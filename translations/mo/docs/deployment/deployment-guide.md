@@ -1,0 +1,655 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
+  "translation_date": "2025-09-09T19:19:14+00:00",
+  "source_file": "docs/deployment/deployment-guide.md",
+  "language_code": "mo"
+}
+-->
+# 部署指南 - 精通 AZD 部署
+
+## 介紹
+
+這份全面的指南涵蓋了使用 Azure Developer CLI 部署應用程式的所有內容，從基本的單指令部署到具有自訂掛鉤、多環境和 CI/CD 整合的高級生產場景。透過實際範例和最佳實踐，掌握完整的部署生命週期。
+
+## 學習目標
+
+完成本指南後，您將能夠：
+- 精通所有 Azure Developer CLI 的部署指令和工作流程
+- 了解從資源配置到監控的完整部署生命週期
+- 實現自訂部署掛鉤以進行部署前後的自動化
+- 配置多個環境並使用特定於環境的參數
+- 設置高級部署策略，包括藍綠部署和金絲雀部署
+- 將 azd 部署整合到 CI/CD 管道和 DevOps 工作流程中
+
+## 學習成果
+
+完成後，您將能夠：
+- 獨立執行並排除所有 azd 部署工作流程的故障
+- 設計並實現使用掛鉤的自訂部署自動化
+- 配置具備安全性和監控的生產就緒部署
+- 管理複雜的多環境部署場景
+- 優化部署效能並實現回滾策略
+- 將 azd 部署整合到企業 DevOps 實踐中
+
+## 部署概述
+
+Azure Developer CLI 提供了多種部署指令：
+- `azd up` - 完整工作流程（資源配置 + 部署）
+- `azd provision` - 僅建立/更新 Azure 資源
+- `azd deploy` - 僅部署應用程式代碼
+- `azd package` - 建置並打包應用程式
+
+## 基本部署工作流程
+
+### 完整部署（azd up）
+最常見的新專案工作流程：
+```bash
+# Deploy everything from scratch
+azd up
+
+# Deploy with specific environment
+azd up --environment production
+
+# Deploy with custom parameters
+azd up --parameter location=westus2 --parameter sku=P1v2
+```
+
+### 僅基礎設施部署
+當您只需要更新 Azure 資源時：
+```bash
+# Provision/update infrastructure
+azd provision
+
+# Provision with dry-run to preview changes
+azd provision --preview
+
+# Provision specific services
+azd provision --service database
+```
+
+### 僅代碼部署
+用於快速更新應用程式：
+```bash
+# Deploy all services
+azd deploy
+
+# Deploy specific service
+azd deploy --service web
+azd deploy --service api
+
+# Deploy with custom build arguments
+azd deploy --service api --build-arg NODE_ENV=production
+```
+
+## 🏗️ 理解部署過程
+
+### 階段 1：資源配置前掛鉤
+```yaml
+# azure.yaml
+hooks:
+  preprovision:
+    shell: sh
+    run: |
+      echo "Validating configuration..."
+      ./scripts/validate-prereqs.sh
+      
+      echo "Setting up secrets..."
+      ./scripts/setup-secrets.sh
+```
+
+### 階段 2：基礎設施配置
+- 讀取基礎設施模板（Bicep/Terraform）
+- 建立或更新 Azure 資源
+- 配置網路和安全性
+- 設置監控和日誌記錄
+
+### 階段 3：資源配置後掛鉤
+```yaml
+hooks:
+  postprovision:
+    shell: pwsh
+    run: |
+      Write-Host "Infrastructure ready, setting up databases..."
+      ./scripts/setup-database.ps1
+      
+      Write-Host "Configuring application settings..."
+      ./scripts/configure-app-settings.ps1
+```
+
+### 階段 4：應用程式打包
+- 建置應用程式代碼
+- 建立部署工件
+- 為目標平台打包（容器、ZIP 文件等）
+
+### 階段 5：部署前掛鉤
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      echo "Running pre-deployment tests..."
+      npm run test:unit
+      
+      echo "Database migrations..."
+      npm run db:migrate
+```
+
+### 階段 6：應用程式部署
+- 將打包的應用程式部署到 Azure 服務
+- 更新配置設定
+- 啟動/重新啟動服務
+
+### 階段 7：部署後掛鉤
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: |
+      echo "Running integration tests..."
+      npm run test:integration
+      
+      echo "Warming up applications..."
+      curl https://${WEB_URL}/health
+```
+
+## 🎛️ 部署配置
+
+### 特定服務的部署設定
+```yaml
+# azure.yaml
+services:
+  web:
+    project: ./src/web
+    host: staticwebapp
+    buildCommand: npm run build
+    outputPath: dist
+    
+  api:
+    project: ./src/api
+    host: containerapp
+    docker:
+      context: ./src/api
+      dockerfile: Dockerfile
+      target: production
+    env:
+      - name: NODE_ENV
+        value: production
+      - name: API_VERSION
+        value: "1.0.0"
+        
+  worker:
+    project: ./src/worker
+    host: function
+    runtime: node
+    buildCommand: npm install --production
+```
+
+### 特定環境的配置
+```bash
+# Development environment
+azd env set NODE_ENV development
+azd env set DEBUG true
+azd env set LOG_LEVEL debug
+
+# Staging environment
+azd env new staging
+azd env set NODE_ENV staging
+azd env set DEBUG false
+azd env set LOG_LEVEL info
+
+# Production environment
+azd env new production
+azd env set NODE_ENV production
+azd env set DEBUG false
+azd env set LOG_LEVEL error
+```
+
+## 🔧 高級部署場景
+
+### 多服務應用程式
+```yaml
+# Complex application with multiple services
+services:
+  # Frontend applications
+  web-app:
+    project: ./src/web
+    host: staticwebapp
+  
+  admin-portal:
+    project: ./src/admin
+    host: appservice
+    
+  # Backend services
+  user-api:
+    project: ./src/services/users
+    host: containerapp
+    
+  order-api:
+    project: ./src/services/orders
+    host: containerapp
+    
+  payment-api:
+    project: ./src/services/payments
+    host: function
+    
+  # Background processing
+  notification-worker:
+    project: ./src/workers/notifications
+    host: containerapp
+    
+  report-worker:
+    project: ./src/workers/reports
+    host: function
+```
+
+### 藍綠部署
+```bash
+# Create blue environment
+azd env new production-blue
+azd up --environment production-blue
+
+# Test blue environment
+./scripts/test-environment.sh production-blue
+
+# Switch traffic to blue (manual DNS/load balancer update)
+./scripts/switch-traffic.sh production-blue
+
+# Clean up green environment
+azd env select production-green
+azd down --force
+```
+
+### 金絲雀部署
+```yaml
+# azure.yaml - Configure traffic splitting
+services:
+  api:
+    project: ./src/api
+    host: containerapp
+    trafficSplit:
+      - revision: stable
+        percentage: 90
+      - revision: canary
+        percentage: 10
+```
+
+### 分階段部署
+```bash
+#!/bin/bash
+# deploy-staged.sh
+
+echo "Deploying to development..."
+azd env select dev
+azd up --confirm-with-no-prompt
+
+echo "Running dev tests..."
+./scripts/test-environment.sh dev
+
+echo "Deploying to staging..."
+azd env select staging
+azd up --confirm-with-no-prompt
+
+echo "Running staging tests..."
+./scripts/test-environment.sh staging
+
+echo "Manual approval required for production..."
+read -p "Deploy to production? (y/N): " confirm
+if [[ $confirm == [yY] ]]; then
+    echo "Deploying to production..."
+    azd env select production
+    azd up --confirm-with-no-prompt
+    
+    echo "Running production smoke tests..."
+    ./scripts/test-environment.sh production
+fi
+```
+
+## 🐳 容器部署
+
+### 容器應用程式部署
+```yaml
+services:
+  api:
+    project: ./src/api
+    host: containerapp
+    docker:
+      context: ./src/api
+      dockerfile: Dockerfile
+      target: production
+      buildArgs:
+        BUILD_VERSION: ${BUILD_VERSION}
+        NODE_ENV: production
+    env:
+      - name: DATABASE_URL
+        value: ${DATABASE_URL}
+    secrets:
+      - name: jwt-secret
+        value: ${JWT_SECRET}
+    scale:
+      minReplicas: 1
+      maxReplicas: 10
+```
+
+### 多階段 Dockerfile 優化
+```dockerfile
+# Dockerfile
+FROM node:18-alpine AS base
+WORKDIR /app
+COPY package*.json ./
+
+FROM base AS development
+RUN npm ci
+COPY . .
+CMD ["npm", "run", "dev"]
+
+FROM base AS build
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+
+FROM node:18-alpine AS production
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+COPY package*.json ./
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## ⚡ 效能優化
+
+### 平行部署
+```bash
+# Configure parallel deployment
+azd config set deploy.parallelism 5
+
+# Deploy services in parallel
+azd deploy --parallel
+```
+
+### 建置快取
+```yaml
+# azure.yaml - Enable build caching
+services:
+  web:
+    project: ./src/web
+    buildCommand: npm run build
+    buildCache:
+      enabled: true
+      paths:
+        - node_modules
+        - .next/cache
+```
+
+### 增量部署
+```bash
+# Deploy only changed services
+azd deploy --incremental
+
+# Deploy with change detection
+azd deploy --detect-changes
+```
+
+## 🔍 部署監控
+
+### 即時部署監控
+```bash
+# Monitor deployment progress
+azd deploy --follow
+
+# View deployment logs
+azd logs --follow --service api
+
+# Check deployment status
+azd show --service api
+```
+
+### 健康檢查
+```yaml
+# azure.yaml - Configure health checks
+services:
+  api:
+    project: ./src/api
+    host: containerapp
+    healthCheck:
+      path: /health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+```
+
+### 部署後驗證
+```bash
+#!/bin/bash
+# scripts/validate-deployment.sh
+
+echo "Validating deployment..."
+
+# Check application health
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+echo "Testing web application..."
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Web application is healthy"
+else
+    echo "❌ Web application health check failed"
+    exit 1
+fi
+
+echo "Testing API..."
+if curl -f "$API_URL/health"; then
+    echo "✅ API is healthy"
+else
+    echo "❌ API health check failed"
+    exit 1
+fi
+
+echo "Running integration tests..."
+npm run test:integration
+
+echo "✅ Deployment validation completed successfully"
+```
+
+## 🔐 安全性考量
+
+### 機密管理
+```bash
+# Store secrets securely
+azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
+azd env set API_KEY "your-api-key" --secret
+
+# Reference secrets in azure.yaml
+```
+
+```yaml
+services:
+  api:
+    secrets:
+      - name: database-password
+        value: ${DATABASE_PASSWORD}
+      - name: jwt-secret
+        value: ${JWT_SECRET}
+```
+
+### 網路安全
+```yaml
+# azure.yaml - Configure network security
+infra:
+  parameters:
+    enablePrivateEndpoints: true
+    allowedIPs:
+      - "203.0.113.0/24"  # Office IP range
+      - "198.51.100.0/24" # VPN IP range
+```
+
+### 身份與存取管理
+```yaml
+services:
+  api:
+    project: ./src/api
+    host: containerapp
+    identity:
+      type: systemAssigned
+    keyVault:
+      - name: app-secrets
+        secrets:
+          - database-connection
+          - external-api-key
+```
+
+## 🚨 回滾策略
+
+### 快速回滾
+```bash
+# Rollback to previous deployment
+azd deploy --rollback
+
+# Rollback specific service
+azd deploy --service api --rollback
+
+# Rollback to specific version
+azd deploy --service api --version v1.2.3
+```
+
+### 基礎設施回滾
+```bash
+# Rollback infrastructure changes
+azd provision --rollback
+
+# Preview rollback changes
+azd provision --rollback --preview
+```
+
+### 資料庫遷移回滾
+```bash
+#!/bin/bash
+# scripts/rollback-database.sh
+
+echo "Rolling back database migrations..."
+npm run db:rollback
+
+echo "Validating database state..."
+npm run db:validate
+
+echo "Database rollback completed"
+```
+
+## 📊 部署指標
+
+### 追蹤部署效能
+```bash
+# Enable deployment metrics
+azd config set telemetry.deployment.enabled true
+
+# View deployment history
+azd history
+
+# Get deployment statistics
+azd metrics --type deployment
+```
+
+### 自訂指標收集
+```yaml
+# azure.yaml - Configure custom metrics
+hooks:
+  postdeploy:
+    shell: sh
+    run: |
+      # Record deployment metrics
+      DEPLOY_TIME=$(date +%s)
+      SERVICE_COUNT=$(azd show --output json | jq '.services | length')
+      
+      # Send to monitoring system
+      curl -X POST "https://metrics.company.com/deployments" \
+        -H "Content-Type: application/json" \
+        -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
+```
+
+## 🎯 最佳實踐
+
+### 1. 環境一致性
+```bash
+# Use consistent naming
+azd env new dev-$(whoami)
+azd env new staging-$(git rev-parse --short HEAD)
+azd env new production-v1
+
+# Maintain environment parity
+./scripts/sync-environments.sh
+```
+
+### 2. 基礎設施驗證
+```bash
+# Validate before deployment
+azd provision --preview
+azd provision --what-if
+
+# Use ARM/Bicep linting
+az bicep lint --file infra/main.bicep
+```
+
+### 3. 測試整合
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      # Unit tests
+      npm run test:unit
+      
+      # Security scanning
+      npm audit
+      
+      # Code quality checks
+      npm run lint
+      npm run type-check
+      
+  postdeploy:
+    shell: sh
+    run: |
+      # Integration tests
+      npm run test:integration
+      
+      # Performance tests
+      npm run test:performance
+      
+      # Smoke tests
+      npm run test:smoke
+```
+
+### 4. 文件和日誌記錄
+```bash
+# Document deployment procedures
+echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
+echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
+```
+
+## 下一步
+
+- [資源配置](provisioning.md) - 深入了解基礎設施管理
+- [部署前規劃](../pre-deployment/capacity-planning.md) - 規劃您的部署策略
+- [常見問題](../troubleshooting/common-issues.md) - 解決部署問題
+- [最佳實踐](../troubleshooting/debugging.md) - 生產就緒的部署策略
+
+## 其他資源
+
+- [Azure Developer CLI 部署參考](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service 部署](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps 部署](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions 部署](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+
+---
+
+**導航**
+- **上一課**：[您的第一個專案](../getting-started/first-project.md)
+- **下一課**：[資源配置](provisioning.md)
+
+---
+
+**免責聲明**：  
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
