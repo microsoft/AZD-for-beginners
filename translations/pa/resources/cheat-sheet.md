@@ -1,0 +1,566 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
+  "translation_date": "2025-09-09T20:26:28+00:00",
+  "source_file": "resources/cheat-sheet.md",
+  "language_code": "pa"
+}
+-->
+# ਕਮਾਂਡ ਚੀਟ ਸ਼ੀਟ - ਮਹੱਤਵਪੂਰਨ AZD ਕਮਾਂਡਸ
+
+## ਪਰਿਚਯ
+
+ਇਹ ਵਿਸਤ੍ਰਿਤ ਚੀਟ ਸ਼ੀਟ ਆਜ਼ਰ ਡਿਵੈਲਪਰ CLI ਦੀਆਂ ਸਭ ਤੋਂ ਆਮ ਵਰਤੀਆਂ ਜਾਣ ਵਾਲੀਆਂ ਕਮਾਂਡਾਂ ਲਈ ਤੇਜ਼ ਸੰਦਰਭ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ, ਜੋ ਸ਼੍ਰੇਣੀ ਅਨੁਸਾਰ ਵਿਵਸਥਿਤ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ ਅਤੇ ਵਿਹੰਗਮ ਉਦਾਹਰਣਾਂ ਨਾਲ। ਵਿਕਾਸ, ਸਮੱਸਿਆ ਹੱਲ ਕਰਨ ਅਤੇ azd ਪ੍ਰੋਜੈਕਟਾਂ ਨਾਲ ਰੋਜ਼ਾਨਾ ਕਾਰਵਾਈਆਂ ਦੌਰਾਨ ਤੇਜ਼ ਸੰਦਰਭ ਲਈ ਬਹੁਤ ਹੀ ਉਪਯੋਗ।
+
+## ਸਿੱਖਣ ਦੇ ਲਕਸ਼
+
+ਇਸ ਚੀਟ ਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ, ਤੁਸੀਂ:
+- ਆਜ਼ਰ ਡਿਵੈਲਪਰ CLI ਦੀਆਂ ਮਹੱਤਵਪੂਰਨ ਕਮਾਂਡਾਂ ਅਤੇ ਸਿੰਟੈਕਸ ਤੱਕ ਤੁਰੰਤ ਪਹੁੰਚ ਪ੍ਰਾਪਤ ਕਰੋਗੇ
+- ਫੰਕਸ਼ਨਲ ਸ਼੍ਰੇਣੀਆਂ ਅਤੇ ਵਰਤੋਂ ਦੇ ਕੇਸਾਂ ਅਨੁਸਾਰ ਕਮਾਂਡਾਂ ਦੀ ਵਿਵਸਥਾ ਨੂੰ ਸਮਝੋਗੇ
+- ਆਮ ਵਿਕਾਸ ਅਤੇ ਡਿਪਲੌਇਮੈਂਟ ਸਥਿਤੀਆਂ ਲਈ ਵਿਹੰਗਮ ਉਦਾਹਰਣਾਂ ਦਾ ਸੰਦਰਭ ਲਵੋਗੇ
+- ਸਮੱਸਿਆ ਹੱਲ ਕਰਨ ਲਈ ਤੇਜ਼ ਕਮਾਂਡਾਂ ਤੱਕ ਪਹੁੰਚ ਪ੍ਰਾਪਤ ਕਰੋਗੇ
+- ਉੱਚ-ਸਤਰੀ ਕਨਫਿਗਰੇਸ਼ਨ ਅਤੇ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ ਵਿਕਲਪਾਂ ਨੂੰ ਕੁਸ਼ਲਤਾਪੂਰਵਕ ਲੱਭੋਗੇ
+- ਵਾਤਾਵਰਣ ਪ੍ਰਬੰਧਨ ਅਤੇ ਬਹੁ-ਵਾਤਾਵਰਣ ਵਰਕਫਲੋ ਕਮਾਂਡਾਂ ਨੂੰ ਲੱਭੋਗੇ
+
+## ਸਿੱਖਣ ਦੇ ਨਤੀਜੇ
+
+ਇਸ ਚੀਟ ਸ਼ੀਟ ਨੂੰ ਨਿਯਮਿਤ ਤੌਰ 'ਤੇ ਵਰਤ ਕੇ, ਤੁਸੀਂ:
+- ਪੂਰੀ ਦਸਤਾਵੇਜ਼ੀ ਦੇ ਹਵਾਲੇ ਤੋਂ ਬਿਨਾਂ azd ਕਮਾਂਡਾਂ ਨੂੰ ਵਿਸ਼ਵਾਸ ਨਾਲ ਚਲਾਉਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ
+- ਸਹੀ ਡਾਇਗਨੋਸਟਿਕ ਕਮਾਂਡਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਮ ਸਮੱਸਿਆਵਾਂ ਨੂੰ ਤੇਜ਼ੀ ਨਾਲ ਹੱਲ ਕਰੋਗੇ
+- ਬਹੁ-ਵਾਤਾਵਰਣ ਅਤੇ ਡਿਪਲੌਇਮੈਂਟ ਸਥਿਤੀਆਂ ਨੂੰ ਕੁਸ਼ਲਤਾਪੂਰਵਕ ਪ੍ਰਬੰਧਿਤ ਕਰੋਗੇ
+- ਜ਼ਰੂਰਤ ਪੜਨ 'ਤੇ azd ਦੀਆਂ ਉੱਚ-ਸਤਰੀ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਅਤੇ ਕਨਫਿਗਰੇਸ਼ਨ ਵਿਕਲਪਾਂ ਨੂੰ ਲਾਗੂ ਕਰੋਗੇ
+- ਡਿਪਲੌਇਮੈਂਟ ਸਮੱਸਿਆਵਾਂ ਨੂੰ ਵਿਵਸਥਿਤ ਕਮਾਂਡ ਕ੍ਰਮਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਹੱਲ ਕਰੋਗੇ
+- azd ਸ਼ਾਰਟਕਟ ਅਤੇ ਵਿਕਲਪਾਂ ਦੀ ਕੁਸ਼ਲਤਾਪੂਰਵਕ ਵਰਤੋਂ ਕਰਕੇ ਵਰਕਫਲੋਜ਼ ਨੂੰ ਅਨੁਕੂਲ ਬਣਾਓਗੇ
+
+## ਸ਼ੁਰੂਆਤੀ ਕਮਾਂਡਾਂ
+
+### ਪ੍ਰਮਾਣਿਕਤਾ
+```bash
+# Login to Azure (uses Azure CLI)
+az login
+
+# Check current account
+az account show
+
+# Set default subscription
+az account set --subscription "your-subscription-id"
+azd config set defaults.subscription "your-subscription-id"
+```
+
+### ਪ੍ਰੋਜੈਕਟ ਸ਼ੁਰੂਆਤ
+```bash
+# Browse available templates
+azd template list
+
+# Initialize from template
+azd init --template todo-nodejs-mongo
+azd init --template <template-name>
+
+# Initialize in current directory
+azd init .
+
+# Initialize with custom name
+azd init --template todo-nodejs-mongo my-awesome-app
+```
+
+## ਮੁੱਖ ਡਿਪਲੌਇਮੈਂਟ ਕਮਾਂਡਾਂ
+
+### ਪੂਰੀ ਡਿਪਲੌਇਮੈਂਟ ਵਰਕਫਲੋ
+```bash
+# Deploy everything (provision + deploy)
+azd up
+
+# Deploy with confirmation prompts disabled
+azd up --confirm-with-no-prompt
+
+# Deploy to specific environment
+azd up --environment production
+
+# Deploy with custom parameters
+azd up --parameter location=westus2
+```
+
+### ਸਿਰਫ ਢਾਂਚਾ
+```bash
+# Provision Azure resources
+azd provision
+
+# Preview infrastructure changes
+azd provision --preview
+
+# Provision with what-if analysis
+azd provision --what-if
+```
+
+### ਸਿਰਫ ਐਪਲੀਕੇਸ਼ਨ
+```bash
+# Deploy application code
+azd deploy
+
+# Deploy specific service
+azd deploy --service web
+azd deploy --service api
+
+# Deploy all services
+azd deploy --all
+```
+
+### ਬਿਲਡ ਅਤੇ ਪੈਕੇਜ
+```bash
+# Build applications
+azd package
+
+# Build specific service
+azd package --service api
+```
+
+## 🌍 ਵਾਤਾਵਰਣ ਪ੍ਰਬੰਧਨ
+
+### ਵਾਤਾਵਰਣ ਕਾਰਵਾਈਆਂ
+```bash
+# List all environments
+azd env list
+
+# Create new environment
+azd env new development
+azd env new staging --location westus2
+
+# Select environment
+azd env select production
+
+# Show current environment
+azd env show
+
+# Refresh environment state
+azd env refresh
+```
+
+### ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ
+```bash
+# Set environment variable
+azd env set API_KEY "your-secret-key"
+azd env set DEBUG true
+
+# Get environment variable
+azd env get API_KEY
+
+# List all environment variables
+azd env get-values
+
+# Remove environment variable
+azd env unset DEBUG
+```
+
+## ⚙️ ਕਨਫਿਗਰੇਸ਼ਨ ਕਮਾਂਡਾਂ
+
+### ਗਲੋਬਲ ਕਨਫਿਗਰੇਸ਼ਨ
+```bash
+# List all configuration
+azd config list
+
+# Set global defaults
+azd config set defaults.location eastus2
+azd config set defaults.subscription "sub-id"
+
+# Remove configuration
+azd config unset defaults.location
+
+# Reset all configuration
+azd config reset
+```
+
+### ਪ੍ਰੋਜੈਕਟ ਕਨਫਿਗਰੇਸ਼ਨ
+```bash
+# Validate azure.yaml
+azd config validate
+
+# Show project information
+azd show
+
+# Get service endpoints
+azd show --output json
+```
+
+## 📊 ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਲਾਗ
+
+### ਐਪਲੀਕੇਸ਼ਨ ਲਾਗ
+```bash
+# View logs from all services
+azd logs
+
+# View logs from specific service
+azd logs --service api
+
+# Follow logs in real-time
+azd logs --follow
+
+# View logs since specific time
+azd logs --since 1h
+azd logs --since "2024-01-01 10:00:00"
+
+# Filter logs by level
+azd logs --level error
+```
+
+### ਮਾਨੀਟਰਿੰਗ
+```bash
+# Open Azure portal for monitoring
+azd monitor
+
+# Open Application Insights
+azd monitor --insights
+```
+
+## 🛠️ ਰਖ-ਰਖਾਵ ਕਮਾਂਡਾਂ
+
+### ਸਾਫ਼-ਸਫਾਈ
+```bash
+# Remove all Azure resources
+azd down
+
+# Force delete without confirmation
+azd down --force
+
+# Purge soft-deleted resources
+azd down --purge
+
+# Complete cleanup
+azd down --force --purge
+```
+
+### ਅਪਡੇਟਸ
+```bash
+# Check for azd updates
+azd version --check-for-updates
+
+# Get current version
+azd version
+
+# Show system information
+azd info
+```
+
+## 🔧 ਉੱਚ-ਸਤਰੀ ਕਮਾਂਡਾਂ
+
+### ਪਾਈਪਲਾਈਨ ਅਤੇ CI/CD
+```bash
+# Configure GitHub Actions
+azd pipeline config
+
+# Configure Azure DevOps
+azd pipeline config --provider azdo
+
+# Show pipeline configuration
+azd pipeline show
+```
+
+### ਢਾਂਚਾ ਪ੍ਰਬੰਧਨ
+```bash
+# Import existing resources
+azd infra import
+
+# Export infrastructure template
+azd infra export
+
+# Validate infrastructure
+azd infra validate
+```
+
+### ਸੇਵਾ ਪ੍ਰਬੰਧਨ
+```bash
+# List all services
+azd service list
+
+# Show service details
+azd service show --service web
+
+# Restart service
+azd service restart --service api
+```
+
+## 🎯 ਤੇਜ਼ ਵਰਕਫਲੋਜ਼
+
+### ਵਿਕਾਸ ਵਰਕਫਲੋ
+```bash
+# Start new project
+azd init --template todo-nodejs-mongo
+cd my-project
+
+# Deploy to development
+azd env new dev
+azd up
+
+# Make changes and redeploy
+azd deploy
+
+# View logs
+azd logs --follow
+```
+
+### ਬਹੁ-ਵਾਤਾਵਰਣ ਵਰਕਫਲੋ
+```bash
+# Set up environments
+azd env new dev
+azd env new staging  
+azd env new production
+
+# Deploy to dev
+azd env select dev
+azd up
+
+# Test and promote to staging
+azd env select staging
+azd up
+
+# Deploy to production
+azd env select production
+azd up
+```
+
+### ਸਮੱਸਿਆ ਹੱਲ ਕਰਨ ਦਾ ਵਰਕਫਲੋ
+```bash
+# Enable debug mode
+export AZD_DEBUG=true
+
+# Check system info
+azd info
+
+# Validate configuration
+azd config validate
+
+# View detailed logs
+azd logs --level debug --since 1h
+
+# Check resource status
+azd show --output json
+```
+
+## 🔍 ਡਿਬੱਗਿੰਗ ਕਮਾਂਡਾਂ
+
+### ਡਿਬੱਗ ਜਾਣਕਾਰੀ
+```bash
+# Enable debug output
+export AZD_DEBUG=true
+azd <command> --debug
+
+# Disable telemetry for cleaner output
+export AZD_DISABLE_TELEMETRY=true
+
+# Get system information
+azd info
+
+# Check authentication status
+az account show
+```
+
+### ਟੈਂਪਲੇਟ ਡਿਬੱਗਿੰਗ
+```bash
+# List available templates with details
+azd template list --output json
+
+# Show template information
+azd template show <template-name>
+
+# Validate template before init
+azd template validate <template-name>
+```
+
+## 📁 ਫਾਈਲ ਅਤੇ ਡਾਇਰੈਕਟਰੀ ਕਮਾਂਡਾਂ
+
+### ਪ੍ਰੋਜੈਕਟ ਸਟ੍ਰਕਚਰ
+```bash
+# Show current directory structure
+tree /f  # Windows
+find . -type f  # Linux/macOS
+
+# Navigate to azd project root
+cd $(azd root)
+
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
+```
+
+## 🎨 ਆਉਟਪੁੱਟ ਫਾਰਮੈਟਿੰਗ
+
+### JSON ਆਉਟਪੁੱਟ
+```bash
+# Get JSON output for scripting
+azd show --output json
+azd env list --output json
+azd config list --output json
+
+# Parse with jq
+azd show --output json | jq '.services.web.endpoint'
+azd env get-values --output json | jq -r '.DATABASE_URL'
+```
+
+### ਟੇਬਲ ਆਉਟਪੁੱਟ
+```bash
+# Format as table
+azd env list --output table
+azd service list --output table
+```
+
+## 🔧 ਆਮ ਕਮਾਂਡ ਕkombination
+
+### ਹੈਲਥ ਚੈਕ ਸਕ੍ਰਿਪਟ
+```bash
+#!/bin/bash
+# Quick health check
+azd show
+azd env show
+azd logs --level error --since 10m
+```
+
+### ਡਿਪਲੌਇਮੈਂਟ ਵੈਰੀਫਿਕੇਸ਼ਨ
+```bash
+#!/bin/bash
+# Pre-deployment validation
+azd config validate
+azd provision --preview
+az account show
+```
+
+### ਵਾਤਾਵਰਣ ਤੁਲਨਾ
+```bash
+#!/bin/bash
+# Compare environments
+for env in dev staging production; do
+    echo "=== $env ==="
+    azd env select $env
+    azd show --output json | jq '.services[].endpoint'
+done
+```
+
+### ਰਿਸੋਰਸ ਸਾਫ਼-ਸਫਾਈ ਸਕ੍ਰਿਪਟ
+```bash
+#!/bin/bash
+# Clean up old environments
+azd env list | grep -E "(dev-|test-)" | while read env; do
+    echo "Cleaning up $env"
+    azd env select $env
+    azd down --force --purge
+done
+```
+
+## 📝 ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ
+
+### ਆਮ ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ
+```bash
+# Azure configuration
+export AZURE_SUBSCRIPTION_ID="your-subscription-id"
+export AZURE_LOCATION="eastus2"
+export AZURE_ENV_NAME="development"
+
+# AZD configuration
+export AZD_DEBUG=true
+export AZD_DISABLE_TELEMETRY=true
+export AZD_CONFIG_DIR="~/.azd"
+
+# Application configuration
+export NODE_ENV="production"
+export LOG_LEVEL="info"
+```
+
+## 🚨 ਐਮਰਜੈਂਸੀ ਕਮਾਂਡਾਂ
+
+### ਤੇਜ਼ ਹੱਲ
+```bash
+# Reset authentication
+az account clear
+az login
+
+# Force refresh environment
+azd env refresh --force
+
+# Restart all services
+azd service restart --all
+
+# Quick rollback
+azd deploy --rollback
+```
+
+### ਰਿਕਵਰੀ ਕਮਾਂਡਾਂ
+```bash
+# Recover from failed deployment
+azd provision --continue-on-error
+azd deploy --ignore-errors
+
+# Clean slate recovery
+azd down --force
+azd up --confirm-with-no-prompt
+```
+
+## 💡 ਪ੍ਰੋ ਟਿਪਸ
+
+### ਤੇਜ਼ ਵਰਕਫਲੋ ਲਈ ਅਲੀਅਸ
+```bash
+# Add to your .bashrc or .zshrc
+alias azdup='azd up --confirm-with-no-prompt'
+alias azdl='azd logs --follow'
+alias azds='azd show --output json'
+alias azde='azd env'
+```
+
+### ਫੰਕਸ਼ਨ ਸ਼ਾਰਟਕਟ
+```bash
+# Quick environment switching
+azd-env() {
+    azd env select $1 && azd show
+}
+
+# Quick deployment with logs
+azd-deploy-watch() {
+    azd deploy --service $1 && azd logs --service $1 --follow
+}
+
+# Environment status
+azd-status() {
+    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Services:"
+    azd show --output json | jq -r '.services | keys[]'
+}
+```
+
+## 📖 ਮਦਦ ਅਤੇ ਦਸਤਾਵੇਜ਼ੀ
+
+### ਮਦਦ ਪ੍ਰਾਪਤ ਕਰਨਾ
+```bash
+# General help
+azd --help
+azd help
+
+# Command-specific help
+azd up --help
+azd env --help
+azd config --help
+
+# Show version and build info
+azd version
+azd version --output json
+```
+
+### ਦਸਤਾਵੇਜ਼ੀ ਲਿੰਕ
+```bash
+# Open documentation in browser
+azd docs
+
+# Show template documentation
+azd template show <template-name> --docs
+```
+
+---
+
+**ਟਿਪ**: ਇਸ ਚੀਟ ਸ਼ੀਟ ਨੂੰ ਬੁੱਕਮਾਰਕ ਕਰੋ ਅਤੇ `Ctrl+F` ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਜ਼ਰੂਰੀ ਕਮਾਂਡਾਂ ਨੂੰ ਤੇਜ਼ੀ ਨਾਲ ਲੱਭੋ!
+
+---
+
+**ਨੈਵੀਗੇਸ਼ਨ**
+- **ਪਿਛਲਾ ਪਾਠ**: [ਪ੍ਰੀਫਲਾਈਟ ਚੈਕਸ](../docs/pre-deployment/preflight-checks.md)
+- **ਅਗਲਾ ਪਾਠ**: [ਗਲੋਸਰੀ](glossary.md)
+
+---
+
+**ਅਸਵੀਕਰਤੀ**:  
+ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਚਤਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
