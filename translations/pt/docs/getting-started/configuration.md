@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T16:51:56+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:07:52+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "pt"
 }
@@ -11,11 +11,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Este guia abrangente cobre todos os aspetos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação otimizados. Vais aprender sobre a hierarquia de configuração, gestão de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implementações eficientes e seguras no Azure.
+Este guia abrangente cobre todos os aspetos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação otimizados. Irá aprender sobre a hierarquia de configuração, gestão de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implementações eficientes e seguras no Azure.
 
 ## Objetivos de Aprendizagem
 
-No final desta lição, vais:
+No final desta lição, irá:
 - Dominar a hierarquia de configuração do azd e compreender como as definições são priorizadas
 - Configurar definições globais e específicas de projetos de forma eficaz
 - Gerir múltiplos ambientes com diferentes configurações
@@ -24,27 +24,27 @@ No final desta lição, vais:
 
 ## Resultados de Aprendizagem
 
-Após concluir esta lição, serás capaz de:
+Após concluir esta lição, será capaz de:
 - Configurar o azd para fluxos de trabalho de desenvolvimento otimizados
 - Configurar e gerir múltiplos ambientes de implementação
 - Implementar práticas seguras de gestão de configuração
-- Resolver problemas relacionados com configuração
-- Personalizar o comportamento do azd para requisitos específicos da organização
+- Resolver problemas relacionados com configurações
+- Personalizar o comportamento do azd para requisitos específicos da sua organização
 
 Este guia abrangente cobre todos os aspetos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação otimizados.
 
 ## Hierarquia de Configuração
 
 O azd utiliza um sistema hierárquico de configuração:
-1. **Flags da linha de comando** (maior prioridade)
+1. **Flags da linha de comando** (prioridade mais alta)
 2. **Variáveis de ambiente**
 3. **Configuração local do projeto** (`.azd/config.json`)
 4. **Configuração global do utilizador** (`~/.azd/config.json`)
-5. **Valores padrão** (menor prioridade)
+5. **Valores padrão** (prioridade mais baixa)
 
 ## Configuração Global
 
-### Definir Valores Globais Padrão
+### Definir Valores Padrão Globais
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -81,7 +81,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Configuração do Projeto
 
 ### Estrutura do azure.yaml
-O ficheiro `azure.yaml` é o núcleo do teu projeto azd:
+O ficheiro `azure.yaml` é o coração do seu projeto azd:
 
 ```yaml
 # Minimum configuration
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### Modelos de Ambiente
-Cria `.azure/env.template` para uma configuração consistente de ambientes:
+Crie `.azure/env.template` para uma configuração consistente de ambientes:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -285,7 +285,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Autenticação com Service Principal
-Para pipelines CI/CD:
+Para pipelines de CI/CD:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -308,7 +308,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Configuração de Infraestrutura
 
 ### Parâmetros Bicep
-Configura parâmetros de infraestrutura em `infra/main.parameters.json`:
+Configure os parâmetros de infraestrutura em `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -331,7 +331,7 @@ Configura parâmetros de infraestrutura em `infra/main.parameters.json`:
 ```
 
 ### Configuração Terraform
-Para projetos Terraform, configura em `infra/terraform.tfvars`:
+Para projetos Terraform, configure em `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Exemplo de `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Configuração Avançada
 
@@ -456,7 +457,7 @@ azd provision --dry-run
 ```
 
 ### Scripts de Configuração
-Cria scripts de validação em `scripts/`:
+Crie scripts de validação em `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -479,9 +480,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Melhores Práticas
+## 🎓 Boas Práticas
 
-### 1. Utilizar Variáveis de Ambiente
+### 1. Utilize Variáveis de Ambiente
 ```yaml
 # Good: Use environment variables
 database:
@@ -492,7 +493,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organizar Ficheiros de Configuração
+### 2. Organize os Ficheiros de Configuração
 ```
 .azure/
 ├── config.json              # Global project config
@@ -516,8 +517,8 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Documentação de Configuração
-Documenta a tua configuração em `CONFIG.md`:
+### 4. Documentação da Configuração
+Documente a sua configuração em `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -534,8 +535,8 @@ Documenta a tua configuração em `CONFIG.md`:
 
 ## Próximos Passos
 
-- [O Teu Primeiro Projeto](first-project.md) - Aplicar a configuração na prática
-- [Guia de Implementação](../deployment/deployment-guide.md) - Utilizar a configuração para implementação
+- [O Seu Primeiro Projeto](first-project.md) - Aplique a configuração na prática
+- [Guia de Implementação](../deployment/deployment-guide.md) - Utilize a configuração para implementação
 - [Provisionamento de Recursos](../deployment/provisioning.md) - Configurações prontas para produção
 
 ## Referências
@@ -548,7 +549,7 @@ Documenta a tua configuração em `CONFIG.md`:
 
 **Navegação**
 - **Lição Anterior**: [Instalação e Configuração](installation.md)
-- **Próxima Lição**: [O Teu Primeiro Projeto](first-project.md)
+- **Próxima Lição**: [O Seu Primeiro Projeto](first-project.md)
 
 ---
 

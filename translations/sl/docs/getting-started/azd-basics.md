@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:14:32+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:43:05+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sl"
 }
@@ -20,13 +20,13 @@ Do konca te lekcije boste:
 - Spoznali temeljne koncepte predlog, okolij in storitev
 - Raziskali ključne funkcije, vključno z razvojem na podlagi predlog in infrastrukturo kot kodo
 - Razumeli strukturo projekta azd in delovni tok
-- Pripravljeni na namestitev in konfiguracijo azd za vaš razvojni okolje
+- Pripravljeni na namestitev in konfiguracijo azd za vaše razvojno okolje
 
 ## Rezultati učenja
 
 Po zaključku te lekcije boste sposobni:
 - Pojasniti vlogo azd v sodobnih delovnih tokovih razvoja za oblak
-- Identificirati komponente strukture projekta azd
+- Prepoznati komponente strukture projekta azd
 - Opisati, kako predloge, okolja in storitve delujejo skupaj
 - Razumeti prednosti infrastrukture kot kode z azd
 - Prepoznati različne ukaze azd in njihove namene
@@ -40,7 +40,7 @@ Azure Developer CLI (azd) je orodje ukazne vrstice, zasnovano za pospešitev va�
 ### Predloge
 Predloge so osnova azd. Vsebujejo:
 - **Kodo aplikacije** - Vašo izvorno kodo in odvisnosti
-- **Definicije infrastrukture** - Azure viri, definirani v Bicep ali Terraform
+- **Definicije infrastrukture** - Azure vire, definirane v Bicep ali Terraform
 - **Konfiguracijske datoteke** - Nastavitve in okoljske spremenljivke
 - **Skripte za uvajanje** - Avtomatizirani delovni tokovi uvajanja
 
@@ -50,8 +50,8 @@ Okolja predstavljajo različne cilje uvajanja:
 - **Staging** - Predprodukcijsko okolje
 - **Produkcijsko** - Živo produkcijsko okolje
 
-Vsako okolje vzdržuje svoje:
-- Azure skupine virov
+Vsako okolje ima svoje:
+- Skupino virov Azure
 - Konfiguracijske nastavitve
 - Stanje uvajanja
 
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Integrirani delovni tokovi
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Razumevanje `azd down --force --purge`
+Ukaz `azd down --force --purge` je zmogljiv način za popolno odstranitev vašega azd okolja in vseh povezanih virov. Tukaj je razčlenitev, kaj vsak parameter naredi:
+```
+--force
+```
+- Preskoči potrditvene pozive.
+- Koristno za avtomatizacijo ali skriptiranje, kjer ročni vnos ni izvedljiv.
+- Zagotovi, da se odstranitev nadaljuje brez prekinitev, tudi če CLI zazna nedoslednosti.
+
+```
+--purge
+```
+Izbriše **vse povezane metapodatke**, vključno z:
+Stanje okolja
+Lokalna mapa `.azure`
+Predpomnjene informacije o uvajanju
+Prepreči, da bi azd "zapomnil" prejšnja uvajanja, kar lahko povzroči težave, kot so neusklajene skupine virov ali zastarele reference registracije.
+
+### Zakaj uporabiti oboje?
+Ko naletite na težave z `azd up` zaradi preostalega stanja ali delnih uvajanj, ta kombinacija zagotovi **čisto stanje**.
+
+Še posebej uporabno po ročnih brisanjih virov v Azure portalu ali pri preklapljanju predlog, okolij ali konvencij poimenovanja skupin virov.
 
 ### Upravljanje več okolij
 ```bash
@@ -250,24 +273,24 @@ azd init --template template1
 
 ### 4. Upravljanje konfiguracije
 - Uporabljajte okoljske spremenljivke za občutljive podatke
-- Hranite konfiguracijo v sistemu za nadzor različic
+- Hranite konfiguracijo v nadzoru različic
 - Dokumentirajte nastavitve, specifične za okolje
 
 ## Napredovanje učenja
 
-### Začetnik (1-2 teden)
+### Začetnik (1-2 tedna)
 1. Namestite azd in se prijavite
 2. Uvedite preprosto predlogo
 3. Razumite strukturo projekta
 4. Naučite se osnovnih ukazov (up, down, deploy)
 
-### Srednje napreden (3-4 teden)
+### Srednji nivo (3-4 tedna)
 1. Prilagodite predloge
 2. Upravljajte več okolij
 3. Razumite infrastrukturo kot kodo
 4. Nastavite CI/CD pipeline
 
-### Napreden (5+ tednov)
+### Napredni nivo (5+ tednov)
 1. Ustvarite lastne predloge
 2. Napredni vzorci infrastrukture
 3. Uvajanja v več regijah

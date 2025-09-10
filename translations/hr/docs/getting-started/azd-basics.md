@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:14:07+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:41:52+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "hr"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Uvod
 
-Ova lekcija uvodi vas u Azure Developer CLI (azd), moćan alat naredbenog retka koji ubrzava vaš put od lokalnog razvoja do implementacije na Azure. Naučit ćete osnovne koncepte, ključne značajke i razumjeti kako azd pojednostavljuje implementaciju aplikacija prilagođenih oblaku.
+Ova lekcija uvodi vas u Azure Developer CLI (azd), moćan alat naredbenog retka koji ubrzava vaš put od lokalnog razvoja do implementacije na Azure. Naučit ćete osnovne koncepte, ključne značajke i kako azd pojednostavljuje implementaciju aplikacija prilagođenih oblaku.
 
 ## Ciljevi učenja
 
@@ -19,16 +19,16 @@ Na kraju ove lekcije, moći ćete:
 - Razumjeti što je Azure Developer CLI i njegovu primarnu svrhu
 - Naučiti osnovne koncepte poput predložaka, okruženja i usluga
 - Istražiti ključne značajke, uključujući razvoj temeljen na predlošcima i infrastrukturu kao kod
-- Razumjeti strukturu i tijek rada azd projekata
+- Razumjeti strukturu projekta azd-a i tijek rada
 - Biti spremni instalirati i konfigurirati azd za svoj razvojni okoliš
 
 ## Ishodi učenja
 
 Nakon završetka ove lekcije, moći ćete:
-- Objasniti ulogu azd-a u modernim radnim tijekovima razvoja oblaka
-- Identificirati komponente strukture azd projekta
+- Objasniti ulogu azd-a u modernim tijekovima rada razvoja u oblaku
+- Identificirati komponente strukture projekta azd-a
 - Opisati kako predlošci, okruženja i usluge međusobno djeluju
-- Razumjeti prednosti infrastrukture kao kod uz azd
+- Razumjeti prednosti infrastrukture kao kod s azd-om
 - Prepoznati različite azd naredbe i njihove svrhe
 
 ## Što je Azure Developer CLI (azd)?
@@ -40,7 +40,7 @@ Azure Developer CLI (azd) je alat naredbenog retka dizajniran za ubrzavanje vaš
 ### Predlošci
 Predlošci su temelj azd-a. Sadrže:
 - **Kod aplikacije** - Vaš izvorni kod i ovisnosti
-- **Definicije infrastrukture** - Azure resurse definirane u Bicep-u ili Terraform-u
+- **Definicije infrastrukture** - Azure resurse definirane u Bicep-u ili Terraformu
 - **Konfiguracijske datoteke** - Postavke i varijable okruženja
 - **Skripte za implementaciju** - Automatizirani tijekovi implementacije
 
@@ -58,7 +58,7 @@ Svako okruženje održava vlastite:
 ### Usluge
 Usluge su gradivni blokovi vaše aplikacije:
 - **Frontend** - Web aplikacije, SPAs
-- **Backend** - API-jevi, mikroservisi
+- **Backend** - API-ji, mikroservisi
 - **Baza podataka** - Rješenja za pohranu podataka
 - **Pohrana** - Pohrana datoteka i blobova
 
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Integrirani tijekovi rada
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -97,7 +97,7 @@ azd env list
 
 ## 📁 Struktura projekta
 
-Tipična struktura azd projekta:
+Tipična struktura projekta azd-a:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Razumijevanje `azd down --force --purge`
+Naredba `azd down --force --purge` moćan je način za potpuno uklanjanje vašeg azd okruženja i svih povezanih resursa. Evo što svaka zastavica radi:
+```
+--force
+```
+- Preskače potvrde.
+- Korisno za automatizaciju ili skriptiranje gdje ručni unos nije izvediv.
+- Osigurava da se uklanjanje nastavi bez prekida, čak i ako CLI otkrije nedosljednosti.
+
+```
+--purge
+```
+Briše **sve povezane metapodatke**, uključujući:
+Stanje okruženja
+Lokalnu `.azure` mapu
+Keširane informacije o implementaciji
+Sprječava azd da "pamti" prethodne implementacije, što može uzrokovati probleme poput neusklađenih resursnih grupa ili zastarjelih referenci registra.
+
+### Zašto koristiti oboje?
+Kada naiđete na probleme s `azd up` zbog zaostalog stanja ili djelomičnih implementacija, ova kombinacija osigurava **čistu početnu točku**.
+
+Posebno je korisno nakon ručnog brisanja resursa u Azure portalu ili pri promjeni predložaka, okruženja ili konvencija imenovanja resursnih grupa.
 
 ### Upravljanje višestrukim okruženjima
 ```bash
@@ -241,12 +264,12 @@ azd init --template template1
 ### 2. Iskoristite predloške
 - Započnite s postojećim predlošcima
 - Prilagodite ih svojim potrebama
-- Kreirajte predloške za višekratnu upotrebu unutar svoje organizacije
+- Kreirajte predloške za ponovnu upotrebu unutar svoje organizacije
 
 ### 3. Izolacija okruženja
 - Koristite odvojena okruženja za razvoj/staging/produkciju
 - Nikada ne implementirajte direktno u produkciju s lokalnog računala
-- Koristite CI/CD tijekove rada za produkcijske implementacije
+- Koristite CI/CD pipeline za produkcijske implementacije
 
 ### 4. Upravljanje konfiguracijom
 - Koristite varijable okruženja za osjetljive podatke
@@ -264,8 +287,8 @@ azd init --template template1
 ### Srednji nivo (3.-4. tjedan)
 1. Prilagodite predloške
 2. Upravljajte višestrukim okruženjima
-3. Razumite kod infrastrukture
-4. Postavite CI/CD tijekove rada
+3. Razumite infrastrukturu kao kod
+4. Postavite CI/CD pipeline
 
 ### Napredni nivo (5. tjedan i dalje)
 1. Kreirajte prilagođene predloške
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.

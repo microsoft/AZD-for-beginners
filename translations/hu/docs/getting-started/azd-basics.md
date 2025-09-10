@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:11:44+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:33:57+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "hu"
 }
@@ -17,18 +17,18 @@ Ez a lecke bemutatja az Azure Developer CLI-t (azd), egy hatékony parancssori e
 
 A lecke végére:
 - Megérted, mi az Azure Developer CLI és mi a fő célja
-- Megtanulod a sablonok, környezetek és szolgáltatások alapfogalmait
-- Felfedezed a kulcsfontosságú funkciókat, mint például a sablonvezérelt fejlesztés és az infrastruktúra kódként való kezelése
-- Megérted az azd projektstruktúráját és munkafolyamatát
+- Megismered a sablonok, környezetek és szolgáltatások alapfogalmait
+- Felfedezed a kulcsfontosságú funkciókat, mint például a sablonvezérelt fejlesztés és az infrastruktúra kód formájában
+- Megérted az azd projektstruktúrát és munkafolyamatot
 - Felkészülsz az azd telepítésére és konfigurálására a fejlesztési környezetedben
 
 ## Tanulási eredmények
 
 A lecke elvégzése után képes leszel:
-- Elmagyarázni az azd szerepét a modern felhőfejlesztési munkafolyamatokban
+- Elmagyarázni az azd szerepét a modern felhőalapú fejlesztési munkafolyamatokban
 - Azonosítani az azd projektstruktúra elemeit
 - Leírni, hogyan működnek együtt a sablonok, környezetek és szolgáltatások
-- Megérteni az infrastruktúra kódként való kezelésének előnyeit az azd segítségével
+- Megérteni az infrastruktúra kód formájában történő előnyeit az azd segítségével
 - Felismerni az azd különböző parancsait és azok célját
 
 ## Mi az Azure Developer CLI (azd)?
@@ -38,9 +38,9 @@ Az Azure Developer CLI (azd) egy parancssori eszköz, amelyet arra terveztek, ho
 ## Alapfogalmak
 
 ### Sablonok
-A sablonok az azd alapját képezik. Ezek tartalmazzák:
+A sablonok az azd alapját képezik. Tartalmazzák:
 - **Alkalmazáskód** - A forráskódod és függőségeid
-- **Infrastruktúra-definíciók** - Azure erőforrások Bicep vagy Terraform segítségével definiálva
+- **Infrastruktúra definíciók** - Azure erőforrások Bicep vagy Terraform segítségével definiálva
 - **Konfigurációs fájlok** - Beállítások és környezeti változók
 - **Telepítési szkriptek** - Automatizált telepítési munkafolyamatok
 
@@ -73,7 +73,7 @@ azd template list
 azd init --template <template-name>
 ```
 
-### 2. Infrastruktúra kódként
+### 2. Infrastruktúra kód formájában
 - **Bicep** - Az Azure domain-specifikus nyelve
 - **Terraform** - Többfelhős infrastruktúra eszköz
 - **ARM sablonok** - Azure Resource Manager sablonok
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Integrált munkafolyamatok
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Az `azd down --force --purge` megértése
+Az `azd down --force --purge` parancs egy hatékony módja annak, hogy teljesen lebontsd az azd környezetet és az összes kapcsolódó erőforrást. Íme, mit csinál az egyes kapcsolók:
+```
+--force
+```
+- Kihagyja a megerősítési kéréseket.
+- Hasznos automatizálás vagy szkriptek esetén, ahol a manuális bemenet nem lehetséges.
+- Biztosítja, hogy a lebontás megszakítás nélkül folytatódjon, még akkor is, ha a CLI inkonzisztenciákat észlel.
+
+```
+--purge
+```
+Törli **az összes kapcsolódó metaadatot**, beleértve:
+Környezeti állapot
+Helyi `.azure` mappa
+Gyorsítótárazott telepítési információk
+Megakadályozza, hogy az azd "emlékezzen" korábbi telepítésekre, amelyek problémákat okozhatnak, például nem egyező erőforráscsoportok vagy elavult regisztrációs hivatkozások.
+
+### Miért használjuk mindkettőt?
+Ha problémába ütköztél az `azd up` használatával a fennmaradó állapot vagy részleges telepítések miatt, ez a kombináció biztosítja a **tiszta lapot**.
+
+Különösen hasznos manuális erőforrás-törlések után az Azure portálon, vagy sablonok, környezetek vagy erőforráscsoport elnevezési konvenciók váltásakor.
 
 ### Több környezet kezelése
 ```bash
@@ -241,12 +264,12 @@ azd init --template template1
 ### 2. Használd ki a sablonokat
 - Kezdd meglévő sablonokkal
 - Testreszabás az igényeid szerint
-- Hozz létre újrafelhasználható sablonokat a szervezeted számára
+- Hozz létre újrahasználható sablonokat a szervezeted számára
 
 ### 3. Környezetek elkülönítése
 - Használj külön környezeteket fejlesztéshez/staginghez/termeléshez
 - Soha ne telepíts közvetlenül termelésbe helyi gépről
-- Használj CI/CD csatornákat a termelési telepítésekhez
+- Használj CI/CD csatornákat termelési telepítésekhez
 
 ### 4. Konfigurációkezelés
 - Használj környezeti változókat érzékeny adatokhoz
@@ -264,7 +287,7 @@ azd init --template template1
 ### Középhaladó (3-4. hét)
 1. Testreszabás sablonokkal
 2. Több környezet kezelése
-3. Értsd meg az infrastruktúra kódját
+3. Értsd meg az infrastruktúra kódot
 4. Állítsd be a CI/CD csatornákat
 
 ### Haladó (5+ hét)
@@ -282,7 +305,7 @@ azd init --template template1
 ## További források
 
 - [Azure Developer CLI áttekintés](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Sablongaléria](https://azure.github.io/awesome-azd/)
+- [Sablon galéria](https://azure.github.io/awesome-azd/)
 - [Közösségi minták](https://github.com/Azure-Samples)
 
 ---
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt a professzionális, emberi fordítás igénybevétele. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.

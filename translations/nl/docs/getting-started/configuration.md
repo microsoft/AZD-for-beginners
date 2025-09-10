@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:32:24+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:25:06+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "nl"
 }
@@ -15,21 +15,21 @@ Deze uitgebreide gids behandelt alle aspecten van het configureren van Azure Dev
 
 ## Leerdoelen
 
-Aan het einde van deze les zul je:
+Aan het einde van deze les kun je:
 - De azd-configuratiehiërarchie beheersen en begrijpen hoe instellingen worden geprioriteerd
 - Globale en project-specifieke instellingen effectief configureren
-- Meerdere omgevingen met verschillende configuraties beheren
+- Meerdere omgevingen beheren met verschillende configuraties
 - Veilige authenticatie- en autorisatiepatronen implementeren
 - Geavanceerde configuratiepatronen begrijpen voor complexe scenario's
 
 ## Leerresultaten
 
-Na het voltooien van deze les ben je in staat om:
-- azd te configureren voor optimale ontwikkelworkflows
-- Meerdere implementatieomgevingen op te zetten en te beheren
-- Veilige configuratiebeheerpraktijken te implementeren
-- Problemen met configuratie-gerelateerde kwesties op te lossen
-- azd aan te passen aan specifieke organisatorische vereisten
+Na het voltooien van deze les kun je:
+- azd configureren voor optimale ontwikkelworkflows
+- Meerdere implementatieomgevingen opzetten en beheren
+- Veilige configuratiebeheerpraktijken implementeren
+- Problemen met configuratie oplossen
+- azd aanpassen aan specifieke organisatorische vereisten
 
 Deze uitgebreide gids behandelt alle aspecten van het configureren van Azure Developer CLI voor optimale ontwikkel- en implementatieworkflows.
 
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Voorbeeld `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Geavanceerde Configuratie
 
@@ -508,7 +509,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Overwegingen voor Versiebeheer
+### 3. Versiebeheer Overwegingen
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -553,4 +554,4 @@ Documenteer je configuratie in `CONFIG.md`:
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

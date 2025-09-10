@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:21:50+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:18:25+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "sv"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduktion
 
-Välkommen till ditt första Azure Developer CLI-projekt! Denna omfattande praktiska guide ger dig en komplett genomgång av hur du skapar, distribuerar och hanterar en fullstack-applikation på Azure med hjälp av azd. Du kommer att arbeta med en riktig todo-applikation som inkluderar en React-frontend, Node.js API-backend och en MongoDB-databas.
+Välkommen till ditt första Azure Developer CLI-projekt! Denna omfattande praktiska guide ger dig en komplett genomgång av hur du skapar, distribuerar och hanterar en fullstack-applikation på Azure med azd. Du kommer att arbeta med en riktig todo-applikation som inkluderar en React-frontend, Node.js API-backend och en MongoDB-databas.
 
 ## Lärandemål
 
@@ -25,7 +25,7 @@ Genom att slutföra denna guide kommer du att:
 
 ## Läranderesultat
 
-När du är klar kommer du att kunna:
+Efter att ha slutfört guiden kommer du att kunna:
 - Självständigt initiera och konfigurera azd-projekt från mallar
 - Navigera och modifiera azd-projektstrukturer effektivt
 - Distribuera fullstack-applikationer till Azure med enstaka kommandon
@@ -35,9 +35,9 @@ När du är klar kommer du att kunna:
 
 ## Kom igång
 
-### Förutsättningar
-- ✅ Azure Developer CLI installerat ([Installationsguide](installation.md))
-- ✅ Azure CLI installerat och autentiserat
+### Förutsättningar - Checklista
+- ✅ Azure Developer CLI installerad ([Installationsguide](installation.md))
+- ✅ Azure CLI installerad och autentiserad
 - ✅ Git installerat på ditt system
 - ✅ Node.js 16+ (för denna guide)
 - ✅ Visual Studio Code (rekommenderas)
@@ -46,11 +46,15 @@ När du är klar kommer du att kunna:
 ```bash
 # Check azd installation
 azd version
+```
+### Verifiera Azure-autentisering
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Kontrollera Node.js-version
+```bash
 node --version
 ```
 
@@ -133,7 +137,7 @@ head -30 infra/main.bicep
 
 ## Steg 3: Anpassa ditt projekt (valfritt)
 
-Innan distributionen kan du anpassa applikationen:
+Innan distribution kan du anpassa applikationen:
 
 ### Ändra frontend
 ```bash
@@ -151,8 +155,7 @@ Gör en enkel ändring:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -204,10 +207,10 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Testa todo-applikationen
-1. **Lägg till en todo** - Klicka på "Add Todo" och skriv in en uppgift
+### Testa todo-appen
+1. **Lägg till en todo-post** - Klicka på "Add Todo" och ange en uppgift
 2. **Markera som klar** - Kryssa för slutförda uppgifter
-3. **Ta bort uppgifter** - Ta bort todos du inte längre behöver
+3. **Ta bort poster** - Ta bort todos du inte längre behöver
 
 ### Övervaka din applikation
 ```bash
@@ -234,7 +237,7 @@ Lägg till en anpassad svarshuvud:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Distribuera endast kodändringar
+### Distribuera endast kodändringarna
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -273,7 +276,7 @@ azd show
 
 ## Steg 8: Rensa resurser
 
-När du är klar med att experimentera, rensa upp för att undvika löpande kostnader:
+När du är klar med experimenten, rensa för att undvika löpande kostnader:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -319,7 +322,7 @@ azd logs --service api
 azd logs --service web
 ```
 
-### Konflikter med resursnamn
+### Resursnamnskonflikter
 ```bash
 # Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
@@ -344,7 +347,7 @@ Nu när du har slutfört ditt första projekt, utforska dessa avancerade ämnen:
 - [GitHub Actions Integration](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Bästa praxis för produktion
+### 3. Produktionsbästa praxis
 - [Säkerhetskonfigurationer](../deployment/best-practices.md#security)
 - [Prestandaoptimering](../deployment/best-practices.md#performance)
 - [Övervakning och loggning](../deployment/best-practices.md#monitoring)
@@ -364,7 +367,7 @@ azd init --template todo-java-mongo
 
 ## Ytterligare resurser
 
-### Läromaterial
+### Lärandematerial
 - [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

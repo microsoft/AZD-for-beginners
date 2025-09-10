@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-10T06:10:45+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:46:50+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "lt"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Įvadas
 
-Šis išsamus vadovas apima visus Azure Developer CLI konfigūravimo aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas. Sužinosite apie konfigūracijos hierarchiją, aplinkos valdymą, autentifikavimo metodus ir pažangius konfigūravimo modelius, kurie leidžia efektyviai ir saugiai diegti Azure.
+Šis išsamus vadovas apima visus Azure Developer CLI konfigūravimo aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas. Sužinosite apie konfigūracijos hierarchiją, aplinkos valdymą, autentifikavimo metodus ir pažangius konfigūracijos modelius, leidžiančius efektyviai ir saugiai diegti Azure.
 
 ## Mokymosi tikslai
 
@@ -20,14 +20,14 @@ CO_OP_TRANSLATOR_METADATA:
 - Efektyviai konfigūruosite globalius ir projektui specifinius nustatymus
 - Valdysite kelias aplinkas su skirtingomis konfigūracijomis
 - Įgyvendinsite saugius autentifikavimo ir autorizacijos modelius
-- Suprasite pažangius konfigūravimo modelius sudėtingiems scenarijams
+- Suprasite pažangius konfigūracijos modelius sudėtingiems scenarijams
 
 ## Mokymosi rezultatai
 
 Baigę šią pamoką, galėsite:
 - Konfigūruoti azd optimalioms kūrimo darbo eigoms
 - Nustatyti ir valdyti kelias diegimo aplinkas
-- Įgyvendinti saugius konfigūracijos valdymo metodus
+- Įgyvendinti saugias konfigūracijos valdymo praktikas
 - Spręsti su konfigūracija susijusias problemas
 - Pritaikyti azd elgseną specifiniams organizacijos poreikiams
 
@@ -39,12 +39,12 @@ azd naudoja hierarchinę konfigūracijos sistemą:
 1. **Komandinės eilutės vėliavėlės** (aukščiausias prioritetas)
 2. **Aplinkos kintamieji**
 3. **Vietinė projekto konfigūracija** (`.azd/config.json`)
-4. **Globali vartotojo konfigūracija** (`~/.azd/config.json`)
+4. **Globali naudotojo konfigūracija** (`~/.azd/config.json`)
 5. **Numatytosios reikšmės** (žemiausias prioritetas)
 
 ## Globali konfigūracija
 
-### Globalių numatytųjų reikšmių nustatymas
+### Numatytųjų globalių nustatymų nustatymas
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +62,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Dažniausiai naudojami globalūs nustatymai
+### Dažni globalūs nustatymai
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -81,7 +81,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Projekto konfigūracija
 
 ### azure.yaml struktūra
-Failas `azure.yaml` yra jūsų azd projekto pagrindas:
+`azure.yaml` failas yra jūsų azd projekto pagrindas:
 
 ```yaml
 # Minimum configuration
@@ -159,7 +159,7 @@ pipeline:
 
 ### Paslaugų konfigūracijos parinktys
 
-#### Host tipai
+#### Pagrindinių tipų pasirinkimas
 ```yaml
 services:
   web-static:
@@ -284,7 +284,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Paslaugų principo autentifikavimas
+### Paslaugų pagrindinio autentifikavimas
 CI/CD procesams:
 ```bash
 # Set environment variables
@@ -297,7 +297,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Valdoma tapatybė
+### Valdomas identitetas
 Azure talpinamoms aplinkoms:
 ```bash
 # Enable managed identity authentication
@@ -341,7 +341,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Diegimo konfigūracija
 
-### Build konfigūracija
+### Kūrimo konfigūracija
 ```yaml
 # In azure.yaml
 services:
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Pavyzdinis `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Pažangi konfigūracija
 
-### Tinkintas resursų pavadinimas
+### Individualus resursų pavadinimas
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -423,7 +424,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging aplinka
+### Testavimo aplinka
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -432,7 +433,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Produkcijos aplinka
+### Gamybinė aplinka
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -441,9 +442,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Konfigūracijos validacija
+## 🔍 Konfigūracijos tikrinimas
 
-### Konfigūracijos validavimas
+### Konfigūracijos tikrinimas
 ```bash
 # Check configuration syntax
 azd config validate
@@ -455,8 +456,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Konfigūracijos skriptai
-Sukurkite validavimo skriptus `scripts/`:
+### Konfigūracijos scenarijai
+Sukurkite tikrinimo scenarijus `scripts/` kataloge:
 
 ```bash
 #!/bin/bash
@@ -517,7 +518,7 @@ database:
 ```
 
 ### 4. Konfigūracijos dokumentacija
-Dokumentuokite savo konfigūraciją `CONFIG.md`:
+Dokumentuokite savo konfigūraciją `CONFIG.md` faile:
 ```markdown
 # Configuration Guide
 
@@ -536,7 +537,7 @@ Dokumentuokite savo konfigūraciją `CONFIG.md`:
 
 - [Jūsų pirmasis projektas](first-project.md) - Praktiškai pritaikykite konfigūraciją
 - [Diegimo vadovas](../deployment/deployment-guide.md) - Naudokite konfigūraciją diegimui
-- [Resursų paruošimas](../deployment/provisioning.md) - Produkcijai paruoštos konfigūracijos
+- [Resursų paruošimas](../deployment/provisioning.md) - Gamybai paruoštos konfigūracijos
 
 ## Nuorodos
 
@@ -553,4 +554,4 @@ Dokumentuokite savo konfigūraciją `CONFIG.md`:
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudotis profesionalių vertėjų paslaugomis. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama naudotis profesionalių vertėjų paslaugomis. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.

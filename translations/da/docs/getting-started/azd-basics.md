@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T21:35:02+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:21:11+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "da"
 }
@@ -11,11 +11,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduktion
 
-Denne lektion introducerer dig til Azure Developer CLI (azd), et kraftfuldt kommandolinjeværktøj, der fremskynder din rejse fra lokal udvikling til Azure-implementering. Du vil lære de grundlæggende begreber, kernefunktioner og forstå, hvordan azd forenkler implementeringen af cloud-native applikationer.
+Denne lektion introducerer dig til Azure Developer CLI (azd), et kraftfuldt kommandolinjeværktøj, der accelererer din rejse fra lokal udvikling til Azure-implementering. Du vil lære de grundlæggende begreber, kernefunktioner og forstå, hvordan azd forenkler implementeringen af cloud-native applikationer.
 
 ## Læringsmål
 
-Ved afslutningen af denne lektion vil du:
+Ved slutningen af denne lektion vil du:
 - Forstå, hvad Azure Developer CLI er, og dets primære formål
 - Lære de grundlæggende begreber om skabeloner, miljøer og tjenester
 - Udforske nøglefunktioner, herunder skabelonbaseret udvikling og Infrastructure as Code
@@ -33,14 +33,14 @@ Efter at have gennemført denne lektion vil du kunne:
 
 ## Hvad er Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) er et kommandolinjeværktøj designet til at fremskynde din rejse fra lokal udvikling til Azure-implementering. Det forenkler processen med at bygge, implementere og administrere cloud-native applikationer på Azure.
+Azure Developer CLI (azd) er et kommandolinjeværktøj designet til at accelerere din rejse fra lokal udvikling til Azure-implementering. Det forenkler processen med at bygge, implementere og administrere cloud-native applikationer på Azure.
 
 ## Grundlæggende Begreber
 
 ### Skabeloner
 Skabeloner er fundamentet for azd. De indeholder:
 - **Applikationskode** - Din kildekode og afhængigheder
-- **Infrastrukturdefinitioner** - Azure-ressourcer defineret i Bicep eller Terraform
+- **Infrastrukturbeskrivelser** - Azure-ressourcer defineret i Bicep eller Terraform
 - **Konfigurationsfiler** - Indstillinger og miljøvariabler
 - **Implementeringsscripts** - Automatiserede implementeringsarbejdsgange
 
@@ -50,8 +50,8 @@ Miljøer repræsenterer forskellige implementeringsmål:
 - **Staging** - Pre-produktionsmiljø
 - **Produktion** - Live produktionsmiljø
 
-Hvert miljø opretholder sin egen:
-- Azure-ressourcegruppe
+Hvert miljø opretholder sine egne:
+- Azure resource group
 - Konfigurationsindstillinger
 - Implementeringstilstand
 
@@ -74,16 +74,16 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Azure's domænespecifikke sprog
+- **Bicep** - Azures domænespecifikke sprog
 - **Terraform** - Multi-cloud infrastrukturværktøj
 - **ARM Templates** - Azure Resource Manager-skabeloner
 
 ### 3. Integrerede Arbejdsgange
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -120,7 +120,7 @@ my-app/
 ## 🔧 Konfigurationsfiler
 
 ### azure.yaml
-Hovedprojektets konfigurationsfil:
+Den primære projektkonfigurationsfil:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Forstå `azd down --force --purge`
+Kommandoen `azd down --force --purge` er en kraftfuld måde at fuldstændigt nedlægge dit azd-miljø og alle tilknyttede ressourcer. Her er en oversigt over, hvad hver flag gør:
+```
+--force
+```
+- Springer bekræftelsesprompter over.
+- Nyttig til automatisering eller scripts, hvor manuel input ikke er muligt.
+- Sikrer, at nedlæggelsen fortsætter uden afbrydelser, selv hvis CLI'en opdager uoverensstemmelser.
+
+```
+--purge
+```
+Sletter **al tilknyttet metadata**, herunder:
+Miljøtilstand  
+Lokal `.azure`-mappe  
+Cachede implementeringsoplysninger  
+Forhindrer azd i at "huske" tidligere implementeringer, hvilket kan forårsage problemer som uoverensstemmende resource groups eller forældede registreringsreferencer.
+
+### Hvorfor bruge begge?
+Når du støder på problemer med `azd up` på grund af resterende tilstand eller delvise implementeringer, sikrer denne kombination en **ren start**.
+
+Det er især nyttigt efter manuelle ressource-sletninger i Azure-portalen eller ved skift af skabeloner, miljøer eller navngivningskonventioner for resource groups.
 
 ### Håndtering af Flere Miljøer
 ```bash
@@ -225,7 +248,7 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Bedste Fremgangsmåder
+## Bedste Praksis
 
 ### 1. Brug Meningsfulde Navne
 ```bash
@@ -287,11 +310,11 @@ azd init --template template1
 
 ---
 
-**Navigation**
-- **Forrige Lektion**: [README](../../README.md)
+**Navigation**  
+- **Forrige Lektion**: [README](../../README.md)  
 - **Næste Lektion**: [Installation & Opsætning](installation.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

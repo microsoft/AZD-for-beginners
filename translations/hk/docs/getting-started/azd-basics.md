@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T16:54:17+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T12:56:51+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "hk"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 簡介
 
-本課程將介紹 Azure Developer CLI (azd)，這是一個強大的命令列工具，能加速從本地開發到部署至 Azure 的過程。你將學習基本概念、核心功能，並了解 azd 如何簡化雲原生應用程式的部署。
+本課程將介紹 Azure Developer CLI (azd)，這是一個強大的命令列工具，能加速從本地開發到 Azure 部署的過程。你將學習基本概念、核心功能，並了解 azd 如何簡化雲原生應用程式的部署。
 
 ## 學習目標
 
 完成本課程後，你將能夠：
-- 理解什麼是 Azure Developer CLI 及其主要用途
+- 理解 Azure Developer CLI 是什麼及其主要用途
 - 學習模板、環境和服務的核心概念
-- 探索包括基於模板的開發和基礎架構即代碼 (Infrastructure as Code) 在內的關鍵功能
+- 探索模板驅動開發和基礎架構即代碼等關鍵功能
 - 理解 azd 專案結構和工作流程
 - 為你的開發環境安裝和配置 azd 做好準備
 
@@ -33,7 +33,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 什麼是 Azure Developer CLI (azd)？
 
-Azure Developer CLI (azd) 是一個命令列工具，旨在加速從本地開發到部署至 Azure 的過程。它簡化了在 Azure 上構建、部署和管理雲原生應用程式的流程。
+Azure Developer CLI (azd) 是一個命令列工具，旨在加速從本地開發到 Azure 部署的過程。它簡化了在 Azure 上構建、部署和管理雲原生應用程式的流程。
 
 ## 核心概念
 
@@ -47,24 +47,24 @@ Azure Developer CLI (azd) 是一個命令列工具，旨在加速從本地開發
 ### 環境
 環境代表不同的部署目標：
 - **開發環境** - 用於測試和開發
-- **預備環境** - 生產前的環境
-- **生產環境** - 實際運行的生產環境
+- **測試環境** - 預生產環境
+- **生產環境** - 線上生產環境
 
-每個環境都有自己的：
+每個環境都維護自己的：
 - Azure 資源群組
 - 配置設定
 - 部署狀態
 
 ### 服務
 服務是應用程式的構建模塊：
-- **前端** - 網頁應用程式、單頁應用 (SPA)
+- **前端** - 網頁應用程式、單頁應用程式 (SPA)
 - **後端** - API、微服務
-- **資料庫** - 數據存儲解決方案
+- **資料庫** - 資料存儲解決方案
 - **存儲** - 文件和 Blob 存儲
 
 ## 關鍵功能
 
-### 1. 基於模板的開發
+### 1. 模板驅動開發
 ```bash
 # Browse available templates
 azd template list
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. 集成工作流程
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## 理解 `azd down --force --purge`
+`azd down --force --purge` 命令是一種強大的方式，可以完全拆除你的 azd 環境及所有相關資源。以下是每個標誌的功能解析：
+```
+--force
+```
+- 跳過確認提示。
+- 適用於無需手動輸入的自動化或腳本場景。
+- 即使 CLI 檢測到不一致，也能確保拆除過程不中斷。
+
+```
+--purge
+```
+刪除 **所有相關的元數據**，包括：
+- 環境狀態
+- 本地 `.azure` 資料夾
+- 快取的部署資訊
+- 防止 azd "記住" 之前的部署，避免出現資源群組不匹配或過時的註冊表引用等問題。
+
+### 為什麼要同時使用？
+當你因殘留狀態或部分部署而在使用 `azd up` 時遇到問題時，這個組合能確保一個 **乾淨的起點**。
+
+這在手動刪除 Azure 入口網站中的資源後，或切換模板、環境或資源群組命名約定時特別有用。
 
 ### 管理多個環境
 ```bash
@@ -244,7 +267,7 @@ azd init --template template1
 - 為你的組織創建可重用的模板
 
 ### 3. 環境隔離
-- 為開發/預備/生產使用獨立的環境
+- 為開發/測試/生產使用獨立的環境
 - 切勿直接從本地機器部署到生產環境
 - 使用 CI/CD 管道進行生產部署
 
@@ -275,8 +298,8 @@ azd init --template template1
 
 ## 下一步
 
-- [安裝與設置](installation.md) - 安裝和配置 azd
-- [你的第一個專案](first-project.md) - 實操教程
+- [安裝與設置](installation.md) - 安裝並配置 azd
+- [你的第一個專案](first-project.md) - 動手教程
 - [配置指南](configuration.md) - 高級配置選項
 
 ## 其他資源
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。

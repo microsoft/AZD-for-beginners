@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-10T06:07:27+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:33:36+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "hu"
 }
@@ -15,12 +15,12 @@ Ez az átfogó útmutató bemutatja az Azure Developer CLI konfigurálásának m
 
 ## Tanulási célok
 
-A lecke végére képes leszel:
-- Elsajátítani az azd konfigurációs hierarchiát, és megérteni, hogyan kerülnek prioritásba a beállítások
-- Hatékonyan konfigurálni globális és projekt-specifikus beállításokat
-- Több környezetet kezelni különböző konfigurációkkal
-- Biztonságos autentikációs és autorizációs mintákat alkalmazni
-- Megérteni a fejlett konfigurációs mintákat összetett forgatókönyvekhez
+A lecke végére:
+- Elsajátítod az azd konfigurációs hierarchiát, és megérted, hogyan kerülnek prioritásba a beállítások
+- Hatékonyan konfigurálod a globális és projekt-specifikus beállításokat
+- Több környezetet kezelsz különböző konfigurációkkal
+- Biztonságos autentikációs és autorizációs mintákat valósítasz meg
+- Megérted a fejlett konfigurációs mintákat összetett forgatókönyvekhez
 
 ## Tanulási eredmények
 
@@ -38,7 +38,7 @@ Ez az átfogó útmutató bemutatja az Azure Developer CLI konfigurálásának m
 Az azd hierarchikus konfigurációs rendszert használ:
 1. **Parancssori kapcsolók** (legmagasabb prioritás)
 2. **Környezeti változók**
-3. **Helyi projekt konfiguráció** (`.azd/config.json`)
+3. **Helyi projektkonfiguráció** (`.azd/config.json`)
 4. **Globális felhasználói konfiguráció** (`~/.azd/config.json`)
 5. **Alapértelmezett értékek** (legalacsonyabb prioritás)
 
@@ -78,7 +78,7 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ Projekt konfiguráció
+## 🏗️ Projektkonfiguráció
 
 ### azure.yaml felépítése
 Az `azure.yaml` fájl az azd projekt központi eleme:
@@ -157,7 +157,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Szolgáltatás konfigurációs lehetőségek
+### Szolgáltatáskonfigurációs lehetőségek
 
 #### Host típusok
 ```yaml
@@ -216,7 +216,7 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Környezet konfiguráció
+### Környezetkonfiguráció
 Minden környezet saját konfigurációval rendelkezik a `.azure/<env-name>/config.json` fájlban:
 
 ```json
@@ -253,7 +253,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-### Környezet sablonok
+### Környezeti sablonok
 Hozz létre `.azure/env.template` fájlt a következetes környezetbeállítás érdekében:
 ```bash
 # Required variables
@@ -331,7 +331,7 @@ Infrastruktúra paraméterek konfigurálása az `infra/main.parameters.json` fá
 ```
 
 ### Terraform konfiguráció
-Terraform projektekhez konfigurálj az `infra/terraform.tfvars` fájlban:
+Terraform projektekhez konfigurálás az `infra/terraform.tfvars` fájlban:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Példa `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Fejlett konfiguráció
 
-### Egyedi erőforrás elnevezés
+### Egyedi erőforrásnevek
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -516,7 +517,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Konfiguráció dokumentációja
+### 4. Konfiguráció dokumentálása
 Dokumentáld a konfigurációt a `CONFIG.md` fájlban:
 ```markdown
 # Configuration Guide
@@ -552,5 +553,5 @@ Dokumentáld a konfigurációt a `CONFIG.md` fájlban:
 
 ---
 
-**Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+**Felelősségkizárás**:  
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítószolgáltatás segítségével készült fordítás. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.

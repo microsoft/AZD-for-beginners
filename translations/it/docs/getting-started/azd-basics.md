@@ -1,28 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T19:17:39+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:10:35+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "it"
 }
 -->
-# AZD - Nozioni di base - Comprendere Azure Developer CLI
+# AZD Fondamenti - Comprendere Azure Developer CLI
 
 ## Introduzione
 
-Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento da riga di comando potente che accelera il passaggio dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e come azd semplifica il deployment di applicazioni cloud-native.
+Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento da riga di comando potente che accelera il tuo percorso dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e capirai come azd semplifica il deployment di applicazioni cloud-native.
 
-## Obiettivi di apprendimento
+## Obiettivi di Apprendimento
 
 Alla fine di questa lezione, sarai in grado di:
 - Comprendere cos'è Azure Developer CLI e il suo scopo principale
-- Apprendere i concetti fondamentali di template, ambienti e servizi
+- Imparare i concetti fondamentali di template, ambienti e servizi
 - Esplorare le funzionalità principali, tra cui lo sviluppo basato su template e l'Infrastructure as Code
 - Comprendere la struttura e il flusso di lavoro di un progetto azd
 - Essere pronto a installare e configurare azd per il tuo ambiente di sviluppo
 
-## Risultati di apprendimento
+## Risultati di Apprendimento
 
 Dopo aver completato questa lezione, sarai in grado di:
 - Spiegare il ruolo di azd nei flussi di lavoro di sviluppo cloud moderni
@@ -33,9 +33,9 @@ Dopo aver completato questa lezione, sarai in grado di:
 
 ## Cos'è Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) è uno strumento da riga di comando progettato per accelerare il passaggio dallo sviluppo locale al deployment su Azure. Semplifica il processo di creazione, deployment e gestione di applicazioni cloud-native su Azure.
+Azure Developer CLI (azd) è uno strumento da riga di comando progettato per accelerare il tuo percorso dallo sviluppo locale al deployment su Azure. Semplifica il processo di creazione, deployment e gestione di applicazioni cloud-native su Azure.
 
-## Concetti fondamentali
+## Concetti Fondamentali
 
 ### Template
 I template sono la base di azd. Contengono:
@@ -56,15 +56,15 @@ Ogni ambiente mantiene il proprio:
 - Stato di deployment
 
 ### Servizi
-I servizi sono i componenti fondamentali della tua applicazione:
+I servizi sono i blocchi costitutivi della tua applicazione:
 - **Frontend** - Applicazioni web, SPAs
 - **Backend** - API, microservizi
 - **Database** - Soluzioni di archiviazione dati
 - **Storage** - Archiviazione di file e blob
 
-## Funzionalità principali
+## Funzionalità Principali
 
-### 1. Sviluppo basato su template
+### 1. Sviluppo Basato su Template
 ```bash
 # Browse available templates
 azd template list
@@ -76,18 +76,18 @@ azd init --template <template-name>
 ### 2. Infrastructure as Code
 - **Bicep** - Linguaggio specifico di dominio di Azure
 - **Terraform** - Strumento multi-cloud per l'infrastruttura
-- **Template ARM** - Template di Azure Resource Manager
+- **ARM Templates** - Template di Azure Resource Manager
 
-### 3. Flussi di lavoro integrati
+### 3. Flussi di Lavoro Integrati
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
-### 4. Gestione degli ambienti
+### 4. Gestione degli Ambienti
 ```bash
 # Create and manage environments
 azd env new <environment-name>
@@ -95,7 +95,7 @@ azd env select <environment-name>
 azd env list
 ```
 
-## 📁 Struttura del progetto
+## 📁 Struttura del Progetto
 
 Una tipica struttura di progetto azd:
 ```
@@ -117,7 +117,7 @@ my-app/
 └── README.md
 ```
 
-## 🔧 File di configurazione
+## 🔧 File di Configurazione
 
 ### azure.yaml
 Il file principale di configurazione del progetto:
@@ -157,9 +157,9 @@ Configurazione specifica dell'ambiente:
 }
 ```
 
-## 🎪 Flussi di lavoro comuni
+## 🎪 Flussi di Lavoro Comuni
 
-### Avviare un nuovo progetto
+### Avviare un Nuovo Progetto
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -171,7 +171,7 @@ azd init
 azd init .
 ```
 
-### Ciclo di sviluppo
+### Ciclo di Sviluppo
 ```bash
 # Set up development environment
 azd auth login
@@ -185,10 +185,33 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-### Gestire più ambienti
+## Comprendere `azd down --force --purge`
+Il comando `azd down --force --purge` è un modo potente per smantellare completamente il tuo ambiente azd e tutte le risorse associate. Ecco una panoramica di cosa fa ogni flag:
+```
+--force
+```
+- Salta i prompt di conferma.
+- Utile per automazione o scripting dove l'input manuale non è fattibile.
+- Garantisce che lo smantellamento proceda senza interruzioni, anche se la CLI rileva incongruenze.
+
+```
+--purge
+```
+Elimina **tutti i metadati associati**, inclusi:
+Stato dell'ambiente
+Cartella locale `.azure`
+Informazioni di deployment memorizzate nella cache
+Previene che azd "ricordi" deployment precedenti, che possono causare problemi come gruppi di risorse non corrispondenti o riferimenti obsoleti al registro.
+
+### Perché usarli entrambi?
+Quando incontri problemi con `azd up` a causa di stato residuo o deployment parziali, questa combinazione garantisce una **pulizia completa**.
+
+È particolarmente utile dopo eliminazioni manuali di risorse nel portale Azure o quando si cambiano template, ambienti o convenzioni di denominazione dei gruppi di risorse.
+
+### Gestione di Ambienti Multipli
 ```bash
 # Create staging environment
 azd env new staging
@@ -202,7 +225,7 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Comandi di navigazione
+## 🧭 Comandi di Navigazione
 
 ### Scoperta
 ```bash
@@ -211,7 +234,7 @@ azd template show <template>   # Template details
 azd init --help               # Initialization options
 ```
 
-### Gestione del progetto
+### Gestione del Progetto
 ```bash
 azd show                     # Project overview
 azd env show                 # Current environment
@@ -225,9 +248,9 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Migliori pratiche
+## Migliori Pratiche
 
-### 1. Usa nomi significativi
+### 1. Usa Nomi Significativi
 ```bash
 # Good
 azd env new production-east
@@ -238,32 +261,32 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Sfrutta i template
+### 2. Sfrutta i Template
 - Inizia con template esistenti
-- Personalizza in base alle tue esigenze
+- Personalizza secondo le tue esigenze
 - Crea template riutilizzabili per la tua organizzazione
 
-### 3. Isolamento degli ambienti
+### 3. Isolamento degli Ambienti
 - Usa ambienti separati per sviluppo/staging/produzione
 - Non effettuare mai il deployment direttamente in produzione dalla macchina locale
 - Usa pipeline CI/CD per i deployment in produzione
 
-### 4. Gestione della configurazione
+### 4. Gestione della Configurazione
 - Usa variabili d'ambiente per dati sensibili
 - Mantieni la configurazione sotto controllo di versione
 - Documenta le impostazioni specifiche dell'ambiente
 
-## Progressione di apprendimento
+## Progressione di Apprendimento
 
 ### Principiante (Settimana 1-2)
 1. Installa azd e autentica
 2. Effettua il deployment di un template semplice
 3. Comprendi la struttura del progetto
-4. Impara i comandi di base (up, down, deploy)
+4. Impara i comandi base (up, down, deploy)
 
 ### Intermedio (Settimana 3-4)
 1. Personalizza i template
-2. Gestisci più ambienti
+2. Gestisci ambienti multipli
 3. Comprendi il codice dell'infrastruttura
 4. Configura pipeline CI/CD
 
@@ -273,25 +296,25 @@ azd init --template template1
 3. Deployment multi-regione
 4. Configurazioni di livello enterprise
 
-## Prossimi passi
+## Prossimi Passi
 
-- [Installazione e configurazione](installation.md) - Installa e configura azd
-- [Il tuo primo progetto](first-project.md) - Tutorial pratico
-- [Guida alla configurazione](configuration.md) - Opzioni di configurazione avanzate
+- [Installazione e Configurazione](installation.md) - Installa e configura azd
+- [Il Tuo Primo Progetto](first-project.md) - Tutorial pratico
+- [Guida alla Configurazione](configuration.md) - Opzioni di configurazione avanzate
 
-## Risorse aggiuntive
+## Risorse Aggiuntive
 
 - [Panoramica di Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Galleria di template](https://azure.github.io/awesome-azd/)
-- [Esempi della community](https://github.com/Azure-Samples)
+- [Galleria di Template](https://azure.github.io/awesome-azd/)
+- [Esempi della Comunità](https://github.com/Azure-Samples)
 
 ---
 
 **Navigazione**
-- **Lezione precedente**: [README](../../README.md)
-- **Prossima lezione**: [Installazione e configurazione](installation.md)
+- **Lezione Precedente**: [README](../../README.md)
+- **Prossima Lezione**: [Installazione e Configurazione](installation.md)
 
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un esperto umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

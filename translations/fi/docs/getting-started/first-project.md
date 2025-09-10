@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:23:39+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:23:16+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "fi"
 }
@@ -11,52 +11,56 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Johdanto
 
-Tervetuloa ensimmäiseen Azure Developer CLI -projektiisi! Tämä kattava käytännön opas tarjoaa täydellisen läpikäynnin täysimittaisen sovelluksen luomisesta, käyttöönotosta ja hallinnasta Azuren avulla käyttäen azd-työkalua. Työskentelet todellisen tehtävälistasovelluksen kanssa, joka sisältää React-frontendin, Node.js API-backendin ja MongoDB-tietokannan.
+Tervetuloa ensimmäiseen Azure Developer CLI -projektiisi! Tämä kattava käytännön opas tarjoaa täydellisen läpikäynnin täyden pinon sovelluksen luomisesta, käyttöönotosta ja hallinnasta Azuren avulla käyttäen azd-työkalua. Työskentelet todellisen tehtävälistasovelluksen kanssa, joka sisältää React-frontendin, Node.js API -backendin ja MongoDB-tietokannan.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
-- Hallitsemaan azd-projektin aloitustyönkulun mallien avulla
-- Ymmärtämään Azure Developer CLI -projektin rakenteen ja konfiguraatiotiedostot
-- Toteuttamaan sovelluksen täydellisen käyttöönoton Azureen infrastruktuurin provisioinnilla
+- Hallitsemaan azd-projektin alustamisen työnkulun mallien avulla
+- Ymmärtämään Azure Developer CLI -projektin rakenteen ja konfigurointitiedostot
+- Suorittamaan sovelluksen täydellisen käyttöönoton Azureen infrastruktuurin provisioinnin kanssa
 - Toteuttamaan sovelluspäivityksiä ja uudelleenkäyttöstrategioita
-- Hallitsemaan useita ympäristöjä kehitystä ja testausvaiheita varten
+- Hallitsemaan useita ympäristöjä kehitystä ja testausta varten
 - Soveltamaan resurssien siivous- ja kustannustenhallintakäytäntöjä
 
 ## Oppimistulokset
 
 Oppaan suorittamisen jälkeen osaat:
-- Aloittaa ja konfiguroida azd-projekteja itsenäisesti mallien avulla
+- Alustaa ja konfiguroida azd-projekteja itsenäisesti mallien avulla
 - Navigoida ja muokata azd-projektirakenteita tehokkaasti
-- Ottaa täysimittaisia sovelluksia käyttöön Azureen yksinkertaisilla komennoilla
-- Ratkaista yleisiä käyttöönotto- ja autentikointiongelmia
-- Hallita useita Azure-ympäristöjä eri käyttöönoton vaiheisiin
+- Ottaa täyden pinon sovelluksia käyttöön Azureen yksinkertaisilla komennoilla
+- Ratkaista yleisiä käyttöönotto- ja todennusongelmia
+- Hallita useita Azure-ympäristöjä eri käyttöönoton vaiheita varten
 - Toteuttaa jatkuvan käyttöönoton työnkulkuja sovelluspäivityksiä varten
 
 ## Aloittaminen
 
-### Esivaatimusten tarkistuslista
+### Esitarkistuslista
 - ✅ Azure Developer CLI asennettuna ([Asennusohje](installation.md))
-- ✅ Azure CLI asennettuna ja autentikoituna
+- ✅ Azure CLI asennettuna ja todennettuna
 - ✅ Git asennettuna järjestelmääsi
 - ✅ Node.js 16+ (tätä opasta varten)
 - ✅ Visual Studio Code (suositeltu)
 
-### Varmista asennuksesi
+### Tarkista asennuksesi
 ```bash
 # Check azd installation
 azd version
+```
+### Varmista Azure-todennus
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Tarkista Node.js-versio
+```bash
 node --version
 ```
 
-## Vaihe 1: Valitse ja aloita malli
+## Vaihe 1: Valitse ja alusta malli
 
-Aloitetaan suositulla tehtävälistasovellusmallilla, joka sisältää React-frontendin ja Node.js API-backendin.
+Aloitetaan suositulla tehtävälistasovelluksen mallilla, joka sisältää React-frontendin ja Node.js API -backendin.
 
 ```bash
 # Browse available templates
@@ -77,11 +81,11 @@ azd init --template todo-nodejs-mongo
 - Mallikoodi ladattiin paikalliseen hakemistoosi
 - Luotiin `azure.yaml`-tiedosto palvelumäärittelyillä
 - Infrastruktuurikoodi asetettiin `infra/`-hakemistoon
-- Luotiin ympäristön konfiguraatio
+- Luotiin ympäristökonfiguraatio
 
 ## Vaihe 2: Tutki projektin rakennetta
 
-Tutkitaan, mitä azd loi meille:
+Tarkastellaan, mitä azd loi meille:
 
 ```bash
 # View the project structure
@@ -117,7 +121,7 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Keskeiset tiedostot, jotka kannattaa ymmärtää
+### Tärkeät tiedostot ymmärtää
 
 **azure.yaml** - azd-projektisi ydin:
 ```bash
@@ -151,15 +155,14 @@ Tee yksinkertainen muutos:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
 ## Vaihe 4: Ota käyttöön Azureen
 
-Nyt jännittävä osuus - otetaan kaikki käyttöön Azureen!
+Nyt jännittävä osa - otetaan kaikki käyttöön Azureen!
 
 ```bash
 # Deploy infrastructure and application
@@ -172,10 +175,10 @@ azd up
 # 4. Display the application URL
 ```
 
-### Mitä tapahtuu käyttöönoton aikana?
+### Mitä käyttöönoton aikana tapahtuu?
 
 `azd up` -komento suorittaa seuraavat vaiheet:
-1. **Provisiointi** (`azd provision`) - Luo Azure-resurssit
+1. **Provisionointi** (`azd provision`) - Luo Azure-resurssit
 2. **Paketointi** - Rakentaa sovelluskoodin
 3. **Käyttöönotto** (`azd deploy`) - Ottaa koodin käyttöön Azure-resursseihin
 
@@ -194,7 +197,7 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Vaihe 5: Testaa sovelluksesi
 
-### Pääsy sovellukseen
+### Käytä sovellustasi
 Klikkaa käyttöönoton tulosteessa annettua URL-osoitetta tai hae se milloin tahansa:
 ```bash
 # Get application endpoints
@@ -204,7 +207,7 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Testaa tehtävälistasovellus
+### Testaa tehtävälistasovellusta
 1. **Lisää tehtävä** - Klikkaa "Add Todo" ja syötä tehtävä
 2. **Merkitse valmiiksi** - Ruksaa valmiit tehtävät
 3. **Poista tehtäviä** - Poista tehtävät, joita et enää tarvitse
@@ -244,7 +247,7 @@ azd deploy
 
 ## Vaihe 7: Hallitse useita ympäristöjä
 
-Luo testausympäristö, jossa voit testata muutoksia ennen tuotantoa:
+Luo testausympäristö muutosten testaamiseksi ennen tuotantoa:
 
 ```bash
 # Create a new staging environment
@@ -290,16 +293,16 @@ azd down --force --purge
 ## Mitä olet oppinut
 
 Onnittelut! Olet onnistuneesti:
-- Aloittanut azd-projektin mallista
+- Alustanut azd-projektin mallista
 - Tutkinut projektin rakennetta ja keskeisiä tiedostoja
-- Ottanut täysimittaisen sovelluksen käyttöön Azureen
+- Ottanut täyden pinon sovelluksen käyttöön Azureen
 - Tehnyt koodimuutoksia ja ottanut ne uudelleen käyttöön
 - Hallinnut useita ympäristöjä
 - Siivonnut resurssit
 
 ## Yleisten ongelmien vianmääritys
 
-### Autentikointivirheet
+### Todennusvirheet
 ```bash
 # Re-authenticate with Azure
 az login
@@ -325,7 +328,7 @@ azd logs --service web
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Portti-/verkko-ongelmat
+### Portti-/verkkovirheet
 ```bash
 # Check if ports are available
 netstat -an | grep :3000
@@ -337,14 +340,14 @@ netstat -an | grep :3100
 Nyt kun olet suorittanut ensimmäisen projektisi, tutustu näihin edistyneisiin aiheisiin:
 
 ### 1. Mukauta infrastruktuuria
-- [Infrastructure as Code](../deployment/provisioning.md)
+- [Infrastruktuuri koodina](../deployment/provisioning.md)
 - [Lisää tietokantoja, tallennustilaa ja muita palveluita](../deployment/provisioning.md#adding-services)
 
 ### 2. Määritä CI/CD
 - [GitHub Actions -integraatio](../deployment/cicd-integration.md)
 - [Azure DevOps -putket](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Tuotannon parhaat käytännöt
+### 3. Tuotantokäytön parhaat käytännöt
 - [Turvallisuusasetukset](../deployment/best-practices.md#security)
 - [Suorituskyvyn optimointi](../deployment/best-practices.md#performance)
 - [Seuranta ja lokitus](../deployment/best-practices.md#monitoring)
@@ -366,30 +369,30 @@ azd init --template todo-java-mongo
 
 ### Oppimateriaalit
 - [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure-arkkitehtuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Yhteisö ja tuki
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer -yhteisö](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Mallit ja esimerkit
 - [Virallinen malligalleria](https://azure.github.io/awesome-azd/)
 - [Yhteisön mallit](https://github.com/Azure-Samples/azd-templates)
-- [Yrityskäytännöt](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Yritysmallit](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**Onnittelut ensimmäisen azd-projektisi suorittamisesta!** Olet nyt valmis rakentamaan ja ottamaan käyttöön upeita sovelluksia Azureen luottavaisin mielin.
+**Onnittelut ensimmäisen azd-projektisi suorittamisesta!** Olet nyt valmis rakentamaan ja ottamaan käyttöön upeita sovelluksia Azuren avulla luottavaisin mielin.
 
 ---
 
 **Navigointi**
-- **Edellinen oppitunti**: [Konfiguraatio](configuration.md)
-- **Seuraava oppitunti**: [Käyttöönotto-opas](../deployment/deployment-guide.md)
+- **Edellinen osio**: [Konfigurointi](configuration.md)
+- **Seuraava osio**: [Käyttöopas](../deployment/deployment-guide.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskääntämistä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinkäsityksistä tai virhetulkinnoista.

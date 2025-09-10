@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T16:56:40+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:12:24+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "pl"
 }
@@ -18,8 +18,8 @@ Ta lekcja wprowadza Cię do Azure Developer CLI (azd), potężnego narzędzia wi
 Po zakończeniu tej lekcji będziesz:
 - Rozumieć, czym jest Azure Developer CLI i jego główny cel
 - Poznać podstawowe koncepcje, takie jak szablony, środowiska i usługi
-- Odkrywać kluczowe funkcje, w tym rozwój oparty na szablonach i Infrastructure as Code
-- Rozumieć strukturę projektu azd i przepływ pracy
+- Zbadać kluczowe funkcje, w tym rozwój oparty na szablonach i Infrastructure as Code
+- Zrozumieć strukturę projektu azd i przepływ pracy
 - Przygotowany do instalacji i konfiguracji azd w swoim środowisku deweloperskim
 
 ## Efekty nauki
@@ -50,7 +50,7 @@ Szablony są podstawą azd. Zawierają:
 - **Staging** - Środowisko przedprodukcyjne
 - **Produkcja** - Środowisko produkcyjne na żywo
 
-Każde środowisko posiada własne:
+Każde środowisko utrzymuje własne:
 - Grupę zasobów Azure
 - Ustawienia konfiguracyjne
 - Stan wdrożenia
@@ -60,7 +60,7 @@ Usługi są elementami składowymi Twojej aplikacji:
 - **Frontend** - Aplikacje webowe, SPA
 - **Backend** - API, mikrousługi
 - **Baza danych** - Rozwiązania do przechowywania danych
-- **Przechowywanie** - Przechowywanie plików i obiektów blob
+- **Przechowywanie** - Przechowywanie plików i blobów
 
 ## Kluczowe funkcje
 
@@ -74,16 +74,16 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Specjalistyczny język Azure
+- **Bicep** - Specyficzny dla Azure język domenowy
 - **Terraform** - Narzędzie do infrastruktury wielochmurowej
 - **ARM Templates** - Szablony Azure Resource Manager
 
 ### 3. Zintegrowane przepływy pracy
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Zrozumienie `azd down --force --purge`
+Polecenie `azd down --force --purge` to potężny sposób na całkowite usunięcie środowiska azd i wszystkich powiązanych zasobów. Oto szczegóły dotyczące każdego flagi:
+```
+--force
+```
+- Pomija potwierdzenia.
+- Przydatne w automatyzacji lub skryptach, gdzie ręczne wprowadzanie nie jest możliwe.
+- Zapewnia, że proces usuwania przebiega bez przerw, nawet jeśli CLI wykryje niespójności.
+
+```
+--purge
+```
+Usuwa **wszystkie powiązane metadane**, w tym:
+Stan środowiska
+Lokalny folder `.azure`
+Zbuforowane informacje o wdrożeniu
+Zapobiega "zapamiętywaniu" przez azd poprzednich wdrożeń, co może powodować problemy, takie jak niedopasowane grupy zasobów lub nieaktualne odwołania do rejestru.
+
+### Dlaczego używać obu?
+Gdy napotkasz problemy z `azd up` z powodu pozostałego stanu lub częściowych wdrożeń, ta kombinacja zapewnia **czystą kartę**.
+
+Jest szczególnie przydatna po ręcznym usunięciu zasobów w portalu Azure lub podczas zmiany szablonów, środowisk lub konwencji nazewnictwa grup zasobów.
 
 ### Zarządzanie wieloma środowiskami
 ```bash
@@ -244,13 +267,13 @@ azd init --template template1
 - Twórz szablony wielokrotnego użytku dla swojej organizacji
 
 ### 3. Izolacja środowisk
-- Używaj oddzielnych środowisk dla rozwoju/staging/produkcji
+- Używaj oddzielnych środowisk dla dev/staging/prod
 - Nigdy nie wdrażaj bezpośrednio do produkcji z lokalnej maszyny
 - Używaj pipeline'ów CI/CD do wdrożeń produkcyjnych
 
 ### 4. Zarządzanie konfiguracją
 - Używaj zmiennych środowiskowych dla danych wrażliwych
-- Przechowuj konfigurację w systemie kontroli wersji
+- Przechowuj konfigurację w kontroli wersji
 - Dokumentuj ustawienia specyficzne dla środowiska
 
 ## Postęp w nauce

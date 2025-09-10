@@ -1,37 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:32:38+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:26:25+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "he"
 }
 -->
 # מדריך תצורה
 
-## הקדמה
+## מבוא
 
-מדריך מקיף זה מכסה את כל ההיבטים של תצורת Azure Developer CLI לצורך זרימות עבודה אופטימליות של פיתוח ופריסה. תלמדו על היררכיית התצורה, ניהול סביבות, שיטות אימות, ודפוסי תצורה מתקדמים שמאפשרים פריסות יעילות ובטוחות ב-Azure.
+מדריך מקיף זה מכסה את כל ההיבטים של תצורת Azure Developer CLI לעבודה מיטבית של פיתוח ופריסה. תלמדו על היררכיית התצורה, ניהול סביבות, שיטות אימות, ודפוסי תצורה מתקדמים שמאפשרים פריסות יעילות ומאובטחות ב-Azure.
 
 ## מטרות למידה
 
-בסיום השיעור הזה, תוכלו:
+בסיום השיעור, תלמדו:
 - לשלוט בהיררכיית התצורה של azd ולהבין כיצד ההגדרות מקבלות עדיפות
-- להגדיר הגדרות גלובליות והגדרות ספציפיות לפרויקט בצורה יעילה
+- להגדיר הגדרות גלובליות והגדרות ייחודיות לפרויקט בצורה יעילה
 - לנהל מספר סביבות עם תצורות שונות
 - ליישם דפוסי אימות והרשאה מאובטחים
-- להבין דפוסי תצורה מתקדמים עבור תרחישים מורכבים
+- להבין דפוסי תצורה מתקדמים לתרחישים מורכבים
 
 ## תוצאות למידה
 
 לאחר השלמת השיעור, תוכלו:
-- להגדיר את azd לזרימות עבודה אופטימליות של פיתוח
+- להגדיר את azd לעבודה מיטבית בתהליכי פיתוח
 - להקים ולנהל מספר סביבות פריסה
 - ליישם שיטות ניהול תצורה מאובטחות
 - לפתור בעיות הקשורות לתצורה
-- להתאים את התנהגות azd לדרישות ארגוניות ספציפיות
+- להתאים את התנהגות azd לצרכים ארגוניים ספציפיים
 
-מדריך מקיף זה מכסה את כל ההיבטים של תצורת Azure Developer CLI לצורך זרימות עבודה אופטימליות של פיתוח ופריסה.
+מדריך מקיף זה מכסה את כל ההיבטים של תצורת Azure Developer CLI לעבודה מיטבית של פיתוח ופריסה.
 
 ## היררכיית תצורה
 
@@ -39,12 +39,12 @@ azd משתמשת במערכת תצורה היררכית:
 1. **דגלי שורת פקודה** (עדיפות גבוהה ביותר)
 2. **משתני סביבה**
 3. **תצורת פרויקט מקומית** (`.azd/config.json`)
-4. **תצורת משתמש גלובלית** (`~/.azd/config.json`)
+4. **תצורה גלובלית של משתמש** (`~/.azd/config.json`)
 5. **ערכי ברירת מחדל** (עדיפות נמוכה ביותר)
 
 ## תצורה גלובלית
 
-### הגדרת ברירות מחדל גלובליות
+### הגדרת ערכי ברירת מחדל גלובליים
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -178,7 +178,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### הגדרות ספציפיות לשפה
+#### הגדרות ייחודיות לשפה
 ```yaml
 services:
   node-app:
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### תבניות סביבה
-צרו `.azure/env.template` לצורך הגדרת סביבה עקבית:
+צרו `.azure/env.template` להגדרת סביבה עקבית:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -284,8 +284,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### אימות Service Principal
-עבור צינורות CI/CD:
+### אימות עם Service Principal
+לשימוש בצינורות CI/CD:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,7 +298,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-עבור סביבות שמתארחות ב-Azure:
+לסביבות שמתארחות ב-Azure:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -331,7 +331,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### תצורת Terraform
-עבור פרויקטים של Terraform, הגדירו ב-`infra/terraform.tfvars`:
+לפרויקטים של Terraform, הגדירו ב-`infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+דוגמה ל-`Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 תצורה מתקדמת
 
-### התאמה אישית של שמות משאבים
+### מתן שמות מותאם אישית למשאבים
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -412,7 +413,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 תצורות ספציפיות לסביבה
+## 🎯 תצורות ייחודיות לסביבות
 
 ### סביבת פיתוח
 ```bash
@@ -423,7 +424,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### סביבת בדיקות
+### סביבת בדיקות (Staging)
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -455,7 +456,7 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### סקריפטים לתצורה
+### סקריפטים לאימות
 צרו סקריפטים לאימות ב-`scripts/`:
 
 ```bash
@@ -532,10 +533,10 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## צעדים הבאים
+## הצעדים הבאים
 
-- [הפרויקט הראשון שלכם](first-project.md) - יישום תצורה בפועל
-- [מדריך פריסה](../deployment/deployment-guide.md) - שימוש בתצורה לצורך פריסה
+- [הפרויקט הראשון שלכם](first-project.md) - יישום התצורה בפועל
+- [מדריך פריסה](../deployment/deployment-guide.md) - שימוש בתצורה לפריסה
 - [הקצאת משאבים](../deployment/provisioning.md) - תצורות מוכנות לייצור
 
 ## מקורות
@@ -553,4 +554,4 @@ database:
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור הסמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפתו המקורית נחשב למקור הסמכותי. למידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי בני אדם. איננו נושאים באחריות לכל אי-הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.

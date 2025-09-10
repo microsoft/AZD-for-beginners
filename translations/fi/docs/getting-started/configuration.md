@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:32:05+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:23:41+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "fi"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Johdanto
 
-Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfiguroinnin osa-alueita, jotta kehitys- ja käyttöönotto-työnkulut olisivat mahdollisimman tehokkaita. Opit konfigurointihierarkiasta, ympäristön hallinnasta, autentikointimenetelmistä ja edistyneistä konfigurointimalleista, jotka mahdollistavat tehokkaat ja turvalliset Azure-käyttöönotot.
+Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfiguroinnin osa-alueita optimaalisten kehitys- ja käyttöönottojen työnkulkujen saavuttamiseksi. Opit konfigurointihierarkiasta, ympäristön hallinnasta, autentikointimenetelmistä ja edistyneistä konfigurointimalleista, jotka mahdollistavat tehokkaat ja turvalliset Azure-käyttöönotot.
 
 ## Oppimistavoitteet
 
@@ -24,14 +24,14 @@ Tämän oppitunnin lopussa osaat:
 
 ## Oppimistulokset
 
-Tämän oppitunnin jälkeen pystyt:
-- Konfiguroimaan azd:n kehitystyönkulkujen optimoimiseksi
+Oppitunnin suorittamisen jälkeen pystyt:
+- Konfiguroimaan azd:n optimaalisiin kehitystyönkulkuihin
 - Määrittämään ja hallitsemaan useita käyttöönottoympäristöjä
 - Toteuttamaan turvallisia konfigurointikäytäntöjä
 - Ratkaisemaan konfigurointiin liittyviä ongelmia
 - Mukauttamaan azd:n toimintaa organisaation erityistarpeisiin
 
-Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfiguroinnin osa-alueita, jotta kehitys- ja käyttöönotto-työnkulut olisivat mahdollisimman tehokkaita.
+Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfiguroinnin osa-alueita optimaalisten kehitys- ja käyttöönottojen työnkulkujen saavuttamiseksi.
 
 ## Konfigurointihierarkia
 
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### Ympäristömallit
-Luo `.azure/env.template` yhtenäistä ympäristön asetusta varten:
+Luo `.azure/env.template` johdonmukaista ympäristön asetusta varten:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -284,7 +284,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Palvelutunnuksen autentikointi
+### Service Principal -autentikointi
 CI/CD-putkia varten:
 ```bash
 # Set environment variables
@@ -341,7 +341,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Käyttöönoton konfiguraatio
 
-### Rakennuskonfiguraatio
+### Build-konfiguraatio
 ```yaml
 # In azure.yaml
 services:
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Esimerkki `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Edistynyt konfiguraatio
 
@@ -534,8 +535,8 @@ Dokumentoi konfiguraatio tiedostoon `CONFIG.md`:
 
 ## Seuraavat askeleet
 
-- [Ensimmäinen projektisi](first-project.md) - Sovella konfiguraatiota käytännössä
-- [Käyttöönotto-opas](../deployment/deployment-guide.md) - Käytä konfiguraatiota käyttöönotossa
+- [Ensimmäinen projektisi](first-project.md) - Käytä konfiguraatiota käytännössä
+- [Käyttöönotto-opas](../deployment/deployment-guide.md) - Hyödynnä konfiguraatiota käyttöönotossa
 - [Resurssien provisiointi](../deployment/provisioning.md) - Tuotantovalmiit konfiguraatiot
 
 ## Viitteet
@@ -553,4 +554,4 @@ Dokumentoi konfiguraatio tiedostoon `CONFIG.md`:
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskääntämistä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinkäsityksistä tai virhetulkinnoista.

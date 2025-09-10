@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T16:44:43+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T12:48:54+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "de"
 }
@@ -18,7 +18,7 @@ Willkommen zu Ihrem ersten Azure Developer CLI-Projekt! Dieses umfassende Praxis
 Durch den Abschluss dieses Tutorials werden Sie:
 - Den azd-Projektinitialisierungs-Workflow mit Vorlagen meistern
 - Die Struktur und Konfigurationsdateien von Azure Developer CLI-Projekten verstehen
-- Eine vollständige Anwendungsbereitstellung auf Azure mit Infrastrukturprovisionierung durchführen
+- Eine vollständige Anwendungsbereitstellung auf Azure mit Infrastruktur-Provisionierung durchführen
 - Strategien für Anwendungsaktualisierungen und erneute Bereitstellungen implementieren
 - Mehrere Umgebungen für Entwicklung und Staging verwalten
 - Praktiken zur Ressourcensäuberung und Kostenmanagement anwenden
@@ -28,8 +28,8 @@ Durch den Abschluss dieses Tutorials werden Sie:
 Nach Abschluss werden Sie in der Lage sein:
 - azd-Projekte unabhängig von Vorlagen zu initialisieren und zu konfigurieren
 - azd-Projektstrukturen effektiv zu navigieren und zu ändern
-- Full-Stack-Anwendungen mit einfachen Befehlen auf Azure bereitzustellen
-- Häufige Bereitstellungsprobleme und Authentifizierungsprobleme zu beheben
+- Full-Stack-Anwendungen mit einem einzigen Befehl auf Azure bereitzustellen
+- Häufige Bereitstellungsprobleme und Authentifizierungsfehler zu beheben
 - Mehrere Azure-Umgebungen für verschiedene Bereitstellungsstufen zu verwalten
 - Kontinuierliche Bereitstellungs-Workflows für Anwendungsaktualisierungen zu implementieren
 
@@ -46,11 +46,15 @@ Nach Abschluss werden Sie in der Lage sein:
 ```bash
 # Check azd installation
 azd version
+```
+### Azure-Authentifizierung überprüfen
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Node.js-Version überprüfen
+```bash
 node --version
 ```
 
@@ -76,8 +80,8 @@ azd init --template todo-nodejs-mongo
 ### Was ist gerade passiert?
 - Der Vorlagencode wurde in Ihr lokales Verzeichnis heruntergeladen
 - Eine `azure.yaml`-Datei mit Dienstdefinitionen wurde erstellt
-- Infrastrukturcode im Verzeichnis `infra/` wurde eingerichtet
-- Eine Umgebungskonfiguration wurde erstellt
+- Infrastrukturcode im Verzeichnis `infra/` eingerichtet
+- Eine Umgebungskonfiguration erstellt
 
 ## Schritt 2: Projektstruktur erkunden
 
@@ -151,13 +155,12 @@ Nehmen Sie eine einfache Änderung vor:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
-## Schritt 4: Bereitstellung auf Azure
+## Schritt 4: Auf Azure bereitstellen
 
 Jetzt kommt der spannende Teil - alles auf Azure bereitstellen!
 
@@ -176,7 +179,7 @@ azd up
 
 Der Befehl `azd up` führt folgende Schritte aus:
 1. **Provisionierung** (`azd provision`) - Erstellt Azure-Ressourcen
-2. **Paketierung** - Baut Ihren Anwendungscode
+2. **Packaging** - Baut Ihren Anwendungscode
 3. **Bereitstellung** (`azd deploy`) - Stellt Code auf Azure-Ressourcen bereit
 
 ### Erwartete Ausgabe
@@ -228,7 +231,7 @@ Nehmen wir eine Änderung vor und sehen, wie einfach es ist, ein Update durchzuf
 code src/api/src/routes/lists.js
 ```
 
-Fügen Sie einen benutzerdefinierten Antwortheader hinzu:
+Fügen Sie einen benutzerdefinierten Antwort-Header hinzu:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -377,7 +380,7 @@ azd init --template todo-java-mongo
 ### Vorlagen & Beispiele
 - [Offizielle Vorlagengalerie](https://azure.github.io/awesome-azd/)
 - [Community-Vorlagen](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise-Muster](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, weisen wir darauf hin, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.

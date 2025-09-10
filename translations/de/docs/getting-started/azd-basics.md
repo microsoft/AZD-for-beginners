@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T16:56:03+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T12:49:31+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "de"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Einführung
 
-Diese Lektion führt Sie in die Azure Developer CLI (azd) ein, ein leistungsstarkes Befehlszeilentool, das Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung beschleunigt. Sie lernen die grundlegenden Konzepte, die Kernfunktionen und wie azd die Bereitstellung von cloud-nativen Anwendungen vereinfacht.
+Diese Lektion führt Sie in die Azure Developer CLI (azd) ein, ein leistungsstarkes Befehlszeilen-Tool, das Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung beschleunigt. Sie lernen die grundlegenden Konzepte, die Kernfunktionen und wie azd die Bereitstellung von cloud-nativen Anwendungen vereinfacht.
 
 ## Lernziele
 
@@ -33,7 +33,7 @@ Nach Abschluss dieser Lektion werden Sie in der Lage sein:
 
 ## Was ist Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) ist ein Befehlszeilentool, das entwickelt wurde, um Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung zu beschleunigen. Es vereinfacht den Prozess des Erstellens, Bereitstellens und Verwalten von cloud-nativen Anwendungen auf Azure.
+Azure Developer CLI (azd) ist ein Befehlszeilen-Tool, das entwickelt wurde, um Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung zu beschleunigen. Es vereinfacht den Prozess des Erstellens, Bereitstellens und Verwalten von cloud-nativen Anwendungen auf Azure.
 
 ## Kernkonzepte
 
@@ -59,10 +59,10 @@ Jede Umgebung hat ihre eigenen:
 Dienste sind die Bausteine Ihrer Anwendung:
 - **Frontend** - Webanwendungen, SPAs
 - **Backend** - APIs, Microservices
-- **Datenbank** - Datenlösungen
+- **Datenbank** - Datenbankspeicherlösungen
 - **Speicher** - Datei- und Blob-Speicher
 
-## Hauptfunktionen
+## Wichtige Funktionen
 
 ### 1. Templatebasierte Entwicklung
 ```bash
@@ -75,15 +75,15 @@ azd init --template <template-name>
 
 ### 2. Infrastructure as Code
 - **Bicep** - Azure-spezifische Sprache
-- **Terraform** - Multi-Cloud-Infrastrukturtool
+- **Terraform** - Multi-Cloud-Infrastruktur-Tool
 - **ARM Templates** - Azure Resource Manager Templates
 
 ### 3. Integrierte Workflows
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Verständnis von `azd down --force --purge`
+Der Befehl `azd down --force --purge` ist eine leistungsstarke Möglichkeit, Ihre azd-Umgebung und alle zugehörigen Ressourcen vollständig abzubauen. Hier ist eine Aufschlüsselung, was jede Option bewirkt:
+```
+--force
+```
+- Überspringt Bestätigungsaufforderungen.
+- Nützlich für Automatisierung oder Skripte, bei denen keine manuelle Eingabe möglich ist.
+- Stellt sicher, dass der Abbau ohne Unterbrechung fortgesetzt wird, selbst wenn die CLI Inkonsistenzen erkennt.
+
+```
+--purge
+```
+Löscht **alle zugehörigen Metadaten**, einschließlich:
+Umgebungsstatus  
+Lokaler `.azure`-Ordner  
+Zwischengespeicherte Bereitstellungsinformationen  
+Verhindert, dass azd "frühere Bereitstellungen" speichert, was Probleme wie nicht übereinstimmende Ressourcengruppen oder veraltete Registry-Referenzen verursachen kann.
+
+### Warum beide verwenden?
+Wenn Sie bei `azd up` aufgrund verbleibender Zustände oder teilweiser Bereitstellungen auf Probleme stoßen, sorgt diese Kombination für einen **sauberen Neustart**.
+
+Es ist besonders hilfreich nach manuellen Ressourcendeletionen im Azure-Portal oder beim Wechsel von Templates, Umgebungen oder Namenskonventionen für Ressourcengruppen.
 
 ### Verwaltung mehrerer Umgebungen
 ```bash
@@ -239,13 +262,13 @@ azd init --template template1
 ```
 
 ### 2. Templates nutzen
-- Beginnen Sie mit bestehenden Templates
+- Beginnen Sie mit vorhandenen Templates
 - Passen Sie diese an Ihre Bedürfnisse an
 - Erstellen Sie wiederverwendbare Templates für Ihre Organisation
 
 ### 3. Umweltisolierung
 - Verwenden Sie separate Umgebungen für Entwicklung/Staging/Produktion
-- Stellen Sie niemals direkt von der lokalen Maschine in die Produktion bereit
+- Stellen Sie niemals direkt von Ihrer lokalen Maschine in die Produktion bereit
 - Nutzen Sie CI/CD-Pipelines für Produktionsbereitstellungen
 
 ### 4. Konfigurationsmanagement

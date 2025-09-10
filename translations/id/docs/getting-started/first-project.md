@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:25:09+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:28:17+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "id"
 }
@@ -46,11 +46,15 @@ Setelah selesai, Anda akan dapat:
 ```bash
 # Check azd installation
 azd version
+```
+### Verifikasi autentikasi Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Periksa versi Node.js
+```bash
 node --version
 ```
 
@@ -151,8 +155,7 @@ Lakukan perubahan sederhana:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -332,7 +335,7 @@ netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## Langkah Selanjutnya
+## Langkah Berikutnya
 
 Setelah menyelesaikan proyek pertama Anda, jelajahi topik lanjutan berikut:
 
@@ -381,15 +384,15 @@ azd init --template todo-java-mongo
 
 ---
 
-**Selamat atas penyelesaian proyek azd pertama Anda!** Anda sekarang siap untuk membangun dan menerapkan aplikasi luar biasa di Azure dengan percaya diri.
+**Selamat atas keberhasilan Anda menyelesaikan proyek azd pertama!** Anda sekarang siap untuk membangun dan menerapkan aplikasi luar biasa di Azure dengan percaya diri.
 
 ---
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Konfigurasi](configuration.md)
-- **Pelajaran Selanjutnya**: [Panduan Penerapan](../deployment/deployment-guide.md)
+- **Pelajaran Berikutnya**: [Panduan Penerapan](../deployment/deployment-guide.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

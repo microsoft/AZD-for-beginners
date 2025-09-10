@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T16:43:36+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T12:59:21+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ko"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 소개
 
-Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적인 실습 튜토리얼은 azd를 사용하여 Azure에서 풀스택 애플리케이션을 생성, 배포 및 관리하는 과정을 완벽히 안내합니다. React 프론트엔드, Node.js API 백엔드, MongoDB 데이터베이스를 포함한 실제 할 일 관리 애플리케이션을 다룰 것입니다.
+Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적인 실습 튜토리얼은 azd를 사용하여 Azure에서 풀스택 애플리케이션을 생성, 배포 및 관리하는 과정을 안내합니다. React 프론트엔드, Node.js API 백엔드, MongoDB 데이터베이스를 포함한 실제 할 일 관리 애플리케이션을 다룰 것입니다.
 
 ## 학습 목표
 
@@ -26,11 +26,11 @@ Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적
 ## 학습 결과
 
 튜토리얼 완료 후, 다음을 수행할 수 있습니다:
-- 템플릿에서 azd 프로젝트를 독립적으로 초기화하고 구성
-- azd 프로젝트 구조를 효과적으로 탐색하고 수정
+- 템플릿에서 azd 프로젝트를 독립적으로 초기화 및 구성
+- azd 프로젝트 구조를 효과적으로 탐색 및 수정
 - 단일 명령으로 풀스택 애플리케이션을 Azure에 배포
 - 일반적인 배포 문제 및 인증 문제 해결
-- 다양한 배포 단계에 맞는 여러 Azure 환경 관리
+- 다양한 배포 단계에 대한 여러 Azure 환경 관리
 - 애플리케이션 업데이트를 위한 지속적 배포 워크플로우 구현
 
 ## 시작하기
@@ -46,11 +46,15 @@ Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적
 ```bash
 # Check azd installation
 azd version
+```
+### Azure 인증 확인
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Node.js 버전 확인
+```bash
 node --version
 ```
 
@@ -151,15 +155,14 @@ code src/web/src/App.tsx
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
 ## 4단계: Azure에 배포
 
-이제 가장 흥미로운 단계입니다 - 모든 것을 Azure에 배포해봅시다!
+이제 흥미로운 부분입니다 - 모든 것을 Azure에 배포해봅시다!
 
 ```bash
 # Deploy infrastructure and application
@@ -172,12 +175,12 @@ azd up
 # 4. Display the application URL
 ```
 
-### 배포 중에 일어나는 일
+### 배포 중에 무슨 일이 일어나나요?
 
 `azd up` 명령은 다음 단계를 수행합니다:
 1. **프로비저닝** (`azd provision`) - Azure 리소스 생성
 2. **패키징** - 애플리케이션 코드 빌드
-3. **배포** (`azd deploy`) - 코드를 Azure 리소스에 배포
+3. **배포** (`azd deploy`) - Azure 리소스에 코드 배포
 
 ### 예상 출력
 ```
@@ -244,7 +247,7 @@ azd deploy
 
 ## 7단계: 여러 환경 관리
 
-프로덕션 전에 변경 사항을 테스트할 스테이징 환경을 생성합니다:
+프로덕션 전에 변경 사항을 테스트할 스테이징 환경을 생성:
 
 ```bash
 # Create a new staging environment
@@ -273,7 +276,7 @@ azd show
 
 ## 8단계: 리소스 정리
 
-실험이 끝나면 지속적인 비용을 방지하기 위해 정리합니다:
+실험이 끝나면 지속적인 비용을 방지하기 위해 정리:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -289,13 +292,13 @@ azd down --force --purge
 
 ## 배운 내용
 
-축하합니다! 다음을 성공적으로 완료했습니다:
+축하합니다! 성공적으로:
 - 템플릿에서 azd 프로젝트 초기화
 - 프로젝트 구조 및 주요 파일 탐색
 - 풀스택 애플리케이션을 Azure에 배포
 - 코드 변경 및 재배포
 - 여러 환경 관리
-- 리소스 정리
+- 리소스 정리 완료
 
 ## 일반적인 문제 해결
 

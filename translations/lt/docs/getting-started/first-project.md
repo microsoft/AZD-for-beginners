@@ -1,60 +1,64 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-10T06:01:43+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:46:23+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "lt"
 }
 -->
-# Jūsų pirmasis projektas - praktinis vadovas
+# Jūsų Pirmasis Projektas - Praktinis Vadovas
 
 ## Įvadas
 
-Sveiki atvykę į savo pirmąjį Azure Developer CLI projektą! Šis išsamus praktinis vadovas suteiks jums pilną apžvalgą, kaip sukurti, diegti ir valdyti pilno funkcionalumo aplikaciją Azure platformoje naudojant azd. Jūs dirbsite su realia užduočių aplikacija, kuri apima React frontendą, Node.js API backendą ir MongoDB duomenų bazę.
+Sveiki atvykę į savo pirmąjį Azure Developer CLI projektą! Šis išsamus praktinis vadovas suteiks jums pilną apžvalgą, kaip sukurti, diegti ir valdyti pilno funkcionalumo aplikaciją Azure naudojant azd. Jūs dirbsite su tikra užduočių aplikacija, kuri apima React frontendą, Node.js API backendą ir MongoDB duomenų bazę.
 
-## Mokymosi tikslai
+## Mokymosi Tikslai
 
 Baigę šį vadovą, jūs:
-- Įvaldysite azd projekto inicializavimo procesą naudojant šablonus
+- Įvaldysite azd projekto inicijavimo procesą naudojant šablonus
 - Suprasite Azure Developer CLI projekto struktūrą ir konfigūracijos failus
-- Vykdysite pilną aplikacijos diegimą Azure kartu su infrastruktūros paruošimu
+- Vykdysite pilną aplikacijos diegimą į Azure su infrastruktūros paruošimu
 - Įgyvendinsite aplikacijos atnaujinimo ir pakartotinio diegimo strategijas
-- Valdysite kelias aplinkas, skirtas vystymui ir testavimui
+- Valdysite kelias aplinkas vystymui ir testavimui
 - Taikysite resursų valymo ir kaštų valdymo praktikas
 
-## Mokymosi rezultatai
+## Mokymosi Rezultatai
 
 Baigę vadovą, jūs galėsite:
-- Savarankiškai inicializuoti ir konfigūruoti azd projektus iš šablonų
+- Savarankiškai inicijuoti ir konfigūruoti azd projektus iš šablonų
 - Efektyviai naršyti ir modifikuoti azd projekto struktūras
-- Diegti pilno funkcionalumo aplikacijas Azure naudojant vieną komandą
+- Diegti pilno funkcionalumo aplikacijas į Azure naudojant vieną komandą
 - Spręsti dažniausiai pasitaikančias diegimo ir autentifikacijos problemas
 - Valdyti kelias Azure aplinkas skirtingiems diegimo etapams
 - Įgyvendinti nuolatinio diegimo procesus aplikacijos atnaujinimams
 
 ## Pradžia
 
-### Būtini reikalavimai
-- ✅ Įdiegta Azure Developer CLI ([Diegimo vadovas](installation.md))
+### Būtini Reikalavimai
+- ✅ Įdiegta Azure Developer CLI ([Diegimo Vadovas](installation.md))
 - ✅ Įdiegta ir autentifikuota Azure CLI
 - ✅ Įdiegta Git jūsų sistemoje
 - ✅ Node.js 16+ (reikalinga šiam vadovui)
 - ✅ Visual Studio Code (rekomenduojama)
 
-### Patikrinkite savo nustatymus
+### Patikrinkite Savo Nustatymus
 ```bash
 # Check azd installation
 azd version
+```
+### Patikrinkite Azure autentifikaciją
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Patikrinkite Node.js versiją
+```bash
 node --version
 ```
 
-## 1 žingsnis: Pasirinkite ir inicializuokite šabloną
+## 1 Žingsnis: Pasirinkite ir Inicijuokite Šabloną
 
 Pradėkime nuo populiaraus užduočių aplikacijos šablono, kuris apima React frontendą ir Node.js API backendą.
 
@@ -73,15 +77,15 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### Kas ką tik įvyko?
-- Atsisiųstas šablono kodas į jūsų vietinį katalogą
+### Kas Įvyko?
+- Šablono kodas buvo atsisiųstas į jūsų vietinį katalogą
 - Sukurtas `azure.yaml` failas su paslaugų apibrėžimais
 - Nustatytas infrastruktūros kodas kataloge `infra/`
 - Sukurta aplinkos konfigūracija
 
-## 2 žingsnis: Ištyrinėkite projekto struktūrą
+## 2 Žingsnis: Ištyrinėkite Projekto Struktūrą
 
-Pažiūrėkime, ką azd sukūrė mums:
+Pažiūrėkime, ką azd sukūrė:
 
 ```bash
 # View the project structure
@@ -117,7 +121,7 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Svarbiausi failai, kuriuos reikia suprasti
+### Pagrindiniai Failai, Kuriuos Reikia Suprasti
 
 **azure.yaml** - Jūsų azd projekto pagrindas:
 ```bash
@@ -131,11 +135,11 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## 3 žingsnis: Pritaikykite savo projektą (pasirinktinai)
+## 3 Žingsnis: Pritaikykite Savo Projektą (Pasirinktinai)
 
-Prieš diegdami, galite pritaikyti aplikaciją:
+Prieš diegiant, galite pritaikyti aplikaciją:
 
-### Modifikuokite frontendą
+### Modifikuokite Frontendą
 ```bash
 # Open the React app component
 code src/web/src/App.tsx
@@ -147,17 +151,16 @@ Padarykite paprastą pakeitimą:
 <h1>My Awesome Todo App</h1>
 ```
 
-### Konfigūruokite aplinkos kintamuosius
+### Konfigūruokite Aplinkos Kintamuosius
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
-## 4 žingsnis: Diegimas į Azure
+## 4 Žingsnis: Diegimas į Azure
 
 Dabar pats įdomiausias momentas - viską diegiame į Azure!
 
@@ -172,14 +175,14 @@ azd up
 # 4. Display the application URL
 ```
 
-### Kas vyksta diegimo metu?
+### Kas Vyksta Diegimo Metu?
 
 Komanda `azd up` atlieka šiuos veiksmus:
 1. **Paruošimas** (`azd provision`) - Sukuria Azure resursus
 2. **Pakavimas** - Sukuria jūsų aplikacijos kodą
 3. **Diegimas** (`azd deploy`) - Diegia kodą į Azure resursus
 
-### Tikėtinas rezultatas
+### Tikėtinas Rezultatas
 ```
 Packaging services (azd package)
 
@@ -192,9 +195,9 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## 5 žingsnis: Testuokite savo aplikaciją
+## 5 Žingsnis: Testuokite Savo Aplikaciją
 
-### Pasiekite savo aplikaciją
+### Pasiekite Savo Aplikaciją
 Spustelėkite URL, pateiktą diegimo rezultatuose, arba pasiekite jį bet kada:
 ```bash
 # Get application endpoints
@@ -204,12 +207,12 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Testuokite užduočių aplikaciją
-1. **Pridėkite užduotį** - Spustelėkite „Add Todo“ ir įveskite užduotį
+### Testuokite Užduočių Aplikaciją
+1. **Pridėkite užduotį** - Spustelėkite "Add Todo" ir įveskite užduotį
 2. **Pažymėkite kaip atliktą** - Pažymėkite atliktas užduotis
 3. **Ištrinkite užduotis** - Pašalinkite nereikalingas užduotis
 
-### Stebėkite savo aplikaciją
+### Stebėkite Savo Aplikaciją
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -218,7 +221,7 @@ azd monitor
 azd logs
 ```
 
-## 6 žingsnis: Darykite pakeitimus ir pakartotinai diekite
+## 6 Žingsnis: Darykite Pakeitimus ir Pakartotinai Diekite
 
 Padarykime pakeitimą ir pažiūrėkime, kaip lengva atnaujinti:
 
@@ -234,7 +237,7 @@ Pridėkite pasirinktą atsakymo antraštę:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Diekite tik kodo pakeitimus
+### Diekite Tik Kodo Pakeitimus
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -242,9 +245,9 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## 7 žingsnis: Valdykite kelias aplinkas
+## 7 Žingsnis: Valdykite Kelias Aplinkas
 
-Sukurkite testavimo aplinką, kad galėtumėte išbandyti pakeitimus prieš diegimą į produkciją:
+Sukurkite testavimo aplinką, kad patikrintumėte pakeitimus prieš gamybą:
 
 ```bash
 # Create a new staging environment
@@ -260,7 +263,7 @@ azd env select dev
 azd env list
 ```
 
-### Aplinkų palyginimas
+### Aplinkų Palyginimas
 ```bash
 # View dev environment
 azd env select dev
@@ -271,7 +274,7 @@ azd env select staging
 azd show
 ```
 
-## 8 žingsnis: Išvalykite resursus
+## 8 Žingsnis: Išvalykite Resursus
 
 Kai baigsite eksperimentuoti, išvalykite resursus, kad išvengtumėte papildomų išlaidų:
 
@@ -287,19 +290,19 @@ azd env select staging
 azd down --force --purge
 ```
 
-## Ką išmokote
+## Ką Išmokote
 
 Sveikiname! Jūs sėkmingai:
-- Inicializavote azd projektą iš šablono
-- Ištyrinėjote projekto struktūrą ir svarbiausius failus
+- Inicijavote azd projektą iš šablono
+- Ištyrinėjote projekto struktūrą ir pagrindinius failus
 - Diegėte pilno funkcionalumo aplikaciją į Azure
 - Padarėte kodo pakeitimus ir pakartotinai diegėte
 - Valdėte kelias aplinkas
 - Išvalėte resursus
 
-## Dažniausiai pasitaikančių problemų sprendimas
+## Dažniausiai Pasitaikančių Problemų Sprendimas
 
-### Autentifikacijos klaidos
+### Autentifikacijos Klaidos
 ```bash
 # Re-authenticate with Azure
 az login
@@ -308,7 +311,7 @@ az login
 az account show
 ```
 
-### Diegimo klaidos
+### Diegimo Nesėkmės
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -319,37 +322,37 @@ azd logs --service api
 azd logs --service web
 ```
 
-### Resursų pavadinimų konfliktai
+### Resursų Pavadinimų Konfliktai
 ```bash
 # Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Prievadų/tinklo problemos
+### Prievado/Tinklo Problemos
 ```bash
 # Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## Kiti žingsniai
+## Kiti Žingsniai
 
 Dabar, kai baigėte savo pirmąjį projektą, išbandykite šias pažangias temas:
 
-### 1. Pritaikykite infrastruktūrą
-- [Infrastruktūra kaip kodas](../deployment/provisioning.md)
+### 1. Pritaikykite Infrastruktūrą
+- [Infrastruktūra kaip Kodas](../deployment/provisioning.md)
 - [Pridėkite duomenų bazes, saugyklas ir kitas paslaugas](../deployment/provisioning.md#adding-services)
 
 ### 2. Nustatykite CI/CD
-- [GitHub Actions integracija](../deployment/cicd-integration.md)
+- [GitHub Actions Integracija](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Geriausios praktikos produkcijai
+### 3. Gamybos Geriausios Praktikos
 - [Saugumo konfigūracijos](../deployment/best-practices.md#security)
 - [Našumo optimizavimas](../deployment/best-practices.md#performance)
 - [Stebėjimas ir žurnalai](../deployment/best-practices.md#monitoring)
 
-### 4. Išbandykite daugiau šablonų
+### 4. Išbandykite Daugiau Šablonų
 ```bash
 # Browse templates by category
 azd template list --filter web
@@ -362,34 +365,34 @@ azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
 ```
 
-## Papildomi ištekliai
+## Papildomi Ištekliai
 
-### Mokymosi medžiaga
-- [Azure Developer CLI dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure gerai suprojektuotos sistemos principai](https://learn.microsoft.com/en-us/azure/well-architected/)
+### Mokymosi Medžiaga
+- [Azure Developer CLI Dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architektūros Centras](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Gerai Suplanuotos Architektūros Sistema](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### Bendruomenė ir palaikymas
+### Bendruomenė ir Pagalba
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer bendruomenė](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer Bendruomenė](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### Šablonai ir pavyzdžiai
-- [Oficiali šablonų galerija](https://azure.github.io/awesome-azd/)
-- [Bendruomenės šablonai](https://github.com/Azure-Samples/azd-templates)
-- [Įmonių modeliai](https://github.com/Azure/azure-dev/tree/main/templates)
+### Šablonai ir Pavyzdžiai
+- [Oficiali Šablonų Galerija](https://azure.github.io/awesome-azd/)
+- [Bendruomenės Šablonai](https://github.com/Azure-Samples/azd-templates)
+- [Įmonių Modeliai](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**Sveikiname baigus savo pirmąjį azd projektą!** Dabar esate pasiruošę kurti ir diegti nuostabias aplikacijas Azure platformoje su pasitikėjimu.
+**Sveikiname baigus savo pirmąjį azd projektą!** Dabar esate pasiruošę kurti ir diegti nuostabias aplikacijas Azure su pasitikėjimu.
 
 ---
 
 **Navigacija**
-- **Ankstesnė pamoka**: [Konfigūracija](configuration.md)
-- **Kita pamoka**: [Diegimo vadovas](../deployment/deployment-guide.md)
+- **Ankstesnė Pamoka**: [Konfigūracija](configuration.md)
+- **Kita Pamoka**: [Diegimo Vadovas](../deployment/deployment-guide.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudotis profesionalių vertėjų paslaugomis. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.

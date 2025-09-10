@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T16:54:34+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T12:47:28+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "fr"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de commande puissant qui accélère votre transition du développement local au déploiement sur Azure. Vous découvrirez les concepts fondamentaux, les fonctionnalités principales et comment azd simplifie le déploiement d'applications cloud natives.
+Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de commande puissant qui accélère votre passage du développement local au déploiement sur Azure. Vous apprendrez les concepts fondamentaux, les fonctionnalités principales et comprendrez comment azd simplifie le déploiement d'applications cloud natives.
 
 ## Objectifs d'apprentissage
 
 À la fin de cette leçon, vous serez capable de :
 - Comprendre ce qu'est Azure Developer CLI et son objectif principal
-- Apprendre les concepts clés des modèles, environnements et services
-- Explorer les fonctionnalités principales, notamment le développement basé sur des modèles et l'Infrastructure as Code
+- Découvrir les concepts clés des modèles, des environnements et des services
+- Explorer les fonctionnalités principales, notamment le développement basé sur des modèles et l'infrastructure en tant que code
 - Comprendre la structure et le flux de travail d'un projet azd
 - Être prêt à installer et configurer azd pour votre environnement de développement
 
@@ -27,20 +27,20 @@ Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de comm
 Après avoir terminé cette leçon, vous serez capable de :
 - Expliquer le rôle d'azd dans les flux de travail modernes de développement cloud
 - Identifier les composants de la structure d'un projet azd
-- Décrire comment les modèles, environnements et services fonctionnent ensemble
-- Comprendre les avantages de l'Infrastructure as Code avec azd
+- Décrire comment les modèles, les environnements et les services fonctionnent ensemble
+- Comprendre les avantages de l'infrastructure en tant que code avec azd
 - Reconnaître les différentes commandes azd et leurs objectifs
 
 ## Qu'est-ce qu'Azure Developer CLI (azd) ?
 
-Azure Developer CLI (azd) est un outil en ligne de commande conçu pour accélérer votre transition du développement local au déploiement sur Azure. Il simplifie le processus de création, de déploiement et de gestion des applications cloud natives sur Azure.
+Azure Developer CLI (azd) est un outil en ligne de commande conçu pour accélérer votre passage du développement local au déploiement sur Azure. Il simplifie le processus de création, de déploiement et de gestion des applications cloud natives sur Azure.
 
 ## Concepts clés
 
 ### Modèles
 Les modèles sont la base d'azd. Ils contiennent :
 - **Code de l'application** - Votre code source et ses dépendances
-- **Définitions d'infrastructure** - Ressources Azure définies en Bicep ou Terraform
+- **Définitions de l'infrastructure** - Ressources Azure définies en Bicep ou Terraform
 - **Fichiers de configuration** - Paramètres et variables d'environnement
 - **Scripts de déploiement** - Flux de travail automatisés pour le déploiement
 
@@ -60,7 +60,7 @@ Les services sont les blocs de construction de votre application :
 - **Frontend** - Applications web, SPAs
 - **Backend** - APIs, microservices
 - **Base de données** - Solutions de stockage de données
-- **Stockage** - Stockage de fichiers et blobs
+- **Stockage** - Stockage de fichiers et de blobs
 
 ## Fonctionnalités principales
 
@@ -73,7 +73,7 @@ azd template list
 azd init --template <template-name>
 ```
 
-### 2. Infrastructure as Code
+### 2. Infrastructure en tant que code
 - **Bicep** - Langage spécifique à Azure
 - **Terraform** - Outil d'infrastructure multi-cloud
 - **Modèles ARM** - Modèles Azure Resource Manager
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Flux de travail intégrés
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Comprendre `azd down --force --purge`
+La commande `azd down --force --purge` est un moyen puissant de démanteler complètement votre environnement azd et toutes les ressources associées. Voici une explication de ce que chaque option fait :
+```
+--force
+```
+- Ignore les invites de confirmation.
+- Utile pour l'automatisation ou les scripts où une saisie manuelle n'est pas possible.
+- Assure que le démantèlement se poursuit sans interruption, même si le CLI détecte des incohérences.
+
+```
+--purge
+```
+Supprime **toutes les métadonnées associées**, y compris :
+État de l'environnement
+Dossier local `.azure`
+Informations de déploiement mises en cache
+Empêche azd de "se souvenir" des déploiements précédents, ce qui peut causer des problèmes comme des groupes de ressources non correspondants ou des références de registre obsolètes.
+
+### Pourquoi utiliser les deux ?
+Lorsque vous rencontrez des problèmes avec `azd up` en raison d'un état persistant ou de déploiements partiels, cette combinaison garantit un **nouveau départ**.
+
+C'est particulièrement utile après des suppressions manuelles de ressources dans le portail Azure ou lors du changement de modèles, d'environnements ou de conventions de nommage des groupes de ressources.
 
 ### Gestion de plusieurs environnements
 ```bash
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction humaine professionnelle. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
