@@ -72,9 +72,9 @@ azd init --template <template-name>
 ### 3. Integrated Workflows
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -176,8 +176,33 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Understanding `azd down --force --purge`
+The `azd down --force --purge` command is a powerful way to completely tear down your azd environment and all associated resources. Here's a breakdown of what each flag does:
+```
+--force
+```
+- Skips confirmation prompts.
+- Useful for automation or scripting where manual input isn’t feasible.
+- Ensures the teardown proceeds without interruption, even if the CLI detects inconsistencies.
+
+```
+--purge
+```
+Deletes **all associated metadata**, including:
+Environment state
+Local `.azure` folder
+Cached deployment info
+Prevents azd from "remembering" previous deployments, which can cause issues like mismatched resource groups or stale registry references.
+
+
+### Why use both?
+When you've hit a wall with `azd up` due to lingering state or partial deployments, this combo ensures a **clean slate**.
+
+It’s especially helpful after manual resource deletions in the Azure portal or when switching templates, environments, or resource group naming conventions.
+
 
 ### Managing Multiple Environments
 ```bash

@@ -369,6 +369,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Advanced Configuration
 

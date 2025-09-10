@@ -37,11 +37,15 @@ Upon completion, you will be able to:
 ```bash
 # Check azd installation
 azd version
+```
+### Verify Azure authentication
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Check Node.js version
+```bash
 node --version
 ```
 
@@ -142,8 +146,7 @@ Make a simple change:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
