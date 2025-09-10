@@ -1,0 +1,655 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
+  "translation_date": "2025-09-10T06:19:36+00:00",
+  "source_file": "docs/deployment/deployment-guide.md",
+  "language_code": "my"
+}
+-->
+# Deployment Guide - AZD Deployments ကို ကျွမ်းကျင်စွာ အသုံးပြုခြင်း
+
+## အကျဉ်းချုပ်
+
+ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI ကို အသုံးပြုပြီး အပလီကေးရှင်းများကို deploy လုပ်ခြင်းဆိုင်ရာ အခြေခံ single-command deployments ကနေ custom hooks, အမျိုးမျိုးသော environments, CI/CD integration ပါဝင်တဲ့ အဆင့်မြင့် production scenarios အထိ အားလုံးကို ဖော်ပြထားပါတယ်။ လက်တွေ့နမူနာများနှင့် အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများကို အသုံးပြု၍ deployment lifecycle အားလုံးကို ကျွမ်းကျင်စွာ လေ့လာနိုင်ပါမည်။
+
+## သင်ယူရမည့် အချက်များ
+
+ဒီလမ်းညွှန်ကို ပြီးမြောက်စွာ လေ့လာပြီးပါက၊ သင်သည်:
+- Azure Developer CLI deployment commands နှင့် workflows အားလုံးကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
+- Provisioning ကနေ monitoring အထိ deployment lifecycle အားလုံးကို နားလည်နိုင်မည်
+- Pre နှင့် post-deployment automation အတွက် custom deployment hooks များကို အကောင်အထည်ဖော်နိုင်မည်
+- Environment-specific parameters များနှင့် အမျိုးမျိုးသော environments များကို configure လုပ်နိုင်မည်
+- Blue-green နှင့် canary deployments အပါအဝင် အဆင့်မြင့် deployment strategies များကို စီစဉ်နိုင်မည်
+- azd deployments ကို CI/CD pipelines နှင့် DevOps workflows တွင် ပေါင်းစည်းနိုင်မည်
+
+## သင်ယူပြီးရရှိမည့် ရလဒ်များ
+
+ဒီလမ်းညွှန်ကို ပြီးမြောက်စွာ လေ့လာပြီးပါက၊ သင်သည်:
+- azd deployment workflows အားလုံးကို ကိုယ်တိုင် run နှင့် troubleshoot လုပ်နိုင်မည်
+- Hooks အသုံးပြု၍ custom deployment automation ကို ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်နိုင်မည်
+- လုံခြုံရေးနှင့် monitoring အဆင့်မြင့်သော production-ready deployments များကို configure လုပ်နိုင်မည်
+- Multi-environment deployment scenarios များကို စီမံနိုင်မည်
+- Deployment performance ကို အကောင်းဆုံး optimize လုပ်ပြီး rollback strategies များကို အကောင်အထည်ဖော်နိုင်မည်
+- Enterprise DevOps practices တွင် azd deployments ကို ပေါင်းစည်းနိုင်မည်
+
+## Deployment အကျဉ်းချုပ်
+
+Azure Developer CLI သည် အောက်ပါ deployment commands များကို ပေးထားသည်:
+- `azd up` - အားလုံးကို လုပ်ဆောင်သော workflow (provision + deploy)
+- `azd provision` - Azure resources များကို ဖန်တီး/အပ်ဒိတ်လုပ်ခြင်းသာ
+- `azd deploy` - Application code ကို deploy လုပ်ခြင်းသာ
+- `azd package` - Applications များကို build နှင့် package လုပ်ခြင်း
+
+## အခြေခံ Deployment Workflows
+
+### အားလုံးကို လုပ်ဆောင်သော Deployment (azd up)
+Project အသစ်များအတွက် အများဆုံး အသုံးပြုသော workflow:
+```bash
+# Deploy everything from scratch
+azd up
+
+# Deploy with specific environment
+azd up --environment production
+
+# Deploy with custom parameters
+azd up --parameter location=westus2 --parameter sku=P1v2
+```
+
+### Infrastructure-Only Deployment
+Azure resources များကို update လုပ်ရန်သာလိုအပ်သောအခါ:
+```bash
+# Provision/update infrastructure
+azd provision
+
+# Provision with dry-run to preview changes
+azd provision --preview
+
+# Provision specific services
+azd provision --service database
+```
+
+### Code-Only Deployment
+Application ကို အမြန် update လုပ်ရန်:
+```bash
+# Deploy all services
+azd deploy
+
+# Deploy specific service
+azd deploy --service web
+azd deploy --service api
+
+# Deploy with custom build arguments
+azd deploy --service api --build-arg NODE_ENV=production
+```
+
+## 🏗️ Deployment Process ကို နားလည်ခြင်း
+
+### အဆင့် ၁: Pre-Provision Hooks
+```yaml
+# azure.yaml
+hooks:
+  preprovision:
+    shell: sh
+    run: |
+      echo "Validating configuration..."
+      ./scripts/validate-prereqs.sh
+      
+      echo "Setting up secrets..."
+      ./scripts/setup-secrets.sh
+```
+
+### အဆင့် ၂: Infrastructure Provisioning
+- Infrastructure templates (Bicep/Terraform) များကို ဖတ်ရှုသည်
+- Azure resources များကို ဖန်တီး/အပ်ဒိတ်လုပ်သည်
+- Networking နှင့် security ကို configure လုပ်သည်
+- Monitoring နှင့် logging ကို စီစဉ်သည်
+
+### အဆင့် ၃: Post-Provision Hooks
+```yaml
+hooks:
+  postprovision:
+    shell: pwsh
+    run: |
+      Write-Host "Infrastructure ready, setting up databases..."
+      ./scripts/setup-database.ps1
+      
+      Write-Host "Configuring application settings..."
+      ./scripts/configure-app-settings.ps1
+```
+
+### အဆင့် ၄: Application Packaging
+- Application code ကို build လုပ်သည်
+- Deployment artifacts များကို ဖန်တီးသည်
+- Target platform အတွက် package လုပ်သည် (containers, ZIP files, စသည်)
+
+### အဆင့် ၅: Pre-Deploy Hooks
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      echo "Running pre-deployment tests..."
+      npm run test:unit
+      
+      echo "Database migrations..."
+      npm run db:migrate
+```
+
+### အဆင့် ၆: Application Deployment
+- Packaged applications များကို Azure services တွင် deploy လုပ်သည်
+- Configuration settings များကို update လုပ်သည်
+- Services များကို start/restart လုပ်သည်
+
+### အဆင့် ၇: Post-Deploy Hooks
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: |
+      echo "Running integration tests..."
+      npm run test:integration
+      
+      echo "Warming up applications..."
+      curl https://${WEB_URL}/health
+```
+
+## 🎛️ Deployment Configuration
+
+### Service-Specific Deployment Settings
+```yaml
+# azure.yaml
+services:
+  web:
+    project: ./src/web
+    host: staticwebapp
+    buildCommand: npm run build
+    outputPath: dist
+    
+  api:
+    project: ./src/api
+    host: containerapp
+    docker:
+      context: ./src/api
+      dockerfile: Dockerfile
+      target: production
+    env:
+      - name: NODE_ENV
+        value: production
+      - name: API_VERSION
+        value: "1.0.0"
+        
+  worker:
+    project: ./src/worker
+    host: function
+    runtime: node
+    buildCommand: npm install --production
+```
+
+### Environment-Specific Configurations
+```bash
+# Development environment
+azd env set NODE_ENV development
+azd env set DEBUG true
+azd env set LOG_LEVEL debug
+
+# Staging environment
+azd env new staging
+azd env set NODE_ENV staging
+azd env set DEBUG false
+azd env set LOG_LEVEL info
+
+# Production environment
+azd env new production
+azd env set NODE_ENV production
+azd env set DEBUG false
+azd env set LOG_LEVEL error
+```
+
+## 🔧 အဆင့်မြင့် Deployment Scenarios
+
+### Multi-Service Applications
+```yaml
+# Complex application with multiple services
+services:
+  # Frontend applications
+  web-app:
+    project: ./src/web
+    host: staticwebapp
+  
+  admin-portal:
+    project: ./src/admin
+    host: appservice
+    
+  # Backend services
+  user-api:
+    project: ./src/services/users
+    host: containerapp
+    
+  order-api:
+    project: ./src/services/orders
+    host: containerapp
+    
+  payment-api:
+    project: ./src/services/payments
+    host: function
+    
+  # Background processing
+  notification-worker:
+    project: ./src/workers/notifications
+    host: containerapp
+    
+  report-worker:
+    project: ./src/workers/reports
+    host: function
+```
+
+### Blue-Green Deployments
+```bash
+# Create blue environment
+azd env new production-blue
+azd up --environment production-blue
+
+# Test blue environment
+./scripts/test-environment.sh production-blue
+
+# Switch traffic to blue (manual DNS/load balancer update)
+./scripts/switch-traffic.sh production-blue
+
+# Clean up green environment
+azd env select production-green
+azd down --force
+```
+
+### Canary Deployments
+```yaml
+# azure.yaml - Configure traffic splitting
+services:
+  api:
+    project: ./src/api
+    host: containerapp
+    trafficSplit:
+      - revision: stable
+        percentage: 90
+      - revision: canary
+        percentage: 10
+```
+
+### Staged Deployments
+```bash
+#!/bin/bash
+# deploy-staged.sh
+
+echo "Deploying to development..."
+azd env select dev
+azd up --confirm-with-no-prompt
+
+echo "Running dev tests..."
+./scripts/test-environment.sh dev
+
+echo "Deploying to staging..."
+azd env select staging
+azd up --confirm-with-no-prompt
+
+echo "Running staging tests..."
+./scripts/test-environment.sh staging
+
+echo "Manual approval required for production..."
+read -p "Deploy to production? (y/N): " confirm
+if [[ $confirm == [yY] ]]; then
+    echo "Deploying to production..."
+    azd env select production
+    azd up --confirm-with-no-prompt
+    
+    echo "Running production smoke tests..."
+    ./scripts/test-environment.sh production
+fi
+```
+
+## 🐳 Container Deployments
+
+### Container App Deployments
+```yaml
+services:
+  api:
+    project: ./src/api
+    host: containerapp
+    docker:
+      context: ./src/api
+      dockerfile: Dockerfile
+      target: production
+      buildArgs:
+        BUILD_VERSION: ${BUILD_VERSION}
+        NODE_ENV: production
+    env:
+      - name: DATABASE_URL
+        value: ${DATABASE_URL}
+    secrets:
+      - name: jwt-secret
+        value: ${JWT_SECRET}
+    scale:
+      minReplicas: 1
+      maxReplicas: 10
+```
+
+### Multi-Stage Dockerfile Optimization
+```dockerfile
+# Dockerfile
+FROM node:18-alpine AS base
+WORKDIR /app
+COPY package*.json ./
+
+FROM base AS development
+RUN npm ci
+COPY . .
+CMD ["npm", "run", "dev"]
+
+FROM base AS build
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+
+FROM node:18-alpine AS production
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+COPY package*.json ./
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## ⚡ Performance Optimization
+
+### Parallel Deployments
+```bash
+# Configure parallel deployment
+azd config set deploy.parallelism 5
+
+# Deploy services in parallel
+azd deploy --parallel
+```
+
+### Build Caching
+```yaml
+# azure.yaml - Enable build caching
+services:
+  web:
+    project: ./src/web
+    buildCommand: npm run build
+    buildCache:
+      enabled: true
+      paths:
+        - node_modules
+        - .next/cache
+```
+
+### Incremental Deployments
+```bash
+# Deploy only changed services
+azd deploy --incremental
+
+# Deploy with change detection
+azd deploy --detect-changes
+```
+
+## 🔍 Deployment Monitoring
+
+### Real-Time Deployment Monitoring
+```bash
+# Monitor deployment progress
+azd deploy --follow
+
+# View deployment logs
+azd logs --follow --service api
+
+# Check deployment status
+azd show --service api
+```
+
+### Health Checks
+```yaml
+# azure.yaml - Configure health checks
+services:
+  api:
+    project: ./src/api
+    host: containerapp
+    healthCheck:
+      path: /health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+```
+
+### Post-Deployment Validation
+```bash
+#!/bin/bash
+# scripts/validate-deployment.sh
+
+echo "Validating deployment..."
+
+# Check application health
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+echo "Testing web application..."
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Web application is healthy"
+else
+    echo "❌ Web application health check failed"
+    exit 1
+fi
+
+echo "Testing API..."
+if curl -f "$API_URL/health"; then
+    echo "✅ API is healthy"
+else
+    echo "❌ API health check failed"
+    exit 1
+fi
+
+echo "Running integration tests..."
+npm run test:integration
+
+echo "✅ Deployment validation completed successfully"
+```
+
+## 🔐 Security Considerations
+
+### Secrets Management
+```bash
+# Store secrets securely
+azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
+azd env set API_KEY "your-api-key" --secret
+
+# Reference secrets in azure.yaml
+```
+
+```yaml
+services:
+  api:
+    secrets:
+      - name: database-password
+        value: ${DATABASE_PASSWORD}
+      - name: jwt-secret
+        value: ${JWT_SECRET}
+```
+
+### Network Security
+```yaml
+# azure.yaml - Configure network security
+infra:
+  parameters:
+    enablePrivateEndpoints: true
+    allowedIPs:
+      - "203.0.113.0/24"  # Office IP range
+      - "198.51.100.0/24" # VPN IP range
+```
+
+### Identity and Access Management
+```yaml
+services:
+  api:
+    project: ./src/api
+    host: containerapp
+    identity:
+      type: systemAssigned
+    keyVault:
+      - name: app-secrets
+        secrets:
+          - database-connection
+          - external-api-key
+```
+
+## 🚨 Rollback Strategies
+
+### Quick Rollback
+```bash
+# Rollback to previous deployment
+azd deploy --rollback
+
+# Rollback specific service
+azd deploy --service api --rollback
+
+# Rollback to specific version
+azd deploy --service api --version v1.2.3
+```
+
+### Infrastructure Rollback
+```bash
+# Rollback infrastructure changes
+azd provision --rollback
+
+# Preview rollback changes
+azd provision --rollback --preview
+```
+
+### Database Migration Rollback
+```bash
+#!/bin/bash
+# scripts/rollback-database.sh
+
+echo "Rolling back database migrations..."
+npm run db:rollback
+
+echo "Validating database state..."
+npm run db:validate
+
+echo "Database rollback completed"
+```
+
+## 📊 Deployment Metrics
+
+### Deployment Performance ကို ထိန်းသိမ်းခြင်း
+```bash
+# Enable deployment metrics
+azd config set telemetry.deployment.enabled true
+
+# View deployment history
+azd history
+
+# Get deployment statistics
+azd metrics --type deployment
+```
+
+### Custom Metrics Collection
+```yaml
+# azure.yaml - Configure custom metrics
+hooks:
+  postdeploy:
+    shell: sh
+    run: |
+      # Record deployment metrics
+      DEPLOY_TIME=$(date +%s)
+      SERVICE_COUNT=$(azd show --output json | jq '.services | length')
+      
+      # Send to monitoring system
+      curl -X POST "https://metrics.company.com/deployments" \
+        -H "Content-Type: application/json" \
+        -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
+```
+
+## 🎯 အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
+
+### ၁. Environment Consistency
+```bash
+# Use consistent naming
+azd env new dev-$(whoami)
+azd env new staging-$(git rev-parse --short HEAD)
+azd env new production-v1
+
+# Maintain environment parity
+./scripts/sync-environments.sh
+```
+
+### ၂. Infrastructure Validation
+```bash
+# Validate before deployment
+azd provision --preview
+azd provision --what-if
+
+# Use ARM/Bicep linting
+az bicep lint --file infra/main.bicep
+```
+
+### ၃. Testing Integration
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      # Unit tests
+      npm run test:unit
+      
+      # Security scanning
+      npm audit
+      
+      # Code quality checks
+      npm run lint
+      npm run type-check
+      
+  postdeploy:
+    shell: sh
+    run: |
+      # Integration tests
+      npm run test:integration
+      
+      # Performance tests
+      npm run test:performance
+      
+      # Smoke tests
+      npm run test:smoke
+```
+
+### ၄. Documentation နှင့် Logging
+```bash
+# Document deployment procedures
+echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
+echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
+```
+
+## နောက်တစ်ဆင့်
+
+- [Provisioning Resources](provisioning.md) - Infrastructure management ကို အနက်အနက် လေ့လာရန်
+- [Pre-Deployment Planning](../pre-deployment/capacity-planning.md) - Deployment strategy ကို စီစဉ်ရန်
+- [Common Issues](../troubleshooting/common-issues.md) - Deployment အခက်အခဲများကို ဖြေရှင်းရန်
+- [Best Practices](../troubleshooting/debugging.md) - Production-ready deployment strategies
+
+## အပိုဆောင်း ရင်းမြစ်များ
+
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+
+---
+
+**Navigation**
+- **Previous Lesson**: [Your First Project](../getting-started/first-project.md)
+- **Next Lesson**: [Provisioning Resources](provisioning.md)
+
+---
+
+**ဝက်ဘ်ဆိုက်မှတ်ချက်**:  
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက်ဘာသာပြန်ဆိုမှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို ကျေးဇူးပြု၍ သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတည်သော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပြန်ဆိုမှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုမှားများ သို့မဟုတ် အဓိပ္ပါယ်မှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

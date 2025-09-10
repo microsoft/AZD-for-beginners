@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T19:31:32+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:27:56+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "mo"
 }
 -->
-# 偵錯指南 - 高級故障排除技術
+# 偵錯指南 - 高級故障排除與日誌分析技術
 
 ## 介紹
 
-本指南提供了針對 Azure Developer CLI 部署進行診斷和解決複雜問題的高級偵錯策略、工具和技術。學習系統化的故障排除方法、日誌分析技術、性能分析以及高級診斷工具，以高效解決部署和運行時的問題。
+本指南提供高級偵錯策略、工具和技術，用於診斷和解決 Azure Developer CLI 部署中的複雜問題。學習系統化的故障排除方法、日誌分析技術、性能分析以及高級診斷工具，以高效解決部署和運行時的問題。
 
 ## 學習目標
 
@@ -123,7 +123,7 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ## 🛠️ 高級偵錯工具
 
-### Azure 資源圖查詢
+### Azure Resource Graph 查詢
 ```bash
 # Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
@@ -231,7 +231,7 @@ monitor_performance() {
 }
 ```
 
-### 資源利用率分析
+### 資源使用分析
 ```bash
 # Monitor resource usage
 monitor_resources() {
@@ -328,7 +328,7 @@ load_test() {
 }
 ```
 
-## 🔧 基礎架構偵錯
+## 🔧 基礎設施偵錯
 
 ### Bicep 模板偵錯
 ```bash
@@ -451,9 +451,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 特定應用偵錯
+## 📱 應用程序特定偵錯
 
-### Node.js 應用偵錯
+### Node.js 應用程序偵錯
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -656,7 +656,7 @@ aggregate_logs() {
 - `health-check.sh` - 全面健康檢查
 - `performance-test.sh` - 自動性能測試
 - `log-analyzer.py` - 高級日誌解析和分析
-- `resource-validator.sh` - 基礎架構驗證
+- `resource-validator.sh` - 基礎設施驗證
 
 ### 監控集成
 ```yaml
@@ -681,7 +681,7 @@ hooks:
 2. **創建可重現的測試案例** 以定位問題
 3. **記錄偵錯程序** 供團隊使用
 4. **自動化健康檢查** 和監控
-5. **保持偵錯工具更新** 與應用變更同步
+5. **保持偵錯工具更新** 與應用程序變更同步
 6. **在非事故時間練習偵錯程序**
 
 ## 下一步
@@ -699,9 +699,10 @@ hooks:
 
 **導航**
 - **上一課**：[常見問題](common-issues.md)
+
 - **下一課**：[容量規劃](../pre-deployment/capacity-planning.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。

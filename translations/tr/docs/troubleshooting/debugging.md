@@ -1,43 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T19:33:59+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:32:31+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "tr"
 }
 -->
-# Hata Ayıklama Kılavuzu - İleri Düzey Sorun Giderme Teknikleri
+# Hata Ayıklama Kılavuzu - Gelişmiş Sorun Giderme ve Günlük Analizi Teknikleri
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI dağıtımlarıyla ilgili karmaşık sorunları teşhis etmek ve çözmek için ileri düzey hata ayıklama stratejileri, araçları ve teknikleri sunar. Dağıtım ve çalışma zamanı sorunlarını verimli bir şekilde çözmek için sistematik sorun giderme yöntemlerini, günlük analizi tekniklerini, performans profillemeyi ve ileri düzey tanılama araçlarını öğrenin.
+Bu kapsamlı kılavuz, Azure Developer CLI dağıtımlarıyla ilgili karmaşık sorunları teşhis etmek ve çözmek için gelişmiş hata ayıklama stratejileri, araçlar ve teknikler sunar. Dağıtım ve çalışma zamanı sorunlarını verimli bir şekilde çözmek için sistematik sorun giderme yöntemlerini, günlük analizi tekniklerini, performans profillemeyi ve gelişmiş tanılama araçlarını öğrenin.
 
 ## Öğrenme Hedefleri
 
 Bu kılavuzu tamamladığınızda:
 - Azure Developer CLI sorunları için sistematik hata ayıklama yöntemlerini ustalıkla kullanabileceksiniz
-- İleri düzey günlük yapılandırması ve günlük analizi tekniklerini anlayabileceksiniz
+- Gelişmiş günlük yapılandırması ve günlük analizi tekniklerini anlayabileceksiniz
 - Performans profilleme ve izleme stratejilerini uygulayabileceksiniz
 - Karmaşık sorunları çözmek için Azure tanılama araçlarını ve hizmetlerini kullanabileceksiniz
 - Ağ hata ayıklama ve güvenlik sorun giderme tekniklerini uygulayabileceksiniz
-- Proaktif sorun tespiti için kapsamlı izleme ve uyarı yapılandırabileceksiniz
+- Proaktif sorun tespiti için kapsamlı izleme ve uyarı yapılandırması yapabileceksiniz
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Karmaşık dağıtım sorunlarını sistematik olarak ayıklamak için TRIAGE metodolojisini uygulayın
-- Kapsamlı günlük ve izleme bilgilerini yapılandırın ve analiz edin
-- Azure Monitor, Application Insights ve tanılama araçlarını etkili bir şekilde kullanın
-- Ağ bağlantısı, kimlik doğrulama ve izin sorunlarını bağımsız olarak ayıklayın
-- Performans izleme ve optimizasyon stratejilerini uygulayın
-- Tekrarlayan sorunlar için özel hata ayıklama betikleri ve otomasyon oluşturun
+- Karmaşık dağıtım sorunlarını sistematik olarak çözmek için TRIAGE metodolojisini uygulayabilirsiniz
+- Kapsamlı günlük ve izleme bilgilerini yapılandırabilir ve analiz edebilirsiniz
+- Azure Monitor, Application Insights ve tanılama araçlarını etkili bir şekilde kullanabilirsiniz
+- Ağ bağlantısı, kimlik doğrulama ve izin sorunlarını bağımsız olarak çözebilirsiniz
+- Performans izleme ve optimizasyon stratejilerini uygulayabilirsiniz
+- Tekrarlayan sorunlar için özel hata ayıklama betikleri ve otomasyon oluşturabilirsiniz
 
 ## Hata Ayıklama Metodolojisi
 
 ### TRIAGE Yaklaşımı
 - **T**ime: Sorun ne zaman başladı?
-- **R**eproduce: Sorunu tutarlı bir şekilde yeniden oluşturabiliyor musunuz?
+- **R**eproduce: Sorunu tutarlı bir şekilde yeniden oluşturabilir misiniz?
 - **I**solate: Hangi bileşen başarısız oluyor?
 - **A**nalyze: Günlükler bize ne söylüyor?
 - **G**ather: Tüm ilgili bilgileri toplayın
@@ -121,7 +121,7 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ İleri Düzey Hata Ayıklama Araçları
+## 🛠️ Gelişmiş Hata Ayıklama Araçları
 
 ### Azure Resource Graph Sorguları
 ```bash
@@ -649,13 +649,13 @@ aggregate_logs() {
 }
 ```
 
-## 🔗 İleri Düzey Kaynaklar
+## 🔗 Gelişmiş Kaynaklar
 
 ### Özel Hata Ayıklama Betikleri
 `scripts/debug/` dizinini oluşturun ve içine şunları ekleyin:
 - `health-check.sh` - Kapsamlı sağlık kontrolü
 - `performance-test.sh` - Otomatik performans testi
-- `log-analyzer.py` - İleri düzey günlük ayrıştırma ve analiz
+- `log-analyzer.py` - Gelişmiş günlük ayrıştırma ve analiz
 - `resource-validator.sh` - Altyapı doğrulama
 
 ### İzleme Entegrasyonu
@@ -677,9 +677,9 @@ hooks:
 
 ## En İyi Uygulamalar
 
-1. **Her zaman hata ayıklama günlüklerini etkinleştirin** üretim dışı ortamlarda
-2. **Sorunlar için yeniden oluşturulabilir test vakaları oluşturun**
-3. **Ekibiniz için hata ayıklama prosedürlerini belgeleyin**
+1. **Hata ayıklama günlüklerini her zaman etkinleştirin** üretim dışı ortamlarda
+2. **Sorunlar için yeniden üretilebilir test vakaları oluşturun**
+3. **Hata ayıklama prosedürlerini ekibiniz için belgeleyin**
 4. **Sağlık kontrollerini ve izlemeyi otomatikleştirin**
 5. **Hata ayıklama araçlarını uygulama değişikliklerinizle güncel tutun**
 6. **Olay olmayan zamanlarda hata ayıklama prosedürlerini uygulayın**
@@ -689,19 +689,20 @@ hooks:
 - [Kapasite Planlama](../pre-deployment/capacity-planning.md) - Kaynak gereksinimlerini planlayın
 - [SKU Seçimi](../pre-deployment/sku-selection.md) - Uygun hizmet seviyelerini seçin
 - [Ön Kontroller](../pre-deployment/preflight-checks.md) - Dağıtım öncesi doğrulama
-- [Hızlı Referans](../../resources/cheat-sheet.md) - Hızlı komut referansı
+- [Hızlı Başvuru](../../resources/cheat-sheet.md) - Hızlı komut referansı
 
 ---
 
-**Unutmayın**: İyi bir hata ayıklama, sistematik, titiz ve sabırlı olmaktır. Bu araçlar ve teknikler sorunları daha hızlı ve etkili bir şekilde teşhis etmenize yardımcı olacaktır.
+**Unutmayın**: İyi bir hata ayıklama, sistematik, titiz ve sabırlı olmaktır. Bu araçlar ve teknikler, sorunları daha hızlı ve etkili bir şekilde teşhis etmenize yardımcı olacaktır.
 
 ---
 
 **Navigasyon**
 - **Önceki Ders**: [Yaygın Sorunlar](common-issues.md)
+
 - **Sonraki Ders**: [Kapasite Planlama](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.

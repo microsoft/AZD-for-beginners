@@ -1,33 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T17:12:21+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:25:57+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "de"
 }
 -->
-# Debugging-Leitfaden - Fortgeschrittene Fehlersuchtechniken
+# Debugging-Leitfaden - Fortgeschrittene Techniken zur Analyse von Fehlerprotokollen
 
 ## Einführung
 
-Dieser umfassende Leitfaden bietet fortgeschrittene Strategien, Tools und Techniken zur Diagnose und Lösung komplexer Probleme bei Azure Developer CLI-Bereitstellungen. Lernen Sie systematische Fehlersuchmethoden, Log-Analyse-Techniken, Leistungsprofilierung und fortgeschrittene Diagnosetools, um Bereitstellungs- und Laufzeitprobleme effizient zu beheben.
+Dieser umfassende Leitfaden bietet fortgeschrittene Debugging-Strategien, Tools und Techniken zur Diagnose und Lösung komplexer Probleme bei Azure Developer CLI-Bereitstellungen. Lernen Sie systematische Fehlersuchmethoden, Protokollanalysetechniken, Leistungsprofilierung und fortgeschrittene Diagnosetools, um Bereitstellungs- und Laufzeitprobleme effizient zu beheben.
 
 ## Lernziele
 
 Nach Abschluss dieses Leitfadens werden Sie:
-- Systematische Fehlersuchmethoden für Azure Developer CLI-Probleme beherrschen
-- Fortgeschrittene Log-Konfiguration und Log-Analyse-Techniken verstehen
+- Systematische Debugging-Methoden für Azure Developer CLI-Probleme beherrschen
+- Fortgeschrittene Protokollkonfiguration und Analysetechniken verstehen
 - Strategien zur Leistungsprofilierung und -überwachung umsetzen
 - Azure-Diagnosetools und -dienste für die Lösung komplexer Probleme nutzen
-- Netzwerk-Fehlersuche und Sicherheitsprobleme beheben
-- Umfassende Überwachung und Alarmierung für proaktive Problemerkennung konfigurieren
+- Netzwerk-Debugging und Sicherheitstroubleshooting-Techniken anwenden
+- Umfassende Überwachungs- und Alarmierungsfunktionen für proaktive Fehlererkennung konfigurieren
 
 ## Lernergebnisse
 
 Nach Abschluss werden Sie in der Lage sein:
 - Die TRIAGE-Methode anwenden, um komplexe Bereitstellungsprobleme systematisch zu debuggen
-- Umfassende Log- und Tracing-Informationen konfigurieren und analysieren
+- Umfassende Protokollierungs- und Tracing-Informationen konfigurieren und analysieren
 - Azure Monitor, Application Insights und Diagnosetools effektiv nutzen
 - Netzwerkverbindungs-, Authentifizierungs- und Berechtigungsprobleme eigenständig debuggen
 - Strategien zur Leistungsüberwachung und -optimierung implementieren
@@ -39,9 +39,9 @@ Nach Abschluss werden Sie in der Lage sein:
 - **T**ime: Wann hat das Problem begonnen?
 - **R**eproduce: Kann das Problem konsistent reproduziert werden?
 - **I**solate: Welche Komponente funktioniert nicht?
-- **A**nalyze: Was sagen die Logs aus?
+- **A**nalyze: Was sagen die Protokolle aus?
 - **G**ather: Alle relevanten Informationen sammeln
-- **E**scalate: Wann sollte zusätzliche Hilfe gesucht werden?
+- **E**scalate: Wann sollte zusätzliche Hilfe angefordert werden?
 
 ## Debug-Modus aktivieren
 
@@ -71,9 +71,9 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Log-Analyse-Techniken
+## 📊 Protokollanalysetechniken
 
-### Verständnis der Log-Level
+### Verständnis der Protokollstufen
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,7 +83,7 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Strukturierte Log-Analyse
+### Strukturierte Protokollanalyse
 ```bash
 # Filter logs by level
 azd logs --level error --since 1h
@@ -98,7 +98,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### Log-Korrelation
+### Protokollkorrelation
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -135,7 +135,7 @@ az graph query -q "ResourceContainers | where type == 'microsoft.resources/resou
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Netzwerk-Fehlersuche
+### Netzwerk-Debugging
 ```bash
 # Test connectivity between services
 test_connectivity() {
@@ -399,7 +399,7 @@ analyze_resources() {
 
 ## 🔒 Sicherheits-Debugging
 
-### Debugging des Authentifizierungsflusses
+### Debugging des Authentifizierungsablaufs
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -627,7 +627,7 @@ create_debug_queries() {
 }
 ```
 
-### Log-Aggregation
+### Protokollaggregation
 ```bash
 # Aggregate logs from multiple sources
 aggregate_logs() {
@@ -655,7 +655,7 @@ aggregate_logs() {
 Erstellen Sie ein Verzeichnis `scripts/debug/` mit:
 - `health-check.sh` - Umfassende Gesundheitsprüfung
 - `performance-test.sh` - Automatisierte Leistungstests
-- `log-analyzer.py` - Fortgeschrittene Log-Analyse
+- `log-analyzer.py` - Fortgeschrittene Protokollanalyse
 - `resource-validator.sh` - Validierung der Infrastruktur
 
 ### Überwachungsintegration
@@ -677,7 +677,7 @@ hooks:
 
 ## Best Practices
 
-1. **Aktivieren Sie immer Debug-Logging** in Nicht-Produktionsumgebungen
+1. **Aktivieren Sie immer die Debug-Protokollierung** in Nicht-Produktionsumgebungen
 2. **Erstellen Sie reproduzierbare Testfälle** für Probleme
 3. **Dokumentieren Sie Debugging-Verfahren** für Ihr Team
 4. **Automatisieren Sie Gesundheitsprüfungen** und Überwachung
@@ -687,9 +687,9 @@ hooks:
 ## Nächste Schritte
 
 - [Kapazitätsplanung](../pre-deployment/capacity-planning.md) - Ressourcenanforderungen planen
-- [SKU-Auswahl](../pre-deployment/sku-selection.md) - Geeignete Service-Tiers auswählen
+- [SKU-Auswahl](../pre-deployment/sku-selection.md) - Geeignete Servicestufen auswählen
 - [Preflight-Checks](../pre-deployment/preflight-checks.md) - Validierung vor der Bereitstellung
-- [Spickzettel](../../resources/cheat-sheet.md) - Schnellreferenz-Befehle
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Schnellreferenz für Befehle
 
 ---
 
@@ -699,6 +699,7 @@ hooks:
 
 **Navigation**
 - **Vorherige Lektion**: [Häufige Probleme](common-issues.md)
+
 - **Nächste Lektion**: [Kapazitätsplanung](../pre-deployment/capacity-planning.md)
 
 ---

@@ -1,49 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T17:10:10+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:28:31+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "tw"
 }
 -->
-# 除錯指南 - 高級故障排除技術
+# 偵錯指南 - 高級故障排除與日誌分析技術
 
 ## 介紹
 
-本指南提供高級除錯策略、工具和技術，用於診斷和解決 Azure Developer CLI 部署中的複雜問題。學習系統化的故障排除方法、日誌分析技術、性能剖析以及高級診斷工具，以高效解決部署和運行時的問題。
+本指南提供高級偵錯策略、工具和技術，用於診斷和解決 Azure Developer CLI 部署中的複雜問題。學習系統化的故障排除方法、日誌分析技術、性能分析以及高級診斷工具，以高效解決部署和運行時的問題。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
-- 掌握 Azure Developer CLI 問題的系統化除錯方法
+- 掌握 Azure Developer CLI 問題的系統化偵錯方法
 - 理解高級日誌配置和日誌分析技術
-- 實施性能剖析和監控策略
+- 實施性能分析和監控策略
 - 使用 Azure 診斷工具和服務解決複雜問題
-- 應用網絡除錯和安全故障排除技術
+- 應用網絡偵錯和安全故障排除技術
 - 配置全面的監控和警報以主動檢測問題
 
 ## 學習成果
 
 完成後，您將能夠：
-- 使用 TRIAGE 方法系統化除錯複雜的部署問題
-- 配置和分析全面的日誌和追蹤信息
+- 使用 TRIAGE 方法系統化地偵錯複雜的部署問題
+- 配置並分析全面的日誌和追蹤信息
 - 有效使用 Azure Monitor、Application Insights 和診斷工具
-- 獨立除錯網絡連接、身份驗證和權限問題
+- 獨立偵錯網絡連接、身份驗證和權限問題
 - 實施性能監控和優化策略
-- 創建自定義除錯腳本和自動化以解決重複性問題
+- 創建自定義偵錯腳本和自動化以解決重複性問題
 
-## 除錯方法
+## 偵錯方法
 
 ### TRIAGE 方法
 - **T**ime：問題何時開始？
 - **R**eproduce：是否能穩定重現問題？
 - **I**solate：哪個組件出現故障？
-- **A**nalyze：日誌告訴我們什麼？
+- **A**nalyze：日誌中提供了哪些信息？
 - **G**ather：收集所有相關信息
-- **E**scalate：何時需要尋求額外幫助
+- **E**scalate：何時需要尋求額外幫助？
 
-## 啟用除錯模式
+## 啟用偵錯模式
 
 ### 環境變數
 ```bash
@@ -59,7 +59,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### 除錯配置
+### 偵錯配置
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -98,7 +98,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### 日誌關聯
+### 日誌關聯分析
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -121,7 +121,7 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ 高級除錯工具
+## 🛠️ 高級偵錯工具
 
 ### Azure 資源圖查詢
 ```bash
@@ -135,7 +135,7 @@ az graph query -q "ResourceContainers | where type == 'microsoft.resources/resou
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### 網絡除錯
+### 網絡偵錯
 ```bash
 # Test connectivity between services
 test_connectivity() {
@@ -156,7 +156,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### 容器除錯
+### 容器偵錯
 ```bash
 # Debug container app issues
 debug_container() {
@@ -176,7 +176,7 @@ debug_container() {
 }
 ```
 
-### 數據庫連接除錯
+### 數據庫連接偵錯
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,7 +195,7 @@ debug_database() {
 }
 ```
 
-## 🔬 性能除錯
+## 🔬 性能偵錯
 
 ### 應用性能監控
 ```bash
@@ -231,7 +231,7 @@ monitor_performance() {
 }
 ```
 
-### 資源利用率分析
+### 資源使用分析
 ```bash
 # Monitor resource usage
 monitor_resources() {
@@ -257,7 +257,7 @@ monitor_resources() {
 
 ## 🧪 測試與驗證
 
-### 集成測試除錯
+### 集成測試偵錯
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -306,7 +306,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### 負載測試除錯
+### 負載測試偵錯
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -328,9 +328,9 @@ load_test() {
 }
 ```
 
-## 🔧 基礎設施除錯
+## 🔧 基礎設施偵錯
 
-### Bicep 模板除錯
+### Bicep 模板偵錯
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -397,9 +397,9 @@ analyze_resources() {
 }
 ```
 
-## 🔒 安全除錯
+## 🔒 安全偵錯
 
-### 身份驗證流程除錯
+### 身份驗證流程偵錯
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -433,7 +433,7 @@ debug_keyvault() {
 }
 ```
 
-### 網絡安全除錯
+### 網絡安全偵錯
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -451,9 +451,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 特定應用除錯
+## 📱 特定應用偵錯
 
-### Node.js 應用除錯
+### Node.js 應用偵錯
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -482,7 +482,7 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### 數據庫查詢除錯
+### 數據庫查詢偵錯
 ```javascript
 // database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
@@ -512,7 +512,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 緊急除錯程序
+## 🚨 緊急偵錯程序
 
 ### 生產問題響應
 ```bash
@@ -602,7 +602,7 @@ quick_rollback() {
 }
 ```
 
-## 📊 除錯儀表板
+## 📊 偵錯儀表板
 
 ### 自定義監控儀表板
 ```bash
@@ -651,11 +651,11 @@ aggregate_logs() {
 
 ## 🔗 高級資源
 
-### 自定義除錯腳本
+### 自定義偵錯腳本
 創建一個 `scripts/debug/` 目錄，包含：
 - `health-check.sh` - 全面健康檢查
 - `performance-test.sh` - 自動性能測試
-- `log-analyzer.py` - 高級日誌解析和分析
+- `log-analyzer.py` - 高級日誌解析與分析
 - `resource-validator.sh` - 基礎設施驗證
 
 ### 監控集成
@@ -677,31 +677,32 @@ hooks:
 
 ## 最佳實踐
 
-1. **始終啟用除錯日誌** 在非生產環境中
+1. **始終啟用偵錯日誌** 在非生產環境中
 2. **創建可重現的測試案例** 以定位問題
-3. **記錄除錯程序** 供團隊使用
+3. **記錄偵錯程序** 供團隊使用
 4. **自動化健康檢查** 和監控
-5. **保持除錯工具更新** 與應用程序變更同步
-6. **在非事故時間練習除錯程序**
+5. **保持偵錯工具更新** 與應用程序同步
+6. **在非事故時間練習偵錯程序**
 
 ## 下一步
 
 - [容量規劃](../pre-deployment/capacity-planning.md) - 規劃資源需求
 - [SKU 選擇](../pre-deployment/sku-selection.md) - 選擇合適的服務層級
-- [預檢驗檢查](../pre-deployment/preflight-checks.md) - 部署前驗證
+- [預檢查](../pre-deployment/preflight-checks.md) - 部署前驗證
 - [速查表](../../resources/cheat-sheet.md) - 快速參考命令
 
 ---
 
-**記住**：良好的除錯是系統化、徹底且耐心的。這些工具和技術將幫助您更快、更有效地診斷問題。
+**記住**：良好的偵錯是系統化、徹底且耐心的過程。這些工具和技術將幫助您更快、更有效地診斷問題。
 
 ---
 
 **導航**
 - **上一課**：[常見問題](common-issues.md)
+
 - **下一課**：[容量規劃](../pre-deployment/capacity-planning.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。

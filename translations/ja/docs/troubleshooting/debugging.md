@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T17:11:07+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:28:48+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ja"
 }
 -->
-# デバッグガイド - 高度なトラブルシューティング技術
+# デバッグガイド - 高度なトラブルシューティングログ分析技術
 
 ## はじめに
 
@@ -19,9 +19,9 @@ CO_OP_TRANSLATOR_METADATA:
 - Azure Developer CLI の問題に対する体系的なデバッグ手法をマスターする
 - 高度なログ設定とログ分析技術を理解する
 - パフォーマンスプロファイリングとモニタリング戦略を実装する
-- Azure の診断ツールやサービスを使用して複雑な問題を解決する
+- 複雑な問題解決のための Azure 診断ツールとサービスを使用する
 - ネットワークデバッグやセキュリティトラブルシューティング技術を適用する
-- 包括的なモニタリングとアラート設定を行い、問題を事前に検出する
+- プロアクティブな問題検出のための包括的なモニタリングとアラート設定を構成する
 
 ## 学習成果
 
@@ -36,12 +36,12 @@ CO_OP_TRANSLATOR_METADATA:
 ## デバッグ手法
 
 ### TRIAGE アプローチ
-- **T**ime: 問題が発生した時期は？
-- **R**eproduce: 一貫して再現できますか？
-- **I**solate: どのコンポーネントが失敗していますか？
-- **A**nalyze: ログから何が分かりますか？
+- **T**ime: 問題がいつ発生したか？
+- **R**eproduce: 一貫して再現できるか？
+- **I**solate: どのコンポーネントが失敗しているか？
+- **A**nalyze: ログから何が分かるか？
 - **G**ather: 関連情報をすべて収集する
-- **E**scalate: 追加の支援が必要な場合は？
+- **E**scalate: 追加の支援が必要な場合
 
 ## デバッグモードの有効化
 
@@ -98,7 +98,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### ログの相関関係
+### ログの相関
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -656,7 +656,7 @@ aggregate_logs() {
 - `health-check.sh` - 包括的なヘルスチェック
 - `performance-test.sh` - 自動化されたパフォーマンステスト
 - `log-analyzer.py` - 高度なログ解析
-- `resource-validator.sh` - インフラストラクチャの検証
+- `resource-validator.sh` - インフラストラクチャ検証
 
 ### モニタリング統合
 ```yaml
@@ -677,9 +677,9 @@ hooks:
 
 ## ベストプラクティス
 
-1. **デバッグログを常に有効化**する（本番環境以外で）
-2. **問題の再現可能なテストケースを作成**する
-3. **デバッグ手順をチーム向けに文書化**する
+1. **デバッグログを常に有効化**する（非本番環境で）
+2. **再現可能なテストケースを作成**する
+3. **デバッグ手順を文書化**してチームで共有する
 4. **ヘルスチェックとモニタリングを自動化**する
 5. **デバッグツールをアプリケーションの変更に合わせて更新**する
 6. **非インシデント時にデバッグ手順を練習**する
@@ -689,16 +689,17 @@ hooks:
 - [キャパシティプランニング](../pre-deployment/capacity-planning.md) - リソース要件を計画する
 - [SKU 選択](../pre-deployment/sku-selection.md) - 適切なサービス階層を選択する
 - [事前チェック](../pre-deployment/preflight-checks.md) - デプロイ前の検証
-- [チートシート](../../resources/cheat-sheet.md) - クイックリファレンスコマンド
+- [チートシート](../../resources/cheat-sheet.md) - コマンドのクイックリファレンス
 
 ---
 
-**覚えておいてください**: 良いデバッグは体系的で、徹底的で、忍耐強くあることが重要です。これらのツールと技術は、問題をより迅速かつ効果的に診断するのに役立ちます。
+**覚えておいてください**: 良いデバッグは体系的で、徹底的で、忍耐強く行うことが重要です。これらのツールと技術は、問題をより迅速かつ効果的に診断するのに役立ちます。
 
 ---
 
 **ナビゲーション**
 - **前のレッスン**: [一般的な問題](common-issues.md)
+
 - **次のレッスン**: [キャパシティプランニング](../pre-deployment/capacity-planning.md)
 
 ---

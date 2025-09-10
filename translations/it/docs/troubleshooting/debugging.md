@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T19:33:42+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:31:55+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "it"
 }
 -->
-# Guida al Debugging - Tecniche Avanzate di Risoluzione dei Problemi
+# Guida al Debugging - Tecniche Avanzate di Analisi dei Log per la Risoluzione dei Problemi
 
 ## Introduzione
 
-Questa guida completa fornisce strategie avanzate di debugging, strumenti e tecniche per diagnosticare e risolvere problemi complessi con i deployment di Azure Developer CLI. Impara metodologie sistematiche di troubleshooting, tecniche di analisi dei log, profilazione delle prestazioni e strumenti diagnostici avanzati per risolvere efficacemente problemi di deployment e runtime.
+Questa guida completa fornisce strategie avanzate di debugging, strumenti e tecniche per diagnosticare e risolvere problemi complessi con i deployment di Azure Developer CLI. Impara metodologie sistematiche di troubleshooting, tecniche di analisi dei log, profilazione delle prestazioni e strumenti diagnostici avanzati per risolvere in modo efficiente problemi di deployment e runtime.
 
 ## Obiettivi di Apprendimento
 
@@ -21,15 +21,15 @@ Completando questa guida, sarai in grado di:
 - Implementare strategie di profilazione e monitoraggio delle prestazioni
 - Utilizzare strumenti e servizi diagnostici di Azure per risolvere problemi complessi
 - Applicare tecniche di debugging di rete e troubleshooting di sicurezza
-- Configurare monitoraggio completo e sistemi di allerta per rilevare proattivamente i problemi
+- Configurare monitoraggio e alerting completi per rilevare proattivamente i problemi
 
 ## Risultati di Apprendimento
 
 Al termine, sarai in grado di:
 - Applicare la metodologia TRIAGE per debug sistematico di problemi complessi di deployment
-- Configurare e analizzare informazioni dettagliate di logging e tracing
+- Configurare e analizzare informazioni complete di logging e tracing
 - Utilizzare Azure Monitor, Application Insights e strumenti diagnostici in modo efficace
-- Risolvere autonomamente problemi di connettività di rete, autenticazione e permessi
+- Debuggare problemi di connettività di rete, autenticazione e permessi in autonomia
 - Implementare strategie di monitoraggio e ottimizzazione delle prestazioni
 - Creare script di debugging personalizzati e automazioni per problemi ricorrenti
 
@@ -45,7 +45,7 @@ Al termine, sarai in grado di:
 
 ## Abilitare la Modalità Debug
 
-### Variabili di Ambiente
+### Variabili d'Ambiente
 ```bash
 # Enable comprehensive debugging
 export AZD_DEBUG=true
@@ -651,7 +651,7 @@ aggregate_logs() {
 
 ## 🔗 Risorse Avanzate
 
-### Script di Debug Personalizzati
+### Script di Debugging Personalizzati
 Crea una directory `scripts/debug/` con:
 - `health-check.sh` - Controllo completo dello stato
 - `performance-test.sh` - Test delle prestazioni automatizzato
@@ -675,12 +675,12 @@ hooks:
       fi
 ```
 
-## Migliori Pratiche
+## Best Practices
 
 1. **Abilita sempre il logging di debug** negli ambienti non di produzione
 2. **Crea casi di test riproducibili** per i problemi
 3. **Documenta le procedure di debugging** per il tuo team
-4. **Automatizza i controlli dello stato** e il monitoraggio
+4. **Automatizza i controlli di stato** e il monitoraggio
 5. **Mantieni gli strumenti di debug aggiornati** con le modifiche dell'applicazione
 6. **Esercitati nelle procedure di debugging** durante i periodi non critici
 
@@ -699,7 +699,8 @@ hooks:
 
 **Navigazione**
 - **Lezione Precedente**: [Problemi Comuni](common-issues.md)
-- **Lezione Successiva**: [Pianificazione della Capacità](../pre-deployment/capacity-planning.md)
+
+- **Prossima Lezione**: [Pianificazione della Capacità](../pre-deployment/capacity-planning.md)
 
 ---
 

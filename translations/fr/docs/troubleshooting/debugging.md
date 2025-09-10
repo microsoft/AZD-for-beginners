@@ -1,27 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T17:10:43+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:25:20+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "fr"
 }
 -->
-# Guide de Débogage - Techniques Avancées de Dépannage
+# Guide de Débogage - Techniques Avancées d'Analyse des Journaux
 
 ## Introduction
 
-Ce guide complet propose des stratégies, outils et techniques avancés pour diagnostiquer et résoudre des problèmes complexes liés aux déploiements avec Azure Developer CLI. Apprenez des méthodologies de dépannage systématiques, des techniques d'analyse des journaux, du profilage des performances et des outils de diagnostic avancés pour résoudre efficacement les problèmes de déploiement et d'exécution.
+Ce guide complet propose des stratégies, outils et techniques avancés pour diagnostiquer et résoudre des problèmes complexes liés aux déploiements avec Azure Developer CLI. Apprenez des méthodologies de dépannage systématiques, des techniques d'analyse des journaux, du profilage de performance et des outils de diagnostic avancés pour résoudre efficacement les problèmes de déploiement et d'exécution.
 
 ## Objectifs d'Apprentissage
 
-En suivant ce guide, vous apprendrez à :
+En suivant ce guide, vous allez :
 - Maîtriser des méthodologies de débogage systématiques pour les problèmes liés à Azure Developer CLI
-- Comprendre la configuration avancée des journaux et les techniques d'analyse des journaux
+- Comprendre les techniques avancées de configuration et d'analyse des journaux
 - Mettre en œuvre des stratégies de profilage et de surveillance des performances
 - Utiliser les outils et services de diagnostic Azure pour résoudre des problèmes complexes
-- Appliquer des techniques de dépannage réseau et de sécurité
-- Configurer une surveillance complète et des alertes pour une détection proactive des problèmes
+- Appliquer des techniques de débogage réseau et de dépannage en matière de sécurité
+- Configurer une surveillance et des alertes complètes pour détecter les problèmes de manière proactive
 
 ## Résultats d'Apprentissage
 
@@ -73,7 +73,7 @@ azd config set trace.outputPath ./debug-traces
 
 ## 📊 Techniques d'Analyse des Journaux
 
-### Comprendre les Niveaux de Journalisation
+### Comprendre les Niveaux de Journaux
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -156,7 +156,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Débogage de Conteneurs
+### Débogage des Conteneurs
 ```bash
 # Debug container app issues
 debug_container() {
@@ -330,7 +330,7 @@ load_test() {
 
 ## 🔧 Débogage de l'Infrastructure
 
-### Débogage des Templates Bicep
+### Débogage des Modèles Bicep
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -512,7 +512,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Procédures de Débogage d'Urgence
+## 🚨 Procédures de Débogage en Urgence
 
 ### Réponse aux Problèmes en Production
 ```bash
@@ -653,7 +653,7 @@ aggregate_logs() {
 
 ### Scripts de Débogage Personnalisés
 Créez un répertoire `scripts/debug/` avec :
-- `health-check.sh` - Vérification complète de l'état
+- `health-check.sh` - Vérification complète de la santé
 - `performance-test.sh` - Tests de performance automatisés
 - `log-analyzer.py` - Analyse avancée des journaux
 - `resource-validator.sh` - Validation de l'infrastructure
@@ -680,9 +680,9 @@ hooks:
 1. **Activez toujours la journalisation de débogage** dans les environnements non-production
 2. **Créez des cas de test reproductibles** pour les problèmes
 3. **Documentez les procédures de débogage** pour votre équipe
-4. **Automatisez les vérifications de l'état** et la surveillance
-5. **Maintenez les outils de débogage à jour** avec les changements de votre application
-6. **Entraînez-vous aux procédures de débogage** en dehors des périodes d'incident
+4. **Automatisez les vérifications de santé** et la surveillance
+5. **Gardez les outils de débogage à jour** avec les changements de votre application
+6. **Pratiquez les procédures de débogage** en dehors des périodes d'incident
 
 ## Prochaines Étapes
 
@@ -693,12 +693,13 @@ hooks:
 
 ---
 
-**Rappelez-vous** : Un bon débogage repose sur une approche systématique, minutieuse et patiente. Ces outils et techniques vous aideront à diagnostiquer les problèmes plus rapidement et efficacement.
+**Rappel** : Un bon débogage repose sur une approche systématique, minutieuse et patiente. Ces outils et techniques vous aideront à diagnostiquer les problèmes plus rapidement et efficacement.
 
 ---
 
 **Navigation**
 - **Leçon Précédente** : [Problèmes Courants](common-issues.md)
+
 - **Leçon Suivante** : [Planification de la Capacité](../pre-deployment/capacity-planning.md)
 
 ---

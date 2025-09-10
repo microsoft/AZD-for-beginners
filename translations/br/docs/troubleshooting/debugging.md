@@ -1,31 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T19:33:23+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:31:38+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "br"
 }
 -->
-# Guia de Depuração - Técnicas Avançadas de Solução de Problemas
+# Guia de Depuração - Técnicas Avançadas de Análise de Logs
 
 ## Introdução
 
-Este guia abrangente fornece estratégias avançadas de depuração, ferramentas e técnicas para diagnosticar e resolver problemas complexos com implantações do Azure Developer CLI. Aprenda metodologias sistemáticas de solução de problemas, técnicas de análise de logs, perfil de desempenho e ferramentas de diagnóstico avançadas para resolver problemas de implantação e execução de forma eficiente.
+Este guia abrangente fornece estratégias avançadas de depuração, ferramentas e técnicas para diagnosticar e resolver problemas complexos em implantações do Azure Developer CLI. Aprenda metodologias sistemáticas de solução de problemas, técnicas de análise de logs, perfil de desempenho e ferramentas de diagnóstico avançadas para resolver problemas de implantação e execução de forma eficiente.
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 Ao concluir este guia, você será capaz de:
-- Dominar metodologias sistemáticas de depuração para problemas do Azure Developer CLI
+- Dominar metodologias sistemáticas de depuração para problemas no Azure Developer CLI
 - Compreender configurações avançadas de logs e técnicas de análise de logs
 - Implementar estratégias de monitoramento e perfil de desempenho
 - Utilizar ferramentas e serviços de diagnóstico do Azure para resolver problemas complexos
 - Aplicar técnicas de depuração de rede e segurança
 - Configurar monitoramento abrangente e alertas para detecção proativa de problemas
 
-## Resultados de Aprendizagem
+## Resultados de Aprendizado
 
-Ao final, você será capaz de:
+Ao finalizar, você será capaz de:
 - Aplicar a metodologia TRIAGE para depurar sistematicamente problemas complexos de implantação
 - Configurar e analisar informações abrangentes de logs e rastreamento
 - Utilizar Azure Monitor, Application Insights e ferramentas de diagnóstico de forma eficaz
@@ -156,7 +156,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Depuração de Contêineres
+### Depuração de Containers
 ```bash
 # Debug container app issues
 debug_container() {
@@ -176,7 +176,7 @@ debug_container() {
 }
 ```
 
-### Depuração de Conexões de Banco de Dados
+### Depuração de Conexão com Banco de Dados
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -370,7 +370,7 @@ debug_deployment() {
 }
 ```
 
-### Análise do Estado de Recursos
+### Análise do Estado dos Recursos
 ```bash
 # Analyze resource states for inconsistencies
 analyze_resources() {
@@ -399,7 +399,7 @@ analyze_resources() {
 
 ## 🔒 Depuração de Segurança
 
-### Depuração de Fluxos de Autenticação
+### Depuração de Fluxo de Autenticação
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -677,7 +677,7 @@ hooks:
 
 ## Melhores Práticas
 
-1. **Sempre habilite o registro de depuração** em ambientes não-produtivos
+1. **Sempre habilite o registro de logs de depuração** em ambientes não produtivos
 2. **Crie casos de teste reproduzíveis** para os problemas
 3. **Documente os procedimentos de depuração** para sua equipe
 4. **Automatize verificações de saúde** e monitoramento
@@ -689,7 +689,7 @@ hooks:
 - [Planejamento de Capacidade](../pre-deployment/capacity-planning.md) - Planeje os requisitos de recursos
 - [Seleção de SKU](../pre-deployment/sku-selection.md) - Escolha os níveis de serviço apropriados
 - [Verificações Pré-Implantação](../pre-deployment/preflight-checks.md) - Validação antes da implantação
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Comandos de referência rápida
+- [Guia Rápido](../../resources/cheat-sheet.md) - Comandos de referência rápida
 
 ---
 
@@ -699,6 +699,7 @@ hooks:
 
 **Navegação**
 - **Lição Anterior**: [Problemas Comuns](common-issues.md)
+
 - **Próxima Lição**: [Planejamento de Capacidade](../pre-deployment/capacity-planning.md)
 
 ---
