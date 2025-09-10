@@ -27,38 +27,13 @@ Upon completing these examples, you will be able to:
 ## Directory Structure
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -68,14 +43,20 @@ examples/
 ## Quick Start Examples
 
 ### For Beginners
-1. **[Simple Web App](./simple-web-app/)** - Deploy a basic Node.js web application
-2. **[Static Website](./static-website/)** - Host a static website on Azure Storage
-3. **[Container App](./container-app/)** - Deploy a containerized application
+1. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Deploy a Node.js Express web application with MongoDB
+2. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Host a React static website with Azure Static Web Apps
+3. **[Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Deploy a containerized Python Flask application
 
 ### For Intermediate Users
-4. **[Database App](./database-app/)** - Web application with PostgreSQL database
-5. **[Serverless Function](./serverless-function/)** - Azure Functions with HTTP triggers
-6. **[Microservices](./microservices/)** - Multi-service application with API gateway
+4. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Web application with C# API and Azure SQL Database
+5. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions with HTTP triggers and Cosmos DB
+6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Multi-service Java application with Container Apps and API gateway
+
+### Azure AI Foundry Templates
+
+1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Intelligent chat application with Azure OpenAI
+2. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** - Document analysis using Azure AI services
+3. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps workflow with Azure Machine Learning
 
 ## 📋 Usage Instructions
 
@@ -142,35 +123,52 @@ Each example includes:
 
 ## 📖 Example Descriptions
 
-### Simple Web App
-**Technologies**: Node.js, App Service, Application Insights  
+### Simple Web App - Node.js Express
+**Technologies**: Node.js, Express, MongoDB, Container Apps  
 **Complexity**: Beginner  
-**Concepts**: Basic deployment, environment variables, health checks
+**Concepts**: Basic deployment, REST API, NoSQL database integration
 
-### Static Website
-**Technologies**: HTML/CSS/JS, Storage Account, CDN  
+### Static Website - React SPA
+**Technologies**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Complexity**: Beginner  
-**Concepts**: Static hosting, CDN integration, custom domains
+**Concepts**: Static hosting, serverless backend, modern web development
 
-### Container App
-**Technologies**: Docker, Container Apps, Container Registry  
+### Container App - Python Flask
+**Technologies**: Python Flask, Docker, Container Apps, Container Registry  
+**Complexity**: Beginner  
+**Concepts**: Containerization, microservices architecture, API development
+
+### Database App - C# with Azure SQL
+**Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Complexity**: Intermediate  
-**Concepts**: Containerization, scaling, ingress configuration
+**Concepts**: Entity Framework, database connections, web API development
 
-### Database App
-**Technologies**: Python Flask, PostgreSQL, App Service  
+### Serverless Function - Python Azure Functions
+**Technologies**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Complexity**: Intermediate  
-**Concepts**: Database connections, secrets management, migrations
+**Concepts**: Event-driven architecture, serverless computing, full-stack development
 
-### Serverless Function
-**Technologies**: Azure Functions, Cosmos DB, API Management  
+### Microservices - Java Spring Boot
+**Technologies**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Complexity**: Intermediate  
-**Concepts**: Event-driven architecture, bindings, API management
+**Concepts**: Microservices communication, distributed systems, enterprise patterns
 
-### Microservices
-**Technologies**: Multiple services, Service Bus, API Gateway  
+### Azure AI Foundry Examples
+
+#### Azure OpenAI Chat App
+**Technologies**: Azure OpenAI, Cognitive Search, App Service  
+**Complexity**: Intermediate  
+**Concepts**: RAG architecture, vector search, LLM integration
+
+#### AI Document Processing
+**Technologies**: Azure AI Document Intelligence, Storage, Functions  
+**Complexity**: Intermediate  
+**Concepts**: Document analysis, OCR, data extraction
+
+#### Machine Learning Pipeline
+**Technologies**: Azure ML, MLOps, Container Registry  
 **Complexity**: Advanced  
-**Concepts**: Service communication, message queuing, load balancing
+**Concepts**: Model training, deployment pipelines, monitoring
 
 ## 🛠 Configuration Examples
 
@@ -222,12 +220,15 @@ The `configurations/` directory contains reusable components:
 
 | Example | Services | Database | Auth | Monitoring | Complexity |
 |---------|----------|----------|------|------------|------------|
-| Simple Web App | 1 | ❌ | Basic | Basic | ⭐ |
-| Static Website | 1 | ❌ | ❌ | Basic | ⭐ |
-| Container App | 1 | ❌ | Basic | Full | ⭐⭐ |
-| Database App | 2 | ✅ | Full | Full | ⭐⭐⭐ |
-| Serverless Function | 3 | ✅ | Full | Full | ⭐⭐⭐ |
-| Microservices | 5+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
+| React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |
+| Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Full | Full | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
 
 ## 🎓 Learning Path
 
@@ -266,27 +267,31 @@ The `configurations/` directory contains reusable components:
 ## 🔍 Finding the Right Example
 
 ### By Technology Stack
-- **Node.js**: Simple Web App, Microservices
-- **Python**: Database App, Serverless Function
-- **Static Sites**: Static Website
-- **Containers**: Container App, Microservices
-- **Databases**: Database App, Serverless Function
+- **Node.js**: Node.js Express Todo App
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Containers**: Python Flask Container App, Java Microservices
+- **Databases**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### By Architecture Pattern
-- **Monolithic**: Simple Web App, Database App
-- **Static**: Static Website
-- **Microservices**: Microservices example
-- **Serverless**: Serverless Function
-- **Hybrid**: Container App
+- **Monolithic**: Node.js Express Todo, C# Web API + SQL
+- **Static + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: Java Spring Boot Microservices
+- **Containerized**: Python Flask Container App
+- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### By Complexity Level
-- **Beginner**: Simple Web App, Static Website
-- **Intermediate**: Container App, Database App, Serverless Function  
-- **Advanced**: Microservices
+- **Beginner**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Intermediate**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Advanced**: ML Pipeline
 
 ## 📚 Additional Resources
 
 ### Documentation Links
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
@@ -295,6 +300,12 @@ The `configurations/` directory contains reusable components:
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
 - [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Web App with C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions with Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Best Practices
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
