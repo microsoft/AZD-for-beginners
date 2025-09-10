@@ -1,26 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T17:11:47+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:31:22+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "pt"
 }
 -->
-# Guia de Depuração - Técnicas Avançadas de Resolução de Problemas
+# Guia de Depuração - Técnicas Avançadas de Análise de Logs
 
 ## Introdução
 
-Este guia abrangente fornece estratégias avançadas de depuração, ferramentas e técnicas para diagnosticar e resolver problemas complexos com implementações do Azure Developer CLI. Aprenda metodologias sistemáticas de resolução de problemas, técnicas de análise de logs, perfil de desempenho e ferramentas de diagnóstico avançadas para resolver eficientemente problemas de implementação e execução.
+Este guia abrangente apresenta estratégias avançadas de depuração, ferramentas e técnicas para diagnosticar e resolver problemas complexos em implementações do Azure Developer CLI. Aprenda metodologias sistemáticas de resolução de problemas, técnicas de análise de logs, perfil de desempenho e ferramentas de diagnóstico avançadas para resolver problemas de implementação e execução de forma eficiente.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este guia, irá:
-- Dominar metodologias sistemáticas de depuração para problemas do Azure Developer CLI
+- Dominar metodologias sistemáticas de depuração para problemas no Azure Developer CLI
 - Compreender configurações avançadas de logs e técnicas de análise de logs
 - Implementar estratégias de monitorização e perfil de desempenho
 - Utilizar ferramentas e serviços de diagnóstico do Azure para resolver problemas complexos
-- Aplicar técnicas de depuração de rede e segurança
+- Aplicar técnicas de depuração de rede e resolução de problemas de segurança
 - Configurar monitorização abrangente e alertas para deteção proativa de problemas
 
 ## Resultados de Aprendizagem
@@ -36,11 +36,11 @@ Após a conclusão, será capaz de:
 ## Metodologia de Depuração
 
 ### A Abordagem TRIAGE
-- **T**empo: Quando o problema começou?
+- **T**empo: Quando começou o problema?
 - **R**eproduzir: Consegue reproduzi-lo consistentemente?
 - **I**slar: Qual componente está a falhar?
 - **A**nalisar: O que dizem os logs?
-- **C**oletar: Reunir todas as informações relevantes
+- **R**eunir: Colete todas as informações relevantes
 - **E**scalar: Quando procurar ajuda adicional
 
 ## Ativar o Modo de Depuração
@@ -604,7 +604,7 @@ quick_rollback() {
 
 ## 📊 Dashboards de Depuração
 
-### Dashboard de Monitorização Personalizado
+### Dashboard Personalizado de Monitorização
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -687,8 +687,8 @@ hooks:
 ## Próximos Passos
 
 - [Planeamento de Capacidade](../pre-deployment/capacity-planning.md) - Planeie os requisitos de recursos
-- [Seleção de SKU](../pre-deployment/sku-selection.md) - Escolha os níveis de serviço apropriados
-- [Verificações Preliminares](../pre-deployment/preflight-checks.md) - Validação antes da implementação
+- [Seleção de SKU](../pre-deployment/sku-selection.md) - Escolha os níveis de serviço adequados
+- [Verificações Pré-Implementação](../pre-deployment/preflight-checks.md) - Validação antes da implementação
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Comandos de referência rápida
 
 ---
@@ -699,6 +699,7 @@ hooks:
 
 **Navegação**
 - **Lição Anterior**: [Problemas Comuns](common-issues.md)
+
 - **Próxima Lição**: [Planeamento de Capacidade](../pre-deployment/capacity-planning.md)
 
 ---
