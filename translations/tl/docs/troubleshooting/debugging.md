@@ -1,44 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:52:58+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:21:26+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "tl"
 }
 -->
-# Gabay sa Pag-debug - Mga Teknik sa Advanced na Pag-troubleshoot
+# Gabay sa Pag-debug - Mga Teknik sa Advanced na Pagsusuri ng Log
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay nagbibigay ng mga advanced na estratehiya, tools, at teknik sa pag-debug para sa pagsusuri at pagresolba ng mga komplikadong isyu sa Azure Developer CLI deployments. Matutunan ang sistematikong pamamaraan sa pag-troubleshoot, mga teknik sa pagsusuri ng log, performance profiling, at mga advanced na diagnostic tools upang epektibong maresolba ang mga isyu sa deployment at runtime.
+Ang komprehensibong gabay na ito ay nagbibigay ng mga advanced na estratehiya, kasangkapan, at teknik sa pag-debug para sa pagsusuri at paglutas ng mga kumplikadong isyu sa mga deployment ng Azure Developer CLI. Matutunan ang sistematikong mga pamamaraan sa troubleshooting, mga teknik sa pagsusuri ng log, pag-profile ng performance, at mga advanced na kasangkapan sa diagnostic upang epektibong malutas ang mga isyu sa deployment at runtime.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng gabay na ito, ikaw ay:
-- Magiging bihasa sa sistematikong pamamaraan sa pag-debug ng mga isyu sa Azure Developer CLI
-- Maiintindihan ang advanced na configuration ng logging at mga teknik sa pagsusuri ng log
-- Makakapagpatupad ng mga estratehiya sa performance profiling at monitoring
-- Magagamit ang mga diagnostic tools at serbisyo ng Azure para sa komplikadong pagresolba ng problema
+- Magiging bihasa sa sistematikong mga pamamaraan sa pag-debug para sa mga isyu sa Azure Developer CLI
+- Maiintindihan ang advanced na konfigurasyon ng logging at mga teknik sa pagsusuri ng log
+- Makakapagpatupad ng mga estratehiya sa pag-profile ng performance at monitoring
+- Magagamit ang mga kasangkapan at serbisyo ng Azure para sa paglutas ng mga kumplikadong problema
 - Makakapag-apply ng mga teknik sa pag-debug ng network at seguridad
 - Makakapag-configure ng komprehensibong monitoring at alerting para sa maagang pagtuklas ng mga isyu
 
 ## Mga Resulta ng Pag-aaral
 
-Sa pagtatapos, ikaw ay magiging:
-- Bihasa sa paggamit ng TRIAGE methodology para sistematikong i-debug ang mga komplikadong isyu sa deployment
-- Marunong mag-configure at magsuri ng komprehensibong logging at tracing information
-- Epektibong magagamit ang Azure Monitor, Application Insights, at mga diagnostic tools
-- Makakapag-debug ng mga isyu sa network connectivity, authentication, at permission nang mag-isa
-- Makakapagpatupad ng mga estratehiya sa performance monitoring at optimization
-- Makakagawa ng mga custom debugging scripts at automation para sa mga paulit-ulit na isyu
+Sa pagtatapos, magagawa mong:
+- I-apply ang TRIAGE methodology para sistematikong i-debug ang mga kumplikadong isyu sa deployment
+- I-configure at suriin ang komprehensibong impormasyon sa logging at tracing
+- Epektibong magamit ang Azure Monitor, Application Insights, at mga kasangkapan sa diagnostic
+- Mag-debug ng mga isyu sa koneksyon ng network, authentication, at mga pahintulot nang mag-isa
+- Magpatupad ng mga estratehiya sa monitoring at pag-optimize ng performance
+- Gumawa ng mga custom na script sa pag-debug at automation para sa mga paulit-ulit na isyu
 
 ## Pamamaraan sa Pag-debug
 
 ### Ang TRIAGE Approach
 - **T**ime: Kailan nagsimula ang isyu?
-- **R**eproduce: Maaari bang paulit-ulit itong mangyari?
-- **I**solate: Aling bahagi ang may problema?
+- **R**eproduce: Maaari mo bang paulit-ulit itong ma-reproduce?
+- **I**solate: Aling bahagi ang nagkakaroon ng problema?
 - **A**nalyze: Ano ang sinasabi ng mga log?
 - **G**ather: Kolektahin ang lahat ng kaugnay na impormasyon
 - **E**scalate: Kailan dapat humingi ng karagdagang tulong
@@ -59,7 +59,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Debug Configuration
+### Konfigurasyon ng Debug
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -73,7 +73,7 @@ azd config set trace.outputPath ./debug-traces
 
 ## 📊 Mga Teknik sa Pagsusuri ng Log
 
-### Pag-unawa sa Log Levels
+### Pag-unawa sa Mga Log Level
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -121,9 +121,9 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Mga Advanced na Tools sa Pag-debug
+## 🛠️ Mga Advanced na Kasangkapan sa Pag-debug
 
-### Azure Resource Graph Queries
+### Mga Query sa Azure Resource Graph
 ```bash
 # Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
@@ -176,7 +176,7 @@ debug_container() {
 }
 ```
 
-### Pag-debug ng Database Connection
+### Pag-debug ng Koneksyon sa Database
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -197,7 +197,7 @@ debug_database() {
 
 ## 🔬 Pag-debug ng Performance
 
-### Application Performance Monitoring
+### Monitoring ng Performance ng Application
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -255,7 +255,7 @@ monitor_resources() {
 }
 ```
 
-## 🧪 Pagsusuri at Pag-validate
+## 🧪 Pagsusuri at Pagpapatunay
 
 ### Pag-debug ng Integration Test
 ```bash
@@ -451,7 +451,7 @@ debug_network_security() {
 }
 ```
 
-## 📱 Pag-debug na Nakatuon sa Aplikasyon
+## 📱 Pag-debug na Nakatuon sa Application
 
 ### Pag-debug ng Node.js Application
 ```javascript
@@ -514,7 +514,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 Mga Pamamaraan sa Emergency Debugging
 
-### Tugon sa Production Issue
+### Tugon sa Isyu sa Production
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -651,12 +651,12 @@ aggregate_logs() {
 
 ## 🔗 Mga Advanced na Resources
 
-### Custom Debug Scripts
-Gumawa ng `scripts/debug/` directory na may:
+### Mga Custom na Debug Script
+Gumawa ng `scripts/debug/` na direktoryo na may:
 - `health-check.sh` - Komprehensibong pagsusuri ng kalusugan
 - `performance-test.sh` - Automated na pagsusuri ng performance
-- `log-analyzer.py` - Advanced na pagsusuri at pag-parse ng log
-- `resource-validator.sh` - Pag-validate ng infrastructure
+- `log-analyzer.py` - Advanced na pag-parse at pagsusuri ng log
+- `resource-validator.sh` - Pagpapatunay ng infrastructure
 
 ### Monitoring Integration
 ```yaml
@@ -678,30 +678,31 @@ hooks:
 ## Mga Best Practices
 
 1. **Laging i-enable ang debug logging** sa mga non-production environment
-2. **Gumawa ng mga reproducible test cases** para sa mga isyu
+2. **Gumawa ng mga reproducible test case** para sa mga isyu
 3. **I-dokumenta ang mga pamamaraan sa pag-debug** para sa iyong team
-4. **I-automate ang health checks** at monitoring
-5. **Panatilihing updated ang mga debug tools** kasabay ng mga pagbabago sa iyong application
-6. **Magpraktis ng mga pamamaraan sa pag-debug** sa panahon na walang insidente
+4. **I-automate ang mga health check** at monitoring
+5. **Panatilihing updated ang mga kasangkapan sa pag-debug** kasabay ng mga pagbabago sa iyong application
+6. **Sanayin ang mga pamamaraan sa pag-debug** sa mga oras na walang insidente
 
 ## Mga Susunod na Hakbang
 
-- [Capacity Planning](../pre-deployment/capacity-planning.md) - Planuhin ang mga kinakailangang resources
+- [Capacity Planning](../pre-deployment/capacity-planning.md) - Planuhin ang mga kinakailangang resource
 - [SKU Selection](../pre-deployment/sku-selection.md) - Pumili ng naaangkop na service tiers
-- [Preflight Checks](../pre-deployment/preflight-checks.md) - Pre-deployment validation
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Mabilisang reference ng mga commands
+- [Preflight Checks](../pre-deployment/preflight-checks.md) - Pagpapatunay bago ang deployment
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Mabilisang reference para sa mga command
 
 ---
 
-**Tandaan**: Ang mahusay na pag-debug ay tungkol sa pagiging sistematiko, masusi, at matiyaga. Ang mga tools at teknik na ito ay makakatulong sa iyo na mas mabilis at mas epektibong ma-diagnose ang mga isyu.
+**Tandaan**: Ang mahusay na pag-debug ay tungkol sa pagiging sistematiko, masusi, at matiyaga. Ang mga kasangkapan at teknik na ito ay makakatulong sa iyo na mas mabilis at mas epektibong mag-diagnose ng mga isyu.
 
 ---
 
 **Navigation**
 - **Nakaraang Aralin**: [Common Issues](common-issues.md)
+
 - **Susunod na Aralin**: [Capacity Planning](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

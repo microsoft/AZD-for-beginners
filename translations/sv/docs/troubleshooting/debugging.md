@@ -1,27 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:50:18+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:18:50+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "sv"
 }
 -->
-# Felsökningsguide - Avancerade felsökningstekniker
+# Felsökningsguide - Avancerade tekniker för logganalys
 
 ## Introduktion
 
-Denna omfattande guide ger avancerade strategier, verktyg och tekniker för att diagnostisera och lösa komplexa problem med Azure Developer CLI-distributioner. Lär dig systematiska felsökningsmetoder, logganalystekniker, prestandaprofilering och avancerade diagnostikverktyg för att effektivt lösa distributions- och körningsproblem.
+Denna omfattande guide ger avancerade felsökningsstrategier, verktyg och tekniker för att diagnostisera och lösa komplexa problem med Azure Developer CLI-distributioner. Lär dig systematiska felsökningsmetoder, tekniker för logganalys, prestandaprofilering och avancerade diagnostikverktyg för att effektivt lösa distributions- och körningsproblem.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
 - Bemästra systematiska felsökningsmetoder för problem med Azure Developer CLI
-- Förstå avancerad loggkonfiguration och logganalystekniker
+- Förstå avancerad loggkonfiguration och tekniker för logganalys
 - Implementera strategier för prestandaprofilering och övervakning
 - Använda Azure diagnostikverktyg och tjänster för att lösa komplexa problem
 - Tillämpa nätverksfelsökning och säkerhetsfelsökningstekniker
-- Konfigurera omfattande övervakning och varningar för proaktiv problemidentifiering
+- Konfigurera omfattande övervakning och varningar för proaktiv upptäckt av problem
 
 ## Läranderesultat
 
@@ -71,7 +71,7 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Logganalystekniker
+## 📊 Tekniker för logganalys
 
 ### Förstå loggnivåer
 ```
@@ -156,7 +156,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Containerfelsökning
+### Felsökning av containrar
 ```bash
 # Debug container app issues
 debug_container() {
@@ -197,7 +197,7 @@ debug_database() {
 
 ## 🔬 Prestandafelsökning
 
-### Applikationsövervakning av prestanda
+### Övervakning av applikationsprestanda
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -512,9 +512,9 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Nödfelsökningsprocedurer
+## 🚨 Akuta felsökningsprocedurer
 
-### Hantering av produktionsproblem
+### Respons på produktionsproblem
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -656,7 +656,7 @@ Skapa en `scripts/debug/`-katalog med:
 - `health-check.sh` - Omfattande hälsokontroll
 - `performance-test.sh` - Automatiserad prestandatestning
 - `log-analyzer.py` - Avancerad loggparsing och analys
-- `resource-validator.sh` - Infrastrukturvalidering
+- `resource-validator.sh` - Validering av infrastruktur
 
 ### Övervakningsintegration
 ```yaml
@@ -699,9 +699,10 @@ hooks:
 
 **Navigering**
 - **Föregående lektion**: [Vanliga problem](common-issues.md)
+
 - **Nästa lektion**: [Kapacitetsplanering](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

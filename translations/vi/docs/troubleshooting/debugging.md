@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:52:07+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:20:33+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "vi"
 }
 -->
-# Hướng Dẫn Gỡ Lỗi - Kỹ Thuật Xử Lý Sự Cố Nâng Cao
+# Hướng Dẫn Gỡ Lỗi - Kỹ Thuật Phân Tích Nhật Ký Xử Lý Sự Cố Nâng Cao
 
 ## Giới Thiệu
 
@@ -15,29 +15,29 @@ Hướng dẫn toàn diện này cung cấp các chiến lược, công cụ, v�
 
 ## Mục Tiêu Học Tập
 
-Khi hoàn thành hướng dẫn này, bạn sẽ:
+Sau khi hoàn thành hướng dẫn này, bạn sẽ:
 - Thành thạo các phương pháp gỡ lỗi có hệ thống cho các vấn đề Azure Developer CLI
 - Hiểu cấu hình nhật ký nâng cao và kỹ thuật phân tích nhật ký
-- Áp dụng chiến lược giám sát và phân tích hiệu suất
+- Áp dụng chiến lược phân tích hiệu suất và giám sát
 - Sử dụng các công cụ và dịch vụ chẩn đoán của Azure để giải quyết các vấn đề phức tạp
 - Áp dụng kỹ thuật gỡ lỗi mạng và xử lý sự cố bảo mật
-- Cấu hình giám sát toàn diện và cảnh báo để phát hiện vấn đề một cách chủ động
+- Cấu hình giám sát toàn diện và cảnh báo để phát hiện vấn đề chủ động
 
 ## Kết Quả Học Tập
 
-Sau khi hoàn thành, bạn sẽ có khả năng:
+Sau khi hoàn thành, bạn sẽ có thể:
 - Áp dụng phương pháp TRIAGE để gỡ lỗi có hệ thống các vấn đề triển khai phức tạp
 - Cấu hình và phân tích thông tin nhật ký và truy vết toàn diện
-- Sử dụng hiệu quả Azure Monitor, Application Insights, và các công cụ chẩn đoán
-- Gỡ lỗi các vấn đề kết nối mạng, xác thực, và quyền truy cập một cách độc lập
+- Sử dụng Azure Monitor, Application Insights, và các công cụ chẩn đoán một cách hiệu quả
+- Gỡ lỗi các vấn đề về kết nối mạng, xác thực, và quyền truy cập một cách độc lập
 - Áp dụng chiến lược giám sát và tối ưu hóa hiệu suất
 - Tạo các script gỡ lỗi tùy chỉnh và tự động hóa cho các vấn đề lặp lại
 
 ## Phương Pháp Gỡ Lỗi
 
 ### Phương Pháp TRIAGE
-- **T**hời gian: Vấn đề bắt đầu từ khi nào?
-- **R**eproduce: Bạn có thể tái hiện vấn đề một cách nhất quán không?
+- **T**ime: Vấn đề bắt đầu từ khi nào?
+- **R**eproduce: Có thể tái hiện vấn đề một cách nhất quán không?
 - **I**solate: Thành phần nào đang gặp lỗi?
 - **A**nalyze: Nhật ký cho chúng ta biết điều gì?
 - **G**ather: Thu thập tất cả thông tin liên quan
@@ -514,7 +514,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 Quy Trình Gỡ Lỗi Khẩn Cấp
 
-### Phản Hồi Vấn Đề Sản Xuất
+### Phản Hồi Sự Cố Sản Xuất
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -684,12 +684,12 @@ hooks:
 5. **Cập nhật công cụ gỡ lỗi** theo thay đổi của ứng dụng
 6. **Thực hành quy trình gỡ lỗi** trong thời gian không có sự cố
 
-## Bước Tiếp Theo
+## Các Bước Tiếp Theo
 
 - [Lập Kế Hoạch Năng Lực](../pre-deployment/capacity-planning.md) - Lập kế hoạch yêu cầu tài nguyên
 - [Lựa Chọn SKU](../pre-deployment/sku-selection.md) - Chọn cấp dịch vụ phù hợp
-- [Kiểm Tra Trước Khi Triển Khai](../pre-deployment/preflight-checks.md) - Xác thực trước khi triển khai
-- [Tài Liệu Tóm Tắt](../../resources/cheat-sheet.md) - Lệnh tham khảo nhanh
+- [Kiểm Tra Trước Triển Khai](../pre-deployment/preflight-checks.md) - Xác thực trước triển khai
+- [Tài Liệu Tham Khảo Nhanh](../../resources/cheat-sheet.md) - Các lệnh tham khảo nhanh
 
 ---
 
@@ -699,9 +699,10 @@ hooks:
 
 **Điều Hướng**
 - **Bài Học Trước**: [Các Vấn Đề Thường Gặp](common-issues.md)
+
 - **Bài Học Tiếp Theo**: [Lập Kế Hoạch Năng Lực](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

@@ -1,26 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:50:35+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:19:07+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "da"
 }
 -->
-# Fejlfindingsguide - Avancerede Fejlfindingsmetoder
+# Fejlfindingsguide - Avancerede teknikker til loganalyse
 
 ## Introduktion
 
-Denne omfattende guide giver avancerede strategier, værktøjer og teknikker til fejlfinding og løsning af komplekse problemer med Azure Developer CLI-implementeringer. Lær systematiske fejlfindingmetoder, loganalyse-teknikker, performanceprofilering og avancerede diagnostiske værktøjer til effektivt at løse implementerings- og runtime-problemer.
+Denne omfattende guide giver avancerede strategier, værktøjer og teknikker til fejlfinding af komplekse problemer med Azure Developer CLI-implementeringer. Lær systematiske metoder til fejlfinding, loganalyse, performanceprofilering og avancerede diagnostiske værktøjer til effektivt at løse implementerings- og runtimeproblemer.
 
 ## Læringsmål
 
 Ved at gennemføre denne guide vil du:
-- Mestre systematiske fejlfindingmetoder for Azure Developer CLI-problemer
-- Forstå avanceret logkonfiguration og loganalyse-teknikker
-- Implementere strategier for performanceprofilering og overvågning
-- Bruge Azure-diagnostiske værktøjer og tjenester til løsning af komplekse problemer
-- Anvende netværksfejlfinding og sikkerhedsfejlfindingsmetoder
+- Mestre systematiske metoder til fejlfinding af Azure Developer CLI-problemer
+- Forstå avanceret logkonfiguration og loganalysestrategier
+- Implementere performanceprofilering og overvågningsstrategier
+- Bruge Azure-diagnostiske værktøjer og tjenester til at løse komplekse problemer
+- Anvende netværksfejlfinding og sikkerhedsrelaterede teknikker
 - Konfigurere omfattende overvågning og alarmering for proaktiv problemregistrering
 
 ## Læringsresultater
@@ -29,9 +29,9 @@ Efter afslutning vil du kunne:
 - Anvende TRIAGE-metoden til systematisk fejlfinding af komplekse implementeringsproblemer
 - Konfigurere og analysere omfattende log- og sporingsinformation
 - Effektivt bruge Azure Monitor, Application Insights og diagnostiske værktøjer
-- Fejlsøge netværksforbindelse, autentificering og tilladelsesproblemer uafhængigt
-- Implementere strategier for performanceovervågning og optimering
-- Oprette brugerdefinerede fejlfindingsscripts og automatisering til tilbagevendende problemer
+- Fejlsøge netværksforbindelse, autentificering og tilladelsesproblemer selvstændigt
+- Implementere performanceovervågning og optimeringsstrategier
+- Oprette brugerdefinerede scripts og automatisering til tilbagevendende problemer
 
 ## Fejlfindingsmetode
 
@@ -39,11 +39,11 @@ Efter afslutning vil du kunne:
 - **T**id: Hvornår startede problemet?
 - **R**eproducer: Kan du konsekvent genskabe det?
 - **I**soler: Hvilken komponent fejler?
-- **A**nalyser: Hvad fortæller loggene os?
+- **A**nalyser: Hvad fortæller logfilerne os?
 - **S**aml: Indsaml alle relevante oplysninger
 - **E**skalér: Hvornår skal du søge yderligere hjælp?
 
-## Aktivering af fejlfindingstilstand
+## Aktivering af fejlsøgningstilstand
 
 ### Miljøvariabler
 ```bash
@@ -59,7 +59,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Fejlfindingskonfiguration
+### Fejlsøgningskonfiguration
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -71,9 +71,9 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Loganalyse-teknikker
+## 📊 Loganalysestrategier
 
-### Forståelse af logniveauer
+### Forstå logniveauer
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -121,7 +121,7 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Avancerede Fejlfindingsværktøjer
+## 🛠️ Avancerede fejlsøgningsværktøjer
 
 ### Azure Resource Graph-forespørgsler
 ```bash
@@ -135,7 +135,7 @@ az graph query -q "ResourceContainers | where type == 'microsoft.resources/resou
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Netværksfejlfinding
+### Netværksfejlsøgning
 ```bash
 # Test connectivity between services
 test_connectivity() {
@@ -156,7 +156,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Container-fejlfinding
+### Container-fejlsøgning
 ```bash
 # Debug container app issues
 debug_container() {
@@ -176,7 +176,7 @@ debug_container() {
 }
 ```
 
-### Fejlfinding af databaseforbindelser
+### Fejlsøgning af databaseforbindelser
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,7 +195,7 @@ debug_database() {
 }
 ```
 
-## 🔬 Performance-fejlfinding
+## 🔬 Performance-fejlsøgning
 
 ### Overvågning af applikationsperformance
 ```bash
@@ -257,7 +257,7 @@ monitor_resources() {
 
 ## 🧪 Test og validering
 
-### Fejlfinding af integrationstest
+### Fejlsøgning af integrationstest
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -306,7 +306,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Belastningstest til fejlfinding
+### Belastningstest til fejlsøgning
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -328,9 +328,9 @@ load_test() {
 }
 ```
 
-## 🔧 Infrastruktur-fejlfinding
+## 🔧 Infrastruktur-fejlsøgning
 
-### Fejlfinding af Bicep-skabeloner
+### Fejlsøgning af Bicep-skabeloner
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -397,9 +397,9 @@ analyze_resources() {
 }
 ```
 
-## 🔒 Sikkerhedsfejlfinding
+## 🔒 Sikkerhedsfejlsøgning
 
-### Fejlfinding af autentificeringsflow
+### Fejlsøgning af autentificeringsflow
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -433,7 +433,7 @@ debug_keyvault() {
 }
 ```
 
-### Fejlfinding af netværkssikkerhed
+### Fejlsøgning af netværkssikkerhed
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -451,9 +451,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 Applikationsspecifik fejlfinding
+## 📱 Applikationsspecifik fejlsøgning
 
-### Fejlfinding af Node.js-applikationer
+### Fejlsøgning af Node.js-applikationer
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -482,7 +482,7 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Fejlfinding af databaseforespørgsler
+### Fejlsøgning af databaseforespørgsler
 ```javascript
 // database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
@@ -512,7 +512,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Nødprocedurer for fejlfinding
+## 🚨 Nødprocedurer for fejlsøgning
 
 ### Respons på produktionsproblemer
 ```bash
@@ -602,7 +602,7 @@ quick_rollback() {
 }
 ```
 
-## 📊 Fejlfindingsdashboard
+## 📊 Fejlsøgningsdashboard
 
 ### Brugerdefineret overvågningsdashboard
 ```bash
@@ -651,7 +651,7 @@ aggregate_logs() {
 
 ## 🔗 Avancerede ressourcer
 
-### Brugerdefinerede fejlfindingsscripts
+### Brugerdefinerede fejlsøgningsscripts
 Opret en `scripts/debug/`-mappe med:
 - `health-check.sh` - Omfattende sundhedstjek
 - `performance-test.sh` - Automatiseret performancetest
@@ -679,10 +679,10 @@ hooks:
 
 1. **Aktivér altid fejllogning** i ikke-produktionsmiljøer
 2. **Opret reproducerbare testcases** for problemer
-3. **Dokumentér fejlfindingsprocedurer** for dit team
+3. **Dokumentér fejlsøgningsprocedurer** for dit team
 4. **Automatisér sundhedstjek** og overvågning
-5. **Hold fejlfindingsværktøjer opdateret** med dine applikationsændringer
-6. **Øv fejlfindingsprocedurer** i ikke-incident tider
+5. **Hold fejlsøgningsværktøjer opdateret** med dine applikationsændringer
+6. **Øv fejlsøgningsprocedurer** i ikke-incident tider
 
 ## Næste trin
 
@@ -693,12 +693,13 @@ hooks:
 
 ---
 
-**Husk**: God fejlfinding handler om at være systematisk, grundig og tålmodig. Disse værktøjer og teknikker vil hjælpe dig med at diagnosticere problemer hurtigere og mere effektivt.
+**Husk**: God fejlsøgning handler om at være systematisk, grundig og tålmodig. Disse værktøjer og teknikker vil hjælpe dig med at diagnosticere problemer hurtigere og mere effektivt.
 
 ---
 
 **Navigation**
 - **Forrige lektion**: [Almindelige problemer](common-issues.md)
+
 - **Næste lektion**: [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md)
 
 ---

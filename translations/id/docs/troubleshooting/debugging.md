@@ -1,35 +1,35 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:52:26+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:20:53+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "id"
 }
 -->
-# Panduan Debugging - Teknik Pemecahan Masalah Lanjutan
+# Panduan Debugging - Teknik Analisis Log Pemecahan Masalah Lanjutan
 
 ## Pendahuluan
 
-Panduan lengkap ini menyediakan strategi debugging lanjutan, alat, dan teknik untuk mendiagnosis dan menyelesaikan masalah kompleks dalam penerapan Azure Developer CLI. Pelajari metodologi pemecahan masalah yang sistematis, teknik analisis log, profiling kinerja, dan alat diagnostik lanjutan untuk menyelesaikan masalah penerapan dan runtime secara efisien.
+Panduan komprehensif ini menyediakan strategi debugging lanjutan, alat, dan teknik untuk mendiagnosis dan menyelesaikan masalah kompleks dalam penerapan Azure Developer CLI. Pelajari metodologi pemecahan masalah yang sistematis, teknik analisis log, profil kinerja, dan alat diagnostik lanjutan untuk menyelesaikan masalah penerapan dan runtime secara efisien.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
 - Menguasai metodologi debugging sistematis untuk masalah Azure Developer CLI
 - Memahami konfigurasi logging lanjutan dan teknik analisis log
-- Menerapkan strategi profiling kinerja dan pemantauan
-- Menggunakan alat diagnostik dan layanan Azure untuk menyelesaikan masalah kompleks
-- Menerapkan teknik debugging jaringan dan keamanan
-- Mengonfigurasi pemantauan dan pemberitahuan yang komprehensif untuk deteksi masalah secara proaktif
+- Menerapkan strategi profil kinerja dan pemantauan
+- Menggunakan alat dan layanan diagnostik Azure untuk menyelesaikan masalah kompleks
+- Menerapkan teknik debugging jaringan dan pemecahan masalah keamanan
+- Mengonfigurasi pemantauan dan peringatan yang komprehensif untuk deteksi masalah secara proaktif
 
 ## Hasil Pembelajaran
 
 Setelah selesai, Anda akan dapat:
-- Menerapkan metodologi TRIAGE untuk debugging sistematis masalah penerapan yang kompleks
+- Menerapkan metodologi TRIAGE untuk secara sistematis memecahkan masalah penerapan yang kompleks
 - Mengonfigurasi dan menganalisis informasi logging dan tracing yang komprehensif
 - Menggunakan Azure Monitor, Application Insights, dan alat diagnostik secara efektif
-- Melakukan debugging masalah konektivitas jaringan, autentikasi, dan izin secara mandiri
+- Memecahkan masalah konektivitas jaringan, autentikasi, dan izin secara mandiri
 - Menerapkan strategi pemantauan dan optimasi kinerja
 - Membuat skrip debugging khusus dan otomatisasi untuk masalah yang berulang
 
@@ -681,14 +681,14 @@ hooks:
 2. **Buat kasus uji yang dapat direproduksi** untuk masalah
 3. **Dokumentasikan prosedur debugging** untuk tim Anda
 4. **Otomatiskan pemeriksaan kesehatan** dan pemantauan
-5. **Perbarui alat debugging** sesuai perubahan aplikasi Anda
+5. **Perbarui alat debugging** sesuai dengan perubahan aplikasi Anda
 6. **Latih prosedur debugging** selama waktu non-insiden
 
 ## Langkah Selanjutnya
 
 - [Perencanaan Kapasitas](../pre-deployment/capacity-planning.md) - Rencanakan kebutuhan sumber daya
 - [Pemilihan SKU](../pre-deployment/sku-selection.md) - Pilih tingkat layanan yang sesuai
-- [Pemeriksaan Pra-Penerapan](../pre-deployment/preflight-checks.md) - Validasi pra-penerapan
+- [Pemeriksaan Awal](../pre-deployment/preflight-checks.md) - Validasi sebelum penerapan
 - [Lembar Cheat](../../resources/cheat-sheet.md) - Referensi cepat perintah
 
 ---
@@ -699,6 +699,7 @@ hooks:
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Masalah Umum](common-issues.md)
+
 - **Pelajaran Selanjutnya**: [Perencanaan Kapasitas](../pre-deployment/capacity-planning.md)
 
 ---

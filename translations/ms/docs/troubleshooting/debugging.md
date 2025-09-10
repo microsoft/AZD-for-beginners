@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:52:41+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:21:10+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ms"
 }
 -->
-# Panduan Debugging - Teknik Penyelesaian Masalah Lanjutan
+# Panduan Debugging - Teknik Analisis Log Penyelesaian Masalah Lanjutan
 
 ## Pengenalan
 
-Panduan komprehensif ini menyediakan strategi debugging lanjutan, alat, dan teknik untuk mendiagnosis dan menyelesaikan masalah kompleks dengan pengedaran Azure Developer CLI. Pelajari metodologi penyelesaian masalah secara sistematik, teknik analisis log, profil prestasi, dan alat diagnostik lanjutan untuk menyelesaikan masalah pengedaran dan runtime dengan cekap.
+Panduan komprehensif ini menyediakan strategi debugging lanjutan, alat, dan teknik untuk mendiagnosis dan menyelesaikan isu kompleks dengan pengedaran Azure Developer CLI. Pelajari metodologi penyelesaian masalah secara sistematik, teknik analisis log, profil prestasi, dan alat diagnostik lanjutan untuk menyelesaikan isu pengedaran dan runtime dengan cekap.
 
 ## Matlamat Pembelajaran
 
@@ -19,14 +19,14 @@ Dengan melengkapkan panduan ini, anda akan:
 - Menguasai metodologi debugging sistematik untuk isu Azure Developer CLI
 - Memahami konfigurasi log lanjutan dan teknik analisis log
 - Melaksanakan strategi profil prestasi dan pemantauan
-- Menggunakan alat diagnostik dan perkhidmatan Azure untuk penyelesaian masalah kompleks
+- Menggunakan alat dan perkhidmatan diagnostik Azure untuk penyelesaian masalah kompleks
 - Menerapkan teknik debugging rangkaian dan penyelesaian masalah keselamatan
-- Mengkonfigurasi pemantauan dan amaran yang komprehensif untuk pengesanan isu secara proaktif
+- Mengkonfigurasi pemantauan dan amaran komprehensif untuk pengesanan isu secara proaktif
 
 ## Hasil Pembelajaran
 
 Setelah selesai, anda akan dapat:
-- Menggunakan metodologi TRIAGE untuk debugging isu pengedaran kompleks secara sistematik
+- Menerapkan metodologi TRIAGE untuk debugging isu pengedaran kompleks secara sistematik
 - Mengkonfigurasi dan menganalisis maklumat log dan penjejakan yang komprehensif
 - Menggunakan Azure Monitor, Application Insights, dan alat diagnostik dengan berkesan
 - Debug isu sambungan rangkaian, pengesahan, dan kebenaran secara bebas
@@ -514,7 +514,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 Prosedur Debugging Kecemasan
 
-### Tindak Balas Isu Pengeluaran
+### Respons Isu Pengeluaran
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -681,8 +681,8 @@ hooks:
 2. **Buat kes ujian yang boleh dihasilkan semula** untuk isu
 3. **Dokumentasikan prosedur debugging** untuk pasukan anda
 4. **Automasi pemeriksaan kesihatan** dan pemantauan
-5. **Pastikan alat debug dikemas kini** dengan perubahan aplikasi anda
-6. **Latih prosedur debugging** semasa masa bukan insiden
+5. **Pastikan alat debugging dikemas kini** dengan perubahan aplikasi anda
+6. **Latih prosedur debugging** semasa waktu bukan insiden
 
 ## Langkah Seterusnya
 
@@ -699,9 +699,10 @@ hooks:
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Isu Umum](common-issues.md)
+
 - **Pelajaran Seterusnya**: [Perancangan Kapasiti](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
