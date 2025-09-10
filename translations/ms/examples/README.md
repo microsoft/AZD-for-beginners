@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:14:11+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:21:36+00:00",
   "source_file": "examples/README.md",
   "language_code": "ms"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pengenalan
 
-Direktori ini mengandungi contoh praktikal, templat, dan senario dunia sebenar untuk membantu anda mempelajari Azure Developer CLI melalui latihan secara langsung. Setiap contoh menyediakan kod kerja lengkap, templat infrastruktur, dan arahan terperinci untuk pelbagai seni bina aplikasi dan corak penyebaran.
+Direktori ini mengandungi contoh praktikal, templat, dan senario dunia sebenar untuk membantu anda mempelajari Azure Developer CLI melalui latihan secara langsung. Setiap contoh menyediakan kod lengkap yang berfungsi, templat infrastruktur, dan arahan terperinci untuk pelbagai seni bina aplikasi dan corak penyebaran.
 
 ## Matlamat Pembelajaran
 
@@ -21,11 +21,11 @@ Dengan mengerjakan contoh-contoh ini, anda akan:
 - Menguasai corak Infrastructure as Code untuk pelbagai perkhidmatan Azure
 - Menerapkan pengurusan konfigurasi dan strategi penyebaran khusus persekitaran
 - Melaksanakan corak pemantauan, keselamatan, dan penskalaan dalam konteks praktikal
-- Membina pengalaman dengan penyelesaian masalah dan debugging senario penyebaran sebenar
+- Membangun pengalaman dengan penyelesaian masalah dan debugging senario penyebaran sebenar
 
 ## Hasil Pembelajaran
 
-Setelah melengkapkan contoh-contoh ini, anda akan dapat:
+Setelah menyelesaikan contoh-contoh ini, anda akan dapat:
 - Menyebarkan pelbagai jenis aplikasi menggunakan Azure Developer CLI dengan yakin
 - Menyesuaikan templat yang disediakan kepada keperluan aplikasi anda sendiri
 - Merancang dan melaksanakan corak infrastruktur tersuai menggunakan Bicep
@@ -135,7 +135,7 @@ Setiap contoh termasuk:
 - Aplikasi satu perkhidmatan
 - Corak infrastruktur mudah
 - Pengurusan konfigurasi asas
-- Tetapan pembangunan kos efektif
+- Tetapan pembangunan yang kos efektif
 
 #### **Senario Lanjutan**
 - Seni bina multi-perkhidmatan
@@ -262,7 +262,7 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
    - Fahami rentetan sambungan
    - Berlatih pengurusan rahsia
 
-5. **Terokai Tanpa Pelayan**
+5. **Terokai Fungsi Tanpa Pelayan**
    - Fahami seni bina berasaskan acara
    - Pelajari tentang pencetus dan pengikatan
    - Berlatih dengan API
@@ -296,13 +296,14 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
 ## 📚 Sumber Tambahan
 
 ### Pautan Dokumentasi
-- [Spesifikasi Templat AZD](https://aka.ms/azd/templates)
+- [Templat AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentasi Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Contoh Komuniti
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galeri Templat AZD](https://azure.github.io/awesome-azd/)
+- [Templat AZD Contoh Azure](https://github.com/Azure-Samples/azd-templates)
+- [Templat Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Galeri Azure Developer CLI](https://azure.github.io/awesome-azd/)
 
 ### Amalan Terbaik
 - [Kerangka Seni Bina Azure yang Baik](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -335,7 +336,7 @@ example-name/
 
 ---
 
-**Tip Pro**: Mulakan dengan contoh paling mudah yang sesuai dengan teknologi anda, kemudian secara beransur-ansur tingkatkan kepada senario yang lebih kompleks. Setiap contoh membina konsep daripada yang sebelumnya!
+**Tip Profesional**: Mulakan dengan contoh paling mudah yang sesuai dengan teknologi anda, kemudian secara beransur-ansur tingkatkan kepada senario yang lebih kompleks. Setiap contoh membina konsep daripada yang sebelumnya!
 
 **Langkah Seterusnya**: 
 - Pilih contoh yang sesuai dengan tahap kemahiran anda
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

@@ -1,27 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:13:10+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:20:32+00:00",
   "source_file": "examples/README.md",
   "language_code": "vi"
 }
 -->
-# Ví dụ - Mẫu và Cấu hình AZD Thực Tiễn
+# Ví dụ - Mẫu và Cấu hình AZD Thực tiễn
 
 ## Giới thiệu
 
-Thư mục này chứa các ví dụ thực tiễn, mẫu, và tình huống thực tế để giúp bạn học Azure Developer CLI thông qua thực hành. Mỗi ví dụ cung cấp mã hoạt động hoàn chỉnh, mẫu hạ tầng, và hướng dẫn chi tiết cho các kiến trúc ứng dụng và mô hình triển khai khác nhau.
+Thư mục này chứa các ví dụ thực tiễn, mẫu và tình huống thực tế để giúp bạn học Azure Developer CLI thông qua thực hành. Mỗi ví dụ cung cấp mã hoạt động đầy đủ, mẫu hạ tầng và hướng dẫn chi tiết cho các kiến trúc ứng dụng và mô hình triển khai khác nhau.
 
 ## Mục tiêu học tập
 
-Khi làm việc qua các ví dụ này, bạn sẽ:
+Khi làm việc với các ví dụ này, bạn sẽ:
 - Thực hành quy trình làm việc của Azure Developer CLI với các tình huống ứng dụng thực tế
 - Hiểu các kiến trúc ứng dụng khác nhau và cách triển khai chúng với azd
 - Thành thạo các mô hình Infrastructure as Code cho nhiều dịch vụ Azure
 - Áp dụng quản lý cấu hình và chiến lược triển khai theo môi trường cụ thể
-- Thực hiện các mô hình giám sát, bảo mật, và mở rộng trong các ngữ cảnh thực tế
-- Xây dựng kinh nghiệm với việc khắc phục sự cố và gỡ lỗi các tình huống triển khai thực tế
+- Thực hiện các mô hình giám sát, bảo mật và mở rộng trong các ngữ cảnh thực tế
+- Xây dựng kinh nghiệm xử lý sự cố và gỡ lỗi các tình huống triển khai thực tế
 
 ## Kết quả học tập
 
@@ -30,8 +30,8 @@ Sau khi hoàn thành các ví dụ này, bạn sẽ có thể:
 - Tùy chỉnh các mẫu được cung cấp theo yêu cầu ứng dụng của bạn
 - Thiết kế và triển khai các mô hình hạ tầng tùy chỉnh bằng Bicep
 - Cấu hình các ứng dụng đa dịch vụ phức tạp với các phụ thuộc phù hợp
-- Áp dụng các thực tiễn tốt nhất về bảo mật, giám sát, và hiệu suất trong các tình huống thực tế
-- Khắc phục sự cố và tối ưu hóa triển khai dựa trên kinh nghiệm thực tế
+- Áp dụng các thực tiễn tốt nhất về bảo mật, giám sát và hiệu suất trong các tình huống thực tế
+- Xử lý sự cố và tối ưu hóa triển khai dựa trên kinh nghiệm thực tế
 
 ## Cấu trúc thư mục
 
@@ -74,15 +74,15 @@ examples/
     └── scripts/
 ```
 
-## Ví dụ Bắt Đầu Nhanh
+## Ví dụ Bắt đầu Nhanh
 
 ### Dành cho Người Mới Bắt Đầu
-1. **[Ứng dụng Web Đơn Giản](../../../examples/simple-web-app)** - Triển khai một ứng dụng web Node.js cơ bản
-2. **[Website Tĩnh](../../../examples/static-website)** - Lưu trữ một website tĩnh trên Azure Storage
-3. **[Ứng dụng Container](../../../examples/container-app)** - Triển khai một ứng dụng container hóa
+1. **[Ứng dụng Web Đơn giản](../../../examples/simple-web-app)** - Triển khai ứng dụng web Node.js cơ bản
+2. **[Trang Web Tĩnh](../../../examples/static-website)** - Lưu trữ trang web tĩnh trên Azure Storage
+3. **[Ứng dụng Container](../../../examples/container-app)** - Triển khai ứng dụng container hóa
 
 ### Dành cho Người Dùng Trung Cấp
-4. **[Ứng dụng Cơ Sở Dữ Liệu](../../../examples/database-app)** - Ứng dụng web với cơ sở dữ liệu PostgreSQL
+4. **[Ứng dụng Cơ sở Dữ liệu](../../../examples/database-app)** - Ứng dụng web với cơ sở dữ liệu PostgreSQL
 5. **[Hàm Serverless](../../../examples/serverless-function)** - Azure Functions với các trigger HTTP
 6. **[Microservices](../../../examples/microservices)** - Ứng dụng đa dịch vụ với API gateway
 
@@ -121,29 +121,29 @@ examples/
 ### Tùy chỉnh Ví dụ
 
 Mỗi ví dụ bao gồm:
-- **README.md** - Hướng dẫn chi tiết về thiết lập và tùy chỉnh
+- **README.md** - Hướng dẫn thiết lập và tùy chỉnh chi tiết
 - **azure.yaml** - Cấu hình AZD với các chú thích
 - **infra/** - Mẫu Bicep với giải thích tham số
 - **src/** - Mã ứng dụng mẫu
-- **scripts/** - Các script hỗ trợ cho các tác vụ thông thường
+- **scripts/** - Script hỗ trợ cho các tác vụ thông thường
 
 ## 🎯 Mục tiêu học tập
 
 ### Danh mục Ví dụ
 
-#### **Triển khai Cơ Bản**
+#### **Triển khai Cơ bản**
 - Ứng dụng đơn dịch vụ
 - Mô hình hạ tầng đơn giản
 - Quản lý cấu hình cơ bản
 - Thiết lập phát triển tiết kiệm chi phí
 
-#### **Tình huống Nâng Cao**
+#### **Tình huống Nâng cao**
 - Kiến trúc đa dịch vụ
 - Cấu hình mạng phức tạp
 - Mô hình tích hợp cơ sở dữ liệu
 - Triển khai bảo mật và tuân thủ
 
-#### **Mô hình Sẵn Sàng Sản Xuất**
+#### **Mô hình Sẵn sàng Sản xuất**
 - Cấu hình độ khả dụng cao
 - Giám sát và quan sát
 - Tích hợp CI/CD
@@ -151,12 +151,12 @@ Mỗi ví dụ bao gồm:
 
 ## 📖 Mô tả Ví dụ
 
-### Ứng dụng Web Đơn Giản
+### Ứng dụng Web Đơn giản
 **Công nghệ**: Node.js, App Service, Application Insights  
 **Độ phức tạp**: Người mới bắt đầu  
 **Khái niệm**: Triển khai cơ bản, biến môi trường, kiểm tra sức khỏe
 
-### Website Tĩnh
+### Trang Web Tĩnh
 **Công nghệ**: HTML/CSS/JS, Storage Account, CDN  
 **Độ phức tạp**: Người mới bắt đầu  
 **Khái niệm**: Lưu trữ tĩnh, tích hợp CDN, tên miền tùy chỉnh
@@ -166,7 +166,7 @@ Mỗi ví dụ bao gồm:
 **Độ phức tạp**: Trung cấp  
 **Khái niệm**: Container hóa, mở rộng, cấu hình ingress
 
-### Ứng dụng Cơ Sở Dữ Liệu
+### Ứng dụng Cơ sở Dữ liệu
 **Công nghệ**: Python Flask, PostgreSQL, App Service  
 **Độ phức tạp**: Trung cấp  
 **Khái niệm**: Kết nối cơ sở dữ liệu, quản lý bí mật, di chuyển dữ liệu
@@ -197,7 +197,7 @@ Thư mục `configurations/` chứa các thành phần có thể tái sử dụn
 - Mẫu bảo mật cao
 - Cấu hình tối ưu chi phí
 
-### Script Hỗ Trợ
+### Script Hỗ trợ
 - Tự động hóa thiết lập môi trường
 - Script di chuyển cơ sở dữ liệu
 - Công cụ xác thực triển khai
@@ -205,7 +205,7 @@ Thư mục `configurations/` chứa các thành phần có thể tái sử dụn
 
 ## 🔧 Hướng dẫn Tùy chỉnh
 
-### Tùy chỉnh Ví dụ cho Trường Hợp Sử Dụng của Bạn
+### Tùy chỉnh Ví dụ cho Trường hợp Sử dụng của Bạn
 
 1. **Xem lại Yêu cầu**
    - Kiểm tra yêu cầu dịch vụ Azure
@@ -217,7 +217,7 @@ Thư mục `configurations/` chứa các thành phần có thể tái sử dụn
    - Tùy chỉnh mẫu Bicep
    - Điều chỉnh biến môi trường
 
-3. **Kiểm tra Kỹ Lưỡng**
+3. **Kiểm tra Kỹ lưỡng**
    - Triển khai vào môi trường phát triển trước
    - Xác thực chức năng
    - Kiểm tra khả năng mở rộng và hiệu suất
@@ -231,23 +231,23 @@ Thư mục `configurations/` chứa các thành phần có thể tái sử dụn
 
 | Ví dụ | Dịch vụ | Cơ sở dữ liệu | Xác thực | Giám sát | Độ phức tạp |
 |-------|---------|--------------|----------|----------|-------------|
-| Ứng dụng Web Đơn Giản | 1 | ❌ | Cơ bản | Cơ bản | ⭐ |
-| Website Tĩnh | 1 | ❌ | ❌ | Cơ bản | ⭐ |
+| Ứng dụng Web Đơn giản | 1 | ❌ | Cơ bản | Cơ bản | ⭐ |
+| Trang Web Tĩnh | 1 | ❌ | ❌ | Cơ bản | ⭐ |
 | Ứng dụng Container | 1 | ❌ | Cơ bản | Đầy đủ | ⭐⭐ |
-| Ứng dụng Cơ Sở Dữ Liệu | 2 | ✅ | Đầy đủ | Đầy đủ | ⭐⭐⭐ |
+| Ứng dụng Cơ sở Dữ liệu | 2 | ✅ | Đầy đủ | Đầy đủ | ⭐⭐⭐ |
 | Hàm Serverless | 3 | ✅ | Đầy đủ | Đầy đủ | ⭐⭐⭐ |
 | Microservices | 5+ | ✅ | Đầy đủ | Đầy đủ | ⭐⭐⭐⭐ |
 
-## 🎓 Lộ trình học tập
+## 🎓 Lộ trình Học tập
 
-### Tiến trình Khuyến nghị
+### Tiến trình Đề xuất
 
-1. **Bắt đầu với Ứng dụng Web Đơn Giản**
+1. **Bắt đầu với Ứng dụng Web Đơn giản**
    - Học các khái niệm cơ bản về AZD
    - Hiểu quy trình triển khai
    - Thực hành quản lý môi trường
 
-2. **Thử Website Tĩnh**
+2. **Thử Trang Web Tĩnh**
    - Khám phá các tùy chọn lưu trữ khác nhau
    - Tìm hiểu về tích hợp CDN
    - Hiểu cấu hình DNS
@@ -257,7 +257,7 @@ Thư mục `configurations/` chứa các thành phần có thể tái sử dụn
    - Hiểu các khái niệm mở rộng
    - Thực hành với Docker
 
-4. **Thêm Tích hợp Cơ Sở Dữ Liệu**
+4. **Thêm Tích hợp Cơ sở Dữ liệu**
    - Học cách cung cấp cơ sở dữ liệu
    - Hiểu chuỗi kết nối
    - Thực hành quản lý bí mật
@@ -274,38 +274,39 @@ Thư mục `configurations/` chứa các thành phần có thể tái sử dụn
 
 ## 🔍 Tìm Ví dụ Phù Hợp
 
-### Theo Công Nghệ
-- **Node.js**: Ứng dụng Web Đơn Giản, Microservices
-- **Python**: Ứng dụng Cơ Sở Dữ Liệu, Hàm Serverless
-- **Website Tĩnh**: Website Tĩnh
+### Theo Công nghệ
+- **Node.js**: Ứng dụng Web Đơn giản, Microservices
+- **Python**: Ứng dụng Cơ sở Dữ liệu, Hàm Serverless
+- **Trang Tĩnh**: Trang Web Tĩnh
 - **Container**: Ứng dụng Container, Microservices
-- **Cơ Sở Dữ Liệu**: Ứng dụng Cơ Sở Dữ Liệu, Hàm Serverless
+- **Cơ sở Dữ liệu**: Ứng dụng Cơ sở Dữ liệu, Hàm Serverless
 
-### Theo Mô Hình Kiến Trúc
-- **Monolithic**: Ứng dụng Web Đơn Giản, Ứng dụng Cơ Sở Dữ Liệu
-- **Tĩnh**: Website Tĩnh
+### Theo Mô hình Kiến trúc
+- **Monolithic**: Ứng dụng Web Đơn giản, Ứng dụng Cơ sở Dữ liệu
+- **Tĩnh**: Trang Web Tĩnh
 - **Microservices**: Ví dụ Microservices
 - **Serverless**: Hàm Serverless
 - **Hybrid**: Ứng dụng Container
 
 ### Theo Mức Độ Phức Tạp
-- **Người mới bắt đầu**: Ứng dụng Web Đơn Giản, Website Tĩnh
-- **Trung cấp**: Ứng dụng Container, Ứng dụng Cơ Sở Dữ Liệu, Hàm Serverless  
+- **Người mới bắt đầu**: Ứng dụng Web Đơn giản, Trang Web Tĩnh
+- **Trung cấp**: Ứng dụng Container, Ứng dụng Cơ sở Dữ liệu, Hàm Serverless  
 - **Nâng cao**: Microservices
 
-## 📚 Tài nguyên bổ sung
+## 📚 Tài nguyên Bổ sung
 
 ### Liên kết Tài liệu
-- [Đặc tả Mẫu AZD](https://aka.ms/azd/templates)
+- [Mẫu AZD của Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Tài liệu Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Trung tâm Kiến trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Ví dụ Cộng đồng
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Thư viện Mẫu AZD](https://azure.github.io/awesome-azd/)
+- [Mẫu AZD của Azure Samples](https://github.com/Azure-Samples/azd-templates)
+- [Mẫu của Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Thư viện Azure Developer CLI](https://azure.github.io/awesome-azd/)
 
-### Thực tiễn tốt nhất
-- [Khung Kiến trúc Tốt Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+### Thực tiễn Tốt nhất
+- [Khung Kiến trúc Tốt của Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Khung Chấp nhận Đám mây](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Đóng góp Ví dụ
@@ -335,21 +336,21 @@ example-name/
 
 ---
 
-**Mẹo chuyên nghiệp**: Bắt đầu với ví dụ đơn giản nhất phù hợp với công nghệ của bạn, sau đó dần dần tiến lên các tình huống phức tạp hơn. Mỗi ví dụ xây dựng trên các khái niệm từ ví dụ trước!
+**Mẹo Chuyên Nghiệp**: Bắt đầu với ví dụ đơn giản nhất phù hợp với công nghệ của bạn, sau đó dần dần tiến lên các tình huống phức tạp hơn. Mỗi ví dụ xây dựng trên các khái niệm từ ví dụ trước!
 
-**Bước tiếp theo**: 
-- Chọn một ví dụ phù hợp với trình độ của bạn
+**Bước Tiếp Theo**: 
+- Chọn ví dụ phù hợp với trình độ của bạn
 - Làm theo hướng dẫn thiết lập trong README của ví dụ
 - Thử nghiệm với các tùy chỉnh
 - Chia sẻ những gì bạn học được với cộng đồng
 
 ---
 
-**Điều hướng**
+**Điều Hướng**
 - **Bài học trước**: [Hướng dẫn học tập](../resources/study-guide.md)
 - **Quay lại**: [README chính](../README.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn tham khảo chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

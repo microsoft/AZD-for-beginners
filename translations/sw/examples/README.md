@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-10T06:57:56+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:22:41+00:00",
   "source_file": "examples/README.md",
   "language_code": "sw"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Utangulizi
 
-Hii ni saraka inayojumuisha mifano ya kivitendo, violezo, na hali halisi za matumizi ili kukusaidia kujifunza Azure Developer CLI kwa mazoezi ya vitendo. Kila mfano unatoa msimbo kamili unaofanya kazi, violezo vya miundombinu, na maelekezo ya kina kwa usanifu tofauti wa programu na mifumo ya usambazaji.
+Hili jalada lina mifano ya kivitendo, violezo, na hali halisi za matumizi ili kukusaidia kujifunza Azure Developer CLI kupitia mazoezi ya vitendo. Kila mfano unatoa msimbo kamili unaofanya kazi, violezo vya miundombinu, na maelekezo ya kina kwa usanifu tofauti wa programu na mifumo ya usambazaji.
 
 ## Malengo ya Kujifunza
 
@@ -26,14 +26,14 @@ Kwa kufanya kazi kupitia mifano hii, utaweza:
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha mifano hii, utaweza:
-- Kusambaza aina mbalimbali za programu kwa kujiamini ukitumia Azure Developer CLI
+- Kusambaza aina mbalimbali za programu kwa kutumia Azure Developer CLI kwa ujasiri
 - Kubadilisha violezo vilivyotolewa ili kukidhi mahitaji ya programu yako
-- Kubuni na kutekeleza mifumo ya miundombinu maalum ukitumia Bicep
+- Kubuni na kutekeleza mifumo maalum ya miundombinu kwa kutumia Bicep
 - Kusimamia programu za huduma nyingi kwa utegemezi sahihi
 - Kutumia mbinu bora za usalama, ufuatiliaji, na utendaji katika hali halisi
 - Kutatua matatizo na kuboresha usambazaji kwa msingi wa uzoefu wa vitendo
 
-## Muundo wa Saraka
+## Muundo wa Jalada
 
 ```
 examples/
@@ -76,15 +76,15 @@ examples/
 
 ## Mifano ya Kuanza Haraka
 
-### Kwa Wanaoanza
-1. **[Programu Rahisi ya Wavuti](../../../examples/simple-web-app)** - Sambaza programu ya msingi ya Node.js ya wavuti
-2. **[Tovuti ya Kawaida](../../../examples/static-website)** - Karibisha tovuti ya kawaida kwenye Azure Storage
+### Kwa Anayeanza
+1. **[Programu Rahisi ya Wavuti](../../../examples/simple-web-app)** - Sambaza programu ya msingi ya Node.js
+2. **[Tovuti ya Kawaida](../../../examples/static-website)** - Weka tovuti ya kawaida kwenye Azure Storage
 3. **[Programu ya Kontena](../../../examples/container-app)** - Sambaza programu iliyowekwa kwenye kontena
 
 ### Kwa Watumiaji wa Kati
-4. **[Programu ya Hifadhidata](../../../examples/database-app)** - Programu ya wavuti yenye hifadhidata ya PostgreSQL
-5. **[Kazi ya Bila Seva](../../../examples/serverless-function)** - Azure Functions na vichocheo vya HTTP
-6. **[Huduma Ndogo](../../../examples/microservices)** - Programu ya huduma nyingi yenye lango la API
+4. **[Programu ya Hifadhidata](../../../examples/database-app)** - Programu ya wavuti na hifadhidata ya PostgreSQL
+5. **[Kazi Isiyo na Seva](../../../examples/serverless-function)** - Azure Functions na vichocheo vya HTTP
+6. **[Huduma Ndogo](../../../examples/microservices)** - Programu ya huduma nyingi na API gateway
 
 ## 📋 Maelekezo ya Matumizi
 
@@ -122,16 +122,16 @@ examples/
 
 Kila mfano unajumuisha:
 - **README.md** - Maelekezo ya kina ya usanidi na ubinafsishaji
-- **azure.yaml** - Usanidi wa AZD wenye maelezo
-- **infra/** - Violezo vya Bicep vyenye maelezo ya vigezo
-- **src/** - Msimbo wa mfano wa programu
+- **azure.yaml** - Usanidi wa AZD na maelezo
+- **infra/** - Violezo vya Bicep na maelezo ya vigezo
+- **src/** - Msimbo wa programu ya mfano
 - **scripts/** - Hati za kusaidia kwa kazi za kawaida
 
 ## 🎯 Malengo ya Kujifunza
 
 ### Makundi ya Mifano
 
-#### **Usambazaji wa Msingi**
+#### **Usambazaji Rahisi**
 - Programu za huduma moja
 - Mifumo rahisi ya miundombinu
 - Usimamizi wa usanidi wa msingi
@@ -141,7 +141,7 @@ Kila mfano unajumuisha:
 - Usanifu wa huduma nyingi
 - Usanidi wa mitandao tata
 - Mifumo ya ujumuishaji wa hifadhidata
-- Utekelezaji wa usalama na kufuata sheria
+- Utekelezaji wa usalama na uzingatiaji
 
 #### **Mifumo Tayari kwa Uzalishaji**
 - Usanidi wa upatikanaji wa juu
@@ -153,25 +153,25 @@ Kila mfano unajumuisha:
 
 ### Programu Rahisi ya Wavuti
 **Teknolojia**: Node.js, App Service, Application Insights  
-**Ugumu**: Msingi  
+**Ugumu**: Anayeanza  
 **Mafunzo**: Usambazaji wa msingi, vigezo vya mazingira, ukaguzi wa afya
 
 ### Tovuti ya Kawaida
 **Teknolojia**: HTML/CSS/JS, Storage Account, CDN  
-**Ugumu**: Msingi  
-**Mafunzo**: Ukaribishaji wa kawaida, ujumuishaji wa CDN, majina ya kawaida
+**Ugumu**: Anayeanza  
+**Mafunzo**: Ukaribishaji wa kawaida, ujumuishaji wa CDN, majina maalum ya kikoa
 
 ### Programu ya Kontena
 **Teknolojia**: Docker, Container Apps, Container Registry  
 **Ugumu**: Kati  
-**Mafunzo**: Uwekaji kwenye kontena, upanuzi, usanidi wa kuingilia
+**Mafunzo**: Uwekaji kwenye kontena, upanuzi, usanidi wa ingress
 
 ### Programu ya Hifadhidata
 **Teknolojia**: Python Flask, PostgreSQL, App Service  
 **Ugumu**: Kati  
 **Mafunzo**: Muunganisho wa hifadhidata, usimamizi wa siri, uhamishaji
 
-### Kazi ya Bila Seva
+### Kazi Isiyo na Seva
 **Teknolojia**: Azure Functions, Cosmos DB, API Management  
 **Ugumu**: Kati  
 **Mafunzo**: Usanifu unaotegemea matukio, viunganishi, usimamizi wa API
@@ -183,7 +183,7 @@ Kila mfano unajumuisha:
 
 ## 🛠 Mifano ya Usanidi
 
-Saraka ya `configurations/` ina vipengele vinavyoweza kutumika tena:
+Jalada la `configurations/` lina vipengele vinavyoweza kutumika tena:
 
 ### Usanidi wa Mazingira
 - Mipangilio ya mazingira ya maendeleo
@@ -194,14 +194,14 @@ Saraka ya `configurations/` ina vipengele vinavyoweza kutumika tena:
 ### Moduli za Bicep
 - Vipengele vya miundombinu vinavyoweza kutumika tena
 - Mifumo ya rasilimali ya kawaida
-- Violezo vilivyohifadhiwa kwa usalama
+- Violezo vilivyoboreshwa kwa usalama
 - Usanidi wa gharama nafuu
 
 ### Hati za Kusaidia
 - Uendeshaji wa usanidi wa mazingira
 - Hati za uhamishaji wa hifadhidata
 - Zana za uthibitishaji wa usambazaji
-- Vifaa vya ufuatiliaji wa gharama
+- Zana za ufuatiliaji wa gharama
 
 ## 🔧 Mwongozo wa Kubinafsisha
 
@@ -235,7 +235,7 @@ Saraka ya `configurations/` ina vipengele vinavyoweza kutumika tena:
 | Tovuti ya Kawaida | 1 | ❌ | ❌ | Msingi | ⭐ |
 | Programu ya Kontena | 1 | ❌ | Msingi | Kamili | ⭐⭐ |
 | Programu ya Hifadhidata | 2 | ✅ | Kamili | Kamili | ⭐⭐⭐ |
-| Kazi ya Bila Seva | 3 | ✅ | Kamili | Kamili | ⭐⭐⭐ |
+| Kazi Isiyo na Seva | 3 | ✅ | Kamili | Kamili | ⭐⭐⭐ |
 | Huduma Ndogo | 5+ | ✅ | Kamili | Kamili | ⭐⭐⭐⭐ |
 
 ## 🎓 Njia ya Kujifunza
@@ -262,7 +262,7 @@ Saraka ya `configurations/` ina vipengele vinavyoweza kutumika tena:
    - Elewa mistari ya muunganisho
    - Fanya mazoezi ya usimamizi wa siri
 
-5. **Chunguza Bila Seva**
+5. **Chunguza Kazi Isiyo na Seva**
    - Elewa usanifu unaotegemea matukio
    - Jifunze kuhusu vichocheo na viunganishi
    - Fanya mazoezi na API
@@ -276,50 +276,51 @@ Saraka ya `configurations/` ina vipengele vinavyoweza kutumika tena:
 
 ### Kwa Teknolojia
 - **Node.js**: Programu Rahisi ya Wavuti, Huduma Ndogo
-- **Python**: Programu ya Hifadhidata, Kazi ya Bila Seva
+- **Python**: Programu ya Hifadhidata, Kazi Isiyo na Seva
 - **Tovuti za Kawaida**: Tovuti ya Kawaida
 - **Kontena**: Programu ya Kontena, Huduma Ndogo
-- **Hifadhidata**: Programu ya Hifadhidata, Kazi ya Bila Seva
+- **Hifadhidata**: Programu ya Hifadhidata, Kazi Isiyo na Seva
 
 ### Kwa Mfano wa Usanifu
 - **Monolithic**: Programu Rahisi ya Wavuti, Programu ya Hifadhidata
 - **Kawaida**: Tovuti ya Kawaida
 - **Huduma Ndogo**: Mfano wa Huduma Ndogo
-- **Bila Seva**: Kazi ya Bila Seva
+- **Isiyo na Seva**: Kazi Isiyo na Seva
 - **Mseto**: Programu ya Kontena
 
 ### Kwa Kiwango cha Ugumu
-- **Msingi**: Programu Rahisi ya Wavuti, Tovuti ya Kawaida
-- **Kati**: Programu ya Kontena, Programu ya Hifadhidata, Kazi ya Bila Seva  
+- **Anayeanza**: Programu Rahisi ya Wavuti, Tovuti ya Kawaida
+- **Kati**: Programu ya Kontena, Programu ya Hifadhidata, Kazi Isiyo na Seva  
 - **Juu**: Huduma Ndogo
 
 ## 📚 Rasilimali za Ziada
 
 ### Viungo vya Nyaraka
-- [Ufafanuzi wa Violezo vya AZD](https://aka.ms/azd/templates)
-- [Nyaraka za Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Kituo cha Usanifu wa Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Mifano ya Jamii
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Matunzio ya Violezo vya AZD](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### Mbinu Bora
-- [Mfumo wa Usanifu Bora wa Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Mfumo wa Kupitisha Wingu](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Kuchangia Mifano
 
 Una mfano muhimu wa kushiriki? Tunakaribisha michango!
 
 ### Miongozo ya Uwasilishaji
-1. Fuata muundo wa saraka uliowekwa
-2. Jumuisha README.md ya kina
+1. Fuata muundo wa jalada uliowekwa
+2. Jumuisha README.md yenye maelezo kamili
 3. Ongeza maoni kwenye faili za usanidi
 4. Jaribu kwa kina kabla ya kuwasilisha
 5. Jumuisha makadirio ya gharama na mahitaji
 
-### Muundo wa Violezo vya Mfano
+### Muundo wa Mfano wa Kiolezo
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -335,7 +336,7 @@ example-name/
 
 ---
 
-**Ushauri wa Wataalamu**: Anza na mfano rahisi unaolingana na teknolojia yako, kisha polepole endelea hadi hali ngumu zaidi. Kila mfano unajenga juu ya dhana kutoka kwa ule uliopita!
+**Ushauri wa Wataalamu**: Anza na mfano rahisi unaolingana na teknolojia yako, kisha endelea hatua kwa hatua hadi hali ngumu zaidi. Kila mfano unajenga juu ya dhana za mfano uliopita!
 
 **Hatua Zifuatazo**: 
 - Chagua mfano unaolingana na kiwango chako cha ujuzi
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia huduma ya tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

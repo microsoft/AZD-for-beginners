@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:10:08+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:17:02+00:00",
   "source_file": "examples/README.md",
   "language_code": "sv"
 }
@@ -15,7 +15,7 @@ Den här katalogen innehåller praktiska exempel, mallar och verkliga scenarier 
 
 ## Lärandemål
 
-Genom att arbeta med dessa exempel kommer du att:
+Genom att arbeta igenom dessa exempel kommer du att:
 - Öva på Azure Developer CLI-arbetsflöden med realistiska applikationsscenarier
 - Förstå olika applikationsarkitekturer och deras azd-implementeringar
 - Bemästra Infrastructure as Code-mönster för olika Azure-tjänster
@@ -77,12 +77,12 @@ examples/
 ## Snabbstartsexempel
 
 ### För nybörjare
-1. **[Enkel webbapp](../../../examples/simple-web-app)** - Distribuera en grundläggande Node.js-webbapplikation
+1. **[Enkel webbapplikation](../../../examples/simple-web-app)** - Distribuera en grundläggande Node.js-webbapplikation
 2. **[Statisk webbplats](../../../examples/static-website)** - Värd för en statisk webbplats på Azure Storage
-3. **[Containerapp](../../../examples/container-app)** - Distribuera en containeriserad applikation
+3. **[Containerapplikation](../../../examples/container-app)** - Distribuera en containeriserad applikation
 
 ### För användare på mellannivå
-4. **[Databasapp](../../../examples/database-app)** - Webbapplikation med PostgreSQL-databas
+4. **[Databasapplikation](../../../examples/database-app)** - Webbapplikation med PostgreSQL-databas
 5. **[Serverlös funktion](../../../examples/serverless-function)** - Azure Functions med HTTP-triggers
 6. **[Mikrotjänster](../../../examples/microservices)** - Applikation med flera tjänster och API-gateway
 
@@ -147,11 +147,11 @@ Varje exempel innehåller:
 - Konfigurationer för hög tillgänglighet
 - Övervakning och insyn
 - CI/CD-integrering
-- Återställningsstrategier vid katastrofer
+- Återställningslösningar vid katastrofer
 
 ## 📖 Exempelbeskrivningar
 
-### Enkel webbapp
+### Enkel webbapplikation
 **Teknologier**: Node.js, App Service, Application Insights  
 **Komplexitet**: Nybörjare  
 **Koncept**: Grundläggande distribution, miljövariabler, hälsokontroller
@@ -161,12 +161,12 @@ Varje exempel innehåller:
 **Komplexitet**: Nybörjare  
 **Koncept**: Statisk hosting, CDN-integrering, anpassade domäner
 
-### Containerapp
+### Containerapplikation
 **Teknologier**: Docker, Container Apps, Container Registry  
 **Komplexitet**: Mellannivå  
 **Koncept**: Containerisering, skalning, ingresskonfiguration
 
-### Databasapp
+### Databasapplikation
 **Teknologier**: Python Flask, PostgreSQL, App Service  
 **Komplexitet**: Mellannivå  
 **Koncept**: Databasanslutningar, hantering av hemligheter, migrationer
@@ -199,7 +199,7 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 
 ### Hjälpskript
 - Automatisering av miljöinställningar
-- Databas-migrationsskript
+- Databasmigrationsskript
 - Verktyg för validering av distributioner
 - Verktyg för kostnadsövervakning
 
@@ -231,10 +231,10 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 
 | Exempel | Tjänster | Databas | Autentisering | Övervakning | Komplexitet |
 |---------|----------|----------|---------------|-------------|-------------|
-| Enkel webbapp | 1 | ❌ | Grundläggande | Grundläggande | ⭐ |
+| Enkel webbapplikation | 1 | ❌ | Grundläggande | Grundläggande | ⭐ |
 | Statisk webbplats | 1 | ❌ | ❌ | Grundläggande | ⭐ |
-| Containerapp | 1 | ❌ | Grundläggande | Fullständig | ⭐⭐ |
-| Databasapp | 2 | ✅ | Fullständig | Fullständig | ⭐⭐⭐ |
+| Containerapplikation | 1 | ❌ | Grundläggande | Fullständig | ⭐⭐ |
+| Databasapplikation | 2 | ✅ | Fullständig | Fullständig | ⭐⭐⭐ |
 | Serverlös funktion | 3 | ✅ | Fullständig | Fullständig | ⭐⭐⭐ |
 | Mikrotjänster | 5+ | ✅ | Fullständig | Fullständig | ⭐⭐⭐⭐ |
 
@@ -242,9 +242,9 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 
 ### Rekommenderad progression
 
-1. **Börja med Enkel webbapp**
+1. **Börja med Enkel webbapplikation**
    - Lär dig grundläggande AZD-koncept
-   - Förstå distributionsarbetsflödet
+   - Förstå distributionsarbetsflöde
    - Öva på miljöhantering
 
 2. **Prova Statisk webbplats**
@@ -252,7 +252,7 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
    - Lär dig om CDN-integrering
    - Förstå DNS-konfiguration
 
-3. **Gå vidare till Containerapp**
+3. **Gå vidare till Containerapplikation**
    - Lär dig grunderna i containerisering
    - Förstå skalningskoncept
    - Öva med Docker
@@ -262,7 +262,7 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
    - Förstå anslutningssträngar
    - Öva på hantering av hemligheter
 
-5. **Utforska Serverlös**
+5. **Utforska Serverlös funktion**
    - Förstå händelsedriven arkitektur
    - Lär dig om triggers och bindningar
    - Öva med API:er
@@ -275,34 +275,35 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 ## 🔍 Hitta rätt exempel
 
 ### Efter teknologistack
-- **Node.js**: Enkel webbapp, Mikrotjänster
-- **Python**: Databasapp, Serverlös funktion
+- **Node.js**: Enkel webbapplikation, Mikrotjänster
+- **Python**: Databasapplikation, Serverlös funktion
 - **Statiska webbplatser**: Statisk webbplats
-- **Containers**: Containerapp, Mikrotjänster
-- **Databaser**: Databasapp, Serverlös funktion
+- **Containers**: Containerapplikation, Mikrotjänster
+- **Databaser**: Databasapplikation, Serverlös funktion
 
 ### Efter arkitekturmönster
-- **Monolitisk**: Enkel webbapp, Databasapp
+- **Monolitisk**: Enkel webbapplikation, Databasapplikation
 - **Statisk**: Statisk webbplats
 - **Mikrotjänster**: Mikrotjänster-exempel
 - **Serverlös**: Serverlös funktion
-- **Hybrid**: Containerapp
+- **Hybrid**: Containerapplikation
 
 ### Efter komplexitetsnivå
-- **Nybörjare**: Enkel webbapp, Statisk webbplats
-- **Mellannivå**: Containerapp, Databasapp, Serverlös funktion  
+- **Nybörjare**: Enkel webbapplikation, Statisk webbplats
+- **Mellannivå**: Containerapplikation, Databasapplikation, Serverlös funktion  
 - **Avancerad**: Mikrotjänster
 
 ## 📚 Ytterligare resurser
 
 ### Dokumentationslänkar
-- [AZD Template Specification](https://aka.ms/azd/templates)
-- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure AI Foundry AZD-mallar](https://github.com/Azure/ai-foundry-templates)
+- [Bicep-dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Community-exempel
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD-mallar](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry-mallar](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### Bästa praxis
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -335,11 +336,11 @@ example-name/
 
 ---
 
-**Tips**: Börja med det enklaste exemplet som matchar din teknologistack och arbeta dig gradvis upp till mer komplexa scenarier. Varje exempel bygger på koncept från föregående.
+**Tips**: Börja med det enklaste exemplet som matchar din teknologistack och arbeta dig gradvis upp till mer komplexa scenarier. Varje exempel bygger på koncept från det föregående!
 
 **Nästa steg**: 
 - Välj ett exempel som matchar din kunskapsnivå
-- Följ installationsinstruktionerna i exempelets README
+- Följ installationsinstruktionerna i exempelns README
 - Experimentera med anpassningar
 - Dela dina lärdomar med communityn
 
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.

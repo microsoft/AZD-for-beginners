@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T20:01:29+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:13:32+00:00",
   "source_file": "examples/README.md",
   "language_code": "it"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduzione
 
-Questa directory contiene esempi pratici, template e scenari reali per aiutarti a imparare Azure Developer CLI attraverso esercitazioni pratiche. Ogni esempio fornisce codice funzionante completo, template di infrastruttura e istruzioni dettagliate per diverse architetture applicative e modelli di distribuzione.
+Questa directory contiene esempi pratici, template e scenari reali per aiutarti a imparare Azure Developer CLI attraverso la pratica diretta. Ogni esempio fornisce codice funzionante completo, template di infrastruttura e istruzioni dettagliate per diverse architetture applicative e modelli di distribuzione.
 
 ## Obiettivi di Apprendimento
 
@@ -205,19 +205,19 @@ La directory `configurations/` contiene componenti riutilizzabili:
 
 ## 🔧 Guida alla Personalizzazione
 
-### Adattamento degli Esempi alle Tue Esigenze
+### Adattamento degli Esempi al Tuo Caso d'Uso
 
-1. **Revisione dei Prerequisiti**
+1. **Rivedi i Prerequisiti**
    - Controlla i requisiti dei servizi Azure
    - Verifica i limiti della sottoscrizione
    - Comprendi le implicazioni sui costi
 
-2. **Modifica della Configurazione**
+2. **Modifica la Configurazione**
    - Aggiorna le definizioni dei servizi in `azure.yaml`
    - Personalizza i template Bicep
    - Regola le variabili di ambiente
 
-3. **Test Approfonditi**
+3. **Testa a Fondo**
    - Distribuisci prima nell'ambiente di sviluppo
    - Valida la funzionalità
    - Testa scalabilità e prestazioni
@@ -284,7 +284,7 @@ La directory `configurations/` contiene componenti riutilizzabili:
 ### Per Modello Architetturale
 - **Monolitico**: Simple Web App, Database App
 - **Statico**: Static Website
-- **Microservizi**: Esempio Microservices
+- **Microservices**: Esempio Microservices
 - **Serverless**: Serverless Function
 - **Ibrido**: Container App
 
@@ -296,19 +296,20 @@ La directory `configurations/` contiene componenti riutilizzabili:
 ## 📚 Risorse Aggiuntive
 
 ### Link alla Documentazione
-- [AZD Template Specification](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Documentazione Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Esempi della Comunità
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
-### Migliori Pratiche
+### Best Practices
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Contribuire con Esempi
+## 🤝 Contributi agli Esempi
 
 Hai un esempio utile da condividere? Accogliamo con piacere i contributi!
 
@@ -316,7 +317,7 @@ Hai un esempio utile da condividere? Accogliamo con piacere i contributi!
 1. Segui la struttura della directory stabilita
 2. Includi un README.md completo
 3. Aggiungi commenti ai file di configurazione
-4. Testa accuratamente prima di inviare
+4. Testa a fondo prima di inviare
 5. Includi stime sui costi e prerequisiti
 
 ### Struttura del Template per gli Esempi
@@ -335,7 +336,7 @@ example-name/
 
 ---
 
-**Consiglio**: Inizia con l'esempio più semplice che corrisponde al tuo stack tecnologico, poi passa gradualmente a scenari più complessi. Ogni esempio si basa sui concetti dei precedenti!
+**Consiglio**: Inizia con l'esempio più semplice che corrisponde al tuo stack tecnologico, poi avanza gradualmente verso scenari più complessi. Ogni esempio si basa sui concetti dei precedenti!
 
 **Prossimi Passi**: 
 - Scegli un esempio che corrisponde al tuo livello di competenza

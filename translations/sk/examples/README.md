@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-10T07:00:21+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:24:41+00:00",
   "source_file": "examples/README.md",
   "language_code": "sk"
 }
@@ -16,8 +16,8 @@ Tento adresár obsahuje praktické príklady, šablóny a scenáre z reálneho s
 ## Ciele učenia
 
 Prácou na týchto príkladoch sa naučíte:
-- Precvičiť si pracovné postupy Azure Developer CLI s realistickými scenármi aplikácií
-- Pochopiť rôzne architektúry aplikácií a ich implementácie pomocou azd
+- Praktizovať pracovné postupy Azure Developer CLI s realistickými scenármi aplikácií
+- Pochopiť rôzne architektúry aplikácií a ich implementácie pomocou AZD
 - Ovládnuť vzory Infrastructure as Code pre rôzne služby Azure
 - Aplikovať stratégie správy konfigurácie a nasadenia špecifické pre prostredie
 - Implementovať monitorovacie, bezpečnostné a škálovacie vzory v praktických kontextoch
@@ -28,7 +28,7 @@ Prácou na týchto príkladoch sa naučíte:
 Po dokončení týchto príkladov budete schopní:
 - S istotou nasadiť rôzne typy aplikácií pomocou Azure Developer CLI
 - Prispôsobiť poskytnuté šablóny vlastným požiadavkám aplikácie
-- Navrhnúť a implementovať vlastné vzory infraštruktúry pomocou Bicep
+- Navrhnúť a implementovať vlastné infraštruktúrne vzory pomocou Bicep
 - Konfigurovať komplexné aplikácie s viacerými službami a správnymi závislosťami
 - Aplikovať bezpečnostné, monitorovacie a výkonnostné osvedčené postupy v reálnych scenároch
 - Riešiť problémy a optimalizovať nasadenia na základe praktických skúseností
@@ -90,13 +90,13 @@ examples/
 
 ### Spustenie príkladov lokálne
 
-1. **Naklonujte alebo skopírujte príklad**
+1. **Klonovanie alebo kopírovanie príkladu**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
    ```
 
-2. **Inicializujte prostredie AZD**
+2. **Inicializácia prostredia AZD**
    ```bash
    # Initialize with existing template
    azd init
@@ -105,7 +105,7 @@ examples/
    azd env new my-environment
    ```
 
-3. **Konfigurujte prostredie**
+3. **Konfigurácia prostredia**
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
@@ -133,7 +133,7 @@ Každý príklad obsahuje:
 
 #### **Základné nasadenia**
 - Aplikácie s jednou službou
-- Jednoduché vzory infraštruktúry
+- Jednoduché infraštruktúrne vzory
 - Základná správa konfigurácie
 - Nákladovo efektívne vývojové nastavenia
 
@@ -154,7 +154,7 @@ Každý príklad obsahuje:
 ### Jednoduchá webová aplikácia
 **Technológie**: Node.js, App Service, Application Insights  
 **Komplexnosť**: Začiatočník  
-**Koncepty**: Základné nasadenie, environmentálne premenné, kontrola stavu
+**Koncepty**: Základné nasadenie, premenné prostredia, kontrola stavu
 
 ### Statická webová stránka
 **Technológie**: HTML/CSS/JS, Storage Account, CDN  
@@ -192,7 +192,7 @@ Adresár `configurations/` obsahuje opakovane použiteľné komponenty:
 - Nastavenia nasadenia do viacerých regiónov
 
 ### Moduly Bicep
-- Opakovane použiteľné komponenty infraštruktúry
+- Opakovane použiteľné infraštruktúrne komponenty
 - Bežné vzory zdrojov
 - Šablóny s posilnenou bezpečnosťou
 - Nákladovo optimalizované konfigurácie
@@ -215,7 +215,7 @@ Adresár `configurations/` obsahuje opakovane použiteľné komponenty:
 2. **Upravte konfiguráciu**
    - Aktualizujte definície služieb v `azure.yaml`
    - Prispôsobte šablóny Bicep
-   - Upravte environmentálne premenné
+   - Upravte premenné prostredia
 
 3. **Dôkladne otestujte**
    - Najskôr nasadzujte do vývojového prostredia
@@ -296,21 +296,22 @@ Adresár `configurations/` obsahuje opakovane použiteľné komponenty:
 ## 📚 Ďalšie zdroje
 
 ### Odkazy na dokumentáciu
-- [Špecifikácia šablón AZD](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentácia Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Centrum architektúry Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Príklady z komunity
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galéria šablón AZD](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### Osvedčené postupy
-- [Rámec dobre navrhnutej architektúry Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Rámec prijatia cloudu](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Prispievanie príkladov
 
-Máte užitočný príklad na zdieľanie? Radi uvítame vaše príspevky!
+Máte užitočný príklad na zdieľanie? Privítame vaše príspevky!
 
 ### Pokyny na odoslanie
 1. Dodržujte stanovenú štruktúru adresára
@@ -335,13 +336,13 @@ example-name/
 
 ---
 
-**Tip na záver**: Začnite s najjednoduchším príkladom, ktorý zodpovedá vášmu technologickému stacku, a postupne sa prepracujte k zložitejším scenárom. Každý príklad stavia na konceptoch z predchádzajúcich!
+**Tip**: Začnite s najjednoduchším príkladom, ktorý zodpovedá vášmu technologickému stacku, a postupne prechádzajte k zložitejším scenárom. Každý príklad stavia na konceptoch z predchádzajúcich!
 
 **Ďalšie kroky**: 
 - Vyberte si príklad, ktorý zodpovedá vašej úrovni zručností
 - Postupujte podľa pokynov na nastavenie v README daného príkladu
 - Experimentujte s prispôsobeniami
-- Podeľte sa o svoje poznatky s komunitou
+- Zdieľajte svoje poznatky s komunitou
 
 ---
 
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie odporúčame profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
