@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:18:48+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:16:44+00:00",
   "source_file": "examples/README.md",
   "language_code": "fi"
 }
@@ -19,55 +19,30 @@ Työskennellessäsi näiden esimerkkien parissa opit:
 - Harjoittelemaan Azure Developer CLI -työnkulkuja realistisissa sovellusskenaarioissa
 - Ymmärtämään erilaisia sovellusarkkitehtuureja ja niiden azd-toteutuksia
 - Hallitsemaan Infrastructure as Code -malleja eri Azure-palveluille
-- Soveltamaan konfiguraationhallintaa ja ympäristökohtaisia käyttöönoton strategioita
-- Toteuttamaan monitorointi-, turvallisuus- ja skaalausmalleja käytännön yhteyksissä
-- Kertymään kokemusta todellisten käyttöönottojen vianetsinnästä ja virheenkorjauksesta
+- Soveltamaan konfiguraation hallintaa ja ympäristökohtaisia käyttöönoton strategioita
+- Toteuttamaan valvonta-, turvallisuus- ja skaalausmalleja käytännön yhteyksissä
+- Kertymään kokemusta todellisten käyttöönottojen vianetsinnästä ja optimoinnista
 
 ## Oppimistulokset
 
-Kun olet suorittanut nämä esimerkit, osaat:
-- Ottaa käyttöön erilaisia sovellustyyppejä Azure Developer CLI:n avulla itsevarmasti
-- Mukauttaa tarjottuja malleja omiin sovellusvaatimuksiisi
-- Suunnitella ja toteuttaa räätälöityjä infrastruktuurimalleja Bicepin avulla
-- Konfiguroida monimutkaisia monipalvelusovelluksia oikeilla riippuvuuksilla
-- Soveltaa turvallisuus-, monitorointi- ja suorituskyvyn parhaita käytäntöjä todellisissa skenaarioissa
-- Vianetsintää ja optimointia käytännön kokemuksen perusteella
+Kun olet suorittanut nämä esimerkit, pystyt:
+- Ottamaan käyttöön erilaisia sovellustyyppejä Azure Developer CLI:n avulla itsevarmasti
+- Mukauttamaan tarjottuja malleja omien sovellusvaatimustesi mukaan
+- Suunnittelemaan ja toteuttamaan räätälöityjä infrastruktuurimalleja Bicepin avulla
+- Konfiguroimaan monimutkaisia monipalvelusovelluksia oikeilla riippuvuuksilla
+- Soveltamaan turvallisuus-, valvonta- ja suorituskyvyn parhaita käytäntöjä todellisissa skenaarioissa
+- Vianetsimään ja optimoimaan käyttöönottoja käytännön kokemuksen perusteella
 
 ## Hakemistorakenne
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,14 +52,20 @@ examples/
 ## Nopeat aloitusesimerkit
 
 ### Aloittelijoille
-1. **[Yksinkertainen verkkosovellus](../../../examples/simple-web-app)** - Ota käyttöön perus Node.js -verkkosovellus
-2. **[Staattinen verkkosivusto](../../../examples/static-website)** - Isännöi staattista verkkosivustoa Azure Storagessa
-3. **[Konttisovellus](../../../examples/container-app)** - Ota käyttöön konttipohjainen sovellus
+1. **[Yksinkertainen verkkosovellus - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Ota käyttöön Node.js Express -verkkosovellus MongoDB:n kanssa
+2. **[Staattinen verkkosivusto - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Isännöi React-pohjaista staattista verkkosivustoa Azure Static Web Appsilla
+3. **[Konttisovellus - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Ota käyttöön konttimuotoinen Python Flask -sovellus
 
 ### Keskitasoisille käyttäjille
-4. **[Tietokantasovellus](../../../examples/database-app)** - Verkkosovellus PostgreSQL-tietokannan kanssa
-5. **[Serverless-toiminto](../../../examples/serverless-function)** - Azure Functions HTTP-liipaisimilla
-6. **[Mikropalvelut](../../../examples/microservices)** - Monipalvelusovellus API-yhdyskäytävällä
+4. **[Tietokantasovellus - C# ja Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Verkkosovellus C# API:lla ja Azure SQL -tietokannalla
+5. **[Palveluton funktio - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions HTTP-liipaisimilla ja Cosmos DB:llä
+6. **[Mikropalvelut - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Monipalveluinen Java-sovellus Container Appsilla ja API-yhdyskäytävällä
+
+### Azure AI Foundry -mallit
+
+1. **[Azure OpenAI Chat -sovellus](https://github.com/Azure-Samples/azure-search-openai-demo)** - Älykäs chat-sovellus Azure OpenAI:lla
+2. **[AI-dokumenttien käsittely](https://github.com/Azure-Samples/azure-ai-document-processing)** - Dokumenttianalyysi Azure AI -palveluiden avulla
+3. **[Koneoppimisen putkisto](https://github.com/Azure-Samples/mlops-v2)** - MLOps-työnkulku Azure Machine Learningilla
 
 ## 📋 Käyttöohjeet
 
@@ -145,41 +126,58 @@ Jokainen esimerkki sisältää:
 
 #### **Tuotantovalmiit mallit**
 - Korkean saatavuuden konfiguraatiot
-- Monitorointi ja havainnointi
+- Valvonta ja näkyvyys
 - CI/CD-integraatio
 - Katastrofipalautusasetukset
 
 ## 📖 Esimerkkien kuvaukset
 
-### Yksinkertainen verkkosovellus
-**Teknologiat**: Node.js, App Service, Application Insights  
+### Yksinkertainen verkkosovellus - Node.js Express
+**Teknologiat**: Node.js, Express, MongoDB, Container Apps  
 **Monimutkaisuus**: Aloittelija  
-**Konseptit**: Peruskäyttöönotto, ympäristömuuttujat, terveystarkistukset
+**Konseptit**: Peruskäyttöönotto, REST API, NoSQL-tietokantaintegraatio
 
-### Staattinen verkkosivusto
-**Teknologiat**: HTML/CSS/JS, Storage Account, CDN  
+### Staattinen verkkosivusto - React SPA
+**Teknologiat**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Monimutkaisuus**: Aloittelija  
-**Konseptit**: Staattinen isännöinti, CDN-integraatio, mukautetut verkkotunnukset
+**Konseptit**: Staattinen isännöinti, palveluton taustajärjestelmä, moderni verkkokehitys
 
-### Konttisovellus
-**Teknologiat**: Docker, Container Apps, Container Registry  
-**Monimutkaisuus**: Keskitaso  
-**Konseptit**: Konttien käyttö, skaalaus, ingress-konfiguraatio
+### Konttisovellus - Python Flask
+**Teknologiat**: Python Flask, Docker, Container Apps, Container Registry  
+**Monimutkaisuus**: Aloittelija  
+**Konseptit**: Konttimuotoisuus, mikropalveluarkkitehtuuri, API-kehitys
 
-### Tietokantasovellus
-**Teknologiat**: Python Flask, PostgreSQL, App Service  
-**Monimutkaisuus**: Keskitaso  
-**Konseptit**: Tietokantayhteydet, salaisuuksien hallinta, migraatiot
+### Tietokantasovellus - C# ja Azure SQL
+**Teknologiat**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Monimutkaisuus**: Keskitasoinen  
+**Konseptit**: Entity Framework, tietokantayhteydet, verkkosovelluskehitys
 
-### Serverless-toiminto
-**Teknologiat**: Azure Functions, Cosmos DB, API Management  
-**Monimutkaisuus**: Keskitaso  
-**Konseptit**: Tapahtumapohjainen arkkitehtuuri, sidokset, API-hallinta
+### Palveluton funktio - Python Azure Functions
+**Teknologiat**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Monimutkaisuus**: Keskitasoinen  
+**Konseptit**: Tapahtumapohjainen arkkitehtuuri, palveluton laskenta, full-stack-kehitys
 
-### Mikropalvelut
-**Teknologiat**: Useita palveluita, Service Bus, API Gateway  
+### Mikropalvelut - Java Spring Boot
+**Teknologiat**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Monimutkaisuus**: Keskitasoinen  
+**Konseptit**: Mikropalveluiden kommunikointi, hajautetut järjestelmät, yritysmallit
+
+### Azure AI Foundry -esimerkit
+
+#### Azure OpenAI Chat -sovellus
+**Teknologiat**: Azure OpenAI, Cognitive Search, App Service  
+**Monimutkaisuus**: Keskitasoinen  
+**Konseptit**: RAG-arkkitehtuuri, vektorihaku, LLM-integraatio
+
+#### AI-dokumenttien käsittely
+**Teknologiat**: Azure AI Document Intelligence, Storage, Functions  
+**Monimutkaisuus**: Keskitasoinen  
+**Konseptit**: Dokumenttianalyysi, OCR, tiedon poiminta
+
+#### Koneoppimisen putkisto
+**Teknologiat**: Azure ML, MLOps, Container Registry  
 **Monimutkaisuus**: Edistynyt  
-**Konseptit**: Palveluiden välinen viestintä, viestijonot, kuormituksen tasapainotus
+**Konseptit**: Mallin koulutus, käyttöönoton putkistot, valvonta
 
 ## 🛠 Konfiguraatioesimerkit
 
@@ -189,7 +187,7 @@ Jokainen esimerkki sisältää:
 - Kehitysympäristön asetukset
 - Välivaiheen ympäristön konfiguraatiot
 - Tuotantovalmiit konfiguraatiot
-- Monialueiset käyttöönotot
+- Monialueiset käyttöönottoasetukset
 
 ### Bicep-moduulit
 - Uudelleenkäytettävät infrastruktuurikomponentit
@@ -199,9 +197,9 @@ Jokainen esimerkki sisältää:
 
 ### Apuskriptit
 - Ympäristön asennusautomaatio
-- Tietokantamigraatiot
+- Tietokannan migraatioskriptit
 - Käyttöönoton validointityökalut
-- Kustannusten seurannan apuvälineet
+- Kustannusten seurantatyökalut
 
 ## 🔧 Mukautusopas
 
@@ -213,30 +211,33 @@ Jokainen esimerkki sisältää:
    - Ymmärrä kustannusvaikutukset
 
 2. **Muokkaa konfiguraatiota**
-   - Päivitä `azure.yaml` palvelumääritelmät
+   - Päivitä `azure.yaml`-palvelumääritelmät
    - Mukauta Bicep-mallit
    - Säädä ympäristömuuttujat
 
 3. **Testaa perusteellisesti**
-   - Ota käyttöön ensin kehitysympäristössä
+   - Ota ensin käyttöön kehitysympäristössä
    - Varmista toiminnallisuus
-   - Testaa skaalaus ja suorituskyky
+   - Testaa skaalausta ja suorituskykyä
 
 4. **Turvallisuuskatsaus**
    - Tarkista käyttöoikeudet
    - Toteuta salaisuuksien hallinta
-   - Ota käyttöön monitorointi ja hälytykset
+   - Ota käyttöön valvonta ja hälytykset
 
 ## 📊 Vertailutaulukko
 
-| Esimerkki | Palvelut | Tietokanta | Autentikointi | Monitorointi | Monimutkaisuus |
-|-----------|----------|------------|---------------|--------------|----------------|
-| Yksinkertainen verkkosovellus | 1 | ❌ | Perus | Perus | ⭐ |
-| Staattinen verkkosivusto | 1 | ❌ | ❌ | Perus | ⭐ |
-| Konttisovellus | 1 | ❌ | Perus | Täysi | ⭐⭐ |
-| Tietokantasovellus | 2 | ✅ | Täysi | Täysi | ⭐⭐⭐ |
-| Serverless-toiminto | 3 | ✅ | Täysi | Täysi | ⭐⭐⭐ |
-| Mikropalvelut | 5+ | ✅ | Täysi | Täysi | ⭐⭐⭐⭐ |
+| Esimerkki | Palvelut | Tietokanta | Autentikointi | Valvonta | Monimutkaisuus |
+|-----------|----------|------------|---------------|----------|----------------|
+| Node.js Express Todo | 2 | ✅ | Perus | Perus | ⭐ |
+| React SPA + Functions | 3 | ✅ | Perus | Täysi | ⭐ |
+| Python Flask Container | 2 | ❌ | Perus | Täysi | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Täysi | Täysi | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Täysi | Täysi | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Täysi | Täysi | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Täysi | Täysi | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Perus | Täysi | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Täysi | Täysi | ⭐⭐⭐⭐ |
 
 ## 🎓 Oppimispolku
 
@@ -253,7 +254,7 @@ Jokainen esimerkki sisältää:
    - Ymmärrä DNS-konfiguraatio
 
 3. **Siirry konttisovellukseen**
-   - Opettele konttien perusasiat
+   - Opettele konttimuotoisuuden perusteet
    - Ymmärrä skaalauskonseptit
    - Harjoittele Dockerin käyttöä
 
@@ -262,40 +263,44 @@ Jokainen esimerkki sisältää:
    - Ymmärrä yhteysmerkkijonot
    - Harjoittele salaisuuksien hallintaa
 
-5. **Tutki serverless-ratkaisuja**
+5. **Tutki palvelutonta arkkitehtuuria**
    - Ymmärrä tapahtumapohjainen arkkitehtuuri
    - Opettele liipaisimet ja sidokset
    - Harjoittele API:iden käyttöä
 
-6. **Rakenna mikropalveluja**
-   - Opettele palveluiden välinen viestintä
+6. **Rakenna mikropalveluita**
+   - Opettele palveluiden välinen kommunikointi
    - Ymmärrä hajautetut järjestelmät
    - Harjoittele monimutkaisia käyttöönottoja
 
 ## 🔍 Oikean esimerkin löytäminen
 
 ### Teknologiapinon mukaan
-- **Node.js**: Yksinkertainen verkkosovellus, Mikropalvelut
-- **Python**: Tietokantasovellus, Serverless-toiminto
-- **Staattiset sivustot**: Staattinen verkkosivusto
-- **Kontit**: Konttisovellus, Mikropalvelut
-- **Tietokannat**: Tietokantasovellus, Serverless-toiminto
+- **Node.js**: Node.js Express Todo -sovellus
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Kontit**: Python Flask Container App, Java Microservices
+- **Tietokannat**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Arkkitehtuurimallin mukaan
-- **Monoliittinen**: Yksinkertainen verkkosovellus, Tietokantasovellus
-- **Staattinen**: Staattinen verkkosivusto
-- **Mikropalvelut**: Mikropalvelut-esimerkki
-- **Serverless**: Serverless-toiminto
-- **Hybridimalli**: Konttisovellus
+- **Monoliittinen**: Node.js Express Todo, C# Web API + SQL
+- **Staattinen + palveluton**: React SPA + Functions, Python Functions + SPA
+- **Mikropalvelut**: Java Spring Boot Microservices
+- **Konttimuotoinen**: Python Flask Container App
+- **AI-pohjainen**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Monimutkaisuuden mukaan
-- **Aloittelija**: Yksinkertainen verkkosovellus, Staattinen verkkosivusto
-- **Keskitaso**: Konttisovellus, Tietokantasovellus, Serverless-toiminto  
-- **Edistynyt**: Mikropalvelut
+- **Aloittelija**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Keskitasoinen**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Edistynyt**: ML Pipeline
 
 ## 📚 Lisäresurssit
 
 ### Dokumentaatiolinkit
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep-dokumentaatio](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
@@ -304,6 +309,12 @@ Jokainen esimerkki sisältää:
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
 - [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo-sovellus C#:llä ja Azure SQL:llä](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo-sovellus Pythonilla ja MongoDB:llä](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo-sovellus Node.js:llä ja PostgreSQL:llä](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React-verkkosovellus C# API:lla](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Parhaat käytännöt
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -336,7 +347,7 @@ example-name/
 
 ---
 
-**Vinkki**: Aloita yksinkertaisimmasta esimerkistä, joka vastaa teknologiapinoasi, ja etene vähitellen kohti monimutkaisempia skenaarioita. Jokainen esimerkki rakentuu edellisen oppien päälle!
+**Vinkki**: Aloita yksinkertaisimmasta esimerkistä, joka vastaa teknologiapinoasi, ja etene vähitellen monimutkaisempiin skenaarioihin. Jokainen esimerkki rakentuu edellisen oppien päälle!
 
 **Seuraavat askeleet**: 
 - Valitse esimerkki, joka vastaa taitotasoasi
@@ -353,4 +364,4 @@ example-name/
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

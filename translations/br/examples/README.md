@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:12:57+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:09:28+00:00",
   "source_file": "examples/README.md",
   "language_code": "br"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Este diretório contém exemplos práticos, modelos e cenários reais para ajudar você a aprender o Azure Developer CLI por meio de prática prática. Cada exemplo fornece código funcional completo, modelos de infraestrutura e instruções detalhadas para diferentes arquiteturas de aplicativos e padrões de implantação.
+Este diretório contém exemplos práticos, modelos e cenários reais para ajudá-lo a aprender o Azure Developer CLI por meio de prática prática. Cada exemplo fornece código funcional completo, modelos de infraestrutura e instruções detalhadas para diferentes arquiteturas de aplicativos e padrões de implantação.
 
 ## Objetivos de Aprendizado
 
 Ao trabalhar com esses exemplos, você irá:
 - Praticar fluxos de trabalho do Azure Developer CLI com cenários de aplicativos realistas
 - Compreender diferentes arquiteturas de aplicativos e suas implementações no azd
-- Dominar padrões de Infraestrutura como Código para diversos serviços do Azure
+- Dominar padrões de Infraestrutura como Código para vários serviços do Azure
 - Aplicar estratégias de gerenciamento de configuração e implantação específicas para ambientes
 - Implementar padrões de monitoramento, segurança e escalabilidade em contextos práticos
 - Ganhar experiência com solução de problemas e depuração de cenários reais de implantação
@@ -26,48 +26,23 @@ Ao trabalhar com esses exemplos, você irá:
 ## Resultados de Aprendizado
 
 Ao concluir esses exemplos, você será capaz de:
-- Implantar com confiança diversos tipos de aplicativos usando o Azure Developer CLI
+- Implantar com confiança vários tipos de aplicativos usando o Azure Developer CLI
 - Adaptar os modelos fornecidos às suas próprias necessidades de aplicativos
 - Projetar e implementar padrões de infraestrutura personalizados usando Bicep
 - Configurar aplicativos complexos com múltiplos serviços e dependências adequadas
 - Aplicar práticas recomendadas de segurança, monitoramento e desempenho em cenários reais
-- Solucionar problemas e otimizar implantações com base em experiência prática
+- Solucionar problemas e otimizar implantações com base na experiência prática
 
 ## Estrutura do Diretório
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,14 +52,20 @@ examples/
 ## Exemplos de Início Rápido
 
 ### Para Iniciantes
-1. **[Aplicativo Web Simples](../../../examples/simple-web-app)** - Implante um aplicativo web básico em Node.js
-2. **[Site Estático](../../../examples/static-website)** - Hospede um site estático no Azure Storage
-3. **[Aplicativo em Contêiner](../../../examples/container-app)** - Implante um aplicativo em contêiner
+1. **[Aplicativo Web Simples - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Implante um aplicativo web Node.js Express com MongoDB
+2. **[Site Estático - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Hospede um site estático React com Azure Static Web Apps
+3. **[Aplicativo em Contêiner - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Implante um aplicativo Python Flask em contêiner
 
 ### Para Usuários Intermediários
-4. **[Aplicativo com Banco de Dados](../../../examples/database-app)** - Aplicativo web com banco de dados PostgreSQL
-5. **[Função Serverless](../../../examples/serverless-function)** - Azure Functions com gatilhos HTTP
-6. **[Microservices](../../../examples/microservices)** - Aplicativo com múltiplos serviços e gateway de API
+4. **[Aplicativo com Banco de Dados - C# com Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Aplicativo web com API em C# e Banco de Dados Azure SQL
+5. **[Função Serverless - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Funções Azure em Python com gatilhos HTTP e Cosmos DB
+6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Aplicativo Java com múltiplos serviços, Container Apps e gateway de API
+
+### Modelos do Azure AI Foundry
+
+1. **[Aplicativo de Chat com Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Aplicativo de chat inteligente com Azure OpenAI
+2. **[Processamento de Documentos com IA](https://github.com/Azure-Samples/azure-ai-document-processing)** - Análise de documentos usando serviços de IA do Azure
+3. **[Pipeline de Machine Learning](https://github.com/Azure-Samples/mlops-v2)** - Fluxo de trabalho MLOps com Azure Machine Learning
 
 ## 📋 Instruções de Uso
 
@@ -151,35 +132,52 @@ Cada exemplo inclui:
 
 ## 📖 Descrições dos Exemplos
 
-### Aplicativo Web Simples
-**Tecnologias**: Node.js, App Service, Application Insights  
+### Aplicativo Web Simples - Node.js Express
+**Tecnologias**: Node.js, Express, MongoDB, Container Apps  
 **Complexidade**: Iniciante  
-**Conceitos**: Implantação básica, variáveis de ambiente, verificações de saúde
+**Conceitos**: Implantação básica, API REST, integração com banco de dados NoSQL
 
-### Site Estático
-**Tecnologias**: HTML/CSS/JS, Storage Account, CDN  
+### Site Estático - React SPA
+**Tecnologias**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Complexidade**: Iniciante  
-**Conceitos**: Hospedagem estática, integração com CDN, domínios personalizados
+**Conceitos**: Hospedagem estática, backend serverless, desenvolvimento web moderno
 
-### Aplicativo em Contêiner
-**Tecnologias**: Docker, Container Apps, Container Registry  
+### Aplicativo em Contêiner - Python Flask
+**Tecnologias**: Python Flask, Docker, Container Apps, Container Registry  
+**Complexidade**: Iniciante  
+**Conceitos**: Containerização, arquitetura de microsserviços, desenvolvimento de API
+
+### Aplicativo com Banco de Dados - C# com Azure SQL
+**Tecnologias**: C# ASP.NET Core, Banco de Dados Azure SQL, App Service  
 **Complexidade**: Intermediário  
-**Conceitos**: Containerização, escalabilidade, configuração de entrada
+**Conceitos**: Entity Framework, conexões com banco de dados, desenvolvimento de API web
 
-### Aplicativo com Banco de Dados
-**Tecnologias**: Python Flask, PostgreSQL, App Service  
+### Função Serverless - Python Azure Functions
+**Tecnologias**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Complexidade**: Intermediário  
-**Conceitos**: Conexões com banco de dados, gerenciamento de segredos, migrações
+**Conceitos**: Arquitetura orientada a eventos, computação serverless, desenvolvimento full-stack
 
-### Função Serverless
-**Tecnologias**: Azure Functions, Cosmos DB, API Management  
+### Microservices - Java Spring Boot
+**Tecnologias**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Complexidade**: Intermediário  
-**Conceitos**: Arquitetura orientada a eventos, bindings, gerenciamento de API
+**Conceitos**: Comunicação entre microsserviços, sistemas distribuídos, padrões empresariais
 
-### Microservices
-**Tecnologias**: Múltiplos serviços, Service Bus, API Gateway  
+### Exemplos do Azure AI Foundry
+
+#### Aplicativo de Chat com Azure OpenAI
+**Tecnologias**: Azure OpenAI, Cognitive Search, App Service  
+**Complexidade**: Intermediário  
+**Conceitos**: Arquitetura RAG, busca vetorial, integração com LLM
+
+#### Processamento de Documentos com IA
+**Tecnologias**: Azure AI Document Intelligence, Storage, Functions  
+**Complexidade**: Intermediário  
+**Conceitos**: Análise de documentos, OCR, extração de dados
+
+#### Pipeline de Machine Learning
+**Tecnologias**: Azure ML, MLOps, Container Registry  
 **Complexidade**: Avançado  
-**Conceitos**: Comunicação entre serviços, filas de mensagens, balanceamento de carga
+**Conceitos**: Treinamento de modelos, pipelines de implantação, monitoramento
 
 ## 🛠 Exemplos de Configuração
 
@@ -189,12 +187,12 @@ O diretório `configurations/` contém componentes reutilizáveis:
 - Configurações para ambiente de desenvolvimento
 - Configurações para ambiente de staging
 - Configurações prontas para produção
-- Configurações de implantação em múltiplas regiões
+- Configurações de implantação em várias regiões
 
 ### Módulos Bicep
 - Componentes de infraestrutura reutilizáveis
 - Padrões comuns de recursos
-- Modelos reforçados para segurança
+- Modelos com segurança reforçada
 - Configurações otimizadas para custo
 
 ### Scripts Auxiliares
@@ -210,7 +208,7 @@ O diretório `configurations/` contém componentes reutilizáveis:
 1. **Revise os Pré-requisitos**
    - Verifique os requisitos de serviços do Azure
    - Confirme os limites da assinatura
-   - Entenda as implicações de custo
+   - Compreenda as implicações de custo
 
 2. **Modifique a Configuração**
    - Atualize as definições de serviço no `azure.yaml`
@@ -231,12 +229,15 @@ O diretório `configurations/` contém componentes reutilizáveis:
 
 | Exemplo | Serviços | Banco de Dados | Autenticação | Monitoramento | Complexidade |
 |---------|----------|----------------|--------------|---------------|--------------|
-| Aplicativo Web Simples | 1 | ❌ | Básico | Básico | ⭐ |
-| Site Estático | 1 | ❌ | ❌ | Básico | ⭐ |
-| Aplicativo em Contêiner | 1 | ❌ | Básico | Completo | ⭐⭐ |
-| Aplicativo com Banco de Dados | 2 | ✅ | Completo | Completo | ⭐⭐⭐ |
-| Função Serverless | 3 | ✅ | Completo | Completo | ⭐⭐⭐ |
-| Microservices | 5+ | ✅ | Completo | Completo | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Básico | Básico | ⭐ |
+| React SPA + Functions | 3 | ✅ | Básico | Completo | ⭐ |
+| Python Flask Container | 2 | ❌ | Básico | Completo | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Completo | Completo | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Completo | Completo | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Completo | Completo | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Completo | Completo | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Básico | Completo | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Completo | Completo | ⭐⭐⭐⭐ |
 
 ## 🎓 Caminho de Aprendizado
 
@@ -244,59 +245,63 @@ O diretório `configurations/` contém componentes reutilizáveis:
 
 1. **Comece com Aplicativo Web Simples**
    - Aprenda conceitos básicos do AZD
-   - Entenda o fluxo de trabalho de implantação
-   - Pratique gerenciamento de ambiente
+   - Compreenda o fluxo de trabalho de implantação
+   - Pratique o gerenciamento de ambientes
 
 2. **Experimente Site Estático**
    - Explore diferentes opções de hospedagem
    - Aprenda sobre integração com CDN
-   - Entenda configuração de DNS
+   - Compreenda configuração de DNS
 
 3. **Avance para Aplicativo em Contêiner**
-   - Aprenda os fundamentos da containerização
-   - Entenda conceitos de escalabilidade
+   - Aprenda fundamentos de containerização
+   - Compreenda conceitos de escalabilidade
    - Pratique com Docker
 
 4. **Adicione Integração com Banco de Dados**
    - Aprenda provisionamento de banco de dados
-   - Entenda strings de conexão
+   - Compreenda strings de conexão
    - Pratique gerenciamento de segredos
 
 5. **Explore Serverless**
-   - Entenda arquitetura orientada a eventos
+   - Compreenda arquitetura orientada a eventos
    - Aprenda sobre gatilhos e bindings
    - Pratique com APIs
 
 6. **Construa Microservices**
    - Aprenda comunicação entre serviços
-   - Entenda sistemas distribuídos
+   - Compreenda sistemas distribuídos
    - Pratique implantações complexas
 
 ## 🔍 Encontrando o Exemplo Certo
 
-### Por Stack de Tecnologia
-- **Node.js**: Aplicativo Web Simples, Microservices
-- **Python**: Aplicativo com Banco de Dados, Função Serverless
-- **Sites Estáticos**: Site Estático
-- **Contêineres**: Aplicativo em Contêiner, Microservices
-- **Bancos de Dados**: Aplicativo com Banco de Dados, Função Serverless
+### Por Stack Tecnológico
+- **Node.js**: Aplicativo Node.js Express Todo
+- **Python**: Aplicativo Python Flask em Contêiner, Python Functions + SPA
+- **C#**: API Web C# + Banco de Dados SQL, Aplicativo de Chat com Azure OpenAI, Pipeline de ML
+- **Java**: Microservices Java Spring Boot
+- **React**: React SPA + Functions
+- **Contêineres**: Aplicativo Python Flask em Contêiner, Microservices Java
+- **Bancos de Dados**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **IA/ML**: Aplicativo de Chat com Azure OpenAI, Processamento de Documentos com IA, Pipeline de ML
 
 ### Por Padrão de Arquitetura
-- **Monolítico**: Aplicativo Web Simples, Aplicativo com Banco de Dados
-- **Estático**: Site Estático
-- **Microservices**: Exemplo de Microservices
-- **Serverless**: Função Serverless
-- **Híbrido**: Aplicativo em Contêiner
+- **Monolítico**: Node.js Express Todo, API Web C# + SQL
+- **Estático + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: Microservices Java Spring Boot
+- **Containerizado**: Aplicativo Python Flask em Contêiner
+- **IA-Powered**: Aplicativo de Chat com Azure OpenAI, Processamento de Documentos com IA, Pipeline de ML
 
 ### Por Nível de Complexidade
-- **Iniciante**: Aplicativo Web Simples, Site Estático
-- **Intermediário**: Aplicativo em Contêiner, Aplicativo com Banco de Dados, Função Serverless  
-- **Avançado**: Microservices
+- **Iniciante**: Node.js Express Todo, React SPA + Functions, Aplicativo Python Flask em Contêiner
+- **Intermediário**: API Web C# + SQL, Python Functions + SPA, Microservices Java, Aplicativo de Chat com Azure OpenAI, Processamento de Documentos com IA
+- **Avançado**: Pipeline de ML
 
 ## 📚 Recursos Adicionais
 
 ### Links de Documentação
-- [Modelos AZD do Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Modelos do Azure AI Foundry AZD](https://github.com/Azure/ai-foundry-templates)
 - [Documentação do Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Centro de Arquitetura do Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
@@ -304,10 +309,16 @@ O diretório `configurations/` contém componentes reutilizáveis:
 - [Modelos AZD de Exemplos do Azure](https://github.com/Azure-Samples/azd-templates)
 - [Modelos do Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Galeria do Azure Developer CLI](https://azure.github.io/awesome-azd/)
+- [Aplicativo Todo com C# e Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Aplicativo Todo com Python e MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Aplicativo Todo com Node.js e PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [Aplicativo Web React com API em C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Job de Container Apps do Azure](https://github.com/Azure-Samples/container-apps-jobs)
+- [Funções Azure com Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Melhores Práticas
 - [Framework Bem-Arquitetado do Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Framework de Adoção de Nuvem](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Framework de Adoção na Nuvem](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Contribuindo com Exemplos
 
@@ -336,7 +347,7 @@ example-name/
 
 ---
 
-**Dica Pro**: Comece com o exemplo mais simples que corresponda ao seu stack de tecnologia e, gradualmente, avance para cenários mais complexos. Cada exemplo constrói conceitos a partir dos anteriores!
+**Dica Pro**: Comece com o exemplo mais simples que corresponda ao seu stack tecnológico e, gradualmente, avance para cenários mais complexos. Cada exemplo constrói conceitos a partir dos anteriores!
 
 **Próximos Passos**: 
 - Escolha um exemplo que corresponda ao seu nível de habilidade
@@ -348,7 +359,7 @@ example-name/
 
 **Navegação**
 - **Lição Anterior**: [Guia de Estudo](../resources/study-guide.md)
-- **Voltar para**: [README Principal](../README.md)
+- **Retornar para**: [README Principal](../README.md)
 
 ---
 

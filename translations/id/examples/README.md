@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:21:06+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:19:39+00:00",
   "source_file": "examples/README.md",
   "language_code": "id"
 }
 -->
-# Contoh - Template dan Konfigurasi AZD Praktis
+# Contoh - Template dan Konfigurasi Praktis AZD
 
 ## Pendahuluan
 
-Direktori ini berisi contoh praktis, template, dan skenario dunia nyata untuk membantu Anda mempelajari Azure Developer CLI melalui praktik langsung. Setiap contoh menyediakan kode yang berfungsi penuh, template infrastruktur, dan instruksi terperinci untuk berbagai arsitektur aplikasi dan pola penerapan.
+Direktori ini berisi contoh praktis, template, dan skenario dunia nyata untuk membantu Anda mempelajari Azure Developer CLI melalui praktik langsung. Setiap contoh menyediakan kode kerja lengkap, template infrastruktur, dan instruksi terperinci untuk berbagai arsitektur aplikasi dan pola penerapan.
 
 ## Tujuan Pembelajaran
 
@@ -21,7 +21,7 @@ Dengan mempelajari contoh-contoh ini, Anda akan:
 - Menguasai pola Infrastructure as Code untuk berbagai layanan Azure
 - Menerapkan manajemen konfigurasi dan strategi penerapan spesifik lingkungan
 - Mengimplementasikan pola pemantauan, keamanan, dan penskalaan dalam konteks praktis
-- Membangun pengalaman dalam memecahkan masalah dan debugging skenario penerapan nyata
+- Membangun pengalaman dalam pemecahan masalah dan debugging skenario penerapan nyata
 
 ## Hasil Pembelajaran
 
@@ -36,38 +36,13 @@ Setelah menyelesaikan contoh-contoh ini, Anda akan dapat:
 ## Struktur Direktori
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,14 +52,20 @@ examples/
 ## Contoh Memulai Cepat
 
 ### Untuk Pemula
-1. **[Aplikasi Web Sederhana](../../../examples/simple-web-app)** - Menerapkan aplikasi web Node.js dasar
-2. **[Situs Web Statis](../../../examples/static-website)** - Menyimpan situs web statis di Azure Storage
-3. **[Aplikasi Kontainer](../../../examples/container-app)** - Menerapkan aplikasi yang dikontainerisasi
+1. **[Aplikasi Web Sederhana - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Menerapkan aplikasi web Node.js Express dengan MongoDB
+2. **[Situs Statis - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Hosting situs web statis React dengan Azure Static Web Apps
+3. **[Aplikasi Kontainer - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Menerapkan aplikasi Python Flask yang dikontainerkan
 
 ### Untuk Pengguna Menengah
-4. **[Aplikasi Database](../../../examples/database-app)** - Aplikasi web dengan database PostgreSQL
-5. **[Fungsi Tanpa Server](../../../examples/serverless-function)** - Azure Functions dengan pemicu HTTP
-6. **[Mikroservis](../../../examples/microservices)** - Aplikasi multi-layanan dengan API gateway
+4. **[Aplikasi Database - C# dengan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Aplikasi web dengan API C# dan Azure SQL Database
+5. **[Fungsi Serverless - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions dengan pemicu HTTP dan Cosmos DB
+6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Aplikasi Java multi-layanan dengan Container Apps dan API gateway
+
+### Template Azure AI Foundry
+
+1. **[Aplikasi Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Aplikasi chat cerdas dengan Azure OpenAI
+2. **[Pemrosesan Dokumen AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analisis dokumen menggunakan layanan Azure AI
+3. **[Pipeline Pembelajaran Mesin](https://github.com/Azure-Samples/mlops-v2)** - Alur kerja MLOps dengan Azure Machine Learning
 
 ## 📋 Instruksi Penggunaan
 
@@ -121,7 +102,7 @@ examples/
 ### Menyesuaikan Contoh
 
 Setiap contoh mencakup:
-- **README.md** - Instruksi pengaturan dan kustomisasi yang terperinci
+- **README.md** - Instruksi pengaturan dan penyesuaian terperinci
 - **azure.yaml** - Konfigurasi AZD dengan komentar
 - **infra/** - Template Bicep dengan penjelasan parameter
 - **src/** - Kode aplikasi contoh
@@ -151,35 +132,52 @@ Setiap contoh mencakup:
 
 ## 📖 Deskripsi Contoh
 
-### Aplikasi Web Sederhana
-**Teknologi**: Node.js, App Service, Application Insights  
+### Aplikasi Web Sederhana - Node.js Express
+**Teknologi**: Node.js, Express, MongoDB, Container Apps  
 **Kompleksitas**: Pemula  
-**Konsep**: Penerapan dasar, variabel lingkungan, pemeriksaan kesehatan
+**Konsep**: Penerapan dasar, REST API, integrasi database NoSQL
 
-### Situs Web Statis
-**Teknologi**: HTML/CSS/JS, Storage Account, CDN  
+### Situs Statis - React SPA
+**Teknologi**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Kompleksitas**: Pemula  
-**Konsep**: Hosting statis, integrasi CDN, domain kustom
+**Konsep**: Hosting statis, backend serverless, pengembangan web modern
 
-### Aplikasi Kontainer
-**Teknologi**: Docker, Container Apps, Container Registry  
+### Aplikasi Kontainer - Python Flask
+**Teknologi**: Python Flask, Docker, Container Apps, Container Registry  
+**Kompleksitas**: Pemula  
+**Konsep**: Kontainerisasi, arsitektur microservices, pengembangan API
+
+### Aplikasi Database - C# dengan Azure SQL
+**Teknologi**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Kompleksitas**: Menengah  
-**Konsep**: Kontainerisasi, penskalaan, konfigurasi ingress
+**Konsep**: Entity Framework, koneksi database, pengembangan web API
 
-### Aplikasi Database
-**Teknologi**: Python Flask, PostgreSQL, App Service  
+### Fungsi Serverless - Python Azure Functions
+**Teknologi**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Kompleksitas**: Menengah  
-**Konsep**: Koneksi database, manajemen rahasia, migrasi
+**Konsep**: Arsitektur berbasis event, komputasi serverless, pengembangan full-stack
 
-### Fungsi Tanpa Server
-**Teknologi**: Azure Functions, Cosmos DB, API Management  
+### Microservices - Java Spring Boot
+**Teknologi**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Kompleksitas**: Menengah  
-**Konsep**: Arsitektur berbasis peristiwa, binding, manajemen API
+**Konsep**: Komunikasi microservices, sistem terdistribusi, pola enterprise
 
-### Mikroservis
-**Teknologi**: Layanan multi, Service Bus, API Gateway  
+### Contoh Azure AI Foundry
+
+#### Aplikasi Chat Azure OpenAI
+**Teknologi**: Azure OpenAI, Cognitive Search, App Service  
+**Kompleksitas**: Menengah  
+**Konsep**: Arsitektur RAG, pencarian vektor, integrasi LLM
+
+#### Pemrosesan Dokumen AI
+**Teknologi**: Azure AI Document Intelligence, Storage, Functions  
+**Kompleksitas**: Menengah  
+**Konsep**: Analisis dokumen, OCR, ekstraksi data
+
+#### Pipeline Pembelajaran Mesin
+**Teknologi**: Azure ML, MLOps, Container Registry  
 **Kompleksitas**: Lanjutan  
-**Konsep**: Komunikasi layanan, antrian pesan, penyeimbangan beban
+**Konsep**: Pelatihan model, pipeline penerapan, pemantauan
 
 ## 🛠 Contoh Konfigurasi
 
@@ -203,9 +201,9 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 - Alat validasi penerapan
 - Utilitas pemantauan biaya
 
-## 🔧 Panduan Kustomisasi
+## 🔧 Panduan Penyesuaian
 
-### Menyesuaikan Contoh untuk Kasus Penggunaan Anda
+### Menyesuaikan Contoh untuk Kebutuhan Anda
 
 1. **Tinjau Prasyarat**
    - Periksa persyaratan layanan Azure
@@ -224,32 +222,35 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 
 4. **Tinjauan Keamanan**
    - Tinjau kontrol akses
-   - Terapkan manajemen rahasia
-   - Aktifkan pemantauan dan pemberitahuan
+   - Implementasikan manajemen rahasia
+   - Aktifkan pemantauan dan peringatan
 
 ## 📊 Matriks Perbandingan
 
 | Contoh | Layanan | Database | Auth | Pemantauan | Kompleksitas |
 |--------|---------|----------|------|------------|--------------|
-| Aplikasi Web Sederhana | 1 | ❌ | Dasar | Dasar | ⭐ |
-| Situs Web Statis | 1 | ❌ | ❌ | Dasar | ⭐ |
-| Aplikasi Kontainer | 1 | ❌ | Dasar | Penuh | ⭐⭐ |
-| Aplikasi Database | 2 | ✅ | Penuh | Penuh | ⭐⭐⭐ |
-| Fungsi Tanpa Server | 3 | ✅ | Penuh | Penuh | ⭐⭐⭐ |
-| Mikroservis | 5+ | ✅ | Penuh | Penuh | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Dasar | Dasar | ⭐ |
+| React SPA + Functions | 3 | ✅ | Dasar | Lengkap | ⭐ |
+| Python Flask Container | 2 | ❌ | Dasar | Lengkap | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Lengkap | Lengkap | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Lengkap | Lengkap | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Lengkap | Lengkap | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Lengkap | Lengkap | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Dasar | Lengkap | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Lengkap | Lengkap | ⭐⭐⭐⭐ |
 
 ## 🎓 Jalur Pembelajaran
 
-### Kemajuan yang Direkomendasikan
+### Progression yang Direkomendasikan
 
 1. **Mulai dengan Aplikasi Web Sederhana**
    - Pelajari konsep dasar AZD
    - Pahami alur kerja penerapan
    - Praktikkan manajemen lingkungan
 
-2. **Coba Situs Web Statis**
+2. **Coba Situs Statis**
    - Jelajahi opsi hosting yang berbeda
-   - Pelajari tentang integrasi CDN
+   - Pelajari integrasi CDN
    - Pahami konfigurasi DNS
 
 3. **Lanjutkan ke Aplikasi Kontainer**
@@ -262,12 +263,12 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
    - Pahami string koneksi
    - Praktikkan manajemen rahasia
 
-5. **Jelajahi Fungsi Tanpa Server**
-   - Pahami arsitektur berbasis peristiwa
+5. **Jelajahi Serverless**
+   - Pahami arsitektur berbasis event
    - Pelajari tentang pemicu dan binding
    - Praktikkan dengan API
 
-6. **Bangun Mikroservis**
+6. **Bangun Microservices**
    - Pelajari komunikasi layanan
    - Pahami sistem terdistribusi
    - Praktikkan penerapan yang kompleks
@@ -275,39 +276,49 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 ## 🔍 Menemukan Contoh yang Tepat
 
 ### Berdasarkan Teknologi
-- **Node.js**: Aplikasi Web Sederhana, Mikroservis
-- **Python**: Aplikasi Database, Fungsi Tanpa Server
-- **Situs Statis**: Situs Web Statis
-- **Kontainer**: Aplikasi Kontainer, Mikroservis
-- **Database**: Aplikasi Database, Fungsi Tanpa Server
+- **Node.js**: Node.js Express Todo App
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Kontainer**: Python Flask Container App, Java Microservices
+- **Database**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Berdasarkan Pola Arsitektur
-- **Monolitik**: Aplikasi Web Sederhana, Aplikasi Database
-- **Statis**: Situs Web Statis
-- **Mikroservis**: Contoh Mikroservis
-- **Tanpa Server**: Fungsi Tanpa Server
-- **Hibrid**: Aplikasi Kontainer
+- **Monolitik**: Node.js Express Todo, C# Web API + SQL
+- **Statis + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: Java Spring Boot Microservices
+- **Kontainerisasi**: Python Flask Container App
+- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Berdasarkan Tingkat Kompleksitas
-- **Pemula**: Aplikasi Web Sederhana, Situs Web Statis
-- **Menengah**: Aplikasi Kontainer, Aplikasi Database, Fungsi Tanpa Server  
-- **Lanjutan**: Mikroservis
+- **Pemula**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Menengah**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Lanjutan**: ML Pipeline
 
 ## 📚 Sumber Daya Tambahan
 
 ### Tautan Dokumentasi
-- [Template AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentasi Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Pusat Arsitektur Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Contoh Komunitas
-- [Template AZD Contoh Azure](https://github.com/Azure-Samples/azd-templates)
-- [Template Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Galeri Azure Developer CLI](https://azure.github.io/awesome-azd/)
+- [Todo App dengan C# dan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App dengan Python dan MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App dengan Node.js dan PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Web App dengan C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions dengan Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Praktik Terbaik
-- [Kerangka Kerja Arsitektur yang Baik Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Kerangka Kerja Adopsi Cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Kerangka Kerja Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Kerangka Adopsi Cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Berkontribusi pada Contoh
 
@@ -316,7 +327,7 @@ Punya contoh berguna untuk dibagikan? Kami menyambut kontribusi!
 ### Panduan Pengiriman
 1. Ikuti struktur direktori yang telah ditetapkan
 2. Sertakan README.md yang komprehensif
-3. Tambahkan komentar ke file konfigurasi
+3. Tambahkan komentar pada file konfigurasi
 4. Uji secara menyeluruh sebelum mengirimkan
 5. Sertakan estimasi biaya dan prasyarat
 
@@ -341,7 +352,7 @@ example-name/
 **Langkah Selanjutnya**: 
 - Pilih contoh yang sesuai dengan tingkat keahlian Anda
 - Ikuti instruksi pengaturan di README contoh
-- Bereksperimen dengan kustomisasi
+- Bereksperimen dengan penyesuaian
 - Bagikan pembelajaran Anda dengan komunitas
 
 ---
@@ -353,4 +364,4 @@ example-name/
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

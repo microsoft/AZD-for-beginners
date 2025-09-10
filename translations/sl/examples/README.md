@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:27:56+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:27:48+00:00",
   "source_file": "examples/README.md",
   "language_code": "sl"
 }
 -->
-# Primeri - Praktične predloge in konfiguracije za AZD
+# Primeri - Praktične predloge in konfiguracije AZD
 
 ## Uvod
 
@@ -16,18 +16,18 @@ Ta mapa vsebuje praktične primere, predloge in scenarije iz resničnega sveta, 
 ## Cilji učenja
 
 Z delom na teh primerih boste:
-- Vadili delovne tokove Azure Developer CLI z realističnimi scenariji aplikacij
+- Vadili delovne tokove Azure Developer CLI z realističnimi aplikacijskimi scenariji
 - Razumeli različne arhitekture aplikacij in njihove implementacije z azd
 - Obvladali vzorce Infrastructure as Code za različne Azure storitve
 - Uporabili strategije upravljanja konfiguracij in uvajanja, specifične za okolje
 - Implementirali vzorce za spremljanje, varnost in skaliranje v praktičnih kontekstih
-- Pridobili izkušnje pri odpravljanju težav in odpravljanju napak v resničnih scenarijih uvajanja
+- Pridobili izkušnje z odpravljanjem težav in odpravljanjem napak pri resničnih scenarijih uvajanja
 
 ## Rezultati učenja
 
 Po zaključku teh primerov boste sposobni:
 - Z zaupanjem uvajati različne vrste aplikacij z uporabo Azure Developer CLI
-- Prilagoditi podane predloge svojim zahtevam aplikacije
+- Prilagoditi predložene predloge svojim aplikacijskim zahtevam
 - Oblikovati in implementirati prilagojene infrastrukturne vzorce z uporabo Bicep
 - Konfigurirati kompleksne aplikacije z več storitvami in ustreznimi odvisnostmi
 - Uporabiti najboljše prakse za varnost, spremljanje in zmogljivost v resničnih scenarijih
@@ -36,55 +36,36 @@ Po zaključku teh primerov boste sposobni:
 ## Struktura mape
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
     └── scripts/
 ```
 
-## Hitri primeri
+## Hitri primeri za začetek
 
 ### Za začetnike
-1. **[Preprosta spletna aplikacija](../../../examples/simple-web-app)** - Uvajanje osnovne Node.js spletne aplikacije
-2. **[Statično spletno mesto](../../../examples/static-website)** - Gostovanje statičnega spletnega mesta na Azure Storage
-3. **[Aplikacija v kontejnerju](../../../examples/container-app)** - Uvajanje aplikacije v kontejnerju
+1. **[Preprosta spletna aplikacija - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Uvajanje spletne aplikacije Node.js Express z MongoDB
+2. **[Statična spletna stran - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Gostovanje statične spletne strani React z Azure Static Web Apps
+3. **[Aplikacija v kontejnerju - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Uvajanje aplikacije Python Flask v kontejnerju
 
 ### Za uporabnike s srednjim znanjem
-4. **[Aplikacija z bazo podatkov](../../../examples/database-app)** - Spletna aplikacija s PostgreSQL bazo podatkov
-5. **[Serverless funkcija](../../../examples/serverless-function)** - Azure Functions z HTTP sprožilci
-6. **[Mikrostoritve](../../../examples/microservices)** - Aplikacija z več storitvami in API prehodom
+4. **[Aplikacija z bazo podatkov - C# z Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Spletna aplikacija z API-jem C# in bazo podatkov Azure SQL
+5. **[Serverless funkcija - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions z HTTP sprožilci in Cosmos DB
+6. **[Mikrostoritve - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Večstoritevna Java aplikacija z Container Apps in API prehodom
+
+### Predloge Azure AI Foundry
+
+1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Inteligentna aplikacija za klepet z Azure OpenAI
+2. **[Obdelava dokumentov z AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analiza dokumentov z uporabo storitev Azure AI
+3. **[Strojno učenje - Pipeline](https://github.com/Azure-Samples/mlops-v2)** - Delovni tok MLOps z Azure Machine Learning
 
 ## 📋 Navodila za uporabo
 
@@ -123,9 +104,9 @@ examples/
 Vsak primer vključuje:
 - **README.md** - Podrobna navodila za nastavitev in prilagoditev
 - **azure.yaml** - AZD konfiguracija s komentarji
-- **infra/** - Bicep predloge s pojasnili parametrov
+- **infra/** - Bicep predloge z razlagami parametrov
 - **src/** - Vzorčna koda aplikacije
-- **scripts/** - Pomožni skripti za običajne naloge
+- **scripts/** - Pomožni skripti za pogoste naloge
 
 ## 🎯 Cilji učenja
 
@@ -151,37 +132,54 @@ Vsak primer vključuje:
 
 ## 📖 Opisi primerov
 
-### Preprosta spletna aplikacija
-**Tehnologije**: Node.js, App Service, Application Insights  
+### Preprosta spletna aplikacija - Node.js Express
+**Tehnologije**: Node.js, Express, MongoDB, Container Apps  
 **Kompleksnost**: Začetnik  
-**Koncepti**: Osnovno uvajanje, okoljske spremenljivke, preverjanje stanja
+**Koncepti**: Osnovno uvajanje, REST API, integracija NoSQL baze podatkov
 
-### Statično spletno mesto
-**Tehnologije**: HTML/CSS/JS, Storage Account, CDN  
+### Statična spletna stran - React SPA
+**Tehnologije**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Kompleksnost**: Začetnik  
-**Koncepti**: Statično gostovanje, integracija CDN, prilagojene domene
+**Koncepti**: Statično gostovanje, serverless backend, sodoben spletni razvoj
 
-### Aplikacija v kontejnerju
-**Tehnologije**: Docker, Container Apps, Container Registry  
-**Kompleksnost**: Srednje  
-**Koncepti**: Kontejnerizacija, skaliranje, konfiguracija dostopa
+### Aplikacija v kontejnerju - Python Flask
+**Tehnologije**: Python Flask, Docker, Container Apps, Container Registry  
+**Kompleksnost**: Začetnik  
+**Koncepti**: Kontejnerizacija, arhitektura mikrostoritev, razvoj API-jev
 
-### Aplikacija z bazo podatkov
-**Tehnologije**: Python Flask, PostgreSQL, App Service  
-**Kompleksnost**: Srednje  
-**Koncepti**: Povezave z bazo podatkov, upravljanje skrivnosti, migracije
+### Aplikacija z bazo podatkov - C# z Azure SQL
+**Tehnologije**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Kompleksnost**: Srednje zahtevno  
+**Koncepti**: Entity Framework, povezave z bazo podatkov, razvoj spletnih API-jev
 
-### Serverless funkcija
-**Tehnologije**: Azure Functions, Cosmos DB, API Management  
-**Kompleksnost**: Srednje  
-**Koncepti**: Arhitektura, ki temelji na dogodkih, povezave, upravljanje API-jev
+### Serverless funkcija - Python Azure Functions
+**Tehnologije**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Kompleksnost**: Srednje zahtevno  
+**Koncepti**: Arhitektura, ki temelji na dogodkih, serverless računalništvo, razvoj celotnega sklopa
 
-### Mikrostoritve
-**Tehnologije**: Več storitev, Service Bus, API Gateway  
+### Mikrostoritve - Java Spring Boot
+**Tehnologije**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Kompleksnost**: Srednje zahtevno  
+**Koncepti**: Komunikacija med storitvami, porazdeljeni sistemi, vzorci za podjetja
+
+### Primeri Azure AI Foundry
+
+#### Azure OpenAI Chat App
+**Tehnologije**: Azure OpenAI, Cognitive Search, App Service  
+**Kompleksnost**: Srednje zahtevno  
+**Koncepti**: RAG arhitektura, iskanje vektorjev, integracija LLM
+
+#### Obdelava dokumentov z AI
+**Tehnologije**: Azure AI Document Intelligence, Storage, Functions  
+**Kompleksnost**: Srednje zahtevno  
+**Koncepti**: Analiza dokumentov, OCR, ekstrakcija podatkov
+
+#### Strojno učenje - Pipeline
+**Tehnologije**: Azure ML, MLOps, Container Registry  
 **Kompleksnost**: Napredno  
-**Koncepti**: Komunikacija med storitvami, sporočilne vrste, uravnavanje obremenitve
+**Koncepti**: Usposabljanje modelov, uvajanje pipeline, spremljanje
 
-## 🛠 Primeri konfiguracij
+## 🛠 Konfiguracijski primeri
 
 Mapa `configurations/` vsebuje ponovno uporabne komponente:
 
@@ -231,30 +229,33 @@ Mapa `configurations/` vsebuje ponovno uporabne komponente:
 
 | Primer | Storitve | Baza podatkov | Avtentikacija | Spremljanje | Kompleksnost |
 |--------|----------|---------------|---------------|-------------|--------------|
-| Preprosta spletna aplikacija | 1 | ❌ | Osnovno | Osnovno | ⭐ |
-| Statično spletno mesto | 1 | ❌ | ❌ | Osnovno | ⭐ |
-| Aplikacija v kontejnerju | 1 | ❌ | Osnovno | Polno | ⭐⭐ |
-| Aplikacija z bazo podatkov | 2 | ✅ | Polno | Polno | ⭐⭐⭐ |
-| Serverless funkcija | 3 | ✅ | Polno | Polno | ⭐⭐⭐ |
-| Mikrostoritve | 5+ | ✅ | Polno | Polno | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Osnovno | Osnovno | ⭐ |
+| React SPA + Functions | 3 | ✅ | Osnovno | Polno | ⭐ |
+| Python Flask Container | 2 | ❌ | Osnovno | Polno | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Polno | Polno | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Polno | Polno | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Polno | Polno | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Polno | Polno | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Osnovno | Polno | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Polno | Polno | ⭐⭐⭐⭐ |
 
 ## 🎓 Učni načrt
 
-### Priporočena pot
+### Priporočena progresija
 
 1. **Začnite s preprosto spletno aplikacijo**
    - Naučite se osnovnih konceptov AZD
    - Razumite delovni tok uvajanja
    - Vadite upravljanje okolja
 
-2. **Preizkusite statično spletno mesto**
+2. **Preizkusite statično spletno stran**
    - Raziščite različne možnosti gostovanja
    - Naučite se integracije CDN
    - Razumite konfiguracijo DNS
 
 3. **Preidite na aplikacijo v kontejnerju**
    - Naučite se osnov kontejnerizacije
-   - Razumite koncept skaliranja
+   - Razumite koncepte skaliranja
    - Vadite z Dockerjem
 
 4. **Dodajte integracijo baze podatkov**
@@ -264,7 +265,7 @@ Mapa `configurations/` vsebuje ponovno uporabne komponente:
 
 5. **Raziščite serverless**
    - Razumite arhitekturo, ki temelji na dogodkih
-   - Naučite se sprožilcev in povezav
+   - Naučite se sprožilcev in vezav
    - Vadite z API-ji
 
 6. **Zgradite mikrostoritve**
@@ -274,36 +275,46 @@ Mapa `configurations/` vsebuje ponovno uporabne komponente:
 
 ## 🔍 Iskanje pravega primera
 
-### Po tehnološkem skladu
-- **Node.js**: Preprosta spletna aplikacija, Mikrostoritve
-- **Python**: Aplikacija z bazo podatkov, Serverless funkcija
-- **Statična mesta**: Statično spletno mesto
-- **Kontejnerji**: Aplikacija v kontejnerju, Mikrostoritve
-- **Baze podatkov**: Aplikacija z bazo podatkov, Serverless funkcija
+### Po tehnološkem sklopu
+- **Node.js**: Node.js Express Todo App
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Kontejnerji**: Python Flask Container App, Java Microservices
+- **Baze podatkov**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Po arhitekturnem vzorcu
-- **Monolitne**: Preprosta spletna aplikacija, Aplikacija z bazo podatkov
-- **Statične**: Statično spletno mesto
-- **Mikrostoritve**: Primer mikrostoritev
-- **Serverless**: Serverless funkcija
-- **Hibridne**: Aplikacija v kontejnerju
+- **Monolitne**: Node.js Express Todo, C# Web API + SQL
+- **Statične + serverless**: React SPA + Functions, Python Functions + SPA
+- **Mikrostoritve**: Java Spring Boot Microservices
+- **Kontejnerizirane**: Python Flask Container App
+- **AI-podprte**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Po stopnji kompleksnosti
-- **Začetnik**: Preprosta spletna aplikacija, Statično spletno mesto
-- **Srednje**: Aplikacija v kontejnerju, Aplikacija z bazo podatkov, Serverless funkcija  
-- **Napredno**: Mikrostoritve
+- **Začetnik**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Srednje zahtevno**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Napredno**: ML Pipeline
 
 ## 📚 Dodatni viri
 
 ### Povezave do dokumentacije
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
-- [Dokumentacija za Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Dokumentacija Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Primeri skupnosti
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
 - [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App z C# in Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App z Python in MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App z Node.js in PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Web App z C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions z Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Najboljše prakse
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -320,7 +331,7 @@ Imate uporaben primer za deljenje? Veseli bomo vaših prispevkov!
 4. Temeljito testirajte pred oddajo
 5. Vključite ocene stroškov in predpogoje
 
-### Struktura predloge primerov
+### Struktura predloge za primer
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -336,21 +347,21 @@ example-name/
 
 ---
 
-**Nasvet**: Začnite z najpreprostejšim primerom, ki ustreza vašemu tehnološkemu skladu, nato pa postopoma napredujte do bolj kompleksnih scenarijev. Vsak primer gradi na konceptih iz prejšnjih!
+**Nasvet**: Začnite z najpreprostejšim primerom, ki ustreza vašemu tehnološkemu sklopu, nato pa postopoma preidite na bolj kompleksne scenarije. Vsak primer gradi na konceptih iz prejšnjih!
 
 **Naslednji koraki**: 
 - Izberite primer, ki ustreza vaši stopnji znanja
 - Sledite navodilom za nastavitev v README datoteki primera
 - Eksperimentirajte s prilagoditvami
-- Delite svoje izkušnje s skupnostjo
+- Delite svoje ugotovitve s skupnostjo
 
 ---
 
 **Navigacija**
 - **Prejšnja lekcija**: [Vodnik za študij](../resources/study-guide.md)
-- **Nazaj na**: [Glavni README](../README.md)
+- **Vrnitev na**: [Glavni README](../README.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da se zavedate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

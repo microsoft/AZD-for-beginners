@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:23:57+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:23:21+00:00",
   "source_file": "examples/README.md",
   "language_code": "cs"
 }
@@ -11,17 +11,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tento adresář obsahuje praktické příklady, šablony a scénáře z reálného světa, které vám pomohou naučit se Azure Developer CLI prostřednictvím praktického cvičení. Každý příklad poskytuje kompletní funkční kód, šablony infrastruktury a podrobné pokyny pro různé architektury aplikací a vzory nasazení.
+Tento adresář obsahuje praktické příklady, šablony a scénáře z reálného světa, které vám pomohou naučit se Azure Developer CLI prostřednictvím praktického cvičení. Každý příklad poskytuje kompletní funkční kód, šablony infrastruktury a podrobné instrukce pro různé architektury aplikací a vzory nasazení.
 
 ## Cíle učení
 
-Prací na těchto příkladech si osvojíte:
-- Procvičení pracovních postupů Azure Developer CLI s realistickými scénáři aplikací
-- Porozumění různým architekturám aplikací a jejich implementacím v azd
-- Zvládnutí vzorů Infrastructure as Code pro různé služby Azure
-- Použití správy konfigurace a strategií nasazení specifických pro prostředí
-- Implementaci monitorování, zabezpečení a škálovacích vzorů v praktických kontextech
-- Získání zkušeností s řešením problémů a laděním reálných scénářů nasazení
+Prací na těchto příkladech se naučíte:
+- Procvičit pracovní postupy Azure Developer CLI na realistických scénářích aplikací
+- Porozumět různým architekturám aplikací a jejich implementacím v azd
+- Ovládnout vzory Infrastructure as Code pro různé služby Azure
+- Aplikovat strategie správy konfigurace a nasazení specifické pro prostředí
+- Implementovat monitorovací, bezpečnostní a škálovací vzory v praktických kontextech
+- Získat zkušenosti s řešením problémů a laděním reálných scénářů nasazení
 
 ## Výsledky učení
 
@@ -29,45 +29,20 @@ Po dokončení těchto příkladů budete schopni:
 - S jistotou nasazovat různé typy aplikací pomocí Azure Developer CLI
 - Přizpůsobit poskytnuté šablony vlastním požadavkům na aplikace
 - Navrhovat a implementovat vlastní vzory infrastruktury pomocí Bicep
-- Konfigurovat složité aplikace s více službami a správnými závislostmi
-- Používat osvědčené postupy pro zabezpečení, monitorování a výkon v reálných scénářích
+- Konfigurovat komplexní aplikace s více službami a správnými závislostmi
+- Aplikovat bezpečnostní, monitorovací a výkonnostní osvědčené postupy v reálných scénářích
 - Řešit problémy a optimalizovat nasazení na základě praktických zkušeností
 
 ## Struktura adresáře
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,26 +52,32 @@ examples/
 ## Příklady pro rychlý start
 
 ### Pro začátečníky
-1. **[Jednoduchá webová aplikace](../../../examples/simple-web-app)** - Nasazení základní webové aplikace Node.js
-2. **[Statická webová stránka](../../../examples/static-website)** - Hostování statické webové stránky na Azure Storage
-3. **[Aplikace v kontejneru](../../../examples/container-app)** - Nasazení aplikace v kontejneru
+1. **[Jednoduchá webová aplikace - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Nasazení webové aplikace Node.js Express s MongoDB
+2. **[Statická webová stránka - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Hostování statické webové stránky React pomocí Azure Static Web Apps
+3. **[Aplikace v kontejneru - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Nasazení kontejnerizované aplikace Python Flask
 
 ### Pro pokročilé uživatele
-4. **[Aplikace s databází](../../../examples/database-app)** - Webová aplikace s databází PostgreSQL
-5. **[Serverless funkce](../../../examples/serverless-function)** - Azure Functions s HTTP triggery
-6. **[Mikroslužby](../../../examples/microservices)** - Aplikace s více službami a API gateway
+4. **[Databázová aplikace - C# s Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Webová aplikace s C# API a databází Azure SQL
+5. **[Serverless funkce - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions s HTTP triggery a Cosmos DB
+6. **[Mikroslužby - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Víceslužbová aplikace Java s Container Apps a API gateway
+
+### Šablony Azure AI Foundry
+
+1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Inteligentní chatovací aplikace s Azure OpenAI
+2. **[Zpracování dokumentů AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analýza dokumentů pomocí služeb Azure AI
+3. **[Pipeline strojového učení](https://github.com/Azure-Samples/mlops-v2)** - Workflow MLOps s Azure Machine Learning
 
 ## 📋 Pokyny k použití
 
 ### Spuštění příkladů lokálně
 
-1. **Naklonujte nebo zkopírujte příklad**
+1. **Klonování nebo kopírování příkladu**  
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
    ```
 
-2. **Inicializujte prostředí AZD**
+2. **Inicializace prostředí AZD**  
    ```bash
    # Initialize with existing template
    azd init
@@ -105,14 +86,14 @@ examples/
    azd env new my-environment
    ```
 
-3. **Konfigurujte prostředí**
+3. **Konfigurace prostředí**  
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
 
-4. **Nasazení**
+4. **Nasazení**  
    ```bash
    # Deploy infrastructure and application
    azd up
@@ -139,9 +120,9 @@ Každý příklad obsahuje:
 
 #### **Pokročilé scénáře**
 - Architektury s více službami
-- Složité konfigurace sítí
+- Komplexní konfigurace sítí
 - Vzory integrace databází
-- Implementace zabezpečení a souladu
+- Implementace bezpečnosti a souladu
 
 #### **Vzory připravené pro produkci**
 - Konfigurace vysoké dostupnosti
@@ -151,57 +132,74 @@ Každý příklad obsahuje:
 
 ## 📖 Popisy příkladů
 
-### Jednoduchá webová aplikace
-**Technologie**: Node.js, App Service, Application Insights  
+### Jednoduchá webová aplikace - Node.js Express
+**Technologie**: Node.js, Express, MongoDB, Container Apps  
 **Složitost**: Začátečník  
-**Koncepty**: Základní nasazení, proměnné prostředí, kontrola stavu
+**Koncepty**: Základní nasazení, REST API, integrace NoSQL databáze
 
-### Statická webová stránka
-**Technologie**: HTML/CSS/JS, Storage Account, CDN  
+### Statická webová stránka - React SPA
+**Technologie**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Složitost**: Začátečník  
-**Koncepty**: Statické hostování, integrace CDN, vlastní domény
+**Koncepty**: Statické hostování, serverless backend, moderní vývoj webu
 
-### Aplikace v kontejneru
-**Technologie**: Docker, Container Apps, Container Registry  
-**Složitost**: Středně pokročilý  
-**Koncepty**: Kontejnerizace, škálování, konfigurace přístupu
+### Aplikace v kontejneru - Python Flask
+**Technologie**: Python Flask, Docker, Container Apps, Container Registry  
+**Složitost**: Začátečník  
+**Koncepty**: Kontejnerizace, architektura mikroslužeb, vývoj API
 
-### Aplikace s databází
-**Technologie**: Python Flask, PostgreSQL, App Service  
-**Složitost**: Středně pokročilý  
-**Koncepty**: Připojení k databázi, správa tajemství, migrace
-
-### Serverless funkce
-**Technologie**: Azure Functions, Cosmos DB, API Management  
-**Složitost**: Středně pokročilý  
-**Koncepty**: Architektura řízená událostmi, vazby, správa API
-
-### Mikroslužby
-**Technologie**: Více služeb, Service Bus, API Gateway  
+### Databázová aplikace - C# s Azure SQL
+**Technologie**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Složitost**: Pokročilý  
-**Koncepty**: Komunikace mezi službami, fronty zpráv, vyvažování zátěže
+**Koncepty**: Entity Framework, připojení k databázi, vývoj webového API
 
-## 🛠 Příklady konfigurace
+### Serverless funkce - Python Azure Functions
+**Technologie**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Složitost**: Pokročilý  
+**Koncepty**: Architektura řízená událostmi, serverless computing, vývoj full-stack aplikací
+
+### Mikroslužby - Java Spring Boot
+**Technologie**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Složitost**: Pokročilý  
+**Koncepty**: Komunikace mikroslužeb, distribuované systémy, podnikové vzory
+
+### Příklady Azure AI Foundry
+
+#### Azure OpenAI Chat App
+**Technologie**: Azure OpenAI, Cognitive Search, App Service  
+**Složitost**: Pokročilý  
+**Koncepty**: Architektura RAG, vektorové vyhledávání, integrace LLM
+
+#### Zpracování dokumentů AI
+**Technologie**: Azure AI Document Intelligence, Storage, Functions  
+**Složitost**: Pokročilý  
+**Koncepty**: Analýza dokumentů, OCR, extrakce dat
+
+#### Pipeline strojového učení
+**Technologie**: Azure ML, MLOps, Container Registry  
+**Složitost**: Pokročilý  
+**Koncepty**: Trénování modelů, nasazovací pipeline, monitorování
+
+## 🛠 Konfigurační příklady
 
 Adresář `configurations/` obsahuje znovupoužitelné komponenty:
 
 ### Konfigurace prostředí
 - Nastavení vývojového prostředí
-- Konfigurace prostředí pro testování
+- Konfigurace stagingového prostředí
 - Konfigurace připravené pro produkci
 - Nastavení nasazení do více regionů
 
 ### Moduly Bicep
 - Znovupoužitelné komponenty infrastruktury
 - Běžné vzory zdrojů
-- Šablony se zvýšeným zabezpečením
+- Šablony s posílenou bezpečností
 - Nákladově optimalizované konfigurace
 
 ### Pomocné skripty
 - Automatizace nastavení prostředí
 - Skripty pro migraci databáze
-- Nástroje pro ověření nasazení
-- Nástroje pro sledování nákladů
+- Nástroje pro validaci nasazení
+- Pomůcky pro monitorování nákladů
 
 ## 🔧 Průvodce přizpůsobením
 
@@ -222,7 +220,7 @@ Adresář `configurations/` obsahuje znovupoužitelné komponenty:
    - Ověřte funkčnost
    - Testujte škálování a výkon
 
-4. **Zabezpečení**
+4. **Bezpečnostní kontrola**
    - Zkontrolujte přístupová oprávnění
    - Implementujte správu tajemství
    - Aktivujte monitorování a upozornění
@@ -230,13 +228,16 @@ Adresář `configurations/` obsahuje znovupoužitelné komponenty:
 ## 📊 Porovnávací tabulka
 
 | Příklad | Služby | Databáze | Autentizace | Monitorování | Složitost |
-|---------|----------|----------|------|------------|------------|
-| Jednoduchá webová aplikace | 1 | ❌ | Základní | Základní | ⭐ |
-| Statická webová stránka | 1 | ❌ | ❌ | Základní | ⭐ |
-| Aplikace v kontejneru | 1 | ❌ | Základní | Plné | ⭐⭐ |
-| Aplikace s databází | 2 | ✅ | Plné | Plné | ⭐⭐⭐ |
-| Serverless funkce | 3 | ✅ | Plné | Plné | ⭐⭐⭐ |
-| Mikroslužby | 5+ | ✅ | Plné | Plné | ⭐⭐⭐⭐ |
+|---------|--------|----------|-------------|--------------|-----------|
+| Node.js Express Todo | 2 | ✅ | Základní | Základní | ⭐ |
+| React SPA + Functions | 3 | ✅ | Základní | Plné | ⭐ |
+| Python Flask Container | 2 | ❌ | Základní | Plné | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Plné | Plné | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Plné | Plné | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Plné | Plné | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Plné | Plné | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Základní | Plné | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Plné | Plné | ⭐⭐⭐⭐ |
 
 ## 🎓 Učební cesta
 
@@ -270,32 +271,36 @@ Adresář `configurations/` obsahuje znovupoužitelné komponenty:
 6. **Vytvořte mikroslužby**
    - Naučte se komunikaci mezi službami
    - Pochopte distribuované systémy
-   - Procvičte složitá nasazení
+   - Procvičte komplexní nasazení
 
 ## 🔍 Výběr správného příkladu
 
 ### Podle technologického stacku
-- **Node.js**: Jednoduchá webová aplikace, Mikroslužby
-- **Python**: Aplikace s databází, Serverless funkce
-- **Statické stránky**: Statická webová stránka
-- **Kontejnery**: Aplikace v kontejneru, Mikroslužby
-- **Databáze**: Aplikace s databází, Serverless funkce
+- **Node.js**: Node.js Express Todo App
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Kontejnery**: Python Flask Container App, Java Microservices
+- **Databáze**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Podle architektonického vzoru
-- **Monolitické**: Jednoduchá webová aplikace, Aplikace s databází
-- **Statické**: Statická webová stránka
-- **Mikroslužby**: Příklad mikroslužeb
-- **Serverless**: Serverless funkce
-- **Hybridní**: Aplikace v kontejneru
+- **Monolitické**: Node.js Express Todo, C# Web API + SQL
+- **Statické + serverless**: React SPA + Functions, Python Functions + SPA
+- **Mikroslužby**: Java Spring Boot Microservices
+- **Kontejnerizované**: Python Flask Container App
+- **AI-poháněné**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Podle úrovně složitosti
-- **Začátečník**: Jednoduchá webová aplikace, Statická webová stránka
-- **Středně pokročilý**: Aplikace v kontejneru, Aplikace s databází, Serverless funkce  
-- **Pokročilý**: Mikroslužby
+- **Začátečník**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Pokročilý**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Pokročilý**: ML Pipeline
 
 ## 📚 Další zdroje
 
 ### Odkazy na dokumentaci
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentace Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
@@ -303,7 +308,13 @@ Adresář `configurations/` obsahuje znovupoužitelné komponenty:
 ### Příklady z komunity
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
 - [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Galerie Azure Developer CLI](https://azure.github.io/awesome-azd/)
+- [Todo App s C# a Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App s Pythonem a MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App s Node.js a PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Web App s C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions s Javou](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Osvědčené postupy
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -348,9 +359,9 @@ example-name/
 
 **Navigace**
 - **Předchozí lekce**: [Studijní průvodce](../resources/study-guide.md)
-- **Zpět na**: [Hlavní README](../README.md)
+- **Návrat na**: [Hlavní README](../README.md)
 
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Za autoritativní zdroj by měl být považován původní dokument v jeho původním jazyce. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

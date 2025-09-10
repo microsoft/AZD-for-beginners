@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:22:07+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:20:55+00:00",
   "source_file": "examples/README.md",
   "language_code": "tl"
 }
 -->
-# Mga Halimbawa - Praktikal na AZD Templates at Konfigurasyon
+# Mga Halimbawa - Praktikal na AZD Templates at Configurations
 
 ## Panimula
 
-Ang direktoryong ito ay naglalaman ng mga praktikal na halimbawa, templates, at mga totoong senaryo upang matulungan kang matutunan ang Azure Developer CLI sa pamamagitan ng aktwal na pagsasanay. Bawat halimbawa ay nagbibigay ng kumpletong gumaganang code, mga template ng imprastraktura, at detalyadong mga tagubilin para sa iba't ibang arkitektura ng aplikasyon at mga pattern ng pag-deploy.
+Ang direktoryong ito ay naglalaman ng mga praktikal na halimbawa, templates, at mga totoong senaryo upang matulungan kang matutunan ang Azure Developer CLI sa pamamagitan ng hands-on na pagsasanay. Bawat halimbawa ay nagbibigay ng kumpletong gumaganang code, mga template ng imprastraktura, at detalyadong mga tagubilin para sa iba't ibang arkitektura ng aplikasyon at mga pattern ng deployment.
 
 ## Mga Layunin sa Pag-aaral
 
@@ -19,55 +19,30 @@ Sa pamamagitan ng pagtrabaho sa mga halimbawang ito, ikaw ay:
 - Magpapraktis ng mga workflow ng Azure Developer CLI gamit ang makatotohanang mga senaryo ng aplikasyon
 - Mauunawaan ang iba't ibang arkitektura ng aplikasyon at ang kanilang mga implementasyon sa azd
 - Magiging bihasa sa mga pattern ng Infrastructure as Code para sa iba't ibang serbisyo ng Azure
-- Mag-aaplay ng pamamahala ng konfigurasyon at mga estratehiya sa pag-deploy na partikular sa kapaligiran
-- Magpapatupad ng mga pattern para sa monitoring, seguridad, at scaling sa praktikal na konteksto
-- Magkakaroon ng karanasan sa pag-troubleshoot at pag-debug ng mga totoong senaryo ng pag-deploy
+- Mag-aaplay ng pamamahala ng configuration at mga deployment strategy na partikular sa environment
+- Magpapatupad ng mga pattern para sa monitoring, seguridad, at scaling sa mga praktikal na konteksto
+- Magkakaroon ng karanasan sa pag-troubleshoot at pag-debug ng mga totoong senaryo ng deployment
 
-## Mga Resulta sa Pag-aaral
+## Mga Resulta ng Pag-aaral
 
-Kapag natapos mo ang mga halimbawang ito, magagawa mo:
+Kapag natapos mo ang mga halimbawang ito, magagawa mo nang:
 - Mag-deploy ng iba't ibang uri ng aplikasyon gamit ang Azure Developer CLI nang may kumpiyansa
 - Iangkop ang mga ibinigay na template sa iyong sariling mga pangangailangan sa aplikasyon
 - Magdisenyo at magpatupad ng mga custom na pattern ng imprastraktura gamit ang Bicep
 - Mag-configure ng mga kumplikadong multi-service na aplikasyon na may tamang dependencies
-- Mag-aplay ng mga pinakamahusay na kasanayan sa seguridad, monitoring, at performance sa totoong mga senaryo
+- Mag-aplay ng mga pinakamahusay na kasanayan sa seguridad, monitoring, at performance sa mga totoong senaryo
 - Mag-troubleshoot at mag-optimize ng mga deployment batay sa praktikal na karanasan
 
 ## Estruktura ng Direktoryo
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -76,15 +51,21 @@ examples/
 
 ## Mga Halimbawa para sa Mabilisang Pagsisimula
 
-### Para sa Mga Baguhan
-1. **[Simple Web App](../../../examples/simple-web-app)** - Mag-deploy ng basic na Node.js web application
-2. **[Static Website](../../../examples/static-website)** - Mag-host ng static na website sa Azure Storage
-3. **[Container App](../../../examples/container-app)** - Mag-deploy ng containerized na aplikasyon
+### Para sa mga Baguhan
+1. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Mag-deploy ng Node.js Express web application na may MongoDB
+2. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Mag-host ng React static website gamit ang Azure Static Web Apps
+3. **[Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Mag-deploy ng containerized Python Flask application
 
-### Para sa Mga Intermediate na Gumagamit
-4. **[Database App](../../../examples/database-app)** - Web application na may PostgreSQL database
-5. **[Serverless Function](../../../examples/serverless-function)** - Azure Functions na may HTTP triggers
-6. **[Microservices](../../../examples/microservices)** - Multi-service na aplikasyon na may API gateway
+### Para sa mga Intermediate na User
+4. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Web application na may C# API at Azure SQL Database
+5. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions na may HTTP triggers at Cosmos DB
+6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Multi-service Java application na may Container Apps at API gateway
+
+### Azure AI Foundry Templates
+
+1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Matalinong chat application gamit ang Azure OpenAI
+2. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** - Pagsusuri ng dokumento gamit ang mga serbisyo ng Azure AI
+3. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps workflow gamit ang Azure Machine Learning
 
 ## 📋 Mga Tagubilin sa Paggamit
 
@@ -134,113 +115,133 @@ Bawat halimbawa ay naglalaman ng:
 #### **Mga Pangunahing Deployment**
 - Mga single-service na aplikasyon
 - Simpleng mga pattern ng imprastraktura
-- Pangunahing pamamahala ng konfigurasyon
+- Pangunahing pamamahala ng configuration
 - Mga cost-effective na setup para sa development
 
 #### **Mga Advanced na Senaryo**
 - Mga multi-service na arkitektura
-- Kumplikadong mga konfigurasyon ng networking
+- Kumplikadong mga configuration ng networking
 - Mga pattern ng integrasyon ng database
 - Mga implementasyon ng seguridad at pagsunod
 
 #### **Mga Pattern na Handa sa Produksyon**
-- Mga konfigurasyon para sa mataas na availability
+- Mga configuration para sa mataas na availability
 - Monitoring at observability
 - Integrasyon ng CI/CD
 - Mga setup para sa disaster recovery
 
 ## 📖 Mga Deskripsyon ng Halimbawa
 
-### Simple Web App
-**Mga Teknolohiya**: Node.js, App Service, Application Insights  
-**Kumplikado**: Baguhan  
-**Mga Konsepto**: Pangunahing deployment, environment variables, health checks
+### Simple Web App - Node.js Express
+**Mga Teknolohiya**: Node.js, Express, MongoDB, Container Apps  
+**Kumpleksidad**: Baguhan  
+**Mga Konsepto**: Pangunahing deployment, REST API, integrasyon ng NoSQL database
 
-### Static Website
-**Mga Teknolohiya**: HTML/CSS/JS, Storage Account, CDN  
-**Kumplikado**: Baguhan  
-**Mga Konsepto**: Static hosting, CDN integration, custom domains
+### Static Website - React SPA
+**Mga Teknolohiya**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
+**Kumpleksidad**: Baguhan  
+**Mga Konsepto**: Static hosting, serverless backend, modernong web development
 
-### Container App
-**Mga Teknolohiya**: Docker, Container Apps, Container Registry  
-**Kumplikado**: Intermediate  
-**Mga Konsepto**: Containerization, scaling, ingress configuration
+### Container App - Python Flask
+**Mga Teknolohiya**: Python Flask, Docker, Container Apps, Container Registry  
+**Kumpleksidad**: Baguhan  
+**Mga Konsepto**: Containerization, microservices architecture, API development
 
-### Database App
-**Mga Teknolohiya**: Python Flask, PostgreSQL, App Service  
-**Kumplikado**: Intermediate  
-**Mga Konsepto**: Database connections, secrets management, migrations
+### Database App - C# with Azure SQL
+**Mga Teknolohiya**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Kumpleksidad**: Intermediate  
+**Mga Konsepto**: Entity Framework, koneksyon sa database, web API development
 
-### Serverless Function
-**Mga Teknolohiya**: Azure Functions, Cosmos DB, API Management  
-**Kumplikado**: Intermediate  
-**Mga Konsepto**: Event-driven architecture, bindings, API management
+### Serverless Function - Python Azure Functions
+**Mga Teknolohiya**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Kumpleksidad**: Intermediate  
+**Mga Konsepto**: Event-driven architecture, serverless computing, full-stack development
 
-### Microservices
-**Mga Teknolohiya**: Maraming serbisyo, Service Bus, API Gateway  
-**Kumplikado**: Advanced  
-**Mga Konsepto**: Service communication, message queuing, load balancing
+### Microservices - Java Spring Boot
+**Mga Teknolohiya**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Kumpleksidad**: Intermediate  
+**Mga Konsepto**: Komunikasyon ng microservices, distributed systems, enterprise patterns
 
-## 🛠 Mga Halimbawa ng Konfigurasyon
+### Azure AI Foundry Examples
+
+#### Azure OpenAI Chat App
+**Mga Teknolohiya**: Azure OpenAI, Cognitive Search, App Service  
+**Kumpleksidad**: Intermediate  
+**Mga Konsepto**: RAG architecture, vector search, LLM integration
+
+#### AI Document Processing
+**Mga Teknolohiya**: Azure AI Document Intelligence, Storage, Functions  
+**Kumpleksidad**: Intermediate  
+**Mga Konsepto**: Pagsusuri ng dokumento, OCR, pagkuha ng data
+
+#### Machine Learning Pipeline
+**Mga Teknolohiya**: Azure ML, MLOps, Container Registry  
+**Kumpleksidad**: Advanced  
+**Mga Konsepto**: Pagsasanay ng modelo, deployment pipelines, monitoring
+
+## 🛠 Mga Halimbawa ng Configuration
 
 Ang direktoryong `configurations/` ay naglalaman ng mga reusable na bahagi:
 
-### Mga Konfigurasyon ng Environment
+### Mga Configuration ng Environment
 - Mga setting para sa development environment
-- Mga konfigurasyon para sa staging environment
-- Mga konfigurasyong handa sa produksyon
+- Mga configuration para sa staging environment
+- Mga configuration na handa sa produksyon
 - Mga setup para sa multi-region deployment
 
-### Mga Bicep Module
+### Mga Module ng Bicep
 - Mga reusable na bahagi ng imprastraktura
 - Karaniwang mga pattern ng resource
 - Mga template na pinatibay para sa seguridad
-- Mga konfigurasyong cost-optimized
+- Mga configuration na optimized para sa gastos
 
 ### Mga Helper Script
-- Automation para sa setup ng environment
-- Mga script para sa database migration
-- Mga tool para sa pag-validate ng deployment
+- Automation ng setup ng environment
+- Mga script para sa migration ng database
+- Mga tool para sa validation ng deployment
 - Mga utility para sa monitoring ng gastos
 
 ## 🔧 Gabay sa Pagpapasadya
 
 ### Pag-aangkop ng Mga Halimbawa para sa Iyong Gamit
 
-1. **Suriin ang Mga Kinakailangan**
-   - Tingnan ang mga kinakailangan sa serbisyo ng Azure
+1. **Suriin ang Mga Prerequisite**
+   - Suriin ang mga kinakailangan sa serbisyo ng Azure
    - I-verify ang mga limitasyon ng subscription
    - Unawain ang mga implikasyon sa gastos
 
-2. **Baguhin ang Konfigurasyon**
-   - I-update ang `azure.yaml` service definitions
+2. **I-modify ang Configuration**
+   - I-update ang mga service definition sa `azure.yaml`
    - I-customize ang mga template ng Bicep
-   - Ayusin ang mga environment variables
+   - I-adjust ang mga environment variable
 
 3. **Subukan nang Mabuti**
    - Mag-deploy muna sa development environment
    - I-validate ang functionality
    - Subukan ang scaling at performance
 
-4. **Suriin ang Seguridad**
+4. **Review ng Seguridad**
    - Suriin ang mga access control
-   - Magpatupad ng secrets management
+   - Magpatupad ng pamamahala ng mga secrets
    - I-enable ang monitoring at alerting
 
 ## 📊 Matrix ng Paghahambing
 
-| Halimbawa | Mga Serbisyo | Database | Auth | Monitoring | Kumplikado |
-|-----------|--------------|----------|------|------------|------------|
-| Simple Web App | 1 | ❌ | Basic | Basic | ⭐ |
-| Static Website | 1 | ❌ | ❌ | Basic | ⭐ |
-| Container App | 1 | ❌ | Basic | Full | ⭐⭐ |
-| Database App | 2 | ✅ | Full | Full | ⭐⭐⭐ |
-| Serverless Function | 3 | ✅ | Full | Full | ⭐⭐⭐ |
-| Microservices | 5+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| Halimbawa | Mga Serbisyo | Database | Auth | Monitoring | Kumpleksidad |
+|-----------|--------------|----------|------|------------|--------------|
+| Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
+| React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |
+| Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Full | Full | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
 
-## 🎓 Landas sa Pag-aaral
+## 🎓 Landas ng Pag-aaral
 
-### Inirerekomendang Pag-unlad
+### Inirerekomendang Pagkakasunod-sunod
 
 1. **Simulan sa Simple Web App**
    - Matutunan ang mga pangunahing konsepto ng AZD
@@ -250,7 +251,7 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na bahagi:
 2. **Subukan ang Static Website**
    - Tuklasin ang iba't ibang opsyon sa hosting
    - Matutunan ang integrasyon ng CDN
-   - Unawain ang konfigurasyon ng DNS
+   - Unawain ang configuration ng DNS
 
 3. **Lumipat sa Container App**
    - Matutunan ang mga pangunahing kaalaman sa containerization
@@ -259,8 +260,8 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na bahagi:
 
 4. **Magdagdag ng Integrasyon ng Database**
    - Matutunan ang provisioning ng database
-   - Unawain ang connection strings
-   - Magpraktis ng secrets management
+   - Unawain ang mga connection string
+   - Magpraktis ng pamamahala ng mga secrets
 
 5. **Tuklasin ang Serverless**
    - Unawain ang event-driven architecture
@@ -268,34 +269,38 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na bahagi:
    - Magpraktis gamit ang APIs
 
 6. **Bumuo ng Microservices**
-   - Matutunan ang service communication
+   - Matutunan ang komunikasyon ng serbisyo
    - Unawain ang distributed systems
    - Magpraktis ng mga kumplikadong deployment
 
 ## 🔍 Paghahanap ng Tamang Halimbawa
 
-### Ayon sa Teknolohiya
-- **Node.js**: Simple Web App, Microservices
-- **Python**: Database App, Serverless Function
-- **Static Sites**: Static Website
-- **Containers**: Container App, Microservices
-- **Databases**: Database App, Serverless Function
+### Batay sa Teknolohiya
+- **Node.js**: Node.js Express Todo App
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Containers**: Python Flask Container App, Java Microservices
+- **Databases**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
-### Ayon sa Pattern ng Arkitektura
-- **Monolithic**: Simple Web App, Database App
-- **Static**: Static Website
-- **Microservices**: Microservices example
-- **Serverless**: Serverless Function
-- **Hybrid**: Container App
+### Batay sa Pattern ng Arkitektura
+- **Monolithic**: Node.js Express Todo, C# Web API + SQL
+- **Static + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: Java Spring Boot Microservices
+- **Containerized**: Python Flask Container App
+- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
-### Ayon sa Antas ng Kumplikado
-- **Baguhan**: Simple Web App, Static Website
-- **Intermediate**: Container App, Database App, Serverless Function  
-- **Advanced**: Microservices
+### Batay sa Antas ng Kumpleksidad
+- **Baguhan**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Intermediate**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Advanced**: ML Pipeline
 
 ## 📚 Karagdagang Mga Mapagkukunan
 
 ### Mga Link sa Dokumentasyon
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
@@ -304,6 +309,12 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na bahagi:
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
 - [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Web App with C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions with Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Mga Pinakamahusay na Kasanayan
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -318,7 +329,7 @@ May kapaki-pakinabang na halimbawa na nais ibahagi? Malugod naming tinatanggap a
 2. Isama ang komprehensibong README.md
 3. Magdagdag ng mga komento sa mga configuration file
 4. Subukan nang mabuti bago magsumite
-5. Isama ang mga pagtatantya sa gastos at mga kinakailangan
+5. Isama ang mga pagtatantya sa gastos at mga prerequisite
 
 ### Estruktura ng Template ng Halimbawa
 ```
@@ -336,7 +347,7 @@ example-name/
 
 ---
 
-**Tip**: Simulan sa pinakasimpleng halimbawa na tumutugma sa iyong teknolohiya, pagkatapos ay unti-unting magtrabaho patungo sa mas kumplikadong mga senaryo. Ang bawat halimbawa ay bumubuo sa mga konsepto mula sa mga nauna.
+**Pro Tip**: Simulan sa pinakasimpleng halimbawa na tumutugma sa iyong teknolohiyang stack, pagkatapos ay unti-unting magtrabaho patungo sa mas kumplikadong mga senaryo. Ang bawat halimbawa ay bumubuo sa mga konsepto mula sa mga nauna.
 
 **Susunod na Hakbang**: 
 - Pumili ng halimbawa na tumutugma sa iyong antas ng kasanayan
@@ -346,11 +357,11 @@ example-name/
 
 ---
 
-**Pag-navigate**
+**Navigation**
 - **Nakaraang Aralin**: [Study Guide](../resources/study-guide.md)
 - **Bumalik sa**: [Main README](../README.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
