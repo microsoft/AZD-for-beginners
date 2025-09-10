@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T16:45:26+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:11:10+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "pl"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Wprowadzenie
 
-Witaj w swoim pierwszym projekcie z Azure Developer CLI! Ten kompleksowy praktyczny samouczek przeprowadzi Cię przez proces tworzenia, wdrażania i zarządzania aplikacją full-stack na platformie Azure za pomocą azd. Będziesz pracować z rzeczywistą aplikacją typu "todo", która obejmuje frontend w React, backend API w Node.js oraz bazę danych MongoDB.
+Witaj w swoim pierwszym projekcie z Azure Developer CLI! Ten kompleksowy praktyczny samouczek przeprowadzi Cię przez cały proces tworzenia, wdrażania i zarządzania aplikacją full-stack na Azure za pomocą azd. Będziesz pracować z rzeczywistą aplikacją typu "todo", która zawiera frontend React, backend API w Node.js oraz bazę danych MongoDB.
 
 ## Cele Nauki
 
@@ -29,34 +29,38 @@ Po ukończeniu będziesz w stanie:
 - Samodzielnie inicjalizować i konfigurować projekty azd z szablonów
 - Skutecznie nawigować i modyfikować struktury projektów azd
 - Wdrażać aplikacje full-stack na Azure za pomocą pojedynczych poleceń
-- Rozwiązywać typowe problemy związane z wdrożeniem i uwierzytelnianiem
+- Rozwiązywać typowe problemy z wdrożeniem i uwierzytelnianiem
 - Zarządzać wieloma środowiskami Azure dla różnych etapów wdrożenia
 - Implementować ciągłe wdrażanie dla aktualizacji aplikacji
 
-## Rozpoczęcie
+## Pierwsze Kroki
 
-### Lista Kontrolna Wymagań Wstępnych
+### Lista Kontrolna Wymagań
 - ✅ Zainstalowany Azure Developer CLI ([Przewodnik instalacji](installation.md))
 - ✅ Zainstalowany i uwierzytelniony Azure CLI
 - ✅ Zainstalowany Git na Twoim systemie
 - ✅ Node.js 16+ (dla tego samouczka)
 - ✅ Visual Studio Code (zalecane)
 
-### Zweryfikuj Swoje Środowisko
+### Weryfikacja Konfiguracji
 ```bash
 # Check azd installation
 azd version
+```
+### Weryfikacja uwierzytelnienia Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Sprawdzenie wersji Node.js
+```bash
 node --version
 ```
 
-## Krok 1: Wybierz i Zainicjalizuj Szablon
+## Krok 1: Wybór i Inicjalizacja Szablonu
 
-Rozpocznijmy od popularnego szablonu aplikacji "todo", który zawiera frontend w React oraz backend API w Node.js.
+Zacznijmy od popularnego szablonu aplikacji "todo", który zawiera frontend React oraz backend API w Node.js.
 
 ```bash
 # Browse available templates
@@ -73,13 +77,13 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### Co Właśnie Się Stało?
+### Co się właśnie wydarzyło?
 - Pobranie kodu szablonu do lokalnego katalogu
 - Utworzenie pliku `azure.yaml` z definicjami usług
 - Przygotowanie kodu infrastruktury w katalogu `infra/`
 - Utworzenie konfiguracji środowiska
 
-## Krok 2: Zbadaj Strukturę Projektu
+## Krok 2: Eksploracja Struktury Projektu
 
 Przyjrzyjmy się, co azd dla nas stworzył:
 
@@ -131,11 +135,11 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## Krok 3: Dostosuj Swój Projekt (Opcjonalne)
+## Krok 3: Dostosowanie Projektu (Opcjonalne)
 
 Przed wdrożeniem możesz dostosować aplikację:
 
-### Zmodyfikuj Frontend
+### Modyfikacja Frontendu
 ```bash
 # Open the React app component
 code src/web/src/App.tsx
@@ -147,17 +151,16 @@ Wprowadź prostą zmianę:
 <h1>My Awesome Todo App</h1>
 ```
 
-### Skonfiguruj Zmienne Środowiskowe
+### Konfiguracja Zmiennych Środowiskowych
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
-## Krok 4: Wdróż na Azure
+## Krok 4: Wdrożenie na Azure
 
 Teraz najciekawsza część - wdrożenie wszystkiego na Azure!
 
@@ -172,7 +175,7 @@ azd up
 # 4. Display the application URL
 ```
 
-### Co Dzieje Się Podczas Wdrożenia?
+### Co się dzieje podczas wdrożenia?
 
 Polecenie `azd up` wykonuje następujące kroki:
 1. **Provision** (`azd provision`) - Tworzy zasoby Azure
@@ -192,9 +195,9 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Krok 5: Przetestuj Swoją Aplikację
+## Krok 5: Testowanie Aplikacji
 
-### Uzyskaj Dostęp do Aplikacji
+### Dostęp do Aplikacji
 Kliknij na URL podany w wynikach wdrożenia lub uzyskaj go w dowolnym momencie:
 ```bash
 # Get application endpoints
@@ -204,12 +207,12 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Przetestuj Aplikację Todo
+### Testowanie Aplikacji Todo
 1. **Dodaj zadanie** - Kliknij "Add Todo" i wpisz zadanie
 2. **Oznacz jako ukończone** - Zaznacz ukończone zadania
 3. **Usuń zadania** - Usuń zadania, które już nie są potrzebne
 
-### Monitoruj Swoją Aplikację
+### Monitorowanie Aplikacji
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -218,11 +221,11 @@ azd monitor
 azd logs
 ```
 
-## Krok 6: Wprowadź Zmiany i Ponownie Wdróż
+## Krok 6: Wprowadzenie Zmian i Ponowne Wdrożenie
 
-Wprowadźmy zmianę i zobaczmy, jak łatwo jest zaktualizować:
+Wprowadźmy zmianę i zobaczmy, jak łatwo jest zaktualizować aplikację:
 
-### Zmodyfikuj API
+### Modyfikacja API
 ```bash
 # Edit the API code
 code src/api/src/routes/lists.js
@@ -234,7 +237,7 @@ Dodaj niestandardowy nagłówek odpowiedzi:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Wdróż Tylko Zmiany w Kodzie
+### Wdrożenie Tylko Zmian w Kodzie
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -242,7 +245,7 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## Krok 7: Zarządzaj Wieloma Środowiskami
+## Krok 7: Zarządzanie Wieloma Środowiskami
 
 Utwórz środowisko testowe, aby sprawdzić zmiany przed produkcją:
 
@@ -271,9 +274,9 @@ azd env select staging
 azd show
 ```
 
-## Krok 8: Wyczyść Zasoby
+## Krok 8: Czyszczenie Zasobów
 
-Gdy skończysz eksperymentować, wyczyść zasoby, aby uniknąć dalszych opłat:
+Po zakończeniu eksperymentów wyczyść zasoby, aby uniknąć dalszych opłat:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -299,7 +302,7 @@ Gratulacje! Udało Ci się:
 
 ## Rozwiązywanie Typowych Problemów
 
-### Błędy Uwierzytelniania
+### Błędy Uwierzytelnienia
 ```bash
 # Re-authenticate with Azure
 az login
@@ -334,7 +337,7 @@ netstat -an | grep :3100
 
 ## Kolejne Kroki
 
-Po ukończeniu swojego pierwszego projektu, odkryj te zaawansowane tematy:
+Po ukończeniu pierwszego projektu, odkryj te zaawansowane tematy:
 
 ### 1. Dostosowanie Infrastruktury
 - [Infrastructure as Code](../deployment/provisioning.md)
@@ -349,7 +352,7 @@ Po ukończeniu swojego pierwszego projektu, odkryj te zaawansowane tematy:
 - [Optymalizacja wydajności](../deployment/best-practices.md#performance)
 - [Monitorowanie i logowanie](../deployment/best-practices.md#monitoring)
 
-### 4. Odkryj Więcej Szablonów
+### 4. Odkrywanie Więcej Szablonów
 ```bash
 # Browse templates by category
 azd template list --filter web
@@ -381,7 +384,7 @@ azd init --template todo-java-mongo
 
 ---
 
-**Gratulacje ukończenia swojego pierwszego projektu azd!** Teraz jesteś gotowy, aby z pewnością budować i wdrażać niesamowite aplikacje na Azure.
+**Gratulacje z ukończenia swojego pierwszego projektu azd!** Teraz jesteś gotowy, aby z pewnością budować i wdrażać niesamowite aplikacje na Azure.
 
 ---
 
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

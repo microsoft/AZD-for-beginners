@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:25:31+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:29:16+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ms"
 }
@@ -15,13 +15,13 @@ Selamat datang ke projek pertama anda menggunakan Azure Developer CLI! Tutorial 
 
 ## Matlamat Pembelajaran
 
-Dengan melengkapkan tutorial ini, anda akan:
+Dengan menyelesaikan tutorial ini, anda akan:
 - Menguasai aliran kerja inisialisasi projek azd menggunakan templat
-- Memahami struktur projek Azure Developer CLI dan fail konfigurasi
+- Memahami struktur projek dan fail konfigurasi Azure Developer CLI
 - Melaksanakan pelancaran aplikasi lengkap ke Azure dengan penyediaan infrastruktur
-- Mengaplikasikan strategi kemas kini aplikasi dan pelancaran semula
+- Melaksanakan kemas kini aplikasi dan strategi pelancaran semula
 - Menguruskan pelbagai persekitaran untuk pembangunan dan staging
-- Mengamalkan pembersihan sumber dan pengurusan kos
+- Menerapkan amalan pembersihan sumber dan pengurusan kos
 
 ## Hasil Pembelajaran
 
@@ -46,11 +46,15 @@ Selepas selesai, anda akan dapat:
 ```bash
 # Check azd installation
 azd version
+```
+### Sahkan pengesahan Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Periksa versi Node.js
+```bash
 node --version
 ```
 
@@ -119,7 +123,7 @@ my-first-azd-app/
 
 ### Fail Utama untuk Difahami
 
-**azure.yaml** - Nadi projek azd anda:
+**azure.yaml** - Inti projek azd anda:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -141,7 +145,7 @@ Sebelum melancarkan, anda boleh menyesuaikan aplikasi:
 code src/web/src/App.tsx
 ```
 
-Buat perubahan mudah:
+Buat perubahan ringkas:
 ```typescript
 // Find the title and change it
 <h1>My Awesome Todo App</h1>
@@ -151,15 +155,14 @@ Buat perubahan mudah:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
 ## Langkah 4: Lancarkan ke Azure
 
-Sekarang untuk bahagian yang menarik - lancarkan semuanya ke Azure!
+Sekarang bahagian yang menarik - lancarkan semuanya ke Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -207,7 +210,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ### Uji Aplikasi Todo
 1. **Tambah item todo** - Klik "Add Todo" dan masukkan tugas
 2. **Tandakan sebagai selesai** - Tandakan item yang telah selesai
-3. **Padam item** - Buang todo yang tidak lagi diperlukan
+3. **Padam item** - Hapuskan todo yang tidak lagi diperlukan
 
 ### Pantau Aplikasi Anda
 ```bash
@@ -244,7 +247,7 @@ azd deploy
 
 ## Langkah 7: Uruskan Pelbagai Persekitaran
 
-Cipta persekitaran staging untuk menguji perubahan sebelum produksi:
+Cipta persekitaran staging untuk menguji perubahan sebelum pengeluaran:
 
 ```bash
 # Create a new staging environment
@@ -291,7 +294,7 @@ azd down --force --purge
 
 Tahniah! Anda telah berjaya:
 - Memulakan projek azd daripada templat
-- Menerokai struktur projek dan fail utama
+- Meneroka struktur projek dan fail utama
 - Melancarkan aplikasi full-stack ke Azure
 - Membuat perubahan kod dan melancarkan semula
 - Menguruskan pelbagai persekitaran
@@ -334,7 +337,7 @@ netstat -an | grep :3100
 
 ## Langkah Seterusnya
 
-Sekarang setelah anda melengkapkan projek pertama anda, terokai topik lanjutan ini:
+Sekarang anda telah menyelesaikan projek pertama anda, terokai topik lanjutan ini:
 
 ### 1. Sesuaikan Infrastruktur
 - [Infrastructure as Code](../deployment/provisioning.md)
@@ -344,10 +347,10 @@ Sekarang setelah anda melengkapkan projek pertama anda, terokai topik lanjutan i
 - [Integrasi GitHub Actions](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Amalan Terbaik Produksi
+### 3. Amalan Terbaik Pengeluaran
 - [Konfigurasi keselamatan](../deployment/best-practices.md#security)
 - [Pengoptimuman prestasi](../deployment/best-practices.md#performance)
-- [Pemantauan dan logging](../deployment/best-practices.md#monitoring)
+- [Pemantauan dan log](../deployment/best-practices.md#monitoring)
 
 ### 4. Terokai Lebih Banyak Templat
 ```bash
@@ -366,7 +369,7 @@ azd init --template todo-java-mongo
 
 ### Bahan Pembelajaran
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Pusat Arkitektur Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Kerangka Well-Architected Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Komuniti & Sokongan
@@ -381,7 +384,7 @@ azd init --template todo-java-mongo
 
 ---
 
-**Tahniah kerana melengkapkan projek azd pertama anda!** Anda kini bersedia untuk membina dan melancarkan aplikasi hebat di Azure dengan yakin.
+**Tahniah kerana menyelesaikan projek azd pertama anda!** Anda kini bersedia untuk membina dan melancarkan aplikasi hebat di Azure dengan yakin.
 
 ---
 
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

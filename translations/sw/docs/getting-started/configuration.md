@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-10T06:07:09+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:32:13+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sw"
 }
@@ -11,16 +11,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Utangulizi
 
-Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mchakato bora wa maendeleo na usambazaji. Utajifunza kuhusu mpangilio wa usanidi, usimamizi wa mazingira, mbinu za uthibitishaji, na mifumo ya usanidi ya hali ya juu inayowezesha usambazaji wa Azure kwa ufanisi na usalama.
+Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mchakato bora wa maendeleo na usambazaji. Utajifunza kuhusu mpangilio wa usanidi, usimamizi wa mazingira, mbinu za uthibitishaji, na mifumo ya usanidi wa hali ya juu inayowezesha usambazaji wa Azure kwa ufanisi na usalama.
 
 ## Malengo ya Kujifunza
 
-Ifikapo mwisho wa somo hili, utaweza:
-- Kumudu mpangilio wa usanidi wa azd na kuelewa jinsi mipangilio inavyopangiliwa kwa kipaumbele
+Mwisho wa somo hili, utaweza:
+- Kufahamu mpangilio wa usanidi wa azd na kuelewa jinsi mipangilio inavyopangwa kwa kipaumbele
 - Kusimamia mipangilio ya kimataifa na ya mradi maalum kwa ufanisi
 - Kusimamia mazingira mengi yenye usanidi tofauti
 - Kutekeleza mifumo salama ya uthibitishaji na ruhusa
-- Kuelewa mifumo ya usanidi ya hali ya juu kwa hali ngumu
+- Kuelewa mifumo ya usanidi wa hali ya juu kwa hali ngumu
 
 ## Matokeo ya Kujifunza
 
@@ -28,14 +28,14 @@ Baada ya kukamilisha somo hili, utaweza:
 - Kusimamia azd kwa mchakato bora wa maendeleo
 - Kuweka na kusimamia mazingira mengi ya usambazaji
 - Kutekeleza mbinu salama za usimamizi wa usanidi
-- Kutatua masuala yanayohusiana na usanidi
+- Kutatua matatizo yanayohusiana na usanidi
 - Kubinafsisha tabia ya azd kwa mahitaji maalum ya shirika
 
 Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mchakato bora wa maendeleo na usambazaji.
 
 ## Mpangilio wa Usanidi
 
-azd hutumia mfumo wa usanidi wa mpangilio:
+azd hutumia mfumo wa usanidi wa mpangilio wa kipaumbele:
 1. **Bendera za amri** (kipaumbele cha juu zaidi)
 2. **Vigezo vya mazingira**
 3. **Usanidi wa mradi wa ndani** (`.azd/config.json`)
@@ -44,7 +44,7 @@ azd hutumia mfumo wa usanidi wa mpangilio:
 
 ## Usanidi wa Kimataifa
 
-### Kuweka Chaguo-msingi za Kimataifa
+### Kuweka Thamani za Msingi za Kimataifa
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### Violezo vya Mazingira
-Tengeneza `.azure/env.template` kwa usanidi thabiti wa mazingira:
+Tengeneza `.azure/env.template` kwa usanidi wa mazingira unaofanana:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Mfano wa `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Usanidi wa Hali ya Juu
 
@@ -516,7 +517,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Uandishi wa Nyaraka za Usanidi
+### 4. Nyaraka za Usanidi
 Andika nyaraka za usanidi wako katika `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -538,9 +539,9 @@ Andika nyaraka za usanidi wako katika `CONFIG.md`:
 - [Mwongozo wa Usambazaji](../deployment/deployment-guide.md) - Tumia usanidi kwa usambazaji
 - [Utoaji wa Rasilimali](../deployment/provisioning.md) - Usanidi wa hali ya uzalishaji
 
-## Marejeleo
+## Marejeo
 
-- [Marejeleo ya Usanidi wa azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Marejeo ya Usanidi wa azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Muundo wa azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Vigezo vya Mazingira](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
@@ -553,4 +554,4 @@ Andika nyaraka za usanidi wako katika `CONFIG.md`:
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asilia katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutokuelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia huduma ya tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:31:34+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:20:46+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "da"
 }
 -->
-# Konfigurationsguide
+# Konfigurationsvejledning
 
 ## Introduktion
 
-Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og implementeringsarbejdsgange. Du vil lære om konfigurationshierarkiet, miljøstyring, autentificeringsmetoder og avancerede konfigurationsmønstre, der muliggør effektive og sikre Azure-implementeringer.
+Denne omfattende vejledning dækker alle aspekter af konfiguration af Azure Developer CLI for at opnå optimale udviklings- og implementeringsarbejdsgange. Du vil lære om konfigurationshierarkiet, miljøstyring, autentificeringsmetoder og avancerede konfigurationsmønstre, der muliggør effektive og sikre Azure-implementeringer.
 
 ## Læringsmål
 
@@ -20,18 +20,18 @@ Ved afslutningen af denne lektion vil du:
 - Effektivt konfigurere globale og projekt-specifikke indstillinger
 - Administrere flere miljøer med forskellige konfigurationer
 - Implementere sikre autentificerings- og autorisationsmønstre
-- Forstå avancerede konfigurationsmønstre for komplekse scenarier
+- Forstå avancerede konfigurationsmønstre til komplekse scenarier
 
-## Læringsresultater
+## Læringsudbytte
 
 Efter at have gennemført denne lektion vil du være i stand til at:
 - Konfigurere azd for optimale udviklingsarbejdsgange
 - Opsætte og administrere flere implementeringsmiljøer
 - Implementere sikre konfigurationsstyringspraksisser
 - Fejlsøge konfigurationsrelaterede problemer
-- Tilpasse azd's adfærd til specifikke organisatoriske krav
+- Tilpasse azd-adfærd til specifikke organisatoriske krav
 
-Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og implementeringsarbejdsgange.
+Denne omfattende vejledning dækker alle aspekter af konfiguration af Azure Developer CLI for at opnå optimale udviklings- og implementeringsarbejdsgange.
 
 ## Konfigurationshierarki
 
@@ -39,7 +39,7 @@ azd bruger et hierarkisk konfigurationssystem:
 1. **Kommandolinjeflag** (højeste prioritet)
 2. **Miljøvariabler**
 3. **Lokal projektkonfiguration** (`.azd/config.json`)
-4. **Global bruger-konfiguration** (`~/.azd/config.json`)
+4. **Global brugerkonfiguration** (`~/.azd/config.json`)
 5. **Standardværdier** (laveste prioritet)
 
 ## Global konfiguration
@@ -159,7 +159,7 @@ pipeline:
 
 ### Servicekonfigurationsmuligheder
 
-#### Værttyper
+#### Værttype
 ```yaml
 services:
   web-static:
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### Miljøskabeloner
-Opret `.azure/env.template` for konsistent miljøopsætning:
+Opret `.azure/env.template` for en ensartet miljøopsætning:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -341,7 +341,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Implementeringskonfiguration
 
-### Build-konfiguration
+### Byggekonfiguration
 ```yaml
 # In azure.yaml
 services:
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Eksempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Avanceret konfiguration
 
-### Tilpasset ressource-navngivning
+### Tilpasset ressourcenavngivning
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -441,7 +442,7 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Konfigurationsvalidering
+## 🔍 Validering af konfiguration
 
 ### Valider konfiguration
 ```bash
@@ -517,7 +518,7 @@ database:
 ```
 
 ### 4. Dokumentation af konfiguration
-Dokumentér din konfiguration i `CONFIG.md`:
+Dokumenter din konfiguration i `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -532,10 +533,10 @@ Dokumentér din konfiguration i `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## Næste trin
+## Næste skridt
 
 - [Dit første projekt](first-project.md) - Anvend konfiguration i praksis
-- [Implementeringsguide](../deployment/deployment-guide.md) - Brug konfiguration til implementering
+- [Implementeringsvejledning](../deployment/deployment-guide.md) - Brug konfiguration til implementering
 - [Provisionering af ressourcer](../deployment/provisioning.md) - Produktionsklare konfigurationer
 
 ## Referencer
@@ -547,10 +548,10 @@ Dokumentér din konfiguration i `CONFIG.md`:
 ---
 
 **Navigation**
-- **Forrige lektion**: [Installation & Opsætning](installation.md)
+- **Forrige lektion**: [Installation og opsætning](installation.md)
 - **Næste lektion**: [Dit første projekt](first-project.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

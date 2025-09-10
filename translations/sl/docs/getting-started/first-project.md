@@ -1,62 +1,66 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-10T06:00:23+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:42:16+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "sl"
 }
 -->
-# Vaš prvi projekt - praktični vodič
+# Vaš prvi projekt - Praktični vodič
 
 ## Uvod
 
-Dobrodošli v vašem prvem projektu z Azure Developer CLI! Ta obsežen praktični vodič vas bo korak za korakom popeljal skozi proces ustvarjanja, uvajanja in upravljanja aplikacije s polnim skladom na Azure z uporabo azd. Delali boste z resnično aplikacijo za upravljanje nalog, ki vključuje React frontend, Node.js API backend in MongoDB podatkovno bazo.
+Dobrodošli v vašem prvem projektu z Azure Developer CLI! Ta obsežen praktični vodič vas bo korak za korakom popeljal skozi ustvarjanje, uvajanje in upravljanje celovite aplikacije na Azure z uporabo azd. Delali boste s pravo aplikacijo za upravljanje opravil, ki vključuje React frontend, Node.js API backend in MongoDB bazo podatkov.
 
 ## Cilji učenja
 
 Z dokončanjem tega vodiča boste:
-- Obvladali postopek inicializacije projektov azd z uporabo predlog
-- Razumeli strukturo projektov Azure Developer CLI in konfiguracijske datoteke
+- Obvladali postopek inicializacije projekta azd z uporabo predlog
+- Razumeli strukturo projektov in konfiguracijskih datotek Azure Developer CLI
 - Izvedli popolno uvajanje aplikacije na Azure z zagotavljanjem infrastrukture
-- Uvedli strategije za posodobitve aplikacij in ponovno uvajanje
+- Izvedli posodobitve aplikacije in strategije ponovnega uvajanja
 - Upravljali več okolij za razvoj in testiranje
-- Uporabili prakse za čiščenje virov in upravljanje stroškov
+- Uporabili prakse čiščenja virov in upravljanja stroškov
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
 - Samostojno inicializirati in konfigurirati azd projekte iz predlog
 - Učinkovito navigirati in spreminjati strukture projektov azd
-- Uvajati aplikacije s polnim skladom na Azure z enojnimi ukazi
-- Reševati pogoste težave pri uvajanju in avtentikaciji
+- Uvajati celovite aplikacije na Azure z enostavnimi ukazi
+- Odpravljati pogoste težave pri uvajanju in avtentikaciji
 - Upravljati več Azure okolij za različne faze uvajanja
-- Uvesti delovne tokove za neprekinjeno uvajanje posodobitev aplikacij
+- Implementirati delovne tokove za neprekinjeno uvajanje posodobitev aplikacij
 
 ## Začetek
 
-### Seznam predpogojev
+### Kontrolni seznam predpogojev
 - ✅ Nameščen Azure Developer CLI ([Navodila za namestitev](installation.md))
 - ✅ Nameščen in avtenticiran Azure CLI
 - ✅ Nameščen Git na vašem sistemu
-- ✅ Node.js 16+ (za ta vodič)
-- ✅ Visual Studio Code (priporočeno)
+- ✅ Nameščen Node.js 16+ (za ta vodič)
+- ✅ Priporočeno: Visual Studio Code
 
 ### Preverite svojo nastavitev
 ```bash
 # Check azd installation
 azd version
+```
+### Preverite avtentikacijo na Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Preverite različico Node.js
+```bash
 node --version
 ```
 
 ## Korak 1: Izberite in inicializirajte predlogo
 
-Začnimo s priljubljeno predlogo aplikacije za upravljanje nalog, ki vključuje React frontend in Node.js API backend.
+Začnimo s priljubljeno predlogo aplikacije za upravljanje opravil, ki vključuje React frontend in Node.js API backend.
 
 ```bash
 # Browse available templates
@@ -75,9 +79,9 @@ azd init --template todo-nodejs-mongo
 
 ### Kaj se je pravkar zgodilo?
 - Prenesli ste kodo predloge v lokalni imenik
-- Ustvarili datoteko `azure.yaml` z definicijami storitev
-- Nastavili kodo infrastrukture v imeniku `infra/`
-- Ustvarili konfiguracijo okolja
+- Ustvarili ste datoteko `azure.yaml` z definicijami storitev
+- Nastavili ste kodo infrastrukture v imeniku `infra/`
+- Ustvarili ste konfiguracijo okolja
 
 ## Korak 2: Raziščite strukturo projekta
 
@@ -151,15 +155,14 @@ Naredite preprosto spremembo:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
 ## Korak 4: Uvedite na Azure
 
-Zdaj pa k razburljivemu delu - uvedite vse na Azure!
+Zdaj pa k razburljivemu delu - vse uvedite na Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -174,7 +177,7 @@ azd up
 
 ### Kaj se dogaja med uvajanjem?
 
-Ukaz `azd up` izvaja naslednje korake:
+Ukaz `azd up` izvede naslednje korake:
 1. **Zagotavljanje** (`azd provision`) - Ustvari Azure vire
 2. **Pakiranje** - Zgradi kodo vaše aplikacije
 3. **Uvajanje** (`azd deploy`) - Uvede kodo na Azure vire
@@ -194,8 +197,8 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Korak 5: Preizkusite svojo aplikacijo
 
-### Dostop do vaše aplikacije
-Kliknite na URL, ki je naveden v izhodu uvajanja, ali ga pridobite kadarkoli:
+### Dostopajte do svoje aplikacije
+Kliknite na URL, ki je naveden v izhodu uvajanja, ali ga pridobite kadar koli:
 ```bash
 # Get application endpoints
 azd show
@@ -204,10 +207,10 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Preizkusite aplikacijo za upravljanje nalog
-1. **Dodajte nalogo** - Kliknite "Add Todo" in vnesite opravilo
+### Preizkusite aplikacijo za upravljanje opravil
+1. **Dodajte opravilo** - Kliknite "Add Todo" in vnesite nalogo
 2. **Označite kot dokončano** - Označite dokončane naloge
-3. **Izbrišite naloge** - Odstranite naloge, ki jih ne potrebujete več
+3. **Izbrišite naloge** - Odstranite opravila, ki jih ne potrebujete več
 
 ### Spremljajte svojo aplikacijo
 ```bash
@@ -228,7 +231,7 @@ Naredimo spremembo in preverimo, kako enostavno je posodobiti:
 code src/api/src/routes/lists.js
 ```
 
-Dodajte prilagojen odzivni header:
+Dodajte prilagojeno glavo odgovora:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -271,9 +274,9 @@ azd env select staging
 azd show
 ```
 
-## Korak 8: Očistite vire
+## Korak 8: Počistite vire
 
-Ko končate z eksperimentiranjem, očistite vire, da se izognete stalnim stroškom:
+Ko končate z eksperimentiranjem, počistite vire, da se izognete tekočim stroškom:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -289,15 +292,15 @@ azd down --force --purge
 
 ## Kaj ste se naučili
 
-Čestitke! Uspešno ste:
+Čestitamo! Uspešno ste:
 - Inicializirali azd projekt iz predloge
-- Raziščili strukturo projekta in ključne datoteke
-- Uvedli aplikacijo s polnim skladom na Azure
+- Raziskali strukturo projekta in ključne datoteke
+- Uvedli celovito aplikacijo na Azure
 - Naredili spremembe kode in ponovno uvedli
 - Upravljali več okolij
-- Očistili vire
+- Počistili vire
 
-## Reševanje pogostih težav
+## Odpravljanje pogostih težav
 
 ### Napake pri avtentikaciji
 ```bash
@@ -325,7 +328,7 @@ azd logs --service web
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Težave s porti/omrežjem
+### Težave s pristanišči/omrežjem
 ```bash
 # Check if ports are available
 netstat -an | grep :3000
@@ -338,7 +341,7 @@ Zdaj, ko ste zaključili svoj prvi projekt, raziščite te napredne teme:
 
 ### 1. Prilagodite infrastrukturo
 - [Infrastruktura kot koda](../deployment/provisioning.md)
-- [Dodajanje podatkovnih baz, shranjevanja in drugih storitev](../deployment/provisioning.md#adding-services)
+- [Dodajanje baz podatkov, shranjevanja in drugih storitev](../deployment/provisioning.md#adding-services)
 
 ### 2. Nastavite CI/CD
 - [Integracija z GitHub Actions](../deployment/cicd-integration.md)
@@ -371,7 +374,7 @@ azd init --template todo-java-mongo
 
 ### Skupnost in podpora
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Skupnost Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Predloge in primeri
@@ -381,7 +384,7 @@ azd init --template todo-java-mongo
 
 ---
 
-**Čestitke za dokončanje vašega prvega azd projekta!** Zdaj ste pripravljeni na gradnjo in uvajanje izjemnih aplikacij na Azure z zaupanjem.
+**Čestitamo za dokončanje vašega prvega azd projekta!** Zdaj ste pripravljeni na gradnjo in uvajanje izjemnih aplikacij na Azure z zaupanjem.
 
 ---
 

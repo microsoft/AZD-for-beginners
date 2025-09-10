@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T19:13:29+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:09:03+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "br"
 }
@@ -11,32 +11,32 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação ideais. Você aprenderá sobre a hierarquia de configuração, gerenciamento de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implantações eficientes e seguras no Azure.
+Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação otimizados. Você aprenderá sobre a hierarquia de configuração, gerenciamento de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implantações eficientes e seguras no Azure.
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 Ao final desta lição, você será capaz de:
 - Dominar a hierarquia de configuração do azd e entender como as configurações são priorizadas
-- Configurar configurações globais e específicas de projetos de forma eficaz
+- Configurar definições globais e específicas de projetos de forma eficaz
 - Gerenciar múltiplos ambientes com diferentes configurações
 - Implementar padrões seguros de autenticação e autorização
 - Compreender padrões avançados de configuração para cenários complexos
 
-## Resultados de Aprendizagem
+## Resultados de Aprendizado
 
 Após concluir esta lição, você será capaz de:
-- Configurar o azd para fluxos de trabalho de desenvolvimento ideais
+- Configurar o azd para fluxos de trabalho de desenvolvimento otimizados
 - Configurar e gerenciar múltiplos ambientes de implantação
 - Implementar práticas seguras de gerenciamento de configuração
 - Solucionar problemas relacionados à configuração
-- Personalizar o comportamento do azd para requisitos específicos da organização
+- Personalizar o comportamento do azd para atender a requisitos específicos da organização
 
-Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação ideais.
+Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação otimizados.
 
 ## Hierarquia de Configuração
 
-O azd utiliza um sistema de configuração hierárquico:
-1. **Flags de linha de comando** (maior prioridade)
+O azd utiliza um sistema hierárquico de configuração:
+1. **Flags da linha de comando** (maior prioridade)
 2. **Variáveis de ambiente**
 3. **Configuração local do projeto** (`.azd/config.json`)
 4. **Configuração global do usuário** (`~/.azd/config.json`)
@@ -78,10 +78,10 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ Configuração de Projetos
+## 🏗️ Configuração do Projeto
 
 ### Estrutura do azure.yaml
-O arquivo `azure.yaml` é o núcleo do seu projeto azd:
+O arquivo `azure.yaml` é o coração do seu projeto azd:
 
 ```yaml
 # Minimum configuration
@@ -307,7 +307,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 
 ## 🏗️ Configuração de Infraestrutura
 
-### Parâmetros Bicep
+### Parâmetros do Bicep
 Configure os parâmetros de infraestrutura em `infra/main.parameters.json`:
 ```json
 {
@@ -330,7 +330,7 @@ Configure os parâmetros de infraestrutura em `infra/main.parameters.json`:
 }
 ```
 
-### Configuração Terraform
+### Configuração do Terraform
 Para projetos Terraform, configure em `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
@@ -364,7 +364,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Configuração Docker
+### Configuração do Docker
 ```yaml
 services:
   api:
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Exemplo de `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Configuração Avançada
 
@@ -492,7 +493,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Arquivos de Configuração
+### 2. Organize os Arquivos de Configuração
 ```
 .azure/
 ├── config.json              # Global project config
@@ -516,7 +517,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Documentação de Configuração
+### 4. Documentação da Configuração
 Documente sua configuração em `CONFIG.md`:
 ```markdown
 # Configuration Guide

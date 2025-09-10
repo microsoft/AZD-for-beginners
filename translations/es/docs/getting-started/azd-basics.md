@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T16:55:46+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T12:48:35+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "es"
 }
@@ -39,7 +39,7 @@ Azure Developer CLI (azd) es una herramienta de línea de comandos diseñada par
 
 ### Plantillas
 Las plantillas son la base de azd. Contienen:
-- **Código de la aplicación** - Tu código fuente y dependencias
+- **Código de aplicación** - Tu código fuente y dependencias
 - **Definiciones de infraestructura** - Recursos de Azure definidos en Bicep o Terraform
 - **Archivos de configuración** - Configuraciones y variables de entorno
 - **Scripts de despliegue** - Flujos de trabajo automatizados de despliegue
@@ -75,15 +75,15 @@ azd init --template <template-name>
 
 ### 2. Infraestructura como Código
 - **Bicep** - Lenguaje específico de dominio de Azure
-- **Terraform** - Herramienta de infraestructura multi-nube
+- **Terraform** - Herramienta de infraestructura multicloud
 - **ARM Templates** - Plantillas de Azure Resource Manager
 
 ### 3. Flujos de Trabajo Integrados
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Entendiendo `azd down --force --purge`
+El comando `azd down --force --purge` es una forma poderosa de desmantelar completamente tu entorno azd y todos los recursos asociados. Aquí tienes un desglose de lo que hace cada bandera:
+```
+--force
+```
+- Omite las solicitudes de confirmación.
+- Útil para automatización o scripts donde no es factible la entrada manual.
+- Asegura que el desmantelamiento proceda sin interrupciones, incluso si la CLI detecta inconsistencias.
+
+```
+--purge
+```
+Elimina **todos los metadatos asociados**, incluyendo:
+Estado del entorno  
+Carpeta local `.azure`  
+Información de despliegue en caché  
+Evita que azd "recuerde" despliegues anteriores, lo que puede causar problemas como grupos de recursos desajustados o referencias obsoletas de registros.
+
+### ¿Por qué usar ambos?
+Cuando te encuentras con problemas con `azd up` debido a estados persistentes o despliegues parciales, esta combinación asegura un **nuevo comienzo**.
+
+Es especialmente útil después de eliminar recursos manualmente en el portal de Azure o al cambiar plantillas, entornos o convenciones de nombres de grupos de recursos.
 
 ### Gestión de Múltiples Entornos
 ```bash
@@ -240,12 +263,12 @@ azd init --template template1
 
 ### 2. Aprovecha las Plantillas
 - Comienza con plantillas existentes
-- Personalízalas según tus necesidades
+- Personaliza según tus necesidades
 - Crea plantillas reutilizables para tu organización
 
 ### 3. Aislamiento de Entornos
 - Usa entornos separados para desarrollo/staging/producción
-- Nunca despliegues directamente en producción desde tu máquina local
+- Nunca despliegues directamente a producción desde tu máquina local
 - Usa pipelines de CI/CD para despliegues en producción
 
 ### 4. Gestión de Configuración
@@ -270,7 +293,7 @@ azd init --template template1
 ### Avanzado (Semana 5+)
 1. Crear plantillas personalizadas
 2. Patrones avanzados de infraestructura
-3. Despliegues multi-región
+3. Despliegues multirregión
 4. Configuraciones de nivel empresarial
 
 ## Próximos Pasos
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

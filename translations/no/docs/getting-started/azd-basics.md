@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T21:35:20+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:22:50+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "no"
 }
@@ -11,12 +11,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduksjon
 
-Denne leksjonen introduserer deg for Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen din fra lokal utvikling til Azure-deployering. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler deployering av skybaserte applikasjoner.
+Denne leksjonen introduserer deg for Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen fra lokal utvikling til Azure-distribusjon. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler distribusjon av skybaserte applikasjoner.
 
 ## Læringsmål
 
 Ved slutten av denne leksjonen vil du:
-- Forstå hva Azure Developer CLI er og dens hovedformål
+- Forstå hva Azure Developer CLI er og dets hovedformål
 - Lære de grunnleggende konseptene som maler, miljøer og tjenester
 - Utforske nøkkelfunksjoner som malbasert utvikling og Infrastructure as Code
 - Forstå azd-projektstrukturen og arbeidsflyten
@@ -24,7 +24,7 @@ Ved slutten av denne leksjonen vil du:
 
 ## Læringsutbytte
 
-Etter å ha fullført denne leksjonen vil du kunne:
+Etter å ha fullført denne leksjonen, vil du kunne:
 - Forklare rollen til azd i moderne skyutviklingsarbeidsflyter
 - Identifisere komponentene i en azd-projektstruktur
 - Beskrive hvordan maler, miljøer og tjenester fungerer sammen
@@ -33,7 +33,7 @@ Etter å ha fullført denne leksjonen vil du kunne:
 
 ## Hva er Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen din fra lokal utvikling til Azure-deployering. Det forenkler prosessen med å bygge, deployere og administrere skybaserte applikasjoner på Azure.
+Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen fra lokal utvikling til Azure-distribusjon. Det forenkler prosessen med å bygge, distribuere og administrere skybaserte applikasjoner på Azure.
 
 ## Grunnleggende konsepter
 
@@ -42,18 +42,18 @@ Maler er grunnlaget for azd. De inneholder:
 - **Applikasjonskode** - Kildekoden din og avhengigheter
 - **Infrastrukturdefinisjoner** - Azure-ressurser definert i Bicep eller Terraform
 - **Konfigurasjonsfiler** - Innstillinger og miljøvariabler
-- **Deployeringsskript** - Automatiserte deployeringsarbeidsflyter
+- **Distribusjonsskript** - Automatiserte distribusjonsarbeidsflyter
 
 ### Miljøer
-Miljøer representerer ulike deployeringsmål:
+Miljøer representerer ulike distribusjonsmål:
 - **Utvikling** - For testing og utvikling
 - **Staging** - Pre-produksjonsmiljø
 - **Produksjon** - Live produksjonsmiljø
 
-Hvert miljø opprettholder sin egen:
+Hvert miljø har sitt eget:
 - Azure ressursgruppe
 - Konfigurasjonsinnstillinger
-- Deployeringstilstand
+- Distribusjonstilstand
 
 ### Tjenester
 Tjenester er byggesteinene i applikasjonen din:
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Integrerte arbeidsflyter
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -97,7 +97,7 @@ azd env list
 
 ## 📁 Prosjektstruktur
 
-En typisk azd-prosjektstruktur:
+En typisk azd-projektstruktur:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Forstå `azd down --force --purge`
+Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned azd-miljøet og alle tilknyttede ressurser. Her er en oversikt over hva hver flagg gjør:
+```
+--force
+```
+- Hopper over bekreftelsesprompter.
+- Nyttig for automatisering eller skripting der manuell input ikke er mulig.
+- Sikrer at nedrivningen fortsetter uten avbrudd, selv om CLI oppdager inkonsistenser.
+
+```
+--purge
+```
+Sletter **all tilknyttet metadata**, inkludert:
+Miljøtilstand
+Lokal `.azure`-mappe
+Bufret distribusjonsinformasjon
+Forhindrer azd fra å "huske" tidligere distribusjoner, som kan forårsake problemer som feil ressursgrupper eller utdaterte registerreferanser.
+
+### Hvorfor bruke begge?
+Når du har støtt på problemer med `azd up` på grunn av gjenværende tilstand eller delvise distribusjoner, sikrer denne kombinasjonen en **ren start**.
+
+Det er spesielt nyttig etter manuelle ressurs-slettinger i Azure-portalen eller når du bytter maler, miljøer eller ressursgruppenavn.
 
 ### Administrere flere miljøer
 ```bash
@@ -243,10 +266,10 @@ azd init --template template1
 - Tilpass etter behov
 - Lag gjenbrukbare maler for organisasjonen din
 
-### 3. Isolering av miljøer
+### 3. Miljøisolasjon
 - Bruk separate miljøer for utvikling/staging/produksjon
-- Aldri deploy direkte til produksjon fra lokal maskin
-- Bruk CI/CD-pipelines for produksjonsdeployeringer
+- Aldri distribuer direkte til produksjon fra lokal maskin
+- Bruk CI/CD-pipelines for produksjonsdistribusjoner
 
 ### 4. Konfigurasjonsadministrasjon
 - Bruk miljøvariabler for sensitiv data
@@ -257,11 +280,11 @@ azd init --template template1
 
 ### Nybegynner (Uke 1-2)
 1. Installer azd og autentiser
-2. Deploy en enkel mal
-3. Forstå prosjektstrukturen
+2. Distribuer en enkel mal
+3. Forstå prosjektstruktur
 4. Lær grunnleggende kommandoer (up, down, deploy)
 
-### Middels nivå (Uke 3-4)
+### Middels (Uke 3-4)
 1. Tilpass maler
 2. Administrer flere miljøer
 3. Forstå infrastrukturkode
@@ -270,13 +293,13 @@ azd init --template template1
 ### Avansert (Uke 5+)
 1. Lag egne maler
 2. Avanserte infrastrukturmønstre
-3. Deployeringer på tvers av regioner
-4. Konfigurasjoner for bedriftsnivå
+3. Distribusjoner på tvers av regioner
+4. Konfigurasjoner for bedrifter
 
 ## Neste steg
 
-- [Installasjon og oppsett](installation.md) - Installer og konfigurer azd
-- [Ditt første prosjekt](first-project.md) - Praktisk veiledning
+- [Installasjon og oppsett](installation.md) - Få azd installert og konfigurert
+- [Ditt første prosjekt](first-project.md) - Praktisk opplæring
 - [Konfigurasjonsveiledning](configuration.md) - Avanserte konfigurasjonsalternativer
 
 ## Tilleggsressurser

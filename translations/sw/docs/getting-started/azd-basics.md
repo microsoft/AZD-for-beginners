@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:11:21+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:32:40+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sw"
 }
 -->
-# Msingi wa AZD - Kuelewa Azure Developer CLI
+# Misingi ya AZD - Kuelewa Azure Developer CLI
 
 ## Utangulizi
 
@@ -25,7 +25,7 @@ Mwisho wa somo hili, utaweza:
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha somo hili, utaweza:
-- Kueleza jukumu la azd katika mtiririko wa kazi wa maendeleo ya wingu la kisasa
+- Kuelezea jukumu la azd katika mtiririko wa kazi wa maendeleo ya wingu la kisasa
 - Kutambua vipengele vya muundo wa mradi wa azd
 - Kufafanua jinsi templates, environments, na services zinavyofanya kazi pamoja
 - Kuelewa faida za Infrastructure as Code kwa kutumia azd
@@ -56,7 +56,7 @@ Kila environment inahifadhi:
 - Hali ya usambazaji
 
 ### Services
-Services ni vipengele vya msingi vya programu yako:
+Services ni sehemu za ujenzi wa programu yako:
 - **Frontend** - Programu za wavuti, SPAs
 - **Backend** - APIs, microservices
 - **Database** - Suluhisho za hifadhi ya data
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Mtiririko wa Kazi Uliofungamanishwa
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Kuelewa `azd down --force --purge`
+Amri ya `azd down --force --purge` ni njia yenye nguvu ya kufuta kabisa mazingira yako ya azd na rasilimali zote zinazohusiana. Hapa kuna maelezo ya kila bendera:
+```
+--force
+```
+- Inaruka maombi ya uthibitisho.
+- Inafaa kwa otomatiki au maandishi ambapo pembejeo ya mwongozo haiwezekani.
+- Inahakikisha mchakato wa kufuta unaendelea bila usumbufu, hata kama CLI inagundua kutokubaliana.
+
+```
+--purge
+```
+Inafuta **metadata yote inayohusiana**, ikiwa ni pamoja na:
+Hali ya mazingira  
+Folda ya ndani ya `.azure`  
+Taarifa ya usambazaji iliyohifadhiwa  
+Inazuia azd "kukumbuka" usambazaji wa awali, ambayo inaweza kusababisha masuala kama vikundi vya rasilimali visivyolingana au marejeleo ya rejista yaliyopitwa na wakati.
+
+### Kwa nini kutumia zote mbili?
+Unapokumbana na matatizo na `azd up` kutokana na hali iliyobaki au usambazaji wa sehemu, mchanganyiko huu unahakikisha **kuanza upya safi**.
+
+Ni muhimu hasa baada ya kufuta rasilimali kwa mikono kwenye Azure portal au unapobadilisha templates, environments, au mikataba ya majina ya vikundi vya rasilimali.
 
 ### Kusimamia Mazingira Mengi
 ```bash
@@ -246,7 +269,7 @@ azd init --template template1
 ### 3. Kutenganisha Mazingira
 - Tumia mazingira tofauti kwa maendeleo/staging/uzalishaji
 - Kamwe usisambaze moja kwa moja kwenye uzalishaji kutoka kwa mashine ya ndani
-- Tumia CI/CD pipelines kwa usambazaji wa uzalishaji
+- Tumia pipelines za CI/CD kwa usambazaji wa uzalishaji
 
 ### 4. Usimamizi wa Usanidi
 - Tumia vigezo vya mazingira kwa data nyeti
@@ -265,11 +288,11 @@ azd init --template template1
 1. Badilisha templates
 2. Simamia mazingira mengi
 3. Elewa msimbo wa miundombinu
-4. Sanidi CI/CD pipelines
+4. Sanidi pipelines za CI/CD
 
 ### Juu (Wiki 5+)
 1. Unda templates maalum
-2. Mifumo ya juu ya miundombinu
+2. Mifumo ya hali ya juu ya miundombinu
 3. Usambazaji wa maeneo mengi
 4. Usanidi wa kiwango cha shirika
 
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asilia katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia huduma ya tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

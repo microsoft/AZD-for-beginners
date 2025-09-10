@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T19:05:51+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:08:40+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "br"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Bem-vindo ao seu primeiro projeto com o Azure Developer CLI! Este tutorial prático abrangente oferece um passo a passo completo para criar, implantar e gerenciar uma aplicação full-stack no Azure usando o azd. Você trabalhará com um aplicativo real de lista de tarefas que inclui um frontend em React, um backend de API em Node.js e um banco de dados MongoDB.
+Bem-vindo ao seu primeiro projeto com o Azure Developer CLI! Este tutorial prático e abrangente oferece um passo a passo completo para criar, implantar e gerenciar uma aplicação full-stack no Azure usando o azd. Você trabalhará com uma aplicação real de lista de tarefas que inclui um frontend em React, um backend API em Node.js e um banco de dados MongoDB.
 
 ## Objetivos de Aprendizado
 
@@ -27,8 +27,8 @@ Ao concluir este tutorial, você será capaz de:
 
 Ao final, você será capaz de:
 - Inicializar e configurar projetos azd a partir de templates de forma independente
-- Navegar e modificar estruturas de projetos azd com eficiência
-- Implantar aplicações full-stack no Azure usando comandos únicos
+- Navegar e modificar estruturas de projetos azd de maneira eficaz
+- Implantar aplicações full-stack no Azure com comandos simples
 - Solucionar problemas comuns de implantação e autenticação
 - Gerenciar múltiplos ambientes no Azure para diferentes estágios de implantação
 - Implementar fluxos de implantação contínua para atualizações de aplicações
@@ -46,17 +46,21 @@ Ao final, você será capaz de:
 ```bash
 # Check azd installation
 azd version
+```
+### Verifique a autenticação no Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Verifique a versão do Node.js
+```bash
 node --version
 ```
 
 ## Passo 1: Escolha e Inicialize um Template
 
-Vamos começar com um template popular de aplicativo de lista de tarefas que inclui um frontend em React e um backend de API em Node.js.
+Vamos começar com um template popular de aplicação de lista de tarefas que inclui um frontend em React e um backend API em Node.js.
 
 ```bash
 # Browse available templates
@@ -73,7 +77,7 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### O que Acabou de Acontecer?
+### O que acabou de acontecer?
 - O código do template foi baixado para o seu diretório local
 - Um arquivo `azure.yaml` foi criado com definições de serviços
 - O código de infraestrutura foi configurado no diretório `infra/`
@@ -125,7 +129,7 @@ my-first-azd-app/
 cat azure.yaml
 ```
 
-**infra/main.bicep** - Definição de infraestrutura:
+**infra/main.bicep** - Definição da infraestrutura:
 ```bash
 # View the infrastructure code
 head -30 infra/main.bicep
@@ -151,15 +155,14 @@ Faça uma alteração simples:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
-## Passo 4: Implante no Azure
+## Passo 4: Implemente no Azure
 
-Agora vem a parte emocionante - implante tudo no Azure!
+Agora vem a parte emocionante - implantar tudo no Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -172,11 +175,11 @@ azd up
 # 4. Display the application URL
 ```
 
-### O que Está Acontecendo Durante a Implantação?
+### O que está acontecendo durante a implantação?
 
-O comando `azd up` realiza os seguintes passos:
-1. **Provisionar** (`azd provision`) - Cria recursos no Azure
-2. **Empacotar** - Compila o código da sua aplicação
+O comando `azd up` executa as seguintes etapas:
+1. **Provisionar** (`azd provision`) - Cria os recursos no Azure
+2. **Empacotar** - Constrói o código da sua aplicação
 3. **Implantar** (`azd deploy`) - Implanta o código nos recursos do Azure
 
 ### Saída Esperada
@@ -195,7 +198,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Passo 5: Teste Sua Aplicação
 
 ### Acesse Sua Aplicação
-Clique na URL fornecida na saída da implantação ou obtenha-a a qualquer momento:
+Clique no URL fornecido na saída da implantação ou acesse a qualquer momento:
 ```bash
 # Get application endpoints
 azd show
@@ -204,7 +207,7 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Teste o Aplicativo de Lista de Tarefas
+### Teste o App de Lista de Tarefas
 1. **Adicione um item à lista** - Clique em "Add Todo" e insira uma tarefa
 2. **Marque como concluído** - Marque os itens concluídos
 3. **Exclua itens** - Remova tarefas que você não precisa mais
@@ -234,7 +237,7 @@ Adicione um cabeçalho de resposta personalizado:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Implante Apenas as Alterações de Código
+### Implante Apenas as Alterações no Código
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -347,7 +350,7 @@ Agora que você concluiu seu primeiro projeto, explore estes tópicos avançados
 ### 3. Melhores Práticas para Produção
 - [Configurações de segurança](../deployment/best-practices.md#security)
 - [Otimização de desempenho](../deployment/best-practices.md#performance)
-- [Monitoramento e registro](../deployment/best-practices.md#monitoring)
+- [Monitoramento e logs](../deployment/best-practices.md#monitoring)
 
 ### 4. Explore Mais Templates
 ```bash
@@ -371,7 +374,7 @@ azd init --template todo-java-mongo
 
 ### Comunidade e Suporte
 - [GitHub do Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [Comunidade de Desenvolvedores do Azure](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Comunidade de Desenvolvedores Azure](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Templates e Exemplos
@@ -381,7 +384,7 @@ azd init --template todo-java-mongo
 
 ---
 
-**Parabéns por concluir seu primeiro projeto azd!** Agora você está pronto para construir e implantar aplicações incríveis no Azure com confiança.
+**Parabéns por concluir seu primeiro projeto azd!** Agora você está pronto para criar e implantar aplicações incríveis no Azure com confiança.
 
 ---
 

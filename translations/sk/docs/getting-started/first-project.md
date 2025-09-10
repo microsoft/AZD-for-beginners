@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-10T05:58:24+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:35:53+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "sk"
 }
@@ -36,7 +36,7 @@ Po dokončení budete schopní:
 ## Začíname
 
 ### Kontrolný zoznam predpokladov
-- ✅ Nainštalovaný Azure Developer CLI ([Inštalačný sprievodca](installation.md))
+- ✅ Nainštalovaný Azure Developer CLI ([Návod na inštaláciu](installation.md))
 - ✅ Nainštalovaný a autentifikovaný Azure CLI
 - ✅ Nainštalovaný Git na vašom systéme
 - ✅ Node.js 16+ (pre tento tutoriál)
@@ -46,11 +46,15 @@ Po dokončení budete schopní:
 ```bash
 # Check azd installation
 azd version
+```
+### Overenie autentifikácie Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Kontrola verzie Node.js
+```bash
 node --version
 ```
 
@@ -151,8 +155,7 @@ Urobte jednoduchú zmenu:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -175,9 +178,9 @@ azd up
 ### Čo sa deje počas nasadenia?
 
 Príkaz `azd up` vykonáva tieto kroky:
-1. **Provision** (`azd provision`) - Vytvára zdroje na Azure
-2. **Package** - Zostavuje kód vašej aplikácie
-3. **Deploy** (`azd deploy`) - Nasadzuje kód na zdroje Azure
+1. **Provision** (`azd provision`) - Vytvorenie zdrojov Azure
+2. **Package** - Zostavenie kódu aplikácie
+3. **Deploy** (`azd deploy`) - Nasadenie kódu na zdroje Azure
 
 ### Očakávaný výstup
 ```
@@ -387,9 +390,9 @@ azd init --template todo-java-mongo
 
 **Navigácia**
 - **Predchádzajúca lekcia**: [Konfigurácia](configuration.md)
-- **Nasledujúca lekcia**: [Sprievodca nasadením](../deployment/deployment-guide.md)
+- **Nasledujúca lekcia**: [Príručka nasadenia](../deployment/deployment-guide.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

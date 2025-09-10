@@ -1,50 +1,50 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T19:11:19+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T12:53:31+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ur"
 }
 -->
-# ترتیب دینے کی گائیڈ
+# کنفیگریشن گائیڈ
 
 ## تعارف
 
-یہ جامع گائیڈ Azure Developer CLI کو بہترین ترقی اور تعیناتی ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔ آپ ترتیب کی درجہ بندی، ماحول کے انتظام، تصدیق کے طریقے، اور پیچیدہ ترتیب کے نمونے سیکھیں گے جو مؤثر اور محفوظ Azure تعیناتیوں کو ممکن بناتے ہیں۔
+یہ جامع گائیڈ Azure Developer CLI کی کنفیگریشن کے تمام پہلوؤں کا احاطہ کرتی ہے تاکہ ترقی اور تعیناتی کے ورک فلو کو بہتر بنایا جا سکے۔ آپ کنفیگریشن کی درجہ بندی، ماحولیات کا انتظام، تصدیق کے طریقے، اور پیچیدہ کنفیگریشن پیٹرنز کے بارے میں سیکھیں گے جو Azure کی مؤثر اور محفوظ تعیناتی کو ممکن بناتے ہیں۔
 
-## سیکھنے کے اہداف
+## سیکھنے کے مقاصد
 
 اس سبق کے اختتام تک، آپ:
-- azd ترتیب کی درجہ بندی کو سمجھیں گے اور جانیں گے کہ کس طرح ترتیبات کو ترجیح دی جاتی ہے
-- عالمی اور پروجیکٹ مخصوص ترتیبات کو مؤثر طریقے سے ترتیب دیں گے
-- مختلف ترتیبات کے ساتھ متعدد ماحول کا انتظام کریں گے
-- محفوظ تصدیق اور اجازت کے نمونے نافذ کریں گے
-- پیچیدہ منظرناموں کے لیے اعلیٰ درجے کی ترتیب کے نمونے سمجھیں گے
+- azd کنفیگریشن کی درجہ بندی کو سمجھیں گے اور جانیں گے کہ سیٹنگز کو کیسے ترجیح دی جاتی ہے
+- عالمی اور پروجیکٹ کی مخصوص سیٹنگز کو مؤثر طریقے سے ترتیب دیں گے
+- مختلف کنفیگریشنز کے ساتھ متعدد ماحولیات کا انتظام کریں گے
+- محفوظ تصدیق اور اجازت کے پیٹرنز کو نافذ کریں گے
+- پیچیدہ منظرناموں کے لیے جدید کنفیگریشن پیٹرنز کو سمجھیں گے
 
 ## سیکھنے کے نتائج
 
 اس سبق کو مکمل کرنے کے بعد، آپ قابل ہوں گے:
 - ترقی کے بہترین ورک فلو کے لیے azd کو ترتیب دیں
-- متعدد تعیناتی ماحول قائم کریں اور ان کا انتظام کریں
-- محفوظ ترتیب کے انتظام کے طریقے نافذ کریں
-- ترتیب سے متعلق مسائل کو حل کریں
+- متعدد تعیناتی ماحولیات کو ترتیب دیں اور ان کا انتظام کریں
+- محفوظ کنفیگریشن مینجمنٹ کے طریقے نافذ کریں
+- کنفیگریشن سے متعلق مسائل کو حل کریں
 - مخصوص تنظیمی ضروریات کے لیے azd کے رویے کو حسب ضرورت بنائیں
 
-یہ جامع گائیڈ Azure Developer CLI کو بہترین ترقی اور تعیناتی ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔
+یہ جامع گائیڈ Azure Developer CLI کی کنفیگریشن کے تمام پہلوؤں کا احاطہ کرتی ہے تاکہ ترقی اور تعیناتی کے ورک فلو کو بہتر بنایا جا سکے۔
 
-## ترتیب کی درجہ بندی
+## کنفیگریشن کی درجہ بندی
 
-azd ایک درجہ بندی ترتیب کا نظام استعمال کرتا ہے:
+azd ایک درجہ بندی والے کنفیگریشن سسٹم کا استعمال کرتا ہے:
 1. **کمانڈ لائن فلیگز** (سب سے زیادہ ترجیح)
-2. **ماحول کے متغیرات**
-3. **مقامی پروجیکٹ ترتیب** (`.azd/config.json`)
-4. **عالمی صارف ترتیب** (`~/.azd/config.json`)
-5. **پہلے سے طے شدہ اقدار** (سب سے کم ترجیح)
+2. **ماحولیاتی متغیرات**
+3. **مقامی پروجیکٹ کنفیگریشن** (`.azd/config.json`)
+4. **عالمی صارف کنفیگریشن** (`~/.azd/config.json`)
+5. **ڈیفالٹ ویلیوز** (سب سے کم ترجیح)
 
-## عالمی ترتیب
+## عالمی کنفیگریشن
 
-### عالمی ڈیفالٹس ترتیب دینا
+### عالمی ڈیفالٹس سیٹ کرنا
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +62,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### عام عالمی ترتیبات
+### عام عالمی سیٹنگز
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -78,9 +78,9 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ پروجیکٹ ترتیب
+## 🏗️ پروجیکٹ کنفیگریشن
 
-### azure.yaml کا ڈھانچہ
+### azure.yaml کی ساخت
 `azure.yaml` فائل آپ کے azd پروجیکٹ کا مرکز ہے:
 
 ```yaml
@@ -157,9 +157,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### سروس ترتیب کے اختیارات
+### سروس کنفیگریشن کے اختیارات
 
-#### میزبان کی اقسام
+#### ہوسٹ کی اقسام
 ```yaml
 services:
   web-static:
@@ -178,7 +178,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### زبان کے مخصوص ترتیبات
+#### زبان کے لحاظ سے مخصوص سیٹنگز
 ```yaml
 services:
   node-app:
@@ -202,9 +202,9 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 ماحول کا انتظام
+## 🌟 ماحولیات کا انتظام
 
-### ماحول بنانا
+### ماحولیات بنانا
 ```bash
 # Create a new environment
 azd env new development
@@ -216,8 +216,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### ماحول کی ترتیب
-ہر ماحول کی اپنی ترتیب `.azure/<env-name>/config.json` میں ہوتی ہے:
+### ماحولیات کی کنفیگریشن
+ہر ماحول کی اپنی کنفیگریشن `.azure/<env-name>/config.json` میں ہوتی ہے:
 
 ```json
 {
@@ -239,7 +239,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### ماحول کے متغیرات
+### ماحولیاتی متغیرات
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -253,8 +253,8 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-### ماحول کے سانچے
-مسلسل ماحول کی ترتیب کے لیے `.azure/env.template` بنائیں:
+### ماحولیاتی ٹیمپلیٹس
+مسلسل ماحولیاتی سیٹ اپ کے لیے `.azure/env.template` بنائیں:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -270,7 +270,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 تصدیق کی ترتیب
+## 🔐 تصدیق کی کنفیگریشن
 
 ### Azure CLI انضمام
 ```bash
@@ -297,18 +297,18 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### منظم شناخت
-Azure پر میزبانی شدہ ماحول کے لیے:
+### مینیجڈ آئیڈینٹیٹی
+Azure ہوسٹڈ ماحولیات کے لیے:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ بنیادی ڈھانچے کی ترتیب
+## 🏗️ انفراسٹرکچر کنفیگریشن
 
 ### Bicep پیرامیٹرز
-بنیادی ڈھانچے کے پیرامیٹرز کو `infra/main.parameters.json` میں ترتیب دیں:
+`infra/main.parameters.json` میں انفراسٹرکچر پیرامیٹرز کو ترتیب دیں:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -330,7 +330,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform ترتیب
+### Terraform کنفیگریشن
 Terraform پروجیکٹس کے لیے، `infra/terraform.tfvars` میں ترتیب دیں:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
@@ -339,9 +339,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 تعیناتی ترتیب
+## 🚀 تعیناتی کی کنفیگریشن
 
-### تعمیر کی ترتیب
+### بلڈ کنفیگریشن
 ```yaml
 # In azure.yaml
 services:
@@ -364,7 +364,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker ترتیب
+### Docker کنفیگریشن
 ```yaml
 services:
   api:
@@ -378,8 +378,9 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+مثال `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 اعلیٰ درجے کی ترتیب
+## 🔧 جدید کنفیگریشن
 
 ### حسب ضرورت وسائل کے نام
 ```bash
@@ -389,7 +390,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### نیٹ ورک ترتیب
+### نیٹ ورک کنفیگریشن
 ```yaml
 # In azure.yaml
 infra:
@@ -400,7 +401,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### نگرانی کی ترتیب
+### مانیٹرنگ کنفیگریشن
 ```yaml
 # In azure.yaml
 monitoring:
@@ -412,7 +413,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 ماحول کے مخصوص ترتیبات
+## 🎯 ماحولیات کے لحاظ سے مخصوص کنفیگریشنز
 
 ### ترقیاتی ماحول
 ```bash
@@ -432,7 +433,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### پیداواری ماحول
+### پروڈکشن ماحول
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -441,9 +442,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 ترتیب کی توثیق
+## 🔍 کنفیگریشن کی توثیق
 
-### ترتیب کی توثیق کریں
+### کنفیگریشن کی توثیق کریں
 ```bash
 # Check configuration syntax
 azd config validate
@@ -455,8 +456,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### ترتیب کے اسکرپٹس
-`scripts/` میں توثیق کے اسکرپٹس بنائیں:
+### کنفیگریشن اسکرپٹس
+`scripts/` میں توثیقی اسکرپٹس بنائیں:
 
 ```bash
 #!/bin/bash
@@ -481,7 +482,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 بہترین طریقے
 
-### 1. ماحول کے متغیرات استعمال کریں
+### 1. ماحولیاتی متغیرات کا استعمال کریں
 ```yaml
 # Good: Use environment variables
 database:
@@ -492,7 +493,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. ترتیب کی فائلوں کو منظم کریں
+### 2. کنفیگریشن فائلوں کو منظم کریں
 ```
 .azure/
 ├── config.json              # Global project config
@@ -516,8 +517,8 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. ترتیب کی دستاویزات
-اپنی ترتیب کو `CONFIG.md` میں دستاویز کریں:
+### 4. کنفیگریشن کی دستاویزات
+اپنی کنفیگریشن کو `CONFIG.md` میں دستاویز کریں:
 ```markdown
 # Configuration Guide
 
@@ -532,17 +533,17 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## اگلے مراحل
+## اگلے اقدامات
 
-- [آپ کا پہلا پروجیکٹ](first-project.md) - ترتیب کو عملی طور پر نافذ کریں
-- [تعیناتی گائیڈ](../deployment/deployment-guide.md) - تعیناتی کے لیے ترتیب استعمال کریں
-- [وسائل کی فراہمی](../deployment/provisioning.md) - پیداواری ترتیب کے لیے
+- [آپ کا پہلا پروجیکٹ](first-project.md) - عملی طور پر کنفیگریشن کا اطلاق کریں
+- [تعیناتی گائیڈ](../deployment/deployment-guide.md) - تعیناتی کے لیے کنفیگریشن کا استعمال کریں
+- [وسائل کی فراہمی](../deployment/provisioning.md) - پروڈکشن کے لیے تیار کنفیگریشنز
 
 ## حوالہ جات
 
-- [azd ترتیب حوالہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azd کنفیگریشن حوالہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml اسکیمہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [ماحول کے متغیرات](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [ماحولیاتی متغیرات](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 

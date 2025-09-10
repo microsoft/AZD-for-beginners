@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:31:48+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:22:26+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "no"
 }
@@ -11,25 +11,25 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduksjon
 
-Denne omfattende veiledningen dekker alle aspekter ved å konfigurere Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter. Du vil lære om konfigurasjonshierarkiet, miljøadministrasjon, autentiseringsmetoder og avanserte konfigurasjonsmønstre som muliggjør effektive og sikre Azure-distribusjoner.
+Denne omfattende veiledningen dekker alle aspekter ved å konfigurere Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter. Du vil lære om konfigurasjonshierarkiet, miljøhåndtering, autentiseringsmetoder og avanserte konfigurasjonsmønstre som muliggjør effektive og sikre Azure-distribusjoner.
 
 ## Læringsmål
 
 Ved slutten av denne leksjonen vil du:
 - Mestre azd-konfigurasjonshierarkiet og forstå hvordan innstillinger prioriteres
 - Konfigurere globale og prosjektspesifikke innstillinger effektivt
-- Administrere flere miljøer med ulike konfigurasjoner
+- Håndtere flere miljøer med ulike konfigurasjoner
 - Implementere sikre autentiserings- og autorisasjonsmønstre
 - Forstå avanserte konfigurasjonsmønstre for komplekse scenarier
 
 ## Læringsutbytte
 
-Etter å ha fullført denne leksjonen, vil du kunne:
+Etter å ha fullført denne leksjonen vil du kunne:
 - Konfigurere azd for optimale utviklingsarbeidsflyter
 - Sette opp og administrere flere distribusjonsmiljøer
-- Implementere sikre konfigurasjonsadministrasjonspraksiser
+- Implementere sikre konfigurasjonsstyringspraksiser
 - Feilsøke konfigurasjonsrelaterte problemer
-- Tilpasse azd-oppførsel for spesifikke organisatoriske krav
+- Tilpasse azd-oppførsel for spesifikke organisatoriske behov
 
 Denne omfattende veiledningen dekker alle aspekter ved å konfigurere Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter.
 
@@ -81,7 +81,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Prosjektkonfigurasjon
 
 ### azure.yaml-struktur
-Filen `azure.yaml` er hjertet i ditt azd-prosjekt:
+Filen `azure.yaml` er kjernen i ditt azd-prosjekt:
 
 ```yaml
 # Minimum configuration
@@ -202,7 +202,7 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Miljøadministrasjon
+## 🌟 Miljøhåndtering
 
 ### Opprette miljøer
 ```bash
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### Miljømaler
-Opprett `.azure/env.template` for konsistent miljøoppsett:
+Opprett `.azure/env.template` for konsekvent miljøoppsett:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -272,7 +272,7 @@ LOG_LEVEL=info
 
 ## 🔐 Autentiseringskonfigurasjon
 
-### Integrasjon med Azure CLI
+### Azure CLI-integrasjon
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -284,7 +284,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Autentisering med tjenesteprinsipp
+### Service Principal-autentisering
 For CI/CD-pipelines:
 ```bash
 # Set environment variables
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Eksempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Avansert konfigurasjon
 
@@ -517,7 +518,7 @@ database:
 ```
 
 ### 4. Dokumentasjon av konfigurasjon
-Dokumenter konfigurasjonen din i `CONFIG.md`:
+Dokumenter konfigurasjonen i `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -534,15 +535,15 @@ Dokumenter konfigurasjonen din i `CONFIG.md`:
 
 ## Neste steg
 
-- [Ditt første prosjekt](first-project.md) - Bruk konfigurasjon i praksis
-- [Distribusjonsveiledning](../deployment/deployment-guide.md) - Bruk konfigurasjon for distribusjon
-- [Ressursprovisjonering](../deployment/provisioning.md) - Produksjonsklare konfigurasjoner
+- [Ditt første prosjekt](first-project.md) - Bruk konfigurasjonen i praksis
+- [Distribusjonsveiledning](../deployment/deployment-guide.md) - Bruk konfigurasjonen for distribusjon
+- [Klargjøring av ressurser](../deployment/provisioning.md) - Produksjonsklare konfigurasjoner
 
 ## Referanser
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd Konfigurasjonsreferanse](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml-skjema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Miljøvariabler](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
@@ -553,4 +554,4 @@ Dokumenter konfigurasjonen din i `CONFIG.md`:
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

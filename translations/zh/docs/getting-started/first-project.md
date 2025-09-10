@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T16:41:32+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T12:54:14+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "zh"
 }
@@ -11,13 +11,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 介绍
 
-欢迎来到您的第一个 Azure Developer CLI 项目！这个全面的实践教程将带您完整体验如何使用 azd 在 Azure 上创建、部署和管理一个全栈应用程序。您将使用一个真实的待办事项应用程序，该应用包括 React 前端、Node.js API 后端和 MongoDB 数据库。
+欢迎来到您的第一个 Azure Developer CLI 项目！这个全面的实践教程将带您完整体验如何使用 azd 在 Azure 上创建、部署和管理一个全栈应用程序。您将使用一个真实的待办事项应用程序，该应用程序包括 React 前端、Node.js API 后端和 MongoDB 数据库。
 
 ## 学习目标
 
 完成本教程后，您将能够：
 - 掌握使用模板初始化 azd 项目的工作流程
-- 理解 Azure Developer CLI 项目结构和配置文件
+- 理解 Azure Developer CLI 项目的结构和配置文件
 - 完成应用程序的部署到 Azure，包括基础设施的配置
 - 实现应用程序更新和重新部署策略
 - 管理开发和测试的多环境设置
@@ -28,17 +28,17 @@ CO_OP_TRANSLATOR_METADATA:
 完成后，您将能够：
 - 独立从模板初始化和配置 azd 项目
 - 有效地导航和修改 azd 项目结构
-- 使用单条命令将全栈应用程序部署到 Azure
+- 使用单一命令将全栈应用程序部署到 Azure
 - 解决常见的部署问题和身份验证问题
 - 管理不同部署阶段的多个 Azure 环境
 - 实现应用程序更新的持续部署工作流
 
 ## 开始
 
-### 前置条件清单
+### 先决条件清单
 - ✅ 已安装 Azure Developer CLI ([安装指南](installation.md))
 - ✅ 已安装并认证 Azure CLI
-- ✅ 系统中已安装 Git
+- ✅ 系统上已安装 Git
 - ✅ Node.js 16+（适用于本教程）
 - ✅ 推荐使用 Visual Studio Code
 
@@ -46,17 +46,21 @@ CO_OP_TRANSLATOR_METADATA:
 ```bash
 # Check azd installation
 azd version
+```
+### 验证 Azure 身份认证
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### 检查 Node.js 版本
+```bash
 node --version
 ```
 
 ## 第一步：选择并初始化模板
 
-我们从一个流行的待办事项应用模板开始，该模板包括 React 前端和 Node.js API 后端。
+我们从一个流行的待办事项应用程序模板开始，该模板包括 React 前端和 Node.js API 后端。
 
 ```bash
 # Browse available templates
@@ -75,7 +79,7 @@ azd init --template todo-nodejs-mongo
 
 ### 刚刚发生了什么？
 - 将模板代码下载到您的本地目录
-- 创建了一个包含服务定义的 `azure.yaml` 文件
+- 创建了一个 `azure.yaml` 文件，其中包含服务定义
 - 在 `infra/` 目录中设置了基础设施代码
 - 创建了环境配置
 
@@ -119,7 +123,7 @@ my-first-azd-app/
 
 ### 需要理解的关键文件
 
-**azure.yaml** - 您的 azd 项目的核心：
+**azure.yaml** - azd 项目的核心：
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -151,8 +155,7 @@ code src/web/src/App.tsx
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -204,8 +207,8 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### 测试待办事项应用
-1. **添加待办事项** - 点击“添加待办事项”，输入任务
+### 测试待办事项应用程序
+1. **添加待办事项** - 点击“Add Todo”，输入任务
 2. **标记为完成** - 勾选已完成的项目
 3. **删除项目** - 移除不再需要的待办事项
 
@@ -244,7 +247,7 @@ azd deploy
 
 ## 第七步：管理多个环境
 
-创建一个测试环境以在生产之前测试更改：
+创建一个测试环境，在生产之前测试更改：
 
 ```bash
 # Create a new staging environment
@@ -299,7 +302,7 @@ azd down --force --purge
 
 ## 常见问题排查
 
-### 身份验证错误
+### 身份认证错误
 ```bash
 # Re-authenticate with Azure
 az login
@@ -334,7 +337,7 @@ netstat -an | grep :3100
 
 ## 下一步
 
-完成第一个项目后，探索以下高级主题：
+完成您的第一个项目后，可以探索以下高级主题：
 
 ### 1. 自定义基础设施
 - [基础设施即代码](../deployment/provisioning.md)

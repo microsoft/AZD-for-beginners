@@ -1,45 +1,45 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T16:50:03+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T12:54:37+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "zh"
 }
 -->
 # 配置指南
 
-## 介绍
+## 简介
 
-本指南全面涵盖了配置 Azure Developer CLI 的所有方面，以实现最佳的开发和部署工作流程。您将学习配置层级结构、环境管理、身份验证方法以及高级配置模式，从而实现高效且安全的 Azure 部署。
+本指南全面介绍了如何配置 Azure Developer CLI，以实现最佳的开发和部署工作流。您将学习配置层级、环境管理、身份验证方法以及高级配置模式，从而实现高效且安全的 Azure 部署。
 
 ## 学习目标
 
-完成本课程后，您将能够：
-- 掌握 azd 的配置层级结构，并了解设置的优先级
+通过本课程，您将能够：
+- 掌握 azd 的配置层级并了解设置的优先级
 - 有效配置全局和项目特定的设置
 - 管理具有不同配置的多个环境
 - 实现安全的身份验证和授权模式
-- 理解复杂场景的高级配置模式
+- 理解复杂场景下的高级配置模式
 
 ## 学习成果
 
 完成本课程后，您将能够：
-- 配置 azd 以优化开发工作流程
+- 配置 azd 以优化开发工作流
 - 设置和管理多个部署环境
 - 实现安全的配置管理实践
 - 解决与配置相关的问题
-- 根据特定组织需求定制 azd 的行为
+- 根据特定组织需求自定义 azd 行为
 
-本指南全面涵盖了配置 Azure Developer CLI 的所有方面，以实现最佳的开发和部署工作流程。
+本指南全面介绍了如何配置 Azure Developer CLI，以实现最佳的开发和部署工作流。
 
-## 配置层级结构
+## 配置层级
 
 azd 使用分层的配置系统：
 1. **命令行标志**（最高优先级）
 2. **环境变量**
-3. **本地项目配置** (`.azd/config.json`)
-4. **全局用户配置** (`~/.azd/config.json`)
+3. **本地项目配置**（`.azd/config.json`）
+4. **全局用户配置**（`~/.azd/config.json`）
 5. **默认值**（最低优先级）
 
 ## 全局配置
@@ -178,7 +178,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### 特定语言设置
+#### 语言特定设置
 ```yaml
 services:
   node-app:
@@ -285,7 +285,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### 服务主体身份验证
-适用于 CI/CD 管道：
+适用于 CI/CD 流水线：
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -377,7 +377,8 @@ services:
       buildArgs:
         NODE_ENV: production
         API_VERSION: v1.0.0
-```
+```  
+示例 `Dockerfile`：https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 高级配置
 
@@ -412,7 +413,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 特定环境配置
+## 🎯 环境特定配置
 
 ### 开发环境
 ```bash
@@ -423,7 +424,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### 测试环境
+### 预生产环境
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -492,7 +493,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. 整理配置文件
+### 2. 组织配置文件
 ```
 .azure/
 ├── config.json              # Global project config
@@ -547,10 +548,10 @@ database:
 ---
 
 **导航**
-- **上一课**: [安装与设置](installation.md)
-- **下一课**: [您的第一个项目](first-project.md)
+- **上一课**：[安装与设置](installation.md)
+- **下一课**：[您的第一个项目](first-project.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

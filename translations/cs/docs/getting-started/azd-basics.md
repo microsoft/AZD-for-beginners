@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:12:07+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:35:29+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "cs"
 }
@@ -11,12 +11,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tato lekce vás seznámí s Azure Developer CLI (azd), výkonným nástrojem příkazového řádku, který urychluje přechod od lokálního vývoje k nasazení na Azure. Naučíte se základní koncepty, klíčové funkce a pochopíte, jak azd zjednodušuje nasazení cloudově orientovaných aplikací.
+Tato lekce vás seznámí s Azure Developer CLI (azd), výkonným nástrojem příkazového řádku, který urychluje cestu od lokálního vývoje k nasazení na Azure. Naučíte se základní koncepty, klíčové funkce a pochopíte, jak azd zjednodušuje nasazení cloudově orientovaných aplikací.
 
 ## Cíle učení
 
 Na konci této lekce budete:
-- Rozumět tomu, co je Azure Developer CLI a jeho hlavní účel
+- Rozumět tomu, co je Azure Developer CLI a jeho hlavnímu účelu
 - Naučíte se základní koncepty šablon, prostředí a služeb
 - Prozkoumáte klíčové funkce, včetně vývoje založeného na šablonách a Infrastructure as Code
 - Pochopíte strukturu projektu azd a pracovní postupy
@@ -33,7 +33,7 @@ Po dokončení této lekce budete schopni:
 
 ## Co je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je nástroj příkazového řádku navržený k urychlení přechodu od lokálního vývoje k nasazení na Azure. Zjednodušuje proces vytváření, nasazení a správy cloudově orientovaných aplikací na Azure.
+Azure Developer CLI (azd) je nástroj příkazového řádku navržený k urychlení cesty od lokálního vývoje k nasazení na Azure. Zjednodušuje proces vytváření, nasazení a správy cloudově orientovaných aplikací na Azure.
 
 ## Základní koncepty
 
@@ -46,9 +46,9 @@ Azure Developer CLI (azd) je nástroj příkazového řádku navržený k urychl
 
 ### Prostředí
 Prostředí představují různé cíle nasazení:
-- **Vývoj** - pro testování a vývoj
+- **Vývojové** - pro testování a vývoj
 - **Staging** - předprodukční prostředí
-- **Produkce** - živé produkční prostředí
+- **Produkční** - živé produkční prostředí
 
 Každé prostředí udržuje své vlastní:
 - Azure resource group
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Integrované pracovní postupy
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Porozumění `azd down --force --purge`
+Příkaz `azd down --force --purge` je výkonný způsob, jak kompletně odstranit vaše prostředí azd a všechny související zdroje. Zde je rozpis, co jednotlivé příznaky dělají:
+```
+--force
+```
+- Přeskakuje potvrzovací výzvy.
+- Užitečné pro automatizaci nebo skriptování, kde není možné manuální zadávání.
+- Zajišťuje, že odstranění proběhne bez přerušení, i když CLI detekuje nekonzistence.
+
+```
+--purge
+```
+Maže **veškerá související metadata**, včetně:
+Stavu prostředí
+Lokální složky `.azure`
+Informací o uloženém nasazení
+Zabraňuje azd v "zapamatování" předchozích nasazení, což může způsobit problémy, jako jsou nesprávné resource groups nebo zastaralé registry.
+
+### Proč použít obojí?
+Když narazíte na problémy s `azd up` kvůli přetrvávajícímu stavu nebo částečným nasazením, tato kombinace zajistí **čistý start**.
+
+Je obzvláště užitečné po manuálním odstranění zdrojů v Azure portálu nebo při přepínání šablon, prostředí nebo konvencí pojmenování resource groups.
 
 ### Správa více prostředí
 ```bash
@@ -245,8 +268,8 @@ azd init --template template1
 
 ### 3. Izolace prostředí
 - Používejte oddělená prostředí pro vývoj/staging/produkci
-- Nikdy nenasazujte přímo do produkce z lokálního počítače
-- Používejte CI/CD pipeline pro produkční nasazení
+- Nikdy nenasazujte přímo do produkce z lokálního stroje
+- Používejte CI/CD pipelines pro produkční nasazení
 
 ### 4. Správa konfigurace
 - Používejte proměnné prostředí pro citlivá data
@@ -258,16 +281,16 @@ azd init --template template1
 ### Začátečník (1.-2. týden)
 1. Nainstalujte azd a autentizujte se
 2. Nasazení jednoduché šablony
-3. Pochopte strukturu projektu
+3. Porozumění struktuře projektu
 4. Naučte se základní příkazy (up, down, deploy)
 
-### Středně pokročilý (3.-4. týden)
+### Pokročilý (3.-4. týden)
 1. Přizpůsobení šablon
 2. Správa více prostředí
-3. Pochopení infrastruktury jako kódu
-4. Nastavení CI/CD pipeline
+3. Porozumění infrastrukturnímu kódu
+4. Nastavení CI/CD pipelines
 
-### Pokročilý (5. týden a dále)
+### Expert (5. týden a dále)
 1. Vytváření vlastních šablon
 2. Pokročilé infrastrukturní vzory
 3. Nasazení do více regionů
@@ -283,7 +306,7 @@ azd init --template template1
 
 - [Přehled Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galerie šablon](https://azure.github.io/awesome-azd/)
-- [Ukázky od komunity](https://github.com/Azure-Samples)
+- [Ukázky komunity](https://github.com/Azure-Samples)
 
 ---
 
@@ -293,5 +316,5 @@ azd init --template template1
 
 ---
 
-**Prohlášení**:  
+**Upozornění**:  
 Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.

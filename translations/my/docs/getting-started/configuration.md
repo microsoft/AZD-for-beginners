@@ -1,50 +1,50 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-10T06:10:03+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:43:58+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "my"
 }
 -->
 # ဖွဲ့စည်းမှုလမ်းညွှန်
 
-## မိတ်ဆက်
+## နိဒါန်း
 
-ဒီလမ်းညွှန်က Azure Developer CLI ကို အကောင်းဆုံး ဖွံ့ဖြိုးရေးနှင့် တင်သွင်းမှုလုပ်ငန်းစဉ်များအတွက် ဖွဲ့စည်းပုံဆိုင်ရာ အပိုင်းအားလုံးကို ဖော်ပြထားပါတယ်။ သင် configuration hierarchy, ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှု, authentication နည်းလမ်းများနှင့် Azure ကို လုံခြုံစွာ deploy လုပ်နိုင်ဖို့ အဆင့်မြင့်ဖွဲ့စည်းပုံ pattern များကို လေ့လာနိုင်ပါမည်။
+ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI ကို အကောင်းဆုံး ဖွံ့ဖြိုးတိုးတက်မှုနှင့် တင်သွင်းမှု လုပ်ငန်းစဉ်များအတွက် ဖွဲ့စည်းပုံဆိုင်ရာ အချက်အလက်များကို အပြည့်အစုံ ဖော်ပြထားပါတယ်။ ဖွဲ့စည်းမှုအဆင့်ဆင့်၊ ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှု၊ အတည်ပြုမှုနည်းလမ်းများနှင့် အဆင့်မြင့်ဖွဲ့စည်းမှု ပုံစံများကို သင်လေ့လာပြီး Azure ကို ထိရောက်စွာနှင့် လုံခြုံစွာ တင်သွင်းနိုင်မည့် နည်းလမ်းများကို သိရှိနိုင်ပါမည်။
 
-## သင်ယူရမည့်ရည်ရွယ်ချက်များ
+## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-ဒီသင်ခန်းစာအဆုံးသတ်ချိန်မှာ သင်:
-- azd configuration hierarchy ကို ကျွမ်းကျင်ပြီး settings များကို ဘယ်လို priority ပေးရမယ်ဆိုတာ နားလည်နိုင်ပါမည်
-- Global နှင့် project-specific settings များကို ထိရောက်စွာ ဖွဲ့စည်းနိုင်ပါမည်
-- ပုံစံကွဲပြားတဲ့ configuration များနှင့် အမျိုးမျိုးသော environment များကို စီမံနိုင်ပါမည်
-- လုံခြုံသော authentication နှင့် authorization pattern များကို အကောင်အထည်ဖော်နိုင်ပါမည်
-- ရှုပ်ထွေးတဲ့အခြေအနေများအတွက် အဆင့်မြင့် configuration pattern များကို နားလည်နိုင်ပါမည်
+ဒီသင်ခန်းစာအဆုံးတွင် သင်သည်:
+- azd ဖွဲ့စည်းမှုအဆင့်ဆင့်ကို ကျွမ်းကျင်စွာ သိရှိပြီး အဆင့်သတ်မှတ်မှုများကို နားလည်မည်
+- အထွေထွေနှင့် ပရောဂျက်အထူးသတ်မှတ်ချက်များကို ထိရောက်စွာ ဖွဲ့စည်းနိုင်မည်
+- ပုံစံကွဲပြားသော ပတ်ဝန်းကျင်များကို စီမံခန့်ခွဲနိုင်မည်
+- လုံခြုံမှုနှင့် ခွင့်ပြုချက်ပုံစံများကို အကောင်အထည်ဖော်နိုင်မည်
+- ရှုပ်ထွေးသော အခြေအနေများအတွက် အဆင့်မြင့်ဖွဲ့စည်းမှု ပုံစံများကို နားလည်နိုင်မည်
 
-## သင်ယူပြီးရရှိမည့်ရလဒ်များ
+## သင်ခန်းစာပြီးဆုံးချိန်တွင် ရရှိမည့် ရလဒ်များ
 
-ဒီသင်ခန်းစာကို ပြီးမြောက်ပြီးနောက်မှာ သင်:
-- azd ကို အကောင်းဆုံး ဖွံ့ဖြိုးရေးလုပ်ငန်းစဉ်များအတွက် ဖွဲ့စည်းနိုင်ပါမည်
-- Deployment environment များစီမံနိုင်ပါမည်
-- လုံခြုံသော configuration စီမံခန့်ခွဲမှုအလေ့အကျင့်များကို အကောင်အထည်ဖော်နိုင်ပါမည်
-- Configuration ဆိုင်ရာပြဿနာများကို ဖြေရှင်းနိုင်ပါမည်
-- အဖွဲ့အစည်း-specific လိုအပ်ချက်များအတွက် azd ကို customize လုပ်နိုင်ပါမည်
+ဒီသင်ခန်းစာပြီးဆုံးချိန်တွင် သင်သည်:
+- ဖွံ့ဖြိုးတိုးတက်မှု လုပ်ငန်းစဉ်များအတွက် azd ကို ထိရောက်စွာ ဖွဲ့စည်းနိုင်မည်
+- တင်သွင်းမှု ပတ်ဝန်းကျင်များစွာကို စီမံခန့်ခွဲနိုင်မည်
+- လုံခြုံမှုရှိသော ဖွဲ့စည်းမှု စီမံခန့်ခွဲမှု လုပ်ငန်းစဉ်များကို အကောင်အထည်ဖော်နိုင်မည်
+- ဖွဲ့စည်းမှုနှင့်ဆိုင်သော ပြဿနာများကို ဖြေရှင်းနိုင်မည်
+- အဖွဲ့အစည်းအလိုက် azd အပြုအမူကို စိတ်ကြိုက်ပြင်ဆင်နိုင်မည်
 
-ဒီလမ်းညွှန်က Azure Developer CLI ကို အကောင်းဆုံး ဖွံ့ဖြိုးရေးနှင့် တင်သွင်းမှုလုပ်ငန်းစဉ်များအတွက် ဖွဲ့စည်းပုံဆိုင်ရာ အပိုင်းအားလုံးကို ဖော်ပြထားပါတယ်။
+ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI ကို အကောင်းဆုံး ဖွံ့ဖြိုးတိုးတက်မှုနှင့် တင်သွင်းမှု လုပ်ငန်းစဉ်များအတွက် ဖွဲ့စည်းပုံဆိုင်ရာ အချက်အလက်များကို အပြည့်အစုံ ဖော်ပြထားပါတယ်။
 
-## Configuration Hierarchy
+## ဖွဲ့စည်းမှုအဆင့်ဆင့်
 
-azd သည် hierarchy ဖွဲ့စည်းပုံစနစ်ကို အသုံးပြုသည်:
-1. **Command-line flags** (အမြင့်ဆုံး priority)
+azd သည် အဆင့်လိုက် ဖွဲ့စည်းမှုစနစ်ကို အသုံးပြုသည်:
+1. **Command-line flags** (အမြင့်ဆုံး ဦးစားပေးမှု)
 2. **Environment variables**
 3. **Local project configuration** (`.azd/config.json`)
 4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (အနိမ့်ဆုံး priority)
+5. **Default values** (အနိမ့်ဆုံး ဦးစားပေးမှု)
 
-## Global Configuration
+## အထွေထွေဖွဲ့စည်းမှု
 
-### Global Defaults သတ်မှတ်ခြင်း
+### အထွေထွေ Default များ သတ်မှတ်ခြင်း
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +62,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Global Settings များ
+### အထွေထွေ သုံးစွဲမှုများ
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -78,10 +78,10 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ ပရောဂျက်ဖွဲ့စည်းမှု
 
-### azure.yaml ဖွဲ့စည်းပုံ
-`azure.yaml` ဖိုင်သည် သင့် azd project ၏ အဓိကဖြစ်သည်:
+### azure.yaml ဖွဲ့စည်းမှု
+`azure.yaml` ဖိုင်သည် သင့် azd ပရောဂျက်၏ အဓိကဖြစ်သည်:
 
 ```yaml
 # Minimum configuration
@@ -157,7 +157,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration ရွေးချယ်မှုများ
+### ဝန်ဆောင်မှု ဖွဲ့စည်းမှု ရွေးချယ်မှုများ
 
 #### Host Types
 ```yaml
@@ -178,7 +178,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### Programming Language အလိုက် သတ်မှတ်ချက်များ
 ```yaml
 services:
   node-app:
@@ -202,9 +202,9 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Environment Management
+## 🌟 ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှု
 
-### Environment များဖန်တီးခြင်း
+### ပတ်ဝန်းကျင်များ ဖန်တီးခြင်း
 ```bash
 # Create a new environment
 azd env new development
@@ -216,8 +216,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-Environment တစ်ခုစီတွင် `.azure/<env-name>/config.json` တွင် ကိုယ်ပိုင် configuration ရှိသည်:
+### ပတ်ဝန်းကျင် ဖွဲ့စည်းမှု
+ပတ်ဝန်းကျင်တစ်ခုစီတွင် `.azure/<env-name>/config.json` တွင် သီးသန့်ဖွဲ့စည်းမှုရှိသည်:
 
 ```json
 {
@@ -239,7 +239,7 @@ Environment တစ်ခုစီတွင် `.azure/<env-name>/config.json` �
 }
 ```
 
-### Environment Variables
+### ပတ်ဝန်းကျင် Variable များ
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -253,8 +253,8 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-### Environment Templates
-Environment setup ကို တူညီစေရန် `.azure/env.template` ဖန်တီးပါ:
+### ပတ်ဝန်းကျင် Template များ
+ပုံမှန်ပတ်ဝန်းကျင် ဖွဲ့စည်းမှုအတွက် `.azure/env.template` ဖန်တီးပါ:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -270,9 +270,9 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Authentication Configuration
+## 🔐 အတည်ပြုမှု ဖွဲ့စည်းမှု
 
-### Azure CLI Integration
+### Azure CLI ပေါင်းစည်းမှု
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -285,7 +285,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Service Principal Authentication
-CI/CD pipelines အတွက်:
+CI/CD pipeline များအတွက်:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,17 +298,17 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-Azure-hosted environment များအတွက်:
+Azure-hosted ပတ်ဝန်းကျင်များအတွက်:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ အခြေခံဖွဲ့စည်းမှု
 
 ### Bicep Parameters
-Infrastructure parameters များကို `infra/main.parameters.json` တွင် configure လုပ်ပါ:
+`infra/main.parameters.json` တွင် အခြေခံဖွဲ့စည်းမှု parameter များ သတ်မှတ်ပါ:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -330,8 +330,8 @@ Infrastructure parameters များကို `infra/main.parameters.json` တ
 }
 ```
 
-### Terraform Configuration
-Terraform project များအတွက် `infra/terraform.tfvars` တွင် configure လုပ်ပါ:
+### Terraform ဖွဲ့စည်းမှု
+Terraform ပရောဂျက်များအတွက် `infra/terraform.tfvars` တွင် ဖွဲ့စည်းပါ:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -339,9 +339,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 တင်သွင်းမှု ဖွဲ့စည်းမှု
 
-### Build Configuration
+### Build ဖွဲ့စည်းမှု
 ```yaml
 # In azure.yaml
 services:
@@ -364,7 +364,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### Docker ဖွဲ့စည်းမှု
 ```yaml
 services:
   api:
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+ဥပမာ `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Advanced Configuration
+## 🔧 အဆင့်မြင့်ဖွဲ့စည်းမှု
 
-### Custom Resource Naming
+### စိတ်ကြိုက် အရင်းအမြစ်အမည်ပေးခြင်း
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -389,7 +390,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### Network ဖွဲ့စည်းမှု
 ```yaml
 # In azure.yaml
 infra:
@@ -400,7 +401,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### စောင့်ကြည့်မှု ဖွဲ့စည်းမှု
 ```yaml
 # In azure.yaml
 monitoring:
@@ -412,9 +413,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Environment-Specific Configurations
+## 🎯 ပတ်ဝန်းကျင်အထူးသတ်မှတ်ချက်များ
 
-### Development Environment
+### ဖွံ့ဖြိုးတိုးတက်မှု ပတ်ဝန်းကျင်
 ```bash
 # .azure/development/.env
 DEBUG=true
@@ -423,7 +424,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### စမ်းသပ်မှု ပတ်ဝန်းကျင်
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -432,7 +433,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### ထုတ်လုပ်မှု ပတ်ဝန်းကျင်
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -441,9 +442,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 ဖွဲ့စည်းမှု အတည်ပြုခြင်း
 
-### Configuration Validate လုပ်ခြင်း
+### ဖွဲ့စည်းမှု အတည်ပြုခြင်း
 ```bash
 # Check configuration syntax
 azd config validate
@@ -455,8 +456,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Configuration Scripts
-`scripts/` တွင် validation scripts ဖန်တီးပါ:
+### ဖွဲ့စည်းမှု Scripts
+`scripts/` တွင် အတည်ပြုမှု script များ ဖန်တီးပါ:
 
 ```bash
 #!/bin/bash
@@ -479,9 +480,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
 
-### 1. Environment Variables ကို အသုံးပြုပါ
+### 1. ပတ်ဝန်းကျင် Variable များ အသုံးပြုပါ
 ```yaml
 # Good: Use environment variables
 database:
@@ -492,7 +493,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Configuration Files များကို စနစ်တကျ စီစဉ်ပါ
+### 2. ဖွဲ့စည်းမှုဖိုင်များ စနစ်တကျ စီစဉ်ပါ
 ```
 .azure/
 ├── config.json              # Global project config
@@ -516,8 +517,8 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Configuration Documentation
-သင့် configuration ကို `CONFIG.md` တွင် documentation လုပ်ပါ:
+### 4. ဖွဲ့စည်းမှု Documentation
+`CONFIG.md` တွင် သင့်ဖွဲ့စည်းမှုကို မှတ်တမ်းတင်ပါ:
 ```markdown
 # Configuration Guide
 
@@ -532,25 +533,25 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## Next Steps
+## နောက်တစ်ဆင့်
 
-- [Your First Project](first-project.md) - Configuration ကို လက်တွေ့အသုံးချပါ
-- [Deployment Guide](../deployment/deployment-guide.md) - Configuration ကို deployment အတွက် အသုံးပြုပါ
-- [Provisioning Resources](../deployment/provisioning.md) - Production-ready configurations
+- [သင့်ပထမဆုံးပရောဂျက်](first-project.md) - လက်တွေ့ဖွဲ့စည်းမှုကို လေ့ကျင့်ပါ
+- [တင်သွင်းမှုလမ်းညွှန်](../deployment/deployment-guide.md) - ဖွဲ့စည်းမှုကို တင်သွင်းမှုအတွက် အသုံးပြုပါ
+- [အရင်းအမြစ်များ Provisioning](../deployment/provisioning.md) - ထုတ်လုပ်မှုအဆင့် ဖွဲ့စည်းမှုများ
 
-## References
+## ကိုးကားချက်များ
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azd ဖွဲ့စည်းမှုကိုးကားချက်](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [ပတ်ဝန်းကျင် Variable များ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
 **Navigation**
-- **Previous Lesson**: [Installation & Setup](installation.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+- **ယခင်သင်ခန်းစာ**: [Installation & Setup](installation.md)
+- **နောက်သင်ခန်းစာ**: [သင့်ပထမဆုံးပရောဂျက်](first-project.md)
 
 ---
 
 **ဝက်ဘ်ဆိုက်မှတ်ချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက်ဘာသာပြန်ဆိုမှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို ကျေးဇူးပြု၍ သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူလဘာသာစကားဖြင့် အာဏာတည်သောရင်းမြစ်အဖြစ် သတ်မှတ်ရန် လိုအပ်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူကူးဘာသာပြန်ဝန်ဆောင်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုမှားများ သို့မဟုတ် အဓိပ္ပါယ်မှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက်ဘာသာပြန်ဆိုမှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို ကျေးဇူးပြု၍ သိရှိပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတည်သော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပြန်ဆိုမှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုမှားများ သို့မဟုတ် အဓိပ္ပါယ်မှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-10T06:08:31+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:37:46+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ro"
 }
@@ -15,9 +15,9 @@ Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer C
 
 ## Obiective de Învățare
 
-Până la sfârșitul acestei lecții, vei:
+Până la finalul acestei lecții, vei:
 - Stăpâni ierarhia de configurare azd și vei înțelege cum sunt prioritizate setările
-- Configura setări globale și specifice proiectului în mod eficient
+- Configura eficient setările globale și cele specifice proiectului
 - Gestiona mai multe medii cu configurații diferite
 - Implementa modele sigure de autentificare și autorizare
 - Înțelege modele avansate de configurare pentru scenarii complexe
@@ -36,11 +36,11 @@ Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer C
 ## Ierarhia de Configurare
 
 azd folosește un sistem ierarhic de configurare:
-1. **Flag-uri din linia de comandă** (prioritate cea mai mare)
+1. **Flag-uri din linia de comandă** (cea mai mare prioritate)
 2. **Variabile de mediu**
 3. **Configurația locală a proiectului** (`.azd/config.json`)
 4. **Configurația globală a utilizatorului** (`~/.azd/config.json`)
-5. **Valori implicite** (prioritate cea mai mică)
+5. **Valori implicite** (cea mai mică prioritate)
 
 ## Configurare Globală
 
@@ -341,7 +341,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Configurarea Implementării
 
-### Configurare Build
+### Configurarea Build-ului
 ```yaml
 # In azure.yaml
 services:
@@ -364,7 +364,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Configurare Docker
+### Configurarea Docker
 ```yaml
 services:
   api:
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Exemplu `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Configurare Avansată
 
-### Denumirea Personalizată a Resurselor
+### Denumirea Resurselor Personalizate
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -389,7 +390,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Configurare Rețea
+### Configurarea Rețelei
 ```yaml
 # In azure.yaml
 infra:
@@ -400,7 +401,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Configurare Monitorizare
+### Configurarea Monitorizării
 ```yaml
 # In azure.yaml
 monitoring:
@@ -423,7 +424,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Mediu de Testare
+### Mediu de Staging
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -552,5 +553,5 @@ Documentează configurația în `CONFIG.md`:
 
 ---
 
-**Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinarea responsabilității**:  
+Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea realizată de un profesionist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

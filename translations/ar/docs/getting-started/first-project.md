@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T19:02:54+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T12:51:01+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ar"
 }
@@ -17,9 +17,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 عند إكمال هذا الدليل، ستتمكن من:
 - إتقان عملية بدء مشاريع azd باستخدام القوالب
-- فهم هيكل مشاريع Azure Developer CLI وملفات التكوين
+- فهم هيكل مشروع Azure Developer CLI وملفات التكوين
 - تنفيذ نشر كامل للتطبيق على Azure مع توفير البنية التحتية
-- تطبيق استراتيجيات تحديث التطبيقات وإعادة نشرها
+- تطبيق استراتيجيات تحديث التطبيق وإعادة النشر
 - إدارة بيئات متعددة للتطوير والتجربة
 - تطبيق ممارسات تنظيف الموارد وإدارة التكاليف
 
@@ -31,7 +31,7 @@ CO_OP_TRANSLATOR_METADATA:
 - نشر تطبيقات كاملة على Azure باستخدام أوامر بسيطة
 - حل المشكلات الشائعة في النشر ومشاكل المصادقة
 - إدارة بيئات Azure متعددة لمراحل النشر المختلفة
-- تنفيذ تدفقات النشر المستمر لتحديث التطبيقات
+- تنفيذ تدفقات النشر المستمر لتحديثات التطبيق
 
 ## البدء
 
@@ -46,11 +46,15 @@ CO_OP_TRANSLATOR_METADATA:
 ```bash
 # Check azd installation
 azd version
+```
+### التحقق من المصادقة على Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### التحقق من إصدار Node.js
+```bash
 node --version
 ```
 
@@ -81,7 +85,7 @@ azd init --template todo-nodejs-mongo
 
 ## الخطوة 2: استكشاف هيكل المشروع
 
-لنلقِ نظرة على ما أنشأه azd لنا:
+لنقم بفحص ما أنشأه azd لنا:
 
 ```bash
 # View the project structure
@@ -151,8 +155,7 @@ code src/web/src/App.tsx
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -205,9 +208,9 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### اختبار تطبيق المهام
-1. **إضافة مهمة** - انقر على "إضافة مهمة" وأدخل مهمة
-2. **وضع علامة كمكتملة** - ضع علامة على المهام المكتملة
-3. **حذف المهام** - قم بإزالة المهام التي لم تعد بحاجة إليها
+1. **إضافة عنصر مهام** - انقر على "إضافة مهمة" وأدخل المهمة
+2. **وضع علامة كمكتمل** - قم بتحديد العناصر المكتملة
+3. **حذف العناصر** - قم بإزالة المهام التي لم تعد بحاجة إليها
 
 ### مراقبة تطبيقك
 ```bash
@@ -222,7 +225,7 @@ azd logs
 
 لنقم بإجراء تغيير ونرى مدى سهولة تحديث التطبيق:
 
-### تعديل واجهة API
+### تعديل الواجهة الخلفية
 ```bash
 # Edit the API code
 code src/api/src/routes/lists.js
@@ -371,7 +374,7 @@ azd init --template todo-java-mongo
 
 ### المجتمع والدعم
 - [GitHub الخاص بـ Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [مجتمع Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [مجتمع مطوري Azure](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### القوالب والأمثلة
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.

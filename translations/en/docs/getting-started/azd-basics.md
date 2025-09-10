@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:11:05+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T12:46:24+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "en"
 }
@@ -11,16 +11,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that streamlines the process of moving from local development to Azure deployment. You'll learn the key concepts, main features, and how azd simplifies deploying cloud-native applications.
+This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that streamlines the process from local development to Azure deployment. You'll learn the key concepts, main features, and how azd simplifies deploying cloud-native applications.
 
 ## Learning Goals
 
 By the end of this lesson, you will:
 - Understand what Azure Developer CLI is and its main purpose
-- Learn the essential concepts of templates, environments, and services
+- Learn the core concepts of templates, environments, and services
 - Explore key features like template-driven development and Infrastructure as Code
-- Understand the structure and workflow of an azd project
-- Be ready to install and configure azd for your development setup
+- Understand the azd project structure and workflow
+- Be ready to install and configure azd for your development environment
 
 ## Learning Outcomes
 
@@ -33,7 +33,7 @@ After completing this lesson, you will be able to:
 
 ## What is Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) is a command-line tool designed to simplify and speed up the process of building, deploying, and managing cloud-native applications on Azure.
+Azure Developer CLI (azd) is a command-line tool designed to simplify the process of building, deploying, and managing cloud-native applications on Azure, helping you move quickly from local development to deployment.
 
 ## Core Concepts
 
@@ -46,7 +46,7 @@ Templates are the backbone of azd. They include:
 
 ### Environments
 Environments represent different deployment targets:
-- **Development** - For testing and development purposes
+- **Development** - For testing and development
 - **Staging** - Pre-production environment
 - **Production** - Live production environment
 
@@ -56,9 +56,9 @@ Each environment has its own:
 - Deployment state
 
 ### Services
-Services are the individual components of your application:
-- **Frontend** - Web applications or single-page apps
-- **Backend** - APIs or microservices
+Services are the components of your application:
+- **Frontend** - Web applications, single-page apps
+- **Backend** - APIs, microservices
 - **Database** - Data storage solutions
 - **Storage** - File and blob storage
 
@@ -74,16 +74,16 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Azure's domain-specific language for infrastructure
-- **Terraform** - A multi-cloud infrastructure tool
+- **Bicep** - Azure's domain-specific language
+- **Terraform** - Multi-cloud infrastructure tool
 - **ARM Templates** - Azure Resource Manager templates
 
 ### 3. Integrated Workflows
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -120,7 +120,7 @@ my-app/
 ## 🔧 Configuration Files
 
 ### azure.yaml
-The main configuration file for the project:
+The main project configuration file:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -143,7 +143,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Configuration specific to each environment:
+Environment-specific configuration:
 ```json
 {
   "version": 1,
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Understanding `azd down --force --purge`
+The `azd down --force --purge` command is a powerful way to completely remove your azd environment and all associated resources. Here's what each flag does:
+```
+--force
+```
+- Skips confirmation prompts.
+- Useful for automation or scripting where manual input isn’t practical.
+- Ensures the teardown proceeds without interruption, even if the CLI detects inconsistencies.
+
+```
+--purge
+```
+Deletes **all associated metadata**, including:
+Environment state
+Local `.azure` folder
+Cached deployment info
+Prevents azd from "remembering" previous deployments, which can lead to issues like mismatched resource groups or outdated registry references.
+
+### Why use both?
+When you encounter issues with `azd up` due to lingering state or partial deployments, this combination ensures a **clean slate**.
+
+It’s especially useful after manually deleting resources in the Azure portal or when switching templates, environments, or resource group naming conventions.
 
 ### Managing Multiple Environments
 ```bash
@@ -239,7 +262,7 @@ azd init --template template1
 ```
 
 ### 2. Leverage Templates
-- Start with pre-existing templates
+- Start with existing templates
 - Customize them to fit your needs
 - Create reusable templates for your organization
 
@@ -250,15 +273,15 @@ azd init --template template1
 
 ### 4. Configuration Management
 - Use environment variables for sensitive data
-- Keep configuration files under version control
-- Document settings specific to each environment
+- Keep configuration files in version control
+- Document environment-specific settings
 
 ## Learning Progression
 
 ### Beginner (Week 1-2)
 1. Install azd and authenticate
 2. Deploy a simple template
-3. Understand the project structure
+3. Understand project structure
 4. Learn basic commands (up, down, deploy)
 
 ### Intermediate (Week 3-4)
@@ -269,15 +292,15 @@ azd init --template template1
 
 ### Advanced (Week 5+)
 1. Create custom templates
-2. Implement advanced infrastructure patterns
-3. Deploy to multiple regions
-4. Configure enterprise-grade setups
+2. Advanced infrastructure patterns
+3. Multi-region deployments
+4. Enterprise-grade configurations
 
 ## Next Steps
 
-- [Installation & Setup](installation.md) - Learn how to install and configure azd
-- [Your First Project](first-project.md) - A hands-on tutorial
-- [Configuration Guide](configuration.md) - Explore advanced configuration options
+- [Installation & Setup](installation.md) - Get azd installed and configured
+- [Your First Project](first-project.md) - Hands-on tutorial
+- [Configuration Guide](configuration.md) - Advanced configuration options
 
 ## Additional Resources
 
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

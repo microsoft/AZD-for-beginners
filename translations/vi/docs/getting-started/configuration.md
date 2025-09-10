@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:32:54+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:27:36+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "vi"
 }
@@ -15,7 +15,7 @@ Hướng dẫn toàn diện này bao gồm tất cả các khía cạnh của vi
 
 ## Mục Tiêu Học Tập
 
-Sau bài học này, bạn sẽ:
+Sau khi hoàn thành bài học này, bạn sẽ:
 - Nắm vững hệ thống cấu hình của azd và hiểu cách ưu tiên các thiết lập
 - Cấu hình hiệu quả các thiết lập toàn cầu và thiết lập cụ thể cho dự án
 - Quản lý nhiều môi trường với các cấu hình khác nhau
@@ -27,7 +27,7 @@ Sau bài học này, bạn sẽ:
 Sau khi hoàn thành bài học này, bạn sẽ có thể:
 - Cấu hình azd để tối ưu hóa quy trình phát triển
 - Thiết lập và quản lý nhiều môi trường triển khai
-- Áp dụng các phương pháp quản lý cấu hình an toàn
+- Áp dụng các thực hành quản lý cấu hình an toàn
 - Khắc phục sự cố liên quan đến cấu hình
 - Tùy chỉnh hành vi của azd theo yêu cầu của tổ chức
 
@@ -331,7 +331,7 @@ Cấu hình tham số hạ tầng trong `infra/main.parameters.json`:
 ```
 
 ### Cấu Hình Terraform
-Đối với các dự án Terraform, cấu hình trong `infra/terraform.tfvars`:
+Dành cho các dự án Terraform, cấu hình trong `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Ví dụ `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Cấu Hình Nâng Cao
 
-### Tùy Chỉnh Tên Tài Nguyên
+### Đặt Tên Tài Nguyên Tùy Chỉnh
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -479,7 +480,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Các Thực Hành Tốt Nhất
+## 🎓 Thực Hành Tốt Nhất
 
 ### 1. Sử Dụng Biến Môi Trường
 ```yaml
@@ -553,4 +554,4 @@ Ghi lại cấu hình của bạn trong `CONFIG.md`:
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn tham khảo chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

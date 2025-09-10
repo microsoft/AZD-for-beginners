@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:25:49+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:30:29+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "tl"
 }
@@ -17,7 +17,7 @@ Maligayang pagdating sa iyong unang Azure Developer CLI na proyekto! Ang kompreh
 
 Sa pagtatapos ng tutorial na ito, ikaw ay:
 - Magiging bihasa sa workflow ng azd project initialization gamit ang mga template
-- Maiintindihan ang istruktura ng proyekto ng Azure Developer CLI at mga configuration file
+- Mauunawaan ang istruktura ng proyekto ng Azure Developer CLI at mga configuration file
 - Maisasagawa ang kumpletong pag-deploy ng application sa Azure kasama ang provisioning ng infrastructure
 - Makakagawa ng mga update sa application at mga estratehiya sa redeployment
 - Makakapamahala ng maraming environment para sa development at staging
@@ -25,7 +25,7 @@ Sa pagtatapos ng tutorial na ito, ikaw ay:
 
 ## Mga Resulta ng Pag-aaral
 
-Kapag natapos, magagawa mo:
+Sa pagtatapos, magagawa mo:
 - Mag-initialize at mag-configure ng mga azd project mula sa mga template nang mag-isa
 - Mag-navigate at mag-modify ng istruktura ng azd project nang epektibo
 - Mag-deploy ng full-stack na application sa Azure gamit ang isang command
@@ -36,9 +36,9 @@ Kapag natapos, magagawa mo:
 ## Pagsisimula
 
 ### Checklist ng Mga Kinakailangan
-- ✅ Na-install ang Azure Developer CLI ([Installation Guide](installation.md))
-- ✅ Na-install at authenticated ang Azure CLI
-- ✅ Na-install ang Git sa iyong sistema
+- ✅ Nakainstall ang Azure Developer CLI ([Installation Guide](installation.md))
+- ✅ Nakainstall at authenticated ang Azure CLI
+- ✅ Nakainstall ang Git sa iyong sistema
 - ✅ Node.js 16+ (para sa tutorial na ito)
 - ✅ Visual Studio Code (inirerekomenda)
 
@@ -46,11 +46,15 @@ Kapag natapos, magagawa mo:
 ```bash
 # Check azd installation
 azd version
+```
+### I-verify ang Azure authentication
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Suriin ang Node.js na bersyon
+```bash
 node --version
 ```
 
@@ -74,9 +78,9 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### Ano ang Nangyari?
-- Na-download ang template code sa iyong lokal na directory
+- Na-download ang template code sa iyong lokal na direktoryo
 - Nilikha ang `azure.yaml` file na may mga service definition
-- Na-set up ang infrastructure code sa `infra/` directory
+- Nisetup ang infrastructure code sa `infra/` directory
 - Nilikha ang environment configuration
 
 ## Hakbang 2: Tuklasin ang Istruktura ng Proyekto
@@ -119,13 +123,13 @@ my-first-azd-app/
 
 ### Mga Pangunahing File na Dapat Maunawaan
 
-**azure.yaml** - Ang puso ng iyong azd project:
+**azure.yaml** - Ang puso ng iyong azd na proyekto:
 ```bash
 # View the project configuration
 cat azure.yaml
 ```
 
-**infra/main.bicep** - Ang definition ng infrastructure:
+**infra/main.bicep** - Infrastructure definition:
 ```bash
 # View the infrastructure code
 head -30 infra/main.bicep
@@ -151,15 +155,14 @@ Gumawa ng simpleng pagbabago:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
 ## Hakbang 4: I-deploy sa Azure
 
-Ngayon ang exciting na bahagi - i-deploy ang lahat sa Azure!
+Ngayon ang kapanapanabik na bahagi - i-deploy ang lahat sa Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -175,9 +178,9 @@ azd up
 ### Ano ang Nangyayari Habang Nagde-deploy?
 
 Ang `azd up` command ay gumagawa ng mga sumusunod na hakbang:
-1. **Provision** (`azd provision`) - Lumilikha ng mga Azure resource
-2. **Package** - Binubuo ang application code
-3. **Deploy** (`azd deploy`) - I-deploy ang code sa mga Azure resource
+1. **Provision** (`azd provision`) - Gumagawa ng mga Azure resources
+2. **Package** - Binubuo ang iyong application code
+3. **Deploy** (`azd deploy`) - I-deploy ang code sa Azure resources
 
 ### Inaasahang Output
 ```
@@ -220,7 +223,7 @@ azd logs
 
 ## Hakbang 6: Gumawa ng Mga Pagbabago at I-redeploy
 
-Gumawa tayo ng pagbabago at tingnan kung gaano kadali ang pag-update:
+Gumawa tayo ng pagbabago at tingnan kung gaano kadali mag-update:
 
 ### I-modify ang API
 ```bash
@@ -273,7 +276,7 @@ azd show
 
 ## Hakbang 8: Linisin ang Mga Resource
 
-Kapag tapos ka na sa pag-eeksperimento, linisin ang mga resource para maiwasan ang patuloy na singil:
+Kapag tapos ka nang mag-eksperimento, linisin ang mga resource para maiwasan ang patuloy na singil:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -290,7 +293,7 @@ azd down --force --purge
 ## Ano ang Iyong Natutunan
 
 Binabati kita! Matagumpay mong:
-- Na-initialize ang isang azd project mula sa template
+- Na-initialize ang isang azd na proyekto mula sa template
 - Nasuri ang istruktura ng proyekto at mga pangunahing file
 - Na-deploy ang isang full-stack na application sa Azure
 - Gumawa ng mga pagbabago sa code at na-redeploy
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

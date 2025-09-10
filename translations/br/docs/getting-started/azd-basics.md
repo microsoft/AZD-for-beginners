@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T19:17:22+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:09:18+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "br"
 }
@@ -11,16 +11,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Esta lição apresenta o Azure Developer CLI (azd), uma poderosa ferramenta de linha de comando que acelera sua jornada do desenvolvimento local para a implantação no Azure. Você aprenderá os conceitos fundamentais, os recursos principais e entenderá como o azd simplifica a implantação de aplicações nativas na nuvem.
+Esta lição apresenta o Azure Developer CLI (azd), uma poderosa ferramenta de linha de comando que acelera sua jornada do desenvolvimento local para a implantação no Azure. Você aprenderá os conceitos fundamentais, os principais recursos e entenderá como o azd simplifica a implantação de aplicações nativas na nuvem.
 
 ## Objetivos de Aprendizagem
 
 Ao final desta lição, você será capaz de:
-- Entender o que é o Azure Developer CLI e seu propósito principal
-- Aprender os conceitos básicos de templates, ambientes e serviços
+- Entender o que é o Azure Developer CLI e seu principal propósito
+- Aprender os conceitos fundamentais de templates, ambientes e serviços
 - Explorar os principais recursos, incluindo desenvolvimento orientado por templates e Infraestrutura como Código
 - Compreender a estrutura e o fluxo de trabalho de projetos azd
-- Estar preparado para instalar e configurar o azd no seu ambiente de desenvolvimento
+- Estar preparado para instalar e configurar o azd para seu ambiente de desenvolvimento
 
 ## Resultados de Aprendizagem
 
@@ -62,7 +62,7 @@ Serviços são os blocos de construção da sua aplicação:
 - **Banco de dados** - Soluções de armazenamento de dados
 - **Armazenamento** - Armazenamento de arquivos e blobs
 
-## Recursos Principais
+## Principais Recursos
 
 ### 1. Desenvolvimento Orientado por Templates
 ```bash
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Fluxos de Trabalho Integrados
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Entendendo `azd down --force --purge`
+O comando `azd down --force --purge` é uma maneira poderosa de desmontar completamente seu ambiente azd e todos os recursos associados. Aqui está um detalhamento do que cada flag faz:
+```
+--force
+```
+- Ignora prompts de confirmação.
+- Útil para automação ou scripts onde a entrada manual não é viável.
+- Garante que a desmontagem prossiga sem interrupções, mesmo se o CLI detectar inconsistências.
+
+```
+--purge
+```
+Exclui **todos os metadados associados**, incluindo:
+Estado do ambiente  
+Pasta local `.azure`  
+Informações de implantação em cache  
+Impede que o azd "lembre" implantações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências de registro obsoletas.
+
+### Por que usar ambos?
+Quando você encontra problemas com `azd up` devido a estado residual ou implantações parciais, essa combinação garante um **novo começo**.
+
+É especialmente útil após exclusões manuais de recursos no portal do Azure ou ao alternar templates, ambientes ou convenções de nomenclatura de grupos de recursos.
 
 ### Gerenciando Múltiplos Ambientes
 ```bash
@@ -244,9 +267,9 @@ azd init --template template1
 - Crie templates reutilizáveis para sua organização
 
 ### 3. Isolamento de Ambientes
-- Use ambientes separados para desenvolvimento/staging/produção
+- Use ambientes separados para dev/staging/prod
 - Nunca implante diretamente na produção a partir da máquina local
-- Utilize pipelines de CI/CD para implantações em produção
+- Use pipelines de CI/CD para implantações em produção
 
 ### 4. Gerenciamento de Configuração
 - Use variáveis de ambiente para dados sensíveis
@@ -257,8 +280,8 @@ azd init --template template1
 
 ### Iniciante (Semana 1-2)
 1. Instale o azd e autentique-se
-2. Implante um template simples
-3. Compreenda a estrutura do projeto
+2. Implemente um template simples
+3. Entenda a estrutura do projeto
 4. Aprenda comandos básicos (up, down, deploy)
 
 ### Intermediário (Semana 3-4)

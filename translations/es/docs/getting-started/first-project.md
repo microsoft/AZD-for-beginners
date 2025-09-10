@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T16:44:22+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T12:47:48+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "es"
 }
@@ -17,7 +17,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Al completar este tutorial, lograrás:
 - Dominar el flujo de inicialización de proyectos azd utilizando plantillas
-- Comprender la estructura y los archivos de configuración de proyectos de Azure Developer CLI
+- Comprender la estructura de proyectos y archivos de configuración de Azure Developer CLI
 - Ejecutar el despliegue completo de una aplicación en Azure con aprovisionamiento de infraestructura
 - Implementar actualizaciones de la aplicación y estrategias de redepliegue
 - Gestionar múltiples entornos para desarrollo y pruebas
@@ -33,7 +33,7 @@ Al finalizar, serás capaz de:
 - Gestionar múltiples entornos de Azure para diferentes etapas de despliegue
 - Implementar flujos de despliegue continuo para actualizaciones de aplicaciones
 
-## Comenzando
+## Primeros Pasos
 
 ### Lista de Verificación de Requisitos Previos
 - ✅ Azure Developer CLI instalado ([Guía de Instalación](installation.md))
@@ -46,11 +46,15 @@ Al finalizar, serás capaz de:
 ```bash
 # Check azd installation
 azd version
+```
+### Verifica la Autenticación en Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Verifica la Versión de Node.js
+```bash
 node --version
 ```
 
@@ -151,8 +155,7 @@ Realiza un cambio simple:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -175,7 +178,7 @@ azd up
 ### ¿Qué Sucede Durante el Despliegue?
 
 El comando `azd up` realiza estos pasos:
-1. **Provisionar** (`azd provision`) - Crea recursos de Azure
+1. **Provisionar** (`azd provision`) - Crea recursos en Azure
 2. **Empaquetar** - Construye el código de tu aplicación
 3. **Desplegar** (`azd deploy`) - Despliega el código en los recursos de Azure
 
@@ -194,8 +197,8 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Paso 5: Probar tu Aplicación
 
-### Acceder a tu Aplicación
-Haz clic en la URL proporcionada en la salida del despliegue, o consíguela en cualquier momento:
+### Accede a tu Aplicación
+Haz clic en la URL proporcionada en la salida del despliegue, o consúltala en cualquier momento:
 ```bash
 # Get application endpoints
 azd show
@@ -204,12 +207,12 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Probar la Aplicación de Tareas
-1. **Agregar una tarea** - Haz clic en "Add Todo" e ingresa una tarea
+### Prueba la Aplicación de Tareas
+1. **Añadir una tarea** - Haz clic en "Add Todo" e ingresa una tarea
 2. **Marcar como completada** - Marca las tareas completadas
 3. **Eliminar tareas** - Borra las tareas que ya no necesites
 
-### Monitorear tu Aplicación
+### Monitorea tu Aplicación
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -228,7 +231,7 @@ Hagamos un cambio y veamos qué tan fácil es actualizar:
 code src/api/src/routes/lists.js
 ```
 
-Agrega un encabezado de respuesta personalizado:
+Añade un encabezado de respuesta personalizado:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -273,7 +276,7 @@ azd show
 
 ## Paso 8: Limpiar Recursos
 
-Cuando termines de experimentar, limpia los recursos para evitar cargos continuos:
+Cuando termines de experimentar, limpia los recursos para evitar costos continuos:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -338,7 +341,7 @@ Ahora que has completado tu primer proyecto, explora estos temas avanzados:
 
 ### 1. Personalizar Infraestructura
 - [Infraestructura como Código](../deployment/provisioning.md)
-- [Agregar bases de datos, almacenamiento y otros servicios](../deployment/provisioning.md#adding-services)
+- [Añadir bases de datos, almacenamiento y otros servicios](../deployment/provisioning.md#adding-services)
 
 ### 2. Configurar CI/CD
 - [Integración con GitHub Actions](../deployment/cicd-integration.md)
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

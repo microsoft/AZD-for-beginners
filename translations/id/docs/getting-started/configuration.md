@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:33:16+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:28:37+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "id"
 }
@@ -36,7 +36,7 @@ Panduan lengkap ini mencakup semua aspek konfigurasi Azure Developer CLI untuk a
 ## Hierarki Konfigurasi
 
 azd menggunakan sistem konfigurasi hierarkis:
-1. **Command-line flags** (prioritas tertinggi)
+1. **Flag baris perintah** (prioritas tertinggi)
 2. **Variabel lingkungan**
 3. **Konfigurasi proyek lokal** (`.azd/config.json`)
 4. **Konfigurasi pengguna global** (`~/.azd/config.json`)
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Contoh `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Konfigurasi Lanjutan
 
@@ -492,7 +493,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Atur File Konfigurasi
+### 2. Organisasi File Konfigurasi
 ```
 .azure/
 ├── config.json              # Global project config
@@ -553,4 +554,4 @@ Dokumentasikan konfigurasi Anda di `CONFIG.md`:
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

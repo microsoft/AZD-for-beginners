@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:15:16+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:45:57+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "uk"
 }
@@ -24,7 +24,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Результати навчання
 
-Після завершення цього уроку ви зможете:
+Після завершення уроку ви зможете:
 - Пояснити роль azd у сучасних робочих процесах хмарної розробки
 - Визначити компоненти структури проекту azd
 - Описати, як шаблони, середовища та сервіси працюють разом
@@ -75,15 +75,15 @@ azd init --template <template-name>
 
 ### 2. Infrastructure as Code
 - **Bicep** - Спеціалізована мова Azure
-- **Terraform** - Інструмент для багатохмарної інфраструктури
+- **Terraform** - Інструмент для мультихмарної інфраструктури
 - **ARM Templates** - Шаблони Azure Resource Manager
 
 ### 3. Інтегровані робочі процеси
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Розуміння `azd down --force --purge`
+Команда `azd down --force --purge` — це потужний спосіб повністю знищити ваше середовище azd і всі пов’язані ресурси. Ось розбір того, що робить кожен прапорець:
+```
+--force
+```
+- Пропускає запити на підтвердження.
+- Корисно для автоматизації або скриптів, де ручне введення неможливе.
+- Забезпечує безперервне виконання, навіть якщо CLI виявляє невідповідності.
+
+```
+--purge
+```
+Видаляє **всі пов’язані метадані**, включаючи:
+Стан середовища
+Локальну папку `.azure`
+Кешовану інформацію про розгортання
+Запобігає "запам’ятовуванню" попередніх розгортань azd, що може спричинити проблеми, такі як невідповідність груп ресурсів або застарілі посилання на реєстр.
+
+### Чому використовувати обидва?
+Коли ви стикаєтеся з проблемами `azd up` через залишковий стан або часткові розгортання, ця комбінація забезпечує **чистий старт**.
+
+Це особливо корисно після ручного видалення ресурсів у порталі Azure або при зміні шаблонів, середовищ чи конвенцій іменування груп ресурсів.
 
 ### Управління кількома середовищами
 ```bash
@@ -211,7 +234,7 @@ azd template show <template>   # Template details
 azd init --help               # Initialization options
 ```
 
-### Управління проектом
+### Управління проектами
 ```bash
 azd show                     # Project overview
 azd env show                 # Current environment
@@ -255,21 +278,21 @@ azd init --template template1
 
 ## Прогрес навчання
 
-### Початківець (1-2 тиждень)
+### Початківець (1-2 тижні)
 1. Встановіть azd і автентифікуйтеся
 2. Розгорніть простий шаблон
 3. Зрозумійте структуру проекту
 4. Вивчіть основні команди (up, down, deploy)
 
-### Середній рівень (3-4 тиждень)
+### Середній рівень (3-4 тижні)
 1. Налаштуйте шаблони
 2. Управляйте кількома середовищами
 3. Зрозумійте код інфраструктури
 4. Налаштуйте CI/CD конвеєри
 
-### Просунутий рівень (5+ тиждень)
+### Просунутий рівень (5+ тижнів)
 1. Створюйте власні шаблони
-2. Складні інфраструктурні патерни
+2. Складні шаблони інфраструктури
 3. Розгортання у кількох регіонах
 4. Конфігурації корпоративного рівня
 

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-10T06:06:55+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T12:45:58+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "en"
 }
@@ -11,27 +11,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This guide provides a detailed overview of how to configure Azure Developer CLI for streamlined development and deployment workflows. It covers the configuration hierarchy, managing environments, authentication methods, and advanced configuration techniques to ensure efficient and secure Azure deployments.
+This detailed guide explains everything you need to know about configuring the Azure Developer CLI to optimize your development and deployment workflows. You'll explore the configuration hierarchy, environment management, authentication methods, and advanced configuration techniques to enable efficient and secure Azure deployments.
 
 ## Learning Goals
 
-By the end of this guide, you will:
+By the end of this lesson, you will:
 - Understand the azd configuration hierarchy and how settings are prioritized
-- Learn to configure global and project-specific settings effectively
-- Manage multiple environments with unique configurations
+- Effectively configure global and project-specific settings
+- Manage multiple environments with distinct configurations
 - Implement secure authentication and authorization practices
-- Explore advanced configuration techniques for complex scenarios
+- Learn advanced configuration techniques for complex scenarios
 
 ## Learning Outcomes
 
-After completing this guide, you will be able to:
-- Set up azd for efficient development workflows
-- Manage multiple deployment environments
+After completing this lesson, you will be able to:
+- Configure azd for streamlined development workflows
+- Set up and manage multiple deployment environments
 - Apply secure configuration management practices
-- Resolve configuration-related issues
-- Tailor azd behavior to meet specific organizational needs
+- Troubleshoot configuration-related issues
+- Customize azd behavior to meet specific organizational needs
 
-This guide provides a detailed overview of how to configure Azure Developer CLI for streamlined development and deployment workflows.
+This guide provides a complete overview of configuring the Azure Developer CLI for optimal development and deployment workflows.
 
 ## Configuration Hierarchy
 
@@ -285,7 +285,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Service Principal Authentication
-Ideal for CI/CD pipelines:
+For CI/CD pipelines:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,7 +298,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-Best suited for Azure-hosted environments:
+For Azure-hosted environments:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -331,7 +331,7 @@ Define infrastructure parameters in `infra/main.parameters.json`:
 ```
 
 ### Terraform Configuration
-For Terraform projects, use `infra/terraform.tfvars`:
+For Terraform projects, configure settings in `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Advanced Configuration
 
@@ -456,7 +457,7 @@ azd provision --dry-run
 ```
 
 ### Configuration Scripts
-Place validation scripts in `scripts/`:
+Create validation scripts in the `scripts/` directory:
 
 ```bash
 #!/bin/bash
@@ -553,4 +554,4 @@ Document your configuration in `CONFIG.md`:
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
