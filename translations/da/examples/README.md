@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:10:36+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:17:33+00:00",
   "source_file": "examples/README.md",
   "language_code": "da"
 }
@@ -20,17 +20,17 @@ Ved at arbejde med disse eksempler vil du:
 - Forstå forskellige applikationsarkitekturer og deres azd-implementeringer
 - Mestre Infrastructure as Code-mønstre for forskellige Azure-tjenester
 - Anvende konfigurationsstyring og miljøspecifikke udrulningsstrategier
-- Implementere overvågnings-, sikkerheds- og skaleringsmønstre i praktiske sammenhænge
+- Implementere overvågning, sikkerhed og skaleringsmønstre i praktiske sammenhænge
 - Opbygge erfaring med fejlfinding og debugging af reelle udrulningsscenarier
 
 ## Læringsresultater
 
-Når du har gennemført disse eksempler, vil du kunne:
+Når du har gennemført disse eksempler, vil du være i stand til at:
 - Udrulle forskellige applikationstyper med Azure Developer CLI med selvtillid
 - Tilpasse de leverede skabeloner til dine egne applikationskrav
 - Designe og implementere brugerdefinerede infrastruktursmønstre ved hjælp af Bicep
 - Konfigurere komplekse multi-service applikationer med korrekte afhængigheder
-- Anvende sikkerheds-, overvågnings- og performance-best practices i virkelige scenarier
+- Anvende sikkerheds-, overvågnings- og performance-best practices i reelle scenarier
 - Fejlsøge og optimere udrulninger baseret på praktisk erfaring
 
 ## Mappestruktur
@@ -124,7 +124,7 @@ Hvert eksempel inkluderer:
 - **README.md** - Detaljerede opsætnings- og tilpasningsinstruktioner
 - **azure.yaml** - AZD-konfiguration med kommentarer
 - **infra/** - Bicep-skabeloner med parameterforklaringer
-- **src/** - Eksempelapplikationskode
+- **src/** - Eksempel på applikationskode
 - **scripts/** - Hjælpescripts til almindelige opgaver
 
 ## 🎯 Læringsmål
@@ -141,7 +141,7 @@ Hvert eksempel inkluderer:
 - Multi-service arkitekturer
 - Komplekse netværkskonfigurationer
 - Databaseintegrationsmønstre
-- Sikkerheds- og compliance-implementeringer
+- Implementeringer af sikkerhed og compliance
 
 #### **Produktionsklare mønstre**
 - Høj tilgængelighedskonfigurationer
@@ -149,7 +149,7 @@ Hvert eksempel inkluderer:
 - CI/CD-integration
 - Disaster recovery-opsætninger
 
-## 📖 Eksempeldeskriptioner
+## 📖 Eksempelbeskrivelser
 
 ### Simple Web App
 **Teknologier**: Node.js, App Service, Application Insights  
@@ -179,7 +179,7 @@ Hvert eksempel inkluderer:
 ### Microservices
 **Teknologier**: Flere tjenester, Service Bus, API Gateway  
 **Kompleksitet**: Avanceret  
-**Koncepter**: Servicekommunikation, beskedkøer, load balancing
+**Koncepter**: Servicekommunikation, meddelelseskøer, load balancing
 
 ## 🛠 Konfigurationseksempler
 
@@ -189,10 +189,10 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
 - Indstillinger for udviklingsmiljø
 - Konfigurationer for staging-miljø
 - Produktionsklare konfigurationer
-- Multi-region udrulningsopsætninger
+- Opsætninger til multi-region udrulning
 
 ### Bicep-moduler
-- Genanvendelige infrastrukturskomponenter
+- Genanvendelige infrastrukturkomponenter
 - Almindelige ressource-mønstre
 - Sikkerhedshærdede skabeloner
 - Omkostningsoptimerede konfigurationer
@@ -201,11 +201,11 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
 - Automatisering af miljøopsætning
 - Scripts til databasemigration
 - Værktøjer til validering af udrulning
-- Omkostningsovervågningsværktøjer
+- Værktøjer til omkostningsovervågning
 
 ## 🔧 Tilpasningsvejledning
 
-### Tilpasning af eksempler til din brugssituation
+### Tilpasning af eksempler til dit brugsscenarie
 
 1. **Gennemgå forudsætninger**
    - Tjek krav til Azure-tjenester
@@ -222,21 +222,21 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
    - Valider funktionalitet
    - Test skalering og performance
 
-4. **Sikkerhedsrevision**
-   - Gennemgå adgangskontroller
+4. **Sikkerhedsgennemgang**
+   - Gennemgå adgangskontrol
    - Implementer hemmelighedshåndtering
-   - Aktiver overvågning og alarmer
+   - Aktivér overvågning og alarmer
 
 ## 📊 Sammenligningsmatrix
 
 | Eksempel | Tjenester | Database | Auth | Overvågning | Kompleksitet |
 |----------|-----------|----------|------|-------------|--------------|
-| Simple Web App | 1 | ❌ | Grundlæggende | Grundlæggende | ⭐ |
-| Static Website | 1 | ❌ | ❌ | Grundlæggende | ⭐ |
-| Container App | 1 | ❌ | Grundlæggende | Fuld | ⭐⭐ |
-| Database App | 2 | ✅ | Fuld | Fuld | ⭐⭐⭐ |
-| Serverless Function | 3 | ✅ | Fuld | Fuld | ⭐⭐⭐ |
-| Microservices | 5+ | ✅ | Fuld | Fuld | ⭐⭐⭐⭐ |
+| Simple Web App | 1 | ❌ | Basic | Basic | ⭐ |
+| Static Website | 1 | ❌ | ❌ | Basic | ⭐ |
+| Container App | 1 | ❌ | Basic | Full | ⭐⭐ |
+| Database App | 2 | ✅ | Full | Full | ⭐⭐⭐ |
+| Serverless Function | 3 | ✅ | Full | Full | ⭐⭐⭐ |
+| Microservices | 5+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
 
 ## 🎓 Læringssti
 
@@ -244,7 +244,7 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
 
 1. **Start med Simple Web App**
    - Lær grundlæggende AZD-koncepter
-   - Forstå udrulningsarbejdsgang
+   - Forstå udrulningsarbejdsgangen
    - Øv miljøstyring
 
 2. **Prøv Static Website**
@@ -296,13 +296,14 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
 ## 📚 Yderligere ressourcer
 
 ### Dokumentationslinks
-- [AZD Template Specification](https://aka.ms/azd/templates)
-- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Bicep-dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Community-eksempler
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### Best Practices
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -314,7 +315,7 @@ Har du et nyttigt eksempel at dele? Vi byder bidrag velkommen!
 
 ### Retningslinjer for indsendelse
 1. Følg den etablerede mappestruktur
-2. Inkluder omfattende README.md
+2. Inkluder en omfattende README.md
 3. Tilføj kommentarer til konfigurationsfiler
 4. Test grundigt før indsendelse
 5. Inkluder omkostningsestimater og forudsætninger
@@ -335,19 +336,19 @@ example-name/
 
 ---
 
-**Tip**: Start med det enkleste eksempel, der matcher din teknologistak, og arbejd dig gradvist op til mere komplekse scenarier. Hvert eksempel bygger på koncepter fra de foregående!
+**Tip**: Start med det enkleste eksempel, der matcher din teknologistak, og arbejd dig gradvist op til mere komplekse scenarier. Hvert eksempel bygger videre på koncepter fra de foregående!
 
 **Næste skridt**: 
 - Vælg et eksempel, der matcher dit færdighedsniveau
 - Følg opsætningsinstruktionerne i eksemplets README
-- Eksperimenter med tilpasninger
-- Del dine erfaringer med communityet
+- Eksperimentér med tilpasninger
+- Del dine erfaringer med fællesskabet
 
 ---
 
 **Navigation**
-- **Forrige lektion**: [Studieguide](../resources/study-guide.md)
-- **Tilbage til**: [Hoved-README](../README.md)
+- **Forrige lektion**: [Studievejledning](../resources/study-guide.md)
+- **Tilbage til**: [Hoved README](../README.md)
 
 ---
 

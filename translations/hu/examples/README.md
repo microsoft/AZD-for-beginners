@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-10T06:58:35+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:23:14+00:00",
   "source_file": "examples/README.md",
   "language_code": "hu"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Bevezetés
 
-Ez a könyvtár gyakorlati példákat, sablonokat és valós forgatókönyveket tartalmaz, amelyek segítenek az Azure Developer CLI elsajátításában gyakorlati tapasztalatokon keresztül. Minden példa teljesen működő kódot, infrastruktúra sablonokat és részletes útmutatást nyújt különböző alkalmazásarchitektúrákhoz és telepítési mintákhoz.
+Ez a könyvtár gyakorlati példákat, sablonokat és valós életből vett forgatókönyveket tartalmaz, amelyek segítenek az Azure Developer CLI elsajátításában gyakorlati tapasztalatok révén. Minden példa teljes működő kódot, infrastruktúra sablonokat és részletes útmutatást nyújt különböző alkalmazásarchitektúrákhoz és telepítési mintákhoz.
 
 ## Tanulási célok
 
 Ezeken a példákon keresztül:
-- Gyakorolhatod az Azure Developer CLI munkafolyamatait valós alkalmazási forgatókönyvekkel
+- Gyakorolhatod az Azure Developer CLI munkafolyamatokat valós alkalmazási forgatókönyvekkel
 - Megértheted az alkalmazásarchitektúrák különböző típusait és azok azd megvalósításait
-- Elsajátíthatod az Infrastructure as Code mintákat különböző Azure szolgáltatásokhoz
+- Elsajátíthatod az infrastruktúra mintakódolásának módszereit különböző Azure szolgáltatásokhoz
 - Alkalmazhatod a konfigurációkezelési és környezet-specifikus telepítési stratégiákat
 - Megvalósíthatod a monitorozási, biztonsági és skálázási mintákat gyakorlati környezetben
 - Tapasztalatot szerezhetsz a telepítési problémák elhárításában és hibakeresésben
@@ -79,12 +79,12 @@ examples/
 ### Kezdőknek
 1. **[Egyszerű webalkalmazás](../../../examples/simple-web-app)** - Alapvető Node.js webalkalmazás telepítése
 2. **[Statikus weboldal](../../../examples/static-website)** - Statikus weboldal hosztolása Azure Storage-on
-3. **[Konténeres alkalmazás](../../../examples/container-app)** - Konténeres alkalmazás telepítése
+3. **[Konténeres alkalmazás](../../../examples/container-app)** - Konténerizált alkalmazás telepítése
 
 ### Haladó felhasználóknak
 4. **[Adatbázis alkalmazás](../../../examples/database-app)** - Webalkalmazás PostgreSQL adatbázissal
 5. **[Szerver nélküli funkció](../../../examples/serverless-function)** - Azure Functions HTTP triggerrel
-6. **[Mikroszolgáltatások](../../../examples/microservices)** - Több szolgáltatást tartalmazó alkalmazás API gateway-jel
+6. **[Mikroszolgáltatások](../../../examples/microservices)** - Több szolgáltatást tartalmazó alkalmazás API átjáróval
 
 ## 📋 Használati útmutató
 
@@ -122,7 +122,7 @@ examples/
 
 Minden példa tartalmazza:
 - **README.md** - Részletes beállítási és testreszabási útmutató
-- **azure.yaml** - AZD konfiguráció kommentekkel
+- **azure.yaml** - AZD konfiguráció megjegyzésekkel
 - **infra/** - Bicep sablonok paramétermagyarázatokkal
 - **src/** - Mintakód az alkalmazáshoz
 - **scripts/** - Segédszkriptek gyakori feladatokhoz
@@ -143,7 +143,7 @@ Minden példa tartalmazza:
 - Adatbázis integrációs minták
 - Biztonsági és megfelelőségi megvalósítások
 
-#### **Éles környezetre kész minták**
+#### **Gyártásra kész minták**
 - Magas rendelkezésre állású konfigurációk
 - Monitorozás és megfigyelhetőség
 - CI/CD integráció
@@ -174,7 +174,7 @@ Minden példa tartalmazza:
 ### Szerver nélküli funkció
 **Technológiák**: Azure Functions, Cosmos DB, API Management  
 **Komplexitás**: Középhaladó  
-**Fogalmak**: Eseményvezérelt architektúra, kötés, API kezelés
+**Fogalmak**: Eseményvezérelt architektúra, kötőelemek, API kezelés
 
 ### Mikroszolgáltatások
 **Technológiák**: Több szolgáltatás, Service Bus, API Gateway  
@@ -188,7 +188,7 @@ A `configurations/` könyvtár újrahasznosítható komponenseket tartalmaz:
 ### Környezetkonfigurációk
 - Fejlesztési környezet beállításai
 - Tesztkörnyezet konfigurációk
-- Éles környezetre kész beállítások
+- Gyártásra kész konfigurációk
 - Több régiót érintő telepítési beállítások
 
 ### Bicep modulok
@@ -200,8 +200,8 @@ A `configurations/` könyvtár újrahasznosítható komponenseket tartalmaz:
 ### Segédszkriptek
 - Környezetbeállítás automatizálása
 - Adatbázis migrációs szkriptek
-- Telepítési ellenőrző eszközök
-- Költségfigyelő segédletek
+- Telepítési validációs eszközök
+- Költségfigyelési segédletek
 
 ## 🔧 Testreszabási útmutató
 
@@ -231,9 +231,9 @@ A `configurations/` könyvtár újrahasznosítható komponenseket tartalmaz:
 
 | Példa | Szolgáltatások | Adatbázis | Hitelesítés | Monitorozás | Komplexitás |
 |-------|----------------|-----------|-------------|-------------|-------------|
-| Egyszerű webalkalmazás | 1 | ❌ | Alapvető | Alapvető | ⭐ |
-| Statikus weboldal | 1 | ❌ | ❌ | Alapvető | ⭐ |
-| Konténeres alkalmazás | 1 | ❌ | Alapvető | Teljes | ⭐⭐ |
+| Egyszerű webalkalmazás | 1 | ❌ | Alap | Alap | ⭐ |
+| Statikus weboldal | 1 | ❌ | ❌ | Alap | ⭐ |
+| Konténeres alkalmazás | 1 | ❌ | Alap | Teljes | ⭐⭐ |
 | Adatbázis alkalmazás | 2 | ✅ | Teljes | Teljes | ⭐⭐⭐ |
 | Szerver nélküli funkció | 3 | ✅ | Teljes | Teljes | ⭐⭐⭐ |
 | Mikroszolgáltatások | 5+ | ✅ | Teljes | Teljes | ⭐⭐⭐⭐ |
@@ -262,17 +262,17 @@ A `configurations/` könyvtár újrahasznosítható komponenseket tartalmaz:
    - Értsd meg a kapcsolati karakterláncokat
    - Gyakorold a titkok kezelését
 
-5. **Fedezd fel a Szerver nélküli funkciókat**
+5. **Fedezd fel a Szerver nélküli megoldásokat**
    - Értsd meg az eseményvezérelt architektúrát
-   - Tanuld meg a triggerek és kötéseket
+   - Tanuld meg a trigger és kötőelemek használatát
    - Gyakorolj API-kkal
 
 6. **Építs mikroszolgáltatásokat**
-   - Ismerd meg a szolgáltatáskommunikációt
+   - Tanuld meg a szolgáltatáskommunikációt
    - Értsd meg az elosztott rendszereket
    - Gyakorolj összetett telepítésekkel
 
-## 🔍 A megfelelő példa kiválasztása
+## 🔍 Megfelelő példa kiválasztása
 
 ### Technológiai stack alapján
 - **Node.js**: Egyszerű webalkalmazás, Mikroszolgáltatások
@@ -296,13 +296,14 @@ A `configurations/` könyvtár újrahasznosítható komponenseket tartalmaz:
 ## 📚 További források
 
 ### Dokumentációs linkek
-- [AZD sablon specifikáció](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD sablonok](https://github.com/Azure/ai-foundry-templates)
 - [Bicep dokumentáció](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architektúra Központ](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Közösségi példák
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD sablonok galériája](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD sablonok](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry sablonok](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Galéria](https://azure.github.io/awesome-azd/)
 
 ### Legjobb gyakorlatok
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -310,16 +311,16 @@ A `configurations/` könyvtár újrahasznosítható komponenseket tartalmaz:
 
 ## 🤝 Példák hozzájárulása
 
-Van egy hasznos példád, amit megosztanál? Szívesen fogadjuk a hozzájárulásokat!
+Van egy hasznos példád, amit megosztanál? Örömmel fogadjuk a hozzájárulásokat!
 
 ### Beküldési irányelvek
 1. Kövesd a meglévő könyvtárstruktúrát
 2. Tartalmazz részletes README.md fájlt
-3. Adj hozzá kommenteket a konfigurációs fájlokhoz
+3. Adj megjegyzéseket a konfigurációs fájlokhoz
 4. Teszteld alaposan a beküldés előtt
 5. Tüntesd fel a költségbecsléseket és előfeltételeket
 
-### Példa sablon struktúra
+### Példa sablonstruktúra
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -335,11 +336,11 @@ example-name/
 
 ---
 
-**Tipp**: Kezdd a legegyszerűbb példával, amely megfelel a technológiai stack-ednek, majd fokozatosan haladj az összetettebb forgatókönyvek felé. Minden példa az előzőekben tanult fogalmakra épít!
+**Tipp**: Kezdd a legegyszerűbb példával, amely megfelel a technológiai stack-ednek, majd fokozatosan haladj az összetettebb forgatókönyvek felé. Minden példa az előzőekben tanult fogalmakra épül!
 
 **Következő lépések**: 
 - Válassz egy példát, amely megfelel a tudásszintednek
-- Kövesd az adott példa README fájljában található beállítási útmutatót
+- Kövesd az adott példa README-jében található beállítási útmutatót
 - Kísérletezz testreszabásokkal
 - Oszd meg tapasztalataidat a közösséggel
 
@@ -347,9 +348,9 @@ example-name/
 
 **Navigáció**
 - **Előző lecke**: [Tanulmányi útmutató](../resources/study-guide.md)
-- **Vissza a**: [Fő README](../README.md)
+- **Vissza**: [Fő README](../README.md)
 
 ---
 
-**Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősség kizárása**:  
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T17:31:13+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:00:21+00:00",
   "source_file": "examples/README.md",
   "language_code": "fr"
 }
@@ -21,11 +21,11 @@ En travaillant sur ces exemples, vous allez :
 - Maîtriser les modèles d'Infrastructure as Code pour divers services Azure
 - Appliquer des stratégies de gestion de configuration et de déploiement spécifiques à l'environnement
 - Mettre en œuvre des modèles de surveillance, de sécurité et de mise à l'échelle dans des contextes pratiques
-- Acquérir de l'expérience dans le dépannage et le débogage de scénarios de déploiement réels
+- Acquérir de l'expérience en dépannage et en débogage de scénarios de déploiement réels
 
 ## Résultats d'apprentissage
 
-Une fois ces exemples terminés, vous serez capable de :
+Après avoir terminé ces exemples, vous serez capable de :
 - Déployer différents types d'applications en toute confiance avec Azure Developer CLI
 - Adapter les modèles fournis à vos propres besoins applicatifs
 - Concevoir et implémenter des modèles d'infrastructure personnalisés avec Bicep
@@ -121,7 +121,7 @@ examples/
 ### Adapter les exemples
 
 Chaque exemple inclut :
-- **README.md** - Instructions détaillées pour la configuration et la personnalisation
+- **README.md** - Instructions détaillées de configuration et de personnalisation
 - **azure.yaml** - Configuration AZD avec commentaires
 - **infra/** - Modèles Bicep avec explications des paramètres
 - **src/** - Code d'application exemple
@@ -194,7 +194,7 @@ Le répertoire `configurations/` contient des composants réutilisables :
 ### Modules Bicep
 - Composants d'infrastructure réutilisables
 - Modèles de ressources courants
-- Modèles renforcés en matière de sécurité
+- Modèles sécurisés
 - Configurations optimisées pour les coûts
 
 ### Scripts d'aide
@@ -207,17 +207,17 @@ Le répertoire `configurations/` contient des composants réutilisables :
 
 ### Adapter les exemples à votre cas d'utilisation
 
-1. **Vérifiez les prérequis**
+1. **Vérifier les prérequis**
    - Vérifiez les exigences des services Azure
    - Confirmez les limites de votre abonnement
    - Comprenez les implications en termes de coûts
 
-2. **Modifiez la configuration**
+2. **Modifier la configuration**
    - Mettez à jour les définitions de service dans `azure.yaml`
    - Personnalisez les modèles Bicep
    - Ajustez les variables d'environnement
 
-3. **Testez minutieusement**
+3. **Tester minutieusement**
    - Déployez d'abord dans l'environnement de développement
    - Validez la fonctionnalité
    - Testez la mise à l'échelle et les performances
@@ -274,7 +274,7 @@ Le répertoire `configurations/` contient des composants réutilisables :
 
 ## 🔍 Trouver le bon exemple
 
-### Par stack technologique
+### Par pile technologique
 - **Node.js** : Application Web simple, Microservices
 - **Python** : Application avec base de données, Fonction sans serveur
 - **Sites statiques** : Site web statique
@@ -296,16 +296,17 @@ Le répertoire `configurations/` contient des composants réutilisables :
 ## 📚 Ressources supplémentaires
 
 ### Liens vers la documentation
-- [Spécification des modèles AZD](https://aka.ms/azd/templates)
+- [Modèles AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Documentation Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Centre d'architecture Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Exemples communautaires
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galerie de modèles AZD](https://azure.github.io/awesome-azd/)
+- [Modèles AZD Azure Samples](https://github.com/Azure-Samples/azd-templates)
+- [Modèles Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Galerie Azure Developer CLI](https://azure.github.io/awesome-azd/)
 
 ### Meilleures pratiques
-- [Framework Azure bien architecturé](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Framework Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Framework d'adoption du cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Contribuer des exemples
@@ -335,7 +336,7 @@ example-name/
 
 ---
 
-**Astuce** : Commencez par l'exemple le plus simple correspondant à votre stack technologique, puis progressez graduellement vers des scénarios plus complexes. Chaque exemple s'appuie sur les concepts des précédents !
+**Astuce** : Commencez par l'exemple le plus simple correspondant à votre pile technologique, puis progressez graduellement vers des scénarios plus complexes. Chaque exemple s'appuie sur les concepts des précédents !
 
 **Prochaines étapes** : 
 - Choisissez un exemple correspondant à votre niveau de compétence

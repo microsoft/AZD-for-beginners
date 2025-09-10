@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T17:33:24+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:00:51+00:00",
   "source_file": "examples/README.md",
   "language_code": "es"
 }
@@ -11,13 +11,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introducción
 
-Este directorio contiene ejemplos prácticos, plantillas y escenarios reales para ayudarte a aprender Azure Developer CLI mediante práctica directa. Cada ejemplo incluye código funcional completo, plantillas de infraestructura e instrucciones detalladas para diferentes arquitecturas de aplicaciones y patrones de despliegue.
+Este directorio contiene ejemplos prácticos, plantillas y escenarios reales para ayudarte a aprender Azure Developer CLI mediante práctica directa. Cada ejemplo proporciona código funcional completo, plantillas de infraestructura e instrucciones detalladas para diferentes arquitecturas de aplicaciones y patrones de despliegue.
 
 ## Objetivos de Aprendizaje
 
 Al trabajar con estos ejemplos, podrás:
 - Practicar flujos de trabajo de Azure Developer CLI con escenarios de aplicaciones realistas
-- Comprender diferentes arquitecturas de aplicaciones y sus implementaciones en azd
+- Comprender diferentes arquitecturas de aplicaciones y sus implementaciones con azd
 - Dominar patrones de Infraestructura como Código para varios servicios de Azure
 - Aplicar estrategias de gestión de configuración y despliegues específicos por entorno
 - Implementar patrones de monitoreo, seguridad y escalabilidad en contextos prácticos
@@ -29,7 +29,7 @@ Al completar estos ejemplos, serás capaz de:
 - Desplegar diferentes tipos de aplicaciones utilizando Azure Developer CLI con confianza
 - Adaptar las plantillas proporcionadas a los requisitos de tus propias aplicaciones
 - Diseñar e implementar patrones de infraestructura personalizados utilizando Bicep
-- Configurar aplicaciones complejas con múltiples servicios y dependencias adecuadas
+- Configurar aplicaciones complejas de múltiples servicios con dependencias adecuadas
 - Aplicar mejores prácticas de seguridad, monitoreo y rendimiento en escenarios reales
 - Resolver problemas y optimizar despliegues basándote en experiencia práctica
 
@@ -74,7 +74,7 @@ examples/
     └── scripts/
 ```
 
-## Ejemplos Rápidos
+## Ejemplos de Inicio Rápido
 
 ### Para Principiantes
 1. **[Aplicación Web Simple](../../../examples/simple-web-app)** - Despliega una aplicación web básica en Node.js
@@ -84,19 +84,19 @@ examples/
 ### Para Usuarios Intermedios
 4. **[Aplicación con Base de Datos](../../../examples/database-app)** - Aplicación web con base de datos PostgreSQL
 5. **[Función Serverless](../../../examples/serverless-function)** - Azure Functions con disparadores HTTP
-6. **[Microservicios](../../../examples/microservices)** - Aplicación con múltiples servicios y puerta de enlace API
+6. **[Microservicios](../../../examples/microservices)** - Aplicación de múltiples servicios con API Gateway
 
 ## 📋 Instrucciones de Uso
 
 ### Ejecutar Ejemplos Localmente
 
-1. **Clonar o Copiar el Ejemplo**  
+1. **Clonar o Copiar Ejemplo**  
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
    ```
 
-2. **Inicializar el Entorno AZD**  
+2. **Inicializar Entorno AZD**  
    ```bash
    # Initialize with existing template
    azd init
@@ -105,7 +105,7 @@ examples/
    azd env new my-environment
    ```
 
-3. **Configurar el Entorno**  
+3. **Configurar Entorno**  
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
@@ -132,21 +132,21 @@ Cada ejemplo incluye:
 ### Categorías de Ejemplos
 
 #### **Despliegues Básicos**
-- Aplicaciones con un solo servicio
+- Aplicaciones de un solo servicio
 - Patrones de infraestructura simples
 - Gestión básica de configuración
 - Configuraciones económicas para desarrollo
 
 #### **Escenarios Avanzados**
-- Arquitecturas con múltiples servicios
+- Arquitecturas de múltiples servicios
 - Configuraciones de red complejas
-- Patrones de integración con bases de datos
+- Patrones de integración de bases de datos
 - Implementaciones de seguridad y cumplimiento
 
 #### **Patrones Listos para Producción**
 - Configuraciones de alta disponibilidad
 - Monitoreo y observabilidad
-- Integración con CI/CD
+- Integración CI/CD
 - Configuraciones para recuperación ante desastres
 
 ## 📖 Descripciones de Ejemplos
@@ -194,8 +194,8 @@ El directorio `configurations/` contiene componentes reutilizables:
 ### Módulos Bicep
 - Componentes de infraestructura reutilizables
 - Patrones comunes de recursos
-- Plantillas reforzadas en seguridad
-- Configuraciones optimizadas en costos
+- Plantillas con seguridad reforzada
+- Configuraciones optimizadas para costos
 
 ### Scripts Auxiliares
 - Automatización de configuración de entornos
@@ -208,24 +208,24 @@ El directorio `configurations/` contiene componentes reutilizables:
 ### Adaptar Ejemplos a Tu Caso de Uso
 
 1. **Revisar Requisitos**
-   - Verificar los servicios de Azure necesarios
-   - Comprobar límites de suscripción
-   - Entender las implicaciones de costos
+   - Verifica los requisitos de servicios de Azure
+   - Confirma los límites de suscripción
+   - Comprende las implicaciones de costos
 
 2. **Modificar Configuración**
-   - Actualizar definiciones de servicios en `azure.yaml`
-   - Personalizar plantillas Bicep
-   - Ajustar variables de entorno
+   - Actualiza las definiciones de servicios en `azure.yaml`
+   - Personaliza las plantillas Bicep
+   - Ajusta las variables de entorno
 
 3. **Probar Exhaustivamente**
-   - Desplegar primero en un entorno de desarrollo
-   - Validar funcionalidad
-   - Probar escalabilidad y rendimiento
+   - Despliega primero en el entorno de desarrollo
+   - Valida la funcionalidad
+   - Prueba escalabilidad y rendimiento
 
 4. **Revisión de Seguridad**
-   - Revisar controles de acceso
-   - Implementar gestión de secretos
-   - Activar monitoreo y alertas
+   - Revisa los controles de acceso
+   - Implementa gestión de secretos
+   - Activa monitoreo y alertas
 
 ## 📊 Matriz Comparativa
 
@@ -248,17 +248,17 @@ El directorio `configurations/` contiene componentes reutilizables:
    - Practica la gestión de entornos
 
 2. **Prueba Sitio Web Estático**
-   - Explora opciones de hosting diferentes
+   - Explora diferentes opciones de hosting
    - Aprende sobre integración con CDN
-   - Comprende configuración de DNS
+   - Comprende la configuración de DNS
 
 3. **Avanza a Aplicación en Contenedor**
    - Aprende los fundamentos de contenerización
    - Comprende conceptos de escalabilidad
    - Practica con Docker
 
-4. **Añade Integración con Base de Datos**
-   - Aprende aprovisionamiento de bases de datos
+4. **Añade Integración de Base de Datos**
+   - Aprende sobre aprovisionamiento de bases de datos
    - Comprende cadenas de conexión
    - Practica gestión de secretos
 
@@ -296,13 +296,14 @@ El directorio `configurations/` contiene componentes reutilizables:
 ## 📚 Recursos Adicionales
 
 ### Enlaces de Documentación
-- [Especificación de Plantillas AZD](https://aka.ms/azd/templates)
+- [Plantillas AZD de Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Documentación de Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Centro de Arquitectura de Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Ejemplos de la Comunidad
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galería de Plantillas AZD](https://azure.github.io/awesome-azd/)
+- [Plantillas AZD de Azure Samples](https://github.com/Azure-Samples/azd-templates)
+- [Plantillas de Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Galería de Azure Developer CLI](https://azure.github.io/awesome-azd/)
 
 ### Mejores Prácticas
 - [Marco de Arquitectura Bien Diseñada de Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -317,7 +318,7 @@ El directorio `configurations/` contiene componentes reutilizables:
 2. Incluye un README.md completo
 3. Agrega comentarios a los archivos de configuración
 4. Prueba exhaustivamente antes de enviar
-5. Incluye estimaciones de costos y requisitos
+5. Incluye estimaciones de costos y requisitos previos
 
 ### Estructura de Plantilla de Ejemplo
 ```
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

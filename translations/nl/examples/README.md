@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:12:10+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:19:28+00:00",
   "source_file": "examples/README.md",
   "language_code": "nl"
 }
@@ -26,8 +26,8 @@ Door deze voorbeelden te doorlopen, leer je:
 ## Leerresultaten
 
 Na het voltooien van deze voorbeelden kun je:
-- Verschillende applicatietypen met vertrouwen implementeren met Azure Developer CLI
-- De aangeboden sjablonen aanpassen aan je eigen applicatievereisten
+- Verschillende soorten applicaties met vertrouwen implementeren met Azure Developer CLI
+- De meegeleverde sjablonen aanpassen aan je eigen applicatievereisten
 - Eigen infrastructuurpatronen ontwerpen en implementeren met Bicep
 - Complexe multi-service applicaties configureren met de juiste afhankelijkheden
 - Beveiligings-, monitoring- en prestatiebest practices toepassen in echte scenario's
@@ -74,23 +74,23 @@ examples/
     └── scripts/
 ```
 
-## Snelstartvoorbeelden
+## Snelle Start Voorbeelden
 
-### Voor beginners
-1. **[Eenvoudige webapp](../../../examples/simple-web-app)** - Implementeer een basis Node.js-webapplicatie
-2. **[Statische website](../../../examples/static-website)** - Host een statische website op Azure Storage
-3. **[Container-app](../../../examples/container-app)** - Implementeer een containerized applicatie
+### Voor Beginners
+1. **[Eenvoudige Webapp](../../../examples/simple-web-app)** - Implementeer een basis Node.js-webapplicatie
+2. **[Statische Website](../../../examples/static-website)** - Host een statische website op Azure Storage
+3. **[Container App](../../../examples/container-app)** - Implementeer een containerized applicatie
 
-### Voor gevorderde gebruikers
-4. **[Database-app](../../../examples/database-app)** - Webapplicatie met PostgreSQL-database
-5. **[Serverloze functie](../../../examples/serverless-function)** - Azure Functions met HTTP-triggers
+### Voor Gevorderden
+4. **[Database App](../../../examples/database-app)** - Webapplicatie met PostgreSQL-database
+5. **[Serverloze Functie](../../../examples/serverless-function)** - Azure Functions met HTTP-triggers
 6. **[Microservices](../../../examples/microservices)** - Multi-service applicatie met API-gateway
 
-## 📋 Gebruiksaanwijzing
+## 📋 Gebruiksinstructies
 
-### Voorbeelden lokaal uitvoeren
+### Voorbeelden Lokaal Uitvoeren
 
-1. **Clone of kopieer voorbeeld**
+1. **Clone of Kopieer Voorbeeld**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
@@ -105,7 +105,7 @@ examples/
    azd env new my-environment
    ```
 
-3. **Configureer omgeving**
+3. **Configureer Omgeving**
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
@@ -118,7 +118,7 @@ examples/
    azd up
    ```
 
-### Voorbeelden aanpassen
+### Voorbeelden Aanpassen
 
 Elk voorbeeld bevat:
 - **README.md** - Gedetailleerde setup- en aanpassingsinstructies
@@ -137,7 +137,7 @@ Elk voorbeeld bevat:
 - Basisconfiguratiemanagement
 - Kostenbesparende ontwikkelomgevingen
 
-#### **Geavanceerde scenario's**
+#### **Geavanceerde Scenario's**
 - Multi-service architecturen
 - Complexe netwerkconfiguraties
 - Database-integratiepatronen
@@ -151,29 +151,29 @@ Elk voorbeeld bevat:
 
 ## 📖 Voorbeeldbeschrijvingen
 
-### Eenvoudige webapp
+### Eenvoudige Webapp
 **Technologieën**: Node.js, App Service, Application Insights  
 **Complexiteit**: Beginner  
 **Concepten**: Basisimplementatie, omgevingsvariabelen, gezondheidscontroles
 
-### Statische website
+### Statische Website
 **Technologieën**: HTML/CSS/JS, Storage Account, CDN  
 **Complexiteit**: Beginner  
 **Concepten**: Statische hosting, CDN-integratie, aangepaste domeinen
 
-### Container-app
+### Container App
 **Technologieën**: Docker, Container Apps, Container Registry  
-**Complexiteit**: Gemiddeld  
+**Complexiteit**: Gevorderd  
 **Concepten**: Containerisatie, schaalbaarheid, ingress-configuratie
 
-### Database-app
+### Database App
 **Technologieën**: Python Flask, PostgreSQL, App Service  
-**Complexiteit**: Gemiddeld  
+**Complexiteit**: Gevorderd  
 **Concepten**: Databaseverbindingen, geheimenbeheer, migraties
 
-### Serverloze functie
+### Serverloze Functie
 **Technologieën**: Azure Functions, Cosmos DB, API Management  
-**Complexiteit**: Gemiddeld  
+**Complexiteit**: Gevorderd  
 **Concepten**: Event-driven architectuur, bindings, API-beheer
 
 ### Microservices
@@ -191,33 +191,33 @@ De map `configurations/` bevat herbruikbare componenten:
 - Productieklare configuraties
 - Multi-regio implementaties
 
-### Bicep-modules
+### Bicep Modules
 - Herbruikbare infrastructuurcomponenten
 - Veelvoorkomende resourcepatronen
-- Beveiligingsversterkte sjablonen
+- Beveiligingsgeharde sjablonen
 - Kosten geoptimaliseerde configuraties
 
 ### Hulpscripts
 - Automatisering van omgevingsinstellingen
-- Scripts voor database-migratie
-- Tools voor validatie van implementaties
-- Hulpmiddelen voor kostenmonitoring
+- Database-migratiescripts
+- Validatietools voor implementatie
+- Kostenbewakingshulpmiddelen
 
 ## 🔧 Aanpassingsgids
 
-### Voorbeelden aanpassen aan jouw gebruikssituatie
+### Voorbeelden Aanpassen aan Jouw Gebruikssituatie
 
-1. **Controleer vereisten**
+1. **Controleer Vereisten**
    - Controleer Azure-servicevereisten
    - Verifieer abonnementslimieten
    - Begrijp kostenimplicaties
 
-2. **Wijzig configuratie**
+2. **Wijzig Configuratie**
    - Werk `azure.yaml`-servicedefinities bij
    - Pas Bicep-sjablonen aan
    - Stel omgevingsvariabelen in
 
-3. **Test grondig**
+3. **Test Grondig**
    - Implementeer eerst in ontwikkelomgeving
    - Valideer functionaliteit
    - Test schaalbaarheid en prestaties
@@ -231,38 +231,38 @@ De map `configurations/` bevat herbruikbare componenten:
 
 | Voorbeeld | Services | Database | Auth | Monitoring | Complexiteit |
 |-----------|----------|----------|------|------------|--------------|
-| Eenvoudige webapp | 1 | ❌ | Basis | Basis | ⭐ |
-| Statische website | 1 | ❌ | ❌ | Basis | ⭐ |
-| Container-app | 1 | ❌ | Basis | Volledig | ⭐⭐ |
-| Database-app | 2 | ✅ | Volledig | Volledig | ⭐⭐⭐ |
-| Serverloze functie | 3 | ✅ | Volledig | Volledig | ⭐⭐⭐ |
+| Eenvoudige Webapp | 1 | ❌ | Basis | Basis | ⭐ |
+| Statische Website | 1 | ❌ | ❌ | Basis | ⭐ |
+| Container App | 1 | ❌ | Basis | Volledig | ⭐⭐ |
+| Database App | 2 | ✅ | Volledig | Volledig | ⭐⭐⭐ |
+| Serverloze Functie | 3 | ✅ | Volledig | Volledig | ⭐⭐⭐ |
 | Microservices | 5+ | ✅ | Volledig | Volledig | ⭐⭐⭐⭐ |
 
 ## 🎓 Leerpad
 
-### Aanbevolen volgorde
+### Aanbevolen Volgorde
 
-1. **Begin met Eenvoudige webapp**
+1. **Begin met Eenvoudige Webapp**
    - Leer basisconcepten van AZD
    - Begrijp implementatieworkflow
    - Oefen omgevingsbeheer
 
-2. **Probeer Statische website**
+2. **Probeer Statische Website**
    - Verken verschillende hostingopties
    - Leer over CDN-integratie
    - Begrijp DNS-configuratie
 
-3. **Ga verder met Container-app**
+3. **Ga verder met Container App**
    - Leer basisprincipes van containerisatie
    - Begrijp schaalconcepten
    - Oefen met Docker
 
-4. **Voeg database-integratie toe**
+4. **Voeg Database-integratie toe**
    - Leer databasevoorziening
    - Begrijp verbindingsstrings
    - Oefen geheimenbeheer
 
-5. **Verken Serverloze functies**
+5. **Verken Serverloze Functies**
    - Begrijp event-driven architectuur
    - Leer over triggers en bindings
    - Oefen met API's
@@ -272,54 +272,55 @@ De map `configurations/` bevat herbruikbare componenten:
    - Begrijp gedistribueerde systemen
    - Oefen complexe implementaties
 
-## 🔍 Het juiste voorbeeld vinden
+## 🔍 Het Juiste Voorbeeld Vinden
 
-### Op technologie-stack
-- **Node.js**: Eenvoudige webapp, Microservices
-- **Python**: Database-app, Serverloze functie
-- **Statische sites**: Statische website
-- **Containers**: Container-app, Microservices
-- **Databases**: Database-app, Serverloze functie
+### Op Technologie Stack
+- **Node.js**: Eenvoudige Webapp, Microservices
+- **Python**: Database App, Serverloze Functie
+- **Statische Sites**: Statische Website
+- **Containers**: Container App, Microservices
+- **Databases**: Database App, Serverloze Functie
 
-### Op architectuurpatroon
-- **Monolithisch**: Eenvoudige webapp, Database-app
-- **Statisch**: Statische website
-- **Microservices**: Microservices-voorbeeld
-- **Serverloos**: Serverloze functie
-- **Hybride**: Container-app
+### Op Architectuurpatroon
+- **Monolithisch**: Eenvoudige Webapp, Database App
+- **Statisch**: Statische Website
+- **Microservices**: Microservices voorbeeld
+- **Serverloos**: Serverloze Functie
+- **Hybride**: Container App
 
-### Op complexiteitsniveau
-- **Beginner**: Eenvoudige webapp, Statische website
-- **Gemiddeld**: Container-app, Database-app, Serverloze functie  
+### Op Complexiteitsniveau
+- **Beginner**: Eenvoudige Webapp, Statische Website
+- **Gevorderd**: Container App, Database App, Serverloze Functie  
 - **Geavanceerd**: Microservices
 
-## 📚 Aanvullende bronnen
+## 📚 Aanvullende Bronnen
 
 ### Documentatielinks
-- [AZD-sjabloonspecificatie](https://aka.ms/azd/templates)
-- [Bicep-documentatie](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Bicep Documentatie](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architectuurcentrum](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Communityvoorbeelden
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+### Community Voorbeelden
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
-### Best practices
+### Best Practices
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Voorbeelden bijdragen
+## 🤝 Voorbeelden Bijdragen
 
 Heb je een nuttig voorbeeld om te delen? We verwelkomen bijdragen!
 
-### Richtlijnen voor inzending
+### Richtlijnen voor Indienen
 1. Volg de vastgestelde mapstructuur
 2. Voeg een uitgebreide README.md toe
 3. Voeg opmerkingen toe aan configuratiebestanden
 4. Test grondig voordat je indient
 5. Voeg kostenramingen en vereisten toe
 
-### Voorbeeldsjabloonstructuur
+### Voorbeeld Sjabloonstructuur
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -335,9 +336,9 @@ example-name/
 
 ---
 
-**Pro Tip**: Begin met het eenvoudigste voorbeeld dat past bij jouw technologie-stack en werk geleidelijk door naar complexere scenario's. Elk voorbeeld bouwt voort op concepten van de vorige!
+**Pro Tip**: Begin met het eenvoudigste voorbeeld dat past bij jouw technologie stack en werk geleidelijk naar complexere scenario's toe. Elk voorbeeld bouwt voort op concepten van de vorige!
 
-**Volgende stappen**: 
+**Volgende Stappen**: 
 - Kies een voorbeeld dat past bij jouw vaardigheidsniveau
 - Volg de setup-instructies in de README van het voorbeeld
 - Experimenteer met aanpassingen
@@ -346,10 +347,10 @@ example-name/
 ---
 
 **Navigatie**
-- **Vorige les**: [Studiegids](../resources/study-guide.md)
+- **Vorige Les**: [Studiegids](../resources/study-guide.md)
 - **Terug naar**: [Hoofd README](../README.md)
 
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we ons best doen om nauwkeurigheid te garanderen, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

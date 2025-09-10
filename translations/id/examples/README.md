@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:13:43+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:21:06+00:00",
   "source_file": "examples/README.md",
   "language_code": "id"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pendahuluan
 
-Direktori ini berisi contoh praktis, template, dan skenario dunia nyata untuk membantu Anda mempelajari Azure Developer CLI melalui praktik langsung. Setiap contoh menyediakan kode lengkap yang berfungsi, template infrastruktur, dan instruksi terperinci untuk berbagai arsitektur aplikasi dan pola penerapan.
+Direktori ini berisi contoh praktis, template, dan skenario dunia nyata untuk membantu Anda mempelajari Azure Developer CLI melalui praktik langsung. Setiap contoh menyediakan kode yang berfungsi penuh, template infrastruktur, dan instruksi terperinci untuk berbagai arsitektur aplikasi dan pola penerapan.
 
 ## Tujuan Pembelajaran
 
@@ -121,7 +121,7 @@ examples/
 ### Menyesuaikan Contoh
 
 Setiap contoh mencakup:
-- **README.md** - Instruksi pengaturan dan penyesuaian yang terperinci
+- **README.md** - Instruksi pengaturan dan kustomisasi yang terperinci
 - **azure.yaml** - Konfigurasi AZD dengan komentar
 - **infra/** - Template Bicep dengan penjelasan parameter
 - **src/** - Kode aplikasi contoh
@@ -159,7 +159,7 @@ Setiap contoh mencakup:
 ### Situs Web Statis
 **Teknologi**: HTML/CSS/JS, Storage Account, CDN  
 **Kompleksitas**: Pemula  
-**Konsep**: Hosting statis, integrasi CDN, domain khusus
+**Konsep**: Hosting statis, integrasi CDN, domain kustom
 
 ### Aplikasi Kontainer
 **Teknologi**: Docker, Container Apps, Container Registry  
@@ -203,9 +203,9 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 - Alat validasi penerapan
 - Utilitas pemantauan biaya
 
-## 🔧 Panduan Penyesuaian
+## 🔧 Panduan Kustomisasi
 
-### Menyesuaikan Contoh untuk Kebutuhan Anda
+### Menyesuaikan Contoh untuk Kasus Penggunaan Anda
 
 1. **Tinjau Prasyarat**
    - Periksa persyaratan layanan Azure
@@ -225,7 +225,7 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 4. **Tinjauan Keamanan**
    - Tinjau kontrol akses
    - Terapkan manajemen rahasia
-   - Aktifkan pemantauan dan peringatan
+   - Aktifkan pemantauan dan pemberitahuan
 
 ## 📊 Matriks Perbandingan
 
@@ -240,7 +240,7 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 
 ## 🎓 Jalur Pembelajaran
 
-### Progression yang Direkomendasikan
+### Kemajuan yang Direkomendasikan
 
 1. **Mulai dengan Aplikasi Web Sederhana**
    - Pelajari konsep dasar AZD
@@ -262,7 +262,7 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
    - Pahami string koneksi
    - Praktikkan manajemen rahasia
 
-5. **Eksplorasi Tanpa Server**
+5. **Jelajahi Fungsi Tanpa Server**
    - Pahami arsitektur berbasis peristiwa
    - Pelajari tentang pemicu dan binding
    - Praktikkan dengan API
@@ -296,23 +296,24 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 ## 📚 Sumber Daya Tambahan
 
 ### Tautan Dokumentasi
-- [Spesifikasi Template AZD](https://aka.ms/azd/templates)
+- [Template AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentasi Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Pusat Arsitektur Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Contoh Komunitas
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galeri Template AZD](https://azure.github.io/awesome-azd/)
+- [Template AZD Contoh Azure](https://github.com/Azure-Samples/azd-templates)
+- [Template Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Galeri Azure Developer CLI](https://azure.github.io/awesome-azd/)
 
 ### Praktik Terbaik
-- [Kerangka Kerja Arsitektur Azure yang Baik](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Kerangka Kerja Arsitektur yang Baik Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Kerangka Kerja Adopsi Cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Berkontribusi pada Contoh
 
 Punya contoh berguna untuk dibagikan? Kami menyambut kontribusi!
 
-### Panduan Pengajuan
+### Panduan Pengiriman
 1. Ikuti struktur direktori yang telah ditetapkan
 2. Sertakan README.md yang komprehensif
 3. Tambahkan komentar ke file konfigurasi
@@ -340,7 +341,7 @@ example-name/
 **Langkah Selanjutnya**: 
 - Pilih contoh yang sesuai dengan tingkat keahlian Anda
 - Ikuti instruksi pengaturan di README contoh
-- Bereksperimen dengan penyesuaian
+- Bereksperimen dengan kustomisasi
 - Bagikan pembelajaran Anda dengan komunitas
 
 ---

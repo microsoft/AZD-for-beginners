@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-10T07:03:36+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:27:56+00:00",
   "source_file": "examples/README.md",
   "language_code": "sl"
 }
@@ -21,13 +21,13 @@ Z delom na teh primerih boste:
 - Obvladali vzorce Infrastructure as Code za različne Azure storitve
 - Uporabili strategije upravljanja konfiguracij in uvajanja, specifične za okolje
 - Implementirali vzorce za spremljanje, varnost in skaliranje v praktičnih kontekstih
-- Pridobili izkušnje z odpravljanjem težav in odpravljanjem napak pri resničnih scenarijih uvajanja
+- Pridobili izkušnje pri odpravljanju težav in odpravljanju napak v resničnih scenarijih uvajanja
 
 ## Rezultati učenja
 
 Po zaključku teh primerov boste sposobni:
 - Z zaupanjem uvajati različne vrste aplikacij z uporabo Azure Developer CLI
-- Prilagoditi podane predloge svojim potrebam aplikacije
+- Prilagoditi podane predloge svojim zahtevam aplikacije
 - Oblikovati in implementirati prilagojene infrastrukturne vzorce z uporabo Bicep
 - Konfigurirati kompleksne aplikacije z več storitvami in ustreznimi odvisnostmi
 - Uporabiti najboljše prakse za varnost, spremljanje in zmogljivost v resničnih scenarijih
@@ -74,11 +74,11 @@ examples/
     └── scripts/
 ```
 
-## Hitri primeri za začetek
+## Hitri primeri
 
 ### Za začetnike
 1. **[Preprosta spletna aplikacija](../../../examples/simple-web-app)** - Uvajanje osnovne Node.js spletne aplikacije
-2. **[Statična spletna stran](../../../examples/static-website)** - Gostovanje statične spletne strani na Azure Storage
+2. **[Statično spletno mesto](../../../examples/static-website)** - Gostovanje statičnega spletnega mesta na Azure Storage
 3. **[Aplikacija v kontejnerju](../../../examples/container-app)** - Uvajanje aplikacije v kontejnerju
 
 ### Za uporabnike s srednjim znanjem
@@ -156,24 +156,24 @@ Vsak primer vključuje:
 **Kompleksnost**: Začetnik  
 **Koncepti**: Osnovno uvajanje, okoljske spremenljivke, preverjanje stanja
 
-### Statična spletna stran
+### Statično spletno mesto
 **Tehnologije**: HTML/CSS/JS, Storage Account, CDN  
 **Kompleksnost**: Začetnik  
 **Koncepti**: Statično gostovanje, integracija CDN, prilagojene domene
 
 ### Aplikacija v kontejnerju
 **Tehnologije**: Docker, Container Apps, Container Registry  
-**Kompleksnost**: Srednje zahtevno  
+**Kompleksnost**: Srednje  
 **Koncepti**: Kontejnerizacija, skaliranje, konfiguracija dostopa
 
 ### Aplikacija z bazo podatkov
 **Tehnologije**: Python Flask, PostgreSQL, App Service  
-**Kompleksnost**: Srednje zahtevno  
+**Kompleksnost**: Srednje  
 **Koncepti**: Povezave z bazo podatkov, upravljanje skrivnosti, migracije
 
 ### Serverless funkcija
 **Tehnologije**: Azure Functions, Cosmos DB, API Management  
-**Kompleksnost**: Srednje zahtevno  
+**Kompleksnost**: Srednje  
 **Koncepti**: Arhitektura, ki temelji na dogodkih, povezave, upravljanje API-jev
 
 ### Mikrostoritve
@@ -232,33 +232,33 @@ Mapa `configurations/` vsebuje ponovno uporabne komponente:
 | Primer | Storitve | Baza podatkov | Avtentikacija | Spremljanje | Kompleksnost |
 |--------|----------|---------------|---------------|-------------|--------------|
 | Preprosta spletna aplikacija | 1 | ❌ | Osnovno | Osnovno | ⭐ |
-| Statična spletna stran | 1 | ❌ | ❌ | Osnovno | ⭐ |
+| Statično spletno mesto | 1 | ❌ | ❌ | Osnovno | ⭐ |
 | Aplikacija v kontejnerju | 1 | ❌ | Osnovno | Polno | ⭐⭐ |
 | Aplikacija z bazo podatkov | 2 | ✅ | Polno | Polno | ⭐⭐⭐ |
 | Serverless funkcija | 3 | ✅ | Polno | Polno | ⭐⭐⭐ |
 | Mikrostoritve | 5+ | ✅ | Polno | Polno | ⭐⭐⭐⭐ |
 
-## 🎓 Pot učenja
+## 🎓 Učni načrt
 
-### Priporočeni vrstni red
+### Priporočena pot
 
 1. **Začnite s preprosto spletno aplikacijo**
    - Naučite se osnovnih konceptov AZD
    - Razumite delovni tok uvajanja
    - Vadite upravljanje okolja
 
-2. **Preizkusite statično spletno stran**
+2. **Preizkusite statično spletno mesto**
    - Raziščite različne možnosti gostovanja
    - Naučite se integracije CDN
    - Razumite konfiguracijo DNS
 
-3. **Nadaljujte z aplikacijo v kontejnerju**
+3. **Preidite na aplikacijo v kontejnerju**
    - Naučite se osnov kontejnerizacije
    - Razumite koncept skaliranja
    - Vadite z Dockerjem
 
 4. **Dodajte integracijo baze podatkov**
-   - Naučite se priprave baze podatkov
+   - Naučite se zagotavljanja baz podatkov
    - Razumite povezovalne nize
    - Vadite upravljanje skrivnosti
 
@@ -277,32 +277,33 @@ Mapa `configurations/` vsebuje ponovno uporabne komponente:
 ### Po tehnološkem skladu
 - **Node.js**: Preprosta spletna aplikacija, Mikrostoritve
 - **Python**: Aplikacija z bazo podatkov, Serverless funkcija
-- **Statične strani**: Statična spletna stran
+- **Statična mesta**: Statično spletno mesto
 - **Kontejnerji**: Aplikacija v kontejnerju, Mikrostoritve
 - **Baze podatkov**: Aplikacija z bazo podatkov, Serverless funkcija
 
 ### Po arhitekturnem vzorcu
 - **Monolitne**: Preprosta spletna aplikacija, Aplikacija z bazo podatkov
-- **Statične**: Statična spletna stran
+- **Statične**: Statično spletno mesto
 - **Mikrostoritve**: Primer mikrostoritev
 - **Serverless**: Serverless funkcija
 - **Hibridne**: Aplikacija v kontejnerju
 
-### Po stopnji zahtevnosti
-- **Začetnik**: Preprosta spletna aplikacija, Statična spletna stran
-- **Srednje zahtevno**: Aplikacija v kontejnerju, Aplikacija z bazo podatkov, Serverless funkcija  
+### Po stopnji kompleksnosti
+- **Začetnik**: Preprosta spletna aplikacija, Statično spletno mesto
+- **Srednje**: Aplikacija v kontejnerju, Aplikacija z bazo podatkov, Serverless funkcija  
 - **Napredno**: Mikrostoritve
 
 ## 📚 Dodatni viri
 
 ### Povezave do dokumentacije
-- [Specifikacija predlog AZD](https://aka.ms/azd/templates)
-- [Dokumentacija Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Dokumentacija za Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Primeri skupnosti
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galerija predlog AZD](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### Najboljše prakse
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -313,7 +314,7 @@ Mapa `configurations/` vsebuje ponovno uporabne komponente:
 Imate uporaben primer za deljenje? Veseli bomo vaših prispevkov!
 
 ### Smernice za oddajo
-1. Upoštevajte uveljavljeno strukturo map
+1. Upoštevajte uveljavljeno strukturo mape
 2. Vključite celovit README.md
 3. Dodajte komentarje v konfiguracijske datoteke
 4. Temeljito testirajte pred oddajo
@@ -335,7 +336,7 @@ example-name/
 
 ---
 
-**Nasvet**: Začnite z najpreprostejšim primerom, ki ustreza vašemu tehnološkemu skladu, nato pa postopoma napredujte k bolj zahtevnim scenarijem. Vsak primer gradi na konceptih iz prejšnjih!
+**Nasvet**: Začnite z najpreprostejšim primerom, ki ustreza vašemu tehnološkemu skladu, nato pa postopoma napredujte do bolj kompleksnih scenarijev. Vsak primer gradi na konceptih iz prejšnjih!
 
 **Naslednji koraki**: 
 - Izberite primer, ki ustreza vaši stopnji znanja
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da se zavedate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.

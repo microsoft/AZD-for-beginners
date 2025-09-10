@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T17:33:51+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:01:23+00:00",
   "source_file": "examples/README.md",
   "language_code": "de"
 }
@@ -21,7 +21,7 @@ Durch die Bearbeitung dieser Beispiele werden Sie:
 - Muster für Infrastructure as Code für verschiedene Azure-Dienste meistern
 - Strategien für Konfigurationsmanagement und umgebungsspezifische Bereitstellungen anwenden
 - Überwachungs-, Sicherheits- und Skalierungsmuster in praktischen Kontexten implementieren
-- Erfahrungen mit der Fehlersuche und dem Debuggen von echten Bereitstellungsszenarien sammeln
+- Erfahrungen mit der Fehlersuche und dem Debuggen realer Bereitstellungsszenarien sammeln
 
 ## Lernergebnisse
 
@@ -132,10 +132,10 @@ Jedes Beispiel enthält:
 ### Beispielkategorien
 
 #### **Grundlegende Bereitstellungen**
-- Einzelservice-Anwendungen
+- Anwendungen mit einem Dienst
 - Einfache Infrastrukturmuster
 - Grundlegendes Konfigurationsmanagement
-- Kostenoptimierte Entwicklungsumgebungen
+- Kosteneffiziente Entwicklungsumgebungen
 
 #### **Fortgeschrittene Szenarien**
 - Multi-Service-Architekturen
@@ -169,7 +169,7 @@ Jedes Beispiel enthält:
 ### Datenbank-App
 **Technologien**: Python Flask, PostgreSQL, App Service  
 **Komplexität**: Fortgeschritten  
-**Konzepte**: Datenbankverbindungen, Geheimnisverwaltung, Migrationen
+**Konzepte**: Datenbankverbindungen, Geheimnismanagement, Migrationen
 
 ### Serverless-Funktion
 **Technologien**: Azure Functions, Cosmos DB, API Management  
@@ -193,7 +193,7 @@ Das Verzeichnis `configurations/` enthält wiederverwendbare Komponenten:
 
 ### Bicep-Module
 - Wiederverwendbare Infrastrukturkomponenten
-- Häufige Ressourcenmuster
+- Häufige Ressourcenvorlagen
 - Sicherheitsgehärtete Vorlagen
 - Kostenoptimierte Konfigurationen
 
@@ -205,7 +205,7 @@ Das Verzeichnis `configurations/` enthält wiederverwendbare Komponenten:
 
 ## 🔧 Anpassungsleitfaden
 
-### Beispiele an Ihre Anforderungen anpassen
+### Beispiele für Ihren Anwendungsfall anpassen
 
 1. **Voraussetzungen prüfen**
    - Anforderungen an Azure-Dienste überprüfen
@@ -224,7 +224,7 @@ Das Verzeichnis `configurations/` enthält wiederverwendbare Komponenten:
 
 4. **Sicherheitsüberprüfung**
    - Zugriffssteuerungen überprüfen
-   - Geheimnisverwaltung implementieren
+   - Geheimnismanagement implementieren
    - Überwachung und Alarmierung aktivieren
 
 ## 📊 Vergleichsmatrix
@@ -242,17 +242,17 @@ Das Verzeichnis `configurations/` enthält wiederverwendbare Komponenten:
 
 ### Empfohlene Reihenfolge
 
-1. **Mit einfacher Web-App beginnen**
+1. **Beginnen Sie mit der einfachen Web-App**
    - Grundlegende AZD-Konzepte lernen
    - Bereitstellungsworkflow verstehen
    - Umgebungsmanagement üben
 
-2. **Statische Website ausprobieren**
+2. **Probieren Sie die statische Website**
    - Verschiedene Hosting-Optionen erkunden
    - CDN-Integration lernen
    - DNS-Konfiguration verstehen
 
-3. **Zu Container-App wechseln**
+3. **Wechseln Sie zur Container-App**
    - Grundlagen der Containerisierung lernen
    - Skalierungskonzepte verstehen
    - Mit Docker üben
@@ -260,7 +260,7 @@ Das Verzeichnis `configurations/` enthält wiederverwendbare Komponenten:
 4. **Datenbankintegration hinzufügen**
    - Datenbankbereitstellung lernen
    - Verbindungsstrings verstehen
-   - Geheimnisverwaltung üben
+   - Geheimnismanagement üben
 
 5. **Serverless erkunden**
    - Eventgesteuerte Architektur verstehen
@@ -296,13 +296,14 @@ Das Verzeichnis `configurations/` enthält wiederverwendbare Komponenten:
 ## 📚 Zusätzliche Ressourcen
 
 ### Dokumentationslinks
-- [AZD-Vorlagenspezifikation](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD-Vorlagen](https://github.com/Azure/ai-foundry-templates)
 - [Bicep-Dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architekturzentrum](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Community-Beispiele
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD-Vorlagen](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry-Vorlagen](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Galerie](https://azure.github.io/awesome-azd/)
 
 ### Best Practices
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -317,7 +318,7 @@ Haben Sie ein nützliches Beispiel, das Sie teilen möchten? Wir freuen uns übe
 2. Fügen Sie eine umfassende README.md hinzu
 3. Kommentieren Sie Konfigurationsdateien
 4. Testen Sie gründlich vor der Einreichung
-5. Fügen Sie Kostenabschätzungen und Voraussetzungen hinzu
+5. Fügen Sie Kostenschätzungen und Voraussetzungen hinzu
 
 ### Beispielvorlagenstruktur
 ```
@@ -339,7 +340,7 @@ example-name/
 
 **Nächste Schritte**: 
 - Wählen Sie ein Beispiel, das Ihrem Kenntnisstand entspricht
-- Folgen Sie den Einrichtungshinweisen im README des Beispiels
+- Folgen Sie den Einrichtungshinweisen in der README des Beispiels
 - Experimentieren Sie mit Anpassungen
 - Teilen Sie Ihre Erkenntnisse mit der Community
 
