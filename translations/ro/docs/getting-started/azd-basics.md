@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:12:52+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:38:05+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "ro"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introducere
 
-Această lecție te introduce în Azure Developer CLI (azd), un instrument puternic de linie de comandă care accelerează tranziția de la dezvoltarea locală la implementarea în Azure. Vei învăța conceptele fundamentale, caracteristicile de bază și vei înțelege cum azd simplifică implementarea aplicațiilor cloud-native.
+Această lecție te introduce în Azure Developer CLI (azd), un instrument puternic de linie de comandă care accelerează tranziția de la dezvoltarea locală la implementarea pe Azure. Vei învăța conceptele fundamentale, caracteristicile de bază și vei înțelege cum azd simplifică implementarea aplicațiilor cloud-native.
 
 ## Obiective de învățare
 
@@ -19,7 +19,7 @@ Până la sfârșitul acestei lecții, vei:
 - Înțelege ce este Azure Developer CLI și scopul său principal
 - Învața conceptele de bază despre șabloane, medii și servicii
 - Explora caracteristicile cheie, inclusiv dezvoltarea bazată pe șabloane și Infrastructure as Code
-- Înțelege structura și fluxul de lucru al unui proiect azd
+- Înțelege structura și fluxul de lucru al proiectelor azd
 - Fi pregătit să instalezi și să configurezi azd pentru mediul tău de dezvoltare
 
 ## Rezultate ale învățării
@@ -33,7 +33,7 @@ După finalizarea acestei lecții, vei putea:
 
 ## Ce este Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) este un instrument de linie de comandă conceput pentru a accelera tranziția de la dezvoltarea locală la implementarea în Azure. Simplifică procesul de construire, implementare și gestionare a aplicațiilor cloud-native pe Azure.
+Azure Developer CLI (azd) este un instrument de linie de comandă conceput pentru a accelera tranziția de la dezvoltarea locală la implementarea pe Azure. Simplifică procesul de construire, implementare și gestionare a aplicațiilor cloud-native pe Azure.
 
 ## Concepte de bază
 
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Fluxuri de lucru integrate
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Înțelegerea `azd down --force --purge`
+Comanda `azd down --force --purge` este o modalitate puternică de a elimina complet mediul azd și toate resursele asociate. Iată o descriere a ceea ce face fiecare flag:
+```
+--force
+```
+- Sare peste solicitările de confirmare.
+- Util pentru automatizare sau scripting unde inputul manual nu este fezabil.
+- Asigură că procesul de eliminare continuă fără întreruperi, chiar dacă CLI detectează inconsistențe.
+
+```
+--purge
+```
+Șterge **toate metadatele asociate**, inclusiv:
+Starea mediului
+Folderul local `.azure`
+Informațiile de implementare în cache
+Previne ca azd să "își amintească" implementările anterioare, ceea ce poate cauza probleme precum grupuri de resurse nepotrivite sau referințe vechi la registre.
+
+### De ce să folosești ambele?
+Când te confrunți cu probleme la `azd up` din cauza stării persistente sau implementărilor parțiale, această combinație asigură un **nou început**.
+
+Este deosebit de utilă după ștergeri manuale de resurse în portalul Azure sau când schimbi șabloane, medii sau convenții de denumire a grupurilor de resurse.
 
 ### Gestionarea mai multor medii
 ```bash
@@ -211,7 +234,7 @@ azd template show <template>   # Template details
 azd init --help               # Initialization options
 ```
 
-### Gestionarea proiectului
+### Gestionarea proiectelor
 ```bash
 azd show                     # Project overview
 azd env show                 # Current environment
@@ -227,7 +250,7 @@ azd logs                     # View application logs
 
 ## Cele mai bune practici
 
-### 1. Folosește denumiri semnificative
+### 1. Folosește nume semnificative
 ```bash
 # Good
 azd env new production-east
@@ -238,7 +261,7 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Utilizează șabloane
+### 2. Profită de șabloane
 - Începe cu șabloane existente
 - Personalizează-le pentru nevoile tale
 - Creează șabloane reutilizabile pentru organizația ta
@@ -246,14 +269,14 @@ azd init --template template1
 ### 3. Izolarea mediilor
 - Folosește medii separate pentru dev/staging/prod
 - Nu implementa direct în producție de pe mașina locală
-- Utilizează pipeline-uri CI/CD pentru implementările în producție
+- Folosește pipeline-uri CI/CD pentru implementările în producție
 
 ### 4. Gestionarea configurației
 - Folosește variabile de mediu pentru date sensibile
 - Păstrează configurația în controlul versiunilor
 - Documentează setările specifice mediului
 
-## Progresul învățării
+## Progresul în învățare
 
 ### Începător (Săptămâna 1-2)
 1. Instalează azd și autentifică-te

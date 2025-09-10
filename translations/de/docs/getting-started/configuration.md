@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T16:52:34+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T12:49:13+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "de"
 }
@@ -11,13 +11,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Einführung
 
-Dieser umfassende Leitfaden behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows. Sie erfahren mehr über die Konfigurationshierarchie, das Management von Umgebungen, Authentifizierungsmethoden und fortgeschrittene Konfigurationsmuster, die effiziente und sichere Azure-Bereitstellungen ermöglichen.
+Dieses umfassende Handbuch behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows. Sie erfahren mehr über die Konfigurationshierarchie, das Management von Umgebungen, Authentifizierungsmethoden und fortgeschrittene Konfigurationsmuster, die effiziente und sichere Azure-Bereitstellungen ermöglichen.
 
 ## Lernziele
 
 Am Ende dieser Lektion werden Sie:
 - Die azd-Konfigurationshierarchie beherrschen und verstehen, wie Einstellungen priorisiert werden
-- Globale und projektbezogene Einstellungen effektiv konfigurieren
+- Globale und projektspezifische Einstellungen effektiv konfigurieren
 - Mehrere Umgebungen mit unterschiedlichen Konfigurationen verwalten
 - Sichere Authentifizierungs- und Autorisierungsmuster implementieren
 - Fortgeschrittene Konfigurationsmuster für komplexe Szenarien verstehen
@@ -31,7 +31,7 @@ Nach Abschluss dieser Lektion werden Sie in der Lage sein:
 - Konfigurationsbezogene Probleme zu beheben
 - Das Verhalten von azd an spezifische organisatorische Anforderungen anzupassen
 
-Dieser umfassende Leitfaden behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows.
+Dieses umfassende Handbuch behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows.
 
 ## Konfigurationshierarchie
 
@@ -202,7 +202,7 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Management von Umgebungen
+## 🌟 Umweltmanagement
 
 ### Umgebungen erstellen
 ```bash
@@ -272,7 +272,7 @@ LOG_LEVEL=info
 
 ## 🔐 Authentifizierungskonfiguration
 
-### Integration mit Azure CLI
+### Integration der Azure CLI
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -298,7 +298,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Verwaltete Identität
-Für in Azure gehostete Umgebungen:
+Für Azure-gehostete Umgebungen:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Beispiel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Erweiterte Konfiguration
 
@@ -441,7 +442,7 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Validierung der Konfiguration
+## 🔍 Konfigurationsvalidierung
 
 ### Konfiguration validieren
 ```bash
@@ -481,7 +482,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 Best Practices
 
-### 1. Umgebungsvariablen verwenden
+### 1. Verwenden Sie Umgebungsvariablen
 ```yaml
 # Good: Use environment variables
 database:
@@ -492,7 +493,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Konfigurationsdateien organisieren
+### 2. Organisieren Sie Konfigurationsdateien
 ```
 .azure/
 ├── config.json              # Global project config
@@ -535,8 +536,8 @@ Dokumentieren Sie Ihre Konfiguration in `CONFIG.md`:
 ## Nächste Schritte
 
 - [Ihr erstes Projekt](first-project.md) - Konfiguration in der Praxis anwenden
-- [Bereitstellungsleitfaden](../deployment/deployment-guide.md) - Konfiguration für die Bereitstellung nutzen
-- [Ressourcen bereitstellen](../deployment/provisioning.md) - Produktionsreife Konfigurationen
+- [Bereitstellungshandbuch](../deployment/deployment-guide.md) - Konfiguration für die Bereitstellung nutzen
+- [Ressourcenbereitstellung](../deployment/provisioning.md) - Produktionsreife Konfigurationen
 
 ## Referenzen
 
@@ -553,4 +554,4 @@ Dokumentieren Sie Ihre Konfiguration in `CONFIG.md`:
 ---
 
 **Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:24:44+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:27:08+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "vi"
 }
@@ -11,27 +11,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giới Thiệu
 
-Chào mừng bạn đến với dự án đầu tiên sử dụng Azure Developer CLI! Hướng dẫn thực hành toàn diện này sẽ cung cấp cho bạn quy trình chi tiết để tạo, triển khai và quản lý một ứng dụng full-stack trên Azure bằng azd. Bạn sẽ làm việc với một ứng dụng quản lý công việc thực tế bao gồm giao diện React, API backend Node.js, và cơ sở dữ liệu MongoDB.
+Chào mừng bạn đến với dự án Azure Developer CLI đầu tiên của mình! Hướng dẫn thực hành toàn diện này sẽ cung cấp cho bạn một lộ trình chi tiết để tạo, triển khai và quản lý một ứng dụng full-stack trên Azure bằng azd. Bạn sẽ làm việc với một ứng dụng todo thực tế bao gồm giao diện React, backend API Node.js và cơ sở dữ liệu MongoDB.
 
 ## Mục Tiêu Học Tập
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
 - Thành thạo quy trình khởi tạo dự án azd bằng các mẫu
 - Hiểu cấu trúc dự án và các tệp cấu hình của Azure Developer CLI
-- Thực hiện triển khai ứng dụng hoàn chỉnh lên Azure với việc cung cấp hạ tầng
-- Áp dụng chiến lược cập nhật và triển khai lại ứng dụng
+- Thực hiện triển khai ứng dụng hoàn chỉnh lên Azure cùng với việc cung cấp hạ tầng
+- Áp dụng các chiến lược cập nhật và triển khai lại ứng dụng
 - Quản lý nhiều môi trường cho phát triển và thử nghiệm
 - Áp dụng các thực hành dọn dẹp tài nguyên và quản lý chi phí
 
 ## Kết Quả Học Tập
 
-Sau khi hoàn thành, bạn sẽ có khả năng:
-- Tự khởi tạo và cấu hình dự án azd từ các mẫu
+Sau khi hoàn thành, bạn sẽ có thể:
+- Tự khởi tạo và cấu hình các dự án azd từ mẫu
 - Điều hướng và chỉnh sửa cấu trúc dự án azd một cách hiệu quả
-- Triển khai ứng dụng full-stack lên Azure chỉ với một lệnh
+- Triển khai các ứng dụng full-stack lên Azure chỉ với một lệnh
 - Khắc phục các vấn đề triển khai phổ biến và lỗi xác thực
 - Quản lý nhiều môi trường Azure cho các giai đoạn triển khai khác nhau
-- Áp dụng quy trình triển khai liên tục cho các bản cập nhật ứng dụng
+- Thực hiện các quy trình triển khai liên tục để cập nhật ứng dụng
 
 ## Bắt Đầu
 
@@ -42,21 +42,25 @@ Sau khi hoàn thành, bạn sẽ có khả năng:
 - ✅ Node.js 16+ (cho hướng dẫn này)
 - ✅ Visual Studio Code (khuyến nghị)
 
-### Xác Minh Thiết Lập
+### Xác Minh Cài Đặt
 ```bash
 # Check azd installation
 azd version
+```
+### Xác Minh Xác Thực Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Kiểm Tra Phiên Bản Node.js
+```bash
 node --version
 ```
 
-## Bước 1: Chọn và Khởi Tạo Mẫu
+## Bước 1: Chọn và Khởi Tạo Một Mẫu
 
-Hãy bắt đầu với một mẫu ứng dụng quản lý công việc phổ biến bao gồm giao diện React và API backend Node.js.
+Hãy bắt đầu với một mẫu ứng dụng todo phổ biến bao gồm giao diện React và backend API Node.js.
 
 ```bash
 # Browse available templates
@@ -73,11 +77,11 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### Điều Gì Vừa Xảy Ra?
-- Tải xuống mã mẫu vào thư mục cục bộ của bạn
-- Tạo tệp `azure.yaml` với các định nghĩa dịch vụ
-- Thiết lập mã hạ tầng trong thư mục `infra/`
-- Tạo cấu hình môi trường
+### Điều Gì Đã Xảy Ra?
+- Đã tải mã mẫu về thư mục cục bộ của bạn
+- Đã tạo tệp `azure.yaml` với các định nghĩa dịch vụ
+- Đã thiết lập mã hạ tầng trong thư mục `infra/`
+- Đã tạo cấu hình môi trường
 
 ## Bước 2: Khám Phá Cấu Trúc Dự Án
 
@@ -151,15 +155,14 @@ Thực hiện một thay đổi đơn giản:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
 ## Bước 4: Triển Khai Lên Azure
 
-Bây giờ là phần thú vị - triển khai mọi thứ lên Azure!
+Bây giờ đến phần thú vị - triển khai mọi thứ lên Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -172,12 +175,12 @@ azd up
 # 4. Display the application URL
 ```
 
-### Điều Gì Xảy Ra Trong Quá Trình Triển Khai?
+### Điều Gì Đang Xảy Ra Trong Quá Trình Triển Khai?
 
 Lệnh `azd up` thực hiện các bước sau:
-1. **Cung Cấp** (`azd provision`) - Tạo tài nguyên Azure
-2. **Đóng Gói** - Xây dựng mã ứng dụng của bạn
-3. **Triển Khai** (`azd deploy`) - Triển khai mã lên tài nguyên Azure
+1. **Provision** (`azd provision`) - Tạo tài nguyên Azure
+2. **Package** - Xây dựng mã ứng dụng của bạn
+3. **Deploy** (`azd deploy`) - Triển khai mã lên các tài nguyên Azure
 
 ### Kết Quả Dự Kiến
 ```
@@ -194,7 +197,7 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Bước 5: Kiểm Tra Ứng Dụng Của Bạn
 
-### Truy Cập Ứng Dụng
+### Truy Cập Ứng Dụng Của Bạn
 Nhấp vào URL được cung cấp trong kết quả triển khai, hoặc lấy nó bất kỳ lúc nào:
 ```bash
 # Get application endpoints
@@ -204,10 +207,10 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Kiểm Tra Ứng Dụng Quản Lý Công Việc
-1. **Thêm một công việc** - Nhấp vào "Add Todo" và nhập một nhiệm vụ
-2. **Đánh dấu hoàn thành** - Tích vào các mục đã hoàn thành
-3. **Xóa mục** - Loại bỏ các công việc không cần thiết
+### Kiểm Tra Ứng Dụng Todo
+1. **Thêm một mục todo** - Nhấp "Add Todo" và nhập một nhiệm vụ
+2. **Đánh dấu hoàn thành** - Đánh dấu các mục đã hoàn thành
+3. **Xóa mục** - Xóa các mục không còn cần thiết
 
 ### Giám Sát Ứng Dụng Của Bạn
 ```bash
@@ -220,7 +223,7 @@ azd logs
 
 ## Bước 6: Thực Hiện Thay Đổi và Triển Khai Lại
 
-Hãy thực hiện một thay đổi và xem cách cập nhật dễ dàng:
+Hãy thực hiện một thay đổi và xem việc cập nhật dễ dàng như thế nào:
 
 ### Chỉnh Sửa API
 ```bash
@@ -228,13 +231,13 @@ Hãy thực hiện một thay đổi và xem cách cập nhật dễ dàng:
 code src/api/src/routes/lists.js
 ```
 
-Thêm một tiêu đề phản hồi tùy chỉnh:
+Thêm một header phản hồi tùy chỉnh:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Chỉ Triển Khai Thay Đổi Mã
+### Chỉ Triển Khai Các Thay Đổi Mã
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -244,7 +247,7 @@ azd deploy
 
 ## Bước 7: Quản Lý Nhiều Môi Trường
 
-Tạo một môi trường thử nghiệm để kiểm tra thay đổi trước khi đưa vào sản xuất:
+Tạo một môi trường thử nghiệm để kiểm tra các thay đổi trước khi đưa vào sản xuất:
 
 ```bash
 # Create a new staging environment
@@ -297,7 +300,7 @@ Chúc mừng! Bạn đã thành công:
 - Quản lý nhiều môi trường
 - Dọn dẹp tài nguyên
 
-## Khắc Phục Các Vấn Đề Phổ Biến
+## Khắc Phục Các Vấn Đề Thường Gặp
 
 ### Lỗi Xác Thực
 ```bash
@@ -332,13 +335,13 @@ netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## Bước Tiếp Theo
+## Các Bước Tiếp Theo
 
 Bây giờ bạn đã hoàn thành dự án đầu tiên, hãy khám phá các chủ đề nâng cao sau:
 
 ### 1. Tùy Chỉnh Hạ Tầng
 - [Hạ Tầng dưới dạng Mã](../deployment/provisioning.md)
-- [Thêm cơ sở dữ liệu, lưu trữ, và các dịch vụ khác](../deployment/provisioning.md#adding-services)
+- [Thêm cơ sở dữ liệu, lưu trữ và các dịch vụ khác](../deployment/provisioning.md#adding-services)
 
 ### 2. Thiết Lập CI/CD
 - [Tích Hợp GitHub Actions](../deployment/cicd-integration.md)
@@ -367,7 +370,7 @@ azd init --template todo-java-mongo
 ### Tài Liệu Học Tập
 - [Tài Liệu Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Trung Tâm Kiến Trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Khung Kiến Trúc Tốt Nhất Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Khung Kiến Trúc Tốt Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Cộng Đồng & Hỗ Trợ
 - [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn tham khảo chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

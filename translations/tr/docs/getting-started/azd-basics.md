@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T19:17:56+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:14:05+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "tr"
 }
@@ -11,43 +11,43 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giriş
 
-Bu ders, sizi Azure Developer CLI (azd) ile tanıştırıyor. Azd, yerel geliştirmeden Azure'a dağıtıma kadar olan yolculuğunuzu hızlandıran güçlü bir komut satırı aracıdır. Temel kavramları, ana özellikleri öğrenecek ve azd'nin bulut tabanlı uygulama dağıtımını nasıl basitleştirdiğini anlayacaksınız.
+Bu ders, Azure Developer CLI'yi (azd) tanıtarak, yerel geliştirmeden Azure'a dağıtıma kadar olan süreci hızlandıran güçlü bir komut satırı aracını keşfetmenizi sağlar. Temel kavramları, ana özellikleri öğrenecek ve azd'nin bulut tabanlı uygulama dağıtımını nasıl kolaylaştırdığını anlayacaksınız.
 
 ## Öğrenme Hedefleri
 
 Bu dersin sonunda:
-- Azure Developer CLI'nin ne olduğunu ve ana amacını anlayacaksınız
+- Azure Developer CLI'nin ne olduğunu ve temel amacını anlayacaksınız
 - Şablonlar, ortamlar ve hizmetler gibi temel kavramları öğreneceksiniz
 - Şablon tabanlı geliştirme ve Kod Olarak Altyapı gibi ana özellikleri keşfedeceksiniz
-- Azd proje yapısını ve iş akışını anlayacaksınız
-- Geliştirme ortamınız için azd'yi kurmaya ve yapılandırmaya hazır olacaksınız
+- azd proje yapısını ve iş akışını anlayacaksınız
+- azd'yi geliştirme ortamınıza kurmaya ve yapılandırmaya hazır olacaksınız
 
 ## Öğrenme Çıktıları
 
 Bu dersi tamamladıktan sonra:
-- Azd'nin modern bulut geliştirme iş akışlarındaki rolünü açıklayabileceksiniz
-- Azd proje yapısının bileşenlerini tanımlayabileceksiniz
-- Şablonların, ortamların ve hizmetlerin nasıl birlikte çalıştığını açıklayabileceksiniz
-- Azd ile Kod Olarak Altyapının faydalarını anlayabileceksiniz
+- azd'nin modern bulut geliştirme iş akışlarındaki rolünü açıklayabileceksiniz
+- azd proje yapısının bileşenlerini tanımlayabileceksiniz
+- Şablonların, ortamların ve hizmetlerin nasıl birlikte çalıştığını tarif edebileceksiniz
+- azd ile Kod Olarak Altyapı'nın faydalarını anlayabileceksiniz
 - Farklı azd komutlarını ve amaçlarını tanıyabileceksiniz
 
 ## Azure Developer CLI (azd) Nedir?
 
-Azure Developer CLI (azd), yerel geliştirmeden Azure'a dağıtıma kadar olan yolculuğunuzu hızlandırmak için tasarlanmış bir komut satırı aracıdır. Bulut tabanlı uygulamaları Azure üzerinde oluşturma, dağıtma ve yönetme sürecini basitleştirir.
+Azure Developer CLI (azd), yerel geliştirmeden Azure'a dağıtıma kadar olan süreci hızlandırmak için tasarlanmış bir komut satırı aracıdır. Azure üzerinde bulut tabanlı uygulamalar oluşturma, dağıtma ve yönetme sürecini basitleştirir.
 
 ## Temel Kavramlar
 
 ### Şablonlar
 Şablonlar, azd'nin temelini oluşturur. Şunları içerir:
 - **Uygulama kodu** - Kaynak kodunuz ve bağımlılıklarınız
-- **Altyapı tanımları** - Azure kaynakları Bicep veya Terraform ile tanımlanır
+- **Altyapı tanımları** - Bicep veya Terraform ile tanımlanmış Azure kaynakları
 - **Yapılandırma dosyaları** - Ayarlar ve ortam değişkenleri
 - **Dağıtım betikleri** - Otomatik dağıtım iş akışları
 
 ### Ortamlar
 Ortamlar, farklı dağıtım hedeflerini temsil eder:
 - **Geliştirme** - Test ve geliştirme için
-- **Staging** - Ön üretim ortamı
+- **Staging** - Üretim öncesi ortam
 - **Üretim** - Canlı üretim ortamı
 
 Her ortam kendi:
@@ -57,7 +57,7 @@ Her ortam kendi:
 
 ### Hizmetler
 Hizmetler, uygulamanızın yapı taşlarıdır:
-- **Frontend** - Web uygulamaları, SPAlar
+- **Frontend** - Web uygulamaları, tek sayfa uygulamaları (SPA)
 - **Backend** - API'ler, mikro hizmetler
 - **Veritabanı** - Veri depolama çözümleri
 - **Depolama** - Dosya ve blob depolama
@@ -74,16 +74,16 @@ azd init --template <template-name>
 ```
 
 ### 2. Kod Olarak Altyapı
-- **Bicep** - Azure'ın alanına özgü dili
+- **Bicep** - Azure'un alanına özel dili
 - **Terraform** - Çoklu bulut altyapı aracı
 - **ARM Şablonları** - Azure Resource Manager şablonları
 
 ### 3. Entegre İş Akışları
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,10 +185,33 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-### Birden Fazla Ortamı Yönetme
+## `azd down --force --purge` Komutunu Anlamak
+`azd down --force --purge` komutu, azd ortamınızı ve ilişkili tüm kaynakları tamamen kaldırmanın güçlü bir yoludur. İşte her bir bayrağın işlevi:
+```
+--force
+```
+- Onay istemlerini atlar.
+- Manuel girişin mümkün olmadığı otomasyon veya betiklerde kullanışlıdır.
+- CLI tutarsızlıklar algılasa bile kaldırma işleminin kesintisiz devam etmesini sağlar.
+
+```
+--purge
+```
+**Tüm ilişkili meta verileri** siler, bunlar şunları içerir:
+- Ortam durumu
+- Yerel `.azure` klasörü
+- Önbelleğe alınmış dağıtım bilgileri
+- azd'nin önceki dağıtımları "hatırlamasını" engeller, bu da kaynak grubu uyuşmazlıkları veya eski kayıt defteri referansları gibi sorunlara neden olabilir.
+
+### Neden İkisini Birlikte Kullanmalı?
+`azd up` ile kalan durum veya kısmi dağıtımlar nedeniyle sorun yaşadığınızda, bu kombinasyon **temiz bir başlangıç** sağlar.
+
+Özellikle Azure portalında manuel kaynak silme işlemlerinden sonra veya şablonlar, ortamlar ya da kaynak grubu adlandırma kuralları arasında geçiş yaparken faydalıdır.
+
+### Birden Fazla Ortamı Yönetmek
 ```bash
 # Create staging environment
 azd env new staging
@@ -246,7 +269,7 @@ azd init --template template1
 ### 3. Ortam İzolasyonu
 - Geliştirme/staging/üretim için ayrı ortamlar kullanın
 - Yerel makineden doğrudan üretime dağıtım yapmayın
-- Üretim dağıtımları için CI/CD hatlarını kullanın
+- Üretim dağıtımları için CI/CD boru hatlarını kullanın
 
 ### 4. Yapılandırma Yönetimi
 - Hassas veriler için ortam değişkenlerini kullanın
@@ -255,19 +278,19 @@ azd init --template template1
 
 ## Öğrenme İlerlemesi
 
-### Başlangıç (Hafta 1-2)
-1. Azd'yi kurun ve kimlik doğrulaması yapın
+### Başlangıç (1-2. Hafta)
+1. azd'yi kurun ve kimlik doğrulaması yapın
 2. Basit bir şablon dağıtın
 3. Proje yapısını anlayın
 4. Temel komutları öğrenin (up, down, deploy)
 
-### Orta Seviye (Hafta 3-4)
+### Orta Seviye (3-4. Hafta)
 1. Şablonları özelleştirin
 2. Birden fazla ortam yönetin
 3. Altyapı kodunu anlayın
-4. CI/CD hatlarını kurun
+4. CI/CD boru hatlarını kurun
 
-### İleri Seviye (Hafta 5+)
+### İleri Seviye (5+ Hafta)
 1. Özel şablonlar oluşturun
 2. Gelişmiş altyapı desenleri
 3. Çok bölgeli dağıtımlar
@@ -275,7 +298,7 @@ azd init --template template1
 
 ## Sonraki Adımlar
 
-- [Kurulum ve Yapılandırma](installation.md) - Azd'yi kurun ve yapılandırın
+- [Kurulum ve Yapılandırma](installation.md) - azd'yi kurun ve yapılandırın
 - [İlk Projeniz](first-project.md) - Uygulamalı eğitim
 - [Yapılandırma Kılavuzu](configuration.md) - Gelişmiş yapılandırma seçenekleri
 
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T16:51:14+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T12:58:34+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ja"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLIを最適な開発およびデプロイワークフローに設定する方法を説明します。設定の階層構造、環境管理、認証方法、効率的かつ安全なAzureデプロイを可能にする高度な設定パターンについて学びます。
+この包括的なガイドでは、Azure Developer CLIを最適な開発およびデプロイワークフローに設定する方法を解説します。設定の階層構造、環境管理、認証方法、効率的かつ安全なAzureデプロイを可能にする高度な設定パターンについて学びます。
 
 ## 学習目標
 
@@ -31,7 +31,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 設定に関連する問題をトラブルシュートする
 - 特定の組織要件に合わせてazdの動作をカスタマイズする
 
-この包括的なガイドでは、Azure Developer CLIを最適な開発およびデプロイワークフローに設定する方法を説明します。
+この包括的なガイドでは、Azure Developer CLIを最適な開発およびデプロイワークフローに設定する方法を解説します。
 
 ## 設定階層
 
@@ -217,7 +217,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### 環境設定
-各環境には独自の設定が`.azure/<env-name>/config.json`に保存されます:
+各環境には`.azure/<env-name>/config.json`に独自の設定があります:
 
 ```json
 {
@@ -272,7 +272,7 @@ LOG_LEVEL=info
 
 ## 🔐 認証設定
 
-### Azure CLI統合
+### Azure CLIの統合
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+例 `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 高度な設定
 
@@ -553,4 +554,4 @@ database:
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は一切の責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。

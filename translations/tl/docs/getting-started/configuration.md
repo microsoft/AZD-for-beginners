@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:33:46+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:30:54+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tl"
 }
@@ -11,27 +11,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na workflows sa pag-develop at pag-deploy. Malalaman mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng environment, mga pamamaraan ng authentication, at mga advanced na pattern ng konfigurasyon na nagbibigay-daan sa mas epektibo at ligtas na Azure deployments.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa pinakamainam na daloy ng pag-develop at pag-deploy. Malalaman mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng mga environment, mga paraan ng authentication, at mga advanced na pattern ng konfigurasyon na nagbibigay-daan sa mahusay at ligtas na Azure deployments.
 
-## Mga Layunin sa Pag-aaral
+## Mga Layunin sa Pagkatuto
 
 Sa pagtatapos ng araling ito, ikaw ay:
-- Magiging bihasa sa hierarchy ng konfigurasyon ng azd at mauunawaan kung paano inuuna ang mga settings
-- Epektibong makakapag-configure ng global at project-specific na settings
+- Magiging bihasa sa hierarchy ng konfigurasyon ng azd at mauunawaan kung paano inuuna ang mga setting
+- Epektibong makakapag-configure ng global at project-specific na mga setting
 - Makakapamahala ng maraming environment na may iba't ibang konfigurasyon
-- Makakapagpatupad ng ligtas na authentication at authorization patterns
-- Mauunawaan ang mga advanced na pattern ng konfigurasyon para sa mas kumplikadong mga sitwasyon
+- Makakapagpatupad ng ligtas na mga pattern ng authentication at authorization
+- Mauunawaan ang mga advanced na pattern ng konfigurasyon para sa masalimuot na mga sitwasyon
 
-## Mga Resulta ng Pag-aaral
+## Mga Resulta ng Pagkatuto
 
-Pagkatapos makumpleto ang araling ito, magagawa mo ang sumusunod:
-- I-configure ang azd para sa optimal na workflows sa pag-develop
-- Mag-set up at mag-manage ng maraming deployment environments
+Pagkatapos makumpleto ang araling ito, magagawa mong:
+- I-configure ang azd para sa pinakamainam na daloy ng pag-develop
+- Mag-set up at mag-manage ng maraming deployment environment
 - Magpatupad ng ligtas na mga kasanayan sa pamamahala ng konfigurasyon
 - Mag-troubleshoot ng mga isyu na may kaugnayan sa konfigurasyon
-- I-customize ang behavior ng azd para sa mga partikular na pangangailangan ng organisasyon
+- I-customize ang pag-uugali ng azd para sa mga partikular na pangangailangan ng organisasyon
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na workflows sa pag-develop at pag-deploy.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa pinakamainam na daloy ng pag-develop at pag-deploy.
 
 ## Hierarchy ng Konfigurasyon
 
@@ -80,8 +80,8 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 
 ## 🏗️ Konfigurasyon ng Proyekto
 
-### Istruktura ng azure.yaml
-Ang `azure.yaml` file ang sentro ng iyong azd project:
+### Estruktura ng azure.yaml
+Ang `azure.yaml` file ang puso ng iyong azd project:
 
 ```yaml
 # Minimum configuration
@@ -178,7 +178,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Mga Setting na Pangwika
+#### Mga Setting na Espesipiko sa Wika
 ```yaml
 services:
   node-app:
@@ -204,7 +204,7 @@ services:
 
 ## 🌟 Pamamahala ng Environment
 
-### Paglikha ng Environment
+### Paglikha ng mga Environment
 ```bash
 # Create a new environment
 azd env new development
@@ -305,10 +305,10 @@ azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Konfigurasyon ng Infrastructure
+## 🏗️ Konfigurasyon ng Imprastraktura
 
 ### Mga Parameter ng Bicep
-I-configure ang mga parameter ng infrastructure sa `infra/main.parameters.json`:
+I-configure ang mga parameter ng imprastraktura sa `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Halimbawa ng `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Advanced na Konfigurasyon
 
-### Custom na Pagpapangalan ng Resource
+### Custom na Pangalan ng Resource
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -412,7 +413,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Mga Konfigurasyon na Specific sa Environment
+## 🎯 Mga Konfigurasyon na Espesipiko sa Environment
 
 ### Development Environment
 ```bash
@@ -443,7 +444,7 @@ ENABLE_SECURITY_HEADERS=true
 
 ## 🔍 Pag-validate ng Konfigurasyon
 
-### Pag-validate ng Konfigurasyon
+### I-validate ang Konfigurasyon
 ```bash
 # Check configuration syntax
 azd config validate
@@ -479,7 +480,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Mga Best Practices
+## 🎓 Mga Pinakamahusay na Kasanayan
 
 ### 1. Gumamit ng Environment Variables
 ```yaml
@@ -536,7 +537,7 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 
 - [Ang Iyong Unang Proyekto](first-project.md) - I-apply ang konfigurasyon sa praktika
 - [Gabay sa Deployment](../deployment/deployment-guide.md) - Gamitin ang konfigurasyon para sa deployment
-- [Pag-provision ng Resources](../deployment/provisioning.md) - Mga konfigurasyon na handa para sa produksyon
+- [Pagpo-provision ng mga Resource](../deployment/provisioning.md) - Mga konfigurasyong handa para sa produksyon
 
 ## Mga Sanggunian
 
@@ -553,4 +554,4 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

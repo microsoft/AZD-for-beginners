@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:31:17+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:19:04+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sv"
 }
@@ -16,15 +16,15 @@ Den här omfattande guiden täcker alla aspekter av att konfigurera Azure Develo
 ## Lärandemål
 
 I slutet av denna lektion kommer du att:
-- Behärska azd-konfigurationshierarkin och förstå hur inställningar prioriteras
+- Behärska azd:s konfigurationshierarki och förstå hur inställningar prioriteras
 - Konfigurera globala och projekt-specifika inställningar effektivt
 - Hantera flera miljöer med olika konfigurationer
-- Implementera säkra autentiserings- och auktorisationsmönster
+- Implementera säkra autentiserings- och auktoriseringsmönster
 - Förstå avancerade konfigurationsmönster för komplexa scenarier
 
 ## Läranderesultat
 
-Efter att ha avslutat denna lektion kommer du att kunna:
+Efter att ha slutfört denna lektion kommer du att kunna:
 - Konfigurera azd för optimala utvecklingsarbetsflöden
 - Ställa in och hantera flera distributionsmiljöer
 - Implementera säkra konfigurationshanteringsmetoder
@@ -80,8 +80,8 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 
 ## 🏗️ Projektkonfiguration
 
-### azure.yaml-struktur
-Filen `azure.yaml` är kärnan i ditt azd-projekt:
+### Strukturen i azure.yaml
+Filen `azure.yaml` är hjärtat i ditt azd-projekt:
 
 ```yaml
 # Minimum configuration
@@ -157,7 +157,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Tjänstekonfigurationsalternativ
+### Tjänstkonfigurationsalternativ
 
 #### Värdtyper
 ```yaml
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### Miljömallar
-Skapa `.azure/env.template` för konsekvent miljöinställning:
+Skapa `.azure/env.template` för en konsekvent miljöinställning:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -284,7 +284,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Autentisering med tjänstehuvud
+### Autentisering med Service Principal
 För CI/CD-pipelines:
 ```bash
 # Set environment variables
@@ -298,7 +298,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Hanterad identitet
-För Azure-värdmiljöer:
+För Azure-värdbaserade miljöer:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Exempel på `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Avancerad konfiguration
 
-### Anpassad resursnamngivning
+### Anpassade resursnamn
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -423,7 +424,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Stagingmiljö
+### Staging-miljö
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -441,7 +442,7 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Konfigurationsvalidering
+## 🔍 Validering av konfiguration
 
 ### Validera konfiguration
 ```bash
@@ -508,7 +509,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versionshantering
+### 3. Versionshanteringsöverväganden
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -536,21 +537,21 @@ Dokumentera din konfiguration i `CONFIG.md`:
 
 - [Ditt första projekt](first-project.md) - Tillämpa konfiguration i praktiken
 - [Distributionsguide](../deployment/deployment-guide.md) - Använd konfiguration för distribution
-- [Resursförsörjning](../deployment/provisioning.md) - Produktionsklara konfigurationer
+- [Provisionering av resurser](../deployment/provisioning.md) - Produktionsklara konfigurationer
 
 ## Referenser
 
-- [azd-konfigurationsreferens](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml-schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [azd Konfigurationsreferens](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Miljövariabler](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
 **Navigering**
-- **Föregående lektion**: [Installation & Setup](installation.md)
+- **Föregående lektion**: [Installation och inställning](installation.md)
 - **Nästa lektion**: [Ditt första projekt](first-project.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

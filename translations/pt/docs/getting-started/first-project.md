@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T16:43:59+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:07:30+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "pt"
 }
@@ -33,7 +33,7 @@ Após a conclusão, será capaz de:
 - Gerir múltiplos ambientes Azure para diferentes etapas de implementação
 - Implementar fluxos de trabalho de implantação contínua para atualizações de aplicações
 
-## Começar
+## Primeiros Passos
 
 ### Lista de Pré-requisitos
 - ✅ Azure Developer CLI instalado ([Guia de Instalação](installation.md))
@@ -46,11 +46,15 @@ Após a conclusão, será capaz de:
 ```bash
 # Check azd installation
 azd version
+```
+### Verificar a Autenticação no Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Verificar a Versão do Node.js
+```bash
 node --version
 ```
 
@@ -76,7 +80,7 @@ azd init --template todo-nodejs-mongo
 ### O Que Aconteceu?
 - O código do template foi descarregado para o seu diretório local
 - Foi criado um ficheiro `azure.yaml` com definições de serviços
-- Foi configurado o código de infraestrutura no diretório `infra/`
+- O código de infraestrutura foi configurado no diretório `infra/`
 - Foi criada uma configuração de ambiente
 
 ## Passo 2: Explorar a Estrutura do Projeto
@@ -151,8 +155,7 @@ Faça uma alteração simples:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -176,10 +179,10 @@ azd up
 
 O comando `azd up` realiza os seguintes passos:
 1. **Provisionar** (`azd provision`) - Cria os recursos no Azure
-2. **Empacotar** - Constrói o código da sua aplicação
+2. **Empacotar** - Constrói o código da aplicação
 3. **Implementar** (`azd deploy`) - Implementa o código nos recursos do Azure
 
-### Saída Esperada
+### Resultado Esperado
 ```
 Packaging services (azd package)
 

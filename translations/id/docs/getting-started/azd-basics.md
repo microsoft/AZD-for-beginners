@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T21:36:55+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:28:57+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "id"
 }
@@ -38,7 +38,7 @@ Azure Developer CLI (azd) adalah alat baris perintah yang dirancang untuk memper
 ## Konsep Inti
 
 ### Template
-Template adalah dasar dari azd. Template berisi:
+Template adalah dasar dari azd. Template mencakup:
 - **Kode aplikasi** - Kode sumber dan dependensi Anda
 - **Definisi infrastruktur** - Sumber daya Azure yang didefinisikan dalam Bicep atau Terraform
 - **File konfigurasi** - Pengaturan dan variabel lingkungan
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Alur Kerja Terintegrasi
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Memahami `azd down --force --purge`
+Perintah `azd down --force --purge` adalah cara yang ampuh untuk sepenuhnya menghentikan lingkungan azd Anda dan semua sumber daya terkait. Berikut adalah penjelasan tentang apa yang dilakukan setiap flag:
+```
+--force
+```
+- Melewati prompt konfirmasi.
+- Berguna untuk otomatisasi atau skrip di mana input manual tidak memungkinkan.
+- Memastikan penghentian berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidaksesuaian.
+
+```
+--purge
+```
+Menghapus **semua metadata terkait**, termasuk:
+Status lingkungan  
+Folder lokal `.azure`  
+Info penerapan yang di-cache  
+Mencegah azd "mengingat" penerapan sebelumnya, yang dapat menyebabkan masalah seperti grup sumber daya yang tidak cocok atau referensi registri yang usang.
+
+### Mengapa menggunakan keduanya?
+Ketika Anda mengalami masalah dengan `azd up` karena status yang tertinggal atau penerapan parsial, kombinasi ini memastikan **awal yang bersih**.
+
+Ini sangat berguna setelah penghapusan sumber daya manual di portal Azure atau saat beralih template, lingkungan, atau konvensi penamaan grup sumber daya.
 
 ### Mengelola Banyak Lingkungan
 ```bash
@@ -240,7 +263,7 @@ azd init --template template1
 
 ### 2. Manfaatkan Template
 - Mulai dengan template yang ada
-- Sesuaikan dengan kebutuhan Anda
+- Sesuaikan sesuai kebutuhan Anda
 - Buat template yang dapat digunakan kembali untuk organisasi Anda
 
 ### 3. Isolasi Lingkungan
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa terjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T19:14:02+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:13:39+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tr"
 }
@@ -11,27 +11,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI'nin en iyi geliştirme ve dağıtım iş akışları için nasıl yapılandırılacağını ele alır. Yapılandırma hiyerarşisi, ortam yönetimi, kimlik doğrulama yöntemleri ve verimli ve güvenli Azure dağıtımları sağlayan gelişmiş yapılandırma modelleri hakkında bilgi edineceksiniz.
+Bu kapsamlı kılavuz, Azure Developer CLI'nin (azd) geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasına dair tüm yönleri kapsar. Yapılandırma hiyerarşisini, ortam yönetimini, kimlik doğrulama yöntemlerini ve verimli ve güvenli Azure dağıtımları için gelişmiş yapılandırma desenlerini öğreneceksiniz.
 
 ## Öğrenme Hedefleri
 
-Bu dersin sonunda:
+Bu dersi tamamladığınızda:
 - azd yapılandırma hiyerarşisini öğrenecek ve ayarların nasıl önceliklendirildiğini anlayacaksınız
 - Küresel ve proje bazlı ayarları etkili bir şekilde yapılandırabileceksiniz
 - Farklı yapılandırmalara sahip birden fazla ortamı yönetebileceksiniz
-- Güvenli kimlik doğrulama ve yetkilendirme modellerini uygulayabileceksiniz
-- Karmaşık senaryolar için gelişmiş yapılandırma modellerini anlayacaksınız
+- Güvenli kimlik doğrulama ve yetkilendirme desenlerini uygulayabileceksiniz
+- Karmaşık senaryolar için gelişmiş yapılandırma desenlerini anlayabileceksiniz
 
 ## Öğrenme Çıktıları
 
 Bu dersi tamamladıktan sonra:
-- azd'yi en iyi geliştirme iş akışları için yapılandırabileceksiniz
+- azd'yi geliştirme iş akışları için en iyi şekilde yapılandırabileceksiniz
 - Birden fazla dağıtım ortamını kurup yönetebileceksiniz
 - Güvenli yapılandırma yönetimi uygulamalarını hayata geçirebileceksiniz
 - Yapılandırma ile ilgili sorunları giderebileceksiniz
 - azd davranışını belirli kurumsal gereksinimlere göre özelleştirebileceksiniz
 
-Bu kapsamlı kılavuz, Azure Developer CLI'nin en iyi geliştirme ve dağıtım iş akışları için nasıl yapılandırılacağını ele alır.
+Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasına dair tüm yönleri kapsar.
 
 ## Yapılandırma Hiyerarşisi
 
@@ -81,7 +81,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Proje Yapılandırması
 
 ### azure.yaml Yapısı
-`azure.yaml` dosyası, azd projenizin merkezidir:
+`azure.yaml` dosyası, azd projenizin kalbidir:
 
 ```yaml
 # Minimum configuration
@@ -159,7 +159,7 @@ pipeline:
 
 ### Hizmet Yapılandırma Seçenekleri
 
-#### Host Türleri
+#### Barındırma Türleri
 ```yaml
 services:
   web-static:
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### Ortam Şablonları
-Tutarlı ortam kurulumları için `.azure/env.template` oluşturun:
+Tutarlı ortam kurulumu için `.azure/env.template` oluşturun:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -284,7 +284,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Hizmet Prensibi Kimlik Doğrulama
+### Hizmet Prensibi Kimlik Doğrulaması
 CI/CD hatları için:
 ```bash
 # Set environment variables
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Örnek `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Gelişmiş Yapılandırma
 
@@ -455,8 +456,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Yapılandırma Betikleri
-Doğrulama betiklerini `scripts/` içinde oluşturun:
+### Yapılandırma Komut Dosyaları
+`scripts/` içinde doğrulama komut dosyaları oluşturun:
 
 ```bash
 #!/bin/bash
@@ -534,9 +535,9 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 
 ## Sonraki Adımlar
 
-- [İlk Projeniz](first-project.md) - Yapılandırmayı uygulamada kullanın
+- [İlk Projeniz](first-project.md) - Yapılandırmayı pratikte uygulayın
 - [Dağıtım Kılavuzu](../deployment/deployment-guide.md) - Yapılandırmayı dağıtım için kullanın
-- [Kaynakları Sağlama](../deployment/provisioning.md) - Üretime hazır yapılandırmalar
+- [Kaynak Sağlama](../deployment/provisioning.md) - Üretime hazır yapılandırmalar
 
 ## Referanslar
 
@@ -546,11 +547,11 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 
 ---
 
-**Navigasyon**
+**Gezinme**
 - **Önceki Ders**: [Kurulum ve Ayar](installation.md)
 - **Sonraki Ders**: [İlk Projeniz](first-project.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

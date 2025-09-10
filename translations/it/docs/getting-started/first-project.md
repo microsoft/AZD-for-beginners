@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T19:06:12+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:09:39+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "it"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduzione
 
-Benvenuto al tuo primo progetto con Azure Developer CLI! Questo tutorial pratico e completo ti guiderà passo dopo passo nella creazione, distribuzione e gestione di un'applicazione full-stack su Azure utilizzando azd. Lavorerai con una vera applicazione todo che include un frontend React, un backend API Node.js e un database MongoDB.
+Benvenuto al tuo primo progetto con Azure Developer CLI! Questo tutorial pratico completo ti guiderà passo dopo passo nella creazione, distribuzione e gestione di un'applicazione full-stack su Azure utilizzando azd. Lavorerai con una vera applicazione todo che include un frontend React, un backend API Node.js e un database MongoDB.
 
 ## Obiettivi di apprendimento
 
@@ -26,7 +26,7 @@ Completando questo tutorial, sarai in grado di:
 ## Risultati di apprendimento
 
 Al termine, sarai in grado di:
-- Inizializzare e configurare autonomamente progetti azd dai template
+- Inizializzare e configurare progetti azd dai template in modo autonomo
 - Navigare e modificare efficacemente le strutture dei progetti azd
 - Distribuire applicazioni full-stack su Azure con comandi singoli
 - Risolvere problemi comuni di distribuzione e autenticazione
@@ -46,15 +46,19 @@ Al termine, sarai in grado di:
 ```bash
 # Check azd installation
 azd version
+```
+### Verifica dell'autenticazione su Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Controlla la versione di Node.js
+```bash
 node --version
 ```
 
-## Passo 1: Scegliere e inizializzare un template
+## Passo 1: Scegli e inizializza un template
 
 Iniziamo con un popolare template di applicazione todo che include un frontend React e un backend API Node.js.
 
@@ -79,7 +83,7 @@ azd init --template todo-nodejs-mongo
 - È stato configurato il codice dell'infrastruttura nella directory `infra/`
 - È stata creata una configurazione dell'ambiente
 
-## Passo 2: Esplorare la struttura del progetto
+## Passo 2: Esplora la struttura del progetto
 
 Esaminiamo cosa ha creato azd per noi:
 
@@ -131,11 +135,11 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## Passo 3: Personalizzare il progetto (opzionale)
+## Passo 3: Personalizza il tuo progetto (opzionale)
 
 Prima della distribuzione, puoi personalizzare l'applicazione:
 
-### Modificare il frontend
+### Modifica il frontend
 ```bash
 # Open the React app component
 code src/web/src/App.tsx
@@ -147,19 +151,18 @@ Fai una semplice modifica:
 <h1>My Awesome Todo App</h1>
 ```
 
-### Configurare le variabili d'ambiente
+### Configura le variabili d'ambiente
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
-## Passo 4: Distribuire su Azure
+## Passo 4: Distribuisci su Azure
 
-Ora arriva la parte emozionante: distribuiamo tutto su Azure!
+Ora arriva la parte emozionante: distribuisci tutto su Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -176,7 +179,7 @@ azd up
 
 Il comando `azd up` esegue questi passaggi:
 1. **Provisioning** (`azd provision`) - Crea le risorse Azure
-2. **Packaging** - Compila il codice dell'applicazione
+2. **Packaging** - Compila il codice della tua applicazione
 3. **Distribuzione** (`azd deploy`) - Distribuisce il codice alle risorse Azure
 
 ### Output previsto
@@ -192,9 +195,9 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Passo 5: Testare l'applicazione
+## Passo 5: Testa la tua applicazione
 
-### Accedere all'applicazione
+### Accedi alla tua applicazione
 Clicca sull'URL fornito nell'output della distribuzione, oppure recuperalo in qualsiasi momento:
 ```bash
 # Get application endpoints
@@ -204,12 +207,12 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Testare l'app Todo
-1. **Aggiungere un elemento todo** - Clicca su "Add Todo" e inserisci un'attività
-2. **Segnare come completato** - Spunta gli elementi completati
-3. **Eliminare elementi** - Rimuovi i todo che non ti servono più
+### Testa l'app Todo
+1. **Aggiungi un elemento todo** - Clicca su "Add Todo" e inserisci un'attività
+2. **Segna come completato** - Spunta gli elementi completati
+3. **Elimina elementi** - Rimuovi i todo che non ti servono più
 
-### Monitorare l'applicazione
+### Monitora la tua applicazione
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -218,11 +221,11 @@ azd monitor
 azd logs
 ```
 
-## Passo 6: Apportare modifiche e ridistribuire
+## Passo 6: Apporta modifiche e ridistribuisci
 
 Facciamo una modifica e vediamo quanto è facile aggiornare:
 
-### Modificare l'API
+### Modifica l'API
 ```bash
 # Edit the API code
 code src/api/src/routes/lists.js
@@ -234,7 +237,7 @@ Aggiungi un'intestazione di risposta personalizzata:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Distribuire solo le modifiche al codice
+### Distribuisci solo le modifiche al codice
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -242,7 +245,7 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## Passo 7: Gestire ambienti multipli
+## Passo 7: Gestisci ambienti multipli
 
 Crea un ambiente di staging per testare le modifiche prima della produzione:
 
@@ -271,9 +274,9 @@ azd env select staging
 azd show
 ```
 
-## Passo 8: Pulire le risorse
+## Passo 8: Pulisci le risorse
 
-Quando hai finito di sperimentare, pulisci per evitare costi continuativi:
+Quando hai finito di sperimentare, pulisci per evitare costi continui:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -336,11 +339,11 @@ netstat -an | grep :3100
 
 Ora che hai completato il tuo primo progetto, esplora questi argomenti avanzati:
 
-### 1. Personalizzare l'infrastruttura
+### 1. Personalizza l'infrastruttura
 - [Infrastructure as Code](../deployment/provisioning.md)
-- [Aggiungere database, storage e altri servizi](../deployment/provisioning.md#adding-services)
+- [Aggiungi database, storage e altri servizi](../deployment/provisioning.md#adding-services)
 
-### 2. Configurare CI/CD
+### 2. Configura CI/CD
 - [Integrazione con GitHub Actions](../deployment/cicd-integration.md)
 - [Pipeline di Azure DevOps](../deployment/cicd-integration.md#azure-devops)
 
@@ -349,7 +352,7 @@ Ora che hai completato il tuo primo progetto, esplora questi argomenti avanzati:
 - [Ottimizzazione delle prestazioni](../deployment/best-practices.md#performance)
 - [Monitoraggio e logging](../deployment/best-practices.md#monitoring)
 
-### 4. Esplorare altri template
+### 4. Esplora altri template
 ```bash
 # Browse templates by category
 azd template list --filter web
@@ -366,8 +369,8 @@ azd init --template todo-java-mongo
 
 ### Materiali di apprendimento
 - [Documentazione Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Centro di architettura Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Framework Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Community e supporto
 - [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un esperto umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.

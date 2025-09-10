@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-10T05:56:45+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T12:45:39+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "en"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-Welcome to your first Azure Developer CLI project! This step-by-step tutorial will guide you through creating, deploying, and managing a full-stack application on Azure using azd. You'll work with a real todo application featuring a React frontend, Node.js API backend, and MongoDB database.
+Welcome to your first Azure Developer CLI project! This step-by-step tutorial will guide you through creating, deploying, and managing a full-stack application on Azure using azd. You'll work on a real todo application featuring a React frontend, Node.js API backend, and MongoDB database.
 
 ## Learning Goals
 
@@ -21,7 +21,7 @@ By the end of this tutorial, you will:
 - Deploy a complete application to Azure, including infrastructure setup
 - Update and redeploy applications effectively
 - Manage multiple environments for development and staging
-- Apply best practices for resource cleanup and cost management
+- Practice resource cleanup and cost management
 
 ## Learning Outcomes
 
@@ -29,7 +29,7 @@ After completing this tutorial, you will be able to:
 - Independently initialize and configure azd projects using templates
 - Navigate and modify azd project structures with ease
 - Deploy full-stack applications to Azure with a single command
-- Troubleshoot common deployment and authentication issues
+- Resolve common deployment and authentication issues
 - Manage multiple Azure environments for different stages of deployment
 - Set up continuous deployment workflows for application updates
 
@@ -46,11 +46,15 @@ After completing this tutorial, you will be able to:
 ```bash
 # Check azd installation
 azd version
+```
+### Verify Azure authentication
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Check Node.js version
+```bash
 node --version
 ```
 
@@ -151,8 +155,7 @@ Make a simple change:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -220,7 +223,7 @@ azd logs
 
 ## Step 6: Make Changes and Redeploy
 
-Let’s make a change and see how easy it is to update:
+Make a change and see how easy it is to update:
 
 ### Modify the API
 ```bash
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

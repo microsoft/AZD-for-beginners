@@ -1,26 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-09T21:35:59+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:25:22+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "nl"
 }
 -->
-# AZD Basisprincipes - Begrijpen van Azure Developer CLI
+# AZD Basisprincipes - Azure Developer CLI Begrijpen
 
 ## Introductie
 
-Deze les introduceert je aan Azure Developer CLI (azd), een krachtige commandoregeltool die je reis van lokale ontwikkeling naar Azure-implementatie versnelt. Je leert de fundamentele concepten, kernfuncties en begrijpt hoe azd het implementeren van cloud-native applicaties vereenvoudigt.
+Deze les introduceert je aan Azure Developer CLI (azd), een krachtige opdrachtregeltool die je reis van lokale ontwikkeling naar Azure-implementatie versnelt. Je leert de fundamentele concepten, kernfunctionaliteiten en hoe azd het implementeren van cloud-native applicaties vereenvoudigt.
 
 ## Leerdoelen
 
 Aan het einde van deze les zul je:
 - Begrijpen wat Azure Developer CLI is en het primaire doel ervan
 - De kernconcepten van templates, omgevingen en services leren kennen
-- Belangrijke functies verkennen, waaronder template-gedreven ontwikkeling en Infrastructure as Code
+- Belangrijke functies verkennen, zoals template-gedreven ontwikkeling en Infrastructure as Code
 - Het azd-projectstructuur en workflow begrijpen
-- Klaar zijn om azd te installeren en configureren voor je ontwikkelomgeving
+- Klaar zijn om azd te installeren en configureren voor jouw ontwikkelomgeving
 
 ## Leerresultaten
 
@@ -33,7 +33,7 @@ Na het voltooien van deze les kun je:
 
 ## Wat is Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) is een commandoregeltool ontworpen om je reis van lokale ontwikkeling naar Azure-implementatie te versnellen. Het vereenvoudigt het proces van bouwen, implementeren en beheren van cloud-native applicaties op Azure.
+Azure Developer CLI (azd) is een opdrachtregeltool die is ontworpen om je reis van lokale ontwikkeling naar Azure-implementatie te versnellen. Het vereenvoudigt het proces van het bouwen, implementeren en beheren van cloud-native applicaties op Azure.
 
 ## Kernconcepten
 
@@ -51,7 +51,7 @@ Omgevingen vertegenwoordigen verschillende implementatiedoelen:
 - **Productie** - Live productieomgeving
 
 Elke omgeving onderhoudt zijn eigen:
-- Azure resourcegroep
+- Azure-resourcegroep
 - Configuratie-instellingen
 - Implementatiestatus
 
@@ -59,12 +59,12 @@ Elke omgeving onderhoudt zijn eigen:
 Services zijn de bouwstenen van je applicatie:
 - **Frontend** - Webapplicaties, SPAs
 - **Backend** - API's, microservices
-- **Database** - Datastoreoplossingen
-- **Opslag** - Bestand- en blobopslag
+- **Database** - Databasesystemen
+- **Opslag** - Bestands- en blobopslag
 
-## Belangrijke functies
+## Belangrijke Functies
 
-### 1. Template-gedreven ontwikkeling
+### 1. Template-gedreven Ontwikkeling
 ```bash
 # Browse available templates
 azd template list
@@ -78,12 +78,12 @@ azd init --template <template-name>
 - **Terraform** - Multi-cloud infrastructuurtool
 - **ARM Templates** - Azure Resource Manager templates
 
-### 3. Geïntegreerde workflows
+### 3. Geïntegreerde Workflows
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -157,9 +157,9 @@ Omgevingsspecifieke configuratie:
 }
 ```
 
-## 🎪 Veelvoorkomende workflows
+## 🎪 Veelvoorkomende Workflows
 
-### Een nieuw project starten
+### Een Nieuw Project Starten
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -185,10 +185,34 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-### Meerdere omgevingen beheren
+## Begrijpen van `azd down --force --purge`
+Het commando `azd down --force --purge` is een krachtige manier om je azd-omgeving en alle bijbehorende resources volledig af te breken. Hier is een overzicht van wat elke vlag doet:
+```
+--force
+```
+- Slaat bevestigingsprompts over.
+- Handig voor automatisering of scripting waar handmatige invoer niet mogelijk is.
+- Zorgt ervoor dat de afbraak zonder onderbreking doorgaat, zelfs als de CLI inconsistenties detecteert.
+
+```
+--purge
+```
+Verwijdert **alle bijbehorende metadata**, inclusief:
+- Omgevingsstatus
+- Lokale `.azure` map
+- Gecachte implementatie-informatie
+
+Voorkomt dat azd "herinnert" aan eerdere implementaties, wat problemen kan veroorzaken zoals niet-overeenkomende resourcegroepen of verouderde registerverwijzingen.
+
+### Waarom beide gebruiken?
+Wanneer je vastloopt met `azd up` door achtergebleven status of gedeeltelijke implementaties, zorgt deze combinatie voor een **schone lei**.
+
+Het is vooral nuttig na handmatige resourceverwijderingen in de Azure-portal of bij het wisselen van templates, omgevingen of naamgevingsconventies voor resourcegroepen.
+
+### Meerdere Omgevingen Beheren
 ```bash
 # Create staging environment
 azd env new staging
@@ -225,9 +249,9 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Best practices
+## Best Practices
 
-### 1. Gebruik betekenisvolle namen
+### 1. Gebruik Betekenisvolle Namen
 ```bash
 # Good
 azd env new production-east
@@ -238,14 +262,14 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Maak gebruik van templates
+### 2. Maak Gebruik van Templates
 - Begin met bestaande templates
-- Pas aan voor je behoeften
-- Maak herbruikbare templates voor je organisatie
+- Pas ze aan voor jouw behoeften
+- Maak herbruikbare templates voor jouw organisatie
 
-### 3. Isolatie van omgevingen
+### 3. Omgevingsisolatie
 - Gebruik aparte omgevingen voor ontwikkeling/staging/productie
-- Implementeer nooit direct naar productie vanaf je lokale machine
+- Implementeer nooit direct naar productie vanaf een lokale machine
 - Gebruik CI/CD-pijplijnen voor productie-implementaties
 
 ### 4. Configuratiebeheer
@@ -253,15 +277,15 @@ azd init --template template1
 - Houd configuratie in versiebeheer
 - Documenteer omgevingsspecifieke instellingen
 
-## Leerprogressie
+## Leertraject
 
 ### Beginner (Week 1-2)
-1. Installeer azd en authenticeer
+1. Installeer azd en log in
 2. Implementeer een eenvoudig template
 3. Begrijp de projectstructuur
 4. Leer basiscommando's (up, down, deploy)
 
-### Intermediate (Week 3-4)
+### Gemiddeld (Week 3-4)
 1. Pas templates aan
 2. Beheer meerdere omgevingen
 3. Begrijp infrastructuurcode
@@ -271,27 +295,27 @@ azd init --template template1
 1. Maak aangepaste templates
 2. Geavanceerde infrastructuurpatronen
 3. Multi-regio implementaties
-4. Configuraties van ondernemingsniveau
+4. Configuraties op ondernemingsniveau
 
-## Volgende stappen
+## Volgende Stappen
 
-- [Installatie & Setup](installation.md) - Installeer en configureer azd
-- [Je eerste project](first-project.md) - Praktische tutorial
+- [Installatie & Configuratie](installation.md) - Installeer en configureer azd
+- [Je Eerste Project](first-project.md) - Hands-on tutorial
 - [Configuratiegids](configuration.md) - Geavanceerde configuratieopties
 
-## Aanvullende bronnen
+## Aanvullende Bronnen
 
 - [Azure Developer CLI Overzicht](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Template Galerij](https://azure.github.io/awesome-azd/)
-- [Community Samples](https://github.com/Azure-Samples)
+- [Templategalerij](https://azure.github.io/awesome-azd/)
+- [Communityvoorbeelden](https://github.com/Azure-Samples)
 
 ---
 
 **Navigatie**
-- **Vorige les**: [README](../../README.md)
-- **Volgende les**: [Installatie & Setup](installation.md)
+- **Vorige Les**: [README](../../README.md)
+- **Volgende Les**: [Installatie & Configuratie](installation.md)
 
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

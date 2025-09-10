@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:23:18+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:21:54+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "no"
 }
@@ -46,11 +46,15 @@ Etter fullføring vil du kunne:
 ```bash
 # Check azd installation
 azd version
+```
+### Verifiser Azure-autentisering
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Sjekk Node.js-versjon
+```bash
 node --version
 ```
 
@@ -151,15 +155,14 @@ Gjør en enkel endring:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
 ## Steg 4: Distribuer til Azure
 
-Nå til den spennende delen - distribuer alt til Azure!
+Nå kommer den spennende delen - distribuer alt til Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -207,7 +210,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ### Test Todo-Appen
 1. **Legg til en todo-oppgave** - Klikk "Add Todo" og skriv inn en oppgave
 2. **Marker som fullført** - Kryss av fullførte oppgaver
-3. **Slett oppgaver** - Fjern todo-oppgaver du ikke lenger trenger
+3. **Slett oppgaver** - Fjern todos du ikke lenger trenger
 
 ### Overvåk Applikasjonen Din
 ```bash
@@ -228,7 +231,7 @@ La oss gjøre en endring og se hvor enkelt det er å oppdatere:
 code src/api/src/routes/lists.js
 ```
 
-Legg til en tilpasset responsheader:
+Legg til en egendefinert responsheader:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -291,7 +294,7 @@ azd down --force --purge
 
 Gratulerer! Du har med suksess:
 - Initialisert et azd-prosjekt fra en mal
-- Utforsket prosjektstrukturen og nøkkelfiler
+- Utforsket prosjektstrukturen og viktige filer
 - Distribuert en fullstack-applikasjon til Azure
 - Gjort kodeendringer og distribuert på nytt
 - Administrert flere miljøer
@@ -377,7 +380,7 @@ azd init --template todo-java-mongo
 ### Maler og Eksempler
 - [Offisiell Malgalleri](https://azure.github.io/awesome-azd/)
 - [Fellesskapsmaler](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise Mønstre](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Enterprise-mønstre](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

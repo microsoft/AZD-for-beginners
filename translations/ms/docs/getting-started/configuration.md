@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T21:33:30+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:29:40+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ms"
 }
@@ -36,7 +36,7 @@ Panduan komprehensif ini merangkumi semua aspek konfigurasi Azure Developer CLI 
 ## Hierarki Konfigurasi
 
 azd menggunakan sistem konfigurasi hierarki:
-1. **Flag baris perintah** (keutamaan tertinggi)
+1. **Bendera baris perintah** (keutamaan tertinggi)
 2. **Pembolehubah persekitaran**
 3. **Konfigurasi projek tempatan** (`.azd/config.json`)
 4. **Konfigurasi pengguna global** (`~/.azd/config.json`)
@@ -159,7 +159,7 @@ pipeline:
 
 ### Pilihan Konfigurasi Perkhidmatan
 
-#### Jenis Host
+#### Jenis Hos
 ```yaml
 services:
   web-static:
@@ -217,7 +217,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Konfigurasi Persekitaran
-Setiap persekitaran mempunyai konfigurasi sendiri dalam `.azure/<env-name>/config.json`:
+Setiap persekitaran mempunyai konfigurasi tersendiri dalam `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -254,7 +254,7 @@ azd env unset DEBUG
 ```
 
 ### Templat Persekitaran
-Cipta `.azure/env.template` untuk persediaan persekitaran yang konsisten:
+Cipta `.azure/env.template` untuk penyediaan persekitaran yang konsisten:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -285,7 +285,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Pengesahan Service Principal
-Untuk pipeline CI/CD:
+Untuk saluran CI/CD:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,7 +298,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Identiti Terurus
-Untuk persekitaran yang dihoskan Azure:
+Untuk persekitaran yang dihoskan di Azure:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Contoh `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Konfigurasi Lanjutan
 
@@ -412,7 +413,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Konfigurasi Spesifik Persekitaran
+## 🎯 Konfigurasi Khusus Persekitaran
 
 ### Persekitaran Pembangunan
 ```bash
@@ -432,7 +433,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Persekitaran Produksi
+### Persekitaran Pengeluaran
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -536,7 +537,7 @@ Dokumentasikan konfigurasi anda dalam `CONFIG.md`:
 
 - [Projek Pertama Anda](first-project.md) - Terapkan konfigurasi dalam amalan
 - [Panduan Penyebaran](../deployment/deployment-guide.md) - Gunakan konfigurasi untuk penyebaran
-- [Penyediaan Sumber](../deployment/provisioning.md) - Konfigurasi bersedia untuk produksi
+- [Penyediaan Sumber](../deployment/provisioning.md) - Konfigurasi bersedia untuk pengeluaran
 
 ## Rujukan
 
@@ -553,4 +554,4 @@ Dokumentasikan konfigurasi anda dalam `CONFIG.md`:
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

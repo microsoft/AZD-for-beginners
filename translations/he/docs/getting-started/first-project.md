@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:24:22+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:25:50+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "he"
 }
@@ -11,23 +11,23 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## מבוא
 
-ברוך הבא לפרויקט הראשון שלך עם Azure Developer CLI! מדריך מעשי זה מספק הסבר מלא על יצירה, פריסה וניהול של אפליקציה מלאה ב-Azure באמצעות azd. תעבוד עם אפליקציית משימות אמיתית הכוללת ממשק קדמי ב-React, ממשק API אחורי ב-Node.js, ובסיס נתונים MongoDB.
+ברוך הבא לפרויקט הראשון שלך עם Azure Developer CLI! מדריך מעשי זה מספק הסבר מלא על יצירה, פריסה וניהול של אפליקציה מלאה ב-Azure באמצעות azd. תעבוד עם אפליקציית "רשימת משימות" אמיתית הכוללת ממשק קדמי ב-React, API אחורי ב-Node.js, ומסד נתונים MongoDB.
 
 ## מטרות למידה
 
-על ידי השלמת מדריך זה, תלמד:
-- לשלוט בתהליך האתחול של פרויקט azd באמצעות תבניות
+בסיום המדריך, תלמד:
+- לשלוט בתהליך אתחול פרויקט azd באמצעות תבניות
 - להבין את מבנה הפרויקט וקבצי הקונפיגורציה של Azure Developer CLI
-- לבצע פריסה מלאה של אפליקציה ל-Azure כולל הקצאת תשתיות
+- לבצע פריסה מלאה של אפליקציה ל-Azure כולל הקמת תשתיות
 - ליישם עדכונים לאפליקציה ואסטרטגיות לפריסה מחדש
-- לנהל סביבות מרובות לפיתוח ולבדיקות
+- לנהל סביבות מרובות לפיתוח ובדיקות
 - ליישם שיטות לניקוי משאבים וניהול עלויות
 
 ## תוצאות למידה
 
-בסיום המדריך, תוכל:
-- לאתחל ולבצע קונפיגורציה לפרויקטים של azd באופן עצמאי מתוך תבניות
-- לנווט ולבצע שינויים במבנה הפרויקט של azd בצורה יעילה
+לאחר השלמת המדריך, תוכל:
+- לאתחל ולהגדיר פרויקטים של azd באופן עצמאי מתבניות
+- לנווט ולבצע שינויים במבנה פרויקטים של azd ביעילות
 - לפרוס אפליקציות מלאות ל-Azure באמצעות פקודות בודדות
 - לפתור בעיות נפוצות בפריסה ובעיות אימות
 - לנהל סביבות Azure מרובות לשלבי פריסה שונים
@@ -35,28 +35,32 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## תחילת העבודה
 
-### רשימת דרישות מקדימות
+### רשימת דרישות מוקדמות
 - ✅ Azure Developer CLI מותקן ([מדריך התקנה](installation.md))
 - ✅ Azure CLI מותקן ומאומת
 - ✅ Git מותקן במערכת שלך
 - ✅ Node.js גרסה 16 ומעלה (למדריך זה)
 - ✅ Visual Studio Code (מומלץ)
 
-### אימות ההתקנה שלך
+### בדיקת ההתקנה שלך
 ```bash
 # Check azd installation
 azd version
+```
+### בדיקת אימות Azure
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### בדיקת גרסת Node.js
+```bash
 node --version
 ```
 
 ## שלב 1: בחירת תבנית ואתחול
 
-נתחיל עם תבנית פופולרית של אפליקציית משימות הכוללת ממשק קדמי ב-React וממשק API אחורי ב-Node.js.
+נתחיל עם תבנית פופולרית של אפליקציית "רשימת משימות" הכוללת ממשק קדמי ב-React ו-API אחורי ב-Node.js.
 
 ```bash
 # Browse available templates
@@ -74,9 +78,9 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### מה קרה עכשיו?
-- הורדת את קוד התבנית לספרייה המקומית שלך
+- קוד התבנית הורד לתיקייה המקומית שלך
 - נוצר קובץ `azure.yaml` עם הגדרות שירות
-- הוגדר קוד תשתית בספריית `infra/`
+- הוגדר קוד תשתית בתיקיית `infra/`
 - נוצרה קונפיגורציית סביבה
 
 ## שלב 2: חקר מבנה הפרויקט
@@ -125,13 +129,13 @@ my-first-azd-app/
 cat azure.yaml
 ```
 
-**infra/main.bicep** - הגדרת תשתית:
+**infra/main.bicep** - הגדרת התשתית:
 ```bash
 # View the infrastructure code
 head -30 infra/main.bicep
 ```
 
-## שלב 3: התאמת הפרויקט (אופציונלי)
+## שלב 3: התאמה אישית של הפרויקט (אופציונלי)
 
 לפני הפריסה, תוכל להתאים את האפליקציה:
 
@@ -151,15 +155,14 @@ code src/web/src/App.tsx
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
 ## שלב 4: פריסה ל-Azure
 
-עכשיו לחלק המרגש - פרוס הכל ל-Azure!
+עכשיו לחלק המרגש - לפרוס הכל ל-Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -174,10 +177,10 @@ azd up
 
 ### מה קורה במהלך הפריסה?
 
-פקודת `azd up` מבצעת את השלבים הבאים:
+הפקודה `azd up` מבצעת את השלבים הבאים:
 1. **הקצאה** (`azd provision`) - יוצרת משאבי Azure
 2. **אריזה** - בונה את קוד האפליקציה שלך
-3. **פריסה** (`azd deploy`) - מפריסה את הקוד למשאבי Azure
+3. **פריסה** (`azd deploy`) - פורסת את הקוד למשאבי Azure
 
 ### פלט צפוי
 ```
@@ -195,7 +198,7 @@ https://app-web-abc123def.azurewebsites.net
 ## שלב 5: בדיקת האפליקציה שלך
 
 ### גישה לאפליקציה שלך
-לחץ על ה-URL שסופק בפלט הפריסה, או קבל אותו בכל זמן:
+לחץ על ה-URL שסופק בפלט הפריסה, או קבל אותו בכל עת:
 ```bash
 # Get application endpoints
 azd show
@@ -204,10 +207,10 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### בדיקת אפליקציית המשימות
-1. **הוסף פריט משימה** - לחץ על "Add Todo" והזן משימה
+### בדיקת אפליקציית "רשימת משימות"
+1. **הוסף פריט לרשימה** - לחץ על "Add Todo" והזן משימה
 2. **סמן כהושלם** - סמן פריטים שהושלמו
-3. **מחק פריטים** - הסר משימות שאינן נחוצות יותר
+3. **מחק פריטים** - הסר פריטים שאינך צריך יותר
 
 ### ניטור האפליקציה שלך
 ```bash
@@ -218,7 +221,7 @@ azd monitor
 azd logs
 ```
 
-## שלב 6: ביצוע שינויים ופריסה מחדש
+## שלב 6: בצע שינויים ופרוס מחדש
 
 בוא נבצע שינוי ונראה כמה קל לעדכן:
 
@@ -234,7 +237,7 @@ code src/api/src/routes/lists.js
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### פרוס רק את שינויי הקוד
+### פרוס רק את השינויים בקוד
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -244,7 +247,7 @@ azd deploy
 
 ## שלב 7: ניהול סביבות מרובות
 
-צור סביבה לבדיקות לפני פריסה לייצור:
+צור סביבה לבדיקות לפני העלאה לייצור:
 
 ```bash
 # Create a new staging environment
@@ -289,8 +292,8 @@ azd down --force --purge
 
 ## מה למדת
 
-ברכות! הצלחת:
-- לאתחל פרויקט azd מתוך תבנית
+מזל טוב! הצלחת:
+- לאתחל פרויקט azd מתבנית
 - לחקור את מבנה הפרויקט והקבצים המרכזיים
 - לפרוס אפליקציה מלאה ל-Azure
 - לבצע שינויים בקוד ולפרוס מחדש
@@ -332,17 +335,17 @@ netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## צעדים הבאים
+## הצעדים הבאים
 
 עכשיו כשסיימת את הפרויקט הראשון שלך, חקור את הנושאים המתקדמים הבאים:
 
-### 1. התאמת תשתית
+### 1. התאמה אישית של תשתית
 - [תשתית כקוד](../deployment/provisioning.md)
-- [הוספת בסיסי נתונים, אחסון ושירותים נוספים](../deployment/provisioning.md#adding-services)
+- [הוספת מסדי נתונים, אחסון ושירותים נוספים](../deployment/provisioning.md#adding-services)
 
 ### 2. הגדרת CI/CD
 - [אינטגרציה עם GitHub Actions](../deployment/cicd-integration.md)
-- [צינורות Azure DevOps](../deployment/cicd-integration.md#azure-devops)
+- [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
 ### 3. שיטות עבודה מומלצות לייצור
 - [הגדרות אבטחה](../deployment/best-practices.md#security)
@@ -364,24 +367,24 @@ azd init --template todo-java-mongo
 
 ## משאבים נוספים
 
-### חומרי לימוד
+### חומרי למידה
 - [תיעוד Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [מרכז הארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [מסגרת Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### קהילה ותמיכה
 - [GitHub של Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [קהילת המפתחים של Azure](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [קהילת Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### תבניות ודוגמאות
 - [גלריית התבניות הרשמית](https://azure.github.io/awesome-azd/)
-- [תבניות קהילתיות](https://github.com/Azure-Samples/azd-templates)
+- [תבניות קהילה](https://github.com/Azure-Samples/azd-templates)
 - [תבניות ארגוניות](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**ברכות על השלמת הפרויקט הראשון שלך עם azd!** עכשיו אתה מוכן לבנות ולפרוס אפליקציות מדהימות ב-Azure בביטחון.
+**מזל טוב על השלמת הפרויקט הראשון שלך עם azd!** עכשיו אתה מוכן לבנות ולפרוס אפליקציות מדהימות ב-Azure בביטחון.
 
 ---
 
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפתו המקורית נחשב למקור הסמכותי. למידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אנושי. איננו נושאים באחריות לכל אי-הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.  

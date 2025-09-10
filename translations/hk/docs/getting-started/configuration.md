@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T16:50:41+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T12:56:35+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "hk"
 }
@@ -16,7 +16,7 @@ CO_OP_TRANSLATOR_METADATA:
 ## 學習目標
 
 完成本課程後，您將能夠：
-- 掌握 azd 的配置層級，了解設置的優先順序
+- 掌握 azd 的配置層級，並了解設置的優先順序
 - 有效配置全局和專案特定的設置
 - 管理具有不同配置的多個環境
 - 實現安全的身份驗證和授權模式
@@ -37,7 +37,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 azd 使用分層的配置系統：
 1. **命令行標誌**（最高優先級）
-2. **環境變數**
+2. **環境變量**
 3. **本地專案配置**（`.azd/config.json`）
 4. **全局用戶配置**（`~/.azd/config.json`）
 5. **默認值**（最低優先級）
@@ -239,7 +239,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### 環境變數
+### 環境變量
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+範例 `Dockerfile`：https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 高級配置
 
@@ -412,7 +413,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 特定環境配置
+## 🎯 環境特定配置
 
 ### 開發環境
 ```bash
@@ -481,7 +482,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 最佳實踐
 
-### 1. 使用環境變數
+### 1. 使用環境變量
 ```yaml
 # Good: Use environment variables
 database:
@@ -534,15 +535,15 @@ database:
 
 ## 下一步
 
-- [您的第一個專案](first-project.md) - 實踐配置
+- [您的第一個專案](first-project.md) - 實際應用配置
 - [部署指南](../deployment/deployment-guide.md) - 使用配置進行部署
-- [資源預配](../deployment/provisioning.md) - 生產就緒的配置
+- [資源配置](../deployment/provisioning.md) - 生產就緒的配置
 
 ## 參考資料
 
 - [azd 配置參考](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml 架構](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [環境變數](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [環境變量](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 

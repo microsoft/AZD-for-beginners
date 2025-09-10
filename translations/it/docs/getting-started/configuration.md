@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T19:13:45+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T13:10:15+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "it"
 }
@@ -11,15 +11,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduzione
 
-Questa guida completa copre tutti gli aspetti della configurazione di Azure Developer CLI per flussi di lavoro di sviluppo e distribuzione ottimali. Imparerai la gerarchia di configurazione, la gestione degli ambienti, i metodi di autenticazione e i modelli di configurazione avanzati che consentono distribuzioni Azure efficienti e sicure.
+Questa guida completa copre tutti gli aspetti della configurazione di Azure Developer CLI per flussi di lavoro ottimali di sviluppo e distribuzione. Imparerai la gerarchia di configurazione, la gestione degli ambienti, i metodi di autenticazione e i modelli di configurazione avanzati che consentono distribuzioni Azure efficienti e sicure.
 
 ## Obiettivi di Apprendimento
 
-Alla fine di questa lezione, sarai in grado di:
+Al termine di questa lezione, sarai in grado di:
 - Padroneggiare la gerarchia di configurazione di azd e comprendere come vengono prioritizzate le impostazioni
 - Configurare efficacemente impostazioni globali e specifiche del progetto
 - Gestire più ambienti con configurazioni diverse
-- Implementare modelli di autenticazione e autorizzazione sicuri
+- Implementare modelli sicuri di autenticazione e autorizzazione
 - Comprendere modelli di configurazione avanzati per scenari complessi
 
 ## Risultati di Apprendimento
@@ -27,20 +27,20 @@ Alla fine di questa lezione, sarai in grado di:
 Dopo aver completato questa lezione, sarai in grado di:
 - Configurare azd per flussi di lavoro di sviluppo ottimali
 - Configurare e gestire più ambienti di distribuzione
-- Implementare pratiche di gestione della configurazione sicure
+- Implementare pratiche sicure di gestione della configurazione
 - Risolvere problemi relativi alla configurazione
 - Personalizzare il comportamento di azd per requisiti specifici dell'organizzazione
 
-Questa guida completa copre tutti gli aspetti della configurazione di Azure Developer CLI per flussi di lavoro di sviluppo e distribuzione ottimali.
+Questa guida completa copre tutti gli aspetti della configurazione di Azure Developer CLI per flussi di lavoro ottimali di sviluppo e distribuzione.
 
 ## Gerarchia di Configurazione
 
 azd utilizza un sistema di configurazione gerarchico:
-1. **Flag della riga di comando** (massima priorità)
+1. **Flag della riga di comando** (priorità più alta)
 2. **Variabili d'ambiente**
 3. **Configurazione locale del progetto** (`.azd/config.json`)
 4. **Configurazione globale dell'utente** (`~/.azd/config.json`)
-5. **Valori predefiniti** (minima priorità)
+5. **Valori predefiniti** (priorità più bassa)
 
 ## Configurazione Globale
 
@@ -178,7 +178,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Impostazioni Specifiche per Linguaggi
+#### Impostazioni Specifiche per Linguaggio
 ```yaml
 services:
   node-app:
@@ -378,10 +378,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Esempio di `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Configurazione Avanzata
 
-### Nomi Personalizzati delle Risorse
+### Nomi Personalizzati per le Risorse
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -479,7 +480,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 Best Practice
 
 ### 1. Utilizzare Variabili d'Ambiente
 ```yaml
@@ -508,7 +509,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Considerazioni sul Versionamento
+### 3. Considerazioni sul Controllo di Versione
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -516,7 +517,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Documentazione della Configurazione
+### 4. Documentare la Configurazione
 Documenta la tua configurazione in `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -534,13 +535,13 @@ Documenta la tua configurazione in `CONFIG.md`:
 
 ## Prossimi Passi
 
-- [Il tuo Primo Progetto](first-project.md) - Applica la configurazione nella pratica
-- [Guida alla Distribuzione](../deployment/deployment-guide.md) - Utilizza la configurazione per la distribuzione
+- [Il Tuo Primo Progetto](first-project.md) - Applica la configurazione nella pratica
+- [Guida alla Distribuzione](../deployment/deployment-guide.md) - Usa la configurazione per la distribuzione
 - [Provisioning delle Risorse](../deployment/provisioning.md) - Configurazioni pronte per la produzione
 
 ## Riferimenti
 
-- [Riferimento alla Configurazione di azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Riferimento Configurazione azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schema di azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Variabili d'Ambiente](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
@@ -548,7 +549,7 @@ Documenta la tua configurazione in `CONFIG.md`:
 
 **Navigazione**
 - **Lezione Precedente**: [Installazione e Configurazione](installation.md)
-- **Lezione Successiva**: [Il tuo Primo Progetto](first-project.md)
+- **Lezione Successiva**: [Il Tuo Primo Progetto](first-project.md)
 
 ---
 

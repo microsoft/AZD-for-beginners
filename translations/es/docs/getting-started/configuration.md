@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "71971408c9d2c3ed2357433ec9bc72b5",
-  "translation_date": "2025-09-09T16:52:11+00:00",
+  "original_hash": "7e50c994df9f71d709906549be362fc5",
+  "translation_date": "2025-09-10T12:48:09+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "es"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introducción
 
-Esta guía completa cubre todos los aspectos de la configuración de Azure Developer CLI para flujos de trabajo óptimos de desarrollo y despliegue. Aprenderás sobre la jerarquía de configuración, gestión de entornos, métodos de autenticación y patrones avanzados de configuración que permiten despliegues eficientes y seguros en Azure.
+Esta guía completa cubre todos los aspectos de la configuración de Azure Developer CLI para flujos de trabajo óptimos de desarrollo y despliegue. Aprenderás sobre la jerarquía de configuración, la gestión de entornos, los métodos de autenticación y los patrones avanzados de configuración que permiten despliegues eficientes y seguros en Azure.
 
 ## Objetivos de Aprendizaje
 
@@ -36,7 +36,7 @@ Esta guía completa cubre todos los aspectos de la configuración de Azure Devel
 ## Jerarquía de Configuración
 
 azd utiliza un sistema de configuración jerárquico:
-1. **Flags de línea de comandos** (mayor prioridad)
+1. **Flags de línea de comandos** (máxima prioridad)
 2. **Variables de entorno**
 3. **Configuración local del proyecto** (`.azd/config.json`)
 4. **Configuración global del usuario** (`~/.azd/config.json`)
@@ -44,7 +44,7 @@ azd utiliza un sistema de configuración jerárquico:
 
 ## Configuración Global
 
-### Configuración de Valores Predeterminados Globales
+### Establecer Valores Predeterminados Globales
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -178,7 +178,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Configuraciones Específicas de Lenguaje
+#### Configuraciones Específicas por Lenguaje
 ```yaml
 services:
   node-app:
@@ -331,7 +331,7 @@ Configura parámetros de infraestructura en `infra/main.parameters.json`:
 ```
 
 ### Configuración de Terraform
-Para proyectos Terraform, configura en `infra/terraform.tfvars`:
+Para proyectos con Terraform, configura en `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -378,6 +378,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+Ejemplo de `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Configuración Avanzada
 
@@ -412,7 +413,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Configuraciones Específicas de Entorno
+## 🎯 Configuraciones Específicas por Entorno
 
 ### Entorno de Desarrollo
 ```bash
@@ -481,7 +482,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 Mejores Prácticas
 
-### 1. Usar Variables de Entorno
+### 1. Usa Variables de Entorno
 ```yaml
 # Good: Use environment variables
 database:
@@ -492,7 +493,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organizar Archivos de Configuración
+### 2. Organiza los Archivos de Configuración
 ```
 .azure/
 ├── config.json              # Global project config
@@ -508,7 +509,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Consideraciones de Control de Versiones
+### 3. Consideraciones para el Control de Versiones
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -536,7 +537,7 @@ Documenta tu configuración en `CONFIG.md`:
 
 - [Tu Primer Proyecto](first-project.md) - Aplica la configuración en la práctica
 - [Guía de Despliegue](../deployment/deployment-guide.md) - Usa la configuración para el despliegue
-- [Provisionamiento de Recursos](../deployment/provisioning.md) - Configuraciones listas para producción
+- [Aprovisionamiento de Recursos](../deployment/provisioning.md) - Configuraciones listas para producción
 
 ## Referencias
 
@@ -553,4 +554,4 @@ Documenta tu configuración en `CONFIG.md`:
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

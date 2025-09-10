@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c9095103b04dc9504096cf2814d0e634",
-  "translation_date": "2025-09-10T06:12:29+00:00",
+  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
+  "translation_date": "2025-09-10T13:36:49+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sk"
 }
@@ -18,7 +18,7 @@ Táto lekcia vás zoznámi s Azure Developer CLI (azd), výkonným nástrojom pr
 Na konci tejto lekcie budete:
 - Rozumieť, čo je Azure Developer CLI a jeho hlavný účel
 - Naučíte sa základné koncepty šablón, prostredí a služieb
-- Preskúmate kľúčové funkcie vrátane vývoja založeného na šablónach a Infrastructure as Code
+- Preskúmate kľúčové funkcie vrátane vývoja na základe šablón a Infrastructure as Code
 - Pochopíte štruktúru projektu azd a pracovný postup
 - Budete pripravení nainštalovať a nakonfigurovať azd pre vaše vývojové prostredie
 
@@ -46,17 +46,17 @@ Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchl
 
 ### Prostredia
 Prostredia predstavujú rôzne cieľové miesta nasadenia:
-- **Vývoj** - Na testovanie a vývoj
+- **Vývojové** - Na testovanie a vývoj
 - **Staging** - Predprodukčné prostredie
-- **Produkcia** - Živé produkčné prostredie
+- **Produkčné** - Živé produkčné prostredie
 
-Každé prostredie udržiava svoje vlastné:
+Každé prostredie si udržiava vlastné:
 - Azure resource group
 - Konfiguračné nastavenia
 - Stav nasadenia
 
 ### Služby
-Služby sú stavebné bloky vašej aplikácie:
+Služby sú stavebnými blokmi vašej aplikácie:
 - **Frontend** - Webové aplikácie, SPAs
 - **Backend** - API, mikroslužby
 - **Databáza** - Riešenia na ukladanie dát
@@ -64,7 +64,7 @@ Služby sú stavebné bloky vašej aplikácie:
 
 ## Kľúčové funkcie
 
-### 1. Vývoj založený na šablónach
+### 1. Vývoj na základe šablón
 ```bash
 # Browse available templates
 azd template list
@@ -81,9 +81,9 @@ azd init --template <template-name>
 ### 3. Integrované pracovné postupy
 ```bash
 # Complete deployment workflow
-azd up            # Provision + Deploy
-azd provision     # Create Azure resources
-azd deploy        # Deploy application code
+azd up            # Provision + Deploy this is hands off for first time setup
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
@@ -185,8 +185,31 @@ azd up
 azd deploy
 
 # Clean up when done
-azd down --force --purge
+azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
+
+## Porozumenie `azd down --force --purge`
+Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť vaše prostredie azd a všetky súvisiace zdroje. Tu je rozpis, čo jednotlivé flagy robia:
+```
+--force
+```
+- Preskočí potvrdenia.
+- Užitočné pre automatizáciu alebo skriptovanie, kde manuálny vstup nie je možný.
+- Zabezpečí, že odstránenie prebehne bez prerušenia, aj keď CLI zistí nekonzistencie.
+
+```
+--purge
+```
+Odstráni **všetky súvisiace metadáta**, vrátane:
+Stav prostredia
+Lokálny priečinok `.azure`
+Cache informácií o nasadení
+Zabráni azd "pamätať si" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nesúlad resource groups alebo zastarané registry.
+
+### Prečo použiť oboje?
+Keď narazíte na problémy s `azd up` kvôli pretrvávajúcemu stavu alebo čiastočným nasadeniam, táto kombinácia zabezpečí **čistý štart**.
+
+Je obzvlášť užitočná po manuálnom odstránení zdrojov v Azure portáli alebo pri zmene šablón, prostredí alebo konvencií pomenovania resource groups.
 
 ### Správa viacerých prostredí
 ```bash
@@ -218,7 +241,7 @@ azd env show                 # Current environment
 azd config list             # Configuration settings
 ```
 
-### Monitorovanie
+### Monitoring
 ```bash
 azd monitor                  # Open Azure portal
 azd pipeline config          # Set up CI/CD
@@ -241,7 +264,7 @@ azd init --template template1
 ### 2. Využívajte šablóny
 - Začnite s existujúcimi šablónami
 - Prispôsobte ich svojim potrebám
-- Vytvorte opakovane použiteľné šablóny pre vašu organizáciu
+- Vytvárajte opakovane použiteľné šablóny pre vašu organizáciu
 
 ### 3. Izolácia prostredí
 - Používajte samostatné prostredia pre vývoj/staging/produkciu
@@ -268,8 +291,8 @@ azd init --template template1
 4. Nastavte CI/CD pipelines
 
 ### Pokročilý (5+ týždňov)
-1. Vytvorte vlastné šablóny
-2. Pokročilé vzory infraštruktúry
+1. Vytvárajte vlastné šablóny
+2. Pokročilé infraštruktúrne vzory
 3. Nasadenia vo viacerých regiónoch
 4. Konfigurácie na úrovni podniku
 
@@ -277,7 +300,7 @@ azd init --template template1
 
 - [Inštalácia a nastavenie](installation.md) - Nainštalujte a nakonfigurujte azd
 - [Váš prvý projekt](first-project.md) - Praktický tutoriál
-- [Sprievodca konfiguráciou](configuration.md) - Pokročilé možnosti konfigurácie
+- [Konfiguračný sprievodca](configuration.md) - Pokročilé možnosti konfigurácie
 
 ## Ďalšie zdroje
 
@@ -294,4 +317,4 @@ azd init --template template1
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Za autoritatívny zdroj by sa mal považovať pôvodný dokument v jeho pôvodnom jazyku. Pre dôležité informácie odporúčame profesionálny preklad vykonaný človekom. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie odporúčame profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T19:06:32+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:12:56+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "tr"
 }
@@ -11,27 +11,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giriş
 
-Azure Developer CLI projenize hoş geldiniz! Bu kapsamlı uygulamalı eğitim, azd kullanarak Azure üzerinde tam yığın bir uygulama oluşturma, dağıtma ve yönetme sürecini adım adım anlatır. React frontend, Node.js API backend ve MongoDB veritabanını içeren gerçek bir yapılacaklar uygulaması üzerinde çalışacaksınız.
+İlk Azure Developer CLI projenize hoş geldiniz! Bu kapsamlı uygulamalı eğitim, azd kullanarak Azure üzerinde tam yığın bir uygulama oluşturma, dağıtma ve yönetme sürecini adım adım anlatıyor. React frontend, Node.js API backend ve MongoDB veritabanını içeren gerçek bir yapılacaklar uygulaması üzerinde çalışacaksınız.
 
 ## Öğrenme Hedefleri
 
 Bu eğitimi tamamladığınızda:
-- Şablonlar kullanarak azd proje başlatma iş akışını öğrenmiş olacaksınız
+- Şablonlar kullanarak azd proje başlatma iş akışını öğreneceksiniz
 - Azure Developer CLI proje yapısını ve yapılandırma dosyalarını anlayacaksınız
-- Azure üzerinde altyapı oluşturma ile birlikte tam bir uygulama dağıtımı gerçekleştireceksiniz
+- Altyapı sağlama ile birlikte uygulamayı Azure'a tamamen dağıtmayı öğreneceksiniz
 - Uygulama güncellemeleri ve yeniden dağıtım stratejilerini uygulayacaksınız
-- Geliştirme ve test için birden fazla ortam yöneteceksiniz
-- Kaynak temizliği ve maliyet yönetimi uygulamalarını hayata geçireceksiniz
+- Geliştirme ve test için birden fazla ortamı yöneteceksiniz
+- Kaynak temizliği ve maliyet yönetimi uygulamalarını öğreneceksiniz
 
 ## Öğrenme Çıktıları
 
-Tamamlandığında şunları yapabileceksiniz:
-- Şablonlardan bağımsız olarak azd projeleri başlatma ve yapılandırma
-- azd proje yapısını etkili bir şekilde gezinme ve değiştirme
-- Tek komutlarla tam yığın uygulamaları Azure'a dağıtma
-- Yaygın dağıtım sorunlarını ve kimlik doğrulama problemlerini çözme
-- Farklı dağıtım aşamaları için birden fazla Azure ortamını yönetme
-- Uygulama güncellemeleri için sürekli dağıtım iş akışlarını uygulama
+Tamamlandığında, şunları yapabileceksiniz:
+- Şablonlardan bağımsız olarak azd projelerini başlatıp yapılandırmak
+- azd proje yapılarını etkili bir şekilde gezinmek ve değiştirmek
+- Tek komutlarla tam yığın uygulamaları Azure'a dağıtmak
+- Yaygın dağıtım sorunlarını ve kimlik doğrulama problemlerini çözmek
+- Farklı dağıtım aşamaları için birden fazla Azure ortamını yönetmek
+- Uygulama güncellemeleri için sürekli dağıtım iş akışlarını uygulamak
 
 ## Başlarken
 
@@ -46,11 +46,15 @@ Tamamlandığında şunları yapabileceksiniz:
 ```bash
 # Check azd installation
 azd version
+```
+### Azure kimlik doğrulamasını doğrulayın
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Node.js sürümünü kontrol edin
+```bash
 node --version
 ```
 
@@ -133,7 +137,7 @@ head -30 infra/main.bicep
 
 ## Adım 3: Projenizi Özelleştirin (Opsiyonel)
 
-Dağıtımdan önce uygulamayı özelleştirebilirsiniz:
+Dağıtmadan önce uygulamayı özelleştirebilirsiniz:
 
 ### Frontend'i Değiştirin
 ```bash
@@ -151,13 +155,12 @@ Basit bir değişiklik yapın:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
 
-## Adım 4: Azure'a Dağıtım Yapın
+## Adım 4: Azure'a Dağıtın
 
 Şimdi heyecan verici kısım - her şeyi Azure'a dağıtın!
 
@@ -175,7 +178,7 @@ azd up
 ### Dağıtım Sırasında Neler Oluyor?
 
 `azd up` komutu şu adımları gerçekleştirir:
-1. **Altyapı Sağlama** (`azd provision`) - Azure kaynaklarını oluşturur
+1. **Sağlama** (`azd provision`) - Azure kaynaklarını oluşturur
 2. **Paketleme** - Uygulama kodunuzu derler
 3. **Dağıtım** (`azd deploy`) - Kodu Azure kaynaklarına dağıtır
 
@@ -194,7 +197,7 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Adım 5: Uygulamanızı Test Edin
 
-### Uygulamaya Erişim
+### Uygulamaya Erişin
 Dağıtım çıktısında sağlanan URL'ye tıklayın veya istediğiniz zaman alın:
 ```bash
 # Get application endpoints
@@ -205,7 +208,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Yapılacaklar Uygulamasını Test Edin
-1. **Bir yapılacaklar öğesi ekleyin** - "Add Todo"ya tıklayın ve bir görev girin
+1. **Bir yapılacak ekleyin** - "Add Todo"ya tıklayın ve bir görev girin
 2. **Tamamlandı olarak işaretleyin** - Tamamlanan öğeleri işaretleyin
 3. **Öğeleri silin** - Artık ihtiyacınız olmayan yapılacakları kaldırın
 
@@ -242,7 +245,7 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## Adım 7: Birden Fazla Ortam Yönetin
+## Adım 7: Birden Fazla Ortamı Yönetin
 
 Üretimden önce değişiklikleri test etmek için bir test ortamı oluşturun:
 
@@ -347,7 +350,7 @@ netstat -an | grep :3100
 ### 3. Üretim İçin En İyi Uygulamalar
 - [Güvenlik yapılandırmaları](../deployment/best-practices.md#security)
 - [Performans optimizasyonu](../deployment/best-practices.md#performance)
-- [İzleme ve günlük kaydı](../deployment/best-practices.md#monitoring)
+- [İzleme ve günlükleme](../deployment/best-practices.md#monitoring)
 
 ### 4. Daha Fazla Şablon Keşfedin
 ```bash
@@ -364,7 +367,7 @@ azd init --template todo-java-mongo
 
 ## Ek Kaynaklar
 
-### Eğitim Materyalleri
+### Öğrenme Materyalleri
 - [Azure Developer CLI Belgeleri](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure İyi Tasarlanmış Çerçeve](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -392,4 +395,4 @@ azd init --template todo-java-mongo
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

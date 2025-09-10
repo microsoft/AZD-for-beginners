@@ -1,21 +1,21 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T21:22:54+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T13:19:56+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "da"
 }
 -->
-# Dit Første Projekt - Praktisk Vejledning
+# Dit Første Projekt - Praktisk Tutorial
 
 ## Introduktion
 
-Velkommen til dit første Azure Developer CLI-projekt! Denne omfattende praktiske vejledning giver en komplet gennemgang af, hvordan du opretter, implementerer og administrerer en full-stack applikation på Azure ved hjælp af azd. Du vil arbejde med en rigtig todo-applikation, der inkluderer en React-frontend, Node.js API-backend og MongoDB-database.
+Velkommen til dit første Azure Developer CLI-projekt! Denne omfattende praktiske tutorial giver dig en komplet gennemgang af, hvordan du opretter, implementerer og administrerer en full-stack applikation på Azure ved hjælp af azd. Du vil arbejde med en rigtig todo-applikation, der inkluderer en React-frontend, Node.js API-backend og MongoDB-database.
 
 ## Læringsmål
 
-Ved at gennemføre denne vejledning vil du:
+Ved at gennemføre denne tutorial vil du:
 - Mestre azd-projektets initialiseringsworkflow ved hjælp af skabeloner
 - Forstå Azure Developer CLI-projektstruktur og konfigurationsfiler
 - Udføre komplet applikationsimplementering til Azure med infrastrukturprovisionering
@@ -36,21 +36,25 @@ Når du er færdig, vil du kunne:
 ## Kom godt i gang
 
 ### Tjekliste for forudsætninger
-- ✅ Azure Developer CLI installeret ([Installationsvejledning](installation.md))
+- ✅ Azure Developer CLI installeret ([Installationsguide](installation.md))
 - ✅ Azure CLI installeret og autentificeret
 - ✅ Git installeret på dit system
-- ✅ Node.js 16+ (til denne vejledning)
+- ✅ Node.js 16+ (til denne tutorial)
 - ✅ Visual Studio Code (anbefales)
 
 ### Verificer din opsætning
 ```bash
 # Check azd installation
 azd version
+```
+### Verificer Azure-autentificering
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Tjek Node.js-version
+```bash
 node --version
 ```
 
@@ -76,7 +80,7 @@ azd init --template todo-nodejs-mongo
 ### Hvad skete der lige?
 - Skabelonkoden blev downloadet til din lokale mappe
 - En `azure.yaml`-fil med service-definitioner blev oprettet
-- Infrastrukturkode blev oprettet i `infra/`-mappen
+- Infrastrukturkode blev sat op i `infra/`-mappen
 - Et miljøkonfigurationsfil blev oprettet
 
 ## Trin 2: Udforsk projektstrukturen
@@ -119,7 +123,7 @@ my-first-azd-app/
 
 ### Vigtige filer at forstå
 
-**azure.yaml** - Kernen i dit azd-projekt:
+**azure.yaml** - Hjertet i dit azd-projekt:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -151,8 +155,7 @@ Foretag en simpel ændring:
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -228,7 +231,7 @@ Lad os foretage en ændring og se, hvor nemt det er at opdatere:
 code src/api/src/routes/lists.js
 ```
 
-Tilføj en brugerdefineret responsheader:
+Tilføj en brugerdefineret respons-header:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -366,17 +369,17 @@ azd init --template todo-java-mongo
 
 ### Læringsmaterialer
 - [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Arkitekturcenter](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### Fællesskab & Support
+### Community & Support
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Skabeloner & Eksempler
 - [Officiel Skabelongalleri](https://azure.github.io/awesome-azd/)
-- [Fællesskabsskabeloner](https://github.com/Azure-Samples/azd-templates)
+- [Community Skabeloner](https://github.com/Azure-Samples/azd-templates)
 - [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
@@ -387,9 +390,9 @@ azd init --template todo-java-mongo
 
 **Navigation**
 - **Forrige Lektion**: [Konfiguration](configuration.md)
-- **Næste Lektion**: [Implementeringsvejledning](../deployment/deployment-guide.md)
+- **Næste Lektion**: [Implementeringsguide](../deployment/deployment-guide.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

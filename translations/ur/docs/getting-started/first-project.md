@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "483bc6a036553e531b9af4d1d9dec31e",
-  "translation_date": "2025-09-09T19:03:14+00:00",
+  "original_hash": "d0054b58dbf5baa786403593d848de4a",
+  "translation_date": "2025-09-10T12:53:03+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ur"
 }
@@ -18,15 +18,15 @@ CO_OP_TRANSLATOR_METADATA:
 اس رہنمائی کو مکمل کرنے کے بعد، آپ:
 - azd پروجیکٹ انیشیئلائزیشن ورک فلو کو ٹیمپلیٹس کے ذریعے ماسٹر کریں گے
 - Azure Developer CLI پروجیکٹ کی ساخت اور کنفیگریشن فائلز کو سمجھیں گے
-- Azure پر مکمل ایپلیکیشن ڈیپلائے کرنے کے ساتھ انفراسٹرکچر پروویژننگ انجام دیں گے
+- Azure پر مکمل ایپلیکیشن ڈیپلائے کریں گے، جس میں انفراسٹرکچر کی پروویژننگ شامل ہے
 - ایپلیکیشن اپڈیٹس اور ریڈیپلائےمنٹ کی حکمت عملیوں کو نافذ کریں گے
-- ڈیولپمنٹ اور اسٹیجنگ کے لیے متعدد ماحول کو منیج کریں گے
+- ترقی اور اسٹیجنگ کے لیے متعدد ماحول کو منیج کریں گے
 - وسائل کی صفائی اور لاگت کے انتظام کے طریقے اپنائیں گے
 
 ## سیکھنے کے نتائج
 
 رہنمائی مکمل کرنے کے بعد، آپ:
-- ٹیمپلیٹس سے azd پروجیکٹس کو خود سے انیشیئلائز اور کنفیگر کر سکیں گے
+- ٹیمپلیٹس سے azd پروجیکٹس کو خود مختار طور پر انیشیئلائز اور کنفیگر کر سکیں گے
 - azd پروجیکٹ کی ساخت کو مؤثر طریقے سے نیویگیٹ اور تبدیل کر سکیں گے
 - Azure پر مکمل اسٹیک ایپلیکیشنز کو سنگل کمانڈز کے ذریعے ڈیپلائے کر سکیں گے
 - عام ڈیپلائےمنٹ مسائل اور تصدیقی مشکلات کو حل کر سکیں گے
@@ -46,17 +46,21 @@ CO_OP_TRANSLATOR_METADATA:
 ```bash
 # Check azd installation
 azd version
+```
+### Azure تصدیق کی تصدیق کریں
 
-# Verify Azure authentication
+```bash
 az account show
+```
 
-# Check Node.js version
+### Node.js ورژن چیک کریں
+```bash
 node --version
 ```
 
-## مرحلہ 1: ٹیمپلیٹ کا انتخاب اور انیشیئلائز کریں
+## مرحلہ 1: ٹیمپلیٹ منتخب کریں اور انیشیئلائز کریں
 
-چلیں ایک مشہور ٹوڈو ایپلیکیشن ٹیمپلیٹ سے شروع کرتے ہیں جس میں React فرنٹ اینڈ اور Node.js API بیک اینڈ شامل ہیں۔
+چلیں ایک مشہور ٹوڈو ایپلیکیشن ٹیمپلیٹ سے شروع کرتے ہیں جس میں React فرنٹ اینڈ اور Node.js API بیک اینڈ شامل ہے۔
 
 ```bash
 # Browse available templates
@@ -75,7 +79,7 @@ azd init --template todo-nodejs-mongo
 
 ### ابھی کیا ہوا؟
 - ٹیمپلیٹ کوڈ کو آپ کی لوکل ڈائریکٹری میں ڈاؤنلوڈ کیا گیا
-- ایک `azure.yaml` فائل سروس ڈیفینیشنز کے ساتھ بنائی گئی
+- ایک `azure.yaml` فائل بنائی گئی جس میں سروس ڈیفینیشنز ہیں
 - `infra/` ڈائریکٹری میں انفراسٹرکچر کوڈ سیٹ اپ کیا گیا
 - ایک ماحول کی کنفیگریشن بنائی گئی
 
@@ -119,7 +123,7 @@ my-first-azd-app/
 
 ### اہم فائلز کو سمجھیں
 
-**azure.yaml** - آپ کے azd پروجیکٹ کا دل:
+**azure.yaml** - آپ کے azd پروجیکٹ کا مرکز:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -135,7 +139,7 @@ head -30 infra/main.bicep
 
 ڈیپلائے کرنے سے پہلے، آپ ایپلیکیشن کو حسب ضرورت بنا سکتے ہیں:
 
-### فرنٹ اینڈ میں تبدیلی کریں
+### فرنٹ اینڈ میں ترمیم کریں
 ```bash
 # Open the React app component
 code src/web/src/App.tsx
@@ -151,8 +155,7 @@ code src/web/src/App.tsx
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
-azd env set API_VERSION "v1.0.0"
-
+azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
@@ -220,7 +223,7 @@ azd logs
 
 ## مرحلہ 6: تبدیلیاں کریں اور دوبارہ ڈیپلائے کریں
 
-چلیں ایک تبدیلی کرتے ہیں اور دیکھتے ہیں کہ اپڈیٹ کرنا کتنا آسان ہے:
+چلیں ایک تبدیلی کریں اور دیکھیں کہ اپڈیٹ کرنا کتنا آسان ہے:
 
 ### API میں ترمیم کریں
 ```bash
@@ -346,7 +349,7 @@ netstat -an | grep :3100
 
 ### 3. پروڈکشن کے بہترین طریقے
 - [سیکیورٹی کنفیگریشنز](../deployment/best-practices.md#security)
-- [پرفارمنس کی اصلاح](../deployment/best-practices.md#performance)
+- [کارکردگی کی اصلاح](../deployment/best-practices.md#performance)
 - [مانیٹرنگ اور لاگنگ](../deployment/best-practices.md#monitoring)
 
 ### 4. مزید ٹیمپلیٹس دریافت کریں
