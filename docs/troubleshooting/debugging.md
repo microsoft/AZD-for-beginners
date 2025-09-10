@@ -1,4 +1,4 @@
-# Debugging Guide - Advanced Troubleshooti## Log Analysis Techniquesg Techniques
+# Debugging Guide - Advanced Troubleshooting Log Analysis Techniquesg Techniques
 
 ## Introduction
 
@@ -690,4 +690,5 @@ hooks:
 
 **Navigation**
 - **Previous Lesson**: [Common Issues](common-issues.md)
+
 - **Next Lesson**: [Capacity Planning](../pre-deployment/capacity-planning.md)
