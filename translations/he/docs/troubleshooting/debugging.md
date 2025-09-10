@@ -1,47 +1,47 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:51:49+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:20:15+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "he"
 }
 -->
-# מדריך ניפוי שגיאות - טכניקות מתקדמות לפתרון בעיות
+# מדריך ניפוי שגיאות - טכניקות מתקדמות לניתוח לוגים
 
 ## הקדמה
 
-מדריך מקיף זה מספק אסטרטגיות ניפוי שגיאות מתקדמות, כלים וטכניקות לאבחון ופתרון בעיות מורכבות בפריסות של Azure Developer CLI. למדו שיטות ניפוי שגיאות שיטתיות, טכניקות לניתוח לוגים, פרופיל ביצועים וכלי אבחון מתקדמים כדי לפתור בעיות בפריסה ובזמן ריצה בצורה יעילה.
+מדריך מקיף זה מספק אסטרטגיות ניפוי שגיאות מתקדמות, כלים וטכניקות לאבחון ופתרון בעיות מורכבות בפריסות של Azure Developer CLI. תלמדו שיטות ניפוי שגיאות שיטתיות, טכניקות לניתוח לוגים, פרופיל ביצועים וכלים אבחוניים מתקדמים כדי לפתור בעיות בפריסה ובזמן ריצה בצורה יעילה.
 
 ## מטרות למידה
 
-לאחר השלמת המדריך, תוכלו:
+לאחר השלמת מדריך זה, תוכלו:
 - לשלוט בשיטות ניפוי שגיאות שיטתיות עבור בעיות ב-Azure Developer CLI
 - להבין תצורות לוגים מתקדמות וטכניקות לניתוח לוגים
 - ליישם אסטרטגיות פרופיל ביצועים וניטור
 - להשתמש בכלי אבחון ושירותים של Azure לפתרון בעיות מורכבות
-- ליישם טכניקות ניפוי שגיאות ברשת ואבטחה
+- ליישם טכניקות ניפוי שגיאות רשת ואבטחה
 - להגדיר ניטור והתראות מקיפות לזיהוי בעיות באופן יזום
 
 ## תוצאות למידה
 
 בסיום, תוכלו:
-- ליישם את מתודולוגיית TRIAGE לניפוי שגיאות שיטתי של בעיות פריסה מורכבות
-- להגדיר ולנתח מידע מקיף של לוגים ומעקב
+- ליישם את שיטת TRIAGE לניפוי שגיאות שיטתי של בעיות פריסה מורכבות
+- להגדיר ולנתח מידע לוגים ומעקב מקיף
 - להשתמש ב-Azure Monitor, Application Insights וכלי אבחון בצורה יעילה
-- לנפות בעיות של חיבור רשת, אימות והרשאות באופן עצמאי
+- לנפות בעיות חיבור רשת, אימות והרשאות באופן עצמאי
 - ליישם אסטרטגיות לניטור ואופטימיזציה של ביצועים
 - ליצור סקריפטים מותאמים אישית ואוטומציה לניפוי שגיאות חוזרות
 
-## מתודולוגיית ניפוי שגיאות
+## שיטת ניפוי שגיאות
 
 ### גישת TRIAGE
-- **T**זמן: מתי התחילה הבעיה?
-- **R**הפקה מחדש: האם ניתן לשחזר אותה באופן עקבי?
-- **I**זיהוי: איזה רכיב נכשל?
-- **A**ניתוח: מה הלוגים מספרים לנו?
-- **G**איסוף: אספו את כל המידע הרלוונטי
-- **E**הסלמה: מתי יש לפנות לעזרה נוספת
+- **T**ime: מתי התחילה הבעיה?
+- **R**eproduce: האם ניתן לשחזר אותה באופן עקבי?
+- **I**solate: איזה רכיב נכשל?
+- **A**nalyze: מה הלוגים מספרים לנו?
+- **G**ather: אספו את כל המידע הרלוונטי
+- **E**scalate: מתי לפנות לעזרה נוספת
 
 ## הפעלת מצב ניפוי שגיאות
 
@@ -98,7 +98,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### קורלציה בין לוגים
+### התאמת לוגים
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -135,7 +135,7 @@ az graph query -q "ResourceContainers | where type == 'microsoft.resources/resou
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### ניפוי שגיאות ברשת
+### ניפוי שגיאות רשת
 ```bash
 # Test connectivity between services
 test_connectivity() {
@@ -156,7 +156,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### ניפוי שגיאות במכולות
+### ניפוי שגיאות בקונטיינרים
 ```bash
 # Debug container app issues
 debug_container() {
@@ -176,7 +176,7 @@ debug_container() {
 }
 ```
 
-### ניפוי שגיאות בחיבורי מסד נתונים
+### ניפוי שגיאות חיבור למסד נתונים
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -433,7 +433,7 @@ debug_keyvault() {
 }
 ```
 
-### ניפוי שגיאות באבטחת רשת
+### ניפוי שגיאות אבטחת רשת
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -604,7 +604,7 @@ quick_rollback() {
 
 ## 📊 לוחות מחוונים לניפוי שגיאות
 
-### לוח מחוונים מותאם אישית לניטור
+### לוח מחוונים מותאם לניטור
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -651,11 +651,11 @@ aggregate_logs() {
 
 ## 🔗 משאבים מתקדמים
 
-### סקריפטים מותאמים אישית לניפוי שגיאות
+### סקריפטים מותאמים לניפוי שגיאות
 צרו תיקיית `scripts/debug/` עם:
 - `health-check.sh` - בדיקת בריאות מקיפה
 - `performance-test.sh` - בדיקות ביצועים אוטומטיות
-- `log-analyzer.py` - ניתוח מתקדם של לוגים
+- `log-analyzer.py` - ניתוח לוגים מתקדם
 - `resource-validator.sh` - אימות תשתיות
 
 ### אינטגרציה לניטור
@@ -678,11 +678,11 @@ hooks:
 ## שיטות עבודה מומלצות
 
 1. **תמיד הפעילו לוגים לניפוי שגיאות** בסביבות שאינן ייצור
-2. **צרו מקרי בדיקה שניתנים לשחזור** עבור בעיות
+2. **צרו מקרי בדיקה ניתנים לשחזור** עבור בעיות
 3. **תעדו נהלי ניפוי שגיאות** עבור הצוות שלכם
 4. **אוטומטו בדיקות בריאות** וניטור
 5. **שמרו על כלים לניפוי שגיאות מעודכנים** בהתאם לשינויים באפליקציה
-6. **תרגלו נהלי ניפוי שגיאות** בזמני שגרה
+6. **תרגלו נהלי ניפוי שגיאות** בזמנים שאינם אירועי חירום
 
 ## צעדים הבאים
 
@@ -699,9 +699,10 @@ hooks:
 
 **ניווט**
 - **שיעור קודם**: [בעיות נפוצות](common-issues.md)
+
 - **שיעור הבא**: [תכנון קיבולת](../pre-deployment/capacity-planning.md)
 
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

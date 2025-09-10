@@ -1,39 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:51:30+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:20:00+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "nl"
 }
 -->
-# Debugging Gids - Geavanceerde Probleemoplossingstechnieken
+# Debugging Gids - Geavanceerde Technieken voor Loganalyse en Probleemoplossing
 
 ## Introductie
 
-Deze uitgebreide gids biedt geavanceerde strategieën, tools en technieken voor het diagnosticeren en oplossen van complexe problemen met Azure Developer CLI-implementaties. Leer systematische probleemoplossingsmethodologieën, loganalyse-technieken, prestatieprofilering en geavanceerde diagnostische tools om implementatie- en runtimeproblemen efficiënt op te lossen.
+Deze uitgebreide gids biedt geavanceerde strategieën, tools en technieken voor het debuggen en oplossen van complexe problemen met Azure Developer CLI-implementaties. Leer systematische probleemoplossingsmethodologieën, loganalyse technieken, prestatieprofilering en geavanceerde diagnostische tools om implementatie- en runtimeproblemen efficiënt op te lossen.
 
 ## Leerdoelen
 
 Door deze gids te voltooien, leer je:
-- Systematische probleemoplossingsmethodologieën beheersen voor Azure Developer CLI-problemen
-- Geavanceerde logconfiguratie en loganalyse-technieken begrijpen
+- Systematische debugmethodologieën beheersen voor Azure Developer CLI-problemen
+- Geavanceerde logconfiguratie en loganalyse technieken begrijpen
 - Prestatieprofilering en monitoringstrategieën implementeren
-- Azure-diagnosetools en -services gebruiken voor complexe probleemoplossing
-- Netwerkdebugging en beveiligingsprobleemoplossingstechnieken toepassen
+- Azure diagnostische tools en services gebruiken voor complexe probleemoplossing
+- Netwerkdebugging en beveiligingsprobleemoplossing toepassen
 - Uitgebreide monitoring en waarschuwingen configureren voor proactieve probleemdetectie
 
 ## Leerresultaten
 
-Na voltooiing ben je in staat om:
-- De TRIAGE-methodologie toe te passen om complexe implementatieproblemen systematisch op te lossen
-- Uitgebreide log- en traceerinformatie te configureren en analyseren
-- Azure Monitor, Application Insights en diagnostische tools effectief te gebruiken
-- Netwerkconnectiviteit, authenticatie en machtigingsproblemen zelfstandig te debuggen
-- Prestatiemonitoring en optimalisatiestrategieën te implementeren
-- Aangepaste debugscripts en automatisering te maken voor terugkerende problemen
+Na voltooiing kun je:
+- De TRIAGE-methodologie toepassen om complexe implementatieproblemen systematisch te debuggen
+- Uitgebreide log- en traceerinformatie configureren en analyseren
+- Azure Monitor, Application Insights en diagnostische tools effectief gebruiken
+- Netwerkconnectiviteit, authenticatie en machtigingsproblemen zelfstandig debuggen
+- Prestatiemonitoring en optimalisatiestrategieën implementeren
+- Aangepaste debugscripts en automatisering maken voor terugkerende problemen
 
-## Probleemoplossingsmethodologie
+## Debugmethodologie
 
 ### De TRIAGE-aanpak
 - **T**ijd: Wanneer begon het probleem?
@@ -71,9 +71,9 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Loganalyse-technieken
+## 📊 Loganalyse Technieken
 
-### Begrip van logniveaus
+### Begrijpen van Logniveaus
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,7 +83,7 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Gestructureerde loganalyse
+### Gestructureerde Loganalyse
 ```bash
 # Filter logs by level
 azd logs --level error --since 1h
@@ -121,9 +121,9 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Geavanceerde debugtools
+## 🛠️ Geavanceerde Debugging Tools
 
-### Azure Resource Graph-queries
+### Azure Resource Graph Queries
 ```bash
 # Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
@@ -176,7 +176,7 @@ debug_container() {
 }
 ```
 
-### Databaseverbinding-debugging
+### Databaseverbinding Debugging
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,9 +195,9 @@ debug_database() {
 }
 ```
 
-## 🔬 Prestatie-debugging
+## 🔬 Prestatie Debugging
 
-### Applicatieprestatiemonitoring
+### Applicatie Prestatiemonitoring
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -231,7 +231,7 @@ monitor_performance() {
 }
 ```
 
-### Analyse van resourcegebruik
+### Analyse van Resourcegebruik
 ```bash
 # Monitor resource usage
 monitor_resources() {
@@ -255,9 +255,9 @@ monitor_resources() {
 }
 ```
 
-## 🧪 Testen en validatie
+## 🧪 Testen en Validatie
 
-### Debugging van integratietests
+### Debugging van Integratietests
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -306,7 +306,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Loadtesten voor debugging
+### Load Testing voor Debugging
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -328,9 +328,9 @@ load_test() {
 }
 ```
 
-## 🔧 Infrastructuur-debugging
+## 🔧 Infrastructuur Debugging
 
-### Debugging van Bicep-sjablonen
+### Debugging van Bicep Templates
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -370,7 +370,7 @@ debug_deployment() {
 }
 ```
 
-### Analyse van resource-status
+### Analyse van Resource Status
 ```bash
 # Analyze resource states for inconsistencies
 analyze_resources() {
@@ -399,7 +399,7 @@ analyze_resources() {
 
 ## 🔒 Beveiligingsdebugging
 
-### Debugging van authenticatiestromen
+### Debugging van Authenticatiestromen
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -433,7 +433,7 @@ debug_keyvault() {
 }
 ```
 
-### Debugging van netwerkbeveiliging
+### Debugging van Netwerkbeveiliging
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -451,9 +451,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 Applicatiespecifieke debugging
+## 📱 Applicatie-specifieke Debugging
 
-### Debugging van Node.js-applicaties
+### Debugging van Node.js Applicaties
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -482,7 +482,7 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Debugging van databasequery's
+### Debugging van Database Queries
 ```javascript
 // database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
@@ -512,9 +512,9 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Noodprocedures voor debugging
+## 🚨 Noodprocedures voor Debugging
 
-### Reactie op productieproblemen
+### Reactie op Productieproblemen
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -575,7 +575,7 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Terugrolprocedures
+### Rollback Procedures
 ```bash
 # Quick rollback script
 quick_rollback() {
@@ -602,9 +602,9 @@ quick_rollback() {
 }
 ```
 
-## 📊 Debugging-dashboards
+## 📊 Debugging Dashboards
 
-### Aangepast monitoringdashboard
+### Aangepaste Monitoring Dashboard
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -649,16 +649,16 @@ aggregate_logs() {
 }
 ```
 
-## 🔗 Geavanceerde bronnen
+## 🔗 Geavanceerde Bronnen
 
-### Aangepaste debugscripts
-Maak een `scripts/debug/`-map met:
+### Aangepaste Debugscripts
+Maak een `scripts/debug/` directory met:
 - `health-check.sh` - Uitgebreide gezondheidscontrole
 - `performance-test.sh` - Geautomatiseerde prestatietests
-- `log-analyzer.py` - Geavanceerde logparsing en analyse
+- `log-analyzer.py` - Geavanceerde log parsing en analyse
 - `resource-validator.sh` - Validatie van infrastructuur
 
-### Monitoringintegratie
+### Monitoring Integratie
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
@@ -677,18 +677,18 @@ hooks:
 
 ## Best Practices
 
-1. **Schakel altijd debuglogging in** in niet-productieomgevingen
+1. **Schakel altijd debug logging in** in niet-productieomgevingen
 2. **Maak reproduceerbare testcases** voor problemen
-3. **Documenteer probleemoplossingsprocedures** voor je team
+3. **Documenteer debugprocedures** voor je team
 4. **Automatiseer gezondheidscontroles** en monitoring
 5. **Houd debugtools up-to-date** met je applicatiewijzigingen
-6. **Oefen probleemoplossingsprocedures** tijdens niet-incidenttijden
+6. **Oefen debugprocedures** tijdens niet-incident tijden
 
-## Volgende stappen
+## Volgende Stappen
 
 - [Capaciteitsplanning](../pre-deployment/capacity-planning.md) - Plan resourcevereisten
 - [SKU-selectie](../pre-deployment/sku-selection.md) - Kies geschikte servicetiers
-- [Preflight-controles](../pre-deployment/preflight-checks.md) - Validatie vóór implementatie
+- [Preflight Checks](../pre-deployment/preflight-checks.md) - Validatie vóór implementatie
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Snelle referentiecommando's
 
 ---
@@ -698,8 +698,9 @@ hooks:
 ---
 
 **Navigatie**
-- **Vorige les**: [Veelvoorkomende problemen](common-issues.md)
-- **Volgende les**: [Capaciteitsplanning](../pre-deployment/capacity-planning.md)
+- **Vorige Les**: [Veelvoorkomende Problemen](common-issues.md)
+
+- **Volgende Les**: [Capaciteitsplanning](../pre-deployment/capacity-planning.md)
 
 ---
 

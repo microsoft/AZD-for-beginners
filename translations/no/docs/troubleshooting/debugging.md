@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:50:52+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:19:24+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "no"
 }
 -->
-# Feilsøkingsguide - Avansert Feilsøkingsteknikker
+# Feilsøkingsguide - Avanserte teknikker for logganalyse
 
 ## Introduksjon
 
-Denne omfattende guiden gir avanserte feilsøkingsstrategier, verktøy og teknikker for å diagnostisere og løse komplekse problemer med Azure Developer CLI-deployeringer. Lær systematiske feilsøkingsmetoder, logganalyseteknikker, ytelsesprofilering og avanserte diagnostiske verktøy for effektivt å løse problemer med deployering og kjøring.
+Denne omfattende guiden gir avanserte strategier, verktøy og teknikker for feilsøking og løsning av komplekse problemer med Azure Developer CLI-deployeringer. Lær systematiske feilsøkingsmetoder, logganalyseteknikker, ytelsesprofilering og avanserte diagnostiske verktøy for effektivt å løse problemer under deployering og kjøring.
 
 ## Læringsmål
 
@@ -26,9 +26,9 @@ Ved å fullføre denne guiden vil du:
 ## Læringsutbytte
 
 Etter fullføring vil du kunne:
-- Bruke TRIAGE-metodikken for systematisk feilsøking av komplekse deployeringsproblemer
+- Anvende TRIAGE-metodikken for systematisk feilsøking av komplekse deployeringsproblemer
 - Konfigurere og analysere omfattende logg- og sporingsinformasjon
-- Effektivt bruke Azure Monitor, Application Insights og diagnostiske verktøy
+- Bruke Azure Monitor, Application Insights og diagnostiske verktøy effektivt
 - Feilsøke nettverksforbindelser, autentisering og tillatelsesproblemer selvstendig
 - Implementere strategier for ytelsesovervåking og optimalisering
 - Lage tilpassede feilsøkingsskript og automatisering for tilbakevendende problemer
@@ -41,7 +41,7 @@ Etter fullføring vil du kunne:
 - **I**soler: Hvilken komponent feiler?
 - **A**nalyser: Hva forteller loggene oss?
 - **S**amle: Samle all relevant informasjon
-- **E**skalere: Når bør du søke ekstra hjelp
+- **E**skalere: Når bør du søke ytterligere hjelp?
 
 ## Aktivering av feilsøkingsmodus
 
@@ -687,9 +687,9 @@ hooks:
 ## Neste steg
 
 - [Kapasitetsplanlegging](../pre-deployment/capacity-planning.md) - Planlegg ressursbehov
-- [Valg av SKU](../pre-deployment/sku-selection.md) - Velg passende tjenestenivåer
+- [SKU-valg](../pre-deployment/sku-selection.md) - Velg passende tjenestenivåer
 - [Preflight-sjekker](../pre-deployment/preflight-checks.md) - Validering før deployering
-- [Hurtigreferanse](../../resources/cheat-sheet.md) - Kommandoer for rask referanse
+- [Hurtigreferanse](../../resources/cheat-sheet.md) - Kommandoer for rask tilgang
 
 ---
 
@@ -699,6 +699,7 @@ hooks:
 
 **Navigasjon**
 - **Forrige leksjon**: [Vanlige problemer](common-issues.md)
+
 - **Neste leksjon**: [Kapasitetsplanlegging](../pre-deployment/capacity-planning.md)
 
 ---

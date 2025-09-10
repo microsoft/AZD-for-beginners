@@ -1,22 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5066dbb0b4f24e493697f6430505b115",
-  "translation_date": "2025-09-09T21:51:10+00:00",
+  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
+  "translation_date": "2025-09-10T05:19:41+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "fi"
 }
 -->
-# Vianetsintäopas - Edistyneet vianetsintätekniikat
+# Vianetsintäopas - Edistyneet vianetsintä- ja lokianalyysitekniikat
 
 ## Johdanto
 
-Tämä kattava opas tarjoaa edistyneitä vianetsintästrategioita, työkaluja ja tekniikoita Azure Developer CLI -asennusten monimutkaisten ongelmien diagnosointiin ja ratkaisemiseen. Opit järjestelmällisiä vianetsintämenetelmiä, lokianalyysitekniikoita, suorituskyvyn profilointia ja edistyneitä diagnostiikkatyökaluja, joiden avulla voit tehokkaasti ratkaista asennus- ja käyttöaikaisia ongelmia.
+Tämä kattava opas tarjoaa edistyneitä vianetsintästrategioita, työkaluja ja tekniikoita Azure Developer CLI -asennusten monimutkaisten ongelmien diagnosointiin ja ratkaisemiseen. Opit systemaattisia vianetsintämenetelmiä, lokianalyysitekniikoita, suorituskyvyn profilointia ja edistyneitä diagnostiikkatyökaluja, joiden avulla voit tehokkaasti ratkaista asennus- ja käyttöaikaisia ongelmia.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
-- Hallitsemaan järjestelmällisiä vianetsintämenetelmiä Azure Developer CLI -ongelmien ratkaisemiseksi
+- Hallitsemaan systemaattisia vianetsintämenetelmiä Azure Developer CLI -ongelmien ratkaisemiseksi
 - Ymmärtämään edistyneitä lokien konfigurointi- ja analyysitekniikoita
 - Toteuttamaan suorituskyvyn profilointi- ja seurantastrategioita
 - Käyttämään Azure-diagnostiikkatyökaluja ja -palveluita monimutkaisten ongelmien ratkaisemiseksi
@@ -26,7 +26,7 @@ Tämän oppaan suorittamalla opit:
 ## Oppimistulokset
 
 Oppaan suorittamisen jälkeen osaat:
-- Soveltaa TRIAGE-menetelmää monimutkaisten asennusongelmien järjestelmälliseen vianetsintään
+- Soveltaa TRIAGE-menetelmää monimutkaisten asennusongelmien systemaattiseen vianetsintään
 - Konfiguroida ja analysoida kattavia loki- ja jäljitystietoja
 - Käyttää Azure Monitoria, Application Insightsia ja diagnostiikkatyökaluja tehokkaasti
 - Vianetsintää verkon yhteyksissä, autentikoinnissa ja käyttöoikeusongelmissa itsenäisesti
@@ -43,7 +43,7 @@ Oppaan suorittamisen jälkeen osaat:
 - **G**ather: Kerää kaikki asiaankuuluvat tiedot
 - **E**scalate: Milloin pyytää lisäapua?
 
-## Debug-tilan käyttöönotto
+## Debug-tilan ottaminen käyttöön
 
 ### Ympäristömuuttujat
 ```bash
@@ -306,7 +306,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Kuormitustestit vianetsintää varten
+### Kuormitustestauksen vianetsintä
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -433,7 +433,7 @@ debug_keyvault() {
 }
 ```
 
-### Verkkoturvallisuuden vianetsintä
+### Verkon tietoturvan vianetsintä
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -684,24 +684,25 @@ hooks:
 5. **Pidä vianetsintätyökalut ajan tasalla** sovelluksen muutosten kanssa
 6. **Harjoittele vianetsintämenetelmiä** ei-ongelmatilanteissa
 
-## Seuraavat askeleet
+## Seuraavat vaiheet
 
-- [Resurssisuunnittelu](../pre-deployment/capacity-planning.md) - Suunnittele resurssivaatimukset
+- [Resurssien suunnittelu](../pre-deployment/capacity-planning.md) - Suunnittele resurssivaatimukset
 - [SKU-valinta](../pre-deployment/sku-selection.md) - Valitse sopivat palvelutasot
 - [Esitarkistukset](../pre-deployment/preflight-checks.md) - Asennuksen ennakkovarmistus
 - [Pikaopas](../../resources/cheat-sheet.md) - Nopea viite komentoihin
 
 ---
 
-**Muista**: Hyvä vianetsintä on järjestelmällistä, perusteellista ja kärsivällistä. Nämä työkalut ja tekniikat auttavat sinua diagnosoimaan ongelmia nopeammin ja tehokkaammin.
+**Muista**: Hyvä vianetsintä on systemaattista, perusteellista ja kärsivällistä. Nämä työkalut ja tekniikat auttavat sinua diagnosoimaan ongelmia nopeammin ja tehokkaammin.
 
 ---
 
 **Navigointi**
 - **Edellinen osio**: [Yleiset ongelmat](common-issues.md)
-- **Seuraava osio**: [Resurssisuunnittelu](../pre-deployment/capacity-planning.md)
+
+- **Seuraava osio**: [Resurssien suunnittelu](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
