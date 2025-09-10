@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:25:17+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:24:48+00:00",
   "source_file": "examples/README.md",
   "language_code": "ro"
 }
@@ -17,11 +17,11 @@ Acest director conține exemple practice, șabloane și scenarii reale pentru a 
 
 Lucrând prin aceste exemple, vei:
 - Exersa fluxurile de lucru Azure Developer CLI cu scenarii realiste de aplicații
-- Înțelege diferite arhitecturi de aplicații și implementările lor în azd
+- Înțelege diferite arhitecturi de aplicații și implementările lor cu azd
 - Stăpâni modelele Infrastructure as Code pentru diverse servicii Azure
-- Aplica strategii de gestionare a configurațiilor și implementări specifice mediului
+- Aplica strategii de gestionare a configurației și implementări specifice mediului
 - Implementa modele de monitorizare, securitate și scalare în contexte practice
-- Dobândi experiență în depanarea și optimizarea scenariilor reale de implementare
+- Dobândi experiență în depanarea și rezolvarea problemelor reale de implementare
 
 ## Rezultate de Învățare
 
@@ -31,43 +31,18 @@ După finalizarea acestor exemple, vei putea:
 - Proiecta și implementa modele personalizate de infrastructură folosind Bicep
 - Configura aplicații complexe multi-servicii cu dependențe corecte
 - Aplica cele mai bune practici de securitate, monitorizare și performanță în scenarii reale
-- Depana și optimiza implementările bazate pe experiența practică
+- Depana și optimiza implementările bazate pe experiență practică
 
 ## Structura Directorului
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,14 +52,20 @@ examples/
 ## Exemple de Start Rapid
 
 ### Pentru Începători
-1. **[Aplicație Web Simplă](../../../examples/simple-web-app)** - Implementarea unei aplicații web de bază Node.js
-2. **[Website Static](../../../examples/static-website)** - Găzduirea unui website static pe Azure Storage
-3. **[Aplicație Container](../../../examples/container-app)** - Implementarea unei aplicații containerizate
+1. **[Aplicație Web Simplă - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Implementarea unei aplicații web Node.js Express cu MongoDB
+2. **[Website Static - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Găzduirea unui website static React cu Azure Static Web Apps
+3. **[Aplicație Containerizată - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Implementarea unei aplicații Python Flask containerizate
 
 ### Pentru Utilizatori Intermediari
-4. **[Aplicație cu Bază de Date](../../../examples/database-app)** - Aplicație web cu baza de date PostgreSQL
-5. **[Funcție Serverless](../../../examples/serverless-function)** - Funcții Azure cu declanșatori HTTP
-6. **[Microservicii](../../../examples/microservices)** - Aplicație multi-servicii cu API gateway
+4. **[Aplicație cu Bază de Date - C# cu Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Aplicație web cu API C# și baza de date Azure SQL
+5. **[Funcție Serverless - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Funcții Azure Python cu declanșatori HTTP și Cosmos DB
+6. **[Microservicii - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Aplicație Java multi-servicii cu Container Apps și API gateway
+
+### Șabloane Azure AI Foundry
+
+1. **[Aplicație Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Aplicație inteligentă de chat cu Azure OpenAI
+2. **[Procesare Documente AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analiza documentelor folosind serviciile Azure AI
+3. **[Pipeline de Machine Learning](https://github.com/Azure-Samples/mlops-v2)** - Flux de lucru MLOps cu Azure Machine Learning
 
 ## 📋 Instrucțiuni de Utilizare
 
@@ -134,7 +115,7 @@ Fiecare exemplu include:
 #### **Implementări de Bază**
 - Aplicații cu un singur serviciu
 - Modele simple de infrastructură
-- Gestionarea de bază a configurațiilor
+- Gestionarea de bază a configurației
 - Configurații economice pentru dezvoltare
 
 #### **Scenarii Avansate**
@@ -151,35 +132,52 @@ Fiecare exemplu include:
 
 ## 📖 Descrierea Exemplelor
 
-### Aplicație Web Simplă
-**Tehnologii**: Node.js, App Service, Application Insights  
+### Aplicație Web Simplă - Node.js Express
+**Tehnologii**: Node.js, Express, MongoDB, Container Apps  
 **Complexitate**: Începător  
-**Concepte**: Implementare de bază, variabile de mediu, verificări de sănătate
+**Concepte**: Implementare de bază, REST API, integrare bază de date NoSQL
 
-### Website Static
-**Tehnologii**: HTML/CSS/JS, Storage Account, CDN  
+### Website Static - React SPA
+**Tehnologii**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Complexitate**: Începător  
-**Concepte**: Găzduire statică, integrare CDN, domenii personalizate
+**Concepte**: Găzduire statică, backend serverless, dezvoltare web modernă
 
-### Aplicație Container
-**Tehnologii**: Docker, Container Apps, Container Registry  
+### Aplicație Containerizată - Python Flask
+**Tehnologii**: Python Flask, Docker, Container Apps, Container Registry  
+**Complexitate**: Începător  
+**Concepte**: Containerizare, arhitectură microservicii, dezvoltare API
+
+### Aplicație cu Bază de Date - C# cu Azure SQL
+**Tehnologii**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Complexitate**: Intermediar  
-**Concepte**: Containerizare, scalare, configurare ingress
+**Concepte**: Entity Framework, conexiuni la bază de date, dezvoltare API web
 
-### Aplicație cu Bază de Date
-**Tehnologii**: Python Flask, PostgreSQL, App Service  
+### Funcție Serverless - Python Azure Functions
+**Tehnologii**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Complexitate**: Intermediar  
-**Concepte**: Conexiuni la baza de date, gestionarea secretelor, migrații
+**Concepte**: Arhitectură bazată pe evenimente, calcul serverless, dezvoltare full-stack
 
-### Funcție Serverless
-**Tehnologii**: Azure Functions, Cosmos DB, API Management  
+### Microservicii - Java Spring Boot
+**Tehnologii**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Complexitate**: Intermediar  
-**Concepte**: Arhitectură bazată pe evenimente, legături, gestionarea API-urilor
+**Concepte**: Comunicare între microservicii, sisteme distribuite, modele enterprise
 
-### Microservicii
-**Tehnologii**: Servicii multiple, Service Bus, API Gateway  
+### Exemple Azure AI Foundry
+
+#### Aplicație Chat Azure OpenAI
+**Tehnologii**: Azure OpenAI, Cognitive Search, App Service  
+**Complexitate**: Intermediar  
+**Concepte**: Arhitectură RAG, căutare vectorială, integrare LLM
+
+#### Procesare Documente AI
+**Tehnologii**: Azure AI Document Intelligence, Storage, Functions  
+**Complexitate**: Intermediar  
+**Concepte**: Analiza documentelor, OCR, extragerea datelor
+
+#### Pipeline de Machine Learning
+**Tehnologii**: Azure ML, MLOps, Container Registry  
 **Complexitate**: Avansat  
-**Concepte**: Comunicare între servicii, cozi de mesaje, echilibrare a încărcării
+**Concepte**: Antrenarea modelelor, fluxuri de implementare, monitorizare
 
 ## 🛠 Exemple de Configurații
 
@@ -201,13 +199,13 @@ Directorul `configurations/` conține componente reutilizabile:
 - Automatizarea configurării mediului
 - Scripturi de migrare a bazelor de date
 - Instrumente de validare a implementării
-- Utilitare de monitorizare a costurilor
+- Utilitare pentru monitorizarea costurilor
 
 ## 🔧 Ghid de Personalizare
 
 ### Adaptarea Exemplelor la Cazul Tău
 
-1. **Revizuiește Cerințele Prealabile**
+1. **Revizuiește Prerechizitele**
    - Verifică cerințele serviciilor Azure
    - Confirmă limitele abonamentului
    - Înțelege implicațiile costurilor
@@ -231,12 +229,15 @@ Directorul `configurations/` conține componente reutilizabile:
 
 | Exemplu | Servicii | Bază de Date | Autentificare | Monitorizare | Complexitate |
 |---------|----------|--------------|---------------|--------------|--------------|
-| Aplicație Web Simplă | 1 | ❌ | De bază | De bază | ⭐ |
-| Website Static | 1 | ❌ | ❌ | De bază | ⭐ |
-| Aplicație Container | 1 | ❌ | De bază | Complet | ⭐⭐ |
-| Aplicație cu Bază de Date | 2 | ✅ | Complet | Complet | ⭐⭐⭐ |
-| Funcție Serverless | 3 | ✅ | Complet | Complet | ⭐⭐⭐ |
-| Microservicii | 5+ | ✅ | Complet | Complet | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
+| React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |
+| Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Full | Full | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
 
 ## 🎓 Parcurs de Învățare
 
@@ -244,7 +245,7 @@ Directorul `configurations/` conține componente reutilizabile:
 
 1. **Începe cu Aplicația Web Simplă**
    - Învață conceptele de bază AZD
-   - Înțelege fluxul de lucru al implementării
+   - Înțelege fluxul de implementare
    - Exersează gestionarea mediului
 
 2. **Încearcă Website-ul Static**
@@ -252,13 +253,13 @@ Directorul `configurations/` conține componente reutilizabile:
    - Învață despre integrarea CDN
    - Înțelege configurarea DNS
 
-3. **Treci la Aplicația Container**
+3. **Treci la Aplicația Containerizată**
    - Învață bazele containerizării
    - Înțelege conceptele de scalare
    - Exersează cu Docker
 
 4. **Adaugă Integrarea Bazei de Date**
-   - Învață despre provizionarea bazelor de date
+   - Învață despre aprovizionarea bazelor de date
    - Înțelege șirurile de conexiune
    - Exersează gestionarea secretelor
 
@@ -275,28 +276,32 @@ Directorul `configurations/` conține componente reutilizabile:
 ## 🔍 Găsirea Exemplului Potrivit
 
 ### După Stack-ul Tehnologic
-- **Node.js**: Aplicație Web Simplă, Microservicii
-- **Python**: Aplicație cu Bază de Date, Funcție Serverless
-- **Site-uri Statice**: Website Static
-- **Containere**: Aplicație Container, Microservicii
-- **Baze de Date**: Aplicație cu Bază de Date, Funcție Serverless
+- **Node.js**: Aplicația Node.js Express Todo
+- **Python**: Aplicația Python Flask Container, Python Functions + SPA
+- **C#**: Aplicația C# Web API + SQL Database, Aplicația Chat Azure OpenAI, Pipeline ML
+- **Java**: Microservicii Java Spring Boot
+- **React**: React SPA + Functions
+- **Containere**: Aplicația Python Flask Container, Microservicii Java
+- **Baze de Date**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Aplicația Chat Azure OpenAI, Procesare Documente AI, Pipeline ML
 
 ### După Modelul Arhitectural
-- **Monolitic**: Aplicație Web Simplă, Aplicație cu Bază de Date
-- **Static**: Website Static
-- **Microservicii**: Exemplul Microservicii
-- **Serverless**: Funcție Serverless
-- **Hibrid**: Aplicație Container
+- **Monolitic**: Node.js Express Todo, C# Web API + SQL
+- **Static + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservicii**: Microservicii Java Spring Boot
+- **Containerizat**: Aplicația Python Flask Container
+- **AI-Powered**: Aplicația Chat Azure OpenAI, Procesare Documente AI, Pipeline ML
 
 ### După Nivelul de Complexitate
-- **Începător**: Aplicație Web Simplă, Website Static
-- **Intermediar**: Aplicație Container, Aplicație cu Bază de Date, Funcție Serverless  
-- **Avansat**: Microservicii
+- **Începător**: Node.js Express Todo, React SPA + Functions, Aplicația Python Flask Container
+- **Intermediar**: C# Web API + SQL, Python Functions + SPA, Microservicii Java, Aplicația Chat Azure OpenAI, Procesare Documente AI
+- **Avansat**: Pipeline ML
 
 ## 📚 Resurse Suplimentare
 
 ### Link-uri Documentație
-- [Șabloane AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Șabloane Azure AI Foundry AZD](https://github.com/Azure/ai-foundry-templates)
 - [Documentație Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Centrul de Arhitectură Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
@@ -304,6 +309,12 @@ Directorul `configurations/` conține componente reutilizabile:
 - [Șabloane AZD Azure Samples](https://github.com/Azure-Samples/azd-templates)
 - [Șabloane Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Galeria Azure Developer CLI](https://azure.github.io/awesome-azd/)
+- [Aplicație Todo cu C# și Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Aplicație Todo cu Python și MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Aplicație Todo cu Node.js și PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [Aplicație Web React cu API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Job Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+- [Funcții Azure cu Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Cele Mai Bune Practici
 - [Framework-ul Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -316,11 +327,11 @@ Ai un exemplu util de împărtășit? Acceptăm contribuții!
 ### Ghid de Trimitere
 1. Urmează structura de director stabilită
 2. Include README.md cuprinzător
-3. Adaugă comentarii la fișierele de configurare
+3. Adaugă comentarii la fișierele de configurație
 4. Testează temeinic înainte de trimitere
-5. Include estimări de costuri și cerințe prealabile
+5. Include estimări de costuri și prerechizite
 
-### Structura Șablonului Exemplu
+### Structura Șablonului de Exemplu
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -348,9 +359,9 @@ example-name/
 
 **Navigare**
 - **Lecția Anterioară**: [Ghid de Studiu](../resources/study-guide.md)
-- **Revenire la**: [README Principal](../README.md)
+- **Întoarcere la**: [README Principal](../README.md)
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

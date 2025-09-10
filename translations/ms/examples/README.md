@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:21:36+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:20:15+00:00",
   "source_file": "examples/README.md",
   "language_code": "ms"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pengenalan
 
-Direktori ini mengandungi contoh praktikal, templat, dan senario dunia sebenar untuk membantu anda mempelajari Azure Developer CLI melalui latihan secara langsung. Setiap contoh menyediakan kod lengkap yang berfungsi, templat infrastruktur, dan arahan terperinci untuk pelbagai seni bina aplikasi dan corak penyebaran.
+Direktori ini mengandungi contoh praktikal, templat, dan senario dunia sebenar untuk membantu anda mempelajari Azure Developer CLI melalui latihan secara langsung. Setiap contoh menyediakan kod kerja lengkap, templat infrastruktur, dan arahan terperinci untuk pelbagai seni bina aplikasi dan corak penyebaran.
 
 ## Matlamat Pembelajaran
 
@@ -25,7 +25,7 @@ Dengan mengerjakan contoh-contoh ini, anda akan:
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan contoh-contoh ini, anda akan dapat:
+Setelah melengkapkan contoh-contoh ini, anda akan dapat:
 - Menyebarkan pelbagai jenis aplikasi menggunakan Azure Developer CLI dengan yakin
 - Menyesuaikan templat yang disediakan kepada keperluan aplikasi anda sendiri
 - Merancang dan melaksanakan corak infrastruktur tersuai menggunakan Bicep
@@ -36,38 +36,13 @@ Setelah menyelesaikan contoh-contoh ini, anda akan dapat:
 ## Struktur Direktori
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,20 +52,26 @@ examples/
 ## Contoh Permulaan Cepat
 
 ### Untuk Pemula
-1. **[Aplikasi Web Mudah](../../../examples/simple-web-app)** - Menyebarkan aplikasi web Node.js asas
-2. **[Laman Web Statik](../../../examples/static-website)** - Menghoskan laman web statik pada Azure Storage
-3. **[Aplikasi Kontena](../../../examples/container-app)** - Menyebarkan aplikasi yang dikontena
+1. **[Aplikasi Web Mudah - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Menyebarkan aplikasi web Node.js Express dengan MongoDB
+2. **[Laman Web Statik - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Menghoskan laman web statik React dengan Azure Static Web Apps
+3. **[Aplikasi Kontena - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Menyebarkan aplikasi Python Flask yang dikontena
 
 ### Untuk Pengguna Pertengahan
-4. **[Aplikasi Pangkalan Data](../../../examples/database-app)** - Aplikasi web dengan pangkalan data PostgreSQL
-5. **[Fungsi Tanpa Pelayan](../../../examples/serverless-function)** - Azure Functions dengan pencetus HTTP
-6. **[Mikroservis](../../../examples/microservices)** - Aplikasi multi-perkhidmatan dengan API gateway
+4. **[Aplikasi Pangkalan Data - C# dengan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Aplikasi web dengan API C# dan Pangkalan Data Azure SQL
+5. **[Fungsi Tanpa Pelayan - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions dengan pencetus HTTP dan Cosmos DB
+6. **[Mikroservis - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Aplikasi Java multi-perkhidmatan dengan Container Apps dan API gateway
+
+### Templat Azure AI Foundry
+
+1. **[Aplikasi Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Aplikasi chat pintar dengan Azure OpenAI
+2. **[Pemprosesan Dokumen AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analisis dokumen menggunakan perkhidmatan Azure AI
+3. **[Pipeline Pembelajaran Mesin](https://github.com/Azure-Samples/mlops-v2)** - Aliran kerja MLOps dengan Azure Machine Learning
 
 ## 📋 Arahan Penggunaan
 
 ### Menjalankan Contoh Secara Tempatan
 
-1. **Klon atau Salin Contoh**
+1. **Clone atau Salin Contoh**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
@@ -112,7 +93,7 @@ examples/
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
 
-4. **Penyebaran**
+4. **Sediakan**
    ```bash
    # Deploy infrastructure and application
    azd up
@@ -147,39 +128,56 @@ Setiap contoh termasuk:
 - Konfigurasi ketersediaan tinggi
 - Pemantauan dan pemerhatian
 - Integrasi CI/CD
-- Penyiapan pemulihan bencana
+- Tetapan pemulihan bencana
 
 ## 📖 Penerangan Contoh
 
-### Aplikasi Web Mudah
-**Teknologi**: Node.js, App Service, Application Insights  
+### Aplikasi Web Mudah - Node.js Express
+**Teknologi**: Node.js, Express, MongoDB, Container Apps  
 **Kerumitan**: Pemula  
-**Konsep**: Penyebaran asas, pembolehubah persekitaran, pemeriksaan kesihatan
+**Konsep**: Penyebaran asas, REST API, integrasi pangkalan data NoSQL
 
-### Laman Web Statik
-**Teknologi**: HTML/CSS/JS, Storage Account, CDN  
+### Laman Web Statik - React SPA
+**Teknologi**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Kerumitan**: Pemula  
-**Konsep**: Penghosan statik, integrasi CDN, domain tersuai
+**Konsep**: Penghosan statik, backend tanpa pelayan, pembangunan web moden
 
-### Aplikasi Kontena
-**Teknologi**: Docker, Container Apps, Container Registry  
+### Aplikasi Kontena - Python Flask
+**Teknologi**: Python Flask, Docker, Container Apps, Container Registry  
+**Kerumitan**: Pemula  
+**Konsep**: Pengkontenaan, seni bina mikroservis, pembangunan API
+
+### Aplikasi Pangkalan Data - C# dengan Azure SQL
+**Teknologi**: C# ASP.NET Core, Pangkalan Data Azure SQL, App Service  
 **Kerumitan**: Pertengahan  
-**Konsep**: Pengkontenaan, penskalaan, konfigurasi ingress
+**Konsep**: Entity Framework, sambungan pangkalan data, pembangunan web API
 
-### Aplikasi Pangkalan Data
-**Teknologi**: Python Flask, PostgreSQL, App Service  
+### Fungsi Tanpa Pelayan - Python Azure Functions
+**Teknologi**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Kerumitan**: Pertengahan  
-**Konsep**: Sambungan pangkalan data, pengurusan rahsia, migrasi
+**Konsep**: Seni bina berasaskan acara, pengkomputeran tanpa pelayan, pembangunan full-stack
 
-### Fungsi Tanpa Pelayan
-**Teknologi**: Azure Functions, Cosmos DB, API Management  
+### Mikroservis - Java Spring Boot
+**Teknologi**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Kerumitan**: Pertengahan  
-**Konsep**: Seni bina berasaskan acara, pengikatan, pengurusan API
+**Konsep**: Komunikasi mikroservis, sistem teragih, corak perusahaan
 
-### Mikroservis
-**Teknologi**: Pelbagai perkhidmatan, Service Bus, API Gateway  
+### Contoh Azure AI Foundry
+
+#### Aplikasi Chat Azure OpenAI
+**Teknologi**: Azure OpenAI, Cognitive Search, App Service  
+**Kerumitan**: Pertengahan  
+**Konsep**: Seni bina RAG, carian vektor, integrasi LLM
+
+#### Pemprosesan Dokumen AI
+**Teknologi**: Azure AI Document Intelligence, Storage, Functions  
+**Kerumitan**: Pertengahan  
+**Konsep**: Analisis dokumen, OCR, pengekstrakan data
+
+#### Pipeline Pembelajaran Mesin
+**Teknologi**: Azure ML, MLOps, Container Registry  
 **Kerumitan**: Lanjutan  
-**Konsep**: Komunikasi perkhidmatan, penjadualan mesej, pengimbangan beban
+**Konsep**: Latihan model, pipeline penyebaran, pemantauan
 
 ## 🛠 Contoh Konfigurasi
 
@@ -189,7 +187,7 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
 - Tetapan persekitaran pembangunan
 - Konfigurasi persekitaran staging
 - Konfigurasi sedia pengeluaran
-- Penyiapan penyebaran multi-region
+- Tetapan penyebaran multi-region
 
 ### Modul Bicep
 - Komponen infrastruktur yang boleh digunakan semula
@@ -213,12 +211,12 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
    - Fahami implikasi kos
 
 2. **Ubah Konfigurasi**
-   - Kemas kini definisi perkhidmatan dalam `azure.yaml`
+   - Kemas kini definisi perkhidmatan `azure.yaml`
    - Sesuaikan templat Bicep
    - Laraskan pembolehubah persekitaran
 
 3. **Uji Secara Menyeluruh**
-   - Sebarkan ke persekitaran pembangunan terlebih dahulu
+   - Sediakan ke persekitaran pembangunan terlebih dahulu
    - Sahkan fungsi
    - Uji penskalaan dan prestasi
 
@@ -231,16 +229,19 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
 
 | Contoh | Perkhidmatan | Pangkalan Data | Auth | Pemantauan | Kerumitan |
 |--------|--------------|----------------|------|------------|-----------|
-| Aplikasi Web Mudah | 1 | ❌ | Asas | Asas | ⭐ |
-| Laman Web Statik | 1 | ❌ | ❌ | Asas | ⭐ |
-| Aplikasi Kontena | 1 | ❌ | Asas | Penuh | ⭐⭐ |
-| Aplikasi Pangkalan Data | 2 | ✅ | Penuh | Penuh | ⭐⭐⭐ |
-| Fungsi Tanpa Pelayan | 3 | ✅ | Penuh | Penuh | ⭐⭐⭐ |
-| Mikroservis | 5+ | ✅ | Penuh | Penuh | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Asas | Asas | ⭐ |
+| React SPA + Functions | 3 | ✅ | Asas | Penuh | ⭐ |
+| Python Flask Container | 2 | ❌ | Asas | Penuh | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Penuh | Penuh | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Penuh | Penuh | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Penuh | Penuh | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Penuh | Penuh | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Asas | Penuh | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Penuh | Penuh | ⭐⭐⭐⭐ |
 
 ## 🎓 Laluan Pembelajaran
 
-### Kemajuan yang Disyorkan
+### Perkembangan yang Disyorkan
 
 1. **Mulakan dengan Aplikasi Web Mudah**
    - Pelajari konsep asas AZD
@@ -262,7 +263,7 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
    - Fahami rentetan sambungan
    - Berlatih pengurusan rahsia
 
-5. **Terokai Fungsi Tanpa Pelayan**
+5. **Terokai Tanpa Pelayan**
    - Fahami seni bina berasaskan acara
    - Pelajari tentang pencetus dan pengikatan
    - Berlatih dengan API
@@ -275,35 +276,45 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
 ## 🔍 Mencari Contoh yang Sesuai
 
 ### Mengikut Teknologi
-- **Node.js**: Aplikasi Web Mudah, Mikroservis
-- **Python**: Aplikasi Pangkalan Data, Fungsi Tanpa Pelayan
-- **Laman Statik**: Laman Web Statik
-- **Kontena**: Aplikasi Kontena, Mikroservis
-- **Pangkalan Data**: Aplikasi Pangkalan Data, Fungsi Tanpa Pelayan
+- **Node.js**: Node.js Express Todo App
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Kontena**: Python Flask Container App, Java Microservices
+- **Pangkalan Data**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Mengikut Corak Seni Bina
-- **Monolitik**: Aplikasi Web Mudah, Aplikasi Pangkalan Data
-- **Statik**: Laman Web Statik
-- **Mikroservis**: Contoh Mikroservis
-- **Tanpa Pelayan**: Fungsi Tanpa Pelayan
-- **Hibrid**: Aplikasi Kontena
+- **Monolitik**: Node.js Express Todo, C# Web API + SQL
+- **Statik + Tanpa Pelayan**: React SPA + Functions, Python Functions + SPA
+- **Mikroservis**: Java Spring Boot Microservices
+- **Dikontena**: Python Flask Container App
+- **Dikuasakan AI**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Mengikut Tahap Kerumitan
-- **Pemula**: Aplikasi Web Mudah, Laman Web Statik
-- **Pertengahan**: Aplikasi Kontena, Aplikasi Pangkalan Data, Fungsi Tanpa Pelayan  
-- **Lanjutan**: Mikroservis
+- **Pemula**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Pertengahan**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Lanjutan**: ML Pipeline
 
 ## 📚 Sumber Tambahan
 
 ### Pautan Dokumentasi
-- [Templat AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Templat Azure AI Foundry AZD](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentasi Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Contoh Komuniti
-- [Templat AZD Contoh Azure](https://github.com/Azure-Samples/azd-templates)
+- [Templat AZD Azure Samples](https://github.com/Azure-Samples/azd-templates)
 - [Templat Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Galeri Azure Developer CLI](https://azure.github.io/awesome-azd/)
+- [Aplikasi Todo dengan C# dan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Aplikasi Todo dengan Python dan MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Aplikasi Todo dengan Node.js dan PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [Aplikasi Web React dengan API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Kerja Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions dengan Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Amalan Terbaik
 - [Kerangka Seni Bina Azure yang Baik](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -353,4 +364,4 @@ example-name/
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

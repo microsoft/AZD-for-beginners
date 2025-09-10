@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:17:33+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:15:20+00:00",
   "source_file": "examples/README.md",
   "language_code": "da"
 }
@@ -16,58 +16,33 @@ Denne mappe indeholder praktiske eksempler, skabeloner og virkelige scenarier, d
 ## Læringsmål
 
 Ved at arbejde med disse eksempler vil du:
-- Øve Azure Developer CLI-arbejdsgange med realistiske applikationsscenarier
+- Øve Azure Developer CLI-workflows med realistiske applikationsscenarier
 - Forstå forskellige applikationsarkitekturer og deres azd-implementeringer
 - Mestre Infrastructure as Code-mønstre for forskellige Azure-tjenester
 - Anvende konfigurationsstyring og miljøspecifikke udrulningsstrategier
-- Implementere overvågning, sikkerhed og skaleringsmønstre i praktiske sammenhænge
-- Opbygge erfaring med fejlfinding og debugging af reelle udrulningsscenarier
+- Implementere overvågnings-, sikkerheds- og skaleringsmønstre i praktiske kontekster
+- Opbygge erfaring med fejlfinding og optimering af reelle udrulningsscenarier
 
 ## Læringsresultater
 
-Når du har gennemført disse eksempler, vil du være i stand til at:
+Når du har gennemført disse eksempler, vil du kunne:
 - Udrulle forskellige applikationstyper med Azure Developer CLI med selvtillid
 - Tilpasse de leverede skabeloner til dine egne applikationskrav
 - Designe og implementere brugerdefinerede infrastruktursmønstre ved hjælp af Bicep
-- Konfigurere komplekse multi-service applikationer med korrekte afhængigheder
-- Anvende sikkerheds-, overvågnings- og performance-best practices i reelle scenarier
+- Konfigurere komplekse applikationer med flere tjenester og korrekte afhængigheder
+- Anvende sikkerheds-, overvågnings- og performance-best practices i virkelige scenarier
 - Fejlsøge og optimere udrulninger baseret på praktisk erfaring
 
 ## Mappestruktur
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,14 +52,20 @@ examples/
 ## Hurtigstartseksempler
 
 ### For begyndere
-1. **[Simple Web App](../../../examples/simple-web-app)** - Udrul en grundlæggende Node.js-webapplikation
-2. **[Static Website](../../../examples/static-website)** - Host en statisk hjemmeside på Azure Storage
-3. **[Container App](../../../examples/container-app)** - Udrul en containeriseret applikation
+1. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Udrul en Node.js Express-webapplikation med MongoDB
+2. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Host en React-statisk hjemmeside med Azure Static Web Apps
+3. **[Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Udrul en containeriseret Python Flask-applikation
 
 ### For øvede brugere
-4. **[Database App](../../../examples/database-app)** - Webapplikation med PostgreSQL-database
-5. **[Serverless Function](../../../examples/serverless-function)** - Azure Functions med HTTP-triggere
-6. **[Microservices](../../../examples/microservices)** - Multi-service applikation med API-gateway
+4. **[Database App - C# med Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Webapplikation med C# API og Azure SQL Database
+5. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions med HTTP-triggers og Cosmos DB
+6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Multi-service Java-applikation med Container Apps og API-gateway
+
+### Azure AI Foundry-skabeloner
+
+1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Intelligent chatapplikation med Azure OpenAI
+2. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** - Dokumentanalyse ved hjælp af Azure AI-tjenester
+3. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps-workflow med Azure Machine Learning
 
 ## 📋 Brugsanvisning
 
@@ -124,7 +105,7 @@ Hvert eksempel inkluderer:
 - **README.md** - Detaljerede opsætnings- og tilpasningsinstruktioner
 - **azure.yaml** - AZD-konfiguration med kommentarer
 - **infra/** - Bicep-skabeloner med parameterforklaringer
-- **src/** - Eksempel på applikationskode
+- **src/** - Eksempelapplikationskode
 - **scripts/** - Hjælpescripts til almindelige opgaver
 
 ## 🎯 Læringsmål
@@ -132,54 +113,71 @@ Hvert eksempel inkluderer:
 ### Eksempelkategorier
 
 #### **Grundlæggende udrulninger**
-- Enkelt-service applikationer
+- Applikationer med én tjeneste
 - Enkle infrastruktursmønstre
 - Grundlæggende konfigurationsstyring
 - Omkostningseffektive udviklingsopsætninger
 
 #### **Avancerede scenarier**
-- Multi-service arkitekturer
+- Arkitekturer med flere tjenester
 - Komplekse netværkskonfigurationer
 - Databaseintegrationsmønstre
 - Implementeringer af sikkerhed og compliance
 
 #### **Produktionsklare mønstre**
-- Høj tilgængelighedskonfigurationer
+- Konfigurationer med høj tilgængelighed
 - Overvågning og observabilitet
 - CI/CD-integration
-- Disaster recovery-opsætninger
+- Opsætninger til katastrofeberedskab
 
 ## 📖 Eksempelbeskrivelser
 
-### Simple Web App
-**Teknologier**: Node.js, App Service, Application Insights  
+### Simple Web App - Node.js Express
+**Teknologier**: Node.js, Express, MongoDB, Container Apps  
 **Kompleksitet**: Begynder  
-**Koncepter**: Grundlæggende udrulning, miljøvariabler, sundhedstjek
+**Koncepter**: Grundlæggende udrulning, REST API, NoSQL-databaseintegration
 
-### Static Website
-**Teknologier**: HTML/CSS/JS, Storage Account, CDN  
+### Static Website - React SPA
+**Teknologier**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Kompleksitet**: Begynder  
-**Koncepter**: Statisk hosting, CDN-integration, brugerdefinerede domæner
+**Koncepter**: Statisk hosting, serverless backend, moderne webudvikling
 
-### Container App
-**Teknologier**: Docker, Container Apps, Container Registry  
+### Container App - Python Flask
+**Teknologier**: Python Flask, Docker, Container Apps, Container Registry  
+**Kompleksitet**: Begynder  
+**Koncepter**: Containerisering, mikroservicearkitektur, API-udvikling
+
+### Database App - C# med Azure SQL
+**Teknologier**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Kompleksitet**: Øvet  
-**Koncepter**: Containerisering, skalering, ingress-konfiguration
+**Koncepter**: Entity Framework, databaseforbindelser, web API-udvikling
 
-### Database App
-**Teknologier**: Python Flask, PostgreSQL, App Service  
+### Serverless Function - Python Azure Functions
+**Teknologier**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Kompleksitet**: Øvet  
-**Koncepter**: Databaseforbindelser, hemmelighedshåndtering, migrationer
+**Koncepter**: Event-drevet arkitektur, serverless computing, full-stack udvikling
 
-### Serverless Function
-**Teknologier**: Azure Functions, Cosmos DB, API Management  
+### Microservices - Java Spring Boot
+**Teknologier**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Kompleksitet**: Øvet  
-**Koncepter**: Event-drevet arkitektur, bindings, API-styring
+**Koncepter**: Kommunikation mellem tjenester, distribuerede systemer, enterprise-mønstre
 
-### Microservices
-**Teknologier**: Flere tjenester, Service Bus, API Gateway  
+### Azure AI Foundry-eksempler
+
+#### Azure OpenAI Chat App
+**Teknologier**: Azure OpenAI, Cognitive Search, App Service  
+**Kompleksitet**: Øvet  
+**Koncepter**: RAG-arkitektur, vektorsøgning, LLM-integration
+
+#### AI Document Processing
+**Teknologier**: Azure AI Document Intelligence, Storage, Functions  
+**Kompleksitet**: Øvet  
+**Koncepter**: Dokumentanalyse, OCR, dataudtrækning
+
+#### Machine Learning Pipeline
+**Teknologier**: Azure ML, MLOps, Container Registry  
 **Kompleksitet**: Avanceret  
-**Koncepter**: Servicekommunikation, meddelelseskøer, load balancing
+**Koncepter**: Modeltræning, udrulningspipelines, overvågning
 
 ## 🛠 Konfigurationseksempler
 
@@ -189,7 +187,7 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
 - Indstillinger for udviklingsmiljø
 - Konfigurationer for staging-miljø
 - Produktionsklare konfigurationer
-- Opsætninger til multi-region udrulning
+- Opsætninger til udrulning i flere regioner
 
 ### Bicep-moduler
 - Genanvendelige infrastrukturkomponenter
@@ -199,13 +197,13 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
 
 ### Hjælpescripts
 - Automatisering af miljøopsætning
-- Scripts til databasemigration
+- Scripts til databasemigrering
 - Værktøjer til validering af udrulning
-- Værktøjer til omkostningsovervågning
+- Omkostningsovervågningsværktøjer
 
 ## 🔧 Tilpasningsvejledning
 
-### Tilpasning af eksempler til dit brugsscenarie
+### Tilpasning af eksempler til din brugssag
 
 1. **Gennemgå forudsætninger**
    - Tjek krav til Azure-tjenester
@@ -213,7 +211,7 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
    - Forstå omkostningsimplikationer
 
 2. **Ændr konfiguration**
-   - Opdater `azure.yaml` service-definitioner
+   - Opdater `azure.yaml`-tjenestedefinitioner
    - Tilpas Bicep-skabeloner
    - Juster miljøvariabler
 
@@ -222,21 +220,24 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
    - Valider funktionalitet
    - Test skalering og performance
 
-4. **Sikkerhedsgennemgang**
-   - Gennemgå adgangskontrol
-   - Implementer hemmelighedshåndtering
-   - Aktivér overvågning og alarmer
+4. **Sikkerhedsrevision**
+   - Gennemgå adgangskontroller
+   - Implementer hemmelighedsstyring
+   - Aktiver overvågning og alarmer
 
 ## 📊 Sammenligningsmatrix
 
 | Eksempel | Tjenester | Database | Auth | Overvågning | Kompleksitet |
 |----------|-----------|----------|------|-------------|--------------|
-| Simple Web App | 1 | ❌ | Basic | Basic | ⭐ |
-| Static Website | 1 | ❌ | ❌ | Basic | ⭐ |
-| Container App | 1 | ❌ | Basic | Full | ⭐⭐ |
-| Database App | 2 | ✅ | Full | Full | ⭐⭐⭐ |
-| Serverless Function | 3 | ✅ | Full | Full | ⭐⭐⭐ |
-| Microservices | 5+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Grundlæggende | Grundlæggende | ⭐ |
+| React SPA + Functions | 3 | ✅ | Grundlæggende | Fuld | ⭐ |
+| Python Flask Container | 2 | ❌ | Grundlæggende | Fuld | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Fuld | Fuld | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Fuld | Fuld | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Fuld | Fuld | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Fuld | Fuld | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Grundlæggende | Fuld | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Fuld | Fuld | ⭐⭐⭐⭐ |
 
 ## 🎓 Læringssti
 
@@ -244,7 +245,7 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
 
 1. **Start med Simple Web App**
    - Lær grundlæggende AZD-koncepter
-   - Forstå udrulningsarbejdsgangen
+   - Forstå udrulningsworkflow
    - Øv miljøstyring
 
 2. **Prøv Static Website**
@@ -253,57 +254,67 @@ Mappen `configurations/` indeholder genanvendelige komponenter:
    - Forstå DNS-konfiguration
 
 3. **Gå videre til Container App**
-   - Lær grundlæggende containerisering
+   - Lær containeriseringsgrundlag
    - Forstå skalering
    - Øv med Docker
 
 4. **Tilføj databaseintegration**
    - Lær databaseprovisionering
    - Forstå forbindelsesstrenge
-   - Øv hemmelighedshåndtering
+   - Øv hemmelighedsstyring
 
 5. **Udforsk Serverless**
    - Forstå event-drevet arkitektur
-   - Lær om triggere og bindings
+   - Lær om triggers og bindings
    - Øv med API'er
 
 6. **Byg Microservices**
-   - Lær servicekommunikation
+   - Lær tjenestekommunikation
    - Forstå distribuerede systemer
    - Øv komplekse udrulninger
 
-## 🔍 Find det rigtige eksempel
+## 🔍 Find det rette eksempel
 
 ### Efter teknologistak
-- **Node.js**: Simple Web App, Microservices
-- **Python**: Database App, Serverless Function
-- **Statisk**: Static Website
-- **Containere**: Container App, Microservices
-- **Databaser**: Database App, Serverless Function
+- **Node.js**: Node.js Express Todo App
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Containers**: Python Flask Container App, Java Microservices
+- **Databaser**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Efter arkitekturmønster
-- **Monolitisk**: Simple Web App, Database App
-- **Statisk**: Static Website
-- **Microservices**: Microservices-eksempel
-- **Serverless**: Serverless Function
-- **Hybrid**: Container App
+- **Monolitisk**: Node.js Express Todo, C# Web API + SQL
+- **Statisk + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: Java Spring Boot Microservices
+- **Containeriseret**: Python Flask Container App
+- **AI-drevet**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Efter kompleksitetsniveau
-- **Begynder**: Simple Web App, Static Website
-- **Øvet**: Container App, Database App, Serverless Function  
-- **Avanceret**: Microservices
+- **Begynder**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Øvet**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Avanceret**: ML Pipeline
 
 ## 📚 Yderligere ressourcer
 
 ### Dokumentationslinks
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
-- [Bicep-dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Bicep Dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Arkitekturcenter](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Community-eksempler
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
 - [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App med C# og Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App med Python og MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App med Node.js og PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Web App med C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions med Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Best Practices
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -315,7 +326,7 @@ Har du et nyttigt eksempel at dele? Vi byder bidrag velkommen!
 
 ### Retningslinjer for indsendelse
 1. Følg den etablerede mappestruktur
-2. Inkluder en omfattende README.md
+2. Inkluder omfattende README.md
 3. Tilføj kommentarer til konfigurationsfiler
 4. Test grundigt før indsendelse
 5. Inkluder omkostningsestimater og forudsætninger
@@ -336,21 +347,21 @@ example-name/
 
 ---
 
-**Tip**: Start med det enkleste eksempel, der matcher din teknologistak, og arbejd dig gradvist op til mere komplekse scenarier. Hvert eksempel bygger videre på koncepter fra de foregående!
+**Tip**: Start med det enkleste eksempel, der matcher din teknologistak, og arbejd dig gradvist op til mere komplekse scenarier. Hvert eksempel bygger på koncepter fra de foregående!
 
-**Næste skridt**: 
+**Næste trin**: 
 - Vælg et eksempel, der matcher dit færdighedsniveau
 - Følg opsætningsinstruktionerne i eksemplets README
-- Eksperimentér med tilpasninger
+- Eksperimenter med tilpasninger
 - Del dine erfaringer med fællesskabet
 
 ---
 
 **Navigation**
-- **Forrige lektion**: [Studievejledning](../resources/study-guide.md)
+- **Forrige lektion**: [Studieguide](../resources/study-guide.md)
 - **Tilbage til**: [Hoved README](../README.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

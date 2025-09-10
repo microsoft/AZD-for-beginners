@@ -1,73 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:04:59+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:01:04+00:00",
   "source_file": "examples/README.md",
   "language_code": "hk"
 }
 -->
-# 範例 - 實用的 AZD 模板與配置
+# 範例 - 實用的 AZD 模板及配置
 
 ## 簡介
 
-此目錄包含實用範例、模板及真實場景，幫助您通過實際操作學習 Azure Developer CLI。每個範例都提供完整的工作代碼、基礎設施模板以及針對不同應用架構和部署模式的詳細指導。
+此目錄包含實用範例、模板及真實場景，幫助您通過實際操作學習 Azure Developer CLI。每個範例提供完整的工作代碼、基礎設施模板及詳細指引，涵蓋不同的應用架構及部署模式。
 
 ## 學習目標
 
-通過這些範例，您將能夠：
+通過這些範例，您將能：
 - 在真實應用場景中練習 Azure Developer CLI 的工作流程
 - 理解不同應用架構及其 AZD 實現方式
 - 掌握針對各種 Azure 服務的基礎設施即代碼模式
 - 應用配置管理及針對環境的部署策略
-- 在實際情境中實現監控、安全性及擴展模式
+- 在實際情境中實現監控、安全及擴展模式
 - 累積排查及調試真實部署場景的經驗
 
 ## 學習成果
 
-完成這些範例後，您將能夠：
+完成這些範例後，您將能：
 - 自信地使用 Azure Developer CLI 部署各類型應用
 - 根據自己的應用需求調整提供的模板
-- 使用 Bicep 設計並實現自定義基礎設施模式
+- 使用 Bicep 設計及實現自定義基礎設施模式
 - 配置具有正確依賴關係的複雜多服務應用
-- 在真實場景中應用安全性、監控及性能最佳實踐
+- 在真實場景中應用安全、監控及性能最佳實踐
 - 根據實際經驗排查及優化部署
 
 ## 目錄結構
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,16 +52,22 @@ examples/
 ## 快速入門範例
 
 ### 初學者
-1. **[簡單網頁應用](../../../examples/simple-web-app)** - 部署基本的 Node.js 網頁應用
-2. **[靜態網站](../../../examples/static-website)** - 在 Azure Storage 上託管靜態網站
-3. **[容器應用](../../../examples/container-app)** - 部署容器化應用
+1. **[簡單網頁應用 - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - 部署一個使用 MongoDB 的 Node.js Express 網頁應用
+2. **[靜態網站 - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - 使用 Azure 靜態網頁應用托管 React 靜態網站
+3. **[容器應用 - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - 部署容器化的 Python Flask 應用
 
 ### 中級使用者
-4. **[數據庫應用](../../../examples/database-app)** - 帶有 PostgreSQL 數據庫的網頁應用
-5. **[無伺服器函數](../../../examples/serverless-function)** - 帶有 HTTP 觸發器的 Azure Functions
-6. **[微服務](../../../examples/microservices)** - 帶有 API 閘道的多服務應用
+4. **[數據庫應用 - C# 與 Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - 使用 C# API 和 Azure SQL 數據庫的網頁應用
+5. **[無伺服器函數 - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - 使用 HTTP 觸發器和 Cosmos DB 的 Python Azure Functions
+6. **[微服務 - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - 使用容器應用和 API 閘道的多服務 Java 應用
 
-## 📋 使用指導
+### Azure AI Foundry 模板
+
+1. **[Azure OpenAI 聊天應用](https://github.com/Azure-Samples/azure-search-openai-demo)** - 使用 Azure OpenAI 的智能聊天應用
+2. **[AI 文檔處理](https://github.com/Azure-Samples/azure-ai-document-processing)** - 使用 Azure AI 服務進行文檔分析
+3. **[機器學習管道](https://github.com/Azure-Samples/mlops-v2)** - 使用 Azure 機器學習的 MLOps 工作流程
+
+## 📋 使用指引
 
 ### 本地運行範例
 
@@ -121,10 +102,10 @@ examples/
 ### 調整範例
 
 每個範例包括：
-- **README.md** - 詳細的設置及自定義指導
+- **README.md** - 詳細的設置及自定義指引
 - **azure.yaml** - 帶有註解的 AZD 配置
 - **infra/** - 帶有參數說明的 Bicep 模板
-- **src/** - 示例應用代碼
+- **src/** - 範例應用代碼
 - **scripts/** - 常用任務的輔助腳本
 
 ## 🎯 學習目標
@@ -132,8 +113,8 @@ examples/
 ### 範例分類
 
 #### **基礎部署**
-- 單一服務應用
-- 簡單的基礎設施模式
+- 單服務應用
+- 簡單基礎設施模式
 - 基礎配置管理
 - 成本效益高的開發設置
 
@@ -141,7 +122,7 @@ examples/
 - 多服務架構
 - 複雜的網絡配置
 - 數據庫集成模式
-- 安全性及合規性實現
+- 安全及合規實現
 
 #### **生產級模式**
 - 高可用性配置
@@ -151,35 +132,52 @@ examples/
 
 ## 📖 範例描述
 
-### 簡單網頁應用
-**技術**: Node.js, App Service, Application Insights  
+### 簡單網頁應用 - Node.js Express
+**技術**: Node.js, Express, MongoDB, 容器應用  
 **複雜度**: 初學者  
-**概念**: 基本部署、環境變數、健康檢查
+**概念**: 基礎部署、REST API、NoSQL 數據庫集成
 
-### 靜態網站
-**技術**: HTML/CSS/JS, Storage Account, CDN  
+### 靜態網站 - React SPA
+**技術**: React, Azure 靜態網頁應用, Azure Functions, Cosmos DB  
 **複雜度**: 初學者  
-**概念**: 靜態託管、CDN 集成、自定義域名
+**概念**: 靜態托管、無伺服器後端、現代網頁開發
 
-### 容器應用
-**技術**: Docker, Container Apps, Container Registry  
+### 容器應用 - Python Flask
+**技術**: Python Flask, Docker, 容器應用, 容器註冊表  
+**複雜度**: 初學者  
+**概念**: 容器化、微服務架構、API 開發
+
+### 數據庫應用 - C# 與 Azure SQL
+**技術**: C# ASP.NET Core, Azure SQL 數據庫, 應用服務  
 **複雜度**: 中級  
-**概念**: 容器化、擴展、入口配置
+**概念**: Entity Framework、數據庫連接、網頁 API 開發
 
-### 數據庫應用
-**技術**: Python Flask, PostgreSQL, App Service  
+### 無伺服器函數 - Python Azure Functions
+**技術**: Python, Azure Functions, Cosmos DB, 靜態網頁應用  
 **複雜度**: 中級  
-**概念**: 數據庫連接、秘密管理、遷移
+**概念**: 事件驅動架構、無伺服器計算、全棧開發
 
-### 無伺服器函數
-**技術**: Azure Functions, Cosmos DB, API Management  
+### 微服務 - Java Spring Boot
+**技術**: Java Spring Boot, 容器應用, 服務總線, API 閘道  
 **複雜度**: 中級  
-**概念**: 事件驅動架構、綁定、API 管理
+**概念**: 微服務通信、分佈式系統、企業模式
 
-### 微服務
-**技術**: 多個服務、Service Bus、API Gateway  
+### Azure AI Foundry 範例
+
+#### Azure OpenAI 聊天應用
+**技術**: Azure OpenAI, 認知搜索, 應用服務  
+**複雜度**: 中級  
+**概念**: RAG 架構、向量搜索、大型語言模型集成
+
+#### AI 文檔處理
+**技術**: Azure AI 文檔智能, 存儲, 函數  
+**複雜度**: 中級  
+**概念**: 文檔分析、OCR、數據提取
+
+#### 機器學習管道
+**技術**: Azure ML, MLOps, 容器註冊表  
 **複雜度**: 高級  
-**概念**: 服務通信、消息隊列、負載均衡
+**概念**: 模型訓練、部署管道、監控
 
 ## 🛠 配置範例
 
@@ -194,7 +192,7 @@ examples/
 ### Bicep 模塊
 - 可重用的基礎設施組件
 - 常見資源模式
-- 加強安全性的模板
+- 安全加固模板
 - 成本優化配置
 
 ### 輔助腳本
@@ -205,7 +203,7 @@ examples/
 
 ## 🔧 自定義指南
 
-### 調整範例以適應您的使用情境
+### 調整範例以適應您的需求
 
 1. **檢查先決條件**
    - 確認 Azure 服務需求
@@ -222,7 +220,7 @@ examples/
    - 驗證功能
    - 測試擴展性及性能
 
-4. **安全性審查**
+4. **安全審查**
    - 檢查訪問控制
    - 實現秘密管理
    - 啟用監控及警報
@@ -231,24 +229,27 @@ examples/
 
 | 範例 | 服務 | 數據庫 | 認證 | 監控 | 複雜度 |
 |------|------|--------|------|------|--------|
-| 簡單網頁應用 | 1 | ❌ | 基本 | 基本 | ⭐ |
-| 靜態網站 | 1 | ❌ | ❌ | 基本 | ⭐ |
-| 容器應用 | 1 | ❌ | 基本 | 完整 | ⭐⭐ |
-| 數據庫應用 | 2 | ✅ | 完整 | 完整 | ⭐⭐⭐ |
-| 無伺服器函數 | 3 | ✅ | 完整 | 完整 | ⭐⭐⭐ |
-| 微服務 | 5+ | ✅ | 完整 | 完整 | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | 基礎 | 基礎 | ⭐ |
+| React SPA + Functions | 3 | ✅ | 基礎 | 完整 | ⭐ |
+| Python Flask Container | 2 | ❌ | 基礎 | 完整 | ⭐ |
+| C# Web API + SQL | 2 | ✅ | 完整 | 完整 | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | 完整 | 完整 | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | 完整 | 完整 | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | 完整 | 完整 | ⭐⭐⭐ |
+| AI 文檔處理 | 2 | ❌ | 基礎 | 完整 | ⭐⭐ |
+| ML 管道 | 4+ | ✅ | 完整 | 完整 | ⭐⭐⭐⭐ |
 
 ## 🎓 學習路徑
 
 ### 推薦進度
 
 1. **從簡單網頁應用開始**
-   - 學習基本 AZD 概念
+   - 學習基礎 AZD 概念
    - 理解部署工作流程
    - 練習環境管理
 
 2. **嘗試靜態網站**
-   - 探索不同的託管選項
+   - 探索不同的托管選項
    - 學習 CDN 集成
    - 理解 DNS 配置
 
@@ -265,37 +266,41 @@ examples/
 5. **探索無伺服器架構**
    - 理解事件驅動架構
    - 學習觸發器及綁定
-   - 練習使用 API
+   - 練習 API 開發
 
 6. **構建微服務**
    - 學習服務通信
-   - 理解分布式系統
+   - 理解分佈式系統
    - 練習複雜部署
 
 ## 🔍 找到合適的範例
 
 ### 按技術堆疊
-- **Node.js**: 簡單網頁應用、微服務
-- **Python**: 數據庫應用、無伺服器函數
-- **靜態網站**: 靜態網站
-- **容器**: 容器應用、微服務
-- **數據庫**: 數據庫應用、無伺服器函數
+- **Node.js**: Node.js Express Todo 應用
+- **Python**: Python Flask 容器應用, Python Functions + SPA
+- **C#**: C# Web API + SQL 數據庫, Azure OpenAI 聊天應用, ML 管道
+- **Java**: Java Spring Boot 微服務
+- **React**: React SPA + Functions
+- **容器**: Python Flask 容器應用, Java 微服務
+- **數據庫**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI 聊天應用, AI 文檔處理, ML 管道
 
 ### 按架構模式
-- **單體架構**: 簡單網頁應用、數據庫應用
-- **靜態架構**: 靜態網站
-- **微服務架構**: 微服務範例
-- **無伺服器架構**: 無伺服器函數
-- **混合架構**: 容器應用
+- **單體架構**: Node.js Express Todo, C# Web API + SQL
+- **靜態 + 無伺服器**: React SPA + Functions, Python Functions + SPA
+- **微服務**: Java Spring Boot 微服務
+- **容器化**: Python Flask 容器應用
+- **AI 驅動**: Azure OpenAI 聊天應用, AI 文檔處理, ML 管道
 
 ### 按複雜度級別
-- **初學者**: 簡單網頁應用、靜態網站
-- **中級**: 容器應用、數據庫應用、無伺服器函數  
-- **高級**: 微服務
+- **初學者**: Node.js Express Todo, React SPA + Functions, Python Flask 容器應用
+- **中級**: C# Web API + SQL, Python Functions + SPA, Java 微服務, Azure OpenAI 聊天應用, AI 文檔處理
+- **高級**: ML 管道
 
-## 📚 附加資源
+## 📚 其他資源
 
 ### 文件連結
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Azure AI Foundry AZD 模板](https://github.com/Azure/ai-foundry-templates)
 - [Bicep 文件](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure 架構中心](https://learn.microsoft.com/en-us/azure/architecture/)
@@ -304,6 +309,12 @@ examples/
 - [Azure 範例 AZD 模板](https://github.com/Azure-Samples/azd-templates)
 - [Azure AI Foundry 模板](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI 資源庫](https://azure.github.io/awesome-azd/)
+- [使用 C# 和 Azure SQL 的 Todo 應用](https://github.com/Azure-Samples/todo-csharp-sql)
+- [使用 Python 和 MongoDB 的 Todo 應用](https://github.com/Azure-Samples/todo-python-mongo)
+- [使用 Node.js 和 PostgreSQL 的 Todo 應用](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [使用 C# API 的 React 網頁應用](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure 容器應用任務](https://github.com/Azure-Samples/container-apps-jobs)
+- [使用 Java 的 Azure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### 最佳實踐
 - [Azure 良好架構框架](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -316,9 +327,9 @@ examples/
 ### 提交指南
 1. 遵循既定的目錄結構
 2. 包含全面的 README.md
-3. 為配置文件添加註解
+3. 在配置文件中添加註解
 4. 在提交前徹底測試
-5. 包含成本估算及先決條件
+5. 包括成本估算及先決條件
 
 ### 範例模板結構
 ```
@@ -336,11 +347,11 @@ example-name/
 
 ---
 
-**專業提示**: 從最簡單的範例開始，選擇符合您技術堆疊的範例，然後逐步進階到更複雜的場景。每個範例都基於前一個範例的概念進行構建！
+**提示**: 從最簡單的範例開始，選擇符合您技術堆疊的範例，然後逐步進階到更複雜的場景。每個範例都基於前一個範例的概念進行構建！
 
 **下一步**: 
 - 選擇符合您技能水平的範例
-- 按範例 README 中的設置指導操作
+- 按範例 README 中的設置指引操作
 - 嘗試自定義
 - 與社群分享您的學習成果
 

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
-  "translation_date": "2025-09-10T15:30:10+00:00",
+  "original_hash": "e45896a8acbafead1f195788780a4ab7",
+  "translation_date": "2025-09-10T16:30:09+00:00",
   "source_file": "examples/README.md",
   "language_code": "lt"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Įvadas
 
-Šiame kataloge pateikiami praktiniai pavyzdžiai, šablonai ir realaus pasaulio scenarijai, padedantys mokytis Azure Developer CLI per praktinę veiklą. Kiekvienas pavyzdys apima pilną veikiančią kodą, infrastruktūros šablonus ir išsamias instrukcijas įvairioms programų architektūroms ir diegimo modeliams.
+Šiame kataloge rasite praktinius pavyzdžius, šablonus ir realaus pasaulio scenarijus, kurie padės jums išmokti naudotis Azure Developer CLI per praktinę veiklą. Kiekvienas pavyzdys pateikia pilnai veikiančius kodus, infrastruktūros šablonus ir išsamias instrukcijas skirtingoms programų architektūroms bei diegimo modeliams.
 
 ## Mokymosi tikslai
 
@@ -21,14 +21,14 @@ Dirbdami su šiais pavyzdžiais, jūs:
 - Įvaldysite infrastruktūros kaip kodo modelius įvairioms Azure paslaugoms
 - Taikysite konfigūracijos valdymo ir aplinkai specifines diegimo strategijas
 - Įgyvendinsite stebėjimo, saugumo ir mastelio keitimo modelius praktiniuose kontekstuose
-- Įgysite patirties sprendžiant ir derinant realius diegimo scenarijus
+- Įgysite patirties sprendžiant problemas ir derinant realius diegimo scenarijus
 
 ## Mokymosi rezultatai
 
 Baigę šiuos pavyzdžius, jūs galėsite:
 - Pasitikėdami diegti įvairių tipų programas naudodami Azure Developer CLI
 - Pritaikyti pateiktus šablonus savo programų poreikiams
-- Kurti ir įgyvendinti individualius infrastruktūros modelius naudodami Bicep
+- Kurti ir įgyvendinti individualius infrastruktūros modelius naudojant Bicep
 - Konfigūruoti sudėtingas daugiapaslaugines programas su tinkamomis priklausomybėmis
 - Taikyti saugumo, stebėjimo ir našumo geriausias praktikas realiuose scenarijuose
 - Spręsti problemas ir optimizuoti diegimus remiantis praktine patirtimi
@@ -36,38 +36,13 @@ Baigę šiuos pavyzdžius, jūs galėsite:
 ## Katalogo struktūra
 
 ```
-examples/
-├── simple-web-app/          # Basic web application deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── microservices/           # Multi-service application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── services/
-│   └── README.md
-├── database-app/            # Application with database
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── container-app/           # Containerized application
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── Dockerfile
-│   ├── src/
-│   └── README.md
-├── serverless-function/     # Azure Functions example
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
-├── static-website/          # Static website deployment
-│   ├── azure.yaml
-│   ├── infra/
-│   ├── src/
-│   └── README.md
+Azure Samples AZD Templates (linked externally):
+├── todo-nodejs-mongo/       # Node.js Express with MongoDB
+├── todo-csharp-sql-swa-func/ # React SPA with Static Web Apps  
+├── container-apps-store-api/ # Python Flask containerized app
+├── todo-csharp-sql/         # C# Web API with Azure SQL
+├── todo-python-mongo-swa-func/ # Python Functions with Cosmos DB
+├── java-microservices-aca-lab/ # Java microservices with Container Apps
 └── configurations/          # Common configuration examples
     ├── environment-configs/
     ├── bicep-modules/
@@ -77,26 +52,32 @@ examples/
 ## Greito starto pavyzdžiai
 
 ### Pradedantiesiems
-1. **[Paprasta žiniatinklio programa](../../../examples/simple-web-app)** - Diegti pagrindinę Node.js žiniatinklio programą
-2. **[Statinė svetainė](../../../examples/static-website)** - Talpinti statinę svetainę Azure Storage
-3. **[Konteinerinė programa](../../../examples/container-app)** - Diegti konteinerizuotą programą
+1. **[Paprasta žiniatinklio programa - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Diegti Node.js Express žiniatinklio programą su MongoDB
+2. **[Statinė svetainė - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Talpinti React statinę svetainę su Azure Static Web Apps
+3. **[Konteinerinė programa - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Diegti konteinerizuotą Python Flask programą
 
-### Vidutinio lygio naudotojams
-4. **[Duomenų bazės programa](../../../examples/database-app)** - Žiniatinklio programa su PostgreSQL duomenų baze
-5. **[Serverless funkcija](../../../examples/serverless-function)** - Azure Functions su HTTP trigeriais
-6. **[Mikropaslaugos](../../../examples/microservices)** - Daugiapaslaugė programa su API vartais
+### Vidutinio lygio vartotojams
+4. **[Duomenų bazės programa - C# su Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Žiniatinklio programa su C# API ir Azure SQL duomenų baze
+5. **[Serverless funkcija - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions su HTTP trigeriais ir Cosmos DB
+6. **[Mikropaslaugos - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Daugiapaslaugė Java programa su Container Apps ir API gateway
+
+### Azure AI Foundry šablonai
+
+1. **[Azure OpenAI pokalbių programa](https://github.com/Azure-Samples/azure-search-openai-demo)** - Išmani pokalbių programa su Azure OpenAI
+2. **[AI dokumentų apdorojimas](https://github.com/Azure-Samples/azure-ai-document-processing)** - Dokumentų analizė naudojant Azure AI paslaugas
+3. **[Mašininio mokymosi pipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps darbo eiga su Azure Machine Learning
 
 ## 📋 Naudojimo instrukcijos
 
-### Pavyzdžių paleidimas lokaliai
+### Pavyzdžių paleidimas vietoje
 
-1. **Klonuokite arba nukopijuokite pavyzdį**
+1. **Klonuoti arba kopijuoti pavyzdį**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
    ```
 
-2. **Inicializuokite AZD aplinką**
+2. **Inicializuoti AZD aplinką**
    ```bash
    # Initialize with existing template
    azd init
@@ -105,14 +86,14 @@ examples/
    azd env new my-environment
    ```
 
-3. **Konfigūruokite aplinką**
+3. **Konfigūruoti aplinką**
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
 
-4. **Diegimas**
+4. **Diegti**
    ```bash
    # Deploy infrastructure and application
    azd up
@@ -121,11 +102,11 @@ examples/
 ### Pavyzdžių pritaikymas
 
 Kiekvienas pavyzdys apima:
-- **README.md** - Išsamios nustatymo ir pritaikymo instrukcijos
+- **README.md** - Išsamias nustatymo ir pritaikymo instrukcijas
 - **azure.yaml** - AZD konfigūracija su komentarais
 - **infra/** - Bicep šablonai su parametrų paaiškinimais
 - **src/** - Pavyzdinis programos kodas
-- **scripts/** - Pagalbiniai scenarijai bendroms užduotims
+- **scripts/** - Pagalbiniai skriptai bendroms užduotims
 
 ## 🎯 Mokymosi tikslai
 
@@ -137,166 +118,190 @@ Kiekvienas pavyzdys apima:
 - Pagrindinis konfigūracijos valdymas
 - Ekonomiški kūrimo nustatymai
 
-#### **Pažangūs scenarijai**
+#### **Sudėtingi scenarijai**
 - Daugiapaslaugės architektūros
 - Sudėtingos tinklo konfigūracijos
-- Duomenų bazių integracijos modeliai
+- Duomenų bazės integracijos modeliai
 - Saugumo ir atitikties įgyvendinimai
 
-#### **Gamybai paruošti modeliai**
-- Didelio prieinamumo konfigūracijos
+#### **Paruošti gamybai modeliai**
+- Aukšto prieinamumo konfigūracijos
 - Stebėjimas ir stebimumas
 - CI/CD integracija
 - Atsigavimo po nelaimių nustatymai
 
 ## 📖 Pavyzdžių aprašymai
 
-### Paprasta žiniatinklio programa
-**Technologijos**: Node.js, App Service, Application Insights  
-**Sudėtingumas**: Pradedantysis  
-**Koncepcijos**: Pagrindinis diegimas, aplinkos kintamieji, sveikatos patikros
+### Paprasta žiniatinklio programa - Node.js Express
+**Technologijos**: Node.js, Express, MongoDB, Container Apps  
+**Sudėtingumas**: Pradedantiesiems  
+**Koncepcijos**: Pagrindinis diegimas, REST API, NoSQL duomenų bazės integracija
 
-### Statinė svetainė
-**Technologijos**: HTML/CSS/JS, Storage Account, CDN  
-**Sudėtingumas**: Pradedantysis  
-**Koncepcijos**: Statinis talpinimas, CDN integracija, pasirinktiniai domenai
+### Statinė svetainė - React SPA
+**Technologijos**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
+**Sudėtingumas**: Pradedantiesiems  
+**Koncepcijos**: Statinis talpinimas, serverless backend, modernus žiniatinklio kūrimas
 
-### Konteinerinė programa
-**Technologijos**: Docker, Container Apps, Container Registry  
+### Konteinerinė programa - Python Flask
+**Technologijos**: Python Flask, Docker, Container Apps, Container Registry  
+**Sudėtingumas**: Pradedantiesiems  
+**Koncepcijos**: Konteinerizacija, mikropaslaugų architektūra, API kūrimas
+
+### Duomenų bazės programa - C# su Azure SQL
+**Technologijos**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Sudėtingumas**: Vidutinis  
-**Koncepcijos**: Konteinerizacija, mastelio keitimas, įėjimo konfigūracija
+**Koncepcijos**: Entity Framework, duomenų bazės jungtys, žiniatinklio API kūrimas
 
-### Duomenų bazės programa
-**Technologijos**: Python Flask, PostgreSQL, App Service  
+### Serverless funkcija - Python Azure Functions
+**Technologijos**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Sudėtingumas**: Vidutinis  
-**Koncepcijos**: Duomenų bazių jungtys, paslapčių valdymas, migracijos
+**Koncepcijos**: Įvykių pagrįsta architektūra, serverless skaičiavimai, pilnas programų kūrimas
 
-### Serverless funkcija
-**Technologijos**: Azure Functions, Cosmos DB, API Management  
+### Mikropaslaugos - Java Spring Boot
+**Technologijos**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Sudėtingumas**: Vidutinis  
-**Koncepcijos**: Įvykių valdomos architektūros, susiejimai, API valdymas
+**Koncepcijos**: Mikropaslaugų komunikacija, paskirstytos sistemos, įmonės modeliai
 
-### Mikropaslaugos
-**Technologijos**: Kelių paslaugų, Service Bus, API Gateway  
-**Sudėtingumas**: Pažangus  
-**Koncepcijos**: Paslaugų komunikacija, pranešimų eilės, apkrovos balansavimas
+### Azure AI Foundry pavyzdžiai
+
+#### Azure OpenAI pokalbių programa
+**Technologijos**: Azure OpenAI, Cognitive Search, App Service  
+**Sudėtingumas**: Vidutinis  
+**Koncepcijos**: RAG architektūra, vektorinė paieška, LLM integracija
+
+#### AI dokumentų apdorojimas
+**Technologijos**: Azure AI Document Intelligence, Storage, Functions  
+**Sudėtingumas**: Vidutinis  
+**Koncepcijos**: Dokumentų analizė, OCR, duomenų ištraukimas
+
+#### Mašininio mokymosi pipeline
+**Technologijos**: Azure ML, MLOps, Container Registry  
+**Sudėtingumas**: Sudėtingas  
+**Koncepcijos**: Modelių mokymas, diegimo pipeline, stebėjimas
 
 ## 🛠 Konfigūracijos pavyzdžiai
 
-`configurations/` kataloge yra pakartotinai naudojamų komponentų:
+`configurations/` kataloge rasite pakartotinai naudojamus komponentus:
 
 ### Aplinkos konfigūracijos
 - Kūrimo aplinkos nustatymai
-- Bandomosios aplinkos konfigūracijos
-- Gamybai paruoštos konfigūracijos
+- Staging aplinkos konfigūracijos
+- Paruoštos gamybai konfigūracijos
 - Daugiaregioniai diegimo nustatymai
 
 ### Bicep moduliai
 - Pakartotinai naudojami infrastruktūros komponentai
-- Bendri išteklių modeliai
+- Bendri resursų modeliai
 - Saugumo sustiprinti šablonai
 - Ekonomiškai optimizuotos konfigūracijos
 
-### Pagalbiniai scenarijai
+### Pagalbiniai skriptai
 - Aplinkos nustatymo automatizavimas
-- Duomenų bazių migracijos scenarijai
-- Diegimo patikros įrankiai
-- Išlaidų stebėjimo priemonės
+- Duomenų bazės migracijos skriptai
+- Diegimo validacijos įrankiai
+- Kaštų stebėjimo priemonės
 
 ## 🔧 Pritaikymo vadovas
 
 ### Pavyzdžių pritaikymas jūsų poreikiams
 
-1. **Peržiūrėkite reikalavimus**
-   - Patikrinkite Azure paslaugų reikalavimus
-   - Patikrinkite prenumeratos limitus
-   - Supraskite išlaidų pasekmes
+1. **Peržiūrėti reikalavimus**
+   - Patikrinti Azure paslaugų reikalavimus
+   - Patikrinti prenumeratos limitus
+   - Suprasti kaštų pasekmes
 
-2. **Modifikuokite konfigūraciją**
-   - Atnaujinkite `azure.yaml` paslaugų apibrėžimus
-   - Pritaikykite Bicep šablonus
-   - Pakoreguokite aplinkos kintamuosius
+2. **Modifikuoti konfigūraciją**
+   - Atnaujinti `azure.yaml` paslaugų apibrėžimus
+   - Pritaikyti Bicep šablonus
+   - Koreguoti aplinkos kintamuosius
 
-3. **Išbandykite kruopščiai**
-   - Pirmiausia diekite kūrimo aplinkoje
-   - Patikrinkite funkcionalumą
-   - Išbandykite mastelio keitimą ir našumą
+3. **Kruopščiai testuoti**
+   - Pirmiausia diegti kūrimo aplinkoje
+   - Patikrinti funkcionalumą
+   - Testuoti mastelio keitimą ir našumą
 
 4. **Saugumo peržiūra**
-   - Peržiūrėkite prieigos kontrolę
-   - Įgyvendinkite paslapčių valdymą
-   - Įjunkite stebėjimą ir įspėjimus
+   - Peržiūrėti prieigos kontrolę
+   - Įgyvendinti paslapčių valdymą
+   - Įjungti stebėjimą ir įspėjimus
 
 ## 📊 Palyginimo matrica
 
 | Pavyzdys | Paslaugos | Duomenų bazė | Autentifikacija | Stebėjimas | Sudėtingumas |
 |----------|-----------|--------------|-----------------|------------|--------------|
-| Paprasta žiniatinklio programa | 1 | ❌ | Pagrindinė | Pagrindinė | ⭐ |
-| Statinė svetainė | 1 | ❌ | ❌ | Pagrindinė | ⭐ |
-| Konteinerinė programa | 1 | ❌ | Pagrindinė | Pilna | ⭐⭐ |
-| Duomenų bazės programa | 2 | ✅ | Pilna | Pilna | ⭐⭐⭐ |
-| Serverless funkcija | 3 | ✅ | Pilna | Pilna | ⭐⭐⭐ |
-| Mikropaslaugos | 5+ | ✅ | Pilna | Pilna | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Pagrindinė | Pagrindinis | ⭐ |
+| React SPA + Functions | 3 | ✅ | Pagrindinė | Pilnas | ⭐ |
+| Python Flask Container | 2 | ❌ | Pagrindinė | Pilnas | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Pilnas | Pilnas | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Pilnas | Pilnas | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Pilnas | Pilnas | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Pilnas | Pilnas | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Pagrindinė | Pilnas | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Pilnas | Pilnas | ⭐⭐⭐⭐ |
 
 ## 🎓 Mokymosi kelias
 
-### Rekomenduojama seka
+### Rekomenduojama progresija
 
-1. **Pradėkite nuo Paprastos žiniatinklio programos**
-   - Sužinokite pagrindines AZD sąvokas
-   - Supraskite diegimo eigą
-   - Praktikuokite aplinkos valdymą
+1. **Pradėti nuo paprastos žiniatinklio programos**
+   - Išmokti pagrindines AZD sąvokas
+   - Suprasti diegimo eigą
+   - Praktikuoti aplinkos valdymą
 
-2. **Išbandykite Statinę svetainę**
-   - Tyrinėkite skirtingas talpinimo galimybes
-   - Sužinokite apie CDN integraciją
-   - Supraskite DNS konfigūraciją
+2. **Išbandyti statinę svetainę**
+   - Ištyrinėti skirtingas talpinimo galimybes
+   - Suprasti CDN integraciją
+   - Suprasti DNS konfigūraciją
 
-3. **Pereikite prie Konteinerinės programos**
-   - Sužinokite konteinerizacijos pagrindus
-   - Supraskite mastelio keitimo sąvokas
-   - Praktikuokite su Docker
+3. **Pereiti prie konteinerinės programos**
+   - Išmokti konteinerizacijos pagrindus
+   - Suprasti mastelio keitimo sąvokas
+   - Praktikuoti su Docker
 
-4. **Pridėkite Duomenų bazės integraciją**
-   - Sužinokite duomenų bazių teikimą
-   - Supraskite jungčių eilutes
-   - Praktikuokite paslapčių valdymą
+4. **Pridėti duomenų bazės integraciją**
+   - Išmokti duomenų bazės paruošimą
+   - Suprasti jungčių eilutes
+   - Praktikuoti paslapčių valdymą
 
-5. **Tyrinėkite Serverless**
-   - Supraskite įvykių valdomą architektūrą
-   - Sužinokite apie trigerius ir susiejimus
-   - Praktikuokite su API
+5. **Ištyrinėti serverless**
+   - Suprasti įvykių pagrįstą architektūrą
+   - Išmokti apie trigerius ir susiejimus
+   - Praktikuoti su API
 
-6. **Kurkite Mikropaslaugas**
-   - Sužinokite paslaugų komunikaciją
-   - Supraskite paskirstytas sistemas
-   - Praktikuokite sudėtingus diegimus
+6. **Kurti mikropaslaugas**
+   - Išmokti paslaugų komunikaciją
+   - Suprasti paskirstytas sistemas
+   - Praktikuoti sudėtingus diegimus
 
 ## 🔍 Tinkamo pavyzdžio paieška
 
 ### Pagal technologijų rinkinį
-- **Node.js**: Paprasta žiniatinklio programa, Mikropaslaugos
-- **Python**: Duomenų bazės programa, Serverless funkcija
-- **Statinės svetainės**: Statinė svetainė
-- **Konteineriai**: Konteinerinė programa, Mikropaslaugos
-- **Duomenų bazės**: Duomenų bazės programa, Serverless funkcija
+- **Node.js**: Node.js Express Todo App
+- **Python**: Python Flask Container App, Python Functions + SPA
+- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Konteineriai**: Python Flask Container App, Java Microservices
+- **Duomenų bazės**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Pagal architektūros modelį
-- **Monolitinė**: Paprasta žiniatinklio programa, Duomenų bazės programa
-- **Statinė**: Statinė svetainė
-- **Mikropaslaugos**: Mikropaslaugų pavyzdys
-- **Serverless**: Serverless funkcija
-- **Hibridinė**: Konteinerinė programa
+- **Monolitinis**: Node.js Express Todo, C# Web API + SQL
+- **Statinis + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Mikropaslaugos**: Java Spring Boot Microservices
+- **Konteinerizuotas**: Python Flask Container App
+- **AI pagrįstas**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
 
 ### Pagal sudėtingumo lygį
-- **Pradedantysis**: Paprasta žiniatinklio programa, Statinė svetainė
-- **Vidutinis**: Konteinerinė programa, Duomenų bazės programa, Serverless funkcija  
-- **Pažangus**: Mikropaslaugos
+- **Pradedantiesiems**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Vidutinis**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Sudėtingas**: ML Pipeline
 
 ## 📚 Papildomi ištekliai
 
 ### Dokumentacijos nuorodos
-- [Azure AI Foundry AZD šablonai](https://github.com/Azure/ai-foundry-templates)
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)
 
@@ -304,21 +309,27 @@ Kiekvienas pavyzdys apima:
 - [Azure pavyzdžių AZD šablonai](https://github.com/Azure-Samples/azd-templates)
 - [Azure AI Foundry šablonai](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI galerija](https://azure.github.io/awesome-azd/)
+- [Todo programa su C# ir Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo programa su Python ir MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo programa su Node.js ir PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React žiniatinklio programa su C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps darbas](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions su Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Geriausios praktikos
-- [Azure gerai suprojektuotos architektūros pagrindai](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Debesų priėmimo pagrindai](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure gerai suprojektuota sistema](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Debesų priėmimo sistema](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Pavyzdžių prisidėjimas
 
-Turite naudingą pavyzdį? Kviečiame prisidėti!
+Turite naudingą pavyzdį? Mes laukiame jūsų indėlio!
 
 ### Pateikimo gairės
 1. Laikykitės nustatytos katalogo struktūros
 2. Įtraukite išsamų README.md
 3. Pridėkite komentarus prie konfigūracijos failų
 4. Kruopščiai išbandykite prieš pateikdami
-5. Įtraukite išlaidų įvertinimus ir reikalavimus
+5. Įtraukite kaštų įvertinimus ir reikalavimus
 
 ### Pavyzdžio šablono struktūra
 ```
@@ -336,21 +347,21 @@ example-name/
 
 ---
 
-**Patarimas**: Pradėkite nuo paprasčiausio pavyzdžio, kuris atitinka jūsų technologijų rinkinį, tada palaipsniui pereikite prie sudėtingesnių scenarijų. Kiekvienas pavyzdys remiasi ankstesnių sąvokomis!
+**Naudingas patarimas**: Pradėkite nuo paprasčiausio pavyzdžio, kuris atitinka jūsų technologijų rinkinį, tada palaipsniui pereikite prie sudėtingesnių scenarijų. Kiekvienas pavyzdys remiasi ankstesnių sąvokomis!
 
 **Kiti žingsniai**: 
-- Pasirinkite pavyzdį, atitinkantį jūsų įgūdžių lygį
-- Vadovaukitės nustatymo instrukcijomis pavyzdžio README faile
+- Pasirinkite pavyzdį, kuris atitinka jūsų įgūdžių lygį
+- Sekite nustatymo instrukcijas pavyzdžio README faile
 - Eksperimentuokite su pritaikymais
-- Pasidalykite savo patirtimi su bendruomene
+- Pasidalinkite savo mokymosi patirtimi su bendruomene
 
 ---
 
 **Navigacija**
-- **Ankstesnė pamoka**: [Mokymosi vadovas](../resources/study-guide.md)
+- **Ankstesnė pamoka**: [Studijų vadovas](../resources/study-guide.md)
 - **Grįžti į**: [Pagrindinį README](../README.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojame kreiptis į profesionalius vertėjus. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
