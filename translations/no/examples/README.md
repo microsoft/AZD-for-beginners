@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:11:03+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:18:17+00:00",
   "source_file": "examples/README.md",
   "language_code": "no"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduksjon
 
-Denne katalogen inneholder praktiske eksempler, maler og virkelige scenarier for å hjelpe deg med å lære Azure Developer CLI gjennom praktisk øving. Hvert eksempel gir komplett fungerende kode, infrastrukturemaler og detaljerte instruksjoner for ulike applikasjonsarkitekturer og distribusjonsmønstre.
+Denne katalogen inneholder praktiske eksempler, maler og virkelige scenarier som hjelper deg med å lære Azure Developer CLI gjennom praktisk øving. Hvert eksempel gir komplett fungerende kode, infrastrukturmaler og detaljerte instruksjoner for ulike applikasjonsarkitekturer og distribusjonsmønstre.
 
 ## Læringsmål
 
@@ -19,7 +19,7 @@ Ved å jobbe gjennom disse eksemplene vil du:
 - Øve på Azure Developer CLI-arbeidsflyter med realistiske applikasjonsscenarier
 - Forstå ulike applikasjonsarkitekturer og deres azd-implementeringer
 - Mestre Infrastructure as Code-mønstre for ulike Azure-tjenester
-- Anvende konfigurasjonsstyring og distribusjonsstrategier for spesifikke miljøer
+- Bruke konfigurasjonsstyring og distribusjonsstrategier for spesifikke miljøer
 - Implementere overvåking, sikkerhet og skaleringsmønstre i praktiske sammenhenger
 - Bygge erfaring med feilsøking og debugging av reelle distribusjonsscenarier
 
@@ -30,7 +30,7 @@ Når du har fullført disse eksemplene, vil du kunne:
 - Tilpasse de medfølgende malene til dine egne applikasjonsbehov
 - Designe og implementere tilpassede infrastrukturmønstre ved hjelp av Bicep
 - Konfigurere komplekse applikasjoner med flere tjenester og riktige avhengigheter
-- Anvende beste praksis for sikkerhet, overvåking og ytelse i virkelige scenarier
+- Bruke sikkerhets-, overvåkings- og ytelsespraksis i virkelige scenarier
 - Feilsøke og optimalisere distribusjoner basert på praktisk erfaring
 
 ## Katalogstruktur
@@ -77,12 +77,12 @@ examples/
 ## Hurtigstart-eksempler
 
 ### For nybegynnere
-1. **[Enkel webapplikasjon](../../../examples/simple-web-app)** - Distribuer en grunnleggende Node.js-webapplikasjon
-2. **[Statisk nettsted](../../../examples/static-website)** - Host et statisk nettsted på Azure Storage
-3. **[Container-applikasjon](../../../examples/container-app)** - Distribuer en containerisert applikasjon
+1. **[Enkel webapp](../../../examples/simple-web-app)** - Distribuer en grunnleggende Node.js-webapplikasjon
+2. **[Statisk nettside](../../../examples/static-website)** - Host en statisk nettside på Azure Storage
+3. **[Container-app](../../../examples/container-app)** - Distribuer en containerisert applikasjon
 
 ### For viderekomne brukere
-4. **[Database-applikasjon](../../../examples/database-app)** - Webapplikasjon med PostgreSQL-database
+4. **[Database-app](../../../examples/database-app)** - Webapplikasjon med PostgreSQL-database
 5. **[Serverløs funksjon](../../../examples/serverless-function)** - Azure Functions med HTTP-triggere
 6. **[Mikrotjenester](../../../examples/microservices)** - Applikasjon med flere tjenester og API-gateway
 
@@ -140,7 +140,7 @@ Hvert eksempel inkluderer:
 #### **Avanserte scenarier**
 - Arkitekturer med flere tjenester
 - Komplekse nettverkskonfigurasjoner
-- Databaseintegrasjonsmønstre
+- Databasintegrasjonsmønstre
 - Implementeringer for sikkerhet og samsvar
 
 #### **Produksjonsklare mønstre**
@@ -149,24 +149,24 @@ Hvert eksempel inkluderer:
 - CI/CD-integrasjon
 - Oppsett for katastrofegjenoppretting
 
-## 📖 Eksempeldeskripsjoner
+## 📖 Eksempelbeskrivelser
 
-### Enkel webapplikasjon
+### Enkel webapp
 **Teknologier**: Node.js, App Service, Application Insights  
 **Kompleksitet**: Nybegynner  
 **Konsepter**: Grunnleggende distribusjon, miljøvariabler, helsesjekker
 
-### Statisk nettsted
+### Statisk nettside
 **Teknologier**: HTML/CSS/JS, Storage Account, CDN  
 **Kompleksitet**: Nybegynner  
 **Konsepter**: Statisk hosting, CDN-integrasjon, egendefinerte domener
 
-### Container-applikasjon
+### Container-app
 **Teknologier**: Docker, Container Apps, Container Registry  
 **Kompleksitet**: Viderekommen  
 **Konsepter**: Containerisering, skalering, ingress-konfigurasjon
 
-### Database-applikasjon
+### Database-app
 **Teknologier**: Python Flask, PostgreSQL, App Service  
 **Kompleksitet**: Viderekommen  
 **Konsepter**: Databaseforbindelser, hemmelighetshåndtering, migrasjoner
@@ -189,19 +189,19 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
 - Innstillinger for utviklingsmiljø
 - Konfigurasjoner for staging-miljø
 - Produksjonsklare konfigurasjoner
-- Distribusjonsoppsett for flere regioner
+- Oppsett for distribusjon i flere regioner
 
 ### Bicep-moduler
 - Gjenbrukbare infrastrukturkomponenter
 - Vanlige ressursmønstre
-- Sikkerhetsherdede maler
+- Sikkerhetsforsterkede maler
 - Kostnadsoptimaliserte konfigurasjoner
 
 ### Hjelpeskript
 - Automatisering av miljøoppsett
-- Skript for databasemigrering
-- Verktøy for validering av distribusjoner
-- Kostnadsovervåkingsverktøy
+- Skript for databasemigrasjon
+- Verktøy for validering av distribusjon
+- Verktøy for kostnadsovervåking
 
 ## 🔧 Tilpasningsveiledning
 
@@ -231,10 +231,10 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
 
 | Eksempel | Tjenester | Database | Autentisering | Overvåking | Kompleksitet |
 |----------|-----------|----------|---------------|------------|--------------|
-| Enkel webapplikasjon | 1 | ❌ | Grunnleggende | Grunnleggende | ⭐ |
-| Statisk nettsted | 1 | ❌ | ❌ | Grunnleggende | ⭐ |
-| Container-applikasjon | 1 | ❌ | Grunnleggende | Full | ⭐⭐ |
-| Database-applikasjon | 2 | ✅ | Full | Full | ⭐⭐⭐ |
+| Enkel webapp | 1 | ❌ | Grunnleggende | Grunnleggende | ⭐ |
+| Statisk nettside | 1 | ❌ | ❌ | Grunnleggende | ⭐ |
+| Container-app | 1 | ❌ | Grunnleggende | Full | ⭐⭐ |
+| Database-app | 2 | ✅ | Full | Full | ⭐⭐⭐ |
 | Serverløs funksjon | 3 | ✅ | Full | Full | ⭐⭐⭐ |
 | Mikrotjenester | 5+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
 
@@ -242,19 +242,19 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
 
 ### Anbefalt progresjon
 
-1. **Start med Enkel webapplikasjon**
+1. **Start med Enkel webapp**
    - Lær grunnleggende AZD-konsepter
    - Forstå distribusjonsarbeidsflyt
    - Øv på miljøstyring
 
-2. **Prøv Statisk nettsted**
+2. **Prøv Statisk nettside**
    - Utforsk ulike hostingalternativer
    - Lær om CDN-integrasjon
    - Forstå DNS-konfigurasjon
 
-3. **Gå videre til Container-applikasjon**
-   - Lær grunnleggende containerisering
-   - Forstå skalering
+3. **Gå videre til Container-app**
+   - Lær grunnleggende om containerisering
+   - Forstå skaleringskonsepter
    - Øv med Docker
 
 4. **Legg til databaseintegrasjon**
@@ -262,47 +262,48 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
    - Forstå tilkoblingsstrenger
    - Øv på hemmelighetshåndtering
 
-5. **Utforsk Serverløs**
+5. **Utforsk serverløse løsninger**
    - Forstå hendelsesdrevet arkitektur
    - Lær om triggere og bindings
    - Øv med API-er
 
-6. **Bygg Mikrotjenester**
+6. **Bygg mikrotjenester**
    - Lær tjenestekommunikasjon
    - Forstå distribuerte systemer
    - Øv på komplekse distribusjoner
 
 ## 🔍 Finne riktig eksempel
 
-### Etter teknologistack
-- **Node.js**: Enkel webapplikasjon, Mikrotjenester
-- **Python**: Database-applikasjon, Serverløs funksjon
-- **Statiske nettsteder**: Statisk nettsted
-- **Containere**: Container-applikasjon, Mikrotjenester
-- **Databaser**: Database-applikasjon, Serverløs funksjon
+### Etter teknologistakk
+- **Node.js**: Enkel webapp, Mikrotjenester
+- **Python**: Database-app, Serverløs funksjon
+- **Statisk innhold**: Statisk nettside
+- **Containere**: Container-app, Mikrotjenester
+- **Databaser**: Database-app, Serverløs funksjon
 
 ### Etter arkitekturmønster
-- **Monolittisk**: Enkel webapplikasjon, Database-applikasjon
-- **Statisk**: Statisk nettsted
+- **Monolittisk**: Enkel webapp, Database-app
+- **Statisk**: Statisk nettside
 - **Mikrotjenester**: Mikrotjenester-eksempel
 - **Serverløs**: Serverløs funksjon
-- **Hybrid**: Container-applikasjon
+- **Hybrid**: Container-app
 
 ### Etter kompleksitetsnivå
-- **Nybegynner**: Enkel webapplikasjon, Statisk nettsted
-- **Viderekommen**: Container-applikasjon, Database-applikasjon, Serverløs funksjon  
+- **Nybegynner**: Enkel webapp, Statisk nettside
+- **Viderekommen**: Container-app, Database-app, Serverløs funksjon  
 - **Avansert**: Mikrotjenester
 
-## 📚 Ekstra ressurser
+## 📚 Tilleggsressurser
 
 ### Dokumentasjonslenker
-- [AZD Template Specification](https://aka.ms/azd/templates)
-- [Bicep Dokumentasjon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure AI Foundry AZD-maler](https://github.com/Azure/ai-foundry-templates)
+- [Bicep-dokumentasjon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Fellesskapseksempler
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD-maler](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry-maler](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI-galleri](https://azure.github.io/awesome-azd/)
 
 ### Beste praksis
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -319,7 +320,7 @@ Har du et nyttig eksempel å dele? Vi ønsker bidrag velkommen!
 4. Test grundig før innsending
 5. Inkluder kostnadsestimater og forutsetninger
 
-### Eksempelmalestruktur
+### Eksempelmalstruktur
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -335,11 +336,11 @@ example-name/
 
 ---
 
-**Tips**: Start med det enkleste eksempelet som passer din teknologistack, og jobb deg gradvis opp til mer komplekse scenarier. Hvert eksempel bygger på konsepter fra de forrige!
+**Tips**: Start med det enkleste eksemplet som passer din teknologistakk, og jobb deg gradvis opp til mer komplekse scenarier. Hvert eksempel bygger på konsepter fra de forrige!
 
 **Neste steg**: 
 - Velg et eksempel som passer ditt ferdighetsnivå
-- Følg oppsettsinstruksjonene i eksempelets README
+- Følg oppsettinstruksjonene i eksemplets README
 - Eksperimenter med tilpasninger
 - Del dine erfaringer med fellesskapet
 
@@ -347,9 +348,9 @@ example-name/
 
 **Navigasjon**
 - **Forrige leksjon**: [Studieguide](../resources/study-guide.md)
-- **Tilbake til**: [Hoved README](../README.md)
+- **Tilbake til**: [Hoved-README](../README.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

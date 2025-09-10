@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:11:34+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:18:48+00:00",
   "source_file": "examples/README.md",
   "language_code": "fi"
 }
@@ -19,8 +19,8 @@ Työskennellessäsi näiden esimerkkien parissa opit:
 - Harjoittelemaan Azure Developer CLI -työnkulkuja realistisissa sovellusskenaarioissa
 - Ymmärtämään erilaisia sovellusarkkitehtuureja ja niiden azd-toteutuksia
 - Hallitsemaan Infrastructure as Code -malleja eri Azure-palveluille
-- Soveltamaan konfiguraation hallintaa ja ympäristökohtaisia käyttöönotto-strategioita
-- Toteuttamaan valvonta-, turvallisuus- ja skaalausmalleja käytännön yhteyksissä
+- Soveltamaan konfiguraationhallintaa ja ympäristökohtaisia käyttöönoton strategioita
+- Toteuttamaan monitorointi-, turvallisuus- ja skaalausmalleja käytännön yhteyksissä
 - Kertymään kokemusta todellisten käyttöönottojen vianetsinnästä ja virheenkorjauksesta
 
 ## Oppimistulokset
@@ -29,9 +29,9 @@ Kun olet suorittanut nämä esimerkit, osaat:
 - Ottaa käyttöön erilaisia sovellustyyppejä Azure Developer CLI:n avulla itsevarmasti
 - Mukauttaa tarjottuja malleja omiin sovellusvaatimuksiisi
 - Suunnitella ja toteuttaa räätälöityjä infrastruktuurimalleja Bicepin avulla
-- Konfiguroida monimutkaisia monipalvelusovelluksia asianmukaisilla riippuvuuksilla
-- Soveltaa turvallisuus-, valvonta- ja suorituskyvyn parhaita käytäntöjä todellisissa skenaarioissa
-- Vianetsintä ja optimointi käyttöönottoja käytännön kokemuksen perusteella
+- Konfiguroida monimutkaisia monipalvelusovelluksia oikeilla riippuvuuksilla
+- Soveltaa turvallisuus-, monitorointi- ja suorituskyvyn parhaita käytäntöjä todellisissa skenaarioissa
+- Vianetsintää ja optimointia käytännön kokemuksen perusteella
 
 ## Hakemistorakenne
 
@@ -77,8 +77,8 @@ examples/
 ## Nopeat aloitusesimerkit
 
 ### Aloittelijoille
-1. **[Yksinkertainen verkkosovellus](../../../examples/simple-web-app)** - Ota käyttöön perus Node.js-verkkosovellus
-2. **[Staattinen verkkosivusto](../../../examples/static-website)** - Isännöi staattinen verkkosivusto Azure Storagessa
+1. **[Yksinkertainen verkkosovellus](../../../examples/simple-web-app)** - Ota käyttöön perus Node.js -verkkosovellus
+2. **[Staattinen verkkosivusto](../../../examples/static-website)** - Isännöi staattista verkkosivustoa Azure Storagessa
 3. **[Konttisovellus](../../../examples/container-app)** - Ota käyttöön konttipohjainen sovellus
 
 ### Keskitasoisille käyttäjille
@@ -124,7 +124,7 @@ Jokainen esimerkki sisältää:
 - **README.md** - Yksityiskohtaiset asennus- ja mukautusohjeet
 - **azure.yaml** - AZD-konfiguraatio kommentteineen
 - **infra/** - Bicep-mallit parametri-selityksineen
-- **src/** - Näytesovelluskoodi
+- **src/** - Esimerkkisovelluskoodi
 - **scripts/** - Apuskriptit yleisiin tehtäviin
 
 ## 🎯 Oppimistavoitteet
@@ -141,13 +141,13 @@ Jokainen esimerkki sisältää:
 - Monipalveluarkkitehtuurit
 - Monimutkaiset verkkomallit
 - Tietokantaintegraatiomallit
-- Turvallisuus- ja vaatimustenmukaisuusratkaisut
+- Turvallisuus- ja vaatimustenmukaisuuden toteutukset
 
 #### **Tuotantovalmiit mallit**
 - Korkean saatavuuden konfiguraatiot
-- Valvonta ja havainnointi
+- Monitorointi ja havainnointi
 - CI/CD-integraatio
-- Katastrofipalautusratkaisut
+- Katastrofipalautusasetukset
 
 ## 📖 Esimerkkien kuvaukset
 
@@ -201,11 +201,11 @@ Jokainen esimerkki sisältää:
 - Ympäristön asennusautomaatio
 - Tietokantamigraatiot
 - Käyttöönoton validointityökalut
-- Kustannusten seurantatyökalut
+- Kustannusten seurannan apuvälineet
 
 ## 🔧 Mukautusopas
 
-### Esimerkkien mukauttaminen omaan käyttötapaukseesi
+### Esimerkkien mukauttaminen omaan käyttötarkoitukseen
 
 1. **Tarkista vaatimukset**
    - Tarkista Azure-palveluiden vaatimukset
@@ -225,12 +225,12 @@ Jokainen esimerkki sisältää:
 4. **Turvallisuuskatsaus**
    - Tarkista käyttöoikeudet
    - Toteuta salaisuuksien hallinta
-   - Ota käyttöön valvonta ja hälytykset
+   - Ota käyttöön monitorointi ja hälytykset
 
 ## 📊 Vertailutaulukko
 
-| Esimerkki | Palvelut | Tietokanta | Autentikointi | Valvonta | Monimutkaisuus |
-|-----------|----------|------------|---------------|----------|----------------|
+| Esimerkki | Palvelut | Tietokanta | Autentikointi | Monitorointi | Monimutkaisuus |
+|-----------|----------|------------|---------------|--------------|----------------|
 | Yksinkertainen verkkosovellus | 1 | ❌ | Perus | Perus | ⭐ |
 | Staattinen verkkosivusto | 1 | ❌ | ❌ | Perus | ⭐ |
 | Konttisovellus | 1 | ❌ | Perus | Täysi | ⭐⭐ |
@@ -242,32 +242,32 @@ Jokainen esimerkki sisältää:
 
 ### Suositeltu eteneminen
 
-1. **Aloita Yksinkertaisesta verkkosovelluksesta**
+1. **Aloita yksinkertaisesta verkkosovelluksesta**
    - Opettele perus AZD-konseptit
    - Ymmärrä käyttöönoton työnkulku
    - Harjoittele ympäristön hallintaa
 
-2. **Kokeile Staattista verkkosivustoa**
+2. **Kokeile staattista verkkosivustoa**
    - Tutki erilaisia isännöintivaihtoehtoja
    - Opettele CDN-integraatio
    - Ymmärrä DNS-konfiguraatio
 
-3. **Siirry Konttisovellukseen**
+3. **Siirry konttisovellukseen**
    - Opettele konttien perusasiat
    - Ymmärrä skaalauskonseptit
    - Harjoittele Dockerin käyttöä
 
-4. **Lisää Tietokantaintegraatio**
+4. **Lisää tietokantaintegraatio**
    - Opettele tietokannan provisiointi
    - Ymmärrä yhteysmerkkijonot
    - Harjoittele salaisuuksien hallintaa
 
-5. **Tutki Serverless-toimintoja**
+5. **Tutki serverless-ratkaisuja**
    - Ymmärrä tapahtumapohjainen arkkitehtuuri
    - Opettele liipaisimet ja sidokset
    - Harjoittele API:iden käyttöä
 
-6. **Rakenna Mikropalvelut**
+6. **Rakenna mikropalveluja**
    - Opettele palveluiden välinen viestintä
    - Ymmärrä hajautetut järjestelmät
    - Harjoittele monimutkaisia käyttöönottoja
@@ -296,13 +296,14 @@ Jokainen esimerkki sisältää:
 ## 📚 Lisäresurssit
 
 ### Dokumentaatiolinkit
-- [AZD-mallien määrittely](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep-dokumentaatio](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure-arkkitehtuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Yhteisön esimerkit
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD-mallien galleria](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### Parhaat käytännöt
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -335,10 +336,10 @@ example-name/
 
 ---
 
-**Vinkki**: Aloita yksinkertaisimmasta esimerkistä, joka vastaa teknologiapinoasi, ja etene vähitellen monimutkaisempiin skenaarioihin. Jokainen esimerkki rakentuu edellisen konseptien päälle!
+**Vinkki**: Aloita yksinkertaisimmasta esimerkistä, joka vastaa teknologiapinoasi, ja etene vähitellen kohti monimutkaisempia skenaarioita. Jokainen esimerkki rakentuu edellisen oppien päälle!
 
 **Seuraavat askeleet**: 
-- Valitse esimerkki, joka vastaa taitotasoaasi
+- Valitse esimerkki, joka vastaa taitotasoasi
 - Noudata esimerkin README:n asennusohjeita
 - Kokeile mukautuksia
 - Jaa oppimasi yhteisön kanssa
@@ -346,7 +347,7 @@ example-name/
 ---
 
 **Navigointi**
-- **Edellinen oppitunti**: [Opas](../resources/study-guide.md)
+- **Edellinen oppitunti**: [Opintosuunnitelma](../resources/study-guide.md)
 - **Palaa**: [Pää-README](../README.md)
 
 ---

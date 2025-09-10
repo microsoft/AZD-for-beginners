@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-10T07:03:01+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:27:22+00:00",
   "source_file": "examples/README.md",
   "language_code": "hr"
 }
@@ -16,7 +16,7 @@ Ovaj direktorij sadrži praktične primjere, predloške i stvarne scenarije koji
 ## Ciljevi učenja
 
 Radom na ovim primjerima, naučit ćete:
-- Prakticirati Azure Developer CLI radne procese s realističnim scenarijima aplikacija
+- Prakticirati Azure Developer CLI radne procese kroz realne scenarije aplikacija
 - Razumjeti različite arhitekture aplikacija i njihove azd implementacije
 - Ovladati obrascima Infrastructure as Code za razne Azure usluge
 - Primijeniti strategije upravljanja konfiguracijom i implementacije specifične za okruženje
@@ -174,7 +174,7 @@ Svaki primjer uključuje:
 ### Serverless funkcija
 **Tehnologije**: Azure Functions, Cosmos DB, API Management  
 **Složenost**: Srednja razina  
-**Koncepti**: Arhitektura temeljena na događajima, povezivanja, upravljanje API-jem
+**Koncepti**: Arhitektura vođena događajima, vezanja, upravljanje API-jem
 
 ### Mikroservisi
 **Tehnologije**: Više usluga, Service Bus, API Gateway  
@@ -263,8 +263,8 @@ Direktorij `configurations/` sadrži komponente koje se mogu ponovno koristiti:
    - Prakticirajte upravljanje tajnama
 
 5. **Istražite Serverless**
-   - Razumite arhitekturu temeljenu na događajima
-   - Naučite o okidačima i povezivanjima
+   - Razumite arhitekturu vođenu događajima
+   - Naučite o okidačima i vezanjima
    - Prakticirajte s API-ima
 
 6. **Izgradite Mikroservise**
@@ -296,13 +296,14 @@ Direktorij `configurations/` sadrži komponente koje se mogu ponovno koristiti:
 ## 📚 Dodatni resursi
 
 ### Dokumentacija
-- [AZD Specifikacija predloška](https://aka.ms/azd/templates)
-- [Bicep Dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Arhitekturni centar](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure AI Foundry AZD predlošci](https://github.com/Azure/ai-foundry-templates)
+- [Bicep dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Primjeri iz zajednice
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Galerija predložaka](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD predlošci](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry predlošci](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI galerija](https://azure.github.io/awesome-azd/)
 
 ### Najbolje prakse
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.

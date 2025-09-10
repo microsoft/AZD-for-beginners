@@ -1,26 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T17:30:42+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:04:59+00:00",
   "source_file": "examples/README.md",
   "language_code": "hk"
 }
 -->
-# 範例 - 實用的 AZD 模板及配置
+# 範例 - 實用的 AZD 模板與配置
 
 ## 簡介
 
-此目錄包含實用範例、模板及真實場景，幫助您通過實際操作學習 Azure Developer CLI。每個範例提供完整的工作代碼、基礎設施模板及詳細指引，涵蓋不同的應用架構及部署模式。
+此目錄包含實用範例、模板及真實場景，幫助您通過實際操作學習 Azure Developer CLI。每個範例都提供完整的工作代碼、基礎設施模板以及針對不同應用架構和部署模式的詳細指導。
 
 ## 學習目標
 
 通過這些範例，您將能夠：
 - 在真實應用場景中練習 Azure Developer CLI 的工作流程
 - 理解不同應用架構及其 AZD 實現方式
-- 掌握各種 Azure 服務的基礎設施即代碼模式
+- 掌握針對各種 Azure 服務的基礎設施即代碼模式
 - 應用配置管理及針對環境的部署策略
-- 在實際情境中實現監控、安全及擴展模式
+- 在實際情境中實現監控、安全性及擴展模式
 - 累積排查及調試真實部署場景的經驗
 
 ## 學習成果
@@ -28,9 +28,9 @@ CO_OP_TRANSLATOR_METADATA:
 完成這些範例後，您將能夠：
 - 自信地使用 Azure Developer CLI 部署各類型應用
 - 根據自己的應用需求調整提供的模板
-- 使用 Bicep 設計及實現自定義基礎設施模式
+- 使用 Bicep 設計並實現自定義基礎設施模式
 - 配置具有正確依賴關係的複雜多服務應用
-- 在真實場景中應用安全、監控及性能最佳實踐
+- 在真實場景中應用安全性、監控及性能最佳實踐
 - 根據實際經驗排查及優化部署
 
 ## 目錄結構
@@ -86,7 +86,7 @@ examples/
 5. **[無伺服器函數](../../../examples/serverless-function)** - 帶有 HTTP 觸發器的 Azure Functions
 6. **[微服務](../../../examples/microservices)** - 帶有 API 閘道的多服務應用
 
-## 📋 使用指引
+## 📋 使用指導
 
 ### 本地運行範例
 
@@ -121,7 +121,7 @@ examples/
 ### 調整範例
 
 每個範例包括：
-- **README.md** - 詳細的設置及自定義指引
+- **README.md** - 詳細的設置及自定義指導
 - **azure.yaml** - 帶有註解的 AZD 配置
 - **infra/** - 帶有參數說明的 Bicep 模板
 - **src/** - 示例應用代碼
@@ -134,14 +134,14 @@ examples/
 #### **基礎部署**
 - 單一服務應用
 - 簡單的基礎設施模式
-- 基本配置管理
+- 基礎配置管理
 - 成本效益高的開發設置
 
 #### **進階場景**
 - 多服務架構
 - 複雜的網絡配置
 - 數據庫集成模式
-- 安全及合規實現
+- 安全性及合規性實現
 
 #### **生產級模式**
 - 高可用性配置
@@ -194,7 +194,7 @@ examples/
 ### Bicep 模塊
 - 可重用的基礎設施組件
 - 常見資源模式
-- 加強安全的模板
+- 加強安全性的模板
 - 成本優化配置
 
 ### 輔助腳本
@@ -220,9 +220,9 @@ examples/
 3. **徹底測試**
    - 首先部署到開發環境
    - 驗證功能
-   - 測試擴展及性能
+   - 測試擴展性及性能
 
-4. **安全審查**
+4. **安全性審查**
    - 檢查訪問控制
    - 實現秘密管理
    - 啟用監控及警報
@@ -293,16 +293,17 @@ examples/
 - **中級**: 容器應用、數據庫應用、無伺服器函數  
 - **高級**: 微服務
 
-## 📚 其他資源
+## 📚 附加資源
 
 ### 文件連結
-- [AZD 模板規範](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD 模板](https://github.com/Azure/ai-foundry-templates)
 - [Bicep 文件](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure 架構中心](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### 社群範例
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD 模板畫廊](https://azure.github.io/awesome-azd/)
+- [Azure 範例 AZD 模板](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry 模板](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI 資源庫](https://azure.github.io/awesome-azd/)
 
 ### 最佳實踐
 - [Azure 良好架構框架](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -317,7 +318,7 @@ examples/
 2. 包含全面的 README.md
 3. 為配置文件添加註解
 4. 在提交前徹底測試
-5. 包括成本估算及先決條件
+5. 包含成本估算及先決條件
 
 ### 範例模板結構
 ```
@@ -339,7 +340,7 @@ example-name/
 
 **下一步**: 
 - 選擇符合您技能水平的範例
-- 按範例 README 中的設置指引操作
+- 按範例 README 中的設置指導操作
 - 嘗試自定義
 - 與社群分享您的學習成果
 
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。

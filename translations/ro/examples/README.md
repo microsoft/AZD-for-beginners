@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-10T07:01:01+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:25:17+00:00",
   "source_file": "examples/README.md",
   "language_code": "ro"
 }
@@ -21,7 +21,7 @@ Lucrând prin aceste exemple, vei:
 - Stăpâni modelele Infrastructure as Code pentru diverse servicii Azure
 - Aplica strategii de gestionare a configurațiilor și implementări specifice mediului
 - Implementa modele de monitorizare, securitate și scalare în contexte practice
-- Dobândi experiență în depanarea și rezolvarea problemelor reale de implementare
+- Dobândi experiență în depanarea și optimizarea scenariilor reale de implementare
 
 ## Rezultate de Învățare
 
@@ -31,7 +31,7 @@ După finalizarea acestor exemple, vei putea:
 - Proiecta și implementa modele personalizate de infrastructură folosind Bicep
 - Configura aplicații complexe multi-servicii cu dependențe corecte
 - Aplica cele mai bune practici de securitate, monitorizare și performanță în scenarii reale
-- Depana și optimiza implementările bazate pe experiență practică
+- Depana și optimiza implementările bazate pe experiența practică
 
 ## Structura Directorului
 
@@ -199,15 +199,15 @@ Directorul `configurations/` conține componente reutilizabile:
 
 ### Scripturi Ajutătoare
 - Automatizarea configurării mediului
-- Scripturi pentru migrarea bazelor de date
+- Scripturi de migrare a bazelor de date
 - Instrumente de validare a implementării
-- Utilitare pentru monitorizarea costurilor
+- Utilitare de monitorizare a costurilor
 
 ## 🔧 Ghid de Personalizare
 
 ### Adaptarea Exemplelor la Cazul Tău
 
-1. **Revizuiește Cerințele**
+1. **Revizuiește Cerințele Prealabile**
    - Verifică cerințele serviciilor Azure
    - Confirmă limitele abonamentului
    - Înțelege implicațiile costurilor
@@ -222,21 +222,21 @@ Directorul `configurations/` conține componente reutilizabile:
    - Validează funcționalitatea
    - Testează scalarea și performanța
 
-4. **Revizuire de Securitate**
+4. **Revizuiește Securitatea**
    - Verifică controalele de acces
    - Implementează gestionarea secretelor
    - Activează monitorizarea și alertele
 
-## 📊 Matrice de Comparație
+## 📊 Matrice de Comparare
 
 | Exemplu | Servicii | Bază de Date | Autentificare | Monitorizare | Complexitate |
 |---------|----------|--------------|---------------|--------------|--------------|
-| Aplicație Web Simplă | 1 | ❌ | Basic | Basic | ⭐ |
-| Website Static | 1 | ❌ | ❌ | Basic | ⭐ |
-| Aplicație Container | 1 | ❌ | Basic | Full | ⭐⭐ |
-| Aplicație cu Bază de Date | 2 | ✅ | Full | Full | ⭐⭐⭐ |
-| Funcție Serverless | 3 | ✅ | Full | Full | ⭐⭐⭐ |
-| Microservicii | 5+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| Aplicație Web Simplă | 1 | ❌ | De bază | De bază | ⭐ |
+| Website Static | 1 | ❌ | ❌ | De bază | ⭐ |
+| Aplicație Container | 1 | ❌ | De bază | Complet | ⭐⭐ |
+| Aplicație cu Bază de Date | 2 | ✅ | Complet | Complet | ⭐⭐⭐ |
+| Funcție Serverless | 3 | ✅ | Complet | Complet | ⭐⭐⭐ |
+| Microservicii | 5+ | ✅ | Complet | Complet | ⭐⭐⭐⭐ |
 
 ## 🎓 Parcurs de Învățare
 
@@ -244,7 +244,7 @@ Directorul `configurations/` conține componente reutilizabile:
 
 1. **Începe cu Aplicația Web Simplă**
    - Învață conceptele de bază AZD
-   - Înțelege fluxul de implementare
+   - Înțelege fluxul de lucru al implementării
    - Exersează gestionarea mediului
 
 2. **Încearcă Website-ul Static**
@@ -258,7 +258,7 @@ Directorul `configurations/` conține componente reutilizabile:
    - Exersează cu Docker
 
 4. **Adaugă Integrarea Bazei de Date**
-   - Învață despre aprovizionarea bazelor de date
+   - Învață despre provizionarea bazelor de date
    - Înțelege șirurile de conexiune
    - Exersează gestionarea secretelor
 
@@ -296,13 +296,14 @@ Directorul `configurations/` conține componente reutilizabile:
 ## 📚 Resurse Suplimentare
 
 ### Link-uri Documentație
-- [Specificație Șabloane AZD](https://aka.ms/azd/templates)
+- [Șabloane AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Documentație Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Centrul de Arhitectură Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Exemple Comunitare
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galeria Șabloanelor AZD](https://azure.github.io/awesome-azd/)
+- [Șabloane AZD Azure Samples](https://github.com/Azure-Samples/azd-templates)
+- [Șabloane Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Galeria Azure Developer CLI](https://azure.github.io/awesome-azd/)
 
 ### Cele Mai Bune Practici
 - [Framework-ul Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -315,9 +316,9 @@ Ai un exemplu util de împărtășit? Acceptăm contribuții!
 ### Ghid de Trimitere
 1. Urmează structura de director stabilită
 2. Include README.md cuprinzător
-3. Adaugă comentarii la fișierele de configurație
+3. Adaugă comentarii la fișierele de configurare
 4. Testează temeinic înainte de trimitere
-5. Include estimări de costuri și cerințe
+5. Include estimări de costuri și cerințe prealabile
 
 ### Structura Șablonului Exemplu
 ```
@@ -347,9 +348,9 @@ example-name/
 
 **Navigare**
 - **Lecția Anterioară**: [Ghid de Studiu](../resources/study-guide.md)
-- **Înapoi la**: [README Principal](../README.md)
+- **Revenire la**: [README Principal](../README.md)
 
 ---
 
 **Declinarea responsabilității**:  
-Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea realizată de un profesionist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

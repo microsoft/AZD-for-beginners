@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T17:34:55+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:14:17+00:00",
   "source_file": "examples/README.md",
   "language_code": "pl"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Wprowadzenie
 
-Ten katalog zawiera praktyczne przykłady, szablony i scenariusze z życia wzięte, które pomogą Ci nauczyć się Azure Developer CLI poprzez praktyczne ćwiczenia. Każdy przykład zawiera kompletny kod, szablony infrastruktury oraz szczegółowe instrukcje dla różnych architektur aplikacji i wzorców wdrożeniowych.
+Ten katalog zawiera praktyczne przykłady, szablony i scenariusze z życia wzięte, które pomogą Ci nauczyć się korzystać z Azure Developer CLI poprzez praktyczne ćwiczenia. Każdy przykład zawiera kompletny kod, szablony infrastruktury oraz szczegółowe instrukcje dla różnych architektur aplikacji i wzorców wdrożeniowych.
 
 ## Cele nauki
 
@@ -77,9 +77,9 @@ examples/
 ## Przykłady szybkiego startu
 
 ### Dla początkujących
-1. **[Prosta aplikacja webowa](../../../examples/simple-web-app)** - Wdrażanie podstawowej aplikacji webowej Node.js
-2. **[Strona statyczna](../../../examples/static-website)** - Hostowanie strony statycznej na Azure Storage
-3. **[Aplikacja kontenerowa](../../../examples/container-app)** - Wdrażanie aplikacji kontenerowej
+1. **[Prosta aplikacja webowa](../../../examples/simple-web-app)** - Wdrażanie podstawowej aplikacji Node.js
+2. **[Strona statyczna](../../../examples/static-website)** - Hostowanie statycznej strony na Azure Storage
+3. **[Aplikacja kontenerowa](../../../examples/container-app)** - Wdrażanie aplikacji w kontenerze
 
 ### Dla średnio zaawansowanych
 4. **[Aplikacja z bazą danych](../../../examples/database-app)** - Aplikacja webowa z bazą danych PostgreSQL
@@ -121,7 +121,7 @@ examples/
 ### Dostosowywanie przykładów
 
 Każdy przykład zawiera:
-- **README.md** - Szczegółowe instrukcje dotyczące konfiguracji i dostosowywania
+- **README.md** - Szczegółowe instrukcje dotyczące konfiguracji i dostosowania
 - **azure.yaml** - Konfiguracja AZD z komentarzami
 - **infra/** - Szablony Bicep z wyjaśnieniami parametrów
 - **src/** - Przykładowy kod aplikacji
@@ -132,7 +132,7 @@ Każdy przykład zawiera:
 ### Kategorie przykładów
 
 #### **Podstawowe wdrożenia**
-- Aplikacje jednousługowe
+- Aplikacje jednouługowe
 - Proste wzorce infrastruktury
 - Podstawowe zarządzanie konfiguracją
 - Ekonomiczne środowiska deweloperskie
@@ -174,10 +174,10 @@ Każdy przykład zawiera:
 ### Funkcja bezserwerowa
 **Technologie**: Azure Functions, Cosmos DB, API Management  
 **Złożoność**: Średnio zaawansowany  
-**Koncepcje**: Architektura sterowana zdarzeniami, powiązania, zarządzanie API
+**Koncepcje**: Architektura oparta na zdarzeniach, powiązania, zarządzanie API
 
 ### Mikrousługi
-**Technologie**: Wiele usług, Service Bus, API Gateway  
+**Technologie**: Wielousługowe, Service Bus, API Gateway  
 **Złożoność**: Zaawansowany  
 **Koncepcje**: Komunikacja między usługami, kolejkowanie wiadomości, równoważenie obciążenia
 
@@ -189,7 +189,7 @@ Katalog `configurations/` zawiera komponenty wielokrotnego użytku:
 - Ustawienia środowiska deweloperskiego
 - Konfiguracje środowiska testowego
 - Konfiguracje gotowe do produkcji
-- Wdrożenia wieloregionowe
+- Wdrożenia w wielu regionach
 
 ### Moduły Bicep
 - Komponenty infrastruktury wielokrotnego użytku
@@ -199,8 +199,8 @@ Katalog `configurations/` zawiera komponenty wielokrotnego użytku:
 
 ### Skrypty pomocnicze
 - Automatyzacja konfiguracji środowiska
-- Skrypty migracji bazy danych
-- Narzędzia walidacji wdrożenia
+- Skrypty migracji baz danych
+- Narzędzia walidacji wdrożeń
 - Narzędzia monitorowania kosztów
 
 ## 🔧 Przewodnik dostosowywania
@@ -224,31 +224,31 @@ Katalog `configurations/` zawiera komponenty wielokrotnego użytku:
 
 4. **Przegląd bezpieczeństwa**
    - Przejrzyj kontrolę dostępu
-   - Implementuj zarządzanie sekretami
+   - Zaimplementuj zarządzanie sekretami
    - Włącz monitorowanie i alerty
 
 ## 📊 Macierz porównawcza
 
 | Przykład | Usługi | Baza danych | Autoryzacja | Monitorowanie | Złożoność |
 |----------|--------|-------------|-------------|---------------|-----------|
-| Prosta aplikacja webowa | 1 | ❌ | Podstawowa | Podstawowa | ⭐ |
-| Strona statyczna | 1 | ❌ | ❌ | Podstawowa | ⭐ |
-| Aplikacja kontenerowa | 1 | ❌ | Podstawowa | Pełna | ⭐⭐ |
-| Aplikacja z bazą danych | 2 | ✅ | Pełna | Pełna | ⭐⭐⭐ |
-| Funkcja bezserwerowa | 3 | ✅ | Pełna | Pełna | ⭐⭐⭐ |
-| Mikrousługi | 5+ | ✅ | Pełna | Pełna | ⭐⭐⭐⭐ |
+| Prosta aplikacja webowa | 1 | ❌ | Podstawowa | Podstawowe | ⭐ |
+| Strona statyczna | 1 | ❌ | ❌ | Podstawowe | ⭐ |
+| Aplikacja kontenerowa | 1 | ❌ | Podstawowa | Pełne | ⭐⭐ |
+| Aplikacja z bazą danych | 2 | ✅ | Pełne | Pełne | ⭐⭐⭐ |
+| Funkcja bezserwerowa | 3 | ✅ | Pełne | Pełne | ⭐⭐⭐ |
+| Mikrousługi | 5+ | ✅ | Pełne | Pełne | ⭐⭐⭐⭐ |
 
 ## 🎓 Ścieżka nauki
 
 ### Zalecana progresja
 
-1. **Zacznij od Prostej aplikacji webowej**
+1. **Rozpocznij od Prostej aplikacji webowej**
    - Poznaj podstawowe koncepcje AZD
-   - Zrozum przepływ wdrożenia
+   - Zrozum przepływ pracy wdrożeniowego
    - Ćwicz zarządzanie środowiskiem
 
-2. **Spróbuj Strony statycznej**
-   - Eksploruj różne opcje hostowania
+2. **Wypróbuj Stronę statyczną**
+   - Eksploruj różne opcje hostingu
    - Naucz się integracji CDN
    - Zrozum konfigurację DNS
 
@@ -263,7 +263,7 @@ Katalog `configurations/` zawiera komponenty wielokrotnego użytku:
    - Ćwicz zarządzanie sekretami
 
 5. **Eksploruj Funkcje bezserwerowe**
-   - Zrozum architekturę sterowaną zdarzeniami
+   - Zrozum architekturę opartą na zdarzeniach
    - Naucz się wyzwalaczy i powiązań
    - Ćwicz z API
 
@@ -296,13 +296,14 @@ Katalog `configurations/` zawiera komponenty wielokrotnego użytku:
 ## 📚 Dodatkowe zasoby
 
 ### Linki do dokumentacji
-- [Specyfikacja szablonów AZD](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentacja Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Centrum architektury Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Przykłady społecznościowe
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galeria szablonów AZD](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### Najlepsze praktyki
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -310,7 +311,7 @@ Katalog `configurations/` zawiera komponenty wielokrotnego użytku:
 
 ## 🤝 Wkład w przykłady
 
-Masz przydatny przykład do udostępnienia? Zapraszamy do współtworzenia!
+Masz przydatny przykład do udostępnienia? Zapraszamy do współpracy!
 
 ### Wytyczne dotyczące zgłoszeń
 1. Przestrzegaj ustalonej struktury katalogu
@@ -335,7 +336,7 @@ example-name/
 
 ---
 
-**Porada**: Zacznij od najprostszego przykładu, który odpowiada Twojemu stosowi technologicznemu, a następnie stopniowo przechodź do bardziej złożonych scenariuszy. Każdy przykład buduje na koncepcjach z poprzednich!
+**Wskazówka**: Zacznij od najprostszego przykładu, który odpowiada Twojemu stosowi technologicznemu, a następnie stopniowo przechodź do bardziej złożonych scenariuszy. Każdy przykład buduje na koncepcjach z poprzednich!
 
 **Następne kroki**: 
 - Wybierz przykład odpowiadający Twojemu poziomowi umiejętności
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za autorytatywne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

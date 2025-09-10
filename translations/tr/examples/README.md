@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T20:01:58+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:14:58+00:00",
   "source_file": "examples/README.md",
   "language_code": "tr"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giriş
 
-Bu dizin, Azure Developer CLI'yi uygulamalı olarak öğrenmenize yardımcı olmak için pratik örnekler, şablonlar ve gerçek dünya senaryoları içerir. Her örnek, farklı uygulama mimarileri ve dağıtım modelleri için eksiksiz çalışan kod, altyapı şablonları ve ayrıntılı talimatlar sağlar.
+Bu dizin, Azure Developer CLI'yi uygulamalı olarak öğrenmenize yardımcı olacak pratik örnekler, şablonlar ve gerçek dünya senaryoları içerir. Her örnek, farklı uygulama mimarileri ve dağıtım modelleri için tam çalışan kod, altyapı şablonları ve ayrıntılı talimatlar sağlar.
 
 ## Öğrenme Hedefleri
 
@@ -25,13 +25,13 @@ Bu örnekler üzerinde çalışarak:
 
 ## Öğrenme Çıktıları
 
-Bu örnekleri tamamladıktan sonra:
-- Azure Developer CLI kullanarak çeşitli uygulama türlerini güvenle dağıtabilirsiniz
-- Sağlanan şablonları kendi uygulama gereksinimlerinize uyarlayabilirsiniz
-- Bicep kullanarak özel altyapı modelleri tasarlayıp uygulayabilirsiniz
-- Doğru bağımlılıklarla karmaşık çok hizmetli uygulamaları yapılandırabilirsiniz
-- Gerçek senaryolarda güvenlik, izleme ve performans en iyi uygulamalarını uygulayabilirsiniz
-- Pratik deneyime dayalı olarak dağıtımları optimize edip sorunlarını giderebilirsiniz
+Bu örnekleri tamamladığınızda:
+- Azure Developer CLI kullanarak çeşitli uygulama türlerini güvenle dağıtabileceksiniz
+- Sağlanan şablonları kendi uygulama gereksinimlerinize uyarlayabileceksiniz
+- Bicep kullanarak özel altyapı modelleri tasarlayıp uygulayabileceksiniz
+- Doğru bağımlılıklarla karmaşık çok hizmetli uygulamaları yapılandırabileceksiniz
+- Gerçek senaryolarda güvenlik, izleme ve performans en iyi uygulamalarını uygulayabileceksiniz
+- Pratik deneyime dayalı olarak dağıtımları optimize edip sorunları giderebileceksiniz
 
 ## Dizin Yapısı
 
@@ -82,9 +82,9 @@ examples/
 3. **[Konteyner Uygulaması](../../../examples/container-app)** - Konteynerleştirilmiş bir uygulama dağıtın
 
 ### Orta Seviye Kullanıcılar İçin
-4. **[Veritabanı Uygulaması](../../../examples/database-app)** - PostgreSQL veritabanı ile web uygulaması
-5. **[Sunucusuz Fonksiyon](../../../examples/serverless-function)** - HTTP tetikleyicileri ile Azure Functions
-6. **[Mikroservisler](../../../examples/microservices)** - API geçidi ile çok hizmetli uygulama
+4. **[Veritabanı Uygulaması](../../../examples/database-app)** - PostgreSQL veritabanına sahip bir web uygulaması
+5. **[Sunucusuz Fonksiyon](../../../examples/serverless-function)** - HTTP tetikleyicileriyle Azure Functions
+6. **[Mikroservisler](../../../examples/microservices)** - API geçidi ile çok hizmetli bir uygulama
 
 ## 📋 Kullanım Talimatları
 
@@ -127,7 +127,7 @@ Her örnek şunları içerir:
 - **src/** - Örnek uygulama kodu
 - **scripts/** - Yaygın görevler için yardımcı betikler
 
-## 🎯 Öğrenme Hedefleri
+## 🎯 Öğrenme Amaçları
 
 ### Örnek Kategorileri
 
@@ -139,12 +139,12 @@ Her örnek şunları içerir:
 
 #### **Gelişmiş Senaryolar**
 - Çok hizmetli mimariler
-- Karmaşık ağ konfigürasyonları
+- Karmaşık ağ yapılandırmaları
 - Veritabanı entegrasyon modelleri
 - Güvenlik ve uyumluluk uygulamaları
 
 #### **Üretime Hazır Modeller**
-- Yüksek erişilebilirlik konfigürasyonları
+- Yüksek erişilebilirlik yapılandırmaları
 - İzleme ve gözlemlenebilirlik
 - CI/CD entegrasyonu
 - Felaket kurtarma kurulumları
@@ -201,7 +201,7 @@ Her örnek şunları içerir:
 - Ortam kurulum otomasyonu
 - Veritabanı geçiş betikleri
 - Dağıtım doğrulama araçları
-- Maliyet izleme yardımcıları
+- Maliyet izleme araçları
 
 ## 🔧 Özelleştirme Kılavuzu
 
@@ -218,7 +218,7 @@ Her örnek şunları içerir:
    - Ortam değişkenlerini ayarlayın
 
 3. **Ayrıntılı Test Yapın**
-   - Önce geliştirme ortamına dağıtın
+   - Önce geliştirme ortamına dağıtım yapın
    - İşlevselliği doğrulayın
    - Ölçeklendirme ve performansı test edin
 
@@ -296,13 +296,14 @@ Her örnek şunları içerir:
 ## 📚 Ek Kaynaklar
 
 ### Dokümantasyon Bağlantıları
-- [AZD Şablon Spesifikasyonu](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD Şablonları](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Dokümantasyonu](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Topluluk Örnekleri
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Şablon Galerisi](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Şablonları](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Şablonları](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Galerisi](https://azure.github.io/awesome-azd/)
 
 ### En İyi Uygulamalar
 - [Azure İyi Tasarlanmış Çerçeve](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -313,8 +314,8 @@ Her örnek şunları içerir:
 Paylaşacak faydalı bir örneğiniz mi var? Katkılarınızı memnuniyetle karşılıyoruz!
 
 ### Gönderim Yönergeleri
-1. Belirlenmiş dizin yapısına uyun
-2. Kapsamlı bir README.md ekleyin
+1. Belirlenmiş dizin yapısını takip edin
+2. Kapsamlı bir README.md dosyası ekleyin
 3. Konfigürasyon dosyalarına yorumlar ekleyin
 4. Göndermeden önce ayrıntılı test yapın
 5. Maliyet tahminleri ve ön koşulları ekleyin
@@ -335,21 +336,21 @@ example-name/
 
 ---
 
-**İpucu**: Teknoloji yığınına uygun en basit örnekle başlayın, ardından kademeli olarak daha karmaşık senaryolara geçin. Her örnek, önceki örneklerden alınan kavramları geliştirir!
+**İpucu**: Teknoloji yığınına uygun en basit örnekle başlayın, ardından daha karmaşık senaryolara doğru ilerleyin. Her örnek, bir önceki örnekteki kavramları temel alır!
 
 **Sonraki Adımlar**: 
 - Beceri seviyenize uygun bir örnek seçin
 - Örneğin README dosyasındaki kurulum talimatlarını takip edin
-- Özelleştirmelerle denemeler yapın
+- Özelleştirmelerle deney yapın
 - Öğrendiklerinizi toplulukla paylaşın
 
 ---
 
 **Navigasyon**
 - **Önceki Ders**: [Çalışma Kılavuzu](../resources/study-guide.md)
-- **Ana README'ye Dön**: [Ana README](../README.md)
+- **Geri Dön**: [Ana README](../README.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T22:14:41+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:22:07+00:00",
   "source_file": "examples/README.md",
   "language_code": "tl"
 }
@@ -20,7 +20,7 @@ Sa pamamagitan ng pagtrabaho sa mga halimbawang ito, ikaw ay:
 - Mauunawaan ang iba't ibang arkitektura ng aplikasyon at ang kanilang mga implementasyon sa azd
 - Magiging bihasa sa mga pattern ng Infrastructure as Code para sa iba't ibang serbisyo ng Azure
 - Mag-aaplay ng pamamahala ng konfigurasyon at mga estratehiya sa pag-deploy na partikular sa kapaligiran
-- Magpapatupad ng mga pattern sa monitoring, seguridad, at scaling sa praktikal na konteksto
+- Magpapatupad ng mga pattern para sa monitoring, seguridad, at scaling sa praktikal na konteksto
 - Magkakaroon ng karanasan sa pag-troubleshoot at pag-debug ng mga totoong senaryo ng pag-deploy
 
 ## Mga Resulta sa Pag-aaral
@@ -76,12 +76,12 @@ examples/
 
 ## Mga Halimbawa para sa Mabilisang Pagsisimula
 
-### Para sa mga Baguhan
+### Para sa Mga Baguhan
 1. **[Simple Web App](../../../examples/simple-web-app)** - Mag-deploy ng basic na Node.js web application
 2. **[Static Website](../../../examples/static-website)** - Mag-host ng static na website sa Azure Storage
 3. **[Container App](../../../examples/container-app)** - Mag-deploy ng containerized na aplikasyon
 
-### Para sa mga Intermediate na Gumagamit
+### Para sa Mga Intermediate na Gumagamit
 4. **[Database App](../../../examples/database-app)** - Web application na may PostgreSQL database
 5. **[Serverless Function](../../../examples/serverless-function)** - Azure Functions na may HTTP triggers
 6. **[Microservices](../../../examples/microservices)** - Multi-service na aplikasyon na may API gateway
@@ -132,13 +132,13 @@ Bawat halimbawa ay naglalaman ng:
 ### Mga Kategorya ng Halimbawa
 
 #### **Mga Pangunahing Deployment**
-- Mga aplikasyon na may isang serbisyo
+- Mga single-service na aplikasyon
 - Simpleng mga pattern ng imprastraktura
 - Pangunahing pamamahala ng konfigurasyon
 - Mga cost-effective na setup para sa development
 
 #### **Mga Advanced na Senaryo**
-- Multi-service na arkitektura
+- Mga multi-service na arkitektura
 - Kumplikadong mga konfigurasyon ng networking
 - Mga pattern ng integrasyon ng database
 - Mga implementasyon ng seguridad at pagsunod
@@ -169,7 +169,7 @@ Bawat halimbawa ay naglalaman ng:
 ### Database App
 **Mga Teknolohiya**: Python Flask, PostgreSQL, App Service  
 **Kumplikado**: Intermediate  
-**Mga Konsepto**: Mga koneksyon sa database, pamamahala ng mga secrets, migrations
+**Mga Konsepto**: Database connections, secrets management, migrations
 
 ### Serverless Function
 **Mga Teknolohiya**: Azure Functions, Cosmos DB, API Management  
@@ -179,11 +179,11 @@ Bawat halimbawa ay naglalaman ng:
 ### Microservices
 **Mga Teknolohiya**: Maraming serbisyo, Service Bus, API Gateway  
 **Kumplikado**: Advanced  
-**Mga Konsepto**: Komunikasyon ng serbisyo, message queuing, load balancing
+**Mga Konsepto**: Service communication, message queuing, load balancing
 
 ## 🛠 Mga Halimbawa ng Konfigurasyon
 
-Ang direktoryong `configurations/` ay naglalaman ng mga reusable na components:
+Ang direktoryong `configurations/` ay naglalaman ng mga reusable na bahagi:
 
 ### Mga Konfigurasyon ng Environment
 - Mga setting para sa development environment
@@ -191,14 +191,14 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na components:
 - Mga konfigurasyong handa sa produksyon
 - Mga setup para sa multi-region deployment
 
-### Mga Module ng Bicep
-- Mga reusable na component ng imprastraktura
+### Mga Bicep Module
+- Mga reusable na bahagi ng imprastraktura
 - Karaniwang mga pattern ng resource
-- Mga template na pinatibay ang seguridad
+- Mga template na pinatibay para sa seguridad
 - Mga konfigurasyong cost-optimized
 
 ### Mga Helper Script
-- Automation ng environment setup
+- Automation para sa setup ng environment
 - Mga script para sa database migration
 - Mga tool para sa pag-validate ng deployment
 - Mga utility para sa monitoring ng gastos
@@ -223,8 +223,8 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na components:
    - Subukan ang scaling at performance
 
 4. **Suriin ang Seguridad**
-   - Suriin ang mga access controls
-   - Magpatupad ng pamamahala ng mga secrets
+   - Suriin ang mga access control
+   - Magpatupad ng secrets management
    - I-enable ang monitoring at alerting
 
 ## 📊 Matrix ng Paghahambing
@@ -240,7 +240,7 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na components:
 
 ## 🎓 Landas sa Pag-aaral
 
-### Inirerekomendang Pagkakasunod-sunod
+### Inirerekomendang Pag-unlad
 
 1. **Simulan sa Simple Web App**
    - Matutunan ang mga pangunahing konsepto ng AZD
@@ -259,36 +259,36 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na components:
 
 4. **Magdagdag ng Integrasyon ng Database**
    - Matutunan ang provisioning ng database
-   - Unawain ang mga connection string
-   - Magpraktis ng pamamahala ng mga secrets
+   - Unawain ang connection strings
+   - Magpraktis ng secrets management
 
-5. **Galugarin ang Serverless**
+5. **Tuklasin ang Serverless**
    - Unawain ang event-driven architecture
    - Matutunan ang tungkol sa triggers at bindings
    - Magpraktis gamit ang APIs
 
 6. **Bumuo ng Microservices**
-   - Matutunan ang komunikasyon ng serbisyo
+   - Matutunan ang service communication
    - Unawain ang distributed systems
    - Magpraktis ng mga kumplikadong deployment
 
 ## 🔍 Paghahanap ng Tamang Halimbawa
 
-### Batay sa Teknolohiya
+### Ayon sa Teknolohiya
 - **Node.js**: Simple Web App, Microservices
 - **Python**: Database App, Serverless Function
 - **Static Sites**: Static Website
 - **Containers**: Container App, Microservices
 - **Databases**: Database App, Serverless Function
 
-### Batay sa Pattern ng Arkitektura
+### Ayon sa Pattern ng Arkitektura
 - **Monolithic**: Simple Web App, Database App
 - **Static**: Static Website
 - **Microservices**: Microservices example
 - **Serverless**: Serverless Function
 - **Hybrid**: Container App
 
-### Batay sa Antas ng Kumplikado
+### Ayon sa Antas ng Kumplikado
 - **Baguhan**: Simple Web App, Static Website
 - **Intermediate**: Container App, Database App, Serverless Function  
 - **Advanced**: Microservices
@@ -296,13 +296,14 @@ Ang direktoryong `configurations/` ay naglalaman ng mga reusable na components:
 ## 📚 Karagdagang Mga Mapagkukunan
 
 ### Mga Link sa Dokumentasyon
-- [AZD Template Specification](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Mga Halimbawa ng Komunidad
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### Mga Pinakamahusay na Kasanayan
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -335,21 +336,21 @@ example-name/
 
 ---
 
-**Pro Tip**: Simulan sa pinakasimpleng halimbawa na tumutugma sa iyong teknolohiya, pagkatapos ay unti-unting mag-level up sa mas kumplikadong mga senaryo. Ang bawat halimbawa ay bumubuo sa mga konsepto mula sa naunang mga halimbawa!
+**Tip**: Simulan sa pinakasimpleng halimbawa na tumutugma sa iyong teknolohiya, pagkatapos ay unti-unting magtrabaho patungo sa mas kumplikadong mga senaryo. Ang bawat halimbawa ay bumubuo sa mga konsepto mula sa mga nauna.
 
-**Mga Susunod na Hakbang**: 
+**Susunod na Hakbang**: 
 - Pumili ng halimbawa na tumutugma sa iyong antas ng kasanayan
 - Sundin ang mga tagubilin sa setup sa README ng halimbawa
-- Mag-eksperimento sa pagpapasadya
+- Mag-eksperimento sa mga pagpapasadya
 - Ibahagi ang iyong mga natutunan sa komunidad
 
 ---
 
-**Navigation**
+**Pag-navigate**
 - **Nakaraang Aralin**: [Study Guide](../resources/study-guide.md)
 - **Bumalik sa**: [Main README](../README.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

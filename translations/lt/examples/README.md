@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-10T07:05:41+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:30:10+00:00",
   "source_file": "examples/README.md",
   "language_code": "lt"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Įvadas
 
-Šiame kataloge pateikiami praktiniai pavyzdžiai, šablonai ir realūs scenarijai, padedantys mokytis Azure Developer CLI per praktinę veiklą. Kiekvienas pavyzdys apima pilną veikiančią kodą, infrastruktūros šablonus ir išsamius nurodymus įvairioms programų architektūroms ir diegimo modeliams.
+Šiame kataloge pateikiami praktiniai pavyzdžiai, šablonai ir realaus pasaulio scenarijai, padedantys mokytis Azure Developer CLI per praktinę veiklą. Kiekvienas pavyzdys apima pilną veikiančią kodą, infrastruktūros šablonus ir išsamias instrukcijas įvairioms programų architektūroms ir diegimo modeliams.
 
 ## Mokymosi tikslai
 
@@ -19,7 +19,7 @@ Dirbdami su šiais pavyzdžiais, jūs:
 - Praktikuosite Azure Developer CLI darbo eigas su realistiniais programų scenarijais
 - Suprasite skirtingas programų architektūras ir jų azd įgyvendinimus
 - Įvaldysite infrastruktūros kaip kodo modelius įvairioms Azure paslaugoms
-- Taikysite konfigūracijos valdymo ir aplinkai pritaikytas diegimo strategijas
+- Taikysite konfigūracijos valdymo ir aplinkai specifines diegimo strategijas
 - Įgyvendinsite stebėjimo, saugumo ir mastelio keitimo modelius praktiniuose kontekstuose
 - Įgysite patirties sprendžiant ir derinant realius diegimo scenarijus
 
@@ -121,7 +121,7 @@ examples/
 ### Pavyzdžių pritaikymas
 
 Kiekvienas pavyzdys apima:
-- **README.md** - Išsamūs nustatymo ir pritaikymo nurodymai
+- **README.md** - Išsamios nustatymo ir pritaikymo instrukcijos
 - **azure.yaml** - AZD konfigūracija su komentarais
 - **infra/** - Bicep šablonai su parametrų paaiškinimais
 - **src/** - Pavyzdinis programos kodas
@@ -183,11 +183,11 @@ Kiekvienas pavyzdys apima:
 
 ## 🛠 Konfigūracijos pavyzdžiai
 
-`configurations/` kataloge pateikiami pakartotinai naudojami komponentai:
+`configurations/` kataloge yra pakartotinai naudojamų komponentų:
 
 ### Aplinkos konfigūracijos
 - Kūrimo aplinkos nustatymai
-- Testavimo aplinkos konfigūracijos
+- Bandomosios aplinkos konfigūracijos
 - Gamybai paruoštos konfigūracijos
 - Daugiaregioniai diegimo nustatymai
 
@@ -212,10 +212,10 @@ Kiekvienas pavyzdys apima:
    - Patikrinkite prenumeratos limitus
    - Supraskite išlaidų pasekmes
 
-2. **Keiskite konfigūraciją**
+2. **Modifikuokite konfigūraciją**
    - Atnaujinkite `azure.yaml` paslaugų apibrėžimus
    - Pritaikykite Bicep šablonus
-   - Koreguokite aplinkos kintamuosius
+   - Pakoreguokite aplinkos kintamuosius
 
 3. **Išbandykite kruopščiai**
    - Pirmiausia diekite kūrimo aplinkoje
@@ -231,12 +231,12 @@ Kiekvienas pavyzdys apima:
 
 | Pavyzdys | Paslaugos | Duomenų bazė | Autentifikacija | Stebėjimas | Sudėtingumas |
 |----------|-----------|--------------|-----------------|------------|--------------|
-| Paprasta žiniatinklio programa | 1 | ❌ | Pagrindinė | Pagrindinis | ⭐ |
-| Statinė svetainė | 1 | ❌ | ❌ | Pagrindinis | ⭐ |
-| Konteinerinė programa | 1 | ❌ | Pagrindinė | Pilnas | ⭐⭐ |
-| Duomenų bazės programa | 2 | ✅ | Pilnas | Pilnas | ⭐⭐⭐ |
-| Serverless funkcija | 3 | ✅ | Pilnas | Pilnas | ⭐⭐⭐ |
-| Mikropaslaugos | 5+ | ✅ | Pilnas | Pilnas | ⭐⭐⭐⭐ |
+| Paprasta žiniatinklio programa | 1 | ❌ | Pagrindinė | Pagrindinė | ⭐ |
+| Statinė svetainė | 1 | ❌ | ❌ | Pagrindinė | ⭐ |
+| Konteinerinė programa | 1 | ❌ | Pagrindinė | Pilna | ⭐⭐ |
+| Duomenų bazės programa | 2 | ✅ | Pilna | Pilna | ⭐⭐⭐ |
+| Serverless funkcija | 3 | ✅ | Pilna | Pilna | ⭐⭐⭐ |
+| Mikropaslaugos | 5+ | ✅ | Pilna | Pilna | ⭐⭐⭐⭐ |
 
 ## 🎓 Mokymosi kelias
 
@@ -296,21 +296,22 @@ Kiekvienas pavyzdys apima:
 ## 📚 Papildomi ištekliai
 
 ### Dokumentacijos nuorodos
-- [AZD šablonų specifikacija](https://aka.ms/azd/templates)
+- [Azure AI Foundry AZD šablonai](https://github.com/Azure/ai-foundry-templates)
 - [Bicep dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Bendruomenės pavyzdžiai
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD šablonų galerija](https://azure.github.io/awesome-azd/)
+- [Azure pavyzdžių AZD šablonai](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry šablonai](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI galerija](https://azure.github.io/awesome-azd/)
 
 ### Geriausios praktikos
 - [Azure gerai suprojektuotos architektūros pagrindai](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Debesų priėmimo pagrindai](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Pavyzdžių kūrimas
+## 🤝 Pavyzdžių prisidėjimas
 
-Turite naudingą pavyzdį? Laukiame jūsų indėlio!
+Turite naudingą pavyzdį? Kviečiame prisidėti!
 
 ### Pateikimo gairės
 1. Laikykitės nustatytos katalogo struktūros
@@ -335,7 +336,7 @@ example-name/
 
 ---
 
-**Patarimas**: Pradėkite nuo paprasčiausio pavyzdžio, atitinkančio jūsų technologijų rinkinį, tada palaipsniui pereikite prie sudėtingesnių scenarijų. Kiekvienas pavyzdys remiasi ankstesnių sąvokomis!
+**Patarimas**: Pradėkite nuo paprasčiausio pavyzdžio, kuris atitinka jūsų technologijų rinkinį, tada palaipsniui pereikite prie sudėtingesnių scenarijų. Kiekvienas pavyzdys remiasi ankstesnių sąvokomis!
 
 **Kiti žingsniai**: 
 - Pasirinkite pavyzdį, atitinkantį jūsų įgūdžių lygį
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojame kreiptis į profesionalius vertėjus. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T17:32:23+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:07:11+00:00",
   "source_file": "examples/README.md",
   "language_code": "ko"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 소개
 
-이 디렉터리에는 Azure Developer CLI를 실습을 통해 배울 수 있도록 돕는 실용적인 예제, 템플릿 및 실제 시나리오가 포함되어 있습니다. 각 예제는 다양한 애플리케이션 아키텍처와 배포 패턴에 대한 완전한 작동 코드, 인프라 템플릿 및 상세한 지침을 제공합니다.
+이 디렉터리에는 Azure Developer CLI를 실습을 통해 배울 수 있도록 돕는 실용적인 예제, 템플릿, 실제 시나리오가 포함되어 있습니다. 각 예제는 다양한 애플리케이션 아키텍처와 배포 패턴에 대한 완전한 작동 코드, 인프라 템플릿, 상세한 지침을 제공합니다.
 
 ## 학습 목표
 
@@ -20,7 +20,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 다양한 애플리케이션 아키텍처와 그에 대한 azd 구현 이해
 - 다양한 Azure 서비스에 대한 코드로서의 인프라 패턴 숙달
 - 환경별 배포 전략 및 구성 관리 적용
-- 모니터링, 보안 및 확장 패턴을 실용적인 맥락에서 구현
+- 모니터링, 보안, 확장 패턴을 실용적인 맥락에서 구현
 - 실제 배포 시나리오에서 문제 해결 및 디버깅 경험 구축
 
 ## 학습 결과
@@ -153,32 +153,32 @@ examples/
 
 ### Simple Web App
 **기술 스택**: Node.js, App Service, Application Insights  
-**복잡도**: 초급  
+**난이도**: 초급  
 **개념**: 기본 배포, 환경 변수, 상태 확인
 
 ### Static Website
 **기술 스택**: HTML/CSS/JS, Storage Account, CDN  
-**복잡도**: 초급  
+**난이도**: 초급  
 **개념**: 정적 호스팅, CDN 통합, 사용자 지정 도메인
 
 ### Container App
 **기술 스택**: Docker, Container Apps, Container Registry  
-**복잡도**: 중급  
+**난이도**: 중급  
 **개념**: 컨테이너화, 확장, 인그레스 구성
 
 ### Database App
 **기술 스택**: Python Flask, PostgreSQL, App Service  
-**복잡도**: 중급  
+**난이도**: 중급  
 **개념**: 데이터베이스 연결, 비밀 관리, 마이그레이션
 
 ### Serverless Function
 **기술 스택**: Azure Functions, Cosmos DB, API Management  
-**복잡도**: 중급  
+**난이도**: 중급  
 **개념**: 이벤트 기반 아키텍처, 바인딩, API 관리
 
 ### Microservices
 **기술 스택**: 다중 서비스, Service Bus, API Gateway  
-**복잡도**: 고급  
+**난이도**: 고급  
 **개념**: 서비스 간 통신, 메시지 큐잉, 로드 밸런싱
 
 ## 🛠 구성 예제
@@ -229,7 +229,7 @@ examples/
 
 ## 📊 비교 매트릭스
 
-| 예제 | 서비스 | 데이터베이스 | 인증 | 모니터링 | 복잡도 |
+| 예제 | 서비스 | 데이터베이스 | 인증 | 모니터링 | 난이도 |
 |------|--------|-------------|------|----------|--------|
 | Simple Web App | 1 | ❌ | 기본 | 기본 | ⭐ |
 | Static Website | 1 | ❌ | ❌ | 기본 | ⭐ |
@@ -288,7 +288,7 @@ examples/
 - **서버리스**: Serverless Function
 - **하이브리드**: Container App
 
-### 복잡도 수준별
+### 난이도별
 - **초급**: Simple Web App, Static Website
 - **중급**: Container App, Database App, Serverless Function  
 - **고급**: Microservices
@@ -296,13 +296,14 @@ examples/
 ## 📚 추가 자료
 
 ### 문서 링크
-- [AZD 템플릿 사양](https://aka.ms/azd/templates)
-- [Bicep 문서](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure 아키텍처 센터](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### 커뮤니티 예제
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [AZD 템플릿 갤러리](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 
 ### 모범 사례
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -352,4 +353,4 @@ example-name/
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

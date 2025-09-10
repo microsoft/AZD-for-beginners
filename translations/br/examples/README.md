@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9b7074c8a39e77d2f10fb08b3c6ce34f",
-  "translation_date": "2025-09-09T20:01:03+00:00",
+  "original_hash": "9a24ebb49f185f0864813ce1178a3d8b",
+  "translation_date": "2025-09-10T15:12:57+00:00",
   "source_file": "examples/README.md",
   "language_code": "br"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Este diretório contém exemplos práticos, modelos e cenários reais para ajudá-lo a aprender o Azure Developer CLI por meio de prática prática. Cada exemplo fornece código funcional completo, modelos de infraestrutura e instruções detalhadas para diferentes arquiteturas de aplicativos e padrões de implantação.
+Este diretório contém exemplos práticos, modelos e cenários reais para ajudar você a aprender o Azure Developer CLI por meio de prática prática. Cada exemplo fornece código funcional completo, modelos de infraestrutura e instruções detalhadas para diferentes arquiteturas de aplicativos e padrões de implantação.
 
 ## Objetivos de Aprendizado
 
 Ao trabalhar com esses exemplos, você irá:
 - Praticar fluxos de trabalho do Azure Developer CLI com cenários de aplicativos realistas
 - Compreender diferentes arquiteturas de aplicativos e suas implementações no azd
-- Dominar padrões de Infraestrutura como Código para vários serviços do Azure
+- Dominar padrões de Infraestrutura como Código para diversos serviços do Azure
 - Aplicar estratégias de gerenciamento de configuração e implantação específicas para ambientes
 - Implementar padrões de monitoramento, segurança e escalabilidade em contextos práticos
 - Ganhar experiência com solução de problemas e depuração de cenários reais de implantação
@@ -26,12 +26,12 @@ Ao trabalhar com esses exemplos, você irá:
 ## Resultados de Aprendizado
 
 Ao concluir esses exemplos, você será capaz de:
-- Implantar com confiança vários tipos de aplicativos usando o Azure Developer CLI
+- Implantar com confiança diversos tipos de aplicativos usando o Azure Developer CLI
 - Adaptar os modelos fornecidos às suas próprias necessidades de aplicativos
 - Projetar e implementar padrões de infraestrutura personalizados usando Bicep
 - Configurar aplicativos complexos com múltiplos serviços e dependências adequadas
 - Aplicar práticas recomendadas de segurança, monitoramento e desempenho em cenários reais
-- Solucionar problemas e otimizar implantações com base na experiência prática
+- Solucionar problemas e otimizar implantações com base em experiência prática
 
 ## Estrutura do Diretório
 
@@ -189,7 +189,7 @@ O diretório `configurations/` contém componentes reutilizáveis:
 - Configurações para ambiente de desenvolvimento
 - Configurações para ambiente de staging
 - Configurações prontas para produção
-- Configurações de implantação em várias regiões
+- Configurações de implantação em múltiplas regiões
 
 ### Módulos Bicep
 - Componentes de infraestrutura reutilizáveis
@@ -242,17 +242,17 @@ O diretório `configurations/` contém componentes reutilizáveis:
 
 ### Progressão Recomendada
 
-1. **Comece com o Aplicativo Web Simples**
+1. **Comece com Aplicativo Web Simples**
    - Aprenda conceitos básicos do AZD
    - Entenda o fluxo de trabalho de implantação
-   - Pratique o gerenciamento de ambientes
+   - Pratique gerenciamento de ambiente
 
-2. **Experimente o Site Estático**
+2. **Experimente Site Estático**
    - Explore diferentes opções de hospedagem
    - Aprenda sobre integração com CDN
    - Entenda configuração de DNS
 
-3. **Avance para o Aplicativo em Contêiner**
+3. **Avance para Aplicativo em Contêiner**
    - Aprenda os fundamentos da containerização
    - Entenda conceitos de escalabilidade
    - Pratique com Docker
@@ -296,13 +296,14 @@ O diretório `configurations/` contém componentes reutilizáveis:
 ## 📚 Recursos Adicionais
 
 ### Links de Documentação
-- [Especificação de Modelos AZD](https://aka.ms/azd/templates)
+- [Modelos AZD do Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Documentação do Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Centro de Arquitetura do Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Exemplos da Comunidade
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Galeria de Modelos AZD](https://azure.github.io/awesome-azd/)
+- [Modelos AZD de Exemplos do Azure](https://github.com/Azure-Samples/azd-templates)
+- [Modelos do Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Galeria do Azure Developer CLI](https://azure.github.io/awesome-azd/)
 
 ### Melhores Práticas
 - [Framework Bem-Arquitetado do Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -314,7 +315,7 @@ Tem um exemplo útil para compartilhar? Aceitamos contribuições!
 
 ### Diretrizes de Submissão
 1. Siga a estrutura de diretório estabelecida
-2. Inclua um README.md abrangente
+2. Inclua README.md abrangente
 3. Adicione comentários aos arquivos de configuração
 4. Teste minuciosamente antes de enviar
 5. Inclua estimativas de custo e pré-requisitos
@@ -335,7 +336,7 @@ example-name/
 
 ---
 
-**Dica**: Comece com o exemplo mais simples que corresponda ao seu stack de tecnologia e, gradualmente, avance para cenários mais complexos. Cada exemplo constrói conceitos a partir dos anteriores!
+**Dica Pro**: Comece com o exemplo mais simples que corresponda ao seu stack de tecnologia e, gradualmente, avance para cenários mais complexos. Cada exemplo constrói conceitos a partir dos anteriores!
 
 **Próximos Passos**: 
 - Escolha um exemplo que corresponda ao seu nível de habilidade
