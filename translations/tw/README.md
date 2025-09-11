@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T16:22:18+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T09:51:33+00:00",
   "source_file": "README.md",
   "language_code": "tw"
 }
@@ -28,29 +28,29 @@ CO_OP_TRANSLATOR_METADATA:
 
 #### 透過 GitHub Action 支援（自動化且始終保持最新）
 
-[法文](../fr/README.md) | [西班牙文](../es/README.md) | [德文](../de/README.md) | [俄文](../ru/README.md) | [阿拉伯文](../ar/README.md) | [波斯文（法爾西）](../fa/README.md) | [烏爾都文](../ur/README.md) | [中文（簡體）](../zh/README.md) | [中文（繁體，澳門）](../mo/README.md) | [中文（繁體，香港）](../hk/README.md) | [中文（繁體，台灣）](./README.md) | [日文](../ja/README.md) | [韓文](../ko/README.md) | [印地文](../hi/README.md) | [孟加拉文](../bn/README.md) | [馬拉地文](../mr/README.md) | [尼泊爾文](../ne/README.md) | [旁遮普文（古木基文）](../pa/README.md) | [葡萄牙文（葡萄牙）](../pt/README.md) | [葡萄牙文（巴西）](../br/README.md) | [義大利文](../it/README.md) | [波蘭文](../pl/README.md) | [土耳其文](../tr/README.md) | [希臘文](../el/README.md) | [泰文](../th/README.md) | [瑞典文](../sv/README.md) | [丹麥文](../da/README.md) | [挪威文](../no/README.md) | [芬蘭文](../fi/README.md) | [荷蘭文](../nl/README.md) | [希伯來文](../he/README.md) | [越南文](../vi/README.md) | [印尼文](../id/README.md) | [馬來文](../ms/README.md) | [他加祿文（菲律賓文）](../tl/README.md) | [斯瓦希里文](../sw/README.md) | [匈牙利文](../hu/README.md) | [捷克文](../cs/README.md) | [斯洛伐克文](../sk/README.md) | [羅馬尼亞文](../ro/README.md) | [保加利亞文](../bg/README.md) | [塞爾維亞文（西里爾文）](../sr/README.md) | [克羅埃西亞文](../hr/README.md) | [斯洛文尼亞文](../sl/README.md) | [烏克蘭文](../uk/README.md) | [緬甸文（緬甸）](../my/README.md)  
+[法文](../fr/README.md) | [西班牙文](../es/README.md) | [德文](../de/README.md) | [俄文](../ru/README.md) | [阿拉伯文](../ar/README.md) | [波斯文（法爾西）](../fa/README.md) | [烏爾都文](../ur/README.md) | [中文（簡體）](../zh/README.md) | [中文（繁體，澳門）](../mo/README.md) | [中文（繁體，香港）](../hk/README.md) | [中文（繁體，台灣）](./README.md) | [日文](../ja/README.md) | [韓文](../ko/README.md) | [印地文](../hi/README.md) | [孟加拉文](../bn/README.md) | [馬拉地文](../mr/README.md) | [尼泊爾文](../ne/README.md) | [旁遮普文（古木基文）](../pa/README.md) | [葡萄牙文（葡萄牙）](../pt/README.md) | [葡萄牙文（巴西）](../br/README.md) | [義大利文](../it/README.md) | [波蘭文](../pl/README.md) | [土耳其文](../tr/README.md) | [希臘文](../el/README.md) | [泰文](../th/README.md) | [瑞典文](../sv/README.md) | [丹麥文](../da/README.md) | [挪威文](../no/README.md) | [芬蘭文](../fi/README.md) | [荷蘭文](../nl/README.md) | [希伯來文](../he/README.md) | [越南文](../vi/README.md) | [印尼文](../id/README.md) | [馬來文](../ms/README.md) | [塔加洛文（菲律賓文）](../tl/README.md) | [斯瓦希里文](../sw/README.md) | [匈牙利文](../hu/README.md) | [捷克文](../cs/README.md) | [斯洛伐克文](../sk/README.md) | [羅馬尼亞文](../ro/README.md) | [保加利亞文](../bg/README.md) | [塞爾維亞文（西里爾文）](../sr/README.md) | [克羅埃西亞文](../hr/README.md) | [斯洛維尼亞文](../sl/README.md) | [烏克蘭文](../uk/README.md) | [緬甸文（緬甸）](../my/README.md)  
 
 **如果您希望支援其他翻譯語言，請參考 [此處](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**  
 
 ## 簡介
 
-歡迎來到 Azure Developer CLI (azd) 的完整指南。本儲存庫旨在幫助各層級的開發者，從學生到專業開發者，學習並掌握 Azure Developer CLI，以便高效進行雲端部署。這份結構化的學習資源提供 Azure 雲端部署的實作經驗、常見問題的排解，以及成功部署 AZD 範本的最佳實踐。
+歡迎來到 Azure Developer CLI (azd) 的完整指南。本儲存庫旨在幫助各層級的開發者，從學生到專業開發者，學習並掌握 Azure Developer CLI，以便高效進行雲端部署。這份結構化的學習資源提供了 Azure 雲端部署的實作經驗、常見問題的排解，以及成功部署 AZD 範本的最佳實踐。
 
 ## 學習目標
 
 透過學習本儲存庫，您將能夠：  
-- 掌握 Azure Developer CLI 的基本原理和核心概念  
+- 掌握 Azure Developer CLI 的基礎知識和核心概念  
 - 學習使用基礎架構即程式碼（Infrastructure as Code）部署和配置 Azure 資源  
-- 培養解決常見 AZD 部署問題的能力  
+- 培養解決 AZD 部署常見問題的能力  
 - 理解部署前的驗證和容量規劃  
 - 實施安全性最佳實踐和成本優化策略  
-- 建立信心，能夠將生產就緒的應用程式部署到 Azure  
+- 建立信心，將生產就緒的應用程式部署到 Azure  
 
 ## 學習成果
 
 完成本課程後，您將能夠：  
 - 成功安裝、配置並使用 Azure Developer CLI  
-- 使用 AZD 範本建立並部署應用程式  
+- 使用 AZD 範本創建並部署應用程式  
 - 排解身份驗證、基礎架構和部署問題  
 - 執行部署前檢查，包括容量規劃和 SKU 選擇  
 - 實施監控、安全性和成本管理的最佳實踐  
@@ -59,7 +59,7 @@ CO_OP_TRANSLATOR_METADATA:
 ## 目錄
 
 - [什麼是 Azure Developer CLI？](../..)  
-- [快速入門](../..)  
+- [快速開始](../..)  
 - [文件](../..)  
 - [範例與範本](../..)  
 - [資源](../..)  
@@ -67,14 +67,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 什麼是 Azure Developer CLI？
 
-Azure Developer CLI (azd) 是一個以開發者為中心的命令列介面，能加速應用程式在 Azure 上的建置和部署過程。它提供：  
+Azure Developer CLI (azd) 是一個以開發者為中心的命令列介面，能加速應用程式在 Azure 上的構建和部署過程。它提供：  
 
-- **基於範本的部署** - 使用預建範本來實現常見的應用程式模式  
+- **基於範本的部署** - 使用預建範本來應對常見的應用程式模式  
 - **基礎架構即程式碼** - 使用 Bicep 或 Terraform 管理 Azure 資源  
 - **整合工作流程** - 無縫配置、部署和監控應用程式  
-- **友善的開發者體驗** - 專為提升開發者生產力和使用體驗而設計  
+- **開發者友好** - 為提升開發者生產力和體驗而優化  
 
-## 快速入門
+## 快速開始
 
 ### 先決條件  
 - Azure 訂閱  
@@ -120,18 +120,11 @@ azd up
 - [**常見問題**](docs/troubleshooting/common-issues.md) - 常見問題及解決方案  
 - [**除錯指南**](docs/troubleshooting/debugging.md) - 步驟式除錯策略  
 
-## 範例與範本
+## 範例與範本  
+- [**範例**](examples/README.md) - 實際範例、範本和真實場景，幫助您透過實作練習學習 Azure Developer CLI。每個範例都提供完整的工作程式碼、基礎架構範本以及詳細的指導，涵蓋不同的應用程式架構和部署模式。  
 
-### 初學者範本  
-- [**簡單的 Web 應用程式**](../../examples/simple-web-app) - 基本的 Node.js Web 應用程式部署  
-- [**靜態網站**](../../examples/static-website) - 使用 Azure Storage 託管靜態網站  
-- [**容器應用程式**](../../examples/container-app) - 容器化應用程式部署  
-- [**資料庫應用程式**](../../examples/database-app) - 與資料庫整合的 Web 應用程式  
-
-### 高級場景  
-- [**微服務**](../../examples/microservices) - 多服務應用程式架構  
-- [**無伺服器函數**](../../examples/serverless-function) - Azure Functions 部署  
-- [**配置範例**](../../examples/configurations) - 可重用的配置模式  
+### 實作實驗/工作坊  
+- [**AZD 初學者指南**](workshop/README.md) - 本工作坊將聚焦於使用 AI Agents AZD 範本入門，並提供使用 AZD 部署 Azure AI 服務的最佳實踐  
 
 ## 資源
 
@@ -149,27 +142,27 @@ azd up
 
 ## 學習路徑
 
-### 適合學生與初學者  
+### 學生與初學者  
 1. 從 [AZD 基礎](docs/getting-started/azd-basics.md) 開始  
 2. 參考 [安裝指南](docs/getting-started/installation.md)  
 3. 完成 [您的第一個專案](docs/getting-started/first-project.md)  
 4. 練習 [簡單 Web 應用範例](../../examples/simple-web-app)  
 
-### 適合開發者  
+### 開發者  
 1. 查看 [配置指南](docs/getting-started/configuration.md)  
 2. 學習 [部署指南](docs/deployment/deployment-guide.md)  
 3. 完成 [資料庫應用範例](../../examples/database-app)  
 4. 探索 [容器應用範例](../../examples/container-app)  
 
-### 適合 DevOps 工程師  
+### DevOps 工程師  
 1. 精通 [資源配置](docs/deployment/provisioning.md)  
 2. 實施 [預檢查](docs/pre-deployment/preflight-checks.md)  
 3. 練習 [容量規劃](docs/pre-deployment/capacity-planning.md)  
-4. 高級 [微服務範例](../../examples/microservices)  
+4. 高階 [微服務範例](../../examples/microservices)  
 
 ## 貢獻
 
-我們歡迎您的貢獻！請閱讀 [貢獻指南](CONTRIBUTING.md) 以了解：  
+我們歡迎您的貢獻！請閱讀 [貢獻指南](CONTRIBUTING.md)，了解以下內容：  
 - 如何提交問題和功能請求  
 - 程式碼貢獻指南  
 - 文件改進  
@@ -199,19 +192,19 @@ azd up
 - [資料科學初學者指南](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI 初學者指南](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
 - [網路安全初學者指南](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [初學者的網頁開發](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-- [初學者的物聯網](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [初學者的XR開發](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [精通GitHub Copilot進行AI配對編程](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [精通GitHub Copilot為C#/.NET開發者服務](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [選擇你的Copilot冒險](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+- [Web 開發初學者指南](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [物聯網入門](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [XR 開發入門](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [精通 GitHub Copilot 的 AI 配對編程](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [精通 GitHub Copilot 的 C#/.NET 開發者指南](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+- [選擇你的 Copilot 冒險](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
 ---
 
-**導航**
-- **下一課**: [AZD基礎](docs/getting-started/azd-basics.md)
+**導航**  
+- **下一課**: [AZD 基礎](docs/getting-started/azd-basics.md)  
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於關鍵資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。

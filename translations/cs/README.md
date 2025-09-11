@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-10T05:35:02+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:12:22+00:00",
   "source_file": "README.md",
   "language_code": "cs"
 }
@@ -11,26 +11,26 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-pro-začátečníky](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.cs.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)  
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)  
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)  
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
 
-[![Azure Discord](https://dcbadge.limes.yellow/api/server/kzRShWzttr)](https://discord.gg/microsoft-azure)  
+[![Azure Discord](https://dcbadge.limes.yellow/api/server/kzRShWzttr)](https://discord.gg/microsoft-azure)
 
-[![Azure AI Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)  
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
-Postupujte podle těchto kroků, abyste mohli začít používat tyto zdroje:  
-1. **Forkněte repozitář**: Klikněte [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)  
-2. **Naklonujte repozitář**: `git clone https://github.com/microsoft/azd-for-beginners.git`  
-3. [**Připojte se k Azure Discord komunitám a setkejte se s experty a dalšími vývojáři**](https://discord.com/invite/ByRwuEEgH4)  
+Postupujte podle těchto kroků, abyste mohli začít používat tyto zdroje:
+1. **Forkněte repozitář**: Klikněte [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Naklonujte repozitář**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. [**Připojte se k Azure Discord komunitám a setkejte se s experty a dalšími vývojáři**](https://discord.com/invite/ByRwuEEgH4)
 
 ### 🌐 Podpora více jazyků
 
 #### Podporováno prostřednictvím GitHub Action (Automatizované & Vždy aktuální)
 
-[French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](./README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)  
+[Francouzština](../fr/README.md) | [Španělština](../es/README.md) | [Němčina](../de/README.md) | [Ruština](../ru/README.md) | [Arabština](../ar/README.md) | [Perština (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Čínština (zjednodušená)](../zh/README.md) | [Čínština (tradiční, Macao)](../mo/README.md) | [Čínština (tradiční, Hongkong)](../hk/README.md) | [Čínština (tradiční, Tchaj-wan)](../tw/README.md) | [Japonština](../ja/README.md) | [Korejština](../ko/README.md) | [Hindština](../hi/README.md) | [Bengálština](../bn/README.md) | [Maráthština](../mr/README.md) | [Nepálština](../ne/README.md) | [Paňdžábština (Gurmukhi)](../pa/README.md) | [Portugalština (Portugalsko)](../pt/README.md) | [Portugalština (Brazílie)](../br/README.md) | [Italština](../it/README.md) | [Polština](../pl/README.md) | [Turečtina](../tr/README.md) | [Řečtina](../el/README.md) | [Thajština](../th/README.md) | [Švédština](../sv/README.md) | [Dánština](../da/README.md) | [Norština](../no/README.md) | [Finština](../fi/README.md) | [Nizozemština](../nl/README.md) | [Hebrejština](../he/README.md) | [Vietnamština](../vi/README.md) | [Indonéština](../id/README.md) | [Malajština](../ms/README.md) | [Tagalog (Filipíny)](../tl/README.md) | [Svahilština](../sw/README.md) | [Maďarština](../hu/README.md) | [Čeština](./README.md) | [Slovenština](../sk/README.md) | [Rumunština](../ro/README.md) | [Bulharština](../bg/README.md) | [Srbština (cyrilice)](../sr/README.md) | [Chorvatština](../hr/README.md) | [Slovinština](../sl/README.md) | [Ukrajinština](../uk/README.md) | [Barmština (Myanmar)](../my/README.md)
 
-**Pokud chcete přidat další překlady, seznam podporovaných jazyků najdete [zde](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**  
+**Pokud si přejete přidat další překlady, seznam podporovaných jazyků najdete [zde](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## Úvod
 
@@ -40,11 +40,11 @@ Vítejte v komplexním průvodci pro Azure Developer CLI (azd). Tento repozitá�
 
 Prací s tímto repozitářem se naučíte:
 - Zvládnout základy a klíčové koncepty Azure Developer CLI
-- Nasazovat a zřizovat Azure zdroje pomocí Infrastructure as Code
+- Naučit se nasazovat a zřizovat Azure zdroje pomocí Infrastructure as Code
 - Rozvíjet dovednosti v řešení běžných problémů při nasazení AZD
 - Porozumět validaci před nasazením a plánování kapacity
 - Implementovat osvědčené postupy v oblasti bezpečnosti a optimalizace nákladů
-- Získat jistotu v nasazování aplikací připravených pro produkci do Azure
+- Získat jistotu v nasazování aplikací připravených pro produkci na Azure
 
 ## Výsledky učení
 
@@ -67,7 +67,7 @@ Po dokončení tohoto kurzu budete schopni:
 
 ## Co je Azure Developer CLI?
 
-Azure Developer CLI (azd) je příkazový řádek zaměřený na vývojáře, který urychluje proces vytváření a nasazování aplikací do Azure. Nabízí:
+Azure Developer CLI (azd) je příkazový řádek zaměřený na vývojáře, který urychluje proces vytváření a nasazování aplikací na Azure. Nabízí:
 
 - **Nasazení na základě šablon** - Používejte předpřipravené šablony pro běžné aplikační vzory
 - **Infrastructure as Code** - Spravujte Azure zdroje pomocí Bicep nebo Terraform
@@ -103,9 +103,9 @@ azd up
 
 ### Začínáme
 - [**AZD Základy**](docs/getting-started/azd-basics.md) - Klíčové koncepty a terminologie
-- [**Instalace & Nastavení**](docs/getting-started/installation.md) - Platformově specifické instalační příručky
+- [**Instalace & Nastavení**](docs/getting-started/installation.md) - Návody na instalaci podle platformy
 - [**Konfigurace**](docs/getting-started/configuration.md) - Nastavení prostředí a autentizace
-- [**Váš první projekt**](docs/getting-started/first-project.md) - Krok za krokem tutoriál
+- [**Váš první projekt**](docs/getting-started/first-project.md) - Krok za krokem
 
 ### Nasazení & Zřizování
 - [**Průvodce nasazením**](docs/deployment/deployment-guide.md) - Kompletní pracovní postupy nasazení
@@ -121,25 +121,18 @@ azd up
 - [**Průvodce laděním**](docs/troubleshooting/debugging.md) - Krok za krokem strategie ladění
 
 ## Příklady & Šablony
+- [**Příklady**]([examples/README.md) - Praktické příklady, šablony a scénáře z reálného světa, které vám pomohou naučit se Azure Developer CLI prostřednictvím praktického cvičení. Každý příklad obsahuje kompletní funkční kód, šablony infrastruktury a podrobné pokyny pro různé aplikační architektury a vzory nasazení.
 
-### Startovací šablony
-- [**Jednoduchá webová aplikace**](../../examples/simple-web-app) - Základní nasazení webové aplikace Node.js
-- [**Statická webová stránka**](../../examples/static-website) - Hosting statické stránky na Azure Storage
-- [**Aplikace v kontejneru**](../../examples/container-app) - Nasazení aplikace v kontejneru
-- [**Databázová aplikace**](../../examples/database-app) - Webová aplikace s integrací databáze
-
-### Pokročilé scénáře
-- [**Mikroslužby**](../../examples/microservices) - Architektura aplikace s více službami
-- [**Serverless funkce**](../../examples/serverless-function) - Nasazení Azure Functions
-- [**Konfigurační příklady**](../../examples/configurations) - Znovupoužitelné konfigurační vzory
+### Praktická laboratoř/Workshop
+- [**AZD Pro Začátečníky**](workshop/README.md) - Tento workshop se zaměří na šablonu Get Started with AI Agents AZD a poskytne praktické osvědčené postupy pro nasazení Azure AI služeb pomocí AZD
 
 ## Zdroje
 
 ### Rychlé odkazy
-- [**Tahák příkazů**](resources/cheat-sheet.md) - Základní příkazy azd
+- [**Přehled příkazů**](resources/cheat-sheet.md) - Základní příkazy azd
 - [**Slovníček**](resources/glossary.md) - Terminologie Azure a azd
 - [**FAQ**](resources/faq.md) - Často kladené otázky
-- [**Studijní příručka**](resources/study-guide.md) - Komplexní cíle učení a cvičení
+- [**Studijní průvodce**](resources/study-guide.md) - Komplexní cíle učení a praktická cvičení
 
 ### Externí zdroje
 - [Dokumentace Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -150,56 +143,56 @@ azd up
 ## Studijní cesta
 
 ### Pro studenty & začátečníky
-1. Začněte s [AZD Základy](docs/getting-started/azd-basics.md)  
-2. Postupujte podle [Instalační příručky](docs/getting-started/installation.md)  
-3. Dokončete [Váš první projekt](docs/getting-started/first-project.md)  
-4. Procvičte si [Jednoduchý příklad webové aplikace](../../examples/simple-web-app)  
+1. Začněte s [AZD Základy](docs/getting-started/azd-basics.md)
+2. Postupujte podle [Průvodce instalací](docs/getting-started/installation.md)
+3. Dokončete [Váš první projekt](docs/getting-started/first-project.md)
+4. Procvičte si [Jednoduchý příklad webové aplikace](../../examples/simple-web-app)
 
 ### Pro vývojáře
-1. Projděte si [Průvodce konfigurací](docs/getting-started/configuration.md)  
-2. Studujte [Průvodce nasazením](docs/deployment/deployment-guide.md)  
-3. Pracujte na [Příkladu databázové aplikace](../../examples/database-app)  
-4. Prozkoumejte [Příklad aplikace v kontejneru](../../examples/container-app)  
+1. Projděte si [Průvodce konfigurací](docs/getting-started/configuration.md)
+2. Studujte [Průvodce nasazením](docs/deployment/deployment-guide.md)
+3. Pracujte na [Příkladu databázové aplikace](../../examples/database-app)
+4. Prozkoumejte [Příklad kontejnerové aplikace](../../examples/container-app)
 
 ### Pro DevOps inženýry
-1. Zvládněte [Zřizování zdrojů](docs/deployment/provisioning.md)  
-2. Implementujte [Kontroly před nasazením](docs/pre-deployment/preflight-checks.md)  
-3. Procvičte si [Plánování kapacity](docs/pre-deployment/capacity-planning.md)  
-4. Pokročilý [Příklad mikroslužeb](../../examples/microservices)  
+1. Zvládněte [Zřizování zdrojů](docs/deployment/provisioning.md)
+2. Implementujte [Kontroly před nasazením](docs/pre-deployment/preflight-checks.md)
+3. Procvičte si [Plánování kapacity](docs/pre-deployment/capacity-planning.md)
+4. Pokročilý [Příklad mikroslužeb](../../examples/microservices)
 
 ## Přispívání
 
-Uvítáme vaše příspěvky! Přečtěte si prosím náš [Průvodce přispíváním](CONTRIBUTING.md) pro podrobnosti o:  
-- Jak nahlásit problémy a požadavky na funkce  
-- Pokyny pro přispívání kódu  
-- Zlepšení dokumentace  
-- Standardy komunity  
+Uvítáme vaše příspěvky! Přečtěte si prosím náš [Průvodce přispíváním](CONTRIBUTING.md) pro podrobnosti o:
+- Jak podávat problémy a požadavky na funkce
+- Pokyny pro přispívání kódu
+- Zlepšení dokumentace
+- Standardy komunity
 
 ## Podpora
 
-- **Problémy**: [Nahlaste chyby a požádejte o funkce](https://github.com/microsoft/azd-for-beginners/issues)  
-- **Diskuze**: [Microsoft Azure Discord Community Q&A a diskuze](https://discord.gg/microsoft-azure)  
-- **E-mail**: Pro soukromé dotazy  
-- **Microsoft Learn**: [Oficiální dokumentace Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- **Problémy**: [Nahlaste chyby a požádejte o funkce](https://github.com/microsoft/azd-for-beginners/issues)
+- **Diskuze**: [Microsoft Azure Discord Komunitní Q&A a diskuze](https://discord.gg/microsoft-azure)
+- **E-mail**: Pro soukromé dotazy
+- **Microsoft Learn**: [Oficiální dokumentace Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ## Licence
 
-Tento projekt je licencován pod licencí MIT - podrobnosti najdete v souboru [LICENSE](../../LICENSE).  
+Tento projekt je licencován pod licencí MIT - podrobnosti najdete v souboru [LICENSE](../../LICENSE).
 
 ## 🎒 Další kurzy
 
-Náš tým vytváří další kurzy! Podívejte se na:  
+Náš tým vytváří další kurzy! Podívejte se na:
 
-- [**NOVÉ** Model Context Protocol (MCP) Pro Začátečníky](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Agents Pro Začátečníky](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generativní AI Pro Začátečníky pomocí .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generativní AI Pro Začátečníky](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generativní AI Pro Začátečníky pomocí Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML Pro Začátečníky](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Data Science Pro Začátečníky](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Pro Začátečníky](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Kybernetická bezpečnost Pro Začátečníky](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Web Dev pro začátečníky](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [**NOVÉ** Model Context Protocol (MCP) Pro Začátečníky](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI Agenti pro Začátečníky](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Generativní AI pro Začátečníky pomocí .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+- [Generativní AI pro Začátečníky](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Generativní AI pro Začátečníky pomocí Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+- [ML pro Začátečníky](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+- [Data Science pro Začátečníky](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI pro Začátečníky](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+- [Kybernetická bezpečnost pro Začátečníky](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
+- [Webový Vývoj pro Začátečníky](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 - [IoT pro začátečníky](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Vývoj XR pro začátečníky](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Ovládnutí GitHub Copilot pro párové programování s AI](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
@@ -214,4 +207,4 @@ Náš tým vytváří další kurzy! Podívejte se na:
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neneseme odpovědnost za jakékoli nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

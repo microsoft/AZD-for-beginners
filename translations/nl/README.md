@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T20:57:26+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:06:43+00:00",
   "source_file": "README.md",
   "language_code": "nl"
 }
@@ -16,7 +16,6 @@ CO_OP_TRANSLATOR_METADATA:
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)  
 
 [![Azure Discord](https://dcbadge.limes.yellow/api/server/kzRShWzttr)](https://discord.gg/microsoft-azure)  
-
 [![Azure AI Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)  
 
 Volg deze stappen om aan de slag te gaan met deze bronnen:  
@@ -30,7 +29,7 @@ Volg deze stappen om aan de slag te gaan met deze bronnen:
 
 [Frans](../fr/README.md) | [Spaans](../es/README.md) | [Duits](../de/README.md) | [Russisch](../ru/README.md) | [Arabisch](../ar/README.md) | [Perzisch (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinees (Vereenvoudigd)](../zh/README.md) | [Chinees (Traditioneel, Macau)](../mo/README.md) | [Chinees (Traditioneel, Hong Kong)](../hk/README.md) | [Chinees (Traditioneel, Taiwan)](../tw/README.md) | [Japans](../ja/README.md) | [Koreaans](../ko/README.md) | [Hindi](../hi/README.md) | [Bengaals](../bn/README.md) | [Marathi](../mr/README.md) | [Nepalees](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portugees (Portugal)](../pt/README.md) | [Portugees (Brazilië)](../br/README.md) | [Italiaans](../it/README.md) | [Pools](../pl/README.md) | [Turks](../tr/README.md) | [Grieks](../el/README.md) | [Thais](../th/README.md) | [Zweeds](../sv/README.md) | [Deens](../da/README.md) | [Noors](../no/README.md) | [Fins](../fi/README.md) | [Nederlands](./README.md) | [Hebreeuws](../he/README.md) | [Vietnamees](../vi/README.md) | [Indonesisch](../id/README.md) | [Maleis](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hongaars](../hu/README.md) | [Tsjechisch](../cs/README.md) | [Slowaaks](../sk/README.md) | [Roemeens](../ro/README.md) | [Bulgaars](../bg/README.md) | [Servisch (Cyrillisch)](../sr/README.md) | [Kroatisch](../hr/README.md) | [Sloveens](../sl/README.md) | [Oekraïens](../uk/README.md) | [Birmaans (Myanmar)](../my/README.md)  
 
-**Als je extra vertalingen wilt, kun je de ondersteunde talen vinden [hier](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**  
+**Als je extra vertalingen wilt, zijn de ondersteunde talen [hier](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md) te vinden.**
 
 ## Introductie
 
@@ -50,7 +49,7 @@ Door deze repository door te werken, leer je:
 
 Na het voltooien van deze cursus kun je:  
 - Azure Developer CLI succesvol installeren, configureren en gebruiken  
-- Applicaties maken en implementeren met behulp van AZD-templates  
+- Applicaties maken en implementeren met AZD-templates  
 - Problemen met authenticatie, infrastructuur en implementatie oplossen  
 - Pre-implementatiecontroles uitvoeren, inclusief capaciteitsplanning en SKU-selectie  
 - Monitoring, beveiliging en kostenbeheer best practices implementeren  
@@ -59,7 +58,7 @@ Na het voltooien van deze cursus kun je:
 ## Inhoudsopgave
 
 - [Wat is Azure Developer CLI?](../..)  
-- [Snelle Start](../..)  
+- [Snelstartgids](../..)  
 - [Documentatie](../..)  
 - [Voorbeelden & Templates](../..)  
 - [Bronnen](../..)  
@@ -74,7 +73,7 @@ Azure Developer CLI (azd) is een ontwikkelaarsgerichte command-line interface di
 - **Geïntegreerde workflows** - Naadloos inrichten, implementeren en monitoren van applicaties  
 - **Ontwikkelaarsvriendelijk** - Geoptimaliseerd voor productiviteit en ervaring van ontwikkelaars  
 
-## Snelle Start
+## Snelstartgids
 
 ### Vereisten  
 - Azure-abonnement  
@@ -120,30 +119,23 @@ azd up
 - [**Veelvoorkomende Problemen**](docs/troubleshooting/common-issues.md) - Veelvoorkomende problemen en oplossingen  
 - [**Debugging Gids**](docs/troubleshooting/debugging.md) - Stapsgewijze debuggingstrategieën  
 
-## Voorbeelden & Templates
+## Voorbeelden & Templates  
+- [**Voorbeelden**](examples/README.md) - Praktische voorbeelden, templates en real-world scenario's om Azure Developer CLI te leren door middel van hands-on oefeningen. Elk voorbeeld biedt complete werkende code, infrastructuurtemplates en gedetailleerde instructies voor verschillende applicatiearchitecturen en implementatiepatronen.  
 
-### Starter Templates  
-- [**Eenvoudige Webapplicatie**](../../examples/simple-web-app) - Basis Node.js webapplicatie-implementatie  
-- [**Statische Website**](../../examples/static-website) - Hosting van statische websites op Azure Storage  
-- [**Container Applicatie**](../../examples/container-app) - Containerized applicatie-implementatie  
-- [**Database Applicatie**](../../examples/database-app) - Webapplicatie met database-integratie  
-
-### Geavanceerde Scenario's  
-- [**Microservices**](../../examples/microservices) - Multi-service applicatiearchitectuur  
-- [**Serverless Functies**](../../examples/serverless-function) - Azure Functions implementatie  
-- [**Configuratie Voorbeelden**](../../examples/configurations) - Herbruikbare configuratiepatronen  
+### Hands-on Lab/Workshop  
+- [**AZD Voor Beginners**](workshop/README.md) - Deze workshop richt zich op de Get Started with AI Agents AZD-template en biedt praktische best practices voor de implementatie van Azure AI-services met AZD.  
 
 ## Bronnen
 
 ### Snelle Referenties  
 - [**Command Cheat Sheet**](resources/cheat-sheet.md) - Essentiële azd-commando's  
-- [**Woordenlijst**](resources/glossary.md) - Azure en azd terminologie  
+- [**Glossarium**](resources/glossary.md) - Azure- en azd-terminologie  
 - [**FAQ**](resources/faq.md) - Veelgestelde vragen  
 - [**Studiegids**](resources/study-guide.md) - Uitgebreide leerdoelen en oefenopdrachten  
 
 ### Externe Bronnen  
 - [Azure Developer CLI Documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architectuur Centrum](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Azure Architectuurcentrum](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [Azure Prijscalculator](https://azure.microsoft.com/pricing/calculator/)  
 - [Azure Status](https://status.azure.com/)  
 
@@ -153,7 +145,7 @@ azd up
 1. Begin met [AZD Basisprincipes](docs/getting-started/azd-basics.md)  
 2. Volg de [Installatiegids](docs/getting-started/installation.md)  
 3. Voltooi [Je Eerste Project](docs/getting-started/first-project.md)  
-4. Oefen met [Eenvoudige Webapp Voorbeeld](../../examples/simple-web-app)  
+4. Oefen met [Eenvoudige Web App Voorbeeld](../../examples/simple-web-app)  
 
 ### Voor Ontwikkelaars  
 1. Bekijk de [Configuratiegids](docs/getting-started/configuration.md)  
@@ -164,7 +156,7 @@ azd up
 ### Voor DevOps Engineers  
 1. Beheers [Resources Inrichten](docs/deployment/provisioning.md)  
 2. Voer [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) uit  
-3. Oefen met [Capaciteitsplanning](docs/pre-deployment/capacity-planning.md)  
+3. Oefen [Capaciteitsplanning](docs/pre-deployment/capacity-planning.md)  
 4. Geavanceerd [Microservices Voorbeeld](../../examples/microservices)  
 
 ## Bijdragen
@@ -191,25 +183,25 @@ Dit project is gelicentieerd onder de MIT-licentie - zie het [LICENSE](../../LIC
 Ons team produceert andere cursussen! Bekijk:  
 
 - [**NIEUW** Model Context Protocol (MCP) Voor Beginners](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Agents Voor Beginners](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generatieve AI Voor Beginners met .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generatieve AI Voor Beginners](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generatieve AI Voor Beginners met Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML Voor Beginners](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Data Science Voor Beginners](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Voor Beginners](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Cybersecurity Voor Beginners](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Webontwikkeling voor beginners](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-- [IoT voor beginners](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [XR-ontwikkeling voor beginners](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [GitHub Copilot beheersen voor AI-paired programmeren](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [GitHub Copilot beheersen voor C#/.NET-ontwikkelaars](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [Kies je eigen Copilot-avontuur](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+- [AI Agents voor Beginners](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generatieve AI voor Beginners met .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [Generatieve AI voor Beginners](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generatieve AI voor Beginners met Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [ML voor Beginners](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Data Science voor Beginners](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI voor Beginners](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Cybersecurity voor Beginners](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [Webontwikkeling voor Beginners](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [IoT voor Beginners](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+- [XR Ontwikkeling voor Beginners](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [GitHub Copilot Meesteren voor AI Samenwerkend Programmeren](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [GitHub Copilot Meesteren voor C#/.NET Ontwikkelaars](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+- [Kies Je Eigen Copilot Avontuur](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
 
 **Navigatie**
-- **Volgende les**: [AZD Basisprincipes](docs/getting-started/azd-basics.md)
+- **Volgende Les**: [AZD Basisprincipes](docs/getting-started/azd-basics.md)
 
 ---
 

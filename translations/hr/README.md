@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-10T05:38:56+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:16:18+00:00",
   "source_file": "README.md",
   "language_code": "hr"
 }
@@ -16,7 +16,6 @@ CO_OP_TRANSLATOR_METADATA:
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)  
 
 [![Azure Discord](https://dcbadge.limes.yellow/api/server/kzRShWzttr)](https://discord.gg/microsoft-azure)  
-
 [![Azure AI Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)  
 
 Slijedite ove korake kako biste započeli korištenje ovih resursa:  
@@ -34,12 +33,12 @@ Slijedite ove korake kako biste započeli korištenje ovih resursa:
 
 ## Uvod
 
-Dobrodošli u sveobuhvatni vodič za Azure Developer CLI (azd). Ovaj repozitorij osmišljen je kako bi pomogao developerima svih razina, od studenata do profesionalaca, da nauče i savladaju Azure Developer CLI za učinkovite implementacije u oblaku. Ovaj strukturirani resurs za učenje pruža praktično iskustvo s implementacijama u Azure oblaku, rješavanjem uobičajenih problema i primjenom najboljih praksi za uspješne implementacije AZD predložaka.
+Dobrodošli u sveobuhvatan vodič za Azure Developer CLI (azd). Ovaj repozitorij osmišljen je kako bi pomogao developerima svih razina, od studenata do profesionalaca, da nauče i savladaju Azure Developer CLI za učinkovite implementacije u oblaku. Ovaj strukturirani resurs za učenje pruža praktično iskustvo s implementacijama u Azure oblaku, rješavanjem uobičajenih problema i primjenom najboljih praksi za uspješne implementacije AZD predložaka.
 
 ## Ciljevi učenja
 
 Radom kroz ovaj repozitorij, naučit ćete:  
-- Osnovne principe i ključne koncepte Azure Developer CLI  
+- Osnove i ključne koncepte Azure Developer CLI  
 - Kako implementirati i osigurati Azure resurse koristeći Infrastructure as Code  
 - Razviti vještine rješavanja problema vezanih uz AZD implementacije  
 - Razumjeti provjere prije implementacije i planiranje kapaciteta  
@@ -120,32 +119,25 @@ azd up
 - [**Uobičajeni problemi**](docs/troubleshooting/common-issues.md) - Često susretani problemi i rješenja  
 - [**Vodič za otklanjanje grešaka**](docs/troubleshooting/debugging.md) - Strategije otklanjanja grešaka korak-po-korak  
 
-## Primjeri i predlošci
+## Primjeri i predlošci  
+- [**Primjeri**](examples/README.md) - Praktični primjeri, predlošci i scenariji iz stvarnog svijeta koji će vam pomoći da naučite Azure Developer CLI kroz praktičnu primjenu. Svaki primjer uključuje kompletan radni kod, infrastrukturne predloške i detaljne upute za različite arhitekture aplikacija i obrasce implementacije.  
 
-### Početni predlošci  
-- [**Jednostavna web aplikacija**](../../examples/simple-web-app) - Osnovna implementacija Node.js web aplikacije  
-- [**Staticka web stranica**](../../examples/static-website) - Hosting statičke web stranice na Azure Storage  
-- [**Aplikacija u kontejneru**](../../examples/container-app) - Implementacija aplikacije u kontejneru  
-- [**Aplikacija s bazom podataka**](../../examples/database-app) - Web aplikacija s integracijom baze podataka  
-
-### Napredni scenariji  
-- [**Mikroservisi**](../../examples/microservices) - Arhitektura aplikacije s više servisa  
-- [**Serverless funkcije**](../../examples/serverless-function) - Implementacija Azure Functions  
-- [**Primjeri konfiguracije**](../../examples/configurations) - Ponovno upotrebljivi obrasci konfiguracije  
+### Praktična radionica  
+- [**AZD Za Početnike**](workshop/README.md) - Ova radionica fokusira se na predložak Get Started with AI Agents AZD i pruža praktične najbolje prakse za implementaciju Azure AI usluga koristeći AZD  
 
 ## Resursi
 
 ### Brzi referentni materijali  
 - [**Popis naredbi**](resources/cheat-sheet.md) - Ključne azd naredbe  
-- [**Pojmovnik**](resources/glossary.md) - Terminologija Azure i azd  
+- [**Pojmovnik**](resources/glossary.md) - Terminologija Azure-a i azd-a  
 - [**Česta pitanja**](resources/faq.md) - Najčešće postavljana pitanja  
 - [**Vodič za učenje**](resources/study-guide.md) - Sveobuhvatni ciljevi učenja i vježbe  
 
 ### Vanjski resursi  
-- [Dokumentacija za Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure kalkulator cijena](https://azure.microsoft.com/pricing/calculator/)  
-- [Azure status](https://status.azure.com/)  
+- [Azure Kalkulator cijena](https://azure.microsoft.com/pricing/calculator/)  
+- [Azure Status](https://status.azure.com/)  
 
 ## Put učenja
 
@@ -153,13 +145,13 @@ azd up
 1. Započnite s [Osnovama AZD-a](docs/getting-started/azd-basics.md)  
 2. Slijedite [Vodič za instalaciju](docs/getting-started/installation.md)  
 3. Završite [Vaš prvi projekt](docs/getting-started/first-project.md)  
-4. Vježbajte s [Primjerom jednostavne web aplikacije](../../examples/simple-web-app)  
+4. Vježbajte s [Jednostavnim primjerom web aplikacije](../../examples/simple-web-app)  
 
 ### Za developere  
 1. Pregledajte [Vodič za konfiguraciju](docs/getting-started/configuration.md)  
 2. Proučite [Vodič za implementaciju](docs/deployment/deployment-guide.md)  
 3. Radite na [Primjeru aplikacije s bazom podataka](../../examples/database-app)  
-4. Istražite [Primjer aplikacije u kontejneru](../../examples/container-app)  
+4. Istražite [Primjer aplikacije s kontejnerima](../../examples/container-app)  
 
 ### Za DevOps inženjere  
 1. Savladajte [Osiguranje resursa](docs/deployment/provisioning.md)  
@@ -180,7 +172,7 @@ Pozdravljamo doprinose! Molimo pročitajte naš [Vodič za doprinos](CONTRIBUTIN
 - **Problemi**: [Prijavite greške i predložite značajke](https://github.com/microsoft/azd-for-beginners/issues)  
 - **Diskusije**: [Microsoft Azure Discord zajednica za pitanja i diskusije](https://discord.gg/microsoft-azure)  
 - **Email**: Za privatne upite  
-- **Microsoft Learn**: [Službena dokumentacija za Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- **Microsoft Learn**: [Službena dokumentacija Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
 ## Licenca
 
@@ -191,15 +183,15 @@ Ovaj projekt licenciran je pod MIT licencom - pogledajte [LICENSE](../../LICENSE
 Naš tim proizvodi i druge tečajeve! Pogledajte:  
 
 - [**NOVO** Model Context Protocol (MCP) Za Početnike](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Agenti za Početnike](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generativna AI za Početnike koristeći .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generativna AI za Početnike](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generativna AI za Početnike koristeći Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML za Početnike](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Data Science za Početnike](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI za Početnike](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Cybersecurity za Početnike](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Web Dev za početnike](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI Agents Za Početnike](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generativna AI Za Početnike koristeći .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [Generativna AI Za Početnike](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generativna AI Za Početnike koristeći Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [ML Za Početnike](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Data Science Za Početnike](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI Za Početnike](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Cybersecurity Za Početnike](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [Web Dev Za Početnike](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
 - [IoT za početnike](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
 - [XR razvoj za početnike](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Savladavanje GitHub Copilota za AI programiranje u paru](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  

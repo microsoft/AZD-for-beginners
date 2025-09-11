@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T21:06:05+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:10:15+00:00",
   "source_file": "README.md",
   "language_code": "tl"
 }
@@ -14,44 +14,42 @@ CO_OP_TRANSLATOR_METADATA:
 Sundin ang mga hakbang na ito upang magsimula sa paggamit ng mga resources na ito:
 1. **Fork ang Repository**: I-click ang [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Clone ang Repository**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. [**Sumali sa Azure Discord Communities at makipagkilala sa mga eksperto at kapwa developer**](https://discord.com/invite/ByRwuEEgH4)
+3. [**Sumali sa Azure Discord Communities at makipag-ugnayan sa mga eksperto at kapwa developer**](https://discord.com/invite/ByRwuEEgH4)
 
-### 🌐 Suporta sa Multi-Language
+### 🌐 Suporta sa Maraming Wika
 
 #### Sinusuportahan sa pamamagitan ng GitHub Action (Automated at Laging Napapanahon)
 
-[French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](./README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
-
-**Kung nais mong magkaroon ng karagdagang mga wika para sa pagsasalin, ang mga sinusuportahang wika ay nakalista [dito](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+**Kung nais mong magkaroon ng karagdagang mga pagsasalin, ang mga sinusuportahang wika ay nakalista [dito](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## Panimula
 
-Maligayang pagdating sa komprehensibong gabay para sa Azure Developer CLI (azd). Ang repository na ito ay idinisenyo upang tulungan ang mga developer sa lahat ng antas, mula sa mga estudyante hanggang sa mga propesyonal na developer, na matutunan at ma-master ang Azure Developer CLI para sa mas epektibong cloud deployments. Ang structured learning resource na ito ay nagbibigay ng hands-on na karanasan sa Azure cloud deployments, pag-troubleshoot ng mga karaniwang isyu, at pagpapatupad ng best practices para sa matagumpay na AZD template deployments.
+Maligayang pagdating sa komprehensibong gabay para sa Azure Developer CLI (azd). Ang repository na ito ay idinisenyo upang tulungan ang mga developer sa lahat ng antas, mula sa mga estudyante hanggang sa mga propesyonal, na matutunan at ma-master ang Azure Developer CLI para sa mas epektibong cloud deployments. Ang structured learning resource na ito ay nagbibigay ng hands-on na karanasan sa Azure cloud deployments, pag-troubleshoot ng mga karaniwang isyu, at pagpapatupad ng mga best practices para sa matagumpay na AZD template deployments.
 
 ## Mga Layunin sa Pag-aaral
 
-Sa pamamagitan ng pag-aaral sa repository na ito, ikaw ay:
+Sa pamamagitan ng pagtrabaho sa repository na ito, ikaw ay:
 - Magiging bihasa sa mga pangunahing konsepto ng Azure Developer CLI
 - Matututo kung paano mag-deploy at mag-provision ng Azure resources gamit ang Infrastructure as Code
 - Magkakaroon ng kasanayan sa pag-troubleshoot ng mga karaniwang isyu sa AZD deployment
 - Mauunawaan ang pre-deployment validation at capacity planning
-- Makakapagpatupad ng security best practices at cost optimization strategies
+- Makakapagpatupad ng mga best practices sa seguridad at cost optimization
 - Magkakaroon ng kumpiyansa sa pag-deploy ng production-ready applications sa Azure
 
 ## Mga Resulta ng Pag-aaral
 
 Pagkatapos makumpleto ang kursong ito, ikaw ay:
-- Magiging matagumpay sa pag-install, pag-configure, at paggamit ng Azure Developer CLI
+- Matagumpay na makakapag-install, makakapag-configure, at makakagamit ng Azure Developer CLI
 - Makakagawa at makakapag-deploy ng mga application gamit ang AZD templates
 - Makakapag-troubleshoot ng authentication, infrastructure, at deployment problems
 - Makakapagsagawa ng pre-deployment checks kabilang ang capacity planning at SKU selection
 - Makakapagpatupad ng monitoring, security, at cost management best practices
 - Makakapag-integrate ng AZD workflows sa CI/CD pipelines
 
-## Nilalaman
+## Talaan ng Nilalaman
 
 - [Ano ang Azure Developer CLI?](../..)
-- [Mabilisang Simula](../..)
+- [Mabilisang Pagsisimula](../..)
 - [Dokumentasyon](../..)
 - [Mga Halimbawa at Templates](../..)
 - [Mga Resources](../..)
@@ -61,12 +59,12 @@ Pagkatapos makumpleto ang kursong ito, ikaw ay:
 
 Ang Azure Developer CLI (azd) ay isang developer-centric na command-line interface na nagpapabilis sa proseso ng paggawa at pag-deploy ng mga application sa Azure. Ito ay nagbibigay ng:
 
-- **Template-based deployments** - Gumamit ng pre-built templates para sa mga karaniwang application patterns
+- **Template-based deployments** - Gumamit ng mga pre-built templates para sa mga karaniwang application patterns
 - **Infrastructure as Code** - Pamahalaan ang Azure resources gamit ang Bicep o Terraform
-- **Integrated workflows** - Seamlessly na pag-provision, pag-deploy, at pag-monitor ng mga application
+- **Integrated workflows** - Seamless na pag-provision, pag-deploy, at pag-monitor ng mga application
 - **Developer-friendly** - Optimized para sa produktibidad at karanasan ng developer
 
-## Mabilisang Simula
+## Mabilisang Pagsisimula
 
 ### Mga Kinakailangan
 - Azure subscription
@@ -96,11 +94,11 @@ azd up
 ### Pagsisimula
 - [**AZD Basics**](docs/getting-started/azd-basics.md) - Mga pangunahing konsepto at terminolohiya
 - [**Installation & Setup**](docs/getting-started/installation.md) - Mga gabay sa pag-install para sa iba't ibang platform
-- [**Configuration**](docs/getting-started/configuration.md) - Pag-setup ng environment at authentication
-- [**Ang Iyong Unang Project**](docs/getting-started/first-project.md) - Step-by-step na tutorial
+- [**Configuration**](docs/getting-started/configuration.md) - Setup ng environment at authentication
+- [**Ang Iyong Unang Proyekto**](docs/getting-started/first-project.md) - Step-by-step na tutorial
 
 ### Deployment at Provisioning
-- [**Deployment Guide**](docs/deployment/deployment-guide.md) - Kumpletong workflows para sa deployment
+- [**Deployment Guide**](docs/deployment/deployment-guide.md) - Kumpletong workflows sa pag-deploy
 - [**Provisioning Resources**](docs/deployment/provisioning.md) - Pamamahala ng Azure resources
 
 ### Pre-Deployment Checks
@@ -109,32 +107,25 @@ azd up
 - [**Pre-flight Checks**](docs/pre-deployment/preflight-checks.md) - Automated na validation scripts
 
 ### Troubleshooting
-- [**Common Issues**](docs/troubleshooting/common-issues.md) - Mga karaniwang problema at solusyon
-- [**Debugging Guide**](docs/troubleshooting/debugging.md) - Step-by-step na debugging strategies
+- [**Mga Karaniwang Isyu**](docs/troubleshooting/common-issues.md) - Mga madalas na problema at solusyon
+- [**Debugging Guide**](docs/troubleshooting/debugging.md) - Step-by-step na mga estratehiya sa debugging
 
 ## Mga Halimbawa at Templates
+- [**Mga Halimbawa**]([examples/README.md) - Mga praktikal na halimbawa, templates, at real-world scenarios upang matutunan ang Azure Developer CLI sa pamamagitan ng hands-on na pagsasanay. Ang bawat halimbawa ay nagbibigay ng kumpletong working code, infrastructure templates, at detalyadong instruksyon para sa iba't ibang application architectures at deployment patterns.
 
-### Starter Templates
-- [**Simple Web Application**](../../examples/simple-web-app) - Basic na Node.js web application deployment
-- [**Static Website**](../../examples/static-website) - Static na website hosting sa Azure Storage
-- [**Container Application**](../../examples/container-app) - Containerized na application deployment
-- [**Database Application**](../../examples/database-app) - Web application na may database integration
-
-### Advanced Scenarios
-- [**Microservices**](../../examples/microservices) - Multi-service na application architecture
-- [**Serverless Functions**](../../examples/serverless-function) - Azure Functions deployment
-- [**Configuration Examples**](../../examples/configurations) - Mga reusable na configuration patterns
+### Hands On Lab/Workshop
+- [**AZD Para sa Mga Baguhan**](workshop/README.md) - Ang workshop na ito ay magpopokus sa Get Started with AI Agents AZD template at magbibigay ng hands-on na best practice para sa pag-deploy ng Azure AI services gamit ang AZD
 
 ## Mga Resources
 
-### Quick References
+### Mabilisang Sanggunian
 - [**Command Cheat Sheet**](resources/cheat-sheet.md) - Mahahalagang azd commands
 - [**Glossary**](resources/glossary.md) - Terminolohiya ng Azure at azd
 - [**FAQ**](resources/faq.md) - Mga madalas itanong
 - [**Study Guide**](resources/study-guide.md) - Komprehensibong learning objectives at practice exercises
 
-### External Resources
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+### Panlabas na Resources
+- [Dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Status](https://status.azure.com/)
@@ -144,7 +135,7 @@ azd up
 ### Para sa Mga Estudyante at Baguhan
 1. Simulan sa [AZD Basics](docs/getting-started/azd-basics.md)
 2. Sundin ang [Installation Guide](docs/getting-started/installation.md)
-3. Kumpletuhin ang [Ang Iyong Unang Project](docs/getting-started/first-project.md)
+3. Kumpletuhin ang [Ang Iyong Unang Proyekto](docs/getting-started/first-project.md)
 4. Magpraktis gamit ang [Simple Web App Example](../../examples/simple-web-app)
 
 ### Para sa Mga Developer
@@ -191,11 +182,11 @@ Ang aming team ay gumagawa ng iba pang mga kurso! Tingnan ang:
 - [Data Science para sa Mga Baguhan](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 - [AI para sa Mga Baguhan](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 - [Cybersecurity para sa Mga Baguhan](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
-- [Web Dev para sa mga Baguhan](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [Web Dev para sa Mga Baguhan](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 - [IoT para sa mga Baguhan](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 - [Pag-develop ng XR para sa mga Baguhan](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Pag-master sa GitHub Copilot para sa AI Paired Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [Pag-master sa GitHub Copilot para sa mga C#/.NET Developer](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+- [Pag-master ng GitHub Copilot para sa AI Paired Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [Pag-master ng GitHub Copilot para sa mga C#/.NET Developer](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 - [Piliin ang Iyong Sariling Copilot Adventure](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---

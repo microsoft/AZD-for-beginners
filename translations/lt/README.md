@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-10T05:42:05+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:19:21+00:00",
   "source_file": "README.md",
   "language_code": "lt"
 }
@@ -32,7 +32,7 @@ Sveiki atvykę į išsamų Azure Developer CLI (azd) vadovą. Ši saugykla skirt
 
 Dirbdami su šia saugykla, jūs:
 - Įvaldysite Azure Developer CLI pagrindus ir pagrindines sąvokas
-- Išmoksite diegti ir kurti Azure išteklius naudodami infrastruktūrą kaip kodą
+- Išmoksite diegti ir paruošti Azure išteklius naudodami infrastruktūrą kaip kodą
 - Ugdysite problemų sprendimo įgūdžius, susijusius su AZD diegimo problemomis
 - Suprasite prieš diegimą atliekamą patikrą ir pajėgumų planavimą
 - Įgyvendinsite saugumo geriausias praktikas ir išlaidų optimizavimo strategijas
@@ -44,7 +44,7 @@ Baigę šį kursą, jūs galėsite:
 - Sėkmingai įdiegti, sukonfigūruoti ir naudoti Azure Developer CLI
 - Kurti ir diegti programas naudodami AZD šablonus
 - Spręsti autentifikavimo, infrastruktūros ir diegimo problemas
-- Atlikti prieš diegimą atliekamas patikras, įskaitant pajėgumų planavimą ir SKU pasirinkimą
+- Atlikti prieš diegimą atliekamus patikrinimus, įskaitant pajėgumų planavimą ir SKU pasirinkimą
 - Įgyvendinti stebėjimo, saugumo ir išlaidų valdymo geriausias praktikas
 - Integruoti AZD darbo eigas į CI/CD procesus
 
@@ -59,16 +59,16 @@ Baigę šį kursą, jūs galėsite:
 
 ## Kas yra Azure Developer CLI?
 
-Azure Developer CLI (azd) yra kūrėjams pritaikyta komandinės eilutės sąsaja, kuri pagreitina programų kūrimo ir diegimo procesą Azure platformoje. Ji siūlo:
+Azure Developer CLI (azd) yra kūrėjams pritaikyta komandinės eilutės sąsaja, kuri pagreitina programų kūrimo ir diegimo procesą Azure platformoje. Ji suteikia:
 
-- **Šablonais pagrįsti diegimai** - Naudokite iš anksto paruoštus šablonus dažniausiai pasitaikančioms programų struktūroms
-- **Infrastruktūra kaip kodas** - Valdykite Azure išteklius naudodami Bicep arba Terraform
-- **Integruotos darbo eigos** - Sklandžiai kurkite, diekite ir stebėkite programas
+- **Šablonais pagrįstus diegimus** - Naudokite iš anksto paruoštus šablonus dažniausiai pasitaikančioms programų struktūroms
+- **Infrastruktūrą kaip kodą** - Valdykite Azure išteklius naudodami Bicep arba Terraform
+- **Integruotas darbo eigas** - Sklandžiai paruoškite, diekite ir stebėkite programas
 - **Draugiška kūrėjams** - Optimizuota kūrėjų produktyvumui ir patirčiai
 
 ## Greitas startas
 
-### Būtinos sąlygos
+### Reikalavimai
 - Azure prenumerata
 - Įdiegtas Azure CLI
 - Git (šablonų klonavimui)
@@ -97,33 +97,26 @@ azd up
 - [**AZD pagrindai**](docs/getting-started/azd-basics.md) - Pagrindinės sąvokos ir terminologija
 - [**Įdiegimas ir nustatymas**](docs/getting-started/installation.md) - Platformai pritaikyti įdiegimo vadovai
 - [**Konfigūracija**](docs/getting-started/configuration.md) - Aplinkos nustatymas ir autentifikacija
-- [**Pirmasis projektas**](docs/getting-started/first-project.md) - Žingsnis po žingsnio pamoka
+- [**Pirmasis projektas**](docs/getting-started/first-project.md) - Žingsnis po žingsnio vadovas
 
-### Diegimas ir išteklių kūrimas
-- [**Diegimo vadovas**](docs/deployment/deployment-guide.md) - Pilnos diegimo darbo eigos
-- [**Išteklių kūrimas**](docs/deployment/provisioning.md) - Azure išteklių valdymas
+### Diegimas ir paruošimas
+- [**Diegimo vadovas**](docs/deployment/deployment-guide.md) - Pilni diegimo darbo procesai
+- [**Išteklių paruošimas**](docs/deployment/provisioning.md) - Azure išteklių valdymas
 
-### Prieš diegimą atliekamos patikros
+### Prieš diegimą atliekami patikrinimai
 - [**Pajėgumų planavimas**](docs/pre-deployment/capacity-planning.md) - Azure išteklių pajėgumų patvirtinimas
 - [**SKU pasirinkimas**](docs/pre-deployment/sku-selection.md) - Tinkamų Azure SKU pasirinkimas
-- [**Prieš diegimą atliekamos patikros**](docs/pre-deployment/preflight-checks.md) - Automatiniai patvirtinimo scenarijai
+- [**Prieš skrydį atliekami patikrinimai**](docs/pre-deployment/preflight-checks.md) - Automatiniai patvirtinimo scenarijai
 
 ### Problemų sprendimas
-- [**Dažnos problemos**](docs/troubleshooting/common-issues.md) - Dažniausiai pasitaikančios problemos ir jų sprendimai
+- [**Dažniausiai pasitaikančios problemos**](docs/troubleshooting/common-issues.md) - Dažniausiai pasitaikančios problemos ir jų sprendimai
 - [**Derinimo vadovas**](docs/troubleshooting/debugging.md) - Žingsnis po žingsnio derinimo strategijos
 
 ## Pavyzdžiai ir šablonai
+- [**Pavyzdžiai**]([examples/README.md) - Praktiniai pavyzdžiai, šablonai ir realaus pasaulio scenarijai, padedantys išmokti Azure Developer CLI per praktinę veiklą. Kiekvienas pavyzdys pateikia pilną veikiančią kodą, infrastruktūros šablonus ir išsamias instrukcijas skirtingoms programų architektūroms ir diegimo modeliams.
 
-### Pradiniai šablonai
-- [**Paprasta interneto programa**](../../examples/simple-web-app) - Pagrindinis Node.js interneto programos diegimas
-- [**Statinė svetainė**](../../examples/static-website) - Statinės svetainės talpinimas Azure Storage
-- [**Konteinerinė programa**](../../examples/container-app) - Konteinerizuotos programos diegimas
-- [**Duomenų bazės programa**](../../examples/database-app) - Interneto programa su duomenų bazės integracija
-
-### Sudėtingesni scenarijai
-- [**Mikropaslaugos**](../../examples/microservices) - Daugiafunkcinės programos architektūra
-- [**Serverless funkcijos**](../../examples/serverless-function) - Azure Functions diegimas
-- [**Konfigūracijų pavyzdžiai**](../../examples/configurations) - Naudojamos konfigūracijų struktūros
+### Praktinis seminaras
+- [**AZD pradedantiesiems**](workshop/README.md) - Šis seminaras bus skirtas AI agentų AZD šablonui ir suteiks praktinių geriausių praktikų diegiant Azure AI paslaugas naudojant AZD
 
 ## Ištekliai
 
@@ -131,13 +124,13 @@ azd up
 - [**Komandų atmintinė**](resources/cheat-sheet.md) - Esminės azd komandos
 - [**Žodynėlis**](resources/glossary.md) - Azure ir azd terminologija
 - [**DUK**](resources/faq.md) - Dažniausiai užduodami klausimai
-- [**Mokymosi vadovas**](resources/study-guide.md) - Išsamūs mokymosi tikslai ir praktikos užduotys
+- [**Mokymosi vadovas**](resources/study-guide.md) - Išsamūs mokymosi tikslai ir praktiniai pratimai
 
 ### Išoriniai ištekliai
 - [Azure Developer CLI dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure kainų skaičiuoklė](https://azure.microsoft.com/pricing/calculator/)
-- [Azure būsenos puslapis](https://status.azure.com/)
+- [Azure būklė](https://status.azure.com/)
 
 ## Mokymosi kelias
 
@@ -151,11 +144,11 @@ azd up
 1. Peržiūrėkite [Konfigūracijos vadovą](docs/getting-started/configuration.md)
 2. Išstudijuokite [Diegimo vadovą](docs/deployment/deployment-guide.md)
 3. Dirbkite su [Duomenų bazės programos pavyzdžiu](../../examples/database-app)
-4. Išbandykite [Konteinerinės programos pavyzdį](../../examples/container-app)
+4. Išbandykite [Konteinerių programos pavyzdį](../../examples/container-app)
 
 ### DevOps inžinieriams
-1. Įvaldykite [Išteklių kūrimą](docs/deployment/provisioning.md)
-2. Įgyvendinkite [Prieš diegimą atliekamas patikras](docs/pre-deployment/preflight-checks.md)
+1. Įvaldykite [Išteklių paruošimą](docs/deployment/provisioning.md)
+2. Įgyvendinkite [Prieš skrydį atliekamus patikrinimus](docs/pre-deployment/preflight-checks.md)
 3. Praktikuokitės [Pajėgumų planavimą](docs/pre-deployment/capacity-planning.md)
 4. Išbandykite [Mikropaslaugų pavyzdį](../../examples/microservices)
 
@@ -164,10 +157,10 @@ azd up
 Mes laukiame jūsų indėlio! Prašome perskaityti mūsų [Prisidėjimo vadovą](CONTRIBUTING.md), kuriame rasite informaciją apie:
 - Kaip pateikti problemas ir funkcijų užklausas
 - Kodo prisidėjimo gaires
-- Dokumentacijos tobulinimą
+- Dokumentacijos patobulinimus
 - Bendruomenės standartus
 
-## Palaikymas
+## Pagalba
 
 - **Problemos**: [Praneškite apie klaidas ir pateikite funkcijų užklausas](https://github.com/microsoft/azd-for-beginners/issues)
 - **Diskusijos**: [Microsoft Azure Discord bendruomenės klausimai ir diskusijos](https://discord.gg/microsoft-azure)
@@ -176,13 +169,13 @@ Mes laukiame jūsų indėlio! Prašome perskaityti mūsų [Prisidėjimo vadovą]
 
 ## Licencija
 
-Šis projektas licencijuotas pagal MIT licenciją - detales rasite [LICENSE](../../LICENSE) faile.
+Šis projektas licencijuotas pagal MIT licenciją - išsamią informaciją rasite [LICENSE](../../LICENSE) faile.
 
 ## 🎒 Kiti kursai
 
 Mūsų komanda kuria kitus kursus! Peržiūrėkite:
 
-- [**NAUJAS** Model Context Protocol (MCP) pradedantiesiems](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [**NAUJA** Model Context Protocol (MCP) pradedantiesiems](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [AI agentai pradedantiesiems](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [Generatyvinė AI pradedantiesiems naudojant .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
 - [Generatyvinė AI pradedantiesiems](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -191,19 +184,19 @@ Mūsų komanda kuria kitus kursus! Peržiūrėkite:
 - [Duomenų mokslas pradedantiesiems](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 - [AI pradedantiesiems](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 - [Kibernetinis saugumas pradedantiesiems](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
-- [Pradedantiesiems: Tinklalapių kūrimas](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-- [Pradedantiesiems: Daiktų internetas (IoT)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [Pradedantiesiems: XR kūrimas](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [GitHub Copilot įvaldymas AI poriniam programavimui](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [GitHub Copilot įvaldymas C#/.NET programuotojams](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [Pasirinkite savo Copilot nuotykį](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+- [Interneto kūrimas pradedantiesiems](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [IoT pradedantiesiems](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [XR kūrimas pradedantiesiems](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [GitHub Copilot įvaldymas AI poriniam programavimui](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [GitHub Copilot įvaldymas C#/.NET programuotojams](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+- [Pasirinkite savo Copilot nuotykį](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
 ---
 
-**Navigacija**
-- **Kita pamoka**: [AZD pagrindai](docs/getting-started/azd-basics.md)
+**Navigacija**  
+- **Kita pamoka**: [AZD pagrindai](docs/getting-started/azd-basics.md)  
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

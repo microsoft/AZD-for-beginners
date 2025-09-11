@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T16:25:16+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T09:53:02+00:00",
   "source_file": "README.md",
   "language_code": "ko"
 }
@@ -29,17 +29,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 [French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](./README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)  
 
-**추가 번역 언어를 지원받고 싶다면 [여기](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)를 확인하세요.**
+**추가 번역 언어를 원하시면 [여기](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)에서 지원되는 언어를 확인하세요.**
 
 ## 소개
 
-Azure Developer CLI (azd)에 대한 종합 가이드에 오신 것을 환영합니다. 이 저장소는 학생부터 전문 개발자까지 모든 수준의 개발자가 Azure Developer CLI를 배우고 숙달하여 효율적인 클라우드 배포를 할 수 있도록 돕기 위해 설계되었습니다. 이 구조화된 학습 리소스는 Azure 클라우드 배포, 일반적인 문제 해결, 성공적인 AZD 템플릿 배포를 위한 모범 사례 구현에 대한 실습 경험을 제공합니다.
+Azure Developer CLI (azd)를 위한 종합 가이드에 오신 것을 환영합니다. 이 저장소는 학생부터 전문 개발자까지 모든 수준의 개발자가 Azure Developer CLI를 배우고 숙달하여 효율적인 클라우드 배포를 할 수 있도록 돕기 위해 설계되었습니다. 이 구조화된 학습 리소스는 Azure 클라우드 배포, 일반적인 문제 해결, 성공적인 AZD 템플릿 배포를 위한 모범 사례 구현에 대한 실습 경험을 제공합니다.
 
 ## 학습 목표
 
 이 저장소를 통해 다음을 배울 수 있습니다:
 - Azure Developer CLI의 기본 및 핵심 개념 숙달
-- 코드로 인프라를 사용하여 Azure 리소스를 배포 및 프로비저닝하는 방법 학습
+- 코드형 인프라를 사용하여 Azure 리소스를 배포 및 프로비저닝하는 방법 학습
 - 일반적인 AZD 배포 문제에 대한 문제 해결 기술 개발
 - 사전 배포 검증 및 용량 계획 이해
 - 보안 모범 사례 및 비용 최적화 전략 구현
@@ -66,16 +66,16 @@ Azure Developer CLI (azd)에 대한 종합 가이드에 오신 것을 환영합�
 
 ## Azure Developer CLI란 무엇인가?
 
-Azure Developer CLI (azd)는 Azure에 애플리케이션을 구축하고 배포하는 과정을 가속화하는 개발자 중심의 명령줄 인터페이스입니다. 주요 기능은 다음과 같습니다:
+Azure Developer CLI (azd)는 애플리케이션을 Azure에 빌드하고 배포하는 과정을 가속화하는 개발자 중심의 명령줄 인터페이스입니다. 주요 기능은 다음과 같습니다:
 
 - **템플릿 기반 배포** - 일반적인 애플리케이션 패턴을 위한 사전 제작된 템플릿 사용
-- **코드로 인프라 관리** - Bicep 또는 Terraform을 사용하여 Azure 리소스 관리
+- **코드형 인프라** - Bicep 또는 Terraform을 사용하여 Azure 리소스 관리
 - **통합 워크플로** - 애플리케이션 프로비저닝, 배포 및 모니터링을 원활하게 수행
 - **개발자 친화적** - 개발자 생산성과 경험을 최적화
 
 ## 빠른 시작
 
-### 사전 준비
+### 사전 준비 사항
 - Azure 구독
 - Azure CLI 설치
 - Git (템플릿 클론용)
@@ -120,25 +120,18 @@ azd up
 - [**디버깅 가이드**](docs/troubleshooting/debugging.md) - 단계별 디버깅 전략
 
 ## 예제 및 템플릿
+- [**예제**](examples/README.md) - 실습 예제, 템플릿 및 실제 시나리오를 통해 Azure Developer CLI를 학습하세요. 각 예제는 완전한 작동 코드, 인프라 템플릿 및 다양한 애플리케이션 아키텍처와 배포 패턴에 대한 자세한 지침을 제공합니다.
 
-### 시작 템플릿
-- [**간단한 웹 애플리케이션**](../../examples/simple-web-app) - 기본 Node.js 웹 애플리케이션 배포
-- [**정적 웹사이트**](../../examples/static-website) - Azure Storage에서 정적 웹사이트 호스팅
-- [**컨테이너 애플리케이션**](../../examples/container-app) - 컨테이너화된 애플리케이션 배포
-- [**데이터베이스 애플리케이션**](../../examples/database-app) - 데이터베이스 통합 웹 애플리케이션
-
-### 고급 시나리오
-- [**마이크로서비스**](../../examples/microservices) - 다중 서비스 애플리케이션 아키텍처
-- [**서버리스 함수**](../../examples/serverless-function) - Azure Functions 배포
-- [**구성 예제**](../../examples/configurations) - 재사용 가능한 구성 패턴
+### 실습 랩/워크숍
+- [**AZD 초보자를 위한 워크숍**](workshop/README.md) - 이 워크숍은 AI 에이전트 AZD 템플릿을 사용하여 Azure AI 서비스를 AZD로 배포하는 모범 사례를 실습합니다.
 
 ## 리소스
 
-### 빠른 참조
+### 빠른 참고 자료
 - [**명령어 치트 시트**](resources/cheat-sheet.md) - 필수 azd 명령어
 - [**용어집**](resources/glossary.md) - Azure 및 azd 용어
 - [**FAQ**](resources/faq.md) - 자주 묻는 질문
-- [**학습 가이드**](resources/study-guide.md) - 종합적인 학습 목표 및 연습 문제
+- [**학습 가이드**](resources/study-guide.md) - 종합적인 학습 목표 및 실습 문제
 
 ### 외부 리소스
 - [Azure Developer CLI 문서](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -149,26 +142,26 @@ azd up
 ## 학습 경로
 
 ### 학생 및 초보자를 위한 경로
-1. [AZD 기본 사항](docs/getting-started/azd-basics.md)부터 시작
-2. [설치 가이드](docs/getting-started/installation.md) 따라하기
-3. [첫 번째 프로젝트](docs/getting-started/first-project.md) 완료하기
-4. [간단한 웹 애플리케이션 예제](../../examples/simple-web-app) 연습하기
+1. [AZD 기본 사항](docs/getting-started/azd-basics.md)부터 시작하세요.
+2. [설치 가이드](docs/getting-started/installation.md)를 따라하세요.
+3. [첫 번째 프로젝트](docs/getting-started/first-project.md)를 완료하세요.
+4. [간단한 웹 앱 예제](../../examples/simple-web-app)를 실습하세요.
 
 ### 개발자를 위한 경로
-1. [구성 가이드](docs/getting-started/configuration.md) 검토
-2. [배포 가이드](docs/deployment/deployment-guide.md) 학습
-3. [데이터베이스 애플리케이션 예제](../../examples/database-app) 작업
-4. [컨테이너 애플리케이션 예제](../../examples/container-app) 탐색
+1. [구성 가이드](docs/getting-started/configuration.md)를 검토하세요.
+2. [배포 가이드](docs/deployment/deployment-guide.md)를 학습하세요.
+3. [데이터베이스 앱 예제](../../examples/database-app)를 실습하세요.
+4. [컨테이너 앱 예제](../../examples/container-app)를 탐색하세요.
 
 ### DevOps 엔지니어를 위한 경로
-1. [리소스 프로비저닝](docs/deployment/provisioning.md) 숙달
-2. [사전 점검](docs/pre-deployment/preflight-checks.md) 구현
-3. [용량 계획](docs/pre-deployment/capacity-planning.md) 연습
-4. 고급 [마이크로서비스 예제](../../examples/microservices) 실습
+1. [리소스 프로비저닝](docs/deployment/provisioning.md)을 숙달하세요.
+2. [사전 점검](docs/pre-deployment/preflight-checks.md)을 구현하세요.
+3. [용량 계획](docs/pre-deployment/capacity-planning.md)을 실습하세요.
+4. [마이크로서비스 예제](../../examples/microservices)를 심화 학습하세요.
 
 ## 기여
 
-기여를 환영합니다! [기여 가이드](CONTRIBUTING.md)를 읽고 다음에 대해 자세히 알아보세요:
+기여를 환영합니다! [기여 가이드](CONTRIBUTING.md)를 읽고 다음 내용을 확인하세요:
 - 문제 및 기능 요청 제출 방법
 - 코드 기여 지침
 - 문서 개선
@@ -183,34 +176,34 @@ azd up
 
 ## 라이선스
 
-이 프로젝트는 MIT 라이선스에 따라 라이선스가 부여됩니다 - 자세한 내용은 [LICENSE](../../LICENSE) 파일을 참조하세요.
+이 프로젝트는 MIT 라이선스에 따라 라이선스가 부여됩니다. 자세한 내용은 [LICENSE](../../LICENSE) 파일을 참조하세요.
 
 ## 🎒 다른 강좌
 
 우리 팀이 제작한 다른 강좌를 확인하세요:
 
 - [**NEW** Model Context Protocol (MCP) 초보자를 위한 가이드](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Agents 초보자를 위한 가이드](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI 초보자를 위한 .NET 사용 강좌](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI 초보자를 위한 강좌](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI 초보자를 위한 Java 사용 강좌](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML 초보자를 위한 강좌](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [데이터 과학 초보자를 위한 강좌](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI 초보자를 위한 강좌](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [사이버 보안 초보자를 위한 강좌](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [AI 에이전트 초보자를 위한 가이드](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [.NET을 사용한 초보자를 위한 생성형 AI](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 생성형 AI](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Java를 사용한 초보자를 위한 생성형 AI](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 머신러닝](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 데이터 과학](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 AI](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 사이버 보안](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
 - [초보자를 위한 웹 개발](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-- [초보자를 위한 IoT](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-- [초보자를 위한 XR 개발](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI 페어드 프로그래밍을 위한 GitHub Copilot 마스터하기](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
-- [C#/.NET 개발자를 위한 GitHub Copilot 마스터하기](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
-- [나만의 Copilot 모험 선택하기](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 IoT](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+- [초보자를 위한 XR 개발](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI 페어 프로그래밍을 위한 GitHub Copilot 마스터하기](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [C#/.NET 개발자를 위한 GitHub Copilot 마스터하기](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+- [나만의 Copilot 모험 선택하기](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
 
-**탐색**  
-- **다음 강의**: [AZD 기본](docs/getting-started/azd-basics.md)  
+**탐색**
+- **다음 강의**: [AZD 기본](docs/getting-started/azd-basics.md)
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서를 해당 언어로 작성된 상태에서 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

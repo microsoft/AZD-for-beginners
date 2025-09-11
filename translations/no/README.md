@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T20:55:57+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:05:06+00:00",
   "source_file": "README.md",
   "language_code": "no"
 }
@@ -16,7 +16,6 @@ CO_OP_TRANSLATOR_METADATA:
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)  
 
 [![Azure Discord](https://dcbadge.limes.yellow/api/server/kzRShWzttr)](https://discord.gg/microsoft-azure)  
-
 [![Azure AI Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)  
 
 Følg disse stegene for å komme i gang med ressursene:  
@@ -28,7 +27,7 @@ Følg disse stegene for å komme i gang med ressursene:
 
 #### Støttet via GitHub Action (Automatisk og alltid oppdatert)
 
-[Fransk](../fr/README.md) | [Spansk](../es/README.md) | [Tysk](../de/README.md) | [Russisk](../ru/README.md) | [Arabisk](../ar/README.md) | [Persisk (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Kinesisk (Forenklet)](../zh/README.md) | [Kinesisk (Tradisjonell, Macau)](../mo/README.md) | [Kinesisk (Tradisjonell, Hong Kong)](../hk/README.md) | [Kinesisk (Tradisjonell, Taiwan)](../tw/README.md) | [Japansk](../ja/README.md) | [Koreansk](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portugisisk (Portugal)](../pt/README.md) | [Portugisisk (Brasil)](../br/README.md) | [Italiensk](../it/README.md) | [Polsk](../pl/README.md) | [Tyrkisk](../tr/README.md) | [Gresk](../el/README.md) | [Thai](../th/README.md) | [Svensk](../sv/README.md) | [Dansk](../da/README.md) | [Norsk](./README.md) | [Finsk](../fi/README.md) | [Nederlandsk](../nl/README.md) | [Hebraisk](../he/README.md) | [Vietnamesisk](../vi/README.md) | [Indonesisk](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filippinsk)](../tl/README.md) | [Swahili](../sw/README.md) | [Ungarsk](../hu/README.md) | [Tsjekkisk](../cs/README.md) | [Slovakisk](../sk/README.md) | [Rumensk](../ro/README.md) | [Bulgarsk](../bg/README.md) | [Serbisk (Kyrillisk)](../sr/README.md) | [Kroatisk](../hr/README.md) | [Slovensk](../sl/README.md) | [Ukrainsk](../uk/README.md) | [Burmesisk (Myanmar)](../my/README.md)  
+[French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](./README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)  
 
 **Hvis du ønsker støtte for flere språk, finner du en liste over tilgjengelige språk [her](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**  
 
@@ -53,7 +52,7 @@ Etter å ha fullført dette kurset vil du kunne:
 - Lage og implementere applikasjoner ved hjelp av AZD-maler  
 - Feilsøke autentisering, infrastruktur og implementeringsproblemer  
 - Utføre kontroller før implementering, inkludert kapasitetsplanlegging og valg av SKU  
-- Implementere overvåking, sikkerhet og kostnadsstyringspraksis  
+- Implementere overvåking, sikkerhet og kostnadsstyring beste praksis  
 - Integrere AZD-arbeidsflyter i CI/CD-pipelines  
 
 ## Innholdsfortegnelse
@@ -120,24 +119,17 @@ azd up
 - [**Vanlige problemer**](docs/troubleshooting/common-issues.md) - Ofte møtte problemer og løsninger  
 - [**Feilsøkingsguide**](docs/troubleshooting/debugging.md) - Steg-for-steg feilsøkingsstrategier  
 
-## Eksempler og maler
+## Eksempler og maler  
+- [**Eksempler**](examples/README.md) - Praktiske eksempler, maler og virkelige scenarier for å hjelpe deg med å lære Azure Developer CLI gjennom praktisk øvelse. Hvert eksempel gir komplett fungerende kode, infrastrukturmaler og detaljerte instruksjoner for ulike applikasjonsarkitekturer og implementeringsmønstre.  
 
-### Startmaler  
-- [**Enkel webapplikasjon**](../../examples/simple-web-app) - Grunnleggende Node.js webapplikasjonsimplementering  
-- [**Statisk nettside**](../../examples/static-website) - Hosting av statisk nettside på Azure Storage  
-- [**Container-applikasjon**](../../examples/container-app) - Implementering av containerisert applikasjon  
-- [**Database-applikasjon**](../../examples/database-app) - Webapplikasjon med databaseintegrasjon  
-
-### Avanserte scenarier  
-- [**Mikrotjenester**](../../examples/microservices) - Applikasjonsarkitektur med flere tjenester  
-- [**Serverløse funksjoner**](../../examples/serverless-function) - Implementering av Azure Functions  
-- [**Konfigurasjonseksempler**](../../examples/configurations) - Gjenbrukbare konfigurasjonsmønstre  
+### Praktisk lab/workshop  
+- [**AZD For Nybegynnere**](workshop/README.md) - Denne workshoppen fokuserer på å komme i gang med AI Agents AZD-malen og gir praktisk beste praksis for implementering av Azure AI-tjenester ved hjelp av AZD  
 
 ## Ressurser
 
 ### Hurtigreferanser  
-- [**Kommandosnarveier**](resources/cheat-sheet.md) - Essensielle azd-kommandoer  
-- [**Ordliste**](resources/glossary.md) - Terminologi for Azure og azd  
+- [**Kommandosnarveiark**](resources/cheat-sheet.md) - Essensielle azd-kommandoer  
+- [**Ordliste**](resources/glossary.md) - Azure- og azd-terminologi  
 - [**FAQ**](resources/faq.md) - Ofte stilte spørsmål  
 - [**Studieguide**](resources/study-guide.md) - Omfattende læringsmål og øvelser  
 
@@ -151,21 +143,21 @@ azd up
 
 ### For studenter og nybegynnere  
 1. Start med [AZD Grunnleggende](docs/getting-started/azd-basics.md)  
-2. Følg [Installasjonsguide](docs/getting-started/installation.md)  
+2. Følg [Installasjonsguiden](docs/getting-started/installation.md)  
 3. Fullfør [Ditt første prosjekt](docs/getting-started/first-project.md)  
-4. Øv med [Eksempel på enkel webapplikasjon](../../examples/simple-web-app)  
+4. Øv med [Enkel webapp-eksempel](../../examples/simple-web-app)  
 
 ### For utviklere  
 1. Gå gjennom [Konfigurasjonsguide](docs/getting-started/configuration.md)  
 2. Studer [Implementeringsguide](docs/deployment/deployment-guide.md)  
-3. Jobb med [Eksempel på databaseapplikasjon](../../examples/database-app)  
-4. Utforsk [Eksempel på container-applikasjon](../../examples/container-app)  
+3. Jobb med [Databaseapp-eksempel](../../examples/database-app)  
+4. Utforsk [Containerapp-eksempel](../../examples/container-app)  
 
 ### For DevOps-ingeniører  
 1. Mestre [Klargjøring av ressurser](docs/deployment/provisioning.md)  
 2. Implementer [Forhåndskontroller](docs/pre-deployment/preflight-checks.md)  
 3. Øv på [Kapasitetsplanlegging](docs/pre-deployment/capacity-planning.md)  
-4. Avansert [Eksempel på mikrotjenester](../../examples/microservices)  
+4. Avansert [Mikrotjenester-eksempel](../../examples/microservices)  
 
 ## Bidra
 
@@ -180,30 +172,30 @@ Vi ønsker bidrag velkommen! Les vår [Bidragsguide](CONTRIBUTING.md) for detalj
 - **Problemer**: [Rapporter feil og foreslå funksjoner](https://github.com/microsoft/azd-for-beginners/issues)  
 - **Diskusjoner**: [Microsoft Azure Discord Community Q&A og diskusjoner](https://discord.gg/microsoft-azure)  
 - **E-post**: For private henvendelser  
-- **Microsoft Learn**: [Offisiell dokumentasjon for Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- **Microsoft Learn**: [Offisiell Azure Developer CLI dokumentasjon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
 ## Lisens
 
-Dette prosjektet er lisensiert under MIT-lisensen - se [LICENSE](../../LICENSE)-filen for detaljer.  
+Dette prosjektet er lisensiert under MIT-lisensen - se [LICENSE](../../LICENSE) for detaljer.  
 
 ## 🎒 Andre kurs
 
 Vårt team produserer andre kurs! Sjekk ut:  
 
 - [**NY** Model Context Protocol (MCP) For Nybegynnere](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI-agenter for nybegynnere](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generativ AI for nybegynnere med .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generativ AI for nybegynnere](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generativ AI for nybegynnere med Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML for nybegynnere](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Data Science for nybegynnere](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI for nybegynnere](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Cybersikkerhet for nybegynnere](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Webutvikling for nybegynnere](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI Agents for Nybegynnere](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generativ AI for Nybegynnere med .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [Generativ AI for Nybegynnere](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generativ AI for Nybegynnere med Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [ML for Nybegynnere](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Data Science for Nybegynnere](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI for Nybegynnere](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Cybersecurity for Nybegynnere](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [Webutvikling for Nybegynnere](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
 - [IoT for nybegynnere](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 - [XR-utvikling for nybegynnere](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Mestre GitHub Copilot for AI-parprogrammering](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [Mestre GitHub Copilot for C#/.NET-utviklere](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+- [Behersk GitHub Copilot for AI-parprogrammering](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [Behersk GitHub Copilot for C#/.NET-utviklere](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 - [Velg ditt eget Copilot-eventyr](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
@@ -214,4 +206,4 @@ Vårt team produserer andre kurs! Sjekk ut:
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

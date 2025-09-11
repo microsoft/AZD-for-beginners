@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T18:43:32+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T09:46:55+00:00",
   "source_file": "README.md",
   "language_code": "ar"
 }
@@ -16,11 +16,10 @@ CO_OP_TRANSLATOR_METADATA:
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)  
 
 [![Azure Discord](https://dcbadge.limes.yellow/api/server/kzRShWzttr)](https://discord.gg/microsoft-azure)  
-
 [![Azure AI Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)  
 
 اتبع هذه الخطوات للبدء باستخدام هذه الموارد:  
-1. **نسخ المستودع**: اضغط [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)  
+1. **نسخ المستودع**: اضغط على [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)  
 2. **استنساخ المستودع**: `git clone https://github.com/microsoft/azd-for-beginners.git`  
 3. [**انضم إلى مجتمعات Azure Discord وتواصل مع الخبراء والمطورين الآخرين**](https://discord.com/invite/ByRwuEEgH4)  
 
@@ -34,26 +33,26 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## المقدمة
 
-مرحبًا بك في الدليل الشامل لـ Azure Developer CLI (azd). تم تصميم هذا المستودع لمساعدة المطورين على جميع المستويات، من الطلاب إلى المطورين المحترفين، على تعلم وإتقان Azure Developer CLI لنشر التطبيقات السحابية بكفاءة. يوفر هذا المورد التعليمي المهيكل تجربة عملية مع نشرات Azure السحابية، وحل المشكلات الشائعة، وتطبيق أفضل الممارسات لنشر قوالب AZD بنجاح.
+مرحبًا بك في الدليل الشامل لـ Azure Developer CLI (azd). تم تصميم هذا المستودع لمساعدة المطورين على جميع المستويات، من الطلاب إلى المطورين المحترفين، على تعلم وإتقان Azure Developer CLI لنشر السحابة بكفاءة. يوفر هذا المورد التعليمي المنظم تجربة عملية مع نشرات السحابة في Azure، وحل المشكلات الشائعة، وتطبيق أفضل الممارسات لنشر قوالب AZD بنجاح.
 
 ## أهداف التعلم
 
 من خلال العمل على هذا المستودع، ستتمكن من:  
 - إتقان أساسيات ومفاهيم Azure Developer CLI  
 - تعلم كيفية نشر وتوفير موارد Azure باستخدام البنية التحتية ككود  
-- تطوير مهارات حل المشكلات المتعلقة بنشرات AZD  
+- تطوير مهارات حل المشكلات المتعلقة بنشر AZD  
 - فهم التحقق المسبق للنشر وتخطيط السعة  
-- تطبيق أفضل ممارسات الأمان واستراتيجيات تحسين التكلفة  
+- تطبيق أفضل الممارسات الأمنية واستراتيجيات تحسين التكلفة  
 - بناء الثقة في نشر التطبيقات الجاهزة للإنتاج على Azure  
 
 ## نتائج التعلم
 
-بعد إكمال هذا الدورة، ستكون قادرًا على:  
+بعد إكمال هذه الدورة، ستكون قادرًا على:  
 - تثبيت وتكوين واستخدام Azure Developer CLI بنجاح  
 - إنشاء ونشر التطبيقات باستخدام قوالب AZD  
 - حل مشكلات المصادقة والبنية التحتية والنشر  
 - إجراء فحوصات ما قبل النشر بما في ذلك تخطيط السعة واختيار SKU  
-- تطبيق أفضل ممارسات المراقبة والأمان وإدارة التكلفة  
+- تطبيق أفضل الممارسات في المراقبة والأمان وإدارة التكلفة  
 - دمج تدفقات عمل AZD في خطوط CI/CD  
 
 ## جدول المحتويات
@@ -103,7 +102,7 @@ azd up
 
 ### البدء  
 - [**أساسيات AZD**](docs/getting-started/azd-basics.md) - المفاهيم والمصطلحات الأساسية  
-- [**التثبيت والإعداد**](docs/getting-started/installation.md) - أدلة التثبيت الخاصة بالمنصة  
+- [**التثبيت والإعداد**](docs/getting-started/installation.md) - أدلة التثبيت حسب النظام الأساسي  
 - [**التكوين**](docs/getting-started/configuration.md) - إعداد البيئة والمصادقة  
 - [**مشروعك الأول**](docs/getting-started/first-project.md) - دليل خطوة بخطوة  
 
@@ -120,18 +119,11 @@ azd up
 - [**المشكلات الشائعة**](docs/troubleshooting/common-issues.md) - المشكلات والحلول المتكررة  
 - [**دليل التصحيح**](docs/troubleshooting/debugging.md) - استراتيجيات التصحيح خطوة بخطوة  
 
-## الأمثلة والقوالب
+## الأمثلة والقوالب  
+- [**الأمثلة**](examples/README.md) - أمثلة عملية وقوالب وسيناريوهات واقعية لمساعدتك على تعلم Azure Developer CLI من خلال الممارسة العملية. يوفر كل مثال كودًا كاملًا، وقوالب بنية تحتية، وتعليمات مفصلة لأنماط التطبيقات المختلفة وطرق النشر.  
 
-### قوالب البداية  
-- [**تطبيق ويب بسيط**](../../examples/simple-web-app) - نشر تطبيق ويب Node.js أساسي  
-- [**موقع ثابت**](../../examples/static-website) - استضافة موقع ثابت على Azure Storage  
-- [**تطبيق الحاويات**](../../examples/container-app) - نشر تطبيق مخصص للحاويات  
-- [**تطبيق قاعدة البيانات**](../../examples/database-app) - تطبيق ويب مع تكامل قاعدة البيانات  
-
-### السيناريوهات المتقدمة  
-- [**الخدمات المصغرة**](../../examples/microservices) - بنية تطبيق متعددة الخدمات  
-- [**وظائف بدون خادم**](../../examples/serverless-function) - نشر وظائف Azure  
-- [**أمثلة التكوين**](../../examples/configurations) - أنماط تكوين قابلة لإعادة الاستخدام  
+### مختبر عملي/ورشة عمل  
+- [**AZD للمبتدئين**](workshop/README.md) - تركز هذه الورشة على البدء باستخدام قالب AZD لوكلاء الذكاء الاصطناعي وتوفر ممارسة عملية لأفضل الممارسات لنشر خدمات Azure AI باستخدام AZD  
 
 ## الموارد
 
@@ -143,7 +135,7 @@ azd up
 
 ### الموارد الخارجية  
 - [توثيق Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [مركز بنية Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [مركز هندسة Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [حاسبة أسعار Azure](https://azure.microsoft.com/pricing/calculator/)  
 - [حالة Azure](https://status.azure.com/)  
 
@@ -153,7 +145,7 @@ azd up
 1. ابدأ بـ [أساسيات AZD](docs/getting-started/azd-basics.md)  
 2. اتبع [دليل التثبيت](docs/getting-started/installation.md)  
 3. أكمل [مشروعك الأول](docs/getting-started/first-project.md)  
-4. تدرب على [مثال تطبيق ويب بسيط](../../examples/simple-web-app)  
+4. مارس مع [مثال تطبيق ويب بسيط](../../examples/simple-web-app)  
 
 ### للمطورين  
 1. راجع [دليل التكوين](docs/getting-started/configuration.md)  
@@ -164,21 +156,21 @@ azd up
 ### لمهندسي DevOps  
 1. أتقن [توفير الموارد](docs/deployment/provisioning.md)  
 2. نفذ [فحوصات ما قبل الطيران](docs/pre-deployment/preflight-checks.md)  
-3. تدرب على [تخطيط السعة](docs/pre-deployment/capacity-planning.md)  
+3. مارس [تخطيط السعة](docs/pre-deployment/capacity-planning.md)  
 4. مثال متقدم [الخدمات المصغرة](../../examples/microservices)  
 
 ## المساهمة
 
 نرحب بالمساهمات! يرجى قراءة [دليل المساهمة](CONTRIBUTING.md) للحصول على تفاصيل حول:  
 - كيفية تقديم المشكلات وطلبات الميزات  
-- إرشادات مساهمة الكود  
+- إرشادات المساهمة في الكود  
 - تحسينات التوثيق  
 - معايير المجتمع  
 
 ## الدعم
 
 - **المشكلات**: [الإبلاغ عن الأخطاء وطلب الميزات](https://github.com/microsoft/azd-for-beginners/issues)  
-- **المناقشات**: [مجتمع Microsoft Azure Discord للأسئلة والمناقشات](https://discord.gg/microsoft-azure)  
+- **المناقشات**: [أسئلة وأجوبة ومناقشات مجتمع Microsoft Azure Discord](https://discord.gg/microsoft-azure)  
 - **البريد الإلكتروني**: للاستفسارات الخاصة  
 - **Microsoft Learn**: [توثيق Azure Developer CLI الرسمي](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
@@ -199,19 +191,19 @@ azd up
 - [علم البيانات للمبتدئين](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
 - [الذكاء الاصطناعي للمبتدئين](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
 - [الأمن السيبراني للمبتدئين](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [تطوير الويب للمبتدئين](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-- [إنترنت الأشياء للمبتدئين](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [تطوير الواقع الممتد للمبتدئين](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [إتقان GitHub Copilot للبرمجة المزدوجة بالذكاء الاصطناعي](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [إتقان GitHub Copilot لمطوري C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [اختر مغامرتك الخاصة مع Copilot](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+- [تطوير الويب للمبتدئين](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [إنترنت الأشياء للمبتدئين](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [تطوير الواقع الممتد للمبتدئين](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [إتقان GitHub Copilot للبرمجة المزدوجة بالذكاء الاصطناعي](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [إتقان GitHub Copilot لمطوري C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+- [اختر مغامرتك الخاصة مع Copilot](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
 ---
 
-**التنقل**
-- **الدرس التالي**: [أساسيات AZD](docs/getting-started/azd-basics.md)
+**التنقل**  
+- **الدرس التالي**: [أساسيات AZD](docs/getting-started/azd-basics.md)  
 
 ---
 
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T16:26:05+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T09:58:23+00:00",
   "source_file": "README.md",
   "language_code": "pt"
 }
@@ -16,7 +16,7 @@ Siga estes passos para começar a utilizar estes recursos:
 2. **Clone o Repositório**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. [**Junte-se às Comunidades Azure Discord e conecte-se com especialistas e outros programadores**](https://discord.com/invite/ByRwuEEgH4)
 
-### 🌐 Suporte Multilingue
+### 🌐 Suporte Multilíngue
 
 #### Suportado via GitHub Action (Automatizado e Sempre Atualizado)
 
@@ -32,7 +32,7 @@ Bem-vindo ao guia completo para Azure Developer CLI (azd). Este repositório foi
 
 Ao trabalhar com este repositório, você irá:
 - Dominar os fundamentos e conceitos principais do Azure Developer CLI
-- Aprender a implementar e provisionar recursos Azure usando Infrastructure as Code
+- Aprender a implementar e provisionar recursos Azure usando Infraestrutura como Código
 - Desenvolver habilidades para resolver problemas comuns de implementação AZD
 - Compreender validações pré-implementação e planeamento de capacidade
 - Aplicar boas práticas de segurança e estratégias de otimização de custos
@@ -40,7 +40,7 @@ Ao trabalhar com este repositório, você irá:
 
 ## Resultados de Aprendizagem
 
-Após completar este curso, você será capaz de:
+Após concluir este curso, você será capaz de:
 - Instalar, configurar e utilizar o Azure Developer CLI com sucesso
 - Criar e implementar aplicações usando templates AZD
 - Resolver problemas de autenticação, infraestrutura e implementação
@@ -51,7 +51,7 @@ Após completar este curso, você será capaz de:
 ## Índice
 
 - [O que é Azure Developer CLI?](../..)
-- [Início Rápido](../..)
+- [Introdução Rápida](../..)
 - [Documentação](../..)
 - [Exemplos e Templates](../..)
 - [Recursos](../..)
@@ -62,11 +62,11 @@ Após completar este curso, você será capaz de:
 Azure Developer CLI (azd) é uma interface de linha de comando centrada no programador que acelera o processo de criação e implementação de aplicações no Azure. Ele oferece:
 
 - **Implementações baseadas em templates** - Utilize templates pré-construídos para padrões comuns de aplicações
-- **Infrastructure as Code** - Gerencie recursos Azure usando Bicep ou Terraform
+- **Infraestrutura como Código** - Gerencie recursos Azure usando Bicep ou Terraform
 - **Fluxos de trabalho integrados** - Provisione, implemente e monitore aplicações de forma integrada
 - **Focado no programador** - Otimizado para produtividade e experiência do programador
 
-## Início Rápido
+## Introdução Rápida
 
 ### Pré-requisitos
 - Subscrição Azure
@@ -94,9 +94,9 @@ azd up
 ## Documentação
 
 ### Primeiros Passos
-- [**Fundamentos do AZD**](docs/getting-started/azd-basics.md) - Conceitos e terminologia principais
+- [**Fundamentos do AZD**](docs/getting-started/azd-basics.md) - Conceitos principais e terminologia
 - [**Instalação e Configuração**](docs/getting-started/installation.md) - Guias de instalação específicos para cada plataforma
-- [**Configuração**](docs/getting-started/configuration.md) - Configuração de ambiente e autenticação
+- [**Configuração**](docs/getting-started/configuration.md) - Configuração do ambiente e autenticação
 - [**Seu Primeiro Projeto**](docs/getting-started/first-project.md) - Tutorial passo a passo
 
 ### Implementação e Provisionamento
@@ -110,25 +110,18 @@ azd up
 
 ### Resolução de Problemas
 - [**Problemas Comuns**](docs/troubleshooting/common-issues.md) - Problemas frequentemente encontrados e soluções
-- [**Guia de Depuração**](docs/troubleshooting/debugging.md) - Estratégias de depuração passo a passo
+- [**Guia de Depuração**](docs/troubleshooting/debugging.md) - Estratégias passo a passo para depuração
 
 ## Exemplos e Templates
+- [**Exemplos**]([examples/README.md) - Exemplos práticos, templates e cenários reais para ajudar você a aprender Azure Developer CLI através de prática. Cada exemplo fornece código completo, templates de infraestrutura e instruções detalhadas para diferentes arquiteturas de aplicações e padrões de implementação.
 
-### Templates Iniciais
-- [**Aplicação Web Simples**](../../examples/simple-web-app) - Implementação básica de aplicação web Node.js
-- [**Website Estático**](../../examples/static-website) - Hospedagem de website estático no Azure Storage
-- [**Aplicação em Container**](../../examples/container-app) - Implementação de aplicação containerizada
-- [**Aplicação com Base de Dados**](../../examples/database-app) - Aplicação web com integração de base de dados
-
-### Cenários Avançados
-- [**Microserviços**](../../examples/microservices) - Arquitetura de aplicação com múltiplos serviços
-- [**Funções Serverless**](../../examples/serverless-function) - Implementação de Azure Functions
-- [**Exemplos de Configuração**](../../examples/configurations) - Padrões de configuração reutilizáveis
+### Laboratório Prático/Workshop
+- [**AZD Para Iniciantes**](workshop/README.md) - Este workshop irá focar no template Get Started with AI Agents AZD e fornecer práticas recomendadas para implementação de serviços Azure AI usando AZD
 
 ## Recursos
 
 ### Referências Rápidas
-- [**Resumo de Comandos**](resources/cheat-sheet.md) - Comandos essenciais do azd
+- [**Folha de Comandos**](resources/cheat-sheet.md) - Comandos essenciais do azd
 - [**Glossário**](resources/glossary.md) - Terminologia do Azure e azd
 - [**FAQ**](resources/faq.md) - Perguntas frequentes
 - [**Guia de Estudo**](resources/study-guide.md) - Objetivos de aprendizagem abrangentes e exercícios práticos
@@ -151,7 +144,7 @@ azd up
 1. Revise o [Guia de Configuração](docs/getting-started/configuration.md)
 2. Estude o [Guia de Implementação](docs/deployment/deployment-guide.md)
 3. Trabalhe com [Exemplo de Aplicação com Base de Dados](../../examples/database-app)
-4. Explore o [Exemplo de Aplicação em Container](../../examples/container-app)
+4. Explore o [Exemplo de Aplicação em Contêiner](../../examples/container-app)
 
 ### Para Engenheiros DevOps
 1. Domine o [Provisionamento de Recursos](docs/deployment/provisioning.md)
@@ -161,7 +154,7 @@ azd up
 
 ## Contribuindo
 
-Aceitamos contribuições! Por favor, leia o nosso [Guia de Contribuição](CONTRIBUTING.md) para detalhes sobre:
+Contribuições são bem-vindas! Por favor, leia o nosso [Guia de Contribuição](CONTRIBUTING.md) para detalhes sobre:
 - Como submeter problemas e pedidos de funcionalidades
 - Diretrizes para contribuição de código
 - Melhorias na documentação
@@ -192,16 +185,16 @@ Nossa equipa produz outros cursos! Confira:
 - [IA para Iniciantes](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 - [Cibersegurança para Iniciantes](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
 - [Desenvolvimento Web para Iniciantes](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-- [IoT para Iniciantes](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [Desenvolvimento XR para Iniciantes](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Dominando o GitHub Copilot para Programação em Par com IA](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [Dominando o GitHub Copilot para Desenvolvedores C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [Escolha a Sua Própria Aventura com Copilot](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+- [IoT para Principiantes](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Desenvolvimento XR para Principiantes](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Dominando o GitHub Copilot para Programação em Par com IA](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [Dominando o GitHub Copilot para Desenvolvedores C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+- [Escolha a Sua Própria Aventura com Copilot](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
 ---
 
-**Navegação**
-- **Próxima Aula**: [Noções Básicas do AZD](docs/getting-started/azd-basics.md)
+**Navegação**  
+- **Próxima Aula**: [Fundamentos do AZD](docs/getting-started/azd-basics.md)  
 
 ---
 

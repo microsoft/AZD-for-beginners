@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T16:24:30+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T09:52:17+00:00",
   "source_file": "README.md",
   "language_code": "ja"
 }
@@ -25,7 +25,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### 🌐 多言語対応
 
-#### GitHub Actionによるサポート (自動化 & 常に最新)
+#### GitHub Actionによるサポート (自動更新 & 常に最新)
 
 [French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](./README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)  
 
@@ -33,7 +33,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## はじめに
 
-Azure Developer CLI (azd) の包括的なガイドへようこそ。このリポジトリは、学生からプロフェッショナルな開発者まで、あらゆるレベルの開発者がAzure Developer CLIを学び、効率的なクラウドデプロイメントを実現するための支援を目的としています。この構造化された学習リソースは、Azureクラウドデプロイメントの実践的な経験、一般的な問題のトラブルシューティング、成功するAZDテンプレートデプロイメントのベストプラクティスの実装を提供します。
+Azure Developer CLI (azd) の包括的なガイドへようこそ。このリポジトリは、学生からプロフェッショナルな開発者まで、Azure Developer CLIを効率的なクラウドデプロイメントのために学び、習得するための支援を目的としています。この構造化された学習リソースは、Azureクラウドデプロイメントの実践的な経験、一般的な問題のトラブルシューティング、成功するAZDテンプレートデプロイメントのベストプラクティスの実装を提供します。
 
 ## 学習目標
 
@@ -68,7 +68,7 @@ Azure Developer CLI (azd) の包括的なガイドへようこそ。このリポ
 
 Azure Developer CLI (azd) は、Azureへのアプリケーションの構築とデプロイを加速する開発者向けのコマンドラインインターフェイスです。以下を提供します:
 
-- **テンプレートベースのデプロイメント** - 一般的なアプリケーションパターンのための事前構築テンプレートを使用
+- **テンプレートベースのデプロイ** - 一般的なアプリケーションパターンのための事前構築テンプレートを使用
 - **インフラストラクチャコード** - BicepまたはTerraformを使用してAzureリソースを管理
 - **統合ワークフロー** - アプリケーションのプロビジョニング、デプロイ、およびモニタリングをシームレスに実行
 - **開発者向け** - 開発者の生産性と体験を最適化
@@ -89,7 +89,7 @@ powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' 
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### 初めてのデプロイメント
+### 初めてのデプロイ
 ```bash
 # Initialize a new project
 azd init --template todo-nodejs-mongo
@@ -100,37 +100,30 @@ azd up
 
 ## ドキュメント
 
-### 入門
+### はじめに
 - [**AZDの基本**](docs/getting-started/azd-basics.md) - コアコンセプトと用語
 - [**インストールとセットアップ**](docs/getting-started/installation.md) - プラットフォーム別のインストールガイド
 - [**設定**](docs/getting-started/configuration.md) - 環境設定と認証
 - [**初めてのプロジェクト**](docs/getting-started/first-project.md) - ステップバイステップのチュートリアル
 
-### デプロイメントとプロビジョニング
+### デプロイとプロビジョニング
 - [**デプロイメントガイド**](docs/deployment/deployment-guide.md) - 完全なデプロイメントワークフロー
 - [**リソースのプロビジョニング**](docs/deployment/provisioning.md) - Azureリソース管理
 
 ### デプロイ前のチェック
 - [**キャパシティプランニング**](docs/pre-deployment/capacity-planning.md) - Azureリソースのキャパシティ検証
 - [**SKU選択**](docs/pre-deployment/sku-selection.md) - 適切なAzure SKUの選択
-- [**事前チェック**](docs/pre-deployment/preflight-checks.md) - 自動化された検証スクリプト
+- [**事前チェック**](docs/pre-deployment/preflight-checks.md) - 自動検証スクリプト
 
 ### トラブルシューティング
 - [**一般的な問題**](docs/troubleshooting/common-issues.md) - よくある問題と解決策
 - [**デバッグガイド**](docs/troubleshooting/debugging.md) - ステップバイステップのデバッグ戦略
 
 ## 例とテンプレート
+- [**例**](examples/README.md) - 実践的な例、テンプレート、実際のシナリオを通じてAzure Developer CLIを学ぶためのハンズオン練習。各例には、完全な動作コード、インフラストラクチャテンプレート、および詳細な指示が含まれています。
 
-### スターターテンプレート
-- [**シンプルなWebアプリケーション**](../../examples/simple-web-app) - 基本的なNode.js Webアプリケーションのデプロイ
-- [**静的ウェブサイト**](../../examples/static-website) - Azure Storageでの静的ウェブサイトホスティング
-- [**コンテナアプリケーション**](../../examples/container-app) - コンテナ化されたアプリケーションのデプロイ
-- [**データベースアプリケーション**](../../examples/database-app) - データベース統合を含むWebアプリケーション
-
-### 高度なシナリオ
-- [**マイクロサービス**](../../examples/microservices) - 複数サービスのアプリケーションアーキテクチャ
-- [**サーバーレス関数**](../../examples/serverless-function) - Azure Functionsのデプロイ
-- [**設定例**](../../examples/configurations) - 再利用可能な設定パターン
+### ハンズオンラボ/ワークショップ
+- [**AZD初心者向け**](workshop/README.md) - このワークショップでは、AIエージェントAZDテンプレートを使用したAzure AIサービスのデプロイメントに関するベストプラクティスを提供します。
 
 ## リソース
 
@@ -143,7 +136,7 @@ azd up
 ### 外部リソース
 - [Azure Developer CLIドキュメント](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azureアーキテクチャセンター](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure料金計算機](https://azure.microsoft.com/pricing/calculator/)
+- [Azure料金計算ツール](https://azure.microsoft.com/pricing/calculator/)
 - [Azureステータス](https://status.azure.com/)
 
 ## 学習パス
@@ -158,11 +151,11 @@ azd up
 1. [設定ガイド](docs/getting-started/configuration.md)を確認する
 2. [デプロイメントガイド](docs/deployment/deployment-guide.md)を学ぶ
 3. [データベースアプリの例](../../examples/database-app)を実践する
-4. [コンテナアプリの例](../../examples/container-app)を探索する
+4. [コンテナアプリの例](../../examples/container-app)を探る
 
 ### DevOpsエンジニア向け
 1. [リソースのプロビジョニング](docs/deployment/provisioning.md)を習得する
-2. [事前チェック](docs/pre-deployment/preflight-checks.md)を実装する
+2. [事前チェック](docs/pre-deployment/preflight-checks.md)を実行する
 3. [キャパシティプランニング](docs/pre-deployment/capacity-planning.md)を練習する
 4. 高度な[マイクロサービスの例](../../examples/microservices)を試す
 
@@ -176,41 +169,41 @@ azd up
 
 ## サポート
 
-- **問題**: [バグ報告と機能リクエスト](https://github.com/microsoft/azd-for-beginners/issues)
-- **ディスカッション**: [Microsoft Azure DiscordコミュニティでのQ&Aとディスカッション](https://discord.gg/microsoft-azure)
-- **メール**: 非公開の問い合わせ
-- **Microsoft Learn**: [公式Azure Developer CLIドキュメント](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- **問題**: [バグ報告と機能リクエスト](https://github.com/microsoft/azd-for-beginners/issues)  
+- **ディスカッション**: [Microsoft Azure DiscordコミュニティでのQ&Aとディスカッション](https://discord.gg/microsoft-azure)  
+- **メール**: 非公開の問い合わせの場合  
+- **Microsoft Learn**: [公式Azure Developer CLIドキュメント](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
 ## ライセンス
 
-このプロジェクトはMITライセンスの下でライセンスされています。詳細は[LICENSE](../../LICENSE)ファイルをご覧ください。
+このプロジェクトはMITライセンスの下で提供されています。詳細は[LICENSE](../../LICENSE)ファイルをご覧ください。
 
 ## 🎒 その他のコース
 
 私たちのチームが提供する他のコースもチェックしてください:
 
-- [**NEW** Model Context Protocol (MCP) For Beginners](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Agents for Beginners](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI for Beginners using .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI for Beginners](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI for Beginners using Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML for Beginners](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Data Science for Beginners](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI for Beginners](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Cybersecurity for Beginners](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [初心者向けWeb開発](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-- [初心者向けIoT](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-- [初心者向けXR開発](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [GitHub Copilotを活用したAIペアプログラミングの習得](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
-- [C#/.NET開発者向けGitHub Copilotの習得](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
-- [自分で選ぶCopilotの冒険](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
+- [**NEW** Model Context Protocol (MCP)初心者向け](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AIエージェント初心者向け](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [.NETを使用した初心者向け生成AI](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [生成AI初心者向け](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Javaを使用した初心者向け生成AI](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [ML初心者向け](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [データサイエンス初心者向け](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI初心者向け](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [サイバーセキュリティ初心者向け](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [Web開発初心者向け](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [IoT 初心者向け](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [XR 開発初心者向け](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [GitHub Copilot を活用した AI ペアプログラミングの習得](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [C#/.NET 開発者向け GitHub Copilot の習得](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+- [自分だけの Copilot アドベンチャーを選ぼう](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
 ---
 
 **ナビゲーション**  
-- **次のレッスン**: [AZDの基本](docs/getting-started/azd-basics.md)  
+- **次のレッスン**: [AZD の基本](docs/getting-started/azd-basics.md)  
 
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解について、当社は責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤った解釈について、当方は責任を負いません。

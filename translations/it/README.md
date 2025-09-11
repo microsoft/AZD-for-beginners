@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T18:49:36+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T09:59:49+00:00",
   "source_file": "README.md",
   "language_code": "it"
 }
@@ -22,11 +22,11 @@ Segui questi passaggi per iniziare a utilizzare queste risorse:
 
 [Francese](../fr/README.md) | [Spagnolo](../es/README.md) | [Tedesco](../de/README.md) | [Russo](../ru/README.md) | [Arabo](../ar/README.md) | [Persiano (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Cinese (Semplificato)](../zh/README.md) | [Cinese (Tradizionale, Macao)](../mo/README.md) | [Cinese (Tradizionale, Hong Kong)](../hk/README.md) | [Cinese (Tradizionale, Taiwan)](../tw/README.md) | [Giapponese](../ja/README.md) | [Coreano](../ko/README.md) | [Hindi](../hi/README.md) | [Bengalese](../bn/README.md) | [Marathi](../mr/README.md) | [Nepalese](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portoghese (Portogallo)](../pt/README.md) | [Portoghese (Brasile)](../br/README.md) | [Italiano](./README.md) | [Polacco](../pl/README.md) | [Turco](../tr/README.md) | [Greco](../el/README.md) | [Thailandese](../th/README.md) | [Svedese](../sv/README.md) | [Danese](../da/README.md) | [Norvegese](../no/README.md) | [Finlandese](../fi/README.md) | [Olandese](../nl/README.md) | [Ebraico](../he/README.md) | [Vietnamita](../vi/README.md) | [Indonesiano](../id/README.md) | [Malese](../ms/README.md) | [Tagalog (Filippino)](../tl/README.md) | [Swahili](../sw/README.md) | [Ungherese](../hu/README.md) | [Ceco](../cs/README.md) | [Slovacco](../sk/README.md) | [Rumeno](../ro/README.md) | [Bulgaro](../bg/README.md) | [Serbo (Cirillico)](../sr/README.md) | [Croato](../hr/README.md) | [Sloveno](../sl/README.md) | [Ucraino](../uk/README.md) | [Birmano (Myanmar)](../my/README.md)
 
-**Se desideri supportare ulteriori traduzioni, le lingue disponibili sono elencate [qui](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+**Se desideri supportare ulteriori lingue, l'elenco delle lingue supportate è disponibile [qui](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## Introduzione
 
-Benvenuto nella guida completa per Azure Developer CLI (azd). Questo repository è progettato per aiutare sviluppatori di tutti i livelli, dagli studenti ai professionisti, a imparare e padroneggiare Azure Developer CLI per implementazioni cloud efficienti. Questa risorsa di apprendimento strutturata offre esperienza pratica con implementazioni cloud su Azure, risoluzione di problemi comuni e applicazione delle migliori pratiche per implementazioni di template AZD di successo.
+Benvenuto nella guida completa per Azure Developer CLI (azd). Questo repository è progettato per aiutare sviluppatori di tutti i livelli, dagli studenti ai professionisti, a imparare e padroneggiare Azure Developer CLI per implementazioni cloud efficienti. Questa risorsa di apprendimento strutturata offre esperienza pratica con implementazioni cloud su Azure, risoluzione di problemi comuni e applicazione delle migliori pratiche per il successo delle implementazioni di template AZD.
 
 ## Obiettivi di Apprendimento
 
@@ -51,7 +51,7 @@ Dopo aver completato questo corso, sarai in grado di:
 ## Indice
 
 - [Cos'è Azure Developer CLI?](../..)
-- [Introduzione Rapida](../..)
+- [Guida Rapida](../..)
 - [Documentazione](../..)
 - [Esempi e Template](../..)
 - [Risorse](../..)
@@ -66,7 +66,7 @@ Azure Developer CLI (azd) è un'interfaccia a riga di comando orientata agli svi
 - **Flussi di lavoro integrati** - Fornisci, implementa e monitora applicazioni senza interruzioni
 - **Ottimizzato per gli sviluppatori** - Progettato per massimizzare la produttività e l'esperienza degli sviluppatori
 
-## Introduzione Rapida
+## Guida Rapida
 
 ### Prerequisiti
 - Abbonamento Azure
@@ -110,34 +110,27 @@ azd up
 
 ### Risoluzione dei Problemi
 - [**Problemi Comuni**](docs/troubleshooting/common-issues.md) - Problemi frequenti e soluzioni
-- [**Guida al Debug**](docs/troubleshooting/debugging.md) - Strategie di debug passo-passo
+- [**Guida al Debugging**](docs/troubleshooting/debugging.md) - Strategie di debugging passo-passo
 
 ## Esempi e Template
+- [**Esempi**]([examples/README.md) - Esempi pratici, template e scenari reali per aiutarti a imparare Azure Developer CLI attraverso la pratica. Ogni esempio fornisce codice completo funzionante, template di infrastruttura e istruzioni dettagliate per diverse architetture di applicazione e modelli di implementazione.
 
-### Template Iniziali
-- [**Applicazione Web Semplice**](../../examples/simple-web-app) - Implementazione di base di un'applicazione web Node.js
-- [**Sito Web Statico**](../../examples/static-website) - Hosting di siti web statici su Azure Storage
-- [**Applicazione Containerizzata**](../../examples/container-app) - Implementazione di applicazioni containerizzate
-- [**Applicazione con Database**](../../examples/database-app) - Applicazione web con integrazione del database
-
-### Scenari Avanzati
-- [**Microservizi**](../../examples/microservices) - Architettura di applicazioni multi-servizio
-- [**Funzioni Serverless**](../../examples/serverless-function) - Implementazione di Azure Functions
-- [**Esempi di Configurazione**](../../examples/configurations) - Modelli di configurazione riutilizzabili
+### Laboratorio Pratico/Workshop
+- [**AZD Per Principianti**](workshop/README.md) - Questo workshop si concentrerà sul template AZD "Get Started with AI Agents" e fornirà pratiche migliori per l'implementazione dei servizi Azure AI utilizzando AZD.
 
 ## Risorse
 
 ### Riferimenti Rapidi
-- [**Cheat Sheet dei Comandi**](resources/cheat-sheet.md) - Comandi essenziali di azd
+- [**Comandi Essenziali**](resources/cheat-sheet.md) - Comandi azd fondamentali
 - [**Glossario**](resources/glossary.md) - Terminologia di Azure e azd
 - [**FAQ**](resources/faq.md) - Domande frequenti
-- [**Guida allo Studio**](resources/study-guide.md) - Obiettivi di apprendimento e esercizi pratici
+- [**Guida di Studio**](resources/study-guide.md) - Obiettivi di apprendimento completi ed esercizi pratici
 
 ### Risorse Esterne
-- [Documentazione di Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Documentazione Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Centro Architettura Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Calcolatore Prezzi Azure](https://azure.microsoft.com/pricing/calculator/)
-- [Stato di Azure](https://status.azure.com/)
+- [Stato Azure](https://status.azure.com/)
 
 ## Percorso di Apprendimento
 
@@ -148,10 +141,10 @@ azd up
 4. Pratica con [Esempio di Applicazione Web Semplice](../../examples/simple-web-app)
 
 ### Per Sviluppatori
-1. Esamina la [Guida alla Configurazione](docs/getting-started/configuration.md)
+1. Rivedi la [Guida alla Configurazione](docs/getting-started/configuration.md)
 2. Studia la [Guida all'Implementazione](docs/deployment/deployment-guide.md)
-3. Lavora con [Esempio di Applicazione con Database](../../examples/database-app)
-4. Esplora [Esempio di Applicazione Containerizzata](../../examples/container-app)
+3. Lavora con [Esempio di Applicazione Database](../../examples/database-app)
+4. Esplora [Esempio di Applicazione Container](../../examples/container-app)
 
 ### Per Ingegneri DevOps
 1. Padroneggia il [Provisioning delle Risorse](docs/deployment/provisioning.md)
@@ -162,7 +155,7 @@ azd up
 ## Contributi
 
 Accogliamo con favore i contributi! Leggi la nostra [Guida ai Contributi](CONTRIBUTING.md) per dettagli su:
-- Come segnalare problemi e richiedere funzionalità
+- Come inviare problemi e richieste di funzionalità
 - Linee guida per il contributo al codice
 - Miglioramenti alla documentazione
 - Standard della comunità
@@ -184,24 +177,24 @@ Il nostro team produce altri corsi! Dai un'occhiata:
 
 - [**NUOVO** Protocollo Model Context (MCP) Per Principianti](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [Agenti AI per Principianti](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [AI Generativa per Principianti con .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-- [AI Generativa per Principianti](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [AI Generativa per Principianti con Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+- [Generative AI per Principianti usando .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+- [Generative AI per Principianti](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Generative AI per Principianti usando Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
 - [ML per Principianti](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 - [Data Science per Principianti](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 - [AI per Principianti](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 - [Cybersecurity per Principianti](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
-- [Sviluppo Web per Principianti](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [Web Dev per Principianti](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 - [IoT per Principianti](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 - [Sviluppo XR per Principianti](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Padroneggiare GitHub Copilot per la Programmazione Assistita dall'AI](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [Padroneggiare GitHub Copilot per la Programmazione Assistita da AI](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 - [Padroneggiare GitHub Copilot per Sviluppatori C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 - [Scegli la Tua Avventura con Copilot](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
 
 **Navigazione**
-- **Prossima Lezione**: [Nozioni di Base su AZD](docs/getting-started/azd-basics.md)
+- **Prossima Lezione**: [AZD Fondamenti](docs/getting-started/azd-basics.md)
 
 ---
 
