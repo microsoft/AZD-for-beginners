@@ -115,17 +115,10 @@ azd up
 - [**Debugging Guide**](docs/troubleshooting/debugging.md) - Step-by-step debugging strategies
 
 ## Examples & Templates
+- [**Examples**]([examples/README.md) - Practical examples, templates, and real-world scenarios to help you learn Azure Developer CLI through hands-on practice. Each example provides complete working code, infrastructure templates, and detailed instructions for different application architectures and deployment patterns.
 
-### Starter Templates
-- [**Simple Web Application**](examples/simple-web-app/) - Basic Node.js web application deployment
-- [**Static Website**](examples/static-website/) - Static website hosting on Azure Storage
-- [**Container Application**](examples/container-app/) - Containerized application deployment
-- [**Database Application**](examples/database-app/) - Web application with database integration
-
-### Advanced Scenarios
-- [**Microservices**](examples/microservices/) - Multi-service application architecture
-- [**Serverless Functions**](examples/serverless-function/) - Azure Functions deployment
-- [**Configuration Examples**](examples/configurations/) - Reusable configuration patterns
+### Hands On Lab/Workshop
+- [**AZD For Beginners**](workshop/README.md) - This workshop will focus on the Get Started with AI Agents AZD template and provide hands on best practice for deployment of Azure AI services using AZD
 
 ## Resources
 
@@ -204,4 +197,5 @@ Our team produces other courses! Check out:
 
 **Navigation**
 - **Next Lesson**: [AZD Basics](docs/getting-started/azd-basics.md)
+
 
