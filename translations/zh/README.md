@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T16:21:35+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T09:49:21+00:00",
   "source_file": "README.md",
   "language_code": "zh"
 }
@@ -27,13 +27,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 #### 通过 GitHub Action 支持（自动更新，始终保持最新）
 
-[法语](../fr/README.md) | [西班牙语](../es/README.md) | [德语](../de/README.md) | [俄语](../ru/README.md) | [阿拉伯语](../ar/README.md) | [波斯语](../fa/README.md) | [乌尔都语](../ur/README.md) | [中文（简体）](./README.md) | [中文（繁体，澳门）](../mo/README.md) | [中文（繁体，香港）](../hk/README.md) | [中文（繁体，台湾）](../tw/README.md) | [日语](../ja/README.md) | [韩语](../ko/README.md) | [印地语](../hi/README.md) | [孟加拉语](../bn/README.md) | [马拉地语](../mr/README.md) | [尼泊尔语](../ne/README.md) | [旁遮普语](../pa/README.md) | [葡萄牙语（葡萄牙）](../pt/README.md) | [葡萄牙语（巴西）](../br/README.md) | [意大利语](../it/README.md) | [波兰语](../pl/README.md) | [土耳其语](../tr/README.md) | [希腊语](../el/README.md) | [泰语](../th/README.md) | [瑞典语](../sv/README.md) | [丹麦语](../da/README.md) | [挪威语](../no/README.md) | [芬兰语](../fi/README.md) | [荷兰语](../nl/README.md) | [希伯来语](../he/README.md) | [越南语](../vi/README.md) | [印尼语](../id/README.md) | [马来语](../ms/README.md) | [他加禄语（菲律宾语）](../tl/README.md) | [斯瓦希里语](../sw/README.md) | [匈牙利语](../hu/README.md) | [捷克语](../cs/README.md) | [斯洛伐克语](../sk/README.md) | [罗马尼亚语](../ro/README.md) | [保加利亚语](../bg/README.md) | [塞尔维亚语（西里尔字母）](../sr/README.md) | [克罗地亚语](../hr/README.md) | [斯洛文尼亚语](../sl/README.md) | [乌克兰语](../uk/README.md) | [缅甸语](../my/README.md)  
+[法语](../fr/README.md) | [西班牙语](../es/README.md) | [德语](../de/README.md) | [俄语](../ru/README.md) | [阿拉伯语](../ar/README.md) | [波斯语](../fa/README.md) | [乌尔都语](../ur/README.md) | [中文（简体）](./README.md) | [中文（繁体，澳门）](../mo/README.md) | [中文（繁体，香港）](../hk/README.md) | [中文（繁体，台湾）](../tw/README.md) | [日语](../ja/README.md) | [韩语](../ko/README.md) | [印地语](../hi/README.md) | [孟加拉语](../bn/README.md) | [马拉地语](../mr/README.md) | [尼泊尔语](../ne/README.md) | [旁遮普语（古木基文）](../pa/README.md) | [葡萄牙语（葡萄牙）](../pt/README.md) | [葡萄牙语（巴西）](../br/README.md) | [意大利语](../it/README.md) | [波兰语](../pl/README.md) | [土耳其语](../tr/README.md) | [希腊语](../el/README.md) | [泰语](../th/README.md) | [瑞典语](../sv/README.md) | [丹麦语](../da/README.md) | [挪威语](../no/README.md) | [芬兰语](../fi/README.md) | [荷兰语](../nl/README.md) | [希伯来语](../he/README.md) | [越南语](../vi/README.md) | [印尼语](../id/README.md) | [马来语](../ms/README.md) | [他加禄语（菲律宾语）](../tl/README.md) | [斯瓦希里语](../sw/README.md) | [匈牙利语](../hu/README.md) | [捷克语](../cs/README.md) | [斯洛伐克语](../sk/README.md) | [罗马尼亚语](../ro/README.md) | [保加利亚语](../bg/README.md) | [塞尔维亚语（西里尔文）](../sr/README.md) | [克罗地亚语](../hr/README.md) | [斯洛文尼亚语](../sl/README.md) | [乌克兰语](../uk/README.md) | [缅甸语（缅甸）](../my/README.md)  
 
 **如果您希望支持其他语言，请查看 [这里](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**  
 
 ## 简介
 
-欢迎来到 Azure Developer CLI (azd) 的全面指南。本仓库旨在帮助从学生到专业开发者的各类用户学习和掌握 Azure Developer CLI，以实现高效的云部署。通过结构化的学习资源，您将获得 Azure 云部署的实践经验，解决常见问题，并实施最佳实践以成功部署 AZD 模板。
+欢迎来到 Azure Developer CLI (azd) 的全面指南。本仓库旨在帮助从学生到专业开发者的各类用户学习并掌握 Azure Developer CLI，以实现高效的云部署。通过结构化的学习资源，您将获得 Azure 云部署的实践经验，解决常见问题，并实施最佳实践以成功部署 AZD 模板。
 
 ## 学习目标
 
@@ -49,7 +49,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 完成本课程后，您将能够：  
 - 成功安装、配置并使用 Azure Developer CLI  
-- 使用 AZD 模板创建和部署应用  
+- 使用 AZD 模板创建并部署应用  
 - 解决认证、基础架构和部署问题  
 - 执行部署前检查，包括容量规划和 SKU 选择  
 - 实施监控、安全和成本管理的最佳实践  
@@ -66,8 +66,8 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 什么是 Azure Developer CLI？
 
-Azure Developer CLI (azd) 是一个以开发者为中心的命令行工具，旨在加速构建和部署 Azure 应用的过程。它提供：  
-- **基于模板的部署** - 使用预构建模板实现常见应用模式  
+Azure Developer CLI (azd) 是一个以开发者为中心的命令行工具，旨在加速应用程序在 Azure 上的构建和部署过程。它提供：  
+- **基于模板的部署** - 使用预构建模板处理常见应用模式  
 - **基础架构即代码** - 使用 Bicep 或 Terraform 管理 Azure 资源  
 - **集成工作流** - 无缝配置、部署和监控应用  
 - **开发者友好** - 优化开发者的生产力和体验  
@@ -103,7 +103,7 @@ azd up
 - [**AZD 基础**](docs/getting-started/azd-basics.md) - 核心概念和术语  
 - [**安装与设置**](docs/getting-started/installation.md) - 平台特定安装指南  
 - [**配置**](docs/getting-started/configuration.md) - 环境设置和认证  
-- [**第一个项目**](docs/getting-started/first-project.md) - 分步教程  
+- [**您的第一个项目**](docs/getting-started/first-project.md) - 分步教程  
 
 ### 部署与配置  
 - [**部署指南**](docs/deployment/deployment-guide.md) - 完整的部署工作流  
@@ -118,18 +118,11 @@ azd up
 - [**常见问题**](docs/troubleshooting/common-issues.md) - 常见问题及解决方案  
 - [**调试指南**](docs/troubleshooting/debugging.md) - 分步调试策略  
 
-## 示例与模板
+## 示例与模板  
+- [**示例**](examples/README.md) - 实践示例、模板和真实场景，帮助您通过动手练习学习 Azure Developer CLI。每个示例都提供完整的工作代码、基础架构模板以及详细的应用架构和部署模式说明。  
 
-### 入门模板  
-- [**简单 Web 应用**](../../examples/simple-web-app) - 基础 Node.js Web 应用部署  
-- [**静态网站**](../../examples/static-website) - 在 Azure 存储上托管静态网站  
-- [**容器应用**](../../examples/container-app) - 容器化应用部署  
-- [**数据库应用**](../../examples/database-app) - 带数据库集成的 Web 应用  
-
-### 高级场景  
-- [**微服务**](../../examples/microservices) - 多服务应用架构  
-- [**无服务器函数**](../../examples/serverless-function) - Azure Functions 部署  
-- [**配置示例**](../../examples/configurations) - 可重用的配置模式  
+### 实践实验/工作坊  
+- [**AZD 初学者指南**](workshop/README.md) - 本工作坊将重点介绍使用 AI Agents AZD 模板入门，并提供使用 AZD 部署 Azure AI 服务的最佳实践。  
 
 ## 资源
 
@@ -149,8 +142,8 @@ azd up
 
 ### 学生与初学者  
 1. 从 [AZD 基础](docs/getting-started/azd-basics.md) 开始  
-2. 按照 [安装指南](docs/getting-started/installation.md) 操作  
-3. 完成 [第一个项目](docs/getting-started/first-project.md)  
+2. 按照 [安装指南](docs/getting-started/installation.md)  
+3. 完成 [您的第一个项目](docs/getting-started/first-project.md)  
 4. 练习 [简单 Web 应用示例](../../examples/simple-web-app)  
 
 ### 开发者  
@@ -163,7 +156,7 @@ azd up
 1. 掌握 [资源配置](docs/deployment/provisioning.md)  
 2. 实施 [预检脚本](docs/pre-deployment/preflight-checks.md)  
 3. 练习 [容量规划](docs/pre-deployment/capacity-planning.md)  
-4. 深入学习 [微服务示例](../../examples/microservices)  
+4. 高级 [微服务示例](../../examples/microservices)  
 
 ## 贡献
 
@@ -187,7 +180,7 @@ azd up
 ## 🎒 其他课程
 
 我们的团队还制作了其他课程！查看：  
-- [**新课程** Model Context Protocol (MCP) 初学者指南](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [**新** Model Context Protocol (MCP) 初学者指南](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI Agents 初学者指南](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [使用 .NET 的生成式 AI 初学者指南](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
 - [生成式 AI 初学者指南](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
@@ -196,9 +189,9 @@ azd up
 - [数据科学初学者指南](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI 初学者指南](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
 - [网络安全初学者指南](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [初学者的Web开发](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-- [初学者的物联网](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-- [初学者的XR开发](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Web 开发初学者指南](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [物联网入门](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [XR开发入门](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [掌握GitHub Copilot进行AI配对编程](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
 - [掌握GitHub Copilot为C#/.NET开发者服务](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
 - [选择你的Copilot冒险之旅](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
@@ -211,4 +204,4 @@ azd up
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

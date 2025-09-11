@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T20:56:39+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:05:50+00:00",
   "source_file": "README.md",
   "language_code": "fi"
 }
@@ -16,12 +16,11 @@ CO_OP_TRANSLATOR_METADATA:
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)  
 
 [![Azure Discord](https://dcbadge.limes.yellow/api/server/kzRShWzttr)](https://discord.gg/microsoft-azure)  
-
 [![Azure AI Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)  
 
 Seuraa näitä vaiheita päästäksesi alkuun näiden resurssien kanssa:  
-1. **Haarauta repositorio**: Klikkaa [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)  
-2. **Kloonaa repositorio**:   `git clone https://github.com/microsoft/azd-for-beginners.git`  
+1. **Haarauta arkisto**: Klikkaa [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)  
+2. **Kloonaa arkisto**:   `git clone https://github.com/microsoft/azd-for-beginners.git`  
 3. [**Liity Azure Discord -yhteisöihin ja tapaa asiantuntijoita sekä muita kehittäjiä**](https://discord.com/invite/ByRwuEEgH4)  
 
 ### 🌐 Monikielinen tuki
@@ -30,18 +29,18 @@ Seuraa näitä vaiheita päästäksesi alkuun näiden resurssien kanssa:
 
 [French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](./README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)  
 
-**Jos haluat lisätä uusia kieliä, tuetut kielet löytyvät [täältä](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**  
+**Jos haluat lisätä muita kieliä, tuetut kielet löytyvät [täältä](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**  
 
 ## Johdanto
 
-Tervetuloa Azure Developer CLI:n (azd) kattavaan oppaaseen. Tämä repositorio on suunniteltu auttamaan kehittäjiä kaikilla tasoilla, opiskelijoista ammattilaisiin, oppimaan ja hallitsemaan Azure Developer CLI:tä tehokkaiden pilvijärjestelmien käyttöönotossa. Tämä jäsennelty oppimateriaali tarjoaa käytännön kokemusta Azure-pilvikäyttöönotosta, yleisten ongelmien ratkaisemisesta ja parhaiden käytäntöjen toteuttamisesta onnistuneisiin AZD-mallikäyttöönottoihin.
+Tervetuloa Azure Developer CLI:n (azd) kattavaan oppaaseen. Tämä arkisto on suunniteltu auttamaan kehittäjiä kaikilla tasoilla, opiskelijoista ammattilaisiin, oppimaan ja hallitsemaan Azure Developer CLI:tä tehokkaiden pilvitoteutusten saavuttamiseksi. Tämä jäsennelty oppimateriaali tarjoaa käytännön kokemusta Azure-pilvitoteutuksista, yleisten ongelmien ratkaisemisesta ja parhaiden käytäntöjen toteuttamisesta onnistuneiden AZD-mallien käyttöönotossa.
 
 ## Oppimistavoitteet
 
-Työskennellessäsi tämän repositorion parissa opit:  
+Työskennellessäsi tämän arkiston parissa opit:  
 - Hallitsemaan Azure Developer CLI:n perusteet ja keskeiset käsitteet  
-- Käyttämään ja provisioimaan Azure-resursseja Infrastructure as Code -menetelmällä  
-- Kehittämään ongelmanratkaisutaitoja yleisiin AZD-käyttöönottohaasteisiin  
+- Ottamaan käyttöön ja provisioimaan Azure-resursseja Infrastructure as Code -menetelmällä  
+- Kehittämään ongelmanratkaisutaitoja yleisiin AZD-toteutusongelmiin  
 - Ymmärtämään ennakkotarkistukset ja kapasiteettisuunnittelun  
 - Toteuttamaan tietoturvan parhaat käytännöt ja kustannusten optimointistrategiat  
 - Rakentamaan varmuutta tuotantovalmiiden sovellusten käyttöönotossa Azureen  
@@ -51,7 +50,7 @@ Työskennellessäsi tämän repositorion parissa opit:
 Kurssin suorittamisen jälkeen pystyt:  
 - Asentamaan, konfiguroimaan ja käyttämään Azure Developer CLI:tä onnistuneesti  
 - Luomaan ja ottamaan käyttöön sovelluksia AZD-mallien avulla  
-- Ratkaisemaan autentikointiin, infrastruktuuriin ja käyttöönottoon liittyviä ongelmia  
+- Ratkaisemaan todennus-, infrastruktuuri- ja käyttöönotto-ongelmia  
 - Suorittamaan ennakkotarkistuksia, kuten kapasiteettisuunnittelua ja SKU-valintaa  
 - Toteuttamaan valvonnan, tietoturvan ja kustannusten hallinnan parhaat käytännöt  
 - Integroimaan AZD-työnkulut CI/CD-putkistoihin  
@@ -78,7 +77,7 @@ Azure Developer CLI (azd) on kehittäjille suunnattu komentoriviliittymä, joka 
 
 ### Esivaatimukset  
 - Azure-tilaus  
-- Azure CLI asennettuna  
+- Asennettu Azure CLI  
 - Git (mallien kloonaamiseen)  
 
 ### Asennus  
@@ -104,7 +103,7 @@ azd up
 ### Aloittaminen  
 - [**AZD:n perusteet**](docs/getting-started/azd-basics.md) - Keskeiset käsitteet ja termit  
 - [**Asennus ja asetukset**](docs/getting-started/installation.md) - Alustakohtaiset asennusohjeet  
-- [**Konfigurointi**](docs/getting-started/configuration.md) - Ympäristön asennus ja autentikointi  
+- [**Konfigurointi**](docs/getting-started/configuration.md) - Ympäristön asennus ja todennus  
 - [**Ensimmäinen projekti**](docs/getting-started/first-project.md) - Vaiheittainen opas  
 
 ### Käyttöönotto ja provisiointi  
@@ -116,22 +115,15 @@ azd up
 - [**SKU-valinta**](docs/pre-deployment/sku-selection.md) - Oikeiden Azure-SKU:iden valinta  
 - [**Ennakkotarkistukset**](docs/pre-deployment/preflight-checks.md) - Automatisoidut validointiskriptit  
 
-### Vianetsintä  
+### Vianmääritys  
 - [**Yleiset ongelmat**](docs/troubleshooting/common-issues.md) - Usein kohdatut ongelmat ja ratkaisut  
-- [**Vianetsintäopas**](docs/troubleshooting/debugging.md) - Vaiheittaiset vianetsintästrategiat  
+- [**Vianmääritysopas**](docs/troubleshooting/debugging.md) - Vaiheittaiset vianmääritysstrategiat  
 
-## Esimerkit ja mallit
+## Esimerkit ja mallit  
+- [**Esimerkit**](examples/README.md) - Käytännön esimerkkejä, malleja ja todellisia skenaarioita, jotka auttavat sinua oppimaan Azure Developer CLI:tä käytännön harjoittelun kautta. Jokainen esimerkki sisältää täydellisen toimivan koodin, infrastruktuurimallit ja yksityiskohtaiset ohjeet eri sovellusarkkitehtuureille ja käyttöönotto-kuvioille.  
 
-### Aloitusmallit  
-- [**Yksinkertainen verkkosovellus**](../../examples/simple-web-app) - Perus Node.js-verkkosovelluksen käyttöönotto  
-- [**Staattinen verkkosivusto**](../../examples/static-website) - Staattisen verkkosivuston isännöinti Azure Storage -palvelussa  
-- [**Konttisovellus**](../../examples/container-app) - Konttien käyttöönotto  
-- [**Tietokantasovellus**](../../examples/database-app) - Verkkosovellus tietokantaintegraatiolla  
-
-### Edistyneet skenaariot  
-- [**Mikropalvelut**](../../examples/microservices) - Monipalveluarkkitehtuuri  
-- [**Palveluttomat funktiot**](../../examples/serverless-function) - Azure Functions -käyttöönotto  
-- [**Konfigurointiesimerkit**](../../examples/configurations) - Uudelleenkäytettävät konfigurointimallit  
+### Käytännön laboratorio/työpaja  
+- [**AZD Aloittelijoille**](workshop/README.md) - Tämä työpaja keskittyy AI Agents AZD -mallin käyttöönottoon ja tarjoaa käytännön parhaita käytäntöjä Azure AI -palveluiden käyttöönottoon AZD:n avulla.  
 
 ## Resurssit
 
@@ -142,9 +134,9 @@ azd up
 - [**Opintosuunnitelma**](resources/study-guide.md) - Kattavat oppimistavoitteet ja harjoitustehtävät  
 
 ### Ulkoiset resurssit  
-- [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)  
+- [Azure Developer CLI Dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Azure Arkkitehtuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Azure Hinnoittelulaskuri](https://azure.microsoft.com/pricing/calculator/)  
 - [Azure Status](https://status.azure.com/)  
 
 ## Oppimispolku
@@ -152,7 +144,7 @@ azd up
 ### Opiskelijoille ja aloittelijoille  
 1. Aloita [AZD:n perusteista](docs/getting-started/azd-basics.md)  
 2. Seuraa [Asennusopasta](docs/getting-started/installation.md)  
-3. Suorita [Ensimmäinen projekti](docs/getting-started/first-project.md)  
+3. Suorita [Ensimmäinen projektisi](docs/getting-started/first-project.md)  
 4. Harjoittele [Yksinkertaisen verkkosovelluksen esimerkillä](../../examples/simple-web-app)  
 
 ### Kehittäjille  
@@ -165,26 +157,26 @@ azd up
 1. Hallitse [Resurssien provisiointi](docs/deployment/provisioning.md)  
 2. Toteuta [Ennakkotarkistukset](docs/pre-deployment/preflight-checks.md)  
 3. Harjoittele [Kapasiteettisuunnittelua](docs/pre-deployment/capacity-planning.md)  
-4. Edistyneet [Mikropalvelujen esimerkit](../../examples/microservices)  
+4. Edistyneempi [Mikropalveluiden esimerkki](../../examples/microservices)  
 
 ## Osallistuminen
 
-Otamme mielellämme vastaan kontribuutioita! Lue [Osallistumisopas](CONTRIBUTING.md) saadaksesi lisätietoja:  
+Otamme mielellämme vastaan osallistumisia! Lue [Osallistumisoppaamme](CONTRIBUTING.md) saadaksesi lisätietoja:  
 - Kuinka raportoida ongelmia ja ehdottaa ominaisuuksia  
-- Koodin kontribuointiohjeet  
+- Koodin osallistumisohjeet  
 - Dokumentaation parannukset  
 - Yhteisön standardit  
 
 ## Tuki
 
-- **Ongelmat**: [Raportoi virheitä ja ehdota ominaisuuksia](https://github.com/microsoft/azd-for-beginners/issues)  
+- **Ongelmat**: [Raportoi virheitä ja pyydä ominaisuuksia](https://github.com/microsoft/azd-for-beginners/issues)  
 - **Keskustelut**: [Microsoft Azure Discord -yhteisön Q&A ja keskustelut](https://discord.gg/microsoft-azure)  
-- **Sähköposti**: Yksityisiä tiedusteluja varten  
+- **Sähköposti**: Yksityisiin tiedusteluihin  
 - **Microsoft Learn**: [Virallinen Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
 ## Lisenssi
 
-Tämä projekti on lisensoitu MIT-lisenssillä - katso [LICENSE](../../LICENSE) lisätietoja varten.  
+Tämä projekti on lisensoitu MIT-lisenssillä - katso [LICENSE](../../LICENSE) lisätietoja.  
 
 ## 🎒 Muut kurssit
 
@@ -192,17 +184,17 @@ Tiimimme tuottaa muita kursseja! Tutustu:
 
 - [**UUSI** Model Context Protocol (MCP) Aloittelijoille](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI Agents Aloittelijoille](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI Aloittelijoille käyttäen .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI Aloittelijoille](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI Aloittelijoille käyttäen Javaa](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [Generatiivinen AI Aloittelijoille käyttäen .NET:iä](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [Generatiivinen AI Aloittelijoille](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generatiivinen AI Aloittelijoille käyttäen Javaa](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
 - [ML Aloittelijoille](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Data Science Aloittelijoille](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI Aloittelijoille](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Kyberturvallisuus Aloittelijoille](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Web-kehitys aloittelijoille](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [Web-kehitys Aloittelijoille](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
 - [IoT aloittelijoille](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 - [XR-kehitys aloittelijoille](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [GitHub Copilotin hallinta tekoälypariohjelmointiin](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [GitHub Copilotin hallinta AI-pariohjelmointia varten](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 - [GitHub Copilotin hallinta C#/.NET-kehittäjille](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 - [Valitse oma Copilot-seikkailusi](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
@@ -214,4 +206,4 @@ Tiimimme tuottaa muita kursseja! Tutustu:
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

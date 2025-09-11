@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T20:59:40+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:08:57+00:00",
   "source_file": "README.md",
   "language_code": "id"
 }
@@ -22,7 +22,7 @@ Ikuti langkah-langkah berikut untuk mulai menggunakan sumber daya ini:
 
 [French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](./README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
 
-**Jika Anda ingin menambahkan dukungan untuk bahasa lain, daftar bahasa yang didukung tersedia [di sini](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+**Jika Anda ingin menambahkan bahasa terjemahan lainnya, daftar bahasa yang didukung tersedia [di sini](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## Pengantar
 
@@ -71,7 +71,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
 ### Prasyarat
 - Langganan Azure
 - Azure CLI terinstal
-- Git (untuk mengkloning template)
+- Git (untuk cloning template)
 
 ### Instalasi
 ```bash
@@ -106,32 +106,25 @@ azd up
 ### Pemeriksaan Pra-Penerapan
 - [**Perencanaan Kapasitas**](docs/pre-deployment/capacity-planning.md) - Validasi kapasitas sumber daya Azure
 - [**Pemilihan SKU**](docs/pre-deployment/sku-selection.md) - Memilih SKU Azure yang tepat
-- [**Pemeriksaan Awal**](docs/pre-deployment/preflight-checks.md) - Skrip validasi otomatis
+- [**Pemeriksaan Pra-Penerbangan**](docs/pre-deployment/preflight-checks.md) - Skrip validasi otomatis
 
 ### Pemecahan Masalah
 - [**Masalah Umum**](docs/troubleshooting/common-issues.md) - Masalah yang sering ditemui dan solusinya
 - [**Panduan Debugging**](docs/troubleshooting/debugging.md) - Strategi debugging langkah demi langkah
 
 ## Contoh & Template
+- [**Contoh**]([examples/README.md) - Contoh praktis, template, dan skenario dunia nyata untuk membantu Anda mempelajari Azure Developer CLI melalui praktik langsung. Setiap contoh menyediakan kode lengkap, template infrastruktur, dan instruksi terperinci untuk berbagai arsitektur aplikasi dan pola penerapan.
 
-### Template Pemula
-- [**Aplikasi Web Sederhana**](../../examples/simple-web-app) - Penerapan aplikasi web Node.js dasar
-- [**Situs Web Statis**](../../examples/static-website) - Hosting situs web statis di Azure Storage
-- [**Aplikasi Kontainer**](../../examples/container-app) - Penerapan aplikasi yang dikontainerisasi
-- [**Aplikasi Database**](../../examples/database-app) - Aplikasi web dengan integrasi database
-
-### Skenario Lanjutan
-- [**Microservices**](../../examples/microservices) - Arsitektur aplikasi multi-layanan
-- [**Fungsi Tanpa Server**](../../examples/serverless-function) - Penerapan Azure Functions
-- [**Contoh Konfigurasi**](../../examples/configurations) - Pola konfigurasi yang dapat digunakan kembali
+### Lab/Workshop Praktis
+- [**AZD Untuk Pemula**](workshop/README.md) - Workshop ini akan berfokus pada template AZD Get Started with AI Agents dan memberikan praktik terbaik untuk penerapan layanan Azure AI menggunakan AZD
 
 ## Sumber Daya
 
 ### Referensi Cepat
-- [**Lembar Cheat Perintah**](resources/cheat-sheet.md) - Perintah azd yang penting
+- [**Lembar Cheat Perintah**](resources/cheat-sheet.md) - Perintah azd penting
 - [**Glosarium**](resources/glossary.md) - Terminologi Azure dan azd
 - [**FAQ**](resources/faq.md) - Pertanyaan yang sering diajukan
-- [**Panduan Belajar**](resources/study-guide.md) - Tujuan pembelajaran dan latihan yang komprehensif
+- [**Panduan Belajar**](resources/study-guide.md) - Tujuan pembelajaran dan latihan komprehensif
 
 ### Sumber Daya Eksternal
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -151,11 +144,11 @@ azd up
 1. Tinjau [Panduan Konfigurasi](docs/getting-started/configuration.md)
 2. Pelajari [Panduan Penerapan](docs/deployment/deployment-guide.md)
 3. Kerjakan [Contoh Aplikasi Database](../../examples/database-app)
-4. Jelajahi [Contoh Aplikasi Kontainer](../../examples/container-app)
+4. Jelajahi [Contoh Aplikasi Container](../../examples/container-app)
 
 ### Untuk Insinyur DevOps
 1. Kuasai [Penyediaan Sumber Daya](docs/deployment/provisioning.md)
-2. Terapkan [Pemeriksaan Awal](docs/pre-deployment/preflight-checks.md)
+2. Terapkan [Pemeriksaan Pra-Penerbangan](docs/pre-deployment/preflight-checks.md)
 3. Latihan [Perencanaan Kapasitas](docs/pre-deployment/capacity-planning.md)
 4. Contoh Lanjutan [Microservices](../../examples/microservices)
 
@@ -164,13 +157,13 @@ azd up
 Kami menyambut kontribusi! Silakan baca [Panduan Kontribusi](CONTRIBUTING.md) untuk detail tentang:
 - Cara mengirimkan masalah dan permintaan fitur
 - Panduan kontribusi kode
-- Perbaikan dokumentasi
+- Peningkatan dokumentasi
 - Standar komunitas
 
 ## Dukungan
 
 - **Masalah**: [Laporkan bug dan minta fitur](https://github.com/microsoft/azd-for-beginners/issues)
-- **Diskusi**: [Tanya jawab dan diskusi di Komunitas Microsoft Azure Discord](https://discord.gg/microsoft-azure)
+- **Diskusi**: [Komunitas Microsoft Azure Discord Q&A dan diskusi](https://discord.gg/microsoft-azure)
 - **Email**: Untuk pertanyaan pribadi
 - **Microsoft Learn**: [Dokumentasi resmi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
@@ -191,7 +184,7 @@ Tim kami juga membuat kursus lainnya! Lihat:
 - [Data Science untuk Pemula](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 - [AI untuk Pemula](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 - [Keamanan Siber untuk Pemula](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
-- [Web Dev untuk Pemula](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [Pengembangan Web untuk Pemula](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 - [IoT untuk Pemula](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 - [Pengembangan XR untuk Pemula](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [Menguasai GitHub Copilot untuk Pemrograman Berpasangan AI](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
@@ -201,7 +194,7 @@ Tim kami juga membuat kursus lainnya! Lihat:
 ---
 
 **Navigasi**
-- **Pelajaran Berikutnya**: [Dasar-dasar AZD](docs/getting-started/azd-basics.md)
+- **Pelajaran Selanjutnya**: [Dasar-dasar AZD](docs/getting-started/azd-basics.md)
 
 ---
 

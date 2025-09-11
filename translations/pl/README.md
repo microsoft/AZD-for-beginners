@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3bd0e0644b110276e4364eb753ddcef8",
-  "translation_date": "2025-09-09T16:28:57+00:00",
+  "original_hash": "c0984265b7a9357388f864c19606c80d",
+  "translation_date": "2025-09-11T10:00:28+00:00",
   "source_file": "README.md",
   "language_code": "pl"
 }
 -->
 # AZD dla Początkujących
 
-![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.pl.png) 
+![AZD-dla-początkujących](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.pl.png) 
 
 [![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)  
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)  
@@ -33,24 +33,24 @@ Postępuj zgodnie z poniższymi krokami, aby rozpocząć korzystanie z tych zaso
 
 ## Wprowadzenie
 
-Witamy w kompleksowym przewodniku po Azure Developer CLI (azd). To repozytorium zostało zaprojektowane, aby pomóc programistom na każdym poziomie, od studentów po profesjonalistów, nauczyć się i opanować Azure Developer CLI w celu efektywnego wdrażania w chmurze. Ten uporządkowany zasób edukacyjny oferuje praktyczne doświadczenie w zakresie wdrożeń w chmurze Azure, rozwiązywania typowych problemów oraz wdrażania najlepszych praktyk w celu pomyślnego użycia szablonów AZD.
+Witamy w kompleksowym przewodniku po Azure Developer CLI (azd). To repozytorium zostało zaprojektowane, aby pomóc programistom na każdym poziomie, od studentów po profesjonalistów, nauczyć się i opanować Azure Developer CLI w celu efektywnego wdrażania w chmurze. Ten uporządkowany zasób edukacyjny oferuje praktyczne doświadczenie w zakresie wdrożeń w chmurze Azure, rozwiązywania typowych problemów oraz wdrażania najlepszych praktyk w zakresie szablonów AZD.
 
 ## Cele nauki
 
 Pracując z tym repozytorium, nauczysz się:
 - Podstaw i kluczowych koncepcji Azure Developer CLI
-- Wdrażania i zarządzania zasobami Azure za pomocą Infrastructure as Code
+- Wdrażania i tworzenia zasobów Azure za pomocą Infrastructure as Code
 - Rozwiązywania typowych problemów związanych z wdrożeniami AZD
 - Walidacji przed wdrożeniem i planowania pojemności
 - Wdrażania najlepszych praktyk w zakresie bezpieczeństwa i optymalizacji kosztów
-- Zyskania pewności w wdrażaniu aplikacji gotowych do produkcji na Azure
+- Zyskasz pewność w wdrażaniu aplikacji gotowych do produkcji na platformie Azure
 
 ## Rezultaty nauki
 
 Po ukończeniu tego kursu będziesz w stanie:
 - Zainstalować, skonfigurować i używać Azure Developer CLI
 - Tworzyć i wdrażać aplikacje za pomocą szablonów AZD
-- Rozwiązywać problemy związane z uwierzytelnianiem, infrastrukturą i wdrożeniami
+- Rozwiązywać problemy z uwierzytelnianiem, infrastrukturą i wdrożeniami
 - Przeprowadzać kontrole przed wdrożeniem, w tym planowanie pojemności i wybór SKU
 - Wdrażać najlepsze praktyki w zakresie monitorowania, bezpieczeństwa i zarządzania kosztami
 - Zintegrować przepływy pracy AZD z pipeline'ami CI/CD
@@ -66,11 +66,11 @@ Po ukończeniu tego kursu będziesz w stanie:
 
 ## Czym jest Azure Developer CLI?
 
-Azure Developer CLI (azd) to interfejs wiersza poleceń skoncentrowany na programistach, który przyspiesza proces tworzenia i wdrażania aplikacji na Azure. Oferuje:  
+Azure Developer CLI (azd) to interfejs wiersza poleceń skoncentrowany na programistach, który przyspiesza proces tworzenia i wdrażania aplikacji na platformie Azure. Oferuje:  
 
-- **Wdrożenia oparte na szablonach** - Korzystaj z gotowych szablonów dla typowych wzorców aplikacji  
-- **Infrastructure as Code** - Zarządzaj zasobami Azure za pomocą Bicep lub Terraform  
-- **Zintegrowane przepływy pracy** - Bezproblemowe provisionowanie, wdrażanie i monitorowanie aplikacji  
+- **Wdrożenia oparte na szablonach** - Korzystanie z gotowych szablonów dla typowych wzorców aplikacji  
+- **Infrastructure as Code** - Zarządzanie zasobami Azure za pomocą Bicep lub Terraform  
+- **Zintegrowane przepływy pracy** - Bezproblemowe tworzenie, wdrażanie i monitorowanie aplikacji  
 - **Przyjazny dla programistów** - Optymalizowany pod kątem produktywności i doświadczenia programistów  
 
 ## Szybki Start
@@ -106,9 +106,9 @@ azd up
 - [**Konfiguracja**](docs/getting-started/configuration.md) - Ustawienia środowiska i uwierzytelnianie  
 - [**Twój pierwszy projekt**](docs/getting-started/first-project.md) - Samouczek krok po kroku  
 
-### Wdrożenie i provisionowanie
+### Wdrożenie i tworzenie zasobów
 - [**Przewodnik wdrożeniowy**](docs/deployment/deployment-guide.md) - Kompleksowe przepływy wdrożeniowe  
-- [**Provisionowanie zasobów**](docs/deployment/provisioning.md) - Zarządzanie zasobami Azure  
+- [**Tworzenie zasobów**](docs/deployment/provisioning.md) - Zarządzanie zasobami Azure  
 
 ### Kontrole przed wdrożeniem
 - [**Planowanie pojemności**](docs/pre-deployment/capacity-planning.md) - Walidacja pojemności zasobów Azure  
@@ -120,17 +120,10 @@ azd up
 - [**Przewodnik debugowania**](docs/troubleshooting/debugging.md) - Strategie debugowania krok po kroku  
 
 ## Przykłady i Szablony
+- [**Przykłady**]([examples/README.md) - Praktyczne przykłady, szablony i scenariusze, które pomogą Ci nauczyć się Azure Developer CLI poprzez praktykę. Każdy przykład zawiera kompletny kod, szablony infrastruktury oraz szczegółowe instrukcje dla różnych architektur aplikacji i wzorców wdrożeniowych.  
 
-### Szablony startowe
-- [**Prosta aplikacja webowa**](../../examples/simple-web-app) - Podstawowe wdrożenie aplikacji Node.js  
-- [**Strona statyczna**](../../examples/static-website) - Hosting strony statycznej na Azure Storage  
-- [**Aplikacja kontenerowa**](../../examples/container-app) - Wdrożenie aplikacji kontenerowej  
-- [**Aplikacja bazodanowa**](../../examples/database-app) - Aplikacja webowa z integracją bazy danych  
-
-### Zaawansowane scenariusze
-- [**Mikrousługi**](../../examples/microservices) - Architektura aplikacji wielousługowej  
-- [**Funkcje serverless**](../../examples/serverless-function) - Wdrożenie Azure Functions  
-- [**Przykłady konfiguracji**](../../examples/configurations) - Wzorce konfiguracji do ponownego użycia  
+### Warsztaty praktyczne
+- [**AZD dla Początkujących**](workshop/README.md) - Warsztat skupiający się na szablonie Get Started with AI Agents AZD, oferujący praktyczne wdrożenie usług Azure AI za pomocą AZD  
 
 ## Zasoby
 
@@ -161,10 +154,10 @@ azd up
 4. Eksploruj [Przykład aplikacji kontenerowej](../../examples/container-app)  
 
 ### Dla inżynierów DevOps
-1. Opanuj [Provisionowanie zasobów](docs/deployment/provisioning.md)  
+1. Opanuj [Tworzenie zasobów](docs/deployment/provisioning.md)  
 2. Wdrażaj [Kontrole przed wdrożeniem](docs/pre-deployment/preflight-checks.md)  
 3. Ćwicz [Planowanie pojemności](docs/pre-deployment/capacity-planning.md)  
-4. Zaawansowany [Przykład mikrousług](../../examples/microservices)  
+4. Zaawansowany [Przykład mikroserwisów](../../examples/microservices)  
 
 ## Wkład w rozwój
 
@@ -198,19 +191,19 @@ Nasza ekipa tworzy inne kursy! Sprawdź:
 - [Data Science dla Początkujących](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI dla Początkujących](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Cybersecurity dla Początkujących](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Web Dev dla Początkujących](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-- [IoT dla Początkujących](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [Rozwój XR dla Początkujących](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Opanowanie GitHub Copilot dla Programowania w Parze z AI](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [Opanowanie GitHub Copilot dla Programistów C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [Wybierz Swoją Własną Przygodę z Copilotem](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+- [Web Dev dla Początkujących](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [IoT dla początkujących](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Rozwój XR dla początkujących](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Opanowanie GitHub Copilot dla programowania w parze z AI](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [Opanowanie GitHub Copilot dla programistów C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+- [Wybierz swoją własną przygodę z Copilotem](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
 ---
 
-**Nawigacja**
-- **Następna Lekcja**: [Podstawy AZD](docs/getting-started/azd-basics.md)
+**Nawigacja**  
+- **Następna lekcja**: [Podstawy AZD](docs/getting-started/azd-basics.md)  
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
