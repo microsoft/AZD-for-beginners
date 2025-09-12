@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:21:54+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T21:07:57+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "no"
 }
 -->
 # Ditt Første Prosjekt - Praktisk Veiledning
+
+**Forrige:** [Konfigurasjon](configuration.md) | **Neste:** [Azure AI Foundry Integrasjon](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduksjon
 
@@ -16,7 +18,7 @@ Velkommen til ditt første Azure Developer CLI-prosjekt! Denne omfattende prakti
 ## Læringsmål
 
 Ved å fullføre denne veiledningen vil du:
-- Mestre arbeidsflyten for azd-prosjektinitialisering ved hjelp av maler
+- Mestre arbeidsflyten for initialisering av azd-prosjekter ved hjelp av maler
 - Forstå strukturen og konfigurasjonsfilene i Azure Developer CLI-prosjekter
 - Utføre fullstendig applikasjonsdistribusjon til Azure med infrastrukturprovisjonering
 - Implementere strategier for applikasjonsoppdateringer og ny distribusjon
@@ -26,10 +28,10 @@ Ved å fullføre denne veiledningen vil du:
 ## Læringsutbytte
 
 Etter fullføring vil du kunne:
-- Initialisere og konfigurere azd-prosjekter fra maler uavhengig
+- Initialisere og konfigurere azd-prosjekter fra maler på egen hånd
 - Navigere og endre azd-prosjektstrukturer effektivt
 - Distribuere fullstack-applikasjoner til Azure med enkle kommandoer
-- Feilsøke vanlige distribusjonsproblemer og autentiseringsutfordringer
+- Feilsøke vanlige distribusjonsproblemer og autentiseringsfeil
 - Administrere flere Azure-miljøer for ulike distribusjonsstadier
 - Implementere kontinuerlige distribusjonsarbeidsflyter for applikasjonsoppdateringer
 
@@ -78,10 +80,10 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### Hva Skjedde Akkurat?
-- Lastet ned malens kode til din lokale katalog
-- Opprettet en `azure.yaml`-fil med tjenestedefinisjoner
-- Satt opp infrastrukturkode i `infra/`-katalogen
-- Opprettet en miljøkonfigurasjon
+- Malens kode ble lastet ned til din lokale katalog
+- En `azure.yaml`-fil med tjenestedefinisjoner ble opprettet
+- Infrastrukturkode ble satt opp i `infra/`-katalogen
+- Et miljøkonfigurasjon ble opprettet
 
 ## Steg 2: Utforsk Prosjektstrukturen
 
@@ -162,7 +164,7 @@ azd env get-values
 
 ## Steg 4: Distribuer til Azure
 
-Nå kommer den spennende delen - distribuer alt til Azure!
+Nå til den spennende delen - distribuer alt til Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -195,7 +197,7 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Steg 5: Test Applikasjonen Din
+## Steg 5: Test Applikasjonen
 
 ### Få Tilgang til Applikasjonen
 Klikk på URL-en som ble gitt i distribusjonsutdataene, eller hent den når som helst:
@@ -210,9 +212,9 @@ azd show --output json | jq -r '.services.web.endpoint'
 ### Test Todo-Appen
 1. **Legg til en todo-oppgave** - Klikk "Add Todo" og skriv inn en oppgave
 2. **Marker som fullført** - Kryss av fullførte oppgaver
-3. **Slett oppgaver** - Fjern todos du ikke lenger trenger
+3. **Slett oppgaver** - Fjern todo-oppgaver du ikke lenger trenger
 
-### Overvåk Applikasjonen Din
+### Overvåk Applikasjonen
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -231,7 +233,7 @@ La oss gjøre en endring og se hvor enkelt det er å oppdatere:
 code src/api/src/routes/lists.js
 ```
 
-Legg til en egendefinert responsheader:
+Legg til en tilpasset responsheader:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -344,10 +346,10 @@ Nå som du har fullført ditt første prosjekt, utforsk disse avanserte temaene:
 - [Legg til databaser, lagring og andre tjenester](../deployment/provisioning.md#adding-services)
 
 ### 2. Sett Opp CI/CD
-- [GitHub Actions-integrasjon](../deployment/cicd-integration.md)
+- [GitHub Actions Integrasjon](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Beste Praksis for Produksjon
+### 3. Beste Praksiser for Produksjon
 - [Sikkerhetskonfigurasjoner](../deployment/best-practices.md#security)
 - [Ytelsesoptimalisering](../deployment/best-practices.md#performance)
 - [Overvåking og logging](../deployment/best-practices.md#monitoring)
@@ -380,7 +382,7 @@ azd init --template todo-java-mongo
 ### Maler og Eksempler
 - [Offisiell Malgalleri](https://azure.github.io/awesome-azd/)
 - [Fellesskapsmaler](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise-mønstre](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Enterprise Mønstre](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigasjon**
-- **Forrige Leksjon**: [Konfigurasjon](configuration.md)
+**Forrige:** [Konfigurasjon](configuration.md) | **Neste:** [Azure AI Foundry Integrasjon](../ai-foundry/azure-ai-foundry-integration.md)
 - **Neste Leksjon**: [Distribusjonsveiledning](../deployment/deployment-guide.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:27:21+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:04:56+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "da"
 }
 -->
 # Installations- og opsætningsguide
+
+**Forrige:** [Hoveddokumentation](../../README.md) | **Næste:** [AZD Grundlæggende](azd-basics.md)
 
 ## Introduktion
 
@@ -146,7 +148,7 @@ Forventet output:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Opsætning af autentifikation
+## Opsætning af autentifikation
 
 ### Azure CLI-autentifikation (Anbefalet)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfiguration
+## Konfiguration
 
 ### Global konfiguration
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE-integration
+## IDE-integration
 
 ### Visual Studio Code
 Installer Azure Developer CLI-udvidelsen:
@@ -322,7 +324,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Næste trin
 
 1. **Fuldfør autentifikation**: Sørg for, at du kan få adgang til dit Azure-abonnement
-2. **Prøv din første udrulning**: Følg [Første projekt-guide](first-project.md)
+2. **Prøv din første udrulning**: Følg [Første projektguide](first-project.md)
 3. **Udforsk skabeloner**: Gennemse tilgængelige skabeloner med `azd template list`
 4. **Konfigurer din IDE**: Opsæt dit udviklingsmiljø
 
@@ -330,19 +332,17 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 Hvis du støder på problemer:
 - [Officiel dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Rapportér problemer](https://github.com/Azure/azure-dev/issues)
+- [Rapporter problemer](https://github.com/Azure/azure-dev/issues)
 - [Community-diskussioner](https://github.com/Azure/azure-dev/discussions)
 - [Azure Support](https://azure.microsoft.com/support/)
 
 ---
 
-**Navigation**
-- **Forrige lektion**: [AZD Basics](azd-basics.md)
-- **Næste lektion**: [Konfiguration](configuration.md)
+**Forrige:** [Hoveddokumentation](../../README.md) | **Næste:** [AZD Grundlæggende](azd-basics.md)
 
 **Installation fuldført!** Fortsæt til [Dit første projekt](first-project.md) for at begynde at bygge med azd.
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at sikre nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

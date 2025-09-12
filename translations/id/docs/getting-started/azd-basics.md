@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:28:57+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T21:25:23+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "id"
 }
 -->
 # Dasar-Dasar AZD - Memahami Azure Developer CLI
+
+**Sebelumnya:** [Instalasi & Pengaturan](installation.md) | **Selanjutnya:** [Konfigurasi](configuration.md)
 
 ## Pendahuluan
 
@@ -195,7 +197,7 @@ Perintah `azd down --force --purge` adalah cara yang ampuh untuk sepenuhnya meng
 ```
 - Melewati prompt konfirmasi.
 - Berguna untuk otomatisasi atau skrip di mana input manual tidak memungkinkan.
-- Memastikan penghentian berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidaksesuaian.
+- Memastikan penghentian berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidakkonsistenan.
 
 ```
 --purge
@@ -263,11 +265,11 @@ azd init --template template1
 
 ### 2. Manfaatkan Template
 - Mulai dengan template yang ada
-- Sesuaikan sesuai kebutuhan Anda
+- Sesuaikan dengan kebutuhan Anda
 - Buat template yang dapat digunakan kembali untuk organisasi Anda
 
 ### 3. Isolasi Lingkungan
-- Gunakan lingkungan terpisah untuk pengembangan/staging/produksi
+- Gunakan lingkungan terpisah untuk dev/staging/prod
 - Jangan pernah menerapkan langsung ke produksi dari mesin lokal
 - Gunakan pipeline CI/CD untuk penerapan produksi
 
@@ -304,17 +306,16 @@ azd init --template template1
 
 ## Sumber Daya Tambahan
 
-- [Ikhtisar Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Galeri Template](https://azure.github.io/awesome-azd/)
-- [Contoh Komunitas](https://github.com/Azure-Samples)
+- [Azure Developer CLI Overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Template Gallery](https://azure.github.io/awesome-azd/)
+- [Community Samples](https://github.com/Azure-Samples)
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [README](../../README.md)
+**Sebelumnya:** [Instalasi & Pengaturan](installation.md) | **Selanjutnya:** [Konfigurasi](configuration.md)  
 - **Pelajaran Selanjutnya**: [Instalasi & Pengaturan](installation.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa terjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

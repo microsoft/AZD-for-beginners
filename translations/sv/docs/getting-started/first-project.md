@@ -1,27 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:18:25+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T21:01:32+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "sv"
 }
 -->
 # Ditt Första Projekt - Praktisk Guide
 
+**Föregående:** [Konfiguration](configuration.md) | **Nästa:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Introduktion
 
-Välkommen till ditt första Azure Developer CLI-projekt! Denna omfattande praktiska guide ger dig en komplett genomgång av hur du skapar, distribuerar och hanterar en fullstack-applikation på Azure med azd. Du kommer att arbeta med en riktig todo-applikation som inkluderar en React-frontend, Node.js API-backend och en MongoDB-databas.
+Välkommen till ditt första Azure Developer CLI-projekt! Denna omfattande praktiska guide ger en komplett genomgång av hur du skapar, distribuerar och hanterar en fullstack-applikation på Azure med azd. Du kommer att arbeta med en riktig todo-applikation som inkluderar en React-frontend, Node.js API-backend och en MongoDB-databas.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Behärska arbetsflödet för att initiera azd-projekt med hjälp av mallar
+- Bemästra arbetsflödet för azd-projektinitiering med hjälp av mallar
 - Förstå strukturen och konfigurationsfilerna för Azure Developer CLI-projekt
 - Utföra en komplett applikationsdistribution till Azure med infrastrukturprovisionering
 - Implementera strategier för applikationsuppdateringar och omdistribution
 - Hantera flera miljöer för utveckling och staging
-- Tillämpa metoder för resursrensning och kostnadshantering
+- Tillämpa metoder för resursstädning och kostnadshantering
 
 ## Läranderesultat
 
@@ -35,7 +37,7 @@ Efter att ha slutfört guiden kommer du att kunna:
 
 ## Kom igång
 
-### Förutsättningar - Checklista
+### Förutsättningar
 - ✅ Azure Developer CLI installerad ([Installationsguide](installation.md))
 - ✅ Azure CLI installerad och autentiserad
 - ✅ Git installerat på ditt system
@@ -78,7 +80,7 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### Vad hände precis?
-- Mallkoden laddades ner till din lokala katalog
+- Mallkod laddades ner till din lokala katalog
 - En `azure.yaml`-fil skapades med tjänstedefinitioner
 - Infrastrukturkod sattes upp i katalogen `infra/`
 - En miljökonfiguration skapades
@@ -198,7 +200,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Steg 5: Testa din applikation
 
 ### Öppna din applikation
-Klicka på URL:en som tillhandahålls i distributionsutdata, eller hämta den när som helst:
+Klicka på URL:en som tillhandahålls i distributionsoutputen, eller hämta den när som helst:
 ```bash
 # Get application endpoints
 azd show
@@ -207,10 +209,10 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Testa todo-appen
-1. **Lägg till en todo-post** - Klicka på "Add Todo" och ange en uppgift
+### Testa todo-applikationen
+1. **Lägg till en todo** - Klicka på "Add Todo" och ange en uppgift
 2. **Markera som klar** - Kryssa för slutförda uppgifter
-3. **Ta bort poster** - Ta bort todos du inte längre behöver
+3. **Ta bort uppgifter** - Ta bort todos du inte längre behöver
 
 ### Övervaka din applikation
 ```bash
@@ -237,7 +239,7 @@ Lägg till en anpassad svarshuvud:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Distribuera endast kodändringarna
+### Distribuera endast kodändringar
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -276,7 +278,7 @@ azd show
 
 ## Steg 8: Rensa resurser
 
-När du är klar med experimenten, rensa för att undvika löpande kostnader:
+När du är klar med att experimentera, rensa upp för att undvika löpande kostnader:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -380,7 +382,7 @@ azd init --template todo-java-mongo
 ### Mallar & Exempel
 - [Officiellt Mallgalleri](https://azure.github.io/awesome-azd/)
 - [Community-mallar](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise-mönster](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Företagsmönster](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigering**
-- **Föregående Lektion**: [Konfiguration](configuration.md)
+**Föregående:** [Konfiguration](configuration.md) | **Nästa:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
 - **Nästa Lektion**: [Distributionsguide](../deployment/deployment-guide.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

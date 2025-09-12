@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:29:32+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:27:43+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "ms"
 }
 -->
 # Panduan Pemasangan & Persediaan
+
+**Sebelumnya:** [Dokumentasi Utama](../../README.md) | **Seterusnya:** [Asas AZD](azd-basics.md)
 
 ## Pengenalan
 
@@ -24,10 +26,10 @@ Pada akhir pelajaran ini, anda akan:
 
 ## Hasil Pembelajaran
 
-Selepas menyelesaikan pelajaran ini, anda akan dapat:
+Selepas melengkapkan pelajaran ini, anda akan dapat:
 - Memasang azd menggunakan kaedah yang sesuai untuk platform anda
 - Mengesahkan dengan Azure menggunakan `azd auth login`
-- Memeriksa pemasangan anda dan menguji arahan asas azd
+- Memastikan pemasangan anda berfungsi dan menguji arahan asas azd
 - Mengkonfigurasi persekitaran pembangunan anda untuk penggunaan azd yang optimum
 - Menyelesaikan masalah pemasangan biasa secara berdikari
 
@@ -51,7 +53,7 @@ Sebelum memasang azd, pastikan anda mempunyai:
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### Pilihan 2: Windows Package Manager (winget)
+#### Pilihan 2: Pengurus Pakej Windows (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
@@ -64,7 +66,7 @@ choco install azd
 #### Pilihan 4: Pemasangan Manual
 1. Muat turun keluaran terkini dari [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Ekstrak ke `C:\Program Files\azd\`
-3. Tambahkan ke pemboleh ubah PATH
+3. Tambahkan ke pemboleh ubah PATH persekitaran
 
 ### macOS
 
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd telah dipasang terlebih dahulu dalam GitHub Codespaces. Cipta sahaja codespace dan mula menggunakan azd dengan segera.
+azd telah dipasang terlebih dahulu dalam GitHub Codespaces. Hanya buat codespace dan mula menggunakan azd dengan segera.
 
 ### Docker
 
@@ -126,9 +128,9 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Periksa Pemasangan
+## ✅ Pengesahan Pemasangan
 
-Selepas pemasangan, periksa sama ada azd berfungsi dengan betul:
+Selepas pemasangan, pastikan azd berfungsi dengan betul:
 
 ```bash
 # Check version
@@ -146,7 +148,7 @@ Output yang dijangkakan:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Persediaan Pengesahan
+## Persediaan Pengesahan
 
 ### Pengesahan Azure CLI (Disyorkan)
 ```bash
@@ -168,7 +170,7 @@ Jika anda menggunakan sistem tanpa kepala atau menghadapi masalah pelayar:
 az login --use-device-code
 ```
 
-### Service Principal (CI/CD)
+### Prinsipal Perkhidmatan (CI/CD)
 Untuk persekitaran automasi:
 ```bash
 az login --service-principal \
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfigurasi
+## Konfigurasi
 
 ### Konfigurasi Global
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integrasi IDE
+## Integrasi IDE
 
 ### Visual Studio Code
 Pasang sambungan Azure Developer CLI:
@@ -219,7 +221,7 @@ Ciri-ciri:
 - Pemantauan penggunaan
 
 ### GitHub Codespaces
-Cipta `.devcontainer/devcontainer.json`:
+Buat `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -240,7 +242,7 @@ Cipta `.devcontainer/devcontainer.json`:
 
 ### Masalah Biasa
 
-#### Permission Denied (Windows)
+#### Kebenaran Ditolak (Windows)
 ```powershell
 # Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -260,7 +262,7 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Masalah Rangkaian/Proxy
+#### Masalah Rangkaian/Proksi
 ```bash
 # Configure proxy
 azd config set http.proxy http://proxy:8080
@@ -281,7 +283,7 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### Mendapatkan Bantuan Tambahan
+### Mendapatkan Bantuan Lebih Lanjut
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -336,9 +338,7 @@ Jika anda menghadapi masalah:
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [Asas AZD](azd-basics.md)
-- **Pelajaran Seterusnya**: [Konfigurasi](configuration.md)
+**Sebelumnya:** [Dokumentasi Utama](../../README.md) | **Seterusnya:** [Asas AZD](azd-basics.md)
 
 **Pemasangan Selesai!** Teruskan ke [Projek Pertama Anda](first-project.md) untuk mula membina dengan azd.
 

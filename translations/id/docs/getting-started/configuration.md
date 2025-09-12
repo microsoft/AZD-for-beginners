@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:28:37+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T21:25:08+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "id"
 }
 -->
 # Panduan Konfigurasi
+
+**Sebelumnya:** [AZD Dasar](azd-basics.md) | **Berikutnya:** [Proyek Pertama](first-project.md)
 
 ## Pendahuluan
 
@@ -20,7 +22,7 @@ Pada akhir pelajaran ini, Anda akan:
 - Mengonfigurasi pengaturan global dan spesifik proyek secara efektif
 - Mengelola beberapa lingkungan dengan konfigurasi yang berbeda
 - Menerapkan pola autentikasi dan otorisasi yang aman
-- Memahami pola konfigurasi lanjutan untuk skenario kompleks
+- Memahami pola konfigurasi lanjutan untuk skenario yang kompleks
 
 ## Hasil Pembelajaran
 
@@ -493,7 +495,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organisasi File Konfigurasi
+### 2. Atur File Konfigurasi
 ```
 .azure/
 ├── config.json              # Global project config
@@ -533,7 +535,7 @@ Dokumentasikan konfigurasi Anda di `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## Langkah Selanjutnya
+## Langkah Berikutnya
 
 - [Proyek Pertama Anda](first-project.md) - Terapkan konfigurasi dalam praktik
 - [Panduan Penerapan](../deployment/deployment-guide.md) - Gunakan konfigurasi untuk penerapan
@@ -547,11 +549,10 @@ Dokumentasikan konfigurasi Anda di `CONFIG.md`:
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [Instalasi & Pengaturan](installation.md)
-- **Pelajaran Selanjutnya**: [Proyek Pertama Anda](first-project.md)
+**Sebelumnya:** [AZD Dasar](azd-basics.md) | **Berikutnya:** [Proyek Pertama](first-project.md)
+- **Pelajaran Berikutnya**: [Proyek Pertama Anda](first-project.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

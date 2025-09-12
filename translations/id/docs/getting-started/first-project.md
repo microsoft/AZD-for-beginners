@@ -1,23 +1,25 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:28:17+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T21:24:34+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "id"
 }
 -->
 # Proyek Pertama Anda - Tutorial Praktis
 
+**Sebelumnya:** [Konfigurasi](configuration.md) | **Selanjutnya:** [Integrasi Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Pendahuluan
 
-Selamat datang di proyek pertama Anda menggunakan Azure Developer CLI! Tutorial praktis ini memberikan panduan lengkap untuk membuat, menerapkan, dan mengelola aplikasi full-stack di Azure menggunakan azd. Anda akan bekerja dengan aplikasi todo nyata yang mencakup frontend React, backend API Node.js, dan database MongoDB.
+Selamat datang di proyek pertama Anda dengan Azure Developer CLI! Tutorial praktis ini memberikan panduan lengkap untuk membuat, menerapkan, dan mengelola aplikasi full-stack di Azure menggunakan azd. Anda akan bekerja dengan aplikasi todo nyata yang mencakup frontend React, backend API Node.js, dan database MongoDB.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan tutorial ini, Anda akan:
 - Menguasai alur kerja inisialisasi proyek azd menggunakan template
-- Memahami struktur proyek dan file konfigurasi Azure Developer CLI
+- Memahami struktur proyek Azure Developer CLI dan file konfigurasi
 - Melakukan penerapan aplikasi lengkap ke Azure dengan penyediaan infrastruktur
 - Menerapkan pembaruan aplikasi dan strategi penerapan ulang
 - Mengelola beberapa lingkungan untuk pengembangan dan staging
@@ -25,7 +27,7 @@ Dengan menyelesaikan tutorial ini, Anda akan:
 
 ## Hasil Pembelajaran
 
-Setelah selesai, Anda akan dapat:
+Setelah selesai, Anda akan mampu:
 - Menginisialisasi dan mengonfigurasi proyek azd dari template secara mandiri
 - Menavigasi dan memodifikasi struktur proyek azd dengan efektif
 - Menerapkan aplikasi full-stack ke Azure menggunakan perintah tunggal
@@ -335,7 +337,7 @@ netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## Langkah Berikutnya
+## Langkah Selanjutnya
 
 Setelah menyelesaikan proyek pertama Anda, jelajahi topik lanjutan berikut:
 
@@ -384,15 +386,14 @@ azd init --template todo-java-mongo
 
 ---
 
-**Selamat atas keberhasilan Anda menyelesaikan proyek azd pertama!** Anda sekarang siap untuk membangun dan menerapkan aplikasi luar biasa di Azure dengan percaya diri.
+**Selamat atas penyelesaian proyek azd pertama Anda!** Anda sekarang siap untuk membangun dan menerapkan aplikasi luar biasa di Azure dengan percaya diri.
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [Konfigurasi](configuration.md)
-- **Pelajaran Berikutnya**: [Panduan Penerapan](../deployment/deployment-guide.md)
+**Sebelumnya:** [Konfigurasi](configuration.md) | **Selanjutnya:** [Integrasi Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+- **Pelajaran Selanjutnya**: [Panduan Penerapan](../deployment/deployment-guide.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

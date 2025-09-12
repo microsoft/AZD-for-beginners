@@ -1,37 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:19:04+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T21:02:11+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sv"
 }
 -->
 # Konfigurationsguide
 
+**Föregående:** [AZD Grunder](azd-basics.md) | **Nästa:** [Första Projektet](first-project.md)
+
 ## Introduktion
 
-Den här omfattande guiden täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och distributionsarbetsflöden. Du kommer att lära dig om konfigurationshierarkin, miljöhantering, autentiseringsmetoder och avancerade konfigurationsmönster som möjliggör effektiva och säkra Azure-distributioner.
+Denna omfattande guide täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och distributionsarbetsflöden. Du kommer att lära dig om konfigurationshierarkin, miljöhantering, autentiseringsmetoder och avancerade konfigurationsmönster som möjliggör effektiva och säkra Azure-distributioner.
 
 ## Lärandemål
 
 I slutet av denna lektion kommer du att:
-- Behärska azd:s konfigurationshierarki och förstå hur inställningar prioriteras
+- Behärska azd-konfigurationshierarkin och förstå hur inställningar prioriteras
 - Konfigurera globala och projekt-specifika inställningar effektivt
 - Hantera flera miljöer med olika konfigurationer
-- Implementera säkra autentiserings- och auktoriseringsmönster
+- Implementera säkra autentiserings- och auktorisationsmönster
 - Förstå avancerade konfigurationsmönster för komplexa scenarier
 
 ## Läranderesultat
 
-Efter att ha slutfört denna lektion kommer du att kunna:
+Efter att ha avslutat denna lektion kommer du att kunna:
 - Konfigurera azd för optimala utvecklingsarbetsflöden
 - Ställa in och hantera flera distributionsmiljöer
 - Implementera säkra konfigurationshanteringsmetoder
 - Felsöka konfigurationsrelaterade problem
 - Anpassa azd:s beteende för specifika organisatoriska krav
 
-Den här omfattande guiden täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och distributionsarbetsflöden.
+Denna omfattande guide täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och distributionsarbetsflöden.
 
 ## Konfigurationshierarki
 
@@ -42,7 +44,7 @@ azd använder ett hierarkiskt konfigurationssystem:
 4. **Global användarkonfiguration** (`~/.azd/config.json`)
 5. **Standardvärden** (lägsta prioritet)
 
-## Global konfiguration
+## Global Konfiguration
 
 ### Ställa in globala standardvärden
 ```bash
@@ -80,8 +82,8 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 
 ## 🏗️ Projektkonfiguration
 
-### Strukturen i azure.yaml
-Filen `azure.yaml` är hjärtat i ditt azd-projekt:
+### azure.yaml-struktur
+Filen `azure.yaml` är kärnan i ditt azd-projekt:
 
 ```yaml
 # Minimum configuration
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Miljömallar
-Skapa `.azure/env.template` för en konsekvent miljöinställning:
+Skapa `.azure/env.template` för konsekvent miljöinställning:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -298,7 +300,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Hanterad identitet
-För Azure-värdbaserade miljöer:
+För Azure-värdmiljöer:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -378,11 +380,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Exempel på `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Exempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Avancerad konfiguration
+## 🔧 Avancerad Konfiguration
 
-### Anpassade resursnamn
+### Anpassad resursnamngivning
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -413,7 +415,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Miljöspecifika konfigurationer
+## 🎯 Miljöspecifika Konfigurationer
 
 ### Utvecklingsmiljö
 ```bash
@@ -424,7 +426,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging-miljö
+### Stagingmiljö
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -442,7 +444,7 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Validering av konfiguration
+## 🔍 Validering av Konfiguration
 
 ### Validera konfiguration
 ```bash
@@ -480,7 +482,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Bästa praxis
+## 🎓 Bästa Praxis
 
 ### 1. Använd miljövariabler
 ```yaml
@@ -509,7 +511,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versionshanteringsöverväganden
+### 3. Versionshantering
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -533,11 +535,11 @@ Dokumentera din konfiguration i `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## Nästa steg
+## Nästa Steg
 
-- [Ditt första projekt](first-project.md) - Tillämpa konfiguration i praktiken
+- [Ditt Första Projekt](first-project.md) - Tillämpa konfiguration i praktiken
 - [Distributionsguide](../deployment/deployment-guide.md) - Använd konfiguration för distribution
-- [Provisionering av resurser](../deployment/provisioning.md) - Produktionsklara konfigurationer
+- [Resursförsörjning](../deployment/provisioning.md) - Produktionsklara konfigurationer
 
 ## Referenser
 
@@ -547,11 +549,10 @@ Dokumentera din konfiguration i `CONFIG.md`:
 
 ---
 
-**Navigering**
-- **Föregående lektion**: [Installation och inställning](installation.md)
-- **Nästa lektion**: [Ditt första projekt](first-project.md)
+**Föregående:** [AZD Grunder](azd-basics.md) | **Nästa:** [Första Projektet](first-project.md)
+- **Nästa Lektion**: [Ditt Första Projekt](first-project.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

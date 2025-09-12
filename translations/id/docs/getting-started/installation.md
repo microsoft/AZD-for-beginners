@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:29:13+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:24:52+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "id"
 }
 -->
 # Panduan Instalasi & Pengaturan
 
+**Sebelumnya:** [Dokumentasi Utama](../../README.md) | **Selanjutnya:** [Dasar-Dasar AZD](azd-basics.md)
+
 ## Pendahuluan
 
-Panduan lengkap ini akan memandu Anda melalui proses instalasi dan konfigurasi Azure Developer CLI (azd) di sistem Anda. Anda akan mempelajari berbagai metode instalasi untuk sistem operasi yang berbeda, pengaturan autentikasi, dan konfigurasi awal untuk mempersiapkan lingkungan pengembangan Anda untuk deployment di Azure.
+Panduan lengkap ini akan membantu Anda menginstal dan mengonfigurasi Azure Developer CLI (azd) di sistem Anda. Anda akan mempelajari berbagai metode instalasi untuk sistem operasi yang berbeda, pengaturan autentikasi, dan konfigurasi awal untuk mempersiapkan lingkungan pengembangan Anda untuk deployment di Azure.
 
 ## Tujuan Pembelajaran
 
@@ -19,7 +21,7 @@ Pada akhir pelajaran ini, Anda akan:
 - Berhasil menginstal Azure Developer CLI di sistem operasi Anda
 - Mengonfigurasi autentikasi dengan Azure menggunakan berbagai metode
 - Menyiapkan lingkungan pengembangan Anda dengan prasyarat yang diperlukan
-- Memahami berbagai opsi instalasi dan kapan harus menggunakannya
+- Memahami berbagai opsi instalasi dan kapan menggunakannya
 - Memecahkan masalah umum terkait instalasi dan pengaturan
 
 ## Hasil Pembelajaran
@@ -74,7 +76,7 @@ brew tap azure/azd
 brew install azd
 ```
 
-#### Opsi 2: Install Script
+#### Opsi 2: Script Instalasi
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
@@ -87,12 +89,12 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### Opsi 1: Install Script (Direkomendasikan)
+#### Opsi 1: Script Instalasi (Direkomendasikan)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Opsi 2: Package Managers
+#### Opsi 2: Package Manager
 
 **Ubuntu/Debian:**
 ```bash
@@ -146,7 +148,7 @@ Output yang diharapkan:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Pengaturan Autentikasi
+## Pengaturan Autentikasi
 
 ### Autentikasi Azure CLI (Direkomendasikan)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfigurasi
+## Konfigurasi
 
 ### Konfigurasi Global
 ```bash
@@ -203,14 +205,14 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integrasi IDE
+## Integrasi IDE
 
 ### Visual Studio Code
-Pasang ekstensi Azure Developer CLI:
+Instal ekstensi Azure Developer CLI:
 1. Buka VS Code
 2. Pergi ke Extensions (Ctrl+Shift+X)
 3. Cari "Azure Developer CLI"
-4. Pasang ekstensi tersebut
+4. Instal ekstensi tersebut
 
 Fitur:
 - IntelliSense untuk azure.yaml
@@ -232,8 +234,8 @@ Buat file `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Pasang plugin Azure
-2. Konfigurasikan kredensial Azure
+1. Instal plugin Azure
+2. Konfigurasi kredensial Azure
 3. Gunakan terminal terintegrasi untuk perintah azd
 
 ## 🐛 Pemecahan Masalah Instalasi
@@ -247,7 +249,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### Masalah PATH
-Tambahkan azd secara manual ke PATH Anda:
+Tambahkan azd secara manual ke PATH:
 
 **Windows:**
 ```cmd
@@ -324,7 +326,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 1. **Selesaikan autentikasi**: Pastikan Anda dapat mengakses langganan Azure Anda
 2. **Coba deployment pertama Anda**: Ikuti [Panduan Proyek Pertama](first-project.md)
 3. **Jelajahi template**: Telusuri template yang tersedia dengan `azd template list`
-4. **Konfigurasikan IDE Anda**: Siapkan lingkungan pengembangan Anda
+4. **Konfigurasi IDE Anda**: Siapkan lingkungan pengembangan Anda
 
 ## Dukungan
 
@@ -336,13 +338,11 @@ Jika Anda mengalami masalah:
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [Dasar-dasar AZD](azd-basics.md)
-- **Pelajaran Selanjutnya**: [Konfigurasi](configuration.md)
+**Sebelumnya:** [Dokumentasi Utama](../../README.md) | **Selanjutnya:** [Dasar-Dasar AZD](azd-basics.md)
 
 **Instalasi Selesai!** Lanjutkan ke [Proyek Pertama Anda](first-project.md) untuk mulai membangun dengan azd.
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

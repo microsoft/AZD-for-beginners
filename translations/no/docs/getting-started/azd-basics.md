@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:22:50+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T21:08:54+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "no"
 }
 -->
 # AZD Grunnleggende - Forstå Azure Developer CLI
 
+**Forrige:** [Installasjon og Oppsett](installation.md) | **Neste:** [Konfigurasjon](configuration.md)
+
 ## Introduksjon
 
-Denne leksjonen introduserer deg for Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen fra lokal utvikling til Azure-distribusjon. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler distribusjon av skybaserte applikasjoner.
+Denne leksjonen introduserer deg for Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen din fra lokal utvikling til Azure-deployering. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler deployering av skybaserte applikasjoner.
 
 ## Læringsmål
 
@@ -24,7 +26,7 @@ Ved slutten av denne leksjonen vil du:
 
 ## Læringsutbytte
 
-Etter å ha fullført denne leksjonen, vil du kunne:
+Etter å ha fullført denne leksjonen vil du kunne:
 - Forklare rollen til azd i moderne skyutviklingsarbeidsflyter
 - Identifisere komponentene i en azd-projektstruktur
 - Beskrive hvordan maler, miljøer og tjenester fungerer sammen
@@ -33,19 +35,19 @@ Etter å ha fullført denne leksjonen, vil du kunne:
 
 ## Hva er Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen fra lokal utvikling til Azure-distribusjon. Det forenkler prosessen med å bygge, distribuere og administrere skybaserte applikasjoner på Azure.
+Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen din fra lokal utvikling til Azure-deployering. Det forenkler prosessen med å bygge, deployere og administrere skybaserte applikasjoner på Azure.
 
-## Grunnleggende konsepter
+## Grunnleggende Konsepter
 
 ### Maler
 Maler er grunnlaget for azd. De inneholder:
 - **Applikasjonskode** - Kildekoden din og avhengigheter
 - **Infrastrukturdefinisjoner** - Azure-ressurser definert i Bicep eller Terraform
 - **Konfigurasjonsfiler** - Innstillinger og miljøvariabler
-- **Distribusjonsskript** - Automatiserte distribusjonsarbeidsflyter
+- **Deployeringsskript** - Automatiserte deployeringsarbeidsflyter
 
 ### Miljøer
-Miljøer representerer ulike distribusjonsmål:
+Miljøer representerer ulike deployeringsmål:
 - **Utvikling** - For testing og utvikling
 - **Staging** - Pre-produksjonsmiljø
 - **Produksjon** - Live produksjonsmiljø
@@ -53,7 +55,7 @@ Miljøer representerer ulike distribusjonsmål:
 Hvert miljø har sitt eget:
 - Azure ressursgruppe
 - Konfigurasjonsinnstillinger
-- Distribusjonstilstand
+- Deployeringstilstand
 
 ### Tjenester
 Tjenester er byggesteinene i applikasjonen din:
@@ -64,7 +66,7 @@ Tjenester er byggesteinene i applikasjonen din:
 
 ## Nøkkelfunksjoner
 
-### 1. Malbasert utvikling
+### 1. Malbasert Utvikling
 ```bash
 # Browse available templates
 azd template list
@@ -78,7 +80,7 @@ azd init --template <template-name>
 - **Terraform** - Multi-sky infrastrukturverktøy
 - **ARM-maler** - Azure Resource Manager-maler
 
-### 3. Integrerte arbeidsflyter
+### 3. Integrerte Arbeidsflyter
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
@@ -157,9 +159,9 @@ Miljøspesifikk konfigurasjon:
 }
 ```
 
-## 🎪 Vanlige arbeidsflyter
+## 🎪 Vanlige Arbeidsflyter
 
-### Starte et nytt prosjekt
+### Starte et Nytt Prosjekt
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -189,7 +191,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Forstå `azd down --force --purge`
-Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned azd-miljøet og alle tilknyttede ressurser. Her er en oversikt over hva hver flagg gjør:
+Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned azd-miljøet ditt og alle tilknyttede ressurser. Her er en oversikt over hva hver flagg gjør:
 ```
 --force
 ```
@@ -203,15 +205,15 @@ Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ne
 Sletter **all tilknyttet metadata**, inkludert:
 Miljøtilstand
 Lokal `.azure`-mappe
-Bufret distribusjonsinformasjon
-Forhindrer azd fra å "huske" tidligere distribusjoner, som kan forårsake problemer som feil ressursgrupper eller utdaterte registerreferanser.
+Bufret deployeringsinformasjon
+Forhindrer azd fra å "huske" tidligere deployeringer, som kan forårsake problemer som feil ressursgrupper eller utdaterte registerreferanser.
 
 ### Hvorfor bruke begge?
-Når du har støtt på problemer med `azd up` på grunn av gjenværende tilstand eller delvise distribusjoner, sikrer denne kombinasjonen en **ren start**.
+Når du har støtt på problemer med `azd up` på grunn av gjenværende tilstand eller delvise deployeringer, sikrer denne kombinasjonen en **ren start**.
 
 Det er spesielt nyttig etter manuelle ressurs-slettinger i Azure-portalen eller når du bytter maler, miljøer eller ressursgruppenavn.
 
-### Administrere flere miljøer
+### Administrere Flere Miljøer
 ```bash
 # Create staging environment
 azd env new staging
@@ -248,9 +250,9 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Beste praksis
+## Beste Praksis
 
-### 1. Bruk meningsfulle navn
+### 1. Bruk Meningsfulle Navn
 ```bash
 # Good
 azd env new production-east
@@ -261,15 +263,15 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Utnytt maler
+### 2. Utnytt Maler
 - Start med eksisterende maler
 - Tilpass etter behov
 - Lag gjenbrukbare maler for organisasjonen din
 
 ### 3. Miljøisolasjon
 - Bruk separate miljøer for utvikling/staging/produksjon
-- Aldri distribuer direkte til produksjon fra lokal maskin
-- Bruk CI/CD-pipelines for produksjonsdistribusjoner
+- Aldri deploy direkte til produksjon fra lokal maskin
+- Bruk CI/CD-pipelines for produksjonsdeployeringer
 
 ### 4. Konfigurasjonsadministrasjon
 - Bruk miljøvariabler for sensitiv data
@@ -280,7 +282,7 @@ azd init --template template1
 
 ### Nybegynner (Uke 1-2)
 1. Installer azd og autentiser
-2. Distribuer en enkel mal
+2. Deploy en enkel mal
 3. Forstå prosjektstruktur
 4. Lær grunnleggende kommandoer (up, down, deploy)
 
@@ -293,28 +295,27 @@ azd init --template template1
 ### Avansert (Uke 5+)
 1. Lag egne maler
 2. Avanserte infrastrukturmønstre
-3. Distribusjoner på tvers av regioner
+3. Deployeringer på tvers av regioner
 4. Konfigurasjoner for bedrifter
 
-## Neste steg
+## Neste Steg
 
-- [Installasjon og oppsett](installation.md) - Få azd installert og konfigurert
-- [Ditt første prosjekt](first-project.md) - Praktisk opplæring
-- [Konfigurasjonsveiledning](configuration.md) - Avanserte konfigurasjonsalternativer
+- [Installasjon og Oppsett](installation.md) - Få azd installert og konfigurert
+- [Ditt Første Prosjekt](first-project.md) - Praktisk veiledning
+- [Konfigurasjonsguide](configuration.md) - Avanserte konfigurasjonsalternativer
 
 ## Tilleggsressurser
 
 - [Azure Developer CLI Oversikt](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Malbibliotek](https://azure.github.io/awesome-azd/)
-- [Community-eksempler](https://github.com/Azure-Samples)
+- [Community Eksempler](https://github.com/Azure-Samples)
 
 ---
 
-**Navigasjon**
-- **Forrige leksjon**: [README](../../README.md)
-- **Neste leksjon**: [Installasjon og oppsett](installation.md)
+**Forrige:** [Installasjon og Oppsett](installation.md) | **Neste:** [Konfigurasjon](configuration.md)
+- **Neste Leksjon**: [Installasjon og Oppsett](installation.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

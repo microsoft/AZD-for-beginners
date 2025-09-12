@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8de774b36773a00bc9fa2a445a0d8d49",
-  "translation_date": "2025-09-09T21:17:15+00:00",
+  "original_hash": "9736db53ea878e07688670ebcc8906bc",
+  "translation_date": "2025-09-12T21:29:32+00:00",
   "source_file": "changelog.md",
   "language_code": "tl"
 }
@@ -17,60 +17,93 @@ Ang changelog na ito ay nagdodokumento ng lahat ng mahahalagang pagbabago, updat
 
 Sa pag-review ng changelog na ito, ikaw ay:
 - Mananatiling updated sa mga bagong feature at karagdagang nilalaman
-- Mauunawaan ang mga pagpapabuti sa umiiral na dokumentasyon
+- Mauunawaan ang mga pagpapabuti sa kasalukuyang dokumentasyon
 - Masusubaybayan ang mga pag-aayos ng bug at mga koreksyon para sa mas tumpak na impormasyon
 - Masusundan ang ebolusyon ng mga materyales sa pag-aaral sa paglipas ng panahon
 
 ## Mga Resulta ng Pag-aaral
 
-Pagkatapos i-review ang mga entry sa changelog, ikaw ay:
-- Makikilala ang mga bagong nilalaman at resources para sa pag-aaral
-- Mauunawaan kung aling mga seksyon ang na-update o pinahusay
-- Makakapagplano ng iyong landas sa pag-aaral batay sa pinakabagong materyales
-- Makakapagbigay ng feedback at mga suhestiyon para sa mga susunod na pagpapabuti
+Pagkatapos i-review ang mga entry sa changelog, magagawa mong:
+- Tukuyin ang mga bagong nilalaman at resources para sa pag-aaral
+- Mauunawaan kung aling mga seksyon ang na-update o pinabuti
+- Magplano ng iyong landas sa pag-aaral batay sa pinakabagong materyales
+- Magbigay ng feedback at mga suhestiyon para sa mga susunod na pagpapabuti
 
 ## Kasaysayan ng Bersyon
 
-### [v2.0.0] - 2025-09-09
+### [v3.0.0] - 2025-09-12
 
-#### Malalaking Pagbabago - Pag-aayos ng Repository at Propesyonal na Pagpapahusay
-**Ang bersyong ito ay kumakatawan sa isang malaking pagbabago sa istruktura ng repository at presentasyon ng nilalaman.**
+#### Malalaking Pagbabago - Pokus sa AI Developer at Integrasyon ng Azure AI Foundry
+**Binago ng bersyong ito ang repository upang maging isang komprehensibong resource sa pag-aaral na nakatuon sa AI na may integrasyon sa Azure AI Foundry.**
 
 #### Idinagdag
-- **Structured Learning Framework**: Lahat ng pahina ng dokumentasyon ay mayroon nang mga seksyon ng Panimula, Mga Layunin sa Pag-aaral, at Mga Resulta ng Pag-aaral
-- **Navigation System**: Idinagdag ang mga link para sa Nakaraang/Susunod na aralin sa buong dokumentasyon para sa gabay na pag-aaral
-- **Study Guide**: Komprehensibong study-guide.md na may mga layunin sa pag-aaral, mga pagsasanay, at mga materyales sa pagsusuri
+- **🤖 AI-First Learning Path**: Kumpletong restructuring na inuuna ang mga AI developer at engineer
+- **Azure AI Foundry Integration Guide**: Komprehensibong dokumentasyon para sa pagkonekta ng AZD sa mga serbisyo ng Azure AI Foundry
+- **AI Model Deployment Patterns**: Detalyadong gabay sa pagpili ng modelo, configuration, at mga estratehiya sa production deployment
+- **AI Workshop Lab**: 2-3 oras na hands-on workshop para sa pag-convert ng mga AI application sa AZD-deployable solutions
+- **Production AI Best Practices**: Mga pattern na handa para sa enterprise para sa pag-scale, pag-monitor, at pag-secure ng mga AI workload
+- **AI-Specific Troubleshooting Guide**: Komprehensibong troubleshooting para sa Azure OpenAI, Cognitive Services, at mga isyu sa AI deployment
+- **AI Template Gallery**: Koleksyon ng mga template ng Azure AI Foundry na may mga rating ng complexity
+- **Workshop Materials**: Kumpletong istruktura ng workshop na may hands-on labs at reference materials
+
+#### Pinahusay
+- **README Structure**: Nakatuon sa AI-developer na may 45% data ng interes mula sa komunidad ng Azure AI Foundry Discord
+- **Learning Paths**: Dedikadong landas para sa AI developer kasabay ng tradisyunal na landas para sa mga estudyante at DevOps engineer
+- **Template Recommendations**: Mga tampok na AI template kabilang ang azure-search-openai-demo, contoso-chat, at openai-chat-app-quickstart
+- **Community Integration**: Pinahusay na suporta sa Discord community na may mga AI-specific na channel at diskusyon
+
+#### Pokus sa Seguridad at Produksyon
+- **Managed Identity Patterns**: Mga AI-specific na authentication at security configuration
+- **Cost Optimization**: Pagsubaybay sa paggamit ng token at mga kontrol sa budget para sa mga AI workload
+- **Multi-Region Deployment**: Mga estratehiya para sa global na deployment ng AI application
+- **Performance Monitoring**: Mga AI-specific na metrics at Application Insights integration
+
+#### Kalidad ng Dokumentasyon
+- **Linear Course Structure**: Lohikal na progression mula sa baguhan hanggang sa advanced na AI deployment patterns
+- **Validated URLs**: Lahat ng external repository links ay na-verify at accessible
+- **Complete Reference**: Lahat ng internal documentation links ay validated at functional
+- **Production Ready**: Mga pattern ng enterprise deployment na may mga halimbawa sa totoong mundo
+
+### [v2.0.0] - 2025-09-09
+
+#### Malalaking Pagbabago - Restructure ng Repository at Propesyonal na Pagpapahusay
+**Ang bersyong ito ay kumakatawan sa isang makabuluhang overhaul ng istruktura ng repository at presentasyon ng nilalaman.**
+
+#### Idinagdag
+- **Structured Learning Framework**: Lahat ng dokumentasyon ay may kasamang Introduction, Learning Goals, at Learning Outcomes sections
+- **Navigation System**: Idinagdag ang Previous/Next lesson links sa lahat ng dokumentasyon para sa guided learning progression
+- **Study Guide**: Komprehensibong study-guide.md na may mga layunin sa pag-aaral, practice exercises, at assessment materials
 - **Professional Presentation**: Tinanggal ang lahat ng emoji icons para sa mas mahusay na accessibility at propesyonal na hitsura
 - **Enhanced Content Structure**: Pinahusay na organisasyon at daloy ng mga materyales sa pag-aaral
 
 #### Binago
-- **Documentation Format**: Standardized ang lahat ng dokumentasyon na may pare-parehong istruktura na nakatuon sa pag-aaral
-- **Navigation Flow**: Inimplementa ang lohikal na progresyon sa lahat ng materyales sa pag-aaral
-- **Content Presentation**: Tinanggal ang mga dekoratibong elemento para sa malinaw at propesyonal na format
+- **Documentation Format**: Standardized ang lahat ng dokumentasyon na may consistent na learning-focused structure
+- **Navigation Flow**: Nagpatupad ng lohikal na progression sa lahat ng materyales sa pag-aaral
+- **Content Presentation**: Tinanggal ang mga dekoratibong elemento para sa mas malinaw at propesyonal na formatting
 - **Link Structure**: In-update ang lahat ng internal links para suportahan ang bagong navigation system
 
 #### Pinahusay
 - **Accessibility**: Tinanggal ang dependency sa emoji para sa mas mahusay na compatibility sa screen reader
-- **Professional Appearance**: Malinis, akademikong estilo ng presentasyon na angkop para sa enterprise learning
-- **Learning Experience**: Structured na approach na may malinaw na layunin at resulta para sa bawat aralin
+- **Professional Appearance**: Malinis, academic-style na presentasyon na angkop para sa enterprise learning
+- **Learning Experience**: Structured na approach na may malinaw na layunin at resulta para sa bawat lesson
 - **Content Organization**: Mas mahusay na lohikal na daloy at koneksyon sa pagitan ng mga kaugnay na paksa
 
 ### [v1.0.0] - 2025-09-09
 
-#### Unang Paglabas - Komprehensibong AZD Learning Repository
+#### Paunang Paglabas - Komprehensibong AZD Learning Repository
 
 #### Idinagdag
 - **Core Documentation Structure**
   - Kumpletong getting-started guide series
   - Komprehensibong deployment at provisioning documentation
   - Detalyadong troubleshooting resources at debugging guides
-  - Mga tool at pamamaraan para sa pre-deployment validation
+  - Mga pre-deployment validation tools at procedures
 
 - **Getting Started Module**
   - AZD Basics: Mga pangunahing konsepto at terminolohiya
   - Installation Guide: Mga platform-specific na setup instructions
-  - Configuration Guide: Pag-setup ng environment at authentication
-  - First Project Tutorial: Step-by-step na hands-on learning
+  - Configuration Guide: Environment setup at authentication
+  - First Project Tutorial: Step-by-step hands-on learning
 
 - **Deployment and Provisioning Module**
   - Deployment Guide: Kumpletong workflow documentation
@@ -105,10 +138,10 @@ Pagkatapos i-review ang mga entry sa changelog, ikaw ay:
   - Serverless function implementations
 
 #### Mga Tampok
-- **Multi-Platform Support**: Mga gabay sa pag-install at configuration para sa Windows, macOS, at Linux
+- **Multi-Platform Support**: Mga gabay sa installation at configuration para sa Windows, macOS, at Linux
 - **Multiple Skill Levels**: Nilalaman na idinisenyo para sa mga estudyante hanggang sa mga propesyonal na developer
-- **Practical Focus**: Hands-on examples at real-world scenarios
-- **Comprehensive Coverage**: Mula sa mga pangunahing konsepto hanggang sa advanced enterprise patterns
+- **Practical Focus**: Hands-on examples at mga totoong senaryo
+- **Comprehensive Coverage**: Mula sa mga pangunahing konsepto hanggang sa advanced na enterprise patterns
 - **Security-First Approach**: Mga best practices sa seguridad na isinama sa kabuuan
 - **Cost Optimization**: Gabay para sa cost-effective na deployments at resource management
 
@@ -121,37 +154,62 @@ Pagkatapos i-review ang mga entry sa changelog, ikaw ay:
 
 ## Mga Planong Hinaharap na Pagpapahusay
 
-### Bersyon 3.0.0 (Planado)
-#### Mga Iminungkahing Idagdag
-- **Interactive Tutorials**: Hands-on coding exercises na may automated validation
-- **Video Content**: Supplementary video tutorials para sa mga visual learners
-- **Advanced Security Module**: Malalim na talakayan sa enterprise security patterns
-- **Multi-Cloud Support**: Integrasyon sa iba pang cloud providers
-- **Performance Optimization**: Advanced tuning at scaling strategies
+### Bersyon 3.1.0 (Planado)
+#### Pagpapalawak ng AI Platform
+- **Multi-Model Support**: Mga pattern ng integrasyon para sa Hugging Face, Azure Machine Learning, at custom models
+- **AI Agent Frameworks**: Mga template para sa LangChain, Semantic Kernel, at AutoGen deployments
+- **Advanced RAG Patterns**: Mga opsyon sa vector database bukod sa Azure AI Search (Pinecone, Weaviate, atbp.)
+- **AI Observability**: Pinahusay na monitoring para sa performance ng modelo, paggamit ng token, at kalidad ng response
 
-#### Mga Iminungkahing Pagpapabuti
-- **Mobile-Friendly Documentation**: Responsive design para sa mobile learning
-- **Offline Access**: Mga downloadable na dokumentasyon packages
-- **Community Contributions**: Pinahusay na mga gabay para sa kontribusyon ng komunidad
-- **Translation Support**: Multi-language documentation options
+#### Karanasan ng Developer
+- **VS Code Extension**: Integrated AZD + AI Foundry development experience
+- **GitHub Copilot Integration**: AI-assisted AZD template generation
+- **Interactive Tutorials**: Hands-on coding exercises na may automated validation para sa AI scenarios
+- **Video Content**: Supplementary video tutorials para sa mga visual learners na nakatuon sa AI deployments
 
-### Bersyon 2.1.0 (Planado)
-#### Minor Enhancements
-- **Karagdagang Mga Halimbawa**: Mas maraming real-world deployment scenarios
-- **Pinalawak na FAQ**: Dagdag na mga karaniwang tanong at sagot
+### Bersyon 4.0.0 (Planado)
+#### Mga Pattern ng Enterprise AI
+- **Governance Framework**: Pamamahala ng AI model, compliance, at audit trails
+- **Multi-Tenant AI**: Mga pattern para sa pagseserbisyo sa maraming customer na may hiwalay na AI services
+- **Edge AI Deployment**: Integrasyon sa Azure IoT Edge at container instances
+- **Hybrid Cloud AI**: Mga pattern ng multi-cloud at hybrid deployment para sa AI workloads
+
+#### Advanced na Mga Tampok
+- **AI Pipeline Automation**: MLOps integration gamit ang Azure Machine Learning pipelines
+- **Advanced Security**: Zero-trust patterns, private endpoints, at advanced threat protection
+- **Performance Optimization**: Advanced tuning at scaling strategies para sa high-throughput AI applications
+- **Global Distribution**: Mga pattern ng content delivery at edge caching para sa AI applications
+
+### Bersyon 3.0.0 (Planado) - Napalitan ng Kasalukuyang Release
+#### Mga Iminungkahing Karagdagan - Ngayon ay Naipatupad sa v3.0.0
+- ✅ **AI-Focused Content**: Komprehensibong integrasyon ng Azure AI Foundry (Tapos na)
+- ✅ **Interactive Tutorials**: Hands-on AI workshop lab (Tapos na)
+- ✅ **Advanced Security Module**: Mga AI-specific na security patterns (Tapos na)
+- ✅ **Performance Optimization**: Mga estratehiya sa tuning ng AI workload (Tapos na)
+
+### Bersyon 2.1.0 (Planado) - Bahagyang Naipatupad sa v3.0.0
+#### Minor Enhancements - Ang Iba ay Tapos na sa Kasalukuyang Release
+- ✅ **Karagdagang Mga Halimbawa**: Mga AI-focused na deployment scenarios (Tapos na)
+- ✅ **Pinalawak na FAQ**: Mga AI-specific na tanong at troubleshooting (Tapos na)
 - **Tool Integration**: Pinahusay na mga gabay sa integrasyon ng IDE at editor
-- **Monitoring Expansion**: Advanced monitoring at alerting patterns
+- ✅ **Monitoring Expansion**: Mga AI-specific na monitoring at alerting patterns (Tapos na)
+
+#### Planado Pa rin para sa Hinaharap na Release
+- **Mobile-Friendly Documentation**: Responsive na disenyo para sa mobile learning
+- **Offline Access**: Mga downloadable na dokumentasyon packages
+- **Enhanced IDE Integration**: VS Code extension para sa AZD + AI workflows
+- **Community Dashboard**: Real-time na metrics ng komunidad at pagsubaybay sa kontribusyon
 
 ## Pag-aambag sa Changelog
 
 ### Pag-uulat ng Mga Pagbabago
-Kapag nag-aambag sa repository na ito, tiyakin na ang mga entry sa changelog ay naglalaman ng:
+Kapag nag-aambag sa repository na ito, tiyaking ang mga entry sa changelog ay may kasamang:
 
 1. **Numero ng Bersyon**: Sumusunod sa semantic versioning (major.minor.patch)
-2. **Petsa**: Petsa ng paglabas o update sa format na YYYY-MM-DD
-3. **Kategorya**: Added, Changed, Deprecated, Removed, Fixed, Security
-4. **Malinaw na Deskripsyon**: Maikli ngunit malinaw na deskripsyon ng pagbabago
-5. **Impact Assessment**: Paano naapektuhan ang mga umiiral na user
+2. **Petsa**: Petsa ng release o update sa format na YYYY-MM-DD
+3. **Kategorya**: Idinagdag, Binago, Deprecated, Tinanggal, Naayos, Seguridad
+4. **Malinaw na Deskripsyon**: Maikling deskripsyon ng kung ano ang nagbago
+5. **Pagtatasa ng Epekto**: Paano naapektuhan ang mga kasalukuyang user
 
 ### Mga Kategorya ng Pagbabago
 
@@ -161,9 +219,9 @@ Kapag nag-aambag sa repository na ito, tiyakin na ang mga entry sa changelog ay 
 - Karagdagang tools, scripts, o utilities
 
 #### Binago
-- Mga pagbabago sa umiiral na functionality o dokumentasyon
+- Mga pagbabago sa kasalukuyang functionality o dokumentasyon
 - Mga update para mapabuti ang kalinawan o katumpakan
-- Pag-aayos ng nilalaman o organisasyon
+- Restructure ng nilalaman o organisasyon
 
 #### Deprecated
 - Mga feature o approach na unti-unting tinatanggal
@@ -183,13 +241,13 @@ Kapag nag-aambag sa repository na ito, tiyakin na ang mga entry sa changelog ay 
 #### Seguridad
 - Mga pagpapabuti o pag-aayos na may kaugnayan sa seguridad
 - Mga update sa security best practices
-- Resolusyon ng mga security vulnerabilities
+- Resolusyon ng mga kahinaan sa seguridad
 
 ### Mga Alituntunin sa Semantic Versioning
 
 #### Major Version (X.0.0)
 - Mga breaking changes na nangangailangan ng aksyon mula sa user
-- Malaking pagbabago sa istruktura ng nilalaman o organisasyon
+- Malaking restructuring ng nilalaman o organisasyon
 - Mga pagbabago na nagbabago sa pangunahing approach o methodology
 
 #### Minor Version (X.Y.0)
@@ -199,69 +257,71 @@ Kapag nag-aambag sa repository na ito, tiyakin na ang mga entry sa changelog ay 
 
 #### Patch Version (X.Y.Z)
 - Mga pag-aayos ng bug at koreksyon
-- Maliit na pagpapabuti sa umiiral na nilalaman
-- Mga klaripikasyon at maliliit na enhancements
+- Maliit na pagpapabuti sa kasalukuyang nilalaman
+- Mga klaripikasyon at maliliit na enhancement
 
-## Feedback at Mga Suhestiyon ng Komunidad
+## Feedback at Mga Suhestiyon mula sa Komunidad
 
-Aktibo naming hinihikayat ang feedback ng komunidad upang mapabuti ang learning resource na ito:
+Aktibo naming hinihikayat ang feedback mula sa komunidad upang mapabuti ang resource na ito sa pag-aaral:
 
 ### Paano Magbigay ng Feedback
-- **GitHub Issues**: Mag-ulat ng mga problema o magmungkahi ng mga pagpapabuti
-- **Discord Discussions**: Magbahagi ng mga ideya at makipag-ugnayan sa komunidad
-- **Pull Requests**: Mag-ambag ng direktang pagpapabuti sa nilalaman
-- **Discord Community Forums**: Makilahok sa mas malawak na talakayan ng Azure developer
+- **GitHub Issues**: Mag-ulat ng mga problema o magmungkahi ng mga pagpapabuti (AI-specific na isyu ay welcome)
+- **Discord Discussions**: Magbahagi ng mga ideya at makipag-ugnayan sa komunidad ng Azure AI Foundry
+- **Pull Requests**: Mag-ambag ng direktang pagpapabuti sa nilalaman, lalo na sa mga AI template at gabay
+- **Azure AI Foundry Discord**: Makilahok sa #Azure channel para sa AZD + AI discussions
+- **Community Forums**: Makilahok sa mas malawak na diskusyon ng Azure developer
 
 ### Mga Kategorya ng Feedback
-- **Content Accuracy**: Mga koreksyon sa teknikal na impormasyon
-- **Learning Experience**: Mga suhestiyon para sa mas mahusay na daloy ng pag-aaral
-- **Missing Content**: Mga kahilingan para sa karagdagang paksa o halimbawa
+- **Katumpakan ng AI Content**: Mga koreksyon sa impormasyon ng integrasyon at deployment ng AI service
+- **Karanasan sa Pag-aaral**: Mga suhestiyon para sa mas mahusay na daloy ng pag-aaral para sa AI developer
+- **Nawawalang AI Content**: Mga kahilingan para sa karagdagang AI template, pattern, o halimbawa
 - **Accessibility**: Mga pagpapabuti para sa iba't ibang pangangailangan sa pag-aaral
-- **Tool Integration**: Mga suhestiyon para sa mas mahusay na integrasyon ng workflow sa development
+- **AI Tool Integration**: Mga suhestiyon para sa mas mahusay na workflow ng AI development
+- **Mga Pattern ng Production AI**: Mga kahilingan para sa mga pattern ng enterprise AI deployment
 
 ### Commitment sa Pagtugon
-- **Issue Response**: Sa loob ng 48 oras para sa mga naiulat na problema
-- **Feature Requests**: Pagsusuri sa loob ng isang linggo
-- **Community Contributions**: Review sa loob ng isang linggo
-- **Security Issues**: Agarang prayoridad na may pinabilis na pagtugon
+- **Pagtugon sa Isyu**: Sa loob ng 48 oras para sa mga naiulat na problema
+- **Mga Kahilingan sa Feature**: Pagsusuri sa loob ng isang linggo
+- **Mga Kontribusyon ng Komunidad**: Review sa loob ng isang linggo
+- **Mga Isyu sa Seguridad**: Agarang prayoridad na may pinabilis na pagtugon
 
 ## Iskedyul ng Pagpapanatili
 
 ### Regular na Update
-- **Monthly Reviews**: Pag-validate ng katumpakan ng nilalaman at mga link
-- **Quarterly Updates**: Malalaking karagdagang nilalaman at pagpapabuti
-- **Semi-Annual Reviews**: Komprehensibong pag-aayos at pagpapahusay
-- **Annual Releases**: Malalaking update ng bersyon na may mahahalagang pagpapabuti
+- **Monthly Reviews**: Katumpakan ng nilalaman at validation ng link
+- **Quarterly Updates**: Malalaking karagdagan at pagpapabuti ng nilalaman
+- **Semi-Annual Reviews**: Komprehensibong restructuring at enhancement
+- **Annual Releases**: Malalaking update ng bersyon na may makabuluhang pagpapabuti
 
 ### Monitoring at Quality Assurance
-- **Automated Testing**: Regular na pag-validate ng mga code examples at links
-- **Community Feedback Integration**: Regular na pagsasama ng mga suhestiyon ng user
-- **Technology Updates**: Pag-align sa pinakabagong Azure services at azd releases
+- **Automated Testing**: Regular na validation ng mga code example at link
+- **Integration ng Feedback ng Komunidad**: Regular na pagsasama ng mga suhestiyon ng user
+- **Technology Updates**: Pagsunod sa pinakabagong Azure services at azd releases
 - **Accessibility Audits**: Regular na pagsusuri para sa inclusive design principles
 
 ## Patakaran sa Suporta ng Bersyon
 
 ### Suporta sa Kasalukuyang Bersyon
-- **Pinakabagong Major Version**: Buong suporta na may regular na update
-- **Nakaraang Major Version**: Mga update sa seguridad at mahahalagang pag-aayos sa loob ng 12 buwan
-- **Legacy Versions**: Suporta ng komunidad lamang, walang opisyal na update
+- **Pinakabagong Pangunahing Bersyon**: Buong suporta na may regular na pag-update  
+- **Nakaraang Pangunahing Bersyon**: Mga update sa seguridad at mahahalagang pag-aayos sa loob ng 12 buwan  
+- **Legacy na Bersyon**: Suporta mula sa komunidad lamang, walang opisyal na update  
 
-### Gabay sa Migration
-Kapag may mga bagong major version na inilabas, nagbibigay kami ng:
-- **Migration Guides**: Step-by-step na mga tagubilin sa paglipat
-- **Compatibility Notes**: Mga detalye tungkol sa mga breaking changes
-- **Tool Support**: Mga script o utilities para tumulong sa migration
-- **Community Support**: Dedicated forums para sa mga tanong sa migration
+### Gabay sa Paglipat  
+Kapag inilabas ang mga pangunahing bersyon, nagbibigay kami ng:  
+- **Mga Gabay sa Paglipat**: Hakbang-hakbang na mga tagubilin para sa paglipat  
+- **Mga Tala sa Compatibility**: Mga detalye tungkol sa mga pagbabago na maaaring makaapekto  
+- **Suporta sa Tool**: Mga script o utility para tumulong sa paglipat  
+- **Suporta mula sa Komunidad**: Mga dedikadong forum para sa mga tanong tungkol sa paglipat  
 
 ---
 
-**Navigation**
-- **Nakaraang Aralin**: [Study Guide](resources/study-guide.md)
-- **Susunod na Aralin**: Bumalik sa [Main README](README.md)
+**Pag-navigate**  
+- **Nakaraang Aralin**: [Gabay sa Pag-aaral](resources/study-guide.md)  
+- **Susunod na Aralin**: Bumalik sa [Pangunahing README](README.md)  
 
-**Manatiling Updated**: I-follow ang repository na ito para sa mga notification tungkol sa mga bagong release at mahahalagang update sa mga materyales sa pag-aaral.
+**Manatiling Nai-update**: I-follow ang repository na ito para sa mga notification tungkol sa mga bagong release at mahahalagang update sa mga materyales sa pag-aaral.  
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

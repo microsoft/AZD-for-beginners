@@ -1,53 +1,55 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:24:31+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T21:15:14+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "nl"
 }
 -->
 # Je Eerste Project - Praktische Tutorial
 
+**Vorige:** [Configuratie](configuration.md) | **Volgende:** [Azure AI Foundry Integratie](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Introductie
 
-Welkom bij je eerste Azure Developer CLI-project! Deze uitgebreide praktische tutorial biedt een volledige handleiding voor het maken, implementeren en beheren van een full-stack applicatie op Azure met behulp van azd. Je werkt met een echte todo-applicatie die een React-frontend, een Node.js API-backend en een MongoDB-database omvat.
+Welkom bij je eerste Azure Developer CLI-project! Deze uitgebreide praktische tutorial biedt een volledige walkthrough van het maken, implementeren en beheren van een full-stack applicatie op Azure met behulp van azd. Je werkt met een echte todo-applicatie die een React-frontend, Node.js API-backend en MongoDB-database bevat.
 
 ## Leerdoelen
 
-Door deze tutorial te voltooien, zul je:
-- Het azd-projectinitialisatieproces met sjablonen beheersen
-- De structuur en configuratiebestanden van een Azure Developer CLI-project begrijpen
+Door deze tutorial te voltooien, leer je:
+- Het azd-projectinitialisatieproces beheersen met behulp van templates
+- De structuur van Azure Developer CLI-projecten en configuratiebestanden begrijpen
 - Een volledige applicatie implementeren op Azure inclusief infrastructuurvoorziening
-- Applicatie-updates en herimplementatiestrategieën toepassen
+- Applicatie-updates en herimplementatiestrategieën uitvoeren
 - Meerdere omgevingen beheren voor ontwikkeling en staging
-- Praktijken voor het opruimen van resources en kostenbeheer toepassen
+- Praktijken toepassen voor het opruimen van resources en kostenbeheer
 
 ## Leerresultaten
 
-Na voltooiing ben je in staat om:
-- Zelfstandig azd-projecten te initialiseren en configureren vanuit sjablonen
-- Effectief door azd-projectstructuren te navigeren en deze aan te passen
-- Full-stack applicaties naar Azure te implementeren met enkele commando's
-- Veelvoorkomende implementatieproblemen en authenticatieproblemen op te lossen
-- Meerdere Azure-omgevingen te beheren voor verschillende implementatiefasen
-- Continue implementatieworkflows voor applicatie-updates te implementeren
+Na voltooiing kun je:
+- Zelfstandig azd-projecten initialiseren en configureren vanuit templates
+- Effectief navigeren en wijzigingen aanbrengen in azd-projectstructuren
+- Full-stack applicaties implementeren op Azure met enkele commando's
+- Veelvoorkomende implementatieproblemen en authenticatieproblemen oplossen
+- Meerdere Azure-omgevingen beheren voor verschillende implementatiefasen
+- Continue implementatieworkflows toepassen voor applicatie-updates
 
-## Aan de Slag
+## Aan de slag
 
-### Vereisten Checklist
+### Checklist Voorvereisten
 - ✅ Azure Developer CLI geïnstalleerd ([Installatiehandleiding](installation.md))
 - ✅ Azure CLI geïnstalleerd en geauthenticeerd
 - ✅ Git geïnstalleerd op je systeem
 - ✅ Node.js 16+ (voor deze tutorial)
 - ✅ Visual Studio Code (aanbevolen)
 
-### Controleer je Setup
+### Verifieer Je Setup
 ```bash
 # Check azd installation
 azd version
 ```
-### Controleer Azure-authenticatie
+### Verifieer Azure-authenticatie
 
 ```bash
 az account show
@@ -58,9 +60,9 @@ az account show
 node --version
 ```
 
-## Stap 1: Kies en Initialiseer een Sjabloon
+## Stap 1: Kies en Initialiseer een Template
 
-Laten we beginnen met een populaire todo-applicatiesjabloon die een React-frontend en een Node.js API-backend bevat.
+Laten we beginnen met een populaire todo-applicatietemplate die een React-frontend en Node.js API-backend bevat.
 
 ```bash
 # Browse available templates
@@ -77,11 +79,11 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### Wat is er zojuist gebeurd?
-- De sjablooncode is gedownload naar je lokale map
+### Wat is er net gebeurd?
+- De templatecode is gedownload naar je lokale map
 - Een `azure.yaml`-bestand is aangemaakt met servicedefinities
 - Infrastructuurcode is ingesteld in de map `infra/`
-- Een omgevingsconfiguratie is aangemaakt
+- Een configuratie voor de omgeving is aangemaakt
 
 ## Stap 2: Verken de Projectstructuur
 
@@ -135,7 +137,7 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## Stap 3: Pas je Project aan (Optioneel)
+## Stap 3: Pas Je Project Aan (Optioneel)
 
 Voordat je implementeert, kun je de applicatie aanpassen:
 
@@ -160,9 +162,9 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## Stap 4: Implementeer naar Azure
+## Stap 4: Implementeer op Azure
 
-Nu komt het spannende deel - alles implementeren naar Azure!
+Nu komt het spannende deel - alles implementeren op Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -175,12 +177,12 @@ azd up
 # 4. Display the application URL
 ```
 
-### Wat Gebeurt er Tijdens de Implementatie?
+### Wat Gebeurt Er Tijdens de Implementatie?
 
 Het commando `azd up` voert de volgende stappen uit:
-1. **Provision** (`azd provision`) - Maakt Azure-resources aan
-2. **Package** - Bouwt je applicatiecode
-3. **Deploy** (`azd deploy`) - Implementeert code naar Azure-resources
+1. **Voorzien** (`azd provision`) - Maakt Azure-resources aan
+2. **Pakket** - Bouwt je applicatiecode
+3. **Implementeer** (`azd deploy`) - Implementeert code naar Azure-resources
 
 ### Verwachte Output
 ```
@@ -195,9 +197,9 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Stap 5: Test je Applicatie
+## Stap 5: Test Je Applicatie
 
-### Open je Applicatie
+### Toegang tot Je Applicatie
 Klik op de URL die wordt weergegeven in de implementatie-output, of haal deze op elk moment op:
 ```bash
 # Get application endpoints
@@ -212,7 +214,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 2. **Markeer als voltooid** - Vink voltooide items aan
 3. **Verwijder items** - Verwijder todo's die je niet meer nodig hebt
 
-### Monitor je Applicatie
+### Monitor Je Applicatie
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -223,7 +225,7 @@ azd logs
 
 ## Stap 6: Wijzigingen Aanbrengen en Herimplementeren
 
-Laten we een wijziging aanbrengen en zien hoe eenvoudig het is om bij te werken:
+Laten we een wijziging aanbrengen en zien hoe eenvoudig het is om te updaten:
 
 ### Wijzig de API
 ```bash
@@ -231,7 +233,7 @@ Laten we een wijziging aanbrengen en zien hoe eenvoudig het is om bij te werken:
 code src/api/src/routes/lists.js
 ```
 
-Voeg een aangepaste response-header toe:
+Voeg een aangepaste response header toe:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -247,7 +249,7 @@ azd deploy
 
 ## Stap 7: Beheer Meerdere Omgevingen
 
-Maak een stagingomgeving aan om wijzigingen te testen voordat je naar productie gaat:
+Maak een stagingomgeving om wijzigingen te testen voordat je naar productie gaat:
 
 ```bash
 # Create a new staging environment
@@ -274,7 +276,7 @@ azd env select staging
 azd show
 ```
 
-## Stap 8: Ruim Resources op
+## Stap 8: Ruim Resources Op
 
 Als je klaar bent met experimenteren, ruim dan op om doorlopende kosten te vermijden:
 
@@ -292,10 +294,10 @@ azd down --force --purge
 
 ## Wat Je Hebt Geleerd
 
-Gefeliciteerd! Je hebt met succes:
-- Een azd-project vanuit een sjabloon geïnitieerd
+Gefeliciteerd! Je hebt succesvol:
+- Een azd-project vanuit een template geïnitieerd
 - De projectstructuur en belangrijke bestanden verkend
-- Een full-stack applicatie naar Azure geïmplementeerd
+- Een full-stack applicatie geïmplementeerd op Azure
 - Codewijzigingen aangebracht en hergeïmplementeerd
 - Meerdere omgevingen beheerd
 - Resources opgeruimd
@@ -339,11 +341,11 @@ netstat -an | grep :3100
 
 Nu je je eerste project hebt voltooid, kun je deze geavanceerde onderwerpen verkennen:
 
-### 1. Pas de Infrastructuur aan
-- [Infrastructuur als Code](../deployment/provisioning.md)
+### 1. Infrastructuur Aanpassen
+- [Infrastructure as Code](../deployment/provisioning.md)
 - [Voeg databases, opslag en andere services toe](../deployment/provisioning.md#adding-services)
 
-### 2. Stel CI/CD in
+### 2. Stel CI/CD In
 - [GitHub Actions Integratie](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
@@ -352,7 +354,7 @@ Nu je je eerste project hebt voltooid, kun je deze geavanceerde onderwerpen verk
 - [Prestatieoptimalisatie](../deployment/best-practices.md#performance)
 - [Monitoring en logging](../deployment/best-practices.md#monitoring)
 
-### 4. Verken Meer Sjablonen
+### 4. Verken Meer Templates
 ```bash
 # Browse templates by category
 azd template list --filter web
@@ -377,9 +379,9 @@ azd init --template todo-java-mongo
 - [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### Sjablonen & Voorbeelden
-- [Officiële Sjablonengalerij](https://azure.github.io/awesome-azd/)
-- [Community Sjablonen](https://github.com/Azure-Samples/azd-templates)
+### Templates & Voorbeelden
+- [Officiële Templategalerij](https://azure.github.io/awesome-azd/)
+- [Community Templates](https://github.com/Azure-Samples/azd-templates)
 - [Enterprise Patronen](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigatie**
-- **Vorige Les**: [Configuratie](configuration.md)
+**Vorige:** [Configuratie](configuration.md) | **Volgende:** [Azure AI Foundry Integratie](../ai-foundry/azure-ai-foundry-integration.md)
 - **Volgende Les**: [Implementatiehandleiding](../deployment/deployment-guide.md)
 
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, willen we u erop wijzen dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

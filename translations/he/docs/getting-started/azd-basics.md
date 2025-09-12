@@ -1,31 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:26:46+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T21:19:10+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "he"
 }
 -->
 # יסודות AZD - הבנת Azure Developer CLI
 
-## הקדמה
+**קודם:** [התקנה והגדרה](installation.md) | **הבא:** [תצורה](configuration.md)
 
-שיעור זה מציג בפניכם את Azure Developer CLI (azd), כלי שורת פקודה עוצמתי שמאיץ את המעבר שלכם מפיתוח מקומי לפריסה ב-Azure. תלמדו את המושגים הבסיסיים, התכונות המרכזיות, ותבינו כיצד azd מפשט את תהליך הפריסה של יישומים מבוססי ענן.
+## מבוא
+
+השיעור הזה מציג את Azure Developer CLI (azd), כלי שורת פקודה עוצמתי שמאיץ את המעבר שלך מפיתוח מקומי לפריסה ב-Azure. תלמד את המושגים הבסיסיים, התכונות המרכזיות, ותבין כיצד azd מפשט את תהליך הפריסה של יישומים מבוססי ענן.
 
 ## מטרות למידה
 
-בסיום השיעור, תדעו:
-- מהו Azure Developer CLI ומה מטרתו העיקרית
+בסיום השיעור הזה, תוכל:
+- להבין מהו Azure Developer CLI ומה מטרתו העיקרית
 - ללמוד את המושגים המרכזיים של תבניות, סביבות ושירותים
 - לחקור תכונות מרכזיות כמו פיתוח מבוסס תבניות ותשתית כקוד
-- להבין את מבנה הפרויקט והזרימה של azd
-- להיות מוכנים להתקנה ולהגדרה של azd בסביבת הפיתוח שלכם
+- להבין את מבנה הפרויקט של azd ואת זרימת העבודה
+- להיות מוכן להתקין ולהגדיר את azd בסביבת הפיתוח שלך
 
 ## תוצאות למידה
 
-לאחר השלמת השיעור, תוכלו:
-- להסביר את תפקיד azd בזרימות עבודה מודרניות של פיתוח בענן
+לאחר השלמת השיעור, תוכל:
+- להסביר את תפקיד azd בתהליכי פיתוח מודרניים בענן
 - לזהות את הרכיבים של מבנה פרויקט azd
 - לתאר כיצד תבניות, סביבות ושירותים עובדים יחד
 - להבין את היתרונות של תשתית כקוד עם azd
@@ -33,30 +35,30 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## מהו Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) הוא כלי שורת פקודה שנועד להאיץ את המעבר שלכם מפיתוח מקומי לפריסה ב-Azure. הוא מפשט את תהליך הבנייה, הפריסה והניהול של יישומים מבוססי ענן ב-Azure.
+Azure Developer CLI (azd) הוא כלי שורת פקודה שנועד להאיץ את המעבר שלך מפיתוח מקומי לפריסה ב-Azure. הוא מפשט את תהליך הבנייה, הפריסה והניהול של יישומים מבוססי ענן ב-Azure.
 
 ## מושגים מרכזיים
 
 ### תבניות
 תבניות הן הבסיס של azd. הן כוללות:
-- **קוד יישום** - קוד המקור שלכם ותלויות
+- **קוד יישום** - קוד המקור שלך ותלויותיו
 - **הגדרות תשתית** - משאבי Azure המוגדרים ב-Bicep או Terraform
-- **קבצי הגדרות** - הגדרות ומשתני סביבה
-- **סקריפטים לפריסה** - זרימות עבודה אוטומטיות לפריסה
+- **קבצי תצורה** - הגדרות ומשתני סביבה
+- **סקריפטים לפריסה** - תהליכי פריסה אוטומטיים
 
 ### סביבות
 סביבות מייצגות יעדי פריסה שונים:
 - **פיתוח** - לבדיקות ופיתוח
-- **שלב ביניים** - סביבה לפני הפקה
-- **הפקה** - סביבה חיה בהפקה
+- **בדיקות** - סביבה לפני הפקה
+- **הפקה** - סביבה חיה
 
 כל סביבה שומרת על:
 - קבוצת משאבים ב-Azure
-- הגדרות קונפיגורציה
+- הגדרות תצורה
 - מצב פריסה
 
 ### שירותים
-שירותים הם אבני הבניין של היישום שלכם:
+שירותים הם אבני הבניין של היישום שלך:
 - **חזית** - יישומי אינטרנט, SPAs
 - **עורף** - APIs, מיקרו-שירותים
 - **מסד נתונים** - פתרונות אחסון נתונים
@@ -117,10 +119,10 @@ my-app/
 └── README.md
 ```
 
-## 🔧 קבצי הגדרות
+## 🔧 קבצי תצורה
 
 ### azure.yaml
-קובץ ההגדרות הראשי של הפרויקט:
+קובץ התצורה הראשי של הפרויקט:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -143,7 +145,7 @@ hooks:
 ```
 
 ### .azure/config.json
-הגדרות ספציפיות לסביבה:
+תצורה ספציפית לסביבה:
 ```json
 {
   "version": 1,
@@ -189,7 +191,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## הבנת `azd down --force --purge`
-הפקודה `azd down --force --purge` היא דרך עוצמתית לפרק לחלוטין את סביבת azd ואת כל המשאבים הקשורים. הנה פירוט של מה שכל דגל עושה:
+הפקודה `azd down --force --purge` היא דרך עוצמתית לפרק לחלוטין את סביבת azd שלך ואת כל המשאבים הקשורים. הנה פירוט של מה שכל דגל עושה:
 ```
 --force
 ```
@@ -204,10 +206,10 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 מצב סביבה
 תיקיית `.azure` המקומית
 מידע פריסה במטמון
-מונע מ-azd "לזכור" פריסות קודמות, מה שעלול לגרום לבעיות כמו קבוצות משאבים לא תואמות או הפניות רישום ישנות.
+מונע מ-azd "לזכור" פריסות קודמות, מה שיכול לגרום לבעיות כמו קבוצות משאבים לא תואמות או הפניות רישום ישנות.
 
 ### למה להשתמש בשניהם?
-כשנתקלים בקשיים עם `azd up` עקב מצב מתמשך או פריסות חלקיות, השילוב הזה מבטיח **דף נקי**.
+כשנתקלת בקשיים עם `azd up` עקב מצב מתמשך או פריסות חלקיות, השילוב הזה מבטיח **דף נקי**.
 
 זה מועיל במיוחד לאחר מחיקות ידניות של משאבים בפורטל Azure או בעת מעבר בין תבניות, סביבות או מוסכמות שמות של קבוצות משאבים.
 
@@ -250,7 +252,7 @@ azd logs                     # View application logs
 
 ## שיטות עבודה מומלצות
 
-### 1. השתמשו בשמות משמעותיים
+### 1. השתמש בשמות משמעותיים
 ```bash
 # Good
 azd env new production-east
@@ -261,31 +263,31 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. נצלו תבניות
-- התחילו עם תבניות קיימות
-- התאימו לצרכים שלכם
-- צרו תבניות לשימוש חוזר עבור הארגון שלכם
+### 2. נצל תבניות
+- התחל עם תבניות קיימות
+- התאמה אישית לצרכים שלך
+- צור תבניות לשימוש חוזר עבור הארגון שלך
 
 ### 3. בידוד סביבות
-- השתמשו בסביבות נפרדות לפיתוח/שלב ביניים/הפקה
-- לעולם אל תפרסו ישירות להפקה מהמחשב המקומי
-- השתמשו בצינורות CI/CD לפריסות הפקה
+- השתמש בסביבות נפרדות לפיתוח/בדיקות/הפקה
+- לעולם אל תפרוס ישירות להפקה מהמחשב המקומי
+- השתמש בצינורות CI/CD לפריסות הפקה
 
-### 4. ניהול קונפיגורציה
-- השתמשו במשתני סביבה עבור נתונים רגישים
-- שמרו את ההגדרות תחת בקרת גרסאות
-- תעדו הגדרות ספציפיות לסביבה
+### 4. ניהול תצורה
+- השתמש במשתני סביבה לנתונים רגישים
+- שמור תצורה תחת בקרת גרסאות
+- תעד הגדרות ספציפיות לסביבה
 
 ## התקדמות בלמידה
 
 ### מתחילים (שבוע 1-2)
-1. התקינו את azd ואמתו
-2. פרסו תבנית פשוטה
-3. הבינו את מבנה הפרויקט
-4. למדו פקודות בסיסיות (up, down, deploy)
+1. התקן את azd ואמת
+2. פרוס תבנית פשוטה
+3. הבן את מבנה הפרויקט
+4. למד פקודות בסיסיות (up, down, deploy)
 
 ### בינוניים (שבוע 3-4)
-1. התאימו תבניות
+1. התאמה אישית של תבניות
 2. ניהול סביבות מרובות
 3. הבנת קוד תשתית
 4. הגדרת צינורות CI/CD
@@ -294,13 +296,13 @@ azd init --template template1
 1. יצירת תבניות מותאמות אישית
 2. דפוסי תשתית מתקדמים
 3. פריסות רב-אזוריות
-4. הגדרות ברמה ארגונית
+4. תצורות ברמה ארגונית
 
 ## צעדים הבאים
 
-- [התקנה והגדרה](installation.md) - התקינו והגדירו את azd
-- [הפרויקט הראשון שלכם](first-project.md) - מדריך מעשי
-- [מדריך קונפיגורציה](configuration.md) - אפשרויות קונפיגורציה מתקדמות
+- [התקנה והגדרה](installation.md) - התקן והגדר את azd
+- [הפרויקט הראשון שלך](first-project.md) - מדריך מעשי
+- [מדריך תצורה](configuration.md) - אפשרויות תצורה מתקדמות
 
 ## משאבים נוספים
 
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**ניווט**
-- **שיעור קודם**: [README](../../README.md)
-- **שיעור הבא**: [התקנה והגדרה](installation.md)
+**קודם:** [התקנה והגדרה](installation.md) | **הבא:** [תצורה](configuration.md)
+- **השיעור הבא**: [התקנה והגדרה](installation.md)
 
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפתו המקורית נחשב למקור הסמכותי. למידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אנושי. איננו נושאים באחריות לכל אי-הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

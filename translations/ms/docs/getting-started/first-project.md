@@ -1,27 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:29:16+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T21:27:22+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ms"
 }
 -->
 # Projek Pertama Anda - Tutorial Praktikal
 
+**Sebelumnya:** [Konfigurasi](configuration.md) | **Seterusnya:** [Integrasi Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Pengenalan
 
-Selamat datang ke projek pertama anda menggunakan Azure Developer CLI! Tutorial praktikal ini memberikan panduan lengkap untuk mencipta, melancarkan, dan mengurus aplikasi full-stack di Azure menggunakan azd. Anda akan bekerja dengan aplikasi todo sebenar yang merangkumi frontend React, backend API Node.js, dan pangkalan data MongoDB.
+Selamat datang ke projek pertama Azure Developer CLI anda! Tutorial praktikal ini memberikan panduan lengkap untuk mencipta, melancarkan, dan mengurus aplikasi full-stack di Azure menggunakan azd. Anda akan bekerja dengan aplikasi todo sebenar yang merangkumi frontend React, backend API Node.js, dan pangkalan data MongoDB.
 
 ## Matlamat Pembelajaran
 
-Dengan menyelesaikan tutorial ini, anda akan:
+Dengan melengkapkan tutorial ini, anda akan:
 - Menguasai aliran kerja inisialisasi projek azd menggunakan templat
-- Memahami struktur projek dan fail konfigurasi Azure Developer CLI
+- Memahami struktur projek Azure Developer CLI dan fail konfigurasi
 - Melaksanakan pelancaran aplikasi lengkap ke Azure dengan penyediaan infrastruktur
 - Melaksanakan kemas kini aplikasi dan strategi pelancaran semula
 - Menguruskan pelbagai persekitaran untuk pembangunan dan staging
-- Menerapkan amalan pembersihan sumber dan pengurusan kos
+- Mengamalkan pembersihan sumber dan pengurusan kos
 
 ## Hasil Pembelajaran
 
@@ -47,13 +49,13 @@ Selepas selesai, anda akan dapat:
 # Check azd installation
 azd version
 ```
-### Sahkan pengesahan Azure
+### Sahkan Pengesahan Azure
 
 ```bash
 az account show
 ```
 
-### Periksa versi Node.js
+### Periksa Versi Node.js
 ```bash
 node --version
 ```
@@ -79,7 +81,7 @@ azd init --template todo-nodejs-mongo
 
 ### Apa yang Baru Berlaku?
 - Kod templat dimuat turun ke direktori tempatan anda
-- Fail `azure.yaml` dengan definisi perkhidmatan dicipta
+- Fail `azure.yaml` dicipta dengan definisi perkhidmatan
 - Kod infrastruktur disediakan dalam direktori `infra/`
 - Konfigurasi persekitaran dicipta
 
@@ -162,7 +164,7 @@ azd env get-values
 
 ## Langkah 4: Lancarkan ke Azure
 
-Sekarang bahagian yang menarik - lancarkan semuanya ke Azure!
+Sekarang untuk bahagian yang menarik - lancarkan semuanya ke Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -198,7 +200,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Langkah 5: Uji Aplikasi Anda
 
 ### Akses Aplikasi Anda
-Klik pada URL yang disediakan dalam output pelancaran, atau dapatkan bila-bila masa:
+Klik pada URL yang diberikan dalam output pelancaran, atau dapatkan bila-bila masa:
 ```bash
 # Get application endpoints
 azd show
@@ -210,7 +212,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ### Uji Aplikasi Todo
 1. **Tambah item todo** - Klik "Add Todo" dan masukkan tugas
 2. **Tandakan sebagai selesai** - Tandakan item yang telah selesai
-3. **Padam item** - Hapuskan todo yang tidak lagi diperlukan
+3. **Padam item** - Buang todo yang tidak lagi diperlukan
 
 ### Pantau Aplikasi Anda
 ```bash
@@ -247,7 +249,7 @@ azd deploy
 
 ## Langkah 7: Uruskan Pelbagai Persekitaran
 
-Cipta persekitaran staging untuk menguji perubahan sebelum pengeluaran:
+Cipta persekitaran staging untuk menguji perubahan sebelum produksi:
 
 ```bash
 # Create a new staging environment
@@ -337,17 +339,17 @@ netstat -an | grep :3100
 
 ## Langkah Seterusnya
 
-Sekarang anda telah menyelesaikan projek pertama anda, terokai topik lanjutan ini:
+Sekarang setelah anda melengkapkan projek pertama anda, terokai topik lanjutan ini:
 
 ### 1. Sesuaikan Infrastruktur
-- [Infrastructure as Code](../deployment/provisioning.md)
+- [Infrastruktur sebagai Kod](../deployment/provisioning.md)
 - [Tambah pangkalan data, storan, dan perkhidmatan lain](../deployment/provisioning.md#adding-services)
 
 ### 2. Sediakan CI/CD
 - [Integrasi GitHub Actions](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Amalan Terbaik Pengeluaran
+### 3. Amalan Terbaik Produksi
 - [Konfigurasi keselamatan](../deployment/best-practices.md#security)
 - [Pengoptimuman prestasi](../deployment/best-practices.md#performance)
 - [Pemantauan dan log](../deployment/best-practices.md#monitoring)
@@ -369,7 +371,7 @@ azd init --template todo-java-mongo
 
 ### Bahan Pembelajaran
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Pusat Arkitektur Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Kerangka Well-Architected Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Komuniti & Sokongan
@@ -384,15 +386,14 @@ azd init --template todo-java-mongo
 
 ---
 
-**Tahniah kerana menyelesaikan projek azd pertama anda!** Anda kini bersedia untuk membina dan melancarkan aplikasi hebat di Azure dengan yakin.
+**Tahniah kerana melengkapkan projek azd pertama anda!** Anda kini bersedia untuk membina dan melancarkan aplikasi hebat di Azure dengan yakin.
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [Konfigurasi](configuration.md)
+**Sebelumnya:** [Konfigurasi](configuration.md) | **Seterusnya:** [Integrasi Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
 - **Pelajaran Seterusnya**: [Panduan Pelancaran](../deployment/deployment-guide.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
