@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T19:10:27+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T19:14:17+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "tr"
 }
 -->
 # Kurulum ve Ayar Kılavuzu
+
+**Önceki:** [Ana Dokümantasyon](../../README.md) | **Sonraki:** [AZD Temelleri](azd-basics.md)
 
 ## Giriş
 
@@ -17,7 +19,7 @@ Bu kapsamlı kılavuz, Azure Developer CLI (azd) aracını sisteminize nasıl ku
 
 Bu dersin sonunda:
 - Azure Developer CLI'yi işletim sisteminize başarıyla kurabileceksiniz
-- Azure ile çeşitli yöntemler kullanarak kimlik doğrulama yapabileceksiniz
+- Azure ile çeşitli yöntemlerle kimlik doğrulama yapabileceksiniz
 - Geliştirme ortamınızı gerekli ön koşullarla kurabileceksiniz
 - Farklı kurulum seçeneklerini ve her birini ne zaman kullanmanız gerektiğini anlayabileceksiniz
 - Yaygın kurulum ve ayar sorunlarını çözebileceksiniz
@@ -26,7 +28,7 @@ Bu dersin sonunda:
 
 Bu dersi tamamladıktan sonra:
 - Platformunuza uygun yöntemi kullanarak azd'yi kurabileceksiniz
-- azd auth login komutunu kullanarak Azure ile kimlik doğrulama yapabileceksiniz
+- `azd auth login` komutuyla Azure'da kimlik doğrulama yapabileceksiniz
 - Kurulumunuzu doğrulayıp temel azd komutlarını test edebileceksiniz
 - Geliştirme ortamınızı azd'yi en iyi şekilde kullanmak için yapılandırabileceksiniz
 - Yaygın kurulum sorunlarını bağımsız olarak çözebileceksiniz
@@ -35,7 +37,7 @@ Bu kılavuz, işletim sisteminiz veya geliştirme ortamınız ne olursa olsun Az
 
 ## Ön Koşullar
 
-azd'yi kurmadan önce aşağıdakilere sahip olduğunuzdan emin olun:
+azd'yi kurmadan önce şunlara sahip olduğunuzdan emin olun:
 - **Azure aboneliği** - [Ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/)
 - **Azure CLI** - Kimlik doğrulama ve kaynak yönetimi için
 - **Git** - Şablonları klonlamak ve sürüm kontrolü için
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd, GitHub Codespaces içinde önceden yüklenmiş olarak gelir. Bir codespace oluşturun ve azd'yi hemen kullanmaya başlayın.
+azd, GitHub Codespaces içinde önceden kurulu olarak gelir. Bir codespace oluşturun ve azd'yi hemen kullanmaya başlayın.
 
 ### Docker
 
@@ -146,7 +148,7 @@ Beklenen çıktı:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Kimlik Doğrulama Ayarları
+## Kimlik Doğrulama Ayarları
 
 ### Azure CLI Kimlik Doğrulama (Önerilen)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Yapılandırma
+## Yapılandırma
 
 ### Genel Yapılandırma
 ```bash
@@ -203,17 +205,17 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE Entegrasyonu
+## IDE Entegrasyonu
 
 ### Visual Studio Code
-Azure Developer CLI uzantısını yükleyin:
+Azure Developer CLI uzantısını kurun:
 1. VS Code'u açın
-2. Uzantılar bölümüne gidin (Ctrl+Shift+X)
+2. Uzantılar sekmesine gidin (Ctrl+Shift+X)
 3. "Azure Developer CLI" arayın
 4. Uzantıyı yükleyin
 
 Özellikler:
-- azure.yaml için IntelliSense
+- `azure.yaml` için IntelliSense
 - Entegre terminal komutları
 - Şablon tarama
 - Dağıtım izleme
@@ -336,13 +338,11 @@ Sorunlarla karşılaşırsanız:
 
 ---
 
-**Navigasyon**
-- **Önceki Ders**: [AZD Temelleri](azd-basics.md)
-- **Sonraki Ders**: [Yapılandırma](configuration.md)
+**Önceki:** [Ana Dokümantasyon](../../README.md) | **Sonraki:** [AZD Temelleri](azd-basics.md)
 
 **Kurulum Tamamlandı!** [İlk Projeniz](first-project.md) ile azd kullanarak geliştirmeye başlayın.
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlama durumunda sorumluluk kabul edilmez.

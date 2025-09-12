@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:09:39+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T19:09:38+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "it"
 }
 -->
 # Il tuo primo progetto - Tutorial pratico
+
+**Precedente:** [Configurazione](configuration.md) | **Successivo:** [Integrazione con Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduzione
 
@@ -26,7 +28,7 @@ Completando questo tutorial, sarai in grado di:
 ## Risultati di apprendimento
 
 Al termine, sarai in grado di:
-- Inizializzare e configurare progetti azd dai template in modo autonomo
+- Inizializzare e configurare autonomamente progetti azd dai template
 - Navigare e modificare efficacemente le strutture dei progetti azd
 - Distribuire applicazioni full-stack su Azure con comandi singoli
 - Risolvere problemi comuni di distribuzione e autenticazione
@@ -137,7 +139,7 @@ head -30 infra/main.bicep
 
 ## Passo 3: Personalizza il tuo progetto (opzionale)
 
-Prima della distribuzione, puoi personalizzare l'applicazione:
+Prima di distribuire, puoi personalizzare l'applicazione:
 
 ### Modifica il frontend
 ```bash
@@ -292,13 +294,13 @@ azd down --force --purge
 
 ## Cosa hai imparato
 
-Congratulazioni! Hai completato con successo:
-- L'inizializzazione di un progetto azd da un template
-- L'esplorazione della struttura del progetto e dei file chiave
-- La distribuzione di un'applicazione full-stack su Azure
-- L'apporto di modifiche al codice e la ridistribuzione
-- La gestione di ambienti multipli
-- La pulizia delle risorse
+Congratulazioni! Hai:
+- Inizializzato un progetto azd da un template
+- Esplorato la struttura del progetto e i file chiave
+- Distribuito un'applicazione full-stack su Azure
+- Apportato modifiche al codice e ridistribuito
+- Gestito ambienti multipli
+- Pulito le risorse
 
 ## Risoluzione dei problemi comuni
 
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigazione**
-- **Lezione precedente**: [Configurazione](configuration.md)
-- **Lezione successiva**: [Guida alla distribuzione](../deployment/deployment-guide.md)
+**Precedente:** [Configurazione](configuration.md) | **Successivo:** [Integrazione con Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+- **Prossima lezione**: [Guida alla distribuzione](../deployment/deployment-guide.md)
 
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un esperto umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

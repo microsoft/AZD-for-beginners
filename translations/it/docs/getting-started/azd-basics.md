@@ -1,26 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:10:35+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T19:10:40+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "it"
 }
 -->
 # AZD Fondamenti - Comprendere Azure Developer CLI
 
+**Precedente:** [Installazione e Configurazione](installation.md) | **Successivo:** [Configurazione](configuration.md)
+
 ## Introduzione
 
-Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento da riga di comando potente che accelera il tuo percorso dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e capirai come azd semplifica il deployment di applicazioni cloud-native.
+Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento da riga di comando potente che accelera il passaggio dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e come azd semplifica il deployment di applicazioni cloud-native.
 
 ## Obiettivi di Apprendimento
 
 Alla fine di questa lezione, sarai in grado di:
 - Comprendere cos'è Azure Developer CLI e il suo scopo principale
-- Imparare i concetti fondamentali di template, ambienti e servizi
+- Apprendere i concetti fondamentali di template, ambienti e servizi
 - Esplorare le funzionalità principali, tra cui lo sviluppo basato su template e l'Infrastructure as Code
 - Comprendere la struttura e il flusso di lavoro di un progetto azd
-- Essere pronto a installare e configurare azd per il tuo ambiente di sviluppo
+- Essere pronto per installare e configurare azd nel tuo ambiente di sviluppo
 
 ## Risultati di Apprendimento
 
@@ -33,7 +35,7 @@ Dopo aver completato questa lezione, sarai in grado di:
 
 ## Cos'è Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) è uno strumento da riga di comando progettato per accelerare il tuo percorso dallo sviluppo locale al deployment su Azure. Semplifica il processo di creazione, deployment e gestione di applicazioni cloud-native su Azure.
+Azure Developer CLI (azd) è uno strumento da riga di comando progettato per accelerare il passaggio dallo sviluppo locale al deployment su Azure. Semplifica il processo di creazione, deployment e gestione di applicazioni cloud-native su Azure.
 
 ## Concetti Fondamentali
 
@@ -41,7 +43,7 @@ Azure Developer CLI (azd) è uno strumento da riga di comando progettato per acc
 I template sono la base di azd. Contengono:
 - **Codice applicativo** - Il tuo codice sorgente e le dipendenze
 - **Definizioni dell'infrastruttura** - Risorse Azure definite in Bicep o Terraform
-- **File di configurazione** - Impostazioni e variabili d'ambiente
+- **File di configurazione** - Impostazioni e variabili di ambiente
 - **Script di deployment** - Flussi di lavoro automatizzati per il deployment
 
 ### Ambienti
@@ -56,7 +58,7 @@ Ogni ambiente mantiene il proprio:
 - Stato di deployment
 
 ### Servizi
-I servizi sono i blocchi costitutivi della tua applicazione:
+I servizi sono i componenti fondamentali della tua applicazione:
 - **Frontend** - Applicazioni web, SPAs
 - **Backend** - API, microservizi
 - **Database** - Soluzioni di archiviazione dati
@@ -143,7 +145,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Configurazione specifica dell'ambiente:
+Configurazione specifica per l'ambiente:
 ```json
 {
   "version": 1,
@@ -189,7 +191,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Comprendere `azd down --force --purge`
-Il comando `azd down --force --purge` è un modo potente per smantellare completamente il tuo ambiente azd e tutte le risorse associate. Ecco una panoramica di cosa fa ogni flag:
+Il comando `azd down --force --purge` è un modo potente per smantellare completamente il tuo ambiente azd e tutte le risorse associate. Ecco una panoramica di cosa fanno i flag:
 ```
 --force
 ```
@@ -206,7 +208,7 @@ Cartella locale `.azure`
 Informazioni di deployment memorizzate nella cache
 Previene che azd "ricordi" deployment precedenti, che possono causare problemi come gruppi di risorse non corrispondenti o riferimenti obsoleti al registro.
 
-### Perché usarli entrambi?
+### Perché usare entrambi?
 Quando incontri problemi con `azd up` a causa di stato residuo o deployment parziali, questa combinazione garantisce una **pulizia completa**.
 
 È particolarmente utile dopo eliminazioni manuali di risorse nel portale Azure o quando si cambiano template, ambienti o convenzioni di denominazione dei gruppi di risorse.
@@ -272,9 +274,9 @@ azd init --template template1
 - Usa pipeline CI/CD per i deployment in produzione
 
 ### 4. Gestione della Configurazione
-- Usa variabili d'ambiente per dati sensibili
+- Usa variabili di ambiente per dati sensibili
 - Mantieni la configurazione sotto controllo di versione
-- Documenta le impostazioni specifiche dell'ambiente
+- Documenta le impostazioni specifiche per l'ambiente
 
 ## Progressione di Apprendimento
 
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**Navigazione**
-- **Lezione Precedente**: [README](../../README.md)
+**Precedente:** [Installazione e Configurazione](installation.md) | **Successivo:** [Configurazione](configuration.md)
 - **Prossima Lezione**: [Installazione e Configurazione](installation.md)
 
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un esperto umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

@@ -1,24 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T12:55:32+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T18:45:07+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "mo"
 }
 -->
 # 配置指南
 
+**上一章:** [AZD 基礎知識](azd-basics.md) | **下一章:** [第一個專案](first-project.md)
+
 ## 簡介
 
-本指南全面涵蓋如何配置 Azure Developer CLI，以實現最佳的開發和部署工作流程。您將學習配置層次結構、環境管理、身份驗證方法以及高級配置模式，從而實現高效且安全的 Azure 部署。
+本指南全面涵蓋如何配置 Azure Developer CLI，以實現最佳的開發和部署工作流程。您將學習配置層級、環境管理、身份驗證方法，以及高級配置模式，這些都能幫助您高效且安全地進行 Azure 部署。
 
 ## 學習目標
 
 完成本課程後，您將能夠：
-- 掌握 azd 的配置層次結構，了解設置的優先級
-- 有效配置全局和項目特定的設置
-- 管理具有不同配置的多個環境
+- 掌握 azd 的配置層級，了解設定的優先順序
+- 有效配置全域和專案特定的設定
+- 管理多個具有不同配置的環境
 - 實施安全的身份驗證和授權模式
 - 理解複雜場景中的高級配置模式
 
@@ -26,25 +28,25 @@ CO_OP_TRANSLATOR_METADATA:
 
 完成本課程後，您將能夠：
 - 配置 azd 以實現最佳開發工作流程
-- 設置和管理多個部署環境
+- 設置並管理多個部署環境
 - 實施安全的配置管理實踐
 - 排除與配置相關的問題
-- 根據特定組織需求自定義 azd 行為
+- 根據特定組織需求自訂 azd 行為
 
 本指南全面涵蓋如何配置 Azure Developer CLI，以實現最佳的開發和部署工作流程。
 
-## 配置層次結構
+## 配置層級
 
 azd 使用分層的配置系統：
-1. **命令行標誌**（最高優先級）
+1. **命令列標誌**（最高優先級）
 2. **環境變數**
-3. **本地項目配置**（`.azd/config.json`）
-4. **全局用戶配置**（`~/.azd/config.json`）
-5. **默認值**（最低優先級）
+3. **本地專案配置** (`.azd/config.json`)
+4. **全域使用者配置** (`~/.azd/config.json`)
+5. **預設值**（最低優先級）
 
-## 全局配置
+## 全域配置
 
-### 設置全局默認值
+### 設置全域預設值
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +64,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### 常見的全局設置
+### 常見的全域設定
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -78,10 +80,10 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ 項目配置
+## 🏗️ 專案配置
 
 ### azure.yaml 結構
-`azure.yaml` 文件是 azd 項目的核心：
+`azure.yaml` 文件是 azd 專案的核心：
 
 ```yaml
 # Minimum configuration
@@ -178,7 +180,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### 特定語言設置
+#### 語言特定設定
 ```yaml
 services:
   node-app:
@@ -204,7 +206,7 @@ services:
 
 ## 🌟 環境管理
 
-### 創建環境
+### 建立環境
 ```bash
 # Create a new environment
 azd env new development
@@ -217,7 +219,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### 環境配置
-每個環境都有自己的配置文件，位於 `.azure/<env-name>/config.json`：
+每個環境都有自己的配置，存放於 `.azure/<env-name>/config.json`：
 
 ```json
 {
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### 環境模板
-創建 `.azure/env.template` 以實現一致的環境設置：
+建立 `.azure/env.template` 以保持一致的環境設置：
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -272,7 +274,7 @@ LOG_LEVEL=info
 
 ## 🔐 身份驗證配置
 
-### Azure CLI 集成
+### Azure CLI 整合
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -305,10 +307,10 @@ azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ 基礎設施配置
+## 🏗️ 基礎架構配置
 
 ### Bicep 參數
-在 `infra/main.parameters.json` 中配置基礎設施參數：
+在 `infra/main.parameters.json` 中配置基礎架構參數：
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -331,7 +333,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### Terraform 配置
-對於 Terraform 項目，在 `infra/terraform.tfvars` 中進行配置：
+對於 Terraform 專案，在 `infra/terraform.tfvars` 中進行配置：
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -378,11 +380,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-示例 `Dockerfile`：https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+範例 `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 高級配置
 
-### 自定義資源命名
+### 自訂資源命名
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -390,7 +392,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### 網絡配置
+### 網路配置
 ```yaml
 # In azure.yaml
 infra:
@@ -457,7 +459,7 @@ azd provision --dry-run
 ```
 
 ### 配置腳本
-在 `scripts/` 中創建驗證腳本：
+在 `scripts/` 中建立驗證腳本：
 
 ```bash
 #!/bin/bash
@@ -517,7 +519,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. 配置文檔
+### 4. 配置文件文檔
 在 `CONFIG.md` 中記錄您的配置：
 ```markdown
 # Configuration Guide
@@ -535,9 +537,9 @@ database:
 
 ## 下一步
 
-- [您的第一個項目](first-project.md) - 實際應用配置
+- [您的第一個專案](first-project.md) - 實際應用配置
 - [部署指南](../deployment/deployment-guide.md) - 使用配置進行部署
-- [資源預配](../deployment/provisioning.md) - 生產就緒配置
+- [資源佈署](../deployment/provisioning.md) - 適用於生產環境的配置
 
 ## 參考資料
 
@@ -547,11 +549,10 @@ database:
 
 ---
 
-**導航**
-- **上一課**：[安裝與設置](installation.md)
-- **下一課**：[您的第一個項目](first-project.md)
+**上一章:** [AZD 基礎知識](azd-basics.md) | **下一章:** [第一個專案](first-project.md)
+- **下一課程**: [您的第一個專案](first-project.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
