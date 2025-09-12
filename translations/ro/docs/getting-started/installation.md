@@ -1,28 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-10T06:03:52+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T22:28:52+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "ro"
 }
 -->
-# Ghid de instalare și configurare
+# Ghid de Instalare și Configurare
+
+**Anterior:** [Documentația Principală](../../README.md) | **Următor:** [Bazele AZD](azd-basics.md)
 
 ## Introducere
 
-Acest ghid cuprinzător te va ghida prin procesul de instalare și configurare a Azure Developer CLI (azd) pe sistemul tău. Vei învăța metode multiple de instalare pentru diferite sisteme de operare, configurarea autentificării și setările inițiale pentru a pregăti mediul de dezvoltare pentru implementările Azure.
+Acest ghid cuprinzător te va ghida prin procesul de instalare și configurare a Azure Developer CLI (azd) pe sistemul tău. Vei învăța diverse metode de instalare pentru diferite sisteme de operare, configurarea autentificării și setările inițiale pentru a pregăti mediul de dezvoltare pentru implementările Azure.
 
-## Obiective de învățare
+## Obiective de Învățare
 
 La finalul acestei lecții, vei:
 - Instala cu succes Azure Developer CLI pe sistemul tău de operare
-- Configura autentificarea cu Azure folosind metode multiple
+- Configura autentificarea cu Azure folosind mai multe metode
 - Configura mediul de dezvoltare cu cerințele necesare
 - Înțelege diferitele opțiuni de instalare și când să le folosești
 - Depana problemele comune de instalare și configurare
 
-## Rezultate de învățare
+## Rezultate de Învățare
 
 După finalizarea acestei lecții, vei putea:
 - Instala azd folosind metoda potrivită pentru platforma ta
@@ -33,7 +35,7 @@ După finalizarea acestei lecții, vei putea:
 
 Acest ghid te va ajuta să instalezi și să configurezi Azure Developer CLI pe sistemul tău, indiferent de sistemul de operare sau mediul de dezvoltare.
 
-## Cerințe preliminare
+## Cerințe Prealabile
 
 Înainte de a instala azd, asigură-te că ai:
 - **Abonament Azure** - [Creează un cont gratuit](https://azure.microsoft.com/free/)
@@ -41,7 +43,7 @@ Acest ghid te va ajuta să instalezi și să configurezi Azure Developer CLI pe 
 - **Git** - Pentru clonarea șabloanelor și controlul versiunilor
 - **Docker** (opțional) - Pentru aplicații containerizate
 
-## Metode de instalare
+## Metode de Instalare
 
 ### Windows
 
@@ -61,7 +63,7 @@ winget install Microsoft.Azd
 choco install azd
 ```
 
-#### Opțiunea 4: Instalare manuală
+#### Opțiunea 4: Instalare Manuală
 1. Descarcă cea mai recentă versiune de pe [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Extrage în `C:\Program Files\azd\`
 3. Adaugă în variabila de mediu PATH
@@ -74,12 +76,12 @@ brew tap azure/azd
 brew install azd
 ```
 
-#### Opțiunea 2: Script de instalare
+#### Opțiunea 2: Script de Instalare
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Opțiunea 3: Instalare manuală
+#### Opțiunea 3: Instalare Manuală
 ```bash
 # Download and install
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
@@ -87,12 +89,12 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### Opțiunea 1: Script de instalare (Recomandată)
+#### Opțiunea 1: Script de Instalare (Recomandată)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Opțiunea 2: Manageri de pachete
+#### Opțiunea 2: Manageri de Pachete
 
 **Ubuntu/Debian:**
 ```bash
@@ -126,7 +128,7 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verificarea instalării
+## ✅ Verificarea Instalării
 
 După instalare, verifică dacă azd funcționează corect:
 
@@ -146,9 +148,9 @@ Rezultatul așteptat:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Configurarea autentificării
+## Configurarea Autentificării
 
-### Autentificare Azure CLI (Recomandată)
+### Autentificare cu Azure CLI (Recomandată)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
@@ -162,7 +164,7 @@ az login
 az account show
 ```
 
-### Autentificare prin cod de dispozitiv
+### Autentificare prin Cod Dispozitiv
 Dacă folosești un sistem fără interfață grafică sau întâmpini probleme cu browserul:
 ```bash
 az login --use-device-code
@@ -177,9 +179,9 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configurare
+## Configurare
 
-### Configurare globală
+### Configurare Globală
 ```bash
 # Set default subscription
 azd config set defaults.subscription <subscription-id>
@@ -191,7 +193,7 @@ azd config set defaults.location eastus2
 azd config list
 ```
 
-### Variabile de mediu
+### Variabile de Mediu
 Adaugă în profilul shell-ului tău (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integrare IDE
+## Integrare IDE
 
 ### Visual Studio Code
 Instalează extensia Azure Developer CLI:
@@ -233,14 +235,14 @@ Creează un fișier `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Instalează pluginul Azure
-2. Configurează credențialele Azure
+2. Configurează acreditivele Azure
 3. Folosește terminalul integrat pentru comenzile azd
 
-## 🐛 Depanarea instalării
+## 🐛 Depanarea Instalării
 
-### Probleme comune
+### Probleme Comune
 
-#### Permisiune refuzată (Windows)
+#### Permisiune Refuzată (Windows)
 ```powershell
 # Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -260,7 +262,7 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Probleme de rețea/proxy
+#### Probleme de Rețea/Proxy
 ```bash
 # Configure proxy
 azd config set http.proxy http://proxy:8080
@@ -270,7 +272,7 @@ azd config set https.proxy https://proxy:8080
 azd config set http.insecure true
 ```
 
-#### Conflicte de versiune
+#### Conflicte de Versiune
 ```bash
 # Remove old installations
 # Windows: winget uninstall Microsoft.Azd
@@ -281,7 +283,7 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### Obținerea mai multor informații
+### Obținerea Mai Multor Ajutoare
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -296,13 +298,13 @@ azd info
 
 ## Actualizarea azd
 
-### Actualizări automate
+### Actualizări Automate
 azd te va notifica când sunt disponibile actualizări:
 ```bash
 azd version --check-for-updates
 ```
 
-### Actualizări manuale
+### Actualizări Manuale
 
 **Windows (winget):**
 ```cmd
@@ -319,9 +321,9 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## Următorii pași
+## Următorii Pași
 
-1. **Completează autentificarea**: Asigură-te că poți accesa abonamentul Azure
+1. **Finalizează autentificarea**: Asigură-te că poți accesa abonamentul Azure
 2. **Încearcă prima implementare**: Urmează [Ghidul Primului Proiect](first-project.md)
 3. **Explorează șabloanele**: Răsfoiește șabloanele disponibile cu `azd template list`
 4. **Configurează IDE-ul tău**: Setează mediul de dezvoltare
@@ -329,20 +331,18 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Suport
 
 Dacă întâmpini probleme:
-- [Documentație oficială](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Raportează probleme](https://github.com/Azure/azure-dev/issues)
-- [Discuții comunitare](https://github.com/Azure/azure-dev/discussions)
+- [Documentația Oficială](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Raportează Probleme](https://github.com/Azure/azure-dev/issues)
+- [Discuții Comunitare](https://github.com/Azure/azure-dev/discussions)
 - [Suport Azure](https://azure.microsoft.com/support/)
 
 ---
 
-**Navigare**
-- **Lecția anterioară**: [Bazele AZD](azd-basics.md)
-- **Lecția următoare**: [Configurare](configuration.md)
+**Anterior:** [Documentația Principală](../../README.md) | **Următor:** [Bazele AZD](azd-basics.md)
 
-**Instalare completă!** Continuă cu [Primul tău proiect](first-project.md) pentru a începe să construiești cu azd.
+**Instalare Finalizată!** Continuă cu [Primul Tău Proiect](first-project.md) pentru a începe să construiești cu azd.
 
 ---
 
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

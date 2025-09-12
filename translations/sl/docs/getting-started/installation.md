@@ -1,41 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-10T06:05:19+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T22:44:55+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "sl"
 }
 -->
-# Vodnik za namestitev in nastavitev
+# Navodila za namestitev in nastavitev
+
+**Prejšnje:** [Glavna dokumentacija](../../README.md) | **Naslednje:** [Osnove AZD](azd-basics.md)
 
 ## Uvod
 
-Ta obsežen vodnik vas bo korak za korakom vodil skozi postopek namestitve in konfiguracije Azure Developer CLI (azd) na vašem sistemu. Spoznali boste različne metode namestitve za različne operacijske sisteme, nastavitev avtentikacije ter začetno konfiguracijo za pripravo vašega razvojnega okolja za uvajanje v Azure.
+Ta obsežen vodič vas bo popeljal skozi postopek namestitve in konfiguracije Azure Developer CLI (azd) na vašem sistemu. Spoznali boste različne metode namestitve za različne operacijske sisteme, nastavitev avtentikacije in začetno konfiguracijo, da pripravite svoje razvojno okolje za uvajanje v Azure.
 
 ## Cilji učenja
 
 Do konca te lekcije boste:
 - Uspešno namestili Azure Developer CLI na vaš operacijski sistem
-- Konfigurirali avtentikacijo z Azure z uporabo različnih metod
-- Nastavili vaše razvojno okolje z vsemi potrebnimi predpogoji
-- Razumeli različne možnosti namestitve in kdaj uporabiti vsako
+- Konfigurirali avtentikacijo z Azure z več metodami
+- Nastavili svoje razvojno okolje z vsemi potrebnimi predpogoji
+- Razumeli različne možnosti namestitve in kdaj uporabiti posamezno
 - Rešili pogoste težave pri namestitvi in nastavitvi
 
 ## Rezultati učenja
 
 Po zaključku te lekcije boste sposobni:
 - Namestiti azd z ustrezno metodo za vašo platformo
-- Avtenticirati z Azure z uporabo ukaza azd auth login
+- Avtenticirati z Azure z ukazom `azd auth login`
 - Preveriti namestitev in preizkusiti osnovne ukaze azd
-- Konfigurirati vaše razvojno okolje za optimalno uporabo azd
-- Samostojno rešiti pogoste težave pri namestitvi
+- Konfigurirati svoje razvojno okolje za optimalno uporabo azd
+- Samostojno reševati pogoste težave pri namestitvi
 
-Ta vodnik vam bo pomagal namestiti in konfigurirati Azure Developer CLI na vašem sistemu, ne glede na operacijski sistem ali razvojno okolje.
+Ta vodič vam bo pomagal namestiti in konfigurirati Azure Developer CLI na vašem sistemu, ne glede na operacijski sistem ali razvojno okolje.
 
 ## Predpogoji
 
-Pred namestitvijo azd se prepričajte, da imate:
+Pred namestitvijo azd poskrbite, da imate:
 - **Azure naročnino** - [Ustvarite brezplačen račun](https://azure.microsoft.com/free/)
 - **Azure CLI** - Za avtentikacijo in upravljanje virov
 - **Git** - Za kloniranje predlog in nadzor različic
@@ -146,7 +148,7 @@ Pričakovani izhod:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Nastavitev avtentikacije
+## Nastavitev avtentikacije
 
 ### Avtentikacija prek Azure CLI (Priporočeno)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfiguracija
+## Konfiguracija
 
 ### Globalna konfiguracija
 ```bash
@@ -192,7 +194,7 @@ azd config list
 ```
 
 ### Okoljske spremenljivke
-Dodajte v profil vaše lupine (`.bashrc`, `.zshrc`, `.profile`):
+Dodajte v profil lupine (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integracija z IDE
+## Integracija z IDE
 
 ### Visual Studio Code
 Namestite razširitev Azure Developer CLI:
@@ -232,7 +234,7 @@ Ustvarite `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Namestite Azure vtičnik
+1. Namestite vtičnik Azure
 2. Konfigurirajte Azure poverilnice
 3. Uporabite integrirani terminal za ukaze azd
 
@@ -281,7 +283,7 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### Dodatna pomoč
+### Pridobivanje dodatne pomoči
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -321,10 +323,10 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Naslednji koraki
 
-1. **Dokončajte avtentikacijo**: Prepričajte se, da imate dostop do vaše Azure naročnine
-2. **Preizkusite prvo uvajanje**: Sledite [Vodniku za prvi projekt](first-project.md)
+1. **Dokončajte avtentikacijo**: Poskrbite, da imate dostop do svoje Azure naročnine
+2. **Preizkusite prvo uvajanje**: Sledite [Vodiču za prvi projekt](first-project.md)
 3. **Raziskujte predloge**: Brskajte po razpoložljivih predlogah z `azd template list`
-4. **Konfigurirajte vaš IDE**: Nastavite vaše razvojno okolje
+4. **Konfigurirajte svoj IDE**: Nastavite svoje razvojno okolje
 
 ## Podpora
 
@@ -336,13 +338,11 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ---
 
-**Navigacija**
-- **Prejšnja lekcija**: [Osnove AZD](azd-basics.md)
-- **Naslednja lekcija**: [Konfiguracija](configuration.md)
+**Prejšnje:** [Glavna dokumentacija](../../README.md) | **Naslednje:** [Osnove AZD](azd-basics.md)
 
 **Namestitev zaključena!** Nadaljujte na [Vaš prvi projekt](first-project.md) in začnite graditi z azd.
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da se zavedate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

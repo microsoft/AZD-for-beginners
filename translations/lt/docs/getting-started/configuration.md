@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:46:50+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T22:56:59+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "lt"
 }
 -->
 # Konfigūracijos vadovas
 
+**Ankstesnis:** [AZD Pagrindai](azd-basics.md) | **Kitas:** [Pirmasis Projektas](first-project.md)
+
 ## Įvadas
 
-Šis išsamus vadovas apima visus Azure Developer CLI konfigūravimo aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas. Sužinosite apie konfigūracijos hierarchiją, aplinkos valdymą, autentifikavimo metodus ir pažangius konfigūracijos modelius, leidžiančius efektyviai ir saugiai diegti Azure.
+Šis išsamus vadovas apima visus Azure Developer CLI konfigūracijos aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas. Sužinosite apie konfigūracijos hierarchiją, aplinkos valdymą, autentifikavimo metodus ir pažangius konfigūracijos modelius, kurie leidžia efektyviai ir saugiai diegti Azure.
 
 ## Mokymosi tikslai
 
@@ -27,11 +29,11 @@ CO_OP_TRANSLATOR_METADATA:
 Baigę šią pamoką, galėsite:
 - Konfigūruoti azd optimalioms kūrimo darbo eigoms
 - Nustatyti ir valdyti kelias diegimo aplinkas
-- Įgyvendinti saugias konfigūracijos valdymo praktikas
+- Įgyvendinti saugius konfigūracijos valdymo metodus
 - Spręsti su konfigūracija susijusias problemas
 - Pritaikyti azd elgseną specifiniams organizacijos poreikiams
 
-Šis išsamus vadovas apima visus Azure Developer CLI konfigūravimo aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas.
+Šis išsamus vadovas apima visus Azure Developer CLI konfigūracijos aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas.
 
 ## Konfigūracijos hierarchija
 
@@ -39,12 +41,12 @@ azd naudoja hierarchinę konfigūracijos sistemą:
 1. **Komandinės eilutės vėliavėlės** (aukščiausias prioritetas)
 2. **Aplinkos kintamieji**
 3. **Vietinė projekto konfigūracija** (`.azd/config.json`)
-4. **Globali naudotojo konfigūracija** (`~/.azd/config.json`)
+4. **Globali vartotojo konfigūracija** (`~/.azd/config.json`)
 5. **Numatytosios reikšmės** (žemiausias prioritetas)
 
 ## Globali konfigūracija
 
-### Numatytųjų globalių nustatymų nustatymas
+### Globalių numatytųjų reikšmių nustatymas
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +64,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Dažni globalūs nustatymai
+### Dažniausiai naudojami globalūs nustatymai
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -159,7 +161,7 @@ pipeline:
 
 ### Paslaugų konfigūracijos parinktys
 
-#### Pagrindinių tipų pasirinkimas
+#### Host tipai
 ```yaml
 services:
   web-static:
@@ -284,7 +286,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Paslaugų pagrindinio autentifikavimas
+### Paslaugų principo autentifikavimas
 CI/CD procesams:
 ```bash
 # Set environment variables
@@ -297,7 +299,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Valdomas identitetas
+### Valdoma tapatybė
 Azure talpinamoms aplinkoms:
 ```bash
 # Enable managed identity authentication
@@ -341,7 +343,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Diegimo konfigūracija
 
-### Kūrimo konfigūracija
+### Build konfigūracija
 ```yaml
 # In azure.yaml
 services:
@@ -382,7 +384,7 @@ Pavyzdinis `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/
 
 ## 🔧 Pažangi konfigūracija
 
-### Individualus resursų pavadinimas
+### Tinkintas resursų pavadinimas
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -433,7 +435,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Gamybinė aplinka
+### Produkcijos aplinka
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -442,9 +444,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Konfigūracijos tikrinimas
+## 🔍 Konfigūracijos validacija
 
-### Konfigūracijos tikrinimas
+### Konfigūracijos validavimas
 ```bash
 # Check configuration syntax
 azd config validate
@@ -456,8 +458,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Konfigūracijos scenarijai
-Sukurkite tikrinimo scenarijus `scripts/` kataloge:
+### Konfigūracijos skriptai
+Sukurkite validavimo skriptus `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -509,7 +511,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versijų kontrolės svarstymai
+### 3. Versijų kontrolės aspektai
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -518,7 +520,7 @@ database:
 ```
 
 ### 4. Konfigūracijos dokumentacija
-Dokumentuokite savo konfigūraciją `CONFIG.md` faile:
+Dokumentuokite savo konfigūraciją `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -537,21 +539,20 @@ Dokumentuokite savo konfigūraciją `CONFIG.md` faile:
 
 - [Jūsų pirmasis projektas](first-project.md) - Praktiškai pritaikykite konfigūraciją
 - [Diegimo vadovas](../deployment/deployment-guide.md) - Naudokite konfigūraciją diegimui
-- [Resursų paruošimas](../deployment/provisioning.md) - Gamybai paruoštos konfigūracijos
+- [Resursų paruošimas](../deployment/provisioning.md) - Produkcijai paruoštos konfigūracijos
 
 ## Nuorodos
 
-- [azd konfigūracijos nuoroda](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [azd Konfigūracijos nuoroda](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Aplinkos kintamieji](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Navigacija**
-- **Ankstesnė pamoka**: [Diegimas ir nustatymas](installation.md)
+**Ankstesnis:** [AZD Pagrindai](azd-basics.md) | **Kitas:** [Pirmasis Projektas](first-project.md)
 - **Kita pamoka**: [Jūsų pirmasis projektas](first-project.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama naudotis profesionalių vertėjų paslaugomis. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

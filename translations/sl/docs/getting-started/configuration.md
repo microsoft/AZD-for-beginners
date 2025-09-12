@@ -1,37 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:42:44+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T22:45:13+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sl"
 }
 -->
 # Vodnik za konfiguracijo
 
+**Prejšnje:** [Osnove AZD](azd-basics.md) | **Naslednje:** [Prvi projekt](first-project.md)
+
 ## Uvod
 
-Ta obsežen vodnik zajema vse vidike konfiguracije Azure Developer CLI za optimalne razvojne in uvajalne delovne tokove. Spoznali boste hierarhijo konfiguracije, upravljanje okolij, metode overjanja in napredne vzorce konfiguracije, ki omogočajo učinkovite in varne uvajanja v Azure.
+Ta obsežen vodnik zajema vse vidike konfiguracije Azure Developer CLI za optimalne delovne procese razvoja in uvajanja. Naučili se boste o hierarhiji konfiguracije, upravljanju okolij, metodah avtentikacije ter naprednih vzorcih konfiguracije, ki omogočajo učinkovite in varne uvajanja v Azure.
 
 ## Cilji učenja
 
 Do konca te lekcije boste:
-- Obvladali hierarhijo konfiguracije azd in razumeli, kako so nastavitve prioritizirane
+- Obvladali hierarhijo konfiguracije azd in razumeli, kako se nastavitve prioritizirajo
 - Učinkovito konfigurirali globalne in projektno specifične nastavitve
 - Upravljali več okolij z različnimi konfiguracijami
-- Uvedli varne vzorce overjanja in avtorizacije
+- Uvedli varne vzorce avtentikacije in avtorizacije
 - Razumeli napredne vzorce konfiguracije za kompleksne scenarije
 
 ## Rezultati učenja
 
 Po zaključku te lekcije boste sposobni:
-- Konfigurirati azd za optimalne razvojne delovne tokove
-- Nastaviti in upravljati več uvajalnih okolij
+- Konfigurirati azd za optimalne delovne procese razvoja
+- Nastaviti in upravljati več okolij za uvajanje
 - Uvesti varne prakse upravljanja konfiguracije
 - Odpravljati težave, povezane s konfiguracijo
-- Prilagoditi vedenje azd za specifične zahteve organizacije
+- Prilagoditi delovanje azd za specifične zahteve organizacije
 
-Ta obsežen vodnik zajema vse vidike konfiguracije Azure Developer CLI za optimalne razvojne in uvajalne delovne tokove.
+Ta obsežen vodnik zajema vse vidike konfiguracije Azure Developer CLI za optimalne delovne procese razvoja in uvajanja.
 
 ## Hierarhija konfiguracije
 
@@ -178,7 +180,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Nastavitve specifične za programski jezik
+#### Nastavitve specifične za jezik
 ```yaml
 services:
   node-app:
@@ -216,7 +218,7 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Konfiguracija okolij
+### Konfiguracija okolja
 Vsako okolje ima svojo konfiguracijo v `.azure/<env-name>/config.json`:
 
 ```json
@@ -253,8 +255,8 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-### Predloge okolij
-Ustvarite `.azure/env.template` za dosledno nastavitev okolij:
+### Predloge okolja
+Ustvarite `.azure/env.template` za dosledno nastavitev okolja:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -270,7 +272,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Konfiguracija overjanja
+## 🔐 Konfiguracija avtentikacije
 
 ### Integracija z Azure CLI
 ```bash
@@ -284,8 +286,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Overjanje s servisnim glavnim imenom
-Za CI/CD tokove:
+### Avtentikacija prek Service Principal
+Za CI/CD procese:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -401,7 +403,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Konfiguracija nadzora
+### Konfiguracija spremljanja
 ```yaml
 # In azure.yaml
 monitoring:
@@ -424,7 +426,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging okolje
+### Testno okolje
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -442,9 +444,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Preverjanje konfiguracije
+## 🔍 Validacija konfiguracije
 
-### Preverjanje konfiguracije
+### Validacija konfiguracije
 ```bash
 # Check configuration syntax
 azd config validate
@@ -456,8 +458,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Skripti za preverjanje konfiguracije
-Ustvarite skripte za preverjanje v `scripts/`:
+### Skripti za konfiguracijo
+Ustvarite validacijske skripte v `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -509,7 +511,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Razmislite o različnem nadzoru
+### 3. Razmislite o različicah konfiguracije
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -537,7 +539,7 @@ Dokumentirajte svojo konfiguracijo v `CONFIG.md`:
 
 - [Vaš prvi projekt](first-project.md) - Uporaba konfiguracije v praksi
 - [Vodnik za uvajanje](../deployment/deployment-guide.md) - Uporaba konfiguracije za uvajanje
-- [Zagotavljanje virov](../deployment/provisioning.md) - Konfiguracije za proizvodno okolje
+- [Priprava virov](../deployment/provisioning.md) - Konfiguracije, pripravljene za proizvodnjo
 
 ## Reference
 
@@ -547,11 +549,10 @@ Dokumentirajte svojo konfiguracijo v `CONFIG.md`:
 
 ---
 
-**Navigacija**
-- **Prejšnja lekcija**: [Namestitev in nastavitev](installation.md)
+**Prejšnje:** [Osnove AZD](azd-basics.md) | **Naslednje:** [Prvi projekt](first-project.md)
 - **Naslednja lekcija**: [Vaš prvi projekt](first-project.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da se zavedate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovni prevod s strani človeka. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

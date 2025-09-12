@@ -1,31 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:43:05+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T22:45:29+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sl"
 }
 -->
 # Osnove AZD - Razumevanje Azure Developer CLI
 
+**Prejšnje:** [Namestitev in nastavitev](installation.md) | **Naslednje:** [Konfiguracija](configuration.md)
+
 ## Uvod
 
-Ta lekcija vas uvaja v Azure Developer CLI (azd), zmogljivo orodje ukazne vrstice, ki pospeši vašo pot od lokalnega razvoja do uvajanja v Azure. Spoznali boste temeljne koncepte, ključne funkcije in razumeli, kako azd poenostavi uvajanje aplikacij, zasnovanih za oblak.
+Ta lekcija vas uvaja v Azure Developer CLI (azd), zmogljivo orodje ukazne vrstice, ki pospeši prehod od lokalnega razvoja do uvajanja v Azure. Spoznali boste osnovne koncepte, ključne funkcije in razumeli, kako azd poenostavi uvajanje aplikacij, zasnovanih za oblak.
 
 ## Cilji učenja
 
 Do konca te lekcije boste:
 - Razumeli, kaj je Azure Developer CLI in njegov glavni namen
-- Spoznali temeljne koncepte predlog, okolij in storitev
+- Spoznali osnovne koncepte predlog, okolij in storitev
 - Raziskali ključne funkcije, vključno z razvojem na podlagi predlog in infrastrukturo kot kodo
-- Razumeli strukturo projekta azd in delovni tok
-- Pripravljeni na namestitev in konfiguracijo azd za vaše razvojno okolje
+- Razumeli strukturo projekta azd in potek dela
+- Pripravljeni na namestitev in konfiguracijo azd za vaš razvojni okolje
 
 ## Rezultati učenja
 
 Po zaključku te lekcije boste sposobni:
-- Pojasniti vlogo azd v sodobnih delovnih tokovih razvoja za oblak
+- Pojasniti vlogo azd v sodobnih delovnih procesih razvoja za oblak
 - Prepoznati komponente strukture projekta azd
 - Opisati, kako predloge, okolja in storitve delujejo skupaj
 - Razumeti prednosti infrastrukture kot kode z azd
@@ -33,25 +35,25 @@ Po zaključku te lekcije boste sposobni:
 
 ## Kaj je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je orodje ukazne vrstice, zasnovano za pospešitev vaše poti od lokalnega razvoja do uvajanja v Azure. Poenostavi proces gradnje, uvajanja in upravljanja aplikacij, zasnovanih za oblak, na Azure.
+Azure Developer CLI (azd) je orodje ukazne vrstice, zasnovano za pospešitev prehoda od lokalnega razvoja do uvajanja v Azure. Poenostavi proces gradnje, uvajanja in upravljanja aplikacij, zasnovanih za oblak, na Azure.
 
-## Temeljni koncepti
+## Osnovni koncepti
 
 ### Predloge
-Predloge so osnova azd. Vsebujejo:
+Predloge so temelj azd. Vsebujejo:
 - **Kodo aplikacije** - Vašo izvorno kodo in odvisnosti
-- **Definicije infrastrukture** - Azure vire, definirane v Bicep ali Terraform
+- **Definicije infrastrukture** - Azure viri, definirani v Bicep ali Terraform
 - **Konfiguracijske datoteke** - Nastavitve in okoljske spremenljivke
-- **Skripte za uvajanje** - Avtomatizirani delovni tokovi uvajanja
+- **Skripte za uvajanje** - Avtomatizirani poteki uvajanja
 
 ### Okolja
 Okolja predstavljajo različne cilje uvajanja:
-- **Razvojno** - Za testiranje in razvoj
+- **Razvoj** - Za testiranje in razvoj
 - **Staging** - Predprodukcijsko okolje
-- **Produkcijsko** - Živo produkcijsko okolje
+- **Produkcija** - Živo produkcijsko okolje
 
 Vsako okolje ima svoje:
-- Skupino virov Azure
+- Azure skupine virov
 - Konfiguracijske nastavitve
 - Stanje uvajanja
 
@@ -78,7 +80,7 @@ azd init --template <template-name>
 - **Terraform** - Orodje za infrastrukturo v več oblakih
 - **ARM predloge** - Predloge Azure Resource Manager
 
-### 3. Integrirani delovni tokovi
+### 3. Integrirani poteki dela
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
@@ -157,7 +159,7 @@ Konfiguracija, specifična za okolje:
 }
 ```
 
-## 🎪 Pogosti delovni tokovi
+## 🎪 Pogosti poteki dela
 
 ### Začetek novega projekta
 ```bash
@@ -195,7 +197,7 @@ Ukaz `azd down --force --purge` je zmogljiv način za popolno odstranitev vašeg
 ```
 - Preskoči potrditvene pozive.
 - Koristno za avtomatizacijo ali skriptiranje, kjer ročni vnos ni izvedljiv.
-- Zagotovi, da se odstranitev nadaljuje brez prekinitev, tudi če CLI zazna nedoslednosti.
+- Zagotovi, da se odstranitev nadaljuje brez prekinitve, tudi če CLI zazna neskladnosti.
 
 ```
 --purge
@@ -204,12 +206,12 @@ Izbriše **vse povezane metapodatke**, vključno z:
 Stanje okolja
 Lokalna mapa `.azure`
 Predpomnjene informacije o uvajanju
-Prepreči, da bi azd "zapomnil" prejšnja uvajanja, kar lahko povzroči težave, kot so neusklajene skupine virov ali zastarele reference registracije.
+Prepreči, da bi azd "zapomnil" prejšnja uvajanja, kar lahko povzroči težave, kot so neskladne skupine virov ali zastarele reference registracije.
 
 ### Zakaj uporabiti oboje?
 Ko naletite na težave z `azd up` zaradi preostalega stanja ali delnih uvajanj, ta kombinacija zagotovi **čisto stanje**.
 
-Še posebej uporabno po ročnih brisanjih virov v Azure portalu ali pri preklapljanju predlog, okolij ali konvencij poimenovanja skupin virov.
+To je še posebej koristno po ročnih brisanjih virov v Azure portalu ali pri preklapljanju predlog, okolij ali konvencij poimenovanja skupin virov.
 
 ### Upravljanje več okolij
 ```bash
@@ -225,7 +227,7 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Ukazi za navigacijo
+## 🧭 Navigacijski ukazi
 
 ### Odkritje
 ```bash
@@ -273,7 +275,7 @@ azd init --template template1
 
 ### 4. Upravljanje konfiguracije
 - Uporabljajte okoljske spremenljivke za občutljive podatke
-- Hranite konfiguracijo v nadzoru različic
+- Hranite konfiguracijo v sistemu za nadzor različic
 - Dokumentirajte nastavitve, specifične za okolje
 
 ## Napredovanje učenja
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**Navigacija**
-- **Prejšnja lekcija**: [README](../../README.md)
+**Prejšnje:** [Namestitev in nastavitev](installation.md) | **Naslednje:** [Konfiguracija](configuration.md)
 - **Naslednja lekcija**: [Namestitev in nastavitev](installation.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

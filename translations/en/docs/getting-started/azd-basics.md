@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T12:46:24+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T22:08:57+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "en"
 }
 -->
 # AZD Basics - Understanding Azure Developer CLI
 
+**Previous:** [Installation & Setup](installation.md) | **Next:** [Configuration](configuration.md)
+
 ## Introduction
 
-This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that streamlines the process from local development to Azure deployment. You'll learn the key concepts, main features, and how azd simplifies deploying cloud-native applications.
+This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that streamlines the process of moving from local development to Azure deployment. You'll learn the key concepts, main features, and how azd simplifies deploying cloud-native applications.
 
 ## Learning Goals
 
@@ -19,8 +21,8 @@ By the end of this lesson, you will:
 - Understand what Azure Developer CLI is and its main purpose
 - Learn the core concepts of templates, environments, and services
 - Explore key features like template-driven development and Infrastructure as Code
-- Understand the azd project structure and workflow
-- Be ready to install and configure azd for your development environment
+- Understand the structure and workflow of an azd project
+- Be ready to install and configure azd for your development setup
 
 ## Learning Outcomes
 
@@ -33,7 +35,7 @@ After completing this lesson, you will be able to:
 
 ## What is Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) is a command-line tool designed to simplify the process of building, deploying, and managing cloud-native applications on Azure, helping you move quickly from local development to deployment.
+Azure Developer CLI (azd) is a command-line tool designed to simplify the process of building, deploying, and managing cloud-native applications on Azure. It helps developers move quickly from local development to deployment in the cloud.
 
 ## Core Concepts
 
@@ -56,9 +58,9 @@ Each environment has its own:
 - Deployment state
 
 ### Services
-Services are the components of your application:
-- **Frontend** - Web applications, single-page apps
-- **Backend** - APIs, microservices
+Services are the individual components of your application:
+- **Frontend** - Web applications or single-page apps
+- **Backend** - APIs or microservices
 - **Database** - Data storage solutions
 - **Storage** - File and blob storage
 
@@ -74,8 +76,8 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Azure's domain-specific language
-- **Terraform** - Multi-cloud infrastructure tool
+- **Bicep** - Azure's domain-specific language for infrastructure
+- **Terraform** - A tool for managing multi-cloud infrastructure
 - **ARM Templates** - Azure Resource Manager templates
 
 ### 3. Integrated Workflows
@@ -120,7 +122,7 @@ my-app/
 ## 🔧 Configuration Files
 
 ### azure.yaml
-The main project configuration file:
+The main configuration file for the project:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -143,7 +145,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Environment-specific configuration:
+Configuration specific to each environment:
 ```json
 {
   "version": 1,
@@ -189,25 +191,26 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Understanding `azd down --force --purge`
-The `azd down --force --purge` command is a powerful way to completely remove your azd environment and all associated resources. Here's what each flag does:
+The `azd down --force --purge` command is a powerful way to completely remove your azd environment and all related resources. Here's what each flag does:
 ```
 --force
 ```
 - Skips confirmation prompts.
 - Useful for automation or scripting where manual input isn’t practical.
-- Ensures the teardown proceeds without interruption, even if the CLI detects inconsistencies.
+- Ensures the teardown proceeds without interruptions, even if the CLI detects inconsistencies.
 
 ```
 --purge
 ```
 Deletes **all associated metadata**, including:
-Environment state
-Local `.azure` folder
-Cached deployment info
-Prevents azd from "remembering" previous deployments, which can lead to issues like mismatched resource groups or outdated registry references.
+Environment state  
+Local `.azure` folder  
+Cached deployment information  
+
+This prevents azd from "remembering" previous deployments, which can lead to issues like mismatched resource groups or outdated registry references.
 
 ### Why use both?
-When you encounter issues with `azd up` due to lingering state or partial deployments, this combination ensures a **clean slate**.
+If you encounter issues with `azd up` due to lingering state or partial deployments, this combination ensures a **clean slate**.
 
 It’s especially useful after manually deleting resources in the Azure portal or when switching templates, environments, or resource group naming conventions.
 
@@ -274,14 +277,14 @@ azd init --template template1
 ### 4. Configuration Management
 - Use environment variables for sensitive data
 - Keep configuration files in version control
-- Document environment-specific settings
+- Document settings specific to each environment
 
 ## Learning Progression
 
 ### Beginner (Week 1-2)
 1. Install azd and authenticate
 2. Deploy a simple template
-3. Understand project structure
+3. Understand the project structure
 4. Learn basic commands (up, down, deploy)
 
 ### Intermediate (Week 3-4)
@@ -292,15 +295,15 @@ azd init --template template1
 
 ### Advanced (Week 5+)
 1. Create custom templates
-2. Advanced infrastructure patterns
-3. Multi-region deployments
-4. Enterprise-grade configurations
+2. Implement advanced infrastructure patterns
+3. Deploy to multiple regions
+4. Configure enterprise-grade setups
 
 ## Next Steps
 
-- [Installation & Setup](installation.md) - Get azd installed and configured
-- [Your First Project](first-project.md) - Hands-on tutorial
-- [Configuration Guide](configuration.md) - Advanced configuration options
+- [Installation & Setup](installation.md) - Learn how to install and configure azd
+- [Your First Project](first-project.md) - A hands-on tutorial
+- [Configuration Guide](configuration.md) - Explore advanced configuration options
 
 ## Additional Resources
 
@@ -310,11 +313,10 @@ azd init --template template1
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [README](../../README.md)
+**Previous:** [Installation & Setup](installation.md) | **Next:** [Configuration](configuration.md)
 - **Next Lesson**: [Installation & Setup](installation.md)
 
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

@@ -1,35 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:36:18+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T22:25:20+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sk"
 }
 -->
 # Príručka konfigurácie
 
+**Predchádzajúce:** [AZD Základy](azd-basics.md) | **Ďalšie:** [Prvý projekt](first-project.md)
+
 ## Úvod
 
-Táto komplexná príručka pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy. Naučíte sa o hierarchii konfigurácie, správe prostredí, metódach autentifikácie a pokročilých vzoroch konfigurácie, ktoré umožňujú efektívne a bezpečné nasadenia v Azure.
+Táto komplexná príručka pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy. Naučíte sa o hierarchii konfigurácie, správe prostredí, metódach autentifikácie a pokročilých vzoroch konfigurácie, ktoré umožňujú efektívne a bezpečné nasadenie v Azure.
 
 ## Ciele učenia
 
 Na konci tejto lekcie budete:
-- Ovládať hierarchiu konfigurácie azd a rozumieť priorite nastavení
+- Ovládať hierarchiu konfigurácie azd a rozumieť tomu, ako sú nastavenia prioritizované
 - Efektívne konfigurovať globálne a projektovo špecifické nastavenia
 - Spravovať viacero prostredí s rôznymi konfiguráciami
 - Implementovať bezpečné vzory autentifikácie a autorizácie
-- Rozumieť pokročilým vzorom konfigurácie pre zložité scenáre
+- Rozumieť pokročilým vzorom konfigurácie pre komplexné scenáre
 
 ## Výsledky učenia
 
-Po absolvovaní tejto lekcie budete schopní:
+Po dokončení tejto lekcie budete schopní:
 - Konfigurovať azd pre optimálne vývojové pracovné postupy
 - Nastaviť a spravovať viacero nasadzovacích prostredí
-- Implementovať bezpečné postupy správy konfigurácie
+- Implementovať bezpečné praktiky správy konfigurácie
 - Riešiť problémy súvisiace s konfiguráciou
-- Prispôsobiť správanie azd pre špecifické organizačné požiadavky
+- Prispôsobiť správanie azd pre špecifické požiadavky organizácie
 
 Táto komplexná príručka pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy.
 
@@ -39,7 +41,7 @@ azd používa hierarchický systém konfigurácie:
 1. **Príkazové parametre** (najvyššia priorita)
 2. **Premenné prostredia**
 3. **Lokálna projektová konfigurácia** (`.azd/config.json`)
-4. **Globálna používateľská konfigurácia** (`~/.azd/config.json`)
+4. **Globálna užívateľská konfigurácia** (`~/.azd/config.json`)
 5. **Predvolené hodnoty** (najnižšia priorita)
 
 ## Globálna konfigurácia
@@ -297,7 +299,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
+### Spravovaná identita
 Pre prostredia hostované v Azure:
 ```bash
 # Enable managed identity authentication
@@ -341,7 +343,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Konfigurácia nasadenia
 
-### Konfigurácia zostavenia
+### Konfigurácia buildu
 ```yaml
 # In azure.yaml
 services:
@@ -480,7 +482,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Najlepšie postupy
+## 🎓 Najlepšie praktiky
 
 ### 1. Používajte premenné prostredia
 ```yaml
@@ -518,7 +520,7 @@ database:
 ```
 
 ### 4. Dokumentácia konfigurácie
-Zdokumentujte svoju konfiguráciu v `CONFIG.md`:
+Dokumentujte svoju konfiguráciu v `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -536,8 +538,8 @@ Zdokumentujte svoju konfiguráciu v `CONFIG.md`:
 ## Ďalšie kroky
 
 - [Váš prvý projekt](first-project.md) - Aplikujte konfiguráciu v praxi
-- [Príručka nasadenia](../deployment/deployment-guide.md) - Použitie konfigurácie na nasadenie
-- [Zabezpečenie zdrojov](../deployment/provisioning.md) - Konfigurácie pripravené na produkciu
+- [Príručka nasadenia](../deployment/deployment-guide.md) - Použite konfiguráciu na nasadenie
+- [Provisioning zdrojov](../deployment/provisioning.md) - Konfigurácie pripravené na produkciu
 
 ## Referencie
 
@@ -547,11 +549,10 @@ Zdokumentujte svoju konfiguráciu v `CONFIG.md`:
 
 ---
 
-**Navigácia**
-- **Predchádzajúca lekcia**: [Inštalácia a nastavenie](installation.md)
+**Predchádzajúce:** [AZD Základy](azd-basics.md) | **Ďalšie:** [Prvý projekt](first-project.md)
 - **Ďalšia lekcia**: [Váš prvý projekt](first-project.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

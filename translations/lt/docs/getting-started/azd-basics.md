@@ -1,54 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:47:19+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T22:57:19+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "lt"
 }
 -->
 # AZD Pagrindai - Azure Developer CLI supratimas
 
+**Ankstesnė:** [Diegimas ir nustatymas](installation.md) | **Kita:** [Konfigūracija](configuration.md)
+
 ## Įvadas
 
-Šioje pamokoje susipažinsite su Azure Developer CLI (azd) – galingu komandų eilutės įrankiu, kuris pagreitina perėjimą nuo vietinio kūrimo iki diegimo Azure. Sužinosite pagrindines sąvokas, pagrindines funkcijas ir kaip azd supaprastina debesų technologijomis paremtų programų diegimą.
+Ši pamoka supažindins jus su Azure Developer CLI (azd), galingu komandų eilutės įrankiu, kuris pagreitina jūsų kelią nuo vietinio kūrimo iki diegimo Azure platformoje. Sužinosite pagrindines sąvokas, pagrindines funkcijas ir kaip azd supaprastina debesų technologijomis pagrįstų programų diegimą.
 
 ## Mokymosi tikslai
 
-Šios pamokos pabaigoje jūs:
+Pamokos pabaigoje jūs:
 - Suprasite, kas yra Azure Developer CLI ir jo pagrindinę paskirtį
-- Išmoksite pagrindines sąvokas apie šablonus, aplinkas ir paslaugas
-- Susipažinsite su pagrindinėmis funkcijomis, įskaitant šablonais paremtą kūrimą ir infrastruktūrą kaip kodą
+- Išmoksite pagrindines sąvokas, tokias kaip šablonai, aplinkos ir paslaugos
+- Susipažinsite su pagrindinėmis funkcijomis, įskaitant šablonais pagrįstą kūrimą ir infrastruktūrą kaip kodą
 - Suprasite azd projekto struktūrą ir darbo eigą
-- Būsite pasiruošę įdiegti ir sukonfigūruoti azd savo kūrimo aplinkoje
+- Būsite pasiruošę įdiegti ir konfigūruoti azd savo kūrimo aplinkoje
 
 ## Mokymosi rezultatai
 
-Baigę šią pamoką, jūs galėsite:
-- Paaiškinti azd vaidmenį šiuolaikinėse debesų kūrimo darbo eigose
-- Atpažinti azd projekto struktūros komponentus
+Baigę šią pamoką, galėsite:
+- Paaiškinti azd vaidmenį šiuolaikiniuose debesų technologijų kūrimo procesuose
+- Identifikuoti azd projekto struktūros komponentus
 - Apibūdinti, kaip šablonai, aplinkos ir paslaugos veikia kartu
 - Suprasti infrastruktūros kaip kodo privalumus naudojant azd
 - Atpažinti skirtingas azd komandas ir jų paskirtį
 
 ## Kas yra Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) yra komandų eilutės įrankis, skirtas pagreitinti perėjimą nuo vietinio kūrimo iki diegimo Azure. Jis supaprastina debesų technologijomis paremtų programų kūrimo, diegimo ir valdymo procesą.
+Azure Developer CLI (azd) yra komandų eilutės įrankis, sukurtas pagreitinti jūsų kelią nuo vietinio kūrimo iki diegimo Azure platformoje. Jis supaprastina debesų technologijomis pagrįstų programų kūrimo, diegimo ir valdymo procesą.
 
 ## Pagrindinės sąvokos
 
 ### Šablonai
 Šablonai yra azd pagrindas. Jie apima:
-- **Programos kodą** – jūsų šaltinio kodą ir priklausomybes
-- **Infrastruktūros apibrėžimus** – Azure išteklius, apibrėžtus naudojant Bicep arba Terraform
-- **Konfigūracijos failus** – nustatymus ir aplinkos kintamuosius
-- **Diegimo scenarijus** – automatizuotas diegimo darbo eigas
+- **Programos kodą** - Jūsų šaltinio kodą ir priklausomybes
+- **Infrastruktūros apibrėžimus** - Azure išteklius, apibrėžtus naudojant Bicep arba Terraform
+- **Konfigūracijos failus** - Nustatymus ir aplinkos kintamuosius
+- **Diegimo scenarijus** - Automatizuotus diegimo procesus
 
 ### Aplinkos
-Aplinkos atspindi skirtingas diegimo paskirtis:
-- **Kūrimas** – testavimui ir kūrimui
-- **Bandomoji** – prieš gamybą skirta aplinka
-- **Gamybinė** – veikianti gamybinė aplinka
+Aplinkos atspindi skirtingus diegimo tikslus:
+- **Kūrimas** - Testavimui ir kūrimui
+- **Staging** - Prieš gamybos aplinka
+- **Gamyba** - Veikianti gamybos aplinka
 
 Kiekviena aplinka turi savo:
 - Azure išteklių grupę
@@ -56,15 +58,15 @@ Kiekviena aplinka turi savo:
 - Diegimo būseną
 
 ### Paslaugos
-Paslaugos yra jūsų programos sudedamosios dalys:
-- **Priekinė dalis** – žiniatinklio programos, vieno puslapio programos (SPA)
-- **Galinė dalis** – API, mikropaslaugos
-- **Duomenų bazė** – duomenų saugojimo sprendimai
-- **Saugykla** – failų ir blob saugykla
+Paslaugos yra jūsų programos statybiniai blokai:
+- **Frontend** - Internetinės programos, SPAs
+- **Backend** - API, mikroservisai
+- **Duomenų bazė** - Duomenų saugojimo sprendimai
+- **Saugykla** - Failų ir blob saugykla
 
 ## Pagrindinės funkcijos
 
-### 1. Šablonais paremtas kūrimas
+### 1. Šablonais pagrįstas kūrimas
 ```bash
 # Browse available templates
 azd template list
@@ -74,9 +76,9 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastruktūra kaip kodas
-- **Bicep** – Azure specifinė kalba
-- **Terraform** – daugiadebesinė infrastruktūros priemonė
-- **ARM šablonai** – Azure Resource Manager šablonai
+- **Bicep** - Azure specifinė kalba
+- **Terraform** - Įrankis daugiadebesinei infrastruktūrai
+- **ARM šablonai** - Azure Resource Manager šablonai
 
 ### 3. Integruotos darbo eigos
 ```bash
@@ -87,7 +89,7 @@ azd deploy        # Deploy application code or redeploy application code once up
 azd down          # Clean up resources
 ```
 
-### 4. Aplinkų valdymas
+### 4. Aplinkos valdymas
 ```bash
 # Create and manage environments
 azd env new <environment-name>
@@ -188,23 +190,23 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## Komandos `azd down --force --purge` supratimas
+## Supratimas apie `azd down --force --purge`
 Komanda `azd down --force --purge` yra galingas būdas visiškai pašalinti jūsų azd aplinką ir visus susijusius išteklius. Štai ką daro kiekvienas parametras:
 ```
 --force
 ```
 - Praleidžia patvirtinimo užklausas.
-- Naudinga automatizavimui ar scenarijams, kur rankinis įsikišimas nėra įmanomas.
-- Užtikrina, kad pašalinimas vyktų be pertraukų, net jei CLI aptinka neatitikimų.
+- Naudinga automatizavimui ar scenarijams, kur rankinis įvedimas nėra įmanomas.
+- Užtikrina, kad pašalinimas vyktų be pertraukų, net jei CLI aptinka neatitikimus.
 
 ```
 --purge
 ```
 Ištrina **visą susijusią metainformaciją**, įskaitant:
-- Aplinkos būseną
-- Vietinį `.azure` aplanką
-- Talpykloje saugomą diegimo informaciją
-- Neleidžia azd „atsiminti“ ankstesnių diegimų, kurie gali sukelti problemų, pvz., neatitinkančias išteklių grupes ar pasenusias registrų nuorodas.
+Aplinkos būseną
+Vietinį `.azure` aplanką
+Talpykloje saugomą diegimo informaciją
+Neleidžia azd „prisiminti“ ankstesnių diegimų, kurie gali sukelti problemų, tokių kaip netinkamos išteklių grupės ar pasenę registrų nuorodos.
 
 ### Kodėl naudoti abu?
 Kai susiduriate su problemomis naudojant `azd up` dėl likusios būsenos ar dalinių diegimų, šis derinys užtikrina **švarią pradžią**.
@@ -263,24 +265,24 @@ azd init --template template1
 
 ### 2. Pasinaudokite šablonais
 - Pradėkite nuo esamų šablonų
-- Pritaikykite juos savo poreikiams
+- Pritaikykite pagal savo poreikius
 - Kurkite pakartotinai naudojamus šablonus savo organizacijai
 
 ### 3. Aplinkų izoliacija
-- Naudokite atskiras aplinkas kūrimui/bandomajai/gamybinei aplinkai
-- Niekada nediekite tiesiai į gamybinę aplinką iš vietinio kompiuterio
-- Naudokite CI/CD procesus gamybinėms diegimams
+- Naudokite atskiras aplinkas kūrimui/staging/gamybai
+- Niekada nediegkite tiesiai į gamybą iš vietinio kompiuterio
+- Naudokite CI/CD procesus gamybos diegimams
 
 ### 4. Konfigūracijos valdymas
 - Naudokite aplinkos kintamuosius jautriems duomenims
-- Laikykite konfigūraciją versijų valdymo sistemoje
+- Laikykite konfigūraciją versijų kontrolėje
 - Dokumentuokite aplinkai specifinius nustatymus
 
 ## Mokymosi progresija
 
 ### Pradedantysis (1-2 savaitės)
 1. Įdiekite azd ir autentifikuokite
-2. Diekite paprastą šabloną
+2. Diegkite paprastą šabloną
 3. Supraskite projekto struktūrą
 4. Išmokite pagrindines komandas (up, down, deploy)
 
@@ -288,19 +290,19 @@ azd init --template template1
 1. Pritaikykite šablonus
 2. Valdykite kelias aplinkas
 3. Supraskite infrastruktūros kodą
-4. Sukurkite CI/CD procesus
+4. Nustatykite CI/CD procesus
 
 ### Pažengęs (5+ savaitės)
 1. Kurkite savo šablonus
 2. Pažangūs infrastruktūros modeliai
 3. Diegimai keliuose regionuose
-4. Įmonės lygio konfigūracijos
+4. Konfigūracijos sprendimai įmonės lygmeniu
 
 ## Kiti žingsniai
 
-- [Diegimas ir nustatymas](installation.md) – Įdiekite ir sukonfigūruokite azd
-- [Jūsų pirmasis projektas](first-project.md) – Praktinis vadovas
-- [Konfigūracijos vadovas](configuration.md) – Pažangios konfigūracijos parinktys
+- [Diegimas ir nustatymas](installation.md) - Įdiekite ir sukonfigūruokite azd
+- [Jūsų pirmasis projektas](first-project.md) - Praktinis vadovas
+- [Konfigūracijos vadovas](configuration.md) - Išplėstinės konfigūracijos parinktys
 
 ## Papildomi ištekliai
 
@@ -310,8 +312,7 @@ azd init --template template1
 
 ---
 
-**Navigacija**
-- **Ankstesnė pamoka**: [README](../../README.md)
+**Ankstesnė:** [Diegimas ir nustatymas](installation.md) | **Kita:** [Konfigūracija](configuration.md)
 - **Kita pamoka**: [Diegimas ir nustatymas](installation.md)
 
 ---
