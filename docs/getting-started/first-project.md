@@ -1,5 +1,7 @@
 # Your First Project - Hands-On Tutorial
 
+**Previous:** [Configuration](configuration.md) | **Next:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Introduction
 
 Welcome to your first Azure Developer CLI project! This comprehensive hands-on tutorial provides a complete walkthrough of creating, deploying, and managing a full-stack application on Azure using azd. You'll work with a real todo application that includes a React frontend, Node.js API backend, and MongoDB database.
@@ -379,6 +381,5 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Configuration](configuration.md)
+**Previous:** [Configuration](configuration.md) | **Next:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
 - **Next Lesson**: [Deployment Guide](../deployment/deployment-guide.md)

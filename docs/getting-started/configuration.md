@@ -1,5 +1,7 @@
 # Configuration Guide
 
+**Previous:** [AZD Basics](azd-basics.md) | **Next:** [First Project](first-project.md)
+
 ## Introduction
 
 This comprehensive guide covers all aspects of configuring Azure Developer CLI for optimal development and deployment workflows. You'll learn about the configuration hierarchy, environment management, authentication methods, and advanced configuration patterns that enable efficient and secure Azure deployments.
@@ -538,6 +540,5 @@ Document your configuration in `CONFIG.md`:
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Installation & Setup](installation.md)
+**Previous:** [AZD Basics](azd-basics.md) | **Next:** [First Project](first-project.md)
 - **Next Lesson**: [Your First Project](first-project.md)

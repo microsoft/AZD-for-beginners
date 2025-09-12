@@ -22,6 +22,39 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.0.0] - 2025-09-12
+
+#### Major Changes - AI Developer Focus and Azure AI Foundry Integration
+**This version transforms the repository into a comprehensive AI-focused learning resource with Azure AI Foundry integration.**
+
+#### Added
+- **🤖 AI-First Learning Path**: Complete restructure prioritizing AI developers and engineers
+- **Azure AI Foundry Integration Guide**: Comprehensive documentation for connecting AZD with Azure AI Foundry services
+- **AI Model Deployment Patterns**: Detailed guide covering model selection, configuration, and production deployment strategies
+- **AI Workshop Lab**: 2-3 hour hands-on workshop for converting AI applications to AZD-deployable solutions
+- **Production AI Best Practices**: Enterprise-ready patterns for scaling, monitoring, and securing AI workloads
+- **AI-Specific Troubleshooting Guide**: Comprehensive troubleshooting for Azure OpenAI, Cognitive Services, and AI deployment issues
+- **AI Template Gallery**: Featured collection of Azure AI Foundry templates with complexity ratings
+- **Workshop Materials**: Complete workshop structure with hands-on labs and reference materials
+
+#### Enhanced
+- **README Structure**: AI-developer focused with 45% community interest data from Azure AI Foundry Discord
+- **Learning Paths**: Dedicated AI developer journey alongside traditional paths for students and DevOps engineers
+- **Template Recommendations**: Featured AI templates including azure-search-openai-demo, contoso-chat, and openai-chat-app-quickstart
+- **Community Integration**: Enhanced Discord community support with AI-specific channels and discussions
+
+#### Security & Production Focus
+- **Managed Identity Patterns**: AI-specific authentication and security configurations
+- **Cost Optimization**: Token usage tracking and budget controls for AI workloads
+- **Multi-Region Deployment**: Strategies for global AI application deployment
+- **Performance Monitoring**: AI-specific metrics and Application Insights integration
+
+#### Documentation Quality
+- **Linear Course Structure**: Logical progression from beginner to advanced AI deployment patterns
+- **Validated URLs**: All external repository links verified and accessible
+- **Complete Reference**: All internal documentation links validated and functional
+- **Production Ready**: Enterprise deployment patterns with real-world examples
+
 ### [v2.0.0] - 2025-09-09
 
 #### Major Changes - Repository Restructure and Professional Enhancement
@@ -112,26 +145,51 @@ After reviewing changelog entries, you will be able to:
 
 ## Planned Future Enhancements
 
-### Version 3.0.0 (Planned)
-#### Proposed Additions
-- **Interactive Tutorials**: Hands-on coding exercises with automated validation
-- **Video Content**: Supplementary video tutorials for visual learners
-- **Advanced Security Module**: Deep-dive into enterprise security patterns
-- **Multi-Cloud Support**: Integration with other cloud providers
-- **Performance Optimization**: Advanced tuning and scaling strategies
+### Version 3.1.0 (Planned)
+#### AI Platform Expansion
+- **Multi-Model Support**: Integration patterns for Hugging Face, Azure Machine Learning, and custom models
+- **AI Agent Frameworks**: Templates for LangChain, Semantic Kernel, and AutoGen deployments
+- **Advanced RAG Patterns**: Vector database options beyond Azure AI Search (Pinecone, Weaviate, etc.)
+- **AI Observability**: Enhanced monitoring for model performance, token usage, and response quality
 
-#### Proposed Improvements
+#### Developer Experience
+- **VS Code Extension**: Integrated AZD + AI Foundry development experience
+- **GitHub Copilot Integration**: AI-assisted AZD template generation
+- **Interactive Tutorials**: Hands-on coding exercises with automated validation for AI scenarios
+- **Video Content**: Supplementary video tutorials for visual learners focusing on AI deployments
+
+### Version 4.0.0 (Planned)
+#### Enterprise AI Patterns
+- **Governance Framework**: AI model governance, compliance, and audit trails
+- **Multi-Tenant AI**: Patterns for serving multiple customers with isolated AI services
+- **Edge AI Deployment**: Integration with Azure IoT Edge and container instances
+- **Hybrid Cloud AI**: Multi-cloud and hybrid deployment patterns for AI workloads
+
+#### Advanced Features
+- **AI Pipeline Automation**: MLOps integration with Azure Machine Learning pipelines
+- **Advanced Security**: Zero-trust patterns, private endpoints, and advanced threat protection
+- **Performance Optimization**: Advanced tuning and scaling strategies for high-throughput AI applications
+- **Global Distribution**: Content delivery and edge caching patterns for AI applications
+
+### Version 3.0.0 (Planned) - Superseded by Current Release
+#### Proposed Additions - Now Implemented in v3.0.0
+- ✅ **AI-Focused Content**: Comprehensive Azure AI Foundry integration (Completed)
+- ✅ **Interactive Tutorials**: Hands-on AI workshop lab (Completed)
+- ✅ **Advanced Security Module**: AI-specific security patterns (Completed)
+- ✅ **Performance Optimization**: AI workload tuning strategies (Completed)
+
+### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
+#### Minor Enhancements - Some Completed in Current Release
+- ✅ **Additional Examples**: AI-focused deployment scenarios (Completed)
+- ✅ **Extended FAQ**: AI-specific questions and troubleshooting (Completed)
+- **Tool Integration**: Enhanced IDE and editor integration guides
+- ✅ **Monitoring Expansion**: AI-specific monitoring and alerting patterns (Completed)
+
+#### Still Planned for Future Release
 - **Mobile-Friendly Documentation**: Responsive design for mobile learning
 - **Offline Access**: Downloadable documentation packages
-- **Community Contributions**: Enhanced community contribution guidelines
-- **Translation Support**: Multi-language documentation options
-
-### Version 2.1.0 (Planned)
-#### Minor Enhancements
-- **Additional Examples**: More real-world deployment scenarios
-- **Extended FAQ**: Additional common questions and answers
-- **Tool Integration**: Enhanced IDE and editor integration guides
-- **Monitoring Expansion**: Advanced monitoring and alerting patterns
+- **Enhanced IDE Integration**: VS Code extension for AZD + AI workflows
+- **Community Dashboard**: Real-time community metrics and contribution tracking
 
 ## Contributing to the Changelog
 
@@ -198,17 +256,19 @@ When contributing to this repository, please ensure changelog entries include:
 We actively encourage community feedback to improve this learning resource:
 
 ### How to Provide Feedback
-- **GitHub Issues**: Report problems or suggest improvements
-- **Discord Discussions**: Share ideas and engage with the community
-- **Pull Requests**: Contribute direct improvements to content
-- **Discord Community Forums**: Participate in broader Azure developer discussions
+- **GitHub Issues**: Report problems or suggest improvements (AI-specific issues welcome)
+- **Discord Discussions**: Share ideas and engage with the Azure AI Foundry community
+- **Pull Requests**: Contribute direct improvements to content, especially AI templates and guides
+- **Azure AI Foundry Discord**: Participate in #Azure channel for AZD + AI discussions
+- **Community Forums**: Participate in broader Azure developer discussions
 
 ### Feedback Categories
-- **Content Accuracy**: Corrections to technical information
-- **Learning Experience**: Suggestions for improved learning flow
-- **Missing Content**: Requests for additional topics or examples
+- **AI Content Accuracy**: Corrections to AI service integration and deployment information
+- **Learning Experience**: Suggestions for improved AI developer learning flow
+- **Missing AI Content**: Requests for additional AI templates, patterns, or examples
 - **Accessibility**: Improvements for diverse learning needs
-- **Tool Integration**: Suggestions for better development workflow integration
+- **AI Tool Integration**: Suggestions for better AI development workflow integration
+- **Production AI Patterns**: Enterprise AI deployment pattern requests
 
 ### Response Commitment
 - **Issue Response**: Within 48 hours for reported problems

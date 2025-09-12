@@ -1,5 +1,7 @@
 # AZD Basics - Understanding Azure Developer CLI
 
+**Previous:** [Installation & Setup](installation.md) | **Next:** [Configuration](configuration.md)
+
 ## Introduction
 
 This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that accelerates your journey from local development to Azure deployment. You'll learn the fundamental concepts, core features, and understand how azd simplifies cloud-native application deployment.
@@ -303,6 +305,5 @@ azd init --template template1
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [README](../../README.md)
+**Previous:** [Installation & Setup](installation.md) | **Next:** [Configuration](configuration.md)
 - **Next Lesson**: [Installation & Setup](installation.md)

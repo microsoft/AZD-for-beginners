@@ -7,9 +7,9 @@
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
 
-[![Azure Discord](https://dcbadge.limes.yellow/api/server/kzRShWzttr)](https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
 
-[![Azure AI Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
 
 Follow these steps to get started using these resources:
 1. **Fork the Repository**: Click [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
@@ -17,7 +17,7 @@ Follow these steps to get started using these resources:
 3. [**Join The Azure Discord Communities and meet experts and fellow developers**](https://discord.com/invite/ByRwuEEgH4)
 
 
-### 🌐 Multi-Language Support
+### Multi-Language Support
 
 #### Supported via GitHub Action (Automated & Always Up-to-Date)
 
@@ -28,7 +28,15 @@ Follow these steps to get started using these resources:
 
 ## Introduction
 
-Welcome to the comprehensive guide for Azure Developer CLI (azd). This repository is designed to help developers at all levels from students to professional developers learn and master Azure Developer CLI for efficient cloud deployments. This structured learning resource provides hands-on experience with Azure cloud deployments, troubleshooting common issues, and implementing best practices for successful AZD template deployments.
+Welcome to the comprehensive guide for Azure Developer CLI (azd). This repository is designed to help developers at all levels from students to professional developers learn and master Azure Developer CLI for efficient cloud deployments, **with a special focus on AI application deployment using Azure AI Foundry**. This structured learning resource provides hands-on experience with Azure cloud deployments, troubleshooting common issues, and implementing best practices for successful AZD template deployments.
+
+### **Why This Guide Matters for AI Developers**
+Based on our recent Azure AI Foundry Discord community poll, **45% of developers are interested in using AZD for AI workloads** but face challenges with:
+- Complex multi-service AI architectures
+- Production AI deployment best practices
+- Azure AI service integration and configuration
+- Cost optimization for AI workloads
+- Troubleshooting AI-specific deployment issues
 
 ## Learning Goals
 
@@ -68,6 +76,17 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 - **Integrated workflows** - Seamlessly provision, deploy, and monitor applications
 - **Developer-friendly** - Optimized for developer productivity and experience
 
+### **AZD + Azure AI Foundry: Perfect for AI Deployments**
+
+**Why AZD for AI Solutions?** AZD addresses the top challenges AI developers face:
+
+- **AI-Ready Templates** - Pre-configured templates for Azure OpenAI, Cognitive Services, and ML workloads
+- **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints
+- **Production AI Patterns** - Best practices for scalable, cost-effective AI application deployments
+- **End-to-End AI Workflows** - From model development to production deployment with proper monitoring
+- **💰 Cost Optimization** - Smart resource allocation and scaling strategies for AI workloads
+- **Azure AI Foundry Integration** - Seamless connection to AI Foundry model catalog and endpoints
+
 ## Quick Start
 
 ### Prerequisites
@@ -93,6 +112,20 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
+### Your First AI Deployment
+```bash
+# Initialize an AI-powered chat application with Azure OpenAI
+azd init --template azure-search-openai-demo
+
+# Configure AI services and deploy
+azd up
+
+# Or try other AI templates:
+azd init --template openai-chat-app-quickstart
+azd init --template ai-document-processing
+azd init --template contoso-chat
+```
+
 ## Documentation
 
 ### Getting Started
@@ -110,15 +143,38 @@ azd up
 - [**SKU Selection**](docs/pre-deployment/sku-selection.md) - Choosing the right Azure SKUs
 - [**Pre-flight Checks**](docs/pre-deployment/preflight-checks.md) - Automated validation scripts
 
+### AI & Azure AI Foundry
+- [**Azure AI Foundry Integration**](docs/ai-foundry/azure-ai-foundry-integration.md) - Connect AZD with Azure AI Foundry services
+- [**AI Model Deployment Patterns**](docs/ai-foundry/ai-model-deployment.md) - Deploy and manage AI models with AZD
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Hands-on lab: Making AI solutions AZD-ready
+- [**Production AI Best Practices**](docs/ai-foundry/production-ai-practices.md) - Security, scaling, and monitoring for AI workloads
+
 ### Troubleshooting
 - [**Common Issues**](docs/troubleshooting/common-issues.md) - Frequently encountered problems and solutions
 - [**Debugging Guide**](docs/troubleshooting/debugging.md) - Step-by-step debugging strategies
+- [**AI-Specific Troubleshooting**](docs/troubleshooting/ai-troubleshooting.md) - AI service and model deployment issues
 
 ## Examples & Templates
-- [**Examples**]([examples/README.md) - Practical examples, templates, and real-world scenarios to help you learn Azure Developer CLI through hands-on practice. Each example provides complete working code, infrastructure templates, and detailed instructions for different application architectures and deployment patterns.
 
-### Hands On Lab/Workshop
-- [**AZD For Beginners**](workshop/README.md) - This workshop will focus on the Get Started with AI Agents AZD template and provide hands on best practice for deployment of Azure AI services using AZD
+### Featured: Azure AI Foundry Templates
+**Start here if you're deploying AI applications!**
+
+| Template | Description | Complexity | Services |
+|----------|-------------|------------|----------|
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-enabled chat app with Azure OpenAI | ⭐⭐ | OpenAI + Search + App Service |
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Simple chat interface with Azure OpenAI | ⭐ | OpenAI + Container Apps |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Enterprise chat with AI orchestration | ⭐⭐⭐ | OpenAI + Search + Container Apps |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Document analysis with AI services | ⭐⭐ | Document Intelligence + Functions |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | AI agent framework with function calling | ⭐⭐⭐ | OpenAI + Container Apps + Functions |
+
+### Additional AZD Templates
+- [**Examples Directory**](examples/README.md) - Practical examples, templates, and real-world scenarios
+- [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Official Microsoft sample templates  
+- [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Community-contributed templates
+
+### 🎓 Hands-On Labs & Workshops
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - **NEW**: Make your AI solutions AZD-deployable
+- [**AZD For Beginners Workshop**](workshop/README.md) - Focus on AI Agents AZD template deployment
 
 ## Resources
 
@@ -135,6 +191,13 @@ azd up
 - [Azure Status](https://status.azure.com/)
 
 ## Learning Path
+
+### For AI Developers (Recommended Start Here!)
+1. **Quick Start**: Try [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) template
+2. **Learn Fundamentals**: [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
+3. **Hands-On Practice**: Complete [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
+4. **Production Ready**: Review [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
+5. **Advanced**: Deploy [contoso-chat](https://github.com/Azure-Samples/contoso-chat) enterprise template
 
 ### For Students & Beginners
 1. Start with [AZD Basics](docs/getting-started/azd-basics.md)
@@ -166,14 +229,28 @@ We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) 
 
 - **Issues**: [Report bugs and request features](https://github.com/microsoft/azd-for-beginners/issues)
 - **Discussions**: [Microsoft Azure Discord Community Q&A and discussions](https://discord.gg/microsoft-azure)
+- **AI-Specific Support**: Join the [#Azure channel](https://discord.gg/microsoft-azure) for AZD + AI Foundry discussions
 - **Email**: For private inquiries
 - **Microsoft Learn**: [Official Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+
+### Community Insights from Azure AI Foundry Discord
+
+**Poll Results from #Azure Channel:**
+- **45%** of developers want to use AZD for AI workloads
+- **Top challenges**: Multi-service deployments, credential management, production readiness
+- **Most requested**: AI-specific templates, troubleshooting guides, best practices
+
+**Join our community to:**
+- 💬 Share your AZD + AI experiences and get help
+- Access early previews of new AI templates
+- Contribute to AI deployment best practices
+- Influence future AI + AZD feature development
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🎒 Other Courses
+## Other Courses
 
 Our team produces other courses! Check out:
 

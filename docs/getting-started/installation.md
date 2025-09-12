@@ -1,5 +1,7 @@
 # Installation & Setup Guide
 
+**Previous:** [Main Documentation](../../README.md) | **Next:** [AZD Basics](azd-basics.md)
+
 ## Introduction
 
 This comprehensive guide will walk you through installing and configuring Azure Developer CLI (azd) on your system. You'll learn multiple installation methods for different operating systems, authentication setup, and initial configuration to prepare your development environment for Azure deployments.
@@ -137,7 +139,7 @@ Expected output:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Authentication Setup
+## Authentication Setup
 
 ### Azure CLI Authentication (Recommended)
 ```bash
@@ -168,7 +170,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configuration
+## Configuration
 
 ### Global Configuration
 ```bash
@@ -194,7 +196,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE Integration
+## IDE Integration
 
 ### Visual Studio Code
 Install the Azure Developer CLI extension:
@@ -327,8 +329,6 @@ If you encounter issues:
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [AZD Basics](azd-basics.md)
-- **Next Lesson**: [Configuration](configuration.md)
+**Previous:** [Main Documentation](../../README.md) | **Next:** [AZD Basics](azd-basics.md)
 
 **Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.
