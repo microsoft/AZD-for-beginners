@@ -1,21 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T16:46:16+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T16:40:50+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "zh"
 }
 -->
 # 安装与设置指南
 
+**上一节：** [主文档](../../README.md) | **下一节：** [AZD 基础知识](azd-basics.md)
+
 ## 简介
 
-本指南将详细介绍如何在您的系统上安装和配置 Azure Developer CLI (azd)。您将学习适用于不同操作系统的多种安装方法、身份验证设置以及初始配置，以便为 Azure 部署准备开发环境。
+本指南将详细介绍如何在您的系统上安装和配置 Azure Developer CLI (azd)。您将学习针对不同操作系统的多种安装方法、身份验证设置以及初始配置，以便为 Azure 部署准备开发环境。
 
 ## 学习目标
 
-完成本课程后，您将能够：
+完成本节后，您将能够：
 - 成功在您的操作系统上安装 Azure Developer CLI
 - 使用多种方法配置 Azure 身份验证
 - 设置开发环境所需的必要前提条件
@@ -24,7 +26,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 学习成果
 
-完成本课程后，您将能够：
+完成本节后，您将能够：
 - 根据您的平台选择合适的安装方法安装 azd
 - 使用 `azd auth login` 命令进行 Azure 身份验证
 - 验证安装并测试基本的 azd 命令
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd 已预装在 GitHub Codespaces 中。只需创建一个 Codespace 即可立即使用 azd。
+azd 已预装在 GitHub Codespaces 中。只需创建一个 Codespace 即可立即开始使用 azd。
 
 ### Docker
 
@@ -146,7 +148,7 @@ azd template list
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 身份验证设置
+## 身份验证设置
 
 ### Azure CLI 身份验证（推荐）
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ 配置
+## 配置
 
 ### 全局配置
 ```bash
@@ -203,12 +205,12 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE 集成
+## IDE 集成
 
 ### Visual Studio Code
 安装 Azure Developer CLI 扩展：
 1. 打开 VS Code
-2. 转到扩展（Ctrl+Shift+X）
+2. 转到扩展 (Ctrl+Shift+X)
 3. 搜索 "Azure Developer CLI"
 4. 安装扩展
 
@@ -319,10 +321,10 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 后续步骤
+## 下一步
 
 1. **完成身份验证**：确保您可以访问您的 Azure 订阅
-2. **尝试首次部署**：参考 [首次项目指南](first-project.md)
+2. **尝试首次部署**：参考 [第一个项目指南](first-project.md)
 3. **探索模板**：使用 `azd template list` 浏览可用模板
 4. **配置您的 IDE**：设置开发环境
 
@@ -336,13 +338,11 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ---
 
-**导航**
-- **上一课**：[AZD 基础](azd-basics.md)
-- **下一课**：[配置](configuration.md)
+**上一节：** [主文档](../../README.md) | **下一节：** [AZD 基础知识](azd-basics.md)
 
-**安装完成！** 继续前往 [您的第一个项目](first-project.md)，开始使用 azd 构建项目。
+**安装完成！** 继续阅读 [您的第一个项目](first-project.md)，开始使用 azd 构建项目。
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

@@ -1,24 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T12:48:35+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T17:05:27+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "es"
 }
 -->
 # Conceptos Básicos de AZD - Entendiendo Azure Developer CLI
 
+**Anterior:** [Instalación y Configuración](installation.md) | **Siguiente:** [Configuración](configuration.md)
+
 ## Introducción
 
-Esta lección te introduce a Azure Developer CLI (azd), una poderosa herramienta de línea de comandos que acelera tu camino desde el desarrollo local hasta el despliegue en Azure. Aprenderás los conceptos fundamentales, las características principales y cómo azd simplifica el despliegue de aplicaciones nativas en la nube.
+Esta lección te introduce a Azure Developer CLI (azd), una herramienta de línea de comandos poderosa que acelera tu transición desde el desarrollo local hasta el despliegue en Azure. Aprenderás los conceptos fundamentales, las características principales y cómo azd simplifica el despliegue de aplicaciones nativas en la nube.
 
 ## Objetivos de Aprendizaje
 
 Al final de esta lección, podrás:
 - Entender qué es Azure Developer CLI y su propósito principal
 - Aprender los conceptos clave de plantillas, entornos y servicios
-- Explorar características principales como desarrollo basado en plantillas e Infraestructura como Código
+- Explorar características importantes como el desarrollo basado en plantillas y la Infraestructura como Código
 - Comprender la estructura y el flujo de trabajo de los proyectos azd
 - Estar preparado para instalar y configurar azd en tu entorno de desarrollo
 
@@ -28,18 +30,18 @@ Después de completar esta lección, serás capaz de:
 - Explicar el papel de azd en los flujos de trabajo modernos de desarrollo en la nube
 - Identificar los componentes de la estructura de un proyecto azd
 - Describir cómo las plantillas, entornos y servicios trabajan juntos
-- Comprender los beneficios de Infraestructura como Código con azd
+- Comprender los beneficios de la Infraestructura como Código con azd
 - Reconocer diferentes comandos de azd y sus propósitos
 
 ## ¿Qué es Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) es una herramienta de línea de comandos diseñada para acelerar tu camino desde el desarrollo local hasta el despliegue en Azure. Simplifica el proceso de construir, desplegar y gestionar aplicaciones nativas en la nube en Azure.
+Azure Developer CLI (azd) es una herramienta de línea de comandos diseñada para acelerar tu transición desde el desarrollo local hasta el despliegue en Azure. Simplifica el proceso de construir, desplegar y gestionar aplicaciones nativas en la nube en Azure.
 
 ## Conceptos Clave
 
 ### Plantillas
 Las plantillas son la base de azd. Contienen:
-- **Código de aplicación** - Tu código fuente y dependencias
+- **Código de la aplicación** - Tu código fuente y dependencias
 - **Definiciones de infraestructura** - Recursos de Azure definidos en Bicep o Terraform
 - **Archivos de configuración** - Configuraciones y variables de entorno
 - **Scripts de despliegue** - Flujos de trabajo automatizados de despliegue
@@ -75,7 +77,7 @@ azd init --template <template-name>
 
 ### 2. Infraestructura como Código
 - **Bicep** - Lenguaje específico de dominio de Azure
-- **Terraform** - Herramienta de infraestructura multicloud
+- **Terraform** - Herramienta de infraestructura multi-nube
 - **ARM Templates** - Plantillas de Azure Resource Manager
 
 ### 3. Flujos de Trabajo Integrados
@@ -293,7 +295,7 @@ azd init --template template1
 ### Avanzado (Semana 5+)
 1. Crear plantillas personalizadas
 2. Patrones avanzados de infraestructura
-3. Despliegues multirregión
+3. Despliegues en múltiples regiones
 4. Configuraciones de nivel empresarial
 
 ## Próximos Pasos
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**Navegación**
-- **Lección Anterior**: [README](../../README.md)
+**Anterior:** [Instalación y Configuración](installation.md) | **Siguiente:** [Configuración](configuration.md)
 - **Próxima Lección**: [Instalación y Configuración](installation.md)
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

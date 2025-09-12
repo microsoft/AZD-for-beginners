@@ -1,24 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T12:49:31+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T17:08:40+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "de"
 }
 -->
 # AZD Grundlagen - Einführung in Azure Developer CLI
 
+**Vorher:** [Installation & Einrichtung](installation.md) | **Nächste:** [Konfiguration](configuration.md)
+
 ## Einführung
 
-Diese Lektion führt Sie in die Azure Developer CLI (azd) ein, ein leistungsstarkes Befehlszeilen-Tool, das Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung beschleunigt. Sie lernen die grundlegenden Konzepte, die Kernfunktionen und wie azd die Bereitstellung von cloud-nativen Anwendungen vereinfacht.
+Diese Lektion führt Sie in Azure Developer CLI (azd) ein, ein leistungsstarkes Befehlszeilentool, das Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung beschleunigt. Sie lernen die grundlegenden Konzepte, die Kernfunktionen und wie azd die Bereitstellung von cloud-nativen Anwendungen vereinfacht.
 
 ## Lernziele
 
 Am Ende dieser Lektion werden Sie:
-- Verstehen, was die Azure Developer CLI ist und welchen Hauptzweck sie erfüllt
+- Verstehen, was Azure Developer CLI ist und welchen Hauptzweck es erfüllt
 - Die Kernkonzepte von Templates, Umgebungen und Diensten kennenlernen
-- Wichtige Funktionen wie templatebasierte Entwicklung und Infrastructure as Code erkunden
+- Wichtige Funktionen wie templatebasiertes Entwickeln und Infrastructure as Code erkunden
 - Die azd-Projektstruktur und den Workflow verstehen
 - Bereit sein, azd für Ihre Entwicklungsumgebung zu installieren und zu konfigurieren
 
@@ -28,12 +30,12 @@ Nach Abschluss dieser Lektion werden Sie in der Lage sein:
 - Die Rolle von azd in modernen Cloud-Entwicklungs-Workflows zu erklären
 - Die Komponenten einer azd-Projektstruktur zu identifizieren
 - Beschreiben, wie Templates, Umgebungen und Dienste zusammenarbeiten
-- Die Vorteile von Infrastructure as Code mit azd zu verstehen
-- Verschiedene azd-Befehle und deren Zwecke zu erkennen
+- Die Vorteile von Infrastructure as Code mit azd verstehen
+- Verschiedene azd-Befehle und deren Zwecke erkennen
 
 ## Was ist Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) ist ein Befehlszeilen-Tool, das entwickelt wurde, um Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung zu beschleunigen. Es vereinfacht den Prozess des Erstellens, Bereitstellens und Verwalten von cloud-nativen Anwendungen auf Azure.
+Azure Developer CLI (azd) ist ein Befehlszeilentool, das entwickelt wurde, um Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung zu beschleunigen. Es vereinfacht den Prozess des Erstellens, Bereitstellens und Verwalten von cloud-nativen Anwendungen auf Azure.
 
 ## Kernkonzepte
 
@@ -64,7 +66,7 @@ Dienste sind die Bausteine Ihrer Anwendung:
 
 ## Wichtige Funktionen
 
-### 1. Templatebasierte Entwicklung
+### 1. Templatebasiertes Entwickeln
 ```bash
 # Browse available templates
 azd template list
@@ -75,7 +77,7 @@ azd init --template <template-name>
 
 ### 2. Infrastructure as Code
 - **Bicep** - Azure-spezifische Sprache
-- **Terraform** - Multi-Cloud-Infrastruktur-Tool
+- **Terraform** - Multi-Cloud-Infrastrukturtool
 - **ARM Templates** - Azure Resource Manager Templates
 
 ### 3. Integrierte Workflows
@@ -207,9 +209,9 @@ Zwischengespeicherte Bereitstellungsinformationen
 Verhindert, dass azd "frühere Bereitstellungen" speichert, was Probleme wie nicht übereinstimmende Ressourcengruppen oder veraltete Registry-Referenzen verursachen kann.
 
 ### Warum beide verwenden?
-Wenn Sie bei `azd up` aufgrund verbleibender Zustände oder teilweiser Bereitstellungen auf Probleme stoßen, sorgt diese Kombination für einen **sauberen Neustart**.
+Wenn Sie bei `azd up` aufgrund verbleibender Zustände oder teilweiser Bereitstellungen auf Probleme stoßen, sorgt diese Kombination für einen **Neuanfang**.
 
-Es ist besonders hilfreich nach manuellen Ressourcendeletionen im Azure-Portal oder beim Wechsel von Templates, Umgebungen oder Namenskonventionen für Ressourcengruppen.
+Besonders hilfreich nach manuellen Ressourcendeletionen im Azure-Portal oder beim Wechsel von Templates, Umgebungen oder Namenskonventionen für Ressourcengruppen.
 
 ### Verwaltung mehrerer Umgebungen
 ```bash
@@ -268,8 +270,8 @@ azd init --template template1
 
 ### 3. Umweltisolierung
 - Verwenden Sie separate Umgebungen für Entwicklung/Staging/Produktion
-- Stellen Sie niemals direkt von Ihrer lokalen Maschine in die Produktion bereit
-- Nutzen Sie CI/CD-Pipelines für Produktionsbereitstellungen
+- Nie direkt von der lokalen Maschine in die Produktion bereitstellen
+- Verwenden Sie CI/CD-Pipelines für Produktionsbereitstellungen
 
 ### 4. Konfigurationsmanagement
 - Verwenden Sie Umgebungsvariablen für sensible Daten
@@ -310,8 +312,7 @@ azd init --template template1
 
 ---
 
-**Navigation**
-- **Vorherige Lektion**: [README](../../README.md)
+**Vorher:** [Installation & Einrichtung](installation.md) | **Nächste:** [Konfiguration](configuration.md)
 - **Nächste Lektion**: [Installation & Einrichtung](installation.md)
 
 ---

@@ -1,25 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:12:24+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T17:16:11+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "pl"
 }
 -->
 # Podstawy AZD - Zrozumienie Azure Developer CLI
 
+**Poprzednie:** [Instalacja i konfiguracja](installation.md) | **Następne:** [Konfiguracja](configuration.md)
+
 ## Wprowadzenie
 
-Ta lekcja wprowadza Cię do Azure Developer CLI (azd), potężnego narzędzia wiersza poleceń, które przyspiesza przejście od lokalnego rozwoju do wdrożenia w Azure. Dowiesz się o podstawowych koncepcjach, kluczowych funkcjach i zrozumiesz, jak azd upraszcza wdrażanie aplikacji natywnych dla chmury.
+Ta lekcja wprowadza Cię w Azure Developer CLI (azd), potężne narzędzie wiersza poleceń, które przyspiesza przejście od lokalnego rozwoju do wdrożenia w Azure. Dowiesz się o podstawowych koncepcjach, kluczowych funkcjach i zrozumiesz, jak azd upraszcza wdrażanie aplikacji natywnych dla chmury.
 
 ## Cele nauki
 
 Po zakończeniu tej lekcji będziesz:
 - Rozumieć, czym jest Azure Developer CLI i jego główny cel
 - Poznać podstawowe koncepcje, takie jak szablony, środowiska i usługi
-- Zbadać kluczowe funkcje, w tym rozwój oparty na szablonach i Infrastructure as Code
-- Zrozumieć strukturę projektu azd i przepływ pracy
+- Odkrywać kluczowe funkcje, w tym rozwój oparty na szablonach i Infrastructure as Code
+- Rozumieć strukturę projektu azd i przepływ pracy
 - Przygotowany do instalacji i konfiguracji azd w swoim środowisku deweloperskim
 
 ## Efekty nauki
@@ -33,7 +35,7 @@ Po ukończeniu tej lekcji będziesz w stanie:
 
 ## Czym jest Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) to narzędzie wiersza poleceń zaprojektowane, aby przyspieszyć przejście od lokalnego rozwoju do wdrożenia w Azure. Upraszcza proces budowania, wdrażania i zarządzania aplikacjami natywnymi dla chmury w Azure.
+Azure Developer CLI (azd) to narzędzie wiersza poleceń zaprojektowane, aby przyspieszyć przejście od lokalnego rozwoju do wdrożenia w Azure. Upraszcza proces budowania, wdrażania i zarządzania aplikacjami natywnymi dla chmury na platformie Azure.
 
 ## Podstawowe koncepcje
 
@@ -56,11 +58,11 @@ Każde środowisko utrzymuje własne:
 - Stan wdrożenia
 
 ### Usługi
-Usługi są elementami składowymi Twojej aplikacji:
+Usługi są podstawowymi elementami Twojej aplikacji:
 - **Frontend** - Aplikacje webowe, SPA
 - **Backend** - API, mikrousługi
 - **Baza danych** - Rozwiązania do przechowywania danych
-- **Przechowywanie** - Przechowywanie plików i blobów
+- **Przechowywanie** - Przechowywanie plików i obiektów blob
 
 ## Kluczowe funkcje
 
@@ -74,7 +76,7 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Specyficzny dla Azure język domenowy
+- **Bicep** - Specjalistyczny język Azure
 - **Terraform** - Narzędzie do infrastruktury wielochmurowej
 - **ARM Templates** - Szablony Azure Resource Manager
 
@@ -204,7 +206,7 @@ Usuwa **wszystkie powiązane metadane**, w tym:
 Stan środowiska
 Lokalny folder `.azure`
 Zbuforowane informacje o wdrożeniu
-Zapobiega "zapamiętywaniu" przez azd poprzednich wdrożeń, co może powodować problemy, takie jak niedopasowane grupy zasobów lub nieaktualne odwołania do rejestru.
+Zapobiega "zapamiętywaniu" przez azd poprzednich wdrożeń, co może powodować problemy, takie jak niedopasowane grupy zasobów lub nieaktualne odwołania do rejestrów.
 
 ### Dlaczego używać obu?
 Gdy napotkasz problemy z `azd up` z powodu pozostałego stanu lub częściowych wdrożeń, ta kombinacja zapewnia **czystą kartę**.
@@ -234,7 +236,7 @@ azd template show <template>   # Template details
 azd init --help               # Initialization options
 ```
 
-### Zarządzanie projektem
+### Zarządzanie projektami
 ```bash
 azd show                     # Project overview
 azd env show                 # Current environment
@@ -262,18 +264,18 @@ azd init --template template1
 ```
 
 ### 2. Wykorzystuj szablony
-- Rozpocznij od istniejących szablonów
-- Dostosuj je do swoich potrzeb
+- Zaczynaj od istniejących szablonów
+- Dostosowuj je do swoich potrzeb
 - Twórz szablony wielokrotnego użytku dla swojej organizacji
 
 ### 3. Izolacja środowisk
-- Używaj oddzielnych środowisk dla dev/staging/prod
+- Używaj oddzielnych środowisk dla rozwoju/staging/produkcji
 - Nigdy nie wdrażaj bezpośrednio do produkcji z lokalnej maszyny
 - Używaj pipeline'ów CI/CD do wdrożeń produkcyjnych
 
 ### 4. Zarządzanie konfiguracją
 - Używaj zmiennych środowiskowych dla danych wrażliwych
-- Przechowuj konfigurację w kontroli wersji
+- Przechowuj konfigurację w systemie kontroli wersji
 - Dokumentuj ustawienia specyficzne dla środowiska
 
 ## Postęp w nauce
@@ -293,13 +295,13 @@ azd init --template template1
 ### Zaawansowany (Tydzień 5+)
 1. Twórz własne szablony
 2. Zaawansowane wzorce infrastruktury
-3. Wdrożenia wieloregionowe
+3. Wdrożenia w wielu regionach
 4. Konfiguracje na poziomie przedsiębiorstwa
 
 ## Kolejne kroki
 
 - [Instalacja i konfiguracja](installation.md) - Zainstaluj i skonfiguruj azd
-- [Twój pierwszy projekt](first-project.md) - Praktyczny samouczek
+- [Twój pierwszy projekt](first-project.md) - Praktyczny tutorial
 - [Przewodnik konfiguracji](configuration.md) - Zaawansowane opcje konfiguracji
 
 ## Dodatkowe zasoby
@@ -310,8 +312,7 @@ azd init --template template1
 
 ---
 
-**Nawigacja**
-- **Poprzednia lekcja**: [README](../../README.md)
+**Poprzednie:** [Instalacja i konfiguracja](installation.md) | **Następne:** [Konfiguracja](configuration.md)
 - **Następna lekcja**: [Instalacja i konfiguracja](installation.md)
 
 ---

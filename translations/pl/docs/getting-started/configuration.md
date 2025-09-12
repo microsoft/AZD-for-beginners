@@ -1,22 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:11:46+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T17:15:53+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "pl"
 }
 -->
 # Przewodnik Konfiguracyjny
 
+**Poprzedni:** [Podstawy AZD](azd-basics.md) | **Następny:** [Pierwszy Projekt](first-project.md)
+
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik obejmuje wszystkie aspekty konfiguracji Azure Developer CLI, aby zapewnić optymalne przepływy pracy związane z rozwojem i wdrażaniem. Dowiesz się o hierarchii konfiguracji, zarządzaniu środowiskami, metodach uwierzytelniania oraz zaawansowanych wzorcach konfiguracji, które umożliwiają efektywne i bezpieczne wdrożenia w Azure.
+Ten kompleksowy przewodnik obejmuje wszystkie aspekty konfiguracji Azure Developer CLI, aby zapewnić optymalne procesy rozwoju i wdrażania. Dowiesz się o hierarchii konfiguracji, zarządzaniu środowiskami, metodach uwierzytelniania oraz zaawansowanych wzorcach konfiguracji, które umożliwiają efektywne i bezpieczne wdrożenia w Azure.
 
 ## Cele nauki
 
 Po zakończeniu tej lekcji będziesz:
-- Mistrzowsko zarządzać hierarchią konfiguracji azd i rozumieć, jak priorytetowane są ustawienia
+- Znać hierarchię konfiguracji azd i rozumieć, jak priorytetyzowane są ustawienia
 - Skutecznie konfigurować ustawienia globalne i specyficzne dla projektu
 - Zarządzać wieloma środowiskami z różnymi konfiguracjami
 - Wdrażać bezpieczne wzorce uwierzytelniania i autoryzacji
@@ -25,13 +27,13 @@ Po zakończeniu tej lekcji będziesz:
 ## Rezultaty nauki
 
 Po ukończeniu tej lekcji będziesz w stanie:
-- Skonfigurować azd dla optymalnych przepływów pracy związanych z rozwojem
+- Skonfigurować azd dla optymalnych procesów rozwoju
 - Ustawić i zarządzać wieloma środowiskami wdrożeniowymi
-- Wdrażać bezpieczne praktyki zarządzania konfiguracją
+- Wdrażać praktyki bezpiecznego zarządzania konfiguracją
 - Rozwiązywać problemy związane z konfiguracją
-- Dostosowywać zachowanie azd do specyficznych wymagań organizacyjnych
+- Dostosowywać działanie azd do specyficznych wymagań organizacyjnych
 
-Ten kompleksowy przewodnik obejmuje wszystkie aspekty konfiguracji Azure Developer CLI, aby zapewnić optymalne przepływy pracy związane z rozwojem i wdrażaniem.
+Ten kompleksowy przewodnik obejmuje wszystkie aspekty konfiguracji Azure Developer CLI, aby zapewnić optymalne procesy rozwoju i wdrażania.
 
 ## Hierarchia Konfiguracji
 
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Szablony Środowisk
-Utwórz `.azure/env.template` dla spójnego ustawienia środowiska:
+Utwórz `.azure/env.template`, aby zapewnić spójne ustawienia środowiska:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -308,7 +310,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Konfiguracja Infrastruktury
 
 ### Parametry Bicep
-Skonfiguruj parametry infrastruktury w `infra/main.parameters.json`:
+Konfiguruj parametry infrastruktury w `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -331,7 +333,7 @@ Skonfiguruj parametry infrastruktury w `infra/main.parameters.json`:
 ```
 
 ### Konfiguracja Terraform
-Dla projektów Terraform, skonfiguruj w `infra/terraform.tfvars`:
+Dla projektów Terraform, konfiguruj w `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -424,7 +426,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Środowisko Stagingowe
+### Środowisko Testowe
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -457,7 +459,7 @@ azd provision --dry-run
 ```
 
 ### Skrypty Konfiguracji
-Utwórz skrypty walidacyjne w `scripts/`:
+Twórz skrypty walidacyjne w `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -482,7 +484,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 Najlepsze Praktyki
 
-### 1. Używaj Zmiennych Środowiskowych
+### 1. Korzystaj ze Zmiennych Środowiskowych
 ```yaml
 # Good: Use environment variables
 database:
@@ -547,11 +549,10 @@ Dokumentuj swoją konfigurację w `CONFIG.md`:
 
 ---
 
-**Nawigacja**
-- **Poprzednia Lekcja**: [Instalacja i Konfiguracja](installation.md)
+**Poprzedni:** [Podstawy AZD](azd-basics.md) | **Następny:** [Pierwszy Projekt](first-project.md)
 - **Następna Lekcja**: [Twój Pierwszy Projekt](first-project.md)
 
 ---
 
 **Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

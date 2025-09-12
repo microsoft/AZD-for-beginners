@@ -1,24 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T12:54:53+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T16:41:21+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "zh"
 }
 -->
 # AZD 基础知识 - 了解 Azure Developer CLI
 
-## 介绍
+**上一节:** [安装与设置](installation.md) | **下一节:** [配置](configuration.md)
 
-本课程将向您介绍 Azure Developer CLI (azd)，这是一款强大的命令行工具，可加速从本地开发到 Azure 部署的过程。您将学习基本概念、核心功能，并了解 azd 如何简化云原生应用的部署。
+## 简介
+
+本课程将向您介绍 Azure Developer CLI (azd)，这是一款强大的命令行工具，可以加速从本地开发到 Azure 部署的过程。您将学习 azd 的基本概念、核心功能，并了解它如何简化云原生应用的部署。
 
 ## 学习目标
 
 完成本课程后，您将能够：
-- 了解 Azure Developer CLI 的定义及其主要用途
+- 了解 Azure Developer CLI 的用途及其主要目标
 - 学习模板、环境和服务的核心概念
-- 探索关键功能，包括基于模板的开发和基础设施即代码
+- 探索基于模板的开发和基础设施即代码的关键功能
 - 理解 azd 项目结构和工作流程
 - 为您的开发环境安装和配置 azd 做好准备
 
@@ -56,7 +58,7 @@ Azure Developer CLI (azd) 是一个命令行工具，旨在加速从本地开发
 - 部署状态
 
 ### 服务
-服务是应用的构建模块：
+服务是构建应用的模块：
 - **前端** - Web 应用、单页应用
 - **后端** - API、微服务
 - **数据库** - 数据存储解决方案
@@ -189,12 +191,12 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## 了解 `azd down --force --purge`
-`azd down --force --purge` 命令是一种强大的方式，可以完全拆除您的 azd 环境及所有相关资源。以下是每个标志的功能：
+`azd down --force --purge` 命令是一种强大的方式，可以完全清除您的 azd 环境及所有相关资源。以下是每个标志的功能：
 ```
 --force
 ```
 - 跳过确认提示。
-- 适用于自动化或脚本场景，无需手动输入。
+- 适用于自动化或脚本化场景，无需手动输入。
 - 即使 CLI 检测到不一致，也能确保拆除过程不受干扰。
 
 ```
@@ -206,10 +208,10 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 缓存的部署信息  
 防止 azd "记住" 之前的部署，这可能导致资源组不匹配或过时的注册表引用等问题。
 
-### 为什么同时使用这两个选项？
-当您因遗留状态或部分部署问题而无法使用 `azd up` 时，这种组合可以确保一个 **干净的起点**。
+### 为什么同时使用？
+当您因遗留状态或部分部署问题而无法使用 `azd up` 时，这个组合可以确保一个 **干净的起点**。
 
-在 Azure 门户中手动删除资源后，或者切换模板、环境或资源组命名约定时，这种方法尤其有用。
+特别是在 Azure 门户中手动删除资源后，或者切换模板、环境或资源组命名约定时，这种方法非常有用。
 
 ### 管理多个环境
 ```bash
@@ -267,7 +269,7 @@ azd init --template template1
 - 为您的组织创建可重复使用的模板
 
 ### 3. 环境隔离
-- 为开发/预生产/生产使用单独的环境
+- 为开发/预生产/生产使用独立的环境
 - 切勿直接从本地机器部署到生产环境
 - 使用 CI/CD 管道进行生产环境部署
 
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**导航**
-- **上一课**: [README](../../README.md)
-- **下一课**: [安装与设置](installation.md)
+**上一节:** [安装与设置](installation.md) | **下一节:** [配置](configuration.md)  
+- **下一课程**: [安装与设置](installation.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。虽然我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

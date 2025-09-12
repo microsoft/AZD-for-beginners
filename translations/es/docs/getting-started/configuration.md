@@ -1,22 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T12:48:09+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T17:05:12+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "es"
 }
 -->
 # Guía de Configuración
 
+**Anterior:** [AZD Básico](azd-basics.md) | **Siguiente:** [Primer Proyecto](first-project.md)
+
 ## Introducción
 
-Esta guía completa cubre todos los aspectos de la configuración de Azure Developer CLI para flujos de trabajo óptimos de desarrollo y despliegue. Aprenderás sobre la jerarquía de configuración, la gestión de entornos, los métodos de autenticación y los patrones avanzados de configuración que permiten despliegues eficientes y seguros en Azure.
+Esta guía completa cubre todos los aspectos de la configuración de Azure Developer CLI para flujos de trabajo óptimos de desarrollo y despliegue. Aprenderás sobre la jerarquía de configuración, gestión de entornos, métodos de autenticación y patrones avanzados de configuración que permiten despliegues eficientes y seguros en Azure.
 
 ## Objetivos de Aprendizaje
 
 Al final de esta lección, podrás:
-- Dominar la jerarquía de configuración de azd y entender cómo se priorizan las configuraciones
+- Dominar la jerarquía de configuración de azd y entender cómo se priorizan los ajustes
 - Configurar ajustes globales y específicos de proyectos de manera efectiva
 - Gestionar múltiples entornos con diferentes configuraciones
 - Implementar patrones seguros de autenticación y autorización
@@ -36,7 +38,7 @@ Esta guía completa cubre todos los aspectos de la configuración de Azure Devel
 ## Jerarquía de Configuración
 
 azd utiliza un sistema de configuración jerárquico:
-1. **Flags de línea de comandos** (máxima prioridad)
+1. **Flags de línea de comandos** (mayor prioridad)
 2. **Variables de entorno**
 3. **Configuración local del proyecto** (`.azd/config.json`)
 4. **Configuración global del usuario** (`~/.azd/config.json`)
@@ -44,7 +46,7 @@ azd utiliza un sistema de configuración jerárquico:
 
 ## Configuración Global
 
-### Establecer Valores Predeterminados Globales
+### Configuración de Valores Predeterminados Globales
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +64,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Configuraciones Globales Comunes
+### Configuración Global Común
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -178,7 +180,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Configuraciones Específicas por Lenguaje
+#### Configuración Específica del Lenguaje
 ```yaml
 services:
   node-app:
@@ -284,7 +286,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Autenticación con Principal de Servicio
+### Autenticación con Service Principal
 Para pipelines de CI/CD:
 ```bash
 # Set environment variables
@@ -331,7 +333,7 @@ Configura parámetros de infraestructura en `infra/main.parameters.json`:
 ```
 
 ### Configuración de Terraform
-Para proyectos con Terraform, configura en `infra/terraform.tfvars`:
+Para proyectos Terraform, configura en `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -378,7 +380,7 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Ejemplo de `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Ejemplo `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Configuración Avanzada
 
@@ -413,7 +415,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Configuraciones Específicas por Entorno
+## 🎯 Configuraciones Específicas de Entornos
 
 ### Entorno de Desarrollo
 ```bash
@@ -482,7 +484,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 Mejores Prácticas
 
-### 1. Usa Variables de Entorno
+### 1. Usar Variables de Entorno
 ```yaml
 # Good: Use environment variables
 database:
@@ -493,7 +495,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organiza los Archivos de Configuración
+### 2. Organizar Archivos de Configuración
 ```
 .azure/
 ├── config.json              # Global project config
@@ -509,7 +511,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Consideraciones para el Control de Versiones
+### 3. Consideraciones de Control de Versiones
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -537,7 +539,7 @@ Documenta tu configuración en `CONFIG.md`:
 
 - [Tu Primer Proyecto](first-project.md) - Aplica la configuración en la práctica
 - [Guía de Despliegue](../deployment/deployment-guide.md) - Usa la configuración para el despliegue
-- [Aprovisionamiento de Recursos](../deployment/provisioning.md) - Configuraciones listas para producción
+- [Provisionamiento de Recursos](../deployment/provisioning.md) - Configuraciones listas para producción
 
 ## Referencias
 
@@ -547,11 +549,10 @@ Documenta tu configuración en `CONFIG.md`:
 
 ---
 
-**Navegación**
-- **Lección Anterior**: [Instalación y Configuración](installation.md)
+**Anterior:** [AZD Básico](azd-basics.md) | **Siguiente:** [Primer Proyecto](first-project.md)
 - **Próxima Lección**: [Tu Primer Proyecto](first-project.md)
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

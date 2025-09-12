@@ -1,46 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:07:52+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T17:02:08+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "pt"
 }
 -->
 # Guia de Configuração
 
+**Anterior:** [AZD Básico](azd-basics.md) | **Próximo:** [Primeiro Projeto](first-project.md)
+
 ## Introdução
 
-Este guia abrangente cobre todos os aspetos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação otimizados. Irá aprender sobre a hierarquia de configuração, gestão de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implementações eficientes e seguras no Azure.
+Este guia abrangente cobre todos os aspetos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação otimizados. Vais aprender sobre a hierarquia de configuração, gestão de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implementações eficientes e seguras no Azure.
 
 ## Objetivos de Aprendizagem
 
-No final desta lição, irá:
+No final desta lição, vais:
 - Dominar a hierarquia de configuração do azd e compreender como as definições são priorizadas
-- Configurar definições globais e específicas de projetos de forma eficaz
+- Configurar definições globais e específicas de projeto de forma eficaz
 - Gerir múltiplos ambientes com diferentes configurações
 - Implementar padrões seguros de autenticação e autorização
 - Compreender padrões avançados de configuração para cenários complexos
 
 ## Resultados de Aprendizagem
 
-Após concluir esta lição, será capaz de:
+Após concluir esta lição, serás capaz de:
 - Configurar o azd para fluxos de trabalho de desenvolvimento otimizados
 - Configurar e gerir múltiplos ambientes de implementação
 - Implementar práticas seguras de gestão de configuração
-- Resolver problemas relacionados com configurações
-- Personalizar o comportamento do azd para requisitos específicos da sua organização
+- Resolver problemas relacionados com configuração
+- Personalizar o comportamento do azd para requisitos específicos da organização
 
 Este guia abrangente cobre todos os aspetos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação otimizados.
 
 ## Hierarquia de Configuração
 
-O azd utiliza um sistema hierárquico de configuração:
-1. **Flags da linha de comando** (prioridade mais alta)
+O azd utiliza um sistema de configuração hierárquico:
+1. **Flags da linha de comando** (maior prioridade)
 2. **Variáveis de ambiente**
 3. **Configuração local do projeto** (`.azd/config.json`)
 4. **Configuração global do utilizador** (`~/.azd/config.json`)
-5. **Valores padrão** (prioridade mais baixa)
+5. **Valores padrão** (menor prioridade)
 
 ## Configuração Global
 
@@ -81,7 +83,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Configuração do Projeto
 
 ### Estrutura do azure.yaml
-O ficheiro `azure.yaml` é o coração do seu projeto azd:
+O ficheiro `azure.yaml` é o núcleo do teu projeto azd:
 
 ```yaml
 # Minimum configuration
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Modelos de Ambiente
-Crie `.azure/env.template` para uma configuração consistente de ambientes:
+Cria `.azure/env.template` para uma configuração consistente de ambientes:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -308,7 +310,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Configuração de Infraestrutura
 
 ### Parâmetros Bicep
-Configure os parâmetros de infraestrutura em `infra/main.parameters.json`:
+Configura parâmetros de infraestrutura em `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -331,7 +333,7 @@ Configure os parâmetros de infraestrutura em `infra/main.parameters.json`:
 ```
 
 ### Configuração Terraform
-Para projetos Terraform, configure em `infra/terraform.tfvars`:
+Para projetos Terraform, configura em `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -457,7 +459,7 @@ azd provision --dry-run
 ```
 
 ### Scripts de Configuração
-Crie scripts de validação em `scripts/`:
+Cria scripts de validação em `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -480,9 +482,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Boas Práticas
+## 🎓 Melhores Práticas
 
-### 1. Utilize Variáveis de Ambiente
+### 1. Utilizar Variáveis de Ambiente
 ```yaml
 # Good: Use environment variables
 database:
@@ -493,7 +495,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize os Ficheiros de Configuração
+### 2. Organizar Ficheiros de Configuração
 ```
 .azure/
 ├── config.json              # Global project config
@@ -517,8 +519,8 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Documentação da Configuração
-Documente a sua configuração em `CONFIG.md`:
+### 4. Documentação de Configuração
+Documenta a tua configuração em `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -535,8 +537,8 @@ Documente a sua configuração em `CONFIG.md`:
 
 ## Próximos Passos
 
-- [O Seu Primeiro Projeto](first-project.md) - Aplique a configuração na prática
-- [Guia de Implementação](../deployment/deployment-guide.md) - Utilize a configuração para implementação
+- [O Teu Primeiro Projeto](first-project.md) - Aplicar a configuração na prática
+- [Guia de Implementação](../deployment/deployment-guide.md) - Utilizar a configuração para implementação
 - [Provisionamento de Recursos](../deployment/provisioning.md) - Configurações prontas para produção
 
 ## Referências
@@ -547,9 +549,8 @@ Documente a sua configuração em `CONFIG.md`:
 
 ---
 
-**Navegação**
-- **Lição Anterior**: [Instalação e Configuração](installation.md)
-- **Próxima Lição**: [O Seu Primeiro Projeto](first-project.md)
+**Anterior:** [AZD Básico](azd-basics.md) | **Próximo:** [Primeiro Projeto](first-project.md)
+- **Próxima Lição**: [O Teu Primeiro Projeto](first-project.md)
 
 ---
 

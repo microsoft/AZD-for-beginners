@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T12:58:34+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T16:55:42+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ja"
 }
 -->
 # 設定ガイド
 
+**前回:** [AZDの基本](azd-basics.md) | **次回:** [最初のプロジェクト](first-project.md)
+
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLIを最適な開発およびデプロイワークフローに設定する方法を解説します。設定の階層構造、環境管理、認証方法、効率的かつ安全なAzureデプロイを可能にする高度な設定パターンについて学びます。
+この包括的なガイドでは、Azure Developer CLIを最適な開発およびデプロイメントワークフローに設定する方法を解説します。設定の階層構造、環境管理、認証方法、効率的かつ安全なAzureデプロイメントを可能にする高度な設定パターンについて学びます。
 
 ## 学習目標
 
@@ -19,19 +21,19 @@ CO_OP_TRANSLATOR_METADATA:
 - azdの設定階層を理解し、設定の優先順位を把握する
 - グローバルおよびプロジェクト固有の設定を効果的に構成する
 - 異なる設定を持つ複数の環境を管理する
-- 安全な認証および認可パターンを実装する
+- 安全な認証と認可パターンを実装する
 - 複雑なシナリオに対応する高度な設定パターンを理解する
 
 ## 学習成果
 
 このレッスンを完了すると、以下ができるようになります:
 - 開発ワークフローを最適化するためにazdを設定する
-- 複数のデプロイ環境をセットアップおよび管理する
+- 複数のデプロイメント環境をセットアップおよび管理する
 - 安全な設定管理の実践を実装する
 - 設定に関連する問題をトラブルシュートする
-- 特定の組織要件に合わせてazdの動作をカスタマイズする
+- 特定の組織の要件に合わせてazdの動作をカスタマイズする
 
-この包括的なガイドでは、Azure Developer CLIを最適な開発およびデプロイワークフローに設定する方法を解説します。
+この包括的なガイドでは、Azure Developer CLIを最適な開発およびデプロイメントワークフローに設定する方法を解説します。
 
 ## 設定階層
 
@@ -217,7 +219,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### 環境設定
-各環境には`.azure/<env-name>/config.json`に独自の設定があります:
+各環境には独自の設定があり、`.azure/<env-name>/config.json`に保存されます:
 
 ```json
 {
@@ -285,7 +287,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### サービスプリンシパル認証
-CI/CDパイプライン用:
+CI/CDパイプライン向け:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,7 +300,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### マネージドID
-Azureホスト環境用:
+Azureホスト環境向け:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -339,7 +341,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 デプロイ設定
+## 🚀 デプロイメント設定
 
 ### ビルド設定
 ```yaml
@@ -536,8 +538,8 @@ database:
 ## 次のステップ
 
 - [最初のプロジェクト](first-project.md) - 設定を実際に適用する
-- [デプロイガイド](../deployment/deployment-guide.md) - デプロイに設定を活用する
-- [リソースのプロビジョニング](../deployment/provisioning.md) - 本番対応の設定
+- [デプロイメントガイド](../deployment/deployment-guide.md) - 設定を使用してデプロイメントを行う
+- [リソースのプロビジョニング](../deployment/provisioning.md) - 本番環境向けの設定
 
 ## 参考資料
 
@@ -547,11 +549,10 @@ database:
 
 ---
 
-**ナビゲーション**
-- **前のレッスン**: [インストールとセットアップ](installation.md)
+**前回:** [AZDの基本](azd-basics.md) | **次回:** [最初のプロジェクト](first-project.md)
 - **次のレッスン**: [最初のプロジェクト](first-project.md)
 
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は一切の責任を負いません。

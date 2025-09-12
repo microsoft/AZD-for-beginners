@@ -1,37 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:11:10+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T17:15:03+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "pl"
 }
 -->
 # Twój Pierwszy Projekt - Praktyczny Samouczek
 
+**Poprzedni:** [Konfiguracja](configuration.md) | **Następny:** [Integracja z Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Wprowadzenie
 
-Witaj w swoim pierwszym projekcie z Azure Developer CLI! Ten kompleksowy praktyczny samouczek przeprowadzi Cię przez cały proces tworzenia, wdrażania i zarządzania aplikacją full-stack na Azure za pomocą azd. Będziesz pracować z rzeczywistą aplikacją typu "todo", która zawiera frontend React, backend API w Node.js oraz bazę danych MongoDB.
+Witamy w Twoim pierwszym projekcie z Azure Developer CLI! Ten kompleksowy praktyczny samouczek przeprowadzi Cię przez proces tworzenia, wdrażania i zarządzania aplikacją full-stack na platformie Azure za pomocą azd. Będziesz pracować z rzeczywistą aplikacją typu "todo", która obejmuje frontend React, backend API w Node.js oraz bazę danych MongoDB.
 
 ## Cele Nauki
 
-Po ukończeniu tego samouczka:
-- Opanujesz proces inicjalizacji projektu azd za pomocą szablonów
-- Zrozumiesz strukturę projektu Azure Developer CLI oraz pliki konfiguracyjne
-- Wykonasz pełne wdrożenie aplikacji na Azure wraz z przygotowaniem infrastruktury
-- Zaimplementujesz aktualizacje aplikacji i strategie ponownego wdrażania
-- Zarządzisz wieloma środowiskami dla rozwoju i testów
-- Zastosujesz praktyki czyszczenia zasobów i zarządzania kosztami
+Po ukończeniu tego samouczka będziesz:
+- Mistrzowsko korzystać z workflow inicjalizacji projektu azd za pomocą szablonów
+- Rozumieć strukturę projektu Azure Developer CLI oraz pliki konfiguracyjne
+- Wykonywać pełne wdrożenie aplikacji na Azure wraz z przygotowaniem infrastruktury
+- Wdrażać aktualizacje aplikacji i strategie ponownego wdrażania
+- Zarządzać wieloma środowiskami dla rozwoju i testów
+- Stosować praktyki czyszczenia zasobów i zarządzania kosztami
 
 ## Efekty Nauki
 
 Po ukończeniu będziesz w stanie:
-- Samodzielnie inicjalizować i konfigurować projekty azd z szablonów
+- Samodzielnie inicjalizować i konfigurować projekty azd na podstawie szablonów
 - Skutecznie nawigować i modyfikować struktury projektów azd
 - Wdrażać aplikacje full-stack na Azure za pomocą pojedynczych poleceń
 - Rozwiązywać typowe problemy z wdrożeniem i uwierzytelnianiem
 - Zarządzać wieloma środowiskami Azure dla różnych etapów wdrożenia
-- Implementować ciągłe wdrażanie dla aktualizacji aplikacji
+- Wdrażać workflow ciągłego wdrażania dla aktualizacji aplikacji
 
 ## Pierwsze Kroki
 
@@ -42,23 +44,23 @@ Po ukończeniu będziesz w stanie:
 - ✅ Node.js 16+ (dla tego samouczka)
 - ✅ Visual Studio Code (zalecane)
 
-### Weryfikacja Konfiguracji
+### Zweryfikuj Swoje Środowisko
 ```bash
 # Check azd installation
 azd version
 ```
-### Weryfikacja uwierzytelnienia Azure
+### Zweryfikuj uwierzytelnienie Azure
 
 ```bash
 az account show
 ```
 
-### Sprawdzenie wersji Node.js
+### Sprawdź wersję Node.js
 ```bash
 node --version
 ```
 
-## Krok 1: Wybór i Inicjalizacja Szablonu
+## Krok 1: Wybierz i Zainicjalizuj Szablon
 
 Zacznijmy od popularnego szablonu aplikacji "todo", który zawiera frontend React oraz backend API w Node.js.
 
@@ -83,7 +85,7 @@ azd init --template todo-nodejs-mongo
 - Przygotowanie kodu infrastruktury w katalogu `infra/`
 - Utworzenie konfiguracji środowiska
 
-## Krok 2: Eksploracja Struktury Projektu
+## Krok 2: Zbadaj Strukturę Projektu
 
 Przyjrzyjmy się, co azd dla nas stworzył:
 
@@ -135,11 +137,11 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## Krok 3: Dostosowanie Projektu (Opcjonalne)
+## Krok 3: Dostosuj Swój Projekt (Opcjonalne)
 
 Przed wdrożeniem możesz dostosować aplikację:
 
-### Modyfikacja Frontendu
+### Zmień Frontend
 ```bash
 # Open the React app component
 code src/web/src/App.tsx
@@ -151,7 +153,7 @@ Wprowadź prostą zmianę:
 <h1>My Awesome Todo App</h1>
 ```
 
-### Konfiguracja Zmiennych Środowiskowych
+### Skonfiguruj Zmienne Środowiskowe
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
@@ -160,9 +162,9 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## Krok 4: Wdrożenie na Azure
+## Krok 4: Wdróż na Azure
 
-Teraz najciekawsza część - wdrożenie wszystkiego na Azure!
+Teraz czas na ekscytującą część - wdrożenie wszystkiego na Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -195,9 +197,9 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Krok 5: Testowanie Aplikacji
+## Krok 5: Przetestuj Swoją Aplikację
 
-### Dostęp do Aplikacji
+### Uzyskaj Dostęp do Aplikacji
 Kliknij na URL podany w wynikach wdrożenia lub uzyskaj go w dowolnym momencie:
 ```bash
 # Get application endpoints
@@ -207,12 +209,12 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Testowanie Aplikacji Todo
+### Przetestuj Aplikację Todo
 1. **Dodaj zadanie** - Kliknij "Add Todo" i wpisz zadanie
 2. **Oznacz jako ukończone** - Zaznacz ukończone zadania
 3. **Usuń zadania** - Usuń zadania, które już nie są potrzebne
 
-### Monitorowanie Aplikacji
+### Monitoruj Swoją Aplikację
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -221,11 +223,11 @@ azd monitor
 azd logs
 ```
 
-## Krok 6: Wprowadzenie Zmian i Ponowne Wdrożenie
+## Krok 6: Wprowadź Zmiany i Ponownie Wdróż
 
-Wprowadźmy zmianę i zobaczmy, jak łatwo jest zaktualizować aplikację:
+Wprowadźmy zmianę i zobaczmy, jak łatwo jest zaktualizować:
 
-### Modyfikacja API
+### Zmień API
 ```bash
 # Edit the API code
 code src/api/src/routes/lists.js
@@ -237,7 +239,7 @@ Dodaj niestandardowy nagłówek odpowiedzi:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Wdrożenie Tylko Zmian w Kodzie
+### Wdróż Tylko Zmiany w Kodzie
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -245,7 +247,7 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## Krok 7: Zarządzanie Wieloma Środowiskami
+## Krok 7: Zarządzaj Wieloma Środowiskami
 
 Utwórz środowisko testowe, aby sprawdzić zmiany przed produkcją:
 
@@ -274,9 +276,9 @@ azd env select staging
 azd show
 ```
 
-## Krok 8: Czyszczenie Zasobów
+## Krok 8: Wyczyść Zasoby
 
-Po zakończeniu eksperymentów wyczyść zasoby, aby uniknąć dalszych opłat:
+Gdy skończysz eksperymentować, wyczyść zasoby, aby uniknąć dalszych opłat:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -293,7 +295,7 @@ azd down --force --purge
 ## Czego Się Nauczyłeś
 
 Gratulacje! Udało Ci się:
-- Zainicjalizować projekt azd z szablonu
+- Zainicjalizować projekt azd na podstawie szablonu
 - Zbadać strukturę projektu i kluczowe pliki
 - Wdrożyć aplikację full-stack na Azure
 - Wprowadzić zmiany w kodzie i ponownie wdrożyć
@@ -302,7 +304,7 @@ Gratulacje! Udało Ci się:
 
 ## Rozwiązywanie Typowych Problemów
 
-### Błędy Uwierzytelnienia
+### Problemy z Uwierzytelnieniem
 ```bash
 # Re-authenticate with Azure
 az login
@@ -311,7 +313,7 @@ az login
 az account show
 ```
 
-### Problemy z Wdrożeniem
+### Niepowodzenia Wdrożenia
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -337,7 +339,7 @@ netstat -an | grep :3100
 
 ## Kolejne Kroki
 
-Po ukończeniu pierwszego projektu, odkryj te zaawansowane tematy:
+Po ukończeniu pierwszego projektu, zapoznaj się z tymi zaawansowanymi tematami:
 
 ### 1. Dostosowanie Infrastruktury
 - [Infrastructure as Code](../deployment/provisioning.md)
@@ -352,7 +354,7 @@ Po ukończeniu pierwszego projektu, odkryj te zaawansowane tematy:
 - [Optymalizacja wydajności](../deployment/best-practices.md#performance)
 - [Monitorowanie i logowanie](../deployment/best-practices.md#monitoring)
 
-### 4. Odkrywanie Więcej Szablonów
+### 4. Odkryj Więcej Szablonów
 ```bash
 # Browse templates by category
 azd template list --filter web
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Nawigacja**
-- **Poprzednia Lekcja**: [Konfiguracja](configuration.md)
+**Poprzedni:** [Konfiguracja](configuration.md) | **Następny:** [Integracja z Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
 - **Następna Lekcja**: [Przewodnik Wdrożenia](../deployment/deployment-guide.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

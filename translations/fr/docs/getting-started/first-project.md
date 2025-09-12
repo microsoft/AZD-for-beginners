@@ -1,48 +1,50 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:46:41+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T16:50:51+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "fr"
 }
 -->
 # Votre Premier Projet - Tutoriel Pratique
 
+**Précédent :** [Configuration](configuration.md) | **Suivant :** [Intégration Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Introduction
 
 Bienvenue dans votre premier projet avec Azure Developer CLI ! Ce tutoriel pratique complet vous guide pas à pas pour créer, déployer et gérer une application full-stack sur Azure en utilisant azd. Vous travaillerez sur une véritable application de gestion de tâches comprenant un frontend React, un backend API Node.js et une base de données MongoDB.
 
-## Objectifs d'Apprentissage
+## Objectifs d'apprentissage
 
 En complétant ce tutoriel, vous allez :
 - Maîtriser le workflow d'initialisation de projet azd à l'aide de modèles
 - Comprendre la structure des projets Azure Developer CLI et les fichiers de configuration
-- Effectuer un déploiement complet d'application sur Azure avec provisionnement d'infrastructure
+- Réaliser un déploiement complet d'application sur Azure avec provisionnement d'infrastructure
 - Mettre en œuvre des mises à jour d'application et des stratégies de redéploiement
-- Gérer plusieurs environnements pour le développement et la mise en staging
+- Gérer plusieurs environnements pour le développement et la mise en scène
 - Appliquer des pratiques de nettoyage des ressources et de gestion des coûts
 
-## Résultats d'Apprentissage
+## Résultats d'apprentissage
 
 À la fin de ce tutoriel, vous serez capable de :
 - Initialiser et configurer des projets azd à partir de modèles de manière autonome
-- Naviguer et modifier efficacement les structures de projets azd
+- Naviguer et modifier efficacement les structures de projet azd
 - Déployer des applications full-stack sur Azure avec des commandes simples
 - Résoudre les problèmes courants de déploiement et d'authentification
 - Gérer plusieurs environnements Azure pour différentes étapes de déploiement
 - Mettre en œuvre des workflows de déploiement continu pour les mises à jour d'application
 
-## Prise en Main
+## Premiers Pas
 
-### Liste de Prérequis
-- ✅ Azure Developer CLI installé ([Guide d'Installation](installation.md))
+### Liste de vérification des prérequis
+- ✅ Azure Developer CLI installé ([Guide d'installation](installation.md))
 - ✅ Azure CLI installé et authentifié
 - ✅ Git installé sur votre système
 - ✅ Node.js 16+ (pour ce tutoriel)
 - ✅ Visual Studio Code (recommandé)
 
-### Vérifiez votre Configuration
+### Vérifiez votre configuration
 ```bash
 # Check azd installation
 azd version
@@ -60,7 +62,7 @@ node --version
 
 ## Étape 1 : Choisir et Initialiser un Modèle
 
-Commençons avec un modèle populaire d'application de gestion de tâches comprenant un frontend React et un backend API Node.js.
+Commençons par un modèle populaire d'application de gestion de tâches comprenant un frontend React et un backend API Node.js.
 
 ```bash
 # Browse available templates
@@ -77,9 +79,9 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### Que s'est-il passé ?
+### Ce qui vient de se passer :
 - Le code du modèle a été téléchargé dans votre répertoire local
-- Un fichier `azure.yaml` a été créé avec les définitions de service
+- Un fichier `azure.yaml` a été créé avec des définitions de services
 - Le code d'infrastructure a été configuré dans le répertoire `infra/`
 - Une configuration d'environnement a été créée
 
@@ -121,7 +123,7 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Fichiers Clés à Comprendre
+### Fichiers clés à comprendre
 
 **azure.yaml** - Le cœur de votre projet azd :
 ```bash
@@ -135,7 +137,7 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## Étape 3 : Personnaliser votre Projet (Optionnel)
+## Étape 3 : Personnaliser Votre Projet (Optionnel)
 
 Avant de déployer, vous pouvez personnaliser l'application :
 
@@ -145,7 +147,7 @@ Avant de déployer, vous pouvez personnaliser l'application :
 code src/web/src/App.tsx
 ```
 
-Faites un simple changement :
+Faites une modification simple :
 ```typescript
 // Find the title and change it
 <h1>My Awesome Todo App</h1>
@@ -162,7 +164,7 @@ azd env get-values
 
 ## Étape 4 : Déployer sur Azure
 
-Passons maintenant à l'étape excitante : tout déployer sur Azure !
+Passons maintenant à la partie excitante - tout déployer sur Azure !
 
 ```bash
 # Deploy infrastructure and application
@@ -175,14 +177,14 @@ azd up
 # 4. Display the application URL
 ```
 
-### Que se passe-t-il pendant le déploiement ?
+### Ce qui se passe pendant le déploiement
 
 La commande `azd up` effectue les étapes suivantes :
-1. **Provision** (`azd provision`) - Crée les ressources Azure
-2. **Package** - Construit le code de votre application
-3. **Deploy** (`azd deploy`) - Déploie le code sur les ressources Azure
+1. **Provisionnement** (`azd provision`) - Crée les ressources Azure
+2. **Packaging** - Compile le code de votre application
+3. **Déploiement** (`azd deploy`) - Déploie le code sur les ressources Azure
 
-### Résultat Attendu
+### Résultat attendu
 ```
 Packaging services (azd package)
 
@@ -195,9 +197,9 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Étape 5 : Tester votre Application
+## Étape 5 : Tester Votre Application
 
-### Accéder à votre Application
+### Accéder à Votre Application
 Cliquez sur l'URL fournie dans le résultat du déploiement, ou récupérez-la à tout moment :
 ```bash
 # Get application endpoints
@@ -208,11 +210,11 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Tester l'Application de Gestion de Tâches
-1. **Ajouter une tâche** - Cliquez sur "Add Todo" et entrez une tâche
+1. **Ajouter une tâche** - Cliquez sur "Ajouter une tâche" et entrez une activité
 2. **Marquer comme terminée** - Cochez les tâches terminées
 3. **Supprimer des tâches** - Retirez les tâches dont vous n'avez plus besoin
 
-### Surveiller votre Application
+### Surveiller Votre Application
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -237,7 +239,7 @@ Ajoutez un en-tête de réponse personnalisé :
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Déployer Uniquement les Modifications de Code
+### Déployer uniquement les modifications de code
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -247,7 +249,7 @@ azd deploy
 
 ## Étape 7 : Gérer Plusieurs Environnements
 
-Créez un environnement de staging pour tester les modifications avant la production :
+Créez un environnement de mise en scène pour tester les modifications avant la production :
 
 ```bash
 # Create a new staging environment
@@ -290,7 +292,7 @@ azd env select staging
 azd down --force --purge
 ```
 
-## Ce que Vous Avez Appris
+## Ce Que Vous Avez Appris
 
 Félicitations ! Vous avez réussi à :
 - Initialiser un projet azd à partir d'un modèle
@@ -340,14 +342,14 @@ netstat -an | grep :3100
 Maintenant que vous avez terminé votre premier projet, explorez ces sujets avancés :
 
 ### 1. Personnaliser l'Infrastructure
-- [Infrastructure as Code](../deployment/provisioning.md)
+- [Infrastructure en tant que Code](../deployment/provisioning.md)
 - [Ajouter des bases de données, du stockage et d'autres services](../deployment/provisioning.md#adding-services)
 
 ### 2. Configurer CI/CD
 - [Intégration GitHub Actions](../deployment/cicd-integration.md)
 - [Pipelines Azure DevOps](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Bonnes Pratiques en Production
+### 3. Meilleures Pratiques pour la Production
 - [Configurations de sécurité](../deployment/best-practices.md#security)
 - [Optimisation des performances](../deployment/best-practices.md#performance)
 - [Surveillance et journalisation](../deployment/best-practices.md#monitoring)
@@ -368,9 +370,9 @@ azd init --template todo-java-mongo
 ## Ressources Supplémentaires
 
 ### Matériaux d'Apprentissage
-- [Documentation Azure Developer CLI](https://learn.microsoft.com/fr-fr/azure/developer/azure-developer-cli/)
-- [Centre d'Architecture Azure](https://learn.microsoft.com/fr-fr/azure/architecture/)
-- [Framework Azure Well-Architected](https://learn.microsoft.com/fr-fr/azure/well-architected/)
+- [Documentation Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Centre d'Architecture Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Framework Azure Bien-Architecturé](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Communauté & Support
 - [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -378,7 +380,7 @@ azd init --template todo-java-mongo
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Modèles & Exemples
-- [Galerie Officielle de Modèles](https://azure.github.io/awesome-azd/)
+- [Galerie de Modèles Officiels](https://azure.github.io/awesome-azd/)
 - [Modèles Communautaires](https://github.com/Azure-Samples/azd-templates)
 - [Modèles pour Entreprises](https://github.com/Azure/azure-dev/tree/main/templates)
 
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigation**
-- **Leçon Précédente** : [Configuration](configuration.md)
-- **Leçon Suivante** : [Guide de Déploiement](../deployment/deployment-guide.md)
+**Précédent :** [Configuration](configuration.md) | **Suivant :** [Intégration Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+- **Prochaine Leçon :** [Guide de Déploiement](../deployment/deployment-guide.md)
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction humaine professionnelle. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

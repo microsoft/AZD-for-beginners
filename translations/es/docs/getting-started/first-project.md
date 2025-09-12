@@ -1,41 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:47:48+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T17:04:29+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "es"
 }
 -->
 # Tu Primer Proyecto - Tutorial Práctico
 
+**Anterior:** [Configuración](configuration.md) | **Siguiente:** [Integración con Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Introducción
 
-¡Bienvenido a tu primer proyecto con Azure Developer CLI! Este completo tutorial práctico te guiará paso a paso para crear, desplegar y gestionar una aplicación full-stack en Azure utilizando azd. Trabajarás con una aplicación real de tareas pendientes que incluye un frontend en React, un backend API en Node.js y una base de datos MongoDB.
+¡Bienvenido a tu primer proyecto con Azure Developer CLI! Este tutorial práctico y completo te guiará paso a paso en la creación, implementación y gestión de una aplicación full-stack en Azure utilizando azd. Trabajarás con una aplicación real de tareas pendientes que incluye un frontend en React, un backend API en Node.js y una base de datos MongoDB.
 
 ## Objetivos de Aprendizaje
 
-Al completar este tutorial, lograrás:
+Al completar este tutorial, podrás:
 - Dominar el flujo de inicialización de proyectos azd utilizando plantillas
 - Comprender la estructura de proyectos y archivos de configuración de Azure Developer CLI
-- Ejecutar el despliegue completo de una aplicación en Azure con aprovisionamiento de infraestructura
-- Implementar actualizaciones de la aplicación y estrategias de redepliegue
+- Ejecutar la implementación completa de aplicaciones en Azure con aprovisionamiento de infraestructura
+- Aplicar estrategias de actualización y reimplementación de aplicaciones
 - Gestionar múltiples entornos para desarrollo y pruebas
-- Aplicar prácticas de limpieza de recursos y gestión de costos
+- Implementar prácticas de limpieza de recursos y gestión de costos
 
 ## Resultados de Aprendizaje
 
 Al finalizar, serás capaz de:
 - Inicializar y configurar proyectos azd desde plantillas de forma independiente
 - Navegar y modificar estructuras de proyectos azd de manera efectiva
-- Desplegar aplicaciones full-stack en Azure con comandos simples
-- Solucionar problemas comunes de despliegue y autenticación
-- Gestionar múltiples entornos de Azure para diferentes etapas de despliegue
+- Implementar aplicaciones full-stack en Azure con comandos únicos
+- Solucionar problemas comunes de implementación y autenticación
+- Gestionar múltiples entornos de Azure para diferentes etapas de implementación
 - Implementar flujos de despliegue continuo para actualizaciones de aplicaciones
 
-## Primeros Pasos
+## Comenzando
 
-### Lista de Verificación de Requisitos Previos
+### Lista de Verificación de Prerrequisitos
 - ✅ Azure Developer CLI instalado ([Guía de Instalación](installation.md))
 - ✅ Azure CLI instalado y autenticado
 - ✅ Git instalado en tu sistema
@@ -47,13 +49,13 @@ Al finalizar, serás capaz de:
 # Check azd installation
 azd version
 ```
-### Verifica la Autenticación en Azure
+### Verifica la autenticación en Azure
 
 ```bash
 az account show
 ```
 
-### Verifica la Versión de Node.js
+### Verifica la versión de Node.js
 ```bash
 node --version
 ```
@@ -137,7 +139,7 @@ head -30 infra/main.bicep
 
 ## Paso 3: Personalizar tu Proyecto (Opcional)
 
-Antes de desplegar, puedes personalizar la aplicación:
+Antes de implementar, puedes personalizar la aplicación:
 
 ### Modificar el Frontend
 ```bash
@@ -145,7 +147,7 @@ Antes de desplegar, puedes personalizar la aplicación:
 code src/web/src/App.tsx
 ```
 
-Realiza un cambio simple:
+Haz un cambio simple:
 ```typescript
 // Find the title and change it
 <h1>My Awesome Todo App</h1>
@@ -160,9 +162,9 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## Paso 4: Desplegar en Azure
+## Paso 4: Implementar en Azure
 
-¡Ahora viene la parte emocionante: desplegar todo en Azure!
+¡Ahora viene la parte emocionante: implementar todo en Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -175,12 +177,12 @@ azd up
 # 4. Display the application URL
 ```
 
-### ¿Qué Sucede Durante el Despliegue?
+### ¿Qué Está Sucediendo Durante la Implementación?
 
 El comando `azd up` realiza estos pasos:
 1. **Provisionar** (`azd provision`) - Crea recursos en Azure
 2. **Empaquetar** - Construye el código de tu aplicación
-3. **Desplegar** (`azd deploy`) - Despliega el código en los recursos de Azure
+3. **Implementar** (`azd deploy`) - Implementa el código en los recursos de Azure
 
 ### Salida Esperada
 ```
@@ -198,7 +200,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Paso 5: Probar tu Aplicación
 
 ### Accede a tu Aplicación
-Haz clic en la URL proporcionada en la salida del despliegue, o consúltala en cualquier momento:
+Haz clic en la URL proporcionada en la salida de la implementación, o consíguela en cualquier momento:
 ```bash
 # Get application endpoints
 azd show
@@ -208,9 +210,9 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Prueba la Aplicación de Tareas
-1. **Añadir una tarea** - Haz clic en "Add Todo" e ingresa una tarea
-2. **Marcar como completada** - Marca las tareas completadas
-3. **Eliminar tareas** - Borra las tareas que ya no necesites
+1. **Agregar un elemento de tarea** - Haz clic en "Add Todo" e ingresa una tarea
+2. **Marcar como completado** - Marca los elementos completados
+3. **Eliminar elementos** - Elimina las tareas que ya no necesites
 
 ### Monitorea tu Aplicación
 ```bash
@@ -221,23 +223,23 @@ azd monitor
 azd logs
 ```
 
-## Paso 6: Realizar Cambios y Redeplegar
+## Paso 6: Realizar Cambios y Reimplementar
 
-Hagamos un cambio y veamos qué tan fácil es actualizar:
+Hagamos un cambio y veamos lo fácil que es actualizar:
 
-### Modificar la API
+### Modificar el API
 ```bash
 # Edit the API code
 code src/api/src/routes/lists.js
 ```
 
-Añade un encabezado de respuesta personalizado:
+Agrega un encabezado de respuesta personalizado:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Desplegar Solo los Cambios de Código
+### Implementar Solo los Cambios de Código
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -276,7 +278,7 @@ azd show
 
 ## Paso 8: Limpiar Recursos
 
-Cuando termines de experimentar, limpia los recursos para evitar costos continuos:
+Cuando termines de experimentar, limpia los recursos para evitar cargos continuos:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -290,13 +292,13 @@ azd env select staging
 azd down --force --purge
 ```
 
-## Lo que Has Aprendido
+## Lo Que Has Aprendido
 
 ¡Felicidades! Has logrado:
 - Inicializar un proyecto azd desde una plantilla
 - Explorar la estructura del proyecto y los archivos clave
-- Desplegar una aplicación full-stack en Azure
-- Realizar cambios en el código y redeplegar
+- Implementar una aplicación full-stack en Azure
+- Realizar cambios en el código y reimplementar
 - Gestionar múltiples entornos
 - Limpiar recursos
 
@@ -311,7 +313,7 @@ az login
 az account show
 ```
 
-### Fallos en el Despliegue
+### Fallos de Implementación
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -341,7 +343,7 @@ Ahora que has completado tu primer proyecto, explora estos temas avanzados:
 
 ### 1. Personalizar Infraestructura
 - [Infraestructura como Código](../deployment/provisioning.md)
-- [Añadir bases de datos, almacenamiento y otros servicios](../deployment/provisioning.md#adding-services)
+- [Agregar bases de datos, almacenamiento y otros servicios](../deployment/provisioning.md#adding-services)
 
 ### 2. Configurar CI/CD
 - [Integración con GitHub Actions](../deployment/cicd-integration.md)
@@ -370,7 +372,7 @@ azd init --template todo-java-mongo
 ### Materiales de Aprendizaje
 - [Documentación de Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Centro de Arquitectura de Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Marco de Buenas Prácticas de Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Marco de Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Comunidad y Soporte
 - [GitHub de Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -384,15 +386,14 @@ azd init --template todo-java-mongo
 
 ---
 
-**¡Felicidades por completar tu primer proyecto azd!** Ahora estás listo para construir y desplegar aplicaciones increíbles en Azure con confianza.
+**¡Felicidades por completar tu primer proyecto azd!** Ahora estás listo para construir e implementar aplicaciones increíbles en Azure con confianza.
 
 ---
 
-**Navegación**
-- **Lección Anterior**: [Configuración](configuration.md)
-- **Próxima Lección**: [Guía de Despliegue](../deployment/deployment-guide.md)
+**Anterior:** [Configuración](configuration.md) | **Siguiente:** [Integración con Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+- **Próxima Lección**: [Guía de Implementación](../deployment/deployment-guide.md)
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

@@ -1,23 +1,25 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T16:48:09+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T17:01:49+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "pt"
 }
 -->
 # Guia de Instalação e Configuração
 
+**Anterior:** [Documentação Principal](../../README.md) | **Próximo:** [Fundamentos do AZD](azd-basics.md)
+
 ## Introdução
 
-Este guia abrangente irá orientá-lo na instalação e configuração do Azure Developer CLI (azd) no seu sistema. Aprenderá diferentes métodos de instalação para vários sistemas operativos, configuração de autenticação e configuração inicial para preparar o seu ambiente de desenvolvimento para implementações no Azure.
+Este guia abrangente irá orientá-lo na instalação e configuração do Azure Developer CLI (azd) no seu sistema. Você aprenderá diferentes métodos de instalação para vários sistemas operativos, configuração de autenticação e preparação inicial do ambiente de desenvolvimento para implementações no Azure.
 
 ## Objetivos de Aprendizagem
 
 Ao final desta lição, você será capaz de:
 - Instalar com sucesso o Azure Developer CLI no seu sistema operativo
-- Configurar autenticação com o Azure utilizando vários métodos
+- Configurar autenticação com o Azure utilizando diferentes métodos
 - Preparar o seu ambiente de desenvolvimento com os pré-requisitos necessários
 - Compreender as diferentes opções de instalação e quando utilizá-las
 - Resolver problemas comuns de instalação e configuração
@@ -26,7 +28,7 @@ Ao final desta lição, você será capaz de:
 
 Após concluir esta lição, você será capaz de:
 - Instalar o azd utilizando o método apropriado para a sua plataforma
-- Autenticar-se com o Azure utilizando o comando `azd auth login`
+- Autenticar-se com o Azure usando o comando `azd auth login`
 - Verificar a instalação e testar comandos básicos do azd
 - Configurar o seu ambiente de desenvolvimento para uso otimizado do azd
 - Resolver problemas comuns de instalação de forma independente
@@ -36,10 +38,10 @@ Este guia ajudará você a instalar e configurar o Azure Developer CLI no seu si
 ## Pré-requisitos
 
 Antes de instalar o azd, certifique-se de que possui:
-- **Subscrição do Azure** - [Crie uma conta gratuita](https://azure.microsoft.com/free/)
+- **Assinatura do Azure** - [Crie uma conta gratuita](https://azure.microsoft.com/free/)
 - **Azure CLI** - Para autenticação e gestão de recursos
-- **Git** - Para clonar templates e controlo de versão
-- **Docker** (opcional) - Para aplicações em contêineres
+- **Git** - Para clonar templates e controle de versão
+- **Docker** (opcional) - Para aplicações containerizadas
 
 ## Métodos de Instalação
 
@@ -64,7 +66,7 @@ choco install azd
 #### Opção 4: Instalação Manual
 1. Faça o download da última versão em [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Extraia para `C:\Program Files\azd\`
-3. Adicione ao PATH na variável de ambiente
+3. Adicione à variável de ambiente PATH
 
 ### macOS
 
@@ -146,7 +148,7 @@ Saída esperada:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Configuração de Autenticação
+## Configuração de Autenticação
 
 ### Autenticação com Azure CLI (Recomendado)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configuração
+## Configuração
 
 ### Configuração Global
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integração com IDE
+## Integração com IDE
 
 ### Visual Studio Code
 Instale a extensão Azure Developer CLI:
@@ -216,10 +218,10 @@ Funcionalidades:
 - IntelliSense para azure.yaml
 - Comandos integrados no terminal
 - Navegação de templates
-- Monitorização de implementações
+- Monitoramento de implementações
 
 ### GitHub Codespaces
-Crie um `.devcontainer/devcontainer.json`:
+Crie um arquivo `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -294,7 +296,7 @@ azd logs
 azd info
 ```
 
-## Atualizar o azd
+## Atualização do azd
 
 ### Atualizações Automáticas
 O azd notificará quando houver atualizações disponíveis:
@@ -321,7 +323,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Próximos Passos
 
-1. **Concluir autenticação**: Certifique-se de que pode aceder à sua subscrição do Azure
+1. **Concluir autenticação**: Certifique-se de que pode acessar a sua assinatura do Azure
 2. **Experimente a sua primeira implementação**: Siga o [Guia do Primeiro Projeto](first-project.md)
 3. **Explore templates**: Navegue pelos templates disponíveis com `azd template list`
 4. **Configure o seu IDE**: Prepare o seu ambiente de desenvolvimento
@@ -330,17 +332,15 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 Se encontrar problemas:
 - [Documentação Oficial](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Reportar Problemas](https://github.com/Azure/azure-dev/issues)
+- [Relatar Problemas](https://github.com/Azure/azure-dev/issues)
 - [Discussões da Comunidade](https://github.com/Azure/azure-dev/discussions)
 - [Suporte do Azure](https://azure.microsoft.com/support/)
 
 ---
 
-**Navegação**
-- **Lição Anterior**: [Fundamentos do AZD](azd-basics.md)
-- **Próxima Lição**: [Configuração](configuration.md)
+**Anterior:** [Documentação Principal](../../README.md) | **Próximo:** [Fundamentos do AZD](azd-basics.md)
 
-**Instalação Concluída!** Continue para [O Seu Primeiro Projeto](first-project.md) para começar a construir com azd.
+**Instalação Concluída!** Continue para [Seu Primeiro Projeto](first-project.md) para começar a construir com azd.
 
 ---
 
