@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:08:40+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T19:06:24+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "br"
 }
 -->
 # Seu Primeiro Projeto - Tutorial Prático
 
+**Anterior:** [Configuração](configuration.md) | **Próximo:** [Integração com Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Introdução
 
-Bem-vindo ao seu primeiro projeto com o Azure Developer CLI! Este tutorial prático e abrangente oferece um passo a passo completo para criar, implantar e gerenciar uma aplicação full-stack no Azure usando o azd. Você trabalhará com uma aplicação real de lista de tarefas que inclui um frontend em React, um backend API em Node.js e um banco de dados MongoDB.
+Bem-vindo ao seu primeiro projeto com Azure Developer CLI! Este tutorial prático e abrangente oferece um passo a passo completo para criar, implantar e gerenciar uma aplicação full-stack no Azure usando o azd. Você trabalhará com uma aplicação real de lista de tarefas que inclui um frontend em React, um backend de API em Node.js e um banco de dados MongoDB.
 
 ## Objetivos de Aprendizado
 
@@ -19,7 +21,7 @@ Ao concluir este tutorial, você será capaz de:
 - Dominar o fluxo de inicialização de projetos azd usando templates
 - Compreender a estrutura de projetos e arquivos de configuração do Azure Developer CLI
 - Executar a implantação completa de uma aplicação no Azure com provisionamento de infraestrutura
-- Implementar atualizações na aplicação e estratégias de reimplantação
+- Implementar estratégias de atualização e reimplantação de aplicações
 - Gerenciar múltiplos ambientes para desenvolvimento e homologação
 - Aplicar práticas de limpeza de recursos e gerenciamento de custos
 
@@ -27,8 +29,8 @@ Ao concluir este tutorial, você será capaz de:
 
 Ao final, você será capaz de:
 - Inicializar e configurar projetos azd a partir de templates de forma independente
-- Navegar e modificar estruturas de projetos azd de maneira eficaz
-- Implantar aplicações full-stack no Azure com comandos simples
+- Navegar e modificar estruturas de projetos azd com eficiência
+- Implantar aplicações full-stack no Azure usando comandos únicos
 - Solucionar problemas comuns de implantação e autenticação
 - Gerenciar múltiplos ambientes no Azure para diferentes estágios de implantação
 - Implementar fluxos de implantação contínua para atualizações de aplicações
@@ -38,7 +40,7 @@ Ao final, você será capaz de:
 ### Lista de Pré-requisitos
 - ✅ Azure Developer CLI instalado ([Guia de Instalação](installation.md))
 - ✅ Azure CLI instalado e autenticado
-- ✅ Git instalado no seu sistema
+- ✅ Git instalado no sistema
 - ✅ Node.js 16+ (para este tutorial)
 - ✅ Visual Studio Code (recomendado)
 
@@ -60,7 +62,7 @@ node --version
 
 ## Passo 1: Escolha e Inicialize um Template
 
-Vamos começar com um template popular de aplicação de lista de tarefas que inclui um frontend em React e um backend API em Node.js.
+Vamos começar com um template popular de aplicação de lista de tarefas que inclui um frontend em React e um backend de API em Node.js.
 
 ```bash
 # Browse available templates
@@ -78,7 +80,7 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### O que acabou de acontecer?
-- O código do template foi baixado para o seu diretório local
+- O código do template foi baixado para o diretório local
 - Um arquivo `azure.yaml` foi criado com definições de serviços
 - O código de infraestrutura foi configurado no diretório `infra/`
 - Uma configuração de ambiente foi criada
@@ -129,7 +131,7 @@ my-first-azd-app/
 cat azure.yaml
 ```
 
-**infra/main.bicep** - Definição da infraestrutura:
+**infra/main.bicep** - Definição de infraestrutura:
 ```bash
 # View the infrastructure code
 head -30 infra/main.bicep
@@ -162,7 +164,7 @@ azd env get-values
 
 ## Passo 4: Implemente no Azure
 
-Agora vem a parte emocionante - implantar tudo no Azure!
+Agora vem a parte emocionante - implante tudo no Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -177,9 +179,9 @@ azd up
 
 ### O que está acontecendo durante a implantação?
 
-O comando `azd up` executa as seguintes etapas:
+O comando `azd up` executa os seguintes passos:
 1. **Provisionar** (`azd provision`) - Cria os recursos no Azure
-2. **Empacotar** - Constrói o código da sua aplicação
+2. **Empacotar** - Compila o código da aplicação
 3. **Implantar** (`azd deploy`) - Implanta o código nos recursos do Azure
 
 ### Saída Esperada
@@ -198,7 +200,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Passo 5: Teste Sua Aplicação
 
 ### Acesse Sua Aplicação
-Clique no URL fornecido na saída da implantação ou acesse a qualquer momento:
+Clique na URL fornecida na saída da implantação ou acesse a qualquer momento:
 ```bash
 # Get application endpoints
 azd show
@@ -207,10 +209,10 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Teste o App de Lista de Tarefas
+### Teste a Aplicação de Lista de Tarefas
 1. **Adicione um item à lista** - Clique em "Add Todo" e insira uma tarefa
 2. **Marque como concluído** - Marque os itens concluídos
-3. **Exclua itens** - Remova tarefas que você não precisa mais
+3. **Exclua itens** - Remova tarefas que não são mais necessárias
 
 ### Monitore Sua Aplicação
 ```bash
@@ -237,7 +239,7 @@ Adicione um cabeçalho de resposta personalizado:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Implante Apenas as Alterações no Código
+### Implante Apenas as Alterações de Código
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -350,7 +352,7 @@ Agora que você concluiu seu primeiro projeto, explore estes tópicos avançados
 ### 3. Melhores Práticas para Produção
 - [Configurações de segurança](../deployment/best-practices.md#security)
 - [Otimização de desempenho](../deployment/best-practices.md#performance)
-- [Monitoramento e logs](../deployment/best-practices.md#monitoring)
+- [Monitoramento e registro](../deployment/best-practices.md#monitoring)
 
 ### 4. Explore Mais Templates
 ```bash
@@ -388,9 +390,8 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navegação**
-- **Lição Anterior**: [Configuração](configuration.md)
-- **Próxima Lição**: [Guia de Implantação](../deployment/deployment-guide.md)
+**Anterior:** [Configuração](configuration.md) | **Próximo:** [Integração com Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+- **Próxima Aula**: [Guia de Implantação](../deployment/deployment-guide.md)
 
 ---
 

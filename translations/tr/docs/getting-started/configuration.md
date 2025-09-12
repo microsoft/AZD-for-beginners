@@ -1,37 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:13:39+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T19:14:37+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tr"
 }
 -->
 # Yapılandırma Kılavuzu
 
+**Önceki:** [AZD Temelleri](azd-basics.md) | **Sonraki:** [İlk Proje](first-project.md)
+
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI'nin (azd) geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasına dair tüm yönleri kapsar. Yapılandırma hiyerarşisini, ortam yönetimini, kimlik doğrulama yöntemlerini ve verimli ve güvenli Azure dağıtımları için gelişmiş yapılandırma desenlerini öğreneceksiniz.
+Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasını kapsar. Yapılandırma hiyerarşisi, ortam yönetimi, kimlik doğrulama yöntemleri ve verimli ve güvenli Azure dağıtımları için gelişmiş yapılandırma modelleri hakkında bilgi edineceksiniz.
 
 ## Öğrenme Hedefleri
 
-Bu dersi tamamladığınızda:
-- azd yapılandırma hiyerarşisini öğrenecek ve ayarların nasıl önceliklendirildiğini anlayacaksınız
+Bu dersin sonunda:
+- azd yapılandırma hiyerarşisini ustalıkla öğrenip ayarların nasıl önceliklendirildiğini anlayacaksınız
 - Küresel ve proje bazlı ayarları etkili bir şekilde yapılandırabileceksiniz
 - Farklı yapılandırmalara sahip birden fazla ortamı yönetebileceksiniz
-- Güvenli kimlik doğrulama ve yetkilendirme desenlerini uygulayabileceksiniz
-- Karmaşık senaryolar için gelişmiş yapılandırma desenlerini anlayabileceksiniz
+- Güvenli kimlik doğrulama ve yetkilendirme modellerini uygulayabileceksiniz
+- Karmaşık senaryolar için gelişmiş yapılandırma modellerini anlayabileceksiniz
 
 ## Öğrenme Çıktıları
 
 Bu dersi tamamladıktan sonra:
-- azd'yi geliştirme iş akışları için en iyi şekilde yapılandırabileceksiniz
+- azd'yi en iyi geliştirme iş akışları için yapılandırabileceksiniz
 - Birden fazla dağıtım ortamını kurup yönetebileceksiniz
 - Güvenli yapılandırma yönetimi uygulamalarını hayata geçirebileceksiniz
 - Yapılandırma ile ilgili sorunları giderebileceksiniz
-- azd davranışını belirli kurumsal gereksinimlere göre özelleştirebileceksiniz
+- azd davranışını belirli organizasyonel gereksinimlere göre özelleştirebileceksiniz
 
-Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasına dair tüm yönleri kapsar.
+Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasını kapsar.
 
 ## Yapılandırma Hiyerarşisi
 
@@ -81,7 +83,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Proje Yapılandırması
 
 ### azure.yaml Yapısı
-`azure.yaml` dosyası, azd projenizin kalbidir:
+`azure.yaml` dosyası, azd projenizin merkezidir:
 
 ```yaml
 # Minimum configuration
@@ -159,7 +161,7 @@ pipeline:
 
 ### Hizmet Yapılandırma Seçenekleri
 
-#### Barındırma Türleri
+#### Host Türleri
 ```yaml
 services:
   web-static:
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Ortam Şablonları
-Tutarlı ortam kurulumu için `.azure/env.template` oluşturun:
+Tutarlı ortam kurulumları için `.azure/env.template` oluşturun:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -284,7 +286,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Hizmet Prensibi Kimlik Doğrulaması
+### Hizmet Prensibi Kimlik Doğrulama
 CI/CD hatları için:
 ```bash
 # Set environment variables
@@ -331,7 +333,7 @@ Altyapı parametrelerini `infra/main.parameters.json` içinde yapılandırın:
 ```
 
 ### Terraform Yapılandırması
-Terraform projeleri için, `infra/terraform.tfvars` içinde yapılandırın:
+Terraform projeleri için `infra/terraform.tfvars` içinde yapılandırın:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -382,7 +384,7 @@ services:
 
 ## 🔧 Gelişmiş Yapılandırma
 
-### Özel Kaynak Adlandırma
+### Özel Kaynak İsimlendirme
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -456,8 +458,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Yapılandırma Komut Dosyaları
-`scripts/` içinde doğrulama komut dosyaları oluşturun:
+### Yapılandırma Scriptleri
+`scripts/` içinde doğrulama scriptleri oluşturun:
 
 ```bash
 #!/bin/bash
@@ -535,9 +537,9 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 
 ## Sonraki Adımlar
 
-- [İlk Projeniz](first-project.md) - Yapılandırmayı pratikte uygulayın
+- [İlk Projeniz](first-project.md) - Yapılandırmayı uygulamada kullanın
 - [Dağıtım Kılavuzu](../deployment/deployment-guide.md) - Yapılandırmayı dağıtım için kullanın
-- [Kaynak Sağlama](../deployment/provisioning.md) - Üretime hazır yapılandırmalar
+- [Kaynakların Sağlanması](../deployment/provisioning.md) - Üretime hazır yapılandırmalar
 
 ## Referanslar
 
@@ -547,11 +549,10 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 
 ---
 
-**Gezinme**
-- **Önceki Ders**: [Kurulum ve Ayar](installation.md)
+**Önceki:** [AZD Temelleri](azd-basics.md) | **Sonraki:** [İlk Proje](first-project.md)
 - **Sonraki Ders**: [İlk Projeniz](first-project.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
