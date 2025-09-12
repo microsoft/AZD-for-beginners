@@ -7,9 +7,9 @@
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
 
-[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
+![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
 
-[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
+![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
 
 Follow these steps to get started using these resources:
 1. **Fork the Repository**: Click [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
@@ -62,10 +62,26 @@ After completing this course, you will be able to:
 
 - [What is Azure Developer CLI?](#what-is-azure-developer-cli)
 - [Quick Start](#quick-start)
+- [Learning Path](#learning-path)
+  - [For AI Developers (Recommended Start Here!)](#for-ai-developers-recommended-start-here)
+  - [For Students & Beginners](#for-students--beginners)
+  - [For Developers](#for-developers)
+  - [For DevOps Engineers](#for-devops-engineers)
 - [Documentation](#documentation)
+  - [Getting Started](#getting-started)
+  - [Deployment & Provisioning](#deployment--provisioning)
+  - [Pre-Deployment Checks](#pre-deployment-checks)
+  - [AI & Azure AI Foundry](#ai--azure-ai-foundry)
+  - [Troubleshooting](#troubleshooting)
 - [Examples & Templates](#examples--templates)
+  - [Featured: Azure AI Foundry Templates](#featured-azure-ai-foundry-templates)
+  - [Featured: Azure AI Foundry E2E Scenarios](#featured-azure-ai-foundry-e2e-scenarios)
+  - [Additional AZD Templates](#additional-azd-templates)
+  - [Hands-On Labs & Workshops](#hands-on-labs--workshops)
 - [Resources](#resources)
 - [Contributing](#contributing)
+- [Support](#support)
+- [Community](#community-insights-from-azure-ai-foundry-discord)
 
 ## What is Azure Developer CLI?
 
@@ -84,7 +100,7 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 - **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints
 - **Production AI Patterns** - Best practices for scalable, cost-effective AI application deployments
 - **End-to-End AI Workflows** - From model development to production deployment with proper monitoring
-- **💰 Cost Optimization** - Smart resource allocation and scaling strategies for AI workloads
+- **Cost Optimization** - Smart resource allocation and scaling strategies for AI workloads
 - **Azure AI Foundry Integration** - Seamless connection to AI Foundry model catalog and endpoints
 
 ## Quick Start
@@ -126,6 +142,34 @@ azd init --template ai-document-processing
 azd init --template contoso-chat
 ```
 
+## Learning Path
+
+### For AI Developers (Recommended Start Here!)
+1. **Quick Start**: Try [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) template
+2. **Learn Fundamentals**: [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
+3. **Hands-On Practice**: Complete [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
+4. **Production Ready**: Review [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
+5. **Advanced**: Deploy [contoso-chat](https://github.com/Azure-Samples/contoso-chat) enterprise template
+
+### For Students & Beginners
+1. Start with [AZD Basics](docs/getting-started/azd-basics.md)
+2. Follow the [Installation Guide](docs/getting-started/installation.md)
+3. Complete [Your First Project](docs/getting-started/first-project.md)
+4. Practice with [Simple Web App Example](examples/simple-web-app/)
+
+### For Developers
+1. Review [Configuration Guide](docs/getting-started/configuration.md)
+2. Study [Deployment Guide](docs/deployment/deployment-guide.md)
+3. Work through [Database App Example](examples/database-app/)
+4. Explore [Container App Example](examples/container-app/)
+
+### For DevOps Engineers
+1. Master [Provisioning Resources](docs/deployment/provisioning.md)
+2. Implement [Pre-flight Checks](docs/pre-deployment/preflight-checks.md)
+3. Practice [Capacity Planning](docs/pre-deployment/capacity-planning.md)
+4. Advanced [Microservices Example](examples/microservices/)
+
+
 ## Documentation
 
 ### Getting Started
@@ -156,23 +200,38 @@ azd init --template contoso-chat
 
 ## Examples & Templates
 
-### Featured: Azure AI Foundry Templates
+### [Featured: Azure AI Foundry Templates](https://ai.azure.com/resource/build/templates)
 **Start here if you're deploying AI applications!**
 
 | Template | Description | Complexity | Services |
 |----------|-------------|------------|----------|
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-enabled chat app with Azure OpenAI | ⭐⭐ | OpenAI + Search + App Service |
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Simple chat interface with Azure OpenAI | ⭐ | OpenAI + Container Apps |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Enterprise chat with AI orchestration | ⭐⭐⭐ | OpenAI + Search + Container Apps |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Document analysis with AI services | ⭐⭐ | Document Intelligence + Functions |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | AI agent framework with function calling | ⭐⭐⭐ | OpenAI + Container Apps + Functions |
+| [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Create and deploy a basic chat application integrated with your data and telemetry insights using Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
+| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Create and deploy a basic agent application with actions and telemetry insights using Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
+| [**Multi-agent workflow automation**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Enhance task planning and automation by orchestrating and managing a group of AI agents.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Generate documents from your data**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Accelerate generation of documents such as contracts, invoices and investment proposals by finding and summarizing relevant information from your data. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
+| [**Improve client meetings with agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Migrate legacy code to modern languages by leveraging a team of agents. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
+| [**Modernize your code with agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Create and deploy a basic chat application integrated with your data and telemetry insights using Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Build your conversational agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Leverage advanced conversational understanding to create and enhance chatbots and agents with deterministic and human-controllable workflows. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
+| [**Unlock insights from conversational data**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Improve contact center efficiency by uncovering insights from large audio and text-based data sets using advanced content understanding capabilities. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
+| [**Multi-modal content processing**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Process claims, invoices, contracts and other documents quickly and accurately by extracting information from unstructured content and mapping it to a structured format. This template supports text, images, tables and graphs. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
+
+### Featured: Azure AI Foundry E2E Scenarios
+**Start here if you're deploying AI applications!**
+
+| Template | Description | Complexity | Services |
+|----------|-------------|------------|----------|
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Simple chat interface with Azure OpenAI | ⭐ | AzureOpenAI + Container Apps |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-enabled chat app with Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Document analysis with AI services | ⭐⭐ | Azure Document Intelligence + Functions |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | AI agent framework with function calling | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Enterprise chat with AI orchestration | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |
 
 ### Additional AZD Templates
 - [**Examples Directory**](examples/README.md) - Practical examples, templates, and real-world scenarios
 - [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Official Microsoft sample templates  
 - [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Community-contributed templates
 
-### 🎓 Hands-On Labs & Workshops
+### Hands-On Labs & Workshops
 - [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - **NEW**: Make your AI solutions AZD-deployable
 - [**AZD For Beginners Workshop**](workshop/README.md) - Focus on AI Agents AZD template deployment
 
@@ -189,33 +248,6 @@ azd init --template contoso-chat
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Status](https://status.azure.com/)
-
-## Learning Path
-
-### For AI Developers (Recommended Start Here!)
-1. **Quick Start**: Try [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) template
-2. **Learn Fundamentals**: [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
-3. **Hands-On Practice**: Complete [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
-4. **Production Ready**: Review [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
-5. **Advanced**: Deploy [contoso-chat](https://github.com/Azure-Samples/contoso-chat) enterprise template
-
-### For Students & Beginners
-1. Start with [AZD Basics](docs/getting-started/azd-basics.md)
-2. Follow the [Installation Guide](docs/getting-started/installation.md)
-3. Complete [Your First Project](docs/getting-started/first-project.md)
-4. Practice with [Simple Web App Example](examples/simple-web-app/)
-
-### For Developers
-1. Review [Configuration Guide](docs/getting-started/configuration.md)
-2. Study [Deployment Guide](docs/deployment/deployment-guide.md)
-3. Work through [Database App Example](examples/database-app/)
-4. Explore [Container App Example](examples/container-app/)
-
-### For DevOps Engineers
-1. Master [Provisioning Resources](docs/deployment/provisioning.md)
-2. Implement [Pre-flight Checks](docs/pre-deployment/preflight-checks.md)
-3. Practice [Capacity Planning](docs/pre-deployment/capacity-planning.md)
-4. Advanced [Microservices Example](examples/microservices/)
 
 ## Contributing
 
@@ -241,7 +273,7 @@ We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) 
 - **Most requested**: AI-specific templates, troubleshooting guides, best practices
 
 **Join our community to:**
-- 💬 Share your AZD + AI experiences and get help
+- Share your AZD + AI experiences and get help
 - Access early previews of new AI templates
 - Contribute to AI deployment best practices
 - Influence future AI + AZD feature development
