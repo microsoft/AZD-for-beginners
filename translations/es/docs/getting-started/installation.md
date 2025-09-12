@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T16:48:27+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T17:04:51+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "es"
 }
 -->
 # Guía de Instalación y Configuración
 
+**Anterior:** [Documentación Principal](../../README.md) | **Siguiente:** [Conceptos Básicos de AZD](azd-basics.md)
+
 ## Introducción
 
-Esta guía completa te llevará paso a paso por el proceso de instalación y configuración de Azure Developer CLI (azd) en tu sistema. Aprenderás diferentes métodos de instalación para distintos sistemas operativos, configuración de autenticación y ajustes iniciales para preparar tu entorno de desarrollo para implementaciones en Azure.
+Esta guía completa te llevará paso a paso por la instalación y configuración de Azure Developer CLI (azd) en tu sistema. Aprenderás varios métodos de instalación para diferentes sistemas operativos, configuración de autenticación y ajustes iniciales para preparar tu entorno de desarrollo para implementaciones en Azure.
 
 ## Objetivos de Aprendizaje
 
@@ -19,14 +21,14 @@ Al final de esta lección, podrás:
 - Instalar Azure Developer CLI en tu sistema operativo
 - Configurar la autenticación con Azure utilizando varios métodos
 - Preparar tu entorno de desarrollo con los requisitos necesarios
-- Comprender las diferentes opciones de instalación y cuándo usar cada una
+- Comprender las diferentes opciones de instalación y cuándo utilizarlas
 - Solucionar problemas comunes de instalación y configuración
 
 ## Resultados de Aprendizaje
 
 Después de completar esta lección, serás capaz de:
 - Instalar azd utilizando el método adecuado para tu plataforma
-- Autenticarse con Azure usando `azd auth login`
+- Autenticarte con Azure usando `azd auth login`
 - Verificar tu instalación y probar comandos básicos de azd
 - Configurar tu entorno de desarrollo para un uso óptimo de azd
 - Resolver problemas comunes de instalación de forma independiente
@@ -51,7 +53,7 @@ Antes de instalar azd, asegúrate de tener:
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### Opción 2: Administrador de Paquetes de Windows (winget)
+#### Opción 2: Windows Package Manager (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
@@ -63,8 +65,8 @@ choco install azd
 
 #### Opción 4: Instalación Manual
 1. Descarga la última versión desde [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Extrae los archivos en `C:\Program Files\azd\`
-3. Agrega la ruta a la variable de entorno PATH
+2. Extrae en `C:\Program Files\azd\`
+3. Agrega a la variable de entorno PATH
 
 ### macOS
 
@@ -146,7 +148,7 @@ Salida esperada:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Configuración de Autenticación
+## Configuración de Autenticación
 
 ### Autenticación con Azure CLI (Recomendado)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configuración
+## Configuración
 
 ### Configuración Global
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integración con IDE
+## Integración con IDE
 
 ### Visual Studio Code
 Instala la extensión de Azure Developer CLI:
@@ -234,7 +236,7 @@ Crea un archivo `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Instala el plugin de Azure
 2. Configura las credenciales de Azure
-3. Usa la terminal integrada para comandos azd
+3. Usa la terminal integrada para comandos de azd
 
 ## 🐛 Solución de Problemas de Instalación
 
@@ -247,7 +249,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### Problemas con PATH
-Agrega azd manualmente a tu PATH:
+Agrega manualmente azd a tu PATH:
 
 **Windows:**
 ```cmd
@@ -321,8 +323,8 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Próximos Pasos
 
-1. **Completa la autenticación**: Asegúrate de poder acceder a tu suscripción de Azure
-2. **Prueba tu primera implementación**: Sigue la [Guía de Primer Proyecto](first-project.md)
+1. **Completa la autenticación**: Asegúrate de que puedes acceder a tu suscripción de Azure
+2. **Prueba tu primera implementación**: Sigue la [Guía del Primer Proyecto](first-project.md)
 3. **Explora plantillas**: Navega por las plantillas disponibles con `azd template list`
 4. **Configura tu IDE**: Prepara tu entorno de desarrollo
 
@@ -336,13 +338,11 @@ Si encuentras problemas:
 
 ---
 
-**Navegación**
-- **Lección Anterior**: [Conceptos Básicos de AZD](azd-basics.md)
-- **Próxima Lección**: [Configuración](configuration.md)
+**Anterior:** [Documentación Principal](../../README.md) | **Siguiente:** [Conceptos Básicos de AZD](azd-basics.md)
 
 **¡Instalación Completa!** Continúa con [Tu Primer Proyecto](first-project.md) para comenzar a construir con azd.
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

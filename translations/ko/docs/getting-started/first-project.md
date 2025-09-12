@@ -1,21 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:59:21+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T16:58:15+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ko"
 }
 -->
 # 첫 번째 프로젝트 - 실습 튜토리얼
 
+**이전:** [Configuration](configuration.md) | **다음:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## 소개
 
-Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적인 실습 튜토리얼은 azd를 사용하여 Azure에서 풀스택 애플리케이션을 생성, 배포 및 관리하는 과정을 안내합니다. React 프론트엔드, Node.js API 백엔드, MongoDB 데이터베이스를 포함한 실제 할 일 관리 애플리케이션을 다룰 것입니다.
+Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적인 실습 튜토리얼은 azd를 사용하여 Azure에서 풀스택 애플리케이션을 생성, 배포 및 관리하는 과정을 안내합니다. React 프론트엔드, Node.js API 백엔드, MongoDB 데이터베이스를 포함한 실제 할 일(todo) 애플리케이션을 다루게 됩니다.
 
 ## 학습 목표
 
-이 튜토리얼을 완료하면 다음을 할 수 있습니다:
+이 튜토리얼을 완료하면 다음을 배울 수 있습니다:
 - 템플릿을 사용한 azd 프로젝트 초기화 워크플로우 숙달
 - Azure Developer CLI 프로젝트 구조 및 구성 파일 이해
 - 인프라 프로비저닝과 함께 애플리케이션을 Azure에 완전 배포
@@ -26,11 +28,11 @@ Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적
 ## 학습 결과
 
 튜토리얼 완료 후, 다음을 수행할 수 있습니다:
-- 템플릿에서 azd 프로젝트를 독립적으로 초기화 및 구성
-- azd 프로젝트 구조를 효과적으로 탐색 및 수정
-- 단일 명령으로 풀스택 애플리케이션을 Azure에 배포
+- 템플릿에서 azd 프로젝트를 독립적으로 초기화하고 구성
+- azd 프로젝트 구조를 효과적으로 탐색하고 수정
+- 단일 명령으로 Azure에 풀스택 애플리케이션 배포
 - 일반적인 배포 문제 및 인증 문제 해결
-- 다양한 배포 단계에 대한 여러 Azure 환경 관리
+- 다양한 배포 단계에 맞는 여러 Azure 환경 관리
 - 애플리케이션 업데이트를 위한 지속적 배포 워크플로우 구현
 
 ## 시작하기
@@ -60,7 +62,7 @@ node --version
 
 ## 1단계: 템플릿 선택 및 초기화
 
-React 프론트엔드와 Node.js API 백엔드를 포함한 인기 있는 할 일 관리 애플리케이션 템플릿으로 시작해봅시다.
+React 프론트엔드와 Node.js API 백엔드를 포함한 인기 있는 할 일 애플리케이션 템플릿으로 시작해 봅시다.
 
 ```bash
 # Browse available templates
@@ -78,8 +80,8 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### 방금 무슨 일이 일어났나요?
-- 템플릿 코드를 로컬 디렉토리에 다운로드했습니다.
-- 서비스 정의가 포함된 `azure.yaml` 파일을 생성했습니다.
+- 템플릿 코드를 로컬 디렉토리에 다운로드
+- 서비스 정의가 포함된 `azure.yaml` 파일 생성
 - `infra/` 디렉토리에 인프라 코드 설정
 - 환경 구성 생성
 
@@ -162,7 +164,7 @@ azd env get-values
 
 ## 4단계: Azure에 배포
 
-이제 흥미로운 부분입니다 - 모든 것을 Azure에 배포해봅시다!
+이제 모든 것을 Azure에 배포해 봅시다!
 
 ```bash
 # Deploy infrastructure and application
@@ -180,7 +182,7 @@ azd up
 `azd up` 명령은 다음 단계를 수행합니다:
 1. **프로비저닝** (`azd provision`) - Azure 리소스 생성
 2. **패키징** - 애플리케이션 코드 빌드
-3. **배포** (`azd deploy`) - Azure 리소스에 코드 배포
+3. **배포** (`azd deploy`) - 코드를 Azure 리소스에 배포
 
 ### 예상 출력
 ```
@@ -207,7 +209,7 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### 할 일 관리 앱 테스트
+### 할 일 애플리케이션 테스트
 1. **할 일 항목 추가** - "Add Todo"를 클릭하고 작업 입력
 2. **완료로 표시** - 완료된 항목 체크
 3. **항목 삭제** - 더 이상 필요 없는 할 일 삭제
@@ -223,7 +225,7 @@ azd logs
 
 ## 6단계: 변경 사항 적용 및 재배포
 
-변경 사항을 적용하고 업데이트가 얼마나 쉬운지 확인해봅시다:
+변경 사항을 적용하고 업데이트가 얼마나 쉬운지 확인해 봅시다:
 
 ### API 수정
 ```bash
@@ -337,7 +339,7 @@ netstat -an | grep :3100
 
 ## 다음 단계
 
-첫 번째 프로젝트를 완료한 후, 다음 고급 주제를 탐색해보세요:
+첫 번째 프로젝트를 완료한 후, 다음 고급 주제를 탐색해 보세요:
 
 ### 1. 인프라 맞춤화
 - [코드로서의 인프라](../deployment/provisioning.md)
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**탐색**
-- **이전 레슨**: [구성](configuration.md)
-- **다음 레슨**: [배포 가이드](../deployment/deployment-guide.md)
+**이전:** [Configuration](configuration.md) | **다음:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+- **다음 레슨**: [Deployment Guide](../deployment/deployment-guide.md)
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

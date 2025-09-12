@@ -1,50 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T12:56:35+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T16:47:29+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "hk"
 }
 -->
 # 配置指南
 
+**上一章:** [AZD 基礎知識](azd-basics.md) | **下一章:** [第一個專案](first-project.md)
+
 ## 簡介
 
-這份全面的指南涵蓋了配置 Azure Developer CLI 的所有方面，幫助您實現最佳的開發和部署工作流程。您將學習配置層級、環境管理、身份驗證方法，以及能夠提升 Azure 部署效率和安全性的高級配置模式。
+這份全面的指南涵蓋了配置 Azure Developer CLI 的所有方面，以實現最佳的開發和部署工作流程。你將學習配置層級、環境管理、身份驗證方法，以及能夠提升效率和安全性的高級配置模式。
 
 ## 學習目標
 
-完成本課程後，您將能夠：
-- 掌握 azd 的配置層級，並了解設置的優先順序
-- 有效配置全局和專案特定的設置
-- 管理具有不同配置的多個環境
-- 實現安全的身份驗證和授權模式
+完成本課程後，你將能夠：
+- 掌握 azd 的配置層級，了解設定的優先順序
+- 有效地配置全域和專案特定的設定
+- 管理多個具有不同配置的環境
+- 實施安全的身份驗證和授權模式
 - 理解複雜場景中的高級配置模式
 
 ## 學習成果
 
-完成本課程後，您將能夠：
+完成本課程後，你將能夠：
 - 配置 azd 以實現最佳的開發工作流程
 - 設置和管理多個部署環境
 - 實施安全的配置管理實踐
-- 排查與配置相關的問題
-- 根據特定組織需求自定義 azd 行為
+- 排除與配置相關的問題
+- 根據特定組織需求自訂 azd 的行為
 
-這份全面的指南涵蓋了配置 Azure Developer CLI 的所有方面，幫助您實現最佳的開發和部署工作流程。
+這份全面的指南涵蓋了配置 Azure Developer CLI 的所有方面，以實現最佳的開發和部署工作流程。
 
 ## 配置層級
 
 azd 使用分層的配置系統：
-1. **命令行標誌**（最高優先級）
-2. **環境變量**
-3. **本地專案配置**（`.azd/config.json`）
-4. **全局用戶配置**（`~/.azd/config.json`）
-5. **默認值**（最低優先級）
+1. **命令列標誌**（最高優先級）
+2. **環境變數**
+3. **本地專案配置** (`.azd/config.json`)
+4. **全域使用者配置** (`~/.azd/config.json`)
+5. **預設值**（最低優先級）
 
-## 全局配置
+## 全域配置
 
-### 設置全局默認值
+### 設置全域預設值
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +64,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### 常見的全局設置
+### 常見的全域設定
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -178,7 +180,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### 語言特定設置
+#### 語言特定設定
 ```yaml
 services:
   node-app:
@@ -217,7 +219,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### 環境配置
-每個環境都有自己的配置，存儲在 `.azure/<env-name>/config.json` 中：
+每個環境都有自己的配置，存放於 `.azure/<env-name>/config.json`：
 
 ```json
 {
@@ -239,7 +241,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### 環境變量
+### 環境變數
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### 環境模板
-創建 `.azure/env.template` 以實現一致的環境設置：
+創建 `.azure/env.template` 以保持一致的環境設置：
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -272,7 +274,7 @@ LOG_LEVEL=info
 
 ## 🔐 身份驗證配置
 
-### Azure CLI 集成
+### Azure CLI 整合
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -305,10 +307,10 @@ azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ 基礎設施配置
+## 🏗️ 基礎架構配置
 
 ### Bicep 參數
-在 `infra/main.parameters.json` 中配置基礎設施參數：
+在 `infra/main.parameters.json` 中配置基礎架構參數：
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -378,11 +380,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-範例 `Dockerfile`：https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+範例 `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 高級配置
 
-### 自定義資源命名
+### 自訂資源命名
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -413,7 +415,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 環境特定配置
+## 🎯 特定環境配置
 
 ### 開發環境
 ```bash
@@ -482,7 +484,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 最佳實踐
 
-### 1. 使用環境變量
+### 1. 使用環境變數
 ```yaml
 # Good: Use environment variables
 database:
@@ -517,8 +519,8 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. 配置文檔
-在 `CONFIG.md` 中記錄您的配置：
+### 4. 配置文件文檔
+在 `CONFIG.md` 中記錄你的配置：
 ```markdown
 # Configuration Guide
 
@@ -535,23 +537,22 @@ database:
 
 ## 下一步
 
-- [您的第一個專案](first-project.md) - 實際應用配置
+- [你的第一個專案](first-project.md) - 實際應用配置
 - [部署指南](../deployment/deployment-guide.md) - 使用配置進行部署
-- [資源配置](../deployment/provisioning.md) - 生產就緒的配置
+- [資源佈署](../deployment/provisioning.md) - 適用於生產環境的配置
 
 ## 參考資料
 
 - [azd 配置參考](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml 架構](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [環境變量](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [環境變數](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**導航**
-- **上一課**：[安裝與設置](installation.md)
-- **下一課**：[您的第一個專案](first-project.md)
+**上一章:** [AZD 基礎知識](azd-basics.md) | **下一章:** [第一個專案](first-project.md)
+- **下一課程**: [你的第一個專案](first-project.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。

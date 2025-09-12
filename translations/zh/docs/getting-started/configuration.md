@@ -1,45 +1,47 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T12:54:37+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T16:41:07+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "zh"
 }
 -->
 # 配置指南
 
-## 简介
+**上一节：** [AZD 基础知识](azd-basics.md) | **下一节：** [第一个项目](first-project.md)
 
-本指南全面介绍了如何配置 Azure Developer CLI，以实现最佳的开发和部署工作流。您将学习配置层级、环境管理、身份验证方法以及高级配置模式，从而实现高效且安全的 Azure 部署。
+## 介绍
+
+本指南全面涵盖了配置 Azure Developer CLI 的所有方面，以实现最佳开发和部署工作流程。您将学习配置层级、环境管理、身份验证方法以及高级配置模式，从而实现高效且安全的 Azure 部署。
 
 ## 学习目标
 
-通过本课程，您将能够：
-- 掌握 azd 的配置层级并了解设置的优先级
+完成本课程后，您将能够：
+- 掌握 azd 的配置层级，并了解设置的优先级
 - 有效配置全局和项目特定的设置
 - 管理具有不同配置的多个环境
 - 实现安全的身份验证和授权模式
-- 理解复杂场景下的高级配置模式
+- 理解复杂场景的高级配置模式
 
 ## 学习成果
 
 完成本课程后，您将能够：
-- 配置 azd 以优化开发工作流
+- 配置 azd 以优化开发工作流程
 - 设置和管理多个部署环境
 - 实现安全的配置管理实践
 - 解决与配置相关的问题
-- 根据特定组织需求自定义 azd 行为
+- 根据特定组织需求定制 azd 的行为
 
-本指南全面介绍了如何配置 Azure Developer CLI，以实现最佳的开发和部署工作流。
+本指南全面涵盖了配置 Azure Developer CLI 的所有方面，以实现最佳开发和部署工作流程。
 
 ## 配置层级
 
 azd 使用分层的配置系统：
 1. **命令行标志**（最高优先级）
 2. **环境变量**
-3. **本地项目配置**（`.azd/config.json`）
-4. **全局用户配置**（`~/.azd/config.json`）
+3. **本地项目配置** (`.azd/config.json`)
+4. **全局用户配置** (`~/.azd/config.json`)
 5. **默认值**（最低优先级）
 
 ## 全局配置
@@ -285,7 +287,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### 服务主体身份验证
-适用于 CI/CD 流水线：
+用于 CI/CD 管道：
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,7 +300,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### 托管身份
-适用于 Azure 托管环境：
+用于 Azure 托管环境：
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -377,8 +379,8 @@ services:
       buildArgs:
         NODE_ENV: production
         API_VERSION: v1.0.0
-```  
-示例 `Dockerfile`：https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+```
+示例 `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 高级配置
 
@@ -533,7 +535,7 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 后续步骤
+## 下一步
 
 - [您的第一个项目](first-project.md) - 实践应用配置
 - [部署指南](../deployment/deployment-guide.md) - 使用配置进行部署
@@ -547,11 +549,10 @@ database:
 
 ---
 
-**导航**
-- **上一课**：[安装与设置](installation.md)
-- **下一课**：[您的第一个项目](first-project.md)
+**上一节：** [AZD 基础知识](azd-basics.md) | **下一节：** [第一个项目](first-project.md)
+- **下一课：** [您的第一个项目](first-project.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

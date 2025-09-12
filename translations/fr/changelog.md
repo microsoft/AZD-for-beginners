@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8de774b36773a00bc9fa2a445a0d8d49",
-  "translation_date": "2025-09-09T16:33:40+00:00",
+  "original_hash": "9736db53ea878e07688670ebcc8906bc",
+  "translation_date": "2025-09-12T16:50:02+00:00",
   "source_file": "changelog.md",
   "language_code": "fr"
 }
@@ -31,7 +31,40 @@ Après avoir examiné les entrées du journal des modifications, vous serez capa
 
 ## Historique des versions
 
-### [v2.0.0] - 2025-09-09
+### [v3.0.0] - 12/09/2025
+
+#### Changements majeurs - Focus sur les développeurs IA et intégration Azure AI Foundry
+**Cette version transforme le dépôt en une ressource complète axée sur l'apprentissage de l'IA avec l'intégration d'Azure AI Foundry.**
+
+#### Ajouté
+- **🤖 Parcours d'apprentissage axé sur l'IA** : Restructuration complète priorisant les développeurs et ingénieurs IA
+- **Guide d'intégration Azure AI Foundry** : Documentation complète pour connecter AZD aux services Azure AI Foundry
+- **Modèles de déploiement IA** : Guide détaillé sur la sélection, la configuration et les stratégies de déploiement en production
+- **Atelier pratique IA** : Atelier pratique de 2-3 heures pour convertir des applications IA en solutions déployables avec AZD
+- **Meilleures pratiques IA en production** : Modèles prêts pour l'entreprise pour l'évolutivité, la surveillance et la sécurisation des charges de travail IA
+- **Guide de dépannage spécifique à l'IA** : Résolution des problèmes liés à Azure OpenAI, Cognitive Services et déploiements IA
+- **Galerie de modèles IA** : Collection de modèles Azure AI Foundry avec des évaluations de complexité
+- **Matériaux d'atelier** : Structure complète d'atelier avec laboratoires pratiques et matériaux de référence
+
+#### Amélioré
+- **Structure du README** : Axée sur les développeurs IA avec 45 % d'intérêt communautaire provenant de Discord Azure AI Foundry
+- **Parcours d'apprentissage** : Parcours dédié aux développeurs IA en parallèle des parcours traditionnels pour étudiants et ingénieurs DevOps
+- **Recommandations de modèles** : Modèles IA recommandés, incluant azure-search-openai-demo, contoso-chat et openai-chat-app-quickstart
+- **Intégration communautaire** : Support amélioré sur Discord avec des canaux et discussions spécifiques à l'IA
+
+#### Focus sur la sécurité et la production
+- **Modèles d'identité gérée** : Configurations d'authentification et de sécurité spécifiques à l'IA
+- **Optimisation des coûts** : Suivi de l'utilisation des tokens et contrôle budgétaire pour les charges de travail IA
+- **Déploiement multi-régions** : Stratégies pour le déploiement global des applications IA
+- **Surveillance des performances** : Intégration de métriques spécifiques à l'IA et Application Insights
+
+#### Qualité de la documentation
+- **Structure de cours linéaire** : Progression logique des modèles de déploiement IA débutants à avancés
+- **URLs validées** : Tous les liens externes du dépôt vérifiés et accessibles
+- **Références complètes** : Tous les liens internes de la documentation validés et fonctionnels
+- **Prêt pour la production** : Modèles de déploiement d'entreprise avec des exemples concrets
+
+### [v2.0.0] - 09/09/2025
 
 #### Changements majeurs - Restructuration du dépôt et amélioration professionnelle
 **Cette version représente une refonte significative de la structure du dépôt et de la présentation du contenu.**
@@ -39,13 +72,13 @@ Après avoir examiné les entrées du journal des modifications, vous serez capa
 #### Ajouté
 - **Cadre d'apprentissage structuré** : Toutes les pages de documentation incluent désormais des sections Introduction, Objectifs d'apprentissage et Résultats d'apprentissage
 - **Système de navigation** : Ajout de liens Précédent/Suivant dans toute la documentation pour une progression guidée
-- **Guide d'étude** : Nouveau fichier study-guide.md avec objectifs d'apprentissage, exercices pratiques et matériaux d'évaluation
+- **Guide d'étude** : study-guide.md complet avec objectifs d'apprentissage, exercices pratiques et matériaux d'évaluation
 - **Présentation professionnelle** : Suppression de tous les icônes emoji pour une meilleure accessibilité et une apparence professionnelle
-- **Structure de contenu améliorée** : Organisation et flux des supports d'apprentissage optimisés
+- **Structure de contenu améliorée** : Organisation et flux des matériaux d'apprentissage optimisés
 
 #### Modifié
 - **Format de la documentation** : Standardisation de toute la documentation avec une structure cohérente axée sur l'apprentissage
-- **Flux de navigation** : Mise en place d'une progression logique à travers tous les supports d'apprentissage
+- **Flux de navigation** : Progression logique implémentée dans tous les matériaux d'apprentissage
 - **Présentation du contenu** : Suppression des éléments décoratifs au profit d'un format clair et professionnel
 - **Structure des liens** : Mise à jour de tous les liens internes pour prendre en charge le nouveau système de navigation
 
@@ -53,22 +86,22 @@ Après avoir examiné les entrées du journal des modifications, vous serez capa
 - **Accessibilité** : Suppression des dépendances aux emojis pour une meilleure compatibilité avec les lecteurs d'écran
 - **Apparence professionnelle** : Présentation académique adaptée à l'apprentissage en entreprise
 - **Expérience d'apprentissage** : Approche structurée avec des objectifs et résultats clairs pour chaque leçon
-- **Organisation du contenu** : Meilleure logique et connexion entre les sujets liés
+- **Organisation du contenu** : Meilleure progression logique et connexion entre les sujets liés
 
-### [v1.0.0] - 2025-09-09
+### [v1.0.0] - 09/09/2025
 
-#### Première version - Dépôt complet d'apprentissage AZD
+#### Version initiale - Dépôt complet d'apprentissage AZD
 
 #### Ajouté
 - **Structure de documentation principale**
   - Série complète de guides de démarrage
-  - Documentation détaillée sur le déploiement et la provision
-  - Ressources de dépannage et guides de débogage
+  - Documentation complète sur le déploiement et la provision
+  - Ressources de dépannage détaillées et guides de débogage
   - Outils et procédures de validation avant déploiement
 
 - **Module de démarrage**
-  - Bases d'AZD : Concepts et terminologie essentiels
-  - Guide d'installation : Instructions spécifiques à la plateforme
+  - Bases d'AZD : Concepts et terminologie clés
+  - Guide d'installation : Instructions de configuration spécifiques à la plateforme
   - Guide de configuration : Configuration de l'environnement et authentification
   - Tutoriel premier projet : Apprentissage pratique étape par étape
 
@@ -86,19 +119,19 @@ Après avoir examiné les entrées du journal des modifications, vous serez capa
 
 - **Module de dépannage**
   - Problèmes courants : Problèmes fréquemment rencontrés et solutions
-  - Guide de débogage : Méthodologies systématiques de dépannage
+  - Guide de débogage : Méthodologies de dépannage systématique
   - Techniques et outils de diagnostic avancés
   - Surveillance des performances et optimisation
 
 - **Ressources et références**
   - Fiche de commandes : Référence rapide pour les commandes essentielles
   - Glossaire : Définitions complètes des termes et acronymes
-  - FAQ : Réponses détaillées aux questions fréquentes
+  - FAQ : Réponses détaillées aux questions courantes
   - Liens vers des ressources externes et connexions communautaires
 
 - **Exemples et modèles**
   - Exemple d'application web simple
-  - Modèle de déploiement de site statique
+  - Modèle de déploiement de site web statique
   - Configuration d'application conteneurisée
   - Modèles d'intégration de base de données
   - Exemples d'architecture microservices
@@ -106,14 +139,14 @@ Après avoir examiné les entrées du journal des modifications, vous serez capa
 
 #### Fonctionnalités
 - **Support multi-plateforme** : Guides d'installation et de configuration pour Windows, macOS et Linux
-- **Niveaux de compétence variés** : Contenu conçu pour les étudiants et les développeurs professionnels
-- **Approche pratique** : Exemples concrets et scénarios réels
-- **Couverture complète** : Des concepts de base aux modèles d'entreprise avancés
+- **Niveaux de compétence multiples** : Contenu conçu pour les étudiants jusqu'aux développeurs professionnels
+- **Focus pratique** : Exemples concrets et scénarios réels
+- **Couverture complète** : Des concepts de base aux modèles avancés d'entreprise
 - **Approche axée sur la sécurité** : Meilleures pratiques de sécurité intégrées
-- **Optimisation des coûts** : Conseils pour des déploiements rentables et une gestion efficace des ressources
+- **Optimisation des coûts** : Conseils pour des déploiements rentables et une gestion des ressources
 
 #### Qualité de la documentation
-- **Exemples de code détaillés** : Exemples pratiques et testés
+- **Exemples de code détaillés** : Exemples de code pratiques et testés
 - **Instructions étape par étape** : Conseils clairs et actionnables
 - **Gestion complète des erreurs** : Dépannage des problèmes courants
 - **Intégration des meilleures pratiques** : Normes et recommandations de l'industrie
@@ -121,36 +154,61 @@ Après avoir examiné les entrées du journal des modifications, vous serez capa
 
 ## Améliorations futures prévues
 
-### Version 3.0.0 (Prévue)
-#### Ajouts proposés
-- **Tutoriels interactifs** : Exercices de codage pratiques avec validation automatisée
-- **Contenu vidéo** : Tutoriels vidéo complémentaires pour les apprenants visuels
-- **Module de sécurité avancée** : Exploration approfondie des modèles de sécurité d'entreprise
-- **Support multi-cloud** : Intégration avec d'autres fournisseurs de cloud
-- **Optimisation des performances** : Stratégies avancées de réglage et de mise à l'échelle
+### Version 3.1.0 (Prévue)
+#### Expansion de la plateforme IA
+- **Support multi-modèles** : Modèles d'intégration pour Hugging Face, Azure Machine Learning et modèles personnalisés
+- **Frameworks d'agents IA** : Modèles pour LangChain, Semantic Kernel et déploiements AutoGen
+- **Modèles avancés RAG** : Options de bases de données vectorielles au-delà d'Azure AI Search (Pinecone, Weaviate, etc.)
+- **Observabilité IA** : Surveillance améliorée des performances des modèles, utilisation des tokens et qualité des réponses
 
-#### Améliorations proposées
-- **Documentation adaptée aux mobiles** : Design réactif pour l'apprentissage sur mobile
+#### Expérience développeur
+- **Extension VS Code** : Expérience de développement intégrée AZD + AI Foundry
+- **Intégration GitHub Copilot** : Génération assistée de modèles AZD
+- **Tutoriels interactifs** : Exercices pratiques avec validation automatisée pour les scénarios IA
+- **Contenu vidéo** : Tutoriels vidéo complémentaires pour les apprenants visuels axés sur les déploiements IA
+
+### Version 4.0.0 (Prévue)
+#### Modèles IA d'entreprise
+- **Cadre de gouvernance** : Gouvernance des modèles IA, conformité et traçabilité
+- **IA multi-locataires** : Modèles pour servir plusieurs clients avec des services IA isolés
+- **Déploiement IA Edge** : Intégration avec Azure IoT Edge et instances conteneurisées
+- **IA hybride cloud** : Modèles de déploiement multi-cloud et hybrides pour les charges de travail IA
+
+#### Fonctionnalités avancées
+- **Automatisation des pipelines IA** : Intégration MLOps avec les pipelines Azure Machine Learning
+- **Sécurité avancée** : Modèles de confiance zéro, points de terminaison privés et protection contre les menaces avancées
+- **Optimisation des performances** : Stratégies avancées de réglage et d'évolutivité pour les applications IA à haut débit
+- **Distribution mondiale** : Modèles de livraison de contenu et mise en cache Edge pour les applications IA
+
+### Version 3.0.0 (Prévue) - Supplantée par la version actuelle
+#### Ajouts proposés - Maintenant implémentés dans la v3.0.0
+- ✅ **Contenu axé sur l'IA** : Intégration complète d'Azure AI Foundry (Terminé)
+- ✅ **Tutoriels interactifs** : Atelier pratique IA (Terminé)
+- ✅ **Module de sécurité avancée** : Modèles de sécurité spécifiques à l'IA (Terminé)
+- ✅ **Optimisation des performances** : Stratégies de réglage des charges de travail IA (Terminé)
+
+### Version 2.1.0 (Prévue) - Partiellement implémentée dans la v3.0.0
+#### Améliorations mineures - Certaines terminées dans la version actuelle
+- ✅ **Exemples supplémentaires** : Scénarios de déploiement axés sur l'IA (Terminé)
+- ✅ **FAQ étendue** : Questions spécifiques à l'IA et dépannage (Terminé)
+- **Intégration des outils** : Guides améliorés d'intégration IDE et éditeur
+- ✅ **Expansion de la surveillance** : Modèles de surveillance et d'alerte spécifiques à l'IA (Terminé)
+
+#### Toujours prévu pour une future version
+- **Documentation adaptée aux mobiles** : Design réactif pour l'apprentissage mobile
 - **Accès hors ligne** : Packages de documentation téléchargeables
-- **Contributions communautaires** : Directives améliorées pour les contributions
-- **Support de traduction** : Options de documentation multilingue
-
-### Version 2.1.0 (Prévue)
-#### Améliorations mineures
-- **Exemples supplémentaires** : Scénarios de déploiement réels supplémentaires
-- **FAQ étendue** : Questions et réponses supplémentaires
-- **Intégration d'outils** : Guides améliorés pour l'intégration avec IDE et éditeurs
-- **Extension de la surveillance** : Modèles avancés de surveillance et d'alerte
+- **Intégration IDE améliorée** : Extension VS Code pour les workflows AZD + IA
+- **Tableau de bord communautaire** : Métriques communautaires en temps réel et suivi des contributions
 
 ## Contribuer au journal des modifications
 
 ### Signalement des changements
 Lors de la contribution à ce dépôt, veuillez vous assurer que les entrées du journal des modifications incluent :
 
-1. **Numéro de version** : Suivant le versionnement sémantique (major.minor.patch)
+1. **Numéro de version** : Suivant le versionnement sémantique (majeur.mineur.correctif)
 2. **Date** : Date de publication ou de mise à jour au format AAAA-MM-JJ
 3. **Catégorie** : Ajouté, Modifié, Obsolète, Supprimé, Corrigé, Sécurité
-4. **Description claire** : Description concise des changements
+4. **Description claire** : Description concise de ce qui a changé
 5. **Évaluation de l'impact** : Comment les changements affectent les utilisateurs existants
 
 ### Catégories de changements
@@ -163,7 +221,7 @@ Lors de la contribution à ce dépôt, veuillez vous assurer que les entrées du
 #### Modifié
 - Modifications de fonctionnalités ou de documentation existantes
 - Mises à jour pour améliorer la clarté ou l'exactitude
-- Restructuration de contenu ou d'organisation
+- Restructuration du contenu ou de l'organisation
 
 #### Obsolète
 - Fonctionnalités ou approches en cours de suppression
@@ -172,12 +230,12 @@ Lors de la contribution à ce dépôt, veuillez vous assurer que les entrées du
 
 #### Supprimé
 - Fonctionnalités, documentation ou exemples qui ne sont plus pertinents
-- Informations obsolètes ou approches dépassées
+- Informations obsolètes ou approches dépréciées
 - Contenu redondant ou consolidé
 
 #### Corrigé
 - Corrections d'erreurs dans la documentation ou le code
-- Résolution de problèmes signalés
+- Résolution de problèmes ou de bugs signalés
 - Améliorations de l'exactitude ou de la fonctionnalité
 
 #### Sécurité
@@ -185,7 +243,7 @@ Lors de la contribution à ce dépôt, veuillez vous assurer que les entrées du
 - Mises à jour des meilleures pratiques de sécurité
 - Résolution de vulnérabilités de sécurité
 
-### Directives de versionnement sémantique
+### Lignes directrices pour le versionnement sémantique
 
 #### Version majeure (X.0.0)
 - Changements majeurs nécessitant une action de l'utilisateur
@@ -197,7 +255,7 @@ Lors de la contribution à ce dépôt, veuillez vous assurer que les entrées du
 - Améliorations compatibles avec les versions précédentes
 - Exemples, outils ou ressources supplémentaires
 
-#### Version de correctif (X.Y.Z)
+#### Version corrective (X.Y.Z)
 - Corrections de bugs et ajustements
 - Améliorations mineures du contenu existant
 - Clarifications et petites améliorations
@@ -207,17 +265,19 @@ Lors de la contribution à ce dépôt, veuillez vous assurer que les entrées du
 Nous encourageons activement les retours de la communauté pour améliorer cette ressource d'apprentissage :
 
 ### Comment fournir des retours
-- **Problèmes GitHub** : Signalez des problèmes ou suggérez des améliorations
-- **Discussions Discord** : Partagez vos idées et engagez-vous avec la communauté
-- **Pull Requests** : Apportez des améliorations directes au contenu
-- **Forums communautaires Discord** : Participez à des discussions plus larges sur le développement Azure
+- **Problèmes GitHub** : Signalez des problèmes ou suggérez des améliorations (problèmes spécifiques à l'IA bienvenus)
+- **Discussions Discord** : Partagez des idées et engagez-vous avec la communauté Azure AI Foundry
+- **Pull Requests** : Contribuez directement à l'amélioration du contenu, en particulier des modèles et guides IA
+- **Discord Azure AI Foundry** : Participez au canal #Azure pour les discussions AZD + IA
+- **Forums communautaires** : Participez à des discussions plus larges sur les développeurs Azure
 
 ### Catégories de retours
-- **Exactitude du contenu** : Corrections d'informations techniques
-- **Expérience d'apprentissage** : Suggestions pour améliorer le flux d'apprentissage
-- **Contenu manquant** : Demandes de sujets ou exemples supplémentaires
-- **Accessibilité** : Améliorations pour répondre à des besoins d'apprentissage divers
-- **Intégration d'outils** : Suggestions pour une meilleure intégration des workflows de développement
+- **Exactitude du contenu IA** : Corrections sur l'intégration et le déploiement des services IA
+- **Expérience d'apprentissage** : Suggestions pour améliorer le flux d'apprentissage des développeurs IA
+- **Contenu IA manquant** : Demandes de modèles, schémas ou exemples IA supplémentaires
+- **Accessibilité** : Améliorations pour répondre aux besoins d'apprentissage diversifiés
+- **Intégration des outils IA** : Suggestions pour une meilleure intégration des workflows de développement IA
+- **Modèles IA en production** : Demandes de modèles de déploiement IA pour l'entreprise
 
 ### Engagement de réponse
 - **Réponse aux problèmes** : Sous 48 heures pour les problèmes signalés
@@ -228,40 +288,40 @@ Nous encourageons activement les retours de la communauté pour améliorer cette
 ## Calendrier de maintenance
 
 ### Mises à jour régulières
-- **Revue mensuelle** : Validation de l'exactitude du contenu et des liens
+- **Revues mensuelles** : Exactitude du contenu et validation des liens
 - **Mises à jour trimestrielles** : Ajouts et améliorations majeurs de contenu
-- **Revue semestrielle** : Restructuration et amélioration complète
+- **Revues semestrielles** : Restructuration et amélioration complètes
 - **Versions annuelles** : Mises à jour majeures avec améliorations significatives
 
 ### Surveillance et assurance qualité
 - **Tests automatisés** : Validation régulière des exemples de code et des liens
 - **Intégration des retours communautaires** : Incorporation régulière des suggestions des utilisateurs
-- **Mises à jour technologiques** : Alignement avec les derniers services Azure et fonctionnalités azd
+- **Mises à jour technologiques** : Alignement avec les derniers services Azure et versions azd
 - **Audits d'accessibilité** : Revue régulière des principes de design inclusif
 
 ## Politique de support des versions
 
-### Support des versions actuelles
-- **Dernière version majeure** : Support complet avec mises à jour régulières
-- **Version majeure précédente** : Mises à jour de sécurité et corrections critiques pendant 12 mois
-- **Versions héritées** : Support communautaire uniquement, sans mises à jour officielles
+### Support de la version actuelle
+- **Dernière version majeure** : Support complet avec mises à jour régulières  
+- **Version majeure précédente** : Mises à jour de sécurité et correctifs critiques pendant 12 mois  
+- **Versions héritées** : Support communautaire uniquement, pas de mises à jour officielles  
 
-### Guide de migration
-Lors de la publication de versions majeures, nous fournissons :
-- **Guides de migration** : Instructions de transition étape par étape
-- **Notes de compatibilité** : Détails sur les changements majeurs
-- **Support d'outils** : Scripts ou utilitaires pour faciliter la migration
-- **Support communautaire** : Forums dédiés aux questions de migration
+### Conseils pour la migration  
+Lors de la sortie de nouvelles versions majeures, nous fournissons :  
+- **Guides de migration** : Instructions étape par étape pour la transition  
+- **Notes de compatibilité** : Détails sur les changements majeurs  
+- **Support d'outils** : Scripts ou utilitaires pour faciliter la migration  
+- **Support communautaire** : Forums dédiés aux questions de migration  
 
 ---
 
-**Navigation**
-- **Leçon précédente** : [Guide d'étude](resources/study-guide.md)
-- **Leçon suivante** : Retour au [README principal](README.md)
+**Navigation**  
+- **Leçon précédente** : [Guide d'étude](resources/study-guide.md)  
+- **Leçon suivante** : Retour au [README principal](README.md)  
 
-**Restez informé** : Suivez ce dépôt pour recevoir des notifications sur les nouvelles versions et les mises à jour importantes des supports d'apprentissage.
+**Restez informé** : Suivez ce dépôt pour recevoir des notifications sur les nouvelles versions et les mises à jour importantes des supports d'apprentissage.  
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction humaine professionnelle. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

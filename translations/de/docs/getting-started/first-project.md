@@ -1,25 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:48:54+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T17:07:43+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "de"
 }
 -->
-# Ihr erstes Projekt - Praxis-Tutorial
+# Ihr erstes Projekt - Praktisches Tutorial
+
+**Vorher:** [Konfiguration](configuration.md) | **Nächste:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Einführung
 
-Willkommen zu Ihrem ersten Azure Developer CLI-Projekt! Dieses umfassende Praxis-Tutorial bietet eine vollständige Anleitung zur Erstellung, Bereitstellung und Verwaltung einer Full-Stack-Anwendung auf Azure mit azd. Sie arbeiten mit einer echten Todo-Anwendung, die ein React-Frontend, ein Node.js-API-Backend und eine MongoDB-Datenbank umfasst.
+Willkommen zu Ihrem ersten Azure Developer CLI-Projekt! Dieses umfassende praktische Tutorial bietet eine vollständige Anleitung zur Erstellung, Bereitstellung und Verwaltung einer Full-Stack-Anwendung auf Azure mit azd. Sie arbeiten mit einer echten Todo-Anwendung, die ein React-Frontend, ein Node.js-API-Backend und eine MongoDB-Datenbank umfasst.
 
 ## Lernziele
 
 Durch den Abschluss dieses Tutorials werden Sie:
-- Den azd-Projektinitialisierungs-Workflow mit Vorlagen meistern
+- Den Workflow zur Initialisierung von azd-Projekten mit Vorlagen meistern
 - Die Struktur und Konfigurationsdateien von Azure Developer CLI-Projekten verstehen
-- Eine vollständige Anwendungsbereitstellung auf Azure mit Infrastruktur-Provisionierung durchführen
-- Strategien für Anwendungsaktualisierungen und erneute Bereitstellungen implementieren
+- Eine vollständige Anwendung mit Infrastrukturbereitstellung auf Azure bereitstellen
+- Strategien für Anwendungsupdates und erneute Bereitstellungen implementieren
 - Mehrere Umgebungen für Entwicklung und Staging verwalten
 - Praktiken zur Ressourcensäuberung und Kostenmanagement anwenden
 
@@ -28,10 +30,10 @@ Durch den Abschluss dieses Tutorials werden Sie:
 Nach Abschluss werden Sie in der Lage sein:
 - azd-Projekte unabhängig von Vorlagen zu initialisieren und zu konfigurieren
 - azd-Projektstrukturen effektiv zu navigieren und zu ändern
-- Full-Stack-Anwendungen mit einem einzigen Befehl auf Azure bereitzustellen
-- Häufige Bereitstellungsprobleme und Authentifizierungsfehler zu beheben
+- Full-Stack-Anwendungen mit einfachen Befehlen auf Azure bereitzustellen
+- Häufige Bereitstellungsprobleme und Authentifizierungsprobleme zu beheben
 - Mehrere Azure-Umgebungen für verschiedene Bereitstellungsstufen zu verwalten
-- Kontinuierliche Bereitstellungs-Workflows für Anwendungsaktualisierungen zu implementieren
+- Kontinuierliche Bereitstellungs-Workflows für Anwendungsupdates zu implementieren
 
 ## Erste Schritte
 
@@ -81,7 +83,7 @@ azd init --template todo-nodejs-mongo
 - Der Vorlagencode wurde in Ihr lokales Verzeichnis heruntergeladen
 - Eine `azure.yaml`-Datei mit Dienstdefinitionen wurde erstellt
 - Infrastrukturcode im Verzeichnis `infra/` eingerichtet
-- Eine Umgebungskonfiguration erstellt
+- Eine Umgebungs-Konfiguration erstellt
 
 ## Schritt 2: Projektstruktur erkunden
 
@@ -123,7 +125,7 @@ my-first-azd-app/
 
 ### Wichtige Dateien zum Verstehen
 
-**azure.yaml** - Das Herzstück Ihres azd-Projekts:
+**azure.yaml** - Das Herz Ihres azd-Projekts:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -178,9 +180,9 @@ azd up
 ### Was passiert während der Bereitstellung?
 
 Der Befehl `azd up` führt folgende Schritte aus:
-1. **Provisionierung** (`azd provision`) - Erstellt Azure-Ressourcen
-2. **Packaging** - Baut Ihren Anwendungscode
-3. **Bereitstellung** (`azd deploy`) - Stellt Code auf Azure-Ressourcen bereit
+1. **Bereitstellen** (`azd provision`) - Erstellt Azure-Ressourcen
+2. **Paketieren** - Baut Ihren Anwendungscode
+3. **Bereitstellen** (`azd deploy`) - Stellt Code auf Azure-Ressourcen bereit
 
 ### Erwartete Ausgabe
 ```
@@ -212,7 +214,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 2. **Als erledigt markieren** - Haken Sie erledigte Elemente ab
 3. **Elemente löschen** - Entfernen Sie Todos, die Sie nicht mehr benötigen
 
-### Anwendung überwachen
+### Ihre Anwendung überwachen
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -231,7 +233,7 @@ Nehmen wir eine Änderung vor und sehen, wie einfach es ist, ein Update durchzuf
 code src/api/src/routes/lists.js
 ```
 
-Fügen Sie einen benutzerdefinierten Antwort-Header hinzu:
+Fügen Sie einen benutzerdefinierten Antwortheader hinzu:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -369,7 +371,7 @@ azd init --template todo-java-mongo
 
 ### Lernmaterialien
 - [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architekturzentrum](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Community & Support
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigation**
-- **Vorherige Lektion**: [Konfiguration](configuration.md)
+**Vorher:** [Konfiguration](configuration.md) | **Nächste:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
 - **Nächste Lektion**: [Bereitstellungsanleitung](../deployment/deployment-guide.md)
 
 ---
 
 **Haftungsausschluss**:  
-Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, weisen wir darauf hin, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.

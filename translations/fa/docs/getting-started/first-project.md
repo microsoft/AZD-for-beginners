@@ -1,48 +1,50 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:52:01+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T17:10:47+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "fa"
 }
 -->
 # پروژه اول شما - آموزش عملی
 
+**قبلی:** [پیکربندی](configuration.md) | **بعدی:** [ادغام Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## مقدمه
 
-به اولین پروژه Azure Developer CLI خود خوش آمدید! این آموزش جامع و عملی، یک راهنمای کامل برای ایجاد، استقرار و مدیریت یک برنامه فول‌استک در Azure با استفاده از azd ارائه می‌دهد. شما با یک برنامه واقعی مدیریت کارها (todo) کار خواهید کرد که شامل یک فرانت‌اند React، بک‌اند API با Node.js و پایگاه داده MongoDB است.
+به اولین پروژه Azure Developer CLI خود خوش آمدید! این آموزش جامع و عملی، راهنمای کاملی برای ایجاد، استقرار و مدیریت یک برنامه فول‌استک در Azure با استفاده از azd ارائه می‌دهد. شما با یک برنامه واقعی مدیریت وظایف کار خواهید کرد که شامل یک رابط کاربری React، بک‌اند API با Node.js و پایگاه داده MongoDB است.
 
 ## اهداف یادگیری
 
 با تکمیل این آموزش، شما:
 - فرآیند اولیه‌سازی پروژه azd با استفاده از قالب‌ها را یاد خواهید گرفت
 - ساختار پروژه و فایل‌های پیکربندی Azure Developer CLI را درک خواهید کرد
-- استقرار کامل برنامه در Azure همراه با تأمین زیرساخت را اجرا خواهید کرد
+- استقرار کامل برنامه در Azure همراه با ایجاد زیرساخت را اجرا خواهید کرد
 - استراتژی‌های به‌روزرسانی و استقرار مجدد برنامه را پیاده‌سازی خواهید کرد
 - محیط‌های مختلف برای توسعه و آزمایش را مدیریت خواهید کرد
-- اصول پاکسازی منابع و مدیریت هزینه‌ها را اعمال خواهید کرد
+- شیوه‌های پاکسازی منابع و مدیریت هزینه‌ها را اعمال خواهید کرد
 
 ## نتایج یادگیری
 
-پس از اتمام این آموزش، شما قادر خواهید بود:
+پس از اتمام، شما قادر خواهید بود:
 - پروژه‌های azd را به‌طور مستقل از قالب‌ها اولیه‌سازی و پیکربندی کنید
 - ساختار پروژه‌های azd را به‌طور مؤثر پیمایش و تغییر دهید
 - برنامه‌های فول‌استک را با استفاده از دستورات ساده در Azure مستقر کنید
 - مشکلات رایج استقرار و مسائل احراز هویت را رفع کنید
 - محیط‌های مختلف Azure را برای مراحل مختلف استقرار مدیریت کنید
-- فرآیندهای استقرار مداوم را برای به‌روزرسانی برنامه‌ها پیاده‌سازی کنید
+- جریان‌های استقرار مداوم برای به‌روزرسانی برنامه‌ها را پیاده‌سازی کنید
 
 ## شروع به کار
 
 ### چک‌لیست پیش‌نیازها
-- ✅ Azure Developer CLI نصب شده ([راهنمای نصب](installation.md))
-- ✅ Azure CLI نصب شده و احراز هویت شده
-- ✅ Git روی سیستم شما نصب شده است
+- ✅ نصب Azure Developer CLI ([راهنمای نصب](installation.md))
+- ✅ نصب و احراز هویت Azure CLI
+- ✅ نصب Git روی سیستم شما
 - ✅ Node.js نسخه 16 یا بالاتر (برای این آموزش)
 - ✅ Visual Studio Code (توصیه‌شده)
 
-### تأیید تنظیمات
+### تأیید تنظیمات شما
 ```bash
 # Check azd installation
 azd version
@@ -60,7 +62,7 @@ node --version
 
 ## مرحله ۱: انتخاب و اولیه‌سازی یک قالب
 
-بیایید با یک قالب محبوب برنامه مدیریت کارها که شامل یک فرانت‌اند React و بک‌اند API با Node.js است، شروع کنیم.
+بیایید با یک قالب محبوب برنامه مدیریت وظایف که شامل رابط کاربری React و بک‌اند API با Node.js است شروع کنیم.
 
 ```bash
 # Browse available templates
@@ -135,11 +137,11 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## مرحله ۳: سفارشی‌سازی پروژه (اختیاری)
+## مرحله ۳: سفارشی‌سازی پروژه شما (اختیاری)
 
 قبل از استقرار، می‌توانید برنامه را سفارشی کنید:
 
-### تغییر فرانت‌اند
+### تغییر رابط کاربری
 ```bash
 # Open the React app component
 code src/web/src/App.tsx
@@ -162,7 +164,7 @@ azd env get-values
 
 ## مرحله ۴: استقرار در Azure
 
-حالا به بخش هیجان‌انگیز می‌رسیم - همه چیز را در Azure مستقر کنید!
+حالا قسمت هیجان‌انگیز - همه چیز را در Azure مستقر کنید!
 
 ```bash
 # Deploy infrastructure and application
@@ -178,9 +180,9 @@ azd up
 ### چه اتفاقی در طول استقرار می‌افتد؟
 
 دستور `azd up` این مراحل را انجام می‌دهد:
-1. **تأمین منابع** (`azd provision`) - ایجاد منابع Azure
-2. **بسته‌بندی** - ساخت کد برنامه شما
-3. **استقرار** (`azd deploy`) - استقرار کد در منابع Azure
+1. **ایجاد زیرساخت** (`azd provision`) - منابع Azure ایجاد می‌شوند
+2. **بسته‌بندی** - کد برنامه شما ساخته می‌شود
+3. **استقرار** (`azd deploy`) - کد به منابع Azure مستقر می‌شود
 
 ### خروجی مورد انتظار
 ```
@@ -195,10 +197,10 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## مرحله ۵: آزمایش برنامه
+## مرحله ۵: آزمایش برنامه شما
 
-### دسترسی به برنامه
-روی URL ارائه‌شده در خروجی استقرار کلیک کنید، یا هر زمان که خواستید آن را دریافت کنید:
+### دسترسی به برنامه شما
+روی URL ارائه‌شده در خروجی استقرار کلیک کنید، یا هر زمان آن را دریافت کنید:
 ```bash
 # Get application endpoints
 azd show
@@ -207,12 +209,12 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### آزمایش برنامه مدیریت کارها
-1. **افزودن یک مورد کار** - روی "Add Todo" کلیک کنید و یک کار وارد کنید
-2. **علامت‌گذاری به‌عنوان کامل‌شده** - موارد کامل‌شده را تیک بزنید
-3. **حذف موارد** - کارهایی که دیگر نیاز ندارید را حذف کنید
+### آزمایش برنامه مدیریت وظایف
+1. **افزودن یک وظیفه** - روی "Add Todo" کلیک کنید و یک وظیفه وارد کنید
+2. **علامت‌گذاری به‌عنوان کامل‌شده** - وظایف کامل‌شده را علامت بزنید
+3. **حذف وظایف** - وظایفی که دیگر نیاز ندارید را حذف کنید
 
-### نظارت بر برنامه
+### نظارت بر برنامه شما
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -223,7 +225,7 @@ azd logs
 
 ## مرحله ۶: ایجاد تغییرات و استقرار مجدد
 
-بیایید یک تغییر ایجاد کنیم و ببینیم به‌روزرسانی چقدر آسان است:
+بیایید یک تغییر ایجاد کنیم و ببینیم چگونه به‌راحتی می‌توان به‌روزرسانی کرد:
 
 ### تغییر API
 ```bash
@@ -276,7 +278,7 @@ azd show
 
 ## مرحله ۸: پاکسازی منابع
 
-وقتی آزمایش‌هایتان تمام شد، منابع را پاک کنید تا از هزینه‌های مداوم جلوگیری کنید:
+وقتی آزمایش شما تمام شد، منابع را پاک کنید تا از هزینه‌های مداوم جلوگیری کنید:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -290,10 +292,10 @@ azd env select staging
 azd down --force --purge
 ```
 
-## آنچه آموخته‌اید
+## آنچه یاد گرفته‌اید
 
-تبریک می‌گوییم! شما با موفقیت:
-- یک پروژه azd را از یک قالب اولیه‌سازی کردید
+تبریک! شما با موفقیت:
+- یک پروژه azd را از قالب اولیه‌سازی کردید
 - ساختار پروژه و فایل‌های کلیدی را بررسی کردید
 - یک برنامه فول‌استک را در Azure مستقر کردید
 - تغییرات کد ایجاد کردید و مجدداً مستقر کردید
@@ -322,7 +324,7 @@ azd logs --service api
 azd logs --service web
 ```
 
-### تعارض نام منابع
+### تضاد نام منابع
 ```bash
 # Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
@@ -337,20 +339,20 @@ netstat -an | grep :3100
 
 ## مراحل بعدی
 
-حالا که پروژه اول خود را تکمیل کرده‌اید، این موضوعات پیشرفته را بررسی کنید:
+حالا که اولین پروژه خود را تکمیل کرده‌اید، این موضوعات پیشرفته را بررسی کنید:
 
 ### ۱. سفارشی‌سازی زیرساخت
 - [زیرساخت به‌عنوان کد](../deployment/provisioning.md)
-- [افزودن پایگاه داده‌ها، ذخیره‌سازی و سایر خدمات](../deployment/provisioning.md#adding-services)
+- [افزودن پایگاه داده‌ها، ذخیره‌سازی و خدمات دیگر](../deployment/provisioning.md#adding-services)
 
-### ۲. راه‌اندازی CI/CD
-- [ادغام با GitHub Actions](../deployment/cicd-integration.md)
+### ۲. تنظیم CI/CD
+- [ادغام GitHub Actions](../deployment/cicd-integration.md)
 - [پایپ‌لاین‌های Azure DevOps](../deployment/cicd-integration.md#azure-devops)
 
 ### ۳. بهترین شیوه‌های تولید
 - [پیکربندی‌های امنیتی](../deployment/best-practices.md#security)
 - [بهینه‌سازی عملکرد](../deployment/best-practices.md#performance)
-- [نظارت و لاگ‌گیری](../deployment/best-practices.md#monitoring)
+- [نظارت و ثبت لاگ‌ها](../deployment/best-practices.md#monitoring)
 
 ### ۴. بررسی قالب‌های بیشتر
 ```bash
@@ -367,10 +369,10 @@ azd init --template todo-java-mongo
 
 ## منابع اضافی
 
-### مطالب آموزشی
+### مواد آموزشی
 - [مستندات Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [مرکز معماری Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [چارچوب Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [چارچوب خوب معماری Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### جامعه و پشتیبانی
 - [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -378,19 +380,18 @@ azd init --template todo-java-mongo
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### قالب‌ها و مثال‌ها
-- [گالری رسمی قالب‌ها](https://azure.github.io/awesome-azd/)
+- [گالری قالب رسمی](https://azure.github.io/awesome-azd/)
 - [قالب‌های جامعه](https://github.com/Azure-Samples/azd-templates)
 - [الگوهای سازمانی](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**تبریک می‌گوییم که پروژه اول azd خود را تکمیل کردید!** اکنون آماده‌اید تا با اطمینان برنامه‌های شگفت‌انگیزی را در Azure بسازید و مستقر کنید.
+**تبریک بابت تکمیل اولین پروژه azd شما!** اکنون آماده هستید تا با اطمینان برنامه‌های شگفت‌انگیزی را در Azure بسازید و مستقر کنید.
 
 ---
 
-**ناوبری**
-- **درس قبلی**: [پیکربندی](configuration.md)
-- **درس بعدی**: [راهنمای استقرار](../deployment/deployment-guide.md)
+**قبلی:** [پیکربندی](configuration.md) | **بعدی:** [ادغام Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+- **درس بعدی:** [راهنمای استقرار](../deployment/deployment-guide.md)
 
 ---
 

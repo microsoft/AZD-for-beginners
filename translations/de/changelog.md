@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8de774b36773a00bc9fa2a445a0d8d49",
-  "translation_date": "2025-09-09T16:36:47+00:00",
+  "original_hash": "9736db53ea878e07688670ebcc8906bc",
+  "translation_date": "2025-09-12T17:07:00+00:00",
   "source_file": "changelog.md",
   "language_code": "de"
 }
@@ -11,13 +11,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Einführung
 
-Dieses Änderungsprotokoll dokumentiert alle bemerkenswerten Änderungen, Aktualisierungen und Verbesserungen des AZD für Anfänger Repositorys. Wir folgen den Prinzipien der semantischen Versionierung und führen dieses Protokoll, um den Nutzern zu helfen, die Unterschiede zwischen den Versionen zu verstehen.
+Dieses Änderungsprotokoll dokumentiert alle bemerkenswerten Änderungen, Aktualisierungen und Verbesserungen am AZD für Anfänger-Repository. Wir folgen den Prinzipien der semantischen Versionierung und führen dieses Protokoll, um den Nutzern zu helfen, die Unterschiede zwischen den Versionen zu verstehen.
 
 ## Lernziele
 
 Durch die Überprüfung dieses Änderungsprotokolls werden Sie:
 - Über neue Funktionen und Inhalte informiert bleiben
-- Verbesserungen an bestehender Dokumentation nachvollziehen können
+- Verbesserungen an bestehender Dokumentation nachvollziehen
 - Fehlerbehebungen und Korrekturen verfolgen, um Genauigkeit sicherzustellen
 - Die Entwicklung der Lernmaterialien im Laufe der Zeit verfolgen
 
@@ -31,56 +31,89 @@ Nach der Überprüfung der Einträge im Änderungsprotokoll werden Sie in der La
 
 ## Versionshistorie
 
-### [v2.0.0] - 2025-09-09
+### [v3.0.0] - 12.09.2025
+
+#### Wichtige Änderungen - Fokus auf KI-Entwickler und Integration der Azure AI Foundry
+**Diese Version verwandelt das Repository in eine umfassende, KI-fokussierte Lernressource mit Integration der Azure AI Foundry.**
+
+#### Hinzugefügt
+- **🤖 KI-zentrierter Lernpfad**: Komplette Umstrukturierung mit Priorisierung von KI-Entwicklern und Ingenieuren
+- **Azure AI Foundry-Integrationsleitfaden**: Umfassende Dokumentation zur Verbindung von AZD mit Azure AI Foundry-Diensten
+- **Muster für KI-Modellbereitstellung**: Detaillierter Leitfaden zu Modellauswahl, Konfiguration und Produktionsbereitstellung
+- **KI-Workshop-Labor**: 2-3 Stunden praktischer Workshop zur Umwandlung von KI-Anwendungen in AZD-bereitstellbare Lösungen
+- **Best Practices für KI in der Produktion**: Unternehmensgerechte Muster für Skalierung, Überwachung und Sicherung von KI-Workloads
+- **KI-spezifischer Leitfaden zur Fehlerbehebung**: Umfassende Problemlösung für Azure OpenAI, Cognitive Services und KI-Bereitstellungsprobleme
+- **KI-Vorlagengalerie**: Ausgewählte Sammlung von Azure AI Foundry-Vorlagen mit Komplexitätsbewertungen
+- **Workshop-Materialien**: Vollständige Workshop-Struktur mit praktischen Übungen und Referenzmaterialien
+
+#### Verbesserungen
+- **README-Struktur**: Fokus auf KI-Entwickler mit 45 % Community-Interesse aus dem Azure AI Foundry Discord
+- **Lernpfade**: Dedizierter Lernweg für KI-Entwickler neben traditionellen Pfaden für Studenten und DevOps-Ingenieure
+- **Vorlagenempfehlungen**: Vorgestellte KI-Vorlagen wie azure-search-openai-demo, contoso-chat und openai-chat-app-quickstart
+- **Community-Integration**: Verbesserte Unterstützung der Discord-Community mit KI-spezifischen Kanälen und Diskussionen
+
+#### Fokus auf Sicherheit und Produktion
+- **Muster für verwaltete Identitäten**: KI-spezifische Authentifizierungs- und Sicherheitskonfigurationen
+- **Kostenoptimierung**: Verfolgung der Token-Nutzung und Budgetkontrollen für KI-Workloads
+- **Bereitstellung in mehreren Regionen**: Strategien für die globale Bereitstellung von KI-Anwendungen
+- **Leistungsüberwachung**: KI-spezifische Metriken und Integration von Application Insights
+
+#### Dokumentationsqualität
+- **Linearer Kursaufbau**: Logische Progression von Anfänger- bis zu fortgeschrittenen KI-Bereitstellungsmustern
+- **Validierte URLs**: Alle externen Repository-Links überprüft und zugänglich
+- **Vollständige Referenz**: Alle internen Dokumentationslinks validiert und funktional
+- **Produktionsreife**: Unternehmensbereitschaft mit praxisnahen Beispielen
+
+### [v2.0.0] - 09.09.2025
 
 #### Wichtige Änderungen - Umstrukturierung des Repositorys und professionelle Verbesserung
-**Diese Version stellt eine umfassende Überarbeitung der Repository-Struktur und der Präsentation der Inhalte dar.**
+**Diese Version stellt eine bedeutende Überarbeitung der Repository-Struktur und der Inhaltspräsentation dar.**
 
 #### Hinzugefügt
 - **Strukturiertes Lernframework**: Alle Dokumentationsseiten enthalten jetzt Abschnitte zu Einführung, Lernzielen und Lernergebnissen
-- **Navigationssystem**: Vorherige/Nächste Lektion-Links wurden in der gesamten Dokumentation hinzugefügt, um eine geführte Lernprogression zu ermöglichen
-- **Lernleitfaden**: Umfassende study-guide.md mit Lernzielen, Übungsaufgaben und Bewertungsmaterialien
-- **Professionelle Präsentation**: Alle Emoji-Symbole wurden entfernt, um die Barrierefreiheit und ein professionelles Erscheinungsbild zu verbessern
-- **Verbesserte Inhaltsstruktur**: Optimierte Organisation und Ablauf der Lernmaterialien
+- **Navigationssystem**: Vorherige/Nächste Lektion-Links in der gesamten Dokumentation für eine geführte Lernprogression
+- **Lernleitfaden**: Umfassender study-guide.md mit Lernzielen, Übungsaufgaben und Bewertungsmaterialien
+- **Professionelle Präsentation**: Entfernung aller Emoji-Symbole für verbesserte Barrierefreiheit und professionelles Erscheinungsbild
+- **Verbesserte Inhaltsstruktur**: Verbesserte Organisation und Fluss der Lernmaterialien
 
 #### Geändert
-- **Dokumentationsformat**: Standardisierung aller Dokumentationen mit einer konsistenten, lernorientierten Struktur
-- **Navigationsfluss**: Logische Progression durch alle Lernmaterialien implementiert
-- **Inhaltspräsentation**: Dekorative Elemente wurden zugunsten einer klaren, professionellen Formatierung entfernt
-- **Linkstruktur**: Alle internen Links wurden aktualisiert, um das neue Navigationssystem zu unterstützen
+- **Dokumentationsformat**: Standardisierung aller Dokumentationen mit konsistenter, lernorientierter Struktur
+- **Navigationsfluss**: Implementierung einer logischen Progression durch alle Lernmaterialien
+- **Inhaltspräsentation**: Entfernung dekorativer Elemente zugunsten klarer, professioneller Formatierung
+- **Linkstruktur**: Aktualisierung aller internen Links zur Unterstützung des neuen Navigationssystems
 
 #### Verbesserungen
 - **Barrierefreiheit**: Entfernung von Emoji-Abhängigkeiten für bessere Kompatibilität mit Screenreadern
 - **Professionelles Erscheinungsbild**: Saubere, akademische Präsentation, geeignet für Unternehmensschulungen
 - **Lernerfahrung**: Strukturierter Ansatz mit klaren Zielen und Ergebnissen für jede Lektion
-- **Inhaltsorganisation**: Bessere logische Verbindung und Ablauf zwischen verwandten Themen
+- **Inhaltsorganisation**: Bessere logische Verbindung zwischen verwandten Themen
 
-### [v1.0.0] - 2025-09-09
+### [v1.0.0] - 09.09.2025
 
-#### Erstveröffentlichung - Umfassendes AZD-Lernrepository
+#### Erster Release - Umfassendes AZD-Lernrepository
 
 #### Hinzugefügt
 - **Kernstruktur der Dokumentation**
   - Vollständige Einsteigerleitfaden-Serie
   - Umfassende Dokumentation zu Bereitstellung und Provisionierung
-  - Detaillierte Ressourcen zur Fehlerbehebung und Debugging-Leitfäden
-  - Validierungstools und Verfahren vor der Bereitstellung
+  - Detaillierte Ressourcen zur Fehlerbehebung und Debugging
+  - Tools und Verfahren zur Validierung vor der Bereitstellung
 
 - **Einsteiger-Modul**
   - AZD-Grundlagen: Kernkonzepte und Terminologie
-  - Installationsanleitung: Plattform-spezifische Setup-Anweisungen
-  - Konfigurationsanleitung: Einrichtung der Umgebung und Authentifizierung
-  - Erstes Projekt-Tutorial: Schritt-für-Schritt praktisches Lernen
+  - Installationsleitfaden: Plattform-spezifische Einrichtung
+  - Konfigurationsleitfaden: Umgebungseinrichtung und Authentifizierung
+  - Erste Projektanleitung: Schritt-für-Schritt praktisches Lernen
 
 - **Bereitstellungs- und Provisionierungsmodul**
-  - Bereitstellungsanleitung: Vollständige Workflow-Dokumentation
-  - Provisionierungsanleitung: Infrastruktur als Code mit Bicep
+  - Bereitstellungsleitfaden: Vollständige Workflow-Dokumentation
+  - Provisionierungsleitfaden: Infrastruktur als Code mit Bicep
   - Best Practices für Produktionsbereitstellungen
   - Muster für Multi-Service-Architekturen
 
 - **Validierungsmodul vor der Bereitstellung**
-  - Kapazitätsplanung: Validierung der Verfügbarkeit von Azure-Ressourcen
-  - SKU-Auswahl: Umfassende Anleitung zu Service-Tiers
+  - Kapazitätsplanung: Validierung der Azure-Ressourcenverfügbarkeit
+  - SKU-Auswahl: Umfassende Anleitung zu Servicestufen
   - Pre-Flight-Checks: Automatisierte Validierungsskripte (PowerShell und Bash)
   - Tools zur Kostenschätzung und Budgetplanung
 
@@ -91,25 +124,25 @@ Nach der Überprüfung der Einträge im Änderungsprotokoll werden Sie in der La
   - Leistungsüberwachung und Optimierung
 
 - **Ressourcen und Referenzen**
-  - Befehlsübersicht: Schnelle Referenz für wesentliche Befehle
+  - Befehlsübersicht: Schnelle Referenz für wichtige Befehle
   - Glossar: Umfassende Definitionen von Begriffen und Akronymen
   - FAQ: Detaillierte Antworten auf häufige Fragen
-  - Links zu externen Ressourcen und Community-Verbindungen
+  - Externe Ressourcenlinks und Community-Verbindungen
 
 - **Beispiele und Vorlagen**
-  - Beispiel für eine einfache Webanwendung
-  - Vorlage für die Bereitstellung einer statischen Website
-  - Konfiguration einer Containeranwendung
+  - Beispiel für einfache Webanwendungen
+  - Vorlage für die Bereitstellung statischer Websites
+  - Konfiguration von Containeranwendungen
   - Datenbank-Integrationsmuster
   - Beispiele für Microservices-Architekturen
   - Implementierungen von serverlosen Funktionen
 
 #### Funktionen
-- **Plattformübergreifende Unterstützung**: Installations- und Konfigurationsanleitungen für Windows, macOS und Linux
+- **Plattformübergreifende Unterstützung**: Installations- und Konfigurationsleitfäden für Windows, macOS und Linux
 - **Verschiedene Fähigkeitsstufen**: Inhalte für Studenten bis hin zu professionellen Entwicklern
-- **Praktischer Fokus**: Praktische Beispiele und Szenarien aus der realen Welt
+- **Praktischer Fokus**: Praktische Beispiele und reale Szenarien
 - **Umfassende Abdeckung**: Von grundlegenden Konzepten bis hin zu fortgeschrittenen Unternehmensmustern
-- **Sicherheitsorientierter Ansatz**: Sicherheitsbest Practices integriert in alle Inhalte
+- **Sicherheitsorientierter Ansatz**: Sicherheitsbest Practices integriert
 - **Kostenoptimierung**: Anleitung für kosteneffiziente Bereitstellungen und Ressourcenmanagement
 
 #### Dokumentationsqualität
@@ -117,40 +150,65 @@ Nach der Überprüfung der Einträge im Änderungsprotokoll werden Sie in der La
 - **Schritt-für-Schritt-Anleitungen**: Klare, umsetzbare Anweisungen
 - **Umfassende Fehlerbehandlung**: Fehlerbehebung für häufige Probleme
 - **Integration von Best Practices**: Industriestandards und Empfehlungen
-- **Versionskompatibilität**: Aktuell mit den neuesten Azure-Diensten und azd-Funktionen
+- **Versionskompatibilität**: Aktuell mit den neuesten Azure-Diensten und AZD-Funktionen
 
 ## Geplante zukünftige Verbesserungen
 
-### Version 3.0.0 (Geplant)
-#### Vorgeschlagene Ergänzungen
-- **Interaktive Tutorials**: Praktische Coding-Übungen mit automatisierter Validierung
-- **Videoinhalte**: Ergänzende Video-Tutorials für visuelle Lerner
-- **Fortgeschrittenes Sicherheitsmodul**: Tiefgehende Analyse von Sicherheitsmustern für Unternehmen
-- **Multi-Cloud-Unterstützung**: Integration mit anderen Cloud-Anbietern
-- **Leistungsoptimierung**: Fortgeschrittene Tuning- und Skalierungsstrategien
+### Version 3.1.0 (Geplant)
+#### Erweiterung der KI-Plattform
+- **Unterstützung für mehrere Modelle**: Integrationsmuster für Hugging Face, Azure Machine Learning und benutzerdefinierte Modelle
+- **Frameworks für KI-Agenten**: Vorlagen für LangChain, Semantic Kernel und AutoGen-Bereitstellungen
+- **Fortgeschrittene RAG-Muster**: Optionen für Vektordatenbanken jenseits von Azure AI Search (Pinecone, Weaviate usw.)
+- **KI-Überwachung**: Verbesserte Überwachung der Modellleistung, Token-Nutzung und Antwortqualität
 
-#### Vorgeschlagene Verbesserungen
+#### Entwicklererfahrung
+- **VS Code-Erweiterung**: Integrierte AZD + AI Foundry Entwicklungsumgebung
+- **GitHub Copilot-Integration**: KI-unterstützte AZD-Vorlagengenerierung
+- **Interaktive Tutorials**: Praktische Codierungsübungen mit automatisierter Validierung für KI-Szenarien
+- **Videoinhalte**: Ergänzende Video-Tutorials für visuelle Lerner mit Fokus auf KI-Bereitstellungen
+
+### Version 4.0.0 (Geplant)
+#### Unternehmensmuster für KI
+- **Governance-Framework**: Governance, Compliance und Audit-Trails für KI-Modelle
+- **Multi-Tenant-KI**: Muster für die Bereitstellung isolierter KI-Dienste für mehrere Kunden
+- **Edge-KI-Bereitstellung**: Integration mit Azure IoT Edge und Containerinstanzen
+- **Hybrid-Cloud-KI**: Multi-Cloud- und hybride Bereitstellungsmuster für KI-Workloads
+
+#### Erweiterte Funktionen
+- **Automatisierung von KI-Pipelines**: MLOps-Integration mit Azure Machine Learning-Pipelines
+- **Erweiterte Sicherheit**: Zero-Trust-Muster, private Endpunkte und erweiterter Bedrohungsschutz
+- **Leistungsoptimierung**: Fortgeschrittene Abstimmungs- und Skalierungsstrategien für hochdurchsatzfähige KI-Anwendungen
+- **Globale Verteilung**: Muster für Content-Delivery und Edge-Caching für KI-Anwendungen
+
+### Version 3.0.0 (Geplant) - Ersetzt durch aktuelle Version
+#### Vorgeschlagene Ergänzungen - Jetzt in v3.0.0 umgesetzt
+- ✅ **KI-fokussierte Inhalte**: Umfassende Integration der Azure AI Foundry (Abgeschlossen)
+- ✅ **Interaktive Tutorials**: Praktisches KI-Workshop-Labor (Abgeschlossen)
+- ✅ **Erweitertes Sicherheitsmodul**: KI-spezifische Sicherheitsmuster (Abgeschlossen)
+- ✅ **Leistungsoptimierung**: Abstimmungsstrategien für KI-Workloads (Abgeschlossen)
+
+### Version 2.1.0 (Geplant) - Teilweise in v3.0.0 umgesetzt
+#### Kleinere Verbesserungen - Einige in aktueller Version abgeschlossen
+- ✅ **Zusätzliche Beispiele**: KI-fokussierte Bereitstellungsszenarien (Abgeschlossen)
+- ✅ **Erweiterte FAQ**: KI-spezifische Fragen und Fehlerbehebung (Abgeschlossen)
+- **Tool-Integration**: Verbesserte Leitfäden zur Integration von IDEs und Editoren
+- ✅ **Erweiterte Überwachung**: KI-spezifische Muster für Überwachung und Warnungen (Abgeschlossen)
+
+#### Noch für zukünftige Versionen geplant
 - **Mobilfreundliche Dokumentation**: Responsives Design für mobiles Lernen
 - **Offline-Zugriff**: Herunterladbare Dokumentationspakete
-- **Community-Beiträge**: Verbesserte Richtlinien für Community-Beiträge
-- **Übersetzungsunterstützung**: Dokumentation in mehreren Sprachen
-
-### Version 2.1.0 (Geplant)
-#### Kleinere Verbesserungen
-- **Zusätzliche Beispiele**: Weitere reale Bereitstellungsszenarien
-- **Erweiterte FAQ**: Zusätzliche häufige Fragen und Antworten
-- **Tool-Integration**: Verbesserte Leitfäden zur Integration von IDEs und Editoren
-- **Erweiterte Überwachung**: Fortgeschrittene Muster für Überwachung und Warnungen
+- **Verbesserte IDE-Integration**: VS Code-Erweiterung für AZD + KI-Workflows
+- **Community-Dashboard**: Echtzeit-Metriken und Beitragsverfolgung der Community
 
 ## Beitrag zum Änderungsprotokoll
 
 ### Änderungen melden
-Beim Beitrag zu diesem Repository sollten Änderungsprotokolleinträge Folgendes enthalten:
+Beim Beitrag zu diesem Repository stellen Sie bitte sicher, dass die Einträge im Änderungsprotokoll Folgendes enthalten:
 
 1. **Versionsnummer**: Nach semantischer Versionierung (major.minor.patch)
-2. **Datum**: Veröffentlichungs- oder Aktualisierungsdatum im Format YYYY-MM-DD
+2. **Datum**: Veröffentlichungs- oder Aktualisierungsdatum im Format JJJJ-MM-TT
 3. **Kategorie**: Hinzugefügt, Geändert, Veraltet, Entfernt, Behoben, Sicherheit
-4. **Klare Beschreibung**: Präzise Beschreibung der Änderungen
+4. **Klare Beschreibung**: Prägnante Beschreibung der Änderungen
 5. **Auswirkungsbewertung**: Wie sich die Änderungen auf bestehende Nutzer auswirken
 
 ### Änderungskategorien
@@ -177,12 +235,12 @@ Beim Beitrag zu diesem Repository sollten Änderungsprotokolleinträge Folgendes
 
 #### Behoben
 - Korrekturen von Fehlern in Dokumentation oder Code
-- Lösung von gemeldeten Problemen oder Fehlern
+- Lösung von gemeldeten Problemen oder Schwierigkeiten
 - Verbesserungen der Genauigkeit oder Funktionalität
 
 #### Sicherheit
 - Sicherheitsbezogene Verbesserungen oder Korrekturen
-- Aktualisierungen zu Sicherheitsbest Practices
+- Aktualisierungen der Sicherheitsbest Practices
 - Behebung von Sicherheitslücken
 
 ### Richtlinien zur semantischen Versionierung
@@ -193,73 +251,73 @@ Beim Beitrag zu diesem Repository sollten Änderungsprotokolleinträge Folgendes
 - Änderungen, die den grundlegenden Ansatz oder die Methodik verändern
 
 #### Nebenversion (X.Y.0)
-- Neue Funktionen oder Inhaltsergänzungen
-- Verbesserungen, die rückwärtskompatibel bleiben
+- Neue Funktionen oder Inhaltszusätze
+- Verbesserungen, die die Rückwärtskompatibilität erhalten
 - Zusätzliche Beispiele, Tools oder Ressourcen
 
 #### Patch-Version (X.Y.Z)
 - Fehlerbehebungen und Korrekturen
 - Kleine Verbesserungen an bestehenden Inhalten
-- Klarstellungen und kleine Ergänzungen
+- Klarstellungen und kleine Erweiterungen
 
 ## Community-Feedback und Vorschläge
 
 Wir ermutigen aktiv zu Community-Feedback, um diese Lernressource zu verbessern:
 
 ### So geben Sie Feedback
-- **GitHub Issues**: Probleme melden oder Verbesserungen vorschlagen
-- **Discord-Diskussionen**: Ideen teilen und mit der Community interagieren
-- **Pull Requests**: Direkte Verbesserungen an Inhalten beitragen
-- **Discord Community-Foren**: Teilnahme an breiteren Diskussionen zu Azure-Entwicklern
+- **GitHub Issues**: Probleme melden oder Verbesserungen vorschlagen (KI-spezifische Themen willkommen)
+- **Discord-Diskussionen**: Ideen teilen und mit der Azure AI Foundry-Community interagieren
+- **Pull Requests**: Direkte Verbesserungen zu Inhalten beitragen, insbesondere KI-Vorlagen und Leitfäden
+- **Azure AI Foundry Discord**: Teilnahme am #Azure-Kanal für AZD + KI-Diskussionen
+- **Community-Foren**: Teilnahme an breiteren Diskussionen für Azure-Entwickler
 
 ### Feedback-Kategorien
-- **Inhaltsgenauigkeit**: Korrekturen zu technischen Informationen
-- **Lernerfahrung**: Vorschläge für einen verbesserten Lernfluss
-- **Fehlende Inhalte**: Anfragen für zusätzliche Themen oder Beispiele
+- **Genauigkeit der KI-Inhalte**: Korrekturen zu Informationen über KI-Dienstintegration und Bereitstellung
+- **Lernerfahrung**: Vorschläge für einen verbesserten Lernfluss für KI-Entwickler
+- **Fehlende KI-Inhalte**: Anfragen für zusätzliche KI-Vorlagen, Muster oder Beispiele
 - **Barrierefreiheit**: Verbesserungen für unterschiedliche Lernbedürfnisse
-- **Tool-Integration**: Vorschläge für eine bessere Integration in Entwicklungs-Workflows
+- **Integration von KI-Tools**: Vorschläge für bessere Workflows in der KI-Entwicklung
+- **Produktionsmuster für KI**: Anfragen für Unternehmensmuster zur KI-Bereitstellung
 
-### Antwortverpflichtung
+### Verpflichtung zur Reaktion
 - **Antwort auf Probleme**: Innerhalb von 48 Stunden bei gemeldeten Problemen
 - **Feature-Anfragen**: Bewertung innerhalb einer Woche
 - **Community-Beiträge**: Überprüfung innerhalb einer Woche
-- **Sicherheitsprobleme**: Sofortige Priorität mit beschleunigter Antwort
+- **Sicherheitsprobleme**: Sofortige Priorität mit beschleunigter Reaktion
 
 ## Wartungsplan
 
 ### Regelmäßige Updates
 - **Monatliche Überprüfungen**: Inhaltsgenauigkeit und Linkvalidierung
-- **Vierteljährliche Updates**: Wichtige Inhaltsergänzungen und Verbesserungen
-- **Halbjährliche Überprüfungen**: Umfassende Umstrukturierung und Verbesserung
-- **Jährliche Veröffentlichungen**: Hauptversionsupdates mit bedeutenden Verbesserungen
+- **Vierteljährliche Updates**: Große Inhaltszusätze und Verbesserungen
+- **Halbjährliche Überprüfungen**: Umfassende Umstrukturierung und Erweiterung
+- **Jährliche Veröffentlichungen**: Hauptversion-Updates mit bedeutenden Verbesserungen
 
 ### Überwachung und Qualitätssicherung
 - **Automatisierte Tests**: Regelmäßige Validierung von Codebeispielen und Links
 - **Integration von Community-Feedback**: Regelmäßige Einbindung von Nutzer-Vorschlägen
-- **Technologie-Updates**: Anpassung an die neuesten Azure-Dienste und azd-Versionen
+- **Technologie-Updates**: Ausrichtung an den neuesten Azure-Diensten und AZD-Versionen
 - **Barrierefreiheitsprüfungen**: Regelmäßige Überprüfung auf inklusive Designprinzipien
 
 ## Richtlinie zur Versionsunterstützung
+- **Neueste Hauptversion**: Vollständige Unterstützung mit regelmäßigen Updates  
+- **Vorherige Hauptversion**: Sicherheitsupdates und kritische Fehlerbehebungen für 12 Monate  
+- **Legacy-Versionen**: Nur Community-Support, keine offiziellen Updates  
 
-### Unterstützung der aktuellen Version
-- **Neueste Hauptversion**: Volle Unterstützung mit regelmäßigen Updates
-- **Vorherige Hauptversion**: Sicherheitsupdates und kritische Korrekturen für 12 Monate
-- **Legacy-Versionen**: Nur Community-Unterstützung, keine offiziellen Updates
-
-### Migrationsanleitung
-Wenn Hauptversionen veröffentlicht werden, stellen wir bereit:
-- **Migrationsleitfäden**: Schritt-für-Schritt-Übergangsanweisungen
-- **Kompatibilitätsnotizen**: Details zu Änderungen, die bestehende Nutzer betreffen
-- **Tool-Unterstützung**: Skripte oder Utilities zur Unterstützung der Migration
-- **Community-Unterstützung**: Dedizierte Foren für Migrationsfragen
+### Migrationsanleitung  
+Wenn Hauptversionen veröffentlicht werden, stellen wir bereit:  
+- **Migrationsanleitungen**: Schritt-für-Schritt-Anweisungen für den Übergang  
+- **Kompatibilitätsnotizen**: Details zu Änderungen, die nicht rückwärtskompatibel sind  
+- **Tool-Unterstützung**: Skripte oder Hilfsprogramme zur Unterstützung bei der Migration  
+- **Community-Support**: Spezielle Foren für Fragen zur Migration  
 
 ---
 
-**Navigation**
-- **Vorherige Lektion**: [Lernleitfaden](resources/study-guide.md)
-- **Nächste Lektion**: Zurück zur [Haupt-README](README.md)
+**Navigation**  
+- **Vorherige Lektion**: [Lernleitfaden](resources/study-guide.md)  
+- **Nächste Lektion**: Zurück zur [Haupt-README](README.md)  
 
-**Bleiben Sie informiert**: Beobachten Sie dieses Repository, um Benachrichtigungen über neue Veröffentlichungen und wichtige Updates zu den Lernmaterialien zu erhalten.
+**Bleiben Sie auf dem Laufenden**: Beobachten Sie dieses Repository, um Benachrichtigungen über neue Versionen und wichtige Updates zu den Lernmaterialien zu erhalten.  
 
 ---
 

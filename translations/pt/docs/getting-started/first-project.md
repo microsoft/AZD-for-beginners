@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:07:30+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T17:01:26+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "pt"
 }
 -->
 # O Seu Primeiro Projeto - Tutorial Prático
 
+**Anterior:** [Configuração](configuration.md) | **Próximo:** [Integração com Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Introdução
 
-Bem-vindo ao seu primeiro projeto com o Azure Developer CLI! Este tutorial prático e abrangente oferece um guia completo para criar, implementar e gerir uma aplicação full-stack no Azure utilizando o azd. Irá trabalhar com uma aplicação real de lista de tarefas (todo) que inclui um frontend em React, um backend API em Node.js e uma base de dados MongoDB.
+Bem-vindo ao seu primeiro projeto com o Azure Developer CLI! Este tutorial prático e abrangente oferece um guia completo para criar, implementar e gerir uma aplicação full-stack no Azure utilizando o azd. Irá trabalhar com uma aplicação real de lista de tarefas que inclui um frontend em React, um backend API em Node.js e uma base de dados MongoDB.
 
 ## Objetivos de Aprendizagem
 
@@ -19,8 +21,8 @@ Ao concluir este tutorial, irá:
 - Dominar o fluxo de inicialização de projetos azd utilizando templates
 - Compreender a estrutura de projetos e ficheiros de configuração do Azure Developer CLI
 - Executar a implementação completa de uma aplicação no Azure com provisionamento de infraestrutura
-- Implementar atualizações na aplicação e estratégias de reimplantação
-- Gerir múltiplos ambientes para desenvolvimento e staging
+- Implementar atualizações na aplicação e estratégias de reimplementação
+- Gerir múltiplos ambientes para desenvolvimento e testes
 - Aplicar práticas de limpeza de recursos e gestão de custos
 
 ## Resultados de Aprendizagem
@@ -31,9 +33,9 @@ Após a conclusão, será capaz de:
 - Implementar aplicações full-stack no Azure com comandos simples
 - Resolver problemas comuns de implementação e autenticação
 - Gerir múltiplos ambientes Azure para diferentes etapas de implementação
-- Implementar fluxos de trabalho de implantação contínua para atualizações de aplicações
+- Implementar fluxos de implementação contínua para atualizações de aplicações
 
-## Primeiros Passos
+## Começar
 
 ### Lista de Pré-requisitos
 - ✅ Azure Developer CLI instalado ([Guia de Instalação](installation.md))
@@ -42,18 +44,18 @@ Após a conclusão, será capaz de:
 - ✅ Node.js 16+ (para este tutorial)
 - ✅ Visual Studio Code (recomendado)
 
-### Verificar a Configuração
+### Verificar Configuração
 ```bash
 # Check azd installation
 azd version
 ```
-### Verificar a Autenticação no Azure
+### Verificar Autenticação no Azure
 
 ```bash
 az account show
 ```
 
-### Verificar a Versão do Node.js
+### Verificar Versão do Node.js
 ```bash
 node --version
 ```
@@ -77,10 +79,10 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### O Que Aconteceu?
+### O Que Acabou de Acontecer?
 - O código do template foi descarregado para o seu diretório local
 - Foi criado um ficheiro `azure.yaml` com definições de serviços
-- O código de infraestrutura foi configurado no diretório `infra/`
+- Foi configurado o código de infraestrutura no diretório `infra/`
 - Foi criada uma configuração de ambiente
 
 ## Passo 2: Explorar a Estrutura do Projeto
@@ -129,7 +131,7 @@ my-first-azd-app/
 cat azure.yaml
 ```
 
-**infra/main.bicep** - Definição da infraestrutura:
+**infra/main.bicep** - Definição de infraestrutura:
 ```bash
 # View the infrastructure code
 head -30 infra/main.bicep
@@ -179,10 +181,10 @@ azd up
 
 O comando `azd up` realiza os seguintes passos:
 1. **Provisionar** (`azd provision`) - Cria os recursos no Azure
-2. **Empacotar** - Constrói o código da aplicação
+2. **Empacotar** - Compila o código da aplicação
 3. **Implementar** (`azd deploy`) - Implementa o código nos recursos do Azure
 
-### Resultado Esperado
+### Saída Esperada
 ```
 Packaging services (azd package)
 
@@ -198,7 +200,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Passo 5: Testar a Sua Aplicação
 
 ### Aceder à Sua Aplicação
-Clique no URL fornecido na saída da implementação ou obtenha-o a qualquer momento:
+Clique no URL fornecido na saída da implementação ou aceda a qualquer momento:
 ```bash
 # Get application endpoints
 azd show
@@ -247,7 +249,7 @@ azd deploy
 
 ## Passo 7: Gerir Múltiplos Ambientes
 
-Crie um ambiente de staging para testar alterações antes da produção:
+Crie um ambiente de testes para validar alterações antes de as colocar em produção:
 
 ```bash
 # Create a new staging environment
@@ -339,7 +341,7 @@ netstat -an | grep :3100
 
 Agora que concluiu o seu primeiro projeto, explore estes tópicos avançados:
 
-### 1. Personalizar a Infraestrutura
+### 1. Personalizar Infraestrutura
 - [Infraestrutura como Código](../deployment/provisioning.md)
 - [Adicionar bases de dados, armazenamento e outros serviços](../deployment/provisioning.md#adding-services)
 
@@ -347,7 +349,7 @@ Agora que concluiu o seu primeiro projeto, explore estes tópicos avançados:
 - [Integração com GitHub Actions](../deployment/cicd-integration.md)
 - [Pipelines do Azure DevOps](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Boas Práticas para Produção
+### 3. Melhores Práticas para Produção
 - [Configurações de segurança](../deployment/best-practices.md#security)
 - [Otimização de desempenho](../deployment/best-practices.md#performance)
 - [Monitorização e registo](../deployment/best-practices.md#monitoring)
@@ -370,7 +372,7 @@ azd init --template todo-java-mongo
 ### Materiais de Aprendizagem
 - [Documentação do Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Centro de Arquitetura do Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Framework Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Framework Bem-Arquitetado do Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Comunidade e Suporte
 - [GitHub do Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -384,15 +386,14 @@ azd init --template todo-java-mongo
 
 ---
 
-**Parabéns por concluir o seu primeiro projeto azd!** Agora está pronto para criar e implementar aplicações incríveis no Azure com confiança.
+**Parabéns por concluir o seu primeiro projeto azd!** Está agora pronto para criar e implementar aplicações incríveis no Azure com confiança.
 
 ---
 
-**Navegação**
-- **Lição Anterior**: [Configuração](configuration.md)
-- **Próxima Lição**: [Guia de Implementação](../deployment/deployment-guide.md)
+**Anterior:** [Configuração](configuration.md) | **Próximo:** [Integração com Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+- **Próxima Aula**: [Guia de Implementação](../deployment/deployment-guide.md)
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante ter em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.

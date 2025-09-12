@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T16:47:49+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T16:58:36+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "ko"
 }
 -->
 # 설치 및 설정 가이드
 
+**이전:** [메인 문서](../../README.md) | **다음:** [AZD 기본 사항](azd-basics.md)
+
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI(azd)를 시스템에 설치하고 구성하는 방법을 안내합니다. 다양한 운영 체제에서의 설치 방법, 인증 설정, 초기 구성 등을 배우며 Azure 배포를 위한 개발 환경을 준비할 수 있습니다.
+이 포괄적인 가이드는 Azure Developer CLI(azd)를 시스템에 설치하고 구성하는 방법을 안내합니다. 다양한 운영 체제에서의 설치 방법, 인증 설정, 초기 구성 방법을 배워 Azure 배포를 위한 개발 환경을 준비할 수 있습니다.
 
 ## 학습 목표
 
@@ -26,16 +28,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 이 레슨을 완료한 후, 다음을 수행할 수 있습니다:
 - 플랫폼에 적합한 방법으로 azd를 설치
-- azd auth login을 사용하여 Azure에 인증
+- `azd auth login`을 사용하여 Azure에 인증
 - 설치를 확인하고 기본 azd 명령을 테스트
-- azd를 최적화하여 개발 환경 구성
+- azd를 최적화하여 사용할 수 있도록 개발 환경 구성
 - 일반적인 설치 문제를 독립적으로 해결
 
 이 가이드는 운영 체제나 개발 환경에 관계없이 Azure Developer CLI를 설치하고 구성하는 데 도움을 줍니다.
 
 ## 사전 요구 사항
 
-azd를 설치하기 전에 다음을 준비하세요:
+azd를 설치하기 전에 다음을 확인하세요:
 - **Azure 구독** - [무료 계정 생성](https://azure.microsoft.com/free/)
 - **Azure CLI** - 인증 및 리소스 관리용
 - **Git** - 템플릿 복제 및 버전 관리용
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd는 GitHub Codespaces에 사전 설치되어 있습니다. Codespace를 생성하고 즉시 azd를 사용할 수 있습니다.
+azd는 GitHub Codespaces에 사전 설치되어 있습니다. Codespace를 생성하고 바로 azd를 사용할 수 있습니다.
 
 ### Docker
 
@@ -128,7 +130,7 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 
 ## ✅ 설치 확인
 
-설치 후 azd가 올바르게 작동하는지 확인하세요:
+설치 후, azd가 올바르게 작동하는지 확인하세요:
 
 ```bash
 # Check version
@@ -146,7 +148,7 @@ azd template list
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 인증 설정
+## 인증 설정
 
 ### Azure CLI 인증 (권장)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ 구성
+## 구성
 
 ### 글로벌 구성
 ```bash
@@ -203,17 +205,17 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE 통합
+## IDE 통합
 
 ### Visual Studio Code
-Azure Developer CLI 확장 설치:
+Azure Developer CLI 확장을 설치하세요:
 1. VS Code 열기
-2. 확장 탭으로 이동 (Ctrl+Shift+X)
+2. 확장 메뉴로 이동 (Ctrl+Shift+X)
 3. "Azure Developer CLI" 검색
 4. 확장 설치
 
 기능:
-- azure.yaml에 대한 IntelliSense
+- `azure.yaml`에 대한 IntelliSense
 - 통합 터미널 명령
 - 템플릿 탐색
 - 배포 모니터링
@@ -336,13 +338,11 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ---
 
-**탐색**
-- **이전 레슨**: [AZD 기본](azd-basics.md)
-- **다음 레슨**: [구성](configuration.md)
+**이전:** [메인 문서](../../README.md) | **다음:** [AZD 기본 사항](azd-basics.md)
 
 **설치 완료!** [첫 프로젝트](first-project.md)로 이동하여 azd를 사용해 빌드를 시작하세요.
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서를 해당 언어로 작성된 상태에서 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역을 사용함으로써 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
