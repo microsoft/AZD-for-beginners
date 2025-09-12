@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:29:52+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:30:35+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "tl"
 }
 -->
 # Gabay sa Pag-install at Setup
+
+**Nakaraan:** [Pangunahing Dokumentasyon](../../README.md) | **Susunod:** [Mga Pangunahing Kaalaman sa AZD](azd-basics.md)
 
 ## Panimula
 
@@ -27,7 +29,7 @@ Sa pagtatapos ng araling ito, ikaw ay:
 Pagkatapos makumpleto ang araling ito, magagawa mo ang sumusunod:
 - I-install ang azd gamit ang tamang paraan para sa iyong platform
 - Mag-authenticate sa Azure gamit ang `azd auth login`
-- I-verify ang iyong installation at subukan ang mga pangunahing utos ng azd
+- I-verify ang iyong pag-install at subukan ang mga pangunahing utos ng azd
 - I-configure ang iyong development environment para sa optimal na paggamit ng azd
 - Malutas ang mga karaniwang problema sa pag-install nang mag-isa
 
@@ -37,9 +39,9 @@ Ang gabay na ito ay tutulong sa iyo na i-install at i-configure ang Azure Develo
 
 Bago i-install ang azd, tiyakin na mayroon ka ng sumusunod:
 - **Azure subscription** - [Gumawa ng libreng account](https://azure.microsoft.com/free/)
-- **Azure CLI** - Para sa authentication at resource management
+- **Azure CLI** - Para sa authentication at pamamahala ng resources
 - **Git** - Para sa pag-clone ng mga template at version control
-- **Docker** (opsyonal) - Para sa containerized applications
+- **Docker** (opsyonal) - Para sa mga containerized na aplikasyon
 
 ## Mga Paraan ng Pag-install
 
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-Pre-installed na ang azd sa GitHub Codespaces. Gumawa lamang ng codespace at simulan ang paggamit ng azd kaagad.
+Ang azd ay pre-installed na sa GitHub Codespaces. Gumawa lamang ng codespace at simulan ang paggamit ng azd kaagad.
 
 ### Docker
 
@@ -146,7 +148,7 @@ Inaasahang output:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Setup ng Authentication
+## Setup ng Authentication
 
 ### Azure CLI Authentication (Inirerekomenda)
 ```bash
@@ -169,7 +171,7 @@ az login --use-device-code
 ```
 
 ### Service Principal (CI/CD)
-Para sa automated na mga environment:
+Para sa mga automated na environment:
 ```bash
 az login --service-principal \
   --username <client-id> \
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configuration
+## Configuration
 
 ### Global Configuration
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integrasyon sa IDE
+## Integrasyon sa IDE
 
 ### Visual Studio Code
 I-install ang Azure Developer CLI extension:
@@ -238,7 +240,7 @@ Gumawa ng `.devcontainer/devcontainer.json`:
 
 ## 🐛 Pag-troubleshoot ng Pag-install
 
-### Karaniwang Mga Isyu
+### Mga Karaniwang Isyu
 
 #### Permission Denied (Windows)
 ```powershell
@@ -297,7 +299,7 @@ azd info
 ## Pag-update ng azd
 
 ### Automatic Updates
-Ipapaalam sa iyo ng azd kapag may available na updates:
+Ang azd ay magbibigay ng abiso kapag may available na update:
 ```bash
 azd version --check-for-updates
 ```
@@ -322,7 +324,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Mga Susunod na Hakbang
 
 1. **Kumpletuhin ang authentication**: Tiyakin na ma-access mo ang iyong Azure subscription
-2. **Subukan ang iyong unang deployment**: Sundan ang [First Project Guide](first-project.md)
+2. **Subukan ang iyong unang deployment**: Sundan ang [Gabay sa Unang Proyekto](first-project.md)
 3. **I-explore ang mga template**: I-browse ang mga available na template gamit ang `azd template list`
 4. **I-configure ang iyong IDE**: I-setup ang iyong development environment
 
@@ -331,18 +333,16 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 Kung makakaranas ng mga isyu:
 - [Opisyal na Dokumentasyon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Mag-report ng mga Isyu](https://github.com/Azure/azure-dev/issues)
-- [Diskusyon ng Komunidad](https://github.com/Azure/azure-dev/discussions)
+- [Mga Diskusyon ng Komunidad](https://github.com/Azure/azure-dev/discussions)
 - [Suporta ng Azure](https://azure.microsoft.com/support/)
 
 ---
 
-**Navigation**
-- **Nakaraang Aralin**: [AZD Basics](azd-basics.md)
-- **Susunod na Aralin**: [Configuration](configuration.md)
+**Nakaraan:** [Pangunahing Dokumentasyon](../../README.md) | **Susunod:** [Mga Pangunahing Kaalaman sa AZD](azd-basics.md)
 
-**Tapos na ang Pag-install!** Magpatuloy sa [Your First Project](first-project.md) upang simulan ang paggawa gamit ang azd.
+**Tapos na ang Pag-install!** Magpatuloy sa [Iyong Unang Proyekto](first-project.md) upang simulan ang paggawa gamit ang azd.
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

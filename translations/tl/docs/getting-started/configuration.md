@@ -1,50 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:30:54+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T21:30:55+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tl"
 }
 -->
 # Gabay sa Konfigurasyon
 
+**Nakaraan:** [AZD Basics](azd-basics.md) | **Susunod:** [Unang Proyekto](first-project.md)
+
 ## Panimula
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa pinakamainam na daloy ng pag-develop at pag-deploy. Malalaman mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng mga environment, mga paraan ng authentication, at mga advanced na pattern ng konfigurasyon na nagbibigay-daan sa mahusay at ligtas na Azure deployments.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na workflows sa pag-develop at pag-deploy. Matutunan mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng environment, mga pamamaraan ng authentication, at mga advanced na pattern ng konfigurasyon na nagbibigay-daan sa mas epektibo at ligtas na Azure deployments.
 
-## Mga Layunin sa Pagkatuto
+## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng araling ito, ikaw ay:
-- Magiging bihasa sa hierarchy ng konfigurasyon ng azd at mauunawaan kung paano inuuna ang mga setting
+- Magiging bihasa sa hierarchy ng konfigurasyon ng azd at mauunawaan kung paano inuuna ang mga settings
 - Epektibong makakapag-configure ng global at project-specific na mga setting
 - Makakapamahala ng maraming environment na may iba't ibang konfigurasyon
 - Makakapagpatupad ng ligtas na mga pattern ng authentication at authorization
-- Mauunawaan ang mga advanced na pattern ng konfigurasyon para sa masalimuot na mga sitwasyon
+- Mauunawaan ang mga advanced na pattern ng konfigurasyon para sa mas kumplikadong mga sitwasyon
 
-## Mga Resulta ng Pagkatuto
+## Mga Resulta ng Pag-aaral
 
-Pagkatapos makumpleto ang araling ito, magagawa mong:
-- I-configure ang azd para sa pinakamainam na daloy ng pag-develop
-- Mag-set up at mag-manage ng maraming deployment environment
+Pagkatapos makumpleto ang araling ito, magagawa mo ang sumusunod:
+- I-configure ang azd para sa optimal na workflows sa pag-develop
+- Mag-set up at mag-manage ng maraming deployment environments
 - Magpatupad ng ligtas na mga kasanayan sa pamamahala ng konfigurasyon
 - Mag-troubleshoot ng mga isyu na may kaugnayan sa konfigurasyon
-- I-customize ang pag-uugali ng azd para sa mga partikular na pangangailangan ng organisasyon
+- I-customize ang behavior ng azd para sa mga partikular na pangangailangan ng organisasyon
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa pinakamainam na daloy ng pag-develop at pag-deploy.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na workflows sa pag-develop at pag-deploy.
 
 ## Hierarchy ng Konfigurasyon
 
 Ang azd ay gumagamit ng hierarchical na sistema ng konfigurasyon:
-1. **Command-line flags** (pinakamataas na priyoridad)
+1. **Command-line flags** (pinakamataas na priority)
 2. **Environment variables**
 3. **Local project configuration** (`.azd/config.json`)
 4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (pinakamababang priyoridad)
+5. **Default values** (pinakamababang priority)
 
 ## Global na Konfigurasyon
 
-### Pagtatakda ng Global Defaults
+### Pag-set ng Global Defaults
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -80,8 +82,8 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 
 ## 🏗️ Konfigurasyon ng Proyekto
 
-### Estruktura ng azure.yaml
-Ang `azure.yaml` file ang puso ng iyong azd project:
+### Istruktura ng azure.yaml
+Ang `azure.yaml` file ang sentro ng iyong azd na proyekto:
 
 ```yaml
 # Minimum configuration
@@ -178,7 +180,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Mga Setting na Espesipiko sa Wika
+#### Mga Setting na Specific sa Wika
 ```yaml
 services:
   node-app:
@@ -204,7 +206,7 @@ services:
 
 ## 🌟 Pamamahala ng Environment
 
-### Paglikha ng mga Environment
+### Paglikha ng Environment
 ```bash
 # Create a new environment
 azd env new development
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Mga Template ng Environment
-Gumawa ng `.azure/env.template` para sa pare-parehong setup ng environment:
+Gumawa ng `.azure/env.template` para sa consistent na setup ng environment:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -305,10 +307,10 @@ azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Konfigurasyon ng Imprastraktura
+## 🏗️ Konfigurasyon ng Infrastructure
 
 ### Mga Parameter ng Bicep
-I-configure ang mga parameter ng imprastraktura sa `infra/main.parameters.json`:
+I-configure ang mga parameter ng infrastructure sa `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -382,7 +384,7 @@ Halimbawa ng `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/mai
 
 ## 🔧 Advanced na Konfigurasyon
 
-### Custom na Pangalan ng Resource
+### Custom na Pagpapangalan ng Resource
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -413,7 +415,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Mga Konfigurasyon na Espesipiko sa Environment
+## 🎯 Mga Konfigurasyon na Specific sa Environment
 
 ### Development Environment
 ```bash
@@ -444,7 +446,7 @@ ENABLE_SECURITY_HEADERS=true
 
 ## 🔍 Pag-validate ng Konfigurasyon
 
-### I-validate ang Konfigurasyon
+### Pag-validate ng Konfigurasyon
 ```bash
 # Check configuration syntax
 azd config validate
@@ -480,7 +482,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Mga Pinakamahusay na Kasanayan
+## 🎓 Mga Best Practices
 
 ### 1. Gumamit ng Environment Variables
 ```yaml
@@ -537,7 +539,7 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 
 - [Ang Iyong Unang Proyekto](first-project.md) - I-apply ang konfigurasyon sa praktika
 - [Gabay sa Deployment](../deployment/deployment-guide.md) - Gamitin ang konfigurasyon para sa deployment
-- [Pagpo-provision ng mga Resource](../deployment/provisioning.md) - Mga konfigurasyong handa para sa produksyon
+- [Pag-provision ng Resources](../deployment/provisioning.md) - Mga konfigurasyon na handa para sa produksyon
 
 ## Mga Sanggunian
 
@@ -547,11 +549,10 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 
 ---
 
-**Navigation**
-- **Nakaraang Aralin**: [Installation & Setup](installation.md)
+**Nakaraan:** [AZD Basics](azd-basics.md) | **Susunod:** [Unang Proyekto](first-project.md)
 - **Susunod na Aralin**: [Ang Iyong Unang Proyekto](first-project.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

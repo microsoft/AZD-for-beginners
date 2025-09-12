@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:27:58+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:12:30+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "fi"
 }
 -->
 # Asennus- ja käyttöönotto-opas
+
+**Edellinen:** [Päädokumentaatio](../../README.md) | **Seuraava:** [AZD Perusteet](azd-basics.md)
 
 ## Johdanto
 
@@ -27,7 +29,7 @@ Tämän oppitunnin lopussa osaat:
 Oppitunnin suorittamisen jälkeen pystyt:
 - Asentamaan azd:n sopivalla menetelmällä alustallesi
 - Autentikoitumaan Azureen komennolla `azd auth login`
-- Varmistamaan asennuksen ja testaamaan peruskomennot azd:llä
+- Varmistamaan asennuksen ja testaamaan peruskomentoja azd:llä
 - Konfiguroimaan kehitysympäristösi optimaalista azd:n käyttöä varten
 - Ratkaisemaan yleisiä asennusongelmia itsenäisesti
 
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd on esiasennettu GitHub Codespacesissa. Luo vain Codespace ja aloita azd:n käyttö välittömästi.
+azd on esiasennettu GitHub Codespacesissa. Luo vain codespace ja aloita azd:n käyttö välittömästi.
 
 ### Docker
 
@@ -146,7 +148,7 @@ Odotettu tulos:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Autentikoinnin asetukset
+## Autentikoinnin asetukset
 
 ### Azure CLI -autentikointi (suositeltu)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfigurointi
+## Konfigurointi
 
 ### Globaalit asetukset
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE-integraatio
+## IDE-integraatio
 
 ### Visual Studio Code
 Asenna Azure Developer CLI -laajennus:
@@ -214,7 +216,7 @@ Asenna Azure Developer CLI -laajennus:
 
 Ominaisuudet:
 - IntelliSense azure.yaml-tiedostoille
-- Integroitu terminaalikomennot
+- Integroitu terminaalikomentojen käyttö
 - Mallien selaus
 - Käyttöönoton seuranta
 
@@ -234,7 +236,7 @@ Luo `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Asenna Azure-laajennus
 2. Konfiguroi Azure-tunnukset
-3. Käytä integroituja terminaalikomentoja azd:lle
+3. Käytä integroitua terminaalia azd-komentoihin
 
 ## 🐛 Asennuksen vianmääritys
 
@@ -336,9 +338,7 @@ Jos kohtaat ongelmia:
 
 ---
 
-**Navigointi**
-- **Edellinen oppitunti**: [AZD:n perusteet](azd-basics.md)
-- **Seuraava oppitunti**: [Konfigurointi](configuration.md)
+**Edellinen:** [Päädokumentaatio](../../README.md) | **Seuraava:** [AZD Perusteet](azd-basics.md)
 
 **Asennus valmis!** Jatka [Ensimmäiseen projektiin](first-project.md) ja aloita työskentely azd:n kanssa.
 

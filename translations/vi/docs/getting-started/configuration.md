@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:27:36+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T21:22:11+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "vi"
 }
 -->
 # Hướng Dẫn Cấu Hình
+
+**Trước:** [AZD Cơ Bản](azd-basics.md) | **Tiếp Theo:** [Dự Án Đầu Tiên](first-project.md)
 
 ## Giới Thiệu
 
@@ -17,7 +19,7 @@ Hướng dẫn toàn diện này bao gồm tất cả các khía cạnh của vi
 
 Sau khi hoàn thành bài học này, bạn sẽ:
 - Nắm vững hệ thống cấu hình của azd và hiểu cách ưu tiên các thiết lập
-- Cấu hình hiệu quả các thiết lập toàn cầu và thiết lập cụ thể cho dự án
+- Cấu hình hiệu quả các thiết lập toàn cục và dành riêng cho dự án
 - Quản lý nhiều môi trường với các cấu hình khác nhau
 - Áp dụng các mẫu xác thực và ủy quyền an toàn
 - Hiểu các mẫu cấu hình nâng cao cho các tình huống phức tạp
@@ -39,12 +41,12 @@ azd sử dụng hệ thống cấu hình theo thứ tự ưu tiên:
 1. **Cờ dòng lệnh** (ưu tiên cao nhất)
 2. **Biến môi trường**
 3. **Cấu hình dự án cục bộ** (`.azd/config.json`)
-4. **Cấu hình người dùng toàn cầu** (`~/.azd/config.json`)
+4. **Cấu hình người dùng toàn cục** (`~/.azd/config.json`)
 5. **Giá trị mặc định** (ưu tiên thấp nhất)
 
-## Cấu Hình Toàn Cầu
+## Cấu Hình Toàn Cục
 
-### Thiết Lập Giá Trị Mặc Định Toàn Cầu
+### Thiết Lập Giá Trị Mặc Định Toàn Cục
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +64,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Các Thiết Lập Toàn Cầu Thường Dùng
+### Các Thiết Lập Toàn Cục Thường Dùng
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -535,7 +537,7 @@ Ghi lại cấu hình của bạn trong `CONFIG.md`:
 
 ## Bước Tiếp Theo
 
-- [Dự Án Đầu Tiên Của Bạn](first-project.md) - Áp dụng cấu hình vào thực tế
+- [Dự Án Đầu Tiên](first-project.md) - Áp dụng cấu hình vào thực tế
 - [Hướng Dẫn Triển Khai](../deployment/deployment-guide.md) - Sử dụng cấu hình để triển khai
 - [Cung Cấp Tài Nguyên](../deployment/provisioning.md) - Cấu hình sẵn sàng cho sản xuất
 
@@ -547,11 +549,10 @@ Ghi lại cấu hình của bạn trong `CONFIG.md`:
 
 ---
 
-**Điều Hướng**
-- **Bài Học Trước**: [Cài Đặt & Thiết Lập](installation.md)
-- **Bài Học Tiếp Theo**: [Dự Án Đầu Tiên Của Bạn](first-project.md)
+**Trước:** [AZD Cơ Bản](azd-basics.md) | **Tiếp Theo:** [Dự Án Đầu Tiên](first-project.md)
+- **Bài Học Tiếp Theo**: [Dự Án Đầu Tiên](first-project.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn tham khảo chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

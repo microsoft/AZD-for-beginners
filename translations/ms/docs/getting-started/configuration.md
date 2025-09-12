@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:29:40+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T21:28:00+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ms"
 }
 -->
 # Panduan Konfigurasi
+
+**Sebelumnya:** [AZD Basics](azd-basics.md) | **Seterusnya:** [First Project](first-project.md)
 
 ## Pengenalan
 
@@ -20,7 +22,7 @@ Pada akhir pelajaran ini, anda akan:
 - Mengkonfigurasi tetapan global dan spesifik projek dengan berkesan
 - Menguruskan pelbagai persekitaran dengan konfigurasi yang berbeza
 - Melaksanakan corak pengesahan dan kebenaran yang selamat
-- Memahami corak konfigurasi lanjutan untuk senario yang kompleks
+- Memahami corak konfigurasi lanjutan untuk senario kompleks
 
 ## Hasil Pembelajaran
 
@@ -36,7 +38,7 @@ Panduan komprehensif ini merangkumi semua aspek konfigurasi Azure Developer CLI 
 ## Hierarki Konfigurasi
 
 azd menggunakan sistem konfigurasi hierarki:
-1. **Bendera baris perintah** (keutamaan tertinggi)
+1. **Flag baris perintah** (keutamaan tertinggi)
 2. **Pembolehubah persekitaran**
 3. **Konfigurasi projek tempatan** (`.azd/config.json`)
 4. **Konfigurasi pengguna global** (`~/.azd/config.json`)
@@ -159,7 +161,7 @@ pipeline:
 
 ### Pilihan Konfigurasi Perkhidmatan
 
-#### Jenis Hos
+#### Jenis Host
 ```yaml
 services:
   web-static:
@@ -204,7 +206,7 @@ services:
 
 ## 🌟 Pengurusan Persekitaran
 
-### Mencipta Persekitaran
+### Mewujudkan Persekitaran
 ```bash
 # Create a new environment
 azd env new development
@@ -217,7 +219,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Konfigurasi Persekitaran
-Setiap persekitaran mempunyai konfigurasi tersendiri dalam `.azure/<env-name>/config.json`:
+Setiap persekitaran mempunyai konfigurasi sendiri dalam `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Templat Persekitaran
-Cipta `.azure/env.template` untuk penyediaan persekitaran yang konsisten:
+Cipta `.azure/env.template` untuk persediaan persekitaran yang konsisten:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -285,7 +287,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Pengesahan Service Principal
-Untuk saluran CI/CD:
+Untuk pipeline CI/CD:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,7 +300,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Identiti Terurus
-Untuk persekitaran yang dihoskan di Azure:
+Untuk persekitaran yang dihoskan Azure:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -535,23 +537,22 @@ Dokumentasikan konfigurasi anda dalam `CONFIG.md`:
 
 ## Langkah Seterusnya
 
-- [Projek Pertama Anda](first-project.md) - Terapkan konfigurasi dalam amalan
-- [Panduan Penyebaran](../deployment/deployment-guide.md) - Gunakan konfigurasi untuk penyebaran
-- [Penyediaan Sumber](../deployment/provisioning.md) - Konfigurasi bersedia untuk pengeluaran
+- [Your First Project](first-project.md) - Terapkan konfigurasi dalam amalan
+- [Deployment Guide](../deployment/deployment-guide.md) - Gunakan konfigurasi untuk penyebaran
+- [Provisioning Resources](../deployment/provisioning.md) - Konfigurasi bersedia untuk pengeluaran
 
 ## Rujukan
 
-- [Rujukan Konfigurasi azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Skema azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Pembolehubah Persekitaran](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [Pemasangan & Persediaan](installation.md)
-- **Pelajaran Seterusnya**: [Projek Pertama Anda](first-project.md)
+**Sebelumnya:** [AZD Basics](azd-basics.md) | **Seterusnya:** [First Project](first-project.md)
+- **Pelajaran Seterusnya**: [Your First Project](first-project.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

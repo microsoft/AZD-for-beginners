@@ -1,37 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:20:46+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T21:05:12+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "da"
 }
 -->
-# Konfigurationsvejledning
+# Konfigurationsguide
+
+**Forrige:** [AZD Grundlæggende](azd-basics.md) | **Næste:** [Første Projekt](first-project.md)
 
 ## Introduktion
 
-Denne omfattende vejledning dækker alle aspekter af konfiguration af Azure Developer CLI for at opnå optimale udviklings- og implementeringsarbejdsgange. Du vil lære om konfigurationshierarkiet, miljøstyring, autentificeringsmetoder og avancerede konfigurationsmønstre, der muliggør effektive og sikre Azure-implementeringer.
+Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og implementeringsarbejdsgange. Du vil lære om konfigurationshierarkiet, miljøstyring, autentificeringsmetoder og avancerede konfigurationsmønstre, der muliggør effektive og sikre Azure-implementeringer.
 
 ## Læringsmål
 
 Ved afslutningen af denne lektion vil du:
-- Mestre azd-konfigurationshierarkiet og forstå, hvordan indstillinger prioriteres
+- Mestre azd konfigurationshierarkiet og forstå, hvordan indstillinger prioriteres
 - Effektivt konfigurere globale og projekt-specifikke indstillinger
 - Administrere flere miljøer med forskellige konfigurationer
 - Implementere sikre autentificerings- og autorisationsmønstre
-- Forstå avancerede konfigurationsmønstre til komplekse scenarier
+- Forstå avancerede konfigurationsmønstre for komplekse scenarier
 
-## Læringsudbytte
+## Læringsresultater
 
 Efter at have gennemført denne lektion vil du være i stand til at:
 - Konfigurere azd for optimale udviklingsarbejdsgange
 - Opsætte og administrere flere implementeringsmiljøer
 - Implementere sikre konfigurationsstyringspraksisser
 - Fejlsøge konfigurationsrelaterede problemer
-- Tilpasse azd-adfærd til specifikke organisatoriske krav
+- Tilpasse azd's adfærd til specifikke organisatoriske krav
 
-Denne omfattende vejledning dækker alle aspekter af konfiguration af Azure Developer CLI for at opnå optimale udviklings- og implementeringsarbejdsgange.
+Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og implementeringsarbejdsgange.
 
 ## Konfigurationshierarki
 
@@ -39,12 +41,12 @@ azd bruger et hierarkisk konfigurationssystem:
 1. **Kommandolinjeflag** (højeste prioritet)
 2. **Miljøvariabler**
 3. **Lokal projektkonfiguration** (`.azd/config.json`)
-4. **Global brugerkonfiguration** (`~/.azd/config.json`)
+4. **Global bruger-konfiguration** (`~/.azd/config.json`)
 5. **Standardværdier** (laveste prioritet)
 
-## Global konfiguration
+## Global Konfiguration
 
-### Opsætning af globale standarder
+### Opsætning af Globale Standarder
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +64,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Almindelige globale indstillinger
+### Almindelige Globale Indstillinger
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -80,7 +82,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 
 ## 🏗️ Projektkonfiguration
 
-### azure.yaml-struktur
+### azure.yaml Struktur
 Filen `azure.yaml` er hjertet i dit azd-projekt:
 
 ```yaml
@@ -159,7 +161,7 @@ pipeline:
 
 ### Servicekonfigurationsmuligheder
 
-#### Værttype
+#### Værttyper
 ```yaml
 services:
   web-static:
@@ -178,7 +180,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Sprog-specifikke indstillinger
+#### Sprog-specifikke Indstillinger
 ```yaml
 services:
   node-app:
@@ -204,7 +206,7 @@ services:
 
 ## 🌟 Miljøstyring
 
-### Oprettelse af miljøer
+### Oprettelse af Miljøer
 ```bash
 # Create a new environment
 azd env new development
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Miljøskabeloner
-Opret `.azure/env.template` for en ensartet miljøopsætning:
+Opret `.azure/env.template` for konsistent miljøopsætning:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -272,7 +274,7 @@ LOG_LEVEL=info
 
 ## 🔐 Autentificeringskonfiguration
 
-### Azure CLI-integration
+### Azure CLI Integration
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -284,8 +286,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal-autentificering
-Til CI/CD-pipelines:
+### Service Principal Autentificering
+For CI/CD-pipelines:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,7 +300,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-Til Azure-hostede miljøer:
+For Azure-hostede miljøer:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -307,7 +309,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 
 ## 🏗️ Infrastrukturkonfiguration
 
-### Bicep-parametre
+### Bicep Parametre
 Konfigurer infrastrukturparametre i `infra/main.parameters.json`:
 ```json
 {
@@ -330,7 +332,7 @@ Konfigurer infrastrukturparametre i `infra/main.parameters.json`:
 }
 ```
 
-### Terraform-konfiguration
+### Terraform Konfiguration
 For Terraform-projekter, konfigurer i `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
@@ -341,7 +343,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Implementeringskonfiguration
 
-### Byggekonfiguration
+### Build Konfiguration
 ```yaml
 # In azure.yaml
 services:
@@ -364,7 +366,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker-konfiguration
+### Docker Konfiguration
 ```yaml
 services:
   api:
@@ -380,9 +382,9 @@ services:
 ```
 Eksempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Avanceret konfiguration
+## 🔧 Avanceret Konfiguration
 
-### Tilpasset ressourcenavngivning
+### Tilpasset Ressourcenavngivning
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -413,7 +415,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Miljøspecifikke konfigurationer
+## 🎯 Miljø-specifikke Konfigurationer
 
 ### Udviklingsmiljø
 ```bash
@@ -424,7 +426,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging-miljø
+### Staging Miljø
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -442,9 +444,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Validering af konfiguration
+## 🔍 Konfigurationsvalidering
 
-### Valider konfiguration
+### Valider Konfiguration
 ```bash
 # Check configuration syntax
 azd config validate
@@ -480,9 +482,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Bedste praksis
+## 🎓 Bedste Praksis
 
-### 1. Brug miljøvariabler
+### 1. Brug Miljøvariabler
 ```yaml
 # Good: Use environment variables
 database:
@@ -493,7 +495,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organiser konfigurationsfiler
+### 2. Organiser Konfigurationsfiler
 ```
 .azure/
 ├── config.json              # Global project config
@@ -509,7 +511,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Overvejelser om versionskontrol
+### 3. Overvejelser om Versionskontrol
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -517,7 +519,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Dokumentation af konfiguration
+### 4. Dokumentation af Konfiguration
 Dokumenter din konfiguration i `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -533,25 +535,24 @@ Dokumenter din konfiguration i `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## Næste skridt
+## Næste Skridt
 
-- [Dit første projekt](first-project.md) - Anvend konfiguration i praksis
-- [Implementeringsvejledning](../deployment/deployment-guide.md) - Brug konfiguration til implementering
-- [Provisionering af ressourcer](../deployment/provisioning.md) - Produktionsklare konfigurationer
+- [Dit Første Projekt](first-project.md) - Anvend konfiguration i praksis
+- [Implementeringsguide](../deployment/deployment-guide.md) - Brug konfiguration til implementering
+- [Ressourceprovisionering](../deployment/provisioning.md) - Produktionsklare konfigurationer
 
 ## Referencer
 
-- [azd-konfigurationsreference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml-skema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [azd Konfigurationsreference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Skema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Miljøvariabler](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Navigation**
-- **Forrige lektion**: [Installation og opsætning](installation.md)
-- **Næste lektion**: [Dit første projekt](first-project.md)
+**Forrige:** [AZD Grundlæggende](azd-basics.md) | **Næste:** [Første Projekt](first-project.md)
+- **Næste Lektion**: [Dit Første Projekt](first-project.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

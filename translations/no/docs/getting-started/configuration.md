@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:22:26+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T21:08:37+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "no"
 }
 -->
 # Konfigurasjonsveiledning
+
+**Forrige:** [AZD Grunnleggende](azd-basics.md) | **Neste:** [Første Prosjekt](first-project.md)
 
 ## Introduksjon
 
@@ -24,7 +26,7 @@ Ved slutten av denne leksjonen vil du:
 
 ## Læringsutbytte
 
-Etter å ha fullført denne leksjonen vil du kunne:
+Etter å ha fullført denne leksjonen, vil du kunne:
 - Konfigurere azd for optimale utviklingsarbeidsflyter
 - Sette opp og administrere flere distribusjonsmiljøer
 - Implementere sikre konfigurasjonsstyringspraksiser
@@ -42,9 +44,9 @@ azd bruker et hierarkisk konfigurasjonssystem:
 4. **Global brukerkonfigurasjon** (`~/.azd/config.json`)
 5. **Standardverdier** (laveste prioritet)
 
-## Global konfigurasjon
+## Global Konfigurasjon
 
-### Sette globale standarder
+### Sette Globale Standardverdier
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -62,7 +64,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Vanlige globale innstillinger
+### Vanlige Globale Innstillinger
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -81,7 +83,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Prosjektkonfigurasjon
 
 ### azure.yaml-struktur
-Filen `azure.yaml` er kjernen i ditt azd-prosjekt:
+Filen `azure.yaml` er hjertet i ditt azd-prosjekt:
 
 ```yaml
 # Minimum configuration
@@ -178,7 +180,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Språkspesifikke innstillinger
+#### Språkspesifikke Innstillinger
 ```yaml
 services:
   node-app:
@@ -204,7 +206,7 @@ services:
 
 ## 🌟 Miljøhåndtering
 
-### Opprette miljøer
+### Opprette Miljøer
 ```bash
 # Create a new environment
 azd env new development
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Miljømaler
-Opprett `.azure/env.template` for konsekvent miljøoppsett:
+Opprett `.azure/env.template` for konsistent miljøoppsett:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -297,7 +299,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Administrert identitet
+### Administrert Identitet
 For Azure-hostede miljøer:
 ```bash
 # Enable managed identity authentication
@@ -380,9 +382,9 @@ services:
 ```
 Eksempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Avansert konfigurasjon
+## 🔧 Avansert Konfigurasjon
 
-### Tilpasset ressursnavngivning
+### Tilpasset Ressursnavngivning
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -413,7 +415,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Miljøspesifikke konfigurasjoner
+## 🎯 Miljøspesifikke Konfigurasjoner
 
 ### Utviklingsmiljø
 ```bash
@@ -442,9 +444,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Validering av konfigurasjon
+## 🔍 Validering av Konfigurasjon
 
-### Valider konfigurasjon
+### Valider Konfigurasjon
 ```bash
 # Check configuration syntax
 azd config validate
@@ -480,9 +482,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Beste praksis
+## 🎓 Beste Praksis
 
-### 1. Bruk miljøvariabler
+### 1. Bruk Miljøvariabler
 ```yaml
 # Good: Use environment variables
 database:
@@ -493,7 +495,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organiser konfigurasjonsfiler
+### 2. Organiser Konfigurasjonsfiler
 ```
 .azure/
 ├── config.json              # Global project config
@@ -517,8 +519,8 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Dokumentasjon av konfigurasjon
-Dokumenter konfigurasjonen i `CONFIG.md`:
+### 4. Dokumentasjon av Konfigurasjon
+Dokumenter din konfigurasjon i `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -533,11 +535,11 @@ Dokumenter konfigurasjonen i `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## Neste steg
+## Neste Steg
 
-- [Ditt første prosjekt](first-project.md) - Bruk konfigurasjonen i praksis
-- [Distribusjonsveiledning](../deployment/deployment-guide.md) - Bruk konfigurasjonen for distribusjon
-- [Klargjøring av ressurser](../deployment/provisioning.md) - Produksjonsklare konfigurasjoner
+- [Ditt Første Prosjekt](first-project.md) - Bruk konfigurasjon i praksis
+- [Distribusjonsveiledning](../deployment/deployment-guide.md) - Bruk konfigurasjon for distribusjon
+- [Ressursprovisjonering](../deployment/provisioning.md) - Produksjonsklare konfigurasjoner
 
 ## Referanser
 
@@ -547,11 +549,10 @@ Dokumenter konfigurasjonen i `CONFIG.md`:
 
 ---
 
-**Navigasjon**
-- **Forrige leksjon**: [Installasjon og oppsett](installation.md)
-- **Neste leksjon**: [Ditt første prosjekt](first-project.md)
+**Forrige:** [AZD Grunnleggende](azd-basics.md) | **Neste:** [Første Prosjekt](first-project.md)
+- **Neste Leksjon**: [Ditt Første Prosjekt](first-project.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
