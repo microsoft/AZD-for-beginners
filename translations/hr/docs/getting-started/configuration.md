@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:41:27+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T22:41:20+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "hr"
 }
 -->
 # Vodič za konfiguraciju
 
+**Prethodno:** [Osnove AZD-a](azd-basics.md) | **Sljedeće:** [Prvi projekt](first-project.md)
+
 ## Uvod
 
-Ovaj sveobuhvatni vodič pokriva sve aspekte konfiguracije Azure Developer CLI-a za optimalne razvojne i implementacijske tijekove rada. Naučit ćete o hijerarhiji konfiguracije, upravljanju okruženjima, metodama autentifikacije i naprednim obrascima konfiguracije koji omogućuju učinkovite i sigurne Azure implementacije.
+Ovaj sveobuhvatni vodič pokriva sve aspekte konfiguriranja Azure Developer CLI-a za optimalne razvojne i implementacijske tijekove rada. Naučit ćete o hijerarhiji konfiguracije, upravljanju okruženjima, metodama autentifikacije i naprednim obrascima konfiguracije koji omogućuju učinkovite i sigurne implementacije na Azureu.
 
 ## Ciljevi učenja
 
@@ -24,14 +26,14 @@ Na kraju ove lekcije, moći ćete:
 
 ## Ishodi učenja
 
-Nakon završetka ove lekcije, bit ćete sposobni:
+Nakon završetka ove lekcije, moći ćete:
 - Konfigurirati azd za optimalne razvojne tijekove rada
-- Postaviti i upravljati višestrukim implementacijskim okruženjima
-- Implementirati sigurne prakse upravljanja konfiguracijom
-- Rješavati probleme vezane uz konfiguraciju
+- Postaviti i upravljati višestrukim okruženjima za implementaciju
+- Provoditi sigurne prakse upravljanja konfiguracijom
+- Rješavati probleme povezane s konfiguracijom
 - Prilagoditi ponašanje azd-a specifičnim zahtjevima organizacije
 
-Ovaj sveobuhvatni vodič pokriva sve aspekte konfiguracije Azure Developer CLI-a za optimalne razvojne i implementacijske tijekove rada.
+Ovaj sveobuhvatni vodič pokriva sve aspekte konfiguriranja Azure Developer CLI-a za optimalne razvojne i implementacijske tijekove rada.
 
 ## Hijerarhija konfiguracije
 
@@ -284,7 +286,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Autentifikacija putem Service Principal-a
+### Autentifikacija putem Service Principala
 Za CI/CD tijekove rada:
 ```bash
 # Set environment variables
@@ -298,7 +300,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Upravljani identitet
-Za okruženja hostirana na Azure-u:
+Za okruženja hostirana na Azureu:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -307,7 +309,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 
 ## 🏗️ Konfiguracija infrastrukture
 
-### Parametri za Bicep
+### Parametri Bicepa
 Konfigurirajte parametre infrastrukture u `infra/main.parameters.json`:
 ```json
 {
@@ -330,7 +332,7 @@ Konfigurirajte parametre infrastrukture u `infra/main.parameters.json`:
 }
 ```
 
-### Konfiguracija za Terraform
+### Konfiguracija Terraform-a
 Za Terraform projekte, konfigurirajte u `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
@@ -364,7 +366,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Konfiguracija za Docker
+### Konfiguracija Dockera
 ```yaml
 services:
   api:
@@ -382,7 +384,7 @@ Primjer `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azu
 
 ## 🔧 Napredna konfiguracija
 
-### Prilagođavanje imena resursa
+### Prilagođeno imenovanje resursa
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -390,7 +392,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Mrežna konfiguracija
+### Konfiguracija mreže
 ```yaml
 # In azure.yaml
 infra:
@@ -401,7 +403,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Konfiguracija nadzora
+### Konfiguracija praćenja
 ```yaml
 # In azure.yaml
 monitoring:
@@ -424,7 +426,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging okruženje
+### Okruženje za testiranje
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -517,7 +519,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Dokumentirajte konfiguraciju
+### 4. Dokumentacija konfiguracije
 Dokumentirajte svoju konfiguraciju u `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -541,17 +543,16 @@ Dokumentirajte svoju konfiguraciju u `CONFIG.md`:
 
 ## Reference
 
-- [azd Referenca konfiguracije](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Shema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Referenca za konfiguraciju azd-a](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Shema azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Varijable okruženja](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Navigacija**
-- **Prethodna lekcija**: [Instalacija i postavljanje](installation.md)
+**Prethodno:** [Osnove AZD-a](azd-basics.md) | **Sljedeće:** [Prvi projekt](first-project.md)
 - **Sljedeća lekcija**: [Vaš prvi projekt](first-project.md)
 
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.

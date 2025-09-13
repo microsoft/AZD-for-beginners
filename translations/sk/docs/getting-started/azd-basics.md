@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:36:49+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T22:25:38+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sk"
 }
 -->
 # AZD Základy - Porozumenie Azure Developer CLI
 
+**Predchádzajúce:** [Inštalácia a nastavenie](installation.md) | **Ďalšie:** [Konfigurácia](configuration.md)
+
 ## Úvod
 
-Táto lekcia vás zoznámi s Azure Developer CLI (azd), výkonným nástrojom príkazového riadku, ktorý urýchľuje váš prechod od lokálneho vývoja k nasadeniu na Azure. Naučíte sa základné koncepty, kľúčové funkcie a pochopíte, ako azd zjednodušuje nasadenie cloud-native aplikácií.
+Táto lekcia vás zoznámi s Azure Developer CLI (azd), výkonným nástrojom príkazového riadku, ktorý urýchľuje váš prechod od lokálneho vývoja k nasadeniu na Azure. Naučíte sa základné koncepty, kľúčové funkcie a pochopíte, ako azd zjednodušuje nasadenie cloudových aplikácií.
 
 ## Ciele učenia
 
@@ -20,7 +22,7 @@ Na konci tejto lekcie budete:
 - Naučíte sa základné koncepty šablón, prostredí a služieb
 - Preskúmate kľúčové funkcie vrátane vývoja na základe šablón a Infrastructure as Code
 - Pochopíte štruktúru projektu azd a pracovný postup
-- Budete pripravení nainštalovať a nakonfigurovať azd pre vaše vývojové prostredie
+- Pripravení na inštaláciu a konfiguráciu azd pre vaše vývojové prostredie
 
 ## Výsledky učenia
 
@@ -33,7 +35,7 @@ Po dokončení tejto lekcie budete schopní:
 
 ## Čo je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchlenie vášho prechodu od lokálneho vývoja k nasadeniu na Azure. Zjednodušuje proces budovania, nasadzovania a správy cloud-native aplikácií na Azure.
+Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchlenie vášho prechodu od lokálneho vývoja k nasadeniu na Azure. Zjednodušuje proces budovania, nasadzovania a správy cloudových aplikácií na Azure.
 
 ## Základné koncepty
 
@@ -45,10 +47,10 @@ Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchl
 - **Nasadzovacie skripty** - Automatizované pracovné postupy nasadenia
 
 ### Prostredia
-Prostredia predstavujú rôzne cieľové miesta nasadenia:
-- **Vývojové** - Na testovanie a vývoj
+Prostredia predstavujú rôzne ciele nasadenia:
+- **Vývoj** - Na testovanie a vývoj
 - **Staging** - Predprodukčné prostredie
-- **Produkčné** - Živé produkčné prostredie
+- **Produkcia** - Živé produkčné prostredie
 
 Každé prostredie si udržiava vlastné:
 - Azure resource group
@@ -56,11 +58,11 @@ Každé prostredie si udržiava vlastné:
 - Stav nasadenia
 
 ### Služby
-Služby sú stavebnými blokmi vašej aplikácie:
+Služby sú stavebné bloky vašej aplikácie:
 - **Frontend** - Webové aplikácie, SPAs
 - **Backend** - API, mikroslužby
 - **Databáza** - Riešenia na ukladanie dát
-- **Úložisko** - Súborové a blobové úložisko
+- **Úložisko** - Ukladanie súborov a blobov
 
 ## Kľúčové funkcie
 
@@ -195,7 +197,7 @@ Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť 
 ```
 - Preskočí potvrdenia.
 - Užitočné pre automatizáciu alebo skriptovanie, kde manuálny vstup nie je možný.
-- Zabezpečí, že odstránenie prebehne bez prerušenia, aj keď CLI zistí nekonzistencie.
+- Zabezpečuje, že odstránenie prebehne bez prerušenia, aj keď CLI zistí nekonzistencie.
 
 ```
 --purge
@@ -203,8 +205,8 @@ Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť 
 Odstráni **všetky súvisiace metadáta**, vrátane:
 Stav prostredia
 Lokálny priečinok `.azure`
-Cache informácií o nasadení
-Zabráni azd "pamätať si" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nesúlad resource groups alebo zastarané registry.
+Cache informácie o nasadení
+Zabraňuje azd "pamätať si" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nesúlad resource groups alebo zastarané registry.
 
 ### Prečo použiť oboje?
 Keď narazíte na problémy s `azd up` kvôli pretrvávajúcemu stavu alebo čiastočným nasadeniam, táto kombinácia zabezpečí **čistý štart**.
@@ -241,7 +243,7 @@ azd env show                 # Current environment
 azd config list             # Configuration settings
 ```
 
-### Monitoring
+### Monitorovanie
 ```bash
 azd monitor                  # Open Azure portal
 azd pipeline config          # Set up CI/CD
@@ -263,8 +265,8 @@ azd init --template template1
 
 ### 2. Využívajte šablóny
 - Začnite s existujúcimi šablónami
-- Prispôsobte ich svojim potrebám
-- Vytvárajte opakovane použiteľné šablóny pre vašu organizáciu
+- Prispôsobte si ich podľa svojich potrieb
+- Vytvorte opakovane použiteľné šablóny pre vašu organizáciu
 
 ### 3. Izolácia prostredí
 - Používajte samostatné prostredia pre vývoj/staging/produkciu
@@ -273,7 +275,7 @@ azd init --template template1
 
 ### 4. Správa konfigurácie
 - Používajte environmentálne premenné pre citlivé údaje
-- Udržujte konfiguráciu vo verziovacom systéme
+- Uchovávajte konfiguráciu vo verziovacom systéme
 - Dokumentujte nastavenia špecifické pre prostredie
 
 ## Postup učenia
@@ -287,11 +289,11 @@ azd init --template template1
 ### Stredne pokročilý (3-4 týždne)
 1. Prispôsobte šablóny
 2. Spravujte viaceré prostredia
-3. Pochopte kód infraštruktúry
+3. Pochopte infraštruktúrny kód
 4. Nastavte CI/CD pipelines
 
 ### Pokročilý (5+ týždňov)
-1. Vytvárajte vlastné šablóny
+1. Vytvorte vlastné šablóny
 2. Pokročilé infraštruktúrne vzory
 3. Nasadenia vo viacerých regiónoch
 4. Konfigurácie na úrovni podniku
@@ -300,9 +302,9 @@ azd init --template template1
 
 - [Inštalácia a nastavenie](installation.md) - Nainštalujte a nakonfigurujte azd
 - [Váš prvý projekt](first-project.md) - Praktický tutoriál
-- [Konfiguračný sprievodca](configuration.md) - Pokročilé možnosti konfigurácie
+- [Príručka konfigurácie](configuration.md) - Pokročilé možnosti konfigurácie
 
-## Ďalšie zdroje
+## Dodatočné zdroje
 
 - [Prehľad Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galéria šablón](https://azure.github.io/awesome-azd/)
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**Navigácia**
-- **Predchádzajúca lekcia**: [README](../../README.md)
-- **Nasledujúca lekcia**: [Inštalácia a nastavenie](installation.md)
+**Predchádzajúce:** [Inštalácia a nastavenie](installation.md) | **Ďalšie:** [Konfigurácia](configuration.md)
+- **Ďalšia lekcia**: [Inštalácia a nastavenie](installation.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie odporúčame profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

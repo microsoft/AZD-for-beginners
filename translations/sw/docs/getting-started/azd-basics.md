@@ -1,22 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:32:40+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T22:12:32+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sw"
 }
 -->
-# Misingi ya AZD - Kuelewa Azure Developer CLI
+# AZD Msingi - Kuelewa Azure Developer CLI
+
+**Iliyopita:** [Usakinishaji na Usanidi](installation.md) | **Inayofuata:** [Usanidi](configuration.md)
 
 ## Utangulizi
 
-Somo hili linakutambulisha kwa Azure Developer CLI (azd), chombo chenye nguvu cha mstari wa amri kinachoharakisha safari yako kutoka kwa maendeleo ya ndani hadi usambazaji kwenye Azure. Utajifunza dhana za msingi, vipengele vya msingi, na kuelewa jinsi azd inavyorahisisha usambazaji wa programu za wingu asilia.
+Somo hili linakutambulisha kwa Azure Developer CLI (azd), zana yenye nguvu ya mstari wa amri inayoharakisha safari yako kutoka kwa maendeleo ya ndani hadi usambazaji wa Azure. Utajifunza dhana za msingi, vipengele vya msingi, na kuelewa jinsi azd inavyorahisisha usambazaji wa programu za wingu.
 
 ## Malengo ya Kujifunza
 
 Mwisho wa somo hili, utaweza:
-- Kuelewa Azure Developer CLI ni nini na madhumuni yake ya msingi
+- Kuelewa Azure Developer CLI ni nini na kusudi lake kuu
 - Kujifunza dhana za msingi za templates, environments, na services
 - Kuchunguza vipengele muhimu ikiwa ni pamoja na maendeleo yanayoendeshwa na templates na Infrastructure as Code
 - Kuelewa muundo wa mradi wa azd na mtiririko wa kazi
@@ -28,21 +30,21 @@ Baada ya kukamilisha somo hili, utaweza:
 - Kuelezea jukumu la azd katika mtiririko wa kazi wa maendeleo ya wingu la kisasa
 - Kutambua vipengele vya muundo wa mradi wa azd
 - Kufafanua jinsi templates, environments, na services zinavyofanya kazi pamoja
-- Kuelewa faida za Infrastructure as Code kwa kutumia azd
+- Kuelewa faida za Infrastructure as Code na azd
 - Kutambua amri tofauti za azd na madhumuni yake
 
 ## Azure Developer CLI (azd) ni nini?
 
-Azure Developer CLI (azd) ni chombo cha mstari wa amri kilichoundwa kuharakisha safari yako kutoka kwa maendeleo ya ndani hadi usambazaji kwenye Azure. Kinapunguza ugumu wa kujenga, kusambaza, na kusimamia programu za wingu asilia kwenye Azure.
+Azure Developer CLI (azd) ni zana ya mstari wa amri iliyoundwa kuharakisha safari yako kutoka kwa maendeleo ya ndani hadi usambazaji wa Azure. Inarahisisha mchakato wa kujenga, kusambaza, na kusimamia programu za wingu kwenye Azure.
 
 ## Dhana za Msingi
 
 ### Templates
 Templates ni msingi wa azd. Zinajumuisha:
 - **Msimbo wa programu** - Chanzo chako cha msimbo na utegemezi
-- **Ufafanuzi wa miundombinu** - Rasilimali za Azure zilizoelezwa kwa Bicep au Terraform
+- **Ufafanuzi wa miundombinu** - Rasilimali za Azure zilizoainishwa kwa Bicep au Terraform
 - **Faili za usanidi** - Mipangilio na vigezo vya mazingira
-- **Skripti za usambazaji** - Mtiririko wa kazi wa usambazaji wa kiotomatiki
+- **Skripti za usambazaji** - Mtiririko wa kazi wa usambazaji uliojiendesha
 
 ### Environments
 Environments zinawakilisha malengo tofauti ya usambazaji:
@@ -50,15 +52,15 @@ Environments zinawakilisha malengo tofauti ya usambazaji:
 - **Staging** - Mazingira ya kabla ya uzalishaji
 - **Uzalishaji** - Mazingira ya uzalishaji wa moja kwa moja
 
-Kila environment inahifadhi:
-- Kikundi chake cha rasilimali za Azure
+Kila mazingira yanadumisha:
+- Kikundi cha rasilimali za Azure
 - Mipangilio ya usanidi
 - Hali ya usambazaji
 
 ### Services
-Services ni sehemu za ujenzi wa programu yako:
+Services ni sehemu za kujenga programu yako:
 - **Frontend** - Programu za wavuti, SPAs
-- **Backend** - APIs, microservices
+- **Backend** - APIs, huduma ndogo
 - **Database** - Suluhisho za hifadhi ya data
 - **Storage** - Hifadhi ya faili na blob
 
@@ -75,10 +77,10 @@ azd init --template <template-name>
 
 ### 2. Infrastructure as Code
 - **Bicep** - Lugha maalum ya Azure
-- **Terraform** - Chombo cha miundombinu ya wingu nyingi
+- **Terraform** - Zana ya miundombinu ya wingu nyingi
 - **ARM Templates** - Templates za Azure Resource Manager
 
-### 3. Mtiririko wa Kazi Uliofungamanishwa
+### 3. Mtiririko wa Kazi Uliojiendesha
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
@@ -189,27 +191,27 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Kuelewa `azd down --force --purge`
-Amri ya `azd down --force --purge` ni njia yenye nguvu ya kufuta kabisa mazingira yako ya azd na rasilimali zote zinazohusiana. Hapa kuna maelezo ya kila bendera:
+Amri ya `azd down --force --purge` ni njia yenye nguvu ya kuondoa kabisa mazingira yako ya azd na rasilimali zote zinazohusiana. Hapa kuna maelezo ya kila bendera:
 ```
 --force
 ```
-- Inaruka maombi ya uthibitisho.
-- Inafaa kwa otomatiki au maandishi ambapo pembejeo ya mwongozo haiwezekani.
-- Inahakikisha mchakato wa kufuta unaendelea bila usumbufu, hata kama CLI inagundua kutokubaliana.
+- Inaruka maonyo ya uthibitisho.
+- Inafaa kwa otomatiki au scripting ambapo pembejeo ya mwongozo si rahisi.
+- Inahakikisha mchakato wa kuondoa unaendelea bila usumbufu, hata kama CLI inagundua kutofautiana.
 
 ```
 --purge
 ```
 Inafuta **metadata yote inayohusiana**, ikiwa ni pamoja na:
-Hali ya mazingira  
-Folda ya ndani ya `.azure`  
-Taarifa ya usambazaji iliyohifadhiwa  
+Hali ya mazingira
+Folda ya ndani `.azure`
+Taarifa ya usambazaji iliyohifadhiwa
 Inazuia azd "kukumbuka" usambazaji wa awali, ambayo inaweza kusababisha masuala kama vikundi vya rasilimali visivyolingana au marejeleo ya rejista yaliyopitwa na wakati.
 
-### Kwa nini kutumia zote mbili?
-Unapokumbana na matatizo na `azd up` kutokana na hali iliyobaki au usambazaji wa sehemu, mchanganyiko huu unahakikisha **kuanza upya safi**.
+### Kwa nini utumie zote?
+Unapokumbana na matatizo na `azd up` kutokana na hali iliyosalia au usambazaji wa sehemu, mchanganyiko huu unahakikisha **ukurasa safi**.
 
-Ni muhimu hasa baada ya kufuta rasilimali kwa mikono kwenye Azure portal au unapobadilisha templates, environments, au mikataba ya majina ya vikundi vya rasilimali.
+Ni muhimu hasa baada ya kufuta rasilimali kwa mikono kwenye portal ya Azure au unapobadilisha templates, environments, au mikataba ya majina ya vikundi vya rasilimali.
 
 ### Kusimamia Mazingira Mengi
 ```bash
@@ -248,7 +250,7 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Mbinu Bora
+## Mazoea Bora
 
 ### 1. Tumia Majina Yenye Maana
 ```bash
@@ -263,17 +265,17 @@ azd init --template template1
 
 ### 2. Tumia Templates
 - Anza na templates zilizopo
-- Badilisha kulingana na mahitaji yako
+- Badilisha kwa mahitaji yako
 - Unda templates zinazoweza kutumika tena kwa shirika lako
 
 ### 3. Kutenganisha Mazingira
 - Tumia mazingira tofauti kwa maendeleo/staging/uzalishaji
-- Kamwe usisambaze moja kwa moja kwenye uzalishaji kutoka kwa mashine ya ndani
-- Tumia pipelines za CI/CD kwa usambazaji wa uzalishaji
+- Usambaze moja kwa moja kwenye uzalishaji kutoka kwa mashine ya ndani
+- Tumia njia za CI/CD kwa usambazaji wa uzalishaji
 
 ### 4. Usimamizi wa Usanidi
 - Tumia vigezo vya mazingira kwa data nyeti
-- Hifadhi usanidi kwenye udhibiti wa toleo
+- Weka usanidi katika udhibiti wa toleo
 - Andika mipangilio maalum ya mazingira
 
 ## Maendeleo ya Kujifunza
@@ -287,34 +289,33 @@ azd init --template template1
 ### Kati (Wiki 3-4)
 1. Badilisha templates
 2. Simamia mazingira mengi
-3. Elewa msimbo wa miundombinu
-4. Sanidi pipelines za CI/CD
+3. Elewa miundombinu ya msimbo
+4. Sanidi njia za CI/CD
 
 ### Juu (Wiki 5+)
 1. Unda templates maalum
-2. Mifumo ya hali ya juu ya miundombinu
+2. Mifumo ya miundombinu ya hali ya juu
 3. Usambazaji wa maeneo mengi
-4. Usanidi wa kiwango cha shirika
+4. Usanidi wa kiwango cha biashara
 
 ## Hatua Zifuatazo
 
-- [Usakinishaji na Usanidi](installation.md) - Sakinisha na usanidi azd
+- [Usakinishaji na Usanidi](installation.md) - Sakinisha na sanidi azd
 - [Mradi Wako wa Kwanza](first-project.md) - Mafunzo ya vitendo
 - [Mwongozo wa Usanidi](configuration.md) - Chaguo za usanidi wa hali ya juu
 
 ## Rasilimali za Ziada
 
 - [Muhtasari wa Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Maktaba ya Templates](https://azure.github.io/awesome-azd/)
+- [Matunzio ya Templates](https://azure.github.io/awesome-azd/)
 - [Mifano ya Jamii](https://github.com/Azure-Samples)
 
 ---
 
-**Uabiri**
-- **Somo Lililopita**: [README](../../README.md)
+**Iliyopita:** [Usakinishaji na Usanidi](installation.md) | **Inayofuata:** [Usanidi](configuration.md)
 - **Somo Linalofuata**: [Usakinishaji na Usanidi](installation.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia huduma ya tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
