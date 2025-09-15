@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T17:09:00+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T14:48:27+00:00",
   "source_file": "README.md",
   "language_code": "fa"
 }
@@ -11,33 +11,33 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.fa.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)  
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)  
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)  
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)  
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)  
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
-برای شروع استفاده از این منابع، مراحل زیر را دنبال کنید:  
-1. **فورک کردن مخزن**: کلیک کنید [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)  
-2. **کلون کردن مخزن**: `git clone https://github.com/microsoft/azd-for-beginners.git`  
-3. [**به جوامع دیسکورد Azure بپیوندید و با کارشناسان و توسعه‌دهندگان دیگر آشنا شوید**](https://discord.com/invite/ByRwuEEgH4)  
+برای شروع استفاده از این منابع، مراحل زیر را دنبال کنید:
+1. **فورک کردن مخزن**: کلیک کنید [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **کلون کردن مخزن**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. [**به جوامع دیسکورد Azure بپیوندید و با کارشناسان و توسعه‌دهندگان دیگر ملاقات کنید**](https://discord.com/invite/ByRwuEEgH4)
 
 ### پشتیبانی چندزبانه
 
 #### پشتیبانی شده از طریق GitHub Action (خودکار و همیشه به‌روز)
 
-[فرانسوی](../fr/README.md) | [اسپانیایی](../es/README.md) | [آلمانی](../de/README.md) | [روسی](../ru/README.md) | [عربی](../ar/README.md) | [فارسی](./README.md) | [اردو](../ur/README.md) | [چینی (ساده‌شده)](../zh/README.md) | [چینی (سنتی، ماکائو)](../mo/README.md) | [چینی (سنتی، هنگ‌کنگ)](../hk/README.md) | [چینی (سنتی، تایوان)](../tw/README.md) | [ژاپنی](../ja/README.md) | [کره‌ای](../ko/README.md) | [هندی](../hi/README.md) | [بنگالی](../bn/README.md) | [مراتی](../mr/README.md) | [نپالی](../ne/README.md) | [پنجابی (گرمکی)](../pa/README.md) | [پرتغالی (پرتغال)](../pt/README.md) | [پرتغالی (برزیل)](../br/README.md) | [ایتالیایی](../it/README.md) | [لهستانی](../pl/README.md) | [ترکی](../tr/README.md) | [یونانی](../el/README.md) | [تایلندی](../th/README.md) | [سوئدی](../sv/README.md) | [دانمارکی](../da/README.md) | [نروژی](../no/README.md) | [فنلاندی](../fi/README.md) | [هلندی](../nl/README.md) | [عبری](../he/README.md) | [ویتنامی](../vi/README.md) | [اندونزیایی](../id/README.md) | [مالایی](../ms/README.md) | [تاگالوگ (فیلیپینی)](../tl/README.md) | [سواحیلی](../sw/README.md) | [مجاری](../hu/README.md) | [چکی](../cs/README.md) | [اسلواکی](../sk/README.md) | [رومانیایی](../ro/README.md) | [بلغاری](../bg/README.md) | [صربی (سیریلیک)](../sr/README.md) | [کرواتی](../hr/README.md) | [اسلوونیایی](../sl/README.md) | [اوکراینی](../uk/README.md) | [برمه‌ای (میانمار)](../my/README.md)  
+[فرانسوی](../fr/README.md) | [اسپانیایی](../es/README.md) | [آلمانی](../de/README.md) | [روسی](../ru/README.md) | [عربی](../ar/README.md) | [فارسی](./README.md) | [اردو](../ur/README.md) | [چینی (ساده‌شده)](../zh/README.md) | [چینی (سنتی، ماکائو)](../mo/README.md) | [چینی (سنتی، هنگ‌کنگ)](../hk/README.md) | [چینی (سنتی، تایوان)](../tw/README.md) | [ژاپنی](../ja/README.md) | [کره‌ای](../ko/README.md) | [هندی](../hi/README.md) | [بنگالی](../bn/README.md) | [مراتی](../mr/README.md) | [نپالی](../ne/README.md) | [پنجابی (گرمکی)](../pa/README.md) | [پرتغالی (پرتغال)](../pt/README.md) | [پرتغالی (برزیل)](../br/README.md) | [ایتالیایی](../it/README.md) | [لهستانی](../pl/README.md) | [ترکی](../tr/README.md) | [یونانی](../el/README.md) | [تایلندی](../th/README.md) | [سوئدی](../sv/README.md) | [دانمارکی](../da/README.md) | [نروژی](../no/README.md) | [فنلاندی](../fi/README.md) | [هلندی](../nl/README.md) | [عبری](../he/README.md) | [ویتنامی](../vi/README.md) | [اندونزیایی](../id/README.md) | [مالایی](../ms/README.md) | [تاگالوگ (فیلیپینی)](../tl/README.md) | [سواحیلی](../sw/README.md) | [مجاری](../hu/README.md) | [چکی](../cs/README.md) | [اسلواکی](../sk/README.md) | [رومانیایی](../ro/README.md) | [بلغاری](../bg/README.md) | [صربی (سیریلیک)](../sr/README.md) | [کرواتی](../hr/README.md) | [اسلوونیایی](../sl/README.md) | [اوکراینی](../uk/README.md) | [برمه‌ای (میانمار)](../my/README.md)
 
-**اگر می‌خواهید زبان‌های ترجمه اضافی پشتیبانی شوند، لیست زبان‌های موجود [اینجا](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md) قرار دارد.**
+**اگر مایل به اضافه شدن زبان‌های دیگر هستید، زبان‌های پشتیبانی‌شده [اینجا](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md) فهرست شده‌اند**
 
 ## مقدمه
 
-به راهنمای جامع برای Azure Developer CLI (azd) خوش آمدید. این مخزن برای کمک به توسعه‌دهندگان در همه سطوح، از دانشجویان تا توسعه‌دهندگان حرفه‌ای، طراحی شده است تا Azure Developer CLI را برای استقرارهای ابری کارآمد یاد بگیرند و تسلط پیدا کنند، **با تمرکز ویژه بر استقرار برنامه‌های هوش مصنوعی با استفاده از Azure AI Foundry**. این منبع آموزشی ساختاریافته تجربه عملی با استقرارهای ابری Azure، رفع مشکلات رایج و اجرای بهترین شیوه‌ها برای استقرار قالب‌های AZD را فراهم می‌کند.
+به راهنمای جامع برای Azure Developer CLI (azd) خوش آمدید. این مخزن برای کمک به توسعه‌دهندگان در همه سطوح، از دانشجویان تا توسعه‌دهندگان حرفه‌ای، طراحی شده است تا Azure Developer CLI را برای استقرارهای ابری کارآمد یاد بگیرند و تسلط پیدا کنند، **با تمرکز ویژه بر استقرار برنامه‌های هوش مصنوعی با استفاده از Azure AI Foundry**. این منبع آموزشی ساختاریافته تجربه عملی در استقرارهای ابری Azure، رفع مشکلات رایج و اجرای بهترین شیوه‌ها برای استقرار قالب‌های AZD را فراهم می‌کند.
 
 ### **چرا این راهنما برای توسعه‌دهندگان هوش مصنوعی مهم است**
-بر اساس نظرسنجی اخیر جامعه دیسکورد Azure AI Foundry، **45٪ از توسعه‌دهندگان علاقه‌مند به استفاده از AZD برای بارهای کاری هوش مصنوعی هستند** اما با چالش‌های زیر مواجه‌اند:
+بر اساس نظرسنجی اخیر جامعه دیسکورد Azure AI Foundry، **۴۵٪ از توسعه‌دهندگان علاقه‌مند به استفاده از AZD برای بارهای کاری هوش مصنوعی هستند** اما با چالش‌های زیر مواجه‌اند:
 - معماری‌های پیچیده چندسرویسی هوش مصنوعی
 - بهترین شیوه‌های استقرار هوش مصنوعی در محیط تولید
 - یکپارچه‌سازی و پیکربندی خدمات Azure AI
@@ -48,7 +48,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 با کار کردن روی این مخزن، شما:
 - اصول و مفاهیم اصلی Azure Developer CLI را یاد خواهید گرفت
-- یاد می‌گیرید چگونه منابع Azure را با استفاده از Infrastructure as Code استقرار و فراهم کنید
+- یاد می‌گیرید که منابع Azure را با استفاده از Infrastructure as Code استقرار و فراهم کنید
 - مهارت‌های رفع مشکلات برای مسائل رایج استقرار AZD را توسعه می‌دهید
 - اعتبارسنجی پیش از استقرار و برنامه‌ریزی ظرفیت را درک می‌کنید
 - بهترین شیوه‌های امنیتی و استراتژی‌های بهینه‌سازی هزینه را اجرا می‌کنید
@@ -69,7 +69,7 @@ CO_OP_TRANSLATOR_METADATA:
 - [Azure Developer CLI چیست؟](../..)
 - [شروع سریع](../..)
 - [مسیر یادگیری](../..)
-  - [برای توسعه‌دهندگان هوش مصنوعی (شروع توصیه‌شده از اینجا!)](../..)
+  - [برای توسعه‌دهندگان هوش مصنوعی (شروع از اینجا توصیه می‌شود!)](../..)
   - [برای دانشجویان و مبتدیان](../..)
   - [برای توسعه‌دهندگان](../..)
   - [برای مهندسان DevOps](../..)
@@ -79,7 +79,7 @@ CO_OP_TRANSLATOR_METADATA:
   - [بررسی‌های پیش از استقرار](../..)
   - [هوش مصنوعی و Azure AI Foundry](../..)
   - [رفع مشکلات](../..)
-- [مثال‌ها و قالب‌ها](../..)
+- [نمونه‌ها و قالب‌ها](../..)
   - [ویژه: قالب‌های Azure AI Foundry](../..)
   - [ویژه: سناریوهای E2E Azure AI Foundry](../..)
   - [قالب‌های اضافی AZD](../..)
@@ -150,84 +150,84 @@ azd init --template contoso-chat
 
 ## مسیر یادگیری
 
-### برای توسعه‌دهندگان هوش مصنوعی (شروع توصیه‌شده از اینجا!)
-1. **شروع سریع**: قالب [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) را امتحان کنید  
-2. **یادگیری اصول**: [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)  
-3. **تمرین عملی**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) را کامل کنید  
-4. **آماده تولید**: [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) را مرور کنید  
-5. **پیشرفته**: قالب سازمانی [contoso-chat](https://github.com/Azure-Samples/contoso-chat) را استقرار دهید  
+### برای توسعه‌دهندگان هوش مصنوعی (شروع از اینجا توصیه می‌شود!)
+1. **شروع سریع**: قالب [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) را امتحان کنید
+2. **یادگیری اصول**: [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
+3. **تمرین عملی**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) را کامل کنید
+4. **آماده تولید**: [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) را مرور کنید
+5. **پیشرفته**: قالب سازمانی [contoso-chat](https://github.com/Azure-Samples/contoso-chat) را استقرار دهید
 
 ### برای دانشجویان و مبتدیان
-1. با [AZD Basics](docs/getting-started/azd-basics.md) شروع کنید  
-2. [راهنمای نصب](docs/getting-started/installation.md) را دنبال کنید  
-3. [اولین پروژه شما](docs/getting-started/first-project.md) را کامل کنید  
-4. با [مثال برنامه وب ساده](../../examples/simple-web-app) تمرین کنید  
+1. با [AZD Basics](docs/getting-started/azd-basics.md) شروع کنید
+2. [راهنمای نصب](docs/getting-started/installation.md) را دنبال کنید
+3. [پروژه اول شما](docs/getting-started/first-project.md) را کامل کنید
+4. با [مثال برنامه وب ساده](../../examples/simple-web-app) تمرین کنید
 
 ### برای توسعه‌دهندگان
-1. [راهنمای پیکربندی](docs/getting-started/configuration.md) را مرور کنید  
-2. [راهنمای استقرار](docs/deployment/deployment-guide.md) را مطالعه کنید  
-3. [مثال برنامه پایگاه داده](../../examples/database-app) را کار کنید  
-4. [مثال برنامه کانتینر](../../examples/container-app) را بررسی کنید  
+1. [راهنمای پیکربندی](docs/getting-started/configuration.md) را مرور کنید
+2. [راهنمای استقرار](docs/deployment/deployment-guide.md) را مطالعه کنید
+3. [مثال برنامه پایگاه داده](../../examples/database-app) را کار کنید
+4. [مثال برنامه کانتینر](../../examples/container-app) را بررسی کنید
 
 ### برای مهندسان DevOps
-1. [فراهم‌سازی منابع](docs/deployment/provisioning.md) را یاد بگیرید  
-2. [بررسی‌های پیش از پرواز](docs/pre-deployment/preflight-checks.md) را اجرا کنید  
-3. [برنامه‌ریزی ظرفیت](docs/pre-deployment/capacity-planning.md) را تمرین کنید  
-4. [مثال پیشرفته میکروسرویس‌ها](../../examples/microservices) را انجام دهید  
+1. [فراهم‌سازی منابع](docs/deployment/provisioning.md) را یاد بگیرید
+2. [بررسی‌های پیش از پرواز](docs/pre-deployment/preflight-checks.md) را اجرا کنید
+3. [برنامه‌ریزی ظرفیت](docs/pre-deployment/capacity-planning.md) را تمرین کنید
+4. [مثال پیشرفته میکروسرویس‌ها](../../examples/microservices) را انجام دهید
 
 ## مستندات
 
 ### شروع به کار
-- [**AZD Basics**](docs/getting-started/azd-basics.md) - مفاهیم اصلی و اصطلاحات  
-- [**نصب و راه‌اندازی**](docs/getting-started/installation.md) - راهنماهای نصب مخصوص پلتفرم  
-- [**پیکربندی**](docs/getting-started/configuration.md) - تنظیم محیط و احراز هویت  
-- [**اولین پروژه شما**](docs/getting-started/first-project.md) - آموزش گام‌به‌گام  
+- [**AZD Basics**](docs/getting-started/azd-basics.md) - مفاهیم و اصطلاحات اصلی
+- [**نصب و راه‌اندازی**](docs/getting-started/installation.md) - راهنماهای نصب مخصوص پلتفرم
+- [**پیکربندی**](docs/getting-started/configuration.md) - تنظیم محیط و احراز هویت
+- [**پروژه اول شما**](docs/getting-started/first-project.md) - آموزش گام‌به‌گام
 
 ### استقرار و فراهم‌سازی
-- [**راهنمای استقرار**](docs/deployment/deployment-guide.md) - گردش کارهای کامل استقرار  
-- [**فراهم‌سازی منابع**](docs/deployment/provisioning.md) - مدیریت منابع Azure  
+- [**راهنمای استقرار**](docs/deployment/deployment-guide.md) - گردش کارهای کامل استقرار
+- [**فراهم‌سازی منابع**](docs/deployment/provisioning.md) - مدیریت منابع Azure
 
 ### بررسی‌های پیش از استقرار
-- [**برنامه‌ریزی ظرفیت**](docs/pre-deployment/capacity-planning.md) - اعتبارسنجی ظرفیت منابع Azure  
-- [**انتخاب SKU**](docs/pre-deployment/sku-selection.md) - انتخاب SKU‌های مناسب Azure  
-- [**بررسی‌های پیش از پرواز**](docs/pre-deployment/preflight-checks.md) - اسکریپت‌های اعتبارسنجی خودکار  
+- [**برنامه‌ریزی ظرفیت**](docs/pre-deployment/capacity-planning.md) - اعتبارسنجی ظرفیت منابع Azure
+- [**انتخاب SKU**](docs/pre-deployment/sku-selection.md) - انتخاب SKUهای مناسب Azure
+- [**بررسی‌های پیش از پرواز**](docs/pre-deployment/preflight-checks.md) - اسکریپت‌های اعتبارسنجی خودکار
 
 ### هوش مصنوعی و Azure AI Foundry
-- [**یکپارچه‌سازی Azure AI Foundry**](docs/ai-foundry/azure-ai-foundry-integration.md) - اتصال AZD با خدمات Azure AI Foundry  
-- [**الگوهای استقرار مدل هوش مصنوعی**](docs/ai-foundry/ai-model-deployment.md) - استقرار و مدیریت مدل‌های هوش مصنوعی با AZD  
-- [**آزمایشگاه کارگاه هوش مصنوعی**](docs/ai-foundry/ai-workshop-lab.md) - آزمایشگاه عملی: آماده‌سازی راه‌حل‌های هوش مصنوعی برای AZD  
-- [**بهترین شیوه‌های تولید هوش مصنوعی**](docs/ai-foundry/production-ai-practices.md) - امنیت، مقیاس‌پذیری و نظارت بر بارهای کاری هوش مصنوعی  
+- [**یکپارچه‌سازی Azure AI Foundry**](docs/ai-foundry/azure-ai-foundry-integration.md) - اتصال AZD با خدمات Azure AI Foundry
+- [**الگوهای استقرار مدل هوش مصنوعی**](docs/ai-foundry/ai-model-deployment.md) - استقرار و مدیریت مدل‌های هوش مصنوعی با AZD
+- [**آزمایشگاه کارگاه هوش مصنوعی**](docs/ai-foundry/ai-workshop-lab.md) - آزمایشگاه عملی: آماده‌سازی راه‌حل‌های هوش مصنوعی برای AZD
+- [**بهترین شیوه‌های تولید هوش مصنوعی**](docs/ai-foundry/production-ai-practices.md) - امنیت، مقیاس‌پذیری و نظارت برای بارهای کاری هوش مصنوعی
 
 ### رفع مشکلات
-- [**مشکلات رایج**](docs/troubleshooting/common-issues.md) - مشکلات متداول و راه‌حل‌ها  
+- [**مشکلات رایج**](docs/troubleshooting/common-issues.md) - مشکلات متداول و راه‌حل‌ها
 - [**راهنمای اشکال‌زدایی**](docs/troubleshooting/debugging.md) - استراتژی‌های گام‌به‌گام برای اشکال‌زدایی  
-- [**اشکال‌زدایی مخصوص هوش مصنوعی**](docs/troubleshooting/ai-troubleshooting.md) - مشکلات مربوط به سرویس‌ها و استقرار مدل‌های هوش مصنوعی  
+- [**رفع مشکلات خاص هوش مصنوعی**](docs/troubleshooting/ai-troubleshooting.md) - مسائل مربوط به خدمات هوش مصنوعی و استقرار مدل‌ها  
 
 ## مثال‌ها و قالب‌ها  
 
 ### [ویژه: قالب‌های Azure AI Foundry](https://ai.azure.com/resource/build/templates)  
 **اگر قصد استقرار برنامه‌های هوش مصنوعی دارید، از اینجا شروع کنید!**  
 
-| قالب | توضیحات | پیچیدگی | سرویس‌ها |
-|------|---------|---------|----------|
-| [**شروع کار با چت هوش مصنوعی**](https://github.com/Azure-Samples/get-started-with-ai-chat) | ایجاد و استقرار یک برنامه چت ساده که با داده‌ها و اطلاعات تله‌متری شما یکپارچه شده است، با استفاده از Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
-| [**شروع کار با عوامل هوش مصنوعی**](https://github.com/Azure-Samples/get-started-with-ai-agents) | ایجاد و استقرار یک برنامه عامل ساده با اقدامات و اطلاعات تله‌متری با استفاده از Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
+| قالب | توضیحات | پیچیدگی | خدمات |
+|------|---------|---------|-------|
+| [**شروع با چت هوش مصنوعی**](https://github.com/Azure-Samples/get-started-with-ai-chat) | ایجاد و استقرار یک برنامه چت ساده که با داده‌ها و بینش‌های تلومتری شما یکپارچه شده است، با استفاده از Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
+| [**شروع با عوامل هوش مصنوعی**](https://github.com/Azure-Samples/get-started-with-ai-agents) | ایجاد و استقرار یک برنامه عامل ساده با اقدامات و بینش‌های تلومتری با استفاده از Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
 | [**اتوماسیون جریان کاری چندعاملی**](https://github.com/Azure-Samples/get-started-with-ai-chat) | بهبود برنامه‌ریزی وظایف و اتوماسیون با هماهنگی و مدیریت گروهی از عوامل هوش مصنوعی. |⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
 | [**تولید اسناد از داده‌های شما**](https://github.com/Azure-Samples/get-started-with-ai-chat) | تسریع در تولید اسنادی مانند قراردادها، فاکتورها و پیشنهادات سرمایه‌گذاری با یافتن و خلاصه‌سازی اطلاعات مرتبط از داده‌های شما. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
 | [**بهبود جلسات مشتری با عوامل**](https://github.com/Azure-Samples/get-started-with-ai-chat) | مهاجرت کدهای قدیمی به زبان‌های مدرن با استفاده از تیمی از عوامل. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**مدرن‌سازی کد شما با عوامل**](https://github.com/Azure-Samples/get-started-with-ai-chat) | ایجاد و استقرار یک برنامه چت ساده که با داده‌ها و اطلاعات تله‌متری شما یکپارچه شده است، با استفاده از Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**ساخت عامل مکالمه‌ای خود**](https://github.com/Azure-Samples/get-started-with-ai-chat) | استفاده از درک پیشرفته مکالمه برای ایجاد و بهبود چت‌بات‌ها و عوامل با جریان‌های کاری قابل کنترل انسانی و قطعی. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
+| [**مدرن‌سازی کد شما با عوامل**](https://github.com/Azure-Samples/get-started-with-ai-chat) | ایجاد و استقرار یک برنامه چت ساده که با داده‌ها و بینش‌های تلومتری شما یکپارچه شده است، با استفاده از Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**ساخت عامل مکالمه‌ای خود**](https://github.com/Azure-Samples/get-started-with-ai-chat) | استفاده از درک پیشرفته مکالمه برای ایجاد و بهبود چت‌بات‌ها و عوامل با جریان‌های کاری قطعی و قابل کنترل انسانی. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
 | [**باز کردن بینش‌ها از داده‌های مکالمه‌ای**](https://github.com/Azure-Samples/get-started-with-ai-chat) | بهبود کارایی مرکز تماس با کشف بینش‌ها از مجموعه‌های بزرگ داده‌های صوتی و متنی با استفاده از قابلیت‌های پیشرفته درک محتوا. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
 | [**پردازش محتوای چندحالته**](https://github.com/Azure-Samples/get-started-with-ai-chat) | پردازش سریع و دقیق ادعاها، فاکتورها، قراردادها و سایر اسناد با استخراج اطلاعات از محتوای غیرساختاریافته و نگاشت آن به یک قالب ساختاریافته. این قالب از متن، تصاویر، جداول و نمودارها پشتیبانی می‌کند. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
 
 ### ویژه: سناریوهای انتها به انتهای Azure AI Foundry  
 **اگر قصد استقرار برنامه‌های هوش مصنوعی دارید، از اینجا شروع کنید!**  
 
-| قالب | توضیحات | پیچیدگی | سرویس‌ها |
-|------|---------|---------|----------|
+| قالب | توضیحات | پیچیدگی | خدمات |
+|------|---------|---------|-------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | رابط چت ساده با Azure OpenAI | ⭐ | AzureOpenAI + Container Apps |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | برنامه چت فعال‌شده با RAG و Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | تحلیل اسناد با سرویس‌های هوش مصنوعی | ⭐⭐ | Azure Document Intelligence + Functions |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | برنامه چت فعال شده با RAG با Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | تحلیل اسناد با خدمات هوش مصنوعی | ⭐⭐ | Azure Document Intelligence + Functions |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | چارچوب عامل هوش مصنوعی با فراخوانی توابع | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | چت سازمانی با هماهنگی هوش مصنوعی | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |
 
@@ -256,7 +256,7 @@ azd init --template contoso-chat
 
 ## مشارکت  
 
-ما از مشارکت‌ها استقبال می‌کنیم! لطفاً [راهنمای مشارکت](CONTRIBUTING.md) ما را برای جزئیات بخوانید:  
+ما از مشارکت‌ها استقبال می‌کنیم! لطفاً راهنمای [مشارکت](CONTRIBUTING.md) ما را برای جزئیات بخوانید:  
 - نحوه ارسال مشکلات و درخواست‌های ویژگی  
 - دستورالعمل‌های مشارکت کد  
 - بهبود مستندات  
@@ -266,7 +266,7 @@ azd init --template contoso-chat
 
 - **مشکلات**: [گزارش اشکالات و درخواست ویژگی‌ها](https://github.com/microsoft/azd-for-beginners/issues)  
 - **بحث‌ها**: [پرسش و پاسخ و بحث‌های جامعه Discord مایکروسافت Azure](https://discord.gg/microsoft-azure)  
-- **پشتیبانی مخصوص هوش مصنوعی**: به کانال [#Azure](https://discord.gg/microsoft-azure) بپیوندید برای بحث‌های AZD + AI Foundry  
+- **پشتیبانی خاص هوش مصنوعی**: به کانال [#Azure](https://discord.gg/microsoft-azure) بپیوندید برای بحث‌های AZD + AI Foundry  
 - **ایمیل**: برای پرسش‌های خصوصی  
 - **Microsoft Learn**: [مستندات رسمی CLI توسعه‌دهنده Azure](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
@@ -274,11 +274,11 @@ azd init --template contoso-chat
 
 **نتایج نظرسنجی از کانال #Azure:**  
 - **۴۵٪** از توسعه‌دهندگان می‌خواهند از AZD برای بارهای کاری هوش مصنوعی استفاده کنند  
-- **چالش‌های اصلی**: استقرار چندسرویسی، مدیریت اعتبارنامه‌ها، آمادگی برای تولید  
-- **درخواست‌های بیشتر**: قالب‌های مخصوص هوش مصنوعی، راهنماهای اشکال‌زدایی، بهترین شیوه‌ها  
+- **چالش‌های اصلی**: استقرار چندخدمتی، مدیریت اعتبارنامه‌ها، آمادگی برای تولید  
+- **بیشترین درخواست‌ها**: قالب‌های خاص هوش مصنوعی، راهنماهای رفع مشکلات، بهترین شیوه‌ها  
 
 **به جامعه ما بپیوندید تا:**  
-- تجربیات خود را با AZD + AI به اشتراک بگذارید و کمک بگیرید  
+- تجربیات خود را با AZD + AI به اشتراک بگذارید و کمک دریافت کنید  
 - به پیش‌نمایش‌های اولیه قالب‌های جدید هوش مصنوعی دسترسی پیدا کنید  
 - در بهترین شیوه‌های استقرار هوش مصنوعی مشارکت کنید  
 - بر توسعه ویژگی‌های آینده هوش مصنوعی + AZD تأثیر بگذارید  
@@ -289,7 +289,7 @@ azd init --template contoso-chat
 
 ## دوره‌های دیگر  
 
-تیم ما دوره‌های دیگری تولید می‌کند! بررسی کنید:  
+تیم ما دوره‌های دیگری نیز تولید می‌کند! بررسی کنید:  
 
 - [**جدید** پروتکل زمینه مدل (MCP) برای مبتدیان](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [عوامل هوش مصنوعی برای مبتدیان](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  

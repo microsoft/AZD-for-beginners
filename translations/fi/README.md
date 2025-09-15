@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T21:09:13+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T15:18:25+00:00",
   "source_file": "README.md",
   "language_code": "fi"
 }
@@ -11,15 +11,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-aloittelijoille](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.fi.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
-Seuraa näitä vaiheita päästäksesi alkuun näiden resurssien käytössä:
+Seuraa näitä vaiheita aloittaaksesi näiden resurssien käytön:
 1. **Haarauta arkisto**: Klikkaa [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Kloonaa arkisto**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. [**Liity Azure Discord -yhteisöihin ja tapaa asiantuntijoita sekä muita kehittäjiä**](https://discord.com/invite/ByRwuEEgH4)
@@ -30,38 +30,38 @@ Seuraa näitä vaiheita päästäksesi alkuun näiden resurssien käytössä:
 
 [French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](./README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
 
-**Jos haluat lisätä tuettuja kieliä, katso lista [täältä](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+**Jos haluat lisätä uusia kieliä, tuetut kielet löytyvät [täältä](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## Johdanto
 
-Tervetuloa Azure Developer CLI:n (azd) kattavaan oppaaseen. Tämä arkisto on suunniteltu auttamaan kehittäjiä kaikilla tasoilla, opiskelijoista ammattilaisiin, oppimaan ja hallitsemaan Azure Developer CLI:tä tehokkaiden pilvijärjestelmien käyttöönotossa, **erityisesti keskittyen AI-sovellusten käyttöönottoon Azure AI Foundryn avulla**. Tämä jäsennelty oppimateriaali tarjoaa käytännön kokemusta Azure-pilvikäyttöönotosta, yleisten ongelmien ratkaisemisesta ja parhaiden käytäntöjen soveltamisesta onnistuneisiin AZD-mallikäyttöönottoihin.
+Tervetuloa Azure Developer CLI:n (azd) kattavaan oppaaseen. Tämä arkisto on suunniteltu auttamaan kehittäjiä kaikilla tasoilla, opiskelijoista ammattilaisiin, oppimaan ja hallitsemaan Azure Developer CLI:tä tehokkaiden pilvijärjestelmien käyttöönotossa, **erityisesti keskittyen AI-sovellusten käyttöönottoon Azure AI Foundryn avulla**. Tämä jäsennelty oppimateriaali tarjoaa käytännön kokemusta Azure-pilvikäyttöönotosta, yleisten ongelmien ratkaisemisesta ja parhaiden käytäntöjen soveltamisesta onnistuneisiin AZD-mallien käyttöönottoihin.
 
 ### **Miksi tämä opas on tärkeä AI-kehittäjille**
-Viimeisimmän Azure AI Foundry Discord -yhteisön kyselyn perusteella **45 % kehittäjistä on kiinnostunut käyttämään AZD:tä AI-työkuormiin**, mutta he kohtaavat haasteita, kuten:
-- Monimutkaiset monipalvelu-AI-arkkitehtuurit
-- Parhaat käytännöt tuotantotason AI-käyttöönottoon
+Azure AI Foundry Discord -yhteisön viimeisimmän kyselyn mukaan **45 % kehittäjistä on kiinnostunut käyttämään AZD:tä AI-työkuormiin**, mutta he kohtaavat haasteita, kuten:
+- Monimutkaiset monipalveluarkkitehtuurit AI-sovelluksille
+- Tuotantotason AI-käyttöönoton parhaat käytännöt
 - Azure AI -palveluiden integrointi ja konfigurointi
 - Kustannusten optimointi AI-työkuormille
 - AI-spesifisten käyttöönotto-ongelmien ratkaiseminen
 
 ## Oppimistavoitteet
 
-Työskennellessäsi tämän arkiston parissa opit:
+Työskentelemällä tämän arkiston parissa opit:
 - Hallitsemaan Azure Developer CLI:n perusteet ja ydinkonseptit
-- Käyttämään Infrastructure as Code -menetelmää Azure-resurssien käyttöönotossa
+- Käyttämään ja provisioimaan Azure-resursseja Infrastructure as Code -menetelmällä
 - Kehittämään ongelmanratkaisutaitoja yleisiin AZD-käyttöönottohaasteisiin
-- Ymmärtämään ennakkovarmistuksia ja kapasiteettisuunnittelua
+- Ymmärtämään ennakkovarmistukset ja kapasiteettisuunnittelun
 - Toteuttamaan turvallisuuden parhaat käytännöt ja kustannusten optimointistrategiat
 - Saamaan varmuutta tuotantovalmiiden sovellusten käyttöönotossa Azureen
 
 ## Oppimistulokset
 
-Kurssin suorittamisen jälkeen pystyt:
-- Asentamaan, konfiguroimaan ja käyttämään Azure Developer CLI:tä onnistuneesti
-- Luomaan ja ottamaan käyttöön sovelluksia AZD-mallien avulla
-- Ratkaisemaan autentikointi-, infrastruktuuri- ja käyttöönotto-ongelmia
-- Suorittamaan ennakkotarkistuksia, kuten kapasiteettisuunnittelua ja SKU-valintaa
-- Toteuttamaan valvonnan, turvallisuuden ja kustannusten hallinnan parhaat käytännöt
+Kurssin suorittamisen jälkeen osaat:
+- Asentaa, konfiguroida ja käyttää Azure Developer CLI:tä
+- Luoda ja ottaa käyttöön sovelluksia AZD-mallien avulla
+- Ratkaista autentikointiin, infrastruktuuriin ja käyttöönottoon liittyviä ongelmia
+- Suorittaa ennakkovarmistuksia, kuten kapasiteettisuunnittelua ja SKU-valintaa
+- Toteuttaa valvonnan, turvallisuuden ja kustannusten hallinnan parhaat käytännöt
 - Integroimaan AZD-työnkulut CI/CD-putkistoihin
 
 ## Sisällysluettelo
@@ -75,8 +75,8 @@ Kurssin suorittamisen jälkeen pystyt:
   - [DevOps-insinööreille](../..)
 - [Dokumentaatio](../..)
   - [Aloittaminen](../..)
-  - [Käyttöönotto ja resurssien provisiointi](../..)
-  - [Ennakkotarkistukset](../..)
+  - [Käyttöönotto ja provisiointi](../..)
+  - [Ennakkovarmistukset](../..)
   - [AI ja Azure AI Foundry](../..)
   - [Vianetsintä](../..)
 - [Esimerkit ja mallit](../..)
@@ -95,8 +95,8 @@ Azure Developer CLI (azd) on kehittäjäkeskeinen komentoriviliittymä, joka nop
 
 - **Mallipohjaiset käyttöönotot** - Käytä valmiita malleja yleisiin sovelluskuvioihin
 - **Infrastructure as Code** - Hallitse Azure-resursseja Bicepin tai Terraformin avulla
-- **Integroitu työnkulku** - Resurssien provisiointi, käyttöönotto ja valvonta saumattomasti
-- **Kehittäjäystävällisyys** - Optimoitu kehittäjän tuottavuudelle ja käyttökokemukselle
+- **Integroitu työnkulku** - Provisioi, ota käyttöön ja valvo sovelluksia saumattomasti
+- **Kehittäjäystävällinen** - Optimoitu kehittäjän tuottavuudelle ja käyttökokemukselle
 
 ### **AZD + Azure AI Foundry: Täydellinen AI-käyttöönottoihin**
 
@@ -107,7 +107,7 @@ Azure Developer CLI (azd) on kehittäjäkeskeinen komentoriviliittymä, joka nop
 - **Tuotantotason AI-kuviot** - Parhaat käytännöt skaalautuville ja kustannustehokkaille AI-sovellusten käyttöönotolle
 - **Päästä-päähän AI-työnkulut** - Mallin kehittämisestä tuotantokäyttöön asianmukaisella valvonnalla
 - **Kustannusten optimointi** - Älykkäät resurssien allokointi- ja skaalausstrategiat AI-työkuormille
-- **Azure AI Foundry -integraatio** - Saumaton yhteys AI Foundryn mallikatalogiin ja päätteisiin
+- **Azure AI Foundry -integraatio** - Saumaton yhteys AI Foundryn mallikatalogiin ja päätepisteisiin
 
 ## Pika-aloitus
 
@@ -154,7 +154,7 @@ azd init --template contoso-chat
 1. **Pika-aloitus**: Kokeile [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) -mallia
 2. **Opi perusteet**: [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
 3. **Käytännön harjoittelu**: Suorita [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
-4. **Tuotantovalmius**: Tutustu [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
+4. **Tuotantovalmius**: Tarkista [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
 5. **Edistynyt**: Ota käyttöön [contoso-chat](https://github.com/Azure-Samples/contoso-chat) yritysmalli
 
 ### Opiskelijoille ja aloittelijoille
@@ -164,10 +164,10 @@ azd init --template contoso-chat
 4. Harjoittele [Yksinkertainen verkkosovellus -esimerkin](../../examples/simple-web-app) avulla
 
 ### Kehittäjille
-1. Tutustu [Konfigurointioppaaseen](docs/getting-started/configuration.md)
-2. Opiskele [Käyttöönotto-opasta](docs/deployment/deployment-guide.md)
+1. Tarkista [Konfigurointiopas](docs/getting-started/configuration.md)
+2. Tutki [Käyttöönotto-opasta](docs/deployment/deployment-guide.md)
 3. Työskentele [Tietokantasovellus-esimerkin](../../examples/database-app) parissa
-4. Tutki [Konttisovellus-esimerkkiä](../../examples/container-app)
+4. Tutustu [Konttisovellus-esimerkkiin](../../examples/container-app)
 
 ### DevOps-insinööreille
 1. Hallitse [Resurssien provisiointi](docs/deployment/provisioning.md)
@@ -183,19 +183,19 @@ azd init --template contoso-chat
 - [**Konfigurointi**](docs/getting-started/configuration.md) - Ympäristön asennus ja autentikointi
 - [**Ensimmäinen projektisi**](docs/getting-started/first-project.md) - Vaiheittainen opas
 
-### Käyttöönotto ja resurssien provisiointi
+### Käyttöönotto ja provisiointi
 - [**Käyttöönotto-opas**](docs/deployment/deployment-guide.md) - Täydelliset käyttöönoton työnkulut
 - [**Resurssien provisiointi**](docs/deployment/provisioning.md) - Azure-resurssien hallinta
 
-### Ennakkotarkistukset
+### Ennakkovarmistukset
 - [**Kapasiteettisuunnittelu**](docs/pre-deployment/capacity-planning.md) - Azure-resurssien kapasiteetin validointi
 - [**SKU-valinta**](docs/pre-deployment/sku-selection.md) - Oikeiden Azure SKU:iden valinta
 - [**Ennakkotarkistukset**](docs/pre-deployment/preflight-checks.md) - Automatisoidut validointiskriptit
 
 ### AI ja Azure AI Foundry
 - [**Azure AI Foundry -integraatio**](docs/ai-foundry/azure-ai-foundry-integration.md) - Yhdistä AZD Azure AI Foundry -palveluihin
-- [**AI-mallien käyttöönotto-kuviot**](docs/ai-foundry/ai-model-deployment.md) - AI-mallien käyttöönotto ja hallinta AZD:n avulla
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Käytännön harjoitus: AI-ratkaisujen AZD-valmius
+- [**AI-mallien käyttöönoton kuviot**](docs/ai-foundry/ai-model-deployment.md) - Ota käyttöön ja hallitse AI-malleja AZD:n avulla
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Käytännön harjoitus: Tee AI-ratkaisuista AZD-valmiita
 - [**Tuotantotason AI:n parhaat käytännöt**](docs/ai-foundry/production-ai-practices.md) - Turvallisuus, skaalaus ja valvonta AI-työkuormille
 
 ### Vianetsintä
@@ -206,30 +206,30 @@ azd init --template contoso-chat
 ## Esimerkit ja mallipohjat  
 
 ### [Esillä: Azure AI Foundry -mallipohjat](https://ai.azure.com/resource/build/templates)  
-**Aloita tästä, jos olet ottamassa käyttöön AI-sovelluksia!**  
+**Aloita tästä, jos otat käyttöön AI-sovelluksia!**  
 
 | Mallipohja | Kuvaus | Monimutkaisuus | Palvelut |  
 |------------|---------|----------------|----------|  
 | [**Aloita AI-chatilla**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Luo ja ota käyttöön perus chat-sovellus, joka on integroitu dataasi ja telemetriatietoihisi Azure Container Apps -palvelun avulla |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |  
 | [**Aloita AI-agenttien kanssa**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Luo ja ota käyttöön perus agenttisovellus, jossa on toimintoja ja telemetriatietoja Azure Container Apps -palvelun avulla. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
-| [**Moniagenttinen työnkulkuautomaatio**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Paranna tehtävien suunnittelua ja automaatiota orkestroimalla ja hallinnoimalla AI-agenttien ryhmää. |⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
-| [**Luo dokumentteja datastasi**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Nopeuta dokumenttien, kuten sopimusten, laskujen ja sijoitusehdotusten, luomista löytämällä ja tiivistämällä olennaista tietoa datastasi. |⭐⭐⭐ | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|  
+| [**Moniagenttinen työnkulkuautomaatio**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Paranna tehtävien suunnittelua ja automaatiota orkestroimalla ja hallitsemalla AI-agenttien ryhmää. |⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
+| [**Luo asiakirjoja datastasi**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Nopeuta asiakirjojen, kuten sopimusten, laskujen ja sijoitusehdotusten, luomista löytämällä ja tiivistämällä relevanttia tietoa datastasi. |⭐⭐⭐ | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|  
 | [**Paranna asiakastapaamisia agenttien avulla**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Siirrä vanhaa koodia moderneihin ohjelmointikieliin hyödyntämällä agenttitiimiä. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |  
 | [**Modernisoi koodisi agenttien avulla**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Luo ja ota käyttöön perus chat-sovellus, joka on integroitu dataasi ja telemetriatietoihisi Azure Container Apps -palvelun avulla |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
-| [**Rakenna keskusteleva agenttisi**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Hyödynnä kehittynyttä keskustelun ymmärrystä chatbotien ja agenttien luomisessa ja parantamisessa determinististen ja ihmisen hallittavien työnkulkujen avulla. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
+| [**Rakenna keskusteleva agenttisi**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Hyödynnä kehittynyttä keskustelun ymmärrystä luodaksesi ja parantaaksesi chatbotteja ja agentteja deterministisillä ja ihmisen hallittavilla työnkuluilla. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
 | [**Avaa oivalluksia keskusteludatasta**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Paranna yhteyskeskuksen tehokkuutta löytämällä oivalluksia suurista ääni- ja tekstipohjaisista datamassoista kehittyneiden sisällön ymmärtämisen ominaisuuksien avulla. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|  
-| [**Monimuotoinen sisällön käsittely**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Käsittele vaatimuksia, laskuja, sopimuksia ja muita dokumentteja nopeasti ja tarkasti poimimalla tietoa jäsentämättömästä sisällöstä ja muuntamalla se jäsenneltyyn muotoon. Tämä mallipohja tukee tekstiä, kuvia, taulukoita ja kaavioita. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
+| [**Monimuotoinen sisällön käsittely**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Käsittele vaatimuksia, laskuja, sopimuksia ja muita asiakirjoja nopeasti ja tarkasti poimimalla tietoa jäsentämättömästä sisällöstä ja muuntamalla se jäsenneltyyn muotoon. Tämä mallipohja tukee tekstiä, kuvia, taulukoita ja kaavioita. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
 
 ### Esillä: Azure AI Foundry E2E-skenaariot  
-**Aloita tästä, jos olet ottamassa käyttöön AI-sovelluksia!**  
+**Aloita tästä, jos otat käyttöön AI-sovelluksia!**  
 
 | Mallipohja | Kuvaus | Monimutkaisuus | Palvelut |  
 |------------|---------|----------------|----------|  
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Yksinkertainen chat-käyttöliittymä Azure OpenAI:lla | ⭐ | AzureOpenAI + Container Apps |  
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-ominaisuudella varustettu chat-sovellus Azure OpenAI:lla | ⭐⭐ | AzureOpenAI + Search + App Service |  
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Dokumenttianalyysi AI-palveluilla | ⭐⭐ | Azure Document Intelligence + Functions |  
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Yksinkertainen chat-käyttöliittymä Azure OpenAI:n kanssa | ⭐ | AzureOpenAI + Container Apps |  
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-ominaisuudella varustettu chat-sovellus Azure OpenAI:n kanssa | ⭐⭐ | AzureOpenAI + Search + App Service |  
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Asiakirjojen analysointi AI-palveluiden avulla | ⭐⭐ | Azure Document Intelligence + Functions |  
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | AI-agenttikehys funktiokutsujen kanssa | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |  
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Yrityschat AI-orkestroinnilla | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |  
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Yrityskeskustelu AI-orkestroinnilla | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |  
 
 ### Lisä-AZD-mallipohjat  
 - [**Esimerkkihakemisto**](examples/README.md) - Käytännön esimerkkejä, mallipohjia ja tosielämän skenaarioita  
@@ -251,8 +251,8 @@ azd init --template contoso-chat
 ### Ulkoiset resurssit  
 - [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)  
-- [Azure Status](https://status.azure.com/)  
+- [Azure-hinnoittelulaskuri](https://azure.microsoft.com/pricing/calculator/)  
+- [Azure-tila](https://status.azure.com/)  
 
 ## Osallistuminen  
 
@@ -281,11 +281,11 @@ Otamme mielellämme vastaan osallistumisia! Lue [Osallistumisopas](CONTRIBUTING.
 - Jaa AZD + AI-kokemuksesi ja saa apua  
 - Pääsy uusien AI-mallipohjien varhaisiin esikatseluihin  
 - Osallistu AI-käyttöönoton parhaiden käytäntöjen kehittämiseen  
-- Vaikuta tuleviin AI + AZD-ominaisuuksiin  
+- Vaikuta tulevaan AI + AZD-ominaisuuksien kehitykseen  
 
 ## Lisenssi  
 
-Tämä projekti on lisensoitu MIT-lisenssillä - katso [LISENSSI](../../LICENSE) lisätietoja varten.  
+Tämä projekti on lisensoitu MIT-lisenssillä - katso lisätiedot [LICENSE](../../LICENSE)-tiedostosta.  
 
 ## Muut kurssit  
 
@@ -315,4 +315,4 @@ Tiimimme tuottaa muita kursseja! Tutustu:
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

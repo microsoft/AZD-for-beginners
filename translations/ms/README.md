@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T21:25:42+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T15:24:12+00:00",
   "source_file": "README.md",
   "language_code": "ms"
 }
@@ -11,26 +11,34 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-untuk-pemula](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.ms.png) 
 
-Ikuti langkah-langkah ini untuk mula menggunakan sumber ini:
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
+
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
+
+Ikuti langkah-langkah berikut untuk mula menggunakan sumber ini:
 1. **Fork Repositori**: Klik [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Clone Repositori**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. [**Sertai Komuniti Discord Azure dan berhubung dengan pakar serta pembangun lain**](https://discord.com/invite/ByRwuEEgH4)
+3. [**Sertai Komuniti Azure Discord dan berhubung dengan pakar serta pembangun lain**](https://discord.com/invite/ByRwuEEgH4)
 
 ### Sokongan Pelbagai Bahasa
 
-#### Disokong melalui GitHub Action (Automatik & Sentiasa Terkini)
+#### Disokong melalui GitHub Action (Automatik & Sentiasa Dikemas Kini)
 
 [French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](./README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
 
-**Jika anda ingin menambah sokongan bahasa tambahan, senarai bahasa yang disokong boleh didapati [di sini](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+**Jika anda ingin menambah sokongan untuk bahasa lain, senarai bahasa yang disokong boleh didapati [di sini](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## Pengenalan
 
-Selamat datang ke panduan komprehensif untuk Azure Developer CLI (azd). Repositori ini direka untuk membantu pembangun pada semua peringkat, daripada pelajar hingga pembangun profesional, mempelajari dan menguasai Azure Developer CLI untuk penyebaran awan yang efisien, **dengan fokus khas pada penyebaran aplikasi AI menggunakan Azure AI Foundry**. Sumber pembelajaran yang terstruktur ini menyediakan pengalaman langsung dengan penyebaran awan Azure, menyelesaikan masalah biasa, dan melaksanakan amalan terbaik untuk penyebaran templat AZD yang berjaya.
+Selamat datang ke panduan komprehensif untuk Azure Developer CLI (azd). Repositori ini direka untuk membantu pembangun pada semua peringkat, daripada pelajar hingga pembangun profesional, mempelajari dan menguasai Azure Developer CLI untuk penyebaran awan yang cekap, **dengan fokus khas pada penyebaran aplikasi AI menggunakan Azure AI Foundry**. Sumber pembelajaran berstruktur ini menyediakan pengalaman langsung dengan penyebaran awan Azure, menyelesaikan masalah biasa, dan melaksanakan amalan terbaik untuk penyebaran templat AZD yang berjaya.
 
 ### **Mengapa Panduan Ini Penting untuk Pembangun AI**
 Berdasarkan tinjauan komuniti Discord Azure AI Foundry baru-baru ini, **45% pembangun berminat menggunakan AZD untuk beban kerja AI** tetapi menghadapi cabaran dengan:
-- Seni bina AI multi-perkhidmatan yang kompleks
+- Seni bina AI pelbagai perkhidmatan yang kompleks
 - Amalan terbaik penyebaran AI untuk pengeluaran
 - Integrasi dan konfigurasi perkhidmatan Azure AI
 - Pengoptimuman kos untuk beban kerja AI
@@ -40,28 +48,28 @@ Berdasarkan tinjauan komuniti Discord Azure AI Foundry baru-baru ini, **45% pemb
 
 Dengan bekerja melalui repositori ini, anda akan:
 - Menguasai asas dan konsep teras Azure Developer CLI
-- Belajar menyebarkan dan menyediakan sumber Azure menggunakan Infrastructure as Code
+- Belajar menyebarkan dan menyediakan sumber Azure menggunakan Infrastruktur sebagai Kod
 - Membangunkan kemahiran menyelesaikan masalah untuk isu penyebaran AZD yang biasa
 - Memahami pengesahan sebelum penyebaran dan perancangan kapasiti
 - Melaksanakan amalan terbaik keselamatan dan strategi pengoptimuman kos
-- Meningkatkan keyakinan dalam menyebarkan aplikasi siap pengeluaran ke Azure
+- Meningkatkan keyakinan dalam menyebarkan aplikasi sedia pengeluaran ke Azure
 
 ## Hasil Pembelajaran
 
 Selepas melengkapkan kursus ini, anda akan dapat:
-- Memasang, mengkonfigurasi, dan menggunakan Azure Developer CLI dengan berjaya
-- Membuat dan menyebarkan aplikasi menggunakan templat AZD
+- Berjaya memasang, mengkonfigurasi, dan menggunakan Azure Developer CLI
+- Mencipta dan menyebarkan aplikasi menggunakan templat AZD
 - Menyelesaikan masalah pengesahan, infrastruktur, dan penyebaran
 - Melakukan pemeriksaan sebelum penyebaran termasuk perancangan kapasiti dan pemilihan SKU
 - Melaksanakan amalan terbaik pemantauan, keselamatan, dan pengurusan kos
-- Mengintegrasikan aliran kerja AZD ke dalam pipeline CI/CD
+- Mengintegrasikan aliran kerja AZD ke dalam saluran CI/CD
 
 ## Kandungan
 
 - [Apa itu Azure Developer CLI?](../..)
 - [Permulaan Pantas](../..)
 - [Laluan Pembelajaran](../..)
-  - [Untuk Pembangun AI (Disarankan Mulakan Di Sini!)](../..)
+  - [Untuk Pembangun AI (Disyorkan Mulakan Di Sini!)](../..)
   - [Untuk Pelajar & Pemula](../..)
   - [Untuk Pembangun](../..)
   - [Untuk Jurutera DevOps](../..)
@@ -72,8 +80,8 @@ Selepas melengkapkan kursus ini, anda akan dapat:
   - [AI & Azure AI Foundry](../..)
   - [Penyelesaian Masalah](../..)
 - [Contoh & Templat](../..)
-  - [Ditampilkan: Templat Azure AI Foundry](../..)
-  - [Ditampilkan: Senario E2E Azure AI Foundry](../..)
+  - [Pilihan: Templat Azure AI Foundry](../..)
+  - [Pilihan: Senario E2E Azure AI Foundry](../..)
   - [Templat AZD Tambahan](../..)
   - [Makmal & Bengkel Praktikal](../..)
 - [Sumber](../..)
@@ -86,27 +94,27 @@ Selepas melengkapkan kursus ini, anda akan dapat:
 Azure Developer CLI (azd) ialah antara muka baris perintah yang berpusatkan pembangun yang mempercepatkan proses membina dan menyebarkan aplikasi ke Azure. Ia menyediakan:
 
 - **Penyebaran berasaskan templat** - Gunakan templat pra-bina untuk corak aplikasi biasa
-- **Infrastructure as Code** - Urus sumber Azure menggunakan Bicep atau Terraform
-- **Aliran kerja bersepadu** - Menyediakan, menyebarkan, dan memantau aplikasi dengan lancar
+- **Infrastruktur sebagai Kod** - Urus sumber Azure menggunakan Bicep atau Terraform
+- **Aliran kerja bersepadu** - Sediakan, sebarkan, dan pantau aplikasi dengan lancar
 - **Mesra pembangun** - Dioptimumkan untuk produktiviti dan pengalaman pembangun
 
 ### **AZD + Azure AI Foundry: Sesuai untuk Penyebaran AI**
 
-**Mengapa AZD untuk Penyelesaian AI?** AZD menangani cabaran utama yang dihadapi oleh pembangun AI:
+**Mengapa AZD untuk Penyelesaian AI?** AZD menangani cabaran utama yang dihadapi pembangun AI:
 
 - **Templat Sedia AI** - Templat pra-konfigurasi untuk Azure OpenAI, Cognitive Services, dan beban kerja ML
 - **Penyebaran AI Selamat** - Corak keselamatan terbina untuk perkhidmatan AI, kunci API, dan titik akhir model
 - **Corak AI Pengeluaran** - Amalan terbaik untuk penyebaran aplikasi AI yang boleh diskalakan dan kos efektif
-- **Aliran Kerja AI Hujung-ke-Hujung** - Daripada pembangunan model hingga penyebaran pengeluaran dengan pemantauan yang betul
-- **Pengoptimuman Kos** - Strategi peruntukan sumber dan penskalaan pintar untuk beban kerja AI
-- **Integrasi Azure AI Foundry** - Sambungan lancar ke katalog model dan titik akhir AI Foundry
+- **Aliran Kerja AI Hujung-ke-Hujung** - Dari pembangunan model hingga penyebaran pengeluaran dengan pemantauan yang betul
+- **Pengoptimuman Kos** - Strategi peruntukan dan penskalaan sumber yang pintar untuk beban kerja AI
+- **Integrasi Azure AI Foundry** - Sambungan lancar ke katalog model AI Foundry dan titik akhir
 
 ## Permulaan Pantas
 
 ### Prasyarat
 - Langganan Azure
 - Azure CLI dipasang
-- Git (untuk clone templat)
+- Git (untuk mengklon templat)
 
 ### Pemasangan
 ```bash
@@ -142,7 +150,7 @@ azd init --template contoso-chat
 
 ## Laluan Pembelajaran
 
-### Untuk Pembangun AI (Disarankan Mulakan Di Sini!)
+### Untuk Pembangun AI (Disyorkan Mulakan Di Sini!)
 1. **Permulaan Pantas**: Cuba templat [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 2. **Belajar Asas**: [AZD Basics](docs/getting-started/azd-basics.md) + [Integrasi Azure AI Foundry](docs/ai-foundry/azure-ai-foundry-integration.md)
 3. **Latihan Praktikal**: Lengkapkan [Makmal Bengkel AI](docs/ai-foundry/ai-workshop-lab.md)
@@ -165,12 +173,12 @@ azd init --template contoso-chat
 1. Kuasai [Penyediaan Sumber](docs/deployment/provisioning.md)
 2. Laksanakan [Pemeriksaan Awal](docs/pre-deployment/preflight-checks.md)
 3. Berlatih [Perancangan Kapasiti](docs/pre-deployment/capacity-planning.md)
-4. Lanjutan [Contoh Mikroservis](../../examples/microservices)
+4. Contoh Lanjutan [Mikroservis](../../examples/microservices)
 
 ## Dokumentasi
 
 ### Memulakan
-- [**AZD Basics**](docs/getting-started/azd-basics.md) - Konsep dan istilah teras
+- [**AZD Basics**](docs/getting-started/azd-basics.md) - Konsep asas dan istilah
 - [**Pemasangan & Persediaan**](docs/getting-started/installation.md) - Panduan pemasangan khusus platform
 - [**Konfigurasi**](docs/getting-started/configuration.md) - Persediaan persekitaran dan pengesahan
 - [**Projek Pertama Anda**](docs/getting-started/first-project.md) - Tutorial langkah demi langkah
@@ -197,22 +205,22 @@ azd init --template contoso-chat
 
 ## Contoh & Templat  
 
-### [Pilihan Utama: Templat Azure AI Foundry](https://ai.azure.com/resource/build/templates)  
+### [Ditampilkan: Templat Azure AI Foundry](https://ai.azure.com/resource/build/templates)  
 **Mulakan di sini jika anda ingin mengedarkan aplikasi AI!**  
 
 | Templat | Penerangan | Kerumitan | Perkhidmatan |  
 |----------|-------------|------------|----------|  
-| [**Mulakan dengan AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Cipta dan edarkan aplikasi chat asas yang diintegrasikan dengan data dan pandangan telemetri anda menggunakan Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |  
-| [**Mulakan dengan ejen AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Cipta dan edarkan aplikasi ejen asas dengan tindakan dan pandangan telemetri menggunakan Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
-| [**Automasi aliran kerja multi-ejen**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tingkatkan perancangan tugas dan automasi dengan mengatur dan menguruskan kumpulan ejen AI.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
+| [**Memulakan aplikasi AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Cipta dan edarkan aplikasi chat asas yang diintegrasikan dengan data dan pandangan telemetri anda menggunakan Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |  
+| [**Memulakan aplikasi AI agen**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Cipta dan edarkan aplikasi agen asas dengan tindakan dan pandangan telemetri menggunakan Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
+| [**Automasi aliran kerja multi-agen**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tingkatkan perancangan tugas dan automasi dengan mengatur dan menguruskan kumpulan agen AI.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
 | [**Hasilkan dokumen daripada data anda**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Percepatkan penghasilan dokumen seperti kontrak, invois dan cadangan pelaburan dengan mencari dan meringkaskan maklumat yang relevan daripada data anda. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|  
-| [**Tingkatkan mesyuarat pelanggan dengan ejen**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Migrasikan kod lama ke bahasa moden dengan memanfaatkan pasukan ejen. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |  
-| [**Modenkan kod anda dengan ejen**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Cipta dan edarkan aplikasi chat asas yang diintegrasikan dengan data dan pandangan telemetri anda menggunakan Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
-| [**Bina ejen perbualan anda**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Manfaatkan pemahaman perbualan lanjutan untuk mencipta dan meningkatkan chatbot serta ejen dengan aliran kerja yang deterministik dan boleh dikawal manusia. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
-| [**Buka pandangan daripada data perbualan**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tingkatkan kecekapan pusat hubungan dengan menemui pandangan daripada set data audio dan teks yang besar menggunakan keupayaan pemahaman kandungan lanjutan. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|  
+| [**Tingkatkan mesyuarat pelanggan dengan agen**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Migrasikan kod lama ke bahasa moden dengan memanfaatkan pasukan agen. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |  
+| [**Modernisasi kod anda dengan agen**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Cipta dan edarkan aplikasi chat asas yang diintegrasikan dengan data dan pandangan telemetri anda menggunakan Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
+| [**Bina agen perbualan anda**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Manfaatkan pemahaman perbualan yang maju untuk mencipta dan meningkatkan chatbot serta agen dengan aliran kerja yang deterministik dan boleh dikawal manusia. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
+| [**Buka pandangan daripada data perbualan**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tingkatkan kecekapan pusat hubungan dengan menemui pandangan daripada set data audio dan teks yang besar menggunakan keupayaan pemahaman kandungan yang maju. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|  
 | [**Pemprosesan kandungan multi-modal**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Proses tuntutan, invois, kontrak dan dokumen lain dengan cepat dan tepat dengan mengekstrak maklumat daripada kandungan tidak berstruktur dan memetakannya kepada format berstruktur. Templat ini menyokong teks, imej, jadual dan graf. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
 
-### Pilihan Utama: Senario E2E Azure AI Foundry  
+### Ditampilkan: Senario E2E Azure AI Foundry  
 **Mulakan di sini jika anda ingin mengedarkan aplikasi AI!**  
 
 | Templat | Penerangan | Kerumitan | Perkhidmatan |  
@@ -220,27 +228,27 @@ azd init --template contoso-chat
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Antara muka chat mudah dengan Azure OpenAI | ⭐ | AzureOpenAI + Container Apps |  
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Aplikasi chat yang diaktifkan RAG dengan Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |  
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Analisis dokumen dengan perkhidmatan AI | ⭐⭐ | Azure Document Intelligence + Functions |  
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kerangka ejen AI dengan pemanggilan fungsi | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |  
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Rangka kerja agen AI dengan pemanggilan fungsi | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |  
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Chat perusahaan dengan orkestrasi AI | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |  
 
 ### Templat AZD Tambahan  
 - [**Direktori Contoh**](examples/README.md) - Contoh praktikal, templat, dan senario dunia sebenar  
 - [**Templat AZD Azure-Samples**](https://github.com/Azure-Samples/azd-templates) - Templat contoh rasmi Microsoft  
-- [**Galeri AZD Hebat**](https://azure.github.io/awesome-azd/) - Templat sumbangan komuniti  
+- [**Galeri Awesome AZD**](https://azure.github.io/awesome-azd/) - Templat sumbangan komuniti  
 
 ### Makmal & Bengkel Praktikal  
 - [**Makmal Bengkel AI**](docs/ai-foundry/ai-workshop-lab.md) - **BARU**: Jadikan penyelesaian AI anda boleh dideploy dengan AZD  
-- [**Bengkel AZD Untuk Pemula**](workshop/README.md) - Fokus pada pengedaran templat ejen AI AZD  
+- [**Bengkel AZD Untuk Pemula**](workshop/README.md) - Fokus pada pengedaran templat agen AI AZD  
 
 ## Sumber  
 
 ### Rujukan Pantas  
 - [**Lembaran Cheat Perintah**](resources/cheat-sheet.md) - Perintah azd penting  
-- [**Glosari**](resources/glossary.md) - Terminologi Azure dan azd  
+- [**Glosari**](resources/glossary.md) - Istilah Azure dan azd  
 - [**FAQ**](resources/faq.md) - Soalan lazim  
 - [**Panduan Pembelajaran**](resources/study-guide.md) - Objektif pembelajaran komprehensif dan latihan praktikal  
 
-### Sumber Luar  
+### Sumber Luaran  
 - [Dokumentasi CLI Pembangun Azure](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 - [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [Kalkulator Harga Azure](https://azure.microsoft.com/pricing/calculator/)  
@@ -248,7 +256,7 @@ azd init --template contoso-chat
 
 ## Menyumbang  
 
-Kami mengalu-alukan sumbangan! Sila baca [Panduan Penyumbangan](CONTRIBUTING.md) kami untuk maklumat lanjut tentang:  
+Kami mengalu-alukan sumbangan! Sila baca [Panduan Menyumbang](CONTRIBUTING.md) kami untuk maklumat lanjut tentang:  
 - Cara menghantar isu dan permintaan ciri  
 - Garis panduan sumbangan kod  
 - Penambahbaikan dokumentasi  
@@ -262,9 +270,9 @@ Kami mengalu-alukan sumbangan! Sila baca [Panduan Penyumbangan](CONTRIBUTING.md)
 - **E-mel**: Untuk pertanyaan peribadi  
 - **Microsoft Learn**: [Dokumentasi rasmi CLI Pembangun Azure](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
-### Pandangan Komuniti daripada Discord Azure AI Foundry  
+### Pandangan Komuniti dari Discord Azure AI Foundry  
 
-**Hasil Undian daripada Saluran #Azure:**  
+**Hasil Undian dari Saluran #Azure:**  
 - **45%** pembangun ingin menggunakan AZD untuk beban kerja AI  
 - **Cabaran utama**: Pengedaran multi-perkhidmatan, pengurusan kelayakan, kesediaan pengeluaran  
 - **Permintaan paling banyak**: Templat khusus AI, panduan penyelesaian masalah, amalan terbaik  
@@ -284,7 +292,7 @@ Projek ini dilesenkan di bawah Lesen MIT - lihat fail [LICENSE](../../LICENSE) u
 Pasukan kami menghasilkan kursus lain! Lihat:  
 
 - [**BARU** Protokol Konteks Model (MCP) Untuk Pemula](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Ejen AI untuk Pemula](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Agen AI untuk Pemula](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI Generatif untuk Pemula menggunakan .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
 - [AI Generatif untuk Pemula](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI Generatif untuk Pemula menggunakan Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
@@ -307,4 +315,4 @@ Pasukan kami menghasilkan kursus lain! Lihat:
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

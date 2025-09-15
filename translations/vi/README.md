@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T21:19:30+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T15:21:55+00:00",
   "source_file": "README.md",
   "language_code": "vi"
 }
@@ -11,18 +11,18 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.vi.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
 Hãy làm theo các bước sau để bắt đầu sử dụng các tài nguyên này:
 1. **Fork Repository**: Nhấn vào [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Clone Repository**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. [**Tham gia cộng đồng Azure Discord và gặp gỡ các chuyên gia cùng các nhà phát triển khác**](https://discord.com/invite/ByRwuEEgH4)
+3. [**Tham gia cộng đồng Azure Discord để gặp gỡ các chuyên gia và nhà phát triển khác**](https://discord.com/invite/ByRwuEEgH4)
 
 ### Hỗ Trợ Đa Ngôn Ngữ
 
@@ -37,7 +37,7 @@ Hãy làm theo các bước sau để bắt đầu sử dụng các tài nguyên
 Chào mừng bạn đến với hướng dẫn toàn diện về Azure Developer CLI (azd). Repository này được thiết kế để giúp các nhà phát triển ở mọi cấp độ, từ sinh viên đến các nhà phát triển chuyên nghiệp, học và làm chủ Azure Developer CLI để triển khai đám mây hiệu quả, **đặc biệt tập trung vào triển khai ứng dụng AI sử dụng Azure AI Foundry**. Tài nguyên học tập có cấu trúc này cung cấp trải nghiệm thực hành với triển khai đám mây Azure, khắc phục các vấn đề thường gặp, và áp dụng các phương pháp tốt nhất để triển khai mẫu AZD thành công.
 
 ### **Tại Sao Hướng Dẫn Này Quan Trọng Đối Với Các Nhà Phát Triển AI**
-Dựa trên cuộc khảo sát gần đây trong cộng đồng Azure AI Foundry Discord, **45% nhà phát triển quan tâm đến việc sử dụng AZD cho các khối lượng công việc AI** nhưng gặp khó khăn với:
+Dựa trên cuộc khảo sát gần đây trong cộng đồng Discord Azure AI Foundry, **45% nhà phát triển quan tâm đến việc sử dụng AZD cho các khối lượng công việc AI** nhưng gặp khó khăn với:
 - Kiến trúc AI đa dịch vụ phức tạp
 - Các phương pháp tốt nhất để triển khai AI trong môi trường sản xuất
 - Tích hợp và cấu hình dịch vụ Azure AI
@@ -48,20 +48,20 @@ Dựa trên cuộc khảo sát gần đây trong cộng đồng Azure AI Foundry
 
 Khi làm việc qua repository này, bạn sẽ:
 - Làm chủ các khái niệm cơ bản và cốt lõi của Azure Developer CLI
-- Học cách triển khai và cung cấp tài nguyên Azure sử dụng Infrastructure as Code
+- Học cách triển khai và cung cấp tài nguyên Azure bằng Infrastructure as Code
 - Phát triển kỹ năng khắc phục sự cố cho các vấn đề triển khai AZD thường gặp
 - Hiểu kiểm tra trước triển khai và lập kế hoạch dung lượng
 - Áp dụng các phương pháp bảo mật và chiến lược tối ưu hóa chi phí
-- Xây dựng sự tự tin trong việc triển khai ứng dụng sẵn sàng sản xuất lên Azure
+- Tự tin triển khai các ứng dụng sẵn sàng cho sản xuất lên Azure
 
 ## Kết Quả Học Tập
 
 Sau khi hoàn thành khóa học này, bạn sẽ có thể:
 - Cài đặt, cấu hình, và sử dụng Azure Developer CLI thành công
-- Tạo và triển khai ứng dụng sử dụng mẫu AZD
-- Khắc phục sự cố xác thực, hạ tầng, và vấn đề triển khai
+- Tạo và triển khai ứng dụng bằng các mẫu AZD
+- Khắc phục sự cố xác thực, hạ tầng, và triển khai
 - Thực hiện kiểm tra trước triển khai bao gồm lập kế hoạch dung lượng và lựa chọn SKU
-- Áp dụng các phương pháp giám sát, bảo mật, và quản lý chi phí tốt nhất
+- Áp dụng các phương pháp tốt nhất về giám sát, bảo mật, và quản lý chi phí
 - Tích hợp quy trình làm việc AZD vào các pipeline CI/CD
 
 ## Mục Lục
@@ -69,9 +69,9 @@ Sau khi hoàn thành khóa học này, bạn sẽ có thể:
 - [Azure Developer CLI là gì?](../..)
 - [Bắt Đầu Nhanh](../..)
 - [Lộ Trình Học Tập](../..)
-  - [Dành Cho Các Nhà Phát Triển AI (Khuyến Nghị Bắt Đầu Tại Đây!)](../..)
+  - [Dành Cho Nhà Phát Triển AI (Khuyến Nghị Bắt Đầu Tại Đây!)](../..)
   - [Dành Cho Sinh Viên & Người Mới Bắt Đầu](../..)
-  - [Dành Cho Các Nhà Phát Triển](../..)
+  - [Dành Cho Nhà Phát Triển](../..)
   - [Dành Cho Kỹ Sư DevOps](../..)
 - [Tài Liệu](../..)
   - [Bắt Đầu](../..)
@@ -94,7 +94,7 @@ Sau khi hoàn thành khóa học này, bạn sẽ có thể:
 Azure Developer CLI (azd) là giao diện dòng lệnh tập trung vào nhà phát triển, giúp tăng tốc quá trình xây dựng và triển khai ứng dụng lên Azure. Nó cung cấp:
 
 - **Triển khai dựa trên mẫu** - Sử dụng các mẫu được xây dựng sẵn cho các mẫu ứng dụng phổ biến
-- **Infrastructure as Code** - Quản lý tài nguyên Azure sử dụng Bicep hoặc Terraform
+- **Infrastructure as Code** - Quản lý tài nguyên Azure bằng Bicep hoặc Terraform
 - **Quy trình làm việc tích hợp** - Cung cấp, triển khai, và giám sát ứng dụng một cách liền mạch
 - **Thân thiện với nhà phát triển** - Tối ưu hóa cho năng suất và trải nghiệm của nhà phát triển
 
@@ -102,19 +102,19 @@ Azure Developer CLI (azd) là giao diện dòng lệnh tập trung vào nhà ph�
 
 **Tại Sao AZD Cho Giải Pháp AI?** AZD giải quyết các thách thức hàng đầu mà các nhà phát triển AI gặp phải:
 
-- **Mẫu Sẵn Sàng AI** - Các mẫu được cấu hình trước cho Azure OpenAI, Cognitive Services, và khối lượng công việc ML
+- **Mẫu Sẵn Sàng Cho AI** - Các mẫu được cấu hình trước cho Azure OpenAI, Cognitive Services, và khối lượng công việc ML
 - **Triển Khai AI An Toàn** - Các mẫu bảo mật tích hợp cho dịch vụ AI, khóa API, và điểm cuối mô hình
 - **Mẫu AI Sản Xuất** - Các phương pháp tốt nhất cho triển khai ứng dụng AI có khả năng mở rộng và chi phí hiệu quả
-- **Quy Trình AI End-to-End** - Từ phát triển mô hình đến triển khai sản xuất với giám sát đúng cách
-- **Tối Ưu Chi Phí** - Chiến lược phân bổ tài nguyên và mở rộng thông minh cho khối lượng công việc AI
+- **Quy Trình AI Từ Đầu Đến Cuối** - Từ phát triển mô hình đến triển khai sản xuất với giám sát phù hợp
+- **Tối Ưu Chi Phí** - Chiến lược phân bổ và mở rộng tài nguyên thông minh cho khối lượng công việc AI
 - **Tích Hợp Azure AI Foundry** - Kết nối liền mạch với danh mục mô hình và điểm cuối của AI Foundry
 
 ## Bắt Đầu Nhanh
 
 ### Yêu Cầu
-- Đăng ký Azure
+- Tài khoản Azure subscription
 - Azure CLI đã được cài đặt
-- Git (để clone mẫu)
+- Git (để clone các mẫu)
 
 ### Cài Đặt
 ```bash
@@ -150,11 +150,11 @@ azd init --template contoso-chat
 
 ## Lộ Trình Học Tập
 
-### Dành Cho Các Nhà Phát Triển AI (Khuyến Nghị Bắt Đầu Tại Đây!)
+### Dành Cho Nhà Phát Triển AI (Khuyến Nghị Bắt Đầu Tại Đây!)
 1. **Bắt Đầu Nhanh**: Thử mẫu [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 2. **Học Các Khái Niệm Cơ Bản**: [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
 3. **Thực Hành Thực Tế**: Hoàn thành [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
-4. **Sẵn Sàng Sản Xuất**: Xem lại [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
+4. **Sẵn Sàng Cho Sản Xuất**: Xem lại [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
 5. **Nâng Cao**: Triển khai mẫu doanh nghiệp [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Dành Cho Sinh Viên & Người Mới Bắt Đầu
@@ -163,7 +163,7 @@ azd init --template contoso-chat
 3. Hoàn thành [Dự Án Đầu Tiên](docs/getting-started/first-project.md)
 4. Thực hành với [Ví Dụ Ứng Dụng Web Đơn Giản](../../examples/simple-web-app)
 
-### Dành Cho Các Nhà Phát Triển
+### Dành Cho Nhà Phát Triển
 1. Xem lại [Hướng Dẫn Cấu Hình](docs/getting-started/configuration.md)
 2. Nghiên cứu [Hướng Dẫn Triển Khai](docs/deployment/deployment-guide.md)
 3. Làm việc qua [Ví Dụ Ứng Dụng Cơ Sở Dữ Liệu](../../examples/database-app)
@@ -173,7 +173,7 @@ azd init --template contoso-chat
 1. Làm chủ [Cung Cấp Tài Nguyên](docs/deployment/provisioning.md)
 2. Thực hiện [Kiểm Tra Trước Triển Khai](docs/pre-deployment/preflight-checks.md)
 3. Thực hành [Lập Kế Hoạch Dung Lượng](docs/pre-deployment/capacity-planning.md)
-4. Nâng cao [Ví Dụ Microservices](../../examples/microservices)
+4. Nâng cao với [Ví Dụ Microservices](../../examples/microservices)
 
 ## Tài Liệu
 
@@ -200,119 +200,119 @@ azd init --template contoso-chat
 
 ### Khắc Phục Sự Cố
 - [**Các Vấn Đề Thường Gặp**](docs/troubleshooting/common-issues.md) - Các vấn đề thường gặp và giải pháp
-- [**Hướng dẫn Gỡ lỗi**](docs/troubleshooting/debugging.md) - Các chiến lược gỡ lỗi từng bước  
-- [**Khắc phục sự cố liên quan đến AI**](docs/troubleshooting/ai-troubleshooting.md) - Các vấn đề về dịch vụ AI và triển khai mô hình  
+- [**Hướng dẫn gỡ lỗi**](docs/troubleshooting/debugging.md) - Chiến lược gỡ lỗi từng bước
+- [**Khắc phục sự cố liên quan đến AI**](docs/troubleshooting/ai-troubleshooting.md) - Các vấn đề về dịch vụ AI và triển khai mô hình
 
 ## Ví dụ & Mẫu
 
-### [Nổi bật: Mẫu Azure AI Foundry](https://ai.azure.com/resource/build/templates)  
-**Bắt đầu từ đây nếu bạn đang triển khai ứng dụng AI!**
+### [Nổi bật: Mẫu Azure AI Foundry](https://ai.azure.com/resource/build/templates)
+**Bắt đầu tại đây nếu bạn đang triển khai ứng dụng AI!**
 
 | Mẫu | Mô tả | Độ phức tạp | Dịch vụ |
 |----------|-------------|------------|----------|
-| [**Bắt đầu với AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tạo và triển khai ứng dụng chat cơ bản tích hợp dữ liệu và thông tin từ telemetry bằng Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
-| [**Bắt đầu với AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Tạo và triển khai ứng dụng agent cơ bản với các hành động và thông tin từ telemetry bằng Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
-| [**Tự động hóa quy trình đa-agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Nâng cao lập kế hoạch và tự động hóa nhiệm vụ bằng cách điều phối và quản lý nhóm các agent AI.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Tạo tài liệu từ dữ liệu của bạn**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tăng tốc tạo tài liệu như hợp đồng, hóa đơn và đề xuất đầu tư bằng cách tìm và tóm tắt thông tin liên quan từ dữ liệu của bạn. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
-| [**Cải thiện cuộc họp khách hàng với agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Di chuyển mã legacy sang ngôn ngữ hiện đại bằng cách tận dụng một nhóm các agents. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**Hiện đại hóa mã của bạn với agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tạo và triển khai ứng dụng chat cơ bản tích hợp dữ liệu và thông tin từ telemetry bằng Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Xây dựng agent hội thoại của bạn**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tận dụng khả năng hiểu hội thoại nâng cao để tạo và cải thiện chatbot và agents với các quy trình làm việc có thể kiểm soát và xác định. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
-| [**Khai phá thông tin từ dữ liệu hội thoại**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Cải thiện hiệu quả trung tâm liên lạc bằng cách khám phá thông tin từ các tập dữ liệu âm thanh và văn bản lớn bằng các khả năng hiểu nội dung nâng cao. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
-| [**Xử lý nội dung đa phương tiện**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Xử lý yêu cầu bồi thường, hóa đơn, hợp đồng và các tài liệu khác nhanh chóng và chính xác bằng cách trích xuất thông tin từ nội dung không có cấu trúc và ánh xạ nó sang định dạng có cấu trúc. Mẫu này hỗ trợ văn bản, hình ảnh, bảng và biểu đồ. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
+| [**Bắt đầu với AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tạo và triển khai ứng dụng chat cơ bản tích hợp với dữ liệu và thông tin giám sát của bạn bằng Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
+| [**Bắt đầu với AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Tạo và triển khai ứng dụng agent cơ bản với các hành động và thông tin giám sát bằng Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
+| [**Tự động hóa quy trình đa-agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Nâng cao lập kế hoạch và tự động hóa nhiệm vụ bằng cách điều phối và quản lý nhóm các AI agents.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Tạo tài liệu từ dữ liệu của bạn**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tăng tốc tạo tài liệu như hợp đồng, hóa đơn và đề xuất đầu tư bằng cách tìm kiếm và tóm tắt thông tin liên quan từ dữ liệu của bạn. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
+| [**Cải thiện cuộc họp khách hàng với agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Di chuyển mã legacy sang ngôn ngữ hiện đại bằng cách tận dụng nhóm các agents. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
+| [**Hiện đại hóa mã của bạn với agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tạo và triển khai ứng dụng chat cơ bản tích hợp với dữ liệu và thông tin giám sát của bạn bằng Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Xây dựng agent hội thoại của bạn**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Tận dụng khả năng hiểu hội thoại nâng cao để tạo và cải thiện chatbot và agents với quy trình làm việc có thể kiểm soát bởi con người. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
+| [**Khám phá thông tin từ dữ liệu hội thoại**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Cải thiện hiệu quả trung tâm liên lạc bằng cách khám phá thông tin từ các tập dữ liệu âm thanh và văn bản lớn sử dụng khả năng hiểu nội dung nâng cao. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
+| [**Xử lý nội dung đa phương tiện**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Xử lý yêu cầu, hóa đơn, hợp đồng và các tài liệu khác nhanh chóng và chính xác bằng cách trích xuất thông tin từ nội dung không có cấu trúc và ánh xạ nó sang định dạng có cấu trúc. Mẫu này hỗ trợ văn bản, hình ảnh, bảng và biểu đồ. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
 
-### Nổi bật: Các kịch bản E2E của Azure AI Foundry  
-**Bắt đầu từ đây nếu bạn đang triển khai ứng dụng AI!**
+### Nổi bật: Các kịch bản E2E của Azure AI Foundry
+**Bắt đầu tại đây nếu bạn đang triển khai ứng dụng AI!**
 
 | Mẫu | Mô tả | Độ phức tạp | Dịch vụ |
 |----------|-------------|------------|----------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Giao diện chat đơn giản với Azure OpenAI | ⭐ | AzureOpenAI + Container Apps |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Ứng dụng chat hỗ trợ RAG với Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Phân tích tài liệu với các dịch vụ AI | ⭐⭐ | Azure Document Intelligence + Functions |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Khung agent AI với khả năng gọi hàm | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Framework AI agent với chức năng gọi | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Chat doanh nghiệp với điều phối AI | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |
 
-### Các mẫu AZD bổ sung  
-- [**Thư mục Ví dụ**](examples/README.md) - Các ví dụ thực tế, mẫu và kịch bản thực tế  
-- [**Mẫu AZD từ Azure-Samples**](https://github.com/Azure-Samples/azd-templates) - Các mẫu chính thức từ Microsoft  
-- [**Thư viện AZD Tuyệt vời**](https://azure.github.io/awesome-azd/) - Các mẫu đóng góp từ cộng đồng  
+### Các mẫu AZD bổ sung
+- [**Thư mục ví dụ**](examples/README.md) - Các ví dụ thực tế, mẫu và kịch bản thực tế
+- [**Mẫu AZD của Azure-Samples**](https://github.com/Azure-Samples/azd-templates) - Mẫu chính thức của Microsoft  
+- [**Thư viện AZD tuyệt vời**](https://azure.github.io/awesome-azd/) - Các mẫu đóng góp từ cộng đồng
 
-### Phòng thí nghiệm & Hội thảo thực hành  
-- [**Phòng thí nghiệm Hội thảo AI**](docs/ai-foundry/ai-workshop-lab.md) - **MỚI**: Làm cho giải pháp AI của bạn có thể triển khai bằng AZD  
-- [**Hội thảo AZD cho Người mới bắt đầu**](workshop/README.md) - Tập trung vào triển khai mẫu AI Agents AZD  
+### Phòng thí nghiệm thực hành & Hội thảo
+- [**Phòng thí nghiệm hội thảo AI**](docs/ai-foundry/ai-workshop-lab.md) - **MỚI**: Làm cho giải pháp AI của bạn có thể triển khai bằng AZD
+- [**Hội thảo AZD cho người mới bắt đầu**](workshop/README.md) - Tập trung vào triển khai mẫu AZD cho AI Agents
 
-## Tài nguyên  
+## Tài nguyên
 
-### Tham khảo nhanh  
-- [**Bảng lệnh Cheat Sheet**](resources/cheat-sheet.md) - Các lệnh azd cần thiết  
-- [**Thuật ngữ**](resources/glossary.md) - Thuật ngữ Azure và azd  
-- [**Câu hỏi thường gặp**](resources/faq.md) - Các câu hỏi thường gặp  
-- [**Hướng dẫn học tập**](resources/study-guide.md) - Mục tiêu học tập toàn diện và bài tập thực hành  
+### Tham khảo nhanh
+- [**Bảng lệnh Cheat Sheet**](resources/cheat-sheet.md) - Các lệnh azd thiết yếu
+- [**Thuật ngữ**](resources/glossary.md) - Thuật ngữ Azure và azd
+- [**Câu hỏi thường gặp**](resources/faq.md) - Các câu hỏi thường gặp
+- [**Hướng dẫn học tập**](resources/study-guide.md) - Mục tiêu học tập toàn diện và bài tập thực hành
 
-### Tài nguyên bên ngoài  
-- [Tài liệu CLI dành cho nhà phát triển Azure](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Trung tâm Kiến trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Máy tính giá Azure](https://azure.microsoft.com/pricing/calculator/)  
-- [Trạng thái Azure](https://status.azure.com/)  
+### Tài nguyên bên ngoài
+- [Tài liệu CLI dành cho nhà phát triển Azure](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Trung tâm Kiến trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Máy tính giá Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Trạng thái Azure](https://status.azure.com/)
 
-## Đóng góp  
+## Đóng góp
 
-Chúng tôi hoan nghênh các đóng góp! Vui lòng đọc [Hướng dẫn Đóng góp](CONTRIBUTING.md) để biết chi tiết về:  
-- Cách gửi vấn đề và yêu cầu tính năng  
-- Hướng dẫn đóng góp mã  
-- Cải thiện tài liệu  
-- Tiêu chuẩn cộng đồng  
+Chúng tôi hoan nghênh các đóng góp! Vui lòng đọc [Hướng dẫn đóng góp](CONTRIBUTING.md) để biết chi tiết về:
+- Cách gửi vấn đề và yêu cầu tính năng
+- Hướng dẫn đóng góp mã
+- Cải thiện tài liệu
+- Tiêu chuẩn cộng đồng
 
-## Hỗ trợ  
+## Hỗ trợ
 
-- **Vấn đề**: [Báo cáo lỗi và yêu cầu tính năng](https://github.com/microsoft/azd-for-beginners/issues)  
-- **Thảo luận**: [Cộng đồng Discord Microsoft Azure - Hỏi đáp và thảo luận](https://discord.gg/microsoft-azure)  
-- **Hỗ trợ liên quan đến AI**: Tham gia [kênh #Azure](https://discord.gg/microsoft-azure) để thảo luận về AZD + AI Foundry  
-- **Email**: Dành cho các yêu cầu riêng tư  
-- **Microsoft Learn**: [Tài liệu chính thức về Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- **Vấn đề**: [Báo cáo lỗi và yêu cầu tính năng](https://github.com/microsoft/azd-for-beginners/issues)
+- **Thảo luận**: [Cộng đồng Discord Microsoft Azure - Hỏi đáp và thảo luận](https://discord.gg/microsoft-azure)
+- **Hỗ trợ liên quan đến AI**: Tham gia [kênh #Azure](https://discord.gg/microsoft-azure) để thảo luận về AZD + AI Foundry
+- **Email**: Đối với các câu hỏi riêng tư
+- **Microsoft Learn**: [Tài liệu chính thức về Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Thông tin từ cộng đồng Azure AI Foundry Discord  
+### Thông tin từ cộng đồng Discord Azure AI Foundry
 
-**Kết quả khảo sát từ kênh #Azure:**  
-- **45%** nhà phát triển muốn sử dụng AZD cho khối lượng công việc AI  
-- **Thách thức hàng đầu**: Triển khai đa dịch vụ, quản lý thông tin xác thực, sẵn sàng sản xuất  
-- **Yêu cầu nhiều nhất**: Mẫu dành riêng cho AI, hướng dẫn khắc phục sự cố, thực hành tốt nhất  
+**Kết quả khảo sát từ kênh #Azure:**
+- **45%** nhà phát triển muốn sử dụng AZD cho khối lượng công việc AI
+- **Thách thức hàng đầu**: Triển khai nhiều dịch vụ, quản lý thông tin xác thực, sẵn sàng cho sản xuất
+- **Yêu cầu nhiều nhất**: Mẫu cụ thể cho AI, hướng dẫn khắc phục sự cố, thực tiễn tốt nhất
 
-**Tham gia cộng đồng của chúng tôi để:**  
-- Chia sẻ kinh nghiệm AZD + AI của bạn và nhận hỗ trợ  
-- Truy cập sớm các mẫu AI mới  
-- Đóng góp vào thực hành triển khai AI tốt nhất  
-- Ảnh hưởng đến sự phát triển tính năng AI + AZD trong tương lai  
+**Tham gia cộng đồng của chúng tôi để:**
+- Chia sẻ kinh nghiệm AZD + AI của bạn và nhận hỗ trợ
+- Truy cập sớm các mẫu AI mới
+- Đóng góp vào thực tiễn triển khai AI tốt nhất
+- Ảnh hưởng đến sự phát triển tính năng AI + AZD trong tương lai
 
-## Giấy phép  
+## Giấy phép
 
-Dự án này được cấp phép theo Giấy phép MIT - xem tệp [LICENSE](../../LICENSE) để biết chi tiết.  
+Dự án này được cấp phép theo Giấy phép MIT - xem tệp [LICENSE](../../LICENSE) để biết chi tiết.
 
-## Các khóa học khác  
+## Các khóa học khác
 
-Nhóm của chúng tôi sản xuất các khóa học khác! Hãy xem:  
+Nhóm của chúng tôi sản xuất các khóa học khác! Hãy xem:
 
-- [**MỚI** Giao thức Ngữ cảnh Mô hình (MCP) cho Người mới bắt đầu](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Agents cho Người mới bắt đầu](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI cho Người mới bắt đầu sử dụng .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI cho Người mới bắt đầu](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI cho Người mới bắt đầu sử dụng Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML cho Người mới bắt đầu](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Khoa học Dữ liệu cho Người mới bắt đầu](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI cho Người mới bắt đầu](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [An ninh mạng cho Người mới bắt đầu](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Phát triển Web cho Người mới bắt đầu](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-- [IoT cho Người mới bắt đầu](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Phát triển XR cho Người mới bắt đầu](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Làm chủ GitHub Copilot cho Lập trình Cặp AI](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
-- [Làm chủ GitHub Copilot cho Nhà phát triển C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
-- [Chọn Cuộc phiêu lưu Copilot của bạn](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
+- [**MỚI** Giao thức ngữ cảnh mô hình (MCP) cho người mới bắt đầu](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI Agents cho người mới bắt đầu](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Generative AI cho người mới bắt đầu sử dụng .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+- [Generative AI cho người mới bắt đầu](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Generative AI cho người mới bắt đầu sử dụng Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+- [ML cho người mới bắt đầu](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+- [Khoa học dữ liệu cho người mới bắt đầu](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI cho người mới bắt đầu](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+- [An ninh mạng cho người mới bắt đầu](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
+- [Phát triển web cho người mới bắt đầu](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [IoT cho người mới bắt đầu](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+- [Phát triển XR cho người mới bắt đầu](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Làm chủ GitHub Copilot cho lập trình cặp AI](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [Làm chủ GitHub Copilot cho nhà phát triển C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+- [Chọn cuộc phiêu lưu Copilot của riêng bạn](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
 
-**Điều hướng**  
-- **Bài học tiếp theo**: [Cơ bản về AZD](docs/getting-started/azd-basics.md)  
+**Điều hướng**
+- **Bài học tiếp theo**: [Cơ bản về AZD](docs/getting-started/azd-basics.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

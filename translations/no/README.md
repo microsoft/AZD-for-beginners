@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T21:05:51+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T15:17:16+00:00",
   "source_file": "README.md",
   "language_code": "no"
 }
@@ -11,17 +11,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-for-nybegynnere](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.no.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
-Følg disse trinnene for å komme i gang med ressursene:
-1. **Fork repositoryet**: Klikk [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Klon repositoryet**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
+Følg disse stegene for å komme i gang med ressursene:
+1. **Fork Repository**: Klikk [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Klon Repository**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. [**Bli med i Azure Discord-fellesskapene og møt eksperter og andre utviklere**](https://discord.com/invite/ByRwuEEgH4)
 
 ### Støtte for flere språk
@@ -30,11 +30,11 @@ Følg disse trinnene for å komme i gang med ressursene:
 
 [French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](./README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
 
-**Hvis du ønsker å få støtte for flere oversettelser, er tilgjengelige språk listet [her](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+**Hvis du ønsker støtte for flere språk, finner du en liste over tilgjengelige språk [her](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## Introduksjon
 
-Velkommen til den omfattende guiden for Azure Developer CLI (azd). Dette repositoryet er laget for å hjelpe utviklere på alle nivåer, fra studenter til profesjonelle utviklere, med å lære og mestre Azure Developer CLI for effektive skyimplementeringer, **med et spesielt fokus på AI-applikasjonsimplementering ved bruk av Azure AI Foundry**. Denne strukturerte læringsressursen gir praktisk erfaring med Azure-skyimplementeringer, feilsøking av vanlige problemer og implementering av beste praksis for vellykkede AZD-malimplementeringer.
+Velkommen til den omfattende guiden for Azure Developer CLI (azd). Dette repositoriet er laget for å hjelpe utviklere på alle nivåer, fra studenter til profesjonelle utviklere, med å lære og mestre Azure Developer CLI for effektive skyimplementeringer, **med et spesielt fokus på AI-applikasjonsimplementering ved bruk av Azure AI Foundry**. Denne strukturerte læringsressursen gir praktisk erfaring med Azure-skyimplementeringer, feilsøking av vanlige problemer og implementering av beste praksis for vellykkede AZD-malimplementeringer.
 
 ### **Hvorfor denne guiden er viktig for AI-utviklere**
 Basert på vår nylige Azure AI Foundry Discord-fellesskapsundersøkelse, **er 45% av utviklerne interessert i å bruke AZD for AI-arbeidsbelastninger**, men møter utfordringer med:
@@ -46,12 +46,12 @@ Basert på vår nylige Azure AI Foundry Discord-fellesskapsundersøkelse, **er 4
 
 ## Læringsmål
 
-Ved å jobbe gjennom dette repositoryet vil du:
-- Mestre grunnleggende konsepter og kjerneprinsipper for Azure Developer CLI
+Ved å jobbe gjennom dette repositoriet vil du:
+- Mestre grunnleggende konsepter og kjernefunksjoner i Azure Developer CLI
 - Lære å implementere og klargjøre Azure-ressurser ved bruk av Infrastructure as Code
 - Utvikle ferdigheter i feilsøking av vanlige AZD-implementeringsproblemer
 - Forstå validering før implementering og kapasitetsplanlegging
-- Implementere sikkerhetspraksis og strategier for kostnadsoptimalisering
+- Implementere sikkerhets- og kostnadsoptimaliseringsstrategier
 - Bygge selvtillit i å implementere produksjonsklare applikasjoner til Azure
 
 ## Læringsutbytte
@@ -94,9 +94,9 @@ Etter å ha fullført dette kurset vil du kunne:
 Azure Developer CLI (azd) er et utviklerfokusert kommandolinjeverktøy som akselererer prosessen med å bygge og implementere applikasjoner til Azure. Det tilbyr:
 
 - **Malbaserte implementeringer** - Bruk ferdiglagde maler for vanlige applikasjonsmønstre
-- **Infrastructure as Code** - Administrer Azure-ressurser ved bruk av Bicep eller Terraform
+- **Infrastructure as Code** - Administrer Azure-ressurser med Bicep eller Terraform
 - **Integrerte arbeidsflyter** - Klargjør, implementer og overvåk applikasjoner sømløst
-- **Utviklervennlig** - Optimalisert for utviklerproduktivitet og opplevelse
+- **Utviklervennlig** - Optimalisert for produktivitet og brukeropplevelse for utviklere
 
 ### **AZD + Azure AI Foundry: Perfekt for AI-implementeringer**
 
@@ -151,10 +151,10 @@ azd init --template contoso-chat
 ## Læringssti
 
 ### For AI-utviklere (Anbefalt startpunkt!)
-1. **Kom i gang**: Prøv [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)-malen
+1. **Kom i gang raskt**: Prøv [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)-malen
 2. **Lær grunnleggende**: [AZD Grunnleggende](docs/getting-started/azd-basics.md) + [Azure AI Foundry-integrasjon](docs/ai-foundry/azure-ai-foundry-integration.md)
 3. **Praktisk øvelse**: Fullfør [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
-4. **Produksjonsklar**: Gå gjennom [Produksjons-AI beste praksis](docs/ai-foundry/production-ai-practices.md)
+4. **Produksjonsklar**: Gå gjennom [Beste praksis for produksjons-AI](docs/ai-foundry/production-ai-practices.md)
 5. **Avansert**: Implementer [contoso-chat](https://github.com/Azure-Samples/contoso-chat)-malen for bedrifter
 
 ### For studenter og nybegynnere
@@ -196,32 +196,32 @@ azd init --template contoso-chat
 - [**Azure AI Foundry-integrasjon**](docs/ai-foundry/azure-ai-foundry-integration.md) - Koble AZD med Azure AI Foundry-tjenester
 - [**Mønstre for AI-modellimplementering**](docs/ai-foundry/ai-model-deployment.md) - Implementer og administrer AI-modeller med AZD
 - [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Praktisk lab: Gjøre AI-løsninger AZD-klare
-- [**Produksjons-AI beste praksis**](docs/ai-foundry/production-ai-practices.md) - Sikkerhet, skalering og overvåking for AI-arbeidsbelastninger
+- [**Beste praksis for produksjons-AI**](docs/ai-foundry/production-ai-practices.md) - Sikkerhet, skalering og overvåking for AI-arbeidsbelastninger
 
 ### Feilsøking
 - [**Vanlige problemer**](docs/troubleshooting/common-issues.md) - Ofte møtte problemer og løsninger
-- [**Feilsøkingsguide**](docs/troubleshooting/debugging.md) - Steg-for-steg strategier for feilsøking  
+- [**Feilsøkingsguide**](docs/troubleshooting/debugging.md) - Steg-for-steg feilsøkingsstrategier  
 - [**AI-spesifikk feilsøking**](docs/troubleshooting/ai-troubleshooting.md) - Problemer med AI-tjenester og modellutplassering  
 
-## Eksempler og maler  
+## Eksempler og Maler  
 
 ### [Utvalgt: Azure AI Foundry-maler](https://ai.azure.com/resource/build/templates)  
-**Start her hvis du skal distribuere AI-applikasjoner!**  
+**Start her hvis du skal utplassere AI-applikasjoner!**  
 
 | Mal | Beskrivelse | Kompleksitet | Tjenester |  
 |----------|-------------|------------|----------|  
-| [**Kom i gang med AI-chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Lag og distribuer en enkel chat-applikasjon integrert med dine data og innsikt fra telemetri ved bruk av Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |  
-| [**Kom i gang med AI-agenter**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Lag og distribuer en enkel agent-applikasjon med handlinger og innsikt fra telemetri ved bruk av Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
+| [**Kom i gang med AI-chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Lag og utplasser en enkel chat-applikasjon integrert med dine data og innsikt fra telemetri ved bruk av Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |  
+| [**Kom i gang med AI-agenter**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Lag og utplasser en enkel agent-applikasjon med handlinger og innsikt fra telemetri ved bruk av Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
 | [**Automatisering av arbeidsflyt med flere agenter**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Forbedre oppgaveplanlegging og automatisering ved å orkestrere og administrere en gruppe AI-agenter.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
 | [**Generer dokumenter fra dine data**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Akselerer generering av dokumenter som kontrakter, fakturaer og investeringsforslag ved å finne og oppsummere relevant informasjon fra dine data. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|  
 | [**Forbedre kundemøter med agenter**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Migrer eldre kode til moderne språk ved å bruke et team av agenter. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |  
-| [**Moderniser koden din med agenter**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Lag og distribuer en enkel chat-applikasjon integrert med dine data og innsikt fra telemetri ved bruk av Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
+| [**Moderniser koden din med agenter**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Lag og utplasser en enkel chat-applikasjon integrert med dine data og innsikt fra telemetri ved bruk av Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
 | [**Bygg din samtaleagent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Utnytt avansert samtaleforståelse for å lage og forbedre chatbots og agenter med deterministiske og menneskekontrollerbare arbeidsflyter. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
-| [**Lås opp innsikt fra samtaledata**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Forbedre effektiviteten i kundesentre ved å avdekke innsikt fra store lyd- og tekstbaserte datasett ved bruk av avanserte innholdsanalysemuligheter. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|  
+| [**Lås opp innsikt fra samtaledata**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Forbedre effektiviteten i kundesentre ved å avdekke innsikt fra store lyd- og tekstbaserte datasett ved bruk av avanserte innholdforståelsesfunksjoner. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|  
 | [**Multimodal innholdsbehandling**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Behandle krav, fakturaer, kontrakter og andre dokumenter raskt og nøyaktig ved å trekke ut informasjon fra ustrukturert innhold og kartlegge det til et strukturert format. Denne malen støtter tekst, bilder, tabeller og grafer. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
 
 ### Utvalgt: Azure AI Foundry E2E-scenarier  
-**Start her hvis du skal distribuere AI-applikasjoner!**  
+**Start her hvis du skal utplassere AI-applikasjoner!**  
 
 | Mal | Beskrivelse | Kompleksitet | Tjenester |  
 |----------|-------------|------------|----------|  
@@ -237,13 +237,13 @@ azd init --template contoso-chat
 - [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Maler bidratt av fellesskapet  
 
 ### Praktiske laboratorier og workshops  
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - **NY**: Gjør AI-løsningene dine AZD-distribuerbare  
-- [**AZD For Beginners Workshop**](workshop/README.md) - Fokus på distribusjon av AI-agenter med AZD-maler  
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - **NY**: Gjør AI-løsningene dine AZD-utplasserbare  
+- [**AZD For Beginners Workshop**](workshop/README.md) - Fokus på utplassering av AI-agenter med AZD-maler  
 
 ## Ressurser  
 
 ### Hurtigreferanser  
-- [**Kommandosnarvei**](resources/cheat-sheet.md) - Essensielle azd-kommandoer  
+- [**Kommandosnarveiark**](resources/cheat-sheet.md) - Essensielle azd-kommandoer  
 - [**Ordliste**](resources/glossary.md) - Azure- og azd-terminologi  
 - [**FAQ**](resources/faq.md) - Ofte stilte spørsmål  
 - [**Studieguide**](resources/study-guide.md) - Omfattende læringsmål og øvelser  
@@ -256,7 +256,7 @@ azd init --template contoso-chat
 
 ## Bidra  
 
-Vi ønsker bidrag velkommen! Les vår [Bidragsguide](CONTRIBUTING.md) for detaljer om:  
+Vi ønsker bidrag velkommen! Les vår [Bidragsveiledning](CONTRIBUTING.md) for detaljer om:  
 - Hvordan sende inn problemer og funksjonsforespørsler  
 - Retningslinjer for kodebidrag  
 - Forbedringer av dokumentasjon  
@@ -274,13 +274,13 @@ Vi ønsker bidrag velkommen! Les vår [Bidragsguide](CONTRIBUTING.md) for detalj
 
 **Avstemningsresultater fra #Azure-kanalen:**  
 - **45%** av utviklere ønsker å bruke AZD for AI-arbeidsbelastninger  
-- **Største utfordringer**: Distribusjon av flere tjenester, håndtering av legitimasjon, produksjonsklarhet  
+- **Største utfordringer**: Utplassering av flere tjenester, håndtering av legitimasjon, produksjonsklarhet  
 - **Mest etterspurt**: AI-spesifikke maler, feilsøkingsguider, beste praksis  
 
 **Bli med i fellesskapet for å:**  
 - Dele dine AZD + AI-erfaringer og få hjelp  
 - Få tidlig tilgang til nye AI-maler  
-- Bidra til beste praksis for AI-distribusjon  
+- Bidra til beste praksis for AI-utplassering  
 - Påvirke fremtidig utvikling av AI + AZD-funksjoner  
 
 ## Lisens  
@@ -296,13 +296,13 @@ Vårt team produserer andre kurs! Sjekk ut:
 - [Generativ AI for nybegynnere med .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
 - [Generativ AI for nybegynnere](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Generativ AI for nybegynnere med Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML for Beginners](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Data Science for Beginners](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI for Beginners](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Cybersecurity for Beginners](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Web Dev for Beginners](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-- [IoT for Beginners](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-- [XR Development for Beginners](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [ML for nybegynnere](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Data Science for nybegynnere](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI for nybegynnere](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Cybersecurity for nybegynnere](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [Webutvikling for nybegynnere](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [IoT for nybegynnere](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [XR-utvikling for nybegynnere](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Mastering GitHub Copilot for AI Paired Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
 - [Mastering GitHub Copilot for C#/.NET Developers](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
 - [Choose Your Own Copilot Adventure](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
@@ -315,4 +315,4 @@ Vårt team produserer andre kurs! Sjekk ut:
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
