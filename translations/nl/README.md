@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T21:13:32+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T15:19:33+00:00",
   "source_file": "README.md",
   "language_code": "nl"
 }
@@ -11,13 +11,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-voor-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.nl.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
 Volg deze stappen om aan de slag te gaan met deze bronnen:
 1. **Fork de Repository**: Klik [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
@@ -37,12 +37,12 @@ Volg deze stappen om aan de slag te gaan met deze bronnen:
 Welkom bij de uitgebreide gids voor Azure Developer CLI (azd). Deze repository is ontworpen om ontwikkelaars van alle niveaus, van studenten tot professionele ontwikkelaars, te helpen leren en beheersen hoe ze Azure Developer CLI kunnen gebruiken voor efficiënte cloudimplementaties, **met speciale aandacht voor AI-applicatie-implementatie met Azure AI Foundry**. Deze gestructureerde leerbron biedt praktische ervaring met Azure-cloudimplementaties, het oplossen van veelvoorkomende problemen en het toepassen van best practices voor succesvolle AZD-template-implementaties.
 
 ### **Waarom Deze Gids Belangrijk Is Voor AI-ontwikkelaars**
-Uit een recente peiling in de Azure AI Foundry Discord-community blijkt dat **45% van de ontwikkelaars geïnteresseerd is in het gebruik van AZD voor AI-werkbelastingen**, maar uitdagingen ondervindt met:
+Uit een recente poll in de Azure AI Foundry Discord-community blijkt dat **45% van de ontwikkelaars geïnteresseerd is in het gebruik van AZD voor AI-werkbelastingen**, maar uitdagingen ondervindt met:
 - Complexe multi-service AI-architecturen
 - Best practices voor productie-AI-implementaties
 - Integratie en configuratie van Azure AI-services
 - Kostenoptimalisatie voor AI-werkbelastingen
-- Problemen oplossen bij AI-specifieke implementaties
+- Het oplossen van AI-specifieke implementatieproblemen
 
 ## Leerdoelen
 
@@ -78,7 +78,7 @@ Na het voltooien van deze cursus kun je:
   - [Implementatie & Inrichting](../..)
   - [Pre-implementatiecontroles](../..)
   - [AI & Azure AI Foundry](../..)
-  - [Problemen oplossen](../..)
+  - [Probleemoplossing](../..)
 - [Voorbeelden & Templates](../..)
   - [Uitgelicht: Azure AI Foundry Templates](../..)
   - [Uitgelicht: Azure AI Foundry E2E Scenario's](../..)
@@ -161,7 +161,7 @@ azd init --template contoso-chat
 1. Begin met [AZD Basisprincipes](docs/getting-started/azd-basics.md)
 2. Volg de [Installatiehandleiding](docs/getting-started/installation.md)
 3. Voltooi [Je Eerste Project](docs/getting-started/first-project.md)
-4. Oefen met [Eenvoudig Web App Voorbeeld](../../examples/simple-web-app)
+4. Oefen met [Eenvoudig Webapp Voorbeeld](../../examples/simple-web-app)
 
 ### Voor Ontwikkelaars
 1. Bekijk [Configuratiehandleiding](docs/getting-started/configuration.md)
@@ -184,21 +184,21 @@ azd init --template contoso-chat
 - [**Je Eerste Project**](docs/getting-started/first-project.md) - Stapsgewijze tutorial
 
 ### Implementatie & Inrichting
-- [**Implementatiehandleiding**](docs/deployment/deployment-guide.md) - Complete implementatieworkflows
-- [**Inrichting van Resources**](docs/deployment/provisioning.md) - Azure resourcebeheer
+- [**Implementatiehandleiding**](docs/deployment/deployment-guide.md) - Volledige implementatieworkflows
+- [**Inrichting van Resources**](docs/deployment/provisioning.md) - Beheer van Azure-resources
 
 ### Pre-implementatiecontroles
-- [**Capaciteitsplanning**](docs/pre-deployment/capacity-planning.md) - Validatie van Azure resourcecapaciteit
+- [**Capaciteitsplanning**](docs/pre-deployment/capacity-planning.md) - Validatie van Azure-resourcecapaciteit
 - [**SKU-selectie**](docs/pre-deployment/sku-selection.md) - Het kiezen van de juiste Azure SKU's
 - [**Pre-flight Checks**](docs/pre-deployment/preflight-checks.md) - Geautomatiseerde validatiescripts
 
 ### AI & Azure AI Foundry
 - [**Azure AI Foundry Integratie**](docs/ai-foundry/azure-ai-foundry-integration.md) - Verbind AZD met Azure AI Foundry-services
-- [**AI Model Implementatiepatronen**](docs/ai-foundry/ai-model-deployment.md) - AI-modellen implementeren en beheren met AZD
+- [**AI Model Implementatiepatronen**](docs/ai-foundry/ai-model-deployment.md) - Implementeer en beheer AI-modellen met AZD
 - [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Praktisch lab: AI-oplossingen AZD-klaar maken
 - [**Productie-AI Best Practices**](docs/ai-foundry/production-ai-practices.md) - Beveiliging, schaalbaarheid en monitoring voor AI-werkbelastingen
 
-### Problemen oplossen
+### Probleemoplossing
 - [**Veelvoorkomende Problemen**](docs/troubleshooting/common-issues.md) - Veelvoorkomende problemen en oplossingen
 - [**Debugging Gids**](docs/troubleshooting/debugging.md) - Stapsgewijze strategieën voor foutopsporing  
 - [**AI-Specifieke Probleemoplossing**](docs/troubleshooting/ai-troubleshooting.md) - Problemen met AI-diensten en modelimplementatie  
@@ -209,29 +209,29 @@ azd init --template contoso-chat
 **Begin hier als je AI-toepassingen implementeert!**  
 
 | Template | Beschrijving | Complexiteit | Diensten |  
-|----------|--------------|--------------|----------|  
-| [**Aan de slag met AI-chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Maak en implementeer een eenvoudige chattoepassing geïntegreerd met je data en telemetrie-inzichten via Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |  
-| [**Aan de slag met AI-agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Maak en implementeer een eenvoudige agenttoepassing met acties en telemetrie-inzichten via Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
+|----------|-------------|------------|----------|  
+| [**Aan de slag met AI-chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Maak en implementeer een eenvoudige chattoepassing geïntegreerd met je data en telemetrie-inzichten met Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |  
+| [**Aan de slag met AI-agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Maak en implementeer een eenvoudige agenttoepassing met acties en telemetrie-inzichten met Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
 | [**Multi-agent workflow automatisering**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Verbeter taakplanning en automatisering door een groep AI-agents te orkestreren en beheren.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
 | [**Documenten genereren uit je data**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Versnel het genereren van documenten zoals contracten, facturen en investeringsvoorstellen door relevante informatie uit je data te vinden en samen te vatten. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|  
 | [**Verbeter klantgesprekken met agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Migreer legacy-code naar moderne talen door gebruik te maken van een team van agents. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |  
-| [**Moderniseer je code met agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Maak en implementeer een eenvoudige chattoepassing geïntegreerd met je data en telemetrie-inzichten via Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
+| [**Moderniseer je code met agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Maak en implementeer een eenvoudige chattoepassing geïntegreerd met je data en telemetrie-inzichten met Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
 | [**Bouw je conversatie-agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Maak gebruik van geavanceerd conversatiebegrip om chatbots en agents te creëren en te verbeteren met deterministische en mens-controleerbare workflows. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
 | [**Ontgrendel inzichten uit conversatiedata**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Verbeter de efficiëntie van contactcenters door inzichten te verkrijgen uit grote audio- en tekstdatasets met geavanceerde contentbegripmogelijkheden. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|  
-| [**Multi-modale contentverwerking**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Verwerk claims, facturen, contracten en andere documenten snel en nauwkeurig door informatie uit ongestructureerde content te extraheren en te koppelen aan een gestructureerd formaat. Deze template ondersteunt tekst, afbeeldingen, tabellen en grafieken. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
+| [**Multi-modale contentverwerking**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Verwerk claims, facturen, contracten en andere documenten snel en nauwkeurig door informatie uit ongestructureerde content te extraheren en te mappen naar een gestructureerd formaat. Deze template ondersteunt tekst, afbeeldingen, tabellen en grafieken. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
 
 ### Uitgelicht: Azure AI Foundry E2E Scenario's  
 **Begin hier als je AI-toepassingen implementeert!**  
 
 | Template | Beschrijving | Complexiteit | Diensten |  
-|----------|--------------|--------------|----------|  
+|----------|-------------|------------|----------|  
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Eenvoudige chatinterface met Azure OpenAI | ⭐ | AzureOpenAI + Container Apps |  
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-enabled chattoepassing met Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |  
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Documentanalyse met AI-diensten | ⭐⭐ | Azure Document Intelligence + Functions |  
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | AI-agent framework met functie-aanroepen | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |  
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Enterprise chat met AI-orkestratie | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |  
 
-### Aanvullende AZD Templates  
+### Extra AZD Templates  
 - [**Voorbeelden Directory**](examples/README.md) - Praktische voorbeelden, templates en real-world scenario's  
 - [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Officiële Microsoft voorbeeldtemplates  
 - [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Door de community bijgedragen templates  
@@ -244,7 +244,7 @@ azd init --template contoso-chat
 
 ### Snelle Referenties  
 - [**Command Cheat Sheet**](resources/cheat-sheet.md) - Essentiële azd-commando's  
-- [**Glossary**](resources/glossary.md) - Azure- en azd-terminologie  
+- [**Glossarium**](resources/glossary.md) - Azure en azd-terminologie  
 - [**FAQ**](resources/faq.md) - Veelgestelde vragen  
 - [**Studiegids**](resources/study-guide.md) - Uitgebreide leerdoelen en oefenopdrachten  
 
@@ -303,7 +303,7 @@ Ons team produceert andere cursussen! Bekijk:
 - [Webontwikkeling voor Beginners](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
 - [IoT voor Beginners](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
 - [XR Ontwikkeling voor Beginners](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Mastering GitHub Copilot voor AI Paired Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [Mastering GitHub Copilot voor AI Pair Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
 - [Mastering GitHub Copilot voor C#/.NET Ontwikkelaars](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
 - [Kies Je Eigen Copilot Avontuur](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
@@ -315,4 +315,4 @@ Ons team produceert andere cursussen! Bekijk:
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, willen we u erop wijzen dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

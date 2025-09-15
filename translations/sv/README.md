@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T20:59:47+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T15:14:59+00:00",
   "source_file": "README.md",
   "language_code": "sv"
 }
@@ -11,15 +11,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.sv.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
-Följ dessa steg för att komma igång med att använda dessa resurser:
+Följ dessa steg för att komma igång med dessa resurser:
 1. **Forka Repositoriet**: Klicka [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Klona Repositoriet**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. [**Gå med i Azure Discord Communities och träffa experter och andra utvecklare**](https://discord.com/invite/ByRwuEEgH4)
@@ -57,7 +57,7 @@ Genom att arbeta igenom detta repository kommer du att:
 ## Inlärningsresultat
 
 Efter att ha slutfört denna kurs kommer du att kunna:
-- Framgångsrikt installera, konfigurera och använda Azure Developer CLI
+- Installera, konfigurera och använda Azure Developer CLI framgångsrikt
 - Skapa och distribuera applikationer med AZD-mallar
 - Felsöka autentisering, infrastruktur och distributionsproblem
 - Utföra kontroller före distribution, inklusive kapacitetsplanering och SKU-val
@@ -74,7 +74,7 @@ Efter att ha slutfört denna kurs kommer du att kunna:
   - [För utvecklare](../..)
   - [För DevOps-ingenjörer](../..)
 - [Dokumentation](../..)
-  - [Komma igång](../..)
+  - [Kom igång](../..)
   - [Distribution & Tillhandahållande](../..)
   - [Kontroller före distribution](../..)
   - [AI & Azure AI Foundry](../..)
@@ -96,7 +96,7 @@ Azure Developer CLI (azd) är ett utvecklarfokuserat kommandoradsverktyg som på
 - **Mallbaserade distributioner** - Använd förbyggda mallar för vanliga applikationsmönster
 - **Infrastructure as Code** - Hantera Azure-resurser med Bicep eller Terraform
 - **Integrerade arbetsflöden** - Smidig tillhandahållning, distribution och övervakning av applikationer
-- **Utvecklarvänligt** - Optimerat för utvecklarproduktivitet och upplevelse
+- **Utvecklarvänligt** - Optimerat för utvecklarproduktivitet och användarupplevelse
 
 ### **AZD + Azure AI Foundry: Perfekt för AI-distributioner**
 
@@ -107,7 +107,7 @@ Azure Developer CLI (azd) är ett utvecklarfokuserat kommandoradsverktyg som på
 - **Produktionsklara AI-mönster** - Bästa praxis för skalbara och kostnadseffektiva AI-applikationsdistributioner
 - **End-to-End AI-arbetsflöden** - Från modellutveckling till produktionsdistribution med korrekt övervakning
 - **Kostnadsoptimering** - Smarta resursallokerings- och skalningsstrategier för AI-arbetsbelastningar
-- **Azure AI Foundry-integration** - Smidig anslutning till AI Foundry-modellkatalog och endpoints
+- **Azure AI Foundry-integration** - Sömlös anslutning till AI Foundry-modellkatalog och endpoints
 
 ## Snabbstart
 
@@ -161,13 +161,13 @@ azd init --template contoso-chat
 1. Börja med [AZD Basics](docs/getting-started/azd-basics.md)
 2. Följ [Installationsguiden](docs/getting-started/installation.md)
 3. Slutför [Ditt första projekt](docs/getting-started/first-project.md)
-4. Öva med [Exempel på enkel webbapp](../../examples/simple-web-app)
+4. Öva med [Exempel på enkel webbapplikation](../../examples/simple-web-app)
 
 ### För utvecklare
 1. Granska [Konfigurationsguiden](docs/getting-started/configuration.md)
 2. Studera [Distributionsguiden](docs/deployment/deployment-guide.md)
-3. Arbeta igenom [Exempel på databasapp](../../examples/database-app)
-4. Utforska [Exempel på containerapp](../../examples/container-app)
+3. Arbeta igenom [Exempel på databasapplikation](../../examples/database-app)
+4. Utforska [Exempel på containerapplikation](../../examples/container-app)
 
 ### För DevOps-ingenjörer
 1. Bemästra [Tillhandahållande av resurser](docs/deployment/provisioning.md)
@@ -177,7 +177,7 @@ azd init --template contoso-chat
 
 ## Dokumentation
 
-### Komma igång
+### Kom igång
 - [**AZD Basics**](docs/getting-started/azd-basics.md) - Kärnkoncept och terminologi
 - [**Installation & Setup**](docs/getting-started/installation.md) - Plattformsspecifika installationsguider
 - [**Konfiguration**](docs/getting-started/configuration.md) - Miljöinställningar och autentisering
@@ -189,18 +189,18 @@ azd init --template contoso-chat
 
 ### Kontroller före distribution
 - [**Kapacitetsplanering**](docs/pre-deployment/capacity-planning.md) - Validering av Azure-resurskapacitet
-- [**SKU-val**](docs/pre-deployment/sku-selection.md) - Välja rätt Azure-SKUs
+- [**SKU-val**](docs/pre-deployment/sku-selection.md) - Välja rätt Azure-SKU:er
 - [**Kontroller före flygning**](docs/pre-deployment/preflight-checks.md) - Automatiserade valideringsskript
 
 ### AI & Azure AI Foundry
 - [**Azure AI Foundry Integration**](docs/ai-foundry/azure-ai-foundry-integration.md) - Anslut AZD med Azure AI Foundry-tjänster
 - [**AI-modellens distributionsmönster**](docs/ai-foundry/ai-model-deployment.md) - Distribuera och hantera AI-modeller med AZD
 - [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Praktisk labb: Göra AI-lösningar AZD-klara
-- [**Produktionsbästa praxis för AI**](docs/ai-foundry/production-ai-practices.md) - Säkerhet, skalning och övervakning för AI-arbetsbelastningar
+- [**Produktionsklara AI-bästa praxis**](docs/ai-foundry/production-ai-practices.md) - Säkerhet, skalning och övervakning för AI-arbetsbelastningar
 
 ### Felsökning
 - [**Vanliga problem**](docs/troubleshooting/common-issues.md) - Vanligt förekommande problem och lösningar
-- [**Felsökningsguide**](docs/troubleshooting/debugging.md) - Steg-för-steg strategier för felsökning  
+- [**Felsökningsguide**](docs/troubleshooting/debugging.md) - Steg-för-steg-strategier för felsökning  
 - [**AI-specifik felsökning**](docs/troubleshooting/ai-troubleshooting.md) - Problem med AI-tjänster och modellimplementering  
 
 ## Exempel & Mallar  
@@ -218,7 +218,7 @@ azd init --template contoso-chat
 | [**Modernisera din kod med agenter**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Skapa och implementera en grundläggande chattapplikation integrerad med din data och telemetriinsikter med Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
 | [**Bygg din konversationsagent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Utnyttja avancerad konversationsförståelse för att skapa och förbättra chatbots och agenter med deterministiska och mänskligt kontrollerbara arbetsflöden. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
 | [**Lås upp insikter från konversationsdata**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Förbättra effektiviteten i kontaktcenter genom att avslöja insikter från stora ljud- och textbaserade datamängder med avancerade innehållsförståelsefunktioner. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|  
-| [**Multi-modal innehållsbehandling**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Behandla anspråk, fakturor, kontrakt och andra dokument snabbt och noggrant genom att extrahera information från ostrukturerat innehåll och kartlägga det till ett strukturerat format. Denna mall stöder text, bilder, tabeller och grafer. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
+| [**Bearbetning av multimodalt innehåll**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Bearbeta krav, fakturor, kontrakt och andra dokument snabbt och noggrant genom att extrahera information från ostrukturerat innehåll och kartlägga det till ett strukturerat format. Denna mall stöder text, bilder, tabeller och grafer. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
 
 ### Utvald: Azure AI Foundry E2E-scenarier  
 **Börja här om du ska implementera AI-applikationer!**  
@@ -257,7 +257,7 @@ azd init --template contoso-chat
 ## Bidra  
 
 Vi välkomnar bidrag! Läs vår [Bidragsguide](CONTRIBUTING.md) för detaljer om:  
-- Hur du skickar in problem och funktionsförfrågningar  
+- Hur man skickar in problem och funktionsförfrågningar  
 - Riktlinjer för kodbidrag  
 - Förbättringar av dokumentation  
 - Community-standarder  
@@ -292,17 +292,17 @@ Detta projekt är licensierat under MIT-licensen - se [LICENSE](../../LICENSE)-f
 Vårt team producerar andra kurser! Kolla in:  
 
 - [**NY** Model Context Protocol (MCP) För Nybörjare](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI-agenter för Nybörjare](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generativ AI för Nybörjare med .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generativ AI för Nybörjare](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generativ AI för Nybörjare med Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML för Nybörjare](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Data Science för Nybörjare](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI för Nybörjare](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Cybersäkerhet för Nybörjare](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Webbutveckling för Nybörjare](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-- [IoT för Nybörjare](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-- [XR-utveckling för Nybörjare](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI-agenter för nybörjare](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generativ AI för nybörjare med .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [Generativ AI för nybörjare](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generativ AI för nybörjare med Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [ML för nybörjare](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Data Science för nybörjare](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI för nybörjare](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Cybersäkerhet för nybörjare](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [Webbutveckling för nybörjare](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [IoT för nybörjare](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [XR-utveckling för nybörjare](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Bemästra GitHub Copilot för AI-parprogrammering](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
 - [Bemästra GitHub Copilot för C#/.NET-utvecklare](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
 - [Välj ditt eget Copilot-äventyr](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
@@ -310,9 +310,9 @@ Vårt team producerar andra kurser! Kolla in:
 ---
 
 **Navigering**  
-- **Nästa lektion**: [AZD Grunder](docs/getting-started/azd-basics.md)  
+- **Nästa lektion**: [AZD-grunder](docs/getting-started/azd-basics.md)  
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

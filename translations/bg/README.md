@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T22:29:48+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T15:32:58+00:00",
   "source_file": "README.md",
   "language_code": "bg"
 }
@@ -11,18 +11,18 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-за-начинаещи](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.bg.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
-Следвайте тези стъпки, за да започнете да използвате ресурсите:
-1. **Fork на хранилището**: Кликнете [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Клониране на хранилището**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. [**Присъединете се към Azure Discord общностите и се срещнете с експерти и други разработчици**](https://discord.com/invite/ByRwuEEgH4)
+Следвайте тези стъпки, за да започнете да използвате тези ресурси:
+1. **Направете Fork на хранилището**: Кликнете [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Клонирайте хранилището**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. [**Присъединете се към Azure Discord общностите и се свържете с експерти и други разработчици**](https://discord.com/invite/ByRwuEEgH4)
 
 ### Поддръжка на много езици
 
@@ -34,7 +34,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Въведение
 
-Добре дошли в изчерпателното ръководство за Azure Developer CLI (azd). Това хранилище е създадено, за да помогне на разработчици от всички нива - от студенти до професионалисти - да научат и овладеят Azure Developer CLI за ефективни облачни внедрения, **с особен акцент върху внедряването на AI приложения с помощта на Azure AI Foundry**. Този структуриран учебен ресурс предоставя практически опит с облачни внедрения в Azure, решаване на често срещани проблеми и прилагане на най-добрите практики за успешни внедрения на AZD шаблони.
+Добре дошли в изчерпателното ръководство за Azure Developer CLI (azd). Това хранилище е създадено, за да помогне на разработчици от всички нива - от студенти до професионалисти - да научат и овладеят Azure Developer CLI за ефективни облачни внедрения, **с особен акцент върху внедряването на AI приложения с помощта на Azure AI Foundry**. Този структуриран учебен ресурс предоставя практически опит с внедрявания в Azure, решаване на често срещани проблеми и прилагане на най-добрите практики за успешни внедрения на AZD шаблони.
 
 ### **Защо това ръководство е важно за AI разработчици**
 Според последната анкета в Azure AI Foundry Discord общността, **45% от разработчиците се интересуват от използването на AZD за AI работни натоварвания**, но срещат трудности с:
@@ -93,21 +93,21 @@ CO_OP_TRANSLATOR_METADATA:
 
 Azure Developer CLI (azd) е команден интерфейс, ориентиран към разработчици, който ускорява процеса на създаване и внедряване на приложения в Azure. Той предоставя:
 
-- **Внедряване на базата на шаблони** - Използване на предварително изградени шаблони за често срещани модели на приложения
-- **Infrastructure as Code** - Управление на ресурси в Azure с помощта на Bicep или Terraform
+- **Внедряване на базата на шаблони** - Използвайте предварително изградени шаблони за често срещани модели на приложения
+- **Infrastructure as Code** - Управлявайте ресурси в Azure с помощта на Bicep или Terraform
 - **Интегрирани работни потоци** - Безпроблемно осигуряване, внедряване и мониторинг на приложения
 - **Ориентиран към разработчици** - Оптимизиран за продуктивност и опит на разработчиците
 
-### **AZD + Azure AI Foundry: Идеално за AI внедрения**
+### **AZD + Azure AI Foundry: Идеален за AI внедрения**
 
 **Защо AZD за AI решения?** AZD адресира основните предизвикателства, пред които са изправени AI разработчиците:
 
 - **Шаблони, готови за AI** - Предварително конфигурирани шаблони за Azure OpenAI, Cognitive Services и ML работни натоварвания
 - **Сигурни AI внедрения** - Вградени модели за сигурност за AI услуги, API ключове и крайни точки на модели
-- **Модели за AI в продукция** - Най-добри практики за мащабируеми и икономически ефективни AI приложения
-- **Крайни AI работни потоци** - От разработка на модели до внедряване в продукция с правилен мониторинг
+- **Модели за AI в продукция** - Най-добри практики за мащабируеми и икономически ефективни AI внедрения
+- **Крайни AI работни потоци** - От разработка на модели до внедряване в продукция с подходящ мониторинг
 - **Оптимизация на разходите** - Умно разпределение на ресурси и стратегии за мащабиране за AI работни натоварвания
-- **Интеграция с Azure AI Foundry** - Безпроблемна връзка с каталога на модели и крайни точки на AI Foundry
+- **Интеграция с Azure AI Foundry** - Безпроблемна връзка с каталога на модели и крайните точки на AI Foundry
 
 ## Бърз старт
 
@@ -155,7 +155,7 @@ azd init --template contoso-chat
 2. **Научете основите**: [AZD Основи](docs/getting-started/azd-basics.md) + [Интеграция с Azure AI Foundry](docs/ai-foundry/azure-ai-foundry-integration.md)
 3. **Практически опит**: Завършете [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
 4. **Готовност за продукция**: Прегледайте [Най-добри практики за AI в продукция](docs/ai-foundry/production-ai-practices.md)
-5. **Напреднали**: Внедрете [contoso-chat](https://github.com/Azure-Samples/contoso-chat) шаблон за предприятия
+5. **Напреднали**: Внедрете [contoso-chat](https://github.com/Azure-Samples/contoso-chat) корпоративен шаблон
 
 ### За студенти и начинаещи
 1. Започнете с [AZD Основи](docs/getting-started/azd-basics.md)
@@ -189,11 +189,11 @@ azd init --template contoso-chat
 
 ### Проверки преди внедряване
 - [**Планиране на капацитета**](docs/pre-deployment/capacity-planning.md) - Валидация на капацитета на ресурси в Azure
-- [**Избор на SKU**](docs/pre-deployment/sku-selection.md) - Избор на подходящи SKU в Azure
+- [**Избор на SKU**](docs/pre-deployment/sku-selection.md) - Избор на подходящи SKU за Azure
 - [**Проверки преди внедряване**](docs/pre-deployment/preflight-checks.md) - Автоматизирани скриптове за валидация
 
 ### AI и Azure AI Foundry
-- [**Интеграция с Azure AI Foundry**](docs/ai-foundry/azure-ai-foundry-integration.md) - Свързване на AZD с услуги на Azure AI Foundry
+- [**Интеграция с Azure AI Foundry**](docs/ai-foundry/azure-ai-foundry-integration.md) - Свързване на AZD с услугите на Azure AI Foundry
 - [**Модели за внедряване на AI**](docs/ai-foundry/ai-model-deployment.md) - Внедряване и управление на AI модели с AZD
 - [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Практическа лаборатория: Подготовка на AI решения за AZD
 - [**Най-добри практики за AI в продукция**](docs/ai-foundry/production-ai-practices.md) - Сигурност, мащабиране и мониторинг за AI работни натоварвания
@@ -212,11 +212,11 @@ azd init --template contoso-chat
 |----------|-------------|------------|----------|  
 | [**Започнете с AI чат**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Създайте и внедрете основно чат приложение, интегрирано с вашите данни и телеметрични прозрения, използвайки Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |  
 | [**Започнете с AI агенти**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Създайте и внедрете основно приложение за агенти с действия и телеметрични прозрения, използвайки Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
-| [**Автоматизация на работни процеси с много агенти**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Подобрете планирането на задачи и автоматизацията чрез оркестриране и управление на група AI агенти.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
-| [**Генериране на документи от вашите данни**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Ускорете генерирането на документи като договори, фактури и инвестиционни предложения, като намерите и обобщите релевантна информация от вашите данни. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|  
+| [**Автоматизация на работни процеси с множество агенти**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Подобрете планирането на задачи и автоматизацията чрез оркестриране и управление на група AI агенти.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
+| [**Генериране на документи от вашите данни**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Ускорете създаването на документи като договори, фактури и инвестиционни предложения, като намерите и обобщите релевантна информация от вашите данни. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|  
 | [**Подобрете клиентските срещи с агенти**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Мигрирайте наследствен код към модерни езици, използвайки екип от агенти. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |  
 | [**Модернизирайте вашия код с агенти**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Създайте и внедрете основно чат приложение, интегрирано с вашите данни и телеметрични прозрения, използвайки Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
-| [**Създайте вашия разговорен агент**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Използвайте усъвършенствано разбиране на разговори, за да създадете и подобрите чатботове и агенти с детерминирани и контролируеми от човека работни процеси. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
+| [**Създайте вашия разговорен агент**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Използвайте усъвършенствано разбиране на разговори, за да създадете и подобрите чатботове и агенти с детерминистични и контролируеми от човека работни процеси. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
 | [**Отключете прозрения от разговорни данни**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Подобрете ефективността на контактния център, като откриете прозрения от големи аудио и текстови набори данни, използвайки усъвършенствани възможности за разбиране на съдържание. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|  
 | [**Мултимодална обработка на съдържание**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Обработвайте искове, фактури, договори и други документи бързо и точно, като извличате информация от неструктурирано съдържание и я преобразувате в структурирана форма. Този шаблон поддържа текст, изображения, таблици и графики. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|  
 
@@ -237,7 +237,7 @@ azd init --template contoso-chat
 - [**Галерия Awesome AZD**](https://azure.github.io/awesome-azd/) - Шаблони, създадени от общността  
 
 ### Практически лаборатории и работилници  
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - **НОВО**: Направете вашите AI решения готови за внедряване с AZD  
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - **НОВО**: Направете вашите AI решения готови за AZD внедряване  
 - [**AZD за начинаещи работилница**](workshop/README.md) - Фокус върху внедряването на шаблони за AI агенти с AZD  
 
 ## Ресурси  
@@ -246,7 +246,7 @@ azd init --template contoso-chat
 - [**Команден лист**](resources/cheat-sheet.md) - Основни azd команди  
 - [**Речник**](resources/glossary.md) - Терминология на Azure и azd  
 - [**Често задавани въпроси**](resources/faq.md) - Често задавани въпроси  
-- [**Ръководство за обучение**](resources/study-guide.md) - Изчерпателни учебни цели и практически упражнения  
+- [**Ръководство за обучение**](resources/study-guide.md) - Обширни учебни цели и практически упражнения  
 
 ### Външни ресурси  
 - [Документация за Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
@@ -264,7 +264,7 @@ azd init --template contoso-chat
 
 ## Поддръжка  
 
-- **Проблеми**: [Докладвайте за грешки и заявявайте функции](https://github.com/microsoft/azd-for-beginners/issues)  
+- **Проблеми**: [Докладвайте за грешки и поискайте функции](https://github.com/microsoft/azd-for-beginners/issues)  
 - **Дискусии**: [Общност на Microsoft Azure в Discord - Q&A и дискусии](https://discord.gg/microsoft-azure)  
 - **AI-специфична поддръжка**: Присъединете се към [#Azure канала](https://discord.gg/microsoft-azure) за дискусии относно AZD + AI Foundry  
 - **Имейл**: За лични запитвания  
@@ -274,8 +274,8 @@ azd init --template contoso-chat
 
 **Резултати от анкета в #Azure канала:**  
 - **45%** от разработчиците искат да използват AZD за AI работни натоварвания  
-- **Основни предизвикателства**: Внедряване на много услуги, управление на идентификационни данни, готовност за производство  
-- **Най-много заявени**: AI-специфични шаблони, ръководства за отстраняване на грешки, добри практики  
+- **Основни предизвикателства**: Внедряване на множество услуги, управление на идентификационни данни, готовност за производство  
+- **Най-много искания**: AI-специфични шаблони, ръководства за отстраняване на грешки, добри практики  
 
 **Присъединете се към нашата общност, за да:**  
 - Споделите вашия опит с AZD + AI и да получите помощ  
@@ -285,7 +285,7 @@ azd init --template contoso-chat
 
 ## Лиценз  
 
-Този проект е лицензиран под MIT лиценз - вижте файла [LICENSE](../../LICENSE) за подробности.  
+Този проект е лицензиран под MIT License - вижте файла [LICENSE](../../LICENSE) за подробности.  
 
 ## Други курсове  
 
@@ -315,4 +315,4 @@ azd init --template contoso-chat
 ---
 
 **Отказ от отговорност**:  
-Този документ е преведен с помощта на AI услуга за превод [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи може да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Ние не носим отговорност за недоразумения или погрешни интерпретации, произтичащи от използването на този превод.
+Този документ е преведен с помощта на AI услуга за превод [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи може да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Не носим отговорност за недоразумения или погрешни интерпретации, произтичащи от използването на този превод.

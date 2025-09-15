@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T16:48:41+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T14:42:42+00:00",
   "source_file": "README.md",
   "language_code": "fr"
 }
@@ -11,22 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-pour-débutants](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.fr.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
-
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
-
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
-
 Suivez ces étapes pour commencer à utiliser ces ressources :
-1. **Forkez le dépôt** : Cliquez sur [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Clonez le dépôt** : `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. [**Rejoignez les communautés Azure Discord et rencontrez des experts et développeurs**](https://discord.com/invite/ByRwuEEgH4)
+1. **Forker le Référentiel** : Cliquez sur [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Cloner le Référentiel** :   `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. [**Rejoignez les Communautés Discord Azure et rencontrez des experts et d'autres développeurs**](https://discord.com/invite/ByRwuEEgH4)
 
 ### Support Multilingue
 
-#### Pris en charge via GitHub Action (Automatisé et toujours à jour)
+#### Pris en charge via GitHub Action (Automatisé & Toujours à Jour)
 
 [Français](./README.md) | [Espagnol](../es/README.md) | [Allemand](../de/README.md) | [Russe](../ru/README.md) | [Arabe](../ar/README.md) | [Persan (Farsi)](../fa/README.md) | [Ourdou](../ur/README.md) | [Chinois (Simplifié)](../zh/README.md) | [Chinois (Traditionnel, Macao)](../mo/README.md) | [Chinois (Traditionnel, Hong Kong)](../hk/README.md) | [Chinois (Traditionnel, Taïwan)](../tw/README.md) | [Japonais](../ja/README.md) | [Coréen](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Népalais](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portugais (Portugal)](../pt/README.md) | [Portugais (Brésil)](../br/README.md) | [Italien](../it/README.md) | [Polonais](../pl/README.md) | [Turc](../tr/README.md) | [Grec](../el/README.md) | [Thaï](../th/README.md) | [Suédois](../sv/README.md) | [Danois](../da/README.md) | [Norvégien](../no/README.md) | [Finnois](../fi/README.md) | [Néerlandais](../nl/README.md) | [Hébreu](../he/README.md) | [Vietnamien](../vi/README.md) | [Indonésien](../id/README.md) | [Malais](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hongrois](../hu/README.md) | [Tchèque](../cs/README.md) | [Slovaque](../sk/README.md) | [Roumain](../ro/README.md) | [Bulgare](../bg/README.md) | [Serbe (Cyrillique)](../sr/README.md) | [Croate](../hr/README.md) | [Slovène](../sl/README.md) | [Ukrainien](../uk/README.md) | [Birman (Myanmar)](../my/README.md)
 
@@ -34,56 +26,56 @@ Suivez ces étapes pour commencer à utiliser ces ressources :
 
 ## Introduction
 
-Bienvenue dans le guide complet pour Azure Developer CLI (azd). Ce dépôt est conçu pour aider les développeurs de tous niveaux, des étudiants aux professionnels, à apprendre et maîtriser Azure Developer CLI pour des déploiements cloud efficaces, **avec un accent particulier sur le déploiement d'applications d'IA utilisant Azure AI Foundry**. Cette ressource d'apprentissage structurée offre une expérience pratique avec les déploiements cloud Azure, la résolution des problèmes courants et la mise en œuvre des meilleures pratiques pour des déploiements réussis de modèles AZD.
+Bienvenue dans le guide complet pour Azure Developer CLI (azd). Ce référentiel est conçu pour aider les développeurs de tous niveaux, des étudiants aux professionnels, à apprendre et maîtriser Azure Developer CLI pour des déploiements cloud efficaces, **avec un accent particulier sur le déploiement d'applications d'IA en utilisant Azure AI Foundry**. Cette ressource d'apprentissage structurée offre une expérience pratique avec les déploiements cloud Azure, la résolution des problèmes courants et la mise en œuvre des meilleures pratiques pour des déploiements réussis de modèles AZD.
 
-### **Pourquoi ce guide est important pour les développeurs IA**
-Selon un sondage récent de la communauté Discord Azure AI Foundry, **45 % des développeurs souhaitent utiliser AZD pour les charges de travail IA** mais rencontrent des difficultés avec :
+### **Pourquoi ce Guide est Important pour les Développeurs IA**
+Selon notre récent sondage auprès de la communauté Discord Azure AI Foundry, **45% des développeurs souhaitent utiliser AZD pour des charges de travail IA** mais rencontrent des difficultés avec :
 - Des architectures IA complexes multi-services
 - Les meilleures pratiques de déploiement IA en production
 - L'intégration et la configuration des services Azure AI
 - L'optimisation des coûts pour les charges de travail IA
 - La résolution des problèmes spécifiques aux déploiements IA
 
-## Objectifs d'apprentissage
+## Objectifs d'Apprentissage
 
-En travaillant à travers ce dépôt, vous allez :
-- Maîtriser les fondamentaux et concepts clés d'Azure Developer CLI
-- Apprendre à déployer et provisionner des ressources Azure en utilisant l'infrastructure comme code
-- Développer des compétences en résolution de problèmes pour les déploiements AZD
+En travaillant à travers ce référentiel, vous allez :
+- Maîtriser les fondamentaux et les concepts clés d'Azure Developer CLI
+- Apprendre à déployer et provisionner des ressources Azure en utilisant l'Infrastructure as Code
+- Développer des compétences en résolution de problèmes pour les déploiements AZD courants
 - Comprendre la validation avant déploiement et la planification de capacité
 - Mettre en œuvre les meilleures pratiques de sécurité et d'optimisation des coûts
 - Gagner en confiance pour déployer des applications prêtes pour la production sur Azure
 
-## Résultats d'apprentissage
+## Résultats d'Apprentissage
 
 Après avoir terminé ce cours, vous serez capable de :
 - Installer, configurer et utiliser Azure Developer CLI avec succès
 - Créer et déployer des applications en utilisant des modèles AZD
 - Résoudre les problèmes d'authentification, d'infrastructure et de déploiement
 - Effectuer des vérifications avant déploiement, y compris la planification de capacité et la sélection de SKU
-- Mettre en œuvre les meilleures pratiques de surveillance, sécurité et gestion des coûts
+- Mettre en œuvre les meilleures pratiques de surveillance, de sécurité et de gestion des coûts
 - Intégrer les workflows AZD dans des pipelines CI/CD
 
-## Table des matières
+## Table des Matières
 
 - [Qu'est-ce qu'Azure Developer CLI ?](../..)
-- [Démarrage rapide](../..)
-- [Parcours d'apprentissage](../..)
-  - [Pour les développeurs IA (Commencez ici !)](../..)
-  - [Pour les étudiants et débutants](../..)
-  - [Pour les développeurs](../..)
-  - [Pour les ingénieurs DevOps](../..)
+- [Démarrage Rapide](../..)
+- [Parcours d'Apprentissage](../..)
+  - [Pour les Développeurs IA (Commencez ici !)](../..)
+  - [Pour les Étudiants & Débutants](../..)
+  - [Pour les Développeurs](../..)
+  - [Pour les Ingénieurs DevOps](../..)
 - [Documentation](../..)
-  - [Premiers pas](../..)
-  - [Déploiement et provisionnement](../..)
-  - [Vérifications avant déploiement](../..)
-  - [IA et Azure AI Foundry](../..)
-  - [Résolution de problèmes](../..)
-- [Exemples et modèles](../..)
-  - [En vedette : Modèles Azure AI Foundry](../..)
-  - [En vedette : Scénarios E2E Azure AI Foundry](../..)
-  - [Modèles AZD supplémentaires](../..)
-  - [Ateliers pratiques et laboratoires](../..)
+  - [Premiers Pas](../..)
+  - [Déploiement & Provisionnement](../..)
+  - [Vérifications Avant Déploiement](../..)
+  - [IA & Azure AI Foundry](../..)
+  - [Résolution de Problèmes](../..)
+- [Exemples & Modèles](../..)
+  - [En Vedette : Modèles Azure AI Foundry](../..)
+  - [En Vedette : Scénarios E2E Azure AI Foundry](../..)
+  - [Modèles AZD Supplémentaires](../..)
+  - [Ateliers Pratiques](../..)
 - [Ressources](../..)
 - [Contribuer](../..)
 - [Support](../..)
@@ -94,22 +86,22 @@ Après avoir terminé ce cours, vous serez capable de :
 Azure Developer CLI (azd) est une interface en ligne de commande centrée sur les développeurs qui accélère le processus de création et de déploiement d'applications sur Azure. Elle offre :
 
 - **Déploiements basés sur des modèles** - Utilisez des modèles préconstruits pour des schémas d'application courants
-- **Infrastructure comme code** - Gérez les ressources Azure avec Bicep ou Terraform
+- **Infrastructure as Code** - Gérez les ressources Azure avec Bicep ou Terraform
 - **Workflows intégrés** - Provisionnez, déployez et surveillez les applications de manière transparente
 - **Conçu pour les développeurs** - Optimisé pour la productivité et l'expérience des développeurs
 
-### **AZD + Azure AI Foundry : Idéal pour les déploiements IA**
+### **AZD + Azure AI Foundry : Idéal pour les Déploiements IA**
 
-**Pourquoi AZD pour les solutions IA ?** AZD répond aux principaux défis rencontrés par les développeurs IA :
+**Pourquoi AZD pour les Solutions IA ?** AZD répond aux principaux défis rencontrés par les développeurs IA :
 
-- **Modèles prêts pour l'IA** - Modèles préconfigurés pour Azure OpenAI, Cognitive Services et les charges de travail ML
-- **Déploiements IA sécurisés** - Modèles de sécurité intégrés pour les services IA, clés API et points de terminaison de modèles
-- **Schémas IA en production** - Meilleures pratiques pour des déploiements d'applications IA évolutifs et rentables
+- **Modèles Prêts pour l'IA** - Modèles préconfigurés pour Azure OpenAI, Cognitive Services et les charges de travail ML
+- **Déploiements IA Sécurisés** - Modèles de sécurité intégrés pour les services IA, les clés API et les points de terminaison des modèles
+- **Schémas IA en Production** - Meilleures pratiques pour des déploiements d'applications IA évolutifs et rentables
 - **Workflows IA de bout en bout** - Du développement de modèles au déploiement en production avec une surveillance appropriée
-- **Optimisation des coûts** - Stratégies intelligentes d'allocation et de mise à l'échelle des ressources pour les charges de travail IA
-- **Intégration Azure AI Foundry** - Connexion transparente au catalogue de modèles et points de terminaison d'AI Foundry
+- **Optimisation des Coûts** - Stratégies intelligentes d'allocation et de mise à l'échelle des ressources pour les charges de travail IA
+- **Intégration Azure AI Foundry** - Connexion transparente au catalogue de modèles et aux points de terminaison d'AI Foundry
 
-## Démarrage rapide
+## Démarrage Rapide
 
 ### Prérequis
 - Abonnement Azure
@@ -125,7 +117,7 @@ powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' 
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### Votre premier déploiement
+### Votre Premier Déploiement
 ```bash
 # Initialize a new project
 azd init --template todo-nodejs-mongo
@@ -134,7 +126,7 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-### Votre premier déploiement IA
+### Votre Premier Déploiement IA
 ```bash
 # Initialize an AI-powered chat application with Azure OpenAI
 azd init --template azure-search-openai-demo
@@ -148,88 +140,88 @@ azd init --template ai-document-processing
 azd init --template contoso-chat
 ```
 
-## Parcours d'apprentissage
+## Parcours d'Apprentissage
 
-### Pour les développeurs IA (Commencez ici !)
-1. **Démarrage rapide** : Essayez le modèle [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
-2. **Apprenez les fondamentaux** : [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
-3. **Pratiquez** : Complétez le [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
-4. **Prêt pour la production** : Consultez les [Meilleures pratiques IA en production](docs/ai-foundry/production-ai-practices.md)
-5. **Avancé** : Déployez le modèle entreprise [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+### Pour les Développeurs IA (Commencez ici !)
+1. **Démarrage Rapide** : Essayez le modèle [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+2. **Apprenez les Fondamentaux** : [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
+3. **Pratiquez** : Complétez [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
+4. **Prêt pour la Production** : Consultez [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
+5. **Avancé** : Déployez le modèle d'entreprise [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-### Pour les étudiants et débutants
+### Pour les Étudiants & Débutants
 1. Commencez avec [AZD Basics](docs/getting-started/azd-basics.md)
-2. Suivez le [Guide d'installation](docs/getting-started/installation.md)
-3. Complétez [Votre premier projet](docs/getting-started/first-project.md)
-4. Pratiquez avec l'[Exemple d'application web simple](../../examples/simple-web-app)
+2. Suivez le [Guide d'Installation](docs/getting-started/installation.md)
+3. Complétez [Votre Premier Projet](docs/getting-started/first-project.md)
+4. Pratiquez avec [Exemple d'Application Web Simple](../../examples/simple-web-app)
 
-### Pour les développeurs
-1. Consultez le [Guide de configuration](docs/getting-started/configuration.md)
-2. Étudiez le [Guide de déploiement](docs/deployment/deployment-guide.md)
-3. Travaillez sur l'[Exemple d'application avec base de données](../../examples/database-app)
-4. Explorez l'[Exemple d'application conteneurisée](../../examples/container-app)
+### Pour les Développeurs
+1. Consultez le [Guide de Configuration](docs/getting-started/configuration.md)
+2. Étudiez le [Guide de Déploiement](docs/deployment/deployment-guide.md)
+3. Travaillez sur [Exemple d'Application Base de Données](../../examples/database-app)
+4. Explorez [Exemple d'Application Conteneur](../../examples/container-app)
 
-### Pour les ingénieurs DevOps
-1. Maîtrisez le [Provisionnement des ressources](docs/deployment/provisioning.md)
-2. Implémentez les [Vérifications préalables](docs/pre-deployment/preflight-checks.md)
-3. Pratiquez la [Planification de capacité](docs/pre-deployment/capacity-planning.md)
-4. Avancé : [Exemple de microservices](../../examples/microservices)
+### Pour les Ingénieurs DevOps
+1. Maîtrisez [Provisioning Resources](docs/deployment/provisioning.md)
+2. Implémentez [Pre-flight Checks](docs/pre-deployment/preflight-checks.md)
+3. Pratiquez [Capacity Planning](docs/pre-deployment/capacity-planning.md)
+4. Avancé [Exemple Microservices](../../examples/microservices)
 
 ## Documentation
 
-### Premiers pas
-- [**AZD Basics**](docs/getting-started/azd-basics.md) - Concepts et terminologie de base
-- [**Installation et configuration**](docs/getting-started/installation.md) - Guides d'installation spécifiques à la plateforme
+### Premiers Pas
+- [**AZD Basics**](docs/getting-started/azd-basics.md) - Concepts clés et terminologie
+- [**Installation & Configuration**](docs/getting-started/installation.md) - Guides d'installation spécifiques à la plateforme
 - [**Configuration**](docs/getting-started/configuration.md) - Configuration de l'environnement et authentification
-- [**Votre premier projet**](docs/getting-started/first-project.md) - Tutoriel pas à pas
+- [**Votre Premier Projet**](docs/getting-started/first-project.md) - Tutoriel étape par étape
 
-### Déploiement et provisionnement
-- [**Guide de déploiement**](docs/deployment/deployment-guide.md) - Workflows de déploiement complets
-- [**Provisionnement des ressources**](docs/deployment/provisioning.md) - Gestion des ressources Azure
+### Déploiement & Provisionnement
+- [**Guide de Déploiement**](docs/deployment/deployment-guide.md) - Workflows de déploiement complets
+- [**Provisioning Resources**](docs/deployment/provisioning.md) - Gestion des ressources Azure
 
-### Vérifications avant déploiement
-- [**Planification de capacité**](docs/pre-deployment/capacity-planning.md) - Validation de la capacité des ressources Azure
-- [**Sélection de SKU**](docs/pre-deployment/sku-selection.md) - Choisir les bons SKU Azure
-- [**Vérifications préalables**](docs/pre-deployment/preflight-checks.md) - Scripts de validation automatisés
+### Vérifications Avant Déploiement
+- [**Capacity Planning**](docs/pre-deployment/capacity-planning.md) - Validation de la capacité des ressources Azure
+- [**SKU Selection**](docs/pre-deployment/sku-selection.md) - Choisir les bons SKU Azure
+- [**Pre-flight Checks**](docs/pre-deployment/preflight-checks.md) - Scripts de validation automatisés
 
-### IA et Azure AI Foundry
-- [**Intégration Azure AI Foundry**](docs/ai-foundry/azure-ai-foundry-integration.md) - Connectez AZD aux services Azure AI Foundry
-- [**Schémas de déploiement de modèles IA**](docs/ai-foundry/ai-model-deployment.md) - Déployez et gérez des modèles IA avec AZD
-- [**Laboratoire IA**](docs/ai-foundry/ai-workshop-lab.md) - Atelier pratique : Rendre les solutions IA compatibles avec AZD
-- [**Meilleures pratiques IA en production**](docs/ai-foundry/production-ai-practices.md) - Sécurité, mise à l'échelle et surveillance des charges de travail IA
+### IA & Azure AI Foundry
+- [**Azure AI Foundry Integration**](docs/ai-foundry/azure-ai-foundry-integration.md) - Connectez AZD aux services Azure AI Foundry
+- [**AI Model Deployment Patterns**](docs/ai-foundry/ai-model-deployment.md) - Déployez et gérez des modèles IA avec AZD
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Atelier pratique : Rendre les solutions IA prêtes pour AZD
+- [**Production AI Best Practices**](docs/ai-foundry/production-ai-practices.md) - Sécurité, mise à l'échelle et surveillance des charges de travail IA
 
-### Résolution de problèmes
-- [**Problèmes courants**](docs/troubleshooting/common-issues.md) - Problèmes fréquemment rencontrés et solutions
+### Résolution de Problèmes
+- [**Problèmes Courants**](docs/troubleshooting/common-issues.md) - Problèmes fréquemment rencontrés et solutions
 - [**Guide de Débogage**](docs/troubleshooting/debugging.md) - Stratégies de débogage étape par étape  
-- [**Résolution de Problèmes Spécifiques à l'IA**](docs/troubleshooting/ai-troubleshooting.md) - Problèmes liés aux services et au déploiement de modèles IA  
+- [**Résolution des Problèmes Spécifiques à l'IA**](docs/troubleshooting/ai-troubleshooting.md) - Problèmes liés aux services et au déploiement de modèles IA  
 
-## Exemples & Modèles
+## Exemples & Modèles  
 
 ### [À la Une : Modèles Azure AI Foundry](https://ai.azure.com/resource/build/templates)  
-**Commencez ici si vous déployez des applications IA !**
+**Commencez ici si vous déployez des applications IA !**  
 
-| Modèle | Description | Complexité | Services |
-|----------|-------------|------------|----------|
-| [**Démarrer avec le chat IA**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Créez et déployez une application de chat basique intégrée à vos données et insights de télémétrie en utilisant Azure Container Apps |⭐⭐ | AzureOpenAI + API d'inférence de modèle Azure AI + Azure AI Search + Azure Container Apps + Application Insights |
-| [**Démarrer avec les agents IA**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Créez et déployez une application d'agent basique avec des actions et des insights de télémétrie en utilisant Azure Container Apps. |⭐⭐ | Service d'agent Azure AI + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights |
-| [**Automatisation des flux de travail multi-agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Améliorez la planification des tâches et l'automatisation en orchestrant et en gérant un groupe d'agents IA. |⭐⭐⭐ | AzureOpenAI + Service d'agent Azure AI + Semantic Kernel + Azure CosmosDB + Azure Container Apps |
-| [**Générer des documents à partir de vos données**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Accélérez la création de documents tels que des contrats, factures et propositions d'investissement en trouvant et résumant les informations pertinentes de vos données. |⭐⭐⭐ | AzureOpenAI + Azure AI Search + Services Azure AI + Azure CosmosDB |
-| [**Améliorer les réunions clients avec des agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Migrez du code hérité vers des langages modernes en utilisant une équipe d'agents. |⭐⭐⭐ | AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**Moderniser votre code avec des agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Créez et déployez une application de chat basique intégrée à vos données et insights de télémétrie en utilisant Azure Container Apps. |⭐⭐⭐ | AzureOpenAI + Service d'agent Azure + Semantic Kernel + Azure CosmosDB + Azure Container Apps |
-| [**Construire votre agent conversationnel**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Exploitez une compréhension conversationnelle avancée pour créer et améliorer des chatbots et agents avec des flux de travail déterministes et contrôlables par l'humain. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry |
-| [**Découvrir des insights à partir de données conversationnelles**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Améliorez l'efficacité des centres de contact en découvrant des insights à partir de grands ensembles de données audio et textuelles grâce à des capacités avancées de compréhension de contenu. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Service d'agent Azure + Compréhension de contenu IA |
-| [**Traitement de contenu multimodal**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Traitez rapidement et avec précision des réclamations, factures, contrats et autres documents en extrayant des informations de contenu non structuré et en les mappant à un format structuré. Ce modèle prend en charge le texte, les images, les tableaux et les graphiques. |⭐⭐⭐⭐ | AzureOpenAI + Compréhension de contenu Azure + Azure CosmosDB + Azure Container Apps |
+| Modèle | Description | Complexité | Services |  
+|----------|-------------|------------|----------|  
+| [**Commencer avec le chat IA**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Créez et déployez une application de chat basique intégrée à vos données et insights de télémétrie en utilisant Azure Container Apps |⭐⭐ | AzureOpenAI + API d'Inférence de Modèle Azure AI + Azure AI Search + Azure Container Apps + Application Insights |  
+| [**Commencer avec les agents IA**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Créez et déployez une application d'agent basique avec des actions et des insights de télémétrie en utilisant Azure Container Apps. |⭐⭐ | Service d'Agent Azure AI + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|  
+| [**Automatisation des flux de travail multi-agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Améliorez la planification des tâches et l'automatisation en orchestrant et en gérant un groupe d'agents IA.|⭐⭐⭐ | AzureOpenAI + Service d'Agent Azure AI + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
+| [**Générer des documents à partir de vos données**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Accélérez la génération de documents tels que des contrats, factures et propositions d'investissement en trouvant et en résumant les informations pertinentes de vos données. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Services Azure AI + Azure CosmosDB|  
+| [**Améliorer les réunions clients avec des agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Migrez du code hérité vers des langages modernes en utilisant une équipe d'agents. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Base de données SQL Azure |  
+| [**Moderniser votre code avec des agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Créez et déployez une application de chat basique intégrée à vos données et insights de télémétrie en utilisant Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Service d'Agent Azure + Semantic Kernel + Azure CosmosDB + Azure Container Apps|  
+| [**Construire votre agent conversationnel**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Exploitez une compréhension conversationnelle avancée pour créer et améliorer des chatbots et agents avec des flux de travail déterministes et contrôlables par l'humain. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|  
+| [**Découvrir des insights à partir de données conversationnelles**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Améliorez l'efficacité des centres de contact en découvrant des insights à partir de grands ensembles de données audio et textuelles grâce à des capacités avancées de compréhension de contenu. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Service d'Agent Azure + Compréhension de Contenu AI|  
+| [**Traitement de contenu multimodal**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Traitez rapidement et avec précision des réclamations, factures, contrats et autres documents en extrayant des informations de contenu non structuré et en les mappant à un format structuré. Ce modèle prend en charge le texte, les images, les tableaux et les graphiques. |⭐⭐⭐⭐ | AzureOpenAI + Compréhension de Contenu Azure + Azure CosmosDB + Azure Container Apps|  
 
 ### À la Une : Scénarios E2E Azure AI Foundry  
-**Commencez ici si vous déployez des applications IA !**
+**Commencez ici si vous déployez des applications IA !**  
 
-| Modèle | Description | Complexité | Services |
-|----------|-------------|------------|----------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Interface de chat simple avec Azure OpenAI | ⭐ | AzureOpenAI + Container Apps |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Application de chat activée par RAG avec Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Analyse de documents avec des services IA | ⭐⭐ | Intelligence Documentaire Azure + Functions |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Framework d'agent IA avec appel de fonctions | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Chat d'entreprise avec orchestration IA | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |
+| Modèle | Description | Complexité | Services |  
+|----------|-------------|------------|----------|  
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Interface de chat simple avec Azure OpenAI | ⭐ | AzureOpenAI + Container Apps |  
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Application de chat activée par RAG avec Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |  
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Analyse de documents avec des services IA | ⭐⭐ | Intelligence Documentaire Azure + Functions |  
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Framework d'agent IA avec appel de fonctions | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |  
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Chat d'entreprise avec orchestration IA | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |  
 
 ### Modèles AZD Supplémentaires  
 - [**Répertoire d'Exemples**](examples/README.md) - Exemples pratiques, modèles et scénarios réels  
@@ -237,10 +229,10 @@ azd init --template contoso-chat
 - [**Galerie Awesome AZD**](https://azure.github.io/awesome-azd/) - Modèles proposés par la communauté  
 
 ### Ateliers Pratiques & Labs  
-- [**Lab Atelier IA**](docs/ai-foundry/ai-workshop-lab.md) - **NOUVEAU** : Rendre vos solutions IA déployables avec AZD  
-- [**Atelier AZD pour Débutants**](workshop/README.md) - Focus sur le déploiement des modèles d'agents IA avec AZD  
+- [**Lab Atelier IA**](docs/ai-foundry/ai-workshop-lab.md) - **NOUVEAU** : Rendez vos solutions IA déployables avec AZD  
+- [**Atelier AZD pour Débutants**](workshop/README.md) - Focus sur le déploiement de modèles d'agents IA avec AZD  
 
-## Ressources
+## Ressources  
 
 ### Références Rapides  
 - [**Fiche de Commandes**](resources/cheat-sheet.md) - Commandes essentielles azd  
@@ -256,9 +248,9 @@ azd init --template contoso-chat
 
 ## Contribuer  
 
-Nous accueillons vos contributions ! Veuillez lire notre [Guide de Contribution](CONTRIBUTING.md) pour plus de détails sur :  
+Nous accueillons les contributions ! Veuillez lire notre [Guide de Contribution](CONTRIBUTING.md) pour des détails sur :  
 - Comment soumettre des problèmes et des demandes de fonctionnalités  
-- Lignes directrices pour les contributions de code  
+- Directives pour les contributions de code  
 - Améliorations de la documentation  
 - Normes communautaires  
 
@@ -270,16 +262,16 @@ Nous accueillons vos contributions ! Veuillez lire notre [Guide de Contribution]
 - **Email** : Pour des demandes privées  
 - **Microsoft Learn** : [Documentation officielle CLI Azure Developer](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
-### Insights Communautaires du Discord Azure AI Foundry  
+### Insights Communautaires de Discord Azure AI Foundry  
 
-**Résultats des Sondages sur le canal #Azure :**  
+**Résultats des Sondages du Canal #Azure :**  
 - **45%** des développeurs souhaitent utiliser AZD pour les charges de travail IA  
-- **Défis principaux** : Déploiements multi-services, gestion des identifiants, préparation à la production  
+- **Principaux défis** : Déploiements multi-services, gestion des identifiants, préparation à la production  
 - **Demandes les plus fréquentes** : Modèles spécifiques à l'IA, guides de résolution de problèmes, meilleures pratiques  
 
 **Rejoignez notre communauté pour :**  
 - Partager vos expériences AZD + IA et obtenir de l'aide  
-- Accéder aux aperçus des nouveaux modèles IA  
+- Accéder à des aperçus anticipés des nouveaux modèles IA  
 - Contribuer aux meilleures pratiques de déploiement IA  
 - Influencer le développement futur des fonctionnalités IA + AZD  
 

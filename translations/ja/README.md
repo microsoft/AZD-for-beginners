@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee9a026a572535444287d531dbd75d78",
-  "translation_date": "2025-09-12T16:52:09+00:00",
+  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
+  "translation_date": "2025-09-15T14:55:55+00:00",
   "source_file": "README.md",
   "language_code": "ja"
 }
@@ -11,13 +11,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.ja.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/?WT.mc_id=academic-105485-koreyst)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/?WT.mc_id=academic-105485-koreyst)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 
-![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
 以下の手順に従って、これらのリソースを使い始めましょう：
 1. **リポジトリをフォークする**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork) をクリック
@@ -34,10 +34,10 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## はじめに
 
-Azure Developer CLI (azd) の包括的なガイドへようこそ。このリポジトリは、学生からプロフェッショナルな開発者まで、Azure Developer CLIを効率的なクラウド展開のために学び、習得するための支援を目的としています。特に、Azure AI Foundryを使用したAIアプリケーション展開に焦点を当てています。この構造化された学習リソースは、Azureクラウド展開の実践的な経験、一般的な問題のトラブルシューティング、成功するAZDテンプレート展開のベストプラクティスを提供します。
+Azure Developer CLI (azd) の包括的なガイドへようこそ。このリポジトリは、学生からプロフェッショナルな開発者まで、すべてのレベルの開発者がAzure Developer CLIを学び、効率的なクラウド展開を実現するための支援を目的としています。特に、Azure AI Foundryを使用したAIアプリケーション展開に焦点を当てています。この構造化された学習リソースは、Azureクラウド展開の実践的な経験、一般的な問題のトラブルシューティング、成功するAZDテンプレート展開のベストプラクティスを提供します。
 
 ### **AI開発者にとってこのガイドが重要な理由**
-最近のAzure AI Foundry Discordコミュニティの調査によると、**45%の開発者がAIワークロードにAZDを使用することに興味を持っています**が、以下の課題に直面しています：
+最近のAzure AI Foundry Discordコミュニティの投票によると、**45%の開発者がAIワークロードにAZDを使用することに興味を持っています**が、以下の課題に直面しています：
 - 複雑なマルチサービスAIアーキテクチャ
 - 本番環境でのAI展開のベストプラクティス
 - Azure AIサービスの統合と設定
@@ -52,7 +52,7 @@ Azure Developer CLI (azd) の包括的なガイドへようこそ。このリポ
 - 一般的なAZD展開問題のトラブルシューティングスキルを習得
 - 展開前の検証と容量計画を理解
 - セキュリティのベストプラクティスとコスト最適化戦略を実装
-- Azureに本番環境対応のアプリケーションを展開する自信を構築
+- 本番環境でのアプリケーションをAzureに展開する自信を構築
 
 ## 学習成果
 
@@ -61,7 +61,7 @@ Azure Developer CLI (azd) の包括的なガイドへようこそ。このリポ
 - AZDテンプレートを使用してアプリケーションを作成および展開
 - 認証、インフラストラクチャ、展開の問題をトラブルシューティング
 - 容量計画やSKU選択を含む展開前チェックを実行
-- 監視、セキュリティ、コスト管理のベストプラクティスを実装
+- モニタリング、セキュリティ、コスト管理のベストプラクティスを実装
 - AZDワークフローをCI/CDパイプラインに統合
 
 ## 目次
@@ -91,21 +91,21 @@ Azure Developer CLI (azd) の包括的なガイドへようこそ。このリポ
 
 ## Azure Developer CLIとは？
 
-Azure Developer CLI (azd) は、Azureへのアプリケーションの構築と展開プロセスを加速する開発者向けのコマンドラインインターフェイスです。以下を提供します：
+Azure Developer CLI (azd) は、Azureへのアプリケーション構築と展開プロセスを加速する開発者向けのコマンドラインインターフェイスです。以下を提供します：
 
 - **テンプレートベースの展開** - 一般的なアプリケーションパターンのための事前構築テンプレートを使用
-- **インフラストラクチャコード** - BicepやTerraformを使用してAzureリソースを管理
-- **統合ワークフロー** - アプリケーションのプロビジョニング、展開、監視をシームレスに実行
+- **インフラストラクチャコード** - BicepまたはTerraformを使用してAzureリソースを管理
+- **統合ワークフロー** - アプリケーションのプロビジョニング、展開、モニタリングをシームレスに実行
 - **開発者向け** - 開発者の生産性と体験を最適化
 
 ### **AZD + Azure AI Foundry: AI展開に最適**
 
-**AIソリューションにAZDを選ぶ理由** AZDはAI開発者が直面する主要な課題に対応します：
+**なぜAIソリューションにAZDが適しているのか？** AZDはAI開発者が直面する主要な課題に対応します：
 
 - **AI対応テンプレート** - Azure OpenAI、Cognitive Services、MLワークロード向けの事前設定テンプレート
 - **安全なAI展開** - AIサービス、APIキー、モデルエンドポイントのための組み込みセキュリティパターン
-- **本番環境AIパターン** - スケーラブルでコスト効率の良いAIアプリケーション展開のベストプラクティス
-- **エンドツーエンドAIワークフロー** - モデル開発から適切な監視を伴う本番展開まで
+- **本番環境AIパターン** - スケーラブルでコスト効率の高いAIアプリケーション展開のベストプラクティス
+- **エンドツーエンドAIワークフロー** - モデル開発から適切なモニタリングを伴う本番展開まで
 - **コスト最適化** - AIワークロードのスマートなリソース割り当てとスケーリング戦略
 - **Azure AI Foundry統合** - AI Foundryモデルカタログとエンドポイントへのシームレスな接続
 
@@ -154,14 +154,14 @@ azd init --template contoso-chat
 1. **クイックスタート**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) テンプレートを試す
 2. **基本を学ぶ**: [AZDの基本](docs/getting-started/azd-basics.md) + [Azure AI Foundry統合](docs/ai-foundry/azure-ai-foundry-integration.md)
 3. **実践練習**: [AIワークショップラボ](docs/ai-foundry/ai-workshop-lab.md) を完了
-4. **本番環境対応**: [本番AIのベストプラクティス](docs/ai-foundry/production-ai-practices.md) を確認
-5. **応用**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat) エンタープライズテンプレートを展開
+4. **本番環境準備**: [本番AIベストプラクティス](docs/ai-foundry/production-ai-practices.md) を確認
+5. **応用編**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat) エンタープライズテンプレートを展開
 
 ### 学生 & 初心者向け
 1. [AZDの基本](docs/getting-started/azd-basics.md) から始める
-2. [インストールガイド](docs/getting-started/installation.md) を確認
+2. [インストールガイド](docs/getting-started/installation.md) を読む
 3. [初めてのプロジェクト](docs/getting-started/first-project.md) を完了
-4. [シンプルなWebアプリの例](../../examples/simple-web-app) を練習
+4. [シンプルなWebアプリの例](../../examples/simple-web-app) で練習
 
 ### 開発者向け
 1. [設定ガイド](docs/getting-started/configuration.md) を確認
@@ -173,7 +173,7 @@ azd init --template contoso-chat
 1. [リソースのプロビジョニング](docs/deployment/provisioning.md) を習得
 2. [事前チェック](docs/pre-deployment/preflight-checks.md) を実装
 3. [容量計画](docs/pre-deployment/capacity-planning.md) を練習
-4. 応用 [マイクロサービスの例](../../examples/microservices)
+4. 応用編 [マイクロサービスの例](../../examples/microservices)
 
 ## ドキュメント
 
@@ -193,13 +193,13 @@ azd init --template contoso-chat
 - [**事前チェック**](docs/pre-deployment/preflight-checks.md) - 自動化された検証スクリプト
 
 ### AI & Azure AI Foundry
-- [**Azure AI Foundry統合**](docs/ai-foundry/azure-ai-foundry-integration.md) - AZDとAzure AI Foundryサービスを接続
+- [**Azure AI Foundry統合**](docs/ai-foundry/azure-ai-foundry-integration.md) - AZDをAzure AI Foundryサービスと接続
 - [**AIモデル展開パターン**](docs/ai-foundry/ai-model-deployment.md) - AZDを使用したAIモデルの展開と管理
-- [**AIワークショップラボ**](docs/ai-foundry/ai-workshop-lab.md) - 実践ラボ: AIソリューションをAZD対応にする
-- [**本番AIのベストプラクティス**](docs/ai-foundry/production-ai-practices.md) - AIワークロードのセキュリティ、スケーリング、監視
+- [**AIワークショップラボ**](docs/ai-foundry/ai-workshop-lab.md) - ハンズオンラボ: AIソリューションをAZD対応にする
+- [**本番AIベストプラクティス**](docs/ai-foundry/production-ai-practices.md) - AIワークロードのセキュリティ、スケーリング、モニタリング
 
 ### トラブルシューティング
-- [**一般的な問題**](docs/troubleshooting/common-issues.md) - よくある問題とその解決方法
+- [**一般的な問題**](docs/troubleshooting/common-issues.md) - よくある問題とその解決策
 - [**デバッグガイド**](docs/troubleshooting/debugging.md) - ステップバイステップのデバッグ戦略  
 - [**AI特有のトラブルシューティング**](docs/troubleshooting/ai-troubleshooting.md) - AIサービスとモデル展開の問題  
 
@@ -211,14 +211,14 @@ azd init --template contoso-chat
 | テンプレート | 説明 | 複雑さ | サービス |
 |----------|-------------|------------|----------|
 | [**AIチャットの始め方**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Azure Container Appsを使用して、データとテレメトリインサイトを統合した基本的なチャットアプリケーションを作成・展開します。 |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
-| [**AIエージェントの始め方**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Azure Container Appsを使用して、アクションとテレメトリインサイトを備えた基本的なエージェントアプリケーションを作成・展開します。 |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
-| [**マルチエージェントワークフローの自動化**](https://github.com/Azure-Samples/get-started-with-ai-chat) | AIエージェントのグループを編成・管理することで、タスク計画と自動化を強化します。|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**データから文書を生成**](https://github.com/Azure-Samples/get-started-with-ai-chat) | データから関連情報を見つけて要約することで、契約書、請求書、投資提案書などの文書生成を加速します。 |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
-| [**エージェントでクライアント会議を改善**](https://github.com/Azure-Samples/get-started-with-ai-chat) | レガシーコードをモダンな言語に移行するためにエージェントチームを活用します。 |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**エージェントでコードをモダン化**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Azure Container Appsを使用して、データとテレメトリインサイトを統合した基本的なチャットアプリケーションを作成・展開します。 |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**会話型エージェントを構築**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 高度な会話理解を活用して、決定論的かつ人間が制御可能なワークフローを備えたチャットボットやエージェントを作成・強化します。 |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
-| [**会話データからインサイトを引き出す**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 大規模な音声およびテキストデータセットからインサイトを引き出し、コンタクトセンターの効率を向上させます。 |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
-| [**マルチモーダルコンテンツ処理**](https://github.com/Azure-Samples/get-started-with-ai-chat) | テキスト、画像、表、グラフを含む非構造化コンテンツから情報を抽出し、構造化形式にマッピングすることで、請求書、契約書などの文書を迅速かつ正確に処理します。 |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
+| [**AIエージェントの始め方**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Azure Container Appsを使用して、アクションとテレメトリインサイトを備えた基本的なエージェントアプリケーションを作成・展開します。 |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights |
+| [**マルチエージェントのワークフロー自動化**](https://github.com/Azure-Samples/get-started-with-ai-chat) | AIエージェントのグループを編成・管理することで、タスク計画と自動化を強化します。 |⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps |
+| [**データから文書を生成**](https://github.com/Azure-Samples/get-started-with-ai-chat) | データから関連情報を見つけて要約することで、契約書、請求書、投資提案書などの文書生成を加速します。 |⭐⭐⭐ | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB |
+| [**エージェントを活用してクライアント会議を改善**](https://github.com/Azure-Samples/get-started-with-ai-chat) | レガシーコードをモダンな言語に移行するためにエージェントチームを活用します。 |⭐⭐⭐ | AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
+| [**エージェントを活用してコードをモダン化**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Azure Container Appsを使用して、データとテレメトリインサイトを統合した基本的なチャットアプリケーションを作成・展開します。 |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps |
+| [**会話型エージェントを構築**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 高度な会話理解を活用して、決定論的かつ人間が制御可能なワークフローを備えたチャットボットやエージェントを作成・強化します。 |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry |
+| [**会話データからインサイトを引き出す**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 大規模な音声およびテキストデータセットからインサイトを引き出し、コンタクトセンターの効率を向上させます。 |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding |
+| [**マルチモーダルコンテンツ処理**](https://github.com/Azure-Samples/get-started-with-ai-chat) | テキスト、画像、表、グラフを含む非構造化コンテンツから情報を抽出し、構造化形式にマッピングすることで、請求書、契約書などの文書を迅速かつ正確に処理します。 |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps |
 
 ### 注目: Azure AI Foundry E2Eシナリオ  
 **AIアプリケーションを展開する場合はここから始めましょう！**
@@ -232,13 +232,13 @@ azd init --template contoso-chat
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | AIオーケストレーションを備えたエンタープライズチャット | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |
 
 ### 追加のAZDテンプレート  
-- [**サンプルディレクトリ**](examples/README.md) - 実践的なサンプル、テンプレート、実際のシナリオ  
+- [**サンプルディレクトリ**](examples/README.md) - 実践的な例、テンプレート、実際のシナリオ  
 - [**Azure-Samples AZDテンプレート**](https://github.com/Azure-Samples/azd-templates) - Microsoft公式サンプルテンプレート  
 - [**Awesome AZDギャラリー**](https://azure.github.io/awesome-azd/) - コミュニティ提供のテンプレート  
 
 ### ハンズオンラボ & ワークショップ  
 - [**AIワークショップラボ**](docs/ai-foundry/ai-workshop-lab.md) - **NEW**: AIソリューションをAZDで展開可能にする方法  
-- [**AZD初心者向けワークショップ**](workshop/README.md) - AIエージェントAZDテンプレート展開に焦点を当てた内容  
+- [**AZD初心者向けワークショップ**](workshop/README.md) - AIエージェントAZDテンプレートの展開に焦点を当てた内容  
 
 ## リソース
 
@@ -265,8 +265,8 @@ azd init --template contoso-chat
 ## サポート
 
 - **問題**: [バグ報告と機能リクエスト](https://github.com/microsoft/azd-for-beginners/issues)  
-- **ディスカッション**: [Microsoft Azure Discord コミュニティ Q&Aとディスカッション](https://discord.gg/microsoft-azure)  
-- **AI特有のサポート**: AZD + AI Foundryディスカッションのための[#Azureチャンネル](https://discord.gg/microsoft-azure)に参加  
+- **ディスカッション**: [Microsoft Azure Discord コミュニティQ&Aとディスカッション](https://discord.gg/microsoft-azure)  
+- **AI特有のサポート**: AZD + AI Foundryのディスカッションには[#Azureチャンネル](https://discord.gg/microsoft-azure)に参加してください  
 - **メール**: 非公開の問い合わせ用  
 - **Microsoft Learn**: [公式Azure Developer CLIドキュメント](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
@@ -285,27 +285,27 @@ azd init --template contoso-chat
 
 ## ライセンス
 
-このプロジェクトはMITライセンスの下で提供されています。詳細は[LICENSE](../../LICENSE)ファイルをご覧ください。  
+このプロジェクトはMITライセンスの下で提供されています。詳細については[LICENSE](../../LICENSE)ファイルをご覧ください。
 
 ## その他のコース
 
-私たちのチームは他にもコースを提供しています！以下をご覧ください:  
+私たちのチームは他にもコースを提供しています！以下をご覧ください:
 
-- [**NEW** モデルコンテキストプロトコル (MCP) 初心者向け](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [**NEW** モデルコンテキストプロトコル(MCP)初心者向け](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AIエージェント初心者向け](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [.NETを使用した生成AI初心者向け](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [生成AI初心者向け](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Javaを使用した生成AI初心者向け](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML初心者向け](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [データサイエンス初心者向け](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI初心者向け](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [サイバーセキュリティ初心者向け](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Web開発初心者向け](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-- [IoT初心者向け](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-- [XR開発初心者向け](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [GitHub Copilotを活用したAIペアプログラミングのマスター](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
-- [C#/.NET開発者向けGitHub Copilotのマスター](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
-- [GitHub Copilotアドベンチャーを選ぼう](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
+- [.NETを使用した初心者向け生成AI](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [初心者向け生成AI](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Javaを使用した初心者向け生成AI](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [初心者向け機械学習](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [初心者向けデータサイエンス](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [初心者向けAI](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [初心者向けサイバーセキュリティ](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [初心者向けWeb開発](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [初心者向けIoT](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [初心者向けXR開発](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [GitHub Copilotを活用したAIペアプログラミングの習得](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [C#/.NET開発者向けGitHub Copilotの習得](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+- [GitHub Copilotの冒険を選ぼう](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
 ---
 
@@ -315,4 +315,4 @@ azd init --template contoso-chat
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。
