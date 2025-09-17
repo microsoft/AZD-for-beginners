@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:28:17+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:15:34+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "nl"
 }
 -->
 # Installatie- en Configuratiehandleiding
+
+**Vorige:** [Hoofddocumentatie](../../README.md) | **Volgende:** [AZD Basisprincipes](azd-basics.md)
 
 ## Introductie
 
@@ -17,7 +19,7 @@ Deze uitgebreide handleiding begeleidt je bij het installeren en configureren va
 
 Aan het einde van deze les kun je:
 - Azure Developer CLI succesvol installeren op je besturingssysteem
-- Authenticatie met Azure instellen via verschillende methoden
+- Authenticatie met Azure configureren via verschillende methoden
 - Je ontwikkelomgeving instellen met de benodigde vereisten
 - Verschillende installatiemogelijkheden begrijpen en weten wanneer je welke moet gebruiken
 - Veelvoorkomende installatie- en configuratieproblemen oplossen
@@ -126,7 +128,7 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Installatie Verifiëren
+## ✅ Installatie verifiëren
 
 Na installatie, verifieer dat azd correct werkt:
 
@@ -146,7 +148,7 @@ Verwachte output:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Authenticatie Instellen
+## Authenticatie instellen
 
 ### Azure CLI Authenticatie (Aanbevolen)
 ```bash
@@ -177,9 +179,9 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configuratie
+## Configuratie
 
-### Globale Configuratie
+### Globale configuratie
 ```bash
 # Set default subscription
 azd config set defaults.subscription <subscription-id>
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE-integratie
+## IDE-integratie
 
 ### Visual Studio Code
 Installeer de Azure Developer CLI-extensie:
@@ -236,11 +238,11 @@ Maak een `.devcontainer/devcontainer.json`:
 2. Configureer Azure-credentials
 3. Gebruik de geïntegreerde terminal voor azd-commando's
 
-## 🐛 Problemen met Installatie Oplossen
+## 🐛 Problemen oplossen bij installatie
 
-### Veelvoorkomende Problemen
+### Veelvoorkomende problemen
 
-#### Toegang Geweigerd (Windows)
+#### Toegang geweigerd (Windows)
 ```powershell
 # Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -260,7 +262,7 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Netwerk-/Proxyproblemen
+#### Netwerk-/proxyproblemen
 ```bash
 # Configure proxy
 azd config set http.proxy http://proxy:8080
@@ -281,7 +283,7 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### Meer Hulp Krijgen
+### Meer hulp krijgen
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -294,15 +296,15 @@ azd logs
 azd info
 ```
 
-## azd Bijwerken
+## azd bijwerken
 
-### Automatische Updates
+### Automatische updates
 azd geeft een melding wanneer er updates beschikbaar zijn:
 ```bash
 azd version --check-for-updates
 ```
 
-### Handmatige Updates
+### Handmatige updates
 
 **Windows (winget):**
 ```cmd
@@ -319,28 +321,26 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## Volgende Stappen
+## Volgende stappen
 
 1. **Voltooi authenticatie**: Zorg ervoor dat je toegang hebt tot je Azure-abonnement
-2. **Probeer je eerste implementatie**: Volg de [Eerste Project Handleiding](first-project.md)
+2. **Probeer je eerste implementatie**: Volg de [Eerste Projecthandleiding](first-project.md)
 3. **Verken templates**: Bekijk beschikbare templates met `azd template list`
 4. **Configureer je IDE**: Stel je ontwikkelomgeving in
 
 ## Ondersteuning
 
-Als je problemen tegenkomt:
-- [Officiële Documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Problemen Melden](https://github.com/Azure/azure-dev/issues)
-- [Community Discussies](https://github.com/Azure/azure-dev/discussions)
-- [Azure Ondersteuning](https://azure.microsoft.com/support/)
+Als je problemen ondervindt:
+- [Officiële documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Problemen melden](https://github.com/Azure/azure-dev/issues)
+- [Communitydiscussies](https://github.com/Azure/azure-dev/discussions)
+- [Azure-ondersteuning](https://azure.microsoft.com/support/)
 
 ---
 
-**Navigatie**
-- **Vorige Les**: [AZD Basisprincipes](azd-basics.md)
-- **Volgende Les**: [Configuratie](configuration.md)
+**Vorige:** [Hoofddocumentatie](../../README.md) | **Volgende:** [AZD Basisprincipes](azd-basics.md)
 
-**Installatie Voltooid!** Ga verder naar [Je Eerste Project](first-project.md) om te beginnen met bouwen met azd.
+**Installatie voltooid!** Ga verder naar [Je Eerste Project](first-project.md) om te beginnen met bouwen met azd.
 
 ---
 

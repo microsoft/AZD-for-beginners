@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-10T06:02:09+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T22:08:32+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "en"
 }
 -->
 # Installation & Setup Guide
 
+**Previous:** [Main Documentation](../../README.md) | **Next:** [AZD Basics](azd-basics.md)
+
 ## Introduction
 
-This detailed guide will help you install and set up Azure Developer CLI (azd) on your system. You'll explore various installation methods for different operating systems, learn how to configure authentication, and prepare your development environment for Azure deployments.
+This detailed guide will help you install and set up the Azure Developer CLI (azd) on your system. You'll explore various installation methods for different operating systems, learn how to configure authentication, and prepare your development environment for Azure deployments.
 
 ## Learning Goals
 
@@ -35,7 +37,7 @@ This guide is designed to help you install and configure Azure Developer CLI, re
 
 ## Prerequisites
 
-Before you begin installing azd, make sure you have:
+Before installing azd, make sure you have:
 - **Azure subscription** - [Create a free account](https://azure.microsoft.com/free/)
 - **Azure CLI** - Required for authentication and resource management
 - **Git** - Needed for cloning templates and version control
@@ -128,7 +130,7 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 
 ## ✅ Verify Installation
 
-After completing the installation, check that azd is working correctly:
+After installation, check that azd is working correctly:
 
 ```bash
 # Check version
@@ -146,7 +148,7 @@ Expected output:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Authentication Setup
+## Authentication Setup
 
 ### Azure CLI Authentication (Recommended)
 ```bash
@@ -163,7 +165,7 @@ az account show
 ```
 
 ### Device Code Authentication
-Use this method if you're on a headless system or experiencing browser issues:
+Use this method if you're on a system without a browser or facing browser issues:
 ```bash
 az login --use-device-code
 ```
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configuration
+## Configuration
 
 ### Global Configuration
 ```bash
@@ -203,12 +205,12 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE Integration
+## IDE Integration
 
 ### Visual Studio Code
 Install the Azure Developer CLI extension:
 1. Open VS Code
-2. Navigate to Extensions (Ctrl+Shift+X)
+2. Go to Extensions (Ctrl+Shift+X)
 3. Search for "Azure Developer CLI"
 4. Install the extension
 
@@ -328,7 +330,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Support
 
-If you need assistance:
+If you need help:
 - [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Report Issues](https://github.com/Azure/azure-dev/issues)
 - [Community Discussions](https://github.com/Azure/azure-dev/discussions)
@@ -336,9 +338,7 @@ If you need assistance:
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [AZD Basics](azd-basics.md)
-- **Next Lesson**: [Configuration](configuration.md)
+**Previous:** [Main Documentation](../../README.md) | **Next:** [AZD Basics](azd-basics.md)
 
 **Installation Complete!** Proceed to [Your First Project](first-project.md) to start building with azd.
 

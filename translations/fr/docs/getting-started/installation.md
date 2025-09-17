@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T16:47:11+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T16:51:14+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "fr"
 }
 -->
 # Guide d'installation et de configuration
 
+**Précédent :** [Documentation principale](../../README.md) | **Suivant :** [Principes de base d'AZD](azd-basics.md)
+
 ## Introduction
 
-Ce guide complet vous accompagnera dans l'installation et la configuration de l'Azure Developer CLI (azd) sur votre système. Vous découvrirez plusieurs méthodes d'installation adaptées à différents systèmes d'exploitation, la configuration de l'authentification, ainsi que les réglages initiaux pour préparer votre environnement de développement aux déploiements Azure.
+Ce guide complet vous expliquera comment installer et configurer Azure Developer CLI (azd) sur votre système. Vous découvrirez plusieurs méthodes d'installation pour différents systèmes d'exploitation, la configuration de l'authentification et les réglages initiaux pour préparer votre environnement de développement aux déploiements Azure.
 
 ## Objectifs d'apprentissage
 
@@ -36,7 +38,7 @@ Ce guide vous aidera à installer et configurer Azure Developer CLI sur votre sy
 ## Prérequis
 
 Avant d'installer azd, assurez-vous d'avoir :
-- **Un abonnement Azure** - [Créer un compte gratuit](https://azure.microsoft.com/free/)
+- **Abonnement Azure** - [Créer un compte gratuit](https://azure.microsoft.com/free/)
 - **Azure CLI** - Pour l'authentification et la gestion des ressources
 - **Git** - Pour cloner des modèles et gérer le contrôle de version
 - **Docker** (optionnel) - Pour les applications conteneurisées
@@ -45,7 +47,7 @@ Avant d'installer azd, assurez-vous d'avoir :
 
 ### Windows
 
-#### Option 1 : PowerShell (Recommandé)
+#### Option 1 : PowerShell (recommandé)
 ```powershell
 # Run as Administrator or with elevated privileges
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
@@ -64,11 +66,11 @@ choco install azd
 #### Option 4 : Installation manuelle
 1. Téléchargez la dernière version depuis [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Extrayez dans `C:\Program Files\azd\`
-3. Ajoutez au chemin d'accès (PATH) de votre variable d'environnement
+3. Ajoutez au chemin d'accès (PATH) de votre système
 
 ### macOS
 
-#### Option 1 : Homebrew (Recommandé)
+#### Option 1 : Homebrew (recommandé)
 ```bash
 brew tap azure/azd
 brew install azd
@@ -87,7 +89,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### Option 1 : Script d'installation (Recommandé)
+#### Option 1 : Script d'installation (recommandé)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
@@ -146,9 +148,9 @@ Résultat attendu :
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Configuration de l'authentification
+## Configuration de l'authentification
 
-### Authentification via Azure CLI (Recommandé)
+### Authentification via Azure CLI (recommandé)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configuration
+## Configuration
 
 ### Configuration globale
 ```bash
@@ -203,12 +205,12 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Intégration avec IDE
+## Intégration IDE
 
 ### Visual Studio Code
 Installez l'extension Azure Developer CLI :
 1. Ouvrez VS Code
-2. Accédez aux Extensions (Ctrl+Shift+X)
+2. Accédez aux extensions (Ctrl+Shift+X)
 3. Recherchez "Azure Developer CLI"
 4. Installez l'extension
 
@@ -297,7 +299,7 @@ azd info
 ## Mise à jour d'azd
 
 ### Mises à jour automatiques
-azd vous avertira lorsque des mises à jour sont disponibles :
+azd vous informera lorsque des mises à jour sont disponibles :
 ```bash
 azd version --check-for-updates
 ```
@@ -336,13 +338,11 @@ Si vous rencontrez des problèmes :
 
 ---
 
-**Navigation**
-- **Leçon précédente** : [Bases d'AZD](azd-basics.md)
-- **Leçon suivante** : [Configuration](configuration.md)
+**Précédent :** [Documentation principale](../../README.md) | **Suivant :** [Principes de base d'AZD](azd-basics.md)
 
-**Installation terminée !** Passez à [Votre premier projet](first-project.md) pour commencer à développer avec azd.
+**Installation terminée !** Passez à [Votre premier projet](first-project.md) pour commencer à construire avec azd.
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

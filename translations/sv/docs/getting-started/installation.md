@@ -1,26 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:27:01+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:01:53+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "sv"
 }
 -->
 # Installations- och konfigurationsguide
 
+**Föregående:** [Huvuddokumentation](../../README.md) | **Nästa:** [AZD Grunder](azd-basics.md)
+
 ## Introduktion
 
-Den här omfattande guiden hjälper dig att installera och konfigurera Azure Developer CLI (azd) på ditt system. Du kommer att lära dig olika installationsmetoder för olika operativsystem, autentiseringsinställningar och initial konfiguration för att förbereda din utvecklingsmiljö för Azure-distributioner.
+Den här omfattande guiden hjälper dig att installera och konfigurera Azure Developer CLI (azd) på ditt system. Du kommer att lära dig olika installationsmetoder för olika operativsystem, autentiseringsinställningar och grundläggande konfiguration för att förbereda din utvecklingsmiljö för Azure-distributioner.
 
 ## Lärandemål
 
 I slutet av denna lektion kommer du att:
-- Framgångsrikt ha installerat Azure Developer CLI på ditt operativsystem
-- Konfigurerat autentisering med Azure med flera metoder
-- Ställt in din utvecklingsmiljö med nödvändiga förutsättningar
-- Förstått olika installationsalternativ och när du ska använda dem
-- Kunna felsöka vanliga installations- och konfigurationsproblem
+- Framgångsrikt installera Azure Developer CLI på ditt operativsystem
+- Konfigurera autentisering med Azure via flera metoder
+- Ställa in din utvecklingsmiljö med nödvändiga förutsättningar
+- Förstå olika installationsalternativ och när du ska använda dem
+- Felsöka vanliga installations- och konfigurationsproblem
 
 ## Läranderesultat
 
@@ -38,7 +40,7 @@ Den här guiden hjälper dig att installera och konfigurera Azure Developer CLI 
 Innan du installerar azd, se till att du har:
 - **Azure-prenumeration** - [Skapa ett gratis konto](https://azure.microsoft.com/free/)
 - **Azure CLI** - För autentisering och resursadministration
-- **Git** - För att klona mallar och versionskontroll
+- **Git** - För att klona mallar och versionshantering
 - **Docker** (valfritt) - För containerbaserade applikationer
 
 ## Installationsmetoder
@@ -146,7 +148,7 @@ Förväntad utdata:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Autentiseringsinställningar
+## Autentiseringsinställningar
 
 ### Azure CLI-autentisering (Rekommenderas)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfiguration
+## Konfiguration
 
 ### Global konfiguration
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE-integrering
+## IDE-integrering
 
 ### Visual Studio Code
 Installera Azure Developer CLI-tillägget:
@@ -213,7 +215,7 @@ Installera Azure Developer CLI-tillägget:
 4. Installera tillägget
 
 Funktioner:
-- IntelliSense för `azure.yaml`
+- IntelliSense för azure.yaml
 - Integrerade terminalkommandon
 - Mallbläddring
 - Övervakning av distributioner
@@ -233,7 +235,7 @@ Skapa en `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Installera Azure-plugin
-2. Konfigurera Azure-autentisering
+2. Konfigurera Azure-uppgifter
 3. Använd den integrerade terminalen för azd-kommandon
 
 ## 🐛 Felsökning av installation
@@ -336,11 +338,9 @@ Om du stöter på problem:
 
 ---
 
-**Navigering**
-- **Föregående lektion**: [AZD Grunder](azd-basics.md)
-- **Nästa lektion**: [Konfiguration](configuration.md)
+**Föregående:** [Huvuddokumentation](../../README.md) | **Nästa:** [AZD Grunder](azd-basics.md)
 
-**Installation slutförd!** Fortsätt till [Ditt första projekt](first-project.md) för att börja bygga med azd.
+**Installation klar!** Fortsätt till [Ditt första projekt](first-project.md) för att börja bygga med azd.
 
 ---
 

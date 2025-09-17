@@ -1,37 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T12:45:58+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T22:08:45+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "en"
 }
 -->
 # Configuration Guide
 
+**Previous:** [AZD Basics](azd-basics.md) | **Next:** [First Project](first-project.md)
+
 ## Introduction
 
-This detailed guide explains everything you need to know about configuring the Azure Developer CLI to optimize your development and deployment workflows. You'll explore the configuration hierarchy, environment management, authentication methods, and advanced configuration techniques to enable efficient and secure Azure deployments.
+This guide provides a detailed overview of how to configure Azure Developer CLI to streamline development and deployment workflows. You'll explore the configuration hierarchy, environment management, authentication methods, and advanced configuration techniques to ensure efficient and secure Azure deployments.
 
 ## Learning Goals
 
 By the end of this lesson, you will:
 - Understand the azd configuration hierarchy and how settings are prioritized
-- Effectively configure global and project-specific settings
-- Manage multiple environments with distinct configurations
+- Learn to configure global and project-specific settings effectively
+- Manage multiple environments with unique configurations
 - Implement secure authentication and authorization practices
-- Learn advanced configuration techniques for complex scenarios
+- Explore advanced configuration techniques for complex scenarios
 
 ## Learning Outcomes
 
 After completing this lesson, you will be able to:
-- Configure azd for streamlined development workflows
-- Set up and manage multiple deployment environments
+- Set up azd for efficient development workflows
+- Configure and manage multiple deployment environments
 - Apply secure configuration management practices
-- Troubleshoot configuration-related issues
-- Customize azd behavior to meet specific organizational needs
+- Diagnose and resolve configuration-related issues
+- Tailor azd settings to meet specific organizational needs
 
-This guide provides a complete overview of configuring the Azure Developer CLI for optimal development and deployment workflows.
+This guide provides a detailed overview of how to configure Azure Developer CLI to streamline development and deployment workflows.
 
 ## Configuration Hierarchy
 
@@ -285,7 +287,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Service Principal Authentication
-For CI/CD pipelines:
+Ideal for CI/CD pipelines:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -298,7 +300,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-For Azure-hosted environments:
+Best suited for Azure-hosted environments:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -331,7 +333,7 @@ Define infrastructure parameters in `infra/main.parameters.json`:
 ```
 
 ### Terraform Configuration
-For Terraform projects, configure settings in `infra/terraform.tfvars`:
+For Terraform projects, use `infra/terraform.tfvars` for configuration:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -457,7 +459,7 @@ azd provision --dry-run
 ```
 
 ### Configuration Scripts
-Create validation scripts in the `scripts/` directory:
+Place validation scripts in the `scripts/` directory:
 
 ```bash
 #!/bin/bash
@@ -535,9 +537,9 @@ Document your configuration in `CONFIG.md`:
 
 ## Next Steps
 
-- [Your First Project](first-project.md) - Practice applying configuration
+- [Your First Project](first-project.md) - Apply configuration in practice
 - [Deployment Guide](../deployment/deployment-guide.md) - Use configuration for deployment
-- [Provisioning Resources](../deployment/provisioning.md) - Create production-ready configurations
+- [Provisioning Resources](../deployment/provisioning.md) - Production-ready configurations
 
 ## References
 
@@ -547,11 +549,10 @@ Document your configuration in `CONFIG.md`:
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Installation & Setup](installation.md)
+**Previous:** [AZD Basics](azd-basics.md) | **Next:** [First Project](first-project.md)
 - **Next Lesson**: [Your First Project](first-project.md)
 
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

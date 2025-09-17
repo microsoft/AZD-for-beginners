@@ -1,31 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T16:49:23+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T17:15:33+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "pl"
 }
 -->
 # Przewodnik instalacji i konfiguracji
 
+**Poprzedni:** [Główna dokumentacja](../../README.md) | **Następny:** [Podstawy AZD](azd-basics.md)
+
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik przeprowadzi Cię przez proces instalacji i konfiguracji Azure Developer CLI (azd) na Twoim systemie. Dowiesz się o różnych metodach instalacji dla różnych systemów operacyjnych, konfiguracji uwierzytelniania oraz początkowej konfiguracji, aby przygotować środowisko deweloperskie do wdrożeń w Azure.
+Ten kompleksowy przewodnik przeprowadzi Cię przez proces instalacji i konfiguracji Azure Developer CLI (azd) na Twoim systemie. Dowiesz się o różnych metodach instalacji dla różnych systemów operacyjnych, konfiguracji uwierzytelniania oraz wstępnej konfiguracji, aby przygotować środowisko deweloperskie do wdrożeń w Azure.
 
 ## Cele nauki
 
-Po ukończeniu tej lekcji będziesz w stanie:
-- Pomyślnie zainstalować Azure Developer CLI na swoim systemie operacyjnym
-- Skonfigurować uwierzytelnianie z Azure za pomocą różnych metod
-- Przygotować swoje środowisko deweloperskie z wymaganymi zależnościami
-- Zrozumieć różne opcje instalacji i kiedy z nich korzystać
+Po zakończeniu tej lekcji będziesz:
+- Pomyślnie instalować Azure Developer CLI na swoim systemie operacyjnym
+- Konfigurować uwierzytelnianie z Azure za pomocą różnych metod
+- Przygotowywać swoje środowisko deweloperskie z niezbędnymi wymaganiami
+- Rozumieć różne opcje instalacji i wiedzieć, kiedy je stosować
 - Rozwiązywać typowe problemy związane z instalacją i konfiguracją
 
-## Rezultaty nauki
+## Efekty nauki
 
-Po ukończeniu tej lekcji będziesz potrafić:
-- Zainstalować azd za pomocą odpowiedniej metody dla Twojej platformy
+Po ukończeniu tej lekcji będziesz w stanie:
+- Zainstalować azd za pomocą odpowiedniej metody dla swojej platformy
 - Uwierzytelnić się w Azure za pomocą `azd auth login`
 - Zweryfikować instalację i przetestować podstawowe polecenia azd
 - Skonfigurować swoje środowisko deweloperskie dla optymalnego korzystania z azd
@@ -146,7 +148,7 @@ Oczekiwany wynik:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Konfiguracja uwierzytelniania
+## Konfiguracja uwierzytelniania
 
 ### Uwierzytelnianie za pomocą Azure CLI (zalecane)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfiguracja
+## Konfiguracja
 
 ### Konfiguracja globalna
 ```bash
@@ -203,12 +205,12 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integracja z IDE
+## Integracja z IDE
 
 ### Visual Studio Code
 Zainstaluj rozszerzenie Azure Developer CLI:
 1. Otwórz VS Code
-2. Przejdź do sekcji Rozszerzenia (Ctrl+Shift+X)
+2. Przejdź do rozszerzeń (Ctrl+Shift+X)
 3. Wyszukaj "Azure Developer CLI"
 4. Zainstaluj rozszerzenie
 
@@ -233,7 +235,7 @@ Utwórz plik `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Zainstaluj wtyczkę Azure
-2. Skonfiguruj dane uwierzytelniające Azure
+2. Skonfiguruj poświadczenia Azure
 3. Korzystaj z zintegrowanego terminala do poleceń azd
 
 ## 🐛 Rozwiązywanie problemów z instalacją
@@ -321,7 +323,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Kolejne kroki
 
-1. **Ukończ uwierzytelnianie**: Upewnij się, że masz dostęp do swojej subskrypcji Azure
+1. **Zakończ uwierzytelnianie**: Upewnij się, że masz dostęp do swojej subskrypcji Azure
 2. **Wypróbuj pierwsze wdrożenie**: Skorzystaj z [Przewodnika pierwszego projektu](first-project.md)
 3. **Przeglądaj szablony**: Przeglądaj dostępne szablony za pomocą `azd template list`
 4. **Skonfiguruj swoje IDE**: Przygotuj swoje środowisko deweloperskie
@@ -336,13 +338,11 @@ Jeśli napotkasz problemy:
 
 ---
 
-**Nawigacja**
-- **Poprzednia lekcja**: [Podstawy AZD](azd-basics.md)
-- **Następna lekcja**: [Konfiguracja](configuration.md)
+**Poprzedni:** [Główna dokumentacja](../../README.md) | **Następny:** [Podstawy AZD](azd-basics.md)
 
 **Instalacja zakończona!** Przejdź do [Twojego pierwszego projektu](first-project.md), aby rozpocząć pracę z azd.
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za autorytatywne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

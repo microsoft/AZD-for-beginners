@@ -1,22 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:23:41+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T21:12:50+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "fi"
 }
 -->
 # Konfigurointiohje
 
+**Edellinen:** [AZD Basics](azd-basics.md) | **Seuraava:** [Ensimmäinen projekti](first-project.md)
+
 ## Johdanto
 
-Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfiguroinnin osa-alueita optimaalisten kehitys- ja käyttöönottojen työnkulkujen saavuttamiseksi. Opit konfigurointihierarkiasta, ympäristön hallinnasta, autentikointimenetelmistä ja edistyneistä konfigurointimalleista, jotka mahdollistavat tehokkaat ja turvalliset Azure-käyttöönotot.
+Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfigurointiin liittyviä osa-alueita, jotka tukevat optimaalista kehitys- ja käyttöönotto-työnkulkua. Opit konfigurointihierarkiasta, ympäristön hallinnasta, autentikointimenetelmistä ja edistyneistä konfigurointimalleista, jotka mahdollistavat tehokkaat ja turvalliset Azure-käyttöönotot.
 
 ## Oppimistavoitteet
 
 Tämän oppitunnin lopussa osaat:
-- Hallita azd:n konfigurointihierarkiaa ja ymmärtää, miten asetukset priorisoidaan
+- Hallita azd:n konfigurointihierarkian ja ymmärtää, miten asetukset priorisoidaan
 - Konfiguroida globaalit ja projektikohtaiset asetukset tehokkaasti
 - Hallita useita ympäristöjä eri konfiguraatioilla
 - Toteuttaa turvallisia autentikointi- ja valtuutusmalleja
@@ -24,14 +26,14 @@ Tämän oppitunnin lopussa osaat:
 
 ## Oppimistulokset
 
-Oppitunnin suorittamisen jälkeen pystyt:
+Tämän oppitunnin jälkeen pystyt:
 - Konfiguroimaan azd:n optimaalisiin kehitystyönkulkuihin
 - Määrittämään ja hallitsemaan useita käyttöönottoympäristöjä
 - Toteuttamaan turvallisia konfigurointikäytäntöjä
 - Ratkaisemaan konfigurointiin liittyviä ongelmia
 - Mukauttamaan azd:n toimintaa organisaation erityistarpeisiin
 
-Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfiguroinnin osa-alueita optimaalisten kehitys- ja käyttöönottojen työnkulkujen saavuttamiseksi.
+Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfigurointiin liittyviä osa-alueita, jotka tukevat optimaalista kehitys- ja käyttöönotto-työnkulkua.
 
 ## Konfigurointihierarkia
 
@@ -44,7 +46,7 @@ azd käyttää hierarkkista konfigurointijärjestelmää:
 
 ## Globaali konfiguraatio
 
-### Globaalien oletusten määrittäminen
+### Globaalien oletusten asettaminen
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -157,7 +159,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Palvelun konfigurointivaihtoehdot
+### Palvelukonfiguraatioasetukset
 
 #### Isäntätyypit
 ```yaml
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Ympäristömallit
-Luo `.azure/env.template` johdonmukaista ympäristön asetusta varten:
+Luo `.azure/env.template` johdonmukaista ympäristön asennusta varten:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -298,7 +300,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Hallittu identiteetti
-Azure-isännöityjä ympäristöjä varten:
+Azure-isännöidyille ympäristöille:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -518,7 +520,7 @@ database:
 ```
 
 ### 4. Konfiguraation dokumentointi
-Dokumentoi konfiguraatio tiedostoon `CONFIG.md`:
+Dokumentoi konfiguraatio tiedostossa `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -547,11 +549,10 @@ Dokumentoi konfiguraatio tiedostoon `CONFIG.md`:
 
 ---
 
-**Navigointi**
-- **Edellinen oppitunti**: [Asennus ja käyttöönotto](installation.md)
+**Edellinen:** [AZD Basics](azd-basics.md) | **Seuraava:** [Ensimmäinen projekti](first-project.md)
 - **Seuraava oppitunti**: [Ensimmäinen projektisi](first-project.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskääntämistä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinkäsityksistä tai virhetulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

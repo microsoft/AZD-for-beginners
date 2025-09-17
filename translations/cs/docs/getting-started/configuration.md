@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:35:07+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T22:21:05+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "cs"
 }
 -->
 # Průvodce konfigurací
+
+**Předchozí:** [AZD Základy](azd-basics.md) | **Další:** [První projekt](first-project.md)
 
 ## Úvod
 
@@ -16,11 +18,11 @@ Tento komplexní průvodce pokrývá všechny aspekty konfigurace Azure Develope
 ## Cíle učení
 
 Na konci této lekce budete:
-- Mít přehled o hierarchii konfigurace azd a pochopit, jak jsou nastavení prioritizována
+- Mít přehled o hierarchii konfigurace azd a pochopíte, jak jsou nastavení prioritizována
 - Efektivně konfigurovat globální a projektově specifická nastavení
 - Spravovat více prostředí s různými konfiguracemi
 - Implementovat bezpečné vzorce autentizace a autorizace
-- Porozumět pokročilým vzorcům konfigurace pro složité scénáře
+- Rozumět pokročilým vzorcům konfigurace pro složité scénáře
 
 ## Výsledky učení
 
@@ -272,7 +274,7 @@ LOG_LEVEL=info
 
 ## 🔐 Konfigurace autentizace
 
-### Integrace s Azure CLI
+### Integrace Azure CLI
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -509,7 +511,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Zvažte použití verzovacího systému
+### 3. Zvažte verzování konfigurace
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -547,11 +549,10 @@ Dokumentujte svou konfiguraci v `CONFIG.md`:
 
 ---
 
-**Navigace**
-- **Předchozí lekce**: [Instalace a nastavení](installation.md)
+**Předchozí:** [AZD Základy](azd-basics.md) | **Další:** [První projekt](first-project.md)
 - **Další lekce**: [Váš první projekt](first-project.md)
 
 ---
 
-**Upozornění**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+**Prohlášení**:  
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

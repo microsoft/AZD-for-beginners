@@ -1,85 +1,87 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-10T06:02:46+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T22:16:32+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "hu"
 }
 -->
-# Telepítési és Beállítási Útmutató
+# Telepítési és beállítási útmutató
+
+**Előző:** [Fő dokumentáció](../../README.md) | **Következő:** [AZD alapok](azd-basics.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató végigvezet az Azure Developer CLI (azd) telepítésén és konfigurálásán a rendszereden. Megismerheted a különböző operációs rendszerekhez tartozó telepítési módszereket, a hitelesítési beállításokat, valamint az elsődleges konfigurációt, hogy felkészítsd fejlesztői környezetedet az Azure-ra történő telepítésekhez.
+Ez az átfogó útmutató végigvezet az Azure Developer CLI (azd) telepítésén és konfigurálásán a rendszereden. Megismerheted a különböző telepítési módszereket az eltérő operációs rendszerekhez, az autentikáció beállítását, valamint az első konfigurációt, hogy felkészítsd fejlesztési környezetedet az Azure telepítésekhez.
 
-## Tanulási Célok
+## Tanulási célok
 
 A lecke végére képes leszel:
 - Sikeresen telepíteni az Azure Developer CLI-t az operációs rendszeredre
-- Többféle módszerrel hitelesítést beállítani az Azure-hoz
-- Felkészíteni a fejlesztői környezetedet a szükséges előfeltételekkel
-- Megérteni a különböző telepítési lehetőségeket és azok alkalmazási területeit
-- Hibaelhárítani a gyakori telepítési és beállítási problémákat
+- Többféle módszerrel konfigurálni az autentikációt az Azure-hoz
+- Beállítani a fejlesztési környezetet a szükséges előfeltételekkel
+- Megérteni a különböző telepítési lehetőségeket és tudni, mikor melyiket érdemes használni
+- Elhárítani a gyakori telepítési és beállítási problémákat
 
-## Tanulási Eredmények
+## Tanulási eredmények
 
 A lecke elvégzése után képes leszel:
 - Az operációs rendszeredhez megfelelő módszerrel telepíteni az azd-t
-- Hitelesítést végezni az Azure-ban az `azd auth login` használatával
-- Ellenőrizni a telepítést és kipróbálni az alapvető azd parancsokat
-- Konfigurálni a fejlesztői környezetedet az azd optimális használatához
+- Az azd auth login segítségével autentikálni az Azure-hoz
+- Ellenőrizni a telepítést és tesztelni az alapvető azd parancsokat
+- Konfigurálni a fejlesztési környezetet az azd optimális használatához
 - Önállóan megoldani a gyakori telepítési problémákat
 
-Ez az útmutató segít az Azure Developer CLI telepítésében és konfigurálásában, függetlenül attól, hogy milyen operációs rendszert vagy fejlesztői környezetet használsz.
+Ez az útmutató segít telepíteni és konfigurálni az Azure Developer CLI-t a rendszereden, függetlenül attól, hogy milyen operációs rendszert vagy fejlesztési környezetet használsz.
 
 ## Előfeltételek
 
-Az azd telepítése előtt győződj meg arról, hogy rendelkezel az alábbiakkal:
-- **Azure-előfizetés** - [Hozz létre egy ingyenes fiókot](https://azure.microsoft.com/free/)
-- **Azure CLI** - Hitelesítéshez és erőforráskezeléshez
-- **Git** - Sablonok klónozásához és verziókezeléshez
-- **Docker** (opcionális) - Konténerizált alkalmazásokhoz
+Az azd telepítése előtt győződj meg róla, hogy rendelkezel:
+- **Azure előfizetéssel** - [Hozz létre ingyenes fiókot](https://azure.microsoft.com/free/)
+- **Azure CLI-vel** - Az autentikációhoz és erőforrás-kezeléshez
+- **Git-tel** - Sablonok klónozásához és verziókezeléshez
+- **Dockerrel** (opcionális) - Konténeres alkalmazásokhoz
 
-## Telepítési Módszerek
+## Telepítési módszerek
 
 ### Windows
 
-#### 1. lehetőség: PowerShell (Ajánlott)
+#### Opció 1: PowerShell (Ajánlott)
 ```powershell
 # Run as Administrator or with elevated privileges
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### 2. lehetőség: Windows Package Manager (winget)
+#### Opció 2: Windows Package Manager (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
 
-#### 3. lehetőség: Chocolatey
+#### Opció 3: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### 4. lehetőség: Kézi telepítés
-1. Töltsd le a legújabb kiadást a [GitHub](https://github.com/Azure/azure-dev/releases) oldaláról
+#### Opció 4: Manuális telepítés
+1. Töltsd le a legújabb kiadást innen: [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Csomagold ki a `C:\Program Files\azd\` mappába
 3. Add hozzá a PATH környezeti változóhoz
 
 ### macOS
 
-#### 1. lehetőség: Homebrew (Ajánlott)
+#### Opció 1: Homebrew (Ajánlott)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### 2. lehetőség: Telepítési szkript
+#### Opció 2: Telepítési script
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### 3. lehetőség: Kézi telepítés
+#### Opció 3: Manuális telepítés
 ```bash
 # Download and install
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
@@ -87,12 +89,12 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### 1. lehetőség: Telepítési szkript (Ajánlott)
+#### Opció 1: Telepítési script (Ajánlott)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### 2. lehetőség: Csomagkezelők
+#### Opció 2: Csomagkezelők
 
 **Ubuntu/Debian:**
 ```bash
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-Az azd előre telepítve van a GitHub Codespaces-ben. Egyszerűen hozz létre egy codespace-et, és azonnal kezdheted az azd használatát.
+Az azd előre telepítve van a GitHub Codespaces-ben. Egyszerűen hozz létre egy codespace-et, és azonnal használhatod az azd-t.
 
 ### Docker
 
@@ -126,9 +128,9 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Telepítés Ellenőrzése
+## ✅ Telepítés ellenőrzése
 
-A telepítés után ellenőrizd, hogy az azd megfelelően működik-e:
+A telepítés után ellenőrizd, hogy az azd megfelelően működik:
 
 ```bash
 # Check version
@@ -146,9 +148,9 @@ Várt kimenet:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Hitelesítési Beállítás
+## Autentikáció beállítása
 
-### Azure CLI Hitelesítés (Ajánlott)
+### Azure CLI autentikáció (Ajánlott)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
@@ -162,13 +164,13 @@ az login
 az account show
 ```
 
-### Eszközkódos Hitelesítés
-Ha fej nélküli rendszeren dolgozol, vagy böngészési problémáid vannak:
+### Eszközkódos autentikáció
+Ha fej nélküli rendszeren dolgozol, vagy böngészőproblémák lépnek fel:
 ```bash
 az login --use-device-code
 ```
 
-### Szolgáltatásnév (CI/CD)
+### Szolgáltatási főazonosító (CI/CD)
 Automatizált környezetekhez:
 ```bash
 az login --service-principal \
@@ -177,9 +179,9 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfiguráció
+## Konfiguráció
 
-### Globális Konfiguráció
+### Globális konfiguráció
 ```bash
 # Set default subscription
 azd config set defaults.subscription <subscription-id>
@@ -191,7 +193,7 @@ azd config set defaults.location eastus2
 azd config list
 ```
 
-### Környezeti Változók
+### Környezeti változók
 Add hozzá a shell profilodhoz (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
@@ -203,18 +205,18 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE Integráció
+## IDE integráció
 
 ### Visual Studio Code
 Telepítsd az Azure Developer CLI bővítményt:
 1. Nyisd meg a VS Code-ot
-2. Lépj a Bővítményekhez (Ctrl+Shift+X)
-3. Keresd meg az "Azure Developer CLI" bővítményt
+2. Menj a Bővítményekhez (Ctrl+Shift+X)
+3. Keress rá az "Azure Developer CLI"-re
 4. Telepítsd a bővítményt
 
 Funkciók:
 - IntelliSense az azure.yaml-hez
-- Integrált terminálparancsok
+- Integrált terminál parancsok
 - Sablonböngészés
 - Telepítési monitorozás
 
@@ -233,20 +235,20 @@ Hozz létre egy `.devcontainer/devcontainer.json` fájlt:
 
 ### IntelliJ/JetBrains
 1. Telepítsd az Azure bővítményt
-2. Konfiguráld az Azure hitelesítési adatokat
+2. Konfiguráld az Azure hitelesítő adatokat
 3. Használd az integrált terminált az azd parancsokhoz
 
-## 🐛 Telepítési Hibák Elnapolása
+## 🐛 Telepítési hibák elhárítása
 
-### Gyakori Problémák
+### Gyakori problémák
 
-#### Hozzáférés Megtagadva (Windows)
+#### Hozzáférés megtagadva (Windows)
 ```powershell
 # Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-#### PATH Problémák
+#### PATH problémák
 Manuálisan add hozzá az azd-t a PATH-hoz:
 
 **Windows:**
@@ -260,7 +262,7 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Hálózati/Proxy Problémák
+#### Hálózati/proxy problémák
 ```bash
 # Configure proxy
 azd config set http.proxy http://proxy:8080
@@ -281,7 +283,7 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### További Segítség
+### További segítség
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -294,15 +296,15 @@ azd logs
 azd info
 ```
 
-## Az azd Frissítése
+## Az azd frissítése
 
-### Automatikus Frissítések
+### Automatikus frissítések
 Az azd értesít, ha elérhető frissítés:
 ```bash
 azd version --check-for-updates
 ```
 
-### Kézi Frissítések
+### Manuális frissítések
 
 **Windows (winget):**
 ```cmd
@@ -319,30 +321,28 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## Következő Lépések
+## Következő lépések
 
-1. **Hitelesítés befejezése**: Győződj meg róla, hogy hozzáférsz az Azure-előfizetésedhez
-2. **Első telepítés kipróbálása**: Kövesd az [Első Projekt Útmutatót](first-project.md)
-3. **Sablonok felfedezése**: Böngészd az elérhető sablonokat az `azd template list` paranccsal
-4. **IDE konfigurálása**: Állítsd be a fejlesztői környezetedet
+1. **Autentikáció befejezése**: Győződj meg róla, hogy hozzáférsz az Azure előfizetésedhez
+2. **Próbáld ki az első telepítést**: Kövesd az [Első projekt útmutatót](first-project.md)
+3. **Fedezd fel a sablonokat**: Böngészd az elérhető sablonokat az `azd template list` parancs segítségével
+4. **Konfiguráld az IDE-t**: Állítsd be a fejlesztési környezetedet
 
 ## Támogatás
 
 Ha problémákba ütközöl:
-- [Hivatalos Dokumentáció](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Hibák Jelentése](https://github.com/Azure/azure-dev/issues)
-- [Közösségi Beszélgetések](https://github.com/Azure/azure-dev/discussions)
-- [Azure Támogatás](https://azure.microsoft.com/support/)
+- [Hivatalos dokumentáció](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Hibák jelentése](https://github.com/Azure/azure-dev/issues)
+- [Közösségi megbeszélések](https://github.com/Azure/azure-dev/discussions)
+- [Azure támogatás](https://azure.microsoft.com/support/)
 
 ---
 
-**Navigáció**
-- **Előző Lecke**: [AZD Alapok](azd-basics.md)
-- **Következő Lecke**: [Konfiguráció](configuration.md)
+**Előző:** [Fő dokumentáció](../../README.md) | **Következő:** [AZD alapok](azd-basics.md)
 
-**Telepítés Kész!** Folytasd az [Első Projekteddel](first-project.md), hogy elkezdj dolgozni az azd-vel.
+**Telepítés kész!** Folytasd az [Első projekted](first-project.md) útmutatójával, hogy elkezdj dolgozni az azd-vel.
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

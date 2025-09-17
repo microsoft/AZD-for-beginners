@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:54:14+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T16:40:31+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "zh"
 }
 -->
-# 第一个项目 - 实践教程
+# 您的第一个项目 - 实践教程
+
+**上一节：** [配置](configuration.md) | **下一节：** [Azure AI Foundry 集成](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 介绍
 
@@ -17,7 +19,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 完成本教程后，您将能够：
 - 掌握使用模板初始化 azd 项目的工作流程
-- 理解 Azure Developer CLI 项目的结构和配置文件
+- 理解 Azure Developer CLI 项目结构和配置文件
 - 完成应用程序的部署到 Azure，包括基础设施的配置
 - 实现应用程序更新和重新部署策略
 - 管理开发和测试的多环境设置
@@ -28,14 +30,14 @@ CO_OP_TRANSLATOR_METADATA:
 完成后，您将能够：
 - 独立从模板初始化和配置 azd 项目
 - 有效地导航和修改 azd 项目结构
-- 使用单一命令将全栈应用程序部署到 Azure
+- 使用单条命令将全栈应用程序部署到 Azure
 - 解决常见的部署问题和身份验证问题
 - 管理不同部署阶段的多个 Azure 环境
 - 实现应用程序更新的持续部署工作流
 
 ## 开始
 
-### 先决条件清单
+### 前置条件清单
 - ✅ 已安装 Azure Developer CLI ([安装指南](installation.md))
 - ✅ 已安装并认证 Azure CLI
 - ✅ 系统上已安装 Git
@@ -79,7 +81,7 @@ azd init --template todo-nodejs-mongo
 
 ### 刚刚发生了什么？
 - 将模板代码下载到您的本地目录
-- 创建了一个 `azure.yaml` 文件，其中包含服务定义
+- 创建了一个包含服务定义的 `azure.yaml` 文件
 - 在 `infra/` 目录中设置了基础设施代码
 - 创建了环境配置
 
@@ -123,7 +125,7 @@ my-first-azd-app/
 
 ### 需要理解的关键文件
 
-**azure.yaml** - azd 项目的核心：
+**azure.yaml** - 您的 azd 项目的核心：
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -162,7 +164,7 @@ azd env get-values
 
 ## 第四步：部署到 Azure
 
-现在是激动人心的时刻——将所有内容部署到 Azure！
+现在到了激动人心的部分——将所有内容部署到 Azure！
 
 ```bash
 # Deploy infrastructure and application
@@ -208,7 +210,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### 测试待办事项应用程序
-1. **添加待办事项** - 点击“Add Todo”，输入任务
+1. **添加待办事项** - 点击“添加待办事项”，输入任务
 2. **标记为完成** - 勾选已完成的项目
 3. **删除项目** - 移除不再需要的待办事项
 
@@ -223,7 +225,7 @@ azd logs
 
 ## 第六步：进行更改并重新部署
 
-让我们进行更改，看看更新有多简单：
+让我们进行更改并看看更新有多简单：
 
 ### 修改 API
 ```bash
@@ -295,7 +297,7 @@ azd down --force --purge
 恭喜！您已经成功：
 - 从模板初始化了一个 azd 项目
 - 探索了项目结构和关键文件
-- 将一个全栈应用程序部署到 Azure
+- 将全栈应用程序部署到 Azure
 - 进行了代码更改并重新部署
 - 管理了多个环境
 - 清理了资源
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**导航**
-- **上一课**：[配置](configuration.md)
-- **下一课**：[部署指南](../deployment/deployment-guide.md)
+**上一节：** [配置](configuration.md) | **下一节：** [Azure AI Foundry 集成](../ai-foundry/azure-ai-foundry-integration.md)
+- **下一课：** [部署指南](../deployment/deployment-guide.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

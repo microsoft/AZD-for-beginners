@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8de774b36773a00bc9fa2a445a0d8d49",
-  "translation_date": "2025-09-10T05:50:10+00:00",
+  "original_hash": "9736db53ea878e07688670ebcc8906bc",
+  "translation_date": "2025-09-12T22:39:52+00:00",
   "source_file": "changelog.md",
   "language_code": "hr"
 }
@@ -31,29 +31,62 @@ Nakon pregleda unosa u dnevniku promjena, moći ćete:
 
 ## Povijest verzija
 
+### [v3.0.0] - 2025-09-12
+
+#### Glavne promjene - Fokus na AI razvoj i integracija Azure AI Foundry
+**Ova verzija transformira repozitorij u sveobuhvatan obrazovni resurs usmjeren na AI s integracijom Azure AI Foundry.**
+
+#### Dodano
+- **🤖 Put učenja usmjeren na AI**: Potpuna reorganizacija s prioritetom na AI razvoj i inženjere
+- **Vodič za integraciju Azure AI Foundry**: Detaljna dokumentacija za povezivanje AZD-a s uslugama Azure AI Foundry
+- **Obrasci za implementaciju AI modela**: Detaljan vodič o odabiru modela, konfiguraciji i strategijama implementacije u produkciju
+- **AI radionica**: Radionica od 2-3 sata za pretvaranje AI aplikacija u AZD rješenja spremna za implementaciju
+- **Najbolje prakse za produkcijski AI**: Obrasci spremni za poduzeća za skaliranje, praćenje i osiguranje AI opterećenja
+- **Vodič za otklanjanje poteškoća specifičnih za AI**: Sveobuhvatno otklanjanje poteškoća za Azure OpenAI, Cognitive Services i probleme s implementacijom AI-a
+- **Galerija predložaka za AI**: Istaknuta kolekcija predložaka Azure AI Foundry s ocjenama složenosti
+- **Materijali za radionice**: Kompletna struktura radionice s praktičnim laboratorijima i referentnim materijalima
+
+#### Poboljšano
+- **Struktura README datoteke**: Fokusirana na AI razvoj s podacima o interesu zajednice (45%) iz Discorda Azure AI Foundry
+- **Putovi učenja**: Posvećeni put za AI razvoj uz tradicionalne putove za studente i DevOps inženjere
+- **Preporuke predložaka**: Istaknuti AI predlošci uključujući azure-search-openai-demo, contoso-chat i openai-chat-app-quickstart
+- **Integracija zajednice**: Poboljšana podrška zajednici na Discordu s kanalima i raspravama specifičnim za AI
+
+#### Fokus na sigurnost i produkciju
+- **Obrasci za upravljane identitete**: Konfiguracije autentifikacije i sigurnosti specifične za AI
+- **Optimizacija troškova**: Praćenje korištenja tokena i kontrola budžeta za AI opterećenja
+- **Implementacija u više regija**: Strategije za globalnu implementaciju AI aplikacija
+- **Praćenje performansi**: Metričke specifične za AI i integracija Application Insights
+
+#### Kvaliteta dokumentacije
+- **Linearna struktura tečaja**: Logičan napredak od početnika do naprednih obrazaca za implementaciju AI-a
+- **Validirani URL-ovi**: Svi vanjski linkovi repozitorija provjereni i dostupni
+- **Kompletna referenca**: Svi unutarnji linkovi dokumentacije provjereni i funkcionalni
+- **Spremno za produkciju**: Obrasci za implementaciju u poduzećima s primjerima iz stvarnog svijeta
+
 ### [v2.0.0] - 2025-09-09
 
 #### Glavne promjene - Restrukturiranje repozitorija i profesionalno poboljšanje
-**Ova verzija predstavlja značajnu reviziju strukture repozitorija i prezentacije sadržaja.**
+**Ova verzija predstavlja značajnu reorganizaciju strukture repozitorija i prezentacije sadržaja.**
 
 #### Dodano
-- **Strukturirani okvir za učenje**: Sve stranice dokumentacije sada uključuju sekcije Uvod, Ciljevi učenja i Ishodi učenja
-- **Navigacijski sustav**: Dodane poveznice za prethodnu/sljedeću lekciju kroz svu dokumentaciju za vođeni napredak u učenju
-- **Vodič za učenje**: Sveobuhvatan study-guide.md s ciljevima učenja, vježbama i materijalima za procjenu
-- **Profesionalna prezentacija**: Uklonjeni svi emoji ikone radi poboljšane pristupačnosti i profesionalnog izgleda
+- **Strukturirani okvir za učenje**: Sve stranice dokumentacije sada uključuju uvod, ciljeve učenja i ishode učenja
+- **Navigacijski sustav**: Dodani linkovi za prethodnu/sljedeću lekciju kroz svu dokumentaciju za vođeni napredak u učenju
+- **Vodič za učenje**: Sveobuhvatan study-guide.md s ciljevima učenja, praktičnim vježbama i materijalima za procjenu
+- **Profesionalna prezentacija**: Uklonjeni svi emoji ikone za poboljšanu pristupačnost i profesionalni izgled
 - **Poboljšana struktura sadržaja**: Poboljšana organizacija i tok obrazovnih materijala
 
 #### Promijenjeno
 - **Format dokumentacije**: Standardizirana sva dokumentacija s dosljednom strukturom usmjerenom na učenje
 - **Tok navigacije**: Implementiran logičan napredak kroz sve obrazovne materijale
 - **Prezentacija sadržaja**: Uklonjeni dekorativni elementi u korist jasnog, profesionalnog formatiranja
-- **Struktura poveznica**: Ažurirane sve interne poveznice kako bi podržale novi navigacijski sustav
+- **Struktura linkova**: Ažurirani svi unutarnji linkovi kako bi podržali novi navigacijski sustav
 
 #### Poboljšano
-- **Pristupačnost**: Uklonjena ovisnost o emoji ikonama radi bolje kompatibilnosti s čitačima ekrana
-- **Profesionalni izgled**: Čista, akademska prezentacija pogodna za korporativno učenje
+- **Pristupačnost**: Uklonjena ovisnost o emoji ikonama za bolju kompatibilnost s čitačima ekrana
+- **Profesionalni izgled**: Čista prezentacija u akademskom stilu pogodna za učenje u poduzećima
 - **Iskustvo učenja**: Strukturirani pristup s jasnim ciljevima i ishodima za svaku lekciju
-- **Organizacija sadržaja**: Bolji logički tok i povezanost između povezanih tema
+- **Organizacija sadržaja**: Bolji logičan tok i povezanost između povezanih tema
 
 ### [v1.0.0] - 2025-09-09
 
@@ -63,30 +96,30 @@ Nakon pregleda unosa u dnevniku promjena, moći ćete:
 - **Osnovna struktura dokumentacije**
   - Kompletan vodič za početak
   - Sveobuhvatna dokumentacija za implementaciju i pripremu
-  - Detaljni resursi za otklanjanje poteškoća i vodiči za dijagnostiku
-  - Alati i postupci za validaciju prije implementacije
+  - Detaljni resursi za otklanjanje poteškoća i vodiči za ispravljanje grešaka
+  - Alati i procedure za validaciju prije implementacije
 
 - **Modul za početak**
   - Osnove AZD-a: Ključni koncepti i terminologija
   - Vodič za instalaciju: Upute za postavljanje specifične za platformu
   - Vodič za konfiguraciju: Postavljanje okruženja i autentifikacija
-  - Prvi projekt: Vodič korak po korak za praktično učenje
+  - Prvi projekt: Korak-po-korak praktično učenje
 
 - **Modul za implementaciju i pripremu**
-  - Vodič za implementaciju: Dokumentacija za kompletan tijek rada
-  - Vodič za pripremu: Infrastruktura kao kod uz Bicep
+  - Vodič za implementaciju: Kompletna dokumentacija tijeka rada
+  - Vodič za pripremu: Infrastruktura kao kod s Bicepom
   - Najbolje prakse za implementaciju u produkciji
   - Obrasci za arhitekturu s više usluga
 
 - **Modul za validaciju prije implementacije**
-  - Planiranje kapaciteta: Validacija dostupnosti Azure resursa
-  - Odabir SKU-a: Sveobuhvatne smjernice za odabir razine usluge
-  - Provjere prije implementacije: Automatizirani skripti za validaciju (PowerShell i Bash)
+  - Planiranje kapaciteta: Validacija dostupnosti resursa na Azureu
+  - Odabir SKU-a: Sveobuhvatne smjernice za razine usluga
+  - Provjere prije implementacije: Automatizirani validacijski skripti (PowerShell i Bash)
   - Alati za procjenu troškova i planiranje budžeta
 
 - **Modul za otklanjanje poteškoća**
   - Uobičajeni problemi: Često susretani problemi i rješenja
-  - Vodič za dijagnostiku: Sustavne metodologije za otklanjanje poteškoća
+  - Vodič za ispravljanje grešaka: Sustavne metodologije za otklanjanje poteškoća
   - Napredne dijagnostičke tehnike i alati
   - Praćenje performansi i optimizacija
 
@@ -94,7 +127,7 @@ Nakon pregleda unosa u dnevniku promjena, moći ćete:
   - Brzi vodič za naredbe: Brza referenca za ključne naredbe
   - Pojmovnik: Sveobuhvatne definicije terminologije i akronima
   - FAQ: Detaljni odgovori na često postavljana pitanja
-  - Vanjske poveznice na resurse i zajednicu
+  - Linkovi na vanjske resurse i poveznice zajednice
 
 - **Primjeri i predlošci**
   - Primjer jednostavne web aplikacije
@@ -106,41 +139,66 @@ Nakon pregleda unosa u dnevniku promjena, moći ćete:
 
 #### Značajke
 - **Podrška za više platformi**: Vodiči za instalaciju i konfiguraciju za Windows, macOS i Linux
-- **Različite razine vještina**: Sadržaj dizajniran za studente i profesionalne programere
+- **Različite razine vještina**: Sadržaj dizajniran za studente do profesionalnih programera
 - **Praktični fokus**: Praktični primjeri i scenariji iz stvarnog svijeta
-- **Sveobuhvatna pokrivenost**: Od osnovnih koncepata do naprednih korporativnih obrazaca
-- **Pristup usmjeren na sigurnost**: Najbolje prakse za sigurnost integrirane kroz cijeli sadržaj
+- **Sveobuhvatna pokrivenost**: Od osnovnih koncepata do naprednih obrazaca za poduzeća
+- **Sigurnost na prvom mjestu**: Najbolje prakse za sigurnost integrirane kroz cijeli sadržaj
 - **Optimizacija troškova**: Smjernice za isplative implementacije i upravljanje resursima
 
 #### Kvaliteta dokumentacije
 - **Detaljni primjeri koda**: Praktični, testirani primjeri koda
-- **Upute korak po korak**: Jasne, provedive smjernice
-- **Sveobuhvatno rukovanje greškama**: Vodiči za otklanjanje uobičajenih problema
+- **Korak-po-korak upute**: Jasne, provedive smjernice
+- **Sveobuhvatno rukovanje greškama**: Otklanjanje poteškoća za uobičajene probleme
 - **Integracija najboljih praksi**: Industrijski standardi i preporuke
 - **Kompatibilnost verzija**: Ažurirano s najnovijim Azure uslugama i značajkama azd-a
 
 ## Planirana buduća poboljšanja
 
-### Verzija 3.0.0 (Planirano)
-#### Predloženi dodaci
-- **Interaktivni vodiči**: Praktične vježbe kodiranja s automatiziranom validacijom
-- **Video sadržaj**: Dodatni video vodiči za vizualne učenike
-- **Napredni modul za sigurnost**: Dubinska analiza obrazaca za sigurnost u korporacijama
-- **Podrška za više oblaka**: Integracija s drugim pružateljima usluga u oblaku
-- **Optimizacija performansi**: Napredne strategije za podešavanje i skaliranje
+### Verzija 3.1.0 (Planirano)
+#### Proširenje AI platforme
+- **Podrška za više modela**: Obrasci za integraciju Hugging Face, Azure Machine Learning i prilagođenih modela
+- **Okviri za AI agente**: Predlošci za LangChain, Semantic Kernel i AutoGen implementacije
+- **Napredni RAG obrasci**: Opcije za vektorske baze podataka izvan Azure AI Search (Pinecone, Weaviate itd.)
+- **AI promatranje**: Poboljšano praćenje performansi modela, korištenja tokena i kvalitete odgovora
 
-#### Predložena poboljšanja
+#### Iskustvo programera
+- **VS Code ekstenzija**: Integrirano AZD + AI Foundry razvojno iskustvo
+- **GitHub Copilot integracija**: AI-pomoć pri generiranju AZD predložaka
+- **Interaktivni vodiči**: Praktične vježbe kodiranja s automatiziranom validacijom za AI scenarije
+- **Video sadržaj**: Dodatni video vodiči za vizualne učenike s fokusom na AI implementacije
+
+### Verzija 4.0.0 (Planirano)
+#### Obrasci za AI u poduzećima
+- **Okvir za upravljanje**: Upravljanje AI modelima, usklađenost i tragovi revizije
+- **AI za više korisnika**: Obrasci za pružanje usluga više korisnicima s izoliranim AI uslugama
+- **Implementacija AI na rubu**: Integracija s Azure IoT Edge i instancama kontejnera
+- **Hibridni AI u oblaku**: Obrasci za implementaciju AI opterećenja u više oblaka i hibridnim okruženjima
+
+#### Napredne značajke
+- **Automatizacija AI cjevovoda**: MLOps integracija s cjevovodima Azure Machine Learning
+- **Napredna sigurnost**: Obrasci za nultu povjerenje, privatne krajnje točke i naprednu zaštitu od prijetnji
+- **Optimizacija performansi**: Napredno podešavanje i strategije skaliranja za AI aplikacije visokog kapaciteta
+- **Globalna distribucija**: Obrasci za isporuku sadržaja i predmemoriranje na rubu za AI aplikacije
+
+### Verzija 3.0.0 (Planirano) - Zamijenjeno trenutnim izdanjem
+#### Predloženi dodaci - Sada implementirani u v3.0.0
+- ✅ **Sadržaj usmjeren na AI**: Sveobuhvatna integracija Azure AI Foundry (Dovršeno)
+- ✅ **Interaktivni vodiči**: Praktična radionica za AI (Dovršeno)
+- ✅ **Napredni sigurnosni modul**: Obrasci za sigurnost specifični za AI (Dovršeno)
+- ✅ **Optimizacija performansi**: Strategije za podešavanje AI opterećenja (Dovršeno)
+
+### Verzija 2.1.0 (Planirano) - Djelomično implementirano u v3.0.0
+#### Manja poboljšanja - Neka dovršena u trenutnom izdanju
+- ✅ **Dodatni primjeri**: Scenariji implementacije usmjereni na AI (Dovršeno)
+- ✅ **Prošireni FAQ**: Pitanja i otklanjanje poteškoća specifičnih za AI (Dovršeno)
+- **Integracija alata**: Poboljšani vodiči za integraciju IDE-a i uređivača
+- ✅ **Proširenje praćenja**: Obrasci za praćenje i upozorenja specifična za AI (Dovršeno)
+
+#### Još planirano za buduće izdanje
 - **Dokumentacija prilagođena mobilnim uređajima**: Responzivni dizajn za učenje na mobilnim uređajima
 - **Pristup bez interneta**: Paketi dokumentacije za preuzimanje
-- **Doprinos zajednice**: Poboljšane smjernice za doprinos zajednice
-- **Podrška za prijevod**: Opcije dokumentacije na više jezika
-
-### Verzija 2.1.0 (Planirano)
-#### Manja poboljšanja
-- **Dodatni primjeri**: Više scenarija implementacije iz stvarnog svijeta
-- **Prošireni FAQ**: Dodatna često postavljana pitanja i odgovori
-- **Integracija alata**: Poboljšani vodiči za integraciju s IDE-ovima i uređivačima
-- **Proširenje praćenja**: Napredni obrasci za praćenje i upozorenja
+- **Poboljšana integracija IDE-a**: VS Code ekstenzija za AZD + AI tijekove rada
+- **Nadzorna ploča zajednice**: Metrike zajednice u stvarnom vremenu i praćenje doprinosa
 
 ## Doprinos dnevniku promjena
 
@@ -148,7 +206,7 @@ Nakon pregleda unosa u dnevniku promjena, moći ćete:
 Prilikom doprinosa ovom repozitoriju, osigurajte da unosi u dnevnik promjena uključuju:
 
 1. **Broj verzije**: Slijedeći semantičko verzioniranje (glavna.sporedna.zakrpa)
-2. **Datum**: Datum izdavanja ili ažuriranja u formatu YYYY-MM-DD
+2. **Datum**: Datum izdanja ili ažuriranja u formatu YYYY-MM-DD
 3. **Kategorija**: Dodano, Promijenjeno, Zastarjelo, Uklonjeno, Ispravljeno, Sigurnost
 4. **Jasan opis**: Sažet opis promjene
 5. **Procjena utjecaja**: Kako promjene utječu na postojeće korisnike
@@ -161,8 +219,8 @@ Prilikom doprinosa ovom repozitoriju, osigurajte da unosi u dnevnik promjena ukl
 - Dodatni alati, skripte ili korisni programi
 
 #### Promijenjeno
-- Modifikacije postojeće funkcionalnosti ili dokumentacije
-- Ažuriranja radi poboljšanja jasnoće ili točnosti
+- Modifikacije postojećih funkcionalnosti ili dokumentacije
+- Ažuriranja za poboljšanje jasnoće ili točnosti
 - Restrukturiranje sadržaja ili organizacije
 
 #### Zastarjelo
@@ -197,7 +255,7 @@ Prilikom doprinosa ovom repozitoriju, osigurajte da unosi u dnevnik promjena ukl
 - Poboljšanja koja održavaju kompatibilnost unatrag
 - Dodatni primjeri, alati ili resursi
 
-#### Zakrpa (X.Y.Z)
+#### Zakrpa verzije (X.Y.Z)
 - Ispravci grešaka i korekcije
 - Manja poboljšanja postojećeg sadržaja
 - Pojašnjenja i mala poboljšanja
@@ -207,61 +265,28 @@ Prilikom doprinosa ovom repozitoriju, osigurajte da unosi u dnevnik promjena ukl
 Aktivno potičemo povratne informacije zajednice kako bismo poboljšali ovaj obrazovni resurs:
 
 ### Kako pružiti povratne informacije
-- **GitHub Issues**: Prijavite probleme ili predložite poboljšanja
-- **Discord rasprave**: Podijelite ideje i uključite se u zajednicu
-- **Pull Requests**: Doprinijeti izravnim poboljšanjima sadržaja
-- **Discord forumi zajednice**: Sudjelujte u širim raspravama o Azure razvoju
+- **GitHub Issues**: Prijavite probleme ili predložite poboljšanja (dobrodošli su problemi specifični za AI)
+- **Discord rasprave**: Podij
+- **Najnovija glavna verzija**: Potpuna podrška uz redovita ažuriranja  
+- **Prethodna glavna verzija**: Sigurnosna ažuriranja i ključne ispravke tijekom 12 mjeseci  
+- **Zastarjele verzije**: Podrška zajednice, bez službenih ažuriranja  
 
-### Kategorije povratnih informacija
-- **Točnost sadržaja**: Ispravci tehničkih informacija
-- **Iskustvo učenja**: Prijedlozi za poboljšanje toka učenja
-- **Nedostajući sadržaj**: Zahtjevi za dodatne teme ili primjere
-- **Pristupačnost**: Poboljšanja za različite potrebe učenja
-- **Integracija alata**: Prijedlozi za bolju integraciju u razvojni tijek rada
-
-### Obveza odgovora
-- **Odgovor na probleme**: Unutar 48 sati za prijavljene probleme
-- **Zahtjevi za značajke**: Procjena unutar tjedan dana
-- **Doprinosi zajednice**: Pregled unutar tjedan dana
-- **Sigurnosni problemi**: Prioritetno s ubrzanim odgovorom
-
-## Raspored održavanja
-
-### Redovita ažuriranja
-- **Mjesečni pregledi**: Provjera točnosti sadržaja i validacija poveznica
-- **Kvartalna ažuriranja**: Glavni dodaci i poboljšanja sadržaja
-- **Polugodišnji pregledi**: Sveobuhvatno restrukturiranje i poboljšanja
-- **Godišnja izdanja**: Glavna ažuriranja verzija sa značajnim poboljšanjima
-
-### Praćenje i osiguranje kvalitete
-- **Automatizirano testiranje**: Redovita validacija primjera koda i poveznica
-- **Integracija povratnih informacija zajednice**: Redovito uključivanje prijedloga korisnika
-- **Ažuriranja tehnologije**: Usklađivanje s najnovijim Azure uslugama i izdanjima azd-a
-- **Revizije pristupačnosti**: Redoviti pregledi za inkluzivne principe dizajna
-
-## Politika podrške za verzije
-
-### Podrška za trenutnu verziju
-- **Najnovija glavna verzija**: Potpuna podrška s redovitim ažuriranjima
-- **Prethodna glavna verzija**: Sigurnosna ažuriranja i kritične ispravke tijekom 12 mjeseci
-- **Zastarjele verzije**: Podrška zajednice, bez službenih ažuriranja
-
-### Smjernice za migraciju
-Kada se izdaju glavne verzije, pružamo:
-- **Vodiče za migraciju**: Upute korak po korak za prijelaz
-- **Napomene o kompatibilnosti**: Detalji o promjenama koje prekidaju kompatibilnost
-- **Podrška za alate**: Skripte ili alati za pomoć pri migraciji
-- **Podrška zajednice**: Posvećeni forumi za pitanja o migraciji
+### Smjernice za migraciju  
+Kada se objave glavne verzije, pružamo:  
+- **Vodiče za migraciju**: Korak-po-korak upute za prijelaz  
+- **Napomene o kompatibilnosti**: Detalji o promjenama koje mogu uzrokovati probleme  
+- **Podršku alata**: Skripte ili alati za pomoć pri migraciji  
+- **Podršku zajednice**: Posvećeni forumi za pitanja o migraciji  
 
 ---
 
-**Navigacija**
-- **Prethodna lekcija**: [Vodič za učenje](resources/study-guide.md)
-- **Sljedeća lekcija**: Povratak na [Glavni README](README.md)
+**Navigacija**  
+- **Prethodna lekcija**: [Vodič za učenje](resources/study-guide.md)  
+- **Sljedeća lekcija**: Povratak na [Glavni README](README.md)  
 
-**Ostanite informirani**: Pratite ovaj repozitorij za obavijesti o novim izdanjima i važnim ažuriranjima obrazovnih materijala.
+**Ostanite informirani**: Pratite ovaj repozitorij za obavijesti o novim izdanjima i važnim ažuriranjima obrazovnih materijala.  
 
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije proizašle iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva pogrešna tumačenja ili nesporazume koji mogu proizaći iz korištenja ovog prijevoda.

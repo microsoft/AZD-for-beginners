@@ -1,23 +1,25 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T16:48:46+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T17:08:03+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "de"
 }
 -->
 # Installations- und Einrichtungsanleitung
 
+**Vorher:** [Hauptdokumentation](../../README.md) | **Nächster Schritt:** [AZD Grundlagen](azd-basics.md)
+
 ## Einführung
 
-Diese umfassende Anleitung führt Sie durch die Installation und Konfiguration der Azure Developer CLI (azd) auf Ihrem System. Sie lernen verschiedene Installationsmethoden für unterschiedliche Betriebssysteme, die Einrichtung der Authentifizierung und die erste Konfiguration, um Ihre Entwicklungsumgebung für Azure-Bereitstellungen vorzubereiten.
+Diese umfassende Anleitung führt Sie durch die Installation und Konfiguration des Azure Developer CLI (azd) auf Ihrem System. Sie lernen verschiedene Installationsmethoden für unterschiedliche Betriebssysteme, die Einrichtung der Authentifizierung und die erste Konfiguration, um Ihre Entwicklungsumgebung für Azure-Bereitstellungen vorzubereiten.
 
 ## Lernziele
 
 Am Ende dieser Lektion werden Sie:
 - Azure Developer CLI erfolgreich auf Ihrem Betriebssystem installieren
-- Die Authentifizierung mit Azure über verschiedene Methoden konfigurieren
+- Die Authentifizierung mit Azure auf verschiedene Arten konfigurieren
 - Ihre Entwicklungsumgebung mit den notwendigen Voraussetzungen einrichten
 - Verschiedene Installationsoptionen verstehen und wissen, wann Sie welche verwenden sollten
 - Häufige Installations- und Einrichtungsprobleme beheben können
@@ -146,7 +148,7 @@ Erwartete Ausgabe:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Authentifizierungseinrichtung
+## Authentifizierungseinrichtung
 
 ### Azure CLI-Authentifizierung (Empfohlen)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfiguration
+## Konfiguration
 
 ### Globale Konfiguration
 ```bash
@@ -203,12 +205,12 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE-Integration
+## IDE-Integration
 
 ### Visual Studio Code
 Installieren Sie die Azure Developer CLI-Erweiterung:
 1. Öffnen Sie VS Code
-2. Gehen Sie zu Erweiterungen (Ctrl+Shift+X)
+2. Gehen Sie zu Erweiterungen (Strg+Shift+X)
 3. Suchen Sie nach "Azure Developer CLI"
 4. Installieren Sie die Erweiterung
 
@@ -336,9 +338,7 @@ Falls Sie auf Probleme stoßen:
 
 ---
 
-**Navigation**
-- **Vorherige Lektion**: [AZD Grundlagen](azd-basics.md)
-- **Nächste Lektion**: [Konfiguration](configuration.md)
+**Vorher:** [Hauptdokumentation](../../README.md) | **Nächster Schritt:** [AZD Grundlagen](azd-basics.md)
 
 **Installation abgeschlossen!** Fahren Sie mit [Ihr erstes Projekt](first-project.md) fort, um mit azd zu starten.
 

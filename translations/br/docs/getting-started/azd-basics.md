@@ -1,28 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:09:18+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T19:07:21+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "br"
 }
 -->
 # Noções Básicas do AZD - Entendendo o Azure Developer CLI
 
+**Anterior:** [Instalação e Configuração](installation.md) | **Próximo:** [Configuração](configuration.md)
+
 ## Introdução
 
 Esta lição apresenta o Azure Developer CLI (azd), uma poderosa ferramenta de linha de comando que acelera sua jornada do desenvolvimento local para a implantação no Azure. Você aprenderá os conceitos fundamentais, os principais recursos e entenderá como o azd simplifica a implantação de aplicações nativas na nuvem.
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 Ao final desta lição, você será capaz de:
-- Entender o que é o Azure Developer CLI e seu principal propósito
-- Aprender os conceitos fundamentais de templates, ambientes e serviços
+- Entender o que é o Azure Developer CLI e seu propósito principal
+- Aprender os conceitos básicos de templates, ambientes e serviços
 - Explorar os principais recursos, incluindo desenvolvimento orientado por templates e Infraestrutura como Código
 - Compreender a estrutura e o fluxo de trabalho de projetos azd
-- Estar preparado para instalar e configurar o azd para seu ambiente de desenvolvimento
+- Estar preparado para instalar e configurar o azd no seu ambiente de desenvolvimento
 
-## Resultados de Aprendizagem
+## Resultados de Aprendizado
 
 Após concluir esta lição, você será capaz de:
 - Explicar o papel do azd nos fluxos de trabalho modernos de desenvolvimento na nuvem
@@ -33,9 +35,9 @@ Após concluir esta lição, você será capaz de:
 
 ## O que é o Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) é uma ferramenta de linha de comando projetada para acelerar sua jornada do desenvolvimento local para a implantação no Azure. Ela simplifica o processo de construção, implantação e gerenciamento de aplicações nativas na nuvem no Azure.
+O Azure Developer CLI (azd) é uma ferramenta de linha de comando projetada para acelerar sua jornada do desenvolvimento local para a implantação no Azure. Ele simplifica o processo de construção, implantação e gerenciamento de aplicações nativas na nuvem no Azure.
 
-## Conceitos Fundamentais
+## Conceitos Básicos
 
 ### Templates
 Templates são a base do azd. Eles contêm:
@@ -76,7 +78,7 @@ azd init --template <template-name>
 ### 2. Infraestrutura como Código
 - **Bicep** - Linguagem específica de domínio do Azure
 - **Terraform** - Ferramenta de infraestrutura multi-nuvem
-- **ARM Templates** - Templates do Azure Resource Manager
+- **Templates ARM** - Templates do Azure Resource Manager
 
 ### 3. Fluxos de Trabalho Integrados
 ```bash
@@ -195,7 +197,7 @@ O comando `azd down --force --purge` é uma maneira poderosa de desmontar comple
 ```
 - Ignora prompts de confirmação.
 - Útil para automação ou scripts onde a entrada manual não é viável.
-- Garante que a desmontagem prossiga sem interrupções, mesmo se o CLI detectar inconsistências.
+- Garante que o processo de desmontagem ocorra sem interrupções, mesmo que o CLI detecte inconsistências.
 
 ```
 --purge
@@ -204,7 +206,7 @@ Exclui **todos os metadados associados**, incluindo:
 Estado do ambiente  
 Pasta local `.azure`  
 Informações de implantação em cache  
-Impede que o azd "lembre" implantações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências de registro obsoletas.
+Impede que o azd "lembre" implantações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências obsoletas de registro.
 
 ### Por que usar ambos?
 Quando você encontra problemas com `azd up` devido a estado residual ou implantações parciais, essa combinação garante um **novo começo**.
@@ -263,7 +265,7 @@ azd init --template template1
 
 ### 2. Aproveite os Templates
 - Comece com templates existentes
-- Personalize conforme suas necessidades
+- Personalize para suas necessidades
 - Crie templates reutilizáveis para sua organização
 
 ### 3. Isolamento de Ambientes
@@ -280,7 +282,7 @@ azd init --template template1
 
 ### Iniciante (Semana 1-2)
 1. Instale o azd e autentique-se
-2. Implemente um template simples
+2. Implante um template simples
 3. Entenda a estrutura do projeto
 4. Aprenda comandos básicos (up, down, deploy)
 
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**Navegação**
-- **Lição Anterior**: [README](../../README.md)
+**Anterior:** [Instalação e Configuração](installation.md) | **Próximo:** [Configuração](configuration.md)  
 - **Próxima Lição**: [Instalação e Configuração](installation.md)
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

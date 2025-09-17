@@ -1,27 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:19:56+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T21:04:34+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "da"
 }
 -->
-# Dit Første Projekt - Praktisk Tutorial
+# Dit Første Projekt - Praktisk Vejledning
+
+**Forrige:** [Konfiguration](configuration.md) | **Næste:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduktion
 
-Velkommen til dit første Azure Developer CLI-projekt! Denne omfattende praktiske tutorial giver dig en komplet gennemgang af, hvordan du opretter, implementerer og administrerer en full-stack applikation på Azure ved hjælp af azd. Du vil arbejde med en rigtig todo-applikation, der inkluderer en React-frontend, Node.js API-backend og MongoDB-database.
+Velkommen til dit første Azure Developer CLI-projekt! Denne omfattende praktiske vejledning giver dig en komplet gennemgang af, hvordan du opretter, implementerer og administrerer en full-stack applikation på Azure ved hjælp af azd. Du vil arbejde med en rigtig todo-applikation, der inkluderer en React-frontend, Node.js API-backend og MongoDB-database.
 
 ## Læringsmål
 
-Ved at gennemføre denne tutorial vil du:
+Ved at gennemføre denne vejledning vil du:
 - Mestre azd-projektets initialiseringsworkflow ved hjælp af skabeloner
 - Forstå Azure Developer CLI-projektstruktur og konfigurationsfiler
-- Udføre komplet applikationsimplementering til Azure med infrastrukturprovisionering
+- Udføre komplet applikationsimplementering til Azure med infrastrukturklargøring
 - Implementere applikationsopdateringer og genimplementeringsstrategier
 - Administrere flere miljøer til udvikling og staging
-- Anvende ressourcerydelse og omkostningsstyringspraksis
+- Anvende praksis for ressourceoprydning og omkostningsstyring
 
 ## Læringsresultater
 
@@ -36,10 +38,10 @@ Når du er færdig, vil du kunne:
 ## Kom godt i gang
 
 ### Tjekliste for forudsætninger
-- ✅ Azure Developer CLI installeret ([Installationsguide](installation.md))
+- ✅ Azure Developer CLI installeret ([Installationsvejledning](installation.md))
 - ✅ Azure CLI installeret og autentificeret
 - ✅ Git installeret på dit system
-- ✅ Node.js 16+ (til denne tutorial)
+- ✅ Node.js 16+ (til denne vejledning)
 - ✅ Visual Studio Code (anbefales)
 
 ### Verificer din opsætning
@@ -79,9 +81,9 @@ azd init --template todo-nodejs-mongo
 
 ### Hvad skete der lige?
 - Skabelonkoden blev downloadet til din lokale mappe
-- En `azure.yaml`-fil med service-definitioner blev oprettet
-- Infrastrukturkode blev sat op i `infra/`-mappen
-- Et miljøkonfigurationsfil blev oprettet
+- En `azure.yaml`-fil med servicedefinitioner blev oprettet
+- Infrastrukturkode blev oprettet i mappen `infra/`
+- En miljøkonfiguration blev oprettet
 
 ## Trin 2: Udforsk projektstrukturen
 
@@ -123,7 +125,7 @@ my-first-azd-app/
 
 ### Vigtige filer at forstå
 
-**azure.yaml** - Hjertet i dit azd-projekt:
+**azure.yaml** - Kernen i dit azd-projekt:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -179,8 +181,8 @@ azd up
 
 Kommandoen `azd up` udfører følgende trin:
 1. **Provision** (`azd provision`) - Opretter Azure-ressourcer
-2. **Pakke** - Bygger din applikationskode
-3. **Implementer** (`azd deploy`) - Implementerer kode til Azure-ressourcer
+2. **Package** - Bygger din applikationskode
+3. **Deploy** (`azd deploy`) - Implementerer kode til Azure-ressourcer
 
 ### Forventet output
 ```
@@ -198,7 +200,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Trin 5: Test din applikation
 
 ### Få adgang til din applikation
-Klik på URL'en, der blev angivet i implementeringsoutputtet, eller hent den når som helst:
+Klik på URL'en, der er angivet i implementeringsoutputtet, eller hent den når som helst:
 ```bash
 # Get application endpoints
 azd show
@@ -208,9 +210,9 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Test todo-applikationen
-1. **Tilføj en todo-item** - Klik på "Add Todo" og indtast en opgave
+1. **Tilføj en todo-opgave** - Klik på "Add Todo" og indtast en opgave
 2. **Markér som fuldført** - Afkryds fuldførte opgaver
-3. **Slet opgaver** - Fjern todo-items, du ikke længere har brug for
+3. **Slet opgaver** - Fjern todos, du ikke længere har brug for
 
 ### Overvåg din applikation
 ```bash
@@ -231,7 +233,7 @@ Lad os foretage en ændring og se, hvor nemt det er at opdatere:
 code src/api/src/routes/lists.js
 ```
 
-Tilføj en brugerdefineret respons-header:
+Tilføj en brugerdefineret svarheader:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -322,7 +324,7 @@ azd logs --service api
 azd logs --service web
 ```
 
-### Ressourcenavnekonflikter
+### Konflikter med ressourcenavne
 ```bash
 # Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
@@ -372,14 +374,14 @@ azd init --template todo-java-mongo
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### Community & Support
+### Fællesskab & Support
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Skabeloner & Eksempler
 - [Officiel Skabelongalleri](https://azure.github.io/awesome-azd/)
-- [Community Skabeloner](https://github.com/Azure-Samples/azd-templates)
+- [Fællesskabsskabeloner](https://github.com/Azure-Samples/azd-templates)
 - [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigation**
-- **Forrige Lektion**: [Konfiguration](configuration.md)
-- **Næste Lektion**: [Implementeringsguide](../deployment/deployment-guide.md)
+**Forrige:** [Konfiguration](configuration.md) | **Næste:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+- **Næste Lektion**: [Implementeringsvejledning](../deployment/deployment-guide.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:51:01+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T18:37:08+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ar"
 }
 -->
 # مشروعك الأول - دليل عملي
+
+**السابق:** [الإعداد](configuration.md) | **التالي:** [دمج Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## المقدمة
 
@@ -17,7 +19,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 عند إكمال هذا الدليل، ستتمكن من:
 - إتقان عملية بدء مشاريع azd باستخدام القوالب
-- فهم هيكل مشروع Azure Developer CLI وملفات التكوين
+- فهم هيكل مشاريع Azure Developer CLI وملفات الإعداد
 - تنفيذ نشر كامل للتطبيق على Azure مع توفير البنية التحتية
 - تطبيق استراتيجيات تحديث التطبيق وإعادة النشر
 - إدارة بيئات متعددة للتطوير والتجربة
@@ -81,11 +83,11 @@ azd init --template todo-nodejs-mongo
 - تم تنزيل كود القالب إلى الدليل المحلي الخاص بك
 - تم إنشاء ملف `azure.yaml` مع تعريفات الخدمات
 - تم إعداد كود البنية التحتية في دليل `infra/`
-- تم إنشاء تكوين البيئة
+- تم إنشاء إعداد البيئة
 
 ## الخطوة 2: استكشاف هيكل المشروع
 
-لنقم بفحص ما أنشأه azd لنا:
+لنلقي نظرة على ما أنشأه azd لنا:
 
 ```bash
 # View the project structure
@@ -178,8 +180,8 @@ azd up
 ### ماذا يحدث أثناء النشر؟
 
 يقوم أمر `azd up` بالخطوات التالية:
-1. **توفير** (`azd provision`) - إنشاء موارد Azure
-2. **التعبئة** - بناء كود التطبيق الخاص بك
+1. **توفير الموارد** (`azd provision`) - إنشاء موارد Azure
+2. **التعبئة** - بناء كود التطبيق
 3. **النشر** (`azd deploy`) - نشر الكود على موارد Azure
 
 ### المخرجات المتوقعة
@@ -208,9 +210,9 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### اختبار تطبيق المهام
-1. **إضافة عنصر مهام** - انقر على "إضافة مهمة" وأدخل المهمة
-2. **وضع علامة كمكتمل** - قم بتحديد العناصر المكتملة
-3. **حذف العناصر** - قم بإزالة المهام التي لم تعد بحاجة إليها
+1. **إضافة مهمة** - انقر على "إضافة مهمة" وأدخل مهمة
+2. **وضع علامة كمكتملة** - ضع علامة على المهام المكتملة
+3. **حذف المهام** - قم بإزالة المهام التي لم تعد بحاجة إليها
 
 ### مراقبة تطبيقك
 ```bash
@@ -225,13 +227,13 @@ azd logs
 
 لنقم بإجراء تغيير ونرى مدى سهولة تحديث التطبيق:
 
-### تعديل الواجهة الخلفية
+### تعديل واجهة API
 ```bash
 # Edit the API code
 code src/api/src/routes/lists.js
 ```
 
-إضافة رأس استجابة مخصص:
+أضف رأس استجابة مخصص:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -344,11 +346,11 @@ netstat -an | grep :3100
 - [إضافة قواعد بيانات، تخزين، وخدمات أخرى](../deployment/provisioning.md#adding-services)
 
 ### 2. إعداد CI/CD
-- [تكامل GitHub Actions](../deployment/cicd-integration.md)
-- [خطوط Azure DevOps](../deployment/cicd-integration.md#azure-devops)
+- [دمج GitHub Actions](../deployment/cicd-integration.md)
+- [خطوط أنابيب Azure DevOps](../deployment/cicd-integration.md#azure-devops)
 
 ### 3. أفضل الممارسات للإنتاج
-- [تكوينات الأمان](../deployment/best-practices.md#security)
+- [إعدادات الأمان](../deployment/best-practices.md#security)
 - [تحسين الأداء](../deployment/best-practices.md#performance)
 - [المراقبة والتسجيل](../deployment/best-practices.md#monitoring)
 
@@ -374,7 +376,7 @@ azd init --template todo-java-mongo
 
 ### المجتمع والدعم
 - [GitHub الخاص بـ Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [مجتمع مطوري Azure](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [مجتمع Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### القوالب والأمثلة
@@ -388,11 +390,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**التنقل**
-- **الدرس السابق**: [التكوين](configuration.md)
+**السابق:** [الإعداد](configuration.md) | **التالي:** [دمج Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
 - **الدرس التالي**: [دليل النشر](../deployment/deployment-guide.md)
 
 ---
 
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.

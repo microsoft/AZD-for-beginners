@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:30:02+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T21:28:15+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "ms"
 }
 -->
-# Asas AZD - Memahami Azure Developer CLI
+# AZD Asas - Memahami Azure Developer CLI
+
+**Sebelumnya:** [Pemasangan & Persediaan](installation.md) | **Seterusnya:** [Konfigurasi](configuration.md)
 
 ## Pengenalan
 
-Pelajaran ini memperkenalkan anda kepada Azure Developer CLI (azd), alat baris perintah yang berkuasa untuk mempercepat perjalanan anda dari pembangunan tempatan ke penyebaran di Azure. Anda akan mempelajari konsep asas, ciri utama, dan memahami bagaimana azd mempermudah penyebaran aplikasi cloud-native.
+Pelajaran ini memperkenalkan anda kepada Azure Developer CLI (azd), alat baris perintah yang berkuasa untuk mempercepatkan perjalanan anda daripada pembangunan tempatan kepada penyebaran di Azure. Anda akan mempelajari konsep asas, ciri utama, dan memahami bagaimana azd mempermudah penyebaran aplikasi cloud-native.
 
 ## Matlamat Pembelajaran
 
@@ -19,21 +21,21 @@ Pada akhir pelajaran ini, anda akan:
 - Memahami apa itu Azure Developer CLI dan tujuan utamanya
 - Mempelajari konsep asas seperti templat, persekitaran, dan perkhidmatan
 - Meneroka ciri utama termasuk pembangunan berasaskan templat dan Infrastruktur sebagai Kod
-- Memahami struktur projek azd dan aliran kerjanya
+- Memahami struktur projek azd dan aliran kerja
 - Bersedia untuk memasang dan mengkonfigurasi azd untuk persekitaran pembangunan anda
 
 ## Hasil Pembelajaran
 
-Selepas melengkapkan pelajaran ini, anda akan dapat:
+Selepas menyelesaikan pelajaran ini, anda akan dapat:
 - Menerangkan peranan azd dalam aliran kerja pembangunan cloud moden
 - Mengenal pasti komponen struktur projek azd
-- Menghuraikan bagaimana templat, persekitaran, dan perkhidmatan berfungsi bersama
+- Menggambarkan bagaimana templat, persekitaran, dan perkhidmatan berfungsi bersama
 - Memahami manfaat Infrastruktur sebagai Kod dengan azd
-- Mengenali pelbagai perintah azd dan tujuan penggunaannya
+- Mengenali pelbagai perintah azd dan tujuannya
 
 ## Apa itu Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) ialah alat baris perintah yang direka untuk mempercepat perjalanan anda dari pembangunan tempatan ke penyebaran di Azure. Ia mempermudah proses membina, menyebar, dan mengurus aplikasi cloud-native di Azure.
+Azure Developer CLI (azd) ialah alat baris perintah yang direka untuk mempercepatkan perjalanan anda daripada pembangunan tempatan kepada penyebaran di Azure. Ia mempermudah proses membina, menyebarkan, dan mengurus aplikasi cloud-native di Azure.
 
 ## Konsep Asas
 
@@ -47,11 +49,11 @@ Templat adalah asas kepada azd. Ia mengandungi:
 ### Persekitaran
 Persekitaran mewakili sasaran penyebaran yang berbeza:
 - **Pembangunan** - Untuk ujian dan pembangunan
-- **Pementasan** - Persekitaran pra-pengeluaran
+- **Staging** - Persekitaran pra-pengeluaran
 - **Pengeluaran** - Persekitaran pengeluaran langsung
 
 Setiap persekitaran mengekalkan:
-- Kumpulan sumber Azure tersendiri
+- Kumpulan sumber Azure sendiri
 - Tetapan konfigurasi
 - Keadaan penyebaran
 
@@ -59,7 +61,7 @@ Setiap persekitaran mengekalkan:
 Perkhidmatan adalah blok binaan aplikasi anda:
 - **Frontend** - Aplikasi web, SPA
 - **Backend** - API, mikroservis
-- **Pangkalan Data** - Penyelesaian penyimpanan data
+- **Pangkalan data** - Penyelesaian penyimpanan data
 - **Penyimpanan** - Penyimpanan fail dan blob
 
 ## Ciri Utama
@@ -76,7 +78,7 @@ azd init --template <template-name>
 ### 2. Infrastruktur sebagai Kod
 - **Bicep** - Bahasa khusus domain Azure
 - **Terraform** - Alat infrastruktur multi-cloud
-- **Templat ARM** - Templat Azure Resource Manager
+- **ARM Templates** - Templat Pengurus Sumber Azure
 
 ### 3. Aliran Kerja Bersepadu
 ```bash
@@ -97,7 +99,7 @@ azd env list
 
 ## 📁 Struktur Projek
 
-Struktur projek azd yang tipikal:
+Struktur projek azd yang biasa:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -189,29 +191,29 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Memahami `azd down --force --purge`
-Perintah `azd down --force --purge` adalah cara yang berkuasa untuk sepenuhnya meruntuhkan persekitaran azd anda dan semua sumber yang berkaitan. Berikut adalah pecahan setiap bendera:
+Perintah `azd down --force --purge` adalah cara yang berkuasa untuk meruntuhkan sepenuhnya persekitaran azd anda dan semua sumber yang berkaitan. Berikut adalah pecahan setiap bendera:
 ```
 --force
 ```
 - Melangkau arahan pengesahan.
 - Berguna untuk automasi atau skrip di mana input manual tidak praktikal.
-- Memastikan proses peruntuhan berjalan tanpa gangguan, walaupun CLI mengesan ketidakkonsistenan.
+- Memastikan proses penurunan berjalan tanpa gangguan, walaupun CLI mengesan ketidakkonsistenan.
 
 ```
 --purge
 ```
 Memadamkan **semua metadata yang berkaitan**, termasuk:
-Keadaan persekitaran  
-Folder `.azure` tempatan  
-Maklumat penyebaran yang di-cache  
+Keadaan persekitaran
+Folder `.azure` tempatan
+Maklumat penyebaran yang disimpan
 Menghalang azd daripada "mengingati" penyebaran sebelumnya, yang boleh menyebabkan masalah seperti kumpulan sumber yang tidak sepadan atau rujukan daftar yang usang.
 
 ### Mengapa menggunakan kedua-duanya?
-Apabila anda menghadapi masalah dengan `azd up` disebabkan oleh keadaan yang tertinggal atau penyebaran separa, gabungan ini memastikan permulaan yang **bersih**.
+Apabila anda menghadapi masalah dengan `azd up` disebabkan keadaan yang tertinggal atau penyebaran separa, gabungan ini memastikan permulaan yang **bersih**.
 
-Ia sangat berguna selepas penghapusan sumber secara manual di portal Azure atau apabila menukar templat, persekitaran, atau konvensi penamaan kumpulan sumber.
+Ia sangat berguna selepas penghapusan sumber secara manual di portal Azure atau apabila menukar templat, persekitaran, atau konvensyen penamaan kumpulan sumber.
 
-### Mengurus Pelbagai Persekitaran
+### Menguruskan Pelbagai Persekitaran
 ```bash
 # Create staging environment
 azd env new staging
@@ -267,8 +269,8 @@ azd init --template template1
 - Cipta templat yang boleh digunakan semula untuk organisasi anda
 
 ### 3. Pengasingan Persekitaran
-- Gunakan persekitaran berasingan untuk pembangunan/pementasan/pengeluaran
-- Jangan sekali-kali menyebar terus ke pengeluaran dari mesin tempatan
+- Gunakan persekitaran berasingan untuk pembangunan/staging/pengeluaran
+- Jangan menyebarkan terus ke pengeluaran dari mesin tempatan
 - Gunakan saluran CI/CD untuk penyebaran pengeluaran
 
 ### 4. Pengurusan Konfigurasi
@@ -286,15 +288,15 @@ azd init --template template1
 
 ### Pertengahan (Minggu 3-4)
 1. Sesuaikan templat
-2. Urus pelbagai persekitaran
+2. Uruskan pelbagai persekitaran
 3. Fahami kod infrastruktur
 4. Sediakan saluran CI/CD
 
 ### Lanjutan (Minggu 5+)
 1. Cipta templat tersuai
 2. Corak infrastruktur lanjutan
-3. Penyebaran multi-rantau
-4. Konfigurasi bertaraf perusahaan
+3. Penyebaran multi-region
+4. Konfigurasi tahap perusahaan
 
 ## Langkah Seterusnya
 
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [README](../../README.md)
+**Sebelumnya:** [Pemasangan & Persediaan](installation.md) | **Seterusnya:** [Konfigurasi](configuration.md)
 - **Pelajaran Seterusnya**: [Pemasangan & Persediaan](installation.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

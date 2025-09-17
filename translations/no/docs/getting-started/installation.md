@@ -1,22 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:27:41+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:08:17+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "no"
 }
 -->
 # Installasjons- og oppsettsveiledning
 
+**Forrige:** [Hoveddokumentasjon](../../README.md) | **Neste:** [AZD Grunnleggende](azd-basics.md)
+
 ## Introduksjon
 
-Denne omfattende veiledningen vil lede deg gjennom installasjon og konfigurering av Azure Developer CLI (azd) på systemet ditt. Du vil lære flere installasjonsmetoder for ulike operativsystemer, oppsett av autentisering og initial konfigurasjon for å klargjøre utviklingsmiljøet ditt for Azure-utplasseringer.
+Denne omfattende veiledningen vil lede deg gjennom installasjon og konfigurering av Azure Developer CLI (azd) på systemet ditt. Du vil lære flere installasjonsmetoder for ulike operativsystemer, autentiseringsoppsett og grunnleggende konfigurasjon for å forberede utviklingsmiljøet ditt for Azure-utplasseringer.
 
 ## Læringsmål
 
 Ved slutten av denne leksjonen vil du:
-- Ha installert Azure Developer CLI på ditt operativsystem
+- Ha installert Azure Developer CLI på operativsystemet ditt
 - Konfigurert autentisering med Azure ved hjelp av flere metoder
 - Satt opp utviklingsmiljøet ditt med nødvendige forutsetninger
 - Forstått ulike installasjonsalternativer og når du skal bruke dem
@@ -35,7 +37,7 @@ Denne veiledningen vil hjelpe deg med å installere og konfigurere Azure Develop
 
 ## Forutsetninger
 
-Før du installerer azd, sørg for at du har:
+Før du installerer azd, må du sørge for at du har:
 - **Azure-abonnement** - [Opprett en gratis konto](https://azure.microsoft.com/free/)
 - **Azure CLI** - For autentisering og ressursadministrasjon
 - **Git** - For kloning av maler og versjonskontroll
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd er forhåndsinstallert i GitHub Codespaces. Opprett en codespace og begynn å bruke azd umiddelbart.
+azd er forhåndsinstallert i GitHub Codespaces. Opprett bare en codespace og begynn å bruke azd umiddelbart.
 
 ### Docker
 
@@ -126,9 +128,9 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verifiser installasjon
+## ✅ Verifiser installasjonen
 
-Etter installasjon, verifiser at azd fungerer korrekt:
+Etter installasjonen, verifiser at azd fungerer korrekt:
 
 ```bash
 # Check version
@@ -146,7 +148,7 @@ Forventet utdata:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Oppsett av autentisering
+## Autentiseringsoppsett
 
 ### Azure CLI-autentisering (Anbefalt)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfigurasjon
+## Konfigurasjon
 
 ### Global konfigurasjon
 ```bash
@@ -192,7 +194,7 @@ azd config list
 ```
 
 ### Miljøvariabler
-Legg til i din shell-profil (`.bashrc`, `.zshrc`, `.profile`):
+Legg til i skallets profil (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 IDE-integrasjon
+## IDE-integrasjon
 
 ### Visual Studio Code
 Installer Azure Developer CLI-utvidelsen:
@@ -321,10 +323,10 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Neste steg
 
-1. **Fullfør autentisering**: Sørg for at du har tilgang til ditt Azure-abonnement
-2. **Prøv din første utplassering**: Følg [Første prosjekt-veiledningen](first-project.md)
+1. **Fullfør autentisering**: Sørg for at du kan få tilgang til Azure-abonnementet ditt
+2. **Prøv din første utplassering**: Følg [Første prosjektveiledning](first-project.md)
 3. **Utforsk maler**: Bla gjennom tilgjengelige maler med `azd template list`
-4. **Konfigurer din IDE**: Sett opp ditt utviklingsmiljø
+4. **Konfigurer IDE-en din**: Sett opp utviklingsmiljøet ditt
 
 ## Support
 
@@ -336,13 +338,11 @@ Hvis du støter på problemer:
 
 ---
 
-**Navigasjon**
-- **Forrige leksjon**: [AZD Grunnleggende](azd-basics.md)
-- **Neste leksjon**: [Konfigurasjon](configuration.md)
+**Forrige:** [Hoveddokumentasjon](../../README.md) | **Neste:** [AZD Grunnleggende](azd-basics.md)
 
 **Installasjon fullført!** Fortsett til [Ditt første prosjekt](first-project.md) for å begynne å bygge med azd.
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

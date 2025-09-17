@@ -1,42 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:09:03+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T19:07:06+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "br"
 }
 -->
 # Guia de Configuração
 
+**Anterior:** [AZD Básico](azd-basics.md) | **Próximo:** [Primeiro Projeto](first-project.md)
+
 ## Introdução
 
-Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação otimizados. Você aprenderá sobre a hierarquia de configuração, gerenciamento de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implantações eficientes e seguras no Azure.
+Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação ideais. Você aprenderá sobre a hierarquia de configuração, gerenciamento de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implantações eficientes e seguras no Azure.
 
-## Objetivos de Aprendizado
+## Objetivos de Aprendizagem
 
 Ao final desta lição, você será capaz de:
 - Dominar a hierarquia de configuração do azd e entender como as configurações são priorizadas
-- Configurar definições globais e específicas de projetos de forma eficaz
+- Configurar configurações globais e específicas de projetos de forma eficaz
 - Gerenciar múltiplos ambientes com diferentes configurações
 - Implementar padrões seguros de autenticação e autorização
 - Compreender padrões avançados de configuração para cenários complexos
 
-## Resultados de Aprendizado
+## Resultados de Aprendizagem
 
 Após concluir esta lição, você será capaz de:
-- Configurar o azd para fluxos de trabalho de desenvolvimento otimizados
+- Configurar o azd para fluxos de trabalho de desenvolvimento ideais
 - Configurar e gerenciar múltiplos ambientes de implantação
 - Implementar práticas seguras de gerenciamento de configuração
 - Solucionar problemas relacionados à configuração
-- Personalizar o comportamento do azd para atender a requisitos específicos da organização
+- Personalizar o comportamento do azd para requisitos específicos da organização
 
-Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação otimizados.
+Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação ideais.
 
 ## Hierarquia de Configuração
 
-O azd utiliza um sistema hierárquico de configuração:
-1. **Flags da linha de comando** (maior prioridade)
+O azd utiliza um sistema de configuração hierárquico:
+1. **Flags de linha de comando** (maior prioridade)
 2. **Variáveis de ambiente**
 3. **Configuração local do projeto** (`.azd/config.json`)
 4. **Configuração global do usuário** (`~/.azd/config.json`)
@@ -78,10 +80,10 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ Configuração do Projeto
+## 🏗️ Configuração de Projetos
 
 ### Estrutura do azure.yaml
-O arquivo `azure.yaml` é o coração do seu projeto azd:
+O arquivo `azure.yaml` é o núcleo do seu projeto azd:
 
 ```yaml
 # Minimum configuration
@@ -493,7 +495,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize os Arquivos de Configuração
+### 2. Organize Arquivos de Configuração
 ```
 .azure/
 ├── config.json              # Global project config
@@ -517,7 +519,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Documentação da Configuração
+### 4. Documentação de Configuração
 Documente sua configuração em `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -547,8 +549,7 @@ Documente sua configuração em `CONFIG.md`:
 
 ---
 
-**Navegação**
-- **Lição Anterior**: [Instalação e Configuração](installation.md)
+**Anterior:** [AZD Básico](azd-basics.md) | **Próximo:** [Primeiro Projeto](first-project.md)
 - **Próxima Lição**: [Seu Primeiro Projeto](first-project.md)
 
 ---

@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T19:10:07+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T19:10:02+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "it"
 }
 -->
 # Guida all'installazione e configurazione
+
+**Precedente:** [Documentazione principale](../../README.md) | **Successivo:** [Nozioni di base su AZD](azd-basics.md)
 
 ## Introduzione
 
@@ -18,7 +20,7 @@ Questa guida completa ti guiderà nell'installazione e configurazione di Azure D
 Alla fine di questa lezione, sarai in grado di:
 - Installare con successo Azure Developer CLI sul tuo sistema operativo
 - Configurare l'autenticazione con Azure utilizzando diversi metodi
-- Configurare il tuo ambiente di sviluppo con i prerequisiti necessari
+- Impostare il tuo ambiente di sviluppo con i prerequisiti necessari
 - Comprendere le diverse opzioni di installazione e quando utilizzarle
 - Risolvere i problemi comuni di installazione e configurazione
 
@@ -38,7 +40,7 @@ Questa guida ti aiuterà a installare e configurare Azure Developer CLI sul tuo 
 Prima di installare azd, assicurati di avere:
 - **Abbonamento Azure** - [Crea un account gratuito](https://azure.microsoft.com/free/)
 - **Azure CLI** - Per l'autenticazione e la gestione delle risorse
-- **Git** - Per clonare template e controllo di versione
+- **Git** - Per clonare i template e il controllo di versione
 - **Docker** (opzionale) - Per applicazioni containerizzate
 
 ## Metodi di installazione
@@ -64,7 +66,7 @@ choco install azd
 #### Opzione 4: Installazione manuale
 1. Scarica l'ultima versione da [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Estrai in `C:\Program Files\azd\`
-3. Aggiungi alla variabile d'ambiente PATH
+3. Aggiungi alla variabile PATH dell'ambiente
 
 ### macOS
 
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd è preinstallato in GitHub Codespaces. Crea semplicemente uno spazio di lavoro e inizia a utilizzare azd immediatamente.
+azd è preinstallato in GitHub Codespaces. Basta creare uno spazio di lavoro e iniziare a utilizzare azd immediatamente.
 
 ### Docker
 
@@ -146,7 +148,7 @@ Output previsto:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Configurazione dell'autenticazione
+## Configurazione dell'autenticazione
 
 ### Autenticazione con Azure CLI (Consigliata)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configurazione
+## Configurazione
 
 ### Configurazione globale
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integrazione con IDE
+## Integrazione con IDE
 
 ### Visual Studio Code
 Installa l'estensione Azure Developer CLI:
@@ -336,13 +338,11 @@ Se riscontri problemi:
 
 ---
 
-**Navigazione**
-- **Lezione precedente**: [AZD Basics](azd-basics.md)
-- **Lezione successiva**: [Configurazione](configuration.md)
+**Precedente:** [Documentazione principale](../../README.md) | **Successivo:** [Nozioni di base su AZD](azd-basics.md)
 
-**Installazione completata!** Continua con [Il tuo primo progetto](first-project.md) per iniziare a sviluppare con azd.
+**Installazione completata!** Continua con [Il tuo primo progetto](first-project.md) per iniziare a costruire con azd.
 
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.

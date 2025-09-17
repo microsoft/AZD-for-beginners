@@ -1,48 +1,50 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T12:59:47+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T16:58:52+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ko"
 }
 -->
-# 구성 가이드
+# 설정 가이드
+
+**이전:** [AZD 기본](azd-basics.md) | **다음:** [첫 번째 프로젝트](first-project.md)
 
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI를 최적의 개발 및 배포 워크플로우로 구성하는 모든 측면을 다룹니다. 구성 계층 구조, 환경 관리, 인증 방법, 그리고 효율적이고 안전한 Azure 배포를 가능하게 하는 고급 구성 패턴에 대해 배우게 됩니다.
+이 포괄적인 가이드는 Azure Developer CLI를 최적의 개발 및 배포 워크플로우로 설정하는 모든 측면을 다룹니다. 설정 계층 구조, 환경 관리, 인증 방법, 그리고 효율적이고 안전한 Azure 배포를 가능하게 하는 고급 설정 패턴에 대해 배우게 됩니다.
 
 ## 학습 목표
 
-이 레슨을 마치면 다음을 할 수 있습니다:
-- azd 구성 계층 구조를 숙지하고 설정 우선순위를 이해하기
+이 레슨이 끝날 때까지, 여러분은 다음을 할 수 있습니다:
+- azd 설정 계층 구조를 숙지하고 설정 우선순위를 이해하기
 - 글로벌 및 프로젝트별 설정을 효과적으로 구성하기
-- 서로 다른 구성을 가진 여러 환경을 관리하기
+- 서로 다른 설정을 가진 여러 환경을 관리하기
 - 안전한 인증 및 권한 부여 패턴 구현하기
-- 복잡한 시나리오를 위한 고급 구성 패턴 이해하기
+- 복잡한 시나리오를 위한 고급 설정 패턴 이해하기
 
 ## 학습 결과
 
-이 레슨을 완료한 후, 다음을 수행할 수 있습니다:
-- 최적의 개발 워크플로우를 위해 azd를 구성하기
+이 레슨을 완료한 후, 여러분은 다음을 할 수 있습니다:
+- 최적의 개발 워크플로우를 위해 azd를 설정하기
 - 여러 배포 환경을 설정하고 관리하기
-- 안전한 구성 관리 관행을 구현하기
-- 구성 관련 문제를 해결하기
+- 안전한 설정 관리 관행을 구현하기
+- 설정 관련 문제를 해결하기
 - 특정 조직 요구사항에 맞게 azd 동작을 사용자 정의하기
 
-이 포괄적인 가이드는 Azure Developer CLI를 최적의 개발 및 배포 워크플로우로 구성하는 모든 측면을 다룹니다.
+이 포괄적인 가이드는 Azure Developer CLI를 최적의 개발 및 배포 워크플로우로 설정하는 모든 측면을 다룹니다.
 
-## 구성 계층 구조
+## 설정 계층 구조
 
-azd는 계층적 구성 시스템을 사용합니다:
+azd는 계층적 설정 시스템을 사용합니다:
 1. **명령줄 플래그** (최우선 순위)
 2. **환경 변수**
-3. **로컬 프로젝트 구성** (`.azd/config.json`)
-4. **글로벌 사용자 구성** (`~/.azd/config.json`)
+3. **로컬 프로젝트 설정** (`.azd/config.json`)
+4. **글로벌 사용자 설정** (`~/.azd/config.json`)
 5. **기본값** (최하위 우선순위)
 
-## 글로벌 구성
+## 글로벌 설정
 
 ### 글로벌 기본값 설정
 ```bash
@@ -78,7 +80,7 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ 프로젝트 구성
+## 🏗️ 프로젝트 설정
 
 ### azure.yaml 구조
 `azure.yaml` 파일은 azd 프로젝트의 핵심입니다:
@@ -157,7 +159,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### 서비스 구성 옵션
+### 서비스 설정 옵션
 
 #### 호스트 유형
 ```yaml
@@ -216,8 +218,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### 환경 구성
-각 환경은 `.azure/<env-name>/config.json`에 자체 구성을 가집니다:
+### 환경 설정
+각 환경은 `.azure/<env-name>/config.json`에 자체 설정을 가집니다:
 
 ```json
 {
@@ -270,7 +272,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 인증 구성
+## 🔐 인증 설정
 
 ### Azure CLI 통합
 ```bash
@@ -298,17 +300,17 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### 관리 ID
-Azure 호스팅 환경용:
+Azure에 호스팅된 환경용:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ 인프라 구성
+## 🏗️ 인프라 설정
 
 ### Bicep 매개변수
-`infra/main.parameters.json`에서 인프라 매개변수를 구성하세요:
+`infra/main.parameters.json`에서 인프라 매개변수를 설정하세요:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -330,8 +332,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform 구성
-Terraform 프로젝트의 경우, `infra/terraform.tfvars`에서 구성하세요:
+### Terraform 설정
+Terraform 프로젝트의 경우, `infra/terraform.tfvars`에서 설정하세요:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -339,9 +341,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 배포 구성
+## 🚀 배포 설정
 
-### 빌드 구성
+### 빌드 설정
 ```yaml
 # In azure.yaml
 services:
@@ -364,7 +366,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker 구성
+### Docker 설정
 ```yaml
 services:
   api:
@@ -380,7 +382,7 @@ services:
 ```
 예제 `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 고급 구성
+## 🔧 고급 설정
 
 ### 사용자 정의 리소스 이름 지정
 ```bash
@@ -390,7 +392,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### 네트워크 구성
+### 네트워크 설정
 ```yaml
 # In azure.yaml
 infra:
@@ -401,7 +403,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### 모니터링 구성
+### 모니터링 설정
 ```yaml
 # In azure.yaml
 monitoring:
@@ -413,7 +415,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 환경별 구성
+## 🎯 환경별 설정
 
 ### 개발 환경
 ```bash
@@ -442,9 +444,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 구성 검증
+## 🔍 설정 검증
 
-### 구성 검증
+### 설정 검증
 ```bash
 # Check configuration syntax
 azd config validate
@@ -456,7 +458,7 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### 구성 스크립트
+### 설정 스크립트
 `scripts/`에 검증 스크립트를 생성하세요:
 
 ```bash
@@ -493,7 +495,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. 구성 파일 정리
+### 2. 설정 파일 정리
 ```
 .azure/
 ├── config.json              # Global project config
@@ -517,8 +519,8 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. 구성 문서화
-`CONFIG.md`에 구성 내용을 문서화하세요:
+### 4. 설정 문서화
+`CONFIG.md`에 설정을 문서화하세요:
 ```markdown
 # Configuration Guide
 
@@ -535,23 +537,22 @@ database:
 
 ## 다음 단계
 
-- [첫 번째 프로젝트](first-project.md) - 구성 실습 적용
-- [배포 가이드](../deployment/deployment-guide.md) - 배포를 위한 구성 사용
-- [리소스 프로비저닝](../deployment/provisioning.md) - 프로덕션 준비 구성
+- [첫 번째 프로젝트](first-project.md) - 설정을 실제로 적용하기
+- [배포 가이드](../deployment/deployment-guide.md) - 배포를 위한 설정 사용하기
+- [리소스 프로비저닝](../deployment/provisioning.md) - 프로덕션 준비 설정
 
 ## 참고 자료
 
-- [azd 구성 참조](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azd 설정 참조](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml 스키마](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [환경 변수](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**탐색**
-- **이전 레슨**: [설치 및 설정](installation.md)
+**이전:** [AZD 기본](azd-basics.md) | **다음:** [첫 번째 프로젝트](first-project.md)
 - **다음 레슨**: [첫 번째 프로젝트](first-project.md)
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

@@ -1,53 +1,55 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:42:16+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T22:44:32+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "sl"
 }
 -->
-# Vaš prvi projekt - Praktični vodič
+# Vaš prvi projekt - praktični vodič
+
+**Prejšnje:** [Konfiguracija](configuration.md) | **Naslednje:** [Integracija Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Uvod
 
-Dobrodošli v vašem prvem projektu z Azure Developer CLI! Ta obsežen praktični vodič vas bo korak za korakom popeljal skozi ustvarjanje, uvajanje in upravljanje celovite aplikacije na Azure z uporabo azd. Delali boste s pravo aplikacijo za upravljanje opravil, ki vključuje React frontend, Node.js API backend in MongoDB bazo podatkov.
+Dobrodošli v vašem prvem projektu z Azure Developer CLI! Ta obsežen praktični vodič vas bo korak za korakom popeljal skozi proces ustvarjanja, uvajanja in upravljanja aplikacije s polnim skladom na Azure z uporabo azd. Delali boste z resnično aplikacijo za upravljanje opravil, ki vključuje React frontend, Node.js API backend in MongoDB podatkovno bazo.
 
 ## Cilji učenja
 
 Z dokončanjem tega vodiča boste:
-- Obvladali postopek inicializacije projekta azd z uporabo predlog
-- Razumeli strukturo projektov in konfiguracijskih datotek Azure Developer CLI
+- Obvladali postopek inicializacije projektov azd z uporabo predlog
+- Razumeli strukturo projektov Azure Developer CLI in konfiguracijske datoteke
 - Izvedli popolno uvajanje aplikacije na Azure z zagotavljanjem infrastrukture
-- Izvedli posodobitve aplikacije in strategije ponovnega uvajanja
+- Uvedli strategije za posodobitve aplikacij in ponovno uvajanje
 - Upravljali več okolij za razvoj in testiranje
 - Uporabili prakse čiščenja virov in upravljanja stroškov
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
-- Samostojno inicializirati in konfigurirati azd projekte iz predlog
+- Samostojno inicializirati in konfigurirati projekte azd iz predlog
 - Učinkovito navigirati in spreminjati strukture projektov azd
-- Uvajati celovite aplikacije na Azure z enostavnimi ukazi
-- Odpravljati pogoste težave pri uvajanju in avtentikaciji
-- Upravljati več Azure okolij za različne faze uvajanja
-- Implementirati delovne tokove za neprekinjeno uvajanje posodobitev aplikacij
+- Uvajati aplikacije s polnim skladom na Azure z enojnimi ukazi
+- Reševati pogoste težave pri uvajanju in avtentikaciji
+- Upravljati več okolij Azure za različne faze uvajanja
+- Uvesti delovne tokove za neprekinjeno uvajanje posodobitev aplikacij
 
 ## Začetek
 
-### Kontrolni seznam predpogojev
+### Seznam predpogojev
 - ✅ Nameščen Azure Developer CLI ([Navodila za namestitev](installation.md))
 - ✅ Nameščen in avtenticiran Azure CLI
 - ✅ Nameščen Git na vašem sistemu
-- ✅ Nameščen Node.js 16+ (za ta vodič)
-- ✅ Priporočeno: Visual Studio Code
+- ✅ Node.js 16+ (za ta vodič)
+- ✅ Visual Studio Code (priporočeno)
 
 ### Preverite svojo nastavitev
 ```bash
 # Check azd installation
 azd version
 ```
-### Preverite avtentikacijo na Azure
+### Preverite avtentikacijo Azure
 
 ```bash
 az account show
@@ -79,9 +81,9 @@ azd init --template todo-nodejs-mongo
 
 ### Kaj se je pravkar zgodilo?
 - Prenesli ste kodo predloge v lokalni imenik
-- Ustvarili ste datoteko `azure.yaml` z definicijami storitev
-- Nastavili ste kodo infrastrukture v imeniku `infra/`
-- Ustvarili ste konfiguracijo okolja
+- Ustvarili datoteko `azure.yaml` z definicijami storitev
+- Nastavili kodo infrastrukture v imeniku `infra/`
+- Ustvarili konfiguracijo okolja
 
 ## Korak 2: Raziščite strukturo projekta
 
@@ -123,7 +125,7 @@ my-first-azd-app/
 
 ### Ključne datoteke za razumevanje
 
-**azure.yaml** - Srce vašega azd projekta:
+**azure.yaml** - Srce vašega projekta azd:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -162,7 +164,7 @@ azd env get-values
 
 ## Korak 4: Uvedite na Azure
 
-Zdaj pa k razburljivemu delu - vse uvedite na Azure!
+Zdaj pa k razburljivemu delu - uvedite vse na Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -177,7 +179,7 @@ azd up
 
 ### Kaj se dogaja med uvajanjem?
 
-Ukaz `azd up` izvede naslednje korake:
+Ukaz `azd up` izvaja naslednje korake:
 1. **Zagotavljanje** (`azd provision`) - Ustvari Azure vire
 2. **Pakiranje** - Zgradi kodo vaše aplikacije
 3. **Uvajanje** (`azd deploy`) - Uvede kodo na Azure vire
@@ -197,8 +199,8 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Korak 5: Preizkusite svojo aplikacijo
 
-### Dostopajte do svoje aplikacije
-Kliknite na URL, ki je naveden v izhodu uvajanja, ali ga pridobite kadar koli:
+### Dostop do vaše aplikacije
+Kliknite na URL, ki je naveden v izhodu uvajanja, ali ga pridobite kadarkoli:
 ```bash
 # Get application endpoints
 azd show
@@ -274,9 +276,9 @@ azd env select staging
 azd show
 ```
 
-## Korak 8: Počistite vire
+## Korak 8: Očistite vire
 
-Ko končate z eksperimentiranjem, počistite vire, da se izognete tekočim stroškom:
+Ko končate z eksperimentiranjem, očistite vire, da se izognete stalnim stroškom:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -292,15 +294,15 @@ azd down --force --purge
 
 ## Kaj ste se naučili
 
-Čestitamo! Uspešno ste:
-- Inicializirali azd projekt iz predloge
-- Raziskali strukturo projekta in ključne datoteke
-- Uvedli celovito aplikacijo na Azure
+Čestitke! Uspešno ste:
+- Inicializirali projekt azd iz predloge
+- Raziščili strukturo projekta in ključne datoteke
+- Uvedli aplikacijo s polnim skladom na Azure
 - Naredili spremembe kode in ponovno uvedli
 - Upravljali več okolij
-- Počistili vire
+- Očistili vire
 
-## Odpravljanje pogostih težav
+## Reševanje pogostih težav
 
 ### Napake pri avtentikaciji
 ```bash
@@ -328,7 +330,7 @@ azd logs --service web
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Težave s pristanišči/omrežjem
+### Težave s porti/omrežjem
 ```bash
 # Check if ports are available
 netstat -an | grep :3000
@@ -341,7 +343,7 @@ Zdaj, ko ste zaključili svoj prvi projekt, raziščite te napredne teme:
 
 ### 1. Prilagodite infrastrukturo
 - [Infrastruktura kot koda](../deployment/provisioning.md)
-- [Dodajanje baz podatkov, shranjevanja in drugih storitev](../deployment/provisioning.md#adding-services)
+- [Dodajte podatkovne baze, shranjevanje in druge storitve](../deployment/provisioning.md#adding-services)
 
 ### 2. Nastavite CI/CD
 - [Integracija z GitHub Actions](../deployment/cicd-integration.md)
@@ -374,7 +376,7 @@ azd init --template todo-java-mongo
 
 ### Skupnost in podpora
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Skupnost razvijalcev Azure](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Predloge in primeri
@@ -384,15 +386,14 @@ azd init --template todo-java-mongo
 
 ---
 
-**Čestitamo za dokončanje vašega prvega azd projekta!** Zdaj ste pripravljeni na gradnjo in uvajanje izjemnih aplikacij na Azure z zaupanjem.
+**Čestitke za dokončanje vašega prvega projekta azd!** Zdaj ste pripravljeni na gradnjo in uvajanje izjemnih aplikacij na Azure z zaupanjem.
 
 ---
 
-**Navigacija**
-- **Prejšnja lekcija**: [Konfiguracija](configuration.md)
+**Prejšnje:** [Konfiguracija](configuration.md) | **Naslednje:** [Integracija Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
 - **Naslednja lekcija**: [Vodič za uvajanje](../deployment/deployment-guide.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

@@ -1,22 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-10T06:03:09+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T22:20:46+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "cs"
 }
 -->
 # Průvodce instalací a nastavením
 
+**Předchozí:** [Hlavní dokumentace](../../README.md) | **Další:** [Základy AZD](azd-basics.md)
+
 ## Úvod
 
-Tento komplexní průvodce vás provede instalací a konfigurací Azure Developer CLI (azd) na vašem systému. Naučíte se různé metody instalace pro různé operační systémy, nastavení autentizace a počáteční konfiguraci, abyste připravili své vývojové prostředí pro nasazení na Azure.
+Tento podrobný průvodce vás provede instalací a konfigurací Azure Developer CLI (azd) na vašem systému. Naučíte se různé metody instalace pro různé operační systémy, nastavení autentizace a počáteční konfiguraci, abyste připravili své vývojové prostředí pro nasazení na Azure.
 
 ## Cíle učení
 
-Na konci této lekce budete:
-- Úspěšně mít nainstalovaný Azure Developer CLI na vašem operačním systému
+Na konci této lekce budete schopni:
+- Úspěšně nainstalovat Azure Developer CLI na váš operační systém
 - Nastavit autentizaci s Azure pomocí různých metod
 - Připravit své vývojové prostředí s potřebnými předpoklady
 - Porozumět různým možnostem instalace a kdy je použít
@@ -31,7 +33,7 @@ Po dokončení této lekce budete schopni:
 - Konfigurovat své vývojové prostředí pro optimální použití azd
 - Samostatně řešit běžné problémy s instalací
 
-Tento průvodce vám pomůže nainstalovat a nastavit Azure Developer CLI na vašem systému, bez ohledu na operační systém nebo vývojové prostředí.
+Tento průvodce vám pomůže nainstalovat a nakonfigurovat Azure Developer CLI na vašem systému, bez ohledu na operační systém nebo vývojové prostředí.
 
 ## Předpoklady
 
@@ -62,7 +64,7 @@ choco install azd
 ```
 
 #### Možnost 4: Manuální instalace
-1. Stáhněte si nejnovější verzi z [GitHub](https://github.com/Azure/azure-dev/releases)
+1. Stáhněte si nejnovější verzi z [GitHubu](https://github.com/Azure/azure-dev/releases)
 2. Rozbalte do `C:\Program Files\azd\`
 3. Přidejte do proměnné PATH
 
@@ -114,7 +116,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd je předinstalován v GitHub Codespaces. Stačí vytvořit codespace a ihned začít používat azd.
+azd je předinstalováno v GitHub Codespaces. Stačí vytvořit codespace a ihned začít používat azd.
 
 ### Docker
 
@@ -146,7 +148,7 @@ Očekávaný výstup:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Nastavení autentizace
+## Nastavení autentizace
 
 ### Autentizace pomocí Azure CLI (doporučeno)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Konfigurace
+## Konfigurace
 
 ### Globální konfigurace
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integrace s IDE
+## Integrace s IDE
 
 ### Visual Studio Code
 Nainstalujte rozšíření Azure Developer CLI:
@@ -233,7 +235,7 @@ Vytvořte `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Nainstalujte plugin Azure
-2. Nastavte Azure přihlašovací údaje
+2. Nakonfigurujte Azure přihlašovací údaje
 3. Použijte integrovaný terminál pro příkazy azd
 
 ## 🐛 Řešení problémů s instalací
@@ -281,7 +283,7 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### Další pomoc
+### Získání další pomoci
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -321,7 +323,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Další kroky
 
-1. **Dokončete autentizaci**: Ujistěte se, že máte přístup k vašemu Azure předplatnému
+1. **Dokončete autentizaci**: Ujistěte se, že máte přístup ke svému Azure předplatnému
 2. **Vyzkoušejte první nasazení**: Postupujte podle [Průvodce prvním projektem](first-project.md)
 3. **Prozkoumejte šablony**: Prohlédněte si dostupné šablony pomocí `azd template list`
 4. **Nakonfigurujte své IDE**: Nastavte své vývojové prostředí
@@ -336,13 +338,11 @@ Pokud narazíte na problémy:
 
 ---
 
-**Navigace**
-- **Předchozí lekce**: [Základy AZD](azd-basics.md)
-- **Další lekce**: [Konfigurace](configuration.md)
+**Předchozí:** [Hlavní dokumentace](../../README.md) | **Další:** [Základy AZD](azd-basics.md)
 
 **Instalace dokončena!** Pokračujte na [Váš první projekt](first-project.md) a začněte pracovat s azd.
 
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

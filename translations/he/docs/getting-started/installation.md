@@ -1,15 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T21:28:34+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T21:18:33+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "he"
 }
 -->
-# מדריך התקנה והגדרה
+# מדריך התקנה והגדרות
 
-## הקדמה
+**קודם:** [תיעוד ראשי](../../README.md) | **הבא:** [יסודות AZD](azd-basics.md)
+
+## מבוא
 
 מדריך מקיף זה ילווה אותך בתהליך ההתקנה וההגדרה של Azure Developer CLI (azd) במערכת שלך. תלמד שיטות התקנה שונות למערכות הפעלה שונות, הגדרת אימות, והגדרות ראשוניות להכנת סביבת הפיתוח שלך לפריסות ב-Azure.
 
@@ -18,7 +20,7 @@ CO_OP_TRANSLATOR_METADATA:
 בסיום השיעור הזה, תוכל:
 - להתקין בהצלחה את Azure Developer CLI במערכת ההפעלה שלך
 - להגדיר אימות עם Azure באמצעות שיטות שונות
-- להקים את סביבת הפיתוח שלך עם הדרישות הנחוצות
+- להגדיר את סביבת הפיתוח שלך עם הדרישות הנחוצות
 - להבין את אפשרויות ההתקנה השונות ומתי להשתמש בכל אחת
 - לפתור בעיות נפוצות בתהליך ההתקנה וההגדרה
 
@@ -51,7 +53,7 @@ CO_OP_TRANSLATOR_METADATA:
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### אפשרות 2: מנהל החבילות של Windows (winget)
+#### אפשרות 2: מנהל חבילות Windows (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
@@ -146,7 +148,7 @@ azd template list
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 הגדרת אימות
+## הגדרת אימות
 
 ### אימות באמצעות Azure CLI (מומלץ)
 ```bash
@@ -163,7 +165,7 @@ az account show
 ```
 
 ### אימות באמצעות קוד מכשיר
-אם אתה עובד על מערכת ללא ממשק גרפי או נתקל בבעיות בדפדפן:
+אם אתה עובד במערכת ללא ממשק גרפי או נתקל בבעיות בדפדפן:
 ```bash
 az login --use-device-code
 ```
@@ -177,9 +179,9 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ הגדרה
+## הגדרות
 
-### הגדרה גלובלית
+### הגדרות גלובליות
 ```bash
 # Set default subscription
 azd config set defaults.subscription <subscription-id>
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 אינטגרציה עם IDE
+## אינטגרציה עם IDE
 
 ### Visual Studio Code
 התקן את התוסף Azure Developer CLI:
@@ -324,25 +326,23 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 1. **השלם את האימות**: ודא שאתה יכול לגשת למנוי Azure שלך
 2. **נסה את הפריסה הראשונה שלך**: עקוב אחר [מדריך הפרויקט הראשון](first-project.md)
 3. **חקור תבניות**: עיין בתבניות זמינות באמצעות `azd template list`
-4. **הגדר את ה-IDE שלך**: הקם את סביבת הפיתוח שלך
+4. **הגדר את ה-IDE שלך**: הגדר את סביבת הפיתוח שלך
 
 ## תמיכה
 
 אם נתקלת בבעיות:
 - [תיעוד רשמי](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [דיווח על בעיות](https://github.com/Azure/azure-dev/issues)
-- [דיונים בקהילה](https://github.com/Azure/azure-dev/discussions)
-- [תמיכה ב-Azure](https://azure.microsoft.com/support/)
+- [דיונים קהילתיים](https://github.com/Azure/azure-dev/discussions)
+- [תמיכת Azure](https://azure.microsoft.com/support/)
 
 ---
 
-**ניווט**
-- **שיעור קודם**: [יסודות AZD](azd-basics.md)
-- **שיעור הבא**: [הגדרה](configuration.md)
+**קודם:** [תיעוד ראשי](../../README.md) | **הבא:** [יסודות AZD](azd-basics.md)
 
 **ההתקנה הושלמה!** המשך ל-[הפרויקט הראשון שלך](first-project.md) כדי להתחיל לעבוד עם azd.
 
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

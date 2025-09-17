@@ -1,34 +1,36 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T13:12:56+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T19:13:54+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "tr"
 }
 -->
 # İlk Projeniz - Uygulamalı Eğitim
 
+**Önceki:** [Yapılandırma](configuration.md) | **Sonraki:** [Azure AI Foundry Entegrasyonu](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## Giriş
 
-İlk Azure Developer CLI projenize hoş geldiniz! Bu kapsamlı uygulamalı eğitim, azd kullanarak Azure üzerinde tam yığın bir uygulama oluşturma, dağıtma ve yönetme sürecini adım adım anlatıyor. React frontend, Node.js API backend ve MongoDB veritabanını içeren gerçek bir yapılacaklar uygulaması üzerinde çalışacaksınız.
+Azure Developer CLI projenize hoş geldiniz! Bu kapsamlı uygulamalı eğitim, azd kullanarak Azure üzerinde tam bir full-stack uygulama oluşturma, dağıtma ve yönetme sürecini adım adım anlatır. React frontend, Node.js API backend ve MongoDB veritabanını içeren gerçek bir yapılacaklar uygulaması üzerinde çalışacaksınız.
 
 ## Öğrenme Hedefleri
 
 Bu eğitimi tamamladığınızda:
 - Şablonlar kullanarak azd proje başlatma iş akışını öğreneceksiniz
 - Azure Developer CLI proje yapısını ve yapılandırma dosyalarını anlayacaksınız
-- Altyapı sağlama ile birlikte uygulamayı Azure'a tamamen dağıtmayı öğreneceksiniz
+- Azure üzerinde altyapı oluşturma ile birlikte tam bir uygulama dağıtımı gerçekleştireceksiniz
 - Uygulama güncellemeleri ve yeniden dağıtım stratejilerini uygulayacaksınız
-- Geliştirme ve test için birden fazla ortamı yöneteceksiniz
+- Geliştirme ve test için birden fazla ortam yöneteceksiniz
 - Kaynak temizliği ve maliyet yönetimi uygulamalarını öğreneceksiniz
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Şablonlardan bağımsız olarak azd projelerini başlatıp yapılandırmak
-- azd proje yapılarını etkili bir şekilde gezinmek ve değiştirmek
-- Tek komutlarla tam yığın uygulamaları Azure'a dağıtmak
+- Şablonlardan bağımsız olarak azd projeleri başlatıp yapılandırmak
+- azd proje yapısını etkili bir şekilde gezinmek ve değiştirmek
+- Tek komutlarla Azure'a full-stack uygulamalar dağıtmak
 - Yaygın dağıtım sorunlarını ve kimlik doğrulama problemlerini çözmek
 - Farklı dağıtım aşamaları için birden fazla Azure ortamını yönetmek
 - Uygulama güncellemeleri için sürekli dağıtım iş akışlarını uygulamak
@@ -80,7 +82,7 @@ azd init --template todo-nodejs-mongo
 ### Ne Oldu?
 - Şablon kodu yerel dizininize indirildi
 - Hizmet tanımları içeren bir `azure.yaml` dosyası oluşturuldu
-- `infra/` dizininde altyapı kodu ayarlandı
+- `infra/` dizininde altyapı kodu kuruldu
 - Bir ortam yapılandırması oluşturuldu
 
 ## Adım 2: Proje Yapısını Keşfedin
@@ -137,7 +139,7 @@ head -30 infra/main.bicep
 
 ## Adım 3: Projenizi Özelleştirin (Opsiyonel)
 
-Dağıtmadan önce uygulamayı özelleştirebilirsiniz:
+Dağıtımdan önce uygulamayı özelleştirebilirsiniz:
 
 ### Frontend'i Değiştirin
 ```bash
@@ -160,9 +162,9 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## Adım 4: Azure'a Dağıtın
+## Adım 4: Azure'a Dağıtım Yapın
 
-Şimdi heyecan verici kısım - her şeyi Azure'a dağıtın!
+Şimdi heyecan verici kısma geldik - her şeyi Azure'a dağıtın!
 
 ```bash
 # Deploy infrastructure and application
@@ -178,7 +180,7 @@ azd up
 ### Dağıtım Sırasında Neler Oluyor?
 
 `azd up` komutu şu adımları gerçekleştirir:
-1. **Sağlama** (`azd provision`) - Azure kaynaklarını oluşturur
+1. **Altyapı Sağlama** (`azd provision`) - Azure kaynaklarını oluşturur
 2. **Paketleme** - Uygulama kodunuzu derler
 3. **Dağıtım** (`azd deploy`) - Kodu Azure kaynaklarına dağıtır
 
@@ -197,7 +199,7 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Adım 5: Uygulamanızı Test Edin
 
-### Uygulamaya Erişin
+### Uygulamaya Erişim
 Dağıtım çıktısında sağlanan URL'ye tıklayın veya istediğiniz zaman alın:
 ```bash
 # Get application endpoints
@@ -208,9 +210,9 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Yapılacaklar Uygulamasını Test Edin
-1. **Bir yapılacak ekleyin** - "Add Todo"ya tıklayın ve bir görev girin
-2. **Tamamlandı olarak işaretleyin** - Tamamlanan öğeleri işaretleyin
-3. **Öğeleri silin** - Artık ihtiyacınız olmayan yapılacakları kaldırın
+1. **Bir görev ekleyin** - "Add Todo" düğmesine tıklayın ve bir görev girin
+2. **Tamamlandı olarak işaretleyin** - Tamamlanan görevleri işaretleyin
+3. **Görevleri silin** - Artık ihtiyaç duymadığınız görevleri kaldırın
 
 ### Uygulamanızı İzleyin
 ```bash
@@ -245,9 +247,9 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## Adım 7: Birden Fazla Ortamı Yönetin
+## Adım 7: Birden Fazla Ortam Yönetin
 
-Üretimden önce değişiklikleri test etmek için bir test ortamı oluşturun:
+Üretim öncesi değişiklikleri test etmek için bir test ortamı oluşturun:
 
 ```bash
 # Create a new staging environment
@@ -276,7 +278,7 @@ azd show
 
 ## Adım 8: Kaynakları Temizleyin
 
-Deneyleriniz bittiğinde, devam eden ücretlerden kaçınmak için temizleyin:
+Deneylerinizi tamamladığınızda, devam eden maliyetlerden kaçınmak için temizleyin:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -295,7 +297,7 @@ azd down --force --purge
 Tebrikler! Başarıyla:
 - Bir şablondan azd projesi başlattınız
 - Proje yapısını ve temel dosyaları keşfettiniz
-- Tam yığın bir uygulamayı Azure'a dağıttınız
+- Azure'a bir full-stack uygulama dağıttınız
 - Kod değişiklikleri yaptınız ve yeniden dağıttınız
 - Birden fazla ortam yönettiniz
 - Kaynakları temizlediniz
@@ -388,9 +390,8 @@ azd init --template todo-java-mongo
 
 ---
 
-**Navigasyon**
-- **Önceki Ders**: [Yapılandırma](configuration.md)
-- **Sonraki Ders**: [Dağıtım Kılavuzu](../deployment/deployment-guide.md)
+**Önceki:** [Yapılandırma](configuration.md) | **Sonraki:** [Azure AI Foundry Entegrasyonu](../ai-foundry/azure-ai-foundry-integration.md)
+- **Sonraki Ders:** [Dağıtım Kılavuzu](../deployment/deployment-guide.md)
 
 ---
 

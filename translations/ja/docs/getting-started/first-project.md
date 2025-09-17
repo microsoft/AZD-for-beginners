@@ -1,13 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:58:09+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T16:54:57+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ja"
 }
 -->
 # 初めてのプロジェクト - 実践チュートリアル
+
+**前回:** [Configuration](configuration.md) | **次回:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## はじめに
 
@@ -15,23 +17,23 @@ Azure Developer CLIプロジェクトへようこそ！この包括的な実践�
 
 ## 学習目標
 
-このチュートリアルを完了することで、以下を習得できます：
-- テンプレートを使用したazdプロジェクトの初期化ワークフロー
+このチュートリアルを完了することで、以下を習得できます:
+- テンプレートを使用したazdプロジェクト初期化ワークフロー
 - Azure Developer CLIプロジェクト構造と設定ファイルの理解
-- インフラストラクチャのプロビジョニングを含むアプリケーションの完全なAzureへのデプロイ
+- インフラストラクチャのプロビジョニングを含むアプリケーションの完全なAzureデプロイ
 - アプリケーションの更新と再デプロイ戦略の実装
 - 開発およびステージング用の複数環境の管理
 - リソースのクリーンアップとコスト管理の実践
 
 ## 学習成果
 
-完了後、以下ができるようになります：
+完了後、以下ができるようになります:
 - テンプレートから独立してazdプロジェクトを初期化および設定
 - azdプロジェクト構造を効果的にナビゲートおよび変更
 - 単一コマンドでフルスタックアプリケーションをAzureにデプロイ
 - 一般的なデプロイ問題や認証問題のトラブルシューティング
-- 異なるデプロイ段階のための複数のAzure環境を管理
-- アプリケーション更新のための継続的デプロイワークフローを実装
+- 異なるデプロイ段階のための複数Azure環境の管理
+- アプリケーション更新のための継続的デプロイワークフローの実装
 
 ## 始める前に
 
@@ -78,14 +80,14 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### 何が起こったのか？
-- テンプレートコードがローカルディレクトリにダウンロードされました
-- サービス定義を含む`azure.yaml`ファイルが作成されました
-- `infra/`ディレクトリにインフラストラクチャコードが設定されました
-- 環境設定が作成されました
+- テンプレートコードをローカルディレクトリにダウンロード
+- サービス定義を含む`azure.yaml`ファイルを作成
+- `infra/`ディレクトリにインフラストラクチャコードを設定
+- 環境設定を作成
 
 ## ステップ2: プロジェクト構造を探索
 
-azdが作成した内容を確認しましょう：
+azdが作成した内容を確認しましょう:
 
 ```bash
 # View the project structure
@@ -94,7 +96,7 @@ tree /f   # Windows
 find . -type f | head -20   # macOS/Linux
 ```
 
-以下が表示されるはずです：
+以下が表示されるはずです:
 ```
 my-first-azd-app/
 ├── .azd/
@@ -123,13 +125,13 @@ my-first-azd-app/
 
 ### 理解すべき主要ファイル
 
-**azure.yaml** - azdプロジェクトの中心：
+**azure.yaml** - azdプロジェクトの中心:
 ```bash
 # View the project configuration
 cat azure.yaml
 ```
 
-**infra/main.bicep** - インフラストラクチャ定義：
+**infra/main.bicep** - インフラストラクチャ定義:
 ```bash
 # View the infrastructure code
 head -30 infra/main.bicep
@@ -137,7 +139,7 @@ head -30 infra/main.bicep
 
 ## ステップ3: プロジェクトのカスタマイズ（オプション）
 
-デプロイ前にアプリケーションをカスタマイズできます：
+デプロイ前にアプリケーションをカスタマイズできます:
 
 ### フロントエンドの変更
 ```bash
@@ -145,7 +147,7 @@ head -30 infra/main.bicep
 code src/web/src/App.tsx
 ```
 
-簡単な変更を加えます：
+簡単な変更を加えます:
 ```typescript
 // Find the title and change it
 <h1>My Awesome Todo App</h1>
@@ -162,7 +164,7 @@ azd env get-values
 
 ## ステップ4: Azureへのデプロイ
 
-いよいよ、すべてをAzureにデプロイします！
+いよいよすべてをAzureにデプロイします！
 
 ```bash
 # Deploy infrastructure and application
@@ -177,7 +179,7 @@ azd up
 
 ### デプロイ中に何が起こるのか？
 
-`azd up`コマンドは以下のステップを実行します：
+`azd up`コマンドは以下のステップを実行します:
 1. **プロビジョン** (`azd provision`) - Azureリソースを作成
 2. **パッケージ** - アプリケーションコードをビルド
 3. **デプロイ** (`azd deploy`) - コードをAzureリソースにデプロイ
@@ -198,7 +200,7 @@ https://app-web-abc123def.azurewebsites.net
 ## ステップ5: アプリケーションのテスト
 
 ### アプリケーションへのアクセス
-デプロイ出力で提供されたURLをクリックするか、いつでも取得できます：
+デプロイ出力で提供されたURLをクリックするか、いつでも取得可能:
 ```bash
 # Get application endpoints
 azd show
@@ -223,7 +225,7 @@ azd logs
 
 ## ステップ6: 変更を加えて再デプロイ
 
-変更を加えて、更新がどれほど簡単か確認しましょう：
+変更を加えて更新がどれほど簡単か確認しましょう:
 
 ### APIの変更
 ```bash
@@ -231,7 +233,7 @@ azd logs
 code src/api/src/routes/lists.js
 ```
 
-カスタムレスポンスヘッダーを追加：
+カスタムレスポンスヘッダーを追加:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -247,7 +249,7 @@ azd deploy
 
 ## ステップ7: 複数環境の管理
 
-本番前に変更をテストするためのステージング環境を作成：
+本番前に変更をテストするためのステージング環境を作成:
 
 ```bash
 # Create a new staging environment
@@ -276,7 +278,7 @@ azd show
 
 ## ステップ8: リソースのクリーンアップ
 
-実験が終わったら、継続的な料金を避けるためにクリーンアップを行います：
+実験が終わったら、継続的な料金を避けるためにクリーンアップ:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -292,7 +294,7 @@ azd down --force --purge
 
 ## 学んだこと
 
-おめでとうございます！以下を成功させました：
+おめでとうございます！以下を成功させました:
 - テンプレートからazdプロジェクトを初期化
 - プロジェクト構造と主要ファイルを探索
 - フルスタックアプリケーションをAzureにデプロイ
@@ -337,7 +339,7 @@ netstat -an | grep :3100
 
 ## 次のステップ
 
-初めてのプロジェクトを完了したので、以下の高度なトピックを探索してください：
+初めてのプロジェクトを完了したので、以下の高度なトピックを探索してください:
 
 ### 1. インフラストラクチャのカスタマイズ
 - [コードとしてのインフラストラクチャ](../deployment/provisioning.md)
@@ -384,15 +386,14 @@ azd init --template todo-java-mongo
 
 ---
 
-**初めてのazdプロジェクトを完了おめでとうございます！** これでAzure上で素晴らしいアプリケーションを自信を持って構築・デプロイする準備が整いました。
+**初めてのazdプロジェクトを完了おめでとうございます！** Azure上で素晴らしいアプリケーションを自信を持って構築・デプロイする準備が整いました。
 
 ---
 
-**ナビゲーション**
-- **前のレッスン**: [設定](configuration.md)
-- **次のレッスン**: [デプロイガイド](../deployment/deployment-guide.md)
+**前回:** [Configuration](configuration.md) | **次回:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+- **次のレッスン**: [Deployment Guide](../deployment/deployment-guide.md)
 
 ---
 
 **免責事項**:  
-この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解について、当社は責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてお考えください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は一切の責任を負いません。

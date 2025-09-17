@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T12:49:13+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T17:08:22+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "de"
 }
 -->
 # Konfigurationshandbuch
 
+**Vorher:** [AZD Grundlagen](azd-basics.md) | **Nächster:** [Erstes Projekt](first-project.md)
+
 ## Einführung
 
-Dieses umfassende Handbuch behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows. Sie erfahren mehr über die Konfigurationshierarchie, das Management von Umgebungen, Authentifizierungsmethoden und fortgeschrittene Konfigurationsmuster, die effiziente und sichere Azure-Bereitstellungen ermöglichen.
+Dieser umfassende Leitfaden behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows. Sie lernen die Konfigurationshierarchie, das Management von Umgebungen, Authentifizierungsmethoden und fortgeschrittene Konfigurationsmuster kennen, die effiziente und sichere Azure-Bereitstellungen ermöglichen.
 
 ## Lernziele
 
@@ -31,7 +33,7 @@ Nach Abschluss dieser Lektion werden Sie in der Lage sein:
 - Konfigurationsbezogene Probleme zu beheben
 - Das Verhalten von azd an spezifische organisatorische Anforderungen anzupassen
 
-Dieses umfassende Handbuch behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows.
+Dieser umfassende Leitfaden behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows.
 
 ## Konfigurationshierarchie
 
@@ -284,7 +286,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Authentifizierung mit Service Principal
+### Service Principal Authentifizierung
 Für CI/CD-Pipelines:
 ```bash
 # Set environment variables
@@ -482,7 +484,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 Best Practices
 
-### 1. Verwenden Sie Umgebungsvariablen
+### 1. Umgebungsvariablen verwenden
 ```yaml
 # Good: Use environment variables
 database:
@@ -493,7 +495,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organisieren Sie Konfigurationsdateien
+### 2. Konfigurationsdateien organisieren
 ```
 .azure/
 ├── config.json              # Global project config
@@ -509,7 +511,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versionskontrolle berücksichtigen
+### 3. Versionskontrollüberlegungen
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -536,8 +538,8 @@ Dokumentieren Sie Ihre Konfiguration in `CONFIG.md`:
 ## Nächste Schritte
 
 - [Ihr erstes Projekt](first-project.md) - Konfiguration in der Praxis anwenden
-- [Bereitstellungshandbuch](../deployment/deployment-guide.md) - Konfiguration für die Bereitstellung nutzen
-- [Ressourcenbereitstellung](../deployment/provisioning.md) - Produktionsreife Konfigurationen
+- [Bereitstellungsleitfaden](../deployment/deployment-guide.md) - Konfiguration für die Bereitstellung nutzen
+- [Ressourcen bereitstellen](../deployment/provisioning.md) - Produktionsreife Konfigurationen
 
 ## Referenzen
 
@@ -547,11 +549,10 @@ Dokumentieren Sie Ihre Konfiguration in `CONFIG.md`:
 
 ---
 
-**Navigation**
-- **Vorherige Lektion**: [Installation & Einrichtung](installation.md)
+**Vorher:** [AZD Grundlagen](azd-basics.md) | **Nächster:** [Erstes Projekt](first-project.md)
 - **Nächste Lektion**: [Ihr erstes Projekt](first-project.md)
 
 ---
 
 **Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.

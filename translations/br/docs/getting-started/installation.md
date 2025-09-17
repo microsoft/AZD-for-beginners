@@ -1,23 +1,25 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-09T19:09:49+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T19:06:44+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "br"
 }
 -->
 # Guia de Instalação e Configuração
 
+**Anterior:** [Documentação Principal](../../README.md) | **Próximo:** [Noções Básicas do AZD](azd-basics.md)
+
 ## Introdução
 
-Este guia abrangente irá orientá-lo na instalação e configuração do Azure Developer CLI (azd) no seu sistema. Você aprenderá diferentes métodos de instalação para diversos sistemas operacionais, configuração de autenticação e ajustes iniciais para preparar seu ambiente de desenvolvimento para implantações no Azure.
+Este guia abrangente irá orientá-lo na instalação e configuração do Azure Developer CLI (azd) em seu sistema. Você aprenderá diferentes métodos de instalação para diversos sistemas operacionais, configuração de autenticação e ajustes iniciais para preparar seu ambiente de desenvolvimento para implantações no Azure.
 
 ## Objetivos de Aprendizado
 
 Ao final desta lição, você será capaz de:
 - Instalar com sucesso o Azure Developer CLI no seu sistema operacional
-- Configurar autenticação com o Azure usando diferentes métodos
+- Configurar autenticação com o Azure utilizando diferentes métodos
 - Preparar seu ambiente de desenvolvimento com os pré-requisitos necessários
 - Compreender as diferentes opções de instalação e quando utilizá-las
 - Solucionar problemas comuns de instalação e configuração
@@ -31,7 +33,7 @@ Após concluir esta lição, você será capaz de:
 - Configurar seu ambiente de desenvolvimento para uso otimizado do azd
 - Resolver problemas comuns de instalação de forma independente
 
-Este guia ajudará você a instalar e configurar o Azure Developer CLI no seu sistema, independentemente do sistema operacional ou ambiente de desenvolvimento.
+Este guia ajudará você a instalar e configurar o Azure Developer CLI em seu sistema, independentemente do sistema operacional ou ambiente de desenvolvimento.
 
 ## Pré-requisitos
 
@@ -146,7 +148,7 @@ Saída esperada:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Configuração de Autenticação
+## Configuração de Autenticação
 
 ### Autenticação com Azure CLI (Recomendado)
 ```bash
@@ -177,7 +179,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Configuração
+## Configuração
 
 ### Configuração Global
 ```bash
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Integração com IDE
+## Integração com IDE
 
 ### Visual Studio Code
 Instale a extensão Azure Developer CLI:
@@ -234,9 +236,9 @@ Crie um arquivo `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Instale o plugin do Azure
 2. Configure as credenciais do Azure
-3. Use o terminal integrado para comandos azd
+3. Use o terminal integrado para comandos do azd
 
-## 🐛 Solução de Problemas na Instalação
+## 🐛 Solução de Problemas de Instalação
 
 ### Problemas Comuns
 
@@ -330,17 +332,15 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 Se você encontrar problemas:
 - [Documentação Oficial](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Reportar Problemas](https://github.com/Azure/azure-dev/issues)
+- [Relatar Problemas](https://github.com/Azure/azure-dev/issues)
 - [Discussões da Comunidade](https://github.com/Azure/azure-dev/discussions)
 - [Suporte do Azure](https://azure.microsoft.com/support/)
 
 ---
 
-**Navegação**
-- **Lição Anterior**: [Noções Básicas do AZD](azd-basics.md)
-- **Próxima Lição**: [Configuração](configuration.md)
+**Anterior:** [Documentação Principal](../../README.md) | **Próximo:** [Noções Básicas do AZD](azd-basics.md)
 
-**Instalação Concluída!** Continue para [Seu Primeiro Projeto](first-project.md) para começar a construir com azd.
+**Instalação Concluída!** Continue para [Seu Primeiro Projeto](first-project.md) para começar a construir com o azd.
 
 ---
 

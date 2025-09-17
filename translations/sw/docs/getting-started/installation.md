@@ -1,23 +1,25 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e9fcb9121c8d0b570798d778f8904a22",
-  "translation_date": "2025-09-10T06:02:26+00:00",
+  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
+  "translation_date": "2025-09-12T22:11:57+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "sw"
 }
 -->
 # Mwongozo wa Usakinishaji na Usanidi
 
+**Iliyopita:** [Nyaraka Kuu](../../README.md) | **Inayofuata:** [Misingi ya AZD](azd-basics.md)
+
 ## Utangulizi
 
-Mwongozo huu wa kina utakusaidia kusakinisha na kusanidi Azure Developer CLI (azd) kwenye mfumo wako. Utajifunza mbinu mbalimbali za usakinishaji kwa mifumo tofauti ya uendeshaji, usanidi wa uthibitishaji, na usanidi wa awali ili kuandaa mazingira yako ya maendeleo kwa ajili ya kupeleka miradi kwenye Azure.
+Mwongozo huu wa kina utakusaidia kusakinisha na kusanidi Azure Developer CLI (azd) kwenye mfumo wako. Utajifunza mbinu mbalimbali za usakinishaji kwa mifumo tofauti ya uendeshaji, usanidi wa uthibitishaji, na maandalizi ya mazingira ya maendeleo kwa ajili ya utekelezaji wa Azure.
 
 ## Malengo ya Kujifunza
 
 Mwisho wa somo hili, utaweza:
 - Kusakinisha Azure Developer CLI kwenye mfumo wako wa uendeshaji
-- Kuseti uthibitishaji na Azure kwa kutumia mbinu mbalimbali
+- Kusanya uthibitishaji na Azure kwa kutumia mbinu mbalimbali
 - Kuandaa mazingira yako ya maendeleo na mahitaji muhimu
 - Kuelewa chaguo tofauti za usakinishaji na wakati wa kutumia kila moja
 - Kutatua matatizo ya kawaida ya usakinishaji na usanidi
@@ -28,17 +30,17 @@ Baada ya kukamilisha somo hili, utaweza:
 - Kusakinisha azd kwa kutumia mbinu inayofaa kwa jukwaa lako
 - Kuthibitisha na Azure kwa kutumia `azd auth login`
 - Kuhakikisha usakinishaji wako na kujaribu amri za msingi za azd
-- Kuseti mazingira yako ya maendeleo kwa matumizi bora ya azd
+- Kusanya mazingira yako ya maendeleo kwa matumizi bora ya azd
 - Kutatua matatizo ya kawaida ya usakinishaji kwa kujitegemea
 
-Mwongozo huu utakusaidia kusakinisha na kusanidi Azure Developer CLI kwenye mfumo wako, bila kujali mfumo wa uendeshaji au mazingira yako ya maendeleo.
+Mwongozo huu utakusaidia kusakinisha na kusanidi Azure Developer CLI kwenye mfumo wako, bila kujali mfumo wa uendeshaji au mazingira ya maendeleo.
 
 ## Mahitaji ya Awali
 
 Kabla ya kusakinisha azd, hakikisha una:
-- **Akaunti ya Azure** - [Fungua akaunti ya bure](https://azure.microsoft.com/free/)
+- **Usajili wa Azure** - [Fungua akaunti ya bure](https://azure.microsoft.com/free/)
 - **Azure CLI** - Kwa uthibitishaji na usimamizi wa rasilimali
-- **Git** - Kwa kunakili templeti na udhibiti wa matoleo
+- **Git** - Kwa kunakili templeti na udhibiti wa toleo
 - **Docker** (hiari) - Kwa programu zilizo kwenye kontena
 
 ## Mbinu za Usakinishaji
@@ -62,7 +64,7 @@ choco install azd
 ```
 
 #### Chaguo 4: Usakinishaji wa Mwongozo
-1. Pakua toleo la hivi karibuni kutoka [GitHub](https://github.com/Azure/azure-dev/releases)
+1. Pakua toleo jipya kutoka [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Toa faili kwenye `C:\Program Files\azd\`
 3. Ongeza kwenye PATH ya mazingira
 
@@ -92,7 +94,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Chaguo 2: Meneja wa Paketi
+#### Chaguo 2: Meneja wa Pakiti
 
 **Ubuntu/Debian:**
 ```bash
@@ -128,7 +130,7 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 
 ## ✅ Thibitisha Usakinishaji
 
-Baada ya kusakinisha, hakikisha azd inafanya kazi vizuri:
+Baada ya usakinishaji, hakikisha azd inafanya kazi vizuri:
 
 ```bash
 # Check version
@@ -146,7 +148,7 @@ Matokeo yanayotarajiwa:
 azd version 1.5.0 (commit abc123)
 ```
 
-## 🔐 Usanidi wa Uthibitishaji
+## Usanidi wa Uthibitishaji
 
 ### Uthibitishaji wa Azure CLI (Inapendekezwa)
 ```bash
@@ -177,9 +179,9 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 🛠️ Usanidi
+## Usanidi
 
-### Usanidi wa Kawaida
+### Usanidi wa Kimataifa
 ```bash
 # Set default subscription
 azd config set defaults.subscription <subscription-id>
@@ -203,7 +205,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## 🔧 Ujumuishaji na IDE
+## Muunganisho wa IDE
 
 ### Visual Studio Code
 Sakinisha kiendelezi cha Azure Developer CLI:
@@ -214,12 +216,12 @@ Sakinisha kiendelezi cha Azure Developer CLI:
 
 Vipengele:
 - IntelliSense kwa azure.yaml
-- Amri za terminal zilizojumuishwa
+- Amri za terminal zilizounganishwa
 - Kutazama templeti
-- Ufuatiliaji wa upelekaji
+- Ufuatiliaji wa utekelezaji
 
 ### GitHub Codespaces
-Tengeneza `.devcontainer/devcontainer.json`:
+Unda `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -234,7 +236,7 @@ Tengeneza `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Sakinisha kiendelezi cha Azure
 2. Sanidi hati za Azure
-3. Tumia terminal iliyojumuishwa kwa amri za azd
+3. Tumia terminal iliyounganishwa kwa amri za azd
 
 ## 🐛 Kutatua Matatizo ya Usakinishaji
 
@@ -247,7 +249,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### Masuala ya PATH
-Ongeza azd kwenye PATH kwa mkono:
+Ongeza azd kwenye PATH kwa mikono:
 
 **Windows:**
 ```cmd
@@ -270,7 +272,7 @@ azd config set https.proxy https://proxy:8080
 azd config set http.insecure true
 ```
 
-#### Migogoro ya Toleo
+#### Migongano ya Toleo
 ```bash
 # Remove old installations
 # Windows: winget uninstall Microsoft.Azd
@@ -297,7 +299,7 @@ azd info
 ## Kusasisha azd
 
 ### Sasisho za Kiotomatiki
-azd itakujulisha wakati sasisho linapatikana:
+azd itakujulisha wakati sasisho zinapatikana:
 ```bash
 azd version --check-for-updates
 ```
@@ -319,10 +321,10 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## Hatua Zifuatazo
+## Hatua Zinazofuata
 
 1. **Kamilisha uthibitishaji**: Hakikisha unaweza kufikia usajili wako wa Azure
-2. **Jaribu upelekaji wako wa kwanza**: Fuata [Mwongozo wa Mradi wa Kwanza](first-project.md)
+2. **Jaribu utekelezaji wako wa kwanza**: Fuata [Mwongozo wa Mradi wa Kwanza](first-project.md)
 3. **Chunguza templeti**: Tazama templeti zinazopatikana kwa `azd template list`
 4. **Sanidi IDE yako**: Andaa mazingira yako ya maendeleo
 
@@ -336,11 +338,9 @@ Ikiwa unakumbana na matatizo:
 
 ---
 
-**Urambazaji**
-- **Somo la Awali**: [Misingi ya AZD](azd-basics.md)
-- **Somo Linalofuata**: [Usanidi](configuration.md)
+**Iliyopita:** [Nyaraka Kuu](../../README.md) | **Inayofuata:** [Misingi ya AZD](azd-basics.md)
 
-**Usakinishaji Umekamilika!** Endelea na [Mradi Wako wa Kwanza](first-project.md) ili kuanza kujenga kwa azd.
+**Usakinishaji Umekamilika!** Endelea kwa [Mradi Wako wa Kwanza](first-project.md) ili kuanza kujenga na azd.
 
 ---
 

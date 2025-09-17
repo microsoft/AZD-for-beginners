@@ -1,39 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T12:47:28+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T16:51:48+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "fr"
 }
 -->
-# AZD Bases - Comprendre Azure Developer CLI
+# AZD Basics - Comprendre Azure Developer CLI
+
+**Précédent :** [Installation et configuration](installation.md) | **Suivant :** [Configuration](configuration.md)
 
 ## Introduction
 
-Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de commande puissant qui accélère votre passage du développement local au déploiement sur Azure. Vous apprendrez les concepts fondamentaux, les fonctionnalités principales et comprendrez comment azd simplifie le déploiement d'applications cloud natives.
+Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de commande puissant qui accélère votre transition du développement local au déploiement sur Azure. Vous découvrirez les concepts fondamentaux, les fonctionnalités principales et comment azd simplifie le déploiement d'applications cloud-native.
 
 ## Objectifs d'apprentissage
 
 À la fin de cette leçon, vous serez capable de :
 - Comprendre ce qu'est Azure Developer CLI et son objectif principal
-- Découvrir les concepts clés des modèles, des environnements et des services
-- Explorer les fonctionnalités principales, notamment le développement basé sur des modèles et l'infrastructure en tant que code
+- Apprendre les concepts clés des modèles, environnements et services
+- Explorer les fonctionnalités essentielles, notamment le développement basé sur des modèles et l'infrastructure en tant que code
 - Comprendre la structure et le flux de travail d'un projet azd
 - Être prêt à installer et configurer azd pour votre environnement de développement
 
 ## Résultats d'apprentissage
 
-Après avoir terminé cette leçon, vous serez capable de :
+Après avoir terminé cette leçon, vous serez en mesure de :
 - Expliquer le rôle d'azd dans les flux de travail modernes de développement cloud
 - Identifier les composants de la structure d'un projet azd
-- Décrire comment les modèles, les environnements et les services fonctionnent ensemble
+- Décrire comment les modèles, environnements et services fonctionnent ensemble
 - Comprendre les avantages de l'infrastructure en tant que code avec azd
 - Reconnaître les différentes commandes azd et leurs objectifs
 
 ## Qu'est-ce qu'Azure Developer CLI (azd) ?
 
-Azure Developer CLI (azd) est un outil en ligne de commande conçu pour accélérer votre passage du développement local au déploiement sur Azure. Il simplifie le processus de création, de déploiement et de gestion des applications cloud natives sur Azure.
+Azure Developer CLI (azd) est un outil en ligne de commande conçu pour accélérer votre transition du développement local au déploiement sur Azure. Il simplifie le processus de création, de déploiement et de gestion des applications cloud-native sur Azure.
 
 ## Concepts clés
 
@@ -189,7 +191,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Comprendre `azd down --force --purge`
-La commande `azd down --force --purge` est un moyen puissant de démanteler complètement votre environnement azd et toutes les ressources associées. Voici une explication de ce que chaque option fait :
+La commande `azd down --force --purge` est un moyen puissant de démanteler complètement votre environnement azd et toutes les ressources associées. Voici une explication de chaque option :
 ```
 --force
 ```
@@ -310,11 +312,10 @@ azd init --template template1
 
 ---
 
-**Navigation**
-- **Leçon précédente** : [README](../../README.md)
-- **Leçon suivante** : [Installation et configuration](installation.md)
+**Précédent :** [Installation et configuration](installation.md) | **Suivant :** [Configuration](configuration.md)
+- **Leçon suivante :** [Installation et configuration](installation.md)
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction humaine professionnelle. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

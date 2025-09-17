@@ -1,17 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d0054b58dbf5baa786403593d848de4a",
-  "translation_date": "2025-09-10T12:53:03+00:00",
+  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
+  "translation_date": "2025-09-12T18:41:11+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ur"
 }
 -->
 # آپ کا پہلا پروجیکٹ - عملی رہنمائی
 
+**پچھلا:** [کنفیگریشن](configuration.md) | **اگلا:** [Azure AI Foundry انضمام](../ai-foundry/azure-ai-foundry-integration.md)
+
 ## تعارف
 
-آپ کے پہلے Azure Developer CLI پروجیکٹ میں خوش آمدید! یہ جامع عملی رہنمائی آپ کو Azure پر azd استعمال کرتے ہوئے ایک مکمل اسٹیک ایپلیکیشن بنانے، ڈیپلائے کرنے اور منیج کرنے کا مکمل طریقہ فراہم کرتی ہے۔ آپ ایک حقیقی ٹوڈو ایپلیکیشن کے ساتھ کام کریں گے جس میں React فرنٹ اینڈ، Node.js API بیک اینڈ، اور MongoDB ڈیٹا بیس شامل ہیں۔
+Azure Developer CLI پروجیکٹ میں خوش آمدید! یہ جامع عملی رہنمائی آپ کو Azure پر azd استعمال کرتے ہوئے ایک مکمل اسٹیک ایپلیکیشن بنانے، ڈیپلائے کرنے اور منظم کرنے کا مکمل طریقہ فراہم کرتی ہے۔ آپ ایک حقیقی ٹوڈو ایپلیکیشن کے ساتھ کام کریں گے جس میں React فرنٹ اینڈ، Node.js API بیک اینڈ، اور MongoDB ڈیٹا بیس شامل ہے۔
 
 ## سیکھنے کے اہداف
 
@@ -20,17 +22,17 @@ CO_OP_TRANSLATOR_METADATA:
 - Azure Developer CLI پروجیکٹ کی ساخت اور کنفیگریشن فائلز کو سمجھیں گے
 - Azure پر مکمل ایپلیکیشن ڈیپلائے کریں گے، جس میں انفراسٹرکچر کی پروویژننگ شامل ہے
 - ایپلیکیشن اپڈیٹس اور ریڈیپلائےمنٹ کی حکمت عملیوں کو نافذ کریں گے
-- ترقی اور اسٹیجنگ کے لیے متعدد ماحول کو منیج کریں گے
+- ترقی اور اسٹیجنگ کے لیے متعدد ماحول کو منظم کریں گے
 - وسائل کی صفائی اور لاگت کے انتظام کے طریقے اپنائیں گے
 
 ## سیکھنے کے نتائج
 
 رہنمائی مکمل کرنے کے بعد، آپ:
-- ٹیمپلیٹس سے azd پروجیکٹس کو خود مختار طور پر انیشیئلائز اور کنفیگر کر سکیں گے
+- azd پروجیکٹس کو ٹیمپلیٹس سے خود مختار طور پر انیشیئلائز اور کنفیگر کر سکیں گے
 - azd پروجیکٹ کی ساخت کو مؤثر طریقے سے نیویگیٹ اور تبدیل کر سکیں گے
-- Azure پر مکمل اسٹیک ایپلیکیشنز کو سنگل کمانڈز کے ذریعے ڈیپلائے کر سکیں گے
+- مکمل اسٹیک ایپلیکیشنز کو Azure پر سنگل کمانڈز کے ذریعے ڈیپلائے کر سکیں گے
 - عام ڈیپلائےمنٹ مسائل اور تصدیقی مشکلات کو حل کر سکیں گے
-- مختلف ڈیپلائےمنٹ مراحل کے لیے متعدد Azure ماحول کو منیج کر سکیں گے
+- مختلف ڈیپلائےمنٹ مراحل کے لیے متعدد Azure ماحول کو منظم کر سکیں گے
 - ایپلیکیشن اپڈیٹس کے لیے مسلسل ڈیپلائےمنٹ ورک فلو نافذ کر سکیں گے
 
 ## شروعات کریں
@@ -78,8 +80,8 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### ابھی کیا ہوا؟
-- ٹیمپلیٹ کوڈ کو آپ کی لوکل ڈائریکٹری میں ڈاؤنلوڈ کیا گیا
-- ایک `azure.yaml` فائل بنائی گئی جس میں سروس ڈیفینیشنز ہیں
+- ٹیمپلیٹ کوڈ آپ کی لوکل ڈائریکٹری میں ڈاؤنلوڈ کیا گیا
+- ایک `azure.yaml` فائل سروس ڈیفینیشنز کے ساتھ بنائی گئی
 - `infra/` ڈائریکٹری میں انفراسٹرکچر کوڈ سیٹ اپ کیا گیا
 - ایک ماحول کی کنفیگریشن بنائی گئی
 
@@ -139,7 +141,7 @@ head -30 infra/main.bicep
 
 ڈیپلائے کرنے سے پہلے، آپ ایپلیکیشن کو حسب ضرورت بنا سکتے ہیں:
 
-### فرنٹ اینڈ میں ترمیم کریں
+### فرنٹ اینڈ میں تبدیلی کریں
 ```bash
 # Open the React app component
 code src/web/src/App.tsx
@@ -223,7 +225,7 @@ azd logs
 
 ## مرحلہ 6: تبدیلیاں کریں اور دوبارہ ڈیپلائے کریں
 
-چلیں ایک تبدیلی کریں اور دیکھیں کہ اپڈیٹ کرنا کتنا آسان ہے:
+چلیں ایک تبدیلی کرتے ہیں اور دیکھتے ہیں کہ اپڈیٹ کرنا کتنا آسان ہے:
 
 ### API میں ترمیم کریں
 ```bash
@@ -231,7 +233,7 @@ azd logs
 code src/api/src/routes/lists.js
 ```
 
-ایک کسٹم ریسپانس ہیڈر شامل کریں:
+ایک کسٹم رسپانس ہیڈر شامل کریں:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -245,7 +247,7 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## مرحلہ 7: متعدد ماحول کو منیج کریں
+## مرحلہ 7: متعدد ماحول کو منظم کریں
 
 پروڈکشن سے پہلے تبدیلیوں کو ٹیسٹ کرنے کے لیے ایک اسٹیجنگ ماحول بنائیں:
 
@@ -295,9 +297,9 @@ azd down --force --purge
 مبارک ہو! آپ نے کامیابی سے:
 - ایک ٹیمپلیٹ سے azd پروجیکٹ انیشیئلائز کیا
 - پروجیکٹ کی ساخت اور اہم فائلز کو دریافت کیا
-- Azure پر ایک مکمل اسٹیک ایپلیکیشن ڈیپلائے کی
+- ایک مکمل اسٹیک ایپلیکیشن Azure پر ڈیپلائے کی
 - کوڈ میں تبدیلیاں کیں اور دوبارہ ڈیپلائے کیا
-- متعدد ماحول کو منیج کیا
+- متعدد ماحول کو منظم کیا
 - وسائل کو صاف کیا
 
 ## عام مسائل کا حل
@@ -337,20 +339,20 @@ netstat -an | grep :3100
 
 ## اگلے مراحل
 
-اب جب کہ آپ نے اپنا پہلا پروجیکٹ مکمل کر لیا ہے، ان ایڈوانسڈ موضوعات کو دریافت کریں:
+اب جب کہ آپ نے اپنا پہلا پروجیکٹ مکمل کر لیا ہے، ان اعلی درجے کے موضوعات کو دریافت کریں:
 
 ### 1. انفراسٹرکچر کو حسب ضرورت بنائیں
 - [Infrastructure as Code](../deployment/provisioning.md)
 - [ڈیٹا بیس، اسٹوریج، اور دیگر سروسز شامل کریں](../deployment/provisioning.md#adding-services)
 
 ### 2. CI/CD سیٹ اپ کریں
-- [GitHub Actions Integration](../deployment/cicd-integration.md)
-- [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
+- [GitHub Actions انضمام](../deployment/cicd-integration.md)
+- [Azure DevOps پائپ لائنز](../deployment/cicd-integration.md#azure-devops)
 
 ### 3. پروڈکشن کے بہترین طریقے
 - [سیکیورٹی کنفیگریشنز](../deployment/best-practices.md#security)
 - [کارکردگی کی اصلاح](../deployment/best-practices.md#performance)
-- [مانیٹرنگ اور لاگنگ](../deployment/best-practices.md#monitoring)
+- [نگرانی اور لاگنگ](../deployment/best-practices.md#monitoring)
 
 ### 4. مزید ٹیمپلیٹس دریافت کریں
 ```bash
@@ -368,28 +370,27 @@ azd init --template todo-java-mongo
 ## اضافی وسائل
 
 ### سیکھنے کے مواد
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Developer CLI دستاویزات](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure آرکیٹیکچر سینٹر](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### کمیونٹی اور سپورٹ
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer کمیونٹی](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### ٹیمپلیٹس اور مثالیں
-- [Official Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Templates](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
+- [آفیشل ٹیمپلیٹ گیلری](https://azure.github.io/awesome-azd/)
+- [کمیونٹی ٹیمپلیٹس](https://github.com/Azure-Samples/azd-templates)
+- [انٹرپرائز پیٹرنز](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**مبارک ہو کہ آپ نے اپنا پہلا azd پروجیکٹ مکمل کر لیا ہے!** آپ اب Azure پر شاندار ایپلیکیشنز بنانے اور ڈیپلائے کرنے کے لیے تیار ہیں۔
+**مبارک ہو کہ آپ نے اپنا پہلا azd پروجیکٹ مکمل کر لیا ہے!** اب آپ اعتماد کے ساتھ Azure پر شاندار ایپلیکیشنز بنانے اور ڈیپلائے کرنے کے لیے تیار ہیں۔
 
 ---
 
-**نیویگیشن**
-- **پچھلا سبق**: [کنفیگریشن](configuration.md)
+**پچھلا:** [کنفیگریشن](configuration.md) | **اگلا:** [Azure AI Foundry انضمام](../ai-foundry/azure-ai-foundry-integration.md)
 - **اگلا سبق**: [ڈیپلائےمنٹ گائیڈ](../deployment/deployment-guide.md)
 
 ---

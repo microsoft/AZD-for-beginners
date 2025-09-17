@@ -1,42 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7e50c994df9f71d709906549be362fc5",
-  "translation_date": "2025-09-10T13:32:13+00:00",
+  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
+  "translation_date": "2025-09-12T22:12:14+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sw"
 }
 -->
 # Mwongozo wa Usanidi
 
+**Iliyopita:** [AZD Basics](azd-basics.md) | **Inayofuata:** [First Project](first-project.md)
+
 ## Utangulizi
 
-Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mchakato bora wa maendeleo na usambazaji. Utajifunza kuhusu mpangilio wa usanidi, usimamizi wa mazingira, mbinu za uthibitishaji, na mifumo ya usanidi wa hali ya juu inayowezesha usambazaji wa Azure kwa ufanisi na usalama.
+Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya kazi bora za maendeleo na utekelezaji. Utajifunza kuhusu mfumo wa usanidi, usimamizi wa mazingira, mbinu za uthibitishaji, na mifumo ya usanidi ya hali ya juu inayowezesha utekelezaji salama na bora wa Azure.
 
 ## Malengo ya Kujifunza
 
 Mwisho wa somo hili, utaweza:
-- Kufahamu mpangilio wa usanidi wa azd na kuelewa jinsi mipangilio inavyopangwa kwa kipaumbele
-- Kusimamia mipangilio ya kimataifa na ya mradi maalum kwa ufanisi
+- Kuelewa mfumo wa usanidi wa azd na jinsi mipangilio inavyopewa kipaumbele
+- Kusimamia mipangilio ya kimataifa na ya mradi kwa ufanisi
 - Kusimamia mazingira mengi yenye usanidi tofauti
-- Kutekeleza mifumo salama ya uthibitishaji na ruhusa
-- Kuelewa mifumo ya usanidi wa hali ya juu kwa hali ngumu
+- Kutekeleza mifumo salama ya uthibitishaji na idhini
+- Kuelewa mifumo ya usanidi ya hali ya juu kwa hali ngumu
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha somo hili, utaweza:
-- Kusimamia azd kwa mchakato bora wa maendeleo
-- Kuweka na kusimamia mazingira mengi ya usambazaji
+- Kusanidi azd kwa kazi bora za maendeleo
+- Kuanzisha na kusimamia mazingira mengi ya utekelezaji
 - Kutekeleza mbinu salama za usimamizi wa usanidi
 - Kutatua matatizo yanayohusiana na usanidi
-- Kubinafsisha tabia ya azd kwa mahitaji maalum ya shirika
+- Kubadilisha tabia ya azd kwa mahitaji maalum ya shirika
 
-Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mchakato bora wa maendeleo na usambazaji.
+Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya kazi bora za maendeleo na utekelezaji.
 
-## Mpangilio wa Usanidi
+## Mfumo wa Usanidi
 
-azd hutumia mfumo wa usanidi wa mpangilio wa kipaumbele:
-1. **Bendera za amri** (kipaumbele cha juu zaidi)
+azd hutumia mfumo wa usanidi wa kihierarkia:
+1. **Bendera za mstari wa amri** (kipaumbele cha juu zaidi)
 2. **Vigezo vya mazingira**
 3. **Usanidi wa mradi wa ndani** (`.azd/config.json`)
 4. **Usanidi wa mtumiaji wa kimataifa** (`~/.azd/config.json`)
@@ -44,7 +46,7 @@ azd hutumia mfumo wa usanidi wa mpangilio wa kipaumbele:
 
 ## Usanidi wa Kimataifa
 
-### Kuweka Thamani za Msingi za Kimataifa
+### Kuweka Mipangilio ya Kimataifa
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -81,7 +83,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Usanidi wa Mradi
 
 ### Muundo wa azure.yaml
-Faili ya `azure.yaml` ni moyo wa mradi wako wa azd:
+Faili ya `azure.yaml` ni msingi wa mradi wako wa azd:
 
 ```yaml
 # Minimum configuration
@@ -159,7 +161,7 @@ pipeline:
 
 ### Chaguo za Usanidi wa Huduma
 
-#### Aina za Wenyeji
+#### Aina za Mwenyeji
 ```yaml
 services:
   web-static:
@@ -254,7 +256,7 @@ azd env unset DEBUG
 ```
 
 ### Violezo vya Mazingira
-Tengeneza `.azure/env.template` kwa usanidi wa mazingira unaofanana:
+Unda `.azure/env.template` kwa usanidi thabiti wa mazingira:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -272,7 +274,7 @@ LOG_LEVEL=info
 
 ## 🔐 Usanidi wa Uthibitishaji
 
-### Ushirikiano wa Azure CLI
+### Muunganisho wa Azure CLI
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -285,7 +287,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Uthibitishaji wa Service Principal
-Kwa CI/CD pipelines:
+Kwa mikondo ya CI/CD:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -339,7 +341,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Usanidi wa Usambazaji
+## 🚀 Usanidi wa Utekelezaji
 
 ### Usanidi wa Ujenzi
 ```yaml
@@ -457,7 +459,7 @@ azd provision --dry-run
 ```
 
 ### Script za Usanidi
-Tengeneza script za uthibitishaji katika `scripts/`:
+Unda script za uthibitishaji katika `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -480,7 +482,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Mbinu Bora
+## 🎓 Mazoea Bora
 
 ### 1. Tumia Vigezo vya Mazingira
 ```yaml
@@ -509,7 +511,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Mambo ya Kuzingatia Katika Udhibiti wa Toleo
+### 3. Mazingatio ya Udhibiti wa Toleo
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -518,7 +520,7 @@ database:
 ```
 
 ### 4. Nyaraka za Usanidi
-Andika nyaraka za usanidi wako katika `CONFIG.md`:
+Andika nyaraka za usanidi katika `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -533,25 +535,24 @@ Andika nyaraka za usanidi wako katika `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## Hatua Zifuatazo
+## Hatua Zinazofuata
 
-- [Mradi Wako wa Kwanza](first-project.md) - Tumia usanidi kwa vitendo
-- [Mwongozo wa Usambazaji](../deployment/deployment-guide.md) - Tumia usanidi kwa usambazaji
-- [Utoaji wa Rasilimali](../deployment/provisioning.md) - Usanidi wa hali ya uzalishaji
+- [Your First Project](first-project.md) - Tumia usanidi kwa vitendo
+- [Deployment Guide](../deployment/deployment-guide.md) - Tumia usanidi kwa utekelezaji
+- [Provisioning Resources](../deployment/provisioning.md) - Usanidi wa hali ya uzalishaji
 
-## Marejeo
+## Marejeleo
 
-- [Marejeo ya Usanidi wa azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Muundo wa azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Vigezo vya Mazingira](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Urambazaji**
-- **Somo Lililopita**: [Usakinishaji na Usanidi](installation.md)
-- **Somo Linalofuata**: [Mradi Wako wa Kwanza](first-project.md)
+**Iliyopita:** [AZD Basics](azd-basics.md) | **Inayofuata:** [First Project](first-project.md)
+- **Somo Linalofuata**: [Your First Project](first-project.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia huduma ya tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

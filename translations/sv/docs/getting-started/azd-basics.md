@@ -1,31 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b0f9bb7d2efce4196ceab8e3269080d3",
-  "translation_date": "2025-09-10T13:19:30+00:00",
+  "original_hash": "32a717e79e5363b775f9bdac58002a80",
+  "translation_date": "2025-09-12T21:02:29+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sv"
 }
 -->
-# AZD-grunder - Förstå Azure Developer CLI
+# AZD Grunder - Förstå Azure Developer CLI
+
+**Föregående:** [Installation & Konfiguration](installation.md) | **Nästa:** [Konfiguration](configuration.md)
 
 ## Introduktion
 
-Den här lektionen introducerar dig till Azure Developer CLI (azd), ett kraftfullt kommandoradsverktyg som påskyndar din resa från lokal utveckling till distribution i Azure. Du kommer att lära dig de grundläggande koncepten, kärnfunktionerna och förstå hur azd förenklar distributionen av molnbaserade applikationer.
+Den här lektionen introducerar dig till Azure Developer CLI (azd), ett kraftfullt kommandoradsverktyg som påskyndar din resa från lokal utveckling till Azure-distribution. Du kommer att lära dig de grundläggande koncepten, kärnfunktionerna och förstå hur azd förenklar distributionen av molnbaserade applikationer.
 
 ## Lärandemål
 
 I slutet av denna lektion kommer du att:
 - Förstå vad Azure Developer CLI är och dess huvudsakliga syfte
-- Lära dig de grundläggande koncepten kring mallar, miljöer och tjänster
+- Lära dig kärnkoncepten kring mallar, miljöer och tjänster
 - Utforska nyckelfunktioner som mallbaserad utveckling och Infrastructure as Code
 - Förstå azd-projektets struktur och arbetsflöde
 - Vara redo att installera och konfigurera azd för din utvecklingsmiljö
 
 ## Läranderesultat
 
-Efter att ha slutfört denna lektion kommer du att kunna:
-- Förklara azds roll i moderna arbetsflöden för molnutveckling
+Efter att ha avslutat denna lektion kommer du att kunna:
+- Förklara azd:s roll i moderna arbetsflöden för molnutveckling
 - Identifiera komponenterna i en azd-projektstruktur
 - Beskriva hur mallar, miljöer och tjänster samverkar
 - Förstå fördelarna med Infrastructure as Code med azd
@@ -33,9 +35,9 @@ Efter att ha slutfört denna lektion kommer du att kunna:
 
 ## Vad är Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) är ett kommandoradsverktyg utformat för att påskynda din resa från lokal utveckling till distribution i Azure. Det förenklar processen att bygga, distribuera och hantera molnbaserade applikationer på Azure.
+Azure Developer CLI (azd) är ett kommandoradsverktyg som är utformat för att påskynda din resa från lokal utveckling till Azure-distribution. Det förenklar processen att bygga, distribuera och hantera molnbaserade applikationer på Azure.
 
-## Grundläggande koncept
+## Kärnkoncept
 
 ### Mallar
 Mallar är grunden för azd. De innehåller:
@@ -51,7 +53,7 @@ Miljöer representerar olika distributionsmål:
 - **Produktion** - Live-produktionsmiljö
 
 Varje miljö har sina egna:
-- Azure-resursgrupper
+- Azure-resursgrupp
 - Konfigurationsinställningar
 - Distributionsstatus
 
@@ -189,7 +191,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Förstå `azd down --force --purge`
-Kommandot `azd down --force --purge` är ett kraftfullt sätt att helt ta bort din azd-miljö och alla associerade resurser. Här är en genomgång av vad varje flagga gör:
+Kommandot `azd down --force --purge` är ett kraftfullt sätt att helt ta bort din azd-miljö och alla associerade resurser. Här är en översikt av vad varje flagga gör:
 ```
 --force
 ```
@@ -204,10 +206,10 @@ Tar bort **all associerad metadata**, inklusive:
 Miljöstatus  
 Lokal `.azure`-mapp  
 Cachelagrad distributionsinformation  
-Förhindrar att azd "kommer ihåg" tidigare distributioner, vilket kan orsaka problem som felaktiga resursgrupper eller föråldrade registerreferenser.
+Förhindrar att azd "kommer ihåg" tidigare distributioner, vilket kan orsaka problem som felmatchade resursgrupper eller föråldrade registerreferenser.
 
 ### Varför använda båda?
-När du stöter på problem med `azd up` på grund av kvarvarande status eller delvisa distributioner, säkerställer denna kombination en **ren start**.
+När du har stött på problem med `azd up` på grund av kvarvarande status eller delvisa distributioner, säkerställer denna kombination en **ren start**.
 
 Det är särskilt användbart efter manuella resursborttagningar i Azure-portalen eller vid byte av mallar, miljöer eller namngivningskonventioner för resursgrupper.
 
@@ -273,7 +275,7 @@ azd init --template template1
 
 ### 4. Konfigurationshantering
 - Använd miljövariabler för känslig data
-- Håll konfigurationen i versionskontroll
+- Håll konfigurationen under versionskontroll
 - Dokumentera miljöspecifika inställningar
 
 ## Lärandeprogression
@@ -281,40 +283,39 @@ azd init --template template1
 ### Nybörjare (Vecka 1-2)
 1. Installera azd och autentisera
 2. Distribuera en enkel mall
-3. Förstå projektstrukturen
+3. Förstå projektstruktur
 4. Lär dig grundläggande kommandon (up, down, deploy)
 
-### Medel (Vecka 3-4)
+### Mellannivå (Vecka 3-4)
 1. Anpassa mallar
 2. Hantera flera miljöer
 3. Förstå infrastrukturkod
-4. Sätt upp CI/CD-pipelines
+4. Ställ in CI/CD-pipelines
 
 ### Avancerad (Vecka 5+)
 1. Skapa egna mallar
 2. Avancerade infrastrukturmönster
-3. Multiregion-distributioner
+3. Multiregiondistributioner
 4. Konfigurationer för företagsnivå
 
 ## Nästa steg
 
-- [Installation & Setup](installation.md) - Installera och konfigurera azd
-- [Your First Project](first-project.md) - Praktisk handledning
-- [Configuration Guide](configuration.md) - Avancerade konfigurationsalternativ
+- [Installation & Konfiguration](installation.md) - Installera och konfigurera azd
+- [Ditt första projekt](first-project.md) - Praktisk handledning
+- [Konfigurationsguide](configuration.md) - Avancerade konfigurationsalternativ
 
 ## Ytterligare resurser
 
 - [Azure Developer CLI Översikt](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Mallgalleri](https://azure.github.io/awesome-azd/)
-- [Community Samples](https://github.com/Azure-Samples)
+- [Community-exempel](https://github.com/Azure-Samples)
 
 ---
 
-**Navigering**
-- **Föregående lektion**: [README](../../README.md)
-- **Nästa lektion**: [Installation & Setup](installation.md)
+**Föregående:** [Installation & Konfiguration](installation.md) | **Nästa:** [Konfiguration](configuration.md)
+- **Nästa lektion**: [Installation & Konfiguration](installation.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
