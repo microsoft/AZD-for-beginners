@@ -1,25 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T19:29:53+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T21:40:57+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "it"
 }
 -->
 # Problemi Comuni e Soluzioni
 
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 7 - Risoluzione dei Problemi e Debugging
+- **⬅️ Capitolo Precedente**: [Capitolo 6: Controlli Preliminari](../pre-deployment/preflight-checks.md)
+- **➡️ Successivo**: [Guida al Debugging](debugging.md)
+- **🚀 Capitolo Successivo**: [Capitolo 8: Modelli per Produzione ed Enterprise](../ai-foundry/production-ai-practices.md)
+
 ## Introduzione
 
-Questa guida completa alla risoluzione dei problemi copre le problematiche più frequenti riscontrate durante l'utilizzo di Azure Developer CLI. Impara a diagnosticare, risolvere e affrontare problemi comuni legati all'autenticazione, al deployment, alla creazione dell'infrastruttura e alla configurazione delle applicazioni. Ogni problema include sintomi dettagliati, cause principali e procedure di risoluzione passo-passo.
+Questa guida completa alla risoluzione dei problemi copre le problematiche più frequenti nell'uso di Azure Developer CLI. Impara a diagnosticare, risolvere e affrontare problemi comuni relativi ad autenticazione, distribuzione, provisioning dell'infrastruttura e configurazione delle applicazioni. Ogni problema include sintomi dettagliati, cause principali e procedure passo-passo per la risoluzione.
 
 ## Obiettivi di Apprendimento
 
 Completando questa guida, sarai in grado di:
-- Padroneggiare tecniche diagnostiche per i problemi di Azure Developer CLI
+- Padroneggiare tecniche diagnostiche per problemi con Azure Developer CLI
 - Comprendere i problemi comuni di autenticazione e permessi e le loro soluzioni
-- Risolvere errori di deployment, problemi di provisioning dell'infrastruttura e di configurazione
-- Implementare strategie di monitoraggio e debug proattive
+- Risolvere errori di distribuzione, problemi di provisioning dell'infrastruttura e di configurazione
+- Implementare strategie di monitoraggio e debugging proattive
 - Applicare metodologie sistematiche per la risoluzione di problemi complessi
 - Configurare correttamente logging e monitoraggio per prevenire problemi futuri
 
@@ -27,15 +34,15 @@ Completando questa guida, sarai in grado di:
 
 Al termine, sarai in grado di:
 - Diagnosticare problemi di Azure Developer CLI utilizzando strumenti diagnostici integrati
-- Risolvere autonomamente problemi di autenticazione, abbonamento e permessi
-- Affrontare efficacemente errori di deployment e problemi di provisioning dell'infrastruttura
-- Debuggare problemi di configurazione delle applicazioni e problematiche specifiche dell'ambiente
-- Implementare monitoraggio e alerting per identificare proattivamente potenziali problemi
-- Applicare le migliori pratiche per logging, debug e flussi di lavoro di risoluzione dei problemi
+- Risolvere autonomamente problemi di autenticazione, sottoscrizione e permessi
+- Affrontare efficacemente errori di distribuzione e problemi di provisioning dell'infrastruttura
+- Debuggare problemi di configurazione delle applicazioni e problemi specifici dell'ambiente
+- Implementare monitoraggio e avvisi per identificare proattivamente potenziali problemi
+- Applicare le migliori pratiche per logging, debugging e flussi di lavoro per la risoluzione dei problemi
 
 ## Diagnostica Rapida
 
-Prima di approfondire i problemi specifici, esegui questi comandi per raccogliere informazioni diagnostiche:
+Prima di affrontare problemi specifici, esegui questi comandi per raccogliere informazioni diagnostiche:
 
 ```bash
 # Check azd version and health
@@ -80,9 +87,9 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Problema: "Privilegi insufficienti" durante il deployment
+### Problema: "Privilegi insufficienti" durante la distribuzione
 **Sintomi:**
-- Il deployment fallisce con errori di permessi
+- La distribuzione fallisce con errori di permessi
 - Impossibile creare alcune risorse Azure
 
 **Soluzioni:**
@@ -115,7 +122,7 @@ az account clear
 ### Problema: Conflitti nei nomi delle risorse
 **Sintomi:**
 - Errori "Il nome della risorsa esiste già"
-- Il deployment fallisce durante la creazione delle risorse
+- La distribuzione fallisce durante la creazione delle risorse
 
 **Soluzioni:**
 ```bash
@@ -134,7 +141,7 @@ azd down --force --purge
 ### Problema: Posizione/Regione non disponibile
 **Sintomi:**
 - "La posizione 'xyz' non è disponibile per il tipo di risorsa"
-- Alcuni SKUs non disponibili nella regione selezionata
+- Alcuni SKU non disponibili nella regione selezionata
 
 **Soluzioni:**
 ```bash
@@ -177,7 +184,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 ### Problema: Errori nei template Bicep
 **Sintomi:**
-- Fallimenti nella validazione dei template
+- Fallimenti nella validazione del template
 - Errori di sintassi nei file Bicep
 
 **Soluzioni:**
@@ -195,11 +202,11 @@ cat infra/main.parameters.json | jq '.'
 azd provision --preview
 ```
 
-## 🚀 Fallimenti nel Deployment
+## 🚀 Fallimenti di Distribuzione
 
 ### Problema: Fallimenti nella build
 **Sintomi:**
-- L'applicazione non riesce a essere compilata durante il deployment
+- L'applicazione non riesce a essere compilata durante la distribuzione
 - Errori nell'installazione dei pacchetti
 
 **Soluzioni:**
@@ -226,9 +233,9 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problema: Fallimenti nel deployment dei container
+### Problema: Fallimenti nella distribuzione dei container
 **Sintomi:**
-- Le app container non riescono ad avviarsi
+- Le app container non si avviano
 - Errori nel pull delle immagini
 
 **Soluzioni:**
@@ -291,7 +298,7 @@ azd deploy --service web
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Problema: Problemi con certificati SSL/TLS
+### Problema: Problemi con i certificati SSL/TLS
 **Sintomi:**
 - HTTPS non funziona
 - Errori di validazione del certificato
@@ -329,7 +336,7 @@ app.use(cors({
 azd show
 ```
 
-## 🌍 Problemi di Gestione dell'Ambiente
+## 🌍 Problemi di Gestione degli Ambienti
 
 ### Problema: Problemi nel cambio di ambiente
 **Sintomi:**
@@ -373,10 +380,10 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Problemi di Prestazioni
 
-### Problema: Tempi di deployment lenti
+### Problema: Tempi di distribuzione lenti
 **Sintomi:**
-- I deployment richiedono troppo tempo
-- Timeout durante il deployment
+- Le distribuzioni richiedono troppo tempo
+- Timeout durante la distribuzione
 
 **Soluzioni:**
 ```bash
@@ -399,7 +406,7 @@ azd config set defaults.location eastus2
 ### Problema: Problemi di prestazioni dell'applicazione
 **Sintomi:**
 - Tempi di risposta lenti
-- Elevato utilizzo delle risorse
+- Alto utilizzo delle risorse
 
 **Soluzioni:**
 ```bash
@@ -462,12 +469,12 @@ az webapp show --name myapp --resource-group myrg --query state
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Ottenere Ulteriore Supporto
+## 🆘 Ottenere Ulteriore Aiuto
 
 ### Quando Escalare
-- Problemi di autenticazione persistono dopo aver provato tutte le soluzioni
+- I problemi di autenticazione persistono dopo aver provato tutte le soluzioni
 - Problemi di infrastruttura con i servizi Azure
-- Problemi legati alla fatturazione o all'abbonamento
+- Problemi relativi a fatturazione o sottoscrizione
 - Preoccupazioni o incidenti di sicurezza
 
 ### Canali di Supporto
@@ -493,7 +500,7 @@ Prima di contattare il supporto, raccogli:
 - Dettagli dell'ambiente (`azd env show`)
 - Cronologia di quando il problema è iniziato
 
-### Script di Raccolta Log
+### Script per la Raccolta dei Log
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Prevenzione dei Problemi
 
-### Checklist Pre-deployment
+### Checklist Pre-distribuzione
 ```bash
 # 1. Validate authentication
 az account show
@@ -568,20 +575,20 @@ az security assessment list --resource-group myrg
 
 ## Risorse Correlate
 
-- [Guida al Debug](debugging.md) - Tecniche avanzate di debug
+- [Guida al Debugging](debugging.md) - Tecniche avanzate di debugging
 - [Provisioning delle Risorse](../deployment/provisioning.md) - Risoluzione dei problemi di infrastruttura
 - [Pianificazione della Capacità](../pre-deployment/capacity-planning.md) - Guida alla pianificazione delle risorse
 - [Selezione degli SKU](../pre-deployment/sku-selection.md) - Raccomandazioni sui livelli di servizio
 
 ---
 
-**Suggerimento**: Tieni questa guida a portata di mano e consultala ogni volta che incontri problemi. La maggior parte dei problemi è già stata affrontata e ha soluzioni consolidate!
+**Suggerimento**: Tieni questa guida tra i preferiti e consultala ogni volta che incontri problemi. La maggior parte dei problemi è già stata affrontata e ha soluzioni consolidate!
 
 ---
 
 **Navigazione**
 - **Lezione Precedente**: [Provisioning delle Risorse](../deployment/provisioning.md)
-- **Prossima Lezione**: [Guida al Debug](debugging.md)
+- **Lezione Successiva**: [Guida al Debugging](debugging.md)
 
 ---
 

@@ -1,17 +1,21 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T19:47:27+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-17T21:27:33+00:00",
   "source_file": "workshop/README.md",
   "language_code": "br"
 }
 -->
 # Workshop AZD para Desenvolvedores de IA
 
-**Anterior:** [Guia de Solução de Problemas de IA](../docs/troubleshooting/ai-troubleshooting.md) | **Próximo:** [Módulos do Workshop](../../../workshop)
+**Navegação do Workshop**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../README.md)
+- **📖 Capítulos Relacionados**: Abrange [Capítulo 1](../README.md#-chapter-1-foundation--quick-start), [Capítulo 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) e [Capítulo 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Laboratório Prático**: [Laboratório de IA](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Próximos Passos**: [Módulos do Laboratório do Workshop](../../../workshop)
 
-Bem-vindo ao workshop prático para aprender Azure Developer CLI (AZD) com foco na implantação de aplicações de IA. Este workshop foi projetado para levar você dos fundamentos do AZD até a implantação de soluções de IA prontas para produção.
+Bem-vindo ao workshop prático para aprender a CLI do Desenvolvedor Azure (AZD) com foco na implantação de aplicações de IA. Este workshop foi projetado para levar você dos fundamentos do AZD até a implantação de soluções de IA prontas para produção.
 
 ## Visão Geral do Workshop
 
@@ -34,25 +38,25 @@ Bem-vindo ao workshop prático para aprender Azure Developer CLI (AZD) com foco 
 - Instalando e configurando o AZD
 - Compreendendo a estrutura de projetos do AZD
 - Sua primeira implantação com AZD
-- **Laboratório**: Implante uma aplicação web simples
+- **Laboratório**: Implantar uma aplicação web simples
 
 ### Módulo 2: Integração com Azure OpenAI (45 minutos)
 - Configurando recursos do Azure OpenAI
 - Estratégias de implantação de modelos
 - Configurando acesso à API e autenticação
-- **Laboratório**: Implante uma aplicação de chat com GPT-4
+- **Laboratório**: Implantar uma aplicação de chat com GPT-4
 
 ### Módulo 3: Aplicações RAG (45 minutos)
 - Integração com Azure AI Search
 - Processamento de documentos com Azure Document Intelligence
 - Embeddings vetoriais e busca semântica
-- **Laboratório**: Construa um sistema de perguntas e respostas com documentos
+- **Laboratório**: Construir um sistema de perguntas e respostas com documentos
 
 ### Módulo 4: Implantação em Produção (30 minutos)
 - Configuração de Container Apps
 - Otimização de escalabilidade e desempenho
 - Monitoramento e registro de logs
-- **Laboratório**: Implante em produção com observabilidade
+- **Laboratório**: Implantar em produção com observabilidade
 
 ### Módulo 5: Padrões Avançados (15 minutos)
 - Implantações em múltiplos ambientes
@@ -86,13 +90,13 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Configuração da Conta Azure
 
-1. **Assinatura do Azure**: [Inscreva-se gratuitamente](https://azure.microsoft.com/free/)  
-2. **Acesso ao Azure OpenAI**: [Solicite acesso](https://aka.ms/oai/access)  
+1. **Assinatura do Azure**: [Inscreva-se gratuitamente](https://azure.microsoft.com/free/)
+2. **Acesso ao Azure OpenAI**: [Solicitar acesso](https://aka.ms/oai/access)
 3. **Permissões Necessárias**:
    - Função de Contribuidor na assinatura ou grupo de recursos
    - Administrador de Acesso de Usuário (para atribuições de RBAC)
 
-### Verifique os Pré-requisitos
+### Verificar Pré-requisitos
 
 Execute este script para verificar sua configuração:
 
@@ -152,9 +156,9 @@ Cada módulo inclui laboratórios práticos com código inicial e instruções p
 
 ### Materiais de Referência
 
-- **[Guia de Integração com AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Padrões de integração abrangentes
+- **[Guia de Integração AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Padrões abrangentes de integração
 - **[Guia de Implantação de Modelos de IA](../docs/ai-foundry/ai-model-deployment.md)** - Melhores práticas de implantação de modelos
-- **[Práticas de IA em Produção](../docs/ai-foundry/production-ai-practices.md)** - Padrões de implantação empresariais
+- **[Práticas de Produção de IA](../docs/ai-foundry/production-ai-practices.md)** - Padrões de implantação para empresas
 - **[Guia de Solução de Problemas de IA](../docs/troubleshooting/ai-troubleshooting.md)** - Problemas comuns e soluções
 
 ### Modelos de Exemplo
@@ -201,9 +205,9 @@ cat README.md  # Follow the instructions
 
 Se você estiver participando de uma sessão com instrutor:
 
-- 🎥 **Gravação do Workshop**: [Disponível sob demanda](https://aka.ms/azd-ai-workshop)  
-- 💬 **Comunidade no Discord**: [Participe para suporte ao vivo](https://aka.ms/foundry/discord)  
-- **Feedback do Workshop**: [Compartilhe sua experiência](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Gravação do Workshop**: [Disponível sob demanda](https://aka.ms/azd-ai-workshop)
+- 💬 **Comunidade no Discord**: [Participe para suporte ao vivo](https://aka.ms/foundry/discord)
+- **Feedback do Workshop**: [Compartilhe sua experiência](https://aka.ms/azd-workshop-feedback)
 
 ## Cronograma do Workshop
 
@@ -218,7 +222,7 @@ Se você estiver participando de uma sessão com instrutor:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Sessão com Instrutor (2,5 horas)
+### Sessão com Instrutor (2.5 horas)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -236,9 +240,9 @@ Se você estiver participando de uma sessão com instrutor:
 Ao final deste workshop, você será capaz de:
 
 ✅ **Implantar aplicações de IA** usando templates do AZD  
-✅ **Configurar o Azure OpenAI** com segurança adequada  
+✅ **Configurar Azure OpenAI** com segurança adequada  
 ✅ **Construir aplicações RAG** com integração ao Azure AI Search  
-✅ **Implementar padrões de produção** para cargas de trabalho empresariais de IA  
+✅ **Implementar padrões de produção** para cargas de trabalho de IA empresariais  
 ✅ **Monitorar e solucionar problemas** em implantações de aplicações de IA  
 ✅ **Aplicar estratégias de otimização de custos** para cargas de trabalho de IA  
 
@@ -246,35 +250,35 @@ Ao final deste workshop, você será capaz de:
 
 ### Durante o Workshop
 
-- 🙋 **Perguntas**: Use o chat do workshop ou levante a mão  
-- 🐛 **Problemas**: Consulte o [guia de solução de problemas](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Dicas**: Compartilhe descobertas com outros participantes  
+- 🙋 **Perguntas**: Use o chat do workshop ou levante a mão
+- 🐛 **Problemas**: Consulte o [guia de solução de problemas](../docs/troubleshooting/ai-troubleshooting.md)
+- **Dicas**: Compartilhe descobertas com outros participantes
 
 ### Após o Workshop
 
-- 💬 **Discord**: [Comunidade Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **Problemas no GitHub**: [Relate problemas com templates](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Feedback**: [Formulário de avaliação do workshop](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Comunidade Azure AI Foundry](https://aka.ms/foundry/discord)
+- **Problemas no GitHub**: [Relatar problemas de templates](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Feedback**: [Formulário de avaliação do workshop](https://aka.ms/azd-workshop-feedback)
 
 ## Próximos Passos
 
 ### Continue Aprendendo
 
-1. **Cenários Avançados**: Explore [implantações em múltiplas regiões](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Integração com CI/CD**: Configure [workflows do GitHub Actions](../docs/deployment/github-actions.md)  
-3. **Templates Personalizados**: Crie seus próprios [templates do AZD](../docs/getting-started/custom-templates.md)  
+1. **Cenários Avançados**: Explore [implantações em múltiplas regiões](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Integração com CI/CD**: Configure [workflows do GitHub Actions](../docs/deployment/github-actions.md)
+3. **Templates Personalizados**: Crie seus próprios [templates AZD](../docs/getting-started/custom-templates.md)
 
 ### Aplique em Seus Projetos
 
-1. **Avaliação**: Use nosso [checklist de prontidão](./production-readiness-checklist.md)  
-2. **Templates**: Comece com nossos [templates específicos para IA](../../../workshop/templates)  
-3. **Suporte**: Participe do [Discord do Azure AI Foundry](https://aka.ms/foundry/discord)  
+1. **Avaliação**: Use nosso [checklist de prontidão](./production-readiness-checklist.md)
+2. **Templates**: Comece com nossos [templates específicos para IA](../../../workshop/templates)
+3. **Suporte**: Participe do [Discord Azure AI Foundry](https://aka.ms/foundry/discord)
 
 ### Compartilhe Seu Sucesso
 
-- ⭐ **Dê uma estrela no repositório** se este workshop foi útil para você  
-- 🐦 **Compartilhe nas redes sociais** com #AzureDeveloperCLI #AzureAI  
-- 📝 **Escreva um post no blog** sobre sua jornada de implantação de IA  
+- ⭐ **Dê uma estrela no repositório** se este workshop foi útil para você
+- 🐦 **Compartilhe nas redes sociais** com #AzureDeveloperCLI #AzureAI
+- 📝 **Escreva um post no blog** sobre sua jornada de implantação de IA
 
 ---
 
@@ -290,7 +294,7 @@ Seu feedback nos ajuda a melhorar a experiência do workshop:
 | Nível de Dificuldade | ⭐⭐⭐⭐⭐ | |
 | Experiência Geral | ⭐⭐⭐⭐⭐ | |
 
-**Envie seu feedback**: [Formulário de Avaliação do Workshop](https://aka.ms/azd-workshop-feedback)
+**Enviar feedback**: [Formulário de Avaliação do Workshop](https://aka.ms/azd-workshop-feedback)
 
 ---
 
@@ -303,4 +307,4 @@ Seu feedback nos ajuda a melhorar a experiência do workshop:
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.

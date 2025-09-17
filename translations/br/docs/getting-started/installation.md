@@ -1,25 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T19:06:44+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T21:23:52+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "br"
 }
 -->
 # Guia de Instalação e Configuração
 
-**Anterior:** [Documentação Principal](../../README.md) | **Próximo:** [Noções Básicas do AZD](azd-basics.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos e Início Rápido
+- **⬅️ Anterior**: [Noções Básicas do AZD](azd-basics.md)
+- **➡️ Próximo**: [Seu Primeiro Projeto](first-project.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introdução
 
-Este guia abrangente irá orientá-lo na instalação e configuração do Azure Developer CLI (azd) em seu sistema. Você aprenderá diferentes métodos de instalação para diversos sistemas operacionais, configuração de autenticação e ajustes iniciais para preparar seu ambiente de desenvolvimento para implantações no Azure.
+Este guia abrangente irá orientá-lo na instalação e configuração do Azure Developer CLI (azd) no seu sistema. Você aprenderá diferentes métodos de instalação para diversos sistemas operacionais, configuração de autenticação e ajustes iniciais para preparar seu ambiente de desenvolvimento para implantações no Azure.
 
 ## Objetivos de Aprendizado
 
 Ao final desta lição, você será capaz de:
 - Instalar com sucesso o Azure Developer CLI no seu sistema operacional
-- Configurar autenticação com o Azure utilizando diferentes métodos
+- Configurar a autenticação com o Azure usando diferentes métodos
 - Preparar seu ambiente de desenvolvimento com os pré-requisitos necessários
 - Compreender as diferentes opções de instalação e quando utilizá-las
 - Solucionar problemas comuns de instalação e configuração
@@ -28,12 +33,12 @@ Ao final desta lição, você será capaz de:
 
 Após concluir esta lição, você será capaz de:
 - Instalar o azd utilizando o método apropriado para sua plataforma
-- Autenticar-se com o Azure usando o comando `azd auth login`
+- Autenticar-se no Azure usando o comando `azd auth login`
 - Verificar sua instalação e testar comandos básicos do azd
 - Configurar seu ambiente de desenvolvimento para uso otimizado do azd
 - Resolver problemas comuns de instalação de forma independente
 
-Este guia ajudará você a instalar e configurar o Azure Developer CLI em seu sistema, independentemente do sistema operacional ou ambiente de desenvolvimento.
+Este guia ajudará você a instalar e configurar o Azure Developer CLI no seu sistema, independentemente do sistema operacional ou ambiente de desenvolvimento.
 
 ## Pré-requisitos
 
@@ -66,7 +71,7 @@ choco install azd
 #### Opção 4: Instalação Manual
 1. Baixe a versão mais recente no [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Extraia para `C:\Program Files\azd\`
-3. Adicione ao variável de ambiente PATH
+3. Adicione ao PATH nas variáveis de ambiente
 
 ### macOS
 
@@ -164,13 +169,13 @@ az login
 az account show
 ```
 
-### Autenticação por Código de Dispositivo
+### Autenticação com Código de Dispositivo
 Se você estiver em um sistema sem interface gráfica ou enfrentando problemas com o navegador:
 ```bash
 az login --use-device-code
 ```
 
-### Service Principal (CI/CD)
+### Principal de Serviço (CI/CD)
 Para ambientes automatizados:
 ```bash
 az login --service-principal \
@@ -234,7 +239,7 @@ Crie um arquivo `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Instale o plugin do Azure
+1. Instale o plugin Azure
 2. Configure as credenciais do Azure
 3. Use o terminal integrado para comandos do azd
 
@@ -323,10 +328,10 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Próximos Passos
 
-1. **Concluir autenticação**: Certifique-se de que pode acessar sua assinatura do Azure
+1. **Conclua a autenticação**: Certifique-se de que você pode acessar sua assinatura do Azure
 2. **Experimente sua primeira implantação**: Siga o [Guia do Primeiro Projeto](first-project.md)
 3. **Explore templates**: Navegue pelos templates disponíveis com `azd template list`
-4. **Configure sua IDE**: Prepare seu ambiente de desenvolvimento
+4. **Configure seu IDE**: Prepare seu ambiente de desenvolvimento
 
 ## Suporte
 
@@ -338,11 +343,16 @@ Se você encontrar problemas:
 
 ---
 
-**Anterior:** [Documentação Principal](../../README.md) | **Próximo:** [Noções Básicas do AZD](azd-basics.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos e Início Rápido
+- **⬅️ Anterior**: [Noções Básicas do AZD](azd-basics.md) 
+- **➡️ Próximo**: [Seu Primeiro Projeto](first-project.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Instalação Concluída!** Continue para [Seu Primeiro Projeto](first-project.md) para começar a construir com o azd.
+**✅ Instalação Concluída!** Continue para [Seu Primeiro Projeto](first-project.md) para começar a construir com o azd.
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.

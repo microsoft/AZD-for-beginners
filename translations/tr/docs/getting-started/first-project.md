@@ -1,39 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T19:13:54+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T21:55:06+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "tr"
 }
 -->
 # İlk Projeniz - Uygulamalı Eğitim
 
-**Önceki:** [Yapılandırma](configuration.md) | **Sonraki:** [Azure AI Foundry Entegrasyonu](../ai-foundry/azure-ai-foundry-integration.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç
+- **⬅️ Önceki**: [Kurulum ve Ayarlar](installation.md)
+- **➡️ Sonraki**: [Yapılandırma](configuration.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Giriş
 
-Azure Developer CLI projenize hoş geldiniz! Bu kapsamlı uygulamalı eğitim, azd kullanarak Azure üzerinde tam bir full-stack uygulama oluşturma, dağıtma ve yönetme sürecini adım adım anlatır. React frontend, Node.js API backend ve MongoDB veritabanını içeren gerçek bir yapılacaklar uygulaması üzerinde çalışacaksınız.
+Azure Developer CLI projenize hoş geldiniz! Bu kapsamlı uygulamalı eğitim, azd kullanarak Azure üzerinde tam yığın bir uygulama oluşturma, dağıtma ve yönetme sürecini adım adım anlatır. React frontend, Node.js API backend ve MongoDB veritabanını içeren gerçek bir yapılacaklar uygulaması üzerinde çalışacaksınız.
 
 ## Öğrenme Hedefleri
 
 Bu eğitimi tamamladığınızda:
-- Şablonlar kullanarak azd proje başlatma iş akışını öğreneceksiniz
+- azd proje başlatma iş akışını şablonlar kullanarak öğrenmiş olacaksınız
 - Azure Developer CLI proje yapısını ve yapılandırma dosyalarını anlayacaksınız
 - Azure üzerinde altyapı oluşturma ile birlikte tam bir uygulama dağıtımı gerçekleştireceksiniz
 - Uygulama güncellemeleri ve yeniden dağıtım stratejilerini uygulayacaksınız
 - Geliştirme ve test için birden fazla ortam yöneteceksiniz
-- Kaynak temizliği ve maliyet yönetimi uygulamalarını öğreneceksiniz
+- Kaynak temizleme ve maliyet yönetimi uygulamalarını hayata geçireceksiniz
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Şablonlardan bağımsız olarak azd projeleri başlatıp yapılandırmak
-- azd proje yapısını etkili bir şekilde gezinmek ve değiştirmek
-- Tek komutlarla Azure'a full-stack uygulamalar dağıtmak
-- Yaygın dağıtım sorunlarını ve kimlik doğrulama problemlerini çözmek
-- Farklı dağıtım aşamaları için birden fazla Azure ortamını yönetmek
-- Uygulama güncellemeleri için sürekli dağıtım iş akışlarını uygulamak
+- Şablonlardan bağımsız olarak azd projeleri başlatma ve yapılandırma
+- azd proje yapısını etkili bir şekilde gezinme ve değiştirme
+- Tek komutlarla Azure üzerinde tam yığın uygulamalar dağıtma
+- Yaygın dağıtım sorunlarını ve kimlik doğrulama problemlerini çözme
+- Farklı dağıtım aşamaları için birden fazla Azure ortamı yönetme
+- Uygulama güncellemeleri için sürekli dağıtım iş akışlarını uygulama
 
 ## Başlarken
 
@@ -82,7 +87,7 @@ azd init --template todo-nodejs-mongo
 ### Ne Oldu?
 - Şablon kodu yerel dizininize indirildi
 - Hizmet tanımları içeren bir `azure.yaml` dosyası oluşturuldu
-- `infra/` dizininde altyapı kodu kuruldu
+- `infra/` dizininde altyapı kodu ayarlandı
 - Bir ortam yapılandırması oluşturuldu
 
 ## Adım 2: Proje Yapısını Keşfedin
@@ -164,7 +169,7 @@ azd env get-values
 
 ## Adım 4: Azure'a Dağıtım Yapın
 
-Şimdi heyecan verici kısma geldik - her şeyi Azure'a dağıtın!
+Şimdi heyecan verici kısım - her şeyi Azure'a dağıtın!
 
 ```bash
 # Deploy infrastructure and application
@@ -199,7 +204,7 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Adım 5: Uygulamanızı Test Edin
 
-### Uygulamaya Erişim
+### Uygulamanıza Erişin
 Dağıtım çıktısında sağlanan URL'ye tıklayın veya istediğiniz zaman alın:
 ```bash
 # Get application endpoints
@@ -210,9 +215,9 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Yapılacaklar Uygulamasını Test Edin
-1. **Bir görev ekleyin** - "Add Todo" düğmesine tıklayın ve bir görev girin
-2. **Tamamlandı olarak işaretleyin** - Tamamlanan görevleri işaretleyin
-3. **Görevleri silin** - Artık ihtiyaç duymadığınız görevleri kaldırın
+1. **Bir yapılacak öğesi ekleyin** - "Add Todo"ya tıklayın ve bir görev girin
+2. **Tamamlandı olarak işaretleyin** - Tamamlanan öğeleri işaretleyin
+3. **Öğeleri silin** - Artık ihtiyacınız olmayan yapılacakları kaldırın
 
 ### Uygulamanızı İzleyin
 ```bash
@@ -249,7 +254,7 @@ azd deploy
 
 ## Adım 7: Birden Fazla Ortam Yönetin
 
-Üretim öncesi değişiklikleri test etmek için bir test ortamı oluşturun:
+Üretimden önce değişiklikleri test etmek için bir test ortamı oluşturun:
 
 ```bash
 # Create a new staging environment
@@ -278,7 +283,7 @@ azd show
 
 ## Adım 8: Kaynakları Temizleyin
 
-Deneylerinizi tamamladığınızda, devam eden maliyetlerden kaçınmak için temizleyin:
+Deneyleriniz bittiğinde, devam eden ücretlerden kaçınmak için temizleme yapın:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -297,7 +302,7 @@ azd down --force --purge
 Tebrikler! Başarıyla:
 - Bir şablondan azd projesi başlattınız
 - Proje yapısını ve temel dosyaları keşfettiniz
-- Azure'a bir full-stack uygulama dağıttınız
+- Azure üzerinde tam yığın bir uygulama dağıttınız
 - Kod değişiklikleri yaptınız ve yeniden dağıttınız
 - Birden fazla ortam yönettiniz
 - Kaynakları temizlediniz
@@ -345,7 +350,7 @@ netstat -an | grep :3100
 - [Kod Olarak Altyapı](../deployment/provisioning.md)
 - [Veritabanları, depolama ve diğer hizmetleri ekleyin](../deployment/provisioning.md#adding-services)
 
-### 2. CI/CD Kurun
+### 2. CI/CD Kurulumu Yapın
 - [GitHub Actions Entegrasyonu](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
@@ -382,7 +387,7 @@ azd init --template todo-java-mongo
 ### Şablonlar ve Örnekler
 - [Resmi Şablon Galerisi](https://azure.github.io/awesome-azd/)
 - [Topluluk Şablonları](https://github.com/Azure-Samples/azd-templates)
-- [Kurumsal Kalıplar](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Kurumsal Modeller](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
@@ -390,8 +395,13 @@ azd init --template todo-java-mongo
 
 ---
 
-**Önceki:** [Yapılandırma](configuration.md) | **Sonraki:** [Azure AI Foundry Entegrasyonu](../ai-foundry/azure-ai-foundry-integration.md)
-- **Sonraki Ders:** [Dağıtım Kılavuzu](../deployment/deployment-guide.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç
+- **⬅️ Önceki**: [Kurulum ve Ayarlar](installation.md)
+- **➡️ Sonraki**: [Yapılandırma](configuration.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
+- **Sonraki Ders**: [Dağıtım Kılavuzu](../deployment/deployment-guide.md)
 
 ---
 

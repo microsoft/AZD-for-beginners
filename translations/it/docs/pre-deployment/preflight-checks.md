@@ -1,22 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T19:38:32+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T21:42:03+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "it"
 }
 -->
-# Controlli Preliminari - Validazione della Prontezza al Deployment
+# Controlli Preliminari per le Distribuzioni AZD
+
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 6 - Validazione e Pianificazione Pre-Distribuzione
+- **⬅️ Precedente**: [Selezione SKU](sku-selection.md)
+- **➡️ Capitolo Successivo**: [Capitolo 7: Risoluzione dei Problemi](../troubleshooting/common-issues.md)
+- **🔧 Correlato**: [Capitolo 4: Guida alla Distribuzione](../deployment/deployment-guide.md)
 
 ## Introduzione
 
-Questa guida completa fornisce script e procedure di validazione pre-deployment per garantire il successo dei deployment con Azure Developer CLI prima che inizino. Scopri come implementare controlli automatizzati per autenticazione, disponibilità delle risorse, quote, conformità alla sicurezza e requisiti di prestazioni per prevenire fallimenti e ottimizzare i tassi di successo dei deployment.
+Questa guida completa fornisce script e procedure di validazione pre-distribuzione per garantire il successo delle distribuzioni con Azure Developer CLI prima che inizino. Impara a implementare controlli automatizzati per autenticazione, disponibilità delle risorse, quote, conformità alla sicurezza e requisiti di prestazioni per prevenire fallimenti e ottimizzare i tassi di successo delle distribuzioni.
 
 ## Obiettivi di Apprendimento
 
 Completando questa guida, sarai in grado di:
-- Padroneggiare tecniche e script di validazione automatizzata pre-deployment
+- Padroneggiare tecniche e script di validazione automatizzata pre-distribuzione
 - Comprendere strategie di controllo complete per autenticazione, permessi e quote
 - Implementare procedure di validazione per disponibilità e capacità delle risorse
 - Configurare controlli di sicurezza e conformità per le politiche organizzative
@@ -27,10 +34,10 @@ Completando questa guida, sarai in grado di:
 
 Al termine, sarai in grado di:
 - Creare ed eseguire script di validazione preliminare completi
-- Progettare flussi di lavoro automatizzati per diversi scenari di deployment
+- Progettare flussi di lavoro automatizzati per diversi scenari di distribuzione
 - Implementare procedure e politiche di validazione specifiche per l'ambiente
-- Configurare monitoraggio proattivo e avvisi per la prontezza al deployment
-- Risolvere problemi pre-deployment e implementare azioni correttive
+- Configurare monitoraggio proattivo e avvisi per la prontezza alla distribuzione
+- Risolvere problemi pre-distribuzione e implementare azioni correttive
 - Integrare controlli preliminari nei pipeline DevOps e nei flussi di lavoro automatizzati
 
 ## Indice
@@ -48,9 +55,9 @@ Al termine, sarai in grado di:
 
 ## Panoramica
 
-I controlli preliminari sono validazioni essenziali eseguite prima del deployment per garantire:
+I controlli preliminari sono validazioni essenziali eseguite prima della distribuzione per garantire:
 
-- **Disponibilità delle risorse** e quote nelle regioni target
+- **Disponibilità delle risorse** e quote nelle regioni di destinazione
 - **Autenticazione e permessi** configurati correttamente
 - **Validità dei template** e correttezza dei parametri
 - **Connettività di rete** e dipendenze
@@ -59,10 +66,10 @@ I controlli preliminari sono validazioni essenziali eseguite prima del deploymen
 
 ### Quando Eseguire i Controlli Preliminari
 
-- **Prima del primo deployment** in un nuovo ambiente
+- **Prima della prima distribuzione** in un nuovo ambiente
 - **Dopo modifiche significative ai template**
-- **Prima dei deployment in produzione**
-- **Quando si cambiano le regioni Azure**
+- **Prima delle distribuzioni in produzione**
+- **Quando si cambiano regioni Azure**
 - **Come parte dei pipeline CI/CD**
 
 ---
@@ -785,21 +792,21 @@ main "$@"
 
 ## Checklist di Validazione Manuale
 
-### Checklist Pre-Deployment
+### Checklist Pre-Distribuzione
 
-Stampa questa checklist e verifica ogni voce prima del deployment:
+Stampa questa checklist e verifica ogni voce prima della distribuzione:
 
 #### ✅ Configurazione dell'Ambiente
 - [ ] AZD CLI installato e aggiornato all'ultima versione
 - [ ] Azure CLI installato e autenticato
 - [ ] Sottoscrizione Azure corretta selezionata
 - [ ] Nome dell'ambiente unico e conforme alle convenzioni di denominazione
-- [ ] Gruppo di risorse target identificato o pronto per essere creato
+- [ ] Gruppo di risorse di destinazione identificato o pronto per essere creato
 
 #### ✅ Autenticazione e Permessi
 - [ ] Autenticazione riuscita con `azd auth login`
-- [ ] L'utente ha il ruolo di Contributor sulla sottoscrizione/gruppo di risorse target
-- [ ] Service principal configurato per CI/CD (se applicabile)
+- [ ] L'utente ha il ruolo di Collaboratore sulla sottoscrizione/gruppo di risorse di destinazione
+- [ ] Principale di servizio configurato per CI/CD (se applicabile)
 - [ ] Nessun certificato o credenziale scaduto
 
 #### ✅ Validazione dei Template
@@ -811,23 +818,23 @@ Stampa questa checklist e verifica ogni voce prima del deployment:
 - [ ] Nessun segreto hardcoded nei template
 
 #### ✅ Pianificazione delle Risorse
-- [ ] Regione Azure target selezionata e validata
-- [ ] Servizi Azure richiesti disponibili nella regione target
+- [ ] Regione Azure di destinazione selezionata e validata
+- [ ] Servizi Azure richiesti disponibili nella regione di destinazione
 - [ ] Quote sufficienti disponibili per le risorse pianificate
 - [ ] Conflitti di denominazione delle risorse verificati
 - [ ] Dipendenze tra risorse comprese
 
 #### ✅ Rete e Sicurezza
-- [ ] Connettività di rete verso gli endpoint Azure verificata
-- [ ] Configurazioni di firewall/proxy impostate se necessario
+- [ ] Connettività di rete con gli endpoint Azure verificata
+- [ ] Impostazioni firewall/proxy configurate se necessario
 - [ ] Key Vault configurato per la gestione dei segreti
 - [ ] Identità gestite utilizzate ove possibile
 - [ ] Enforcement HTTPS abilitato per le applicazioni web
 
 #### ✅ Gestione dei Costi
-- [ ] Stime dei costi calcolate utilizzando Azure Pricing Calculator
+- [ ] Stime dei costi calcolate utilizzando il Calcolatore Prezzi Azure
 - [ ] Avvisi di budget configurati se richiesto
-- [ ] SKUs appropriati selezionati per il tipo di ambiente
+- [ ] SKU appropriati selezionati per il tipo di ambiente
 - [ ] Capacità riservata considerata per carichi di lavoro in produzione
 
 #### ✅ Monitoraggio e Osservabilità
@@ -840,7 +847,7 @@ Stampa questa checklist e verifica ogni voce prima del deployment:
 - [ ] Strategia di backup definita per le risorse di dati
 - [ ] Obiettivi di tempo di recupero (RTO) documentati
 - [ ] Obiettivi di punto di recupero (RPO) documentati
-- [ ] Piano di disaster recovery in atto per la produzione
+- [ ] Piano di recupero da disastri in produzione definito
 
 ---
 
@@ -1296,28 +1303,28 @@ steps:
    - Validazione dei template e sintassi
    - Requisiti di sicurezza e conformità
 
-4. **Report Chiaramente Definiti**
+4. **Reportistica Chiara**
    - Indicatori di stato con codifica a colori
    - Messaggi di errore dettagliati con passaggi di risoluzione
    - Report di sintesi per una valutazione rapida
 
 5. **Interrompi Subito**
-   - Blocca il deployment se i controlli critici falliscono
+   - Blocca la distribuzione se i controlli critici falliscono
    - Fornisci indicazioni chiare per la risoluzione
    - Abilita la facile riesecuzione dei controlli
 
 ### Errori Comuni nei Controlli Preliminari
 
-1. **Saltare la validazione** per deployment "rapidi"
-2. **Controllo insufficiente dei permessi** prima del deployment
-3. **Ignorare i limiti di quota** fino al fallimento del deployment
+1. **Saltare la validazione** per distribuzioni "veloci"
+2. **Permessi insufficienti** verificati prima della distribuzione
+3. **Ignorare i limiti di quota** fino al fallimento della distribuzione
 4. **Non validare i template** nei pipeline CI/CD
 5. **Mancanza di validazione della sicurezza** per ambienti di produzione
-6. **Stima dei costi inadeguata** che porta a sorprese di budget
+6. **Stime dei costi inadeguate** che portano a sorprese di budget
 
 ---
 
-**Suggerimento**: Esegui i controlli preliminari come un job separato nel tuo pipeline CI/CD prima del job di deployment effettivo. Questo ti permette di individuare i problemi in anticipo e fornisce un feedback più rapido agli sviluppatori.
+**Suggerimento**: Esegui i controlli preliminari come un job separato nel tuo pipeline CI/CD prima del job di distribuzione effettivo. Questo ti permette di individuare i problemi in anticipo e fornisce un feedback più rapido agli sviluppatori.
 
 ---
 
@@ -1328,4 +1335,4 @@ steps:
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un esperto umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

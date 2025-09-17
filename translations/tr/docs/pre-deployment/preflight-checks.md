@@ -1,63 +1,70 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T19:39:09+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T21:58:38+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "tr"
 }
 -->
-# Uçuş Öncesi Kontroller - Dağıtım Hazırlık Doğrulaması
+# AZD Dağıtımları İçin Ön Kontroller
+
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 6 - Dağıtım Öncesi Doğrulama ve Planlama
+- **⬅️ Önceki**: [SKU Seçimi](sku-selection.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 7: Sorun Giderme](../troubleshooting/common-issues.md)
+- **🔧 İlgili**: [Bölüm 4: Dağıtım Kılavuzu](../deployment/deployment-guide.md)
 
 ## Giriş
 
-Bu kapsamlı rehber, Azure Developer CLI dağıtımlarının başlamadan önce başarılı bir şekilde gerçekleştirilmesini sağlamak için ön dağıtım doğrulama betikleri ve prosedürleri sunar. Kimlik doğrulama, kaynak kullanılabilirliği, kotalar, güvenlik uyumluluğu ve performans gereksinimleri için otomatik kontroller uygulamayı öğrenerek dağıtım hatalarını önleyebilir ve başarı oranlarını optimize edebilirsiniz.
+Bu kapsamlı kılavuz, Azure Developer CLI dağıtımlarının başlamadan önce başarılı olmasını sağlamak için ön dağıtım doğrulama betikleri ve prosedürleri sunar. Kimlik doğrulama, kaynak kullanılabilirliği, kotalar, güvenlik uyumluluğu ve performans gereksinimleri için otomatik kontroller uygulamayı öğrenerek dağıtım hatalarını önleyebilir ve başarı oranlarını optimize edebilirsiniz.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamladığınızda:
-- Otomatik ön dağıtım doğrulama tekniklerini ve betiklerini ustalıkla kullanabileceksiniz
-- Kimlik doğrulama, izinler ve kotalar için kapsamlı kontrol stratejilerini anlayabileceksiniz
-- Kaynak kullanılabilirliği ve kapasite doğrulama prosedürlerini uygulayabileceksiniz
-- Kurumsal politikalar için güvenlik ve uyumluluk kontrollerini yapılandırabileceksiniz
-- Maliyet tahmini ve bütçe doğrulama iş akışlarını tasarlayabileceksiniz
-- CI/CD hatları için özel uçuş öncesi kontrol otomasyonu oluşturabileceksiniz
+Bu kılavuzu tamamlayarak:
+- Otomatik ön dağıtım doğrulama tekniklerini ve betiklerini öğrenin
+- Kimlik doğrulama, izinler ve kotalar için kapsamlı kontrol stratejilerini anlayın
+- Kaynak kullanılabilirliği ve kapasite doğrulama prosedürlerini uygulayın
+- Kurumsal politikalar için güvenlik ve uyumluluk kontrollerini yapılandırın
+- Maliyet tahmini ve bütçe doğrulama iş akışlarını tasarlayın
+- CI/CD hatları için özel ön kontrol otomasyonu oluşturun
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Kapsamlı uçuş öncesi doğrulama betikleri oluşturmak ve çalıştırmak
-- Farklı dağıtım senaryoları için otomatik kontrol iş akışları tasarlamak
-- Ortama özgü doğrulama prosedürleri ve politikaları uygulamak
-- Dağıtım hazırlığı için proaktif izleme ve uyarı yapılandırmak
-- Ön dağıtım sorunlarını gidermek ve düzeltici eylemler uygulamak
-- Uçuş öncesi kontrolleri DevOps hatlarına ve otomasyon iş akışlarına entegre etmek
+- Kapsamlı ön kontrol doğrulama betikleri oluşturup çalıştırın
+- Farklı dağıtım senaryoları için otomatik kontrol iş akışları tasarlayın
+- Ortama özgü doğrulama prosedürleri ve politikaları uygulayın
+- Dağıtım hazırlığı için proaktif izleme ve uyarılar yapılandırın
+- Ön dağıtım sorunlarını giderin ve düzeltici eylemler uygulayın
+- Ön kontrol kontrollerini DevOps hatlarına ve otomasyon iş akışlarına entegre edin
 
 ## İçindekiler
 
 - [Genel Bakış](../../../../docs/pre-deployment)
-- [Otomatik Uçuş Öncesi Betik](../../../../docs/pre-deployment)
+- [Otomatik Ön Kontrol Betiği](../../../../docs/pre-deployment)
 - [Manuel Doğrulama Kontrol Listesi](../../../../docs/pre-deployment)
 - [Ortam Doğrulama](../../../../docs/pre-deployment)
 - [Kaynak Doğrulama](../../../../docs/pre-deployment)
 - [Güvenlik ve Uyumluluk Kontrolleri](../../../../docs/pre-deployment)
 - [Performans ve Kapasite Planlama](../../../../docs/pre-deployment)
-- [Yaygın Sorunların Giderilmesi](../../../../docs/pre-deployment)
+- [Yaygın Sorunları Giderme](../../../../docs/pre-deployment)
 
 ---
 
 ## Genel Bakış
 
-Uçuş öncesi kontroller, dağıtımdan önce gerçekleştirilen temel doğrulamalardır ve şunları sağlar:
+Ön kontrol kontrolleri, dağıtımdan önce aşağıdakileri doğrulamak için yapılan temel doğrulamalardır:
 
-- Hedef bölgelerde **kaynak kullanılabilirliği** ve kotalar
+- Hedef bölgelerdeki **kaynak kullanılabilirliği** ve kotalar
 - **Kimlik doğrulama ve izinlerin** doğru yapılandırılması
 - **Şablon geçerliliği** ve parametre doğruluğu
 - **Ağ bağlantısı** ve bağımlılıklar
 - Kurumsal politikalarla **güvenlik uyumluluğu**
 - Bütçe sınırları içinde **maliyet tahmini**
 
-### Uçuş Öncesi Kontroller Ne Zaman Çalıştırılmalı?
+### Ön Kontroller Ne Zaman Çalıştırılmalı?
 
 - **Yeni bir ortama** ilk dağıtımdan önce
 - **Önemli şablon değişikliklerinden** sonra
@@ -67,9 +74,9 @@ Uçuş öncesi kontroller, dağıtımdan önce gerçekleştirilen temel doğrula
 
 ---
 
-## Otomatik Uçuş Öncesi Betik
+## Otomatik Ön Kontrol Betiği
 
-### PowerShell Uçuş Öncesi Kontrolcü
+### PowerShell Ön Kontrol Aracı
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Uçuş Öncesi Kontrolcü
+### Bash Ön Kontrol Aracı
 
 ```bash
 #!/bin/bash
@@ -787,28 +794,28 @@ main "$@"
 
 ### Ön Dağıtım Kontrol Listesi
 
-Bu kontrol listesini yazdırın ve dağıtımdan önce her bir öğeyi doğrulayın:
+Bu kontrol listesini yazdırın ve dağıtımdan önce her öğeyi doğrulayın:
 
 #### ✅ Ortam Kurulumu
 - [ ] AZD CLI yüklendi ve en son sürüme güncellendi
 - [ ] Azure CLI yüklendi ve kimlik doğrulandı
 - [ ] Doğru Azure aboneliği seçildi
 - [ ] Ortam adı benzersiz ve adlandırma kurallarına uygun
-- [ ] Hedef kaynak grubu tanımlandı veya oluşturulabilir
+- [ ] Hedef kaynak grubu belirlendi veya oluşturulabilir
 
 #### ✅ Kimlik Doğrulama ve İzinler
 - [ ] `azd auth login` ile başarıyla kimlik doğrulandı
 - [ ] Kullanıcı, hedef abonelik/kaynak grubunda Katkıda Bulunan rolüne sahip
-- [ ] CI/CD için hizmet ilkesi yapılandırıldı (uygulanabilirse)
+- [ ] CI/CD için hizmet sorumlusu yapılandırıldı (uygulanabilirse)
 - [ ] Süresi dolmuş sertifika veya kimlik bilgisi yok
 
 #### ✅ Şablon Doğrulama
-- [ ] `azure.yaml` mevcut ve geçerli bir YAML dosyası
-- [ ] azure.yaml'da tanımlanan tüm hizmetlerin karşılık gelen kaynak kodu mevcut
+- [ ] `azure.yaml` mevcut ve geçerli YAML
+- [ ] azure.yaml'da tanımlanan tüm hizmetlerin karşılık gelen kaynak kodu var
 - [ ] `infra/` dizinindeki Bicep şablonları mevcut
 - [ ] `main.bicep` hatasız derleniyor (`az bicep build --file infra/main.bicep`)
 - [ ] Tüm gerekli parametrelerin varsayılan değerleri var veya sağlanacak
-- [ ] Şablonlarda sabitlenmiş gizli bilgiler yok
+- [ ] Şablonlarda sabit kodlanmış gizli bilgiler yok
 
 #### ✅ Kaynak Planlama
 - [ ] Hedef Azure bölgesi seçildi ve doğrulandı
@@ -820,7 +827,7 @@ Bu kontrol listesini yazdırın ve dağıtımdan önce her bir öğeyi doğrulay
 #### ✅ Ağ ve Güvenlik
 - [ ] Azure uç noktalarına ağ bağlantısı doğrulandı
 - [ ] Gerekirse güvenlik duvarı/proxy ayarları yapılandırıldı
-- [ ] Gizli bilgiler yönetimi için Key Vault yapılandırıldı
+- [ ] Gizli bilgiler için Key Vault yapılandırıldı
 - [ ] Mümkün olduğunda yönetilen kimlikler kullanıldı
 - [ ] Web uygulamaları için HTTPS zorlaması etkinleştirildi
 
@@ -828,9 +835,9 @@ Bu kontrol listesini yazdırın ve dağıtımdan önce her bir öğeyi doğrulay
 - [ ] Azure Fiyatlandırma Hesaplayıcısı kullanılarak maliyet tahminleri hesaplandı
 - [ ] Gerekirse bütçe uyarıları yapılandırıldı
 - [ ] Ortam türü için uygun SKU'lar seçildi
-- [ ] Üretim iş yükleri için ayrılmış kapasite göz önünde bulunduruldu
+- [ ] Üretim iş yükleri için ayrılmış kapasite dikkate alındı
 
-#### ✅ İzleme ve Gözlemlenebilirlik
+#### ✅ İzleme ve Görünürlük
 - [ ] Şablonlarda Application Insights yapılandırıldı
 - [ ] Log Analytics çalışma alanı planlandı
 - [ ] Kritik metrikler için uyarı kuralları tanımlandı
@@ -1278,7 +1285,7 @@ steps:
 
 ## En İyi Uygulamalar Özeti
 
-### ✅ Uçuş Öncesi Kontrol En İyi Uygulamaları
+### ✅ Ön Kontrol En İyi Uygulamaları
 
 1. **Mümkün Olduğunca Otomatikleştirin**
    - Kontrolleri CI/CD hatlarına entegre edin
@@ -1306,18 +1313,18 @@ steps:
    - Çözüm için net rehberlik sağlayın
    - Kontrollerin kolayca yeniden çalıştırılmasını sağlayın
 
-### Yaygın Uçuş Öncesi Hatalar
+### Yaygın Ön Kontrol Hataları
 
 1. **"Hızlı" dağıtımlar için doğrulamayı atlamak**
-2. **Yetersiz izin** kontrolü yapmadan dağıtıma başlamak
+2. **Dağıtımdan önce yetersiz izin kontrolü**
 3. **Kota sınırlarını göz ardı etmek** ve dağıtımın başarısız olması
 4. **Şablonları CI/CD hatlarında doğrulamamak**
-5. **Üretim ortamları için güvenlik doğrulamasını atlamak**
+5. **Üretim ortamları için güvenlik doğrulamasını eksik bırakmak**
 6. **Yetersiz maliyet tahmini** nedeniyle bütçe sürprizleri yaşamak
 
 ---
 
-**Pro İpucu**: Uçuş öncesi kontrolleri, CI/CD hattınızda dağıtım işinden önce ayrı bir iş olarak çalıştırın. Bu, sorunları erken yakalamanıza ve geliştiricilere daha hızlı geri bildirim sağlamanıza olanak tanır.
+**İpucu**: Ön kontrol kontrollerini, CI/CD hattınızda dağıtım işinden önce ayrı bir iş olarak çalıştırın. Bu, sorunları erken yakalamanıza olanak tanır ve geliştiricilere daha hızlı geri bildirim sağlar.
 
 ---
 
@@ -1328,4 +1335,4 @@ steps:
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

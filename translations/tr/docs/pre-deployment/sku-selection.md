@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T19:53:58+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T21:59:05+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "tr"
 }
 -->
 # SKU Seçim Rehberi - Doğru Azure Hizmet Katmanlarını Seçmek
+
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 6 - Dağıtım Öncesi Doğrulama ve Planlama
+- **⬅️ Önceki**: [Kapasite Planlama](capacity-planning.md)
+- **➡️ Sonraki**: [Ön Kontroller](preflight-checks.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 7: Sorun Giderme](../troubleshooting/common-issues.md)
 
 ## Giriş
 
@@ -30,7 +37,7 @@ Tamamlandığında:
 - Doğru katman seçimi ile maliyet etkin çoklu ortam mimarileri tasarlayabileceksiniz
 - SKU seçimleri için performans karşılaştırması ve doğrulama yapabileceksiniz
 - SKU önerisi ve maliyet optimizasyonu için otomatik araçlar oluşturabileceksiniz
-- Değişen gereksinimler için SKU geçişlerini ve ölçeklendirme stratejilerini planlayabileceksiniz
+- Değişen gereksinimler için SKU geçiş ve ölçeklendirme stratejileri planlayabileceksiniz
 - Azure İyi Tasarlanmış Çerçeve prensiplerini hizmet katmanı seçimine uygulayabileceksiniz
 
 ## İçindekiler
@@ -54,7 +61,7 @@ SKU'lar (Stok Tutma Birimleri), Azure kaynakları için farklı hizmet katmanlar
 - **Performans özellikleri** (CPU, bellek, veri aktarım hızı)
 - **Özellik erişilebilirliği** (ölçeklendirme seçenekleri, SLA seviyeleri)
 - **Fiyatlandırma modelleri** (tüketim bazlı, rezerve kapasite)
-- **Bölgesel erişilebilirlik** (tüm SKU'lar her bölgede mevcut değildir)
+- **Bölgesel erişim** (tüm SKU'lar her bölgede mevcut değildir)
 
 ### SKU Seçiminde Ana Faktörler
 
@@ -335,7 +342,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 2. **Otomatik Ölçeklendirme Ayrılmış Veri Aktarımı**
    - Kullanıma göre otomatik ölçeklendirme
-   - Minimum ile kullandığınız kadar ödeme
+   - Kullanılan kadar ödeme (minimum ile)
    - Değişken iş yükleri için iyi
 
 3. **Sunucusuz**
@@ -402,7 +409,7 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### Depolama Hesabı Türleri
 
-1. **Standard_LRS** - Geliştirme, kritik olmayan veriler
+1. **Standard_LRS** - Geliştirme, kritik olmayan veri
 2. **Standard_GRS** - Üretim, coğrafi yedeklilik gerekli
 3. **Premium_LRS** - Yüksek performanslı uygulamalar
 4. **Premium_ZRS** - Bölge yedekliliği ile yüksek erişilebilirlik
@@ -410,7 +417,7 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 #### Performans Katmanları
 
 - **Standart**: Genel amaçlı, maliyet etkin
-- **Premium**: Yüksek performanslı, düşük gecikmeli senaryolar
+- **Premium**: Yüksek performans, düşük gecikme senaryoları
 
 ```bicep
 // Development
@@ -455,7 +462,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. Rezerve Kapasite
 
-1-3 yıl boyunca kaynakları rezerve ederek önemli indirimler elde edin:
+1-3 yıllık kaynakları rezerve ederek önemli indirimler elde edin:
 
 ```bash
 # Check reservation options
@@ -465,7 +472,7 @@ az reservations catalog show --reserved-resource-type CosmosDb
 
 ### 2. Doğru Boyutlandırma
 
-Küçük SKU'larla başlayın ve gerçek kullanıma göre büyütün:
+Küçük SKU'larla başlayın ve gerçek kullanım temelinde büyütün:
 
 ```yaml
 # Progressive scaling approach
@@ -651,7 +658,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 ### App Service SKU Hızlı Referans
 
 | SKU | Katman | vCPU | RAM | Depolama | Fiyat Aralığı | Kullanım Durumu |
-|-----|-------|------|-----|----------|---------------|-----------------|
+|-----|--------|------|-----|----------|---------------|-----------------|
 | F1 | Ücretsiz | Paylaşılan | 1GB | 1GB | Ücretsiz | Geliştirme |
 | B1 | Temel | 1 | 1.75GB | 10GB | $ | Küçük uygulamalar |
 | S1 | Standart | 1 | 1.75GB | 50GB | $$ | Üretim |
@@ -661,17 +668,17 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 ### SQL Veritabanı SKU Hızlı Referans
 
 | SKU | Katman | DTU/vCore | Depolama | Fiyat Aralığı | Kullanım Durumu |
-|-----|-------|-----------|----------|---------------|-----------------|
+|-----|--------|-----------|----------|---------------|-----------------|
 | Temel | Temel | 5 DTU | 2GB | $ | Geliştirme |
 | S2 | Standart | 50 DTU | 250GB | $$ | Küçük üretim |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Yüksek performans |
 | GP_Gen5_4 | Genel Amaçlı | 4 vCore | 4TB | $$$ | Dengeli |
-| BC_Gen5_8 | İş Kritik | 8 vCore | 4TB | $$$$ | Kritik görevler |
+| BC_Gen5_8 | İş Kritik | 8 vCore | 4TB | $$$$ | Kritik görev |
 
 ### Container Apps SKU Hızlı Referans
 
 | Model | Fiyatlandırma | CPU/Bellek | Kullanım Durumu |
-|-------|--------------|------------|-----------------|
+|-------|---------------|------------|-----------------|
 | Tüketim | Kullanım başına ödeme | 0.25-2 vCPU | Geliştirme, değişken yük |
 | Özel D4 | Rezerve | 4 vCPU, 16GB | Üretim |
 | Özel D8 | Rezerve | 8 vCPU, 32GB | Yüksek performans |
@@ -789,14 +796,14 @@ test_configuration:
 
 ### Yapılacaklar
 
-1. **Küçük başlayın ve büyütün** gerçek kullanıma göre
+1. **Küçük başlayın ve büyütün** gerçek kullanım temelinde
 2. **Farklı ortamlar için farklı SKU'lar kullanın**
 3. **Performansı ve maliyetleri sürekli izleyin**
 4. **Üretim iş yükleri için rezerve kapasite kullanın**
 5. **Uygun yerlerde otomatik ölçeklendirme uygulayın**
-6. **Gerçekçi iş yükleriyle performans testi yapın**
+6. **Gerçekçi iş yükleriyle performansı test edin**
 7. **Büyümeyi planlayın ancak aşırı tahsis yapmaktan kaçının**
-8. **Mümkün olduğunda ücretsiz katmanları kullanın**
+8. **Mümkünse geliştirme için ücretsiz katmanları kullanın**
 
 ### Yapılmayacaklar
 
@@ -811,7 +818,7 @@ test_configuration:
 
 ---
 
-**İpucu**: Azure Maliyet Yönetimi ve Danışmanını kullanarak gerçek kullanım desenlerine dayalı olarak SKU seçimlerinizi optimize etmek için kişiselleştirilmiş öneriler alın.
+**Profesyonel İpucu**: Azure Maliyet Yönetimi ve Danışman kullanarak gerçek kullanım desenlerine dayalı SKU seçimlerinizi optimize etmek için kişiselleştirilmiş öneriler alın.
 
 ---
 

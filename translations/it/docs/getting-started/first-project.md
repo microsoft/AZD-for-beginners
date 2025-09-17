@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T19:09:38+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T21:39:03+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "it"
 }
 -->
 # Il tuo primo progetto - Tutorial pratico
 
-**Precedente:** [Configurazione](configuration.md) | **Successivo:** [Integrazione con Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigazione del capitolo:**
+- **📚 Home del corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo corrente**: Capitolo 1 - Fondamenti e Avvio Rapido
+- **⬅️ Precedente**: [Installazione e Configurazione](installation.md)
+- **➡️ Successivo**: [Configurazione](configuration.md)
+- **🚀 Prossimo capitolo**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduzione
 
-Benvenuto al tuo primo progetto con Azure Developer CLI! Questo tutorial pratico completo ti guiderà passo dopo passo nella creazione, distribuzione e gestione di un'applicazione full-stack su Azure utilizzando azd. Lavorerai con una vera applicazione todo che include un frontend React, un backend API Node.js e un database MongoDB.
+Benvenuto al tuo primo progetto con Azure Developer CLI! Questo tutorial pratico e completo ti guiderà passo dopo passo nella creazione, distribuzione e gestione di un'applicazione full-stack su Azure utilizzando azd. Lavorerai con una vera applicazione todo che include un frontend React, un backend API Node.js e un database MongoDB.
 
 ## Obiettivi di apprendimento
 
@@ -28,7 +33,7 @@ Completando questo tutorial, sarai in grado di:
 ## Risultati di apprendimento
 
 Al termine, sarai in grado di:
-- Inizializzare e configurare autonomamente progetti azd dai template
+- Inizializzare e configurare progetti azd dai template in autonomia
 - Navigare e modificare efficacemente le strutture dei progetti azd
 - Distribuire applicazioni full-stack su Azure con comandi singoli
 - Risolvere problemi comuni di distribuzione e autenticazione
@@ -60,7 +65,7 @@ az account show
 node --version
 ```
 
-## Passo 1: Scegli e inizializza un template
+## Passaggio 1: Scegli e inizializza un template
 
 Iniziamo con un popolare template di applicazione todo che include un frontend React e un backend API Node.js.
 
@@ -85,7 +90,7 @@ azd init --template todo-nodejs-mongo
 - È stato configurato il codice dell'infrastruttura nella directory `infra/`
 - È stata creata una configurazione dell'ambiente
 
-## Passo 2: Esplora la struttura del progetto
+## Passaggio 2: Esplora la struttura del progetto
 
 Esaminiamo cosa ha creato azd per noi:
 
@@ -137,9 +142,9 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## Passo 3: Personalizza il tuo progetto (opzionale)
+## Passaggio 3: Personalizza il tuo progetto (opzionale)
 
-Prima di distribuire, puoi personalizzare l'applicazione:
+Prima della distribuzione, puoi personalizzare l'applicazione:
 
 ### Modifica il frontend
 ```bash
@@ -162,7 +167,7 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## Passo 4: Distribuisci su Azure
+## Passaggio 4: Distribuisci su Azure
 
 Ora arriva la parte emozionante: distribuisci tutto su Azure!
 
@@ -197,7 +202,7 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Passo 5: Testa la tua applicazione
+## Passaggio 5: Testa la tua applicazione
 
 ### Accedi alla tua applicazione
 Clicca sull'URL fornito nell'output della distribuzione, oppure recuperalo in qualsiasi momento:
@@ -223,7 +228,7 @@ azd monitor
 azd logs
 ```
 
-## Passo 6: Apporta modifiche e ridistribuisci
+## Passaggio 6: Apporta modifiche e ridistribuisci
 
 Facciamo una modifica e vediamo quanto è facile aggiornare:
 
@@ -247,7 +252,7 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## Passo 7: Gestisci ambienti multipli
+## Passaggio 7: Gestisci ambienti multipli
 
 Crea un ambiente di staging per testare le modifiche prima della produzione:
 
@@ -276,7 +281,7 @@ azd env select staging
 azd show
 ```
 
-## Passo 8: Pulisci le risorse
+## Passaggio 8: Pulisci le risorse
 
 Quando hai finito di sperimentare, pulisci per evitare costi continui:
 
@@ -294,13 +299,13 @@ azd down --force --purge
 
 ## Cosa hai imparato
 
-Congratulazioni! Hai:
-- Inizializzato un progetto azd da un template
-- Esplorato la struttura del progetto e i file chiave
-- Distribuito un'applicazione full-stack su Azure
-- Apportato modifiche al codice e ridistribuito
-- Gestito ambienti multipli
-- Pulito le risorse
+Congratulazioni! Hai completato con successo:
+- L'inizializzazione di un progetto azd da un template
+- L'esplorazione della struttura del progetto e dei file chiave
+- La distribuzione di un'applicazione full-stack su Azure
+- L'apporto di modifiche al codice e la ridistribuzione
+- La gestione di ambienti multipli
+- La pulizia delle risorse
 
 ## Risoluzione dei problemi comuni
 
@@ -342,7 +347,7 @@ netstat -an | grep :3100
 Ora che hai completato il tuo primo progetto, esplora questi argomenti avanzati:
 
 ### 1. Personalizza l'infrastruttura
-- [Infrastructure as Code](../deployment/provisioning.md)
+- [Infrastruttura come codice](../deployment/provisioning.md)
 - [Aggiungi database, storage e altri servizi](../deployment/provisioning.md#adding-services)
 
 ### 2. Configura CI/CD
@@ -371,8 +376,8 @@ azd init --template todo-java-mongo
 
 ### Materiali di apprendimento
 - [Documentazione Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Centro di architettura Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Framework Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Community e supporto
 - [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -390,10 +395,15 @@ azd init --template todo-java-mongo
 
 ---
 
-**Precedente:** [Configurazione](configuration.md) | **Successivo:** [Integrazione con Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigazione del capitolo:**
+- **📚 Home del corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo corrente**: Capitolo 1 - Fondamenti e Avvio Rapido
+- **⬅️ Precedente**: [Installazione e Configurazione](installation.md)
+- **➡️ Successivo**: [Configurazione](configuration.md)
+- **🚀 Prossimo capitolo**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 - **Prossima lezione**: [Guida alla distribuzione](../deployment/deployment-guide.md)
 
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche potrebbero contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.

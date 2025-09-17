@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T19:14:37+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T21:55:59+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tr"
 }
 -->
 # Yapılandırma Kılavuzu
 
-**Önceki:** [AZD Temelleri](azd-basics.md) | **Sonraki:** [İlk Proje](first-project.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 3 - Yapılandırma ve Kimlik Doğrulama
+- **⬅️ Önceki**: [İlk Projeniz](first-project.md)
+- **➡️ Sonraki**: [Dağıtım Kılavuzu](../deployment/deployment-guide.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 4: Kod Olarak Altyapı](../deployment/deployment-guide.md)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasını kapsar. Yapılandırma hiyerarşisi, ortam yönetimi, kimlik doğrulama yöntemleri ve verimli ve güvenli Azure dağıtımları için gelişmiş yapılandırma modelleri hakkında bilgi edineceksiniz.
+Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasını kapsar. Yapılandırma hiyerarşisi, ortam yönetimi, kimlik doğrulama yöntemleri ve verimli ve güvenli Azure dağıtımları sağlayan gelişmiş yapılandırma modelleri hakkında bilgi edineceksiniz.
 
 ## Öğrenme Hedefleri
 
 Bu dersin sonunda:
-- azd yapılandırma hiyerarşisini ustalıkla öğrenip ayarların nasıl önceliklendirildiğini anlayacaksınız
+- azd yapılandırma hiyerarşisini öğrenecek ve ayarların nasıl önceliklendirildiğini anlayacaksınız
 - Küresel ve proje bazlı ayarları etkili bir şekilde yapılandırabileceksiniz
 - Farklı yapılandırmalara sahip birden fazla ortamı yönetebileceksiniz
-- Güvenli kimlik doğrulama ve yetkilendirme modellerini uygulayabileceksiniz
-- Karmaşık senaryolar için gelişmiş yapılandırma modellerini anlayabileceksiniz
+- Güvenli kimlik doğrulama ve yetkilendirme modelleri uygulayabileceksiniz
+- Karmaşık senaryolar için gelişmiş yapılandırma modellerini anlayacaksınız
 
 ## Öğrenme Çıktıları
 
@@ -31,7 +36,7 @@ Bu dersi tamamladıktan sonra:
 - Birden fazla dağıtım ortamını kurup yönetebileceksiniz
 - Güvenli yapılandırma yönetimi uygulamalarını hayata geçirebileceksiniz
 - Yapılandırma ile ilgili sorunları giderebileceksiniz
-- azd davranışını belirli organizasyonel gereksinimlere göre özelleştirebileceksiniz
+- azd davranışını belirli kurumsal gereksinimlere göre özelleştirebileceksiniz
 
 Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasını kapsar.
 
@@ -286,8 +291,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Hizmet Prensibi Kimlik Doğrulama
-CI/CD hatları için:
+### Hizmet Prensibi Kimlik Doğrulaması
+CI/CD iş akışları için:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -333,7 +338,7 @@ Altyapı parametrelerini `infra/main.parameters.json` içinde yapılandırın:
 ```
 
 ### Terraform Yapılandırması
-Terraform projeleri için `infra/terraform.tfvars` içinde yapılandırın:
+Terraform projeleri için, `infra/terraform.tfvars` içinde yapılandırın:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -539,7 +544,7 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 
 - [İlk Projeniz](first-project.md) - Yapılandırmayı uygulamada kullanın
 - [Dağıtım Kılavuzu](../deployment/deployment-guide.md) - Yapılandırmayı dağıtım için kullanın
-- [Kaynakların Sağlanması](../deployment/provisioning.md) - Üretime hazır yapılandırmalar
+- [Kaynakları Sağlama](../deployment/provisioning.md) - Üretime hazır yapılandırmalar
 
 ## Referanslar
 
@@ -549,10 +554,14 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 
 ---
 
-**Önceki:** [AZD Temelleri](azd-basics.md) | **Sonraki:** [İlk Proje](first-project.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 3 - Yapılandırma ve Kimlik Doğrulama
+- **⬅️ Önceki**: [İlk Projeniz](first-project.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 4: Kod Olarak Altyapı](../deployment/deployment-guide.md)
 - **Sonraki Ders**: [İlk Projeniz](first-project.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T19:21:46+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T21:40:24+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "it"
 }
 -->
 # Guida al Deployment - Padroneggiare i Deployment con AZD
 
+**Navigazione Capitoli:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 4 - Infrastruttura come Codice & Deployment
+- **⬅️ Capitolo Precedente**: [Capitolo 3: Configurazione](../getting-started/configuration.md)
+- **➡️ Prossimo**: [Provisioning delle Risorse](provisioning.md)
+- **🚀 Capitolo Successivo**: [Capitolo 5: Soluzioni AI Multi-Agent](../../examples/retail-scenario.md)
+
 ## Introduzione
 
-Questa guida completa copre tutto ciò che devi sapere per distribuire applicazioni utilizzando Azure Developer CLI, dai deployment di base con un singolo comando a scenari avanzati di produzione con hook personalizzati, ambienti multipli e integrazione CI/CD. Padroneggia l'intero ciclo di vita del deployment con esempi pratici e best practice.
+Questa guida completa copre tutto ciò che devi sapere sul deployment delle applicazioni utilizzando Azure Developer CLI, dai deployment di base con un singolo comando a scenari avanzati di produzione con hook personalizzati, ambienti multipli e integrazione CI/CD. Padroneggia l'intero ciclo di vita del deployment con esempi pratici e best practice.
 
 ## Obiettivi di Apprendimento
 
 Completando questa guida, sarai in grado di:
 - Padroneggiare tutti i comandi e i flussi di lavoro di deployment di Azure Developer CLI
-- Comprendere l'intero ciclo di vita del deployment, dalla provisioning al monitoraggio
+- Comprendere l'intero ciclo di vita del deployment, dal provisioning al monitoraggio
 - Implementare hook personalizzati per l'automazione pre e post-deployment
 - Configurare ambienti multipli con parametri specifici per ogni ambiente
-- Impostare strategie di deployment avanzate, inclusi deployment blue-green e canary
+- Impostare strategie di deployment avanzate, inclusi i deployment blue-green e canary
 - Integrare i deployment azd con pipeline CI/CD e flussi di lavoro DevOps
 
 ## Risultati di Apprendimento
@@ -36,9 +43,9 @@ Al termine, sarai in grado di:
 ## Panoramica del Deployment
 
 Azure Developer CLI offre diversi comandi di deployment:
-- `azd up` - Flusso completo (provisioning + deployment)
+- `azd up` - Flusso completo (provision + deploy)
 - `azd provision` - Crea/aggiorna solo le risorse Azure
-- `azd deploy` - Distribuisce solo il codice dell'applicazione
+- `azd deploy` - Deploy del codice applicativo
 - `azd package` - Compila e impacchetta le applicazioni
 
 ## Flussi di Lavoro di Deployment di Base
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Comprendere il Processo di Deployment
 
-### Fase 1: Hook Pre-Provisioning
+### Fase 1: Hook Pre-Provision
 ```yaml
 # azure.yaml
 hooks:
@@ -105,7 +112,7 @@ hooks:
 - Configura rete e sicurezza
 - Imposta monitoraggio e logging
 
-### Fase 3: Hook Post-Provisioning
+### Fase 3: Hook Post-Provision
 ```yaml
 hooks:
   postprovision:
@@ -119,11 +126,11 @@ hooks:
 ```
 
 ### Fase 4: Impacchettamento dell'Applicazione
-- Compila il codice dell'applicazione
+- Compila il codice applicativo
 - Crea artefatti di deployment
 - Impacchetta per la piattaforma di destinazione (container, file ZIP, ecc.)
 
-### Fase 5: Hook Pre-Deployment
+### Fase 5: Hook Pre-Deploy
 ```yaml
 hooks:
   predeploy:
@@ -137,11 +144,11 @@ hooks:
 ```
 
 ### Fase 6: Deployment dell'Applicazione
-- Distribuisce le applicazioni impacchettate ai servizi Azure
+- Esegue il deploy delle applicazioni impacchettate sui servizi Azure
 - Aggiorna le impostazioni di configurazione
 - Avvia/riavvia i servizi
 
-### Fase 7: Hook Post-Deployment
+### Fase 7: Hook Post-Deploy
 ```yaml
 hooks:
   postdeploy:
@@ -369,7 +376,7 @@ azd config set deploy.parallelism 5
 azd deploy --parallel
 ```
 
-### Caching della Build
+### Caching della Compilazione
 ```yaml
 # azure.yaml - Enable build caching
 services:
@@ -638,10 +645,10 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Risorse Aggiuntive
 
-- [Riferimento al Deployment di Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Deployment di Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Deployment di Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Deployment di Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Riferimento Deployment Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Deployment Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Deployment Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Deployment Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 

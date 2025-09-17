@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T20:26:50+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T21:32:58+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "br"
 }
 -->
 # Guia de Comandos - Comandos Essenciais do AZD
 
+**Referência Rápida para Todos os Capítulos**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../README.md)
+- **📖 Início Rápido**: [Capítulo 1: Fundamentos e Início Rápido](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Comandos de IA**: [Capítulo 2: Desenvolvimento Focado em IA](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Avançado**: [Capítulo 4: Infraestrutura como Código](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Introdução
 
-Este guia abrangente oferece uma referência rápida para os comandos mais usados do Azure Developer CLI, organizados por categoria com exemplos práticos. Perfeito para consultas rápidas durante o desenvolvimento, solução de problemas e operações diárias com projetos azd.
+Este guia abrangente oferece uma referência rápida para os comandos mais utilizados do Azure Developer CLI, organizados por categoria com exemplos práticos. Perfeito para consultas rápidas durante o desenvolvimento, solução de problemas e operações diárias com projetos azd.
 
 ## Objetivos de Aprendizado
 
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Build e Empacotamento
+### Construção e Empacotamento
 ```bash
 # Build applications
 azd package

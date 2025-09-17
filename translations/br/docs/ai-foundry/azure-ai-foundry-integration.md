@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T19:30:18+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T21:22:35+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "br"
 }
 -->
 # Integração do Azure AI Foundry com AZD
 
-**Anterior:** [Primeiro Projeto](../getting-started/first-project.md) | **Próximo:** [Implantação de Modelos de IA](ai-model-deployment.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento Orientado por IA
+- **⬅️ Capítulo Anterior**: [Capítulo 1: Seu Primeiro Projeto](../getting-started/first-project.md)
+- **➡️ Próximo**: [Implantação de Modelos de IA](ai-model-deployment.md)
+- **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../getting-started/configuration.md)
 
 ## Visão Geral
 
-Este guia demonstra como integrar os serviços do Azure AI Foundry com o Azure Developer CLI (AZD) para implantações simplificadas de aplicativos de IA. O Azure AI Foundry oferece uma plataforma abrangente para construir, implantar e gerenciar aplicativos de IA, enquanto o AZD simplifica o processo de infraestrutura e implantação.
+Este guia demonstra como integrar os serviços do Azure AI Foundry com o Azure Developer CLI (AZD) para implantações simplificadas de aplicativos de IA. O Azure AI Foundry oferece uma plataforma abrangente para criar, implantar e gerenciar aplicativos de IA, enquanto o AZD simplifica o processo de infraestrutura e implantação.
 
 ## O que é o Azure AI Foundry?
 
@@ -23,12 +28,12 @@ O Azure AI Foundry é a plataforma unificada da Microsoft para desenvolvimento d
 - **Prompt Flow**: Designer visual para fluxos de trabalho de IA
 - **Portal AI Foundry**: Ambiente integrado de desenvolvimento para aplicativos de IA
 - **Opções de Implantação**: Múltiplas opções de hospedagem e escalabilidade
-- **Segurança e Proteção**: Recursos integrados de IA responsável
+- **Segurança e Confiabilidade**: Recursos integrados de IA responsável
 
 ## AZD + Azure AI Foundry: Melhor Juntos
 
 | Recurso | Azure AI Foundry | Benefício da Integração com AZD |
-|---------|------------------|---------------------------------|
+|---------|-----------------|-------------------------------|
 | **Implantação de Modelos** | Implantação manual via portal | Implantações automatizadas e repetíveis |
 | **Infraestrutura** | Provisionamento por cliques | Infraestrutura como Código (Bicep) |
 | **Gerenciamento de Ambientes** | Foco em um único ambiente | Multiambiente (dev/staging/prod) |
@@ -313,7 +318,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Melhores Práticas de Segurança
+## 🔐 Práticas de Segurança Recomendadas
 
 ### Configuração de Identidade Gerenciada
 
@@ -428,10 +433,10 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## Solução de Problemas Comuns
 
-### Problema 1: Cota do OpenAI Excedida
+### Problema 1: Limite do Azure OpenAI Excedido
 
 **Sintomas:**
-- Falha na implantação com erros de cota
+- Falha na implantação com erros de limite
 - Erros 429 nos logs do aplicativo
 
 **Soluções:**
@@ -470,7 +475,7 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Sintomas:**
 - Modelos não disponíveis na implantação
-- Falha em versões específicas de modelos
+- Falhas em versões específicas de modelos
 
 **Soluções:**
 ```bash
@@ -481,7 +486,7 @@ az cognitiveservices model list --location eastus
 # Check model capacity requirements
 ```
 
-## Templates de Exemplos
+## Modelos de Exemplo
 
 ### Aplicativo de Chat Básico
 
@@ -521,7 +526,7 @@ azd up
 
 ## Próximos Passos
 
-1. **Experimente os Exemplos**: Comece com um template pré-construído que corresponda ao seu caso de uso
+1. **Experimente os Exemplos**: Comece com um modelo pré-construído que corresponda ao seu caso de uso
 2. **Personalize para Suas Necessidades**: Modifique a infraestrutura e o código do aplicativo
 3. **Adicione Monitoramento**: Implemente observabilidade abrangente
 4. **Otimize Custos**: Ajuste as configurações para o seu orçamento
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Anterior:** [Primeiro Projeto](../getting-started/first-project.md) | **Próximo:** [Implantação de Modelos de IA](ai-model-deployment.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento Orientado por IA
+- **⬅️ Capítulo Anterior**: [Capítulo 1: Seu Primeiro Projeto](../getting-started/first-project.md)
+- **➡️ Próximo**: [Implantação de Modelos de IA](ai-model-deployment.md)
+- **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../getting-started/configuration.md)
 
 **Precisa de Ajuda?** Participe das discussões da comunidade ou abra um problema no repositório. A comunidade Azure AI + AZD está aqui para ajudar você a ter sucesso!
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.

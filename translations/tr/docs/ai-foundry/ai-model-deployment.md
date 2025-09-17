@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T19:38:39+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T21:54:48+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "tr"
 }
 -->
 # Azure Developer CLI ile AI Modeli Dağıtımı
 
-**Önceki:** [Azure AI Foundry Entegrasyonu](azure-ai-foundry-integration.md) | **Sonraki:** [AI Workshop Lab](ai-workshop-lab.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 2 - AI-Öncelikli Geliştirme
+- **⬅️ Önceki**: [Azure AI Foundry Entegrasyonu](azure-ai-foundry-integration.md)
+- **➡️ Sonraki**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Yapılandırma](../getting-started/configuration.md)
 
-Bu rehber, AZD şablonlarını kullanarak AI modellerinin dağıtımı için kapsamlı talimatlar sunar ve model seçiminden üretim dağıtım desenlerine kadar her şeyi kapsar.
+Bu rehber, model seçiminden üretim dağıtım desenlerine kadar AZD şablonlarını kullanarak AI modellerinin dağıtımı için kapsamlı talimatlar sunar.
 
 ## İçindekiler
 
@@ -19,8 +24,8 @@ Bu rehber, AZD şablonlarını kullanarak AI modellerinin dağıtımı için kap
 - [AI Modelleri için AZD Yapılandırması](../../../../docs/ai-foundry)
 - [Dağıtım Desenleri](../../../../docs/ai-foundry)
 - [Model Yönetimi](../../../../docs/ai-foundry)
-- [Üretim Düşünceleri](../../../../docs/ai-foundry)
-- [İzleme ve Gözlemlenebilirlik](../../../../docs/ai-foundry)
+- [Üretim Dikkat Noktaları](../../../../docs/ai-foundry)
+- [İzleme ve Görünürlük](../../../../docs/ai-foundry)
 
 ## Model Seçim Stratejisi
 
@@ -56,8 +61,8 @@ services:
 
 ### Model Kapasite Planlaması
 
-| Model Türü | Kullanım Senaryosu | Önerilen Kapasite | Maliyet Düşünceleri |
-|------------|--------------------|-------------------|---------------------|
+| Model Türü | Kullanım Senaryosu | Önerilen Kapasite | Maliyet Dikkat Noktaları |
+|------------|--------------------|-------------------|--------------------------|
 | GPT-4o-mini | Sohbet, Soru-Cevap | 10-50 TPM | Çoğu iş yükü için maliyet açısından uygun |
 | GPT-4 | Karmaşık akıl yürütme | 20-100 TPM | Daha yüksek maliyet, premium özellikler için kullanın |
 | Text-embedding-ada-002 | Arama, RAG | 30-120 TPM | Anlamsal arama için gerekli |
@@ -153,12 +158,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-En uygun kullanım alanları:
+Uygun olduğu durumlar:
 - Geliştirme ve test
 - Tek pazar uygulamaları
 - Maliyet optimizasyonu
 
-### Desen 2: Çok Bölgeli Dağıtım
+### Desen 2: Çoklu Bölge Dağıtımı
 
 ```bicep
 // Multi-region deployment
@@ -171,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-En uygun kullanım alanları:
+Uygun olduğu durumlar:
 - Küresel uygulamalar
 - Yüksek erişilebilirlik gereksinimleri
 - Yük dağıtımı
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Üretim Düşünceleri
+## Üretim Dikkat Noktaları
 
 ### Kapasite Planlaması
 
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## İzleme ve Gözlemlenebilirlik
+## İzleme ve Görünürlük
 
 ### Application Insights Entegrasyonu
 
@@ -478,7 +483,7 @@ async def check_ai_models():
 ## Sonraki Adımlar
 
 1. **[Azure AI Foundry Entegrasyon Rehberi](azure-ai-foundry-integration.md)**'ni inceleyerek hizmet entegrasyon desenlerini öğrenin
-2. **[AI Workshop Lab](ai-workshop-lab.md)**'i tamamlayarak uygulamalı deneyim kazanın
+2. **[AI Workshop Lab](ai-workshop-lab.md)**'i tamamlayarak pratik deneyim kazanın
 3. **[Üretim AI Uygulamaları](production-ai-practices.md)**'nı uygulayarak kurumsal dağıtımları gerçekleştirin
 4. **[AI Sorun Giderme Rehberi](../troubleshooting/ai-troubleshooting.md)**'ni keşfederek yaygın sorunları çözün
 
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**Önceki:** [Azure AI Foundry Entegrasyonu](azure-ai-foundry-integration.md) | **Sonraki:** [AI Workshop Lab](ai-workshop-lab.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 2 - AI-Öncelikli Geliştirme
+- **⬅️ Önceki**: [Azure AI Foundry Entegrasyonu](azure-ai-foundry-integration.md)
+- **➡️ Sonraki**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Yapılandırma](../getting-started/configuration.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

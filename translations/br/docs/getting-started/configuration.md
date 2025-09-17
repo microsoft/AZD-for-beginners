@@ -1,44 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T19:07:06+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T21:24:15+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "br"
 }
 -->
 # Guia de Configuração
 
-**Anterior:** [AZD Básico](azd-basics.md) | **Próximo:** [Primeiro Projeto](first-project.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 3 - Configuração e Autenticação
+- **⬅️ Anterior**: [Seu Primeiro Projeto](first-project.md)
+- **➡️ Próximo**: [Guia de Implantação](../deployment/deployment-guide.md)
+- **🚀 Próximo Capítulo**: [Capítulo 4: Infraestrutura como Código](../deployment/deployment-guide.md)
 
 ## Introdução
 
-Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação ideais. Você aprenderá sobre a hierarquia de configuração, gerenciamento de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implantações eficientes e seguras no Azure.
+Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação otimizados. Você aprenderá sobre a hierarquia de configuração, gerenciamento de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implantações eficientes e seguras no Azure.
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 Ao final desta lição, você será capaz de:
 - Dominar a hierarquia de configuração do azd e entender como as configurações são priorizadas
-- Configurar configurações globais e específicas de projetos de forma eficaz
+- Configurar definições globais e específicas de projetos de forma eficaz
 - Gerenciar múltiplos ambientes com diferentes configurações
 - Implementar padrões seguros de autenticação e autorização
 - Compreender padrões avançados de configuração para cenários complexos
 
-## Resultados de Aprendizagem
+## Resultados de Aprendizado
 
 Após concluir esta lição, você será capaz de:
-- Configurar o azd para fluxos de trabalho de desenvolvimento ideais
+- Configurar o azd para fluxos de trabalho de desenvolvimento otimizados
 - Configurar e gerenciar múltiplos ambientes de implantação
 - Implementar práticas seguras de gerenciamento de configuração
 - Solucionar problemas relacionados à configuração
-- Personalizar o comportamento do azd para requisitos específicos da organização
+- Personalizar o comportamento do azd para atender a requisitos específicos da organização
 
-Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação ideais.
+Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implantação otimizados.
 
 ## Hierarquia de Configuração
 
-O azd utiliza um sistema de configuração hierárquico:
-1. **Flags de linha de comando** (maior prioridade)
+O azd utiliza um sistema hierárquico de configuração:
+1. **Flags da linha de comando** (maior prioridade)
 2. **Variáveis de ambiente**
 3. **Configuração local do projeto** (`.azd/config.json`)
 4. **Configuração global do usuário** (`~/.azd/config.json`)
@@ -80,10 +85,10 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ Configuração de Projetos
+## 🏗️ Configuração do Projeto
 
 ### Estrutura do azure.yaml
-O arquivo `azure.yaml` é o núcleo do seu projeto azd:
+O arquivo `azure.yaml` é o coração do seu projeto azd:
 
 ```yaml
 # Minimum configuration
@@ -255,7 +260,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-### Templates de Ambiente
+### Modelos de Ambiente
 Crie `.azure/env.template` para uma configuração consistente de ambientes:
 ```bash
 # Required variables
@@ -286,7 +291,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Autenticação com Service Principal
+### Autenticação com Principal de Serviço
 Para pipelines de CI/CD:
 ```bash
 # Set environment variables
@@ -495,7 +500,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Arquivos de Configuração
+### 2. Organize os Arquivos de Configuração
 ```
 .azure/
 ├── config.json              # Global project config
@@ -519,7 +524,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Documentação de Configuração
+### 4. Documentação da Configuração
 Documente sua configuração em `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -549,10 +554,14 @@ Documente sua configuração em `CONFIG.md`:
 
 ---
 
-**Anterior:** [AZD Básico](azd-basics.md) | **Próximo:** [Primeiro Projeto](first-project.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 3 - Configuração e Autenticação
+- **⬅️ Anterior**: [Seu Primeiro Projeto](first-project.md)
+- **➡️ Próximo Capítulo**: [Capítulo 4: Infraestrutura como Código](../deployment/deployment-guide.md)
 - **Próxima Lição**: [Seu Primeiro Projeto](first-project.md)
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.

@@ -1,28 +1,35 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T19:07:21+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T21:24:33+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "br"
 }
 -->
 # Noções Básicas do AZD - Entendendo o Azure Developer CLI
 
-**Anterior:** [Instalação e Configuração](installation.md) | **Próximo:** [Configuração](configuration.md)
+# Noções Básicas do AZD - Conceitos e Fundamentos Essenciais
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos & Início Rápido
+- **⬅️ Anterior**: [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Próximo**: [Instalação & Configuração](installation.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introdução
 
-Esta lição apresenta o Azure Developer CLI (azd), uma poderosa ferramenta de linha de comando que acelera sua jornada do desenvolvimento local para a implantação no Azure. Você aprenderá os conceitos fundamentais, os principais recursos e entenderá como o azd simplifica a implantação de aplicações nativas na nuvem.
+Esta lição apresenta o Azure Developer CLI (azd), uma poderosa ferramenta de linha de comando que acelera sua jornada do desenvolvimento local para a implantação no Azure. Você aprenderá os conceitos fundamentais, os recursos principais e entenderá como o azd simplifica a implantação de aplicações nativas na nuvem.
 
 ## Objetivos de Aprendizado
 
 Ao final desta lição, você será capaz de:
 - Entender o que é o Azure Developer CLI e seu propósito principal
-- Aprender os conceitos básicos de templates, ambientes e serviços
-- Explorar os principais recursos, incluindo desenvolvimento orientado por templates e Infraestrutura como Código
+- Aprender os conceitos essenciais de templates, ambientes e serviços
+- Explorar recursos importantes, como desenvolvimento orientado por templates e Infraestrutura como Código
 - Compreender a estrutura e o fluxo de trabalho de projetos azd
-- Estar preparado para instalar e configurar o azd no seu ambiente de desenvolvimento
+- Estar preparado para instalar e configurar o azd para seu ambiente de desenvolvimento
 
 ## Resultados de Aprendizado
 
@@ -37,7 +44,7 @@ Após concluir esta lição, você será capaz de:
 
 O Azure Developer CLI (azd) é uma ferramenta de linha de comando projetada para acelerar sua jornada do desenvolvimento local para a implantação no Azure. Ele simplifica o processo de construção, implantação e gerenciamento de aplicações nativas na nuvem no Azure.
 
-## Conceitos Básicos
+## Conceitos Essenciais
 
 ### Templates
 Templates são a base do azd. Eles contêm:
@@ -54,17 +61,17 @@ Ambientes representam diferentes alvos de implantação:
 
 Cada ambiente mantém seu próprio:
 - Grupo de recursos do Azure
-- Configurações
+- Configurações de ambiente
 - Estado de implantação
 
 ### Serviços
 Serviços são os blocos de construção da sua aplicação:
 - **Frontend** - Aplicações web, SPAs
 - **Backend** - APIs, microsserviços
-- **Banco de dados** - Soluções de armazenamento de dados
+- **Banco de Dados** - Soluções de armazenamento de dados
 - **Armazenamento** - Armazenamento de arquivos e blobs
 
-## Principais Recursos
+## Recursos Principais
 
 ### 1. Desenvolvimento Orientado por Templates
 ```bash
@@ -197,7 +204,7 @@ O comando `azd down --force --purge` é uma maneira poderosa de desmontar comple
 ```
 - Ignora prompts de confirmação.
 - Útil para automação ou scripts onde a entrada manual não é viável.
-- Garante que o processo de desmontagem ocorra sem interrupções, mesmo que o CLI detecte inconsistências.
+- Garante que a desmontagem prossiga sem interrupções, mesmo que o CLI detecte inconsistências.
 
 ```
 --purge
@@ -206,10 +213,10 @@ Exclui **todos os metadados associados**, incluindo:
 Estado do ambiente  
 Pasta local `.azure`  
 Informações de implantação em cache  
-Impede que o azd "lembre" implantações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências obsoletas de registro.
+Impede que o azd "lembre" implantações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências de registro obsoletas.
 
 ### Por que usar ambos?
-Quando você encontra problemas com `azd up` devido a estado residual ou implantações parciais, essa combinação garante um **novo começo**.
+Quando você encontra problemas com `azd up` devido a estado persistente ou implantações parciais, essa combinação garante um **recomeço limpo**.
 
 É especialmente útil após exclusões manuais de recursos no portal do Azure ou ao alternar templates, ambientes ou convenções de nomenclatura de grupos de recursos.
 
@@ -282,7 +289,7 @@ azd init --template template1
 
 ### Iniciante (Semana 1-2)
 1. Instale o azd e autentique-se
-2. Implante um template simples
+2. Implemente um template simples
 3. Entenda a estrutura do projeto
 4. Aprenda comandos básicos (up, down, deploy)
 
@@ -300,9 +307,13 @@ azd init --template template1
 
 ## Próximos Passos
 
-- [Instalação e Configuração](installation.md) - Instale e configure o azd
-- [Seu Primeiro Projeto](first-project.md) - Tutorial prático
+**📖 Continue o Aprendizado do Capítulo 1:**
+- [Instalação & Configuração](installation.md) - Instale e configure o azd
+- [Seu Primeiro Projeto](first-project.md) - Complete o tutorial prático
 - [Guia de Configuração](configuration.md) - Opções avançadas de configuração
+
+**🎯 Pronto para o Próximo Capítulo?**
+- [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md) - Comece a construir aplicações de IA
 
 ## Recursos Adicionais
 
@@ -312,10 +323,14 @@ azd init --template template1
 
 ---
 
-**Anterior:** [Instalação e Configuração](installation.md) | **Próximo:** [Configuração](configuration.md)  
-- **Próxima Lição**: [Instalação e Configuração](installation.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos & Início Rápido  
+- **⬅️ Anterior**: [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Próximo**: [Instalação & Configuração](installation.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:31:55+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T21:41:22+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "it"
 }
 -->
-# Guida al Debugging - Tecniche Avanzate di Analisi dei Log per la Risoluzione dei Problemi
+# Guida al Debugging per i Deployment AZD
+
+**Navigazione Capitoli:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 7 - Risoluzione Problemi & Debugging
+- **⬅️ Precedente**: [Problemi Comuni](common-issues.md)
+- **➡️ Successivo**: [Risoluzione Problemi Specifici per AI](ai-troubleshooting.md)
+- **🚀 Prossimo Capitolo**: [Capitolo 8: Modelli per Produzione & Enterprise](../ai-foundry/production-ai-practices.md)
 
 ## Introduzione
 
@@ -27,9 +34,9 @@ Completando questa guida, sarai in grado di:
 
 Al termine, sarai in grado di:
 - Applicare la metodologia TRIAGE per debug sistematico di problemi complessi di deployment
-- Configurare e analizzare informazioni complete di logging e tracing
+- Configurare e analizzare informazioni dettagliate di logging e tracing
 - Utilizzare Azure Monitor, Application Insights e strumenti diagnostici in modo efficace
-- Debuggare problemi di connettività di rete, autenticazione e permessi in autonomia
+- Risolvere autonomamente problemi di connettività di rete, autenticazione e permessi
 - Implementare strategie di monitoraggio e ottimizzazione delle prestazioni
 - Creare script di debugging personalizzati e automazioni per problemi ricorrenti
 
@@ -39,9 +46,9 @@ Al termine, sarai in grado di:
 - **T**empo: Quando è iniziato il problema?
 - **R**iproduci: Puoi riprodurlo in modo consistente?
 - **I**sola: Quale componente sta fallendo?
-- **A**nalizza: Cosa ci dicono i log?
+- **A**nalizza: Cosa dicono i log?
 - **R**accogli: Raccogli tutte le informazioni rilevanti
-- **E**scala: Quando è necessario chiedere ulteriore aiuto
+- **E**scala: Quando chiedere ulteriore aiuto
 
 ## Abilitare la Modalità Debug
 
@@ -176,7 +183,7 @@ debug_container() {
 }
 ```
 
-### Debugging di Connessioni al Database
+### Debugging Connessioni al Database
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Test di Carico per il Debugging
+### Test di Carico per Debugging
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -651,7 +658,7 @@ aggregate_logs() {
 
 ## 🔗 Risorse Avanzate
 
-### Script di Debugging Personalizzati
+### Script di Debug Personalizzati
 Crea una directory `scripts/debug/` con:
 - `health-check.sh` - Controllo completo dello stato
 - `performance-test.sh` - Test delle prestazioni automatizzato
@@ -675,12 +682,12 @@ hooks:
       fi
 ```
 
-## Best Practices
+## Migliori Pratiche
 
 1. **Abilita sempre il logging di debug** negli ambienti non di produzione
 2. **Crea casi di test riproducibili** per i problemi
 3. **Documenta le procedure di debugging** per il tuo team
-4. **Automatizza i controlli di stato** e il monitoraggio
+4. **Automatizza i controlli dello stato** e il monitoraggio
 5. **Mantieni gli strumenti di debug aggiornati** con le modifiche dell'applicazione
 6. **Esercitati nelle procedure di debugging** durante i periodi non critici
 

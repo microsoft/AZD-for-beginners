@@ -1,23 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T19:38:26+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T21:38:42+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "it"
 }
 -->
 # Distribuzione di Modelli AI con Azure Developer CLI
 
-**Precedente:** [Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md) | **Successivo:** [Laboratorio AI Workshop](ai-workshop-lab.md)
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 2 - Sviluppo AI-First
+- **⬅️ Precedente**: [Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Successivo**: [Laboratorio AI Workshop](ai-workshop-lab.md)
+- **🚀 Prossimo Capitolo**: [Capitolo 3: Configurazione](../getting-started/configuration.md)
 
-Questa guida fornisce istruzioni complete per distribuire modelli AI utilizzando i template AZD, coprendo tutto, dalla selezione del modello ai modelli di distribuzione in produzione.
+Questa guida fornisce istruzioni complete per distribuire modelli AI utilizzando i template AZD, coprendo tutto, dalla selezione del modello ai pattern di distribuzione in produzione.
 
 ## Indice
 
 - [Strategia di Selezione del Modello](../../../../docs/ai-foundry)
 - [Configurazione AZD per Modelli AI](../../../../docs/ai-foundry)
-- [Modelli di Distribuzione](../../../../docs/ai-foundry)
+- [Pattern di Distribuzione](../../../../docs/ai-foundry)
 - [Gestione dei Modelli](../../../../docs/ai-foundry)
 - [Considerazioni per la Produzione](../../../../docs/ai-foundry)
 - [Monitoraggio e Osservabilità](../../../../docs/ai-foundry)
@@ -58,10 +63,10 @@ services:
 
 | Tipo di Modello | Caso d'Uso | Capacità Raccomandata | Considerazioni sui Costi |
 |------------------|------------|-----------------------|--------------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Conveniente per la maggior parte dei carichi di lavoro |
-| GPT-4 | Ragionamento complesso | 20-100 TPM | Costi più elevati, da utilizzare per funzionalità premium |
+| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Conveniente per la maggior parte dei carichi |
+| GPT-4 | Ragionamento complesso | 20-100 TPM | Costo più elevato, ideale per funzionalità premium |
 | Text-embedding-ada-002 | Ricerca, RAG | 30-120 TPM | Essenziale per la ricerca semantica |
-| Whisper | Da voce a testo | 10-50 TPM | Carichi di lavoro per l'elaborazione audio |
+| Whisper | Da voce a testo | 10-50 TPM | Per carichi di lavoro audio |
 
 ## Configurazione AZD per Modelli AI
 
@@ -138,9 +143,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Modelli di Distribuzione
+## Pattern di Distribuzione
 
-### Modello 1: Distribuzione in Singola Regione
+### Pattern 1: Distribuzione in Singola Regione
 
 ```yaml
 # azure.yaml - Single region
@@ -158,7 +163,7 @@ Ideale per:
 - Applicazioni per un singolo mercato
 - Ottimizzazione dei costi
 
-### Modello 2: Distribuzione Multi-Regione
+### Pattern 2: Distribuzione Multi-Regione
 
 ```bicep
 // Multi-region deployment
@@ -176,7 +181,7 @@ Ideale per:
 - Requisiti di alta disponibilità
 - Distribuzione del carico
 
-### Modello 3: Distribuzione Ibrida
+### Pattern 3: Distribuzione Ibrida
 
 Combina Azure OpenAI con altri servizi AI:
 
@@ -272,7 +277,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Pianificazione della Capacità
 
-Calcola la capacità necessaria in base ai modelli di utilizzo:
+Calcola la capacità necessaria in base ai pattern di utilizzo:
 
 ```python
 # Capacity calculation example
@@ -297,9 +302,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Configurazione di Auto-scaling
+### Configurazione dell'Auto-Scaling
 
-Configura l'auto-scaling per Container Apps:
+Configura l'auto-scaling per le Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -444,7 +449,7 @@ class AITelemetry:
         )
 ```
 
-### Controlli di Salute
+### Controlli di Integrità
 
 Implementa il monitoraggio dello stato dei servizi AI:
 
@@ -477,21 +482,26 @@ async def check_ai_models():
 
 ## Prossimi Passi
 
-1. **Consulta la [Guida all'Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md)** per i modelli di integrazione dei servizi
+1. **Consulta la [Guida all'Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md)** per i pattern di integrazione dei servizi
 2. **Completa il [Laboratorio AI Workshop](ai-workshop-lab.md)** per un'esperienza pratica
-3. **Implementa le [Pratiche AI per la Produzione](production-ai-practices.md)** per distribuzioni aziendali
-4. **Esplora la [Guida alla Risoluzione dei Problemi AI](../troubleshooting/ai-troubleshooting.md)** per problemi comuni
+3. **Applica le [Pratiche AI per la Produzione](production-ai-practices.md)** per distribuzioni aziendali
+4. **Esplora la [Guida alla Risoluzione dei Problemi AI](../troubleshooting/ai-troubleshooting.md)** per le problematiche comuni
 
 ## Risorse
 
 - [Disponibilità dei Modelli Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentazione Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Scalabilità delle Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Ottimizzazione dei Costi per Modelli AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Ottimizzazione dei Costi dei Modelli AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Precedente:** [Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md) | **Successivo:** [Laboratorio AI Workshop](ai-workshop-lab.md)
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 2 - Sviluppo AI-First
+- **⬅️ Precedente**: [Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Successivo**: [Laboratorio AI Workshop](ai-workshop-lab.md)
+- **🚀 Prossimo Capitolo**: [Capitolo 3: Configurazione](../getting-started/configuration.md)
 
 ---
 

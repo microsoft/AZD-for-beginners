@@ -1,42 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T19:22:08+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T21:56:46+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "tr"
 }
 -->
-# Dağıtım Kılavuzu - AZD Dağıtımlarını Ustalaştırma
+# Dağıtım Kılavuzu - AZD Dağıtımlarında Ustalaşma
+
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 4 - Kod Olarak Altyapı ve Dağıtım
+- **⬅️ Önceki Bölüm**: [Bölüm 3: Konfigürasyon](../getting-started/configuration.md)
+- **➡️ Sonraki**: [Kaynakların Sağlanması](provisioning.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 5: Çoklu Ajanlı Yapay Zeka Çözümleri](../../examples/retail-scenario.md)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI kullanarak uygulamaları dağıtma konusunda bilmeniz gereken her şeyi kapsar. Temel tek komutla dağıtımlardan, özel kancalar, birden fazla ortam ve CI/CD entegrasyonu içeren gelişmiş üretim senaryolarına kadar her şeyi öğrenin. Pratik örnekler ve en iyi uygulamalarla tam dağıtım yaşam döngüsünü ustalaştırın.
+Bu kapsamlı kılavuz, Azure Developer CLI kullanarak uygulamaları dağıtma sürecini öğrenmeniz için gereken her şeyi kapsar. Temel tek komutla dağıtımlardan, özel kancalar, birden fazla ortam ve CI/CD entegrasyonu içeren gelişmiş üretim senaryolarına kadar her şeyi içerir. Pratik örnekler ve en iyi uygulamalarla tam bir dağıtım yaşam döngüsünde ustalaşın.
 
 ## Öğrenme Hedefleri
 
 Bu kılavuzu tamamladığınızda:
-- Tüm Azure Developer CLI dağıtım komutlarını ve iş akışlarını ustalaştıracaksınız
-- Kaynak oluşturma ve izleme dahil tam dağıtım yaşam döngüsünü anlayacaksınız
-- Dağıtım öncesi ve sonrası otomasyon için özel dağıtım kancaları uygulayacaksınız
-- Ortama özel parametrelerle birden fazla ortam yapılandıracaksınız
-- Blue-green ve canary dağıtımları gibi gelişmiş dağıtım stratejileri kuracaksınız
+- Azure Developer CLI dağıtım komutları ve iş akışlarında ustalaşacaksınız
+- Sağlamadan izlemeye kadar tam dağıtım yaşam döngüsünü anlayacaksınız
+- Dağıtım öncesi ve sonrası otomasyon için özel kancalar uygulayacaksınız
+- Ortama özgü parametrelerle birden fazla ortam yapılandıracaksınız
+- Mavi-yeşil ve kanarya dağıtımları gibi gelişmiş dağıtım stratejileri kuracaksınız
 - Azd dağıtımlarını CI/CD boru hatları ve DevOps iş akışlarıyla entegre edeceksiniz
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Tüm azd dağıtım iş akışlarını bağımsız olarak çalıştırıp sorunlarını giderebileceksiniz
-- Özel dağıtım otomasyonunu kancalar kullanarak tasarlayıp uygulayabileceksiniz
-- Güvenlik ve izleme ile üretime hazır dağıtımlar yapılandırabileceksiniz
-- Karmaşık çok ortamlı dağıtım senaryolarını yönetebileceksiniz
-- Dağıtım performansını optimize edip geri alma stratejileri uygulayabileceksiniz
-- Azd dağıtımlarını kurumsal DevOps uygulamalarına entegre edebileceksiniz
+- Tüm azd dağıtım iş akışlarını bağımsız olarak çalıştırmak ve sorun gidermek
+- Özel dağıtım otomasyonunu kancalar kullanarak tasarlamak ve uygulamak
+- Güvenlik ve izleme ile üretime hazır dağıtımlar yapılandırmak
+- Karmaşık çoklu ortam dağıtım senaryolarını yönetmek
+- Dağıtım performansını optimize etmek ve geri alma stratejileri uygulamak
+- Azd dağıtımlarını kurumsal DevOps uygulamalarına entegre etmek
 
 ## Dağıtım Genel Bakış
 
 Azure Developer CLI birkaç dağıtım komutu sağlar:
-- `azd up` - Tam iş akışı (kaynak oluşturma + dağıtım)
+- `azd up` - Tam iş akışı (sağlama + dağıtım)
 - `azd provision` - Sadece Azure kaynaklarını oluştur/güncelle
 - `azd deploy` - Sadece uygulama kodunu dağıt
 - `azd package` - Uygulamaları oluştur ve paketle
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Dağıtım Sürecini Anlama
 
-### Aşama 1: Kaynak Oluşturma Öncesi Kancalar
+### Aşama 1: Sağlama Öncesi Kancalar
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Aşama 2: Altyapı Kaynak Oluşturma
+### Aşama 2: Altyapı Sağlama
 - Altyapı şablonlarını (Bicep/Terraform) okur
 - Azure kaynaklarını oluşturur veya günceller
-- Ağ ve güvenlik yapılandırmalarını yapar
-- İzleme ve günlük kaydını kurar
+- Ağ ve güvenliği yapılandırır
+- İzleme ve günlük kaydını ayarlar
 
-### Aşama 3: Kaynak Oluşturma Sonrası Kancalar
+### Aşama 3: Sağlama Sonrası Kancalar
 ```yaml
 hooks:
   postprovision:
@@ -120,7 +127,7 @@ hooks:
 
 ### Aşama 4: Uygulama Paketleme
 - Uygulama kodunu oluşturur
-- Dağıtım artefaktlarını oluşturur
+- Dağıtım eserlerini oluşturur
 - Hedef platform için paketler (konteynerler, ZIP dosyaları, vb.)
 
 ### Aşama 5: Dağıtım Öncesi Kancalar
@@ -138,7 +145,7 @@ hooks:
 
 ### Aşama 6: Uygulama Dağıtımı
 - Paketlenmiş uygulamaları Azure hizmetlerine dağıtır
-- Yapılandırma ayarlarını günceller
+- Konfigürasyon ayarlarını günceller
 - Hizmetleri başlatır/yeniden başlatır
 
 ### Aşama 7: Dağıtım Sonrası Kancalar
@@ -154,9 +161,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Dağıtım Yapılandırması
+## 🎛️ Dağıtım Konfigürasyonu
 
-### Hizmete Özel Dağıtım Ayarları
+### Hizmete Özgü Dağıtım Ayarları
 ```yaml
 # azure.yaml
 services:
@@ -186,7 +193,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### Ortama Özel Yapılandırmalar
+### Ortama Özgü Konfigürasyonlar
 ```bash
 # Development environment
 azd env set NODE_ENV development
@@ -244,7 +251,7 @@ services:
     host: function
 ```
 
-### Blue-Green Dağıtımları
+### Mavi-Yeşil Dağıtımlar
 ```bash
 # Create blue environment
 azd env new production-blue
@@ -261,7 +268,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Canary Dağıtımları
+### Kanarya Dağıtımları
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -453,7 +460,7 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Güvenlik Hususları
+## 🔐 Güvenlik Dikkatleri
 
 ### Gizli Bilgi Yönetimi
 ```bash
@@ -524,7 +531,7 @@ azd provision --rollback
 azd provision --rollback --preview
 ```
 
-### Veritabanı Geçişi Geri Alma
+### Veritabanı Geçiş Geri Alma
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -631,7 +638,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Sonraki Adımlar
 
-- [Kaynakları Oluşturma](provisioning.md) - Altyapı yönetimine derinlemesine bir bakış
+- [Kaynakların Sağlanması](provisioning.md) - Altyapı yönetimine derinlemesine bir bakış
 - [Dağıtım Öncesi Planlama](../pre-deployment/capacity-planning.md) - Dağıtım stratejinizi planlayın
 - [Yaygın Sorunlar](../troubleshooting/common-issues.md) - Dağıtım sorunlarını çözün
 - [En İyi Uygulamalar](../troubleshooting/debugging.md) - Üretime hazır dağıtım stratejileri
@@ -647,9 +654,9 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 **Navigasyon**
 - **Önceki Ders**: [İlk Projeniz](../getting-started/first-project.md)
-- **Sonraki Ders**: [Kaynakları Oluşturma](provisioning.md)
+- **Sonraki Ders**: [Kaynakların Sağlanması](provisioning.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul edilmez.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

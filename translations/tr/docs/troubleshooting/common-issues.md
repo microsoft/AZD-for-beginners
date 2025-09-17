@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T19:30:16+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T21:57:23+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "tr"
 }
 -->
 # Yaygın Sorunlar ve Çözümleri
 
+**Bölüm Gezinme:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme ve Hata Ayıklama
+- **⬅️ Önceki Bölüm**: [Bölüm 6: Ön Kontroller](../pre-deployment/preflight-checks.md)
+- **➡️ Sonraki**: [Hata Ayıklama Kılavuzu](debugging.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Kalıplar](../ai-foundry/production-ai-practices.md)
+
 ## Giriş
 
-Bu kapsamlı sorun giderme rehberi, Azure Developer CLI kullanırken en sık karşılaşılan sorunları ele alır. Kimlik doğrulama, dağıtım, altyapı sağlama ve uygulama yapılandırmasıyla ilgili yaygın sorunları teşhis etmeyi, çözmeyi ve gidermeyi öğrenin. Her sorun için ayrıntılı semptomlar, temel nedenler ve adım adım çözüm prosedürleri sunulmaktadır.
+Bu kapsamlı sorun giderme kılavuzu, Azure Developer CLI kullanırken en sık karşılaşılan sorunları ele alır. Kimlik doğrulama, dağıtım, altyapı sağlama ve uygulama yapılandırması ile ilgili yaygın sorunları teşhis etmeyi, gidermeyi ve çözmeyi öğrenin. Her sorun için ayrıntılı semptomlar, temel nedenler ve adım adım çözüm prosedürleri sunulmaktadır.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamladığınızda:
-- Azure Developer CLI sorunları için teşhis tekniklerini öğrenmiş olacaksınız
-- Yaygın kimlik doğrulama ve izin sorunlarını ve çözümlerini anlayacaksınız
-- Dağıtım hatalarını, altyapı sağlama hatalarını ve yapılandırma sorunlarını çözebileceksiniz
-- Proaktif izleme ve hata ayıklama stratejilerini uygulayabileceksiniz
-- Karmaşık sorunlar için sistematik sorun giderme metodolojilerini kullanabileceksiniz
-- Gelecekteki sorunları önlemek için doğru günlük kaydı ve izleme yapılandırması yapabileceksiniz
+Bu kılavuzu tamamlayarak:
+- Azure Developer CLI sorunları için teşhis tekniklerini öğrenin
+- Yaygın kimlik doğrulama ve izin sorunlarını ve çözümlerini anlayın
+- Dağıtım hatalarını, altyapı sağlama hatalarını ve yapılandırma sorunlarını çözün
+- Proaktif izleme ve hata ayıklama stratejileri uygulayın
+- Karmaşık sorunlar için sistematik sorun giderme metodolojilerini kullanın
+- Gelecekteki sorunları önlemek için uygun günlük kaydı ve izleme yapılandırması yapın
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Azure Developer CLI sorunlarını yerleşik teşhis araçlarını kullanarak teşhis etmek
-- Kimlik doğrulama, abonelik ve izinle ilgili sorunları bağımsız olarak çözmek
-- Dağıtım hatalarını ve altyapı sağlama hatalarını etkili bir şekilde gidermek
-- Uygulama yapılandırma sorunlarını ve ortama özgü problemleri ayıklamak
-- Potansiyel sorunları proaktif olarak belirlemek için izleme ve uyarı sistemlerini uygulamak
-- Günlük kaydı, hata ayıklama ve sorun çözme iş akışları için en iyi uygulamaları kullanmak
+- Azure Developer CLI sorunlarını yerleşik teşhis araçlarıyla teşhis edin
+- Kimlik doğrulama, abonelik ve izinle ilgili sorunları bağımsız olarak çözün
+- Dağıtım hatalarını ve altyapı sağlama hatalarını etkili bir şekilde giderin
+- Uygulama yapılandırma sorunlarını ve ortamla ilgili problemleri ayıklayın
+- Potansiyel sorunları proaktif olarak belirlemek için izleme ve uyarı sistemleri uygulayın
+- Günlük kaydı, hata ayıklama ve sorun çözme iş akışları için en iyi uygulamaları kullanın
 
 ## Hızlı Teşhis
 
@@ -153,7 +160,7 @@ azd env set AZURE_LOCATION eastus2
 ### Sorun: Kota aşımı hataları
 **Semptomlar:**
 - "Kaynak türü için kota aşıldı" hatası
-- "Maksimum kaynak sayısına ulaşıldı" hatası
+- "Maksimum kaynak sayısına ulaşıldı"
 
 **Çözümler:**
 ```bash
@@ -310,7 +317,7 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 ### Sorun: CORS yapılandırma problemleri
 **Semptomlar:**
-- Frontend API'yi çağırmıyor
+- Ön uç API'yi çağırmıyor
 - Çapraz kaynak isteği engellendi
 
 **Çözümler:**
@@ -354,7 +361,7 @@ azd env select production-new
 
 ### Sorun: Ortam bozulması
 **Semptomlar:**
-- Ortam geçersiz bir durum gösteriyor
+- Ortam geçersiz durumda görünüyor
 - Kaynaklar yapılandırmayla eşleşmiyor
 
 **Çözümler:**
@@ -568,22 +575,22 @@ az security assessment list --resource-group myrg
 
 ## İlgili Kaynaklar
 
-- [Hata Ayıklama Rehberi](debugging.md) - İleri düzey hata ayıklama teknikleri
+- [Hata Ayıklama Kılavuzu](debugging.md) - Gelişmiş hata ayıklama teknikleri
 - [Kaynak Sağlama](../deployment/provisioning.md) - Altyapı sorun giderme
 - [Kapasite Planlama](../pre-deployment/capacity-planning.md) - Kaynak planlama rehberi
-- [SKU Seçimi](../pre-deployment/sku-selection.md) - Hizmet katmanı önerileri
+- [SKU Seçimi](../pre-deployment/sku-selection.md) - Hizmet seviyesi önerileri
 
 ---
 
-**İpucu**: Bu rehberi yer imlerine ekleyin ve sorunlarla karşılaştığınızda başvurun. Çoğu sorun daha önce görülmüş ve çözüm yolları belirlenmiştir!
+**İpucu**: Bu kılavuzu yer imlerine ekleyin ve sorunlarla karşılaştığınızda başvurun. Çoğu sorun daha önce görülmüş ve çözüm yolları belirlenmiştir!
 
 ---
 
-**Navigasyon**
+**Gezinme**
 - **Önceki Ders**: [Kaynak Sağlama](../deployment/provisioning.md)
-- **Sonraki Ders**: [Hata Ayıklama Rehberi](debugging.md)
+- **Sonraki Ders**: [Hata Ayıklama Kılavuzu](debugging.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

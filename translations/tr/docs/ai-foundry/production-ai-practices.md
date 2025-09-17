@@ -1,26 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T19:35:32+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-17T21:54:23+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "tr"
 }
 -->
 # AZD ile Üretim AI İş Yükü En İyi Uygulamaları
 
-**Önceki:** [AI Workshop Lab](ai-workshop-lab.md) | **Sonraki:** [AI Sorun Giderme Kılavuzu](../troubleshooting/ai-troubleshooting.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 8 - Üretim ve Kurumsal Kalıplar
+- **⬅️ Önceki Bölüm**: [Bölüm 7: Sorun Giderme](../troubleshooting/debugging.md)
+- **⬅️ Ayrıca İlgili**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurs Tamamlandı**: [AZD For Beginners](../../README.md)
 
 ## Genel Bakış
 
-Bu kılavuz, Azure Developer CLI (AZD) kullanarak üretime hazır AI iş yüklerini dağıtmak için kapsamlı en iyi uygulamaları sunar. Azure AI Foundry Discord topluluğundan alınan geri bildirimler ve gerçek müşteri dağıtımları temel alınarak, bu uygulamalar üretim AI sistemlerindeki en yaygın zorlukları ele alır.
+Bu rehber, Azure Developer CLI (AZD) kullanarak üretime hazır AI iş yüklerini dağıtmak için kapsamlı en iyi uygulamaları sunar. Azure AI Foundry Discord topluluğundan gelen geri bildirimler ve gerçek müşteri dağıtımları temel alınarak, bu uygulamalar üretim AI sistemlerindeki en yaygın zorlukları ele alır.
 
 ## Ele Alınan Temel Zorluklar
 
-Topluluk anketi sonuçlarına göre, geliştiricilerin karşılaştığı en büyük zorluklar şunlardır:
+Topluluk anket sonuçlarına göre, geliştiricilerin karşılaştığı en büyük zorluklar şunlardır:
 
 - **%45** çok hizmetli AI dağıtımlarıyla mücadele ediyor
-- **%38** kimlik bilgileri ve gizli yönetimiyle ilgili sorunlar yaşıyor  
+- **%38** kimlik bilgileri ve gizli yönetimi sorunları yaşıyor  
 - **%35** üretim hazırlığı ve ölçeklendirmeyi zor buluyor
 - **%32** daha iyi maliyet optimizasyon stratejilerine ihtiyaç duyuyor
 - **%29** izleme ve sorun giderme konusunda iyileştirme talep ediyor
@@ -836,11 +841,11 @@ echo "Infrastructure validation completed successfully!"
 
 ### Güvenlik ✅
 - [ ] Tüm hizmetler yönetilen kimlikler kullanıyor
-- [ ] Gizli bilgiler Key Vault'ta saklanıyor
+- [ ] Gizliler Key Vault'ta saklanıyor
 - [ ] Özel uç noktalar yapılandırıldı
 - [ ] Ağ güvenlik grupları uygulandı
 - [ ] En az ayrıcalıklı RBAC
-- [ ] Genel uç noktalarda WAF etkinleştirildi
+- [ ] Genel uç noktalarda WAF etkin
 
 ### Performans ✅
 - [ ] Otomatik ölçeklendirme yapılandırıldı
@@ -908,14 +913,14 @@ python scripts/load_test.py \
 
 ## 🤝 Topluluk En İyi Uygulamaları
 
-Azure AI Foundry Discord topluluğundan alınan geri bildirimlere dayanarak:
+Azure AI Foundry Discord topluluğundan gelen geri bildirimlere dayanarak:
 
-### Topluluğun Önerdiği En İyi Uygulamalar:
+### Topluluk Tavsiyeleri:
 
 1. **Küçük Başlayın, Kademeli Ölçeklendirin**: Temel SKU'larla başlayın ve gerçek kullanım temelinde ölçeklendirin
 2. **Her Şeyi İzleyin**: İlk günden itibaren kapsamlı izleme kurun
 3. **Güvenliği Otomatikleştirin**: Tutarlı güvenlik için altyapıyı kod olarak kullanın
-4. **İyi Test Edin**: AI'ya özel testleri hattınıza dahil edin
+4. **İyi Test Edin**: Pipeline'ınıza AI-specifik testleri dahil edin
 5. **Maliyetleri Planlayın**: Token kullanımını izleyin ve erken bütçe uyarıları ayarlayın
 
 ### Kaçınılması Gereken Yaygın Hatalar:
@@ -935,7 +940,12 @@ Azure AI Foundry Discord topluluğundan alınan geri bildirimlere dayanarak:
 
 ---
 
-**Önceki:** [AI Workshop Lab](ai-workshop-lab.md) | **Sonraki:** [AI Sorun Giderme Kılavuzu](../troubleshooting/ai-troubleshooting.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 8 - Üretim ve Kurumsal Kalıplar
+- **⬅️ Önceki Bölüm**: [Bölüm 7: Sorun Giderme](../troubleshooting/debugging.md)
+- **⬅️ Ayrıca İlgili**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kurs Tamamlandı**: [AZD For Beginners](../../README.md)
 
 **Unutmayın**: Üretim AI iş yükleri dikkatli planlama, izleme ve sürekli optimizasyon gerektirir. Bu kalıplarla başlayın ve bunları özel gereksinimlerinize göre uyarlayın.
 

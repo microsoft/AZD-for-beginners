@@ -1,45 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T19:25:46+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T21:57:07+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "tr"
 }
 -->
-# Kaynakların Sağlanması - AZD ile Kod Olarak Altyapı
+# Azure Kaynaklarını AZD ile Hazırlama
+
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 4 - Kod Olarak Altyapı ve Dağıtım
+- **⬅️ Önceki**: [Dağıtım Rehberi](deployment-guide.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 5: Çoklu Ajanlı Yapay Zeka Çözümleri](../../examples/retail-scenario.md)
+- **🔧 İlgili**: [Bölüm 6: Ön Dağıtım Doğrulaması](../pre-deployment/capacity-planning.md)
 
 ## Giriş
 
-Bu kapsamlı rehber, Azure Developer CLI kullanarak Azure kaynaklarını sağlama ve yönetme hakkında bilmeniz gereken her şeyi kapsar. Bicep, ARM şablonları, Terraform ve Pulumi kullanarak temel kaynak oluşturma işlemlerinden ileri düzey kurumsal altyapı mimarilerine kadar Kod Olarak Altyapı (IaC) desenlerini uygulamayı öğrenin.
+Bu kapsamlı rehber, Azure Developer CLI kullanarak Azure kaynaklarını hazırlama ve yönetme hakkında bilmeniz gereken her şeyi kapsar. Bicep, ARM şablonları, Terraform ve Pulumi kullanarak temel kaynak oluşturma işlemlerinden, gelişmiş kurumsal altyapı mimarilerine kadar Kod Olarak Altyapı (IaC) desenlerini nasıl uygulayacağınızı öğrenin.
 
 ## Öğrenme Hedefleri
 
 Bu rehberi tamamladığınızda:
-- Kod Olarak Altyapı prensiplerini ve Azure kaynak sağlama işlemlerini ustalıkla öğrenmiş olacaksınız
+- Kod Olarak Altyapı prensiplerini ve Azure kaynak hazırlama süreçlerini öğrenmiş olacaksınız
 - Azure Developer CLI tarafından desteklenen çeşitli IaC sağlayıcılarını anlayacaksınız
 - Yaygın uygulama mimarileri için Bicep şablonları tasarlayıp uygulayabileceksiniz
-- Kaynak parametrelerini, değişkenlerini ve ortama özgü ayarları yapılandırabileceksiniz
-- Ağ ve güvenlik gibi ileri düzey altyapı desenlerini uygulayabileceksiniz
+- Kaynak parametrelerini, değişkenlerini ve ortam spesifik ayarları yapılandırabileceksiniz
+- Ağ ve güvenlik gibi gelişmiş altyapı desenlerini uygulayabileceksiniz
 - Kaynak yaşam döngüsünü, güncellemeleri ve bağımlılık çözümlemelerini yönetebileceksiniz
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Bicep ve ARM şablonlarını kullanarak Azure altyapısını tasarlayıp sağlayabileceksiniz
-- Doğru kaynak bağımlılıkları ile karmaşık çok hizmetli mimarileri yapılandırabileceksiniz
-- Birden fazla ortam ve yapılandırma için parametreli şablonlar uygulayabileceksiniz
-- Altyapı sağlama sorunlarını giderip dağıtım hatalarını çözebileceksiniz
-- Azure İyi Mimarileştirilmiş Çerçeve prensiplerini altyapı tasarımına uygulayabileceksiniz
-- Altyapı güncellemelerini yönetip altyapı sürümleme stratejilerini uygulayabileceksiniz
+- Bicep ve ARM şablonları kullanarak Azure altyapısını tasarlayıp hazırlamak
+- Doğru kaynak bağımlılıkları ile karmaşık çoklu hizmet mimarilerini yapılandırmak
+- Birden fazla ortam ve yapılandırma için parametreli şablonlar uygulamak
+- Altyapı hazırlama sorunlarını gidermek ve dağıtım hatalarını çözmek
+- Azure İyi Tasarlanmış Çerçeve prensiplerini altyapı tasarımına uygulamak
+- Altyapı güncellemelerini yönetmek ve altyapı sürümleme stratejileri uygulamak
 
-## Altyapı Sağlama Genel Bakış
+## Altyapı Hazırlama Genel Bakış
 
 Azure Developer CLI, birden fazla Kod Olarak Altyapı (IaC) sağlayıcısını destekler:
-- **Bicep** (önerilen) - Azure'un alanına özgü dili
+- **Bicep** (önerilen) - Azure'un alan spesifik dili
 - **ARM Şablonları** - JSON tabanlı Azure Resource Manager şablonları
 - **Terraform** - Çoklu bulut altyapı aracı
-- **Pulumi** - Programlama dilleriyle modern altyapı kodu
+- **Pulumi** - Programlama dilleriyle modern altyapı kodlama
 
 ## Azure Kaynaklarını Anlama
 
@@ -130,7 +137,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### İleri Düzey Bicep Desenleri
+### Gelişmiş Bicep Desenleri
 
 #### Modüler Altyapı
 ```bicep
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Veritabanı Sağlama
+## 🗃️ Veritabanı Hazırlama
 
 ### Cosmos DB
 ```bicep
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Koşullu Kaynak Sağlama
+### Koşullu Kaynak Hazırlama
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 İleri Düzey Sağlama Desenleri
+## 🚀 Gelişmiş Hazırlama Desenleri
 
-### Çok Bölgeye Dağıtım
+### Çoklu Bölge Dağıtımı
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -757,7 +764,7 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Kaynak Güncellemeleri ve Taşımalar
+## 🔄 Kaynak Güncellemeleri ve Geçişler
 
 ### Güvenli Kaynak Güncellemeleri
 ```bash
@@ -771,7 +778,7 @@ azd provision --confirm-with-no-prompt
 azd provision --rollback
 ```
 
-### Veritabanı Taşımaları
+### Veritabanı Geçişleri
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,9 +866,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Sonraki Adımlar
 
-- [Dağıtım Öncesi Planlama](../pre-deployment/capacity-planning.md) - Kaynak kullanılabilirliğini doğrulayın
+- [Ön Dağıtım Planlaması](../pre-deployment/capacity-planning.md) - Kaynak kullanılabilirliğini doğrulayın
 - [Yaygın Sorunlar](../troubleshooting/common-issues.md) - Altyapı sorunlarını giderin
-- [Hata Ayıklama Rehberi](../troubleshooting/debugging.md) - Sağlama sorunlarını hata ayıklayın
+- [Hata Ayıklama Rehberi](../troubleshooting/debugging.md) - Hazırlama sorunlarını ayıklayın
 - [SKU Seçimi](../pre-deployment/sku-selection.md) - Uygun hizmet seviyelerini seçin
 
 ## Ek Kaynaklar
@@ -869,15 +876,15 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Azure Bicep Belgeleri](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager Şablonları](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure İyi Mimarileştirilmiş Çerçeve](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure İyi Tasarlanmış Çerçeve](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigasyon**
 - **Önceki Ders**: [Dağıtım Rehberi](deployment-guide.md)
-- **Sonraki Ders**: [Kapasite Planlama](../pre-deployment/capacity-planning.md)
+- **Sonraki Ders**: [Kapasite Planlaması](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlama durumunda sorumluluk kabul edilmez.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
