@@ -1,50 +1,57 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T19:19:14+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T18:58:14+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "mo"
 }
 -->
 # 部署指南 - 精通 AZD 部署
 
-## 介紹
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第四章 - 基礎架構即代碼與部署
+- **⬅️ 上一章**: [第三章：配置](../getting-started/configuration.md)
+- **➡️ 下一步**: [資源佈署](provisioning.md)
+- **🚀 下一章**: [第五章：多代理 AI 解決方案](../../examples/retail-scenario.md)
 
-這份全面的指南涵蓋了使用 Azure Developer CLI 部署應用程式的所有內容，從基本的單指令部署到具有自訂掛鉤、多環境和 CI/CD 整合的高級生產場景。透過實際範例和最佳實踐，掌握完整的部署生命週期。
+## 簡介
+
+這份全面的指南涵蓋了使用 Azure Developer CLI 部署應用程式的所有內容，從基本的單指令部署到包含自定義掛鉤、多環境及 CI/CD 整合的高級生產場景。透過實際範例和最佳實踐，掌握完整的部署生命周期。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
-- 精通所有 Azure Developer CLI 的部署指令和工作流程
-- 了解從資源配置到監控的完整部署生命週期
-- 實現自訂部署掛鉤以進行部署前後的自動化
-- 配置多個環境並使用特定於環境的參數
-- 設置高級部署策略，包括藍綠部署和金絲雀部署
-- 將 azd 部署整合到 CI/CD 管道和 DevOps 工作流程中
+- 精通所有 Azure Developer CLI 部署指令及工作流程
+- 理解從資源佈署到監控的完整部署生命周期
+- 實現自定義部署掛鉤以進行部署前後的自動化
+- 配置多環境並使用特定於環境的參數
+- 設置高級部署策略，包括藍綠部署及金絲雀部署
+- 將 azd 部署整合到 CI/CD 管道及 DevOps 工作流程中
 
 ## 學習成果
 
 完成後，您將能夠：
 - 獨立執行並排除所有 azd 部署工作流程的故障
-- 設計並實現使用掛鉤的自訂部署自動化
-- 配置具備安全性和監控的生產就緒部署
+- 設計並實現基於掛鉤的自定義部署自動化
+- 配置具備安全性及監控的生產級部署
 - 管理複雜的多環境部署場景
-- 優化部署效能並實現回滾策略
-- 將 azd 部署整合到企業 DevOps 實踐中
+- 優化部署性能並實現回滾策略
+- 將 azd 部署整合到企業級 DevOps 實踐中
 
 ## 部署概述
 
-Azure Developer CLI 提供了多種部署指令：
-- `azd up` - 完整工作流程（資源配置 + 部署）
-- `azd provision` - 僅建立/更新 Azure 資源
+Azure Developer CLI 提供多種部署指令：
+- `azd up` - 完整工作流程（佈署 + 部署）
+- `azd provision` - 僅創建/更新 Azure 資源
 - `azd deploy` - 僅部署應用程式代碼
-- `azd package` - 建置並打包應用程式
+- `azd package` - 構建並打包應用程式
 
 ## 基本部署工作流程
 
 ### 完整部署（azd up）
-最常見的新專案工作流程：
+新專案最常用的工作流程：
 ```bash
 # Deploy everything from scratch
 azd up
@@ -56,7 +63,7 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### 僅基礎設施部署
+### 僅佈署基礎架構
 當您只需要更新 Azure 資源時：
 ```bash
 # Provision/update infrastructure
@@ -69,8 +76,8 @@ azd provision --preview
 azd provision --service database
 ```
 
-### 僅代碼部署
-用於快速更新應用程式：
+### 僅部署代碼
+快速更新應用程式：
 ```bash
 # Deploy all services
 azd deploy
@@ -83,9 +90,9 @@ azd deploy --service api
 azd deploy --service api --build-arg NODE_ENV=production
 ```
 
-## 🏗️ 理解部署過程
+## 🏗️ 理解部署流程
 
-### 階段 1：資源配置前掛鉤
+### 階段 1：佈署前掛鉤
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### 階段 2：基礎設施配置
-- 讀取基礎設施模板（Bicep/Terraform）
-- 建立或更新 Azure 資源
-- 配置網路和安全性
-- 設置監控和日誌記錄
+### 階段 2：基礎架構佈署
+- 讀取基礎架構模板（Bicep/Terraform）
+- 創建或更新 Azure 資源
+- 配置網絡及安全性
+- 設置監控及日誌記錄
 
-### 階段 3：資源配置後掛鉤
+### 階段 3：佈署後掛鉤
 ```yaml
 hooks:
   postprovision:
@@ -119,8 +126,8 @@ hooks:
 ```
 
 ### 階段 4：應用程式打包
-- 建置應用程式代碼
-- 建立部署工件
+- 構建應用程式代碼
+- 創建部署工件
 - 為目標平台打包（容器、ZIP 文件等）
 
 ### 階段 5：部署前掛鉤
@@ -139,7 +146,7 @@ hooks:
 ### 階段 6：應用程式部署
 - 將打包的應用程式部署到 Azure 服務
 - 更新配置設定
-- 啟動/重新啟動服務
+- 啟動/重啟服務
 
 ### 階段 7：部署後掛鉤
 ```yaml
@@ -358,9 +365,9 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ 效能優化
+## ⚡ 性能優化
 
-### 平行部署
+### 並行部署
 ```bash
 # Configure parallel deployment
 azd config set deploy.parallelism 5
@@ -369,7 +376,7 @@ azd config set deploy.parallelism 5
 azd deploy --parallel
 ```
 
-### 建置快取
+### 構建緩存
 ```yaml
 # azure.yaml - Enable build caching
 services:
@@ -394,7 +401,7 @@ azd deploy --detect-changes
 
 ## 🔍 部署監控
 
-### 即時部署監控
+### 實時部署監控
 ```bash
 # Monitor deployment progress
 azd deploy --follow
@@ -453,7 +460,7 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 安全性考量
+## 🔐 安全考量
 
 ### 機密管理
 ```bash
@@ -475,7 +482,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### 網路安全
+### 網絡安全
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -486,7 +493,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### 身份與存取管理
+### 身份及訪問管理
 ```yaml
 services:
   api:
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### 基礎設施回滾
+### 基礎架構回滾
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -540,7 +547,7 @@ echo "Database rollback completed"
 
 ## 📊 部署指標
 
-### 追蹤部署效能
+### 跟蹤部署性能
 ```bash
 # Enable deployment metrics
 azd config set telemetry.deployment.enabled true
@@ -552,7 +559,7 @@ azd history
 azd metrics --type deployment
 ```
 
-### 自訂指標收集
+### 自定義指標收集
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -582,7 +589,7 @@ azd env new production-v1
 ./scripts/sync-environments.sh
 ```
 
-### 2. 基礎設施驗證
+### 2. 基礎架構驗證
 ```bash
 # Validate before deployment
 azd provision --preview
@@ -621,7 +628,7 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. 文件和日誌記錄
+### 4. 文件及日誌記錄
 ```bash
 # Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
@@ -631,10 +638,10 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## 下一步
 
-- [資源配置](provisioning.md) - 深入了解基礎設施管理
+- [資源佈署](provisioning.md) - 深入了解基礎架構管理
 - [部署前規劃](../pre-deployment/capacity-planning.md) - 規劃您的部署策略
 - [常見問題](../troubleshooting/common-issues.md) - 解決部署問題
-- [最佳實踐](../troubleshooting/debugging.md) - 生產就緒的部署策略
+- [最佳實踐](../troubleshooting/debugging.md) - 生產級部署策略
 
 ## 其他資源
 
@@ -646,10 +653,10 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **導航**
-- **上一課**：[您的第一個專案](../getting-started/first-project.md)
-- **下一課**：[資源配置](provisioning.md)
+- **上一課**: [您的第一個專案](../getting-started/first-project.md)
+- **下一課**: [資源佈署](provisioning.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。

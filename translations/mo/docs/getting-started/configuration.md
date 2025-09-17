@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T18:45:07+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T18:57:31+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "mo"
 }
 -->
 # 配置指南
 
-**上一章:** [AZD 基礎知識](azd-basics.md) | **下一章:** [第一個專案](first-project.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第三章 - 配置與身份驗證
+- **⬅️ 上一章**: [你的第一個專案](first-project.md)
+- **➡️ 下一章**: [部署指南](../deployment/deployment-guide.md)
+- **🚀 下一章節**: [第四章：基礎架構即程式碼](../deployment/deployment-guide.md)
 
 ## 簡介
 
-本指南全面涵蓋如何配置 Azure Developer CLI，以實現最佳的開發和部署工作流程。您將學習配置層級、環境管理、身份驗證方法，以及高級配置模式，這些都能幫助您高效且安全地進行 Azure 部署。
+本指南全面涵蓋了配置 Azure Developer CLI 的所有方面，旨在優化開發和部署工作流程。您將學習配置層級、環境管理、身份驗證方法以及高級配置模式，這些都能幫助您實現高效且安全的 Azure 部署。
 
 ## 學習目標
 
@@ -27,13 +32,13 @@ CO_OP_TRANSLATOR_METADATA:
 ## 學習成果
 
 完成本課程後，您將能夠：
-- 配置 azd 以實現最佳開發工作流程
-- 設置並管理多個部署環境
+- 配置 azd 以優化開發工作流程
+- 設置和管理多個部署環境
 - 實施安全的配置管理實踐
 - 排除與配置相關的問題
 - 根據特定組織需求自訂 azd 行為
 
-本指南全面涵蓋如何配置 Azure Developer CLI，以實現最佳的開發和部署工作流程。
+本指南全面涵蓋了配置 Azure Developer CLI 的所有方面，旨在優化開發和部署工作流程。
 
 ## 配置層級
 
@@ -206,7 +211,7 @@ services:
 
 ## 🌟 環境管理
 
-### 建立環境
+### 創建環境
 ```bash
 # Create a new environment
 azd env new development
@@ -256,7 +261,7 @@ azd env unset DEBUG
 ```
 
 ### 環境模板
-建立 `.azure/env.template` 以保持一致的環境設置：
+創建 `.azure/env.template` 以保持一致的環境設置：
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -333,7 +338,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### Terraform 配置
-對於 Terraform 專案，在 `infra/terraform.tfvars` 中進行配置：
+對於 Terraform 專案，請在 `infra/terraform.tfvars` 中配置：
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -459,7 +464,7 @@ azd provision --dry-run
 ```
 
 ### 配置腳本
-在 `scripts/` 中建立驗證腳本：
+在 `scripts/` 中創建驗證腳本：
 
 ```bash
 #!/bin/bash
@@ -519,7 +524,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. 配置文件文檔
+### 4. 配置文件文檔化
 在 `CONFIG.md` 中記錄您的配置：
 ```markdown
 # Configuration Guide
@@ -537,9 +542,9 @@ database:
 
 ## 下一步
 
-- [您的第一個專案](first-project.md) - 實際應用配置
+- [你的第一個專案](first-project.md) - 實際應用配置
 - [部署指南](../deployment/deployment-guide.md) - 使用配置進行部署
-- [資源佈署](../deployment/provisioning.md) - 適用於生產環境的配置
+- [資源佈署](../deployment/provisioning.md) - 生產就緒配置
 
 ## 參考資料
 
@@ -549,10 +554,14 @@ database:
 
 ---
 
-**上一章:** [AZD 基礎知識](azd-basics.md) | **下一章:** [第一個專案](first-project.md)
-- **下一課程**: [您的第一個專案](first-project.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第三章 - 配置與身份驗證
+- **⬅️ 上一章**: [你的第一個專案](first-project.md)
+- **➡️ 下一章節**: [第四章：基礎架構即程式碼](../deployment/deployment-guide.md)
+- **下一課程**: [你的第一個專案](first-project.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

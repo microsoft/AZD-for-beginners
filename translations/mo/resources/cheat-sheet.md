@@ -1,27 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T20:25:19+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T19:05:45+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "mo"
 }
 -->
 # 指令速查表 - AZD 必備指令
 
-## 介紹
+**所有章節快速參考**
+- **📚 課程首頁**: [AZD 初學者指南](../README.md)
+- **📖 快速入門**: [第一章：基礎與快速入門](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI 指令**: [第二章：AI 優先開發](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 進階**: [第四章：基礎架構即程式碼](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
+## 簡介
 
 這份全面的速查表提供了最常用的 Azure Developer CLI 指令的快速參考，依照類別整理並附有實用範例。非常適合在開發、故障排除以及日常操作 AZD 專案時快速查閱。
 
 ## 學習目標
 
-透過使用這份速查表，您將能夠：
-- 即時存取 Azure Developer CLI 的基本指令及語法
+使用這份速查表，您將能夠：
+- 即時存取重要的 Azure Developer CLI 指令及語法
 - 了解指令依功能類別及使用情境的組織方式
-- 參考常見開發及部署情境的實用範例
+- 參考常見開發與部署情境的實用範例
 - 學習故障排除指令以快速解決問題
 - 高效找到進階設定及自訂選項
-- 掌握環境管理及多環境工作流程的指令
+- 掌握環境管理及多環境工作流程指令
 
 ## 學習成果
 
@@ -29,13 +35,13 @@ CO_OP_TRANSLATOR_METADATA:
 - 自信地執行 AZD 指令而無需查閱完整文件
 - 使用適當的診斷指令快速解決常見問題
 - 高效管理多個環境及部署情境
-- 根據需求應用 AZD 的進階功能及設定選項
+- 根據需要應用 AZD 的進階功能及設定選項
 - 使用系統化的指令序列排除部署問題
 - 透過有效使用 AZD 快捷方式及選項優化工作流程
 
 ## 入門指令
 
-### 驗證
+### 身份驗證
 ```bash
 # Login to Azure (uses Azure CLI)
 az login
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### 建置及打包
+### 建置與打包
 ```bash
 # Build applications
 azd package
@@ -182,7 +188,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 監控及日誌
+## 📊 監控與日誌
 
 ### 應用程式日誌
 ```bash
@@ -243,7 +249,7 @@ azd info
 
 ## 🔧 進階指令
 
-### 管線及 CI/CD
+### 管線與 CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -366,7 +372,7 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 檔案及目錄指令
+## 📁 檔案與目錄指令
 
 ### 專案結構
 ```bash
@@ -523,7 +529,7 @@ azd-status() {
 }
 ```
 
-## 📖 幫助及文件
+## 📖 幫助與文件
 
 ### 獲取幫助
 ```bash
@@ -552,15 +558,15 @@ azd template show <template-name> --docs
 
 ---
 
-**提示**：將這份速查表加入書籤，並使用 `Ctrl+F` 快速找到您需要的指令！
+**提示**: 將這份速查表加入書籤，並使用 `Ctrl+F` 快速找到您需要的指令！
 
 ---
 
 **導航**
-- **上一課**：[預檢檢查](../docs/pre-deployment/preflight-checks.md)
-- **下一課**：[術語表](glossary.md)
+- **上一課**: [部署前檢查](../docs/pre-deployment/preflight-checks.md)
+- **下一課**: [術語表](glossary.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。應以原始語言的文件作為權威來源。對於關鍵資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

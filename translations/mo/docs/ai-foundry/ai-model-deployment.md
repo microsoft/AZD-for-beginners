@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T19:36:44+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T18:56:22+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "mo"
 }
 -->
 # 使用 Azure Developer CLI 部署 AI 模型
 
-**上一章：** [Azure AI Foundry 整合](azure-ai-foundry-integration.md) | **下一章：** [AI 工作坊實驗室](ai-workshop-lab.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第 2 章 - AI 優先開發
+- **⬅️ 上一章**: [Azure AI Foundry 整合](azure-ai-foundry-integration.md)
+- **➡️ 下一章**: [AI 工作坊實驗](ai-workshop-lab.md)
+- **🚀 下一章節**: [第 3 章：配置](../getting-started/configuration.md)
 
 本指南提供使用 AZD 模板部署 AI 模型的詳細說明，涵蓋從模型選擇到生產部署模式的所有內容。
 
@@ -59,7 +64,7 @@ services:
 | 模型類型 | 使用案例 | 建議容量 | 成本考量 |
 |----------|----------|----------|----------|
 | GPT-4o-mini | 聊天、問答 | 10-50 TPM | 大多數工作負載的成本效益選擇 |
-| GPT-4 | 複雜推理 | 20-100 TPM | 成本較高，適用於高端功能 |
+| GPT-4 | 複雜推理 | 20-100 TPM | 成本較高，適用於高級功能 |
 | Text-embedding-ada-002 | 搜索、RAG | 30-120 TPM | 對語義搜索至關重要 |
 | Whisper | 語音轉文字 | 10-50 TPM | 音頻處理工作負載 |
 
@@ -155,7 +160,7 @@ services:
 
 適用於：
 - 開發和測試
-- 單一市場應用
+- 單一市場應用程式
 - 成本優化
 
 ### 模式 2：多區域部署
@@ -172,13 +177,13 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 適用於：
-- 全球性應用
+- 全球應用程式
 - 高可用性需求
 - 負載分配
 
 ### 模式 3：混合部署
 
-結合 Azure OpenAI 和其他 AI 服務：
+結合 Azure OpenAI 與其他 AI 服務：
 
 ```bicep
 // Hybrid AI services
@@ -211,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### 版本控制
 
-在您的 AZD 配置中追蹤模型版本：
+在 AZD 配置中追蹤模型版本：
 
 ```json
 {
@@ -299,7 +304,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### 自動擴展配置
 
-為 Container Apps 配置自動擴展：
+為容器應用程式配置自動擴展：
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -478,7 +483,7 @@ async def check_ai_models():
 ## 下一步
 
 1. **查看 [Azure AI Foundry 整合指南](azure-ai-foundry-integration.md)**，了解服務整合模式
-2. **完成 [AI 工作坊實驗室](ai-workshop-lab.md)**，獲得實際操作經驗
+2. **完成 [AI 工作坊實驗](ai-workshop-lab.md)**，獲得實際操作經驗
 3. **實施 [生產 AI 實踐](production-ai-practices.md)**，用於企業部署
 4. **探索 [AI 疑難排解指南](../troubleshooting/ai-troubleshooting.md)**，解決常見問題
 
@@ -486,14 +491,19 @@ async def check_ai_models():
 
 - [Azure OpenAI 模型可用性](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI 文件](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps 擴展](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [容器應用程式擴展](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI 模型成本優化](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**上一章：** [Azure AI Foundry 整合](azure-ai-foundry-integration.md) | **下一章：** [AI 工作坊實驗室](ai-workshop-lab.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第 2 章 - AI 優先開發
+- **⬅️ 上一章**: [Azure AI Foundry 整合](azure-ai-foundry-integration.md)
+- **➡️ 下一章**: [AI 工作坊實驗](ai-workshop-lab.md)
+- **🚀 下一章節**: [第 3 章：配置](../getting-started/configuration.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

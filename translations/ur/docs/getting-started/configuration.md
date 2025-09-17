@@ -1,48 +1,53 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T18:41:58+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T18:39:33+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ur"
 }
 -->
-# ترتیب دینے کی رہنمائی
+# ترتیب گائیڈ
 
-**پچھلا:** [AZD بنیادی اصول](azd-basics.md) | **اگلا:** [پہلا پروجیکٹ](first-project.md)
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم**: [AZD ابتدائیوں کے لیے](../../README.md)
+- **📖 موجودہ باب**: باب 3 - ترتیب اور تصدیق
+- **⬅️ پچھلا**: [آپ کا پہلا پروجیکٹ](first-project.md)
+- **➡️ اگلا**: [تعیناتی گائیڈ](../deployment/deployment-guide.md)
+- **🚀 اگلا باب**: [باب 4: کوڈ کے طور پر انفراسٹرکچر](../deployment/deployment-guide.md)
 
 ## تعارف
 
-یہ جامع رہنمائی Azure Developer CLI کو بہترین ترقی اور تعیناتی ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔ آپ ترتیب کی درجہ بندی، ماحولیات کا انتظام، تصدیق کے طریقے، اور پیچیدہ ترتیب کے نمونے سیکھیں گے جو مؤثر اور محفوظ Azure تعیناتیوں کو ممکن بناتے ہیں۔
+یہ جامع گائیڈ Azure Developer CLI کو بہترین ترقی اور تعیناتی ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔ آپ ترتیب کی درجہ بندی، ماحول کے انتظام، تصدیق کے طریقے، اور جدید ترتیب کے نمونوں کے بارے میں سیکھیں گے جو موثر اور محفوظ Azure تعیناتیوں کو ممکن بناتے ہیں۔
 
 ## سیکھنے کے اہداف
 
 اس سبق کے اختتام تک، آپ:
 - azd ترتیب کی درجہ بندی میں مہارت حاصل کریں گے اور سمجھیں گے کہ ترتیبات کو کس طرح ترجیح دی جاتی ہے
 - عالمی اور پروجیکٹ مخصوص ترتیبات کو مؤثر طریقے سے ترتیب دیں گے
-- مختلف ترتیبات کے ساتھ متعدد ماحولیات کا انتظام کریں گے
-- محفوظ تصدیق اور اجازت کے نمونے نافذ کریں گے
-- پیچیدہ منظرناموں کے لیے اعلیٰ درجے کی ترتیب کے نمونے سمجھیں گے
+- مختلف ترتیبات کے ساتھ متعدد ماحول کا انتظام کریں گے
+- محفوظ تصدیق اور اجازت کے نمونوں کو نافذ کریں گے
+- پیچیدہ منظرناموں کے لیے جدید ترتیب کے نمونوں کو سمجھیں گے
 
 ## سیکھنے کے نتائج
 
 اس سبق کو مکمل کرنے کے بعد، آپ قابل ہوں گے:
-- ترقی کے بہترین ورک فلو کے لیے azd کو ترتیب دیں
-- متعدد تعیناتی ماحولیات کو ترتیب دیں اور ان کا انتظام کریں
+- ترقی کے بہترین ورک فلو کے لیے azd ترتیب دیں
+- متعدد تعیناتی ماحول قائم کریں اور ان کا انتظام کریں
 - محفوظ ترتیب کے انتظام کے طریقے نافذ کریں
 - ترتیب سے متعلق مسائل کو حل کریں
 - مخصوص تنظیمی ضروریات کے لیے azd کے رویے کو حسب ضرورت بنائیں
 
-یہ جامع رہنمائی Azure Developer CLI کو بہترین ترقی اور تعیناتی ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔
+یہ جامع گائیڈ Azure Developer CLI کو بہترین ترقی اور تعیناتی ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔
 
 ## ترتیب کی درجہ بندی
 
 azd ایک درجہ بندی ترتیب کا نظام استعمال کرتا ہے:
 1. **کمانڈ لائن فلیگز** (سب سے زیادہ ترجیح)
-2. **ماحولیات کے متغیرات**
+2. **ماحول کے متغیرات**
 3. **مقامی پروجیکٹ ترتیب** (`.azd/config.json`)
 4. **عالمی صارف ترتیب** (`~/.azd/config.json`)
-5. **پہلے سے طے شدہ اقدار** (سب سے کم ترجیح)
+5. **ڈیفالٹ اقدار** (سب سے کم ترجیح)
 
 ## عالمی ترتیب
 
@@ -82,7 +87,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 
 ## 🏗️ پروجیکٹ ترتیب
 
-### azure.yaml کا ڈھانچہ
+### azure.yaml ساخت
 `azure.yaml` فائل آپ کے azd پروجیکٹ کا مرکز ہے:
 
 ```yaml
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### زبان کے مخصوص ترتیبات
+#### زبان مخصوص ترتیبات
 ```yaml
 services:
   node-app:
@@ -204,9 +209,9 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 ماحولیات کا انتظام
+## 🌟 ماحول کا انتظام
 
-### ماحولیات بنانا
+### ماحول بنانا
 ```bash
 # Create a new environment
 azd env new development
@@ -218,8 +223,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### ماحولیات کی ترتیب
-ہر ماحول کی اپنی ترتیب ہوتی ہے `.azure/<env-name>/config.json` میں:
+### ماحول کی ترتیب
+ہر ماحول کی اپنی ترتیب `.azure/<env-name>/config.json` میں ہوتی ہے:
 
 ```json
 {
@@ -241,7 +246,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### ماحولیات کے متغیرات
+### ماحول کے متغیرات
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -255,7 +260,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-### ماحولیات کے سانچے
+### ماحول کے سانچے
 مسلسل ماحول کی ترتیب کے لیے `.azure/env.template` بنائیں:
 ```bash
 # Required variables
@@ -300,17 +305,17 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### منظم شناخت
-Azure پر میزبانی شدہ ماحولیات کے لیے:
+Azure پر میزبانی شدہ ماحول کے لیے:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ بنیادی ڈھانچے کی ترتیب
+## 🏗️ انفراسٹرکچر ترتیب
 
 ### Bicep پیرامیٹرز
-بنیادی ڈھانچے کے پیرامیٹرز کو `infra/main.parameters.json` میں ترتیب دیں:
+`infra/main.parameters.json` میں انفراسٹرکچر پیرامیٹرز ترتیب دیں:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -382,7 +387,7 @@ services:
 ```
 مثال `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 اعلیٰ درجے کی ترتیب
+## 🔧 جدید ترتیب
 
 ### حسب ضرورت وسائل کے نام
 ```bash
@@ -415,7 +420,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 ماحولیات کے مخصوص ترتیبات
+## 🎯 ماحول مخصوص ترتیبات
 
 ### ترقیاتی ماحول
 ```bash
@@ -484,7 +489,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 بہترین طریقے
 
-### 1. ماحولیات کے متغیرات استعمال کریں
+### 1. ماحول کے متغیرات استعمال کریں
 ```yaml
 # Good: Use environment variables
 database:
@@ -535,21 +540,25 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## اگلے مراحل
+## اگلے اقدامات
 
 - [آپ کا پہلا پروجیکٹ](first-project.md) - ترتیب کو عملی طور پر نافذ کریں
-- [تعیناتی رہنمائی](../deployment/deployment-guide.md) - تعیناتی کے لیے ترتیب کا استعمال کریں
+- [تعیناتی گائیڈ](../deployment/deployment-guide.md) - تعیناتی کے لیے ترتیب استعمال کریں
 - [وسائل کی فراہمی](../deployment/provisioning.md) - پیداواری ترتیب کے لیے تیار کریں
 
 ## حوالہ جات
 
 - [azd ترتیب حوالہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml اسکیمہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [ماحولیات کے متغیرات](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [ماحول کے متغیرات](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**پچھلا:** [AZD بنیادی اصول](azd-basics.md) | **اگلا:** [پہلا پروجیکٹ](first-project.md)
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم**: [AZD ابتدائیوں کے لیے](../../README.md)
+- **📖 موجودہ باب**: باب 3 - ترتیب اور تصدیق
+- **⬅️ پچھلا**: [آپ کا پہلا پروجیکٹ](first-project.md)
+- **➡️ اگلا باب**: [باب 4: کوڈ کے طور پر انفراسٹرکچر](../deployment/deployment-guide.md)
 - **اگلا سبق**: [آپ کا پہلا پروجیکٹ](first-project.md)
 
 ---
