@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T19:23:24+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T18:58:35+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "mo"
 }
 -->
-# 資源佈署 - 使用 AZD 的基礎架構即代碼
+# 使用 AZD 配置 Azure 資源
 
-## 介紹
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第四章 - 基礎架構即程式碼與部署
+- **⬅️ 上一章**: [部署指南](deployment-guide.md)
+- **➡️ 下一章**: [第五章：多代理 AI 解決方案](../../examples/retail-scenario.md)
+- **🔧 相關內容**: [第六章：部署前驗證](../pre-deployment/capacity-planning.md)
 
-本指南全面涵蓋使用 Azure Developer CLI 佈署和管理 Azure 資源的所有內容。從基本資源創建到使用 Bicep、ARM 模板、Terraform 和 Pulumi 實現企業級基礎架構架構，學習如何實施基礎架構即代碼（IaC）模式。
+## 簡介
+
+本指南涵蓋使用 Azure Developer CLI 配置和管理 Azure 資源的所有必要知識。從基礎資源建立到企業級基礎架構架構，學習如何使用 Bicep、ARM 模板、Terraform 和 Pulumi 實現基礎架構即程式碼（IaC）模式。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
-- 精通基礎架構即代碼原則及 Azure 資源佈署
+- 掌握基礎架構即程式碼的原則以及 Azure 資源配置
 - 了解 Azure Developer CLI 支援的多種 IaC 提供者
 - 設計並實現常見應用架構的 Bicep 模板
-- 配置資源參數、變數及特定環境設置
-- 實現包括網絡和安全在內的高級基礎架構模式
-- 管理資源生命周期、更新及依賴解決
+- 配置資源參數、變數及特定環境的設置
+- 實現包括網路和安全在內的高級基礎架構模式
+- 管理資源生命週期、更新及依賴解決
 
 ## 學習成果
 
 完成後，您將能夠：
-- 使用 Bicep 和 ARM 模板設計並佈署 Azure 基礎架構
+- 使用 Bicep 和 ARM 模板設計並配置 Azure 基礎架構
 - 配置具有正確資源依賴的複雜多服務架構
 - 為多個環境和配置實現參數化模板
-- 排查基礎架構佈署問題並解決佈署失敗
+- 排除基礎架構配置問題並解決部署失敗
 - 將 Azure 良好架構框架原則應用於基礎架構設計
 - 管理基礎架構更新並實現基礎架構版本控制策略
 
-## 基礎架構佈署概述
+## 基礎架構配置概述
 
-Azure Developer CLI 支援多種基礎架構即代碼（IaC）提供者：
+Azure Developer CLI 支援多種基礎架構即程式碼（IaC）提供者：
 - **Bicep**（推薦）- Azure 的領域專用語言
 - **ARM 模板** - 基於 JSON 的 Azure 資源管理器模板
 - **Terraform** - 多雲基礎架構工具
-- **Pulumi** - 使用編程語言的現代基礎架構即代碼
+- **Pulumi** - 使用程式語言的現代基礎架構即程式碼工具
 
 ## 了解 Azure 資源
 
-### 資源層次結構
+### 資源層級
 ```
 Azure Account
 └── Subscriptions
@@ -52,11 +59,11 @@ Azure Account
 ```
 
 ### 常見應用的 Azure 服務
-- **計算**：App Service、Container Apps、Functions、Virtual Machines
-- **存儲**：Storage Account、Cosmos DB、SQL Database、PostgreSQL
-- **網絡**：Virtual Network、Application Gateway、CDN
-- **安全**：Key Vault、Application Insights、Log Analytics
-- **AI/ML**：Cognitive Services、OpenAI、Machine Learning
+- **計算**: App Service、Container Apps、Functions、虛擬機器
+- **儲存**: 儲存帳戶、Cosmos DB、SQL 資料庫、PostgreSQL
+- **網路**: 虛擬網路、應用程式閘道、CDN
+- **安全**: Key Vault、Application Insights、Log Analytics
+- **AI/ML**: 認知服務、OpenAI、機器學習
 
 ## Bicep 基礎架構模板
 
@@ -132,7 +139,7 @@ output WEB_NAME string = webApp.name
 
 ### 高級 Bicep 模式
 
-#### 模塊化基礎架構
+#### 模組化基礎架構
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -181,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### 條件資源創建
+#### 條件式資源建立
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ 數據庫佈署
+## 🗃️ 資料庫配置
 
 ### Cosmos DB
 ```bicep
@@ -300,9 +307,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 安全和機密管理
+## 🔒 安全與機密管理
 
-### Key Vault 集成
+### Key Vault 整合
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -370,9 +377,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 網絡和連接
+## 🌍 網路與連接
 
-### Virtual Network 配置
+### 虛擬網路配置
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -435,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### 使用 SSL 的 Application Gateway
+### 使用 SSL 的應用程式閘道
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 監控和可觀察性
+## 📊 監控與可觀察性
 
 ### Application Insights
 ```bicep
@@ -529,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### 自定義指標和警報
+### 自訂指標與警示
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 條件資源佈署
+### 條件式資源配置
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 高級佈署模式
+## 🚀 高級配置模式
 
-### 多區域佈署
+### 多區域部署
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -757,9 +764,9 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 資源更新和遷移
+## 🔄 資源更新與遷移
 
-### 安全資源更新
+### 安全的資源更新
 ```bash
 # Preview infrastructure changes
 azd provision --preview
@@ -771,7 +778,7 @@ azd provision --confirm-with-no-prompt
 azd provision --rollback
 ```
 
-### 數據庫遷移
+### 資料庫遷移
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,10 +866,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## 下一步
 
-- [佈署前規劃](../pre-deployment/capacity-planning.md) - 驗證資源可用性
-- [常見問題](../troubleshooting/common-issues.md) - 排查基礎架構問題
-- [調試指南](../troubleshooting/debugging.md) - 調試佈署問題
-- [SKU 選擇](../pre-deployment/sku-selection.md) - 選擇合適的服務層級
+- [部署前規劃](../pre-deployment/capacity-planning.md) - 驗證資源可用性
+- [常見問題](../troubleshooting/common-issues.md) - 排除基礎架構問題
+- [除錯指南](../troubleshooting/debugging.md) - 除錯配置問題
+- [SKU 選擇](../pre-deployment/sku-selection.md) - 選擇適合的服務層級
 
 ## 其他資源
 
@@ -874,10 +881,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **導航**
-- **上一課**：[佈署指南](deployment-guide.md)
-- **下一課**：[容量規劃](../pre-deployment/capacity-planning.md)
+- **上一課**: [部署指南](deployment-guide.md)
+- **下一課**: [容量規劃](../pre-deployment/capacity-planning.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。

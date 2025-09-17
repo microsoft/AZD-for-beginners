@@ -1,37 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T19:28:17+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T18:55:30+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "mo"
 }
 -->
 # Azure AI Foundry 與 AZD 的整合
 
-**前一篇:** [第一個專案](../getting-started/first-project.md) | **下一篇:** [AI 模型部署](ai-model-deployment.md)
+**章節導覽：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第 2 章 - AI 優先開發
+- **⬅️ 上一章**: [第 1 章：你的第一個專案](../getting-started/first-project.md)
+- **➡️ 下一步**: [AI 模型部署](ai-model-deployment.md)
+- **🚀 下一章**: [第 3 章：配置](../getting-started/configuration.md)
 
 ## 概述
 
-本指南展示如何將 Azure AI Foundry 服務與 Azure Developer CLI (AZD) 整合，以簡化 AI 應用程式的部署流程。Azure AI Foundry 提供一個全面的平台，用於建構、部署及管理 AI 應用程式，而 AZD 則簡化基礎架構及部署過程。
+本指南展示如何將 Azure AI Foundry 服務與 Azure Developer CLI (AZD) 整合，以簡化 AI 應用程式的部署流程。Azure AI Foundry 提供一個完整的平台，用於構建、部署和管理 AI 應用程式，而 AZD 則簡化了基礎架構和部署過程。
 
 ## 什麼是 Azure AI Foundry？
 
 Azure AI Foundry 是 Microsoft 的統一 AI 開發平台，包含以下功能：
 
 - **模型目錄**：存取最先進的 AI 模型
-- **Prompt Flow**：AI 工作流程的視覺化設計工具
+- **Prompt Flow**：AI 工作流程的可視化設計工具
 - **AI Foundry Portal**：AI 應用程式的整合開發環境
-- **部署選項**：多種主機及擴展選項
-- **安全性與保障**：內建負責任 AI 的功能
+- **部署選項**：多種託管和擴展選項
+- **安全性與可靠性**：內建負責任 AI 的功能
 
 ## AZD + Azure AI Foundry：更強大的組合
 
 | 功能 | Azure AI Foundry | AZD 整合優勢 |
 |------|------------------|--------------|
-| **模型部署** | 手動透過 Portal 部署 | 自動化、可重複的部署 |
-| **基礎架構** | 點擊式配置 | 基礎架構即程式碼 (Bicep) |
-| **環境管理** | 單一環境專注 | 多環境 (開發/測試/生產) |
+| **模型部署** | 手動透過入口網站部署 | 自動化、可重複的部署 |
+| **基礎架構** | 點擊式配置 | 基於代碼的基礎架構 (Bicep) |
+| **環境管理** | 單一環境專注 | 多環境（開發/測試/生產） |
 | **CI/CD 整合** | 限制性 | 原生支援 GitHub Actions |
 | **成本管理** | 基本監控 | 環境特定的成本優化 |
 
@@ -39,14 +44,14 @@ Azure AI Foundry 是 Microsoft 的統一 AI 開發平台，包含以下功能：
 
 - 擁有適當權限的 Azure 訂閱
 - 已安裝 Azure Developer CLI
-- 可存取 Azure OpenAI 服務
+- 存取 Azure OpenAI 服務
 - 基本了解 Azure AI Foundry
 
 ## 核心整合模式
 
 ### 模式 1：Azure OpenAI 整合
 
-**使用案例**：使用 Azure OpenAI 模型部署聊天應用程式
+**使用場景**：使用 Azure OpenAI 模型部署聊天應用程式
 
 ```yaml
 # azure.yaml
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### 模式 2：AI 搜索 + RAG 整合
 
-**使用案例**：部署檢索增強生成 (RAG) 應用程式
+**使用場景**：部署檢索增強生成 (RAG) 應用程式
 
 ```bicep
 // Azure AI Search
@@ -126,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### 模式 3：文件智能整合
 
-**使用案例**：文件處理及分析工作流程
+**使用場景**：文件處理與分析工作流程
 
 ```bicep
 // Document Intelligence service
@@ -161,7 +166,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 環境變數設置
 
-**生產配置：**
+**生產環境配置：**
 ```bash
 # Core AI services
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
@@ -177,7 +182,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**開發配置：**
+**開發環境配置：**
 ```bash
 # Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -250,9 +255,9 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## 監控與可觀測性
+## 監控與可觀察性
 
-### Application Insights 整合
+### 與 Application Insights 整合
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -426,12 +431,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## 常見問題排解
+## 常見問題排查
 
 ### 問題 1：OpenAI 配額超出
 
 **症狀：**
-- 部署因配額錯誤而失敗
+- 部署因配額錯誤失敗
 - 應用程式日誌中出現 429 錯誤
 
 **解決方案：**
@@ -451,7 +456,7 @@ azd deploy
 ### 問題 2：身份驗證失敗
 
 **症狀：**
-- 呼叫 AI 服務時出現 401/403 錯誤
+- 調用 AI 服務時出現 401/403 錯誤
 - 顯示「存取被拒」訊息
 
 **解決方案：**
@@ -485,9 +490,9 @@ az cognitiveservices model list --location eastus
 
 ### 基本聊天應用程式
 
-**儲存庫**：[azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**儲存庫**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**服務**：Azure OpenAI + Cognitive Search + App Service
+**服務**: Azure OpenAI + 認知搜索 + 應用服務
 
 **快速開始**：
 ```bash
@@ -497,9 +502,9 @@ azd up
 
 ### 文件處理管道
 
-**儲存庫**：[ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**儲存庫**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
-**服務**：Document Intelligence + Storage + Functions
+**服務**: 文件智能 + 儲存 + 函數
 
 **快速開始**：
 ```bash
@@ -509,9 +514,9 @@ azd up
 
 ### 企業聊天與 RAG
 
-**儲存庫**：[contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**儲存庫**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**服務**：Azure OpenAI + Search + Container Apps + Cosmos DB
+**服務**: Azure OpenAI + 搜索 + 容器應用 + Cosmos DB
 
 **快速開始**：
 ```bash
@@ -521,26 +526,31 @@ azd up
 
 ## 下一步
 
-1. **嘗試範例**：從符合您使用案例的預建模板開始
-2. **根據需求自訂**：修改基礎架構及應用程式程式碼
-3. **添加監控**：實施全面的可觀測性
-4. **優化成本**：根據預算微調配置
-5. **保護您的部署**：實施企業級安全模式
-6. **擴展至生產環境**：添加多區域及高可用性功能
+1. **嘗試範例**：從符合您使用場景的預建模板開始
+2. **根據需求自訂**：修改基礎架構和應用程式代碼
+3. **新增監控**：實現全面的可觀察性
+4. **優化成本**：根據預算調整配置
+5. **保護部署**：實施企業級安全模式
+6. **擴展至生產環境**：新增多區域和高可用性功能
 
 ## 社群與支援
 
-- **Azure AI Foundry Discord**：[#Azure 頻道](https://discord.gg/microsoft-azure)
-- **AZD GitHub**：[問題與討論](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**：[官方文件](https://learn.microsoft.com/azure/ai-studio/)
+- **Azure AI Foundry Discord**: [#Azure 頻道](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [問題與討論](https://github.com/Azure/azure-dev)
+- **Microsoft Learn**: [官方文件](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**前一篇:** [第一個專案](../getting-started/first-project.md) | **下一篇:** [AI 模型部署](ai-model-deployment.md)
+**章節導覽：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第 2 章 - AI 優先開發
+- **⬅️ 上一章**: [第 1 章：你的第一個專案](../getting-started/first-project.md)
+- **➡️ 下一步**: [AI 模型部署](ai-model-deployment.md)
+- **🚀 下一章**: [第 3 章：配置](../getting-started/configuration.md)
 
-**需要幫助？** 加入我們的社群討論或在儲存庫中提出問題。Azure AI + AZD 社群致力於幫助您成功！
+**需要幫助嗎？** 加入我們的社群討論或在儲存庫中提交問題。Azure AI + AZD 社群隨時為您提供支援！
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T19:36:28+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T18:38:22+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "ur"
 }
 -->
 # ای آئی ماڈل کی تعیناتی Azure Developer CLI کے ساتھ
 
-**پچھلا:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **اگلا:** [AI Workshop Lab](ai-workshop-lab.md)
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
+- **📖 موجودہ باب**: باب 2 - ای آئی-فرسٹ ڈیولپمنٹ
+- **⬅️ پچھلا**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ اگلا**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 اگلا باب**: [باب 3: کنفیگریشن](../getting-started/configuration.md)
 
 یہ گائیڈ AZD ٹیمپلیٹس کے ذریعے ای آئی ماڈلز کی تعیناتی کے لیے مکمل ہدایات فراہم کرتا ہے، جس میں ماڈل کے انتخاب سے لے کر پروڈکشن تعیناتی کے پیٹرنز تک سب کچھ شامل ہے۔
 
-## فہرستِ مواد
+## مواد کی فہرست
 
 - [ماڈل انتخاب کی حکمت عملی](../../../../docs/ai-foundry)
 - [ای آئی ماڈلز کے لیے AZD کنفیگریشن](../../../../docs/ai-foundry)
@@ -26,7 +31,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### Azure OpenAI ماڈلز
 
-اپنے استعمال کے کیس کے لیے صحیح ماڈل منتخب کریں:
+اپنے استعمال کے لیے صحیح ماڈل منتخب کریں:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -154,7 +159,7 @@ services:
 ```
 
 بہترین استعمال کے لیے:
-- ترقی اور ٹیسٹنگ
+- ڈیولپمنٹ اور ٹیسٹنگ
 - سنگل مارکیٹ ایپلیکیشنز
 - لاگت کی اصلاح
 
@@ -231,7 +236,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### ماڈل اپڈیٹس
 
-ماڈل اپڈیٹس کے لیے AZD ہُکس استعمال کریں:
+ماڈل اپڈیٹس کے لیے AZD ہکس استعمال کریں:
 
 ```bash
 #!/bin/bash
@@ -299,7 +304,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### آٹو اسکیلنگ کنفیگریشن
 
-Container Apps کے لیے آٹو اسکیلنگ کنفیگر کریں:
+کنٹینر ایپس کے لیے آٹو اسکیلنگ کنفیگر کریں:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -369,7 +374,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## مانیٹرنگ اور مشاہدہ
 
-### Application Insights انٹیگریشن
+### ایپلیکیشن انسائٹس انٹیگریشن
 
 ای آئی ورک لوڈز کے لیے مانیٹرنگ کنفیگر کریں:
 
@@ -491,7 +496,12 @@ async def check_ai_models():
 
 ---
 
-**پچھلا:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **اگلا:** [AI Workshop Lab](ai-workshop-lab.md)
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
+- **📖 موجودہ باب**: باب 2 - ای آئی-فرسٹ ڈیولپمنٹ
+- **⬅️ پچھلا**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ اگلا**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 اگلا باب**: [باب 3: کنفیگریشن](../getting-started/configuration.md)
 
 ---
 

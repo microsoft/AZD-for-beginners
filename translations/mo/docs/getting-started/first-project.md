@@ -1,29 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T18:44:27+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T18:56:38+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "mo"
 }
 -->
 # 您的第一個專案 - 實作教學
 
-**上一章:** [配置](configuration.md) | **下一章:** [Azure AI Foundry 整合](../ai-foundry/azure-ai-foundry-integration.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 當前章節**：第 1 章 - 基礎與快速入門
+- **⬅️ 上一章**：[安裝與設定](installation.md)
+- **➡️ 下一章**：[配置](configuration.md)
+- **🚀 下一章節**：[第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 簡介
 
-歡迎來到您的第一個 Azure Developer CLI 專案！這份完整的實作教學將帶您一步步完成使用 azd 在 Azure 上建立、部署及管理全端應用程式的過程。您將操作一個真實的待辦事項應用程式，包含 React 前端、Node.js API 後端，以及 MongoDB 資料庫。
+歡迎來到您的第一個 Azure Developer CLI 專案！這份完整的實作教學將帶您一步步完成在 Azure 上建立、部署及管理全端應用程式的過程，使用 azd 工具。您將操作一個真實的待辦事項應用程式，包含 React 前端、Node.js API 後端，以及 MongoDB 資料庫。
 
 ## 學習目標
 
 完成本教學後，您將能夠：
 - 掌握使用範本初始化 azd 專案的工作流程
 - 理解 Azure Developer CLI 專案結構及配置檔案
-- 執行完整的應用程式部署至 Azure，並進行基礎架構配置
+- 完成應用程式部署至 Azure，包括基礎設施的佈建
 - 實施應用程式更新及重新部署策略
 - 管理多個開發及測試環境
-- 採取資源清理及成本管理的最佳實踐
+- 採用資源清理及成本管理的最佳實踐
 
 ## 學習成果
 
@@ -38,13 +43,13 @@ CO_OP_TRANSLATOR_METADATA:
 ## 開始使用
 
 ### 先決條件清單
-- ✅ 已安裝 Azure Developer CLI ([安裝指南](installation.md))
+- ✅ 已安裝 Azure Developer CLI（[安裝指南](installation.md)）
 - ✅ 已安裝並完成身份驗證的 Azure CLI
 - ✅ 系統已安裝 Git
-- ✅ Node.js 16+ (本教學需要)
+- ✅ Node.js 16+（適用於本教學）
 - ✅ 建議使用 Visual Studio Code
 
-### 驗證您的設置
+### 驗證您的設定
 ```bash
 # Check azd installation
 azd version
@@ -60,7 +65,7 @@ az account show
 node --version
 ```
 
-## 步驟 1：選擇並初始化範本
+## 第一步：選擇並初始化範本
 
 讓我們從一個受歡迎的待辦事項應用程式範本開始，該範本包含 React 前端及 Node.js API 後端。
 
@@ -82,10 +87,10 @@ azd init --template todo-nodejs-mongo
 ### 剛剛發生了什麼？
 - 將範本程式碼下載到您的本地目錄
 - 建立了一個 `azure.yaml` 檔案，包含服務定義
-- 在 `infra/` 目錄中設置了基礎架構程式碼
+- 在 `infra/` 目錄中設置了基礎設施程式碼
 - 建立了環境配置
 
-## 步驟 2：探索專案結構
+## 第二步：探索專案結構
 
 讓我們檢視 azd 為我們建立的內容：
 
@@ -96,7 +101,7 @@ tree /f   # Windows
 find . -type f | head -20   # macOS/Linux
 ```
 
-您應該會看到：
+您應該看到：
 ```
 my-first-azd-app/
 ├── .azd/
@@ -131,13 +136,13 @@ my-first-azd-app/
 cat azure.yaml
 ```
 
-**infra/main.bicep** - 基礎架構定義：
+**infra/main.bicep** - 基礎設施定義：
 ```bash
 # View the infrastructure code
 head -30 infra/main.bicep
 ```
 
-## 步驟 3：自訂您的專案 (可選)
+## 第三步：自訂您的專案（可選）
 
 在部署之前，您可以自訂應用程式：
 
@@ -162,7 +167,7 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## 步驟 4：部署至 Azure
+## 第四步：部署至 Azure
 
 現在進入令人興奮的部分 - 將所有內容部署到 Azure！
 
@@ -180,9 +185,9 @@ azd up
 ### 部署過程中發生了什麼？
 
 `azd up` 指令執行以下步驟：
-1. **配置** (`azd provision`) - 建立 Azure 資源
+1. **佈建**（`azd provision`）- 建立 Azure 資源
 2. **打包** - 建置您的應用程式程式碼
-3. **部署** (`azd deploy`) - 將程式碼部署到 Azure 資源
+3. **部署**（`azd deploy`）- 將程式碼部署到 Azure 資源
 
 ### 預期輸出
 ```
@@ -197,7 +202,7 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## 步驟 5：測試您的應用程式
+## 第五步：測試您的應用程式
 
 ### 存取您的應用程式
 點擊部署輸出中提供的 URL，或隨時取得：
@@ -210,7 +215,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### 測試待辦事項應用程式
-1. **新增待辦事項** - 點擊 "Add Todo" 並輸入任務
+1. **新增待辦事項** - 點擊「新增待辦事項」，並輸入任務
 2. **標記為完成** - 勾選已完成的項目
 3. **刪除項目** - 移除不再需要的待辦事項
 
@@ -223,9 +228,9 @@ azd monitor
 azd logs
 ```
 
-## 步驟 6：進行更改並重新部署
+## 第六步：進行更改並重新部署
 
-讓我們進行更改並看看更新有多簡單：
+讓我們進行更改，看看更新有多簡單：
 
 ### 修改 API
 ```bash
@@ -247,9 +252,9 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## 步驟 7：管理多個環境
+## 第七步：管理多個環境
 
-建立測試環境以在正式環境之前測試更改：
+建立測試環境以在正式環境之前進行更改測試：
 
 ```bash
 # Create a new staging environment
@@ -276,9 +281,9 @@ azd env select staging
 azd show
 ```
 
-## 步驟 8：清理資源
+## 第八步：清理資源
 
-完成實驗後，清理資源以避免持續費用：
+完成實驗後，清理資源以避免持續產生費用：
 
 ```bash
 # Delete all Azure resources for current environment
@@ -341,9 +346,9 @@ netstat -an | grep :3100
 
 完成您的第一個專案後，探索以下進階主題：
 
-### 1. 自訂基礎架構
-- [基礎架構即程式碼](../deployment/provisioning.md)
-- [新增資料庫、儲存及其他服務](../deployment/provisioning.md#adding-services)
+### 1. 自訂基礎設施
+- [基礎設施即程式碼](../deployment/provisioning.md)
+- [新增資料庫、儲存空間及其他服務](../deployment/provisioning.md#adding-services)
 
 ### 2. 設置 CI/CD
 - [GitHub Actions 整合](../deployment/cicd-integration.md)
@@ -352,7 +357,7 @@ netstat -an | grep :3100
 ### 3. 正式環境最佳實踐
 - [安全性配置](../deployment/best-practices.md#security)
 - [效能優化](../deployment/best-practices.md#performance)
-- [監控及日誌](../deployment/best-practices.md#monitoring)
+- [監控與日誌](../deployment/best-practices.md#monitoring)
 
 ### 4. 探索更多範本
 ```bash
@@ -386,12 +391,17 @@ azd init --template todo-java-mongo
 
 ---
 
-**恭喜完成您的第一個 azd 專案！** 您現在已準備好自信地在 Azure 上建立及部署出色的應用程式。
+**恭喜完成您的第一個 azd 專案！** 您現在已準備好自信地在 Azure 上建立及部署令人驚豔的應用程式。
 
 ---
 
-**上一章:** [配置](configuration.md) | **下一章:** [Azure AI Foundry 整合](../ai-foundry/azure-ai-foundry-integration.md)
-- **下一課:** [部署指南](../deployment/deployment-guide.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 當前章節**：第 1 章 - 基礎與快速入門
+- **⬅️ 上一章**：[安裝與設定](installation.md)
+- **➡️ 下一章**：[配置](configuration.md)
+- **🚀 下一章節**：[第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
+- **下一課程**：[部署指南](../deployment/deployment-guide.md)
 
 ---
 

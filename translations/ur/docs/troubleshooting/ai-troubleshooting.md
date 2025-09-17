@@ -1,19 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T19:39:42+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T18:41:53+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "ur"
 }
 -->
-# Azure Developer CLI کے لیے AI مسائل حل کرنے کی گائیڈ
+# اے آئی کے لیے مخصوص خرابیوں کا پتہ لگانے کی گائیڈ
 
-**پچھلا:** [پروڈکشن AI کے اصول](../ai-foundry/production-ai-practices.md) | **اگلا:** [AZD کے ساتھ شروعات](../getting-started/README.md)
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم**: [AZD ابتدائیوں کے لیے](../../README.md)
+- **📖 موجودہ باب**: باب 7 - خرابیوں کا پتہ لگانا اور ڈیبگنگ
+- **⬅️ پچھلا**: [ڈیبگنگ گائیڈ](debugging.md)
+- **➡️ اگلا باب**: [باب 8: پروڈکشن اور انٹرپرائز پیٹرنز](../ai-foundry/production-ai-practices.md)
+- **🤖 متعلقہ**: [باب 2: اے آئی-فرسٹ ڈیولپمنٹ](../ai-foundry/azure-ai-foundry-integration.md)
 
-یہ جامع گائیڈ AZD کے ذریعے AI حلوں کی تعیناتی کے دوران عام مسائل کو حل کرنے کے لیے مخصوص Azure AI سروسز کے حل اور ڈیبگنگ تکنیک فراہم کرتی ہے۔
+**پچھلا:** [پروڈکشن اے آئی پیٹرنز](../ai-foundry/production-ai-practices.md) | **اگلا:** [AZD کے ساتھ شروعات](../getting-started/README.md)
 
-## فہرست
+یہ جامع خرابیوں کا پتہ لگانے کی گائیڈ AZD کے ساتھ اے آئی حلوں کو تعینات کرنے کے دوران عام مسائل کو حل کرنے اور Azure AI سروسز کے لیے مخصوص ڈیبگنگ تکنیک فراہم کرتی ہے۔
+
+## مواد کی فہرست
 
 - [Azure OpenAI سروس کے مسائل](../../../../docs/troubleshooting)
 - [Azure AI سرچ کے مسائل](../../../../docs/troubleshooting)
@@ -26,7 +33,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Azure OpenAI سروس کے مسائل
 
-### مسئلہ: OpenAI سروس علاقے میں دستیاب نہیں
+### مسئلہ: OpenAI سروس منتخب علاقے میں دستیاب نہیں
 
 **علامات:**
 ```
@@ -89,7 +96,7 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **کوٹہ بڑھانے کی درخواست کریں:**
+2. **کوٹہ میں اضافے کی درخواست کریں:**
 ```bash
 # Submit quota increase request
 az support tickets create \
@@ -183,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### مسئلہ: انڈیکس بنانے میں ناکامی
+### مسئلہ: انڈیکس تخلیق کی ناکامیاں
 
 **علامات:**
 ```
@@ -232,7 +239,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## کنٹینر ایپس کی تعیناتی کے مسائل
 
-### مسئلہ: کنٹینر بلڈ کی ناکامی
+### مسئلہ: کنٹینر بلڈ کی ناکامیاں
 
 **علامات:**
 ```
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### مسئلہ: کنٹینر ایپ کے آغاز کی ناکامی
+### مسئلہ: کنٹینر ایپ اسٹارٹ اپ کی ناکامیاں
 
 **علامات:**
 ```
@@ -296,7 +303,7 @@ Error: Container failed to start within timeout period
 
 **حل:**
 
-1. **آغاز کے وقت کو بڑھائیں:**
+1. **اسٹارٹ اپ ٹائم آؤٹ بڑھائیں:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -472,7 +479,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **ماڈل فالبیکس استعمال کریں:**
+2. **ماڈل فال بیکس استعمال کریں:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -661,7 +668,7 @@ class MemoryOptimizedAI:
 
 **علامات:**
 - Azure بل توقع سے زیادہ
-- ٹوکن استعمال اندازوں سے زیادہ
+- ٹوکن کا استعمال اندازوں سے زیادہ
 - بجٹ الرٹس متحرک
 
 **حل:**
@@ -773,7 +780,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **ہیلتھ چیک اینڈپوائنٹس:**
+2. **ہیلتھ چیک اینڈ پوائنٹس:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
@@ -845,21 +852,26 @@ def monitor_performance(func):
 
 ## اگلے مراحل
 
-1. **[AI ماڈل تعیناتی گائیڈ](ai-model-deployment.md)** کا جائزہ لیں بہترین تعیناتی کے اصولوں کے لیے
-2. **[پروڈکشن AI کے اصول](production-ai-practices.md)** مکمل کریں انٹرپرائز کے لیے تیار حل کے لیے
+1. **[اے آئی ماڈل تعیناتی گائیڈ](ai-model-deployment.md)** کا جائزہ لیں بہترین تعیناتی کے طریقوں کے لیے
+2. **[پروڈکشن اے آئی پیٹرنز](production-ai-practices.md)** مکمل کریں انٹرپرائز کے لیے تیار حل کے لیے
 3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)** میں شامل ہوں کمیونٹی سپورٹ کے لیے
-4. **مسائل جمع کروائیں** [AZD GitHub repository](https://github.com/Azure/azure-dev) پر AZD سے متعلقہ مسائل کے لیے
+4. **مسائل جمع کریں** [AZD GitHub ریپوزٹری](https://github.com/Azure/azure-dev) پر AZD سے متعلقہ مسائل کے لیے
 
 ## وسائل
 
-- [Azure OpenAI سروس مسائل حل کرنا](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [کنٹینر ایپس مسائل حل کرنا](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI سرچ مسائل حل کرنا](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure OpenAI سروس خرابیوں کا پتہ لگانا](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [کنٹینر ایپس خرابیوں کا پتہ لگانا](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI سرچ خرابیوں کا پتہ لگانا](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**پچھلا:** [پروڈکشن AI کے اصول](../ai-foundry/production-ai-practices.md) | **اگلا:** [ورکشاپ](../../workshop/README.md)
-- [Azure Developer CLI مسائل حل کرنا](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم**: [AZD ابتدائیوں کے لیے](../../README.md)
+- **📖 موجودہ باب**: باب 7 - خرابیوں کا پتہ لگانا اور ڈیبگنگ
+- **⬅️ پچھلا**: [ڈیبگنگ گائیڈ](debugging.md)
+- **➡️ اگلا باب**: [باب 8: پروڈکشن اور انٹرپرائز پیٹرنز](../ai-foundry/production-ai-practices.md)
+- **🤖 متعلقہ**: [باب 2: اے آئی-فرسٹ ڈیولپمنٹ](../ai-foundry/azure-ai-foundry-integration.md)
+- [Azure Developer CLI خرابیوں کا پتہ لگانا](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

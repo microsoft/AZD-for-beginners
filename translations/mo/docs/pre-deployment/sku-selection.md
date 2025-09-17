@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T19:45:43+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T19:00:32+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "mo"
 }
 -->
-# SKU 選擇指南 - 選擇合適的 Azure 服務層級
+# SKU 選擇指南 - 選擇適合的 Azure 服務層級
 
-## 介紹
+**章節導航：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章節**：第六章 - 部署前驗證與規劃
+- **⬅️ 上一章**：[容量規劃](capacity-planning.md)
+- **➡️ 下一章**：[部署前檢查](preflight-checks.md)
+- **🚀 下一章節**：[第七章：故障排除](../troubleshooting/common-issues.md)
 
-這份全面的指南旨在幫助您為不同的環境、工作負載和需求選擇最佳的 Azure 服務 SKU（庫存單位）。學習如何分析性能需求、成本考量和可擴展性需求，以選擇最適合 Azure Developer CLI 部署的服務層級。
+## 簡介
+
+本指南旨在幫助您為不同環境、工作負載和需求選擇最佳的 Azure 服務 SKU（庫存單位）。學習如何分析性能需求、成本考量和可擴展性需求，以選擇最適合 Azure Developer CLI 部署的服務層級。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
-- 了解 Azure SKU 概念、定價模型和功能差異
+- 了解 Azure SKU 的概念、定價模型和功能差異
 - 掌握針對開發、測試和生產環境的 SKU 選擇策略
 - 分析工作負載需求並匹配適合的服務層級
-- 通過智能 SKU 選擇實施成本優化策略
+- 通過智能 SKU 選擇實現成本優化策略
 - 應用性能測試和驗證技術來評估 SKU 選擇
-- 配置自動化的 SKU 推薦和監控
+- 配置自動化的 SKU 推薦和監控工具
 
 ## 學習成果
 
 完成後，您將能夠：
-- 根據工作負載需求和限制選擇合適的 Azure 服務 SKU
-- 設計具有成本效益的多環境架構並選擇適當的層級
-- 實施性能基準測試並驗證 SKU 選擇
+- 根據工作負載需求和限制選擇適合的 Azure 服務 SKU
+- 設計具有成本效益的多環境架構，並選擇合適的層級
+- 實施性能基準測試和 SKU 選擇的驗證
 - 創建自動化工具以進行 SKU 推薦和成本優化
-- 計劃 SKU 遷移和擴展策略以應對需求變化
-- 在服務層級選擇中應用 Azure Well-Architected Framework 原則
+- 規劃 SKU 遷移和擴展策略以應對需求變化
+- 在服務層級選擇中應用 Azure 良好架構框架原則
 
 ## 目錄
 
@@ -49,18 +56,18 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### 什麼是 SKU？
 
-SKU（庫存單位）代表 Azure 資源的不同服務層級和性能級別。每個 SKU 提供不同的：
+SKU（庫存單位）代表 Azure 資源的不同服務層級和性能等級。每個 SKU 提供不同的：
 
-- **性能特性**（CPU、內存、吞吐量）
+- **性能特性**（CPU、記憶體、吞吐量）
 - **功能可用性**（擴展選項、SLA 等級）
 - **定價模型**（基於消耗、預留容量）
-- **區域可用性**（並非所有 SKU 在所有區域都可用）
+- **區域可用性**（並非所有 SKU 都在所有區域可用）
 
 ### SKU 選擇的關鍵因素
 
 1. **工作負載需求**
    - 預期流量/負載模式
-   - 性能需求（CPU、內存、I/O）
+   - 性能需求（CPU、記憶體、I/O）
    - 存儲需求和訪問模式
 
 2. **環境類型**
@@ -71,12 +78,12 @@ SKU（庫存單位）代表 Azure 資源的不同服務層級和性能級別。�
 3. **預算限制**
    - 初始成本 vs. 運營成本
    - 預留容量折扣
-   - 自動擴展的成本影響
+   - 自動擴展成本影響
 
 4. **增長預測**
    - 可擴展性需求
    - 未來功能需求
-   - 遷移的複雜性
+   - 遷移複雜性
 
 ---
 
@@ -100,13 +107,13 @@ skus:
 ```
 
 #### 特性
-- **App Service**：F1（免費）或 B1（基本）適用於簡單測試
+- **應用服務**：F1（免費）或 B1（基本）適用於簡單測試
 - **資料庫**：基本層級，資源需求低
 - **存儲**：僅限本地冗餘的標準存儲
 - **計算**：可接受共享資源
 - **網絡**：基本配置
 
-### 測試/預備環境
+### 測試/驗證環境
 
 **優先事項**：接近生產配置、成本平衡、性能測試能力
 
@@ -151,13 +158,13 @@ skus:
 - **性能**：專用資源，高吞吐量
 - **安全性**：高級安全功能
 - **擴展**：完整的自動擴展能力
-- **監控**：全面的可觀測性
+- **監控**：全面的可觀察性
 
 ---
 
 ## 服務特定指南
 
-### Azure App Service
+### Azure 應用服務
 
 #### SKU 決策矩陣
 
@@ -203,16 +210,16 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-### Azure SQL Database
+### Azure SQL 資料庫
 
 #### SKU 選擇框架
 
-1. **基於 DTU（數據庫事務單位）**
+1. **基於 DTU（資料庫事務單位）**
    - **基本**：5 DTU - 開發/測試
    - **標準**：S0-S12（10-3000 DTU） - 通用用途
    - **高級**：P1-P15（125-4000 DTU） - 性能關鍵
 
-2. **基於 vCore**（推薦用於生產）
+2. **基於 vCore（推薦用於生產）**
    - **通用用途**：平衡計算和存儲
    - **業務關鍵**：低延遲，高 IOPS
    - **超大規模**：高度可擴展存儲（最高 100TB）
@@ -252,7 +259,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 }
 ```
 
-### Azure Container Apps
+### Azure 容器應用
 
 #### 環境類型
 
@@ -268,7 +275,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 #### 配置示例
 
-**開發（消耗）**
+**開發（基於消耗）**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -398,7 +405,7 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Azure 存儲帳戶
 
 #### 存儲帳戶類型
 
@@ -409,7 +416,7 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### 性能層級
 
-- **標準**：通用，成本效益高
+- **標準**：通用用途，成本效益高
 - **高級**：高性能，低延遲場景
 
 ```bicep
@@ -589,7 +596,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 基線性能需求
 
-在選擇 SKU 之前定義明確的性能需求：
+在選擇 SKU 之前定義清晰的性能需求：
 
 ```yaml
 performance_requirements:
@@ -607,7 +614,7 @@ performance_requirements:
 
 ### 負載測試
 
-測試不同的 SKU 以驗證性能：
+測試不同 SKU 以驗證性能：
 
 ```bash
 # Azure Load Testing service
@@ -617,7 +624,7 @@ az load test create \
   --load-test-config @load-test-config.yaml
 ```
 
-### 監控和優化
+### 監控與優化
 
 設置全面的監控：
 
@@ -648,7 +655,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## 快速參考表
 
-### App Service SKU 快速參考
+### 應用服務 SKU 快速參考
 
 | SKU | 層級 | vCPU | RAM | 存儲 | 價格範圍 | 使用案例 |
 |-----|------|------|-----|---------|-------------|----------|
@@ -656,9 +663,9 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | B1 | 基本 | 1 | 1.75GB | 10GB | $ | 小型應用 |
 | S1 | 標準 | 1 | 1.75GB | 50GB | $$ | 生產 |
 | P1V3 | 高級 V3 | 2 | 8GB | 250GB | $$$ | 高性能 |
-| I1V2 | 隔離 V2 | 2 | 8GB | 1TB | $$$$ | 企業級 |
+| I1V2 | 隔離 V2 | 2 | 8GB | 1TB | $$$$ | 企業 |
 
-### SQL Database SKU 快速參考
+### SQL 資料庫 SKU 快速參考
 
 | SKU | 層級 | DTU/vCore | 存儲 | 價格範圍 | 使用案例 |
 |-----|------|-----------|---------|-------------|----------|
@@ -668,11 +675,11 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | GP_Gen5_4 | 通用用途 | 4 vCore | 4TB | $$$ | 平衡 |
 | BC_Gen5_8 | 業務關鍵 | 8 vCore | 4TB | $$$$ | 關鍵任務 |
 
-### Container Apps SKU 快速參考
+### 容器應用 SKU 快速參考
 
-| 模型 | 定價 | CPU/內存 | 使用案例 |
+| 模型 | 定價 | CPU/記憶體 | 使用案例 |
 |-------|---------|------------|----------|
-| 消耗 | 按使用付費 | 0.25-2 vCPU | 開發，可變負載 |
+| 基於消耗 | 按使用付費 | 0.25-2 vCPU | 開發，可變負載 |
 | 專用 D4 | 預留 | 4 vCPU, 16GB | 生產 |
 | 專用 D8 | 預留 | 8 vCPU, 32GB | 高性能 |
 
@@ -789,13 +796,13 @@ test_configuration:
 
 ### 建議事項
 
-1. **從小規模開始並根據實際使用擴展**
+1. **從小規模開始，根據實際使用情況擴展**
 2. **為不同環境使用不同的 SKU**
 3. **持續監控性能和成本**
 4. **為生產工作負載利用預留容量**
 5. **適當實施自動擴展**
-6. **使用現實工作負載進行性能測試**
-7. **計劃增長但避免過度配置**
+6. **使用真實工作負載進行性能測試**
+7. **規劃增長但避免過度配置**
 8. **盡可能使用免費層級進行開發**
 
 ### 禁忌事項
@@ -807,7 +814,7 @@ test_configuration:
 5. **不要忽略依賴項的影響**
 6. **不要將自動擴展限制設置得過高**
 7. **不要忽略合規性要求**
-8. **不要僅僅基於價格做決策**
+8. **不要僅根據價格做決策**
 
 ---
 
@@ -817,7 +824,7 @@ test_configuration:
 
 **導航**
 - **上一課**：[容量規劃](capacity-planning.md)
-- **下一課**：[預檢檢查](preflight-checks.md)
+- **下一課**：[部署前檢查](preflight-checks.md)
 
 ---
 
