@@ -1,58 +1,62 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T17:47:36+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-17T12:54:24+00:00",
   "source_file": "workshop/README.md",
   "language_code": "tw"
 }
 -->
-# AZD for AI Developers Workshop
+# AZD for AI Developers 工作坊
 
-**前一篇:** [AI 疑難排解指南](../docs/troubleshooting/ai-troubleshooting.md) | **下一篇:** [工作坊實驗模組](../../../workshop)
+**工作坊導航**
+- **📚 課程首頁**: [AZD 初學者指南](../README.md)
+- **📖 相關章節**: 涵蓋 [第一章](../README.md#-chapter-1-foundation--quick-start)、[第二章](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) 和 [第五章](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ 實作實驗室**: [AI 工作坊實驗室](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 下一步**: [工作坊模組](../../../workshop)
 
-歡迎參加 Azure Developer CLI (AZD) 的實作工作坊，重點是學習如何部署 AI 應用程式。本工作坊旨在帶領您從 AZD 基礎知識到部署生產級 AI 解決方案。
+歡迎參加專注於 AI 應用部署的 Azure Developer CLI (AZD) 實作工作坊。本工作坊旨在帶領您從 AZD 基礎知識到部署可投入生產的 AI 解決方案。
 
 ## 工作坊概述
 
 **時長:** 2-3 小時  
 **等級:** 初學者至中級  
-**先決條件:** 基本的 Azure、命令列工具及 AI 概念知識
+**先決條件:** 基本的 Azure、命令列工具和 AI 概念知識
 
 ### 您將學到的內容
 
-- **AZD 基礎知識**: 了解基於基礎架構即程式碼的 AZD
+- **AZD 基礎知識**: 了解基於代碼的基礎設施 (Infrastructure as Code) 與 AZD
 - 🤖 **AI 服務整合**: 部署 Azure OpenAI、AI 搜索及其他 AI 服務
-- **容器部署**: 使用 Azure Container Apps 部署 AI 應用程式
-- **安全性最佳實踐**: 實施 Managed Identity 和安全配置
-- **監控與可觀測性**: 為 AI 工作負載設置 Application Insights
+- **容器部署**: 使用 Azure Container Apps 部署 AI 應用
+- **安全性最佳實踐**: 實施受管理的身份和安全配置
+- **監控與可觀察性**: 為 AI 工作負載設置 Application Insights
 - **生產模式**: 企業級部署策略
 
 ## 工作坊結構
 
 ### 模組 1: AZD 基礎 (30 分鐘)
-- 安裝及配置 AZD
+- 安裝與配置 AZD
 - 了解 AZD 專案結構
 - 您的第一次 AZD 部署
-- **實驗**: 部署一個簡單的網頁應用程式
+- **實驗室**: 部署一個簡單的網頁應用
 
 ### 模組 2: Azure OpenAI 整合 (45 分鐘)
 - 設置 Azure OpenAI 資源
 - 模型部署策略
-- 配置 API 存取及身份驗證
-- **實驗**: 使用 GPT-4 部署聊天應用程式
+- 配置 API 訪問與身份驗證
+- **實驗室**: 使用 GPT-4 部署聊天應用
 
-### 模組 3: RAG 應用程式 (45 分鐘)
+### 模組 3: RAG 應用 (45 分鐘)
 - Azure AI 搜索整合
 - 使用 Azure Document Intelligence 處理文件
-- 向量嵌入及語義搜索
-- **實驗**: 建立文件問答系統
+- 向量嵌入與語義搜索
+- **實驗室**: 建立文件問答系統
 
 ### 模組 4: 生產部署 (30 分鐘)
-- 容器應用程式配置
-- 擴展及性能優化
-- 監控及日誌記錄
-- **實驗**: 部署至生產環境並設置可觀測性
+- 容器應用配置
+- 擴展與性能優化
+- 監控與日誌記錄
+- **實驗室**: 部署至生產環境並設置可觀察性
 
 ### 模組 5: 高級模式 (15 分鐘)
 - 多環境部署
@@ -86,15 +90,15 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Azure 帳戶設置
 
-1. **Azure 訂閱**: [免費註冊](https://azure.microsoft.com/free/)  
-2. **Azure OpenAI 存取**: [申請存取](https://aka.ms/oai/access)  
+1. **Azure 訂閱**: [免費註冊](https://azure.microsoft.com/free/)
+2. **Azure OpenAI 訪問**: [申請訪問](https://aka.ms/oai/access)
 3. **所需權限**:
    - 訂閱或資源群組的 Contributor 角色
    - User Access Administrator (用於 RBAC 分配)
 
 ### 驗證先決條件
 
-執行以下腳本以驗證您的設置：
+運行以下腳本以驗證您的設置：
 
 ```bash
 #!/bin/bash
@@ -140,22 +144,22 @@ echo "Setup verification complete!"
 
 ## 工作坊材料
 
-### 實驗練習
+### 實驗室練習
 
-每個模組都包含實作實驗，提供起始程式碼及逐步指導：
+每個模組都包含實作實驗室，提供起始代碼和逐步指導：
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - 您的第一次 AZD 部署  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - 使用 Azure OpenAI 的聊天應用程式  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - 使用 AI 搜索的 RAG 應用程式  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - 生產部署模式  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - 高級部署場景  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - 您的第一次 AZD 部署
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - 使用 Azure OpenAI 的聊天應用
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - 使用 AI 搜索的 RAG 應用
+- **[lab-4-production/](../../../workshop/lab-4-production)** - 生產部署模式
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - 高級部署場景
 
 ### 參考材料
 
-- **[AI Foundry 整合指南](../docs/ai-foundry/azure-ai-foundry-integration.md)** - 全面的整合模式  
-- **[AI 模型部署指南](../docs/ai-foundry/ai-model-deployment.md)** - 模型部署最佳實踐  
-- **[生產 AI 實踐](../docs/ai-foundry/production-ai-practices.md)** - 企業部署模式  
-- **[AI 疑難排解指南](../docs/troubleshooting/ai-troubleshooting.md)** - 常見問題及解決方案  
+- **[AI Foundry 整合指南](../docs/ai-foundry/azure-ai-foundry-integration.md)** - 全面的整合模式
+- **[AI 模型部署指南](../docs/ai-foundry/ai-model-deployment.md)** - 模型部署最佳實踐
+- **[生產 AI 實踐](../docs/ai-foundry/production-ai-practices.md)** - 企業部署模式
+- **[AI 疑難排解指南](../docs/troubleshooting/ai-troubleshooting.md)** - 常見問題與解決方案
 
 ### 範例模板
 
@@ -185,25 +189,25 @@ git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **登入 Azure:**
+2. **登錄 Azure:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **從實驗 1 開始:**
+3. **從實驗室 1 開始:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### 選項 3: 講師引導工作坊
+### 選項 3: 講師主導的工作坊
 
-如果您參加的是講師引導的課程：
+如果您參加的是講師主導的課程：
 
-- 🎥 **工作坊錄影**: [隨時觀看](https://aka.ms/azd-ai-workshop)  
-- 💬 **Discord 社群**: [加入以獲得即時支援](https://aka.ms/foundry/discord)  
-- **工作坊回饋**: [分享您的體驗](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **工作坊錄影**: [隨時觀看](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord 社群**: [加入以獲得即時支持](https://aka.ms/foundry/discord)
+- **工作坊反饋**: [分享您的體驗](https://aka.ms/azd-workshop-feedback)
 
 ## 工作坊時間表
 
@@ -218,7 +222,7 @@ cat README.md  # Follow the instructions
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### 講師引導課程 (2.5 小時)
+### 講師主導課程 (2.5 小時)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -233,74 +237,74 @@ cat README.md  # Follow the instructions
 
 ## 成功標準
 
-完成工作坊後，您將能夠：
+完成本工作坊後，您將能夠：
 
-✅ **使用 AZD 模板部署 AI 應用程式**  
+✅ **使用 AZD 模板部署 AI 應用**  
 ✅ **配置 Azure OpenAI 服務並確保安全性**  
-✅ **建立 RAG 應用程式**，整合 Azure AI 搜索  
+✅ **構建 RAG 應用**，整合 Azure AI 搜索  
 ✅ **實施生產模式**，適用於企業 AI 工作負載  
-✅ **監控及疑難排解** AI 應用程式部署  
+✅ **監控並排除故障** AI 應用部署  
 ✅ **應用成本優化策略**，降低 AI 工作負載成本  
 
-## 社群與支援
+## 社群與支持
 
 ### 工作坊期間
 
-- 🙋 **問題**: 使用工作坊聊天或舉手提問  
-- 🐛 **問題**: 查看 [疑難排解指南](../docs/troubleshooting/ai-troubleshooting.md)  
-- **提示**: 與其他參與者分享您的發現  
+- 🙋 **問題**: 使用工作坊聊天或舉手提問
+- 🐛 **問題**: 查看 [疑難排解指南](../docs/troubleshooting/ai-troubleshooting.md)
+- **提示**: 與其他參與者分享您的發現
 
 ### 工作坊後
 
-- 💬 **Discord**: [Azure AI Foundry 社群](https://aka.ms/foundry/discord)  
-- **GitHub 問題**: [回報模板問題](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **回饋**: [工作坊評估表](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Azure AI Foundry 社群](https://aka.ms/foundry/discord)
+- **GitHub 問題**: [報告模板問題](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **反饋**: [工作坊評估表](https://aka.ms/azd-workshop-feedback)
 
 ## 下一步
 
 ### 繼續學習
 
-1. **高級場景**: 探索 [多區域部署](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **CI/CD 整合**: 設置 [GitHub Actions 工作流程](../docs/deployment/github-actions.md)  
-3. **自訂模板**: 創建您自己的 [AZD 模板](../docs/getting-started/custom-templates.md)  
+1. **高級場景**: 探索 [多區域部署](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **CI/CD 整合**: 設置 [GitHub Actions 工作流](../docs/deployment/github-actions.md)
+3. **自定義模板**: 創建您自己的 [AZD 模板](../docs/getting-started/custom-templates.md)
 
 ### 應用於您的專案
 
-1. **評估**: 使用我們的 [準備檢查清單](./production-readiness-checklist.md)  
-2. **模板**: 從我們的 [AI 專用模板](../../../workshop/templates) 開始  
-3. **支援**: 加入 [Azure AI Foundry Discord](https://aka.ms/foundry/discord)  
+1. **評估**: 使用我們的 [準備檢查清單](./production-readiness-checklist.md)
+2. **模板**: 從我們的 [AI 特定模板](../../../workshop/templates) 開始
+3. **支持**: 加入 [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
 ### 分享您的成功
 
-- ⭐ **為倉庫加星**，如果本工作坊對您有幫助  
-- 🐦 **在社群媒體上分享**，使用 #AzureDeveloperCLI #AzureAI  
-- 📝 **撰寫部落格文章**，分享您的 AI 部署旅程  
+- ⭐ **為倉庫加星**，如果本工作坊對您有幫助
+- 🐦 **在社交媒體上分享**，使用 #AzureDeveloperCLI #AzureAI
+- 📝 **撰寫部落格文章**，分享您的 AI 部署旅程
 
 ---
 
-## 工作坊回饋
+## 工作坊反饋
 
-您的回饋能幫助我們改善工作坊體驗：
+您的反饋有助於我們改進工作坊體驗：
 
-| 方面 | 評分 (1-5) | 意見 |
-|------|-----------|------|
+| 方面 | 評分 (1-5) | 評論 |
+|------|------------|------|
 | 內容品質 | ⭐⭐⭐⭐⭐ | |
-| 實作實驗 | ⭐⭐⭐⭐⭐ | |
+| 實作實驗室 | ⭐⭐⭐⭐⭐ | |
 | 文件 | ⭐⭐⭐⭐⭐ | |
 | 難度等級 | ⭐⭐⭐⭐⭐ | |
 | 整體體驗 | ⭐⭐⭐⭐⭐ | |
 
-**提交回饋**: [工作坊評估表](https://aka.ms/azd-workshop-feedback)
+**提交反饋**: [工作坊評估表](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**前一篇:** [AI 疑難排解指南](../docs/troubleshooting/ai-troubleshooting.md) | **下一篇:** 開始 [實驗 1: AZD 基礎](../../../workshop/lab-1-azd-basics)
+**上一頁:** [AI 疑難排解指南](../docs/troubleshooting/ai-troubleshooting.md) | **下一頁:** 開始 [實驗室 1: AZD 基礎](../../../workshop/lab-1-azd-basics)
 
-**準備好開始使用 AZD 建立 AI 應用程式了嗎？**
+**準備好開始使用 AZD 構建 AI 應用嗎？**
 
-[開始實驗 1: AZD 基礎 →](./lab-1-azd-basics/README.md)
+[開始實驗室 1: AZD 基礎 →](./lab-1-azd-basics/README.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而產生的任何誤解或錯誤解釋不承擔責任。

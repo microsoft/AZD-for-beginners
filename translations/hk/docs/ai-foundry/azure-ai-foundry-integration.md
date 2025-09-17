@@ -1,36 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:31:36+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T13:05:14+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "hk"
 }
 -->
 # Azure AI Foundry 與 AZD 的整合
 
-**上一頁：** [第一個項目](../getting-started/first-project.md) | **下一頁：** [AI 模型部署](ai-model-deployment.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章節**：第 2 章 - AI 優先開發
+- **⬅️ 上一章節**：[第 1 章：你的第一個專案](../getting-started/first-project.md)
+- **➡️ 下一步**：[AI 模型部署](ai-model-deployment.md)
+- **🚀 下一章節**：[第 3 章：配置](../getting-started/configuration.md)
 
 ## 概述
 
-本指南展示如何將 Azure AI Foundry 服務與 Azure Developer CLI (AZD) 整合，以簡化 AI 應用程式的部署流程。Azure AI Foundry 提供一個全面的平台，用於構建、部署和管理 AI 應用程式，而 AZD 則簡化了基礎設施和部署過程。
+本指南展示如何將 Azure AI Foundry 服務與 Azure Developer CLI (AZD) 整合，以簡化 AI 應用程式的部署流程。Azure AI Foundry 提供一個全面的平台，用於構建、部署和管理 AI 應用程式，而 AZD 則簡化了基礎架構和部署過程。
 
 ## 什麼是 Azure AI Foundry？
 
 Azure AI Foundry 是 Microsoft 的統一 AI 開發平台，包含以下功能：
 
-- **模型目錄**：可存取最先進的 AI 模型
+- **模型目錄**：提供最先進的 AI 模型
 - **Prompt Flow**：AI 工作流程的可視化設計工具
 - **AI Foundry Portal**：AI 應用程式的整合開發環境
 - **部署選項**：多種託管和擴展選項
-- **安全性與保障**：內建負責任 AI 的功能
+- **安全性**：內建負責任 AI 的功能
 
 ## AZD + Azure AI Foundry：更強大的組合
 
 | 功能 | Azure AI Foundry | AZD 整合優勢 |
 |------|------------------|--------------|
 | **模型部署** | 手動透過 Portal 部署 | 自動化、可重複的部署 |
-| **基礎設施** | 點擊式配置 | 基礎設施即代碼 (Bicep) |
+| **基礎架構** | 點擊式配置 | 基於代碼的基礎架構 (Bicep) |
 | **環境管理** | 單一環境專注 | 多環境（開發/測試/生產） |
 | **CI/CD 整合** | 限制性 | 原生支援 GitHub Actions |
 | **成本管理** | 基本監控 | 環境特定的成本優化 |
@@ -60,7 +65,7 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**基礎設施 (main.bicep)：**
+**基礎架構 (main.bicep)：**
 ```bicep
 // Azure OpenAI Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -250,7 +255,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## 監控與可觀察性
+## 監控與可觀測性
 
 ### Application Insights 整合
 
@@ -315,7 +320,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 安全最佳實踐
 
-### 設置受管理身份
+### 設置 Managed Identity
 
 ```bicep
 // Managed identity for the web application
@@ -489,7 +494,7 @@ az cognitiveservices model list --location eastus
 
 **服務**：Azure OpenAI + Cognitive Search + App Service
 
-**快速開始：**
+**快速開始**：
 ```bash
 azd init --template azure-search-openai-demo
 azd up
@@ -501,7 +506,7 @@ azd up
 
 **服務**：Document Intelligence + Storage + Functions
 
-**快速開始：**
+**快速開始**：
 ```bash
 azd init --template ai-document-processing
 azd up
@@ -513,7 +518,7 @@ azd up
 
 **服務**：Azure OpenAI + Search + Container Apps + Cosmos DB
 
-**快速開始：**
+**快速開始**：
 ```bash
 azd init --template contoso-chat
 azd up
@@ -522,10 +527,10 @@ azd up
 ## 下一步
 
 1. **嘗試範例**：從符合您使用案例的預建模板開始
-2. **根據需求自訂**：修改基礎設施和應用程式代碼
-3. **添加監控**：實施全面的可觀察性
+2. **根據需求自訂**：修改基礎架構和應用程式代碼
+3. **添加監控**：實施全面的可觀測性
 4. **優化成本**：根據預算微調配置
-5. **保護您的部署**：實施企業級安全模式
+5. **保護部署**：實施企業級安全模式
 6. **擴展至生產環境**：添加多區域和高可用性功能
 
 ## 社群與支援
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**上一頁：** [第一個項目](../getting-started/first-project.md) | **下一頁：** [AI 模型部署](ai-model-deployment.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章節**：第 2 章 - AI 優先開發
+- **⬅️ 上一章節**：[第 1 章：你的第一個專案](../getting-started/first-project.md)
+- **➡️ 下一步**：[AI 模型部署](ai-model-deployment.md)
+- **🚀 下一章節**：[第 3 章：配置](../getting-started/configuration.md)
 
 **需要幫助？** 加入我們的社群討論或在存儲庫中開啟問題。Azure AI + AZD 社群致力於幫助您成功！
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。

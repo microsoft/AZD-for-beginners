@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T17:59:50+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T13:15:41+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "hk"
 }
 -->
-# 指令速查表 - 必備 AZD 指令
+# 指令速查表 - AZD 必備指令
+
+**所有章節快速參考**
+- **📚 課程首頁**: [AZD 初學者指南](../README.md)
+- **📖 快速入門**: [第1章：基礎與快速入門](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI 指令**: [第2章：AI優先開發](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 進階**: [第4章：基礎架構即程式碼](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## 簡介
 
@@ -18,7 +24,7 @@ CO_OP_TRANSLATOR_METADATA:
 使用這份速查表，您將能夠：
 - 即時獲取重要的 Azure Developer CLI 指令及語法
 - 理解指令按功能類別及使用案例的組織方式
-- 參考常見開發和部署場景的實用範例
+- 參考常見開發與部署場景的實用範例
 - 獲取故障排除指令以快速解決問題
 - 高效找到進階配置及自訂選項
 - 掌握環境管理及多環境工作流程指令
@@ -29,13 +35,13 @@ CO_OP_TRANSLATOR_METADATA:
 - 自信地執行 AZD 指令而無需查閱完整文件
 - 使用適當的診斷指令快速解決常見問題
 - 高效管理多個環境及部署場景
-- 根據需要應用進階 AZD 功能及配置選項
+- 根據需要應用 AZD 的進階功能及配置選項
 - 使用系統化指令序列排除部署問題
 - 通過有效使用 AZD 快捷方式及選項優化工作流程
 
 ## 入門指令
 
-### 認證
+### 身份驗證
 ```bash
 # Login to Azure (uses Azure CLI)
 az login
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### 建置及打包
+### 建置與打包
 ```bash
 # Build applications
 azd package
@@ -182,7 +188,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 監控及日誌
+## 📊 監控與日誌
 
 ### 應用程式日誌
 ```bash
@@ -243,7 +249,7 @@ azd info
 
 ## 🔧 進階指令
 
-### 管道及 CI/CD
+### 管道與 CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -366,7 +372,7 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 檔案及目錄指令
+## 📁 檔案與目錄指令
 
 ### 專案結構
 ```bash
@@ -523,7 +529,7 @@ azd-status() {
 }
 ```
 
-## 📖 幫助及文件
+## 📖 幫助與文件
 
 ### 獲取幫助
 ```bash
@@ -552,15 +558,15 @@ azd template show <template-name> --docs
 
 ---
 
-**提示**：將這份速查表加入書籤，並使用 `Ctrl+F` 快速找到所需指令！
+**提示**: 收藏這份速查表，並使用 `Ctrl+F` 快速找到您需要的指令！
 
 ---
 
 **導航**
-- **上一課**：[預檢查](../docs/pre-deployment/preflight-checks.md)
-- **下一課**：[術語表](glossary.md)
+- **上一課**: [部署前檢查](../docs/pre-deployment/preflight-checks.md)
+- **下一課**: [術語表](glossary.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業的人類翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。

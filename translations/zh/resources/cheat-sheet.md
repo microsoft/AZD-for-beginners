@@ -1,37 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T17:59:22+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T12:43:53+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "zh"
 }
 -->
 # 命令速查表 - AZD核心命令
 
+**所有章节快速参考**
+- **📚 课程主页**: [AZD入门教程](../README.md)
+- **📖 快速开始**: [第1章: 基础与快速开始](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI命令**: [第2章: AI优先开发](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 高级内容**: [第4章: 基础设施即代码](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## 简介
 
-这份全面的速查表按类别整理了最常用的 Azure Developer CLI 命令，并提供实用示例。非常适合在开发、故障排除以及日常操作 azd 项目时快速查阅。
+这份全面的速查表按类别整理了最常用的Azure Developer CLI命令，并提供实用示例。非常适合在开发、故障排查以及日常操作azd项目时快速查阅。
 
 ## 学习目标
 
-通过使用这份速查表，您将能够：
-- 快速访问关键的 Azure Developer CLI 命令及其语法
+通过使用这份速查表，你将能够：
+- 快速访问关键的Azure Developer CLI命令及其语法
 - 理解按功能类别和使用场景组织的命令
 - 参考常见开发和部署场景的实用示例
-- 使用故障排除命令快速解决问题
-- 高效查找高级配置和自定义选项
+- 查找故障排查命令以快速解决问题
+- 高效定位高级配置和自定义选项
 - 掌握环境管理和多环境工作流相关命令
 
 ## 学习成果
 
-通过定期参考这份速查表，您将能够：
-- 自信地执行 azd 命令，无需查阅完整文档
+通过经常参考这份速查表，你将能够：
+- 自信地执行azd命令，无需查阅完整文档
 - 使用适当的诊断命令快速解决常见问题
 - 高效管理多环境和部署场景
-- 根据需要应用 azd 的高级功能和配置选项
+- 根据需要应用高级azd功能和配置选项
 - 使用系统化的命令序列排查部署问题
-- 通过有效使用 azd 快捷方式和选项优化工作流
+- 通过有效使用azd快捷方式和选项优化工作流
 
 ## 入门命令
 
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### 构建和打包
+### 构建与打包
 ```bash
 # Build applications
 azd package
@@ -182,7 +188,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 监控和日志
+## 📊 监控与日志
 
 ### 应用程序日志
 ```bash
@@ -243,7 +249,7 @@ azd info
 
 ## 🔧 高级命令
 
-### 流水线和 CI/CD
+### 流水线与CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -318,7 +324,7 @@ azd env select production
 azd up
 ```
 
-### 故障排除工作流
+### 故障排查工作流
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -366,7 +372,7 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 文件和目录命令
+## 📁 文件与目录命令
 
 ### 项目结构
 ```bash
@@ -383,7 +389,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 
 ## 🎨 输出格式化
 
-### JSON 输出
+### JSON输出
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -494,7 +500,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 专业提示
 
-### 快速工作流的别名
+### 快捷别名加速工作流
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -523,7 +529,7 @@ azd-status() {
 }
 ```
 
-## 📖 帮助和文档
+## 📖 帮助与文档
 
 ### 获取帮助
 ```bash
@@ -552,15 +558,15 @@ azd template show <template-name> --docs
 
 ---
 
-**提示**：将这份速查表加入书签，并使用 `Ctrl+F` 快速找到您需要的命令！
+**提示**: 收藏这份速查表，并使用`Ctrl+F`快速找到所需命令！
 
 ---
 
 **导航**
-- **上一课**：[预检检查](../docs/pre-deployment/preflight-checks.md)
-- **下一课**：[术语表](glossary.md)
+- **上一课**: [预部署检查](../docs/pre-deployment/preflight-checks.md)
+- **下一课**: [术语表](glossary.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:27:42+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T12:38:55+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "zh"
 }
 -->
-# 调试指南 - 高级故障排除日志分析技术
+# AZD 部署调试指南
 
-## 介绍
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第七章 - 故障排查与调试
+- **⬅️ 上一章**: [常见问题](common-issues.md)
+- **➡️ 下一章**: [AI 专属故障排查](ai-troubleshooting.md)
+- **🚀 下一章节**: [第八章：生产与企业模式](../ai-foundry/production-ai-practices.md)
 
-本指南提供了高级调试策略、工具和技术，用于诊断和解决 Azure Developer CLI 部署中的复杂问题。学习系统化的故障排除方法、日志分析技术、性能分析以及高级诊断工具，以高效解决部署和运行时问题。
+## 简介
+
+本指南提供了高级调试策略、工具和技术，用于诊断和解决 Azure Developer CLI 部署中的复杂问题。学习系统化的故障排查方法、日志分析技术、性能分析以及高级诊断工具，以高效解决部署和运行时问题。
 
 ## 学习目标
 
@@ -20,7 +27,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 理解高级日志配置和日志分析技术
 - 实施性能分析和监控策略
 - 使用 Azure 诊断工具和服务解决复杂问题
-- 应用网络调试和安全故障排除技术
+- 应用网络调试和安全故障排查技术
 - 配置全面的监控和警报以主动检测问题
 
 ## 学习成果
@@ -31,17 +38,17 @@ CO_OP_TRANSLATOR_METADATA:
 - 有效使用 Azure Monitor、Application Insights 和诊断工具
 - 独立调试网络连接、身份验证和权限问题
 - 实施性能监控和优化策略
-- 创建自定义调试脚本和自动化解决重复性问题
+- 创建自定义调试脚本和自动化工具以解决重复性问题
 
 ## 调试方法
 
 ### TRIAGE 方法
-- **T**时间：问题何时开始？
-- **R**重现：是否可以稳定重现问题？
-- **I**隔离：哪个组件出现故障？
-- **A**分析：日志中有什么信息？
-- **G**收集：收集所有相关信息
-- **E**升级：何时需要寻求额外帮助
+- **T**ime: 问题何时开始？
+- **R**eproduce: 是否可以稳定复现问题？
+- **I**solate: 哪个组件出现故障？
+- **A**nalyze: 日志中有什么信息？
+- **G**ather: 收集所有相关信息
+- **E**scalate: 何时需要寻求额外帮助
 
 ## 启用调试模式
 
@@ -451,7 +458,7 @@ debug_network_security() {
 }
 ```
 
-## 📱 应用程序特定调试
+## 📱 应用专属调试
 
 ### Node.js 应用调试
 ```javascript
@@ -602,9 +609,9 @@ quick_rollback() {
 }
 ```
 
-## 📊 调试仪表板
+## 📊 调试仪表盘
 
-### 自定义监控仪表板
+### 自定义监控仪表盘
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -655,7 +662,7 @@ aggregate_logs() {
 创建一个 `scripts/debug/` 目录，包含以下内容：
 - `health-check.sh` - 全面的健康检查
 - `performance-test.sh` - 自动化性能测试
-- `log-analyzer.py` - 高级日志解析和分析
+- `log-analyzer.py` - 高级日志解析与分析
 - `resource-validator.sh` - 基础设施验证
 
 ### 监控集成
@@ -678,31 +685,31 @@ hooks:
 ## 最佳实践
 
 1. **始终启用调试日志** 在非生产环境中
-2. **创建可重现的测试用例** 以定位问题
-3. **记录调试过程** 供团队参考
+2. **创建可复现的测试用例** 以定位问题
+3. **记录调试流程** 供团队参考
 4. **自动化健康检查** 和监控
 5. **保持调试工具更新** 与应用程序同步
-6. **在非事件时间练习调试程序**
+6. **在非紧急情况下练习调试流程**
 
 ## 下一步
 
 - [容量规划](../pre-deployment/capacity-planning.md) - 规划资源需求
 - [SKU 选择](../pre-deployment/sku-selection.md) - 选择合适的服务层级
-- [预检](../pre-deployment/preflight-checks.md) - 部署前验证
+- [预检检查](../pre-deployment/preflight-checks.md) - 部署前验证
 - [速查表](../../resources/cheat-sheet.md) - 快速参考命令
 
 ---
 
-**记住**：优秀的调试需要系统化、细致和耐心。这些工具和技术将帮助您更快、更有效地诊断问题。
+**记住**: 优秀的调试需要系统化、细致和耐心。这些工具和技术将帮助您更快、更有效地诊断问题。
 
 ---
 
 **导航**
-- **上一课**：[常见问题](common-issues.md)
+- **上一课**: [常见问题](common-issues.md)
 
-- **下一课**：[容量规划](../pre-deployment/capacity-planning.md)
+- **下一课**: [容量规划](../pre-deployment/capacity-planning.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

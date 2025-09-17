@@ -1,39 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:31:59+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T13:21:50+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "fr"
 }
 -->
 # Intégration d'Azure AI Foundry avec AZD
 
-**Précédent :** [Premier projet](../getting-started/first-project.md) | **Suivant :** [Déploiement de modèles AI](ai-model-deployment.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 2 - Développement axé sur l'IA
+- **⬅️ Chapitre précédent** : [Chapitre 1 : Votre premier projet](../getting-started/first-project.md)
+- **➡️ Suivant** : [Déploiement de modèles IA](ai-model-deployment.md)
+- **🚀 Chapitre suivant** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
 
 ## Vue d'ensemble
 
-Ce guide explique comment intégrer les services Azure AI Foundry avec Azure Developer CLI (AZD) pour simplifier les déploiements d'applications d'intelligence artificielle. Azure AI Foundry offre une plateforme complète pour créer, déployer et gérer des applications AI, tandis qu'AZD simplifie les processus d'infrastructure et de déploiement.
+Ce guide explique comment intégrer les services Azure AI Foundry avec Azure Developer CLI (AZD) pour simplifier les déploiements d'applications IA. Azure AI Foundry offre une plateforme complète pour créer, déployer et gérer des applications IA, tandis qu'AZD simplifie les processus d'infrastructure et de déploiement.
 
 ## Qu'est-ce qu'Azure AI Foundry ?
 
-Azure AI Foundry est la plateforme unifiée de Microsoft pour le développement AI, qui inclut :
+Azure AI Foundry est la plateforme unifiée de Microsoft pour le développement IA, qui inclut :
 
-- **Catalogue de modèles** : Accès à des modèles AI de pointe
-- **Prompt Flow** : Concepteur visuel pour les workflows AI
-- **Portail AI Foundry** : Environnement de développement intégré pour les applications AI
+- **Catalogue de modèles** : Accès à des modèles IA de pointe
+- **Prompt Flow** : Concepteur visuel pour les workflows IA
+- **Portail AI Foundry** : Environnement de développement intégré pour les applications IA
 - **Options de déploiement** : Plusieurs options d'hébergement et de mise à l'échelle
-- **Sécurité et fiabilité** : Fonctionnalités intégrées pour une AI responsable
+- **Sécurité et fiabilité** : Fonctionnalités intégrées pour une IA responsable
 
 ## AZD + Azure AI Foundry : Une meilleure combinaison
 
 | Fonctionnalité | Azure AI Foundry | Avantage de l'intégration avec AZD |
 |----------------|------------------|------------------------------------|
 | **Déploiement de modèles** | Déploiement manuel via le portail | Déploiements automatisés et reproductibles |
-| **Infrastructure** | Provisionnement via clics | Infrastructure as Code (Bicep) |
+| **Infrastructure** | Provisionnement via clics | Infrastructure en tant que code (Bicep) |
 | **Gestion des environnements** | Focus sur un seul environnement | Multi-environnements (dev/staging/prod) |
 | **Intégration CI/CD** | Limitée | Support natif des GitHub Actions |
-| **Gestion des coûts** | Surveillance basique | Optimisation des coûts par environnement |
+| **Gestion des coûts** | Surveillance basique | Optimisation des coûts spécifique à l'environnement |
 
 ## Prérequis
 
@@ -94,7 +99,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Modèle 2 : Recherche AI + Intégration RAG
+### Modèle 2 : Recherche IA + Intégration RAG
 
 **Cas d'utilisation** : Déployer des applications de génération augmentée par récupération (RAG)
 
@@ -451,7 +456,7 @@ azd deploy
 ### Problème 2 : Échecs d'authentification
 
 **Symptômes :**
-- Erreurs 401/403 lors des appels aux services AI
+- Erreurs 401/403 lors des appels aux services IA
 - Messages "Accès refusé"
 
 **Solutions :**
@@ -485,9 +490,9 @@ az cognitiveservices model list --location eastus
 
 ### Application de chat basique
 
-**Répertoire** : [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**Référentiel** : [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**Services** : Azure OpenAI + Cognitive Search + App Service
+**Services** : Azure OpenAI + Recherche cognitive + Service d'application
 
 **Démarrage rapide** :
 ```bash
@@ -497,9 +502,9 @@ azd up
 
 ### Pipeline de traitement de documents
 
-**Répertoire** : [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**Référentiel** : [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
-**Services** : Intelligence Documentaire + Stockage + Fonctions
+**Services** : Intelligence documentaire + Stockage + Fonctions
 
 **Démarrage rapide** :
 ```bash
@@ -509,7 +514,7 @@ azd up
 
 ### Chat d'entreprise avec RAG
 
-**Répertoire** : [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**Référentiel** : [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **Services** : Azure OpenAI + Recherche + Applications conteneurisées + Cosmos DB
 
@@ -523,7 +528,7 @@ azd up
 
 1. **Essayez les exemples** : Commencez avec un modèle préconstruit adapté à votre cas d'utilisation
 2. **Personnalisez selon vos besoins** : Modifiez l'infrastructure et le code de l'application
-3. **Ajoutez de la surveillance** : Implémentez une observabilité complète
+3. **Ajoutez une surveillance** : Implémentez une observabilité complète
 4. **Optimisez les coûts** : Ajustez les configurations selon votre budget
 5. **Sécurisez votre déploiement** : Appliquez des modèles de sécurité d'entreprise
 6. **Passez à la production** : Ajoutez des fonctionnalités multi-régions et haute disponibilité
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Précédent :** [Premier projet](../getting-started/first-project.md) | **Suivant :** [Déploiement de modèles AI](ai-model-deployment.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 2 - Développement axé sur l'IA
+- **⬅️ Chapitre précédent** : [Chapitre 1 : Votre premier projet](../getting-started/first-project.md)
+- **➡️ Suivant** : [Déploiement de modèles IA](ai-model-deployment.md)
+- **🚀 Chapitre suivant** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
 
-**Besoin d'aide ?** Rejoignez nos discussions communautaires ou ouvrez un problème dans le répertoire. La communauté Azure AI + AZD est là pour vous aider à réussir !
+**Besoin d'aide ?** Rejoignez nos discussions communautaires ou ouvrez un problème dans le référentiel. La communauté Azure AI + AZD est là pour vous aider à réussir !
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

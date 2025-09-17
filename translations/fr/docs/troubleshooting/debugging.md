@@ -1,34 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:25:20+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T13:26:01+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "fr"
 }
 -->
-# Guide de Débogage - Techniques Avancées d'Analyse des Journaux
+# Guide de Débogage pour les Déploiements AZD
+
+**Navigation du Chapitre :**
+- **📚 Accueil du Cours** : [AZD pour Débutants](../../README.md)
+- **📖 Chapitre Actuel** : Chapitre 7 - Résolution de Problèmes & Débogage
+- **⬅️ Précédent** : [Problèmes Courants](common-issues.md)
+- **➡️ Suivant** : [Résolution de Problèmes Spécifiques à l'IA](ai-troubleshooting.md)
+- **🚀 Chapitre Suivant** : [Chapitre 8 : Modèles de Production & Entreprise](../ai-foundry/production-ai-practices.md)
 
 ## Introduction
 
-Ce guide complet propose des stratégies, outils et techniques avancés pour diagnostiquer et résoudre des problèmes complexes liés aux déploiements avec Azure Developer CLI. Apprenez des méthodologies de dépannage systématiques, des techniques d'analyse des journaux, du profilage de performance et des outils de diagnostic avancés pour résoudre efficacement les problèmes de déploiement et d'exécution.
+Ce guide complet propose des stratégies avancées de débogage, des outils et des techniques pour diagnostiquer et résoudre des problèmes complexes liés aux déploiements avec Azure Developer CLI. Apprenez des méthodologies de résolution de problèmes systématiques, des techniques d'analyse des journaux, des profils de performance et des outils de diagnostic avancés pour résoudre efficacement les problèmes de déploiement et d'exécution.
 
 ## Objectifs d'Apprentissage
 
 En suivant ce guide, vous allez :
-- Maîtriser des méthodologies de débogage systématiques pour les problèmes liés à Azure Developer CLI
-- Comprendre les techniques avancées de configuration et d'analyse des journaux
+- Maîtriser des méthodologies de débogage systématique pour les problèmes liés à Azure Developer CLI
+- Comprendre la configuration avancée des journaux et les techniques d'analyse des journaux
 - Mettre en œuvre des stratégies de profilage et de surveillance des performances
 - Utiliser les outils et services de diagnostic Azure pour résoudre des problèmes complexes
-- Appliquer des techniques de débogage réseau et de dépannage en matière de sécurité
-- Configurer une surveillance et des alertes complètes pour détecter les problèmes de manière proactive
+- Appliquer des techniques de débogage réseau et de sécurité
+- Configurer une surveillance complète et des alertes pour détecter les problèmes de manière proactive
 
 ## Résultats d'Apprentissage
 
-À la fin de ce guide, vous serez capable de :
+À la fin, vous serez capable de :
 - Appliquer la méthodologie TRIAGE pour déboguer systématiquement des problèmes complexes de déploiement
 - Configurer et analyser des informations complètes de journalisation et de traçage
-- Utiliser efficacement Azure Monitor, Application Insights et les outils de diagnostic
+- Utiliser Azure Monitor, Application Insights et des outils de diagnostic efficacement
 - Déboguer de manière autonome les problèmes de connectivité réseau, d'authentification et de permissions
 - Mettre en œuvre des stratégies de surveillance et d'optimisation des performances
 - Créer des scripts de débogage personnalisés et des automatisations pour les problèmes récurrents
@@ -197,7 +204,7 @@ debug_database() {
 
 ## 🔬 Débogage des Performances
 
-### Surveillance des Performances des Applications
+### Surveillance des Performances Applicatives
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -330,7 +337,7 @@ load_test() {
 
 ## 🔧 Débogage de l'Infrastructure
 
-### Débogage des Modèles Bicep
+### Débogage des Templates Bicep
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -604,7 +611,7 @@ quick_rollback() {
 
 ## 📊 Tableaux de Bord de Débogage
 
-### Tableau de Bord de Surveillance Personnalisé
+### Tableau de Surveillance Personnalisé
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -689,7 +696,7 @@ hooks:
 - [Planification de la Capacité](../pre-deployment/capacity-planning.md) - Planifiez les besoins en ressources
 - [Sélection des SKU](../pre-deployment/sku-selection.md) - Choisissez les niveaux de service appropriés
 - [Vérifications Préliminaires](../pre-deployment/preflight-checks.md) - Validation avant déploiement
-- [Fiche de Référence](../../resources/cheat-sheet.md) - Commandes de référence rapide
+- [Aide-Mémoire](../../resources/cheat-sheet.md) - Commandes de référence rapide
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

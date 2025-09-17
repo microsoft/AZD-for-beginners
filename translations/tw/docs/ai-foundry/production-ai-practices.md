@@ -1,35 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T17:35:12+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-17T12:49:02+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "tw"
 }
 -->
 # 使用 AZD 部署生產級 AI 工作負載的最佳實踐
 
-**前一篇:** [AI 工作坊實驗室](ai-workshop-lab.md) | **下一篇:** [AI 疑難排解指南](../troubleshooting/ai-troubleshooting.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第八章 - 生產與企業模式
+- **⬅️ 上一章**: [第七章：故障排除](../troubleshooting/debugging.md)
+- **⬅️ 相關內容**: [AI 工作坊實驗室](ai-workshop-lab.md)
+- **🎯 課程完成**: [AZD 初學者指南](../../README.md)
 
 ## 概述
 
-本指南提供使用 Azure Developer CLI (AZD) 部署生產級 AI 工作負載的全面最佳實踐。這些實踐基於 Azure AI Foundry Discord 社群的反饋以及真實客戶部署的經驗，旨在解決生產 AI 系統中最常見的挑戰。
+本指南提供了使用 Azure Developer CLI (AZD) 部署生產級 AI 工作負載的全面最佳實踐。這些實踐基於 Azure AI Foundry Discord 社群的反饋以及真實客戶部署的經驗，旨在解決生產 AI 系統中最常見的挑戰。
 
 ## 主要挑戰
 
 根據社群投票結果，以下是開發者面臨的主要挑戰：
 
 - **45%** 在多服務 AI 部署上遇到困難
-- **38%** 在憑證和秘密管理方面有問題  
-- **35%** 覺得生產準備和擴展困難
+- **38%** 在憑證和秘密管理方面存在問題  
+- **35%** 在生產準備和擴展方面感到困難
 - **32%** 需要更好的成本優化策略
-- **29%** 需要改進監控和疑難排解
+- **29%** 需要改進監控和故障排除
 
 ## 生產級 AI 的架構模式
 
-### 模式 1: 微服務 AI 架構
+### 模式 1：微服務 AI 架構
 
-**適用情境**: 複雜的 AI 應用，具有多種功能
+**適用情境**: 具有多種功能的複雜 AI 應用
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -48,7 +53,7 @@ CO_OP_TRANSLATOR_METADATA:
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZD 實現**:
+**AZD 實現方式**:
 
 ```yaml
 # azure.yaml
@@ -71,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### 模式 2: 事件驅動的 AI 處理
+### 模式 2：事件驅動的 AI 處理
 
-**適用情境**: 批次處理、文件分析、非同步工作流程
+**適用情境**: 批量處理、文件分析、非同步工作流
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -125,8 +130,8 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 ### 1. 零信任安全模型
 
 **實現策略**:
-- 所有服務間的通信都需經過身份驗證
-- 所有 API 呼叫使用受管理的身份
+- 所有服務間的通信均需身份驗證
+- 所有 API 調用使用受管理的身份
 - 使用私有端點進行網路隔離
 - 最小權限訪問控制
 
@@ -839,7 +844,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] 秘密存儲於 Key Vault
 - [ ] 配置私有端點
 - [ ] 實施網路安全群組
-- [ ] RBAC 最小權限
+- [ ] 使用最小權限的 RBAC
 - [ ] 公共端點啟用 WAF
 
 ### 性能 ✅
@@ -847,14 +852,14 @@ echo "Infrastructure validation completed successfully!"
 - [ ] 實施快取
 - [ ] 設置負載均衡
 - [ ] 靜態內容使用 CDN
-- [ ] 資料庫連接池
+- [ ] 數據庫連接池
 - [ ] Token 使用優化
 
 ### 監控 ✅
 - [ ] 配置應用程式洞察
 - [ ] 定義自訂指標
 - [ ] 設置警報規則
-- [ ] 建立儀表板
+- [ ] 創建儀表板
 - [ ] 實施健康檢查
 - [ ] 日誌保留政策
 
@@ -892,7 +897,7 @@ echo "Infrastructure validation completed successfully!"
 | **可用性** | 99.9% | 正常運行時間監控 |
 | **錯誤率** | < 0.1% | 應用程式日誌 |
 | **Token 使用** | < $500/月 | 成本管理 |
-| **並發使用者** | 1000+ | 負載測試 |
+| **並發用戶** | 1000+ | 負載測試 |
 | **恢復時間** | < 1 小時 | 災難恢復測試 |
 
 ### 負載測試
@@ -916,7 +921,7 @@ python scripts/load_test.py \
 2. **全面監控**: 從第一天起設置全面的監控
 3. **自動化安全性**: 使用基礎架構即代碼來確保一致的安全性
 4. **徹底測試**: 在管道中包含 AI 特定的測試
-5. **成本規劃**: 早期監控 Token 使用並設置預算警報
+5. **提前規劃成本**: 監控 Token 使用並早期設置預算警報
 
 ### 常見的陷阱需避免：
 
@@ -935,11 +940,16 @@ python scripts/load_test.py \
 
 ---
 
-**前一篇:** [AI 工作坊實驗室](ai-workshop-lab.md) | **下一篇:** [AI 疑難排解指南](../troubleshooting/ai-troubleshooting.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第八章 - 生產與企業模式
+- **⬅️ 上一章**: [第七章：故障排除](../troubleshooting/debugging.md)
+- **⬅️ 相關內容**: [AI 工作坊實驗室](ai-workshop-lab.md)
+- **🎆 課程完成**: [AZD 初學者指南](../../README.md)
 
 **請記住**: 生產級 AI 工作負載需要仔細的規劃、監控和持續優化。從這些模式開始，並根據您的具體需求進行調整。
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

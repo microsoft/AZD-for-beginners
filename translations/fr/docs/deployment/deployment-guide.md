@@ -1,45 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T16:58:25+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T13:24:48+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "fr"
 }
 -->
 # Guide de Déploiement - Maîtriser les Déploiements AZD
 
+**Navigation du Chapitre :**
+- **📚 Accueil du Cours** : [AZD Pour Débutants](../../README.md)
+- **📖 Chapitre Actuel** : Chapitre 4 - Infrastructure en tant que Code & Déploiement
+- **⬅️ Chapitre Précédent** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
+- **➡️ Suivant** : [Provisionnement des Ressources](provisioning.md)
+- **🚀 Chapitre Suivant** : [Chapitre 5 : Solutions IA Multi-Agent](../../examples/retail-scenario.md)
+
 ## Introduction
 
-Ce guide complet couvre tout ce que vous devez savoir sur le déploiement d'applications avec Azure Developer CLI, des déploiements simples en une commande aux scénarios avancés de production avec des hooks personnalisés, des environnements multiples et une intégration CI/CD. Maîtrisez le cycle de vie complet du déploiement grâce à des exemples pratiques et des meilleures pratiques.
+Ce guide complet couvre tout ce que vous devez savoir sur le déploiement d'applications avec Azure Developer CLI, des déploiements simples en une commande aux scénarios avancés de production avec des hooks personnalisés, plusieurs environnements et une intégration CI/CD. Maîtrisez le cycle de vie complet du déploiement grâce à des exemples pratiques et des meilleures pratiques.
 
-## Objectifs d'apprentissage
+## Objectifs d'Apprentissage
 
 En suivant ce guide, vous allez :
 - Maîtriser toutes les commandes et workflows de déploiement d'Azure Developer CLI
-- Comprendre le cycle de vie complet du déploiement, de la mise en service à la surveillance
+- Comprendre le cycle de vie complet du déploiement, du provisionnement à la surveillance
 - Implémenter des hooks personnalisés pour automatiser les étapes avant et après le déploiement
-- Configurer plusieurs environnements avec des paramètres spécifiques à chaque environnement
+- Configurer plusieurs environnements avec des paramètres spécifiques
 - Mettre en place des stratégies de déploiement avancées, y compris les déploiements blue-green et canary
 - Intégrer les déploiements azd dans des pipelines CI/CD et des workflows DevOps
 
-## Résultats d'apprentissage
+## Résultats d'Apprentissage
 
 À la fin de ce guide, vous serez capable de :
 - Exécuter et résoudre les problèmes liés à tous les workflows de déploiement azd de manière autonome
 - Concevoir et implémenter une automatisation personnalisée pour les déploiements à l'aide de hooks
-- Configurer des déploiements prêts pour la production avec une sécurité et une surveillance adéquates
+- Configurer des déploiements prêts pour la production avec une sécurité et une surveillance appropriées
 - Gérer des scénarios complexes de déploiement multi-environnements
-- Optimiser les performances des déploiements et mettre en œuvre des stratégies de retour en arrière
+- Optimiser les performances de déploiement et mettre en œuvre des stratégies de rollback
 - Intégrer les déploiements azd dans les pratiques DevOps d'entreprise
 
-## Aperçu du Déploiement
+## Vue d'Ensemble du Déploiement
 
 Azure Developer CLI propose plusieurs commandes de déploiement :
 - `azd up` - Workflow complet (provisionnement + déploiement)
 - `azd provision` - Crée/Met à jour uniquement les ressources Azure
 - `azd deploy` - Déploie uniquement le code de l'application
-- `azd package` - Construit et empaquette les applications
+- `azd package` - Construit et package les applications
 
 ## Workflows de Déploiement de Base
 
@@ -56,8 +63,8 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Déploiement de l'Infrastructure Seulement
-Lorsque vous avez seulement besoin de mettre à jour les ressources Azure :
+### Déploiement Infrastructure Seulement
+Lorsque vous devez uniquement mettre à jour les ressources Azure :
 ```bash
 # Provision/update infrastructure
 azd provision
@@ -69,7 +76,7 @@ azd provision --preview
 azd provision --service database
 ```
 
-### Déploiement du Code Seulement
+### Déploiement Code Seulement
 Pour des mises à jour rapides de l'application :
 ```bash
 # Deploy all services
@@ -118,10 +125,10 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Phase 4 : Empaquetage de l'Application
+### Phase 4 : Packaging de l'Application
 - Construit le code de l'application
 - Crée des artefacts de déploiement
-- Prépare pour la plateforme cible (conteneurs, fichiers ZIP, etc.)
+- Package pour la plateforme cible (conteneurs, fichiers ZIP, etc.)
 
 ### Phase 5 : Hooks Avant Déploiement
 ```yaml
@@ -137,7 +144,7 @@ hooks:
 ```
 
 ### Phase 6 : Déploiement de l'Application
-- Déploie les applications empaquetées sur les services Azure
+- Déploie les applications packagées sur les services Azure
 - Met à jour les paramètres de configuration
 - Démarre/redémarre les services
 
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimisation Multi-Étapes des Dockerfiles
+### Optimisation Multi-Étages Dockerfile
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -392,9 +399,9 @@ azd deploy --incremental
 azd deploy --detect-changes
 ```
 
-## 🔍 Surveillance des Déploiements
+## 🔍 Surveillance du Déploiement
 
-### Surveillance en Temps Réel des Déploiements
+### Surveillance en Temps Réel
 ```bash
 # Monitor deployment progress
 azd deploy --follow
@@ -501,9 +508,9 @@ services:
           - external-api-key
 ```
 
-## 🚨 Stratégies de Retour en Arrière
+## 🚨 Stratégies de Rollback
 
-### Retour Rapide
+### Rollback Rapide
 ```bash
 # Rollback to previous deployment
 azd deploy --rollback
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### Retour de l'Infrastructure
+### Rollback de l'Infrastructure
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -524,7 +531,7 @@ azd provision --rollback
 azd provision --rollback --preview
 ```
 
-### Retour des Migrations de Base de Données
+### Rollback de Migration de Base de Données
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -652,4 +659,4 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction humaine professionnelle. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

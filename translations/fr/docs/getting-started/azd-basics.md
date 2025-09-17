@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T16:51:48+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T13:24:18+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "fr"
 }
 -->
 # AZD Basics - Comprendre Azure Developer CLI
 
-**Précédent :** [Installation et configuration](installation.md) | **Suivant :** [Configuration](configuration.md)
+# AZD Basics - Concepts clés et fondamentaux
+
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 1 - Fondations & Démarrage rapide
+- **⬅️ Précédent** : [Aperçu du cours](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Suivant** : [Installation & Configuration](installation.md)
+- **🚀 Chapitre suivant** : [Chapitre 2 : Développement axé sur l'IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 
-Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de commande puissant qui accélère votre transition du développement local au déploiement sur Azure. Vous découvrirez les concepts fondamentaux, les fonctionnalités principales et comment azd simplifie le déploiement d'applications cloud-native.
+Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de commande puissant qui accélère votre transition du développement local au déploiement sur Azure. Vous découvrirez les concepts fondamentaux, les fonctionnalités principales et comprendrez comment azd simplifie le déploiement d'applications cloud-native.
 
 ## Objectifs d'apprentissage
 
 À la fin de cette leçon, vous serez capable de :
 - Comprendre ce qu'est Azure Developer CLI et son objectif principal
 - Apprendre les concepts clés des modèles, environnements et services
-- Explorer les fonctionnalités essentielles, notamment le développement basé sur des modèles et l'infrastructure en tant que code
+- Explorer les fonctionnalités principales, notamment le développement basé sur des modèles et l'infrastructure en tant que code
 - Comprendre la structure et le flux de travail d'un projet azd
 - Être prêt à installer et configurer azd pour votre environnement de développement
 
 ## Résultats d'apprentissage
 
-Après avoir terminé cette leçon, vous serez en mesure de :
+Après avoir terminé cette leçon, vous serez capable de :
 - Expliquer le rôle d'azd dans les flux de travail modernes de développement cloud
 - Identifier les composants de la structure d'un projet azd
 - Décrire comment les modèles, environnements et services fonctionnent ensemble
@@ -42,7 +49,7 @@ Azure Developer CLI (azd) est un outil en ligne de commande conçu pour accélé
 ### Modèles
 Les modèles sont la base d'azd. Ils contiennent :
 - **Code de l'application** - Votre code source et ses dépendances
-- **Définitions de l'infrastructure** - Ressources Azure définies en Bicep ou Terraform
+- **Définitions d'infrastructure** - Ressources Azure définies en Bicep ou Terraform
 - **Fichiers de configuration** - Paramètres et variables d'environnement
 - **Scripts de déploiement** - Flux de travail automatisés pour le déploiement
 
@@ -62,7 +69,7 @@ Les services sont les blocs de construction de votre application :
 - **Frontend** - Applications web, SPAs
 - **Backend** - APIs, microservices
 - **Base de données** - Solutions de stockage de données
-- **Stockage** - Stockage de fichiers et de blobs
+- **Stockage** - Stockage de fichiers et blobs
 
 ## Fonctionnalités principales
 
@@ -191,7 +198,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Comprendre `azd down --force --purge`
-La commande `azd down --force --purge` est un moyen puissant de démanteler complètement votre environnement azd et toutes les ressources associées. Voici une explication de chaque option :
+La commande `azd down --force --purge` est un moyen puissant de démanteler complètement votre environnement azd et toutes les ressources associées. Voici une explication de ce que chaque option fait :
 ```
 --force
 ```
@@ -203,9 +210,9 @@ La commande `azd down --force --purge` est un moyen puissant de démanteler comp
 --purge
 ```
 Supprime **toutes les métadonnées associées**, y compris :
-État de l'environnement
-Dossier local `.azure`
-Informations de déploiement mises en cache
+État de l'environnement  
+Dossier local `.azure`  
+Informations de déploiement mises en cache  
 Empêche azd de "se souvenir" des déploiements précédents, ce qui peut causer des problèmes comme des groupes de ressources non correspondants ou des références de registre obsolètes.
 
 ### Pourquoi utiliser les deux ?
@@ -276,7 +283,7 @@ azd init --template template1
 ### 4. Gestion de la configuration
 - Utilisez des variables d'environnement pour les données sensibles
 - Conservez la configuration dans le contrôle de version
-- Documentez les paramètres spécifiques à chaque environnement
+- Documentez les paramètres spécifiques à l'environnement
 
 ## Progression d'apprentissage
 
@@ -300,20 +307,28 @@ azd init --template template1
 
 ## Prochaines étapes
 
-- [Installation et configuration](installation.md) - Installer et configurer azd
+**📖 Continuez l'apprentissage du chapitre 1 :**
+- [Installation & Configuration](installation.md) - Installez et configurez azd
 - [Votre premier projet](first-project.md) - Tutoriel pratique
 - [Guide de configuration](configuration.md) - Options de configuration avancées
 
+**🎯 Prêt pour le chapitre suivant ?**
+- [Chapitre 2 : Développement axé sur l'IA](../ai-foundry/azure-ai-foundry-integration.md) - Commencez à créer des applications IA
+
 ## Ressources supplémentaires
 
-- [Vue d'ensemble d'Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Présentation d'Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galerie de modèles](https://azure.github.io/awesome-azd/)
 - [Exemples communautaires](https://github.com/Azure-Samples)
 
 ---
 
-**Précédent :** [Installation et configuration](installation.md) | **Suivant :** [Configuration](configuration.md)
-- **Leçon suivante :** [Installation et configuration](installation.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 1 - Fondations & Démarrage rapide  
+- **⬅️ Précédent** : [Aperçu du cours](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Suivant** : [Installation & Configuration](installation.md)
+- **🚀 Chapitre suivant** : [Chapitre 2 : Développement axé sur l'IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

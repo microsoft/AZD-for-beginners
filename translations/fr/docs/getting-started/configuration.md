@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T16:51:32+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T13:23:59+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "fr"
 }
 -->
 # Guide de Configuration
 
-**Précédent :** [AZD Basics](azd-basics.md) | **Suivant :** [Premier Projet](first-project.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 3 - Configuration et Authentification
+- **⬅️ Précédent** : [Votre premier projet](first-project.md)
+- **➡️ Suivant** : [Guide de déploiement](../deployment/deployment-guide.md)
+- **🚀 Chapitre suivant** : [Chapitre 4 : Infrastructure en tant que code](../deployment/deployment-guide.md)
 
 ## Introduction
 
-Ce guide complet couvre tous les aspects de la configuration de l'Azure Developer CLI pour des workflows de développement et de déploiement optimaux. Vous apprendrez la hiérarchie de configuration, la gestion des environnements, les méthodes d'authentification et les modèles de configuration avancés permettant des déploiements Azure efficaces et sécurisés.
+Ce guide complet couvre tous les aspects de la configuration de l'Azure Developer CLI pour des workflows de développement et de déploiement optimaux. Vous apprendrez la hiérarchie de configuration, la gestion des environnements, les méthodes d'authentification et les modèles de configuration avancés qui permettent des déploiements Azure efficaces et sécurisés.
 
 ## Objectifs d'apprentissage
 
@@ -21,7 +26,7 @@ Ce guide complet couvre tous les aspects de la configuration de l'Azure Develope
 - Maîtriser la hiérarchie de configuration azd et comprendre comment les paramètres sont priorisés
 - Configurer efficacement les paramètres globaux et spécifiques au projet
 - Gérer plusieurs environnements avec des configurations différentes
-- Mettre en œuvre des modèles sécurisés d'authentification et d'autorisation
+- Mettre en œuvre des modèles d'authentification et d'autorisation sécurisés
 - Comprendre les modèles de configuration avancés pour des scénarios complexes
 
 ## Résultats d'apprentissage
@@ -41,7 +46,7 @@ azd utilise un système de configuration hiérarchique :
 1. **Options de ligne de commande** (priorité la plus élevée)
 2. **Variables d'environnement**
 3. **Configuration locale du projet** (`.azd/config.json`)
-4. **Configuration globale de l'utilisateur** (`~/.azd/config.json`)
+4. **Configuration utilisateur globale** (`~/.azd/config.json`)
 5. **Valeurs par défaut** (priorité la plus basse)
 
 ## Configuration Globale
@@ -286,7 +291,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Authentification par Service Principal
+### Authentification par principal de service
 Pour les pipelines CI/CD :
 ```bash
 # Set environment variables
@@ -299,7 +304,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Identité Managée
+### Identité managée
 Pour les environnements hébergés sur Azure :
 ```bash
 # Enable managed identity authentication
@@ -482,7 +487,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Bonnes Pratiques
+## 🎓 Bonnes pratiques
 
 ### 1. Utiliser des variables d'environnement
 ```yaml
@@ -535,22 +540,26 @@ Documentez votre configuration dans `CONFIG.md` :
 - Production: Uses production database, error logging only
 ```
 
-## Prochaines Étapes
+## Prochaines étapes
 
-- [Votre Premier Projet](first-project.md) - Appliquer la configuration en pratique
-- [Guide de Déploiement](../deployment/deployment-guide.md) - Utiliser la configuration pour le déploiement
-- [Provisionnement des Ressources](../deployment/provisioning.md) - Configurations prêtes pour la production
+- [Votre premier projet](first-project.md) - Appliquez la configuration en pratique
+- [Guide de déploiement](../deployment/deployment-guide.md) - Utilisez la configuration pour le déploiement
+- [Provisionnement des ressources](../deployment/provisioning.md) - Configurations prêtes pour la production
 
 ## Références
 
-- [Référence de Configuration azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Référence de configuration azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schéma azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Variables d'environnement](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Précédent :** [AZD Basics](azd-basics.md) | **Suivant :** [Premier Projet](first-project.md)
-- **Prochaine Leçon** : [Votre Premier Projet](first-project.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 3 - Configuration et Authentification
+- **⬅️ Précédent** : [Votre premier projet](first-project.md)
+- **➡️ Chapitre suivant** : [Chapitre 4 : Infrastructure en tant que code](../deployment/deployment-guide.md)
+- **Leçon suivante** : [Votre premier projet](first-project.md)
 
 ---
 

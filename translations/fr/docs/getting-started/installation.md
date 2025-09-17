@@ -1,24 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T16:51:14+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T13:23:34+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "fr"
 }
 -->
 # Guide d'installation et de configuration
 
-**Précédent :** [Documentation principale](../../README.md) | **Suivant :** [Principes de base d'AZD](azd-basics.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 1 - Fondations et démarrage rapide
+- **⬅️ Précédent** : [Bases d'AZD](azd-basics.md)
+- **➡️ Suivant** : [Votre premier projet](first-project.md)
+- **🚀 Chapitre suivant** : [Chapitre 2 : Développement axé sur l'IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 
-Ce guide complet vous expliquera comment installer et configurer Azure Developer CLI (azd) sur votre système. Vous découvrirez plusieurs méthodes d'installation pour différents systèmes d'exploitation, la configuration de l'authentification et les réglages initiaux pour préparer votre environnement de développement aux déploiements Azure.
+Ce guide complet vous accompagnera dans l'installation et la configuration de l'Azure Developer CLI (azd) sur votre système. Vous découvrirez plusieurs méthodes d'installation adaptées à différents systèmes d'exploitation, la configuration de l'authentification et les réglages initiaux pour préparer votre environnement de développement aux déploiements Azure.
 
 ## Objectifs d'apprentissage
 
 À la fin de cette leçon, vous serez capable de :
-- Installer Azure Developer CLI sur votre système d'exploitation
+- Installer avec succès l'Azure Developer CLI sur votre système d'exploitation
 - Configurer l'authentification avec Azure via plusieurs méthodes
 - Préparer votre environnement de développement avec les prérequis nécessaires
 - Comprendre les différentes options d'installation et savoir quand les utiliser
@@ -28,17 +33,17 @@ Ce guide complet vous expliquera comment installer et configurer Azure Developer
 
 Après avoir terminé cette leçon, vous serez en mesure de :
 - Installer azd en utilisant la méthode appropriée pour votre plateforme
-- Vous authentifier avec Azure en utilisant `azd auth login`
+- Vous authentifier avec Azure via la commande `azd auth login`
 - Vérifier votre installation et tester les commandes de base d'azd
 - Configurer votre environnement de développement pour une utilisation optimale d'azd
 - Résoudre de manière autonome les problèmes courants liés à l'installation
 
-Ce guide vous aidera à installer et configurer Azure Developer CLI sur votre système, quel que soit votre système d'exploitation ou environnement de développement.
+Ce guide vous aidera à installer et configurer l'Azure Developer CLI sur votre système, quel que soit votre système d'exploitation ou environnement de développement.
 
 ## Prérequis
 
 Avant d'installer azd, assurez-vous d'avoir :
-- **Abonnement Azure** - [Créer un compte gratuit](https://azure.microsoft.com/free/)
+- **Un abonnement Azure** - [Créer un compte gratuit](https://azure.microsoft.com/free/)
 - **Azure CLI** - Pour l'authentification et la gestion des ressources
 - **Git** - Pour cloner des modèles et gérer le contrôle de version
 - **Docker** (optionnel) - Pour les applications conteneurisées
@@ -338,9 +343,14 @@ Si vous rencontrez des problèmes :
 
 ---
 
-**Précédent :** [Documentation principale](../../README.md) | **Suivant :** [Principes de base d'AZD](azd-basics.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 1 - Fondations et démarrage rapide
+- **⬅️ Précédent** : [Bases d'AZD](azd-basics.md) 
+- **➡️ Suivant** : [Votre premier projet](first-project.md)
+- **🚀 Chapitre suivant** : [Chapitre 2 : Développement axé sur l'IA](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Installation terminée !** Passez à [Votre premier projet](first-project.md) pour commencer à construire avec azd.
+**✅ Installation terminée !** Passez à [Votre premier projet](first-project.md) pour commencer à construire avec azd.
 
 ---
 

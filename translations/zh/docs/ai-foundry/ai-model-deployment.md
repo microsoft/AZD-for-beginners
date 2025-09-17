@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T17:39:37+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T12:36:18+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "zh"
 }
 -->
 # 使用 Azure Developer CLI 部署 AI 模型
 
-**上一章：** [Azure AI Foundry 集成](azure-ai-foundry-integration.md) | **下一章：** [AI 工作坊实验](ai-workshop-lab.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第2章 - AI优先开发
+- **⬅️ 上一章**: [Azure AI Foundry 集成](azure-ai-foundry-integration.md)
+- **➡️ 下一章**: [AI 工作坊实验](ai-workshop-lab.md)
+- **🚀 下一章节**: [第3章: 配置](../getting-started/configuration.md)
 
-本指南提供了使用 AZD 模板部署 AI 模型的详细说明，涵盖从模型选择到生产部署模式的所有内容。
+本指南提供了使用 AZD 模板部署 AI 模型的全面说明，涵盖从模型选择到生产部署模式的所有内容。
 
 ## 目录
 
@@ -20,7 +25,7 @@ CO_OP_TRANSLATOR_METADATA:
 - [部署模式](../../../../docs/ai-foundry)
 - [模型管理](../../../../docs/ai-foundry)
 - [生产环境注意事项](../../../../docs/ai-foundry)
-- [监控与可观测性](../../../../docs/ai-foundry)
+- [监控与可观察性](../../../../docs/ai-foundry)
 
 ## 模型选择策略
 
@@ -140,7 +145,7 @@ AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 
 ## 部署模式
 
-### 模式 1：单区域部署
+### 模式1：单区域部署
 
 ```yaml
 # azure.yaml - Single region
@@ -158,7 +163,7 @@ services:
 - 单一市场应用
 - 成本优化
 
-### 模式 2：多区域部署
+### 模式2：多区域部署
 
 ```bicep
 // Multi-region deployment
@@ -172,11 +177,11 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 适用于：
-- 全球性应用
+- 全球应用
 - 高可用性需求
 - 负载分布
 
-### 模式 3：混合部署
+### 模式3：混合部署
 
 结合 Azure OpenAI 和其他 AI 服务：
 
@@ -367,9 +372,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## 监控与可观测性
+## 监控与可观察性
 
-### Application Insights 集成
+### 应用洞察集成
 
 为 AI 工作负载配置监控：
 
@@ -491,7 +496,12 @@ async def check_ai_models():
 
 ---
 
-**上一章：** [Azure AI Foundry 集成](azure-ai-foundry-integration.md) | **下一章：** [AI 工作坊实验](ai-workshop-lab.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第2章 - AI优先开发
+- **⬅️ 上一章**: [Azure AI Foundry 集成](azure-ai-foundry-integration.md)
+- **➡️ 下一章**: [AI 工作坊实验](ai-workshop-lab.md)
+- **🚀 下一章节**: [第3章: 配置](../getting-started/configuration.md)
 
 ---
 

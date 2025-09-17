@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T17:35:55+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-17T13:22:18+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "fr"
 }
 -->
 # Meilleures pratiques pour les charges de travail IA en production avec AZD
 
-**Précédent :** [Atelier IA](ai-workshop-lab.md) | **Suivant :** [Guide de dépannage IA](../troubleshooting/ai-troubleshooting.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 8 - Modèles de production et d'entreprise
+- **⬅️ Chapitre précédent** : [Chapitre 7 : Dépannage](../troubleshooting/debugging.md)
+- **⬅️ Également lié** : [Atelier IA](ai-workshop-lab.md)
+- **🎯 Cours terminé** : [AZD pour les débutants](../../README.md)
 
 ## Aperçu
 
@@ -125,7 +130,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 ### 1. Modèle de sécurité Zero-Trust
 
 **Stratégie d'implémentation** :
-- Aucune communication entre services sans authentification
+- Pas de communication entre services sans authentification
 - Toutes les appels API utilisent des identités gérées
 - Isolation réseau avec des points de terminaison privés
 - Contrôles d'accès avec privilèges minimaux
@@ -324,7 +329,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. Répartition de charge et gestion du trafic
 
-**Application Gateway avec WAF** :
+**Passerelle d'application avec WAF** :
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -838,7 +843,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Tous les services utilisent des identités gérées
 - [ ] Secrets stockés dans Key Vault
 - [ ] Points de terminaison privés configurés
-- [ ] Groupes de sécurité réseau implémentés
+- [ ] Groupes de sécurité réseau mis en œuvre
 - [ ] RBAC avec privilèges minimaux
 - [ ] WAF activé sur les points de terminaison publics
 
@@ -847,11 +852,11 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Mise en cache implémentée
 - [ ] Répartition de charge configurée
 - [ ] CDN pour le contenu statique
-- [ ] Pooling des connexions à la base de données
+- [ ] Pooling de connexions à la base de données
 - [ ] Optimisation de l'utilisation des tokens
 
 ### Surveillance ✅
-- [ ] Application Insights configuré
+- [ ] Insights sur les applications configurés
 - [ ] Métriques personnalisées définies
 - [ ] Règles d'alerte configurées
 - [ ] Tableau de bord créé
@@ -860,8 +865,8 @@ echo "Infrastructure validation completed successfully!"
 
 ### Fiabilité ✅
 - [ ] Déploiement multi-régions
-- [ ] Plan de sauvegarde et récupération
-- [ ] Disjoncteurs implémentés
+- [ ] Plan de sauvegarde et de récupération
+- [ ] Disjoncteurs mis en œuvre
 - [ ] Politiques de reprise configurées
 - [ ] Dégradation progressive
 - [ ] Points de terminaison de vérification de santé
@@ -878,7 +883,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Exigences de résidence des données respectées
 - [ ] Journaux d'audit activés
 - [ ] Politiques de conformité appliquées
-- [ ] Bases de sécurité implémentées
+- [ ] Bases de sécurité mises en œuvre
 - [ ] Évaluations de sécurité régulières
 - [ ] Plan de réponse aux incidents
 
@@ -888,7 +893,7 @@ echo "Infrastructure validation completed successfully!"
 
 | Métrique | Objectif | Surveillance |
 |----------|----------|--------------|
-| **Temps de réponse** | < 2 secondes | Application Insights |
+| **Temps de réponse** | < 2 secondes | Insights sur les applications |
 | **Disponibilité** | 99,9 % | Surveillance de disponibilité |
 | **Taux d'erreur** | < 0,1 % | Journaux d'application |
 | **Utilisation des tokens** | < 500 $/mois | Gestion des coûts |
@@ -912,11 +917,11 @@ Basé sur les retours de la communauté Discord Azure AI Foundry :
 
 ### Principales recommandations de la communauté :
 
-1. **Commencer petit, évoluer progressivement** : Débutez avec des SKUs basiques et évoluez selon l'utilisation réelle
-2. **Surveiller tout** : Configurez une surveillance complète dès le premier jour
-3. **Automatiser la sécurité** : Utilisez l'infrastructure comme code pour une sécurité cohérente
-4. **Tester minutieusement** : Incluez des tests spécifiques à l'IA dans votre pipeline
-5. **Planifier les coûts** : Surveillez l'utilisation des tokens et configurez des alertes budgétaires tôt
+1. **Commencez petit, évoluez progressivement** : Débutez avec des SKUs basiques et évoluez selon l'utilisation réelle
+2. **Surveillez tout** : Configurez une surveillance complète dès le premier jour
+3. **Automatisez la sécurité** : Utilisez l'infrastructure comme code pour une sécurité cohérente
+4. **Testez minutieusement** : Incluez des tests spécifiques à l'IA dans votre pipeline
+5. **Planifiez les coûts** : Surveillez l'utilisation des tokens et configurez des alertes budgétaires tôt
 
 ### Erreurs courantes à éviter :
 
@@ -928,18 +933,23 @@ Basé sur les retours de la communauté Discord Azure AI Foundry :
 
 ## Ressources supplémentaires
 
-- **Cadre Azure Well-Architected** : [Guide des charges de travail IA](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Cadre Azure bien architecturé** : [Guide des charges de travail IA](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Documentation Azure AI Foundry** : [Docs officiels](https://learn.microsoft.com/azure/ai-studio/)
 - **Templates communautaires** : [Exemples Azure](https://github.com/Azure-Samples)
 - **Communauté Discord** : [#Azure channel](https://discord.gg/microsoft-azure)
 
 ---
 
-**Précédent :** [Atelier IA](ai-workshop-lab.md) | **Suivant :** [Guide de dépannage IA](../troubleshooting/ai-troubleshooting.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 8 - Modèles de production et d'entreprise
+- **⬅️ Chapitre précédent** : [Chapitre 7 : Dépannage](../troubleshooting/debugging.md)
+- **⬅️ Également lié** : [Atelier IA](ai-workshop-lab.md)
+- **🎆 Cours terminé** : [AZD pour les débutants](../../README.md)
 
 **Rappel** : Les charges de travail IA en production nécessitent une planification minutieuse, une surveillance et une optimisation continue. Commencez avec ces modèles et adaptez-les à vos besoins spécifiques.
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
