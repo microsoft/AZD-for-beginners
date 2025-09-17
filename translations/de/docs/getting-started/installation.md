@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T17:08:03+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T16:08:33+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "de"
 }
 -->
 # Installations- und Einrichtungsanleitung
 
-**Vorher:** [Hauptdokumentation](../../README.md) | **Nächster Schritt:** [AZD Grundlagen](azd-basics.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schnellstart
+- **⬅️ Vorheriges Kapitel**: [AZD Grundlagen](azd-basics.md)
+- **➡️ Nächstes Kapitel**: [Ihr erstes Projekt](first-project.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 2: AI-First Entwicklung](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Einführung
 
-Diese umfassende Anleitung führt Sie durch die Installation und Konfiguration des Azure Developer CLI (azd) auf Ihrem System. Sie lernen verschiedene Installationsmethoden für unterschiedliche Betriebssysteme, die Einrichtung der Authentifizierung und die erste Konfiguration, um Ihre Entwicklungsumgebung für Azure-Bereitstellungen vorzubereiten.
+Diese umfassende Anleitung führt Sie durch die Installation und Konfiguration der Azure Developer CLI (azd) auf Ihrem System. Sie lernen verschiedene Installationsmethoden für unterschiedliche Betriebssysteme, die Einrichtung der Authentifizierung und die erste Konfiguration, um Ihre Entwicklungsumgebung für Azure-Bereitstellungen vorzubereiten.
 
 ## Lernziele
 
@@ -66,7 +71,7 @@ choco install azd
 #### Option 4: Manuelle Installation
 1. Laden Sie die neueste Version von [GitHub](https://github.com/Azure/azure-dev/releases) herunter
 2. Entpacken Sie die Dateien nach `C:\Program Files\azd\`
-3. Fügen Sie den Pfad zur PATH-Umgebungsvariable hinzu
+3. Fügen Sie den Pfad zur Umgebungsvariablen PATH hinzu
 
 ### macOS
 
@@ -150,7 +155,7 @@ azd version 1.5.0 (commit abc123)
 
 ## Authentifizierungseinrichtung
 
-### Azure CLI-Authentifizierung (Empfohlen)
+### Azure CLI Authentifizierung (Empfohlen)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
@@ -194,7 +199,7 @@ azd config list
 ```
 
 ### Umgebungsvariablen
-Fügen Sie diese Ihrer Shell-Profildatei hinzu (`.bashrc`, `.zshrc`, `.profile`):
+Fügen Sie diese Ihrem Shell-Profil hinzu (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -217,8 +222,8 @@ Installieren Sie die Azure Developer CLI-Erweiterung:
 Funktionen:
 - IntelliSense für azure.yaml
 - Integrierte Terminalbefehle
-- Vorlagen durchsuchen
-- Bereitstellungsüberwachung
+- Vorlagenübersicht
+- Überwachung von Bereitstellungen
 
 ### GitHub Codespaces
 Erstellen Sie eine `.devcontainer/devcontainer.json`:
@@ -324,7 +329,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Nächste Schritte
 
 1. **Authentifizierung abschließen**: Stellen Sie sicher, dass Sie Zugriff auf Ihr Azure-Abonnement haben
-2. **Erste Bereitstellung ausprobieren**: Folgen Sie der [Ersten Projektanleitung](first-project.md)
+2. **Erste Bereitstellung ausprobieren**: Folgen Sie der Anleitung [Ihr erstes Projekt](first-project.md)
 3. **Vorlagen erkunden**: Durchsuchen Sie verfügbare Vorlagen mit `azd template list`
 4. **Ihre IDE konfigurieren**: Richten Sie Ihre Entwicklungsumgebung ein
 
@@ -338,9 +343,14 @@ Falls Sie auf Probleme stoßen:
 
 ---
 
-**Vorher:** [Hauptdokumentation](../../README.md) | **Nächster Schritt:** [AZD Grundlagen](azd-basics.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schnellstart
+- **⬅️ Vorheriges Kapitel**: [AZD Grundlagen](azd-basics.md) 
+- **➡️ Nächstes Kapitel**: [Ihr erstes Projekt](first-project.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 2: AI-First Entwicklung](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Installation abgeschlossen!** Fahren Sie mit [Ihr erstes Projekt](first-project.md) fort, um mit azd zu starten.
+**✅ Installation abgeschlossen!** Fahren Sie fort mit [Ihr erstes Projekt](first-project.md), um mit azd zu starten.
 
 ---
 

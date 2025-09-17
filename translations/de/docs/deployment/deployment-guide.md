@@ -1,22 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T17:00:12+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T16:09:38+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "de"
 }
 -->
 # Bereitstellungsanleitung - AZD-Bereitstellungen meistern
 
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 4 - Infrastruktur als Code & Bereitstellung
+- **⬅️ Vorheriges Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
+- **➡️ Weiter**: [Ressourcen bereitstellen](provisioning.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 5: Multi-Agent KI-Lösungen](../../examples/retail-scenario.md)
+
 ## Einführung
 
-Dieser umfassende Leitfaden deckt alles ab, was Sie über die Bereitstellung von Anwendungen mit Azure Developer CLI wissen müssen – von einfachen Ein-Befehl-Bereitstellungen bis hin zu fortgeschrittenen Produktionsszenarien mit benutzerdefinierten Hooks, mehreren Umgebungen und CI/CD-Integration. Meistern Sie den gesamten Bereitstellungslebenszyklus mit praktischen Beispielen und bewährten Verfahren.
+Dieser umfassende Leitfaden behandelt alles, was Sie über die Bereitstellung von Anwendungen mit Azure Developer CLI wissen müssen – von einfachen Bereitstellungen mit einem einzigen Befehl bis hin zu fortgeschrittenen Produktionsszenarien mit benutzerdefinierten Hooks, mehreren Umgebungen und CI/CD-Integration. Meistern Sie den gesamten Bereitstellungslebenszyklus mit praktischen Beispielen und bewährten Verfahren.
 
 ## Lernziele
 
-Durch die Bearbeitung dieses Leitfadens werden Sie:
-- Alle Azure Developer CLI-Befehle und Workflows für Bereitstellungen meistern
+Nach Abschluss dieses Leitfadens werden Sie:
+- Alle Azure Developer CLI-Befehle und Workflows für die Bereitstellung beherrschen
 - Den vollständigen Bereitstellungslebenszyklus von der Bereitstellung bis zur Überwachung verstehen
 - Benutzerdefinierte Bereitstellungshooks für Automatisierung vor und nach der Bereitstellung implementieren
 - Mehrere Umgebungen mit umgebungsspezifischen Parametern konfigurieren
@@ -27,10 +34,10 @@ Durch die Bearbeitung dieses Leitfadens werden Sie:
 
 Nach Abschluss werden Sie in der Lage sein:
 - Alle AZD-Bereitstellungsworkflows eigenständig auszuführen und zu beheben
-- Benutzerdefinierte Automatisierung für Bereitstellungen mit Hooks zu entwerfen und umzusetzen
+- Benutzerdefinierte Automatisierung für die Bereitstellung mit Hooks zu entwerfen und umzusetzen
 - Produktionsreife Bereitstellungen mit angemessener Sicherheit und Überwachung zu konfigurieren
-- Komplexe Multi-Umgebungs-Bereitstellungsszenarien zu verwalten
-- Die Leistung von Bereitstellungen zu optimieren und Rollback-Strategien umzusetzen
+- Komplexe Bereitstellungsszenarien mit mehreren Umgebungen zu verwalten
+- Die Bereitstellungsleistung zu optimieren und Rollback-Strategien umzusetzen
 - AZD-Bereitstellungen in Unternehmens-DevOps-Praktiken zu integrieren
 
 ## Überblick über die Bereitstellung
@@ -38,7 +45,7 @@ Nach Abschluss werden Sie in der Lage sein:
 Azure Developer CLI bietet mehrere Bereitstellungsbefehle:
 - `azd up` - Vollständiger Workflow (Bereitstellung + Deployment)
 - `azd provision` - Nur Azure-Ressourcen erstellen/aktualisieren
-- `azd deploy` - Nur Anwendungscode bereitstellen
+- `azd deploy` - Nur Anwendungs-Code bereitstellen
 - `azd package` - Anwendungen erstellen und paketieren
 
 ## Grundlegende Bereitstellungsworkflows
@@ -70,7 +77,7 @@ azd provision --service database
 ```
 
 ### Nur Code-Bereitstellung
-Für schnelle Anwendungsupdates:
+Für schnelle Anwendungsaktualisierungen:
 ```bash
 # Deploy all services
 azd deploy
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Verständnis des Bereitstellungsprozesses
 
-### Phase 1: Pre-Provision Hooks
+### Phase 1: Hooks vor der Bereitstellung
 ```yaml
 # azure.yaml
 hooks:
@@ -105,7 +112,7 @@ hooks:
 - Konfiguriert Netzwerk und Sicherheit
 - Richtet Überwachung und Protokollierung ein
 
-### Phase 3: Post-Provision Hooks
+### Phase 3: Hooks nach der Bereitstellung
 ```yaml
 hooks:
   postprovision:
@@ -119,11 +126,11 @@ hooks:
 ```
 
 ### Phase 4: Anwendungspaketierung
-- Erstellt Anwendungscode
+- Erstellt Anwendungs-Code
 - Erstellt Bereitstellungsartefakte
-- Paketiert für die Zielplattform (Container, ZIP-Dateien usw.)
+- Paketiert für Zielplattformen (Container, ZIP-Dateien usw.)
 
-### Phase 5: Pre-Deploy Hooks
+### Phase 5: Hooks vor der Bereitstellung
 ```yaml
 hooks:
   predeploy:
@@ -141,7 +148,7 @@ hooks:
 - Aktualisiert Konfigurationseinstellungen
 - Startet/Neustartet Dienste
 
-### Phase 7: Post-Deploy Hooks
+### Phase 7: Hooks nach der Bereitstellung
 ```yaml
 hooks:
   postdeploy:
@@ -394,7 +401,7 @@ azd deploy --detect-changes
 
 ## 🔍 Überwachung der Bereitstellung
 
-### Echtzeit-Bereitstellungsüberwachung
+### Echtzeitüberwachung der Bereitstellung
 ```bash
 # Monitor deployment progress
 azd deploy --follow
@@ -540,7 +547,7 @@ echo "Database rollback completed"
 
 ## 📊 Bereitstellungsmetriken
 
-### Leistung der Bereitstellung verfolgen
+### Bereitstellungsleistung verfolgen
 ```bash
 # Enable deployment metrics
 azd config set telemetry.deployment.enabled true
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. Integration von Tests
+### 3. Integrationstests
 ```yaml
 hooks:
   predeploy:
@@ -631,7 +638,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Nächste Schritte
 
-- [Ressourcen bereitstellen](provisioning.md) - Detaillierte Informationen zur Infrastrukturverwaltung
+- [Ressourcen bereitstellen](provisioning.md) - Tiefgehende Analyse des Infrastrukturmanagements
 - [Planung vor der Bereitstellung](../pre-deployment/capacity-planning.md) - Ihre Bereitstellungsstrategie planen
 - [Häufige Probleme](../troubleshooting/common-issues.md) - Bereitstellungsprobleme lösen
 - [Best Practices](../troubleshooting/debugging.md) - Produktionsreife Bereitstellungsstrategien

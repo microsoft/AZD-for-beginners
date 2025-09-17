@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T17:08:40+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T16:09:16+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "de"
 }
 -->
 # AZD Grundlagen - Einführung in Azure Developer CLI
 
-**Vorher:** [Installation & Einrichtung](installation.md) | **Nächste:** [Konfiguration](configuration.md)
+# AZD Grundlagen - Kernkonzepte und Grundlagen
+
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schnellstart
+- **⬅️ Vorheriges**: [Kursübersicht](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Nächstes**: [Installation & Einrichtung](installation.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 2: AI-First Entwicklung](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Einführung
 
-Diese Lektion führt Sie in Azure Developer CLI (azd) ein, ein leistungsstarkes Befehlszeilentool, das Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung beschleunigt. Sie lernen die grundlegenden Konzepte, die Kernfunktionen und wie azd die Bereitstellung von cloud-nativen Anwendungen vereinfacht.
+In dieser Lektion lernen Sie die Azure Developer CLI (azd) kennen, ein leistungsstarkes Kommandozeilen-Tool, das Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung beschleunigt. Sie erfahren die grundlegenden Konzepte, die wichtigsten Funktionen und wie azd die Bereitstellung von cloud-nativen Anwendungen vereinfacht.
 
 ## Lernziele
 
 Am Ende dieser Lektion werden Sie:
-- Verstehen, was Azure Developer CLI ist und welchen Hauptzweck es erfüllt
+- Verstehen, was die Azure Developer CLI ist und welchen Zweck sie erfüllt
 - Die Kernkonzepte von Templates, Umgebungen und Diensten kennenlernen
-- Wichtige Funktionen wie templatebasiertes Entwickeln und Infrastructure as Code erkunden
+- Wichtige Funktionen wie templatebasierte Entwicklung und Infrastructure as Code erkunden
 - Die azd-Projektstruktur und den Workflow verstehen
 - Bereit sein, azd für Ihre Entwicklungsumgebung zu installieren und zu konfigurieren
 
@@ -35,7 +42,7 @@ Nach Abschluss dieser Lektion werden Sie in der Lage sein:
 
 ## Was ist Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) ist ein Befehlszeilentool, das entwickelt wurde, um Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung zu beschleunigen. Es vereinfacht den Prozess des Erstellens, Bereitstellens und Verwalten von cloud-nativen Anwendungen auf Azure.
+Azure Developer CLI (azd) ist ein Kommandozeilen-Tool, das entwickelt wurde, um Ihre Reise von der lokalen Entwicklung zur Azure-Bereitstellung zu beschleunigen. Es vereinfacht den Prozess des Erstellens, Bereitstellens und Verwalten von cloud-nativen Anwendungen auf Azure.
 
 ## Kernkonzepte
 
@@ -61,12 +68,12 @@ Jede Umgebung hat ihre eigenen:
 Dienste sind die Bausteine Ihrer Anwendung:
 - **Frontend** - Webanwendungen, SPAs
 - **Backend** - APIs, Microservices
-- **Datenbank** - Datenbankspeicherlösungen
+- **Datenbank** - Datenlösungen
 - **Speicher** - Datei- und Blob-Speicher
 
 ## Wichtige Funktionen
 
-### 1. Templatebasiertes Entwickeln
+### 1. Templatebasierte Entwicklung
 ```bash
 # Browse available templates
 azd template list
@@ -77,7 +84,7 @@ azd init --template <template-name>
 
 ### 2. Infrastructure as Code
 - **Bicep** - Azure-spezifische Sprache
-- **Terraform** - Multi-Cloud-Infrastrukturtool
+- **Terraform** - Multi-Cloud-Infrastruktur-Tool
 - **ARM Templates** - Azure Resource Manager Templates
 
 ### 3. Integrierte Workflows
@@ -300,9 +307,13 @@ azd init --template template1
 
 ## Nächste Schritte
 
+**📖 Weiterlernen in Kapitel 1:**
 - [Installation & Einrichtung](installation.md) - azd installieren und konfigurieren
-- [Ihr erstes Projekt](first-project.md) - Praktisches Tutorial
+- [Ihr erstes Projekt](first-project.md) - Praktisches Tutorial abschließen
 - [Konfigurationsleitfaden](configuration.md) - Erweiterte Konfigurationsoptionen
+
+**🎯 Bereit für das nächste Kapitel?**
+- [Kapitel 2: AI-First Entwicklung](../ai-foundry/azure-ai-foundry-integration.md) - Beginnen Sie mit der Entwicklung von KI-Anwendungen
 
 ## Zusätzliche Ressourcen
 
@@ -312,8 +323,12 @@ azd init --template template1
 
 ---
 
-**Vorher:** [Installation & Einrichtung](installation.md) | **Nächste:** [Konfiguration](configuration.md)
-- **Nächste Lektion**: [Installation & Einrichtung](installation.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schnellstart  
+- **⬅️ Vorheriges**: [Kursübersicht](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Nächstes**: [Installation & Einrichtung](installation.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 2: AI-First Entwicklung](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

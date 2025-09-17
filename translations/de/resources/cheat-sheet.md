@@ -1,39 +1,45 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T18:01:26+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T16:17:10+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "de"
 }
 -->
 # Befehlsübersicht - Wichtige AZD-Befehle
 
+**Schnellreferenz für alle Kapitel**
+- **📚 Kursübersicht**: [AZD für Anfänger](../README.md)
+- **📖 Schnellstart**: [Kapitel 1: Grundlagen & Schnellstart](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 KI-Befehle**: [Kapitel 2: KI-First-Entwicklung](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Fortgeschrittene Themen**: [Kapitel 4: Infrastruktur als Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Einführung
 
-Dieses umfassende Spickzettel bietet eine schnelle Referenz für die am häufigsten verwendeten Azure Developer CLI-Befehle, kategorisiert mit praktischen Beispielen. Perfekt für schnelle Nachschlagewerke während der Entwicklung, Fehlersuche und täglichen Arbeiten mit azd-Projekten.
+Dieses umfassende Spickzettel bietet eine schnelle Referenz für die am häufigsten verwendeten Azure Developer CLI-Befehle, kategorisiert mit praktischen Beispielen. Perfekt für schnelle Nachschlagearbeiten während der Entwicklung, Fehlerbehebung und täglichen Arbeiten mit azd-Projekten.
 
 ## Lernziele
 
-Durch die Nutzung dieses Spickzettels werden Sie:
+Durch die Nutzung dieses Spickzettels wirst du:
 - Sofortigen Zugriff auf wichtige Azure Developer CLI-Befehle und deren Syntax haben
 - Die Organisation der Befehle nach funktionalen Kategorien und Anwendungsfällen verstehen
 - Praktische Beispiele für häufige Entwicklungs- und Bereitstellungsszenarien nachschlagen können
-- Befehle zur Fehlersuche für schnelle Problemlösungen finden
-- Effizient erweiterte Konfigurations- und Anpassungsoptionen nutzen
+- Fehlerbehebungsbefehle für schnelle Problemlösungen finden
+- Erweiterte Konfigurations- und Anpassungsoptionen effizient nutzen
 - Befehle für die Verwaltung von Umgebungen und Workflows mit mehreren Umgebungen finden
 
 ## Lernergebnisse
 
-Mit regelmäßiger Nutzung dieses Spickzettels werden Sie in der Lage sein:
+Mit regelmäßiger Nutzung dieses Spickzettels wirst du in der Lage sein:
 - azd-Befehle sicher auszuführen, ohne die vollständige Dokumentation zu konsultieren
-- Häufige Probleme schnell mit den passenden Diagnosebefehlen zu lösen
+- Häufige Probleme schnell mit geeigneten Diagnosebefehlen zu lösen
 - Mehrere Umgebungen und Bereitstellungsszenarien effizient zu verwalten
 - Erweiterte azd-Funktionen und Konfigurationsoptionen bei Bedarf anzuwenden
 - Bereitstellungsprobleme systematisch mit Befehlssequenzen zu beheben
 - Workflows durch effektive Nutzung von azd-Abkürzungen und Optionen zu optimieren
 
-## Erste Schritte
+## Erste Schritte Befehle
 
 ### Authentifizierung
 ```bash
@@ -115,7 +121,7 @@ azd package
 azd package --service api
 ```
 
-## 🌍 Umweltverwaltung
+## 🌍 Umweltmanagement
 
 ### Umweltoperationen
 ```bash
@@ -182,9 +188,9 @@ azd show
 azd show --output json
 ```
 
-## 📊 Überwachung und Protokolle
+## 📊 Überwachung und Logs
 
-### Anwendungsprotokolle
+### Anwendungslogs
 ```bash
 # View logs from all services
 azd logs
@@ -255,7 +261,7 @@ azd pipeline config --provider azdo
 azd pipeline show
 ```
 
-### Infrastrukturverwaltung
+### Infrastrukturmanagement
 ```bash
 # Import existing resources
 azd infra import
@@ -267,7 +273,7 @@ azd infra export
 azd infra validate
 ```
 
-### Dienstverwaltung
+### Servicemanagement
 ```bash
 # List all services
 azd service list
@@ -318,7 +324,7 @@ azd env select production
 azd up
 ```
 
-### Workflow zur Fehlersuche
+### Fehlerbehebungsworkflow
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -404,7 +410,7 @@ azd service list --output table
 
 ## 🔧 Häufige Befehlskombinationen
 
-### Skript für Gesundheitsprüfung
+### Health-Check-Skript
 ```bash
 #!/bin/bash
 # Quick health check
@@ -433,7 +439,7 @@ for env in dev staging production; do
 done
 ```
 
-### Skript zur Bereinigung von Ressourcen
+### Ressourcenbereinigungs-Skript
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -552,12 +558,12 @@ azd template show <template-name> --docs
 
 ---
 
-**Tipp**: Speichern Sie diesen Spickzettel als Lesezeichen und verwenden Sie `Strg+F`, um schnell die benötigten Befehle zu finden!
+**Tipp**: Lesezeichen für diesen Spickzettel setzen und `Strg+F` verwenden, um schnell die benötigten Befehle zu finden!
 
 ---
 
 **Navigation**
-- **Vorherige Lektion**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
+- **Vorherige Lektion**: [Preflight-Checks](../docs/pre-deployment/preflight-checks.md)
 - **Nächste Lektion**: [Glossar](glossary.md)
 
 ---

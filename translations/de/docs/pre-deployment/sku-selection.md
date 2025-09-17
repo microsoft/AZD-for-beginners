@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T17:27:13+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T16:11:47+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "de"
 }
 -->
 # SKU-Auswahlleitfaden - Die richtigen Azure-Serviceebenen wählen
+
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 6 - Validierung & Planung vor der Bereitstellung
+- **⬅️ Vorheriges**: [Kapazitätsplanung](capacity-planning.md)
+- **➡️ Nächstes**: [Preflight-Checks](preflight-checks.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 7: Fehlerbehebung](../troubleshooting/common-issues.md)
 
 ## Einführung
 
@@ -17,21 +24,21 @@ Dieser umfassende Leitfaden hilft Ihnen, optimale Azure-Service-SKUs (Stock Keep
 
 Nach Abschluss dieses Leitfadens werden Sie:
 - Die Konzepte von Azure-SKUs, Preismodelle und Funktionsunterschiede verstehen
-- Strategien zur SKU-Auswahl für Entwicklungs-, Test- und Produktionsumgebungen meistern
-- Workload-Anforderungen analysieren und passende Serviceebenen zuordnen
+- Strategien zur SKU-Auswahl für Entwicklungs-, Test- und Produktionsumgebungen beherrschen
+- Workload-Anforderungen analysieren und passende Serviceebenen auswählen
 - Kostenoptimierungsstrategien durch intelligente SKU-Auswahl umsetzen
-- Leistungstests und Validierungstechniken für SKU-Auswahlen anwenden
+- Leistungstests und Validierungstechniken für SKU-Entscheidungen anwenden
 - Automatisierte SKU-Empfehlungen und Überwachung konfigurieren
 
 ## Lernergebnisse
 
-Nach Abschluss werden Sie in der Lage sein:
-- Geeignete Azure-Service-SKUs basierend auf Workload-Anforderungen und Einschränkungen auszuwählen
-- Kostenoptimierte Architekturen für mehrere Umgebungen mit geeigneter Ebenenauswahl zu entwerfen
-- Leistungs-Benchmarking und Validierung für SKU-Auswahlen umzusetzen
-- Automatisierte Tools für SKU-Empfehlungen und Kostenoptimierung zu erstellen
-- SKU-Migrations- und Skalierungsstrategien für sich ändernde Anforderungen zu planen
-- Prinzipien des Azure Well-Architected Frameworks auf die Auswahl von Serviceebenen anzuwenden
+Nach Abschluss können Sie:
+- Geeignete Azure-Service-SKUs basierend auf Workload-Anforderungen und Einschränkungen auswählen
+- Kostenoptimierte Architekturen für mehrere Umgebungen mit geeigneter Ebenenauswahl entwerfen
+- Leistungstests und Validierung für SKU-Entscheidungen implementieren
+- Automatisierte Tools für SKU-Empfehlungen und Kostenoptimierung erstellen
+- SKU-Migrations- und Skalierungsstrategien für sich ändernde Anforderungen planen
+- Prinzipien des Azure Well-Architected Frameworks auf die Auswahl von Serviceebenen anwenden
 
 ## Inhaltsverzeichnis
 
@@ -66,7 +73,7 @@ SKUs (Stock Keeping Units) repräsentieren verschiedene Serviceebenen und Leistu
 2. **Umgebungstyp**
    - Entwicklung/Test vs. Produktion
    - Verfügbarkeitsanforderungen
-   - Sicherheits- und Compliance-Bedarf
+   - Sicherheits- und Compliance-Bedürfnisse
 
 3. **Budgetbeschränkungen**
    - Anfangskosten vs. Betriebskosten
@@ -75,7 +82,7 @@ SKUs (Stock Keeping Units) repräsentieren verschiedene Serviceebenen und Leistu
 
 4. **Wachstumsprognosen**
    - Skalierbarkeitsanforderungen
-   - Zukünftige Funktionsbedarfe
+   - Zukünftige Funktionsbedürfnisse
    - Migrationskomplexität
 
 ---
@@ -102,11 +109,11 @@ skus:
 #### Merkmale
 - **App Service**: F1 (Free) oder B1 (Basic) für einfache Tests
 - **Datenbanken**: Basisebene mit minimalen Ressourcen
-- **Speicher**: Standard mit nur lokaler Redundanz
+- **Speicher**: Standard mit lokaler Redundanz
 - **Compute**: Gemeinsame Ressourcen akzeptabel
 - **Netzwerk**: Basis-Konfigurationen
 
-### Test-/Staging-Umgebung
+### Staging-/Testumgebung
 
 **Prioritäten**: Produktionsähnliche Konfiguration, Kostenbalance, Leistungstestfähigkeit
 
@@ -166,7 +173,7 @@ skus:
 | Entwicklung/Test | F1 (Free) oder B1 (Basic) | Kosteneffizient, ausreichend für Tests |
 | Kleine Produktionsanwendungen | S1 (Standard) | Eigene Domains, SSL, Auto-Skalierung |
 | Mittlere Produktionsanwendungen | P1V3 (Premium V3) | Bessere Leistung, mehr Funktionen |
-| Hochfrequentierte Anwendungen | P2V3 oder P3V3 | Dedizierte Ressourcen, hohe Leistung |
+| Hochfrequente Anwendungen | P2V3 oder P3V3 | Dedizierte Ressourcen, hohe Leistung |
 | Kritische Anwendungen | I1V2 (Isolated V2) | Netzwerkisolierung, dedizierte Hardware |
 
 #### Konfigurationsbeispiele
@@ -257,14 +264,14 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 #### Umgebungstypen
 
 1. **Verbrauchsbasiert**
-   - Pay-per-use-Preismodell
+   - Pay-per-Use-Preismodell
    - Geeignet für Entwicklung und variable Workloads
    - Gemeinsame Infrastruktur
 
 2. **Dediziert (Workload-Profile)**
    - Dedizierte Compute-Ressourcen
    - Vorhersehbare Leistung
-   - Besser für Produktionsworkloads
+   - Besser für Produktions-Workloads
 
 #### Konfigurationsbeispiele
 
@@ -455,7 +462,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. Reservierte Kapazität
 
-Ressourcen für 1-3 Jahre reservieren, um erhebliche Rabatte zu erhalten:
+Ressourcen für 1-3 Jahre reservieren für erhebliche Rabatte:
 
 ```bash
 # Check reservation options
@@ -672,7 +679,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 | Modell | Preisgestaltung | CPU/Speicher | Anwendungsfall |
 |--------|-----------------|--------------|----------------|
-| Verbrauchsbasiert | Pay-per-use | 0.25-2 vCPU | Entwicklung, variable Last |
+| Verbrauchsbasiert | Pay-per-Use | 0.25-2 vCPU | Entwicklung, variable Last |
 | Dediziert D4 | Reserviert | 4 vCPU, 16GB | Produktion |
 | Dediziert D8 | Reserviert | 8 vCPU, 32GB | Hohe Leistung |
 
@@ -792,7 +799,7 @@ test_configuration:
 1. **Klein anfangen und basierend auf tatsächlicher Nutzung skalieren**
 2. **Verschiedene SKUs für verschiedene Umgebungen verwenden**
 3. **Leistung und Kosten kontinuierlich überwachen**
-4. **Reservierte Kapazität für Produktionsworkloads nutzen**
+4. **Reservierte Kapazität für Produktions-Workloads nutzen**
 5. **Auto-Skalierung dort implementieren, wo es sinnvoll ist**
 6. **Leistung mit realistischen Workloads testen**
 7. **Wachstum planen, aber Überprovisionierung vermeiden**

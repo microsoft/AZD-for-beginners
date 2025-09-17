@@ -1,64 +1,68 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T17:50:28+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-17T16:12:24+00:00",
   "source_file": "workshop/README.md",
   "language_code": "de"
 }
 -->
 # AZD für KI-Entwickler Workshop
 
-**Vorher:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Nächster:** [Workshop Lab Module](../../../workshop)
+**Workshop Navigation**
+- **📚 Kursübersicht**: [AZD für Anfänger](../README.md)
+- **📖 Verwandte Kapitel**: Behandelt [Kapitel 1](../README.md#-chapter-1-foundation--quick-start), [Kapitel 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) und [Kapitel 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Praktische Übung**: [KI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Nächste Schritte**: [Workshop Lab Module](../../../workshop)
 
-Willkommen zum praktischen Workshop, in dem Sie die Azure Developer CLI (AZD) mit Fokus auf die Bereitstellung von KI-Anwendungen kennenlernen. Dieser Workshop soll Sie von den Grundlagen von AZD bis hin zur Bereitstellung produktionsreifer KI-Lösungen führen.
+Willkommen zum praktischen Workshop, in dem Sie die Azure Developer CLI (AZD) mit Fokus auf die Bereitstellung von KI-Anwendungen kennenlernen. Dieser Workshop führt Sie von den Grundlagen von AZD bis hin zur Bereitstellung produktionsreifer KI-Lösungen.
 
-## Workshop-Übersicht
+## Workshop Überblick
 
 **Dauer:** 2-3 Stunden  
-**Level:** Anfänger bis Fortgeschrittene  
+**Level:** Anfänger bis Fortgeschritten  
 **Voraussetzungen:** Grundkenntnisse in Azure, Kommandozeilen-Tools und KI-Konzepten
 
 ### Was Sie lernen werden
 
-- **AZD-Grundlagen**: Verständnis von Infrastructure as Code mit AZD  
-- 🤖 **Integration von KI-Diensten**: Bereitstellung von Azure OpenAI, AI Search und anderen KI-Diensten  
-- **Container-Bereitstellung**: Verwendung von Azure Container Apps für KI-Anwendungen  
-- **Sicherheitsbest Practices**: Implementierung von Managed Identity und sicheren Konfigurationen  
-- **Überwachung & Beobachtbarkeit**: Einrichtung von Application Insights für KI-Workloads  
-- **Produktionsmuster**: Bereitstellungsstrategien für Unternehmen  
+- **AZD Grundlagen**: Verständnis von Infrastructure as Code mit AZD
+- 🤖 **Integration von KI-Diensten**: Bereitstellung von Azure OpenAI, AI Search und anderen KI-Diensten
+- **Container-Bereitstellung**: Verwendung von Azure Container Apps für KI-Anwendungen
+- **Sicherheitsbest Practices**: Implementierung von Managed Identity und sicheren Konfigurationen
+- **Überwachung & Beobachtbarkeit**: Einrichtung von Application Insights für KI-Workloads
+- **Produktionsmuster**: Strategien für unternehmensgerechte Bereitstellungen
 
-## Workshop-Struktur
+## Workshop Struktur
 
 ### Modul 1: AZD Grundlagen (30 Minuten)
-- Installation und Konfiguration von AZD  
-- Verständnis der AZD-Projektstruktur  
-- Ihre erste AZD-Bereitstellung  
-- **Lab**: Bereitstellung einer einfachen Webanwendung  
+- Installation und Konfiguration von AZD
+- Verständnis der AZD-Projektstruktur
+- Ihre erste AZD-Bereitstellung
+- **Übung**: Bereitstellung einer einfachen Webanwendung
 
 ### Modul 2: Azure OpenAI Integration (45 Minuten)
-- Einrichtung von Azure OpenAI-Ressourcen  
-- Strategien zur Modellbereitstellung  
-- Konfiguration von API-Zugriff und Authentifizierung  
-- **Lab**: Bereitstellung einer Chat-Anwendung mit GPT-4  
+- Einrichtung von Azure OpenAI-Ressourcen
+- Strategien für die Modellbereitstellung
+- Konfiguration von API-Zugriff und Authentifizierung
+- **Übung**: Bereitstellung einer Chat-Anwendung mit GPT-4
 
 ### Modul 3: RAG-Anwendungen (45 Minuten)
-- Integration von Azure AI Search  
-- Dokumentenverarbeitung mit Azure Document Intelligence  
-- Vektor-Einbettungen und semantische Suche  
-- **Lab**: Aufbau eines Dokumenten-Q&A-Systems  
+- Integration von Azure AI Search
+- Dokumentenverarbeitung mit Azure Document Intelligence
+- Vektor-Einbettungen und semantische Suche
+- **Übung**: Aufbau eines Dokumenten-Q&A-Systems
 
 ### Modul 4: Produktionsbereitstellung (30 Minuten)
-- Konfiguration von Container Apps  
-- Skalierung und Leistungsoptimierung  
-- Überwachung und Protokollierung  
-- **Lab**: Bereitstellung in der Produktion mit Beobachtbarkeit  
+- Konfiguration von Container Apps
+- Skalierung und Leistungsoptimierung
+- Überwachung und Protokollierung
+- **Übung**: Bereitstellung in der Produktion mit Beobachtbarkeit
 
-### Modul 5: Erweiterte Muster (15 Minuten)
-- Bereitstellungen für mehrere Umgebungen  
-- CI/CD-Integration  
-- Strategien zur Kostenoptimierung  
-- **Abschluss**: Checkliste für Produktionsbereitschaft  
+### Modul 5: Fortgeschrittene Muster (15 Minuten)
+- Bereitstellungen in mehreren Umgebungen
+- CI/CD-Integration
+- Strategien zur Kostenoptimierung
+- **Abschluss**: Checkliste für Produktionsbereitschaft
 
 ## Voraussetzungen
 
@@ -84,13 +88,13 @@ sudo sh get-docker.sh
 sudo apt-get install python3.10 python3.10-venv python3-pip
 ```
 
-### Azure-Konto-Einrichtung
+### Azure Konto Einrichtung
 
-1. **Azure-Abonnement**: [Kostenlos registrieren](https://azure.microsoft.com/free/)  
-2. **Azure OpenAI-Zugriff**: [Zugriff anfordern](https://aka.ms/oai/access)  
-3. **Erforderliche Berechtigungen**:  
-   - Rolle „Contributor“ für Abonnement oder Ressourcengruppe  
-   - „User Access Administrator“ (für RBAC-Zuweisungen)  
+1. **Azure Abonnement**: [Kostenlos registrieren](https://azure.microsoft.com/free/)
+2. **Azure OpenAI Zugriff**: [Zugriff beantragen](https://aka.ms/oai/access)
+3. **Erforderliche Berechtigungen**:
+   - Rolle „Mitwirkender“ für Abonnement oder Ressourcengruppe
+   - Benutzerzugriffsadministrator (für RBAC-Zuweisungen)
 
 ### Voraussetzungen überprüfen
 
@@ -138,24 +142,24 @@ fi
 echo "Setup verification complete!"
 ```
 
-## Workshop-Materialien
+## Workshop Materialien
 
-### Lab-Übungen
+### Übungsaufgaben
 
-Jedes Modul enthält praktische Labs mit Starter-Code und Schritt-für-Schritt-Anleitungen:
+Jedes Modul enthält praktische Übungen mit Starter-Code und Schritt-für-Schritt-Anleitungen:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Ihre erste AZD-Bereitstellung  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat-Anwendung mit Azure OpenAI  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-Anwendung mit AI Search  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Produktionsbereitstellungsmuster  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Erweiterte Bereitstellungsszenarien  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Ihre erste AZD-Bereitstellung
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat-Anwendung mit Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-Anwendung mit AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Muster für Produktionsbereitstellungen
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Fortgeschrittene Bereitstellungsszenarien
 
 ### Referenzmaterialien
 
-- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Umfassende Integrationsmuster  
-- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Best Practices für die Modellbereitstellung  
-- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Unternehmensbereitschaftsmuster  
-- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Häufige Probleme und Lösungen  
+- **[AI Foundry Integrationsleitfaden](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Umfassende Integrationsmuster
+- **[Leitfaden zur Modellbereitstellung](../docs/ai-foundry/ai-model-deployment.md)** - Best Practices für Modellbereitstellungen
+- **[Produktions-KI-Praktiken](../docs/ai-foundry/production-ai-practices.md)** - Muster für Unternehmensbereitstellungen
+- **[Leitfaden zur Fehlerbehebung bei KI](../docs/troubleshooting/ai-troubleshooting.md)** - Häufige Probleme und Lösungen
 
 ### Beispielvorlagen
 
@@ -179,19 +183,19 @@ Der schnellste Weg, um mit dem Workshop zu beginnen:
 
 ### Option 2: Lokale Entwicklung
 
-1. **Klonen Sie das Workshop-Repository:**  
+1. **Klonen Sie das Workshop-Repository:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Melden Sie sich bei Azure an:**  
+2. **Melden Sie sich bei Azure an:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **Starten Sie mit Lab 1:**  
+3. **Beginnen Sie mit Übung 1:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
@@ -201,11 +205,11 @@ cat README.md  # Follow the instructions
 
 Wenn Sie an einer geführten Sitzung teilnehmen:
 
-- 🎥 **Workshop-Aufzeichnung**: [Auf Abruf verfügbar](https://aka.ms/azd-ai-workshop)  
-- 💬 **Discord-Community**: [Treten Sie für Live-Support bei](https://aka.ms/foundry/discord)  
-- **Workshop-Feedback**: [Teilen Sie Ihre Erfahrungen](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Workshop-Aufzeichnung**: [Auf Abruf verfügbar](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord Community**: [Treten Sie für Live-Support bei](https://aka.ms/foundry/discord)
+- **Workshop Feedback**: [Teilen Sie Ihre Erfahrungen](https://aka.ms/azd-workshop-feedback)
 
-## Workshop-Zeitplan
+## Workshop Zeitplan
 
 ### Selbstgesteuertes Lernen (3 Stunden)
 
@@ -246,59 +250,59 @@ Am Ende dieses Workshops werden Sie in der Lage sein:
 
 ### Während des Workshops
 
-- 🙋 **Fragen**: Nutzen Sie den Workshop-Chat oder melden Sie sich  
-- 🐛 **Probleme**: Überprüfen Sie den [Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Tipps**: Teilen Sie Entdeckungen mit anderen Teilnehmern  
+- 🙋 **Fragen**: Nutzen Sie den Workshop-Chat oder melden Sie sich
+- 🐛 **Probleme**: Sehen Sie sich den [Leitfaden zur Fehlerbehebung](../docs/troubleshooting/ai-troubleshooting.md) an
+- **Tipps**: Teilen Sie Entdeckungen mit anderen Teilnehmern
 
 ### Nach dem Workshop
 
-- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)  
-- **GitHub Issues**: [Vorlagenprobleme melden](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Feedback**: [Workshop-Bewertungsformular](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
+- **GitHub Issues**: [Vorlagenprobleme melden](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Feedback**: [Workshop-Bewertungsformular](https://aka.ms/azd-workshop-feedback)
 
 ## Nächste Schritte
 
 ### Weiterlernen
 
-1. **Erweiterte Szenarien**: Erkunden Sie [Bereitstellungen in mehreren Regionen](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **CI/CD-Integration**: Richten Sie [GitHub Actions Workflows](../docs/deployment/github-actions.md) ein  
-3. **Eigene Vorlagen**: Erstellen Sie Ihre eigenen [AZD-Vorlagen](../docs/getting-started/custom-templates.md)  
+1. **Fortgeschrittene Szenarien**: Erkunden Sie [Bereitstellungen in mehreren Regionen](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **CI/CD-Integration**: Richten Sie [GitHub Actions Workflows](../docs/deployment/github-actions.md) ein
+3. **Eigene Vorlagen**: Erstellen Sie Ihre eigenen [AZD-Vorlagen](../docs/getting-started/custom-templates.md)
 
 ### In Ihren Projekten anwenden
 
-1. **Bewertung**: Nutzen Sie unsere [Checkliste für die Bereitschaft](./production-readiness-checklist.md)  
-2. **Vorlagen**: Starten Sie mit unseren [KI-spezifischen Vorlagen](../../../workshop/templates)  
-3. **Support**: Treten Sie der [Azure AI Foundry Discord](https://aka.ms/foundry/discord) bei  
+1. **Bewertung**: Nutzen Sie unsere [Checkliste für die Bereitschaft](./production-readiness-checklist.md)
+2. **Vorlagen**: Beginnen Sie mit unseren [KI-spezifischen Vorlagen](../../../workshop/templates)
+3. **Support**: Treten Sie dem [Azure AI Foundry Discord](https://aka.ms/foundry/discord) bei
 
 ### Teilen Sie Ihren Erfolg
 
-- ⭐ **Markieren Sie das Repository**, wenn dieser Workshop Ihnen geholfen hat  
-- 🐦 **Teilen Sie in sozialen Medien** mit #AzureDeveloperCLI #AzureAI  
-- 📝 **Schreiben Sie einen Blogbeitrag** über Ihre KI-Bereitstellungsreise  
+- ⭐ **Markieren Sie das Repository**, wenn dieser Workshop Ihnen geholfen hat
+- 🐦 **Teilen Sie auf Social Media** mit #AzureDeveloperCLI #AzureAI
+- 📝 **Schreiben Sie einen Blogpost** über Ihre KI-Bereitstellungsreise
 
 ---
 
-## Workshop-Feedback
+## Workshop Feedback
 
 Ihr Feedback hilft uns, die Workshop-Erfahrung zu verbessern:
 
 | Aspekt | Bewertung (1-5) | Kommentare |
 |--------|------------------|-----------|
 | Qualität der Inhalte | ⭐⭐⭐⭐⭐ | |
-| Praktische Labs | ⭐⭐⭐⭐⭐ | |
+| Praktische Übungen | ⭐⭐⭐⭐⭐ | |
 | Dokumentation | ⭐⭐⭐⭐⭐ | |
 | Schwierigkeitsgrad | ⭐⭐⭐⭐⭐ | |
-| Gesamterfahrung | ⭐⭐⭐⭐⭐ | |
+| Gesamterlebnis | ⭐⭐⭐⭐⭐ | |
 
 **Feedback einreichen**: [Workshop-Bewertungsformular](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**Vorher:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Nächster:** Beginnen Sie mit [Lab 1: AZD Grundlagen](../../../workshop/lab-1-azd-basics)
+**Vorher:** [Leitfaden zur Fehlerbehebung bei KI](../docs/troubleshooting/ai-troubleshooting.md) | **Weiter:** Beginnen Sie mit [Übung 1: AZD Grundlagen](../../../workshop/lab-1-azd-basics)
 
 **Bereit, KI-Anwendungen mit AZD zu erstellen?**
 
-[Beginnen Sie mit Lab 1: AZD Grundlagen →](./lab-1-azd-basics/README.md)
+[Beginnen Sie mit Übung 1: AZD Grundlagen →](./lab-1-azd-basics/README.md)
 
 ---
 

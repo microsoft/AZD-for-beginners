@@ -1,27 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T17:09:05+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T16:42:52+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "pl"
 }
 -->
 # Typowe Problemy i Rozwiązania
 
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 7 - Rozwiązywanie problemów i debugowanie
+- **⬅️ Poprzedni rozdział**: [Rozdział 6: Kontrole przed wdrożeniem](../pre-deployment/preflight-checks.md)
+- **➡️ Następny**: [Przewodnik debugowania](debugging.md)
+- **🚀 Następny rozdział**: [Rozdział 8: Wzorce produkcyjne i korporacyjne](../ai-foundry/production-ai-practices.md)
+
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik rozwiązywania problemów obejmuje najczęściej spotykane trudności podczas korzystania z Azure Developer CLI. Dowiedz się, jak diagnozować, rozwiązywać i naprawiać typowe problemy związane z uwierzytelnianiem, wdrożeniem, tworzeniem infrastruktury oraz konfiguracją aplikacji. Każdy problem zawiera szczegółowe objawy, przyczyny oraz procedury krok po kroku.
+Ten kompleksowy przewodnik po rozwiązywaniu problemów obejmuje najczęściej spotykane trudności podczas korzystania z Azure Developer CLI. Dowiedz się, jak diagnozować, rozwiązywać i eliminować typowe problemy związane z uwierzytelnianiem, wdrożeniem, tworzeniem infrastruktury oraz konfiguracją aplikacji. Każdy problem zawiera szczegółowe objawy, przyczyny oraz krok po kroku procedury rozwiązania.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika będziesz:
-- Mistrzowsko diagnozować problemy z Azure Developer CLI
-- Rozumieć typowe problemy z uwierzytelnianiem i uprawnieniami oraz ich rozwiązania
-- Rozwiązywać błędy wdrożeniowe, problemy z tworzeniem infrastruktury i konfiguracją
-- Wdrażać proaktywne strategie monitorowania i debugowania
-- Stosować systematyczne metody rozwiązywania złożonych problemów
-- Konfigurować odpowiednie logowanie i monitorowanie, aby zapobiegać przyszłym problemom
+- Mistrzem technik diagnostycznych dla problemów z Azure Developer CLI
+- Rozumiał typowe problemy z uwierzytelnianiem i uprawnieniami oraz ich rozwiązania
+- Rozwiązywał błędy wdrożeniowe, problemy z tworzeniem infrastruktury i konfiguracją
+- Wdrażał proaktywne strategie monitorowania i debugowania
+- Stosował systematyczne metody rozwiązywania złożonych problemów
+- Konfigurował odpowiednie logowanie i monitorowanie, aby zapobiegać przyszłym problemom
 
 ## Efekty nauki
 
@@ -33,7 +40,7 @@ Po ukończeniu będziesz w stanie:
 - Wdrażać monitorowanie i alerty, aby proaktywnie identyfikować potencjalne problemy
 - Stosować najlepsze praktyki w zakresie logowania, debugowania i rozwiązywania problemów
 
-## Szybka Diagnostyka
+## Szybka diagnostyka
 
 Zanim przejdziesz do konkretnych problemów, uruchom te polecenia, aby zebrać informacje diagnostyczne:
 
@@ -55,12 +62,12 @@ export AZD_DEBUG=true
 azd <command> --debug
 ```
 
-## Problemy z Uwierzytelnianiem
+## Problemy z uwierzytelnianiem
 
 ### Problem: "Nie udało się uzyskać tokenu dostępu"
 **Objawy:**
 - `azd up` kończy się błędami uwierzytelniania
-- Polecenia zwracają "nieautoryzowane" lub "odmowa dostępu"
+- Polecenia zwracają "nieautoryzowany" lub "odmowa dostępu"
 
 **Rozwiązania:**
 ```bash
@@ -110,7 +117,7 @@ azd config set auth.tenantId "your-tenant-id"
 az account clear
 ```
 
-## 🏗️ Błędy Tworzenia Infrastruktury
+## 🏗️ Błędy w tworzeniu infrastruktury
 
 ### Problem: Konflikty nazw zasobów
 **Objawy:**
@@ -133,7 +140,7 @@ azd down --force --purge
 
 ### Problem: Lokalizacja/region niedostępny
 **Objawy:**
-- "Lokalizacja 'xyz' jest niedostępna dla typu zasobu"
+- "Lokalizacja 'xyz' nie jest dostępna dla typu zasobu"
 - Niektóre SKU niedostępne w wybranym regionie
 
 **Rozwiązania:**
@@ -150,7 +157,7 @@ azd env set AZURE_LOCATION eastus2
 # Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problem: Przekroczone limity
+### Problem: Przekroczone limity kwot
 **Objawy:**
 - "Przekroczono limit dla typu zasobu"
 - "Osiągnięto maksymalną liczbę zasobów"
@@ -195,11 +202,11 @@ cat infra/main.parameters.json | jq '.'
 azd provision --preview
 ```
 
-## 🚀 Problemy z Wdrożeniem
+## 🚀 Niepowodzenia wdrożenia
 
 ### Problem: Niepowodzenia kompilacji
 **Objawy:**
-- Aplikacja nie udaje się skompilować podczas wdrożenia
+- Aplikacja nie udaje się zbudować podczas wdrożenia
 - Błędy instalacji pakietów
 
 **Rozwiązania:**
@@ -268,7 +275,7 @@ azd env get-values | grep DATABASE
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
-## 🔧 Problemy z Konfiguracją
+## 🔧 Problemy z konfiguracją
 
 ### Problem: Zmienne środowiskowe nie działają
 **Objawy:**
@@ -329,7 +336,7 @@ app.use(cors({
 azd show
 ```
 
-## 🌍 Problemy z Zarządzaniem Środowiskiem
+## 🌍 Problemy z zarządzaniem środowiskiem
 
 ### Problem: Problemy z przełączaniem środowisk
 **Objawy:**
@@ -371,7 +378,7 @@ azd env set DATABASE_URL "your-value"
 # Manually update .azure/production/config.json with resource IDs
 ```
 
-## 🔍 Problemy z Wydajnością
+## 🔍 Problemy z wydajnością
 
 ### Problem: Wolne czasy wdrożenia
 **Objawy:**
@@ -419,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Narzędzia i Polecenia do Rozwiązywania Problemów
+## 🛠️ Narzędzia i polecenia do rozwiązywania problemów
 
 ### Polecenia debugowania
 ```bash
@@ -462,7 +469,7 @@ az webapp show --name myapp --resource-group myrg --query state
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Uzyskiwanie Dodatkowej Pomocy
+## 🆘 Uzyskiwanie dodatkowej pomocy
 
 ### Kiedy eskalować
 - Problemy z uwierzytelnianiem utrzymują się po wypróbowaniu wszystkich rozwiązań
@@ -517,7 +524,7 @@ azd logs --since 1h >> debug-logs/recent-logs.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 Zapobieganie Problemom
+## 📊 Zapobieganie problemom
 
 ### Lista kontrolna przed wdrożeniem
 ```bash
@@ -566,11 +573,11 @@ az consumption usage list --billing-period-name 202401
 az security assessment list --resource-group myrg
 ```
 
-## Powiązane Zasoby
+## Powiązane zasoby
 
-- [Przewodnik Debugowania](debugging.md) - Zaawansowane techniki debugowania
-- [Tworzenie Zasobów](../deployment/provisioning.md) - Rozwiązywanie problemów z infrastrukturą
-- [Planowanie Pojemności](../pre-deployment/capacity-planning.md) - Wskazówki dotyczące planowania zasobów
+- [Przewodnik debugowania](debugging.md) - Zaawansowane techniki debugowania
+- [Tworzenie zasobów](../deployment/provisioning.md) - Rozwiązywanie problemów z infrastrukturą
+- [Planowanie pojemności](../pre-deployment/capacity-planning.md) - Wytyczne dotyczące planowania zasobów
 - [Wybór SKU](../pre-deployment/sku-selection.md) - Rekomendacje dotyczące poziomów usług
 
 ---
@@ -580,10 +587,10 @@ az security assessment list --resource-group myrg
 ---
 
 **Nawigacja**
-- **Poprzednia Lekcja**: [Tworzenie Zasobów](../deployment/provisioning.md)
-- **Następna Lekcja**: [Przewodnik Debugowania](debugging.md)
+- **Poprzednia lekcja**: [Tworzenie zasobów](../deployment/provisioning.md)
+- **Następna lekcja**: [Przewodnik debugowania](debugging.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

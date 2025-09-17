@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T18:01:56+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T16:50:43+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "pl"
 }
 -->
 # Skrócona lista poleceń - Kluczowe komendy AZD
 
+**Szybki dostęp do wszystkich rozdziałów**
+- **📚 Strona kursu**: [AZD dla początkujących](../README.md)
+- **📖 Szybki start**: [Rozdział 1: Podstawy i szybki start](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Komendy AI**: [Rozdział 2: Rozwój z AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Zaawansowane**: [Rozdział 4: Infrastruktura jako kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Wprowadzenie
 
-Ta kompleksowa lista poleceń zapewnia szybki dostęp do najczęściej używanych komend Azure Developer CLI, uporządkowanych według kategorii z praktycznymi przykładami. Idealna do szybkiego sprawdzania podczas rozwoju, rozwiązywania problemów i codziennej pracy z projektami azd.
+Ta kompleksowa lista poleceń zawiera szybki dostęp do najczęściej używanych komend Azure Developer CLI, uporządkowanych według kategorii z praktycznymi przykładami. Idealna do szybkiego sprawdzania podczas rozwoju, rozwiązywania problemów i codziennej pracy z projektami azd.
 
 ## Cele nauki
 
@@ -25,12 +31,12 @@ Korzystając z tej listy poleceń, będziesz:
 
 ## Rezultaty nauki
 
-Regularnie korzystając z tej listy poleceń, będziesz w stanie:
+Regularne korzystanie z tej listy poleceń pozwoli Ci:
 - Pewnie wykonywać komendy azd bez konieczności przeglądania pełnej dokumentacji
-- Szybko rozwiązywać typowe problemy, używając odpowiednich komend diagnostycznych
+- Szybko rozwiązywać typowe problemy za pomocą odpowiednich komend diagnostycznych
 - Efektywnie zarządzać wieloma środowiskami i scenariuszami wdrożenia
 - Stosować zaawansowane funkcje azd i opcje konfiguracji w razie potrzeby
-- Rozwiązywać problemy z wdrożeniem, korzystając z systematycznych sekwencji komend
+- Rozwiązywać problemy z wdrożeniem za pomocą systematycznych sekwencji komend
 - Optymalizować przepływy pracy dzięki skutecznemu wykorzystaniu skrótów i opcji azd
 
 ## Komendy na start
@@ -281,7 +287,7 @@ azd service restart --service api
 
 ## 🎯 Szybkie przepływy pracy
 
-### Przepływ pracy rozwojowej
+### Przepływ pracy dla rozwoju
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -298,7 +304,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Przepływ pracy w wielu środowiskach
+### Przepływ pracy dla wielu środowisk
 ```bash
 # Set up environments
 azd env new dev
@@ -338,7 +344,7 @@ azd show --output json
 
 ## 🔍 Komendy debugowania
 
-### Informacje debugowe
+### Informacje debugowania
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -492,7 +498,7 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Wskazówki
+## 💡 Porady ekspertów
 
 ### Alias dla szybszego przepływu pracy
 ```bash
@@ -552,7 +558,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Wskazówka**: Dodaj tę listę poleceń do zakładek i używaj `Ctrl+F`, aby szybko znaleźć potrzebne komendy!
+**Porada**: Dodaj tę listę poleceń do zakładek i używaj `Ctrl+F`, aby szybko znaleźć potrzebne komendy!
 
 ---
 
@@ -563,4 +569,4 @@ azd template show <template-name> --docs
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

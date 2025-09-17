@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T17:42:05+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T16:40:04+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "pl"
 }
 -->
 # Wdrażanie modeli AI za pomocą Azure Developer CLI
 
-**Poprzednie:** [Integracja z Azure AI Foundry](azure-ai-foundry-integration.md) | **Następne:** [Laboratorium AI Workshop](ai-workshop-lab.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 2 - Rozwój zorientowany na AI
+- **⬅️ Poprzedni**: [Integracja z Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Następny**: [Laboratorium warsztatowe AI](ai-workshop-lab.md)
+- **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
 
 Ten przewodnik zawiera szczegółowe instrukcje dotyczące wdrażania modeli AI za pomocą szablonów AZD, obejmujące wszystko od wyboru modelu po wzorce wdrożenia produkcyjnego.
 
@@ -61,7 +66,7 @@ services:
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kosztowo efektywny dla większości obciążeń |
 | GPT-4 | Złożone rozumowanie | 20-100 TPM | Wyższe koszty, używany do funkcji premium |
 | Text-embedding-ada-002 | Wyszukiwanie, RAG | 30-120 TPM | Niezbędny dla wyszukiwania semantycznego |
-| Whisper | Mowa na tekst | 10-50 TPM | Obciążenia związane z przetwarzaniem audio |
+| Whisper | Przetwarzanie mowy na tekst | 10-50 TPM | Obciążenia związane z przetwarzaniem audio |
 
 ## Konfiguracja AZD dla modeli AI
 
@@ -128,7 +133,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Zmienne środowiskowe
 
-Skonfiguruj środowisko aplikacji:
+Skonfiguruj środowisko swojej aplikacji:
 
 ```bash
 # .env configuration
@@ -211,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kontrola wersji
 
-Śledź wersje modeli w konfiguracji AZD:
+Śledź wersje modeli w swojej konfiguracji AZD:
 
 ```json
 {
@@ -231,7 +236,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Aktualizacje modeli
 
-Użyj hooków AZD do aktualizacji modeli:
+Używaj hooków AZD do aktualizacji modeli:
 
 ```bash
 #!/bin/bash
@@ -446,7 +451,7 @@ class AITelemetry:
 
 ### Kontrole zdrowia
 
-Wprowadź monitorowanie stanu usług AI:
+Wprowadź monitorowanie zdrowia usług AI:
 
 ```python
 # Health check endpoints
@@ -478,8 +483,8 @@ async def check_ai_models():
 ## Kolejne kroki
 
 1. **Przejrzyj [Przewodnik integracji z Azure AI Foundry](azure-ai-foundry-integration.md)**, aby poznać wzorce integracji usług
-2. **Ukończ [Laboratorium AI Workshop](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie
-3. **Wdroż [Praktyki AI w produkcji](production-ai-practices.md)** dla wdrożeń korporacyjnych
+2. **Ukończ [Laboratorium warsztatowe AI](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie
+3. **Wprowadź [Praktyki AI w produkcji](production-ai-practices.md)** dla wdrożeń korporacyjnych
 4. **Zapoznaj się z [Przewodnikiem rozwiązywania problemów AI](../troubleshooting/ai-troubleshooting.md)**, aby poznać typowe problemy
 
 ## Zasoby
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**Poprzednie:** [Integracja z Azure AI Foundry](azure-ai-foundry-integration.md) | **Następne:** [Laboratorium AI Workshop](ai-workshop-lab.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 2 - Rozwój zorientowany na AI
+- **⬅️ Poprzedni**: [Integracja z Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Następny**: [Laboratorium warsztatowe AI](ai-workshop-lab.md)
+- **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

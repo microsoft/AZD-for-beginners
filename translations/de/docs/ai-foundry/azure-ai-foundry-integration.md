@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:33:32+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T16:07:05+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "de"
 }
 -->
 # Azure AI Foundry-Integration mit AZD
 
-**Vorher:** [Erstes Projekt](../getting-started/first-project.md) | **Nächster Schritt:** [AI-Modellbereitstellung](ai-model-deployment.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - AI-First-Entwicklung
+- **⬅️ Vorheriges Kapitel**: [Kapitel 1: Ihr erstes Projekt](../getting-started/first-project.md)
+- **➡️ Weiter**: [AI-Modellbereitstellung](ai-model-deployment.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ## Überblick
 
@@ -28,11 +33,11 @@ Azure AI Foundry ist Microsofts einheitliche Plattform für KI-Entwicklung, die 
 ## AZD + Azure AI Foundry: Gemeinsam besser
 
 | Funktion | Azure AI Foundry | Vorteil der AZD-Integration |
-|----------|------------------|----------------------------|
-| **Modellbereitstellung** | Manuelle Bereitstellung über das Portal | Automatisierte, wiederholbare Bereitstellungen |
+|----------|------------------|-----------------------------|
+| **Modellbereitstellung** | Manuelle Bereitstellung im Portal | Automatisierte, wiederholbare Bereitstellungen |
 | **Infrastruktur** | Klickbasierte Bereitstellung | Infrastruktur als Code (Bicep) |
 | **Umgebungsmanagement** | Fokus auf eine Umgebung | Mehrere Umgebungen (Entwicklung/Staging/Produktion) |
-| **CI/CD-Integration** | Eingeschränkt | Native Unterstützung für GitHub Actions |
+| **CI/CD-Integration** | Begrenzte Möglichkeiten | Native Unterstützung für GitHub Actions |
 | **Kostenmanagement** | Basisüberwachung | Umgebungsspezifische Kostenoptimierung |
 
 ## Voraussetzungen
@@ -40,7 +45,7 @@ Azure AI Foundry ist Microsofts einheitliche Plattform für KI-Entwicklung, die 
 - Azure-Abonnement mit entsprechenden Berechtigungen
 - Installierte Azure Developer CLI
 - Zugriff auf Azure OpenAI-Dienste
-- Grundlegende Kenntnisse über Azure AI Foundry
+- Grundkenntnisse in Azure AI Foundry
 
 ## Kernintegrationsmuster
 
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Auto-Skalierungskonfiguration
+### Konfiguration von Auto-Scaling
 
 ```bicep
 // Container App with auto-scaling
@@ -521,12 +526,12 @@ azd up
 
 ## Nächste Schritte
 
-1. **Beispiele ausprobieren**: Beginnen Sie mit einer vorgefertigten Vorlage, die zu Ihrem Anwendungsfall passt
-2. **Anpassen an Ihre Bedürfnisse**: Ändern Sie die Infrastruktur und den Anwendungscode
-3. **Überwachung hinzufügen**: Implementieren Sie umfassende Beobachtbarkeit
-4. **Kosten optimieren**: Passen Sie Konfigurationen an Ihr Budget an
-5. **Bereitstellung sichern**: Implementieren Sie Sicherheitsmuster für Unternehmen
-6. **Skalierung auf Produktion**: Fügen Sie Multi-Region- und Hochverfügbarkeitsfunktionen hinzu
+1. **Probieren Sie die Beispiele aus**: Beginnen Sie mit einer vorgefertigten Vorlage, die zu Ihrem Anwendungsfall passt
+2. **Passen Sie an Ihre Bedürfnisse an**: Ändern Sie die Infrastruktur und den Anwendungscode
+3. **Fügen Sie Überwachung hinzu**: Implementieren Sie umfassende Beobachtbarkeit
+4. **Optimieren Sie die Kosten**: Passen Sie Konfigurationen an Ihr Budget an
+5. **Sichern Sie Ihre Bereitstellung**: Implementieren Sie Sicherheitsmuster für Unternehmen
+6. **Skalieren Sie auf Produktion**: Fügen Sie Multi-Region- und Hochverfügbarkeitsfunktionen hinzu
 
 ## Community und Support
 
@@ -536,9 +541,14 @@ azd up
 
 ---
 
-**Vorher:** [Erstes Projekt](../getting-started/first-project.md) | **Nächster Schritt:** [AI-Modellbereitstellung](ai-model-deployment.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - AI-First-Entwicklung
+- **⬅️ Vorheriges Kapitel**: [Kapitel 1: Ihr erstes Projekt](../getting-started/first-project.md)
+- **➡️ Weiter**: [AI-Modellbereitstellung](ai-model-deployment.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
-**Brauchen Sie Hilfe?** Treten Sie unseren Community-Diskussionen bei oder eröffnen Sie ein Problem im Repository. Die Azure AI + AZD-Community unterstützt Sie dabei, erfolgreich zu sein!
+**Brauchen Sie Hilfe?** Treten Sie unseren Community-Diskussionen bei oder eröffnen Sie ein Problem im Repository. Die Azure AI + AZD-Community unterstützt Sie gerne!
 
 ---
 

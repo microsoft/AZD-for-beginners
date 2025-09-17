@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T17:45:41+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T16:10:57+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "de"
 }
 -->
-# AI-Fehlerbehebungshandbuch für Azure Developer CLI
+# KI-spezifischer Leitfaden zur Fehlerbehebung
 
-**Vorher:** [Produktionspraktiken für KI](../ai-foundry/production-ai-practices.md) | **Nächste:** [Erste Schritte mit AZD](../getting-started/README.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 7 - Fehlerbehebung & Debugging
+- **⬅️ Vorheriges Kapitel**: [Debugging-Leitfaden](debugging.md)
+- **➡️ Nächstes Kapitel**: [Kapitel 8: Produktions- & Unternehmensmuster](../ai-foundry/production-ai-practices.md)
+- **🤖 Verwandt**: [Kapitel 2: KI-First-Entwicklung](../ai-foundry/azure-ai-foundry-integration.md)
 
-Dieses umfassende Fehlerbehebungshandbuch behandelt häufige Probleme bei der Bereitstellung von KI-Lösungen mit AZD und bietet Lösungen sowie Debugging-Techniken, die speziell auf Azure AI-Dienste zugeschnitten sind.
+**Vorheriges Kapitel:** [Produktions-KI-Praktiken](../ai-foundry/production-ai-practices.md) | **Nächstes Kapitel:** [Erste Schritte mit AZD](../getting-started/README.md)
+
+Dieser umfassende Leitfaden zur Fehlerbehebung behandelt häufige Probleme bei der Bereitstellung von KI-Lösungen mit AZD und bietet Lösungen sowie Debugging-Techniken, die speziell für Azure KI-Dienste entwickelt wurden.
 
 ## Inhaltsverzeichnis
 
@@ -60,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **Alternative Regionen verwenden:**
+3. **Alternative Regionen nutzen:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -192,7 +199,7 @@ Error: Cannot create index, insufficient permissions
 
 **Lösungen:**
 
-1. **Schlüssel des Suchdienstes überprüfen:**
+1. **Suchdienst-Schlüssel überprüfen:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -241,7 +248,7 @@ Error: Failed to build container image
 
 **Lösungen:**
 
-1. **Syntax der Dockerfile prüfen:**
+1. **Dockerfile-Syntax überprüfen:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -275,7 +282,7 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **Health Check hinzufügen:**
+3. **Health-Check hinzufügen:**
 ```python
 # main.py - Add health check endpoint
 from fastapi import FastAPI
@@ -438,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **RBAC anstelle von Zugriffsrichtlinien verwenden:**
+2. **RBAC anstelle von Zugriffspolicies verwenden:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -534,7 +541,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **Lösungen:**
 
-1. **Anforderungszeitlimits implementieren:**
+1. **Anfrage-Timeouts implementieren:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problem: Speicherfehler
+### Problem: Speicherfehler (Out of Memory)
 
 **Symptome:**
 ```
@@ -661,7 +668,7 @@ class MemoryOptimizedAI:
 
 **Symptome:**
 - Azure-Rechnung höher als erwartet
-- Token-Nutzung übersteigt Schätzungen
+- Token-Nutzung übertrifft Schätzungen
 - Budgetwarnungen ausgelöst
 
 **Lösungen:**
@@ -837,16 +844,16 @@ def monitor_performance(func):
 
 | Fehlercode | Beschreibung | Lösung |
 |------------|-------------|----------|
-| 401 | Nicht autorisiert | API-Schlüssel und Konfiguration der verwalteten Identität prüfen |
+| 401 | Nicht autorisiert | API-Schlüssel und Konfiguration der verwalteten Identität überprüfen |
 | 403 | Verboten | RBAC-Rollen-Zuweisungen überprüfen |
 | 429 | Ratenbegrenzung | Retry-Logik mit exponentiellem Backoff implementieren |
-| 500 | Interner Serverfehler | Status der Modellbereitstellung und Logs prüfen |
-| 503 | Dienst nicht verfügbar | Dienststatus und regionale Verfügbarkeit überprüfen |
+| 500 | Interner Serverfehler | Status der Modellbereitstellung und Logs überprüfen |
+| 503 | Dienst nicht verfügbar | Dienstzustand und regionale Verfügbarkeit prüfen |
 
 ## Nächste Schritte
 
-1. **Überprüfen Sie [Leitfaden zur Modellbereitstellung](ai-model-deployment.md)** für Best Practices zur Bereitstellung
-2. **Abschließen [Produktionspraktiken für KI](production-ai-practices.md)** für unternehmensgerechte Lösungen
+1. **Überprüfen Sie den [Leitfaden zur Modellbereitstellung](ai-model-deployment.md)** für Best Practices zur Bereitstellung
+2. **Abschließen der [Produktions-KI-Praktiken](production-ai-practices.md)** für unternehmensgerechte Lösungen
 3. **Treten Sie dem [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** für Community-Support bei
 4. **Probleme melden** im [AZD GitHub-Repository](https://github.com/Azure/azure-dev) für AZD-spezifische Probleme
 
@@ -858,7 +865,12 @@ def monitor_performance(func):
 
 ---
 
-**Vorher:** [Produktionspraktiken für KI](../ai-foundry/production-ai-practices.md) | **Nächste:** [Workshop](../../workshop/README.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 7 - Fehlerbehebung & Debugging
+- **⬅️ Vorheriges Kapitel**: [Debugging-Leitfaden](debugging.md)
+- **➡️ Nächstes Kapitel**: [Kapitel 8: Produktions- & Unternehmensmuster](../ai-foundry/production-ai-practices.md)
+- **🤖 Verwandt**: [Kapitel 2: KI-First-Entwicklung](../ai-foundry/azure-ai-foundry-integration.md)
 - [Fehlerbehebung bei Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---

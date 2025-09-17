@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T17:46:25+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T16:43:49+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "pl"
 }
 -->
-# Przewodnik rozwiązywania problemów z AI dla Azure Developer CLI
+# Przewodnik Rozwiązywania Problemów Specyficznych dla AI
+
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 7 - Rozwiązywanie problemów i debugowanie
+- **⬅️ Poprzedni**: [Przewodnik debugowania](debugging.md)
+- **➡️ Następny rozdział**: [Rozdział 8: Wzorce produkcyjne i korporacyjne](../ai-foundry/production-ai-practices.md)
+- **🤖 Powiązane**: [Rozdział 2: Rozwój z AI na pierwszym miejscu](../ai-foundry/azure-ai-foundry-integration.md)
 
 **Poprzedni:** [Praktyki AI w produkcji](../ai-foundry/production-ai-practices.md) | **Następny:** [Pierwsze kroki z AZD](../getting-started/README.md)
 
@@ -60,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **Użyj alternatywnych regionów:**
+3. **Skorzystaj z alternatywnych regionów:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -81,7 +88,7 @@ Error: Deployment failed due to insufficient quota
 
 **Rozwiązania:**
 
-1. **Sprawdź bieżący limit:**
+1. **Sprawdź obecny limit:**
 ```bash
 # Check quota usage
 az cognitiveservices usage list \
@@ -685,7 +692,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **Skonfiguruj alerty kosztowe:**
+2. **Ustaw alerty kosztowe:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -749,7 +756,7 @@ azd env get-values
 
 ### Debugowanie aplikacji
 
-1. **Strukturalne logowanie:**
+1. **Logowanie strukturalne:**
 ```python
 import logging
 import json
@@ -846,9 +853,9 @@ def monitor_performance(func):
 ## Kolejne kroki
 
 1. **Przejrzyj [Przewodnik wdrażania modeli AI](ai-model-deployment.md)**, aby poznać najlepsze praktyki wdrażania
-2. **Ukończ [Praktyki AI w produkcji](production-ai-practices.md)**, aby uzyskać rozwiązania gotowe do wdrożenia w przedsiębiorstwie
+2. **Ukończ [Praktyki AI w produkcji](production-ai-practices.md)**, aby uzyskać rozwiązania gotowe dla przedsiębiorstw
 3. **Dołącz do [Discord Azure AI Foundry](https://aka.ms/foundry/discord)**, aby uzyskać wsparcie społeczności
-4. **Zgłaszaj problemy** do [repozytorium AZD na GitHub](https://github.com/Azure/azure-dev), aby rozwiązać specyficzne problemy z AZD
+4. **Zgłaszaj problemy** do [repozytorium AZD na GitHub](https://github.com/Azure/azure-dev) w przypadku problemów specyficznych dla AZD
 
 ## Zasoby
 
@@ -858,10 +865,15 @@ def monitor_performance(func):
 
 ---
 
-**Poprzedni:** [Praktyki AI w produkcji](../ai-foundry/production-ai-practices.md) | **Następny:** [Warsztat](../../workshop/README.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 7 - Rozwiązywanie problemów i debugowanie
+- **⬅️ Poprzedni**: [Przewodnik debugowania](debugging.md)
+- **➡️ Następny rozdział**: [Rozdział 8: Wzorce produkcyjne i korporacyjne](../ai-foundry/production-ai-practices.md)
+- **🤖 Powiązane**: [Rozwój z AI na pierwszym miejscu](../ai-foundry/azure-ai-foundry-integration.md)
 - [Rozwiązywanie problemów z Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

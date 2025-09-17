@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T17:04:08+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T16:09:57+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "de"
 }
 -->
-# Bereitstellung von Ressourcen - Infrastruktur als Code mit AZD
+# Bereitstellung von Azure-Ressourcen mit AZD
+
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 4 - Infrastruktur als Code & Bereitstellung
+- **⬅️ Vorheriges Kapitel**: [Bereitstellungsanleitung](deployment-guide.md)
+- **➡️ Nächstes Kapitel**: [Kapitel 5: Multi-Agent-AI-Lösungen](../../examples/retail-scenario.md)
+- **🔧 Verwandtes Kapitel**: [Kapitel 6: Validierung vor der Bereitstellung](../pre-deployment/capacity-planning.md)
 
 ## Einführung
 
@@ -20,8 +27,8 @@ Nach Abschluss dieses Leitfadens werden Sie:
 - Verschiedene IaC-Anbieter verstehen, die von Azure Developer CLI unterstützt werden
 - Bicep-Vorlagen für gängige Anwendungsarchitekturen entwerfen und implementieren
 - Ressourcenparameter, Variablen und umgebungsspezifische Einstellungen konfigurieren
-- Fortgeschrittene Infrastrukturmuster wie Netzwerk und Sicherheit umsetzen
-- Den Lebenszyklus von Ressourcen, Updates und die Auflösung von Abhängigkeiten verwalten
+- Fortgeschrittene Infrastrukturmuster einschließlich Netzwerk und Sicherheit umsetzen
+- Den Lebenszyklus von Ressourcen, Updates und Abhängigkeitsauflösungen verwalten
 
 ## Lernergebnisse
 
@@ -60,7 +67,7 @@ Azure Account
 
 ## Bicep-Infrastrukturvorlagen
 
-### Grundlegender Aufbau einer Bicep-Vorlage
+### Grundstruktur einer Bicep-Vorlage
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -653,7 +660,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Fortgeschrittene Bereitstellungsmuster
 
-### Bereitstellung in mehreren Regionen
+### Multi-Region-Bereitstellung
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -826,7 +833,7 @@ var commonTags = {
 }
 ```
 
-### 3. Parametervalidierung
+### 3. Validierung von Parametern
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -842,7 +849,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organisation der Ausgaben
+### 4. Organisation von Ausgaben
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -859,10 +866,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Nächste Schritte
 
-- [Planung vor der Bereitstellung](../pre-deployment/capacity-planning.md) - Verfügbarkeit von Ressourcen validieren
+- [Planung vor der Bereitstellung](../pre-deployment/capacity-planning.md) - Ressourcenverfügbarkeit validieren
 - [Häufige Probleme](../troubleshooting/common-issues.md) - Infrastrukturprobleme beheben
-- [Leitfaden zur Fehlerbehebung](../troubleshooting/debugging.md) - Probleme bei der Bereitstellung debuggen
-- [SKU-Auswahl](../pre-deployment/sku-selection.md) - Geeignete Serviceebenen auswählen
+- [Debugging-Leitfaden](../troubleshooting/debugging.md) - Bereitstellungsprobleme debuggen
+- [SKU-Auswahl](../pre-deployment/sku-selection.md) - Geeignete Servicestufen auswählen
 
 ## Zusätzliche Ressourcen
 
@@ -874,7 +881,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigation**
-- **Vorherige Lektion**: [Bereitstellungsleitfaden](deployment-guide.md)
+- **Vorherige Lektion**: [Bereitstellungsanleitung](deployment-guide.md)
 - **Nächste Lektion**: [Kapazitätsplanung](../pre-deployment/capacity-planning.md)
 
 ---

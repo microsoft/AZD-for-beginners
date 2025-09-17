@@ -1,33 +1,38 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T17:15:33+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T16:40:53+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "pl"
 }
 -->
 # Przewodnik instalacji i konfiguracji
 
-**Poprzedni:** [Główna dokumentacja](../../README.md) | **Następny:** [Podstawy AZD](azd-basics.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 1 - Podstawy i szybki start
+- **⬅️ Poprzedni**: [Podstawy AZD](azd-basics.md)
+- **➡️ Następny**: [Twój pierwszy projekt](first-project.md)
+- **🚀 Następny rozdział**: [Rozdział 2: Rozwój oparty na AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik przeprowadzi Cię przez proces instalacji i konfiguracji Azure Developer CLI (azd) na Twoim systemie. Dowiesz się o różnych metodach instalacji dla różnych systemów operacyjnych, konfiguracji uwierzytelniania oraz wstępnej konfiguracji, aby przygotować środowisko deweloperskie do wdrożeń w Azure.
+Ten kompleksowy przewodnik przeprowadzi Cię przez proces instalacji i konfiguracji Azure Developer CLI (azd) na Twoim systemie. Dowiesz się o różnych metodach instalacji dla różnych systemów operacyjnych, konfiguracji uwierzytelniania oraz wstępnej konfiguracji środowiska deweloperskiego do wdrożeń w Azure.
 
 ## Cele nauki
 
 Po zakończeniu tej lekcji będziesz:
-- Pomyślnie instalować Azure Developer CLI na swoim systemie operacyjnym
-- Konfigurować uwierzytelnianie z Azure za pomocą różnych metod
-- Przygotowywać swoje środowisko deweloperskie z niezbędnymi wymaganiami
-- Rozumieć różne opcje instalacji i wiedzieć, kiedy je stosować
+- Pomyślnie zainstalować Azure Developer CLI na swoim systemie operacyjnym
+- Skonfigurować uwierzytelnianie z Azure za pomocą różnych metod
+- Przygotować swoje środowisko deweloperskie z wymaganymi zależnościami
+- Zrozumieć różne opcje instalacji i kiedy z nich korzystać
 - Rozwiązywać typowe problemy związane z instalacją i konfiguracją
 
 ## Efekty nauki
 
 Po ukończeniu tej lekcji będziesz w stanie:
-- Zainstalować azd za pomocą odpowiedniej metody dla swojej platformy
+- Zainstalować azd, korzystając z odpowiedniej metody dla Twojej platformy
 - Uwierzytelnić się w Azure za pomocą `azd auth login`
 - Zweryfikować instalację i przetestować podstawowe polecenia azd
 - Skonfigurować swoje środowisko deweloperskie dla optymalnego korzystania z azd
@@ -65,7 +70,7 @@ choco install azd
 
 #### Opcja 4: Instalacja ręczna
 1. Pobierz najnowszą wersję z [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Wypakuj do `C:\Program Files\azd\`
+2. Rozpakuj do `C:\Program Files\azd\`
 3. Dodaj do zmiennej środowiskowej PATH
 
 ### macOS
@@ -116,7 +121,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd jest wstępnie zainstalowany w GitHub Codespaces. Wystarczy utworzyć przestrzeń roboczą i od razu zacząć korzystać z azd.
+azd jest wstępnie zainstalowany w GitHub Codespaces. Wystarczy utworzyć przestrzeń kodu i od razu zacząć korzystać z azd.
 
 ### Docker
 
@@ -235,7 +240,7 @@ Utwórz plik `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Zainstaluj wtyczkę Azure
-2. Skonfiguruj poświadczenia Azure
+2. Skonfiguruj dane uwierzytelniające Azure
 3. Korzystaj z zintegrowanego terminala do poleceń azd
 
 ## 🐛 Rozwiązywanie problemów z instalacją
@@ -323,8 +328,8 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Kolejne kroki
 
-1. **Zakończ uwierzytelnianie**: Upewnij się, że masz dostęp do swojej subskrypcji Azure
-2. **Wypróbuj pierwsze wdrożenie**: Skorzystaj z [Przewodnika pierwszego projektu](first-project.md)
+1. **Ukończ uwierzytelnianie**: Upewnij się, że masz dostęp do swojej subskrypcji Azure
+2. **Wypróbuj pierwsze wdrożenie**: Postępuj zgodnie z [Przewodnikiem pierwszego projektu](first-project.md)
 3. **Przeglądaj szablony**: Przeglądaj dostępne szablony za pomocą `azd template list`
 4. **Skonfiguruj swoje IDE**: Przygotuj swoje środowisko deweloperskie
 
@@ -338,9 +343,14 @@ Jeśli napotkasz problemy:
 
 ---
 
-**Poprzedni:** [Główna dokumentacja](../../README.md) | **Następny:** [Podstawy AZD](azd-basics.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 1 - Podstawy i szybki start
+- **⬅️ Poprzedni**: [Podstawy AZD](azd-basics.md) 
+- **➡️ Następny**: [Twój pierwszy projekt](first-project.md)
+- **🚀 Następny rozdział**: [Rozdział 2: Rozwój oparty na AI](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Instalacja zakończona!** Przejdź do [Twojego pierwszego projektu](first-project.md), aby rozpocząć pracę z azd.
+**✅ Instalacja zakończona!** Przejdź do [Twojego pierwszego projektu](first-project.md), aby rozpocząć pracę z azd.
 
 ---
 

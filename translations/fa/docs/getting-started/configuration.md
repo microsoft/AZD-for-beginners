@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T17:11:25+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T16:23:47+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "fa"
 }
 -->
 # راهنمای پیکربندی
 
-**قبلی:** [AZD Basics](azd-basics.md) | **بعدی:** [First Project](first-project.md)
+**فهرست فصل‌ها:**
+- **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل فعلی**: فصل ۳ - پیکربندی و احراز هویت
+- **⬅️ قبلی**: [اولین پروژه شما](first-project.md)
+- **➡️ بعدی**: [راهنمای استقرار](../deployment/deployment-guide.md)
+- **🚀 فصل بعدی**: [فصل ۴: زیرساخت به عنوان کد](../deployment/deployment-guide.md)
 
 ## مقدمه
 
@@ -19,10 +24,10 @@ CO_OP_TRANSLATOR_METADATA:
 
 در پایان این درس، شما:
 - به سلسله‌مراتب پیکربندی azd مسلط خواهید شد و نحوه اولویت‌بندی تنظیمات را درک خواهید کرد
-- تنظیمات جهانی و مخصوص پروژه را به طور مؤثر پیکربندی خواهید کرد
+- تنظیمات جهانی و پروژه‌محور را به طور مؤثر پیکربندی خواهید کرد
 - محیط‌های متعدد با پیکربندی‌های مختلف را مدیریت خواهید کرد
 - الگوهای امن احراز هویت و مجوزدهی را پیاده‌سازی خواهید کرد
-- الگوهای پیشرفته پیکربندی برای سناریوهای پیچیده را خواهید فهمید
+- الگوهای پیشرفته پیکربندی برای سناریوهای پیچیده را درک خواهید کرد
 
 ## نتایج یادگیری
 
@@ -38,7 +43,7 @@ CO_OP_TRANSLATOR_METADATA:
 ## سلسله‌مراتب پیکربندی
 
 azd از یک سیستم پیکربندی سلسله‌مراتبی استفاده می‌کند:
-1. **پرچم‌های خط فرمان** (بالاترین اولویت)
+1. **فلگ‌های خط فرمان** (بالاترین اولویت)
 2. **متغیرهای محیطی**
 3. **پیکربندی پروژه محلی** (`.azd/config.json`)
 4. **پیکربندی کاربر جهانی** (`~/.azd/config.json`)
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### تنظیمات مخصوص زبان
+#### تنظیمات زبان‌محور
 ```yaml
 services:
   node-app:
@@ -219,7 +224,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### پیکربندی محیط
-هر محیط پیکربندی مخصوص به خود را در `.azure/<env-name>/config.json` دارد:
+هر محیط دارای پیکربندی خاص خود در `.azure/<env-name>/config.json` است:
 
 ```json
 {
@@ -256,7 +261,7 @@ azd env unset DEBUG
 ```
 
 ### قالب‌های محیط
-فایل `.azure/env.template` را برای تنظیم محیط‌های سازگار ایجاد کنید:
+فایل `.azure/env.template` را برای تنظیم محیط‌های یکسان ایجاد کنید:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -286,7 +291,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### احراز هویت Service Principal
+### احراز هویت با Service Principal
 برای خطوط لوله CI/CD:
 ```bash
 # Set environment variables
@@ -415,7 +420,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 پیکربندی‌های مخصوص محیط
+## 🎯 پیکربندی‌های محیط‌محور
 
 ### محیط توسعه
 ```bash
@@ -537,7 +542,7 @@ database:
 
 ## مراحل بعدی
 
-- [پروژه اول شما](first-project.md) - اعمال پیکربندی در عمل
+- [اولین پروژه شما](first-project.md) - اعمال پیکربندی در عمل
 - [راهنمای استقرار](../deployment/deployment-guide.md) - استفاده از پیکربندی برای استقرار
 - [تأمین منابع](../deployment/provisioning.md) - پیکربندی‌های آماده تولید
 
@@ -549,8 +554,12 @@ database:
 
 ---
 
-**قبلی:** [AZD Basics](azd-basics.md) | **بعدی:** [First Project](first-project.md)
-- **درس بعدی**: [پروژه اول شما](first-project.md)
+**فهرست فصل‌ها:**
+- **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل فعلی**: فصل ۳ - پیکربندی و احراز هویت
+- **⬅️ قبلی**: [اولین پروژه شما](first-project.md)
+- **➡️ فصل بعدی**: [فصل ۴: زیرساخت به عنوان کد](../deployment/deployment-guide.md)
+- **درس بعدی**: [اولین پروژه شما](first-project.md)
 
 ---
 

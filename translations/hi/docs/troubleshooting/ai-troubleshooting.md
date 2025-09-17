@@ -1,30 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T17:46:53+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T17:01:31+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "hi"
 }
 -->
-# एआई समस्या निवारण गाइड Azure Developer CLI के लिए
+# एआई-विशिष्ट समस्या निवारण गाइड
 
-**पिछला:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **अगला:** [Getting Started with AZD](../getting-started/README.md)
+**अध्याय नेविगेशन:**
+- **📚 कोर्स होम**: [AZD फॉर बिगिनर्स](../../README.md)
+- **📖 वर्तमान अध्याय**: अध्याय 7 - समस्या निवारण और डिबगिंग
+- **⬅️ पिछला**: [डिबगिंग गाइड](debugging.md)
+- **➡️ अगला अध्याय**: [अध्याय 8: प्रोडक्शन और एंटरप्राइज पैटर्न](../ai-foundry/production-ai-practices.md)
+- **🤖 संबंधित**: [अध्याय 2: एआई-फर्स्ट डेवलपमेंट](../ai-foundry/azure-ai-foundry-integration.md)
+
+**पिछला:** [प्रोडक्शन एआई प्रैक्टिसेस](../ai-foundry/production-ai-practices.md) | **अगला:** [AZD के साथ शुरुआत करें](../getting-started/README.md)
 
 यह व्यापक समस्या निवारण गाइड AZD के साथ एआई समाधान तैनात करते समय आम समस्याओं को संबोधित करता है, और Azure AI सेवाओं के लिए विशिष्ट समाधान और डिबगिंग तकनीक प्रदान करता है।
 
 ## सामग्री तालिका
 
-- [Azure OpenAI Service Issues](../../../../docs/troubleshooting)
-- [Azure AI Search Problems](../../../../docs/troubleshooting)
-- [Container Apps Deployment Issues](../../../../docs/troubleshooting)
-- [Authentication and Permission Errors](../../../../docs/troubleshooting)
-- [Model Deployment Failures](../../../../docs/troubleshooting)
-- [Performance and Scaling Issues](../../../../docs/troubleshooting)
-- [Cost and Quota Management](../../../../docs/troubleshooting)
-- [Debugging Tools and Techniques](../../../../docs/troubleshooting)
+- [Azure OpenAI सेवा समस्याएं](../../../../docs/troubleshooting)
+- [Azure AI सर्च समस्याएं](../../../../docs/troubleshooting)
+- [कंटेनर ऐप्स तैनाती समस्याएं](../../../../docs/troubleshooting)
+- [प्रमाणीकरण और अनुमति त्रुटियां](../../../../docs/troubleshooting)
+- [मॉडल तैनाती विफलताएं](../../../../docs/troubleshooting)
+- [प्रदर्शन और स्केलिंग समस्याएं](../../../../docs/troubleshooting)
+- [लागत और कोटा प्रबंधन](../../../../docs/troubleshooting)
+- [डिबगिंग उपकरण और तकनीकें](../../../../docs/troubleshooting)
 
-## Azure OpenAI Service Issues
+## Azure OpenAI सेवा समस्याएं
 
 ### समस्या: OpenAI सेवा क्षेत्र में उपलब्ध नहीं
 
@@ -140,7 +147,7 @@ az rest --method get \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI Search Problems
+## Azure AI सर्च समस्याएं
 
 ### समस्या: सर्च सेवा मूल्य निर्धारण स्तर अपर्याप्त
 
@@ -216,7 +223,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **प्रबंधित पहचान का उपयोग करें:**
+3. **मैनेज्ड आइडेंटिटी का उपयोग करें:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -230,7 +237,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps Deployment Issues
+## कंटेनर ऐप्स तैनाती समस्याएं
 
 ### समस्या: कंटेनर निर्माण विफलताएं
 
@@ -359,9 +366,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Authentication and Permission Errors
+## प्रमाणीकरण और अनुमति त्रुटियां
 
-### समस्या: प्रबंधित पहचान अनुमति अस्वीकृत
+### समस्या: मैनेज्ड आइडेंटिटी अनुमति अस्वीकृत
 
 **लक्षण:**
 ```
@@ -370,7 +377,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 **समाधान:**
 
-1. **भूमिका असाइनमेंट की पुष्टि करें:**
+1. **भूमिका असाइनमेंट सत्यापित करें:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -438,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **RBAC का उपयोग करें बजाय एक्सेस नीतियों के:**
+2. **RBAC का उपयोग करें, एक्सेस पॉलिसी के बजाय:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -451,7 +458,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Model Deployment Failures
+## मॉडल तैनाती विफलताएं
 
 ### समस्या: मॉडल संस्करण उपलब्ध नहीं
 
@@ -501,7 +508,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **तैनाती से पहले मॉडल मान्य करें:**
+3. **तैनाती से पहले मॉडल सत्यापित करें:**
 ```python
 # Pre-deployment model validation
 import httpx
@@ -523,7 +530,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Performance and Scaling Issues
+## प्रदर्शन और स्केलिंग समस्याएं
 
 ### समस्या: उच्च विलंबता प्रतिक्रियाएं
 
@@ -534,7 +541,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **समाधान:**
 
-1. **अनुरोध टाइमआउट लागू करें:**
+1. **रिक्वेस्ट टाइमआउट लागू करें:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -655,7 +662,7 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Cost and Quota Management
+## लागत और कोटा प्रबंधन
 
 ### समस्या: अप्रत्याशित उच्च लागत
 
@@ -729,7 +736,7 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## Debugging Tools and Techniques
+## डिबगिंग उपकरण और तकनीकें
 
 ### AZD डिबगिंग कमांड
 
@@ -802,7 +809,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **प्रदर्शन निगरानी:**
+3. **प्रदर्शन मॉनिटरिंग:**
 ```python
 import time
 from functools import wraps
@@ -837,7 +844,7 @@ def monitor_performance(func):
 
 | त्रुटि कोड | विवरण | समाधान |
 |------------|-------------|----------|
-| 401 | अनधिकृत | API कुंजियों और प्रबंधित पहचान कॉन्फ़िगरेशन जांचें |
+| 401 | अनधिकृत | API कुंजियों और मैनेज्ड आइडेंटिटी कॉन्फ़िगरेशन जांचें |
 | 403 | निषिद्ध | RBAC भूमिका असाइनमेंट सत्यापित करें |
 | 429 | दर सीमित | एक्सपोनेंशियल बैकऑफ के साथ पुनः प्रयास लॉजिक लागू करें |
 | 500 | आंतरिक सर्वर त्रुटि | मॉडल तैनाती स्थिति और लॉग जांचें |
@@ -845,21 +852,26 @@ def monitor_performance(func):
 
 ## अगले कदम
 
-1. **[AI Model Deployment Guide](ai-model-deployment.md)** की समीक्षा करें तैनाती सर्वोत्तम प्रथाओं के लिए
-2. **[Production AI Practices](production-ai-practices.md)** पूरा करें एंटरप्राइज़-रेडी समाधान के लिए
+1. **[एआई मॉडल तैनाती गाइड](ai-model-deployment.md)** की समीक्षा करें तैनाती सर्वोत्तम प्रथाओं के लिए
+2. **[प्रोडक्शन एआई प्रैक्टिसेस](production-ai-practices.md)** पूरी करें एंटरप्राइज-रेडी समाधान के लिए
 3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)** से जुड़ें सामुदायिक समर्थन के लिए
-4. **समस्याएं सबमिट करें** [AZD GitHub repository](https://github.com/Azure/azure-dev) पर AZD-विशिष्ट समस्याओं के लिए
+4. **समस्याएं सबमिट करें** [AZD GitHub रिपॉजिटरी](https://github.com/Azure/azure-dev) पर AZD-विशिष्ट समस्याओं के लिए
 
 ## संसाधन
 
-- [Azure OpenAI Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure OpenAI सेवा समस्या निवारण](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [कंटेनर ऐप्स समस्या निवारण](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI सर्च समस्या निवारण](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**पिछला:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **अगला:** [Workshop](../../workshop/README.md)
-- [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**अध्याय नेविगेशन:**
+- **📚 कोर्स होम**: [AZD फॉर बिगिनर्स](../../README.md)
+- **📖 वर्तमान अध्याय**: अध्याय 7 - समस्या निवारण और डिबगिंग
+- **⬅️ पिछला**: [डिबगिंग गाइड](debugging.md)
+- **➡️ अगला अध्याय**: [अध्याय 8: प्रोडक्शन और एंटरप्राइज पैटर्न](../ai-foundry/production-ai-practices.md)
+- **🤖 संबंधित**: [अध्याय 2: एआई-फर्स्ट डेवलपमेंट](../ai-foundry/azure-ai-foundry-integration.md)
+- [Azure Developer CLI समस्या निवारण](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

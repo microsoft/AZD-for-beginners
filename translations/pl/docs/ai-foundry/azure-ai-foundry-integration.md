@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:34:10+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T16:39:11+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "pl"
 }
 -->
 # Integracja Azure AI Foundry z AZD
 
-**Poprzednie:** [Pierwszy projekt](../getting-started/first-project.md) | **Następne:** [Wdrażanie modelu AI](ai-model-deployment.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 2 - Rozwój z AI na pierwszym miejscu
+- **⬅️ Poprzedni rozdział**: [Rozdział 1: Twój pierwszy projekt](../getting-started/first-project.md)
+- **➡️ Następny**: [Wdrażanie modelu AI](ai-model-deployment.md)
+- **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
 
 ## Przegląd
 
-Ten przewodnik pokazuje, jak zintegrować usługi Azure AI Foundry z Azure Developer CLI (AZD), aby uprościć wdrażanie aplikacji AI. Azure AI Foundry oferuje kompleksową platformę do tworzenia, wdrażania i zarządzania aplikacjami AI, podczas gdy AZD upraszcza proces infrastruktury i wdrażania.
+Ten przewodnik pokazuje, jak zintegrować usługi Azure AI Foundry z Azure Developer CLI (AZD), aby uprościć wdrażanie aplikacji AI. Azure AI Foundry oferuje kompleksową platformę do budowy, wdrażania i zarządzania aplikacjami AI, podczas gdy AZD upraszcza proces infrastruktury i wdrażania.
 
 ## Czym jest Azure AI Foundry?
 
@@ -21,16 +26,16 @@ Azure AI Foundry to zintegrowana platforma Microsoftu do rozwoju AI, która obej
 
 - **Katalog modeli**: Dostęp do najnowocześniejszych modeli AI
 - **Prompt Flow**: Wizualny projektant przepływów pracy AI
-- **Portal AI Foundry**: Zintegrowane środowisko do tworzenia aplikacji AI
+- **Portal AI Foundry**: Zintegrowane środowisko programistyczne dla aplikacji AI
 - **Opcje wdrażania**: Różnorodne opcje hostingu i skalowania
-- **Bezpieczeństwo i ochrona**: Wbudowane funkcje odpowiedzialnego AI
+- **Bezpieczeństwo**: Wbudowane funkcje odpowiedzialnego AI
 
 ## AZD + Azure AI Foundry: Lepsze razem
 
 | Funkcja | Azure AI Foundry | Korzyść z integracji z AZD |
 |---------|------------------|---------------------------|
 | **Wdrażanie modeli** | Ręczne wdrażanie przez portal | Zautomatyzowane, powtarzalne wdrażanie |
-| **Infrastruktura** | Tworzenie za pomocą kliknięć | Infrastruktura jako kod (Bicep) |
+| **Infrastruktura** | Konfiguracja przez kliknięcia | Infrastruktura jako kod (Bicep) |
 | **Zarządzanie środowiskiem** | Skupienie na jednym środowisku | Wielośrodowiskowe (dev/staging/prod) |
 | **Integracja CI/CD** | Ograniczona | Wbudowane wsparcie dla GitHub Actions |
 | **Zarządzanie kosztami** | Podstawowy monitoring | Optymalizacja kosztów dla poszczególnych środowisk |
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Wzorzec 2: Integracja AI Search + RAG
 
-**Zastosowanie**: Wdrażanie aplikacji wykorzystujących generację wspomaganą wyszukiwaniem (RAG)
+**Zastosowanie**: Wdrażanie aplikacji z generacją wspomaganą wyszukiwaniem (RAG)
 
 ```bicep
 // Azure AI Search
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### Wdrażanie dla określonych środowisk
+### Wdrażanie specyficzne dla środowiska
 
 ```bash
 # Development environment
@@ -470,7 +475,7 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Objawy:**
 - Modele niedostępne w wdrożeniu
-- Problemy z określonymi wersjami modeli
+- Problemy z konkretnymi wersjami modeli
 
 **Rozwiązania:**
 ```bash
@@ -507,7 +512,7 @@ azd init --template ai-document-processing
 azd up
 ```
 
-### Chat dla przedsiębiorstw z RAG
+### Czat korporacyjny z RAG
 
 **Repozytorium**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
@@ -526,7 +531,7 @@ azd up
 3. **Dodaj monitorowanie**: Wprowadź kompleksową obserwowalność
 4. **Optymalizuj koszty**: Dostosuj konfiguracje do swojego budżetu
 5. **Zabezpiecz wdrożenie**: Wprowadź wzorce bezpieczeństwa dla przedsiębiorstw
-6. **Skaluj do produkcji**: Dodaj funkcje wieloregionalne i wysokiej dostępności
+6. **Skaluj do produkcji**: Dodaj funkcje wieloregionowe i wysokiej dostępności
 
 ## Społeczność i wsparcie
 
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Poprzednie:** [Pierwszy projekt](../getting-started/first-project.md) | **Następne:** [Wdrażanie modelu AI](ai-model-deployment.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 2 - Rozwój z AI na pierwszym miejscu
+- **⬅️ Poprzedni rozdział**: [Rozdział 1: Twój pierwszy projekt](../getting-started/first-project.md)
+- **➡️ Następny**: [Wdrażanie modelu AI](ai-model-deployment.md)
+- **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
 
 **Potrzebujesz pomocy?** Dołącz do dyskusji społeczności lub otwórz zgłoszenie w repozytorium. Społeczność Azure AI + AZD jest tutaj, aby pomóc Ci odnieść sukces!
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

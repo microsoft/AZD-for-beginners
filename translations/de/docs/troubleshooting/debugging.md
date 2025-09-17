@@ -1,36 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:25:57+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T16:10:39+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "de"
 }
 -->
-# Debugging-Leitfaden - Fortgeschrittene Techniken zur Analyse von Fehlerprotokollen
+# Leitfaden zur Fehlerbehebung bei AZD-Bereitstellungen
+
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Einsteiger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 7 - Fehlerbehebung & Debugging
+- **⬅️ Vorheriges**: [Häufige Probleme](common-issues.md)
+- **➡️ Nächstes**: [Fehlerbehebung für KI](ai-troubleshooting.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 8: Produktions- & Unternehmensmuster](../ai-foundry/production-ai-practices.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden bietet fortgeschrittene Debugging-Strategien, Tools und Techniken zur Diagnose und Lösung komplexer Probleme bei Azure Developer CLI-Bereitstellungen. Lernen Sie systematische Fehlersuchmethoden, Protokollanalysetechniken, Leistungsprofilierung und fortgeschrittene Diagnosetools, um Bereitstellungs- und Laufzeitprobleme effizient zu beheben.
+Dieser umfassende Leitfaden bietet fortgeschrittene Strategien, Tools und Techniken zur Diagnose und Behebung komplexer Probleme bei Bereitstellungen mit dem Azure Developer CLI. Lernen Sie systematische Fehlerbehebungsmethoden, Log-Analyse-Techniken, Performance-Profiling und fortgeschrittene Diagnosetools, um Probleme bei der Bereitstellung und Laufzeit effizient zu lösen.
 
 ## Lernziele
 
 Nach Abschluss dieses Leitfadens werden Sie:
 - Systematische Debugging-Methoden für Azure Developer CLI-Probleme beherrschen
-- Fortgeschrittene Protokollkonfiguration und Analysetechniken verstehen
-- Strategien zur Leistungsprofilierung und -überwachung umsetzen
-- Azure-Diagnosetools und -dienste für die Lösung komplexer Probleme nutzen
-- Netzwerk-Debugging und Sicherheitstroubleshooting-Techniken anwenden
-- Umfassende Überwachungs- und Alarmierungsfunktionen für proaktive Fehlererkennung konfigurieren
+- Fortgeschrittene Log-Konfigurationen und Log-Analyse-Techniken verstehen
+- Strategien für Performance-Profiling und -Überwachung implementieren
+- Azure-Diagnosetools und -Dienste für die Lösung komplexer Probleme nutzen
+- Netzwerk-Debugging und Sicherheits-Fehlerbehebung anwenden
+- Umfassende Überwachungs- und Alarmierungsmechanismen für proaktive Problemerkennung konfigurieren
 
 ## Lernergebnisse
 
-Nach Abschluss werden Sie in der Lage sein:
+Nach Abschluss können Sie:
 - Die TRIAGE-Methode anwenden, um komplexe Bereitstellungsprobleme systematisch zu debuggen
-- Umfassende Protokollierungs- und Tracing-Informationen konfigurieren und analysieren
+- Umfassende Logging- und Tracing-Informationen konfigurieren und analysieren
 - Azure Monitor, Application Insights und Diagnosetools effektiv nutzen
 - Netzwerkverbindungs-, Authentifizierungs- und Berechtigungsprobleme eigenständig debuggen
-- Strategien zur Leistungsüberwachung und -optimierung implementieren
+- Strategien zur Performance-Überwachung und -Optimierung implementieren
 - Eigene Debugging-Skripte und Automatisierungen für wiederkehrende Probleme erstellen
 
 ## Debugging-Methodik
@@ -38,9 +45,9 @@ Nach Abschluss werden Sie in der Lage sein:
 ### Der TRIAGE-Ansatz
 - **T**ime: Wann hat das Problem begonnen?
 - **R**eproduce: Kann das Problem konsistent reproduziert werden?
-- **I**solate: Welche Komponente funktioniert nicht?
-- **A**nalyze: Was sagen die Protokolle aus?
-- **G**ather: Alle relevanten Informationen sammeln
+- **I**solate: Welche Komponente schlägt fehl?
+- **A**nalyze: Was sagen die Logs aus?
+- **G**ather: Sammeln Sie alle relevanten Informationen
 - **E**scalate: Wann sollte zusätzliche Hilfe angefordert werden?
 
 ## Debug-Modus aktivieren
@@ -71,9 +78,9 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Protokollanalysetechniken
+## 📊 Log-Analyse-Techniken
 
-### Verständnis der Protokollstufen
+### Log-Level verstehen
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,7 +90,7 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Strukturierte Protokollanalyse
+### Strukturierte Log-Analyse
 ```bash
 # Filter logs by level
 azd logs --level error --since 1h
@@ -98,7 +105,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### Protokollkorrelation
+### Log-Korrelation
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -176,7 +183,7 @@ debug_container() {
 }
 ```
 
-### Datenbankverbindungs-Debugging
+### Debugging von Datenbankverbindungen
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,7 +202,7 @@ debug_database() {
 }
 ```
 
-## 🔬 Leistungs-Debugging
+## 🔬 Performance-Debugging
 
 ### Überwachung der Anwendungsleistung
 ```bash
@@ -255,7 +262,7 @@ monitor_resources() {
 }
 ```
 
-## 🧪 Tests und Validierung
+## 🧪 Testen und Validieren
 
 ### Debugging von Integrationstests
 ```bash
@@ -330,7 +337,7 @@ load_test() {
 
 ## 🔧 Infrastruktur-Debugging
 
-### Debugging von Bicep-Vorlagen
+### Debugging von Bicep-Templates
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -399,7 +406,7 @@ analyze_resources() {
 
 ## 🔒 Sicherheits-Debugging
 
-### Debugging des Authentifizierungsablaufs
+### Debugging von Authentifizierungsabläufen
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -627,7 +634,7 @@ create_debug_queries() {
 }
 ```
 
-### Protokollaggregation
+### Log-Aggregation
 ```bash
 # Aggregate logs from multiple sources
 aggregate_logs() {
@@ -651,11 +658,11 @@ aggregate_logs() {
 
 ## 🔗 Fortgeschrittene Ressourcen
 
-### Benutzerdefinierte Debugging-Skripte
+### Benutzerdefinierte Debug-Skripte
 Erstellen Sie ein Verzeichnis `scripts/debug/` mit:
 - `health-check.sh` - Umfassende Gesundheitsprüfung
 - `performance-test.sh` - Automatisierte Leistungstests
-- `log-analyzer.py` - Fortgeschrittene Protokollanalyse
+- `log-analyzer.py` - Fortgeschrittene Log-Analyse
 - `resource-validator.sh` - Validierung der Infrastruktur
 
 ### Überwachungsintegration
@@ -677,11 +684,11 @@ hooks:
 
 ## Best Practices
 
-1. **Aktivieren Sie immer die Debug-Protokollierung** in Nicht-Produktionsumgebungen
+1. **Aktivieren Sie immer Debug-Logging** in Nicht-Produktionsumgebungen
 2. **Erstellen Sie reproduzierbare Testfälle** für Probleme
 3. **Dokumentieren Sie Debugging-Verfahren** für Ihr Team
 4. **Automatisieren Sie Gesundheitsprüfungen** und Überwachung
-5. **Halten Sie Debugging-Tools aktuell** mit Ihren Anwendungsänderungen
+5. **Halten Sie Debug-Tools aktuell** mit Ihren Anwendungsänderungen
 6. **Üben Sie Debugging-Verfahren** außerhalb von Vorfällen
 
 ## Nächste Schritte
@@ -689,7 +696,7 @@ hooks:
 - [Kapazitätsplanung](../pre-deployment/capacity-planning.md) - Ressourcenanforderungen planen
 - [SKU-Auswahl](../pre-deployment/sku-selection.md) - Geeignete Servicestufen auswählen
 - [Preflight-Checks](../pre-deployment/preflight-checks.md) - Validierung vor der Bereitstellung
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Schnellreferenz für Befehle
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Schnellreferenzbefehle
 
 ---
 

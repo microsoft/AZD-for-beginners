@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T17:38:37+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-17T16:39:33+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "pl"
 }
 -->
 # Najlepsze praktyki dla produkcyjnych obciążeń AI z AZD
 
-**Poprzednie:** [AI Workshop Lab](ai-workshop-lab.md) | **Następne:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 8 - Wzorce produkcyjne i korporacyjne
+- **⬅️ Poprzedni rozdział**: [Rozdział 7: Rozwiązywanie problemów](../troubleshooting/debugging.md)
+- **⬅️ Powiązane**: [Laboratorium warsztatowe AI](ai-workshop-lab.md)
+- **🎯 Zakończenie kursu**: [AZD dla początkujących](../../README.md)
 
 ## Przegląd
 
-Ten przewodnik zawiera kompleksowe najlepsze praktyki dotyczące wdrażania produkcyjnych obciążeń AI przy użyciu Azure Developer CLI (AZD). Na podstawie opinii społeczności Discord Azure AI Foundry oraz rzeczywistych wdrożeń u klientów, te praktyki rozwiązują najczęstsze wyzwania w systemach AI na poziomie produkcyjnym.
+Ten przewodnik zawiera kompleksowe najlepsze praktyki dotyczące wdrażania produkcyjnych obciążeń AI za pomocą Azure Developer CLI (AZD). Na podstawie opinii społeczności Azure AI Foundry na Discordzie oraz wdrożeń u rzeczywistych klientów, te praktyki rozwiązują najczęstsze wyzwania w systemach AI na poziomie produkcyjnym.
 
 ## Kluczowe wyzwania
 
@@ -120,7 +125,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Najlepsze praktyki w zakresie bezpieczeństwa
+## Najlepsze praktyki bezpieczeństwa
 
 ### 1. Model bezpieczeństwa Zero-Trust
 
@@ -665,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Kopie zapasowe danych i odzyskiwanie
+### 2. Kopie zapasowe i odzyskiwanie danych
 
 ```bicep
 // Backup configuration for critical data
@@ -718,7 +723,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 
 ## DevOps i integracja CI/CD
 
-### 1. Workflow GitHub Actions
+### 1. Przepływ pracy GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -838,38 +843,38 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Wszystkie usługi korzystają z zarządzanych tożsamości
 - [ ] Sekrety przechowywane w Key Vault
 - [ ] Prywatne punkty końcowe skonfigurowane
-- [ ] Zaimplementowane grupy zabezpieczeń sieciowych
+- [ ] Grupy zabezpieczeń sieciowych wdrożone
 - [ ] RBAC z zasadą najmniejszych uprawnień
 - [ ] WAF włączony na publicznych punktach końcowych
 
 ### Wydajność ✅
-- [ ] Skonfigurowane automatyczne skalowanie
-- [ ] Zaimplementowane buforowanie
-- [ ] Ustawione równoważenie obciążenia
+- [ ] Automatyczne skalowanie skonfigurowane
+- [ ] Buforowanie wdrożone
+- [ ] Równoważenie obciążenia skonfigurowane
 - [ ] CDN dla treści statycznych
-- [ ] Pooling połączeń z bazą danych
+- [ ] Grupowanie połączeń z bazą danych
 - [ ] Optymalizacja użycia tokenów
 
 ### Monitorowanie ✅
-- [ ] Skonfigurowane Application Insights
+- [ ] Application Insights skonfigurowane
 - [ ] Zdefiniowane niestandardowe metryki
-- [ ] Ustawione reguły alertów
-- [ ] Utworzony pulpit nawigacyjny
-- [ ] Zaimplementowane kontrole stanu
+- [ ] Zasady alertów skonfigurowane
+- [ ] Pulpit nawigacyjny utworzony
+- [ ] Kontrole stanu wdrożone
 - [ ] Polityki przechowywania logów
 
 ### Niezawodność ✅
 - [ ] Wdrożenie w wielu regionach
 - [ ] Plan kopii zapasowych i odzyskiwania
-- [ ] Zaimplementowane wyłączniki obwodów
-- [ ] Skonfigurowane polityki ponawiania
+- [ ] Wyłączniki obwodów wdrożone
+- [ ] Zasady ponawiania skonfigurowane
 - [ ] Łagodne degradacje
 - [ ] Punkty końcowe kontroli stanu
 
 ### Zarządzanie kosztami ✅
-- [ ] Skonfigurowane alerty budżetowe
+- [ ] Alerty budżetowe skonfigurowane
 - [ ] Dopasowanie zasobów
-- [ ] Zastosowane zniżki dla środowisk dev/test
+- [ ] Zniżki dla środowisk deweloperskich/testowych zastosowane
 - [ ] Zakupione instancje zarezerwowane
 - [ ] Pulpit monitorowania kosztów
 - [ ] Regularne przeglądy kosztów
@@ -877,8 +882,8 @@ echo "Infrastructure validation completed successfully!"
 ### Zgodność ✅
 - [ ] Spełnione wymagania dotyczące lokalizacji danych
 - [ ] Włączone logowanie audytowe
-- [ ] Zastosowane polityki zgodności
-- [ ] Zaimplementowane podstawy bezpieczeństwa
+- [ ] Zastosowane zasady zgodności
+- [ ] Wdrożone podstawy bezpieczeństwa
 - [ ] Regularne oceny bezpieczeństwa
 - [ ] Plan reagowania na incydenty
 
@@ -908,19 +913,19 @@ python scripts/load_test.py \
 
 ## 🤝 Najlepsze praktyki społeczności
 
-Na podstawie opinii społeczności Discord Azure AI Foundry:
+Na podstawie opinii społeczności Azure AI Foundry na Discordzie:
 
 ### Najważniejsze rekomendacje społeczności:
 
 1. **Zacznij od małego, skaluj stopniowo**: Rozpocznij od podstawowych SKU i skaluj w oparciu o rzeczywiste użycie
 2. **Monitoruj wszystko**: Skonfiguruj kompleksowe monitorowanie od pierwszego dnia
 3. **Automatyzuj bezpieczeństwo**: Używaj infrastruktury jako kodu dla spójnego bezpieczeństwa
-4. **Testuj dokładnie**: Uwzględnij testy specyficzne dla AI w swoim pipeline
+4. **Testuj dokładnie**: Uwzględnij testowanie specyficzne dla AI w swoim pipeline
 5. **Planuj koszty**: Monitoruj użycie tokenów i ustaw alerty budżetowe wcześnie
 
 ### Typowe błędy do uniknięcia:
 
-- ❌ Hardcoding kluczy API w kodzie
+- ❌ Twarde kodowanie kluczy API w kodzie
 - ❌ Brak odpowiedniego monitorowania
 - ❌ Ignorowanie optymalizacji kosztów
 - ❌ Brak testowania scenariuszy awarii
@@ -935,11 +940,16 @@ Na podstawie opinii społeczności Discord Azure AI Foundry:
 
 ---
 
-**Poprzednie:** [AI Workshop Lab](ai-workshop-lab.md) | **Następne:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 8 - Wzorce produkcyjne i korporacyjne
+- **⬅️ Poprzedni rozdział**: [Rozdział 7: Rozwiązywanie problemów](../troubleshooting/debugging.md)
+- **⬅️ Powiązane**: [Laboratorium warsztatowe AI](ai-workshop-lab.md)
+- **🎆 Zakończenie kursu**: [AZD dla początkujących](../../README.md)
 
 **Pamiętaj**: Produkcyjne obciążenia AI wymagają starannego planowania, monitorowania i ciągłej optymalizacji. Zacznij od tych wzorców i dostosuj je do swoich specyficznych wymagań.
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
