@@ -1,5 +1,12 @@
 # SKU Selection Guide - Choosing the Right Azure Service Tiers
 
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 6 - Pre-Deployment Validation & Planning
+- **⬅️ Previous**: [Capacity Planning](capacity-planning.md)
+- **➡️ Next**: [Pre-flight Checks](preflight-checks.md)
+- **🚀 Next Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/common-issues.md)
+
 ## Introduction
 
 This comprehensive guide helps you select optimal Azure service SKUs (Stock Keeping Units) for different environments, workloads, and requirements. Learn to analyze performance needs, cost considerations, and scalability requirements to choose the most appropriate service tiers for your Azure Developer CLI deployments.

@@ -1,5 +1,11 @@
 # Examples - Practical AZD Templates and Configurations
 
+**Learning by Example - Organized by Chapter**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Chapter Mapping**: Examples organized by learning complexity
+- **🚀 Start Simple**: [Chapter 1 Examples](#chapter-1-foundation--quick-start)
+- **🤖 AI Examples**: [Chapter 2 & 5 AI Solutions](#chapter-2-5-ai-first-development)
+
 ## Introduction
 
 This directory contains practical examples, templates, and real-world scenarios to help you learn Azure Developer CLI through hands-on practice. Each example provides complete working code, infrastructure templates, and detailed instructions for different application architectures and deployment patterns.

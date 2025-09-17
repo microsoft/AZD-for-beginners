@@ -1,4 +1,11 @@
-# AI Troubleshooting Guide for Azure Developer CLI
+# AI-Specific Troubleshooting Guide
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
+- **⬅️ Previous**: [Debugging Guide](debugging.md)
+- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🤖 Related**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 **Previous:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **Next:** [Getting Started with AZD](../getting-started/README.md)
 
@@ -849,5 +856,10 @@ def monitor_performance(func):
 
 ---
 
-**Previous:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **Next:** [Workshop](../../workshop/README.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
+- **⬅️ Previous**: [Debugging Guide](debugging.md)
+- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🤖 Related**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 - [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)

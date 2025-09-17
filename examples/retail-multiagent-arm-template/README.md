@@ -1,5 +1,11 @@
 # Retail Multi-Agent Solution - ARM Template Deployment
 
+**Chapter 5: Production Deployment Package**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Related Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Scenario Guide**: [Complete Implementation](../retail-scenario.md)
+- **🎯 Quick Deploy**: [One-Click Deployment](#-quick-deployment)
+
 This directory contains a complete Azure Resource Manager (ARM) template for deploying the retail Multi-Agent Customer Support Solution, providing infrastructure as code for the entire architecture.
 
 ## 🎯 What Gets Deployed

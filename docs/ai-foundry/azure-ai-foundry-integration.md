@@ -1,6 +1,11 @@
 # Azure AI Foundry Integration with AZD
 
-**Previous:** [First Project](../getting-started/first-project.md) | **Next:** [AI Model Deployment](ai-model-deployment.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../getting-started/first-project.md)
+- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
 ## Overview
 
@@ -527,6 +532,11 @@ azd up
 
 ---
 
-**Previous:** [First Project](../getting-started/first-project.md) | **Next:** [AI Model Deployment](ai-model-deployment.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../getting-started/first-project.md)
+- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
 **Need Help?** Join our community discussions or open an issue in the repository. The Azure AI + AZD community is here to help you succeed!

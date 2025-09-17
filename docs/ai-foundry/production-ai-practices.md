@@ -1,6 +1,11 @@
 # Production AI Workload Best Practices with AZD
 
-**Previous:** [AI Workshop Lab](ai-workshop-lab.md) | **Next:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
+- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/debugging.md)
+- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Course Complete**: [AZD For Beginners](../../README.md)
 
 ## Overview
 
@@ -926,6 +931,11 @@ Based on Azure AI Foundry Discord community feedback:
 
 ---
 
-**Previous:** [AI Workshop Lab](ai-workshop-lab.md) | **Next:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
+- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/debugging.md)
+- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Course Complete**: [AZD For Beginners](../../README.md)
 
 **Remember**: Production AI workloads require careful planning, monitoring, and continuous optimization. Start with these patterns and adapt them to your specific requirements.

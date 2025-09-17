@@ -1,6 +1,11 @@
 # Configuration Guide
 
-**Previous:** [AZD Basics](azd-basics.md) | **Next:** [First Project](first-project.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+- **⬅️ Previous**: [Your First Project](first-project.md)
+- **➡️ Next**: [Deployment Guide](../deployment/deployment-guide.md)
+- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../deployment/deployment-guide.md)
 
 ## Introduction
 
@@ -540,5 +545,9 @@ Document your configuration in `CONFIG.md`:
 
 ---
 
-**Previous:** [AZD Basics](azd-basics.md) | **Next:** [First Project](first-project.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+- **⬅️ Previous**: [Your First Project](first-project.md)
+- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../deployment/deployment-guide.md)
 - **Next Lesson**: [Your First Project](first-project.md)

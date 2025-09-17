@@ -1,6 +1,11 @@
 # AI Workshop Lab: Making Your AI Solutions AZD-Deployable
 
-**Previous:** [AI Model Deployment](ai-model-deployment.md) | **Next:** [Production AI Practices](production-ai-practices.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
 ## Workshop Overview
 
@@ -656,6 +661,11 @@ Congratulations! You've completed the AI Workshop Lab. You should now be able to
 
 ---
 
-**Previous:** [AI Model Deployment](ai-model-deployment.md) | **Next:** [Production AI Practices](production-ai-practices.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
 **Need Help?** Join our community for support and discussions about AZD and AI deployments.

@@ -1,6 +1,11 @@
 # Your First Project - Hands-On Tutorial
 
-**Previous:** [Configuration](configuration.md) | **Next:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Installation & Setup](installation.md)
+- **➡️ Next**: [Configuration](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 
@@ -381,5 +386,10 @@ azd init --template todo-java-mongo
 
 ---
 
-**Previous:** [Configuration](configuration.md) | **Next:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Installation & Setup](installation.md)
+- **➡️ Next**: [Configuration](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 - **Next Lesson**: [Deployment Guide](../deployment/deployment-guide.md)

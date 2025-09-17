@@ -1,4 +1,11 @@
-# Provisioning Resources - Infrastructure as Code with AZD
+# Provisioning Azure Resources with AZD
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
+- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
+- **➡️ Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 Related**: [Chapter 6: Pre-Deployment Validation](../pre-deployment/capacity-planning.md)
 
 ## Introduction
 

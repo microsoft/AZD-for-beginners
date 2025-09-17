@@ -1,4 +1,9 @@
-# Glossary - Azure Developer CLI Terminology
+# Glossary - Azure and AZD Terminology
+
+**Reference for All Chapters**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Learn Basics**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
+- **🤖 AI Terms**: [Chapter 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 

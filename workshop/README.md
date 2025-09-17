@@ -1,6 +1,10 @@
 # AZD for AI Developers Workshop
 
-**Previous:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Next:** [Workshop Lab Modules](#workshop-modules)
+**Workshop Navigation**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Related Chapters**: Covers [Chapter 1](../README.md#-chapter-1-foundation--quick-start), [Chapter 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), and [Chapter 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Hands-On Lab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Next Steps**: [Workshop Lab Modules](#workshop-modules)
 
 Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop is designed to take you from AZD basics to deploying production-ready AI solutions.
 

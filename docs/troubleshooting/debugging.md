@@ -1,4 +1,11 @@
-# Debugging Guide - Advanced Troubleshooting Log Analysis Techniquesg Techniques
+# Debugging Guide for AZD Deployments
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
+- **⬅️ Previous**: [Common Issues](common-issues.md)
+- **➡️ Next**: [AI-Specific Troubleshooting](ai-troubleshooting.md)
+- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
 
 ## Introduction
 

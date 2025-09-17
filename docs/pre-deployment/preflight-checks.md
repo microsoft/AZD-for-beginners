@@ -1,4 +1,11 @@
-# Pre-flight Checks - Deployment Readiness Validation
+# Pre-Flight Checks for AZD Deployments
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 6 - Pre-Deployment Validation & Planning
+- **⬅️ Previous**: [SKU Selection](sku-selection.md)
+- **➡️ Next Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/common-issues.md)
+- **🔧 Related**: [Chapter 4: Deployment Guide](../deployment/deployment-guide.md)
 
 ## Introduction
 

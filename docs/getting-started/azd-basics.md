@@ -1,6 +1,13 @@
 # AZD Basics - Understanding Azure Developer CLI
 
-**Previous:** [Installation & Setup](installation.md) | **Next:** [Configuration](configuration.md)
+# AZD Basics - Core Concepts and Fundamentals
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Next**: [Installation & Setup](installation.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 
@@ -293,9 +300,13 @@ azd init --template template1
 
 ## Next Steps
 
+**📖 Continue Chapter 1 Learning:**
 - [Installation & Setup](installation.md) - Get azd installed and configured
-- [Your First Project](first-project.md) - Hands-on tutorial
+- [Your First Project](first-project.md) - Complete hands-on tutorial
 - [Configuration Guide](configuration.md) - Advanced configuration options
+
+**🎯 Ready for Next Chapter?**
+- [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md) - Start building AI applications
 
 ## Additional Resources
 
@@ -305,5 +316,9 @@ azd init --template template1
 
 ---
 
-**Previous:** [Installation & Setup](installation.md) | **Next:** [Configuration](configuration.md)
-- **Next Lesson**: [Installation & Setup](installation.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start  
+- **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Next**: [Installation & Setup](installation.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)

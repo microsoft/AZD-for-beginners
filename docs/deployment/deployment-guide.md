@@ -1,5 +1,12 @@
 # Deployment Guide - Mastering AZD Deployments
 
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
+- **⬅️ Previous Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
+- **➡️ Next**: [Provisioning Resources](provisioning.md)
+- **🚀 Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+
 ## Introduction
 
 This## Understanding the Deployment Processcomprehensive guide covers everything you need to know about deploying applications using Azure Developer CLI, from basic single-command deployments to advanced production scenarios with custom hooks, multiple environments, and CI/CD integration. Master the complete deployment lifecycle with practical examples and best practices.

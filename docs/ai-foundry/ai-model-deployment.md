@@ -1,6 +1,11 @@
 # AI Model Deployment with Azure Developer CLI
 
-**Previous:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Next:** [AI Workshop Lab](ai-workshop-lab.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
 This guide provides comprehensive instructions for deploying AI models using AZD templates, covering everything from model selection to production deployment patterns.
 
@@ -482,4 +487,9 @@ async def check_ai_models():
 
 ---
 
-**Previous:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Next:** [AI Workshop Lab](ai-workshop-lab.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)

@@ -1,4 +1,9 @@
-# Study Guide - AZD For Beginners
+# Study Guide - Comprehensive Learning Objectives
+
+**Learning Path Navigation**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Start Learning**: [Chapter 1: Foundation & Quick Start](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Progress Tracking**: [Course Completion](../README.md#-course-completion--certification)
 
 ## Introduction
 
@@ -20,9 +25,237 @@ After completing all sections of this study guide, you will be able to:
 - Troubleshoot complex deployment issues independently
 - Create custom templates and contribute to the azd community
 
-## Course Structure
+## 8-Chapter Learning Structure
 
-### Module 1: Getting Started (Weeks 1-2)
+### Chapter 1: Foundation & Quick Start (Week 1)
+**Duration**: 30-45 minutes | **Complexity**: ⭐
+
+#### Learning Objectives
+- Understand Azure Developer CLI core concepts and terminology
+- Successfully install and configure AZD on your development platform
+- Deploy your first application using an existing template
+- Navigate the AZD command-line interface effectively
+
+#### Key Concepts to Master
+- AZD project structure and components (azure.yaml, infra/, src/)
+- Template-based deployment workflows
+- Environment configuration basics
+- Resource group and subscription management
+
+#### Practical Exercises
+1. **Installation Verification**: Install AZD and verify with `azd version`
+2. **First Deployment**: Deploy todo-nodejs-mongo template successfully
+3. **Environment Setup**: Configure your first environment variables
+4. **Resource Exploration**: Navigate deployed resources in Azure Portal
+
+#### Assessment Questions
+- What are the core components of an AZD project?
+- How do you initialize a new project from a template?
+- What is the difference between `azd up` and `azd deploy`?
+- How do you manage multiple environments with AZD?
+
+---
+
+### Chapter 2: AI-First Development (Week 2)
+**Duration**: 1-2 hours | **Complexity**: ⭐⭐
+
+#### Learning Objectives
+- Integrate Azure AI Foundry services with AZD workflows
+- Deploy and configure AI-powered applications
+- Understand RAG (Retrieval-Augmented Generation) implementation patterns
+- Manage AI model deployments and scaling
+
+#### Key Concepts to Master
+- Azure OpenAI service integration and API management
+- AI Search configuration and vector indexing
+- Model deployment strategies and capacity planning
+- AI application monitoring and performance optimization
+
+#### Practical Exercises
+1. **AI Chat Deployment**: Deploy azure-search-openai-demo template
+2. **RAG Implementation**: Configure document indexing and retrieval
+3. **Model Configuration**: Set up multiple AI models with different purposes
+4. **AI Monitoring**: Implement Application Insights for AI workloads
+
+#### Assessment Questions
+- How do you configure Azure OpenAI services in an AZD template?
+- What are the key components of a RAG architecture?
+- How do you manage AI model capacity and scaling?
+- What monitoring metrics are important for AI applications?
+
+---
+
+### Chapter 3: Configuration & Authentication (Week 3)
+**Duration**: 45-60 minutes | **Complexity**: ⭐⭐
+
+#### Learning Objectives
+- Master environment configuration and management strategies
+- Implement secure authentication patterns and managed identity
+- Organize resources with proper naming conventions
+- Configure multi-environment deployments (dev, staging, prod)
+
+#### Key Concepts to Master
+- Environment hierarchy and configuration precedence
+- Managed identity and service principal authentication
+- Key Vault integration for secrets management
+- Environment-specific parameter management
+
+#### Practical Exercises
+1. **Multi-Environment Setup**: Configure dev, staging, and prod environments
+2. **Security Configuration**: Implement managed identity authentication
+3. **Secrets Management**: Integrate Azure Key Vault for sensitive data
+4. **Parameter Management**: Create environment-specific configurations
+
+#### Assessment Questions
+- How do you configure different environments with AZD?
+- What are the benefits of using managed identity over service principals?
+- How do you securely manage application secrets?
+- What is the configuration hierarchy in AZD?
+
+---
+
+### Chapter 4: Infrastructure as Code & Deployment (Week 4-5)
+**Duration**: 1-1.5 hours | **Complexity**: ⭐⭐⭐
+
+#### Learning Objectives
+- Create and customize Bicep infrastructure templates
+- Implement advanced deployment patterns and workflows
+- Understand resource provisioning strategies
+- Design scalable multi-service architectures
+
+#### Key Concepts to Master
+- Bicep template structure and best practices
+- Resource dependencies and deployment ordering
+- Parameter files and template modularity
+- Custom hooks and deployment automation
+
+#### Practical Exercises
+1. **Custom Template Creation**: Build a multi-service application template
+2. **Bicep Mastery**: Create modular, reusable infrastructure components
+3. **Deployment Automation**: Implement pre/post deployment hooks
+4. **Architecture Design**: Deploy complex microservices architecture
+
+#### Assessment Questions
+- How do you create custom Bicep templates for AZD?
+- What are the best practices for organizing infrastructure code?
+- How do you handle resource dependencies in templates?
+- What deployment patterns support zero-downtime updates?
+
+---
+
+### Chapter 5: Multi-Agent AI Solutions (Week 6-7)
+**Duration**: 2-3 hours | **Complexity**: ⭐⭐⭐⭐
+
+#### Learning Objectives
+- Design and implement multi-agent AI architectures
+- Orchestrate agent coordination and communication
+- Deploy production-ready AI solutions with monitoring
+- Understand agent specialization and workflow patterns
+
+#### Key Concepts to Master
+- Multi-agent architecture patterns and design principles
+- Agent communication protocols and data flow
+- Load balancing and scaling strategies for AI agents
+- Production monitoring for multi-agent systems
+
+#### Practical Exercises
+1. **Retail Solution Deployment**: Deploy the complete multi-agent retail scenario
+2. **Agent Customization**: Modify Customer and Inventory agent behaviors
+3. **Architecture Scaling**: Implement load balancing and auto-scaling
+4. **Production Monitoring**: Set up comprehensive monitoring and alerting
+
+#### Assessment Questions
+- How do you design effective multi-agent communication patterns?
+- What are the key considerations for scaling AI agent workloads?
+- How do you monitor and debug multi-agent AI systems?
+- What production patterns ensure reliability for AI agents?
+
+---
+
+### Chapter 6: Pre-Deployment Validation & Planning (Week 8)
+**Duration**: 1 hour | **Complexity**: ⭐⭐
+
+#### Learning Objectives
+- Perform comprehensive capacity planning and resource validation
+- Select optimal Azure SKUs for cost-effectiveness
+- Implement automated pre-flight checks and validation
+- Plan deployments with cost optimization strategies
+
+#### Key Concepts to Master
+- Azure resource quotas and capacity limitations
+- SKU selection criteria and cost optimization
+- Automated validation scripts and testing
+- Deployment planning and risk assessment
+
+#### Practical Exercises
+1. **Capacity Analysis**: Analyze resource requirements for your applications
+2. **SKU Optimization**: Compare and select cost-effective service tiers
+3. **Validation Automation**: Implement pre-deployment check scripts
+4. **Cost Planning**: Create deployment cost estimates and budgets
+
+#### Assessment Questions
+- How do you validate Azure capacity before deployment?
+- What factors influence SKU selection decisions?
+- How do you automate pre-deployment validation?
+- What strategies help optimize deployment costs?
+
+---
+
+### Chapter 7: Troubleshooting & Debugging (Week 9)
+**Duration**: 1-1.5 hours | **Complexity**: ⭐⭐
+
+#### Learning Objectives
+- Develop systematic debugging approaches for AZD deployments
+- Resolve common deployment and configuration issues
+- Debug AI-specific problems and performance issues
+- Implement monitoring and alerting for proactive issue detection
+
+#### Key Concepts to Master
+- Diagnostic techniques and logging strategies
+- Common failure patterns and their solutions
+- Performance monitoring and optimization
+- Incident response and recovery procedures
+
+#### Practical Exercises
+1. **Diagnostic Skills**: Practice with intentionally broken deployments
+2. **Log Analysis**: Use Azure Monitor and Application Insights effectively
+3. **Performance Tuning**: Optimize slow-performing applications
+4. **Recovery Procedures**: Implement backup and disaster recovery
+
+#### Assessment Questions
+- What are the most common AZD deployment failures?
+- How do you debug authentication and permission issues?
+- What monitoring strategies help prevent production issues?
+- How do you optimize application performance in Azure?
+
+---
+
+### Chapter 8: Production & Enterprise Patterns (Week 10-11)
+**Duration**: 2-3 hours | **Complexity**: ⭐⭐⭐⭐
+
+#### Learning Objectives
+- Implement enterprise-grade deployment strategies
+- Design security patterns and compliance frameworks
+- Establish monitoring, governance, and cost management
+- Create scalable CI/CD pipelines with AZD integration
+
+#### Key Concepts to Master
+- Enterprise security and compliance requirements
+- Governance frameworks and policy implementation
+- Advanced monitoring and cost management
+- CI/CD integration and automated deployment pipelines
+
+#### Practical Exercises
+1. **Enterprise Security**: Implement comprehensive security patterns
+2. **Governance Framework**: Set up Azure Policy and resource management
+3. **Advanced Monitoring**: Create dashboards and automated alerting
+4. **CI/CD Integration**: Build automated deployment pipelines
+
+#### Assessment Questions
+- How do you implement enterprise security in AZD deployments?
+- What governance patterns ensure compliance and cost control?
+- How do you design scalable monitoring for production systems?
+- What CI/CD patterns work best with AZD workflows?
 
 #### Learning Objectives
 - Understand Azure Developer CLI fundamentals and core concepts
@@ -75,24 +308,9 @@ Analyze the following components:
 4. What authentication methods can be used with azd?
 5. What happens when you run `azd up` for the first time?
 
-### Module 2: Configuration and Environments (Week 3)
+---
 
-#### Learning Objectives
-- Master environment management and configuration
-- Understand advanced azure.yaml configurations
-- Implement environment-specific settings and variables
-- Configure authentication for different scenarios
-
-#### Key Concepts to Master
-- Environment hierarchy and variable precedence
-- Service configuration and parameters
-- Hooks and lifecycle events
-- Authentication methods (user, service principal, managed identity)
-- Configuration file management
-
-#### Practice Exercises
-
-**Exercise 2.1: Multi-Environment Setup**
+## Progress Tracking and Assessment Framework
 ```bash
 # Create and configure multiple environments:
 1. Create development environment: azd env new development
@@ -486,39 +704,140 @@ Design and implement a complete solution that demonstrates mastery of all concep
 - **Weeks 13-14**: Module 5 (Troubleshooting and Debugging)
 - **Weeks 15-16**: Module 6 (Advanced Topics and Assessment)
 
-### Self-Paced Study
-- Complete each module at your own pace
-- Spend additional time on challenging concepts
-- Repeat exercises until you achieve mastery
-- Join community discussions and ask questions
+---
 
-## Success Tips
+## Progress Tracking and Assessment Framework
 
-### Effective Learning Strategies
-1. **Practice Regularly**: Deploy applications frequently to build muscle memory
-2. **Experiment Fearlessly**: Use development environments to try new configurations
-3. **Document Your Learning**: Keep notes on solutions to problems you encounter
-4. **Join the Community**: Participate in discussions and contribute to projects
-5. **Stay Current**: Follow Azure updates and new azd features
+### Chapter Completion Checklist
 
-### Common Pitfalls to Avoid
-1. **Skipping Prerequisites**: Ensure you have proper foundation knowledge
-2. **Rushing Through Concepts**: Take time to understand fundamentals thoroughly
-3. **Ignoring Security**: Always implement security best practices from the start
-4. **Not Testing Thoroughly**: Test deployments in multiple environments
-5. **Avoiding Documentation**: Good documentation is essential for maintenance
+Track your progress through each chapter with these measurable outcomes:
 
-### Building Practical Experience
-1. **Start Small**: Begin with simple applications and gradually increase complexity
-2. **Learn from Failure**: Use troubleshooting exercises as learning opportunities
-3. **Contribute to Open Source**: Share your templates and solutions with the community
-4. **Teach Others**: Explaining concepts to others reinforces your own understanding
-5. **Stay Curious**: Continuously explore new Azure services and integration patterns
+#### 📚 Chapter 1: Foundation & Quick Start
+- [ ] **Installation Complete**: AZD installed and verified on your platform
+- [ ] **First Deployment**: Successfully deployed todo-nodejs-mongo template
+- [ ] **Environment Setup**: Configured first environment variables
+- [ ] **Resource Navigation**: Explored deployed resources in Azure Portal
+- [ ] **Command Mastery**: Comfortable with basic AZD commands
+
+#### 🤖 Chapter 2: AI-First Development  
+- [ ] **AI Template Deployment**: Deployed azure-search-openai-demo successfully
+- [ ] **RAG Implementation**: Configured document indexing and retrieval
+- [ ] **Model Configuration**: Set up multiple AI models with different purposes
+- [ ] **AI Monitoring**: Implemented Application Insights for AI workloads
+- [ ] **Performance Optimization**: Tuned AI application performance
+
+#### ⚙️ Chapter 3: Configuration & Authentication
+- [ ] **Multi-Environment Setup**: Configured dev, staging, and prod environments
+- [ ] **Security Implementation**: Set up managed identity authentication
+- [ ] **Secrets Management**: Integrated Azure Key Vault for sensitive data
+- [ ] **Parameter Management**: Created environment-specific configurations
+- [ ] **Authentication Mastery**: Implemented secure access patterns
+
+#### 🏗️ Chapter 4: Infrastructure as Code & Deployment
+- [ ] **Custom Template Creation**: Built a multi-service application template
+- [ ] **Bicep Mastery**: Created modular, reusable infrastructure components
+- [ ] **Deployment Automation**: Implemented pre/post deployment hooks
+- [ ] **Architecture Design**: Deployed complex microservices architecture
+- [ ] **Template Optimization**: Optimized templates for performance and cost
+
+#### 🎯 Chapter 5: Multi-Agent AI Solutions
+- [ ] **Retail Solution Deployment**: Deployed complete multi-agent retail scenario
+- [ ] **Agent Customization**: Modified Customer and Inventory agent behaviors
+- [ ] **Architecture Scaling**: Implemented load balancing and auto-scaling
+- [ ] **Production Monitoring**: Set up comprehensive monitoring and alerting
+- [ ] **Performance Tuning**: Optimized multi-agent system performance
+
+#### 🔍 Chapter 6: Pre-Deployment Validation & Planning
+- [ ] **Capacity Analysis**: Analyzed resource requirements for applications
+- [ ] **SKU Optimization**: Selected cost-effective service tiers
+- [ ] **Validation Automation**: Implemented pre-deployment check scripts
+- [ ] **Cost Planning**: Created deployment cost estimates and budgets
+- [ ] **Risk Assessment**: Identified and mitigated deployment risks
+
+#### 🚨 Chapter 7: Troubleshooting & Debugging
+- [ ] **Diagnostic Skills**: Successfully debugged intentionally broken deployments
+- [ ] **Log Analysis**: Used Azure Monitor and Application Insights effectively
+- [ ] **Performance Tuning**: Optimized slow-performing applications
+- [ ] **Recovery Procedures**: Implemented backup and disaster recovery
+- [ ] **Monitoring Setup**: Created proactive monitoring and alerting
+
+#### 🏢 Chapter 8: Production & Enterprise Patterns
+- [ ] **Enterprise Security**: Implemented comprehensive security patterns
+- [ ] **Governance Framework**: Set up Azure Policy and resource management
+- [ ] **Advanced Monitoring**: Created dashboards and automated alerting
+- [ ] **CI/CD Integration**: Built automated deployment pipelines
+- [ ] **Compliance Implementation**: Met enterprise compliance requirements
+
+### Learning Timeline and Milestones
+
+#### Week 1-2: Foundation Building
+- **Milestone**: Deploy first AI application using AZD
+- **Validation**: Working application accessible via public URL
+- **Skills**: Basic AZD workflows and AI service integration
+
+#### Week 3-4: Configuration Mastery
+- **Milestone**: Multi-environment deployment with secure authentication
+- **Validation**: Same application deployed to dev/staging/prod
+- **Skills**: Environment management and security implementation
+
+#### Week 5-6: Infrastructure Expertise
+- **Milestone**: Custom template for complex multi-service application
+- **Validation**: Reusable template deployed by another team member
+- **Skills**: Bicep mastery and infrastructure automation
+
+#### Week 7-8: Advanced AI Implementation
+- **Milestone**: Production-ready multi-agent AI solution
+- **Validation**: System handling real-world load with monitoring
+- **Skills**: Multi-agent orchestration and performance optimization
+
+#### Week 9-10: Production Readiness
+- **Milestone**: Enterprise-grade deployment with full compliance
+- **Validation**: Passes security review and cost optimization audit
+- **Skills**: Governance, monitoring, and CI/CD integration
+
+### Assessment and Certification
+
+#### Knowledge Validation Methods
+1. **Practical Deployments**: Working applications for each chapter
+2. **Code Reviews**: Template and configuration quality assessment
+3. **Problem Solving**: Troubleshooting scenarios and solutions
+4. **Peer Teaching**: Explain concepts to other learners
+5. **Community Contribution**: Share templates or improvements
+
+#### Professional Development Outcomes
+- **Portfolio Projects**: 8 production-ready deployments
+- **Technical Skills**: Industry-standard AZD and AI deployment expertise
+- **Problem-Solving Abilities**: Independent troubleshooting and optimization
+- **Community Recognition**: Active participation in Azure developer community
+- **Career Advancement**: Skills directly applicable to cloud and AI roles
+
+#### Success Metrics
+- **Deployment Success Rate**: >95% successful deployments
+- **Troubleshooting Time**: <30 minutes for common issues
+- **Performance Optimization**: Demonstrable improvements in cost and performance
+- **Security Compliance**: All deployments meet enterprise security standards
+- **Knowledge Transfer**: Ability to mentor other developers
+
+### Continuous Learning and Community Engagement
+
+#### Stay Current
+- **Azure Updates**: Follow Azure Developer CLI release notes
+- **Community Events**: Participate in Azure and AI developer events
+- **Documentation**: Contribute to community documentation and examples
+- **Feedback Loop**: Provide feedback on course content and Azure services
+
+#### Career Development
+- **Professional Network**: Connect with Azure and AI experts
+- **Speaking Opportunities**: Present learnings at conferences or meetups
+- **Open Source Contribution**: Contribute to AZD templates and tools
+- **Mentorship**: Guide other developers in their AZD learning journey
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [FAQ](faq.md)
-- **Next Lesson**: [Changelog](../changelog.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Start Learning**: [Chapter 1: Foundation & Quick Start](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Progress Tracking**: Track your advancement through the comprehensive 8-chapter learning system
+- **🤝 Community**: [Azure Discord](https://discord.gg/microsoft-azure) for support and discussion
 
-**Study Progress Tracking**: Use this guide to track your learning journey and ensure comprehensive coverage of all Azure Developer CLI concepts and practices.
+**Study Progress Tracking**: Use this structured guide to master Azure Developer CLI through progressive, practical learning with measurable outcomes and professional development benefits.

@@ -1,6 +1,11 @@
 # Installation & Setup Guide
 
-**Previous:** [Main Documentation](../../README.md) | **Next:** [AZD Basics](azd-basics.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [AZD Basics](azd-basics.md)
+- **➡️ Next**: [Your First Project](first-project.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 
@@ -329,6 +334,11 @@ If you encounter issues:
 
 ---
 
-**Previous:** [Main Documentation](../../README.md) | **Next:** [AZD Basics](azd-basics.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [AZD Basics](azd-basics.md) 
+- **➡️ Next**: [Your First Project](first-project.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.
+**✅ Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.

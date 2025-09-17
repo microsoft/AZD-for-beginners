@@ -1,5 +1,11 @@
 # Frequently Asked Questions (FAQ)
 
+**Get Help by Chapter**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **🚆 Installation Issues**: [Chapter 1: Installation & Setup](../docs/getting-started/installation.md)
+- **🤖 AI Questions**: [Chapter 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Troubleshooting**: [Chapter 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
+
 ## Introduction
 
 This comprehensive FAQ provides answers to the most common questions about Azure Developer CLI (azd) and Azure deployments. Find quick solutions to common problems, understand best practices, and get clarification on azd concepts and workflows.

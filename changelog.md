@@ -22,6 +22,61 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.2.0] - 2025-09-17
+
+#### Major Navigation Restructuring and Chapter-Based Learning System
+**This version introduces a comprehensive chapter-based learning structure with enhanced navigation throughout the entire repository.**
+
+#### Added
+- **📚 Chapter-Based Learning System**: Restructured entire course into 8 progressive learning chapters
+  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
+  - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
+  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
+  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)
+  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)
+  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
+  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
+  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
+- **📚 Comprehensive Navigation System**: Consistent navigation headers and footers across all documentation
+- **🎯 Progress Tracking**: Course completion checklist and learning verification system
+- **🗺️ Learning Path Guidance**: Clear entry points for different experience levels and goals
+- **🔗 Cross-Reference Navigation**: Related chapters and prerequisites clearly linked
+
+#### Enhanced
+- **README Structure**: Transformed into a structured learning platform with chapter-based organization
+- **Documentation Navigation**: Every page now includes chapter context and progression guidance
+- **Template Organization**: Examples and templates mapped to appropriate learning chapters
+- **Resource Integration**: Cheat sheets, FAQs, and study guides connected to relevant chapters
+- **Workshop Integration**: Hands-on labs mapped to multiple chapter learning objectives
+
+#### Changed
+- **Learning Progression**: Moved from linear documentation to flexible chapter-based learning
+- **Configuration Placement**: Repositioned configuration guide as Chapter 3 for better learning flow
+- **AI Content Integration**: Better integration of AI-specific content throughout the learning journey
+- **Production Content**: Advanced patterns consolidated in Chapter 8 for enterprise learners
+
+#### Improved
+- **User Experience**: Clear navigation breadcrumbs and chapter progression indicators
+- **Accessibility**: Consistent navigation patterns for easier course traversal
+- **Professional Presentation**: University-style course structure suitable for academic and corporate training
+- **Learning Efficiency**: Reduced time to find relevant content through improved organization
+
+#### Technical Implementation
+- **Navigation Headers**: Standardized chapter navigation across 40+ documentation files
+- **Footer Navigation**: Consistent progression guidance and chapter completion indicators
+- **Cross-Linking**: Comprehensive internal linking system connecting related concepts
+- **Chapter Mapping**: Templates and examples clearly associated with learning objectives
+
+#### Study Guide Enhancement
+- **📚 Comprehensive Learning Objectives**: Restructured study guide to align with 8-chapter system
+- **🎯 Chapter-Based Assessment**: Each chapter includes specific learning objectives and practical exercises
+- **📋 Progress Tracking**: Weekly learning schedule with measurable outcomes and completion checklists
+- **❓ Assessment Questions**: Knowledge validation questions for each chapter with professional outcomes
+- **🛠️ Practical Exercises**: Hands-on activities with real deployment scenarios and troubleshooting
+- **📊 Skill Progression**: Clear advancement from basic concepts to enterprise patterns with career development focus
+- **🎓 Certification Framework**: Professional development outcomes and community recognition system
+- **⏱️ Timeline Management**: Structured 10-week learning plan with milestone validation
+
 ### [v3.1.0] - 2025-09-17
 
 #### Enhanced Multi-Agent AI Solutions
