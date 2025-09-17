@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T17:44:30+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T14:35:37+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "ko"
 }
 -->
-# Azure Developer CLI를 위한 AI 문제 해결 가이드
+# AI-특화 문제 해결 가이드
 
-**이전:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **다음:** [Getting Started with AZD](../getting-started/README.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 7 - 문제 해결 및 디버깅
+- **⬅️ 이전**: [디버깅 가이드](debugging.md)
+- **➡️ 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../ai-foundry/production-ai-practices.md)
+- **🤖 관련**: [챕터 2: AI-우선 개발](../ai-foundry/azure-ai-foundry-integration.md)
 
-이 포괄적인 문제 해결 가이드는 AZD를 사용하여 AI 솔루션을 배포할 때 발생하는 일반적인 문제를 다루며, Azure AI 서비스에 특화된 해결책과 디버깅 기술을 제공합니다.
+**이전:** [프로덕션 AI 실습](../ai-foundry/production-ai-practices.md) | **다음:** [AZD 시작하기](../getting-started/README.md)
+
+이 포괄적인 문제 해결 가이드는 AZD를 사용하여 AI 솔루션을 배포할 때 발생할 수 있는 일반적인 문제를 다루며, Azure AI 서비스에 특화된 해결책과 디버깅 기술을 제공합니다.
 
 ## 목차
 
@@ -169,7 +176,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **시맨틱 검색 비활성화 (개발 환경):**
+2. **시맨틱 검색 비활성화 (개발용):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -410,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### 문제: Key Vault 접근 거부
+### 문제: 키 볼트 액세스 거부
 
 **증상:**
 ```
@@ -419,7 +426,7 @@ Error: The user, group or application does not have secrets get permission
 
 **해결책:**
 
-1. **Key Vault 권한 부여:**
+1. **키 볼트 권한 부여:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -438,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **RBAC 사용 (액세스 정책 대신):**
+2. **액세스 정책 대신 RBAC 사용:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -660,8 +667,8 @@ class MemoryOptimizedAI:
 ### 문제: 예상치 못한 높은 비용
 
 **증상:**
-- 예상보다 높은 Azure 청구서
-- 토큰 사용량 초과
+- Azure 청구서 예상보다 높음
+- 토큰 사용량이 추정치를 초과
 - 예산 알림 발생
 
 **해결책:**
@@ -836,7 +843,7 @@ def monitor_performance(func):
 ## 일반적인 오류 코드 및 해결책
 
 | 오류 코드 | 설명 | 해결책 |
-|-----------|------|--------|
+|------------|-------------|----------|
 | 401 | 인증 실패 | API 키 및 관리 ID 구성 확인 |
 | 403 | 접근 금지 | RBAC 역할 할당 확인 |
 | 429 | 속도 제한 | 지수 백오프를 사용한 재시도 로직 구현 |
@@ -846,9 +853,9 @@ def monitor_performance(func):
 ## 다음 단계
 
 1. **[AI 모델 배포 가이드](ai-model-deployment.md)**를 검토하여 배포 모범 사례 확인
-2. **[Production AI Practices](production-ai-practices.md)**를 완료하여 엔터프라이즈 준비 솔루션 확보
+2. **[프로덕션 AI 실습](production-ai-practices.md)**을 완료하여 엔터프라이즈 준비 솔루션 확보
 3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)**에 참여하여 커뮤니티 지원 받기
-4. **문제 제출**을 [AZD GitHub 저장소](https://github.com/Azure/azure-dev)에 등록하여 AZD 관련 문제 해결
+4. **문제 제출**: [AZD GitHub 리포지토리](https://github.com/Azure/azure-dev)에 AZD 관련 문제 보고
 
 ## 리소스
 
@@ -858,10 +865,15 @@ def monitor_performance(func):
 
 ---
 
-**이전:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **다음:** [Workshop](../../workshop/README.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 7 - 문제 해결 및 디버깅
+- **⬅️ 이전**: [디버깅 가이드](debugging.md)
+- **➡️ 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../ai-foundry/production-ai-practices.md)
+- **🤖 관련**: [챕터 2: AI-우선 개발](../ai-foundry/azure-ai-foundry-integration.md)
 - [Azure Developer CLI 문제 해결](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 신뢰할 수 있는 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

@@ -1,43 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T16:58:15+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T14:32:21+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ko"
 }
 -->
 # 첫 번째 프로젝트 - 실습 튜토리얼
 
-**이전:** [Configuration](configuration.md) | **다음:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 1 - 기초 및 빠른 시작
+- **⬅️ 이전**: [설치 및 설정](installation.md)
+- **➡️ 다음**: [구성](configuration.md)
+- **🚀 다음 챕터**: [챕터 2: AI-우선 개발](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 소개
 
-Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적인 실습 튜토리얼은 azd를 사용하여 Azure에서 풀스택 애플리케이션을 생성, 배포 및 관리하는 과정을 안내합니다. React 프론트엔드, Node.js API 백엔드, MongoDB 데이터베이스를 포함한 실제 할 일(todo) 애플리케이션을 다루게 됩니다.
+Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적인 실습 튜토리얼은 azd를 사용하여 Azure에서 풀스택 애플리케이션을 생성, 배포 및 관리하는 과정을 완벽히 안내합니다. React 프론트엔드, Node.js API 백엔드, MongoDB 데이터베이스를 포함한 실제 할 일(todo) 애플리케이션을 다루게 됩니다.
 
 ## 학습 목표
 
-이 튜토리얼을 완료하면 다음을 배울 수 있습니다:
+이 튜토리얼을 완료하면 다음을 할 수 있습니다:
 - 템플릿을 사용한 azd 프로젝트 초기화 워크플로우 숙달
 - Azure Developer CLI 프로젝트 구조 및 구성 파일 이해
-- 인프라 프로비저닝과 함께 애플리케이션을 Azure에 완전 배포
+- 인프라 프로비저닝과 함께 Azure에 애플리케이션을 완전 배포
 - 애플리케이션 업데이트 및 재배포 전략 구현
 - 개발 및 스테이징을 위한 여러 환경 관리
 - 리소스 정리 및 비용 관리 실천
 
 ## 학습 결과
 
-튜토리얼 완료 후, 다음을 수행할 수 있습니다:
-- 템플릿에서 azd 프로젝트를 독립적으로 초기화하고 구성
-- azd 프로젝트 구조를 효과적으로 탐색하고 수정
+튜토리얼 완료 후, 다음을 할 수 있습니다:
+- 템플릿에서 azd 프로젝트를 독립적으로 초기화 및 구성
+- azd 프로젝트 구조를 효과적으로 탐색 및 수정
 - 단일 명령으로 Azure에 풀스택 애플리케이션 배포
 - 일반적인 배포 문제 및 인증 문제 해결
-- 다양한 배포 단계에 맞는 여러 Azure 환경 관리
+- 다양한 배포 단계에 대한 여러 Azure 환경 관리
 - 애플리케이션 업데이트를 위한 지속적 배포 워크플로우 구현
 
 ## 시작하기
 
-### 사전 준비 체크리스트
+### 사전 요구사항 체크리스트
 - ✅ Azure Developer CLI 설치 ([설치 가이드](installation.md))
 - ✅ Azure CLI 설치 및 인증 완료
 - ✅ Git 시스템에 설치
@@ -80,7 +85,7 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### 방금 무슨 일이 일어났나요?
-- 템플릿 코드를 로컬 디렉토리에 다운로드
+- 템플릿 코드가 로컬 디렉토리에 다운로드됨
 - 서비스 정의가 포함된 `azure.yaml` 파일 생성
 - `infra/` 디렉토리에 인프라 코드 설정
 - 환경 구성 생성
@@ -164,7 +169,7 @@ azd env get-values
 
 ## 4단계: Azure에 배포
 
-이제 모든 것을 Azure에 배포해 봅시다!
+이제 흥미로운 부분입니다 - 모든 것을 Azure에 배포해 봅시다!
 
 ```bash
 # Deploy infrastructure and application
@@ -182,7 +187,7 @@ azd up
 `azd up` 명령은 다음 단계를 수행합니다:
 1. **프로비저닝** (`azd provision`) - Azure 리소스 생성
 2. **패키징** - 애플리케이션 코드 빌드
-3. **배포** (`azd deploy`) - 코드를 Azure 리소스에 배포
+3. **배포** (`azd deploy`) - Azure 리소스에 코드 배포
 
 ### 예상 출력
 ```
@@ -239,7 +244,7 @@ code src/api/src/routes/lists.js
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### 코드 변경 사항만 배포
+### 코드 변경만 배포
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -278,7 +283,7 @@ azd show
 
 ## 8단계: 리소스 정리
 
-실험이 끝나면 지속적인 비용을 방지하기 위해 정리:
+실험이 끝나면 지속적인 비용을 피하기 위해 정리:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -297,7 +302,7 @@ azd down --force --purge
 축하합니다! 성공적으로:
 - 템플릿에서 azd 프로젝트 초기화
 - 프로젝트 구조 및 주요 파일 탐색
-- 풀스택 애플리케이션을 Azure에 배포
+- Azure에 풀스택 애플리케이션 배포
 - 코드 변경 및 재배포
 - 여러 환경 관리
 - 리소스 정리 완료
@@ -390,10 +395,15 @@ azd init --template todo-java-mongo
 
 ---
 
-**이전:** [Configuration](configuration.md) | **다음:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
-- **다음 레슨**: [Deployment Guide](../deployment/deployment-guide.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 1 - 기초 및 빠른 시작
+- **⬅️ 이전**: [설치 및 설정](installation.md)
+- **➡️ 다음**: [구성](configuration.md)
+- **🚀 다음 챕터**: [챕터 2: AI-우선 개발](../ai-foundry/azure-ai-foundry-integration.md)
+- **다음 레슨**: [배포 가이드](../deployment/deployment-guide.md)
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

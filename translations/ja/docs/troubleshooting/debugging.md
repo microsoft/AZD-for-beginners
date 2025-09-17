@@ -1,47 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:28:48+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T14:16:39+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ja"
 }
 -->
-# デバッグガイド - 高度なトラブルシューティングログ分析技術
+# AZDデプロイメントのデバッグガイド
+
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
+- **⬅️ 前の章**: [よくある問題](common-issues.md)
+- **➡️ 次の章**: [AI特有のトラブルシューティング](ai-troubleshooting.md)
+- **🚀 次の章**: [第8章: 本番環境とエンタープライズパターン](../ai-foundry/production-ai-practices.md)
 
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLI のデプロイメントにおける複雑な問題を診断・解決するための高度なデバッグ戦略、ツール、技術を提供します。体系的なトラブルシューティング手法、ログ分析技術、パフォーマンスプロファイリング、そして高度な診断ツールを学び、デプロイメントやランタイムの問題を効率的に解決する方法を習得しましょう。
+この包括的なガイドでは、Azure Developer CLIデプロイメントにおける複雑な問題を診断し解決するための高度なデバッグ戦略、ツール、および技術を提供します。体系的なトラブルシューティング手法、ログ分析技術、パフォーマンスプロファイリング、そして高度な診断ツールを学び、デプロイメントやランタイムの問題を効率的に解決する方法を習得しましょう。
 
 ## 学習目標
 
-このガイドを完了することで、以下を習得できます:
-- Azure Developer CLI の問題に対する体系的なデバッグ手法をマスターする
+このガイドを完了することで、以下を達成できます:
+- Azure Developer CLIの問題に対する体系的なデバッグ手法を習得する
 - 高度なログ設定とログ分析技術を理解する
 - パフォーマンスプロファイリングとモニタリング戦略を実装する
-- 複雑な問題解決のための Azure 診断ツールとサービスを使用する
+- Azureの診断ツールやサービスを使用して複雑な問題を解決する
 - ネットワークデバッグやセキュリティトラブルシューティング技術を適用する
-- プロアクティブな問題検出のための包括的なモニタリングとアラート設定を構成する
+- プロアクティブな問題検出のための包括的なモニタリングとアラートを設定する
 
 ## 学習成果
 
-完了後、以下ができるようになります:
-- TRIAGE 手法を適用して複雑なデプロイメント問題を体系的にデバッグする
-- 包括的なログとトレース情報を設定・分析する
-- Azure Monitor、Application Insights、診断ツールを効果的に使用する
-- ネットワーク接続、認証、権限問題を独自にデバッグする
+このガイドを完了すると、以下ができるようになります:
+- TRIAGE手法を適用して複雑なデプロイメント問題を体系的にデバッグする
+- 包括的なログとトレース情報を設定し分析する
+- Azure Monitor、Application Insights、および診断ツールを効果的に使用する
+- ネットワーク接続、認証、権限の問題を独自にデバッグする
 - パフォーマンスモニタリングと最適化戦略を実装する
 - 再発する問題に対するカスタムデバッグスクリプトと自動化を作成する
 
 ## デバッグ手法
 
-### TRIAGE アプローチ
-- **T**ime: 問題がいつ発生したか？
+### TRIAGEアプローチ
+- **T**ime: 問題が発生したのはいつか？
 - **R**eproduce: 一貫して再現できるか？
-- **I**solate: どのコンポーネントが失敗しているか？
-- **A**nalyze: ログから何が分かるか？
-- **G**ather: 関連情報をすべて収集する
-- **E**scalate: 追加の支援が必要な場合
+- **I**solate: どのコンポーネントが失敗しているのか？
+- **A**nalyze: ログは何を示しているか？
+- **G**ather: 関連するすべての情報を収集する
+- **E**scalate: 追加の支援を求めるタイミング
 
 ## デバッグモードの有効化
 
@@ -98,7 +105,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### ログの相関
+### ログの相関分析
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -123,7 +130,7 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ## 🛠️ 高度なデバッグツール
 
-### Azure Resource Graph クエリ
+### Azure Resource Graphクエリ
 ```bash
 # Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
@@ -231,7 +238,7 @@ monitor_performance() {
 }
 ```
 
-### リソース利用状況分析
+### リソース利用状況の分析
 ```bash
 # Monitor resource usage
 monitor_resources() {
@@ -328,9 +335,9 @@ load_test() {
 }
 ```
 
-## 🔧 インフラストラクチャデバッグ
+## 🔧 インフラデバッグ
 
-### Bicep テンプレートデバッグ
+### Bicepテンプレートデバッグ
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -370,7 +377,7 @@ debug_deployment() {
 }
 ```
 
-### リソース状態分析
+### リソース状態の分析
 ```bash
 # Analyze resource states for inconsistencies
 analyze_resources() {
@@ -451,9 +458,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 アプリケーション固有のデバッグ
+## 📱 アプリケーション特有のデバッグ
 
-### Node.js アプリケーションデバッグ
+### Node.jsアプリケーションデバッグ
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -652,11 +659,11 @@ aggregate_logs() {
 ## 🔗 高度なリソース
 
 ### カスタムデバッグスクリプト
-`scripts/debug/` ディレクトリを作成し、以下を含めます:
+`scripts/debug/`ディレクトリを作成し、以下を含めます:
 - `health-check.sh` - 包括的なヘルスチェック
 - `performance-test.sh` - 自動化されたパフォーマンステスト
 - `log-analyzer.py` - 高度なログ解析
-- `resource-validator.sh` - インフラストラクチャ検証
+- `resource-validator.sh` - インフラ検証
 
 ### モニタリング統合
 ```yaml
@@ -677,7 +684,7 @@ hooks:
 
 ## ベストプラクティス
 
-1. **デバッグログを常に有効化**する（非本番環境で）
+1. **デバッグログを常に有効化**（非本番環境で）
 2. **再現可能なテストケースを作成**する
 3. **デバッグ手順を文書化**してチームで共有する
 4. **ヘルスチェックとモニタリングを自動化**する
@@ -687,18 +694,18 @@ hooks:
 ## 次のステップ
 
 - [キャパシティプランニング](../pre-deployment/capacity-planning.md) - リソース要件を計画する
-- [SKU 選択](../pre-deployment/sku-selection.md) - 適切なサービス階層を選択する
+- [SKU選択](../pre-deployment/sku-selection.md) - 適切なサービス階層を選択する
 - [事前チェック](../pre-deployment/preflight-checks.md) - デプロイ前の検証
-- [チートシート](../../resources/cheat-sheet.md) - コマンドのクイックリファレンス
+- [チートシート](../../resources/cheat-sheet.md) - クイックリファレンスコマンド
 
 ---
 
-**覚えておいてください**: 良いデバッグは体系的で、徹底的で、忍耐強く行うことが重要です。これらのツールと技術は、問題をより迅速かつ効果的に診断するのに役立ちます。
+**覚えておいてください**: 良いデバッグとは、体系的で徹底的、そして忍耐強く行うことです。このツールと技術を活用して、問題をより迅速かつ効果的に診断しましょう。
 
 ---
 
 **ナビゲーション**
-- **前のレッスン**: [一般的な問題](common-issues.md)
+- **前のレッスン**: [よくある問題](common-issues.md)
 
 - **次のレッスン**: [キャパシティプランニング](../pre-deployment/capacity-planning.md)
 

@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T17:05:12+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T15:04:01+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "es"
 }
 -->
 # Guía de Configuración
 
-**Anterior:** [AZD Básico](azd-basics.md) | **Siguiente:** [Primer Proyecto](first-project.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 3 - Configuración y Autenticación
+- **⬅️ Anterior**: [Tu Primer Proyecto](first-project.md)
+- **➡️ Siguiente**: [Guía de Despliegue](../deployment/deployment-guide.md)
+- **🚀 Próximo Capítulo**: [Capítulo 4: Infraestructura como Código](../deployment/deployment-guide.md)
 
 ## Introducción
 
@@ -19,7 +24,7 @@ Esta guía completa cubre todos los aspectos de la configuración de Azure Devel
 
 Al final de esta lección, podrás:
 - Dominar la jerarquía de configuración de azd y entender cómo se priorizan los ajustes
-- Configurar ajustes globales y específicos de proyectos de manera efectiva
+- Configurar ajustes globales y específicos del proyecto de manera efectiva
 - Gestionar múltiples entornos con diferentes configuraciones
 - Implementar patrones seguros de autenticación y autorización
 - Comprender patrones avanzados de configuración para escenarios complejos
@@ -64,7 +69,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Configuración Global Común
+### Configuraciones Globales Comunes
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Configuración Específica del Lenguaje
+#### Configuraciones Específicas del Lenguaje
 ```yaml
 services:
   node-app:
@@ -286,7 +291,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Autenticación con Service Principal
+### Autenticación con Principal de Servicio
 Para pipelines de CI/CD:
 ```bash
 # Set environment variables
@@ -549,10 +554,14 @@ Documenta tu configuración en `CONFIG.md`:
 
 ---
 
-**Anterior:** [AZD Básico](azd-basics.md) | **Siguiente:** [Primer Proyecto](first-project.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 3 - Configuración y Autenticación
+- **⬅️ Anterior**: [Tu Primer Proyecto](first-project.md)
+- **➡️ Próximo Capítulo**: [Capítulo 4: Infraestructura como Código](../deployment/deployment-guide.md)
 - **Próxima Lección**: [Tu Primer Proyecto](first-project.md)
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

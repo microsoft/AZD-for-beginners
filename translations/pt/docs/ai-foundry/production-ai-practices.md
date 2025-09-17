@@ -1,29 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T17:37:10+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-17T14:47:31+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "pt"
 }
 -->
 # Melhores Práticas para Workloads de IA em Produção com AZD
 
-**Anterior:** [Laboratório de IA](ai-workshop-lab.md) | **Próximo:** [Guia de Resolução de Problemas de IA](../troubleshooting/ai-troubleshooting.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 8 - Padrões de Produção e Empresariais
+- **⬅️ Capítulo Anterior**: [Capítulo 7: Resolução de Problemas](../troubleshooting/debugging.md)
+- **⬅️ Também Relacionado**: [Laboratório de IA](ai-workshop-lab.md)
+- **🎯 Curso Concluído**: [AZD Para Iniciantes](../../README.md)
 
 ## Visão Geral
 
-Este guia apresenta as melhores práticas para implementar workloads de IA prontos para produção utilizando o Azure Developer CLI (AZD). Baseado no feedback da comunidade do Discord Azure AI Foundry e em implementações reais de clientes, estas práticas abordam os desafios mais comuns em sistemas de IA em produção.
+Este guia apresenta as melhores práticas para implementar workloads de IA prontos para produção utilizando o Azure Developer CLI (AZD). Baseado em feedback da comunidade do Discord Azure AI Foundry e em implementações reais de clientes, estas práticas abordam os desafios mais comuns em sistemas de IA em produção.
 
 ## Principais Desafios Abordados
 
-Com base nos resultados da nossa pesquisa com a comunidade, estes são os principais desafios enfrentados pelos desenvolvedores:
+Com base nos resultados da nossa pesquisa na comunidade, estes são os principais desafios enfrentados pelos desenvolvedores:
 
 - **45%** têm dificuldades com implementações de IA multi-serviço
 - **38%** enfrentam problemas com gestão de credenciais e segredos  
 - **35%** acham difícil preparar para produção e escalar
 - **32%** precisam de melhores estratégias de otimização de custos
-- **29%** necessitam de monitorização e resolução de problemas mais eficazes
+- **29%** necessitam de monitorização e resolução de problemas aprimoradas
 
 ## Padrões de Arquitetura para IA em Produção
 
@@ -248,7 +253,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. Estratégias de Auto-Escala
 
-**Auto-escalonamento de Container Apps**:
+**Auto-escalonamento de Aplicações em Contêineres**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -364,7 +369,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Dimensionamento Adequado de Recursos
 
-**Configurações Específicas para o Ambiente**:
+**Configurações Específicas para Ambientes**:
 
 ```bash
 # Development environment
@@ -425,7 +430,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Otimização do Uso de Tokens
+### 3. Otimização de Uso de Tokens
 
 **Gestão de Custos do OpenAI**:
 
@@ -848,7 +853,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Balanceamento de carga configurado
 - [ ] CDN para conteúdo estático
 - [ ] Pooling de conexões de base de dados
-- [ ] Otimização do uso de tokens
+- [ ] Otimização de uso de tokens
 
 ### Monitorização ✅
 - [ ] Application Insights configurado
@@ -892,7 +897,7 @@ echo "Infrastructure validation completed successfully!"
 | **Disponibilidade** | 99.9% | Monitorização de Uptime |
 | **Taxa de Erro** | < 0.1% | Logs da aplicação |
 | **Uso de Tokens** | < $500/mês | Gestão de custos |
-| **Usuários Simultâneos** | 1000+ | Testes de carga |
+| **Usuários Concorrentes** | 1000+ | Testes de carga |
 | **Tempo de Recuperação** | < 1 hora | Testes de recuperação de desastres |
 
 ### Testes de Carga
@@ -912,7 +917,7 @@ Com base no feedback da comunidade do Discord Azure AI Foundry:
 
 ### Principais Recomendações da Comunidade:
 
-1. **Comece Pequeno, Escale Gradualmente**: Inicie com SKUs básicos e escale com base no uso real
+1. **Comece Pequeno, Escale Gradualmente**: Inicie com SKUs básicos e escale conforme o uso real
 2. **Monitorize Tudo**: Configure monitorização abrangente desde o primeiro dia
 3. **Automatize a Segurança**: Utilize infraestrutura como código para segurança consistente
 4. **Teste Minuciosamente**: Inclua testes específicos de IA no seu pipeline
@@ -928,18 +933,23 @@ Com base no feedback da comunidade do Discord Azure AI Foundry:
 
 ## Recursos Adicionais
 
-- **Azure Well-Architected Framework**: [Orientação para workloads de IA](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Framework Bem-Arquitetado da Azure**: [Orientação para workloads de IA](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Documentação do Azure AI Foundry**: [Documentação oficial](https://learn.microsoft.com/azure/ai-studio/)
-- **Templates da Comunidade**: [Exemplos do Azure](https://github.com/Azure-Samples)
+- **Templates da Comunidade**: [Exemplos da Azure](https://github.com/Azure-Samples)
 - **Comunidade no Discord**: [Canal #Azure](https://discord.gg/microsoft-azure)
 
 ---
 
-**Anterior:** [Laboratório de IA](ai-workshop-lab.md) | **Próximo:** [Guia de Resolução de Problemas de IA](../troubleshooting/ai-troubleshooting.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 8 - Padrões de Produção e Empresariais
+- **⬅️ Capítulo Anterior**: [Capítulo 7: Resolução de Problemas](../troubleshooting/debugging.md)
+- **⬅️ Também Relacionado**: [Laboratório de IA](ai-workshop-lab.md)
+- **🎆 Curso Concluído**: [AZD Para Iniciantes](../../README.md)
 
 **Lembre-se**: Workloads de IA em produção exigem planeamento cuidadoso, monitorização e otimização contínua. Comece com estes padrões e adapte-os às suas necessidades específicas.
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante ter em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

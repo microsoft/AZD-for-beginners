@@ -1,34 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T16:58:44+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T14:15:16+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "ja"
 }
 -->
 # デプロイメントガイド - AZDデプロイメントの習得
 
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
+- **📖 現在の章**: 第4章 - インフラストラクチャコードとデプロイメント
+- **⬅️ 前の章**: [第3章: 設定](../getting-started/configuration.md)
+- **➡️ 次**: [リソースのプロビジョニング](provisioning.md)
+- **🚀 次の章**: [第5章: マルチエージェントAIソリューション](../../examples/retail-scenario.md)
+
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLIを使用したアプリケーションのデプロイ方法について、基本的な単一コマンドのデプロイメントから、カスタムフック、複数環境、CI/CD統合を含む高度なプロダクションシナリオまでを網羅しています。実践的な例とベストプラクティスを通じて、デプロイメントライフサイクル全体を習得しましょう。
+この包括的なガイドでは、Azure Developer CLIを使用したアプリケーションのデプロイメントについて、基本的な単一コマンドのデプロイメントから、カスタムフック、複数環境、CI/CD統合を含む高度なプロダクションシナリオまで、必要なすべてを解説します。実践的な例とベストプラクティスを通じて、デプロイメントライフサイクルを完全に習得しましょう。
 
 ## 学習目標
 
 このガイドを完了することで、以下を習得できます:
 - Azure Developer CLIのすべてのデプロイメントコマンドとワークフローをマスターする
-- プロビジョニングから監視までのデプロイメントライフサイクルを理解する
-- デプロイメント前後の自動化を実現するカスタムフックを実装する
-- 環境固有のパラメータを使用して複数環境を構成する
-- ブルーグリーンデプロイメントやカナリアデプロイメントなどの高度なデプロイメント戦略を設定する
+- プロビジョニングから監視までの完全なデプロイメントライフサイクルを理解する
+- デプロイメント前後の自動化のためのカスタムフックを実装する
+- 環境固有のパラメータを使用して複数環境を設定する
+- ブルーグリーンやカナリアデプロイメントなどの高度なデプロイメント戦略を設定する
 - azdデプロイメントをCI/CDパイプラインやDevOpsワークフローに統合する
 
 ## 学習成果
 
-このガイドを完了すると、以下ができるようになります:
+完了後、以下ができるようになります:
 - azdデプロイメントワークフローを独立して実行およびトラブルシューティングする
-- カスタムデプロイメント自動化をフックを使用して設計・実装する
-- 適切なセキュリティと監視を備えたプロダクション対応のデプロイメントを構成する
+- カスタムデプロイメント自動化をフックを使用して設計および実装する
+- 適切なセキュリティと監視を備えたプロダクション対応のデプロイメントを設定する
 - 複雑な複数環境デプロイメントシナリオを管理する
 - デプロイメントのパフォーマンスを最適化し、ロールバック戦略を実装する
 - azdデプロイメントをエンタープライズDevOpsプラクティスに統合する
@@ -56,7 +63,7 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### インフラのみのデプロイメント
+### インフラストラクチャのみのデプロイメント
 Azureリソースのみを更新する場合:
 ```bash
 # Provision/update infrastructure
@@ -70,7 +77,7 @@ azd provision --service database
 ```
 
 ### コードのみのデプロイメント
-アプリケーションを迅速に更新する場合:
+アプリケーションの迅速な更新に:
 ```bash
 # Deploy all services
 azd deploy
@@ -99,8 +106,8 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### フェーズ2: インフラプロビジョニング
-- インフラテンプレート (Bicep/Terraform) を読み込む
+### フェーズ2: インフラストラクチャのプロビジョニング
+- インフラストラクチャテンプレート (Bicep/Terraform) を読み込む
 - Azureリソースを作成または更新する
 - ネットワークとセキュリティを構成する
 - 監視とログを設定する
@@ -118,7 +125,7 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### フェーズ4: アプリケーションパッケージ化
+### フェーズ4: アプリケーションのパッケージ化
 - アプリケーションコードをビルドする
 - デプロイメントアーティファクトを作成する
 - 対象プラットフォーム向けにパッケージ化する (コンテナ、ZIPファイルなど)
@@ -136,7 +143,7 @@ hooks:
       npm run db:migrate
 ```
 
-### フェーズ6: アプリケーションデプロイメント
+### フェーズ6: アプリケーションのデプロイメント
 - パッケージ化されたアプリケーションをAzureサービスにデプロイする
 - 設定を更新する
 - サービスを開始/再起動する
@@ -154,7 +161,7 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ デプロイメント構成
+## 🎛️ デプロイメント設定
 
 ### サービス固有のデプロイメント設定
 ```yaml
@@ -186,7 +193,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### 環境固有の構成
+### 環境固有の設定
 ```bash
 # Development environment
 azd env set NODE_ENV development
@@ -208,7 +215,7 @@ azd env set LOG_LEVEL error
 
 ## 🔧 高度なデプロイメントシナリオ
 
-### 複数サービスアプリケーション
+### マルチサービスアプリケーション
 ```yaml
 # Complex application with multiple services
 services:
@@ -308,7 +315,7 @@ fi
 
 ## 🐳 コンテナデプロイメント
 
-### コンテナアプリデプロイメント
+### コンテナアプリのデプロイメント
 ```yaml
 services:
   api:
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### インフラロールバック
+### インフラストラクチャロールバック
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -582,7 +589,7 @@ azd env new production-v1
 ./scripts/sync-environments.sh
 ```
 
-### 2. インフラの検証
+### 2. インフラストラクチャの検証
 ```bash
 # Validate before deployment
 azd provision --preview
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. テスト統合
+### 3. 統合テスト
 ```yaml
 hooks:
   predeploy:
@@ -621,7 +628,7 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. ドキュメントとログの作成
+### 4. ドキュメントとログ
 ```bash
 # Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
@@ -632,7 +639,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ## 次のステップ
 
 - [リソースのプロビジョニング](provisioning.md) - インフラ管理の詳細
-- [デプロイ前の計画](../pre-deployment/capacity-planning.md) - デプロイメント戦略の計画
+- [デプロイ前の計画](../pre-deployment/capacity-planning.md) - デプロイメント戦略を計画する
 - [一般的な問題](../troubleshooting/common-issues.md) - デプロイメントの問題を解決する
 - [ベストプラクティス](../troubleshooting/debugging.md) - プロダクション対応のデプロイメント戦略
 
@@ -652,4 +659,4 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **免責事項**:  
-この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解について、当社は責任を負いません。
+この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてお考えください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。

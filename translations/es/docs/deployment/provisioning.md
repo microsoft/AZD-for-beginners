@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T17:03:48+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T15:05:02+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "es"
 }
 -->
-# Aprovisionamiento de Recursos - Infraestructura como Código con AZD
+# Aprovisionamiento de Recursos de Azure con AZD
+
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 4 - Infraestructura como Código y Despliegue
+- **⬅️ Anterior**: [Guía de Despliegue](deployment-guide.md)
+- **➡️ Siguiente Capítulo**: [Capítulo 5: Soluciones de IA Multi-Agente](../../examples/retail-scenario.md)
+- **🔧 Relacionado**: [Capítulo 6: Validación Pre-Despliegue](../pre-deployment/capacity-planning.md)
 
 ## Introducción
 
-Esta guía completa cubre todo lo que necesitas saber sobre el aprovisionamiento y la gestión de recursos de Azure utilizando Azure Developer CLI. Aprende a implementar patrones de Infraestructura como Código (IaC), desde la creación básica de recursos hasta arquitecturas avanzadas de infraestructura empresarial utilizando Bicep, plantillas ARM, Terraform y Pulumi.
+Esta guía completa cubre todo lo que necesitas saber sobre cómo aprovisionar y gestionar recursos de Azure utilizando Azure Developer CLI. Aprende a implementar patrones de Infraestructura como Código (IaC), desde la creación básica de recursos hasta arquitecturas avanzadas de infraestructura empresarial utilizando Bicep, plantillas ARM, Terraform y Pulumi.
 
 ## Objetivos de Aprendizaje
 
@@ -29,17 +36,17 @@ Al finalizar, serás capaz de:
 - Diseñar y aprovisionar infraestructura de Azure utilizando Bicep y plantillas ARM
 - Configurar arquitecturas complejas de múltiples servicios con dependencias de recursos adecuadas
 - Implementar plantillas parametrizadas para múltiples entornos y configuraciones
-- Solucionar problemas de aprovisionamiento de infraestructura y resolver fallos de implementación
-- Aplicar los principios del Marco Bien Arquitectado de Azure al diseño de infraestructura
-- Gestionar actualizaciones de infraestructura e implementar estrategias de versionado de infraestructura
+- Solucionar problemas de aprovisionamiento de infraestructura y resolver fallos de despliegue
+- Aplicar los principios del Marco de Arquitectura Bien Diseñada de Azure al diseño de infraestructura
+- Gestionar actualizaciones de infraestructura e implementar estrategias de versionado
 
 ## Descripción General del Aprovisionamiento de Infraestructura
 
-Azure Developer CLI admite múltiples proveedores de Infraestructura como Código (IaC):
-- **Bicep** (recomendado) - Lenguaje específico de dominio de Azure
-- **Plantillas ARM** - Plantillas JSON del Administrador de Recursos de Azure
-- **Terraform** - Herramienta de infraestructura multi-nube
-- **Pulumi** - Infraestructura moderna como código con lenguajes de programación
+Azure Developer CLI es compatible con múltiples proveedores de Infraestructura como Código (IaC):
+- **Bicep** (recomendado): Lenguaje específico de dominio de Azure
+- **Plantillas ARM**: Plantillas JSON del Administrador de Recursos de Azure
+- **Terraform**: Herramienta de infraestructura multi-nube
+- **Pulumi**: Infraestructura como código moderna con lenguajes de programación
 
 ## Comprendiendo los Recursos de Azure
 
@@ -130,7 +137,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Patrones Avanzados de Bicep
+### Patrones Avanzados con Bicep
 
 #### Infraestructura Modular
 ```bicep
@@ -802,7 +809,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Mejores Prácticas
 
-### 1. Convenciones de Nombres para Recursos
+### 1. Convenciones para Nombres de Recursos
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -859,17 +866,17 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Próximos Pasos
 
-- [Planificación Previa al Despliegue](../pre-deployment/capacity-planning.md) - Validar la disponibilidad de recursos
-- [Problemas Comunes](../troubleshooting/common-issues.md) - Solucionar problemas de infraestructura
-- [Guía de Depuración](../troubleshooting/debugging.md) - Depurar problemas de aprovisionamiento
-- [Selección de SKU](../pre-deployment/sku-selection.md) - Elegir niveles de servicio adecuados
+- [Planificación Pre-Despliegue](../pre-deployment/capacity-planning.md): Valida la disponibilidad de recursos
+- [Problemas Comunes](../troubleshooting/common-issues.md): Soluciona problemas de infraestructura
+- [Guía de Depuración](../troubleshooting/debugging.md): Depura problemas de aprovisionamiento
+- [Selección de SKU](../pre-deployment/sku-selection.md): Elige los niveles de servicio adecuados
 
 ## Recursos Adicionales
 
 - [Documentación de Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Plantillas del Administrador de Recursos de Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Centro de Arquitectura de Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Marco Bien Arquitectado de Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Marco de Arquitectura Bien Diseñada de Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -880,4 +887,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

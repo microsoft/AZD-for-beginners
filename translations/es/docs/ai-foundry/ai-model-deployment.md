@@ -1,23 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T17:41:22+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T15:02:55+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "es"
 }
 -->
-# Despliegue de Modelos de IA con Azure Developer CLI
+# Implementación de Modelos de IA con Azure Developer CLI
 
-**Anterior:** [Integración de Azure AI Foundry](azure-ai-foundry-integration.md) | **Siguiente:** [Laboratorio de Taller de IA](ai-workshop-lab.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 2 - Desarrollo con IA como prioridad
+- **⬅️ Anterior**: [Integración con Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Siguiente**: [Laboratorio de Taller de IA](ai-workshop-lab.md)
+- **🚀 Próximo Capítulo**: [Capítulo 3: Configuración](../getting-started/configuration.md)
 
-Esta guía proporciona instrucciones completas para desplegar modelos de IA utilizando plantillas de AZD, cubriendo todo desde la selección de modelos hasta patrones de despliegue en producción.
+Esta guía proporciona instrucciones completas para implementar modelos de IA utilizando plantillas de AZD, cubriendo desde la selección de modelos hasta patrones de implementación en producción.
 
 ## Tabla de Contenidos
 
 - [Estrategia de Selección de Modelos](../../../../docs/ai-foundry)
 - [Configuración de AZD para Modelos de IA](../../../../docs/ai-foundry)
-- [Patrones de Despliegue](../../../../docs/ai-foundry)
+- [Patrones de Implementación](../../../../docs/ai-foundry)
 - [Gestión de Modelos](../../../../docs/ai-foundry)
 - [Consideraciones para Producción](../../../../docs/ai-foundry)
 - [Monitoreo y Observabilidad](../../../../docs/ai-foundry)
@@ -57,8 +62,8 @@ services:
 ### Planificación de Capacidad del Modelo
 
 | Tipo de Modelo | Caso de Uso | Capacidad Recomendada | Consideraciones de Costos |
-|----------------|-------------|-----------------------|---------------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Rentable para la mayoría de las cargas de trabajo |
+|----------------|------------|-----------------------|---------------------------|
+| GPT-4o-mini | Chat, Preguntas y Respuestas | 10-50 TPM | Rentable para la mayoría de las cargas de trabajo |
 | GPT-4 | Razonamiento complejo | 20-100 TPM | Mayor costo, usar para funciones premium |
 | Text-embedding-ada-002 | Búsqueda, RAG | 30-120 TPM | Esencial para búsqueda semántica |
 | Whisper | Texto a voz | 10-50 TPM | Cargas de trabajo de procesamiento de audio |
@@ -67,7 +72,7 @@ services:
 
 ### Configuración de Plantillas Bicep
 
-Crea despliegues de modelos mediante plantillas Bicep:
+Crea implementaciones de modelos a través de plantillas Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -138,9 +143,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Patrones de Despliegue
+## Patrones de Implementación
 
-### Patrón 1: Despliegue en una sola región
+### Patrón 1: Implementación en una sola región
 
 ```yaml
 # azure.yaml - Single region
@@ -155,10 +160,10 @@ services:
 
 Ideal para:
 - Desarrollo y pruebas
-- Aplicaciones de un solo mercado
+- Aplicaciones para un solo mercado
 - Optimización de costos
 
-### Patrón 2: Despliegue en múltiples regiones
+### Patrón 2: Implementación en múltiples regiones
 
 ```bicep
 // Multi-region deployment
@@ -176,7 +181,7 @@ Ideal para:
 - Requisitos de alta disponibilidad
 - Distribución de carga
 
-### Patrón 3: Despliegue híbrido
+### Patrón 3: Implementación híbrida
 
 Combina Azure OpenAI con otros servicios de IA:
 
@@ -246,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### Pruebas A/B
 
-Despliega múltiples versiones de modelos:
+Implementa múltiples versiones de modelos:
 
 ```bicep
 param enableABTesting bool = false
@@ -477,9 +482,9 @@ async def check_ai_models():
 
 ## Próximos Pasos
 
-1. **Revisa la [Guía de Integración de Azure AI Foundry](azure-ai-foundry-integration.md)** para patrones de integración de servicios
+1. **Revisa la [Guía de Integración con Azure AI Foundry](azure-ai-foundry-integration.md)** para patrones de integración de servicios
 2. **Completa el [Laboratorio de Taller de IA](ai-workshop-lab.md)** para experiencia práctica
-3. **Implementa [Prácticas de IA en Producción](production-ai-practices.md)** para despliegues empresariales
+3. **Implementa [Prácticas de IA en Producción](production-ai-practices.md)** para implementaciones empresariales
 4. **Explora la [Guía de Resolución de Problemas de IA](../troubleshooting/ai-troubleshooting.md)** para problemas comunes
 
 ## Recursos
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**Anterior:** [Integración de Azure AI Foundry](azure-ai-foundry-integration.md) | **Siguiente:** [Laboratorio de Taller de IA](ai-workshop-lab.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 2 - Desarrollo con IA como prioridad
+- **⬅️ Anterior**: [Integración con Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Siguiente**: [Laboratorio de Taller de IA](ai-workshop-lab.md)
+- **🚀 Próximo Capítulo**: [Capítulo 3: Configuración](../getting-started/configuration.md)
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

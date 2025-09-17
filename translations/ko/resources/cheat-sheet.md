@@ -1,36 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T18:00:39+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T14:41:23+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "ko"
 }
 -->
 # 명령어 치트 시트 - 필수 AZD 명령어
 
+**모든 챕터를 빠르게 참고하기**
+- **📚 코스 홈**: [AZD 초보자용](../README.md)
+- **📖 빠른 시작**: [챕터 1: 기초 및 빠른 시작](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI 명령어**: [챕터 2: AI 우선 개발](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 고급**: [챕터 4: 코드로 인프라 관리](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## 소개
 
-이 종합 치트 시트는 가장 자주 사용되는 Azure Developer CLI 명령어를 카테고리별로 정리하고 실용적인 예제를 제공합니다. 개발, 문제 해결, 그리고 azd 프로젝트의 일상적인 작업 중 빠른 참조를 위해 완벽한 자료입니다.
+이 종합 치트 시트는 가장 자주 사용되는 Azure Developer CLI 명령어를 카테고리별로 정리하고 실용적인 예제를 제공합니다. 개발, 문제 해결, 그리고 azd 프로젝트와 관련된 일상적인 작업 중 빠르게 참고하기에 완벽합니다.
 
 ## 학습 목표
 
 이 치트 시트를 사용함으로써:
 - 필수 Azure Developer CLI 명령어와 문법에 즉시 접근할 수 있습니다.
 - 기능별 카테고리와 사용 사례에 따라 명령어를 이해할 수 있습니다.
-- 일반적인 개발 및 배포 시나리오에 대한 실용적인 예제를 참조할 수 있습니다.
+- 일반적인 개발 및 배포 시나리오에 대한 실용적인 예제를 참고할 수 있습니다.
 - 문제를 빠르게 해결할 수 있는 문제 해결 명령어를 찾을 수 있습니다.
 - 고급 설정 및 사용자 정의 옵션을 효율적으로 찾을 수 있습니다.
 - 환경 관리 및 다중 환경 워크플로 명령어를 쉽게 찾을 수 있습니다.
 
 ## 학습 결과
 
-이 치트 시트를 정기적으로 참조함으로써:
+이 치트 시트를 정기적으로 참고하면 다음을 할 수 있습니다:
 - 전체 문서를 참조하지 않고도 azd 명령어를 자신 있게 실행할 수 있습니다.
 - 적절한 진단 명령어를 사용하여 일반적인 문제를 빠르게 해결할 수 있습니다.
 - 여러 환경과 배포 시나리오를 효율적으로 관리할 수 있습니다.
 - 필요에 따라 고급 azd 기능과 설정 옵션을 적용할 수 있습니다.
-- 체계적인 명령어 시퀀스를 사용하여 배포 문제를 해결할 수 있습니다.
+- 체계적인 명령어 순서를 사용하여 배포 문제를 해결할 수 있습니다.
 - azd 단축키와 옵션을 효과적으로 사용하여 워크플로를 최적화할 수 있습니다.
 
 ## 시작하기 명령어
@@ -212,7 +218,7 @@ azd monitor
 azd monitor --insights
 ```
 
-## 🛠️ 유지 관리 명령어
+## 🛠️ 유지보수 명령어
 
 ### 정리
 ```bash
@@ -402,7 +408,7 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 일반적인 명령어 조합
+## 🔧 일반 명령어 조합
 
 ### 상태 확인 스크립트
 ```bash
@@ -446,7 +452,7 @@ done
 
 ## 📝 환경 변수
 
-### 일반적인 환경 변수
+### 일반 환경 변수
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -494,7 +500,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 전문가 팁
 
-### 빠른 워크플로를 위한 별칭
+### 워크플로를 빠르게 하는 별칭
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -552,7 +558,7 @@ azd template show <template-name> --docs
 
 ---
 
-**팁**: 이 치트 시트를 북마크하고 `Ctrl+F`를 사용하여 필요한 명령어를 빠르게 찾으세요!
+**팁**: 이 치트 시트를 북마크하고 `Ctrl+F`를 사용하여 필요한 명령어를 빠르게 찾아보세요!
 
 ---
 
@@ -563,4 +569,4 @@ azd template show <template-name> --docs
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

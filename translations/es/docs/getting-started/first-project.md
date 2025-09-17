@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T17:04:29+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T15:03:18+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "es"
 }
 -->
 # Tu Primer Proyecto - Tutorial Práctico
 
-**Anterior:** [Configuración](configuration.md) | **Siguiente:** [Integración con Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido
+- **⬅️ Anterior**: [Instalación y Configuración](installation.md)
+- **➡️ Siguiente**: [Configuración](configuration.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introducción
 
-¡Bienvenido a tu primer proyecto con Azure Developer CLI! Este tutorial práctico y completo te guiará paso a paso en la creación, implementación y gestión de una aplicación full-stack en Azure utilizando azd. Trabajarás con una aplicación real de tareas pendientes que incluye un frontend en React, un backend API en Node.js y una base de datos MongoDB.
+¡Bienvenido a tu primer proyecto con Azure Developer CLI! Este tutorial práctico te guiará paso a paso en la creación, implementación y gestión de una aplicación full-stack en Azure utilizando azd. Trabajarás con una aplicación real de tareas que incluye un frontend en React, un backend API en Node.js y una base de datos MongoDB.
 
 ## Objetivos de Aprendizaje
 
@@ -30,14 +35,14 @@ Al completar este tutorial, podrás:
 Al finalizar, serás capaz de:
 - Inicializar y configurar proyectos azd desde plantillas de forma independiente
 - Navegar y modificar estructuras de proyectos azd de manera efectiva
-- Implementar aplicaciones full-stack en Azure con comandos únicos
+- Implementar aplicaciones full-stack en Azure con comandos simples
 - Solucionar problemas comunes de implementación y autenticación
 - Gestionar múltiples entornos de Azure para diferentes etapas de implementación
 - Implementar flujos de despliegue continuo para actualizaciones de aplicaciones
 
 ## Comenzando
 
-### Lista de Verificación de Prerrequisitos
+### Lista de Verificación de Requisitos Previos
 - ✅ Azure Developer CLI instalado ([Guía de Instalación](installation.md))
 - ✅ Azure CLI instalado y autenticado
 - ✅ Git instalado en tu sistema
@@ -49,7 +54,7 @@ Al finalizar, serás capaz de:
 # Check azd installation
 azd version
 ```
-### Verifica la autenticación en Azure
+### Verifica la autenticación de Azure
 
 ```bash
 az account show
@@ -62,7 +67,7 @@ node --version
 
 ## Paso 1: Elegir e Inicializar una Plantilla
 
-Comencemos con una plantilla popular de aplicación de tareas pendientes que incluye un frontend en React y un backend API en Node.js.
+Comencemos con una plantilla popular de aplicación de tareas que incluye un frontend en React y un backend API en Node.js.
 
 ```bash
 # Browse available templates
@@ -79,7 +84,7 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### ¿Qué Acaba de Suceder?
+### ¿Qué acaba de suceder?
 - Se descargó el código de la plantilla en tu directorio local
 - Se creó un archivo `azure.yaml` con definiciones de servicios
 - Se configuró el código de infraestructura en el directorio `infra/`
@@ -177,10 +182,10 @@ azd up
 # 4. Display the application URL
 ```
 
-### ¿Qué Está Sucediendo Durante la Implementación?
+### ¿Qué está sucediendo durante la implementación?
 
 El comando `azd up` realiza estos pasos:
-1. **Provisionar** (`azd provision`) - Crea recursos en Azure
+1. **Aprovisionar** (`azd provision`) - Crea recursos de Azure
 2. **Empaquetar** - Construye el código de tu aplicación
 3. **Implementar** (`azd deploy`) - Implementa el código en los recursos de Azure
 
@@ -227,7 +232,7 @@ azd logs
 
 Hagamos un cambio y veamos lo fácil que es actualizar:
 
-### Modificar el API
+### Modificar la API
 ```bash
 # Edit the API code
 code src/api/src/routes/lists.js
@@ -292,7 +297,7 @@ azd env select staging
 azd down --force --purge
 ```
 
-## Lo Que Has Aprendido
+## Lo que Has Aprendido
 
 ¡Felicidades! Has logrado:
 - Inicializar un proyecto azd desde una plantilla
@@ -372,7 +377,7 @@ azd init --template todo-java-mongo
 ### Materiales de Aprendizaje
 - [Documentación de Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Centro de Arquitectura de Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Marco de Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Marco de Arquitectura Bien Diseñada de Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Comunidad y Soporte
 - [GitHub de Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -390,7 +395,12 @@ azd init --template todo-java-mongo
 
 ---
 
-**Anterior:** [Configuración](configuration.md) | **Siguiente:** [Integración con Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido
+- **⬅️ Anterior**: [Instalación y Configuración](installation.md)
+- **➡️ Siguiente**: [Configuración](configuration.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA](../ai-foundry/azure-ai-foundry-integration.md)
 - **Próxima Lección**: [Guía de Implementación](../deployment/deployment-guide.md)
 
 ---

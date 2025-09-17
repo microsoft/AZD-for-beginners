@@ -1,41 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T17:06:42+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T14:16:09+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "ja"
 }
 -->
-# よくある問題と解決策
+# よくある問題と解決方法
+
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
+- **⬅️ 前の章**: [第6章: 事前チェック](../pre-deployment/preflight-checks.md)
+- **➡️ 次へ**: [デバッグガイド](debugging.md)
+- **🚀 次の章**: [第8章: 本番環境とエンタープライズパターン](../ai-foundry/production-ai-practices.md)
 
 ## はじめに
 
-この包括的なトラブルシューティングガイドでは、Azure Developer CLIを使用する際によく遭遇する問題について説明します。認証、デプロイメント、インフラストラクチャのプロビジョニング、アプリケーション設定に関する一般的な問題を診断、トラブルシュート、解決する方法を学びます。各問題には、詳細な症状、根本原因、そして段階的な解決手順が含まれています。
+この包括的なトラブルシューティングガイドでは、Azure Developer CLI を使用する際によく遭遇する問題について説明します。認証、デプロイメント、インフラストラクチャのプロビジョニング、アプリケーション設定に関する問題を診断し、トラブルシューティングし、解決する方法を学びます。各問題には、詳細な症状、根本原因、そして段階的な解決手順が含まれています。
 
 ## 学習目標
 
-このガイドを完了することで、以下を習得できます：
-- Azure Developer CLIの問題に対する診断技術をマスターする
-- 一般的な認証と権限の問題を理解し、その解決策を学ぶ
+このガイドを完了することで、以下を習得できます:
+- Azure Developer CLI の問題に対する診断技術を習得する
+- 認証や権限に関する一般的な問題とその解決方法を理解する
 - デプロイメントの失敗、インフラストラクチャのプロビジョニングエラー、設定の問題を解決する
-- プロアクティブな監視とデバッグ戦略を実装する
+- 予防的な監視とデバッグ戦略を実装する
 - 複雑な問題に対する体系的なトラブルシューティング手法を適用する
 - 適切なログと監視を設定し、将来の問題を防ぐ
 
 ## 学習成果
 
-このガイドを完了すると、以下ができるようになります：
-- Azure Developer CLIの組み込み診断ツールを使用して問題を診断する
+完了後、以下ができるようになります:
+- Azure Developer CLI の組み込み診断ツールを使用して問題を診断する
 - 認証、サブスクリプション、権限に関連する問題を独自に解決する
-- デプロイメントの失敗やインフラストラクチャのプロビジョニングエラーを効果的にトラブルシュートする
+- デプロイメントの失敗やインフラストラクチャのプロビジョニングエラーを効果的にトラブルシューティングする
 - アプリケーション設定の問題や環境固有の問題をデバッグする
-- 監視とアラートを実装し、潜在的な問題をプロアクティブに特定する
-- ログ、デバッグ、問題解決のワークフローにおけるベストプラクティスを適用する
+- 監視とアラートを実装し、潜在的な問題を予防的に特定する
+- ログ、デバッグ、問題解決ワークフローのベストプラクティスを適用する
 
 ## クイック診断
 
-特定の問題に取り組む前に、以下のコマンドを実行して診断情報を収集してください：
+特定の問題に取り組む前に、以下のコマンドを実行して診断情報を収集してください:
 
 ```bash
 # Check azd version and health
@@ -59,10 +66,10 @@ azd <command> --debug
 
 ### 問題: "アクセストークンの取得に失敗しました"
 **症状:**
-- `azd up`が認証エラーで失敗する
-- コマンドが「未認証」または「アクセス拒否」を返す
+- `azd up` が認証エラーで失敗する
+- コマンドが "unauthorized" や "access denied" を返す
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Re-authenticate with Azure CLI
 az login
@@ -80,12 +87,12 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### 問題: デプロイメント中の「権限不足」
+### 問題: デプロイメント中の "権限不足"
 **症状:**
 - デプロイメントが権限エラーで失敗する
-- 特定のAzureリソースを作成できない
+- 特定の Azure リソースを作成できない
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
@@ -98,7 +105,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 ```
 
 ### 問題: マルチテナント認証の問題
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Login with specific tenant
 az login --tenant "your-tenant-id"
@@ -114,10 +121,10 @@ az account clear
 
 ### 問題: リソース名の競合
 **症状:**
-- 「リソース名がすでに存在しています」というエラー
+- "The resource name already exists" エラー
 - リソース作成中にデプロイメントが失敗する
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Use unique resource names with tokens
 # In your Bicep template:
@@ -131,12 +138,12 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### 問題: ロケーション/リージョンが利用不可
+### 問題: 利用可能な場所/リージョンがない
 **症状:**
-- 「リソースタイプに対してロケーション 'xyz' が利用できません」
-- 選択したリージョンで特定のSKUが利用できない
+- "The location 'xyz' is not available for resource type"
+- 選択したリージョンで特定の SKU が利用できない
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
@@ -152,10 +159,10 @@ azd env set AZURE_LOCATION eastus2
 
 ### 問題: クォータ超過エラー
 **症状:**
-- 「リソースタイプのクォータを超過しました」
-- 「リソースの最大数に達しました」
+- "Quota exceeded for resource type"
+- "Maximum number of resources reached"
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
@@ -175,12 +182,12 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### 問題: Bicepテンプレートエラー
+### 問題: Bicep テンプレートエラー
 **症状:**
 - テンプレートの検証失敗
-- Bicepファイルの構文エラー
+- Bicep ファイルの構文エラー
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
@@ -202,7 +209,7 @@ azd provision --preview
 - デプロイメント中にアプリケーションがビルドに失敗する
 - パッケージインストールエラー
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Check build logs
 azd logs --service web
@@ -231,7 +238,7 @@ docker run --rm test-image
 - コンテナアプリが起動しない
 - イメージプルエラー
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Test Docker build locally
 docker build -t my-app:latest .
@@ -252,7 +259,7 @@ az containerapp show --name my-app --resource-group my-rg
 - アプリケーションがデータベースに接続できない
 - 接続タイムアウトエラー
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
@@ -275,7 +282,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 - アプリが設定値を読み取れない
 - 環境変数が空のように見える
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Verify environment variables are set
 azd env get-values
@@ -291,12 +298,12 @@ azd deploy --service web
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### 問題: SSL/TLS証明書の問題
+### 問題: SSL/TLS 証明書の問題
 **症状:**
-- HTTPSが機能しない
+- HTTPS が機能しない
 - 証明書検証エラー
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
@@ -308,12 +315,12 @@ az webapp update --name myapp --resource-group myrg --https-only true
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### 問題: CORS設定の問題
+### 問題: CORS 設定の問題
 **症状:**
-- フロントエンドがAPIを呼び出せない
+- フロントエンドが API を呼び出せない
 - クロスオリジンリクエストがブロックされる
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
@@ -333,10 +340,10 @@ azd show
 
 ### 問題: 環境切り替えの問題
 **症状:**
-- 間違った環境が使用されている
+- 間違った環境が使用される
 - 設定が正しく切り替わらない
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. List all environments
 azd env list
@@ -357,7 +364,7 @@ azd env select production-new
 - 環境が無効な状態を示す
 - リソースが設定と一致しない
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Refresh environment state
 azd env refresh
@@ -375,10 +382,10 @@ azd env set DATABASE_URL "your-value"
 
 ### 問題: デプロイメント時間が遅い
 **症状:**
-- デプロイメントに時間がかかりすぎる
-- デプロイメント中のタイムアウト
+- デプロイメントが非常に時間がかかる
+- デプロイメント中にタイムアウトが発生する
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Enable parallel deployment
 azd config set deploy.parallelism 5
@@ -401,7 +408,7 @@ azd config set defaults.location eastus2
 - 応答時間が遅い
 - 高いリソース使用率
 
-**解決策:**
+**解決方法:**
 ```bash
 # 1. Scale up resources
 # Update SKU in main.parameters.json:
@@ -462,11 +469,11 @@ az webapp show --name myapp --resource-group myrg --query state
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 追加の支援を得る
+## 🆘 追加の支援を得る方法
 
 ### エスカレーションが必要な場合
-- すべての解決策を試した後も認証の問題が続く場合
-- Azureサービスに関連するインフラストラクチャの問題
+- すべての解決方法を試しても認証の問題が解決しない場合
+- Azure サービスに関連するインフラストラクチャの問題
 - 請求やサブスクリプションに関連する問題
 - セキュリティ上の懸念やインシデント
 
@@ -485,13 +492,13 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ```
 
 ### 収集すべき情報
-サポートに連絡する前に以下を収集してください：
-- `azd version`の出力
-- `azd info`の出力
+サポートに連絡する前に以下を収集してください:
+- `azd version` の出力
+- `azd info` の出力
 - エラーメッセージ（全文）
 - 問題を再現する手順
-- 環境の詳細（`azd env show`）
-- 問題が発生し始めたタイムライン
+- 環境の詳細 (`azd env show`)
+- 問題が発生し始めた時期のタイムライン
 
 ### ログ収集スクリプト
 ```bash
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 問題予防
 
-### デプロイメント前のチェックリスト
+### デプロイメント前チェックリスト
 ```bash
 # 1. Validate authentication
 az account show
@@ -538,7 +545,7 @@ npm run test
 azd provision --preview
 ```
 
-### 監視の設定
+### 監視のセットアップ
 ```bash
 # Enable Application Insights
 # Add to main.bicep:
@@ -571,11 +578,11 @@ az security assessment list --resource-group myrg
 - [デバッグガイド](debugging.md) - 高度なデバッグ技術
 - [リソースのプロビジョニング](../deployment/provisioning.md) - インフラストラクチャのトラブルシューティング
 - [キャパシティプランニング](../pre-deployment/capacity-planning.md) - リソース計画のガイダンス
-- [SKU選択](../pre-deployment/sku-selection.md) - サービス層の推奨事項
+- [SKU の選択](../pre-deployment/sku-selection.md) - サービス層の推奨事項
 
 ---
 
-**ヒント**: このガイドをブックマークして、問題が発生した際に参照してください。ほとんどの問題は以前に経験されており、確立された解決策があります！
+**ヒント**: このガイドをブックマークして、問題が発生した際に参照してください。ほとんどの問題は過去に経験されており、確立された解決方法があります！
 
 ---
 
@@ -586,4 +593,4 @@ az security assessment list --resource-group myrg
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤った解釈について、当方は責任を負いません。

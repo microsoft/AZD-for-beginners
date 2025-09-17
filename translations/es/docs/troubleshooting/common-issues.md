@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T17:07:55+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T15:05:20+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "es"
 }
 -->
 # Problemas Comunes y Soluciones
 
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 7 - Solución de Problemas y Depuración
+- **⬅️ Capítulo Anterior**: [Capítulo 6: Verificaciones Previas](../pre-deployment/preflight-checks.md)
+- **➡️ Siguiente**: [Guía de Depuración](debugging.md)
+- **🚀 Próximo Capítulo**: [Capítulo 8: Patrones de Producción y Empresariales](../ai-foundry/production-ai-practices.md)
+
 ## Introducción
 
-Esta guía completa de resolución de problemas cubre los problemas más frecuentes al usar Azure Developer CLI. Aprende a diagnosticar, solucionar y resolver problemas comunes relacionados con la autenticación, el despliegue, la provisión de infraestructura y la configuración de aplicaciones. Cada problema incluye síntomas detallados, causas raíz y procedimientos paso a paso para su resolución.
+Esta guía integral de solución de problemas cubre los inconvenientes más frecuentes al usar Azure Developer CLI. Aprende a diagnosticar, solucionar y resolver problemas comunes relacionados con la autenticación, el despliegue, la provisión de infraestructura y la configuración de aplicaciones. Cada problema incluye síntomas detallados, causas raíz y procedimientos paso a paso para su resolución.
 
 ## Objetivos de Aprendizaje
 
@@ -20,17 +27,17 @@ Al completar esta guía, podrás:
 - Comprender problemas comunes de autenticación y permisos, y sus soluciones
 - Resolver fallos de despliegue, errores de provisión de infraestructura y problemas de configuración
 - Implementar estrategias proactivas de monitoreo y depuración
-- Aplicar metodologías sistemáticas de resolución de problemas complejos
+- Aplicar metodologías sistemáticas de solución de problemas para casos complejos
 - Configurar registros y monitoreo adecuados para prevenir problemas futuros
 
 ## Resultados de Aprendizaje
 
 Al finalizar, serás capaz de:
 - Diagnosticar problemas de Azure Developer CLI utilizando herramientas de diagnóstico integradas
-- Resolver problemas relacionados con autenticación, suscripción y permisos de manera independiente
+- Resolver problemas de autenticación, suscripción y permisos de forma independiente
 - Solucionar fallos de despliegue y errores de provisión de infraestructura de manera efectiva
 - Depurar problemas de configuración de aplicaciones y problemas específicos del entorno
-- Implementar monitoreo y alertas para identificar problemas potenciales de manera proactiva
+- Implementar monitoreo y alertas para identificar problemas potenciales de forma proactiva
 - Aplicar mejores prácticas para registros, depuración y flujos de trabajo de resolución de problemas
 
 ## Diagnósticos Rápidos
@@ -150,7 +157,7 @@ azd env set AZURE_LOCATION eastus2
 # Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problema: Errores por exceder cuotas
+### Problema: Errores de cuota excedida
 **Síntomas:**
 - "Cuota excedida para el tipo de recurso"
 - "Se alcanzó el número máximo de recursos"
@@ -200,7 +207,7 @@ azd provision --preview
 ### Problema: Fallos de compilación
 **Síntomas:**
 - La aplicación falla al compilar durante el despliegue
-- Errores en la instalación de paquetes
+- Errores de instalación de paquetes
 
 **Soluciones:**
 ```bash
@@ -250,7 +257,7 @@ az containerapp show --name my-app --resource-group my-rg
 ### Problema: Fallos de conexión a la base de datos
 **Síntomas:**
 - La aplicación no puede conectarse a la base de datos
-- Errores de tiempo de espera en la conexión
+- Errores de tiempo de espera de conexión
 
 **Soluciones:**
 ```bash
@@ -311,7 +318,7 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 ### Problema: Problemas de configuración de CORS
 **Síntomas:**
 - El frontend no puede llamar a la API
-- Solicitudes de origen cruzado bloqueadas
+- Solicitud de origen cruzado bloqueada
 
 **Soluciones:**
 ```bash
@@ -419,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Herramientas y Comandos de Resolución de Problemas
+## 🛠️ Herramientas y Comandos de Solución de Problemas
 
 ### Comandos de Depuración
 ```bash
@@ -465,7 +472,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 ## 🆘 Obtener Ayuda Adicional
 
 ### Cuándo Escalar
-- Los problemas de autenticación persisten después de intentar todas las soluciones
+- Persisten problemas de autenticación después de intentar todas las soluciones
 - Problemas de infraestructura con servicios de Azure
 - Problemas relacionados con facturación o suscripción
 - Preocupaciones o incidentes de seguridad
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Prevención de Problemas
 
-### Lista de Verificación Pre-despliegue
+### Lista de Verificación Previa al Despliegue
 ```bash
 # 1. Validate authentication
 az account show
@@ -569,13 +576,13 @@ az security assessment list --resource-group myrg
 ## Recursos Relacionados
 
 - [Guía de Depuración](debugging.md) - Técnicas avanzadas de depuración
-- [Provisión de Recursos](../deployment/provisioning.md) - Resolución de problemas de infraestructura
+- [Provisión de Recursos](../deployment/provisioning.md) - Solución de problemas de infraestructura
 - [Planificación de Capacidad](../pre-deployment/capacity-planning.md) - Guía de planificación de recursos
 - [Selección de SKU](../pre-deployment/sku-selection.md) - Recomendaciones de niveles de servicio
 
 ---
 
-**Consejo**: Guarda esta guía en tus marcadores y consúltala siempre que encuentres problemas. La mayoría de los problemas ya han sido vistos antes y tienen soluciones establecidas.
+**Consejo**: Guarda esta guía en tus favoritos y consúltala siempre que encuentres problemas. La mayoría de los problemas ya han sido identificados y tienen soluciones establecidas.
 
 ---
 
@@ -586,4 +593,4 @@ az security assessment list --resource-group myrg
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

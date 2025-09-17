@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T17:26:40+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T15:07:02+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "es"
 }
 -->
 # Guía de Selección de SKU - Elegir los Niveles de Servicio Correctos en Azure
 
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 6 - Validación y Planificación Previa al Despliegue
+- **⬅️ Anterior**: [Planificación de Capacidad](capacity-planning.md)
+- **➡️ Siguiente**: [Verificaciones Previas](preflight-checks.md)
+- **🚀 Próximo Capítulo**: [Capítulo 7: Solución de Problemas](../troubleshooting/common-issues.md)
+
 ## Introducción
 
-Esta guía completa te ayudará a seleccionar los SKU (Unidades de Mantenimiento de Stock) óptimos de servicios de Azure para diferentes entornos, cargas de trabajo y requisitos. Aprende a analizar necesidades de rendimiento, consideraciones de costos y requisitos de escalabilidad para elegir los niveles de servicio más adecuados para tus implementaciones con Azure Developer CLI.
+Esta guía completa te ayuda a seleccionar los SKUs (Unidades de Mantenimiento de Stock) óptimos de servicios de Azure para diferentes entornos, cargas de trabajo y requisitos. Aprende a analizar necesidades de rendimiento, consideraciones de costos y requisitos de escalabilidad para elegir los niveles de servicio más adecuados para tus despliegues con Azure Developer CLI.
 
 ## Objetivos de Aprendizaje
 
 Al completar esta guía, podrás:
-- Comprender los conceptos de SKU de Azure, modelos de precios y diferencias de características
+- Comprender los conceptos de SKU en Azure, modelos de precios y diferencias de características
 - Dominar estrategias de selección de SKU específicas para entornos de desarrollo, pruebas y producción
 - Analizar los requisitos de carga de trabajo y emparejarlos con los niveles de servicio adecuados
 - Implementar estrategias de optimización de costos mediante una selección inteligente de SKU
 - Aplicar técnicas de prueba y validación de rendimiento para las elecciones de SKU
-- Configurar recomendaciones y monitoreo automatizados de SKU
+- Configurar recomendaciones automáticas de SKU y herramientas de monitoreo
 
 ## Resultados de Aprendizaje
 
 Al finalizar, serás capaz de:
-- Seleccionar los SKU de servicios de Azure adecuados según los requisitos y limitaciones de la carga de trabajo
+- Seleccionar los SKUs de servicios de Azure adecuados según los requisitos y limitaciones de las cargas de trabajo
 - Diseñar arquitecturas rentables para múltiples entornos con una selección adecuada de niveles
 - Implementar pruebas de rendimiento y validación para las elecciones de SKU
 - Crear herramientas automatizadas para recomendaciones de SKU y optimización de costos
@@ -35,7 +42,7 @@ Al finalizar, serás capaz de:
 
 ## Tabla de Contenidos
 
-- [Comprender los SKU](../../../../docs/pre-deployment)
+- [Comprender los SKUs](../../../../docs/pre-deployment)
 - [Selección Basada en el Entorno](../../../../docs/pre-deployment)
 - [Guías Específicas de Servicios](../../../../docs/pre-deployment)
 - [Estrategias de Optimización de Costos](../../../../docs/pre-deployment)
@@ -45,16 +52,16 @@ Al finalizar, serás capaz de:
 
 ---
 
-## Comprender los SKU
+## Comprender los SKUs
 
-### ¿Qué son los SKU?
+### ¿Qué son los SKUs?
 
-Los SKU (Unidades de Mantenimiento de Stock) representan diferentes niveles de servicio y niveles de rendimiento para los recursos de Azure. Cada SKU ofrece diferentes:
+Los SKUs (Unidades de Mantenimiento de Stock) representan diferentes niveles de servicio y niveles de rendimiento para los recursos de Azure. Cada SKU ofrece diferentes:
 
 - **Características de rendimiento** (CPU, memoria, capacidad de procesamiento)
 - **Disponibilidad de características** (opciones de escalado, niveles de SLA)
 - **Modelos de precios** (basados en consumo, capacidad reservada)
-- **Disponibilidad regional** (no todos los SKU están disponibles en todas las regiones)
+- **Disponibilidad regional** (no todos los SKUs están disponibles en todas las regiones)
 
 ### Factores Clave en la Selección de SKU
 
@@ -71,7 +78,7 @@ Los SKU (Unidades de Mantenimiento de Stock) representan diferentes niveles de s
 3. **Restricciones de Presupuesto**
    - Costos iniciales vs. costos operativos
    - Descuentos por capacidad reservada
-   - Implicaciones de costos del autoescalado
+   - Implicaciones de costos de autoescalado
 
 4. **Proyecciones de Crecimiento**
    - Requisitos de escalabilidad
@@ -86,7 +93,7 @@ Los SKU (Unidades de Mantenimiento de Stock) representan diferentes niveles de s
 
 **Prioridades**: Optimización de costos, funcionalidad básica, fácil aprovisionamiento/desaprovisionamiento
 
-#### SKU Recomendados
+#### SKUs Recomendados
 ```yaml
 # Development environment configuration
 environment: development
@@ -110,7 +117,7 @@ skus:
 
 **Prioridades**: Configuración similar a producción, equilibrio de costos, capacidad de prueba de rendimiento
 
-#### SKU Recomendados
+#### SKUs Recomendados
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -127,13 +134,13 @@ skus:
 - **Características**: La mayoría de las características de producción habilitadas
 - **Redundancia**: Algo de redundancia geográfica
 - **Escalado**: Autoescalado limitado para pruebas
-- **Monitoreo**: Stack completo de monitoreo
+- **Monitoreo**: Conjunto completo de monitoreo
 
 ### Entorno de Producción
 
 **Prioridades**: Rendimiento, disponibilidad, seguridad, cumplimiento, escalabilidad
 
-#### SKU Recomendados
+#### SKUs Recomendados
 ```yaml
 # Production environment configuration
 environment: production
@@ -161,8 +168,8 @@ skus:
 
 #### Matriz de Decisión de SKU
 
-| Caso de Uso | SKU Recomendado | Razonamiento |
-|-------------|-----------------|--------------|
+| Caso de Uso | SKU Recomendado | Justificación |
+|-------------|-----------------|---------------|
 | Desarrollo/Pruebas | F1 (Gratis) o B1 (Básico) | Rentable, suficiente para pruebas |
 | Aplicaciones pequeñas en producción | S1 (Estándar) | Dominios personalizados, SSL, autoescalado |
 | Aplicaciones medianas en producción | P1V3 (Premium V3) | Mejor rendimiento, más características |
@@ -213,7 +220,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
    - **Premium**: P1-P15 (125-4000 DTU) - Crítico para el rendimiento
 
 2. **Basado en vCore** (Recomendado para producción)
-   - **Propósito General**: Equilibrio entre cómputo y almacenamiento
+   - **Propósito General**: Computación y almacenamiento equilibrados
    - **Crítico para Negocios**: Baja latencia, alto IOPS
    - **Hyperscale**: Almacenamiento altamente escalable (hasta 100TB)
 
@@ -261,10 +268,10 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
    - Adecuado para desarrollo y cargas variables
    - Infraestructura compartida
 
-2. **Dedicado (Perfiles de Carga)**
+2. **Dedicado (Perfiles de Carga de Trabajo)**
    - Recursos de cómputo dedicados
    - Rendimiento predecible
-   - Mejor para cargas de producción
+   - Mejor para cargas de trabajo de producción
 
 #### Ejemplos de Configuración
 
@@ -331,7 +338,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 1. **Capacidad Provisionada Manual**
    - Rendimiento predecible
    - Descuentos por capacidad reservada
-   - Mejor para cargas estables
+   - Ideal para cargas de trabajo estables
 
 2. **Capacidad Provisionada Autoscalable**
    - Escalado automático según uso
@@ -403,14 +410,14 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 #### Tipos de Cuenta de Almacenamiento
 
 1. **Standard_LRS** - Desarrollo, datos no críticos
-2. **Standard_GRS** - Producción, se necesita redundancia geográfica
+2. **Standard_GRS** - Producción, necesidad de redundancia geográfica
 3. **Premium_LRS** - Aplicaciones de alto rendimiento
 4. **Premium_ZRS** - Alta disponibilidad con redundancia zonal
 
 #### Niveles de Rendimiento
 
 - **Estándar**: Propósito general, rentable
-- **Premium**: Escenarios de alto rendimiento y baja latencia
+- **Premium**: Alto rendimiento, escenarios de baja latencia
 
 ```bicep
 // Development
@@ -465,7 +472,7 @@ az reservations catalog show --reserved-resource-type CosmosDb
 
 ### 2. Dimensionamiento Correcto
 
-Comienza con SKU más pequeños y escala según el uso real:
+Comienza con SKUs más pequeños y escala según el uso real:
 
 ```yaml
 # Progressive scaling approach
@@ -589,7 +596,7 @@ Reduce la escala durante horas de menor actividad:
 
 ### Requisitos Básicos de Rendimiento
 
-Define requisitos claros de rendimiento antes de seleccionar SKU:
+Define requisitos claros de rendimiento antes de seleccionar un SKU:
 
 ```yaml
 performance_requirements:
@@ -607,7 +614,7 @@ performance_requirements:
 
 ### Pruebas de Carga
 
-Prueba diferentes SKU para validar el rendimiento:
+Prueba diferentes SKUs para validar el rendimiento:
 
 ```bash
 # Azure Load Testing service
@@ -666,7 +673,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | S2 | Estándar | 50 DTU | 250GB | $$ | Producción pequeña |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Alto rendimiento |
 | GP_Gen5_4 | Propósito General | 4 vCore | 4TB | $$$ | Equilibrado |
-| BC_Gen5_8 | Crítico para Negocios | 8 vCore | 4TB | $$$$ | Crítico |
+| BC_Gen5_8 | Crítico para Negocios | 8 vCore | 4TB | $$$$ | Misión crítica |
 
 ### Referencia Rápida de SKU de Container Apps
 
@@ -787,10 +794,10 @@ test_configuration:
 
 ## Resumen de Mejores Prácticas
 
-### Lo que Debes Hacer
+### Qué Hacer
 
 1. **Comienza pequeño y escala** según el uso real
-2. **Usa diferentes SKU para diferentes entornos**
+2. **Usa diferentes SKUs para diferentes entornos**
 3. **Monitorea continuamente el rendimiento y los costos**
 4. **Aprovecha la capacidad reservada para cargas de producción**
 5. **Implementa autoescalado donde sea apropiado**
@@ -798,10 +805,10 @@ test_configuration:
 7. **Planifica el crecimiento pero evita la sobreaprovisionamiento**
 8. **Usa niveles gratuitos para desarrollo cuando sea posible**
 
-### Lo que No Debes Hacer
+### Qué No Hacer
 
-1. **No uses SKU de producción para desarrollo**
-2. **No ignores la disponibilidad regional de SKU**
+1. **No uses SKUs de producción para desarrollo**
+2. **No ignores la disponibilidad regional de SKUs**
 3. **No olvides los costos de transferencia de datos**
 4. **No sobreaprovisiones sin justificación**
 5. **No ignores el impacto de las dependencias**
@@ -811,13 +818,13 @@ test_configuration:
 
 ---
 
-**Consejo Profesional**: Usa Azure Cost Management y Advisor para obtener recomendaciones personalizadas sobre cómo optimizar tus selecciones de SKU según patrones de uso reales.
+**Consejo Profesional**: Usa Azure Cost Management y Advisor para obtener recomendaciones personalizadas sobre cómo optimizar tus selecciones de SKU según los patrones de uso reales.
 
 ---
 
 **Navegación**
 - **Lección Anterior**: [Planificación de Capacidad](capacity-planning.md)
-- **Próxima Lección**: [Verificaciones Preliminares](preflight-checks.md)
+- **Lección Siguiente**: [Verificaciones Previas](preflight-checks.md)
 
 ---
 

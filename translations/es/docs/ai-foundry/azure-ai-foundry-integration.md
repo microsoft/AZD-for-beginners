@@ -1,52 +1,57 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:33:14+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T15:02:10+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "es"
 }
 -->
 # Integración de Azure AI Foundry con AZD
 
-**Anterior:** [Primer Proyecto](../getting-started/first-project.md) | **Siguiente:** [Despliegue de Modelos de IA](ai-model-deployment.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 2 - Desarrollo centrado en IA
+- **⬅️ Capítulo anterior**: [Capítulo 1: Tu primer proyecto](../getting-started/first-project.md)
+- **➡️ Siguiente**: [Despliegue de modelos de IA](ai-model-deployment.md)
+- **🚀 Próximo capítulo**: [Capítulo 3: Configuración](../getting-started/configuration.md)
 
-## Descripción General
+## Descripción general
 
-Esta guía muestra cómo integrar los servicios de Azure AI Foundry con Azure Developer CLI (AZD) para facilitar el despliegue de aplicaciones de IA. Azure AI Foundry ofrece una plataforma integral para construir, desplegar y gestionar aplicaciones de IA, mientras que AZD simplifica el proceso de infraestructura y despliegue.
+Esta guía muestra cómo integrar los servicios de Azure AI Foundry con Azure Developer CLI (AZD) para facilitar el despliegue de aplicaciones de IA. Azure AI Foundry ofrece una plataforma integral para crear, desplegar y gestionar aplicaciones de IA, mientras que AZD simplifica el proceso de infraestructura y despliegue.
 
 ## ¿Qué es Azure AI Foundry?
 
 Azure AI Foundry es la plataforma unificada de Microsoft para el desarrollo de IA que incluye:
 
-- **Catálogo de Modelos**: Acceso a modelos de IA de última generación
+- **Catálogo de modelos**: Acceso a modelos de IA de última generación
 - **Prompt Flow**: Diseñador visual para flujos de trabajo de IA
 - **Portal de AI Foundry**: Entorno de desarrollo integrado para aplicaciones de IA
-- **Opciones de Despliegue**: Múltiples opciones de alojamiento y escalado
-- **Seguridad y Protección**: Funciones integradas de IA responsable
+- **Opciones de despliegue**: Múltiples opciones de alojamiento y escalado
+- **Seguridad y protección**: Funciones integradas de IA responsable
 
-## AZD + Azure AI Foundry: Mejor Juntos
+## AZD + Azure AI Foundry: Mejor juntos
 
-| Característica | Azure AI Foundry | Beneficio de la Integración con AZD |
+| Característica | Azure AI Foundry | Beneficio de la integración con AZD |
 |----------------|------------------|-------------------------------------|
-| **Despliegue de Modelos** | Despliegue manual en el portal | Despliegues automatizados y repetibles |
-| **Infraestructura** | Aprovisionamiento mediante clics | Infraestructura como Código (Bicep) |
-| **Gestión de Entornos** | Enfoque en un solo entorno | Multi-entorno (desarrollo/staging/producción) |
+| **Despliegue de modelos** | Despliegue manual en el portal | Despliegues automatizados y repetibles |
+| **Infraestructura** | Aprovisionamiento mediante clics | Infraestructura como código (Bicep) |
+| **Gestión de entornos** | Enfoque en un solo entorno | Multi-entorno (desarrollo/staging/producción) |
 | **Integración CI/CD** | Limitada | Soporte nativo para GitHub Actions |
-| **Gestión de Costos** | Monitoreo básico | Optimización de costos específica por entorno |
+| **Gestión de costos** | Monitoreo básico | Optimización de costos específica por entorno |
 
-## Requisitos Previos
+## Requisitos previos
 
 - Suscripción a Azure con permisos adecuados
 - Azure Developer CLI instalado
 - Acceso a los servicios de Azure OpenAI
 - Familiaridad básica con Azure AI Foundry
 
-## Patrones de Integración Principales
+## Patrones principales de integración
 
 ### Patrón 1: Integración con Azure OpenAI
 
-**Caso de Uso**: Desplegar aplicaciones de chat con modelos de Azure OpenAI
+**Caso de uso**: Desplegar aplicaciones de chat con modelos de Azure OpenAI
 
 ```yaml
 # azure.yaml
@@ -94,9 +99,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Patrón 2: Búsqueda de IA + Integración RAG
+### Patrón 2: Integración de búsqueda de IA + RAG
 
-**Caso de Uso**: Desplegar aplicaciones de generación aumentada por recuperación (RAG)
+**Caso de uso**: Desplegar aplicaciones de generación aumentada por recuperación (RAG)
 
 ```bicep
 // Azure AI Search
@@ -124,9 +129,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Patrón 3: Integración de Inteligencia Documental
+### Patrón 3: Integración de inteligencia documental
 
-**Caso de Uso**: Flujos de trabajo de procesamiento y análisis de documentos
+**Caso de uso**: Flujos de trabajo de procesamiento y análisis de documentos
 
 ```bicep
 // Document Intelligence service
@@ -157,11 +162,11 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Patrones de Configuración
+## 🔧 Patrones de configuración
 
-### Configuración de Variables de Entorno
+### Configuración de variables de entorno
 
-**Configuración de Producción:**
+**Configuración de producción:**
 ```bash
 # Core AI services
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
@@ -177,7 +182,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Configuración de Desarrollo:**
+**Configuración de desarrollo:**
 ```bash
 # Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -185,7 +190,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Configuración Segura con Key Vault
+### Configuración segura con Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -220,9 +225,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Flujos de Trabajo de Despliegue
+## Flujos de trabajo de despliegue
 
-### Despliegue con un Solo Comando
+### Despliegue con un solo comando
 
 ```bash
 # Deploy everything with one command
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### Despliegues Específicos por Entorno
+### Despliegues específicos por entorno
 
 ```bash
 # Development environment
@@ -250,7 +255,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Monitoreo y Observabilidad
+## Monitoreo y observabilidad
 
 ### Integración con Application Insights
 
@@ -285,7 +290,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### Monitoreo de Costos
+### Monitoreo de costos
 
 ```bicep
 // Budget alert for AI services
@@ -313,9 +318,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Mejores Prácticas de Seguridad
+## 🔐 Mejores prácticas de seguridad
 
-### Configuración de Identidad Administrada
+### Configuración de identidad administrada
 
 ```bicep
 // Managed identity for the web application
@@ -336,7 +341,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-### Seguridad de Red
+### Seguridad de red
 
 ```bicep
 // Private endpoints for AI services
@@ -360,9 +365,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Optimización de Rendimiento
+## Optimización del rendimiento
 
-### Estrategias de Caché
+### Estrategias de caché
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Configuración de Autoescalado
+### Configuración de autoescalado
 
 ```bicep
 // Container App with auto-scaling
@@ -426,9 +431,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Solución de Problemas Comunes
+## Resolución de problemas comunes
 
-### Problema 1: Cuota de OpenAI Excedida
+### Problema 1: Cuota de OpenAI excedida
 
 **Síntomas:**
 - El despliegue falla con errores de cuota
@@ -448,7 +453,7 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Problema 2: Fallos de Autenticación
+### Problema 2: Fallos de autenticación
 
 **Síntomas:**
 - Errores 401/403 al llamar a servicios de IA
@@ -466,10 +471,10 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Problema 3: Problemas de Despliegue de Modelos
+### Problema 3: Problemas de despliegue de modelos
 
 **Síntomas:**
-- Modelos no disponibles en el despliegue
+- Los modelos no están disponibles en el despliegue
 - Fallos en versiones específicas de modelos
 
 **Soluciones:**
@@ -481,54 +486,54 @@ az cognitiveservices model list --location eastus
 # Check model capacity requirements
 ```
 
-## Plantillas de Ejemplo
+## Plantillas de ejemplo
 
-### Aplicación Básica de Chat
+### Aplicación básica de chat
 
 **Repositorio**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Servicios**: Azure OpenAI + Cognitive Search + App Service
 
-**Inicio Rápido**:
+**Inicio rápido**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### Pipeline de Procesamiento de Documentos
+### Pipeline de procesamiento de documentos
 
 **Repositorio**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
 **Servicios**: Document Intelligence + Storage + Functions
 
-**Inicio Rápido**:
+**Inicio rápido**:
 ```bash
 azd init --template ai-document-processing
 azd up
 ```
 
-### Chat Empresarial con RAG
+### Chat empresarial con RAG
 
 **Repositorio**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **Servicios**: Azure OpenAI + Search + Container Apps + Cosmos DB
 
-**Inicio Rápido**:
+**Inicio rápido**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-## Próximos Pasos
+## Próximos pasos
 
-1. **Prueba los Ejemplos**: Comienza con una plantilla preconstruida que se ajuste a tu caso de uso
-2. **Personaliza según tus Necesidades**: Modifica la infraestructura y el código de la aplicación
-3. **Añade Monitoreo**: Implementa observabilidad completa
-4. **Optimiza Costos**: Ajusta configuraciones según tu presupuesto
-5. **Asegura tu Despliegue**: Implementa patrones de seguridad empresarial
-6. **Escala a Producción**: Añade características de alta disponibilidad y multi-región
+1. **Prueba los ejemplos**: Comienza con una plantilla preconstruida que se ajuste a tu caso de uso
+2. **Personaliza según tus necesidades**: Modifica la infraestructura y el código de la aplicación
+3. **Añade monitoreo**: Implementa observabilidad completa
+4. **Optimiza costos**: Ajusta configuraciones para tu presupuesto
+5. **Asegura tu despliegue**: Implementa patrones de seguridad empresarial
+6. **Escala a producción**: Añade características de alta disponibilidad y multi-región
 
-## Comunidad y Soporte
+## Comunidad y soporte
 
 - **Discord de Azure AI Foundry**: [Canal #Azure](https://discord.gg/microsoft-azure)
 - **GitHub de AZD**: [Problemas y discusiones](https://github.com/Azure/azure-dev)
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Anterior:** [Primer Proyecto](../getting-started/first-project.md) | **Siguiente:** [Despliegue de Modelos de IA](ai-model-deployment.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 2 - Desarrollo centrado en IA
+- **⬅️ Capítulo anterior**: [Capítulo 1: Tu primer proyecto](../getting-started/first-project.md)
+- **➡️ Siguiente**: [Despliegue de modelos de IA](ai-model-deployment.md)
+- **🚀 Próximo capítulo**: [Capítulo 3: Configuración](../getting-started/configuration.md)
 
-**¿Necesitas Ayuda?** Únete a nuestras discusiones comunitarias o abre un problema en el repositorio. La comunidad de Azure AI + AZD está aquí para ayudarte a tener éxito.
+**¿Necesitas ayuda?** Únete a nuestras discusiones comunitarias o abre un problema en el repositorio. ¡La comunidad de Azure AI + AZD está aquí para ayudarte a tener éxito!
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

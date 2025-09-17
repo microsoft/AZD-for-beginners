@@ -1,23 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T17:04:51+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T15:03:41+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "es"
 }
 -->
 # Guía de Instalación y Configuración
 
-**Anterior:** [Documentación Principal](../../README.md) | **Siguiente:** [Conceptos Básicos de AZD](azd-basics.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido
+- **⬅️ Anterior**: [Conceptos Básicos de AZD](azd-basics.md)
+- **➡️ Siguiente**: [Tu Primer Proyecto](first-project.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA como Prioridad](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introducción
 
-Esta guía completa te llevará paso a paso por la instalación y configuración de Azure Developer CLI (azd) en tu sistema. Aprenderás varios métodos de instalación para diferentes sistemas operativos, configuración de autenticación y ajustes iniciales para preparar tu entorno de desarrollo para implementaciones en Azure.
+Esta guía completa te llevará paso a paso por el proceso de instalación y configuración de Azure Developer CLI (azd) en tu sistema. Aprenderás diferentes métodos de instalación para distintos sistemas operativos, configuración de autenticación y ajustes iniciales para preparar tu entorno de desarrollo para implementaciones en Azure.
 
 ## Objetivos de Aprendizaje
 
-Al final de esta lección, podrás:
+Al finalizar esta lección, podrás:
 - Instalar Azure Developer CLI en tu sistema operativo
 - Configurar la autenticación con Azure utilizando varios métodos
 - Preparar tu entorno de desarrollo con los requisitos necesarios
@@ -53,7 +58,7 @@ Antes de instalar azd, asegúrate de tener:
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### Opción 2: Windows Package Manager (winget)
+#### Opción 2: Administrador de Paquetes de Windows (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
@@ -236,7 +241,7 @@ Crea un archivo `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Instala el plugin de Azure
 2. Configura las credenciales de Azure
-3. Usa la terminal integrada para comandos de azd
+3. Usa la terminal integrada para comandos azd
 
 ## 🐛 Solución de Problemas de Instalación
 
@@ -249,7 +254,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### Problemas con PATH
-Agrega manualmente azd a tu PATH:
+Agrega azd manualmente a tu PATH:
 
 **Windows:**
 ```cmd
@@ -323,8 +328,8 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Próximos Pasos
 
-1. **Completa la autenticación**: Asegúrate de que puedes acceder a tu suscripción de Azure
-2. **Prueba tu primera implementación**: Sigue la [Guía del Primer Proyecto](first-project.md)
+1. **Completa la autenticación**: Asegúrate de poder acceder a tu suscripción de Azure
+2. **Prueba tu primera implementación**: Sigue la [Guía de Primer Proyecto](first-project.md)
 3. **Explora plantillas**: Navega por las plantillas disponibles con `azd template list`
 4. **Configura tu IDE**: Prepara tu entorno de desarrollo
 
@@ -338,9 +343,14 @@ Si encuentras problemas:
 
 ---
 
-**Anterior:** [Documentación Principal](../../README.md) | **Siguiente:** [Conceptos Básicos de AZD](azd-basics.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido
+- **⬅️ Anterior**: [Conceptos Básicos de AZD](azd-basics.md) 
+- **➡️ Siguiente**: [Tu Primer Proyecto](first-project.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA como Prioridad](../ai-foundry/azure-ai-foundry-integration.md)
 
-**¡Instalación Completa!** Continúa con [Tu Primer Proyecto](first-project.md) para comenzar a construir con azd.
+**✅ ¡Instalación Completa!** Continúa con [Tu Primer Proyecto](first-project.md) para comenzar a construir con azd.
 
 ---
 

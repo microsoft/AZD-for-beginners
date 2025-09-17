@@ -1,21 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:32:37+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T14:31:14+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "ko"
 }
 -->
 # Azure AI Foundry와 AZD 통합
 
-**이전:** [첫 번째 프로젝트](../getting-started/first-project.md) | **다음:** [AI 모델 배포](ai-model-deployment.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 2 - AI 우선 개발
+- **⬅️ 이전 챕터**: [챕터 1: 첫 번째 프로젝트](../getting-started/first-project.md)
+- **➡️ 다음**: [AI 모델 배포](ai-model-deployment.md)
+- **🚀 다음 챕터**: [챕터 3: 구성](../getting-started/configuration.md)
 
 ## 개요
 
-이 가이드는 Azure AI Foundry 서비스를 Azure Developer CLI (AZD)와 통합하여 AI 애플리케이션 배포를 간소화하는 방법을 설명합니다. Azure AI Foundry는 AI 애플리케이션을 구축, 배포 및 관리할 수 있는 종합 플랫폼을 제공하며, AZD는 인프라와 배포 프로세스를 간소화합니다.
+이 가이드는 Azure AI Foundry 서비스를 Azure Developer CLI (AZD)와 통합하여 AI 애플리케이션 배포를 간소화하는 방법을 설명합니다. Azure AI Foundry는 AI 애플리케이션을 구축, 배포 및 관리할 수 있는 포괄적인 플랫폼을 제공하며, AZD는 인프라와 배포 프로세스를 간소화합니다.
 
-## Azure AI Foundry란 무엇인가요?
+## Azure AI Foundry란?
 
 Azure AI Foundry는 Microsoft의 통합 AI 개발 플랫폼으로 다음을 포함합니다:
 
@@ -25,12 +30,12 @@ Azure AI Foundry는 Microsoft의 통합 AI 개발 플랫폼으로 다음을 포�
 - **배포 옵션**: 다양한 호스팅 및 확장 옵션
 - **안전 및 보안**: 책임 있는 AI 기능 내장
 
-## AZD + Azure AI Foundry: 함께하면 더 나은 결과
+## AZD + Azure AI Foundry: 더 나은 통합
 
 | 기능 | Azure AI Foundry | AZD 통합 혜택 |
 |------|------------------|---------------|
 | **모델 배포** | 포털에서 수동 배포 | 자동화된 반복 가능한 배포 |
-| **인프라** | 클릭 기반 프로비저닝 | 코드로 작성된 인프라 (Bicep) |
+| **인프라** | 클릭 기반 프로비저닝 | 코드로서의 인프라 (Bicep) |
 | **환경 관리** | 단일 환경 중심 | 다중 환경 (개발/스테이징/운영) |
 | **CI/CD 통합** | 제한적 | GitHub Actions 네이티브 지원 |
 | **비용 관리** | 기본 모니터링 | 환경별 비용 최적화 |
@@ -469,7 +474,7 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ### 문제 3: 모델 배포 문제
 
 **증상:**
-- 배포에서 모델이 사용 불가
+- 배포에서 모델 사용 불가
 - 특정 모델 버전 실패
 
 **해결책:**
@@ -531,16 +536,21 @@ azd up
 ## 커뮤니티 및 지원
 
 - **Azure AI Foundry Discord**: [#Azure 채널](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [문제 및 논의](https://github.com/Azure/azure-dev)
+- **AZD GitHub**: [문제 및 토론](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [공식 문서](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**이전:** [첫 번째 프로젝트](../getting-started/first-project.md) | **다음:** [AI 모델 배포](ai-model-deployment.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 2 - AI 우선 개발
+- **⬅️ 이전 챕터**: [챕터 1: 첫 번째 프로젝트](../getting-started/first-project.md)
+- **➡️ 다음**: [AI 모델 배포](ai-model-deployment.md)
+- **🚀 다음 챕터**: [챕터 3: 구성](../getting-started/configuration.md)
 
-**도움이 필요하신가요?** 커뮤니티 논의에 참여하거나 저장소에서 문제를 열어보세요. Azure AI + AZD 커뮤니티는 성공을 위해 여러분을 지원합니다!
+**도움이 필요하신가요?** 커뮤니티 토론에 참여하거나 저장소에서 문제를 열어보세요. Azure AI + AZD 커뮤니티는 여러분의 성공을 지원합니다!
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 신뢰할 수 있는 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.

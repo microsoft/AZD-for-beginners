@@ -1,37 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T15:55:52+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-17T15:08:06+00:00",
   "source_file": "examples/README.md",
   "language_code": "es"
 }
 -->
 # Ejemplos - Plantillas y Configuraciones Prácticas de AZD
 
+**Aprender con Ejemplos - Organizado por Capítulo**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../README.md)
+- **📖 Mapeo de Capítulos**: Ejemplos organizados por complejidad de aprendizaje
+- **🚀 Comienza Simple**: [Ejemplos del Capítulo 1](../../../examples)
+- **🤖 Ejemplos de IA**: [Capítulos 2 y 5 Soluciones de IA](../../../examples)
+
 ## Introducción
 
-Este directorio contiene ejemplos prácticos, plantillas y escenarios reales para ayudarte a aprender Azure Developer CLI mediante práctica directa. Cada ejemplo proporciona código funcional completo, plantillas de infraestructura e instrucciones detalladas para diferentes arquitecturas de aplicaciones y patrones de implementación.
+Este directorio contiene ejemplos prácticos, plantillas y escenarios del mundo real para ayudarte a aprender Azure Developer CLI mediante práctica directa. Cada ejemplo incluye código funcional completo, plantillas de infraestructura e instrucciones detalladas para diferentes arquitecturas de aplicaciones y patrones de despliegue.
 
 ## Objetivos de Aprendizaje
 
 Al trabajar con estos ejemplos, podrás:
 - Practicar flujos de trabajo de Azure Developer CLI con escenarios de aplicaciones realistas
-- Comprender diferentes arquitecturas de aplicaciones y sus implementaciones en azd
+- Comprender diferentes arquitecturas de aplicaciones y sus implementaciones con azd
 - Dominar patrones de Infraestructura como Código para varios servicios de Azure
-- Aplicar estrategias de gestión de configuración e implementaciones específicas por entorno
+- Aplicar estrategias de gestión de configuración y despliegue específicas para cada entorno
 - Implementar patrones de monitoreo, seguridad y escalabilidad en contextos prácticos
-- Adquirir experiencia en la resolución de problemas y depuración de escenarios reales de implementación
+- Adquirir experiencia en resolución de problemas y depuración de escenarios reales de despliegue
 
 ## Resultados de Aprendizaje
 
 Al completar estos ejemplos, serás capaz de:
-- Implementar diversos tipos de aplicaciones utilizando Azure Developer CLI con confianza
+- Desplegar diferentes tipos de aplicaciones usando Azure Developer CLI con confianza
 - Adaptar las plantillas proporcionadas a tus propios requisitos de aplicación
-- Diseñar e implementar patrones de infraestructura personalizados utilizando Bicep
+- Diseñar e implementar patrones de infraestructura personalizados usando Bicep
 - Configurar aplicaciones complejas de múltiples servicios con dependencias adecuadas
 - Aplicar mejores prácticas de seguridad, monitoreo y rendimiento en escenarios reales
-- Resolver problemas y optimizar implementaciones basándote en experiencia práctica
+- Resolver problemas y optimizar despliegues basándote en experiencia práctica
 
 ## Estructura del Directorio
 
@@ -52,9 +58,9 @@ Azure Samples AZD Templates (linked externally):
 ## Ejemplos de Inicio Rápido
 
 ### Para Principiantes
-1. **[Aplicación Web Simple - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Implementa una aplicación web Node.js Express con MongoDB
+1. **[Aplicación Web Simple - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Despliega una aplicación web Node.js Express con MongoDB
 2. **[Sitio Web Estático - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Aloja un sitio web estático React con Azure Static Web Apps
-3. **[Aplicación en Contenedor - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Implementa una aplicación Python Flask en contenedor
+3. **[Aplicación en Contenedor - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Despliega una aplicación Python Flask en contenedor
 
 ### Para Usuarios Intermedios
 4. **[Aplicación con Base de Datos - C# con Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Aplicación web con API en C# y base de datos Azure SQL
@@ -64,20 +70,41 @@ Azure Samples AZD Templates (linked externally):
 ### Plantillas de Azure AI Foundry
 
 1. **[Aplicación de Chat con Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Aplicación de chat inteligente con Azure OpenAI
-2. **[Procesamiento de Documentos con IA](https://github.com/Azure-Samples/azure-ai-document-processing)** - Análisis de documentos utilizando servicios de Azure AI
+2. **[Procesamiento de Documentos con IA](https://github.com/Azure-Samples/azure-ai-document-processing)** - Análisis de documentos usando servicios de Azure AI
 3. **[Pipeline de Machine Learning](https://github.com/Azure-Samples/mlops-v2)** - Flujo de trabajo MLOps con Azure Machine Learning
+
+### Escenarios del Mundo Real
+
+#### **Solución Multi-Agente para Retail** 🆕
+**[Guía Completa de Implementación](./retail-scenario.md)**
+
+Una solución integral de soporte al cliente multi-agente lista para producción que demuestra el despliegue de aplicaciones de IA de nivel empresarial con AZD. Este escenario incluye:
+
+- **Arquitectura Completa**: Sistema multi-agente con agentes especializados en servicio al cliente y gestión de inventario
+- **Infraestructura de Producción**: Despliegues de Azure OpenAI en múltiples regiones, AI Search, Container Apps y monitoreo completo
+- **Plantilla ARM Lista para Desplegar**: Despliegue con un clic y múltiples modos de configuración (Mínimo/Estándar/Premium)
+- **Características Avanzadas**: Validación de seguridad con red teaming, marco de evaluación de agentes, optimización de costos y guías de resolución de problemas
+- **Contexto Empresarial Real**: Caso de uso de soporte al cliente para minoristas con carga de archivos, integración de búsqueda y escalado dinámico
+
+**Tecnologías**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Complejidad**: ⭐⭐⭐⭐ (Avanzado - Listo para Producción Empresarial)
+
+**Perfecto para**: Desarrolladores de IA, arquitectos de soluciones y equipos que construyen sistemas multi-agente de producción
+
+**Inicio Rápido**: Despliega la solución completa en menos de 30 minutos usando la plantilla ARM incluida con `./deploy.sh -g myResourceGroup`
 
 ## 📋 Instrucciones de Uso
 
 ### Ejecutar Ejemplos Localmente
 
-1. **Clonar o Copiar el Ejemplo**
+1. **Clonar o Copiar Ejemplo**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
    ```
 
-2. **Inicializar el Entorno AZD**
+2. **Inicializar Entorno AZD**
    ```bash
    # Initialize with existing template
    azd init
@@ -86,14 +113,14 @@ Azure Samples AZD Templates (linked externally):
    azd env new my-environment
    ```
 
-3. **Configurar el Entorno**
+3. **Configurar Entorno**
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
 
-4. **Implementar**
+4. **Desplegar**
    ```bash
    # Deploy infrastructure and application
    azd up
@@ -112,11 +139,11 @@ Cada ejemplo incluye:
 
 ### Categorías de Ejemplos
 
-#### **Implementaciones Básicas**
+#### **Despliegues Básicos**
 - Aplicaciones de un solo servicio
 - Patrones de infraestructura simples
 - Gestión básica de configuración
-- Configuraciones económicas para desarrollo
+- Configuraciones de desarrollo rentables
 
 #### **Escenarios Avanzados**
 - Arquitecturas de múltiples servicios
@@ -135,7 +162,7 @@ Cada ejemplo incluye:
 ### Aplicación Web Simple - Node.js Express
 **Tecnologías**: Node.js, Express, MongoDB, Container Apps  
 **Complejidad**: Principiante  
-**Conceptos**: Implementación básica, REST API, integración con base de datos NoSQL
+**Conceptos**: Despliegue básico, REST API, integración de base de datos NoSQL
 
 ### Sitio Web Estático - React SPA
 **Tecnologías**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
@@ -150,7 +177,7 @@ Cada ejemplo incluye:
 ### Aplicación con Base de Datos - C# con Azure SQL
 **Tecnologías**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Complejidad**: Intermedio  
-**Conceptos**: Entity Framework, conexiones a bases de datos, desarrollo de API web
+**Conceptos**: Entity Framework, conexiones de base de datos, desarrollo de API web
 
 ### Función Serverless - Python Azure Functions
 **Tecnologías**: Python, Azure Functions, Cosmos DB, Static Web Apps  
@@ -167,7 +194,7 @@ Cada ejemplo incluye:
 #### Aplicación de Chat con Azure OpenAI
 **Tecnologías**: Azure OpenAI, Cognitive Search, App Service  
 **Complejidad**: Intermedio  
-**Conceptos**: Arquitectura RAG, búsqueda vectorial, integración con LLM
+**Conceptos**: Arquitectura RAG, búsqueda vectorial, integración de LLM
 
 #### Procesamiento de Documentos con IA
 **Tecnologías**: Azure AI Document Intelligence, Storage, Functions  
@@ -177,53 +204,53 @@ Cada ejemplo incluye:
 #### Pipeline de Machine Learning
 **Tecnologías**: Azure ML, MLOps, Container Registry  
 **Complejidad**: Avanzado  
-**Conceptos**: Entrenamiento de modelos, pipelines de implementación, monitoreo
+**Conceptos**: Entrenamiento de modelos, pipelines de despliegue, monitoreo
 
 ## 🛠 Ejemplos de Configuración
 
 El directorio `configurations/` contiene componentes reutilizables:
 
 ### Configuraciones de Entorno
-- Configuraciones para entornos de desarrollo
-- Configuraciones para entornos de staging
+- Configuraciones de entorno de desarrollo
+- Configuraciones de entorno de staging
 - Configuraciones listas para producción
-- Configuraciones de implementación en múltiples regiones
+- Configuraciones de despliegue en múltiples regiones
 
 ### Módulos Bicep
 - Componentes de infraestructura reutilizables
 - Patrones comunes de recursos
-- Plantillas con seguridad reforzada
-- Configuraciones optimizadas para costos
+- Plantillas reforzadas en seguridad
+- Configuraciones optimizadas en costos
 
 ### Scripts Auxiliares
 - Automatización de configuración de entornos
 - Scripts de migración de bases de datos
-- Herramientas de validación de implementaciones
+- Herramientas de validación de despliegue
 - Utilidades de monitoreo de costos
 
 ## 🔧 Guía de Personalización
 
 ### Adaptar Ejemplos a Tu Caso de Uso
 
-1. **Revisar Requisitos Previos**
-   - Verificar requisitos de servicios de Azure
-   - Confirmar límites de suscripción
-   - Comprender implicaciones de costos
+1. **Revisar Requisitos**
+   - Verifica los requisitos de servicios de Azure
+   - Confirma los límites de suscripción
+   - Comprende las implicaciones de costos
 
 2. **Modificar Configuración**
-   - Actualizar definiciones de servicios en `azure.yaml`
-   - Personalizar plantillas Bicep
-   - Ajustar variables de entorno
+   - Actualiza las definiciones de servicios en `azure.yaml`
+   - Personaliza las plantillas Bicep
+   - Ajusta las variables de entorno
 
 3. **Probar Exhaustivamente**
-   - Implementar primero en el entorno de desarrollo
-   - Validar funcionalidad
-   - Probar escalabilidad y rendimiento
+   - Despliega primero en el entorno de desarrollo
+   - Valida la funcionalidad
+   - Prueba escalabilidad y rendimiento
 
 4. **Revisión de Seguridad**
-   - Revisar controles de acceso
-   - Implementar gestión de secretos
-   - Habilitar monitoreo y alertas
+   - Revisa controles de acceso
+   - Implementa gestión de secretos
+   - Habilita monitoreo y alertas
 
 ## 📊 Matriz Comparativa
 
@@ -238,6 +265,7 @@ El directorio `configurations/` contiene componentes reutilizables:
 | Azure OpenAI Chat | 3 | ✅ | Completo | Completo | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Básico | Completo | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Completo | Completo | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **Empresarial** | **Avanzado** | **⭐⭐⭐⭐** |
 
 ## 🎓 Ruta de Aprendizaje
 
@@ -245,8 +273,8 @@ El directorio `configurations/` contiene componentes reutilizables:
 
 1. **Comienza con Aplicación Web Simple**
    - Aprende conceptos básicos de AZD
-   - Comprende el flujo de trabajo de implementación
-   - Practica la gestión de entornos
+   - Comprende el flujo de trabajo de despliegue
+   - Practica gestión de entornos
 
 2. **Prueba Sitio Web Estático**
    - Explora diferentes opciones de hosting
@@ -271,37 +299,42 @@ El directorio `configurations/` contiene componentes reutilizables:
 6. **Construye Microservicios**
    - Aprende comunicación entre servicios
    - Comprende sistemas distribuidos
-   - Practica implementaciones complejas
+   - Practica despliegues complejos
 
 ## 🔍 Encontrar el Ejemplo Adecuado
 
 ### Por Stack Tecnológico
 - **Node.js**: Aplicación Todo Node.js Express
 - **Python**: Aplicación Python Flask en Contenedor, Python Functions + SPA
-- **C#**: API Web C# + Base de Datos SQL, Aplicación de Chat con Azure OpenAI, Pipeline de ML
+- **C#**: C# Web API + Base de Datos SQL, Aplicación de Chat con Azure OpenAI, Pipeline de ML
 - **Java**: Microservicios Java Spring Boot
 - **React**: React SPA + Functions
 - **Contenedores**: Aplicación Python Flask en Contenedor, Microservicios Java
 - **Bases de Datos**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **IA/ML**: Aplicación de Chat con Azure OpenAI, Procesamiento de Documentos con IA, Pipeline de ML
+- **IA/ML**: Aplicación de Chat con Azure OpenAI, Procesamiento de Documentos con IA, Pipeline de ML, **Solución Multi-Agente para Retail**
+- **Sistemas Multi-Agente**: **Solución Multi-Agente para Retail**
+- **Producción Empresarial**: **Solución Multi-Agente para Retail**
 
 ### Por Patrón de Arquitectura
 - **Monolítico**: Node.js Express Todo, C# Web API + SQL
 - **Estático + Serverless**: React SPA + Functions, Python Functions + SPA
 - **Microservicios**: Microservicios Java Spring Boot
 - **Contenerizado**: Aplicación Python Flask en Contenedor
-- **Potenciado por IA**: Aplicación de Chat con Azure OpenAI, Procesamiento de Documentos con IA, Pipeline de ML
+- **Impulsado por IA**: Aplicación de Chat con Azure OpenAI, Procesamiento de Documentos con IA, Pipeline de ML, **Solución Multi-Agente para Retail**
+- **Arquitectura Multi-Agente**: **Solución Multi-Agente para Retail**
+- **Multi-Servicio Empresarial**: **Solución Multi-Agente para Retail**
 
 ### Por Nivel de Complejidad
 - **Principiante**: Node.js Express Todo, React SPA + Functions, Aplicación Python Flask en Contenedor
 - **Intermedio**: C# Web API + SQL, Python Functions + SPA, Microservicios Java, Aplicación de Chat con Azure OpenAI, Procesamiento de Documentos con IA
 - **Avanzado**: Pipeline de ML
+- **Listo para Producción Empresarial**: **Solución Multi-Agente para Retail** (Sistema multi-agente completo con despliegue mediante plantilla ARM)
 
 ## 📚 Recursos Adicionales
 
 ### Enlaces de Documentación
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Plantillas de Azure AI Foundry AZD](https://github.com/Azure/ai-foundry-templates)
+- [Plantillas AZD de Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Documentación de Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Centro de Arquitectura de Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
@@ -313,19 +346,19 @@ El directorio `configurations/` contiene componentes reutilizables:
 - [Aplicación Todo con Python y MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
 - [Aplicación Todo con Node.js y PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
 - [Aplicación Web React con API en C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Trabajo en Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
-- [Funciones de Azure con Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Trabajo de Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions con Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Mejores Prácticas
 - [Marco de Arquitectura Bien Diseñada de Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Marco de Adopción de la Nube](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Contribuir Ejemplos
+## 🤝 Ejemplos de Contribución
 
 ¿Tienes un ejemplo útil para compartir? ¡Aceptamos contribuciones!
 
 ### Directrices para Envíos
-1. Sigue la estructura de directorio establecida
+1. Sigue la estructura de directorios establecida
 2. Incluye un README.md completo
 3. Agrega comentarios a los archivos de configuración
 4. Prueba exhaustivamente antes de enviar
@@ -347,10 +380,10 @@ example-name/
 
 ---
 
-**Consejo Profesional**: Comienza con el ejemplo más sencillo que coincida con tu stack tecnológico, luego avanza gradualmente hacia escenarios más complejos. Cada ejemplo se basa en conceptos de los anteriores.
+**Consejo Profesional**: Comienza con el ejemplo más sencillo que se ajuste a tu stack tecnológico, luego avanza gradualmente hacia escenarios más complejos. ¡Cada ejemplo se basa en conceptos de los anteriores!
 
 **Próximos Pasos**: 
-- Elige un ejemplo que coincida con tu nivel de habilidad
+- Elige un ejemplo que se ajuste a tu nivel de habilidad
 - Sigue las instrucciones de configuración en el README del ejemplo
 - Experimenta con personalizaciones
 - Comparte tus aprendizajes con la comunidad
@@ -364,4 +397,4 @@ example-name/
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

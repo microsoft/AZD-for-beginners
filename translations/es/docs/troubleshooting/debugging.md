@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:25:39+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T15:05:45+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "es"
 }
 -->
-# Guía de Depuración - Técnicas Avanzadas de Análisis de Registros
+# Guía de Depuración para Despliegues de AZD
+
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 7 - Resolución de Problemas y Depuración
+- **⬅️ Anterior**: [Problemas Comunes](common-issues.md)
+- **➡️ Siguiente**: [Resolución de Problemas Específicos de IA](ai-troubleshooting.md)
+- **🚀 Próximo Capítulo**: [Capítulo 8: Patrones de Producción y Empresariales](../ai-foundry/production-ai-practices.md)
 
 ## Introducción
 
-Esta guía integral proporciona estrategias avanzadas de depuración, herramientas y técnicas para diagnosticar y resolver problemas complejos con implementaciones de Azure Developer CLI. Aprende metodologías sistemáticas de resolución de problemas, técnicas de análisis de registros, perfiles de rendimiento y herramientas de diagnóstico avanzadas para resolver eficientemente problemas de implementación y tiempo de ejecución.
+Esta guía completa proporciona estrategias avanzadas de depuración, herramientas y técnicas para diagnosticar y resolver problemas complejos en los despliegues de Azure Developer CLI. Aprende metodologías sistemáticas de resolución de problemas, técnicas de análisis de registros, perfiles de rendimiento y herramientas de diagnóstico avanzadas para resolver eficientemente problemas de despliegue y ejecución.
 
 ## Objetivos de Aprendizaje
 
@@ -19,18 +26,18 @@ Al completar esta guía, podrás:
 - Dominar metodologías sistemáticas de depuración para problemas de Azure Developer CLI
 - Comprender configuraciones avanzadas de registro y técnicas de análisis de registros
 - Implementar estrategias de monitoreo y perfilado de rendimiento
-- Usar herramientas y servicios de diagnóstico de Azure para resolver problemas complejos
-- Aplicar técnicas de depuración de red y resolución de problemas de seguridad
+- Utilizar herramientas y servicios de diagnóstico de Azure para resolver problemas complejos
+- Aplicar técnicas de depuración de red y seguridad
 - Configurar monitoreo integral y alertas para la detección proactiva de problemas
 
 ## Resultados de Aprendizaje
 
 Al finalizar, serás capaz de:
-- Aplicar la metodología TRIAGE para depurar sistemáticamente problemas complejos de implementación
+- Aplicar la metodología TRIAGE para depurar sistemáticamente problemas complejos de despliegue
 - Configurar y analizar información completa de registros y trazas
-- Usar Azure Monitor, Application Insights y herramientas de diagnóstico de manera efectiva
+- Utilizar Azure Monitor, Application Insights y herramientas de diagnóstico de manera efectiva
 - Depurar problemas de conectividad de red, autenticación y permisos de forma independiente
-- Implementar estrategias de monitoreo y optimización del rendimiento
+- Implementar estrategias de monitoreo y optimización de rendimiento
 - Crear scripts personalizados de depuración y automatización para problemas recurrentes
 
 ## Metodología de Depuración
@@ -43,7 +50,7 @@ Al finalizar, serás capaz de:
 - **R**ecopilar: Reúne toda la información relevante
 - **E**scalar: ¿Cuándo buscar ayuda adicional?
 
-## Habilitar el Modo de Depuración
+## Activar el Modo de Depuración
 
 ### Variables de Entorno
 ```bash
@@ -197,7 +204,7 @@ debug_database() {
 
 ## 🔬 Depuración de Rendimiento
 
-### Monitoreo del Rendimiento de Aplicaciones
+### Monitoreo de Rendimiento de Aplicaciones
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -677,7 +684,7 @@ hooks:
 
 ## Mejores Prácticas
 
-1. **Siempre habilita el registro de depuración** en entornos que no sean de producción
+1. **Siempre habilita el registro de depuración** en entornos no productivos
 2. **Crea casos de prueba reproducibles** para los problemas
 3. **Documenta los procedimientos de depuración** para tu equipo
 4. **Automatiza las verificaciones de salud** y el monitoreo
@@ -687,8 +694,8 @@ hooks:
 ## Próximos Pasos
 
 - [Planificación de Capacidad](../pre-deployment/capacity-planning.md) - Planifica los requisitos de recursos
-- [Selección de SKU](../pre-deployment/sku-selection.md) - Elige los niveles de servicio adecuados
-- [Verificaciones Previas](../pre-deployment/preflight-checks.md) - Validación previa a la implementación
+- [Selección de SKU](../pre-deployment/sku-selection.md) - Elige niveles de servicio adecuados
+- [Verificaciones Preliminares](../pre-deployment/preflight-checks.md) - Validación previa al despliegue
 - [Hoja de Referencia](../../resources/cheat-sheet.md) - Comandos de referencia rápida
 
 ---
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

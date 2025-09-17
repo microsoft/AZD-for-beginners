@@ -1,35 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T17:16:33+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T15:06:35+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "es"
 }
 -->
-# Verificaciones Previas - Validación de Preparación para Despliegue
+# Verificaciones Previas al Despliegue para Implementaciones de AZD
+
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 6 - Validación y Planificación Previa al Despliegue
+- **⬅️ Anterior**: [Selección de SKU](sku-selection.md)
+- **➡️ Próximo Capítulo**: [Capítulo 7: Solución de Problemas](../troubleshooting/common-issues.md)
+- **🔧 Relacionado**: [Capítulo 4: Guía de Despliegue](../deployment/deployment-guide.md)
 
 ## Introducción
 
-Esta guía completa proporciona scripts y procedimientos de validación previos al despliegue para garantizar implementaciones exitosas con Azure Developer CLI antes de comenzar. Aprende a implementar verificaciones automatizadas para autenticación, disponibilidad de recursos, cuotas, cumplimiento de seguridad y requisitos de rendimiento para prevenir fallos en el despliegue y optimizar las tasas de éxito.
+Esta guía completa proporciona scripts y procedimientos de validación previa al despliegue para garantizar implementaciones exitosas con Azure Developer CLI antes de comenzar. Aprende a implementar verificaciones automatizadas para autenticación, disponibilidad de recursos, cuotas, cumplimiento de seguridad y requisitos de rendimiento para prevenir fallos en el despliegue y optimizar las tasas de éxito.
 
 ## Objetivos de Aprendizaje
 
 Al completar esta guía, podrás:
-- Dominar técnicas y scripts de validación automatizada previos al despliegue
+- Dominar técnicas y scripts automatizados de validación previa al despliegue
 - Comprender estrategias completas de verificación para autenticación, permisos y cuotas
 - Implementar procedimientos de validación de disponibilidad y capacidad de recursos
 - Configurar verificaciones de seguridad y cumplimiento para políticas organizacionales
 - Diseñar flujos de trabajo de estimación de costos y validación de presupuestos
-- Crear automatización personalizada de verificaciones previas para pipelines CI/CD
+- Crear automatización personalizada de verificaciones previas para pipelines de CI/CD
 
 ## Resultados de Aprendizaje
 
 Al finalizar, serás capaz de:
-- Crear y ejecutar scripts de validación previa completos
-- Diseñar flujos de trabajo de verificación automatizada para diferentes escenarios de despliegue
+- Crear y ejecutar scripts completos de validación previa al despliegue
+- Diseñar flujos de trabajo automatizados de verificación para diferentes escenarios de despliegue
 - Implementar procedimientos y políticas de validación específicas del entorno
-- Configurar monitoreo proactivo y alertas para preparación de despliegue
+- Configurar monitoreo proactivo y alertas para la preparación del despliegue
 - Solucionar problemas previos al despliegue e implementar acciones correctivas
 - Integrar verificaciones previas en pipelines de DevOps y flujos de trabajo automatizados
 
@@ -38,7 +45,7 @@ Al finalizar, serás capaz de:
 - [Resumen](../../../../docs/pre-deployment)
 - [Script Automatizado de Verificación Previa](../../../../docs/pre-deployment)
 - [Lista de Verificación Manual](../../../../docs/pre-deployment)
-- [Validación de Entorno](../../../../docs/pre-deployment)
+- [Validación del Entorno](../../../../docs/pre-deployment)
 - [Validación de Recursos](../../../../docs/pre-deployment)
 - [Verificaciones de Seguridad y Cumplimiento](../../../../docs/pre-deployment)
 - [Planificación de Rendimiento y Capacidad](../../../../docs/pre-deployment)
@@ -48,9 +55,9 @@ Al finalizar, serás capaz de:
 
 ## Resumen
 
-Las verificaciones previas son validaciones esenciales realizadas antes del despliegue para garantizar:
+Las verificaciones previas al despliegue son validaciones esenciales realizadas antes de implementar para garantizar:
 
-- **Disponibilidad de recursos** y cuotas en regiones objetivo
+- **Disponibilidad de recursos** y cuotas en las regiones objetivo
 - **Autenticación y permisos** configurados correctamente
 - **Validez de plantillas** y corrección de parámetros
 - **Conectividad de red** y dependencias
@@ -63,7 +70,7 @@ Las verificaciones previas son validaciones esenciales realizadas antes del desp
 - **Después de cambios significativos en plantillas**
 - **Antes de despliegues en producción**
 - **Al cambiar regiones de Azure**
-- **Como parte de pipelines CI/CD**
+- **Como parte de pipelines de CI/CD**
 
 ---
 
@@ -793,7 +800,7 @@ Imprime esta lista y verifica cada elemento antes del despliegue:
 - [ ] AZD CLI instalado y actualizado a la última versión
 - [ ] Azure CLI instalado y autenticado
 - [ ] Suscripción de Azure correcta seleccionada
-- [ ] Nombre del entorno único y siguiendo convenciones de nomenclatura
+- [ ] El nombre del entorno es único y sigue las convenciones de nomenclatura
 - [ ] Grupo de recursos objetivo identificado o puede ser creado
 
 #### ✅ Autenticación y Permisos
@@ -834,7 +841,7 @@ Imprime esta lista y verifica cada elemento antes del despliegue:
 - [ ] Application Insights configurado en las plantillas
 - [ ] Espacio de trabajo de Log Analytics planificado
 - [ ] Reglas de alerta definidas para métricas críticas
-- [ ] Puntos finales de verificación de salud implementados en aplicaciones
+- [ ] Puntos finales de verificación de salud implementados en las aplicaciones
 
 #### ✅ Respaldo y Recuperación
 - [ ] Estrategia de respaldo definida para recursos de datos
@@ -844,7 +851,7 @@ Imprime esta lista y verifica cada elemento antes del despliegue:
 
 ---
 
-## Validación de Entorno
+## Validación del Entorno
 
 ### Validación del Entorno de Desarrollo
 
@@ -1281,7 +1288,7 @@ steps:
 ### ✅ Mejores Prácticas para Verificaciones Previas
 
 1. **Automatiza Siempre que Sea Posible**
-   - Integra verificaciones en pipelines CI/CD
+   - Integra las verificaciones en pipelines de CI/CD
    - Usa scripts para validaciones repetibles
    - Almacena resultados para auditorías
 
@@ -1303,21 +1310,21 @@ steps:
 
 5. **Falla Rápida**
    - Detén el despliegue si fallan verificaciones críticas
-   - Proporciona orientación clara para resolución
-   - Habilita la fácil re-ejecución de verificaciones
+   - Proporciona orientación clara para la resolución
+   - Habilita la fácil reejecución de verificaciones
 
 ### Errores Comunes en Verificaciones Previas
 
-1. **Omitir validación** para despliegues "rápidos"
-2. **Insuficiente verificación de permisos** antes del despliegue
-3. **Ignorar límites de cuotas** hasta que falle el despliegue
-4. **No validar plantillas** en pipelines CI/CD
+1. **Omitir validaciones** para despliegues "rápidos"
+2. **Verificación insuficiente de permisos** antes del despliegue
+3. **Ignorar límites de cuotas** hasta que el despliegue falle
+4. **No validar plantillas** en pipelines de CI/CD
 5. **Falta de validación de seguridad** para entornos de producción
 6. **Estimación de costos inadecuada** que lleva a sorpresas presupuestarias
 
 ---
 
-**Consejo Profesional**: Ejecuta las verificaciones previas como un trabajo separado en tu pipeline CI/CD antes del trabajo de despliegue real. Esto te permite detectar problemas temprano y proporciona retroalimentación más rápida a los desarrolladores.
+**Consejo Profesional**: Ejecuta las verificaciones previas como un trabajo separado en tu pipeline de CI/CD antes del trabajo de despliegue real. Esto te permite detectar problemas temprano y proporciona retroalimentación más rápida a los desarrolladores.
 
 ---
 
@@ -1328,4 +1335,4 @@ steps:
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

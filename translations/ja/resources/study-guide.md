@@ -1,21 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7634850a19864a183bc82ab5ac993c8a",
-  "translation_date": "2025-09-09T17:40:06+00:00",
+  "original_hash": "ee6549c72fe4271931326578e2379243",
+  "translation_date": "2025-09-17T14:22:17+00:00",
   "source_file": "resources/study-guide.md",
   "language_code": "ja"
 }
 -->
-# 学習ガイド - AZD初心者向け
+# 学習ガイド - 包括的な学習目標
+
+**学習パスのナビゲーション**
+- **📚 コースホーム**: [AZD 初心者向け](../README.md)
+- **📖 学習を開始**: [第1章: 基礎とクイックスタート](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 進捗管理**: [コース完了](../README.md#-course-completion--certification)
 
 ## はじめに
 
-この包括的な学習ガイドは、Azure Developer CLI (azd) を習得するための構造化された学習目標、重要な概念、練習問題、評価資料を提供します。このガイドを活用して進捗を追跡し、重要なトピックをすべて網羅していることを確認してください。
+この包括的な学習ガイドは、Azure Developer CLI (azd) を習得するための構造化された学習目標、重要な概念、実践演習、評価資料を提供します。このガイドを使用して進捗を追跡し、すべての重要なトピックを網羅していることを確認してください。
 
 ## 学習目標
 
-この学習ガイドを完了することで、以下を達成できます：
+この学習ガイドを完了することで、以下を達成できます:
 - Azure Developer CLI の基本的および高度な概念を習得する
 - Azure アプリケーションのデプロイと管理における実践的なスキルを開発する
 - デプロイのトラブルシューティングと最適化に自信を持つ
@@ -23,245 +28,208 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 学習成果
 
-この学習ガイドのすべてのセクションを完了した後、以下ができるようになります：
+この学習ガイドのすべてのセクションを完了した後、以下ができるようになります:
 - azd を使用して完全なアプリケーションアーキテクチャを設計、デプロイ、管理する
-- 包括的なモニタリング、セキュリティ、コスト最適化戦略を実装する
+- 包括的な監視、セキュリティ、コスト最適化戦略を実装する
 - 複雑なデプロイ問題を独自にトラブルシューティングする
 - カスタムテンプレートを作成し、azd コミュニティに貢献する
 
-## コース構成
+## 8章構成の学習プログラム
 
-### モジュール 1: 初めてのステップ (1～2週目)
-
-#### 学習目標
-- Azure Developer CLI の基本とコア概念を理解する
-- 開発環境に azd を正常にインストールして設定する
-- 既存のテンプレートを使用して初めてのデプロイを完了する
-- azd プロジェクト構造を把握し、主要なコンポーネントを理解する
-
-#### 習得すべき重要な概念
-- テンプレート、環境、サービス
-- azure.yaml の設定構造
-- 基本的な azd コマンド (init, up, down, deploy)
-- Infrastructure as Code の原則
-- Azure の認証と認可
-
-#### 練習問題
-
-**演習 1.1: インストールとセットアップ**  
-```bash
-# Complete these tasks:
-1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
-3. Verify installation with: azd version
-4. Test connectivity with: azd auth login
-5. Explore available templates: azd template list
-```
-
-**演習 1.2: 初めてのデプロイ**  
-```bash
-# Deploy a simple web application:
-1. Initialize project: azd init --template todo-nodejs-mongo
-2. Review project structure and configuration files
-3. Deploy to Azure: azd up
-4. Test the deployed application
-5. Clean up resources: azd down
-```
-
-**演習 1.3: プロジェクト構造の分析**  
-```
-Analyze the following components:
-1. azure.yaml - service definitions and hooks
-2. infra/ directory - Bicep templates and modules
-3. src/ directory - application source code
-4. .azure/ directory - environment configurations
-```
-
-#### 自己評価質問
-1. azd アーキテクチャの3つのコア概念は何ですか？
-2. azure.yaml ファイルの目的は何ですか？
-3. 環境は異なるデプロイターゲットを管理する上でどのように役立ちますか？
-4. azd で使用できる認証方法は何ですか？
-5. 初めて `azd up` を実行すると何が起こりますか？
-
-### モジュール 2: 設定と環境 (3週目)
+### 第1章: 基礎とクイックスタート (1週目)
+**所要時間**: 30～45分 | **難易度**: ⭐
 
 #### 学習目標
-- 環境管理と設定を習得する
-- 高度な azure.yaml 設定を理解する
-- 環境固有の設定と変数を実装する
-- 異なるシナリオに対する認証を設定する
+- Azure Developer CLI の基本概念と用語を理解する
+- 開発環境に AZD をインストールして設定する
+- 既存のテンプレートを使用して最初のアプリケーションをデプロイする
+- AZD コマンドラインインターフェースを効果的に操作する
 
 #### 習得すべき重要な概念
-- 環境階層と変数の優先順位
-- サービス設定とパラメータ
-- フックとライフサイクルイベント
-- 認証方法 (ユーザー、サービスプリンシパル、マネージドアイデンティティ)
-- 設定ファイルの管理
+- AZD プロジェクトの構造とコンポーネント (azure.yaml, infra/, src/)
+- テンプレートベースのデプロイワークフロー
+- 環境設定の基本
+- リソースグループとサブスクリプション管理
 
-#### 練習問題
+#### 実践演習
+1. **インストール確認**: AZD をインストールし、`azd version` で確認する
+2. **初回デプロイ**: todo-nodejs-mongo テンプレートを正常にデプロイする
+3. **環境設定**: 初めての環境変数を設定する
+4. **リソース探索**: Azure ポータルでデプロイされたリソースを確認する
 
-**演習 2.1: マルチ環境セットアップ**  
-```bash
-# Create and configure multiple environments:
-1. Create development environment: azd env new development
-2. Create staging environment: azd env new staging
-3. Create production environment: azd env new production
-4. Configure different settings for each environment
-5. Deploy the same application to different environments
-```
+#### 評価質問
+- AZD プロジェクトの主要なコンポーネントは何ですか？
+- テンプレートから新しいプロジェクトを初期化する方法は？
+- `azd up` と `azd deploy` の違いは何ですか？
+- AZD を使用して複数の環境を管理する方法は？
 
-**演習 2.2: 高度な設定**  
-```yaml
-# Modify azure.yaml to include:
-1. Multiple services with different configurations
-2. Pre and post deployment hooks
-3. Environment-specific parameters
-4. Custom resource naming patterns
-```
+---
 
-**演習 2.3: セキュリティ設定**  
-```bash
-# Implement security best practices:
-1. Configure managed identity for service authentication
-2. Set up Azure Key Vault for secrets management
-3. Implement least-privilege access controls
-4. Enable HTTPS and secure communication protocols
-```
-
-#### 自己評価質問
-1. azd は環境変数の優先順位をどのように処理しますか？
-2. デプロイフックとは何で、いつ使用すべきですか？
-3. 異なる環境で異なる SKU を設定する方法は？
-4. 異なる認証方法のセキュリティ上の影響は何ですか？
-5. 秘密情報や機密設定データをどのように管理しますか？
-
-### モジュール 3: デプロイとプロビジョニング (4週目)
+### 第2章: AI優先の開発 (2週目)
+**所要時間**: 1～2時間 | **難易度**: ⭐⭐
 
 #### 学習目標
-- デプロイワークフローとベストプラクティスを習得する
-- Bicep テンプレートを使用した Infrastructure as Code を理解する
-- 複雑なマルチサービスアーキテクチャを実装する
-- デプロイのパフォーマンスと信頼性を最適化する
+- AZD ワークフローに Azure AI Foundry サービスを統合する
+- AI対応アプリケーションをデプロイして設定する
+- RAG (Retrieval-Augmented Generation) 実装パターンを理解する
+- AIモデルのデプロイとスケーリングを管理する
 
 #### 習得すべき重要な概念
-- Bicep テンプレートの構造とモジュール
-- リソースの依存関係と順序
-- デプロイ戦略 (ブルーグリーン、ローリングアップデート)
-- マルチリージョンデプロイ
-- データベース移行とデータ管理
+- Azure OpenAI サービスの統合と API 管理
+- AI 検索設定とベクトルインデックス
+- モデルデプロイ戦略とキャパシティプランニング
+- AI アプリケーションの監視とパフォーマンス最適化
 
-#### 練習問題
+#### 実践演習
+1. **AIチャットデプロイ**: azure-search-openai-demo テンプレートをデプロイする
+2. **RAG実装**: ドキュメントのインデックスと検索を設定する
+3. **モデル設定**: 異なる目的の複数のAIモデルを設定する
+4. **AI監視**: AIワークロードに Application Insights を実装する
 
-**演習 3.1: カスタムインフラストラクチャ**  
-```bicep
-// Create custom Bicep templates for:
-1. Web application with custom domain and SSL
-2. Database with backup and high availability
-3. Storage account with access policies
-4. Monitoring and logging configuration
-5. Network security groups and virtual networks
-```
+#### 評価質問
+- AZD テンプレートで Azure OpenAI サービスを設定する方法は？
+- RAG アーキテクチャの主要なコンポーネントは何ですか？
+- AIモデルのキャパシティとスケーリングを管理する方法は？
+- AIアプリケーションにおける重要な監視指標は何ですか？
 
-**演習 3.2: マルチサービスアプリケーション**  
-```bash
-# Deploy a microservices architecture:
-1. Frontend web application
-2. Backend API service
-3. Database service
-4. Message queue service
-5. Background worker service
-```
+---
 
-**演習 3.3: データベース統合**  
-```bash
-# Implement database deployment patterns:
-1. Deploy PostgreSQL with connection pooling
-2. Implement schema migrations
-3. Configure backup and recovery procedures
-4. Set up read replicas for performance
-5. Implement data seeding for different environments
-```
-
-#### 自己評価質問
-1. ARM テンプレートより Bicep を使用する利点は何ですか？
-2. azd デプロイでデータベース移行をどのように処理しますか？
-3. ダウンタイムゼロのデプロイ戦略にはどのようなものがありますか？
-4. サービス間の依存関係をどのように管理しますか？
-5. マルチリージョンデプロイの考慮事項は何ですか？
-
-### モジュール 4: デプロイ前の検証 (5週目)
+### 第3章: 設定と認証 (3週目)
+**所要時間**: 45～60分 | **難易度**: ⭐⭐
 
 #### 学習目標
-- 包括的なデプロイ前チェックを実装する
-- 容量計画とリソース検証を習得する
-- SKU の選択とコスト最適化を理解する
-- 自動化された検証パイプラインを構築する
+- 環境設定と管理戦略を習得する
+- 安全な認証パターンとマネージドIDを実装する
+- 適切な命名規則でリソースを整理する
+- 複数環境のデプロイ (開発、ステージング、本番) を設定する
 
 #### 習得すべき重要な概念
-- Azure リソースのクォータと制限
-- SKU 選択基準とコストへの影響
-- 自動化された検証スクリプトとツール
-- 容量計画の方法論
-- パフォーマンステストと最適化
+- 環境階層と設定の優先順位
+- マネージドIDとサービスプリンシパル認証
+- 機密情報管理のための Key Vault 統合
+- 環境固有のパラメータ管理
 
-#### 練習問題
+#### 実践演習
+1. **複数環境設定**: 開発、ステージング、本番環境を設定する
+2. **セキュリティ設定**: マネージドID認証を実装する
+3. **機密情報管理**: 機密データのために Azure Key Vault を統合する
+4. **パラメータ管理**: 環境固有の設定を作成する
 
-**演習 4.1: 容量計画**  
-```bash
-# Implement capacity validation:
-1. Create scripts to check Azure quotas
-2. Validate service availability in target regions
-3. Estimate resource costs for different SKUs
-4. Plan for scaling and growth requirements
-5. Document capacity requirements for each environment
-```
+#### 評価質問
+- AZD を使用して異なる環境を設定する方法は？
+- マネージドIDをサービスプリンシパルよりも使用する利点は何ですか？
+- アプリケーションの機密情報を安全に管理する方法は？
+- AZD の設定階層はどのようになっていますか？
 
-**演習 4.2: プレフライト検証**  
-```powershell
-# Build comprehensive validation pipeline:
-1. Authentication and permissions validation
-2. Template syntax and parameter validation
-3. Resource naming and availability checks
-4. Network connectivity and security validation
-5. Cost estimation and budget verification
-```
+---
 
-**演習 4.3: SKU 最適化**  
-```bash
-# Optimize service configurations:
-1. Compare performance characteristics of different SKUs
-2. Implement cost-effective development configurations
-3. Design high-performance production configurations
-4. Create monitoring dashboards for resource utilization
-5. Set up auto-scaling policies
-```
-
-#### 自己評価質問
-1. SKU 選択の決定に影響を与える要因は何ですか？
-2. デプロイ前に Azure リソースの利用可能性をどのように検証しますか？
-3. プレフライトチェックシステムの主要な構成要素は何ですか？
-4. デプロイコストをどのように見積もり、管理しますか？
-5. 容量計画に必要なモニタリングは何ですか？
-
-### モジュール 5: トラブルシューティングとデバッグ (6週目)
+### 第4章: コードとしてのインフラとデプロイ (4～5週目)
+**所要時間**: 1～1.5時間 | **難易度**: ⭐⭐⭐
 
 #### 学習目標
-- 系統的なトラブルシューティング方法論を習得する
-- 複雑なデプロイ問題のデバッグに精通する
-- 包括的なモニタリングとアラートを実装する
-- インシデント対応と復旧手順を構築する
+- Bicep インフラテンプレートを作成してカスタマイズする
+- 高度なデプロイパターンとワークフローを実装する
+- リソースプロビジョニング戦略を理解する
+- スケーラブルなマルチサービスアーキテクチャを設計する
 
 #### 習得すべき重要な概念
-- 一般的なデプロイ失敗パターン
-- ログ分析と相関技術
-- パフォーマンスモニタリングと最適化
-- セキュリティインシデントの検出と対応
-- 災害復旧と事業継続
+- Bicep テンプレートの構造とベストプラクティス
+- リソース依存関係とデプロイ順序
+- パラメータファイルとテンプレートのモジュール化
+- カスタムフックとデプロイ自動化
 
-#### 練習問題
+#### 実践演習
+1. **カスタムテンプレート作成**: マルチサービスアプリケーションテンプレートを構築する
+2. **Bicepの習得**: モジュール化された再利用可能なインフラコンポーネントを作成する
+3. **デプロイ自動化**: 事前/事後デプロイフックを実装する
+4. **アーキテクチャ設計**: 複雑なマイクロサービスアーキテクチャをデプロイする
 
-**演習 5.1: トラブルシューティングシナリオ**  
+#### 評価質問
+- AZD 用のカスタム Bicep テンプレートを作成する方法は？
+- インフラコードを整理するためのベストプラクティスは何ですか？
+- テンプレート内でリソース依存関係をどのように処理しますか？
+- ゼロダウンタイム更新をサポートするデプロイパターンは何ですか？
+
+---
+
+### 第5章: マルチエージェントAIソリューション (6～7週目)
+**所要時間**: 2～3時間 | **難易度**: ⭐⭐⭐⭐
+
+#### 学習目標
+- マルチエージェントAIアーキテクチャを設計して実装する
+- エージェントの調整と通信をオーケストレーションする
+- 監視付きの本番対応AIソリューションをデプロイする
+- エージェントの専門化とワークフローパターンを理解する
+
+#### 習得すべき重要な概念
+- マルチエージェントアーキテクチャのパターンと設計原則
+- エージェント通信プロトコルとデータフロー
+- AIエージェントの負荷分散とスケーリング戦略
+- マルチエージェントシステムの本番監視
+
+#### 実践演習
+1. **小売ソリューションデプロイ**: 完全なマルチエージェント小売シナリオをデプロイする
+2. **エージェントカスタマイズ**: 顧客および在庫エージェントの動作を変更する
+3. **アーキテクチャスケーリング**: 負荷分散と自動スケーリングを実装する
+4. **本番監視**: 包括的な監視とアラートを設定する
+
+#### 評価質問
+- 効果的なマルチエージェント通信パターンを設計する方法は？
+- AIエージェントのワークロードをスケーリングする際の重要な考慮事項は何ですか？
+- マルチエージェントAIシステムを監視してデバッグする方法は？
+- AIエージェントの信頼性を確保する本番パターンは何ですか？
+
+---
+
+### 第6章: デプロイ前の検証と計画 (8週目)
+**所要時間**: 1時間 | **難易度**: ⭐⭐
+
+#### 学習目標
+- 包括的なキャパシティプランニングとリソース検証を実施する
+- コスト効率の良い最適な Azure SKU を選択する
+- 自動化された事前チェックと検証を実装する
+- コスト最適化戦略を用いたデプロイ計画を立てる
+
+#### 習得すべき重要な概念
+- Azure リソースのクォータとキャパシティ制限
+- SKU 選択基準とコスト最適化
+- 自動化された検証スクリプトとテスト
+- デプロイ計画とリスク評価
+
+#### 実践演習
+1. **キャパシティ分析**: アプリケーションのリソース要件を分析する
+2. **SKU最適化**: コスト効率の良いサービス階層を比較して選択する
+3. **検証自動化**: デプロイ前チェックスクリプトを実装する
+4. **コスト計画**: デプロイコストの見積もりと予算を作成する
+
+#### 評価質問
+- デプロイ前に Azure のキャパシティを検証する方法は？
+- SKU 選択の決定に影響を与える要因は何ですか？
+- デプロイ前の検証を自動化する方法は？
+- デプロイコストを最適化するための戦略は何ですか？
+2. Azureリソースの利用可能性をデプロイ前にどのように確認しますか？  
+3. プレフライトチェックシステムの主要な構成要素は何ですか？  
+4. デプロイメントコストをどのように見積もり、管理しますか？  
+5. キャパシティプランニングに必要なモニタリングは何ですか？
+
+### モジュール5: トラブルシューティングとデバッグ (6週目)
+
+#### 学習目標
+- 系統的なトラブルシューティング手法を習得する  
+- 複雑なデプロイメント問題のデバッグに精通する  
+- 包括的なモニタリングとアラートを実装する  
+- インシデント対応と復旧手順を構築する  
+
+#### 習得すべき主要概念
+- 一般的なデプロイメント失敗パターン  
+- ログ分析と相関技術  
+- パフォーマンスモニタリングと最適化  
+- セキュリティインシデントの検出と対応  
+- 災害復旧と事業継続  
+
+#### 実践演習
+
+**演習5.1: トラブルシューティングシナリオ**  
 ```bash
 # Practice resolving common issues:
 1. Authentication and authorization failures
@@ -269,9 +237,9 @@ Analyze the following components:
 3. Application startup and runtime errors
 4. Network connectivity problems
 5. Performance and scaling issues
-```
+```  
 
-**演習 5.2: モニタリングの実装**  
+**演習5.2: モニタリングの実装**  
 ```bash
 # Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
@@ -279,9 +247,9 @@ Analyze the following components:
 3. Custom dashboards and alerting rules
 4. Log aggregation and analysis
 5. Health check endpoints and automated testing
-```
+```  
 
-**演習 5.3: インシデント対応**  
+**演習5.3: インシデント対応**  
 ```bash
 # Build incident response procedures:
 1. Create runbooks for common problems
@@ -289,33 +257,33 @@ Analyze the following components:
 3. Set up notification and escalation workflows
 4. Practice disaster recovery scenarios
 5. Document lessons learned and improvements
-```
+```  
 
 #### 自己評価質問
-1. azd デプロイのトラブルシューティングにおける系統的アプローチは何ですか？
-2. 複数のサービスやリソース間でログをどのように相関させますか？
-3. 問題の早期検出に最も重要なモニタリング指標は何ですか？
-4. 効果的な災害復旧手順をどのように実装しますか？
+1. azdデプロイメントの系統的なトラブルシューティングアプローチは何ですか？  
+2. 複数のサービスやリソース間でログをどのように相関させますか？  
+3. 早期問題検出に最も重要なモニタリング指標は何ですか？  
+4. 効果的な災害復旧手順をどのように実装しますか？  
 5. インシデント対応計画の主要な構成要素は何ですか？
 
-### モジュール 6: 高度なトピックとベストプラクティス (7～8週目)
+### モジュール6: 高度なトピックとベストプラクティス (7-8週目)
 
 #### 学習目標
-- エンタープライズグレードのデプロイパターンを実装する
-- CI/CD の統合と自動化を習得する
-- カスタムテンプレートを開発し、コミュニティに貢献する
-- 高度なセキュリティとコンプライアンス要件を理解する
+- エンタープライズグレードのデプロイメントパターンを実装する  
+- CI/CD統合と自動化を習得する  
+- カスタムテンプレートを開発し、コミュニティに貢献する  
+- 高度なセキュリティとコンプライアンス要件を理解する  
 
-#### 習得すべき重要な概念
-- CI/CD パイプライン統合パターン
-- カスタムテンプレートの開発と配布
-- エンタープライズガバナンスとコンプライアンス
-- 高度なネットワークとセキュリティ設定
-- パフォーマンス最適化とコスト管理
+#### 習得すべき主要概念
+- CI/CDパイプライン統合パターン  
+- カスタムテンプレートの開発と配布  
+- エンタープライズガバナンスとコンプライアンス  
+- 高度なネットワーキングとセキュリティ構成  
+- パフォーマンス最適化とコスト管理  
 
-#### 練習問題
+#### 実践演習
 
-**演習 6.1: CI/CD の統合**  
+**演習6.1: CI/CD統合**  
 ```yaml
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
@@ -323,9 +291,9 @@ Analyze the following components:
 3. Multi-stage deployment with approvals
 4. Automated testing and quality gates
 5. Security scanning and compliance checks
-```
+```  
 
-**演習 6.2: カスタムテンプレートの開発**  
+**演習6.2: カスタムテンプレート開発**  
 ```bash
 # Create and publish custom templates:
 1. Design template for your organization's architecture
@@ -333,9 +301,9 @@ Analyze the following components:
 3. Add comprehensive documentation and examples
 4. Test template across different environments
 5. Publish and maintain template in template gallery
-```
+```  
 
-**演習 6.3: エンタープライズ実装**  
+**演習6.3: エンタープライズ実装**  
 ```bash
 # Implement enterprise-grade features:
 1. Multi-tenant architecture with proper isolation
@@ -343,114 +311,114 @@ Analyze the following components:
 3. Compliance and governance controls
 4. Cost allocation and chargeback mechanisms
 5. Disaster recovery and business continuity
-```
+```  
 
 #### 自己評価質問
-1. azd を既存の CI/CD ワークフローに統合する方法は？
-2. カスタムテンプレート開発の重要な考慮事項は何ですか？
-3. azd デプロイにおけるガバナンスとコンプライアンスをどのように実装しますか？
-4. エンタープライズ規模のデプロイにおけるベストプラクティスは何ですか？
-5. azd コミュニティに効果的に貢献する方法は？
+1. azdを既存のCI/CDワークフローにどのように統合しますか？  
+2. カスタムテンプレート開発の重要な考慮事項は何ですか？  
+3. azdデプロイメントにおけるガバナンスとコンプライアンスをどのように実装しますか？  
+4. エンタープライズ規模のデプロイメントにおけるベストプラクティスは何ですか？  
+5. azdコミュニティに効果的に貢献する方法は何ですか？
 
 ## 実践プロジェクト
 
-### プロジェクト 1: 個人ポートフォリオウェブサイト
+### プロジェクト1: 個人ポートフォリオウェブサイト  
 **複雑度**: 初級  
-**期間**: 1～2週間
+**期間**: 1-2週間  
 
-以下を使用して個人ポートフォリオウェブサイトを構築およびデプロイします：
-- Azure Storage を使用した静的ウェブサイトホスティング
-- カスタムドメイン設定
-- グローバルパフォーマンス向上のための CDN 統合
-- 自動デプロイパイプライン
+以下を使用して個人ポートフォリオウェブサイトを構築・デプロイする:  
+- Azure Storageでの静的ウェブサイトホスティング  
+- カスタムドメイン設定  
+- グローバルパフォーマンス向上のためのCDN統合  
+- 自動デプロイメントパイプライン  
 
-**成果物**:
-- Azure にデプロイされた動作するウェブサイト
-- ポートフォリオデプロイ用のカスタム azd テンプレート
-- デプロイプロセスのドキュメント
-- コスト分析と最適化の推奨事項
+**成果物**:  
+- Azure上にデプロイされた動作するウェブサイト  
+- ポートフォリオデプロイメント用のカスタムazdテンプレート  
+- デプロイメントプロセスのドキュメント  
+- コスト分析と最適化の推奨事項  
 
-### プロジェクト 2: タスク管理アプリケーション
+### プロジェクト2: タスク管理アプリケーション  
 **複雑度**: 中級  
-**期間**: 2～3週間
+**期間**: 2-3週間  
 
-以下を含むフルスタックタスク管理アプリケーションを作成します：
-- App Service にデプロイされた React フロントエンド
-- 認証付きの Node.js API バックエンド
-- マイグレーション付きの PostgreSQL データベース
-- Application Insights モニタリング
+以下を使用してフルスタックのタスク管理アプリケーションを作成する:  
+- App ServiceにデプロイされたReactフロントエンド  
+- 認証付きNode.js APIバックエンド  
+- マイグレーション付きPostgreSQLデータベース  
+- Application Insightsモニタリング  
 
-**成果物**:
-- ユーザー認証付きの完全なアプリケーション
-- データベーススキーマとマイグレーションスクリプト
-- モニタリングダッシュボードとアラートルール
-- マルチ環境デプロイ設定
+**成果物**:  
+- ユーザー認証付きの完全なアプリケーション  
+- データベーススキーマとマイグレーションスクリプト  
+- モニタリングダッシュボードとアラートルール  
+- 複数環境のデプロイメント構成  
 
-### プロジェクト 3: マイクロサービス型 Eコマースプラットフォーム
+### プロジェクト3: マイクロサービスEコマースプラットフォーム  
 **複雑度**: 上級  
-**期間**: 4～6週間
+**期間**: 4-6週間  
 
-以下を含むマイクロサービスベースの Eコマースプラットフォームを設計および実装します：
-- 複数の API サービス (カタログ、注文、支払い、ユーザー)
-- Service Bus を使用したメッセージキュー統合
-- パフォーマンス最適化のための Redis キャッシュ
-- 包括的なログとモニタリング
+以下を使用してマイクロサービスベースのEコマースプラットフォームを設計・実装する:  
+- 複数のAPIサービス (カタログ、注文、支払い、ユーザー)  
+- Service Busを使用したメッセージキュー統合  
+- パフォーマンス最適化のためのRedisキャッシュ  
+- 包括的なログとモニタリング  
 
-**成果物**:
-- 完全なマイクロサービスアーキテクチャ
-- サービス間通信パターン
-- パフォーマンステストと最適化
-- 本番環境向けのセキュリティ実装
+**成果物**:  
+- 完全なマイクロサービスアーキテクチャ  
+- サービス間通信パターン  
+- パフォーマンステストと最適化  
+- 本番対応のセキュリティ実装  
 
 ## 評価と認定
 
 ### 知識チェック
 
-各モジュール終了後に以下の評価を完了してください：
+各モジュール終了後に以下の評価を完了してください:
 
-**モジュール 1 評価**: 基本概念とインストール  
+**モジュール1評価**: 基本概念とインストール  
 - コア概念に関する選択問題  
-- 実践的なインストールと設定タスク  
-- 簡単なデプロイ演習  
+- 実践的なインストールと構成タスク  
+- 簡単なデプロイメント演習  
 
-**モジュール 2 評価**: 設定と環境  
+**モジュール2評価**: 構成と環境  
 - 環境管理シナリオ  
-- 設定トラブルシューティング演習  
-- セキュリティ設定の実装  
+- 構成トラブルシューティング演習  
+- セキュリティ構成の実装  
 
-**モジュール 3 評価**: デプロイとプロビジョニング  
+**モジュール3評価**: デプロイメントとプロビジョニング  
 - インフラ設計課題  
-- マルチサービスデプロイシナリオ  
+- 複数サービスのデプロイメントシナリオ  
 - パフォーマンス最適化演習  
 
-**モジュール 4 評価**: デプロイ前の検証  
-- 容量計画ケーススタディ  
+**モジュール4評価**: デプロイ前の検証  
+- キャパシティプランニングケーススタディ  
 - コスト最適化シナリオ  
 - 検証パイプラインの実装  
 
-**モジュール 5 評価**: トラブルシューティングとデバッグ  
+**モジュール5評価**: トラブルシューティングとデバッグ  
 - 問題診断演習  
 - モニタリング実装タスク  
 - インシデント対応シミュレーション  
 
-**モジュール 6 評価**: 高度なトピック  
-- CI/CD パイプライン設計  
+**モジュール6評価**: 高度なトピック  
+- CI/CDパイプライン設計  
 - カスタムテンプレート開発  
 - エンタープライズアーキテクチャシナリオ  
 
 ### 最終キャップストーンプロジェクト
 
-すべての概念の習得を示す完全なソリューションを設計および実装してください：
+すべての概念を習得したことを示す完全なソリューションを設計・実装してください:
 
-**要件**:
+**要件**:  
 - マルチティアアプリケーションアーキテクチャ  
-- 複数のデプロイ環境  
+- 複数のデプロイメント環境  
 - 包括的なモニタリングとアラート  
 - セキュリティとコンプライアンスの実装  
 - コスト最適化とパフォーマンス調整  
 - 完全なドキュメントと運用手順書  
 
-**評価基準**:
+**評価基準**:  
 - 技術的な実装の品質  
 - ドキュメントの完全性  
 - セキュリティとベストプラクティスの遵守  
@@ -460,44 +428,143 @@ Analyze the following components:
 ## 学習リソースと参考資料
 
 ### 公式ドキュメント
-- [Azure Developer CLI ドキュメント](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Bicep ドキュメント](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure アーキテクチャセンター](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
 
 ### コミュニティリソース
-- [AZD テンプレートギャラリー](https://azure.github.io/awesome-azd/)
-- [Azure-Samples GitHub 組織](https://github.com/Azure-Samples)
-- [Azure Developer CLI GitHub リポジトリ](https://github.com/Azure/azure-dev)
+- [AZD Template Gallery](https://azure.github.io/awesome-azd/)  
+- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)  
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)  
 
-### 練習環境
-- [Azure 無料アカウント](https://azure.microsoft.com/free/)
-- [Azure DevOps 無料プラン](https://azure.microsoft.com/services/devops/)
-- [GitHub Actions](https://github.com/features/actions)
+### 実践環境
+- [Azure Free Account](https://azure.microsoft.com/free/)  
+- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)  
+- [GitHub Actions](https://github.com/features/actions)  
 
 ### 追加ツール
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)  
+- [Visual Studio Code](https://code.visualstudio.com/)  
+- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
 
 ## 学習スケジュールの推奨
 
 ### フルタイム学習 (8週間)
-- **1～2週目**: モジュール 1～2 (初めてのステップ、設定)
-- **3～4週目**: モジュール 3～4 (デプロイ、デプロイ前)
-- **5～6週目**: モジュール 5～6 (トラブルシュ
-3. **オープンソースに貢献する**: テンプレートやソリューションをコミュニティと共有しましょう  
-4. **他の人に教える**: 概念を他の人に説明することで、自分自身の理解も深まります  
-5. **好奇心を持ち続ける**: 新しいAzureサービスや統合パターンを継続的に探求しましょう  
+- **1-2週目**: モジュール1-2 (入門、構成)  
+- **3-4週目**: モジュール3-4 (デプロイメント、デプロイ前準備)  
+- **5-6週目**: モジュール5-6 (トラブルシューティング、高度なトピック)  
+- **7-8週目**: 実践プロジェクトと最終評価  
+
+### パートタイム学習 (16週間)
+- **1-4週目**: モジュール1 (入門)  
+- **5-7週目**: モジュール2 (構成と環境)  
+- **8-10週目**: モジュール3 (デプロイメントとプロビジョニング)  
+- **11-12週目**: モジュール4 (デプロイ前の検証)  
+- **13-14週目**: モジュール5 (トラブルシューティングとデバッグ)  
+- **15-16週目**: モジュール6 (高度なトピックと評価)  
 
 ---
 
-**ナビゲーション**  
-- **前のレッスン**: [FAQ](faq.md)  
-- **次のレッスン**: [Changelog](../changelog.md)  
+## 進捗追跡と評価フレームワーク
 
-**学習進捗の追跡**: このガイドを活用して学習の旅を追跡し、Azure Developer CLIのすべての概念と実践を包括的にカバーできるようにしましょう。  
+### チャプター完了チェックリスト
+
+各チャプターの進捗を以下の成果で追跡してください:
+
+#### 📚 チャプター1: 基礎とクイックスタート  
+- [ ] **インストール完了**: AZDがプラットフォーム上でインストールされ、確認済み  
+- [ ] **初回デプロイメント**: todo-nodejs-mongoテンプレートを正常にデプロイ  
+- [ ] **環境設定**: 初回の環境変数を構成  
+- [ ] **リソースナビゲーション**: Azureポータルでデプロイされたリソースを探索  
+- [ ] **コマンド習得**: 基本的なAZDコマンドに慣れる  
+
+#### 🤖 チャプター2: AIファースト開発  
+- [ ] **AIテンプレートデプロイメント**: azure-search-openai-demoを正常にデプロイ  
+- [ ] **RAG実装**: ドキュメントのインデックス作成と検索を構成  
+- [ ] **モデル構成**: 異なる目的の複数のAIモデルを設定  
+- [ ] **AIモニタリング**: AIワークロード向けにApplication Insightsを実装  
+- [ ] **パフォーマンス最適化**: AIアプリケーションのパフォーマンスを調整  
+
+#### ⚙️ チャプター3: 構成と認証  
+- [ ] **マルチ環境設定**: dev、staging、prod環境を構成  
+- [ ] **セキュリティ実装**: マネージドID認証を設定  
+- [ ] **秘密管理**: 機密データ用にAzure Key Vaultを統合  
+- [ ] **パラメータ管理**: 環境固有の構成を作成  
+- [ ] **認証習得**: 安全なアクセスパターンを実装  
+
+#### 🏗️ チャプター4: コードとしてのインフラとデプロイメント  
+- [ ] **カスタムテンプレート作成**: 複数サービスアプリケーションテンプレートを構築  
+- [ ] **Bicep習得**: モジュール化された再利用可能なインフラコンポーネントを作成  
+- [ ] **デプロイメント自動化**: デプロイ前/後のフックを実装  
+- [ ] **アーキテクチャ設計**: 複雑なマイクロサービスアーキテクチャをデプロイ  
+- [ ] **テンプレート最適化**: パフォーマンスとコストのためにテンプレートを最適化  
+
+#### 🎯 チャプター5: マルチエージェントAIソリューション  
+- [ ] **小売ソリューションデプロイメント**: 完全なマルチエージェント小売シナリオをデプロイ  
+- [ ] **エージェントカスタマイズ**: 顧客および在庫エージェントの動作を変更  
+- [ ] **アーキテクチャスケーリング**: 負荷分散と自動スケーリングを実装  
+- [ ] **本番モニタリング**: 包括的なモニタリングとアラートを設定  
+- [ ] **パフォーマンス調整**: マルチエージェントシステムのパフォーマンスを最適化  
+
+#### 🔍 チャプター6: デプロイ前の検証と計画  
+- [ ] **キャパシティ分析**: アプリケーションのリソース要件を分析  
+- [ ] **SKU最適化**: コスト効率の良いサービス階層を選択  
+- [ ] **検証自動化**: デプロイ前チェックスクリプトを実装  
+- [ ] **コスト計画**: デプロイメントコストの見積もりと予算を作成  
+- [ ] **リスク評価**: デプロイメントリスクを特定し、軽減  
+
+#### 🚨 チャプター7: トラブルシューティングとデバッグ  
+- [ ] **診断スキル**: 意図的に壊れたデプロイメントを正常にデバッグ  
+- [ ] **ログ分析**: Azure MonitorとApplication Insightsを効果的に使用  
+- [ ] **パフォーマンス調整**: 遅いアプリケーションを最適化  
+- [ ] **復旧手順**: バックアップと災害復旧を実装  
+- [ ] **モニタリング設定**: 予防的なモニタリングとアラートを作成  
+
+#### 🏢 チャプター8: 本番とエンタープライズパターン  
+- [ ] **エンタープライズセキュリティ**: 包括的なセキュリティパターンを実装  
+- [ ] **ガバナンスフレームワーク**: Azure Policyとリソース管理を設定  
+- [ ] **高度なモニタリング**: ダッシュボードと自動アラートを作成  
+- [ ] **CI/CD統合**: 自動デプロイメントパイプラインを構築  
+- [ ] **コンプライアンス実装**: エンタープライズコンプライアンス要件を満たす  
+
+### 学習タイムラインとマイルストーン
+
+#### 1-2週目: 基礎構築  
+- **マイルストーン**: AZDを使用して初めてのAIアプリケーションをデプロイ  
+- **検証**: 公開URLでアクセス可能な動作するアプリケーション  
+- **スキル**: 基本的なAZDワークフローとAIサービス統合  
+
+#### 3-4週目: 構成習得  
+- **マイルストーン**: 安全な認証付きのマルチ環境デプロイメント  
+- **検証**: 同じアプリケーションをdev/staging/prodにデプロイ  
+- **スキル**: 環境管理とセキュリティ実装  
+
+#### 5-6週目: インフラ専門知識  
+- **マイルストーン**: 複雑なマルチサービスアプリケーション用のカスタムテンプレート  
+- **検証**: 他のチームメンバーによってデプロイされた再利用可能なテンプレート  
+- **スキル**: Bicep習得とインフラ自動化  
+
+#### 7-
+- **ドキュメント**: コミュニティドキュメントや例に貢献する  
+- **フィードバックループ**: コース内容やAzureサービスに関するフィードバックを提供する  
+
+#### キャリア開発  
+- **プロフェッショナルネットワーク**: AzureやAIの専門家とつながる  
+- **スピーキングの機会**: 学んだことを会議やミートアップで発表する  
+- **オープンソースへの貢献**: AZDテンプレートやツールに貢献する  
+- **メンターシップ**: 他の開発者がAZDを学ぶ旅をサポートする  
+
+---
+
+**章のナビゲーション:**  
+- **📚 コースホーム**: [AZD初心者向け](../README.md)  
+- **📖 学習を始める**: [第1章: 基礎とクイックスタート](../README.md#-chapter-1-foundation--quick-start)  
+- **🎯 進捗追跡**: 包括的な8章の学習システムを通じて進捗を追跡する  
+- **🤝 コミュニティ**: [Azure Discord](https://discord.gg/microsoft-azure)でサポートや議論を行う  
+
+**学習進捗の追跡**: この構造化されたガイドを使用して、Azure Developer CLIを段階的かつ実践的に学び、測定可能な成果とキャリア開発のメリットを得ることができます。  
 
 ---
 
 **免責事項**:  
-この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当社は責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当社は一切の責任を負いません。

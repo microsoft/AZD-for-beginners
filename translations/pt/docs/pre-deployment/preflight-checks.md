@@ -1,42 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T17:16:13+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T14:51:37+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "pt"
 }
 -->
-# Verificações Pré-implantação - Validação de Prontidão para Implantação
+# Verificações Pré-Desdobramento para Implementações AZD
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 6 - Validação e Planeamento Pré-Desdobramento
+- **⬅️ Anterior**: [Seleção de SKU](sku-selection.md)
+- **➡️ Próximo Capítulo**: [Capítulo 7: Resolução de Problemas](../troubleshooting/common-issues.md)
+- **🔧 Relacionado**: [Capítulo 4: Guia de Desdobramento](../deployment/deployment-guide.md)
 
 ## Introdução
 
-Este guia abrangente fornece scripts e procedimentos de validação pré-implantação para garantir o sucesso das implementações do Azure Developer CLI antes de começarem. Aprenda a implementar verificações automatizadas de autenticação, disponibilidade de recursos, limites, conformidade de segurança e requisitos de desempenho para evitar falhas de implantação e otimizar as taxas de sucesso.
+Este guia abrangente fornece scripts e procedimentos de validação pré-desdobramento para garantir implementações bem-sucedidas com Azure Developer CLI antes de começarem. Aprenda a implementar verificações automatizadas para autenticação, disponibilidade de recursos, quotas, conformidade de segurança e requisitos de desempenho para evitar falhas de desdobramento e otimizar as taxas de sucesso.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este guia, você irá:
-- Dominar técnicas e scripts automatizados de validação pré-implantação
-- Compreender estratégias abrangentes de verificação de autenticação, permissões e limites
+Ao concluir este guia, irá:
+- Dominar técnicas e scripts de validação automatizada pré-desdobramento
+- Compreender estratégias abrangentes de verificação para autenticação, permissões e quotas
 - Implementar procedimentos de validação de disponibilidade e capacidade de recursos
 - Configurar verificações de segurança e conformidade para políticas organizacionais
 - Projetar fluxos de trabalho de estimativa de custos e validação de orçamento
-- Criar automações personalizadas de verificação pré-implantação para pipelines CI/CD
+- Criar automação personalizada de verificações pré-desdobramento para pipelines CI/CD
 
 ## Resultados de Aprendizagem
 
-Ao finalizar, você será capaz de:
-- Criar e executar scripts abrangentes de validação pré-implantação
-- Projetar fluxos de trabalho automatizados de verificação para diferentes cenários de implantação
+Após a conclusão, será capaz de:
+- Criar e executar scripts abrangentes de validação pré-desdobramento
+- Projetar fluxos de trabalho de verificação automatizada para diferentes cenários de desdobramento
 - Implementar procedimentos e políticas de validação específicas para o ambiente
-- Configurar monitoramento proativo e alertas para prontidão de implantação
-- Solucionar problemas pré-implantação e implementar ações corretivas
-- Integrar verificações pré-implantação em pipelines DevOps e fluxos de trabalho de automação
+- Configurar monitorização proativa e alertas para prontidão de desdobramento
+- Resolver problemas pré-desdobramento e implementar ações corretivas
+- Integrar verificações pré-desdobramento em pipelines DevOps e fluxos de trabalho de automação
 
 ## Índice
 
 - [Visão Geral](../../../../docs/pre-deployment)
-- [Script Automatizado de Verificação Pré-implantação](../../../../docs/pre-deployment)
+- [Script Automatizado Pré-desdobramento](../../../../docs/pre-deployment)
 - [Lista de Verificação Manual](../../../../docs/pre-deployment)
 - [Validação de Ambiente](../../../../docs/pre-deployment)
 - [Validação de Recursos](../../../../docs/pre-deployment)
@@ -48,28 +55,28 @@ Ao finalizar, você será capaz de:
 
 ## Visão Geral
 
-As verificações pré-implantação são validações essenciais realizadas antes de implantar para garantir:
+As verificações pré-desdobramento são validações essenciais realizadas antes do desdobramento para garantir:
 
-- **Disponibilidade de recursos** e limites nas regiões alvo
+- **Disponibilidade de recursos** e quotas nas regiões alvo
 - **Autenticação e permissões** configuradas corretamente
 - **Validade de templates** e correção de parâmetros
 - **Conectividade de rede** e dependências
 - **Conformidade de segurança** com políticas organizacionais
 - **Estimativa de custos** dentro das restrições orçamentais
 
-### Quando Executar Verificações Pré-implantação
+### Quando Executar Verificações Pré-desdobramento
 
-- **Antes da primeira implantação** em um novo ambiente
+- **Antes do primeiro desdobramento** num novo ambiente
 - **Após alterações significativas nos templates**
-- **Antes de implantações em produção**
-- **Ao mudar de regiões do Azure**
+- **Antes de desdobramentos em produção**
+- **Ao mudar de regiões Azure**
 - **Como parte de pipelines CI/CD**
 
 ---
 
-## Script Automatizado de Verificação Pré-implantação
+## Script Automatizado Pré-desdobramento
 
-### Verificador Pré-implantação em PowerShell
+### Verificador Pré-desdobramento em PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Verificador Pré-implantação em Bash
+### Verificador Pré-desdobramento em Bash
 
 ```bash
 #!/bin/bash
@@ -785,14 +792,14 @@ main "$@"
 
 ## Lista de Verificação Manual
 
-### Lista de Verificação Pré-implantação
+### Lista de Verificação Pré-desdobramento
 
-Imprima esta lista e verifique cada item antes da implantação:
+Imprima esta lista e verifique cada item antes do desdobramento:
 
 #### ✅ Configuração do Ambiente
 - [ ] AZD CLI instalado e atualizado para a versão mais recente
 - [ ] Azure CLI instalado e autenticado
-- [ ] Subscrição correta do Azure selecionada
+- [ ] Subscrição Azure correta selecionada
 - [ ] Nome do ambiente é único e segue as convenções de nomenclatura
 - [ ] Grupo de recursos alvo identificado ou pode ser criado
 
@@ -803,25 +810,25 @@ Imprima esta lista e verifique cada item antes da implantação:
 - [ ] Sem certificados ou credenciais expirados
 
 #### ✅ Validação de Templates
-- [ ] `azure.yaml` existe e é um YAML válido
+- [ ] `azure.yaml` existe e é YAML válido
 - [ ] Todos os serviços definidos em azure.yaml têm código-fonte correspondente
 - [ ] Templates Bicep no diretório `infra/` estão presentes
 - [ ] `main.bicep` compila sem erros (`az bicep build --file infra/main.bicep`)
 - [ ] Todos os parâmetros necessários têm valores padrão ou serão fornecidos
-- [ ] Sem segredos codificados diretamente nos templates
+- [ ] Sem segredos hardcoded nos templates
 
 #### ✅ Planeamento de Recursos
-- [ ] Região alvo do Azure selecionada e validada
-- [ ] Serviços necessários do Azure disponíveis na região alvo
-- [ ] Limites suficientes disponíveis para os recursos planeados
+- [ ] Região Azure alvo selecionada e validada
+- [ ] Serviços Azure necessários disponíveis na região alvo
+- [ ] Quotas suficientes disponíveis para os recursos planeados
 - [ ] Conflitos de nomenclatura de recursos verificados
 - [ ] Dependências entre recursos compreendidas
 
 #### ✅ Rede e Segurança
-- [ ] Conectividade de rede com endpoints do Azure verificada
+- [ ] Conectividade de rede com endpoints Azure verificada
 - [ ] Configurações de firewall/proxy ajustadas, se necessário
 - [ ] Key Vault configurado para gestão de segredos
-- [ ] Identidades geridas utilizadas sempre que possível
+- [ ] Identidades geridas usadas sempre que possível
 - [ ] Aplicações web com HTTPS ativado
 
 #### ✅ Gestão de Custos
@@ -832,7 +839,7 @@ Imprima esta lista e verifique cada item antes da implantação:
 
 #### ✅ Monitorização e Observabilidade
 - [ ] Application Insights configurado nos templates
-- [ ] Workspace do Log Analytics planeado
+- [ ] Workspace Log Analytics planeado
 - [ ] Regras de alerta definidas para métricas críticas
 - [ ] Endpoints de verificação de saúde implementados nas aplicações
 
@@ -840,7 +847,7 @@ Imprima esta lista e verifique cada item antes da implantação:
 - [ ] Estratégia de backup definida para recursos de dados
 - [ ] Objetivos de tempo de recuperação (RTO) documentados
 - [ ] Objetivos de ponto de recuperação (RPO) documentados
-- [ ] Plano de recuperação de desastres em vigor para produção
+- [ ] Plano de recuperação de desastres em produção implementado
 
 ---
 
@@ -921,7 +928,7 @@ validate_prod_environment() {
 
 ## Validação de Recursos
 
-### Script de Validação de Limites
+### Script de Validação de Quotas
 
 ```python
 #!/usr/bin/env python3
@@ -1278,21 +1285,21 @@ steps:
 
 ## Resumo de Melhores Práticas
 
-### ✅ Melhores Práticas para Verificações Pré-implantação
+### ✅ Melhores Práticas para Verificações Pré-desdobramento
 
 1. **Automatize Sempre que Possível**
    - Integre verificações em pipelines CI/CD
    - Use scripts para validações repetíveis
    - Armazene resultados para auditorias
 
-2. **Validação Específica para o Ambiente**
+2. **Validação Específica do Ambiente**
    - Verificações diferentes para dev/staging/prod
    - Requisitos de segurança apropriados por ambiente
    - Otimização de custos para ambientes não produtivos
 
 3. **Cobertura Abrangente**
    - Autenticação e permissões
-   - Limites e disponibilidade de recursos
+   - Quotas e disponibilidade de recursos
    - Validação de templates e sintaxe
    - Requisitos de segurança e conformidade
 
@@ -1302,30 +1309,30 @@ steps:
    - Relatórios resumidos para avaliação rápida
 
 5. **Falha Rápida**
-   - Pare a implantação se verificações críticas falharem
+   - Pare o desdobramento se verificações críticas falharem
    - Forneça orientações claras para resolução
-   - Permita fácil reexecução das verificações
+   - Permita reexecução fácil das verificações
 
-### Armadilhas Comuns nas Verificações Pré-implantação
+### Armadilhas Comuns nas Verificações Pré-desdobramento
 
-1. **Ignorar validação** para implantações "rápidas"
-2. **Verificação insuficiente de permissões** antes da implantação
-3. **Ignorar limites** até que a implantação falhe
+1. **Ignorar validação** para desdobramentos "rápidos"
+2. **Verificação insuficiente de permissões** antes do desdobramento
+3. **Ignorar limites de quotas** até que o desdobramento falhe
 4. **Não validar templates** em pipelines CI/CD
 5. **Falta de validação de segurança** para ambientes de produção
-6. **Estimativa de custos inadequada** levando a surpresas no orçamento
+6. **Estimativa de custos inadequada** levando a surpresas orçamentais
 
 ---
 
-**Dica Profissional**: Execute verificações pré-implantação como um trabalho separado no seu pipeline CI/CD antes do trabalho de implantação real. Isso permite identificar problemas cedo e fornece feedback mais rápido aos desenvolvedores.
+**Dica Pro**: Execute verificações pré-desdobramento como um trabalho separado no seu pipeline CI/CD antes do trabalho de desdobramento real. Isso permite identificar problemas cedo e fornece feedback mais rápido aos desenvolvedores.
 
 ---
 
 **Navegação**
-- **Lição Anterior**: [Seleção de SKUs](sku-selection.md)
-- **Próxima Lição**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Lição Anterior**: [Seleção de SKU](sku-selection.md)
+- **Próxima Lição**: [Resumo](../../resources/cheat-sheet.md)
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante ter em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.

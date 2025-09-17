@@ -1,39 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T16:58:52+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T14:33:07+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ko"
 }
 -->
 # 설정 가이드
 
-**이전:** [AZD 기본](azd-basics.md) | **다음:** [첫 번째 프로젝트](first-project.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD For Beginners](../../README.md)
+- **📖 현재 챕터**: 챕터 3 - 설정 및 인증
+- **⬅️ 이전**: [첫 번째 프로젝트](first-project.md)
+- **➡️ 다음**: [배포 가이드](../deployment/deployment-guide.md)
+- **🚀 다음 챕터**: [챕터 4: 코드로서의 인프라](../deployment/deployment-guide.md)
 
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI를 최적의 개발 및 배포 워크플로우로 설정하는 모든 측면을 다룹니다. 설정 계층 구조, 환경 관리, 인증 방법, 그리고 효율적이고 안전한 Azure 배포를 가능하게 하는 고급 설정 패턴에 대해 배우게 됩니다.
+이 포괄적인 가이드는 Azure Developer CLI를 최적의 개발 및 배포 워크플로로 설정하는 모든 측면을 다룹니다. 설정 계층 구조, 환경 관리, 인증 방법 및 효율적이고 안전한 Azure 배포를 가능하게 하는 고급 설정 패턴에 대해 배우게 됩니다.
 
 ## 학습 목표
 
-이 레슨이 끝날 때까지, 여러분은 다음을 할 수 있습니다:
-- azd 설정 계층 구조를 숙지하고 설정 우선순위를 이해하기
-- 글로벌 및 프로젝트별 설정을 효과적으로 구성하기
-- 서로 다른 설정을 가진 여러 환경을 관리하기
-- 안전한 인증 및 권한 부여 패턴 구현하기
-- 복잡한 시나리오를 위한 고급 설정 패턴 이해하기
+이 레슨이 끝날 때까지, 여러분은:
+- azd 설정 계층 구조를 숙지하고 설정 우선순위를 이해합니다.
+- 글로벌 및 프로젝트별 설정을 효과적으로 구성합니다.
+- 다양한 설정을 가진 여러 환경을 관리합니다.
+- 안전한 인증 및 권한 부여 패턴을 구현합니다.
+- 복잡한 시나리오를 위한 고급 설정 패턴을 이해합니다.
 
 ## 학습 결과
 
-이 레슨을 완료한 후, 여러분은 다음을 할 수 있습니다:
-- 최적의 개발 워크플로우를 위해 azd를 설정하기
-- 여러 배포 환경을 설정하고 관리하기
-- 안전한 설정 관리 관행을 구현하기
-- 설정 관련 문제를 해결하기
-- 특정 조직 요구사항에 맞게 azd 동작을 사용자 정의하기
+이 레슨을 완료한 후, 여러분은:
+- 최적의 개발 워크플로를 위해 azd를 설정할 수 있습니다.
+- 여러 배포 환경을 설정하고 관리할 수 있습니다.
+- 안전한 설정 관리 관행을 구현할 수 있습니다.
+- 설정 관련 문제를 해결할 수 있습니다.
+- 특정 조직 요구 사항에 맞게 azd 동작을 사용자 정의할 수 있습니다.
 
-이 포괄적인 가이드는 Azure Developer CLI를 최적의 개발 및 배포 워크플로우로 설정하는 모든 측면을 다룹니다.
+이 포괄적인 가이드는 Azure Developer CLI를 최적의 개발 및 배포 워크플로로 설정하는 모든 측면을 다룹니다.
 
 ## 설정 계층 구조
 
@@ -42,7 +47,7 @@ azd는 계층적 설정 시스템을 사용합니다:
 2. **환경 변수**
 3. **로컬 프로젝트 설정** (`.azd/config.json`)
 4. **글로벌 사용자 설정** (`~/.azd/config.json`)
-5. **기본값** (최하위 우선순위)
+5. **기본값** (최하위 우선 순위)
 
 ## 글로벌 설정
 
@@ -256,7 +261,7 @@ azd env unset DEBUG
 ```
 
 ### 환경 템플릿
-일관된 환경 설정을 위해 `.azure/env.template`를 생성하세요:
+일관된 환경 설정을 위해 `.azure/env.template`를 생성합니다:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -300,7 +305,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### 관리 ID
-Azure에 호스팅된 환경용:
+Azure 호스팅 환경용:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -310,7 +315,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ 인프라 설정
 
 ### Bicep 매개변수
-`infra/main.parameters.json`에서 인프라 매개변수를 설정하세요:
+`infra/main.parameters.json`에서 인프라 매개변수를 설정합니다:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -333,7 +338,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### Terraform 설정
-Terraform 프로젝트의 경우, `infra/terraform.tfvars`에서 설정하세요:
+Terraform 프로젝트의 경우, `infra/terraform.tfvars`에서 설정합니다:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -459,7 +464,7 @@ azd provision --dry-run
 ```
 
 ### 설정 스크립트
-`scripts/`에 검증 스크립트를 생성하세요:
+`scripts/`에 검증 스크립트를 생성합니다:
 
 ```bash
 #!/bin/bash
@@ -520,7 +525,7 @@ database:
 ```
 
 ### 4. 설정 문서화
-`CONFIG.md`에 설정을 문서화하세요:
+`CONFIG.md`에 설정을 문서화합니다:
 ```markdown
 # Configuration Guide
 
@@ -537,8 +542,8 @@ database:
 
 ## 다음 단계
 
-- [첫 번째 프로젝트](first-project.md) - 설정을 실제로 적용하기
-- [배포 가이드](../deployment/deployment-guide.md) - 배포를 위한 설정 사용하기
+- [첫 번째 프로젝트](first-project.md) - 설정을 실습에 적용하기
+- [배포 가이드](../deployment/deployment-guide.md) - 배포를 위한 설정 사용
 - [리소스 프로비저닝](../deployment/provisioning.md) - 프로덕션 준비 설정
 
 ## 참고 자료
@@ -549,7 +554,11 @@ database:
 
 ---
 
-**이전:** [AZD 기본](azd-basics.md) | **다음:** [첫 번째 프로젝트](first-project.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD For Beginners](../../README.md)
+- **📖 현재 챕터**: 챕터 3 - 설정 및 인증
+- **⬅️ 이전**: [첫 번째 프로젝트](first-project.md)
+- **➡️ 다음 챕터**: [챕터 4: 코드로서의 인프라](../deployment/deployment-guide.md)
 - **다음 레슨**: [첫 번째 프로젝트](first-project.md)
 
 ---

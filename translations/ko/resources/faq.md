@@ -1,42 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T17:51:54+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-17T14:40:25+00:00",
   "source_file": "resources/faq.md",
   "language_code": "ko"
 }
 -->
 # 자주 묻는 질문 (FAQ)
 
+**챕터별 도움말**
+- **📚 코스 홈**: [AZD For Beginners](../README.md)
+- **🚆 설치 문제**: [챕터 1: 설치 및 설정](../docs/getting-started/installation.md)
+- **🤖 AI 관련 질문**: [챕터 2: AI-First 개발](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 문제 해결**: [챕터 7: 문제 해결 및 디버깅](../docs/troubleshooting/common-issues.md)
+
 ## 소개
 
-이 포괄적인 FAQ는 Azure Developer CLI(azd)와 Azure 배포에 대한 가장 일반적인 질문에 대한 답변을 제공합니다. 일반적인 문제에 대한 빠른 해결책을 찾고, 모범 사례를 이해하며, azd 개념과 워크플로우에 대한 명확한 설명을 얻으세요.
+이 포괄적인 FAQ는 Azure Developer CLI (azd)와 Azure 배포에 대한 가장 일반적인 질문에 대한 답변을 제공합니다. 일반적인 문제에 대한 빠른 해결책을 찾고, 모범 사례를 이해하며, azd 개념과 워크플로우에 대한 명확한 설명을 얻을 수 있습니다.
 
 ## 학습 목표
 
 이 FAQ를 검토함으로써 다음을 할 수 있습니다:
-- Azure Developer CLI 관련 일반적인 질문과 문제에 대한 빠른 답변 찾기
+- Azure Developer CLI의 일반적인 질문과 문제에 대한 빠른 답변 찾기
 - 실용적인 Q&A 형식을 통해 주요 개념과 용어 이해
 - 자주 발생하는 문제와 오류 시나리오에 대한 해결책 접근
 - 최적화에 대한 일반적인 질문을 통해 모범 사례 학습
 - 전문가 수준의 질문을 통해 고급 기능과 역량 발견
-- 비용, 보안, 배포 전략에 대한 지침을 효율적으로 참조
+- 비용, 보안 및 배포 전략에 대한 지침을 효율적으로 참조
 
 ## 학습 결과
 
-이 FAQ를 정기적으로 참조하면 다음을 수행할 수 있습니다:
+이 FAQ를 정기적으로 참조함으로써 다음을 할 수 있습니다:
 - 제공된 솔루션을 사용하여 일반적인 Azure Developer CLI 문제를 독립적으로 해결
 - 배포 전략 및 구성에 대한 정보에 입각한 결정을 내림
 - azd와 다른 Azure 도구 및 서비스 간의 관계 이해
 - 커뮤니티 경험과 전문가 추천을 기반으로 모범 사례 적용
 - 인증, 배포 및 구성 문제를 효과적으로 해결
-- FAQ 통찰력과 추천을 통해 비용과 성능 최적화
+- FAQ 통찰력과 추천을 사용하여 비용과 성능 최적화
 
 ## 목차
 
 - [시작하기](../../../resources)
-- [인증 및 액세스](../../../resources)
+- [인증 및 접근](../../../resources)
 - [템플릿 및 프로젝트](../../../resources)
 - [배포 및 인프라](../../../resources)
 - [구성 및 환경](../../../resources)
@@ -49,8 +55,8 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 시작하기
 
-### Q: Azure Developer CLI(azd)란 무엇인가요?
-**A**: Azure Developer CLI(azd)는 개발자 중심의 명령줄 도구로, 로컬 개발 환경에서 Azure로 애플리케이션을 배포하는 시간을 단축시킵니다. 템플릿을 통해 모범 사례를 제공하며 전체 배포 라이프사이클을 지원합니다.
+### Q: Azure Developer CLI (azd)란 무엇인가요?
+**A**: Azure Developer CLI (azd)는 개발자 중심의 명령줄 도구로, 로컬 개발 환경에서 Azure로 애플리케이션을 배포하는 시간을 단축시켜줍니다. 템플릿을 통해 모범 사례를 제공하며 전체 배포 라이프사이클을 지원합니다.
 
 ### Q: azd는 Azure CLI와 어떻게 다른가요?
 **A**: 
@@ -59,11 +65,11 @@ CO_OP_TRANSLATOR_METADATA:
 - azd는 Azure CLI를 내부적으로 사용하지만 일반적인 개발 시나리오에 대한 고급 추상화를 제공합니다.
 - azd는 템플릿, 환경 관리 및 배포 자동화를 포함합니다.
 
-### Q: azd를 사용하려면 Azure CLI를 설치해야 하나요?
+### Q: azd를 사용하려면 Azure CLI가 설치되어 있어야 하나요?
 **A**: 네, azd는 인증 및 일부 작업을 위해 Azure CLI가 필요합니다. 먼저 Azure CLI를 설치한 후 azd를 설치하세요.
 
 ### Q: azd는 어떤 프로그래밍 언어를 지원하나요?
-**A**: azd는 언어에 구애받지 않습니다. 다음과 함께 작동합니다:
+**A**: azd는 언어에 구애받지 않습니다. 다음과 같은 언어를 지원합니다:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
@@ -77,16 +83,16 @@ CO_OP_TRANSLATOR_METADATA:
 **A**: 네! 다음 중 하나를 선택할 수 있습니다:
 1. `azd init`을 사용하여 기존 프로젝트에 azd 구성을 추가
 2. 기존 프로젝트를 azd 템플릿 구조에 맞게 조정
-3. 기존 아키텍처를 기반으로 사용자 지정 템플릿 생성
+3. 기존 아키텍처를 기반으로 사용자 정의 템플릿 생성
 
 ---
 
-## 인증 및 액세스
+## 인증 및 접근
 
 ### Q: azd를 사용하여 Azure에 인증하려면 어떻게 해야 하나요?
 **A**: `azd auth login`을 사용하면 Azure 인증을 위한 브라우저 창이 열립니다. CI/CD 시나리오에서는 서비스 주체 또는 관리 ID를 사용하세요.
 
-### Q: azd를 여러 Azure 구독과 함께 사용할 수 있나요?
+### Q: 여러 Azure 구독에서 azd를 사용할 수 있나요?
 **A**: 네. `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>`를 사용하여 각 환경에서 사용할 구독을 지정하세요.
 
 ### Q: azd로 배포하려면 어떤 권한이 필요하나요?
@@ -117,7 +123,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 커뮤니티 템플릿: GitHub에서 "azd-template" 검색
 - `azd template list`를 사용하여 사용 가능한 템플릿을 탐색
 
-### Q: 사용자 지정 템플릿을 생성하려면 어떻게 해야 하나요?
+### Q: 사용자 정의 템플릿을 생성하려면 어떻게 해야 하나요?
 **A**: 
 1. 기존 템플릿 구조를 시작점으로 사용
 2. `azure.yaml`, 인프라 파일 및 애플리케이션 코드를 수정
@@ -129,10 +135,10 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### Q: 공식 템플릿과 커뮤니티 템플릿의 차이점은 무엇인가요?
 **A**: 
-- **공식 템플릿**: Microsoft에서 관리, 정기적으로 업데이트, 포괄적인 문서 제공
-- **커뮤니티 템플릿**: 개발자가 생성, 전문적인 사용 사례가 있을 수 있음, 품질과 유지 관리가 다양함
+- **공식 템플릿**: Microsoft에서 유지 관리, 정기적으로 업데이트, 포괄적인 문서 제공
+- **커뮤니티 템플릿**: 개발자가 생성, 전문적인 사용 사례 가능, 품질 및 유지 관리가 다양함
 
-### Q: 프로젝트에서 템플릿을 업데이트하려면 어떻게 해야 하나요?
+### Q: 프로젝트의 템플릿을 업데이트하려면 어떻게 해야 하나요?
 **A**: 템플릿은 자동으로 업데이트되지 않습니다. 다음을 수행할 수 있습니다:
 1. 소스 템플릿에서 변경 사항을 수동으로 비교 및 병합
 2. 업데이트된 템플릿을 사용하여 `azd init`으로 새로 시작
@@ -153,7 +159,7 @@ CO_OP_TRANSLATOR_METADATA:
 **A**: 네, Bicep 템플릿에서 여러 지역을 구성하고 각 환경에 적합한 위치 매개변수를 설정하세요.
 
 ### Q: 데이터베이스 스키마 마이그레이션은 어떻게 처리하나요?
-**A**: `azure.yaml`에서 배포 후크를 사용하세요:
+**A**: `azure.yaml`에서 배포 훅을 사용하세요:
 ```yaml
 hooks:
   postdeploy:
@@ -179,7 +185,7 @@ hooks:
 
 ## 구성 및 환경
 
-### Q: 다른 환경(dev, staging, prod)을 어떻게 관리하나요?
+### Q: 다른 환경(dev, staging, prod)을 관리하려면 어떻게 해야 하나요?
 **A**: `azd env new <environment-name>`을 사용하여 별도의 환경을 생성하고 각 환경에 대해 다른 설정을 구성하세요:
 ```bash
 azd env new development
@@ -190,8 +196,8 @@ azd env new production
 ### Q: 환경 구성은 어디에 저장되나요?
 **A**: 프로젝트 디렉토리 내 `.azure` 폴더에 저장됩니다. 각 환경은 자체 폴더와 구성 파일을 가집니다.
 
-### Q: 환경별 구성을 어떻게 설정하나요?
-**A**: `azd env set`을 사용하여 환경 변수를 설정하세요:
+### Q: 환경별 구성을 설정하려면 어떻게 해야 하나요?
+**A**: `azd env set`을 사용하여 환경 변수를 구성하세요:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
@@ -203,7 +209,7 @@ azd env set DATABASE_TIER Basic
 2. 환경을 설정하는 배포 스크립트 사용
 3. 민감한 구성은 Azure Key Vault를 사용
 
-### Q: 템플릿 기본값을 어떻게 재정의하나요?
+### Q: 템플릿 기본값을 재정의하려면 어떻게 해야 하나요?
 **A**: 템플릿 매개변수에 해당하는 환경 변수를 설정하세요:
 ```bash
 azd env set LOCATION "West US 2"
@@ -222,7 +228,7 @@ azd env set SKU_NAME "B1"
 4. **할당량/용량 문제**: 지역 가용성 확인
 5. **템플릿 오류**: Bicep 템플릿 유효성 검사
 
-### Q: 배포 실패를 어떻게 디버깅하나요?
+### Q: 배포 실패를 디버깅하려면 어떻게 해야 하나요?
 **A**: 
 1. `azd deploy --debug`를 사용하여 자세한 출력 확인
 2. Azure 포털 배포 기록 확인
@@ -230,25 +236,25 @@ azd env set SKU_NAME "B1"
 4. `azd show`를 사용하여 현재 환경 상태 표시
 
 ### Q: 환경 변수가 작동하지 않는 이유는 무엇인가요?
-**A**: 확인 사항:
-1. 변수 이름이 템플릿 매개변수와 정확히 일치하는지 확인
-2. 값에 공백이 포함된 경우 적절히 인용되었는지 확인
-3. 환경이 선택되었는지 확인: `azd env select <environment>`
-4. 변수가 올바른 환경에 설정되었는지 확인
+**A**: 확인해야 할 사항:
+1. 변수 이름이 템플릿 매개변수와 정확히 일치하는지
+2. 값에 공백이 포함된 경우 적절히 인용되었는지
+3. 환경이 선택되었는지: `azd env select <environment>`
+4. 변수가 올바른 환경에 설정되었는지
 
-### Q: 실패한 배포를 어떻게 정리하나요?
+### Q: 실패한 배포를 정리하려면 어떻게 해야 하나요?
 **A**: 
 ```bash
 azd down --force --purge
 ```
 이 명령은 모든 리소스와 환경 구성을 제거합니다.
 
-### Q: 배포 후 애플리케이션에 액세스할 수 없는 이유는 무엇인가요?
-**A**: 확인 사항:
-1. 배포가 성공적으로 완료되었는지 확인
-2. 애플리케이션이 실행 중인지 확인(Azure 포털에서 로그 확인)
-3. 네트워크 보안 그룹이 트래픽을 허용하는지 확인
-4. DNS/사용자 지정 도메인이 올바르게 구성되었는지 확인
+### Q: 배포 후 애플리케이션에 접근할 수 없는 이유는 무엇인가요?
+**A**: 확인해야 할 사항:
+1. 배포가 성공적으로 완료되었는지
+2. 애플리케이션이 실행 중인지(Azure 포털에서 로그 확인)
+3. 네트워크 보안 그룹이 트래픽을 허용하는지
+4. DNS/사용자 지정 도메인이 올바르게 구성되었는지
 
 ---
 
@@ -263,7 +269,7 @@ azd down --force --purge
 
 [Azure 가격 계산기](https://azure.microsoft.com/pricing/calculator/)를 사용하여 비용을 추정하세요.
 
-### Q: azd 배포 비용을 어떻게 제어할 수 있나요?
+### Q: azd 배포 비용을 제어하려면 어떻게 해야 하나요?
 **A**: 
 1. 개발 환경에 낮은 계층 SKU 사용
 2. Azure 예산 및 알림 설정
@@ -274,13 +280,13 @@ azd down --force --purge
 ### Q: azd 템플릿에 무료 계층 옵션이 있나요?
 **A**: 많은 Azure 서비스가 무료 계층을 제공합니다:
 - App Service: 무료 계층 사용 가능
-- Azure Functions: 월 100만 회 무료 실행
+- Azure Functions: 월 1백만 회 무료 실행
 - Cosmos DB: 400 RU/s 무료 계층
 - Application Insights: 월 5GB 무료
 
 가능한 경우 템플릿을 무료 계층으로 구성하세요.
 
-### Q: 배포 전에 비용을 어떻게 추정하나요?
+### Q: 배포 전에 비용을 추정하려면 어떻게 해야 하나요?
 **A**: 
 1. 템플릿의 `main.bicep`을 검토하여 생성되는 리소스를 확인
 2. 특정 SKU를 사용하여 Azure 가격 계산기 사용
@@ -317,16 +323,16 @@ azd down --force --purge
 .azure/
 ```
 
-### Q: 비밀 및 민감한 구성을 어떻게 처리해야 하나요?
+### Q: 비밀 및 민감한 구성은 어떻게 처리해야 하나요?
 **A**: 
 1. 비밀은 Azure Key Vault를 사용
 2. 애플리케이션 구성에서 Key Vault 비밀 참조
 3. 비밀을 버전 관리에 커밋하지 않음
 4. 서비스 간 인증을 위해 관리 ID 사용
 
-### Q: azd를 사용한 CI/CD에 대한 권장 접근 방식은 무엇인가요?
+### Q: azd를 사용한 CI/CD 권장 접근 방식은 무엇인가요?
 **A**: 
-1. 각 단계(dev/staging/prod)에 대해 별도의 환경 사용
+1. 각 단계(dev/staging/prod)에 별도의 환경 사용
 2. 배포 전에 자동화된 테스트 구현
 3. 인증을 위해 서비스 주체 사용
 4. 파이프라인 비밀/변수에 민감한 구성 저장
@@ -336,8 +342,8 @@ azd down --force --purge
 
 ## 고급 주제
 
-### Q: azd에 사용자 지정 기능을 추가할 수 있나요?
-**A**: 네, `azure.yaml`에서 배포 후크를 통해 가능합니다:
+### Q: azd에 사용자 정의 기능을 확장할 수 있나요?
+**A**: 네, `azure.yaml`에서 배포 훅을 통해 가능합니다:
 ```yaml
 hooks:
   predeploy:
@@ -353,33 +359,33 @@ hooks:
 3. 기존 모니터링 및 알림과 통합
 4. 파이프라인 통합을 위한 azd의 JSON 출력 사용
 
-### Q: azd를 Azure DevOps와 함께 사용할 수 있나요?
+### Q: Azure DevOps와 azd를 사용할 수 있나요?
 **A**: 네, azd는 모든 CI/CD 시스템과 작동합니다. Azure DevOps 파이프라인을 생성하여 azd 명령을 사용하세요.
 
-### Q: azd 또는 커뮤니티 템플릿에 기여하려면 어떻게 해야 하나요?
+### Q: azd에 기여하거나 커뮤니티 템플릿을 생성하려면 어떻게 해야 하나요?
 **A**: 
 1. **azd 도구**: [Azure/azure-dev](https://github.com/Azure/azure-dev)에 기여
-2. **템플릿**: [템플릿 가이드라인](https://github.com/Azure-Samples/awesome-azd)을 따라 템플릿 생성
-3. **문서**: [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)에 문서 기여
+2. **템플릿**: [템플릿 가이드라인](https://github.com/Azure-Samples/awesome-azd)을 따라 템플릿을 만드세요.  
+3. **문서화**: [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)에 문서를 기여하세요.  
 
-### Q: azd의 로드맵은 무엇인가요?
-**A**: [공식 로드맵](https://github.com/Azure/azure-dev/projects)을 확인하여 계획된 기능과 개선 사항을 확인하세요.
+### Q: azd의 로드맵은 무엇인가요?  
+**A**: 계획된 기능과 개선 사항은 [공식 로드맵](https://github.com/Azure/azure-dev/projects)을 확인하세요.  
 
-### Q: 다른 배포 도구에서 azd로 마이그레이션하려면 어떻게 해야 하나요?
-**A**:
+### Q: 다른 배포 도구에서 azd로 어떻게 마이그레이션하나요?  
+**A**:  
 1. 현재 배포 아키텍처 분석  
 2. 동일한 Bicep 템플릿 생성  
-3. `azure.yaml`을 현재 서비스에 맞게 구성  
+3. 현재 서비스에 맞게 `azure.yaml` 구성  
 4. 개발 환경에서 철저히 테스트  
 5. 환경을 점진적으로 마이그레이션  
 
 ---
 
-## 아직 궁금한 점이 있으신가요?
+## 아직 질문이 있으신가요?  
 
 ### **먼저 검색하세요**  
-- [공식 문서](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)를 확인하세요  
-- [GitHub 이슈](https://github.com/Azure/azure-dev/issues)에서 유사한 문제를 검색하세요  
+- [공식 문서](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)를 확인하세요.  
+- [GitHub 이슈](https://github.com/Azure/azure-dev/issues)에서 유사한 문제를 검색하세요.  
 
 ### **도움 받기**  
 - [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - 커뮤니티 지원  
@@ -392,7 +398,7 @@ hooks:
 
 ### **더 알아보기**  
 - [Azure Developer CLI 문서](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Azure 아키텍처 센터](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)  
 
 ---
@@ -402,10 +408,10 @@ hooks:
 ---
 
 **탐색**  
-- **이전 레슨**: [용어집](glossary.md)  
-- **다음 레슨**: [학습 가이드](study-guide.md)  
+- **이전 학습**: [용어집](glossary.md)  
+- **다음 학습**: [학습 가이드](study-guide.md)  
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서를 해당 언어로 작성된 상태에서 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역을 사용함으로써 발생할 수 있는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
