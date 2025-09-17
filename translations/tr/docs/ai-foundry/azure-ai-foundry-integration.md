@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T19:30:55+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T21:54:02+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "tr"
 }
 -->
 # Azure AI Foundry ve AZD Entegrasyonu
 
-**Önceki:** [İlk Proje](../getting-started/first-project.md) | **Sonraki:** [AI Model Dağıtımı](ai-model-deployment.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 2 - AI-Öncelikli Geliştirme
+- **⬅️ Önceki Bölüm**: [Bölüm 1: İlk Projeniz](../getting-started/first-project.md)
+- **➡️ Sonraki**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Konfigürasyon](../getting-started/configuration.md)
 
 ## Genel Bakış
 
@@ -157,11 +162,11 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Yapılandırma Modelleri
+## 🔧 Konfigürasyon Modelleri
 
 ### Ortam Değişkenleri Ayarı
 
-**Üretim Yapılandırması:**
+**Üretim Konfigürasyonu:**
 ```bash
 # Core AI services
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
@@ -177,7 +182,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Geliştirme Yapılandırması:**
+**Geliştirme Konfigürasyonu:**
 ```bash
 # Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -185,7 +190,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Key Vault ile Güvenli Yapılandırma
+### Key Vault ile Güvenli Konfigürasyon
 
 ```bicep
 // Key Vault for secrets
@@ -315,7 +320,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 Güvenlik En İyi Uygulamaları
 
-### Yönetilen Kimlik Yapılandırması
+### Yönetilen Kimlik Konfigürasyonu
 
 ```bicep
 // Managed identity for the web application
@@ -362,7 +367,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Performans Optimizasyonu
 
-### Önbellekleme Stratejileri
+### Önbellek Stratejileri
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Otomatik Ölçeklendirme Yapılandırması
+### Otomatik Ölçeklendirme Konfigürasyonu
 
 ```bicep
 // Container App with auto-scaling
@@ -521,10 +526,10 @@ azd up
 
 ## Sonraki Adımlar
 
-1. **Örnekleri Deneyin**: Kullanım durumunuza uygun önceden hazırlanmış bir şablonla başlayın
+1. **Örnekleri Deneyin**: Kullanım durumunuza uygun önceden oluşturulmuş bir şablonla başlayın
 2. **İhtiyaçlarınıza Göre Özelleştirin**: Altyapı ve uygulama kodunu değiştirin
 3. **İzleme Ekleyin**: Kapsamlı gözlemlenebilirlik uygulayın
-4. **Maliyetleri Optimize Edin**: Bütçenize uygun yapılandırmaları ince ayar yapın
+4. **Maliyetleri Optimize Edin**: Bütçenize uygun konfigürasyonları ince ayar yapın
 5. **Dağıtımınızı Güvenli Hale Getirin**: Kurumsal güvenlik modellerini uygulayın
 6. **Üretime Ölçeklendirin**: Çok bölgeli ve yüksek erişilebilirlik özellikleri ekleyin
 
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Önceki:** [İlk Proje](../getting-started/first-project.md) | **Sonraki:** [AI Model Dağıtımı](ai-model-deployment.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 2 - AI-Öncelikli Geliştirme
+- **⬅️ Önceki Bölüm**: [Bölüm 1: İlk Projeniz](../getting-started/first-project.md)
+- **➡️ Sonraki**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Konfigürasyon](../getting-started/configuration.md)
 
-**Yardıma mı ihtiyacınız var?** Topluluk tartışmalarına katılın veya depoda bir sorun açın. Azure AI + AZD topluluğu başarıya ulaşmanız için burada!
+**Yardım mı gerekiyor?** Topluluk tartışmalarına katılın veya depoda bir sorun açın. Azure AI + AZD topluluğu başarıya ulaşmanız için burada!
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlama durumunda sorumluluk kabul edilmez.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

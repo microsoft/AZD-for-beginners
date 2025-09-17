@@ -1,34 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T19:38:10+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T21:26:42+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "br"
 }
 -->
-# Verificações Pré-implantação - Validação de Prontidão para Implantação
+# Verificações Pré-Implantação para Deployments AZD
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 6 - Validação e Planejamento Pré-Implantação
+- **⬅️ Anterior**: [Seleção de SKU](sku-selection.md)
+- **➡️ Próximo Capítulo**: [Capítulo 7: Solução de Problemas](../troubleshooting/common-issues.md)
+- **🔧 Relacionado**: [Capítulo 4: Guia de Implantação](../deployment/deployment-guide.md)
 
 ## Introdução
 
-Este guia abrangente fornece scripts e procedimentos de validação pré-implantação para garantir o sucesso das implantações com o Azure Developer CLI antes de começarem. Aprenda a implementar verificações automatizadas de autenticação, disponibilidade de recursos, cotas, conformidade de segurança e requisitos de desempenho para evitar falhas de implantação e otimizar as taxas de sucesso.
+Este guia abrangente fornece scripts e procedimentos de validação pré-implantação para garantir o sucesso dos deployments com Azure Developer CLI antes de começarem. Aprenda a implementar verificações automatizadas de autenticação, disponibilidade de recursos, cotas, conformidade de segurança e requisitos de desempenho para evitar falhas de implantação e otimizar as taxas de sucesso.
 
 ## Objetivos de Aprendizado
 
 Ao concluir este guia, você irá:
-- Dominar técnicas e scripts automatizados de validação pré-implantação
+- Dominar técnicas e scripts de validação pré-implantação automatizados
 - Compreender estratégias abrangentes de verificação de autenticação, permissões e cotas
 - Implementar procedimentos de validação de disponibilidade e capacidade de recursos
 - Configurar verificações de segurança e conformidade para políticas organizacionais
 - Projetar fluxos de trabalho de estimativa de custos e validação de orçamento
-- Criar automações personalizadas de verificação pré-implantação para pipelines CI/CD
+- Criar automações personalizadas de verificações pré-implantação para pipelines CI/CD
 
 ## Resultados de Aprendizado
 
 Ao finalizar, você será capaz de:
 - Criar e executar scripts abrangentes de validação pré-implantação
 - Projetar fluxos de trabalho automatizados de verificação para diferentes cenários de implantação
-- Implementar procedimentos e políticas de validação específicas para o ambiente
+- Implementar procedimentos e políticas de validação específicas para ambientes
 - Configurar monitoramento proativo e alertas para prontidão de implantação
 - Solucionar problemas pré-implantação e implementar ações corretivas
 - Integrar verificações pré-implantação em pipelines DevOps e fluxos de trabalho de automação
@@ -36,8 +43,8 @@ Ao finalizar, você será capaz de:
 ## Índice
 
 - [Visão Geral](../../../../docs/pre-deployment)
-- [Script Automatizado de Verificação Pré-implantação](../../../../docs/pre-deployment)
-- [Lista de Verificação Manual](../../../../docs/pre-deployment)
+- [Script Automatizado de Verificação Pré-Implantação](../../../../docs/pre-deployment)
+- [Checklist de Validação Manual](../../../../docs/pre-deployment)
 - [Validação de Ambiente](../../../../docs/pre-deployment)
 - [Validação de Recursos](../../../../docs/pre-deployment)
 - [Verificações de Segurança e Conformidade](../../../../docs/pre-deployment)
@@ -57,7 +64,7 @@ As verificações pré-implantação são validações essenciais realizadas ant
 - **Conformidade de segurança** com políticas organizacionais
 - **Estimativa de custos** dentro das restrições orçamentárias
 
-### Quando Executar Verificações Pré-implantação
+### Quando Executar Verificações Pré-Implantação
 
 - **Antes da primeira implantação** em um novo ambiente
 - **Após mudanças significativas nos templates**
@@ -67,9 +74,9 @@ As verificações pré-implantação são validações essenciais realizadas ant
 
 ---
 
-## Script Automatizado de Verificação Pré-implantação
+## Script Automatizado de Verificação Pré-Implantação
 
-### Verificador Pré-implantação em PowerShell
+### Verificador Pré-Implantação em PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Verificador Pré-implantação em Bash
+### Verificador Pré-Implantação em Bash
 
 ```bash
 #!/bin/bash
@@ -783,11 +790,11 @@ main "$@"
 
 ---
 
-## Lista de Verificação Manual
+## Checklist de Validação Manual
 
-### Lista de Verificação Pré-implantação
+### Checklist Pré-Implantação
 
-Imprima esta lista e verifique cada item antes da implantação:
+Imprima este checklist e verifique cada item antes da implantação:
 
 #### ✅ Configuração do Ambiente
 - [ ] AZD CLI instalado e atualizado para a versão mais recente
@@ -811,8 +818,8 @@ Imprima esta lista e verifique cada item antes da implantação:
 - [ ] Nenhum segredo hardcoded nos templates
 
 #### ✅ Planejamento de Recursos
-- [ ] Região do Azure alvo selecionada e validada
-- [ ] Serviços do Azure necessários disponíveis na região alvo
+- [ ] Região alvo do Azure selecionada e validada
+- [ ] Serviços necessários do Azure disponíveis na região alvo
 - [ ] Cotas suficientes disponíveis para os recursos planejados
 - [ ] Conflitos de nomenclatura de recursos verificados
 - [ ] Dependências entre recursos compreendidas
@@ -1278,14 +1285,14 @@ steps:
 
 ## Resumo de Melhores Práticas
 
-### ✅ Melhores Práticas para Verificações Pré-implantação
+### ✅ Melhores Práticas para Verificações Pré-Implantação
 
 1. **Automatize Sempre que Possível**
    - Integre verificações em pipelines CI/CD
    - Use scripts para validações repetíveis
    - Armazene resultados para trilhas de auditoria
 
-2. **Validação Específica para o Ambiente**
+2. **Validação Específica por Ambiente**
    - Verificações diferentes para dev/staging/prod
    - Requisitos de segurança apropriados por ambiente
    - Otimização de custos para ambientes não produtivos
@@ -1298,15 +1305,15 @@ steps:
 
 4. **Relatórios Claros**
    - Indicadores de status com cores
-   - Mensagens de erro detalhadas com etapas de correção
+   - Mensagens de erro detalhadas com etapas de resolução
    - Relatórios resumidos para avaliação rápida
 
 5. **Falha Rápida**
-   - Pare a implantação se verificações críticas falharem
+   - Interrompa a implantação se verificações críticas falharem
    - Forneça orientações claras para resolução
    - Permita fácil reexecução das verificações
 
-### Erros Comuns nas Verificações Pré-implantação
+### Armadilhas Comuns nas Verificações Pré-Implantação
 
 1. **Pular validação** para implantações "rápidas"
 2. **Verificação insuficiente de permissões** antes da implantação

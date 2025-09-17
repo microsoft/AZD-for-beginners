@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T20:23:47+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-17T22:04:35+00:00",
   "source_file": "resources/faq.md",
   "language_code": "tr"
 }
 -->
 # Sıkça Sorulan Sorular (SSS)
 
+**Bölüme Göre Yardım Alın**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../README.md)
+- **🚆 Kurulum Sorunları**: [Bölüm 1: Kurulum ve Ayarlar](../docs/getting-started/installation.md)
+- **🤖 Yapay Zeka Soruları**: [Bölüm 2: Yapay Zeka-Öncelikli Geliştirme](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Sorun Giderme**: [Bölüm 7: Sorun Giderme ve Hata Ayıklama](../docs/troubleshooting/common-issues.md)
+
 ## Giriş
 
-Bu kapsamlı SSS, Azure Developer CLI (azd) ve Azure dağıtımları hakkında en yaygın sorulara yanıtlar sunar. Yaygın sorunlara hızlı çözümler bulun, en iyi uygulamaları anlayın ve azd kavramları ile iş akışları hakkında netlik kazanın.
+Bu kapsamlı SSS, Azure Developer CLI (azd) ve Azure dağıtımlarıyla ilgili en yaygın sorulara yanıtlar sunar. Yaygın sorunlara hızlı çözümler bulun, en iyi uygulamaları anlayın ve azd kavramları ile iş akışları hakkında netlik kazanın.
 
 ## Öğrenme Hedefleri
 
@@ -26,7 +32,7 @@ Bu SSS'yi inceleyerek:
 ## Öğrenme Çıktıları
 
 Bu SSS'ye düzenli olarak başvurarak:
-- Sağlanan çözümleri kullanarak Azure Developer CLI ile ilgili yaygın sorunları bağımsız olarak çözebilirsiniz
+- Sağlanan çözümleri kullanarak yaygın Azure Developer CLI sorunlarını bağımsız olarak çözebilirsiniz
 - Dağıtım stratejileri ve yapılandırmaları hakkında bilinçli kararlar alabilirsiniz
 - azd ile diğer Azure araçları ve hizmetleri arasındaki ilişkiyi anlayabilirsiniz
 - Topluluk deneyimlerine ve uzman önerilerine dayalı en iyi uygulamaları uygulayabilirsiniz
@@ -41,7 +47,7 @@ Bu SSS'ye düzenli olarak başvurarak:
 - [Dağıtım ve Altyapı](../../../resources)
 - [Yapılandırma ve Ortamlar](../../../resources)
 - [Sorun Giderme](../../../resources)
-- [Maliyet ve Faturalama](../../../resources)
+- [Maliyet ve Faturalandırma](../../../resources)
 - [En İyi Uygulamalar](../../../resources)
 - [Gelişmiş Konular](../../../resources)
 
@@ -50,12 +56,12 @@ Bu SSS'ye düzenli olarak başvurarak:
 ## Başlarken
 
 ### S: Azure Developer CLI (azd) nedir?
-**C**: Azure Developer CLI (azd), uygulamanızı yerel geliştirme ortamından Azure'a taşıma süresini hızlandıran geliştirici odaklı bir komut satırı aracıdır. Şablonlar aracılığıyla en iyi uygulamaları sunar ve tüm dağıtım yaşam döngüsüne yardımcı olur.
+**C**: Azure Developer CLI (azd), uygulamanızı yerel geliştirme ortamından Azure'a taşıma sürecini hızlandıran geliştirici odaklı bir komut satırı aracıdır. Şablonlar aracılığıyla en iyi uygulamaları sunar ve tüm dağıtım yaşam döngüsüne yardımcı olur.
 
 ### S: azd, Azure CLI'dan nasıl farklıdır?
 **C**: 
-- **Azure CLI**: Azure kaynaklarını yönetmek için genel amaçlı bir araçtır
-- **azd**: Uygulama dağıtım iş akışları için geliştirici odaklı bir araçtır
+- **Azure CLI**: Azure kaynaklarını yönetmek için genel amaçlı bir araç
+- **azd**: Uygulama dağıtım iş akışları için geliştirici odaklı bir araç
 - azd, Azure CLI'yi dahili olarak kullanır ancak yaygın geliştirme senaryoları için daha yüksek seviyeli soyutlamalar sağlar
 - azd, şablonlar, ortam yönetimi ve dağıtım otomasyonu içerir
 
@@ -84,7 +90,7 @@ Bu SSS'ye düzenli olarak başvurarak:
 ## Kimlik Doğrulama ve Erişim
 
 ### S: azd ile Azure'a nasıl kimlik doğrulama yaparım?
-**C**: `azd auth login` komutunu kullanın; bu, Azure kimlik doğrulaması için bir tarayıcı penceresi açar. CI/CD senaryoları için hizmet ilkeleri veya yönetilen kimlikler kullanın.
+**C**: `azd auth login` komutunu kullanın, bu Azure kimlik doğrulaması için bir tarayıcı penceresi açar. CI/CD senaryoları için hizmet ilkeleri veya yönetilen kimlikler kullanın.
 
 ### S: azd'yi birden fazla Azure aboneliğiyle kullanabilir miyim?
 **C**: Evet. Her ortam için hangi aboneliğin kullanılacağını belirtmek için `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` komutunu kullanın.
@@ -93,7 +99,7 @@ Bu SSS'ye düzenli olarak başvurarak:
 **C**: Genellikle şunlara ihtiyacınız olur:
 - Kaynak grubu veya abonelikte **Katkıda Bulunan** rolü
 - Rol atamaları gerektiren kaynakları dağıtıyorsanız **Kullanıcı Erişim Yöneticisi**
-- Şablona ve dağıtılan kaynaklara bağlı olarak özel izinler
+- Şablona ve dağıtılan kaynaklara bağlı olarak izinler değişebilir
 
 ### S: azd'yi CI/CD hatlarında kullanabilir miyim?
 **C**: Kesinlikle! azd, CI/CD entegrasyonu için tasarlanmıştır. Kimlik doğrulama için hizmet ilkelerini kullanın ve yapılandırma için ortam değişkenlerini ayarlayın.
@@ -114,10 +120,10 @@ Bu SSS'ye düzenli olarak başvurarak:
 ### S: azd şablonlarını nerede bulabilirim?
 **C**: 
 - Resmi şablonlar: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Topluluk şablonları: GitHub'da "azd-template" araması yapın
-- `azd template list` komutunu kullanarak mevcut şablonlara göz atın
+- Topluluk şablonları: "azd-template" için GitHub araması yapın
+- Mevcut şablonları gözden geçirmek için `azd template list` komutunu kullanın
 
-### S: Özel bir şablon nasıl oluşturulur?
+### S: Özel bir şablon nasıl oluştururum?
 **C**: 
 1. Mevcut bir şablon yapısıyla başlayın
 2. `azure.yaml`, altyapı dosyaları ve uygulama kodunu değiştirin
@@ -130,12 +136,12 @@ Bu SSS'ye düzenli olarak başvurarak:
 ### S: Resmi ve topluluk şablonları arasındaki fark nedir?
 **C**: 
 - **Resmi şablonlar**: Microsoft tarafından bakım yapılır, düzenli olarak güncellenir, kapsamlı belgeler içerir
-- **Topluluk şablonları**: Geliştiriciler tarafından oluşturulur, özel kullanım durumlarına sahip olabilir, kalite ve bakım değişkenlik gösterebilir
+- **Topluluk şablonları**: Geliştiriciler tarafından oluşturulur, özel kullanım durumları olabilir, kalite ve bakım değişkenlik gösterebilir
 
 ### S: Projemdeki bir şablonu nasıl güncellerim?
 **C**: Şablonlar otomatik olarak güncellenmez. Şunları yapabilirsiniz:
 1. Kaynak şablondan değişiklikleri manuel olarak karşılaştırıp birleştirin
-2. Güncellenmiş şablonu kullanarak `azd init` ile sıfırdan başlayın
+2. Güncellenmiş şablonla `azd init` kullanarak sıfırdan başlayın
 3. Güncellenmiş şablonlardan belirli iyileştirmeleri seçin
 
 ---
@@ -144,7 +150,7 @@ Bu SSS'ye düzenli olarak başvurarak:
 
 ### S: azd hangi Azure hizmetlerini dağıtabilir?
 **C**: azd, Bicep/ARM şablonları aracılığıyla herhangi bir Azure hizmetini dağıtabilir, örneğin:
-- App Services, Container Apps, Functions
+- Uygulama Hizmetleri, Konteyner Uygulamaları, Fonksiyonlar
 - Veritabanları (SQL, PostgreSQL, Cosmos DB)
 - Depolama, Key Vault, Application Insights
 - Ağ, güvenlik ve izleme kaynakları
@@ -200,7 +206,7 @@ azd env set DATABASE_TIER Basic
 ### S: Ortam yapılandırmalarını ekip üyeleri arasında nasıl paylaşırım?
 **C**: `.azure` klasörü hassas bilgiler içerir ve sürüm kontrolüne eklenmemelidir. Bunun yerine:
 1. Gerekli ortam değişkenlerini belgeleyin
-2. Ortamları kurmak için dağıtım komut dosyaları kullanın
+2. Ortamları kurmak için dağıtım komut dosyalarını kullanın
 3. Hassas yapılandırma için Azure Key Vault kullanın
 
 ### S: Şablon varsayılanlarını nasıl geçersiz kılarım?
@@ -218,7 +224,7 @@ azd env set SKU_NAME "B1"
 **C**: Yaygın nedenler:
 1. **Kimlik doğrulama sorunları**: `azd auth login` komutunu çalıştırın
 2. **Yetersiz izinler**: Azure rol atamalarınızı kontrol edin
-3. **Kaynak adlandırma çakışmaları**: AZURE_ENV_NAME değiştirin
+3. **Kaynak adlandırma çakışmaları**: AZURE_ENV_NAME'i değiştirin
 4. **Kota/kapasite sorunları**: Bölgesel kullanılabilirliği kontrol edin
 5. **Şablon hataları**: Bicep şablonlarını doğrulayın
 
@@ -232,7 +238,7 @@ azd env set SKU_NAME "B1"
 ### S: Ortam değişkenlerim neden çalışmıyor?
 **C**: Kontrol edin:
 1. Değişken adları şablon parametreleriyle tam olarak eşleşiyor mu
-2. Değerler boşluk içeriyorsa düzgün şekilde tırnak içine alınmış mı
+2. Değerler boşluk içeriyorsa doğru şekilde tırnak içine alınmış mı
 3. Ortam seçilmiş mi: `azd env select <environment>`
 4. Değişkenler doğru ortamda ayarlanmış mı
 
@@ -252,7 +258,7 @@ Bu, tüm kaynakları ve ortam yapılandırmasını kaldırır.
 
 ---
 
-## Maliyet ve Faturalama
+## Maliyet ve Faturalandırma
 
 ### S: azd dağıtımları ne kadar maliyetli olur?
 **C**: Maliyetler şunlara bağlıdır:
@@ -267,18 +273,18 @@ Tahminler için [Azure Fiyatlandırma Hesaplayıcısı](https://azure.microsoft.
 **C**: 
 1. Geliştirme ortamları için daha düşük katmanlı SKU'lar kullanın
 2. Azure bütçeleri ve uyarıları ayarlayın
-3. Kaynaklara ihtiyaç duyulmadığında `azd down` komutunu kullanarak kaldırın
+3. Kaynaklara ihtiyaç duyulmadığında `azd down` komutunu kullanın
 4. Uygun bölgeleri seçin (maliyetler konuma göre değişir)
 5. Azure Maliyet Yönetimi araçlarını kullanın
 
 ### S: azd şablonları için ücretsiz katman seçenekleri var mı?
 **C**: Birçok Azure hizmeti ücretsiz katmanlar sunar:
-- App Service: Ücretsiz katman mevcut
-- Azure Functions: Ayda 1M ücretsiz yürütme
+- Uygulama Hizmeti: Ücretsiz katman mevcut
+- Azure Fonksiyonları: Ayda 1M ücretsiz yürütme
 - Cosmos DB: 400 RU/s ile ücretsiz katman
 - Application Insights: Ayda ilk 5GB ücretsiz
 
-Şablonları, mevcut olduğu yerlerde ücretsiz katmanları kullanacak şekilde yapılandırın.
+Şablonları uygun olduğunda ücretsiz katmanları kullanacak şekilde yapılandırın.
 
 ### S: Dağıtımdan önce maliyetleri nasıl tahmin ederim?
 **C**: 
@@ -329,7 +335,7 @@ Tahminler için [Azure Fiyatlandırma Hesaplayıcısı](https://azure.microsoft.
 1. Her aşama için ayrı ortamlar kullanın (geliştirme/test/üretim)
 2. Dağıtımdan önce otomatik testler uygulayın
 3. Kimlik doğrulama için hizmet ilkelerini kullanın
-4. Hassas yapılandırmayı pipeline sırları/değişkenlerinde saklayın
+4. Hassas yapılandırmayı boru hattı sırlarında/değişkenlerinde saklayın
 5. Üretim dağıtımları için onay kapıları uygulayın
 
 ---
@@ -348,21 +354,20 @@ hooks:
 
 ### S: azd'yi mevcut DevOps süreçleriyle nasıl entegre ederim?
 **C**: 
-1. Mevcut pipeline komut dosyalarında azd komutlarını kullanın
+1. Mevcut boru hattı komut dosyalarında azd komutlarını kullanın
 2. Ekipler arasında azd şablonlarını standartlaştırın
 3. Mevcut izleme ve uyarılarla entegre edin
-4. Pipeline entegrasyonu için azd'nin JSON çıktısını kullanın
+4. Boru hattı entegrasyonu için azd'nin JSON çıktısını kullanın
 
-### S: azd'yi Azure DevOps ile kullanabilir miyim?
-**C**: Evet, azd herhangi bir CI/CD sistemiyle çalışır. Azure DevOps pipeline'ları oluşturun ve azd komutlarını kullanın.
+### S: azd'yi Azure DevOps
+2. **Şablonlar**: [şablon yönergelerini](https://github.com/Azure-Samples/awesome-azd) takip ederek şablonlar oluşturun  
+3. **Dokümantasyon**: [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs) adresinde dokümantasyona katkıda bulunun  
 
-### S: azd'ye veya topluluk şablonlarına nasıl katkıda bulunabilirim?
-**C**: 
-1. **azd aracı**: [Azure/azure-dev](https://github.com/Azure/azure-dev) adresine katkıda bulunun
-2. **Şablonlar**: [şablon yönergelerini](https://github.com/Azure-Samples/awesome-azd) takip ederek şablonlar oluşturun
-3. **Belgeler**: [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs) adresindeki belgelere katkıda bulunun
+### S: azd için yol haritası nedir?  
+**C**: Planlanan özellikler ve iyileştirmeler için [resmi yol haritasını](https://github.com/Azure/azure-dev/projects) kontrol edin.  
 
-### S
+### S: Diğer dağıtım araçlarından azd'ye nasıl geçiş yapabilirim?  
+**C**:  
 1. Mevcut dağıtım mimarisini analiz edin  
 2. Eşdeğer Bicep şablonları oluşturun  
 3. `azure.yaml` dosyasını mevcut hizmetlere uygun şekilde yapılandırın  
@@ -371,10 +376,10 @@ hooks:
 
 ---
 
-## Hâlâ Sorularınız mı Var?
+## Hâlâ Sorularınız mı Var?  
 
 ### **Önce Arayın**  
-- [Resmi belgeleri](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) kontrol edin  
+- [Resmi dokümantasyonu](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) kontrol edin  
 - Benzer sorunlar için [GitHub sorunlarını](https://github.com/Azure/azure-dev/issues) arayın  
 
 ### **Yardım Alın**  
@@ -387,7 +392,7 @@ hooks:
 - İlgili günlükleri, hata mesajlarını ve yeniden oluşturma adımlarını ekleyin  
 
 ### **Daha Fazla Bilgi Edinin**  
-- [Azure Developer CLI belgeleri](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Azure Developer CLI dokümantasyonu](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 - [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [Azure İyi Tasarlanmış Çerçeve](https://learn.microsoft.com/en-us/azure/well-architected/)  
 
@@ -404,4 +409,4 @@ hooks:
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.

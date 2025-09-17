@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:11:38+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-17T22:00:11+00:00",
   "source_file": "examples/README.md",
   "language_code": "tr"
 }
 -->
 # Örnekler - Pratik AZD Şablonları ve Konfigürasyonlar
 
+**Örneklerle Öğrenme - Bölümlere Göre Düzenlenmiş**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../README.md)
+- **📖 Bölüm Haritası**: Öğrenme zorluğuna göre düzenlenmiş örnekler
+- **🚀 Basit Başlangıç**: [1. Bölüm Örnekleri](../../../examples)
+- **🤖 AI Örnekleri**: [2. ve 5. Bölüm AI Çözümleri](../../../examples)
+
 ## Giriş
 
-Bu dizin, Azure Developer CLI'yi uygulamalı olarak öğrenmenize yardımcı olacak pratik örnekler, şablonlar ve gerçek dünya senaryoları içerir. Her örnek, farklı uygulama mimarileri ve dağıtım modelleri için tam çalışan kod, altyapı şablonları ve ayrıntılı talimatlar sağlar.
+Bu dizin, Azure Developer CLI'yi pratik yaparak öğrenmenize yardımcı olacak pratik örnekler, şablonlar ve gerçek dünya senaryoları içerir. Her örnek, farklı uygulama mimarileri ve dağıtım modelleri için tam çalışan kod, altyapı şablonları ve ayrıntılı talimatlar sağlar.
 
 ## Öğrenme Hedefleri
 
@@ -19,7 +25,7 @@ Bu örnekler üzerinde çalışarak:
 - Gerçekçi uygulama senaryolarıyla Azure Developer CLI iş akışlarını pratik yapabilirsiniz
 - Farklı uygulama mimarilerini ve bunların azd uygulamalarını anlayabilirsiniz
 - Çeşitli Azure hizmetleri için Kod Olarak Altyapı (IaC) modellerini öğrenebilirsiniz
-- Konfigürasyon yönetimi ve ortam bazlı dağıtım stratejilerini uygulayabilirsiniz
+- Konfigürasyon yönetimi ve ortama özgü dağıtım stratejilerini uygulayabilirsiniz
 - İzleme, güvenlik ve ölçeklendirme modellerini pratik bağlamlarda uygulayabilirsiniz
 - Gerçek dağıtım senaryolarında sorun giderme ve hata ayıklama deneyimi kazanabilirsiniz
 
@@ -67,17 +73,38 @@ Azure Samples AZD Templates (linked externally):
 2. **[AI Belge İşleme](https://github.com/Azure-Samples/azure-ai-document-processing)** - Azure AI hizmetlerini kullanarak belge analizi
 3. **[Makine Öğrenimi Pipeline](https://github.com/Azure-Samples/mlops-v2)** - Azure Machine Learning ile MLOps iş akışı
 
+### Gerçek Dünya Senaryoları
+
+#### **Perakende Çoklu-Ajan Çözümü** 🆕
+**[Tam Uygulama Kılavuzu](./retail-scenario.md)**
+
+AZD ile kurumsal düzeyde AI uygulama dağıtımını gösteren kapsamlı, üretime hazır çoklu-ajan müşteri destek çözümü. Bu senaryo şunları sağlar:
+
+- **Tam Mimari**: Müşteri hizmetleri ve envanter yönetimi için özel ajanlarla çoklu-ajan sistemi
+- **Üretim Altyapısı**: Çok bölgeli Azure OpenAI dağıtımları, AI Arama, Konteyner Uygulamaları ve kapsamlı izleme
+- **Hazır ARM Şablonu**: Birden fazla konfigürasyon modu (Minimal/Standart/Premium) ile tek tıkla dağıtım
+- **Gelişmiş Özellikler**: Güvenlik doğrulama, ajan değerlendirme çerçevesi, maliyet optimizasyonu ve sorun giderme kılavuzları
+- **Gerçek İş Bağlamı**: Dosya yüklemeleri, arama entegrasyonu ve dinamik ölçeklendirme ile perakende müşteri destek kullanım durumu
+
+**Teknolojiler**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Konteyner Uygulamaları, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Zorluk Seviyesi**: ⭐⭐⭐⭐ (İleri - Kurumsal Üretime Hazır)
+
+**Uygun Kitle**: AI geliştiricileri, çözüm mimarları ve üretim çoklu-ajan sistemleri geliştiren ekipler
+
+**Hızlı Başlangıç**: `./deploy.sh -g myResourceGroup` komutuyla dahil edilen ARM şablonunu kullanarak çözümü 30 dakikadan kısa sürede dağıtın
+
 ## 📋 Kullanım Talimatları
 
 ### Örnekleri Yerel Olarak Çalıştırma
 
-1. **Örneği Klonlayın veya Kopyalayın**  
+1. **Örneği Klonlayın veya Kopyalayın**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
    ```
 
-2. **AZD Ortamını Başlatın**  
+2. **AZD Ortamını Başlatın**
    ```bash
    # Initialize with existing template
    azd init
@@ -86,14 +113,14 @@ Azure Samples AZD Templates (linked externally):
    azd env new my-environment
    ```
 
-3. **Ortamı Yapılandırın**  
+3. **Ortamı Yapılandırın**
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
 
-4. **Dağıtın**  
+4. **Dağıtım Yapın**
    ```bash
    # Deploy infrastructure and application
    azd up
@@ -103,12 +130,12 @@ Azure Samples AZD Templates (linked externally):
 
 Her örnek şunları içerir:
 - **README.md** - Ayrıntılı kurulum ve özelleştirme talimatları
-- **azure.yaml** - Yorumlarla birlikte AZD konfigürasyonu
+- **azure.yaml** - Yorumlarla AZD konfigürasyonu
 - **infra/** - Parametre açıklamalarıyla Bicep şablonları
 - **src/** - Örnek uygulama kodu
 - **scripts/** - Yaygın görevler için yardımcı betikler
 
-## 🎯 Öğrenme Amaçları
+## 🎯 Öğrenme Hedefleri
 
 ### Örnek Kategorileri
 
@@ -118,7 +145,7 @@ Her örnek şunları içerir:
 - Temel konfigürasyon yönetimi
 - Maliyet etkin geliştirme kurulumları
 
-#### **Gelişmiş Senaryolar**
+#### **İleri Senaryolar**
 - Çok hizmetli mimariler
 - Karmaşık ağ konfigürasyonları
 - Veritabanı entegrasyon modelleri
@@ -140,7 +167,7 @@ Her örnek şunları içerir:
 ### Statik Web Sitesi - React SPA
 **Teknolojiler**: React, Azure Statik Web Uygulamaları, Azure Functions, Cosmos DB  
 **Zorluk Seviyesi**: Yeni Başlayan  
-**Kavramlar**: Statik barındırma, sunucusuz arka uç, modern web geliştirme
+**Kavramlar**: Statik barındırma, sunucusuz backend, modern web geliştirme
 
 ### Konteyner Uygulaması - Python Flask
 **Teknolojiler**: Python Flask, Docker, Konteyner Uygulamaları, Konteyner Kaydı  
@@ -149,29 +176,29 @@ Her örnek şunları içerir:
 
 ### Veritabanı Uygulaması - C# ve Azure SQL
 **Teknolojiler**: C# ASP.NET Core, Azure SQL Veritabanı, Uygulama Hizmeti  
-**Zorluk Seviyesi**: Orta  
+**Zorluk Seviyesi**: Orta Seviye  
 **Kavramlar**: Entity Framework, veritabanı bağlantıları, web API geliştirme
 
 ### Sunucusuz Fonksiyon - Python Azure Functions
 **Teknolojiler**: Python, Azure Functions, Cosmos DB, Statik Web Uygulamaları  
-**Zorluk Seviyesi**: Orta  
+**Zorluk Seviyesi**: Orta Seviye  
 **Kavramlar**: Olay odaklı mimari, sunucusuz hesaplama, tam yığın geliştirme
 
 ### Mikroservisler - Java Spring Boot
 **Teknolojiler**: Java Spring Boot, Konteyner Uygulamaları, Service Bus, API Geçidi  
-**Zorluk Seviyesi**: Orta  
+**Zorluk Seviyesi**: Orta Seviye  
 **Kavramlar**: Mikroservis iletişimi, dağıtık sistemler, kurumsal modeller
 
 ### Azure AI Foundry Örnekleri
 
 #### Azure OpenAI Sohbet Uygulaması
 **Teknolojiler**: Azure OpenAI, Cognitive Search, Uygulama Hizmeti  
-**Zorluk Seviyesi**: Orta  
+**Zorluk Seviyesi**: Orta Seviye  
 **Kavramlar**: RAG mimarisi, vektör arama, LLM entegrasyonu
 
 #### AI Belge İşleme
-**Teknolojiler**: Azure AI Belge Zekası, Depolama, Fonksiyonlar  
-**Zorluk Seviyesi**: Orta  
+**Teknolojiler**: Azure AI Document Intelligence, Depolama, Fonksiyonlar  
+**Zorluk Seviyesi**: Orta Seviye  
 **Kavramlar**: Belge analizi, OCR, veri çıkarma
 
 #### Makine Öğrenimi Pipeline
@@ -201,9 +228,9 @@ Her örnek şunları içerir:
 - Dağıtım doğrulama araçları
 - Maliyet izleme yardımcıları
 
-## 🔧 Özelleştirme Rehberi
+## 🔧 Özelleştirme Kılavuzu
 
-### Örnekleri Kendi Kullanımınıza Uyarlama
+### Örnekleri Kendi Kullanım Durumunuza Uyarlama
 
 1. **Ön Koşulları İnceleyin**
    - Azure hizmet gereksinimlerini kontrol edin
@@ -238,12 +265,13 @@ Her örnek şunları içerir:
 | Azure OpenAI Sohbet | 3 | ✅ | Tam | Tam | ⭐⭐⭐ |
 | AI Belge İşleme | 2 | ❌ | Temel | Tam | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Tam | Tam | ⭐⭐⭐⭐ |
+| **Perakende Çoklu-Ajan** | **8+** | **✅** | **Kurumsal** | **Gelişmiş** | **⭐⭐⭐⭐** |
 
 ## 🎓 Öğrenme Yolu
 
 ### Önerilen İlerleme
 
-1. **Basit Web Uygulaması ile Başlayın**
+1. **Basit Web Uygulamasıyla Başlayın**
    - Temel AZD kavramlarını öğrenin
    - Dağıtım iş akışını anlayın
    - Ortam yönetimini pratik yapın
@@ -263,7 +291,7 @@ Her örnek şunları içerir:
    - Bağlantı dizelerini anlayın
    - Gizli bilgilerin yönetimini pratik yapın
 
-5. **Sunucusuz Mimariyi Keşfedin**
+5. **Sunucusuz Çözümleri Keşfedin**
    - Olay odaklı mimariyi anlayın
    - Tetikleyiciler ve bağlamalar hakkında bilgi edinin
    - API'lerle pratik yapın
@@ -283,52 +311,51 @@ Her örnek şunları içerir:
 - **React**: React SPA + Fonksiyonlar
 - **Konteynerler**: Python Flask Konteyner Uygulaması, Java Mikroservisler
 - **Veritabanları**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Sohbet Uygulaması, AI Belge İşleme, ML Pipeline
+- **AI/ML**: Azure OpenAI Sohbet Uygulaması, AI Belge İşleme, ML Pipeline, **Perakende Çoklu-Ajan Çözümü**
+- **Çoklu-Ajan Sistemleri**: **Perakende Çoklu-Ajan Çözümü**
+- **Kurumsal Üretim**: **Perakende Çoklu-Ajan Çözümü**
 
 ### Mimari Modeline Göre
 - **Monolitik**: Node.js Express Todo, C# Web API + SQL
 - **Statik + Sunucusuz**: React SPA + Fonksiyonlar, Python Fonksiyonlar + SPA
 - **Mikroservisler**: Java Spring Boot Mikroservisler
 - **Konteynerleştirilmiş**: Python Flask Konteyner Uygulaması
-- **AI Destekli**: Azure OpenAI Sohbet Uygulaması, AI Belge İşleme, ML Pipeline
+- **AI Destekli**: Azure OpenAI Sohbet Uygulaması, AI Belge İşleme, ML Pipeline, **Perakende Çoklu-Ajan Çözümü**
+- **Çoklu-Ajan Mimari**: **Perakende Çoklu-Ajan Çözümü**
+- **Kurumsal Çok Hizmetli**: **Perakende Çoklu-Ajan Çözümü**
 
 ### Zorluk Seviyesine Göre
 - **Yeni Başlayan**: Node.js Express Todo, React SPA + Fonksiyonlar, Python Flask Konteyner Uygulaması
-- **Orta**: C# Web API + SQL, Python Fonksiyonlar + SPA, Java Mikroservisler, Azure OpenAI Sohbet Uygulaması, AI Belge İşleme
+- **Orta Seviye**: C# Web API + SQL, Python Fonksiyonlar + SPA, Java Mikroservisler, Azure OpenAI Sohbet Uygulaması, AI Belge İşleme
 - **İleri**: ML Pipeline
+- **Kurumsal Üretime Hazır**: **Perakende Çoklu-Ajan Çözümü** (ARM şablonuyla tam çoklu-ajan sistemi)
 
 ## 📚 Ek Kaynaklar
 
 ### Dokümantasyon Bağlantıları
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Azure AI Foundry AZD Şablonları](https://github.com/Azure/ai-foundry-templates)
-- [Bicep Dokümantasyonu](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)
-
-### Topluluk Örnekleri
-- [Azure Samples AZD Şablonları](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Şablonları](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Galerisi](https://azure.github.io/awesome-azd/)
+- [Bicep Dokümantasyonu](https
 - [C# ve Azure SQL ile Todo Uygulaması](https://github.com/Azure-Samples/todo-csharp-sql)
 - [Python ve MongoDB ile Todo Uygulaması](https://github.com/Azure-Samples/todo-python-mongo)
 - [Node.js ve PostgreSQL ile Todo Uygulaması](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React Web Uygulaması ve C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure Konteyner Uygulamaları İş](https://github.com/Azure-Samples/container-apps-jobs)
-- [Java ile Azure Fonksiyonları](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [C# API ile React Web Uygulaması](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps İşleri](https://github.com/Azure-Samples/container-apps-jobs)
+- [Java ile Azure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### En İyi Uygulamalar
-- [Azure İyi Tasarlanmış Çerçeve](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Bulut Kabul Çerçevesi](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Örnek Katkıları
+## 🤝 Örneklerle Katkıda Bulunma
 
-Paylaşacak faydalı bir örneğiniz mi var? Katkılarınızı memnuniyetle karşılıyoruz!
+Paylaşmak istediğiniz faydalı bir örneğiniz mi var? Katkılarınızı memnuniyetle karşılıyoruz!
 
-### Gönderim Yönergeleri
+### Gönderim Kuralları
 1. Belirlenmiş dizin yapısına uyun
-2. Kapsamlı bir README.md ekleyin
-3. Konfigürasyon dosyalarına yorumlar ekleyin
-4. Göndermeden önce detaylı test yapın
+2. Kapsamlı bir README.md dosyası ekleyin
+3. Yapılandırma dosyalarına yorumlar ekleyin
+4. Göndermeden önce kapsamlı bir şekilde test edin
 5. Maliyet tahminleri ve ön koşulları ekleyin
 
 ### Örnek Şablon Yapısı
@@ -347,21 +374,21 @@ example-name/
 
 ---
 
-**İpucu**: Teknoloji yığınıza uygun en basit örnekle başlayın, ardından daha karmaşık senaryolara doğru ilerleyin. Her örnek, önceki örneklerden alınan kavramları geliştirir!
+**Uzman İpucu**: Teknoloji yığınınıza uygun en basit örnekle başlayın, ardından daha karmaşık senaryolara doğru ilerleyin. Her örnek, önceki örneklerden gelen kavramlar üzerine inşa edilir!
 
 **Sonraki Adımlar**: 
 - Beceri seviyenize uygun bir örnek seçin
-- Örneğin README'sindeki kurulum talimatlarını takip edin
+- Örneğin README dosyasındaki kurulum talimatlarını takip edin
 - Özelleştirmelerle denemeler yapın
 - Öğrendiklerinizi toplulukla paylaşın
 
 ---
 
-**Navigasyon**
-- **Önceki Ders**: [Çalışma Rehberi](../resources/study-guide.md)
-- **Ana README'ye Dön**: [Ana README](../README.md)
+**Gezinme**
+- **Önceki Ders**: [Çalışma Kılavuzu](../resources/study-guide.md)
+- **Geri Dön**: [Ana README](../README.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

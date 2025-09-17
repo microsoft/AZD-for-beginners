@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T19:43:04+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T21:58:08+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "tr"
 }
 -->
-# Azure Developer CLI için AI Sorun Giderme Kılavuzu
+# AI'ye Özel Sorun Giderme Kılavuzu
+
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme ve Hata Ayıklama
+- **⬅️ Önceki**: [Hata Ayıklama Kılavuzu](debugging.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Kalıplar](../ai-foundry/production-ai-practices.md)
+- **🤖 İlgili**: [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
 
 **Önceki:** [Üretim AI Uygulamaları](../ai-foundry/production-ai-practices.md) | **Sonraki:** [AZD ile Başlangıç](../getting-started/README.md)
 
-Bu kapsamlı sorun giderme kılavuzu, AZD ile AI çözümleri dağıtırken karşılaşılan yaygın sorunları ele alır ve Azure AI hizmetlerine özel çözümler ve hata ayıklama teknikleri sunar.
+Bu kapsamlı sorun giderme kılavuzu, AZD ile AI çözümleri dağıtılırken karşılaşılan yaygın sorunları ele alır ve Azure AI hizmetlerine özel çözümler ve hata ayıklama teknikleri sunar.
 
 ## İçindekiler
 
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Sorun: Container Uygulaması Başlangıç Hataları
+### Sorun: Container Uygulama Başlangıç Hataları
 
 **Belirtiler:**
 ```
@@ -361,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Kimlik Doğrulama ve İzin Hataları
 
-### Sorun: Yönetilen Kimlik İzni Reddedildi
+### Sorun: Yönetilen Kimlik İzin Reddedildi
 
 **Belirtiler:**
 ```
@@ -410,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Sorun: Key Vault Erişimi Reddedildi
+### Sorun: Key Vault Erişim Reddedildi
 
 **Belirtiler:**
 ```
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Sorun: Bellek Tükenmesi Hataları
+### Sorun: Bellek Tükenme Hataları
 
 **Belirtiler:**
 ```
@@ -839,16 +846,16 @@ def monitor_performance(func):
 |-----------|----------|-------|
 | 401 | Yetkisiz | API anahtarlarını ve yönetilen kimlik yapılandırmasını kontrol edin |
 | 403 | Yasaklandı | RBAC rol atamalarını doğrulayın |
-| 429 | Hız Sınırı Aşıldı | Üstel geri alma ile yeniden deneme mantığı uygulayın |
-| 500 | Dahili Sunucu Hatası | Model dağıtım durumunu ve günlükleri kontrol edin |
+| 429 | Hız Sınırı | Üstel geri alma ile yeniden deneme mantığı uygulayın |
+| 500 | Dahili Sunucu Hatası | Model dağıtım durumu ve günlükleri kontrol edin |
 | 503 | Hizmet Kullanılamıyor | Hizmet sağlığını ve bölgesel uygunluğu doğrulayın |
 
 ## Sonraki Adımlar
 
-1. **[AI Model Dağıtım Kılavuzunu](ai-model-deployment.md)** inceleyerek dağıtım en iyi uygulamalarını öğrenin
-2. **[Üretim AI Uygulamaları](production-ai-practices.md)** tamamlayarak kurumsal çözümler oluşturun
-3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)** topluluğuna katılarak destek alın
-4. **Sorunları bildirin** [AZD GitHub deposuna](https://github.com/Azure/azure-dev) AZD ile ilgili problemler için
+1. **[AI Model Dağıtım Kılavuzu](ai-model-deployment.md)**'nu inceleyin ve dağıtım en iyi uygulamalarını öğrenin
+2. **[Üretim AI Uygulamaları](production-ai-practices.md)**'nı tamamlayarak kurumsal çözümler geliştirin
+3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)**'a katılarak topluluk desteği alın
+4. **Sorunları bildirin**: AZD'ye özel problemler için [AZD GitHub deposuna](https://github.com/Azure/azure-dev) gönderin
 
 ## Kaynaklar
 
@@ -858,10 +865,15 @@ def monitor_performance(func):
 
 ---
 
-**Önceki:** [Üretim AI Uygulamaları](../ai-foundry/production-ai-practices.md) | **Sonraki:** [Atölye](../../workshop/README.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme ve Hata Ayıklama
+- **⬅️ Önceki**: [Hata Ayıklama Kılavuzu](debugging.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Kalıplar](../ai-foundry/production-ai-practices.md)
+- **🤖 İlgili**: [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
 - [Azure Developer CLI Sorun Giderme](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul edilmez.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

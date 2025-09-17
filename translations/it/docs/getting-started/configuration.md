@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T19:10:22+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T21:39:44+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "it"
 }
 -->
 # Guida alla Configurazione
 
-**Precedente:** [AZD Basics](azd-basics.md) | **Successivo:** [Primo Progetto](first-project.md)
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 3 - Configurazione e Autenticazione
+- **⬅️ Precedente**: [Il Tuo Primo Progetto](first-project.md)
+- **➡️ Successivo**: [Guida al Deployment](../deployment/deployment-guide.md)
+- **🚀 Capitolo Successivo**: [Capitolo 4: Infrastruttura come Codice](../deployment/deployment-guide.md)
 
 ## Introduzione
 
@@ -17,9 +22,9 @@ Questa guida completa copre tutti gli aspetti della configurazione di Azure Deve
 
 ## Obiettivi di Apprendimento
 
-Alla fine di questa lezione, sarai in grado di:
+Al termine di questa lezione, sarai in grado di:
 - Padroneggiare la gerarchia di configurazione di azd e comprendere come vengono prioritizzate le impostazioni
-- Configurare efficacemente impostazioni globali e specifiche del progetto
+- Configurare in modo efficace impostazioni globali e specifiche del progetto
 - Gestire più ambienti con configurazioni diverse
 - Implementare modelli di autenticazione e autorizzazione sicuri
 - Comprendere modelli di configurazione avanzati per scenari complessi
@@ -38,7 +43,7 @@ Questa guida completa copre tutti gli aspetti della configurazione di Azure Deve
 ## Gerarchia di Configurazione
 
 azd utilizza un sistema di configurazione gerarchico:
-1. **Flag della riga di comando** (massima priorità)
+1. **Flag della riga di comando** (priorità più alta)
 2. **Variabili d'ambiente**
 3. **Configurazione locale del progetto** (`.azd/config.json`)
 4. **Configurazione globale dell'utente** (`~/.azd/config.json`)
@@ -299,7 +304,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Identità Gestita
+### Managed Identity
 Per ambienti ospitati su Azure:
 ```bash
 # Enable managed identity authentication
@@ -341,7 +346,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Configurazione della Distribuzione
+## 🚀 Configurazione del Deployment
 
 ### Configurazione della Build
 ```yaml
@@ -384,7 +389,7 @@ Esempio di `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/
 
 ## 🔧 Configurazione Avanzata
 
-### Nomi Personalizzati delle Risorse
+### Nomi Personalizzati per le Risorse
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -482,9 +487,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 Migliori Pratiche
 
-### 1. Utilizzare Variabili d'Ambiente
+### 1. Usa le Variabili d'Ambiente
 ```yaml
 # Good: Use environment variables
 database:
@@ -495,7 +500,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organizzare i File di Configurazione
+### 2. Organizza i File di Configurazione
 ```
 .azure/
 ├── config.json              # Global project config
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Considerazioni sul Versionamento
+### 3. Considerazioni sul Controllo di Versione
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -537,8 +542,8 @@ Documenta la tua configurazione in `CONFIG.md`:
 
 ## Prossimi Passi
 
-- [Il tuo Primo Progetto](first-project.md) - Applica la configurazione nella pratica
-- [Guida alla Distribuzione](../deployment/deployment-guide.md) - Utilizza la configurazione per la distribuzione
+- [Il Tuo Primo Progetto](first-project.md) - Applica la configurazione nella pratica
+- [Guida al Deployment](../deployment/deployment-guide.md) - Usa la configurazione per il deployment
 - [Provisioning delle Risorse](../deployment/provisioning.md) - Configurazioni pronte per la produzione
 
 ## Riferimenti
@@ -549,10 +554,14 @@ Documenta la tua configurazione in `CONFIG.md`:
 
 ---
 
-**Precedente:** [AZD Basics](azd-basics.md) | **Successivo:** [Primo Progetto](first-project.md)
-- **Prossima Lezione**: [Il tuo Primo Progetto](first-project.md)
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 3 - Configurazione e Autenticazione
+- **⬅️ Precedente**: [Il Tuo Primo Progetto](first-project.md)
+- **➡️ Capitolo Successivo**: [Capitolo 4: Infrastruttura come Codice](../deployment/deployment-guide.md)
+- **Lezione Successiva**: [Il Tuo Primo Progetto](first-project.md)
 
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si consiglia una traduzione professionale eseguita da un traduttore umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.

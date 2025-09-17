@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T19:29:32+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T21:25:32+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "br"
 }
 -->
 # Problemas Comuns e Soluções
 
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 7 - Solução de Problemas e Depuração
+- **⬅️ Capítulo Anterior**: [Capítulo 6: Verificações Prévias](../pre-deployment/preflight-checks.md)
+- **➡️ Próximo**: [Guia de Depuração](debugging.md)
+- **🚀 Próximo Capítulo**: [Capítulo 8: Padrões de Produção e Corporativos](../ai-foundry/production-ai-practices.md)
+
 ## Introdução
 
-Este guia abrangente de solução de problemas aborda os problemas mais frequentemente encontrados ao usar o Azure Developer CLI. Aprenda a diagnosticar, solucionar e resolver problemas comuns relacionados à autenticação, implantação, provisionamento de infraestrutura e configuração de aplicativos. Cada problema inclui sintomas detalhados, causas raiz e procedimentos passo a passo para resolução.
+Este guia abrangente de solução de problemas aborda as questões mais frequentemente encontradas ao usar o Azure Developer CLI. Aprenda a diagnosticar, solucionar e resolver problemas comuns relacionados à autenticação, implantação, provisionamento de infraestrutura e configuração de aplicativos. Cada problema inclui sintomas detalhados, causas principais e procedimentos passo a passo para resolução.
 
 ## Objetivos de Aprendizado
 
 Ao concluir este guia, você será capaz de:
 - Dominar técnicas de diagnóstico para problemas no Azure Developer CLI
-- Entender problemas comuns de autenticação e permissões e suas soluções
+- Compreender problemas comuns de autenticação e permissões e suas soluções
 - Resolver falhas de implantação, erros de provisionamento de infraestrutura e problemas de configuração
 - Implementar estratégias proativas de monitoramento e depuração
 - Aplicar metodologias sistemáticas de solução de problemas para questões complexas
@@ -29,11 +36,11 @@ Após a conclusão, você será capaz de:
 - Diagnosticar problemas no Azure Developer CLI usando ferramentas de diagnóstico integradas
 - Resolver problemas relacionados à autenticação, assinatura e permissões de forma independente
 - Solucionar falhas de implantação e erros de provisionamento de infraestrutura de maneira eficaz
-- Depurar problemas de configuração de aplicativos e questões específicas do ambiente
-- Implementar monitoramento e alertas para identificar proativamente possíveis problemas
-- Aplicar boas práticas para fluxos de trabalho de registro, depuração e resolução de problemas
+- Depurar problemas de configuração de aplicativos e questões específicas de ambiente
+- Implementar monitoramento e alertas para identificar problemas potenciais de forma proativa
+- Aplicar as melhores práticas para fluxos de trabalho de registro, depuração e resolução de problemas
 
-## Diagnóstico Rápido
+## Diagnósticos Rápidos
 
 Antes de mergulhar em problemas específicos, execute estes comandos para coletar informações de diagnóstico:
 
@@ -177,7 +184,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 ### Problema: Erros em templates Bicep
 **Sintomas:**
-- Falhas na validação de templates
+- Falhas na validação do template
 - Erros de sintaxe em arquivos Bicep
 
 **Soluções:**
@@ -197,9 +204,9 @@ azd provision --preview
 
 ## 🚀 Falhas de Implantação
 
-### Problema: Falhas de build
+### Problema: Falhas na construção
 **Sintomas:**
-- Aplicativo falha ao construir durante a implantação
+- O aplicativo falha ao ser construído durante a implantação
 - Erros na instalação de pacotes
 
 **Soluções:**
@@ -228,7 +235,7 @@ docker run --rm test-image
 
 ### Problema: Falhas na implantação de contêineres
 **Sintomas:**
-- Aplicativos em contêiner falham ao iniciar
+- Aplicativos em contêiner não iniciam
 - Erros ao puxar imagens
 
 **Soluções:**
@@ -247,10 +254,10 @@ az acr login --name myregistry
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problema: Falhas de conexão com banco de dados
+### Problema: Falhas de conexão com o banco de dados
 **Sintomas:**
-- Aplicativo não consegue se conectar ao banco de dados
-- Erros de timeout de conexão
+- O aplicativo não consegue se conectar ao banco de dados
+- Erros de tempo limite de conexão
 
 **Soluções:**
 ```bash
@@ -270,9 +277,9 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 Problemas de Configuração
 
-### Problema: Variáveis de ambiente não funcionam
+### Problema: Variáveis de ambiente não funcionando
 **Sintomas:**
-- Aplicativo não consegue ler valores de configuração
+- O aplicativo não consegue ler valores de configuração
 - Variáveis de ambiente aparecem vazias
 
 **Soluções:**
@@ -308,9 +315,9 @@ az webapp update --name myapp --resource-group myrg --https-only true
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Problema: Problemas de configuração de CORS
+### Problema: Problemas de configuração CORS
 **Sintomas:**
-- Frontend não consegue chamar a API
+- O frontend não consegue chamar a API
 - Solicitação de origem cruzada bloqueada
 
 **Soluções:**
@@ -376,7 +383,7 @@ azd env set DATABASE_URL "your-value"
 ### Problema: Tempos de implantação lentos
 **Sintomas:**
 - Implantações demorando muito
-- Timeouts durante a implantação
+- Erros de tempo limite durante a implantação
 
 **Soluções:**
 ```bash
@@ -575,7 +582,7 @@ az security assessment list --resource-group myrg
 
 ---
 
-**Dica**: Mantenha este guia nos favoritos e consulte-o sempre que encontrar problemas. A maioria dos problemas já foi vista antes e possui soluções estabelecidas!
+**Dica**: Mantenha este guia nos favoritos e consulte-o sempre que encontrar problemas. A maioria dos problemas já foi enfrentada antes e possui soluções estabelecidas!
 
 ---
 
@@ -586,4 +593,4 @@ az security assessment list --resource-group myrg
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

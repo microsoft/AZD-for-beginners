@@ -1,33 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T20:27:20+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T22:05:28+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "tr"
 }
 -->
-# Komut Kılavuzu - Temel AZD Komutları
+# Komut Hızlı Başvuru Kılavuzu - Temel AZD Komutları
+
+**Tüm Bölümler İçin Hızlı Başvuru**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../README.md)
+- **📖 Hızlı Başlangıç**: [Bölüm 1: Temel Bilgiler ve Hızlı Başlangıç](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Komutları**: [Bölüm 2: AI-Öncelikli Geliştirme](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 İleri Düzey**: [Bölüm 4: Kod Olarak Altyapı](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, en sık kullanılan Azure Developer CLI komutları için hızlı bir referans sağlar. Komutlar kategorilere göre düzenlenmiş ve pratik örneklerle desteklenmiştir. Geliştirme, sorun giderme ve günlük azd projeleriyle çalışma sırasında hızlı başvurular için idealdir.
+Bu kapsamlı hızlı başvuru kılavuzu, en sık kullanılan Azure Developer CLI komutlarını kategoriye göre düzenlenmiş ve pratik örneklerle sunar. Geliştirme, sorun giderme ve günlük AZD projeleri operasyonları sırasında hızlı başvurular için mükemmeldir.
 
 ## Öğrenme Hedefleri
 
-Bu kılavuzu kullanarak:
+Bu hızlı başvuru kılavuzunu kullanarak:
 - Temel Azure Developer CLI komutlarına ve sözdizimine anında erişim sağlayabilirsiniz
-- Komutların işlevsel kategorilere ve kullanım senaryolarına göre düzenlenmesini anlayabilirsiniz
+- Komutların işlevsel kategorilere ve kullanım durumlarına göre düzenlenmesini anlayabilirsiniz
 - Yaygın geliştirme ve dağıtım senaryoları için pratik örneklere başvurabilirsiniz
-- Sorunları hızlı bir şekilde çözmek için sorun giderme komutlarına erişebilirsiniz
+- Sorunları hızlıca çözmek için sorun giderme komutlarına erişebilirsiniz
 - Gelişmiş yapılandırma ve özelleştirme seçeneklerini verimli bir şekilde bulabilirsiniz
 - Çevre yönetimi ve çoklu çevre iş akışı komutlarını kolayca bulabilirsiniz
 
 ## Öğrenme Çıktıları
 
-Bu kılavuzu düzenli olarak referans alarak:
-- Tam belgeleri incelemeden azd komutlarını güvenle çalıştırabilirsiniz
-- Uygun tanı komutlarını kullanarak yaygın sorunları hızlı bir şekilde çözebilirsiniz
+Bu hızlı başvuru kılavuzuna düzenli olarak başvurarak:
+- Tam dokümantasyona bakmadan azd komutlarını güvenle çalıştırabilirsiniz
+- Uygun tanı komutlarını kullanarak yaygın sorunları hızla çözebilirsiniz
 - Birden fazla çevreyi ve dağıtım senaryolarını verimli bir şekilde yönetebilirsiniz
 - Gerekli olduğunda gelişmiş azd özelliklerini ve yapılandırma seçeneklerini uygulayabilirsiniz
 - Sistematik komut dizileri kullanarak dağıtım sorunlarını giderebilirsiniz
@@ -241,7 +247,7 @@ azd version
 azd info
 ```
 
-## 🔧 Gelişmiş Komutlar
+## 🔧 İleri Düzey Komutlar
 
 ### Pipeline ve CI/CD
 ```bash
@@ -338,7 +344,7 @@ azd show --output json
 
 ## 🔍 Hata Ayıklama Komutları
 
-### Hata Ayıklama Bilgisi
+### Hata Ayıklama Bilgileri
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -494,7 +500,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 İpuçları
 
-### Daha Hızlı İş Akışı için Kısayollar
+### Daha Hızlı İş Akışı İçin Kısayollar
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -523,7 +529,7 @@ azd-status() {
 }
 ```
 
-## 📖 Yardım ve Belgeler
+## 📖 Yardım ve Dokümantasyon
 
 ### Yardım Alma
 ```bash
@@ -541,7 +547,7 @@ azd version
 azd version --output json
 ```
 
-### Belge Linkleri
+### Dokümantasyon Bağlantıları
 ```bash
 # Open documentation in browser
 azd docs
@@ -552,15 +558,15 @@ azd template show <template-name> --docs
 
 ---
 
-**İpucu**: Bu kılavuzu yer imlerine ekleyin ve ihtiyacınız olan komutları hızlıca bulmak için `Ctrl+F` kullanın!
+**İpucu**: Bu hızlı başvuru kılavuzunu yer imlerine ekleyin ve ihtiyacınız olan komutları hızlıca bulmak için `Ctrl+F` kullanın!
 
 ---
 
-**Navigasyon**
-- **Önceki Ders**: [Preflight Kontrolleri](../docs/pre-deployment/preflight-checks.md)
+**Gezinme**
+- **Önceki Ders**: [Ön Kontroller](../docs/pre-deployment/preflight-checks.md)
 - **Sonraki Ders**: [Sözlük](glossary.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

@@ -1,15 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T19:14:58+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T21:56:19+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "tr"
 }
 -->
-# AZD Temelleri - Azure Developer CLI'yi Anlamak
+# AZD Temelleri - Azure Developer CLI'yi Anlama
 
-**Önceki:** [Kurulum ve Ayarlar](installation.md) | **Sonraki:** [Yapılandırma](configuration.md)
+# AZD Temelleri - Temel Kavramlar ve Temeller
+
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç
+- **⬅️ Önceki**: [Kurs Genel Bakış](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Sonraki**: [Kurulum ve Ayarlar](installation.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Giriş
 
@@ -18,7 +25,7 @@ Bu ders, Azure Developer CLI (azd) ile tanışmanızı sağlar. Azd, yerel geli�
 ## Öğrenme Hedefleri
 
 Bu dersin sonunda:
-- Azure Developer CLI'nin ne olduğunu ve temel amacını anlayacaksınız
+- Azure Developer CLI'nin ne olduğunu ve ana amacını anlayacaksınız
 - Şablonlar, ortamlar ve hizmetler gibi temel kavramları öğreneceksiniz
 - Şablon tabanlı geliştirme ve Kod Olarak Altyapı gibi ana özellikleri keşfedeceksiniz
 - Azd proje yapısını ve iş akışını anlayacaksınız
@@ -40,7 +47,7 @@ Azure Developer CLI (azd), yerel geliştirmeden Azure'a dağıtıma kadar olan y
 ## Temel Kavramlar
 
 ### Şablonlar
-Şablonlar azd'nin temelini oluşturur. Şablonlar şunları içerir:
+Şablonlar azd'nin temelini oluşturur. Şunları içerir:
 - **Uygulama kodu** - Kaynak kodunuz ve bağımlılıklarınız
 - **Altyapı tanımları** - Bicep veya Terraform ile tanımlanmış Azure kaynakları
 - **Yapılandırma dosyaları** - Ayarlar ve ortam değişkenleri
@@ -49,7 +56,7 @@ Azure Developer CLI (azd), yerel geliştirmeden Azure'a dağıtıma kadar olan y
 ### Ortamlar
 Ortamlar farklı dağıtım hedeflerini temsil eder:
 - **Geliştirme** - Test ve geliştirme için
-- **Staging** - Ön üretim ortamı
+- **Staging** - Üretim öncesi ortam
 - **Üretim** - Canlı üretim ortamı
 
 Her ortam kendi:
@@ -59,7 +66,7 @@ Her ortam kendi:
 
 ### Hizmetler
 Hizmetler uygulamanızın yapı taşlarıdır:
-- **Frontend** - Web uygulamaları, tek sayfa uygulamaları (SPA)
+- **Frontend** - Web uygulamaları, SPAlar
 - **Backend** - API'ler, mikro hizmetler
 - **Veritabanı** - Veri depolama çözümleri
 - **Depolama** - Dosya ve blob depolama
@@ -190,30 +197,30 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## `azd down --force --purge` Komutunu Anlamak
+## `azd down --force --purge` Komutunu Anlama
 `azd down --force --purge` komutu, azd ortamınızı ve ilişkili tüm kaynakları tamamen kaldırmanın güçlü bir yoludur. İşte her bir bayrağın ne yaptığına dair bir açıklama:
 ```
 --force
 ```
 - Onay istemlerini atlar.
 - Manuel girişin mümkün olmadığı otomasyon veya betiklerde kullanışlıdır.
-- CLI tutarsızlıklar algılasa bile kesintisiz bir şekilde kaldırma işleminin devam etmesini sağlar.
+- CLI tutarsızlıklar algılasa bile kaldırma işleminin kesintisiz devam etmesini sağlar.
 
 ```
 --purge
 ```
-**Tüm ilişkili metaverileri** siler, bunlar şunları içerir:
+**Tüm ilişkili meta verileri** siler, bunlar dahil:
 Ortam durumu
 Yerel `.azure` klasörü
 Önbelleğe alınmış dağıtım bilgileri
 Azd'nin önceki dağıtımları "hatırlamasını" engeller, bu da kaynak grupları veya eski kayıt defteri referansları gibi sorunlara yol açabilir.
 
 ### Neden İkisini Birlikte Kullanmalı?
-`azd up` ile kalan durum veya kısmi dağıtımlar nedeniyle sorun yaşadığınızda, bu kombinasyon **temiz bir başlangıç** sağlar.
+`azd up` ile kalan durum veya kısmi dağıtımlar nedeniyle bir duvara çarptığınızda, bu kombinasyon **temiz bir başlangıç** sağlar.
 
 Özellikle Azure portalında manuel kaynak silme işlemlerinden sonra veya şablonları, ortamları veya kaynak grubu adlandırma kurallarını değiştirirken faydalıdır.
 
-### Birden Fazla Ortamı Yönetmek
+### Birden Fazla Ortamı Yönetme
 ```bash
 # Create staging environment
 azd env new staging
@@ -280,19 +287,19 @@ azd init --template template1
 
 ## Öğrenme İlerlemesi
 
-### Başlangıç (1-2 Hafta)
+### Başlangıç (Hafta 1-2)
 1. Azd'yi kurun ve kimlik doğrulaması yapın
 2. Basit bir şablon dağıtın
 3. Proje yapısını anlayın
 4. Temel komutları öğrenin (up, down, deploy)
 
-### Orta Seviye (3-4 Hafta)
+### Orta Seviye (Hafta 3-4)
 1. Şablonları özelleştirin
 2. Birden fazla ortam yönetin
 3. Altyapı kodunu anlayın
-4. CI/CD hatlarını kurun
+4. CI/CD hatlarını ayarlayın
 
-### İleri Seviye (5+ Hafta)
+### İleri Seviye (Hafta 5+)
 1. Özel şablonlar oluşturun
 2. Gelişmiş altyapı desenleri
 3. Çok bölgeli dağıtımlar
@@ -300,9 +307,13 @@ azd init --template template1
 
 ## Sonraki Adımlar
 
+**📖 Bölüm 1 Öğrenimine Devam Edin:**
 - [Kurulum ve Ayarlar](installation.md) - Azd'yi kurun ve yapılandırın
-- [İlk Projeniz](first-project.md) - Uygulamalı eğitim
+- [İlk Projeniz](first-project.md) - Uygulamalı eğitim tamamlayın
 - [Yapılandırma Kılavuzu](configuration.md) - Gelişmiş yapılandırma seçenekleri
+
+**🎯 Sonraki Bölüme Hazır mısınız?**
+- [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md) - AI uygulamaları oluşturmaya başlayın
 
 ## Ek Kaynaklar
 
@@ -312,10 +323,14 @@ azd init --template template1
 
 ---
 
-**Önceki:** [Kurulum ve Ayarlar](installation.md) | **Sonraki:** [Yapılandırma](configuration.md)
-- **Sonraki Ders**: [Kurulum ve Ayarlar](installation.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç  
+- **⬅️ Önceki**: [Kurs Genel Bakış](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Sonraki**: [Kurulum ve Ayarlar](installation.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul edilmez.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

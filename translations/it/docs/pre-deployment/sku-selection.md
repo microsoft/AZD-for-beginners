@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T19:53:21+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T21:42:27+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "it"
 }
 -->
 # Guida alla Selezione degli SKU - Scegliere i Giusti Livelli di Servizio Azure
+
+**Navigazione Capitoli:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 6 - Validazione e Pianificazione Pre-Distribuzione
+- **⬅️ Precedente**: [Pianificazione della Capacità](capacity-planning.md)
+- **➡️ Successivo**: [Controlli Pre-Distribuzione](preflight-checks.md)
+- **🚀 Capitolo Successivo**: [Capitolo 7: Risoluzione dei Problemi](../troubleshooting/common-issues.md)
 
 ## Introduzione
 
@@ -21,7 +28,7 @@ Completando questa guida, sarai in grado di:
 - Analizzare i requisiti dei carichi di lavoro e abbinarli ai livelli di servizio appropriati
 - Implementare strategie di ottimizzazione dei costi attraverso una selezione intelligente degli SKU
 - Applicare tecniche di test delle prestazioni e validazione per le scelte degli SKU
-- Configurare raccomandazioni e monitoraggio automatizzati degli SKU
+- Configurare raccomandazioni e monitoraggio automatici degli SKU
 
 ## Risultati di Apprendimento
 
@@ -29,7 +36,7 @@ Al termine, sarai in grado di:
 - Selezionare gli SKU dei servizi Azure appropriati in base ai requisiti e ai vincoli dei carichi di lavoro
 - Progettare architetture multi-ambiente economiche con una corretta selezione dei livelli
 - Implementare benchmarking delle prestazioni e validazione per le scelte degli SKU
-- Creare strumenti automatizzati per raccomandazioni sugli SKU e ottimizzazione dei costi
+- Creare strumenti automatizzati per raccomandazioni SKU e ottimizzazione dei costi
 - Pianificare migrazioni e strategie di scalabilità degli SKU per requisiti in evoluzione
 - Applicare i principi del Framework Azure Well-Architected alla selezione dei livelli di servizio
 
@@ -66,7 +73,7 @@ Gli SKU (Stock Keeping Units) rappresentano diversi livelli di servizio e presta
 2. **Tipo di Ambiente**
    - Sviluppo/test vs. produzione
    - Requisiti di disponibilità
-   - Esigenze di sicurezza e conformità
+   - Necessità di sicurezza e conformità
 
 3. **Vincoli di Budget**
    - Costi iniziali vs. costi operativi
@@ -108,7 +115,7 @@ skus:
 
 ### Ambiente di Staging/Test
 
-**Priorità**: Configurazione simile alla produzione, equilibrio dei costi, capacità di test delle prestazioni
+**Priorità**: Configurazione simile alla produzione, bilanciamento dei costi, capacità di test delle prestazioni
 
 #### SKU Raccomandati
 ```yaml
@@ -159,7 +166,7 @@ skus:
 
 ### Azure App Service
 
-#### Matrice di Decisione degli SKU
+#### Matrice di Decisione SKU
 
 | Caso d'Uso | SKU Raccomandato | Motivazione |
 |------------|------------------|-------------|
@@ -205,7 +212,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Framework di Selezione degli SKU
+#### Framework di Selezione SKU
 
 1. **Basato su DTU (Database Transaction Units)**
    - **Base**: 5 DTU - Sviluppo/test
@@ -258,13 +265,13 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 1. **Basato sul Consumo**
    - Prezzi pay-per-use
-   - Adatto per sviluppo e carichi di lavoro variabili
+   - Adatto per sviluppo e carichi variabili
    - Infrastruttura condivisa
 
 2. **Dedicato (Profili di Carico)**
    - Risorse di calcolo dedicate
    - Prestazioni prevedibili
-   - Migliore per carichi di lavoro di produzione
+   - Migliore per carichi di produzione
 
 #### Esempi di Configurazione
 
@@ -331,17 +338,17 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 1. **Throughput Manuale Provisionato**
    - Prestazioni prevedibili
    - Sconti per capacità riservata
-   - Ideale per carichi di lavoro stabili
+   - Ideale per carichi stabili
 
 2. **Throughput Provisionato Autoscalabile**
    - Scalabilità automatica basata sull'uso
-   - Paghi solo ciò che usi (con minimo)
-   - Buono per carichi di lavoro variabili
+   - Paghi solo per ciò che usi (con minimo)
+   - Buono per carichi variabili
 
 3. **Serverless**
    - Pagamento per richiesta
    - Nessun throughput provisionato
-   - Ideale per sviluppo e carichi di lavoro intermittenti
+   - Ideale per sviluppo e carichi intermittenti
 
 #### Esempi di SKU
 
@@ -410,7 +417,7 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 #### Livelli di Prestazione
 
 - **Standard**: Uso generico, economico
-- **Premium**: Alte prestazioni, scenari a bassa latenza
+- **Premium**: Scenari ad alte prestazioni, bassa latenza
 
 ```bicep
 // Development
@@ -540,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Scalabilità Programmata
 
-Riduci la scala durante le ore non di punta:
+Riduci la scala durante le ore di inattività:
 
 ```json
 {
@@ -589,7 +596,7 @@ Riduci la scala durante le ore non di punta:
 
 ### Requisiti di Prestazione di Base
 
-Definisci requisiti di prestazione chiari prima di selezionare gli SKU:
+Definisci requisiti di prestazione chiari prima della selezione degli SKU:
 
 ```yaml
 performance_requirements:
@@ -666,12 +673,12 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | S2 | Standard | 50 DTU | 250GB | $$ | Piccola produzione |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Alte prestazioni |
 | GP_Gen5_4 | Uso Generale | 4 vCore | 4TB | $$$ | Bilanciato |
-| BC_Gen5_8 | Critico per il Business | 8 vCore | 4TB | $$$$ | Mission critical |
+| BC_Gen5_8 | Critico per il Business | 8 vCore | 4TB | $$$$ | Missione critica |
 
 ### Riferimento Rapido SKU Container Apps
 
 | Modello | Prezzi | CPU/Memoria | Caso d'Uso |
-|---------|--------|-------------|------------|
+|---------|-------|-------------|------------|
 | Consumo | Pay-per-use | 0.25-2 vCPU | Sviluppo, carico variabile |
 | Dedicato D4 | Riservato | 4 vCPU, 16GB | Produzione |
 | Dedicato D8 | Riservato | 8 vCPU, 32GB | Alte prestazioni |
@@ -785,16 +792,16 @@ test_configuration:
 
 ---
 
-## Riepilogo delle Best Practices
+## Riepilogo delle Migliori Pratiche
 
 ### Cosa Fare
 
 1. **Inizia in piccolo e scala** in base all'uso effettivo
 2. **Usa SKU diversi per ambienti diversi**
 3. **Monitora continuamente prestazioni e costi**
-4. **Sfrutta la capacità riservata per carichi di lavoro di produzione**
+4. **Sfrutta la capacità riservata per carichi di produzione**
 5. **Implementa auto-scalabilità dove appropriato**
-6. **Testa le prestazioni con carichi di lavoro realistici**
+6. **Testa le prestazioni con carichi realistici**
 7. **Pianifica la crescita ma evita il sovra-provisioning**
 8. **Usa livelli gratuiti per lo sviluppo quando possibile**
 
@@ -811,15 +818,15 @@ test_configuration:
 
 ---
 
-**Suggerimento Pro**: Usa Azure Cost Management e Advisor per ottenere raccomandazioni personalizzate sull'ottimizzazione delle selezioni degli SKU basate sui modelli di utilizzo effettivi.
+**Suggerimento Pro**: Usa Azure Cost Management e Advisor per ottenere raccomandazioni personalizzate sull'ottimizzazione delle selezioni SKU basate sui modelli di utilizzo effettivi.
 
 ---
 
 **Navigazione**
 - **Lezione Precedente**: [Pianificazione della Capacità](capacity-planning.md)
-- **Prossima Lezione**: [Controlli Preflight](preflight-checks.md)
+- **Lezione Successiva**: [Controlli Pre-Distribuzione](preflight-checks.md)
 
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:32:31+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T21:57:46+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "tr"
 }
 -->
-# Hata Ayıklama Kılavuzu - Gelişmiş Sorun Giderme ve Günlük Analizi Teknikleri
+# AZD Dağıtımları için Hata Ayıklama Kılavuzu
+
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme ve Hata Ayıklama
+- **⬅️ Önceki**: [Yaygın Sorunlar](common-issues.md)
+- **➡️ Sonraki**: [AI'ye Özgü Sorun Giderme](ai-troubleshooting.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Kalıplar](../ai-foundry/production-ai-practices.md)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI dağıtımlarıyla ilgili karmaşık sorunları teşhis etmek ve çözmek için gelişmiş hata ayıklama stratejileri, araçlar ve teknikler sunar. Dağıtım ve çalışma zamanı sorunlarını verimli bir şekilde çözmek için sistematik sorun giderme yöntemlerini, günlük analizi tekniklerini, performans profillemeyi ve gelişmiş tanılama araçlarını öğrenin.
+Bu kapsamlı kılavuz, Azure Developer CLI dağıtımlarıyla ilgili karmaşık sorunları teşhis etmek ve çözmek için gelişmiş hata ayıklama stratejileri, araçları ve teknikleri sunar. Sistematik sorun giderme yöntemlerini, günlük analizi tekniklerini, performans profillemeyi ve gelişmiş tanı araçlarını öğrenerek dağıtım ve çalışma zamanı sorunlarını verimli bir şekilde çözebilirsiniz.
 
 ## Öğrenme Hedefleri
 
@@ -19,17 +26,17 @@ Bu kılavuzu tamamladığınızda:
 - Azure Developer CLI sorunları için sistematik hata ayıklama yöntemlerini ustalıkla kullanabileceksiniz
 - Gelişmiş günlük yapılandırması ve günlük analizi tekniklerini anlayabileceksiniz
 - Performans profilleme ve izleme stratejilerini uygulayabileceksiniz
-- Karmaşık sorunları çözmek için Azure tanılama araçlarını ve hizmetlerini kullanabileceksiniz
+- Karmaşık sorunları çözmek için Azure tanı araçlarını ve hizmetlerini kullanabileceksiniz
 - Ağ hata ayıklama ve güvenlik sorun giderme tekniklerini uygulayabileceksiniz
 - Proaktif sorun tespiti için kapsamlı izleme ve uyarı yapılandırması yapabileceksiniz
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Karmaşık dağıtım sorunlarını sistematik olarak çözmek için TRIAGE metodolojisini uygulayabilirsiniz
+- Karmaşık dağıtım sorunlarını sistematik olarak hata ayıklamak için TRIAGE metodolojisini uygulayabilirsiniz
 - Kapsamlı günlük ve izleme bilgilerini yapılandırabilir ve analiz edebilirsiniz
-- Azure Monitor, Application Insights ve tanılama araçlarını etkili bir şekilde kullanabilirsiniz
-- Ağ bağlantısı, kimlik doğrulama ve izin sorunlarını bağımsız olarak çözebilirsiniz
+- Azure Monitor, Application Insights ve tanı araçlarını etkili bir şekilde kullanabilirsiniz
+- Ağ bağlantısı, kimlik doğrulama ve izin sorunlarını bağımsız olarak hata ayıklayabilirsiniz
 - Performans izleme ve optimizasyon stratejilerini uygulayabilirsiniz
 - Tekrarlayan sorunlar için özel hata ayıklama betikleri ve otomasyon oluşturabilirsiniz
 
@@ -37,11 +44,11 @@ Tamamlandığında, şunları yapabileceksiniz:
 
 ### TRIAGE Yaklaşımı
 - **T**ime: Sorun ne zaman başladı?
-- **R**eproduce: Sorunu tutarlı bir şekilde yeniden oluşturabilir misiniz?
+- **R**eproduce: Sorunu tutarlı bir şekilde yeniden oluşturabiliyor musunuz?
 - **I**solate: Hangi bileşen başarısız oluyor?
 - **A**nalyze: Günlükler bize ne söylüyor?
 - **G**ather: Tüm ilgili bilgileri toplayın
-- **E**scalate: Ek yardım ne zaman gerekli?
+- **E**scalate: Ek yardım ne zaman aranmalı?
 
 ## Hata Ayıklama Modunu Etkinleştirme
 
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Yük Testi ile Hata Ayıklama
+### Yük Testi için Hata Ayıklama
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -652,7 +659,7 @@ aggregate_logs() {
 ## 🔗 Gelişmiş Kaynaklar
 
 ### Özel Hata Ayıklama Betikleri
-`scripts/debug/` dizinini oluşturun ve içine şunları ekleyin:
+`scripts/debug/` dizinini oluşturun ve şunları ekleyin:
 - `health-check.sh` - Kapsamlı sağlık kontrolü
 - `performance-test.sh` - Otomatik performans testi
 - `log-analyzer.py` - Gelişmiş günlük ayrıştırma ve analiz
@@ -677,9 +684,9 @@ hooks:
 
 ## En İyi Uygulamalar
 
-1. **Hata ayıklama günlüklerini her zaman etkinleştirin** üretim dışı ortamlarda
-2. **Sorunlar için yeniden üretilebilir test vakaları oluşturun**
-3. **Hata ayıklama prosedürlerini ekibiniz için belgeleyin**
+1. **Her zaman hata ayıklama günlüklerini etkinleştirin** üretim dışı ortamlarda
+2. **Sorunlar için yeniden oluşturulabilir test vakaları oluşturun**
+3. **Ekibiniz için hata ayıklama prosedürlerini belgeleyin**
 4. **Sağlık kontrollerini ve izlemeyi otomatikleştirin**
 5. **Hata ayıklama araçlarını uygulama değişikliklerinizle güncel tutun**
 6. **Olay olmayan zamanlarda hata ayıklama prosedürlerini uygulayın**
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

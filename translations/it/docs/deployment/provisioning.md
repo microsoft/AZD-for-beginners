@@ -1,39 +1,46 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T19:25:29+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T21:40:41+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "it"
 }
 -->
-# Provisioning delle Risorse - Infrastructure as Code con AZD
+# Provisioning delle risorse Azure con AZD
+
+**Navigazione del capitolo:**
+- **📚 Home del corso**: [AZD per principianti](../../README.md)
+- **📖 Capitolo corrente**: Capitolo 4 - Infrastructure as Code & Deployment
+- **⬅️ Precedente**: [Guida al deployment](deployment-guide.md)
+- **➡️ Capitolo successivo**: [Capitolo 5: Soluzioni AI multi-agente](../../examples/retail-scenario.md)
+- **🔧 Correlato**: [Capitolo 6: Validazione pre-deployment](../pre-deployment/capacity-planning.md)
 
 ## Introduzione
 
-Questa guida completa copre tutto ciò che devi sapere sulla creazione e gestione delle risorse Azure utilizzando Azure Developer CLI. Impara a implementare i modelli di Infrastructure as Code (IaC), dalla creazione di risorse di base fino ad architetture avanzate di infrastruttura aziendale utilizzando Bicep, ARM templates, Terraform e Pulumi.
+Questa guida completa copre tutto ciò che devi sapere sulla creazione e gestione delle risorse Azure utilizzando Azure Developer CLI. Imparerai a implementare modelli di Infrastructure as Code (IaC), dalla creazione di risorse di base fino ad architetture infrastrutturali avanzate di livello aziendale utilizzando Bicep, ARM templates, Terraform e Pulumi.
 
-## Obiettivi di Apprendimento
+## Obiettivi di apprendimento
 
 Completando questa guida, sarai in grado di:
 - Padroneggiare i principi di Infrastructure as Code e il provisioning delle risorse Azure
 - Comprendere i diversi provider IaC supportati da Azure Developer CLI
 - Progettare e implementare template Bicep per architetture applicative comuni
 - Configurare parametri delle risorse, variabili e impostazioni specifiche per l'ambiente
-- Implementare modelli avanzati di infrastruttura, inclusi networking e sicurezza
+- Implementare modelli infrastrutturali avanzati, inclusi networking e sicurezza
 - Gestire il ciclo di vita delle risorse, aggiornamenti e risoluzione delle dipendenze
 
-## Risultati di Apprendimento
+## Risultati di apprendimento
 
 Al termine, sarai in grado di:
 - Progettare e creare infrastrutture Azure utilizzando Bicep e ARM templates
 - Configurare architetture complesse multi-servizio con dipendenze tra risorse
 - Implementare template parametrizzati per ambienti e configurazioni multiple
-- Risolvere problemi di provisioning dell'infrastruttura e gestire errori di distribuzione
-- Applicare i principi del Framework Azure Well-Architected alla progettazione dell'infrastruttura
-- Gestire aggiornamenti dell'infrastruttura e implementare strategie di versioning
+- Risolvere problemi di provisioning infrastrutturale e gestire errori di deployment
+- Applicare i principi del Framework Azure Well-Architected alla progettazione infrastrutturale
+- Gestire aggiornamenti infrastrutturali e implementare strategie di versioning
 
-## Panoramica sul Provisioning dell'Infrastruttura
+## Panoramica del provisioning infrastrutturale
 
 Azure Developer CLI supporta diversi provider di Infrastructure as Code (IaC):
 - **Bicep** (consigliato) - Linguaggio specifico per Azure
@@ -41,9 +48,9 @@ Azure Developer CLI supporta diversi provider di Infrastructure as Code (IaC):
 - **Terraform** - Strumento multi-cloud per infrastrutture
 - **Pulumi** - Infrastructure as Code moderna con linguaggi di programmazione
 
-## Comprendere le Risorse Azure
+## Comprendere le risorse Azure
 
-### Gerarchia delle Risorse
+### Gerarchia delle risorse
 ```
 Azure Account
 └── Subscriptions
@@ -51,16 +58,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Servizi Azure Comuni per Applicazioni
+### Servizi Azure comuni per applicazioni
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
 - **Sicurezza**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Template di Infrastruttura Bicep
+## Template infrastrutturali Bicep
 
-### Struttura Base di un Template Bicep
+### Struttura base di un template Bicep
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,9 +137,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Modelli Avanzati di Bicep
+### Modelli avanzati Bicep
 
-#### Infrastruttura Modulare
+#### Infrastruttura modulare
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -181,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Creazione Condizionale di Risorse
+#### Creazione condizionale di risorse
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Provisioning del Database
+## 🗃️ Provisioning di database
 
 ### Cosmos DB
 ```bicep
@@ -300,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Sicurezza e Gestione dei Segreti
+## 🔒 Gestione della sicurezza e dei segreti
 
 ### Integrazione con Key Vault
 ```bicep
@@ -370,7 +377,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Networking e Connettività
+## 🌍 Networking e connettività
 
 ### Configurazione di Virtual Network
 ```bicep
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Monitoraggio e Osservabilità
+## 📊 Monitoraggio e osservabilità
 
 ### Application Insights
 ```bicep
@@ -529,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Metriche Personalizzate e Avvisi
+### Metriche personalizzate e avvisi
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -563,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Configurazioni Specifiche per l'Ambiente
+## 🔧 Configurazioni specifiche per l'ambiente
 
-### File di Parametri per Ambienti Diversi
+### File di parametri per ambienti diversi
 ```json
 // infra/main.parameters.dev.json
 {
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Provisioning Condizionale delle Risorse
+### Provisioning condizionale delle risorse
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Modelli Avanzati di Provisioning
+## 🚀 Modelli di provisioning avanzati
 
-### Distribuzione Multi-Regione
+### Deployment multi-regione
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -721,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Test dell'Infrastruttura
+### Test dell'infrastruttura
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -757,9 +764,9 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Aggiornamenti e Migrazioni delle Risorse
+## 🔄 Aggiornamenti e migrazioni delle risorse
 
-### Aggiornamenti Sicuri delle Risorse
+### Aggiornamenti sicuri delle risorse
 ```bash
 # Preview infrastructure changes
 azd provision --preview
@@ -771,7 +778,7 @@ azd provision --confirm-with-no-prompt
 azd provision --rollback
 ```
 
-### Migrazioni del Database
+### Migrazioni di database
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -802,7 +809,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Best Practices
 
-### 1. Convenzioni per la Nomenclatura delle Risorse
+### 1. Convenzioni di naming delle risorse
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -813,7 +820,7 @@ var naming = {
 }
 ```
 
-### 2. Strategia di Tagging
+### 2. Strategia di tagging
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -826,7 +833,7 @@ var commonTags = {
 }
 ```
 
-### 3. Validazione dei Parametri
+### 3. Validazione dei parametri
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -842,7 +849,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organizzazione degli Output
+### 4. Organizzazione degli output
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -857,25 +864,25 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Prossimi Passi
+## Prossimi passi
 
-- [Pianificazione Pre-distribuzione](../pre-deployment/capacity-planning.md) - Validare la disponibilità delle risorse
-- [Problemi Comuni](../troubleshooting/common-issues.md) - Risolvere problemi di infrastruttura
-- [Guida al Debug](../troubleshooting/debugging.md) - Debug dei problemi di provisioning
-- [Selezione degli SKU](../pre-deployment/sku-selection.md) - Scegliere i livelli di servizio appropriati
+- [Pianificazione pre-deployment](../pre-deployment/capacity-planning.md) - Validare la disponibilità delle risorse
+- [Problemi comuni](../troubleshooting/common-issues.md) - Risolvere problemi infrastrutturali
+- [Guida al debugging](../troubleshooting/debugging.md) - Debug di problemi di provisioning
+- [Selezione SKU](../pre-deployment/sku-selection.md) - Scegliere i livelli di servizio appropriati
 
-## Risorse Aggiuntive
+## Risorse aggiuntive
 
 - [Documentazione Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Template Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Centro Architettura Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Centro di architettura Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Framework Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigazione**
-- **Lezione Precedente**: [Guida alla Distribuzione](deployment-guide.md)
-- **Prossima Lezione**: [Pianificazione della Capacità](../pre-deployment/capacity-planning.md)
+- **Lezione precedente**: [Guida al deployment](deployment-guide.md)
+- **Prossima lezione**: [Pianificazione della capacità](../pre-deployment/capacity-planning.md)
 
 ---
 

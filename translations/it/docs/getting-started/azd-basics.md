@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T19:10:40+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T21:40:02+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "it"
 }
 -->
 # AZD Fondamenti - Comprendere Azure Developer CLI
 
-**Precedente:** [Installazione e Configurazione](installation.md) | **Successivo:** [Configurazione](configuration.md)
+# AZD Fondamenti - Concetti e Principi di Base
+
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 1 - Fondamenti & Avvio Rapido
+- **⬅️ Precedente**: [Panoramica del Corso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Successivo**: [Installazione & Configurazione](installation.md)
+- **🚀 Capitolo Successivo**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduzione
 
-Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento da riga di comando potente che accelera il passaggio dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e come azd semplifica il deployment di applicazioni cloud-native.
+Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento potente da riga di comando che accelera il passaggio dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e come azd semplifica il deployment di applicazioni cloud-native.
 
 ## Obiettivi di Apprendimento
 
 Alla fine di questa lezione, sarai in grado di:
 - Comprendere cos'è Azure Developer CLI e il suo scopo principale
 - Apprendere i concetti fondamentali di template, ambienti e servizi
-- Esplorare le funzionalità principali, tra cui lo sviluppo basato su template e l'Infrastructure as Code
+- Esplorare le funzionalità principali, tra cui sviluppo basato su template e Infrastructure as Code
 - Comprendere la struttura e il flusso di lavoro di un progetto azd
 - Essere pronto per installare e configurare azd nel tuo ambiente di sviluppo
 
@@ -30,7 +37,7 @@ Dopo aver completato questa lezione, sarai in grado di:
 - Spiegare il ruolo di azd nei flussi di lavoro di sviluppo cloud moderni
 - Identificare i componenti della struttura di un progetto azd
 - Descrivere come template, ambienti e servizi lavorano insieme
-- Comprendere i vantaggi dell'Infrastructure as Code con azd
+- Comprendere i vantaggi di Infrastructure as Code con azd
 - Riconoscere i diversi comandi azd e i loro scopi
 
 ## Cos'è Azure Developer CLI (azd)?
@@ -43,8 +50,8 @@ Azure Developer CLI (azd) è uno strumento da riga di comando progettato per acc
 I template sono la base di azd. Contengono:
 - **Codice applicativo** - Il tuo codice sorgente e le dipendenze
 - **Definizioni dell'infrastruttura** - Risorse Azure definite in Bicep o Terraform
-- **File di configurazione** - Impostazioni e variabili di ambiente
-- **Script di deployment** - Flussi di lavoro automatizzati per il deployment
+- **File di configurazione** - Impostazioni e variabili d'ambiente
+- **Script di deployment** - Flussi di lavoro di deployment automatizzati
 
 ### Ambienti
 Gli ambienti rappresentano diversi target di deployment:
@@ -191,13 +198,13 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Comprendere `azd down --force --purge`
-Il comando `azd down --force --purge` è un modo potente per smantellare completamente il tuo ambiente azd e tutte le risorse associate. Ecco una panoramica di cosa fanno i flag:
+Il comando `azd down --force --purge` è un modo potente per eliminare completamente il tuo ambiente azd e tutte le risorse associate. Ecco una panoramica di cosa fanno i flag:
 ```
 --force
 ```
 - Salta i prompt di conferma.
-- Utile per automazione o scripting dove l'input manuale non è fattibile.
-- Garantisce che lo smantellamento proceda senza interruzioni, anche se la CLI rileva incongruenze.
+- Utile per automazione o scripting dove l'input manuale non è praticabile.
+- Garantisce che l'eliminazione proceda senza interruzioni, anche se la CLI rileva incongruenze.
 
 ```
 --purge
@@ -206,12 +213,14 @@ Elimina **tutti i metadati associati**, inclusi:
 Stato dell'ambiente
 Cartella locale `.azure`
 Informazioni di deployment memorizzate nella cache
-Previene che azd "ricordi" deployment precedenti, che possono causare problemi come gruppi di risorse non corrispondenti o riferimenti obsoleti al registro.
+Previene che azd "ricordi" deployment precedenti, evitando problemi come gruppi di risorse non corrispondenti o riferimenti obsoleti al registro.
+
 
 ### Perché usare entrambi?
-Quando incontri problemi con `azd up` a causa di stato residuo o deployment parziali, questa combinazione garantisce una **pulizia completa**.
+Quando incontri problemi con `azd up` a causa di stato residuo o deployment parziali, questa combinazione garantisce un **nuovo inizio**.
 
 È particolarmente utile dopo eliminazioni manuali di risorse nel portale Azure o quando si cambiano template, ambienti o convenzioni di denominazione dei gruppi di risorse.
+
 
 ### Gestione di Ambienti Multipli
 ```bash
@@ -274,7 +283,7 @@ azd init --template template1
 - Usa pipeline CI/CD per i deployment in produzione
 
 ### 4. Gestione della Configurazione
-- Usa variabili di ambiente per dati sensibili
+- Usa variabili d'ambiente per dati sensibili
 - Mantieni la configurazione sotto controllo di versione
 - Documenta le impostazioni specifiche per l'ambiente
 
@@ -294,15 +303,19 @@ azd init --template template1
 
 ### Avanzato (Settimana 5+)
 1. Crea template personalizzati
-2. Modelli avanzati di infrastruttura
+2. Pattern avanzati per l'infrastruttura
 3. Deployment multi-regione
 4. Configurazioni di livello enterprise
 
 ## Prossimi Passi
 
-- [Installazione e Configurazione](installation.md) - Installa e configura azd
-- [Il Tuo Primo Progetto](first-project.md) - Tutorial pratico
+**📖 Continua l'apprendimento del Capitolo 1:**
+- [Installazione & Configurazione](installation.md) - Installa e configura azd
+- [Il Tuo Primo Progetto](first-project.md) - Completa il tutorial pratico
 - [Guida alla Configurazione](configuration.md) - Opzioni di configurazione avanzate
+
+**🎯 Pronto per il Capitolo Successivo?**
+- [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md) - Inizia a costruire applicazioni AI
 
 ## Risorse Aggiuntive
 
@@ -312,8 +325,12 @@ azd init --template template1
 
 ---
 
-**Precedente:** [Installazione e Configurazione](installation.md) | **Successivo:** [Configurazione](configuration.md)
-- **Prossima Lezione**: [Installazione e Configurazione](installation.md)
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 1 - Fondamenti & Avvio Rapido  
+- **⬅️ Precedente**: [Panoramica del Corso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Successivo**: [Installazione & Configurazione](installation.md)
+- **🚀 Capitolo Successivo**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

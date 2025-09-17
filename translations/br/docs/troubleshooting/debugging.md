@@ -1,34 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:31:38+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T21:25:54+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "br"
 }
 -->
-# Guia de Depuração - Técnicas Avançadas de Análise de Logs
+# Guia de Depuração para Implantações AZD
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 7 - Solução de Problemas e Depuração
+- **⬅️ Anterior**: [Problemas Comuns](common-issues.md)
+- **➡️ Próximo**: [Solução de Problemas Específicos de IA](ai-troubleshooting.md)
+- **🚀 Próximo Capítulo**: [Capítulo 8: Padrões de Produção e Corporativos](../ai-foundry/production-ai-practices.md)
 
 ## Introdução
 
-Este guia abrangente fornece estratégias avançadas de depuração, ferramentas e técnicas para diagnosticar e resolver problemas complexos em implantações do Azure Developer CLI. Aprenda metodologias sistemáticas de solução de problemas, técnicas de análise de logs, perfil de desempenho e ferramentas de diagnóstico avançadas para resolver problemas de implantação e execução de forma eficiente.
+Este guia abrangente fornece estratégias avançadas de depuração, ferramentas e técnicas para diagnosticar e resolver problemas complexos com implantações do Azure Developer CLI. Aprenda metodologias sistemáticas de solução de problemas, técnicas de análise de logs, perfis de desempenho e ferramentas de diagnóstico avançadas para resolver problemas de implantação e tempo de execução de forma eficiente.
 
 ## Objetivos de Aprendizado
 
 Ao concluir este guia, você será capaz de:
-- Dominar metodologias sistemáticas de depuração para problemas no Azure Developer CLI
+- Dominar metodologias sistemáticas de depuração para problemas do Azure Developer CLI
 - Compreender configurações avançadas de logs e técnicas de análise de logs
-- Implementar estratégias de monitoramento e perfil de desempenho
+- Implementar estratégias de monitoramento e perfis de desempenho
 - Utilizar ferramentas e serviços de diagnóstico do Azure para resolver problemas complexos
 - Aplicar técnicas de depuração de rede e segurança
 - Configurar monitoramento abrangente e alertas para detecção proativa de problemas
 
 ## Resultados de Aprendizado
 
-Ao finalizar, você será capaz de:
+Ao final, você será capaz de:
 - Aplicar a metodologia TRIAGE para depurar sistematicamente problemas complexos de implantação
 - Configurar e analisar informações abrangentes de logs e rastreamento
-- Utilizar Azure Monitor, Application Insights e ferramentas de diagnóstico de forma eficaz
+- Usar Azure Monitor, Application Insights e ferramentas de diagnóstico de forma eficaz
 - Depurar problemas de conectividade de rede, autenticação e permissões de forma independente
 - Implementar estratégias de monitoramento e otimização de desempenho
 - Criar scripts personalizados de depuração e automação para problemas recorrentes
@@ -39,7 +46,7 @@ Ao finalizar, você será capaz de:
 - **T**empo: Quando o problema começou?
 - **R**eproduzir: É possível reproduzi-lo consistentemente?
 - **I**slar: Qual componente está falhando?
-- **A**nalisar: O que os logs nos dizem?
+- **A**nalisar: O que os logs indicam?
 - **C**oletar: Reúna todas as informações relevantes
 - **E**scalar: Quando buscar ajuda adicional
 
@@ -73,7 +80,7 @@ azd config set trace.outputPath ./debug-traces
 
 ## 📊 Técnicas de Análise de Logs
 
-### Compreendendo os Níveis de Logs
+### Compreendendo os Níveis de Log
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -156,7 +163,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Depuração de Containers
+### Depuração de Contêineres
 ```bash
 # Debug container app issues
 debug_container() {
@@ -176,7 +183,7 @@ debug_container() {
 }
 ```
 
-### Depuração de Conexão com Banco de Dados
+### Depuração de Conexões de Banco de Dados
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -399,7 +406,7 @@ analyze_resources() {
 
 ## 🔒 Depuração de Segurança
 
-### Depuração de Fluxo de Autenticação
+### Depuração de Fluxos de Autenticação
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -602,9 +609,9 @@ quick_rollback() {
 }
 ```
 
-## 📊 Painéis de Depuração
+## 📊 Dashboards de Depuração
 
-### Painel de Monitoramento Personalizado
+### Dashboard Personalizado de Monitoramento
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -654,7 +661,7 @@ aggregate_logs() {
 ### Scripts Personalizados de Depuração
 Crie um diretório `scripts/debug/` com:
 - `health-check.sh` - Verificação abrangente de saúde
-- `performance-test.sh` - Teste automatizado de desempenho
+- `performance-test.sh` - Testes automatizados de desempenho
 - `log-analyzer.py` - Análise avançada de logs
 - `resource-validator.sh` - Validação de infraestrutura
 
@@ -677,7 +684,7 @@ hooks:
 
 ## Melhores Práticas
 
-1. **Sempre habilite o registro de logs de depuração** em ambientes não produtivos
+1. **Sempre habilite logs de depuração** em ambientes não-produtivos
 2. **Crie casos de teste reproduzíveis** para os problemas
 3. **Documente os procedimentos de depuração** para sua equipe
 4. **Automatize verificações de saúde** e monitoramento
@@ -689,7 +696,7 @@ hooks:
 - [Planejamento de Capacidade](../pre-deployment/capacity-planning.md) - Planeje os requisitos de recursos
 - [Seleção de SKU](../pre-deployment/sku-selection.md) - Escolha os níveis de serviço apropriados
 - [Verificações Pré-Implantação](../pre-deployment/preflight-checks.md) - Validação antes da implantação
-- [Guia Rápido](../../resources/cheat-sheet.md) - Comandos de referência rápida
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Comandos de referência rápida
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

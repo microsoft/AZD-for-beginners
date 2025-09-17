@@ -1,15 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T19:42:16+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T21:26:18+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "br"
 }
 -->
-# Guia de Solução de Problemas de IA para Azure Developer CLI
+# Guia de Solução de Problemas Específicos de IA
 
-**Anterior:** [Práticas de IA em Produção](../ai-foundry/production-ai-practices.md) | **Próximo:** [Introdução ao AZD](../getting-started/README.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 7 - Solução de Problemas e Depuração
+- **⬅️ Anterior**: [Guia de Depuração](debugging.md)
+- **➡️ Próximo Capítulo**: [Capítulo 8: Padrões de Produção e Empresariais](../ai-foundry/production-ai-practices.md)
+- **🤖 Relacionado**: [Capítulo 2: Desenvolvimento Focado em IA](../ai-foundry/azure-ai-foundry-integration.md)
+
+**Anterior:** [Práticas de Produção de IA](../ai-foundry/production-ai-practices.md) | **Próximo:** [Introdução ao AZD](../getting-started/README.md)
 
 Este guia abrangente de solução de problemas aborda questões comuns ao implantar soluções de IA com AZD, fornecendo soluções e técnicas de depuração específicas para os serviços de IA do Azure.
 
@@ -17,7 +24,7 @@ Este guia abrangente de solução de problemas aborda questões comuns ao implan
 
 - [Problemas com o Azure OpenAI Service](../../../../docs/troubleshooting)
 - [Problemas com o Azure AI Search](../../../../docs/troubleshooting)
-- [Problemas de Implantação de Container Apps](../../../../docs/troubleshooting)
+- [Problemas de Implantação de Aplicativos em Contêiner](../../../../docs/troubleshooting)
 - [Erros de Autenticação e Permissão](../../../../docs/troubleshooting)
 - [Falhas na Implantação de Modelos](../../../../docs/troubleshooting)
 - [Problemas de Desempenho e Escalabilidade](../../../../docs/troubleshooting)
@@ -40,7 +47,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Soluções:**
 
-1. **Verificar Disponibilidade na Região:**
+1. **Verificar Disponibilidade Regional:**
 ```bash
 # List available regions for OpenAI
 az cognitiveservices account list-skus \
@@ -230,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Problemas de Implantação de Container Apps
+## Problemas de Implantação de Aplicativos em Contêiner
 
-### Problema: Falhas na Construção de Containers
+### Problema: Falhas na Construção de Contêiner
 
 **Sintomas:**
 ```
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problema: Falhas na Inicialização de Container Apps
+### Problema: Falhas na Inicialização de Aplicativos em Contêiner
 
 **Sintomas:**
 ```
@@ -660,7 +667,7 @@ class MemoryOptimizedAI:
 ### Problema: Custos Altos Inesperados
 
 **Sintomas:**
-- Conta do Azure mais alta do que o esperado
+- Fatura do Azure maior que o esperado
 - Uso de tokens excedendo estimativas
 - Alertas de orçamento acionados
 
@@ -747,9 +754,9 @@ azd logs --follow
 azd env get-values
 ```
 
-### Depuração de Aplicações
+### Depuração de Aplicativos
 
-1. **Log Estruturado:**
+1. **Registro Estruturado:**
 ```python
 import logging
 import json
@@ -838,30 +845,35 @@ def monitor_performance(func):
 | Código de Erro | Descrição | Solução |
 |----------------|-----------|---------|
 | 401 | Não autorizado | Verificar chaves de API e configuração de identidade gerenciada |
-| 403 | Proibido | Verificar atribuições de função RBAC |
+| 403 | Proibido | Confirmar atribuições de função RBAC |
 | 429 | Limite de taxa | Implementar lógica de repetição com backoff exponencial |
 | 500 | Erro interno do servidor | Verificar status de implantação do modelo e logs |
-| 503 | Serviço indisponível | Verificar saúde do serviço e disponibilidade regional |
+| 503 | Serviço indisponível | Confirmar saúde do serviço e disponibilidade regional |
 
 ## Próximos Passos
 
 1. **Revisar [Guia de Implantação de Modelos de IA](ai-model-deployment.md)** para melhores práticas de implantação
-2. **Completar [Práticas de IA em Produção](production-ai-practices.md)** para soluções prontas para empresas
+2. **Concluir [Práticas de Produção de IA](production-ai-practices.md)** para soluções prontas para empresas
 3. **Participar do [Discord do Azure AI Foundry](https://aka.ms/foundry/discord)** para suporte da comunidade
 4. **Enviar problemas** para o [repositório GitHub do AZD](https://github.com/Azure/azure-dev) para problemas específicos do AZD
 
 ## Recursos
 
 - [Solução de Problemas do Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Solução de Problemas de Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Solução de Problemas de Aplicativos em Contêiner](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Solução de Problemas do Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**Anterior:** [Práticas de IA em Produção](../ai-foundry/production-ai-practices.md) | **Próximo:** [Workshop](../../workshop/README.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 7 - Solução de Problemas e Depuração
+- **⬅️ Anterior**: [Guia de Depuração](debugging.md)
+- **➡️ Próximo Capítulo**: [Capítulo 8: Padrões de Produção e Empresariais](../ai-foundry/production-ai-practices.md)
+- **🤖 Relacionado**: [Capítulo 2: Desenvolvimento Focado em IA](../ai-foundry/azure-ai-foundry-integration.md)
 - [Solução de Problemas do Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

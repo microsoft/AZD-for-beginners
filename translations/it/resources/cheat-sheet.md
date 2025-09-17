@@ -1,37 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T20:27:06+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T21:48:07+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "it"
 }
 -->
 # Command Cheat Sheet - Comandi Essenziali AZD
 
+**Riferimento Rapido per Tutti i Capitoli**
+- **📚 Home del Corso**: [AZD Per Principianti](../README.md)
+- **📖 Avvio Rapido**: [Capitolo 1: Fondamenti e Avvio Rapido](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Comandi AI**: [Capitolo 2: Sviluppo AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Avanzato**: [Capitolo 4: Infrastruttura come Codice](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Introduzione
 
-Questa guida completa offre un riferimento rapido ai comandi più utilizzati della Azure Developer CLI, organizzati per categoria con esempi pratici. Perfetta per consultazioni rapide durante lo sviluppo, la risoluzione dei problemi e le operazioni quotidiane con progetti azd.
+Questo cheat sheet completo offre un riferimento rapido ai comandi più utilizzati della CLI per sviluppatori Azure, organizzati per categoria con esempi pratici. Perfetto per consultazioni rapide durante lo sviluppo, la risoluzione dei problemi e le operazioni quotidiane con progetti azd.
 
 ## Obiettivi di Apprendimento
 
-Utilizzando questa guida, potrai:
-- Accedere immediatamente ai comandi essenziali della Azure Developer CLI e alla loro sintassi
+Utilizzando questo cheat sheet, potrai:
+- Accedere immediatamente ai comandi essenziali della CLI per sviluppatori Azure e alla loro sintassi
 - Comprendere l'organizzazione dei comandi per categorie funzionali e casi d'uso
 - Consultare esempi pratici per scenari comuni di sviluppo e distribuzione
-- Accedere a comandi di risoluzione dei problemi per una rapida soluzione
+- Accedere ai comandi di risoluzione dei problemi per una rapida soluzione
 - Trovare opzioni avanzate di configurazione e personalizzazione in modo efficiente
-- Gestire comandi per la gestione degli ambienti e flussi di lavoro multi-ambiente
+- Localizzare comandi per la gestione degli ambienti e flussi di lavoro multi-ambiente
 
 ## Risultati di Apprendimento
 
-Con un utilizzo regolare di questa guida, sarai in grado di:
+Con un riferimento regolare a questo cheat sheet, sarai in grado di:
 - Eseguire i comandi azd con sicurezza senza dover consultare la documentazione completa
 - Risolvere rapidamente problemi comuni utilizzando i comandi diagnostici appropriati
 - Gestire ambienti multipli e scenari di distribuzione in modo efficiente
-- Applicare funzionalità avanzate e opzioni di configurazione di azd quando necessario
-- Risolvere problemi di distribuzione utilizzando sequenze di comandi sistematiche
-- Ottimizzare i flussi di lavoro attraverso un uso efficace di scorciatoie e opzioni di azd
+- Applicare funzionalità avanzate di azd e opzioni di configurazione quando necessario
+- Risolvere problemi di distribuzione utilizzando sequenze sistematiche di comandi
+- Ottimizzare i flussi di lavoro attraverso un uso efficace di scorciatoie e opzioni azd
 
 ## Comandi per Iniziare
 
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Build e Pacchettizzazione
+### Build e Pacchetto
 ```bash
 # Build applications
 azd package
@@ -402,7 +408,7 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Combinazioni di Comandi Comuni
+## 🔧 Combinazioni Comuni di Comandi
 
 ### Script di Controllo della Salute
 ```bash
@@ -552,13 +558,13 @@ azd template show <template-name> --docs
 
 ---
 
-**Consiglio**: Aggiungi questa guida ai segnalibri e usa `Ctrl+F` per trovare rapidamente i comandi di cui hai bisogno!
+**Consiglio**: Aggiungi questo cheat sheet ai segnalibri e usa `Ctrl+F` per trovare rapidamente i comandi di cui hai bisogno!
 
 ---
 
 **Navigazione**
 - **Lezione Precedente**: [Controlli Preliminari](../docs/pre-deployment/preflight-checks.md)
-- **Lezione Successiva**: [Glossario](glossary.md)
+- **Prossima Lezione**: [Glossario](glossary.md)
 
 ---
 

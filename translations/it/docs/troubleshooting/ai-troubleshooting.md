@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T19:42:40+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T21:41:38+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "it"
 }
 -->
-# Guida alla Risoluzione dei Problemi per Azure Developer CLI
+# Guida alla Risoluzione dei Problemi Specifici per l'AI
+
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 7 - Risoluzione dei Problemi e Debugging
+- **⬅️ Precedente**: [Guida al Debugging](debugging.md)
+- **➡️ Capitolo Successivo**: [Capitolo 8: Modelli di Produzione e Aziendali](../ai-foundry/production-ai-practices.md)
+- **🤖 Correlato**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 **Precedente:** [Pratiche AI in Produzione](../ai-foundry/production-ai-practices.md) | **Successivo:** [Introduzione ad AZD](../getting-started/README.md)
 
-Questa guida completa affronta i problemi comuni durante il deployment di soluzioni AI con AZD, fornendo soluzioni e tecniche di debug specifiche per i servizi Azure AI.
+Questa guida completa alla risoluzione dei problemi affronta le questioni comuni durante il deployment di soluzioni AI con AZD, fornendo soluzioni e tecniche di debugging specifiche per i servizi Azure AI.
 
 ## Indice
 
@@ -22,11 +29,11 @@ Questa guida completa affronta i problemi comuni durante il deployment di soluzi
 - [Fallimenti nel Deployment dei Modelli](../../../../docs/troubleshooting)
 - [Problemi di Prestazioni e Scalabilità](../../../../docs/troubleshooting)
 - [Gestione dei Costi e delle Quote](../../../../docs/troubleshooting)
-- [Strumenti e Tecniche di Debug](../../../../docs/troubleshooting)
+- [Strumenti e Tecniche di Debugging](../../../../docs/troubleshooting)
 
 ## Problemi con Azure OpenAI Service
 
-### Problema: Servizio OpenAI non disponibile nella regione
+### Problema: Servizio OpenAI Non Disponibile nella Regione
 
 **Sintomi:**
 ```
@@ -40,7 +47,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Soluzioni:**
 
-1. **Verifica Disponibilità della Regione:**
+1. **Verifica Disponibilità Regionale:**
 ```bash
 # List available regions for OpenAI
 az cognitiveservices account list-skus \
@@ -60,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **Usa Regioni Alternative:**
+3. **Utilizza Regioni Alternative:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -72,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Problema: Quota di Deployment del Modello Superata
+### Problema: Quota di Deployment Modelli Superata
 
 **Sintomi:**
 ```
@@ -117,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### Problema: Versione API non valida
+### Problema: Versione API Non Valida
 
 **Sintomi:**
 ```
@@ -126,7 +133,7 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Soluzioni:**
 
-1. **Usa una Versione API Supportata:**
+1. **Utilizza una Versione API Supportata:**
 ```python
 # Use latest supported version
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
@@ -216,7 +223,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Usa Identità Gestite:**
+3. **Utilizza l'Identità Gestita:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -232,7 +239,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Problemi di Deployment delle Container Apps
 
-### Problema: Fallimenti nella Build del Container
+### Problema: Fallimenti nella Creazione del Container
 
 **Sintomi:**
 ```
@@ -361,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Errori di Autenticazione e Permessi
 
-### Problema: Permesso Negato per Identità Gestite
+### Problema: Permesso Negato per l'Identità Gestita
 
 **Sintomi:**
 ```
@@ -370,7 +377,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 **Soluzioni:**
 
-1. **Verifica le Assegnazioni di Ruolo:**
+1. **Verifica gli Assegnamenti di Ruolo:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -378,7 +385,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Assegna i Ruoli Necessari:**
+2. **Assegna i Ruoli Richiesti:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -419,7 +426,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Soluzioni:**
 
-1. **Concedi Permessi a Key Vault:**
+1. **Concedi i Permessi a Key Vault:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -438,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Usa RBAC invece delle Politiche di Accesso:**
+2. **Utilizza RBAC invece delle Politiche di Accesso:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -453,7 +460,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 
 ## Fallimenti nel Deployment dei Modelli
 
-### Problema: Versione del Modello non Disponibile
+### Problema: Versione del Modello Non Disponibile
 
 **Sintomi:**
 ```
@@ -472,7 +479,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Usa Modelli Alternativi:**
+2. **Utilizza Modelli Alternativi:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -534,7 +541,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **Soluzioni:**
 
-1. **Implementa Timeout delle Richieste:**
+1. **Implementa Timeout per le Richieste:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -710,7 +717,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **Ottimizza la Selezione del Modello:**
+3. **Ottimizza la Scelta del Modello:**
 ```python
 # Cost-aware model selection
 MODEL_COSTS = {
@@ -729,9 +736,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## Strumenti e Tecniche di Debug
+## Strumenti e Tecniche di Debugging
 
-### Comandi di Debug AZD
+### Comandi di Debugging AZD
 
 ```bash
 # Enable verbose logging
@@ -747,7 +754,7 @@ azd logs --follow
 azd env get-values
 ```
 
-### Debug dell'Applicazione
+### Debugging dell'Applicazione
 
 1. **Logging Strutturato:**
 ```python
@@ -837,16 +844,16 @@ def monitor_performance(func):
 
 | Codice di Errore | Descrizione | Soluzione |
 |------------------|-------------|-----------|
-| 401 | Non autorizzato | Controlla le chiavi API e la configurazione dell'identità gestita |
-| 403 | Vietato | Verifica le assegnazioni di ruolo RBAC |
-| 429 | Limite di velocità | Implementa una logica di retry con backoff esponenziale |
-| 500 | Errore interno del server | Controlla lo stato del deployment del modello e i log |
-| 503 | Servizio non disponibile | Verifica la salute del servizio e la disponibilità regionale |
+| 401 | Non Autorizzato | Controlla le chiavi API e la configurazione dell'identità gestita |
+| 403 | Vietato | Verifica gli assegnamenti di ruolo RBAC |
+| 429 | Limite di Richieste Superato | Implementa una logica di retry con backoff esponenziale |
+| 500 | Errore Interno del Server | Controlla lo stato del deployment del modello e i log |
+| 503 | Servizio Non Disponibile | Verifica la salute del servizio e la disponibilità regionale |
 
 ## Prossimi Passi
 
-1. **Consulta [Guida al Deployment dei Modelli AI](ai-model-deployment.md)** per le migliori pratiche di deployment
-2. **Completa [Pratiche AI in Produzione](production-ai-practices.md)** per soluzioni pronte per l'azienda
+1. **Consulta la [Guida al Deployment dei Modelli AI](ai-model-deployment.md)** per le migliori pratiche di deployment
+2. **Completa le [Pratiche AI in Produzione](production-ai-practices.md)** per soluzioni pronte per l'azienda
 3. **Unisciti al [Discord di Azure AI Foundry](https://aka.ms/foundry/discord)** per supporto dalla community
 4. **Invia problemi** al [repository GitHub di AZD](https://github.com/Azure/azure-dev) per problemi specifici di AZD
 
@@ -858,7 +865,12 @@ def monitor_performance(func):
 
 ---
 
-**Precedente:** [Pratiche AI in Produzione](../ai-foundry/production-ai-practices.md) | **Successivo:** [Workshop](../../workshop/README.md)
+**Navigazione Capitolo:**
+- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 7 - Risoluzione dei Problemi e Debugging
+- **⬅️ Precedente**: [Guida al Debugging](debugging.md)
+- **➡️ Capitolo Successivo**: [Capitolo 8: Modelli di Produzione e Aziendali](../ai-foundry/production-ai-practices.md)
+- **🤖 Correlato**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 - [Risoluzione dei Problemi di Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---

@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T19:21:25+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T21:24:53+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "br"
 }
 -->
 # Guia de Implantação - Dominando Implantações com AZD
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 4 - Infraestrutura como Código & Implantação
+- **⬅️ Capítulo Anterior**: [Capítulo 3: Configuração](../getting-started/configuration.md)
+- **➡️ Próximo**: [Provisionamento de Recursos](provisioning.md)
+- **🚀 Próximo Capítulo**: [Capítulo 5: Soluções de IA Multi-Agente](../../examples/retail-scenario.md)
 
 ## Introdução
 
@@ -20,7 +27,7 @@ Ao concluir este guia, você será capaz de:
 - Compreender o ciclo completo de implantação, desde o provisionamento até o monitoramento
 - Implementar hooks personalizados para automação antes e depois da implantação
 - Configurar múltiplos ambientes com parâmetros específicos para cada ambiente
-- Configurar estratégias avançadas de implantação, incluindo blue-green e canary deployments
+- Implementar estratégias avançadas de implantação, como blue-green e canary deployments
 - Integrar implantações com azd em pipelines de CI/CD e fluxos de trabalho DevOps
 
 ## Resultados de Aprendizado
@@ -37,14 +44,14 @@ Ao final, você será capaz de:
 
 O Azure Developer CLI oferece vários comandos de implantação:
 - `azd up` - Fluxo completo (provisionamento + implantação)
-- `azd provision` - Criar/atualizar apenas os recursos do Azure
+- `azd provision` - Criar/atualizar apenas recursos do Azure
 - `azd deploy` - Implantar apenas o código da aplicação
 - `azd package` - Construir e empacotar aplicações
 
 ## Fluxos de Trabalho Básicos de Implantação
 
 ### Implantação Completa (azd up)
-O fluxo mais comum para novos projetos:
+O fluxo de trabalho mais comum para novos projetos:
 ```bash
 # Deploy everything from scratch
 azd up
@@ -119,7 +126,7 @@ hooks:
 ```
 
 ### Fase 4: Empacotamento de Aplicação
-- Constrói o código da aplicação
+- Compila o código da aplicação
 - Cria artefatos de implantação
 - Empacota para a plataforma alvo (containers, arquivos ZIP, etc.)
 
@@ -137,7 +144,7 @@ hooks:
 ```
 
 ### Fase 6: Implantação de Aplicação
-- Implanta aplicações empacotadas em serviços do Azure
+- Implanta aplicações empacotadas nos serviços do Azure
 - Atualiza configurações
 - Inicia/reinicia serviços
 
@@ -208,7 +215,7 @@ azd env set LOG_LEVEL error
 
 ## 🔧 Cenários Avançados de Implantação
 
-### Aplicações com Múltiplos Serviços
+### Aplicações Multi-Serviço
 ```yaml
 # Complex application with multiple services
 services:
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Otimização de Dockerfile em Múltiplos Estágios
+### Otimização de Dockerfile Multi-Estágio
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -631,7 +638,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Próximos Passos
 
-- [Provisionamento de Recursos](provisioning.md) - Detalhamento sobre gerenciamento de infraestrutura
+- [Provisionamento de Recursos](provisioning.md) - Exploração detalhada do gerenciamento de infraestrutura
 - [Planejamento Pré-Implantação](../pre-deployment/capacity-planning.md) - Planeje sua estratégia de implantação
 - [Problemas Comuns](../troubleshooting/common-issues.md) - Resolva problemas de implantação
 - [Melhores Práticas](../troubleshooting/debugging.md) - Estratégias de implantação prontas para produção
@@ -652,4 +659,4 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

@@ -1,64 +1,68 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T19:47:52+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-17T21:42:58+00:00",
   "source_file": "workshop/README.md",
   "language_code": "it"
 }
 -->
 # Workshop AZD per Sviluppatori AI
 
-**Precedente:** [Guida alla risoluzione dei problemi AI](../docs/troubleshooting/ai-troubleshooting.md) | **Successivo:** [Moduli del laboratorio del workshop](../../../workshop)
+**Navigazione del Workshop**  
+- **📚 Home del Corso**: [AZD Per Principianti](../README.md)  
+- **📖 Capitoli Correlati**: Include [Capitolo 1](../README.md#-chapter-1-foundation--quick-start), [Capitolo 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) e [Capitolo 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
+- **🛠️ Laboratorio Pratico**: [Laboratorio AI Workshop](../docs/ai-foundry/ai-workshop-lab.md)  
+- **🚀 Prossimi Passi**: [Moduli del Workshop](../../../workshop)  
 
-Benvenuto al workshop pratico per imparare Azure Developer CLI (AZD) con un focus sul deployment di applicazioni AI. Questo workshop è progettato per guidarti dai concetti base di AZD fino al deployment di soluzioni AI pronte per la produzione.
+Benvenuto al workshop pratico per imparare a utilizzare Azure Developer CLI (AZD) con un focus sul deployment di applicazioni AI. Questo workshop ti guiderà dai concetti base di AZD fino al deployment di soluzioni AI pronte per la produzione.
 
 ## Panoramica del Workshop
 
 **Durata:** 2-3 ore  
 **Livello:** Principiante a Intermedio  
-**Prerequisiti:** Conoscenza di base di Azure, strumenti da riga di comando e concetti di AI
+**Prerequisiti:** Conoscenza di base di Azure, strumenti da riga di comando e concetti di AI  
 
 ### Cosa Imparerai
 
-- **Fondamenti di AZD**: Comprendere l'infrastruttura come codice con AZD
-- 🤖 **Integrazione di Servizi AI**: Deployment di Azure OpenAI, AI Search e altri servizi AI
-- **Deployment di Container**: Utilizzo di Azure Container Apps per applicazioni AI
-- **Best Practice di Sicurezza**: Implementazione di Managed Identity e configurazioni sicure
-- **Monitoraggio e Osservabilità**: Configurazione di Application Insights per carichi di lavoro AI
-- **Pattern di Produzione**: Strategie di deployment pronte per l'azienda
+- **Fondamenti di AZD**: Comprendere l'Infrastructure as Code con AZD  
+- 🤖 **Integrazione di Servizi AI**: Deployment di Azure OpenAI, AI Search e altri servizi AI  
+- **Deployment di Container**: Utilizzo di Azure Container Apps per applicazioni AI  
+- **Best Practice di Sicurezza**: Implementazione di Managed Identity e configurazioni sicure  
+- **Monitoraggio e Osservabilità**: Configurazione di Application Insights per carichi di lavoro AI  
+- **Pattern di Produzione**: Strategie di deployment pronte per l'azienda  
 
 ## Struttura del Workshop
 
-### Modulo 1: Fondamenti di AZD (30 minuti)
-- Installazione e configurazione di AZD
-- Comprendere la struttura del progetto AZD
-- Il tuo primo deployment con AZD
-- **Laboratorio**: Deploy di una semplice applicazione web
+### Modulo 1: Fondamenti di AZD (30 minuti)  
+- Installazione e configurazione di AZD  
+- Comprendere la struttura di un progetto AZD  
+- Il tuo primo deployment con AZD  
+- **Laboratorio**: Deployment di una semplice applicazione web  
 
-### Modulo 2: Integrazione con Azure OpenAI (45 minuti)
-- Configurazione delle risorse Azure OpenAI
-- Strategie di deployment dei modelli
-- Configurazione dell'accesso API e autenticazione
-- **Laboratorio**: Deploy di un'applicazione di chat con GPT-4
+### Modulo 2: Integrazione con Azure OpenAI (45 minuti)  
+- Configurazione delle risorse Azure OpenAI  
+- Strategie di deployment dei modelli  
+- Configurazione dell'accesso API e autenticazione  
+- **Laboratorio**: Deployment di un'applicazione di chat con GPT-4  
 
-### Modulo 3: Applicazioni RAG (45 minuti)
-- Integrazione con Azure AI Search
-- Elaborazione di documenti con Azure Document Intelligence
-- Embedding vettoriali e ricerca semantica
-- **Laboratorio**: Creazione di un sistema di Q&A basato su documenti
+### Modulo 3: Applicazioni RAG (45 minuti)  
+- Integrazione con Azure AI Search  
+- Elaborazione documenti con Azure Document Intelligence  
+- Embedding vettoriali e ricerca semantica  
+- **Laboratorio**: Creazione di un sistema di Q&A per documenti  
 
-### Modulo 4: Deployment in Produzione (30 minuti)
-- Configurazione di Container Apps
-- Ottimizzazione delle prestazioni e scalabilità
-- Monitoraggio e logging
-- **Laboratorio**: Deployment in produzione con osservabilità
+### Modulo 4: Deployment in Produzione (30 minuti)  
+- Configurazione di Container Apps  
+- Ottimizzazione delle prestazioni e scalabilità  
+- Monitoraggio e logging  
+- **Laboratorio**: Deployment in produzione con osservabilità  
 
-### Modulo 5: Pattern Avanzati (15 minuti)
-- Deployment multi-ambiente
-- Integrazione CI/CD
-- Strategie di ottimizzazione dei costi
-- **Conclusione**: Checklist per la prontezza alla produzione
+### Modulo 5: Pattern Avanzati (15 minuti)  
+- Deployment multi-ambiente  
+- Integrazione CI/CD  
+- Strategie di ottimizzazione dei costi  
+- **Conclusione**: Checklist per la prontezza alla produzione  
 
 ## Prerequisiti
 
@@ -84,11 +88,11 @@ sudo sh get-docker.sh
 sudo apt-get install python3.10 python3.10-venv python3-pip
 ```
 
-### Configurazione Account Azure
+### Configurazione dell'Account Azure
 
 1. **Sottoscrizione Azure**: [Registrati gratuitamente](https://azure.microsoft.com/free/)  
 2. **Accesso ad Azure OpenAI**: [Richiedi accesso](https://aka.ms/oai/access)  
-3. **Permessi richiesti**:  
+3. **Permessi Richiesti**:  
    - Ruolo di Contributor sulla sottoscrizione o sul gruppo di risorse  
    - User Access Administrator (per assegnazioni RBAC)  
 
@@ -142,7 +146,7 @@ echo "Setup verification complete!"
 
 ### Esercizi di Laboratorio
 
-Ogni modulo include laboratori pratici con codice iniziale e istruzioni passo-passo:
+Ogni modulo include laboratori pratici con codice di partenza e istruzioni passo-passo:
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Il tuo primo deployment con AZD  
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Applicazione di chat con Azure OpenAI  
@@ -152,14 +156,14 @@ Ogni modulo include laboratori pratici con codice iniziale e istruzioni passo-pa
 
 ### Materiali di Riferimento
 
-- **[Guida all'integrazione AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Pattern di integrazione completi  
-- **[Guida al deployment di modelli AI](../docs/ai-foundry/ai-model-deployment.md)** - Best practice per il deployment di modelli  
-- **[Pratiche AI in produzione](../docs/ai-foundry/production-ai-practices.md)** - Pattern di deployment aziendali  
-- **[Guida alla risoluzione dei problemi AI](../docs/troubleshooting/ai-troubleshooting.md)** - Problemi comuni e soluzioni  
+- **[Guida all'Integrazione AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Pattern di integrazione completi  
+- **[Guida al Deployment di Modelli AI](../docs/ai-foundry/ai-model-deployment.md)** - Best practice per il deployment dei modelli  
+- **[Pratiche AI in Produzione](../docs/ai-foundry/production-ai-practices.md)** - Pattern di deployment aziendali  
+- **[Guida alla Risoluzione dei Problemi AI](../docs/troubleshooting/ai-troubleshooting.md)** - Problemi comuni e soluzioni  
 
 ### Template di Esempio
 
-Template di avvio rapido per scenari AI comuni:
+Template per iniziare rapidamente con scenari AI comuni:
 
 ```
 workshop/templates/
@@ -171,7 +175,7 @@ workshop/templates/
 
 ## Iniziare
 
-### Opzione 1: GitHub Codespaces (Consigliata)
+### Opzione 1: GitHub Codespaces (Consigliato)
 
 Il modo più veloce per iniziare il workshop:
 
@@ -183,29 +187,29 @@ Il modo più veloce per iniziare il workshop:
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
-```
+```  
 
 2. **Accedi ad Azure:**  
 ```bash
 az login
 azd auth login
-```
+```  
 
 3. **Inizia con il Laboratorio 1:**  
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
-```
+```  
 
 ### Opzione 3: Workshop con Istruttore
 
-Se stai partecipando a una sessione con istruttore:
+Se stai partecipando a una sessione con istruttore:  
 
 - 🎥 **Registrazione del Workshop**: [Disponibile su richiesta](https://aka.ms/azd-ai-workshop)  
 - 💬 **Community su Discord**: [Unisciti per supporto live](https://aka.ms/foundry/discord)  
 - **Feedback sul Workshop**: [Condividi la tua esperienza](https://aka.ms/azd-workshop-feedback)  
 
-## Timeline del Workshop
+## Cronologia del Workshop
 
 ### Apprendimento Autonomo (3 ore)
 
@@ -218,7 +222,7 @@ Se stai partecipando a una sessione con istruttore:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Sessione con Istruttore (2.5 ore)
+### Sessione con Istruttore (2,5 ore)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -233,11 +237,11 @@ Se stai partecipando a una sessione con istruttore:
 
 ## Criteri di Successo
 
-Alla fine di questo workshop, sarai in grado di:
+Alla fine di questo workshop, sarai in grado di:  
 
-✅ **Deploy di applicazioni AI** utilizzando template AZD  
-✅ **Configurare Azure OpenAI** con sicurezza adeguata  
-✅ **Creare applicazioni RAG** con integrazione AI Search  
+✅ **Effettuare il deployment di applicazioni AI** utilizzando i template AZD  
+✅ **Configurare Azure OpenAI** con le corrette impostazioni di sicurezza  
+✅ **Creare applicazioni RAG** con integrazione di Azure AI Search  
 ✅ **Implementare pattern di produzione** per carichi di lavoro AI aziendali  
 ✅ **Monitorare e risolvere problemi** nei deployment di applicazioni AI  
 ✅ **Applicare strategie di ottimizzazione dei costi** per carichi di lavoro AI  
@@ -272,9 +276,9 @@ Alla fine di questo workshop, sarai in grado di:
 
 ### Condividi il Tuo Successo
 
-- ⭐ **Dai una stella al repository** se questo workshop ti è stato utile  
+- ⭐ **Metti una stella al repository** se questo workshop ti è stato utile  
 - 🐦 **Condividi sui social media** con #AzureDeveloperCLI #AzureAI  
-- 📝 **Scrivi un post sul blog** sulla tua esperienza di deployment AI  
+- 📝 **Scrivi un post sul blog** sul tuo percorso di deployment AI  
 
 ---
 
@@ -282,23 +286,23 @@ Alla fine di questo workshop, sarai in grado di:
 
 Il tuo feedback ci aiuta a migliorare l'esperienza del workshop:
 
-| Aspetto | Valutazione (1-5) | Commenti |
-|--------|--------------|----------|
-| Qualità dei Contenuti | ⭐⭐⭐⭐⭐ | |
-| Laboratori Pratici | ⭐⭐⭐⭐⭐ | |
-| Documentazione | ⭐⭐⭐⭐⭐ | |
-| Livello di Difficoltà | ⭐⭐⭐⭐⭐ | |
-| Esperienza Complessiva | ⭐⭐⭐⭐⭐ | |
+| Aspetto | Valutazione (1-5) | Commenti |  
+|--------|--------------|----------|  
+| Qualità dei Contenuti | ⭐⭐⭐⭐⭐ | |  
+| Laboratori Pratici | ⭐⭐⭐⭐⭐ | |  
+| Documentazione | ⭐⭐⭐⭐⭐ | |  
+| Livello di Difficoltà | ⭐⭐⭐⭐⭐ | |  
+| Esperienza Complessiva | ⭐⭐⭐⭐⭐ | |  
 
-**Invia feedback**: [Modulo di valutazione del workshop](https://aka.ms/azd-workshop-feedback)
+**Invia il feedback**: [Modulo di Valutazione del Workshop](https://aka.ms/azd-workshop-feedback)  
 
 ---
 
-**Precedente:** [Guida alla risoluzione dei problemi AI](../docs/troubleshooting/ai-troubleshooting.md) | **Successivo:** Inizia con [Laboratorio 1: Fondamenti di AZD](../../../workshop/lab-1-azd-basics)
+**Precedente:** [Guida alla Risoluzione dei Problemi AI](../docs/troubleshooting/ai-troubleshooting.md) | **Successivo:** Inizia con [Laboratorio 1: Fondamenti di AZD](../../../workshop/lab-1-azd-basics)
 
-**Pronto per iniziare a costruire applicazioni AI con AZD?**
+**Pronto a iniziare a costruire applicazioni AI con AZD?**
 
-[Inizia il Laboratorio 1: Fondamenti di AZD →](./lab-1-azd-basics/README.md)
+[Inizia il Laboratorio 1: Fondamenti di AZD →](./lab-1-azd-basics/README.md)  
 
 ---
 

@@ -1,21 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T19:25:15+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T21:25:10+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "br"
 }
 -->
-# Provisionando Recursos - Infraestrutura como Código com AZD
+# Provisionando Recursos do Azure com AZD
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 4 - Infraestrutura como Código e Implantação
+- **⬅️ Anterior**: [Guia de Implantação](deployment-guide.md)
+- **➡️ Próximo Capítulo**: [Capítulo 5: Soluções de IA Multi-Agente](../../examples/retail-scenario.md)
+- **🔧 Relacionado**: [Capítulo 6: Validação Pré-Implantação](../pre-deployment/capacity-planning.md)
 
 ## Introdução
 
-Este guia abrangente cobre tudo o que você precisa saber sobre provisionamento e gerenciamento de recursos do Azure usando o Azure Developer CLI. Aprenda a implementar padrões de Infraestrutura como Código (IaC), desde a criação básica de recursos até arquiteturas avançadas de infraestrutura de nível empresarial usando Bicep, templates ARM, Terraform e Pulumi.
+Este guia abrangente cobre tudo o que você precisa saber sobre provisionamento e gerenciamento de recursos do Azure usando o Azure Developer CLI. Aprenda a implementar padrões de Infraestrutura como Código (IaC), desde a criação básica de recursos até arquiteturas avançadas de infraestrutura empresarial usando Bicep, templates ARM, Terraform e Pulumi.
 
 ## Objetivos de Aprendizado
 
-Ao concluir este guia, você irá:
+Ao concluir este guia, você será capaz de:
 - Dominar os princípios de Infraestrutura como Código e o provisionamento de recursos do Azure
 - Compreender os diversos provedores de IaC suportados pelo Azure Developer CLI
 - Projetar e implementar templates Bicep para arquiteturas comuns de aplicativos
@@ -30,14 +37,14 @@ Ao final, você será capaz de:
 - Configurar arquiteturas complexas de múltiplos serviços com dependências adequadas de recursos
 - Implementar templates parametrizados para múltiplos ambientes e configurações
 - Solucionar problemas de provisionamento de infraestrutura e resolver falhas de implantação
-- Aplicar os princípios do Azure Well-Architected Framework ao design de infraestrutura
-- Gerenciar atualizações de infraestrutura e implementar estratégias de versionamento de infraestrutura
+- Aplicar os princípios do Framework Bem-Arquitetado do Azure ao design de infraestrutura
+- Gerenciar atualizações de infraestrutura e implementar estratégias de versionamento
 
 ## Visão Geral do Provisionamento de Infraestrutura
 
 O Azure Developer CLI suporta diversos provedores de Infraestrutura como Código (IaC):
 - **Bicep** (recomendado) - Linguagem específica de domínio do Azure
-- **Templates ARM** - Templates JSON baseados no Azure Resource Manager
+- **Templates ARM** - Templates JSON do Azure Resource Manager
 - **Terraform** - Ferramenta de infraestrutura multi-cloud
 - **Pulumi** - Infraestrutura moderna como código com linguagens de programação
 
@@ -869,7 +876,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Documentação do Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Templates do Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Centro de Arquitetura do Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Framework Bem-Arquitetado do Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -880,4 +887,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.

@@ -1,43 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T19:14:17+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T21:55:38+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "tr"
 }
 -->
 # Kurulum ve Ayar Kılavuzu
 
-**Önceki:** [Ana Dokümantasyon](../../README.md) | **Sonraki:** [AZD Temelleri](azd-basics.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç
+- **⬅️ Önceki**: [AZD Temelleri](azd-basics.md)
+- **➡️ Sonraki**: [İlk Projeniz](first-project.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-First Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI (azd) aracını sisteminize nasıl kuracağınızı ve yapılandıracağınızı adım adım açıklayacaktır. Farklı işletim sistemleri için çeşitli kurulum yöntemlerini, kimlik doğrulama ayarlarını ve Azure dağıtımları için geliştirme ortamınızı hazırlamak üzere ilk yapılandırmayı öğreneceksiniz.
+Bu kapsamlı kılavuz, Azure Developer CLI (azd) aracını sisteminize nasıl kuracağınızı ve yapılandıracağınızı adım adım açıklayacaktır. Farklı işletim sistemleri için çeşitli kurulum yöntemlerini, kimlik doğrulama ayarlarını ve Azure dağıtımları için geliştirme ortamınızı hazırlamak üzere başlangıç yapılandırmasını öğreneceksiniz.
 
 ## Öğrenme Hedefleri
 
 Bu dersin sonunda:
-- Azure Developer CLI'yi işletim sisteminize başarıyla kurabileceksiniz
-- Azure ile çeşitli yöntemlerle kimlik doğrulama yapabileceksiniz
-- Geliştirme ortamınızı gerekli ön koşullarla kurabileceksiniz
-- Farklı kurulum seçeneklerini ve her birini ne zaman kullanmanız gerektiğini anlayabileceksiniz
-- Yaygın kurulum ve ayar sorunlarını çözebileceksiniz
+- Azure Developer CLI'yi işletim sisteminize başarıyla kurmuş olacaksınız
+- Azure ile çeşitli yöntemler kullanarak kimlik doğrulama yapılandırması yapabileceksiniz
+- Geliştirme ortamınızı gerekli ön koşullarla hazırlayabileceksiniz
+- Farklı kurulum seçeneklerini ve her birinin ne zaman kullanılacağını anlayabileceksiniz
+- Yaygın kurulum ve yapılandırma sorunlarını çözebileceksiniz
 
 ## Öğrenme Çıktıları
 
 Bu dersi tamamladıktan sonra:
-- Platformunuza uygun yöntemi kullanarak azd'yi kurabileceksiniz
-- `azd auth login` komutuyla Azure'da kimlik doğrulama yapabileceksiniz
+- Platformunuz için uygun yöntemi kullanarak azd'yi kurabileceksiniz
+- azd auth login komutunu kullanarak Azure ile kimlik doğrulama yapabileceksiniz
 - Kurulumunuzu doğrulayıp temel azd komutlarını test edebileceksiniz
-- Geliştirme ortamınızı azd'yi en iyi şekilde kullanmak için yapılandırabileceksiniz
+- Geliştirme ortamınızı azd'nin en iyi şekilde kullanımı için yapılandırabileceksiniz
 - Yaygın kurulum sorunlarını bağımsız olarak çözebileceksiniz
 
 Bu kılavuz, işletim sisteminiz veya geliştirme ortamınız ne olursa olsun Azure Developer CLI'yi sisteminize kurmanıza ve yapılandırmanıza yardımcı olacaktır.
 
 ## Ön Koşullar
 
-azd'yi kurmadan önce şunlara sahip olduğunuzdan emin olun:
+azd'yi kurmadan önce aşağıdakilere sahip olduğunuzdan emin olun:
 - **Azure aboneliği** - [Ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/)
 - **Azure CLI** - Kimlik doğrulama ve kaynak yönetimi için
 - **Git** - Şablonları klonlamak ve sürüm kontrolü için
@@ -210,18 +215,18 @@ export AZD_DEBUG=true  # Enable debug logging
 ### Visual Studio Code
 Azure Developer CLI uzantısını kurun:
 1. VS Code'u açın
-2. Uzantılar sekmesine gidin (Ctrl+Shift+X)
+2. Uzantılar bölümüne gidin (Ctrl+Shift+X)
 3. "Azure Developer CLI" arayın
 4. Uzantıyı yükleyin
 
 Özellikler:
-- `azure.yaml` için IntelliSense
+- azure.yaml için IntelliSense
 - Entegre terminal komutları
 - Şablon tarama
 - Dağıtım izleme
 
 ### GitHub Codespaces
-`.devcontainer/devcontainer.json` oluşturun:
+Bir `.devcontainer/devcontainer.json` oluşturun:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -338,11 +343,16 @@ Sorunlarla karşılaşırsanız:
 
 ---
 
-**Önceki:** [Ana Dokümantasyon](../../README.md) | **Sonraki:** [AZD Temelleri](azd-basics.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç
+- **⬅️ Önceki**: [AZD Temelleri](azd-basics.md) 
+- **➡️ Sonraki**: [İlk Projeniz](first-project.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-First Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Kurulum Tamamlandı!** [İlk Projeniz](first-project.md) ile azd kullanarak geliştirmeye başlayın.
+**✅ Kurulum Tamamlandı!** azd ile proje oluşturmaya başlamak için [İlk Projeniz](first-project.md) bölümüne devam edin.
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlama durumunda sorumluluk kabul edilmez.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
