@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T16:56:01+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T14:14:41+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "ja"
 }
 -->
-# AZDの基本 - Azure Developer CLIの理解
+# AZD 基礎 - Azure Developer CLI の理解
 
-**前回:** [インストールとセットアップ](installation.md) | **次回:** [設定](configuration.md)
+# AZD 基礎 - 核となる概念と基本事項
+
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前章**: [コース概要](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ 次章**: [インストールとセットアップ](installation.md)
+- **🚀 次の章**: [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## はじめに
 
-このレッスンでは、Azure Developer CLI (azd) を紹介します。azdは、ローカル開発からAzureへのデプロイを加速する強力なコマンドラインツールです。基本的な概念や主要な機能を学び、azdがクラウドネイティブアプリケーションのデプロイをどのように簡素化するかを理解します。
+このレッスンでは、Azure Developer CLI (azd) を紹介します。これは、ローカル開発からAzureへのデプロイを加速する強力なコマンドラインツールです。基本的な概念、主要な機能を学び、azd がクラウドネイティブアプリケーションのデプロイをどのように簡素化するかを理解します。
 
 ## 学習目標
 
 このレッスンの終わりまでに、以下を理解できるようになります:
-- Azure Developer CLIとは何か、その主な目的
-- テンプレート、環境、サービスの基本概念
-- テンプレート駆動型開発やInfrastructure as Codeの主要機能
-- azdプロジェクトの構造とワークフロー
-- 開発環境に合わせたazdのインストールと設定の準備
+- Azure Developer CLI の目的とその基本的な役割
+- テンプレート、環境、サービスの基本概念を学ぶ
+- テンプレート駆動型開発やInfrastructure as Codeの主要な機能を探る
+- azd プロジェクトの構造とワークフローを理解する
+- 開発環境に azd をインストールして設定する準備を整える
 
 ## 学習成果
 
 このレッスンを完了すると、以下ができるようになります:
-- azdが現代のクラウド開発ワークフローで果たす役割を説明する
-- azdプロジェクト構造の構成要素を特定する
+- azd が現代のクラウド開発ワークフローで果たす役割を説明する
+- azd プロジェクト構造の構成要素を特定する
 - テンプレート、環境、サービスがどのように連携するかを説明する
-- azdを使用したInfrastructure as Codeの利点を理解する
-- azdのさまざまなコマンドとその目的を認識する
+- azd を使用したInfrastructure as Codeの利点を理解する
+- azd のさまざまなコマンドとその目的を認識する
 
-## Azure Developer CLI (azd)とは？
+## Azure Developer CLI (azd) とは？
 
 Azure Developer CLI (azd) は、ローカル開発からAzureへのデプロイを加速するために設計されたコマンドラインツールです。クラウドネイティブアプリケーションの構築、デプロイ、管理プロセスを簡素化します。
 
-## 基本概念
+## 核となる概念
 
 ### テンプレート
-テンプレートはazdの基盤です。以下を含みます:
+テンプレートは azd の基盤です。以下を含みます:
 - **アプリケーションコード** - ソースコードと依存関係
-- **インフラ定義** - BicepやTerraformで定義されたAzureリソース
-- **設定ファイル** - 設定や環境変数
+- **インフラ定義** - Bicep または Terraform で定義された Azure リソース
+- **設定ファイル** - 設定と環境変数
 - **デプロイメントスクリプト** - 自動化されたデプロイメントワークフロー
 
 ### 環境
@@ -53,7 +60,7 @@ Azure Developer CLI (azd) は、ローカル開発からAzureへのデプロイ�
 - **本番** - 実際の運用環境
 
 各環境は以下を個別に保持します:
-- Azureリソースグループ
+- Azure リソースグループ
 - 設定情報
 - デプロイメント状態
 
@@ -64,7 +71,7 @@ Azure Developer CLI (azd) は、ローカル開発からAzureへのデプロイ�
 - **データベース** - データストレージソリューション
 - **ストレージ** - ファイルやBlobストレージ
 
-## 主な機能
+## 主要な機能
 
 ### 1. テンプレート駆動型開発
 ```bash
@@ -76,9 +83,9 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Azureのドメイン固有言語
+- **Bicep** - Azure のドメイン固有言語
 - **Terraform** - マルチクラウドインフラツール
-- **ARMテンプレート** - Azure Resource Managerテンプレート
+- **ARM テンプレート** - Azure Resource Manager テンプレート
 
 ### 3. 統合ワークフロー
 ```bash
@@ -99,7 +106,7 @@ azd env list
 
 ## 📁 プロジェクト構造
 
-典型的なazdプロジェクト構造:
+典型的な azd プロジェクト構造:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -122,7 +129,7 @@ my-app/
 ## 🔧 設定ファイル
 
 ### azure.yaml
-主なプロジェクト設定ファイル:
+主要なプロジェクト設定ファイル:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -159,7 +166,7 @@ hooks:
 }
 ```
 
-## 🎪 よくあるワークフロー
+## 🎪 一般的なワークフロー
 
 ### 新しいプロジェクトの開始
 ```bash
@@ -190,29 +197,28 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## `azd down --force --purge`の理解
-
-`azd down --force --purge` コマンドは、azd環境と関連するすべてのリソースを完全に削除する強力な方法です。各フラグの機能は以下の通りです:
+## `azd down --force --purge` の理解
+`azd down --force --purge` コマンドは、azd 環境と関連するすべてのリソースを完全に削除する強力な方法です。各フラグの機能は以下の通りです:
 ```
 --force
 ```
 - 確認プロンプトをスキップします。
 - 手動入力が難しい自動化やスクリプトに便利です。
-- CLIが不整合を検出しても中断せずに削除を進めます。
+- CLI が不整合を検出しても、削除が中断されないようにします。
 
 ```
 --purge
 ```
 **すべての関連メタデータ**を削除します。これには以下が含まれます:
-- 環境状態
-- ローカル `.azure` フォルダー
-- キャッシュされたデプロイ情報
-- azdが以前のデプロイを「記憶」するのを防ぎます。これにより、リソースグループの不一致や古いレジストリ参照などの問題を回避できます。
+環境状態
+ローカル `.azure` フォルダー
+キャッシュされたデプロイ情報
+以前のデプロイメントを azd が「記憶」しないようにし、リソースグループの不一致や古いレジストリ参照などの問題を防ぎます。
 
 ### 両方を使用する理由
 `azd up` が残存状態や部分的なデプロイメントのために問題を引き起こした場合、この組み合わせは**完全なリセット**を保証します。
 
-特にAzureポータルで手動でリソースを削除した後や、テンプレート、環境、リソースグループ命名規則を切り替える際に役立ちます。
+特に、Azure ポータルで手動でリソースを削除した後や、テンプレート、環境、リソースグループ命名規則を切り替える際に役立ちます。
 
 ### 複数環境の管理
 ```bash
@@ -267,10 +273,10 @@ azd init --template template1
 ### 2. テンプレートを活用する
 - 既存のテンプレートから始める
 - ニーズに合わせてカスタマイズする
-- 組織向けの再利用可能なテンプレートを作成する
+- 組織向けに再利用可能なテンプレートを作成する
 
 ### 3. 環境の分離
-- 開発/ステージング/本番用に環境を分ける
+- 開発/ステージング/本番用に別々の環境を使用する
 - ローカルマシンから直接本番にデプロイしない
 - 本番デプロイにはCI/CDパイプラインを使用する
 
@@ -282,41 +288,49 @@ azd init --template template1
 ## 学習の進行
 
 ### 初級 (1〜2週目)
-1. azdをインストールして認証する
+1. azd をインストールして認証する
 2. シンプルなテンプレートをデプロイする
 3. プロジェクト構造を理解する
-4. 基本コマンド (up, down, deploy) を学ぶ
+4. 基本的なコマンド (up, down, deploy) を学ぶ
 
 ### 中級 (3〜4週目)
 1. テンプレートをカスタマイズする
 2. 複数環境を管理する
 3. インフラコードを理解する
-4. CI/CDパイプラインを設定する
+4. CI/CD パイプラインを設定する
 
 ### 上級 (5週目以降)
 1. カスタムテンプレートを作成する
-2. 高度なインフラパターン
-3. マルチリージョンデプロイ
-4. エンタープライズ向け設定
+2. 高度なインフラパターンを学ぶ
+3. マルチリージョンデプロイメントを行う
+4. エンタープライズ向けの設定を構築する
 
 ## 次のステップ
 
-- [インストールとセットアップ](installation.md) - azdのインストールと設定
-- [最初のプロジェクト](first-project.md) - 実践的なチュートリアル
+**📖 第1章の学習を続ける:**
+- [インストールとセットアップ](installation.md) - azd をインストールして設定する
+- [最初のプロジェクト](first-project.md) - 実践的なチュートリアルを完了する
 - [設定ガイド](configuration.md) - 高度な設定オプション
+
+**🎯 次の章に進む準備はできましたか？**
+- [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md) - AIアプリケーションの構築を開始する
 
 ## 追加リソース
 
-- [Azure Developer CLI概要](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Developer CLI 概要](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [テンプレートギャラリー](https://azure.github.io/awesome-azd/)
 - [コミュニティサンプル](https://github.com/Azure-Samples)
 
 ---
 
-**前回:** [インストールとセットアップ](installation.md) | **次回:** [設定](configuration.md)
-- **次のレッスン**: [インストールとセットアップ](installation.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート  
+- **⬅️ 前章**: [コース概要](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ 次章**: [インストールとセットアップ](installation.md)
+- **🚀 次の章**: [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は一切の責任を負いません。
+この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。

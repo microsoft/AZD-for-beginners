@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:32:55+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T14:47:11+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "pt"
 }
 -->
 # Integração do Azure AI Foundry com AZD
 
-**Anterior:** [Primeiro Projeto](../getting-started/first-project.md) | **Próximo:** [Implementação de Modelos de IA](ai-model-deployment.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento Orientado por IA
+- **⬅️ Capítulo Anterior**: [Capítulo 1: O Seu Primeiro Projeto](../getting-started/first-project.md)
+- **➡️ Próximo**: [Implementação de Modelos de IA](ai-model-deployment.md)
+- **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../getting-started/configuration.md)
 
 ## Visão Geral
 
-Este guia demonstra como integrar os serviços do Azure AI Foundry com o Azure Developer CLI (AZD) para facilitar a implementação de aplicações de IA. O Azure AI Foundry oferece uma plataforma abrangente para criar, implementar e gerir aplicações de IA, enquanto o AZD simplifica o processo de infraestrutura e implementação.
+Este guia demonstra como integrar os serviços do Azure AI Foundry com o Azure Developer CLI (AZD) para facilitar a implementação de aplicações de IA. O Azure AI Foundry oferece uma plataforma abrangente para criar, implementar e gerenciar aplicações de IA, enquanto o AZD simplifica o processo de infraestrutura e implementação.
 
 ## O que é o Azure AI Foundry?
 
@@ -23,7 +28,7 @@ O Azure AI Foundry é a plataforma unificada da Microsoft para desenvolvimento d
 - **Prompt Flow**: Designer visual para fluxos de trabalho de IA
 - **Portal AI Foundry**: Ambiente integrado de desenvolvimento para aplicações de IA
 - **Opções de Implementação**: Múltiplas opções de hospedagem e escalabilidade
-- **Segurança e Proteção**: Funcionalidades integradas de IA responsável
+- **Segurança e Proteção**: Recursos integrados de IA responsável
 
 ## AZD + Azure AI Foundry: Melhor Juntos
 
@@ -31,9 +36,9 @@ O Azure AI Foundry é a plataforma unificada da Microsoft para desenvolvimento d
 |----------------|------------------|---------------------------------|
 | **Implementação de Modelos** | Implementação manual via portal | Implementações automatizadas e repetíveis |
 | **Infraestrutura** | Provisionamento manual | Infraestrutura como Código (Bicep) |
-| **Gestão de Ambientes** | Foco em um único ambiente | Multi-ambiente (dev/staging/prod) |
+| **Gestão de Ambientes** | Foco em um único ambiente | Multiambiente (dev/staging/prod) |
 | **Integração CI/CD** | Limitada | Suporte nativo ao GitHub Actions |
-| **Gestão de Custos** | Monitorização básica | Otimização de custos específica por ambiente |
+| **Gestão de Custos** | Monitorização básica | Otimização de custos por ambiente |
 
 ## Pré-requisitos
 
@@ -220,9 +225,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Fluxos de Implementação
+## Fluxos de Trabalho de Implementação
 
-### Implementação com um Único Comando
+### Implementação com Comando Único
 
 ```bash
 # Deploy everything with one command
@@ -313,7 +318,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Melhores Práticas de Segurança
+## 🔐 Práticas de Segurança Recomendadas
 
 ### Configuração de Identidade Gerida
 
@@ -481,7 +486,7 @@ az cognitiveservices model list --location eastus
 # Check model capacity requirements
 ```
 
-## Exemplos de Templates
+## Modelos de Exemplo
 
 ### Aplicação de Chat Básica
 
@@ -521,24 +526,29 @@ azd up
 
 ## Próximos Passos
 
-1. **Experimente os Exemplos**: Comece com um template pré-construído que corresponda ao seu caso de uso
+1. **Experimente os Exemplos**: Comece com um modelo pré-construído que corresponda ao seu caso de uso
 2. **Personalize para as Suas Necessidades**: Modifique a infraestrutura e o código da aplicação
 3. **Adicione Monitorização**: Implemente observabilidade abrangente
 4. **Otimize Custos**: Ajuste as configurações ao seu orçamento
 5. **Proteja a Sua Implementação**: Aplique padrões de segurança empresariais
-6. **Escale para Produção**: Adicione recursos de multi-região e alta disponibilidade
+6. **Escale para Produção**: Adicione recursos de alta disponibilidade e multirregião
 
 ## Comunidade e Suporte
 
-- **Discord do Azure AI Foundry**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Discord do Azure AI Foundry**: [Canal #Azure](https://discord.gg/microsoft-azure)
 - **GitHub do AZD**: [Problemas e discussões](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Documentação oficial](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**Anterior:** [Primeiro Projeto](../getting-started/first-project.md) | **Próximo:** [Implementação de Modelos de IA](ai-model-deployment.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento Orientado por IA
+- **⬅️ Capítulo Anterior**: [Capítulo 1: O Seu Primeiro Projeto](../getting-started/first-project.md)
+- **➡️ Próximo**: [Implementação de Modelos de IA](ai-model-deployment.md)
+- **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../getting-started/configuration.md)
 
-**Precisa de Ajuda?** Junte-se às discussões da comunidade ou abra um problema no repositório. A comunidade Azure AI + AZD está aqui para ajudá-lo a ter sucesso!
+**Precisa de Ajuda?** Participe das discussões da comunidade ou abra um problema no repositório. A comunidade Azure AI + AZD está aqui para ajudá-lo a ter sucesso!
 
 ---
 

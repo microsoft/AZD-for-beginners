@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T17:40:49+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T14:32:01+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "ko"
 }
 -->
 # Azure Developer CLI를 활용한 AI 모델 배포
 
-**이전:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **다음:** [AI Workshop Lab](ai-workshop-lab.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 2 - AI 우선 개발
+- **⬅️ 이전**: [Azure AI Foundry 통합](azure-ai-foundry-integration.md)
+- **➡️ 다음**: [AI 워크숍 실습](ai-workshop-lab.md)
+- **🚀 다음 챕터**: [챕터 3: 구성](../getting-started/configuration.md)
 
-이 가이드는 AZD 템플릿을 사용하여 AI 모델을 배포하는 방법에 대한 포괄적인 지침을 제공합니다. 모델 선택부터 프로덕션 배포 패턴까지 모든 내용을 다룹니다.
+이 가이드는 AZD 템플릿을 사용하여 AI 모델을 배포하는 포괄적인 지침을 제공하며, 모델 선택부터 프로덕션 배포 패턴까지 다룹니다.
 
 ## 목차
 
@@ -59,7 +64,7 @@ services:
 | 모델 유형 | 사용 사례 | 권장 용량 | 비용 고려사항 |
 |------------|----------|---------------------|-------------------|
 | GPT-4o-mini | 채팅, Q&A | 10-50 TPM | 대부분의 워크로드에 비용 효율적 |
-| GPT-4 | 복잡한 추론 | 20-100 TPM | 높은 비용, 프리미엄 기능에 적합 |
+| GPT-4 | 복잡한 추론 | 20-100 TPM | 높은 비용, 프리미엄 기능에 사용 |
 | Text-embedding-ada-002 | 검색, RAG | 30-120 TPM | 의미론적 검색에 필수적 |
 | Whisper | 음성-텍스트 변환 | 10-50 TPM | 오디오 처리 워크로드 |
 
@@ -246,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### A/B 테스트
 
-다양한 모델 버전을 배포하세요:
+여러 모델 버전을 배포하세요:
 
 ```bicep
 param enableABTesting bool = false
@@ -299,7 +304,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### 자동 확장 구성
 
-Container Apps의 자동 확장을 구성하세요:
+Container Apps에 대한 자동 확장을 구성하세요:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -371,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights 통합
 
-AI 워크로드 모니터링을 구성하세요:
+AI 워크로드에 대한 모니터링을 구성하세요:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -409,7 +414,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### 사용자 정의 메트릭
 
-AI 관련 메트릭을 추적하세요:
+AI 특화 메트릭을 추적하세요:
 
 ```python
 # Custom telemetry for AI models
@@ -444,7 +449,7 @@ class AITelemetry:
         )
 ```
 
-### 상태 점검
+### 상태 확인
 
 AI 서비스 상태 모니터링을 구현하세요:
 
@@ -477,10 +482,10 @@ async def check_ai_models():
 
 ## 다음 단계
 
-1. **[Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)**를 검토하여 서비스 통합 패턴을 확인하세요.
-2. **[AI Workshop Lab](ai-workshop-lab.md)**을 완료하여 실습 경험을 얻으세요.
-3. **[Production AI Practices](production-ai-practices.md)**를 구현하여 엔터프라이즈 배포를 준비하세요.
-4. **[AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)**를 탐색하여 일반적인 문제를 해결하세요.
+1. **[Azure AI Foundry 통합 가이드](azure-ai-foundry-integration.md)**를 검토하여 서비스 통합 패턴을 확인하세요
+2. **[AI 워크숍 실습](ai-workshop-lab.md)**을 완료하여 실습 경험을 쌓으세요
+3. **[프로덕션 AI 실무](production-ai-practices.md)**를 구현하여 엔터프라이즈 배포를 준비하세요
+4. **[AI 문제 해결 가이드](../troubleshooting/ai-troubleshooting.md)**를 탐색하여 일반적인 문제를 해결하세요
 
 ## 리소스
 
@@ -491,7 +496,12 @@ async def check_ai_models():
 
 ---
 
-**이전:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **다음:** [AI Workshop Lab](ai-workshop-lab.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 2 - AI 우선 개발
+- **⬅️ 이전**: [Azure AI Foundry 통합](azure-ai-foundry-integration.md)
+- **➡️ 다음**: [AI 워크숍 실습](ai-workshop-lab.md)
+- **🚀 다음 챕터**: [챕터 3: 구성](../getting-started/configuration.md)
 
 ---
 

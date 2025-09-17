@@ -1,24 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T16:55:21+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T14:13:48+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "ja"
 }
 -->
 # インストールとセットアップガイド
 
-**前回:** [メインドキュメント](../../README.md) | **次回:** [AZDの基本](azd-basics.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前章**: [AZDの基本](azd-basics.md)
+- **➡️ 次章**: [初めてのプロジェクト](first-project.md)
+- **🚀 次の章**: [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLI (azd) をシステムにインストールし、設定する方法を説明します。異なるオペレーティングシステム向けの複数のインストール方法、認証設定、初期構成について学び、Azureデプロイメントのための開発環境を準備します。
+この包括的なガイドでは、Azure Developer CLI (azd) をシステムにインストールして設定する方法を説明します。異なるオペレーティングシステム向けの複数のインストール方法、認証設定、Azureデプロイメントの準備のための初期設定について学びます。
 
 ## 学習目標
 
 このレッスンの終了時には以下を達成できます:
-- 使用しているオペレーティングシステムにAzure Developer CLIをインストールする
+- Azure Developer CLI をオペレーティングシステムにインストールする
 - 複数の方法でAzureの認証を設定する
 - 必要な前提条件を備えた開発環境をセットアップする
 - 異なるインストールオプションとその使用タイミングを理解する
@@ -30,14 +35,14 @@ CO_OP_TRANSLATOR_METADATA:
 - プラットフォームに適した方法でazdをインストールする
 - `azd auth login` を使用してAzureに認証する
 - インストールを確認し、基本的なazdコマンドをテストする
-- azdを最適に使用するための開発環境を構成する
-- 一般的なインストール問題を自力で解決する
+- azdを最適に使用するための開発環境を設定する
+- 一般的なインストールの問題を自力で解決する
 
-このガイドは、オペレーティングシステムや開発環境に関係なく、Azure Developer CLIをシステムにインストールして設定する方法を提供します。
+このガイドは、オペレーティングシステムや開発環境に関係なく、Azure Developer CLI をシステムにインストールして設定する方法をサポートします。
 
 ## 前提条件
 
-azdをインストールする前に、以下を確認してください:
+azdをインストールする前に以下を確認してください:
 - **Azureサブスクリプション** - [無料アカウントを作成](https://azure.microsoft.com/free/)
 - **Azure CLI** - 認証とリソース管理のため
 - **Git** - テンプレートのクローン作成とバージョン管理のため
@@ -64,8 +69,8 @@ choco install azd
 ```
 
 #### オプション4: 手動インストール
-1. [GitHub](https://github.com/Azure/azure-dev/releases)から最新リリースをダウンロード
-2. `C:\Program Files\azd\` に展開
+1. [GitHub](https://github.com/Azure/azure-dev/releases) から最新リリースをダウンロード
+2. `C:\Program Files\azd\` に解凍
 3. PATH環境変数に追加
 
 ### macOS
@@ -171,7 +176,7 @@ az login --use-device-code
 ```
 
 ### サービスプリンシパル (CI/CD)
-自動化環境向け:
+自動化された環境向け:
 ```bash
 az login --service-principal \
   --username <client-id> \
@@ -179,9 +184,9 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 構成
+## 設定
 
-### グローバル構成
+### グローバル設定
 ```bash
 # Set default subscription
 azd config set defaults.subscription <subscription-id>
@@ -215,7 +220,7 @@ Azure Developer CLI拡張機能をインストール:
 4. 拡張機能をインストール
 
 機能:
-- `azure.yaml` のIntelliSense
+- `azure.yaml` のためのIntelliSense
 - 統合ターミナルコマンド
 - テンプレートの閲覧
 - デプロイメントのモニタリング
@@ -235,7 +240,7 @@ Azure Developer CLI拡張機能をインストール:
 
 ### IntelliJ/JetBrains
 1. Azureプラグインをインストール
-2. Azureの資格情報を設定
+2. Azureの認証情報を設定
 3. 統合ターミナルでazdコマンドを使用
 
 ## 🐛 インストールのトラブルシューティング
@@ -324,9 +329,9 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## 次のステップ
 
 1. **認証を完了する**: Azureサブスクリプションにアクセスできることを確認
-2. **最初のデプロイを試す**: [最初のプロジェクトガイド](first-project.md) に従う
+2. **初めてのデプロイを試す**: [初めてのプロジェクトガイド](first-project.md) に従う
 3. **テンプレートを探索する**: `azd template list` を使用して利用可能なテンプレートを閲覧
-4. **IDEを構成する**: 開発環境をセットアップ
+4. **IDEを設定する**: 開発環境をセットアップ
 
 ## サポート
 
@@ -338,9 +343,14 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ---
 
-**前回:** [メインドキュメント](../../README.md) | **次回:** [AZDの基本](azd-basics.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前章**: [AZDの基本](azd-basics.md) 
+- **➡️ 次章**: [初めてのプロジェクト](first-project.md)
+- **🚀 次の章**: [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md)
 
-**インストール完了！** [最初のプロジェクト](first-project.md) に進み、azdを使った構築を始めましょう。
+**✅ インストール完了！** [初めてのプロジェクト](first-project.md) に進んで、azdを使った構築を始めましょう。
 
 ---
 

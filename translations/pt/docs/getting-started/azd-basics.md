@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T17:02:23+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T14:49:20+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "pt"
 }
 -->
-# Noções Básicas do AZD - Compreender o Azure Developer CLI
+# AZD Básico - Compreender o Azure Developer CLI
 
-**Anterior:** [Instalação e Configuração](installation.md) | **Próximo:** [Configuração](configuration.md)
+# AZD Básico - Conceitos e Fundamentos Essenciais
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos & Início Rápido
+- **⬅️ Anterior**: [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Próximo**: [Instalação & Configuração](installation.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introdução
 
-Esta lição apresenta o Azure Developer CLI (azd), uma ferramenta poderosa de linha de comando que acelera a sua jornada desde o desenvolvimento local até à implementação no Azure. Vai aprender os conceitos fundamentais, as principais funcionalidades e compreender como o azd simplifica a implementação de aplicações nativas na cloud.
+Esta lição apresenta o Azure Developer CLI (azd), uma ferramenta poderosa de linha de comando que acelera a sua jornada desde o desenvolvimento local até a implementação no Azure. Você aprenderá os conceitos fundamentais, os recursos principais e entenderá como o azd simplifica a implementação de aplicações nativas na nuvem.
 
 ## Objetivos de Aprendizagem
 
-Até ao final desta lição, irá:
-- Compreender o que é o Azure Developer CLI e o seu propósito principal
-- Aprender os conceitos fundamentais de templates, ambientes e serviços
-- Explorar funcionalidades-chave, incluindo desenvolvimento orientado por templates e Infrastructure as Code
-- Compreender a estrutura e o fluxo de trabalho de projetos azd
+Ao final desta lição, você será capaz de:
+- Compreender o que é o Azure Developer CLI e seu propósito principal
+- Aprender os conceitos essenciais de templates, ambientes e serviços
+- Explorar os recursos principais, incluindo desenvolvimento orientado por templates e Infraestrutura como Código
+- Entender a estrutura e o fluxo de trabalho de projetos azd
 - Estar preparado para instalar e configurar o azd no seu ambiente de desenvolvimento
 
 ## Resultados de Aprendizagem
 
-Após completar esta lição, será capaz de:
-- Explicar o papel do azd nos fluxos de trabalho modernos de desenvolvimento na cloud
+Após concluir esta lição, você será capaz de:
+- Explicar o papel do azd nos fluxos de trabalho modernos de desenvolvimento na nuvem
 - Identificar os componentes da estrutura de um projeto azd
-- Descrever como os templates, ambientes e serviços funcionam em conjunto
-- Compreender os benefícios da Infrastructure as Code com azd
-- Reconhecer diferentes comandos do azd e os seus propósitos
+- Descrever como templates, ambientes e serviços funcionam em conjunto
+- Compreender os benefícios da Infraestrutura como Código com azd
+- Reconhecer diferentes comandos do azd e seus propósitos
 
 ## O que é o Azure Developer CLI (azd)?
 
-O Azure Developer CLI (azd) é uma ferramenta de linha de comando concebida para acelerar a sua jornada desde o desenvolvimento local até à implementação no Azure. Simplifica o processo de criação, implementação e gestão de aplicações nativas na cloud no Azure.
+O Azure Developer CLI (azd) é uma ferramenta de linha de comando projetada para acelerar sua jornada desde o desenvolvimento local até a implementação no Azure. Ele simplifica o processo de criação, implementação e gestão de aplicações nativas na nuvem no Azure.
 
-## Conceitos Fundamentais
+## Conceitos Essenciais
 
 ### Templates
 Os templates são a base do azd. Eles contêm:
-- **Código da aplicação** - O seu código-fonte e dependências
+- **Código da aplicação** - Seu código-fonte e dependências
 - **Definições de infraestrutura** - Recursos do Azure definidos em Bicep ou Terraform
-- **Ficheiros de configuração** - Definições e variáveis de ambiente
+- **Arquivos de configuração** - Configurações e variáveis de ambiente
 - **Scripts de implementação** - Fluxos de trabalho automatizados de implementação
 
 ### Ambientes
@@ -52,19 +59,19 @@ Os ambientes representam diferentes alvos de implementação:
 - **Staging** - Ambiente de pré-produção
 - **Produção** - Ambiente de produção ao vivo
 
-Cada ambiente mantém o seu próprio:
+Cada ambiente mantém seu próprio:
 - Grupo de recursos do Azure
-- Definições de configuração
+- Configurações específicas
 - Estado de implementação
 
 ### Serviços
 Os serviços são os blocos de construção da sua aplicação:
 - **Frontend** - Aplicações web, SPAs
-- **Backend** - APIs, microserviços
+- **Backend** - APIs, microsserviços
 - **Base de dados** - Soluções de armazenamento de dados
-- **Armazenamento** - Armazenamento de ficheiros e blobs
+- **Armazenamento** - Armazenamento de arquivos e blobs
 
-## Funcionalidades Principais
+## Recursos Principais
 
 ### 1. Desenvolvimento Orientado por Templates
 ```bash
@@ -75,10 +82,10 @@ azd template list
 azd init --template <template-name>
 ```
 
-### 2. Infrastructure as Code
-- **Bicep** - Linguagem específica de domínio do Azure
-- **Terraform** - Ferramenta de infraestrutura multi-cloud
-- **ARM Templates** - Templates do Azure Resource Manager
+### 2. Infraestrutura como Código
+- **Bicep** - Linguagem específica do Azure
+- **Terraform** - Ferramenta de infraestrutura multi-nuvem
+- **Templates ARM** - Templates do Azure Resource Manager
 
 ### 3. Fluxos de Trabalho Integrados
 ```bash
@@ -119,10 +126,10 @@ my-app/
 └── README.md
 ```
 
-## 🔧 Ficheiros de Configuração
+## 🔧 Arquivos de Configuração
 
 ### azure.yaml
-O ficheiro principal de configuração do projeto:
+O principal arquivo de configuração do projeto:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -161,7 +168,7 @@ Configuração específica do ambiente:
 
 ## 🎪 Fluxos de Trabalho Comuns
 
-### Iniciar um Novo Projeto
+### Iniciando um Novo Projeto
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -190,30 +197,30 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## Compreender `azd down --force --purge`
-O comando `azd down --force --purge` é uma forma poderosa de desmontar completamente o seu ambiente azd e todos os recursos associados. Aqui está uma explicação do que cada parâmetro faz:
+## Compreendendo `azd down --force --purge`
+O comando `azd down --force --purge` é uma forma poderosa de desmontar completamente o seu ambiente azd e todos os recursos associados. Aqui está um resumo do que cada parâmetro faz:
 ```
 --force
 ```
 - Ignora os prompts de confirmação.
 - Útil para automação ou scripts onde a entrada manual não é viável.
-- Garante que a desmontagem prossegue sem interrupções, mesmo que o CLI detete inconsistências.
+- Garante que o processo de desmontagem ocorra sem interrupções, mesmo que o CLI detecte inconsistências.
 
 ```
 --purge
 ```
-Elimina **todos os metadados associados**, incluindo:
+Exclui **todos os metadados associados**, incluindo:
 Estado do ambiente  
 Pasta local `.azure`  
 Informações de implementação em cache  
-Impede que o azd "lembre-se" de implementações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências obsoletas de registo.
+Impede que o azd "lembre" implementações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências obsoletas de registro.
 
 ### Por que usar ambos?
-Quando encontra problemas com `azd up` devido a estado persistente ou implementações parciais, esta combinação garante um **novo começo**.
+Quando você encontra problemas com `azd up` devido a estados persistentes ou implementações parciais, esta combinação garante um **novo começo**.
 
-É especialmente útil após eliminações manuais de recursos no portal do Azure ou ao alternar entre templates, ambientes ou convenções de nomenclatura de grupos de recursos.
+É especialmente útil após exclusões manuais de recursos no portal do Azure ou ao alternar templates, ambientes ou convenções de nomenclatura de grupos de recursos.
 
-### Gestão de Múltiplos Ambientes
+### Gerindo Múltiplos Ambientes
 ```bash
 # Create staging environment
 azd env new staging
@@ -265,8 +272,8 @@ azd init --template template1
 
 ### 2. Aproveite os Templates
 - Comece com templates existentes
-- Personalize conforme as suas necessidades
-- Crie templates reutilizáveis para a sua organização
+- Personalize conforme suas necessidades
+- Crie templates reutilizáveis para sua organização
 
 ### 3. Isolamento de Ambientes
 - Use ambientes separados para desenvolvimento/staging/produção
@@ -275,8 +282,8 @@ azd init --template template1
 
 ### 4. Gestão de Configuração
 - Use variáveis de ambiente para dados sensíveis
-- Mantenha a configuração sob controlo de versão
-- Documente as definições específicas de cada ambiente
+- Mantenha a configuração sob controle de versão
+- Documente configurações específicas de cada ambiente
 
 ## Progressão de Aprendizagem
 
@@ -286,7 +293,7 @@ azd init --template template1
 3. Compreender a estrutura do projeto
 4. Aprender comandos básicos (up, down, deploy)
 
-### Intermédio (Semana 3-4)
+### Intermediário (Semana 3-4)
 1. Personalizar templates
 2. Gerir múltiplos ambientes
 3. Compreender o código de infraestrutura
@@ -295,14 +302,18 @@ azd init --template template1
 ### Avançado (Semana 5+)
 1. Criar templates personalizados
 2. Padrões avançados de infraestrutura
-3. Implementações multi-região
+3. Implementações em múltiplas regiões
 4. Configurações de nível empresarial
 
 ## Próximos Passos
 
-- [Instalação e Configuração](installation.md) - Instale e configure o azd
-- [O Seu Primeiro Projeto](first-project.md) - Tutorial prático
+**📖 Continue o Aprendizado do Capítulo 1:**
+- [Instalação & Configuração](installation.md) - Instale e configure o azd
+- [Seu Primeiro Projeto](first-project.md) - Tutorial prático completo
 - [Guia de Configuração](configuration.md) - Opções avançadas de configuração
+
+**🎯 Pronto para o Próximo Capítulo?**
+- [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md) - Comece a criar aplicações de IA
 
 ## Recursos Adicionais
 
@@ -312,8 +323,12 @@ azd init --template template1
 
 ---
 
-**Anterior:** [Instalação e Configuração](installation.md) | **Próximo:** [Configuração](configuration.md)  
-- **Próxima Lição**: [Instalação e Configuração](installation.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos & Início Rápido  
+- **⬅️ Anterior**: [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Próximo**: [Instalação & Configuração](installation.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T17:53:26+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-17T15:11:30+00:00",
   "source_file": "resources/faq.md",
   "language_code": "es"
 }
 -->
 # Preguntas Frecuentes (FAQ)
 
+**Obtén Ayuda por Capítulo**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../README.md)
+- **🚆 Problemas de Instalación**: [Capítulo 1: Instalación y Configuración](../docs/getting-started/installation.md)
+- **🤖 Preguntas sobre IA**: [Capítulo 2: Desarrollo con IA](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Resolución de Problemas**: [Capítulo 7: Solución de Problemas y Depuración](../docs/troubleshooting/common-issues.md)
+
 ## Introducción
 
-Este FAQ completo proporciona respuestas a las preguntas más comunes sobre Azure Developer CLI (azd) y los despliegues en Azure. Encuentra soluciones rápidas a problemas comunes, comprende las mejores prácticas y obtén aclaraciones sobre conceptos y flujos de trabajo de azd.
+Este FAQ completo proporciona respuestas a las preguntas más comunes sobre Azure Developer CLI (azd) y despliegues en Azure. Encuentra soluciones rápidas a problemas comunes, comprende las mejores prácticas y aclara conceptos y flujos de trabajo de azd.
 
 ## Objetivos de Aprendizaje
 
@@ -60,9 +66,9 @@ Con referencia regular a este FAQ, serás capaz de:
 - azd incluye plantillas, gestión de entornos y automatización de despliegues
 
 ### P: ¿Necesito tener Azure CLI instalado para usar azd?
-**R**: Sí, azd requiere Azure CLI para la autenticación y algunas operaciones. Instala Azure CLI primero y luego instala azd.
+**R**: Sí, azd requiere Azure CLI para autenticación y algunas operaciones. Instala Azure CLI primero y luego instala azd.
 
-### P: ¿Qué lenguajes de programación soporta azd?
+### P: ¿Qué lenguajes de programación admite azd?
 **R**: azd es independiente del lenguaje. Funciona con:
 - Node.js/JavaScript/TypeScript
 - Python
@@ -96,7 +102,7 @@ Con referencia regular a este FAQ, serás capaz de:
 - Los permisos específicos varían según la plantilla y los recursos que se despliegan
 
 ### P: ¿Puedo usar azd en pipelines de CI/CD?
-**R**: ¡Por supuesto! azd está diseñado para integrarse con CI/CD. Usa principales de servicio para la autenticación y configura variables de entorno.
+**R**: ¡Por supuesto! azd está diseñado para integración con CI/CD. Usa principales de servicio para la autenticación y configura variables de entorno para la configuración.
 
 ### P: ¿Cómo manejo la autenticación en GitHub Actions?
 **R**: Usa la acción de inicio de sesión de Azure con credenciales de principal de servicio:
@@ -150,7 +156,7 @@ Con referencia regular a este FAQ, serás capaz de:
 - Recursos de red, seguridad y monitoreo
 
 ### P: ¿Puedo desplegar en múltiples regiones?
-**R**: Sí, configura múltiples regiones en tus plantillas Bicep y ajusta el parámetro de ubicación apropiadamente para cada entorno.
+**R**: Sí, configura múltiples regiones en tus plantillas Bicep y establece el parámetro de ubicación apropiadamente para cada entorno.
 
 ### P: ¿Cómo manejo las migraciones de esquemas de bases de datos?
 **R**: Usa hooks de despliegue en `azure.yaml`:
@@ -173,7 +179,7 @@ hooks:
 3. Modificar las plantillas para crear o referenciar recursos condicionalmente
 
 ### P: ¿Puedo usar Terraform en lugar de Bicep?
-**R**: Actualmente, azd soporta principalmente plantillas Bicep/ARM. El soporte para Terraform no está oficialmente disponible, aunque pueden existir soluciones de la comunidad.
+**R**: Actualmente, azd admite principalmente plantillas Bicep/ARM. El soporte para Terraform no está oficialmente disponible, aunque pueden existir soluciones de la comunidad.
 
 ---
 
@@ -203,8 +209,8 @@ azd env set DATABASE_TIER Basic
 2. Usa scripts de despliegue para configurar entornos
 3. Usa Azure Key Vault para configuraciones sensibles
 
-### P: ¿Cómo sobrescribo los valores predeterminados de las plantillas?
-**R**: Configura variables de entorno que correspondan a los parámetros de las plantillas:
+### P: ¿Cómo sobrescribo los valores predeterminados de la plantilla?
+**R**: Configura variables de entorno que correspondan a los parámetros de la plantilla:
 ```bash
 azd env set LOCATION "West US 2"
 azd env set SKU_NAME "B1"
@@ -222,9 +228,9 @@ azd env set SKU_NAME "B1"
 4. **Problemas de cuota/capacidad**: Verifica la disponibilidad regional
 5. **Errores en la plantilla**: Valida las plantillas Bicep
 
-### P: ¿Cómo depuro fallos en el despliegue?
+### P: ¿Cómo depuro fallos de despliegue?
 **R**: 
-1. Usa `azd deploy --debug` para obtener salida detallada
+1. Usa `azd deploy --debug` para salida detallada
 2. Revisa el historial de despliegue en el portal de Azure
 3. Consulta el Registro de Actividades en el portal de Azure
 4. Usa `azd show` para mostrar el estado actual del entorno
@@ -232,7 +238,7 @@ azd env set SKU_NAME "B1"
 ### P: ¿Por qué no funcionan mis variables de entorno?
 **R**: Verifica:
 1. Los nombres de las variables coinciden exactamente con los parámetros de la plantilla
-2. Los valores están correctamente entre comillas si contienen espacios
+2. Los valores están correctamente entrecomillados si contienen espacios
 3. El entorno está seleccionado: `azd env select <environment>`
 4. Las variables están configuradas en el entorno correcto
 
@@ -246,9 +252,9 @@ Esto elimina todos los recursos y la configuración del entorno.
 ### P: ¿Por qué mi aplicación no es accesible después del despliegue?
 **R**: Verifica:
 1. El despliegue se completó exitosamente
-2. La aplicación está en ejecución (consulta los registros en el portal de Azure)
+2. La aplicación está en ejecución (revisa los logs en el portal de Azure)
 3. Los grupos de seguridad de red permiten tráfico
-4. Los DNS/dominios personalizados están configurados correctamente
+4. Los dominios DNS/personalizados están configurados correctamente
 
 ---
 
@@ -256,16 +262,16 @@ Esto elimina todos los recursos y la configuración del entorno.
 
 ### P: ¿Cuánto costarán los despliegues de azd?
 **R**: Los costos dependen de:
-- Los servicios de Azure desplegados
-- Los niveles/planes de servicio seleccionados
-- Las diferencias de precios regionales
-- Los patrones de uso
+- Servicios de Azure desplegados
+- Niveles/SKUs de servicio seleccionados
+- Diferencias de precios regionales
+- Patrones de uso
 
 Usa el [Calculador de Precios de Azure](https://azure.microsoft.com/pricing/calculator/) para estimaciones.
 
-### P: ¿Cómo controlo los costos en los despliegues de azd?
+### P: ¿Cómo controlo los costos en despliegues de azd?
 **R**: 
-1. Usa niveles más bajos para entornos de desarrollo
+1. Usa SKUs de nivel inferior para entornos de desarrollo
 2. Configura presupuestos y alertas en Azure
 3. Usa `azd down` para eliminar recursos cuando no sean necesarios
 4. Elige regiones apropiadas (los costos varían según la ubicación)
@@ -280,10 +286,10 @@ Usa el [Calculador de Precios de Azure](https://azure.microsoft.com/pricing/calc
 
 Configura las plantillas para usar niveles gratuitos donde estén disponibles.
 
-### P: ¿Cómo estimo los costos antes del despliegue?
+### P: ¿Cómo estimo costos antes del despliegue?
 **R**: 
 1. Revisa el `main.bicep` de la plantilla para ver qué recursos se crean
-2. Usa el Calculador de Precios de Azure con planes específicos
+2. Usa el Calculador de Precios de Azure con SKUs específicos
 3. Despliega en un entorno de desarrollo primero para monitorear costos reales
 4. Usa Gestión de Costos de Azure para análisis detallado de costos
 
@@ -330,14 +336,14 @@ Configura las plantillas para usar niveles gratuitos donde estén disponibles.
 2. Implementa pruebas automatizadas antes del despliegue
 3. Usa principales de servicio para la autenticación
 4. Almacena configuraciones sensibles en secretos/variables del pipeline
-5. Implementa aprobaciones para despliegues en producción
+5. Implementa puertas de aprobación para despliegues en producción
 
 ---
 
 ## Temas Avanzados
 
 ### P: ¿Puedo extender azd con funcionalidad personalizada?
-**R**: Sí, mediante hooks de despliegue en `azure.yaml`:
+**R**: Sí, a través de hooks de despliegue en `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -356,22 +362,22 @@ hooks:
 ### P: ¿Puedo usar azd con Azure DevOps?
 **R**: Sí, azd funciona con cualquier sistema de CI/CD. Crea pipelines de Azure DevOps que usen comandos de azd.
 
-### P: ¿Cómo contribuyo a azd o creo plantillas de la comunidad?
+### P: ¿Cómo contribuyo a azd o creo plantillas comunitarias?
 **R**: 
-1. **Herramienta azd**: Contribuye en [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Plantillas**: Crea plantillas siguiendo las [directrices de plantillas](https://github.com/Azure-Samples/awesome-azd)
-3. **Documentación**: Contribuye a la documentación en [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+1. **Herramienta azd**: Contribuye a [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Plantillas**: Crea plantillas siguiendo las [directrices para plantillas](https://github.com/Azure-Samples/awesome-azd)  
+3. **Documentación**: Contribuye a la documentación en [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
 
-### P: ¿Cuál es la hoja de ruta para azd?
-**R**: Consulta la [hoja de ruta oficial](https://github.com/Azure/azure-dev/projects) para características y mejoras planificadas.
+### P: ¿Cuál es la hoja de ruta para azd?  
+**R**: Consulta la [hoja de ruta oficial](https://github.com/Azure/azure-dev/projects) para conocer las características y mejoras planificadas.  
 
-### P: ¿Cómo migro de otras herramientas de despliegue a azd?
-**R**:
-1. Analizar la arquitectura de implementación actual  
-2. Crear plantillas equivalentes en Bicep  
-3. Configurar `azure.yaml` para que coincida con los servicios actuales  
-4. Probar exhaustivamente en el entorno de desarrollo  
-5. Migrar los entornos de forma gradual  
+### P: ¿Cómo migro desde otras herramientas de implementación a azd?  
+**R**:  
+1. Analiza la arquitectura de implementación actual  
+2. Crea plantillas equivalentes en Bicep  
+3. Configura `azure.yaml` para que coincida con los servicios actuales  
+4. Realiza pruebas exhaustivas en el entorno de desarrollo  
+5. Migra los entornos de forma gradual  
 
 ---
 
@@ -379,15 +385,15 @@ hooks:
 
 ### **Busca primero**  
 - Consulta la [documentación oficial](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Busca problemas similares en [GitHub issues](https://github.com/Azure/azure-dev/issues)  
+- Busca en [issues de GitHub](https://github.com/Azure/azure-dev/issues) problemas similares  
 
 ### **Obtén ayuda**  
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Soporte de la comunidad  
+- [Discusiones en GitHub](https://github.com/Azure/azure-dev/discussions) - Soporte de la comunidad  
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Preguntas técnicas  
 - [Azure Discord](https://discord.gg/azure) - Chat comunitario en tiempo real  
 
 ### **Reporta problemas**  
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Reportes de errores y solicitudes de características  
+- [Issues en GitHub](https://github.com/Azure/azure-dev/issues/new) - Informes de errores y solicitudes de características  
 - Incluye registros relevantes, mensajes de error y pasos para reproducir el problema  
 
 ### **Aprende más**  
@@ -408,4 +414,4 @@ hooks:
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

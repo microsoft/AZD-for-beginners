@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:29:06+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T14:35:17+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ko"
 }
 -->
-# 디버깅 가이드 - 고급 문제 해결 로그 분석 기술
+# AZD 배포 디버깅 가이드
+
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 7 - 문제 해결 및 디버깅
+- **⬅️ 이전**: [일반적인 문제](common-issues.md)
+- **➡️ 다음**: [AI 관련 문제 해결](ai-troubleshooting.md)
+- **🚀 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../ai-foundry/production-ai-practices.md)
 
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI 배포와 관련된 복잡한 문제를 진단하고 해결하기 위한 고급 디버깅 전략, 도구 및 기술을 제공합니다. 체계적인 문제 해결 방법론, 로그 분석 기술, 성능 프로파일링 및 고급 진단 도구를 배워 배포 및 실행 중 발생하는 문제를 효율적으로 해결하세요.
+이 포괄적인 가이드는 Azure Developer CLI 배포와 관련된 복잡한 문제를 진단하고 해결하기 위한 고급 디버깅 전략, 도구 및 기술을 제공합니다. 체계적인 문제 해결 방법론, 로그 분석 기술, 성능 프로파일링 및 고급 진단 도구를 배워 배포 및 런타임 문제를 효율적으로 해결하세요.
 
 ## 학습 목표
 
@@ -19,9 +26,9 @@ CO_OP_TRANSLATOR_METADATA:
 - Azure Developer CLI 문제에 대한 체계적인 디버깅 방법론 숙달
 - 고급 로그 구성 및 로그 분석 기술 이해
 - 성능 프로파일링 및 모니터링 전략 구현
-- 복잡한 문제 해결을 위한 Azure 진단 도구 및 서비스 활용
+- 복잡한 문제 해결을 위한 Azure 진단 도구 및 서비스 사용
 - 네트워크 디버깅 및 보안 문제 해결 기술 적용
-- 사전 문제 감지를 위한 포괄적인 모니터링 및 알림 구성
+- 사전 문제 감지를 위한 포괄적인 모니터링 및 경고 구성
 
 ## 학습 결과
 
@@ -31,7 +38,7 @@ CO_OP_TRANSLATOR_METADATA:
 - Azure Monitor, Application Insights 및 진단 도구를 효과적으로 사용
 - 네트워크 연결, 인증 및 권한 문제를 독립적으로 디버깅
 - 성능 모니터링 및 최적화 전략 구현
-- 반복적인 문제를 위한 사용자 정의 디버깅 스크립트 및 자동화 생성
+- 반복적인 문제를 위한 맞춤형 디버깅 스크립트 및 자동화 생성
 
 ## 디버깅 방법론
 
@@ -41,7 +48,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **I**solate: 어떤 구성 요소가 실패하고 있나요?
 - **A**nalyze: 로그에서 무엇을 알 수 있나요?
 - **G**ather: 관련 정보를 모두 수집하세요
-- **E**scalate: 추가 지원이 필요할 때는 언제인가요?
+- **E**scalate: 추가 도움이 필요할 때는 언제인가요?
 
 ## 디버그 모드 활성화
 
@@ -73,7 +80,7 @@ azd config set trace.outputPath ./debug-traces
 
 ## 📊 로그 분석 기술
 
-### 로그 레벨 이해하기
+### 로그 레벨 이해
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -514,7 +521,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 긴급 디버깅 절차
 
-### 운영 환경 문제 대응
+### 프로덕션 문제 대응
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -604,7 +611,7 @@ quick_rollback() {
 
 ## 📊 디버깅 대시보드
 
-### 사용자 정의 모니터링 대시보드
+### 맞춤형 모니터링 대시보드
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -651,10 +658,10 @@ aggregate_logs() {
 
 ## 🔗 고급 리소스
 
-### 사용자 정의 디버깅 스크립트
+### 맞춤형 디버깅 스크립트
 `scripts/debug/` 디렉터리를 생성하여 다음을 포함하세요:
-- `health-check.sh` - 포괄적인 상태 점검
-- `performance-test.sh` - 자동화된 성능 테스트
+- `health-check.sh` - 포괄적인 상태 확인
+- `performance-test.sh` - 자동 성능 테스트
 - `log-analyzer.py` - 고급 로그 파싱 및 분석
 - `resource-validator.sh` - 인프라 검증
 
@@ -677,19 +684,19 @@ hooks:
 
 ## 모범 사례
 
-1. **디버그 로깅을 항상 활성화**하세요 (운영 환경 제외)
-2. **문제에 대한 재현 가능한 테스트 케이스**를 만드세요
+1. **디버그 로깅을 항상 활성화**하세요 (비프로덕션 환경에서)
+2. **재현 가능한 테스트 케이스를 생성**하세요
 3. **팀을 위한 디버깅 절차를 문서화**하세요
-4. **상태 점검 및 모니터링을 자동화**하세요
+4. **상태 확인 및 모니터링을 자동화**하세요
 5. **애플리케이션 변경 사항에 맞춰 디버깅 도구를 업데이트**하세요
-6. **비상 상황이 아닌 시간에 디버깅 절차를 연습**하세요
+6. **비사건 시간 동안 디버깅 절차를 연습**하세요
 
 ## 다음 단계
 
 - [용량 계획](../pre-deployment/capacity-planning.md) - 리소스 요구 사항 계획
-- [SKU 선택](../pre-deployment/sku-selection.md) - 적합한 서비스 계층 선택
+- [SKU 선택](../pre-deployment/sku-selection.md) - 적절한 서비스 계층 선택
 - [사전 점검](../pre-deployment/preflight-checks.md) - 배포 전 검증
-- [치트 시트](../../resources/cheat-sheet.md) - 빠른 참조 명령어
+- [치트 시트](../../resources/cheat-sheet.md) - 빠른 참조 명령
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 신뢰할 수 있는 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.

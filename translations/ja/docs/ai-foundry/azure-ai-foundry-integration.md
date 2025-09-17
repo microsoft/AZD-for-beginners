@@ -1,34 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:32:16+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T14:12:07+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "ja"
 }
 -->
 # Azure AI FoundryとAZDの統合
 
-**前:** [最初のプロジェクト](../getting-started/first-project.md) | **次:** [AIモデルのデプロイ](ai-model-deployment.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
+- **📖 現在の章**: 第2章 - AIファースト開発
+- **⬅️ 前の章**: [第1章: 初めてのプロジェクト](../getting-started/first-project.md)
+- **➡️ 次へ**: [AIモデルのデプロイ](ai-model-deployment.md)
+- **🚀 次の章**: [第3章: 設定](../getting-started/configuration.md)
 
 ## 概要
 
-このガイドでは、Azure AI FoundryサービスをAzure Developer CLI (AZD)と統合し、AIアプリケーションのデプロイを効率化する方法を説明します。Azure AI Foundryは、AIアプリケーションの構築、デプロイ、管理を包括的にサポートするプラットフォームであり、AZDはインフラとデプロイプロセスを簡素化します。
+このガイドでは、Azure AI FoundryサービスをAzure Developer CLI (AZD)と統合し、AIアプリケーションのデプロイを効率化する方法を説明します。Azure AI FoundryはAIアプリケーションの構築、デプロイ、管理を包括的にサポートするプラットフォームであり、AZDはインフラとデプロイプロセスを簡素化します。
 
 ## Azure AI Foundryとは？
 
-Azure AI Foundryは、Microsoftが提供するAI開発の統合プラットフォームで、以下を含みます：
+Azure AI Foundryは、Microsoftが提供するAI開発の統合プラットフォームで、以下を含みます:
 
 - **モデルカタログ**: 最先端のAIモデルへのアクセス
 - **プロンプトフロー**: AIワークフローのビジュアルデザイナー
 - **AI Foundryポータル**: AIアプリケーションの統合開発環境
 - **デプロイオプション**: 多様なホスティングとスケーリングオプション
-- **安全性とセキュリティ**: 責任あるAI機能を内蔵
+- **安全性とセキュリティ**: 責任あるAI機能の組み込み
 
 ## AZD + Azure AI Foundry: 組み合わせのメリット
 
 | 機能 | Azure AI Foundry | AZD統合のメリット |
-|------|-----------------|------------------|
+|------|------------------|------------------|
 | **モデルデプロイ** | ポータルでの手動デプロイ | 自動化された再現可能なデプロイ |
 | **インフラ** | クリック操作でのプロビジョニング | コードとしてのインフラ (Bicep) |
 | **環境管理** | 単一環境に焦点 | 複数環境 (開発/ステージング/本番) |
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### 環境別デプロイ
+### 環境別のデプロイ
 
 ```bash
 # Development environment
@@ -469,7 +474,7 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ### 問題3: モデルデプロイの問題
 
 **症状:**
-- デプロイにモデルが利用できない
+- デプロイでモデルが利用できない
 - 特定のモデルバージョンが失敗
 
 **解決策:**
@@ -525,7 +530,7 @@ azd up
 2. **ニーズに合わせてカスタマイズ**: インフラとアプリケーションコードを修正
 3. **モニタリングを追加**: 包括的な可観測性を実装
 4. **コストを最適化**: 予算に合わせた設定を調整
-5. **デプロイを安全に**: エンタープライズセキュリティパターンを導入
+5. **デプロイを安全に**: エンタープライズセキュリティパターンを実装
 6. **本番環境へスケール**: マルチリージョンと高可用性機能を追加
 
 ## コミュニティとサポート
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**前:** [最初のプロジェクト](../getting-started/first-project.md) | **次:** [AIモデルのデプロイ](ai-model-deployment.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
+- **📖 現在の章**: 第2章 - AIファースト開発
+- **⬅️ 前の章**: [第1章: 初めてのプロジェクト](../getting-started/first-project.md)
+- **➡️ 次へ**: [AIモデルのデプロイ](ai-model-deployment.md)
+- **🚀 次の章**: [第3章: 設定](../getting-started/configuration.md)
 
-**ヘルプが必要ですか？** コミュニティディスカッションに参加するか、リポジトリで課題をオープンしてください。Azure AI + AZDコミュニティは成功をサポートします！
+**ヘルプが必要ですか？** コミュニティディスカッションに参加するか、リポジトリで課題をオープンしてください。Azure AI + AZDコミュニティが成功をサポートします！
 
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解について、当社は責任を負いません。
+この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当社は責任を負いません。

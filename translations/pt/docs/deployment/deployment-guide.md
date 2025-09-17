@@ -1,43 +1,50 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T16:59:35+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T14:49:45+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "pt"
 }
 -->
 # Guia de Implementação - Domine as Implementações com AZD
 
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 4 - Infraestrutura como Código e Implementação
+- **⬅️ Capítulo Anterior**: [Capítulo 3: Configuração](../getting-started/configuration.md)
+- **➡️ Próximo**: [Provisionamento de Recursos](provisioning.md)
+- **🚀 Próximo Capítulo**: [Capítulo 5: Soluções de IA Multi-Agente](../../examples/retail-scenario.md)
+
 ## Introdução
 
-Este guia abrangente cobre tudo o que precisa saber sobre como implementar aplicações utilizando o Azure Developer CLI, desde implementações básicas com um único comando até cenários avançados de produção com hooks personalizados, múltiplos ambientes e integração CI/CD. Domine o ciclo completo de implementação com exemplos práticos e melhores práticas.
+Este guia abrangente cobre tudo o que precisa saber sobre como implementar aplicações utilizando o Azure Developer CLI, desde implementações básicas com um único comando até cenários avançados de produção com hooks personalizados, múltiplos ambientes e integração com CI/CD. Domine o ciclo de vida completo da implementação com exemplos práticos e melhores práticas.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este guia, irá:
 - Dominar todos os comandos e fluxos de trabalho de implementação do Azure Developer CLI
-- Compreender o ciclo completo de implementação, desde o provisionamento até à monitorização
-- Implementar hooks personalizados para automação antes e depois da implementação
+- Compreender o ciclo de vida completo da implementação, desde o provisionamento até o monitoramento
+- Implementar hooks personalizados para automação pré e pós-implementação
 - Configurar múltiplos ambientes com parâmetros específicos para cada ambiente
 - Configurar estratégias avançadas de implementação, incluindo blue-green e canary deployments
-- Integrar implementações azd com pipelines CI/CD e fluxos de trabalho DevOps
+- Integrar implementações azd com pipelines de CI/CD e fluxos de trabalho DevOps
 
 ## Resultados de Aprendizagem
 
 Após a conclusão, será capaz de:
-- Executar e resolver problemas de forma independente em todos os fluxos de trabalho de implementação azd
+- Executar e solucionar problemas de todos os fluxos de trabalho de implementação azd de forma independente
 - Projetar e implementar automação personalizada de implementação utilizando hooks
-- Configurar implementações prontas para produção com segurança e monitorização adequadas
+- Configurar implementações prontas para produção com segurança e monitoramento adequados
 - Gerir cenários complexos de implementação em múltiplos ambientes
-- Otimizar o desempenho das implementações e implementar estratégias de rollback
+- Otimizar o desempenho da implementação e implementar estratégias de rollback
 - Integrar implementações azd em práticas empresariais de DevOps
 
 ## Visão Geral da Implementação
 
-O Azure Developer CLI oferece vários comandos de implementação:
-- `azd up` - Fluxo completo (provisionamento + implementação)
-- `azd provision` - Criar/atualizar apenas recursos do Azure
+O Azure Developer CLI fornece vários comandos de implementação:
+- `azd up` - Fluxo de trabalho completo (provisionamento + implementação)
+- `azd provision` - Criar/atualizar apenas os recursos do Azure
 - `azd deploy` - Implementar apenas o código da aplicação
 - `azd package` - Construir e empacotar aplicações
 
@@ -57,7 +64,7 @@ azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Implementação Apenas de Infraestrutura
-Quando apenas precisa atualizar os recursos do Azure:
+Quando precisa apenas atualizar os recursos do Azure:
 ```bash
 # Provision/update infrastructure
 azd provision
@@ -83,7 +90,7 @@ azd deploy --service api
 azd deploy --service api --build-arg NODE_ENV=production
 ```
 
-## 🏗️ Compreender o Processo de Implementação
+## 🏗️ Compreendendo o Processo de Implementação
 
 ### Fase 1: Hooks Pré-Provisionamento
 ```yaml
@@ -103,7 +110,7 @@ hooks:
 - Lê templates de infraestrutura (Bicep/Terraform)
 - Cria ou atualiza recursos do Azure
 - Configura rede e segurança
-- Configura monitorização e registo
+- Configura monitoramento e logging
 
 ### Fase 3: Hooks Pós-Provisionamento
 ```yaml
@@ -118,10 +125,10 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Fase 4: Empacotamento de Aplicações
-- Compila o código da aplicação
+### Fase 4: Empacotamento da Aplicação
+- Constrói o código da aplicação
 - Cria artefactos de implementação
-- Empacota para a plataforma alvo (containers, ficheiros ZIP, etc.)
+- Empacota para a plataforma de destino (contentores, ficheiros ZIP, etc.)
 
 ### Fase 5: Hooks Pré-Implementação
 ```yaml
@@ -136,7 +143,7 @@ hooks:
       npm run db:migrate
 ```
 
-### Fase 6: Implementação de Aplicações
+### Fase 6: Implementação da Aplicação
 - Implementa aplicações empacotadas nos serviços Azure
 - Atualiza configurações
 - Inicia/reinicia serviços
@@ -306,9 +313,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Implementações em Containers
+## 🐳 Implementações de Contentores
 
-### Implementações de Aplicações em Containers
+### Implementações de Aplicações em Contentores
 ```yaml
 services:
   api:
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Otimização de Dockerfile Multi-Stage
+### Otimização de Dockerfile Multi-Estágio
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -392,9 +399,9 @@ azd deploy --incremental
 azd deploy --detect-changes
 ```
 
-## 🔍 Monitorização de Implementação
+## 🔍 Monitoramento de Implementação
 
-### Monitorização em Tempo Real
+### Monitoramento em Tempo Real
 ```bash
 # Monitor deployment progress
 azd deploy --follow
@@ -486,7 +493,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Gestão de Identidade e Acesso
+### Gestão de Identidade e Acessos
 ```yaml
 services:
   api:
@@ -552,7 +559,7 @@ azd history
 azd metrics --type deployment
 ```
 
-### Coleção de Métricas Personalizadas
+### Coleta de Métricas Personalizadas
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -571,7 +578,7 @@ hooks:
 
 ## 🎯 Melhores Práticas
 
-### 1. Consistência de Ambiente
+### 1. Consistência de Ambientes
 ```bash
 # Use consistent naming
 azd env new dev-$(whoami)
@@ -621,7 +628,7 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Documentação e Registo
+### 4. Documentação e Logging
 ```bash
 # Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
@@ -652,4 +659,4 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante ter em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.

@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T17:03:31+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T14:50:04+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "pt"
 }
 -->
-# Provisionamento de Recursos - Infraestrutura como Código com AZD
+# Provisionamento de Recursos Azure com AZD
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 4 - Infraestrutura como Código e Implementação
+- **⬅️ Anterior**: [Guia de Implementação](deployment-guide.md)
+- **➡️ Próximo Capítulo**: [Capítulo 5: Soluções de IA Multi-Agente](../../examples/retail-scenario.md)
+- **🔧 Relacionado**: [Capítulo 6: Validação Pré-Implementação](../pre-deployment/capacity-planning.md)
 
 ## Introdução
 
@@ -17,7 +24,7 @@ Este guia abrangente cobre tudo o que precisa saber sobre o provisionamento e ge
 
 Ao concluir este guia, irá:
 - Dominar os princípios de Infraestrutura como Código e o provisionamento de recursos Azure
-- Compreender os diferentes fornecedores de IaC suportados pelo Azure Developer CLI
+- Compreender os vários fornecedores de IaC suportados pelo Azure Developer CLI
 - Projetar e implementar templates Bicep para arquiteturas de aplicações comuns
 - Configurar parâmetros de recursos, variáveis e definições específicas de ambiente
 - Implementar padrões avançados de infraestrutura, incluindo redes e segurança
@@ -27,7 +34,7 @@ Ao concluir este guia, irá:
 
 Após a conclusão, será capaz de:
 - Projetar e provisionar infraestrutura Azure utilizando Bicep e ARM templates
-- Configurar arquiteturas complexas de múltiplos serviços com dependências adequadas de recursos
+- Configurar arquiteturas complexas de múltiplos serviços com dependências de recursos adequadas
 - Implementar templates parametrizados para múltiplos ambientes e configurações
 - Resolver problemas de provisionamento de infraestrutura e falhas de implementação
 - Aplicar os princípios do Azure Well-Architected Framework ao design de infraestrutura
@@ -862,7 +869,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Planeamento Pré-Implementação](../pre-deployment/capacity-planning.md) - Validar disponibilidade de recursos
 - [Problemas Comuns](../troubleshooting/common-issues.md) - Resolver problemas de infraestrutura
 - [Guia de Depuração](../troubleshooting/debugging.md) - Depurar problemas de provisionamento
-- [Seleção de SKU](../pre-deployment/sku-selection.md) - Escolher níveis de serviço adequados
+- [Seleção de SKU](../pre-deployment/sku-selection.md) - Escolher níveis de serviço apropriados
 
 ## Recursos Adicionais
 
@@ -880,4 +887,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante ter em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.

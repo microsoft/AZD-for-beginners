@@ -1,44 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T16:58:36+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T14:32:46+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "ko"
 }
 -->
 # 설치 및 설정 가이드
 
-**이전:** [메인 문서](../../README.md) | **다음:** [AZD 기본 사항](azd-basics.md)
+**챕터 네비게이션:**
+- **📚 코스 홈**: [AZD For Beginners](../../README.md)
+- **📖 현재 챕터**: Chapter 1 - 기초 및 빠른 시작
+- **⬅️ 이전**: [AZD 기본](azd-basics.md)
+- **➡️ 다음**: [첫 번째 프로젝트](first-project.md)
+- **🚀 다음 챕터**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI(azd)를 시스템에 설치하고 구성하는 방법을 안내합니다. 다양한 운영 체제에서의 설치 방법, 인증 설정, 초기 구성 방법을 배워 Azure 배포를 위한 개발 환경을 준비할 수 있습니다.
+이 종합 가이드는 Azure Developer CLI(azd)를 시스템에 설치하고 구성하는 방법을 안내합니다. 다양한 운영 체제에서의 설치 방법, 인증 설정, 초기 구성 방법을 배우고 Azure 배포를 위한 개발 환경을 준비할 수 있습니다.
 
 ## 학습 목표
 
-이 레슨을 완료하면 다음을 할 수 있습니다:
+이 강의를 마치면 다음을 할 수 있습니다:
 - 운영 체제에 Azure Developer CLI를 성공적으로 설치
-- 다양한 방법으로 Azure 인증을 설정
+- 여러 방법으로 Azure 인증 구성
 - 필요한 사전 요구 사항을 갖춘 개발 환경 설정
 - 다양한 설치 옵션과 각 옵션을 사용하는 상황 이해
 - 일반적인 설치 및 설정 문제 해결
 
 ## 학습 결과
 
-이 레슨을 완료한 후, 다음을 수행할 수 있습니다:
-- 플랫폼에 적합한 방법으로 azd를 설치
+이 강의를 완료한 후, 다음을 수행할 수 있습니다:
+- 플랫폼에 적합한 방법으로 azd 설치
 - `azd auth login`을 사용하여 Azure에 인증
-- 설치를 확인하고 기본 azd 명령을 테스트
+- 설치를 확인하고 기본 azd 명령 테스트
 - azd를 최적화하여 사용할 수 있도록 개발 환경 구성
 - 일반적인 설치 문제를 독립적으로 해결
 
-이 가이드는 운영 체제나 개발 환경에 관계없이 Azure Developer CLI를 설치하고 구성하는 데 도움을 줍니다.
+이 가이드는 운영 체제나 개발 환경에 관계없이 Azure Developer CLI를 설치하고 구성하는 데 도움을 줄 것입니다.
 
 ## 사전 요구 사항
 
-azd를 설치하기 전에 다음을 확인하세요:
-- **Azure 구독** - [무료 계정 생성](https://azure.microsoft.com/free/)
+azd를 설치하기 전에 다음을 준비하세요:
+- **Azure 구독** - [무료 계정 만들기](https://azure.microsoft.com/free/)
 - **Azure CLI** - 인증 및 리소스 관리용
 - **Git** - 템플릿 복제 및 버전 관리용
 - **Docker** (선택 사항) - 컨테이너화된 애플리케이션용
@@ -64,9 +69,9 @@ choco install azd
 ```
 
 #### 옵션 4: 수동 설치
-1. [GitHub](https://github.com/Azure/azure-dev/releases)에서 최신 릴리스를 다운로드
-2. `C:\Program Files\azd\`에 압축 해제
-3. PATH 환경 변수에 추가
+1. [GitHub](https://github.com/Azure/azure-dev/releases)에서 최신 릴리스를 다운로드합니다.
+2. `C:\Program Files\azd\`에 압축을 풉니다.
+3. PATH 환경 변수에 추가합니다.
 
 ### macOS
 
@@ -181,7 +186,7 @@ az login --service-principal \
 
 ## 구성
 
-### 글로벌 구성
+### 전역 구성
 ```bash
 # Set default subscription
 azd config set defaults.subscription <subscription-id>
@@ -209,10 +214,10 @@ export AZD_DEBUG=true  # Enable debug logging
 
 ### Visual Studio Code
 Azure Developer CLI 확장을 설치하세요:
-1. VS Code 열기
-2. 확장 메뉴로 이동 (Ctrl+Shift+X)
-3. "Azure Developer CLI" 검색
-4. 확장 설치
+1. VS Code를 엽니다.
+2. 확장 탭으로 이동 (Ctrl+Shift+X)
+3. "Azure Developer CLI"를 검색합니다.
+4. 확장을 설치합니다.
 
 기능:
 - `azure.yaml`에 대한 IntelliSense
@@ -221,7 +226,7 @@ Azure Developer CLI 확장을 설치하세요:
 - 배포 모니터링
 
 ### GitHub Codespaces
-`.devcontainer/devcontainer.json` 생성:
+`.devcontainer/devcontainer.json`을 생성하세요:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -234,9 +239,9 @@ Azure Developer CLI 확장을 설치하세요:
 ```
 
 ### IntelliJ/JetBrains
-1. Azure 플러그인 설치
-2. Azure 자격 증명 구성
-3. 통합 터미널에서 azd 명령 사용
+1. Azure 플러그인을 설치합니다.
+2. Azure 자격 증명을 구성합니다.
+3. 통합 터미널에서 azd 명령을 사용합니다.
 
 ## 🐛 설치 문제 해결
 
@@ -249,7 +254,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### PATH 문제
-azd를 PATH에 수동으로 추가:
+azd를 PATH에 수동으로 추가하세요:
 
 **Windows:**
 ```cmd
@@ -323,14 +328,14 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## 다음 단계
 
-1. **인증 완료**: Azure 구독에 액세스할 수 있는지 확인
-2. **첫 배포 시도**: [첫 프로젝트 가이드](first-project.md)를 따라 진행
-3. **템플릿 탐색**: `azd template list` 명령으로 사용 가능한 템플릿 탐색
-4. **IDE 구성**: 개발 환경 설정
+1. **인증 완료**: Azure 구독에 액세스할 수 있는지 확인하세요.
+2. **첫 번째 배포 시도**: [첫 번째 프로젝트 가이드](first-project.md)를 따라하세요.
+3. **템플릿 탐색**: `azd template list` 명령으로 사용 가능한 템플릿을 살펴보세요.
+4. **IDE 구성**: 개발 환경을 설정하세요.
 
 ## 지원
 
-문제가 발생하면:
+문제가 발생하면 다음을 참고하세요:
 - [공식 문서](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [문제 보고](https://github.com/Azure/azure-dev/issues)
 - [커뮤니티 토론](https://github.com/Azure/azure-dev/discussions)
@@ -338,11 +343,16 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ---
 
-**이전:** [메인 문서](../../README.md) | **다음:** [AZD 기본 사항](azd-basics.md)
+**챕터 네비게이션:**
+- **📚 코스 홈**: [AZD For Beginners](../../README.md)
+- **📖 현재 챕터**: Chapter 1 - 기초 및 빠른 시작
+- **⬅️ 이전**: [AZD 기본](azd-basics.md) 
+- **➡️ 다음**: [첫 번째 프로젝트](first-project.md)
+- **🚀 다음 챕터**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
-**설치 완료!** [첫 프로젝트](first-project.md)로 이동하여 azd를 사용해 빌드를 시작하세요.
+**✅ 설치 완료!** [첫 번째 프로젝트](first-project.md)를 진행하며 azd로 빌드를 시작하세요.
 
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

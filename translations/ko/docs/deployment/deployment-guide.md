@@ -1,33 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T16:59:13+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T14:33:51+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "ko"
 }
 -->
 # 배포 가이드 - AZD 배포 마스터하기
 
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 4 - 코드로서의 인프라 및 배포
+- **⬅️ 이전 챕터**: [챕터 3: 구성](../getting-started/configuration.md)
+- **➡️ 다음**: [리소스 프로비저닝](provisioning.md)
+- **🚀 다음 챕터**: [챕터 5: 다중 에이전트 AI 솔루션](../../examples/retail-scenario.md)
+
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI를 사용하여 애플리케이션을 배포하는 방법에 대해 기본적인 단일 명령 배포부터 사용자 정의 훅, 다중 환경, CI/CD 통합을 포함한 고급 프로덕션 시나리오까지 모든 것을 다룹니다. 실용적인 예제와 모범 사례를 통해 배포 라이프사이클을 완벽히 익히세요.
+이 포괄적인 가이드는 Azure Developer CLI를 사용하여 애플리케이션을 배포하는 모든 과정을 다룹니다. 단일 명령 배포부터 맞춤형 훅, 다중 환경, CI/CD 통합을 포함한 고급 프로덕션 시나리오까지 실습 예제와 모범 사례를 통해 배포 라이프사이클을 완벽히 익힐 수 있습니다.
 
 ## 학습 목표
 
 이 가이드를 완료하면 다음을 할 수 있습니다:
-- Azure Developer CLI 배포 명령과 워크플로를 마스터하기
-- 프로비저닝부터 모니터링까지 배포 라이프사이클을 이해하기
-- 배포 전후 자동화를 위한 사용자 정의 배포 훅 구현하기
+- Azure Developer CLI 배포 명령 및 워크플로를 마스터하기
+- 프로비저닝부터 모니터링까지 배포 라이프사이클 이해하기
+- 배포 전후 자동화를 위한 맞춤형 훅 구현하기
 - 환경별 매개변수를 사용하여 다중 환경 구성하기
-- 블루-그린 및 카나리 배포를 포함한 고급 배포 전략 설정하기
-- azd 배포를 CI/CD 파이프라인 및 DevOps 워크플로에 통합하기
+- 블루-그린 및 카나리 배포와 같은 고급 배포 전략 설정하기
+- azd 배포를 CI/CD 파이프라인 및 DevOps 워크플로와 통합하기
 
 ## 학습 결과
 
 가이드를 완료하면 다음을 수행할 수 있습니다:
 - 모든 azd 배포 워크플로를 독립적으로 실행하고 문제 해결하기
-- 사용자 정의 배포 자동화를 설계하고 구현하기
+- 맞춤형 배포 자동화를 설계하고 구현하기
 - 적절한 보안 및 모니터링을 갖춘 프로덕션 준비 배포 구성하기
 - 복잡한 다중 환경 배포 시나리오 관리하기
 - 배포 성능을 최적화하고 롤백 전략 구현하기
@@ -83,9 +90,9 @@ azd deploy --service api
 azd deploy --service api --build-arg NODE_ENV=production
 ```
 
-## 🏗️ 배포 프로세스 이해하기
+## 🏗️ 배포 과정 이해하기
 
-### 1단계: 프로비저닝 전 훅
+### 단계 1: 프로비저닝 전 훅
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### 2단계: 인프라 프로비저닝
+### 단계 2: 인프라 프로비저닝
 - 인프라 템플릿(Bicep/Terraform)을 읽음
 - Azure 리소스를 생성 또는 업데이트
 - 네트워킹 및 보안 구성
 - 모니터링 및 로깅 설정
 
-### 3단계: 프로비저닝 후 훅
+### 단계 3: 프로비저닝 후 훅
 ```yaml
 hooks:
   postprovision:
@@ -118,12 +125,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### 4단계: 애플리케이션 패키징
+### 단계 4: 애플리케이션 패키징
 - 애플리케이션 코드 빌드
 - 배포 아티팩트 생성
 - 대상 플랫폼(컨테이너, ZIP 파일 등)에 맞게 패키징
 
-### 5단계: 배포 전 훅
+### 단계 5: 배포 전 훅
 ```yaml
 hooks:
   predeploy:
@@ -136,12 +143,12 @@ hooks:
       npm run db:migrate
 ```
 
-### 6단계: 애플리케이션 배포
+### 단계 6: 애플리케이션 배포
 - 패키징된 애플리케이션을 Azure 서비스에 배포
 - 구성 설정 업데이트
 - 서비스 시작/재시작
 
-### 7단계: 배포 후 훅
+### 단계 7: 배포 후 훅
 ```yaml
 hooks:
   postdeploy:
@@ -538,7 +545,7 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 배포 메트릭
+## 📊 배포 지표
 
 ### 배포 성능 추적
 ```bash
@@ -552,7 +559,7 @@ azd history
 azd metrics --type deployment
 ```
 
-### 사용자 정의 메트릭 수집
+### 사용자 정의 지표 수집
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. 테스트 통합
+### 3. 통합 테스트
 ```yaml
 hooks:
   predeploy:
@@ -631,7 +638,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## 다음 단계
 
-- [리소스 프로비저닝](provisioning.md) - 인프라 관리 심층 분석
+- [리소스 프로비저닝](provisioning.md) - 인프라 관리 심화 학습
 - [배포 전 계획](../pre-deployment/capacity-planning.md) - 배포 전략 계획
 - [일반적인 문제](../troubleshooting/common-issues.md) - 배포 문제 해결
 - [모범 사례](../troubleshooting/debugging.md) - 프로덕션 준비 배포 전략
@@ -652,4 +659,4 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 신뢰할 수 있는 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

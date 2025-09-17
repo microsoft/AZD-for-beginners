@@ -1,15 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T17:44:52+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T14:51:05+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "pt"
 }
 -->
-# Guia de Resolução de Problemas de IA para Azure Developer CLI
+# Guia de Resolução de Problemas Específicos de IA
 
-**Anterior:** [Práticas de IA em Produção](../ai-foundry/production-ai-practices.md) | **Próximo:** [Introdução ao AZD](../getting-started/README.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 7 - Resolução de Problemas e Depuração
+- **⬅️ Anterior**: [Guia de Depuração](debugging.md)
+- **➡️ Próximo Capítulo**: [Capítulo 8: Padrões de Produção e Empresariais](../ai-foundry/production-ai-practices.md)
+- **🤖 Relacionado**: [Capítulo 2: Desenvolvimento Focado em IA](../ai-foundry/azure-ai-foundry-integration.md)
+
+**Anterior:** [Práticas de Produção de IA](../ai-foundry/production-ai-practices.md) | **Próximo:** [Introdução ao AZD](../getting-started/README.md)
 
 Este guia abrangente de resolução de problemas aborda questões comuns ao implementar soluções de IA com AZD, fornecendo soluções e técnicas de depuração específicas para os serviços de IA do Azure.
 
@@ -17,7 +24,7 @@ Este guia abrangente de resolução de problemas aborda questões comuns ao impl
 
 - [Problemas com o Azure OpenAI Service](../../../../docs/troubleshooting)
 - [Problemas com o Azure AI Search](../../../../docs/troubleshooting)
-- [Problemas de Implementação de Container Apps](../../../../docs/troubleshooting)
+- [Problemas de Implementação de Aplicações em Contêiner](../../../../docs/troubleshooting)
 - [Erros de Autenticação e Permissões](../../../../docs/troubleshooting)
 - [Falhas na Implementação de Modelos](../../../../docs/troubleshooting)
 - [Problemas de Desempenho e Escalabilidade](../../../../docs/troubleshooting)
@@ -200,7 +207,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Verificar Esquema do Índice:**
+2. **Checar Esquema do Índice:**
 ```python
 # Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
@@ -230,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Problemas de Implementação de Container Apps
+## Problemas de Implementação de Aplicações em Contêiner
 
-### Problema: Falhas na Construção de Containers
+### Problema: Falhas na Construção de Contêineres
 
 **Sintomas:**
 ```
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problema: Falhas na Inicialização de Container Apps
+### Problema: Falhas na Inicialização de Aplicações em Contêiner
 
 **Sintomas:**
 ```
@@ -296,7 +303,7 @@ Error: Container failed to start within timeout period
 
 **Soluções:**
 
-1. **Aumentar Tempo de Inicialização:**
+1. **Aumentar Tempo de Espera para Inicialização:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -838,27 +845,32 @@ def monitor_performance(func):
 | Código de Erro | Descrição | Solução |
 |----------------|-----------|---------|
 | 401 | Não autorizado | Verificar chaves de API e configuração de identidade gerida |
-| 403 | Proibido | Verificar atribuições de funções RBAC |
-| 429 | Limite de Taxa | Implementar lógica de repetição com backoff exponencial |
-| 500 | Erro Interno do Servidor | Verificar estado da implementação do modelo e registos |
-| 503 | Serviço Indisponível | Verificar saúde do serviço e disponibilidade regional |
+| 403 | Proibido | Confirmar atribuições de funções RBAC |
+| 429 | Limite de taxa | Implementar lógica de repetição com backoff exponencial |
+| 500 | Erro interno do servidor | Verificar status de implementação do modelo e registos |
+| 503 | Serviço indisponível | Confirmar saúde do serviço e disponibilidade regional |
 
 ## Próximos Passos
 
-1. **Rever [Guia de Implementação de Modelos de IA](ai-model-deployment.md)** para melhores práticas de implementação
-2. **Completar [Práticas de IA em Produção](production-ai-practices.md)** para soluções prontas para empresas
-3. **Participar no [Discord do Azure AI Foundry](https://aka.ms/foundry/discord)** para suporte da comunidade
-4. **Submeter problemas** no [repositório GitHub do AZD](https://github.com/Azure/azure-dev) para problemas específicos do AZD
+1. **Revisar [Guia de Implementação de Modelos de IA](ai-model-deployment.md)** para melhores práticas de implementação
+2. **Completar [Práticas de Produção de IA](production-ai-practices.md)** para soluções empresariais
+3. **Participar do [Discord do Azure AI Foundry](https://aka.ms/foundry/discord)** para suporte da comunidade
+4. **Submeter problemas** ao [repositório GitHub do AZD](https://github.com/Azure/azure-dev) para questões específicas do AZD
 
 ## Recursos
 
 - [Resolução de Problemas do Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Resolução de Problemas de Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Resolução de Problemas de Aplicações em Contêiner](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Resolução de Problemas do Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**Anterior:** [Práticas de IA em Produção](../ai-foundry/production-ai-practices.md) | **Próximo:** [Workshop](../../workshop/README.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 7 - Resolução de Problemas e Depuração
+- **⬅️ Anterior**: [Guia de Depuração](debugging.md)
+- **➡️ Próximo Capítulo**: [Capítulo 8: Padrões de Produção e Empresariais](../ai-foundry/production-ai-practices.md)
+- **🤖 Relacionado**: [Capítulo 2: Desenvolvimento Focado em IA](../ai-foundry/azure-ai-foundry-integration.md)
 - [Resolução de Problemas do Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---

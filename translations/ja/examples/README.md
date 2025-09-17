@@ -1,37 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:02:41+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-17T14:19:31+00:00",
   "source_file": "examples/README.md",
   "language_code": "ja"
 }
 -->
-# 実例 - 実践的なAZDテンプレートと設定
+# 実例 - 実践的なAZDテンプレートと構成
+
+**例を通じて学ぶ - 章ごとに整理**
+- **📚 コースホーム**: [AZD初心者向け](../README.md)
+- **📖 章のマッピング**: 学習の難易度に応じた例
+- **🚀 シンプルに始める**: [第1章の例](../../../examples)
+- **🤖 AIの例**: [第2章 & 第5章 AIソリューション](../../../examples)
 
 ## はじめに
 
-このディレクトリには、Azure Developer CLIを実践的に学ぶための実例、テンプレート、現実的なシナリオが含まれています。各例では、さまざまなアプリケーションアーキテクチャやデプロイメントパターンに対応した完全な動作コード、インフラテンプレート、詳細な手順を提供しています。
+このディレクトリには、Azure Developer CLIを実践的に学ぶための例、テンプレート、実際のシナリオが含まれています。各例は、完全な動作コード、インフラテンプレート、詳細な指示を提供し、さまざまなアプリケーションアーキテクチャやデプロイメントパターンを学ぶことができます。
 
 ## 学習目標
 
-これらの例を通じて、以下を学ぶことができます：
-- 現実的なアプリケーションシナリオを通じたAzure Developer CLIのワークフローの練習
-- さまざまなアプリケーションアーキテクチャとそのAZD実装の理解
-- Azureサービス向けのInfrastructure as Codeパターンの習得
-- 設定管理と環境固有のデプロイメント戦略の適用
-- 実践的な文脈での監視、セキュリティ、スケーリングパターンの実装
-- 実際のデプロイメントシナリオでのトラブルシューティングとデバッグの経験を積む
+これらの例を通じて、以下を学ぶことができます:
+- 実際のアプリケーションシナリオを使用したAzure Developer CLIのワークフローを練習
+- さまざまなアプリケーションアーキテクチャとそのAZD実装を理解
+- Azureサービス向けのInfrastructure as Codeパターンを習得
+- 環境固有のデプロイメント戦略と構成管理を適用
+- 実践的な文脈での監視、セキュリティ、スケーリングパターンを実装
+- 実際のデプロイメントシナリオでのトラブルシューティングとデバッグの経験を構築
 
 ## 学習成果
 
-これらの例を完了すると、以下ができるようになります：
+これらの例を完了すると、以下ができるようになります:
 - Azure Developer CLIを使用してさまざまなアプリケーションタイプを自信を持ってデプロイ
-- 提供されたテンプレートを自身のアプリケーション要件に適応
+- 提供されたテンプレートを自分のアプリケーション要件に適応
 - Bicepを使用してカスタムインフラパターンを設計・実装
-- 適切な依存関係を持つ複雑なマルチサービスアプリケーションを設定
+- 適切な依存関係を持つ複雑なマルチサービスアプリケーションを構成
 - 実際のシナリオでセキュリティ、監視、パフォーマンスのベストプラクティスを適用
-- 実践的な経験に基づいてデプロイメントをトラブルシュートおよび最適化
+- 実践的な経験に基づいてデプロイメントをトラブルシューティングおよび最適化
 
 ## ディレクトリ構造
 
@@ -52,9 +58,9 @@ Azure Samples AZD Templates (linked externally):
 ## クイックスタート例
 
 ### 初心者向け
-1. **[シンプルなWebアプリ - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - MongoDBを使用したNode.js Express Webアプリケーションのデプロイ
-2. **[静的ウェブサイト - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Azure Static Web Appsを使用したReact静的ウェブサイトのホスティング
-3. **[コンテナアプリ - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - コンテナ化されたPython Flaskアプリケーションのデプロイ
+1. **[シンプルなWebアプリ - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - MongoDBを使用したNode.js Express Webアプリケーションをデプロイ
+2. **[静的ウェブサイト - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Azure Static Web AppsでReact静的ウェブサイトをホスト
+3. **[コンテナアプリ - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - コンテナ化されたPython Flaskアプリケーションをデプロイ
 
 ### 中級者向け
 4. **[データベースアプリ - C#とAzure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - C# APIとAzure SQLデータベースを使用したWebアプリケーション
@@ -67,9 +73,30 @@ Azure Samples AZD Templates (linked externally):
 2. **[AIドキュメント処理](https://github.com/Azure-Samples/azure-ai-document-processing)** - Azure AIサービスを使用したドキュメント分析
 3. **[機械学習パイプライン](https://github.com/Azure-Samples/mlops-v2)** - Azure Machine Learningを使用したMLOpsワークフロー
 
-## 📋 使用手順
+### 実際のシナリオ
 
-### ローカルでの例の実行
+#### **小売業向けマルチエージェントソリューション** 🆕
+**[完全な実装ガイド](./retail-scenario.md)**
+
+AZDを使用したエンタープライズグレードのAIアプリケーションデプロイメントを示す包括的な、実運用対応のマルチエージェント顧客サポートソリューション。このシナリオには以下が含まれます:
+
+- **完全なアーキテクチャ**: 専門的な顧客サービスおよび在庫管理エージェントを備えたマルチエージェントシステム
+- **運用インフラ**: マルチリージョンAzure OpenAIデプロイメント、AI検索、コンテナアプリ、包括的な監視
+- **即時デプロイ可能なARMテンプレート**: 複数の構成モード（最小/標準/プレミアム）でのワンクリックデプロイメント
+- **高度な機能**: レッドチーミングセキュリティ検証、エージェント評価フレームワーク、コスト最適化、トラブルシューティングガイド
+- **実際のビジネスコンテキスト**: ファイルアップロード、検索統合、動的スケーリングを備えた小売業者の顧客サポートユースケース
+
+**技術**: Azure OpenAI (GPT-4o, GPT-4o-mini)、Azure AI Search、Container Apps、Cosmos DB、Application Insights、Document Intelligence、Bing Search API
+
+**複雑度**: ⭐⭐⭐⭐ (高度 - エンタープライズ運用対応)
+
+**対象**: AI開発者、ソリューションアーキテクト、運用マルチエージェントシステムを構築するチーム
+
+**クイックスタート**: ARMテンプレートを使用して30分以内に完全なソリューションをデプロイ `./deploy.sh -g myResourceGroup`
+
+## 📋 使用方法
+
+### ローカルで例を実行する
 
 1. **例をクローンまたはコピー**
    ```bash
@@ -86,7 +113,7 @@ Azure Samples AZD Templates (linked externally):
    azd env new my-environment
    ```
 
-3. **環境を設定**
+3. **環境を構成**
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
@@ -101,9 +128,9 @@ Azure Samples AZD Templates (linked externally):
 
 ### 例の適応
 
-各例には以下が含まれます：
+各例には以下が含まれます:
 - **README.md** - 詳細なセットアップとカスタマイズ手順
-- **azure.yaml** - コメント付きのAZD設定
+- **azure.yaml** - コメント付きのAZD構成
 - **infra/** - パラメータの説明付きBicepテンプレート
 - **src/** - サンプルアプリケーションコード
 - **scripts/** - 共通タスク用のヘルパースクリプト
@@ -112,11 +139,11 @@ Azure Samples AZD Templates (linked externally):
 
 ### 例のカテゴリ
 
-#### **基本的なデプロイ**
+#### **基本的なデプロイメント**
 - 単一サービスアプリケーション
 - シンプルなインフラパターン
-- 基本的な設定管理
-- コスト効率の高い開発セットアップ
+- 基本的な構成管理
+- コスト効率の良い開発セットアップ
 
 #### **高度なシナリオ**
 - マルチサービスアーキテクチャ
@@ -124,7 +151,7 @@ Azure Samples AZD Templates (linked externally):
 - データベース統合パターン
 - セキュリティとコンプライアンスの実装
 
-#### **本番対応パターン**
+#### **運用対応パターン**
 - 高可用性構成
 - 監視と可観測性
 - CI/CD統合
@@ -133,67 +160,67 @@ Azure Samples AZD Templates (linked externally):
 ## 📖 例の説明
 
 ### シンプルなWebアプリ - Node.js Express
-**技術**: Node.js, Express, MongoDB, Container Apps  
-**複雑さ**: 初心者向け  
-**コンセプト**: 基本的なデプロイ、REST API、NoSQLデータベース統合
+**技術**: Node.js、Express、MongoDB、Container Apps  
+**複雑度**: 初心者  
+**コンセプト**: 基本的なデプロイメント、REST API、NoSQLデータベース統合
 
 ### 静的ウェブサイト - React SPA
-**技術**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**複雑さ**: 初心者向け  
+**技術**: React、Azure Static Web Apps、Azure Functions、Cosmos DB  
+**複雑度**: 初心者  
 **コンセプト**: 静的ホスティング、サーバーレスバックエンド、モダンなウェブ開発
 
 ### コンテナアプリ - Python Flask
-**技術**: Python Flask, Docker, Container Apps, Container Registry  
-**複雑さ**: 初心者向け  
+**技術**: Python Flask、Docker、Container Apps、Container Registry  
+**複雑度**: 初心者  
 **コンセプト**: コンテナ化、マイクロサービスアーキテクチャ、API開発
 
 ### データベースアプリ - C#とAzure SQL
-**技術**: C# ASP.NET Core, Azure SQL Database, App Service  
-**複雑さ**: 中級者向け  
+**技術**: C# ASP.NET Core、Azure SQL Database、App Service  
+**複雑度**: 中級者  
 **コンセプト**: Entity Framework、データベース接続、Web API開発
 
 ### サーバーレス関数 - Python Azure Functions
-**技術**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**複雑さ**: 中級者向け  
+**技術**: Python、Azure Functions、Cosmos DB、Static Web Apps  
+**複雑度**: 中級者  
 **コンセプト**: イベント駆動型アーキテクチャ、サーバーレスコンピューティング、フルスタック開発
 
 ### マイクロサービス - Java Spring Boot
-**技術**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**複雑さ**: 中級者向け  
+**技術**: Java Spring Boot、Container Apps、Service Bus、API Gateway  
+**複雑度**: 中級者  
 **コンセプト**: マイクロサービス通信、分散システム、エンタープライズパターン
 
 ### Azure AI Foundryの例
 
 #### Azure OpenAIチャットアプリ
-**技術**: Azure OpenAI, Cognitive Search, App Service  
-**複雑さ**: 中級者向け  
+**技術**: Azure OpenAI、Cognitive Search、App Service  
+**複雑度**: 中級者  
 **コンセプト**: RAGアーキテクチャ、ベクトル検索、LLM統合
 
 #### AIドキュメント処理
-**技術**: Azure AI Document Intelligence, Storage, Functions  
-**複雑さ**: 中級者向け  
+**技術**: Azure AI Document Intelligence、Storage、Functions  
+**複雑度**: 中級者  
 **コンセプト**: ドキュメント分析、OCR、データ抽出
 
 #### 機械学習パイプライン
-**技術**: Azure ML, MLOps, Container Registry  
-**複雑さ**: 上級者向け  
+**技術**: Azure ML、MLOps、Container Registry  
+**複雑度**: 高度  
 **コンセプト**: モデルトレーニング、デプロイメントパイプライン、監視
 
-## 🛠 設定例
+## 🛠 構成例
 
-`configurations/`ディレクトリには再利用可能なコンポーネントが含まれています：
+`configurations/`ディレクトリには再利用可能なコンポーネントが含まれています:
 
-### 環境設定
+### 環境構成
 - 開発環境設定
-- ステージング環境設定
-- 本番対応設定
+- ステージング環境構成
+- 運用対応構成
 - マルチリージョンデプロイメントセットアップ
 
 ### Bicepモジュール
 - 再利用可能なインフラコンポーネント
 - 共通リソースパターン
 - セキュリティ強化テンプレート
-- コスト最適化設定
+- コスト最適化構成
 
 ### ヘルパースクリプト
 - 環境セットアップの自動化
@@ -203,15 +230,15 @@ Azure Samples AZD Templates (linked externally):
 
 ## 🔧 カスタマイズガイド
 
-### 自分のユースケースに例を適応
+### 自分のユースケースに例を適応する
 
 1. **前提条件を確認**
-   - 必要なAzureサービスを確認
+   - Azureサービスの要件を確認
    - サブスクリプションの制限を確認
    - コストの影響を理解
 
-2. **設定を変更**
-   - `azure.yaml`のサービス定義を更新
+2. **構成を変更**
+   - `azure.yaml`サービス定義を更新
    - Bicepテンプレートをカスタマイズ
    - 環境変数を調整
 
@@ -225,10 +252,10 @@ Azure Samples AZD Templates (linked externally):
    - シークレット管理を実装
    - 監視とアラートを有効化
 
-## 📊 比較表
+## 📊 比較マトリックス
 
-| 例 | サービス | データベース | 認証 | 監視 | 複雑さ |
-|----|----------|-------------|------|--------|--------|
+| 例 | サービス | データベース | 認証 | 監視 | 複雑度 |
+|----|----------|-------------|------|-------|--------|
 | Node.js Express Todo | 2 | ✅ | 基本 | 基本 | ⭐ |
 | React SPA + Functions | 3 | ✅ | 基本 | フル | ⭐ |
 | Python Flask Container | 2 | ❌ | 基本 | フル | ⭐ |
@@ -238,20 +265,21 @@ Azure Samples AZD Templates (linked externally):
 | Azure OpenAI Chat | 3 | ✅ | フル | フル | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | 基本 | フル | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | フル | フル | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **エンタープライズ** | **高度** | **⭐⭐⭐⭐** |
 
 ## 🎓 学習パス
 
 ### 推奨進行順序
 
 1. **シンプルなWebアプリから始める**
-   - 基本的なAZDの概念を学ぶ
+   - 基本的なAZD概念を学ぶ
    - デプロイメントワークフローを理解
    - 環境管理を練習
 
 2. **静的ウェブサイトを試す**
    - 異なるホスティングオプションを探る
    - CDN統合を学ぶ
-   - DNS設定を理解
+   - DNS構成を理解
 
 3. **コンテナアプリに進む**
    - コンテナ化の基本を学ぶ
@@ -269,7 +297,7 @@ Azure Samples AZD Templates (linked externally):
    - APIを練習
 
 6. **マイクロサービスを構築**
-   - サービス間通信を学ぶ
+   - サービス通信を学ぶ
    - 分散システムを理解
    - 複雑なデプロイメントを練習
 
@@ -283,55 +311,58 @@ Azure Samples AZD Templates (linked externally):
 - **React**: React SPA + Functions
 - **コンテナ**: Python Flask Container App, Java Microservices
 - **データベース**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **マルチエージェントシステム**: **Retail Multi-Agent Solution**
+- **エンタープライズ運用**: **Retail Multi-Agent Solution**
 
 ### アーキテクチャパターン別
 - **モノリシック**: Node.js Express Todo, C# Web API + SQL
 - **静的 + サーバーレス**: React SPA + Functions, Python Functions + SPA
 - **マイクロサービス**: Java Spring Boot Microservices
 - **コンテナ化**: Python Flask Container App
-- **AI対応**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI対応**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **マルチエージェントアーキテクチャ**: **Retail Multi-Agent Solution**
+- **エンタープライズマルチサービス**: **Retail Multi-Agent Solution**
 
-### 複雑さレベル別
+### 複雑度レベル別
 - **初心者**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
 - **中級者**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
-- **上級者**: ML Pipeline
+- **高度**: ML Pipeline
+- **エンタープライズ運用対応**: **Retail Multi-Agent Solution** (ARMテンプレートデプロイメントを含む完全なマルチエージェントシステム)
 
 ## 📚 追加リソース
 
 ### ドキュメントリンク
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure AI Foundry AZDテンプレート](https://github.com/Azure/ai-foundry-templates)
 - [Bicepドキュメント](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azureアーキテクチャセンター](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### コミュニティ例
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLIギャラリー](https://azure.github.io/awesome-azd/)
-- [C#とAzure SQLのTodoアプリ](https://github.com/Azure-Samples/todo-csharp-sql)
-- [PythonとMongoDBのTodoアプリ](https://github.com/Azure-Samples/todo-python-mongo)
-- [Node.jsとPostgreSQLのTodoアプリ](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [C# APIを使用したReact Webアプリ](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Samples AZDテンプレート](https://github.com/Azure-S
+- [C#とAzure SQLを使ったTodoアプリ](https://github.com/Azure-Samples/todo-csharp-sql)
+- [PythonとMongoDBを使ったTodoアプリ](https://github.com/Azure-Samples/todo-python-mongo)
+- [Node.jsとPostgreSQLを使ったTodoアプリ](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [C# APIを使ったReact Webアプリ](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Azure Container Appsジョブ](https://github.com/Azure-Samples/container-apps-jobs)
-- [Javaを使用したAzure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Javaを使ったAzure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### ベストプラクティス
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [クラウド導入フレームワーク](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 例の貢献
+## 🤝 サンプルの貢献
 
-有用な例を共有したいですか？貢献を歓迎します！
+役立つサンプルを共有したいですか？貢献を歓迎します！
 
 ### 提出ガイドライン
-1. 確立されたディレクトリ構造に従う
-2. 包括的なREADME.mdを含める
-3. 設定ファイルにコメントを追加
-4. 提出前に徹底的にテスト
+1. 既存のディレクトリ構造に従う
+2. 詳細なREADME.mdを含める
+3. 設定ファイルにコメントを追加する
+4. 提出前に徹底的にテストする
 5. コスト見積もりと前提条件を含める
 
-### 例のテンプレート構造
+### サンプルテンプレート構造
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -347,13 +378,13 @@ example-name/
 
 ---
 
-**プロのヒント**: 自分の技術スタックに合った最も簡単な例から始め、徐々により複雑なシナリオに進んでください。各例は前の例の概念を基に構築されています！
+**プロのヒント**: 自分の技術スタックに合った最も簡単なサンプルから始め、徐々により複雑なシナリオに進んでください。各サンプルは前のものの概念を基に構築されています！
 
 **次のステップ**: 
-- 自分のスキルレベルに合った例を選ぶ
-- 例のREADMEに記載されたセットアップ手順に従う
-- カスタマイズを試す
-- 学んだことをコミュニティと共有
+- 自分のスキルレベルに合ったサンプルを選ぶ
+- サンプルのREADMEに記載されたセットアップ手順に従う
+- カスタマイズを試してみる
+- コミュニティと学びを共有する
 
 ---
 
@@ -364,4 +395,4 @@ example-name/
 ---
 
 **免責事項**:  
-この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当社は責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当社は責任を負いません。

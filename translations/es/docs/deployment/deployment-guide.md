@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T16:59:52+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T15:04:42+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "es"
 }
 -->
 # Guía de Despliegue - Dominando los Despliegues con AZD
 
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 4 - Infraestructura como Código y Despliegue
+- **⬅️ Capítulo Anterior**: [Capítulo 3: Configuración](../getting-started/configuration.md)
+- **➡️ Siguiente**: [Aprovisionamiento de Recursos](provisioning.md)
+- **🚀 Próximo Capítulo**: [Capítulo 5: Soluciones de IA Multi-Agente](../../examples/retail-scenario.md)
+
 ## Introducción
 
-Esta guía completa cubre todo lo que necesitas saber sobre el despliegue de aplicaciones utilizando Azure Developer CLI, desde despliegues básicos con un solo comando hasta escenarios avanzados de producción con hooks personalizados, múltiples entornos e integración con CI/CD. Domina el ciclo de vida completo del despliegue con ejemplos prácticos y mejores prácticas.
+Esta guía completa cubre todo lo que necesitas saber sobre el despliegue de aplicaciones utilizando Azure Developer CLI, desde despliegues básicos con un solo comando hasta escenarios avanzados de producción con hooks personalizados, múltiples entornos e integración CI/CD. Domina el ciclo de vida completo del despliegue con ejemplos prácticos y mejores prácticas.
 
 ## Objetivos de Aprendizaje
 
 Al completar esta guía, podrás:
 - Dominar todos los comandos y flujos de trabajo de despliegue de Azure Developer CLI
-- Comprender el ciclo de vida completo del despliegue, desde la provisión hasta el monitoreo
+- Comprender el ciclo de vida completo del despliegue, desde el aprovisionamiento hasta el monitoreo
 - Implementar hooks personalizados para automatización antes y después del despliegue
 - Configurar múltiples entornos con parámetros específicos para cada entorno
 - Establecer estrategias avanzadas de despliegue, incluyendo despliegues blue-green y canary
-- Integrar los despliegues de azd con pipelines de CI/CD y flujos de trabajo de DevOps
+- Integrar los despliegues de azd con pipelines CI/CD y flujos de trabajo DevOps
 
 ## Resultados de Aprendizaje
 
 Al finalizar, serás capaz de:
-- Ejecutar y solucionar problemas de todos los flujos de trabajo de despliegue de azd de manera independiente
+- Ejecutar y solucionar problemas de manera independiente en todos los flujos de trabajo de despliegue de azd
 - Diseñar e implementar automatización personalizada de despliegue utilizando hooks
 - Configurar despliegues listos para producción con seguridad y monitoreo adecuados
 - Gestionar escenarios complejos de despliegue en múltiples entornos
@@ -35,16 +42,16 @@ Al finalizar, serás capaz de:
 
 ## Resumen del Despliegue
 
-Azure Developer CLI proporciona varios comandos de despliegue:
-- `azd up` - Flujo completo (provisión + despliegue)
+Azure Developer CLI ofrece varios comandos de despliegue:
+- `azd up` - Flujo completo (aprovisionar + desplegar)
 - `azd provision` - Crear/actualizar solo recursos de Azure
 - `azd deploy` - Desplegar solo el código de la aplicación
 - `azd package` - Construir y empaquetar aplicaciones
 
-## Flujos de Trabajo Básicos de Despliegue
+## Flujos Básicos de Despliegue
 
 ### Despliegue Completo (azd up)
-El flujo de trabajo más común para nuevos proyectos:
+El flujo más común para proyectos nuevos:
 ```bash
 # Deploy everything from scratch
 azd up
@@ -70,7 +77,7 @@ azd provision --service database
 ```
 
 ### Despliegue Solo de Código
-Para actualizaciones rápidas de la aplicación:
+Para actualizaciones rápidas de aplicaciones:
 ```bash
 # Deploy all services
 azd deploy
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Comprendiendo el Proceso de Despliegue
 
-### Fase 1: Hooks Pre-Provisión
+### Fase 1: Hooks Pre-Aprovisionamiento
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Fase 2: Provisión de Infraestructura
+### Fase 2: Aprovisionamiento de Infraestructura
 - Lee las plantillas de infraestructura (Bicep/Terraform)
 - Crea o actualiza recursos de Azure
 - Configura redes y seguridad
 - Establece monitoreo y registro
 
-### Fase 3: Hooks Post-Provisión
+### Fase 3: Hooks Post-Aprovisionamiento
 ```yaml
 hooks:
   postprovision:
@@ -552,7 +559,7 @@ azd history
 azd metrics --type deployment
 ```
 
-### Recopilación de Métricas Personalizadas
+### Colección de Métricas Personalizadas
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -631,7 +638,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Próximos Pasos
 
-- [Provisión de Recursos](provisioning.md) - Análisis detallado de la gestión de infraestructura
+- [Aprovisionamiento de Recursos](provisioning.md) - Análisis profundo de la gestión de infraestructura
 - [Planificación Pre-Despliegue](../pre-deployment/capacity-planning.md) - Planifica tu estrategia de despliegue
 - [Problemas Comunes](../troubleshooting/common-issues.md) - Soluciona problemas de despliegue
 - [Mejores Prácticas](../troubleshooting/debugging.md) - Estrategias de despliegue listas para producción
@@ -639,17 +646,17 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ## Recursos Adicionales
 
 - [Referencia de Despliegue de Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Despliegue de Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Despliegue de Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Despliegue de Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Despliegue en Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Despliegue en Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Despliegue en Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navegación**
 - **Lección Anterior**: [Tu Primer Proyecto](../getting-started/first-project.md)
-- **Próxima Lección**: [Provisión de Recursos](provisioning.md)
+- **Próxima Lección**: [Aprovisionamiento de Recursos](provisioning.md)
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

@@ -1,47 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T16:54:57+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T14:13:21+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ja"
 }
 -->
-# 初めてのプロジェクト - 実践チュートリアル
+# 初めてのプロジェクト - ハンズオンチュートリアル
 
-**前回:** [Configuration](configuration.md) | **次回:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前へ**: [インストールとセットアップ](installation.md)
+- **➡️ 次へ**: [設定](configuration.md)
+- **🚀 次の章**: [第2章: AIファースト開発](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## はじめに
 
-Azure Developer CLIプロジェクトへようこそ！この包括的な実践チュートリアルでは、azdを使用してAzure上でフルスタックアプリケーションを作成、デプロイ、管理する方法を完全に解説します。Reactフロントエンド、Node.js APIバックエンド、MongoDBデータベースを含む実際のTodoアプリケーションを扱います。
+Azure Developer CLI プロジェクトへようこそ！この包括的なハンズオンチュートリアルでは、azd を使用して Azure 上でフルスタックアプリケーションを作成、デプロイ、管理する方法を完全に解説します。React フロントエンド、Node.js API バックエンド、MongoDB データベースを含む実際の Todo アプリケーションを扱います。
 
 ## 学習目標
 
 このチュートリアルを完了することで、以下を習得できます:
-- テンプレートを使用したazdプロジェクト初期化ワークフロー
-- Azure Developer CLIプロジェクト構造と設定ファイルの理解
-- インフラストラクチャのプロビジョニングを含むアプリケーションの完全なAzureデプロイ
+- テンプレートを使用した azd プロジェクトの初期化ワークフロー
+- Azure Developer CLI プロジェクトの構造と設定ファイルの理解
+- インフラストラクチャのプロビジョニングを含むアプリケーションの完全なデプロイ
 - アプリケーションの更新と再デプロイ戦略の実装
 - 開発およびステージング用の複数環境の管理
 - リソースのクリーンアップとコスト管理の実践
 
 ## 学習成果
 
-完了後、以下ができるようになります:
-- テンプレートから独立してazdプロジェクトを初期化および設定
-- azdプロジェクト構造を効果的にナビゲートおよび変更
-- 単一コマンドでフルスタックアプリケーションをAzureにデプロイ
-- 一般的なデプロイ問題や認証問題のトラブルシューティング
-- 異なるデプロイ段階のための複数Azure環境の管理
-- アプリケーション更新のための継続的デプロイワークフローの実装
+このチュートリアルを完了すると、以下ができるようになります:
+- テンプレートから azd プロジェクトを独立して初期化および設定
+- azd プロジェクト構造を効果的にナビゲートおよび変更
+- 単一コマンドでフルスタックアプリケーションを Azure にデプロイ
+- 一般的なデプロイの問題や認証の問題をトラブルシュート
+- 異なるデプロイ段階のための複数の Azure 環境を管理
+- アプリケーション更新のための継続的デプロイワークフローを実装
 
 ## 始める前に
 
 ### 必要条件チェックリスト
-- ✅ Azure Developer CLIインストール済み ([インストールガイド](installation.md))
-- ✅ Azure CLIインストール済みおよび認証済み
-- ✅ Gitがシステムにインストール済み
-- ✅ Node.js 16以上（このチュートリアル用）
+- ✅ Azure Developer CLI がインストール済み ([インストールガイド](installation.md))
+- ✅ Azure CLI がインストールされ、認証済み
+- ✅ Git がシステムにインストール済み
+- ✅ Node.js 16+（このチュートリアル用）
 - ✅ Visual Studio Code（推奨）
 
 ### セットアップの確認
@@ -49,20 +54,20 @@ Azure Developer CLIプロジェクトへようこそ！この包括的な実践�
 # Check azd installation
 azd version
 ```
-### Azure認証の確認
+### Azure 認証の確認
 
 ```bash
 az account show
 ```
 
-### Node.jsバージョンの確認
+### Node.js バージョンの確認
 ```bash
 node --version
 ```
 
-## ステップ1: テンプレートの選択と初期化
+## ステップ 1: テンプレートの選択と初期化
 
-ReactフロントエンドとNode.js APIバックエンドを含む人気のTodoアプリケーションテンプレートから始めましょう。
+React フロントエンドと Node.js API バックエンドを含む人気の Todo アプリケーションテンプレートから始めましょう。
 
 ```bash
 # Browse available templates
@@ -80,14 +85,14 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### 何が起こったのか？
-- テンプレートコードをローカルディレクトリにダウンロード
-- サービス定義を含む`azure.yaml`ファイルを作成
-- `infra/`ディレクトリにインフラストラクチャコードを設定
-- 環境設定を作成
+- テンプレートコードがローカルディレクトリにダウンロードされました
+- サービス定義を含む `azure.yaml` ファイルが作成されました
+- `infra/` ディレクトリにインフラストラクチャコードが設定されました
+- 環境設定が作成されました
 
-## ステップ2: プロジェクト構造を探索
+## ステップ 2: プロジェクト構造を探索
 
-azdが作成した内容を確認しましょう:
+azd が作成した内容を確認しましょう:
 
 ```bash
 # View the project structure
@@ -125,7 +130,7 @@ my-first-azd-app/
 
 ### 理解すべき主要ファイル
 
-**azure.yaml** - azdプロジェクトの中心:
+**azure.yaml** - azd プロジェクトの中心:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -137,7 +142,7 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## ステップ3: プロジェクトのカスタマイズ（オプション）
+## ステップ 3: プロジェクトのカスタマイズ（オプション）
 
 デプロイ前にアプリケーションをカスタマイズできます:
 
@@ -162,9 +167,9 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## ステップ4: Azureへのデプロイ
+## ステップ 4: Azure へのデプロイ
 
-いよいよすべてをAzureにデプロイします！
+いよいよ本番です - すべてを Azure にデプロイしましょう！
 
 ```bash
 # Deploy infrastructure and application
@@ -179,10 +184,10 @@ azd up
 
 ### デプロイ中に何が起こるのか？
 
-`azd up`コマンドは以下のステップを実行します:
-1. **プロビジョン** (`azd provision`) - Azureリソースを作成
-2. **パッケージ** - アプリケーションコードをビルド
-3. **デプロイ** (`azd deploy`) - コードをAzureリソースにデプロイ
+`azd up` コマンドは以下のステップを実行します:
+1. **プロビジョニング** (`azd provision`) - Azure リソースを作成
+2. **パッケージ化** - アプリケーションコードをビルド
+3. **デプロイ** (`azd deploy`) - コードを Azure リソースにデプロイ
 
 ### 期待される出力
 ```
@@ -197,10 +202,10 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## ステップ5: アプリケーションのテスト
+## ステップ 5: アプリケーションのテスト
 
-### アプリケーションへのアクセス
-デプロイ出力で提供されたURLをクリックするか、いつでも取得可能:
+### アプリケーションにアクセス
+デプロイ出力に表示された URL をクリックするか、いつでも以下を使用して取得できます:
 ```bash
 # Get application endpoints
 azd show
@@ -209,10 +214,10 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Todoアプリのテスト
-1. **Todoアイテムを追加** - 「Add Todo」をクリックしてタスクを入力
-2. **完了としてマーク** - 完了したアイテムをチェック
-3. **アイテムを削除** - 不要なTodoを削除
+### Todo アプリのテスト
+1. **Todo アイテムを追加** - 「Add Todo」をクリックしてタスクを入力
+2. **完了としてマーク** - 完了したアイテムにチェックを入れる
+3. **アイテムを削除** - 不要な Todo を削除
 
 ### アプリケーションの監視
 ```bash
@@ -223,11 +228,11 @@ azd monitor
 azd logs
 ```
 
-## ステップ6: 変更を加えて再デプロイ
+## ステップ 6: 変更を加えて再デプロイ
 
-変更を加えて更新がどれほど簡単か確認しましょう:
+変更を加え、更新がどれほど簡単か確認しましょう:
 
-### APIの変更
+### API の変更
 ```bash
 # Edit the API code
 code src/api/src/routes/lists.js
@@ -247,7 +252,7 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## ステップ7: 複数環境の管理
+## ステップ 7: 複数環境の管理
 
 本番前に変更をテストするためのステージング環境を作成:
 
@@ -276,9 +281,9 @@ azd env select staging
 azd show
 ```
 
-## ステップ8: リソースのクリーンアップ
+## ステップ 8: リソースのクリーンアップ
 
-実験が終わったら、継続的な料金を避けるためにクリーンアップ:
+実験が終わったら、継続的な料金を避けるためにクリーンアップを実行:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -295,14 +300,14 @@ azd down --force --purge
 ## 学んだこと
 
 おめでとうございます！以下を成功させました:
-- テンプレートからazdプロジェクトを初期化
+- テンプレートから azd プロジェクトを初期化
 - プロジェクト構造と主要ファイルを探索
-- フルスタックアプリケーションをAzureにデプロイ
+- フルスタックアプリケーションを Azure にデプロイ
 - コード変更を加えて再デプロイ
 - 複数環境を管理
 - リソースをクリーンアップ
 
-## よくある問題のトラブルシューティング
+## 一般的な問題のトラブルシューティング
 
 ### 認証エラー
 ```bash
@@ -330,7 +335,7 @@ azd logs --service web
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### ポート/ネットワーク問題
+### ポート/ネットワークの問題
 ```bash
 # Check if ports are available
 netstat -an | grep :3000
@@ -339,15 +344,15 @@ netstat -an | grep :3100
 
 ## 次のステップ
 
-初めてのプロジェクトを完了したので、以下の高度なトピックを探索してください:
+最初のプロジェクトを完了したら、以下の高度なトピックを探求してください:
 
 ### 1. インフラストラクチャのカスタマイズ
 - [コードとしてのインフラストラクチャ](../deployment/provisioning.md)
 - [データベース、ストレージ、その他のサービスの追加](../deployment/provisioning.md#adding-services)
 
-### 2. CI/CDの設定
-- [GitHub Actionsの統合](../deployment/cicd-integration.md)
-- [Azure DevOpsパイプライン](../deployment/cicd-integration.md#azure-devops)
+### 2. CI/CD のセットアップ
+- [GitHub Actions の統合](../deployment/cicd-integration.md)
+- [Azure DevOps パイプライン](../deployment/cicd-integration.md#azure-devops)
 
 ### 3. 本番環境のベストプラクティス
 - [セキュリティ設定](../deployment/best-practices.md#security)
@@ -376,7 +381,7 @@ azd init --template todo-java-mongo
 
 ### コミュニティとサポート
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer コミュニティ](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### テンプレートと例
@@ -386,14 +391,19 @@ azd init --template todo-java-mongo
 
 ---
 
-**初めてのazdプロジェクトを完了おめでとうございます！** Azure上で素晴らしいアプリケーションを自信を持って構築・デプロイする準備が整いました。
+**初めての azd プロジェクトを完了したことをおめでとうございます！** これで、Azure 上で素晴らしいアプリケーションを自信を持って構築・デプロイする準備が整いました。
 
 ---
 
-**前回:** [Configuration](configuration.md) | **次回:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
-- **次のレッスン**: [Deployment Guide](../deployment/deployment-guide.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前へ**: [インストールとセットアップ](installation.md)
+- **➡️ 次へ**: [設定](configuration.md)
+- **🚀 次の章**: [第2章: AIファースト開発](../ai-foundry/azure-ai-foundry-integration.md)
+- **次のレッスン**: [デプロイメントガイド](../deployment/deployment-guide.md)
 
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてお考えください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は一切の責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。

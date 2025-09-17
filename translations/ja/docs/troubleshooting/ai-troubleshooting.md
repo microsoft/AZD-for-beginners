@@ -1,22 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T17:44:07+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T14:16:59+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "ja"
 }
 -->
-# Azure Developer CLI の AI トラブルシューティングガイド
+# AI特化型トラブルシューティングガイド
 
-**前:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **次:** [Getting Started with AZD](../getting-started/README.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
+- **⬅️ 前章**: [デバッグガイド](debugging.md)
+- **➡️ 次章**: [第8章: 本番環境とエンタープライズパターン](../ai-foundry/production-ai-practices.md)
+- **🤖 関連**: [第2章: AIファースト開発](../ai-foundry/azure-ai-foundry-integration.md)
 
-この包括的なトラブルシューティングガイドでは、AZD を使用して AI ソリューションをデプロイする際に発生する一般的な問題について説明し、Azure AI サービスに特化した解決策とデバッグ手法を提供します。
+**前章:** [本番AIの実践](../ai-foundry/production-ai-practices.md) | **次章:** [AZDの始め方](../getting-started/README.md)
+
+この包括的なトラブルシューティングガイドでは、AZDを使用してAIソリューションをデプロイする際に発生する一般的な問題に対処し、Azure AIサービスに特化した解決策とデバッグ手法を提供します。
 
 ## 目次
 
 - [Azure OpenAI サービスの問題](../../../../docs/troubleshooting)
-- [Azure AI Search の問題](../../../../docs/troubleshooting)
+- [Azure AI 検索の問題](../../../../docs/troubleshooting)
 - [コンテナアプリのデプロイ問題](../../../../docs/troubleshooting)
 - [認証と権限エラー](../../../../docs/troubleshooting)
 - [モデルデプロイの失敗](../../../../docs/troubleshooting)
@@ -34,7 +41,7 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **原因:**
-- 選択したリージョンで Azure OpenAI が利用不可
+- 選択したリージョンでAzure OpenAIが利用不可
 - 優先リージョンでクォータが枯渇
 - リージョンの容量制約
 
@@ -49,7 +56,7 @@ az cognitiveservices account list-skus \
   --output table
 ```
 
-2. **AZD 設定を更新:**
+2. **AZD設定を更新:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -72,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### 問題: モデルデプロイのクォータ超過
+### 問題: モデルデプロイクォータの超過
 
 **症状:**
 ```
@@ -117,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### 問題: 無効な API バージョン
+### 問題: 無効なAPIバージョン
 
 **症状:**
 ```
@@ -126,13 +133,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **解決策:**
 
-1. **サポートされている API バージョンを使用:**
+1. **サポートされているAPIバージョンを使用:**
 ```python
 # Use latest supported version
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
-2. **API バージョンの互換性を確認:**
+2. **APIバージョンの互換性を確認:**
 ```bash
 # List supported API versions
 az rest --method get \
@@ -140,9 +147,9 @@ az rest --method get \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI Search の問題
+## Azure AI 検索の問題
 
-### 問題: Search サービスの価格帯が不十分
+### 問題: 検索サービスの料金プランが不十分
 
 **症状:**
 ```
@@ -151,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **解決策:**
 
-1. **価格帯をアップグレード:**
+1. **料金プランをアップグレード:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -169,7 +176,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **セマンティック検索を無効化 (開発環境):**
+2. **セマンティック検索を無効化 (開発用):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -192,7 +199,7 @@ Error: Cannot create index, insufficient permissions
 
 **解決策:**
 
-1. **Search サービスキーを確認:**
+1. **検索サービスキーを確認:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -216,7 +223,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **マネージド ID を使用:**
+3. **マネージドIDを使用:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -241,7 +248,7 @@ Error: Failed to build container image
 
 **解決策:**
 
-1. **Dockerfile の構文を確認:**
+1. **Dockerfileの構文を確認:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -361,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## 認証と権限エラー
 
-### 問題: マネージド ID の権限拒否
+### 問題: マネージドIDの権限拒否
 
 **症状:**
 ```
@@ -410,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### 問題: Key Vault のアクセス拒否
+### 問題: Key Vaultへのアクセス拒否
 
 **症状:**
 ```
@@ -419,7 +426,7 @@ Error: The user, group or application does not have secrets get permission
 
 **解決策:**
 
-1. **Key Vault の権限を付与:**
+1. **Key Vaultの権限を付与:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -438,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **RBAC を使用してアクセスポリシーを置き換え:**
+2. **RBACを使用してアクセスポリシーを置き換え:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -472,7 +479,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **モデルのフォールバックを使用:**
+2. **モデルフォールバックを使用:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -525,10 +532,10 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ## パフォーマンスとスケーリングの問題
 
-### 問題: 高い応答遅延
+### 問題: 応答遅延が高い
 
 **症状:**
-- 応答時間が 30 秒を超える
+- 応答時間が30秒を超える
 - タイムアウトエラー
 - ユーザー体験の低下
 
@@ -657,11 +664,11 @@ class MemoryOptimizedAI:
 
 ## コストとクォータ管理
 
-### 問題: 予期しない高コスト
+### 問題: 想定外の高コスト
 
 **症状:**
-- Azure の請求額が予想以上
-- トークン使用量が推定を超える
+- Azure請求額が予想以上
+- トークン使用量が推定を超過
 - 予算アラートが発生
 
 **解決策:**
@@ -731,7 +738,7 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 
 ## デバッグツールと手法
 
-### AZD デバッグコマンド
+### AZDデバッグコマンド
 
 ```bash
 # Enable verbose logging
@@ -837,31 +844,35 @@ def monitor_performance(func):
 
 | エラーコード | 説明 | 解決策 |
 |--------------|------|--------|
-| 401 | 認証失敗 | API キーとマネージド ID 設定を確認 |
-| 403 | 禁止 | RBAC ロール割り当てを確認 |
+| 401 | 認証失敗 | APIキーとマネージドID設定を確認 |
+| 403 | アクセス拒否 | RBACロール割り当てを確認 |
 | 429 | レート制限 | 指数バックオフを使用したリトライロジックを実装 |
 | 500 | 内部サーバーエラー | モデルデプロイの状態とログを確認 |
 | 503 | サービス利用不可 | サービスの正常性とリージョンの利用可能性を確認 |
 
 ## 次のステップ
 
-1. **[AI モデルデプロイガイド](ai-model-deployment.md)** を確認してデプロイのベストプラクティスを学ぶ
-2. **[Production AI Practices](production-ai-practices.md)** を完了してエンタープライズ対応ソリューションを構築
+1. **[AIモデルデプロイガイド](ai-model-deployment.md)** を確認してデプロイのベストプラクティスを学ぶ
+2. **[本番AIの実践](production-ai-practices.md)** を完了してエンタープライズ対応ソリューションを構築
 3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)** に参加してコミュニティサポートを受ける
-4. **問題を報告**するには [AZD GitHub リポジトリ](https://github.com/Azure/azure-dev) を利用
+4. **問題を報告**: [AZD GitHubリポジトリ](https://github.com/Azure/azure-dev) でAZD特有の問題を報告
 
 ## リソース
 
 - [Azure OpenAI サービスのトラブルシューティング](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [コンテナアプリのトラブルシューティング](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search のトラブルシューティング](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure AI 検索のトラブルシューティング](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**前:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **次:** [Workshop](../../workshop/README.md)
-- [Azure Developer CLI のトラブルシューティング](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
+- **⬅️ 前章**: [デバッグガイド](debugging.md)
+- **➡️ 次章**: [第8章: 本番環境とエンタープライズパターン](../ai-foundry/production-ai-practices.md)
+- [Azure Developer CLI トラブルシューティング](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **免責事項**:  
-この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当社は責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いません。

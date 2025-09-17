@@ -1,15 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T17:05:27+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T15:04:20+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "es"
 }
 -->
 # Conceptos Básicos de AZD - Entendiendo Azure Developer CLI
 
-**Anterior:** [Instalación y Configuración](installation.md) | **Siguiente:** [Configuración](configuration.md)
+# Conceptos Básicos de AZD - Conceptos Fundamentales y Principales
+
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido
+- **⬅️ Anterior**: [Descripción del Curso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Siguiente**: [Instalación y Configuración](installation.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introducción
 
@@ -20,17 +27,17 @@ Esta lección te introduce a Azure Developer CLI (azd), una herramienta de líne
 Al final de esta lección, podrás:
 - Entender qué es Azure Developer CLI y su propósito principal
 - Aprender los conceptos clave de plantillas, entornos y servicios
-- Explorar características importantes como el desarrollo basado en plantillas y la Infraestructura como Código
-- Comprender la estructura y el flujo de trabajo de los proyectos azd
+- Explorar características principales como desarrollo basado en plantillas e Infraestructura como Código
+- Comprender la estructura y el flujo de trabajo de proyectos azd
 - Estar preparado para instalar y configurar azd en tu entorno de desarrollo
 
 ## Resultados de Aprendizaje
 
 Después de completar esta lección, serás capaz de:
-- Explicar el papel de azd en los flujos de trabajo modernos de desarrollo en la nube
+- Explicar el rol de azd en los flujos de trabajo modernos de desarrollo en la nube
 - Identificar los componentes de la estructura de un proyecto azd
 - Describir cómo las plantillas, entornos y servicios trabajan juntos
-- Comprender los beneficios de la Infraestructura como Código con azd
+- Comprender los beneficios de Infraestructura como Código con azd
 - Reconocer diferentes comandos de azd y sus propósitos
 
 ## ¿Qué es Azure Developer CLI (azd)?
@@ -77,8 +84,8 @@ azd init --template <template-name>
 
 ### 2. Infraestructura como Código
 - **Bicep** - Lenguaje específico de dominio de Azure
-- **Terraform** - Herramienta de infraestructura multi-nube
-- **ARM Templates** - Plantillas de Azure Resource Manager
+- **Terraform** - Herramienta de infraestructura multicloud
+- **Plantillas ARM** - Plantillas de Azure Resource Manager
 
 ### 3. Flujos de Trabajo Integrados
 ```bash
@@ -196,7 +203,7 @@ El comando `azd down --force --purge` es una forma poderosa de desmantelar compl
 --force
 ```
 - Omite las solicitudes de confirmación.
-- Útil para automatización o scripts donde no es factible la entrada manual.
+- Útil para automatización o scripts donde la entrada manual no es factible.
 - Asegura que el desmantelamiento proceda sin interrupciones, incluso si la CLI detecta inconsistencias.
 
 ```
@@ -295,14 +302,18 @@ azd init --template template1
 ### Avanzado (Semana 5+)
 1. Crear plantillas personalizadas
 2. Patrones avanzados de infraestructura
-3. Despliegues en múltiples regiones
+3. Despliegues multirregión
 4. Configuraciones de nivel empresarial
 
 ## Próximos Pasos
 
+**📖 Continúa con el Aprendizaje del Capítulo 1:**
 - [Instalación y Configuración](installation.md) - Instala y configura azd
-- [Tu Primer Proyecto](first-project.md) - Tutorial práctico
+- [Tu Primer Proyecto](first-project.md) - Completa el tutorial práctico
 - [Guía de Configuración](configuration.md) - Opciones avanzadas de configuración
+
+**🎯 ¿Listo para el Próximo Capítulo?**
+- [Capítulo 2: Desarrollo con IA](../ai-foundry/azure-ai-foundry-integration.md) - Comienza a construir aplicaciones con IA
 
 ## Recursos Adicionales
 
@@ -312,10 +323,14 @@ azd init --template template1
 
 ---
 
-**Anterior:** [Instalación y Configuración](installation.md) | **Siguiente:** [Configuración](configuration.md)
-- **Próxima Lección**: [Instalación y Configuración](installation.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido  
+- **⬅️ Anterior**: [Descripción del Curso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Siguiente**: [Instalación y Configuración](installation.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

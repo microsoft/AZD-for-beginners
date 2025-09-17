@@ -1,37 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:03:25+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-17T14:37:49+00:00",
   "source_file": "examples/README.md",
   "language_code": "ko"
 }
 -->
-# 예제 - 실용적인 AZD 템플릿 및 구성
+# 예제 - 실용적인 AZD 템플릿과 구성
+
+**예제를 통한 학습 - 챕터별로 정리됨**
+- **📚 코스 홈**: [AZD 초보자를 위한 가이드](../README.md)
+- **📖 챕터 매핑**: 학습 난이도에 따라 정리된 예제
+- **🚀 간단히 시작하기**: [챕터 1 예제](../../../examples)
+- **🤖 AI 예제**: [챕터 2 & 5 AI 솔루션](../../../examples)
 
 ## 소개
 
-이 디렉터리에는 Azure Developer CLI를 실습을 통해 배울 수 있도록 돕는 실용적인 예제, 템플릿 및 실제 시나리오가 포함되어 있습니다. 각 예제는 다양한 애플리케이션 아키텍처와 배포 패턴에 대한 완전한 작동 코드, 인프라 템플릿 및 상세한 지침을 제공합니다.
+이 디렉터리는 Azure Developer CLI를 실습을 통해 학습할 수 있도록 실용적인 예제, 템플릿, 실제 시나리오를 제공합니다. 각 예제는 완전한 작동 코드, 인프라 템플릿, 다양한 애플리케이션 아키텍처 및 배포 패턴에 대한 자세한 지침을 포함합니다.
 
 ## 학습 목표
 
 이 예제를 통해 다음을 학습할 수 있습니다:
 - 현실적인 애플리케이션 시나리오를 통해 Azure Developer CLI 워크플로우를 연습
 - 다양한 애플리케이션 아키텍처와 그에 대한 azd 구현 이해
-- 다양한 Azure 서비스에 대한 코드로서의 인프라 패턴 숙달
-- 환경별 배포 전략 및 구성 관리 적용
-- 모니터링, 보안 및 확장 패턴을 실용적인 맥락에서 구현
-- 실제 배포 시나리오에서 문제 해결 및 디버깅 경험 구축
+- 다양한 Azure 서비스에 대한 코드형 인프라 패턴 숙달
+- 구성 관리 및 환경별 배포 전략 적용
+- 모니터링, 보안, 확장 패턴을 실질적인 맥락에서 구현
+- 실제 배포 시나리오에서 문제 해결 및 디버깅 경험 쌓기
 
 ## 학습 결과
 
-이 예제를 완료하면 다음을 수행할 수 있습니다:
+이 예제를 완료하면 다음을 할 수 있습니다:
 - Azure Developer CLI를 사용하여 다양한 애플리케이션 유형을 자신 있게 배포
 - 제공된 템플릿을 자신의 애플리케이션 요구 사항에 맞게 조정
 - Bicep을 사용하여 맞춤형 인프라 패턴 설계 및 구현
 - 적절한 종속성을 가진 복잡한 다중 서비스 애플리케이션 구성
-- 실제 시나리오에서 보안, 모니터링 및 성능 모범 사례 적용
-- 실용적인 경험을 바탕으로 배포 문제를 해결하고 최적화
+- 실제 시나리오에서 보안, 모니터링, 성능 모범 사례 적용
+- 실질적인 경험을 바탕으로 배포 문제를 해결하고 최적화
 
 ## 디렉터리 구조
 
@@ -52,11 +58,11 @@ Azure Samples AZD Templates (linked externally):
 ## 빠른 시작 예제
 
 ### 초보자를 위한 예제
-1. **[간단한 웹 앱 - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - MongoDB를 사용하는 Node.js Express 웹 애플리케이션 배포
+1. **[간단한 웹 앱 - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - MongoDB와 함께 Node.js Express 웹 애플리케이션 배포
 2. **[정적 웹사이트 - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Azure Static Web Apps를 사용하여 React 정적 웹사이트 호스팅
 3. **[컨테이너 앱 - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - 컨테이너화된 Python Flask 애플리케이션 배포
 
-### 중급 사용자용 예제
+### 중급 사용자를 위한 예제
 4. **[데이터베이스 앱 - C#과 Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - C# API와 Azure SQL 데이터베이스를 사용하는 웹 애플리케이션
 5. **[서버리스 함수 - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - HTTP 트리거와 Cosmos DB를 사용하는 Python Azure Functions
 6. **[마이크로서비스 - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Container Apps와 API 게이트웨이를 사용하는 다중 서비스 Java 애플리케이션
@@ -67,11 +73,32 @@ Azure Samples AZD Templates (linked externally):
 2. **[AI 문서 처리](https://github.com/Azure-Samples/azure-ai-document-processing)** - Azure AI 서비스를 사용한 문서 분석
 3. **[머신 러닝 파이프라인](https://github.com/Azure-Samples/mlops-v2)** - Azure Machine Learning을 활용한 MLOps 워크플로우
 
+### 실제 시나리오
+
+#### **리테일 멀티 에이전트 솔루션** 🆕
+**[완전한 구현 가이드](./retail-scenario.md)**
+
+AZD를 사용한 엔터프라이즈급 AI 애플리케이션 배포를 보여주는 종합적이고 프로덕션 준비된 멀티 에이전트 고객 지원 솔루션. 이 시나리오는 다음을 제공합니다:
+
+- **완전한 아키텍처**: 고객 서비스 및 재고 관리 에이전트를 포함한 멀티 에이전트 시스템
+- **프로덕션 인프라**: 다중 지역 Azure OpenAI 배포, AI 검색, 컨테이너 앱, 종합 모니터링
+- **즉시 배포 가능한 ARM 템플릿**: 여러 구성 모드(최소/표준/프리미엄)로 원클릭 배포
+- **고급 기능**: 보안 검증, 에이전트 평가 프레임워크, 비용 최적화, 문제 해결 가이드
+- **실제 비즈니스 컨텍스트**: 파일 업로드, 검색 통합, 동적 확장을 포함한 리테일 고객 지원 사례
+
+**기술 스택**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**난이도**: ⭐⭐⭐⭐ (고급 - 엔터프라이즈 프로덕션 준비)
+
+**적합 대상**: AI 개발자, 솔루션 아키텍트, 프로덕션 멀티 에이전트 시스템을 구축하는 팀
+
+**빠른 시작**: 포함된 ARM 템플릿을 사용하여 `./deploy.sh -g myResourceGroup` 명령으로 30분 이내에 전체 솔루션 배포
+
 ## 📋 사용 지침
 
 ### 로컬에서 예제 실행
 
-1. **예제 클론 또는 복사**
+1. **예제 복제 또는 복사**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
@@ -101,7 +128,7 @@ Azure Samples AZD Templates (linked externally):
 
 ### 예제 수정
 
-각 예제에는 다음이 포함됩니다:
+각 예제는 다음을 포함합니다:
 - **README.md** - 상세한 설정 및 사용자 정의 지침
 - **azure.yaml** - 주석이 포함된 AZD 구성
 - **infra/** - 매개변수 설명이 포함된 Bicep 템플릿
@@ -126,7 +153,7 @@ Azure Samples AZD Templates (linked externally):
 
 #### **프로덕션 준비 패턴**
 - 고가용성 구성
-- 모니터링 및 관찰 가능성
+- 모니터링 및 가시성
 - CI/CD 통합
 - 재해 복구 설정
 
@@ -134,54 +161,54 @@ Azure Samples AZD Templates (linked externally):
 
 ### 간단한 웹 앱 - Node.js Express
 **기술 스택**: Node.js, Express, MongoDB, Container Apps  
-**복잡도**: 초보자  
+**난이도**: 초보자  
 **개념**: 기본 배포, REST API, NoSQL 데이터베이스 통합
 
 ### 정적 웹사이트 - React SPA
 **기술 스택**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**복잡도**: 초보자  
-**개념**: 정적 호스팅, 서버리스 백엔드, 현대 웹 개발
+**난이도**: 초보자  
+**개념**: 정적 호스팅, 서버리스 백엔드, 현대적 웹 개발
 
 ### 컨테이너 앱 - Python Flask
 **기술 스택**: Python Flask, Docker, Container Apps, Container Registry  
-**복잡도**: 초보자  
+**난이도**: 초보자  
 **개념**: 컨테이너화, 마이크로서비스 아키텍처, API 개발
 
 ### 데이터베이스 앱 - C#과 Azure SQL
 **기술 스택**: C# ASP.NET Core, Azure SQL Database, App Service  
-**복잡도**: 중급  
+**난이도**: 중급  
 **개념**: Entity Framework, 데이터베이스 연결, 웹 API 개발
 
 ### 서버리스 함수 - Python Azure Functions
 **기술 스택**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**복잡도**: 중급  
+**난이도**: 중급  
 **개념**: 이벤트 기반 아키텍처, 서버리스 컴퓨팅, 풀스택 개발
 
 ### 마이크로서비스 - Java Spring Boot
 **기술 스택**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**복잡도**: 중급  
+**난이도**: 중급  
 **개념**: 마이크로서비스 통신, 분산 시스템, 엔터프라이즈 패턴
 
 ### Azure AI Foundry 예제
 
 #### Azure OpenAI 채팅 앱
 **기술 스택**: Azure OpenAI, Cognitive Search, App Service  
-**복잡도**: 중급  
+**난이도**: 중급  
 **개념**: RAG 아키텍처, 벡터 검색, LLM 통합
 
 #### AI 문서 처리
 **기술 스택**: Azure AI Document Intelligence, Storage, Functions  
-**복잡도**: 중급  
+**난이도**: 중급  
 **개념**: 문서 분석, OCR, 데이터 추출
 
 #### 머신 러닝 파이프라인
 **기술 스택**: Azure ML, MLOps, Container Registry  
-**복잡도**: 고급  
+**난이도**: 고급  
 **개념**: 모델 학습, 배포 파이프라인, 모니터링
 
 ## 🛠 구성 예제
 
-`configurations/` 디렉터리에는 재사용 가능한 구성 요소가 포함되어 있습니다:
+`configurations/` 디렉터리는 재사용 가능한 구성 요소를 포함합니다:
 
 ### 환경 구성
 - 개발 환경 설정
@@ -191,7 +218,7 @@ Azure Samples AZD Templates (linked externally):
 
 ### Bicep 모듈
 - 재사용 가능한 인프라 구성 요소
-- 일반적인 리소스 패턴
+- 공통 리소스 패턴
 - 보안 강화 템플릿
 - 비용 최적화 구성
 
@@ -205,7 +232,7 @@ Azure Samples AZD Templates (linked externally):
 
 ### 예제를 자신의 사용 사례에 맞게 수정
 
-1. **필수 조건 검토**
+1. **사전 요구 사항 검토**
    - Azure 서비스 요구 사항 확인
    - 구독 제한 확인
    - 비용 영향 이해
@@ -227,23 +254,24 @@ Azure Samples AZD Templates (linked externally):
 
 ## 📊 비교 매트릭스
 
-| 예제 | 서비스 | 데이터베이스 | 인증 | 모니터링 | 복잡도 |
-|------|--------|-------------|------|----------|--------|
+| 예제 | 서비스 | 데이터베이스 | 인증 | 모니터링 | 난이도 |
+|---------|----------|----------|------|------------|------------|
 | Node.js Express Todo | 2 | ✅ | 기본 | 기본 | ⭐ |
-| React SPA + Functions | 3 | ✅ | 기본 | 풀 | ⭐ |
-| Python Flask Container | 2 | ❌ | 기본 | 풀 | ⭐ |
-| C# Web API + SQL | 2 | ✅ | 풀 | 풀 | ⭐⭐ |
-| Python Functions + SPA | 3 | ✅ | 풀 | 풀 | ⭐⭐ |
-| Java Microservices | 5+ | ✅ | 풀 | 풀 | ⭐⭐ |
-| Azure OpenAI Chat | 3 | ✅ | 풀 | 풀 | ⭐⭐⭐ |
-| AI Document Processing | 2 | ❌ | 기본 | 풀 | ⭐⭐ |
-| ML Pipeline | 4+ | ✅ | 풀 | 풀 | ⭐⭐⭐⭐ |
+| React SPA + Functions | 3 | ✅ | 기본 | 전체 | ⭐ |
+| Python Flask Container | 2 | ❌ | 기본 | 전체 | ⭐ |
+| C# Web API + SQL | 2 | ✅ | 전체 | 전체 | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | 전체 | 전체 | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | 전체 | 전체 | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | 전체 | 전체 | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | 기본 | 전체 | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | 전체 | 전체 | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **엔터프라이즈** | **고급** | **⭐⭐⭐⭐** |
 
 ## 🎓 학습 경로
 
-### 추천 진행 순서
+### 추천 학습 순서
 
-1. **간단한 웹 앱부터 시작**
+1. **간단한 웹 앱으로 시작**
    - 기본 AZD 개념 학습
    - 배포 워크플로우 이해
    - 환경 관리 연습
@@ -269,7 +297,7 @@ Azure Samples AZD Templates (linked externally):
    - API 연습
 
 6. **마이크로서비스 구축**
-   - 서비스 통신 학습
+   - 서비스 간 통신 학습
    - 분산 시스템 이해
    - 복잡한 배포 연습
 
@@ -283,53 +311,58 @@ Azure Samples AZD Templates (linked externally):
 - **React**: React SPA + Functions
 - **컨테이너**: Python Flask Container App, Java Microservices
 - **데이터베이스**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **멀티 에이전트 시스템**: **Retail Multi-Agent Solution**
+- **엔터프라이즈 프로덕션**: **Retail Multi-Agent Solution**
 
 ### 아키텍처 패턴별
 - **모놀리식**: Node.js Express Todo, C# Web API + SQL
 - **정적 + 서버리스**: React SPA + Functions, Python Functions + SPA
 - **마이크로서비스**: Java Spring Boot Microservices
 - **컨테이너화**: Python Flask Container App
-- **AI 기반**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI 기반**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **멀티 에이전트 아키텍처**: **Retail Multi-Agent Solution**
+- **엔터프라이즈 다중 서비스**: **Retail Multi-Agent Solution**
 
-### 복잡도 수준별
+### 난이도별
 - **초보자**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
 - **중급**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
 - **고급**: ML Pipeline
+- **엔터프라이즈 프로덕션 준비**: **Retail Multi-Agent Solution** (완전한 멀티 에이전트 시스템, ARM 템플릿 배포 포함)
 
 ## 📚 추가 자료
 
 ### 문서 링크
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure AI Foundry AZD 템플릿](https://github.com/Azure/ai-foundry-templates)
 - [Bicep 문서](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure 아키텍처 센터](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### 커뮤니티 예제
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Samples AZD 템플릿](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry 템플릿](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI 갤러리](https://azure.github.io/awesome-azd/)
-- [C#과 Azure SQL을 사용한 Todo 앱](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Python과 MongoDB를 사용한 Todo 앱](https://github.com/Azure-Samples/todo-python-mongo)
-- [Node.js와 PostgreSQL을 사용한 Todo 앱](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [C# API를 사용하는 React 웹 앱](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [C#와 Azure SQL을 활용한 Todo 앱](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Python과 MongoDB를 활용한 Todo 앱](https://github.com/Azure-Samples/todo-python-mongo)
+- [Node.js와 PostgreSQL을 활용한 Todo 앱](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [C# API를 활용한 React 웹 앱](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Azure Container Apps 작업](https://github.com/Azure-Samples/container-apps-jobs)
-- [Java를 사용한 Azure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Java를 활용한 Azure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### 모범 사례
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 예제 기여
+## 🤝 예제 기여하기
 
 유용한 예제를 공유하고 싶으신가요? 기여를 환영합니다!
 
 ### 제출 지침
 1. 정해진 디렉터리 구조를 따르세요
 2. 포괄적인 README.md를 포함하세요
-3. 구성 파일에 주석을 추가하세요
+3. 설정 파일에 주석을 추가하세요
 4. 제출 전에 철저히 테스트하세요
-5. 비용 추정 및 필수 조건을 포함하세요
+5. 비용 추정치와 사전 요구 사항을 포함하세요
 
 ### 예제 템플릿 구조
 ```
@@ -347,18 +380,18 @@ example-name/
 
 ---
 
-**팁**: 자신의 기술 스택에 맞는 가장 간단한 예제부터 시작한 후 점차적으로 더 복잡한 시나리오로 진행하세요. 각 예제는 이전 예제의 개념을 기반으로 구축됩니다!
+**꿀팁**: 자신이 사용하는 기술 스택에 맞는 가장 간단한 예제부터 시작하세요. 그런 다음 점차 복잡한 시나리오로 발전해 나가세요. 각 예제는 이전 예제의 개념을 기반으로 구축됩니다!
 
 **다음 단계**: 
 - 자신의 기술 수준에 맞는 예제를 선택하세요
 - 예제의 README에 있는 설정 지침을 따르세요
-- 사용자 정의를 실험해보세요
-- 커뮤니티와 학습 내용을 공유하세요
+- 사용자 정의를 실험해 보세요
+- 커뮤니티와 배운 내용을 공유하세요
 
 ---
 
 **탐색**
-- **이전 학습**: [학습 가이드](../resources/study-guide.md)
+- **이전 레슨**: [학습 가이드](../resources/study-guide.md)
 - **돌아가기**: [메인 README](../README.md)
 
 ---

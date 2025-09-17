@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T17:07:13+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T14:34:47+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "ko"
 }
 -->
-# 일반적인 문제 및 해결 방법
+# 일반적인 문제와 해결 방법
+
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 7 - 문제 해결 및 디버깅
+- **⬅️ 이전 챕터**: [챕터 6: 사전 점검](../pre-deployment/preflight-checks.md)
+- **➡️ 다음**: [디버깅 가이드](debugging.md)
+- **🚀 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../ai-foundry/production-ai-practices.md)
 
 ## 소개
 
-이 포괄적인 문제 해결 가이드는 Azure Developer CLI를 사용할 때 자주 발생하는 문제를 다룹니다. 인증, 배포, 인프라 프로비저닝, 애플리케이션 구성과 관련된 일반적인 문제를 진단, 해결 및 해결하는 방법을 배울 수 있습니다. 각 문제는 상세한 증상, 근본 원인, 단계별 해결 절차를 포함합니다.
+이 포괄적인 문제 해결 가이드는 Azure Developer CLI를 사용할 때 자주 발생하는 문제를 다룹니다. 인증, 배포, 인프라 프로비저닝, 애플리케이션 구성과 관련된 일반적인 문제를 진단, 해결 및 수정하는 방법을 배울 수 있습니다. 각 문제는 상세한 증상, 근본 원인, 단계별 해결 절차를 포함합니다.
 
 ## 학습 목표
 
@@ -21,7 +28,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 배포 실패, 인프라 프로비저닝 오류 및 구성 문제 해결
 - 사전 모니터링 및 디버깅 전략 구현
 - 복잡한 문제에 대한 체계적인 문제 해결 방법론 적용
-- 적절한 로깅 및 모니터링을 구성하여 미래의 문제 예방
+- 향후 문제를 방지하기 위한 적절한 로깅 및 모니터링 구성
 
 ## 학습 결과
 
@@ -133,7 +140,7 @@ azd down --force --purge
 
 ### 문제: 위치/지역 사용 불가
 **증상:**
-- "리소스 유형에 대해 위치 'xyz'가 사용 불가" 오류
+- "리소스 유형에 대해 'xyz' 위치가 사용 불가합니다"
 - 선택한 지역에서 특정 SKU 사용 불가
 
 **해결 방법:**
@@ -270,7 +277,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 구성 문제
 
-### 문제: 환경 변수 작동하지 않음
+### 문제: 환경 변수 작동 안 함
 **증상:**
 - 앱이 구성 값을 읽을 수 없음
 - 환경 변수가 비어 있음
@@ -293,7 +300,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 ### 문제: SSL/TLS 인증서 문제
 **증상:**
-- HTTPS 작동하지 않음
+- HTTPS 작동 안 함
 - 인증서 유효성 검사 오류
 
 **해결 방법:**
@@ -373,10 +380,10 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 성능 문제
 
-### 문제: 느린 배포 시간
+### 문제: 배포 시간이 느림
 **증상:**
 - 배포가 너무 오래 걸림
-- 배포 중 시간 초과
+- 배포 중 시간 초과 발생
 
 **해결 방법:**
 ```bash
@@ -398,7 +405,7 @@ azd config set defaults.location eastus2
 
 ### 문제: 애플리케이션 성능 문제
 **증상:**
-- 느린 응답 시간
+- 응답 시간이 느림
 - 높은 리소스 사용량
 
 **해결 방법:**
@@ -464,7 +471,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ## 🆘 추가 도움 받기
 
-### 에스컬레이션 시점
+### 에스컬레이션이 필요한 경우
 - 모든 해결 방법을 시도한 후에도 인증 문제가 지속될 때
 - Azure 서비스와 관련된 인프라 문제
 - 청구 또는 구독 관련 문제
@@ -484,14 +491,14 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### 수집할 정보
-지원에 연락하기 전에 다음 정보를 수집하세요:
+### 수집해야 할 정보
+지원팀에 연락하기 전에 다음 정보를 수집하세요:
 - `azd version` 출력
 - `azd info` 출력
 - 오류 메시지 (전체 텍스트)
 - 문제를 재현하는 단계
 - 환경 세부 정보 (`azd env show`)
-- 문제 시작 시점의 타임라인
+- 문제 발생 시점의 타임라인
 
 ### 로그 수집 스크립트
 ```bash
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 문제 예방
 
-### 배포 전 체크리스트
+### 사전 배포 체크리스트
 ```bash
 # 1. Validate authentication
 az account show
@@ -570,12 +577,12 @@ az security assessment list --resource-group myrg
 
 - [디버깅 가이드](debugging.md) - 고급 디버깅 기술
 - [리소스 프로비저닝](../deployment/provisioning.md) - 인프라 문제 해결
-- [용량 계획](../pre-deployment/capacity-planning.md) - 리소스 계획 지침
+- [용량 계획](../pre-deployment/capacity-planning.md) - 리소스 계획 가이드
 - [SKU 선택](../pre-deployment/sku-selection.md) - 서비스 계층 추천
 
 ---
 
-**팁**: 이 가이드를 북마크에 추가하고 문제가 발생할 때마다 참조하세요. 대부분의 문제는 이미 발생한 적이 있으며 확립된 해결 방법이 있습니다!
+**팁**: 이 가이드를 북마크해 두고 문제가 발생할 때마다 참조하세요. 대부분의 문제는 이미 경험된 것이며 확립된 해결 방법이 있습니다!
 
 ---
 
@@ -586,4 +593,4 @@ az security assessment list --resource-group myrg
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확한 내용이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

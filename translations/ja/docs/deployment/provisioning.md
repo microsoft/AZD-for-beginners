@@ -1,45 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T17:02:53+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T14:15:45+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "ja"
 }
 -->
-# リソースのプロビジョニング - AZDを使ったインフラストラクチャコード
+# Azureリソースのプロビジョニング - AZD
+
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
+- **📖 現在の章**: 第4章 - コードとしてのインフラとデプロイメント
+- **⬅️ 前章**: [デプロイメントガイド](deployment-guide.md)
+- **➡️ 次章**: [第5章: マルチエージェントAIソリューション](../../examples/retail-scenario.md)
+- **🔧 関連章**: [第6章: デプロイ前の検証](../pre-deployment/capacity-planning.md)
 
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLIを使用してAzureリソースをプロビジョニングおよび管理する方法を説明します。基本的なリソース作成から、Bicep、ARMテンプレート、Terraform、Pulumiを使用した高度なエンタープライズ向けインフラストラクチャアーキテクチャまで、インフラストラクチャコード（IaC）のパターンを実装する方法を学びます。
+この包括的なガイドでは、Azure Developer CLIを使用してAzureリソースをプロビジョニングおよび管理する方法を学びます。基本的なリソース作成から、Bicep、ARMテンプレート、Terraform、Pulumiを使用した高度なエンタープライズ向けインフラアーキテクチャまで、コードとしてのインフラ（IaC）パターンを実装する方法を習得できます。
 
 ## 学習目標
 
-このガイドを完了することで、以下を習得できます:
-- インフラストラクチャコードの原則とAzureリソースのプロビジョニングをマスターする
+このガイドを完了することで、以下を達成できます:
+- コードとしてのインフラの原則とAzureリソースのプロビジョニングを習得する
 - Azure Developer CLIがサポートする複数のIaCプロバイダーを理解する
 - 一般的なアプリケーションアーキテクチャ向けのBicepテンプレートを設計・実装する
 - リソースパラメータ、変数、環境固有の設定を構成する
-- ネットワーキングやセキュリティを含む高度なインフラストラクチャパターンを実装する
+- ネットワーキングやセキュリティを含む高度なインフラパターンを実装する
 - リソースのライフサイクル、更新、依存関係の解決を管理する
 
 ## 学習成果
 
-完了後、以下ができるようになります:
-- BicepおよびARMテンプレートを使用してAzureインフラストラクチャを設計・プロビジョニングする
+このガイドを完了すると、以下ができるようになります:
+- BicepやARMテンプレートを使用してAzureインフラを設計・プロビジョニングする
 - 適切なリソース依存関係を持つ複雑なマルチサービスアーキテクチャを構成する
 - 複数の環境や設定に対応するパラメータ化されたテンプレートを実装する
-- インフラストラクチャプロビジョニングの問題をトラブルシュートし、デプロイ失敗を解決する
-- Azure Well-Architected Frameworkの原則をインフラストラクチャ設計に適用する
-- インフラストラクチャの更新を管理し、バージョニング戦略を実装する
+- インフラプロビジョニングの問題をトラブルシュートし、デプロイメントの失敗を解決する
+- AzureのWell-Architected Frameworkの原則をインフラ設計に適用する
+- インフラの更新を管理し、インフラのバージョン管理戦略を実装する
 
-## インフラストラクチャプロビジョニング概要
+## インフラプロビジョニングの概要
 
-Azure Developer CLIは複数のインフラストラクチャコード（IaC）プロバイダーをサポートしています:
+Azure Developer CLIは複数のコードとしてのインフラ（IaC）プロバイダーをサポートしています:
 - **Bicep**（推奨） - Azure専用のドメイン固有言語
 - **ARMテンプレート** - JSONベースのAzure Resource Managerテンプレート
-- **Terraform** - マルチクラウドインフラストラクチャツール
-- **Pulumi** - プログラミング言語を使用した最新のインフラストラクチャコード
+- **Terraform** - マルチクラウドインフラツール
+- **Pulumi** - プログラミング言語を使用した最新のコードとしてのインフラ
 
 ## Azureリソースの理解
 
@@ -58,7 +65,7 @@ Azure Account
 - **セキュリティ**: Key Vault、Application Insights、Log Analytics
 - **AI/ML**: Cognitive Services、OpenAI、Machine Learning
 
-## Bicepインフラストラクチャテンプレート
+## Bicepインフラテンプレート
 
 ### 基本的なBicepテンプレート構造
 ```bicep
@@ -132,7 +139,7 @@ output WEB_NAME string = webApp.name
 
 ### 高度なBicepパターン
 
-#### モジュール化されたインフラストラクチャ
+#### モジュール化されたインフラ
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -302,7 +309,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 セキュリティと秘密管理
 
-### Key Vault統合
+### Key Vaultの統合
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -344,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### マネージドアイデンティティ構成
+### マネージドIDの構成
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -372,7 +379,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 ネットワーキングと接続性
 
-### Virtual Network構成
+### Virtual Networkの構成
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -721,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### インフラストラクチャテスト
+### インフラテスト
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -826,7 +833,7 @@ var commonTags = {
 }
 ```
 
-### 3. パラメータ検証
+### 3. パラメータの検証
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -859,8 +866,8 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## 次のステップ
 
-- [事前デプロイメント計画](../pre-deployment/capacity-planning.md) - リソースの利用可能性を確認する
-- [一般的な問題](../troubleshooting/common-issues.md) - インフラストラクチャの問題をトラブルシュートする
+- [デプロイ前の計画](../pre-deployment/capacity-planning.md) - リソースの利用可能性を検証する
+- [一般的な問題](../troubleshooting/common-issues.md) - インフラの問題をトラブルシュートする
 - [デバッグガイド](../troubleshooting/debugging.md) - プロビジョニングの問題をデバッグする
 - [SKU選択](../pre-deployment/sku-selection.md) - 適切なサービス階層を選択する
 
@@ -880,4 +887,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は一切の責任を負いません。
+この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いません。

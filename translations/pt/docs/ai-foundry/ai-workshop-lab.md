@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "668bc93b35c9249e52245a0b037b6011",
-  "translation_date": "2025-09-12T17:26:27+00:00",
+  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
+  "translation_date": "2025-09-17T14:46:19+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "pt"
 }
 -->
-# Laboratório de IA: Tornando Suas Soluções de IA Implantáveis com AZD
+# Laboratório de Workshop de IA: Tornando Suas Soluções de IA Implantáveis com AZD
 
-**Anterior:** [Implantação de Modelos de IA](ai-model-deployment.md) | **Próximo:** [Práticas de IA em Produção](production-ai-practices.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento com Foco em IA
+- **⬅️ Anterior**: [Implantação de Modelos de IA](ai-model-deployment.md)
+- **➡️ Próximo**: [Melhores Práticas para IA em Produção](production-ai-practices.md)
+- **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../getting-started/configuration.md)
 
 ## Visão Geral do Workshop
 
@@ -151,7 +156,7 @@ azd up
 - ✅ Configura o App Service para a aplicação web
 - ✅ Configura rede e segurança
 - ✅ Implanta o código da aplicação
-- ✅ Configura monitoramento e registro
+- ✅ Configura monitoramento e registro de logs
 
 2. **Monitore o progresso da implantação** e observe os recursos sendo criados.
 
@@ -259,13 +264,13 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 - Use o nível Básico para Search Service no desenvolvimento
 - Considere usar o plano de Consumo para Functions
 
-## Módulo 4: Segurança e Melhores Práticas de Produção
+## Módulo 4: Segurança e Melhores Práticas para Produção
 
 ### Passo 4.1: Gerenciamento Seguro de Credenciais
 
-**Desafio atual**: Muitas aplicações de IA codificam chaves de API ou usam armazenamento inseguro.
+**Desafio atual**: Muitas aplicações de IA armazenam chaves de API de forma insegura.
 
-**Solução AZD**: Identidade Gerenciada + Integração com Key Vault.
+**Solução AZD**: Integração de Identidade Gerenciada + Key Vault.
 
 1. **Revise a configuração de segurança no seu template:**
 ```bash
@@ -315,7 +320,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Configure monitoramento específico de IA:**
+2. **Configure monitoramento específico para IA:**
 
 Adicione métricas personalizadas para operações de IA:
 ```bicep
@@ -343,17 +348,17 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 **Tarefa**: Revise sua implantação para melhores práticas de segurança.
 
 **Lista de verificação:**
-- [ ] Nenhum segredo codificado no código ou configuração
+- [ ] Nenhum segredo hardcoded no código ou configuração
 - [ ] Identidade Gerenciada usada para autenticação entre serviços
 - [ ] Key Vault armazena configurações sensíveis
-- [ ] O acesso à rede está devidamente restrito
-- [ ] Monitoramento e registro estão habilitados
+- [ ] Acesso à rede está devidamente restrito
+- [ ] Monitoramento e registro de logs estão habilitados
 
 ## Módulo 5: Convertendo Sua Própria Aplicação de IA
 
 ### Passo 5.1: Folha de Avaliação
 
-**Antes de converter sua aplicação**, responda estas perguntas:
+**Antes de converter sua aplicação**, responda às seguintes perguntas:
 
 1. **Arquitetura da Aplicação:**
    - Quais serviços de IA sua aplicação utiliza?
@@ -544,7 +549,7 @@ az role assignment create \
 1. **Crie dashboards personalizados:**
 
 Navegue até o portal do Azure e crie um dashboard com:
-- Contagem de solicitações e latência do OpenAI
+- Contagem de requisições e latência do OpenAI
 - Taxas de erro da aplicação
 - Utilização de recursos
 - Rastreamento de custos
@@ -571,8 +576,8 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 2. **Implemente controles de custo:**
 - Configure alertas de orçamento
 - Use políticas de autoescalonamento
-- Implemente cache de solicitações
-- Monitore o uso de tokens para OpenAI
+- Implemente cache de requisições
+- Monitore o uso de tokens no OpenAI
 
 ### **Exercício de Laboratório 7.1: Otimização de Desempenho**
 
@@ -581,7 +586,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 **Métricas para melhorar:**
 - Reduzir o tempo médio de resposta em 20%
 - Reduzir os custos mensais em 15%
-- Manter 99,9% de tempo de atividade
+- Manter 99,9% de uptime
 
 **Estratégias para tentar:**
 - Implemente cache de respostas
@@ -603,9 +608,9 @@ Você foi encarregado de criar um chatbot de atendimento ao cliente com IA pront
 - Suporte multilíngue
 
 **Requisitos Não Funcionais:**
-- Suportar 1000 usuários simultâneos
-- SLA de 99,9% de tempo de atividade
-- Conformidade com SOC 2
+- Suporte para 1000 usuários simultâneos
+- SLA de uptime de 99,9%
+- Conformidade SOC 2
 - Custo abaixo de $500/mês
 - Implantação em múltiplos ambientes (dev, staging, prod)
 
@@ -622,7 +627,7 @@ Você foi encarregado de criar um chatbot de atendimento ao cliente com IA pront
 
 - ✅ **Funcionalidade**: Atende a todos os requisitos?
 - ✅ **Segurança**: As melhores práticas foram implementadas?
-- ✅ **Escalabilidade**: Suporta a carga esperada?
+- ✅ **Escalabilidade**: Consegue lidar com a carga?
 - ✅ **Manutenibilidade**: O código e a infraestrutura estão bem organizados?
 - ✅ **Custo**: Permanece dentro do orçamento?
 
@@ -640,36 +645,41 @@ Você foi encarregado de criar um chatbot de atendimento ao cliente com IA pront
 
 ### Recursos da Comunidade
 - [Discord do Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [GitHub do Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [Templates AZD Incríveis](https://azure.github.io/awesome-azd/)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Certificado de Conclusão
 
-Parabéns! Você concluiu o Laboratório de IA. Agora você deve ser capaz de:
+Parabéns! Concluíste o Laboratório do Workshop de IA. Agora deves ser capaz de:
 
-- ✅ Converter aplicações de IA existentes para templates AZD
-- ✅ Implantar aplicações de IA prontas para produção
-- ✅ Implementar práticas recomendadas de segurança para cargas de trabalho de IA  
-- ✅ Monitorizar e otimizar o desempenho de aplicações de IA  
-- ✅ Resolver problemas comuns de implementação  
+- ✅ Converter aplicações de IA existentes em modelos AZD
+- ✅ Implementar aplicações de IA prontas para produção
+- ✅ Aplicar as melhores práticas de segurança para cargas de trabalho de IA
+- ✅ Monitorizar e otimizar o desempenho de aplicações de IA
+- ✅ Resolver problemas comuns de implementação
 
-### Próximos Passos  
-1. Aplique estes padrões aos seus próprios projetos de IA  
-2. Contribua com modelos para a comunidade  
-3. Junte-se ao Discord do Azure AI Foundry para suporte contínuo  
-4. Explore tópicos avançados como implementações em várias regiões  
-
----
-
-**Feedback do Workshop**: Ajude-nos a melhorar este workshop partilhando a sua experiência no [canal #Azure do Discord do Azure AI Foundry](https://discord.gg/microsoft-azure).  
+### Próximos Passos
+1. Aplica estes padrões aos teus próprios projetos de IA
+2. Contribui com modelos para a comunidade
+3. Junta-te ao Discord do Azure AI Foundry para suporte contínuo
+4. Explora tópicos avançados como implementações em várias regiões
 
 ---
 
-**Anterior:** [Implementação de Modelos de IA](ai-model-deployment.md) | **Próximo:** [Práticas de IA em Produção](production-ai-practices.md)  
+**Feedback do Workshop**: Ajuda-nos a melhorar este workshop partilhando a tua experiência no [canal #Azure do Discord do Azure AI Foundry](https://discord.gg/microsoft-azure).
 
-**Precisa de Ajuda?** Junte-se à nossa comunidade para suporte e discussões sobre AZD e implementações de IA.  
+---
+
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento IA-First
+- **⬅️ Anterior**: [Implementação de Modelos de IA](ai-model-deployment.md)
+- **➡️ Próximo**: [Melhores Práticas para IA em Produção](production-ai-practices.md)
+- **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../getting-started/configuration.md)
+
+**Precisas de Ajuda?** Junta-te à nossa comunidade para suporte e discussões sobre AZD e implementações de IA.
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante ter em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.

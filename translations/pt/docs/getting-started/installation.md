@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T17:01:49+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T14:48:42+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "pt"
 }
 -->
 # Guia de Instalação e Configuração
 
-**Anterior:** [Documentação Principal](../../README.md) | **Próximo:** [Fundamentos do AZD](azd-basics.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos e Início Rápido
+- **⬅️ Anterior**: [Noções Básicas do AZD](azd-basics.md)
+- **➡️ Próximo**: [Seu Primeiro Projeto](first-project.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introdução
 
@@ -19,7 +24,7 @@ Este guia abrangente irá orientá-lo na instalação e configuração do Azure 
 
 Ao final desta lição, você será capaz de:
 - Instalar com sucesso o Azure Developer CLI no seu sistema operativo
-- Configurar autenticação com o Azure utilizando diferentes métodos
+- Configurar autenticação com o Azure utilizando vários métodos
 - Preparar o seu ambiente de desenvolvimento com os pré-requisitos necessários
 - Compreender as diferentes opções de instalação e quando utilizá-las
 - Resolver problemas comuns de instalação e configuração
@@ -37,7 +42,7 @@ Este guia ajudará você a instalar e configurar o Azure Developer CLI no seu si
 
 ## Pré-requisitos
 
-Antes de instalar o azd, certifique-se de que possui:
+Antes de instalar o azd, certifique-se de ter:
 - **Assinatura do Azure** - [Crie uma conta gratuita](https://azure.microsoft.com/free/)
 - **Azure CLI** - Para autenticação e gestão de recursos
 - **Git** - Para clonar templates e controle de versão
@@ -338,11 +343,16 @@ Se encontrar problemas:
 
 ---
 
-**Anterior:** [Documentação Principal](../../README.md) | **Próximo:** [Fundamentos do AZD](azd-basics.md)
+**Navegação do Capítulo:**
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos e Início Rápido
+- **⬅️ Anterior**: [Noções Básicas do AZD](azd-basics.md) 
+- **➡️ Próximo**: [Seu Primeiro Projeto](first-project.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Instalação Concluída!** Continue para [Seu Primeiro Projeto](first-project.md) para começar a construir com azd.
+**✅ Instalação Concluída!** Continue para [Seu Primeiro Projeto](first-project.md) para começar a construir com azd.
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante ter em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
