@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:13:07+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-17T22:45:08+00:00",
   "source_file": "examples/README.md",
   "language_code": "el"
 }
 -->
 # Παραδείγματα - Πρακτικά Πρότυπα και Ρυθμίσεις AZD
+
+**Μάθηση μέσω Παραδειγμάτων - Οργανωμένα ανά Κεφάλαιο**
+- **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../README.md)
+- **📖 Χαρτογράφηση Κεφαλαίων**: Παραδείγματα οργανωμένα ανά επίπεδο δυσκολίας
+- **🚀 Ξεκινήστε Απλά**: [Παραδείγματα Κεφαλαίου 1](../../../examples)
+- **🤖 Παραδείγματα AI**: [Παραδείγματα Κεφαλαίων 2 & 5](../../../examples)
 
 ## Εισαγωγή
 
@@ -17,7 +23,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Εργαζόμενοι με αυτά τα παραδείγματα, θα:
 - Εξασκηθείτε στις ροές εργασίας του Azure Developer CLI με ρεαλιστικά σενάρια εφαρμογών
-- Κατανοήσετε διαφορετικές αρχιτεκτονικές εφαρμογών και τις υλοποιήσεις τους με azd
+- Κατανοήσετε διαφορετικές αρχιτεκτονικές εφαρμογών και τις υλοποιήσεις τους με το azd
 - Μάθετε μοτίβα Υποδομής ως Κώδικα για διάφορες υπηρεσίες Azure
 - Εφαρμόσετε στρατηγικές διαχείρισης ρυθμίσεων και ανάπτυξης ανά περιβάλλον
 - Υλοποιήσετε μοτίβα παρακολούθησης, ασφάλειας και κλιμάκωσης σε πρακτικά πλαίσια
@@ -31,7 +37,7 @@ CO_OP_TRANSLATOR_METADATA:
 - Σχεδιάσετε και υλοποιήσετε προσαρμοσμένα μοτίβα υποδομής χρησιμοποιώντας Bicep
 - Ρυθμίσετε σύνθετες εφαρμογές πολλαπλών υπηρεσιών με σωστές εξαρτήσεις
 - Εφαρμόσετε βέλτιστες πρακτικές ασφάλειας, παρακολούθησης και απόδοσης σε πραγματικά σενάρια
-- Αντιμετωπίσετε προβλήματα και βελτιστοποιήσετε τις αναπτύξεις βάσει πρακτικής εμπειρίας
+- Αντιμετωπίσετε προβλήματα και βελτιστοποιήσετε αναπτύξεις βάσει πρακτικής εμπειρίας
 
 ## Δομή Φακέλου
 
@@ -56,7 +62,7 @@ Azure Samples AZD Templates (linked externally):
 2. **[Στατική Ιστοσελίδα - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Φιλοξενήστε μια στατική ιστοσελίδα React με Azure Static Web Apps
 3. **[Εφαρμογή Container - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Αναπτύξτε μια containerized εφαρμογή Python Flask
 
-### Για Μεσαίους Χρήστες
+### Για Χρήστες Μεσαίου Επιπέδου
 4. **[Εφαρμογή Βάσης Δεδομένων - C# με Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Εφαρμογή ιστού με API C# και Azure SQL Database
 5. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions με HTTP triggers και Cosmos DB
 6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Εφαρμογή πολλαπλών υπηρεσιών Java με Container Apps και API gateway
@@ -66,6 +72,27 @@ Azure Samples AZD Templates (linked externally):
 1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Έξυπνη εφαρμογή συνομιλίας με Azure OpenAI
 2. **[Επεξεργασία Εγγράφων AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Ανάλυση εγγράφων χρησιμοποιώντας υπηρεσίες Azure AI
 3. **[Pipeline Μηχανικής Μάθησης](https://github.com/Azure-Samples/mlops-v2)** - Ροή εργασίας MLOps με Azure Machine Learning
+
+### Σενάρια Πραγματικού Κόσμου
+
+#### **Λύση Λιανικής Πολλαπλών Πρακτόρων** 🆕
+**[Οδηγός Πλήρους Υλοποίησης](./retail-scenario.md)**
+
+Μια ολοκληρωμένη, έτοιμη για παραγωγή λύση πολλαπλών πρακτόρων για υποστήριξη πελατών που επιδεικνύει ανάπτυξη εφαρμογών AI επιπέδου επιχείρησης με AZD. Αυτό το σενάριο παρέχει:
+
+- **Πλήρης Αρχιτεκτονική**: Σύστημα πολλαπλών πρακτόρων με εξειδικευμένους πράκτορες εξυπηρέτησης πελατών και διαχείρισης αποθεμάτων
+- **Υποδομή Παραγωγής**: Αναπτύξεις Azure OpenAI πολλαπλών περιοχών, AI Search, Container Apps και ολοκληρωμένη παρακολούθηση
+- **Έτοιμο Πρότυπο ARM**: Ανάπτυξη με ένα κλικ με πολλαπλές λειτουργίες ρύθμισης (Ελάχιστη/Κανονική/Προηγμένη)
+- **Προηγμένα Χαρακτηριστικά**: Επικύρωση ασφάλειας, πλαίσιο αξιολόγησης πρακτόρων, βελτιστοποίηση κόστους και οδηγοί αντιμετώπισης προβλημάτων
+- **Πραγματικό Επιχειρηματικό Πλαίσιο**: Χρήση για υποστήριξη πελατών λιανικής με μεταφορτώσεις αρχείων, ενσωμάτωση αναζήτησης και δυναμική κλιμάκωση
+
+**Τεχνολογίες**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Δυσκολία**: ⭐⭐⭐⭐ (Προχωρημένο - Έτοιμο για Παραγωγή Επιχείρησης)
+
+**Ιδανικό για**: Προγραμματιστές AI, αρχιτέκτονες λύσεων και ομάδες που κατασκευάζουν συστήματα πολλαπλών πρακτόρων για παραγωγή
+
+**Γρήγορη Εκκίνηση**: Αναπτύξτε την πλήρη λύση σε λιγότερο από 30 λεπτά χρησιμοποιώντας το περιλαμβανόμενο πρότυπο ARM με `./deploy.sh -g myResourceGroup`
 
 ## 📋 Οδηγίες Χρήσης
 
@@ -106,7 +133,7 @@ Azure Samples AZD Templates (linked externally):
 - **azure.yaml** - Ρύθμιση AZD με σχόλια
 - **infra/** - Πρότυπα Bicep με εξηγήσεις παραμέτρων
 - **src/** - Δείγμα κώδικα εφαρμογής
-- **scripts/** - Βοηθητικά scripts για κοινές εργασίες
+- **scripts/** - Βοηθητικά σενάρια για κοινές εργασίες
 
 ## 🎯 Στόχοι Μάθησης
 
@@ -134,50 +161,50 @@ Azure Samples AZD Templates (linked externally):
 
 ### Απλή Εφαρμογή Ιστού - Node.js Express
 **Τεχνολογίες**: Node.js, Express, MongoDB, Container Apps  
-**Πολυπλοκότητα**: Αρχάριος  
+**Δυσκολία**: Αρχάριος  
 **Έννοιες**: Βασική ανάπτυξη, REST API, ενσωμάτωση NoSQL βάσης δεδομένων
 
 ### Στατική Ιστοσελίδα - React SPA
 **Τεχνολογίες**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**Πολυπλοκότητα**: Αρχάριος  
+**Δυσκολία**: Αρχάριος  
 **Έννοιες**: Στατική φιλοξενία, serverless backend, σύγχρονη ανάπτυξη ιστού
 
 ### Εφαρμογή Container - Python Flask
 **Τεχνολογίες**: Python Flask, Docker, Container Apps, Container Registry  
-**Πολυπλοκότητα**: Αρχάριος  
-**Έννοιες**: Containerization, αρχιτεκτονική μικροϋπηρεσιών, ανάπτυξη API
+**Δυσκολία**: Αρχάριος  
+**Έννοιες**: Containerization, αρχιτεκτονική microservices, ανάπτυξη API
 
 ### Εφαρμογή Βάσης Δεδομένων - C# με Azure SQL
 **Τεχνολογίες**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Πολυπλοκότητα**: Μεσαίος  
+**Δυσκολία**: Μεσαίο  
 **Έννοιες**: Entity Framework, συνδέσεις βάσεων δεδομένων, ανάπτυξη web API
 
 ### Serverless Function - Python Azure Functions
 **Τεχνολογίες**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Πολυπλοκότητα**: Μεσαίος  
+**Δυσκολία**: Μεσαίο  
 **Έννοιες**: Αρχιτεκτονική βασισμένη σε γεγονότα, serverless computing, ανάπτυξη full-stack
 
 ### Microservices - Java Spring Boot
 **Τεχνολογίες**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Πολυπλοκότητα**: Μεσαίος  
-**Έννοιες**: Επικοινωνία μικροϋπηρεσιών, κατανεμημένα συστήματα, μοτίβα επιχειρησιακής κλίμακας
+**Δυσκολία**: Μεσαίο  
+**Έννοιες**: Επικοινωνία υπηρεσιών, κατανεμημένα συστήματα, μοτίβα επιχείρησης
 
 ### Παραδείγματα Azure AI Foundry
 
 #### Azure OpenAI Chat App
 **Τεχνολογίες**: Azure OpenAI, Cognitive Search, App Service  
-**Πολυπλοκότητα**: Μεσαίος  
+**Δυσκολία**: Μεσαίο  
 **Έννοιες**: Αρχιτεκτονική RAG, αναζήτηση vector, ενσωμάτωση LLM
 
 #### Επεξεργασία Εγγράφων AI
 **Τεχνολογίες**: Azure AI Document Intelligence, Storage, Functions  
-**Πολυπλοκότητα**: Μεσαίος  
+**Δυσκολία**: Μεσαίο  
 **Έννοιες**: Ανάλυση εγγράφων, OCR, εξαγωγή δεδομένων
 
 #### Pipeline Μηχανικής Μάθησης
 **Τεχνολογίες**: Azure ML, MLOps, Container Registry  
-**Πολυπλοκότητα**: Προχωρημένος  
-**Έννοιες**: Εκπαίδευση μοντέλων, ροές εργασίας ανάπτυξης, παρακολούθηση
+**Δυσκολία**: Προχωρημένο  
+**Έννοιες**: Εκπαίδευση μοντέλων, ροές ανάπτυξης, παρακολούθηση
 
 ## 🛠 Παραδείγματα Ρυθμίσεων
 
@@ -192,12 +219,12 @@ Azure Samples AZD Templates (linked externally):
 ### Μονάδες Bicep
 - Επαναχρησιμοποιήσιμα στοιχεία υποδομής
 - Κοινά μοτίβα πόρων
-- Πρότυπα με αυξημένη ασφάλεια
+- Πρότυπα με ενισχυμένη ασφάλεια
 - Ρυθμίσεις βελτιστοποιημένου κόστους
 
-### Βοηθητικά Scripts
+### Βοηθητικά Σενάρια
 - Αυτοματοποίηση ρύθμισης περιβάλλοντος
-- Scripts μετανάστευσης βάσεων δεδομένων
+- Σενάρια μετεγκατάστασης βάσεων δεδομένων
 - Εργαλεία επικύρωσης ανάπτυξης
 - Εργαλεία παρακολούθησης κόστους
 
@@ -205,15 +232,15 @@ Azure Samples AZD Templates (linked externally):
 
 ### Προσαρμογή Παραδειγμάτων στις Ανάγκες Σας
 
-1. **Ανασκόπηση Προαπαιτούμενων**
+1. **Επισκόπηση Προαπαιτούμενων**
    - Ελέγξτε τις απαιτήσεις υπηρεσιών Azure
    - Επαληθεύστε τα όρια συνδρομής
    - Κατανοήστε τις επιπτώσεις κόστους
 
-2. **Τροποποίηση Ρυθμίσεων**
+2. **Τροποποίηση Ρύθμισης**
    - Ενημερώστε τους ορισμούς υπηρεσιών στο `azure.yaml`
    - Προσαρμόστε τα πρότυπα Bicep
-   - Ρυθμίστε τις μεταβλητές περιβάλλοντος
+   - Ρυθμίστε μεταβλητές περιβάλλοντος
 
 3. **Δοκιμή**
    - Αναπτύξτε πρώτα στο περιβάλλον ανάπτυξης
@@ -227,8 +254,8 @@ Azure Samples AZD Templates (linked externally):
 
 ## 📊 Πίνακας Σύγκρισης
 
-| Παράδειγμα | Υπηρεσίες | Βάση Δεδομένων | Αυθεντικοποίηση | Παρακολούθηση | Πολυπλοκότητα |
-|------------|-----------|----------------|------------------|---------------|---------------|
+| Παράδειγμα | Υπηρεσίες | Βάση Δεδομένων | Αυθεντικοποίηση | Παρακολούθηση | Δυσκολία |
+|------------|-----------|----------------|------------------|---------------|----------|
 | Node.js Express Todo | 2 | ✅ | Βασική | Βασική | ⭐ |
 | React SPA + Functions | 3 | ✅ | Βασική | Πλήρης | ⭐ |
 | Python Flask Container | 2 | ❌ | Βασική | Πλήρης | ⭐ |
@@ -238,22 +265,23 @@ Azure Samples AZD Templates (linked externally):
 | Azure OpenAI Chat | 3 | ✅ | Πλήρης | Πλήρης | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Βασική | Πλήρης | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Πλήρης | Πλήρης | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **Επιχειρηματική** | **Προηγμένη** | **⭐⭐⭐⭐** |
 
 ## 🎓 Διαδρομή Μάθησης
 
-### Συνιστώμενη Πρόοδος
+### Προτεινόμενη Πρόοδος
 
-1. **Ξεκινήστε με την Απλή Εφαρμογή Ιστού**
+1. **Ξεκινήστε με Απλή Εφαρμογή Ιστού**
    - Μάθετε βασικές έννοιες AZD
    - Κατανοήστε τη ροή εργασίας ανάπτυξης
    - Εξασκηθείτε στη διαχείριση περιβάλλοντος
 
-2. **Δοκιμάστε τη Στατική Ιστοσελίδα**
+2. **Δοκιμάστε Στατική Ιστοσελίδα**
    - Εξερευνήστε διαφορετικές επιλογές φιλοξενίας
    - Μάθετε για την ενσωμάτωση CDN
    - Κατανοήστε τη ρύθμιση DNS
 
-3. **Προχωρήστε στην Εφαρμογή Container**
+3. **Προχωρήστε σε Εφαρμογή Container**
    - Μάθετε βασικά στοιχεία containerization
    - Κατανοήστε έννοιες κλιμάκωσης
    - Εξασκηθείτε με Docker
@@ -263,12 +291,12 @@ Azure Samples AZD Templates (linked externally):
    - Κατανοήστε τις συμβολοσειρές σύνδεσης
    - Εξασκηθείτε στη διαχείριση μυστικών
 
-5. **Εξερευνήστε το Serverless**
+5. **Εξερευνήστε Serverless**
    - Κατανοήστε την αρχιτεκτονική βασισμένη σε γεγονότα
    - Μάθετε για triggers και bindings
    - Εξασκηθείτε με APIs
 
-6. **Δημιουργήστε Microservices**
+6. **Κατασκευάστε Microservices**
    - Μάθετε την επικοινωνία υπηρεσιών
    - Κατανοήστε κατανεμημένα συστήματα
    - Εξασκηθείτε σε σύνθετες αναπτύξεις
@@ -277,50 +305,60 @@ Azure Samples AZD Templates (linked externally):
 
 ### Ανά Τεχνολογικό Στοίβα
 - **Node.js**: Node.js Express Todo App
-- **Python**: Python Flask Container App, Python Functions + SPA
-- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
-- **Java**: Java Spring Boot Microservices
-- **React**: React SPA + Functions
-- **Containers**: Python Flask Container App, Java Microservices
-- **Databases**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
-
-### Ανά Μοτίβο Αρχιτεκτονικής
-- **Μονολιθικό**: Node.js Express Todo, C# Web API + SQL
-- **Στατικό + Serverless**: React SPA + Functions, Python Functions + SPA
-- **Microservices**: Java Spring Boot Microservices
-- **Containerized**: Python Flask Container App
-- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
-
-### Ανά Επίπεδο Πολυπλοκότητας
-- **Αρχάριος**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
-- **Μεσαίος**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
-- **Προχωρημένος**: ML Pipeline
-
-## 📚 Πρόσθετοι Πόροι
-
-### Σύνδεσμοι Τεκμηρίωσης
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
-- [Τεκμηρίωση Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Κέντρο Αρχιτεκτονικής Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-
-### Παραδείγματα Κοινότητας
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
-- [Todo App με C# και Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Todo App με Python και MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
-- [Todo App με Node.js και PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React Web App με C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- **Python**: Python Flask Container App, Python Functions
+- [Εφαρμογή Todo με C# και Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Εφαρμογή Todo με Python και MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Εφαρμογή Todo με Node.js και PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [Web Εφαρμογή React με API σε C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions με Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Βέλτιστες Πρακτικές
-- [Πλαίσιο Καλά Αρχιτεκτονημένου Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Πλαίσιο Υιοθέτησης Cloud](https://learn.microsoft.com/en-us
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+
+## 🤝 Συμβολή Παραδειγμάτων
+
+Έχετε ένα χρήσιμο παράδειγμα να μοιραστείτε; Καλωσορίζουμε τις συνεισφορές!
+
+### Οδηγίες Υποβολής
+1. Ακολουθήστε την καθορισμένη δομή καταλόγου
+2. Συμπεριλάβετε αναλυτικό README.md
+3. Προσθέστε σχόλια στα αρχεία ρυθμίσεων
+4. Δοκιμάστε διεξοδικά πριν την υποβολή
+5. Συμπεριλάβετε εκτιμήσεις κόστους και προαπαιτούμενα
+
+### Παράδειγμα Δομής Προτύπου
+```
+example-name/
+├── README.md           # Detailed setup instructions
+├── azure.yaml          # AZD configuration
+├── infra/              # Infrastructure templates
+│   ├── main.bicep
+│   └── modules/
+├── src/                # Application source code
+├── scripts/            # Helper scripts
+├── .gitignore         # Git ignore rules
+└── docs/              # Additional documentation
+```
+
+---
+
+**Χρήσιμη Συμβουλή**: Ξεκινήστε με το πιο απλό παράδειγμα που ταιριάζει στην τεχνολογική σας στοίβα και στη συνέχεια προχωρήστε σταδιακά σε πιο σύνθετα σενάρια. Κάθε παράδειγμα βασίζεται σε έννοιες από τα προηγούμενα!
+
+**Επόμενα Βήματα**: 
+- Επιλέξτε ένα παράδειγμα που ταιριάζει στο επίπεδο δεξιοτήτων σας
+- Ακολουθήστε τις οδηγίες εγκατάστασης στο README του παραδείγματος
+- Πειραματιστείτε με προσαρμογές
+- Μοιραστείτε τις γνώσεις σας με την κοινότητα
+
+---
+
+**Πλοήγηση**
+- **Προηγούμενο Μάθημα**: [Οδηγός Μελέτης](../resources/study-guide.md)
+- **Επιστροφή σε**: [Κύριο README](../README.md)
 
 ---
 
 **Αποποίηση ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.

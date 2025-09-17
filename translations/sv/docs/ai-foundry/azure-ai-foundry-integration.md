@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:43:30+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T23:12:48+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "sv"
 }
 -->
 # Azure AI Foundry Integration med AZD
 
-**Föregående:** [Första Projektet](../getting-started/first-project.md) | **Nästa:** [AI-modellens Utrullning](ai-model-deployment.md)
+**Kapitelnavigation:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 2 - AI-Driven Utveckling
+- **⬅️ Föregående Kapitel**: [Kapitel 1: Ditt Första Projekt](../getting-started/first-project.md)
+- **➡️ Nästa**: [AI-Modellutplacering](ai-model-deployment.md)
+- **🚀 Nästa Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ## Översikt
 
-Den här guiden visar hur du integrerar Azure AI Foundry-tjänster med Azure Developer CLI (AZD) för smidiga AI-applikationsutrullningar. Azure AI Foundry erbjuder en omfattande plattform för att bygga, distribuera och hantera AI-applikationer, medan AZD förenklar infrastrukturen och utrullningsprocessen.
+Den här guiden visar hur du integrerar Azure AI Foundry-tjänster med Azure Developer CLI (AZD) för smidiga AI-applikationsutplaceringar. Azure AI Foundry erbjuder en omfattande plattform för att bygga, distribuera och hantera AI-applikationer, medan AZD förenklar infrastrukturen och utplaceringsprocessen.
 
 ## Vad är Azure AI Foundry?
 
@@ -22,17 +27,17 @@ Azure AI Foundry är Microsofts enhetliga plattform för AI-utveckling som inklu
 - **Modellkatalog**: Tillgång till toppmoderna AI-modeller
 - **Prompt Flow**: Visuell designer för AI-arbetsflöden
 - **AI Foundry Portal**: Integrerad utvecklingsmiljö för AI-applikationer
-- **Utrullningsalternativ**: Flera hosting- och skalningsalternativ
-- **Säkerhet och trygghet**: Inbyggda funktioner för ansvarsfull AI
+- **Utplaceringsalternativ**: Flera hosting- och skalningsalternativ
+- **Säkerhet och Trygghet**: Inbyggda funktioner för ansvarsfull AI
 
 ## AZD + Azure AI Foundry: Bättre Tillsammans
 
 | Funktion | Azure AI Foundry | Fördel med AZD-integration |
 |----------|------------------|---------------------------|
-| **Modellutrullning** | Manuell portalutrullning | Automatiserade, upprepbara utrullningar |
+| **Modellutplacering** | Manuell portalutplacering | Automatiserade, upprepbara utplaceringar |
 | **Infrastruktur** | Klickbaserad provisionering | Infrastruktur som kod (Bicep) |
 | **Miljöhantering** | Fokus på en miljö | Flera miljöer (utveckling/staging/produktion) |
-| **CI/CD-integration** | Begränsad | Inbyggt stöd för GitHub Actions |
+| **CI/CD Integration** | Begränsad | Inbyggt stöd för GitHub Actions |
 | **Kostnadshantering** | Grundläggande övervakning | Miljöspecifik kostnadsoptimering |
 
 ## Förutsättningar
@@ -46,7 +51,7 @@ Azure AI Foundry är Microsofts enhetliga plattform för AI-utveckling som inklu
 
 ### Mönster 1: Azure OpenAI Integration
 
-**Användningsfall**: Utrullning av chattapplikationer med Azure OpenAI-modeller
+**Användningsfall**: Distribuera chattapplikationer med Azure OpenAI-modeller
 
 ```yaml
 # azure.yaml
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Mönster 2: AI-sökning + RAG Integration
 
-**Användningsfall**: Utrullning av applikationer med retrieval-augmented generation (RAG)
+**Användningsfall**: Distribuera applikationer med retrieval-augmented generation (RAG)
 
 ```bicep
 // Azure AI Search
@@ -159,7 +164,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 Konfigurationsmönster
 
-### Miljövariabler Setup
+### Inställning av Miljövariabler
 
 **Produktionskonfiguration:**
 ```bash
@@ -220,9 +225,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Utrullningsarbetsflöden
+## Utplaceringsarbetsflöden
 
-### Utrullning med ett Kommando
+### Utplacering med Ett Kommando
 
 ```bash
 # Deploy everything with one command
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### Miljöspecifika Utrullningar
+### Miljöspecifika Utplaceringar
 
 ```bash
 # Development environment
@@ -313,7 +318,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Säkerhetsbästa Praxis
+## 🔐 Säkerhetsbästa praxis
 
 ### Konfiguration av Hanterad Identitet
 
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Konfiguration för Autoskalning
+### Konfiguration av Autoskalning
 
 ```bicep
 // Container App with auto-scaling
@@ -431,7 +436,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 ### Problem 1: OpenAI-kvot Överskriden
 
 **Symptom:**
-- Utrullning misslyckas med kvotfel
+- Utplacering misslyckas med kvotfel
 - 429-fel i applikationsloggar
 
 **Lösningar:**
@@ -466,10 +471,10 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Problem 3: Problem med Modellutrullning
+### Problem 3: Problem med Modellutplacering
 
 **Symptom:**
-- Modeller är inte tillgängliga i utrullningen
+- Modeller är inte tillgängliga i utplaceringen
 - Specifika modellversioner misslyckas
 
 **Lösningar:**
@@ -525,22 +530,27 @@ azd up
 2. **Anpassa efter Dina Behov**: Modifiera infrastrukturen och applikationskoden
 3. **Lägg till Övervakning**: Implementera omfattande observabilitet
 4. **Optimera Kostnader**: Finjustera konfigurationer för din budget
-5. **Säkra Din Utrullning**: Implementera säkerhetsmönster för företag
+5. **Säkra Din Utplacering**: Implementera säkerhetsmönster för företag
 6. **Skala till Produktion**: Lägg till funktioner för flera regioner och hög tillgänglighet
 
 ## Community och Support
 
-- **Azure AI Foundry Discord**: [#Azure-kanal](https://discord.gg/microsoft-azure)
+- **Azure AI Foundry Discord**: [#Azure kanal](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Problem och diskussioner](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Officiell dokumentation](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**Föregående:** [Första Projektet](../getting-started/first-project.md) | **Nästa:** [AI-modellens Utrullning](ai-model-deployment.md)
+**Kapitelnavigation:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 2 - AI-Driven Utveckling
+- **⬅️ Föregående Kapitel**: [Kapitel 1: Ditt Första Projekt](../getting-started/first-project.md)
+- **➡️ Nästa**: [AI-Modellutplacering](ai-model-deployment.md)
+- **🚀 Nästa Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 **Behöver Hjälp?** Gå med i våra communitydiskussioner eller öppna ett problem i repositoryn. Azure AI + AZD-communityn är här för att hjälpa dig att lyckas!
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

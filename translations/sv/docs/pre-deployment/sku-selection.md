@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:03:06+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T23:17:31+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "sv"
 }
 -->
 # Guide för SKU-val - Välja rätt Azure-tjänstenivåer
+
+**Kapitelnavigation:**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 6 - Validering och planering före driftsättning
+- **⬅️ Föregående**: [Kapacitetsplanering](capacity-planning.md)
+- **➡️ Nästa**: [Kontroller före driftsättning](preflight-checks.md)
+- **🚀 Nästa kapitel**: [Kapitel 7: Felsökning](../troubleshooting/common-issues.md)
 
 ## Introduktion
 
@@ -21,17 +28,17 @@ Genom att slutföra denna guide kommer du att:
 - Analysera arbetsbelastningskrav och matcha dem med lämpliga tjänstenivåer
 - Implementera kostnadsoptimeringsstrategier genom intelligent SKU-val
 - Använda prestandatestning och valideringstekniker för SKU-val
-- Konfigurera automatiska SKU-rekommendationer och övervakning
+- Konfigurera automatiserade SKU-rekommendationer och övervakning
 
 ## Läranderesultat
 
 Efter att ha slutfört guiden kommer du att kunna:
 - Välja lämpliga Azure-tjänste-SKU:er baserat på arbetsbelastningskrav och begränsningar
 - Designa kostnadseffektiva arkitekturer för flera miljöer med korrekt nivåval
-- Implementera prestandabenchmarking och validering för SKU-val
+- Implementera prestandamätning och validering för SKU-val
 - Skapa automatiserade verktyg för SKU-rekommendationer och kostnadsoptimering
 - Planera SKU-migreringar och skalningsstrategier för förändrade krav
-- Tillämpa principer från Azure Well-Architected Framework för val av tjänstenivåer
+- Tillämpa principer från Azure Well-Architected Framework för tjänstenivåval
 
 ## Innehållsförteckning
 
@@ -56,7 +63,7 @@ SKU:er (Stock Keeping Units) representerar olika tjänstenivåer och prestandani
 - **Prismodeller** (förbrukningsbaserad, reserverad kapacitet)
 - **Regional tillgänglighet** (alla SKU:er är inte tillgängliga i alla regioner)
 
-### Viktiga faktorer vid val av SKU
+### Viktiga faktorer vid SKU-val
 
 1. **Arbetsbelastningskrav**
    - Förväntade trafik-/belastningsmönster
@@ -209,7 +216,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 1. **DTU-baserad (Database Transaction Units)**
    - **Basic**: 5 DTU - Utveckling/testning
-   - **Standard**: S0-S12 (10-3000 DTU) - Allmän användning
+   - **Standard**: S0-S12 (10-3000 DTU) - Allmänt ändamål
    - **Premium**: P1-P15 (125-4000 DTU) - Prestandakritisk
 
 2. **vCore-baserad** (Rekommenderas för produktion)
@@ -341,7 +348,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 3. **Serverlös**
    - Betala per begäran
    - Ingen provisionerad genomströmning
-   - Perfekt för utveckling och intermittent arbetsbelastning
+   - Perfekt för utveckling och intermittenta arbetsbelastningar
 
 #### SKU-exempel
 
@@ -409,7 +416,7 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### Prestandanivåer
 
-- **Standard**: Allmän användning, kostnadseffektivt
+- **Standard**: Allmänt ändamål, kostnadseffektivt
 - **Premium**: Hög prestanda, låg latens
 
 ```bicep
@@ -815,11 +822,11 @@ test_configuration:
 
 ---
 
-**Navigering**
+**Navigation**
 - **Föregående lektion**: [Kapacitetsplanering](capacity-planning.md)
-- **Nästa lektion**: [Förkontroller](preflight-checks.md)
+- **Nästa lektion**: [Kontroller före driftsättning](preflight-checks.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

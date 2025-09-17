@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:03:41+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T23:31:53+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "da"
 }
 -->
 # Vejledning til SKU-valg - Sådan vælger du de rette Azure-serviceniveauer
+
+**Kapiteloversigt:**
+- **📚 Kursushjem**: [AZD For Beginners](../../README.md)
+- **📖 Aktuelt kapitel**: Kapitel 6 - Validering og planlægning før implementering
+- **⬅️ Forrige**: [Kapacitetsplanlægning](capacity-planning.md)
+- **➡️ Næste**: [Pre-flight Checks](preflight-checks.md)
+- **🚀 Næste kapitel**: [Kapitel 7: Fejlfinding](../troubleshooting/common-issues.md)
 
 ## Introduktion
 
@@ -16,18 +23,18 @@ Denne omfattende vejledning hjælper dig med at vælge optimale Azure SKU'er (St
 ## Læringsmål
 
 Ved at gennemføre denne vejledning vil du:
-- Forstå Azure SKU-konceptet, prismodeller og forskelle i funktioner
-- Mestre miljøspecifikke SKU-valgstrategier til udvikling, staging og produktion
+- Forstå Azure SKU-konceptet, prisstrukturer og forskelle i funktioner
+- Mestre strategier for SKU-valg baseret på miljøer som udvikling, staging og produktion
 - Analysere arbejdsbelastningskrav og matche dem med passende serviceniveauer
 - Implementere omkostningsoptimeringsstrategier gennem intelligent SKU-valg
-- Anvende ydeevnetest og valideringsteknikker til SKU-valg
+- Anvende ydeevnetest og valideringsteknikker for SKU-valg
 - Konfigurere automatiske SKU-anbefalinger og overvågning
 
 ## Læringsresultater
 
-Efter afslutning vil du kunne:
+Efter afslutning vil du være i stand til at:
 - Vælge passende Azure SKU'er baseret på arbejdsbelastningskrav og begrænsninger
-- Designe omkostningseffektive arkitekturer med flere miljøer og korrekt niveauvalg
+- Designe omkostningseffektive arkitekturer med korrekt niveauvalg for flere miljøer
 - Implementere ydeevnebenchmarking og validering for SKU-valg
 - Oprette automatiserede værktøjer til SKU-anbefalinger og omkostningsoptimering
 - Planlægge SKU-migreringer og skaleringsstrategier for ændrede krav
@@ -37,8 +44,8 @@ Efter afslutning vil du kunne:
 
 - [Forståelse af SKU'er](../../../../docs/pre-deployment)
 - [Miljøbaseret valg](../../../../docs/pre-deployment)
-- [Service-specifikke retningslinjer](../../../../docs/pre-deployment)
-- [Omkostningsoptimeringsstrategier](../../../../docs/pre-deployment)
+- [Specifikke retningslinjer for tjenester](../../../../docs/pre-deployment)
+- [Strategier for omkostningsoptimering](../../../../docs/pre-deployment)
 - [Overvejelser om ydeevne](../../../../docs/pre-deployment)
 - [Hurtige referencetabeller](../../../../docs/pre-deployment)
 - [Valideringsværktøjer](../../../../docs/pre-deployment)
@@ -53,7 +60,7 @@ SKU'er (Stock Keeping Units) repræsenterer forskellige serviceniveauer og ydeev
 
 - **Ydeevneegenskaber** (CPU, hukommelse, gennemløb)
 - **Funktionalitet** (skaleringsmuligheder, SLA-niveauer)
-- **Prismodeller** (forbrugsbaseret, reserveret kapacitet)
+- **Prisstrukturer** (forbrugsbaseret, reserveret kapacitet)
 - **Regional tilgængelighed** (ikke alle SKU'er er tilgængelige i alle regioner)
 
 ### Vigtige faktorer i SKU-valg
@@ -66,7 +73,7 @@ SKU'er (Stock Keeping Units) repræsenterer forskellige serviceniveauer og ydeev
 2. **Miljøtype**
    - Udvikling/test vs. produktion
    - Tilgængelighedskrav
-   - Sikkerheds- og overholdelsesbehov
+   - Sikkerheds- og compliancebehov
 
 3. **Budgetbegrænsninger**
    - Startomkostninger vs. driftsomkostninger
@@ -108,7 +115,7 @@ skus:
 
 ### Staging/testmiljø
 
-**Prioriteter**: Produktion-lignende konfiguration, balance mellem omkostninger og ydeevne
+**Prioriteter**: Produktion-lignende konfiguration, balancerede omkostninger, kapacitet til ydeevnetest
 
 #### Anbefalede SKU'er
 ```yaml
@@ -127,11 +134,11 @@ skus:
 - **Funktioner**: De fleste produktionsfunktioner aktiveret
 - **Redundans**: Nogle geografiske redundansmuligheder
 - **Skalering**: Begrænset autoskalering til test
-- **Overvågning**: Fuldt overvågningsstack
+- **Overvågning**: Fuld overvågningspakke
 
 ### Produktionsmiljø
 
-**Prioriteter**: Ydeevne, tilgængelighed, sikkerhed, overholdelse, skalerbarhed
+**Prioriteter**: Ydeevne, tilgængelighed, sikkerhed, compliance, skalerbarhed
 
 #### Anbefalede SKU'er
 ```yaml
@@ -150,12 +157,12 @@ skus:
 - **Høj tilgængelighed**: 99,9%+ SLA-krav
 - **Ydeevne**: Dedikerede ressourcer, høj gennemløb
 - **Sikkerhed**: Premium sikkerhedsfunktioner
-- **Skalering**: Fulde autoskaleringsmuligheder
+- **Skalering**: Fuld autoskalering
 - **Overvågning**: Omfattende observabilitet
 
 ---
 
-## Service-specifikke retningslinjer
+## Specifikke retningslinjer for tjenester
 
 ### Azure App Service
 
@@ -205,7 +212,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Framework til SKU-valg
+#### Framework for SKU-valg
 
 1. **DTU-baseret (Database Transaction Units)**
    - **Basic**: 5 DTU - Udvikling/test
@@ -259,10 +266,10 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 1. **Forbrugsbaseret**
    - Betal pr. brug
    - Velegnet til udvikling og variable arbejdsbelastninger
-   - Delt infrastruktur
+   - Delte infrastrukturer
 
 2. **Dedikeret (Workload Profiles)**
-   - Dedikerede computressourcer
+   - Dedikerede compute-ressourcer
    - Forudsigelig ydeevne
    - Bedre til produktionsarbejdsbelastninger
 
@@ -333,7 +340,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
    - Rabatter for reserveret kapacitet
    - Bedst til stabile arbejdsbelastninger
 
-2. **Autoskalering provisioneret gennemløb**
+2. **Autoskalering af provisioneret gennemløb**
    - Automatisk skalering baseret på brug
    - Betal kun for det, du bruger (med minimum)
    - Godt til variable arbejdsbelastninger
@@ -451,7 +458,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## Omkostningsoptimeringsstrategier
+## Strategier for omkostningsoptimering
 
 ### 1. Reserveret kapacitet
 
@@ -663,15 +670,15 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | SKU | Niveau | DTU/vCore | Lager | Prisinterval | Brugsscenarie |
 |-----|--------|-----------|-------|--------------|---------------|
 | Basic | Basic | 5 DTU | 2GB | $ | Udvikling |
-| S2 | Standard | 50 DTU | 250GB | $$ | Lille produktion |
+| S2 | Standard | 50 DTU | 250GB | $$ | Små produktioner |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Høj ydeevne |
 | GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanceret |
 | BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Kritisk |
 
 ### Container Apps SKU Hurtig Reference
 
-| Model | Pris | CPU/Hukommelse | Brugsscenarie |
-|-------|------|----------------|---------------|
+| Model | Prisstruktur | CPU/Hukommelse | Brugsscenarie |
+|-------|--------------|----------------|---------------|
 | Forbrug | Betal pr. brug | 0.25-2 vCPU | Udvikling, variabel belastning |
 | Dedikeret D4 | Reserveret | 4 vCPU, 16GB | Produktion |
 | Dedikeret D8 | Reserveret | 8 vCPU, 32GB | Høj ydeevne |
@@ -806,8 +813,8 @@ test_configuration:
 4. **Overprovisionér ikke uden begrundelse**
 5. **Ignorér ikke afhængigheders indvirkning**
 6. **Sæt ikke autoskaleringsgrænser for højt**
-7. **Glem ikke overholdelseskrav**
-8. **Tag ikke beslutninger baseret på pris alene**
+7. **Glem ikke compliancekrav**
+8. **Tag ikke beslutninger baseret kun på pris**
 
 ---
 
@@ -822,4 +829,4 @@ test_configuration:
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

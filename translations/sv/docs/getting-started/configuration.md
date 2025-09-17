@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:02:11+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T23:14:37+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sv"
 }
 -->
 # Konfigurationsguide
 
-**Föregående:** [AZD Grunder](azd-basics.md) | **Nästa:** [Första Projektet](first-project.md)
+**Kapitelnavigation:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 3 - Konfiguration & Autentisering
+- **⬅️ Föregående**: [Ditt Första Projekt](first-project.md)
+- **➡️ Nästa**: [Deploymentsguide](../deployment/deployment-guide.md)
+- **🚀 Nästa Kapitel**: [Kapitel 4: Infrastruktur som Kod](../deployment/deployment-guide.md)
 
 ## Introduktion
 
-Denna omfattande guide täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och distributionsarbetsflöden. Du kommer att lära dig om konfigurationshierarkin, miljöhantering, autentiseringsmetoder och avancerade konfigurationsmönster som möjliggör effektiva och säkra Azure-distributioner.
+Denna omfattande guide täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och deployeringsarbetsflöden. Du kommer att lära dig om konfigurationshierarkin, miljöhantering, autentiseringsmetoder och avancerade konfigurationsmönster som möjliggör effektiva och säkra Azure-deployeringar.
 
 ## Lärandemål
 
@@ -28,12 +33,12 @@ I slutet av denna lektion kommer du att:
 
 Efter att ha avslutat denna lektion kommer du att kunna:
 - Konfigurera azd för optimala utvecklingsarbetsflöden
-- Ställa in och hantera flera distributionsmiljöer
+- Ställa in och hantera flera deployeringsmiljöer
 - Implementera säkra konfigurationshanteringsmetoder
 - Felsöka konfigurationsrelaterade problem
 - Anpassa azd:s beteende för specifika organisatoriska krav
 
-Denna omfattande guide täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och distributionsarbetsflöden.
+Denna omfattande guide täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och deployeringsarbetsflöden.
 
 ## Konfigurationshierarki
 
@@ -46,7 +51,7 @@ azd använder ett hierarkiskt konfigurationssystem:
 
 ## Global Konfiguration
 
-### Ställa in globala standardvärden
+### Ställa in Globala Standardvärden
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -64,7 +69,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Vanliga globala inställningar
+### Vanliga Globala Inställningar
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -82,8 +87,8 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 
 ## 🏗️ Projektkonfiguration
 
-### azure.yaml-struktur
-Filen `azure.yaml` är kärnan i ditt azd-projekt:
+### azure.yaml Struktur
+Filen `azure.yaml` är hjärtat i ditt azd-projekt:
 
 ```yaml
 # Minimum configuration
@@ -159,7 +164,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Tjänstkonfigurationsalternativ
+### Tjänstekonfigurationsalternativ
 
 #### Värdtyper
 ```yaml
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Språkspecifika inställningar
+#### Språkspecifika Inställningar
 ```yaml
 services:
   node-app:
@@ -206,7 +211,7 @@ services:
 
 ## 🌟 Miljöhantering
 
-### Skapa miljöer
+### Skapa Miljöer
 ```bash
 # Create a new environment
 azd env new development
@@ -274,7 +279,7 @@ LOG_LEVEL=info
 
 ## 🔐 Autentiseringskonfiguration
 
-### Azure CLI-integration
+### Azure CLI Integration
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -286,7 +291,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Autentisering med Service Principal
+### Service Principal Autentisering
 För CI/CD-pipelines:
 ```bash
 # Set environment variables
@@ -299,7 +304,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Hanterad identitet
+### Hanterad Identitet
 För Azure-värdmiljöer:
 ```bash
 # Enable managed identity authentication
@@ -309,7 +314,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 
 ## 🏗️ Infrastrukturkonfiguration
 
-### Bicep-parametrar
+### Bicep Parametrar
 Konfigurera infrastrukturparametrar i `infra/main.parameters.json`:
 ```json
 {
@@ -332,7 +337,7 @@ Konfigurera infrastrukturparametrar i `infra/main.parameters.json`:
 }
 ```
 
-### Terraform-konfiguration
+### Terraform Konfiguration
 För Terraform-projekt, konfigurera i `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
@@ -341,7 +346,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Distributionskonfiguration
+## 🚀 Deployeringskonfiguration
 
 ### Byggkonfiguration
 ```yaml
@@ -366,7 +371,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker-konfiguration
+### Docker Konfiguration
 ```yaml
 services:
   api:
@@ -384,7 +389,7 @@ Exempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azu
 
 ## 🔧 Avancerad Konfiguration
 
-### Anpassad resursnamngivning
+### Anpassad Resursnamngivning
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -444,9 +449,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Validering av Konfiguration
+## 🔍 Konfigurationsvalidering
 
-### Validera konfiguration
+### Validera Konfiguration
 ```bash
 # Check configuration syntax
 azd config validate
@@ -484,7 +489,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 Bästa Praxis
 
-### 1. Använd miljövariabler
+### 1. Använd Miljövariabler
 ```yaml
 # Good: Use environment variables
 database:
@@ -495,7 +500,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organisera konfigurationsfiler
+### 2. Organisera Konfigurationsfiler
 ```
 .azure/
 ├── config.json              # Global project config
@@ -519,7 +524,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Dokumentation av konfiguration
+### 4. Dokumentation av Konfiguration
 Dokumentera din konfiguration i `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -538,7 +543,7 @@ Dokumentera din konfiguration i `CONFIG.md`:
 ## Nästa Steg
 
 - [Ditt Första Projekt](first-project.md) - Tillämpa konfiguration i praktiken
-- [Distributionsguide](../deployment/deployment-guide.md) - Använd konfiguration för distribution
+- [Deploymentsguide](../deployment/deployment-guide.md) - Använd konfiguration för deployering
 - [Resursförsörjning](../deployment/provisioning.md) - Produktionsklara konfigurationer
 
 ## Referenser
@@ -549,10 +554,14 @@ Dokumentera din konfiguration i `CONFIG.md`:
 
 ---
 
-**Föregående:** [AZD Grunder](azd-basics.md) | **Nästa:** [Första Projektet](first-project.md)
+**Kapitelnavigation:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 3 - Konfiguration & Autentisering
+- **⬅️ Föregående**: [Ditt Första Projekt](first-project.md)
+- **➡️ Nästa Kapitel**: [Kapitel 4: Infrastruktur som Kod](../deployment/deployment-guide.md)
 - **Nästa Lektion**: [Ditt Första Projekt](first-project.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

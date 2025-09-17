@@ -1,33 +1,38 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T21:47:12+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-17T23:13:08+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "sv"
 }
 -->
 # Bästa praxis för AI-arbetsbelastningar i produktion med AZD
 
-**Föregående:** [AI Workshop Lab](ai-workshop-lab.md) | **Nästa:** [AI Felsökningsguide](../troubleshooting/ai-troubleshooting.md)
+**Kapitelöversikt:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 8 - Produktions- och Företagsmönster
+- **⬅️ Föregående Kapitel**: [Kapitel 7: Felsökning](../troubleshooting/debugging.md)
+- **⬅️ Även Relaterat**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurs Avslutad**: [AZD För Nybörjare](../../README.md)
 
 ## Översikt
 
-Den här guiden ger omfattande bästa praxis för att distribuera produktionsklara AI-arbetsbelastningar med Azure Developer CLI (AZD). Baserat på feedback från Azure AI Foundry Discord-communityn och verkliga kunddistributioner, adresserar dessa praxis de vanligaste utmaningarna i produktions-AI-system.
+Denna guide ger omfattande bästa praxis för att distribuera produktionsklara AI-arbetsbelastningar med hjälp av Azure Developer CLI (AZD). Baserat på feedback från Azure AI Foundry Discord-communityn och verkliga kunddistributioner, adresserar dessa metoder de vanligaste utmaningarna i produktions-AI-system.
 
-## Viktiga utmaningar som adresseras
+## Centrala Utmaningar som Adresseras
 
-Baserat på resultaten från vår community-undersökning är detta de största utmaningarna utvecklare står inför:
+Baserat på resultaten från vår community-undersökning är detta de största utmaningarna som utvecklare möter:
 
-- **45%** har svårt med AI-distributioner med flera tjänster  
+- **45%** kämpar med AI-distributioner med flera tjänster
 - **38%** har problem med hantering av autentisering och hemligheter  
-- **35%** tycker att produktionsberedskap och skalning är svårt  
-- **32%** behöver bättre strategier för kostnadsoptimering  
-- **29%** kräver förbättrad övervakning och felsökning  
+- **35%** tycker att produktionsberedskap och skalning är svårt
+- **32%** behöver bättre strategier för kostnadsoptimering
+- **29%** kräver förbättrad övervakning och felsökning
 
-## Arkitekturmönster för AI i produktion
+## Arkitekturmönster för AI i Produktion
 
-### Mönster 1: Mikrotjänstbaserad AI-arkitektur
+### Mönster 1: Mikrotjänstarkitektur för AI
 
 **När ska det användas**: Komplexa AI-applikationer med flera funktioner
 
@@ -48,7 +53,7 @@ Baserat på resultaten från vår community-undersökning är detta de största 
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZD-implementering**:
+**AZD-Implementering**:
 
 ```yaml
 # azure.yaml
@@ -71,7 +76,7 @@ services:
     host: containerapp
 ```
 
-### Mönster 2: Händelsestyrd AI-bearbetning
+### Mönster 2: Händelsedriven AI-bearbetning
 
 **När ska det användas**: Batchbearbetning, dokumentanalys, asynkrona arbetsflöden
 
@@ -122,13 +127,13 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ## Säkerhetsbästa praxis
 
-### 1. Zero-Trust säkerhetsmodell
+### 1. Zero-Trust-säkerhetsmodell
 
 **Implementeringsstrategi**:
-- Ingen kommunikation mellan tjänster utan autentisering  
-- Alla API-anrop använder hanterade identiteter  
-- Nätverksisolering med privata slutpunkter  
-- Åtkomstkontroller med minsta möjliga behörighet  
+- Ingen tjänst-till-tjänst-kommunikation utan autentisering
+- Alla API-anrop använder hanterade identiteter
+- Nätverksisolering med privata slutpunkter
+- Åtkomstkontroller med minsta möjliga behörighet
 
 ```bicep
 // Managed Identity for each service
@@ -151,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Säker hantering av hemligheter
 
-**Mönster för Key Vault-integrering**:
+**Mönster för Key Vault-integration**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -244,9 +249,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Prestanda och skalning
+## Prestanda och Skalning
 
-### 1. Strategier för autoskalning
+### 1. Strategier för Autoskalning
 
 **Autoskalning för Container Apps**:
 
@@ -322,7 +327,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Lastbalansering och trafikhantering
+### 3. Lastbalansering och Trafikhantering
 
 **Application Gateway med WAF**:
 
@@ -364,7 +369,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Rätt dimensionering av resurser
 
-**Konfigurationer för specifika miljöer**:
+**Miljöspecifika konfigurationer**:
 
 ```bash
 # Development environment
@@ -427,7 +432,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Optimering av tokenanvändning
 
-**OpenAI kostnadshantering**:
+**OpenAI Kostnadshantering**:
 
 ```typescript
 // Application-level token optimization
@@ -454,7 +459,7 @@ class TokenOptimizer {
 }
 ```
 
-## Övervakning och insyn
+## Övervakning och Observabilitet
 
 ### 1. Omfattande Application Insights
 
@@ -503,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI-specifik övervakning
 
-**Anpassade dashboards för AI-mått**:
+**Anpassade instrumentpaneler för AI-mått**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -532,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Hälsokontroller och drifttidsövervakning
+### 3. Hälsokontroller och Uptime-övervakning
 
 ```bicep
 // Application Insights availability tests
@@ -601,9 +606,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Katastrofåterställning och hög tillgänglighet
+## Katastrofåterställning och Hög Tillgänglighet
 
-### 1. Distribution över flera regioner
+### 1. Distribution i flera regioner
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -665,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Säkerhetskopiering och återställning av data
+### 2. Säkerhetskopiering och Återställning av Data
 
 ```bicep
 // Backup configuration for critical data
@@ -716,9 +721,9 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps och CI/CD-integrering
+## DevOps och CI/CD-Integration
 
-### 1. GitHub Actions arbetsflöde
+### 1. GitHub Actions-arbetsflöde
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -799,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Validering av infrastruktur
+### 2. Validering av Infrastruktur
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -832,65 +837,65 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Checklista för produktionsberedskap
+## Checklista för Produktionsberedskap
 
 ### Säkerhet ✅
-- [ ] Alla tjänster använder hanterade identiteter  
-- [ ] Hemligheter lagras i Key Vault  
-- [ ] Privata slutpunkter konfigurerade  
-- [ ] Nätverkssäkerhetsgrupper implementerade  
-- [ ] RBAC med minsta möjliga behörighet  
-- [ ] WAF aktiverad på offentliga slutpunkter  
+- [ ] Alla tjänster använder hanterade identiteter
+- [ ] Hemligheter lagras i Key Vault
+- [ ] Privata slutpunkter konfigurerade
+- [ ] Nätverkssäkerhetsgrupper implementerade
+- [ ] RBAC med minsta möjliga behörighet
+- [ ] WAF aktiverad på publika slutpunkter
 
 ### Prestanda ✅
-- [ ] Autoskalning konfigurerad  
-- [ ] Cache implementerad  
-- [ ] Lastbalansering inställd  
-- [ ] CDN för statiskt innehåll  
-- [ ] Databasanslutningspoolning  
-- [ ] Optimering av tokenanvändning  
+- [ ] Autoskalning konfigurerad
+- [ ] Cache implementerad
+- [ ] Lastbalansering inställd
+- [ ] CDN för statiskt innehåll
+- [ ] Poolning av databasanslutningar
+- [ ] Optimering av tokenanvändning
 
 ### Övervakning ✅
-- [ ] Application Insights konfigurerad  
-- [ ] Anpassade mått definierade  
-- [ ] Larmregler inställda  
-- [ ] Dashboard skapad  
-- [ ] Hälsokontroller implementerade  
-- [ ] Loggpolicyer för retention  
+- [ ] Application Insights konfigurerad
+- [ ] Anpassade mått definierade
+- [ ] Larmregler inställda
+- [ ] Instrumentpanel skapad
+- [ ] Hälsokontroller implementerade
+- [ ] Loggpolicyer för lagring
 
 ### Tillförlitlighet ✅
-- [ ] Distribution över flera regioner  
-- [ ] Säkerhetskopierings- och återställningsplan  
-- [ ] Circuit breakers implementerade  
-- [ ] Återförsökspolicyer konfigurerade  
-- [ ] Graciös nedtrappning  
-- [ ] Hälsokontrollslutpunkter  
+- [ ] Distribution i flera regioner
+- [ ] Säkerhetskopierings- och återställningsplan
+- [ ] Kretsbrytare implementerade
+- [ ] Återförsökspolicyer konfigurerade
+- [ ] Graciös nedtrappning
+- [ ] Hälsokontrollslutpunkter
 
 ### Kostnadshantering ✅
-- [ ] Budgetlarm konfigurerade  
-- [ ] Rätt dimensionering av resurser  
-- [ ] Rabatter för utveckling/test tillämpade  
-- [ ] Reserverade instanser köpta  
-- [ ] Dashboard för kostnadsövervakning  
-- [ ] Regelbundna kostnadsgranskningar  
+- [ ] Budgetlarm konfigurerade
+- [ ] Rätt dimensionering av resurser
+- [ ] Rabatter för utveckling/test tillämpade
+- [ ] Reserverade instanser köpta
+- [ ] Instrumentpanel för kostnadsövervakning
+- [ ] Regelbundna kostnadsgranskningar
 
 ### Efterlevnad ✅
-- [ ] Krav på dataresidens uppfyllda  
-- [ ] Granskning av loggning aktiverad  
-- [ ] Efterlevnadspolicyer tillämpade  
-- [ ] Säkerhetsbaslinjer implementerade  
-- [ ] Regelbundna säkerhetsbedömningar  
-- [ ] Incidenthanteringsplan  
+- [ ] Krav på datalagring uppfyllda
+- [ ] Revisionsloggning aktiverad
+- [ ] Efterlevnadspolicyer tillämpade
+- [ ] Säkerhetsbaslinjer implementerade
+- [ ] Regelbundna säkerhetsbedömningar
+- [ ] Incidenthanteringsplan
 
-## Prestandamått
+## Prestandabenchmark
 
-### Typiska produktionsmått
+### Typiska Produktionsmått
 
 | Mått | Mål | Övervakning |
 |------|-----|-------------|
 | **Svarstid** | < 2 sekunder | Application Insights |
-| **Tillgänglighet** | 99.9% | Drifttidsövervakning |
-| **Felfrekvens** | < 0.1% | Applikationsloggar |
+| **Tillgänglighet** | 99,9% | Uptime-övervakning |
+| **Felfrekvens** | < 0,1% | Applikationsloggar |
 | **Tokenanvändning** | < $500/månad | Kostnadshantering |
 | **Samtidiga användare** | 1000+ | Belastningstestning |
 | **Återställningstid** | < 1 timme | Tester för katastrofåterställning |
@@ -906,40 +911,45 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Community bästa praxis
+## 🤝 Community Bästa Praxis
 
 Baserat på feedback från Azure AI Foundry Discord-communityn:
 
-### Topprekommendationer från communityn:
+### Topprekommendationer från Communityn:
 
-1. **Börja smått, skala gradvis**: Börja med grundläggande SKU:er och skala upp baserat på faktisk användning  
-2. **Övervaka allt**: Sätt upp omfattande övervakning från dag ett  
-3. **Automatisera säkerhet**: Använd infrastruktur som kod för konsekvent säkerhet  
-4. **Testa noggrant**: Inkludera AI-specifik testning i din pipeline  
-5. **Planera för kostnader**: Övervaka tokenanvändning och sätt budgetlarm tidigt  
+1. **Börja smått, skala gradvis**: Börja med grundläggande SKU:er och skala upp baserat på faktisk användning
+2. **Övervaka allt**: Sätt upp omfattande övervakning från dag ett
+3. **Automatisera säkerhet**: Använd infrastruktur som kod för konsekvent säkerhet
+4. **Testa noggrant**: Inkludera AI-specifik testning i din pipeline
+5. **Planera för kostnader**: Övervaka tokenanvändning och ställ in budgetlarm tidigt
 
-### Vanliga fallgropar att undvika:
+### Vanliga Fallgropar att Undvika:
 
-- ❌ Hårdkoda API-nycklar i kod  
-- ❌ Inte sätta upp korrekt övervakning  
-- ❌ Ignorera kostnadsoptimering  
-- ❌ Inte testa felhanteringsscenarier  
-- ❌ Distribuera utan hälsokontroller  
+- ❌ Hårdkodning av API-nycklar i kod
+- ❌ Att inte sätta upp korrekt övervakning
+- ❌ Att ignorera kostnadsoptimering
+- ❌ Att inte testa felhanteringsscenarier
+- ❌ Att distribuera utan hälsokontroller
 
-## Ytterligare resurser
+## Ytterligare Resurser
 
-- **Azure Well-Architected Framework**: [AI arbetsbelastningsguide](https://learn.microsoft.com/azure/well-architected/ai/)  
-- **Azure AI Foundry Dokumentation**: [Officiella dokument](https://learn.microsoft.com/azure/ai-studio/)  
-- **Communitymallar**: [Azure Samples](https://github.com/Azure-Samples)  
-- **Discord Community**: [#Azure kanal](https://discord.gg/microsoft-azure)  
+- **Azure Well-Architected Framework**: [AI-arbetsbelastningsvägledning](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure AI Foundry Dokumentation**: [Officiella dokument](https://learn.microsoft.com/azure/ai-studio/)
+- **Communitymallar**: [Azure Samples](https://github.com/Azure-Samples)
+- **Discord Community**: [#Azure-kanal](https://discord.gg/microsoft-azure)
 
 ---
 
-**Föregående:** [AI Workshop Lab](ai-workshop-lab.md) | **Nästa:** [AI Felsökningsguide](../troubleshooting/ai-troubleshooting.md)
+**Kapitelöversikt:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 8 - Produktions- och Företagsmönster
+- **⬅️ Föregående Kapitel**: [Kapitel 7: Felsökning](../troubleshooting/debugging.md)
+- **⬅️ Även Relaterat**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kurs Avslutad**: [AZD För Nybörjare](../../README.md)
 
 **Kom ihåg**: AI-arbetsbelastningar i produktion kräver noggrann planering, övervakning och kontinuerlig optimering. Börja med dessa mönster och anpassa dem efter dina specifika behov.
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

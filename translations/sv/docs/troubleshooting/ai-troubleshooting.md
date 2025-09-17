@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T21:54:20+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T23:16:40+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "sv"
 }
 -->
-# AI Felsökningsguide för Azure Developer CLI
+# AI-specifik felsökningsguide
+
+**Kapitelnavigation:**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning & Debugging
+- **⬅️ Föregående**: [Debugging Guide](debugging.md)
+- **➡️ Nästa kapitel**: [Kapitel 8: Produktions- & Företagsmönster](../ai-foundry/production-ai-practices.md)
+- **🤖 Relaterat**: [Kapitel 2: AI-First Utveckling](../ai-foundry/azure-ai-foundry-integration.md)
 
 **Föregående:** [Produktions-AI-praktiker](../ai-foundry/production-ai-practices.md) | **Nästa:** [Kom igång med AZD](../getting-started/README.md)
 
-Denna omfattande felsökningsguide tar upp vanliga problem vid implementering av AI-lösningar med AZD och erbjuder lösningar och felsökningstekniker specifika för Azure AI-tjänster.
+Denna omfattande felsökningsguide tar upp vanliga problem vid implementering av AI-lösningar med AZD och erbjuder lösningar och debuggingtekniker specifika för Azure AI-tjänster.
 
 ## Innehållsförteckning
 
@@ -22,7 +29,7 @@ Denna omfattande felsökningsguide tar upp vanliga problem vid implementering av
 - [Fel vid modellimplementering](../../../../docs/troubleshooting)
 - [Prestanda- och skalningsproblem](../../../../docs/troubleshooting)
 - [Kostnads- och kvothantering](../../../../docs/troubleshooting)
-- [Felsökningsverktyg och tekniker](../../../../docs/troubleshooting)
+- [Debuggingverktyg och tekniker](../../../../docs/troubleshooting)
 
 ## Problem med Azure OpenAI-tjänsten
 
@@ -142,7 +149,7 @@ az rest --method get \
 
 ## Problem med Azure AI Search
 
-### Problem: Otillräcklig prissättning för söktjänsten
+### Problem: Otillräcklig prissättningstier för söktjänsten
 
 **Symptom:**
 ```
@@ -151,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Lösningar:**
 
-1. **Uppgradera prissättning:**
+1. **Uppgradera prissättningstier:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -169,7 +176,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Inaktivera semantisk sökning (för utveckling):**
+2. **Inaktivera semantisk sökning (utveckling):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -361,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Autentisering och behörighetsfel
 
-### Problem: Hanterad identitet nekad behörighet
+### Problem: Nekad behörighet för hanterad identitet
 
 **Symptom:**
 ```
@@ -419,7 +426,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Lösningar:**
 
-1. **Ge Key Vault-behörigheter:**
+1. **Ge behörigheter till Key Vault:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -472,7 +479,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Använd reservmodeller:**
+2. **Använd modellfallbacks:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -729,9 +736,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## Felsökningsverktyg och tekniker
+## Debuggingverktyg och tekniker
 
-### AZD-felsökningskommandon
+### AZD Debugging-kommandon
 
 ```bash
 # Enable verbose logging
@@ -747,7 +754,7 @@ azd logs --follow
 azd env get-values
 ```
 
-### Applikationsfelsökning
+### Applikationsdebugging
 
 1. **Strukturerad loggning:**
 ```python
@@ -839,14 +846,14 @@ def monitor_performance(func):
 |--------|-------------|---------|
 | 401 | Obehörig | Kontrollera API-nycklar och konfiguration för hanterad identitet |
 | 403 | Förbjuden | Verifiera RBAC-rolltilldelningar |
-| 429 | Begränsad | Implementera retry-logik med exponentiell backoff |
-| 500 | Internt serverfel | Kontrollera modellens implementeringsstatus och loggar |
+| 429 | Begränsad hastighet | Implementera retry-logik med exponentiell backoff |
+| 500 | Internt serverfel | Kontrollera modellimplementeringsstatus och loggar |
 | 503 | Tjänsten otillgänglig | Verifiera tjänstens hälsa och regional tillgänglighet |
 
 ## Nästa steg
 
-1. **Granska [AI-modellimplementeringsguiden](ai-model-deployment.md)** för bästa praxis vid implementering
-2. **Slutför [Produktions-AI-praktiker](production-ai-practices.md)** för lösningar redo för företag
+1. **Granska [AI Model Deployment Guide](ai-model-deployment.md)** för bästa praxis vid implementering
+2. **Slutför [Produktions-AI-praktiker](production-ai-practices.md)** för företagsklara lösningar
 3. **Gå med i [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** för communitysupport
 4. **Rapportera problem** till [AZD GitHub-repository](https://github.com/Azure/azure-dev) för AZD-specifika problem
 
@@ -858,10 +865,15 @@ def monitor_performance(func):
 
 ---
 
-**Föregående:** [Produktions-AI-praktiker](../ai-foundry/production-ai-practices.md) | **Nästa:** [Workshop](../../workshop/README.md)
+**Kapitelnavigation:**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning & Debugging
+- **⬅️ Föregående**: [Debugging Guide](debugging.md)
+- **➡️ Nästa kapitel**: [Kapitel 8: Produktions- & Företagsmönster](../ai-foundry/production-ai-practices.md)
+- **🤖 Relaterat**: [Kapitel 2: AI-First Utveckling](../ai-foundry/azure-ai-foundry-integration.md)
 - [Felsökning av Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

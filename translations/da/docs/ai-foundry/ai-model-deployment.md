@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:51:24+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T23:28:08+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "da"
 }
 -->
 # Udrulning af AI-modeller med Azure Developer CLI
 
-**Forrige:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Næste:** [AI Workshop Lab](ai-workshop-lab.md)
+**Kapiteloversigt:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 2 - AI-First Udvikling
+- **⬅️ Forrige**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Næste**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Næste Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
-Denne guide giver omfattende instruktioner til udrulning af AI-modeller ved hjælp af AZD-skabeloner, fra valg af model til produktionsudrulningsmønstre.
+Denne vejledning giver omfattende instruktioner til udrulning af AI-modeller ved hjælp af AZD-skabeloner og dækker alt fra modelvalg til produktionsudrulningsmønstre.
 
 ## Indholdsfortegnelse
 
-- [Strategi for modelvalg](../../../../docs/ai-foundry)
+- [Strategi for Modelvalg](../../../../docs/ai-foundry)
 - [AZD-konfiguration for AI-modeller](../../../../docs/ai-foundry)
 - [Udrulningsmønstre](../../../../docs/ai-foundry)
-- [Modelstyring](../../../../docs/ai-foundry)
-- [Overvejelser for produktion](../../../../docs/ai-foundry)
-- [Overvågning og observabilitet](../../../../docs/ai-foundry)
+- [Modelhåndtering](../../../../docs/ai-foundry)
+- [Overvejelser i Produktion](../../../../docs/ai-foundry)
+- [Overvågning og Observabilitet](../../../../docs/ai-foundry)
 
-## Strategi for modelvalg
+## Strategi for Modelvalg
 
 ### Azure OpenAI-modeller
 
@@ -57,7 +62,7 @@ services:
 ### Kapacitetsplanlægning for modeller
 
 | Modeltype | Brugssituation | Anbefalet kapacitet | Omkostningsovervejelser |
-|-----------|----------------|---------------------|-------------------------|
+|-----------|----------------|---------------------|--------------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Omkostningseffektiv for de fleste arbejdsbelastninger |
 | GPT-4 | Kompleks ræsonnement | 20-100 TPM | Højere omkostninger, brug til premiumfunktioner |
 | Text-embedding-ada-002 | Søgning, RAG | 30-120 TPM | Nødvendig for semantisk søgning |
@@ -207,7 +212,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Modelstyring
+## Modelhåndtering
 
 ### Versionskontrol
 
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Overvejelser for produktion
+## Overvejelser i Produktion
 
 ### Kapacitetsplanlægning
 
@@ -297,7 +302,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Auto-skalering
+### Auto-skalering Konfiguration
 
 Konfigurer auto-skalering for Container Apps:
 
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Overvågning og observabilitet
+## Overvågning og Observabilitet
 
 ### Integration med Application Insights
 
@@ -446,7 +451,7 @@ class AITelemetry:
 
 ### Sundhedstjek
 
-Implementer overvågning af AI-tjenestens tilstand:
+Implementer overvågning af AI-tjenestens sundhed:
 
 ```python
 # Health check endpoints
@@ -475,25 +480,30 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Næste trin
+## Næste Skridt
 
 1. **Gennemgå [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** for mønstre til tjenesteintegration
 2. **Fuldfør [AI Workshop Lab](ai-workshop-lab.md)** for praktisk erfaring
-3. **Implementer [Production AI Practices](production-ai-practices.md)** for virksomhedsudrulninger
-4. **Udforsk [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** for almindelige problemer
+3. **Implementer [Produktions-AI-praksis](production-ai-practices.md)** for virksomhedsudrulninger
+4. **Udforsk [AI Fejlfindingsguide](../troubleshooting/ai-troubleshooting.md)** for almindelige problemer
 
 ## Ressourcer
 
-- [Azure OpenAI Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Azure OpenAI Modeltilgængelighed](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Skalering](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Omkostningsoptimering](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Forrige:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Næste:** [AI Workshop Lab](ai-workshop-lab.md)
+**Kapiteloversigt:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 2 - AI-First Udvikling
+- **⬅️ Forrige**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Næste**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Næste Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at sikre nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

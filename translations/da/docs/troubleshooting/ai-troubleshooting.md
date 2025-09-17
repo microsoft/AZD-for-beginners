@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T21:54:40+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-17T23:31:01+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "da"
 }
 -->
-# AI Fejlfindingsguide for Azure Developer CLI
+# AI-Specifik Fejlfindingsguide
 
-**Forrige:** [Produktions-AI-praksis](../ai-foundry/production-ai-practices.md) | **Næste:** [Kom godt i gang med AZD](../getting-started/README.md)
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Beginners](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 7 - Fejlfindings- og Debugging
+- **⬅️ Forrige**: [Debugging Guide](debugging.md)
+- **➡️ Næste Kapitel**: [Kapitel 8: Produktions- og Enterprise-mønstre](../ai-foundry/production-ai-practices.md)
+- **🤖 Relateret**: [Kapitel 2: AI-First Udvikling](../ai-foundry/azure-ai-foundry-integration.md)
+
+**Forrige:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **Næste:** [Kom godt i gang med AZD](../getting-started/README.md)
 
 Denne omfattende fejlfindingsguide adresserer almindelige problemer ved implementering af AI-løsninger med AZD og giver løsninger og debugging-teknikker specifikt til Azure AI-tjenester.
 
 ## Indholdsfortegnelse
 
-- [Problemer med Azure OpenAI-tjenesten](../../../../docs/troubleshooting)
+- [Problemer med Azure OpenAI Service](../../../../docs/troubleshooting)
 - [Problemer med Azure AI Search](../../../../docs/troubleshooting)
-- [Problemer med implementering af Container Apps](../../../../docs/troubleshooting)
+- [Problemer med Container Apps-implementering](../../../../docs/troubleshooting)
 - [Autentificerings- og tilladelsesfejl](../../../../docs/troubleshooting)
 - [Fejl ved modelimplementering](../../../../docs/troubleshooting)
 - [Ydeevne- og skaleringsproblemer](../../../../docs/troubleshooting)
 - [Omkostnings- og kvotestyring](../../../../docs/troubleshooting)
-- [Fejlfindingsværktøjer og teknikker](../../../../docs/troubleshooting)
+- [Debugging-værktøjer og teknikker](../../../../docs/troubleshooting)
 
-## Problemer med Azure OpenAI-tjenesten
+## Problemer med Azure OpenAI Service
 
-### Problem: OpenAI-tjenesten er ikke tilgængelig i regionen
+### Problem: OpenAI Service ikke tilgængelig i regionen
 
 **Symptomer:**
 ```
@@ -35,7 +42,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Årsager:**
 - Azure OpenAI er ikke tilgængelig i den valgte region
-- Kvoten er opbrugt i de foretrukne regioner
+- Kvoten er opbrugt i foretrukne regioner
 - Begrænsninger i regional kapacitet
 
 **Løsninger:**
@@ -49,7 +56,7 @@ az cognitiveservices account list-skus \
   --output table
 ```
 
-2. **Opdater AZD-konfigurationen:**
+2. **Opdater AZD-konfiguration:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -72,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Problem: Kvoten for modelimplementering er overskredet
+### Problem: Kvoten for modelimplementering overskredet
 
 **Symptomer:**
 ```
@@ -81,7 +88,7 @@ Error: Deployment failed due to insufficient quota
 
 **Løsninger:**
 
-1. **Tjek den aktuelle kvote:**
+1. **Tjek nuværende kvote:**
 ```bash
 # Check quota usage
 az cognitiveservices usage list \
@@ -99,7 +106,7 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **Optimer modelkapaciteten:**
+3. **Optimer modelkapacitet:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -142,7 +149,7 @@ az rest --method get \
 
 ## Problemer med Azure AI Search
 
-### Problem: Pristier for søgetjenesten er utilstrækkelig
+### Problem: Utilstrækkelig prisniveau for søgetjeneste
 
 **Symptomer:**
 ```
@@ -151,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Løsninger:**
 
-1. **Opgrader pristier:**
+1. **Opgrader prisniveau:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -200,7 +207,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Tjek indeksskemaet:**
+2. **Tjek indeks-skema:**
 ```python
 # Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
@@ -230,7 +237,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Problemer med implementering af Container Apps
+## Problemer med Container Apps-implementering
 
 ### Problem: Fejl ved opbygning af container
 
@@ -263,7 +270,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Bekræft afhængigheder:**
+2. **Validér afhængigheder:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -370,7 +377,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 **Løsninger:**
 
-1. **Bekræft rollefordelinger:**
+1. **Bekræft rolle-tildelinger:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -410,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Problem: Adgang til Key Vault nægtet
+### Problem: Adgang nægtet til Key Vault
 
 **Symptomer:**
 ```
@@ -501,7 +508,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Valider model før implementering:**
+3. **Validér model før implementering:**
 ```python
 # Pre-deployment model validation
 import httpx
@@ -534,7 +541,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **Løsninger:**
 
-1. **Implementer timeout for forespørgsler:**
+1. **Implementér timeout for forespørgsler:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -549,7 +556,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Tilføj svar-caching:**
+2. **Tilføj cache til svar:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -666,7 +673,7 @@ class MemoryOptimizedAI:
 
 **Løsninger:**
 
-1. **Implementer omkostningskontroller:**
+1. **Implementér omkostningskontrol:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -729,9 +736,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## Fejlfindingsværktøjer og teknikker
+## Debugging-værktøjer og teknikker
 
-### AZD-fejlfindingskommandoer
+### AZD Debugging-kommandoer
 
 ```bash
 # Enable verbose logging
@@ -747,7 +754,7 @@ azd logs --follow
 azd env get-values
 ```
 
-### Fejlfindingsmetoder for applikationer
+### Applikationsdebugging
 
 1. **Struktureret logning:**
 ```python
@@ -838,30 +845,35 @@ def monitor_performance(func):
 | Fejlkode | Beskrivelse | Løsning |
 |----------|-------------|---------|
 | 401 | Uautoriseret | Tjek API-nøgler og konfiguration af administreret identitet |
-| 403 | Forbudt | Bekræft RBAC-rollefordelinger |
-| 429 | Ratebegrænsning | Implementer retry-logik med eksponentiel backoff |
+| 403 | Forbudt | Bekræft RBAC-rolle-tildelinger |
+| 429 | Ratebegrænsning | Implementér retry-logik med eksponentiel backoff |
 | 500 | Intern serverfejl | Tjek status for modelimplementering og logs |
-| 503 | Tjenesten utilgængelig | Bekræft tjenestens helbred og regional tilgængelighed |
+| 503 | Tjeneste utilgængelig | Bekræft tjenestens sundhed og regional tilgængelighed |
 
 ## Næste trin
 
 1. **Gennemgå [AI Model Deployment Guide](ai-model-deployment.md)** for bedste praksis ved implementering
-2. **Fuldfør [Produktions-AI-praksis](production-ai-practices.md)** for virksomhedsklare løsninger
+2. **Fuldfør [Production AI Practices](production-ai-practices.md)** for enterprise-klare løsninger
 3. **Deltag i [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** for fællesskabsstøtte
-4. **Indsend problemer** til [AZD GitHub-repositoriet](https://github.com/Azure/azure-dev) for AZD-specifikke problemer
+4. **Indsend problemer** til [AZD GitHub repository](https://github.com/Azure/azure-dev) for AZD-specifikke problemer
 
 ## Ressourcer
 
-- [Fejlfindingsguide for Azure OpenAI-tjenesten](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Fejlfindingsguide for Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Fejlfindingsguide for Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure OpenAI Service Fejlfindingsguide](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps Fejlfindingsguide](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI Search Fejlfindingsguide](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**Forrige:** [Produktions-AI-praksis](../ai-foundry/production-ai-practices.md) | **Næste:** [Workshop](../../workshop/README.md)
-- [Fejlfindingsguide for Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Beginners](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 7 - Fejlfindings- og Debugging
+- **⬅️ Forrige**: [Debugging Guide](debugging.md)
+- **➡️ Næste Kapitel**: [Kapitel 8: Produktions- og Enterprise-mønstre](../ai-foundry/production-ai-practices.md)
+- **🤖 Relateret**: [Kapitel 2: AI-First Udvikling](../ai-foundry/azure-ai-foundry-integration.md)
+- [Azure Developer CLI Fejlfindingsguide](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

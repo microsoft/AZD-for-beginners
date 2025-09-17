@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T21:04:34+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T23:28:26+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "da"
 }
 -->
 # Dit Første Projekt - Praktisk Vejledning
 
-**Forrige:** [Konfiguration](configuration.md) | **Næste:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 1 - Grundlag & Hurtig Start
+- **⬅️ Forrige**: [Installation & Opsætning](installation.md)
+- **➡️ Næste**: [Konfiguration](configuration.md)
+- **🚀 Næste Kapitel**: [Kapitel 2: AI-First Udvikling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduktion
 
@@ -20,10 +25,10 @@ Velkommen til dit første Azure Developer CLI-projekt! Denne omfattende praktisk
 Ved at gennemføre denne vejledning vil du:
 - Mestre azd-projektets initialiseringsworkflow ved hjælp af skabeloner
 - Forstå Azure Developer CLI-projektstruktur og konfigurationsfiler
-- Udføre komplet applikationsimplementering til Azure med infrastrukturklargøring
-- Implementere applikationsopdateringer og genimplementeringsstrategier
+- Udføre komplet applikationsimplementering til Azure med infrastrukturprovisionering
+- Implementere strategier for applikationsopdateringer og genimplementering
 - Administrere flere miljøer til udvikling og staging
-- Anvende praksis for ressourceoprydning og omkostningsstyring
+- Anvende praksis for oprydning af ressourcer og omkostningsstyring
 
 ## Læringsresultater
 
@@ -60,7 +65,7 @@ az account show
 node --version
 ```
 
-## Trin 1: Vælg og initialiser en skabelon
+## Trin 1: Vælg og Initialiser en Skabelon
 
 Lad os starte med en populær todo-applikationsskabelon, der inkluderer en React-frontend og Node.js API-backend.
 
@@ -83,9 +88,9 @@ azd init --template todo-nodejs-mongo
 - Skabelonkoden blev downloadet til din lokale mappe
 - En `azure.yaml`-fil med servicedefinitioner blev oprettet
 - Infrastrukturkode blev oprettet i mappen `infra/`
-- En miljøkonfiguration blev oprettet
+- Et miljøkonfigurationsfil blev oprettet
 
-## Trin 2: Udforsk projektstrukturen
+## Trin 2: Udforsk Projektstrukturen
 
 Lad os undersøge, hvad azd har oprettet for os:
 
@@ -123,7 +128,7 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Vigtige filer at forstå
+### Vigtige Filer at Forstå
 
 **azure.yaml** - Kernen i dit azd-projekt:
 ```bash
@@ -137,11 +142,11 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## Trin 3: Tilpas dit projekt (valgfrit)
+## Trin 3: Tilpas Dit Projekt (Valgfrit)
 
 Før implementering kan du tilpasse applikationen:
 
-### Ændr frontend
+### Ændr Frontenden
 ```bash
 # Open the React app component
 code src/web/src/App.tsx
@@ -153,7 +158,7 @@ Foretag en simpel ændring:
 <h1>My Awesome Todo App</h1>
 ```
 
-### Konfigurer miljøvariabler
+### Konfigurer Miljøvariabler
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
@@ -181,10 +186,10 @@ azd up
 
 Kommandoen `azd up` udfører følgende trin:
 1. **Provision** (`azd provision`) - Opretter Azure-ressourcer
-2. **Package** - Bygger din applikationskode
-3. **Deploy** (`azd deploy`) - Implementerer kode til Azure-ressourcer
+2. **Pakke** - Bygger din applikationskode
+3. **Implementer** (`azd deploy`) - Implementerer kode til Azure-ressourcer
 
-### Forventet output
+### Forventet Output
 ```
 Packaging services (azd package)
 
@@ -197,10 +202,10 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Trin 5: Test din applikation
+## Trin 5: Test Din Applikation
 
-### Få adgang til din applikation
-Klik på URL'en, der er angivet i implementeringsoutputtet, eller hent den når som helst:
+### Få Adgang til Din Applikation
+Klik på URL'en, der blev angivet i implementeringsoutputtet, eller hent den når som helst:
 ```bash
 # Get application endpoints
 azd show
@@ -209,12 +214,12 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Test todo-applikationen
+### Test Todo-Appen
 1. **Tilføj en todo-opgave** - Klik på "Add Todo" og indtast en opgave
 2. **Markér som fuldført** - Afkryds fuldførte opgaver
-3. **Slet opgaver** - Fjern todos, du ikke længere har brug for
+3. **Slet opgaver** - Fjern todo-opgaver, du ikke længere har brug for
 
-### Overvåg din applikation
+### Overvåg Din Applikation
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -223,7 +228,7 @@ azd monitor
 azd logs
 ```
 
-## Trin 6: Foretag ændringer og genimplementer
+## Trin 6: Foretag Ændringer og Genimplementer
 
 Lad os foretage en ændring og se, hvor nemt det er at opdatere:
 
@@ -239,7 +244,7 @@ Tilføj en brugerdefineret svarheader:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Implementer kun kodeændringer
+### Implementer Kun Kodeændringer
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -247,7 +252,7 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## Trin 7: Administrer flere miljøer
+## Trin 7: Administrer Flere Miljøer
 
 Opret et staging-miljø for at teste ændringer før produktion:
 
@@ -276,7 +281,7 @@ azd env select staging
 azd show
 ```
 
-## Trin 8: Ryd op i ressourcer
+## Trin 8: Ryd Op i Ressourcer
 
 Når du er færdig med at eksperimentere, skal du rydde op for at undgå løbende omkostninger:
 
@@ -292,7 +297,7 @@ azd env select staging
 azd down --force --purge
 ```
 
-## Hvad du har lært
+## Hvad Du Har Lært
 
 Tillykke! Du har med succes:
 - Initialiseret et azd-projekt fra en skabelon
@@ -302,7 +307,7 @@ Tillykke! Du har med succes:
 - Administreret flere miljøer
 - Ryddet op i ressourcer
 
-## Fejlfinding af almindelige problemer
+## Fejlfinding af Almindelige Problemer
 
 ### Autentificeringsfejl
 ```bash
@@ -324,24 +329,24 @@ azd logs --service api
 azd logs --service web
 ```
 
-### Konflikter med ressourcenavne
+### Ressourcenavnekonflikter
 ```bash
 # Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Port-/netværksproblemer
+### Port-/Netværksproblemer
 ```bash
 # Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## Næste trin
+## Næste Skridt
 
 Nu hvor du har gennemført dit første projekt, kan du udforske disse avancerede emner:
 
-### 1. Tilpas infrastruktur
+### 1. Tilpas Infrastruktur
 - [Infrastructure as Code](../deployment/provisioning.md)
 - [Tilføj databaser, lager og andre tjenester](../deployment/provisioning.md#adding-services)
 
@@ -349,12 +354,12 @@ Nu hvor du har gennemført dit første projekt, kan du udforske disse avancerede
 - [GitHub Actions Integration](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Produktionsbedste praksis
+### 3. Produktionsbedste Praksis
 - [Sikkerhedskonfigurationer](../deployment/best-practices.md#security)
 - [Performanceoptimering](../deployment/best-practices.md#performance)
 - [Overvågning og logning](../deployment/best-practices.md#monitoring)
 
-### 4. Udforsk flere skabeloner
+### 4. Udforsk Flere Skabeloner
 ```bash
 # Browse templates by category
 azd template list --filter web
@@ -367,11 +372,11 @@ azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
 ```
 
-## Yderligere ressourcer
+## Yderligere Ressourcer
 
 ### Læringsmaterialer
 - [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Arkitekturcenter](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Fællesskab & Support
@@ -382,7 +387,7 @@ azd init --template todo-java-mongo
 ### Skabeloner & Eksempler
 - [Officiel Skabelongalleri](https://azure.github.io/awesome-azd/)
 - [Fællesskabsskabeloner](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Enterprise Mønstre](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
@@ -390,10 +395,15 @@ azd init --template todo-java-mongo
 
 ---
 
-**Forrige:** [Konfiguration](configuration.md) | **Næste:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 1 - Grundlag & Hurtig Start
+- **⬅️ Forrige**: [Installation & Opsætning](installation.md)
+- **➡️ Næste**: [Konfiguration](configuration.md)
+- **🚀 Næste Kapitel**: [Kapitel 2: AI-First Udvikling](../ai-foundry/azure-ai-foundry-integration.md)
 - **Næste Lektion**: [Implementeringsvejledning](../deployment/deployment-guide.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

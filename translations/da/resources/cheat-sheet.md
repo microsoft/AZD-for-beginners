@@ -1,39 +1,45 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:45:03+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T23:37:07+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "da"
 }
 -->
-# Kommandosnydeark - Vigtige AZD-kommandoer
+# Kommandooversigt - Vigtige AZD-kommandoer
+
+**Hurtig reference for alle kapitler**
+- **📚 Kursushjem**: [AZD For Begyndere](../README.md)
+- **📖 Hurtig Start**: [Kapitel 1: Fundament & Hurtig Start](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-kommandoer**: [Kapitel 2: AI-First Udvikling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Avanceret**: [Kapitel 4: Infrastruktur som kode](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduktion
 
-Dette omfattende snydeark giver en hurtig reference til de mest anvendte Azure Developer CLI-kommandoer, organiseret efter kategori med praktiske eksempler. Perfekt til hurtige opslag under udvikling, fejlfinding og daglige operationer med azd-projekter.
+Denne omfattende oversigt giver en hurtig reference til de mest anvendte Azure Developer CLI-kommandoer, organiseret efter kategori med praktiske eksempler. Perfekt til hurtige opslag under udvikling, fejlfinding og daglige operationer med azd-projekter.
 
 ## Læringsmål
 
-Ved at bruge dette snydeark vil du:
+Ved at bruge denne oversigt vil du:
 - Få øjeblikkelig adgang til essentielle Azure Developer CLI-kommandoer og syntaks
-- Forstå kommandoernes organisering efter funktionelle kategorier og anvendelsesområder
+- Forstå kommandoernes organisering efter funktionelle kategorier og anvendelsesscenarier
 - Referere til praktiske eksempler for almindelige udviklings- og implementeringsscenarier
-- Få adgang til fejlfindingskommandoer for hurtig problemløsning
+- Finde fejlfinding-kommandoer til hurtig løsning af problemer
 - Effektivt finde avancerede konfigurations- og tilpasningsmuligheder
 - Lokalisere kommandoer til miljøstyring og workflows med flere miljøer
 
 ## Læringsresultater
 
-Ved regelmæssigt at bruge dette snydeark vil du kunne:
-- Udføre azd-kommandoer selvsikkert uden at skulle referere til den fulde dokumentation
+Ved regelmæssig brug af denne oversigt vil du kunne:
+- Udføre azd-kommandoer med selvtillid uden at skulle referere til fuld dokumentation
 - Hurtigt løse almindelige problemer ved hjælp af passende diagnostiske kommandoer
 - Effektivt administrere flere miljøer og implementeringsscenarier
 - Anvende avancerede azd-funktioner og konfigurationsmuligheder efter behov
 - Fejlsøge implementeringsproblemer ved hjælp af systematiske kommando-sekvenser
 - Optimere workflows gennem effektiv brug af azd-genveje og muligheder
 
-## Kommandostart
+## Kom i gang med kommandoer
 
 ### Autentificering
 ```bash
@@ -318,7 +324,7 @@ azd env select production
 azd up
 ```
 
-### Fejlfindingsworkflow
+### Fejlsøgningsworkflow
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -492,7 +498,7 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Gode råd
+## 💡 Pro Tips
 
 ### Aliasser for hurtigere workflows
 ```bash
@@ -552,7 +558,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Bogmærk dette snydeark og brug `Ctrl+F` til hurtigt at finde de kommandoer, du har brug for!
+**Tip**: Bogmærk denne oversigt og brug `Ctrl+F` til hurtigt at finde de kommandoer, du har brug for!
 
 ---
 
@@ -563,4 +569,4 @@ azd template show <template-name> --docs
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

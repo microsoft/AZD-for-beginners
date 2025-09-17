@@ -1,13 +1,18 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "59cb1c1635512e212da16d50f3259ca4",
-  "translation_date": "2025-09-09T22:49:34+00:00",
+  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
+  "translation_date": "2025-09-17T23:37:22+00:00",
   "source_file": "resources/glossary.md",
   "language_code": "da"
 }
 -->
-# Glossar - Azure Developer CLI Terminologi
+# Glossar - Azure og AZD Terminologi
+
+**Reference for alle kapitler**
+- **📚 Kursushjem**: [AZD For Begyndere](../README.md)
+- **📖 Lær Grundlæggende**: [Kapitel 1: AZD Grundlæggende](../docs/getting-started/azd-basics.md)
+- **🤖 AI Termer**: [Kapitel 2: AI-First Udvikling](../docs/ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduktion
 
@@ -16,12 +21,12 @@ Dette omfattende glossar giver definitioner af termer, begreber og akronymer, de
 ## Læringsmål
 
 Ved at bruge dette glossar vil du:
-- Forstå grundlæggende terminologi og begreber i Azure Developer CLI
+- Forstå essentielle Azure Developer CLI-termer og begreber
 - Mestre ordforråd og tekniske termer inden for Azure cloud-udvikling
-- Effektivt referere til Infrastructure as Code og deployment-terminologi
+- Effektivt referere til Infrastructure as Code og udrulningstermer
 - Forstå Azure-tjenestenavne, akronymer og deres formål
-- Få adgang til definitioner for fejlfindings- og debugging-terminologi
-- Lære avancerede begreber inden for Azure-arkitektur og udvikling
+- Få adgang til definitioner for fejlfindings- og debugging-termer
+- Lære avancerede Azure-arkitektur- og udviklingsbegreber
 
 ## Læringsresultater
 
@@ -36,36 +41,36 @@ Med regelmæssig brug af dette glossar vil du kunne:
 ## A
 
 **ARM Template**  
-Azure Resource Manager-skabelon. JSON-baseret Infrastructure as Code-format, der bruges til at definere og implementere Azure-ressourcer deklarativt.
+Azure Resource Manager-skabelon. JSON-baseret Infrastructure as Code-format, der bruges til at definere og udrulle Azure-ressourcer deklarativt.
 
 **App Service**  
 Azures platform-as-a-service (PaaS)-tilbud til hosting af webapplikationer, REST API'er og mobile backends uden behov for at administrere infrastruktur.
 
 **Application Insights**  
-Azures applikationsperformance-overvågningstjeneste (APM), der giver dyb indsigt i applikationens ydeevne, tilgængelighed og brug.
+Azures applikationsperformance-overvågningstjeneste (APM), der giver dyb indsigt i applikationsperformance, tilgængelighed og brug.
 
 **Azure CLI**  
 Kommandolinjegrænseflade til styring af Azure-ressourcer. Bruges af azd til autentificering og visse operationer.
 
 **Azure Developer CLI (azd)**  
-Udviklerfokuseret kommandolinjeværktøj, der fremskynder processen med at bygge og implementere applikationer til Azure ved hjælp af skabeloner og Infrastructure as Code.
+Udviklerfokuseret kommandolinjeværktøj, der fremskynder processen med at bygge og udrulle applikationer til Azure ved hjælp af skabeloner og Infrastructure as Code.
 
 **azure.yaml**  
-Hovedkonfigurationsfilen for et azd-projekt, der definerer tjenester, infrastruktur og deployment-hooks.
+Hovedkonfigurationsfilen for et azd-projekt, der definerer tjenester, infrastruktur og udrulningshooks.
 
 **Azure Resource Manager (ARM)**  
-Azures implementerings- og styringstjeneste, der giver et styringslag til oprettelse, opdatering og sletning af ressourcer.
+Azures udrulnings- og styringstjeneste, der giver et styringslag til oprettelse, opdatering og sletning af ressourcer.
 
 ## B
 
 **Bicep**  
-Domænespecifikt sprog (DSL) udviklet af Microsoft til implementering af Azure-ressourcer. Tilbyder enklere syntaks end ARM-skabeloner, mens det kompilerer til ARM.
+Domænespecifikt sprog (DSL) udviklet af Microsoft til udrulning af Azure-ressourcer. Giver enklere syntaks end ARM-skabeloner, mens det kompilerer til ARM.
 
 **Build**  
-Processen med at kompilere kildekode, installere afhængigheder og forberede applikationer til implementering.
+Processen med at kompilere kildekode, installere afhængigheder og forberede applikationer til udrulning.
 
 **Blue-Green Deployment**  
-Implementeringsstrategi, der bruger to identiske produktionsmiljøer (blå og grøn) for at minimere nedetid og risiko.
+Udrulningsstrategi, der bruger to identiske produktionsmiljøer (blå og grøn) for at minimere nedetid og risiko.
 
 ## C
 
@@ -73,13 +78,13 @@ Implementeringsstrategi, der bruger to identiske produktionsmiljøer (blå og gr
 Azures serverløse container-tjeneste, der gør det muligt at køre containeriserede applikationer uden at administrere kompleks infrastruktur.
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Automatiserede praksisser for integration af kodeændringer og implementering af applikationer.
+Continuous Integration/Continuous Deployment. Automatiserede praksisser til integration af kodeændringer og udrulning af applikationer.
 
 **Cosmos DB**  
-Azures globalt distribuerede, multi-model database-tjeneste, der tilbyder omfattende SLA'er for gennemløb, latenstid, tilgængelighed og konsistens.
+Azures globalt distribuerede, multi-model databaseservice, der tilbyder omfattende SLA'er for gennemløb, latenstid, tilgængelighed og konsistens.
 
 **Configuration**  
-Indstillinger og parametre, der styrer applikationsadfærd og implementeringsmuligheder.
+Indstillinger og parametre, der styrer applikationsadfærd og udrulningsmuligheder.
 
 ## D
 
@@ -95,10 +100,10 @@ Tekstfil, der indeholder instruktioner til opbygning af en Docker-containerbille
 ## E
 
 **Environment**  
-Et implementeringsmål, der repræsenterer en specifik instans af din applikation (f.eks. udvikling, staging, produktion).
+Et udrulningsmål, der repræsenterer en specifik instans af din applikation (f.eks. udvikling, staging, produktion).
 
 **Environment Variables**  
-Konfigurationsværdier gemt som nøgle-værdi-par, som applikationer kan få adgang til under runtime.
+Konfigurationsværdier gemt som nøgle-værdi-par, som applikationer kan tilgå under runtime.
 
 **Endpoint**  
 URL eller netværksadresse, hvor en applikation eller tjeneste kan tilgås.
@@ -106,7 +111,7 @@ URL eller netværksadresse, hvor en applikation eller tjeneste kan tilgås.
 ## F
 
 **Function App**  
-Azures serverløse beregningstjeneste, der gør det muligt at køre hændelsesdrevet kode uden at administrere infrastruktur.
+Azures serverløse beregningstjeneste, der gør det muligt at køre begivenhedsdrevet kode uden at administrere infrastruktur.
 
 ## G
 
@@ -119,10 +124,10 @@ Distribueret versionskontrolsystem, der bruges til at spore ændringer i kildeko
 ## H
 
 **Hooks**  
-Brugerdefinerede scripts eller kommandoer, der kører på specifikke punkter under implementeringslivscyklussen (preprovision, postprovision, predeploy, postdeploy).
+Brugerdefinerede scripts eller kommandoer, der kører på specifikke punkter under udrulningslivscyklussen (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Den Azure-tjenestetype, hvor en applikation vil blive implementeret (f.eks. appservice, containerapp, function).
+Den Azure-tjenestetype, hvor en applikation vil blive udrullet (f.eks. appservice, containerapp, function).
 
 ## I
 
@@ -151,7 +156,7 @@ Forespørgselssprog, der bruges til at analysere data i Azure Monitor, Applicati
 ## L
 
 **Load Balancer**  
-Tjeneste, der fordeler indgående netværkstrafik på tværs af flere servere eller instanser.
+Tjeneste, der distribuerer indgående netværkstrafik på tværs af flere servere eller instanser.
 
 **Log Analytics**  
 Azure-tjeneste til indsamling, analyse og handling på telemetridata fra cloud- og on-premises-miljøer.
@@ -165,7 +170,7 @@ Azure-funktion, der giver Azure-tjenester en automatisk administreret identitet 
 Arkitektonisk tilgang, hvor applikationer bygges som en samling af små, uafhængige tjenester.
 
 **Monitor**  
-Azures samlede overvågningsløsning, der giver fuld-stack observabilitet på tværs af applikationer og infrastruktur.
+Azures samlede overvågningsløsning, der giver fuld-stack synlighed på tværs af applikationer og infrastruktur.
 
 ## N
 
@@ -178,21 +183,21 @@ Pakkehåndtering til Node.js, der administrerer afhængigheder og pakker.
 ## O
 
 **Output**  
-Værdier returneret fra infrastrukturimplementering, der kan bruges af applikationer eller andre ressourcer.
+Værdier returneret fra infrastrukturudrulning, der kan bruges af applikationer eller andre ressourcer.
 
 ## P
 
 **Package**  
-Processen med at forberede applikationskode og afhængigheder til implementering.
+Processen med at forberede applikationskode og afhængigheder til udrulning.
 
 **Parameters**  
-Inputværdier, der sendes til infrastruktur-skabeloner for at tilpasse implementeringer.
+Inputværdier, der sendes til infrastrukturskabeloner for at tilpasse udrulninger.
 
 **PostgreSQL**  
-Open-source relationsdatabase-system understøttet som en administreret tjeneste i Azure.
+Open-source relationsdatabasesystem understøttet som en administreret tjeneste i Azure.
 
 **Provisioning**  
-Processen med at oprette og konfigurere Azure-ressourcer defineret i infrastruktur-skabeloner.
+Processen med at oprette og konfigurere Azure-ressourcer defineret i infrastrukturskabeloner.
 
 ## Q
 
@@ -205,7 +210,7 @@ Grænser for mængden af ressourcer, der kan oprettes i et Azure-abonnement elle
 Logisk container for Azure-ressourcer, der deler samme livscyklus, tilladelser og politikker.
 
 **Resource Token**  
-Unik streng genereret af azd for at sikre, at ressourcenavne er unikke på tværs af implementeringer.
+Unik streng genereret af azd for at sikre, at ressourcenavne er unikke på tværs af udrulninger.
 
 **REST API**  
 Arkitektonisk stil til design af netværksapplikationer ved hjælp af HTTP-metoder.
@@ -216,27 +221,27 @@ Processen med at vende tilbage til en tidligere version af en applikation eller 
 ## S
 
 **Service**  
-En komponent af din applikation defineret i azure.yaml (f.eks. webfrontend, API-backend, database).
+En komponent af din applikation defineret i azure.yaml (f.eks. web frontend, API backend, database).
 
 **SKU**  
-Stock Keeping Unit. Repræsenterer forskellige tjenesteniveauer eller ydeevne for Azure-ressourcer.
+Stock Keeping Unit. Repræsenterer forskellige tjenesteniveauer eller ydelsesniveauer for Azure-ressourcer.
 
 **SQL Database**  
-Azures administrerede relationsdatabasetjeneste baseret på Microsoft SQL Server.
+Azures administrerede relationsdatabaseservice baseret på Microsoft SQL Server.
 
 **Static Web Apps**  
-Azure-tjeneste til opbygning og implementering af full-stack webapplikationer fra kildekoderepositorier.
+Azure-tjeneste til opbygning og udrulning af full-stack webapplikationer fra kildekoderepositorier.
 
 **Storage Account**  
 Azure-tjeneste, der tilbyder cloud-lagring til dataobjekter, herunder blobs, filer, køer og tabeller.
 
 **Subscription**  
-Azure-kontocontainer, der holder ressourcegrupper og ressourcer med tilhørende fakturering og adgangsstyring.
+Azure-kontocontainer, der indeholder resourcegrupper og ressourcer med tilhørende fakturering og adgangsstyring.
 
 ## T
 
 **Template**  
-Forudbygget projektstruktur, der indeholder applikationskode, infrastrukturdefinitioner og konfiguration til almindelige scenarier.
+Forudbygget projektstruktur, der indeholder applikationskode, infrastruktursdefinitioner og konfiguration til almindelige scenarier.
 
 **Terraform**  
 Open-source Infrastructure as Code-værktøj, der understøtter flere cloud-leverandører, herunder Azure.
@@ -263,10 +268,10 @@ Visual Studio Code. Populær kodeeditor med fremragende Azure- og azd-integratio
 ## W
 
 **Webhook**  
-HTTP-tilbagekald udløst af specifikke hændelser, ofte brugt i CI/CD-pipelines.
+HTTP-tilbagekald udløst af specifikke begivenheder, ofte brugt i CI/CD-pipelines.
 
 **What-if**  
-Azure-funktion, der viser, hvilke ændringer der ville blive foretaget af en implementering uden faktisk at udføre den.
+Azure-funktion, der viser, hvilke ændringer der ville blive foretaget af en udrulning uden faktisk at udføre den.
 
 ## Y
 
@@ -282,13 +287,13 @@ Fysisk adskilte lokationer inden for en Azure-region, der giver redundans og hø
 
 ## Almindelige Akronymer
 
-| Akronym | Fuld Betegnelse | Beskrivelse |
-|---------|-----------------|-------------|
+| Akronym | Fuld Form | Beskrivelse |
+|---------|-----------|-------------|
 | AAD | Azure Active Directory | Identitets- og adgangsstyringstjeneste |
 | ACR | Azure Container Registry | Containerbilledregistertjeneste |
 | AKS | Azure Kubernetes Service | Administreret Kubernetes-tjeneste |
 | API | Application Programming Interface | Sæt af protokoller til opbygning af software |
-| ARM | Azure Resource Manager | Azures implementerings- og styringstjeneste |
+| ARM | Azure Resource Manager | Azures udrulnings- og styringstjeneste |
 | CDN | Content Delivery Network | Distribueret netværk af servere |
 | CI/CD | Continuous Integration/Continuous Deployment | Automatiserede udviklingspraksisser |
 | CLI | Command Line Interface | Tekstbaseret brugergrænseflade |
@@ -301,7 +306,7 @@ Fysisk adskilte lokationer inden for en Azure-region, der giver redundans og hø
 | RBAC | Role-Based Access Control | Adgangsstyringsmetode baseret på brugerroller |
 | REST | Representational State Transfer | Arkitektonisk stil til webtjenester |
 | SDK | Software Development Kit | Samling af udviklingsværktøjer |
-| SLA | Service Level Agreement | Forpligtelse til tjenestetilgængelighed/ydeevne |
+| SLA | Service Level Agreement | Forpligtelse til tjenestetilgængelighed/ydelse |
 | SQL | Structured Query Language | Sprog til styring af relationsdatabaser |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kryptografiske protokoller |
 | URI | Uniform Resource Identifier | Streng, der identificerer en ressource |
@@ -340,18 +345,18 @@ Fysisk adskilte lokationer inden for en Azure-region, der giver redundans og hø
 
 ### Sikkerhedstermer
 - **Managed Identity**: Azure-funktion, der giver automatisk styring af legitimationsoplysninger
-- **Key Vault**: Sikker opbevaring af hemmeligheder, nøgler og certifikater
+- **Key Vault**: Sikker opbevaring til hemmeligheder, nøgler og certifikater
 - **RBAC**: Rollebaseret adgangsstyring for Azure-ressourcer
 - **Network Security Group**: Virtuel firewall til styring af netværkstrafik
 
 ### Overvågningstermer
 - **Telemetry**: Automatisk indsamling af målinger og data
-- **Application Performance Monitoring (APM)**: Overvågning af softwareydelse
+- **Application Performance Monitoring (APM)**: Overvågning af softwareperformance
 - **Log Analytics**: Tjeneste til indsamling og analyse af logdata
 - **Alert Rules**: Automatiske notifikationer baseret på metrikker eller betingelser
 
-### Implementeringstermer
-- **Blue-Green Deployment**: Implementeringsstrategi uden nedetid
+### Udrulningstermer
+- **Blue-Green Deployment**: Udrulningsstrategi uden nedetid
 - **Canary Deployment**: Gradvis udrulning til en delmængde af brugere
 - **Rolling Update**: Sekventiel udskiftning af applikationsinstanser
 - **Rollback**: Tilbagevenden til tidligere applikationsversion

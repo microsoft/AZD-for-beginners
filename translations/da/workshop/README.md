@@ -1,19 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T21:59:30+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-17T23:32:27+00:00",
   "source_file": "workshop/README.md",
   "language_code": "da"
 }
 -->
 # AZD for AI-udviklere Workshop
 
-**Forrige:** [AI Fejlfindingsguide](../docs/troubleshooting/ai-troubleshooting.md) | **Næste:** [Workshop Lab-moduler](../../../workshop)
+**Workshop Navigation**
+- **📚 Kursushjem**: [AZD For Begyndere](../README.md)
+- **📖 Relaterede kapitler**: Dækker [Kapitel 1](../README.md#-chapter-1-foundation--quick-start), [Kapitel 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) og [Kapitel 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Praktisk Lab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Næste skridt**: [Workshop Lab Moduler](../../../workshop)
 
 Velkommen til den praktiske workshop, hvor du lærer Azure Developer CLI (AZD) med fokus på udrulning af AI-applikationer. Denne workshop er designet til at tage dig fra AZD-grundlæggende til udrulning af produktionsklare AI-løsninger.
 
-## Workshopoversigt
+## Workshop Oversigt
 
 **Varighed:** 2-3 timer  
 **Niveau:** Begynder til mellemniveau  
@@ -23,14 +27,14 @@ Velkommen til den praktiske workshop, hvor du lærer Azure Developer CLI (AZD) m
 
 - **AZD Grundlæggende**: Forståelse af Infrastructure as Code med AZD
 - 🤖 **AI Service Integration**: Udrulning af Azure OpenAI, AI Search og andre AI-tjenester
-- **Containerudrulning**: Brug af Azure Container Apps til AI-applikationer
+- **Container Udrulning**: Brug af Azure Container Apps til AI-applikationer
 - **Sikkerhedsprincipper**: Implementering af Managed Identity og sikre konfigurationer
 - **Overvågning & Observabilitet**: Opsætning af Application Insights til AI-arbejdsbelastninger
-- **Produktionsmønstre**: Udrulningsstrategier klar til virksomheder
+- **Produktionsmønstre**: Strategier til virksomhedsklar udrulning
 
-## Workshopstruktur
+## Workshop Struktur
 
-### Modul 1: AZD Grundlæggende (30 minutter)
+### Modul 1: AZD Grundlag (30 minutter)
 - Installation og konfiguration af AZD
 - Forståelse af AZD-projektstruktur
 - Din første AZD-udrulning
@@ -42,7 +46,7 @@ Velkommen til den praktiske workshop, hvor du lærer Azure Developer CLI (AZD) m
 - Konfiguration af API-adgang og autentifikation
 - **Lab**: Udrul en chatapplikation med GPT-4
 
-### Modul 3: RAG-applikationer (45 minutter)
+### Modul 3: RAG Applikationer (45 minutter)
 - Integration af Azure AI Search
 - Dokumentbehandling med Azure Document Intelligence
 - Vektorindlejring og semantisk søgning
@@ -56,13 +60,13 @@ Velkommen til den praktiske workshop, hvor du lærer Azure Developer CLI (AZD) m
 
 ### Modul 5: Avancerede Mønstre (15 minutter)
 - Udrulning i flere miljøer
-- CI/CD-integration
+- CI/CD integration
 - Strategier for omkostningsoptimering
 - **Afslutning**: Produktionsklarhedstjekliste
 
 ## Forudsætninger
 
-### Nødvendige værktøjer
+### Nødvendige Værktøjer
 
 Installér venligst disse værktøjer før workshoppen:
 
@@ -84,15 +88,15 @@ sudo sh get-docker.sh
 sudo apt-get install python3.10 python3.10-venv python3-pip
 ```
 
-### Azure-kontoopsætning
+### Azure Kontoopsætning
 
-1. **Azure-abonnement**: [Tilmeld dig gratis](https://azure.microsoft.com/free/)  
-2. **Azure OpenAI-adgang**: [Anmod om adgang](https://aka.ms/oai/access)  
-3. **Nødvendige tilladelser**:  
-   - Contributor-rolle på abonnement eller ressourcegruppe  
-   - User Access Administrator (til RBAC-tildelinger)  
+1. **Azure Abonnement**: [Tilmeld dig gratis](https://azure.microsoft.com/free/)
+2. **Azure OpenAI Adgang**: [Anmod om adgang](https://aka.ms/oai/access)
+3. **Nødvendige Tilladelser**:
+   - Contributor-rolle på abonnement eller ressourcegruppe
+   - User Access Administrator (til RBAC-tildelinger)
 
-### Verificér forudsætninger
+### Verificér Forudsætninger
 
 Kør dette script for at verificere din opsætning:
 
@@ -138,28 +142,28 @@ fi
 echo "Setup verification complete!"
 ```
 
-## Workshopmaterialer
+## Workshop Materialer
 
-### Lab-øvelser
+### Lab Øvelser
 
 Hvert modul inkluderer praktiske labs med startkode og trin-for-trin instruktioner:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Din første AZD-udrulning  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chatapplikation med Azure OpenAI  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-applikation med AI Search  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Produktionsudrulningsmønstre  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Avancerede udrulningsscenarier  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Din første AZD-udrulning
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chatapplikation med Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-applikation med AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Produktionsudrulningsmønstre
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Avancerede udrulningsscenarier
 
-### Referencematerialer
+### Reference Materialer
 
-- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Omfattende integrationsmønstre  
-- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Bedste praksis for modeludrulning  
-- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Udrulningsmønstre for virksomheder  
-- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Almindelige problemer og løsninger  
+- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Omfattende integrationsmønstre
+- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Bedste praksis for modeludrulning
+- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Mønstre for virksomhedsklar udrulning
+- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Almindelige problemer og løsninger
 
-### Eksempeltemplates
+### Eksempel Templates
 
-Hurtigstarttemplates til almindelige AI-scenarier:
+Hurtigstart templates til almindelige AI-scenarier:
 
 ```
 workshop/templates/
@@ -169,43 +173,43 @@ workshop/templates/
 └── production-ready/     # Enterprise template
 ```
 
-## Kom godt i gang
+## Kom i gang
 
-### Mulighed 1: GitHub Codespaces (Anbefalet)
+### Option 1: GitHub Codespaces (Anbefalet)
 
 Den hurtigste måde at starte workshoppen på:
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
-### Mulighed 2: Lokal udvikling
+### Option 2: Lokal Udvikling
 
-1. **Klon workshop-repositoriet:**  
+1. **Klon workshop-repositoriet:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Log ind på Azure:**  
+2. **Log ind på Azure:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **Start med Lab 1:**  
+3. **Start med Lab 1:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### Mulighed 3: Instruktørledet workshop
+### Option 3: Instruktørledet Workshop
 
 Hvis du deltager i en instruktørledet session:
 
-- 🎥 **Workshopoptagelse**: [Tilgængelig on-demand](https://aka.ms/azd-ai-workshop)  
-- 💬 **Discord-fællesskab**: [Deltag for live support](https://aka.ms/foundry/discord)  
-- **Workshopfeedback**: [Del din oplevelse](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Workshop Optagelse**: [Tilgængelig on-demand](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord Community**: [Deltag for live support](https://aka.ms/foundry/discord)
+- **Workshop Feedback**: [Del din oplevelse](https://aka.ms/azd-workshop-feedback)
 
-## Workshop-tidslinje
+## Workshop Tidslinje
 
 ### Selvstudie (3 timer)
 
@@ -218,7 +222,7 @@ Hvis du deltager i en instruktørledet session:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Instruktørledet session (2,5 timer)
+### Instruktørledet Session (2,5 timer)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -236,71 +240,71 @@ Hvis du deltager i en instruktørledet session:
 Ved afslutningen af denne workshop vil du kunne:
 
 ✅ **Udrulle AI-applikationer** ved hjælp af AZD-templates  
-✅ **Konfigurere Azure OpenAI**-tjenester med korrekt sikkerhed  
-✅ **Bygge RAG-applikationer** med Azure AI Search-integration  
-✅ **Implementere produktionsmønstre** for AI-arbejdsbelastninger i virksomheder  
+✅ **Konfigurere Azure OpenAI** tjenester med korrekt sikkerhed  
+✅ **Bygge RAG-applikationer** med Azure AI Search integration  
+✅ **Implementere produktionsmønstre** for virksomhedsklare AI-arbejdsbelastninger  
 ✅ **Overvåge og fejlfinde** AI-applikationsudrulninger  
-✅ **Anvende omkostningsoptimering** strategier for AI-arbejdsbelastninger  
+✅ **Anvende omkostningsoptimeringsstrategier** for AI-arbejdsbelastninger  
 
-## Fællesskab & Support
+## Community & Support
 
-### Under workshoppen
+### Under Workshoppen
 
-- 🙋 **Spørgsmål**: Brug workshopchatten eller ræk hånden op  
-- 🐛 **Problemer**: Tjek [fejlfindingsguiden](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Tips**: Del opdagelser med andre deltagere  
+- 🙋 **Spørgsmål**: Brug workshop-chatten eller ræk hånden op
+- 🐛 **Problemer**: Tjek [fejlfindingsguiden](../docs/troubleshooting/ai-troubleshooting.md)
+- **Tips**: Del opdagelser med andre deltagere
 
-### Efter workshoppen
+### Efter Workshoppen
 
-- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)  
-- **GitHub Issues**: [Rapportér templateproblemer](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Feedback**: [Workshop-evalueringsformular](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
+- **GitHub Issues**: [Rapportér templateproblemer](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Feedback**: [Workshop evalueringsformular](https://aka.ms/azd-workshop-feedback)
 
-## Næste skridt
+## Næste Skridt
 
-### Fortsæt læringen
+### Fortsæt Læring
 
-1. **Avancerede scenarier**: Udforsk [multi-region udrulninger](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **CI/CD Integration**: Opsæt [GitHub Actions workflows](../docs/deployment/github-actions.md)  
-3. **Custom Templates**: Opret dine egne [AZD-templates](../docs/getting-started/custom-templates.md)  
+1. **Avancerede Scenarier**: Udforsk [multi-region udrulninger](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **CI/CD Integration**: Opsæt [GitHub Actions workflows](../docs/deployment/github-actions.md)
+3. **Custom Templates**: Opret dine egne [AZD templates](../docs/getting-started/custom-templates.md)
 
-### Anvend i dine projekter
+### Anvend i Dine Projekter
 
-1. **Vurdering**: Brug vores [klarhedstjekliste](./production-readiness-checklist.md)  
-2. **Templates**: Start med vores [AI-specifikke templates](../../../workshop/templates)  
-3. **Support**: Deltag i [Azure AI Foundry Discord](https://aka.ms/foundry/discord)  
+1. **Vurdering**: Brug vores [klarhedstjekliste](./production-readiness-checklist.md)
+2. **Templates**: Start med vores [AI-specifikke templates](../../../workshop/templates)
+3. **Support**: Deltag i [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
-### Del din succes
+### Del Din Succes
 
-- ⭐ **Stjernemarkér repositoriet**, hvis denne workshop hjalp dig  
-- 🐦 **Del på sociale medier** med #AzureDeveloperCLI #AzureAI  
-- 📝 **Skriv et blogindlæg** om din AI-udrulningsrejse  
+- ⭐ **Stjernemarkér repositoriet**, hvis denne workshop hjalp dig
+- 🐦 **Del på sociale medier** med #AzureDeveloperCLI #AzureAI
+- 📝 **Skriv et blogindlæg** om din AI-udrulningsrejse
 
 ---
 
-## Workshopfeedback
+## Workshop Feedback
 
 Din feedback hjælper os med at forbedre workshopoplevelsen:
 
 | Aspekt | Bedømmelse (1-5) | Kommentarer |
 |--------|------------------|-------------|
 | Kvalitet af indhold | ⭐⭐⭐⭐⭐ | |
-| Praktiske labs | ⭐⭐⭐⭐⭐ | |
+| Praktiske Labs | ⭐⭐⭐⭐⭐ | |
 | Dokumentation | ⭐⭐⭐⭐⭐ | |
 | Sværhedsgrad | ⭐⭐⭐⭐⭐ | |
 | Overordnet oplevelse | ⭐⭐⭐⭐⭐ | |
 
-**Indsend feedback**: [Workshop-evalueringsformular](https://aka.ms/azd-workshop-feedback)
+**Indsend feedback**: [Workshop Evalueringsformular](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**Forrige:** [AI Fejlfindingsguide](../docs/troubleshooting/ai-troubleshooting.md) | **Næste:** Start med [Lab 1: AZD Grundlæggende](../../../workshop/lab-1-azd-basics)
+**Forrige:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Næste:** Start med [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)
 
 **Klar til at begynde at bygge AI-applikationer med AZD?**
 
-[Start Lab 1: AZD Grundlæggende →](./lab-1-azd-basics/README.md)
+[Start Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at sikre nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

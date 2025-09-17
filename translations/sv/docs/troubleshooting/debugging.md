@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:18:50+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T23:16:17+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "sv"
 }
 -->
-# Felsökningsguide - Avancerade tekniker för logganalys
+# Felsökningsguide för AZD-implementeringar
+
+**Kapitelnavigation:**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning & Debugging
+- **⬅️ Föregående**: [Vanliga Problem](common-issues.md)
+- **➡️ Nästa**: [AI-specifik Felsökning](ai-troubleshooting.md)
+- **🚀 Nästa kapitel**: [Kapitel 8: Produktions- & Företagsmönster](../ai-foundry/production-ai-practices.md)
 
 ## Introduktion
 
-Denna omfattande guide ger avancerade felsökningsstrategier, verktyg och tekniker för att diagnostisera och lösa komplexa problem med Azure Developer CLI-distributioner. Lär dig systematiska felsökningsmetoder, tekniker för logganalys, prestandaprofilering och avancerade diagnostikverktyg för att effektivt lösa distributions- och körningsproblem.
+Denna omfattande guide ger avancerade strategier, verktyg och tekniker för felsökning och diagnos av komplexa problem med Azure Developer CLI-implementeringar. Lär dig systematiska felsökningsmetoder, logganalystekniker, prestandaprofilering och avancerade diagnostikverktyg för att effektivt lösa implementerings- och körningsproblem.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Bemästra systematiska felsökningsmetoder för problem med Azure Developer CLI
-- Förstå avancerad loggkonfiguration och tekniker för logganalys
+- Bemästra systematiska felsökningsmetoder för Azure Developer CLI-problem
+- Förstå avancerad loggkonfiguration och logganalystekniker
 - Implementera strategier för prestandaprofilering och övervakning
 - Använda Azure diagnostikverktyg och tjänster för att lösa komplexa problem
 - Tillämpa nätverksfelsökning och säkerhetsfelsökningstekniker
-- Konfigurera omfattande övervakning och varningar för proaktiv upptäckt av problem
+- Konfigurera omfattande övervakning och varningar för proaktiv problemidentifiering
 
 ## Läranderesultat
 
 Efter att ha slutfört guiden kommer du att kunna:
-- Tillämpa TRIAGE-metoden för att systematiskt felsöka komplexa distributionsproblem
+- Tillämpa TRIAGE-metoden för att systematiskt felsöka komplexa implementeringsproblem
 - Konfigurera och analysera omfattande loggning och spårningsinformation
 - Använda Azure Monitor, Application Insights och diagnostikverktyg effektivt
 - Felsöka nätverksanslutning, autentisering och behörighetsproblem självständigt
@@ -43,7 +50,7 @@ Efter att ha slutfört guiden kommer du att kunna:
 - **S**amla: Samla in all relevant information
 - **E**skalera: När ska du söka ytterligare hjälp?
 
-## Aktivera felsökningsläge
+## Aktivera debug-läge
 
 ### Miljövariabler
 ```bash
@@ -59,7 +66,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Felsökningskonfiguration
+### Debug-konfiguration
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -71,7 +78,7 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Tekniker för logganalys
+## 📊 Logganalystekniker
 
 ### Förstå loggnivåer
 ```
@@ -156,7 +163,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Felsökning av containrar
+### Containerfelsökning
 ```bash
 # Debug container app issues
 debug_container() {
@@ -197,7 +204,7 @@ debug_database() {
 
 ## 🔬 Prestandafelsökning
 
-### Övervakning av applikationsprestanda
+### Applikationsprestandaövervakning
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -512,7 +519,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Akuta felsökningsprocedurer
+## 🚨 Nödfelsökningsprocedurer
 
 ### Respons på produktionsproblem
 ```bash
@@ -627,7 +634,7 @@ create_debug_queries() {
 }
 ```
 
-### Loggaggregation
+### Loggaggregat
 ```bash
 # Aggregate logs from multiple sources
 aggregate_logs() {
@@ -656,7 +663,7 @@ Skapa en `scripts/debug/`-katalog med:
 - `health-check.sh` - Omfattande hälsokontroll
 - `performance-test.sh` - Automatiserad prestandatestning
 - `log-analyzer.py` - Avancerad loggparsing och analys
-- `resource-validator.sh` - Validering av infrastruktur
+- `resource-validator.sh` - Infrastrukturvalidering
 
 ### Övervakningsintegration
 ```yaml
@@ -677,18 +684,18 @@ hooks:
 
 ## Bästa praxis
 
-1. **Aktivera alltid felsökningsloggning** i icke-produktionsmiljöer
+1. **Aktivera alltid debug-loggning** i icke-produktionsmiljöer
 2. **Skapa reproducerbara testfall** för problem
 3. **Dokumentera felsökningsprocedurer** för ditt team
 4. **Automatisera hälsokontroller** och övervakning
 5. **Håll felsökningsverktyg uppdaterade** med dina applikationsändringar
-6. **Öva på felsökningsprocedurer** under icke-incidenttider
+6. **Öva felsökningsprocedurer** under icke-incidenttider
 
 ## Nästa steg
 
 - [Kapacitetsplanering](../pre-deployment/capacity-planning.md) - Planera resursbehov
-- [Val av SKU](../pre-deployment/sku-selection.md) - Välj lämpliga tjänstenivåer
-- [Förkontroller](../pre-deployment/preflight-checks.md) - Validering före distribution
+- [SKU-val](../pre-deployment/sku-selection.md) - Välj lämpliga tjänstenivåer
+- [Preflight-kontroller](../pre-deployment/preflight-checks.md) - Validering före implementering
 - [Fuskblad](../../resources/cheat-sheet.md) - Snabbreferenskommandon
 
 ---
@@ -697,8 +704,8 @@ hooks:
 
 ---
 
-**Navigering**
-- **Föregående lektion**: [Vanliga problem](common-issues.md)
+**Navigation**
+- **Föregående lektion**: [Vanliga Problem](common-issues.md)
 
 - **Nästa lektion**: [Kapacitetsplanering](../pre-deployment/capacity-planning.md)
 

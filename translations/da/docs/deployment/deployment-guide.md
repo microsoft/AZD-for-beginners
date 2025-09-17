@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T21:38:58+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T23:29:48+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "da"
 }
 -->
 # Implementeringsguide - Mestre AZD-implementeringer
+
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 4 - Infrastruktur som kode & implementering
+- **⬅️ Forrige Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
+- **➡️ Næste**: [Ressourceklargøring](provisioning.md)
+- **🚀 Næste Kapitel**: [Kapitel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
 
 ## Introduktion
 
@@ -17,8 +24,8 @@ Denne omfattende guide dækker alt, hvad du behøver at vide om implementering a
 
 Ved at gennemføre denne guide vil du:
 - Mestre alle Azure Developer CLI-implementeringskommandoer og arbejdsgange
-- Forstå hele implementeringslivscyklussen fra klargøring til overvågning
-- Implementere brugerdefinerede hooks til automatisering før og efter implementering
+- Forstå den komplette implementeringslivscyklus fra klargøring til overvågning
+- Implementere brugerdefinerede implementeringshooks til automatisering før og efter implementering
 - Konfigurere flere miljøer med miljøspecifikke parametre
 - Opsætte avancerede implementeringsstrategier, herunder blue-green og canary-implementeringer
 - Integrere azd-implementeringer med CI/CD-pipelines og DevOps-arbejdsgange
@@ -26,7 +33,7 @@ Ved at gennemføre denne guide vil du:
 ## Læringsresultater
 
 Efter afslutning vil du være i stand til at:
-- Udføre og fejlfinde alle azd-implementeringsarbejdsgange selvstændigt
+- Udføre og fejlfinde alle azd-implementeringsarbejdsgange uafhængigt
 - Designe og implementere brugerdefineret implementeringsautomatisering ved hjælp af hooks
 - Konfigurere produktionsklare implementeringer med korrekt sikkerhed og overvågning
 - Administrere komplekse implementeringsscenarier med flere miljøer
@@ -56,7 +63,7 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Kun infrastruktur-implementering
+### Kun infrastrukturimplementering
 Når du kun behøver at opdatere Azure-ressourcer:
 ```bash
 # Provision/update infrastructure
@@ -69,7 +76,7 @@ azd provision --preview
 azd provision --service database
 ```
 
-### Kun kode-implementering
+### Kun kodeimplementering
 Til hurtige applikationsopdateringer:
 ```bash
 # Deploy all services
@@ -275,7 +282,7 @@ services:
         percentage: 10
 ```
 
-### Trinvise implementeringer
+### Fasede implementeringer
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -306,9 +313,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Container-implementeringer
+## 🐳 Containerimplementeringer
 
-### Implementering af containerapplikationer
+### Containerapplikationsimplementeringer
 ```yaml
 services:
   api:
@@ -394,7 +401,7 @@ azd deploy --detect-changes
 
 ## 🔍 Implementeringsovervågning
 
-### Overvågning i realtid
+### Overvågning af implementering i realtid
 ```bash
 # Monitor deployment progress
 azd deploy --follow
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### Infrastruktur-rollback
+### Infrastrukturrollback
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -631,7 +638,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Næste trin
 
-- [Klargøring af ressourcer](provisioning.md) - Dybdegående om infrastrukturstyring
+- [Ressourceklargøring](provisioning.md) - Dybdegående om infrastrukturstyring
 - [Planlægning før implementering](../pre-deployment/capacity-planning.md) - Planlæg din implementeringsstrategi
 - [Almindelige problemer](../troubleshooting/common-issues.md) - Løs implementeringsproblemer
 - [Bedste praksis](../troubleshooting/debugging.md) - Produktionsklare implementeringsstrategier
@@ -646,10 +653,10 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Navigation**
-- **Forrige lektion**: [Dit første projekt](../getting-started/first-project.md)
-- **Næste lektion**: [Klargøring af ressourcer](provisioning.md)
+- **Forrige Lektion**: [Dit Første Projekt](../getting-started/first-project.md)
+- **Næste Lektion**: [Ressourceklargøring](provisioning.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

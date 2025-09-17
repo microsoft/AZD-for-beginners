@@ -1,29 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:43:47+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T23:27:27+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "da"
 }
 -->
 # Azure AI Foundry Integration med AZD
 
-**Forrige:** [Første Projekt](../getting-started/first-project.md) | **Næste:** [AI Model Deployment](ai-model-deployment.md)
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 2 - AI-First Udvikling
+- **⬅️ Forrige Kapitel**: [Kapitel 1: Dit Første Projekt](../getting-started/first-project.md)
+- **➡️ Næste**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Næste Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ## Oversigt
 
-Denne guide viser, hvordan man integrerer Azure AI Foundry-tjenester med Azure Developer CLI (AZD) for at forenkle udrulning af AI-applikationer. Azure AI Foundry tilbyder en omfattende platform til opbygning, udrulning og styring af AI-applikationer, mens AZD gør infrastrukturen og udrulningsprocessen enklere.
+Denne guide viser, hvordan man integrerer Azure AI Foundry-tjenester med Azure Developer CLI (AZD) for at forenkle udrulningen af AI-applikationer. Azure AI Foundry tilbyder en omfattende platform til opbygning, udrulning og styring af AI-applikationer, mens AZD gør infrastrukturen og udrulningsprocessen mere enkel.
 
 ## Hvad er Azure AI Foundry?
 
-Azure AI Foundry er Microsofts samlede platform til AI-udvikling, som inkluderer:
+Azure AI Foundry er Microsofts samlede platform for AI-udvikling, som inkluderer:
 
 - **Modelkatalog**: Adgang til avancerede AI-modeller
 - **Prompt Flow**: Visuel designer til AI-arbejdsgange
 - **AI Foundry Portal**: Integreret udviklingsmiljø til AI-applikationer
 - **Udrulningsmuligheder**: Flere hosting- og skaleringsmuligheder
-- **Sikkerhed og ansvarlighed**: Indbyggede funktioner til ansvarlig AI
+- **Sikkerhed og Ansvarlighed**: Indbyggede funktioner til ansvarlig AI
 
 ## AZD + Azure AI Foundry: Bedre Sammen
 
@@ -428,10 +433,10 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## Fejlfinding af Almindelige Problemer
 
-### Problem 1: OpenAI-kvote Overskredet
+### Problem 1: OpenAI Kvota Overskredet
 
 **Symptomer:**
-- Udrulning fejler med kvotefejl
+- Udrulning fejler med kvotafejl
 - 429-fejl i applikationslogfiler
 
 **Løsninger:**
@@ -481,7 +486,7 @@ az cognitiveservices model list --location eastus
 # Check model capacity requirements
 ```
 
-## Eksempel Templates
+## Eksempel Skabeloner
 
 ### Grundlæggende Chatapplikation
 
@@ -521,12 +526,12 @@ azd up
 
 ## Næste Skridt
 
-1. **Prøv Eksemplerne**: Start med en forudbygget template, der matcher din anvendelse
+1. **Prøv Eksemplerne**: Start med en forudbygget skabelon, der matcher din anvendelse
 2. **Tilpas til Dine Behov**: Modificer infrastrukturen og applikationskoden
 3. **Tilføj Overvågning**: Implementer omfattende observabilitet
 4. **Optimer Omkostninger**: Finjuster konfigurationer til dit budget
-5. **Sikre Din Udrulning**: Implementer sikkerhedsmønstre til virksomheder
-6. **Skalér til Produktion**: Tilføj multi-region og høj tilgængelighedsfunktioner
+5. **Sikr Din Udrulning**: Implementer sikkerhedsmønstre til virksomheder
+6. **Skalér til Produktion**: Tilføj multi-region og høj tilgængelighed
 
 ## Fællesskab og Support
 
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Forrige:** [Første Projekt](../getting-started/first-project.md) | **Næste:** [AI Model Deployment](ai-model-deployment.md)
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 2 - AI-First Udvikling
+- **⬅️ Forrige Kapitel**: [Kapitel 1: Dit Første Projekt](../getting-started/first-project.md)
+- **➡️ Næste**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Næste Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
-**Brug for Hjælp?** Deltag i vores fællesskabsdiskussioner eller opret en issue i repository. Azure AI + AZD-fællesskabet er her for at hjælpe dig med at få succes!
+**Brug for Hjælp?** Deltag i vores fællesskabsdiskussioner eller opret en issue i repositoryen. Azure AI + AZD-fællesskabet er her for at hjælpe dig med at få succes!
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

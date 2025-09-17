@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:42:43+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T23:30:06+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "da"
 }
 -->
-# Klargøring af ressourcer - Infrastruktur som kode med AZD
+# Klargøring af Azure-ressourcer med AZD
+
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 4 - Infrastruktur som kode & Udrulning
+- **⬅️ Forrige**: [Udrulningsguide](deployment-guide.md)
+- **➡️ Næste Kapitel**: [Kapitel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
+- **🔧 Relateret**: [Kapitel 6: Validering før udrulning](../pre-deployment/capacity-planning.md)
 
 ## Introduktion
 
-Denne omfattende guide dækker alt, hvad du behøver at vide om klargøring og administration af Azure-ressourcer ved hjælp af Azure Developer CLI. Lær at implementere mønstre for Infrastruktur som kode (IaC) fra grundlæggende ressourceoprettelse til avancerede virksomhedsinfrastrukturer ved hjælp af Bicep, ARM-skabeloner, Terraform og Pulumi.
+Denne omfattende guide dækker alt, hvad du behøver at vide om klargøring og styring af Azure-ressourcer ved hjælp af Azure Developer CLI. Lær at implementere mønstre for Infrastruktur som kode (IaC) fra grundlæggende ressourceoprettelse til avancerede virksomhedsinfrastrukturer ved hjælp af Bicep, ARM-skabeloner, Terraform og Pulumi.
 
 ## Læringsmål
 
@@ -25,13 +32,13 @@ Ved at gennemføre denne guide vil du:
 
 ## Læringsresultater
 
-Efter afslutning vil du være i stand til at:
+Når du er færdig, vil du kunne:
 - Designe og klargøre Azure-infrastruktur ved hjælp af Bicep og ARM-skabeloner
-- Konfigurere komplekse arkitekturer med flere tjenester og korrekte ressourceafhængigheder
+- Konfigurere komplekse multi-service arkitekturer med korrekte ressourceafhængigheder
 - Implementere parameteriserede skabeloner til flere miljøer og konfigurationer
-- Fejlsøge problemer med infrastrukturklargøring og løse implementeringsfejl
+- Fejlsøge problemer med infrastrukturklargøring og løse udrulningsfejl
 - Anvende principperne fra Azure Well-Architected Framework til infrastrukturdannelse
-- Administrere infrastrukturændringer og implementere strategier for versionsstyring af infrastruktur
+- Administrere infrastrukturændringer og implementere strategier for versionsstyring
 
 ## Oversigt over infrastrukturklargøring
 
@@ -39,9 +46,9 @@ Azure Developer CLI understøtter flere leverandører af Infrastruktur som kode 
 - **Bicep** (anbefalet) - Azures domænespecifikke sprog
 - **ARM-skabeloner** - JSON-baserede Azure Resource Manager-skabeloner
 - **Terraform** - Multi-cloud infrastrukturværktøj
-- **Pulumi** - Moderne infrastruktur som kode med programmeringssprog
+- **Pulumi** - Moderne Infrastruktur som kode med programmeringssprog
 
-## Forståelse af Azure-ressourcer
+## Forstå Azure-ressourcer
 
 ### Ressourcehierarki
 ```
@@ -54,13 +61,13 @@ Azure Account
 ### Almindelige Azure-tjenester til applikationer
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
+- **Netværk**: Virtual Network, Application Gateway, CDN
+- **Sikkerhed**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
 ## Bicep-infrastrukturskabeloner
 
-### Grundlæggende struktur for Bicep-skabeloner
+### Grundlæggende Bicep-skabelonstruktur
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -302,7 +309,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 Sikkerhed og hemmelighedshåndtering
 
-### Integration med Key Vault
+### Key Vault-integration
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -653,7 +660,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Avancerede klargøringsmønstre
 
-### Implementering i flere regioner
+### Multi-region udrulning
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -759,7 +766,7 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🔄 Ressourceopdateringer og migrationer
 
-### Sikker opdatering af ressourcer
+### Sikker ressourceopdatering
 ```bash
 # Preview infrastructure changes
 azd provision --preview
@@ -802,7 +809,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Bedste praksis
 
-### 1. Konventioner for ressourcenavne
+### 1. Ressourcenavnkonventioner
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -813,7 +820,7 @@ var naming = {
 }
 ```
 
-### 2. Strategi for tagging
+### 2. Tagging-strategi
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -826,7 +833,7 @@ var commonTags = {
 }
 ```
 
-### 3. Validering af parametre
+### 3. Parametervalidering
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -842,7 +849,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organisering af output
+### 4. Outputorganisering
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -859,25 +866,25 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Næste trin
 
-- [Planlægning før implementering](../pre-deployment/capacity-planning.md) - Valider ressourcekapacitet
+- [Planlægning før udrulning](../pre-deployment/capacity-planning.md) - Valider ressourcekapacitet
 - [Almindelige problemer](../troubleshooting/common-issues.md) - Fejlsøg infrastrukturproblemer
 - [Fejlfindingsguide](../troubleshooting/debugging.md) - Fejlfind klargøringsproblemer
-- [Valg af SKU](../pre-deployment/sku-selection.md) - Vælg passende serviceniveauer
+- [SKU-valg](../pre-deployment/sku-selection.md) - Vælg passende serviceniveauer
 
 ## Yderligere ressourcer
 
-- [Azure Bicep-dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager-skabeloner](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Bicep Dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Skabeloner](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Arkitekturcenter](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigation**
-- **Forrige lektion**: [Implementeringsguide](deployment-guide.md)
-- **Næste lektion**: [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md)
+- **Forrige Lektion**: [Udrulningsguide](deployment-guide.md)
+- **Næste Lektion**: [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at sikre nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

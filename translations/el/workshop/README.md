@@ -1,17 +1,21 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T21:58:07+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-17T22:43:51+00:00",
   "source_file": "workshop/README.md",
   "language_code": "el"
 }
 -->
 # AZD για Εργαστήριο Ανάπτυξης AI
 
-**Προηγούμενο:** [Οδηγός Επίλυσης Προβλημάτων AI](../docs/troubleshooting/ai-troubleshooting.md) | **Επόμενο:** [Εργαστηριακές Ενότητες](../../../workshop)
+**Πλοήγηση Εργαστηρίου**
+- **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../README.md)
+- **📖 Σχετικά Κεφάλαια**: Περιλαμβάνει [Κεφάλαιο 1](../README.md#-chapter-1-foundation--quick-start), [Κεφάλαιο 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), και [Κεφάλαιο 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Εργαστήριο Πρακτικής**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Επόμενα Βήματα**: [Ενότητες Εργαστηρίου](../../../workshop)
 
-Καλώς ήρθατε στο πρακτικό εργαστήριο για την εκμάθηση του Azure Developer CLI (AZD) με έμφαση στην ανάπτυξη εφαρμογών AI. Αυτό το εργαστήριο έχει σχεδιαστεί για να σας καθοδηγήσει από τα βασικά του AZD μέχρι την ανάπτυξη λύσεων AI έτοιμων για παραγωγή.
+Καλώς ήρθατε στο πρακτικό εργαστήριο για την εκμάθηση του Azure Developer CLI (AZD) με έμφαση στην ανάπτυξη εφαρμογών AI. Αυτό το εργαστήριο έχει σχεδιαστεί για να σας καθοδηγήσει από τα βασικά του AZD έως την ανάπτυξη λύσεων AI έτοιμων για παραγωγή.
 
 ## Επισκόπηση Εργαστηρίου
 
@@ -46,19 +50,19 @@ CO_OP_TRANSLATOR_METADATA:
 - Ενσωμάτωση του Azure AI Search
 - Επεξεργασία εγγράφων με το Azure Document Intelligence
 - Ενσωματώσεις διανυσμάτων και σημασιολογική αναζήτηση
-- **Εργαστήριο**: Δημιουργία συστήματος ερωτήσεων και απαντήσεων για έγγραφα
+- **Εργαστήριο**: Δημιουργία συστήματος ερωτήσεων και απαντήσεων εγγράφων
 
-### Ενότητα 4: Ανάπτυξη για Παραγωγή (30 λεπτά)
+### Ενότητα 4: Ανάπτυξη Παραγωγής (30 λεπτά)
 - Ρύθμιση Container Apps
 - Βελτιστοποίηση κλιμάκωσης και απόδοσης
 - Παρακολούθηση και καταγραφή
-- **Εργαστήριο**: Ανάπτυξη για παραγωγή με παρατηρησιμότητα
+- **Εργαστήριο**: Ανάπτυξη σε παραγωγή με παρατηρησιμότητα
 
-### Ενότητα 5: Προχωρημένα Μοτίβα (15 λεπτά)
+### Ενότητα 5: Προηγμένα Μοτίβα (15 λεπτά)
 - Αναπτύξεις πολλαπλών περιβαλλόντων
 - Ενσωμάτωση CI/CD
 - Στρατηγικές βελτιστοποίησης κόστους
-- **Επίλογος**: Λίστα ελέγχου ετοιμότητας για παραγωγή
+- **Ανακεφαλαίωση**: Λίστα ελέγχου ετοιμότητας παραγωγής
 
 ## Προαπαιτούμενα
 
@@ -86,15 +90,15 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Ρύθμιση Λογαριασμού Azure
 
-1. **Συνδρομή Azure**: [Εγγραφείτε δωρεάν](https://azure.microsoft.com/free/)  
-2. **Πρόσβαση στο Azure OpenAI**: [Αιτηθείτε πρόσβαση](https://aka.ms/oai/access)  
+1. **Συνδρομή Azure**: [Εγγραφείτε δωρεάν](https://azure.microsoft.com/free/)
+2. **Πρόσβαση στο Azure OpenAI**: [Αιτηθείτε πρόσβαση](https://aka.ms/oai/access)
 3. **Απαιτούμενα Δικαιώματα**:
    - Ρόλος Contributor στη συνδρομή ή την ομάδα πόρων
    - User Access Administrator (για αναθέσεις RBAC)
 
 ### Επαλήθευση Προαπαιτούμενων
 
-Εκτελέστε αυτό το script για να επαληθεύσετε τη ρύθμιση σας:
+Εκτελέστε αυτό το script για να επαληθεύσετε τη ρύθμισή σας:
 
 ```bash
 #!/bin/bash
@@ -140,22 +144,22 @@ echo "Setup verification complete!"
 
 ## Υλικά Εργαστηρίου
 
-### Εργαστηριακές Ασκήσεις
+### Ασκήσεις Εργαστηρίου
 
 Κάθε ενότητα περιλαμβάνει πρακτικά εργαστήρια με αρχικό κώδικα και οδηγίες βήμα προς βήμα:
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Η πρώτη σας ανάπτυξη με AZD
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Εφαρμογή συνομιλίας με το Azure OpenAI
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Εφαρμογή συνομιλίας με Azure OpenAI
 - **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Εφαρμογή RAG με AI Search
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Μοτίβα ανάπτυξης για παραγωγή
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Προχωρημένα σενάρια ανάπτυξης
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Μοτίβα ανάπτυξης παραγωγής
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Σενάρια προηγμένης ανάπτυξης
 
 ### Υλικά Αναφοράς
 
 - **[Οδηγός Ενσωμάτωσης AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Ολοκληρωμένα μοτίβα ενσωμάτωσης
 - **[Οδηγός Ανάπτυξης Μοντέλων AI](../docs/ai-foundry/ai-model-deployment.md)** - Βέλτιστες πρακτικές ανάπτυξης μοντέλων
-- **[Πρακτικές AI για Παραγωγή](../docs/ai-foundry/production-ai-practices.md)** - Μοτίβα ανάπτυξης για επιχειρήσεις
-- **[Οδηγός Επίλυσης Προβλημάτων AI](../docs/troubleshooting/ai-troubleshooting.md)** - Συνηθισμένα προβλήματα και λύσεις
+- **[Πρακτικές Παραγωγής AI](../docs/ai-foundry/production-ai-practices.md)** - Μοτίβα ανάπτυξης για επιχειρήσεις
+- **[Οδηγός Αντιμετώπισης Προβλημάτων AI](../docs/troubleshooting/ai-troubleshooting.md)** - Συνηθισμένα προβλήματα και λύσεις
 
 ### Δείγματα Προτύπων
 
@@ -175,7 +179,7 @@ workshop/templates/
 
 Ο πιο γρήγορος τρόπος για να ξεκινήσετε το εργαστήριο:
 
-[![Άνοιγμα στο GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
+[![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
 ### Επιλογή 2: Τοπική Ανάπτυξη
 
@@ -191,7 +195,7 @@ az login
 azd auth login
 ```
 
-3. **Ξεκινήστε με την Ενότητα 1:**
+3. **Ξεκινήστε με το Εργαστήριο 1:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
@@ -201,8 +205,8 @@ cat README.md  # Follow the instructions
 
 Αν παρακολουθείτε μια συνεδρία με εκπαιδευτή:
 
-- 🎥 **Εγγραφή Εργαστηρίου**: [Διαθέσιμη κατ' απαίτηση](https://aka.ms/azd-ai-workshop)  
-- 💬 **Κοινότητα Discord**: [Συμμετοχή για ζωντανή υποστήριξη](https://aka.ms/foundry/discord)  
+- 🎥 **Εγγραφή Εργαστηρίου**: [Διαθέσιμη κατ' απαίτηση](https://aka.ms/azd-ai-workshop)
+- 💬 **Κοινότητα Discord**: [Συμμετοχή για ζωντανή υποστήριξη](https://aka.ms/foundry/discord)
 - **Ανατροφοδότηση Εργαστηρίου**: [Μοιραστείτε την εμπειρία σας](https://aka.ms/azd-workshop-feedback)
 
 ## Χρονοδιάγραμμα Εργαστηρίου
@@ -238,43 +242,43 @@ cat README.md  # Follow the instructions
 ✅ **Αναπτύξετε εφαρμογές AI** χρησιμοποιώντας πρότυπα AZD  
 ✅ **Ρυθμίσετε το Azure OpenAI** με σωστή ασφάλεια  
 ✅ **Δημιουργήσετε εφαρμογές RAG** με ενσωμάτωση του Azure AI Search  
-✅ **Εφαρμόσετε μοτίβα παραγωγής** για φόρτους εργασίας AI σε επιχειρήσεις  
-✅ **Παρακολουθήσετε και επιλύσετε προβλήματα** στις αναπτύξεις εφαρμογών AI  
+✅ **Εφαρμόσετε μοτίβα παραγωγής** για φόρτους εργασίας AI επιχειρησιακού επιπέδου  
+✅ **Παρακολουθήσετε και αντιμετωπίσετε προβλήματα** στις αναπτύξεις εφαρμογών AI  
 ✅ **Εφαρμόσετε στρατηγικές βελτιστοποίησης κόστους** για φόρτους εργασίας AI  
 
 ## Κοινότητα & Υποστήριξη
 
 ### Κατά τη Διάρκεια του Εργαστηρίου
 
-- 🙋 **Ερωτήσεις**: Χρησιμοποιήστε τη συνομιλία του εργαστηρίου ή σηκώστε το χέρι σας  
-- 🐛 **Προβλήματα**: Ελέγξτε τον [οδηγό επίλυσης προβλημάτων](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Συμβουλές**: Μοιραστείτε ανακαλύψεις με άλλους συμμετέχοντες  
+- 🙋 **Ερωτήσεις**: Χρησιμοποιήστε τη συνομιλία του εργαστηρίου ή σηκώστε το χέρι σας
+- 🐛 **Προβλήματα**: Ελέγξτε τον [οδηγό αντιμετώπισης προβλημάτων](../docs/troubleshooting/ai-troubleshooting.md)
+- **Συμβουλές**: Μοιραστείτε ανακαλύψεις με άλλους συμμετέχοντες
 
 ### Μετά το Εργαστήριο
 
-- 💬 **Discord**: [Κοινότητα Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **GitHub Issues**: [Αναφορά προβλημάτων προτύπων](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
+- 💬 **Discord**: [Κοινότητα Azure AI Foundry](https://aka.ms/foundry/discord)
+- **GitHub Issues**: [Αναφορά προβλημάτων προτύπων](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
 - 📧 **Ανατροφοδότηση**: [Φόρμα αξιολόγησης εργαστηρίου](https://aka.ms/azd-workshop-feedback)
 
 ## Επόμενα Βήματα
 
 ### Συνεχίστε τη Μάθηση
 
-1. **Προχωρημένα Σενάρια**: Εξερευνήστε [αναπτύξεις πολλαπλών περιοχών](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Ενσωμάτωση CI/CD**: Ρυθμίστε [ροές εργασίας GitHub Actions](../docs/deployment/github-actions.md)  
-3. **Προσαρμοσμένα Πρότυπα**: Δημιουργήστε τα δικά σας [πρότυπα AZD](../docs/getting-started/custom-templates.md)  
+1. **Προηγμένα Σενάρια**: Εξερευνήστε [αναπτύξεις πολλαπλών περιοχών](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Ενσωμάτωση CI/CD**: Ρυθμίστε [GitHub Actions workflows](../docs/deployment/github-actions.md)
+3. **Προσαρμοσμένα Πρότυπα**: Δημιουργήστε τα δικά σας [πρότυπα AZD](../docs/getting-started/custom-templates.md)
 
 ### Εφαρμόστε στα Έργα σας
 
-1. **Αξιολόγηση**: Χρησιμοποιήστε τη [λίστα ελέγχου ετοιμότητας](./production-readiness-checklist.md)  
-2. **Πρότυπα**: Ξεκινήστε με τα [πρότυπα AI](../../../workshop/templates)  
-3. **Υποστήριξη**: Συμμετοχή στο [Azure AI Foundry Discord](https://aka.ms/foundry/discord)  
+1. **Αξιολόγηση**: Χρησιμοποιήστε τη [λίστα ελέγχου ετοιμότητας](./production-readiness-checklist.md)
+2. **Πρότυπα**: Ξεκινήστε με τα [πρότυπα AI](../../../workshop/templates)
+3. **Υποστήριξη**: Συμμετοχή στο [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
 ### Μοιραστείτε την Επιτυχία σας
 
-- ⭐ **Αξιολογήστε το αποθετήριο** αν αυτό το εργαστήριο σας βοήθησε  
-- 🐦 **Μοιραστείτε στα κοινωνικά δίκτυα** με #AzureDeveloperCLI #AzureAI  
-- 📝 **Γράψτε ένα άρθρο** για το ταξίδι σας στην ανάπτυξη AI  
+- ⭐ **Αξιολογήστε το αποθετήριο** αν αυτό το εργαστήριο σας βοήθησε
+- 🐦 **Μοιραστείτε στα κοινωνικά δίκτυα** με #AzureDeveloperCLI #AzureAI
+- 📝 **Γράψτε ένα άρθρο** για το ταξίδι σας στην ανάπτυξη AI
 
 ---
 
@@ -294,11 +298,11 @@ cat README.md  # Follow the instructions
 
 ---
 
-**Προηγούμενο:** [Οδηγός Επίλυσης Προβλημάτων AI](../docs/troubleshooting/ai-troubleshooting.md) | **Επόμενο:** Ξεκινήστε με [Ενότητα 1: Βασικά του AZD](../../../workshop/lab-1-azd-basics)
+**Προηγούμενο:** [Οδηγός Αντιμετώπισης Προβλημάτων AI](../docs/troubleshooting/ai-troubleshooting.md) | **Επόμενο:** Ξεκινήστε με [Εργαστήριο 1: Βασικά του AZD](../../../workshop/lab-1-azd-basics)
 
 **Έτοιμοι να ξεκινήσετε την ανάπτυξη εφαρμογών AI με το AZD;**
 
-[Ξεκινήστε την Ενότητα 1: Βασικά του AZD →](./lab-1-azd-basics/README.md)
+[Ξεκινήστε το Εργαστήριο 1: Βασικά του AZD →](./lab-1-azd-basics/README.md)
 
 ---
 

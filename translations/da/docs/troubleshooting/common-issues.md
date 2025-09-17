@@ -1,34 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:46:26+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T23:30:22+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "da"
 }
 -->
-# Almindelige Problemer & Løsninger
+# Almindelige Problemer og Løsninger
+
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 7 - Fejlfinding & Debugging
+- **⬅️ Forrige Kapitel**: [Kapitel 6: Pre-flight Checks](../pre-deployment/preflight-checks.md)
+- **➡️ Næste**: [Debugging Guide](debugging.md)
+- **🚀 Næste Kapitel**: [Kapitel 8: Produktions- & Enterprise-mønstre](../ai-foundry/production-ai-practices.md)
 
 ## Introduktion
 
-Denne omfattende fejlfindingguide dækker de mest almindelige problemer, der opstår ved brug af Azure Developer CLI. Lær at diagnosticere, fejlfinde og løse typiske problemer med autentifikation, udrulning, infrastrukturklargøring og applikationskonfiguration. Hvert problem inkluderer detaljerede symptomer, årsager og trin-for-trin løsninger.
+Denne omfattende vejledning til fejlfinding dækker de mest almindelige problemer, der opstår ved brug af Azure Developer CLI. Lær at diagnosticere, fejlfinde og løse typiske problemer med autentificering, deployment, infrastrukturprovisionering og applikationskonfiguration. Hvert problem inkluderer detaljerede symptomer, årsager og trin-for-trin løsninger.
 
 ## Læringsmål
 
-Ved at gennemføre denne guide vil du:
+Ved at gennemføre denne vejledning vil du:
 - Mestre diagnostiske teknikker til Azure Developer CLI-problemer
-- Forstå almindelige autentifikations- og tilladelsesproblemer samt deres løsninger
-- Løse fejl ved udrulning, infrastrukturklargøring og konfigurationsproblemer
-- Implementere proaktiv overvågning og fejlsøgningsstrategier
-- Anvende systematiske fejlfindingsteknikker til komplekse problemer
+- Forstå almindelige autentificerings- og tilladelsesproblemer samt deres løsninger
+- Løse fejl i deployment, infrastrukturprovisionering og konfigurationsproblemer
+- Implementere proaktive overvågnings- og debuggingstrategier
+- Anvende systematiske metoder til fejlfinding af komplekse problemer
 - Konfigurere korrekt logning og overvågning for at forhindre fremtidige problemer
 
 ## Læringsresultater
 
-Efter afslutning vil du kunne:
+Efter afslutning vil du være i stand til at:
 - Diagnosticere Azure Developer CLI-problemer ved hjælp af indbyggede diagnostiske værktøjer
-- Løse autentifikations-, abonnements- og tilladelsesrelaterede problemer selvstændigt
-- Fejlfinde udrulningsfejl og infrastrukturklargøringsproblemer effektivt
+- Løse autentificerings-, abonnements- og tilladelsesrelaterede problemer selvstændigt
+- Fejlfinde fejl i deployment og infrastrukturprovisionering effektivt
 - Debugge applikationskonfigurationsproblemer og miljøspecifikke udfordringer
 - Implementere overvågning og alarmering for proaktivt at identificere potentielle problemer
 - Anvende bedste praksis for logning, debugging og workflows til problemløsning
@@ -55,11 +62,11 @@ export AZD_DEBUG=true
 azd <command> --debug
 ```
 
-## Autentifikationsproblemer
+## Autentificeringsproblemer
 
 ### Problem: "Kunne ikke hente adgangstoken"
 **Symptomer:**
-- `azd up` fejler med autentifikationsfejl
+- `azd up` fejler med autentificeringsfejl
 - Kommandoer returnerer "unauthorized" eller "access denied"
 
 **Løsninger:**
@@ -80,9 +87,9 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Problem: "Utilstrækkelige rettigheder" under udrulning
+### Problem: "Utilstrækkelige rettigheder" under deployment
 **Symptomer:**
-- Udrulning fejler med tilladelsesfejl
+- Deployment fejler med tilladelsesfejl
 - Kan ikke oprette visse Azure-ressourcer
 
 **Løsninger:**
@@ -97,7 +104,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 3. Contact your Azure administrator for proper permissions
 ```
 
-### Problem: Problemer med multi-tenant autentifikation
+### Problem: Multi-tenant autentificeringsproblemer
 **Løsninger:**
 ```bash
 # 1. Login with specific tenant
@@ -110,12 +117,12 @@ azd config set auth.tenantId "your-tenant-id"
 az account clear
 ```
 
-## 🏗️ Infrastrukturklargøringsfejl
+## 🏗️ Infrastrukturprovisioneringsfejl
 
 ### Problem: Konflikter med ressourcenavne
 **Symptomer:**
-- Fejlmeddelelser som "The resource name already exists"
-- Udrulning fejler under oprettelse af ressourcer
+- Fejlmeddelelser om "The resource name already exists"
+- Deployment fejler under oprettelse af ressourcer
 
 **Løsninger:**
 ```bash
@@ -133,7 +140,7 @@ azd down --force --purge
 
 ### Problem: Lokation/region ikke tilgængelig
 **Symptomer:**
-- Fejlmeddelelser som "The location 'xyz' is not available for resource type"
+- Fejlmeddelelse: "The location 'xyz' is not available for resource type"
 - Visse SKUs er ikke tilgængelige i den valgte region
 
 **Løsninger:**
@@ -152,7 +159,7 @@ azd env set AZURE_LOCATION eastus2
 
 ### Problem: Kvota overskredet
 **Symptomer:**
-- Fejlmeddelelser som "Quota exceeded for resource type"
+- Fejlmeddelelse: "Quota exceeded for resource type"
 - "Maximum number of resources reached"
 
 **Løsninger:**
@@ -195,7 +202,7 @@ cat infra/main.parameters.json | jq '.'
 azd provision --preview
 ```
 
-## 🚀 Udrulningsfejl
+## 🚀 Deploymentsfejl
 
 ### Problem: Build-fejl
 **Symptomer:**
@@ -226,7 +233,7 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problem: Fejl ved container-udrulning
+### Problem: Fejl ved container-deployment
 **Symptomer:**
 - Container-applikationer starter ikke
 - Fejl ved hentning af image
@@ -247,7 +254,7 @@ az acr login --name myregistry
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problem: Fejl ved databaseforbindelse
+### Problem: Databaseforbindelsesfejl
 **Symptomer:**
 - Applikationen kan ikke oprette forbindelse til databasen
 - Timeout-fejl ved forbindelse
@@ -308,7 +315,7 @@ az webapp update --name myapp --resource-group myrg --https-only true
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Problem: Problemer med CORS-konfiguration
+### Problem: CORS-konfigurationsproblemer
 **Symptomer:**
 - Frontend kan ikke kalde API
 - Cross-origin anmodning blokeret
@@ -355,7 +362,7 @@ azd env select production-new
 ### Problem: Korruption af miljø
 **Symptomer:**
 - Miljøet viser en ugyldig tilstand
-- Ressourcer matcher ikke konfigurationen
+- Ressourcer stemmer ikke overens med konfigurationen
 
 **Løsninger:**
 ```bash
@@ -373,10 +380,10 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Performanceproblemer
 
-### Problem: Langsom udrulningstid
+### Problem: Langsom deployment
 **Symptomer:**
-- Udrulninger tager for lang tid
-- Timeouts under udrulning
+- Deployments tager for lang tid
+- Timeouts under deployment
 
 **Løsninger:**
 ```bash
@@ -419,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Fejlfindingværktøjer og kommandoer
+## 🛠️ Fejlfindingsværktøjer og kommandoer
 
 ### Debug-kommandoer
 ```bash
@@ -465,7 +472,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 ## 🆘 Få Yderligere Hjælp
 
 ### Hvornår skal du eskalere
-- Autentifikationsproblemer fortsætter efter at have prøvet alle løsninger
+- Autentificeringsproblemer fortsætter efter at have prøvet alle løsninger
 - Infrastrukturproblemer med Azure-tjenester
 - Problemer relateret til fakturering eller abonnement
 - Sikkerhedsproblemer eller hændelser
@@ -485,15 +492,15 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ```
 
 ### Information at indsamle
-Før du kontakter support, indsamle:
+Før du kontakter support, skal du indsamle:
 - Output fra `azd version`
 - Output fra `azd info`
 - Fejlmeddelelser (fuld tekst)
-- Trin til at genskabe problemet
+- Trin til at reproducere problemet
 - Miljødetaljer (`azd env show`)
 - Tidslinje for, hvornår problemet startede
 
-### Script til logindsamling
+### Logindsamlingsscript
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Forebyggelse af Problemer
 
-### Tjekliste før udrulning
+### Tjekliste før deployment
 ```bash
 # 1. Validate authentication
 az account show
@@ -568,22 +575,22 @@ az security assessment list --resource-group myrg
 
 ## Relaterede Ressourcer
 
-- [Fejlsøgningsguide](debugging.md) - Avancerede fejlsøgningsteknikker
-- [Klargøring af ressourcer](../deployment/provisioning.md) - Fejlfinding af infrastruktur
-- [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md) - Vejledning til ressourceplanlægning
-- [Valg af SKU](../pre-deployment/sku-selection.md) - Anbefalinger til serviceniveauer
+- [Debugging Guide](debugging.md) - Avancerede debuggingteknikker
+- [Provisioning Resources](../deployment/provisioning.md) - Fejlfinding af infrastruktur
+- [Capacity Planning](../pre-deployment/capacity-planning.md) - Vejledning til ressourceplanlægning
+- [SKU Selection](../pre-deployment/sku-selection.md) - Anbefalinger til servicelag
 
 ---
 
-**Tip**: Gem denne guide som bogmærke og brug den, når du støder på problemer. De fleste problemer er set før og har etablerede løsninger!
+**Tip**: Gem denne vejledning som bogmærke og brug den, når du støder på problemer. De fleste problemer er set før og har etablerede løsninger!
 
 ---
 
 **Navigation**
-- **Forrige Lektion**: [Klargøring af ressourcer](../deployment/provisioning.md)
-- **Næste Lektion**: [Fejlsøgningsguide](debugging.md)
+- **Forrige Lektion**: [Provisioning Resources](../deployment/provisioning.md)
+- **Næste Lektion**: [Debugging Guide](debugging.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

@@ -1,39 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T21:01:53+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T23:14:14+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "sv"
 }
 -->
 # Installations- och konfigurationsguide
 
-**Föregående:** [Huvuddokumentation](../../README.md) | **Nästa:** [AZD Grunder](azd-basics.md)
+**Kapitelöversikt:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 1 - Grundläggande & Snabbstart
+- **⬅️ Föregående**: [AZD Grunder](azd-basics.md)
+- **➡️ Nästa**: [Ditt Första Projekt](first-project.md)
+- **🚀 Nästa kapitel**: [Kapitel 2: AI-Driven Utveckling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduktion
 
-Den här omfattande guiden hjälper dig att installera och konfigurera Azure Developer CLI (azd) på ditt system. Du kommer att lära dig olika installationsmetoder för olika operativsystem, autentiseringsinställningar och grundläggande konfiguration för att förbereda din utvecklingsmiljö för Azure-distributioner.
+Denna omfattande guide leder dig genom installation och konfiguration av Azure Developer CLI (azd) på ditt system. Du kommer att lära dig flera installationsmetoder för olika operativsystem, autentiseringsinställningar och grundläggande konfiguration för att förbereda din utvecklingsmiljö för Azure-distributioner.
 
 ## Lärandemål
 
 I slutet av denna lektion kommer du att:
 - Framgångsrikt installera Azure Developer CLI på ditt operativsystem
-- Konfigurera autentisering med Azure via flera metoder
+- Konfigurera autentisering med Azure med flera metoder
 - Ställa in din utvecklingsmiljö med nödvändiga förutsättningar
-- Förstå olika installationsalternativ och när du ska använda dem
+- Förstå olika installationsalternativ och när de ska användas
 - Felsöka vanliga installations- och konfigurationsproblem
 
 ## Läranderesultat
 
-Efter att ha avslutat denna lektion kommer du att kunna:
+Efter att ha slutfört denna lektion kommer du att kunna:
 - Installera azd med rätt metod för din plattform
 - Autentisera med Azure med hjälp av `azd auth login`
 - Verifiera din installation och testa grundläggande azd-kommandon
 - Konfigurera din utvecklingsmiljö för optimal användning av azd
 - Självständigt lösa vanliga installationsproblem
 
-Den här guiden hjälper dig att installera och konfigurera Azure Developer CLI på ditt system, oavsett operativsystem eller utvecklingsmiljö.
+Denna guide hjälper dig att installera och konfigurera Azure Developer CLI på ditt system, oavsett operativsystem eller utvecklingsmiljö.
 
 ## Förutsättningar
 
@@ -41,7 +46,7 @@ Innan du installerar azd, se till att du har:
 - **Azure-prenumeration** - [Skapa ett gratis konto](https://azure.microsoft.com/free/)
 - **Azure CLI** - För autentisering och resursadministration
 - **Git** - För att klona mallar och versionshantering
-- **Docker** (valfritt) - För containerbaserade applikationer
+- **Docker** (valfritt) - För containeriserade applikationer
 
 ## Installationsmetoder
 
@@ -164,7 +169,7 @@ az login
 az account show
 ```
 
-### Enhetskodautentisering
+### Enhetskodsautentisering
 Om du använder ett system utan grafiskt gränssnitt eller har problem med webbläsaren:
 ```bash
 az login --use-device-code
@@ -205,7 +210,7 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Enable debug logging
 ```
 
-## IDE-integrering
+## IDE-integration
 
 ### Visual Studio Code
 Installera Azure Developer CLI-tillägget:
@@ -218,7 +223,7 @@ Funktioner:
 - IntelliSense för azure.yaml
 - Integrerade terminalkommandon
 - Mallbläddring
-- Övervakning av distributioner
+- Distributionsövervakning
 
 ### GitHub Codespaces
 Skapa en `.devcontainer/devcontainer.json`:
@@ -235,7 +240,7 @@ Skapa en `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Installera Azure-plugin
-2. Konfigurera Azure-uppgifter
+2. Konfigurera Azure-autentisering
 3. Använd den integrerade terminalen för azd-kommandon
 
 ## 🐛 Felsökning av installation
@@ -249,7 +254,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### PATH-problem
-Lägg till azd manuellt i din PATH:
+Lägg manuellt till azd i din PATH:
 
 **Windows:**
 ```cmd
@@ -324,7 +329,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Nästa steg
 
 1. **Slutför autentisering**: Se till att du kan komma åt din Azure-prenumeration
-2. **Testa din första distribution**: Följ [Första projektguiden](first-project.md)
+2. **Testa din första distribution**: Följ [Guiden för Första Projektet](first-project.md)
 3. **Utforska mallar**: Bläddra bland tillgängliga mallar med `azd template list`
 4. **Konfigurera din IDE**: Ställ in din utvecklingsmiljö
 
@@ -338,11 +343,16 @@ Om du stöter på problem:
 
 ---
 
-**Föregående:** [Huvuddokumentation](../../README.md) | **Nästa:** [AZD Grunder](azd-basics.md)
+**Kapitelöversikt:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 1 - Grundläggande & Snabbstart
+- **⬅️ Föregående**: [AZD Grunder](azd-basics.md) 
+- **➡️ Nästa**: [Ditt Första Projekt](first-project.md)
+- **🚀 Nästa kapitel**: [Kapitel 2: AI-Driven Utveckling](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Installation klar!** Fortsätt till [Ditt första projekt](first-project.md) för att börja bygga med azd.
+**✅ Installation klar!** Fortsätt till [Ditt Första Projekt](first-project.md) för att börja bygga med azd.
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.
