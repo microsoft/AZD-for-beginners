@@ -1,22 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:32:12+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T16:43:20+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "pl"
 }
 -->
-# Przewodnik debugowania - Zaawansowane techniki analizy logów
+# Przewodnik debugowania dla wdrożeń AZD
+
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 7 - Rozwiązywanie problemów i debugowanie
+- **⬅️ Poprzedni**: [Typowe problemy](common-issues.md)
+- **➡️ Następny**: [Rozwiązywanie problemów specyficznych dla AI](ai-troubleshooting.md)
+- **🚀 Następny rozdział**: [Rozdział 8: Wzorce produkcyjne i korporacyjne](../ai-foundry/production-ai-practices.md)
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik przedstawia zaawansowane strategie debugowania, narzędzia i techniki diagnozowania oraz rozwiązywania złożonych problemów związanych z wdrożeniami Azure Developer CLI. Dowiedz się, jak stosować systematyczne metody rozwiązywania problemów, techniki analizy logów, profilowanie wydajności oraz zaawansowane narzędzia diagnostyczne, aby efektywnie rozwiązywać problemy związane z wdrożeniami i działaniem aplikacji.
+Ten kompleksowy przewodnik przedstawia zaawansowane strategie debugowania, narzędzia i techniki diagnozowania oraz rozwiązywania złożonych problemów związanych z wdrożeniami Azure Developer CLI. Nauczysz się systematycznych metod rozwiązywania problemów, technik analizy logów, profilowania wydajności oraz korzystania z zaawansowanych narzędzi diagnostycznych, aby efektywnie rozwiązywać problemy związane z wdrożeniami i działaniem aplikacji.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika będziesz:
-- Mistrzowsko stosować systematyczne metody debugowania problemów z Azure Developer CLI
+- Opanować systematyczne metody debugowania problemów z Azure Developer CLI
 - Rozumieć zaawansowaną konfigurację logowania i techniki analizy logów
 - Wdrażać strategie profilowania wydajności i monitorowania
 - Korzystać z narzędzi diagnostycznych i usług Azure do rozwiązywania złożonych problemów
@@ -26,9 +33,9 @@ Po ukończeniu tego przewodnika będziesz:
 ## Efekty nauki
 
 Po ukończeniu będziesz w stanie:
-- Stosować metodologię TRIAGE do systematycznego debugowania złożonych problemów z wdrożeniami
+- Zastosować metodologię TRIAGE do systematycznego debugowania złożonych problemów z wdrożeniami
 - Konfigurować i analizować kompleksowe informacje o logowaniu i śledzeniu
-- Efektywnie korzystać z Azure Monitor, Application Insights i narzędzi diagnostycznych
+- Skutecznie korzystać z Azure Monitor, Application Insights i narzędzi diagnostycznych
 - Samodzielnie debugować problemy z łącznością sieciową, uwierzytelnianiem i uprawnieniami
 - Wdrażać strategie monitorowania wydajności i optymalizacji
 - Tworzyć niestandardowe skrypty debugowania i automatyzację dla powtarzających się problemów
@@ -36,7 +43,7 @@ Po ukończeniu będziesz w stanie:
 ## Metodologia debugowania
 
 ### Podejście TRIAGE
-- **T**ime: Kiedy problem się rozpoczął?
+- **T**ime: Kiedy problem się pojawił?
 - **R**eproduce: Czy można go konsekwentnie odtworzyć?
 - **I**solate: Który komponent zawodzi?
 - **A**nalyze: Co mówią logi?
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Testy obciążeniowe w debugowaniu
+### Testy obciążeniowe w celu debugowania
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -655,7 +662,7 @@ aggregate_logs() {
 Utwórz katalog `scripts/debug/` zawierający:
 - `health-check.sh` - Kompleksowe sprawdzanie stanu
 - `performance-test.sh` - Automatyczne testowanie wydajności
-- `log-analyzer.py` - Zaawansowane parsowanie i analiza logów
+- `log-analyzer.py` - Zaawansowana analiza logów
 - `resource-validator.sh` - Walidacja infrastruktury
 
 ### Integracja monitorowania
@@ -689,7 +696,7 @@ hooks:
 - [Planowanie pojemności](../pre-deployment/capacity-planning.md) - Planowanie wymagań dotyczących zasobów
 - [Wybór SKU](../pre-deployment/sku-selection.md) - Wybór odpowiednich poziomów usług
 - [Kontrole przed wdrożeniem](../pre-deployment/preflight-checks.md) - Walidacja przed wdrożeniem
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Szybkie odniesienie do poleceń
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Szybki dostęp do poleceń
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

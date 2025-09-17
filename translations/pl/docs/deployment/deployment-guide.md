@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T17:00:55+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T16:42:07+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "pl"
 }
 -->
 # Przewodnik wdrożeniowy - Opanowanie wdrożeń AZD
 
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 4 - Infrastruktura jako kod i wdrożenie
+- **⬅️ Poprzedni rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
+- **➡️ Następny**: [Tworzenie zasobów](provisioning.md)
+- **🚀 Następny rozdział**: [Rozdział 5: Rozwiązania AI z wieloma agentami](../../examples/retail-scenario.md)
+
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o wdrażaniu aplikacji za pomocą Azure Developer CLI, od podstawowych wdrożeń za pomocą jednego polecenia, po zaawansowane scenariusze produkcyjne z niestandardowymi hookami, wieloma środowiskami i integracją CI/CD. Opanuj pełny cykl życia wdrożeń dzięki praktycznym przykładom i najlepszym praktykom.
+Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o wdrażaniu aplikacji za pomocą Azure Developer CLI, od podstawowych wdrożeń za pomocą jednego polecenia po zaawansowane scenariusze produkcyjne z niestandardowymi hookami, wieloma środowiskami i integracją CI/CD. Opanuj pełny cykl życia wdrożeń dzięki praktycznym przykładom i najlepszym praktykom.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika będziesz:
-- Mistrzem wszystkich poleceń i przepływów pracy wdrożeniowych Azure Developer CLI
-- Rozumiał pełny cykl życia wdrożeń, od tworzenia zasobów po monitorowanie
-- Wdrażał niestandardowe hooki automatyzacji przed i po wdrożeniu
-- Konfigurował wiele środowisk z parametrami specyficznymi dla środowiska
-- Ustawiał zaawansowane strategie wdrożeniowe, takie jak blue-green i canary deployments
-- Integrując wdrożenia azd z pipeline'ami CI/CD i przepływami pracy DevOps
+- Znać wszystkie polecenia i przepływy pracy wdrożeniowe Azure Developer CLI
+- Rozumieć pełny cykl życia wdrożenia, od tworzenia zasobów po monitorowanie
+- Implementować niestandardowe hooki wdrożeniowe dla automatyzacji przed i po wdrożeniu
+- Konfigurować wiele środowisk z parametrami specyficznymi dla środowiska
+- Ustawiać zaawansowane strategie wdrożeniowe, takie jak blue-green i canary deployments
+- Integracja wdrożeń azd z pipeline'ami CI/CD i procesami DevOps
 
-## Rezultaty nauki
+## Efekty nauki
 
 Po ukończeniu będziesz w stanie:
 - Samodzielnie wykonywać i rozwiązywać problemy związane z wszystkimi przepływami pracy wdrożeniowej azd
-- Projektować i wdrażać niestandardową automatyzację wdrożeń za pomocą hooków
+- Projektować i implementować niestandardową automatyzację wdrożeń za pomocą hooków
 - Konfigurować wdrożenia gotowe do produkcji z odpowiednim zabezpieczeniem i monitorowaniem
 - Zarządzać złożonymi scenariuszami wdrożeniowymi w wielu środowiskach
-- Optymalizować wydajność wdrożeń i wdrażać strategie wycofywania
-- Integrując wdrożenia azd w praktykach DevOps dla przedsiębiorstw
+- Optymalizować wydajność wdrożeń i implementować strategie wycofywania
+- Włączać wdrożenia azd do praktyk DevOps w przedsiębiorstwie
 
 ## Przegląd wdrożeń
 
@@ -44,7 +51,7 @@ Azure Developer CLI oferuje kilka poleceń wdrożeniowych:
 ## Podstawowe przepływy pracy wdrożeniowej
 
 ### Kompleksowe wdrożenie (azd up)
-Najczęstszy przepływ pracy dla nowych projektów:
+Najczęściej stosowany przepływ pracy dla nowych projektów:
 ```bash
 # Deploy everything from scratch
 azd up
@@ -102,7 +109,7 @@ hooks:
 ### Faza 2: Tworzenie infrastruktury
 - Odczytuje szablony infrastruktury (Bicep/Terraform)
 - Tworzy lub aktualizuje zasoby Azure
-- Konfiguruje sieć i zabezpieczenia
+- Konfiguruje sieci i zabezpieczenia
 - Ustawia monitorowanie i logowanie
 
 ### Faza 3: Hooki po tworzeniu zasobów
@@ -540,7 +547,7 @@ echo "Database rollback completed"
 
 ## 📊 Metryki wdrożeniowe
 
-### Śledzenie wydajności wdrożeń
+### Śledzenie wydajności wdrożenia
 ```bash
 # Enable deployment metrics
 azd config set telemetry.deployment.enabled true
@@ -652,4 +659,4 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T17:04:38+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T16:42:31+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "pl"
 }
 -->
-# Provisioning Resources - Infrastruktura jako kod z AZD
+# Provisioning Azure Resources with AZD
+
+**Nawigacja po rozdziale:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 4 - Infrastruktura jako kod i wdrożenie
+- **⬅️ Poprzedni**: [Przewodnik wdrożeniowy](deployment-guide.md)
+- **➡️ Następny rozdział**: [Rozdział 5: Rozwiązania AI z wieloma agentami](../../examples/retail-scenario.md)
+- **🔧 Powiązane**: [Rozdział 6: Walidacja przed wdrożeniem](../pre-deployment/capacity-planning.md)
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o tworzeniu i zarządzaniu zasobami Azure za pomocą Azure Developer CLI. Naucz się wdrażać wzorce Infrastruktury jako Kod (IaC) od podstawowego tworzenia zasobów po zaawansowane architektury infrastruktury na poziomie przedsiębiorstwa, korzystając z Bicep, szablonów ARM, Terraform i Pulumi.
+Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o tworzeniu i zarządzaniu zasobami Azure za pomocą Azure Developer CLI. Nauczysz się wdrażać wzorce Infrastruktury jako Kod (IaC) - od podstawowego tworzenia zasobów po zaawansowane architektury infrastruktury na poziomie przedsiębiorstwa, korzystając z Bicep, szablonów ARM, Terraform i Pulumi.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika:
 - Opanujesz zasady Infrastruktury jako Kod oraz tworzenie zasobów Azure
-- Zrozumiesz różnych dostawców IaC obsługiwanych przez Azure Developer CLI
+- Zrozumiesz różne dostawców IaC obsługiwanych przez Azure Developer CLI
 - Zaprojektujesz i wdrożysz szablony Bicep dla typowych architektur aplikacji
 - Skonfigurujesz parametry zasobów, zmienne i ustawienia specyficzne dla środowiska
 - Wdrożysz zaawansowane wzorce infrastruktury, w tym sieci i bezpieczeństwo
@@ -26,20 +33,20 @@ Po ukończeniu tego przewodnika:
 ## Efekty nauki
 
 Po ukończeniu będziesz w stanie:
-- Projektować i tworzyć infrastrukturę Azure za pomocą Bicep i szablonów ARM
+- Projektować i wdrażać infrastrukturę Azure za pomocą Bicep i szablonów ARM
 - Konfigurować złożone architektury wielousługowe z odpowiednimi zależnościami zasobów
 - Wdrażać szablony z parametrami dla wielu środowisk i konfiguracji
-- Rozwiązywać problemy z tworzeniem infrastruktury i naprawiać błędy wdrożeniowe
+- Rozwiązywać problemy z tworzeniem infrastruktury i błędy wdrożeniowe
 - Stosować zasady Azure Well-Architected Framework w projektowaniu infrastruktury
 - Zarządzać aktualizacjami infrastruktury i wdrażać strategie wersjonowania infrastruktury
 
 ## Przegląd tworzenia infrastruktury
 
 Azure Developer CLI obsługuje wielu dostawców Infrastruktury jako Kod (IaC):
-- **Bicep** (zalecane) - Specyficzny dla Azure język dziedzinowy
+- **Bicep** (zalecane) - Specyficzny dla Azure język domenowy
 - **Szablony ARM** - Szablony JSON dla Azure Resource Manager
 - **Terraform** - Narzędzie do infrastruktury wielochmurowej
-- **Pulumi** - Nowoczesna infrastruktura jako kod z językami programowania
+- **Pulumi** - Nowoczesna infrastruktura jako kod z użyciem języków programowania
 
 ## Zrozumienie zasobów Azure
 
@@ -757,7 +764,7 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Aktualizacje i migracje zasobów
+## 🔄 Aktualizacje zasobów i migracje
 
 ### Bezpieczne aktualizacje zasobów
 ```bash

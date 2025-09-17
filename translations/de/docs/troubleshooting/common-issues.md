@@ -1,39 +1,46 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T17:08:18+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T16:10:16+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "de"
 }
 -->
-# Häufige Probleme & Lösungen
+# Häufige Probleme und Lösungen
+
+**Kapitel Navigation:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 7 - Fehlerbehebung & Debugging
+- **⬅️ Vorheriges Kapitel**: [Kapitel 6: Vorabprüfungen](../pre-deployment/preflight-checks.md)
+- **➡️ Weiter**: [Debugging-Leitfaden](debugging.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 8: Produktions- & Unternehmensmuster](../ai-foundry/production-ai-practices.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden zur Fehlerbehebung behandelt die am häufigsten auftretenden Probleme bei der Verwendung von Azure Developer CLI. Lernen Sie, wie Sie Authentifizierungs-, Bereitstellungs-, Infrastruktur- und Anwendungskonfigurationsprobleme diagnostizieren, beheben und lösen können. Jedes Problem enthält detaillierte Symptome, Ursachen und schrittweise Lösungsverfahren.
+Dieser umfassende Leitfaden zur Fehlerbehebung behandelt die am häufigsten auftretenden Probleme bei der Verwendung der Azure Developer CLI. Lernen Sie, wie Sie Authentifizierungs-, Bereitstellungs-, Infrastruktur- und Konfigurationsprobleme diagnostizieren, beheben und lösen können. Jedes Problem enthält detaillierte Symptome, Ursachen und schrittweise Lösungsansätze.
 
 ## Lernziele
 
 Nach Abschluss dieses Leitfadens werden Sie:
-- Diagnosetechniken für Probleme mit Azure Developer CLI beherrschen
+- Diagnosetechniken für Probleme mit der Azure Developer CLI beherrschen
 - Häufige Authentifizierungs- und Berechtigungsprobleme verstehen und lösen können
 - Bereitstellungsfehler, Infrastrukturprobleme und Konfigurationsprobleme beheben
 - Proaktive Überwachungs- und Debugging-Strategien implementieren
 - Systematische Methoden zur Fehlerbehebung bei komplexen Problemen anwenden
-- Richtiges Logging und Monitoring konfigurieren, um zukünftige Probleme zu vermeiden
+- Geeignete Protokollierung und Überwachung einrichten, um zukünftige Probleme zu vermeiden
 
 ## Lernergebnisse
 
-Nach Abschluss werden Sie in der Lage sein:
-- Probleme mit Azure Developer CLI mithilfe integrierter Diagnosetools zu erkennen
-- Authentifizierungs-, Abonnement- und Berechtigungsprobleme eigenständig zu lösen
-- Bereitstellungsfehler und Infrastrukturprobleme effektiv zu beheben
-- Konfigurationsprobleme und umgebungsspezifische Fehler zu debuggen
-- Überwachung und Alarmierung implementieren, um potenzielle Probleme frühzeitig zu erkennen
-- Best Practices für Logging, Debugging und Workflows zur Problemlösung anwenden
+Nach Abschluss können Sie:
+- Probleme mit der Azure Developer CLI mithilfe integrierter Diagnosetools erkennen
+- Authentifizierungs-, Abonnement- und Berechtigungsprobleme eigenständig lösen
+- Bereitstellungsfehler und Infrastrukturprobleme effektiv beheben
+- Konfigurationsprobleme und umgebungsspezifische Fehler debuggen
+- Überwachung und Warnungen implementieren, um potenzielle Probleme frühzeitig zu erkennen
+- Best Practices für Protokollierung, Debugging und Fehlerbehebungs-Workflows anwenden
 
-## Schnelle Diagnose
+## Schnelle Diagnosen
 
 Bevor Sie sich mit spezifischen Problemen befassen, führen Sie diese Befehle aus, um Diagnosedaten zu sammeln:
 
@@ -110,9 +117,9 @@ azd config set auth.tenantId "your-tenant-id"
 az account clear
 ```
 
-## 🏗️ Fehler bei der Infrastrukturbereitstellung
+## 🏗️ Infrastrukturprobleme
 
-### Problem: Ressourcennamenskonflikte
+### Problem: Ressourcennamen-Konflikte
 **Symptome:**
 - Fehler "Der Ressourcenname existiert bereits"
 - Bereitstellung schlägt bei der Ressourcenerstellung fehl
@@ -175,9 +182,9 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problem: Fehler in Bicep-Vorlagen
+### Problem: Bicep-Template-Fehler
 **Symptome:**
-- Validierungsfehler in Vorlagen
+- Validierungsfehler bei Templates
 - Syntaxfehler in Bicep-Dateien
 
 **Lösungen:**
@@ -250,7 +257,7 @@ az containerapp show --name my-app --resource-group my-rg
 ### Problem: Datenbankverbindungsfehler
 **Symptome:**
 - Anwendung kann keine Verbindung zur Datenbank herstellen
-- Fehler bei der Verbindungszeitüberschreitung
+- Verbindungszeitüberschreitungen
 
 **Lösungen:**
 ```bash
@@ -334,7 +341,7 @@ azd show
 ### Problem: Probleme beim Wechseln der Umgebung
 **Symptome:**
 - Falsche Umgebung wird verwendet
-- Konfiguration wechselt nicht richtig
+- Konfiguration wechselt nicht korrekt
 
 **Lösungen:**
 ```bash
@@ -437,7 +444,7 @@ azd config validate
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### Log-Analyse
+### Protokollanalyse
 ```bash
 # Application logs
 azd logs --service web --follow
@@ -484,7 +491,7 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Informationen, die gesammelt werden sollten
+### Informationen sammeln
 Bevor Sie den Support kontaktieren, sammeln Sie:
 - Ausgabe von `azd version`
 - Ausgabe von `azd info`
@@ -493,7 +500,7 @@ Bevor Sie den Support kontaktieren, sammeln Sie:
 - Umgebungsdetails (`azd env show`)
 - Zeitachse, wann das Problem begann
 
-### Skript zur Log-Sammlung
+### Skript zur Protokollsammlung
 ```bash
 #!/bin/bash
 # collect-debug-info.sh

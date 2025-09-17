@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T17:37:53+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-17T16:07:26+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "de"
 }
 -->
 # Best Practices für produktive KI-Workloads mit AZD
 
-**Vorher:** [AI Workshop Lab](ai-workshop-lab.md) | **Nächster:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 8 - Produktions- & Unternehmensmuster
+- **⬅️ Vorheriges Kapitel**: [Kapitel 7: Fehlerbehebung](../troubleshooting/debugging.md)
+- **⬅️ Ebenfalls relevant**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kursabschluss**: [AZD für Anfänger](../../README.md)
 
 ## Überblick
 
@@ -456,7 +461,7 @@ class TokenOptimizer {
 
 ## Überwachung und Beobachtbarkeit
 
-### 1. Umfassende Application Insights
+### 1. Umfassende Anwendungsüberwachung
 
 ```bicep
 // Application Insights with advanced features
@@ -503,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. KI-spezifische Überwachung
 
-**Benutzerdefinierte Dashboards für KI-Metriken**:
+**Individuelle Dashboards für KI-Metriken**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -532,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Gesundheitsprüfungen und Uptime-Monitoring
+### 3. Gesundheitsprüfungen und Verfügbarkeitsüberwachung
 
 ```bicep
 // Application Insights availability tests
@@ -852,7 +857,7 @@ echo "Infrastructure validation completed successfully!"
 
 ### Überwachung ✅
 - [ ] Application Insights konfiguriert
-- [ ] Benutzerdefinierte Metriken definiert
+- [ ] Individuelle Metriken definiert
 - [ ] Alarmregeln eingerichtet
 - [ ] Dashboard erstellt
 - [ ] Gesundheitsprüfungen implementiert
@@ -871,7 +876,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Ressourcenanpassung
 - [ ] Rabatte für Entwicklung/Test angewendet
 - [ ] Reservierte Instanzen gekauft
-- [ ] Dashboard zur Kostenüberwachung
+- [ ] Kostenüberwachungs-Dashboard
 - [ ] Regelmäßige Kostenüberprüfungen
 
 ### Compliance ✅
@@ -889,7 +894,7 @@ echo "Infrastructure validation completed successfully!"
 | Metrik | Ziel | Überwachung |
 |--------|------|-------------|
 | **Antwortzeit** | < 2 Sekunden | Application Insights |
-| **Verfügbarkeit** | 99,9 % | Uptime-Monitoring |
+| **Verfügbarkeit** | 99,9 % | Verfügbarkeitsüberwachung |
 | **Fehlerrate** | < 0,1 % | Anwendungsprotokolle |
 | **Token-Nutzung** | < $500/Monat | Kostenmanagement |
 | **Gleichzeitige Benutzer** | 1000+ | Lasttests |
@@ -929,13 +934,18 @@ Basierend auf Feedback der Azure AI Foundry Discord-Community:
 ## Zusätzliche Ressourcen
 
 - **Azure Well-Architected Framework**: [Leitfaden für KI-Workloads](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Dokumentation**: [Offizielle Dokumentation](https://learn.microsoft.com/azure/ai-studio/)
+- **Azure AI Foundry-Dokumentation**: [Offizielle Dokumentation](https://learn.microsoft.com/azure/ai-studio/)
 - **Community-Vorlagen**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord-Community**: [#Azure-Kanal](https://discord.gg/microsoft-azure)
 
 ---
 
-**Vorher:** [AI Workshop Lab](ai-workshop-lab.md) | **Nächster:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 8 - Produktions- & Unternehmensmuster
+- **⬅️ Vorheriges Kapitel**: [Kapitel 7: Fehlerbehebung](../troubleshooting/debugging.md)
+- **⬅️ Ebenfalls relevant**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kursabschluss**: [AZD für Anfänger](../../README.md)
 
 **Denken Sie daran**: Produktive KI-Workloads erfordern sorgfältige Planung, Überwachung und kontinuierliche Optimierung. Beginnen Sie mit diesen Mustern und passen Sie sie an Ihre spezifischen Anforderungen an.
 

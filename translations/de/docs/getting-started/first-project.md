@@ -1,39 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T17:07:43+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T16:08:09+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "de"
 }
 -->
 # Ihr erstes Projekt - Praktisches Tutorial
 
-**Vorher:** [Konfiguration](configuration.md) | **Nächste:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Kapitel Navigation:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schnellstart
+- **⬅️ Vorheriges**: [Installation & Einrichtung](installation.md)
+- **➡️ Nächstes**: [Konfiguration](configuration.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 2: AI-First Entwicklung](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Einführung
 
-Willkommen zu Ihrem ersten Azure Developer CLI-Projekt! Dieses umfassende praktische Tutorial bietet eine vollständige Anleitung zur Erstellung, Bereitstellung und Verwaltung einer Full-Stack-Anwendung auf Azure mit azd. Sie arbeiten mit einer echten Todo-Anwendung, die ein React-Frontend, ein Node.js-API-Backend und eine MongoDB-Datenbank umfasst.
+Willkommen zu Ihrem ersten Azure Developer CLI Projekt! Dieses umfassende praktische Tutorial bietet eine vollständige Anleitung zur Erstellung, Bereitstellung und Verwaltung einer Full-Stack-Anwendung auf Azure mit azd. Sie arbeiten mit einer echten Todo-Anwendung, die ein React-Frontend, ein Node.js-API-Backend und eine MongoDB-Datenbank umfasst.
 
 ## Lernziele
 
 Durch den Abschluss dieses Tutorials werden Sie:
-- Den Workflow zur Initialisierung von azd-Projekten mit Vorlagen meistern
-- Die Struktur und Konfigurationsdateien von Azure Developer CLI-Projekten verstehen
+- Den Workflow zur Initialisierung eines azd-Projekts mit Vorlagen meistern
+- Die Struktur und Konfigurationsdateien eines Azure Developer CLI Projekts verstehen
 - Eine vollständige Anwendung mit Infrastrukturbereitstellung auf Azure bereitstellen
-- Strategien für Anwendungsupdates und erneute Bereitstellungen implementieren
+- Strategien für Anwendungsupdates und erneute Bereitstellung umsetzen
 - Mehrere Umgebungen für Entwicklung und Staging verwalten
 - Praktiken zur Ressourcensäuberung und Kostenmanagement anwenden
 
 ## Lernergebnisse
 
 Nach Abschluss werden Sie in der Lage sein:
-- azd-Projekte unabhängig von Vorlagen zu initialisieren und zu konfigurieren
+- azd-Projekte eigenständig aus Vorlagen zu initialisieren und zu konfigurieren
 - azd-Projektstrukturen effektiv zu navigieren und zu ändern
 - Full-Stack-Anwendungen mit einfachen Befehlen auf Azure bereitzustellen
-- Häufige Bereitstellungsprobleme und Authentifizierungsprobleme zu beheben
+- Häufige Bereitstellungsprobleme und Authentifizierungsfehler zu beheben
 - Mehrere Azure-Umgebungen für verschiedene Bereitstellungsstufen zu verwalten
-- Kontinuierliche Bereitstellungs-Workflows für Anwendungsupdates zu implementieren
+- Kontinuierliche Bereitstellungs-Workflows für Anwendungsupdates umzusetzen
 
 ## Erste Schritte
 
@@ -82,8 +87,8 @@ azd init --template todo-nodejs-mongo
 ### Was ist gerade passiert?
 - Der Vorlagencode wurde in Ihr lokales Verzeichnis heruntergeladen
 - Eine `azure.yaml`-Datei mit Dienstdefinitionen wurde erstellt
-- Infrastrukturcode im Verzeichnis `infra/` eingerichtet
-- Eine Umgebungs-Konfiguration erstellt
+- Infrastrukturcode wurde im Verzeichnis `infra/` eingerichtet
+- Eine Umgebungs-Konfiguration wurde erstellt
 
 ## Schritt 2: Projektstruktur erkunden
 
@@ -125,7 +130,7 @@ my-first-azd-app/
 
 ### Wichtige Dateien zum Verstehen
 
-**azure.yaml** - Das Herz Ihres azd-Projekts:
+**azure.yaml** - Das Herzstück Ihres azd-Projekts:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -162,7 +167,7 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## Schritt 4: Auf Azure bereitstellen
+## Schritt 4: Bereitstellung auf Azure
 
 Jetzt kommt der spannende Teil - alles auf Azure bereitstellen!
 
@@ -200,7 +205,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Schritt 5: Anwendung testen
 
 ### Zugriff auf Ihre Anwendung
-Klicken Sie auf die URL, die in der Bereitstellungsausgabe bereitgestellt wurde, oder rufen Sie sie jederzeit ab:
+Klicken Sie auf die URL, die in der Bereitstellungsausgabe bereitgestellt wird, oder rufen Sie sie jederzeit ab:
 ```bash
 # Get application endpoints
 azd show
@@ -214,7 +219,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 2. **Als erledigt markieren** - Haken Sie erledigte Elemente ab
 3. **Elemente löschen** - Entfernen Sie Todos, die Sie nicht mehr benötigen
 
-### Ihre Anwendung überwachen
+### Anwendung überwachen
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -233,7 +238,7 @@ Nehmen wir eine Änderung vor und sehen, wie einfach es ist, ein Update durchzuf
 code src/api/src/routes/lists.js
 ```
 
-Fügen Sie einen benutzerdefinierten Antwortheader hinzu:
+Fügen Sie einen benutzerdefinierten Antwort-Header hinzu:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -390,7 +395,12 @@ azd init --template todo-java-mongo
 
 ---
 
-**Vorher:** [Konfiguration](configuration.md) | **Nächste:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Kapitel Navigation:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schnellstart
+- **⬅️ Vorheriges**: [Installation & Einrichtung](installation.md)
+- **➡️ Nächstes**: [Konfiguration](configuration.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 2: AI-First Entwicklung](../ai-foundry/azure-ai-foundry-integration.md)
 - **Nächste Lektion**: [Bereitstellungsanleitung](../deployment/deployment-guide.md)
 
 ---

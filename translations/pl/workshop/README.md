@@ -1,17 +1,21 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T17:51:17+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-17T16:45:37+00:00",
   "source_file": "workshop/README.md",
   "language_code": "pl"
 }
 -->
-# Warsztaty AZD dla programistów AI
+# Warsztaty AZD dla Twórców AI
 
-**Poprzednie:** [Przewodnik rozwiązywania problemów AI](../docs/troubleshooting/ai-troubleshooting.md) | **Następne:** [Moduły warsztatowe](../../../workshop)
+**Nawigacja po warsztatach**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../README.md)
+- **📖 Powiązane rozdziały**: Obejmuje [Rozdział 1](../README.md#-chapter-1-foundation--quick-start), [Rozdział 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) oraz [Rozdział 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Laboratorium praktyczne**: [Laboratorium warsztatowe AI](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Kolejne kroki**: [Moduły laboratorium warsztatowego](../../../workshop)
 
-Witamy na praktycznych warsztatach dotyczących nauki Azure Developer CLI (AZD) z naciskiem na wdrażanie aplikacji AI. Warsztaty zostały zaprojektowane tak, aby przeprowadzić Cię od podstaw AZD do wdrażania gotowych do produkcji rozwiązań AI.
+Witamy na warsztatach praktycznych dotyczących nauki Azure Developer CLI (AZD) z naciskiem na wdrażanie aplikacji AI. Warsztaty te mają na celu przeprowadzenie Cię od podstaw AZD do wdrażania gotowych do produkcji rozwiązań AI.
 
 ## Przegląd warsztatów
 
@@ -21,7 +25,7 @@ Witamy na praktycznych warsztatach dotyczących nauki Azure Developer CLI (AZD) 
 
 ### Czego się nauczysz
 
-- **Podstawy AZD**: Zrozumienie Infrastructure as Code z AZD
+- **Podstawy AZD**: Zrozumienie infrastruktury jako kodu z AZD
 - 🤖 **Integracja usług AI**: Wdrażanie Azure OpenAI, AI Search i innych usług AI
 - **Wdrażanie kontenerów**: Korzystanie z Azure Container Apps dla aplikacji AI
 - **Najlepsze praktyki bezpieczeństwa**: Implementacja Managed Identity i bezpiecznych konfiguracji
@@ -86,8 +90,8 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Konfiguracja konta Azure
 
-1. **Subskrypcja Azure**: [Zarejestruj się za darmo](https://azure.microsoft.com/free/)  
-2. **Dostęp do Azure OpenAI**: [Złóż wniosek o dostęp](https://aka.ms/oai/access)  
+1. **Subskrypcja Azure**: [Zarejestruj się za darmo](https://azure.microsoft.com/free/)
+2. **Dostęp do Azure OpenAI**: [Poproś o dostęp](https://aka.ms/oai/access)
 3. **Wymagane uprawnienia**:
    - Rola Contributor na subskrypcji lub grupie zasobów
    - User Access Administrator (dla przypisań RBAC)
@@ -142,13 +146,13 @@ echo "Setup verification complete!"
 
 ### Ćwiczenia laboratoryjne
 
-Każdy moduł zawiera praktyczne laboratoria z kodem początkowym i instrukcjami krok po kroku:
+Każdy moduł zawiera laboratoria praktyczne z kodem startowym i instrukcjami krok po kroku:
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Twoje pierwsze wdrożenie AZD
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplikacja czatu z Azure OpenAI
 - **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Aplikacja RAG z AI Search
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Wzorce wdrożenia produkcyjnego
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Zaawansowane scenariusze wdrożenia
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Scenariusze zaawansowanego wdrożenia
 
 ### Materiały referencyjne
 
@@ -201,9 +205,9 @@ cat README.md  # Follow the instructions
 
 Jeśli uczestniczysz w sesji prowadzonej przez instruktora:
 
-- 🎥 **Nagranie warsztatów**: [Dostępne na żądanie](https://aka.ms/azd-ai-workshop)  
-- 💬 **Społeczność Discord**: [Dołącz, aby uzyskać wsparcie na żywo](https://aka.ms/foundry/discord)  
-- **Opinie o warsztatach**: [Podziel się swoimi doświadczeniami](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Nagranie warsztatów**: [Dostępne na żądanie](https://aka.ms/azd-ai-workshop)
+- 💬 **Społeczność Discord**: [Dołącz, aby uzyskać wsparcie na żywo](https://aka.ms/foundry/discord)
+- **Opinie o warsztatach**: [Podziel się swoimi doświadczeniami](https://aka.ms/azd-workshop-feedback)
 
 ## Harmonogram warsztatów
 
@@ -233,48 +237,48 @@ Jeśli uczestniczysz w sesji prowadzonej przez instruktora:
 
 ## Kryteria sukcesu
 
-Po zakończeniu warsztatów będziesz w stanie:
+Na koniec warsztatów będziesz w stanie:
 
 ✅ **Wdrażać aplikacje AI** za pomocą szablonów AZD  
 ✅ **Konfigurować usługi Azure OpenAI** z odpowiednim zabezpieczeniem  
 ✅ **Budować aplikacje RAG** z integracją Azure AI Search  
 ✅ **Implementować wzorce produkcyjne** dla obciążeń AI na poziomie przedsiębiorstwa  
-✅ **Monitorować i rozwiązywać problemy** z wdrożeniami aplikacji AI  
+✅ **Monitorować i rozwiązywać problemy** związane z wdrażaniem aplikacji AI  
 ✅ **Stosować strategie optymalizacji kosztów** dla obciążeń AI  
 
 ## Społeczność i wsparcie
 
 ### Podczas warsztatów
 
-- 🙋 **Pytania**: Korzystaj z czatu warsztatowego lub zgłoś się
+- 🙋 **Pytania**: Korzystaj z czatu warsztatowego lub podnieś rękę
 - 🐛 **Problemy**: Sprawdź [przewodnik rozwiązywania problemów](../docs/troubleshooting/ai-troubleshooting.md)
 - **Wskazówki**: Dziel się odkryciami z innymi uczestnikami
 
 ### Po warsztatach
 
-- 💬 **Discord**: [Społeczność Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **Problemy GitHub**: [Zgłoś problemy z szablonami](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Opinie**: [Formularz oceny warsztatów](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Społeczność Azure AI Foundry](https://aka.ms/foundry/discord)
+- **Problemy GitHub**: [Zgłoś problemy z szablonami](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Opinie**: [Formularz oceny warsztatów](https://aka.ms/azd-workshop-feedback)
 
 ## Kolejne kroki
 
 ### Kontynuuj naukę
 
-1. **Zaawansowane scenariusze**: Eksploruj [wdrożenia w wielu regionach](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Integracja CI/CD**: Skonfiguruj [przepływy pracy GitHub Actions](../docs/deployment/github-actions.md)  
-3. **Własne szablony**: Twórz własne [szablony AZD](../docs/getting-started/custom-templates.md)  
+1. **Zaawansowane scenariusze**: Eksploruj [wdrożenia w wielu regionach](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Integracja CI/CD**: Skonfiguruj [przepływy pracy GitHub Actions](../docs/deployment/github-actions.md)
+3. **Własne szablony**: Twórz własne [szablony AZD](../docs/getting-started/custom-templates.md)
 
 ### Zastosuj w swoich projektach
 
-1. **Ocena**: Skorzystaj z naszej [listy kontrolnej gotowości](./production-readiness-checklist.md)  
-2. **Szablony**: Rozpocznij od naszych [szablonów specyficznych dla AI](../../../workshop/templates)  
-3. **Wsparcie**: Dołącz do [Discord Azure AI Foundry](https://aka.ms/foundry/discord)  
+1. **Ocena**: Skorzystaj z naszej [listy kontrolnej gotowości](./production-readiness-checklist.md)
+2. **Szablony**: Rozpocznij od naszych [szablonów specyficznych dla AI](../../../workshop/templates)
+3. **Wsparcie**: Dołącz do [Discord Azure AI Foundry](https://aka.ms/foundry/discord)
 
 ### Podziel się sukcesem
 
-- ⭐ **Oceń repozytorium**, jeśli warsztaty były pomocne  
-- 🐦 **Podziel się w mediach społecznościowych** z #AzureDeveloperCLI #AzureAI  
-- 📝 **Napisz post na blogu** o swojej podróży wdrażania AI  
+- ⭐ **Oceń repozytorium**, jeśli warsztaty były pomocne
+- 🐦 **Podziel się w mediach społecznościowych** używając #AzureDeveloperCLI #AzureAI
+- 📝 **Napisz post na blogu** o swojej podróży wdrażania AI
 
 ---
 
@@ -296,11 +300,11 @@ Twoje opinie pomagają nam ulepszać warsztaty:
 
 **Poprzednie:** [Przewodnik rozwiązywania problemów AI](../docs/troubleshooting/ai-troubleshooting.md) | **Następne:** Rozpocznij od [Laboratorium 1: Podstawy AZD](../../../workshop/lab-1-azd-basics)
 
-**Gotowy, aby zacząć budować aplikacje AI z AZD?**
+**Gotowy do rozpoczęcia budowy aplikacji AI z AZD?**
 
 [Rozpocznij Laboratorium 1: Podstawy AZD →](./lab-1-azd-basics/README.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

@@ -1,47 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T17:16:54+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T16:11:21+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "de"
 }
 -->
-# Vorabprüfungen - Validierung der Einsatzbereitschaft
+# Vorabprüfungen für AZD-Bereitstellungen
+
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 6 - Validierung & Planung vor der Bereitstellung
+- **⬅️ Vorheriges Kapitel**: [SKU-Auswahl](sku-selection.md)
+- **➡️ Nächstes Kapitel**: [Kapitel 7: Fehlerbehebung](../troubleshooting/common-issues.md)
+- **🔧 Verwandtes Kapitel**: [Kapitel 4: Bereitstellungsanleitung](../deployment/deployment-guide.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden bietet Validierungsskripte und Verfahren vor der Bereitstellung, um erfolgreiche Azure Developer CLI-Bereitstellungen sicherzustellen, bevor sie beginnen. Lernen Sie, automatisierte Prüfungen für Authentifizierung, Ressourcenverfügbarkeit, Quoten, Sicherheitskonformität und Leistungsanforderungen umzusetzen, um Bereitstellungsfehler zu vermeiden und die Erfolgsquote zu optimieren.
+Dieser umfassende Leitfaden bietet Validierungsskripte und Verfahren vor der Bereitstellung, um erfolgreiche Azure Developer CLI-Bereitstellungen sicherzustellen, bevor sie beginnen. Lernen Sie, automatisierte Prüfungen für Authentifizierung, Ressourcenverfügbarkeit, Quoten, Sicherheitsrichtlinien und Leistungsanforderungen umzusetzen, um Bereitstellungsfehler zu vermeiden und die Erfolgsquote zu optimieren.
 
 ## Lernziele
 
-Durch die Bearbeitung dieses Leitfadens werden Sie:
-- Automatisierte Validierungstechniken und Skripte vor der Bereitstellung meistern
+Nach Abschluss dieses Leitfadens werden Sie:
+- Automatisierte Validierungstechniken und Skripte vor der Bereitstellung beherrschen
 - Umfassende Prüfstrategien für Authentifizierung, Berechtigungen und Quoten verstehen
 - Verfahren zur Validierung von Ressourcenverfügbarkeit und Kapazität implementieren
-- Sicherheits- und Konformitätsprüfungen für organisatorische Richtlinien konfigurieren
+- Sicherheits- und Compliance-Prüfungen für organisatorische Richtlinien konfigurieren
 - Workflows zur Kostenschätzung und Budgetvalidierung entwerfen
-- Individuelle Automatisierungen für Vorabprüfungen in CI/CD-Pipelines erstellen
+- Eigene Automatisierungen für Vorabprüfungen in CI/CD-Pipelines erstellen
 
 ## Lernergebnisse
 
 Nach Abschluss werden Sie in der Lage sein:
 - Umfassende Validierungsskripte vor der Bereitstellung zu erstellen und auszuführen
 - Automatisierte Prüfungs-Workflows für verschiedene Bereitstellungsszenarien zu entwerfen
-- Umgebungspezifische Validierungsverfahren und Richtlinien umzusetzen
-- Proaktives Monitoring und Benachrichtigungen für die Einsatzbereitschaft zu konfigurieren
+- Umgebungsabhängige Validierungsverfahren und Richtlinien umzusetzen
+- Proaktives Monitoring und Benachrichtigungen für die Bereitstellungsbereitschaft zu konfigurieren
 - Probleme vor der Bereitstellung zu beheben und Korrekturmaßnahmen umzusetzen
 - Vorabprüfungen in DevOps-Pipelines und Automatisierungs-Workflows zu integrieren
 
 ## Inhaltsverzeichnis
 
 - [Übersicht](../../../../docs/pre-deployment)
-- [Automatisiertes Vorabprüfungsskript](../../../../docs/pre-deployment)
+- [Automatisiertes Vorabprüfungs-Skript](../../../../docs/pre-deployment)
 - [Manuelle Validierungs-Checkliste](../../../../docs/pre-deployment)
 - [Umgebungsvalidierung](../../../../docs/pre-deployment)
 - [Ressourcenvalidierung](../../../../docs/pre-deployment)
-- [Sicherheits- und Konformitätsprüfungen](../../../../docs/pre-deployment)
-- [Leistungs- und Kapazitätsplanung](../../../../docs/pre-deployment)
+- [Sicherheits- & Compliance-Prüfungen](../../../../docs/pre-deployment)
+- [Leistungs- & Kapazitätsplanung](../../../../docs/pre-deployment)
 - [Fehlerbehebung bei häufigen Problemen](../../../../docs/pre-deployment)
 
 ---
@@ -61,15 +68,15 @@ Vorabprüfungen sind essenzielle Validierungen, die vor der Bereitstellung durch
 
 - **Vor der ersten Bereitstellung** in einer neuen Umgebung
 - **Nach wesentlichen Änderungen an Vorlagen**
-- **Vor Bereitstellungen in Produktionsumgebungen**
+- **Vor Produktionsbereitstellungen**
 - **Beim Wechsel von Azure-Regionen**
 - **Als Teil von CI/CD-Pipelines**
 
 ---
 
-## Automatisiertes Vorabprüfungsskript
+## Automatisiertes Vorabprüfungs-Skript
 
-### PowerShell Vorabprüfer
+### PowerShell Vorabprüfungs-Skript
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Vorabprüfer
+### Bash Vorabprüfungs-Skript
 
 ```bash
 #!/bin/bash
@@ -798,7 +805,7 @@ Drucken Sie diese Checkliste aus und überprüfen Sie jeden Punkt vor der Bereit
 
 #### ✅ Authentifizierung & Berechtigungen
 - [ ] Erfolgreich authentifiziert mit `azd auth login`
-- [ ] Benutzer hat die Rolle "Mitwirkender" im Zielabonnement/der Ressourcengruppe
+- [ ] Benutzer hat die Rolle "Mitwirkender" im Zielabonnement/Ressourcengruppe
 - [ ] Dienstprinzipal für CI/CD konfiguriert (falls zutreffend)
 - [ ] Keine abgelaufenen Zertifikate oder Anmeldeinformationen
 
@@ -821,13 +828,13 @@ Drucken Sie diese Checkliste aus und überprüfen Sie jeden Punkt vor der Bereit
 - [ ] Netzwerkverbindung zu Azure-Endpunkten überprüft
 - [ ] Firewall-/Proxy-Einstellungen konfiguriert, falls erforderlich
 - [ ] Key Vault für Geheimnisverwaltung konfiguriert
-- [ ] Verwaltete Identitäten, wo möglich, verwendet
+- [ ] Verwaltete Identitäten verwendet, wo möglich
 - [ ] HTTPS-Erzwingung für Webanwendungen aktiviert
 
 #### ✅ Kostenmanagement
 - [ ] Kostenschätzungen mit dem Azure Pricing Calculator berechnet
 - [ ] Budgetwarnungen konfiguriert, falls erforderlich
-- [ ] Geeignete SKUs für den Umgebungs-Typ ausgewählt
+- [ ] Geeignete SKUs für den Umwelttyp ausgewählt
 - [ ] Reservierte Kapazität für Produktionslasten berücksichtigt
 
 #### ✅ Monitoring & Beobachtbarkeit
@@ -840,7 +847,7 @@ Drucken Sie diese Checkliste aus und überprüfen Sie jeden Punkt vor der Bereit
 - [ ] Backup-Strategie für Datenressourcen definiert
 - [ ] Wiederherstellungszeitziele (RTO) dokumentiert
 - [ ] Wiederherstellungspunktziele (RPO) dokumentiert
-- [ ] Notfallwiederherstellungsplan für die Produktion vorhanden
+- [ ] Notfallwiederherstellungsplan für Produktion vorhanden
 
 ---
 
@@ -1044,7 +1051,7 @@ if __name__ == "__main__":
 
 ---
 
-## Sicherheits- und Konformitätsprüfungen
+## Sicherheits- & Compliance-Prüfungen
 
 ### Skript zur Sicherheitsvalidierung
 
@@ -1163,7 +1170,7 @@ main "$@"
 
 ---
 
-## Integration mit CI/CD
+## Integration in CI/CD
 
 ### Integration mit GitHub Actions
 
@@ -1280,7 +1287,7 @@ steps:
 
 ### ✅ Best Practices für Vorabprüfungen
 
-1. **Automatisieren, wo möglich**
+1. **Automatisierung, wo möglich**
    - Prüfungen in CI/CD-Pipelines integrieren
    - Skripte für wiederholbare Validierungen verwenden
    - Ergebnisse für Audit-Zwecke speichern
@@ -1294,12 +1301,12 @@ steps:
    - Authentifizierung und Berechtigungen
    - Ressourcenquoten und Verfügbarkeit
    - Vorlagenvalidierung und Syntax
-   - Sicherheits- und Konformitätsanforderungen
+   - Sicherheits- und Compliance-Anforderungen
 
 4. **Klare Berichterstattung**
    - Farblich gekennzeichnete Statusindikatoren
    - Detaillierte Fehlermeldungen mit Lösungsschritten
-   - Zusammenfassende Berichte für schnelle Bewertungen
+   - Zusammenfassende Berichte für schnelle Bewertung
 
 5. **Schnelles Scheitern**
    - Bereitstellung stoppen, wenn kritische Prüfungen fehlschlagen
@@ -1317,7 +1324,7 @@ steps:
 
 ---
 
-**Tipp**: Führen Sie Vorabprüfungen als separaten Job in Ihrer CI/CD-Pipeline aus, bevor der eigentliche Bereitstellungsjob startet. So können Probleme frühzeitig erkannt und schneller Feedback an Entwickler gegeben werden.
+**Tipp**: Führen Sie Vorabprüfungen als separaten Job in Ihrer CI/CD-Pipeline aus, bevor der eigentliche Bereitstellungsjob startet. So können Probleme frühzeitig erkannt werden und Entwickler erhalten schnelleres Feedback.
 
 ---
 

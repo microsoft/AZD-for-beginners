@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T17:17:39+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T16:44:18+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "pl"
 }
 -->
-# Kontrole przed wdrożeniem - Walidacja gotowości do wdrożenia
+# Kontrole przed wdrożeniem dla AZD
+
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 6 - Walidacja i planowanie przed wdrożeniem
+- **⬅️ Poprzedni**: [Wybór SKU](sku-selection.md)
+- **➡️ Następny rozdział**: [Rozdział 7: Rozwiązywanie problemów](../troubleshooting/common-issues.md)
+- **🔧 Powiązane**: [Rozdział 4: Przewodnik wdrożeniowy](../deployment/deployment-guide.md)
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik dostarcza skrypty i procedury walidacji przed wdrożeniem, aby zapewnić pomyślne wdrożenia za pomocą Azure Developer CLI. Dowiedz się, jak wdrożyć automatyczne kontrole uwierzytelniania, dostępności zasobów, limitów, zgodności z zasadami bezpieczeństwa oraz wymagań wydajnościowych, aby zapobiec niepowodzeniom wdrożenia i zoptymalizować wskaźniki sukcesu.
+Ten kompleksowy przewodnik dostarcza skryptów i procedur walidacji przed wdrożeniem, aby zapewnić pomyślne wdrożenia za pomocą Azure Developer CLI. Dowiedz się, jak wdrożyć automatyczne kontrole uwierzytelniania, dostępności zasobów, limitów, zgodności z zasadami bezpieczeństwa oraz wymagań wydajnościowych, aby zapobiec niepowodzeniom wdrożenia i zoptymalizować wskaźniki sukcesu.
 
 ## Cele nauki
 
@@ -20,18 +27,18 @@ Po ukończeniu tego przewodnika będziesz:
 - Rozumieć kompleksowe strategie kontroli uwierzytelniania, uprawnień i limitów
 - Wdrażać procedury walidacji dostępności i pojemności zasobów
 - Konfigurować kontrole bezpieczeństwa i zgodności z politykami organizacyjnymi
-- Projektować przepływy pracy do szacowania kosztów i walidacji budżetu
-- Tworzyć niestandardowe automatyzacje kontroli przed wdrożeniem dla potoków CI/CD
+- Projektować przepływy pracy szacowania kosztów i walidacji budżetu
+- Tworzyć niestandardową automatyzację kontroli przed wdrożeniem dla potoków CI/CD
 
 ## Efekty nauki
 
 Po ukończeniu będziesz w stanie:
 - Tworzyć i wykonywać kompleksowe skrypty walidacji przed wdrożeniem
-- Projektować automatyczne przepływy kontroli dla różnych scenariuszy wdrożenia
+- Projektować automatyczne przepływy kontroli dla różnych scenariuszy wdrożeniowych
 - Wdrażać procedury i polityki walidacji specyficzne dla środowiska
 - Konfigurować proaktywne monitorowanie i alerty dotyczące gotowości do wdrożenia
 - Rozwiązywać problemy przed wdrożeniem i wdrażać działania naprawcze
-- Integracja kontroli przed wdrożeniem z potokami DevOps i automatyzacją
+- Integracja kontroli przed wdrożeniem z potokami DevOps i przepływami automatyzacji
 
 ## Spis treści
 
@@ -54,7 +61,7 @@ Kontrole przed wdrożeniem to kluczowe walidacje wykonywane przed wdrożeniem, a
 - **Uwierzytelnianie i uprawnienia** są poprawnie skonfigurowane
 - **Poprawność szablonów** i parametrów jest zapewniona
 - **Łączność sieciowa** i zależności są spełnione
-- **Zgodność z zasadami bezpieczeństwa** organizacji jest zachowana
+- **Zgodność z zasadami bezpieczeństwa** organizacji jest zapewniona
 - **Szacowanie kosztów** mieści się w ramach budżetu
 
 ### Kiedy uruchamiać kontrole przed wdrożeniem
@@ -790,8 +797,8 @@ main "$@"
 Wydrukuj tę listę i zweryfikuj każdy punkt przed wdrożeniem:
 
 #### ✅ Konfiguracja środowiska
-- [ ] AZD CLI zainstalowane i zaktualizowane do najnowszej wersji
-- [ ] Azure CLI zainstalowane i uwierzytelnione
+- [ ] Zainstalowany i zaktualizowany do najnowszej wersji AZD CLI
+- [ ] Zainstalowany i uwierzytelniony Azure CLI
 - [ ] Wybrana poprawna subskrypcja Azure
 - [ ] Nazwa środowiska jest unikalna i zgodna z konwencjami nazewnictwa
 - [ ] Zidentyfikowana docelowa grupa zasobów lub możliwość jej utworzenia
@@ -821,13 +828,13 @@ Wydrukuj tę listę i zweryfikuj każdy punkt przed wdrożeniem:
 - [ ] Zweryfikowano łączność sieciową z punktami końcowymi Azure
 - [ ] Skonfigurowano ustawienia zapory/proxy, jeśli wymagane
 - [ ] Skonfigurowano Key Vault do zarządzania sekretami
-- [ ] W miarę możliwości używane są zarządzane tożsamości
-- [ ] Wymuszenie HTTPS włączone dla aplikacji webowych
+- [ ] Wykorzystano zarządzane tożsamości, gdzie to możliwe
+- [ ] Włączono wymuszanie HTTPS dla aplikacji webowych
 
 #### ✅ Zarządzanie kosztami
-- [ ] Szacowanie kosztów obliczone za pomocą Azure Pricing Calculator
+- [ ] Obliczono szacunkowe koszty za pomocą Azure Pricing Calculator
 - [ ] Skonfigurowano alerty budżetowe, jeśli wymagane
-- [ ] Wybrane odpowiednie SKU dla typu środowiska
+- [ ] Wybrano odpowiednie SKU dla typu środowiska
 - [ ] Rozważono zarezerwowaną pojemność dla obciążeń produkcyjnych
 
 #### ✅ Monitorowanie i obserwowalność
@@ -837,10 +844,10 @@ Wydrukuj tę listę i zweryfikuj każdy punkt przed wdrożeniem:
 - [ ] Zaimplementowano punkty końcowe kontroli zdrowia w aplikacjach
 
 #### ✅ Kopie zapasowe i odzyskiwanie
-- [ ] Zdefiniowano strategię kopii zapasowych dla zasobów danych
+- [ ] Zdefiniowano strategię tworzenia kopii zapasowych dla zasobów danych
 - [ ] Udokumentowano cele czasu odzyskiwania (RTO)
-- [ ] Udokumentowano cele punktów odzyskiwania (RPO)
-- [ ] Plan odzyskiwania po awarii dla produkcji jest gotowy
+- [ ] Udokumentowano cele punktu odzyskiwania (RPO)
+- [ ] Opracowano plan odzyskiwania awaryjnego dla produkcji
 
 ---
 
@@ -1282,8 +1289,8 @@ steps:
 
 1. **Automatyzacja, gdzie to możliwe**
    - Integracja kontroli z potokami CI/CD
-   - Używanie skryptów do powtarzalnych walidacji
-   - Przechowywanie wyników dla celów audytu
+   - Wykorzystanie skryptów do powtarzalnych walidacji
+   - Przechowywanie wyników dla celów audytowych
 
 2. **Walidacja specyficzna dla środowiska**
    - Różne kontrole dla dev/staging/prod
@@ -1296,14 +1303,14 @@ steps:
    - Walidacja szablonów i składni
    - Wymagania dotyczące bezpieczeństwa i zgodności
 
-4. **Jasne raportowanie**
+4. **Przejrzyste raportowanie**
    - Wskaźniki statusu w kolorach
    - Szczegółowe komunikaty o błędach z krokami naprawczymi
    - Raporty podsumowujące dla szybkiej oceny
 
 5. **Szybkie zatrzymanie**
    - Zatrzymanie wdrożenia, jeśli krytyczne kontrole zawiodą
-   - Jasne wskazówki dotyczące rozwiązania problemów
+   - Jasne wskazówki dotyczące rozwiązania problemu
    - Możliwość łatwego ponownego uruchomienia kontroli
 
 ### Typowe pułapki kontroli przed wdrożeniem
@@ -1313,11 +1320,11 @@ steps:
 3. **Ignorowanie limitów** aż do momentu niepowodzenia wdrożenia
 4. **Brak walidacji szablonów** w potokach CI/CD
 5. **Pomijanie walidacji bezpieczeństwa** dla środowisk produkcyjnych
-6. **Niedostateczne szacowanie kosztów**, prowadzące do niespodzianek budżetowych
+6. **Niewystarczające szacowanie kosztów**, prowadzące do niespodzianek budżetowych
 
 ---
 
-**Porada**: Uruchamiaj kontrole przed wdrożeniem jako osobne zadanie w potoku CI/CD przed właściwym zadaniem wdrożeniowym. Pozwala to na wczesne wychwycenie problemów i szybsze przekazywanie informacji zwrotnych do deweloperów.
+**Porada**: Uruchamiaj kontrole przed wdrożeniem jako osobne zadanie w potoku CI/CD przed właściwym zadaniem wdrożeniowym. Pozwoli to na wczesne wykrycie problemów i szybsze przekazywanie informacji zwrotnych do deweloperów.
 
 ---
 
@@ -1328,4 +1335,4 @@ steps:
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.

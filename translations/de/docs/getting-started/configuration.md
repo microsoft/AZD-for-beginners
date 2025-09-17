@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T17:08:22+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T16:08:56+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "de"
 }
 -->
 # Konfigurationshandbuch
 
-**Vorher:** [AZD Grundlagen](azd-basics.md) | **Nächster:** [Erstes Projekt](first-project.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 3 - Konfiguration & Authentifizierung
+- **⬅️ Vorheriges Kapitel**: [Ihr erstes Projekt](first-project.md)
+- **➡️ Nächstes Kapitel**: [Bereitstellungshandbuch](../deployment/deployment-guide.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 4: Infrastruktur als Code](../deployment/deployment-guide.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows. Sie lernen die Konfigurationshierarchie, das Management von Umgebungen, Authentifizierungsmethoden und fortgeschrittene Konfigurationsmuster kennen, die effiziente und sichere Azure-Bereitstellungen ermöglichen.
+Dieses umfassende Handbuch behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungsworkflows. Sie lernen die Konfigurationshierarchie, das Management von Umgebungen, Authentifizierungsmethoden und fortgeschrittene Konfigurationsmuster kennen, die effiziente und sichere Azure-Bereitstellungen ermöglichen.
 
 ## Lernziele
 
@@ -27,13 +32,13 @@ Am Ende dieser Lektion werden Sie:
 ## Lernergebnisse
 
 Nach Abschluss dieser Lektion werden Sie in der Lage sein:
-- azd für optimale Entwicklungs-Workflows zu konfigurieren
+- azd für optimale Entwicklungsworkflows zu konfigurieren
 - Mehrere Bereitstellungsumgebungen einzurichten und zu verwalten
 - Sichere Konfigurationsmanagementpraktiken umzusetzen
 - Konfigurationsbezogene Probleme zu beheben
-- Das Verhalten von azd an spezifische organisatorische Anforderungen anzupassen
+- azd-Verhalten für spezifische organisatorische Anforderungen anzupassen
 
-Dieser umfassende Leitfaden behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungs-Workflows.
+Dieses umfassende Handbuch behandelt alle Aspekte der Konfiguration der Azure Developer CLI für optimale Entwicklungs- und Bereitstellungsworkflows.
 
 ## Konfigurationshierarchie
 
@@ -46,7 +51,7 @@ azd verwendet ein hierarchisches Konfigurationssystem:
 
 ## Globale Konfiguration
 
-### Globale Standardwerte festlegen
+### Globale Standards festlegen
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versionskontrollüberlegungen
+### 3. Versionskontrolle berücksichtigen
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -538,7 +543,7 @@ Dokumentieren Sie Ihre Konfiguration in `CONFIG.md`:
 ## Nächste Schritte
 
 - [Ihr erstes Projekt](first-project.md) - Konfiguration in der Praxis anwenden
-- [Bereitstellungsleitfaden](../deployment/deployment-guide.md) - Konfiguration für die Bereitstellung nutzen
+- [Bereitstellungshandbuch](../deployment/deployment-guide.md) - Konfiguration für die Bereitstellung nutzen
 - [Ressourcen bereitstellen](../deployment/provisioning.md) - Produktionsreife Konfigurationen
 
 ## Referenzen
@@ -549,7 +554,11 @@ Dokumentieren Sie Ihre Konfiguration in `CONFIG.md`:
 
 ---
 
-**Vorher:** [AZD Grundlagen](azd-basics.md) | **Nächster:** [Erstes Projekt](first-project.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 3 - Konfiguration & Authentifizierung
+- **⬅️ Vorheriges Kapitel**: [Ihr erstes Projekt](first-project.md)
+- **➡️ Nächstes Kapitel**: [Kapitel 4: Infrastruktur als Code](../deployment/deployment-guide.md)
 - **Nächste Lektion**: [Ihr erstes Projekt](first-project.md)
 
 ---

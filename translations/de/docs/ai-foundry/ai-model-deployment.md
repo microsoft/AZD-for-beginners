@@ -1,24 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T17:41:36+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T16:07:52+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "de"
 }
 -->
 # Bereitstellung von KI-Modellen mit Azure Developer CLI
 
-**Vorher:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Nächste:** [AI Workshop Lab](ai-workshop-lab.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-First-Entwicklung
+- **⬅️ Vorheriges**: [Integration der Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Nächstes**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
-Dieser Leitfaden bietet umfassende Anweisungen zur Bereitstellung von KI-Modellen mithilfe von AZD-Vorlagen, von der Modellauswahl bis hin zu Produktionsbereitstellungsmustern.
+Diese Anleitung bietet umfassende Anweisungen zur Bereitstellung von KI-Modellen mithilfe von AZD-Vorlagen und behandelt alles von der Modellauswahl bis hin zu Produktionsbereitstellungsmustern.
 
 ## Inhaltsverzeichnis
 
 - [Strategie zur Modellauswahl](../../../../docs/ai-foundry)
 - [AZD-Konfiguration für KI-Modelle](../../../../docs/ai-foundry)
 - [Bereitstellungsmuster](../../../../docs/ai-foundry)
-- [Modellverwaltung](../../../../docs/ai-foundry)
+- [Modellmanagement](../../../../docs/ai-foundry)
 - [Überlegungen zur Produktion](../../../../docs/ai-foundry)
 - [Überwachung und Beobachtbarkeit](../../../../docs/ai-foundry)
 
@@ -59,7 +64,7 @@ services:
 | Modelltyp | Anwendungsfall | Empfohlene Kapazität | Kostenüberlegungen |
 |-----------|----------------|----------------------|--------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kosteneffizient für die meisten Workloads |
-| GPT-4 | Komplexes Denken | 20-100 TPM | Höhere Kosten, für Premium-Funktionen geeignet |
+| GPT-4 | Komplexes Denken | 20-100 TPM | Höhere Kosten, für Premium-Funktionen verwenden |
 | Text-embedding-ada-002 | Suche, RAG | 30-120 TPM | Essenziell für semantische Suche |
 | Whisper | Sprache-zu-Text | 10-50 TPM | Workloads zur Audiobearbeitung |
 
@@ -153,7 +158,7 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Am besten geeignet für:
+Geeignet für:
 - Entwicklung und Tests
 - Anwendungen für einen einzelnen Markt
 - Kostenoptimierung
@@ -171,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Am besten geeignet für:
+Geeignet für:
 - Globale Anwendungen
 - Anforderungen an hohe Verfügbarkeit
 - Lastverteilung
@@ -207,7 +212,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Modellverwaltung
+## Modellmanagement
 
 ### Versionskontrolle
 
@@ -231,7 +236,7 @@ Verfolgen Sie Modellversionen in Ihrer AZD-Konfiguration:
 
 ### Modellaktualisierungen
 
-Nutzen Sie AZD-Hooks für Modellaktualisierungen:
+Verwenden Sie AZD-Hooks für Modellaktualisierungen:
 
 ```bash
 #!/bin/bash
@@ -477,21 +482,26 @@ async def check_ai_models():
 
 ## Nächste Schritte
 
-1. **Überprüfen Sie den [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** für Integrationsmuster von Diensten
+1. **Überprüfen Sie den [Leitfaden zur Integration der Azure AI Foundry](azure-ai-foundry-integration.md)** für Integrationsmuster
 2. **Absolvieren Sie das [AI Workshop Lab](ai-workshop-lab.md)** für praktische Erfahrungen
-3. **Implementieren Sie [Production AI Practices](production-ai-practices.md)** für Unternehmensbereitstellungen
-4. **Erkunden Sie den [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** für häufige Probleme
+3. **Implementieren Sie [Produktions-KI-Praktiken](production-ai-practices.md)** für Unternehmenseinsätze
+4. **Erkunden Sie den [Leitfaden zur Fehlerbehebung bei KI](../troubleshooting/ai-troubleshooting.md)** für häufige Probleme
 
 ## Ressourcen
 
-- [Azure OpenAI Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Skalierung](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [KI-Modell Kostenoptimierung](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Verfügbarkeit von Azure OpenAI-Modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Dokumentation zur Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Skalierung von Container-Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Kostenoptimierung für KI-Modelle](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Vorher:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Nächste:** [AI Workshop Lab](ai-workshop-lab.md)
+**Kapitelübersicht:**
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-First-Entwicklung
+- **⬅️ Vorheriges**: [Integration der Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Nächstes**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ---
 

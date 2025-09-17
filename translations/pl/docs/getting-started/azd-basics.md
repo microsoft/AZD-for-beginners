@@ -1,27 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T17:16:11+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T16:41:40+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "pl"
 }
 -->
-# Podstawy AZD - Zrozumienie Azure Developer CLI
+# AZD Podstawy - Zrozumienie Azure Developer CLI
 
-**Poprzednie:** [Instalacja i konfiguracja](installation.md) | **Następne:** [Konfiguracja](configuration.md)
+# AZD Podstawy - Kluczowe Koncepcje i Fundamenty
+
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 1 - Podstawy i szybki start
+- **⬅️ Poprzedni**: [Przegląd kursu](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Następny**: [Instalacja i konfiguracja](installation.md)
+- **🚀 Następny rozdział**: [Rozdział 2: Rozwój oparty na AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Wprowadzenie
 
-Ta lekcja wprowadza Cię w Azure Developer CLI (azd), potężne narzędzie wiersza poleceń, które przyspiesza przejście od lokalnego rozwoju do wdrożenia w Azure. Dowiesz się o podstawowych koncepcjach, kluczowych funkcjach i zrozumiesz, jak azd upraszcza wdrażanie aplikacji natywnych dla chmury.
+W tej lekcji poznasz Azure Developer CLI (azd), potężne narzędzie wiersza poleceń, które przyspiesza przejście od lokalnego rozwoju do wdrożenia w Azure. Dowiesz się o podstawowych koncepcjach, kluczowych funkcjach i zrozumiesz, jak azd upraszcza wdrażanie aplikacji natywnych dla chmury.
 
 ## Cele nauki
 
-Po zakończeniu tej lekcji będziesz:
+Pod koniec tej lekcji będziesz:
 - Rozumieć, czym jest Azure Developer CLI i jego główny cel
-- Poznać podstawowe koncepcje, takie jak szablony, środowiska i usługi
-- Odkrywać kluczowe funkcje, w tym rozwój oparty na szablonach i Infrastructure as Code
-- Rozumieć strukturę projektu azd i przepływ pracy
+- Poznać kluczowe koncepcje, takie jak szablony, środowiska i usługi
+- Zbadać kluczowe funkcje, w tym rozwój oparty na szablonach i Infrastructure as Code
+- Zrozumieć strukturę projektu azd i przepływ pracy
 - Przygotowany do instalacji i konfiguracji azd w swoim środowisku deweloperskim
 
 ## Efekty nauki
@@ -35,9 +42,9 @@ Po ukończeniu tej lekcji będziesz w stanie:
 
 ## Czym jest Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) to narzędzie wiersza poleceń zaprojektowane, aby przyspieszyć przejście od lokalnego rozwoju do wdrożenia w Azure. Upraszcza proces budowania, wdrażania i zarządzania aplikacjami natywnymi dla chmury na platformie Azure.
+Azure Developer CLI (azd) to narzędzie wiersza poleceń zaprojektowane, aby przyspieszyć przejście od lokalnego rozwoju do wdrożenia w Azure. Upraszcza proces budowania, wdrażania i zarządzania aplikacjami natywnymi dla chmury w Azure.
 
-## Podstawowe koncepcje
+## Kluczowe koncepcje
 
 ### Szablony
 Szablony są podstawą azd. Zawierają:
@@ -58,11 +65,11 @@ Każde środowisko utrzymuje własne:
 - Stan wdrożenia
 
 ### Usługi
-Usługi są podstawowymi elementami Twojej aplikacji:
+Usługi są elementami składowymi Twojej aplikacji:
 - **Frontend** - Aplikacje webowe, SPA
 - **Backend** - API, mikrousługi
 - **Baza danych** - Rozwiązania do przechowywania danych
-- **Przechowywanie** - Przechowywanie plików i obiektów blob
+- **Przechowywanie** - Przechowywanie plików i blobów
 
 ## Kluczowe funkcje
 
@@ -203,10 +210,10 @@ Polecenie `azd down --force --purge` to potężny sposób na całkowite usunięc
 --purge
 ```
 Usuwa **wszystkie powiązane metadane**, w tym:
-Stan środowiska
-Lokalny folder `.azure`
-Zbuforowane informacje o wdrożeniu
-Zapobiega "zapamiętywaniu" przez azd poprzednich wdrożeń, co może powodować problemy, takie jak niedopasowane grupy zasobów lub nieaktualne odwołania do rejestrów.
+Stan środowiska  
+Lokalny folder `.azure`  
+Zbuforowane informacje o wdrożeniu  
+Zapobiega "zapamiętywaniu" poprzednich wdrożeń przez azd, co może powodować problemy, takie jak niedopasowane grupy zasobów lub nieaktualne odwołania do rejestrów.
 
 ### Dlaczego używać obu?
 Gdy napotkasz problemy z `azd up` z powodu pozostałego stanu lub częściowych wdrożeń, ta kombinacja zapewnia **czystą kartę**.
@@ -236,7 +243,7 @@ azd template show <template>   # Template details
 azd init --help               # Initialization options
 ```
 
-### Zarządzanie projektami
+### Zarządzanie projektem
 ```bash
 azd show                     # Project overview
 azd env show                 # Current environment
@@ -264,18 +271,18 @@ azd init --template template1
 ```
 
 ### 2. Wykorzystuj szablony
-- Zaczynaj od istniejących szablonów
-- Dostosowuj je do swoich potrzeb
+- Rozpocznij od istniejących szablonów
+- Dostosuj je do swoich potrzeb
 - Twórz szablony wielokrotnego użytku dla swojej organizacji
 
 ### 3. Izolacja środowisk
-- Używaj oddzielnych środowisk dla rozwoju/staging/produkcji
+- Używaj oddzielnych środowisk dla dev/staging/prod
 - Nigdy nie wdrażaj bezpośrednio do produkcji z lokalnej maszyny
 - Używaj pipeline'ów CI/CD do wdrożeń produkcyjnych
 
 ### 4. Zarządzanie konfiguracją
 - Używaj zmiennych środowiskowych dla danych wrażliwych
-- Przechowuj konfigurację w systemie kontroli wersji
+- Przechowuj konfigurację w kontroli wersji
 - Dokumentuj ustawienia specyficzne dla środowiska
 
 ## Postęp w nauce
@@ -295,14 +302,18 @@ azd init --template template1
 ### Zaawansowany (Tydzień 5+)
 1. Twórz własne szablony
 2. Zaawansowane wzorce infrastruktury
-3. Wdrożenia w wielu regionach
+3. Wdrożenia wieloregionowe
 4. Konfiguracje na poziomie przedsiębiorstwa
 
 ## Kolejne kroki
 
+**📖 Kontynuuj naukę w Rozdziale 1:**
 - [Instalacja i konfiguracja](installation.md) - Zainstaluj i skonfiguruj azd
-- [Twój pierwszy projekt](first-project.md) - Praktyczny tutorial
+- [Twój pierwszy projekt](first-project.md) - Ukończ praktyczny tutorial
 - [Przewodnik konfiguracji](configuration.md) - Zaawansowane opcje konfiguracji
+
+**🎯 Gotowy na kolejny rozdział?**
+- [Rozdział 2: Rozwój oparty na AI](../ai-foundry/azure-ai-foundry-integration.md) - Zacznij budować aplikacje AI
 
 ## Dodatkowe zasoby
 
@@ -312,10 +323,14 @@ azd init --template template1
 
 ---
 
-**Poprzednie:** [Instalacja i konfiguracja](installation.md) | **Następne:** [Konfiguracja](configuration.md)
-- **Następna lekcja**: [Instalacja i konfiguracja](installation.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 1 - Podstawy i szybki start  
+- **⬅️ Poprzedni**: [Przegląd kursu](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Następny**: [Instalacja i konfiguracja](installation.md)
+- **🚀 Następny rozdział**: [Rozdział 2: Rozwój oparty na AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

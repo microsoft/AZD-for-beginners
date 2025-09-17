@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T17:28:31+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T16:44:52+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "pl"
 }
 -->
 # Przewodnik po wyborze SKU - Wybór odpowiednich poziomów usług Azure
+
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 6 - Walidacja i planowanie przed wdrożeniem
+- **⬅️ Poprzedni**: [Planowanie pojemności](capacity-planning.md)
+- **➡️ Następny**: [Kontrole przed wdrożeniem](preflight-checks.md)
+- **🚀 Następny rozdział**: [Rozdział 7: Rozwiązywanie problemów](../troubleshooting/common-issues.md)
 
 ## Wprowadzenie
 
@@ -15,23 +22,23 @@ Ten kompleksowy przewodnik pomoże Ci wybrać optymalne SKU (Stock Keeping Units
 
 ## Cele nauki
 
-Po ukończeniu tego przewodnika:
-- Zrozumiesz koncepcje SKU Azure, modele cenowe i różnice w funkcjach
-- Opanujesz strategie wyboru SKU dla specyficznych środowisk: deweloperskich, testowych i produkcyjnych
-- Przeanalizujesz wymagania obciążeń i dopasujesz je do odpowiednich poziomów usług
-- Wdrożysz strategie optymalizacji kosztów poprzez inteligentny wybór SKU
-- Zastosujesz techniki testowania wydajności i walidacji wyboru SKU
-- Skonfigurujesz automatyczne rekomendacje SKU i monitorowanie
+Po ukończeniu tego przewodnika będziesz:
+- Rozumieć koncepcje SKU Azure, modele cenowe i różnice w funkcjach
+- Opanować strategie wyboru SKU specyficzne dla środowiska: rozwoju, testowania i produkcji
+- Analizować wymagania obciążeń i dopasowywać je do odpowiednich poziomów usług
+- Wdrażać strategie optymalizacji kosztów poprzez inteligentny wybór SKU
+- Stosować techniki testowania wydajności i walidacji dla wybranych SKU
+- Konfigurować automatyczne rekomendacje SKU i monitorowanie
 
 ## Efekty nauki
 
 Po ukończeniu będziesz w stanie:
 - Wybrać odpowiednie SKU usług Azure na podstawie wymagań i ograniczeń obciążeń
-- Zaprojektować ekonomiczne architektury wielośrodowiskowe z właściwym wyborem poziomów usług
-- Wdrożyć benchmarking wydajności i walidację wyboru SKU
-- Stworzyć narzędzia automatyzujące rekomendacje SKU i optymalizację kosztów
-- Zaplanować migracje SKU i strategie skalowania dla zmieniających się wymagań
-- Zastosować zasady Azure Well-Architected Framework do wyboru poziomów usług
+- Projektować ekonomiczne architektury wielośrodowiskowe z właściwym wyborem poziomów usług
+- Wdrażać testy wydajności i walidację dla wybranych SKU
+- Tworzyć narzędzia automatyzujące rekomendacje SKU i optymalizację kosztów
+- Planować migracje SKU i strategie skalowania dla zmieniających się wymagań
+- Stosować zasady Azure Well-Architected Framework do wyboru poziomów usług
 
 ## Spis treści
 
@@ -41,7 +48,7 @@ Po ukończeniu będziesz w stanie:
 - [Strategie optymalizacji kosztów](../../../../docs/pre-deployment)
 - [Uwagi dotyczące wydajności](../../../../docs/pre-deployment)
 - [Tabele szybkiego odniesienia](../../../../docs/pre-deployment)
-- [Narzędzia walidacyjne](../../../../docs/pre-deployment)
+- [Narzędzia walidacji](../../../../docs/pre-deployment)
 
 ---
 
@@ -49,12 +56,12 @@ Po ukończeniu będziesz w stanie:
 
 ### Czym są SKU?
 
-SKU (Stock Keeping Units) reprezentują różne poziomy usług i wydajności dla zasobów Azure. Każde SKU oferuje różne:
+SKU (Stock Keeping Units) reprezentują różne poziomy usług i poziomy wydajności dla zasobów Azure. Każde SKU oferuje różne:
 
 - **Charakterystyki wydajnościowe** (CPU, pamięć, przepustowość)
 - **Dostępność funkcji** (opcje skalowania, poziomy SLA)
-- **Modele cenowe** (na podstawie zużycia, rezerwacja zasobów)
-- **Dostępność regionalną** (nie wszystkie SKU są dostępne we wszystkich regionach)
+- **Modele cenowe** (na podstawie zużycia, zarezerwowanej pojemności)
+- **Dostępność regionalna** (nie wszystkie SKU są dostępne we wszystkich regionach)
 
 ### Kluczowe czynniki przy wyborze SKU
 
@@ -63,17 +70,17 @@ SKU (Stock Keeping Units) reprezentują różne poziomy usług i wydajności dla
    - Wymagania wydajnościowe (CPU, pamięć, I/O)
    - Potrzeby magazynowe i wzorce dostępu
 
-2. **Rodzaj środowiska**
-   - Rozwój/testy vs. produkcja
+2. **Typ środowiska**
+   - Rozwój/testowanie vs. produkcja
    - Wymagania dotyczące dostępności
    - Potrzeby w zakresie bezpieczeństwa i zgodności
 
 3. **Ograniczenia budżetowe**
    - Koszty początkowe vs. koszty operacyjne
-   - Zniżki na rezerwację zasobów
+   - Zniżki na zarezerwowaną pojemność
    - Koszty związane z automatycznym skalowaniem
 
-4. **Prognozy wzrostu**
+4. **Projekcje wzrostu**
    - Wymagania dotyczące skalowalności
    - Przyszłe potrzeby funkcjonalne
    - Złożoność migracji
@@ -82,7 +89,7 @@ SKU (Stock Keeping Units) reprezentują różne poziomy usług i wydajności dla
 
 ## Wybór oparty na środowisku
 
-### Środowisko deweloperskie
+### Środowisko rozwojowe
 
 **Priorytety**: Optymalizacja kosztów, podstawowa funkcjonalność, łatwe wdrażanie/usuwanie
 
@@ -100,7 +107,7 @@ skus:
 ```
 
 #### Charakterystyka
-- **App Service**: F1 (Free) lub B1 (Basic) dla prostych testów
+- **App Service**: F1 (Free) lub B1 (Basic) dla prostego testowania
 - **Bazy danych**: Podstawowy poziom z minimalnymi zasobami
 - **Magazyn**: Standardowy z lokalną redundancją
 - **Obliczenia**: Akceptowalne zasoby współdzielone
@@ -147,7 +154,7 @@ skus:
 ```
 
 #### Charakterystyka
-- **Wysoka dostępność**: Wymagania SLA 99,9%+
+- **Wysoka dostępność**: Wymagania SLA 99.9%+
 - **Wydajność**: Dedykowane zasoby, wysoka przepustowość
 - **Bezpieczeństwo**: Funkcje bezpieczeństwa premium
 - **Skalowanie**: Pełne możliwości automatycznego skalowania
@@ -163,8 +170,8 @@ skus:
 
 | Zastosowanie | Rekomendowane SKU | Uzasadnienie |
 |--------------|-------------------|--------------|
-| Rozwój/testy | F1 (Free) lub B1 (Basic) | Ekonomiczne, wystarczające do testów |
-| Małe aplikacje produkcyjne | S1 (Standard) | Domeny niestandardowe, SSL, automatyczne skalowanie |
+| Rozwój/testowanie | F1 (Free) lub B1 (Basic) | Ekonomiczne, wystarczające do testów |
+| Małe aplikacje produkcyjne | S1 (Standard) | Własne domeny, SSL, automatyczne skalowanie |
 | Średnie aplikacje produkcyjne | P1V3 (Premium V3) | Lepsza wydajność, więcej funkcji |
 | Aplikacje o dużym ruchu | P2V3 lub P3V3 | Dedykowane zasoby, wysoka wydajność |
 | Aplikacje krytyczne | I1V2 (Isolated V2) | Izolacja sieciowa, dedykowany sprzęt |
@@ -208,12 +215,12 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 #### Ramy wyboru SKU
 
 1. **Oparte na DTU (Database Transaction Units)**
-   - **Podstawowy**: 5 DTU - Rozwój/testy
-   - **Standardowy**: S0-S12 (10-3000 DTU) - Ogólne zastosowanie
+   - **Podstawowe**: 5 DTU - Rozwój/testowanie
+   - **Standardowe**: S0-S12 (10-3000 DTU) - Ogólne zastosowanie
    - **Premium**: P1-P15 (125-4000 DTU) - Krytyczne dla wydajności
 
 2. **Oparte na vCore** (zalecane dla produkcji)
-   - **Ogólne zastosowanie**: Zrównoważone zasoby obliczeniowe i magazynowe
+   - **Ogólne przeznaczenie**: Zrównoważone zasoby obliczeniowe i magazynowe
    - **Biznes krytyczny**: Niska latencja, wysoki IOPS
    - **Hyperscale**: Wysoce skalowalny magazyn (do 100TB)
 
@@ -330,7 +337,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 1. **Ręcznie przydzielona przepustowość**
    - Przewidywalna wydajność
-   - Zniżki na rezerwację zasobów
+   - Zniżki na zarezerwowaną pojemność
    - Najlepsze dla stabilnych obciążeń
 
 2. **Automatyczne skalowanie przepustowości**
@@ -341,7 +348,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 3. **Serverless**
    - Płatność za żądanie
    - Brak przydzielonej przepustowości
-   - Idealne dla rozwoju i sporadycznych obciążeń
+   - Idealne dla rozwoju i przerywanych obciążeń
 
 #### Przykłady SKU
 
@@ -403,13 +410,13 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 #### Typy kont magazynowych
 
 1. **Standard_LRS** - Rozwój, dane niekrytyczne
-2. **Standard_GRS** - Produkcja, wymagana redundancja geograficzna
+2. **Standard_GRS** - Produkcja, wymagana geo-redundancja
 3. **Premium_LRS** - Aplikacje o wysokiej wydajności
 4. **Premium_ZRS** - Wysoka dostępność z redundancją strefową
 
 #### Poziomy wydajności
 
-- **Standardowy**: Ogólne zastosowanie, ekonomiczne
+- **Standardowe**: Ogólne zastosowanie, ekonomiczne
 - **Premium**: Wysoka wydajność, scenariusze o niskiej latencji
 
 ```bicep
@@ -453,7 +460,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## Strategie optymalizacji kosztów
 
-### 1. Rezerwacja zasobów
+### 1. Zarezerwowana pojemność
 
 Rezerwuj zasoby na 1-3 lata, aby uzyskać znaczące zniżki:
 
@@ -481,7 +488,7 @@ production:
 
 ### 3. Konfiguracja automatycznego skalowania
 
-Wdrożenie inteligentnego skalowania w celu optymalizacji kosztów:
+Wdrażaj inteligentne skalowanie, aby optymalizować koszty:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -607,7 +614,7 @@ performance_requirements:
 
 ### Testy obciążeniowe
 
-Przetestuj różne SKU, aby zweryfikować wydajność:
+Testuj różne SKU, aby zweryfikować wydajność:
 
 ```bash
 # Azure Load Testing service
@@ -663,22 +670,22 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | SKU | Poziom | DTU/vCore | Magazyn | Zakres cenowy | Zastosowanie |
 |-----|--------|-----------|---------|---------------|--------------|
 | Basic | Podstawowy | 5 DTU | 2GB | $ | Rozwój |
-| S2 | Standardowy | 50 DTU | 250GB | $$ | Mała produkcja |
+| S2 | Standard | 50 DTU | 250GB | $$ | Mała produkcja |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Wysoka wydajność |
-| GP_Gen5_4 | Ogólne zastosowanie | 4 vCore | 4TB | $$$ | Zrównoważone |
-| BC_Gen5_8 | Biznes krytyczny | 8 vCore | 4TB | $$$$ | Krytyczne |
+| GP_Gen5_4 | Ogólne przeznaczenie | 4 vCore | 4TB | $$$ | Zrównoważone |
+| BC_Gen5_8 | Biznes krytyczny | 8 vCore | 4TB | $$$$ | Krytyczne dla biznesu |
 
 ### Szybkie odniesienie SKU dla Container Apps
 
 | Model | Cennik | CPU/Pamięć | Zastosowanie |
 |-------|--------|------------|--------------|
 | Zużycie | Płatność za użycie | 0.25-2 vCPU | Rozwój, zmienne obciążenie |
-| Dedykowane D4 | Rezerwacja | 4 vCPU, 16GB | Produkcja |
-| Dedykowane D8 | Rezerwacja | 8 vCPU, 32GB | Wysoka wydajność |
+| Dedykowane D4 | Zarezerwowane | 4 vCPU, 16GB | Produkcja |
+| Dedykowane D8 | Zarezerwowane | 8 vCPU, 32GB | Wysoka wydajność |
 
 ---
 
-## Narzędzia walidacyjne
+## Narzędzia walidacji
 
 ### Narzędzie do sprawdzania dostępności SKU
 
@@ -789,11 +796,11 @@ test_configuration:
 
 ### Co robić
 
-1. **Zacznij od małych SKU i skaluj w górę** na podstawie rzeczywistego użycia
+1. **Zaczynaj od małych SKU i skaluj w górę** na podstawie rzeczywistego użycia
 2. **Używaj różnych SKU dla różnych środowisk**
 3. **Monitoruj wydajność i koszty na bieżąco**
-4. **Wykorzystaj rezerwację zasobów dla obciążeń produkcyjnych**
-5. **Wdroż automatyczne skalowanie tam, gdzie to odpowiednie**
+4. **Wykorzystuj zarezerwowaną pojemność dla obciążeń produkcyjnych**
+5. **Wdrażaj automatyczne skalowanie tam, gdzie to możliwe**
 6. **Testuj wydajność na realistycznych obciążeniach**
 7. **Planuj wzrost, ale unikaj nadmiernego przydzielania zasobów**
 8. **Używaj darmowych poziomów dla rozwoju, gdy to możliwe**
@@ -801,7 +808,7 @@ test_configuration:
 ### Czego unikać
 
 1. **Nie używaj SKU produkcyjnych dla rozwoju**
-2. **Nie ignoruj regionalnej dostępności SKU**
+2. **Nie ignoruj dostępności SKU w regionach**
 3. **Nie zapominaj o kosztach transferu danych**
 4. **Nie przydzielaj nadmiernych zasobów bez uzasadnienia**
 5. **Nie ignoruj wpływu zależności**

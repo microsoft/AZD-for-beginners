@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T17:15:53+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T16:41:18+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "pl"
 }
 -->
-# Przewodnik Konfiguracyjny
+# Przewodnik Konfiguracji
 
-**Poprzedni:** [Podstawy AZD](azd-basics.md) | **Następny:** [Pierwszy Projekt](first-project.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 3 - Konfiguracja i uwierzytelnianie
+- **⬅️ Poprzedni**: [Twój pierwszy projekt](first-project.md)
+- **➡️ Następny**: [Przewodnik wdrożeniowy](../deployment/deployment-guide.md)
+- **🚀 Następny rozdział**: [Rozdział 4: Infrastruktura jako kod](../deployment/deployment-guide.md)
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik obejmuje wszystkie aspekty konfiguracji Azure Developer CLI, aby zapewnić optymalne procesy rozwoju i wdrażania. Dowiesz się o hierarchii konfiguracji, zarządzaniu środowiskami, metodach uwierzytelniania oraz zaawansowanych wzorcach konfiguracji, które umożliwiają efektywne i bezpieczne wdrożenia w Azure.
+Ten kompleksowy przewodnik obejmuje wszystkie aspekty konfiguracji Azure Developer CLI, aby zoptymalizować procesy tworzenia i wdrażania. Dowiesz się o hierarchii konfiguracji, zarządzaniu środowiskami, metodach uwierzytelniania oraz zaawansowanych wzorcach konfiguracji, które umożliwiają efektywne i bezpieczne wdrożenia w Azure.
 
 ## Cele nauki
 
@@ -27,15 +32,15 @@ Po zakończeniu tej lekcji będziesz:
 ## Rezultaty nauki
 
 Po ukończeniu tej lekcji będziesz w stanie:
-- Skonfigurować azd dla optymalnych procesów rozwoju
+- Skonfigurować azd dla optymalnych procesów tworzenia
 - Ustawić i zarządzać wieloma środowiskami wdrożeniowymi
 - Wdrażać praktyki bezpiecznego zarządzania konfiguracją
 - Rozwiązywać problemy związane z konfiguracją
 - Dostosowywać działanie azd do specyficznych wymagań organizacyjnych
 
-Ten kompleksowy przewodnik obejmuje wszystkie aspekty konfiguracji Azure Developer CLI, aby zapewnić optymalne procesy rozwoju i wdrażania.
+Ten kompleksowy przewodnik obejmuje wszystkie aspekty konfiguracji Azure Developer CLI, aby zoptymalizować procesy tworzenia i wdrażania.
 
-## Hierarchia Konfiguracji
+## Hierarchia konfiguracji
 
 azd korzysta z hierarchicznego systemu konfiguracji:
 1. **Flagi wiersza poleceń** (najwyższy priorytet)
@@ -44,9 +49,9 @@ azd korzysta z hierarchicznego systemu konfiguracji:
 4. **Globalna konfiguracja użytkownika** (`~/.azd/config.json`)
 5. **Wartości domyślne** (najniższy priorytet)
 
-## Konfiguracja Globalna
+## Konfiguracja globalna
 
-### Ustawianie Domyślnych Wartości Globalnych
+### Ustawianie domyślnych wartości globalnych
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -64,7 +69,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Typowe Ustawienia Globalne
+### Typowe ustawienia globalne
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -80,7 +85,7 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ Konfiguracja Projektu
+## 🏗️ Konfiguracja projektu
 
 ### Struktura azure.yaml
 Plik `azure.yaml` jest sercem Twojego projektu azd:
@@ -159,9 +164,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Opcje Konfiguracji Usług
+### Opcje konfiguracji usług
 
-#### Typy Hostów
+#### Typy hostów
 ```yaml
 services:
   web-static:
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Ustawienia Specyficzne dla Języka
+#### Ustawienia specyficzne dla języka
 ```yaml
 services:
   node-app:
@@ -204,9 +209,9 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Zarządzanie Środowiskami
+## 🌟 Zarządzanie środowiskami
 
-### Tworzenie Środowisk
+### Tworzenie środowisk
 ```bash
 # Create a new environment
 azd env new development
@@ -218,7 +223,7 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Konfiguracja Środowiska
+### Konfiguracja środowiska
 Każde środowisko ma własną konfigurację w `.azure/<env-name>/config.json`:
 
 ```json
@@ -241,7 +246,7 @@ Każde środowisko ma własną konfigurację w `.azure/<env-name>/config.json`:
 }
 ```
 
-### Zmienne Środowiskowe
+### Zmienne środowiskowe
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -255,7 +260,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-### Szablony Środowisk
+### Szablony środowisk
 Utwórz `.azure/env.template`, aby zapewnić spójne ustawienia środowiska:
 ```bash
 # Required variables
@@ -272,7 +277,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Konfiguracja Uwierzytelniania
+## 🔐 Konfiguracja uwierzytelniania
 
 ### Integracja z Azure CLI
 ```bash
@@ -299,7 +304,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Zarządzana Tożsamość
+### Zarządzana tożsamość
 Dla środowisk hostowanych w Azure:
 ```bash
 # Enable managed identity authentication
@@ -307,7 +312,7 @@ azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Konfiguracja Infrastruktury
+## 🏗️ Konfiguracja infrastruktury
 
 ### Parametry Bicep
 Konfiguruj parametry infrastruktury w `infra/main.parameters.json`:
@@ -341,9 +346,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Konfiguracja Wdrożenia
+## 🚀 Konfiguracja wdrożeniowa
 
-### Konfiguracja Budowania
+### Konfiguracja budowania
 ```yaml
 # In azure.yaml
 services:
@@ -366,7 +371,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Konfiguracja Dockera
+### Konfiguracja Docker
 ```yaml
 services:
   api:
@@ -382,9 +387,9 @@ services:
 ```
 Przykładowy `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Zaawansowana Konfiguracja
+## 🔧 Zaawansowana konfiguracja
 
-### Niestandardowe Nazewnictwo Zasobów
+### Niestandardowe nazewnictwo zasobów
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -392,7 +397,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Konfiguracja Sieci
+### Konfiguracja sieci
 ```yaml
 # In azure.yaml
 infra:
@@ -403,7 +408,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Konfiguracja Monitorowania
+### Konfiguracja monitorowania
 ```yaml
 # In azure.yaml
 monitoring:
@@ -415,9 +420,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Konfiguracje Specyficzne dla Środowiska
+## 🎯 Konfiguracje specyficzne dla środowiska
 
-### Środowisko Rozwojowe
+### Środowisko deweloperskie
 ```bash
 # .azure/development/.env
 DEBUG=true
@@ -426,7 +431,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Środowisko Testowe
+### Środowisko testowe
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -435,7 +440,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Środowisko Produkcyjne
+### Środowisko produkcyjne
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -444,9 +449,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Walidacja Konfiguracji
+## 🔍 Walidacja konfiguracji
 
-### Walidacja Konfiguracji
+### Walidacja konfiguracji
 ```bash
 # Check configuration syntax
 azd config validate
@@ -458,7 +463,7 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Skrypty Konfiguracji
+### Skrypty konfiguracji
 Twórz skrypty walidacyjne w `scripts/`:
 
 ```bash
@@ -482,9 +487,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Najlepsze Praktyki
+## 🎓 Najlepsze praktyki
 
-### 1. Korzystaj ze Zmiennych Środowiskowych
+### 1. Korzystaj ze zmiennych środowiskowych
 ```yaml
 # Good: Use environment variables
 database:
@@ -495,7 +500,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organizuj Pliki Konfiguracyjne
+### 2. Organizuj pliki konfiguracyjne
 ```
 .azure/
 ├── config.json              # Global project config
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Rozważania Dotyczące Kontroli Wersji
+### 3. Rozważania dotyczące kontroli wersji
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -519,7 +524,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Dokumentacja Konfiguracji
+### 4. Dokumentacja konfiguracji
 Dokumentuj swoją konfigurację w `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -535,24 +540,28 @@ Dokumentuj swoją konfigurację w `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## Kolejne Kroki
+## Kolejne kroki
 
-- [Twój Pierwszy Projekt](first-project.md) - Zastosowanie konfiguracji w praktyce
-- [Przewodnik Wdrożeniowy](../deployment/deployment-guide.md) - Wykorzystanie konfiguracji do wdrożenia
-- [Tworzenie Zasobów](../deployment/provisioning.md) - Konfiguracje gotowe do produkcji
+- [Twój pierwszy projekt](first-project.md) - Zastosowanie konfiguracji w praktyce
+- [Przewodnik wdrożeniowy](../deployment/deployment-guide.md) - Wykorzystanie konfiguracji do wdrożenia
+- [Tworzenie zasobów](../deployment/provisioning.md) - Konfiguracje gotowe do produkcji
 
 ## Źródła
 
-- [Referencja Konfiguracji azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Referencja konfiguracji azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schemat azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Zmienne Środowiskowe](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [Zmienne środowiskowe](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Poprzedni:** [Podstawy AZD](azd-basics.md) | **Następny:** [Pierwszy Projekt](first-project.md)
-- **Następna Lekcja**: [Twój Pierwszy Projekt](first-project.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 3 - Konfiguracja i uwierzytelnianie
+- **⬅️ Poprzedni**: [Twój pierwszy projekt](first-project.md)
+- **➡️ Następny rozdział**: [Rozdział 4: Infrastruktura jako kod](../deployment/deployment-guide.md)
+- **Następna lekcja**: [Twój pierwszy projekt](first-project.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, należy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
