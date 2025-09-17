@@ -22,6 +22,36 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.1.0] - 2025-09-17
+
+#### Enhanced Multi-Agent AI Solutions
+**This version improves the multi-agent retail solution with better agent naming and enhanced documentation.**
+
+#### Changed
+- **Multi-Agent Terminology**: Replaced "Cora agent" with "Customer agent" throughout retail multi-agent solution for clearer understanding
+- **Agent Architecture**: Updated all documentation, ARM templates, and code examples to use consistent "Customer agent" naming
+- **Configuration Examples**: Modernized agent configuration patterns with updated naming conventions
+- **Documentation Consistency**: Ensured all references use professional, descriptive agent names
+
+#### Enhanced
+- **ARM Template Package**: Updated retail-multiagent-arm-template with Customer agent references
+- **Architecture Diagrams**: Refreshed Mermaid diagrams with updated agent naming
+- **Code Examples**: Python classes and implementation examples now use CustomerAgent naming
+- **Environment Variables**: Updated all deployment scripts to use CUSTOMER_AGENT_NAME conventions
+
+#### Improved
+- **Developer Experience**: Clearer agent roles and responsibilities in documentation
+- **Production Readiness**: Better alignment with enterprise naming conventions
+- **Learning Materials**: More intuitive agent naming for educational purposes
+- **Template Usability**: Simplified understanding of agent functions and deployment patterns
+
+#### Technical Details
+- Updated Mermaid architecture diagrams with CustomerAgent references
+- Replaced CoraAgent class names with CustomerAgent in Python examples
+- Modified ARM template JSON configurations to use "customer" agent type
+- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns
+- Refreshed all deployment commands and container configurations
+
 ### [v3.0.0] - 2025-09-12
 
 #### Major Changes - AI Developer Focus and Azure AI Foundry Integration

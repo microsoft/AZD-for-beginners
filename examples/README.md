@@ -58,6 +58,27 @@ Azure Samples AZD Templates (linked externally):
 2. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** - Document analysis using Azure AI services
 3. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps workflow with Azure Machine Learning
 
+### Real-World Scenarios
+
+#### **Retail Multi-Agent Solution** 🆕
+**[Complete Implementation Guide](./retail-scenario.md)**
+
+A comprehensive, production-ready multi-agent customer support solution that demonstrates enterprise-grade AI application deployment with AZD. This scenario provides:
+
+- **Complete Architecture**: Multi-agent system with specialized customer service and inventory management agents
+- **Production Infrastructure**: Multi-region Azure OpenAI deployments, AI Search, Container Apps, and comprehensive monitoring
+- **Ready-to-Deploy ARM Template**: One-click deployment with multiple configuration modes (Minimal/Standard/Premium)
+- **Advanced Features**: Red teaming security validation, agent evaluation framework, cost optimization, and troubleshooting guides
+- **Real Business Context**: Retailer customer support use case with file uploads, search integration, and dynamic scaling
+
+**Technologies**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)
+
+**Perfect for**: AI developers, solution architects, and teams building production multi-agent systems
+
+**Quick Start**: Deploy the complete solution in under 30 minutes using the included ARM template with `./deploy.sh -g myResourceGroup`
+
 ## 📋 Usage Instructions
 
 ### Running Examples Locally
@@ -229,6 +250,7 @@ The `configurations/` directory contains reusable components:
 | Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
 ## 🎓 Learning Path
 
@@ -274,19 +296,24 @@ The `configurations/` directory contains reusable components:
 - **React**: React SPA + Functions
 - **Containers**: Python Flask Container App, Java Microservices
 - **Databases**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Systems**: **Retail Multi-Agent Solution**
+- **Enterprise Production**: **Retail Multi-Agent Solution**
 
 ### By Architecture Pattern
 - **Monolithic**: Node.js Express Todo, C# Web API + SQL
 - **Static + Serverless**: React SPA + Functions, Python Functions + SPA
 - **Microservices**: Java Spring Boot Microservices
 - **Containerized**: Python Flask Container App
-- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
+- **Enterprise Multi-Service**: **Retail Multi-Agent Solution**
 
 ### By Complexity Level
 - **Beginner**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
 - **Intermediate**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
 - **Advanced**: ML Pipeline
+- **Enterprise Production-Ready**: **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
 
 ## 📚 Additional Resources
 

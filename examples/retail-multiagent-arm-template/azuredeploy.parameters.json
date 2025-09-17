@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "projectName": {
+      "value": "retail"
+    },
+    "location": {
+      "value": "eastus2"
+    },
+    "secondaryLocation": {
+      "value": "westus2"
+    },
+    "tertiaryLocation": {
+      "value": "francecentral"
+    },
+    "environmentName": {
+      "value": "dev"
+    },
+    "deploymentMode": {
+      "value": "standard"
+    },
+    "openAiApiVersion": {
+      "value": "2024-10-21"
+    },
+    "enableMultiRegion": {
+      "value": true
+    },
+    "enableMonitoring": {
+      "value": true
+    },
+    "enableSecurity": {
+      "value": true
+    }
+  }
+}

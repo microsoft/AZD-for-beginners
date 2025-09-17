@@ -148,8 +148,9 @@ azd init --template contoso-chat
 1. **Quick Start**: Try [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) template
 2. **Learn Fundamentals**: [AZD Basics](docs/getting-started/azd-basics.md) + [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
 3. **Hands-On Practice**: Complete [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
-4. **Production Ready**: Review [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
-5. **Advanced**: Deploy [contoso-chat](https://github.com/Azure-Samples/contoso-chat) enterprise template
+4. **Multi-Agent Solutions**: Deploy our [Retail Multi-Agent Solution](examples/retail-scenario.md) with Customer and Inventory agents
+5. **Production Ready**: Review [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md)
+6. **Advanced**: Deploy [contoso-chat](https://github.com/Azure-Samples/contoso-chat) enterprise template
 
 ### For Students & Beginners
 1. Start with [AZD Basics](docs/getting-started/azd-basics.md)
@@ -216,7 +217,7 @@ azd init --template contoso-chat
 | [**Multi-modal content processing**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Process claims, invoices, contracts and other documents quickly and accurately by extracting information from unstructured content and mapping it to a structured format. This template supports text, images, tables and graphs. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
 
 ### Featured: Azure AI Foundry E2E Scenarios
-**Start here if you're deploying AI applications!**
+**Production-ready AI application templates with complete deployment scenarios!**
 
 | Template | Description | Complexity | Services |
 |----------|-------------|------------|----------|
@@ -225,6 +226,7 @@ azd init --template contoso-chat
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Document analysis with AI services | ⭐⭐ | Azure Document Intelligence + Functions |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | AI agent framework with function calling | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Enterprise chat with AI orchestration | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | **NEW**: Multi-agent retail solution with Customer and Inventory agents | ⭐⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps + ARM Templates |
 
 ### Additional AZD Templates
 - [**Examples Directory**](examples/README.md) - Practical examples, templates, and real-world scenarios
