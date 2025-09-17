@@ -1,36 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T17:48:23+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-17T13:28:22+00:00",
   "source_file": "workshop/README.md",
   "language_code": "fr"
 }
 -->
 # Atelier AZD pour les développeurs IA
 
-**Précédent :** [Guide de dépannage IA](../docs/troubleshooting/ai-troubleshooting.md) | **Suivant :** [Modules de l'atelier](../../../workshop)
+**Navigation de l'atelier**
+- **📚 Accueil du cours** : [AZD pour débutants](../README.md)
+- **📖 Chapitres associés** : Couvre [Chapitre 1](../README.md#-chapter-1-foundation--quick-start), [Chapitre 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), et [Chapitre 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Atelier pratique** : [Atelier IA](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Prochaines étapes** : [Modules de l'atelier](../../../workshop)
 
-Bienvenue dans cet atelier pratique pour apprendre à utiliser Azure Developer CLI (AZD) avec un focus sur le déploiement d'applications IA. Cet atelier est conçu pour vous guider des bases d'AZD jusqu'au déploiement de solutions IA prêtes pour la production.
+Bienvenue dans cet atelier pratique pour apprendre Azure Developer CLI (AZD) avec un focus sur le déploiement d'applications IA. Cet atelier est conçu pour vous guider des bases d'AZD jusqu'au déploiement de solutions IA prêtes pour la production.
 
 ## Aperçu de l'atelier
 
 **Durée :** 2-3 heures  
 **Niveau :** Débutant à intermédiaire  
-**Prérequis :** Connaissances de base sur Azure, les outils en ligne de commande et les concepts IA
+**Prérequis :** Connaissances de base sur Azure, les outils en ligne de commande et les concepts d'IA
 
-### Ce que vous allez apprendre
+### Ce que vous apprendrez
 
-- **Les fondamentaux d'AZD** : Comprendre l'infrastructure en tant que code avec AZD
+- **Fondamentaux d'AZD** : Comprendre l'infrastructure en tant que code avec AZD
 - 🤖 **Intégration des services IA** : Déployer Azure OpenAI, AI Search et d'autres services IA
 - **Déploiement de conteneurs** : Utiliser Azure Container Apps pour les applications IA
 - **Meilleures pratiques de sécurité** : Implémenter Managed Identity et des configurations sécurisées
 - **Surveillance et observabilité** : Configurer Application Insights pour les charges de travail IA
-- **Modèles de production** : Stratégies de déploiement adaptées aux entreprises
+- **Modèles de production** : Stratégies de déploiement prêtes pour l'entreprise
 
 ## Structure de l'atelier
 
-### Module 1 : Fondamentaux d'AZD (30 minutes)
+### Module 1 : Fondations d'AZD (30 minutes)
 - Installer et configurer AZD
 - Comprendre la structure des projets AZD
 - Votre premier déploiement avec AZD
@@ -43,7 +47,7 @@ Bienvenue dans cet atelier pratique pour apprendre à utiliser Azure Developer C
 - **Lab** : Déployer une application de chat avec GPT-4
 
 ### Module 3 : Applications RAG (45 minutes)
-- Intégration avec Azure AI Search
+- Intégration d'Azure AI Search
 - Traitement de documents avec Azure Document Intelligence
 - Embeddings vectoriels et recherche sémantique
 - **Lab** : Construire un système de questions-réponses basé sur des documents
@@ -142,7 +146,7 @@ echo "Setup verification complete!"
 
 ### Exercices pratiques
 
-Chaque module inclut des laboratoires pratiques avec du code de démarrage et des instructions pas à pas :
+Chaque module inclut des ateliers pratiques avec du code de démarrage et des instructions pas à pas :
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Votre premier déploiement avec AZD  
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Application de chat avec Azure OpenAI  
@@ -154,12 +158,12 @@ Chaque module inclut des laboratoires pratiques avec du code de démarrage et de
 
 - **[Guide d'intégration AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Modèles d'intégration complets  
 - **[Guide de déploiement de modèles IA](../docs/ai-foundry/ai-model-deployment.md)** - Meilleures pratiques de déploiement de modèles  
-- **[Pratiques IA en production](../docs/ai-foundry/production-ai-practices.md)** - Modèles de déploiement pour les entreprises  
+- **[Pratiques IA en production](../docs/ai-foundry/production-ai-practices.md)** - Modèles de déploiement pour l'entreprise  
 - **[Guide de dépannage IA](../docs/troubleshooting/ai-troubleshooting.md)** - Problèmes courants et solutions  
 
 ### Modèles d'exemple
 
-Modèles de démarrage rapide pour des scénarios IA courants :
+Modèles de démarrage rapide pour scénarios IA courants :
 
 ```
 workshop/templates/
@@ -171,7 +175,7 @@ workshop/templates/
 
 ## Commencer
 
-### Option 1 : GitHub Codespaces (recommandé)
+### Option 1 : GitHub Codespaces (Recommandé)
 
 La manière la plus rapide de commencer l'atelier :
 
@@ -203,7 +207,7 @@ Si vous participez à une session dirigée par un instructeur :
 
 - 🎥 **Enregistrement de l'atelier** : [Disponible à la demande](https://aka.ms/azd-ai-workshop)  
 - 💬 **Communauté Discord** : [Rejoignez pour un support en direct](https://aka.ms/foundry/discord)  
-- **Retour d'expérience** : [Partagez votre avis](https://aka.ms/azd-workshop-feedback)  
+- **Retour d'expérience sur l'atelier** : [Partagez votre avis](https://aka.ms/azd-workshop-feedback)  
 
 ## Chronologie de l'atelier
 
@@ -238,7 +242,7 @@ Si vous participez à une session dirigée par un instructeur :
 ✅ **Déployer des applications IA** en utilisant des modèles AZD  
 ✅ **Configurer Azure OpenAI** avec une sécurité appropriée  
 ✅ **Construire des applications RAG** avec l'intégration Azure AI Search  
-✅ **Implémenter des modèles de production** pour des charges de travail IA d'entreprise  
+✅ **Implémenter des modèles de production** pour les charges de travail IA d'entreprise  
 ✅ **Surveiller et résoudre les problèmes** des déploiements d'applications IA  
 ✅ **Appliquer des stratégies d'optimisation des coûts** pour les charges de travail IA  
 
@@ -253,12 +257,12 @@ Si vous participez à une session dirigée par un instructeur :
 ### Après l'atelier
 
 - 💬 **Discord** : [Communauté Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **GitHub Issues** : [Signalez les problèmes de modèles](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
+- **Problèmes GitHub** : [Signalez les problèmes de modèles](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
 - 📧 **Retour d'expérience** : [Formulaire d'évaluation de l'atelier](https://aka.ms/azd-workshop-feedback)  
 
 ## Prochaines étapes
 
-### Continuer à apprendre
+### Poursuivre l'apprentissage
 
 1. **Scénarios avancés** : Explorez [les déploiements multi-régions](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
 2. **Intégration CI/CD** : Configurez [les workflows GitHub Actions](../docs/deployment/github-actions.md)  
@@ -267,7 +271,7 @@ Si vous participez à une session dirigée par un instructeur :
 ### Appliquer dans vos projets
 
 1. **Évaluation** : Utilisez notre [liste de vérification de préparation](./production-readiness-checklist.md)  
-2. **Modèles** : Commencez avec nos [modèles spécifiques IA](../../../workshop/templates)  
+2. **Modèles** : Commencez avec nos [modèles spécifiques à l'IA](../../../workshop/templates)  
 3. **Support** : Rejoignez le [Discord Azure AI Foundry](https://aka.ms/foundry/discord)  
 
 ### Partagez votre succès
@@ -285,7 +289,7 @@ Votre retour nous aide à améliorer l'expérience de l'atelier :
 | Aspect | Note (1-5) | Commentaires |
 |--------|------------|-------------|
 | Qualité du contenu | ⭐⭐⭐⭐⭐ | |
-| Laboratoires pratiques | ⭐⭐⭐⭐⭐ | |
+| Ateliers pratiques | ⭐⭐⭐⭐⭐ | |
 | Documentation | ⭐⭐⭐⭐⭐ | |
 | Niveau de difficulté | ⭐⭐⭐⭐⭐ | |
 | Expérience globale | ⭐⭐⭐⭐⭐ | |
@@ -294,13 +298,13 @@ Votre retour nous aide à améliorer l'expérience de l'atelier :
 
 ---
 
-**Précédent :** [Guide de dépannage IA](../docs/troubleshooting/ai-troubleshooting.md) | **Suivant :** Commencez avec [Lab 1 : Fondamentaux d'AZD](../../../workshop/lab-1-azd-basics)
+**Précédent :** [Guide de dépannage IA](../docs/troubleshooting/ai-troubleshooting.md) | **Suivant :** Commencez avec [Lab 1 : Fondations AZD](../../../workshop/lab-1-azd-basics)
 
 **Prêt à commencer à construire des applications IA avec AZD ?**
 
-[Commencez le Lab 1 : Fondamentaux d'AZD →](./lab-1-azd-basics/README.md)
+[Commencez le Lab 1 : Fondations AZD →](./lab-1-azd-basics/README.md)
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

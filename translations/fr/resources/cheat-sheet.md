@@ -1,31 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T18:00:06+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T13:34:17+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "fr"
 }
 -->
 # Fiche de Référence des Commandes - Commandes Essentielles AZD
 
+**Référence Rapide pour Tous les Chapitres**
+- **📚 Accueil du Cours** : [AZD Pour Débutants](../README.md)
+- **📖 Démarrage Rapide** : [Chapitre 1 : Fondations & Démarrage Rapide](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Commandes IA** : [Chapitre 2 : Développement IA-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Avancé** : [Chapitre 4 : Infrastructure en tant que Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Introduction
 
-Cette fiche de référence complète offre un accès rapide aux commandes les plus couramment utilisées de l'Azure Developer CLI, organisées par catégorie avec des exemples pratiques. Parfaite pour des consultations rapides pendant le développement, le dépannage et les opérations quotidiennes avec les projets azd.
+Cette fiche de référence complète fournit un accès rapide aux commandes les plus couramment utilisées de l'Azure Developer CLI, organisées par catégorie avec des exemples pratiques. Parfaite pour des recherches rapides pendant le développement, le dépannage et les opérations quotidiennes avec les projets azd.
 
 ## Objectifs d'Apprentissage
 
 En utilisant cette fiche de référence, vous pourrez :
 - Accéder instantanément aux commandes essentielles de l'Azure Developer CLI et à leur syntaxe
 - Comprendre l'organisation des commandes par catégories fonctionnelles et cas d'utilisation
-- Consulter des exemples pratiques pour des scénarios courants de développement et de déploiement
-- Accéder à des commandes de dépannage pour une résolution rapide des problèmes
-- Trouver efficacement des options avancées de configuration et de personnalisation
+- Référencer des exemples pratiques pour des scénarios courants de développement et de déploiement
+- Accéder aux commandes de dépannage pour une résolution rapide des problèmes
+- Trouver efficacement des options de configuration et de personnalisation avancées
 - Localiser les commandes de gestion d'environnement et de workflows multi-environnements
 
 ## Résultats d'Apprentissage
 
-Avec une utilisation régulière de cette fiche de référence, vous serez capable de :
+En consultant régulièrement cette fiche, vous serez capable de :
 - Exécuter les commandes azd avec assurance sans consulter la documentation complète
 - Résoudre rapidement les problèmes courants en utilisant les commandes de diagnostic appropriées
 - Gérer efficacement plusieurs environnements et scénarios de déploiement
@@ -354,7 +360,7 @@ azd info
 az account show
 ```
 
-### Débogage de Modèles
+### Débogage de Templates
 ```bash
 # List available templates with details
 azd template list --output json
@@ -383,7 +389,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 
 ## 🎨 Formatage des Résultats
 
-### Résultats en JSON
+### Résultats JSON
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -563,4 +569,4 @@ azd template show <template-name> --docs
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction humaine professionnelle. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

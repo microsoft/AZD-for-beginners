@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T17:40:19+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T13:22:47+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "fr"
 }
 -->
 # Déploiement de modèles IA avec Azure Developer CLI
 
-**Précédent :** [Intégration Azure AI Foundry](azure-ai-foundry-integration.md) | **Suivant :** [Atelier IA](ai-workshop-lab.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 2 - Développement axé sur l'IA
+- **⬅️ Précédent** : [Intégration Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Suivant** : [Atelier IA](ai-workshop-lab.md)
+- **🚀 Chapitre suivant** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
 
-Ce guide fournit des instructions détaillées pour déployer des modèles IA à l'aide des modèles AZD, couvrant tout, de la sélection des modèles aux schémas de déploiement en production.
+Ce guide fournit des instructions détaillées pour déployer des modèles IA en utilisant les modèles AZD, couvrant tout, de la sélection des modèles aux schémas de déploiement en production.
 
 ## Table des matières
 
@@ -56,8 +61,8 @@ services:
 
 ### Planification de la capacité des modèles
 
-| Type de modèle | Cas d'utilisation | Capacité recommandée | Considérations sur les coûts |
-|----------------|-------------------|-----------------------|-----------------------------|
+| Type de modèle | Cas d'utilisation | Capacité recommandée | Considérations de coût |
+|----------------|-------------------|-----------------------|-------------------------|
 | GPT-4o-mini | Chat, Q&R | 10-50 TPM | Rentable pour la plupart des charges |
 | GPT-4 | Raisonnement complexe | 20-100 TPM | Coût élevé, à utiliser pour des fonctionnalités premium |
 | Text-embedding-ada-002 | Recherche, RAG | 30-120 TPM | Essentiel pour la recherche sémantique |
@@ -65,7 +70,7 @@ services:
 
 ## Configuration AZD pour les modèles IA
 
-### Configuration des modèles avec Bicep
+### Configuration des modèles avec les templates Bicep
 
 Créez des déploiements de modèles via des templates Bicep :
 
@@ -299,7 +304,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Configuration de l'auto-scaling
 
-Configurez l'auto-scaling pour les Container Apps :
+Configurez l'auto-scaling pour les applications conteneurisées :
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -486,12 +491,17 @@ async def check_ai_models():
 
 - [Disponibilité des modèles Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentation Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Scaling des Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Scaling des applications conteneurisées](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optimisation des coûts des modèles IA](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Précédent :** [Intégration Azure AI Foundry](azure-ai-foundry-integration.md) | **Suivant :** [Atelier IA](ai-workshop-lab.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 2 - Développement axé sur l'IA
+- **⬅️ Précédent** : [Intégration Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Suivant** : [Atelier IA](ai-workshop-lab.md)
+- **🚀 Chapitre suivant** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
 
 ---
 

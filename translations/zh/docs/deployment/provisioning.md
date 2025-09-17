@@ -1,47 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T17:01:48+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T12:38:16+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "zh"
 }
 -->
-# 配置资源 - 使用 AZD 实现基础设施即代码
+# 使用 AZD 配置 Azure 资源
+
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第四章 - 基础设施即代码与部署
+- **⬅️ 上一章**: [部署指南](deployment-guide.md)
+- **➡️ 下一章**: [第五章：多代理 AI 解决方案](../../examples/retail-scenario.md)
+- **🔧 相关内容**: [第六章：部署前验证](../pre-deployment/capacity-planning.md)
 
 ## 介绍
 
-本指南全面涵盖了使用 Azure Developer CLI 配置和管理 Azure 资源的所有内容。从基础资源创建到使用 Bicep、ARM 模板、Terraform 和 Pulumi 构建企业级基础设施架构，学习如何实施基础设施即代码 (IaC) 模式。
+本指南全面讲解如何使用 Azure Developer CLI 配置和管理 Azure 资源。从基础资源创建到企业级基础设施架构，学习如何通过 Bicep、ARM 模板、Terraform 和 Pulumi 实现基础设施即代码（IaC）模式。
 
 ## 学习目标
 
 完成本指南后，您将能够：
-- 掌握基础设施即代码的原则以及 Azure 资源配置
-- 了解 Azure Developer CLI 支持的多种 IaC 提供工具
-- 设计并实现适用于常见应用架构的 Bicep 模板
-- 配置资源参数、变量以及特定环境设置
+- 掌握基础设施即代码的原则以及 Azure 资源配置方法
+- 理解 Azure Developer CLI 支持的多种 IaC 工具
+- 设计并实现常见应用架构的 Bicep 模板
+- 配置资源参数、变量以及环境特定设置
 - 实现包括网络和安全在内的高级基础设施模式
 - 管理资源生命周期、更新以及依赖关系解析
 
 ## 学习成果
 
-完成后，您将能够：
+完成学习后，您将能够：
 - 使用 Bicep 和 ARM 模板设计并配置 Azure 基础设施
-- 配置具有正确资源依赖关系的复杂多服务架构
-- 为多个环境和配置实现参数化模板
+- 配置复杂的多服务架构并正确处理资源依赖
+- 为多环境和多配置实现参数化模板
 - 排查基础设施配置问题并解决部署失败
-- 将 Azure Well-Architected Framework 原则应用于基础设施设计
+- 将 Azure 良好架构框架原则应用于基础设施设计
 - 管理基础设施更新并实施版本控制策略
 
 ## 基础设施配置概述
 
-Azure Developer CLI 支持多种基础设施即代码 (IaC) 提供工具：
-- **Bicep**（推荐）- Azure 的领域专用语言
-- **ARM 模板** - 基于 JSON 的 Azure Resource Manager 模板
+Azure Developer CLI 支持多种基础设施即代码（IaC）工具：
+- **Bicep**（推荐） - Azure 的领域特定语言
+- **ARM 模板** - 基于 JSON 的 Azure 资源管理器模板
 - **Terraform** - 多云基础设施工具
 - **Pulumi** - 使用编程语言实现现代基础设施即代码
 
-## 了解 Azure 资源
+## 理解 Azure 资源
 
 ### 资源层级
 ```
@@ -51,12 +58,12 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### 常见的应用 Azure 服务
-- **计算**: App Service, Container Apps, Functions, Virtual Machines
-- **存储**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **网络**: Virtual Network, Application Gateway, CDN
-- **安全**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+### 常见的 Azure 应用服务
+- **计算**: 应用服务、容器应用、函数、虚拟机
+- **存储**: 存储账户、Cosmos DB、SQL 数据库、PostgreSQL
+- **网络**: 虚拟网络、应用网关、CDN
+- **安全**: 密钥保管库、应用洞察、日志分析
+- **AI/ML**: 认知服务、OpenAI、机器学习
 
 ## Bicep 基础设施模板
 
@@ -302,7 +309,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 安全与机密管理
 
-### Key Vault 集成
+### 密钥保管库集成
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -435,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### 带 SSL 的应用网关
+### 配备 SSL 的应用网关
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -500,7 +507,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 📊 监控与可观测性
 
-### Application Insights
+### 应用洞察
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${applicationName}-logs-${resourceToken}'
@@ -563,7 +570,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 特定环境配置
+## 🔧 环境特定配置
 
 ### 不同环境的参数文件
 ```json
@@ -759,7 +766,7 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🔄 资源更新与迁移
 
-### 安全资源更新
+### 安全的资源更新
 ```bash
 # Preview infrastructure changes
 azd provision --preview
@@ -813,7 +820,7 @@ var naming = {
 }
 ```
 
-### 2. 标签策略
+### 2. 标记策略
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -857,7 +864,7 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## 后续步骤
+## 下一步
 
 - [部署前规划](../pre-deployment/capacity-planning.md) - 验证资源可用性
 - [常见问题](../troubleshooting/common-issues.md) - 排查基础设施问题
@@ -867,9 +874,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## 其他资源
 
 - [Azure Bicep 文档](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager 模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure 资源管理器模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure 架构中心](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure 良好架构框架](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -880,4 +887,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。虽然我们尽力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

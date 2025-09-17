@@ -1,52 +1,57 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:31:00+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T12:35:38+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "zh"
 }
 -->
-# Azure AI Foundry 与 AZD 的集成
+# Azure AI Foundry 与 AZD 集成
 
-**上一节：** [第一个项目](../getting-started/first-project.md) | **下一节：** [AI 模型部署](ai-model-deployment.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第2章 - AI优先开发
+- **⬅️ 上一章**: [第1章：你的第一个项目](../getting-started/first-project.md)
+- **➡️ 下一步**: [AI模型部署](ai-model-deployment.md)
+- **🚀 下一章**: [第3章：配置](../getting-started/configuration.md)
 
 ## 概述
 
-本指南展示如何将 Azure AI Foundry 服务与 Azure Developer CLI (AZD) 集成，以简化 AI 应用的部署流程。Azure AI Foundry 提供了一个全面的平台，用于构建、部署和管理 AI 应用，而 AZD 则简化了基础设施和部署过程。
+本指南展示了如何将 Azure AI Foundry 服务与 Azure Developer CLI (AZD) 集成，以简化 AI 应用程序的部署流程。Azure AI Foundry 提供了一个全面的平台，用于构建、部署和管理 AI 应用程序，而 AZD 则简化了基础设施和部署过程。
 
 ## 什么是 Azure AI Foundry？
 
-Azure AI Foundry 是微软的统一 AI 开发平台，包括以下功能：
+Azure AI Foundry 是微软提供的统一 AI 开发平台，包含以下功能：
 
-- **模型目录**：访问最先进的 AI 模型
-- **Prompt Flow**：AI 工作流的可视化设计工具
-- **AI Foundry 门户**：集成的 AI 应用开发环境
-- **部署选项**：多种托管和扩展选项
-- **安全性与合规性**：内置负责任的 AI 功能
+- **模型目录**: 提供最先进的 AI 模型
+- **Prompt Flow**: 用于 AI 工作流的可视化设计工具
+- **AI Foundry 门户**: 集成的 AI 应用开发环境
+- **部署选项**: 多种托管和扩展选项
+- **安全性**: 内置的负责任 AI 功能
 
-## AZD + Azure AI Foundry：更强大的组合
+## AZD + Azure AI Foundry: 强强联合
 
 | 功能 | Azure AI Foundry | AZD 集成优势 |
 |------|------------------|--------------|
-| **模型部署** | 手动门户部署 | 自动化、可重复的部署 |
-| **基础设施** | 点击式配置 | 基础设施即代码 (Bicep) |
-| **环境管理** | 单一环境专注 | 多环境支持（开发/测试/生产） |
-| **CI/CD 集成** | 有限支持 | 原生 GitHub Actions 支持 |
+| **模型部署** | 手动通过门户部署 | 自动化、可重复的部署 |
+| **基础设施** | 点击式配置 | 基于代码的基础设施 (Bicep) |
+| **环境管理** | 单一环境 | 多环境支持 (开发/测试/生产) |
+| **CI/CD 集成** | 有限支持 | 原生支持 GitHub Actions |
 | **成本管理** | 基础监控 | 基于环境的成本优化 |
 
-## 前提条件
+## 前置条件
 
 - 拥有适当权限的 Azure 订阅
 - 已安装 Azure Developer CLI
-- 访问 Azure OpenAI 服务
-- 对 Azure AI Foundry 有基本了解
+- 访问 Azure OpenAI 服务的权限
+- 对 Azure AI Foundry 的基本了解
 
 ## 核心集成模式
 
-### 模式 1：Azure OpenAI 集成
+### 模式 1: Azure OpenAI 集成
 
-**使用场景**：使用 Azure OpenAI 模型部署聊天应用
+**使用场景**: 使用 Azure OpenAI 模型部署聊天应用
 
 ```yaml
 # azure.yaml
@@ -60,7 +65,7 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**基础设施 (main.bicep)：**
+**基础设施 (main.bicep):**
 ```bicep
 // Azure OpenAI Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -94,9 +99,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### 模式 2：AI 搜索 + RAG 集成
+### 模式 2: AI 搜索 + RAG 集成
 
-**使用场景**：部署检索增强生成 (RAG) 应用
+**使用场景**: 部署检索增强生成 (RAG) 应用
 
 ```bicep
 // Azure AI Search
@@ -124,9 +129,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### 模式 3：文档智能集成
+### 模式 3: 文档智能集成
 
-**使用场景**：文档处理和分析工作流
+**使用场景**: 文档处理和分析工作流
 
 ```bicep
 // Document Intelligence service
@@ -161,7 +166,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 环境变量设置
 
-**生产环境配置：**
+**生产环境配置:**
 ```bash
 # Core AI services
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
@@ -177,7 +182,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**开发环境配置：**
+**开发环境配置:**
 ```bash
 # Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -185,7 +190,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### 使用 Key Vault 进行安全配置
+### 使用 Key Vault 实现安全配置
 
 ```bicep
 // Key Vault for secrets
@@ -252,7 +257,7 @@ azd up
 
 ## 监控与可观测性
 
-### 应用洞察集成
+### Application Insights 集成
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -428,13 +433,13 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## 常见问题排查
 
-### 问题 1：OpenAI 配额超限
+### 问题 1: OpenAI 配额超限
 
-**症状：**
+**症状:**
 - 部署因配额错误失败
 - 应用日志中出现 429 错误
 
-**解决方案：**
+**解决方案:**
 ```bash
 # Check current quota usage
 az cognitiveservices usage list --location eastus
@@ -448,13 +453,13 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### 问题 2：身份验证失败
+### 问题 2: 身份验证失败
 
-**症状：**
+**症状:**
 - 调用 AI 服务时出现 401/403 错误
 - 显示“访问被拒绝”消息
 
-**解决方案：**
+**解决方案:**
 ```bash
 # Verify role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
@@ -466,13 +471,13 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### 问题 3：模型部署问题
+### 问题 3: 模型部署问题
 
-**症状：**
+**症状:**
 - 部署中无法使用模型
 - 特定模型版本部署失败
 
-**解决方案：**
+**解决方案:**
 ```bash
 # List available models by region
 az cognitiveservices model list --location eastus
@@ -485,35 +490,35 @@ az cognitiveservices model list --location eastus
 
 ### 基础聊天应用
 
-**代码库**： [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**代码仓库**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**服务**：Azure OpenAI + Cognitive Search + App Service
+**服务**: Azure OpenAI + 认知搜索 + 应用服务
 
-**快速开始**：
+**快速开始**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### 文档处理管道
+### 文档处理流水线
 
-**代码库**： [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**代码仓库**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
-**服务**：Document Intelligence + Storage + Functions
+**服务**: 文档智能 + 存储 + 函数
 
-**快速开始**：
+**快速开始**:
 ```bash
 azd init --template ai-document-processing
 azd up
 ```
 
-### 企业级 RAG 聊天应用
+### 企业级 RAG 聊天
 
-**代码库**： [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**代码仓库**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**服务**：Azure OpenAI + Search + Container Apps + Cosmos DB
+**服务**: Azure OpenAI + 搜索 + 容器应用 + Cosmos DB
 
-**快速开始**：
+**快速开始**:
 ```bash
 azd init --template contoso-chat
 azd up
@@ -521,24 +526,29 @@ azd up
 
 ## 下一步
 
-1. **尝试示例**：从与您的使用场景匹配的预构建模板开始
-2. **根据需求定制**：修改基础设施和应用代码
-3. **添加监控**：实施全面的可观测性
-4. **优化成本**：根据预算调整配置
-5. **保护部署**：实施企业级安全模式
-6. **扩展到生产环境**：添加多区域和高可用性功能
+1. **尝试示例**: 从与您的使用场景匹配的预构建模板开始
+2. **根据需求定制**: 修改基础设施和应用代码
+3. **添加监控**: 实现全面的可观测性
+4. **优化成本**: 根据预算调整配置
+5. **保护部署**: 实现企业级安全模式
+6. **扩展到生产环境**: 添加多区域和高可用性功能
 
 ## 社区与支持
 
-- **Azure AI Foundry Discord**：[#Azure 频道](https://discord.gg/microsoft-azure)
-- **AZD GitHub**： [问题与讨论](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**： [官方文档](https://learn.microsoft.com/azure/ai-studio/)
+- **Azure AI Foundry Discord**: [#Azure 频道](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [问题与讨论](https://github.com/Azure/azure-dev)
+- **Microsoft Learn**: [官方文档](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**上一节：** [第一个项目](../getting-started/first-project.md) | **下一节：** [AI 模型部署](ai-model-deployment.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第2章 - AI优先开发
+- **⬅️ 上一章**: [第1章：你的第一个项目](../getting-started/first-project.md)
+- **➡️ 下一步**: [AI模型部署](ai-model-deployment.md)
+- **🚀 下一章**: [第3章：配置](../getting-started/configuration.md)
 
-**需要帮助？** 加入我们的社区讨论或在代码库中提交问题。Azure AI + AZD 社区随时为您的成功提供支持！
+**需要帮助？** 加入我们的社区讨论或在代码仓库中提交问题。Azure AI + AZD 社区随时为您提供支持！
 
 ---
 

@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T16:44:13+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T12:50:34+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tw"
 }
 -->
 # 配置指南
 
-**上一章:** [AZD 基礎知識](azd-basics.md) | **下一章:** [第一個專案](first-project.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第三章 - 配置與身份驗證
+- **⬅️ 上一章**: [你的第一個專案](first-project.md)
+- **➡️ 下一章**: [部署指南](../deployment/deployment-guide.md)
+- **🚀 下一章節**: [第四章：基礎架構即程式碼](../deployment/deployment-guide.md)
 
 ## 簡介
 
-本指南全面涵蓋如何配置 Azure Developer CLI，以實現最佳的開發和部署工作流程。您將學習配置層級、環境管理、身份驗證方法，以及能夠支持高效且安全的 Azure 部署的高級配置模式。
+本指南全面涵蓋了配置 Azure Developer CLI 的所有方面，旨在優化開發和部署工作流程。您將學習配置層級、環境管理、身份驗證方法以及高級配置模式，這些都能幫助您實現高效且安全的 Azure 部署。
 
 ## 學習目標
 
@@ -22,18 +27,18 @@ CO_OP_TRANSLATOR_METADATA:
 - 有效配置全域和專案特定的設定
 - 管理多個具有不同配置的環境
 - 實施安全的身份驗證和授權模式
-- 理解複雜場景的高級配置模式
+- 理解複雜場景中的高級配置模式
 
 ## 學習成果
 
 完成本課程後，您將能夠：
-- 配置 azd 以實現最佳的開發工作流程
+- 配置 azd 以優化開發工作流程
 - 設置和管理多個部署環境
 - 實施安全的配置管理實踐
 - 排除與配置相關的問題
 - 根據特定組織需求自訂 azd 行為
 
-本指南全面涵蓋如何配置 Azure Developer CLI，以實現最佳的開發和部署工作流程。
+本指南全面涵蓋了配置 Azure Developer CLI 的所有方面，旨在優化開發和部署工作流程。
 
 ## 配置層級
 
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### 語言特定設定
+#### 特定語言的設定
 ```yaml
 services:
   node-app:
@@ -219,7 +224,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### 環境配置
-每個環境都有自己的配置，存放於 `.azure/<env-name>/config.json`：
+每個環境都有自己的配置文件 `.azure/<env-name>/config.json`：
 
 ```json
 {
@@ -537,7 +542,7 @@ database:
 
 ## 下一步
 
-- [您的第一個專案](first-project.md) - 實際應用配置
+- [你的第一個專案](first-project.md) - 實際應用配置
 - [部署指南](../deployment/deployment-guide.md) - 使用配置進行部署
 - [資源佈署](../deployment/provisioning.md) - 生產就緒的配置
 
@@ -549,10 +554,14 @@ database:
 
 ---
 
-**上一章:** [AZD 基礎知識](azd-basics.md) | **下一章:** [第一個專案](first-project.md)
-- **下一課程**: [您的第一個專案](first-project.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第三章 - 配置與身份驗證
+- **⬅️ 上一章**: [你的第一個專案](first-project.md)
+- **➡️ 下一章節**: [第四章：基礎架構即程式碼](../deployment/deployment-guide.md)
+- **下一課程**: [你的第一個專案](first-project.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。

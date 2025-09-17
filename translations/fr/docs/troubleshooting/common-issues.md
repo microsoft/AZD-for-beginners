@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T17:06:22+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T13:25:32+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "fr"
 }
 -->
-# Problèmes Courants & Solutions
+# Problèmes Courants et Solutions
+
+**Navigation du Chapitre :**
+- **📚 Accueil du Cours** : [AZD Pour Débutants](../../README.md)
+- **📖 Chapitre Actuel** : Chapitre 7 - Résolution de Problèmes & Débogage
+- **⬅️ Chapitre Précédent** : [Chapitre 6 : Vérifications Préliminaires](../pre-deployment/preflight-checks.md)
+- **➡️ Suivant** : [Guide de Débogage](debugging.md)
+- **🚀 Chapitre Suivant** : [Chapitre 8 : Modèles de Production & Entreprise](../ai-foundry/production-ai-practices.md)
 
 ## Introduction
 
-Ce guide de dépannage complet couvre les problèmes les plus fréquemment rencontrés lors de l'utilisation de l'Azure Developer CLI. Apprenez à diagnostiquer, résoudre et corriger les problèmes courants liés à l'authentification, au déploiement, à la provision d'infrastructure et à la configuration des applications. Chaque problème inclut des symptômes détaillés, des causes racines et des procédures de résolution étape par étape.
+Ce guide complet de résolution de problèmes couvre les problèmes les plus fréquemment rencontrés lors de l'utilisation de l'Azure Developer CLI. Apprenez à diagnostiquer, résoudre et corriger les problèmes courants liés à l'authentification, au déploiement, à la provision d'infrastructure et à la configuration des applications. Chaque problème inclut des symptômes détaillés, des causes racines et des procédures de résolution étape par étape.
 
 ## Objectifs d'Apprentissage
 
@@ -20,8 +27,8 @@ En suivant ce guide, vous allez :
 - Comprendre les problèmes courants d'authentification et de permissions ainsi que leurs solutions
 - Résoudre les échecs de déploiement, les erreurs de provision d'infrastructure et les problèmes de configuration
 - Mettre en œuvre des stratégies de surveillance et de débogage proactives
-- Appliquer des méthodologies de dépannage systématiques pour des problèmes complexes
-- Configurer une journalisation et une surveillance appropriées pour éviter les problèmes futurs
+- Appliquer des méthodologies systématiques de résolution de problèmes complexes
+- Configurer une journalisation et une surveillance appropriées pour prévenir les problèmes futurs
 
 ## Résultats d'Apprentissage
 
@@ -30,7 +37,7 @@ En suivant ce guide, vous allez :
 - Résoudre de manière autonome les problèmes d'authentification, d'abonnement et de permissions
 - Traiter efficacement les échecs de déploiement et les erreurs de provision d'infrastructure
 - Déboguer les problèmes de configuration des applications et les problèmes spécifiques à l'environnement
-- Mettre en œuvre des systèmes de surveillance et d'alerte pour identifier de manière proactive les problèmes potentiels
+- Mettre en œuvre des systèmes de surveillance et d'alerte pour identifier proactivement les problèmes potentiels
 - Appliquer les meilleures pratiques pour la journalisation, le débogage et les workflows de résolution de problèmes
 
 ## Diagnostics Rapides
@@ -60,7 +67,7 @@ azd <command> --debug
 ### Problème : "Échec de l'obtention du jeton d'accès"
 **Symptômes :**
 - `azd up` échoue avec des erreurs d'authentification
-- Les commandes renvoient "non autorisé" ou "accès refusé"
+- Les commandes retournent "non autorisé" ou "accès refusé"
 
 **Solutions :**
 ```bash
@@ -131,10 +138,10 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### Problème : Emplacement/Région non disponible
+### Problème : Localisation/Région non disponible
 **Symptômes :**
-- "L'emplacement 'xyz' n'est pas disponible pour le type de ressource"
-- Certains SKUs ne sont pas disponibles dans la région sélectionnée
+- "La localisation 'xyz' n'est pas disponible pour le type de ressource"
+- Certaines SKUs ne sont pas disponibles dans la région sélectionnée
 
 **Solutions :**
 ```bash
@@ -175,9 +182,9 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problème : Erreurs de modèle Bicep
+### Problème : Erreurs de modèles Bicep
 **Symptômes :**
-- Échecs de validation de modèle
+- Échecs de validation de modèles
 - Erreurs de syntaxe dans les fichiers Bicep
 
 **Solutions :**
@@ -294,7 +301,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 ### Problème : Problèmes de certificats SSL/TLS
 **Symptômes :**
 - HTTPS ne fonctionne pas
-- Erreurs de validation de certificat
+- Erreurs de validation de certificats
 
 **Solutions :**
 ```bash
@@ -373,7 +380,7 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Problèmes de Performance
 
-### Problème : Temps de déploiement trop longs
+### Problème : Temps de déploiement lents
 **Symptômes :**
 - Les déploiements prennent trop de temps
 - Délais d'attente pendant le déploiement
@@ -419,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Outils et Commandes de Dépannage
+## 🛠️ Outils et Commandes de Débogage
 
 ### Commandes de Débogage
 ```bash
@@ -569,7 +576,7 @@ az security assessment list --resource-group myrg
 ## Ressources Associées
 
 - [Guide de Débogage](debugging.md) - Techniques avancées de débogage
-- [Provision de Ressources](../deployment/provisioning.md) - Dépannage de l'infrastructure
+- [Provision de Ressources](../deployment/provisioning.md) - Résolution des problèmes d'infrastructure
 - [Planification de Capacité](../pre-deployment/capacity-planning.md) - Conseils pour la planification des ressources
 - [Sélection de SKU](../pre-deployment/sku-selection.md) - Recommandations sur les niveaux de service
 
@@ -586,4 +593,4 @@ az security assessment list --resource-group myrg
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

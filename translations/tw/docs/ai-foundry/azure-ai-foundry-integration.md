@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T17:31:17+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-17T12:48:38+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "tw"
 }
 -->
 # Azure AI Foundry 與 AZD 的整合
 
-**前一篇:** [第一個專案](../getting-started/first-project.md) | **下一篇:** [AI 模型部署](ai-model-deployment.md)
+**章節導覽：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章節**：第 2 章 - AI 優先開發
+- **⬅️ 上一章節**：[第 1 章：你的第一個專案](../getting-started/first-project.md)
+- **➡️ 下一步**：[AI 模型部署](ai-model-deployment.md)
+- **🚀 下一章節**：[第 3 章：配置](../getting-started/configuration.md)
 
 ## 概述
 
-本指南展示如何將 Azure AI Foundry 服務與 Azure Developer CLI (AZD) 整合，以簡化 AI 應用程式的部署流程。Azure AI Foundry 提供一個全面的平台，用於建構、部署及管理 AI 應用程式，而 AZD 則簡化基礎架構及部署過程。
+本指南展示如何將 Azure AI Foundry 服務與 Azure Developer CLI (AZD) 整合，以簡化 AI 應用程式的部署流程。Azure AI Foundry 提供一個全面的平台，用於建置、部署和管理 AI 應用程式，而 AZD 則簡化了基礎架構和部署過程。
 
 ## 什麼是 Azure AI Foundry？
 
@@ -21,9 +26,9 @@ Azure AI Foundry 是 Microsoft 的統一 AI 開發平台，包含以下功能：
 
 - **模型目錄**：存取最先進的 AI 模型
 - **Prompt Flow**：AI 工作流程的視覺化設計工具
-- **AI Foundry Portal**：AI 應用程式的整合開發環境
-- **部署選項**：多種主機及擴展選項
-- **安全性與保障**：內建負責任 AI 的功能
+- **AI Foundry Portal**：整合的 AI 應用程式開發環境
+- **部署選項**：多種主機和擴展選項
+- **安全性**：內建負責任 AI 的功能
 
 ## AZD + Azure AI Foundry：更強大的組合
 
@@ -31,7 +36,7 @@ Azure AI Foundry 是 Microsoft 的統一 AI 開發平台，包含以下功能：
 |------|------------------|--------------|
 | **模型部署** | 手動透過 Portal 部署 | 自動化、可重複的部署 |
 | **基礎架構** | 點擊式配置 | 基礎架構即程式碼 (Bicep) |
-| **環境管理** | 單一環境專注 | 多環境 (開發/測試/生產) |
+| **環境管理** | 單一環境專注 | 多環境（開發/測試/生產） |
 | **CI/CD 整合** | 限制性 | 原生支援 GitHub Actions |
 | **成本管理** | 基本監控 | 環境特定的成本優化 |
 
@@ -126,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### 模式 3：文件智能整合
 
-**使用案例**：文件處理及分析工作流程
+**使用案例**：文件處理和分析工作流程
 
 ```bicep
 // Document Intelligence service
@@ -426,12 +431,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## 常見問題排解
+## 常見問題排查
 
 ### 問題 1：OpenAI 配額超出
 
 **症狀：**
-- 部署因配額錯誤而失敗
+- 部署因配額錯誤失敗
 - 應用程式日誌中出現 429 錯誤
 
 **解決方案：**
@@ -489,7 +494,7 @@ az cognitiveservices model list --location eastus
 
 **服務**：Azure OpenAI + Cognitive Search + App Service
 
-**快速開始**：
+**快速開始：**
 ```bash
 azd init --template azure-search-openai-demo
 azd up
@@ -501,19 +506,19 @@ azd up
 
 **服務**：Document Intelligence + Storage + Functions
 
-**快速開始**：
+**快速開始：**
 ```bash
 azd init --template ai-document-processing
 azd up
 ```
 
-### 使用 RAG 的企業聊天
+### RAG 的企業聊天
 
 **儲存庫**：[contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **服務**：Azure OpenAI + Search + Container Apps + Cosmos DB
 
-**快速開始**：
+**快速開始：**
 ```bash
 azd init --template contoso-chat
 azd up
@@ -522,11 +527,11 @@ azd up
 ## 下一步
 
 1. **嘗試範例**：從符合您使用案例的預建模板開始
-2. **根據需求自訂**：修改基礎架構及應用程式程式碼
-3. **新增監控**：實施全面的可觀察性
+2. **根據需求自訂**：修改基礎架構和應用程式程式碼
+3. **添加監控**：實施全面的可觀察性
 4. **優化成本**：根據預算微調配置
 5. **保護部署**：實施企業級安全模式
-6. **擴展至生產環境**：新增多區域及高可用性功能
+6. **擴展至生產環境**：添加多區域和高可用性功能
 
 ## 社群與支援
 
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**前一篇:** [第一個專案](../getting-started/first-project.md) | **下一篇:** [AI 模型部署](ai-model-deployment.md)
+**章節導覽：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章節**：第 2 章 - AI 優先開發
+- **⬅️ 上一章節**：[第 1 章：你的第一個專案](../getting-started/first-project.md)
+- **➡️ 下一步**：[AI 模型部署](ai-model-deployment.md)
+- **🚀 下一章節**：[第 3 章：配置](../getting-started/configuration.md)
 
-**需要幫助？** 加入我們的社群討論或在儲存庫中提出問題。Azure AI + AZD 社群隨時準備協助您成功！
+**需要幫助嗎？** 加入我們的社群討論或在儲存庫中提出問題。Azure AI + AZD 社群隨時準備幫助您成功！
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。

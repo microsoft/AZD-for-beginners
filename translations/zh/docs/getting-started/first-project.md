@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T16:40:31+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T12:36:36+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "zh"
 }
 -->
 # 您的第一个项目 - 实践教程
 
-**上一节：** [配置](configuration.md) | **下一节：** [Azure AI Foundry 集成](../ai-foundry/azure-ai-foundry-integration.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第1章 - 基础与快速入门
+- **⬅️ 上一章**: [安装与设置](installation.md)
+- **➡️ 下一章**: [配置](configuration.md)
+- **🚀 下一章节**: [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md)
 
-## 介绍
+## 简介
 
-欢迎来到您的第一个 Azure Developer CLI 项目！这个全面的实践教程将带您完整体验如何使用 azd 在 Azure 上创建、部署和管理一个全栈应用程序。您将使用一个真实的待办事项应用程序，该应用程序包括 React 前端、Node.js API 后端和 MongoDB 数据库。
+欢迎来到您的第一个 Azure Developer CLI 项目！这个全面的实践教程将带您完整体验如何使用 azd 在 Azure 上创建、部署和管理一个全栈应用程序。您将使用一个真实的待办事项应用程序，该应用包括 React 前端、Node.js API 后端和 MongoDB 数据库。
 
 ## 学习目标
 
@@ -30,17 +35,17 @@ CO_OP_TRANSLATOR_METADATA:
 完成后，您将能够：
 - 独立从模板初始化和配置 azd 项目
 - 有效地导航和修改 azd 项目结构
-- 使用单条命令将全栈应用程序部署到 Azure
-- 解决常见的部署问题和身份验证问题
+- 使用单一命令将全栈应用程序部署到 Azure
+- 解决常见的部署问题和认证问题
 - 管理不同部署阶段的多个 Azure 环境
-- 实现应用程序更新的持续部署工作流
+- 实现应用更新的持续部署工作流
 
 ## 开始
 
 ### 前置条件清单
 - ✅ 已安装 Azure Developer CLI ([安装指南](installation.md))
 - ✅ 已安装并认证 Azure CLI
-- ✅ 系统上已安装 Git
+- ✅ 系统中已安装 Git
 - ✅ Node.js 16+（适用于本教程）
 - ✅ 推荐使用 Visual Studio Code
 
@@ -49,7 +54,7 @@ CO_OP_TRANSLATOR_METADATA:
 # Check azd installation
 azd version
 ```
-### 验证 Azure 身份认证
+### 验证 Azure 认证
 
 ```bash
 az account show
@@ -62,7 +67,7 @@ node --version
 
 ## 第一步：选择并初始化模板
 
-我们从一个流行的待办事项应用程序模板开始，该模板包括 React 前端和 Node.js API 后端。
+我们从一个流行的待办事项应用模板开始，该模板包括 React 前端和 Node.js API 后端。
 
 ```bash
 # Browse available templates
@@ -81,7 +86,7 @@ azd init --template todo-nodejs-mongo
 
 ### 刚刚发生了什么？
 - 将模板代码下载到您的本地目录
-- 创建了一个包含服务定义的 `azure.yaml` 文件
+- 创建了一个 `azure.yaml` 文件，其中包含服务定义
 - 在 `infra/` 目录中设置了基础设施代码
 - 创建了环境配置
 
@@ -125,7 +130,7 @@ my-first-azd-app/
 
 ### 需要理解的关键文件
 
-**azure.yaml** - 您的 azd 项目的核心：
+**azure.yaml** - azd 项目的核心：
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -164,7 +169,7 @@ azd env get-values
 
 ## 第四步：部署到 Azure
 
-现在到了激动人心的部分——将所有内容部署到 Azure！
+现在进入激动人心的部分 - 将所有内容部署到 Azure！
 
 ```bash
 # Deploy infrastructure and application
@@ -209,7 +214,7 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### 测试待办事项应用程序
+### 测试待办事项应用
 1. **添加待办事项** - 点击“添加待办事项”，输入任务
 2. **标记为完成** - 勾选已完成的项目
 3. **删除项目** - 移除不再需要的待办事项
@@ -249,7 +254,7 @@ azd deploy
 
 ## 第七步：管理多个环境
 
-创建一个测试环境，在生产之前测试更改：
+创建一个测试环境以在生产之前测试更改：
 
 ```bash
 # Create a new staging environment
@@ -297,14 +302,14 @@ azd down --force --purge
 恭喜！您已经成功：
 - 从模板初始化了一个 azd 项目
 - 探索了项目结构和关键文件
-- 将全栈应用程序部署到 Azure
+- 将一个全栈应用程序部署到 Azure
 - 进行了代码更改并重新部署
 - 管理了多个环境
 - 清理了资源
 
 ## 常见问题排查
 
-### 身份认证错误
+### 认证错误
 ```bash
 # Re-authenticate with Azure
 az login
@@ -339,7 +344,7 @@ netstat -an | grep :3100
 
 ## 下一步
 
-完成您的第一个项目后，可以探索以下高级主题：
+完成您的第一个项目后，探索以下高级主题：
 
 ### 1. 自定义基础设施
 - [基础设施即代码](../deployment/provisioning.md)
@@ -352,7 +357,7 @@ netstat -an | grep :3100
 ### 3. 生产环境最佳实践
 - [安全配置](../deployment/best-practices.md#security)
 - [性能优化](../deployment/best-practices.md#performance)
-- [监控和日志记录](../deployment/best-practices.md#monitoring)
+- [监控和日志](../deployment/best-practices.md#monitoring)
 
 ### 4. 探索更多模板
 ```bash
@@ -390,10 +395,15 @@ azd init --template todo-java-mongo
 
 ---
 
-**上一节：** [配置](configuration.md) | **下一节：** [Azure AI Foundry 集成](../ai-foundry/azure-ai-foundry-integration.md)
-- **下一课：** [部署指南](../deployment/deployment-guide.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第1章 - 基础与快速入门
+- **⬅️ 上一章**: [安装与设置](installation.md)
+- **➡️ 下一章**: [配置](configuration.md)
+- **🚀 下一章节**: [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md)
+- **下一课**: [部署指南](../deployment/deployment-guide.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

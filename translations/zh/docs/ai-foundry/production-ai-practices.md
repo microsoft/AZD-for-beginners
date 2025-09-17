@@ -1,26 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T17:34:51+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-17T12:35:56+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "zh"
 }
 -->
 # 使用 AZD 部署生产级 AI 工作负载的最佳实践
 
-**上一页：** [AI 工作坊实验](ai-workshop-lab.md) | **下一页：** [AI 故障排除指南](../troubleshooting/ai-troubleshooting.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第八章 - 生产与企业模式
+- **⬅️ 上一章节**: [第七章：故障排除](../troubleshooting/debugging.md)
+- **⬅️ 相关内容**: [AI 工作坊实验](ai-workshop-lab.md)
+- **🎯 课程完成**: [AZD 初学者指南](../../README.md)
 
 ## 概述
 
-本指南提供了使用 Azure Developer CLI (AZD) 部署生产级 AI 工作负载的全面最佳实践。这些实践基于 Azure AI Foundry Discord 社区的反馈以及真实客户部署经验，旨在解决生产 AI 系统中最常见的挑战。
+本指南提供了使用 Azure Developer CLI (AZD) 部署生产级 AI 工作负载的全面最佳实践。这些实践基于 Azure AI Foundry Discord 社区的反馈以及实际客户部署经验，旨在解决生产 AI 系统中最常见的挑战。
 
 ## 主要挑战
 
 根据社区调查结果，以下是开发者面临的主要挑战：
 
 - **45%** 在多服务 AI 部署中遇到困难
-- **38%** 在凭证和密钥管理方面存在问题  
+- **38%** 在凭据和密钥管理方面存在问题  
 - **35%** 认为生产准备和扩展具有挑战性
 - **32%** 需要更好的成本优化策略
 - **29%** 需要改进监控和故障排除
@@ -29,7 +34,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### 模式 1：微服务 AI 架构
 
-**适用场景**：具有多种功能的复杂 AI 应用
+**适用场景**: 具有多种功能的复杂 AI 应用
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -48,7 +53,7 @@ CO_OP_TRANSLATOR_METADATA:
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZD 实现**：
+**AZD 实现**:
 
 ```yaml
 # azure.yaml
@@ -73,7 +78,7 @@ services:
 
 ### 模式 2：事件驱动的 AI 处理
 
-**适用场景**：批处理、文档分析、异步工作流
+**适用场景**: 批处理、文档分析、异步工作流
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -294,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. 缓存策略
 
-**Redis 缓存 AI 响应**：
+**Redis 缓存用于 AI 响应**：
 
 ```bicep
 // Redis Premium for production workloads
@@ -503,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI 特定监控
 
-**AI 指标的自定义仪表盘**：
+**针对 AI 指标的自定义仪表盘**：
 
 ```json
 // Dashboard configuration for AI workloads
@@ -853,21 +858,21 @@ echo "Infrastructure validation completed successfully!"
 ### 监控 ✅
 - [ ] 配置应用洞察
 - [ ] 定义自定义指标
-- [ ] 设置告警规则
+- [ ] 设置警报规则
 - [ ] 创建仪表盘
 - [ ] 实施健康检查
 - [ ] 日志保留策略
 
 ### 可靠性 ✅
 - [ ] 多区域部署
-- [ ] 备份与恢复计划
+- [ ] 数据备份与恢复计划
 - [ ] 实施断路器
 - [ ] 配置重试策略
 - [ ] 优雅降级
 - [ ] 健康检查端点
 
 ### 成本管理 ✅
-- [ ] 配置预算告警
+- [ ] 配置预算警报
 - [ ] 资源合理配置
 - [ ] 应用开发/测试折扣
 - [ ] 购买预留实例
@@ -877,7 +882,7 @@ echo "Infrastructure validation completed successfully!"
 ### 合规性 ✅
 - [ ] 满足数据驻留要求
 - [ ] 启用审计日志
-- [ ] 应用合规策略
+- [ ] 应用合规性策略
 - [ ] 实施安全基线
 - [ ] 定期安全评估
 - [ ] 事件响应计划
@@ -912,11 +917,11 @@ python scripts/load_test.py \
 
 ### 社区的主要建议：
 
-1. **从小开始，逐步扩展**：从基础 SKU 开始，根据实际使用情况逐步扩展
-2. **监控一切**：从第一天起设置全面的监控
+1. **从小开始，逐步扩展**：从基础配置开始，根据实际使用情况逐步扩展
+2. **全面监控**：从第一天起设置全面的监控
 3. **自动化安全**：使用基础设施即代码确保安全一致性
-4. **彻底测试**：在管道中包含 AI 特定测试
-5. **规划成本**：尽早监控 Token 使用并设置预算告警
+4. **彻底测试**：在管道中加入 AI 特定测试
+5. **规划成本**：尽早监控 Token 使用并设置预算警报
 
 ### 常见的错误避免：
 
@@ -928,18 +933,23 @@ python scripts/load_test.py \
 
 ## 其他资源
 
-- **Azure 良好架构框架**： [AI 工作负载指南](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry 文档**： [官方文档](https://learn.microsoft.com/azure/ai-studio/)
-- **社区模板**： [Azure 示例](https://github.com/Azure-Samples)
-- **Discord 社区**： [#Azure 频道](https://discord.gg/microsoft-azure)
+- **Azure 良好架构框架**: [AI 工作负载指南](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure AI Foundry 文档**: [官方文档](https://learn.microsoft.com/azure/ai-studio/)
+- **社区模板**: [Azure 示例](https://github.com/Azure-Samples)
+- **Discord 社区**: [#Azure 频道](https://discord.gg/microsoft-azure)
 
 ---
 
-**上一页：** [AI 工作坊实验](ai-workshop-lab.md) | **下一页：** [AI 故障排除指南](../troubleshooting/ai-troubleshooting.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第八章 - 生产与企业模式
+- **⬅️ 上一章节**: [第七章：故障排除](../troubleshooting/debugging.md)
+- **⬅️ 相关内容**: [AI 工作坊实验](ai-workshop-lab.md)
+- **🎆 课程完成**: [AZD 初学者指南](../../README.md)
 
-**请记住**：生产级 AI 工作负载需要仔细规划、监控和持续优化。以这些模式为起点，并根据您的具体需求进行调整。
+**请记住**: 生产级 AI 工作负载需要仔细规划、监控和持续优化。以这些模式为起点，并根据您的具体需求进行调整。
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

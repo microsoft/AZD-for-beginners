@@ -1,26 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T16:47:08+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-17T13:06:54+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "hk"
 }
 -->
 # 安裝及設定指南
 
-**上一頁：** [主文件](../../README.md) | **下一頁：** [AZD 基本概念](azd-basics.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章節**：第 1 章 - 基礎與快速入門
+- **⬅️ 上一章**：[AZD 基本概念](azd-basics.md)
+- **➡️ 下一章**：[你的第一個專案](first-project.md)
+- **🚀 下一章節**：[第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 簡介
 
-這份全面的指南將帶你一步步完成 Azure Developer CLI (azd) 的安裝及設定。你將學習針對不同操作系統的多種安裝方法、身份驗證設定，以及初始配置，為 Azure 部署準備你的開發環境。
+這份全面的指南將帶你一步步完成在系統上安裝及配置 Azure Developer CLI (azd)。你將學習針對不同操作系統的多種安裝方法、身份驗證設定，以及初始配置，為 Azure 部署準備你的開發環境。
 
 ## 學習目標
 
 完成本課程後，你將能夠：
 - 成功在你的操作系統上安裝 Azure Developer CLI
-- 使用多種方法設定 Azure 的身份驗證
-- 配置你的開發環境，滿足必要的前置條件
+- 使用多種方法配置 Azure 的身份驗證
+- 設定開發環境所需的必要條件
 - 理解不同的安裝選項及其適用情境
 - 排解常見的安裝及設定問題
 
@@ -33,15 +38,15 @@ CO_OP_TRANSLATOR_METADATA:
 - 配置你的開發環境以最佳化 azd 的使用
 - 獨立解決常見的安裝問題
 
-這份指南將幫助你在任何操作系統或開發環境中安裝及設定 Azure Developer CLI。
+這份指南將幫助你在任何操作系統或開發環境中安裝及配置 Azure Developer CLI。
 
-## 前置條件
+## 先決條件
 
-在安裝 azd 之前，請確保你已準備好以下項目：
+在安裝 azd 之前，請確保你已具備：
 - **Azure 訂閱** - [建立免費帳戶](https://azure.microsoft.com/free/)
 - **Azure CLI** - 用於身份驗證及資源管理
 - **Git** - 用於複製模板及版本控制
-- **Docker**（可選）- 用於容器化應用程式
+- **Docker**（可選） - 用於容器化應用程式
 
 ## 安裝方法
 
@@ -53,7 +58,7 @@ CO_OP_TRANSLATOR_METADATA:
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### 方法 2：Windows 套件管理器 (winget)
+#### 方法 2：Windows 套件管理器（winget）
 ```cmd
 winget install Microsoft.Azd
 ```
@@ -65,7 +70,7 @@ choco install azd
 
 #### 方法 4：手動安裝
 1. 從 [GitHub](https://github.com/Azure/azure-dev/releases) 下載最新版本
-2. 解壓至 `C:\Program Files\azd\`
+2. 解壓縮至 `C:\Program Files\azd\`
 3. 添加至 PATH 環境變數
 
 ### macOS
@@ -96,7 +101,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 #### 方法 2：套件管理器
 
-**Ubuntu/Debian:**
+**Ubuntu/Debian：**
 ```bash
 # Add Microsoft package repository
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
@@ -106,7 +111,7 @@ sudo apt-get update
 sudo apt-get install azd
 ```
 
-**RHEL/CentOS/Fedora:**
+**RHEL/CentOS/Fedora：**
 ```bash
 # Add Microsoft package repository
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -238,11 +243,11 @@ export AZD_DEBUG=true  # Enable debug logging
 2. 配置 Azure 憑證
 3. 使用整合終端執行 azd 指令
 
-## 🐛 安裝故障排除
+## 🐛 安裝疑難排解
 
 ### 常見問題
 
-#### 權限被拒絕（Windows）
+#### 權限被拒（Windows）
 ```powershell
 # Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -251,12 +256,12 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 #### PATH 問題
 手動添加 azd 至 PATH：
 
-**Windows:**
+**Windows：**
 ```cmd
 setx PATH "%PATH%;C:\Program Files\azd\"
 ```
 
-**macOS/Linux:**
+**macOS/Linux：**
 ```bash
 echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
@@ -306,17 +311,17 @@ azd version --check-for-updates
 
 ### 手動更新
 
-**Windows (winget):**
+**Windows（winget）：**
 ```cmd
 winget upgrade Microsoft.Azd
 ```
 
-**macOS (Homebrew):**
+**macOS（Homebrew）：**
 ```bash
 brew upgrade azd
 ```
 
-**Linux:**
+**Linux：**
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
@@ -324,13 +329,13 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## 下一步
 
 1. **完成身份驗證**：確保你能訪問你的 Azure 訂閱
-2. **嘗試首次部署**：參考 [第一個專案指南](first-project.md)
+2. **嘗試你的第一次部署**：參考 [第一個專案指南](first-project.md)
 3. **探索模板**：使用 `azd template list` 瀏覽可用模板
-4. **配置你的 IDE**：設置你的開發環境
+4. **配置你的 IDE**：設定你的開發環境
 
 ## 支援
 
-如果你遇到問題：
+如果遇到問題：
 - [官方文件](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [回報問題](https://github.com/Azure/azure-dev/issues)
 - [社群討論](https://github.com/Azure/azure-dev/discussions)
@@ -338,11 +343,16 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ---
 
-**上一頁：** [主文件](../../README.md) | **下一頁：** [AZD 基本概念](azd-basics.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章節**：第 1 章 - 基礎與快速入門
+- **⬅️ 上一章**：[AZD 基本概念](azd-basics.md) 
+- **➡️ 下一章**：[你的第一個專案](first-project.md)
+- **🚀 下一章節**：[第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
 
-**安裝完成！** 繼續前往 [你的第一個專案](first-project.md)，開始使用 azd 建立專案。
+**✅ 安裝完成！** 繼續前往 [你的第一個專案](first-project.md) 開始使用 azd 建立專案。
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。

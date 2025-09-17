@@ -1,31 +1,36 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "668bc93b35c9249e52245a0b037b6011",
-  "translation_date": "2025-09-12T17:23:39+00:00",
+  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
+  "translation_date": "2025-09-17T13:04:16+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "hk"
 }
 -->
-# AI 工作坊實驗：讓您的 AI 解決方案具備 AZD 部署能力
+# AI 工作坊實驗：讓您的 AI 解決方案可使用 AZD 部署
 
-**上一章:** [AI 模型部署](ai-model-deployment.md) | **下一章:** [AI 生產實踐](production-ai-practices.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 當前章節**：第 2 章 - AI 優先開發
+- **⬅️ 上一章**：[AI 模型部署](ai-model-deployment.md)
+- **➡️ 下一章**：[生產環境 AI 最佳實踐](production-ai-practices.md)
+- **🚀 下一章節**：[第 3 章：配置](../getting-started/configuration.md)
 
 ## 工作坊概述
 
-這個實作實驗將引導開發者如何將現有的 AI 應用程式改造為可使用 Azure Developer CLI (AZD) 部署的版本。您將學習使用 Azure AI Foundry 服務進行 AI 生產部署的基本模式。
+這個動手實驗將指導開發者如何將現有的 AI 應用程式改造為可使用 Azure Developer CLI (AZD) 部署的解決方案。您將學習使用 Azure AI Foundry 服務進行生產環境 AI 部署的基本模式。
 
-**時長:** 2-3 小時  
-**難度:** 中級  
-**先決條件:** 基本 Azure 知識，熟悉 AI/ML 概念
+**時長：** 2-3 小時  
+**難度：** 中級  
+**先決條件：** 基本 Azure 知識，熟悉 AI/ML 概念
 
 ## 🎓 學習目標
 
-完成此工作坊後，您將能夠：
-- ✅ 將現有的 AI 應用程式轉換為 AZD 模板
+完成本工作坊後，您將能夠：
+- ✅ 將現有的 AI 應用程式轉換為使用 AZD 模板
 - ✅ 使用 AZD 配置 Azure AI Foundry 服務
-- ✅ 實施 AI 服務的安全憑證管理
-- ✅ 部署具備監控功能的生產級 AI 應用程式
+- ✅ 實現 AI 服務的安全憑證管理
+- ✅ 部署具備監控功能的生產環境 AI 應用程式
 - ✅ 排除常見的 AI 部署問題
 
 ## 先決條件
@@ -37,13 +42,13 @@ CO_OP_TRANSLATOR_METADATA:
 - 程式碼編輯器（推薦使用 VS Code）
 
 ### Azure 資源
-- 擁有具備貢獻者權限的 Azure 訂閱
-- 可存取 Azure OpenAI 服務（或能申請存取權）
-- 建立資源群組的權限
+- 擁有具有貢獻者權限的 Azure 訂閱
+- 可訪問 Azure OpenAI 服務（或能申請訪問權限）
+- 創建資源群組的權限
 
 ### 知識要求
 - 基本了解 Azure 服務
-- 熟悉命令列介面
+- 熟悉命令行界面
 - 基本 AI/ML 概念（API、模型、提示）
 
 ## 實驗設置
@@ -63,7 +68,7 @@ az login
 azd auth login
 ```
 
-2. **克隆工作坊的存儲庫：**
+2. **克隆工作坊倉庫：**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
@@ -73,7 +78,7 @@ cd azure-search-openai-demo
 
 ### AI AZD 模板的結構剖析
 
-探索 AI AZD 模板中的關鍵檔案：
+探索 AI 就緒 AZD 模板中的關鍵文件：
 
 ```
 azure-search-openai-demo/
@@ -92,32 +97,32 @@ azure-search-openai-demo/
 
 ### **實驗練習 1.1：探索配置**
 
-1. **檢查 azure.yaml 檔案：**
+1. **檢查 azure.yaml 文件：**
 ```bash
 cat azure.yaml
 ```
 
 **需要注意的內容：**
-- AI 元件的服務定義
+- AI 組件的服務定義
 - 環境變數映射
 - 主機配置
 
-2. **查看 main.bicep 基礎架構：**
+2. **查看 main.bicep 基礎設施文件：**
 ```bash
 cat infra/main.bicep
 ```
 
 **需要識別的 AI 模式：**
 - Azure OpenAI 服務的配置
-- 認知搜尋的整合
+- 認知搜索的集成
 - 安全密鑰管理
 - 網絡安全配置
 
-### **討論點：為什麼這些模式對 AI 很重要**
+### **討論點：為什麼這些模式對 AI 至關重要**
 
 - **服務依賴性**：AI 應用通常需要多個協調的服務
 - **安全性**：API 密鑰和端點需要安全管理
-- **可擴展性**：AI 工作負載有獨特的擴展需求
+- **可擴展性**：AI 工作負載具有獨特的擴展需求
 - **成本管理**：如果未正確配置，AI 服務可能會非常昂貴
 
 ## 模組 2：部署您的第一個 AI 應用程式
@@ -138,7 +143,7 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### 步驟 2.2：部署基礎架構和應用程式
+### 步驟 2.2：部署基礎設施和應用程式
 
 1. **使用 AZD 部署：**
 ```bash
@@ -147,8 +152,8 @@ azd up
 
 **執行 `azd up` 時發生的事情：**
 - ✅ 配置 Azure OpenAI 服務
-- ✅ 創建認知搜尋服務
-- ✅ 設置 Web 應用程式的 App Service
+- ✅ 創建認知搜索服務
+- ✅ 設置 Web 應用的 App Service
 - ✅ 配置網絡和安全性
 - ✅ 部署應用程式代碼
 - ✅ 設置監控和日誌記錄
@@ -168,18 +173,18 @@ azd show --output json | grep "webAppUrl"
 ```
 
 3. **測試 AI 功能：**
-   - 瀏覽到 Web 應用程式
+   - 瀏覽 Web 應用
    - 嘗試示例查詢
-   - 驗證 AI 回應是否正常運作
+   - 驗證 AI 回應是否正常工作
 
 ### **實驗練習 2.1：故障排除練習**
 
-**場景**：您的部署成功，但 AI 沒有回應。
+**場景**：您的部署成功，但 AI 無法回應。
 
 **需要檢查的常見問題：**
 1. **OpenAI API 密鑰**：確認是否正確設置
 2. **模型可用性**：檢查您的地區是否支持該模型
-3. **網絡連接**：確保服務可以通信
+3. **網絡連接**：確保服務之間可以通信
 4. **RBAC 權限**：確認應用程式可以訪問 OpenAI
 
 **調試命令：**
@@ -209,7 +214,7 @@ azd deploy
 
 2. **添加額外的 AI 服務：**
 
-編輯 `infra/main.bicep` 以添加 Document Intelligence：
+編輯 `infra/main.bicep` 以添加文檔智能：
 
 ```bicep
 // Add to main.bicep
@@ -255,25 +260,25 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 3. 部署並比較與生產配置的成本
 
 **解決提示：**
-- 儘可能使用 F0（免費）層的認知服務
-- 在開發中使用搜尋服務的基本層
-- 考慮使用 Functions 的消耗計劃
+- 使用 F0（免費）層作為認知服務
+- 在開發中使用基本層作為搜索服務
+- 考慮使用消耗計劃作為函數
 
-## 模組 4：安全性和生產最佳實踐
+## 模組 4：安全性和生產環境最佳實踐
 
 ### 步驟 4.1：安全憑證管理
 
 **當前挑戰**：許多 AI 應用程式硬編碼 API 密鑰或使用不安全的存儲。
 
-**AZD 解決方案**：托管身份 + Key Vault 整合。
+**AZD 解決方案**：托管身份 + Key Vault 集成。
 
-1. **檢查模板中的安全配置：**
+1. **查看模板中的安全配置：**
 ```bash
 # Look for Key Vault and Managed Identity configuration
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **驗證托管身份是否正常運作：**
+2. **驗證托管身份是否正常工作：**
 ```bash
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
@@ -315,7 +320,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **設置 AI 特定的監控：**
+2. **設置 AI 特定監控：**
 
 為 AI 操作添加自定義指標：
 ```bicep
@@ -407,7 +412,7 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **創建基礎架構模板：**
+3. **創建基礎設施模板：**
 
 **infra/main.bicep** - 主模板：
 ```bicep
@@ -457,10 +462,10 @@ output name string = openAIAccount.name
 
 **需求：**
 - 使用 Azure OpenAI 進行內容分析
-- 使用 Document Intelligence 進行 OCR
+- 使用文檔智能進行 OCR
 - 使用存儲帳戶進行文檔上傳
-- 使用 Function App 處理邏輯
-- 使用 Web 應用程式作為用戶界面
+- 使用函數應用進行處理邏輯
+- 使用 Web 應用進行用戶界面
 
 **加分項：**
 - 添加適當的錯誤處理
@@ -518,7 +523,7 @@ az role assignment create \
 3. 驗證網絡連接和延遲
 
 **解決方案：**
-- 為常見查詢實施緩存
+- 為常見查詢實現緩存
 - 使用適合用例的 OpenAI 模型
 - 考慮高負載場景的讀取副本
 
@@ -543,11 +548,11 @@ az role assignment create \
 
 1. **創建自定義儀表板：**
 
-進入 Azure 入口並創建包含以下內容的儀表板：
+進入 Azure 入口並創建儀表板，包含：
 - OpenAI 請求數量和延遲
 - 應用程式錯誤率
 - 資源使用情況
-- 成本追蹤
+- 成本跟蹤
 
 2. **設置警報：**
 ```bash
@@ -571,7 +576,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 2. **實施成本控制：**
 - 設置預算警報
 - 使用自動擴展策略
-- 實施請求緩存
+- 實現請求緩存
 - 監控 OpenAI 的令牌使用情況
 
 ### **實驗練習 7.1：性能優化**
@@ -584,32 +589,32 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - 維持 99.9% 的正常運行時間
 
 **可嘗試的策略：**
-- 實施回應緩存
+- 實現回應緩存
 - 優化提示以提高令牌效率
 - 使用適合的計算 SKU
 - 設置適當的自動擴展
 
-## 最終挑戰：端到端實施
+## 最終挑戰：端到端實現
 
 ### 挑戰場景
 
-您需要創建一個生產級的 AI 驅動客服聊天機器人，要求如下：
+您需要創建一個生產就緒的 AI 驅動客服聊天機器人，要求如下：
 
 **功能需求：**
 - 用於客戶交互的 Web 界面
-- 整合 Azure OpenAI 以生成回應
-- 使用認知搜尋進行文檔搜索
-- 整合現有客戶數據庫
+- 集成 Azure OpenAI 以生成回應
+- 使用認知搜索進行文檔搜索
+- 集成現有客戶數據庫
 - 支持多語言
 
 **非功能需求：**
 - 支持 1000 名並發用戶
-- 99.9% 的正常運行 SLA
+- 99.9% 的正常運行時間 SLA
 - 符合 SOC 2 合規性
 - 每月成本低於 $500
 - 部署到多個環境（開發、測試、生產）
 
-### 實施步驟
+### 實現步驟
 
 1. **設計架構**
 2. **創建 AZD 模板**
@@ -621,9 +626,9 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ### 評估標準
 
 - ✅ **功能性**：是否滿足所有需求？
-- ✅ **安全性**：是否實施了最佳實踐？
+- ✅ **安全性**：是否實施最佳實踐？
 - ✅ **可擴展性**：是否能處理負載？
-- ✅ **可維護性**：代碼和基礎架構是否井然有序？
+- ✅ **可維護性**：代碼和基礎設施是否組織良好？
 - ✅ **成本**：是否符合預算？
 
 ## 附加資源
@@ -640,36 +645,41 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ### 社群資源
 - [Azure AI Foundry Discord](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)  
+- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)  
 
-## 🎓 完成證書
+## 🎓 完成證書  
 
-恭喜！您已完成 AI 工作坊實驗。您現在應該能夠：
+恭喜！你已完成 AI 工作坊實驗室。現在你應該能夠：  
 
-- ✅ 將現有的 AI 應用程式轉換為 AZD 模板
-- ✅ 部署生產級 AI 應用程式
+- ✅ 將現有的 AI 應用程式轉換為 AZD 模板  
+- ✅ 部署可供生產使用的 AI 應用程式  
 - ✅ 實施 AI 工作負載的安全最佳實踐  
-- ✅ 監控並優化 AI 應用程式效能  
-- ✅ 排解常見的部署問題  
+- ✅ 監控並優化 AI 應用程式的效能  
+- ✅ 排查常見的部署問題  
 
 ### 下一步  
 1. 將這些模式應用到你自己的 AI 項目  
 2. 向社群回饋模板  
-3. 加入 Azure AI Foundry Discord，獲取持續支援  
-4. 探索進階主題，例如多地區部署  
+3. 加入 Azure AI Foundry Discord 獲取持續支援  
+4. 探索進階主題，例如多區域部署  
 
----
+---  
 
 **工作坊回饋**：透過在 [Azure AI Foundry Discord #Azure 頻道](https://discord.gg/microsoft-azure) 分享你的體驗，幫助我們改進這個工作坊。  
 
----
+---  
 
-**上一章：** [AI 模型部署](ai-model-deployment.md) | **下一章：** [AI 生產環境實踐](production-ai-practices.md)  
+**章節導航：**  
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)  
+- **📖 當前章節**：第 2 章 - AI 優先開發  
+- **⬅️ 上一章**：[AI 模型部署](ai-model-deployment.md)  
+- **➡️ 下一章**：[生產環境 AI 最佳實踐](production-ai-practices.md)  
+- **🚀 下一章節**：[第 3 章：配置](../getting-started/configuration.md)  
 
 **需要幫助？** 加入我們的社群，參與有關 AZD 和 AI 部署的支援與討論。  
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。

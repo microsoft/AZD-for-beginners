@@ -1,25 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T17:02:19+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T13:08:35+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "hk"
 }
 -->
-# 配置資源 - 使用 AZD 實現基礎設施即代碼
+# 使用 AZD 配置 Azure 資源
+
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章內容**: 第四章 - 基礎設施即代碼與部署
+- **⬅️ 上一章**: [部署指南](deployment-guide.md)
+- **➡️ 下一章**: [第五章：多代理 AI 解決方案](../../examples/retail-scenario.md)
+- **🔧 相關章節**: [第六章：部署前驗證](../pre-deployment/capacity-planning.md)
 
 ## 簡介
 
-這份全面指南涵蓋了使用 Azure Developer CLI 配置和管理 Azure 資源所需的一切知識。學習如何從基礎資源創建到高級企業級基礎設施架構，實現基礎設施即代碼（IaC）的模式，並使用 Bicep、ARM 模板、Terraform 和 Pulumi。
+這份全面指南涵蓋了使用 Azure Developer CLI 配置和管理 Azure 資源所需的所有知識。學習如何從基礎資源創建到使用 Bicep、ARM 模板、Terraform 和 Pulumi 實現企業級基礎設施架構，並掌握基礎設施即代碼（IaC）模式。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
-- 精通基礎設施即代碼的原則以及 Azure 資源配置
-- 理解 Azure Developer CLI 支援的多種 IaC 提供者
-- 設計並實現常見應用架構的 Bicep 模板
-- 配置資源參數、變數及針對特定環境的設置
+- 掌握基礎設施即代碼的原則以及 Azure 資源配置
+- 了解 Azure Developer CLI 支援的多種 IaC 提供者
+- 設計並實現適用於常見應用架構的 Bicep 模板
+- 配置資源參數、變數及特定環境設置
 - 實現包括網絡和安全在內的高級基礎設施模式
 - 管理資源生命周期、更新及依賴解決
 
@@ -30,7 +37,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 配置具有正確資源依賴的複雜多服務架構
 - 為多個環境和配置實現參數化模板
 - 排查基礎設施配置問題並解決部署失敗
-- 將 Azure 良好架構框架原則應用於基礎設施設計
+- 在基礎設施設計中應用 Azure 良好架構框架原則
 - 管理基礎設施更新並實現基礎設施版本控制策略
 
 ## 基礎設施配置概述
@@ -39,9 +46,9 @@ Azure Developer CLI 支援多種基礎設施即代碼（IaC）提供者：
 - **Bicep**（推薦）- Azure 的領域專用語言
 - **ARM 模板** - 基於 JSON 的 Azure 資源管理器模板
 - **Terraform** - 多雲基礎設施工具
-- **Pulumi** - 使用編程語言的現代基礎設施即代碼
+- **Pulumi** - 使用編程語言的現代基礎設施即代碼工具
 
-## 理解 Azure 資源
+## 了解 Azure 資源
 
 ### 資源層級
 ```
@@ -52,11 +59,11 @@ Azure Account
 ```
 
 ### 常見應用的 Azure 服務
-- **計算**：App Service、Container Apps、Functions、Virtual Machines
-- **存儲**：Storage Account、Cosmos DB、SQL Database、PostgreSQL
-- **網絡**：Virtual Network、Application Gateway、CDN
-- **安全**：Key Vault、Application Insights、Log Analytics
-- **AI/ML**：Cognitive Services、OpenAI、Machine Learning
+- **計算**: App Service、Container Apps、Functions、虛擬機
+- **存儲**: Storage Account、Cosmos DB、SQL Database、PostgreSQL
+- **網絡**: Virtual Network、Application Gateway、CDN
+- **安全**: Key Vault、Application Insights、Log Analytics
+- **AI/ML**: Cognitive Services、OpenAI、Machine Learning
 
 ## Bicep 基礎設施模板
 
@@ -344,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### 設置託管身份
+### 設置受管理身份
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -372,7 +379,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 網絡與連接
 
-### Virtual Network 配置
+### 虛擬網絡配置
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -435,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### 配備 SSL 的 Application Gateway
+### 使用 SSL 的 Application Gateway
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -759,7 +766,7 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🔄 資源更新與遷移
 
-### 安全的資源更新
+### 安全資源更新
 ```bash
 # Preview infrastructure changes
 azd provision --preview
@@ -874,10 +881,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **導航**
-- **上一課**：[部署指南](deployment-guide.md)
-- **下一課**：[容量規劃](../pre-deployment/capacity-planning.md)
+- **上一課**: [部署指南](deployment-guide.md)
+- **下一課**: [容量規劃](../pre-deployment/capacity-planning.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為具權威性的來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。

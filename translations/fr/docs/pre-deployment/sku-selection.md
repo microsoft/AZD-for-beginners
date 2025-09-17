@@ -1,24 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T17:23:52+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-17T13:27:40+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "fr"
 }
 -->
 # Guide de sélection des SKU - Choisir les bons niveaux de service Azure
 
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 6 - Validation et planification avant le déploiement
+- **⬅️ Précédent** : [Planification de la capacité](capacity-planning.md)
+- **➡️ Suivant** : [Vérifications préalables](preflight-checks.md)
+- **🚀 Chapitre suivant** : [Chapitre 7 : Dépannage](../troubleshooting/common-issues.md)
+
 ## Introduction
 
-Ce guide complet vous aide à sélectionner les SKU (Unités de gestion des stocks) de services Azure optimaux pour différents environnements, charges de travail et besoins. Apprenez à analyser les besoins en performance, les considérations de coût et les exigences de scalabilité pour choisir les niveaux de service les plus appropriés pour vos déploiements Azure Developer CLI.
+Ce guide complet vous aide à sélectionner les SKU (Unités de gestion des stocks) des services Azure optimaux pour différents environnements, charges de travail et exigences. Apprenez à analyser les besoins en performance, les considérations de coût et les exigences de scalabilité pour choisir les niveaux de service les plus appropriés pour vos déploiements Azure Developer CLI.
 
 ## Objectifs d'apprentissage
 
 En suivant ce guide, vous allez :
 - Comprendre les concepts de SKU Azure, les modèles de tarification et les différences de fonctionnalités
-- Maîtriser les stratégies de sélection de SKU spécifiques à l'environnement pour le développement, la préproduction et la production
-- Analyser les besoins des charges de travail et les associer aux niveaux de service appropriés
+- Maîtriser les stratégies de sélection de SKU spécifiques à l'environnement pour le développement, la mise en scène et la production
+- Analyser les exigences des charges de travail et les associer aux niveaux de service appropriés
 - Mettre en œuvre des stratégies d'optimisation des coûts grâce à une sélection intelligente des SKU
 - Appliquer des techniques de test de performance et de validation pour les choix de SKU
 - Configurer des recommandations et une surveillance automatisées des SKU
@@ -26,8 +33,8 @@ En suivant ce guide, vous allez :
 ## Résultats d'apprentissage
 
 À la fin de ce guide, vous serez capable de :
-- Sélectionner les SKU de services Azure appropriés en fonction des besoins et contraintes des charges de travail
-- Concevoir des architectures multi-environnements rentables avec une sélection de niveaux adaptée
+- Sélectionner les SKU de services Azure appropriés en fonction des exigences et contraintes des charges de travail
+- Concevoir des architectures multi-environnements rentables avec une sélection de niveaux appropriée
 - Mettre en œuvre des benchmarks de performance et des validations pour les choix de SKU
 - Créer des outils automatisés pour les recommandations de SKU et l'optimisation des coûts
 - Planifier les migrations de SKU et les stratégies de scalabilité pour répondre aux besoins changeants
@@ -49,7 +56,7 @@ En suivant ce guide, vous allez :
 
 ### Que sont les SKU ?
 
-Les SKU (Unités de gestion des stocks) représentent différents niveaux de service et performances pour les ressources Azure. Chaque SKU offre différents :
+Les SKU (Unités de gestion des stocks) représentent différents niveaux de service et niveaux de performance pour les ressources Azure. Chaque SKU offre différents :
 
 - **Caractéristiques de performance** (CPU, mémoire, débit)
 - **Disponibilité des fonctionnalités** (options de scalabilité, niveaux de SLA)
@@ -58,7 +65,7 @@ Les SKU (Unités de gestion des stocks) représentent différents niveaux de ser
 
 ### Facteurs clés dans la sélection des SKU
 
-1. **Besoins des charges de travail**
+1. **Exigences des charges de travail**
    - Modèles de trafic/charge attendus
    - Exigences de performance (CPU, mémoire, I/O)
    - Besoins de stockage et modèles d'accès
@@ -76,7 +83,7 @@ Les SKU (Unités de gestion des stocks) représentent différents niveaux de ser
 4. **Projections de croissance**
    - Exigences de scalabilité
    - Besoins futurs en fonctionnalités
-   - Complexité de migration
+   - Complexité de la migration
 
 ---
 
@@ -101,12 +108,12 @@ skus:
 
 #### Caractéristiques
 - **App Service** : F1 (Gratuit) ou B1 (Basique) pour des tests simples
-- **Bases de données** : Niveau basique avec ressources minimales
+- **Bases de données** : Niveau basique avec des ressources minimales
 - **Stockage** : Standard avec redondance locale uniquement
 - **Calcul** : Ressources partagées acceptables
 - **Réseau** : Configurations basiques
 
-### Environnement de préproduction/test
+### Environnement de mise en scène/test
 
 **Priorités** : Configuration proche de la production, équilibre des coûts, capacité de test de performance
 
@@ -147,7 +154,7 @@ skus:
 ```
 
 #### Caractéristiques
-- **Haute disponibilité** : Exigences SLA de 99,9 %+
+- **Haute disponibilité** : Exigences de SLA de 99,9 %+
 - **Performance** : Ressources dédiées, haut débit
 - **Sécurité** : Fonctionnalités de sécurité premium
 - **Scalabilité** : Capacités complètes d'auto-scalabilité
@@ -214,7 +221,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 2. **Basé sur vCore** (Recommandé pour la production)
    - **Usage général** : Équilibre entre calcul et stockage
-   - **Critique pour l'entreprise** : Faible latence, haut IOPS
+   - **Critique pour l'entreprise** : Faible latence, IOPS élevé
    - **Hyperscale** : Stockage hautement évolutif (jusqu'à 100 To)
 
 #### Exemples de configuration
@@ -264,7 +271,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 2. **Dédié (Profils de charge de travail)**
    - Ressources de calcul dédiées
    - Performance prévisible
-   - Mieux adapté aux charges de production
+   - Mieux adapté aux charges de travail de production
 
 #### Exemples de configuration
 
@@ -341,7 +348,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 3. **Sans serveur**
    - Paiement par requête
    - Pas de débit provisionné
-   - Idéal pour le développement et les charges intermittentes
+   - Idéal pour le développement et les charges de travail intermittentes
 
 #### Exemples de SKU
 
@@ -403,14 +410,14 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 #### Types de compte de stockage
 
 1. **Standard_LRS** - Développement, données non critiques
-2. **Standard_GRS** - Production, besoin de redondance géographique
+2. **Standard_GRS** - Production, redondance géographique nécessaire
 3. **Premium_LRS** - Applications haute performance
-4. **Premium_ZRS** - Haute disponibilité avec redondance zonale
+4. **Premium_ZRS** - Haute disponibilité avec redondance par zone
 
 #### Niveaux de performance
 
 - **Standard** : Usage général, rentable
-- **Premium** : Scénarios haute performance, faible latence
+- **Premium** : Haute performance, scénarios à faible latence
 
 ```bicep
 // Development
@@ -463,7 +470,7 @@ az reservations catalog show --reserved-resource-type SqlDatabase
 az reservations catalog show --reserved-resource-type CosmosDb
 ```
 
-### 2. Dimensionnement adapté
+### 2. Dimensionnement approprié
 
 Commencez avec des SKU plus petits et augmentez en fonction de l'utilisation réelle :
 
@@ -540,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Scalabilité programmée
 
-Réduisez la capacité pendant les heures creuses :
+Réduisez la scalabilité pendant les heures creuses :
 
 ```json
 {
@@ -750,7 +757,7 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Validation de performance
+### Validation de la performance
 
 ```yaml
 # Load test configuration for SKU validation
@@ -785,7 +792,7 @@ test_configuration:
 
 ---
 
-## Résumé des bonnes pratiques
+## Résumé des meilleures pratiques
 
 ### À faire
 
@@ -793,8 +800,8 @@ test_configuration:
 2. **Utilisez différents SKU pour différents environnements**
 3. **Surveillez continuellement la performance et les coûts**
 4. **Profitez de la capacité réservée pour les charges de production**
-5. **Mettez en œuvre l'auto-scalabilité là où c'est approprié**
-6. **Testez la performance avec des charges réalistes**
+5. **Mettez en œuvre l'auto-scalabilité lorsque cela est approprié**
+6. **Testez la performance avec des charges de travail réalistes**
 7. **Planifiez la croissance mais évitez la surprovision**
 8. **Utilisez les niveaux gratuits pour le développement lorsque possible**
 
@@ -816,7 +823,7 @@ test_configuration:
 ---
 
 **Navigation**
-- **Leçon précédente** : [Planification de capacité](capacity-planning.md)
+- **Leçon précédente** : [Planification de la capacité](capacity-planning.md)
 - **Leçon suivante** : [Vérifications préalables](preflight-checks.md)
 
 ---

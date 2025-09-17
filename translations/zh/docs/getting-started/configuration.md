@@ -1,39 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T16:41:07+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T12:37:19+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "zh"
 }
 -->
 # 配置指南
 
-**上一节：** [AZD 基础知识](azd-basics.md) | **下一节：** [第一个项目](first-project.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第三章 - 配置与认证
+- **⬅️ 上一章**: [你的第一个项目](first-project.md)
+- **➡️ 下一章**: [部署指南](../deployment/deployment-guide.md)
+- **🚀 下一章节**: [第四章：基础设施即代码](../deployment/deployment-guide.md)
 
-## 介绍
+## 简介
 
-本指南全面涵盖了配置 Azure Developer CLI 的所有方面，以实现最佳开发和部署工作流程。您将学习配置层级、环境管理、身份验证方法以及高级配置模式，从而实现高效且安全的 Azure 部署。
+本指南全面介绍了如何配置 Azure Developer CLI，以优化开发和部署工作流程。你将学习配置层级、环境管理、认证方法以及高级配置模式，从而实现高效且安全的 Azure 部署。
 
 ## 学习目标
 
-完成本课程后，您将能够：
-- 掌握 azd 的配置层级，并了解设置的优先级
+完成本课程后，你将能够：
+- 掌握 azd 的配置层级，理解设置的优先级
 - 有效配置全局和项目特定的设置
 - 管理具有不同配置的多个环境
-- 实现安全的身份验证和授权模式
-- 理解复杂场景的高级配置模式
+- 实现安全的认证和授权模式
+- 理解复杂场景下的高级配置模式
 
 ## 学习成果
 
-完成本课程后，您将能够：
+完成本课程后，你将能够：
 - 配置 azd 以优化开发工作流程
 - 设置和管理多个部署环境
 - 实现安全的配置管理实践
 - 解决与配置相关的问题
-- 根据特定组织需求定制 azd 的行为
+- 根据组织需求定制 azd 的行为
 
-本指南全面涵盖了配置 Azure Developer CLI 的所有方面，以实现最佳开发和部署工作流程。
+本指南全面介绍了如何配置 Azure Developer CLI，以优化开发和部署工作流程。
 
 ## 配置层级
 
@@ -272,7 +277,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 身份验证配置
+## 🔐 认证配置
 
 ### Azure CLI 集成
 ```bash
@@ -286,8 +291,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### 服务主体身份验证
-用于 CI/CD 管道：
+### 服务主体认证
+适用于 CI/CD 流水线：
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -300,7 +305,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### 托管身份
-用于 Azure 托管环境：
+适用于 Azure 托管环境：
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -426,7 +431,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### 预生产环境
+### 测试环境
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -520,7 +525,7 @@ database:
 ```
 
 ### 4. 配置文档
-在 `CONFIG.md` 中记录您的配置：
+在 `CONFIG.md` 中记录你的配置：
 ```markdown
 # Configuration Guide
 
@@ -537,7 +542,7 @@ database:
 
 ## 下一步
 
-- [您的第一个项目](first-project.md) - 实践应用配置
+- [你的第一个项目](first-project.md) - 实践应用配置
 - [部署指南](../deployment/deployment-guide.md) - 使用配置进行部署
 - [资源预配](../deployment/provisioning.md) - 生产就绪的配置
 
@@ -549,8 +554,12 @@ database:
 
 ---
 
-**上一节：** [AZD 基础知识](azd-basics.md) | **下一节：** [第一个项目](first-project.md)
-- **下一课：** [您的第一个项目](first-project.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
+- **📖 当前章节**: 第三章 - 配置与认证
+- **⬅️ 上一章**: [你的第一个项目](first-project.md)
+- **➡️ 下一章节**: [第四章：基础设施即代码](../deployment/deployment-guide.md)
+- **下一课**: [你的第一个项目](first-project.md)
 
 ---
 

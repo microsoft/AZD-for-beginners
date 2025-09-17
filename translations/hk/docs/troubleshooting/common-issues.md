@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T17:06:00+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T13:08:53+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "hk"
 }
 -->
 # 常見問題及解決方法
 
+**章節導航：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 當前章節**: 第七章 - 疑難排解與除錯
+- **⬅️ 上一章**: [第六章：部署前檢查](../pre-deployment/preflight-checks.md)
+- **➡️ 下一步**: [除錯指南](debugging.md)
+- **🚀 下一章**: [第八章：生產及企業模式](../ai-foundry/production-ai-practices.md)
+
 ## 簡介
 
-這份全面的故障排除指南涵蓋使用 Azure Developer CLI 時最常遇到的問題。學習如何診斷、排查及解決身份驗證、部署、基礎設施配置及應用程式設定的常見問題。每個問題都包含詳細的症狀、根本原因及逐步解決方法。
+這份全面的疑難排解指南涵蓋了使用 Azure Developer CLI 時最常遇到的問題。學習如何診斷、排除及解決身份驗證、部署、基礎設施配置及應用程式設定的常見問題。每個問題都包含詳細的症狀、根本原因及逐步解決方法。
 
 ## 學習目標
 
@@ -19,23 +26,23 @@ CO_OP_TRANSLATOR_METADATA:
 - 掌握 Azure Developer CLI 問題的診斷技巧
 - 理解常見身份驗證及權限問題及其解決方法
 - 解決部署失敗、基礎設施配置錯誤及設定問題
-- 實施主動監控及調試策略
-- 應用系統化的故障排除方法解決複雜問題
-- 配置正確的日誌及監控以防止未來問題
+- 實施主動監控及除錯策略
+- 應用系統化的疑難排解方法處理複雜問題
+- 配置正確的日誌記錄及監控以防止未來問題
 
 ## 學習成果
 
 完成後，您將能夠：
 - 使用內建診斷工具診斷 Azure Developer CLI 問題
 - 獨立解決身份驗證、訂閱及權限相關問題
-- 有效排查部署失敗及基礎設施配置錯誤
-- 調試應用程式設定問題及環境特定問題
+- 有效排除部署失敗及基礎設施配置錯誤
+- 除錯應用程式設定問題及環境特定問題
 - 實施監控及警報以主動識別潛在問題
-- 應用最佳實踐於日誌、調試及問題解決工作流程
+- 應用最佳實踐進行日誌記錄、除錯及問題解決工作流程
 
 ## 快速診斷
 
-在深入探討具體問題之前，執行以下命令以收集診斷信息：
+在深入探討具體問題之前，執行以下命令以收集診斷資訊：
 
 ```bash
 # Check azd version and health
@@ -57,9 +64,9 @@ azd <command> --debug
 
 ## 身份驗證問題
 
-### 問題："無法獲取訪問令牌"
+### 問題："無法獲取訪問權杖"
 **症狀：**
-- `azd up` 出現身份驗證錯誤
+- `azd up` 因身份驗證錯誤失敗
 - 命令返回 "未授權" 或 "訪問被拒"
 
 **解決方法：**
@@ -80,7 +87,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### 問題：部署時 "權限不足"
+### 問題："部署時權限不足"
 **症狀：**
 - 部署因權限錯誤失敗
 - 無法創建某些 Azure 資源
@@ -131,10 +138,10 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### 問題：位置/區域不可用
+### 問題：位置/地區不可用
 **症狀：**
 - "位置 'xyz' 不可用於資源類型"
-- 選定區域內某些 SKU 不可用
+- 某些 SKU 在選定地區不可用
 
 **解決方法：**
 ```bash
@@ -153,7 +160,7 @@ azd env set AZURE_LOCATION eastus2
 ### 問題：配額超出錯誤
 **症狀：**
 - "資源類型配額超出"
-- "已達到資源最大數量"
+- "達到資源最大數量"
 
 **解決方法：**
 ```bash
@@ -178,7 +185,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 ### 問題：Bicep 模板錯誤
 **症狀：**
 - 模板驗證失敗
-- Bicep 文件中出現語法錯誤
+- Bicep 文件中的語法錯誤
 
 **解決方法：**
 ```bash
@@ -247,9 +254,9 @@ az acr login --name myregistry
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### 問題：數據庫連接失敗
+### 問題：資料庫連接失敗
 **症狀：**
-- 應用程式無法連接到數據庫
+- 應用程式無法連接到資料庫
 - 連接超時錯誤
 
 **解決方法：**
@@ -270,9 +277,9 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 設定問題
 
-### 問題：環境變數無法正常工作
+### 問題：環境變數無法正常運作
 **症狀：**
-- 應用程式無法讀取配置值
+- 應用程式無法讀取設定值
 - 環境變數顯示為空
 
 **解決方法：**
@@ -293,7 +300,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 ### 問題：SSL/TLS 證書問題
 **症狀：**
-- HTTPS 無法正常工作
+- HTTPS 無法正常運作
 - 證書驗證錯誤
 
 **解決方法：**
@@ -308,7 +315,7 @@ az webapp update --name myapp --resource-group myrg --https-only true
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### 問題：CORS 配置問題
+### 問題：CORS 設定問題
 **症狀：**
 - 前端無法調用 API
 - 跨域請求被阻止
@@ -334,7 +341,7 @@ azd show
 ### 問題：環境切換問題
 **症狀：**
 - 使用了錯誤的環境
-- 配置未正確切換
+- 設定未正確切換
 
 **解決方法：**
 ```bash
@@ -355,7 +362,7 @@ azd env select production-new
 ### 問題：環境損壞
 **症狀：**
 - 環境顯示為無效狀態
-- 資源與配置不匹配
+- 資源與設定不匹配
 
 **解決方法：**
 ```bash
@@ -419,9 +426,9 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ 故障排除工具及命令
+## 🛠️ 疑難排解工具及命令
 
-### 調試命令
+### 除錯命令
 ```bash
 # Comprehensive debugging
 export AZD_DEBUG=true
@@ -484,13 +491,13 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### 收集的信息
-在聯繫支援之前，請收集以下信息：
+### 收集資訊
+在聯繫支援之前，請收集以下資訊：
 - `azd version` 輸出
 - `azd info` 輸出
-- 錯誤信息（完整文本）
+- 錯誤訊息（完整文本）
 - 重現問題的步驟
-- 環境詳細信息（`azd env show`）
+- 環境詳情（`azd env show`）
 - 問題開始的時間線
 
 ### 日誌收集腳本
@@ -568,22 +575,22 @@ az security assessment list --resource-group myrg
 
 ## 相關資源
 
-- [調試指南](debugging.md) - 高級調試技巧
-- [資源配置](../deployment/provisioning.md) - 基礎設施故障排除
+- [除錯指南](debugging.md) - 高級除錯技巧
+- [資源配置](../deployment/provisioning.md) - 基礎設施疑難排解
 - [容量規劃](../pre-deployment/capacity-planning.md) - 資源規劃指導
-- [SKU 選擇](../pre-deployment/sku-selection.md) - 服務層建議
+- [SKU 選擇](../pre-deployment/sku-selection.md) - 服務層級建議
 
 ---
 
-**提示**：將本指南加入書籤，遇到問題時隨時參考。大多數問題已被解決並有現成的解決方案！
+**提示**: 將本指南加入書籤，遇到問題時隨時參考。大多數問題都曾出現過並有既定解決方法！
 
 ---
 
 **導航**
-- **上一課**：[資源配置](../deployment/provisioning.md)
-- **下一課**：[調試指南](debugging.md)
+- **上一課**: [資源配置](../deployment/provisioning.md)
+- **下一課**: [除錯指南](debugging.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+此文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯。我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。應以原始語言的文件作為權威來源。對於關鍵資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤詮釋概不負責。

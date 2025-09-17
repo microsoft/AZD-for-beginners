@@ -1,33 +1,38 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T16:50:51+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-17T13:23:07+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "fr"
 }
 -->
 # Votre Premier Projet - Tutoriel Pratique
 
-**Précédent :** [Configuration](configuration.md) | **Suivant :** [Intégration Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigation du Chapitre :**
+- **📚 Accueil du Cours** : [AZD Pour Débutants](../../README.md)
+- **📖 Chapitre Actuel** : Chapitre 1 - Fondations & Démarrage Rapide
+- **⬅️ Précédent** : [Installation & Configuration](installation.md)
+- **➡️ Suivant** : [Configuration](configuration.md)
+- **🚀 Chapitre Suivant** : [Chapitre 2 : Développement AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 
 Bienvenue dans votre premier projet avec Azure Developer CLI ! Ce tutoriel pratique complet vous guide pas à pas pour créer, déployer et gérer une application full-stack sur Azure en utilisant azd. Vous travaillerez sur une véritable application de gestion de tâches comprenant un frontend React, un backend API Node.js et une base de données MongoDB.
 
-## Objectifs d'apprentissage
+## Objectifs d'Apprentissage
 
 En complétant ce tutoriel, vous allez :
-- Maîtriser le workflow d'initialisation de projet azd à l'aide de modèles
+- Maîtriser le workflow d'initialisation de projet azd en utilisant des modèles
 - Comprendre la structure des projets Azure Developer CLI et les fichiers de configuration
-- Réaliser un déploiement complet d'application sur Azure avec provisionnement d'infrastructure
+- Exécuter le déploiement complet d'une application sur Azure avec provisionnement d'infrastructure
 - Mettre en œuvre des mises à jour d'application et des stratégies de redéploiement
 - Gérer plusieurs environnements pour le développement et la mise en scène
 - Appliquer des pratiques de nettoyage des ressources et de gestion des coûts
 
-## Résultats d'apprentissage
+## Résultats d'Apprentissage
 
-À la fin de ce tutoriel, vous serez capable de :
+À la fin, vous serez capable de :
 - Initialiser et configurer des projets azd à partir de modèles de manière autonome
 - Naviguer et modifier efficacement les structures de projet azd
 - Déployer des applications full-stack sur Azure avec des commandes simples
@@ -37,14 +42,14 @@ En complétant ce tutoriel, vous allez :
 
 ## Premiers Pas
 
-### Liste de vérification des prérequis
-- ✅ Azure Developer CLI installé ([Guide d'installation](installation.md))
+### Liste de Vérification des Prérequis
+- ✅ Azure Developer CLI installé ([Guide d'Installation](installation.md))
 - ✅ Azure CLI installé et authentifié
 - ✅ Git installé sur votre système
 - ✅ Node.js 16+ (pour ce tutoriel)
 - ✅ Visual Studio Code (recommandé)
 
-### Vérifiez votre configuration
+### Vérifiez Votre Configuration
 ```bash
 # Check azd installation
 azd version
@@ -79,9 +84,9 @@ azd init --template todo-nodejs-mongo
 # - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### Ce qui vient de se passer :
+### Ce Qui Vient de Se Passer ?
 - Le code du modèle a été téléchargé dans votre répertoire local
-- Un fichier `azure.yaml` a été créé avec des définitions de services
+- Un fichier `azure.yaml` a été créé avec des définitions de service
 - Le code d'infrastructure a été configuré dans le répertoire `infra/`
 - Une configuration d'environnement a été créée
 
@@ -123,7 +128,7 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Fichiers clés à comprendre
+### Fichiers Clés à Comprendre
 
 **azure.yaml** - Le cœur de votre projet azd :
 ```bash
@@ -147,7 +152,7 @@ Avant de déployer, vous pouvez personnaliser l'application :
 code src/web/src/App.tsx
 ```
 
-Faites une modification simple :
+Faites un simple changement :
 ```typescript
 // Find the title and change it
 <h1>My Awesome Todo App</h1>
@@ -177,14 +182,14 @@ azd up
 # 4. Display the application URL
 ```
 
-### Ce qui se passe pendant le déploiement
+### Ce Qui Se Passe Pendant le Déploiement ?
 
-La commande `azd up` effectue les étapes suivantes :
-1. **Provisionnement** (`azd provision`) - Crée les ressources Azure
-2. **Packaging** - Compile le code de votre application
-3. **Déploiement** (`azd deploy`) - Déploie le code sur les ressources Azure
+La commande `azd up` effectue ces étapes :
+1. **Provision** (`azd provision`) - Crée les ressources Azure
+2. **Package** - Compile le code de votre application
+3. **Deploy** (`azd deploy`) - Déploie le code sur les ressources Azure
 
-### Résultat attendu
+### Résultat Attendu
 ```
 Packaging services (azd package)
 
@@ -225,7 +230,7 @@ azd logs
 
 ## Étape 6 : Apporter des Modifications et Redéployer
 
-Apportons une modification et voyons à quel point il est facile de mettre à jour :
+Faisons une modification et voyons à quel point il est facile de mettre à jour :
 
 ### Modifier l'API
 ```bash
@@ -239,7 +244,7 @@ Ajoutez un en-tête de réponse personnalisé :
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Déployer uniquement les modifications de code
+### Déployer Uniquement les Modifications de Code
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -372,7 +377,7 @@ azd init --template todo-java-mongo
 ### Matériaux d'Apprentissage
 - [Documentation Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Centre d'Architecture Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Framework Azure Bien-Architecturé](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cadre Bien Conçu Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Communauté & Support
 - [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -380,7 +385,7 @@ azd init --template todo-java-mongo
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Modèles & Exemples
-- [Galerie de Modèles Officiels](https://azure.github.io/awesome-azd/)
+- [Galerie de Modèles Officielle](https://azure.github.io/awesome-azd/)
 - [Modèles Communautaires](https://github.com/Azure-Samples/azd-templates)
 - [Modèles pour Entreprises](https://github.com/Azure/azure-dev/tree/main/templates)
 
@@ -390,8 +395,13 @@ azd init --template todo-java-mongo
 
 ---
 
-**Précédent :** [Configuration](configuration.md) | **Suivant :** [Intégration Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
-- **Prochaine Leçon :** [Guide de Déploiement](../deployment/deployment-guide.md)
+**Navigation du Chapitre :**
+- **📚 Accueil du Cours** : [AZD Pour Débutants](../../README.md)
+- **📖 Chapitre Actuel** : Chapitre 1 - Fondations & Démarrage Rapide
+- **⬅️ Précédent** : [Installation & Configuration](installation.md)
+- **➡️ Suivant** : [Configuration](configuration.md)
+- **🚀 Chapitre Suivant** : [Chapitre 2 : Développement AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+- **Leçon Suivante** : [Guide de Déploiement](../deployment/deployment-guide.md)
 
 ---
 

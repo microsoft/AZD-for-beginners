@@ -1,22 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T17:02:35+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T13:25:14+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "fr"
 }
 -->
-# Provisionnement des ressources - Infrastructure en tant que code avec AZD
+# Provisionnement des ressources Azure avec AZD
+
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 4 - Infrastructure en tant que code et déploiement
+- **⬅️ Précédent** : [Guide de déploiement](deployment-guide.md)
+- **➡️ Chapitre suivant** : [Chapitre 5 : Solutions IA multi-agents](../../examples/retail-scenario.md)
+- **🔧 Connexe** : [Chapitre 6 : Validation avant déploiement](../pre-deployment/capacity-planning.md)
 
 ## Introduction
 
-Ce guide complet couvre tout ce que vous devez savoir sur le provisionnement et la gestion des ressources Azure en utilisant Azure Developer CLI. Apprenez à mettre en œuvre des modèles d'Infrastructure en tant que Code (IaC), allant de la création de ressources de base à des architectures d'infrastructure avancées de niveau entreprise, en utilisant Bicep, des modèles ARM, Terraform et Pulumi.
+Ce guide complet couvre tout ce que vous devez savoir sur le provisionnement et la gestion des ressources Azure à l'aide de l'Azure Developer CLI. Apprenez à mettre en œuvre des modèles d'infrastructure en tant que code (IaC), allant de la création de ressources de base à des architectures d'infrastructure avancées de niveau entreprise, en utilisant Bicep, les modèles ARM, Terraform et Pulumi.
 
 ## Objectifs d'apprentissage
 
 En suivant ce guide, vous allez :
-- Maîtriser les principes de l'Infrastructure en tant que Code et le provisionnement des ressources Azure
+- Maîtriser les principes de l'infrastructure en tant que code et le provisionnement des ressources Azure
 - Comprendre les différents fournisseurs IaC pris en charge par Azure Developer CLI
 - Concevoir et implémenter des modèles Bicep pour des architectures d'applications courantes
 - Configurer des paramètres de ressources, des variables et des paramètres spécifiques à l'environnement
@@ -26,16 +33,16 @@ En suivant ce guide, vous allez :
 ## Résultats d'apprentissage
 
 À la fin de ce guide, vous serez capable de :
-- Concevoir et provisionner une infrastructure Azure en utilisant Bicep et des modèles ARM
+- Concevoir et provisionner une infrastructure Azure en utilisant Bicep et les modèles ARM
 - Configurer des architectures complexes multi-services avec des dépendances de ressources appropriées
 - Implémenter des modèles paramétrés pour plusieurs environnements et configurations
 - Résoudre les problèmes de provisionnement d'infrastructure et corriger les échecs de déploiement
-- Appliquer les principes du Framework Azure Well-Architected à la conception d'infrastructure
+- Appliquer les principes du cadre Azure Well-Architected à la conception d'infrastructure
 - Gérer les mises à jour d'infrastructure et mettre en œuvre des stratégies de versionnement d'infrastructure
 
 ## Aperçu du provisionnement d'infrastructure
 
-Azure Developer CLI prend en charge plusieurs fournisseurs d'Infrastructure en tant que Code (IaC) :
+Azure Developer CLI prend en charge plusieurs fournisseurs d'infrastructure en tant que code (IaC) :
 - **Bicep** (recommandé) - Langage spécifique au domaine d'Azure
 - **Modèles ARM** - Modèles JSON basés sur Azure Resource Manager
 - **Terraform** - Outil d'infrastructure multi-cloud
@@ -52,11 +59,11 @@ Azure Account
 ```
 
 ### Services Azure courants pour les applications
-- **Calcul** : App Service, Container Apps, Functions, Virtual Machines
-- **Stockage** : Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Réseau** : Virtual Network, Application Gateway, CDN
+- **Calcul** : App Service, Container Apps, Functions, Machines Virtuelles
+- **Stockage** : Compte de stockage, Cosmos DB, Base de données SQL, PostgreSQL
+- **Réseau** : Réseau virtuel, Application Gateway, CDN
 - **Sécurité** : Key Vault, Application Insights, Log Analytics
-- **IA/ML** : Cognitive Services, OpenAI, Machine Learning
+- **IA/ML** : Services cognitifs, OpenAI, Machine Learning
 
 ## Modèles d'infrastructure Bicep
 
@@ -302,7 +309,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 Gestion de la sécurité et des secrets
 
-### Intégration avec Key Vault
+### Intégration Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -372,7 +379,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Réseau et connectivité
 
-### Configuration de Virtual Network
+### Configuration de réseau virtuel
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -862,14 +869,14 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Planification avant déploiement](../pre-deployment/capacity-planning.md) - Valider la disponibilité des ressources
 - [Problèmes courants](../troubleshooting/common-issues.md) - Résoudre les problèmes d'infrastructure
 - [Guide de débogage](../troubleshooting/debugging.md) - Déboguer les problèmes de provisionnement
-- [Sélection des SKU](../pre-deployment/sku-selection.md) - Choisir les niveaux de service appropriés
+- [Sélection de SKU](../pre-deployment/sku-selection.md) - Choisir les niveaux de service appropriés
 
 ## Ressources supplémentaires
 
 - [Documentation Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Modèles Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Centre d'architecture Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Framework Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cadre Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 

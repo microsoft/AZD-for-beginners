@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T17:14:56+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T13:26:57+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "fr"
 }
 -->
-# Vérifications préalables - Validation de la préparation au déploiement
+# Vérifications préalables aux déploiements AZD
+
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 6 - Validation et planification avant déploiement
+- **⬅️ Précédent** : [Sélection des SKU](sku-selection.md)
+- **➡️ Chapitre suivant** : [Chapitre 7 : Résolution des problèmes](../troubleshooting/common-issues.md)
+- **🔧 Connexe** : [Chapitre 4 : Guide de déploiement](../deployment/deployment-guide.md)
 
 ## Introduction
 
@@ -17,17 +24,17 @@ Ce guide complet fournit des scripts et des procédures de validation avant dép
 
 En suivant ce guide, vous allez :
 - Maîtriser les techniques et scripts de validation automatisée avant déploiement
-- Comprendre les stratégies de vérification approfondies pour l'authentification, les permissions et les quotas
-- Mettre en œuvre des procédures de validation de la disponibilité et de la capacité des ressources
+- Comprendre les stratégies de vérification complètes pour l'authentification, les permissions et les quotas
+- Mettre en œuvre des procédures de validation de disponibilité et de capacité des ressources
 - Configurer des vérifications de sécurité et de conformité pour les politiques organisationnelles
 - Concevoir des workflows d'estimation des coûts et de validation budgétaire
 - Créer des automatisations personnalisées de vérifications préalables pour les pipelines CI/CD
 
 ## Résultats d'apprentissage
 
-À la fin de ce guide, vous serez capable de :
+À la fin, vous serez capable de :
 - Créer et exécuter des scripts de validation préalable complets
-- Concevoir des workflows de vérification automatisée pour différents scénarios de déploiement
+- Concevoir des workflows de vérification automatisés pour différents scénarios de déploiement
 - Mettre en œuvre des procédures et politiques de validation spécifiques à l'environnement
 - Configurer une surveillance proactive et des alertes pour la préparation au déploiement
 - Résoudre les problèmes avant déploiement et mettre en œuvre des actions correctives
@@ -41,7 +48,7 @@ En suivant ce guide, vous allez :
 - [Validation de l'environnement](../../../../docs/pre-deployment)
 - [Validation des ressources](../../../../docs/pre-deployment)
 - [Vérifications de sécurité et de conformité](../../../../docs/pre-deployment)
-- [Planification des performances et de la capacité](../../../../docs/pre-deployment)
+- [Planification de performance et de capacité](../../../../docs/pre-deployment)
 - [Résolution des problèmes courants](../../../../docs/pre-deployment)
 
 ---
@@ -51,13 +58,13 @@ En suivant ce guide, vous allez :
 Les vérifications préalables sont des validations essentielles effectuées avant le déploiement pour garantir :
 
 - **Disponibilité des ressources** et quotas dans les régions cibles
-- **Authentification et permissions** correctement configurées
+- **Configuration correcte de l'authentification et des permissions**
 - **Validité des modèles** et exactitude des paramètres
 - **Connectivité réseau** et dépendances
 - **Conformité en matière de sécurité** avec les politiques organisationnelles
 - **Estimation des coûts** dans les limites budgétaires
 
-### Quand effectuer les vérifications préalables
+### Quand exécuter les vérifications préalables
 
 - **Avant le premier déploiement** dans un nouvel environnement
 - **Après des modifications importantes des modèles**
@@ -821,7 +828,7 @@ Imprimez cette liste et vérifiez chaque élément avant le déploiement :
 - [ ] Connectivité réseau aux points de terminaison Azure vérifiée
 - [ ] Paramètres de pare-feu/proxy configurés si nécessaire
 - [ ] Key Vault configuré pour la gestion des secrets
-- [ ] Identités managées utilisées autant que possible
+- [ ] Identités gérées utilisées autant que possible
 - [ ] Enforcement HTTPS activé pour les applications web
 
 #### ✅ Gestion des coûts
@@ -1046,7 +1053,7 @@ if __name__ == "__main__":
 
 ## Vérifications de sécurité et de conformité
 
-### Script de validation de la sécurité
+### Script de validation de sécurité
 
 ```bash
 #!/bin/bash
@@ -1297,7 +1304,7 @@ steps:
    - Exigences de sécurité et de conformité
 
 4. **Rapports clairs**
-   - Indicateurs de statut colorés
+   - Indicateurs de statut codés par couleur
    - Messages d'erreur détaillés avec étapes de résolution
    - Rapports synthétiques pour une évaluation rapide
 
@@ -1309,7 +1316,7 @@ steps:
 ### Erreurs courantes lors des vérifications préalables
 
 1. **Ignorer la validation** pour des déploiements "rapides"
-2. **Vérification insuffisante des permissions** avant le déploiement
+2. **Vérifications insuffisantes des permissions** avant le déploiement
 3. **Ignorer les limites de quotas** jusqu'à l'échec du déploiement
 4. **Ne pas valider les modèles** dans les pipelines CI/CD
 5. **Oublier la validation de sécurité** pour les environnements de production
@@ -1317,12 +1324,12 @@ steps:
 
 ---
 
-**Astuce** : Exécutez les vérifications préalables comme une tâche distincte dans votre pipeline CI/CD avant la tâche de déploiement. Cela permet de détecter les problèmes tôt et offre un retour rapide aux développeurs.
+**Astuce** : Exécutez les vérifications préalables comme une tâche distincte dans votre pipeline CI/CD avant la tâche de déploiement réelle. Cela permet de détecter les problèmes tôt et offre un retour rapide aux développeurs.
 
 ---
 
 **Navigation**
-- **Leçon précédente** : [Sélection des SKUs](sku-selection.md)
+- **Leçon précédente** : [Sélection des SKU](sku-selection.md)
 - **Leçon suivante** : [Fiche de référence](../../resources/cheat-sheet.md)
 
 ---
