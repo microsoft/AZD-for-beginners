@@ -1,20 +1,20 @@
 ---
-name: Feature Request
-description: Suggest a new feature or improvement for AZD For Beginners
-labels: enhancement
+name: Feature request
+about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
-## Summary
-Describe the feature or improvement you would like to see.
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-## Motivation
-Explain why this feature is important or how it improves the project.
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
 
-## Proposed Solution
-Describe how you think this could be implemented.
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
 
-## Alternatives Considered
-List any alternative solutions or features you have considered.
-
-## Additional Context
+**Additional context**
 Add any other context or screenshots about the feature request here.
