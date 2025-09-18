@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T23:15:10+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T14:04:33+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "lt"
 }
 -->
 # Azure AI Foundry integracija su AZD
 
-**Ankstesnis:** [Pirmasis projektas](../getting-started/first-project.md) | **Kitas:** [AI modelio diegimas](ai-model-deployment.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 2 skyrius - AI-pirmasis vystymas
+- **⬅️ Ankstesnis skyrius**: [1 skyrius: Jūsų pirmasis projektas](../getting-started/first-project.md)
+- **➡️ Toliau**: [AI modelio diegimas](ai-model-deployment.md)
+- **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../getting-started/configuration.md)
 
 ## Apžvalga
 
@@ -17,23 +22,23 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Kas yra Azure AI Foundry?
 
-Azure AI Foundry yra Microsoft sukurta vieninga platforma AI kūrimui, kuri apima:
+Azure AI Foundry yra Microsoft sukurta vieninga platforma AI vystymui, kuri apima:
 
 - **Modelių katalogą**: Prieiga prie pažangiausių AI modelių
 - **Prompt Flow**: Vizualinis AI darbo eigų dizaineris
-- **AI Foundry portalą**: Integruota AI programų kūrimo aplinka
-- **Diegimo galimybes**: Įvairūs talpinimo ir mastelio keitimo sprendimai
+- **AI Foundry portalą**: Integruota vystymo aplinka AI programoms
+- **Diegimo galimybes**: Įvairūs talpinimo ir mastelio keitimo variantai
 - **Saugumą ir patikimumą**: Integruotos atsakingo AI funkcijos
 
 ## AZD + Azure AI Foundry: geriau kartu
 
 | Funkcija | Azure AI Foundry | AZD integracijos privalumas |
 |----------|------------------|----------------------------|
-| **Modelio diegimas** | Rankinis diegimas per portalą | Automatizuoti, pakartojami diegimai |
-| **Infrastruktūra** | Diegimas per paspaudimus | Infrastruktūra kaip kodas (Bicep) |
-| **Aplinkos valdymas** | Vienos aplinkos dėmesys | Daug aplinkų (dev/staging/prod) |
+| **Modelio diegimas** | Rankinis portalo diegimas | Automatizuoti, pakartojami diegimai |
+| **Infrastruktūra** | Pasirinkimų peržiūra | Infrastruktūra kaip kodas (Bicep) |
+| **Aplinkos valdymas** | Vienos aplinkos dėmesys | Daugiaaplinkos (dev/staging/prod) |
 | **CI/CD integracija** | Ribota | Integruota GitHub Actions palaikymas |
-| **Kaštų valdymas** | Bazinis stebėjimas | Aplinkai specifinis kaštų optimizavimas |
+| **Kaštų valdymas** | Pagrindinis stebėjimas | Aplinkai specifinis kaštų optimizavimas |
 
 ## Būtinos sąlygos
 
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Modelis 2: AI paieška + RAG integracija
 
-**Naudojimo atvejis**: Diegimas su retrieval-augmented generation (RAG) programomis
+**Naudojimo atvejis**: Diegti paieškos ir generavimo (RAG) programas
 
 ```bicep
 // Azure AI Search
@@ -177,7 +182,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Kūrimo konfigūracija:**
+**Vystymo konfigūracija:**
 ```bash
 # Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -222,7 +227,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ## Diegimo darbo eigos
 
-### Diegimas vienu komanda
+### Vieno komandos diegimas
 
 ```bash
 # Deploy everything with one command
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Automatinio mastelio keitimo konfigūracija
+### Automatinio mastelio konfigūracija
 
 ```bicep
 // Container App with auto-scaling
@@ -469,7 +474,7 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ### Problema 3: Modelio diegimo problemos
 
 **Simptomai:**
-- Modeliai nėra pasiekiami diegime
+- Modeliai nėra prieinami diegime
 - Konkretūs modelio versijų gedimai
 
 **Sprendimai:**
@@ -483,7 +488,7 @@ az cognitiveservices model list --location eastus
 
 ## Pavyzdiniai šablonai
 
-### Paprasta pokalbių programa
+### Pagrindinė pokalbių programa
 
 **Saugykla**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
@@ -507,7 +512,7 @@ azd init --template ai-document-processing
 azd up
 ```
 
-### Įmonės pokalbių programa su RAG
+### Įmonės pokalbiai su RAG
 
 **Saugykla**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
@@ -524,9 +529,9 @@ azd up
 1. **Išbandykite pavyzdžius**: Pradėkite nuo iš anksto paruošto šablono, kuris atitinka jūsų naudojimo atvejį
 2. **Pritaikykite savo poreikiams**: Modifikuokite infrastruktūrą ir programos kodą
 3. **Pridėkite stebėjimą**: Įgyvendinkite išsamų stebimumą
-4. **Optimizuokite kaštus**: Koreguokite konfigūracijas pagal savo biudžetą
+4. **Optimizuokite kaštus**: Koreguokite konfigūraciją pagal savo biudžetą
 5. **Užtikrinkite diegimo saugumą**: Įgyvendinkite įmonės saugumo modelius
-6. **Mastelio keitimas iki produkcijos**: Pridėkite daugiaregionines ir aukšto prieinamumo funkcijas
+6. **Mastelis iki produkcijos**: Pridėkite daugiaregionines ir aukšto prieinamumo funkcijas
 
 ## Bendruomenė ir palaikymas
 
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Ankstesnis:** [Pirmasis projektas](../getting-started/first-project.md) | **Kitas:** [AI modelio diegimas](ai-model-deployment.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 2 skyrius - AI-pirmasis vystymas
+- **⬅️ Ankstesnis skyrius**: [1 skyrius: Jūsų pirmasis projektas](../getting-started/first-project.md)
+- **➡️ Toliau**: [AI modelio diegimas](ai-model-deployment.md)
+- **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../getting-started/configuration.md)
 
 **Reikia pagalbos?** Prisijunkite prie mūsų bendruomenės diskusijų arba atidarykite problemą saugykloje. Azure AI + AZD bendruomenė pasiruošusi padėti jums pasiekti sėkmę!
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

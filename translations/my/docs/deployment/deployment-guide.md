@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:19:36+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T13:22:24+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "my"
 }
 -->
-# Deployment Guide - AZD Deployments ကို ကျွမ်းကျင်စွာ အသုံးပြုခြင်း
+# Deployment Guide - AZD Deployments ကို ကျွမ်းကျင်စွာ အသုံးချခြင်း
+
+**အခန်းများ လမ်းညွှန်:**
+- **📚 သင်ခန်းစာ မူလစာမျက်နှာ**: [AZD အခြေခံများ](../../README.md)
+- **📖 လက်ရှိ အခန်း**: အခန်း 4 - Infrastructure as Code & Deployment
+- **⬅️ ယခင် အခန်း**: [အခန်း 3: Configuration](../getting-started/configuration.md)
+- **➡️ နောက်တစ်ခု**: [Provisioning Resources](provisioning.md)
+- **🚀 နောက်အခန်း**: [အခန်း 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
 
 ## အကျဉ်းချုပ်
 
-ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI ကို အသုံးပြုပြီး အပလီကေးရှင်းများကို deploy လုပ်ခြင်းဆိုင်ရာ အခြေခံ single-command deployments ကနေ custom hooks, အမျိုးမျိုးသော environments, CI/CD integration ပါဝင်တဲ့ အဆင့်မြင့် production scenarios အထိ အားလုံးကို ဖော်ပြထားပါတယ်။ လက်တွေ့နမူနာများနှင့် အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများကို အသုံးပြု၍ deployment lifecycle အားလုံးကို ကျွမ်းကျင်စွာ လေ့လာနိုင်ပါမည်။
+ဒီလမ်းညွှန်မှာ Azure Developer CLI ကို အသုံးပြုပြီး application များကို deploy လုပ်ခြင်းဆိုင်ရာ အခြေခံ single-command deployment မှ custom hooks, အမျိုးမျိုးသော environment များ, CI/CD integration အထိ အဆင့်မြင့် production scenario များအထိ အားလုံးကို လေ့လာနိုင်ပါမည်။ လက်တွေ့ နမူနာများနှင့် အကောင်းဆုံး လုပ်နည်းများကို အသုံးပြု၍ deployment lifecycle အားလုံးကို ကျွမ်းကျင်စွာ လေ့လာနိုင်ပါမည်။
 
-## သင်ယူရမည့် အချက်များ
+## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-ဒီလမ်းညွှန်ကို ပြီးမြောက်စွာ လေ့လာပြီးပါက၊ သင်သည်:
-- Azure Developer CLI deployment commands နှင့် workflows အားလုံးကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
-- Provisioning ကနေ monitoring အထိ deployment lifecycle အားလုံးကို နားလည်နိုင်မည်
-- Pre နှင့် post-deployment automation အတွက် custom deployment hooks များကို အကောင်အထည်ဖော်နိုင်မည်
-- Environment-specific parameters များနှင့် အမျိုးမျိုးသော environments များကို configure လုပ်နိုင်မည်
-- Blue-green နှင့် canary deployments အပါအဝင် အဆင့်မြင့် deployment strategies များကို စီစဉ်နိုင်မည်
-- azd deployments ကို CI/CD pipelines နှင့် DevOps workflows တွင် ပေါင်းစည်းနိုင်မည်
+ဒီလမ်းညွှန်ကို ပြီးမြောက်ပါက:
+- Azure Developer CLI deployment command များနှင့် workflow များကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
+- Provisioning မှ monitoring အထိ deployment lifecycle အားလုံးကို နားလည်နိုင်မည်
+- Pre နှင့် Post-deployment automation အတွက် custom deployment hooks များကို အသုံးပြုနိုင်မည်
+- Environment-specific parameters များဖြင့် အမျိုးမျိုးသော environment များကို configure လုပ်နိုင်မည်
+- Blue-green နှင့် canary deployment များအပါအဝင် အဆင့်မြင့် deployment strategy များကို အကောင်အထည်ဖော်နိုင်မည်
+- azd deployment များကို CI/CD pipeline နှင့် DevOps workflow များနှင့် ပေါင်းစပ်နိုင်မည်
 
-## သင်ယူပြီးရရှိမည့် ရလဒ်များ
+## သင်ယူပြီးရရှိမည့် အကျိုးကျေးဇူးများ
 
-ဒီလမ်းညွှန်ကို ပြီးမြောက်စွာ လေ့လာပြီးပါက၊ သင်သည်:
-- azd deployment workflows အားလုံးကို ကိုယ်တိုင် run နှင့် troubleshoot လုပ်နိုင်မည်
-- Hooks အသုံးပြု၍ custom deployment automation ကို ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်နိုင်မည်
-- လုံခြုံရေးနှင့် monitoring အဆင့်မြင့်သော production-ready deployments များကို configure လုပ်နိုင်မည်
-- Multi-environment deployment scenarios များကို စီမံနိုင်မည်
-- Deployment performance ကို အကောင်းဆုံး optimize လုပ်ပြီး rollback strategies များကို အကောင်အထည်ဖော်နိုင်မည်
-- Enterprise DevOps practices တွင် azd deployments ကို ပေါင်းစည်းနိုင်မည်
+ဒီလမ်းညွှန်ကို ပြီးမြောက်ပါက:
+- azd deployment workflow များကို ကိုယ်တိုင် အဆင်ပြေစွာ run နှင့် troubleshoot လုပ်နိုင်မည်
+- Custom deployment automation ကို hooks အသုံးပြု၍ ဒီဇိုင်းဆွဲနိုင်မည်
+- Security နှင့် monitoring အဆင့်မြင့်သော production-ready deployment များကို configure လုပ်နိုင်မည်
+- အဆင့်မြင့် multi-environment deployment scenario များကို စီမံနိုင်မည်
+- Deployment performance ကို optimize လုပ်ပြီး rollback strategy များကို အကောင်အထည်ဖော်နိုင်မည်
+- azd deployment များကို အဖွဲ့အစည်း DevOps လုပ်ငန်းစဉ်များနှင့် ပေါင်းစပ်နိုင်မည်
 
 ## Deployment အကျဉ်းချုပ်
 
-Azure Developer CLI သည် အောက်ပါ deployment commands များကို ပေးထားသည်:
+Azure Developer CLI မှာ deployment command များအမျိုးမျိုး ပါဝင်သည်:
 - `azd up` - အားလုံးကို လုပ်ဆောင်သော workflow (provision + deploy)
-- `azd provision` - Azure resources များကို ဖန်တီး/အပ်ဒိတ်လုပ်ခြင်းသာ
-- `azd deploy` - Application code ကို deploy လုပ်ခြင်းသာ
-- `azd package` - Applications များကို build နှင့် package လုပ်ခြင်း
+- `azd provision` - Azure resources များကို ဖန်တီး/အပ်ဒိတ်လုပ်ခြင်း
+- `azd deploy` - Application code ကို deploy လုပ်ခြင်း
+- `azd package` - Application များကို build နှင့် package လုပ်ခြင်း
 
-## အခြေခံ Deployment Workflows
+## အခြေခံ Deployment Workflow များ
 
-### အားလုံးကို လုပ်ဆောင်သော Deployment (azd up)
+### အပြည့်အစုံ Deployment (azd up)
 Project အသစ်များအတွက် အများဆုံး အသုံးပြုသော workflow:
 ```bash
 # Deploy everything from scratch
@@ -83,9 +90,9 @@ azd deploy --service api
 azd deploy --service api --build-arg NODE_ENV=production
 ```
 
-## 🏗️ Deployment Process ကို နားလည်ခြင်း
+## 🏗️ Deployment လုပ်ငန်းစဉ်ကို နားလည်ခြင်း
 
-### အဆင့် ၁: Pre-Provision Hooks
+### အဆင့် 1: Pre-Provision Hooks
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### အဆင့် ၂: Infrastructure Provisioning
-- Infrastructure templates (Bicep/Terraform) များကို ဖတ်ရှုသည်
-- Azure resources များကို ဖန်တီး/အပ်ဒိတ်လုပ်သည်
-- Networking နှင့် security ကို configure လုပ်သည်
-- Monitoring နှင့် logging ကို စီစဉ်သည်
+### အဆင့် 2: Infrastructure Provisioning
+- Infrastructure templates (Bicep/Terraform) ကို ဖတ်ရှုခြင်း
+- Azure resources များကို ဖန်တီး/အပ်ဒိတ်လုပ်ခြင်း
+- Networking နှင့် security ကို configure လုပ်ခြင်း
+- Monitoring နှင့် logging ကို စနစ်တကျ စီမံခြင်း
 
-### အဆင့် ၃: Post-Provision Hooks
+### အဆင့် 3: Post-Provision Hooks
 ```yaml
 hooks:
   postprovision:
@@ -118,12 +125,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### အဆင့် ၄: Application Packaging
-- Application code ကို build လုပ်သည်
-- Deployment artifacts များကို ဖန်တီးသည်
-- Target platform အတွက် package လုပ်သည် (containers, ZIP files, စသည်)
+### အဆင့် 4: Application Packaging
+- Application code ကို build လုပ်ခြင်း
+- Deployment artifacts များကို ဖန်တီးခြင်း
+- Target platform အတွက် package လုပ်ခြင်း (containers, ZIP files, စသည်)
 
-### အဆင့် ၅: Pre-Deploy Hooks
+### အဆင့် 5: Pre-Deploy Hooks
 ```yaml
 hooks:
   predeploy:
@@ -136,12 +143,12 @@ hooks:
       npm run db:migrate
 ```
 
-### အဆင့် ၆: Application Deployment
-- Packaged applications များကို Azure services တွင် deploy လုပ်သည်
-- Configuration settings များကို update လုပ်သည်
-- Services များကို start/restart လုပ်သည်
+### အဆင့် 6: Application Deployment
+- Packaged applications များကို Azure services တွင် deploy လုပ်ခြင်း
+- Configuration settings များကို update လုပ်ခြင်း
+- Services များကို စတင်/ပြန်စတင်ခြင်း
 
-### အဆင့် ၇: Post-Deploy Hooks
+### အဆင့် 7: Post-Deploy Hooks
 ```yaml
 hooks:
   postdeploy:
@@ -206,7 +213,7 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 အဆင့်မြင့် Deployment Scenarios
+## 🔧 အဆင့်မြင့် Deployment Scenario များ
 
 ### Multi-Service Applications
 ```yaml
@@ -569,9 +576,9 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
+## 🎯 Best Practices
 
-### ၁. Environment Consistency
+### 1. Environment Consistency
 ```bash
 # Use consistent naming
 azd env new dev-$(whoami)
@@ -582,7 +589,7 @@ azd env new production-v1
 ./scripts/sync-environments.sh
 ```
 
-### ၂. Infrastructure Validation
+### 2. Infrastructure Validation
 ```bash
 # Validate before deployment
 azd provision --preview
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### ၃. Testing Integration
+### 3. Testing Integration
 ```yaml
 hooks:
   predeploy:
@@ -621,7 +628,7 @@ hooks:
       npm run test:smoke
 ```
 
-### ၄. Documentation နှင့် Logging
+### 4. Documentation and Logging
 ```bash
 # Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
@@ -631,10 +638,10 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## နောက်တစ်ဆင့်
 
-- [Provisioning Resources](provisioning.md) - Infrastructure management ကို အနက်အနက် လေ့လာရန်
-- [Pre-Deployment Planning](../pre-deployment/capacity-planning.md) - Deployment strategy ကို စီစဉ်ရန်
-- [Common Issues](../troubleshooting/common-issues.md) - Deployment အခက်အခဲများကို ဖြေရှင်းရန်
-- [Best Practices](../troubleshooting/debugging.md) - Production-ready deployment strategies
+- [Provisioning Resources](provisioning.md) - Infrastructure စီမံခန့်ခွဲမှုကို နက်နက်ရှိုင်းရှိုင်း လေ့လာခြင်း
+- [Pre-Deployment Planning](../pre-deployment/capacity-planning.md) - Deployment strategy ကို စီစဉ်ခြင်း
+- [Common Issues](../troubleshooting/common-issues.md) - Deployment ပြဿနာများကို ဖြေရှင်းခြင်း
+- [Best Practices](../troubleshooting/debugging.md) - Production-ready deployment strategy များ
 
 ## အပိုဆောင်း ရင်းမြစ်များ
 
@@ -645,11 +652,11 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Your First Project](../getting-started/first-project.md)
-- **Next Lesson**: [Provisioning Resources](provisioning.md)
+**လမ်းညွှန်**
+- **ယခင် သင်ခန်းစာ**: [Your First Project](../getting-started/first-project.md)
+- **နောက် သင်ခန်းစာ**: [Provisioning Resources](provisioning.md)
 
 ---
 
-**ဝက်ဘ်ဆိုက်မှတ်ချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက်ဘာသာပြန်ဆိုမှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို ကျေးဇူးပြု၍ သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတည်သော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပြန်ဆိုမှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုမှားများ သို့မဟုတ် အဓိပ္ပါယ်မှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+**အကြောင်းကြားချက်**:  
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် ရှုလေ့လာသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွဲအချော်အချော်များအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

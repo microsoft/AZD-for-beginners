@@ -1,29 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T23:11:24+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T12:44:22+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "en"
 }
 -->
 # Azure AI Foundry Integration with AZD
 
-**Previous:** [First Project](../getting-started/first-project.md) | **Next:** [AI Model Deployment](ai-model-deployment.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../getting-started/first-project.md)
+- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
 ## Overview
 
-This guide explains how to integrate Azure AI Foundry services with Azure Developer CLI (AZD) to simplify the deployment of AI applications. Azure AI Foundry offers a robust platform for creating, deploying, and managing AI applications, while AZD streamlines infrastructure and deployment processes.
+This guide explains how to connect Azure AI Foundry services with Azure Developer CLI (AZD) to simplify the deployment of AI applications. Azure AI Foundry offers a robust platform for creating, deploying, and managing AI solutions, while AZD streamlines infrastructure and deployment tasks.
 
 ## What is Azure AI Foundry?
 
-Azure AI Foundry is Microsoft's unified platform for AI development, featuring:
+Azure AI Foundry is Microsoft's all-in-one platform for AI development, featuring:
 
-- **Model Catalog**: Access to cutting-edge AI models
+- **Model Catalog**: Access cutting-edge AI models
 - **Prompt Flow**: A visual tool for designing AI workflows
-- **AI Foundry Portal**: An integrated environment for developing AI applications
-- **Deployment Options**: Flexible hosting and scaling solutions
-- **Safety and Security**: Built-in features for responsible AI practices
+- **AI Foundry Portal**: A unified development environment for AI applications
+- **Deployment Options**: Flexible hosting and scaling choices
+- **Safety and Security**: Built-in tools for responsible AI practices
 
 ## AZD + Azure AI Foundry: Better Together
 
@@ -31,8 +36,8 @@ Azure AI Foundry is Microsoft's unified platform for AI development, featuring:
 |---------|-----------------|------------------------|
 | **Model Deployment** | Manual deployment via portal | Automated, repeatable deployments |
 | **Infrastructure** | Provisioning through UI | Infrastructure as Code (Bicep) |
-| **Environment Management** | Focused on a single environment | Multi-environment support (dev/staging/prod) |
-| **CI/CD Integration** | Limited capabilities | Native support for GitHub Actions |
+| **Environment Management** | Focus on a single environment | Support for multiple environments (dev/staging/prod) |
+| **CI/CD Integration** | Limited capabilities | Built-in GitHub Actions support |
 | **Cost Management** | Basic monitoring tools | Optimized costs for specific environments |
 
 ## Prerequisites
@@ -452,7 +457,7 @@ azd deploy
 
 **Symptoms:**
 - 401/403 errors when accessing AI services
-- "Access denied" messages
+- "Access denied" error messages
 
 **Solutions:**
 ```bash
@@ -521,10 +526,10 @@ azd up
 
 ## Next Steps
 
-1. **Try the Examples**: Start with a pre-built template that fits your use case
+1. **Try the Examples**: Start with a pre-built template that fits your needs
 2. **Customize for Your Needs**: Adjust the infrastructure and application code
-3. **Add Monitoring**: Set up comprehensive observability
-4. **Optimize Costs**: Configure settings to align with your budget
+3. **Add Monitoring**: Set up detailed observability
+4. **Optimize Costs**: Configure settings to match your budget
 5. **Secure Your Deployment**: Apply enterprise-grade security measures
 6. **Scale to Production**: Implement multi-region and high-availability features
 
@@ -536,7 +541,12 @@ azd up
 
 ---
 
-**Previous:** [First Project](../getting-started/first-project.md) | **Next:** [AI Model Deployment](ai-model-deployment.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../getting-started/first-project.md)
+- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
 **Need Help?** Join our community discussions or open an issue in the repository. The Azure AI + AZD community is here to support you!
 

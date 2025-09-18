@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:45:13+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T13:01:47+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sl"
 }
 -->
 # Vodnik za konfiguracijo
 
-**Prejšnje:** [Osnove AZD](azd-basics.md) | **Naslednje:** [Prvi projekt](first-project.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 3 - Konfiguracija in avtentikacija
+- **⬅️ Prejšnje**: [Vaš prvi projekt](first-project.md)
+- **➡️ Naslednje**: [Vodnik za uvajanje](../deployment/deployment-guide.md)
+- **🚀 Naslednje poglavje**: [Poglavje 4: Infrastruktura kot koda](../deployment/deployment-guide.md)
 
 ## Uvod
 
-Ta obsežen vodnik zajema vse vidike konfiguracije Azure Developer CLI za optimalne delovne procese razvoja in uvajanja. Naučili se boste o hierarhiji konfiguracije, upravljanju okolij, metodah avtentikacije ter naprednih vzorcih konfiguracije, ki omogočajo učinkovite in varne uvajanja v Azure.
+Ta obsežen vodnik zajema vse vidike konfiguracije Azure Developer CLI za optimalne razvojne in uvajalne delovne procese. Naučili se boste o hierarhiji konfiguracije, upravljanju okolij, metodah avtentikacije ter naprednih vzorcih konfiguracije, ki omogočajo učinkovito in varno uvajanje v Azure.
 
 ## Cilji učenja
 
@@ -27,13 +32,13 @@ Do konca te lekcije boste:
 ## Rezultati učenja
 
 Po zaključku te lekcije boste sposobni:
-- Konfigurirati azd za optimalne delovne procese razvoja
-- Nastaviti in upravljati več okolij za uvajanje
+- Konfigurirati azd za optimalne razvojne delovne procese
+- Nastaviti in upravljati več uvajalnih okolij
 - Uvesti varne prakse upravljanja konfiguracije
 - Odpravljati težave, povezane s konfiguracijo
-- Prilagoditi delovanje azd za specifične zahteve organizacije
+- Prilagoditi vedenje azd za specifične zahteve organizacije
 
-Ta obsežen vodnik zajema vse vidike konfiguracije Azure Developer CLI za optimalne delovne procese razvoja in uvajanja.
+Ta obsežen vodnik zajema vse vidike konfiguracije Azure Developer CLI za optimalne razvojne in uvajalne delovne procese.
 
 ## Hierarhija konfiguracije
 
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Nastavitve specifične za jezik
+#### Nastavitve, specifične za jezik
 ```yaml
 services:
   node-app:
@@ -384,7 +389,7 @@ Primer `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azur
 
 ## 🔧 Napredna konfiguracija
 
-### Prilagojeno poimenovanje virov
+### Prilagajanje poimenovanja virov
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -415,7 +420,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Konfiguracije specifične za okolje
+## 🎯 Konfiguracije, specifične za okolje
 
 ### Razvojno okolje
 ```bash
@@ -539,7 +544,7 @@ Dokumentirajte svojo konfiguracijo v `CONFIG.md`:
 
 - [Vaš prvi projekt](first-project.md) - Uporaba konfiguracije v praksi
 - [Vodnik za uvajanje](../deployment/deployment-guide.md) - Uporaba konfiguracije za uvajanje
-- [Priprava virov](../deployment/provisioning.md) - Konfiguracije, pripravljene za proizvodnjo
+- [Priprava virov](../deployment/provisioning.md) - Konfiguracije, pripravljene za produkcijo
 
 ## Reference
 
@@ -549,10 +554,14 @@ Dokumentirajte svojo konfiguracijo v `CONFIG.md`:
 
 ---
 
-**Prejšnje:** [Osnove AZD](azd-basics.md) | **Naslednje:** [Prvi projekt](first-project.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 3 - Konfiguracija in avtentikacija
+- **⬅️ Prejšnje**: [Vaš prvi projekt](first-project.md)
+- **➡️ Naslednje poglavje**: [Poglavje 4: Infrastruktura kot koda](../deployment/deployment-guide.md)
 - **Naslednja lekcija**: [Vaš prvi projekt](first-project.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

@@ -1,37 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-10T07:44:58+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T14:17:52+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "lt"
 }
 -->
-# Komandų atmintinė - Pagrindinės AZD komandos
+# Komandų atmintinė - Pagrindiniai AZD komandos
+
+**Greita nuoroda į visus skyrius**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../README.md)
+- **📖 Greitas startas**: [1 skyrius: Pagrindai ir greitas startas](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI komandos**: [2 skyrius: AI-pirmasis vystymas](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Pažangūs**: [4 skyrius: Infrastruktūra kaip kodas](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Įvadas
 
-Ši išsami atmintinė suteikia greitą prieigą prie dažniausiai naudojamų Azure Developer CLI komandų, suskirstytų pagal kategorijas su praktiniais pavyzdžiais. Puikiai tinka greitam peržiūrėjimui vystymo, trikčių šalinimo ir kasdienės veiklos su azd projektais metu.
+Ši išsami atmintinė suteikia greitą prieigą prie dažniausiai naudojamų Azure Developer CLI komandų, suskirstytų pagal kategorijas su praktiniais pavyzdžiais. Puikiai tinka greitam peržiūrėjimui vystymo, trikčių šalinimo ir kasdienės veiklos metu su azd projektais.
 
 ## Mokymosi tikslai
 
-Naudodamiesi šia atmintine, jūs:
+Naudodami šią atmintinę, jūs:
 - Turėsite greitą prieigą prie pagrindinių Azure Developer CLI komandų ir sintaksės
 - Suprasite komandų organizavimą pagal funkcines kategorijas ir naudojimo atvejus
 - Naudosite praktinius pavyzdžius dažniausiai pasitaikančioms vystymo ir diegimo situacijoms
-- Greitai rasite trikčių šalinimo komandas problemų sprendimui
+- Rasite trikčių šalinimo komandas greitam problemų sprendimui
 - Efektyviai surasite pažangias konfigūracijos ir pritaikymo galimybes
-- Valdysite aplinkas ir daugiaplatforminius darbo procesus
+- Valdysite aplinkos ir kelių aplinkų darbo eigas
 
 ## Mokymosi rezultatai
 
-Reguliariai naudodamiesi šia atmintine, jūs galėsite:
-- Pasitikėdami vykdyti azd komandas be poreikio peržiūrėti visą dokumentaciją
+Reguliariai naudodami šią atmintinę, jūs galėsite:
+- Pasitikėdami vykdyti azd komandas be pilnos dokumentacijos peržiūros
 - Greitai spręsti dažniausiai pasitaikančias problemas naudodami tinkamas diagnostikos komandas
 - Efektyviai valdyti kelias aplinkas ir diegimo scenarijus
 - Naudoti pažangias azd funkcijas ir konfigūracijos galimybes pagal poreikį
 - Sistemingai spręsti diegimo problemas naudodami komandų sekas
-- Optimizuoti darbo procesus efektyviai naudojant azd trumpinius ir parinktis
+- Optimizuoti darbo eigas efektyviai naudojant azd trumpinius ir parinktis
 
 ## Pradžios komandos
 
@@ -279,9 +285,9 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 Greiti darbo procesai
+## 🎯 Greitos darbo eigos
 
-### Vystymo procesas
+### Vystymo darbo eiga
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -298,7 +304,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Daugiaplatforminis procesas
+### Kelių aplinkų darbo eiga
 ```bash
 # Set up environments
 azd env new dev
@@ -318,7 +324,7 @@ azd env select production
 azd up
 ```
 
-### Trikčių šalinimo procesas
+### Trikčių šalinimo darbo eiga
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -402,7 +408,7 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Dažnai naudojamų komandų kombinacijos
+## 🔧 Dažniausiai naudojamų komandų kombinacijos
 
 ### Sveikatos patikrinimo scenarijus
 ```bash
@@ -433,7 +439,7 @@ for env in dev staging production; do
 done
 ```
 
-### Išteklių valymo scenarijus
+### Resursų valymo scenarijus
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -446,7 +452,7 @@ done
 
 ## 📝 Aplinkos kintamieji
 
-### Dažniausiai naudojami aplinkos kintamieji
+### Dažni aplinkos kintamieji
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -463,7 +469,7 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Skubios komandos
+## 🚨 Avarinės komandos
 
 ### Greiti sprendimai
 ```bash
@@ -494,7 +500,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Naudingi patarimai
 
-### Trumpiniai greitesniam darbui
+### Trumpiniai greitesnei darbo eigai
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -557,10 +563,10 @@ azd template show <template-name> --docs
 ---
 
 **Navigacija**
-- **Ankstesnė pamoka**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
-- **Kita pamoka**: [Glossary](glossary.md)
+- **Ankstesnė pamoka**: [Priešdieginiai patikrinimai](../docs/pre-deployment/preflight-checks.md)
+- **Kita pamoka**: [Žodynas](glossary.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudotis profesionalių vertėjų paslaugomis. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.

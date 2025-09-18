@@ -1,15 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T23:32:49+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T13:06:15+00:00",
   "source_file": "workshop/README.md",
   "language_code": "sl"
 }
 -->
 # AZD za delavnico AI razvijalcev
 
-**Prejšnje:** [AI Vodnik za odpravljanje težav](../docs/troubleshooting/ai-troubleshooting.md) | **Naslednje:** [Moduli delavnice](../../../workshop)
+**Navigacija po delavnici**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../README.md)
+- **📖 Povezana poglavja**: Zajema [Poglavje 1](../README.md#-chapter-1-foundation--quick-start), [Poglavje 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) in [Poglavje 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Praktični laboratorij**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Naslednji koraki**: [Moduli laboratorija delavnice](../../../workshop)
 
 Dobrodošli na praktični delavnici za učenje Azure Developer CLI (AZD) s poudarkom na uvajanju AI aplikacij. Ta delavnica je zasnovana tako, da vas popelje od osnov AZD do uvajanja produkcijsko pripravljenih AI rešitev.
 
@@ -26,7 +30,7 @@ Dobrodošli na praktični delavnici za učenje Azure Developer CLI (AZD) s pouda
 - **Uvajanje kontejnerjev**: Uporaba Azure Container Apps za AI aplikacije
 - **Najboljše prakse varnosti**: Uporaba upravljane identitete in varnih konfiguracij
 - **Spremljanje in opazovanje**: Nastavitev Application Insights za AI delovne obremenitve
-- **Produkcijski vzorci**: Strategije uvajanja za podjetja
+- **Produkcijski vzorci**: Strategije uvajanja, pripravljene za podjetja
 
 ## Struktura delavnice
 
@@ -39,7 +43,7 @@ Dobrodošli na praktični delavnici za učenje Azure Developer CLI (AZD) s pouda
 ### Modul 2: Integracija Azure OpenAI (45 minut)
 - Nastavitev virov Azure OpenAI
 - Strategije uvajanja modelov
-- Konfiguracija API dostopa in avtentikacije
+- Konfiguracija dostopa do API-ja in avtentikacije
 - **Laboratorij**: Uvedba aplikacije za klepet z GPT-4
 
 ### Modul 3: RAG aplikacije (45 minut)
@@ -48,9 +52,9 @@ Dobrodošli na praktični delavnici za učenje Azure Developer CLI (AZD) s pouda
 - Vektorske vdelave in semantično iskanje
 - **Laboratorij**: Izdelava sistema za vprašanja in odgovore na podlagi dokumentov
 
-### Modul 4: Produkcijska uvedba (30 minut)
-- Konfiguracija Container Apps
-- Optimizacija zmogljivosti in skaliranje
+### Modul 4: Produkcijsko uvajanje (30 minut)
+- Konfiguracija aplikacij kontejnerjev
+- Optimizacija skaliranja in zmogljivosti
 - Spremljanje in beleženje
 - **Laboratorij**: Uvedba v produkcijo z opazovanjem
 
@@ -86,15 +90,15 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Nastavitev Azure računa
 
-1. **Azure naročnina**: [Prijavite se brezplačno](https://azure.microsoft.com/free/)  
-2. **Dostop do Azure OpenAI**: [Zahtevajte dostop](https://aka.ms/oai/access)  
+1. **Azure naročnina**: [Prijavite se brezplačno](https://azure.microsoft.com/free/)
+2. **Dostop do Azure OpenAI**: [Zahtevajte dostop](https://aka.ms/oai/access)
 3. **Potrebna dovoljenja**:
-   - Vloga Contributor na naročnini ali skupini virov
-   - User Access Administrator (za dodelitve RBAC)
+   - Vloga sodelavca na naročnini ali skupini virov
+   - Upravitelj dostopa uporabnikov (za dodelitve RBAC)
 
 ### Preverite predpogoje
 
-Za preverjanje vaše nastavitve zaženite ta skript:
+Za preverjanje nastavitve zaženite ta skript:
 
 ```bash
 #!/bin/bash
@@ -147,7 +151,7 @@ Vsak modul vključuje praktične laboratorijske vaje z začetno kodo in navodili
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Vaša prva uvedba z AZD
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplikacija za klepet z Azure OpenAI
 - **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG aplikacija z AI Search
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Produkcijski vzorci uvajanja
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Vzorci uvajanja v produkcijo
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Napredni scenariji uvajanja
 
 ### Referenčna gradiva
@@ -155,9 +159,9 @@ Vsak modul vključuje praktične laboratorijske vaje z začetno kodo in navodili
 - **[Vodnik za integracijo AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Celoviti vzorci integracije
 - **[Vodnik za uvajanje AI modelov](../docs/ai-foundry/ai-model-deployment.md)** - Najboljše prakse uvajanja modelov
 - **[Produkcijske AI prakse](../docs/ai-foundry/production-ai-practices.md)** - Vzorci uvajanja za podjetja
-- **[Vodnik za odpravljanje težav AI](../docs/troubleshooting/ai-troubleshooting.md)** - Pogoste težave in rešitve
+- **[Vodnik za odpravljanje težav z AI](../docs/troubleshooting/ai-troubleshooting.md)** - Pogoste težave in rešitve
 
-### Predloge
+### Predloge primerov
 
 Predloge za hiter začetek za pogoste AI scenarije:
 
@@ -171,7 +175,7 @@ workshop/templates/
 
 ## Začetek
 
-### Možnost 1: GitHub Codespaces (Priporočeno)
+### Možnost 1: GitHub Codespaces (priporočeno)
 
 Najhitrejši način za začetek delavnice:
 
@@ -197,17 +201,17 @@ cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### Možnost 3: Delavnica z inštruktorjem
+### Možnost 3: Delavnica pod vodstvom inštruktorja
 
-Če se udeležujete delavnice z inštruktorjem:
+Če se udeležujete delavnice pod vodstvom inštruktorja:
 
-- 🎥 **Posnetek delavnice**: [Na voljo na zahtevo](https://aka.ms/azd-ai-workshop)  
-- 💬 **Discord skupnost**: [Pridružite se za podporo v živo](https://aka.ms/foundry/discord)  
-- **Povratne informacije o delavnici**: [Delite svoje izkušnje](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Posnetek delavnice**: [Na voljo na zahtevo](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord skupnost**: [Pridružite se za podporo v živo](https://aka.ms/foundry/discord)
+- **Povratne informacije o delavnici**: [Delite svoje izkušnje](https://aka.ms/azd-workshop-feedback)
 
 ## Časovnica delavnice
 
-### Samostojno učenje (3 ure)
+### Učenje v lastnem tempu (3 ure)
 
 ```
 ⏰ 00:00 - 00:30  Module 1: AZD Foundations
@@ -218,7 +222,7 @@ cat README.md  # Follow the instructions
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Seansa z inštruktorjem (2,5 ure)
+### Seansa pod vodstvom inštruktorja (2,5 ure)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -235,7 +239,7 @@ cat README.md  # Follow the instructions
 
 Do konca te delavnice boste lahko:
 
-✅ **Uvajali AI aplikacije** z uporabo AZD predlog  
+✅ **Uvajali AI aplikacije** z uporabo predlog AZD  
 ✅ **Konfigurirali Azure OpenAI** storitve z ustrezno varnostjo  
 ✅ **Izdelali RAG aplikacije** z integracijo Azure AI Search  
 ✅ **Uvedli produkcijske vzorce** za AI delovne obremenitve v podjetjih  
@@ -246,35 +250,35 @@ Do konca te delavnice boste lahko:
 
 ### Med delavnico
 
-- 🙋 **Vprašanja**: Uporabite klepet delavnice ali dvignite roko  
-- 🐛 **Težave**: Preverite [vodnik za odpravljanje težav](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Nasveti**: Delite odkritja z drugimi udeleženci  
+- 🙋 **Vprašanja**: Uporabite klepet delavnice ali dvignite roko
+- 🐛 **Težave**: Preverite [vodnik za odpravljanje težav](../docs/troubleshooting/ai-troubleshooting.md)
+- **Nasveti**: Delite odkritja z drugimi udeleženci
 
 ### Po delavnici
 
-- 💬 **Discord**: [Skupnost Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **GitHub težave**: [Prijavite težave s predlogami](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Povratne informacije**: [Obrazec za oceno delavnice](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Skupnost Azure AI Foundry](https://aka.ms/foundry/discord)
+- **GitHub težave**: [Prijavite težave s predlogami](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Povratne informacije**: [Obrazec za oceno delavnice](https://aka.ms/azd-workshop-feedback)
 
 ## Naslednji koraki
 
 ### Nadaljujte z učenjem
 
-1. **Napredni scenariji**: Raziščite [uvajanje v več regijah](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Integracija CI/CD**: Nastavite [GitHub Actions delovne tokove](../docs/deployment/github-actions.md)  
-3. **Prilagojene predloge**: Ustvarite svoje [AZD predloge](../docs/getting-started/custom-templates.md)  
+1. **Napredni scenariji**: Raziščite [uvajanje v več regijah](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Integracija CI/CD**: Nastavite [GitHub Actions delovne tokove](../docs/deployment/github-actions.md)
+3. **Prilagojene predloge**: Ustvarite svoje [AZD predloge](../docs/getting-started/custom-templates.md)
 
 ### Uporabite v svojih projektih
 
-1. **Ocena**: Uporabite naš [kontrolni seznam pripravljenosti](./production-readiness-checklist.md)  
-2. **Predloge**: Začnite z našimi [AI-specifičnimi predlogami](../../../workshop/templates)  
-3. **Podpora**: Pridružite se [Discord skupnosti Azure AI Foundry](https://aka.ms/foundry/discord)  
+1. **Ocena**: Uporabite naš [kontrolni seznam pripravljenosti](./production-readiness-checklist.md)
+2. **Predloge**: Začnite z našimi [AI-specifičnimi predlogami](../../../workshop/templates)
+3. **Podpora**: Pridružite se [Discord skupnosti Azure AI Foundry](https://aka.ms/foundry/discord)
 
 ### Delite svoj uspeh
 
-- ⭐ **Ocenite repozitorij**, če vam je delavnica pomagala  
-- 🐦 **Delite na družbenih omrežjih** z #AzureDeveloperCLI #AzureAI  
-- 📝 **Napišite blog objavo** o svoji poti uvajanja AI  
+- ⭐ **Ocenite repozitorij**, če vam je delavnica pomagala
+- 🐦 **Delite na družbenih omrežjih** z #AzureDeveloperCLI #AzureAI
+- 📝 **Napišite blog objavo** o svoji poti uvajanja AI
 
 ---
 
@@ -294,13 +298,13 @@ Vaše povratne informacije nam pomagajo izboljšati izkušnjo delavnice:
 
 ---
 
-**Prejšnje:** [AI Vodnik za odpravljanje težav](../docs/troubleshooting/ai-troubleshooting.md) | **Naslednje:** Začnite z [Laboratorijem 1: Osnove AZD](../../../workshop/lab-1-azd-basics)
+**Prejšnje:** [Vodnik za odpravljanje težav z AI](../docs/troubleshooting/ai-troubleshooting.md) | **Naslednje:** Začnite z [Laboratorijem 1: Osnove AZD](../../../workshop/lab-1-azd-basics)
 
-**Ste pripravljeni začeti graditi AI aplikacije z AZD?**
+**Pripravljeni na začetek gradnje AI aplikacij z AZD?**
 
-[Začnite z Laboratorijem 1: Osnove AZD →](./lab-1-azd-basics/README.md)
+[Začnite z laboratorijem 1: Osnove AZD →](./lab-1-azd-basics/README.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne odgovarjamo za morebitna napačna razumevanja ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.

@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:15:58+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T12:46:43+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "en"
 }
 -->
 # Deployment Guide - Mastering AZD Deployments
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
+- **⬅️ Previous Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
+- **➡️ Next**: [Provisioning Resources](provisioning.md)
+- **🚀 Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
 
 ## Introduction
 
@@ -18,7 +25,7 @@ This comprehensive guide covers everything you need to know about deploying appl
 By completing this guide, you will:
 - Master all Azure Developer CLI deployment commands and workflows
 - Understand the complete deployment lifecycle from provisioning to monitoring
-- Implement custom deployment hooks for pre and post-deployment automation
+- Implement custom deployment hooks for pre- and post-deployment automation
 - Configure multiple environments with environment-specific parameters
 - Set up advanced deployment strategies including blue-green and canary deployments
 - Integrate azd deployments with CI/CD pipelines and DevOps workflows
@@ -652,4 +659,4 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

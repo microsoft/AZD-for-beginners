@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:20:31+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T12:44:59+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "en"
 }
 -->
 # AI Model Deployment with Azure Developer CLI
 
-**Previous:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Next:** [AI Workshop Lab](ai-workshop-lab.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
-This guide offers detailed instructions for deploying AI models using AZD templates, covering everything from selecting the right model to deployment strategies for production environments.
+This guide offers detailed instructions for deploying AI models using AZD templates, including everything from selecting the right model to implementing production deployment strategies.
 
 ## Table of Contents
 
@@ -26,7 +31,7 @@ This guide offers detailed instructions for deploying AI models using AZD templa
 
 ### Azure OpenAI Models
 
-Select the appropriate model for your specific use case:
+Select the appropriate model for your specific needs:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -58,10 +63,10 @@ services:
 
 | Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Cost-effective for most workloads |
-| GPT-4 | Complex reasoning | 20-100 TPM | Higher cost, suitable for premium features |
-| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Ideal for semantic search |
-| Whisper | Speech-to-text | 10-50 TPM | Designed for audio processing tasks |
+| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Affordable for most workloads |
+| GPT-4 | Complex reasoning | 20-100 TPM | Higher cost, ideal for advanced features |
+| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Crucial for semantic search |
+| Whisper | Speech-to-text | 10-50 TPM | Suitable for audio processing tasks |
 
 ## AZD Configuration for AI Models
 
@@ -153,7 +158,7 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Best suited for:
+Ideal for:
 - Development and testing
 - Applications targeting a single market
 - Cost-efficient setups
@@ -171,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Best suited for:
+Ideal for:
 - Global applications
 - High availability needs
 - Load balancing across regions
@@ -211,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Version Control
 
-Manage model versions within your AZD configuration:
+Manage model versions within your AZD setup:
 
 ```json
 {
@@ -231,7 +236,7 @@ Manage model versions within your AZD configuration:
 
 ### Model Updates
 
-Use AZD hooks to update models:
+Leverage AZD hooks for updating models:
 
 ```bash
 #!/bin/bash
@@ -246,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### A/B Testing
 
-Deploy and test multiple model versions simultaneously:
+Deploy and test multiple model versions:
 
 ```bicep
 param enableABTesting bool = false
@@ -272,7 +277,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Capacity Planning
 
-Estimate the required capacity based on usage patterns:
+Estimate the required capacity based on usage trends:
 
 ```python
 # Capacity calculation example
@@ -477,10 +482,10 @@ async def check_ai_models():
 
 ## Next Steps
 
-1. **Review the [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** for service integration strategies.
-2. **Complete the [AI Workshop Lab](ai-workshop-lab.md)** for hands-on learning.
-3. **Implement [Production AI Practices](production-ai-practices.md)** for enterprise-level deployments.
-4. **Check out the [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** for solutions to common issues.
+1. **Review the [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** for service integration strategies
+2. **Complete the [AI Workshop Lab](ai-workshop-lab.md)** for practical experience
+3. **Apply [Production AI Practices](production-ai-practices.md)** for enterprise-level deployments
+4. **Check out the [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** for resolving common issues
 
 ## Resources
 
@@ -491,7 +496,12 @@ async def check_ai_models():
 
 ---
 
-**Previous:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Next:** [AI Workshop Lab](ai-workshop-lab.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
 ---
 

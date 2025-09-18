@@ -1,75 +1,82 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-10T06:40:48+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T13:04:55+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "sl"
 }
 -->
-# Pre-flight Checks - Preverjanje pripravljenosti za uvajanje
+# Preverjanje pred namestitvijo za AZD
+
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 6 - Validacija in načrtovanje pred namestitvijo
+- **⬅️ Prejšnje**: [Izbira SKU](sku-selection.md)
+- **➡️ Naslednje poglavje**: [Poglavje 7: Odpravljanje težav](../troubleshooting/common-issues.md)
+- **🔧 Povezano**: [Poglavje 4: Vodnik za namestitev](../deployment/deployment-guide.md)
 
 ## Uvod
 
-Ta obsežen vodič ponuja skripte in postopke za preverjanje pred uvajanjem, da zagotovite uspešne uvedbe Azure Developer CLI, še preden se začnejo. Naučite se izvajati avtomatizirane preveritve za avtentikacijo, razpoložljivost virov, kvote, skladnost s pravili varnosti in zahteve glede zmogljivosti, da preprečite neuspehe pri uvajanju in optimizirate stopnje uspešnosti uvajanja.
+Ta obsežen vodnik ponuja skripte in postopke za validacijo pred namestitvijo, da zagotovite uspešne namestitve z Azure Developer CLI, še preden se začnejo. Naučite se izvajati avtomatizirane preveritve za avtentikacijo, razpoložljivost virov, kvote, skladnost s pravili varnosti in zahteve glede zmogljivosti, da preprečite neuspehe pri namestitvi in optimizirate stopnjo uspešnosti.
 
 ## Cilji učenja
 
-Z dokončanjem tega vodiča boste:
-- Obvladali tehnike in skripte za avtomatizirano preverjanje pred uvajanjem
-- Razumeli celovite strategije preverjanja za avtentikacijo, dovoljenja in kvote
-- Izvedli postopke preverjanja razpoložljivosti in zmogljivosti virov
-- Konfigurirali preveritve varnosti in skladnosti z organizacijskimi politikami
-- Oblikovali delovne tokove za oceno stroškov in preverjanje proračuna
-- Ustvarili prilagojeno avtomatizacijo preverjanja pred uvajanjem za CI/CD pipeline
+Z dokončanjem tega vodnika boste:
+- Obvladali tehnike in skripte za avtomatizirano validacijo pred namestitvijo
+- Razumeli strategije za preverjanje avtentikacije, dovoljenj in kvot
+- Izvedli postopke za validacijo razpoložljivosti in zmogljivosti virov
+- Konfigurirali preveritve skladnosti s pravili varnosti za organizacijske politike
+- Oblikovali delovne tokove za oceno stroškov in validacijo proračuna
+- Ustvarili avtomatizacijo preverjanja pred namestitvijo za CI/CD pipeline
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
-- Ustvariti in izvajati celovite skripte za preverjanje pred uvajanjem
-- Oblikovati avtomatizirane delovne tokove preverjanja za različne scenarije uvajanja
-- Izvesti postopke in politike preverjanja, specifične za okolje
-- Konfigurirati proaktivno spremljanje in opozarjanje za pripravljenost na uvajanje
-- Odpravljati težave pred uvajanjem in izvajati korektivne ukrepe
-- Integrirati preverjanje pred uvajanjem v DevOps pipeline in avtomatizacijske delovne tokove
+- Ustvariti in izvajati obsežne skripte za validacijo pred namestitvijo
+- Oblikovati avtomatizirane delovne tokove za različne scenarije namestitve
+- Izvesti postopke in politike za validacijo specifične za okolje
+- Konfigurirati proaktivno spremljanje in opozarjanje za pripravljenost na namestitev
+- Odpraviti težave pred namestitvijo in izvajati korektivne ukrepe
+- Integrirati preveritve pred namestitvijo v DevOps pipeline in avtomatizacijske delovne tokove
 
 ## Kazalo vsebine
 
 - [Pregled](../../../../docs/pre-deployment)
-- [Avtomatiziran skript za preverjanje pred uvajanjem](../../../../docs/pre-deployment)
-- [Ročni kontrolni seznam za preverjanje](../../../../docs/pre-deployment)
-- [Preverjanje okolja](../../../../docs/pre-deployment)
-- [Preverjanje virov](../../../../docs/pre-deployment)
-- [Preverjanje varnosti in skladnosti](../../../../docs/pre-deployment)
-- [Načrtovanje zmogljivosti in učinkovitosti](../../../../docs/pre-deployment)
+- [Avtomatiziran skript za preverjanje pred namestitvijo](../../../../docs/pre-deployment)
+- [Ročni kontrolni seznam za validacijo](../../../../docs/pre-deployment)
+- [Validacija okolja](../../../../docs/pre-deployment)
+- [Validacija virov](../../../../docs/pre-deployment)
+- [Preveritve varnosti in skladnosti](../../../../docs/pre-deployment)
+- [Načrtovanje zmogljivosti in zmogljivost](../../../../docs/pre-deployment)
 - [Odpravljanje pogostih težav](../../../../docs/pre-deployment)
 
 ---
 
 ## Pregled
 
-Preverjanja pred uvajanjem so ključna preverjanja, izvedena pred uvajanjem, da zagotovijo:
+Preveritve pred namestitvijo so ključne validacije, ki se izvajajo pred namestitvijo, da zagotovijo:
 
 - **Razpoložljivost virov** in kvote v ciljni regiji
-- **Avtentikacija in dovoljenja**, ki so pravilno konfigurirana
+- **Avtentikacijo in dovoljenja**, ki so pravilno konfigurirana
 - **Veljavnost predlog** in pravilnost parametrov
 - **Omrežno povezljivost** in odvisnosti
-- **Skladnost z varnostnimi politikami** organizacije
+- **Skladnost s pravili varnosti** organizacijskih politik
 - **Oceno stroškov** znotraj proračunskih omejitev
 
-### Kdaj izvajati preverjanja pred uvajanjem
+### Kdaj izvajati preveritve pred namestitvijo
 
-- **Pred prvo uvedbo** v novo okolje
+- **Pred prvo namestitvijo** v novo okolje
 - **Po pomembnih spremembah predloge**
-- **Pred uvedbami v produkcijo**
+- **Pred namestitvami v produkcijo**
 - **Ob spremembi regij Azure**
 - **Kot del CI/CD pipeline**
 
 ---
 
-## Avtomatiziran skript za preverjanje pred uvajanjem
+## Avtomatiziran skript za preverjanje pred namestitvijo
 
-### PowerShell skript za preverjanje
+### PowerShell preverjanje pred namestitvijo
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash skript za preverjanje
+### Bash preverjanje pred namestitvijo
 
 ```bash
 #!/bin/bash
@@ -783,26 +790,26 @@ main "$@"
 
 ---
 
-## Ročni kontrolni seznam za preverjanje
+## Ročni kontrolni seznam za validacijo
 
-### Kontrolni seznam pred uvajanjem
+### Kontrolni seznam pred namestitvijo
 
-Natisnite ta kontrolni seznam in preverite vsak element pred uvajanjem:
+Natisnite ta kontrolni seznam in preverite vsako točko pred namestitvijo:
 
 #### ✅ Nastavitev okolja
 - [ ] AZD CLI nameščen in posodobljen na najnovejšo različico
 - [ ] Azure CLI nameščen in avtenticiran
 - [ ] Izbrana pravilna naročnina Azure
-- [ ] Ime okolja je edinstveno in ustreza konvencijam poimenovanja
+- [ ] Ime okolja je unikatno in sledi konvencijam poimenovanja
 - [ ] Ciljna skupina virov identificirana ali jo je mogoče ustvariti
 
 #### ✅ Avtentikacija in dovoljenja
 - [ ] Uspešno avtenticiran z `azd auth login`
-- [ ] Uporabnik ima vlogo Contributor v ciljni naročnini/skupini virov
+- [ ] Uporabnik ima vlogo Contributor na ciljni naročnini/skupini virov
 - [ ] Konfiguriran servisni principal za CI/CD (če je primerno)
 - [ ] Ni poteklih certifikatov ali poverilnic
 
-#### ✅ Preverjanje predloge
+#### ✅ Validacija predloge
 - [ ] `azure.yaml` obstaja in je veljaven YAML
 - [ ] Vse storitve, definirane v azure.yaml, imajo ustrezno izvorno kodo
 - [ ] Bicep predloge v imeniku `infra/` so prisotne
@@ -811,9 +818,9 @@ Natisnite ta kontrolni seznam in preverite vsak element pred uvajanjem:
 - [ ] Ni trdo kodiranih skrivnosti v predlogah
 
 #### ✅ Načrtovanje virov
-- [ ] Izbrana in potrjena ciljna regija Azure
+- [ ] Izbrana in validirana ciljna regija Azure
 - [ ] Zahtevane storitve Azure so na voljo v ciljni regiji
-- [ ] Na voljo so zadostne kvote za načrtovane vire
+- [ ] Na voljo zadostne kvote za načrtovane vire
 - [ ] Preverjeni konflikti pri poimenovanju virov
 - [ ] Razumljene odvisnosti med viri
 
@@ -822,31 +829,31 @@ Natisnite ta kontrolni seznam in preverite vsak element pred uvajanjem:
 - [ ] Konfigurirane nastavitve požarnega zidu/proxyja, če je potrebno
 - [ ] Key Vault konfiguriran za upravljanje skrivnosti
 - [ ] Uporabljene upravljane identitete, kjer je mogoče
-- [ ] Omogočena uporaba HTTPS za spletne aplikacije
+- [ ] Uveljavljena uporaba HTTPS za spletne aplikacije
 
 #### ✅ Upravljanje stroškov
-- [ ] Izračunane ocene stroškov z uporabo kalkulatorja cen Azure
+- [ ] Izračunane ocene stroškov z Azure Pricing Calculator
 - [ ] Konfigurirana opozorila o proračunu, če je potrebno
-- [ ] Izbrane ustrezne SKU za vrsto okolja
-- [ ] Upoštevana rezervirana zmogljivost za produkcijske delovne obremenitve
+- [ ] Izbrani ustrezni SKU-ji za tip okolja
+- [ ] Upoštevana rezervirana zmogljivost za produkcijske obremenitve
 
 #### ✅ Spremljanje in opazovanje
 - [ ] Application Insights konfiguriran v predlogah
 - [ ] Načrtovan Log Analytics workspace
-- [ ] Določena pravila opozarjanja za ključne metrike
+- [ ] Določena pravila opozoril za ključne metrike
 - [ ] Implementirane končne točke za preverjanje zdravja v aplikacijah
 
 #### ✅ Varnostno kopiranje in obnovitev
 - [ ] Določena strategija varnostnega kopiranja za podatkovne vire
 - [ ] Dokumentirani cilji časa obnovitve (RTO)
 - [ ] Dokumentirani cilji točke obnovitve (RPO)
-- [ ] Načrt za obnovitev ob nesrečah za produkcijo
+- [ ] Načrt za obnovo po katastrofi za produkcijo
 
 ---
 
-## Preverjanje okolja
+## Validacija okolja
 
-### Preverjanje razvojnega okolja
+### Validacija razvojnega okolja
 
 ```bash
 #!/bin/bash
@@ -878,7 +885,7 @@ validate_dev_environment() {
 }
 ```
 
-### Preverjanje produkcijskega okolja
+### Validacija produkcijskega okolja
 
 ```bash
 #!/bin/bash
@@ -919,9 +926,9 @@ validate_prod_environment() {
 
 ---
 
-## Preverjanje virov
+## Validacija virov
 
-### Skript za preverjanje kvot
+### Skript za validacijo kvot
 
 ```python
 #!/usr/bin/env python3
@@ -1044,9 +1051,9 @@ if __name__ == "__main__":
 
 ---
 
-## Preverjanje varnosti in skladnosti
+## Preveritve varnosti in skladnosti
 
-### Skript za preverjanje varnosti
+### Skript za validacijo varnosti
 
 ```bash
 #!/bin/bash
@@ -1278,54 +1285,54 @@ steps:
 
 ## Povzetek najboljših praks
 
-### ✅ Najboljše prakse za preverjanje pred uvajanjem
+### ✅ Najboljše prakse za preverjanje pred namestitvijo
 
 1. **Avtomatizirajte, kjer je mogoče**
-   - Integrirajte preverjanja v CI/CD pipeline
-   - Uporabljajte skripte za ponovljive preveritve
+   - Integrirajte preveritve v CI/CD pipeline
+   - Uporabljajte skripte za ponovljive validacije
    - Shranjujte rezultate za revizijske sledi
 
-2. **Preverjanje, specifično za okolje**
-   - Različna preverjanja za razvoj/testiranje/produkcijo
+2. **Validacija specifična za okolje**
+   - Različne preveritve za razvoj/testiranje/produkcijo
    - Ustrezne zahteve glede varnosti za posamezno okolje
    - Optimizacija stroškov za neprodukcijska okolja
 
 3. **Celovita pokritost**
    - Avtentikacija in dovoljenja
    - Kvote virov in razpoložljivost
-   - Veljavnost predlog in sintaksa
+   - Validacija predlog in sintakse
    - Zahteve glede varnosti in skladnosti
 
 4. **Jasno poročanje**
    - Barvno kodirani indikatorji stanja
-   - Podrobna sporočila o napakah z navodili za odpravo
+   - Podrobna sporočila o napakah z koraki za odpravo
    - Povzetki poročil za hitro oceno
 
 5. **Hitro ustavljanje**
-   - Ustavite uvajanje, če ključna preverjanja ne uspejo
+   - Ustavite namestitev, če ključne preveritve ne uspejo
    - Zagotovite jasna navodila za rešitev
-   - Omogočite enostavno ponovno izvajanje preverjanj
+   - Omogočite enostavno ponovno izvajanje preveritev
 
-### Pogoste napake pri preverjanju pred uvajanjem
+### Pogoste napake pri preverjanju pred namestitvijo
 
-1. **Preskakovanje preverjanja** za "hitre" uvedbe
-2. **Nezadostno preverjanje dovoljenj** pred uvajanjem
-3. **Ignoriranje omejitev kvot** do neuspeha uvajanja
+1. **Preskakovanje validacije** za "hitre" namestitve
+2. **Nezadostno preverjanje dovoljenj** pred namestitvijo
+3. **Ignoriranje omejitev kvot** do neuspeha namestitve
 4. **Nevalidiranje predlog** v CI/CD pipeline
-5. **Izpuščanje varnostnega preverjanja** za produkcijska okolja
-6. **Nezadostna ocena stroškov**, kar vodi do presenečenj v proračunu
+5. **Izpuščanje varnostne validacije** za produkcijska okolja
+6. **Nezadostna ocena stroškov**, kar vodi do proračunskih presenečenj
 
 ---
 
-**Nasvet**: Izvajajte preverjanja pred uvajanjem kot ločeno opravilo v vašem CI/CD pipeline pred dejanskim uvajanjem. To vam omogoča zgodnje odkrivanje težav in hitrejše povratne informacije za razvijalce.
+**Nasvet**: Izvajajte preveritve pred namestitvijo kot ločeno opravilo v vašem CI/CD pipeline pred dejanskim opravkom namestitve. To vam omogoča zgodnje zaznavanje težav in hitrejše povratne informacije za razvijalce.
 
 ---
 
 **Navigacija**
 - **Prejšnja lekcija**: [Izbira SKU](sku-selection.md)
-- **Naslednja lekcija**: [Pomožni list](../../resources/cheat-sheet.md)
+- **Naslednja lekcija**: [Pomoč pri hitrem začetku](../../resources/cheat-sheet.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas opozarjamo, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

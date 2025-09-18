@@ -1,32 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:22:50+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T13:19:59+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "my"
 }
 -->
-# Azure Developer CLI ဖြင့် AI မော်ဒယ်များ Deploy လုပ်ခြင်း
+# Azure Developer CLI ဖြင့် AI Model Deployment
 
-**အရင်:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **နောက်တစ်ခု:** [AI Workshop Lab](ai-workshop-lab.md)
+**အခန်းအကြောင်းအရာများ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း 2 - AI-First Development
+- **⬅️ ယခင်**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ နောက်တစ်ခု**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 နောက်အခန်း**: [အခန်း 3: Configuration](../getting-started/configuration.md)
 
-ဤလမ်းညွှန်သည် AZD templates ကို အသုံးပြု၍ AI မော်ဒယ်များကို deploy လုပ်ရန်အတွက် လမ်းညွှန်ချက်များကို အပြည့်အစုံပေးထားပြီး မော်ဒယ်ရွေးချယ်မှုမှ စ၍ production deployment patterns အထိ ဖော်ပြထားသည်။
+ဤလမ်းညွှန်သည် AZD templates ကို အသုံးပြု၍ AI models များကို deploy လုပ်ရန်အတွက် လမ်းညွှန်ချက်များကို ပေးထားပြီး၊ model ရွေးချယ်မှုမှ စ၍ production deployment patterns အထိ အကျယ်အဝန်းဖော်ပြထားသည်။
 
 ## အကြောင်းအရာများ
 
-- [မော်ဒယ်ရွေးချယ်မှုမူဝါဒ](../../../../docs/ai-foundry)
-- [AI မော်ဒယ်များအတွက် AZD Configuration](../../../../docs/ai-foundry)
+- [Model ရွေးချယ်မှုမူဝါဒ](../../../../docs/ai-foundry)
+- [AI Models အတွက် AZD Configuration](../../../../docs/ai-foundry)
 - [Deployment Patterns](../../../../docs/ai-foundry)
-- [မော်ဒယ်စီမံခန့်ခွဲမှု](../../../../docs/ai-foundry)
+- [Model စီမံခန့်ခွဲမှု](../../../../docs/ai-foundry)
 - [Production အတွက်စဉ်းစားရန်အချက်များ](../../../../docs/ai-foundry)
 - [Monitoring နှင့် Observability](../../../../docs/ai-foundry)
 
-## မော်ဒယ်ရွေးချယ်မှုမူဝါဒ
+## Model ရွေးချယ်မှုမူဝါဒ
 
-### Azure OpenAI မော်ဒယ်များ
+### Azure OpenAI Models
 
-သင့် use case အတွက် သင့်တော်သော မော်ဒယ်ကို ရွေးချယ်ပါ:
+သင့်အသုံးပြုမှုအတွက် သင့်တော်သော model ကို ရွေးချယ်ပါ:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,20 +59,20 @@ services:
         ]
 ```
 
-### မော်ဒယ်စွမ်းရည်အစီအစဉ်
+### Model Capacity Planning
 
-| မော်ဒယ်အမျိုးအစား | အသုံးပြုမှု | အကြံပြုထားသောစွမ်းရည် | ကုန်ကျစရိတ်စဉ်းစားမှု |
-|--------------------|------------|-----------------------|-------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | အများစု workload များအတွက် ကုန်ကျစရိတ်သက်သာမှုရှိသည် |
-| GPT-4 | ရှုပ်ထွေးသော reasoning | 20-100 TPM | ကုန်ကျစရိတ်များသောကြောင့် premium features အတွက်သာ အသုံးပြုပါ |
-| Text-embedding-ada-002 | ရှာဖွေမှု, RAG | 30-120 TPM | semantic search အတွက် မရှိမဖြစ်လိုအပ်သည် |
+| Model အမျိုးအစား | အသုံးပြုမှု | အကြံပြုထားသော Capacity | ကုန်ကျစရိတ်စဉ်းစားမှု |
+|------------------|------------|-------------------------|---------------------|
+| GPT-4o-mini | Chat, Q&A | 10-50 TPM | အများစု workload များအတွက် စျေးသက်သာ |
+| GPT-4 | ရှုပ်ထွေးသော reasoning | 20-100 TPM | စျေးကြီးပြီး premium features အတွက် အသုံးပြုရန် |
+| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | semantic search အတွက် မရှိမဖြစ်လိုအပ် |
 | Whisper | Speech-to-text | 10-50 TPM | Audio processing workload များအတွက် |
 
-## AI မော်ဒယ်များအတွက် AZD Configuration
+## AI Models အတွက် AZD Configuration
 
 ### Bicep Template Configuration
 
-Bicep templates ကို အသုံးပြု၍ မော်ဒယ်များကို deploy လုပ်ပါ:
+Bicep templates ဖြင့် model deployments ဖန်တီးပါ:
 
 ```bicep
 // infra/main.bicep
@@ -153,10 +158,10 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-သင့်တော်သောအခြေအနေများ:
+သင့်တော်သောအရာများ:
 - Development နှင့် testing
 - Single-market applications
-- ကုန်ကျစရိတ်သက်သာမှု
+- ကုန်ကျစရိတ်အတွက် အထူးသက်သာ
 
 ### Pattern 2: Multi-Region Deployment
 
@@ -171,9 +176,9 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-သင့်တော်သောအခြေအနေများ:
+သင့်တော်သောအရာများ:
 - Global applications
-- အမြင့်မားသော availability လိုအပ်ချက်များ
+- High availability လိုအပ်ချက်များ
 - Load distribution
 
 ### Pattern 3: Hybrid Deployment
@@ -207,11 +212,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## မော်ဒယ်စီမံခန့်ခွဲမှု
+## Model စီမံခန့်ခွဲမှု
 
 ### Version Control
 
-AZD configuration တွင် မော်ဒယ် version များကို track လုပ်ပါ:
+AZD configuration တွင် model versions များကို track လုပ်ပါ:
 
 ```json
 {
@@ -229,9 +234,9 @@ AZD configuration တွင် မော်ဒယ် version များကိ�
 }
 ```
 
-### မော်ဒယ်အပ်ဒိတ်များ
+### Model Updates
 
-AZD hooks ကို အသုံးပြု၍ မော်ဒယ်များကို update လုပ်ပါ:
+Model updates အတွက် AZD hooks ကို အသုံးပြုပါ:
 
 ```bash
 #!/bin/bash
@@ -246,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### A/B Testing
 
-မော်ဒယ် version များစွာကို deploy လုပ်ပါ:
+Model versions များကို အများအပြား deploy လုပ်ပါ:
 
 ```bicep
 param enableABTesting bool = false
@@ -270,9 +275,9 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ## Production အတွက်စဉ်းစားရန်အချက်များ
 
-### စွမ်းရည်အစီအစဉ်
+### Capacity Planning
 
-အသုံးပြုမှု pattern များအပေါ်မူတည်၍ လိုအပ်သောစွမ်းရည်ကိုတွက်ချက်ပါ:
+အသုံးပြုမှု pattern များအပေါ်မူတည်၍ လိုအပ်သော capacity ကိုတွက်ချက်ပါ:
 
 ```python
 # Capacity calculation example
@@ -335,7 +340,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ကုန်ကျစရိတ်သက်သာမှု
+### Cost Optimization
 
 ကုန်ကျစရိတ်ထိန်းချုပ်မှုများကို အကောင်အထည်ဖော်ပါ:
 
@@ -371,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights Integration
 
-AI workload များအတွက် monitoring ကို configure လုပ်ပါ:
+AI workloads အတွက် monitoring ကို configure လုပ်ပါ:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -475,14 +480,14 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## နောက်တစ်ခုလုပ်ရန်
+## နောက်တစ်ဆင့်လုပ်ဆောင်ရန်
 
-1. **[Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** ကို ပြန်လည်သုံးသပ်ပါ
+1. **[Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** ကို ပြန်လည်သုံးသပ်ပြီး service integration patterns များကို လေ့လာပါ
 2. **[AI Workshop Lab](ai-workshop-lab.md)** ကို ပြီးမြောက်စေပြီး လက်တွေ့အတွေ့အကြုံရယူပါ
-3. **[Production AI Practices](production-ai-practices.md)** ကို အဖွဲ့အစည်းအဆင့် deployment များအတွက် အကောင်အထည်ဖော်ပါ
-4. **[AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** ကို သာမန်ပြဿနာများအတွက် လေ့လာပါ
+3. **[Production AI Practices](production-ai-practices.md)** ကို အကောင်အထည်ဖော်ပြီး စီးပွားရေးအတွက် deploy လုပ်ပါ
+4. **[AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** ကို လေ့လာပြီး အခက်အခဲများကို ဖြေရှင်းပါ
 
-## အရင်းအမြစ်များ
+## Resources
 
 - [Azure OpenAI Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**အရင်:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **နောက်တစ်ခု:** [AI Workshop Lab](ai-workshop-lab.md)
+**အခန်းအကြောင်းအရာများ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း 2 - AI-First Development
+- **⬅️ ယခင်**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ နောက်တစ်ခု**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 နောက်အခန်း**: [အခန်း 3: Configuration](../getting-started/configuration.md)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T23:18:55+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T13:00:07+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "sl"
 }
 -->
 # Najboljše prakse za produkcijske AI delovne obremenitve z AZD
 
-**Prejšnje:** [AI Workshop Lab](ai-workshop-lab.md) | **Naslednje:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 8 - Produkcijski in podjetniški vzorci
+- **⬅️ Prejšnje poglavje**: [Poglavje 7: Odpravljanje težav](../troubleshooting/debugging.md)
+- **⬅️ Prav tako povezano**: [Delavnica AI laboratorij](ai-workshop-lab.md)
+- **🎯 Tečaj zaključen**: [AZD za začetnike](../../README.md)
 
 ## Pregled
 
@@ -27,7 +32,7 @@ Na podlagi rezultatov ankete v skupnosti so to najpogostejši izzivi, s katerimi
 
 ## Arhitekturni vzorci za produkcijski AI
 
-### Vzorec 1: Arhitektura AI mikrostoritev
+### Vzorec 1: Arhitektura mikroservisov za AI
 
 **Kdaj uporabiti**: Kompleksne AI aplikacije z več funkcionalnostmi
 
@@ -71,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Vzorec 2: AI obdelava, ki temelji na dogodkih
+### Vzorec 2: Procesiranje AI na podlagi dogodkov
 
-**Kdaj uporabiti**: Obdelava v serijah, analiza dokumentov, asinhroni delovni tokovi
+**Kdaj uporabiti**: Procesiranje v serijah, analiza dokumentov, asinhroni delovni tokovi
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -122,7 +127,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ## Najboljše prakse za varnost
 
-### 1. Varnostni model Zero-Trust
+### 1. Model varnosti z ničelnim zaupanjem
 
 **Strategija implementacije**:
 - Brez komunikacije med storitvami brez avtentikacije
@@ -151,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Varno upravljanje skrivnosti
 
-**Vzorec integracije Key Vault**:
+**Vzorec integracije z Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -324,7 +329,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. Uravnavanje obremenitve in upravljanje prometa
 
-**Application Gateway z WAF**:
+**Prehod aplikacij z WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -364,7 +369,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Pravilno dimenzioniranje virov
 
-**Konfiguracije, specifične za okolje**:
+**Konfiguracije specifične za okolje**:
 
 ```bash
 # Development environment
@@ -501,7 +506,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Spremljanje, specifično za AI
+### 2. Spremljanje specifično za AI
 
 **Prilagojene nadzorne plošče za AI metrike**:
 
@@ -532,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Preverjanje stanja in spremljanje razpoložljivosti
+### 3. Preverjanje zdravja in spremljanje razpoložljivosti
 
 ```bicep
 // Application Insights availability tests
@@ -601,7 +606,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Obnovitev po katastrofi in visoka razpoložljivost
+## Obnova po katastrofi in visoka razpoložljivost
 
 ### 1. Uvajanje v več regijah
 
@@ -665,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Varnostno kopiranje podatkov in obnovitev
+### 2. Varnostno kopiranje podatkov in obnova
 
 ```bicep
 // Backup configuration for critical data
@@ -853,21 +858,21 @@ echo "Infrastructure validation completed successfully!"
 ### Spremljanje ✅
 - [ ] Konfigurirani vpogledi v aplikacijo
 - [ ] Določene prilagojene metrike
-- [ ] Nastavljena pravila za opozorila
+- [ ] Nastavljena pravila za opozarjanje
 - [ ] Ustvarjena nadzorna plošča
-- [ ] Implementirani pregledi stanja
+- [ ] Implementirani pregledi zdravja
 - [ ] Politike zadrževanja dnevnikov
 
 ### Zanesljivost ✅
 - [ ] Uvajanje v več regijah
-- [ ] Načrt varnostnega kopiranja in obnovitve
+- [ ] Načrt varnostnega kopiranja in obnove
 - [ ] Implementirani odklopniki
 - [ ] Konfigurirane politike ponovnih poskusov
 - [ ] Postopno poslabšanje
-- [ ] Končne točke za preverjanje stanja
+- [ ] Končne točke za preverjanje zdravja
 
 ### Upravljanje stroškov ✅
-- [ ] Konfigurirana opozorila o proračunu
+- [ ] Nastavljena opozorila o proračunu
 - [ ] Pravilno dimenzioniranje virov
 - [ ] Uporabljeni popusti za razvoj/testiranje
 - [ ] Kupljene rezervirane instance
@@ -893,7 +898,7 @@ echo "Infrastructure validation completed successfully!"
 | **Stopnja napak** | < 0,1 % | Dnevniki aplikacije |
 | **Uporaba žetonov** | < $500/mesec | Upravljanje stroškov |
 | **Sočasni uporabniki** | 1000+ | Testiranje obremenitve |
-| **Čas obnovitve** | < 1 ura | Testi obnovitve po katastrofi |
+| **Čas obnove** | < 1 ura | Testi obnove po katastrofi |
 
 ### Testiranje obremenitve
 
@@ -912,34 +917,39 @@ Na podlagi povratnih informacij skupnosti Azure AI Foundry Discord:
 
 ### Najboljša priporočila skupnosti:
 
-1. **Začnite majhno, postopoma povečujte**: Začnite z osnovnimi SKU-ji in povečujte glede na dejansko uporabo
+1. **Začnite majhno, postopoma skalirajte**: Začnite z osnovnimi SKU-ji in skalirajte glede na dejansko uporabo
 2. **Spremljajte vse**: Nastavite celovito spremljanje že od prvega dne
 3. **Avtomatizirajte varnost**: Uporabite infrastrukturo kot kodo za dosledno varnost
-4. **Temeljito testirajte**: Vključite testiranje, specifično za AI, v svojo cevovod
+4. **Temeljito testirajte**: Vključite testiranje specifično za AI v svojo cevovod
 5. **Načrtujte stroške**: Spremljajte uporabo žetonov in zgodaj nastavite opozorila o proračunu
 
 ### Pogoste napake, ki se jim je treba izogniti:
 
 - ❌ Trdo kodiranje API ključev v kodi
 - ❌ Ne nastavitev ustreznega spremljanja
-- ❌ Zanemarjanje optimizacije stroškov
+- ❌ Ignoriranje optimizacije stroškov
 - ❌ Ne testiranje scenarijev napak
-- ❌ Uvajanje brez preverjanja stanja
+- ❌ Uvajanje brez pregledov zdravja
 
 ## Dodatni viri
 
-- **Azure Well-Architected Framework**: [Vodič za AI delovne obremenitve](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure dobro zasnovan okvir**: [Vodič za AI delovne obremenitve](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Dokumentacija Azure AI Foundry**: [Uradna dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
 - **Predloge skupnosti**: [Azure vzorci](https://github.com/Azure-Samples)
 - **Skupnost Discord**: [#Azure kanal](https://discord.gg/microsoft-azure)
 
 ---
 
-**Prejšnje:** [AI Workshop Lab](ai-workshop-lab.md) | **Naslednje:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 8 - Produkcijski in podjetniški vzorci
+- **⬅️ Prejšnje poglavje**: [Poglavje 7: Odpravljanje težav](../troubleshooting/debugging.md)
+- **⬅️ Prav tako povezano**: [Delavnica AI laboratorij](ai-workshop-lab.md)
+- **🎆 Tečaj zaključen**: [AZD za začetnike](../../README.md)
 
 **Zapomnite si**: Produkcijske AI delovne obremenitve zahtevajo skrbno načrtovanje, spremljanje in stalno optimizacijo. Začnite s temi vzorci in jih prilagodite svojim specifičnim zahtevam.
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

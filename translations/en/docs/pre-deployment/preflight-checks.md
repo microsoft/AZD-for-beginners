@@ -1,36 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-10T06:36:26+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T12:48:17+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "en"
 }
 -->
-# Pre-flight Checks - Deployment Readiness Validation
+# Pre-Flight Checks for AZD Deployments
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 6 - Pre-Deployment Validation & Planning
+- **⬅️ Previous**: [SKU Selection](sku-selection.md)
+- **➡️ Next Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/common-issues.md)
+- **🔧 Related**: [Chapter 4: Deployment Guide](../deployment/deployment-guide.md)
 
 ## Introduction
 
-This comprehensive guide provides pre-deployment validation scripts and procedures to ensure successful Azure Developer CLI deployments before they begin. Learn how to implement automated checks for authentication, resource availability, quotas, security compliance, and performance requirements to prevent deployment failures and optimize deployment success rates.
+This guide provides detailed scripts and procedures for pre-deployment validation to ensure smooth Azure Developer CLI deployments. Learn how to implement automated checks for authentication, resource availability, quotas, security compliance, and performance requirements to avoid deployment failures and maximize success rates.
 
 ## Learning Goals
 
-By completing this guide, you will:
-- Master automated pre-deployment validation techniques and scripts
-- Understand comprehensive checking strategies for authentication, permissions, and quotas
-- Implement resource availability and capacity validation procedures
-- Configure security and compliance checks for organizational policies
-- Design cost estimation and budget validation workflows
-- Create custom pre-flight check automation for CI/CD pipelines
+By following this guide, you will:
+- Gain expertise in automated pre-deployment validation techniques and scripts
+- Understand strategies for checking authentication, permissions, and quotas
+- Learn how to validate resource availability and capacity
+- Configure security and compliance checks aligned with organizational policies
+- Develop workflows for cost estimation and budget validation
+- Create custom automation for pre-flight checks in CI/CD pipelines
 
 ## Learning Outcomes
 
-Upon completion, you will be able to:
-- Create and execute comprehensive pre-flight validation scripts
-- Design automated checking workflows for different deployment scenarios
-- Implement environment-specific validation procedures and policies
-- Configure proactive monitoring and alerting for deployment readiness
-- Troubleshoot pre-deployment issues and implement corrective actions
+After completing this guide, you will be able to:
+- Develop and execute comprehensive pre-flight validation scripts
+- Design automated workflows for various deployment scenarios
+- Implement validation procedures tailored to specific environments
+- Set up proactive monitoring and alerts for deployment readiness
+- Troubleshoot pre-deployment issues and apply corrective measures
 - Integrate pre-flight checks into DevOps pipelines and automation workflows
 
 ## Table of Contents
@@ -48,21 +55,21 @@ Upon completion, you will be able to:
 
 ## Overview
 
-Pre-flight checks are essential validations performed before deploying to ensure:
+Pre-flight checks are critical validations performed before deployment to ensure:
 
-- **Resource availability** and quotas in target regions
-- **Authentication and permissions** are properly configured
-- **Template validity** and parameter correctness
+- **Resource availability** and quotas in the target regions
+- **Authentication and permissions** are correctly configured
+- **Template validity** and parameter accuracy
 - **Network connectivity** and dependencies
 - **Security compliance** with organizational policies
-- **Cost estimation** within budget constraints
+- **Cost estimation** aligns with budget constraints
 
 ### When to Run Pre-flight Checks
 
-- **Before first deployment** to a new environment
-- **After significant template changes**
+- **Before the first deployment** to a new environment
+- **After major template updates**
 - **Before production deployments**
-- **When changing Azure regions**
+- **When switching Azure regions**
 - **As part of CI/CD pipelines**
 
 ---
@@ -787,47 +794,47 @@ main "$@"
 
 ### Pre-Deployment Checklist
 
-Print this checklist and verify each item before deployment:
+Print this checklist and confirm each item before deployment:
 
 #### ✅ Environment Setup
-- [ ] AZD CLI installed and updated to latest version
+- [ ] AZD CLI installed and updated to the latest version
 - [ ] Azure CLI installed and authenticated
 - [ ] Correct Azure subscription selected
-- [ ] Environment name is unique and follows naming conventions
-- [ ] Target resource group identified or can be created
+- [ ] Environment name is unique and adheres to naming conventions
+- [ ] Target resource group identified or ready for creation
 
 #### ✅ Authentication & Permissions
-- [ ] Successfully authenticated with `azd auth login`
-- [ ] User has Contributor role on target subscription/resource group
+- [ ] Successfully authenticated using `azd auth login`
+- [ ] User has Contributor role on the target subscription/resource group
 - [ ] Service principal configured for CI/CD (if applicable)
 - [ ] No expired certificates or credentials
 
 #### ✅ Template Validation
 - [ ] `azure.yaml` exists and is valid YAML
 - [ ] All services defined in azure.yaml have corresponding source code
-- [ ] Bicep templates in `infra/` directory are present
+- [ ] Bicep templates in the `infra/` directory are present
 - [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
 - [ ] All required parameters have default values or will be provided
 - [ ] No hardcoded secrets in templates
 
 #### ✅ Resource Planning
 - [ ] Target Azure region selected and validated
-- [ ] Required Azure services available in target region
+- [ ] Required Azure services available in the target region
 - [ ] Sufficient quotas available for planned resources
 - [ ] Resource naming conflicts checked
 - [ ] Dependencies between resources understood
 
 #### ✅ Network & Security
 - [ ] Network connectivity to Azure endpoints verified
-- [ ] Firewall/proxy settings configured if needed
+- [ ] Firewall/proxy settings configured if necessary
 - [ ] Key Vault configured for secrets management
-- [ ] Managed identities used where possible
+- [ ] Managed identities used wherever possible
 - [ ] HTTPS enforcement enabled for web applications
 
 #### ✅ Cost Management
 - [ ] Cost estimates calculated using Azure Pricing Calculator
-- [ ] Budget alerts configured if required
-- [ ] Appropriate SKUs selected for environment type
+- [ ] Budget alerts configured if needed
+- [ ] Appropriate SKUs selected for the environment type
 - [ ] Reserved capacity considered for production workloads
 
 #### ✅ Monitoring & Observability
@@ -1283,12 +1290,12 @@ steps:
 1. **Automate Where Possible**
    - Integrate checks into CI/CD pipelines
    - Use scripts for repeatable validations
-   - Store results for audit trails
+   - Store results for audit purposes
 
 2. **Environment-Specific Validation**
-   - Different checks for dev/staging/prod
-   - Appropriate security requirements per environment
-   - Cost optimization for non-production environments
+   - Tailor checks for dev/staging/prod environments
+   - Apply appropriate security requirements for each environment
+   - Optimize costs for non-production environments
 
 3. **Comprehensive Coverage**
    - Authentication and permissions
@@ -1297,19 +1304,19 @@ steps:
    - Security and compliance requirements
 
 4. **Clear Reporting**
-   - Color-coded status indicators
-   - Detailed error messages with remediation steps
-   - Summary reports for quick assessment
+   - Use color-coded status indicators
+   - Provide detailed error messages with resolution steps
+   - Generate summary reports for quick assessments
 
 5. **Fail Fast**
-   - Stop deployment if critical checks fail
-   - Provide clear guidance for resolution
-   - Enable easy re-running of checks
+   - Halt deployment if critical checks fail
+   - Offer clear guidance for resolving issues
+   - Enable easy re-execution of checks
 
 ### Common Pre-flight Pitfalls
 
 1. **Skipping validation** for "quick" deployments
-2. **Insufficient permissions** checking before deployment
+2. **Insufficient permissions** checks before deployment
 3. **Ignoring quota limits** until deployment fails
 4. **Not validating templates** in CI/CD pipelines
 5. **Missing security validation** for production environments
@@ -1317,7 +1324,7 @@ steps:
 
 ---
 
-**Pro Tip**: Run pre-flight checks as a separate job in your CI/CD pipeline before the actual deployment job. This allows you to catch issues early and provides faster feedback to developers.
+**Pro Tip**: Run pre-flight checks as a separate job in your CI/CD pipeline before the actual deployment job. This helps catch issues early and provides faster feedback to developers.
 
 ---
 
@@ -1328,4 +1335,4 @@ steps:
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

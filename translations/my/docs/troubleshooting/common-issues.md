@@ -1,41 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:30:00+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T13:23:12+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "my"
 }
 -->
-# အများဆုံးတွေ့ရသော ပြဿနာများနှင့် ဖြေရှင်းနည်းများ
+# အများဆုံးတွေ့ရသောပြဿနာများနှင့် ဖြေရှင်းနည်းများ
+
+**အခန်းအကြောင်းအရာ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၇ - ပြဿနာရှာဖွေခြင်းနှင့် Debugging
+- **⬅️ ယခင်အခန်း**: [အခန်း ၆: Pre-flight Checks](../pre-deployment/preflight-checks.md)
+- **➡️ နောက်တစ်ခု**: [Debugging Guide](debugging.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၈: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
 
 ## အကျဉ်းချုပ်
 
-ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI ကို အသုံးပြုရာမှာ အများဆုံးတွေ့ရသော ပြဿနာများကို ဖြေရှင်းဖို့ လမ်းညွှန်ပေးထားပါတယ်။ Authentication, Deployment, Infrastructure Provisioning, Application Configuration စတဲ့ ပြဿနာများကို ရှာဖွေ၊ ဖြေရှင်းနည်းများကို လေ့လာနိုင်ပါမယ်။ ပြဿနာတစ်ခုစီမှာ ရှင်းလင်းသော လက္ခဏာများ၊ အကြောင်းရင်းများနှင့် အဆင့်ဆင့်ဖြေရှင်းနည်းများ ပါဝင်ပါတယ်။
+ဒီပြဿနာရှာဖွေခြင်းလမ်းညွှန်မှာ Azure Developer CLI ကိုအသုံးပြုရာတွင် အများဆုံးတွေ့ရသောပြဿနာများကို ကူညီဖြေရှင်းပေးနိုင်ရန် ရည်ရွယ်ထားပါတယ်။ Authentication, Deployment, Infrastructure Provisioning, Application Configuration စတဲ့ပြဿနာများကို ရှာဖွေ၊ ဖြေရှင်းနည်းများကို လေ့လာနိုင်ပါမည်။ ပြဿနာတစ်ခုစီမှာ လက္ခဏာများ၊ အကြောင်းရင်းများနှင့် အဆင့်ဆင့်ဖြေရှင်းနည်းများ ပါဝင်ပါတယ်။
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ
+## သင်ယူရည်မှန်းချက်များ
 
-ဒီလမ်းညွှန်ကို ပြီးမြောက်စွာ လေ့လာပြီးပါက သင်သည်:
-- Azure Developer CLI ပြဿနာများကို Diagnostic နည်းလမ်းများဖြင့် ကျွမ်းကျင်စွာ ရှာဖွေတတ်မည်
-- Authentication နှင့် Permission ပြဿနာများကို နားလည်ပြီး ဖြေရှင်းနည်းများကို သိရှိမည်
+ဒီလမ်းညွှန်ကိုပြီးစီးပါက၊ သင်သည်:
+- Azure Developer CLI ပြဿနာများကို Diagnostic နည်းလမ်းများဖြင့် ကျွမ်းကျင်စွာရှာဖွေနိုင်မည်
+- Authentication နှင့် Permission ပြဿနာများကို နားလည်ပြီး ဖြေရှင်းနိုင်မည်
 - Deployment မအောင်မြင်မှုများ၊ Infrastructure Provisioning အမှားများနှင့် Configuration ပြဿနာများကို ဖြေရှင်းနိုင်မည်
 - Proactive Monitoring နှင့် Debugging Strategy များကို အကောင်အထည်ဖော်နိုင်မည်
-- ပြဿနာများကို Systematic Troubleshooting Methodologies ဖြင့် ဖြေရှင်းနိုင်မည်
-- အနာဂတ်ပြဿနာများကို ကာကွယ်ရန် Logging နှင့် Monitoring ကို သင့်တော်စွာ Configure လုပ်နိုင်မည်
+- ပြဿနာရှာဖွေခြင်းနည်းလမ်းများကို စနစ်တကျအသုံးပြုနိုင်မည်
+- Log နှင့် Monitoring ကိုမှန်ကန်စွာ Configure လုပ်ပြီး အနာဂတ်ပြဿနာများကို ကာကွယ်နိုင်မည်
 
-## သင်ယူပြီးရရှိမည့် အကျိုးကျေးဇူးများ
+## သင်ယူရလဒ်များ
 
-ဒီလမ်းညွှန်ကို ပြီးမြောက်စွာ လေ့လာပြီးပါက သင်သည်:
-- Azure Developer CLI ပြဿနာများကို Built-in Diagnostic Tools အသုံးပြု၍ ရှာဖွေတတ်မည်
-- Authentication, Subscription, Permission ဆိုင်ရာ ပြဿနာများကို ကိုယ်တိုင် ဖြေရှင်းနိုင်မည်
+ဒီလမ်းညွှန်ကိုပြီးစီးပါက၊ သင်သည်:
+- Azure Developer CLI ပြဿနာများကို Built-in Diagnostic Tools အသုံးပြု၍ ရှာဖွေနိုင်မည်
+- Authentication, Subscription, Permission ပြဿနာများကို ကိုယ်တိုင်ဖြေရှင်းနိုင်မည်
 - Deployment မအောင်မြင်မှုများနှင့် Infrastructure Provisioning အမှားများကို ထိရောက်စွာ Troubleshoot လုပ်နိုင်မည်
 - Application Configuration ပြဿနာများနှင့် Environment-specific ပြဿနာများကို Debug လုပ်နိုင်မည်
-- Monitoring နှင့် Alerting ကို အကျိုးရှိစွာ အသုံးပြု၍ ပြဿနာများကို ကြိုတင်ရှာဖွေနိုင်မည်
+- Monitoring နှင့် Alerting ကို Proactively အသုံးပြု၍ ပြဿနာများကို ရှာဖွေနိုင်မည်
 - Logging, Debugging နှင့် Problem Resolution Workflow များအတွက် Best Practices များကို အသုံးပြုနိုင်မည်
 
-## အမြန် Diagnostic လုပ်နည်း
+## အမြန် Diagnostic
 
-အထူးပြဿနာများကို စတင်ရှာဖွေမီ ဒီ Commands များကို Run လုပ်ပြီး Diagnostic အချက်အလက်များကို စုဆောင်းပါ:
+အထူးပြဿနာများကို စတင်ရှာဖွေမည်မတိုင်မီ၊ ဒီ Commands များကို Run လုပ်ပြီး Diagnostic အချက်အလက်များကို စုဆောင်းပါ:
 
 ```bash
 # Check azd version and health
@@ -59,8 +66,8 @@ azd <command> --debug
 
 ### ပြဿနာ: "Failed to get access token"
 **လက္ခဏာများ:**
-- `azd up` မှာ Authentication အမှားများဖြင့် မအောင်မြင်
-- Commands မှာ "unauthorized" သို့မဟုတ် "access denied" ပြဿနာများပြ
+- `azd up` Authentication အမှားများဖြင့် မအောင်မြင်
+- Commands "unauthorized" သို့မဟုတ် "access denied" ပြန်လာ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -80,9 +87,9 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### ပြဿနာ: Deployment လုပ်စဉ်မှာ "Insufficient privileges"
+### ပြဿနာ: Deployment အတွင်း "Insufficient privileges"
 **လက္ခဏာများ:**
-- Deployment မှာ Permission အမှားများကြောင့် မအောင်မြင်
+- Deployment Permission အမှားများဖြင့် မအောင်မြင်
 - Azure Resources တချို့ကို Create လုပ်လို့မရ
 
 **ဖြေရှင်းနည်းများ:**
@@ -115,7 +122,7 @@ az account clear
 ### ပြဿနာ: Resource Name Conflict
 **လက္ခဏာများ:**
 - "The resource name already exists" အမှားများ
-- Resource Creation လုပ်စဉ်မှာ Deployment မအောင်မြင်
+- Resource Creation အတွင်း Deployment မအောင်မြင်
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -133,8 +140,8 @@ azd down --force --purge
 
 ### ပြဿနာ: Location/Region မရရှိနိုင်
 **လက္ခဏာများ:**
-- "The location 'xyz' is not available for resource type" အမှားများ
-- ရွေးချယ်ထားသော Region မှာ SKUs မရရှိနိုင်
+- "The location 'xyz' is not available for resource type"
+- Region ရွေးချယ်မှုအတွင်း SKUs မရရှိနိုင်
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -150,10 +157,10 @@ azd env set AZURE_LOCATION eastus2
 # Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### ပြဿနာ: Quota အလွန်ကျော်သွားမှု
+### ပြဿနာ: Quota အလွန်ကျော်မှု
 **လက္ခဏာများ:**
-- "Quota exceeded for resource type" အမှားများ
-- "Maximum number of resources reached" အမှားများ
+- "Quota exceeded for resource type"
+- "Maximum number of resources reached"
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -178,7 +185,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 ### ပြဿနာ: Bicep Template အမှားများ
 **လက္ခဏာများ:**
 - Template Validation မအောင်မြင်မှု
-- Bicep Files မှ Syntax အမှားများ
+- Bicep Files Syntax အမှားများ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -199,7 +206,7 @@ azd provision --preview
 
 ### ပြဿနာ: Build မအောင်မြင်မှု
 **လက္ခဏာများ:**
-- Deployment လုပ်စဉ်မှာ Application Build မအောင်မြင်
+- Deployment အတွင်း Application Build မအောင်မြင်
 - Package Installation အမှားများ
 
 **ဖြေရှင်းနည်းများ:**
@@ -249,7 +256,7 @@ az containerapp show --name my-app --resource-group my-rg
 
 ### ပြဿနာ: Database Connection မအောင်မြင်မှု
 **လက္ခဏာများ:**
-- Application မှ Database ကို ချိတ်ဆက်လို့မရ
+- Application Database ကို ချိတ်ဆက်လို့မရ
 - Connection Timeout အမှားများ
 
 **ဖြေရှင်းနည်းများ:**
@@ -272,7 +279,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ### ပြဿနာ: Environment Variables မအလုပ်လုပ်
 **လက္ခဏာများ:**
-- App မှ Configuration Values မဖတ်နိုင်
+- App Configuration Values မဖတ်နိုင်
 - Environment Variables အလွတ်ဖြစ်နေ
 
 **ဖြေရှင်းနည်းများ:**
@@ -310,8 +317,8 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 ### ပြဿနာ: CORS Configuration ပြဿနာများ
 **လက္ခဏာများ:**
-- Frontend မှ API ကို ခေါ်လို့မရ
-- Cross-origin Request ကို Block လုပ်ထား
+- Frontend API ကို ခေါ်လို့မရ
+- Cross-origin Request Block ဖြစ်နေ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -333,8 +340,8 @@ azd show
 
 ### ပြဿနာ: Environment Switching ပြဿနာများ
 **လက္ခဏာများ:**
-- မှားသော Environment ကို အသုံးပြုနေ
-- Configuration မပြောင်းလဲနိုင်
+- မှားယွင်းသော Environment ကို အသုံးပြုနေ
+- Configuration မှန်ကန်စွာ Switch မဖြစ်
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -354,8 +361,8 @@ azd env select production-new
 
 ### ပြဿနာ: Environment Corruption
 **လက္ခဏာများ:**
-- Environment မှာ Invalid State ပြနေ
-- Resources များ Configuration နှင့် မကိုက်ညီ
+- Environment Invalid State ပြ
+- Resources Configuration နှင့် မကိုက်ညီ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -373,10 +380,10 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Performance ပြဿနာများ
 
-### ပြဿနာ: Deployment အချိန်ကြာရှည်မှု
+### ပြဿနာ: Deployment အချိန်နှေးကွေး
 **လက္ခဏာများ:**
-- Deployment များ အချိန်ကြာရှည်နေ
-- Deployment လုပ်စဉ်မှာ Timeout ဖြစ်
+- Deployment အချိန်များကြာ
+- Deployment အတွင်း Timeout ဖြစ်
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -398,8 +405,8 @@ azd config set defaults.location eastus2
 
 ### ပြဿနာ: Application Performance ပြဿနာများ
 **လက္ခဏာများ:**
-- Response Time ကြာရှည်နေ
-- Resource Usage မြင့်တက်နေ
+- Response Time နှေးကွေး
+- Resource Usage မြင့်မား
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
@@ -464,11 +471,11 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ## 🆘 အပိုဆောင်းအကူအညီရယူခြင်း
 
-### Escalate လုပ်ရန် အချိန်
-- Authentication ပြဿနာများကို အားလုံးစမ်းသုံးပြီး မဖြေရှင်းနိုင်သေး
-- Azure Services နှင့် ဆိုင်သော Infrastructure ပြဿနာများ
-- Billing သို့မဟုတ် Subscription ဆိုင်ရာ ပြဿနာများ
-- Security ဆိုင်ရာ စိုးရိမ်မှုများ သို့မဟုတ် အရေးပေါ်အခြေအနေများ
+### Escalate လုပ်ရန်အချိန်
+- Authentication ပြဿနာများကို အားလုံးစမ်းပြီးနောက်လည်း မဖြေရှင်းနိုင်
+- Azure Services နှင့်ဆိုင်သော Infrastructure ပြဿနာများ
+- Billing သို့မဟုတ် Subscription ပြဿနာများ
+- လုံခြုံရေးဆိုင်ရာ စိုးရိမ်မှုများ
 
 ### Support Channels
 ```bash
@@ -484,14 +491,13 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Support ကို ဆက်သွယ်မည့်အခါ စုဆောင်းရန် အချက်အလက်များ
-Support ကို ဆက်သွယ်မည့်အခါ အောက်ပါအချက်အလက်များကို စုဆောင်းထားပါ:
-- `azd version` output
-- `azd info` output
+### Support ကိုဆက်သွယ်မည်မတိုင်မီ စုဆောင်းရန်အချက်အလက်များ
+- `azd version` Output
+- `azd info` Output
 - Error Messages (အပြည့်အစုံ)
-- ပြဿနာကို ပြန်လုပ်နိုင်ရန် လုပ်ဆောင်ချက်များ
+- ပြဿနာကို ပြန်လုပ်နိုင်သောအဆင့်များ
 - Environment Details (`azd env show`)
-- ပြဿနာစတင်ဖြစ်ပေါ်ချိန်
+- ပြဿနာစတင်ချိန် Timeline
 
 ### Log Collection Script
 ```bash
@@ -517,7 +523,7 @@ azd logs --since 1h >> debug-logs/recent-logs.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 ပြဿနာများကို ကာကွယ်ခြင်း
+## 📊 ပြဿနာကာကွယ်ခြင်း
 
 ### Pre-deployment Checklist
 ```bash
@@ -566,7 +572,7 @@ az consumption usage list --billing-period-name 202401
 az security assessment list --resource-group myrg
 ```
 
-## ဆက်စပ် Resources
+## ဆက်စပ်အရင်းအမြစ်များ
 
 - [Debugging Guide](debugging.md) - Debugging နည်းလမ်းများ
 - [Provisioning Resources](../deployment/provisioning.md) - Infrastructure Troubleshooting
@@ -575,15 +581,15 @@ az security assessment list --resource-group myrg
 
 ---
 
-**အကြံပြုချက်**: ဒီလမ်းညွှန်ကို Bookmark လုပ်ထားပြီး ပြဿနာများကို တွေ့ရင် အမြန်ဆုံး ပြန်လည်ကြည့်ရှုပါ။ အများဆုံးပြဿနာများမှာ ရှိပြီးသားဖြေရှင်းနည်းများ ရှိပါတယ်။
+**အကြံပြုချက်**: ဒီလမ်းညွှန်ကို Bookmark လုပ်ထားပြီး ပြဿနာများကို ရှာဖွေချိန်တိုင်း ပြန်လည်ကြည့်ရှုပါ။ အများဆုံးပြဿနာများမှာ ရှိပြီးသားဖြေရှင်းနည်းများပါဝင်ပါတယ်။
 
 ---
 
 **Navigation**
-- **Previous Lesson**: [Provisioning Resources](../deployment/provisioning.md)
-- **Next Lesson**: [Debugging Guide](debugging.md)
+- **ယခင်သင်ခန်းစာ**: [Provisioning Resources](../deployment/provisioning.md)
+- **နောက်သင်ခန်းစာ**: [Debugging Guide](debugging.md)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူရင်းဘာသာစကားဖြင့် အာဏာတရ အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွဲအချော်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှားမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

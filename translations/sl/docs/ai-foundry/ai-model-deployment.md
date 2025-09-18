@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:22:37+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T13:00:36+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "sl"
 }
 -->
 # Uvajanje AI modelov z Azure Developer CLI
 
-**Prejšnje:** [Integracija Azure AI Foundry](azure-ai-foundry-integration.md) | **Naslednje:** [Delavnica AI laboratorij](ai-workshop-lab.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj z AI na prvem mestu
+- **⬅️ Prejšnje**: [Integracija Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Naslednje**: [Delavnica AI](ai-workshop-lab.md)
+- **🚀 Naslednje poglavje**: [Poglavje 3: Konfiguracija](../getting-started/configuration.md)
 
-Ta vodič ponuja podrobna navodila za uvajanje AI modelov z uporabo predlog AZD, od izbire modela do vzorcev uvajanja v produkcijo.
+Ta vodič ponuja celovita navodila za uvajanje AI modelov z uporabo predlog AZD, od izbire modela do vzorcev uvajanja v produkcijo.
 
 ## Kazalo vsebine
 
@@ -19,7 +24,7 @@ Ta vodič ponuja podrobna navodila za uvajanje AI modelov z uporabo predlog AZD,
 - [Konfiguracija AZD za AI modele](../../../../docs/ai-foundry)
 - [Vzorce uvajanja](../../../../docs/ai-foundry)
 - [Upravljanje modelov](../../../../docs/ai-foundry)
-- [Produkcijske zahteve](../../../../docs/ai-foundry)
+- [Premisleki za produkcijo](../../../../docs/ai-foundry)
 - [Spremljanje in opazovanje](../../../../docs/ai-foundry)
 
 ## Strategija izbire modela
@@ -56,18 +61,18 @@ services:
 
 ### Načrtovanje zmogljivosti modela
 
-| Tip modela | Primer uporabe | Priporočena zmogljivost | Stroškovni vidiki |
-|------------|----------------|-------------------------|-------------------|
+| Vrsta modela | Primer uporabe | Priporočena zmogljivost | Stroškovni premisleki |
+|--------------|----------------|-------------------------|-----------------------|
 | GPT-4o-mini | Klepet, Q&A | 10-50 TPM | Stroškovno učinkovit za večino delovnih obremenitev |
 | GPT-4 | Kompleksno razmišljanje | 20-100 TPM | Višji stroški, uporabite za premium funkcije |
 | Text-embedding-ada-002 | Iskanje, RAG | 30-120 TPM | Ključno za semantično iskanje |
-| Whisper | Pretvorba govora v besedilo | 10-50 TPM | Obdelava zvočnih vsebin |
+| Whisper | Pretvorba govora v besedilo | 10-50 TPM | Delovne obremenitve za obdelavo zvoka |
 
 ## Konfiguracija AZD za AI modele
 
 ### Konfiguracija predloge Bicep
 
-Ustvarite uvajanje modelov z uporabo predlog Bicep:
+Ustvarite uvajanja modelov s predlogami Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -153,10 +158,10 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Najbolj primerno za:
+Najboljše za:
 - Razvoj in testiranje
 - Aplikacije za en trg
-- Optimizacijo stroškov
+- Optimizacija stroškov
 
 ### Vzorec 2: Uvajanje v več regijah
 
@@ -171,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Najbolj primerno za:
+Najboljše za:
 - Globalne aplikacije
 - Zahteve po visoki razpoložljivosti
 - Porazdelitev obremenitve
@@ -211,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Nadzor različic
 
-Sledite različicam modelov v vaši konfiguraciji AZD:
+Spremljajte različice modelov v vaši konfiguraciji AZD:
 
 ```json
 {
@@ -231,7 +236,7 @@ Sledite različicam modelov v vaši konfiguraciji AZD:
 
 ### Posodobitve modelov
 
-Uporabite AZD kljuke za posodobitve modelov:
+Uporabite kljuke AZD za posodobitve modelov:
 
 ```bash
 #!/bin/bash
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Produkcijske zahteve
+## Premisleki za produkcijo
 
 ### Načrtovanje zmogljivosti
 
@@ -407,9 +412,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Prilagojene metrike
+### Prilagojene meritve
 
-Sledite metrikam, specifičnim za AI:
+Spremljajte meritve, specifične za AI:
 
 ```python
 # Custom telemetry for AI models
@@ -444,9 +449,9 @@ class AITelemetry:
         )
 ```
 
-### Preverjanje stanja
+### Preverjanje zdravja
 
-Uvedite spremljanje stanja AI storitev:
+Uvedite spremljanje zdravja AI storitev:
 
 ```python
 # Health check endpoints
@@ -477,23 +482,28 @@ async def check_ai_models():
 
 ## Naslednji koraki
 
-1. **Preglejte [Vodič za integracijo Azure AI Foundry](azure-ai-foundry-integration.md)** za vzorce integracije storitev
-2. **Zaključite [Delavnico AI laboratorij](ai-workshop-lab.md)** za praktične izkušnje
-3. **Uvedite [Produkcijske AI prakse](production-ai-practices.md)** za uvajanje v podjetjih
-4. **Raziskujte [Vodič za odpravljanje težav z AI](../troubleshooting/ai-troubleshooting.md)** za pogoste težave
+1. **Preglejte [vodnik za integracijo Azure AI Foundry](azure-ai-foundry-integration.md)** za vzorce integracije storitev
+2. **Dokončajte [delavnico AI](ai-workshop-lab.md)** za praktične izkušnje
+3. **Uvedite [prakse za produkcijo AI](production-ai-practices.md)** za podjetniške uvedbe
+4. **Raziščite [vodnik za odpravljanje težav z AI](../troubleshooting/ai-troubleshooting.md)** za pogoste težave
 
 ## Viri
 
 - [Razpoložljivost modelov Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Skaliranje aplikacij Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Spreminjanje velikosti aplikacij Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optimizacija stroškov AI modelov](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Prejšnje:** [Integracija Azure AI Foundry](azure-ai-foundry-integration.md) | **Naslednje:** [Delavnica AI laboratorij](ai-workshop-lab.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj z AI na prvem mestu
+- **⬅️ Prejšnje**: [Integracija Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Naslednje**: [Delavnica AI](ai-workshop-lab.md)
+- **🚀 Naslednje poglavje**: [Poglavje 3: Konfiguracija](../getting-started/configuration.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna napačna razumevanja ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

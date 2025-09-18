@@ -1,27 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-10T07:41:28+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T12:54:23+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "en"
 }
 -->
 # Command Cheat Sheet - Essential AZD Commands
 
+**Quick Reference for All Chapters**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Quick Start**: [Chapter 1: Foundation & Quick Start](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Commands**: [Chapter 2: AI-First Development](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Advanced**: [Chapter 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Introduction
 
-This cheat sheet offers a quick reference to the most frequently used Azure Developer CLI commands, categorized and paired with practical examples. Ideal for quick lookups during development, troubleshooting, and daily operations with azd projects.
+This cheat sheet is a handy reference for the most frequently used Azure Developer CLI commands, categorized and paired with practical examples. Ideal for quick lookups during development, troubleshooting, and daily operations with azd projects.
 
 ## Learning Goals
 
 By using this cheat sheet, you will:
-- Quickly access key Azure Developer CLI commands and syntax
-- Understand how commands are grouped by functionality and use cases
-- Refer to practical examples for common development and deployment scenarios
+- Quickly access essential Azure Developer CLI commands and syntax
+- Understand how commands are organized by functionality and use case
+- Refer to practical examples for common development and deployment tasks
 - Use troubleshooting commands to resolve issues efficiently
-- Explore advanced configuration and customization options
-- Manage environments and workflows across multiple environments
+- Find advanced configuration and customization options with ease
+- Manage environments and workflows across multiple setups
 
 ## Learning Outcomes
 
@@ -30,8 +36,8 @@ By regularly consulting this cheat sheet, you will:
 - Resolve common issues quickly using diagnostic commands
 - Manage multiple environments and deployment scenarios effectively
 - Utilize advanced azd features and configuration options as required
-- Troubleshoot deployment problems with systematic command sequences
-- Streamline workflows by leveraging azd shortcuts and options
+- Troubleshoot deployment problems systematically
+- Streamline workflows with azd shortcuts and options
 
 ## Getting Started Commands
 
@@ -563,4 +569,4 @@ azd template show <template-name> --docs
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

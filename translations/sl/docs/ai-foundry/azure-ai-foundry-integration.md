@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T23:14:08+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T12:59:41+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "sl"
 }
 -->
 # Integracija Azure AI Foundry z AZD
 
-**Prejšnje:** [Prvi projekt](../getting-started/first-project.md) | **Naslednje:** [Namestitev AI modela](ai-model-deployment.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj z AI v ospredju
+- **⬅️ Prejšnje poglavje**: [Poglavje 1: Vaš prvi projekt](../getting-started/first-project.md)
+- **➡️ Naslednje**: [Namestitev AI modela](ai-model-deployment.md)
+- **🚀 Naslednje poglavje**: [Konfiguracija](../getting-started/configuration.md)
 
 ## Pregled
 
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Vzorec 2: AI iskanje + RAG integracija
 
-**Primer uporabe**: Nameščanje aplikacij za generacijo z izboljšanim iskanjem (RAG)
+**Primer uporabe**: Nameščanje aplikacij za generacijo z obogatenim iskanjem (RAG)
 
 ```bicep
 // Azure AI Search
@@ -124,7 +129,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Vzorec 3: Integracija inteligence dokumentov
+### Vzorec 3: Integracija dokumentne inteligence
 
 **Primer uporabe**: Delovni tokovi za obdelavo in analizo dokumentov
 
@@ -470,7 +475,7 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Simptomi:**
 - Modeli niso na voljo pri nameščanju
-- Napake pri določenih različicah modelov
+- Težave s specifičnimi različicami modelov
 
 **Rešitve:**
 ```bash
@@ -499,7 +504,7 @@ azd up
 
 **Repozitorij**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
-**Storitve**: Inteligenca dokumentov + Shranjevanje + Funkcije
+**Storitve**: Document Intelligence + Storage + Functions
 
 **Hitri začetek**:
 ```bash
@@ -511,7 +516,7 @@ azd up
 
 **Repozitorij**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Storitve**: Azure OpenAI + Iskanje + Container Apps + Cosmos DB
+**Storitve**: Azure OpenAI + Search + Container Apps + Cosmos DB
 
 **Hitri začetek**:
 ```bash
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Prejšnje:** [Prvi projekt](../getting-started/first-project.md) | **Naslednje:** [Namestitev AI modela](ai-model-deployment.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj z AI v ospredju
+- **⬅️ Prejšnje poglavje**: [Poglavje 1: Vaš prvi projekt](../getting-started/first-project.md)
+- **➡️ Naslednje**: [Namestitev AI modela](ai-model-deployment.md)
+- **🚀 Naslednje poglavje**: [Konfiguracija](../getting-started/configuration.md)
 
 **Potrebujete pomoč?** Pridružite se razpravam v skupnosti ali odprite težavo v repozitoriju. Skupnost Azure AI + AZD je tukaj, da vam pomaga pri uspehu!
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazuma ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:24:56+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T14:08:16+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "lt"
 }
 -->
-# Išteklių Paruošimas - Infrastruktūra kaip Kodas su AZD
+# Azure išteklių paruošimas su AZD
+
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 4 skyrius - Infrastruktūra kaip kodas ir diegimas
+- **⬅️ Ankstesnis**: [Diegimo vadovas](deployment-guide.md)
+- **➡️ Kitas skyrius**: [5 skyrius: Daugiaagentiniai AI sprendimai](../../examples/retail-scenario.md)
+- **🔧 Susiję**: [6 skyrius: Priešdieginimo patikra](../pre-deployment/capacity-planning.md)
 
 ## Įvadas
 
-Šis išsamus vadovas apima viską, ką reikia žinoti apie „Azure“ išteklių paruošimą ir valdymą naudojant „Azure Developer CLI“. Sužinokite, kaip įgyvendinti infrastruktūros kaip kodo (IaC) modelius – nuo paprastų išteklių kūrimo iki pažangių įmonės lygio infrastruktūros architektūrų naudojant „Bicep“, ARM šablonus, „Terraform“ ir „Pulumi“.
+Šis išsamus vadovas apima viską, ką reikia žinoti apie Azure išteklių paruošimą ir valdymą naudojant Azure Developer CLI. Sužinokite, kaip įgyvendinti infrastruktūros kaip kodo (IaC) modelius nuo paprasto išteklių kūrimo iki pažangių įmonės lygio infrastruktūros architektūrų naudojant Bicep, ARM šablonus, Terraform ir Pulumi.
 
-## Mokymosi Tikslai
+## Mokymosi tikslai
 
 Baigę šį vadovą, jūs:
-- Įvaldysite infrastruktūros kaip kodo principus ir „Azure“ išteklių paruošimą
-- Suprasite įvairius IaC tiekėjus, kuriuos palaiko „Azure Developer CLI“
-- Sukursite ir įgyvendinsite „Bicep“ šablonus dažniausiai naudojamoms programų architektūroms
+- Įvaldysite infrastruktūros kaip kodo principus ir Azure išteklių paruošimą
+- Suprasite įvairius IaC tiekėjus, kuriuos palaiko Azure Developer CLI
+- Sukursite ir įgyvendinsite Bicep šablonus dažniausiai naudojamoms programų architektūroms
 - Konfigūruosite išteklių parametrus, kintamuosius ir aplinkai specifinius nustatymus
-- Įgyvendinsite pažangius infrastruktūros modelius, įskaitant tinklų kūrimą ir saugumą
+- Įgyvendinsite pažangius infrastruktūros modelius, įskaitant tinklų ir saugumo sprendimus
 - Valdysite išteklių gyvavimo ciklą, atnaujinimus ir priklausomybių sprendimą
 
-## Mokymosi Rezultatai
+## Mokymosi rezultatai
 
-Baigę šį vadovą, jūs gebėsite:
-- Kurti ir paruošti „Azure“ infrastruktūrą naudojant „Bicep“ ir ARM šablonus
+Baigę, galėsite:
+- Kurti ir paruošti Azure infrastruktūrą naudojant Bicep ir ARM šablonus
 - Konfigūruoti sudėtingas daugiapaslaugines architektūras su tinkamomis išteklių priklausomybėmis
 - Įgyvendinti parametrizuotus šablonus įvairioms aplinkoms ir konfigūracijoms
 - Spręsti infrastruktūros paruošimo problemas ir šalinti diegimo klaidas
-- Taikyti „Azure Well-Architected Framework“ principus infrastruktūros projektavimui
+- Taikyti Azure gerai suprojektuotos architektūros principus infrastruktūros dizainui
 - Valdyti infrastruktūros atnaujinimus ir įgyvendinti infrastruktūros versijavimo strategijas
 
-## Infrastruktūros Paruošimo Apžvalga
+## Infrastruktūros paruošimo apžvalga
 
-„Azure Developer CLI“ palaiko kelis infrastruktūros kaip kodo (IaC) tiekėjus:
-- **Bicep** (rekomenduojama) - „Azure“ specifinė kalba
-- **ARM šablonai** - JSON pagrindu sukurti „Azure Resource Manager“ šablonai
-- **Terraform** - Daugialypės debesijos infrastruktūros įrankis
+Azure Developer CLI palaiko kelis infrastruktūros kaip kodo (IaC) tiekėjus:
+- **Bicep** (rekomenduojama) - Azure specifinė kalba
+- **ARM šablonai** - JSON pagrindu sukurti Azure Resource Manager šablonai
+- **Terraform** - Įrankis daugiadebesinei infrastruktūrai
 - **Pulumi** - Moderni infrastruktūra kaip kodas naudojant programavimo kalbas
 
-## „Azure“ Išteklių Supratimas
+## Azure išteklių supratimas
 
-### Išteklių Hierarchija
+### Išteklių hierarchija
 ```
 Azure Account
 └── Subscriptions
@@ -51,16 +58,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Dažniausiai Naudojamos „Azure“ Paslaugos Programoms
-- **Skaičiavimas**: „App Service“, „Container Apps“, „Functions“, „Virtual Machines“
-- **Saugojimas**: „Storage Account“, „Cosmos DB“, „SQL Database“, „PostgreSQL“
-- **Tinklai**: „Virtual Network“, „Application Gateway“, CDN
-- **Saugumas**: „Key Vault“, „Application Insights“, „Log Analytics“
-- **Dirbtinis intelektas / Mašininis mokymasis**: „Cognitive Services“, „OpenAI“, „Machine Learning“
+### Dažniausiai naudojamos Azure paslaugos programoms
+- **Skaičiavimas**: App Service, Container Apps, Functions, Virtual Machines
+- **Saugojimas**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Tinklai**: Virtual Network, Application Gateway, CDN
+- **Saugumas**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## „Bicep“ Infrastruktūros Šablonai
+## Bicep infrastruktūros šablonai
 
-### Pagrindinė „Bicep“ Šablono Struktūra
+### Pagrindinė Bicep šablono struktūra
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,9 +137,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Pažangūs „Bicep“ Modeliai
+### Pažangūs Bicep modeliai
 
-#### Modulinė Infrastruktūra
+#### Modulinė infrastruktūra
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -181,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Sąlyginių Išteklių Kūrimas
+#### Sąlyginis išteklių kūrimas
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,9 +209,9 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Duomenų Bazės Paruošimas
+## 🗃️ Duomenų bazių paruošimas
 
-### „Cosmos DB“
+### Cosmos DB
 ```bicep
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
   name: '${applicationName}-cosmos-${resourceToken}'
@@ -253,7 +260,7 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 }
 ```
 
-### „PostgreSQL“
+### PostgreSQL
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -300,9 +307,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Saugumas ir Slaptų Duomenų Valdymas
+## 🔒 Saugumas ir paslapčių valdymas
 
-### „Key Vault“ Integracija
+### Key Vault integracija
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -344,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Valdomos Tapatybės Konfigūracija
+### Valdomos tapatybės konfigūracija
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,9 +377,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Tinklai ir Jungiamumas
+## 🌍 Tinklai ir ryšiai
 
-### Virtualaus Tinklo Konfigūracija
+### Virtualaus tinklo konfigūracija
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -435,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### „Application Gateway“ su SSL
+### Application Gateway su SSL
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -498,9 +505,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Stebėjimas ir Stebimumas
+## 📊 Stebėjimas ir stebimumas
 
-### „Application Insights“
+### Application Insights
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${applicationName}-logs-${resourceToken}'
@@ -529,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Pasirinktiniai Metrikai ir Įspėjimai
+### Individualūs metrikos ir įspėjimai
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -563,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Aplinkai Specifinės Konfigūracijos
+## 🔧 Aplinkai specifinės konfigūracijos
 
-### Parametrų Failai Skirtingoms Aplinkoms
+### Parametrų failai skirtingoms aplinkoms
 ```json
 // infra/main.parameters.dev.json
 {
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Sąlyginis Išteklių Paruošimas
+### Sąlyginis išteklių paruošimas
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Pažangūs Paruošimo Modeliai
+## 🚀 Pažangūs paruošimo modeliai
 
-### Daugiaregionis Diegimas
+### Diegimas keliuose regionuose
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -721,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Infrastruktūros Testavimas
+### Infrastruktūros testavimas
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -757,9 +764,9 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Išteklių Atnaujinimai ir Migracijos
+## 🔄 Išteklių atnaujinimai ir migracijos
 
-### Saugūs Išteklių Atnaujinimai
+### Saugių išteklių atnaujinimai
 ```bash
 # Preview infrastructure changes
 azd provision --preview
@@ -771,7 +778,7 @@ azd provision --confirm-with-no-prompt
 azd provision --rollback
 ```
 
-### Duomenų Bazės Migracijos
+### Duomenų bazių migracijos
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -800,9 +807,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Geriausios Praktikos
+## 🎯 Geriausios praktikos
 
-### 1. Išteklių Pavadinimų Konvencijos
+### 1. Išteklių pavadinimų konvencijos
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -813,7 +820,7 @@ var naming = {
 }
 ```
 
-### 2. Žymėjimo Strategija
+### 2. Žymėjimo strategija
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -826,7 +833,7 @@ var commonTags = {
 }
 ```
 
-### 3. Parametrų Tikrinimas
+### 3. Parametrų validacija
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -842,7 +849,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Rezultatų Organizavimas
+### 4. Rezultatų organizavimas
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -857,27 +864,27 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Kiti Žingsniai
+## Kiti žingsniai
 
-- [Paruošimo Planavimas](../pre-deployment/capacity-planning.md) - Patikrinkite išteklių prieinamumą
-- [Dažnos Problemos](../troubleshooting/common-issues.md) - Spręskite infrastruktūros problemas
-- [Derinimo Vadovas](../troubleshooting/debugging.md) - Šalinkite paruošimo klaidas
-- [SKU Pasirinkimas](../pre-deployment/sku-selection.md) - Pasirinkite tinkamus paslaugų lygius
+- [Priešdieginimo planavimas](../pre-deployment/capacity-planning.md) - Patikrinkite išteklių prieinamumą
+- [Dažnos problemos](../troubleshooting/common-issues.md) - Spręskite infrastruktūros problemas
+- [Derinimo vadovas](../troubleshooting/debugging.md) - Derinkite paruošimo problemas
+- [SKU pasirinkimas](../pre-deployment/sku-selection.md) - Pasirinkite tinkamus paslaugų lygius
 
-## Papildomi Ištekliai
+## Papildomi ištekliai
 
-- [„Azure Bicep“ Dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [„Azure Resource Manager“ Šablonai](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [„Azure“ Architektūros Centras](https://learn.microsoft.com/en-us/azure/architecture/)
-- [„Azure Well-Architected Framework“](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager šablonai](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure gerai suprojektuotos architektūros principai](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigacija**
-- **Ankstesnė Pamoka**: [Diegimo Vadovas](deployment-guide.md)
-- **Kita Pamoka**: [Talpos Planavimas](../pre-deployment/capacity-planning.md)
+- **Ankstesnė pamoka**: [Diegimo vadovas](deployment-guide.md)
+- **Kita pamoka**: [Talpos planavimas](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudotis profesionalių vertėjų paslaugomis. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

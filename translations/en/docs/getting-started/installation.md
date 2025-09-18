@@ -1,24 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T22:08:32+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T12:45:49+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "en"
 }
 -->
 # Installation & Setup Guide
 
-**Previous:** [Main Documentation](../../README.md) | **Next:** [AZD Basics](azd-basics.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [AZD Basics](azd-basics.md)
+- **➡️ Next**: [Your First Project](first-project.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 
-This detailed guide will help you install and set up the Azure Developer CLI (azd) on your system. You'll explore various installation methods for different operating systems, learn how to configure authentication, and prepare your development environment for Azure deployments.
+This guide provides step-by-step instructions for installing and setting up Azure Developer CLI (azd) on your system. It covers various installation methods for different operating systems, authentication setup, and initial configuration to prepare your development environment for Azure deployments.
 
 ## Learning Goals
 
-By the end of this guide, you will:
-- Successfully install Azure Developer CLI on your system
+By the end of this lesson, you will:
+- Successfully install Azure Developer CLI on your operating system
 - Set up authentication with Azure using different methods
 - Prepare your development environment with the required tools
 - Understand the available installation options and when to use them
@@ -26,21 +31,21 @@ By the end of this guide, you will:
 
 ## Learning Outcomes
 
-After completing this guide, you will be able to:
-- Install azd using the best method for your operating system
+After completing this lesson, you will be able to:
+- Install azd using the appropriate method for your platform
 - Authenticate with Azure using `azd auth login`
-- Confirm your installation and test basic azd commands
-- Configure your development environment for efficient use of azd
+- Verify your installation and test basic azd commands
+- Configure your development environment for optimal use of azd
 - Solve common installation problems on your own
 
-This guide is designed to help you install and configure Azure Developer CLI, regardless of your operating system or development setup.
+This guide ensures you can install and configure Azure Developer CLI on your system, regardless of your operating system or development environment.
 
 ## Prerequisites
 
 Before installing azd, make sure you have:
 - **Azure subscription** - [Create a free account](https://azure.microsoft.com/free/)
 - **Azure CLI** - Required for authentication and resource management
-- **Git** - Needed for cloning templates and version control
+- **Git** - Used for cloning templates and version control
 - **Docker** (optional) - For containerized applications
 
 ## Installation Methods
@@ -65,8 +70,8 @@ choco install azd
 
 #### Option 4: Manual Installation
 1. Download the latest release from [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Extract the files to `C:\Program Files\azd\`
-3. Add the folder to your PATH environment variable
+2. Extract to `C:\Program Files\azd\`
+3. Add it to the PATH environment variable
 
 ### macOS
 
@@ -130,7 +135,7 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 
 ## ✅ Verify Installation
 
-After installation, check that azd is working correctly:
+After installation, confirm that azd is working correctly:
 
 ```bash
 # Check version
@@ -165,7 +170,7 @@ az account show
 ```
 
 ### Device Code Authentication
-Use this method if you're on a system without a browser or facing browser issues:
+Use this method if you're on a headless system or experiencing browser issues:
 ```bash
 az login --use-device-code
 ```
@@ -194,7 +199,7 @@ azd config list
 ```
 
 ### Environment Variables
-Add the following to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
+Add these to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -215,13 +220,13 @@ Install the Azure Developer CLI extension:
 4. Install the extension
 
 Features:
-- IntelliSense for `azure.yaml`
+- IntelliSense for azure.yaml
 - Integrated terminal commands
 - Template browsing
 - Deployment monitoring
 
 ### GitHub Codespaces
-Create a `.devcontainer/devcontainer.json` file:
+Create a `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -235,7 +240,7 @@ Create a `.devcontainer/devcontainer.json` file:
 
 ### IntelliJ/JetBrains
 1. Install the Azure plugin
-2. Set up Azure credentials
+2. Configure Azure credentials
 3. Use the integrated terminal for azd commands
 
 ## 🐛 Troubleshooting Installation
@@ -325,12 +330,12 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 1. **Complete authentication**: Ensure you can access your Azure subscription
 2. **Try your first deployment**: Follow the [First Project Guide](first-project.md)
-3. **Explore templates**: Use `azd template list` to browse available templates
-4. **Set up your IDE**: Configure your development environment
+3. **Explore templates**: Browse available templates with `azd template list`
+4. **Configure your IDE**: Set up your development environment
 
 ## Support
 
-If you need help:
+If you encounter issues:
 - [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Report Issues](https://github.com/Azure/azure-dev/issues)
 - [Community Discussions](https://github.com/Azure/azure-dev/discussions)
@@ -338,9 +343,14 @@ If you need help:
 
 ---
 
-**Previous:** [Main Documentation](../../README.md) | **Next:** [AZD Basics](azd-basics.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [AZD Basics](azd-basics.md) 
+- **➡️ Next**: [Your First Project](first-project.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Installation Complete!** Proceed to [Your First Project](first-project.md) to start building with azd.
+**✅ Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.
 
 ---
 

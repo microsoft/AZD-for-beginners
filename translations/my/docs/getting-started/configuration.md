@@ -1,52 +1,57 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:48:36+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T13:21:25+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "my"
 }
 -->
 # Configuration Guide
 
-**အရင်:** [AZD Basics](azd-basics.md) | **နောက်တစ်ခု:** [First Project](first-project.md)
+**အခန်းအကြောင်းအရာ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၃ - Configuration & Authentication
+- **⬅️ အရင်**: [Your First Project](first-project.md)
+- **➡️ နောက်တစ်ခု**: [Deployment Guide](../deployment/deployment-guide.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၄: Infrastructure as Code](../deployment/deployment-guide.md)
 
 ## အကျဉ်းချုပ်
 
-ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI ကို အကောင်းဆုံး ဖွံ့ဖြိုးရေးနှင့် တင်သွင်းမှုလုပ်ငန်းစဉ်များအတွက် စနစ်တကျ ပြင်ဆင်ပုံကို အကျဉ်းချုပ်ဖော်ပြထားပါတယ်။ Configuration hierarchy, ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှု, authentication နည်းလမ်းများနှင့် အဆင့်မြင့် configuration ပုံစံများကို သင်ယူပြီး Azure ကို လုံခြုံစွာ တင်သွင်းနိုင်မည့် နည်းလမ်းများကို သင်လေ့လာနိုင်ပါမည်။
+ဒီလမ်းညွှန်မှာ Azure Developer CLI ကို အကောင်းဆုံးဖွံ့ဖြိုးရေးနှင့် deployment လုပ်ငန်းစဉ်များအတွက် configure လုပ်ပုံကို အကျယ်အဝန်းဖော်ပြထားပါတယ်။ Configuration hierarchy, ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှု, authentication နည်းလမ်းများနှင့် အဆင့်မြင့် configuration ပုံစံများကို သင်လေ့လာနိုင်ပြီး Azure deployment များကို ထိရောက်စွာနှင့် လုံခြုံစွာလုပ်ဆောင်နိုင်ပါမည်။
 
-## သင်ယူရမည့်ရည်ရွယ်ချက်များ
+## သင်ယူရမည့်အရာများ
 
-ဒီသင်ခန်းစာအဆုံးသတ်ချိန်မှာ သင်သည်:
-- azd configuration hierarchy ကို ကျွမ်းကျင်စွာ နားလည်ပြီး settings များကို ဘယ်လို ဦးစားပေးထားသည်ကို သိရှိမည်
-- Global နှင့် project-specific settings များကို ထိရောက်စွာ ပြင်ဆင်နိုင်မည်
-- အမျိုးမျိုးသော configuration များနှင့် အတူ ပတ်ဝန်းကျင်များစီမံခန့်ခွဲနိုင်မည်
+ဒီသင်ခန်းစာအဆုံးတွင် သင်သည်:
+- azd configuration hierarchy ကို ကျွမ်းကျင်ပြီး settings များကို ဘယ်လို priority ပေးရမည်ကို နားလည်မည်
+- Global နှင့် project-specific settings များကို ထိရောက်စွာ configure လုပ်နိုင်မည်
+- ပုံစံကွဲပြားသော configuration များနှင့် အမျိုးမျိုးသော environment များကို စီမံခန့်ခွဲနိုင်မည်
 - လုံခြုံသော authentication နှင့် authorization ပုံစံများကို အကောင်အထည်ဖော်နိုင်မည်
-- အဆင့်မြင့် configuration ပုံစံများကို နားလည်ပြီး ရှုပ်ထွေးသောအခြေအနေများအတွက် အသုံးပြုနိုင်မည်
+- အဆင့်မြင့် configuration ပုံစံများကို နားလည်ပြီး ရှုပ်ထွေးသောအခြေအနေများကို ကိုင်တွယ်နိုင်မည်
 
 ## သင်ယူပြီးရရှိမည့်ရလဒ်များ
 
-ဒီသင်ခန်းစာကို ပြီးမြောက်ပြီးနောက် သင်သည်:
-- ဖွံ့ဖြိုးရေးလုပ်ငန်းစဉ်များအတွက် azd ကို အကောင်းဆုံး ပြင်ဆင်နိုင်မည်
-- Deployment ပတ်ဝန်းကျင်များစီမံခန့်ခွဲနိုင်မည်
+ဒီသင်ခန်းစာပြီးဆုံးပါက သင်သည်:
+- azd ကို ဖွံ့ဖြိုးရေးလုပ်ငန်းစဉ်များအတွက် အကောင်းဆုံး configure လုပ်နိုင်မည်
+- Deployment environment များစီမံခန့်ခွဲနိုင်မည်
 - လုံခြုံသော configuration စီမံခန့်ခွဲမှုအလေ့အကျင့်များကို အကောင်အထည်ဖော်နိုင်မည်
 - Configuration ဆိုင်ရာပြဿနာများကို ဖြေရှင်းနိုင်မည်
-- အဖွဲ့အစည်းအလိုက် azd ကို customize ပြင်ဆင်နိုင်မည်
+- အဖွဲ့အစည်း၏လိုအပ်ချက်များအတွက် azd ကို customize လုပ်နိုင်မည်
 
-ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI ကို အကောင်းဆုံး ဖွံ့ဖြိုးရေးနှင့် တင်သွင်းမှုလုပ်ငန်းစဉ်များအတွက် စနစ်တကျ ပြင်ဆင်ပုံကို အကျဉ်းချုပ်ဖော်ပြထားပါတယ်။
+ဒီလမ်းညွှန်မှာ Azure Developer CLI ကို အကောင်းဆုံးဖွံ့ဖြိုးရေးနှင့် deployment လုပ်ငန်းစဉ်များအတွက် configure လုပ်ပုံကို အကျယ်အဝန်းဖော်ပြထားပါတယ်။
 
 ## Configuration Hierarchy
 
-azd သည် hierarchy စနစ်တကျ configuration ကို အသုံးပြုသည်:
-1. **Command-line flags** (အမြင့်ဆုံးဦးစားပေး)
+azd သည် hierarchy အဆင့်လိုက် configuration စနစ်ကို အသုံးပြုသည်:
+1. **Command-line flags** (အမြင့်ဆုံး priority)
 2. **Environment variables**
 3. **Local project configuration** (`.azd/config.json`)
 4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (အနိမ့်ဆုံးဦးစားပေး)
+5. **Default values** (အနိမ့်ဆုံး priority)
 
 ## Global Configuration
 
-### Global Defaults ပြင်ဆင်ခြင်း
+### Global Defaults သတ်မှတ်ခြင်း
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -206,7 +211,7 @@ services:
 
 ## 🌟 Environment Management
 
-### ပတ်ဝန်းကျင်များ ဖန်တီးခြင်း
+### Environment များဖန်တီးခြင်း
 ```bash
 # Create a new environment
 azd env new development
@@ -218,8 +223,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### ပတ်ဝန်းကျင် Configuration
-တစ်ခုချင်းစီသော ပတ်ဝန်းကျင်တွင် `.azure/<env-name>/config.json` တွင် configuration ရှိသည်:
+### Environment Configuration
+Environment တစ်ခုစီတွင် `.azure/<env-name>/config.json` တွင် configuration ရှိသည်:
 
 ```json
 {
@@ -256,7 +261,7 @@ azd env unset DEBUG
 ```
 
 ### Environment Templates
-ပုံမှန်ပတ်ဝန်းကျင် setup အတွက် `.azure/env.template` ဖန်တီးပါ:
+Environment setup ကို တစ်စည်းတည်းဖြစ်စေရန် `.azure/env.template` ဖန်တီးပါ:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -300,7 +305,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-Azure-hosted ပတ်ဝန်းကျင်များအတွက်:
+Azure-hosted environments အတွက်:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -310,7 +315,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Infrastructure Configuration
 
 ### Bicep Parameters
-Infrastructure parameters များကို `infra/main.parameters.json` တွင် ပြင်ဆင်ပါ:
+Infrastructure parameters များကို `infra/main.parameters.json` တွင် configure လုပ်ပါ:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -333,7 +338,7 @@ Infrastructure parameters များကို `infra/main.parameters.json` တ
 ```
 
 ### Terraform Configuration
-Terraform projects အတွက် `infra/terraform.tfvars` တွင် ပြင်ဆင်ပါ:
+Terraform project များအတွက် `infra/terraform.tfvars` တွင် configure လုပ်ပါ:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control အတွက် စဉ်းစားပါ
+### 3. Version Control အတွက် စဉ်းစားရန်
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -520,7 +525,7 @@ database:
 ```
 
 ### 4. Configuration Documentation
-သင့် configuration ကို `CONFIG.md` တွင် documentation ပြုလုပ်ပါ:
+သင့် configuration ကို `CONFIG.md` တွင် မှတ်တမ်းတင်ပါ:
 ```markdown
 # Configuration Guide
 
@@ -535,10 +540,10 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## Next Steps
+## နောက်တစ်ဆင့်များ
 
-- [Your First Project](first-project.md) - Configuration ကို လက်တွေ့အသုံးချခြင်း
-- [Deployment Guide](../deployment/deployment-guide.md) - Configuration ကို တင်သွင်းမှုအတွက် အသုံးပြုခြင်း
+- [Your First Project](first-project.md) - Configuration ကို လက်တွေ့အသုံးချပါ
+- [Deployment Guide](../deployment/deployment-guide.md) - Deployment အတွက် configuration ကို အသုံးပြုပါ
 - [Provisioning Resources](../deployment/provisioning.md) - Production-ready configurations
 
 ## References
@@ -549,10 +554,14 @@ database:
 
 ---
 
-**အရင်:** [AZD Basics](azd-basics.md) | **နောက်တစ်ခု:** [First Project](first-project.md)
+**အခန်းအကြောင်းအရာ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၃ - Configuration & Authentication
+- **⬅️ အရင်**: [Your First Project](first-project.md)
+- **➡️ နောက်အခန်း**: [အခန်း ၄: Infrastructure as Code](../deployment/deployment-guide.md)
 - **နောက်သင်ခန်းစာ**: [Your First Project](first-project.md)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူရင်းဘာသာစကားဖြင့် အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် ရှုလေ့လာသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

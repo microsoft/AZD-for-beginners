@@ -1,25 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:23:24+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T14:05:36+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "lt"
 }
 -->
 # AI modelių diegimas naudojant Azure Developer CLI
 
-**Ankstesnis:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Kitas:** [AI Workshop Lab](ai-workshop-lab.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 2 skyrius - AI-pirmasis vystymas
+- **⬅️ Ankstesnis**: [Azure AI Foundry integracija](azure-ai-foundry-integration.md)
+- **➡️ Kitas**: [AI dirbtuvių laboratorija](ai-workshop-lab.md)
+- **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../getting-started/configuration.md)
 
-Šiame vadove pateikiamos išsamios instrukcijos, kaip diegti AI modelius naudojant AZD šablonus, apimant viską nuo modelio pasirinkimo iki diegimo į gamybos aplinką.
+Šis vadovas pateikia išsamius nurodymus, kaip diegti AI modelius naudojant AZD šablonus, apimant viską nuo modelio pasirinkimo iki diegimo į gamybą šablonų.
 
 ## Turinys
 
 - [Modelio pasirinkimo strategija](../../../../docs/ai-foundry)
 - [AZD konfigūracija AI modeliams](../../../../docs/ai-foundry)
-- [Diegimo modeliai](../../../../docs/ai-foundry)
+- [Diegimo šablonai](../../../../docs/ai-foundry)
 - [Modelių valdymas](../../../../docs/ai-foundry)
-- [Gamybos aplinkos aspektai](../../../../docs/ai-foundry)
+- [Gamybiniai aspektai](../../../../docs/ai-foundry)
 - [Stebėjimas ir stebimumas](../../../../docs/ai-foundry)
 
 ## Modelio pasirinkimo strategija
@@ -56,12 +61,12 @@ services:
 
 ### Modelio pajėgumų planavimas
 
-| Modelio tipas | Naudojimo atvejis | Rekomenduojama pajėgumų apimtis | Kainos aspektai |
-|---------------|-------------------|-------------------------------|-----------------|
-| GPT-4o-mini | Pokalbiai, Q&A | 10-50 TPM | Ekonomiškas daugumai užduočių |
-| GPT-4 | Sudėtingas samprotavimas | 20-100 TPM | Didesnė kaina, naudoti premium funkcijoms |
-| Text-embedding-ada-002 | Paieška, RAG | 30-120 TPM | Būtinas semantinei paieškai |
-| Whisper | Kalbos į tekstą | 10-50 TPM | Garso apdorojimo užduotys |
+| Modelio tipas | Naudojimo atvejis | Rekomenduojama talpa | Kainos aspektai |
+|---------------|-------------------|----------------------|-----------------|
+| GPT-4o-mini   | Pokalbiai, Q&A    | 10-50 TPM            | Ekonomiškas daugumai užduočių |
+| GPT-4         | Sudėtingas mąstymas | 20-100 TPM         | Didesnė kaina, naudoti aukščiausios kokybės funkcijoms |
+| Text-embedding-ada-002 | Paieška, RAG | 30-120 TPM         | Būtinas semantinei paieškai |
+| Whisper       | Kalbos į tekstą   | 10-50 TPM            | Garso apdorojimo užduotims |
 
 ## AZD konfigūracija AI modeliams
 
@@ -128,7 +133,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Aplinkos kintamieji
 
-Konfigūruokite savo aplikacijos aplinką:
+Konfigūruokite savo programos aplinką:
 
 ```bash
 # .env configuration
@@ -138,9 +143,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Diegimo modeliai
+## Diegimo šablonai
 
-### Modelis 1: Vieno regiono diegimas
+### Šablonas 1: Vieno regiono diegimas
 
 ```yaml
 # azure.yaml - Single region
@@ -154,11 +159,11 @@ services:
 ```
 
 Tinka:
-- Kūrimo ir testavimo aplinkoms
-- Vienos rinkos aplikacijoms
-- Kaštų optimizavimui
+- Vystymui ir testavimui
+- Vienos rinkos programoms
+- Kainų optimizavimui
 
-### Modelis 2: Daugiaregionis diegimas
+### Šablonas 2: Kelių regionų diegimas
 
 ```bicep
 // Multi-region deployment
@@ -172,11 +177,11 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 Tinka:
-- Globalioms aplikacijoms
+- Globalioms programoms
 - Aukšto prieinamumo reikalavimams
 - Apkrovos paskirstymui
 
-### Modelis 3: Hibridinis diegimas
+### Šablonas 3: Hibridinis diegimas
 
 Derinkite Azure OpenAI su kitomis AI paslaugomis:
 
@@ -246,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### A/B testavimas
 
-Diegti kelias modelio versijas:
+Diekite kelias modelių versijas:
 
 ```bicep
 param enableABTesting bool = false
@@ -268,11 +273,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Gamybos aplinkos aspektai
+## Gamybiniai aspektai
 
 ### Pajėgumų planavimas
 
-Apskaičiuokite reikalingą pajėgumą pagal naudojimo modelius:
+Apskaičiuokite reikiamą pajėgumą pagal naudojimo modelius:
 
 ```python
 # Capacity calculation example
@@ -297,9 +302,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Automatinio mastelio konfigūracija
+### Automatinio mastelio keitimo konfigūracija
 
-Konfigūruokite automatinį mastelį Container Apps:
+Konfigūruokite automatinį mastelio keitimą Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -335,9 +340,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Kaštų optimizavimas
+### Kainų optimizavimas
 
-Įgyvendinkite kaštų kontrolės priemones:
+Įgyvendinkite išlaidų kontrolės priemones:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -407,9 +412,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Individualūs metrikos rodikliai
+### Individualūs metrikai
 
-Sekite AI specifinius metrikos rodiklius:
+Sekite AI specifinius metrikus:
 
 ```python
 # Custom telemetry for AI models
@@ -444,7 +449,7 @@ class AITelemetry:
         )
 ```
 
-### Sveikatos patikrinimai
+### Sveikatos patikros
 
 Įgyvendinkite AI paslaugų sveikatos stebėjimą:
 
@@ -477,23 +482,28 @@ async def check_ai_models():
 
 ## Kiti žingsniai
 
-1. **Peržiūrėkite [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)**, kad susipažintumėte su paslaugų integracijos modeliais
-2. **Užbaikite [AI Workshop Lab](ai-workshop-lab.md)**, kad įgytumėte praktinės patirties
-3. **Įgyvendinkite [Production AI Practices](production-ai-practices.md)**, skirtas įmonių diegimams
-4. **Išnagrinėkite [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)**, kad susipažintumėte su dažniausiai pasitaikančiomis problemomis
+1. **Peržiūrėkite [Azure AI Foundry integracijos vadovą](azure-ai-foundry-integration.md)**, kad sužinotumėte apie paslaugų integracijos šablonus
+2. **Atlikite [AI dirbtuvių laboratoriją](ai-workshop-lab.md)**, kad įgytumėte praktinės patirties
+3. **Įgyvendinkite [Gamybines AI praktikas](production-ai-practices.md)**, skirtas įmonių diegimams
+4. **Išnagrinėkite [AI trikčių šalinimo vadovą](../troubleshooting/ai-troubleshooting.md)**, kad sužinotumėte apie dažniausias problemas
 
 ## Ištekliai
 
 - [Azure OpenAI modelių prieinamumas](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps mastelio keitimas](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI modelių kaštų optimizavimas](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [AI modelių kainų optimizavimas](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Ankstesnis:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Kitas:** [AI Workshop Lab](ai-workshop-lab.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 2 skyrius - AI-pirmasis vystymas
+- **⬅️ Ankstesnis**: [Azure AI Foundry integracija](azure-ai-foundry-integration.md)
+- **➡️ Kitas**: [AI dirbtuvių laboratorija](ai-workshop-lab.md)
+- **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../getting-started/configuration.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.

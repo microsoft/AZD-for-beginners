@@ -1,298 +1,435 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6c3d0f9ef66c2cd692a55a2811d9c3e5",
-  "translation_date": "2025-09-15T15:37:54+00:00",
+  "original_hash": "21dcf6a2d8a223a853d965138d4fb045",
+  "translation_date": "2025-09-18T12:55:08+00:00",
   "source_file": "README.md",
   "language_code": "sl"
 }
 -->
-# AZD Za Začetnike
+# AZD Za Začetnike: Strukturirano Učno Potovanje
 
 ![AZD-za-začetnike](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.sl.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+## Začetek s tem tečajem
 
-[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
+Sledite tem korakom, da začnete svoje učno potovanje z AZD:
 
-[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
-
-Sledite tem korakom, da začnete uporabljati te vire:
 1. **Forkajte repozitorij**: Kliknite [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Klonirajte repozitorij**:   `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. [**Pridružite se Azure Discord skupnostim in spoznajte strokovnjake ter druge razvijalce**](https://discord.com/invite/ByRwuEEgH4)
+2. **Klonirajte repozitorij**: `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. **Pridružite se skupnosti**: [Azure Discord skupnosti](https://discord.com/invite/ByRwuEEgH4) za strokovno podporo
+4. **Izberite svojo učno pot**: Izberite poglavje spodaj, ki ustreza vaši ravni izkušenj
 
 ### Podpora za več jezikov
 
-#### Podprto prek GitHub Action (Avtomatizirano in vedno posodobljeno)
+#### Samodejni prevodi (vedno posodobljeni)
 
 [French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](./README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
 
-**Če želite dodati dodatne jezike, so podprti jeziki navedeni [tukaj](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+## Pregled tečaja
 
-## Uvod
+Obvladajte Azure Developer CLI (azd) skozi strukturirana poglavja, zasnovana za postopno učenje. **Poseben poudarek na uvajanju AI aplikacij z integracijo Azure AI Foundry.**
 
-Dobrodošli v celovitem vodniku za Azure Developer CLI (azd). Ta repozitorij je zasnovan za pomoč razvijalcem na vseh ravneh, od študentov do profesionalnih razvijalcev, pri učenju in obvladovanju Azure Developer CLI za učinkovite oblačne namestitve, **s posebnim poudarkom na uvajanju AI aplikacij z uporabo Azure AI Foundry**. Ta strukturiran učni vir ponuja praktične izkušnje z oblačnimi namestitvami na Azure, odpravljanjem pogostih težav in izvajanjem najboljših praks za uspešno uvajanje predlog AZD.
+### Zakaj je ta tečaj pomemben za sodobne razvijalce
 
-### **Zakaj je ta vodnik pomemben za AI razvijalce**
-Na podlagi nedavne ankete v skupnosti Azure AI Foundry Discord je **45 % razvijalcev zainteresiranih za uporabo AZD za AI delovne obremenitve**, vendar se soočajo z izzivi, kot so:
-- Kompleksne večstoritevne AI arhitekture
-- Najboljše prakse za produkcijsko uvajanje AI
+Na podlagi vpogledov iz skupnosti Azure AI Foundry Discord **45 % razvijalcev želi uporabljati AZD za AI delovne obremenitve**, vendar se soočajo z izzivi, kot so:
+- Zapletene večstoritevne AI arhitekture
+- Najboljše prakse za uvajanje AI v produkcijo  
 - Integracija in konfiguracija storitev Azure AI
 - Optimizacija stroškov za AI delovne obremenitve
-- Odpravljanje težav, specifičnih za AI uvajanje
+- Odpravljanje težav pri uvajanju AI
 
-## Cilji učenja
+### Cilji učenja
 
-Z delom skozi ta repozitorij boste:
-- Obvladali osnove in ključne koncepte Azure Developer CLI
-- Naučili se uvajati in zagotavljati Azure vire z uporabo Infrastructure as Code
-- Razvili veščine odpravljanja težav pri pogostih težavah z uvajanjem AZD
-- Razumeli preverjanje pred uvajanjem in načrtovanje zmogljivosti
-- Izvajali najboljše prakse za varnost in optimizacijo stroškov
-- Pridobili samozavest pri uvajanju aplikacij, pripravljenih za produkcijo, na Azure
+Z zaključkom tega strukturiranega tečaja boste:
+- **Obvladali osnove AZD**: Temeljni koncepti, namestitev in konfiguracija
+- **Uvajali AI aplikacije**: Uporaba AZD z Azure AI Foundry storitvami
+- **Implementirali infrastrukturo kot kodo**: Upravljanje Azure virov z Bicep predlogami
+- **Odpravljali težave pri uvajanju**: Reševanje pogostih težav in odpravljanje napak
+- **Optimizirali za produkcijo**: Varnost, skaliranje, spremljanje in upravljanje stroškov
+- **Gradili rešitve z več agenti**: Uvajanje kompleksnih AI arhitektur
 
-## Rezultati učenja
+## 📚 Učna poglavja
 
-Po zaključku tega tečaja boste sposobni:
-- Uspešno namestiti, konfigurirati in uporabljati Azure Developer CLI
-- Ustvariti in uvajati aplikacije z uporabo predlog AZD
-- Odpravljati težave z avtentikacijo, infrastrukturo in uvajanjem
-- Izvesti preverjanja pred uvajanjem, vključno z načrtovanjem zmogljivosti in izbiro SKU
-- Izvajati najboljše prakse za spremljanje, varnost in upravljanje stroškov
-- Integrirati delovne tokove AZD v CI/CD pipeline
+*Izberite svojo učno pot glede na raven izkušenj in cilje*
 
-## Kazalo vsebine
+### 🚀 Poglavje 1: Osnove & Hitri začetek
+**Predpogoji**: Azure naročnina, osnovno znanje ukazne vrstice  
+**Trajanje**: 30-45 minut  
+**Kompleksnost**: ⭐
 
-- [Kaj je Azure Developer CLI?](../..)
-- [Hitri začetek](../..)
-- [Učna pot](../..)
-  - [Za AI razvijalce (Priporočeno začnite tukaj!)](../..)
-  - [Za študente in začetnike](../..)
-  - [Za razvijalce](../..)
-  - [Za DevOps inženirje](../..)
-- [Dokumentacija](../..)
-  - [Začetek](../..)
-  - [Uvajanje in zagotavljanje](../..)
-  - [Preverjanja pred uvajanjem](../..)
-  - [AI in Azure AI Foundry](../..)
-  - [Odpravljanje težav](../..)
-- [Primeri in predloge](../..)
-  - [Izpostavljeno: Predloge Azure AI Foundry](../..)
-  - [Izpostavljeno: Scenariji Azure AI Foundry E2E](../..)
-  - [Dodatne predloge AZD](../..)
-  - [Praktične delavnice in laboratoriji](../..)
-- [Viri](../..)
-- [Prispevanje](../..)
-- [Podpora](../..)
-- [Skupnost](../..)
+#### Kaj se boste naučili
+- Razumevanje osnov Azure Developer CLI
+- Namestitev AZD na vaši platformi
+- Vaša prva uspešna uvedba
 
-## Kaj je Azure Developer CLI?
+#### Učni viri
+- **🎯 Začnite tukaj**: [Kaj je Azure Developer CLI?](../..)
+- **📖 Teorija**: [Osnove AZD](docs/getting-started/azd-basics.md) - Temeljni koncepti in terminologija
+- **⚙️ Namestitev**: [Namestitev & Nastavitev](docs/getting-started/installation.md) - Vodniki za specifične platforme
+- **🛠️ Praktično delo**: [Vaš prvi projekt](docs/getting-started/first-project.md) - Korak za korakom
+- **📋 Hiter referenčni vodič**: [Ukazna tabela](resources/cheat-sheet.md)
 
-Azure Developer CLI (azd) je ukazna vrstica, osredotočena na razvijalce, ki pospeši proces gradnje in uvajanja aplikacij na Azure. Ponuja:
+#### Praktične vaje
+```bash
+# Quick installation check
+azd version
 
-- **Uvajanje na podlagi predlog** - Uporaba vnaprej pripravljenih predlog za pogoste vzorce aplikacij
-- **Infrastructure as Code** - Upravljanje Azure virov z uporabo Bicep ali Terraform
+# Deploy your first application
+azd init --template todo-nodejs-mongo
+azd up
+```
+
+**💡 Rezultat poglavja**: Uspešno uvedite preprosto spletno aplikacijo na Azure z uporabo AZD
+
+---
+
+### 🤖 Poglavje 2: Razvoj z AI v ospredju (Priporočeno za AI razvijalce)
+**Predpogoji**: Zaključeno poglavje 1  
+**Trajanje**: 1-2 uri  
+**Kompleksnost**: ⭐⭐
+
+#### Kaj se boste naučili
+- Integracija Azure AI Foundry z AZD
+- Uvajanje aplikacij, ki temeljijo na AI
+- Razumevanje konfiguracij AI storitev
+
+#### Učni viri
+- **🎯 Začnite tukaj**: [Integracija Azure AI Foundry](docs/ai-foundry/azure-ai-foundry-integration.md)
+- **📖 Vzorci**: [Uvajanje AI modelov](docs/ai-foundry/ai-model-deployment.md) - Upravljanje AI modelov
+- **🛠️ Delavnica**: [AI delavnica](docs/ai-foundry/ai-workshop-lab.md) - Priprava AI rešitev za AZD
+- **📋 Predloge**: [Predloge Azure AI Foundry](../..)
+
+#### Praktične vaje
+```bash
+# Deploy your first AI application
+azd init --template azure-search-openai-demo
+azd up
+
+# Try additional AI templates
+azd init --template openai-chat-app-quickstart
+azd init --template agent-openai-python-prompty
+```
+
+**💡 Rezultat poglavja**: Uvedite in konfigurirajte AI aplikacijo za klepet z RAG funkcionalnostmi
+
+---
+
+### ⚙️ Poglavje 3: Konfiguracija & Avtentikacija
+**Predpogoji**: Zaključeno poglavje 1  
+**Trajanje**: 45-60 minut  
+**Kompleksnost**: ⭐⭐
+
+#### Kaj se boste naučili
+- Upravljanje konfiguracije okolja
+- Najboljše prakse za avtentikacijo in varnost
+- Poimenovanje virov in organizacija
+
+#### Učni viri
+- **📖 Konfiguracija**: [Vodič za konfiguracijo](docs/getting-started/configuration.md) - Nastavitev okolja
+- **🔐 Varnost**: Vzorci avtentikacije in upravljane identitete
+- **📝 Primeri**: [Primer aplikacije z bazo podatkov](../../examples/database-app) - Vzorci konfiguracije
+
+#### Praktične vaje
+- Konfigurirajte več okolij (razvoj, testiranje, produkcija)
+- Nastavite avtentikacijo z upravljano identiteto
+- Implementirajte konfiguracije specifične za okolje
+
+**💡 Rezultat poglavja**: Upravljajte več okolij z ustrezno avtentikacijo in varnostjo
+
+---
+
+### 🏗️ Poglavje 4: Infrastruktura kot koda & Uvajanje
+**Predpogoji**: Zaključena poglavja 1-3  
+**Trajanje**: 1-1.5 ure  
+**Kompleksnost**: ⭐⭐⭐
+
+#### Kaj se boste naučili
+- Napredni vzorci uvajanja
+- Infrastruktura kot koda z Bicep
+- Strategije za upravljanje virov
+
+#### Učni viri
+- **📖 Uvajanje**: [Vodič za uvajanje](docs/deployment/deployment-guide.md) - Celotni delovni tokovi
+- **🏗️ Upravljanje virov**: [Upravljanje virov](docs/deployment/provisioning.md) - Upravljanje Azure virov
+- **📝 Primeri**: [Primer aplikacije v kontejnerju](../../examples/container-app) - Uvajanje kontejneriziranih aplikacij
+
+#### Praktične vaje
+- Ustvarite prilagojene Bicep predloge
+- Uvedite aplikacije z več storitvami
+- Implementirajte strategije uvajanja modro-zelene
+
+**💡 Rezultat poglavja**: Uvedite kompleksne aplikacije z več storitvami z uporabo prilagojenih infrastrukturnih predlog
+
+---
+
+### 🎯 Poglavje 5: Rešitve z več agenti (Napredno)
+**Predpogoji**: Zaključena poglavja 1-2  
+**Trajanje**: 2-3 ure  
+**Kompleksnost**: ⭐⭐⭐⭐
+
+#### Kaj se boste naučili
+- Vzorci arhitekture z več agenti
+- Orkestracija in koordinacija agentov
+- Uvajanje AI rešitev, pripravljenih za produkcijo
+
+#### Učni viri
+- **🤖 Izpostavljen projekt**: [Rešitev za maloprodajo z več agenti](examples/retail-scenario.md) - Celotna implementacija
+- **🛠️ ARM predloge**: [Paket ARM predlog](../../examples/retail-multiagent-arm-template) - Uvajanje z enim klikom
+- **📖 Arhitektura**: Vzorci koordinacije z več agenti
+
+#### Praktične vaje
+```bash
+# Deploy the complete retail multi-agent solution
+cd examples/retail-multiagent-arm-template
+./deploy.sh
+
+# Explore agent configurations
+az deployment group show --resource-group <rg-name> --name <deployment-name>
+```
+
+**💡 Rezultat poglavja**: Uvedite in upravljajte produkcijsko rešitev z več agenti, vključno z agenti za stranke in zaloge
+
+---
+
+### 🔍 Poglavje 6: Validacija & Načrtovanje pred uvajanjem
+**Predpogoji**: Zaključeno poglavje 4  
+**Trajanje**: 1 ura  
+**Kompleksnost**: ⭐⭐
+
+#### Kaj se boste naučili
+- Načrtovanje kapacitet in validacija virov
+- Strategije izbire SKU
+- Preverjanje pred uvajanjem in avtomatizacija
+
+#### Učni viri
+- **📊 Načrtovanje**: [Načrtovanje kapacitet](docs/pre-deployment/capacity-planning.md) - Validacija virov
+- **💰 Izbira**: [Izbira SKU](docs/pre-deployment/sku-selection.md) - Stroškovno učinkovite izbire
+- **✅ Validacija**: [Preverjanje pred uvajanjem](docs/pre-deployment/preflight-checks.md) - Avtomatizirani skripti
+
+#### Praktične vaje
+- Zaženite skripte za validacijo kapacitet
+- Optimizirajte izbire SKU za stroške
+- Implementirajte avtomatizirana preverjanja pred uvajanjem
+
+**💡 Rezultat poglavja**: Validirajte in optimizirajte uvajanja pred izvedbo
+
+---
+
+### 🚨 Poglavje 7: Odpravljanje težav & Debugging
+**Predpogoji**: Zaključeno katerokoli poglavje o uvajanju  
+**Trajanje**: 1-1.5 ure  
+**Kompleksnost**: ⭐⭐
+
+#### Kaj se boste naučili
+- Sistematični pristopi k odpravljanju težav
+- Pogoste težave in rešitve
+- Odpravljanje težav specifičnih za AI
+
+#### Učni viri
+- **🔧 Pogoste težave**: [Pogoste težave](docs/troubleshooting/common-issues.md) - FAQ in rešitve
+- **🕵️ Debugging**: [Vodič za debugging](docs/troubleshooting/debugging.md) - Korak za korakom strategije
+- **🤖 AI težave**: [Odpravljanje težav specifičnih za AI](docs/troubleshooting/ai-troubleshooting.md) - Težave s storitvami AI
+
+#### Praktične vaje
+- Diagnosticirajte napake pri uvajanju
+- Rešite težave z avtentikacijo
+- Debugging povezljivosti storitev AI
+
+**💡 Rezultat poglavja**: Samostojno diagnosticirajte in rešite pogoste težave pri uvajanju
+
+---
+
+### 🏢 Poglavje 8: Produkcija & Vzorci za podjetja
+**Predpogoji**: Zaključena poglavja 1-4  
+**Trajanje**: 2-3 ure  
+**Kompleksnost**: ⭐⭐⭐⭐
+
+#### Kaj se boste naučili
+- Strategije uvajanja v produkcijo
+- Vzorci varnosti za podjetja
+- Spremljanje in optimizacija stroškov
+
+#### Učni viri
+- **🏭 Produkcija**: [Najboljše prakse za produkcijo AI](docs/ai-foundry/production-ai-practices.md) - Vzorci za podjetja
+- **📝 Primeri**: [Primer mikrostoritev](../../examples/microservices) - Kompleksne arhitekture
+- **📊 Spremljanje**: Integracija Application Insights
+
+#### Praktične vaje
+- Uvedite varnostne vzorce za podjetja
+- Nastavite celovito spremljanje
+- Uvedite v produkcijo z ustreznim upravljanjem
+
+**💡 Cilj poglavja**: Uvedite aplikacije, pripravljene za podjetja, z vsemi produkcijskimi zmogljivostmi
+
+---
+
+## 📖 Kaj je Azure Developer CLI?
+
+Azure Developer CLI (azd) je ukazna vrstica, osredotočena na razvijalce, ki pospeši proces gradnje in uvajanja aplikacij v Azure. Ponuja:
+
+- **Uvajanja na osnovi predlog** - Uporabite vnaprej pripravljene predloge za pogoste vzorce aplikacij
+- **Infrastruktura kot koda** - Upravljajte Azure vire z Bicep ali Terraform  
 - **Integrirani delovni tokovi** - Brezhibno zagotavljanje, uvajanje in spremljanje aplikacij
-- **Prijazno do razvijalcev** - Optimizirano za produktivnost in izkušnjo razvijalcev
+- **Prijazno za razvijalce** - Optimizirano za produktivnost in izkušnjo razvijalcev
 
-### **AZD + Azure AI Foundry: Popolno za AI uvajanja**
+### **AZD + Azure AI Foundry: Popolno za uvajanje AI**
 
-**Zakaj AZD za AI rešitve?** AZD rešuje glavne izzive, s katerimi se soočajo AI razvijalci:
+**Zakaj AZD za AI rešitve?** AZD rešuje glavne izzive, s katerimi se soočajo razvijalci AI:
 
 - **Predloge, pripravljene za AI** - Vnaprej konfigurirane predloge za Azure OpenAI, Cognitive Services in ML delovne obremenitve
-- **Varna AI uvajanja** - Vgrajeni varnostni vzorci za AI storitve, API ključe in modelne končne točke
-- **Produkcijski AI vzorci** - Najboljše prakse za skalabilna in stroškovno učinkovita AI uvajanja
-- **Celoviti AI delovni tokovi** - Od razvoja modela do produkcijskega uvajanja z ustreznim spremljanjem
-- **Optimizacija stroškov** - Pametna dodelitev virov in strategije skaliranja za AI delovne obremenitve
-- **Integracija Azure AI Foundry** - Brezhibna povezava z modelnim katalogom in končnimi točkami AI Foundry
+- **Varne AI uvedbe** - Vgrajeni varnostni vzorci za AI storitve, API ključe in končne točke modelov  
+- **Produkcijski AI vzorci** - Najboljše prakse za skalabilne in stroškovno učinkovite AI aplikacije
+- **Celoviti AI delovni tokovi** - Od razvoja modela do produkcijske uvedbe z ustreznim spremljanjem
+- **Optimizacija stroškov** - Pametne strategije dodeljevanja virov in skaliranja za AI delovne obremenitve
+- **Integracija Azure AI Foundry** - Brezhibna povezava s katalogom modelov AI Foundry in končnimi točkami
 
-## Hitri začetek
+---
 
-### Predpogoji
-- Azure naročnina
-- Nameščen Azure CLI
-- Git (za kloniranje predlog)
+## 🎯 Knjižnica predlog in primerov
 
-### Namestitev
-```bash
-# Windows (PowerShell)
-powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
-
-# macOS/Linux
-curl -fsSL https://aka.ms/install-azd.sh | bash
-```
-
-### Vaše prvo uvajanje
-```bash
-# Initialize a new project
-azd init --template todo-nodejs-mongo
-
-# Provision Azure resources and deploy
-azd up
-```
-
-### Vaše prvo AI uvajanje
-```bash
-# Initialize an AI-powered chat application with Azure OpenAI
-azd init --template azure-search-openai-demo
-
-# Configure AI services and deploy
-azd up
-
-# Or try other AI templates:
-azd init --template openai-chat-app-quickstart
-azd init --template ai-document-processing
-azd init --template contoso-chat
-```
-
-## Učna pot
-
-### Za AI razvijalce (Priporočeno začnite tukaj!)
-1. **Hitri začetek**: Preizkusite [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) predlogo
-2. **Naučite se osnov**: [Osnove AZD](docs/getting-started/azd-basics.md) + [Integracija Azure AI Foundry](docs/ai-foundry/azure-ai-foundry-integration.md)
-3. **Praktična vaja**: Dokončajte [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md)
-4. **Pripravljeno za produkcijo**: Preglejte [Najboljše prakse za produkcijski AI](docs/ai-foundry/production-ai-practices.md)
-5. **Napredno**: Uvedite [contoso-chat](https://github.com/Azure-Samples/contoso-chat) predlogo za podjetja
-
-### Za študente in začetnike
-1. Začnite z [Osnovami AZD](docs/getting-started/azd-basics.md)
-2. Sledite [Vodniku za namestitev](docs/getting-started/installation.md)
-3. Dokončajte [Vaš prvi projekt](docs/getting-started/first-project.md)
-4. Vadite z [Primerom preproste spletne aplikacije](../../examples/simple-web-app)
-
-### Za razvijalce
-1. Preglejte [Vodnik za konfiguracijo](docs/getting-started/configuration.md)
-2. Preučite [Vodnik za uvajanje](docs/deployment/deployment-guide.md)
-3. Delajte na [Primeru aplikacije z bazo podatkov](../../examples/database-app)
-4. Raziščite [Primer aplikacije v kontejnerju](../../examples/container-app)
-
-### Za DevOps inženirje
-1. Obvladujte [Zagotavljanje virov](docs/deployment/provisioning.md)
-2. Izvedite [Preverjanja pred uvajanjem](docs/pre-deployment/preflight-checks.md)
-3. Vadite [Načrtovanje zmogljivosti](docs/pre-deployment/capacity-planning.md)
-4. Napredno [Primer mikrostoritev](../../examples/microservices)
-
-## Dokumentacija
-
-### Začetek
-- [**Osnove AZD**](docs/getting-started/azd-basics.md) - Ključni koncepti in terminologija
-- [**Namestitev in nastavitev**](docs/getting-started/installation.md) - Vodniki za namestitev glede na platformo
-- [**Konfiguracija**](docs/getting-started/configuration.md) - Nastavitev okolja in avtentikacija
-- [**Vaš prvi projekt**](docs/getting-started/first-project.md) - Korak za korakom vadnica
-
-### Uvajanje in zagotavljanje
-- [**Vodnik za uvajanje**](docs/deployment/deployment-guide.md) - Celoviti delovni tokovi za uvajanje
-- [**Zagotavljanje virov**](docs/deployment/provisioning.md) - Upravljanje Azure virov
-
-### Preverjanja pred uvajanjem
-- [**Načrtovanje zmogljivosti**](docs/pre-deployment/capacity-planning.md) - Validacija zmogljivosti Azure virov
-- [**Izbira SKU**](docs/pre-deployment/sku-selection.md) - Izbira ustreznih SKU za Azure
-- [**Preverjanja pred uvajanjem**](docs/pre-deployment/preflight-checks.md) - Avtomatizirani validacijski skripti
-
-### AI in Azure AI Foundry
-- [**Integracija Azure AI Foundry**](docs/ai-foundry/azure-ai-foundry-integration.md) - Povezava AZD z storitvami Azure AI Foundry
-- [**Vzorci za uvajanje AI modelov**](docs/ai-foundry/ai-model-deployment.md) - Uvajanje in upravljanje AI modelov z AZD
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Praktični laboratorij: Priprava AI rešitev za AZD
-- [**Najboljše prakse za produkcijski AI**](docs/ai-foundry/production-ai-practices.md) - Varnost, skaliranje in spremljanje AI delovnih obremenitev
-
-### Odpravljanje težav
-- [**Pogoste težave**](docs/troubleshooting/common-issues.md) - Pogosto srečane težave in rešitve
-- [**Vodnik za odpravljanje napak**](docs/troubleshooting/debugging.md) - Koraki za odpravljanje napak
-- [**Odpravljanje težav, povezanih z AI**](docs/troubleshooting/ai-troubleshooting.md) - Težave pri storitvah AI in uvajanju modelov
-
-## Primeri in predloge
-
-### [Izpostavljeno: Predloge Azure AI Foundry](https://ai.azure.com/resource/build/templates)
+### Priporočeno: Predloge Azure AI Foundry
 **Začnite tukaj, če uvajate AI aplikacije!**
 
-| Predloga | Opis | Kompleksnost | Storitve |
-|----------|-------------|------------|----------|
-| [**Začnite z AI klepetom**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Ustvarite in uvedite osnovno aplikacijo za klepet, integrirano z vašimi podatki in vpogledi v telemetrijo, z uporabo Azure Container Apps |⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
-| [**Začnite z AI agenti**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Ustvarite in uvedite osnovno aplikacijo za agente z akcijami in vpogledi v telemetrijo z uporabo Azure Container Apps. |⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
-| [**Avtomatizacija delovnih tokov z več agenti**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Izboljšajte načrtovanje nalog in avtomatizacijo z orkestracijo in upravljanjem skupine AI agentov.|⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Generiranje dokumentov iz vaših podatkov**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Pospešite generiranje dokumentov, kot so pogodbe, računi in investicijski predlogi, z iskanjem in povzetkom relevantnih informacij iz vaših podatkov. |⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
-| [**Izboljšajte sestanke s strankami z agenti**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Migrirajte zastarelo kodo v sodobne jezike z uporabo ekipe agentov. |⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**Modernizirajte svojo kodo z agenti**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Ustvarite in uvedite osnovno aplikacijo za klepet, integrirano z vašimi podatki in vpogledi v telemetrijo, z uporabo Azure Container Apps |⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Zgradite svoj pogovorni agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Izkoristite napredno razumevanje pogovorov za ustvarjanje in izboljšanje chatbotov ter agentov z determinističnimi in človeško nadzorovanimi delovnimi tokovi. |⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
-| [**Odklenite vpoglede iz pogovornih podatkov**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Izboljšajte učinkovitost kontaktnih centrov z odkrivanjem vpogledov iz velikih zvočnih in besedilnih podatkovnih nizov z uporabo naprednih zmogljivosti razumevanja vsebine. |⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
-| [**Večmodalna obdelava vsebine**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Hitro in natančno obdelajte zahtevke, račune, pogodbe in druge dokumente z ekstrakcijo informacij iz nestrukturirane vsebine ter njihovo preslikavo v strukturiran format. Ta predloga podpira besedilo, slike, tabele in grafe. |⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
+| Predloga | Poglavje | Kompleksnost | Storitve |
+|----------|----------|-------------|----------|
+| [**Začnite z AI klepetom**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Poglavje 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
+| [**Začnite z AI agenti**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Poglavje 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
+| [**Avtomatizacija delovnih tokov z več agenti**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Poglavje 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Generiranje dokumentov iz vaših podatkov**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Poglavje 4 | ⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
+| [**Izboljšajte sestanke s strankami z agenti**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Poglavje 5 | ⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
+| [**Posodobite svojo kodo z agenti**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Poglavje 5 | ⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Zgradite svoj pogovorni agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Poglavje 4 | ⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
+| [**Odklenite vpoglede iz pogovornih podatkov**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Poglavje 8 | ⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
+| [**Večmodalna obdelava vsebine**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Poglavje 8 | ⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
 
-### Izpostavljeno: Celoviti scenariji Azure AI Foundry
-**Začnite tukaj, če uvajate AI aplikacije!**
+### Priporočeno: Celoviti učni scenariji
+**Predloge aplikacij, pripravljene za produkcijo, povezane z učnimi poglavji**
 
-| Predloga | Opis | Kompleksnost | Storitve |
-|----------|-------------|------------|----------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Preprost vmesnik za klepet z Azure OpenAI | ⭐ | AzureOpenAI + Container Apps |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Klepetalna aplikacija z omogočenim RAG z Azure OpenAI | ⭐⭐ | AzureOpenAI + Search + App Service |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Analiza dokumentov z AI storitvami | ⭐⭐ | Azure Document Intelligence + Functions |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Okvir AI agentov z klicem funkcij | ⭐⭐⭐ | AzureOpenAI + Azure Container Apps + Functions |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Klepet za podjetja z AI orkestracijo | ⭐⭐⭐ | AzureOpenAI + Azure AI Search + Container Apps |
+| Predloga | Učno poglavje | Kompleksnost | Ključna znanja |
+|----------|---------------|-------------|----------------|
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Poglavje 2 | ⭐ | Osnovni vzorci uvajanja AI |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Poglavje 2 | ⭐⭐ | Implementacija RAG z Azure AI Search |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Poglavje 4 | ⭐⭐ | Integracija inteligence dokumentov |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Poglavje 5 | ⭐⭐⭐ | Okvir agentov in klicanje funkcij |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Poglavje 8 | ⭐⭐⭐ | Orkestracija AI za podjetja |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Poglavje 5 | ⭐⭐⭐⭐ | Arhitektura z več agenti za stranke in zaloge |
 
-### Dodatne AZD predloge
-- [**Imenik primerov**](examples/README.md) - Praktični primeri, predloge in scenariji iz resničnega sveta
-- [**Azure-Samples AZD predloge**](https://github.com/Azure-Samples/azd-templates) - Uradne Microsoftove vzorčne predloge  
-- [**Galerija Awesome AZD**](https://azure.github.io/awesome-azd/) - Predloge, ki jih prispeva skupnost
+### Učenje po vrsti primerov
 
-### Praktične delavnice in laboratoriji
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - **NOVO**: Naredite svoje AI rešitve pripravljene za AZD uvajanje
-- [**Delavnica AZD za začetnike**](workshop/README.md) - Osredotočeno na uvajanje predlog AI agentov z AZD
+#### Enostavne aplikacije (Poglavja 1-2)
+- [Enostavna spletna aplikacija](../../examples/simple-web-app) - Osnovni vzorci uvajanja
+- [Statična spletna stran](../../examples/static-site) - Uvajanje statične vsebine
+- [Osnovni API](../../examples/basic-api) - Uvajanje REST API
 
-## Viri
+#### Integracija podatkovnih baz (Poglavje 3-4)  
+- [Aplikacija s podatkovno bazo](../../examples/database-app) - Vzorci povezljivosti podatkovnih baz
+- [Obdelava podatkov](../../examples/data-processing) - Uvajanje ETL delovnih tokov
+
+#### Napredni vzorci (Poglavja 4-8)
+- [Aplikacije v kontejnerjih](../../examples/container-app) - Uvajanje kontejneriziranih aplikacij
+- [Mikrostoritve](../../examples/microservices) - Arhitekture z več storitvami  
+- [Rešitve za podjetja](../../examples/enterprise) - Vzorci, pripravljeni za produkcijo
+
+### Zbirke zunanjih predlog
+- [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Uradni Microsoftovi primeri
+- [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Predloge, ki jih prispeva skupnost
+- [**Direktorij primerov**](examples/README.md) - Lokalni učni primeri z podrobnimi razlagami
+
+---
+
+## 📚 Učni viri in reference
 
 ### Hitre reference
-- [**Seznam ukazov**](resources/cheat-sheet.md) - Ključni azd ukazi
-- [**Slovar**](resources/glossary.md) - Terminologija Azure in azd
-- [**Pogosta vprašanja**](resources/faq.md) - Pogosta vprašanja
-- [**Vodnik za študij**](resources/study-guide.md) - Celoviti učni cilji in praktične vaje
+- [**Ukazna kartica**](resources/cheat-sheet.md) - Ključni azd ukazi, organizirani po poglavjih
+- [**Slovar**](resources/glossary.md) - Terminologija Azure in azd  
+- [**Pogosta vprašanja**](resources/faq.md) - Pogosta vprašanja, organizirana po učnih poglavjih
+- [**Učni vodič**](resources/study-guide.md) - Celovite praktične vaje
 
-### Zunanji viri
+### Praktične delavnice
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Naredite svoje AI rešitve pripravljene za AZD
+- [**Delavnica AZD za začetnike**](workshop/README.md) - Celoviti materiali za praktično delavnico
+
+### Zunanji učni viri
 - [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Kalkulator cen Azure](https://azure.microsoft.com/pricing/calculator/)
-- [Status Azure](https://status.azure.com/)
+- [Azure kalkulator cen](https://azure.microsoft.com/pricing/calculator/)
+- [Azure Status](https://status.azure.com/)
 
-## Prispevanje
+---
 
-Veseli smo prispevkov! Prosimo, preberite naš [Vodnik za prispevanje](CONTRIBUTING.md) za podrobnosti o:
-- Kako prijaviti težave in predlagati funkcije
-- Smernice za prispevanje kode
-- Izboljšave dokumentacije
-- Standardi skupnosti
+## 🎓 Zaključek tečaja in certifikacija
 
-## Podpora
+### Sledenje napredku
+Sledite svojemu učnemu napredku skozi vsako poglavje:
 
-- **Težave**: [Prijavite napake in predlagajte funkcije](https://github.com/microsoft/azd-for-beginners/issues)
-- **Razprave**: [Microsoft Azure Discord skupnost za vprašanja in razprave](https://discord.gg/microsoft-azure)
-- **Podpora, povezana z AI**: Pridružite se [kanalu #Azure](https://discord.gg/microsoft-azure) za razprave o AZD + AI Foundry
-- **E-pošta**: Za zasebna vprašanja
-- **Microsoft Learn**: [Uradna dokumentacija Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [ ] **Poglavje 1**: Osnove in hitri začetek ✅
+- [ ] **Poglavje 2**: Razvoj, osredotočen na AI ✅  
+- [ ] **Poglavje 3**: Konfiguracija in avtentikacija ✅
+- [ ] **Poglavje 4**: Infrastruktura kot koda in uvajanje ✅
+- [ ] **Poglavje 5**: Rešitve AI z več agenti ✅
+- [ ] **Poglavje 6**: Validacija in načrtovanje pred uvedbo ✅
+- [ ] **Poglavje 7**: Odpravljanje težav in razhroščevanje ✅
+- [ ] **Poglavje 8**: Produkcijski in podjetniški vzorci ✅
+
+### Preverjanje znanja
+Po zaključku vsakega poglavja preverite svoje znanje z:
+1. **Praktična vaja**: Zaključite praktično uvajanje poglavja
+2. **Preverjanje znanja**: Preglejte razdelek FAQ za svoje poglavje
+3. **Skupnostna razprava**: Delite svoje izkušnje v Azure Discord
+4. **Naslednje poglavje**: Premaknite se na naslednjo stopnjo kompleksnosti
+
+### Prednosti zaključka tečaja
+Po zaključku vseh poglavij boste pridobili:
+- **Produkcijske izkušnje**: Uvedli resnične AI aplikacije v Azure
+- **Profesionalne veščine**: Zmožnosti uvajanja, pripravljene za podjetja  
+- **Priznanje skupnosti**: Aktivni član skupnosti razvijalcev Azure
+- **Napredovanje v karieri**: Iskane veščine za AZD in uvajanje AI
+
+---
+
+## 🤝 Skupnost in podpora
+
+### Pridobite pomoč in podporo
+- **Tehnične težave**: [Prijavite napake in zahtevajte funkcije](https://github.com/microsoft/azd-for-beginners/issues)
+- **Učna vprašanja**: [Microsoft Azure Discord skupnost](https://discord.gg/microsoft-azure)
+- **Pomoč, specifična za AI**: Pridružite se [#Azure kanalu](https://discord.gg/microsoft-azure) za razprave o AZD + AI Foundry
+- **Dokumentacija**: [Uradna dokumentacija Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Vpogledi skupnosti iz Discorda Azure AI Foundry
 
-**Rezultati ankete iz kanala #Azure:**
+**Nedavni rezultati ankete iz #Azure kanala:**
 - **45%** razvijalcev želi uporabljati AZD za AI delovne obremenitve
-- **Glavni izzivi**: Uvajanje več storitev, upravljanje poverilnic, pripravljenost za produkcijo
-- **Najbolj zaželeno**: Predloge, specifične za AI, vodniki za odpravljanje težav, najboljše prakse
+- **Glavni izzivi**: Uvajanje več storitev, upravljanje poverilnic, pripravljenost za produkcijo  
+- **Najbolj zaželeno**: Predloge, specifične za AI, vodiči za odpravljanje težav, najboljše prakse
 
 **Pridružite se naši skupnosti za:**
 - Deljenje svojih izkušenj z AZD + AI in pridobivanje pomoči
 - Dostop do zgodnjih predogledov novih AI predlog
 - Prispevanje k najboljšim praksam za uvajanje AI
-- Vpliv na prihodnji razvoj funkcij AI + AZD
+- Vplivanje na prihodnji razvoj funkcij AI + AZD
 
-## Licenca
+### Prispevanje k tečaju
+Veseli smo prispevkov! Prosimo, preberite naš [Vodnik za prispevanje](CONTRIBUTING.md) za podrobnosti o:
+- **Izboljšanju vsebine**: Izboljšajte obstoječa poglavja in primere
+- **Novih primerih**: Dodajte scenarije iz resničnega sveta in predloge  
+- **Prevajanju**: Pomagajte ohranjati podporo za več jezikov
+- **Prijavi napak**: Izboljšajte natančnost in jasnost
+- **Standardi skupnosti**: Upoštevajte naše vključujoče smernice skupnosti
 
+---
+
+## 📄 Informacije o tečaju
+
+### Licenca
 Ta projekt je licenciran pod licenco MIT - glejte datoteko [LICENSE](../../LICENSE) za podrobnosti.
 
-## Drugi tečaji
+### Povezani Microsoftovi učni viri
 
-Naša ekipa pripravlja tudi druge tečaje! Oglejte si:
+Naša ekipa ustvarja druge celovite učne tečaje:
 
-- [**NOVO** Protokol konteksta modela (MCP) za začetnike](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [AI agenti za začetnike](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [**NOVO** Model Context Protocol (MCP) za začetnike](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI agenti za začetnike](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [Generativni AI za začetnike z uporabo .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
 - [Generativni AI za začetnike](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [Generativni AI za začetnike z uporabo Jave](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
@@ -300,19 +437,26 @@ Naša ekipa pripravlja tudi druge tečaje! Oglejte si:
 - [Podatkovna znanost za začetnike](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 - [AI za začetnike](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 - [Kibernetska varnost za začetnike](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
-- [Razvoj spletnih aplikacij za začetnike](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [Spletni razvoj za začetnike](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 - [IoT za začetnike](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [Razvoj XR za začetnike](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [XR razvoj za začetnike](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [Obvladovanje GitHub Copilot za AI programiranje v paru](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [Obvladovanje GitHub Copilot za razvijalce C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [Izberite svojo pustolovščino z Copilotom](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+- [Obvladovanje GitHub Copilot za C#/.NET razvijalce](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+- [Izberite svojo Copilot pustolovščino](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
 
-**Navigacija**
-- **Naslednja lekcija**: [Osnove AZD](docs/getting-started/azd-basics.md)
+## 🗺️ Navigacija po tečaju
+
+**🚀 Pripravljeni na začetek učenja?**
+
+**Začetniki**: Začnite z [Poglavjem 1: Osnove in hitri začetek](../..)  
+**AI razvijalci**: Preskočite na [Poglavje 2: Razvoj, osredotočen na AI](../..)
+**Izkušeni razvijalci**: Začnite z [Poglavje 3: Konfiguracija in avtentikacija](../..)
+
+**Naslednji koraki**: [Začnite Poglavje 1 - Osnove AZD](docs/getting-started/azd-basics.md) →
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna napačna razumevanja ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

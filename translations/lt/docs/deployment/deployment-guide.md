@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:20:23+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T14:07:52+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "lt"
 }
 -->
 # Diegimo vadovas - AZD diegimų įvaldymas
+
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 4 skyrius - Infrastruktūra kaip kodas ir diegimas
+- **⬅️ Ankstesnis skyrius**: [3 skyrius: Konfigūracija](../getting-started/configuration.md)
+- **➡️ Toliau**: [Išteklių paruošimas](provisioning.md)
+- **🚀 Kitas skyrius**: [5 skyrius: Daugiaagentės AI sprendimai](../../examples/retail-scenario.md)
 
 ## Įvadas
 
@@ -17,7 +24,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Baigę šį vadovą, jūs:
 - Įvaldysite visas Azure Developer CLI diegimo komandas ir darbo eigas
-- Suprasite visą diegimo ciklą nuo išteklių paruošimo iki stebėjimo
+- Suprasite visą diegimo ciklą nuo paruošimo iki stebėjimo
 - Įgyvendinsite pritaikytus diegimo kabliukus automatizavimui prieš ir po diegimo
 - Konfigūruosite kelias aplinkas su specifiniais aplinkos parametrais
 - Nustatysite pažangias diegimo strategijas, įskaitant „blue-green“ ir „canary“ diegimus
@@ -25,12 +32,12 @@ Baigę šį vadovą, jūs:
 
 ## Mokymosi rezultatai
 
-Baigę vadovą, galėsite:
+Baigę, galėsite:
 - Savarankiškai vykdyti ir šalinti visų azd diegimo darbo eigų problemas
 - Kurti ir įgyvendinti pritaikytą diegimo automatizavimą naudojant kabliukus
 - Konfigūruoti gamybai paruoštus diegimus su tinkamu saugumu ir stebėjimu
 - Valdyti sudėtingus kelių aplinkų diegimo scenarijus
-- Optimizuoti diegimo našumą ir įgyvendinti atsitraukimo strategijas
+- Optimizuoti diegimo našumą ir įgyvendinti atsisakymo strategijas
 - Integruoti azd diegimus į įmonės DevOps praktikas
 
 ## Diegimo apžvalga
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Diegimo proceso supratimas
 
-### 1 etapas: Kabliukai prieš paruošimą
+### 1 fazė: Kabliukai prieš paruošimą
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### 2 etapas: Infrastruktūros paruošimas
+### 2 fazė: Infrastruktūros paruošimas
 - Skaito infrastruktūros šablonus (Bicep/Terraform)
 - Kuria arba atnaujina Azure išteklius
 - Konfigūruoja tinklus ir saugumą
 - Nustato stebėjimą ir žurnalavimą
 
-### 3 etapas: Kabliukai po paruošimo
+### 3 fazė: Kabliukai po paruošimo
 ```yaml
 hooks:
   postprovision:
@@ -118,12 +125,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### 4 etapas: Programos paketavimas
+### 4 fazė: Programos paketavimas
 - Kuria programos kodą
 - Sukuria diegimo artefaktus
 - Pakuoja tikslinei platformai (konteineriai, ZIP failai ir kt.)
 
-### 5 etapas: Kabliukai prieš diegimą
+### 5 fazė: Kabliukai prieš diegimą
 ```yaml
 hooks:
   predeploy:
@@ -136,12 +143,12 @@ hooks:
       npm run db:migrate
 ```
 
-### 6 etapas: Programos diegimas
+### 6 fazė: Programos diegimas
 - Diegia supakuotas programas į Azure paslaugas
 - Atnaujina konfigūracijos nustatymus
-- Paleidžia/atnaujina paslaugas
+- Paleidžia/perkrauna paslaugas
 
-### 7 etapas: Kabliukai po diegimo
+### 7 fazė: Kabliukai po diegimo
 ```yaml
 hooks:
   postdeploy:
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Daugiaetapė „Dockerfile“ optimizacija
+### Daugiaetapė Dockerfile optimizacija
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -501,9 +508,9 @@ services:
           - external-api-key
 ```
 
-## 🚨 Atsitraukimo strategijos
+## 🚨 Atsisakymo strategijos
 
-### Greitas atsitraukimas
+### Greitas atsisakymas
 ```bash
 # Rollback to previous deployment
 azd deploy --rollback
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### Infrastruktūros atsitraukimas
+### Infrastruktūros atsisakymas
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -524,7 +531,7 @@ azd provision --rollback
 azd provision --rollback --preview
 ```
 
-### Duomenų bazės migracijos atsitraukimas
+### Duomenų bazės migracijos atsisakymas
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -552,7 +559,7 @@ azd history
 azd metrics --type deployment
 ```
 
-### Pritaikytų metrikų rinkimas
+### Individualių metrikų rinkimas
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -582,7 +589,7 @@ azd env new production-v1
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastruktūros patvirtinimas
+### 2. Infrastruktūros patikrinimas
 ```bash
 # Validate before deployment
 azd provision --preview
@@ -652,4 +659,4 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudotis profesionalių vertėjų paslaugomis. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

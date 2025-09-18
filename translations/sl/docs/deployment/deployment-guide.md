@@ -1,44 +1,51 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:19:16+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T13:02:43+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "sl"
 }
 -->
 # Vodnik za uvajanje - Obvladovanje uvajanj z AZD
 
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 4 - Infrastruktura kot koda in uvajanje
+- **⬅️ Prejšnje poglavje**: [Poglavje 3: Konfiguracija](../getting-started/configuration.md)
+- **➡️ Naslednje**: [Zagotavljanje virov](provisioning.md)
+- **🚀 Naslednje poglavje**: [Poglavje 5: Rešitve z več agenti AI](../../examples/retail-scenario.md)
+
 ## Uvod
 
-Ta obsežen vodnik zajema vse, kar morate vedeti o uvajanju aplikacij z Azure Developer CLI, od osnovnih uvajanj z enim ukazom do naprednih produkcijskih scenarijev s prilagojenimi kljukami, več okolji in integracijo CI/CD. Obvladujte celoten življenjski cikel uvajanja s praktičnimi primeri in najboljšimi praksami.
+Ta celovit vodnik zajema vse, kar morate vedeti o uvajanju aplikacij z uporabo Azure Developer CLI, od osnovnih uvajanj z enim ukazom do naprednih produkcijskih scenarijev s prilagojenimi kljukami, več okolji in integracijo CI/CD. Obvladujte celoten življenjski cikel uvajanja s praktičnimi primeri in najboljšimi praksami.
 
 ## Cilji učenja
 
 Z dokončanjem tega vodnika boste:
 - Obvladali vse ukaze in delovne tokove za uvajanje z Azure Developer CLI
-- Razumeli celoten življenjski cikel uvajanja, od priprave do spremljanja
+- Razumeli celoten življenjski cikel uvajanja od zagotavljanja do spremljanja
 - Implementirali prilagojene kljuke za avtomatizacijo pred in po uvajanju
 - Konfigurirali več okolij s parametri, specifičnimi za okolje
-- Nastavili napredne strategije uvajanja, vključno z blue-green in kanarskimi uvajanji
-- Integrirali uvajanja z azd v CI/CD pipeline in DevOps delovne tokove
+- Nastavili napredne strategije uvajanja, vključno z modro-zelenimi in kanarskimi uvajanji
+- Integrirali uvajanja z azd v CI/CD pipeline in delovne tokove DevOps
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
 - Samostojno izvajati in odpravljati težave pri vseh delovnih tokovih uvajanja z azd
-- Oblikovati in implementirati prilagojeno avtomatizacijo uvajanja s kljukami
+- Oblikovati in implementirati prilagojeno avtomatizacijo uvajanja z uporabo kljuk
 - Konfigurirati produkcijsko pripravljena uvajanja z ustrezno varnostjo in spremljanjem
-- Upravljati kompleksne scenarije uvajanja v več okoljih
+- Upravljati kompleksne scenarije uvajanja z več okolji
 - Optimizirati zmogljivost uvajanja in implementirati strategije povratka
-- Integrirati uvajanja z azd v prakse podjetniškega DevOps-a
+- Integrirati uvajanja z azd v prakse DevOps za podjetja
 
 ## Pregled uvajanja
 
 Azure Developer CLI ponuja več ukazov za uvajanje:
-- `azd up` - Celoten delovni tok (priprava + uvajanje)
-- `azd provision` - Ustvarjanje/posodabljanje Azure virov
-- `azd deploy` - Uvajanje aplikacijske kode
+- `azd up` - Celoten delovni tok (zagotavljanje + uvajanje)
+- `azd provision` - Ustvarjanje/posodabljanje samo Azure virov
+- `azd deploy` - Uvajanje samo aplikacijske kode
 - `azd package` - Gradnja in pakiranje aplikacij
 
 ## Osnovni delovni tokovi uvajanja
@@ -57,7 +64,7 @@ azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Uvajanje samo infrastrukture
-Ko morate posodobiti le Azure vire:
+Ko morate posodobiti samo Azure vire:
 ```bash
 # Provision/update infrastructure
 azd provision
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Razumevanje procesa uvajanja
 
-### Faza 1: Ključi pred pripravo
+### Faza 1: Ključi pred zagotavljanjem
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Faza 2: Priprava infrastrukture
+### Faza 2: Zagotavljanje infrastrukture
 - Bere predloge infrastrukture (Bicep/Terraform)
-- Ustvari ali posodobi Azure vire
+- Ustvarja ali posodablja Azure vire
 - Konfigurira omrežje in varnost
 - Nastavi spremljanje in beleženje
 
-### Faza 3: Ključi po pripravi
+### Faza 3: Ključi po zagotavljanju
 ```yaml
 hooks:
   postprovision:
@@ -120,7 +127,7 @@ hooks:
 
 ### Faza 4: Pakiranje aplikacije
 - Gradi aplikacijsko kodo
-- Ustvari artefakte uvajanja
+- Ustvari artefakte za uvajanje
 - Pakira za ciljno platformo (kontejnerji, ZIP datoteke itd.)
 
 ### Faza 5: Ključi pred uvajanjem
@@ -137,8 +144,8 @@ hooks:
 ```
 
 ### Faza 6: Uvajanje aplikacije
-- Uvede pakirane aplikacije v Azure storitve
-- Posodobi nastavitve konfiguracije
+- Uvaja pakirane aplikacije v Azure storitve
+- Posodablja nastavitve konfiguracije
 - Zažene/ponovno zažene storitve
 
 ### Faza 7: Ključi po uvajanju
@@ -156,7 +163,7 @@ hooks:
 
 ## 🎛️ Konfiguracija uvajanja
 
-### Nastavitve uvajanja, specifične za storitve
+### Nastavitve uvajanja, specifične za storitev
 ```yaml
 # azure.yaml
 services:
@@ -244,7 +251,7 @@ services:
     host: function
 ```
 
-### Blue-Green uvajanja
+### Modro-zelena uvajanja
 ```bash
 # Create blue environment
 azd env new production-blue
@@ -524,7 +531,7 @@ azd provision --rollback
 azd provision --rollback --preview
 ```
 
-### Povratek migracije podatkovnih baz
+### Povratek migracije podatkovne baze
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -538,7 +545,7 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Metrični podatki uvajanja
+## 📊 Metrične uvajanja
 
 ### Spremljanje zmogljivosti uvajanja
 ```bash
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. Integracija testiranja
+### 3. Testiranje integracije
 ```yaml
 hooks:
   predeploy:
@@ -631,7 +638,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Naslednji koraki
 
-- [Priprava virov](provisioning.md) - Podrobnejši pregled upravljanja infrastrukture
+- [Zagotavljanje virov](provisioning.md) - Podrobno o upravljanju infrastrukture
 - [Načrtovanje pred uvajanjem](../pre-deployment/capacity-planning.md) - Načrtujte svojo strategijo uvajanja
 - [Pogoste težave](../troubleshooting/common-issues.md) - Reševanje težav pri uvajanju
 - [Najboljše prakse](../troubleshooting/debugging.md) - Strategije za produkcijsko pripravljena uvajanja
@@ -647,9 +654,9 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 **Navigacija**
 - **Prejšnja lekcija**: [Vaš prvi projekt](../getting-started/first-project.md)
-- **Naslednja lekcija**: [Priprava virov](provisioning.md)
+- **Naslednja lekcija**: [Zagotavljanje virov](provisioning.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna napačna razumevanja ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.

@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:35:20+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T13:23:44+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "my"
 }
 -->
-# Debugging Guide - အဆင့်မြင့် Troubleshooting Log Analysis နည်းလမ်းများ
+# AZD တင်သွင်းမှုများအတွက် Debugging လမ်းညွှန်
 
-## အကျဉ်းချုပ်
+**အခန်းအကြောင်းအရာများ:**
+- **📚 သင်ခန်းစာ မူလစာမျက်နှာ**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၇ - ပြဿနာရှာဖွေခြင်းနှင့် Debugging
+- **⬅️ ယခင်အခန်း**: [Common Issues](common-issues.md)
+- **➡️ နောက်အခန်း**: [AI-Specific Troubleshooting](ai-troubleshooting.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၈: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
 
-ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI deployment များနှင့်ပတ်သက်သော ရှုပ်ထွေးသောပြဿနာများကို ရှင်းလင်းရန်အတွက် အဆင့်မြင့် debugging များ၊ ကိရိယာများနှင့် နည်းလမ်းများကို ဖော်ပြထားပါတယ်။ Troubleshooting နည်းလမ်းများ၊ log analysis နည်းလမ်းများ၊ performance profiling နှင့် အဆင့်မြင့် diagnostic ကိရိယာများကို သင်ယူပြီး deployment နှင့် runtime ပြဿနာများကို ထိရောက်စွာ ဖြေရှင်းနိုင်ပါမည်။
+## နိဒါန်း
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ
+ဒီလမ်းညွှန်မှာ Azure Developer CLI တင်သွင်းမှုများနှင့်ပတ်သက်သော ရှုပ်ထွေးသောပြဿနာများကို ရှာဖွေဖြေရှင်းရန် အဆင့်မြင့် Debugging များ၊ ကိရိယာများနှင့် နည်းလမ်းများကို ဖော်ပြထားပါတယ်။ ပြဿနာရှာဖွေမှုစနစ်များ၊ လော့ဖိုင်ခွဲခြမ်းစိတ်ဖြာမှုနည်းလမ်းများ၊ စွမ်းဆောင်ရည်ကို အကဲဖြတ်ခြင်းနည်းလမ်းများနှင့် အဆင့်မြင့် Diagnostic ကိရိယာများကို သင်ယူပြီး တင်သွင်းမှုနှင့် အလုပ်လည်ပတ်မှုဆိုင်ရာ ပြဿနာများကို ထိရောက်စွာ ဖြေရှင်းနိုင်ပါမည်။
 
-ဒီလမ်းညွှန်ကိုပြီးမြောက်သင်ယူပြီးနောက်၊ သင်သည်:
-- Azure Developer CLI ပြဿနာများအတွက် systematic debugging နည်းလမ်းများကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
-- အဆင့်မြင့် logging configuration နှင့် log analysis နည်းလမ်းများကို နားလည်မည်
-- Performance profiling နှင့် monitoring နည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်မည်
-- Azure diagnostic ကိရိယာများနှင့် ဝန်ဆောင်မှုများကို အသုံးပြု၍ ရှုပ်ထွေးသောပြဿနာများကို ဖြေရှင်းနိုင်မည်
-- Network debugging နှင့် security troubleshooting နည်းလမ်းများကို အသုံးပြုနိုင်မည်
-- ပြဿနာများကို ကြိုတင်သိရှိရန် monitoring နှင့် alerting များကို ပြည့်စုံစွာ configure လုပ်နိုင်မည်
+## သင်ယူရမည့်ရည်မှန်းချက်များ
 
-## သင်ယူပြီးနောက် ရလဒ်များ
+ဒီလမ်းညွှန်ကို ပြီးမြောက်သင်ယူပြီးနောက်၊ သင်သည်:
+- Azure Developer CLI ပြဿနာများအတွက် စနစ်တကျ Debugging နည်းလမ်းများကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
+- အဆင့်မြင့် လော့ဖိုင်များကို ပြင်ဆင်ခြင်းနှင့် ခွဲခြမ်းစိတ်ဖြာခြင်းနည်းလမ်းများကို နားလည်မည်
+- စွမ်းဆောင်ရည်ကို အကဲဖြတ်ခြင်းနှင့် စောင့်ကြည့်မှုနည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်မည်
+- Azure Diagnostic ကိရိယာများနှင့် ဝန်ဆောင်မှုများကို အသုံးပြု၍ ရှုပ်ထွေးသော ပြဿနာများကို ဖြေရှင်းနိုင်မည်
+- ကွန်ယက် Debugging နှင့် လုံခြုံရေးပြဿနာရှာဖွေမှုနည်းလမ်းများကို အသုံးပြုနိုင်မည်
+- ပြဿနာရှာဖွေမှုနှင့် သတိပေးမှုများကို စနစ်တကျ ပြင်ဆင်နိုင်မည်
 
-ဒီလမ်းညွှန်ကိုပြီးမြောက်သင်ယူပြီးနောက်၊ သင်သည်:
-- TRIAGE နည်းလမ်းကို အသုံးပြု၍ ရှုပ်ထွေးသော deployment ပြဿနာများကို systematic debugging လုပ်နိုင်မည်
-- Logging နှင့် tracing အချက်အလက်များကို configure လုပ်ပြီး analysis လုပ်နိုင်မည်
-- Azure Monitor, Application Insights နှင့် diagnostic ကိရိယာများကို ထိရောက်စွာ အသုံးပြုနိုင်မည်
-- Network connectivity, authentication နှင့် permission ပြဿနာများကို ကိုယ်တိုင် debug လုပ်နိုင်မည်
-- Performance monitoring နှင့် optimization နည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်မည်
-- ပြန်လည်ဖြစ်ပေါ်လာသောပြဿနာများအတွက် custom debugging scripts နှင့် automation များကို ဖန်တီးနိုင်မည်
+## သင်ယူပြီးနောက်ရလဒ်များ
+
+ဒီလမ်းညွှန်ကို ပြီးမြောက်သင်ယူပြီးနောက်၊ သင်သည်:
+- TRIAGE နည်းလမ်းကို အသုံးပြု၍ ရှုပ်ထွေးသော တင်သွင်းမှုပြဿနာများကို စနစ်တကျ Debugging ပြုလုပ်နိုင်မည်
+- လော့ဖိုင်များနှင့် ခြေရာခံမှုအချက်အလက်များကို ပြင်ဆင်ပြီး ခွဲခြမ်းစိတ်ဖြာနိုင်မည်
+- Azure Monitor, Application Insights နှင့် Diagnostic ကိရိယာများကို ထိရောက်စွာ အသုံးပြုနိုင်မည်
+- ကွန်ယက်ချိတ်ဆက်မှု၊ Authentication နှင့် ခွင့်ပြုချက်ပြဿနာများကို ကိုယ်တိုင် Debugging ပြုလုပ်နိုင်မည်
+- စွမ်းဆောင်ရည် စောင့်ကြည့်မှုနှင့် အကောင်းဆုံးအခြေအနေများကို အကောင်အထည်ဖော်နိုင်မည်
+- ထပ်တလဲလဲဖြစ်ပေါ်နေသော ပြဿနာများအတွက် စိတ်ကြိုက် Debugging စက်ရုပ်များနှင့် Automation များကို ဖန်တီးနိုင်မည်
 
 ## Debugging နည်းလမ်း
 
 ### TRIAGE နည်းလမ်း
 - **T**ime: ပြဿနာစတင်ဖြစ်ပေါ်ချိန်က ဘယ်အချိန်လဲ?
-- **R**eproduce: ပြဿနာကို အကြိမ်ကြိမ် ပြန်လည်ဖြစ်ပေါ်စေနိုင်ပါသလား?
-- **I**solate: ဘယ် component က fail ဖြစ်နေလဲ?
-- **A**nalyze: Logs တွေက ဘာပြောပြနေသလဲ?
+- **R**eproduce: ပြဿနာကို ထပ်မံဖြစ်ပေါ်အောင် ပြုလုပ်နိုင်ပါသလား?
+- **I**solate: ဘယ်ကွန်ပိုနင့်မှာ ပြဿနာရှိနေလဲ?
+- **A**nalyze: လော့ဖိုင်တွေက ဘာပြောပြနေသလဲ?
 - **G**ather: သက်ဆိုင်ရာ အချက်အလက်အားလုံးကို စုဆောင်းပါ
-- **E**scalate: အကူအညီတောင်းဖို့ လိုအပ်တဲ့အချိန်ကို သတ်မှတ်ပါ
+- **E**scalate: အကူအညီတောင်းဖို့ လိုအပ်တဲ့အချိန်မှာ ဘယ်လိုလုပ်မလဲ?
 
-## Debug Mode ဖွင့်ခြင်း
+## Debug Mode ဖွင့်ရန်
 
 ### Environment Variables
 ```bash
@@ -71,9 +78,9 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Log Analysis နည်းလမ်းများ
+## 📊 Log ခွဲခြမ်းစိတ်ဖြာမှုနည်းလမ်းများ
 
-### Log Levels နားလည်ခြင်း
+### Log Level များကို နားလည်ခြင်း
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,7 +90,7 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Structured Log Analysis
+### Structured Log ခွဲခြမ်းစိတ်ဖြာမှု
 ```bash
 # Filter logs by level
 azd logs --level error --since 1h
@@ -135,7 +142,7 @@ az graph query -q "ResourceContainers | where type == 'microsoft.resources/resou
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Network Debugging
+### ကွန်ယက် Debugging
 ```bash
 # Test connectivity between services
 test_connectivity() {
@@ -176,7 +183,7 @@ debug_container() {
 }
 ```
 
-### Database Connection Debugging
+### Database ချိတ်ဆက်မှု Debugging
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,9 +202,9 @@ debug_database() {
 }
 ```
 
-## 🔬 Performance Debugging
+## 🔬 စွမ်းဆောင်ရည် Debugging
 
-### Application Performance Monitoring
+### Application စွမ်းဆောင်ရည် စောင့်ကြည့်မှု
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -231,7 +238,7 @@ monitor_performance() {
 }
 ```
 
-### Resource Utilization Analysis
+### အရင်းအမြစ်အသုံးပြုမှု ခွဲခြမ်းစိတ်ဖြာမှု
 ```bash
 # Monitor resource usage
 monitor_resources() {
@@ -255,7 +262,7 @@ monitor_resources() {
 }
 ```
 
-## 🧪 Testing နှင့် Validation
+## 🧪 စမ်းသပ်မှုနှင့် အတည်ပြုမှု
 
 ### Integration Test Debugging
 ```bash
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Load Testing အတွက် Debugging
+### Debugging အတွက် Load Testing
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -328,7 +335,7 @@ load_test() {
 }
 ```
 
-## 🔧 Infrastructure Debugging
+## 🔧 အခြေခံဖွဲ့စည်းမှု Debugging
 
 ### Bicep Template Debugging
 ```bash
@@ -370,7 +377,7 @@ debug_deployment() {
 }
 ```
 
-### Resource State Analysis
+### အရင်းအမြစ်အခြေအနေ ခွဲခြမ်းစိတ်ဖြာမှု
 ```bash
 # Analyze resource states for inconsistencies
 analyze_resources() {
@@ -397,9 +404,9 @@ analyze_resources() {
 }
 ```
 
-## 🔒 Security Debugging
+## 🔒 လုံခြုံရေး Debugging
 
-### Authentication Flow Debugging
+### Authentication လမ်းကြောင်း Debugging
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -433,7 +440,7 @@ debug_keyvault() {
 }
 ```
 
-### Network Security Debugging
+### ကွန်ယက်လုံခြုံရေး Debugging
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -451,7 +458,7 @@ debug_network_security() {
 }
 ```
 
-## 📱 Application-Specific Debugging
+## 📱 အထူးသတ်မှတ်ထားသော Debugging
 
 ### Node.js Application Debugging
 ```javascript
@@ -514,7 +521,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 အရေးပေါ် Debugging လုပ်ငန်းစဉ်များ
 
-### Production Issue Response
+### Production ပြဿနာတုံ့ပြန်မှု
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -602,9 +609,9 @@ quick_rollback() {
 }
 ```
 
-## 📊 Debugging Dashboards
+## 📊 Debugging Dashboard များ
 
-### Custom Monitoring Dashboard
+### စိတ်ကြိုက် Monitoring Dashboard
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -651,12 +658,12 @@ aggregate_logs() {
 
 ## 🔗 အဆင့်မြင့် အရင်းအမြစ်များ
 
-### Custom Debug Scripts
-`scripts/debug/` directory ကို ဖန်တီးပြီး:
-- `health-check.sh` - Comprehensive health checking
-- `performance-test.sh` - Automated performance testing
-- `log-analyzer.py` - Advanced log parsing နှင့် analysis
-- `resource-validator.sh` - Infrastructure validation
+### စိတ်ကြိုက် Debug Scripts
+`scripts/debug/` directory ထဲတွင် ဖန်တီးပါ:
+- `health-check.sh` - ကျန်းမာရေးစစ်ဆေးမှုအပြည့်အစုံ
+- `performance-test.sh` - စွမ်းဆောင်ရည်စမ်းသပ်မှု အလိုအလျောက်ပြုလုပ်ခြင်း
+- `log-analyzer.py` - အဆင့်မြင့် Log ခွဲခြမ်းစိတ်ဖြာမှု
+- `resource-validator.sh` - အခြေခံဖွဲ့စည်းမှု အတည်ပြုမှု
 
 ### Monitoring Integration
 ```yaml
@@ -675,34 +682,34 @@ hooks:
       fi
 ```
 
-## အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
+## အကောင်းဆုံးအလေ့အထများ
 
-1. **Debug logging ကို အမြဲဖွင့်ထားပါ** production မဟုတ်သော ပတ်ဝန်းကျင်များတွင်
-2. **ပြဿနာများအတွက် ပြန်လည်ဖြစ်ပေါ်စေသော စမ်းသပ်မှုများ** ဖန်တီးပါ
-3. **Debugging လုပ်ငန်းစဉ်များကို မှတ်တမ်းတင်ထားပါ** သင့်အဖွဲ့အတွက်
-4. **Health checks နှင့် monitoring များကို အလိုအလျောက်လုပ်ဆောင်ပါ**
-5. **Debug tools များကို သင့် application ပြောင်းလဲမှုများနှင့်အတူ update လုပ်ထားပါ**
-6. **Debugging လုပ်ငန်းစဉ်များကို** ပြဿနာမရှိသောအချိန်များတွင် လေ့ကျင့်ပါ
+1. **Debug Logging ကို အမြဲဖွင့်ထားပါ** (Non-Production ပတ်ဝန်းကျင်များတွင်သာ)
+2. **ပြဿနာများအတွက် ပြန်လည်ဖြစ်ပေါ်စေသော စမ်းသပ်မှုများ ဖန်တီးပါ**
+3. **Debugging လုပ်ငန်းစဉ်များကို သင့်အဖွဲ့အတွက် မှတ်တမ်းတင်ထားပါ**
+4. **ကျန်းမာရေးစစ်ဆေးမှုများနှင့် စောင့်ကြည့်မှုများကို အလိုအလျောက်ပြုလုပ်ပါ**
+5. **Debug Tools များကို သင့်အက်ပ်နှင့်အတူ အမြဲအပ်ဒိတ်လုပ်ပါ**
+6. **ပြဿနာမရှိသောအချိန်များတွင် Debugging လုပ်ငန်းစဉ်များကို လေ့ကျင့်ပါ**
 
 ## နောက်တစ်ဆင့်
 
 - [Capacity Planning](../pre-deployment/capacity-planning.md) - အရင်းအမြစ်လိုအပ်ချက်များကို စီစဉ်ပါ
 - [SKU Selection](../pre-deployment/sku-selection.md) - သင့်တော်သော ဝန်ဆောင်မှုအဆင့်များကို ရွေးချယ်ပါ
-- [Preflight Checks](../pre-deployment/preflight-checks.md) - Pre-deployment အတည်ပြုမှု
-- [Cheat Sheet](../../resources/cheat-sheet.md) - အမြန်အသုံးပြုနိုင်သော command များ
+- [Preflight Checks](../pre-deployment/preflight-checks.md) - တင်သွင်းမှုမတိုင်မီ အတည်ပြုမှု
+- [Cheat Sheet](../../resources/cheat-sheet.md) - အမြန်ရယူနိုင်သော အမိန့်များ
 
 ---
 
-**သတိပြုပါ**: Debugging က systematic, thorough, နှင့် သည်းခံမှုရှိရမည့် လုပ်ငန်းစဉ်တစ်ခုဖြစ်ပါတယ်။ ဒီကိရိယာများနှင့် နည်းလမ်းများက သင့်ကို ပြဿနာများကို ပိုမိုမြန်ဆန်စွာနှင့် ထိရောက်စွာ ဖြေရှင်းနိုင်စေပါမည်။
+**သတိရပါ**: Debugging က စနစ်တကျ၊ ပြည့်စုံမှုနှင့် သည်းခံမှုအပေါ် မူတည်ပါတယ်။ ဒီကိရိယာများနှင့် နည်းလမ်းများက သင့်ကို ပြဿနာများကို ပိုမိုမြန်ဆန်စွာနှင့် ထိရောက်စွာ ဖြေရှင်းနိုင်စေပါမည်။
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Common Issues](common-issues.md)
+**အခန်းအကြောင်းအရာများ**
+- **ယခင်သင်ခန်းစာ**: [Common Issues](common-issues.md)
 
-- **Next Lesson**: [Capacity Planning](../pre-deployment/capacity-planning.md)
+- **နောက်သင်ခန်းစာ**: [Capacity Planning](../pre-deployment/capacity-planning.md)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

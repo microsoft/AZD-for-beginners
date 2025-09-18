@@ -1,30 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T23:27:33+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T13:24:19+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "my"
 }
 -->
-# Azure Developer CLI အတွက် AI ပြဿနာဖြေရှင်းလမ်းညွှန်
+# AI-Specific Troubleshooting Guide
 
-**အရင်:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **နောက်တစ်ခု:** [Getting Started with AZD](../getting-started/README.md)
+**အခန်းများအကြောင်းအရာ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း 7 - အခက်အခဲရှင်းလင်းခြင်းနှင့် Debugging
+- **⬅️ အရင်အခန်း**: [Debugging Guide](debugging.md)
+- **➡️ နောက်အခန်း**: [အခန်း 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🤖 ဆက်စပ်အခန်း**: [အခန်း 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
-AZD ကို အသုံးပြု၍ AI ဖြေရှင်းချက်များကို တင်သွင်းရာတွင် ကြုံတွေ့ရသော ပြဿနာများကို ဖြေရှင်းရန်၊ Azure AI ဝန်ဆောင်မှုများနှင့် သက်ဆိုင်သော debugging နည်းလမ်းများနှင့်အတူ လမ်းညွှန်ချက်များကို ပေးထားသည်။
+**အရင်အခန်း**: [Production AI Practices](../ai-foundry/production-ai-practices.md) | **နောက်အခန်း**: [Getting Started with AZD](../getting-started/README.md)
+
+ဒီအခက်အခဲရှင်းလင်းလမ်းညွှန်သည် AZD ဖြင့် AI ဖြေရှင်းချက်များကို တင်သွင်းရာတွင် ကြုံတွေ့ရသော အခက်အခဲများကို ရှင်းလင်းပေးပြီး Azure AI ဝန်ဆောင်မှုများအတွက် အထူး Debugging နည်းလမ်းများကို ပေးထားသည်။
 
 ## အကြောင်းအရာများ
 
-- [Azure OpenAI Service ပြဿနာများ](../../../../docs/troubleshooting)
+- [Azure OpenAI Service အခက်အခဲများ](../../../../docs/troubleshooting)
 - [Azure AI Search ပြဿနာများ](../../../../docs/troubleshooting)
-- [Container Apps Deployment ပြဿနာများ](../../../../docs/troubleshooting)
+- [Container Apps Deployment အခက်အခဲများ](../../../../docs/troubleshooting)
 - [Authentication နှင့် Permission အမှားများ](../../../../docs/troubleshooting)
 - [Model Deployment မအောင်မြင်မှုများ](../../../../docs/troubleshooting)
-- [စွမ်းဆောင်ရည်နှင့် Scaling ပြဿနာများ](../../../../docs/troubleshooting)
+- [Performance နှင့် Scaling ပြဿနာများ](../../../../docs/troubleshooting)
 - [ကုန်ကျစရိတ်နှင့် Quota စီမံခန့်ခွဲမှု](../../../../docs/troubleshooting)
 - [Debugging Tools နှင့် နည်းလမ်းများ](../../../../docs/troubleshooting)
 
-## Azure OpenAI Service ပြဿနာများ
+## Azure OpenAI Service အခက်အခဲများ
 
 ### ပြဿနာ: OpenAI Service ကို ရွေးချယ်ထားသော Region တွင် မရရှိနိုင်
 
@@ -72,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### ပြဿနာ: Model Deployment Quota ကျော်လွန်နေသည်
+### ပြဿနာ: Model Deployment Quota ကျော်လွန်မှု
 
 **လက္ခဏာများ:**
 ```
@@ -89,7 +96,7 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **Quota တိုးမြှင့်ရန် တောင်းဆိုပါ:**
+2. **Quota တိုးမြှင့်မှုကို တောင်းဆိုပါ:**
 ```bash
 # Submit quota increase request
 az support tickets create \
@@ -117,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### ပြဿနာ: API Version မမှန်ကန်
+### ပြဿနာ: API Version မမှန်ကန်မှု
 
 **လက္ခဏာများ:**
 ```
@@ -142,7 +149,7 @@ az rest --method get \
 
 ## Azure AI Search ပြဿနာများ
 
-### ပြဿနာ: Search Service Pricing Tier မလုံလောက်
+### ပြဿနာ: Search Service Pricing Tier မလုံလောက်မှု
 
 **လက္ခဏာများ:**
 ```
@@ -183,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### ပြဿနာ: Index ဖန်တီးမှု မအောင်မြင်
+### ပြဿနာ: Index ဖန်တီးမှု မအောင်မြင်မှု
 
 **လက္ခဏာများ:**
 ```
@@ -230,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps Deployment ပြဿနာများ
+## Container Apps Deployment အခက်အခဲများ
 
-### ပြဿနာ: Container Build မအောင်မြင်
+### ပြဿနာ: Container Build မအောင်မြင်မှု
 
 **လက္ခဏာများ:**
 ```
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### ပြဿနာ: Container App Startup မအောင်မြင်
+### ပြဿနာ: Container App Startup မအောင်မြင်မှု
 
 **လက္ခဏာများ:**
 ```
@@ -361,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Authentication နှင့် Permission အမှားများ
 
-### ပြဿနာ: Managed Identity Permission ပိတ်ထားသည်
+### ပြဿနာ: Managed Identity Permission ပိတ်ပင်ထားမှု
 
 **လက္ခဏာများ:**
 ```
@@ -410,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### ပြဿနာ: Key Vault Access ပိတ်ထားသည်
+### ပြဿနာ: Key Vault Access ပိတ်ပင်ထားမှု
 
 **လက္ခဏာများ:**
 ```
@@ -438,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **RBAC ကို Access Policies အစား အသုံးပြုပါ:**
+2. **Access Policies အစား RBAC ကို အသုံးပြုပါ:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -453,7 +460,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 
 ## Model Deployment မအောင်မြင်မှုများ
 
-### ပြဿနာ: Model Version မရရှိနိုင်
+### ပြဿနာ: Model Version မရရှိနိုင်မှု
 
 **လက္ခဏာများ:**
 ```
@@ -523,12 +530,12 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## စွမ်းဆောင်ရည်နှင့် Scaling ပြဿနာများ
+## Performance နှင့် Scaling ပြဿနာများ
 
 ### ပြဿနာ: Latency မြင့်မားသော Response
 
 **လက္ခဏာများ:**
-- Response time > 30 စက္ကန့်
+- Response အချိန် > 30 စက္ကန့်
 - Timeout အမှားများ
 - အသုံးပြုသူအတွေ့အကြုံ အနည်းငယ်
 
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ပြဿနာ: Memory ကုန်ဆုံးမှု အမှားများ
+### ပြဿနာ: Memory ကုန်ဆုံးမှု
 
 **လက္ခဏာများ:**
 ```
@@ -657,12 +664,12 @@ class MemoryOptimizedAI:
 
 ## ကုန်ကျစရိတ်နှင့် Quota စီမံခန့်ခွဲမှု
 
-### ပြဿနာ: မမျှော်လင့်ထားသော ကုန်ကျစရိတ် မြင့်မားမှု
+### ပြဿနာ: မမျှော်လင့်ထားသော ကုန်ကျစရိတ်မြင့်မားမှု
 
 **လက္ခဏာများ:**
 - Azure ဘီလ် မျှော်လင့်ထားသည်ထက် မြင့်မားနေသည်
-- Token အသုံးပြုမှု အကဲဖြတ်ချက်များ ကျော်လွန်နေသည်
-- Budget alerts များ Trigger ဖြစ်နေသည်
+- Token အသုံးပြုမှု ခန့်မှန်းချက်များ ကျော်လွန်နေသည်
+- Budget Alerts Trigger ဖြစ်နေသည်
 
 **ဖြေရှင်းနည်းများ:**
 
@@ -843,14 +850,14 @@ def monitor_performance(func):
 | 500 | Internal Server Error | Model deployment status နှင့် logs ကို စစ်ဆေးပါ |
 | 503 | Service Unavailable | Service health နှင့် regional availability ကို စစ်ဆေးပါ |
 
-## နောက်တစ်ဆင့်များ
+## နောက်တစ်ဆင့်
 
 1. **[AI Model Deployment Guide](ai-model-deployment.md)** ကို Review လုပ်ပါ
 2. **[Production AI Practices](production-ai-practices.md)** ကို ပြီးမြောက်ပါ
 3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)** ကို Join လုပ်ပြီး community support ရယူပါ
 4. **ပြဿနာများကို Submit လုပ်ပါ** [AZD GitHub repository](https://github.com/Azure/azure-dev) တွင် AZD-specific ပြဿနာများအတွက်
 
-## Resources
+## အရင်းအမြစ်များ
 
 - [Azure OpenAI Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
@@ -858,10 +865,15 @@ def monitor_performance(func):
 
 ---
 
-**အရင်:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **နောက်တစ်ခု:** [Workshop](../../workshop/README.md)
+**အခန်းများအကြောင်းအရာ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း 7 - Troubleshooting & Debugging
+- **⬅️ အရင်အခန်း**: [Debugging Guide](debugging.md)
+- **➡️ နောက်အခန်း**: [အခန်း 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🤖 ဆက်စပ်အခန်း**: [အခန်း 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 - [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူရင်းဘာသာစကားဖြင့် အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှုမှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် ရှုလေ့လာသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

@@ -1,25 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:29:29+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T13:03:30+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "sl"
 }
 -->
 # Pogoste težave in rešitve
 
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in razhroščevanje
+- **⬅️ Prejšnje poglavje**: [Poglavje 6: Predhodni pregledi](../pre-deployment/preflight-checks.md)
+- **➡️ Naslednje**: [Vodnik za razhroščevanje](debugging.md)
+- **🚀 Naslednje poglavje**: [Poglavje 8: Vzorce za produkcijo in podjetja](../ai-foundry/production-ai-practices.md)
+
 ## Uvod
 
-Ta obsežen vodič za odpravljanje težav pokriva najpogosteje srečane težave pri uporabi Azure Developer CLI. Naučite se diagnosticirati, odpravljati in reševati pogoste težave, povezane z avtentikacijo, uvajanjem, zagotavljanjem infrastrukture in konfiguracijo aplikacij. Vsaka težava vključuje podrobne simptome, vzroke in postopke za rešitev korak za korakom.
+Ta obsežen vodnik za odpravljanje težav zajema najpogostejše težave, s katerimi se srečujete pri uporabi Azure Developer CLI. Naučite se diagnosticirati, odpravljati in reševati pogoste težave, povezane z avtentikacijo, uvajanjem, zagotavljanjem infrastrukture in konfiguracijo aplikacij. Vsaka težava vključuje podrobne simptome, osnovne vzroke in postopke za rešitev korak za korakom.
 
 ## Cilji učenja
 
-Z dokončanjem tega vodiča boste:
-- Obvladali tehnike diagnostike težav z Azure Developer CLI
+Z dokončanjem tega vodnika boste:
+- Obvladali diagnostične tehnike za težave z Azure Developer CLI
 - Razumeli pogoste težave z avtentikacijo in dovoljenji ter njihove rešitve
-- Rešili napake pri uvajanju, težave pri zagotavljanju infrastrukture in konfiguracijske težave
-- Uvedli proaktivne strategije za spremljanje in odpravljanje napak
+- Odpravili napake pri uvajanju, težave pri zagotavljanju infrastrukture in konfiguracijske težave
+- Uvedli proaktivne strategije za spremljanje in razhroščevanje
 - Uporabili sistematične metodologije za odpravljanje kompleksnih težav
 - Konfigurirali ustrezno beleženje in spremljanje za preprečevanje prihodnjih težav
 
@@ -29,11 +36,11 @@ Po zaključku boste sposobni:
 - Diagnosticirati težave z Azure Developer CLI z uporabo vgrajenih diagnostičnih orodij
 - Samostojno reševati težave, povezane z avtentikacijo, naročninami in dovoljenji
 - Učinkovito odpravljati napake pri uvajanju in težave pri zagotavljanju infrastrukture
-- Odpravljati težave s konfiguracijo aplikacij in težave, specifične za okolje
-- Uvesti spremljanje in opozarjanje za proaktivno prepoznavanje potencialnih težav
-- Uporabiti najboljše prakse za beleženje, odpravljanje napak in delovne tokove za reševanje težav
+- Razhroščevati težave s konfiguracijo aplikacij in težave, specifične za okolje
+- Uvesti spremljanje in opozarjanje za proaktivno prepoznavanje morebitnih težav
+- Uporabiti najboljše prakse za beleženje, razhroščevanje in delovne tokove za reševanje težav
 
-## Hitra diagnostika
+## Hitri diagnostični postopki
 
 Preden se lotite specifičnih težav, za zbiranje diagnostičnih informacij zaženite naslednje ukaze:
 
@@ -59,8 +66,8 @@ azd <command> --debug
 
 ### Težava: "Ni uspelo pridobiti dostopnega žetona"
 **Simptomi:**
-- `azd up` ne uspe zaradi napak pri avtentikaciji
-- Ukazi vračajo "nepooblaščen" ali "dostop zavrnjen"
+- `azd up` ne uspe z napakami pri avtentikaciji
+- Ukazi vračajo "neavtorizirano" ali "dostop zavrnjen"
 
 **Rešitve:**
 ```bash
@@ -133,8 +140,8 @@ azd down --force --purge
 
 ### Težava: Lokacija/regija ni na voljo
 **Simptomi:**
-- Napaka "Lokacija 'xyz' ni na voljo za vrsto vira"
-- Določeni SKUs niso na voljo v izbrani regiji
+- "Lokacija 'xyz' ni na voljo za vrsto vira"
+- Določeni SKU-ji niso na voljo v izbrani regiji
 
 **Rešitve:**
 ```bash
@@ -177,7 +184,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 ### Težava: Napake v Bicep predlogah
 **Simptomi:**
-- Napake pri validaciji predlog
+- Napake pri preverjanju veljavnosti predloge
 - Sintaktične napake v Bicep datotekah
 
 **Rešitve:**
@@ -250,7 +257,7 @@ az containerapp show --name my-app --resource-group my-rg
 ### Težava: Napake pri povezavi z bazo podatkov
 **Simptomi:**
 - Aplikacija se ne more povezati z bazo podatkov
-- Napake pri časovnih omejitvah povezave
+- Napake pri časovnem izteku povezave
 
 **Rešitve:**
 ```bash
@@ -268,12 +275,12 @@ azd env get-values | grep DATABASE
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
-## 🔧 Konfiguracijske težave
+## 🔧 Težave s konfiguracijo
 
-### Težava: Okoljske spremenljivke ne delujejo
+### Težava: Spremenljivke okolja ne delujejo
 **Simptomi:**
 - Aplikacija ne more prebrati konfiguracijskih vrednosti
-- Okoljske spremenljivke so videti prazne
+- Spremenljivke okolja so prazne
 
 **Rešitve:**
 ```bash
@@ -294,7 +301,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 ### Težava: Težave s SSL/TLS certifikati
 **Simptomi:**
 - HTTPS ne deluje
-- Napake pri validaciji certifikata
+- Napake pri preverjanju veljavnosti certifikata
 
 **Rešitve:**
 ```bash
@@ -310,8 +317,8 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 ### Težava: Težave s konfiguracijo CORS
 **Simptomi:**
-- Frontend ne more poklicati API-ja
-- Blokirana zahteva med različnimi izvoroma
+- Sprednji del ne more klicati API-ja
+- Blokirana zahteva zaradi navzkrižnega izvora
 
 **Rešitve:**
 ```bash
@@ -331,10 +338,10 @@ azd show
 
 ## 🌍 Težave pri upravljanju okolja
 
-### Težava: Težave pri preklapljanju okolja
+### Težava: Težave pri preklapljanju okolij
 **Simptomi:**
 - Uporablja se napačno okolje
-- Konfiguracija se ne preklopi pravilno
+- Konfiguracija se ne preklaplja pravilno
 
 **Rešitve:**
 ```bash
@@ -352,7 +359,7 @@ azd env new production-new
 azd env select production-new
 ```
 
-### Težava: Korupcija okolja
+### Težava: Poškodba okolja
 **Simptomi:**
 - Okolje prikazuje neveljavno stanje
 - Viri se ne ujemajo s konfiguracijo
@@ -421,7 +428,7 @@ azd logs --service api --follow
 
 ## 🛠️ Orodja in ukazi za odpravljanje težav
 
-### Ukazi za odpravljanje napak
+### Ukazi za razhroščevanje
 ```bash
 # Comprehensive debugging
 export AZD_DEBUG=true
@@ -462,13 +469,13 @@ az webapp show --name myapp --resource-group myrg --query state
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Pridobivanje dodatne pomoči
+## 🆘 Dodatna pomoč
 
 ### Kdaj eskalirati
-- Težave z avtentikacijo vztrajajo po preizkusu vseh rešitev
+- Težave z avtentikacijo vztrajajo kljub vsem rešitvam
 - Težave z infrastrukturo pri Azure storitvah
 - Težave, povezane z obračunavanjem ali naročninami
-- Varnostne skrbi ali incidenti
+- Varnostni pomisleki ali incidenti
 
 ### Kanali za podporo
 ```bash
@@ -484,7 +491,7 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Informacije za zbiranje
+### Informacije, ki jih je treba zbrati
 Preden kontaktirate podporo, zberite:
 - Izhod `azd version`
 - Izhod `azd info`
@@ -568,22 +575,22 @@ az security assessment list --resource-group myrg
 
 ## Povezani viri
 
-- [Vodič za odpravljanje napak](debugging.md) - Napredne tehnike odpravljanja napak
+- [Vodnik za razhroščevanje](debugging.md) - Napredne tehnike razhroščevanja
 - [Zagotavljanje virov](../deployment/provisioning.md) - Odpravljanje težav z infrastrukturo
 - [Načrtovanje zmogljivosti](../pre-deployment/capacity-planning.md) - Smernice za načrtovanje virov
 - [Izbira SKU](../pre-deployment/sku-selection.md) - Priporočila za izbiro storitvenih nivojev
 
 ---
 
-**Nasvet**: Shranite ta vodič med zaznamke in se nanj obrnite, kadar naletite na težave. Večina težav je že bila obravnavana in ima uveljavljene rešitve!
+**Nasvet**: Shranite ta vodnik med zaznamke in se nanj obrnite, kadar naletite na težave. Večina težav je že bila opažena in ima preverjene rešitve!
 
 ---
 
 **Navigacija**
 - **Prejšnja lekcija**: [Zagotavljanje virov](../deployment/provisioning.md)
-- **Naslednja lekcija**: [Vodič za odpravljanje napak](debugging.md)
+- **Naslednja lekcija**: [Vodnik za razhroščevanje](debugging.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna napačna razumevanja ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
