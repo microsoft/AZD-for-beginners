@@ -1,24 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:15:51+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T06:52:08+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "nl"
 }
 -->
 # Configuratiegids
 
-**Vorige:** [AZD Basisprincipes](azd-basics.md) | **Volgende:** [Eerste Project](first-project.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 3 - Configuratie & Authenticatie
+- **⬅️ Vorige**: [Je Eerste Project](first-project.md)
+- **➡️ Volgende**: [Implementatiegids](../deployment/deployment-guide.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 4: Infrastructure as Code](../deployment/deployment-guide.md)
 
 ## Introductie
 
-Deze uitgebreide gids behandelt alle aspecten van het configureren van Azure Developer CLI voor optimale ontwikkel- en implementatieworkflows. Je leert over de configuratiehiërarchie, het beheer van omgevingen, authenticatiemethoden en geavanceerde configuratiepatronen die efficiënte en veilige Azure-implementaties mogelijk maken.
+Deze uitgebreide gids behandelt alle aspecten van het configureren van Azure Developer CLI voor optimale ontwikkel- en implementatieworkflows. Je leert over de configuratiehiërarchie, omgevingsbeheer, authenticatiemethoden en geavanceerde configuratiepatronen die efficiënte en veilige Azure-implementaties mogelijk maken.
 
 ## Leerdoelen
 
 Aan het einde van deze les kun je:
-- De configuratiehiërarchie van azd beheersen en begrijpen hoe instellingen worden geprioriteerd
+- De azd-configuratiehiërarchie beheersen en begrijpen hoe instellingen worden geprioriteerd
 - Globale en project-specifieke instellingen effectief configureren
 - Meerdere omgevingen beheren met verschillende configuraties
 - Veilige authenticatie- en autorisatiepatronen implementeren
@@ -28,7 +33,7 @@ Aan het einde van deze les kun je:
 
 Na het voltooien van deze les kun je:
 - azd configureren voor optimale ontwikkelworkflows
-- Meerdere implementatieomgevingen opzetten en beheren
+- Meerdere implementatieomgevingen instellen en beheren
 - Veilige configuratiebeheerpraktijken implementeren
 - Problemen met configuratie oplossen
 - azd aanpassen aan specifieke organisatorische vereisten
@@ -83,7 +88,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Projectconfiguratie
 
 ### azure.yaml Structuur
-Het bestand `azure.yaml` vormt het hart van je azd-project:
+Het bestand `azure.yaml` is het hart van je azd-project:
 
 ```yaml
 # Minimum configuration
@@ -549,10 +554,14 @@ Documenteer je configuratie in `CONFIG.md`:
 
 ---
 
-**Vorige:** [AZD Basisprincipes](azd-basics.md) | **Volgende:** [Eerste Project](first-project.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 3 - Configuratie & Authenticatie
+- **⬅️ Vorige**: [Je Eerste Project](first-project.md)
+- **➡️ Volgend Hoofdstuk**: [Hoofdstuk 4: Infrastructure as Code](../deployment/deployment-guide.md)
 - **Volgende Les**: [Je Eerste Project](first-project.md)
 
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

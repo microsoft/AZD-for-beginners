@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T21:55:22+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T06:37:13+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "fi"
 }
 -->
-# AI-vianmääritysopas Azure Developer CLI:lle
+# AI-Spesifinen Vianmääritysopas
+
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 7 - Vianmääritys ja virheenkorjaus
+- **⬅️ Edellinen**: [Virheenkorjausopas](debugging.md)
+- **➡️ Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../ai-foundry/production-ai-practices.md)
+- **🤖 Liittyvä**: [Luku 2: AI-Ensimmäinen kehitys](../ai-foundry/azure-ai-foundry-integration.md)
 
 **Edellinen:** [Tuotannon AI-käytännöt](../ai-foundry/production-ai-practices.md) | **Seuraava:** [AZD:n aloitus](../getting-started/README.md)
 
-Tämä kattava vianmääritysopas käsittelee yleisiä ongelmia AI-ratkaisujen käyttöönotossa AZD:n avulla ja tarjoaa ratkaisuja sekä vianmääritystekniikoita, jotka ovat erityisesti suunniteltu Azure AI -palveluille.
+Tämä kattava vianmääritysopas käsittelee yleisiä ongelmia AI-ratkaisujen käyttöönotossa AZD:n avulla ja tarjoaa ratkaisuja sekä virheenkorjaustekniikoita, jotka ovat erityisesti suunniteltu Azure AI -palveluille.
 
 ## Sisällysluettelo
 
 - [Azure OpenAI -palvelun ongelmat](../../../../docs/troubleshooting)
-- [Azure AI Search -ongelmat](../../../../docs/troubleshooting)
-- [Container Apps -käyttöönotto-ongelmat](../../../../docs/troubleshooting)
-- [Todennus- ja käyttöoikeusvirheet](../../../../docs/troubleshooting)
+- [Azure AI -haun ongelmat](../../../../docs/troubleshooting)
+- [Container Apps -sovellusten käyttöönotto-ongelmat](../../../../docs/troubleshooting)
+- [Autentikointi- ja käyttöoikeusvirheet](../../../../docs/troubleshooting)
 - [Mallin käyttöönoton epäonnistumiset](../../../../docs/troubleshooting)
 - [Suorituskyky- ja skaalausongelmat](../../../../docs/troubleshooting)
 - [Kustannusten ja kiintiöiden hallinta](../../../../docs/troubleshooting)
-- [Vianmääritystyökalut ja -tekniikat](../../../../docs/troubleshooting)
+- [Virheenkorjaustyökalut ja -tekniikat](../../../../docs/troubleshooting)
 
 ## Azure OpenAI -palvelun ongelmat
 
-### Ongelma: OpenAI-palvelu ei ole saatavilla alueella
+### Ongelma: OpenAI-palvelu ei ole käytettävissä alueella
 
 **Oireet:**
 ```
@@ -35,7 +42,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Syyt:**
 - Azure OpenAI ei ole saatavilla valitulla alueella
-- Kiintiö on käytetty loppuun suosituilla alueilla
+- Kiintiö täynnä halutuilla alueilla
 - Alueelliset kapasiteettirajoitukset
 
 **Ratkaisut:**
@@ -140,9 +147,9 @@ az rest --method get \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI Search -ongelmat
+## Azure AI -haun ongelmat
 
-### Ongelma: Hakupalvelun hinnoittelutaso ei riitä
+### Ongelma: Haun palvelutason hinnoittelu ei riitä
 
 **Oireet:**
 ```
@@ -151,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Ratkaisut:**
 
-1. **Päivitä hinnoittelutaso:**
+1. **Päivitä palvelutaso:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -183,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Ongelma: Indeksin luominen epäonnistuu
+### Ongelma: Indeksin luomisen epäonnistumiset
 
 **Oireet:**
 ```
@@ -192,7 +199,7 @@ Error: Cannot create index, insufficient permissions
 
 **Ratkaisut:**
 
-1. **Varmista hakupalvelun avaimet:**
+1. **Varmista haun palveluavaimet:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -230,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps -käyttöönotto-ongelmat
+## Container Apps -sovellusten käyttöönotto-ongelmat
 
-### Ongelma: Container-rakennus epäonnistuu
+### Ongelma: Container-sovelluksen rakennusvirheet
 
 **Oireet:**
 ```
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Ongelma: Container-sovelluksen käynnistys epäonnistuu
+### Ongelma: Container-sovelluksen käynnistysvirheet
 
 **Oireet:**
 ```
@@ -359,7 +366,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Todennus- ja käyttöoikeusvirheet
+## Autentikointi- ja käyttöoikeusvirheet
 
 ### Ongelma: Hallitun identiteetin käyttöoikeus evätty
 
@@ -395,7 +402,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Testaa todennus:**
+3. **Testaa autentikointi:**
 ```python
 # Test managed identity authentication
 from azure.identity import DefaultAzureCredential
@@ -530,7 +537,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 **Oireet:**
 - Vasteajat > 30 sekuntia
 - Aikakatkaisuvirheet
-- Heikko käyttäjäkokemus
+- Huono käyttäjäkokemus
 
 **Ratkaisut:**
 
@@ -549,7 +556,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Lisää vasteiden välimuisti:**
+2. **Lisää välimuistitus vasteille:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Ongelma: Muistin loppuminen
+### Ongelma: Muistin loppumisvirheet
 
 **Oireet:**
 ```
@@ -662,11 +669,11 @@ class MemoryOptimizedAI:
 **Oireet:**
 - Azure-lasku odotettua korkeampi
 - Tokenien käyttö ylittää arviot
-- Budjettihälytykset aktivoituvat
+- Budjettihälytykset aktivoitu
 
 **Ratkaisut:**
 
-1. **Ota käyttöön kustannusten hallintatoimenpiteet:**
+1. **Ota käyttöön kustannusten hallintatyökalut:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -729,9 +736,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## Vianmääritystyökalut ja -tekniikat
+## Virheenkorjaustyökalut ja -tekniikat
 
-### AZD-vianmäärityskomennot
+### AZD:n virheenkorjauskomennot
 
 ```bash
 # Enable verbose logging
@@ -747,7 +754,7 @@ azd logs --follow
 azd env get-values
 ```
 
-### Sovelluksen vianmääritys
+### Sovelluksen virheenkorjaus
 
 1. **Rakenteellinen lokitus:**
 ```python
@@ -841,27 +848,32 @@ def monitor_performance(func):
 | 403 | Pääsy estetty | Varmista RBAC-roolien määritykset |
 | 429 | Rajoitettu | Ota käyttöön uudelleenyritto logiikka eksponentiaalisella viiveellä |
 | 500 | Sisäinen palvelinvirhe | Tarkista mallin käyttöönoton tila ja lokit |
-| 503 | Palvelu ei ole saatavilla | Varmista palvelun tila ja alueellinen saatavuus |
+| 503 | Palvelu ei ole käytettävissä | Varmista palvelun tila ja alueellinen saatavuus |
 
 ## Seuraavat askeleet
 
 1. **Tutustu [AI-mallin käyttöönotto-oppaaseen](ai-model-deployment.md)** parhaiden käytäntöjen osalta
 2. **Suorita [Tuotannon AI-käytännöt](production-ai-practices.md)** yritysvalmiiden ratkaisujen osalta
-3. **Liity [Azure AI Foundry Discordiin](https://aka.ms/foundry/discord)** saadaksesi yhteisötukea
-4. **Lähetä ongelmia** [AZD GitHub-repositorioon](https://github.com/Azure/azure-dev) AZD-spesifisiä ongelmia varten
+3. **Liity [Azure AI Foundry Discordiin](https://aka.ms/foundry/discord)** saadaksesi yhteisön tukea
+4. **Lähetä ongelmat** [AZD GitHub-repositorioon](https://github.com/Azure/azure-dev) AZD-spesifisiä ongelmia varten
 
 ## Resurssit
 
 - [Azure OpenAI -palvelun vianmääritys](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [Container Apps -vianmääritys](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search -vianmääritys](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure AI -haun vianmääritys](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**Edellinen:** [Tuotannon AI-käytännöt](../ai-foundry/production-ai-practices.md) | **Seuraava:** [Workshop](../../workshop/README.md)
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 7 - Vianmääritys ja virheenkorjaus
+- **⬅️ Edellinen**: [Virheenkorjausopas](debugging.md)
+- **➡️ Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../ai-foundry/production-ai-practices.md)
+- **🤖 Liittyvä**: [Luku 2: AI-Ensimmäinen kehitys](../ai-foundry/azure-ai-foundry-integration.md)
 - [Azure Developer CLI -vianmääritys](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

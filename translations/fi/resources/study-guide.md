@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7634850a19864a183bc82ab5ac993c8a",
-  "translation_date": "2025-09-09T22:25:56+00:00",
+  "original_hash": "ee6549c72fe4271931326578e2379243",
+  "translation_date": "2025-09-18T06:42:03+00:00",
   "source_file": "resources/study-guide.md",
   "language_code": "fi"
 }
 -->
-# Opas opiskeluun - AZD aloittelijoille
+# Opas opiskeluun - Kattavat oppimistavoitteet
+
+**Oppimispolun navigointi**
+- **📚 Kurssin kotisivu**: [AZD For Beginners](../README.md)
+- **📖 Aloita oppiminen**: [Luku 1: Perusteet ja pika-aloitus](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Edistymisen seuranta**: [Kurssin suorittaminen](../README.md#-course-completion--certification)
 
 ## Johdanto
 
-Tämä kattava opas tarjoaa jäsennellyt oppimistavoitteet, keskeiset käsitteet, harjoitustehtävät ja arviointimateriaalit, jotka auttavat sinua hallitsemaan Azure Developer CLI:n (azd). Käytä tätä opasta edistymisesi seuraamiseen ja varmista, että olet käsitellyt kaikki olennaiset aiheet.
+Tämä kattava opas tarjoaa jäsennellyt oppimistavoitteet, keskeiset käsitteet, harjoitustehtävät ja arviointimateriaalit, jotka auttavat sinua hallitsemaan Azure Developer CLI:n (azd). Käytä tätä opasta edistymisesi seuraamiseen ja varmista, että olet käynyt läpi kaikki olennaiset aiheet.
 
 ## Oppimistavoitteet
 
@@ -23,245 +28,208 @@ Tämän oppaan suorittamalla opit:
 
 ## Oppimistulokset
 
-Oppaan kaikkien osioiden suorittamisen jälkeen pystyt:
+Kun olet suorittanut kaikki tämän oppaan osiot, pystyt:
 - Suunnittelemaan, ottamaan käyttöön ja hallitsemaan kokonaisia sovellusarkkitehtuureja azd:n avulla
 - Toteuttamaan kattavia valvonta-, turvallisuus- ja kustannusoptimointistrategioita
-- Ratkaisemaan monimutkaisia käyttöönotto-ongelmia itsenäisesti
+- Ratkaisemaan itsenäisesti monimutkaisia käyttöönotto-ongelmia
 - Luomaan mukautettuja malleja ja osallistumaan azd-yhteisöön
 
-## Kurssin rakenne
+## 8-luvun oppimisrakenne
 
-### Moduuli 1: Aloittaminen (Viikot 1-2)
-
-#### Oppimistavoitteet
-- Ymmärrä Azure Developer CLI:n perusteet ja keskeiset käsitteet
-- Asenna ja konfiguroi azd onnistuneesti kehitysympäristöösi
-- Suorita ensimmäinen käyttöönotto olemassa olevan mallin avulla
-- Navigoi azd-projektirakenteessa ja ymmärrä sen keskeiset komponentit
-
-#### Keskeiset käsitteet
-- Mallit, ympäristöt ja palvelut
-- azure.yaml-konfiguraatiorakenne
-- Peruskomennot azd:ssa (init, up, down, deploy)
-- Infrastructure as Code -periaatteet
-- Azure-autentikointi ja -valtuutus
-
-#### Harjoitustehtävät
-
-**Harjoitus 1.1: Asennus ja asetukset**  
-```bash
-# Complete these tasks:
-1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
-3. Verify installation with: azd version
-4. Test connectivity with: azd auth login
-5. Explore available templates: azd template list
-```
-
-**Harjoitus 1.2: Ensimmäinen käyttöönotto**  
-```bash
-# Deploy a simple web application:
-1. Initialize project: azd init --template todo-nodejs-mongo
-2. Review project structure and configuration files
-3. Deploy to Azure: azd up
-4. Test the deployed application
-5. Clean up resources: azd down
-```
-
-**Harjoitus 1.3: Projektirakenteen analyysi**  
-```
-Analyze the following components:
-1. azure.yaml - service definitions and hooks
-2. infra/ directory - Bicep templates and modules
-3. src/ directory - application source code
-4. .azure/ directory - environment configurations
-```
-
-#### Itsearviointikysymykset
-1. Mitkä ovat azd-arkkitehtuurin kolme keskeistä käsitettä?
-2. Mikä on azure.yaml-tiedoston tarkoitus?
-3. Miten ympäristöt auttavat hallitsemaan eri käyttöönottojen kohteita?
-4. Mitä autentikointimenetelmiä voidaan käyttää azd:ssa?
-5. Mitä tapahtuu, kun suoritat `azd up` ensimmäistä kertaa?
-
-### Moduuli 2: Konfigurointi ja ympäristöt (Viikko 3)
+### Luku 1: Perusteet ja pika-aloitus (Viikko 1)
+**Kesto**: 30-45 minuuttia | **Vaikeustaso**: ⭐
 
 #### Oppimistavoitteet
-- Hallitse ympäristöjen hallinta ja konfigurointi
-- Ymmärrä edistyneet azure.yaml-konfiguraatiot
-- Toteuta ympäristökohtaiset asetukset ja muuttujat
-- Konfiguroi autentikointi eri skenaarioihin
+- Ymmärrä Azure Developer CLI:n keskeiset käsitteet ja terminologia
+- Asenna ja konfiguroi AZD onnistuneesti kehitysalustallesi
+- Ota ensimmäinen sovellus käyttöön olemassa olevan mallin avulla
+- Navigoi AZD:n komentorajapinnassa tehokkaasti
 
 #### Keskeiset käsitteet
-- Ympäristöjen hierarkia ja muuttujien etusijajärjestys
-- Palvelukonfiguraatio ja parametrit
-- Hookit ja elinkaaritapahtumat
-- Autentikointimenetelmät (käyttäjä, palvelutunnus, hallittu identiteetti)
-- Konfiguraatiotiedostojen hallinta
+- AZD-projektin rakenne ja komponentit (azure.yaml, infra/, src/)
+- Mallipohjaiset käyttöönoton työnkulut
+- Ympäristön konfiguroinnin perusteet
+- Resurssiryhmän ja tilauksen hallinta
 
-#### Harjoitustehtävät
+#### Käytännön harjoitukset
+1. **Asennuksen tarkistus**: Asenna AZD ja tarkista `azd version` -komennolla
+2. **Ensimmäinen käyttöönotto**: Ota todo-nodejs-mongo-malli käyttöön onnistuneesti
+3. **Ympäristön asennus**: Konfiguroi ensimmäiset ympäristömuuttujasi
+4. **Resurssien tutkiminen**: Navigoi käyttöön otettuja resursseja Azure-portaalissa
 
-**Harjoitus 2.1: Moniympäristön asennus**  
-```bash
-# Create and configure multiple environments:
-1. Create development environment: azd env new development
-2. Create staging environment: azd env new staging
-3. Create production environment: azd env new production
-4. Configure different settings for each environment
-5. Deploy the same application to different environments
-```
+#### Arviointikysymykset
+- Mitkä ovat AZD-projektin keskeiset komponentit?
+- Kuinka alustat uuden projektin mallista?
+- Mikä ero on `azd up`- ja `azd deploy`-komentojen välillä?
+- Kuinka hallitset useita ympäristöjä AZD:n avulla?
 
-**Harjoitus 2.2: Edistynyt konfiguraatio**  
-```yaml
-# Modify azure.yaml to include:
-1. Multiple services with different configurations
-2. Pre and post deployment hooks
-3. Environment-specific parameters
-4. Custom resource naming patterns
-```
+---
 
-**Harjoitus 2.3: Turvallisuuskonfiguraatio**  
-```bash
-# Implement security best practices:
-1. Configure managed identity for service authentication
-2. Set up Azure Key Vault for secrets management
-3. Implement least-privilege access controls
-4. Enable HTTPS and secure communication protocols
-```
-
-#### Itsearviointikysymykset
-1. Miten azd käsittelee ympäristömuuttujien etusijajärjestystä?
-2. Mitä ovat käyttöönottohookit ja milloin niitä tulisi käyttää?
-3. Miten konfiguroit eri SKU:t eri ympäristöille?
-4. Mitkä ovat eri autentikointimenetelmien turvallisuusvaikutukset?
-5. Miten hallitset salaisuuksia ja arkaluontoisia konfiguraatiotietoja?
-
-### Moduuli 3: Käyttöönotto ja provisiointi (Viikko 4)
+### Luku 2: AI-ensimmäinen kehitys (Viikko 2)
+**Kesto**: 1-2 tuntia | **Vaikeustaso**: ⭐⭐
 
 #### Oppimistavoitteet
-- Hallitse käyttöönoton työnkulut ja parhaat käytännöt
-- Ymmärrä Infrastructure as Code Bicep-mallien avulla
-- Toteuta monimutkaisia monipalveluarkkitehtuureja
-- Optimoi käyttöönoton suorituskyky ja luotettavuus
+- Integroi Azure AI Foundry -palvelut AZD:n työnkulkuihin
+- Ota käyttöön ja konfiguroi tekoälypohjaisia sovelluksia
+- Ymmärrä RAG (Retrieval-Augmented Generation) -toteutusmallit
+- Hallitse tekoälymallien käyttöönottoa ja skaalausta
 
 #### Keskeiset käsitteet
-- Bicep-mallien rakenne ja moduulit
-- Resurssiriippuvuudet ja järjestys
-- Käyttöönoton strategiat (blue-green, rolling updates)
-- Monialueiset käyttöönotot
-- Tietokantamigraatiot ja datan hallinta
+- Azure OpenAI -palvelun integrointi ja API-hallinta
+- AI-hakukonfigurointi ja vektorihakemisto
+- Mallien käyttöönoton strategiat ja kapasiteettisuunnittelu
+- Tekoälysovellusten valvonta ja suorituskyvyn optimointi
 
-#### Harjoitustehtävät
+#### Käytännön harjoitukset
+1. **AI-chatin käyttöönotto**: Ota azure-search-openai-demo-malli käyttöön
+2. **RAG-toteutus**: Konfiguroi dokumenttien indeksointi ja haku
+3. **Mallien konfigurointi**: Aseta useita tekoälymalleja eri tarkoituksiin
+4. **AI-valvonta**: Toteuta Application Insights tekoälytyökuormille
 
-**Harjoitus 3.1: Mukautettu infrastruktuuri**  
-```bicep
-// Create custom Bicep templates for:
-1. Web application with custom domain and SSL
-2. Database with backup and high availability
-3. Storage account with access policies
-4. Monitoring and logging configuration
-5. Network security groups and virtual networks
-```
+#### Arviointikysymykset
+- Kuinka konfiguroit Azure OpenAI -palvelut AZD-mallissa?
+- Mitkä ovat RAG-arkkitehtuurin keskeiset komponentit?
+- Kuinka hallitset tekoälymallien kapasiteettia ja skaalausta?
+- Mitkä valvontamittarit ovat tärkeitä tekoälysovelluksille?
 
-**Harjoitus 3.2: Monipalvelusovellus**  
-```bash
-# Deploy a microservices architecture:
-1. Frontend web application
-2. Backend API service
-3. Database service
-4. Message queue service
-5. Background worker service
-```
+---
 
-**Harjoitus 3.3: Tietokannan integrointi**  
-```bash
-# Implement database deployment patterns:
-1. Deploy PostgreSQL with connection pooling
-2. Implement schema migrations
-3. Configure backup and recovery procedures
-4. Set up read replicas for performance
-5. Implement data seeding for different environments
-```
-
-#### Itsearviointikysymykset
-1. Mitkä ovat Bicepin käytön edut verrattuna ARM-malleihin?
-2. Miten käsittelet tietokantamigraatioita azd-käyttöönotossa?
-3. Mitä strategioita on olemassa käyttökatkosten välttämiseksi?
-4. Miten hallitset riippuvuuksia palveluiden välillä?
-5. Mitkä ovat monialueisten käyttöönottojen huomioon otettavat seikat?
-
-### Moduuli 4: Käyttöönoton ennakkovarmistus (Viikko 5)
+### Luku 3: Konfigurointi ja autentikointi (Viikko 3)
+**Kesto**: 45-60 minuuttia | **Vaikeustaso**: ⭐⭐
 
 #### Oppimistavoitteet
-- Toteuta kattavat ennakkovarmistukset
-- Hallitse kapasiteettisuunnittelu ja resurssien validointi
-- Ymmärrä SKU-valinta ja kustannusoptimointi
-- Rakenna automatisoituja validointiputkia
+- Hallitse ympäristön konfigurointi- ja hallintastrategiat
+- Toteuta turvalliset autentikointimallit ja hallittu identiteetti
+- Järjestä resurssit asianmukaisilla nimeämiskäytännöillä
+- Konfiguroi monen ympäristön käyttöönotot (kehitys, testaus, tuotanto)
 
 #### Keskeiset käsitteet
-- Azuren resurssikiintiöt ja rajat
-- SKU-valintakriteerit ja kustannusvaikutukset
-- Automatisoidut validointiskriptit ja työkalut
-- Kapasiteettisuunnittelun menetelmät
-- Suorituskykytestaus ja optimointi
+- Ympäristöhierarkia ja konfiguroinnin etusijajärjestys
+- Hallittu identiteetti ja palveluperiaatteiden autentikointi
+- Key Vault -integraatio salaisuuksien hallintaan
+- Ympäristökohtainen parametrien hallinta
 
-#### Harjoitustehtävät
+#### Käytännön harjoitukset
+1. **Monen ympäristön asennus**: Konfiguroi kehitys-, testaus- ja tuotantoympäristöt
+2. **Turvallisuuskonfigurointi**: Toteuta hallittu identiteettiautentikointi
+3. **Salaisuuksien hallinta**: Integroi Azure Key Vault arkaluontoisten tietojen hallintaan
+4. **Parametrien hallinta**: Luo ympäristökohtaiset konfiguraatiot
 
-**Harjoitus 4.1: Kapasiteettisuunnittelu**  
-```bash
-# Implement capacity validation:
-1. Create scripts to check Azure quotas
-2. Validate service availability in target regions
-3. Estimate resource costs for different SKUs
-4. Plan for scaling and growth requirements
-5. Document capacity requirements for each environment
-```
+#### Arviointikysymykset
+- Kuinka konfiguroit eri ympäristöt AZD:ssä?
+- Mitkä ovat hallitun identiteetin edut verrattuna palveluperiaatteisiin?
+- Kuinka hallitset sovelluksen salaisuuksia turvallisesti?
+- Mikä on AZD:n konfigurointihierarkia?
 
-**Harjoitus 4.2: Ennakkovarmistus**  
-```powershell
-# Build comprehensive validation pipeline:
-1. Authentication and permissions validation
-2. Template syntax and parameter validation
-3. Resource naming and availability checks
-4. Network connectivity and security validation
-5. Cost estimation and budget verification
-```
+---
 
-**Harjoitus 4.3: SKU-optimointi**  
-```bash
-# Optimize service configurations:
-1. Compare performance characteristics of different SKUs
-2. Implement cost-effective development configurations
-3. Design high-performance production configurations
-4. Create monitoring dashboards for resource utilization
-5. Set up auto-scaling policies
-```
+### Luku 4: Infrastruktuuri koodina ja käyttöönotto (Viikko 4-5)
+**Kesto**: 1-1,5 tuntia | **Vaikeustaso**: ⭐⭐⭐
 
-#### Itsearviointikysymykset
-1. Mitkä tekijät vaikuttavat SKU-valintapäätöksiin?
-2. Miten validoit Azuren resurssien saatavuuden ennen käyttöönottoa?
-3. Mitkä ovat ennakkovarmistusjärjestelmän keskeiset komponentit?
-4. Miten arvioit ja hallitset käyttöönoton kustannuksia?
-5. Mitä valvontaa tarvitaan kapasiteettisuunnittelussa?
+#### Oppimistavoitteet
+- Luo ja mukauta Bicep-infrastruktuurimalleja
+- Toteuta edistyneitä käyttöönoton malleja ja työnkulkuja
+- Ymmärrä resurssien provisiointistrategiat
+- Suunnittele skaalautuvia monipalveluarkkitehtuureja
+
+#### Keskeiset käsitteet
+- Bicep-mallin rakenne ja parhaat käytännöt
+- Resurssiriippuvuudet ja käyttöönoton järjestys
+- Parametritiedostot ja mallien modulaarisuus
+- Mukautetut koukut ja käyttöönoton automaatio
+
+#### Käytännön harjoitukset
+1. **Mukautetun mallin luominen**: Rakenna monipalvelusovelluksen malli
+2. **Bicep-osaaminen**: Luo modulaarisia, uudelleenkäytettäviä infrastruktuurikomponentteja
+3. **Käyttöönoton automaatio**: Toteuta ennen/jälkeen käyttöönoton koukut
+4. **Arkkitehtuurin suunnittelu**: Ota käyttöön monimutkainen mikropalveluarkkitehtuuri
+
+#### Arviointikysymykset
+- Kuinka luot mukautettuja Bicep-malleja AZD:lle?
+- Mitkä ovat parhaat käytännöt infrastruktuurikoodin järjestämiseen?
+- Kuinka käsittelet resurssiriippuvuuksia malleissa?
+- Mitkä käyttöönoton mallit tukevat käyttökatkottomia päivityksiä?
+
+---
+
+### Luku 5: Moniagenttiset tekoälyratkaisut (Viikko 6-7)
+**Kesto**: 2-3 tuntia | **Vaikeustaso**: ⭐⭐⭐⭐
+
+#### Oppimistavoitteet
+- Suunnittele ja toteuta moniagenttisia tekoälyarkkitehtuureja
+- Orkestroi agenttien koordinointi ja viestintä
+- Ota käyttöön tuotantovalmiita tekoälyratkaisuja valvonnalla
+- Ymmärrä agenttien erikoistuminen ja työnkulun mallit
+
+#### Keskeiset käsitteet
+- Moniagenttiset arkkitehtuurimallit ja suunnitteluperiaatteet
+- Agenttien viestintäprotokollat ja datavirta
+- Kuormituksen tasapainotus ja skaalausstrategiat tekoälyagenteille
+- Tuotantovalvonta moniagenttisille järjestelmille
+
+#### Käytännön harjoitukset
+1. **Vähittäiskaupan ratkaisun käyttöönotto**: Ota käyttöön täydellinen moniagenttinen vähittäiskaupan skenaario
+2. **Agenttien mukauttaminen**: Muokkaa asiakas- ja varastoagenttien käyttäytymistä
+3. **Arkkitehtuurin skaalaus**: Toteuta kuormituksen tasapainotus ja automaattinen skaalaus
+4. **Tuotantovalvonta**: Aseta kattava valvonta ja hälytykset
+
+#### Arviointikysymykset
+- Kuinka suunnittelet tehokkaita moniagenttisia viestintämalleja?
+- Mitkä ovat keskeiset näkökohdat tekoälyagenttien kuormituksen skaalaamisessa?
+- Kuinka valvot ja debuggaat moniagenttisia tekoälyjärjestelmiä?
+- Mitkä tuotantokäytännöt varmistavat tekoälyagenttien luotettavuuden?
+
+---
+
+### Luku 6: Ennakkoon tehtävä validointi ja suunnittelu (Viikko 8)
+**Kesto**: 1 tunti | **Vaikeustaso**: ⭐⭐
+
+#### Oppimistavoitteet
+- Suorita kattava kapasiteettisuunnittelu ja resurssien validointi
+- Valitse optimaaliset Azure SKU:t kustannustehokkuuden saavuttamiseksi
+- Toteuta automatisoidut ennakkotarkistukset ja validointi
+- Suunnittele käyttöönotot kustannusoptimointistrategioilla
+
+#### Keskeiset käsitteet
+- Azure-resurssien kiintiöt ja kapasiteettirajoitukset
+- SKU-valintakriteerit ja kustannusoptimointi
+- Automatisoidut validointiskriptit ja testaus
+- Käyttöönoton suunnittelu ja riskien arviointi
+
+#### Käytännön harjoitukset
+1. **Kapasiteettianalyysi**: Analysoi sovellustesi resurssivaatimukset
+2. **SKU-optimointi**: Vertaa ja valitse kustannustehokkaat palvelutasot
+3. **Validoinnin automaatio**: Toteuta ennakkotarkistusskriptit
+4. **Kustannussuunnittelu**: Luo käyttöönoton kustannusarviot ja budjetit
+
+#### Arviointikysymykset
+- Kuinka validoit Azure-kapasiteetin ennen käyttöönottoa?
+- Mitkä tekijät vaikuttavat SKU-valintapäätöksiin?
+- Kuinka automatisoit ennakkotarkistuksen validoinnin?
+- Mitkä strategiat auttavat optimoimaan käyttöönoton kustannuksia?
+2. Kuinka validoit Azure-resurssien saatavuuden ennen käyttöönottoa?  
+3. Mitkä ovat ennakkotarkistusjärjestelmän keskeiset komponentit?  
+4. Kuinka arvioit ja hallitset käyttöönoton kustannuksia?  
+5. Mitä seurantaa tarvitaan kapasiteettisuunnitteluun?
 
 ### Moduuli 5: Vianetsintä ja virheenkorjaus (Viikko 6)
 
-#### Oppimistavoitteet
-- Hallitse systemaattiset vianetsintämenetelmät
-- Kehitä asiantuntemusta monimutkaisten käyttöönotto-ongelmien virheenkorjauksessa
-- Toteuta kattava valvonta ja hälytysjärjestelmät
-- Rakenna incident response - ja palautusmenettelyt
+#### Oppimistavoitteet  
+- Hallitse järjestelmälliset vianetsintämenetelmät  
+- Kehitä asiantuntemusta monimutkaisten käyttöönotto-ongelmien virheenkorjauksessa  
+- Toteuta kattava seuranta ja hälytysjärjestelmät  
+- Rakenna toimintavarmuus- ja palautusmenettelyt  
 
-#### Keskeiset käsitteet
-- Yleiset käyttöönoton epäonnistumismallit
-- Lokianalyysi ja korrelaatiotekniikat
-- Suorituskyvyn valvonta ja optimointi
-- Turvallisuusincidenttien havaitseminen ja reagointi
-- Katastrofipalautus ja liiketoiminnan jatkuvuus
+#### Keskeiset käsitteet  
+- Yleiset käyttöönoton epäonnistumismallit  
+- Lokianalyysi ja korrelaatiotekniikat  
+- Suorituskyvyn seuranta ja optimointi  
+- Tietoturvapoikkeamien havaitseminen ja reagointi  
+- Katastrofien hallinta ja liiketoiminnan jatkuvuus  
 
-#### Harjoitustehtävät
+#### Harjoitustehtävät  
 
-**Harjoitus 5.1: Vianetsintäskenaariot**  
+**Harjoitus 5.1: Vianetsintätilanteet**  
 ```bash
 # Practice resolving common issues:
 1. Authentication and authorization failures
@@ -269,9 +237,9 @@ Analyze the following components:
 3. Application startup and runtime errors
 4. Network connectivity problems
 5. Performance and scaling issues
-```
+```  
 
-**Harjoitus 5.2: Valvonnan toteutus**  
+**Harjoitus 5.2: Seurannan toteutus**  
 ```bash
 # Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
@@ -279,9 +247,9 @@ Analyze the following components:
 3. Custom dashboards and alerting rules
 4. Log aggregation and analysis
 5. Health check endpoints and automated testing
-```
+```  
 
-**Harjoitus 5.3: Incident Response**  
+**Harjoitus 5.3: Poikkeamiin reagointi**  
 ```bash
 # Build incident response procedures:
 1. Create runbooks for common problems
@@ -289,31 +257,31 @@ Analyze the following components:
 3. Set up notification and escalation workflows
 4. Practice disaster recovery scenarios
 5. Document lessons learned and improvements
-```
+```  
 
-#### Itsearviointikysymykset
-1. Mikä on systemaattinen lähestymistapa azd-käyttöönottojen vianetsintään?
-2. Miten korreloit lokit useiden palveluiden ja resurssien välillä?
-3. Mitkä valvontamittarit ovat kriittisimpiä ongelmien varhaisessa havaitsemisessa?
-4. Miten toteutat tehokkaat katastrofipalautusmenettelyt?
-5. Mitkä ovat incident response -suunnitelman keskeiset komponentit?
+#### Itsearviointikysymykset  
+1. Mikä on järjestelmällinen lähestymistapa azd-käyttöönottojen vianetsintään?  
+2. Kuinka korreloit lokit useiden palveluiden ja resurssien välillä?  
+3. Mitkä seurantamittarit ovat kriittisimpiä ongelmien varhaisessa havaitsemisessa?  
+4. Kuinka toteutat tehokkaat katastrofien hallintamenettelyt?  
+5. Mitkä ovat poikkeamiin reagointisuunnitelman keskeiset osat?  
 
 ### Moduuli 6: Edistyneet aiheet ja parhaat käytännöt (Viikot 7-8)
 
-#### Oppimistavoitteet
-- Toteuta yritystason käyttöönoton mallit
-- Hallitse CI/CD-integraatio ja automaatio
-- Kehitä mukautettuja malleja ja osallistu yhteisöön
-- Ymmärrä edistyneet turvallisuus- ja vaatimustenmukaisuusvaatimukset
+#### Oppimistavoitteet  
+- Toteuta yritystason käyttöönoton mallit  
+- Hallitse CI/CD-integraatio ja automaatio  
+- Kehitä mukautettuja malleja ja osallistu yhteisöön  
+- Ymmärrä edistyneet tietoturva- ja vaatimustenmukaisuusvaatimukset  
 
-#### Keskeiset käsitteet
-- CI/CD-putkien integraatiomallit
-- Mukautettujen mallien kehitys ja jakelu
-- Yrityksen hallinto ja vaatimustenmukaisuus
-- Edistyneet verkko- ja turvallisuuskonfiguraatiot
-- Suorituskyvyn optimointi ja kustannusten hallinta
+#### Keskeiset käsitteet  
+- CI/CD-putkiston integraatiomallit  
+- Mukautettujen mallien kehitys ja jakelu  
+- Yrityksen hallintotavat ja vaatimustenmukaisuus  
+- Edistyneet verkko- ja tietoturvakonfiguraatiot  
+- Suorituskyvyn optimointi ja kustannusten hallinta  
 
-#### Harjoitustehtävät
+#### Harjoitustehtävät  
 
 **Harjoitus 6.1: CI/CD-integraatio**  
 ```yaml
@@ -323,7 +291,7 @@ Analyze the following components:
 3. Multi-stage deployment with approvals
 4. Automated testing and quality gates
 5. Security scanning and compliance checks
-```
+```  
 
 **Harjoitus 6.2: Mukautettujen mallien kehitys**  
 ```bash
@@ -333,7 +301,7 @@ Analyze the following components:
 3. Add comprehensive documentation and examples
 4. Test template across different environments
 5. Publish and maintain template in template gallery
-```
+```  
 
 **Harjoitus 6.3: Yritystason toteutus**  
 ```bash
@@ -343,160 +311,250 @@ Analyze the following components:
 3. Compliance and governance controls
 4. Cost allocation and chargeback mechanisms
 5. Disaster recovery and business continuity
-```
+```  
 
-#### Itsearviointikysymykset
-1. Miten integroit azd:n olemassa oleviin CI/CD-työnkulkuihin?
-2. Mitkä ovat keskeiset näkökohdat mukautettujen mallien kehityksessä?
-3. Miten toteutat hallinnon ja vaatimustenmukaisuuden azd-käyttöönotossa?
-4. Mitkä ovat parhaat käytännöt yritystason käyttöönottoihin?
-5. Miten osallistut tehokkaasti azd-yhteisöön?
+#### Itsearviointikysymykset  
+1. Kuinka integroit azd:n olemassa oleviin CI/CD-työnkulkuihin?  
+2. Mitkä ovat mukautettujen mallien kehityksen keskeiset näkökohdat?  
+3. Kuinka toteutat hallintoa ja vaatimustenmukaisuutta azd-käyttöönotossa?  
+4. Mitkä ovat parhaat käytännöt yritystason käyttöönottoihin?  
+5. Kuinka osallistut tehokkaasti azd-yhteisöön?  
 
-## Käytännön projektit
+## Käytännön projektit  
 
-### Projekti 1: Henkilökohtainen portfoliosivusto  
+### Projekti 1: Henkilökohtainen portfolio-sivusto  
 **Vaikeustaso**: Aloittelija  
 **Kesto**: 1-2 viikkoa  
 
-Rakenna ja ota käyttöön henkilökohtainen portfoliosivusto käyttäen:
-- Staattinen verkkosivuston hosting Azure Storagessa
-- Mukautetun verkkotunnuksen konfiguraatio
-- CDN-integraatio globaalin suorituskyvyn parantamiseksi
-- Automatisoitu käyttöönoton putki
+Rakenna ja ota käyttöön henkilökohtainen portfolio-sivusto käyttäen:  
+- Staattinen verkkosivuston isännöinti Azure Storage -palvelussa  
+- Mukautetun verkkotunnuksen konfigurointi  
+- CDN-integraatio globaalin suorituskyvyn parantamiseksi  
+- Automaattinen käyttöönoton putkisto  
 
-**Toimitukset**:
-- Toimiva verkkosivusto, joka on otettu käyttöön Azuren kautta
-- Mukautettu azd-malli portfolioiden käyttöönottoon
-- Käyttöönoton prosessin dokumentaatio
-- Kustannusanalyysi ja optimointisuositukset
+**Toimitukset**:  
+- Toimiva verkkosivusto, joka on otettu käyttöön Azureen  
+- Mukautettu azd-malli portfolio-käyttöönottoihin  
+- Käyttöönoton prosessin dokumentaatio  
+- Kustannusanalyysi ja optimointisuositukset  
 
 ### Projekti 2: Tehtävienhallintasovellus  
 **Vaikeustaso**: Keskitaso  
 **Kesto**: 2-3 viikkoa  
 
-Luo täysimittainen tehtävienhallintasovellus, jossa on:
-- React-frontend, joka on otettu käyttöön App Servicessä
-- Node.js-API-taustajärjestelmä autentikoinnilla
-- PostgreSQL-tietokanta migraatioilla
-- Application Insights -valvonta
+Luo täysimittainen tehtävienhallintasovellus, jossa on:  
+- React-frontend, joka on otettu käyttöön App Service -palvelussa  
+- Node.js-API-taustajärjestelmä, jossa on autentikointi  
+- PostgreSQL-tietokanta ja migraatiot  
+- Application Insights -seuranta  
 
-**Toimitukset**:
-- Täydellinen sovellus käyttäjäautentikoinnilla
-- Tietokannan skeema ja migraatioskriptit
-- Valvontapaneelit ja hälytyssäännöt
-- Moniympäristön käyttöönoton konfiguraatio
+**Toimitukset**:  
+- Täydellinen sovellus käyttäjäautentikoinnilla  
+- Tietokannan skeema ja migraatiokäsikirjoitukset  
+- Seurannan hallintapaneelit ja hälytyssäännöt  
+- Moniympäristöinen käyttöönoton konfiguraatio  
 
 ### Projekti 3: Mikroservices-pohjainen verkkokauppa-alusta  
 **Vaikeustaso**: Edistynyt  
 **Kesto**: 4-6 viikkoa  
 
-Suunnittele ja toteuta mikroservices-pohjainen verkkokauppa-alusta:
-- Useita API-palveluita (katalogi, tilaukset, maksut, käyttäjät)
-- Viestijonon integrointi Service Busin avulla
-- Redis-välimuisti suorituskyvyn optimointiin
-- Kattava lokitus ja valvonta
+Suunnittele ja toteuta mikroservices-pohjainen verkkokauppa-alusta:  
+- Useita API-palveluita (katalogi, tilaukset, maksut, käyttäjät)  
+- Viestijonointegraatio Service Busin avulla  
+- Redis-välimuisti suorituskyvyn optimointiin  
+- Kattava lokitus ja seuranta  
 
-**Toimitukset**:
-- Täydellinen mikroservices-arkkitehtuuri
-- Palveluiden välinen viestintämalli
-- Suorituskykytestaus ja optimointi
-- Tuotantovalmiin turvallisuuden toteutus
+**Toimitukset**:  
+- Täydellinen mikroservices-arkkitehtuuri  
+- Palveluiden välinen viestintämalli  
+- Suorituskyvyn testaus ja optimointi  
+- Tuotantovalmiit tietoturvakonfiguraatiot  
 
-## Arviointi ja sertifiointi
+## Arviointi ja sertifiointi  
 
-### Tietotarkistukset
+### Tietotarkistukset  
 
-Suorita nämä arvioinnit jokaisen moduulin jälkeen:
+Suorita nämä arvioinnit jokaisen moduulin jälkeen:  
 
 **Moduuli 1 Arviointi**: Peruskäsitteet ja asennus  
-- Monivalintakysymyksiä keskeisistä käsitteistä  
+- Monivalintakysymyksiä ydinkäsitteistä  
 - Käytännön asennus- ja konfigurointitehtäviä  
 - Yksinkertainen käyttöönottoharjoitus  
 
-**Moduuli 2 Arviointi**: Konfigurointi ja ympäristöt  
-- Ympäristönhallinnan skenaariot  
-- Konfiguroinnin vianetsintätehtävät  
-- Turvallisuuskonfiguraation toteutus  
+**Moduuli 2 Arviointi**: Konfiguraatio ja ympäristöt  
+- Ympäristönhallintaskenaarioita  
+- Konfiguraation vianetsintätehtäviä  
+- Tietoturvakonfiguraation toteutus  
 
 **Moduuli 3 Arviointi**: Käyttöönotto ja provisiointi  
-- Infrastruktuurin suunnittelun haasteet  
-- Monipalvelun käyttöönoton skenaariot  
-- Suorituskyvyn optimointiharjoitukset  
+- Infrastruktuurin suunnittelutehtäviä  
+- Monipalveluiden käyttöönoton skenaarioita  
+- Suorituskyvyn optimointiharjoituksia  
 
 **Moduuli 4 Arviointi**: Ennakkovarmistus  
-- Kapasiteettisuunnittelun tapaustutkimukset  
-- Kustannusoptimoinnin skenaariot  
-- Validointiputken toteutus  
+- Kapasiteettisuunnittelun tapaustutkimuksia  
+- Kustannusoptimointiskenaarioita  
+- Varmistusputkiston toteutus  
 
 **Moduuli 5 Arviointi**: Vianetsintä ja virheenkorjaus  
-- Ongelman diagnosointiharjoitukset  
-- Valvonnan toteutustehtävät  
-- Incident response -simulaatiot  
+- Ongelman diagnosointiharjoituksia  
+- Seurannan toteutustehtäviä  
+- Poikkeamiin reagoinnin simulointeja  
 
 **Moduuli 6 Arviointi**: Edistyneet aiheet  
-- CI/CD-putken suunnittelu  
+- CI/CD-putkiston suunnittelu  
 - Mukautettujen mallien kehitys  
-- Yritysarkkitehtuurin skenaariot  
+- Yritysarkkitehtuurin skenaarioita  
 
-### Lopullinen päätösprojekti
+### Lopullinen päätösprojekti  
 
-Suunnittele ja toteuta kokonaisratkaisu, joka osoittaa kaikkien käsitteiden hallinnan:
+Suunnittele ja toteuta kokonaisratkaisu, joka osoittaa kaikkien käsitteiden hallinnan:  
 
-**Vaatimukset**:
+**Vaatimukset**:  
 - Monitasoinen sovellusarkkitehtuuri  
 - Useita käyttöönottoympäristöjä  
-- Kattava valvonta ja hälytysjärjestelmät  
-- Turvallisuuden ja vaatimustenmukaisuuden toteutus  
-- Kustannusoptimointi ja suorituskyvyn hienosäätö  
+- Kattava seuranta ja hälytysjärjestelmä  
+- Tietoturva- ja vaatimustenmukaisuustoteutus  
+- Kustannusoptimointi ja suorituskyvyn viritys  
 - Täydellinen dokumentaatio ja käyttöohjeet  
 
-**Arviointikriteerit**:
+**Arviointikriteerit**:  
 - Teknisen toteutuksen laatu  
 - Dokumentaation kattavuus  
-- Turvallisuuden ja parhaiden käytäntöjen noudattaminen  
+- Tietoturvan ja parhaiden käytäntöjen noudattaminen  
 - Suorituskyvyn ja kustannusten optimointi  
-- Vianetsinnän ja valvonnan tehokkuus  
+- Vianetsinnän ja seurannan tehokkuus  
 
-## Opiskeluresurssit ja viitteet
+## Opiskeluresurssit ja viitteet  
 
-### Virallinen dokumentaatio
+### Virallinen dokumentaatio  
 - [Azure Developer CLI Dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 - [Bicep Dokumentaatio](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
 - [Azure Arkkitehtuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)  
 
-### Yhteisöresurssit
+### Yhteisöresurssit  
 - [AZD Malligalleria](https://azure.github.io/awesome-azd/)  
 - [Azure-Samples GitHub Organisaatio](https://github.com/Azure-Samples)  
 - [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)  
 
-### Harjoitusympäristöt
+### Harjoitteluympäristöt  
 - [Azure Free Account](https://azure.microsoft.com/free/)  
 - [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)  
 - [GitHub Actions](https://github.com/features/actions)  
 
-### Lisätyökalut
+### Lisätyökalut  
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)  
 - [Visual Studio Code](https://code.visualstudio.com/)  
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
 
-## Opiskeluaikataulusuositukset
+## Opiskeluaikataulusuositukset  
 
-### Kokopäiväinen opiskelu (8 viikkoa)
-- **Viikot 1-2**: Moduulit 1-2 (Aloittaminen, Konfigurointi)  
+### Kokopäiväinen opiskelu (8 viikkoa)  
+- **Viikot 1-2**: Moduulit 1-2 (Aloittaminen, Konfiguraatio)  
 - **Viikot 3-4**: Moduulit 3-4 (Käyttöönotto, Ennakkovarmistus)  
 - **Viikot 5-6**: Moduulit 5-6 (Vianetsintä, Edistyneet aiheet)  
-- **Viikot 7
-3. **Osallistu avoimeen lähdekoodiin**: Jaa mallisi ja ratkaisusi yhteisön kanssa  
-4. **Opeta muita**: Konseptien selittäminen toisille vahvistaa omaa ymmärrystäsi  
-5. **Ole utelias**: Tutki jatkuvasti uusia Azure-palveluita ja integrointimalleja  
+- **Viikot 7-8**: Käytännön projektit ja lopullinen arviointi  
+
+### Osa-aikainen opiskelu (16 viikkoa)  
+- **Viikot 1-4**: Moduuli 1 (Aloittaminen)  
+- **Viikot 5-7**: Moduuli 2 (Konfiguraatio ja ympäristöt)  
+- **Viikot 8-10**: Moduuli 3 (Käyttöönotto ja provisiointi)  
+- **Viikot 11-12**: Moduuli 4 (Ennakkovarmistus)  
+- **Viikot 13-14**: Moduuli 5 (Vianetsintä ja virheenkorjaus)  
+- **Viikot 15-16**: Moduuli 6 (Edistyneet aiheet ja arviointi)  
 
 ---
 
-**Navigointi**  
-- **Edellinen oppitunti**: [FAQ](faq.md)  
-- **Seuraava oppitunti**: [Changelog](../changelog.md)  
+## Edistymisen seuranta ja arviointikehys  
 
-**Opiskelun etenemisen seuranta**: Käytä tätä opasta oppimismatkan seuraamiseen ja varmista kattava perehtyminen kaikkiin Azure Developer CLI -konsepteihin ja käytäntöihin.  
+### Luvun suorittamisen tarkistuslista  
+
+Seuraa edistymistäsi jokaisen luvun läpi näillä mitattavilla tuloksilla:  
+
+#### 📚 Luku 1: Perusta ja nopea aloitus  
+- [ ] **Asennus valmis**: AZD asennettu ja testattu alustallasi  
+- [ ] **Ensimmäinen käyttöönotto**: Onnistuneesti otettu käyttöön todo-nodejs-mongo-malli  
+- [ ] **Ympäristön asennus**: Ensimmäiset ympäristömuuttujat konfiguroitu  
+- [ ] **Resurssien navigointi**: Tutkittu käyttöön otettuja resursseja Azure-portaalissa  
+- [ ] **Komentojen hallinta**: Perus AZD-komennot hallussa  
+
+#### 🤖 Luku 2: AI-ensimmäinen kehitys  
+- [ ] **AI-mallin käyttöönotto**: Onnistuneesti otettu käyttöön azure-search-openai-demo  
+- [ ] **RAG-toteutus**: Konfiguroitu dokumenttien indeksointi ja haku  
+- [ ] **Mallin konfiguraatio**: Asetettu useita AI-malleja eri tarkoituksiin  
+- [ ] **AI-seuranta**: Toteutettu Application Insights AI-työkuormille  
+- [ ] **Suorituskyvyn optimointi**: Viritetty AI-sovelluksen suorituskyky  
+
+#### ⚙️ Luku 3: Konfiguraatio ja autentikointi  
+- [ ] **Moniympäristöinen asennus**: Konfiguroitu dev-, staging- ja prod-ympäristöt  
+- [ ] **Tietoturvan toteutus**: Asetettu hallittu identiteettiautentikointi  
+- [ ] **Salaisuuksien hallinta**: Integroitu Azure Key Vault arkaluontoisille tiedoille  
+- [ ] **Parametrien hallinta**: Luotu ympäristökohtaiset konfiguraatiot  
+- [ ] **Autentikoinnin hallinta**: Toteutettu turvalliset pääsykuviot  
+
+#### 🏗️ Luku 4: Infrastruktuuri koodina ja käyttöönotto  
+- [ ] **Mukautetun mallin luominen**: Rakennettu monipalvelusovelluksen malli  
+- [ ] **Bicep-hallinta**: Luotu modulaarisia, uudelleenkäytettäviä infrastruktuurikomponentteja  
+- [ ] **Käyttöönoton automaatio**: Toteutettu ennen/jälkeen käyttöönoton koukut  
+- [ ] **Arkkitehtuurin suunnittelu**: Otettu käyttöön monimutkainen mikroservices-arkkitehtuuri  
+- [ ] **Mallin optimointi**: Optimoitu mallit suorituskyvyn ja kustannusten kannalta  
+
+#### 🎯 Luku 5: Moniagenttiset AI-ratkaisut  
+- [ ] **Vähittäiskaupan ratkaisun käyttöönotto**: Otettu käyttöön täydellinen moniagenttinen vähittäiskauppaskenaario  
+- [ ] **Agenttien mukauttaminen**: Muokattu asiakas- ja varastoagenttien käyttäytymistä  
+- [ ] **Arkkitehtuurin skaalaus**: Toteutettu kuormituksen tasapainotus ja automaattinen skaalaus  
+- [ ] **Tuotannon seuranta**: Asetettu kattava seuranta ja hälytysjärjestelmä  
+- [ ] **Suorituskyvyn viritys**: Optimoitu moniagenttisen järjestelmän suorituskyky  
+
+#### 🔍 Luku 6: Ennakkovarmistus ja suunnittelu  
+- [ ] **Kapasiteettianalyysi**: Analysoitu sovellusten resurssivaatimukset  
+- [ ] **SKU-optimointi**: Valittu kustannustehokkaat palvelutasot  
+- [ ] **Varmistuksen automaatio**: Toteutettu ennakkovarmistusskriptit  
+- [ ] **Kustannussuunnittelu**: Luotu käyttöönoton kustannusarviot ja budjetit  
+- [ ] **Riskien arviointi**: Tunnistettu ja lievennetty käyttöönoton riskit  
+
+#### 🚨 Luku 7: Vianetsintä ja virheenkorjaus  
+- [ ] **Diagnostiikkataidot**: Onnistuneesti korjattu tarkoituksella rikottuja käyttöönottoja  
+- [ ] **Lokianalyysi**: Käytetty tehokkaasti Azure Monitoria ja Application Insightsia  
+- [ ] **Suorituskyvyn viritys**: Optimoitu hitaasti toimivia sovelluksia  
+- [ ] **Palautusmenettelyt**: Toteutettu varmuuskopiointi ja katastrofien hallinta  
+- [ ] **Seurannan asennus**: Luotu ennakoiva seuranta ja hälytysjärjestelmä  
+
+#### 🏢 Luku 8: Tuotanto ja yritystason mallit  
+- [ ] **Yritystason tietoturva**: Toteutettu kattavat tietoturvamallit  
+- [ ] **Hallintokehys**: Asetettu Azure Policy ja resurssien hallinta  
+- [ ] **Edistynyt seuranta**: Luotu hallintapaneelit ja automatisoidut hälytykset  
+- [ ] **CI/CD-integraatio**: Rakennettu automatisoidut käyttöönoton putkistot  
+- [ ] **Vaatimustenmukaisuuden toteutus**: Täytetty yrityksen vaatimustenmukaisuusvaatimukset  
+
+### Oppimisen aikajana ja virstanpylväät  
+
+#### Viikko 1-2: Perustan rakentaminen  
+- **Virstanpylväs**: Ensimmäisen AI-sovelluksen käyttöönotto AZD:llä  
+- **Vahvistus**: Toimiva sovellus, joka on käytettävissä julkisen URL:n kautta  
+- **Taidot**: Perus AZD-työnkulut ja AI-palveluiden integrointi  
+
+#### Viikko 3-4: Konfiguraation hallinta  
+- **Virstanpylväs**: Moniympäristöinen käyttöönotto turvallisella autentikoinnilla  
+
+- **Dokumentaatio**: Osallistu yhteisön dokumentaation ja esimerkkien luomiseen
+- **Palaute**: Anna palautetta kurssisisällöstä ja Azure-palveluista
+
+#### Ura Kehitys
+- **Ammatillinen Verkosto**: Yhdistä Azure- ja tekoälyasiantuntijoihin
+- **Puhumismahdollisuudet**: Esittele oppimiasi asioita konferensseissa tai tapaamisissa
+- **Avoimen Lähdekoodin Panos**: Osallistu AZD-mallien ja työkalujen kehittämiseen
+- **Mentorointi**: Ohjaa muita kehittäjiä heidän AZD-oppimispolullaan
+
+---
+
+**Luvun Navigointi:**
+- **📚 Kurssin Etusivu**: [AZD Aloittelijoille](../README.md)
+- **📖 Aloita Oppiminen**: [Luku 1: Perusta & Pika-aloitus](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Edistymisen Seuranta**: Seuraa etenemistäsi kattavan 8-luvun oppimisjärjestelmän avulla
+- **🤝 Yhteisö**: [Azure Discord](https://discord.gg/microsoft-azure) tukemiseen ja keskusteluun
+
+**Opiskelun Edistymisen Seuranta**: Käytä tätä jäsenneltyä opasta hallitaksesi Azure Developer CLI:n progressiivisen, käytännönläheisen oppimisen kautta, saavuttaen mitattavia tuloksia ja ammatillisia kehityshyötyjä.
 
 ---
 

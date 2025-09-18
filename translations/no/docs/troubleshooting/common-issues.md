@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:46:49+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T06:17:44+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "no"
 }
 -->
 # Vanlige Problemer og Løsninger
 
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 7 - Feilsøking og Debugging
+- **⬅️ Forrige Kapittel**: [Kapittel 6: Sjekk før implementering](../pre-deployment/preflight-checks.md)
+- **➡️ Neste**: [Debugging Guide](debugging.md)
+- **🚀 Neste Kapittel**: [Kapittel 8: Produksjon og Enterprise-mønstre](../ai-foundry/production-ai-practices.md)
+
 ## Introduksjon
 
-Denne omfattende feilsøkingsguiden dekker de mest vanlige problemene ved bruk av Azure Developer CLI. Lær å diagnostisere, feilsøke og løse vanlige problemer knyttet til autentisering, utrulling, infrastrukturprovisjonering og applikasjonskonfigurasjon. Hvert problem inkluderer detaljerte symptomer, årsaker og trinnvise løsninger.
+Denne omfattende feilsøkingsguiden dekker de mest vanlige problemene som oppstår ved bruk av Azure Developer CLI. Lær å diagnostisere, feilsøke og løse vanlige problemer knyttet til autentisering, implementering, infrastrukturprovisjonering og applikasjonskonfigurasjon. Hvert problem inkluderer detaljerte symptomer, årsaker og trinnvise løsninger.
 
 ## Læringsmål
 
 Ved å fullføre denne guiden vil du:
 - Mestre diagnostiske teknikker for problemer med Azure Developer CLI
 - Forstå vanlige autentiserings- og tillatelsesproblemer og deres løsninger
-- Løse utrullingsfeil, infrastrukturprovisjoneringsfeil og konfigurasjonsproblemer
-- Implementere proaktiv overvåking og feilsøkingsstrategier
-- Anvende systematiske feilsøkingsmetoder for komplekse problemer
+- Løse implementeringsfeil, infrastrukturprovisjoneringsfeil og konfigurasjonsproblemer
+- Implementere proaktiv overvåking og debugging-strategier
+- Bruke systematiske feilsøkingsmetoder for komplekse problemer
 - Konfigurere riktig logging og overvåking for å forhindre fremtidige problemer
 
 ## Læringsutbytte
@@ -28,10 +35,10 @@ Ved å fullføre denne guiden vil du:
 Etter fullføring vil du kunne:
 - Diagnostisere problemer med Azure Developer CLI ved hjelp av innebygde diagnostiske verktøy
 - Løse autentiserings-, abonnement- og tillatelsesrelaterte problemer selvstendig
-- Feilsøke utrullingsfeil og infrastrukturprovisjoneringsproblemer effektivt
-- Feilsøke applikasjonskonfigurasjonsproblemer og miljøspesifikke utfordringer
+- Feilsøke implementeringsfeil og infrastrukturprovisjoneringsproblemer effektivt
+- Debugge applikasjonskonfigurasjonsproblemer og miljøspesifikke utfordringer
 - Implementere overvåking og varsling for å identifisere potensielle problemer proaktivt
-- Anvende beste praksis for logging, feilsøking og problemløsningsarbeidsflyter
+- Bruke beste praksis for logging, debugging og problemløsningsarbeidsflyter
 
 ## Rask Diagnostikk
 
@@ -80,9 +87,9 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Problem: "Utilstrekkelige privilegier" under utrulling
+### Problem: "Utilstrekkelige privilegier" under implementering
 **Symptomer:**
-- Utrulling feiler med tillatelsesfeil
+- Implementering feiler med tillatelsesfeil
 - Kan ikke opprette visse Azure-ressurser
 
 **Løsninger:**
@@ -114,8 +121,8 @@ az account clear
 
 ### Problem: Konflikter med ressursnavn
 **Symptomer:**
-- Feil som "Ressursnavnet eksisterer allerede"
-- Utrulling feiler under oppretting av ressurser
+- Feil som "The resource name already exists"
+- Implementering feiler under oppretting av ressurser
 
 **Løsninger:**
 ```bash
@@ -133,7 +140,7 @@ azd down --force --purge
 
 ### Problem: Lokasjon/region ikke tilgjengelig
 **Symptomer:**
-- Feil som "Lokasjonen 'xyz' er ikke tilgjengelig for denne ressurstypen"
+- Feil som "The location 'xyz' is not available for resource type"
 - Enkelte SKUs er ikke tilgjengelige i valgt region
 
 **Løsninger:**
@@ -152,8 +159,8 @@ azd env set AZURE_LOCATION eastus2
 
 ### Problem: Kvotebegrensninger overskredet
 **Symptomer:**
-- Feil som "Kvoten er overskredet for ressurstypen"
-- "Maksimalt antall ressurser nådd"
+- Feil som "Quota exceeded for resource type"
+- "Maximum number of resources reached"
 
 **Løsninger:**
 ```bash
@@ -195,11 +202,11 @@ cat infra/main.parameters.json | jq '.'
 azd provision --preview
 ```
 
-## 🚀 Utrullingsfeil
+## 🚀 Implementeringsfeil
 
 ### Problem: Byggefeil
 **Symptomer:**
-- Applikasjonen feiler under bygging i utrullingsprosessen
+- Applikasjonen feiler under bygging i implementeringen
 - Feil ved installasjon av pakker
 
 **Løsninger:**
@@ -226,7 +233,7 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problem: Feil ved utrulling av containere
+### Problem: Feil ved container-implementering
 **Symptomer:**
 - Container-applikasjoner starter ikke
 - Feil ved henting av bilder
@@ -273,7 +280,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 ### Problem: Miljøvariabler fungerer ikke
 **Symptomer:**
 - Applikasjonen kan ikke lese konfigurasjonsverdier
-- Miljøvariabler ser ut til å være tomme
+- Miljøvariabler vises som tomme
 
 **Løsninger:**
 ```bash
@@ -308,7 +315,7 @@ az webapp update --name myapp --resource-group myrg --https-only true
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Problem: CORS-konfigurasjonsproblemer
+### Problem: Problemer med CORS-konfigurasjon
 **Symptomer:**
 - Frontend kan ikke kalle API
 - Cross-origin forespørsel blokkert
@@ -373,10 +380,10 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Ytelsesproblemer
 
-### Problem: Lang utrullingstid
+### Problem: Lang implementeringstid
 **Symptomer:**
-- Utrullinger tar for lang tid
-- Tidsavbrudd under utrulling
+- Implementeringer tar for lang tid
+- Tidsavbrudd under implementering
 
 **Løsninger:**
 ```bash
@@ -421,7 +428,7 @@ azd logs --service api --follow
 
 ## 🛠️ Feilsøkingsverktøy og kommandoer
 
-### Feilsøkingskommandoer
+### Debug-kommandoer
 ```bash
 # Comprehensive debugging
 export AZD_DEBUG=true
@@ -468,7 +475,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 - Autentiseringsproblemer vedvarer etter å ha prøvd alle løsninger
 - Infrastrukturproblemer med Azure-tjenester
 - Problemer relatert til fakturering eller abonnement
-- Sikkerhetsproblemer eller hendelser
+- Sikkerhetsbekymringer eller hendelser
 
 ### Støttekanaler
 ```bash
@@ -489,11 +496,11 @@ Før du kontakter støtte, samle inn:
 - `azd version`-utdata
 - `azd info`-utdata
 - Feilmeldinger (full tekst)
-- Steg for å gjenskape problemet
+- Trinn for å gjenskape problemet
 - Miljødetaljer (`azd env show`)
 - Tidslinje for når problemet startet
 
-### Skript for loggsamling
+### Logginnsamlingsskript
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Forebygging av Problemer
 
-### Sjekkliste før utrulling
+### Sjekkliste før implementering
 ```bash
 # 1. Validate authentication
 az account show
@@ -538,7 +545,7 @@ npm run test
 azd provision --preview
 ```
 
-### Oppsett for overvåking
+### Overvåkingsoppsett
 ```bash
 # Enable Application Insights
 # Add to main.bicep:
@@ -568,10 +575,10 @@ az security assessment list --resource-group myrg
 
 ## Relaterte Ressurser
 
-- [Feilsøkingsguide](debugging.md) - Avanserte feilsøkingsmetoder
-- [Provisjonering av ressurser](../deployment/provisioning.md) - Feilsøking av infrastruktur
-- [Kapasitetsplanlegging](../pre-deployment/capacity-planning.md) - Veiledning for ressursplanlegging
-- [Valg av SKU](../pre-deployment/sku-selection.md) - Anbefalinger for tjenestenivåer
+- [Debugging Guide](debugging.md) - Avanserte debugging-teknikker
+- [Provisioning Resources](../deployment/provisioning.md) - Feilsøking av infrastruktur
+- [Capacity Planning](../pre-deployment/capacity-planning.md) - Veiledning for ressursplanlegging
+- [SKU Selection](../pre-deployment/sku-selection.md) - Anbefalinger for tjenestenivåer
 
 ---
 
@@ -580,10 +587,10 @@ az security assessment list --resource-group myrg
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [Provisjonering av ressurser](../deployment/provisioning.md)
-- **Neste leksjon**: [Feilsøkingsguide](debugging.md)
+- **Forrige Leksjon**: [Provisioning Resources](../deployment/provisioning.md)
+- **Neste Leksjon**: [Debugging Guide](debugging.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

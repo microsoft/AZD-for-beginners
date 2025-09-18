@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:51:38+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T06:15:10+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "no"
 }
 -->
 # Distribusjon av AI-modeller med Azure Developer CLI
 
-**Forrige:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Neste:** [AI Workshop Lab](ai-workshop-lab.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
+- **⬅️ Forrige**: [Integrasjon med Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Neste**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
-Denne veiledningen gir omfattende instruksjoner for å distribuere AI-modeller ved hjelp av AZD-maler, og dekker alt fra modellvalg til produksjonsdistribusjonsmønstre.
+Denne veiledningen gir omfattende instruksjoner for distribusjon av AI-modeller ved bruk av AZD-maler, og dekker alt fra modellvalg til produksjonsmønstre.
 
 ## Innholdsfortegnelse
 
-- [Strategi for modellvalg](../../../../docs/ai-foundry)
+- [Strategi for Modellvalg](../../../../docs/ai-foundry)
 - [AZD-konfigurasjon for AI-modeller](../../../../docs/ai-foundry)
 - [Distribusjonsmønstre](../../../../docs/ai-foundry)
-- [Modelladministrasjon](../../../../docs/ai-foundry)
-- [Produksjonsvurderinger](../../../../docs/ai-foundry)
-- [Overvåking og observasjon](../../../../docs/ai-foundry)
+- [Modellhåndtering](../../../../docs/ai-foundry)
+- [Produksjonsbetraktninger](../../../../docs/ai-foundry)
+- [Overvåking og Observasjon](../../../../docs/ai-foundry)
 
-## Strategi for modellvalg
+## Strategi for Modellvalg
 
 ### Azure OpenAI-modeller
 
@@ -56,8 +61,8 @@ services:
 
 ### Kapasitetsplanlegging for modeller
 
-| Modelltype | Bruksområde | Anbefalt kapasitet | Kostnadsvurderinger |
-|------------|-------------|--------------------|---------------------|
+| Modelltype | Bruksområde | Anbefalt kapasitet | Kostnadsbetraktninger |
+|------------|-------------|---------------------|-----------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kostnadseffektiv for de fleste arbeidsmengder |
 | GPT-4 | Kompleks resonnering | 20-100 TPM | Høyere kostnad, bruk for premiumfunksjoner |
 | Text-embedding-ada-002 | Søk, RAG | 30-120 TPM | Essensiell for semantisk søk |
@@ -207,7 +212,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Modelladministrasjon
+## Modellhåndtering
 
 ### Versjonskontroll
 
@@ -268,11 +273,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Produksjonsvurderinger
+## Produksjonsbetraktninger
 
 ### Kapasitetsplanlegging
 
-Beregn nødvendig kapasitet basert på bruksdata:
+Beregn nødvendig kapasitet basert på bruksmønstre:
 
 ```python
 # Capacity calculation example
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Overvåking og observasjon
+## Overvåking og Observasjon
 
 ### Integrasjon med Application Insights
 
@@ -407,7 +412,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Egendefinerte metrikker
+### Tilpassede metrikker
 
 Spor AI-spesifikke metrikker:
 
@@ -475,12 +480,12 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Neste steg
+## Neste Steg
 
-1. **Gå gjennom [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** for mønstre for tjenesteintegrasjon
+1. **Gå gjennom [Veiledningen for Integrasjon med Azure AI Foundry](azure-ai-foundry-integration.md)** for mønstre for tjenesteintegrasjon
 2. **Fullfør [AI Workshop Lab](ai-workshop-lab.md)** for praktisk erfaring
-3. **Implementer [Production AI Practices](production-ai-practices.md)** for bedriftsdistribusjoner
-4. **Utforsk [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** for vanlige problemer
+3. **Implementer [Produksjonspraksis for AI](production-ai-practices.md)** for bedriftsdistribusjoner
+4. **Utforsk [Feilsøkingsveiledningen for AI](../troubleshooting/ai-troubleshooting.md)** for vanlige problemer
 
 ## Ressurser
 
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**Forrige:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Neste:** [AI Workshop Lab](ai-workshop-lab.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
+- **⬅️ Forrige**: [Integrasjon med Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Neste**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:19:24+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T06:18:08+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "no"
 }
 -->
-# Feilsøkingsguide - Avanserte teknikker for logganalyse
+# Feilsøkingsguide for AZD-utrullinger
+
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 7 - Feilsøking og Debugging
+- **⬅️ Forrige**: [Vanlige Problemer](common-issues.md)
+- **➡️ Neste**: [AI-Spesifikk Feilsøking](ai-troubleshooting.md)
+- **🚀 Neste Kapittel**: [Kapittel 8: Produksjon og Enterprise-mønstre](../ai-foundry/production-ai-practices.md)
 
 ## Introduksjon
 
-Denne omfattende guiden gir avanserte strategier, verktøy og teknikker for feilsøking og løsning av komplekse problemer med Azure Developer CLI-deployeringer. Lær systematiske feilsøkingsmetoder, logganalyseteknikker, ytelsesprofilering og avanserte diagnostiske verktøy for effektivt å løse problemer under deployering og kjøring.
+Denne omfattende guiden gir avanserte strategier, verktøy og teknikker for feilsøking og diagnostisering av komplekse problemer med Azure Developer CLI-utrullinger. Lær systematiske feilsøkingsmetoder, logganalyseteknikker, ytelsesprofilering og avanserte diagnostiske verktøy for effektivt å løse problemer under utrulling og kjøring.
 
 ## Læringsmål
 
@@ -21,12 +28,12 @@ Ved å fullføre denne guiden vil du:
 - Implementere strategier for ytelsesprofilering og overvåking
 - Bruke Azure-diagnostiske verktøy og tjenester for å løse komplekse problemer
 - Anvende nettverksfeilsøking og sikkerhetsrelaterte feilsøkingsmetoder
-- Konfigurere omfattende overvåking og varsling for proaktiv oppdagelse av problemer
+- Konfigurere omfattende overvåking og varsling for proaktiv problemidentifisering
 
 ## Læringsutbytte
 
 Etter fullføring vil du kunne:
-- Anvende TRIAGE-metodikken for systematisk feilsøking av komplekse deployeringsproblemer
+- Anvende TRIAGE-metodikken for systematisk feilsøking av komplekse utrullingsproblemer
 - Konfigurere og analysere omfattende logg- og sporingsinformasjon
 - Bruke Azure Monitor, Application Insights og diagnostiske verktøy effektivt
 - Feilsøke nettverksforbindelser, autentisering og tillatelsesproblemer selvstendig
@@ -35,15 +42,15 @@ Etter fullføring vil du kunne:
 
 ## Feilsøkingsmetodikk
 
-### TRIAGE-metoden
+### TRIAGE-tilnærmingen
 - **T**id: Når startet problemet?
 - **R**eproduser: Kan du konsekvent gjenskape det?
 - **I**soler: Hvilken komponent feiler?
-- **A**nalyser: Hva forteller loggene oss?
+- **A**nalyser: Hva sier loggene?
 - **S**amle: Samle all relevant informasjon
-- **E**skalere: Når bør du søke ytterligere hjelp?
+- **E**skalere: Når bør du søke ekstra hjelp?
 
-## Aktivering av feilsøkingsmodus
+## Aktivering av Debug-modus
 
 ### Miljøvariabler
 ```bash
@@ -59,7 +66,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Feilsøkingskonfigurasjon
+### Debug-konfigurasjon
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -658,7 +665,7 @@ Opprett en `scripts/debug/`-mappe med:
 - `log-analyzer.py` - Avansert logganalyse
 - `resource-validator.sh` - Validering av infrastruktur
 
-### Integrasjon med overvåking
+### Overvåkingsintegrasjon
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
@@ -677,7 +684,7 @@ hooks:
 
 ## Beste praksis
 
-1. **Aktiver alltid feilsøkingslogging** i ikke-produksjonsmiljøer
+1. **Aktiver alltid debug-logging** i ikke-produksjonsmiljøer
 2. **Lag reproducerbare testtilfeller** for problemer
 3. **Dokumenter feilsøkingsprosedyrer** for teamet ditt
 4. **Automatiser helsesjekker** og overvåking
@@ -688,7 +695,7 @@ hooks:
 
 - [Kapasitetsplanlegging](../pre-deployment/capacity-planning.md) - Planlegg ressursbehov
 - [SKU-valg](../pre-deployment/sku-selection.md) - Velg passende tjenestenivåer
-- [Preflight-sjekker](../pre-deployment/preflight-checks.md) - Validering før deployering
+- [Preflight-sjekker](../pre-deployment/preflight-checks.md) - Validering før utrulling
 - [Hurtigreferanse](../../resources/cheat-sheet.md) - Kommandoer for rask tilgang
 
 ---
@@ -698,7 +705,7 @@ hooks:
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [Vanlige problemer](common-issues.md)
+- **Forrige leksjon**: [Vanlige Problemer](common-issues.md)
 
 - **Neste leksjon**: [Kapasitetsplanlegging](../pre-deployment/capacity-planning.md)
 

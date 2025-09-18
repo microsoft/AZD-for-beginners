@@ -1,28 +1,35 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T21:16:07+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T06:52:29+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "nl"
 }
 -->
 # AZD Basisprincipes - Begrijpen van Azure Developer CLI
 
-**Vorige:** [Installatie & Setup](installation.md) | **Volgende:** [Configuratie](configuration.md)
+# AZD Basisprincipes - Kernconcepten en Fundamenten
+
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelle Start
+- **⬅️ Vorige**: [Cursusoverzicht](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Volgende**: [Installatie & Configuratie](installation.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introductie
 
-Deze les introduceert je aan Azure Developer CLI (azd), een krachtige command-line tool die je reis van lokale ontwikkeling naar Azure-implementatie versnelt. Je leert de fundamentele concepten, kernfuncties en hoe azd het implementeren van cloud-native applicaties vereenvoudigt.
+Deze les introduceert je aan Azure Developer CLI (azd), een krachtige command-line tool die je reis van lokale ontwikkeling naar Azure-implementatie versnelt. Je leert de fundamentele concepten, kernfuncties en begrijpt hoe azd het implementeren van cloud-native applicaties vereenvoudigt.
 
 ## Leerdoelen
 
 Aan het einde van deze les zul je:
 - Begrijpen wat Azure Developer CLI is en het primaire doel ervan
-- Leren over de kernconcepten van templates, omgevingen en services
-- Belangrijke functies verkennen, zoals template-gedreven ontwikkeling en Infrastructure as Code
-- Het azd-projectstructuur en workflow begrijpen
-- Klaar zijn om azd te installeren en configureren voor jouw ontwikkelomgeving
+- De kernconcepten van templates, omgevingen en services leren
+- Belangrijke functies verkennen, waaronder template-gedreven ontwikkeling en Infrastructure as Code
+- De azd projectstructuur en workflow begrijpen
+- Klaar zijn om azd te installeren en configureren voor je ontwikkelomgeving
 
 ## Leerresultaten
 
@@ -41,7 +48,7 @@ Azure Developer CLI (azd) is een command-line tool ontworpen om je reis van loka
 
 ### Templates
 Templates vormen de basis van azd. Ze bevatten:
-- **Applicatiecode** - Jouw broncode en afhankelijkheden
+- **Applicatiecode** - Je broncode en afhankelijkheden
 - **Infrastructuurdefinities** - Azure-resources gedefinieerd in Bicep of Terraform
 - **Configuratiebestanden** - Instellingen en omgevingsvariabelen
 - **Implementatiescripts** - Geautomatiseerde implementatieworkflows
@@ -58,15 +65,15 @@ Elke omgeving onderhoudt zijn eigen:
 - Implementatiestatus
 
 ### Services
-Services zijn de bouwstenen van jouw applicatie:
+Services zijn de bouwstenen van je applicatie:
 - **Frontend** - Webapplicaties, SPAs
 - **Backend** - API's, microservices
 - **Database** - Datastoreoplossingen
 - **Opslag** - Bestand- en blobopslag
 
-## Belangrijke functies
+## Belangrijke Functies
 
-### 1. Template-gedreven ontwikkeling
+### 1. Template-gedreven Ontwikkeling
 ```bash
 # Browse available templates
 azd template list
@@ -80,7 +87,7 @@ azd init --template <template-name>
 - **Terraform** - Multi-cloud infrastructuurtool
 - **ARM Templates** - Azure Resource Manager templates
 
-### 3. Geïntegreerde workflows
+### 3. Geïntegreerde Workflows
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
@@ -159,9 +166,9 @@ Omgevingsspecifieke configuratie:
 }
 ```
 
-## 🎪 Veelvoorkomende workflows
+## 🎪 Veelvoorkomende Workflows
 
-### Een nieuw project starten
+### Een Nieuw Project Starten
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -191,7 +198,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Begrijpen van `azd down --force --purge`
-Het `azd down --force --purge`-commando is een krachtige manier om je azd-omgeving en alle bijbehorende resources volledig af te breken. Hier is een overzicht van wat elke vlag doet:
+Het `azd down --force --purge` commando is een krachtige manier om je azd-omgeving en alle bijbehorende resources volledig af te breken. Hier is een overzicht van wat elke vlag doet:
 ```
 --force
 ```
@@ -203,17 +210,17 @@ Het `azd down --force --purge`-commando is een krachtige manier om je azd-omgevi
 --purge
 ```
 Verwijdert **alle bijbehorende metadata**, inclusief:
-Omgevingsstatus  
-Lokale `.azure`-map  
-Gecachte implementatie-informatie  
+Omgevingsstatus
+Lokale `.azure` map
+Gecachte implementatie-informatie
 Voorkomt dat azd "onthoudt" eerdere implementaties, wat problemen kan veroorzaken zoals niet-overeenkomende resourcegroepen of verouderde registerverwijzingen.
 
 ### Waarom beide gebruiken?
 Wanneer je vastloopt met `azd up` door achterblijvende status of gedeeltelijke implementaties, zorgt deze combinatie voor een **schone lei**.
 
-Het is vooral nuttig na handmatige resourceverwijderingen in de Azure-portal of bij het wisselen van templates, omgevingen of naamgevingsconventies voor resourcegroepen.
+Het is vooral nuttig na handmatige resourceverwijderingen in de Azure portal of bij het wisselen van templates, omgevingen of naamgevingsconventies voor resourcegroepen.
 
-### Meerdere omgevingen beheren
+### Meerdere Omgevingen Beheren
 ```bash
 # Create staging environment
 azd env new staging
@@ -250,9 +257,9 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Best practices
+## Best Practices
 
-### 1. Gebruik betekenisvolle namen
+### 1. Gebruik Betekenisvolle Namen
 ```bash
 # Good
 azd env new production-east
@@ -263,14 +270,14 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Maak gebruik van templates
+### 2. Maak Gebruik van Templates
 - Begin met bestaande templates
-- Pas aan voor jouw behoeften
-- Maak herbruikbare templates voor jouw organisatie
+- Pas aan voor je behoeften
+- Maak herbruikbare templates voor je organisatie
 
-### 3. Isolatie van omgevingen
+### 3. Isolatie van Omgevingen
 - Gebruik aparte omgevingen voor ontwikkeling/staging/productie
-- Implementeer nooit direct naar productie vanaf een lokale machine
+- Implementeer nooit direct naar productie vanaf je lokale machine
 - Gebruik CI/CD-pijplijnen voor productie-implementaties
 
 ### 4. Configuratiebeheer
@@ -298,22 +305,30 @@ azd init --template template1
 3. Multi-regio implementaties
 4. Configuraties van ondernemingsniveau
 
-## Volgende stappen
+## Volgende Stappen
 
-- [Installatie & Setup](installation.md) - Installeer en configureer azd
-- [Je eerste project](first-project.md) - Praktische tutorial
+**📖 Ga verder met Hoofdstuk 1:**
+- [Installatie & Configuratie](installation.md) - Installeer en configureer azd
+- [Je Eerste Project](first-project.md) - Voltooi een praktische tutorial
 - [Configuratiegids](configuration.md) - Geavanceerde configuratieopties
 
-## Aanvullende bronnen
+**🎯 Klaar voor het Volgende Hoofdstuk?**
+- [Hoofdstuk 2: AI-First Ontwikkeling](../ai-foundry/azure-ai-foundry-integration.md) - Begin met het bouwen van AI-applicaties
+
+## Aanvullende Bronnen
 
 - [Azure Developer CLI Overzicht](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Samples](https://github.com/Azure-Samples)
+- [Template Galerij](https://azure.github.io/awesome-azd/)
+- [Community Voorbeelden](https://github.com/Azure-Samples)
 
 ---
 
-**Vorige:** [Installatie & Setup](installation.md) | **Volgende:** [Configuratie](configuration.md)
-- **Volgende les**: [Installatie & Setup](installation.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelle Start  
+- **⬅️ Vorige**: [Cursusoverzicht](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Volgende**: [Installatie & Configuratie](installation.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

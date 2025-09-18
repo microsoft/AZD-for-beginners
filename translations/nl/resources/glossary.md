@@ -1,37 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "59cb1c1635512e212da16d50f3259ca4",
-  "translation_date": "2025-09-09T22:51:29+00:00",
+  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
+  "translation_date": "2025-09-18T07:02:28+00:00",
   "source_file": "resources/glossary.md",
   "language_code": "nl"
 }
 -->
-# Woordenlijst - Azure Developer CLI Terminologie
+# Glossarium - Azure en AZD Terminologie
+
+**Referentie voor alle hoofdstukken**
+- **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
+- **📖 Basis leren**: [Hoofdstuk 1: AZD Basisprincipes](../docs/getting-started/azd-basics.md)
+- **🤖 AI Termen**: [Hoofdstuk 2: AI-First Ontwikkeling](../docs/ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introductie
 
-Deze uitgebreide woordenlijst biedt definities voor termen, concepten en acroniemen die worden gebruikt in Azure Developer CLI en Azure cloudontwikkeling. Een essentiële referentie voor het begrijpen van technische documentatie, het oplossen van problemen en het effectief communiceren over azd-projecten en Azure-diensten.
+Dit uitgebreide glossarium biedt definities voor termen, concepten en acroniemen die worden gebruikt in Azure Developer CLI en Azure cloudontwikkeling. Essentiële referentie voor het begrijpen van technische documentatie, het oplossen van problemen en het effectief communiceren over azd-projecten en Azure-diensten.
 
 ## Leerdoelen
 
-Door deze woordenlijst te gebruiken, leer je:
+Door gebruik te maken van dit glossarium, zul je:
 - Essentiële terminologie en concepten van Azure Developer CLI begrijpen
 - De woordenschat en technische termen van Azure cloudontwikkeling beheersen
-- Terminologie van Infrastructure as Code en implementatie efficiënt gebruiken
+- Terminologie van Infrastructure as Code en implementatie efficiënt kunnen raadplegen
 - Namen, acroniemen en doeleinden van Azure-diensten begrijpen
-- Definities voor probleemoplossing en foutopsporing raadplegen
-- Geavanceerde concepten van Azure-architectuur en -ontwikkeling leren
+- Definities voor probleemoplossing en foutopsporingsterminologie kunnen raadplegen
+- Geavanceerde concepten van Azure-architectuur en ontwikkeling leren
 
 ## Leerresultaten
 
-Met regelmatige verwijzing naar deze woordenlijst kun je:
-- Effectief communiceren met correcte Azure Developer CLI-terminologie
-- Technische documentatie en foutmeldingen beter begrijpen
-- Vertrouwd navigeren door Azure-diensten en -concepten
-- Problemen oplossen met behulp van passende technische woordenschat
-- Bijdragen aan teamdiscussies met nauwkeurige technische taal
-- Systematisch je kennis van Azure cloudontwikkeling uitbreiden
+Met regelmatig gebruik van dit glossarium zul je in staat zijn om:
+- Effectief te communiceren met de juiste terminologie van Azure Developer CLI
+- Technische documentatie en foutmeldingen duidelijker te begrijpen
+- Vertrouwd te navigeren door Azure-diensten en concepten
+- Problemen op te lossen met behulp van passende technische woordenschat
+- Bij te dragen aan teamdiscussies met nauwkeurige technische taal
+- Systematisch je kennis van Azure cloudontwikkeling uit te breiden
 
 ## A
 
@@ -51,7 +56,7 @@ Command-line interface voor het beheren van Azure-resources. Gebruikt door azd v
 Ontwikkelaarsgerichte command-line tool die het proces van het bouwen en implementeren van applicaties naar Azure versnelt met behulp van templates en Infrastructure as Code.
 
 **azure.yaml**  
-Het belangrijkste configuratiebestand voor een azd-project dat services, infrastructuur en implementatiehooks definieert.
+Het belangrijkste configuratiebestand voor een azd-project dat diensten, infrastructuur en implementatiehooks definieert.
 
 **Azure Resource Manager (ARM)**  
 Azure's implementatie- en beheerdienst die een beheerslaag biedt voor het maken, bijwerken en verwijderen van resources.
@@ -106,7 +111,7 @@ URL of netwerkadres waar een applicatie of dienst toegankelijk is.
 ## F
 
 **Function App**  
-Azure's serverloze compute-dienst waarmee event-driven code kan worden uitgevoerd zonder infrastructuurbeheer.
+Azure's serverloze computerdienst waarmee event-driven code kan worden uitgevoerd zonder infrastructuurbeheer.
 
 ## G
 
@@ -162,7 +167,7 @@ Azure-dienst voor het verzamelen, analyseren en reageren op telemetriegegevens v
 Azure-functie die Azure-diensten voorziet van een automatisch beheerde identiteit voor authenticatie bij andere Azure-diensten.
 
 **Microservices**  
-Architecturale benadering waarbij applicaties worden gebouwd als een verzameling van kleine, onafhankelijke services.
+Architecturale benadering waarbij applicaties worden gebouwd als een verzameling van kleine, onafhankelijke diensten.
 
 **Monitor**  
 Azure's uniforme bewakingsoplossing die volledige stack-observatie biedt over applicaties en infrastructuur.
@@ -205,7 +210,7 @@ Limieten op de hoeveelheid resources die kunnen worden gemaakt in een Azure-abon
 Logische container voor Azure-resources die dezelfde levenscyclus, machtigingen en beleidsregels delen.
 
 **Resource Token**  
-Unieke string gegenereerd door azd om ervoor te zorgen dat resourcenamen uniek zijn in implementaties.
+Unieke string gegenereerd door azd om ervoor te zorgen dat resourcenamen uniek zijn over implementaties.
 
 **REST API**  
 Architecturale stijl voor het ontwerpen van netwerkapplicaties met behulp van HTTP-methoden.
@@ -216,7 +221,7 @@ Proces van terugkeren naar een eerdere versie van een applicatie of infrastructu
 ## S
 
 **Service**  
-Een component van je applicatie gedefinieerd in azure.yaml (bijv. webfrontend, API-backend, database).
+Een component van je applicatie gedefinieerd in azure.yaml (bijv. web frontend, API backend, database).
 
 **SKU**  
 Stock Keeping Unit. Vertegenwoordigt verschillende serviceniveaus of prestatieniveaus voor Azure-resources.
@@ -250,7 +255,7 @@ Azure's DNS-gebaseerde verkeersloadbalancer voor het verdelen van verkeer over w
 Uniform Resource Identifier. String die een specifieke resource identificeert.
 
 **URL**  
-Uniform Resource Locator. Type URI dat aangeeft waar een resource zich bevindt en hoe deze kan worden opgehaald.
+Uniform Resource Locator. Type URI dat specificeert waar een resource zich bevindt en hoe deze kan worden opgehaald.
 
 ## V
 
@@ -282,10 +287,10 @@ Fysiek gescheiden locaties binnen een Azure-regio die redundantie en hoge beschi
 
 ## Veelvoorkomende Acroniemen
 
-| Acroniem | Volledige naam | Beschrijving |
+| Acroniem | Volledige Naam | Beschrijving |
 |---------|----------------|--------------|
 | AAD | Azure Active Directory | Identiteits- en toegangsbeheer |
-| ACR | Azure Container Registry | Containerimage-registerdienst |
+| ACR | Azure Container Registry | Container image registry service |
 | AKS | Azure Kubernetes Service | Beheerde Kubernetes-dienst |
 | API | Application Programming Interface | Protocolset voor softwareontwikkeling |
 | ARM | Azure Resource Manager | Azure's implementatie- en beheerdienst |
@@ -302,7 +307,7 @@ Fysiek gescheiden locaties binnen een Azure-regio die redundantie en hoge beschi
 | REST | Representational State Transfer | Architecturale stijl voor webservices |
 | SDK | Software Development Kit | Verzameling ontwikkeltools |
 | SLA | Service Level Agreement | Garantie voor servicebeschikbaarheid/prestaties |
-| SQL | Structured Query Language | Taal voor het beheren van relationele databases |
+| SQL | Structured Query Language | Taal voor relationele databases |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Cryptografische protocollen |
 | URI | Uniform Resource Identifier | String die een resource identificeert |
 | URL | Uniform Resource Locator | Type URI dat de locatie van een resource specificeert |
@@ -314,8 +319,8 @@ Fysiek gescheiden locaties binnen een Azure-regio die redundantie en hoge beschi
 
 ## Azure Service Naam Mapping
 
-| Algemene naam | Officiële Azure-dienstnaam | azd Host Type |
-|---------------|----------------------------|---------------|
+| Algemene Naam | Officiële Azure Service Naam | azd Host Type |
+|---------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
@@ -336,10 +341,10 @@ Fysiek gescheiden locaties binnen een Azure-regio die redundantie en hoge beschi
 - **Hot Reload**: Automatisch bijwerken van applicaties tijdens ontwikkeling zonder herstart
 - **Build Pipeline**: Geautomatiseerd proces voor het bouwen en testen van code
 - **Deployment Slot**: Stagingomgeving binnen een App Service
-- **Environment Parity**: Ontwikkeling-, staging- en productieomgevingen gelijk houden
+- **Environment Parity**: Ontwikkeling, staging en productieomgevingen gelijk houden
 
 ### Beveiligingstermen
-- **Managed Identity**: Azure-functie die automatische credentialbeheer biedt
+- **Managed Identity**: Azure-functie die automatische inloggegevensbeheer biedt
 - **Key Vault**: Veilige opslag voor geheimen, sleutels en certificaten
 - **RBAC**: Rolgebaseerde toegangscontrole voor Azure-resources
 - **Network Security Group**: Virtuele firewall voor het beheren van netwerkverkeer
@@ -358,7 +363,7 @@ Fysiek gescheiden locaties binnen een Azure-regio die redundantie en hoge beschi
 
 ---
 
-**Gebruikstip**: Gebruik `Ctrl+F` om snel specifieke termen in deze woordenlijst te zoeken. Termen zijn waar van toepassing onderling gekoppeld.
+**Gebruikstip**: Gebruik `Ctrl+F` om snel specifieke termen in dit glossarium te zoeken. Termen zijn waar van toepassing onderling gekoppeld.
 
 ---
 
@@ -369,4 +374,4 @@ Fysiek gescheiden locaties binnen een Azure-regio die redundantie en hoge beschi
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we ons best doen voor nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

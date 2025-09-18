@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:45:31+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T06:44:35+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "fi"
 }
 -->
 # Komentojen pikaopas - Tärkeimmät AZD-komennot
 
+**Nopea viite kaikille luvuille**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../README.md)
+- **📖 Nopea aloitus**: [Luku 1: Perusta ja nopea aloitus](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-komennot**: [Luku 2: AI-ensimmäinen kehitys](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Edistynyt**: [Luku 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Johdanto
 
-Tämä kattava pikaopas tarjoaa nopean viittauksen yleisimmin käytettyihin Azure Developer CLI -komentoihin, järjestettynä kategorioittain käytännön esimerkkien kanssa. Täydellinen nopeisiin tarkistuksiin kehityksen, vianmäärityksen ja päivittäisten azd-projektien toimintojen aikana.
+Tämä kattava pikaopas tarjoaa nopean viitteen yleisimmin käytetyille Azure Developer CLI -komennoille, jotka on järjestetty kategorioittain käytännön esimerkkien kera. Täydellinen kehityksen, vianmäärityksen ja päivittäisten azd-projektien toimintojen aikana.
 
 ## Oppimistavoitteet
 
@@ -20,18 +26,18 @@ Tämän pikaoppaan avulla:
 - Ymmärrät komentojen järjestelyn toiminnallisten kategorioiden ja käyttötapausten mukaan
 - Löydät käytännön esimerkkejä yleisistä kehitys- ja käyttöönotto-skenaarioista
 - Pääset käsiksi vianmäärityskomentoihin nopeaa ongelmanratkaisua varten
-- Löydät tehokkaasti edistyneitä konfigurointi- ja mukautusvaihtoehtoja
-- Hallitset ympäristöjen hallinnan ja monen ympäristön työnkulkujen komennot
+- Löydät helposti edistyneitä konfigurointi- ja mukautusvaihtoehtoja
+- Hallitset ympäristöjen hallinnan ja monen ympäristön työnkulut
 
 ## Oppimistulokset
 
-Säännöllisesti viittaamalla tähän pikaoppaaseen pystyt:
+Säännöllisesti tätä pikaopasta käyttäen pystyt:
 - Suorittamaan azd-komentoja luottavaisesti ilman täydellistä dokumentaatiota
-- Ratkaisemaan yleisiä ongelmia nopeasti käyttämällä sopivia diagnostiikkakomentoja
+- Ratkaisemaan yleisiä ongelmia nopeasti sopivilla diagnostiikkakomennoilla
 - Hallitsemaan tehokkaasti useita ympäristöjä ja käyttöönotto-skenaarioita
-- Soveltamaan tarvittaessa edistyneitä azd-ominaisuuksia ja konfigurointivaihtoehtoja
-- Vianmäärityksessä käyttämään järjestelmällisiä komentosekvenssejä
-- Optimoimaan työnkulkuja tehokkaalla azd-pikakomennolla ja -vaihtoehdoilla
+- Soveltamaan edistyneitä azd-ominaisuuksia ja konfigurointivaihtoehtoja tarpeen mukaan
+- Vianmäärityksen järjestelmällisten komentosekvenssien avulla ratkaisemaan käyttöönotto-ongelmia
+- Optimoimaan työnkulut tehokkaalla azd-pikakomennolla ja -vaihtoehdoilla
 
 ## Aloituskomennot
 
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Rakennus ja pakkaus
+### Rakentaminen ja paketointi
 ```bash
 # Build applications
 azd package
@@ -154,7 +160,7 @@ azd env unset DEBUG
 
 ## ⚙️ Konfigurointikomennot
 
-### Globaalit asetukset
+### Globaali konfigurointi
 ```bash
 # List all configuration
 azd config list
@@ -170,7 +176,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Projektin asetukset
+### Projektin konfigurointi
 ```bash
 # Validate azure.yaml
 azd config validate
@@ -243,7 +249,7 @@ azd info
 
 ## 🔧 Edistyneet komennot
 
-### Putkistot ja CI/CD
+### Putkisto ja CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -525,7 +531,7 @@ azd-status() {
 
 ## 📖 Apua ja dokumentaatio
 
-### Apua saaminen
+### Avun saaminen
 ```bash
 # General help
 azd --help
@@ -557,10 +563,10 @@ azd template show <template-name> --docs
 ---
 
 **Navigointi**
-- **Edellinen osio**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
-- **Seuraava osio**: [Sanasto](glossary.md)
+- **Edellinen oppitunti**: [Preflight-tarkistukset](../docs/pre-deployment/preflight-checks.md)
+- **Seuraava oppitunti**: [Sanasto](glossary.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

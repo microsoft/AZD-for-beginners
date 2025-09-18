@@ -1,37 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:44:04+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T06:14:25+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "no"
 }
 -->
 # Azure AI Foundry-integrasjon med AZD
 
-**Forrige:** [Første prosjekt](../getting-started/first-project.md) | **Neste:** [AI-modellutplassering](ai-model-deployment.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
+- **⬅️ Forrige Kapittel**: [Kapittel 1: Ditt Første Prosjekt](../getting-started/first-project.md)
+- **➡️ Neste**: [AI Modellutplassering](ai-model-deployment.md)
+- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
 ## Oversikt
 
-Denne veiledningen viser hvordan du kan integrere Azure AI Foundry-tjenester med Azure Developer CLI (AZD) for en mer effektiv utplassering av AI-applikasjoner. Azure AI Foundry tilbyr en omfattende plattform for å bygge, utplassere og administrere AI-applikasjoner, mens AZD forenkler infrastrukturen og utplasseringsprosessen.
+Denne guiden viser hvordan du kan integrere Azure AI Foundry-tjenester med Azure Developer CLI (AZD) for effektiv utplassering av AI-applikasjoner. Azure AI Foundry tilbyr en omfattende plattform for å bygge, utplassere og administrere AI-applikasjoner, mens AZD forenkler infrastrukturen og utplasseringsprosessen.
 
 ## Hva er Azure AI Foundry?
 
-Azure AI Foundry er Microsofts samlede plattform for AI-utvikling som inkluderer:
+Azure AI Foundry er Microsofts enhetlige plattform for AI-utvikling som inkluderer:
 
 - **Modellkatalog**: Tilgang til avanserte AI-modeller
 - **Prompt Flow**: Visuell designer for AI-arbeidsflyter
 - **AI Foundry Portal**: Integrert utviklingsmiljø for AI-applikasjoner
 - **Utplasseringsalternativer**: Flere hosting- og skaleringsalternativer
-- **Sikkerhet og trygghet**: Innebygde funksjoner for ansvarlig AI
+- **Sikkerhet og Ansvarlighet**: Innebygde funksjoner for ansvarlig AI
 
-## AZD + Azure AI Foundry: Bedre sammen
+## AZD + Azure AI Foundry: Bedre Sammen
 
 | Funksjon | Azure AI Foundry | Fordel med AZD-integrasjon |
 |----------|------------------|---------------------------|
 | **Modellutplassering** | Manuell utplassering via portal | Automatiserte, repeterbare utplasseringer |
 | **Infrastruktur** | Klikkbasert klargjøring | Infrastruktur som kode (Bicep) |
-| **Miljøadministrasjon** | Fokus på ett miljø | Flere miljøer (dev/staging/prod) |
+| **Miljøadministrasjon** | Fokus på ett miljø | Multi-miljø (dev/staging/prod) |
 | **CI/CD-integrasjon** | Begrenset | Innebygd støtte for GitHub Actions |
 | **Kostnadsadministrasjon** | Grunnleggende overvåking | Miljøspesifikk kostnadsoptimalisering |
 
@@ -126,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### Mønster 3: Dokumentintelligens-integrasjon
 
-**Brukstilfelle**: Dokumentbehandling og analysearbeidsflyter
+**Brukstilfelle**: Arbeidsflyter for dokumentbehandling og analyse
 
 ```bicep
 // Document Intelligence service
@@ -159,7 +164,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 Konfigurasjonsmønstre
 
-### Oppsett av miljøvariabler
+### Oppsett av Miljøvariabler
 
 **Produksjonskonfigurasjon:**
 ```bash
@@ -185,7 +190,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Sikker konfigurasjon med Key Vault
+### Sikker Konfigurasjon med Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -222,7 +227,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ## Utplasseringsarbeidsflyter
 
-### Utplassering med én kommando
+### Utplassering med Én Kommando
 
 ```bash
 # Deploy everything with one command
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### Miljøspesifikke utplasseringer
+### Miljøspesifikke Utplasseringer
 
 ```bash
 # Development environment
@@ -250,7 +255,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Overvåking og observasjon
+## Overvåking og Observabilitet
 
 ### Integrasjon med Application Insights
 
@@ -313,9 +318,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Beste praksis for sikkerhet
+## 🔐 Sikkerhetspraksis
 
-### Konfigurasjon av administrert identitet
+### Konfigurasjon av Administrert Identitet
 
 ```bicep
 // Managed identity for the web application
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Konfigurasjon for automatisk skalering
+### Konfigurasjon for Autoskalering
 
 ```bicep
 // Container App with auto-scaling
@@ -426,9 +431,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Feilsøking av vanlige problemer
+## Feilsøking av Vanlige Problemer
 
-### Problem 1: OpenAI-kvote overskredet
+### Problem 1: OpenAI-kvote Overskredet
 
 **Symptomer:**
 - Utplassering mislykkes med kvotefeil
@@ -466,10 +471,10 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Problem 3: Problemer med modellutplassering
+### Problem 3: Modellutplasseringsproblemer
 
 **Symptomer:**
-- Modeller er ikke tilgjengelige i utplasseringen
+- Modeller ikke tilgjengelige i utplasseringen
 - Spesifikke modellversjoner feiler
 
 **Løsninger:**
@@ -483,7 +488,7 @@ az cognitiveservices model list --location eastus
 
 ## Eksempelmaler
 
-### Grunnleggende chatteapplikasjon
+### Grunnleggende Chat-applikasjon
 
 **Repository**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
@@ -519,28 +524,33 @@ azd init --template contoso-chat
 azd up
 ```
 
-## Neste steg
+## Neste Steg
 
-1. **Prøv eksemplene**: Start med en ferdig mal som passer ditt brukstilfelle
-2. **Tilpass etter behov**: Endre infrastrukturen og applikasjonskoden
-3. **Legg til overvåking**: Implementer omfattende observasjon
-4. **Optimaliser kostnader**: Finjuster konfigurasjoner for ditt budsjett
-5. **Sikre utplasseringen**: Implementer sikkerhetsmønstre for bedrifter
-6. **Skaler til produksjon**: Legg til multi-region og høy tilgjengelighet
+1. **Prøv Eksemplene**: Start med en ferdiglaget mal som passer ditt brukstilfelle
+2. **Tilpass til Dine Behov**: Endre infrastrukturen og applikasjonskoden
+3. **Legg til Overvåking**: Implementer omfattende observabilitet
+4. **Optimaliser Kostnader**: Finjuster konfigurasjoner for ditt budsjett
+5. **Sikre Utplasseringen**: Implementer sikkerhetsmønstre for bedrifter
+6. **Skaler til Produksjon**: Legg til multi-region og høy tilgjengelighet
 
-## Fellesskap og støtte
+## Fellesskap og Støtte
 
-- **Azure AI Foundry Discord**: [#Azure-kanal](https://discord.gg/microsoft-azure)
+- **Azure AI Foundry Discord**: [#Azure kanal](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Problemer og diskusjoner](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Offisiell dokumentasjon](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**Forrige:** [Første prosjekt](../getting-started/first-project.md) | **Neste:** [AI-modellutplassering](ai-model-deployment.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
+- **⬅️ Forrige Kapittel**: [Kapittel 1: Ditt Første Prosjekt](../getting-started/first-project.md)
+- **➡️ Neste**: [AI Modellutplassering](ai-model-deployment.md)
+- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
-**Trenger du hjelp?** Bli med i fellesskapsdiskusjonene eller åpne en sak i repository. Azure AI + AZD-fellesskapet er her for å hjelpe deg med å lykkes!
+**Trenger Hjelp?** Bli med i våre fellesskapsdiskusjoner eller åpne en sak i repository. Azure AI + AZD-fellesskapet er her for å hjelpe deg med å lykkes!
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

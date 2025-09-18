@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:16:01+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-18T06:20:32+00:00",
   "source_file": "examples/README.md",
   "language_code": "no"
 }
 -->
 # Eksempler - Praktiske AZD-maler og konfigurasjoner
+
+**Lær ved eksempler - Organisert etter kapittel**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../README.md)
+- **📖 Kapittelkartlegging**: Eksempler organisert etter læringskompleksitet
+- **🚀 Start enkelt**: [Kapittel 1 Eksempler](../../../examples)
+- **🤖 AI Eksempler**: [Kapittel 2 & 5 AI-løsninger](../../../examples)
 
 ## Introduksjon
 
@@ -19,18 +25,18 @@ Ved å jobbe gjennom disse eksemplene vil du:
 - Øve på Azure Developer CLI-arbeidsflyter med realistiske applikasjonsscenarier
 - Forstå ulike applikasjonsarkitekturer og deres azd-implementeringer
 - Mestre Infrastructure as Code-mønstre for ulike Azure-tjenester
-- Anvende konfigurasjonsstyring og distribusjonsstrategier for spesifikke miljøer
+- Anvende konfigurasjonsstyring og distribusjonsstrategier spesifikke for miljøer
 - Implementere overvåking, sikkerhet og skaleringsmønstre i praktiske kontekster
-- Bygge erfaring med feilsøking og optimalisering av reelle distribusjonsscenarier
+- Bygge erfaring med feilsøking og debugging av virkelige distribusjonsscenarier
 
 ## Læringsutbytte
 
 Når du har fullført disse eksemplene, vil du kunne:
-- Trygt distribuere ulike applikasjonstyper ved hjelp av Azure Developer CLI
+- Distribuere ulike applikasjonstyper med Azure Developer CLI med selvtillit
 - Tilpasse de medfølgende malene til dine egne applikasjonsbehov
-- Designe og implementere tilpassede infrastrukturmønstre ved hjelp av Bicep
+- Designe og implementere tilpassede infrastruktursmønstre ved hjelp av Bicep
 - Konfigurere komplekse applikasjoner med flere tjenester og riktige avhengigheter
-- Anvende beste praksis for sikkerhet, overvåking og ytelse i virkelige scenarier
+- Anvende sikkerhets-, overvåkings- og ytelsespraksis i virkelige scenarier
 - Feilsøke og optimalisere distribusjoner basert på praktisk erfaring
 
 ## Katalogstruktur
@@ -49,7 +55,7 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## Hurtigstart-eksempler
+## Eksempler for rask start
 
 ### For nybegynnere
 1. **[Enkel webapp - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Distribuer en Node.js Express-webapplikasjon med MongoDB
@@ -64,8 +70,29 @@ Azure Samples AZD Templates (linked externally):
 ### Azure AI Foundry-maler
 
 1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Intelligent chat-applikasjon med Azure OpenAI
-2. **[AI-dokumentbehandling](https://github.com/Azure-Samples/azure-ai-document-processing)** - Dokumentanalyse ved hjelp av Azure AI-tjenester
+2. **[AI Dokumentbehandling](https://github.com/Azure-Samples/azure-ai-document-processing)** - Dokumentanalyse ved hjelp av Azure AI-tjenester
 3. **[Maskinlæringspipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps-arbeidsflyt med Azure Machine Learning
+
+### Virkelige scenarier
+
+#### **Retail Multi-Agent-løsning** 🆕
+**[Komplett implementeringsguide](./retail-scenario.md)**
+
+En omfattende, produksjonsklar multi-agent kundestøtteløsning som demonstrerer AI-applikasjonsdistribusjon i bedriftsklasse med AZD. Dette scenariet gir:
+
+- **Komplett arkitektur**: Multi-agent system med spesialiserte kundeservice- og lagerstyringsagenter
+- **Produksjonsinfrastruktur**: Multi-region Azure OpenAI-distribusjoner, AI Search, Container Apps og omfattende overvåking
+- **Klar-til-distribuere ARM-mal**: Ett-klikks distribusjon med flere konfigurasjonsmoduser (Minimal/Standard/Premium)
+- **Avanserte funksjoner**: Sikkerhetsvalidering, agent evalueringsrammeverk, kostnadsoptimalisering og feilsøkingsguider
+- **Virkelig forretningskontekst**: Kundestøttebrukstilfelle for detaljhandel med filopplastinger, søkeintegrasjon og dynamisk skalering
+
+**Teknologier**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Kompleksitet**: ⭐⭐⭐⭐ (Avansert - Produksjonsklar for bedrifter)
+
+**Perfekt for**: AI-utviklere, løsningsarkitekter og team som bygger produksjonsklare multi-agent systemer
+
+**Rask start**: Distribuer den komplette løsningen på under 30 minutter ved hjelp av den inkluderte ARM-malen med `./deploy.sh -g myResourceGroup`
 
 ## 📋 Bruksanvisning
 
@@ -114,28 +141,28 @@ Hvert eksempel inkluderer:
 
 #### **Grunnleggende distribusjoner**
 - Applikasjoner med én tjeneste
-- Enkle infrastrukturmønstre
+- Enkle infrastruktursmønstre
 - Grunnleggende konfigurasjonsstyring
 - Kostnadseffektive utviklingsoppsett
 
 #### **Avanserte scenarier**
 - Arkitekturer med flere tjenester
 - Komplekse nettverkskonfigurasjoner
-- Databasintegrasjonsmønstre
-- Implementeringer for sikkerhet og samsvar
+- Databaseintegrasjonsmønstre
+- Sikkerhets- og samsvarsimplementeringer
 
 #### **Produksjonsklare mønstre**
 - Konfigurasjoner for høy tilgjengelighet
 - Overvåking og observabilitet
 - CI/CD-integrasjon
-- Oppsett for katastrofegjenoppretting
+- Beredskapsplaner
 
-## 📖 Eksempelbeskrivelser
+## 📖 Eksempeldeskriptioner
 
 ### Enkel webapp - Node.js Express
 **Teknologier**: Node.js, Express, MongoDB, Container Apps  
 **Kompleksitet**: Nybegynner  
-**Konsepter**: Grunnleggende distribusjon, REST API, NoSQL-databasintegrasjon
+**Konsepter**: Grunnleggende distribusjon, REST API, NoSQL databaseintegrasjon
 
 ### Statisk nettsted - React SPA
 **Teknologier**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
@@ -162,14 +189,14 @@ Hvert eksempel inkluderer:
 **Kompleksitet**: Viderekommen  
 **Konsepter**: Kommunikasjon mellom tjenester, distribuerte systemer, bedriftsmønstre
 
-### Azure AI Foundry-eksempler
+### Azure AI Foundry Eksempler
 
 #### Azure OpenAI Chat App
 **Teknologier**: Azure OpenAI, Cognitive Search, App Service  
 **Kompleksitet**: Viderekommen  
 **Konsepter**: RAG-arkitektur, vektorsøk, LLM-integrasjon
 
-#### AI-dokumentbehandling
+#### AI Dokumentbehandling
 **Teknologier**: Azure AI Document Intelligence, Storage, Functions  
 **Kompleksitet**: Viderekommen  
 **Konsepter**: Dokumentanalyse, OCR, datauttrekk
@@ -198,10 +225,10 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
 ### Hjelpeskript
 - Automatisering av miljøoppsett
 - Skript for databasemigrering
-- Verktøy for validering av distribusjoner
+- Verktøy for distribusjonsvalidering
 - Kostnadsovervåkingsverktøy
 
-## 🔧 Tilpasningsveiledning
+## 🔧 Tilpasningsguide
 
 ### Tilpasse eksempler til ditt brukstilfelle
 
@@ -218,7 +245,7 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
 3. **Test grundig**
    - Distribuer først til utviklingsmiljø
    - Valider funksjonalitet
-   - Test skalerbarhet og ytelse
+   - Test skalering og ytelse
 
 4. **Sikkerhetsgjennomgang**
    - Gjennomgå tilgangskontroller
@@ -236,8 +263,9 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
 | Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
 | Java Mikrotjenester | 5+ | ✅ | Full | Full | ⭐⭐ |
 | Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
-| AI-dokumentbehandling | 2 | ❌ | Grunnleggende | Full | ⭐⭐ |
-| ML-pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| AI Dokumentbehandling | 2 | ❌ | Grunnleggende | Full | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **Bedrift** | **Avansert** | **⭐⭐⭐⭐** |
 
 ## 🎓 Læringssti
 
@@ -258,7 +286,7 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
    - Forstå skaleringskonsepter
    - Øv med Docker
 
-4. **Legg til databasintegrasjon**
+4. **Legg til databaseintegrasjon**
    - Lær databaseprovisjonering
    - Forstå tilkoblingsstrenger
    - Øv på hemmelighetshåndtering
@@ -283,37 +311,42 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
 - **React**: React SPA + Functions
 - **Containere**: Python Flask Container App, Java Mikrotjenester
 - **Databaser**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI-dokumentbehandling, ML-pipeline
+- **AI/ML**: Azure OpenAI Chat App, AI Dokumentbehandling, ML Pipeline, **Retail Multi-Agent-løsning**
+- **Multi-Agent Systemer**: **Retail Multi-Agent-løsning**
+- **Produksjonsklar for bedrifter**: **Retail Multi-Agent-løsning**
 
 ### Etter arkitekturmønster
 - **Monolittisk**: Node.js Express Todo, C# Web API + SQL
 - **Statisk + Serverless**: React SPA + Functions, Python Functions + SPA
 - **Mikrotjenester**: Java Spring Boot Mikrotjenester
 - **Containerisert**: Python Flask Container App
-- **AI-drevet**: Azure OpenAI Chat App, AI-dokumentbehandling, ML-pipeline
+- **AI-drevet**: Azure OpenAI Chat App, AI Dokumentbehandling, ML Pipeline, **Retail Multi-Agent-løsning**
+- **Multi-Agent Arkitektur**: **Retail Multi-Agent-løsning**
+- **Bedrifts Multi-Service**: **Retail Multi-Agent-løsning**
 
 ### Etter kompleksitetsnivå
 - **Nybegynner**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
-- **Viderekommen**: C# Web API + SQL, Python Functions + SPA, Java Mikrotjenester, Azure OpenAI Chat App, AI-dokumentbehandling
-- **Avansert**: ML-pipeline
+- **Viderekommen**: C# Web API + SQL, Python Functions + SPA, Java Mikrotjenester, Azure OpenAI Chat App, AI Dokumentbehandling
+- **Avansert**: ML Pipeline
+- **Produksjonsklar for bedrifter**: **Retail Multi-Agent-løsning** (Komplett multi-agent system med ARM-mal distribusjon)
 
-## 📚 Tilleggsressurser
+## 📚 Ekstra ressurser
 
 ### Dokumentasjonslenker
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure AI Foundry AZD-maler](https://github.com/Azure/ai-foundry-templates)
 - [Bicep-dokumentasjon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Arkitektursenter](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Fellesskapseksempler
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Azure Samples AZD-maler](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry-maler](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Galleri](https://azure.github.io/awesome-azd/)
 - [Todo App med C# og Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
 - [Todo App med Python og MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
 - [Todo App med Node.js og PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
 - [React Web App med C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Container Apps Jobb](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions med Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Beste praksis
@@ -325,13 +358,13 @@ Katalogen `configurations/` inneholder gjenbrukbare komponenter:
 Har du et nyttig eksempel å dele? Vi ønsker bidrag velkommen!
 
 ### Retningslinjer for innsending
-1. Følg den etablerte katalogstrukturen
-2. Inkluder omfattende README.md
+1. Følg den etablerte mappestrukturen
+2. Inkluder en omfattende README.md
 3. Legg til kommentarer i konfigurasjonsfiler
 4. Test grundig før innsending
 5. Inkluder kostnadsestimater og forutsetninger
 
-### Eksempelmalestruktur
+### Eksempel på malstruktur
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -347,11 +380,11 @@ example-name/
 
 ---
 
-**Tips**: Start med det enkleste eksempelet som passer din teknologistack, og jobb deg gradvis opp til mer komplekse scenarier. Hvert eksempel bygger på konsepter fra de forrige!
+**Tips**: Start med det enkleste eksempelet som passer til din teknologistack, og jobb deg gradvis opp til mer komplekse scenarier. Hvert eksempel bygger på konsepter fra de forrige!
 
 **Neste steg**: 
 - Velg et eksempel som passer ditt ferdighetsnivå
-- Følg oppsettsinstruksjonene i eksempelets README
+- Følg oppsettinstruksjonene i eksempelets README
 - Eksperimenter med tilpasninger
 - Del dine erfaringer med fellesskapet
 
@@ -359,9 +392,9 @@ example-name/
 
 **Navigasjon**
 - **Forrige leksjon**: [Studieguide](../resources/study-guide.md)
-- **Tilbake til**: [Hoved-README](../README.md)
+- **Tilbake til**: [Hoved README](../README.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

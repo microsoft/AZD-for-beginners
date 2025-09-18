@@ -1,35 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T21:48:12+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T06:32:44+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "fi"
 }
 -->
-# Tuotantotason AI-työkuormien parhaat käytännöt AZD:n kanssa
+# Tuotantovalmiiden AI-työkuormien parhaat käytännöt AZD:n kanssa
 
-**Edellinen:** [AI Workshop Lab](ai-workshop-lab.md) | **Seuraava:** [AI Vianetsintäopas](../troubleshooting/ai-troubleshooting.md)
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 8 - Tuotanto- ja yrityskäytännöt
+- **⬅️ Edellinen luku**: [Luku 7: Vianetsintä](../troubleshooting/debugging.md)
+- **⬅️ Myös liittyvä**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurssi valmis**: [AZD Aloittelijoille](../../README.md)
 
 ## Yleiskatsaus
 
-Tämä opas tarjoaa kattavat parhaat käytännöt tuotantovalmiiden AI-työkuormien käyttöönottoon Azure Developer CLI:n (AZD) avulla. Käytännöt perustuvat Azure AI Foundry Discord -yhteisön palautteeseen ja todellisiin asiakasprojekteihin, ja ne käsittelevät yleisimpiä haasteita tuotantotason AI-järjestelmissä.
+Tämä opas tarjoaa kattavat parhaat käytännöt tuotantovalmiiden AI-työkuormien käyttöönottoon Azure Developer CLI:n (AZD) avulla. Käytännöt perustuvat Azure AI Foundry Discord -yhteisön palautteeseen ja todellisiin asiakasprojekteihin, ja ne käsittelevät yleisimpiä haasteita tuotannon AI-järjestelmissä.
 
 ## Keskeiset haasteet
 
-Yhteisökyselyn tulosten perusteella nämä ovat kehittäjien yleisimmät haasteet:
+Yhteisökyselyn tulosten perusteella nämä ovat kehittäjien suurimmat haasteet:
 
 - **45 %** kamppailee monipalveluisten AI-järjestelmien käyttöönotossa
 - **38 %** kohtaa ongelmia tunnusten ja salaisuuksien hallinnassa  
 - **35 %** pitää tuotantovalmiuden ja skaalautuvuuden saavuttamista vaikeana
-- **32 %** kaipaa parempia kustannusten optimointistrategioita
-- **29 %** tarvitsee parannuksia seurantaan ja vianetsintään
+- **32 %** tarvitsee parempia kustannusten optimointistrategioita
+- **29 %** kaipaa parempaa seurantaa ja vianetsintää
 
-## Arkkitehtuurimallit tuotantotason AI:lle
+## Arkkitehtuurimallit tuotannon AI:lle
 
-### Malli 1: Mikroservices-pohjainen AI-arkkitehtuuri
+### Malli 1: Mikroservices AI-arkkitehtuuri
 
-**Milloin käyttää**: Monimutkaiset AI-sovellukset, joissa on useita toiminnallisuuksia
+**Milloin käyttää**: Monimutkaiset AI-sovellukset, joissa on useita ominaisuuksia
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -73,7 +78,7 @@ services:
 
 ### Malli 2: Tapahtumapohjainen AI-prosessointi
 
-**Milloin käyttää**: Eräajot, asiakirjojen analysointi, asynkroniset työnkulut
+**Milloin käyttää**: Eräajot, asiakirjojen analyysi, asynkroniset työnkulut
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -127,8 +132,8 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 **Toteutusstrategia**:
 - Ei palveluiden välistä viestintää ilman autentikointia
 - Kaikki API-kutsut käyttävät hallittuja identiteettejä
-- Verkkoyhteyksien eristäminen yksityisillä päätepisteillä
-- Pääsynhallinta vähimmän oikeuden periaatteella
+- Verkon eristäminen yksityisillä päätepisteillä
+- Vähimmäisoikeuksien käyttöoikeudet
 
 ```bicep
 // Managed Identity for each service
@@ -248,7 +253,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. Automaattisen skaalauksen strategiat
 
-**Container Apps -automaattiskaalaus**:
+**Container Apps -automaattinen skaalaus**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -322,7 +327,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Kuormantasauksen ja liikenteen hallinta
+### 3. Kuormituksen tasapainotus ja liikenteen hallinta
 
 **Application Gateway ja WAF**:
 
@@ -384,7 +389,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Kustannusseuranta ja budjetit
+### 2. Kustannusten seuranta ja budjetit
 
 ```bicep
 // Cost management and budgets
@@ -454,7 +459,7 @@ class TokenOptimizer {
 }
 ```
 
-## Seuranta ja näkyvyys
+## Seuranta ja havainnointi
 
 ### 1. Kattavat Application Insights -näkymät
 
@@ -503,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI-spesifinen seuranta
 
-**Mukautetut mittaristot AI-metriikoille**:
+**Mukautetut AI-metriikkapaneelit**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -532,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Terveystarkistukset ja käytettävyysseuranta
+### 3. Terveystarkastukset ja käyttöaikaseuranta
 
 ```bicep
 // Application Insights availability tests
@@ -839,39 +844,39 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Salaisuudet tallennettu Key Vaultiin
 - [ ] Yksityiset päätepisteet konfiguroitu
 - [ ] Verkkoturvallisuusryhmät toteutettu
-- [ ] RBAC vähimmän oikeuden periaatteella
+- [ ] RBAC vähimmäisoikeuksilla
 - [ ] WAF aktivoitu julkisilla päätepisteillä
 
 ### Suorituskyky ✅
-- [ ] Automaattiskaalaus konfiguroitu
+- [ ] Automaattinen skaalaus konfiguroitu
 - [ ] Välimuisti toteutettu
-- [ ] Kuormantasaus asetettu
+- [ ] Kuormituksen tasapainotus asetettu
 - [ ] CDN staattiselle sisällölle
 - [ ] Tietokantayhteyksien poolaus
 - [ ] Tokenien käytön optimointi
 
 ### Seuranta ✅
 - [ ] Application Insights konfiguroitu
-- [ ] Mukautetut mittarit määritelty
+- [ ] Mukautetut metriikat määritelty
 - [ ] Hälytyssäännöt asetettu
-- [ ] Mittaristo luotu
-- [ ] Terveystarkistukset toteutettu
+- [ ] Paneeli luotu
+- [ ] Terveystarkastukset toteutettu
 - [ ] Lokien säilytyspolitiikat
 
 ### Luotettavuus ✅
 - [ ] Monialueinen käyttöönotto
 - [ ] Varmuuskopiointi- ja palautussuunnitelma
 - [ ] Piirikatkaisijat toteutettu
-- [ ] Uudelleenyrittämiskäytännöt konfiguroitu
-- [ ] Hallittu heikennys
-- [ ] Terveystarkistuspäätepisteet
+- [ ] Uudelleenkokeilupolitiikat konfiguroitu
+- [ ] Arvokas heikentyminen
+- [ ] Terveystarkastuspäätepisteet
 
 ### Kustannusten hallinta ✅
 - [ ] Budjettihälytykset konfiguroitu
 - [ ] Resurssien oikea mitoitus
 - [ ] Kehitys/testialennukset käytössä
 - [ ] Varatut instanssit ostettu
-- [ ] Kustannusseurannan mittaristo
+- [ ] Kustannusten seuranta-paneeli
 - [ ] Säännölliset kustannuskatsaukset
 
 ### Vaatimustenmukaisuus ✅
@@ -889,7 +894,7 @@ echo "Infrastructure validation completed successfully!"
 | Mittari | Tavoite | Seuranta |
 |--------|--------|------------|
 | **Vasteaika** | < 2 sekuntia | Application Insights |
-| **Käytettävyys** | 99,9 % | Käytettävyysseuranta |
+| **Käytettävyys** | 99,9 % | Käyttöaikaseuranta |
 | **Virheprosentti** | < 0,1 % | Sovelluslokit |
 | **Tokenien käyttö** | < $500/kuukausi | Kustannusten hallinta |
 | **Samanaikaiset käyttäjät** | 1000+ | Kuormitustestaus |
@@ -912,10 +917,10 @@ Azure AI Foundry Discord -yhteisön palautteen perusteella:
 
 ### Yhteisön tärkeimmät suositukset:
 
-1. **Aloita pienestä, skaalaa vähitellen**: Käytä aluksi perus-SKU:ta ja skaalaa käyttöön perustuen
-2. **Seuraa kaikkea**: Ota kattava seuranta käyttöön heti alussa
+1. **Aloita pienestä, skaalaa vähitellen**: Käytä aluksi perus-SKU:ita ja skaalaa käyttöön perustuen
+2. **Seuraa kaikkea**: Ota kattava seuranta käyttöön alusta alkaen
 3. **Automatisoi tietoturva**: Käytä infrastruktuuria koodina tietoturvan johdonmukaisuuden varmistamiseksi
-4. **Testaa huolellisesti**: Sisällytä AI-spesifinen testaus putkistoon
+4. **Testaa perusteellisesti**: Sisällytä AI-spesifinen testaus putkistoon
 5. **Suunnittele kustannukset**: Seuraa tokenien käyttöä ja aseta budjettihälytykset ajoissa
 
 ### Yleiset sudenkuopat, joita kannattaa välttää:
@@ -924,20 +929,25 @@ Azure AI Foundry Discord -yhteisön palautteen perusteella:
 - ❌ Seurannan laiminlyönti
 - ❌ Kustannusten optimoinnin sivuuttaminen
 - ❌ Vikatilanteiden testaamatta jättäminen
-- ❌ Käyttöönotto ilman terveystarkistuksia
+- ❌ Käyttöönotto ilman terveystarkastuksia
 
 ## Lisäresurssit
 
 - **Azure Well-Architected Framework**: [AI-työkuormien ohjeet](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Dokumentaatio**: [Viralliset dokumentit](https://learn.microsoft.com/azure/ai-studio/)
+- **Azure AI Foundry -dokumentaatio**: [Viralliset dokumentit](https://learn.microsoft.com/azure/ai-studio/)
 - **Yhteisön mallipohjat**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord-yhteisö**: [#Azure-kanava](https://discord.gg/microsoft-azure)
 
 ---
 
-**Edellinen:** [AI Workshop Lab](ai-workshop-lab.md) | **Seuraava:** [AI Vianetsintäopas](../troubleshooting/ai-troubleshooting.md)
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 8 - Tuotanto- ja yrityskäytännöt
+- **⬅️ Edellinen luku**: [Luku 7: Vianetsintä](../troubleshooting/debugging.md)
+- **⬅️ Myös liittyvä**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kurssi valmis**: [AZD Aloittelijoille](../../README.md)
 
-**Muista**: Tuotantotason AI-työkuormat vaativat huolellista suunnittelua, seurantaa ja jatkuvaa optimointia. Aloita näillä malleilla ja mukauta ne omiin tarpeisiisi.
+**Muista**: Tuotannon AI-työkuormat vaativat huolellista suunnittelua, seurantaa ja jatkuvaa optimointia. Aloita näillä malleilla ja mukauta ne omiin tarpeisiisi.
 
 ---
 

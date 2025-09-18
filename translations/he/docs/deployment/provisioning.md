@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:43:45+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T07:11:22+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "he"
 }
 -->
-# הקצאת משאבים - תשתית כקוד עם AZD
+# הקצאת משאבי Azure עם AZD
+
+**ניווט פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 4 - תשתית כקוד ופריסה
+- **⬅️ קודם**: [מדריך פריסה](deployment-guide.md)
+- **➡️ פרק הבא**: [פרק 5: פתרונות AI מרובי סוכנים](../../examples/retail-scenario.md)
+- **🔧 קשור**: [פרק 6: אימות לפני פריסה](../pre-deployment/capacity-planning.md)
 
 ## מבוא
 
-מדריך מקיף זה מכסה את כל מה שצריך לדעת על הקצאה וניהול משאבי Azure באמצעות Azure Developer CLI. תלמדו ליישם דפוסי תשתית כקוד (IaC) החל מיצירת משאבים בסיסית ועד ארכיטקטורות תשתית מתקדמות ברמת ארגון באמצעות Bicep, ARM templates, Terraform ו-Pulumi.
+מדריך מקיף זה מכסה את כל מה שצריך לדעת על הקצאה וניהול משאבי Azure באמצעות Azure Developer CLI. תלמדו ליישם דפוסי תשתית כקוד (IaC) החל מיצירת משאבים בסיסית ועד ארכיטקטורות תשתית מתקדמות ברמת ארגון באמצעות Bicep, תבניות ARM, Terraform ו-Pulumi.
 
 ## מטרות למידה
 
@@ -21,25 +28,25 @@ CO_OP_TRANSLATOR_METADATA:
 - לעצב וליישם תבניות Bicep עבור ארכיטקטורות יישומים נפוצות
 - להגדיר פרמטרים של משאבים, משתנים והגדרות ספציפיות לסביבה
 - ליישם דפוסי תשתית מתקדמים כולל רשתות ואבטחה
-- לנהל את מחזור החיים של משאבים, עדכונים ופתרון תלות
+- לנהל מחזור חיים של משאבים, עדכונים ופתרון תלות
 
 ## תוצאות למידה
 
-עם סיום המדריך, תוכלו:
-- לעצב ולהקצות תשתית Azure באמצעות Bicep ו-ARM templates
+עם סיום, תוכלו:
+- לעצב ולהקצות תשתית Azure באמצעות Bicep ותבניות ARM
 - להגדיר ארכיטקטורות מורכבות מרובות שירותים עם תלות משאבים נכונה
 - ליישם תבניות פרמטריות עבור סביבות וקונפיגורציות שונות
 - לפתור בעיות הקצאת תשתית ולתקן כשלים בפריסה
-- ליישם עקרונות של Azure Well-Architected Framework בעיצוב תשתית
+- ליישם עקרונות של מסגרת Azure Well-Architected בעיצוב תשתית
 - לנהל עדכוני תשתית וליישם אסטרטגיות גרסאות תשתית
 
 ## סקירה כללית של הקצאת תשתית
 
 Azure Developer CLI תומך במספר ספקי תשתית כקוד (IaC):
-- **Bicep** (מומלץ) - שפת תחום ייעודית של Azure
-- **ARM Templates** - תבניות JSON של Azure Resource Manager
+- **Bicep** (מומלץ) - שפת תחום ספציפית של Azure
+- **תבניות ARM** - תבניות JSON של מנהל משאבי Azure
 - **Terraform** - כלי תשתית רב-ענני
-- **Pulumi** - תשתית כקוד מודרנית עם שפות תכנות
+- **Pulumi** - תשתית מודרנית כקוד עם שפות תכנות
 
 ## הבנת משאבי Azure
 
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ הקצאת מסדי נתונים
+## 🗃️ הקצאת בסיסי נתונים
 
 ### Cosmos DB
 ```bicep
@@ -344,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### הגדרת Managed Identity
+### הגדרת זהות מנוהלת
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -372,7 +379,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 רשתות וקישוריות
 
-### הגדרת Virtual Network
+### הגדרת רשת וירטואלית
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -529,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### מדדים מותאמים והתראות
+### מדדים מותאמים אישית והתראות
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -771,7 +778,7 @@ azd provision --confirm-with-no-prompt
 azd provision --rollback
 ```
 
-### העברות מסדי נתונים
+### העברות בסיסי נתונים
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -802,7 +809,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 שיטות עבודה מומלצות
 
-### 1. מוסכמות למתן שמות למשאבים
+### 1. מוסכמות שמות משאבים
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -867,8 +874,8 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## משאבים נוספים
 
 - [תיעוד Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [תבניות Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [מרכז הארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [תבניות מנהל משאבי Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [מרכז ארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [מסגרת Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---

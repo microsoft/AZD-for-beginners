@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T21:56:13+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T07:12:32+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "he"
 }
 -->
-# מדריך פתרון בעיות AI עבור Azure Developer CLI
+# מדריך פתרון בעיות ספציפי ל-AI
 
-**קודם:** [שיטות AI בייצור](../ai-foundry/production-ai-practices.md) | **הבא:** [התחלת עבודה עם AZD](../getting-started/README.md)
+**ניווט בין פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 7 - פתרון בעיות וניפוי שגיאות
+- **⬅️ קודם**: [מדריך ניפוי שגיאות](debugging.md)
+- **➡️ פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../ai-foundry/production-ai-practices.md)
+- **🤖 קשור**: [פרק 2: פיתוח מבוסס AI](../ai-foundry/azure-ai-foundry-integration.md)
 
-מדריך מקיף זה מתמקד בפתרון בעיות נפוצות בעת פריסת פתרונות AI עם AZD, ומספק פתרונות וטכניקות דיבוג ייחודיות לשירותי Azure AI.
+**קודם:** [דפוסי AI בייצור](../ai-foundry/production-ai-practices.md) | **הבא:** [התחלת עבודה עם AZD](../getting-started/README.md)
+
+מדריך פתרון בעיות מקיף זה מתמקד בבעיות נפוצות בעת פריסת פתרונות AI עם AZD, ומספק פתרונות וטכניקות ניפוי שגיאות ספציפיות לשירותי Azure AI.
 
 ## תוכן עניינים
 
@@ -19,10 +26,10 @@ CO_OP_TRANSLATOR_METADATA:
 - [בעיות בחיפוש Azure AI](../../../../docs/troubleshooting)
 - [בעיות בפריסת אפליקציות קונטיינר](../../../../docs/troubleshooting)
 - [שגיאות אימות והרשאות](../../../../docs/troubleshooting)
-- [כישלונות בפריסת מודלים](../../../../docs/troubleshooting)
+- [כשלי פריסת מודלים](../../../../docs/troubleshooting)
 - [בעיות ביצועים וסקיילינג](../../../../docs/troubleshooting)
 - [ניהול עלויות ומכסה](../../../../docs/troubleshooting)
-- [כלי דיבוג וטכניקות](../../../../docs/troubleshooting)
+- [כלי וטכניקות ניפוי שגיאות](../../../../docs/troubleshooting)
 
 ## בעיות בשירות Azure OpenAI
 
@@ -183,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### בעיה: כישלונות ביצירת אינדקס
+### בעיה: כשל ביצירת אינדקס
 
 **תסמינים:**
 ```
@@ -232,7 +239,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## בעיות בפריסת אפליקציות קונטיינר
 
-### בעיה: כישלונות בבניית קונטיינר
+### בעיה: כשל בבניית קונטיינר
 
 **תסמינים:**
 ```
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### בעיה: כישלונות בהפעלת אפליקציית קונטיינר
+### בעיה: כשל באתחול אפליקציית קונטיינר
 
 **תסמינים:**
 ```
@@ -296,7 +303,7 @@ Error: Container failed to start within timeout period
 
 **פתרונות:**
 
-1. **הגדלת זמן ההמתנה להפעלה:**
+1. **הגדלת זמן אתחול:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -451,7 +458,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## כישלונות בפריסת מודלים
+## כשלי פריסת מודלים
 
 ### בעיה: גרסת מודל אינה זמינה
 
@@ -657,11 +664,11 @@ class MemoryOptimizedAI:
 
 ## ניהול עלויות ומכסה
 
-### בעיה: עלויות גבוהות בלתי צפויות
+### בעיה: עלויות גבוהות מהצפוי
 
 **תסמינים:**
 - חשבון Azure גבוה מהצפוי
-- שימוש בטוקנים מעבר להערכות
+- שימוש בטוקנים עולה על הערכות
 - התראות תקציב מופעלות
 
 **פתרונות:**
@@ -729,9 +736,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## כלי דיבוג וטכניקות
+## כלי וטכניקות ניפוי שגיאות
 
-### פקודות דיבוג AZD
+### פקודות ניפוי שגיאות של AZD
 
 ```bash
 # Enable verbose logging
@@ -747,7 +754,7 @@ azd logs --follow
 azd env get-values
 ```
 
-### דיבוג אפליקציות
+### ניפוי שגיאות באפליקציות
 
 1. **לוגים מובנים:**
 ```python
@@ -836,19 +843,19 @@ def monitor_performance(func):
 ## קודי שגיאה נפוצים ופתרונות
 
 | קוד שגיאה | תיאור | פתרון |
-|------------|-------------|----------|
+|-----------|--------|-------|
 | 401 | לא מורשה | בדיקת מפתחות API והגדרות זהות מנוהלת |
-| 403 | אסור | אימות הקצאות תפקידים RBAC |
-| 429 | מוגבל קצב | יישום לוגיקת ניסיונות חוזרים עם backoff אקספוננציאלי |
+| 403 | אסור | אימות הקצאות תפקידים ב-RBAC |
+| 429 | מגבלת קצב | יישום לוגיקת ניסיונות חוזרים עם backoff אקספוננציאלי |
 | 500 | שגיאת שרת פנימית | בדיקת סטטוס פריסת מודל ולוגים |
-| 503 | שירות לא זמין | אימות בריאות שירות וזמינות אזורית |
+| 503 | שירות לא זמין | אימות בריאות השירות וזמינות אזורית |
 
 ## צעדים הבאים
 
-1. **סקירת [מדריך פריסת מודלים AI](ai-model-deployment.md)** לשיטות פריסה מיטביות
-2. **השלמת [שיטות AI בייצור](production-ai-practices.md)** לפתרונות מוכנים לארגון
-3. **הצטרפות ל-[Discord של Azure AI Foundry](https://aka.ms/foundry/discord)** לתמיכה קהילתית
-4. **הגשת בעיות** ל-[מאגר GitHub של AZD](https://github.com/Azure/azure-dev) לבעיות ספציפיות ל-AZD
+1. **סקירת [מדריך פריסת מודלים AI](ai-model-deployment.md)** עבור שיטות עבודה מומלצות לפריסה
+2. **השלמת [דפוסי AI בייצור](production-ai-practices.md)** עבור פתרונות מוכנים לארגונים
+3. **הצטרפות ל-[Discord של Azure AI Foundry](https://aka.ms/foundry/discord)** לקבלת תמיכה קהילתית
+4. **הגשת בעיות** ל-[מאגר GitHub של AZD](https://github.com/Azure/azure-dev) עבור בעיות ספציפיות ל-AZD
 
 ## משאבים
 
@@ -858,8 +865,13 @@ def monitor_performance(func):
 
 ---
 
-**קודם:** [שיטות AI בייצור](../ai-foundry/production-ai-practices.md) | **הבא:** [סדנה](../../workshop/README.md)
-- [פתרון בעיות Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**ניווט בין פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 7 - פתרון בעיות וניפוי שגיאות
+- **⬅️ קודם**: [מדריך ניפוי שגיאות](debugging.md)
+- **➡️ פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../ai-foundry/production-ai-practices.md)
+- **🤖 קשור**: [פרק 2: פיתוח מבוסס AI](../ai-foundry/azure-ai-foundry-integration.md)
+- [פתרון בעיות CLI של Azure Developer](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

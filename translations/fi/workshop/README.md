@@ -1,17 +1,21 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T22:00:16+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T06:39:00+00:00",
   "source_file": "workshop/README.md",
   "language_code": "fi"
 }
 -->
 # AZD AI-kehittäjien työpaja
 
-**Edellinen:** [AI Vianetsintäopas](../docs/troubleshooting/ai-troubleshooting.md) | **Seuraava:** [Työpajan lab-moduulit](../../../workshop)
+**Työpajan navigointi**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../README.md)
+- **📖 Liittyvät luvut**: Kattaa [Luku 1](../README.md#-chapter-1-foundation--quick-start), [Luku 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) ja [Luku 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Käytännön harjoitus**: [AI-työpajan labra](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Seuraavat askeleet**: [Työpajan labramoduulit](../../../workshop)
 
-Tervetuloa käytännönläheiseen työpajaan, jossa opit käyttämään Azure Developer CLI:tä (AZD) keskittyen AI-sovellusten käyttöönottoon. Tämä työpaja vie sinut AZD:n perusteista tuotantovalmiiden AI-ratkaisujen käyttöönottoon.
+Tervetuloa käytännön työpajaan, jossa opit käyttämään Azure Developer CLI:tä (AZD) keskittyen AI-sovellusten käyttöönottoon. Työpaja on suunniteltu viemään sinut AZD:n perusteista tuotantovalmiiden AI-ratkaisujen käyttöönottoon.
 
 ## Työpajan yleiskatsaus
 
@@ -24,7 +28,7 @@ Tervetuloa käytännönläheiseen työpajaan, jossa opit käyttämään Azure De
 - **AZD:n perusteet**: Infrastruktuuri koodina AZD:n avulla
 - 🤖 **AI-palveluiden integrointi**: Azure OpenAI:n, AI-haun ja muiden AI-palveluiden käyttöönotto
 - **Konttien käyttöönotto**: Azure Container Apps AI-sovelluksille
-- **Tietoturvan parhaat käytännöt**: Hallitun identiteetin ja turvallisten asetusten toteuttaminen
+- **Tietoturvan parhaat käytännöt**: Hallinnoidun identiteetin ja turvallisten konfiguraatioiden toteuttaminen
 - **Seuranta ja näkyvyys**: Application Insightsin käyttöönotto AI-työkuormille
 - **Tuotantokäytännöt**: Yritystason käyttöönoton strategiat
 
@@ -34,30 +38,30 @@ Tervetuloa käytännönläheiseen työpajaan, jossa opit käyttämään Azure De
 - AZD:n asennus ja konfigurointi
 - AZD-projektirakenteen ymmärtäminen
 - Ensimmäinen AZD-käyttöönotto
-- **Lab**: Yksinkertaisen verkkosovelluksen käyttöönotto
+- **Labra**: Yksinkertaisen verkkosovelluksen käyttöönotto
 
 ### Moduuli 2: Azure OpenAI -integraatio (45 minuuttia)
 - Azure OpenAI -resurssien asettaminen
 - Mallien käyttöönoton strategiat
-- API-käytön ja autentikoinnin konfigurointi
-- **Lab**: Chat-sovelluksen käyttöönotto GPT-4:llä
+- API-pääsyn ja autentikoinnin konfigurointi
+- **Labra**: Chat-sovelluksen käyttöönotto GPT-4:llä
 
 ### Moduuli 3: RAG-sovellukset (45 minuuttia)
-- Azure AI Search -integraatio
+- Azure AI-haun integrointi
 - Dokumenttien käsittely Azure Document Intelligencen avulla
-- Vektoripohjaiset upotukset ja semanttinen haku
-- **Lab**: Dokumentti Q&A -järjestelmän rakentaminen
+- Vektorijoukot ja semanttinen haku
+- **Labra**: Dokumentti Q&A -järjestelmän rakentaminen
 
 ### Moduuli 4: Tuotantokäyttöönotto (30 minuuttia)
 - Container Apps -konfigurointi
 - Skaalaus ja suorituskyvyn optimointi
 - Seuranta ja lokitus
-- **Lab**: Tuotantokäyttöönotto näkyvyyden kanssa
+- **Labra**: Tuotantokäyttöönotto näkyvyyden kanssa
 
 ### Moduuli 5: Edistyneet käytännöt (15 minuuttia)
 - Moniympäristön käyttöönotot
 - CI/CD-integraatio
-- Kustannusten optimointistrategiat
+- Kustannusoptimointistrategiat
 - **Yhteenveto**: Tuotantovalmiuden tarkistuslista
 
 ## Esitiedot
@@ -84,17 +88,17 @@ sudo sh get-docker.sh
 sudo apt-get install python3.10 python3.10-venv python3-pip
 ```
 
-### Azure-tilin asetukset
+### Azure-tilin asennus
 
-1. **Azure-tilaus**: [Rekisteröidy ilmaiseksi](https://azure.microsoft.com/free/)  
-2. **Azure OpenAI -pääsy**: [Pyydä pääsyä](https://aka.ms/oai/access)  
-3. **Vaaditut käyttöoikeudet**:  
-   - Contributor-rooli tilauksessa tai resurssiryhmässä  
-   - User Access Administrator (RBAC-määrityksiä varten)  
+1. **Azure-tilaus**: [Rekisteröidy ilmaiseksi](https://azure.microsoft.com/free/)
+2. **Azure OpenAI -pääsy**: [Pyydä pääsyä](https://aka.ms/oai/access)
+3. **Vaaditut käyttöoikeudet**:
+   - Contributor-rooli tilauksessa tai resurssiryhmässä
+   - User Access Administrator (RBAC-määrityksiä varten)
 
 ### Esitietojen tarkistus
 
-Suorita tämä skripti varmistaaksesi asetuksesi:
+Suorita tämä skripti tarkistaaksesi asetukset:
 
 ```bash
 #!/bin/bash
@@ -140,26 +144,26 @@ echo "Setup verification complete!"
 
 ## Työpajan materiaalit
 
-### Lab-harjoitukset
+### Labraharjoitukset
 
-Jokainen moduuli sisältää käytännön lab-harjoituksia aloituskoodilla ja vaiheittaisilla ohjeilla:
+Jokainen moduuli sisältää käytännön labrat aloituskoodilla ja vaiheittaisilla ohjeilla:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Ensimmäinen AZD-käyttöönotto  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat-sovellus Azure OpenAI:lla  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-sovellus AI-haun kanssa  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Tuotantokäyttöönoton käytännöt  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Edistyneet käyttöönoton skenaariot  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Ensimmäinen AZD-käyttöönotto
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat-sovellus Azure OpenAI:lla
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-sovellus AI-haun kanssa
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Tuotantokäyttöönottokäytännöt
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Edistyneet käyttöönoton skenaariot
 
 ### Viitemateriaalit
 
-- **[AI Foundry -integraatio-opas](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Kattavat integraatiomallit  
-- **[AI-mallien käyttöönotto-opas](../docs/ai-foundry/ai-model-deployment.md)** - Mallien käyttöönoton parhaat käytännöt  
-- **[Tuotantokäytännöt AI:lle](../docs/ai-foundry/production-ai-practices.md)** - Yritystason käyttöönoton mallit  
-- **[AI Vianetsintäopas](../docs/troubleshooting/ai-troubleshooting.md)** - Yleisimmät ongelmat ja ratkaisut  
+- **[AI Foundry -integraatio-opas](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Kattavat integraatiomallit
+- **[AI-mallien käyttöönotto-opas](../docs/ai-foundry/ai-model-deployment.md)** - Mallien käyttöönoton parhaat käytännöt
+- **[Tuotantokäytännöt AI:lle](../docs/ai-foundry/production-ai-practices.md)** - Yritystason käyttöönoton mallit
+- **[AI-vianetsintäopas](../docs/troubleshooting/ai-troubleshooting.md)** - Yleiset ongelmat ja ratkaisut
 
-### Esimerkkipohjat
+### Esimerkkimallit
 
-Pikakäynnistyspohjat yleisiin AI-skenaarioihin:
+Pikakäynnistysmallit yleisiin AI-skenaarioihin:
 
 ```
 workshop/templates/
@@ -179,19 +183,19 @@ Nopein tapa aloittaa työpaja:
 
 ### Vaihtoehto 2: Paikallinen kehitys
 
-1. **Kloonaa työpajan repository:**  
+1. **Kloonaa työpajan repositorio:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Kirjaudu Azureen:**  
+2. **Kirjaudu Azureen:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **Aloita Lab 1:stä:**  
+3. **Aloita Labra 1:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
@@ -201,9 +205,9 @@ cat README.md  # Follow the instructions
 
 Jos osallistut ohjaajan vetämään istuntoon:
 
-- 🎥 **Työpajan tallenne**: [Saatavilla pyynnöstä](https://aka.ms/azd-ai-workshop)  
-- 💬 **Discord-yhteisö**: [Liity saadaksesi tukea](https://aka.ms/foundry/discord)  
-- **Työpajan palaute**: [Jaa kokemuksesi](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Työpajan tallenne**: [Saatavilla pyynnöstä](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord-yhteisö**: [Liity saadaksesi tukea](https://aka.ms/foundry/discord)
+- **Työpajan palaute**: [Jaa kokemuksesi](https://aka.ms/azd-workshop-feedback)
 
 ## Työpajan aikataulu
 
@@ -231,50 +235,50 @@ Jos osallistut ohjaajan vetämään istuntoon:
 ⏰ 02:45 - 03:00  Q&A and Resources
 ```
 
-## Onnistumisen kriteerit
+## Menestyskriteerit
 
 Työpajan lopussa osaat:
 
-✅ **Ottaa käyttöön AI-sovelluksia** AZD-pohjien avulla  
+✅ **Ottaa käyttöön AI-sovelluksia** AZD-mallien avulla  
 ✅ **Konfiguroida Azure OpenAI** -palvelut turvallisesti  
-✅ **Rakentaa RAG-sovelluksia** Azure AI Search -integraatiolla  
+✅ **Rakentaa RAG-sovelluksia** Azure AI-haun integroinnilla  
 ✅ **Toteuttaa tuotantokäytännöt** yritystason AI-työkuormille  
-✅ **Seurata ja vianetsintää** AI-sovellusten käyttöönottoa  
-✅ **Soveltaa kustannusten optimointistrategioita** AI-työkuormille  
+✅ **Seurata ja ratkaista ongelmia** AI-sovellusten käyttöönotossa  
+✅ **Soveltaa kustannusoptimointistrategioita** AI-työkuormille  
 
 ## Yhteisö ja tuki
 
 ### Työpajan aikana
 
-- 🙋 **Kysymykset**: Käytä työpajan chatia tai nosta käsi  
-- 🐛 **Ongelmat**: Katso [vianetsintäopas](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Vinkit**: Jaa löytöjä muiden osallistujien kanssa  
+- 🙋 **Kysymykset**: Käytä työpajan chatia tai nosta käsi
+- 🐛 **Ongelmat**: Tarkista [vianetsintäopas](../docs/troubleshooting/ai-troubleshooting.md)
+- **Vinkit**: Jaa löytöjä muiden osallistujien kanssa
 
 ### Työpajan jälkeen
 
-- 💬 **Discord**: [Azure AI Foundry -yhteisö](https://aka.ms/foundry/discord)  
-- **GitHub-ongelmat**: [Ilmoita pohjaongelmista](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Palaute**: [Työpajan arviointilomake](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Azure AI Foundry -yhteisö](https://aka.ms/foundry/discord)
+- **GitHub-ongelmat**: [Ilmoita malliongelmista](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Palaute**: [Työpajan arviointilomake](https://aka.ms/azd-workshop-feedback)
 
 ## Seuraavat askeleet
 
 ### Jatka oppimista
 
-1. **Edistyneet skenaariot**: Tutki [monialueen käyttöönottoja](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **CI/CD-integraatio**: Ota käyttöön [GitHub Actions -työnkulut](../docs/deployment/github-actions.md)  
-3. **Mukautetut pohjat**: Luo omia [AZD-pohjia](../docs/getting-started/custom-templates.md)  
+1. **Edistyneet skenaariot**: Tutustu [monialueen käyttöönottoihin](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **CI/CD-integraatio**: Ota käyttöön [GitHub Actions -työnkulut](../docs/deployment/github-actions.md)
+3. **Mukautetut mallit**: Luo omia [AZD-malleja](../docs/getting-started/custom-templates.md)
 
 ### Sovella projekteissasi
 
-1. **Arviointi**: Käytä [valmiuslistaa](./production-readiness-checklist.md)  
-2. **Pohjat**: Aloita [AI-spesifisillä pohjilla](../../../workshop/templates)  
-3. **Tuki**: Liity [Azure AI Foundry Discordiin](https://aka.ms/foundry/discord)  
+1. **Arviointi**: Käytä [valmiuslistaa](./production-readiness-checklist.md)
+2. **Mallit**: Aloita [AI-spesifisillä malleilla](../../../workshop/templates)
+3. **Tuki**: Liity [Azure AI Foundry Discordiin](https://aka.ms/foundry/discord)
 
-### Jaa onnistumisesi
+### Jaa menestyksesi
 
-- ⭐ **Tähdellä repository** jos työpaja auttoi sinua  
-- 🐦 **Jaa sosiaalisessa mediassa** tunnisteilla #AzureDeveloperCLI #AzureAI  
-- 📝 **Kirjoita blogikirjoitus** AI-käyttöönoton matkasta  
+- ⭐ **Tähdellä repositorio** jos työpaja auttoi sinua
+- 🐦 **Jaa sosiaalisessa mediassa** tunnisteilla #AzureDeveloperCLI #AzureAI
+- 📝 **Kirjoita blogikirjoitus** AI-käyttöönoton matkasta
 
 ---
 
@@ -285,7 +289,7 @@ Palautteesi auttaa meitä parantamaan työpajakokemusta:
 | Osa-alue | Arvosana (1-5) | Kommentit |
 |----------|----------------|-----------|
 | Sisällön laatu | ⭐⭐⭐⭐⭐ | |
-| Käytännön labit | ⭐⭐⭐⭐⭐ | |
+| Käytännön labrat | ⭐⭐⭐⭐⭐ | |
 | Dokumentaatio | ⭐⭐⭐⭐⭐ | |
 | Vaikeustaso | ⭐⭐⭐⭐⭐ | |
 | Kokonaiskokemus | ⭐⭐⭐⭐⭐ | |
@@ -294,11 +298,11 @@ Palautteesi auttaa meitä parantamaan työpajakokemusta:
 
 ---
 
-**Edellinen:** [AI Vianetsintäopas](../docs/troubleshooting/ai-troubleshooting.md) | **Seuraava:** Aloita [Lab 1: AZD:n perusteet](../../../workshop/lab-1-azd-basics)
+**Edellinen:** [AI-vianetsintäopas](../docs/troubleshooting/ai-troubleshooting.md) | **Seuraava:** Aloita [Labra 1: AZD:n perusteet](../../../workshop/lab-1-azd-basics)
 
 **Valmis aloittamaan AI-sovellusten rakentamisen AZD:llä?**
 
-[Aloita Lab 1: AZD:n perusteet →](./lab-1-azd-basics/README.md)
+[Aloita Labra 1: AZD:n perusteet →](./lab-1-azd-basics/README.md)
 
 ---
 

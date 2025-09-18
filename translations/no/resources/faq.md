@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T22:37:40+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-18T06:24:21+00:00",
   "source_file": "resources/faq.md",
   "language_code": "no"
 }
 -->
 # Ofte stilte spørsmål (FAQ)
+
+**Få hjelp etter kapittel**
+- **📚 Kursoversikt**: [AZD For Beginners](../README.md)
+- **🚆 Installasjonsproblemer**: [Kapittel 1: Installasjon og oppsett](../docs/getting-started/installation.md)
+- **🤖 AI-spørsmål**: [Kapittel 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Feilsøking**: [Kapittel 7: Feilsøking og debugging](../docs/troubleshooting/common-issues.md)
 
 ## Introduksjon
 
@@ -15,17 +21,17 @@ Denne omfattende FAQ-en gir svar på de vanligste spørsmålene om Azure Develop
 
 ## Læringsmål
 
-Ved å gjennomgå denne FAQ-en vil du:
-- Finne raske svar på vanlige spørsmål og problemer knyttet til Azure Developer CLI
-- Forstå nøkkelkonsepter og terminologi gjennom en praktisk Q&A-format
-- Få tilgang til feilsøkingsløsninger for hyppige problemer og feilmeldinger
+Ved å gå gjennom denne FAQ-en vil du:
+- Finne raske svar på vanlige spørsmål og problemer med Azure Developer CLI
+- Forstå nøkkelkonsepter og terminologi gjennom praktisk Q&A-format
+- Få tilgang til feilsøkingsløsninger for hyppige problemer og feilsituasjoner
 - Lære beste praksis gjennom ofte stilte spørsmål om optimalisering
-- Oppdage avanserte funksjoner og muligheter gjennom ekspertspørsmål
+- Oppdage avanserte funksjoner og kapabiliteter gjennom ekspertspørsmål
 - Effektivt referere til veiledning om kostnader, sikkerhet og deployeringsstrategier
 
 ## Læringsutbytte
 
-Med regelmessig referanse til denne FAQ-en vil du kunne:
+Ved regelmessig bruk av denne FAQ-en vil du kunne:
 - Løse vanlige problemer med Azure Developer CLI selvstendig ved hjelp av de oppgitte løsningene
 - Ta informerte beslutninger om deployeringsstrategier og konfigurasjoner
 - Forstå forholdet mellom azd og andre Azure-verktøy og -tjenester
@@ -54,10 +60,10 @@ Med regelmessig referanse til denne FAQ-en vil du kunne:
 
 ### Spørsmål: Hvordan skiller azd seg fra Azure CLI?
 **Svar**: 
-- **Azure CLI**: Et generelt verktøy for administrasjon av Azure-ressurser
-- **azd**: Et utviklerfokusert verktøy for applikasjonsdeployering
-- azd bruker Azure CLI internt, men gir høyere nivå abstraksjoner for vanlige utviklingsscenarier
-- azd inkluderer maler, miljøadministrasjon og automatisering av deployering
+- **Azure CLI**: Generelt verktøy for administrasjon av Azure-ressurser
+- **azd**: Utviklerfokusert verktøy for applikasjonsdeployeringsarbeidsflyter
+- azd bruker Azure CLI internt, men gir høyere nivå-abstraksjoner for vanlige utviklingsscenarier
+- azd inkluderer maler, miljøadministrasjon og deployeringsautomatisering
 
 ### Spørsmål: Må jeg ha Azure CLI installert for å bruke azd?
 **Svar**: Ja, azd krever Azure CLI for autentisering og enkelte operasjoner. Installer Azure CLI først, deretter azd.
@@ -77,13 +83,13 @@ Med regelmessig referanse til denne FAQ-en vil du kunne:
 **Svar**: Ja! Du kan enten:
 1. Bruke `azd init` for å legge til azd-konfigurasjon i eksisterende prosjekter
 2. Tilpasse eksisterende prosjekter til å matche azd-malstrukturen
-3. Lage egne maler basert på din eksisterende arkitektur
+3. Lage egendefinerte maler basert på din eksisterende arkitektur
 
 ---
 
 ## Autentisering og tilgang
 
-### Spørsmål: Hvordan autentiserer jeg med Azure ved hjelp av azd?
+### Spørsmål: Hvordan autentiserer jeg med Azure ved bruk av azd?
 **Svar**: Bruk `azd auth login`, som åpner et nettleservindu for Azure-autentisering. For CI/CD-scenarier, bruk tjenesteprinsipper eller administrerte identiteter.
 
 ### Spørsmål: Kan jeg bruke azd med flere Azure-abonnementer?
@@ -91,8 +97,8 @@ Med regelmessig referanse til denne FAQ-en vil du kunne:
 
 ### Spørsmål: Hvilke tillatelser trenger jeg for å deployere med azd?
 **Svar**: Vanligvis trenger du:
-- **Contributor**-rollen på ressursgruppen eller abonnementet
-- **User Access Administrator** hvis du deployerer ressurser som krever rolleoppgaver
+- **Bidragsyter**-rolle på ressursgruppen eller abonnementet
+- **Brukertilgangsadministrator** hvis du deployerer ressurser som krever rolleoppgaver
 - Spesifikke tillatelser varierer avhengig av mal og ressurser som deployeres
 
 ### Spørsmål: Kan jeg bruke azd i CI/CD-pipelines?
@@ -117,15 +123,15 @@ Med regelmessig referanse til denne FAQ-en vil du kunne:
 - Fellesskapsmaler: Søk på GitHub etter "azd-template"
 - Bruk `azd template list` for å bla gjennom tilgjengelige maler
 
-### Spørsmål: Hvordan lager jeg en egen mal?
+### Spørsmål: Hvordan lager jeg en egendefinert mal?
 **Svar**: 
 1. Start med en eksisterende malstruktur
-2. Endre `azure.yaml`, infrastrukturfiler og applikasjonskode
+2. Modifiser `azure.yaml`, infrastrukturfiler og applikasjonskode
 3. Test grundig med `azd up`
 4. Publiser til GitHub med passende tagger
 
 ### Spørsmål: Kan jeg bruke azd uten en mal?
-**Svar**: Ja, bruk `azd init` i et eksisterende prosjekt for å lage nødvendige konfigurasjonsfiler. Du må manuelt konfigurere `azure.yaml` og infrastrukturfiler.
+**Svar**: Ja, bruk `azd init` i et eksisterende prosjekt for å lage de nødvendige konfigurasjonsfilene. Du må manuelt konfigurere `azure.yaml` og infrastrukturfiler.
 
 ### Spørsmål: Hva er forskjellen mellom offisielle og fellesskapsmaler?
 **Svar**: 
@@ -136,7 +142,7 @@ Med regelmessig referanse til denne FAQ-en vil du kunne:
 **Svar**: Maler oppdateres ikke automatisk. Du kan:
 1. Manuelt sammenligne og slå sammen endringer fra kilde-malen
 2. Starte på nytt med `azd init` ved bruk av den oppdaterte malen
-3. Plukke spesifikke forbedringer fra oppdaterte maler
+3. Plukke ut spesifikke forbedringer fra oppdaterte maler
 
 ---
 
@@ -152,7 +158,7 @@ Med regelmessig referanse til denne FAQ-en vil du kunne:
 ### Spørsmål: Kan jeg deployere til flere regioner?
 **Svar**: Ja, konfigurer flere regioner i Bicep-malene dine og sett lokasjonsparameteren riktig for hvert miljø.
 
-### Spørsmål: Hvordan håndterer jeg database-skjemaendringer?
+### Spørsmål: Hvordan håndterer jeg databaseskjema-migreringer?
 **Svar**: Bruk deployeringshooks i `azure.yaml`:
 ```yaml
 hooks:
@@ -168,19 +174,19 @@ hooks:
 
 ### Spørsmål: Hvordan deployerer jeg til eksisterende Azure-ressurser?
 **Svar**: Dette er komplekst og ikke direkte støttet. Du kan:
-1. Importere eksisterende ressurser inn i Bicep-malene dine
-2. Bruke referanser til eksisterende ressurser i malene
-3. Endre malene for betinget opprettelse eller referanse til ressurser
+1. Importere eksisterende ressurser til Bicep-malene dine
+2. Bruke eksisterende ressursreferanser i malene
+3. Modifisere maler for betinget opprettelse eller referanse til ressurser
 
 ### Spørsmål: Kan jeg bruke Terraform i stedet for Bicep?
-**Svar**: For øyeblikket støtter azd primært Bicep/ARM-maler. Terraform-støtte er ikke offisielt tilgjengelig, men fellesskapsløsninger kan eksistere.
+**Svar**: For øyeblikket støtter azd primært Bicep/ARM-maler. Terraform-støtte er ikke offisielt tilgjengelig, selv om fellesskapsløsninger kan eksistere.
 
 ---
 
 ## Konfigurasjon og miljøer
 
 ### Spørsmål: Hvordan administrerer jeg forskjellige miljøer (dev, staging, prod)?
-**Svar**: Opprett separate miljøer med `azd env new <environment-name>` og konfigurer ulike innstillinger for hvert:
+**Svar**: Opprett separate miljøer med `azd env new <environment-name>` og konfigurer forskjellige innstillinger for hvert:
 ```bash
 azd env new development
 azd env new staging  
@@ -190,7 +196,7 @@ azd env new production
 ### Spørsmål: Hvor lagres miljøkonfigurasjoner?
 **Svar**: I `.azure`-mappen i prosjektkatalogen din. Hvert miljø har sin egen mappe med konfigurasjonsfiler.
 
-### Spørsmål: Hvordan setter jeg miljøspesifikke konfigurasjoner?
+### Spørsmål: Hvordan setter jeg miljøspesifikk konfigurasjon?
 **Svar**: Bruk `azd env set` for å konfigurere miljøvariabler:
 ```bash
 azd env set AZURE_LOCATION eastus
@@ -203,7 +209,7 @@ azd env set DATABASE_TIER Basic
 2. Bruk deployeringsskript for å sette opp miljøer
 3. Bruk Azure Key Vault for sensitiv konfigurasjon
 
-### Spørsmål: Hvordan overstyrer jeg standardinnstillinger i maler?
+### Spørsmål: Hvordan overstyrer jeg malstandarder?
 **Svar**: Sett miljøvariabler som samsvarer med malparametere:
 ```bash
 azd env set LOCATION "West US 2"
@@ -217,8 +223,8 @@ azd env set SKU_NAME "B1"
 ### Spørsmål: Hvorfor feiler `azd up`?
 **Svar**: Vanlige årsaker:
 1. **Autentiseringsproblemer**: Kjør `azd auth login`
-2. **Manglende tillatelser**: Sjekk Azure-rolleoppgaver
-3. **Navnekonflikter for ressurser**: Endre AZURE_ENV_NAME
+2. **Utilstrekkelige tillatelser**: Sjekk Azure-rolleoppgaver
+3. **Ressursnavnekonflikter**: Endre AZURE_ENV_NAME
 4. **Kvoter/kapasitetsproblemer**: Sjekk regional tilgjengelighet
 5. **Malfeil**: Valider Bicep-maler
 
@@ -236,12 +242,12 @@ azd env set SKU_NAME "B1"
 3. Miljøet er valgt: `azd env select <environment>`
 4. Variabler er satt i riktig miljø
 
-### Spørsmål: Hvordan rydder jeg opp etter mislykkede deployeringer?
+### Spørsmål: Hvordan rydder jeg opp i mislykkede deployeringer?
 **Svar**: 
 ```bash
 azd down --force --purge
 ```
-Dette fjerner alle ressurser og miljøkonfigurasjoner.
+Dette fjerner alle ressurser og miljøkonfigurasjon.
 
 ### Spørsmål: Hvorfor er applikasjonen min ikke tilgjengelig etter deployering?
 **Svar**: Sjekk:
@@ -255,9 +261,9 @@ Dette fjerner alle ressurser og miljøkonfigurasjoner.
 ## Kostnader og fakturering
 
 ### Spørsmål: Hvor mye vil azd-deployeringer koste?
-**Svar**: Kostnadene avhenger av:
-- Azure-tjenestene som deployeres
-- Tjenestenivåer/SKU-er som velges
+**Svar**: Kostnader avhenger av:
+- Azure-tjenester som deployeres
+- Tjenestenivåer/SKU-er som er valgt
 - Regionale prisforskjeller
 - Bruksmønstre
 
@@ -265,7 +271,7 @@ Bruk [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 
 ### Spørsmål: Hvordan kontrollerer jeg kostnader i azd-deployeringer?
 **Svar**: 
-1. Bruk lavere nivå SKU-er for utviklingsmiljøer
+1. Bruk lavere nivå-SKU-er for utviklingsmiljøer
 2. Sett opp Azure-budsjetter og varsler
 3. Bruk `azd down` for å fjerne ressurser når de ikke trengs
 4. Velg passende regioner (kostnader varierer etter lokasjon)
@@ -274,7 +280,7 @@ Bruk [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 ### Spørsmål: Finnes det gratisalternativer for azd-maler?
 **Svar**: Mange Azure-tjenester tilbyr gratisnivåer:
 - App Service: Gratisnivå tilgjengelig
-- Azure Functions: 1M gratis kjøringer per måned
+- Azure Functions: 1M gratis kjøringer/måned
 - Cosmos DB: Gratisnivå med 400 RU/s
 - Application Insights: Første 5GB/måned gratis
 
@@ -295,8 +301,8 @@ Konfigurer maler til å bruke gratisnivåer der det er tilgjengelig.
 **Svar**: 
 1. Hold applikasjonskode adskilt fra infrastruktur
 2. Bruk meningsfulle tjenestenavn i `azure.yaml`
-3. Implementer riktig feilhåndtering i byggeskript
-4. Bruk miljøspesifikke konfigurasjoner
+3. Implementer riktig feilbehandling i byggeskript
+4. Bruk miljøspesifikk konfigurasjon
 5. Inkluder omfattende dokumentasjon
 
 ### Spørsmål: Hvordan bør jeg organisere flere tjenester i azd?
@@ -336,7 +342,7 @@ Konfigurer maler til å bruke gratisnivåer der det er tilgjengelig.
 
 ## Avanserte emner
 
-### Spørsmål: Kan jeg utvide azd med egen funksjonalitet?
+### Spørsmål: Kan jeg utvide azd med egendefinert funksjonalitet?
 **Svar**: Ja, gjennom deployeringshooks i `azure.yaml`:
 ```yaml
 hooks:
@@ -359,14 +365,14 @@ hooks:
 ### Spørsmål: Hvordan bidrar jeg til azd eller lager fellesskapsmaler?
 **Svar**: 
 1. **azd-verktøy**: Bidra til [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Maler**: Lag maler i henhold til [malretningslinjene](https://github.com/Azure-Samples/awesome-azd)
-3. **Dokumentasjon**: Bidra til dokumentasjon på [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+2. **Maler**: Lag maler i henhold til [malretningslinjene](https://github.com/Azure-Samples/awesome-azd)  
+3. **Dokumentasjon**: Bidra til dokumentasjonen på [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
 
-### Spørsmål: Hva er veikartet for azd?
-**Svar**: Sjekk [offisielt veikart](https://github.com/Azure/azure-dev/projects) for planlagte funksjoner og forbedringer.
+### Spørsmål: Hva er veikartet for azd?  
+**Svar**: Sjekk [offisielt veikart](https://github.com/Azure/azure-dev/projects) for planlagte funksjoner og forbedringer.  
 
-### Spørsmål: Hvordan migrerer jeg fra andre deployeringsverktøy til azd?
-**Svar**:
+### Spørsmål: Hvordan migrerer jeg fra andre distribusjonsverktøy til azd?  
+**Svar**:  
 1. Analyser nåværende distribusjonsarkitektur  
 2. Lag tilsvarende Bicep-maler  
 3. Konfigurer `azure.yaml` for å samsvare med nåværende tjenester  
@@ -375,11 +381,11 @@ hooks:
 
 ---
 
-## Har du fortsatt spørsmål?
+## Har du fortsatt spørsmål?  
 
 ### **Søk først**  
 - Sjekk [offisiell dokumentasjon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Søk etter [GitHub-issues](https://github.com/Azure/azure-dev/issues) for lignende problemer  
+- Søk i [GitHub-issues](https://github.com/Azure/azure-dev/issues) etter lignende problemer  
 
 ### **Få hjelp**  
 - [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Fellesskapsstøtte  
@@ -408,4 +414,4 @@ hooks:
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

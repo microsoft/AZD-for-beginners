@@ -1,24 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:12:50+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T06:34:37+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "fi"
 }
 -->
 # Konfigurointiohje
 
-**Edellinen:** [AZD Basics](azd-basics.md) | **Seuraava:** [Ensimmäinen projekti](first-project.md)
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 3 - Konfigurointi ja autentikointi
+- **⬅️ Edellinen**: [Ensimmäinen projektisi](first-project.md)
+- **➡️ Seuraava**: [Julkaisuohje](../deployment/deployment-guide.md)
+- **🚀 Seuraava luku**: [Luku 4: Infrastructure as Code](../deployment/deployment-guide.md)
 
 ## Johdanto
 
-Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfigurointiin liittyviä osa-alueita, jotka tukevat optimaalista kehitys- ja käyttöönotto-työnkulkua. Opit konfigurointihierarkiasta, ympäristön hallinnasta, autentikointimenetelmistä ja edistyneistä konfigurointimalleista, jotka mahdollistavat tehokkaat ja turvalliset Azure-käyttöönotot.
+Tämä kattava opas käsittelee Azure Developer CLI:n konfigurointia optimaalisten kehitys- ja julkaisuvirtojen saavuttamiseksi. Opit konfigurointihierarkiasta, ympäristöjen hallinnasta, autentikointimenetelmistä ja edistyneistä konfigurointimalleista, jotka mahdollistavat tehokkaat ja turvalliset Azure-julkaisut.
 
 ## Oppimistavoitteet
 
 Tämän oppitunnin lopussa osaat:
-- Hallita azd:n konfigurointihierarkian ja ymmärtää, miten asetukset priorisoidaan
+- Hallita azd-konfigurointihierarkiaa ja ymmärtää, miten asetukset priorisoidaan
 - Konfiguroida globaalit ja projektikohtaiset asetukset tehokkaasti
 - Hallita useita ympäristöjä eri konfiguraatioilla
 - Toteuttaa turvallisia autentikointi- ja valtuutusmalleja
@@ -26,14 +31,14 @@ Tämän oppitunnin lopussa osaat:
 
 ## Oppimistulokset
 
-Tämän oppitunnin jälkeen pystyt:
-- Konfiguroimaan azd:n optimaalisiin kehitystyönkulkuihin
-- Määrittämään ja hallitsemaan useita käyttöönottoympäristöjä
+Oppitunnin suorittamisen jälkeen pystyt:
+- Konfiguroimaan azd:n optimaalisiin kehitysvirtoihin
+- Määrittämään ja hallitsemaan useita julkaisuympäristöjä
 - Toteuttamaan turvallisia konfigurointikäytäntöjä
 - Ratkaisemaan konfigurointiin liittyviä ongelmia
 - Mukauttamaan azd:n toimintaa organisaation erityistarpeisiin
 
-Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfigurointiin liittyviä osa-alueita, jotka tukevat optimaalista kehitys- ja käyttöönotto-työnkulkua.
+Tämä kattava opas käsittelee Azure Developer CLI:n konfigurointia optimaalisten kehitys- ja julkaisuvirtojen saavuttamiseksi.
 
 ## Konfigurointihierarkia
 
@@ -46,7 +51,7 @@ azd käyttää hierarkkista konfigurointijärjestelmää:
 
 ## Globaali konfiguraatio
 
-### Globaalien oletusten asettaminen
+### Globaalien oletusarvojen asettaminen
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -159,7 +164,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Palvelukonfiguraatioasetukset
+### Palvelun konfigurointivaihtoehdot
 
 #### Isäntätyypit
 ```yaml
@@ -256,7 +261,7 @@ azd env unset DEBUG
 ```
 
 ### Ympäristömallit
-Luo `.azure/env.template` johdonmukaista ympäristön asennusta varten:
+Luo `.azure/env.template` johdonmukaista ympäristön asetusta varten:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -341,7 +346,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Käyttöönoton konfiguraatio
+## 🚀 Julkaisukonfiguraatio
 
 ### Build-konfiguraatio
 ```yaml
@@ -426,7 +431,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Välivaiheen ympäristö
+### Testausympäristö
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -520,7 +525,7 @@ database:
 ```
 
 ### 4. Konfiguraation dokumentointi
-Dokumentoi konfiguraatio tiedostossa `CONFIG.md`:
+Dokumentoi konfiguraatiosi tiedostoon `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -538,18 +543,22 @@ Dokumentoi konfiguraatio tiedostossa `CONFIG.md`:
 ## Seuraavat askeleet
 
 - [Ensimmäinen projektisi](first-project.md) - Käytä konfiguraatiota käytännössä
-- [Käyttöönotto-opas](../deployment/deployment-guide.md) - Hyödynnä konfiguraatiota käyttöönotossa
+- [Julkaisuohje](../deployment/deployment-guide.md) - Käytä konfiguraatiota julkaisuun
 - [Resurssien provisiointi](../deployment/provisioning.md) - Tuotantovalmiit konfiguraatiot
 
 ## Viitteet
 
-- [azd-konfiguraatioviite](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azd-konfiguraation viite](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml-skeema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Ympäristömuuttujat](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Edellinen:** [AZD Basics](azd-basics.md) | **Seuraava:** [Ensimmäinen projekti](first-project.md)
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 3 - Konfigurointi ja autentikointi
+- **⬅️ Edellinen**: [Ensimmäinen projektisi](first-project.md)
+- **➡️ Seuraava luku**: [Luku 4: Infrastructure as Code](../deployment/deployment-guide.md)
 - **Seuraava oppitunti**: [Ensimmäinen projektisi](first-project.md)
 
 ---

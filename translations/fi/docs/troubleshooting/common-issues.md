@@ -1,39 +1,46 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:47:08+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T06:36:14+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "fi"
 }
 -->
 # Yleiset ongelmat ja ratkaisut
 
+**Luvun navigointi:**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 7 - Vianetsintä ja virheenkorjaus
+- **⬅️ Edellinen luku**: [Luku 6: Tarkistukset ennen käyttöönottoa](../pre-deployment/preflight-checks.md)
+- **➡️ Seuraava**: [Virheenkorjausopas](debugging.md)
+- **🚀 Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../ai-foundry/production-ai-practices.md)
+
 ## Johdanto
 
-Tämä kattava vianetsintäopas käsittelee yleisimpiä ongelmia Azure Developer CLI:n käytössä. Opit diagnosoimaan, ratkaisemaan ja korjaamaan yleisiä ongelmia, kuten autentikointia, käyttöönottoa, infrastruktuurin provisiointia ja sovelluksen konfigurointia. Jokainen ongelma sisältää yksityiskohtaiset oireet, juurisyyt ja vaiheittaiset ratkaisumenetelmät.
+Tämä kattava vianetsintäopas käsittelee yleisimpiä ongelmia Azure Developer CLI:n käytössä. Opit diagnosoimaan, korjaamaan ja ratkaisemaan yleisiä ongelmia, kuten autentikointia, käyttöönottoa, infrastruktuurin provisiointia ja sovelluksen konfigurointia. Jokainen ongelma sisältää yksityiskohtaiset oireet, juurisyyt ja vaiheittaiset ratkaisumenetelmät.
 
 ## Oppimistavoitteet
 
-Tämän oppaan avulla opit:
-- Hallitsemaan Azure Developer CLI:n vianetsintätekniikat
-- Ymmärtämään yleiset autentikointi- ja käyttöoikeusongelmat sekä niiden ratkaisut
-- Korjaamaan käyttöönoton epäonnistumiset, infrastruktuurin provisiointivirheet ja konfigurointiongelmat
-- Toteuttamaan ennakoivaa seurantaa ja virheenkorjausstrategioita
-- Soveltamaan systemaattisia vianetsintämenetelmiä monimutkaisiin ongelmiin
-- Konfiguroimaan asianmukaisen lokituksen ja seurannan tulevien ongelmien ehkäisemiseksi
+Tämän oppaan suorittamalla opit:
+- Hallitsemaan diagnostisia tekniikoita Azure Developer CLI -ongelmien ratkaisemiseksi
+- Ymmärtämään yleisiä autentikointi- ja käyttöoikeusongelmia sekä niiden ratkaisuja
+- Korjaamaan käyttöönoton epäonnistumisia, infrastruktuurin provisiointivirheitä ja konfigurointiongelmia
+- Toteuttamaan ennakoivia valvonta- ja virheenkorjausstrategioita
+- Soveltamaan järjestelmällisiä vianetsintämenetelmiä monimutkaisiin ongelmiin
+- Konfiguroimaan asianmukaisen lokituksen ja valvonnan tulevien ongelmien ehkäisemiseksi
 
 ## Oppimistulokset
 
-Oppaan suorittamisen jälkeen pystyt:
-- Diagnosoimaan Azure Developer CLI -ongelmia sisäänrakennettujen diagnostiikkatyökalujen avulla
-- Ratkaisemaan autentikointi-, tilaus- ja käyttöoikeusongelmat itsenäisesti
-- Vianetsimään käyttöönoton epäonnistumisia ja infrastruktuurin provisiointivirheitä tehokkaasti
-- Korjaamaan sovelluksen konfigurointiongelmia ja ympäristökohtaisia haasteita
-- Toteuttamaan seurantaa ja hälytyksiä mahdollisten ongelmien ennakoivaan tunnistamiseen
-- Soveltamaan parhaita käytäntöjä lokitukseen, virheenkorjaukseen ja ongelmanratkaisutyönkulkuihin
+Oppaan suorittamisen jälkeen osaat:
+- Diagnosoida Azure Developer CLI -ongelmia sisäänrakennettujen diagnostisten työkalujen avulla
+- Ratkaista autentikointi-, tilaus- ja käyttöoikeusongelmia itsenäisesti
+- Vianetsintä käyttöönoton epäonnistumisissa ja infrastruktuurin provisiointivirheissä tehokkaasti
+- Korjata sovelluksen konfigurointiongelmia ja ympäristökohtaisia haasteita
+- Toteuttaa valvonta- ja hälytysjärjestelmiä potentiaalisten ongelmien ennakoimiseksi
+- Soveltaa parhaita käytäntöjä lokituksessa, virheenkorjauksessa ja ongelmanratkaisussa
 
-## Nopea diagnostiikka
+## Pikadiagnostiikka
 
 Ennen kuin siirryt yksittäisiin ongelmiin, suorita nämä komennot diagnostiikkatietojen keräämiseksi:
 
@@ -112,7 +119,7 @@ az account clear
 
 ## 🏗️ Infrastruktuurin provisiointivirheet
 
-### Ongelma: Resurssinimikonfliktit
+### Ongelma: Resurssinimien ristiriidat
 **Oireet:**
 - "The resource name already exists" -virheet
 - Käyttöönotto epäonnistuu resurssin luomisen aikana
@@ -329,12 +336,12 @@ app.use(cors({
 azd show
 ```
 
-## 🌍 Ympäristönhallinnan ongelmat
+## 🌍 Ympäristön hallinnan ongelmat
 
 ### Ongelma: Ympäristön vaihtamisongelmat
 **Oireet:**
 - Väärä ympäristö käytössä
-- Konfiguraatio ei vaihdu oikein
+- Konfigurointi ei vaihdu oikein
 
 **Ratkaisut:**
 ```bash
@@ -421,7 +428,7 @@ azd logs --service api --follow
 
 ## 🛠️ Vianetsintätyökalut ja -komennot
 
-### Debug-komennot
+### Virheenkorjauskomennot
 ```bash
 # Comprehensive debugging
 export AZD_DEBUG=true
@@ -466,7 +473,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ### Milloin eskaloida
 - Autentikointiongelmat jatkuvat kaikkien ratkaisujen kokeilun jälkeen
-- Infrastruktuuriongelmat Azure-palveluiden kanssa
+- Infrastruktuuriongelmat Azure-palveluissa
 - Laskutus- tai tilausongelmat
 - Turvallisuushuolenaiheet tai -tapaukset
 
@@ -486,8 +493,8 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 
 ### Kerättävät tiedot
 Ennen tuen ottamista yhteyttä, kerää:
-- `azd version` -komennon tuloste
-- `azd info` -komennon tuloste
+- `azd version` -tuloste
+- `azd info` -tuloste
 - Virheilmoitukset (koko teksti)
 - Vaiheet ongelman toistamiseksi
 - Ympäristön tiedot (`azd env show`)
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Ongelman ehkäisy
 
-### Ennen käyttöönottoa -tarkistuslista
+### Tarkistuslista ennen käyttöönottoa
 ```bash
 # 1. Validate authentication
 az account show
@@ -538,7 +545,7 @@ npm run test
 azd provision --preview
 ```
 
-### Seurannan asennus
+### Valvonnan asennus
 ```bash
 # Enable Application Insights
 # Add to main.bicep:
@@ -568,10 +575,10 @@ az security assessment list --resource-group myrg
 
 ## Liittyvät resurssit
 
-- [Debugging Guide](debugging.md) - Edistyneet virheenkorjaustekniikat
-- [Provisioning Resources](../deployment/provisioning.md) - Infrastruktuurin vianetsintä
-- [Capacity Planning](../pre-deployment/capacity-planning.md) - Resurssien suunnitteluohjeet
-- [SKU Selection](../pre-deployment/sku-selection.md) - Palvelutason suositukset
+- [Virheenkorjausopas](debugging.md) - Edistyneet virheenkorjaustekniikat
+- [Resurssien provisiointi](../deployment/provisioning.md) - Infrastruktuurin vianetsintä
+- [Kapasiteettisuunnittelu](../pre-deployment/capacity-planning.md) - Resurssisuunnittelun ohjeet
+- [SKU-valinta](../pre-deployment/sku-selection.md) - Palvelutason suositukset
 
 ---
 
@@ -580,8 +587,8 @@ az security assessment list --resource-group myrg
 ---
 
 **Navigointi**
-- **Edellinen osio**: [Provisioning Resources](../deployment/provisioning.md)
-- **Seuraava osio**: [Debugging Guide](debugging.md)
+- **Edellinen oppitunti**: [Resurssien provisiointi](../deployment/provisioning.md)
+- **Seuraava oppitunti**: [Virheenkorjausopas](debugging.md)
 
 ---
 

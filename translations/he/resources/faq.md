@@ -1,36 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T22:39:55+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-18T07:20:11+00:00",
   "source_file": "resources/faq.md",
   "language_code": "he"
 }
 -->
 # שאלות נפוצות (FAQ)
 
+**קבלו עזרה לפי פרק**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../README.md)
+- **🚆 בעיות התקנה**: [פרק 1: התקנה והגדרות](../docs/getting-started/installation.md)
+- **🤖 שאלות על AI**: [פרק 2: פיתוח מבוסס AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 פתרון בעיות**: [פרק 7: פתרון בעיות וניפוי שגיאות](../docs/troubleshooting/common-issues.md)
+
 ## מבוא
 
-שאלות נפוצות אלו מספקות תשובות לשאלות הנפוצות ביותר על Azure Developer CLI (azd) ועל פריסות ב-Azure. מצאו פתרונות מהירים לבעיות נפוצות, הבינו את שיטות העבודה המומלצות וקבלו הבהרות על מושגים ותהליכי עבודה של azd.
+שאלות נפוצות אלו מספקות תשובות לשאלות הנפוצות ביותר על Azure Developer CLI (azd) ועל פריסות ב-Azure. כאן תוכלו למצוא פתרונות מהירים לבעיות נפוצות, להבין את שיטות העבודה המומלצות, ולקבל הבהרות על מושגים ותהליכי עבודה של azd.
 
 ## מטרות למידה
 
 על ידי סקירת שאלות נפוצות אלו, תוכלו:
-- למצוא תשובות מהירות לשאלות ובעיות נפוצות על Azure Developer CLI
+- למצוא תשובות מהירות לשאלות ובעיות נפוצות ב-Azure Developer CLI
 - להבין מושגים ומונחים מרכזיים בפורמט של שאלות ותשובות מעשיות
-- לגשת לפתרונות תקלות לבעיות ותסריטי שגיאה נפוצים
+- לגשת לפתרונות לבעיות ושגיאות נפוצות
 - ללמוד שיטות עבודה מומלצות דרך שאלות נפוצות על אופטימיזציה
 - לגלות תכונות מתקדמות ויכולות דרך שאלות ברמת מומחים
 - להתייחס להנחיות עלויות, אבטחה ואסטרטגיות פריסה בצורה יעילה
 
 ## תוצאות למידה
 
-עם התייחסות קבועה לשאלות נפוצות אלו, תוכלו:
+עם התייחסות קבועה לשאלות הנפוצות, תוכלו:
 - לפתור בעיות נפוצות ב-Azure Developer CLI באופן עצמאי באמצעות הפתרונות המסופקים
-- לקבל החלטות מושכלות על אסטרטגיות פריסה וקונפיגורציות
-- להבין את הקשר בין azd לבין כלים ושירותים אחרים של Azure
-- ליישם שיטות עבודה מומלצות בהתבסס על ניסיון קהילתי והמלצות מומחים
-- לפתור בעיות אימות, פריסה וקונפיגורציה בצורה יעילה
+- לקבל החלטות מושכלות על אסטרטגיות פריסה והגדרות
+- להבין את הקשר בין azd לכלים ושירותים אחרים של Azure
+- ליישם שיטות עבודה מומלצות בהתבסס על ניסיון הקהילה והמלצות מומחים
+- לפתור בעיות אימות, פריסה והגדרות בצורה יעילה
 - לאופטימיזציה של עלויות וביצועים באמצעות תובנות והמלצות מהשאלות הנפוצות
 
 ## תוכן עניינים
@@ -39,8 +45,8 @@ CO_OP_TRANSLATOR_METADATA:
 - [אימות וגישה](../../../resources)
 - [תבניות ופרויקטים](../../../resources)
 - [פריסה ותשתיות](../../../resources)
-- [קונפיגורציה וסביבות](../../../resources)
-- [פתרון תקלות](../../../resources)
+- [הגדרות וסביבות](../../../resources)
+- [פתרון בעיות](../../../resources)
 - [עלויות וחיובים](../../../resources)
 - [שיטות עבודה מומלצות](../../../resources)
 - [נושאים מתקדמים](../../../resources)
@@ -57,13 +63,13 @@ CO_OP_TRANSLATOR_METADATA:
 - **Azure CLI**: כלי כללי לניהול משאבי Azure
 - **azd**: כלי ממוקד מפתחים לתהליכי עבודה של פריסת אפליקציות
 - azd משתמש ב-Azure CLI באופן פנימי אך מספק הפשטות ברמה גבוהה לתרחישי פיתוח נפוצים
-- azd כולל תבניות, ניהול סביבות ואוטומציה של פריסות
+- azd כולל תבניות, ניהול סביבות ואוטומציה של פריסה
 
 ### ש: האם אני צריך להתקין את Azure CLI כדי להשתמש ב-azd?
 **ת**: כן, azd דורש את Azure CLI לצורך אימות ולחלק מהפעולות. התקינו את Azure CLI תחילה, ואז התקינו את azd.
 
 ### ש: אילו שפות תכנות נתמכות על ידי azd?
-**ת**: azd הוא בלתי תלוי בשפה. הוא עובד עם:
+**ת**: azd אינו תלוי בשפה. הוא עובד עם:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
@@ -74,8 +80,8 @@ CO_OP_TRANSLATOR_METADATA:
 - אפליקציות מבוססות קונטיינרים
 
 ### ש: האם אני יכול להשתמש ב-azd עם פרויקטים קיימים?
-**ת**: כן! אתם יכולים:
-1. להשתמש ב-`azd init` כדי להוסיף קונפיגורציה של azd לפרויקטים קיימים
+**ת**: כן! תוכלו:
+1. להשתמש ב-`azd init` כדי להוסיף הגדרות azd לפרויקטים קיימים
 2. להתאים פרויקטים קיימים למבנה התבנית של azd
 3. ליצור תבניות מותאמות אישית בהתבסס על הארכיטקטורה הקיימת שלכם
 
@@ -91,12 +97,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### ש: אילו הרשאות אני צריך כדי לפרוס עם azd?
 **ת**: בדרך כלל תצטרכו:
-- תפקיד **Contributor** על קבוצת המשאבים או המנוי
-- **User Access Administrator** אם אתם פורסים משאבים שדורשים הקצאת תפקידים
-- הרשאות ספציפיות משתנות לפי תבנית והמשאבים הנפרסים
+- תפקיד **Contributor** בקבוצת המשאבים או במנוי
+- **User Access Administrator** אם אתם מפרסים משאבים שדורשים הקצאת תפקידים
+- הרשאות ספציפיות משתנות לפי תבנית והמשאבים המפורסים
 
 ### ש: האם אני יכול להשתמש ב-azd בצינורות CI/CD?
-**ת**: בהחלט! azd מיועד לשילוב CI/CD. השתמשו ב-service principals לאימות והגדירו משתני סביבה לקונפיגורציה.
+**ת**: בהחלט! azd מיועד לשילוב CI/CD. השתמשו ב-service principals לאימות והגדירו משתני סביבה להגדרות.
 
 ### ש: איך אני מטפל באימות ב-GitHub Actions?
 **ת**: השתמשו ב-Azure Login action עם אישורי service principal:
@@ -111,7 +117,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## תבניות ופרויקטים
 
-### ש: איפה אני יכול למצוא תבניות של azd?
+### ש: איפה אני יכול למצוא תבניות azd?
 **ת**: 
 - תבניות רשמיות: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - תבניות קהילתיות: חיפוש בגיטאב עבור "azd-template"
@@ -120,12 +126,12 @@ CO_OP_TRANSLATOR_METADATA:
 ### ש: איך אני יוצר תבנית מותאמת אישית?
 **ת**: 
 1. התחילו עם מבנה תבנית קיים
-2. שנו את `azure.yaml`, קבצי התשתית וקוד האפליקציה
+2. ערכו את `azure.yaml`, קבצי התשתית וקוד האפליקציה
 3. בדקו היטב עם `azd up`
 4. פרסמו בגיטאב עם תגיות מתאימות
 
 ### ש: האם אני יכול להשתמש ב-azd ללא תבנית?
-**ת**: כן, השתמשו ב-`azd init` בפרויקט קיים כדי ליצור את קבצי הקונפיגורציה הנדרשים. תצטרכו להגדיר ידנית את `azure.yaml` וקבצי התשתית.
+**ת**: כן, השתמשו ב-`azd init` בפרויקט קיים כדי ליצור את קבצי ההגדרות הנדרשים. תצטרכו להגדיר ידנית את `azure.yaml` וקבצי התשתית.
 
 ### ש: מה ההבדל בין תבניות רשמיות לתבניות קהילתיות?
 **ת**: 
@@ -133,7 +139,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **תבניות קהילתיות**: נוצרות על ידי מפתחים, עשויות להיות בעלות שימושים מיוחדים, איכות ותחזוקה משתנות
 
 ### ש: איך אני מעדכן תבנית בפרויקט שלי?
-**ת**: תבניות אינן מתעדכנות אוטומטית. אתם יכולים:
+**ת**: תבניות אינן מתעדכנות אוטומטית. תוכלו:
 1. להשוות ולמזג שינויים ידנית מהתבנית המקורית
 2. להתחיל מחדש עם `azd init` באמצעות התבנית המעודכנת
 3. לבחור שיפורים ספציפיים מהתבניות המעודכנות
@@ -149,11 +155,11 @@ CO_OP_TRANSLATOR_METADATA:
 - Storage, Key Vault, Application Insights
 - משאבי רשת, אבטחה וניטור
 
-### ש: האם אני יכול לפרוס למספר אזורים?
-**ת**: כן, הגדירו מספר אזורים בתבניות Bicep שלכם והגדירו את פרמטר המיקום בהתאם לכל סביבה.
+### ש: האם אני יכול לפרוס לאזורים מרובים?
+**ת**: כן, הגדירו אזורים מרובים בתבניות Bicep שלכם והגדירו את פרמטר המיקום בהתאם לכל סביבה.
 
 ### ש: איך אני מטפל במיגרציות סכמת מסד נתונים?
-**ת**: השתמשו ב-hooks בפריסה בתוך `azure.yaml`:
+**ת**: השתמשו ב-hooks בפריסה ב-`azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -166,8 +172,8 @@ hooks:
 ### ש: האם אני יכול לפרוס רק תשתית ללא אפליקציות?
 **ת**: כן, השתמשו ב-`azd provision` כדי לפרוס רק את רכיבי התשתית המוגדרים בתבניות שלכם.
 
-### ש: איך אני פורש למשאבי Azure קיימים?
-**ת**: זה מורכב ולא נתמך ישירות. אתם יכולים:
+### ש: איך אני מפריס משאבים קיימים ב-Azure?
+**ת**: זה מורכב ולא נתמך ישירות. תוכלו:
 1. לייבא משאבים קיימים לתוך תבניות Bicep שלכם
 2. להשתמש בהפניות למשאבים קיימים בתבניות
 3. לשנות תבניות כדי ליצור או להפנות משאבים באופן מותנה
@@ -177,7 +183,7 @@ hooks:
 
 ---
 
-## קונפיגורציה וסביבות
+## הגדרות וסביבות
 
 ### ש: איך אני מנהל סביבות שונות (dev, staging, prod)?
 **ת**: צרו סביבות נפרדות עם `azd env new <environment-name>` והגדירו הגדרות שונות לכל אחת:
@@ -188,9 +194,9 @@ azd env new production
 ```
 
 ### ש: איפה נשמרות הגדרות הסביבה?
-**ת**: בתיקיית `.azure` בתוך ספריית הפרויקט שלכם. לכל סביבה יש תיקייה משלה עם קבצי קונפיגורציה.
+**ת**: בתיקיית `.azure` בתוך ספריית הפרויקט שלכם. לכל סביבה יש תיקייה משלה עם קבצי הגדרות.
 
-### ש: איך אני מגדיר קונפיגורציה ספציפית לסביבה?
+### ש: איך אני מגדיר הגדרות ספציפיות לסביבה?
 **ת**: השתמשו ב-`azd env set` כדי להגדיר משתני סביבה:
 ```bash
 azd env set AZURE_LOCATION eastus
@@ -201,10 +207,10 @@ azd env set DATABASE_TIER Basic
 **ת**: תיקיית `.azure` מכילה מידע רגיש ואסור להכניס אותה לניהול גרסאות. במקום זאת:
 1. תעדו את משתני הסביבה הנדרשים
 2. השתמשו בסקריפטים פריסה כדי להגדיר סביבות
-3. השתמשו ב-Azure Key Vault עבור קונפיגורציה רגישה
+3. השתמשו ב-Azure Key Vault עבור הגדרות רגישות
 
-### ש: איך אני עוקף ברירות מחדל של תבנית?
-**ת**: הגדירו משתני סביבה שמתאימים לפרמטרים של התבנית:
+### ש: איך אני עוקף ברירות מחדל של תבניות?
+**ת**: הגדירו משתני סביבה התואמים לפרמטרים של התבנית:
 ```bash
 azd env set LOCATION "West US 2"
 azd env set SKU_NAME "B1"
@@ -212,7 +218,7 @@ azd env set SKU_NAME "B1"
 
 ---
 
-## פתרון תקלות
+## פתרון בעיות
 
 ### ש: למה `azd up` נכשל?
 **ת**: סיבות נפוצות:
@@ -220,12 +226,12 @@ azd env set SKU_NAME "B1"
 2. **הרשאות לא מספקות**: בדקו את הקצאות התפקידים שלכם ב-Azure
 3. **קונפליקטים בשמות משאבים**: שנו את AZURE_ENV_NAME
 4. **בעיות מכסה/קיבולת**: בדקו זמינות אזורית
-5. **שגיאות בתבנית**: אשרו את תבניות Bicep
+5. **שגיאות בתבנית**: אימתו את תבניות Bicep
 
-### ש: איך אני מאבחן כשלי פריסה?
+### ש: איך אני מנפה שגיאות בפריסות?
 **ת**: 
 1. השתמשו ב-`azd deploy --debug` לקבלת פלט מפורט
-2. בדקו את היסטוריית הפריסה בפורטל Azure
+2. בדקו את היסטוריית הפריסות בפורטל Azure
 3. עיינו ביומן הפעילות בפורטל Azure
 4. השתמשו ב-`azd show` כדי להציג את מצב הסביבה הנוכחי
 
@@ -256,7 +262,7 @@ azd down --force --purge
 
 ### ש: כמה יעלו פריסות azd?
 **ת**: העלויות תלויות ב:
-- שירותי Azure שנפרסים
+- שירותי Azure המפורסים
 - רמות שירות/SKUs שנבחרו
 - הבדלים במחירים אזוריים
 - דפוסי שימוש
@@ -295,8 +301,8 @@ azd down --force --purge
 **ת**: 
 1. שמרו על הפרדה בין קוד האפליקציה לתשתית
 2. השתמשו בשמות שירות משמעותיים ב-`azure.yaml`
-3. יישמו טיפול שגיאות נכון בסקריפטים של בנייה
-4. השתמשו בקונפיגורציה ספציפית לסביבה
+3. יישמו טיפול שגיאות נכון בסקריפטים לבנייה
+4. השתמשו בהגדרות ספציפיות לסביבה
 5. כללו תיעוד מקיף
 
 ### ש: איך אני מארגן מספר שירותים ב-azd?
@@ -317,10 +323,10 @@ azd down --force --purge
 .azure/
 ```
 
-### ש: איך אני מטפל בסודות וקונפיגורציה רגישה?
+### ש: איך אני מטפל בסודות והגדרות רגישות?
 **ת**: 
 1. השתמשו ב-Azure Key Vault עבור סודות
-2. הפנו סודות מ-Key Vault בקונפיגורציית האפליקציה
+2. הפנו סודות מ-Key Vault בהגדרות האפליקציה
 3. לעולם אל תכניסו סודות לניהול גרסאות
 4. השתמשו ב-managed identities לאימות בין שירותים
 
@@ -329,15 +335,15 @@ azd down --force --purge
 1. השתמשו בסביבות נפרדות לכל שלב (dev/staging/prod)
 2. יישמו בדיקות אוטומטיות לפני פריסה
 3. השתמשו ב-service principals לאימות
-4. אחסנו קונפיגורציה רגישה בסודות/משתנים של הצינור
-5. יישמו שערי אישור לפריסות ייצור
+4. אחסנו הגדרות רגישות בסודות/משתנים של הצינור
+5. יישמו שערי אישור לפריסות בייצור
 
 ---
 
 ## נושאים מתקדמים
 
 ### ש: האם אני יכול להרחיב את azd עם פונקציונליות מותאמת אישית?
-**ת**: כן, דרך hooks בפריסה בתוך `azure.yaml`:
+**ת**: כן, דרך hooks בפריסה ב-`azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -359,52 +365,77 @@ hooks:
 ### ש: איך אני תורם ל-azd או יוצר תבניות קהילתיות?
 **ת**: 
 1. **כלי azd**: תרמו ל-[Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **תבניות**: צרו תבניות בהתאם ל-[הנחיות התבנית](https://github.com/Azure-Samples/awesome-azd)
-3. **תיעוד**: תרמו לתיעוד ב-[MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+# שאלות נפוצות על Azure Developer CLI (azd)
+
+## שאלות נפוצות
+
+### ש: מה זה azd?
+**ת**: Azure Developer CLI (azd) הוא כלי שמפשט את תהליך הפיתוח והפריסה בענן Azure. הוא מספק פקודות מוכנות מראש לניהול תבניות, פריסות ושירותים.
+
+---
+
+### ש: איך מתחילים עם azd?
+**ת**: 
+1. התקן את azd לפי ההוראות ב-[תיעוד הרשמי](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/).
+2. בחר תבנית מוכנה או צור אחת משלך.
+3. השתמש בפקודות כמו `azd up` כדי להגדיר ולפרוס את הסביבה שלך.
+
+---
+
+### ש: איך אני תורם ל-azd?
+**ת**: יש כמה דרכים לתרום:
+
+1. **תבניות**: צור תבניות בהתאם ל-[הנחיות התבניות](https://github.com/Azure-Samples/awesome-azd).
+2. **תיעוד**: תרום לתיעוד ב-[MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs).
+
+---
 
 ### ש: מהי מפת הדרכים של azd?
-**ת**: בדקו את [מפת הדרכים הרשמית](https://github.com/Azure/azure-dev/projects) עבור תכונות ושיפורים מתוכננים.
+**ת**: בדוק את [מפת הדרכים הרשמית](https://github.com/Azure/azure-dev/projects) כדי לראות תכונות ושיפורים מתוכננים.
 
-### ש: איך אני מבצע מעבר
-1. נתח את ארכיטקטורת הפריסה הנוכחית  
-2. צור תבניות Bicep מקבילות  
-3. הגדר את `azure.yaml` כך שיתאים לשירותים הנוכחיים  
-4. בדוק באופן יסודי בסביבת הפיתוח  
-5. העבר סביבות בהדרגה  
+---
+
+### ש: איך אני מבצע מעבר מכלי פריסה אחרים ל-azd?
+**ת**: 
+1. נתח את הארכיטקטורה הנוכחית של הפריסה.
+2. צור תבניות Bicep מקבילות.
+3. הגדר את `azure.yaml` כך שיתאים לשירותים הנוכחיים.
+4. בדוק היטב בסביבת הפיתוח.
+5. בצע מעבר הדרגתי בין הסביבות.
 
 ---
 
 ## עדיין יש שאלות?
 
 ### **חפש קודם**
-- בדוק את [התיעוד הרשמי](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- חפש [בעיות ב-GitHub](https://github.com/Azure/azure-dev/issues) עבור בעיות דומות  
+- בדוק את [התיעוד הרשמי](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/).
+- חפש [בעיות ב-GitHub](https://github.com/Azure/azure-dev/issues) לבעיות דומות.
 
 ### **קבל עזרה**
-- [דיונים ב-GitHub](https://github.com/Azure/azure-dev/discussions) - תמיכה קהילתית  
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - שאלות טכניות  
-- [Azure Discord](https://discord.gg/azure) - צ'אט קהילתי בזמן אמת  
+- [דיונים ב-GitHub](https://github.com/Azure/azure-dev/discussions) - תמיכה קהילתית.
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - שאלות טכניות.
+- [Azure Discord](https://discord.gg/azure) - צ'אט קהילתי בזמן אמת.
 
 ### **דווח על בעיות**
-- [בעיות ב-GitHub](https://github.com/Azure/azure-dev/issues/new) - דיווחי באגים ובקשות לפיצ'רים  
-- כלול לוגים רלוונטיים, הודעות שגיאה ושלבים לשחזור  
+- [בעיות ב-GitHub](https://github.com/Azure/azure-dev/issues/new) - דיווחי באגים ובקשות לתכונות.
+- כלול לוגים רלוונטיים, הודעות שגיאה ושלבים לשחזור הבעיה.
 
 ### **למד עוד**
-- [תיעוד Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [מרכז הארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [מסגרת הארכיטקטורה המומלצת של Azure](https://learn.microsoft.com/en-us/azure/well-architected/)  
+- [תיעוד Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/).
+- [מרכז הארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/).
+- [מסגרת הארכיטקטורה המומלצת של Azure](https://learn.microsoft.com/en-us/azure/well-architected/).
 
 ---
 
-*שאלות נפוצות אלו מתעדכנות באופן קבוע. עדכון אחרון: 9 בספטמבר 2025*  
+*שאלות נפוצות אלו מתעדכנות באופן קבוע. עדכון אחרון: 9 בספטמבר 2025.*
 
 ---
 
-**ניווט**  
-- **שיעור קודם**: [מילון מונחים](glossary.md)  
-- **שיעור הבא**: [מדריך לימוד](study-guide.md)  
+**ניווט**
+- **שיעור קודם**: [מילון מונחים](glossary.md)
+- **שיעור הבא**: [מדריך לימוד](study-guide.md)
 
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

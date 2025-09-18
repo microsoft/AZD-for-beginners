@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:43:31+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T06:53:16+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "nl"
 }
 -->
-# Resources Provisioneren - Infrastructure as Code met AZD
+# Azure-resources inrichten met AZD
+
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 4 - Infrastructure as Code & Deployment
+- **⬅️ Vorige**: [Deployment Gids](deployment-guide.md)
+- **➡️ Volgend Hoofdstuk**: [Hoofdstuk 5: Multi-Agent AI-oplossingen](../../examples/retail-scenario.md)
+- **🔧 Gerelateerd**: [Hoofdstuk 6: Validatie vóór implementatie](../pre-deployment/capacity-planning.md)
 
 ## Introductie
 
-Deze uitgebreide gids behandelt alles wat je moet weten over het provisioneren en beheren van Azure-resources met Azure Developer CLI. Leer hoe je Infrastructure as Code (IaC)-patronen implementeert, van eenvoudige resourcecreatie tot geavanceerde infrastructuurarchitecturen van ondernemingsniveau met Bicep, ARM-templates, Terraform en Pulumi.
+Deze uitgebreide gids behandelt alles wat je moet weten over het inrichten en beheren van Azure-resources met Azure Developer CLI. Leer hoe je Infrastructure as Code (IaC)-patronen implementeert, van het creëren van basisresources tot geavanceerde infrastructuurarchitecturen van ondernemingsniveau met behulp van Bicep, ARM-templates, Terraform en Pulumi.
 
 ## Leerdoelen
 
 Door deze gids te voltooien, zul je:
-- Meesterschap ontwikkelen in Infrastructure as Code-principes en Azure-resourceprovisionering
-- Verschillende IaC-providers begrijpen die worden ondersteund door Azure Developer CLI
+- De principes van Infrastructure as Code en het inrichten van Azure-resources beheersen
+- Verschillende IaC-providers begrijpen die door Azure Developer CLI worden ondersteund
 - Bicep-templates ontwerpen en implementeren voor veelvoorkomende applicatiearchitecturen
 - Resourceparameters, variabelen en omgevingsspecifieke instellingen configureren
 - Geavanceerde infrastructuurpatronen implementeren, waaronder netwerken en beveiliging
@@ -26,24 +33,24 @@ Door deze gids te voltooien, zul je:
 ## Leerresultaten
 
 Na voltooiing ben je in staat om:
-- Azure-infrastructuur te ontwerpen en provisioneren met Bicep en ARM-templates
+- Azure-infrastructuur te ontwerpen en in te richten met Bicep en ARM-templates
 - Complexe multi-service architecturen te configureren met correcte resource-afhankelijkheden
 - Geparameteriseerde templates te implementeren voor meerdere omgevingen en configuraties
-- Problemen met infrastructuurprovisionering op te lossen en implementatiefouten te verhelpen
+- Problemen met infrastructuurinrichting op te lossen en implementatiefouten te verhelpen
 - Principes van het Azure Well-Architected Framework toe te passen op infrastructuurontwerp
 - Infrastructuurupdates te beheren en strategieën voor infrastructuurversies te implementeren
 
-## Overzicht van Infrastructure Provisioning
+## Overzicht van infrastructuurinrichting
 
 Azure Developer CLI ondersteunt meerdere Infrastructure as Code (IaC)-providers:
 - **Bicep** (aanbevolen) - Azure's domeinspecifieke taal
-- **ARM Templates** - JSON-gebaseerde Azure Resource Manager-templates
+- **ARM-templates** - JSON-gebaseerde Azure Resource Manager-templates
 - **Terraform** - Multi-cloud infrastructuurtool
 - **Pulumi** - Moderne Infrastructure as Code met programmeertalen
 
-## Begrip van Azure Resources
+## Begrip van Azure-resources
 
-### Resourcehiërarchie
+### Resource-hiërarchie
 ```
 Azure Account
 └── Subscriptions
@@ -53,12 +60,12 @@ Azure Account
 
 ### Veelvoorkomende Azure-diensten voor applicaties
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
+- **Opslag**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Netwerken**: Virtual Network, Application Gateway, CDN
+- **Beveiliging**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep Infrastructure Templates
+## Bicep-infrastructuurtemplates
 
 ### Basisstructuur van een Bicep-template
 ```bicep
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Database Provisioning
+## 🗃️ Database-inrichting
 
 ### Cosmos DB
 ```bicep
@@ -300,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Beveiliging en Geheimenbeheer
+## 🔒 Beveiliging en geheimenbeheer
 
 ### Key Vault-integratie
 ```bicep
@@ -370,7 +377,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Netwerken en Connectiviteit
+## 🌍 Netwerken en connectiviteit
 
 ### Configuratie van Virtual Network
 ```bicep
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Monitoring en Observability
+## 📊 Monitoring en observatie
 
 ### Application Insights
 ```bicep
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Voorwaardelijke resourceprovisionering
+### Voorwaardelijke resource-inrichting
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,7 +658,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Geavanceerde Provisioning-patronen
+## 🚀 Geavanceerde inrichtingspatronen
 
 ### Multi-regio implementatie
 ```bicep
@@ -771,7 +778,7 @@ azd provision --confirm-with-no-prompt
 azd provision --rollback
 ```
 
-### Databasemigraties
+### Database-migraties
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -800,7 +807,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Best Practices
+## 🎯 Best practices
 
 ### 1. Resource naamgevingsconventies
 ```bicep
@@ -859,25 +866,25 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Volgende stappen
 
-- [Pre-deployment Planning](../pre-deployment/capacity-planning.md) - Valideer resourcebeschikbaarheid
+- [Planning vóór implementatie](../pre-deployment/capacity-planning.md) - Valideer resourcebeschikbaarheid
 - [Veelvoorkomende problemen](../troubleshooting/common-issues.md) - Los infrastructuurproblemen op
-- [Debugging-gids](../troubleshooting/debugging.md) - Debug provisioning-problemen
+- [Debugging-gids](../troubleshooting/debugging.md) - Debug problemen met inrichting
 - [SKU-selectie](../pre-deployment/sku-selection.md) - Kies geschikte servicetiers
 
 ## Aanvullende bronnen
 
 - [Azure Bicep Documentatie](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architectuurcentrum](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigatie**
-- **Vorige les**: [Deployment Guide](deployment-guide.md)
-- **Volgende les**: [Capacity Planning](../pre-deployment/capacity-planning.md)
+- **Vorige Les**: [Deployment Gids](deployment-guide.md)
+- **Volgende Les**: [Capaciteitsplanning](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

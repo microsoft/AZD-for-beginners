@@ -1,31 +1,36 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T21:48:35+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T06:50:19+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "nl"
 }
 -->
 # Productie AI Workload Best Practices met AZD
 
-**Vorige:** [AI Workshop Lab](ai-workshop-lab.md) | **Volgende:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 8 - Productie & Enterprise Patronen
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../troubleshooting/debugging.md)
+- **⬅️ Ook Gerelateerd**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Cursus Voltooid**: [AZD Voor Beginners](../../README.md)
 
 ## Overzicht
 
-Deze gids biedt uitgebreide best practices voor het implementeren van productieklare AI-workloads met behulp van Azure Developer CLI (AZD). Gebaseerd op feedback van de Azure AI Foundry Discord-community en praktijkervaringen van klanten, behandelen deze praktijken de meest voorkomende uitdagingen in productie-AI-systemen.
+Deze gids biedt uitgebreide best practices voor het implementeren van productieklare AI workloads met behulp van Azure Developer CLI (AZD). Gebaseerd op feedback van de Azure AI Foundry Discord-community en echte klantimplementaties, behandelen deze praktijken de meest voorkomende uitdagingen in productie AI-systemen.
 
 ## Belangrijkste Uitdagingen
 
 Op basis van de resultaten van onze community-enquête zijn dit de grootste uitdagingen voor ontwikkelaars:
 
-- **45%** heeft moeite met AI-implementaties met meerdere services
-- **38%** ondervindt problemen met het beheer van referenties en geheimen  
-- **35%** vindt productievoorbereiding en schaalbaarheid lastig
-- **32%** heeft behoefte aan betere strategieën voor kostenoptimalisatie
-- **29%** vraagt om verbeterde monitoring en probleemoplossing
+- **45%** worstelt met multi-service AI-implementaties
+- **38%** heeft problemen met het beheer van referenties en geheimen  
+- **35%** vindt productievoorbereiding en schaalbaarheid moeilijk
+- **32%** heeft betere strategieën voor kostenoptimalisatie nodig
+- **29%** vereist verbeterde monitoring en probleemoplossing
 
-## Architectuurpatronen voor Productie-AI
+## Architectuurpatronen voor Productie AI
 
 ### Patroon 1: Microservices AI Architectuur
 
@@ -869,13 +874,13 @@ echo "Infrastructure validation completed successfully!"
 ### Kostenbeheer ✅
 - [ ] Budgetwaarschuwingen geconfigureerd
 - [ ] Juiste grootte van resources
-- [ ] Kortingen voor dev/test toegepast
-- [ ] Gereserveerde instanties aangeschaft
+- [ ] Dev/test kortingen toegepast
+- [ ] Gereserveerde instanties gekocht
 - [ ] Kostenmonitoring dashboard
 - [ ] Regelmatige kostenreviews
 
 ### Naleving ✅
-- [ ] Voldoen aan vereisten voor dataresidency
+- [ ] Voldoen aan dataresidentievereisten
 - [ ] Audit logging ingeschakeld
 - [ ] Nalevingsbeleid toegepast
 - [ ] Beveiligingsbaselines geïmplementeerd
@@ -887,12 +892,12 @@ echo "Infrastructure validation completed successfully!"
 ### Typische Productiemetrics
 
 | Metric | Doel | Monitoring |
-|--------|------|------------|
+|--------|--------|------------|
 | **Reactietijd** | < 2 seconden | Application Insights |
 | **Beschikbaarheid** | 99.9% | Uptime monitoring |
 | **Foutpercentage** | < 0.1% | Applicatielogs |
 | **Tokengebruik** | < $500/maand | Kostenbeheer |
-| **Gelijktijdige gebruikers** | 1000+ | Load testing |
+| **Gelijktijdige Gebruikers** | 1000+ | Load testing |
 | **Hersteltijd** | < 1 uur | Tests voor rampenherstel |
 
 ### Load Testing
@@ -910,18 +915,18 @@ python scripts/load_test.py \
 
 Gebaseerd op feedback van de Azure AI Foundry Discord-community:
 
-### Topaanbevelingen van de Community:
+### Top Aanbevelingen van de Community:
 
-1. **Begin klein, schaal geleidelijk**: Start met basis-SKUs en schaal op basis van daadwerkelijk gebruik
-2. **Monitor alles**: Stel uitgebreide monitoring in vanaf dag één
-3. **Automatiseer beveiliging**: Gebruik infrastructuur als code voor consistente beveiliging
-4. **Test grondig**: Neem AI-specifieke tests op in je pipeline
-5. **Plan voor kosten**: Monitor tokengebruik en stel vroegtijdig budgetwaarschuwingen in
+1. **Begin Klein, Schaal Geleidelijk**: Start met basis-SKUs en schaal op basis van daadwerkelijk gebruik
+2. **Monitor Alles**: Stel uitgebreide monitoring in vanaf dag één
+3. **Automatiseer Beveiliging**: Gebruik infrastructuur als code voor consistente beveiliging
+4. **Test Grondig**: Neem AI-specifieke tests op in je pipeline
+5. **Plan voor Kosten**: Monitor tokengebruik en stel vroegtijdig budgetwaarschuwingen in
 
-### Veelvoorkomende valkuilen om te vermijden:
+### Veelvoorkomende Valkuilen om te Vermijden:
 
 - ❌ API-sleutels hardcoderen in code
-- ❌ Geen monitoring instellen
+- ❌ Geen goede monitoring instellen
 - ❌ Kostenoptimalisatie negeren
 - ❌ Geen tests voor faalscenario's uitvoeren
 - ❌ Implementeren zonder gezondheidscontroles
@@ -935,11 +940,16 @@ Gebaseerd op feedback van de Azure AI Foundry Discord-community:
 
 ---
 
-**Vorige:** [AI Workshop Lab](ai-workshop-lab.md) | **Volgende:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 8 - Productie & Enterprise Patronen
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../troubleshooting/debugging.md)
+- **⬅️ Ook Gerelateerd**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Cursus Voltooid**: [AZD Voor Beginners](../../README.md)
 
-**Onthoud**: Productie-AI workloads vereisen zorgvuldige planning, monitoring en continue optimalisatie. Begin met deze patronen en pas ze aan op jouw specifieke vereisten.
+**Onthoud**: Productie AI workloads vereisen zorgvuldige planning, monitoring en continue optimalisatie. Begin met deze patronen en pas ze aan op jouw specifieke vereisten.
 
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:45:17+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T06:25:14+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "no"
 }
 -->
 # Kommando-jukselapp - Essensielle AZD-kommandoer
+
+**Hurtigreferanse for alle kapitler**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../README.md)
+- **📖 Kom i gang raskt**: [Kapittel 1: Grunnlag & Kom i gang](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-kommandoer**: [Kapittel 2: AI-First Utvikling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Avansert**: [Kapittel 4: Infrastruktur som kode](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduksjon
 
@@ -21,7 +27,7 @@ Ved å bruke denne jukselappen vil du:
 - Referere til praktiske eksempler for vanlige utviklings- og distribusjonsscenarier
 - Få tilgang til feilsøkingskommandoer for rask problemløsning
 - Finne avanserte konfigurasjons- og tilpasningsalternativer effektivt
-- Lokalisere kommandoer for miljøhåndtering og arbeidsflyt med flere miljøer
+- Lokalisere kommandoer for miljøstyring og arbeidsflyt med flere miljøer
 
 ## Læringsutbytte
 
@@ -115,7 +121,7 @@ azd package
 azd package --service api
 ```
 
-## 🌍 Miljøhåndtering
+## 🌍 Miljøstyring
 
 ### Miljøoperasjoner
 ```bash
@@ -255,7 +261,7 @@ azd pipeline config --provider azdo
 azd pipeline show
 ```
 
-### Infrastrukturhåndtering
+### Infrastrukturstyring
 ```bash
 # Import existing resources
 azd infra import
@@ -267,7 +273,7 @@ azd infra export
 azd infra validate
 ```
 
-### Tjenestehåndtering
+### Tjenestestyring
 ```bash
 # List all services
 azd service list
@@ -381,7 +387,7 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Utdataformatering
+## 🎨 Utdataformat
 
 ### JSON-utdata
 ```bash
@@ -557,10 +563,10 @@ azd template show <template-name> --docs
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
-- **Neste leksjon**: [Glossary](glossary.md)
+- **Forrige leksjon**: [Forhåndssjekk](../docs/pre-deployment/preflight-checks.md)
+- **Neste leksjon**: [Ordliste](glossary.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

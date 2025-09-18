@@ -1,39 +1,46 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:20:15+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T07:12:11+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "he"
 }
 -->
-# מדריך ניפוי שגיאות - טכניקות מתקדמות לניתוח לוגים
+# מדריך ניפוי שגיאות לפריסות AZD
 
-## הקדמה
+**ניווט פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 7 - פתרון בעיות וניפוי שגיאות
+- **⬅️ קודם**: [בעיות נפוצות](common-issues.md)
+- **➡️ הבא**: [פתרון בעיות ספציפיות ל-AI](ai-troubleshooting.md)
+- **🚀 פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../ai-foundry/production-ai-practices.md)
 
-מדריך מקיף זה מספק אסטרטגיות ניפוי שגיאות מתקדמות, כלים וטכניקות לאבחון ופתרון בעיות מורכבות בפריסות של Azure Developer CLI. תלמדו שיטות ניפוי שגיאות שיטתיות, טכניקות לניתוח לוגים, פרופיל ביצועים וכלים אבחוניים מתקדמים כדי לפתור בעיות בפריסה ובזמן ריצה בצורה יעילה.
+## מבוא
+
+מדריך מקיף זה מספק אסטרטגיות מתקדמות לניפוי שגיאות, כלים וטכניקות לאבחון ופתרון בעיות מורכבות בפריסות Azure Developer CLI. תלמדו שיטות פתרון בעיות שיטתיות, טכניקות לניתוח לוגים, פרופיל ביצועים וכלים אבחוניים מתקדמים כדי לפתור בעיות בפריסה ובזמן ריצה בצורה יעילה.
 
 ## מטרות למידה
 
-לאחר השלמת מדריך זה, תוכלו:
-- לשלוט בשיטות ניפוי שגיאות שיטתיות עבור בעיות ב-Azure Developer CLI
-- להבין תצורות לוגים מתקדמות וטכניקות לניתוח לוגים
+עם סיום המדריך, תוכלו:
+- לשלוט בשיטות ניפוי שגיאות שיטתיות עבור בעיות Azure Developer CLI
+- להבין תצורת לוגים מתקדמת וטכניקות לניתוח לוגים
 - ליישם אסטרטגיות פרופיל ביצועים וניטור
-- להשתמש בכלי אבחון ושירותים של Azure לפתרון בעיות מורכבות
+- להשתמש בכלי אבחון ושירותי Azure לפתרון בעיות מורכבות
 - ליישם טכניקות ניפוי שגיאות רשת ואבטחה
 - להגדיר ניטור והתראות מקיפות לזיהוי בעיות באופן יזום
 
 ## תוצאות למידה
 
-בסיום, תוכלו:
-- ליישם את שיטת TRIAGE לניפוי שגיאות שיטתי של בעיות פריסה מורכבות
+עם סיום המדריך, תוכלו:
+- ליישם את מתודולוגיית TRIAGE לניפוי שגיאות מורכבות בפריסות
 - להגדיר ולנתח מידע לוגים ומעקב מקיף
-- להשתמש ב-Azure Monitor, Application Insights וכלי אבחון בצורה יעילה
+- להשתמש ב-Azure Monitor, Application Insights וכלים אבחוניים בצורה יעילה
 - לנפות בעיות חיבור רשת, אימות והרשאות באופן עצמאי
 - ליישם אסטרטגיות לניטור ואופטימיזציה של ביצועים
-- ליצור סקריפטים מותאמים אישית ואוטומציה לניפוי שגיאות חוזרות
+- ליצור סקריפטים מותאמים אישית לניפוי שגיאות ואוטומציה עבור בעיות חוזרות
 
-## שיטת ניפוי שגיאות
+## מתודולוגיית ניפוי שגיאות
 
 ### גישת TRIAGE
 - **T**ime: מתי התחילה הבעיה?
@@ -41,7 +48,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **I**solate: איזה רכיב נכשל?
 - **A**nalyze: מה הלוגים מספרים לנו?
 - **G**ather: אספו את כל המידע הרלוונטי
-- **E**scalate: מתי לפנות לעזרה נוספת
+- **E**scalate: מתי כדאי לפנות לעזרה נוספת
 
 ## הפעלת מצב ניפוי שגיאות
 
@@ -451,7 +458,7 @@ debug_network_security() {
 }
 ```
 
-## 📱 ניפוי שגיאות ספציפי לאפליקציות
+## 📱 ניפוי שגיאות ספציפיות לאפליקציות
 
 ### ניפוי שגיאות באפליקציות Node.js
 ```javascript
@@ -514,7 +521,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 נהלי ניפוי שגיאות חירום
 
-### תגובה לבעיות בסביבת ייצור
+### תגובה לבעיות בייצור
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -651,12 +658,12 @@ aggregate_logs() {
 
 ## 🔗 משאבים מתקדמים
 
-### סקריפטים מותאמים לניפוי שגיאות
+### סקריפטים מותאמים אישית לניפוי שגיאות
 צרו תיקיית `scripts/debug/` עם:
 - `health-check.sh` - בדיקת בריאות מקיפה
 - `performance-test.sh` - בדיקות ביצועים אוטומטיות
 - `log-analyzer.py` - ניתוח לוגים מתקדם
-- `resource-validator.sh` - אימות תשתיות
+- `resource-validator.sh` - אימות תשתית
 
 ### אינטגרציה לניטור
 ```yaml
@@ -678,11 +685,11 @@ hooks:
 ## שיטות עבודה מומלצות
 
 1. **תמיד הפעילו לוגים לניפוי שגיאות** בסביבות שאינן ייצור
-2. **צרו מקרי בדיקה ניתנים לשחזור** עבור בעיות
+2. **צרו מקרי בדיקה שניתנים לשחזור** עבור בעיות
 3. **תעדו נהלי ניפוי שגיאות** עבור הצוות שלכם
 4. **אוטומטו בדיקות בריאות** וניטור
-5. **שמרו על כלים לניפוי שגיאות מעודכנים** בהתאם לשינויים באפליקציה
-6. **תרגלו נהלי ניפוי שגיאות** בזמנים שאינם אירועי חירום
+5. **שמרו על כלים לניפוי שגיאות מעודכנים** עם שינויים באפליקציה שלכם
+6. **תרגלו נהלי ניפוי שגיאות** בזמני שגרה
 
 ## צעדים הבאים
 

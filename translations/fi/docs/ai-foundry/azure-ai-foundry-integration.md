@@ -1,38 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:44:20+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T06:32:19+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "fi"
 }
 -->
 # Azure AI Foundry -integraatio AZD:n kanssa
 
-**Edellinen:** [Ensimmäinen projekti](../getting-started/first-project.md) | **Seuraava:** [AI-mallin käyttöönotto](ai-model-deployment.md)
+**Luvun navigointi:**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-Ensimmäinen Kehitys
+- **⬅️ Edellinen luku**: [Luku 1: Ensimmäinen projektisi](../getting-started/first-project.md)
+- **➡️ Seuraava**: [AI-mallin käyttöönotto](ai-model-deployment.md)
+- **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../getting-started/configuration.md)
 
 ## Yleiskatsaus
 
-Tämä opas näyttää, kuinka Azure AI Foundry -palvelut integroidaan Azure Developer CLI:n (AZD) kanssa AI-sovellusten käyttöönoton tehostamiseksi. Azure AI Foundry tarjoaa kattavan alustan AI-sovellusten rakentamiseen, käyttöönottoon ja hallintaan, kun taas AZD yksinkertaistaa infrastruktuurin ja käyttöönoton prosessia.
+Tämä opas näyttää, kuinka integroida Azure AI Foundry -palvelut Azure Developer CLI:n (AZD) kanssa AI-sovellusten käyttöönoton tehostamiseksi. Azure AI Foundry tarjoaa kattavan alustan AI-sovellusten rakentamiseen, käyttöönottoon ja hallintaan, kun taas AZD yksinkertaistaa infrastruktuurin ja käyttöönoton prosessia.
 
 ## Mikä on Azure AI Foundry?
 
 Azure AI Foundry on Microsoftin yhtenäinen alusta AI-kehitykseen, joka sisältää:
 
-- **Mallikatalogi**: Pääsy huipputason AI-malleihin
+- **Mallikatalogi**: Pääsy huippuluokan AI-malleihin
 - **Prompt Flow**: Visuaalinen suunnittelutyökalu AI-työnkuluille
 - **AI Foundry -portaali**: Integroitu kehitysympäristö AI-sovelluksille
-- **Käyttöönottovaihtoehdot**: Useita isännöinti- ja skaalausvaihtoehtoja
-- **Turvallisuus ja tietosuoja**: Sisäänrakennetut vastuullisen AI:n ominaisuudet
+- **Käyttöönottoasetukset**: Useita isännöinti- ja skaalausvaihtoehtoja
+- **Turvallisuus ja vastuullisuus**: Sisäänrakennetut vastuullisen AI:n ominaisuudet
 
 ## AZD + Azure AI Foundry: Parempi yhdessä
 
 | Ominaisuus | Azure AI Foundry | AZD-integraation etu |
 |------------|------------------|----------------------|
 | **Mallin käyttöönotto** | Manuaalinen portaali | Automatisoidut, toistettavat käyttöönotot |
-| **Infrastruktuuri** | Klikkaamalla tehtävä provisiointi | Infrastructure as Code (Bicep) |
+| **Infrastruktuuri** | Klikkausperusteinen provisiointi | Infrastructure as Code (Bicep) |
 | **Ympäristön hallinta** | Yhden ympäristön painotus | Moniympäristö (kehitys/testaus/tuotanto) |
-| **CI/CD-integraatio** | Rajoitettu | Luontainen GitHub Actions -tuki |
+| **CI/CD-integraatio** | Rajoitettu | Natiivin GitHub Actions -tuen |
 | **Kustannusten hallinta** | Perusseuranta | Ympäristökohtainen kustannusoptimointi |
 
 ## Esivaatimukset
@@ -40,7 +45,7 @@ Azure AI Foundry on Microsoftin yhtenäinen alusta AI-kehitykseen, joka sisält�
 - Azure-tilaus, jossa on asianmukaiset käyttöoikeudet
 - Azure Developer CLI asennettuna
 - Pääsy Azure OpenAI -palveluihin
-- Perustiedot Azure AI Foundrysta
+- Perustiedot Azure AI Foundrystä
 
 ## Keskeiset integraatiomallit
 
@@ -185,7 +190,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Turvallinen konfiguraatio Key Vaultilla
+### Turvallinen konfiguraatio Key Vaultin avulla
 
 ```bicep
 // Key Vault for secrets
@@ -313,9 +318,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Tietoturvan parhaat käytännöt
+## 🔐 Turvallisuuden parhaat käytännöt
 
-### Hallittu identiteettikonfiguraatio
+### Hallinnoidun identiteetin konfiguraatio
 
 ```bicep
 // Managed identity for the web application
@@ -499,7 +504,7 @@ azd up
 
 **Repository**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
-**Palvelut**: Document Intelligence + Storage + Functions
+**Palvelut**: Dokumenttianalyysi + Tallennus + Functions
 
 **Pika-aloitus**:
 ```bash
@@ -507,11 +512,11 @@ azd init --template ai-document-processing
 azd up
 ```
 
-### Yrityschat RAG:lla
+### Yritystason chat RAG:lla
 
 **Repository**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Palvelut**: Azure OpenAI + Search + Container Apps + Cosmos DB
+**Palvelut**: Azure OpenAI + Haku + Container Apps + Cosmos DB
 
 **Pika-aloitus**:
 ```bash
@@ -521,12 +526,12 @@ azd up
 
 ## Seuraavat askeleet
 
-1. **Kokeile esimerkkejä**: Aloita valmiista mallista, joka vastaa käyttötapaustasi
+1. **Kokeile esimerkkejä**: Aloita valmiilla mallilla, joka vastaa käyttötapaustasi
 2. **Mukauta tarpeisiisi**: Muokkaa infrastruktuuria ja sovelluskoodia
 3. **Lisää seuranta**: Toteuta kattava näkyvyys
 4. **Optimoi kustannukset**: Hienosäädä konfiguraatiot budjetillesi
-5. **Turvaa käyttöönotto**: Toteuta yritystason tietoturvamallit
-6. **Skaalaa tuotantoon**: Lisää monialue- ja korkean käytettävyyden ominaisuuksia
+5. **Turvaa käyttöönotto**: Toteuta yritystason turvallisuusmallit
+6. **Skaalaa tuotantoon**: Lisää monialue- ja korkean saatavuuden ominaisuuksia
 
 ## Yhteisö ja tuki
 
@@ -536,9 +541,14 @@ azd up
 
 ---
 
-**Edellinen:** [Ensimmäinen projekti](../getting-started/first-project.md) | **Seuraava:** [AI-mallin käyttöönotto](ai-model-deployment.md)
+**Luvun navigointi:**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-Ensimmäinen Kehitys
+- **⬅️ Edellinen luku**: [Luku 1: Ensimmäinen projektisi](../getting-started/first-project.md)
+- **➡️ Seuraava**: [AI-mallin käyttöönotto](ai-model-deployment.md)
+- **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../getting-started/configuration.md)
 
-**Tarvitsetko apua?** Liity yhteisökeskusteluihin tai avaa ongelma repositoryssä. Azure AI + AZD -yhteisö on täällä auttamassa sinua onnistumaan!
+**Tarvitsetko apua?** Liity yhteisökeskusteluihin tai avaa ongelma repositoriossa. Azure AI + AZD -yhteisö on täällä auttamassa sinua onnistumaan!
 
 ---
 

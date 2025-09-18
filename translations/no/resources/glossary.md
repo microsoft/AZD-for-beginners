@@ -1,36 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "59cb1c1635512e212da16d50f3259ca4",
-  "translation_date": "2025-09-09T22:50:10+00:00",
+  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
+  "translation_date": "2025-09-18T06:25:31+00:00",
   "source_file": "resources/glossary.md",
   "language_code": "no"
 }
 -->
-# Ordliste - Azure Developer CLI Terminologi
+# Ordliste - Azure og AZD Terminologi
+
+**Referanse for alle kapitler**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../README.md)
+- **📖 Lær Grunnleggende**: [Kapittel 1: AZD Grunnleggende](../docs/getting-started/azd-basics.md)
+- **🤖 AI Begreper**: [Kapittel 2: AI-First Utvikling](../docs/ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduksjon
 
-Denne omfattende ordlisten gir definisjoner for begreper, konsepter og akronymer som brukes i Azure Developer CLI og Azure skyutvikling. Et essensielt referanseverktøy for å forstå teknisk dokumentasjon, feilsøke problemer og kommunisere effektivt om azd-prosjekter og Azure-tjenester.
+Denne omfattende ordlisten gir definisjoner for begreper, konsepter og forkortelser som brukes i Azure Developer CLI og Azure skyutvikling. En essensiell referanse for å forstå teknisk dokumentasjon, feilsøke problemer og kommunisere effektivt om azd-prosjekter og Azure-tjenester.
 
 ## Læringsmål
 
 Ved å bruke denne ordlisten vil du:
-- Forstå essensiell terminologi og konsepter i Azure Developer CLI
-- Mestre vokabularet og tekniske begreper innen Azure skyutvikling
+- Forstå essensiell terminologi og konsepter for Azure Developer CLI
+- Mestre vokabularet og tekniske begreper for Azure skyutvikling
 - Effektivt referere til Infrastructure as Code og distribusjonsterminologi
-- Forstå Azure-tjenestenavn, akronymer og deres formål
+- Forstå Azure-tjenestenavn, forkortelser og deres formål
 - Få tilgang til definisjoner for feilsøking og debugging-terminologi
 - Lære avanserte konsepter innen Azure-arkitektur og utvikling
 
 ## Læringsutbytte
 
 Med regelmessig bruk av denne ordlisten vil du kunne:
-- Kommunisere effektivt ved å bruke korrekt terminologi fra Azure Developer CLI
+- Kommunisere effektivt ved å bruke korrekt terminologi for Azure Developer CLI
 - Forstå teknisk dokumentasjon og feilmeldinger tydeligere
 - Navigere Azure-tjenester og konsepter med selvtillit
-- Feilsøke problemer ved å bruke passende teknisk vokabular
-- Bidra til teamdiskusjoner med nøyaktig teknisk språk
+- Feilsøke problemer ved å bruke riktig teknisk vokabular
+- Bidra til teamdiskusjoner med presist teknisk språk
 - Systematisk utvide din kunnskap om Azure skyutvikling
 
 ## A
@@ -87,10 +92,10 @@ Innstillinger og parametere som styrer applikasjonsatferd og distribusjonsaltern
 Prosessen med å installere og konfigurere applikasjoner og deres avhengigheter på mål-infrastruktur.
 
 **Docker**  
-Plattform for utvikling, levering og kjøring av applikasjoner ved bruk av containeriseringsteknologi.
+Plattform for utvikling, levering og kjøring av applikasjoner ved bruk av containerteknologi.
 
 **Dockerfile**  
-Tekstfil som inneholder instruksjoner for å bygge en Docker-containerbilde.
+Tekstfil som inneholder instruksjoner for å bygge en Docker container-image.
 
 ## E
 
@@ -101,7 +106,7 @@ Et distribusjonsmål som representerer en spesifikk instans av applikasjonen din
 Konfigurasjonsverdier lagret som nøkkel-verdi-par som applikasjoner kan få tilgang til under kjøring.
 
 **Endepunkt**  
-URL eller nettverksadresse hvor en applikasjon eller tjeneste kan nås.
+URL eller nettverksadresse der en applikasjon eller tjeneste kan nås.
 
 ## F
 
@@ -122,7 +127,7 @@ Distribuert versjonskontrollsystem brukt for å spore endringer i kildekode.
 Egendefinerte skript eller kommandoer som kjøres på spesifikke punkter i distribusjonslivssyklusen (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Azure-tjenestetypen hvor en applikasjon vil bli distribuert (f.eks. appservice, containerapp, function).
+Azure-tjenestetypen der en applikasjon vil bli distribuert (f.eks. appservice, containerapp, function).
 
 ## I
 
@@ -158,14 +163,14 @@ Azure-tjeneste for innsamling, analyse og handling på telemetridata fra sky- og
 
 ## M
 
-**Administrert identitet**  
+**Managed Identity**  
 Azure-funksjon som gir Azure-tjenester en automatisk administrert identitet for autentisering til andre Azure-tjenester.
 
 **Mikrotjenester**  
-Arkitektonisk tilnærming hvor applikasjoner bygges som en samling av små, uavhengige tjenester.
+Arkitektonisk tilnærming der applikasjoner bygges som en samling av små, uavhengige tjenester.
 
 **Monitor**  
-Azure sin enhetlige overvåkningsløsning som gir fullstendig observasjon på tvers av applikasjoner og infrastruktur.
+Azure sin enhetlige overvåkningsløsning som gir fullstendig observasjon av applikasjoner og infrastruktur.
 
 ## N
 
@@ -254,11 +259,11 @@ Uniform Resource Locator. Type URI som spesifiserer hvor en ressurs er lokaliser
 
 ## V
 
-**Virtuelt nettverk (VNet)**  
+**Virtuelt Nettverk (VNet)**  
 Grunnleggende byggestein for private nettverk i Azure, som gir isolasjon og segmentering.
 
 **VS Code**  
-Visual Studio Code. Populær kodeeditor med utmerket Azure- og azd-integrasjon.
+Visual Studio Code. Populær kodeeditor med utmerket Azure og azd-integrasjon.
 
 ## W
 
@@ -280,12 +285,12 @@ Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy ti
 
 ---
 
-## Vanlige Akronymer
+## Vanlige Forkortelser
 
-| Akronym | Fullt Navn | Beskrivelse |
-|---------|------------|-------------|
-| AAD | Azure Active Directory | Identitets- og tilgangsadministrasjonstjeneste |
-| ACR | Azure Container Registry | Tjeneste for containerbilde-repositorier |
+| Forkortelse | Full Form | Beskrivelse |
+|-------------|-----------|-------------|
+| AAD | Azure Active Directory | Identitets- og tilgangsstyringstjeneste |
+| ACR | Azure Container Registry | Tjeneste for container-image register |
 | AKS | Azure Kubernetes Service | Administrert Kubernetes-tjeneste |
 | API | Application Programming Interface | Sett med protokoller for bygging av programvare |
 | ARM | Azure Resource Manager | Azure sin distribusjons- og administrasjonstjeneste |
@@ -297,7 +302,7 @@ Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy ti
 | IaC | Infrastructure as Code | Administrasjon av infrastruktur gjennom kode |
 | JSON | JavaScript Object Notation | Datautvekslingsformat |
 | JWT | JSON Web Token | Token-format for sikker informasjonsoverføring |
-| KQL | Kusto Query Language | Spørrespråk for Azure-datatjenester |
+| KQL | Kusto Query Language | Spørrespråk for Azure datatjenester |
 | RBAC | Role-Based Access Control | Tilgangskontrollmetode basert på brukerroller |
 | REST | Representational State Transfer | Arkitektonisk stil for webtjenester |
 | SDK | Software Development Kit | Samling av utviklingsverktøy |
@@ -339,10 +344,10 @@ Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy ti
 - **Miljøparitet**: Holde utviklings-, staging- og produksjonsmiljøer like
 
 ### Sikkerhetsbegreper
-- **Administrert identitet**: Azure-funksjon som gir automatisk administrasjon av legitimasjon
+- **Managed Identity**: Azure-funksjon som gir automatisk administrasjon av legitimasjon
 - **Key Vault**: Sikker lagring for hemmeligheter, nøkler og sertifikater
 - **RBAC**: Rollebasert tilgangskontroll for Azure-ressurser
-- **Nettverkssikkerhetsgruppe**: Virtuell brannmur for kontroll av nettverkstrafikk
+- **Network Security Group**: Virtuell brannmur for kontroll av nettverkstrafikk
 
 ### Overvåkningsbegreper
 - **Telemetri**: Automatisk innsamling av målinger og data
@@ -351,7 +356,7 @@ Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy ti
 - **Varslingsregler**: Automatiserte varsler basert på metrikker eller betingelser
 
 ### Distribusjonsbegreper
-- **Blue-Green Deployment**: Distribusjonsstrategi med null nedetid
+- **Blue-Green Deployment**: Null-nedetid distribusjonsstrategi
 - **Canary Deployment**: Gradvis utrulling til en delmengde av brukere
 - **Rullerende oppdatering**: Sekvensiell erstatning av applikasjonsinstanser
 - **Rollback**: Tilbakeføring til tidligere applikasjonsversjon
@@ -363,10 +368,10 @@ Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy ti
 ---
 
 **Navigasjon**
-- **Forrige Leksjon**: [Cheat Sheet](cheat-sheet.md)
+- **Forrige Leksjon**: [Jukselapp](cheat-sheet.md)
 - **Neste Leksjon**: [FAQ](faq.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

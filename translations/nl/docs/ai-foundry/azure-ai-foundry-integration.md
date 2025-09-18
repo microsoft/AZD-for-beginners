@@ -1,36 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:44:40+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T06:49:55+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "nl"
 }
 -->
 # Azure AI Foundry-integratie met AZD
 
-**Vorige:** [Eerste Project](../getting-started/first-project.md) | **Volgende:** [AI Model Deployment](ai-model-deployment.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 1: Je Eerste Project](../getting-started/first-project.md)
+- **➡️ Volgende**: [AI Model Implementatie](ai-model-deployment.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../getting-started/configuration.md)
 
 ## Overzicht
 
-Deze handleiding laat zien hoe je Azure AI Foundry-services kunt integreren met Azure Developer CLI (AZD) voor gestroomlijnde AI-applicatiedeployments. Azure AI Foundry biedt een uitgebreid platform voor het bouwen, implementeren en beheren van AI-applicaties, terwijl AZD het infrastructuur- en implementatieproces vereenvoudigt.
+Deze handleiding laat zien hoe je Azure AI Foundry-services kunt integreren met Azure Developer CLI (AZD) voor gestroomlijnde implementaties van AI-toepassingen. Azure AI Foundry biedt een uitgebreid platform voor het bouwen, implementeren en beheren van AI-toepassingen, terwijl AZD het infrastructuur- en implementatieproces vereenvoudigt.
 
 ## Wat is Azure AI Foundry?
 
-Azure AI Foundry is Microsofts geïntegreerde platform voor AI-ontwikkeling dat het volgende omvat:
+Azure AI Foundry is het uniforme platform van Microsoft voor AI-ontwikkeling, inclusief:
 
 - **Modelcatalogus**: Toegang tot geavanceerde AI-modellen
 - **Prompt Flow**: Visuele ontwerper voor AI-workflows
-- **AI Foundry Portal**: Geïntegreerde ontwikkelomgeving voor AI-applicaties
+- **AI Foundry Portal**: Geïntegreerde ontwikkelomgeving voor AI-toepassingen
 - **Implementatieopties**: Meerdere hosting- en schaalopties
-- **Veiligheid en beveiliging**: Ingebouwde functies voor verantwoord gebruik van AI
+- **Veiligheid en Beveiliging**: Ingebouwde functies voor verantwoord gebruik van AI
 
-## AZD + Azure AI Foundry: Samen sterker
+## AZD + Azure AI Foundry: Samen Sterker
 
 | Functie | Azure AI Foundry | Voordeel van AZD-integratie |
 |---------|------------------|----------------------------|
 | **Modelimplementatie** | Handmatige implementatie via portal | Geautomatiseerde, herhaalbare implementaties |
-| **Infrastructuur** | Klik-en-implementatie | Infrastructure as Code (Bicep) |
+| **Infrastructuur** | Klik-en-configureer provisioning | Infrastructure as Code (Bicep) |
 | **Omgevingsbeheer** | Focus op één omgeving | Multi-omgeving (dev/staging/prod) |
 | **CI/CD-integratie** | Beperkt | Native ondersteuning voor GitHub Actions |
 | **Kostenbeheer** | Basis monitoring | Omgevingsspecifieke kostenoptimalisatie |
@@ -46,7 +51,7 @@ Azure AI Foundry is Microsofts geïntegreerde platform voor AI-ontwikkeling dat 
 
 ### Patroon 1: Azure OpenAI-integratie
 
-**Gebruiksscenario**: Chatapplicaties implementeren met Azure OpenAI-modellen
+**Gebruiksscenario**: Chattoepassingen implementeren met Azure OpenAI-modellen
 
 ```yaml
 # azure.yaml
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Patroon 2: AI Search + RAG-integratie
 
-**Gebruiksscenario**: Retrieval-augmented generation (RAG)-applicaties implementeren
+**Gebruiksscenario**: Implementeren van retrieval-augmented generation (RAG)-toepassingen
 
 ```bicep
 // Azure AI Search
@@ -159,7 +164,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 Configuratiepatronen
 
-### Instellen van omgevingsvariabelen
+### Instellen van Omgevingsvariabelen
 
 **Productieconfiguratie:**
 ```bash
@@ -185,7 +190,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Veilige configuratie met Key Vault
+### Veilige Configuratie met Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -250,7 +255,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Monitoring en observatie
+## Monitoring en Observatie
 
 ### Integratie met Application Insights
 
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Configuratie voor autoscaling
+### Configuratie voor automatische schaalvergroting
 
 ```bicep
 // Container App with auto-scaling
@@ -426,12 +431,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Veelvoorkomende problemen oplossen
+## Veelvoorkomende Problemen Oplossen
 
-### Probleem 1: OpenAI-quota overschreden
+### Probleem 1: OpenAI Quota Overschreden
 
 **Symptomen:**
-- Implementatie mislukt met quota-fouten
+- Implementatie mislukt met quotafouten
 - 429-fouten in applicatielogs
 
 **Oplossingen:**
@@ -466,7 +471,7 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Probleem 3: Problemen met modelimplementatie
+### Probleem 3: Problemen met Modelimplementatie
 
 **Symptomen:**
 - Modellen niet beschikbaar in implementatie
@@ -481,15 +486,15 @@ az cognitiveservices model list --location eastus
 # Check model capacity requirements
 ```
 
-## Voorbeeldtemplates
+## Voorbeeldsjablonen
 
-### Basis chatapplicatie
+### Basis Chattoepassing
 
 **Repository**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Services**: Azure OpenAI + Cognitive Search + App Service
 
-**Snelle start**:
+**Snelstart**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
@@ -501,7 +506,7 @@ azd up
 
 **Services**: Document Intelligence + Storage + Functions
 
-**Snelle start**:
+**Snelstart**:
 ```bash
 azd init --template ai-document-processing
 azd up
@@ -513,22 +518,22 @@ azd up
 
 **Services**: Azure OpenAI + Search + Container Apps + Cosmos DB
 
-**Snelle start**:
+**Snelstart**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-## Volgende stappen
+## Volgende Stappen
 
-1. **Probeer de voorbeelden**: Begin met een vooraf gebouwd template dat past bij jouw gebruiksscenario
-2. **Pas aan voor jouw behoeften**: Wijzig de infrastructuur en applicatiecode
-3. **Voeg monitoring toe**: Implementeer uitgebreide observatie
-4. **Optimaliseer kosten**: Stem configuraties af op jouw budget
-5. **Beveilig je implementatie**: Implementeer beveiligingspatronen voor ondernemingen
-6. **Schaal naar productie**: Voeg multi-regio en hoge beschikbaarheidsfuncties toe
+1. **Probeer de Voorbeelden**: Begin met een vooraf gebouwd sjabloon dat past bij jouw gebruiksscenario
+2. **Pas aan voor Jouw Behoeften**: Wijzig de infrastructuur en applicatiecode
+3. **Voeg Monitoring Toe**: Implementeer uitgebreide observatie
+4. **Optimaliseer Kosten**: Stem configuraties af op jouw budget
+5. **Beveilig Jouw Implementatie**: Implementeer beveiligingspatronen voor ondernemingen
+6. **Schaal naar Productie**: Voeg multi-regio en hoge beschikbaarheidsfuncties toe
 
-## Community en ondersteuning
+## Community en Ondersteuning
 
 - **Azure AI Foundry Discord**: [#Azure kanaal](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Issues en discussies](https://github.com/Azure/azure-dev)
@@ -536,9 +541,14 @@ azd up
 
 ---
 
-**Vorige:** [Eerste Project](../getting-started/first-project.md) | **Volgende:** [AI Model Deployment](ai-model-deployment.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 1: Je Eerste Project](../getting-started/first-project.md)
+- **➡️ Volgende**: [AI Model Implementatie](ai-model-deployment.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../getting-started/configuration.md)
 
-**Hulp nodig?** Doe mee aan onze communitydiscussies of open een issue in de repository. De Azure AI + AZD-community staat klaar om je te helpen slagen!
+**Hulp Nodig?** Doe mee aan onze communitydiscussies of open een issue in de repository. De Azure AI + AZD-community staat klaar om je te helpen slagen!
 
 ---
 

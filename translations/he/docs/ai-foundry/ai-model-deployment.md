@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:52:20+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T07:09:04+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "he"
 }
 -->
 # פריסת מודלים של AI עם Azure Developer CLI
 
-**קודם:** [אינטגרציה עם Azure AI Foundry](azure-ai-foundry-integration.md) | **הבא:** [מעבדת סדנת AI](ai-workshop-lab.md)
+**ניווט בפרק:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס AI
+- **⬅️ קודם**: [אינטגרציה עם Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ הבא**: [מעבדת סדנת AI](ai-workshop-lab.md)
+- **🚀 פרק הבא**: [פרק 3: תצורה](../getting-started/configuration.md)
 
-מדריך זה מספק הוראות מקיפות לפריסת מודלים של AI באמצעות תבניות AZD, ומכסה הכל מבחירת מודל ועד תבניות פריסה בסביבת ייצור.
+מדריך זה מספק הוראות מקיפות לפריסת מודלים של AI באמצעות תבניות AZD, ומכסה הכל מבחירת מודלים ועד תבניות פריסה בסביבת ייצור.
 
 ## תוכן עניינים
 
-- [אסטרטגיית בחירת מודל](../../../../docs/ai-foundry)
-- [הגדרת AZD למודלים של AI](../../../../docs/ai-foundry)
+- [אסטרטגיית בחירת מודלים](../../../../docs/ai-foundry)
+- [תצורת AZD למודלים של AI](../../../../docs/ai-foundry)
 - [תבניות פריסה](../../../../docs/ai-foundry)
 - [ניהול מודלים](../../../../docs/ai-foundry)
 - [שיקולים לסביבת ייצור](../../../../docs/ai-foundry)
-- [מעקב וניטור](../../../../docs/ai-foundry)
+- [ניטור ותצפיות](../../../../docs/ai-foundry)
 
-## אסטרטגיית בחירת מודל
+## אסטרטגיית בחירת מודלים
 
 ### מודלים של Azure OpenAI
 
@@ -54,18 +59,18 @@ services:
         ]
 ```
 
-### תכנון קיבולת מודל
+### תכנון קיבולת מודלים
 
 | סוג מודל | שימוש | קיבולת מומלצת | שיקולי עלות |
 |----------|-------|---------------|-------------|
 | GPT-4o-mini | צ'אט, שאלות ותשובות | 10-50 TPM | חסכוני לרוב עומסי העבודה |
 | GPT-4 | הסקת מסקנות מורכבת | 20-100 TPM | עלות גבוהה יותר, מתאים לתכונות פרימיום |
 | Text-embedding-ada-002 | חיפוש, RAG | 30-120 TPM | חיוני לחיפוש סמנטי |
-| Whisper | דיבור לטקסט | 10-50 TPM | עומסי עבודה של עיבוד שמע |
+| Whisper | דיבור לטקסט | 10-50 TPM | עומסי עבודה לעיבוד שמע |
 
-## הגדרת AZD למודלים של AI
+## תצורת AZD למודלים של AI
 
-### הגדרת תבניות Bicep
+### תצורת תבנית Bicep
 
 צרו פריסות מודלים באמצעות תבניות Bicep:
 
@@ -211,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### בקרת גרסאות
 
-עקבו אחר גרסאות מודלים בהגדרת AZD שלכם:
+עקבו אחר גרסאות מודלים בתצורת AZD שלכם:
 
 ```json
 {
@@ -272,7 +277,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### תכנון קיבולת
 
-חשב את הקיבולת הנדרשת על בסיס דפוסי שימוש:
+חשב את הקיבולת הנדרשת בהתבסס על דפוסי שימוש:
 
 ```python
 # Capacity calculation example
@@ -297,9 +302,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### הגדרת אוטו-סקיילינג
+### תצורת אוטו-סקיילינג
 
-הגדירו אוטו-סקיילינג עבור Container Apps:
+הגדירו אוטו-סקיילינג ל-Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -335,7 +340,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### אופטימיזציית עלויות
+### אופטימיזציה של עלויות
 
 יישמו בקרות עלויות:
 
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## מעקב וניטור
+## ניטור ותצפיות
 
 ### אינטגרציה עם Application Insights
 
@@ -477,23 +482,28 @@ async def check_ai_models():
 
 ## צעדים הבאים
 
-1. **סקירה של [מדריך האינטגרציה עם Azure AI Foundry](azure-ai-foundry-integration.md)** עבור תבניות אינטגרציה של שירותים
+1. **סקירת [מדריך האינטגרציה עם Azure AI Foundry](azure-ai-foundry-integration.md)** לתבניות אינטגרציה של שירותים
 2. **השלמת [מעבדת סדנת AI](ai-workshop-lab.md)** לחוויה מעשית
 3. **יישום [שיטות AI בסביבת ייצור](production-ai-practices.md)** לפריסות ארגוניות
-4. **חקירת [מדריך פתרון בעיות AI](../troubleshooting/ai-troubleshooting.md)** עבור בעיות נפוצות
+4. **חקירת [מדריך פתרון בעיות AI](../troubleshooting/ai-troubleshooting.md)** לבעיות נפוצות
 
 ## משאבים
 
 - [זמינות מודלים של Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [סקיילינג של Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [אופטימיזציית עלויות מודלים של AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [אופטימיזציה של עלויות מודלים של AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**קודם:** [אינטגרציה עם Azure AI Foundry](azure-ai-foundry-integration.md) | **הבא:** [מעבדת סדנת AI](ai-workshop-lab.md)
+**ניווט בפרק:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס AI
+- **⬅️ קודם**: [אינטגרציה עם Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ הבא**: [מעבדת סדנת AI](ai-workshop-lab.md)
+- **🚀 פרק הבא**: [פרק 3: תצורה](../getting-started/configuration.md)
 
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור הסמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
