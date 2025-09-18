@@ -1,46 +1,53 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:08:23+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T08:33:55+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "tl"
 }
 -->
 # Gabay sa Pagpili ng SKU - Pagpili ng Tamang Azure Service Tiers
 
+**Pag-navigate sa Kabanata:**
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 6 - Pagpapatunay at Pagpaplano Bago ang Deployment
+- **⬅️ Nakaraan**: [Pagpaplano ng Kapasidad](capacity-planning.md)
+- **➡️ Susunod**: [Mga Pre-flight Check](preflight-checks.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 7: Pag-troubleshoot](../troubleshooting/common-issues.md)
+
 ## Panimula
 
-Ang komprehensibong gabay na ito ay tumutulong sa iyo na pumili ng pinakamainam na Azure service SKUs (Stock Keeping Units) para sa iba't ibang kapaligiran, workload, at pangangailangan. Matutunan kung paano suriin ang mga pangangailangan sa performance, mga konsiderasyon sa gastos, at mga kinakailangan sa scalability upang piliin ang pinakaangkop na service tiers para sa iyong Azure Developer CLI deployments.
+Ang komprehensibong gabay na ito ay tumutulong sa iyo na pumili ng pinakamainam na Azure service SKUs (Stock Keeping Units) para sa iba't ibang kapaligiran, workload, at pangangailangan. Matutunan kung paano suriin ang mga pangangailangan sa performance, mga konsiderasyon sa gastos, at mga kinakailangan sa scalability upang makapili ng pinakaangkop na service tiers para sa iyong Azure Developer CLI deployments.
 
-## Mga Layunin sa Pagkatuto
+## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng gabay na ito, ikaw ay:
 - Maiintindihan ang mga konsepto ng Azure SKU, mga modelo ng pagpepresyo, at mga pagkakaiba sa feature
 - Magiging bihasa sa mga estratehiya sa pagpili ng SKU na naaayon sa kapaligiran para sa development, staging, at production
-- Masusuri ang mga pangangailangan ng workload at maitugma ang mga ito sa tamang service tiers
-- Makakagamit ng mga estratehiya sa pag-optimize ng gastos sa pamamagitan ng matalinong pagpili ng SKU
-- Makakapagpatupad ng mga teknik sa performance testing at validation para sa mga napiling SKU
+- Masusuri ang mga pangangailangan ng workload at maitugma ito sa tamang service tiers
+- Makakapagpatupad ng mga estratehiya sa pag-optimize ng gastos sa pamamagitan ng matalinong pagpili ng SKU
+- Makakagamit ng mga teknik sa performance testing at validation para sa mga napiling SKU
 - Makakapag-configure ng automated SKU recommendations at monitoring
 
-## Mga Resulta ng Pagkatuto
+## Mga Resulta ng Pag-aaral
 
-Sa pagtatapos, magagawa mo ang sumusunod:
+Sa pagtatapos, magagawa mong:
 - Pumili ng tamang Azure service SKUs batay sa mga pangangailangan at limitasyon ng workload
 - Magdisenyo ng cost-effective na multi-environment architectures gamit ang tamang tier selection
 - Magpatupad ng performance benchmarking at validation para sa mga napiling SKU
-- Gumawa ng automated tools para sa SKU recommendation at cost optimization
+- Gumawa ng mga automated na tool para sa SKU recommendation at cost optimization
 - Magplano ng SKU migrations at scaling strategies para sa mga nagbabagong pangangailangan
-- Mag-apply ng mga prinsipyo ng Azure Well-Architected Framework sa pagpili ng service tiers
+- Mag-apply ng mga prinsipyo ng Azure Well-Architected Framework sa pagpili ng service tier
 
 ## Talaan ng Nilalaman
 
 - [Pag-unawa sa SKUs](../../../../docs/pre-deployment)
 - [Pagpili Batay sa Kapaligiran](../../../../docs/pre-deployment)
-- [Mga Gabay na Tukoy sa Serbisyo](../../../../docs/pre-deployment)
+- [Mga Gabay Batay sa Serbisyo](../../../../docs/pre-deployment)
 - [Mga Estratehiya sa Pag-optimize ng Gastos](../../../../docs/pre-deployment)
-- [Mga Pagsasaalang-alang sa Performance](../../../../docs/pre-deployment)
-- [Mga Mabilisang Reference na Talaan](../../../../docs/pre-deployment)
+- [Mga Konsiderasyon sa Performance](../../../../docs/pre-deployment)
+- [Mga Quick Reference Tables](../../../../docs/pre-deployment)
 - [Mga Validation Tools](../../../../docs/pre-deployment)
 
 ---
@@ -51,10 +58,10 @@ Sa pagtatapos, magagawa mo ang sumusunod:
 
 Ang SKUs (Stock Keeping Units) ay kumakatawan sa iba't ibang service tiers at performance levels para sa mga Azure resources. Ang bawat SKU ay nag-aalok ng iba't ibang:
 
-- **Mga katangian ng performance** (CPU, memory, throughput)
-- **Availability ng feature** (mga opsyon sa scaling, mga antas ng SLA)
-- **Mga modelo ng pagpepresyo** (consumption-based, reserved capacity)
-- **Availability sa rehiyon** (hindi lahat ng SKUs ay available sa lahat ng rehiyon)
+- **Mga Katangian ng Performance** (CPU, memory, throughput)
+- **Availability ng Feature** (mga opsyon sa scaling, SLA levels)
+- **Mga Modelo ng Pagpepresyo** (consumption-based, reserved capacity)
+- **Availability sa Rehiyon** (hindi lahat ng SKUs ay available sa lahat ng rehiyon)
 
 ### Mga Pangunahing Salik sa Pagpili ng SKU
 
@@ -64,14 +71,14 @@ Ang SKUs (Stock Keeping Units) ay kumakatawan sa iba't ibang service tiers at pe
    - Mga pangangailangan sa storage at access patterns
 
 2. **Uri ng Kapaligiran**
-   - Development/testing kumpara sa production
+   - Development/testing vs. production
    - Mga kinakailangan sa availability
    - Mga pangangailangan sa seguridad at pagsunod
 
 3. **Mga Limitasyon sa Badyet**
-   - Paunang gastos kumpara sa operational na gastos
+   - Paunang gastos vs. operational costs
    - Mga diskwento sa reserved capacity
-   - Mga implikasyon ng auto-scaling sa gastos
+   - Mga implikasyon ng auto-scaling cost
 
 4. **Mga Proyeksiyon ng Paglago**
    - Mga kinakailangan sa scalability
@@ -86,7 +93,7 @@ Ang SKUs (Stock Keeping Units) ay kumakatawan sa iba't ibang service tiers at pe
 
 **Prayoridad**: Pag-optimize ng gastos, pangunahing functionality, madaling provisioning/de-provisioning
 
-#### Mga Inirerekomendang SKUs
+#### Mga Rekomendadong SKU
 ```yaml
 # Development environment configuration
 environment: development
@@ -103,14 +110,14 @@ skus:
 - **App Service**: F1 (Free) o B1 (Basic) para sa simpleng testing
 - **Databases**: Basic tier na may minimal na resources
 - **Storage**: Standard na may lokal na redundancy lamang
-- **Compute**: Katanggap-tanggap ang shared resources
-- **Networking**: Mga pangunahing configuration
+- **Compute**: Shared resources ay katanggap-tanggap
+- **Networking**: Mga basic na configuration
 
 ### Kapaligiran ng Staging/Testing
 
 **Prayoridad**: Production-like configuration, balanse sa gastos, kakayahan sa performance testing
 
-#### Mga Inirerekomendang SKUs
+#### Mga Rekomendadong SKU
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -124,7 +131,7 @@ skus:
 
 #### Mga Katangian
 - **Performance**: 70-80% ng production capacity
-- **Mga Feature**: Karamihan sa production features ay naka-enable
+- **Features**: Karamihan sa production features ay naka-enable
 - **Redundancy**: May geographic redundancy
 - **Scaling**: Limitadong auto-scaling para sa testing
 - **Monitoring**: Kumpletong monitoring stack
@@ -133,7 +140,7 @@ skus:
 
 **Prayoridad**: Performance, availability, seguridad, pagsunod, scalability
 
-#### Mga Inirerekomendang SKUs
+#### Mga Rekomendadong SKU
 ```yaml
 # Production environment configuration
 environment: production
@@ -149,20 +156,20 @@ skus:
 #### Mga Katangian
 - **High availability**: 99.9%+ SLA requirements
 - **Performance**: Dedicated resources, mataas na throughput
-- **Seguridad**: Mga premium na security features
+- **Security**: Premium security features
 - **Scaling**: Kumpletong auto-scaling capabilities
-- **Monitoring**: Komprehensibong observability
+- **Monitoring**: Comprehensive observability
 
 ---
 
-## Mga Gabay na Tukoy sa Serbisyo
+## Mga Gabay Batay sa Serbisyo
 
 ### Azure App Service
 
 #### Matrix ng Desisyon sa SKU
 
-| Gamit | Inirerekomendang SKU | Rason |
-|-------|----------------------|-------|
+| Gamit | Rekomendadong SKU | Rason |
+|-------|-------------------|-------|
 | Development/Testing | F1 (Free) o B1 (Basic) | Cost-effective, sapat para sa testing |
 | Maliit na production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
 | Katamtamang production apps | P1V3 (Premium V3) | Mas mahusay na performance, mas maraming features |
@@ -205,7 +212,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Framework sa Pagpili ng SKU
+#### Framework ng Pagpili ng SKU
 
 1. **DTU-based (Database Transaction Units)**
    - **Basic**: 5 DTU - Development/testing
@@ -214,7 +221,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 2. **vCore-based** (Inirerekomenda para sa production)
    - **General Purpose**: Balanseng compute at storage
-   - **Business Critical**: Mababa ang latency, mataas ang IOPS
+   - **Business Critical**: Mababa ang latency, mataas na IOPS
    - **Hyperscale**: Lubos na scalable na storage (hanggang 100TB)
 
 #### Mga Halimbawa ng Configuration
@@ -264,7 +271,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 2. **Dedicated (Workload Profiles)**
    - Dedicated compute resources
    - Predictable performance
-   - Mas angkop para sa production workloads
+   - Mas mainam para sa production workloads
 
 #### Mga Halimbawa ng Configuration
 
@@ -335,7 +342,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 2. **Autoscale Provisioned Throughput**
    - Automatic scaling batay sa paggamit
-   - Magbabayad lamang sa ginamit (may minimum)
+   - Magbabayad para sa aktwal na paggamit (may minimum)
    - Maganda para sa variable workloads
 
 3. **Serverless**
@@ -585,11 +592,11 @@ Mag-scale down sa mga oras na hindi abala:
 
 ---
 
-## Mga Pagsasaalang-alang sa Performance
+## Mga Konsiderasyon sa Performance
 
 ### Mga Pangunahing Kinakailangan sa Performance
 
-Mag-defina ng malinaw na mga kinakailangan sa performance bago pumili ng SKU:
+Magtakda ng malinaw na performance requirements bago pumili ng SKU:
 
 ```yaml
 performance_requirements:
@@ -619,7 +626,7 @@ az load test create \
 
 ### Monitoring at Optimization
 
-Mag-set up ng komprehensibong monitoring:
+Mag-set up ng comprehensive monitoring:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -646,7 +653,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Mga Mabilisang Reference na Talaan
+## Mga Quick Reference Tables
 
 ### App Service SKU Quick Reference
 
@@ -801,7 +808,7 @@ test_configuration:
 ### Mga Dapat Iwasan
 
 1. **Huwag gumamit ng production SKUs para sa development**
-2. **Huwag balewalain ang availability ng SKU sa rehiyon**
+2. **Huwag balewalain ang regional SKU availability**
 3. **Huwag kalimutan ang mga gastos sa data transfer**
 4. **Huwag mag-over-provision nang walang sapat na dahilan**
 5. **Huwag balewalain ang epekto ng dependencies**
@@ -815,11 +822,11 @@ test_configuration:
 
 ---
 
-**Navigation**
-- **Nakaraang Aralin**: [Capacity Planning](capacity-planning.md)
-- **Susunod na Aralin**: [Preflight Checks](preflight-checks.md)
+**Pag-navigate**
+- **Nakaraang Aralin**: [Pagpaplano ng Kapasidad](capacity-planning.md)
+- **Susunod na Aralin**: [Mga Pre-flight Check](preflight-checks.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

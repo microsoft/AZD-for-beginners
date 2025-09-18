@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T21:56:35+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T07:42:03+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "vi"
 }
 -->
-# Hướng Dẫn Khắc Phục Sự Cố AI cho Azure Developer CLI
+# Hướng Dẫn Khắc Phục Sự Cố Dành Riêng Cho AI
 
-**Trước:** [Thực Hành AI Trong Sản Xuất](../ai-foundry/production-ai-practices.md) | **Tiếp Theo:** [Bắt Đầu Với AZD](../getting-started/README.md)
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
+- **⬅️ Trước**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
+- **➡️ Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../ai-foundry/production-ai-practices.md)
+- **🤖 Liên Quan**: [Chương 2: Phát Triển AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
-Hướng dẫn khắc phục sự cố toàn diện này giải quyết các vấn đề thường gặp khi triển khai giải pháp AI với AZD, cung cấp các giải pháp và kỹ thuật gỡ lỗi cụ thể cho các dịch vụ Azure AI.
+**Trước:** [Mô Hình AI Sản Xuất](../ai-foundry/production-ai-practices.md) | **Tiếp Theo:** [Bắt Đầu Với AZD](../getting-started/README.md)
+
+Hướng dẫn khắc phục sự cố toàn diện này giải quyết các vấn đề phổ biến khi triển khai giải pháp AI với AZD, cung cấp các giải pháp và kỹ thuật gỡ lỗi dành riêng cho dịch vụ Azure AI.
 
 ## Mục Lục
 
@@ -21,7 +28,7 @@ Hướng dẫn khắc phục sự cố toàn diện này giải quyết các v�
 - [Lỗi Xác Thực và Quyền](../../../../docs/troubleshooting)
 - [Thất Bại Triển Khai Mô Hình](../../../../docs/troubleshooting)
 - [Vấn Đề Hiệu Suất và Mở Rộng](../../../../docs/troubleshooting)
-- [Quản Lý Chi Phí và Hạn Mức](../../../../docs/troubleshooting)
+- [Quản Lý Chi Phí và Hạn Ngạch](../../../../docs/troubleshooting)
 - [Công Cụ và Kỹ Thuật Gỡ Lỗi](../../../../docs/troubleshooting)
 
 ## Vấn Đề Dịch Vụ Azure OpenAI
@@ -35,7 +42,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Nguyên Nhân:**
 - Azure OpenAI không có sẵn trong khu vực đã chọn
-- Hạn mức đã hết trong các khu vực ưu tiên
+- Hạn ngạch bị hết trong các khu vực ưu tiên
 - Giới hạn năng lực khu vực
 
 **Giải Pháp:**
@@ -72,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Vấn Đề: Vượt Quá Hạn Mức Triển Khai Mô Hình
+### Vấn Đề: Vượt Quá Hạn Ngạch Triển Khai Mô Hình
 
 **Triệu Chứng:**
 ```
@@ -81,7 +88,7 @@ Error: Deployment failed due to insufficient quota
 
 **Giải Pháp:**
 
-1. **Kiểm Tra Hạn Mức Hiện Tại:**
+1. **Kiểm Tra Hạn Ngạch Hiện Tại:**
 ```bash
 # Check quota usage
 az cognitiveservices usage list \
@@ -89,7 +96,7 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **Yêu Cầu Tăng Hạn Mức:**
+2. **Yêu Cầu Tăng Hạn Ngạch:**
 ```bash
 # Submit quota increase request
 az support tickets create \
@@ -216,7 +223,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Sử Dụng Managed Identity:**
+3. **Sử Dụng Danh Tính Quản Lý:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -263,7 +270,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Xác Minh Các Phụ Thuộc:**
+2. **Xác Minh Phụ Thuộc:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -361,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Lỗi Xác Thực và Quyền
 
-### Vấn Đề: Managed Identity Bị Từ Chối Quyền
+### Vấn Đề: Quyền Danh Tính Quản Lý Bị Từ Chối
 
 **Triệu Chứng:**
 ```
@@ -378,7 +385,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Gán Các Vai Trò Cần Thiết:**
+2. **Gán Vai Trò Cần Thiết:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -529,7 +536,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **Triệu Chứng:**
 - Thời gian phản hồi > 30 giây
-- Lỗi timeout
+- Lỗi hết thời gian chờ
 - Trải nghiệm người dùng kém
 
 **Giải Pháp:**
@@ -655,7 +662,7 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Quản Lý Chi Phí và Hạn Mức
+## Quản Lý Chi Phí và Hạn Ngạch
 
 ### Vấn Đề: Chi Phí Cao Không Mong Đợi
 
@@ -773,7 +780,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Điểm Kiểm Tra Sức Khỏe:**
+2. **Điểm Kết Thúc Kiểm Tra Sức Khỏe:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
@@ -833,22 +840,22 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Mã Lỗi Thường Gặp và Giải Pháp
+## Mã Lỗi Phổ Biến và Giải Pháp
 
 | Mã Lỗi | Mô Tả | Giải Pháp |
 |--------|-------|-----------|
-| 401 | Không Được Phép | Kiểm tra khóa API và cấu hình managed identity |
+| 401 | Không Được Phép | Kiểm tra khóa API và cấu hình danh tính quản lý |
 | 403 | Bị Cấm | Xác minh phân quyền vai trò RBAC |
-| 429 | Bị Giới Hạn Tốc Độ | Thực hiện logic retry với backoff theo cấp số nhân |
+| 429 | Bị Giới Hạn Tốc Độ | Thực hiện logic thử lại với backoff lũy thừa |
 | 500 | Lỗi Máy Chủ Nội Bộ | Kiểm tra trạng thái triển khai mô hình và nhật ký |
 | 503 | Dịch Vụ Không Có Sẵn | Xác minh sức khỏe dịch vụ và khả dụng khu vực |
 
 ## Bước Tiếp Theo
 
-1. **Xem [Hướng Dẫn Triển Khai Mô Hình AI](ai-model-deployment.md)** để biết các thực hành triển khai tốt nhất
-2. **Hoàn Thành [Thực Hành AI Trong Sản Xuất](production-ai-practices.md)** để có giải pháp sẵn sàng cho doanh nghiệp
+1. **Xem lại [Hướng Dẫn Triển Khai Mô Hình AI](ai-model-deployment.md)** để biết các thực hành triển khai tốt nhất
+2. **Hoàn Thành [Mô Hình AI Sản Xuất](production-ai-practices.md)** để có giải pháp sẵn sàng cho doanh nghiệp
 3. **Tham Gia [Discord Azure AI Foundry](https://aka.ms/foundry/discord)** để nhận hỗ trợ từ cộng đồng
-4. **Gửi vấn đề** đến [Kho GitHub AZD](https://github.com/Azure/azure-dev) cho các vấn đề cụ thể của AZD
+4. **Gửi vấn đề** đến [Kho GitHub AZD](https://github.com/Azure/azure-dev) cho các vấn đề cụ thể về AZD
 
 ## Tài Nguyên
 
@@ -858,7 +865,12 @@ def monitor_performance(func):
 
 ---
 
-**Trước:** [Thực Hành AI Trong Sản Xuất](../ai-foundry/production-ai-practices.md) | **Tiếp Theo:** [Workshop](../../workshop/README.md)
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
+- **⬅️ Trước**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
+- **➡️ Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../ai-foundry/production-ai-practices.md)
+- **🤖 Liên Quan**: [Chương 2: Phát Triển AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 - [Khắc Phục Sự Cố Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---

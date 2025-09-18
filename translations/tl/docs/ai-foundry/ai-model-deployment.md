@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:53:13+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T08:29:02+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "tl"
 }
 -->
-# Pag-deploy ng AI Model gamit ang Azure Developer CLI
+# AI Model Deployment gamit ang Azure Developer CLI
 
-**Nakaraan:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Susunod:** [AI Workshop Lab](ai-workshop-lab.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
+- **⬅️ Nakaraan**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Susunod**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
 
-Ang gabay na ito ay nagbibigay ng detalyadong mga tagubilin para sa pag-deploy ng mga AI model gamit ang mga template ng AZD, mula sa pagpili ng modelo hanggang sa mga pattern ng deployment sa produksyon.
+Ang gabay na ito ay nagbibigay ng detalyadong mga tagubilin para sa pag-deploy ng mga AI model gamit ang mga AZD template, mula sa pagpili ng modelo hanggang sa mga pattern ng deployment sa produksyon.
 
 ## Talaan ng Nilalaman
 
-- [Diskarte sa Pagpili ng Modelo](../../../../docs/ai-foundry)
-- [Konfigurasyon ng AZD para sa AI Models](../../../../docs/ai-foundry)
+- [Estratehiya sa Pagpili ng Modelo](../../../../docs/ai-foundry)
+- [AZD Configuration para sa AI Models](../../../../docs/ai-foundry)
 - [Mga Pattern ng Deployment](../../../../docs/ai-foundry)
 - [Pamamahala ng Modelo](../../../../docs/ai-foundry)
 - [Mga Pagsasaalang-alang sa Produksyon](../../../../docs/ai-foundry)
 - [Pag-monitor at Observability](../../../../docs/ai-foundry)
 
-## Diskarte sa Pagpili ng Modelo
+## Estratehiya sa Pagpili ng Modelo
 
 ### Azure OpenAI Models
 
@@ -59,15 +64,15 @@ services:
 | Uri ng Modelo | Use Case | Inirerekomendang Kapasidad | Mga Pagsasaalang-alang sa Gastos |
 |---------------|----------|---------------------------|----------------------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Sulit para sa karamihan ng workload |
-| GPT-4 | Kumplikadong pag-iisip | 20-100 TPM | Mas mataas ang gastos, gamitin para sa premium na features |
+| GPT-4 | Masalimuot na pag-iisip | 20-100 TPM | Mas mataas ang gastos, gamitin para sa premium na features |
 | Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Mahalagang gamitin para sa semantic search |
 | Whisper | Speech-to-text | 10-50 TPM | Para sa mga audio processing workload |
 
-## Konfigurasyon ng AZD para sa AI Models
+## AZD Configuration para sa AI Models
 
-### Konfigurasyon ng Bicep Template
+### Configuration ng Bicep Template
 
-Gumawa ng mga deployment ng modelo gamit ang mga Bicep template:
+Gumawa ng mga deployment ng modelo gamit ang Bicep templates:
 
 ```bicep
 // infra/main.bicep
@@ -297,7 +302,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Konfigurasyon ng Auto-scaling
+### Configuration ng Auto-scaling
 
 I-configure ang auto-scaling para sa Container Apps:
 
@@ -371,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights Integration
 
-I-configure ang pag-monitor para sa mga AI workload:
+I-configure ang monitoring para sa mga AI workload:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -446,7 +451,7 @@ class AITelemetry:
 
 ### Health Checks
 
-Magpatupad ng pag-monitor sa kalusugan ng AI service:
+Magpatupad ng monitoring sa kalusugan ng AI service:
 
 ```python
 # Health check endpoints
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**Nakaraan:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Susunod:** [AI Workshop Lab](ai-workshop-lab.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
+- **⬅️ Nakaraan**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Susunod**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

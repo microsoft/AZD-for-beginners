@@ -1,13 +1,18 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "59cb1c1635512e212da16d50f3259ca4",
-  "translation_date": "2025-09-09T22:54:36+00:00",
+  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
+  "translation_date": "2025-09-18T08:40:16+00:00",
   "source_file": "resources/glossary.md",
   "language_code": "tl"
 }
 -->
-# Glossary - Azure Developer CLI Terminology
+# Glossary - Azure at AZD Terminology
+
+**Sanggunian para sa Lahat ng Kabanata**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Matutunan ang Mga Pangunahing Kaalaman**: [Kabanata 1: AZD Basics](../docs/getting-started/azd-basics.md)
+- **🤖 Mga Terminong AI**: [Kabanata 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
 
 ## Panimula
 
@@ -18,31 +23,31 @@ Ang komprehensibong glossary na ito ay nagbibigay ng mga kahulugan para sa mga t
 Sa paggamit ng glossary na ito, ikaw ay:
 - Makakaunawa ng mahahalagang terminolohiya at konsepto ng Azure Developer CLI
 - Magiging bihasa sa bokabularyo ng Azure cloud development at mga teknikal na termino
-- Magagamit nang epektibo ang terminolohiya ng Infrastructure as Code at deployment
-- Maiintindihan ang mga pangalan ng serbisyo ng Azure, akronim, at ang kanilang mga layunin
-- Makakakuha ng mga kahulugan para sa troubleshooting at debugging na terminolohiya
+- Magagamit ang mga termino ng Infrastructure as Code at deployment nang epektibo
+- Maiintindihan ang mga pangalan ng serbisyo ng Azure, mga akronim, at ang kanilang mga layunin
+- Makakakuha ng mga kahulugan para sa troubleshooting at debugging terminology
 - Matututo ng mga advanced na konsepto sa arkitektura at development ng Azure
 
 ## Mga Resulta ng Pag-aaral
 
-Sa regular na paggamit ng glossary na ito, magagawa mong:
-- Makipag-usap nang epektibo gamit ang tamang terminolohiya ng Azure Developer CLI
-- Mas malinaw na maunawaan ang teknikal na dokumentasyon at mga error message
-- Mag-navigate sa mga serbisyo at konsepto ng Azure nang may kumpiyansa
-- Magresolba ng mga isyu gamit ang angkop na teknikal na bokabularyo
-- Mag-ambag sa mga talakayan ng team gamit ang tamang teknikal na wika
-- Sistematikong palawakin ang iyong kaalaman sa Azure cloud development
+Sa regular na paggamit ng glossary na ito, ikaw ay:
+- Makakapag-usap nang epektibo gamit ang tamang terminolohiya ng Azure Developer CLI
+- Mas malinaw na maiintindihan ang teknikal na dokumentasyon at mga error message
+- Magiging kumpiyansa sa pag-navigate sa mga serbisyo at konsepto ng Azure
+- Makakapagresolba ng mga isyu gamit ang angkop na teknikal na bokabularyo
+- Makakapag-ambag sa mga talakayan ng team gamit ang tamang teknikal na wika
+- Sistematikong mapapalawak ang iyong kaalaman sa Azure cloud development
 
 ## A
 
 **ARM Template**  
-Azure Resource Manager template. JSON-based na Infrastructure as Code format na ginagamit para tukuyin at i-deploy ang mga resource ng Azure nang deklaratibo.
+Template ng Azure Resource Manager. JSON-based na format ng Infrastructure as Code na ginagamit para tukuyin at i-deploy ang mga resource ng Azure nang deklaratibo.
 
 **App Service**  
-Platform-as-a-service (PaaS) ng Azure para sa pagho-host ng mga web application, REST API, at mobile backend nang hindi kinakailangang pamahalaan ang imprastraktura.
+Platform-as-a-service (PaaS) ng Azure para sa pagho-host ng mga web application, REST APIs, at mobile backends nang hindi kinakailangang pamahalaan ang imprastraktura.
 
 **Application Insights**  
-Serbisyo ng Azure para sa application performance monitoring (APM) na nagbibigay ng malalim na kaalaman sa performance, availability, at paggamit ng application.
+Serbisyo ng Azure para sa application performance monitoring (APM) na nagbibigay ng malalim na pananaw sa performance, availability, at paggamit ng application.
 
 **Azure CLI**  
 Command-line interface para sa pamamahala ng mga resource ng Azure. Ginagamit ng azd para sa authentication at ilang operasyon.
@@ -76,7 +81,7 @@ Serverless container service ng Azure na nagbibigay-daan sa pagtakbo ng mga cont
 Continuous Integration/Continuous Deployment. Mga automated na praktis para sa pag-integrate ng mga pagbabago sa code at pag-deploy ng mga application.
 
 **Cosmos DB**  
-Globally distributed, multi-model database service ng Azure na nagbibigay ng komprehensibong SLA para sa throughput, latency, availability, at consistency.
+Globally distributed, multi-model database service ng Azure na nagbibigay ng komprehensibong SLAs para sa throughput, latency, availability, at consistency.
 
 **Configuration**  
 Mga setting at parameter na kumokontrol sa behavior ng application at mga opsyon sa deployment.
@@ -84,13 +89,13 @@ Mga setting at parameter na kumokontrol sa behavior ng application at mga opsyon
 ## D
 
 **Deployment**  
-Proseso ng pag-install at pag-configure ng mga application at ang kanilang mga dependency sa target na imprastruktura.
+Proseso ng pag-install at pag-configure ng mga application at ang kanilang mga dependency sa target na imprastraktura.
 
 **Docker**  
 Platform para sa pag-develop, pag-ship, at pagtakbo ng mga application gamit ang containerization technology.
 
 **Dockerfile**  
-Text file na naglalaman ng mga instruction para sa pagbuo ng Docker container image.
+Text file na naglalaman ng mga instruksyon para sa pagbuo ng Docker container image.
 
 ## E
 
@@ -98,7 +103,7 @@ Text file na naglalaman ng mga instruction para sa pagbuo ng Docker container im
 Deployment target na kumakatawan sa isang partikular na instance ng iyong application (hal., development, staging, production).
 
 **Environment Variables**  
-Mga configuration value na naka-store bilang key-value pairs na maaaring ma-access ng mga application sa runtime.
+Mga configuration value na nakaimbak bilang key-value pairs na maaaring ma-access ng mga application sa runtime.
 
 **Endpoint**  
 URL o network address kung saan maaaring ma-access ang isang application o serbisyo.
@@ -114,7 +119,7 @@ Serverless compute service ng Azure na nagbibigay-daan sa pagtakbo ng event-driv
 CI/CD platform na integrated sa GitHub repositories para sa pag-automate ng workflows.
 
 **Git**  
-Distributed version control system na ginagamit para sa pag-track ng mga pagbabago sa source code.
+Distributed version control system na ginagamit para sa pagsubaybay sa mga pagbabago sa source code.
 
 ## H
 
@@ -127,7 +132,7 @@ Uri ng Azure service kung saan ide-deploy ang isang application (hal., appservic
 ## I
 
 **Infrastructure as Code (IaC)**  
-Praktis ng pagtukoy at pamamahala ng imprastruktura sa pamamagitan ng code sa halip na manual na proseso.
+Praktis ng pagtukoy at pamamahala ng imprastraktura sa pamamagitan ng code sa halip na manual na proseso.
 
 **Init**  
 Proseso ng pag-initialize ng bagong azd project, kadalasang mula sa isang template.
@@ -143,7 +148,7 @@ JSON Web Token. Pamantayan para sa ligtas na pagpapadala ng impormasyon sa pagit
 ## K
 
 **Key Vault**  
-Serbisyo ng Azure para sa ligtas na pag-store at pamamahala ng mga secrets, keys, at certificates.
+Serbisyo ng Azure para sa ligtas na pag-iimbak at pamamahala ng mga secrets, keys, at certificates.
 
 **Kusto Query Language (KQL)**  
 Query language na ginagamit para sa pagsusuri ng data sa Azure Monitor, Application Insights, at iba pang serbisyo ng Azure.
@@ -165,7 +170,7 @@ Feature ng Azure na nagbibigay sa mga serbisyo ng Azure ng awtomatikong managed 
 Arkitektural na approach kung saan ang mga application ay binubuo bilang koleksyon ng maliliit, independent na serbisyo.
 
 **Monitor**  
-Unified monitoring solution ng Azure na nagbibigay ng full-stack observability sa mga application at imprastruktura.
+Unified monitoring solution ng Azure na nagbibigay ng full-stack observability sa mga application at imprastraktura.
 
 ## N
 
@@ -186,7 +191,7 @@ Mga value na ibinabalik mula sa infrastructure deployment na maaaring gamitin ng
 Proseso ng paghahanda ng application code at mga dependency para sa deployment.
 
 **Parameters**  
-Mga input value na ipinapasa sa infrastructure templates para i-customize ang deployment.
+Mga input value na ipinapasa sa infrastructure templates para i-customize ang deployments.
 
 **PostgreSQL**  
 Open-source relational database system na sinusuportahan bilang managed service sa Azure.
@@ -205,13 +210,13 @@ Mga limitasyon sa dami ng mga resource na maaaring likhain sa isang Azure subscr
 Logical container para sa mga resource ng Azure na may parehong lifecycle, permissions, at policies.
 
 **Resource Token**  
-Unique string na binuo ng azd para matiyak na ang mga pangalan ng resource ay natatangi sa mga deployment.
+Natatanging string na binuo ng azd upang matiyak na ang mga pangalan ng resource ay natatangi sa mga deployment.
 
 **REST API**  
 Arkitektural na estilo para sa pagdidisenyo ng mga networked application gamit ang HTTP methods.
 
 **Rollback**  
-Proseso ng pagbabalik sa nakaraang bersyon ng application o configuration ng imprastruktura.
+Proseso ng pagbabalik sa nakaraang bersyon ng application o configuration ng imprastraktura.
 
 ## S
 
@@ -231,18 +236,18 @@ Serbisyo ng Azure para sa paggawa at pag-deploy ng full-stack web applications m
 Serbisyo ng Azure na nagbibigay ng cloud storage para sa mga data object kabilang ang blobs, files, queues, at tables.
 
 **Subscription**  
-Azure account container na naglalaman ng mga resource group at resource, na may kaugnay na billing at access management.
+Container ng Azure account na naglalaman ng mga resource group at resource, na may kaugnay na billing at access management.
 
 ## T
 
 **Template**  
-Pre-built na project structure na naglalaman ng application code, infrastructure definitions, at configuration para sa mga karaniwang senaryo.
+Pre-built na istruktura ng proyekto na naglalaman ng application code, infrastructure definitions, at configuration para sa mga karaniwang senaryo.
 
 **Terraform**  
 Open-source na Infrastructure as Code tool na sumusuporta sa maraming cloud provider kabilang ang Azure.
 
 **Traffic Manager**  
-DNS-based traffic load balancer ng Azure para sa pagdi-distribute ng traffic sa mga global Azure region.
+DNS-based na traffic load balancer ng Azure para sa pagdi-distribute ng traffic sa mga global Azure region.
 
 ## U
 
@@ -290,11 +295,11 @@ Pisikal na magkakahiwalay na lokasyon sa loob ng isang Azure region na nagbibiga
 | API | Application Programming Interface | Set ng mga protocol para sa paggawa ng software |
 | ARM | Azure Resource Manager | Serbisyo ng Azure para sa deployment at pamamahala |
 | CDN | Content Delivery Network | Distributed network ng mga server |
-| CI/CD | Continuous Integration/Continuous Deployment | Automated na mga praktis sa development |
+| CI/CD | Continuous Integration/Continuous Deployment | Mga automated na praktis sa development |
 | CLI | Command Line Interface | Text-based na user interface |
-| DNS | Domain Name System | Sistema para sa pag-translate ng domain names sa IP addresses |
+| DNS | Domain Name System | Sistema para sa pagsasalin ng domain names sa IP addresses |
 | HTTPS | Hypertext Transfer Protocol Secure | Secure na bersyon ng HTTP |
-| IaC | Infrastructure as Code | Pamamahala ng imprastruktura sa pamamagitan ng code |
+| IaC | Infrastructure as Code | Pamamahala ng imprastraktura sa pamamagitan ng code |
 | JSON | JavaScript Object Notation | Format ng data interchange |
 | JWT | JSON Web Token | Format ng token para sa ligtas na pagpapadala ng impormasyon |
 | KQL | Kusto Query Language | Query language para sa mga serbisyo ng data ng Azure |
@@ -312,7 +317,7 @@ Pisikal na magkakahiwalay na lokasyon sa loob ng isang Azure region na nagbibiga
 
 ---
 
-## Azure Service Name Mappings
+## Mga Pangalan ng Serbisyo ng Azure
 
 | Karaniwang Pangalan | Opisyal na Pangalan ng Serbisyo ng Azure | azd Host Type |
 |---------------------|-----------------------------------------|---------------|
@@ -330,17 +335,17 @@ Pisikal na magkakahiwalay na lokasyon sa loob ng isang Azure region na nagbibiga
 
 ---
 
-## Mga Terminong May Kontekstong Partikular
+## Mga Terminong May Konteksto
 
 ### Mga Terminong Pang-Development
 - **Hot Reload**: Awtomatikong pag-update ng mga application habang nasa development nang hindi nire-restart
-- **Build Pipeline**: Awtomatikong proseso para sa pag-build at pag-test ng code
-- **Deployment Slot**: Staging environment sa loob ng isang App Service
+- **Build Pipeline**: Automated na proseso para sa pagbuo at pagsusuri ng code
+- **Deployment Slot**: Staging environment sa loob ng App Service
 - **Environment Parity**: Pagpapanatili ng pagkakapareho ng development, staging, at production environments
 
 ### Mga Terminong Pang-Seguridad
-- **Managed Identity**: Feature ng Azure na nagbibigay ng awtomatikong credential management
-- **Key Vault**: Ligtas na storage para sa mga secrets, keys, at certificates
+- **Managed Identity**: Feature ng Azure na nagbibigay ng awtomatikong pamamahala ng kredensyal
+- **Key Vault**: Ligtas na imbakan para sa mga secrets, keys, at certificates
 - **RBAC**: Role-based access control para sa mga resource ng Azure
 - **Network Security Group**: Virtual firewall para sa pagkontrol ng network traffic
 
@@ -353,20 +358,20 @@ Pisikal na magkakahiwalay na lokasyon sa loob ng isang Azure region na nagbibiga
 ### Mga Terminong Pang-Deployment
 - **Blue-Green Deployment**: Strategiya ng deployment na walang downtime
 - **Canary Deployment**: Gradual na rollout sa subset ng mga user
-- **Rolling Update**: Sequential na pagpapalit ng mga application instance
+- **Rolling Update**: Sunud-sunod na pagpapalit ng mga application instance
 - **Rollback**: Pagbabalik sa nakaraang bersyon ng application
 
 ---
 
-**Tip sa Paggamit**: Gamitin ang `Ctrl+F` para mabilis na hanapin ang partikular na mga termino sa glossary na ito. Ang mga termino ay naka-cross-reference kung naaangkop.
+**Tip sa Paggamit**: Gamitin ang `Ctrl+F` para mabilis na hanapin ang partikular na mga termino sa glossary na ito. Ang mga termino ay naka-cross-reference kung saan naaangkop.
 
 ---
 
-**Navigation**
+**Navigasyon**
 - **Nakaraang Aralin**: [Cheat Sheet](cheat-sheet.md)
 - **Susunod na Aralin**: [FAQ](faq.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

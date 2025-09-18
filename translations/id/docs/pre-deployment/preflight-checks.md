@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T21:57:07+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T08:00:12+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "id"
 }
 -->
-# Pemeriksaan Pra-Penerapan - Validasi Kesiapan Penerapan
+# Pemeriksaan Pra-Penerapan untuk AZD
+
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 6 - Validasi & Perencanaan Pra-Penerapan
+- **⬅️ Sebelumnya**: [Pemilihan SKU](sku-selection.md)
+- **➡️ Bab Berikutnya**: [Bab 7: Pemecahan Masalah](../troubleshooting/common-issues.md)
+- **🔧 Terkait**: [Bab 4: Panduan Penerapan](../deployment/deployment-guide.md)
 
 ## Pendahuluan
 
@@ -20,23 +27,23 @@ Dengan menyelesaikan panduan ini, Anda akan:
 - Memahami strategi pemeriksaan menyeluruh untuk autentikasi, izin, dan kuota
 - Menerapkan prosedur validasi ketersediaan dan kapasitas sumber daya
 - Mengonfigurasi pemeriksaan keamanan dan kepatuhan untuk kebijakan organisasi
-- Merancang alur kerja estimasi biaya dan validasi anggaran
-- Membuat otomatisasi pemeriksaan pra-penerapan khusus untuk pipeline CI/CD
+- Merancang alur kerja validasi anggaran dan estimasi biaya
+- Membuat otomatisasi pemeriksaan pra-penerbangan khusus untuk pipeline CI/CD
 
 ## Hasil Pembelajaran
 
 Setelah selesai, Anda akan dapat:
-- Membuat dan menjalankan skrip validasi pra-penerapan yang menyeluruh
+- Membuat dan menjalankan skrip validasi pra-penerbangan yang menyeluruh
 - Merancang alur kerja pemeriksaan otomatis untuk berbagai skenario penerapan
 - Menerapkan prosedur dan kebijakan validasi spesifik lingkungan
 - Mengonfigurasi pemantauan proaktif dan pemberitahuan untuk kesiapan penerapan
 - Memecahkan masalah pra-penerapan dan menerapkan tindakan korektif
-- Mengintegrasikan pemeriksaan pra-penerapan ke dalam pipeline DevOps dan alur kerja otomatisasi
+- Mengintegrasikan pemeriksaan pra-penerbangan ke dalam pipeline DevOps dan alur kerja otomatisasi
 
 ## Daftar Isi
 
 - [Ikhtisar](../../../../docs/pre-deployment)
-- [Skrip Pra-Penerapan Otomatis](../../../../docs/pre-deployment)
+- [Skrip Pra-Penerbangan Otomatis](../../../../docs/pre-deployment)
 - [Daftar Periksa Validasi Manual](../../../../docs/pre-deployment)
 - [Validasi Lingkungan](../../../../docs/pre-deployment)
 - [Validasi Sumber Daya](../../../../docs/pre-deployment)
@@ -48,28 +55,28 @@ Setelah selesai, Anda akan dapat:
 
 ## Ikhtisar
 
-Pemeriksaan pra-penerapan adalah validasi penting yang dilakukan sebelum penerapan untuk memastikan:
+Pemeriksaan pra-penerbangan adalah validasi penting yang dilakukan sebelum penerapan untuk memastikan:
 
 - **Ketersediaan sumber daya** dan kuota di wilayah target
 - **Autentikasi dan izin** dikonfigurasi dengan benar
 - **Validitas template** dan keakuratan parameter
 - **Konektivitas jaringan** dan dependensi
-- **Kepatuhan keamanan** dengan kebijakan organisasi
+- **Kepatuhan keamanan** terhadap kebijakan organisasi
 - **Estimasi biaya** sesuai dengan batas anggaran
 
-### Kapan Melakukan Pemeriksaan Pra-Penerapan
+### Kapan Melakukan Pemeriksaan Pra-Penerbangan
 
 - **Sebelum penerapan pertama** ke lingkungan baru
 - **Setelah perubahan signifikan pada template**
 - **Sebelum penerapan ke produksi**
-- **Saat mengganti wilayah Azure**
+- **Saat mengubah wilayah Azure**
 - **Sebagai bagian dari pipeline CI/CD**
 
 ---
 
-## Skrip Pra-Penerapan Otomatis
+## Skrip Pra-Penerbangan Otomatis
 
-### Pemeriksa Pra-Penerapan PowerShell
+### Pemeriksa Pra-Penerbangan PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Pemeriksa Pra-Penerapan Bash
+### Pemeriksa Pra-Penerbangan Bash
 
 ```bash
 #!/bin/bash
@@ -793,20 +800,20 @@ Cetak daftar periksa ini dan verifikasi setiap item sebelum penerapan:
 - [ ] AZD CLI terinstal dan diperbarui ke versi terbaru
 - [ ] Azure CLI terinstal dan terautentikasi
 - [ ] Langganan Azure yang benar dipilih
-- [ ] Nama lingkungan unik dan sesuai dengan konvensi penamaan
+- [ ] Nama lingkungan unik dan sesuai konvensi penamaan
 - [ ] Grup sumber daya target diidentifikasi atau dapat dibuat
 
 #### ✅ Autentikasi & Izin
 - [ ] Berhasil terautentikasi dengan `azd auth login`
-- [ ] Pengguna memiliki peran Contributor pada langganan/grup sumber daya target
+- [ ] Pengguna memiliki peran Kontributor pada langganan/grup sumber daya target
 - [ ] Service principal dikonfigurasi untuk CI/CD (jika berlaku)
 - [ ] Tidak ada sertifikat atau kredensial yang kedaluwarsa
 
 #### ✅ Validasi Template
 - [ ] `azure.yaml` ada dan valid sebagai YAML
 - [ ] Semua layanan yang didefinisikan dalam azure.yaml memiliki kode sumber yang sesuai
-- [ ] Template Bicep di direktori `infra/` tersedia
-- [ ] `main.bicep` berhasil dikompilasi tanpa error (`az bicep build --file infra/main.bicep`)
+- [ ] Template Bicep dalam direktori `infra/` tersedia
+- [ ] `main.bicep` dikompilasi tanpa kesalahan (`az bicep build --file infra/main.bicep`)
 - [ ] Semua parameter yang diperlukan memiliki nilai default atau akan disediakan
 - [ ] Tidak ada rahasia yang dikodekan langsung dalam template
 
@@ -820,7 +827,7 @@ Cetak daftar periksa ini dan verifikasi setiap item sebelum penerapan:
 #### ✅ Jaringan & Keamanan
 - [ ] Konektivitas jaringan ke endpoint Azure diverifikasi
 - [ ] Pengaturan firewall/proxy dikonfigurasi jika diperlukan
-- [ ] Key Vault dikonfigurasi untuk pengelolaan rahasia
+- [ ] Key Vault dikonfigurasi untuk manajemen rahasia
 - [ ] Identitas terkelola digunakan jika memungkinkan
 - [ ] Penegakan HTTPS diaktifkan untuk aplikasi web
 
@@ -1278,7 +1285,7 @@ steps:
 
 ## Ringkasan Praktik Terbaik
 
-### ✅ Praktik Terbaik Pemeriksaan Pra-Penerapan
+### ✅ Praktik Terbaik Pemeriksaan Pra-Penerbangan
 
 1. **Otomatisasi Sebisa Mungkin**
    - Integrasikan pemeriksaan ke dalam pipeline CI/CD
@@ -1287,29 +1294,29 @@ steps:
 
 2. **Validasi Spesifik Lingkungan**
    - Pemeriksaan berbeda untuk dev/staging/prod
-   - Persyaratan keamanan yang sesuai untuk setiap lingkungan
+   - Persyaratan keamanan yang sesuai per lingkungan
    - Optimasi biaya untuk lingkungan non-produksi
 
 3. **Cakupan Menyeluruh**
    - Autentikasi dan izin
-   - Kuota dan ketersediaan sumber daya
+   - Kuota sumber daya dan ketersediaan
    - Validasi template dan sintaks
    - Persyaratan keamanan dan kepatuhan
 
 4. **Pelaporan yang Jelas**
    - Indikator status berwarna
-   - Pesan error yang rinci dengan langkah perbaikan
+   - Pesan kesalahan terperinci dengan langkah perbaikan
    - Laporan ringkasan untuk penilaian cepat
 
 5. **Gagal Cepat**
    - Hentikan penerapan jika pemeriksaan kritis gagal
    - Berikan panduan yang jelas untuk resolusi
-   - Aktifkan pengulangan pemeriksaan dengan mudah
+   - Mudahkan pengulangan pemeriksaan
 
-### Kesalahan Umum Pemeriksaan Pra-Penerapan
+### Kesalahan Umum Pemeriksaan Pra-Penerbangan
 
 1. **Melewatkan validasi** untuk penerapan "cepat"
-2. **Pemeriksaan izin yang tidak memadai** sebelum penerapan
+2. **Pemeriksaan izin** yang tidak memadai sebelum penerapan
 3. **Mengabaikan batas kuota** hingga penerapan gagal
 4. **Tidak memvalidasi template** dalam pipeline CI/CD
 5. **Melewatkan validasi keamanan** untuk lingkungan produksi
@@ -1317,13 +1324,13 @@ steps:
 
 ---
 
-**Tips Profesional**: Jalankan pemeriksaan pra-penerapan sebagai pekerjaan terpisah dalam pipeline CI/CD Anda sebelum pekerjaan penerapan sebenarnya. Ini memungkinkan Anda menangkap masalah lebih awal dan memberikan umpan balik lebih cepat kepada pengembang.
+**Tip Profesional**: Jalankan pemeriksaan pra-penerbangan sebagai pekerjaan terpisah dalam pipeline CI/CD Anda sebelum pekerjaan penerapan sebenarnya. Ini memungkinkan Anda menangkap masalah lebih awal dan memberikan umpan balik lebih cepat kepada pengembang.
 
 ---
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Pemilihan SKU](sku-selection.md)
-- **Pelajaran Selanjutnya**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Pelajaran Berikutnya**: [Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 

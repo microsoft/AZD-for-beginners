@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "668bc93b35c9249e52245a0b037b6011",
-  "translation_date": "2025-09-12T21:42:05+00:00",
+  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
+  "translation_date": "2025-09-18T08:27:19+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "tl"
 }
 -->
 # AI Workshop Lab: Paggawa ng Iyong AI Solutions na AZD-Deployable
 
-**Nakaraan:** [AI Model Deployment](ai-model-deployment.md) | **Susunod:** [Production AI Practices](production-ai-practices.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
+- **⬅️ Nakaraan**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Susunod**: [Mga Best Practices sa Production AI](production-ai-practices.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
 
-## Overview ng Workshop
+## Pangkalahatang-ideya ng Workshop
 
-Ang hands-on lab na ito ay gagabay sa mga developer sa proseso ng pagkuha ng isang umiiral na AI application at gawing deployable gamit ang Azure Developer CLI (AZD). Matutunan mo ang mahahalagang pattern para sa production AI deployments gamit ang Azure AI Foundry services.
+Ang hands-on lab na ito ay gagabay sa mga developer sa proseso ng pagkuha ng isang umiiral na AI application at gawing deployable ito gamit ang Azure Developer CLI (AZD). Matutunan mo ang mahahalagang pattern para sa production AI deployments gamit ang Azure AI Foundry services.
 
 **Tagal:** 2-3 oras  
 **Antas:** Intermediate  
@@ -21,12 +26,12 @@ Ang hands-on lab na ito ay gagabay sa mga developer sa proseso ng pagkuha ng isa
 
 ## 🎓 Mga Layunin sa Pag-aaral
 
-Sa pagtatapos ng workshop na ito, magagawa mo:
+Sa pagtatapos ng workshop na ito, magagawa mo ang sumusunod:
 - ✅ I-convert ang isang umiiral na AI application upang gumamit ng AZD templates
 - ✅ I-configure ang Azure AI Foundry services gamit ang AZD
 - ✅ Magpatupad ng secure na pamamahala ng kredensyal para sa AI services
 - ✅ Mag-deploy ng production-ready AI applications na may monitoring
-- ✅ Mag-troubleshoot ng karaniwang isyu sa AI deployment
+- ✅ Mag-troubleshoot ng mga karaniwang isyu sa AI deployment
 
 ## Mga Kinakailangan
 
@@ -46,7 +51,7 @@ Sa pagtatapos ng workshop na ito, magagawa mo:
 - Pamilyar sa command-line interfaces
 - Pangunahing konsepto ng AI/ML (APIs, models, prompts)
 
-## Setup ng Lab
+## Pagsisimula ng Lab
 
 ### Hakbang 1: Paghahanda ng Environment
 
@@ -107,7 +112,7 @@ cat azure.yaml
 cat infra/main.bicep
 ```
 
-**Mga Key AI Patterns na dapat kilalanin:**
+**Mga Key AI Patterns na dapat tukuyin:**
 - Azure OpenAI service provisioning
 - Cognitive Search integration
 - Secure key management
@@ -115,10 +120,10 @@ cat infra/main.bicep
 
 ### **Punto ng Diskusyon:** Bakit Mahalaga ang Mga Pattern na Ito para sa AI
 
-- **Service Dependencies**: Kadalasang nangangailangan ang AI apps ng maraming coordinated services
-- **Seguridad**: Kailangang secure ang pamamahala ng API keys at endpoints
-- **Scalability**: May natatanging scaling requirements ang AI workloads
-- **Pamamahala ng Gastos**: Maaaring magastos ang AI services kung hindi maayos ang configuration
+- **Mga Dependency ng Serbisyo**: Ang mga AI apps ay madalas nangangailangan ng maraming coordinated services
+- **Seguridad**: Ang mga API keys at endpoints ay kailangang secure na pamahalaan
+- **Scalability**: Ang mga AI workloads ay may natatanging scaling requirements
+- **Pamamahala ng Gastos**: Ang mga AI services ay maaaring magastos kung hindi maayos na na-configure
 
 ## Module 2: I-deploy ang Iyong Unang AI Application
 
@@ -148,12 +153,12 @@ azd up
 **Ano ang nangyayari sa `azd up`:**
 - ✅ Nagpo-provision ng Azure OpenAI service
 - ✅ Gumagawa ng Cognitive Search service
-- ✅ Nagsa-set up ng App Service para sa web application
+- ✅ Nagse-set up ng App Service para sa web application
 - ✅ Nagko-configure ng networking at security
 - ✅ Nagde-deploy ng application code
-- ✅ Nagsa-set up ng monitoring at logging
+- ✅ Nagse-set up ng monitoring at logging
 
-2. **I-monitor ang deployment progress** at tandaan ang mga resources na nalikha.
+2. **I-monitor ang deployment progress** at tandaan ang mga resources na ginagawa.
 
 ### Hakbang 2.3: I-verify ang Iyong Deployment
 
@@ -170,17 +175,17 @@ azd show --output json | grep "webAppUrl"
 3. **Subukan ang AI functionality:**
    - Mag-navigate sa web application
    - Subukan ang mga sample queries
-   - I-verify kung gumagana ang AI responses
+   - I-verify na gumagana ang AI responses
 
-### **Lab Exercise 2.1: Practice sa Troubleshooting**
+### **Lab Exercise 2.1: Pagsasanay sa Troubleshooting**
 
-**Scenario**: Tagumpay ang deployment ngunit hindi tumutugon ang AI.
+**Scenario**: Ang iyong deployment ay nagtagumpay ngunit hindi tumutugon ang AI.
 
 **Mga Karaniwang Isyu na Dapat Suriin:**
 1. **OpenAI API keys**: Siguraduhing tama ang pagkaka-set
 2. **Model availability**: Suriin kung sinusuportahan ng iyong rehiyon ang model
-3. **Network connectivity**: Siguraduhing makakapag-communicate ang mga services
-4. **RBAC permissions**: Siguraduhing may access ang app sa OpenAI
+3. **Network connectivity**: Siguraduhing makakapag-ugnayan ang mga serbisyo
+4. **RBAC permissions**: Siguraduhing ma-access ng app ang OpenAI
 
 **Mga Debugging Commands:**
 ```bash
@@ -226,7 +231,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Hakbang 3.2: Environment-Specific Configurations
+### Hakbang 3.2: Mga Configurations na Specific sa Environment
 
 **Best Practice**: Iba't ibang configurations para sa development vs production.
 
@@ -245,21 +250,21 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab Exercise 3.1: Cost Optimization**
+### **Lab Exercise 3.1: Pag-optimize ng Gastos**
 
 **Hamunin**: I-configure ang template para sa cost-effective development.
 
 **Mga Gawain:**
 1. Tukuyin kung aling SKUs ang maaaring i-set sa free/basic tiers
 2. I-configure ang environment variables para sa minimal na gastos
-3. I-deploy at ihambing ang gastos sa production configuration
+3. I-deploy at ihambing ang mga gastos sa production configuration
 
 **Mga Solusyon na Pahiwatig:**
 - Gumamit ng F0 (free) tier para sa Cognitive Services kung maaari
 - Gumamit ng Basic tier para sa Search Service sa development
 - Isaalang-alang ang paggamit ng Consumption plan para sa Functions
 
-## Module 4: Seguridad at Production Best Practices
+## Module 4: Seguridad at Mga Best Practices sa Production
 
 ### Hakbang 4.1: Secure Credential Management
 
@@ -315,7 +320,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Mag-set up ng AI-specific monitoring:**
+2. **I-set up ang AI-specific monitoring:**
 
 Magdagdag ng custom metrics para sa AI operations:
 ```bicep
@@ -340,14 +345,14 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### **Lab Exercise 4.1: Security Audit**
 
-**Gawain**: Suriin ang iyong deployment para sa security best practices.
+**Gawain**: Suriin ang iyong deployment para sa mga best practices sa seguridad.
 
 **Checklist:**
 - [ ] Walang hardcoded secrets sa code o configuration
 - [ ] Managed Identity ang ginagamit para sa service-to-service authentication
 - [ ] Key Vault ang nag-iimbak ng sensitibong configuration
-- [ ] Properly restricted ang network access
-- [ ] Enabled ang monitoring at logging
+- [ ] Ang access sa network ay maayos na na-restrict
+- [ ] Ang monitoring at logging ay naka-enable
 
 ## Module 5: Pag-convert ng Iyong Sariling AI Application
 
@@ -359,15 +364,15 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Anong AI services ang ginagamit ng iyong app?
    - Anong compute resources ang kailangan nito?
    - Kailangan ba nito ng database?
-   - Ano ang dependencies sa pagitan ng mga services?
+   - Ano ang mga dependencies sa pagitan ng mga serbisyo?
 
-2. **Security Requirements:**
+2. **Mga Kinakailangan sa Seguridad:**
    - Anong sensitibong data ang hinahawakan ng iyong app?
    - Anong compliance requirements ang mayroon ka?
    - Kailangan mo ba ng private networking?
 
-3. **Scaling Requirements:**
-   - Ano ang inaasahang load mo?
+3. **Mga Kinakailangan sa Scalability:**
+   - Ano ang inaasahang load?
    - Kailangan mo ba ng auto-scaling?
    - Mayroon bang regional requirements?
 
@@ -469,7 +474,7 @@ output name string = openAIAccount.name
 
 ## Module 6: Troubleshooting Common Issues
 
-### Karaniwang Deployment Issues
+### Mga Karaniwang Isyu sa Deployment
 
 #### Isyu 1: OpenAI Service Quota Exceeded
 **Sintomas:** Nabigo ang deployment dahil sa quota error  
@@ -484,7 +489,7 @@ azd up
 ```
 
 #### Isyu 2: Model Not Available in Region
-**Sintomas:** Nabigo ang AI responses o model deployment errors  
+**Sintomas:** Nabigo ang AI responses o may model deployment errors  
 **Mga Solusyon:**  
 ```bash
 # Check model availability by region
@@ -509,7 +514,7 @@ az role assignment create \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### Performance Issues
+### Mga Isyu sa Performance
 
 #### Isyu 4: Mabagal na AI Responses
 **Mga Hakbang sa Pagsisiyasat:**
@@ -524,9 +529,9 @@ az role assignment create \
 
 ### **Lab Exercise 6.1: Debugging Challenge**
 
-**Scenario**: Tagumpay ang deployment, ngunit nagre-return ang application ng 500 errors.
+**Scenario**: Ang iyong deployment ay nagtagumpay, ngunit ang application ay nagbabalik ng 500 errors.
 
-**Mga Debugging Tasks:**
+**Mga Gawain sa Debugging:**
 1. Suriin ang application logs
 2. I-verify ang service connectivity
 3. Subukan ang authentication
@@ -578,7 +583,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 **Gawain**: I-optimize ang iyong AI application para sa parehong performance at gastos.
 
-**Mga Metrics na I-improve:**
+**Mga Metrics na dapat pagbutihin:**
 - Bawasan ang average response time ng 20%
 - Bawasan ang buwanang gastos ng 15%
 - Panatilihin ang 99.9% uptime
@@ -593,12 +598,12 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ### Scenario ng Hamon
 
-Ikaw ay inatasang gumawa ng production-ready AI-powered customer service chatbot na may mga sumusunod na kinakailangan:
+Ikaw ay inatasan na gumawa ng production-ready AI-powered customer service chatbot na may mga sumusunod na kinakailangan:
 
 **Functional Requirements:**
 - Web interface para sa customer interactions
 - Integration sa Azure OpenAI para sa responses
-- Document search capability gamit ang Cognitive Search
+- Kakayahan sa document search gamit ang Cognitive Search
 - Integration sa umiiral na customer database
 - Multi-language support
 
@@ -607,24 +612,24 @@ Ikaw ay inatasang gumawa ng production-ready AI-powered customer service chatbot
 - 99.9% uptime SLA
 - SOC 2 compliance
 - Gastos na mas mababa sa $500/buwan
-- I-deploy sa maraming environment (dev, staging, prod)
+- I-deploy sa maraming environments (dev, staging, prod)
 
 ### Mga Hakbang sa Implementasyon
 
 1. **I-disenyo ang architecture**
 2. **Gumawa ng AZD template**
-3. **Magpatupad ng security measures**
+3. **Magpatupad ng mga security measures**
 4. **Mag-set up ng monitoring at alerting**
 5. **Gumawa ng deployment pipelines**
 6. **I-dokumenta ang solusyon**
 
 ### Mga Pamantayan sa Pagsusuri
 
-- ✅ **Functionality**: Natutugunan ba ang lahat ng kinakailangan?
-- ✅ **Seguridad**: Naipatupad ba ang best practices?
-- ✅ **Scalability**: Kaya bang mag-handle ng load?
+- ✅ **Functionality**: Natutugunan ba nito ang lahat ng kinakailangan?
+- ✅ **Seguridad**: Naipatupad ba ang mga best practices?
+- ✅ **Scalability**: Kaya ba nitong mag-handle ng load?
 - ✅ **Maintainability**: Maayos ba ang code at infrastructure?
-- ✅ **Gastos**: Nananatili ba sa budget?
+- ✅ **Gastos**: Nananatili ba ito sa budget?
 
 ## Karagdagang Resources
 
@@ -647,29 +652,34 @@ Ikaw ay inatasang gumawa ng production-ready AI-powered customer service chatbot
 
 Binabati kita! Natapos mo na ang AI Workshop Lab. Dapat ay kaya mo nang:
 
-- ✅ I-convert ang umiiral na AI applications sa AZD templates
-- ✅ Mag-deploy ng production-ready AI applications
-- ✅ Ipatupad ang mga pinakamahusay na kasanayan sa seguridad para sa mga AI workload  
-- ✅ Subaybayan at i-optimize ang performance ng AI application  
-- ✅ Ayusin ang mga karaniwang isyu sa deployment  
+- ✅ I-convert ang mga umiiral na AI application sa AZD templates
+- ✅ I-deploy ang mga AI application na handa na para sa produksyon
+- ✅ Ipatupad ang mga pinakamahusay na kasanayan sa seguridad para sa AI workloads
+- ✅ I-monitor at i-optimize ang performance ng AI application
+- ✅ I-troubleshoot ang mga karaniwang isyu sa deployment
 
-### Mga Susunod na Hakbang  
-1. I-apply ang mga pattern na ito sa sarili mong mga AI project  
-2. Mag-ambag ng mga template pabalik sa komunidad  
-3. Sumali sa Azure AI Foundry Discord para sa patuloy na suporta  
-4. Tuklasin ang mga advanced na paksa tulad ng multi-region deployments  
-
----
-
-**Feedback sa Workshop**: Tulungan kaming pagbutihin ang workshop na ito sa pamamagitan ng pagbabahagi ng iyong karanasan sa [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).  
+### Mga Susunod na Hakbang
+1. I-apply ang mga pattern na ito sa sarili mong AI projects
+2. Mag-ambag ng templates pabalik sa komunidad
+3. Sumali sa Azure AI Foundry Discord para sa patuloy na suporta
+4. Tuklasin ang mga advanced na paksa tulad ng multi-region deployments
 
 ---
 
-**Nakaraan:** [AI Model Deployment](ai-model-deployment.md) | **Susunod:** [Production AI Practices](production-ai-practices.md)  
+**Feedback sa Workshop**: Tulungan kaming pagbutihin ang workshop na ito sa pamamagitan ng pagbabahagi ng iyong karanasan sa [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).
 
-**Kailangan ng Tulong?** Sumali sa aming komunidad para sa suporta at talakayan tungkol sa AZD at AI deployments.  
+---
+
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
+- **⬅️ Nakaraan**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Susunod**: [Mga Pinakamahusay na Kasanayan sa Produksyon ng AI](production-ai-practices.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
+
+**Kailangan ng Tulong?** Sumali sa aming komunidad para sa suporta at talakayan tungkol sa AZD at AI deployments.
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

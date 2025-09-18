@@ -1,25 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T21:40:54+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T07:58:15+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "id"
 }
 -->
 # Panduan Deployment - Menguasai Deployment AZD
 
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 4 - Infrastruktur sebagai Kode & Deployment
+- **⬅️ Bab Sebelumnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
+- **➡️ Selanjutnya**: [Penyediaan Sumber Daya](provisioning.md)
+- **🚀 Bab Berikutnya**: [Bab 5: Solusi AI Multi-Agent](../../examples/retail-scenario.md)
+
 ## Pendahuluan
 
-Panduan komprehensif ini mencakup semua yang perlu Anda ketahui tentang cara mendistribusikan aplikasi menggunakan Azure Developer CLI, mulai dari deployment sederhana dengan satu perintah hingga skenario produksi tingkat lanjut dengan custom hooks, berbagai lingkungan, dan integrasi CI/CD. Kuasai seluruh siklus hidup deployment dengan contoh praktis dan praktik terbaik.
+Panduan komprehensif ini mencakup semua yang perlu Anda ketahui tentang deployment aplikasi menggunakan Azure Developer CLI, mulai dari deployment sederhana dengan satu perintah hingga skenario produksi tingkat lanjut dengan custom hooks, beberapa lingkungan, dan integrasi CI/CD. Kuasai seluruh siklus hidup deployment dengan contoh praktis dan praktik terbaik.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
 - Menguasai semua perintah dan alur kerja deployment Azure Developer CLI
-- Memahami siklus hidup deployment lengkap dari provisioning hingga monitoring
+- Memahami siklus hidup deployment lengkap dari penyediaan hingga pemantauan
 - Menerapkan custom hooks untuk otomatisasi sebelum dan sesudah deployment
-- Mengonfigurasi berbagai lingkungan dengan parameter spesifik lingkungan
+- Mengonfigurasi beberapa lingkungan dengan parameter spesifik lingkungan
 - Menyiapkan strategi deployment tingkat lanjut termasuk blue-green dan canary deployments
 - Mengintegrasikan deployment azd dengan pipeline CI/CD dan alur kerja DevOps
 
@@ -27,8 +34,8 @@ Dengan menyelesaikan panduan ini, Anda akan:
 
 Setelah selesai, Anda akan mampu:
 - Menjalankan dan memecahkan masalah semua alur kerja deployment azd secara mandiri
-- Merancang dan menerapkan otomatisasi deployment menggunakan custom hooks
-- Mengonfigurasi deployment siap produksi dengan keamanan dan monitoring yang tepat
+- Merancang dan menerapkan otomatisasi deployment custom menggunakan hooks
+- Mengonfigurasi deployment siap produksi dengan keamanan dan pemantauan yang tepat
 - Mengelola skenario deployment multi-lingkungan yang kompleks
 - Mengoptimalkan kinerja deployment dan menerapkan strategi rollback
 - Mengintegrasikan deployment azd ke dalam praktik DevOps perusahaan
@@ -38,7 +45,7 @@ Setelah selesai, Anda akan mampu:
 Azure Developer CLI menyediakan beberapa perintah deployment:
 - `azd up` - Alur kerja lengkap (provision + deploy)
 - `azd provision` - Membuat/memperbarui sumber daya Azure saja
-- `azd deploy` - Mendistribusikan kode aplikasi saja
+- `azd deploy` - Mendeploy kode aplikasi saja
 - `azd package` - Membangun dan mengemas aplikasi
 
 ## Alur Kerja Deployment Dasar
@@ -99,11 +106,11 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Fase 2: Provisioning Infrastruktur
+### Fase 2: Penyediaan Infrastruktur
 - Membaca template infrastruktur (Bicep/Terraform)
 - Membuat atau memperbarui sumber daya Azure
 - Mengonfigurasi jaringan dan keamanan
-- Menyiapkan monitoring dan logging
+- Menyiapkan pemantauan dan logging
 
 ### Fase 3: Post-Provision Hooks
 ```yaml
@@ -137,7 +144,7 @@ hooks:
 ```
 
 ### Fase 6: Deployment Aplikasi
-- Mendistribusikan aplikasi yang telah dikemas ke layanan Azure
+- Mendeploy aplikasi yang telah dikemas ke layanan Azure
 - Memperbarui pengaturan konfigurasi
 - Memulai/memulai ulang layanan
 
@@ -392,9 +399,9 @@ azd deploy --incremental
 azd deploy --detect-changes
 ```
 
-## 🔍 Monitoring Deployment
+## 🔍 Pemantauan Deployment
 
-### Monitoring Deployment Real-Time
+### Pemantauan Deployment Real-Time
 ```bash
 # Monitor deployment progress
 azd deploy --follow
@@ -455,7 +462,7 @@ echo "✅ Deployment validation completed successfully"
 
 ## 🔐 Pertimbangan Keamanan
 
-### Pengelolaan Rahasia
+### Manajemen Rahasia
 ```bash
 # Store secrets securely
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
@@ -631,23 +638,23 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Langkah Selanjutnya
 
-- [Provisioning Resources](provisioning.md) - Penjelasan mendalam tentang manajemen infrastruktur
-- [Pre-Deployment Planning](../pre-deployment/capacity-planning.md) - Rencanakan strategi deployment Anda
-- [Common Issues](../troubleshooting/common-issues.md) - Atasi masalah deployment
-- [Best Practices](../troubleshooting/debugging.md) - Strategi deployment siap produksi
+- [Penyediaan Sumber Daya](provisioning.md) - Penjelasan mendalam tentang manajemen infrastruktur
+- [Perencanaan Pra-Deployment](../pre-deployment/capacity-planning.md) - Rencanakan strategi deployment Anda
+- [Masalah Umum](../troubleshooting/common-issues.md) - Memecahkan masalah deployment
+- [Praktik Terbaik](../troubleshooting/debugging.md) - Strategi deployment siap produksi
 
 ## Sumber Daya Tambahan
 
-- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Referensi Deployment Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Deployment Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Deployment Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Deployment Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Proyek Pertama Anda](../getting-started/first-project.md)
-- **Pelajaran Selanjutnya**: [Provisioning Resources](provisioning.md)
+- **Pelajaran Selanjutnya**: [Penyediaan Sumber Daya](provisioning.md)
 
 ---
 

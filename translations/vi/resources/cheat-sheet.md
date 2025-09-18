@@ -1,41 +1,47 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:46:19+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T07:50:47+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "vi"
 }
 -->
 # Bảng Lệnh Tóm Tắt - Các Lệnh AZD Cần Thiết
 
-## Giới Thiệu
+**Tham khảo nhanh cho tất cả các chương**
+- **📚 Trang chủ khóa học**: [AZD Dành Cho Người Mới Bắt Đầu](../README.md)
+- **📖 Bắt đầu nhanh**: [Chương 1: Nền tảng & Bắt đầu nhanh](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Lệnh AI**: [Chương 2: Phát triển ưu tiên AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Nâng cao**: [Chương 4: Hạ tầng dưới dạng mã](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-Bảng lệnh tóm tắt toàn diện này cung cấp tham khảo nhanh cho các lệnh Azure Developer CLI được sử dụng phổ biến nhất, được tổ chức theo danh mục với các ví dụ thực tế. Hoàn hảo để tra cứu nhanh trong quá trình phát triển, khắc phục sự cố, và các hoạt động hàng ngày với các dự án azd.
+## Giới thiệu
 
-## Mục Tiêu Học Tập
+Bảng lệnh tóm tắt toàn diện này cung cấp tham khảo nhanh cho các lệnh CLI của Azure Developer được sử dụng phổ biến nhất, được tổ chức theo danh mục với các ví dụ thực tế. Hoàn hảo để tra cứu nhanh trong quá trình phát triển, khắc phục sự cố và vận hành hàng ngày với các dự án azd.
+
+## Mục tiêu học tập
 
 Khi sử dụng bảng lệnh này, bạn sẽ:
-- Có quyền truy cập ngay lập tức vào các lệnh và cú pháp Azure Developer CLI cần thiết
+- Có quyền truy cập tức thì vào các lệnh và cú pháp CLI của Azure Developer cần thiết
 - Hiểu cách tổ chức lệnh theo danh mục chức năng và trường hợp sử dụng
 - Tham khảo các ví dụ thực tế cho các tình huống phát triển và triển khai phổ biến
 - Truy cập các lệnh khắc phục sự cố để giải quyết vấn đề nhanh chóng
 - Tìm kiếm các tùy chọn cấu hình và tùy chỉnh nâng cao một cách hiệu quả
 - Xác định các lệnh quản lý môi trường và quy trình làm việc đa môi trường
 
-## Kết Quả Học Tập
+## Kết quả học tập
 
 Với việc thường xuyên tham khảo bảng lệnh này, bạn sẽ có thể:
-- Thực hiện các lệnh azd một cách tự tin mà không cần tham khảo tài liệu đầy đủ
+- Thực thi các lệnh azd một cách tự tin mà không cần tham khảo tài liệu đầy đủ
 - Nhanh chóng giải quyết các vấn đề phổ biến bằng cách sử dụng các lệnh chẩn đoán phù hợp
 - Quản lý hiệu quả nhiều môi trường và các tình huống triển khai
-- Áp dụng các tính năng và tùy chọn cấu hình nâng cao của azd khi cần thiết
+- Áp dụng các tính năng và tùy chọn cấu hình nâng cao của azd khi cần
 - Khắc phục sự cố triển khai bằng cách sử dụng các chuỗi lệnh có hệ thống
 - Tối ưu hóa quy trình làm việc thông qua việc sử dụng hiệu quả các phím tắt và tùy chọn của azd
 
-## Các Lệnh Bắt Đầu
+## Các lệnh bắt đầu
 
-### Xác Thực
+### Xác thực
 ```bash
 # Login to Azure (uses Azure CLI)
 az login
@@ -48,7 +54,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Khởi Tạo Dự Án
+### Khởi tạo dự án
 ```bash
 # Browse available templates
 azd template list
@@ -64,9 +70,9 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Các Lệnh Triển Khai Cốt Lõi
+## Các lệnh triển khai cốt lõi
 
-### Quy Trình Triển Khai Hoàn Chỉnh
+### Quy trình triển khai hoàn chỉnh
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -81,7 +87,7 @@ azd up --environment production
 azd up --parameter location=westus2
 ```
 
-### Chỉ Triển Khai Hạ Tầng
+### Chỉ triển khai hạ tầng
 ```bash
 # Provision Azure resources
 azd provision
@@ -93,7 +99,7 @@ azd provision --preview
 azd provision --what-if
 ```
 
-### Chỉ Triển Khai Ứng Dụng
+### Chỉ triển khai ứng dụng
 ```bash
 # Deploy application code
 azd deploy
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Xây Dựng và Đóng Gói
+### Xây dựng và đóng gói
 ```bash
 # Build applications
 azd package
@@ -115,9 +121,9 @@ azd package
 azd package --service api
 ```
 
-## 🌍 Quản Lý Môi Trường
+## 🌍 Quản lý môi trường
 
-### Hoạt Động Môi Trường
+### Hoạt động môi trường
 ```bash
 # List all environments
 azd env list
@@ -136,7 +142,7 @@ azd env show
 azd env refresh
 ```
 
-### Biến Môi Trường
+### Biến môi trường
 ```bash
 # Set environment variable
 azd env set API_KEY "your-secret-key"
@@ -152,9 +158,9 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Các Lệnh Cấu Hình
+## ⚙️ Các lệnh cấu hình
 
-### Cấu Hình Toàn Cục
+### Cấu hình toàn cầu
 ```bash
 # List all configuration
 azd config list
@@ -170,7 +176,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Cấu Hình Dự Án
+### Cấu hình dự án
 ```bash
 # Validate azure.yaml
 azd config validate
@@ -182,9 +188,9 @@ azd show
 azd show --output json
 ```
 
-## 📊 Giám Sát và Nhật Ký
+## 📊 Giám sát và nhật ký
 
-### Nhật Ký Ứng Dụng
+### Nhật ký ứng dụng
 ```bash
 # View logs from all services
 azd logs
@@ -203,7 +209,7 @@ azd logs --since "2024-01-01 10:00:00"
 azd logs --level error
 ```
 
-### Giám Sát
+### Giám sát
 ```bash
 # Open Azure portal for monitoring
 azd monitor
@@ -212,9 +218,9 @@ azd monitor
 azd monitor --insights
 ```
 
-## 🛠️ Các Lệnh Bảo Trì
+## 🛠️ Các lệnh bảo trì
 
-### Dọn Dẹp
+### Dọn dẹp
 ```bash
 # Remove all Azure resources
 azd down
@@ -229,7 +235,7 @@ azd down --purge
 azd down --force --purge
 ```
 
-### Cập Nhật
+### Cập nhật
 ```bash
 # Check for azd updates
 azd version --check-for-updates
@@ -241,7 +247,7 @@ azd version
 azd info
 ```
 
-## 🔧 Các Lệnh Nâng Cao
+## 🔧 Các lệnh nâng cao
 
 ### Pipeline và CI/CD
 ```bash
@@ -255,7 +261,7 @@ azd pipeline config --provider azdo
 azd pipeline show
 ```
 
-### Quản Lý Hạ Tầng
+### Quản lý hạ tầng
 ```bash
 # Import existing resources
 azd infra import
@@ -267,7 +273,7 @@ azd infra export
 azd infra validate
 ```
 
-### Quản Lý Dịch Vụ
+### Quản lý dịch vụ
 ```bash
 # List all services
 azd service list
@@ -279,9 +285,9 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 Quy Trình Làm Việc Nhanh
+## 🎯 Quy trình làm việc nhanh
 
-### Quy Trình Phát Triển
+### Quy trình làm việc phát triển
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -298,7 +304,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Quy Trình Làm Việc Đa Môi Trường
+### Quy trình làm việc đa môi trường
 ```bash
 # Set up environments
 azd env new dev
@@ -318,7 +324,7 @@ azd env select production
 azd up
 ```
 
-### Quy Trình Khắc Phục Sự Cố
+### Quy trình làm việc khắc phục sự cố
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -336,9 +342,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Các Lệnh Gỡ Lỗi
+## 🔍 Các lệnh gỡ lỗi
 
-### Thông Tin Gỡ Lỗi
+### Thông tin gỡ lỗi
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -354,7 +360,7 @@ azd info
 az account show
 ```
 
-### Gỡ Lỗi Mẫu
+### Gỡ lỗi mẫu
 ```bash
 # List available templates with details
 azd template list --output json
@@ -366,9 +372,9 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 Các Lệnh Tệp và Thư Mục
+## 📁 Các lệnh tệp và thư mục
 
-### Cấu Trúc Dự Án
+### Cấu trúc dự án
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -381,9 +387,9 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Định Dạng Kết Quả
+## 🎨 Định dạng đầu ra
 
-### Kết Quả JSON
+### Đầu ra JSON
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -395,16 +401,16 @@ azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Kết Quả Dạng Bảng
+### Đầu ra dạng bảng
 ```bash
 # Format as table
 azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Các Kết Hợp Lệnh Phổ Biến
+## 🔧 Các tổ hợp lệnh phổ biến
 
-### Script Kiểm Tra Sức Khỏe
+### Script kiểm tra sức khỏe
 ```bash
 #!/bin/bash
 # Quick health check
@@ -413,7 +419,7 @@ azd env show
 azd logs --level error --since 10m
 ```
 
-### Xác Thực Triển Khai
+### Xác thực triển khai
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -422,7 +428,7 @@ azd provision --preview
 az account show
 ```
 
-### So Sánh Môi Trường
+### So sánh môi trường
 ```bash
 #!/bin/bash
 # Compare environments
@@ -433,7 +439,7 @@ for env in dev staging production; do
 done
 ```
 
-### Script Dọn Dẹp Tài Nguyên
+### Script dọn dẹp tài nguyên
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -444,9 +450,9 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 Biến Môi Trường
+## 📝 Biến môi trường
 
-### Các Biến Môi Trường Phổ Biến
+### Các biến môi trường phổ biến
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -463,9 +469,9 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Các Lệnh Khẩn Cấp
+## 🚨 Các lệnh khẩn cấp
 
-### Sửa Lỗi Nhanh
+### Sửa lỗi nhanh
 ```bash
 # Reset authentication
 az account clear
@@ -481,7 +487,7 @@ azd service restart --all
 azd deploy --rollback
 ```
 
-### Các Lệnh Khôi Phục
+### Lệnh khôi phục
 ```bash
 # Recover from failed deployment
 azd provision --continue-on-error
@@ -492,9 +498,9 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Mẹo Chuyên Nghiệp
+## 💡 Mẹo chuyên nghiệp
 
-### Bí Danh Cho Quy Trình Làm Việc Nhanh Hơn
+### Bí danh để tăng tốc quy trình làm việc
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -503,7 +509,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Phím Tắt Chức Năng
+### Phím tắt chức năng
 ```bash
 # Quick environment switching
 azd-env() {
@@ -523,9 +529,9 @@ azd-status() {
 }
 ```
 
-## 📖 Trợ Giúp và Tài Liệu
+## 📖 Trợ giúp và tài liệu
 
-### Nhận Trợ Giúp
+### Nhận trợ giúp
 ```bash
 # General help
 azd --help
@@ -541,7 +547,7 @@ azd version
 azd version --output json
 ```
 
-### Liên Kết Tài Liệu
+### Liên kết tài liệu
 ```bash
 # Open documentation in browser
 azd docs
@@ -556,9 +562,9 @@ azd template show <template-name> --docs
 
 ---
 
-**Điều Hướng**
-- **Bài Học Trước**: [Kiểm Tra Trước Khi Triển Khai](../docs/pre-deployment/preflight-checks.md)
-- **Bài Học Tiếp Theo**: [Thuật Ngữ](glossary.md)
+**Điều hướng**
+- **Bài học trước**: [Kiểm tra trước triển khai](../docs/pre-deployment/preflight-checks.md)
+- **Bài học tiếp theo**: [Thuật ngữ](glossary.md)
 
 ---
 

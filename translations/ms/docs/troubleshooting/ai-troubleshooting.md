@@ -1,15 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T21:57:20+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T08:15:47+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "ms"
 }
 -->
-# Panduan Penyelesaian Masalah AI untuk Azure Developer CLI
+# Panduan Penyelesaian Masalah Khusus AI
 
-**Sebelumnya:** [Amalan AI Produksi](../ai-foundry/production-ai-practices.md) | **Seterusnya:** [Memulakan dengan AZD](../getting-started/README.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 7 - Penyelesaian Masalah & Debugging
+- **⬅️ Sebelumnya**: [Panduan Debugging](debugging.md)
+- **➡️ Bab Seterusnya**: [Bab 8: Corak Pengeluaran & Perusahaan](../ai-foundry/production-ai-practices.md)
+- **🤖 Berkaitan**: [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+
+**Sebelumnya:** [Amalan AI Pengeluaran](../ai-foundry/production-ai-practices.md) | **Seterusnya:** [Memulakan dengan AZD](../getting-started/README.md)
 
 Panduan penyelesaian masalah yang komprehensif ini menangani isu-isu biasa semasa melaksanakan penyelesaian AI dengan AZD, menyediakan penyelesaian dan teknik debugging khusus untuk perkhidmatan Azure AI.
 
@@ -472,7 +479,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Gunakan Model Alternatif:**
+2. **Gunakan Model Sandaran:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -525,7 +532,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ## Isu Prestasi dan Skalabiliti
 
-### Isu: Tindak Balas Lambat
+### Isu: Tindak Balas Latensi Tinggi
 
 **Gejala:**
 - Masa tindak balas > 30 saat
@@ -839,14 +846,14 @@ def monitor_performance(func):
 |---------------|------------|--------------|
 | 401 | Tidak Dibenarkan | Semak kunci API dan konfigurasi identiti terurus |
 | 403 | Dilarang | Sahkan tugasan peranan RBAC |
-| 429 | Had Kadar | Laksanakan logik percubaan semula dengan backoff eksponen |
+| 429 | Had Kadar | Laksanakan logik cubaan semula dengan backoff eksponen |
 | 500 | Kesilapan Pelayan Dalaman | Semak status pelaksanaan model dan log |
 | 503 | Perkhidmatan Tidak Tersedia | Sahkan kesihatan perkhidmatan dan ketersediaan wilayah |
 
 ## Langkah Seterusnya
 
 1. **Semak [Panduan Pelaksanaan Model AI](ai-model-deployment.md)** untuk amalan terbaik pelaksanaan
-2. **Lengkapkan [Amalan AI Produksi](production-ai-practices.md)** untuk penyelesaian bersedia untuk perusahaan
+2. **Lengkapkan [Amalan AI Pengeluaran](production-ai-practices.md)** untuk penyelesaian bersedia perusahaan
 3. **Sertai [Discord Azure AI Foundry](https://aka.ms/foundry/discord)** untuk sokongan komuniti
 4. **Hantar isu** ke [repositori GitHub AZD](https://github.com/Azure/azure-dev) untuk masalah khusus AZD
 
@@ -858,8 +865,13 @@ def monitor_performance(func):
 
 ---
 
-**Sebelumnya:** [Amalan AI Produksi](../ai-foundry/production-ai-practices.md) | **Seterusnya:** [Bengkel](../../workshop/README.md)
-- [Penyelesaian Masalah Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 7 - Penyelesaian Masalah & Debugging
+- **⬅️ Sebelumnya**: [Panduan Debugging](debugging.md)
+- **➡️ Bab Seterusnya**: [Bab 8: Corak Pengeluaran & Perusahaan](../ai-foundry/production-ai-practices.md)
+- **🤖 Berkaitan**: [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+- [Penyelesaian Masalah CLI Pembangun Azure](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

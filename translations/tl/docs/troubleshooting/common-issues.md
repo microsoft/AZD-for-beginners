@@ -1,41 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:49:14+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T08:31:53+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "tl"
 }
 -->
 # Karaniwang Isyu at Solusyon
 
+**Pag-navigate sa Kabanata:**
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 7 - Pag-troubleshoot at Pag-debug
+- **⬅️ Nakaraang Kabanata**: [Kabanata 6: Mga Pre-flight Check](../pre-deployment/preflight-checks.md)
+- **➡️ Susunod**: [Gabay sa Pag-debug](debugging.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 8: Mga Pattern para sa Produksyon at Enterprise](../ai-foundry/production-ai-practices.md)
+
 ## Panimula
 
-Ang komprehensibong gabay na ito sa pag-troubleshoot ay tumatalakay sa mga madalas na nararanasang isyu kapag ginagamit ang Azure Developer CLI. Matutunan kung paano mag-diagnose, mag-troubleshoot, at magresolba ng mga karaniwang problema sa authentication, deployment, provisioning ng infrastructure, at configuration ng application. Ang bawat isyu ay may detalyadong sintomas, sanhi, at hakbang-hakbang na solusyon.
+Ang komprehensibong gabay na ito sa pag-troubleshoot ay sumasaklaw sa mga karaniwang isyu na nararanasan kapag ginagamit ang Azure Developer CLI. Matutunan kung paano mag-diagnose, mag-troubleshoot, at magresolba ng mga problema sa authentication, deployment, provisioning ng imprastruktura, at configuration ng aplikasyon. Ang bawat isyu ay may detalyadong sintomas, mga ugat na sanhi, at hakbang-hakbang na mga pamamaraan para sa solusyon.
 
-## Layunin ng Pag-aaral
+## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng gabay na ito, ikaw ay:
 - Magiging bihasa sa mga teknik sa pag-diagnose ng mga isyu sa Azure Developer CLI
 - Maiintindihan ang mga karaniwang problema sa authentication at permiso, pati na rin ang kanilang mga solusyon
-- Malulutas ang mga pagkabigo sa deployment, mga error sa provisioning ng infrastructure, at mga isyu sa configuration
-- Makakapagpatupad ng mga proaktibong monitoring at debugging na estratehiya
+- Malulutas ang mga pagkabigo sa deployment, mga error sa provisioning ng imprastruktura, at mga isyu sa configuration
+- Makakapagpatupad ng mga proactive na pamamaraan sa monitoring at debugging
 - Makakagamit ng sistematikong pamamaraan sa pag-troubleshoot ng mga komplikadong problema
-- Makakapag-configure ng tamang logging at monitoring upang maiwasan ang mga susunod na isyu
+- Makakapag-configure ng tamang logging at monitoring upang maiwasan ang mga isyu sa hinaharap
 
-## Mga Resulta ng Pag-aaral
+## Mga Resulta sa Pag-aaral
 
 Sa pagtatapos, magagawa mo ang sumusunod:
 - Mag-diagnose ng mga isyu sa Azure Developer CLI gamit ang mga built-in na diagnostic tools
 - Malutas ang mga problema sa authentication, subscription, at permiso nang mag-isa
-- Mag-troubleshoot ng mga pagkabigo sa deployment at mga error sa provisioning ng infrastructure nang epektibo
-- Mag-debug ng mga isyu sa configuration ng application at mga problemang partikular sa environment
-- Magpatupad ng monitoring at alerting upang proaktibong matukoy ang mga potensyal na isyu
-- Mag-apply ng mga pinakamahusay na kasanayan sa logging, debugging, at workflows sa pagresolba ng problema
+- Mag-troubleshoot ng mga pagkabigo sa deployment at mga error sa provisioning ng imprastruktura nang epektibo
+- Mag-debug ng mga isyu sa configuration ng aplikasyon at mga problemang partikular sa environment
+- Magpatupad ng monitoring at alerting upang maagang matukoy ang mga potensyal na isyu
+- Mag-apply ng mga pinakamahusay na kasanayan sa logging, debugging, at workflows para sa pagresolba ng problema
 
 ## Mabilisang Diagnostics
 
-Bago tumutok sa mga partikular na isyu, patakbuhin ang mga command na ito upang makakuha ng diagnostic na impormasyon:
+Bago sumabak sa mga partikular na isyu, patakbuhin ang mga command na ito upang makakuha ng diagnostic na impormasyon:
 
 ```bash
 # Check azd version and health
@@ -59,7 +66,7 @@ azd <command> --debug
 
 ### Isyu: "Hindi makuha ang access token"
 **Mga Sintomas:**
-- Nabibigo ang `azd up` dahil sa mga error sa authentication
+- Nabigo ang `azd up` dahil sa mga error sa authentication
 - Ang mga command ay nagbabalik ng "unauthorized" o "access denied"
 
 **Mga Solusyon:**
@@ -80,9 +87,9 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Isyu: "Hindi sapat na pribilehiyo" sa panahon ng deployment
+### Isyu: "Insufficient privileges" sa panahon ng deployment
 **Mga Sintomas:**
-- Nabibigo ang deployment dahil sa mga error sa permiso
+- Nabigo ang deployment dahil sa mga error sa permiso
 - Hindi makagawa ng ilang Azure resources
 
 **Mga Solusyon:**
@@ -110,12 +117,12 @@ azd config set auth.tenantId "your-tenant-id"
 az account clear
 ```
 
-## 🏗️ Mga Error sa Provisioning ng Infrastructure
+## 🏗️ Mga Error sa Provisioning ng Imprastruktura
 
 ### Isyu: Mga conflict sa pangalan ng resource
 **Mga Sintomas:**
 - Mga error na "The resource name already exists"
-- Nabibigo ang deployment sa panahon ng paglikha ng resource
+- Nabigo ang deployment sa panahon ng paglikha ng resource
 
 **Mga Solusyon:**
 ```bash
@@ -177,7 +184,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 ### Isyu: Mga error sa Bicep template
 **Mga Sintomas:**
-- Mga pagkabigo sa validation ng template
+- Mga pagkabigo sa template validation
 - Mga syntax error sa mga Bicep file
 
 **Mga Solusyon:**
@@ -199,7 +206,7 @@ azd provision --preview
 
 ### Isyu: Mga pagkabigo sa build
 **Mga Sintomas:**
-- Nabibigo ang application na mag-build sa panahon ng deployment
+- Nabigo ang aplikasyon na mag-build sa panahon ng deployment
 - Mga error sa pag-install ng package
 
 **Mga Solusyon:**
@@ -226,9 +233,9 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Isyu: Mga pagkabigo sa deployment ng container
+### Isyu: Mga pagkabigo sa container deployment
 **Mga Sintomas:**
-- Nabibigo ang mga container app na magsimula
+- Nabigo ang mga container apps na magsimula
 - Mga error sa image pull
 
 **Mga Solusyon:**
@@ -247,9 +254,9 @@ az acr login --name myregistry
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Isyu: Mga pagkabigo sa koneksyon ng database
+### Isyu: Mga pagkabigo sa koneksyon sa database
 **Mga Sintomas:**
-- Hindi makakonekta ang application sa database
+- Hindi makakonekta ang aplikasyon sa database
 - Mga error sa connection timeout
 
 **Mga Solusyon:**
@@ -294,7 +301,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 ### Isyu: Mga problema sa SSL/TLS certificate
 **Mga Sintomas:**
 - Hindi gumagana ang HTTPS
-- Mga error sa validation ng certificate
+- Mga error sa certificate validation
 
 **Mga Solusyon:**
 ```bash
@@ -396,7 +403,7 @@ azd deploy --incremental
 azd config set defaults.location eastus2
 ```
 
-### Isyu: Mga problema sa performance ng application
+### Isyu: Mga problema sa performance ng aplikasyon
 **Mga Sintomas:**
 - Mabagal na response times
 - Mataas na paggamit ng resources
@@ -419,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Mga Tools at Command sa Pag-troubleshoot
+## 🛠️ Mga Tools at Command para sa Pag-troubleshoot
 
 ### Mga Debug Command
 ```bash
@@ -466,7 +473,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ### Kailan Mag-eskalate
 - Patuloy ang mga isyu sa authentication kahit sinubukan na ang lahat ng solusyon
-- Mga problema sa infrastructure na may kaugnayan sa Azure services
+- Mga problema sa imprastruktura na may kaugnayan sa Azure services
 - Mga isyu sa billing o subscription
 - Mga alalahanin sa seguridad o insidente
 
@@ -489,11 +496,11 @@ Bago makipag-ugnayan sa suporta, kolektahin ang:
 - Output ng `azd version`
 - Output ng `azd info`
 - Mga error message (buong teksto)
-- Mga hakbang upang maulit ang isyu
+- Mga hakbang para ma-reproduce ang isyu
 - Mga detalye ng environment (`azd env show`)
 - Timeline kung kailan nagsimula ang isyu
 
-### Script sa Pagkolekta ng Log
+### Script para sa Koleksyon ng Log
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -568,8 +575,8 @@ az security assessment list --resource-group myrg
 
 ## Mga Kaugnay na Resources
 
-- [Debugging Guide](debugging.md) - Mga advanced na teknik sa debugging
-- [Provisioning Resources](../deployment/provisioning.md) - Pag-troubleshoot ng infrastructure
+- [Gabay sa Pag-debug](debugging.md) - Mga advanced na teknik sa pag-debug
+- [Provisioning Resources](../deployment/provisioning.md) - Pag-troubleshoot ng imprastruktura
 - [Capacity Planning](../pre-deployment/capacity-planning.md) - Gabay sa pagpaplano ng resources
 - [SKU Selection](../pre-deployment/sku-selection.md) - Mga rekomendasyon sa service tier
 
@@ -579,11 +586,11 @@ az security assessment list --resource-group myrg
 
 ---
 
-**Navigation**
+**Pag-navigate**
 - **Nakaraang Aralin**: [Provisioning Resources](../deployment/provisioning.md)
-- **Susunod na Aralin**: [Debugging Guide](debugging.md)
+- **Susunod na Aralin**: [Gabay sa Pag-debug](debugging.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

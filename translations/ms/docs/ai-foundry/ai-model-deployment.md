@@ -1,25 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:53:00+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T08:12:13+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "ms"
 }
 -->
-# Penggunaan Model AI dengan Azure Developer CLI
+# Penyebaran Model AI dengan Azure Developer CLI
 
-**Sebelum:** [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md) | **Seterusnya:** [Makmal Bengkel AI](ai-workshop-lab.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan Berasaskan AI
+- **⬅️ Sebelumnya**: [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Seterusnya**: [Makmal Bengkel AI](ai-workshop-lab.md)
+- **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
-Panduan ini menyediakan arahan lengkap untuk menggunakan model AI dengan templat AZD, merangkumi segalanya daripada pemilihan model hingga corak penggunaan dalam pengeluaran.
+Panduan ini menyediakan arahan lengkap untuk menyebarkan model AI menggunakan templat AZD, merangkumi segalanya daripada pemilihan model hingga corak penyebaran produksi.
 
 ## Kandungan
 
 - [Strategi Pemilihan Model](../../../../docs/ai-foundry)
 - [Konfigurasi AZD untuk Model AI](../../../../docs/ai-foundry)
-- [Corak Penggunaan](../../../../docs/ai-foundry)
+- [Corak Penyebaran](../../../../docs/ai-foundry)
 - [Pengurusan Model](../../../../docs/ai-foundry)
-- [Pertimbangan Pengeluaran](../../../../docs/ai-foundry)
+- [Pertimbangan Produksi](../../../../docs/ai-foundry)
 - [Pemantauan dan Pemerhatian](../../../../docs/ai-foundry)
 
 ## Strategi Pemilihan Model
@@ -57,9 +62,9 @@ services:
 ### Perancangan Kapasiti Model
 
 | Jenis Model | Kes Penggunaan | Kapasiti Disyorkan | Pertimbangan Kos |
-|-------------|----------------|--------------------|------------------|
+|-------------|----------------|---------------------|------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kos efektif untuk kebanyakan beban kerja |
-| GPT-4 | Penalaran kompleks | 20-100 TPM | Kos lebih tinggi, gunakan untuk ciri premium |
+| GPT-4 | Penaakulan kompleks | 20-100 TPM | Kos lebih tinggi, gunakan untuk ciri premium |
 | Text-embedding-ada-002 | Carian, RAG | 30-120 TPM | Penting untuk carian semantik |
 | Whisper | Ucapan ke teks | 10-50 TPM | Beban kerja pemprosesan audio |
 
@@ -67,7 +72,7 @@ services:
 
 ### Konfigurasi Templat Bicep
 
-Buat penggunaan model melalui templat Bicep:
+Cipta penyebaran model melalui templat Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -138,9 +143,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Corak Penggunaan
+## Corak Penyebaran
 
-### Corak 1: Penggunaan Satu Wilayah
+### Corak 1: Penyebaran Satu Wilayah
 
 ```yaml
 # azure.yaml - Single region
@@ -153,12 +158,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Sesuai untuk:
+Terbaik untuk:
 - Pembangunan dan ujian
 - Aplikasi pasaran tunggal
 - Pengoptimuman kos
 
-### Corak 2: Penggunaan Pelbagai Wilayah
+### Corak 2: Penyebaran Pelbagai Wilayah
 
 ```bicep
 // Multi-region deployment
@@ -171,12 +176,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Sesuai untuk:
+Terbaik untuk:
 - Aplikasi global
 - Keperluan ketersediaan tinggi
 - Pengagihan beban
 
-### Corak 3: Penggunaan Hibrid
+### Corak 3: Penyebaran Hibrid
 
 Gabungkan Azure OpenAI dengan perkhidmatan AI lain:
 
@@ -246,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### Ujian A/B
 
-Gunakan pelbagai versi model:
+Sebarkan pelbagai versi model:
 
 ```bicep
 param enableABTesting bool = false
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Pertimbangan Pengeluaran
+## Pertimbangan Produksi
 
 ### Perancangan Kapasiti
 
@@ -479,7 +484,7 @@ async def check_ai_models():
 
 1. **Semak [Panduan Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)** untuk corak integrasi perkhidmatan
 2. **Lengkapkan [Makmal Bengkel AI](ai-workshop-lab.md)** untuk pengalaman praktikal
-3. **Laksanakan [Amalan AI Pengeluaran](production-ai-practices.md)** untuk penggunaan perusahaan
+3. **Laksanakan [Amalan AI Produksi](production-ai-practices.md)** untuk penyebaran perusahaan
 4. **Terokai [Panduan Penyelesaian Masalah AI](../troubleshooting/ai-troubleshooting.md)** untuk isu biasa
 
 ## Sumber
@@ -491,7 +496,12 @@ async def check_ai_models():
 
 ---
 
-**Sebelum:** [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md) | **Seterusnya:** [Makmal Bengkel AI](ai-workshop-lab.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan Berasaskan AI
+- **⬅️ Sebelumnya**: [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Seterusnya**: [Makmal Bengkel AI](ai-workshop-lab.md)
+- **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 ---
 

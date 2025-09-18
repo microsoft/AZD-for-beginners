@@ -1,42 +1,47 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "59cb1c1635512e212da16d50f3259ca4",
-  "translation_date": "2025-09-09T22:53:19+00:00",
+  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
+  "translation_date": "2025-09-18T08:06:24+00:00",
   "source_file": "resources/glossary.md",
   "language_code": "id"
 }
 -->
-# Glosarium - Terminologi Azure Developer CLI
+# Glosarium - Istilah Azure dan AZD
+
+**Referensi untuk Semua Bab**  
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../README.md)  
+- **📖 Pelajari Dasar-dasar**: [Bab 1: Dasar-dasar AZD](../docs/getting-started/azd-basics.md)  
+- **🤖 Istilah AI**: [Bab 2: Pengembangan Berbasis AI](../docs/ai-foundry/azure-ai-foundry-integration.md)  
 
 ## Pendahuluan
 
-Glosarium ini menyediakan definisi untuk istilah, konsep, dan akronim yang digunakan dalam Azure Developer CLI dan pengembangan cloud Azure. Referensi penting untuk memahami dokumentasi teknis, menyelesaikan masalah, dan berkomunikasi secara efektif tentang proyek azd dan layanan Azure.
+Glosarium ini menyediakan definisi untuk istilah, konsep, dan akronim yang digunakan dalam Azure Developer CLI dan pengembangan cloud Azure. Referensi penting untuk memahami dokumentasi teknis, memecahkan masalah, dan berkomunikasi secara efektif tentang proyek azd dan layanan Azure.
 
 ## Tujuan Pembelajaran
 
-Dengan menggunakan glosarium ini, Anda akan:
-- Memahami terminologi dan konsep penting Azure Developer CLI
-- Menguasai kosakata pengembangan cloud Azure dan istilah teknis
-- Merujuk terminologi Infrastructure as Code dan deployment secara efisien
-- Memahami nama layanan Azure, akronim, dan tujuannya
-- Mengakses definisi untuk terminologi troubleshooting dan debugging
-- Mempelajari konsep arsitektur dan pengembangan Azure tingkat lanjut
+Dengan menggunakan glosarium ini, Anda akan:  
+- Memahami istilah dan konsep penting dalam Azure Developer CLI  
+- Menguasai kosakata dan istilah teknis pengembangan cloud Azure  
+- Merujuk istilah Infrastruktur sebagai Kode dan terminologi penerapan dengan efisien  
+- Memahami nama layanan Azure, akronim, dan tujuannya  
+- Mengakses definisi untuk istilah pemecahan masalah dan debugging  
+- Mempelajari konsep arsitektur dan pengembangan Azure tingkat lanjut  
 
 ## Hasil Pembelajaran
 
-Dengan merujuk glosarium ini secara teratur, Anda akan dapat:
-- Berkomunikasi secara efektif menggunakan terminologi Azure Developer CLI yang tepat
-- Memahami dokumentasi teknis dan pesan error dengan lebih jelas
-- Menavigasi layanan dan konsep Azure dengan percaya diri
-- Menyelesaikan masalah menggunakan kosakata teknis yang sesuai
-- Berkontribusi dalam diskusi tim dengan bahasa teknis yang akurat
-- Mengembangkan pengetahuan pengembangan cloud Azure secara sistematis
+Dengan merujuk secara rutin ke glosarium ini, Anda akan dapat:  
+- Berkomunikasi secara efektif menggunakan istilah Azure Developer CLI yang tepat  
+- Memahami dokumentasi teknis dan pesan kesalahan dengan lebih jelas  
+- Menavigasi layanan dan konsep Azure dengan percaya diri  
+- Memecahkan masalah menggunakan kosakata teknis yang sesuai  
+- Berkontribusi dalam diskusi tim dengan bahasa teknis yang akurat  
+- Mengembangkan pengetahuan pengembangan cloud Azure secara sistematis  
 
 ## A
 
 **ARM Template**  
-Template Azure Resource Manager. Format Infrastructure as Code berbasis JSON yang digunakan untuk mendefinisikan dan menerapkan sumber daya Azure secara deklaratif.
+Template Azure Resource Manager. Format Infrastruktur sebagai Kode berbasis JSON yang digunakan untuk mendefinisikan dan menerapkan sumber daya Azure secara deklaratif.
 
 **App Service**  
 Layanan platform-as-a-service (PaaS) Azure untuk hosting aplikasi web, REST API, dan backend mobile tanpa perlu mengelola infrastruktur.
@@ -48,10 +53,10 @@ Layanan pemantauan kinerja aplikasi (APM) Azure yang memberikan wawasan mendalam
 Antarmuka baris perintah untuk mengelola sumber daya Azure. Digunakan oleh azd untuk autentikasi dan beberapa operasi.
 
 **Azure Developer CLI (azd)**  
-Alat baris perintah yang berfokus pada pengembang untuk mempercepat proses membangun dan menerapkan aplikasi ke Azure menggunakan template dan Infrastructure as Code.
+Alat baris perintah yang berfokus pada pengembang yang mempercepat proses membangun dan menerapkan aplikasi ke Azure menggunakan template dan Infrastruktur sebagai Kode.
 
 **azure.yaml**  
-File konfigurasi utama untuk proyek azd yang mendefinisikan layanan, infrastruktur, dan hook deployment.
+File konfigurasi utama untuk proyek azd yang mendefinisikan layanan, infrastruktur, dan hook penerapan.
 
 **Azure Resource Manager (ARM)**  
 Layanan penerapan dan pengelolaan Azure yang menyediakan lapisan manajemen untuk membuat, memperbarui, dan menghapus sumber daya.
@@ -59,27 +64,27 @@ Layanan penerapan dan pengelolaan Azure yang menyediakan lapisan manajemen untuk
 ## B
 
 **Bicep**  
-Bahasa domain-specific (DSL) yang dikembangkan oleh Microsoft untuk menerapkan sumber daya Azure. Menyediakan sintaks yang lebih sederhana dibandingkan template ARM sambil tetap dikompilasi ke ARM.
+Bahasa domain-spesifik (DSL) yang dikembangkan oleh Microsoft untuk menerapkan sumber daya Azure. Menyediakan sintaks yang lebih sederhana dibandingkan template ARM sambil tetap dikompilasi ke ARM.
 
 **Build**  
-Proses mengompilasi kode sumber, menginstal dependensi, dan mempersiapkan aplikasi untuk deployment.
+Proses mengompilasi kode sumber, menginstal dependensi, dan menyiapkan aplikasi untuk penerapan.
 
 **Blue-Green Deployment**  
-Strategi deployment yang menggunakan dua lingkungan produksi identik (blue dan green) untuk meminimalkan downtime dan risiko.
+Strategi penerapan yang menggunakan dua lingkungan produksi identik (biru dan hijau) untuk meminimalkan downtime dan risiko.
 
 ## C
 
 **Container Apps**  
-Layanan container serverless Azure yang memungkinkan menjalankan aplikasi yang dikontainerisasi tanpa mengelola infrastruktur yang kompleks.
+Layanan kontainer tanpa server Azure yang memungkinkan menjalankan aplikasi yang dikontainerisasi tanpa mengelola infrastruktur yang kompleks.
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Praktik otomatis untuk mengintegrasikan perubahan kode dan menerapkan aplikasi.
+Integrasi Berkelanjutan/Penerapan Berkelanjutan. Praktik otomatisasi untuk mengintegrasikan perubahan kode dan menerapkan aplikasi.
 
 **Cosmos DB**  
 Layanan database multi-model yang didistribusikan secara global dari Azure yang menyediakan SLA komprehensif untuk throughput, latensi, ketersediaan, dan konsistensi.
 
 **Configuration**  
-Pengaturan dan parameter yang mengontrol perilaku aplikasi dan opsi deployment.
+Pengaturan dan parameter yang mengontrol perilaku aplikasi dan opsi penerapan.
 
 ## D
 
@@ -87,15 +92,15 @@ Pengaturan dan parameter yang mengontrol perilaku aplikasi dan opsi deployment.
 Proses menginstal dan mengonfigurasi aplikasi serta dependensinya pada infrastruktur target.
 
 **Docker**  
-Platform untuk mengembangkan, mengirimkan, dan menjalankan aplikasi menggunakan teknologi containerisasi.
+Platform untuk mengembangkan, mengirimkan, dan menjalankan aplikasi menggunakan teknologi kontainerisasi.
 
 **Dockerfile**  
-File teks yang berisi instruksi untuk membangun image container Docker.
+File teks yang berisi instruksi untuk membangun gambar kontainer Docker.
 
 ## E
 
 **Environment**  
-Target deployment yang mewakili instance spesifik dari aplikasi Anda (misalnya, pengembangan, staging, produksi).
+Target penerapan yang mewakili instance spesifik dari aplikasi Anda (misalnya, pengembangan, staging, produksi).
 
 **Environment Variables**  
 Nilai konfigurasi yang disimpan sebagai pasangan kunci-nilai yang dapat diakses aplikasi saat runtime.
@@ -106,7 +111,7 @@ URL atau alamat jaringan tempat aplikasi atau layanan dapat diakses.
 ## F
 
 **Function App**  
-Layanan komputasi serverless Azure yang memungkinkan menjalankan kode berbasis event tanpa mengelola infrastruktur.
+Layanan komputasi tanpa server Azure yang memungkinkan menjalankan kode berbasis peristiwa tanpa mengelola infrastruktur.
 
 ## G
 
@@ -119,7 +124,7 @@ Sistem kontrol versi terdistribusi yang digunakan untuk melacak perubahan dalam 
 ## H
 
 **Hooks**  
-Script atau perintah khusus yang dijalankan pada titik tertentu selama siklus hidup deployment (preprovision, postprovision, predeploy, postdeploy).
+Skrip atau perintah khusus yang dijalankan pada titik tertentu selama siklus hidup penerapan (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
 Jenis layanan Azure tempat aplikasi akan diterapkan (misalnya, appservice, containerapp, function).
@@ -159,7 +164,7 @@ Layanan Azure untuk mengumpulkan, menganalisis, dan bertindak berdasarkan data t
 ## M
 
 **Managed Identity**  
-Fitur Azure yang menyediakan identitas yang dikelola secara otomatis untuk layanan Azure agar dapat mengautentikasi ke layanan Azure lainnya.
+Fitur Azure yang menyediakan identitas yang dikelola secara otomatis untuk layanan Azure untuk mengautentikasi ke layanan Azure lainnya.
 
 **Microservices**  
 Pendekatan arsitektur di mana aplikasi dibangun sebagai kumpulan layanan kecil yang independen.
@@ -173,23 +178,23 @@ Solusi pemantauan terpadu Azure yang menyediakan observabilitas penuh untuk apli
 Runtime JavaScript yang dibangun di atas mesin JavaScript V8 Chrome untuk membangun aplikasi sisi server.
 
 **npm**  
-Pengelola paket untuk Node.js yang mengelola dependensi dan paket.
+Manajer paket untuk Node.js yang mengelola dependensi dan paket.
 
 ## O
 
 **Output**  
-Nilai yang dikembalikan dari deployment infrastruktur yang dapat digunakan oleh aplikasi atau sumber daya lainnya.
+Nilai yang dikembalikan dari penerapan infrastruktur yang dapat digunakan oleh aplikasi atau sumber daya lainnya.
 
 ## P
 
 **Package**  
-Proses mempersiapkan kode aplikasi dan dependensi untuk deployment.
+Proses menyiapkan kode aplikasi dan dependensi untuk penerapan.
 
 **Parameters**  
-Nilai input yang diteruskan ke template infrastruktur untuk menyesuaikan deployment.
+Nilai input yang diteruskan ke template infrastruktur untuk menyesuaikan penerapan.
 
 **PostgreSQL**  
-Sistem database relasional open-source yang didukung sebagai layanan terkelola di Azure.
+Sistem database relasional sumber terbuka yang didukung sebagai layanan terkelola di Azure.
 
 **Provisioning**  
 Proses membuat dan mengonfigurasi sumber daya Azure yang didefinisikan dalam template infrastruktur.
@@ -197,7 +202,7 @@ Proses membuat dan mengonfigurasi sumber daya Azure yang didefinisikan dalam tem
 ## Q
 
 **Quota**  
-Batasan jumlah sumber daya yang dapat dibuat dalam langganan atau wilayah Azure.
+Batas pada jumlah sumber daya yang dapat dibuat dalam langganan atau wilayah Azure.
 
 ## R
 
@@ -205,7 +210,7 @@ Batasan jumlah sumber daya yang dapat dibuat dalam langganan atau wilayah Azure.
 Kontainer logis untuk sumber daya Azure yang berbagi siklus hidup, izin, dan kebijakan yang sama.
 
 **Resource Token**  
-String unik yang dihasilkan oleh azd untuk memastikan nama sumber daya unik di seluruh deployment.
+String unik yang dihasilkan oleh azd untuk memastikan nama sumber daya unik di seluruh penerapan.
 
 **REST API**  
 Gaya arsitektur untuk merancang aplikasi jaringan menggunakan metode HTTP.
@@ -219,10 +224,10 @@ Proses mengembalikan ke versi sebelumnya dari aplikasi atau konfigurasi infrastr
 Komponen aplikasi Anda yang didefinisikan dalam azure.yaml (misalnya, frontend web, backend API, database).
 
 **SKU**  
-Stock Keeping Unit. Mewakili tingkat layanan atau tingkat kinerja yang berbeda untuk sumber daya Azure.
+Stock Keeping Unit. Mewakili tingkatan layanan atau tingkat kinerja yang berbeda untuk sumber daya Azure.
 
 **SQL Database**  
-Layanan database relasional terkelola Azure yang berbasis Microsoft SQL Server.
+Layanan database relasional terkelola Azure yang berbasis pada Microsoft SQL Server.
 
 **Static Web Apps**  
 Layanan Azure untuk membangun dan menerapkan aplikasi web full-stack dari repositori kode sumber.
@@ -231,15 +236,15 @@ Layanan Azure untuk membangun dan menerapkan aplikasi web full-stack dari reposi
 Layanan Azure yang menyediakan penyimpanan cloud untuk objek data termasuk blob, file, antrean, dan tabel.
 
 **Subscription**  
-Kontainer akun Azure yang menyimpan grup sumber daya dan sumber daya, dengan manajemen penagihan dan akses terkait.
+Kontainer akun Azure yang menampung grup sumber daya dan sumber daya, dengan manajemen penagihan dan akses terkait.
 
 ## T
 
 **Template**  
-Struktur proyek yang sudah dibuat sebelumnya yang berisi kode aplikasi, definisi infrastruktur, dan konfigurasi untuk skenario umum.
+Struktur proyek yang telah dibuat sebelumnya yang berisi kode aplikasi, definisi infrastruktur, dan konfigurasi untuk skenario umum.
 
 **Terraform**  
-Alat Infrastructure as Code open-source yang mendukung banyak penyedia cloud termasuk Azure.
+Alat Infrastruktur sebagai Kode sumber terbuka yang mendukung banyak penyedia cloud termasuk Azure.
 
 **Traffic Manager**  
 Penyeimbang beban berbasis DNS Azure untuk mendistribusikan lalu lintas di seluruh wilayah Azure global.
@@ -266,7 +271,7 @@ Visual Studio Code. Editor kode populer dengan integrasi Azure dan azd yang sang
 Callback HTTP yang dipicu oleh peristiwa tertentu, biasanya digunakan dalam pipeline CI/CD.
 
 **What-if**  
-Fitur Azure yang menunjukkan perubahan apa yang akan dilakukan oleh deployment tanpa benar-benar menjalankannya.
+Fitur Azure yang menunjukkan perubahan apa yang akan dilakukan oleh penerapan tanpa benar-benar mengeksekusinya.
 
 ## Y
 
@@ -276,7 +281,7 @@ YAML Ain't Markup Language. Standar serialisasi data yang mudah dibaca manusia y
 ## Z
 
 **Zone**  
-Lokasi fisik yang terpisah dalam wilayah Azure yang menyediakan redundansi dan ketersediaan tinggi.
+Lokasi fisik yang terpisah dalam suatu wilayah Azure yang menyediakan redundansi dan ketersediaan tinggi.
 
 ---
 
@@ -285,9 +290,9 @@ Lokasi fisik yang terpisah dalam wilayah Azure yang menyediakan redundansi dan k
 | Akronim | Bentuk Lengkap | Deskripsi |
 |---------|----------------|-----------|
 | AAD | Azure Active Directory | Layanan manajemen identitas dan akses |
-| ACR | Azure Container Registry | Layanan registri image container |
+| ACR | Azure Container Registry | Layanan registri gambar kontainer |
 | AKS | Azure Kubernetes Service | Layanan Kubernetes terkelola |
-| API | Application Programming Interface | Protokol untuk membangun perangkat lunak |
+| API | Application Programming Interface | Kumpulan protokol untuk membangun perangkat lunak |
 | ARM | Azure Resource Manager | Layanan penerapan dan pengelolaan Azure |
 | CDN | Content Delivery Network | Jaringan server yang didistribusikan |
 | CI/CD | Continuous Integration/Continuous Deployment | Praktik pengembangan otomatis |
@@ -300,7 +305,7 @@ Lokasi fisik yang terpisah dalam wilayah Azure yang menyediakan redundansi dan k
 | KQL | Kusto Query Language | Bahasa kueri untuk layanan data Azure |
 | RBAC | Role-Based Access Control | Metode kontrol akses berdasarkan peran pengguna |
 | REST | Representational State Transfer | Gaya arsitektur untuk layanan web |
-| SDK | Software Development Kit | Koleksi alat pengembangan |
+| SDK | Software Development Kit | Kumpulan alat pengembangan |
 | SLA | Service Level Agreement | Komitmen terhadap ketersediaan/kinerja layanan |
 | SQL | Structured Query Language | Bahasa untuk mengelola database relasional |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Protokol kriptografi |
@@ -314,8 +319,8 @@ Lokasi fisik yang terpisah dalam wilayah Azure yang menyediakan redundansi dan k
 
 ## Pemetaan Nama Layanan Azure
 
-| Nama Umum | Nama Layanan Resmi Azure | Tipe Host azd |
-|-----------|--------------------------|---------------|
+| Nama Umum | Nama Layanan Resmi Azure | Jenis Host azd |
+|-----------|--------------------------|----------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
@@ -333,40 +338,40 @@ Lokasi fisik yang terpisah dalam wilayah Azure yang menyediakan redundansi dan k
 ## Istilah Konteks-Spesifik
 
 ### Istilah Pengembangan
-- **Hot Reload**: Memperbarui aplikasi secara otomatis selama pengembangan tanpa restart
-- **Build Pipeline**: Proses otomatis untuk membangun dan menguji kode
-- **Deployment Slot**: Lingkungan staging dalam App Service
-- **Environment Parity**: Menjaga kesamaan antara lingkungan pengembangan, staging, dan produksi
+- **Hot Reload**: Memperbarui aplikasi secara otomatis selama pengembangan tanpa memulai ulang  
+- **Build Pipeline**: Proses otomatis untuk membangun dan menguji kode  
+- **Deployment Slot**: Lingkungan staging dalam App Service  
+- **Environment Parity**: Menjaga kesamaan antara lingkungan pengembangan, staging, dan produksi  
 
 ### Istilah Keamanan
-- **Managed Identity**: Fitur Azure yang menyediakan pengelolaan kredensial otomatis
-- **Key Vault**: Penyimpanan aman untuk rahasia, kunci, dan sertifikat
-- **RBAC**: Kontrol akses berbasis peran untuk sumber daya Azure
-- **Network Security Group**: Firewall virtual untuk mengontrol lalu lintas jaringan
+- **Managed Identity**: Fitur Azure yang menyediakan pengelolaan kredensial otomatis  
+- **Key Vault**: Penyimpanan aman untuk rahasia, kunci, dan sertifikat  
+- **RBAC**: Kontrol akses berbasis peran untuk sumber daya Azure  
+- **Network Security Group**: Firewall virtual untuk mengontrol lalu lintas jaringan  
 
 ### Istilah Pemantauan
-- **Telemetry**: Pengumpulan otomatis pengukuran dan data
-- **Application Performance Monitoring (APM)**: Pemantauan kinerja perangkat lunak
-- **Log Analytics**: Layanan untuk mengumpulkan dan menganalisis data log
-- **Alert Rules**: Notifikasi otomatis berdasarkan metrik atau kondisi
+- **Telemetry**: Pengumpulan data dan pengukuran secara otomatis  
+- **Application Performance Monitoring (APM)**: Pemantauan kinerja perangkat lunak  
+- **Log Analytics**: Layanan untuk mengumpulkan dan menganalisis data log  
+- **Alert Rules**: Notifikasi otomatis berdasarkan metrik atau kondisi  
 
-### Istilah Deployment
-- **Blue-Green Deployment**: Strategi deployment tanpa downtime
-- **Canary Deployment**: Peluncuran bertahap ke subset pengguna
-- **Rolling Update**: Penggantian instance aplikasi secara berurutan
-- **Rollback**: Mengembalikan ke versi aplikasi sebelumnya
-
----
-
-**Tip Penggunaan**: Gunakan `Ctrl+F` untuk mencari istilah tertentu dalam glosarium ini. Istilah saling dirujuk jika relevan.
+### Istilah Penerapan
+- **Blue-Green Deployment**: Strategi penerapan tanpa downtime  
+- **Canary Deployment**: Peluncuran bertahap ke subset pengguna  
+- **Rolling Update**: Penggantian bertahap instance aplikasi  
+- **Rollback**: Mengembalikan ke versi aplikasi sebelumnya  
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [Cheat Sheet](cheat-sheet.md)
-- **Pelajaran Berikutnya**: [FAQ](faq.md)
+**Tips Penggunaan**: Gunakan `Ctrl+F` untuk mencari istilah tertentu dalam glosarium ini. Istilah saling dirujuk jika memungkinkan.
+
+---
+
+**Navigasi**  
+- **Pelajaran Sebelumnya**: [Cheat Sheet](cheat-sheet.md)  
+- **Pelajaran Berikutnya**: [FAQ](faq.md)  
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

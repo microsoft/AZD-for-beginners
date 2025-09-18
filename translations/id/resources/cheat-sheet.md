@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:46:35+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T08:06:07+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "id"
 }
 -->
 # Lembar Cheat Perintah - Perintah AZD Penting
 
-## Pengantar
+**Referensi Cepat untuk Semua Bab**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../README.md)
+- **📖 Mulai Cepat**: [Bab 1: Dasar & Mulai Cepat](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Perintah AI**: [Bab 2: Pengembangan Berbasis AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Lanjutan**: [Bab 4: Infrastruktur sebagai Kode](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-Lembar cheat yang komprehensif ini memberikan referensi cepat untuk perintah Azure Developer CLI yang paling sering digunakan, diorganisasi berdasarkan kategori dengan contoh praktis. Sempurna untuk pencarian cepat selama pengembangan, pemecahan masalah, dan operasi harian dengan proyek azd.
+## Pendahuluan
+
+Lembar cheat yang komprehensif ini menyediakan referensi cepat untuk perintah Azure Developer CLI yang paling sering digunakan, diorganisasi berdasarkan kategori dengan contoh praktis. Sempurna untuk pencarian cepat selama pengembangan, pemecahan masalah, dan operasi harian dengan proyek azd.
 
 ## Tujuan Pembelajaran
 
@@ -25,7 +31,7 @@ Dengan menggunakan lembar cheat ini, Anda akan:
 
 ## Hasil Pembelajaran
 
-Dengan merujuk secara rutin ke lembar cheat ini, Anda akan dapat:
+Dengan merujuk lembar cheat ini secara teratur, Anda akan dapat:
 - Menjalankan perintah azd dengan percaya diri tanpa harus merujuk dokumentasi lengkap
 - Cepat menyelesaikan masalah umum menggunakan perintah diagnostik yang sesuai
 - Mengelola beberapa lingkungan dan skenario penerapan dengan efisien
@@ -558,7 +564,7 @@ azd template show <template-name> --docs
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Pemeriksaan Awal](../docs/pre-deployment/preflight-checks.md)
-- **Pelajaran Selanjutnya**: [Glosarium](glossary.md)
+- **Pelajaran Berikutnya**: [Glosarium](glossary.md)
 
 ---
 

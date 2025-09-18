@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T22:41:53+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-18T08:05:17+00:00",
   "source_file": "resources/faq.md",
   "language_code": "id"
 }
 -->
 # Pertanyaan yang Sering Diajukan (FAQ)
+
+**Dapatkan Bantuan Berdasarkan Bab**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../README.md)
+- **🚆 Masalah Instalasi**: [Bab 1: Instalasi & Pengaturan](../docs/getting-started/installation.md)
+- **🤖 Pertanyaan AI**: [Bab 2: Pengembangan Berbasis AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Pemecahan Masalah**: [Bab 7: Pemecahan Masalah & Debugging](../docs/troubleshooting/common-issues.md)
 
 ## Pendahuluan
 
@@ -16,16 +22,16 @@ FAQ ini memberikan jawaban atas pertanyaan umum tentang Azure Developer CLI (azd
 ## Tujuan Pembelajaran
 
 Dengan membaca FAQ ini, Anda akan:
-- Menemukan jawaban cepat untuk pertanyaan dan masalah umum terkait Azure Developer CLI
-- Memahami konsep dan terminologi utama melalui format tanya jawab praktis
-- Mengakses solusi pemecahan masalah untuk skenario error yang sering terjadi
+- Menemukan jawaban cepat atas pertanyaan dan masalah umum terkait Azure Developer CLI
+- Memahami konsep dan terminologi utama melalui format tanya jawab yang praktis
+- Mengakses solusi pemecahan masalah untuk skenario kesalahan yang sering terjadi
 - Mempelajari praktik terbaik melalui pertanyaan umum tentang optimasi
 - Menemukan fitur dan kemampuan tingkat lanjut melalui pertanyaan ahli
-- Merujuk panduan strategi biaya, keamanan, dan deployment secara efisien
+- Merujuk panduan tentang biaya, keamanan, dan strategi deployment secara efisien
 
 ## Hasil Pembelajaran
 
-Dengan merujuk FAQ ini secara rutin, Anda akan mampu:
+Dengan merujuk FAQ ini secara rutin, Anda akan dapat:
 - Menyelesaikan masalah umum Azure Developer CLI secara mandiri menggunakan solusi yang disediakan
 - Membuat keputusan yang tepat tentang strategi dan konfigurasi deployment
 - Memahami hubungan antara azd dan alat serta layanan Azure lainnya
@@ -62,7 +68,7 @@ Dengan merujuk FAQ ini secara rutin, Anda akan mampu:
 ### Q: Apakah saya perlu menginstal Azure CLI untuk menggunakan azd?
 **A**: Ya, azd membutuhkan Azure CLI untuk autentikasi dan beberapa operasi. Instal Azure CLI terlebih dahulu, lalu instal azd.
 
-### Q: Bahasa pemrograman apa saja yang didukung oleh azd?
+### Q: Bahasa pemrograman apa yang didukung oleh azd?
 **A**: azd mendukung berbagai bahasa, termasuk:
 - Node.js/JavaScript/TypeScript
 - Python
@@ -74,16 +80,16 @@ Dengan merujuk FAQ ini secara rutin, Anda akan mampu:
 - Aplikasi yang dikontainerisasi
 
 ### Q: Bisakah saya menggunakan azd dengan proyek yang sudah ada?
-**A**: Tentu! Anda dapat:
+**A**: Tentu saja! Anda dapat:
 1. Menggunakan `azd init` untuk menambahkan konfigurasi azd ke proyek yang sudah ada
 2. Menyesuaikan proyek yang sudah ada agar sesuai dengan struktur template azd
-3. Membuat template kustom berdasarkan arsitektur yang sudah ada
+3. Membuat template khusus berdasarkan arsitektur yang sudah ada
 
 ---
 
 ## Autentikasi & Akses
 
-### Q: Bagaimana cara autentikasi dengan Azure menggunakan azd?
+### Q: Bagaimana cara saya melakukan autentikasi dengan Azure menggunakan azd?
 **A**: Gunakan `azd auth login` yang akan membuka jendela browser untuk autentikasi Azure. Untuk skenario CI/CD, gunakan service principal atau managed identities.
 
 ### Q: Bisakah saya menggunakan azd dengan beberapa langganan Azure?
@@ -93,12 +99,12 @@ Dengan merujuk FAQ ini secara rutin, Anda akan mampu:
 **A**: Biasanya Anda memerlukan:
 - Peran **Contributor** pada grup sumber daya atau langganan
 - **User Access Administrator** jika melakukan deployment sumber daya yang memerlukan penugasan peran
-- Izin spesifik bergantung pada template dan sumber daya yang dideploy
+- Izin spesifik tergantung pada template dan sumber daya yang dideploy
 
 ### Q: Bisakah saya menggunakan azd dalam pipeline CI/CD?
 **A**: Tentu saja! azd dirancang untuk integrasi CI/CD. Gunakan service principal untuk autentikasi dan atur variabel lingkungan untuk konfigurasi.
 
-### Q: Bagaimana cara menangani autentikasi di GitHub Actions?
+### Q: Bagaimana cara saya menangani autentikasi di GitHub Actions?
 **A**: Gunakan Azure Login action dengan kredensial service principal:
 ```yaml
 - uses: azure/login@v1
@@ -111,13 +117,13 @@ Dengan merujuk FAQ ini secara rutin, Anda akan mampu:
 
 ## Template & Proyek
 
-### Q: Di mana saya bisa menemukan template azd?
+### Q: Di mana saya dapat menemukan template azd?
 **A**: 
 - Template resmi: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - Template komunitas: Cari di GitHub dengan kata kunci "azd-template"
 - Gunakan `azd template list` untuk melihat template yang tersedia
 
-### Q: Bagaimana cara membuat template kustom?
+### Q: Bagaimana cara saya membuat template khusus?
 **A**: 
 1. Mulai dengan struktur template yang sudah ada
 2. Modifikasi `azure.yaml`, file infrastruktur, dan kode aplikasi
@@ -132,9 +138,9 @@ Dengan merujuk FAQ ini secara rutin, Anda akan mampu:
 - **Template resmi**: Dikelola oleh Microsoft, diperbarui secara berkala, dokumentasi lengkap
 - **Template komunitas**: Dibuat oleh pengembang, mungkin memiliki kasus penggunaan khusus, kualitas dan pemeliharaan bervariasi
 
-### Q: Bagaimana cara memperbarui template dalam proyek saya?
+### Q: Bagaimana cara saya memperbarui template dalam proyek saya?
 **A**: Template tidak diperbarui secara otomatis. Anda dapat:
-1. Membandingkan dan menggabungkan perubahan dari sumber template secara manual
+1. Membandingkan dan menggabungkan perubahan secara manual dari sumber template
 2. Memulai ulang dengan `azd init` menggunakan template yang diperbarui
 3. Memilih perbaikan spesifik dari template yang diperbarui
 
@@ -147,12 +153,12 @@ Dengan merujuk FAQ ini secara rutin, Anda akan mampu:
 - App Services, Container Apps, Functions
 - Database (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
-- Jaringan, keamanan, dan sumber daya pemantauan
+- Sumber daya jaringan, keamanan, dan pemantauan
 
 ### Q: Bisakah saya melakukan deployment ke beberapa wilayah?
 **A**: Ya, konfigurasikan beberapa wilayah dalam template Bicep Anda dan atur parameter lokasi sesuai untuk setiap lingkungan.
 
-### Q: Bagaimana cara menangani migrasi skema database?
+### Q: Bagaimana cara saya menangani migrasi skema database?
 **A**: Gunakan deployment hooks di `azure.yaml`:
 ```yaml
 hooks:
@@ -166,7 +172,7 @@ hooks:
 ### Q: Bisakah saya hanya mendepoy infrastruktur tanpa aplikasi?
 **A**: Ya, gunakan `azd provision` untuk mendepoy hanya komponen infrastruktur yang didefinisikan dalam template Anda.
 
-### Q: Bagaimana cara mendepoy ke sumber daya Azure yang sudah ada?
+### Q: Bagaimana cara saya mendepoy ke sumber daya Azure yang sudah ada?
 **A**: Ini cukup kompleks dan tidak didukung secara langsung. Anda dapat:
 1. Mengimpor sumber daya yang sudah ada ke dalam template Bicep Anda
 2. Menggunakan referensi sumber daya yang sudah ada dalam template
@@ -179,7 +185,7 @@ hooks:
 
 ## Konfigurasi & Lingkungan
 
-### Q: Bagaimana cara mengelola lingkungan yang berbeda (dev, staging, prod)?
+### Q: Bagaimana cara saya mengelola lingkungan yang berbeda (dev, staging, prod)?
 **A**: Buat lingkungan terpisah dengan `azd env new <environment-name>` dan konfigurasikan pengaturan yang berbeda untuk masing-masing:
 ```bash
 azd env new development
@@ -190,7 +196,7 @@ azd env new production
 ### Q: Di mana konfigurasi lingkungan disimpan?
 **A**: Dalam folder `.azure` di direktori proyek Anda. Setiap lingkungan memiliki folder sendiri dengan file konfigurasi.
 
-### Q: Bagaimana cara mengatur konfigurasi spesifik lingkungan?
+### Q: Bagaimana cara saya mengatur konfigurasi khusus lingkungan?
 **A**: Gunakan `azd env set` untuk mengatur variabel lingkungan:
 ```bash
 azd env set AZURE_LOCATION eastus
@@ -198,12 +204,12 @@ azd env set DATABASE_TIER Basic
 ```
 
 ### Q: Bisakah saya berbagi konfigurasi lingkungan dengan anggota tim?
-**A**: Folder `.azure` berisi informasi sensitif dan tidak boleh dikomit ke kontrol versi. Sebagai gantinya:
+**A**: Folder `.azure` berisi informasi sensitif dan sebaiknya tidak dikomit ke kontrol versi. Sebagai gantinya:
 1. Dokumentasikan variabel lingkungan yang diperlukan
-2. Gunakan skrip deployment untuk menyiapkan lingkungan
+2. Gunakan skrip deployment untuk mengatur lingkungan
 3. Gunakan Azure Key Vault untuk konfigurasi sensitif
 
-### Q: Bagaimana cara menimpa default template?
+### Q: Bagaimana cara saya menimpa default template?
 **A**: Atur variabel lingkungan yang sesuai dengan parameter template:
 ```bash
 azd env set LOCATION "West US 2"
@@ -218,11 +224,11 @@ azd env set SKU_NAME "B1"
 **A**: Penyebab umum:
 1. **Masalah autentikasi**: Jalankan `azd auth login`
 2. **Izin tidak mencukupi**: Periksa penugasan peran Azure Anda
-3. **Konflik nama sumber daya**: Ubah AZURE_ENV_NAME
+3. **Konflik penamaan sumber daya**: Ubah AZURE_ENV_NAME
 4. **Masalah kuota/kapasitas**: Periksa ketersediaan regional
-5. **Error template**: Validasi template Bicep
+5. **Kesalahan template**: Validasi template Bicep
 
-### Q: Bagaimana cara debug kegagalan deployment?
+### Q: Bagaimana cara saya memecahkan masalah kegagalan deployment?
 **A**: 
 1. Gunakan `azd deploy --debug` untuk output yang lebih rinci
 2. Periksa riwayat deployment di portal Azure
@@ -231,12 +237,12 @@ azd env set SKU_NAME "B1"
 
 ### Q: Mengapa variabel lingkungan saya tidak berfungsi?
 **A**: Periksa:
-1. Nama variabel sesuai dengan parameter template secara tepat
+1. Nama variabel sesuai dengan parameter template
 2. Nilai dikutip dengan benar jika mengandung spasi
 3. Lingkungan dipilih: `azd env select <environment>`
 4. Variabel diatur di lingkungan yang benar
 
-### Q: Bagaimana cara membersihkan deployment yang gagal?
+### Q: Bagaimana cara saya membersihkan deployment yang gagal?
 **A**: 
 ```bash
 azd down --force --purge
@@ -247,15 +253,15 @@ Ini akan menghapus semua sumber daya dan konfigurasi lingkungan.
 **A**: Periksa:
 1. Deployment selesai dengan sukses
 2. Aplikasi berjalan (periksa log di portal Azure)
-3. Grup keamanan jaringan memungkinkan lalu lintas
-4. DNS/domain kustom dikonfigurasi dengan benar
+3. Grup keamanan jaringan mengizinkan lalu lintas
+4. DNS/domain khusus dikonfigurasi dengan benar
 
 ---
 
 ## Biaya & Penagihan
 
 ### Q: Berapa biaya deployment azd?
-**A**: Biaya bergantung pada:
+**A**: Biaya tergantung pada:
 - Layanan Azure yang dideploy
 - Tingkat layanan/SKU yang dipilih
 - Perbedaan harga regional
@@ -263,7 +269,7 @@ Ini akan menghapus semua sumber daya dan konfigurasi lingkungan.
 
 Gunakan [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) untuk estimasi.
 
-### Q: Bagaimana cara mengontrol biaya dalam deployment azd?
+### Q: Bagaimana cara saya mengontrol biaya dalam deployment azd?
 **A**: 
 1. Gunakan SKU tingkat rendah untuk lingkungan pengembangan
 2. Atur anggaran dan peringatan Azure
@@ -280,12 +286,12 @@ Gunakan [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculato
 
 Konfigurasikan template untuk menggunakan tingkat gratis jika tersedia.
 
-### Q: Bagaimana cara memperkirakan biaya sebelum deployment?
+### Q: Bagaimana cara saya memperkirakan biaya sebelum deployment?
 **A**: 
 1. Tinjau `main.bicep` dalam template untuk melihat sumber daya yang dibuat
 2. Gunakan Azure Pricing Calculator dengan SKU spesifik
-3. Deploy ke lingkungan pengembangan terlebih dahulu untuk memantau biaya aktual
-4. Gunakan Manajemen Biaya Azure untuk analisis biaya yang mendetail
+3. Lakukan deployment ke lingkungan pengembangan terlebih dahulu untuk memantau biaya aktual
+4. Gunakan Manajemen Biaya Azure untuk analisis biaya yang lebih rinci
 
 ---
 
@@ -295,11 +301,11 @@ Konfigurasikan template untuk menggunakan tingkat gratis jika tersedia.
 **A**: 
 1. Pisahkan kode aplikasi dari infrastruktur
 2. Gunakan nama layanan yang bermakna di `azure.yaml`
-3. Terapkan penanganan error yang baik dalam skrip build
-4. Gunakan konfigurasi spesifik lingkungan
+3. Terapkan penanganan kesalahan yang baik dalam skrip build
+4. Gunakan konfigurasi khusus lingkungan
 5. Sertakan dokumentasi yang lengkap
 
-### Q: Bagaimana cara mengatur beberapa layanan dalam azd?
+### Q: Bagaimana cara saya mengatur beberapa layanan dalam azd?
 **A**: Gunakan struktur yang direkomendasikan:
 ```
 ├── src/
@@ -317,7 +323,7 @@ Konfigurasikan template untuk menggunakan tingkat gratis jika tersedia.
 .azure/
 ```
 
-### Q: Bagaimana cara menangani rahasia dan konfigurasi sensitif?
+### Q: Bagaimana cara saya menangani rahasia dan konfigurasi sensitif?
 **A**: 
 1. Gunakan Azure Key Vault untuk rahasia
 2. Referensikan rahasia Key Vault dalam konfigurasi aplikasi
@@ -330,13 +336,13 @@ Konfigurasikan template untuk menggunakan tingkat gratis jika tersedia.
 2. Terapkan pengujian otomatis sebelum deployment
 3. Gunakan service principal untuk autentikasi
 4. Simpan konfigurasi sensitif dalam rahasia/variabel pipeline
-5. Terapkan persetujuan untuk deployment produksi
+5. Terapkan persetujuan untuk deployment ke produksi
 
 ---
 
 ## Topik Lanjutan
 
-### Q: Bisakah saya memperluas azd dengan fungsionalitas kustom?
+### Q: Bisakah saya memperluas azd dengan fungsionalitas khusus?
 **A**: Ya, melalui deployment hooks di `azure.yaml`:
 ```yaml
 hooks:
@@ -346,7 +352,7 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: Bagaimana cara mengintegrasikan azd dengan proses DevOps yang sudah ada?
+### Q: Bagaimana cara saya mengintegrasikan azd dengan proses DevOps yang sudah ada?
 **A**: 
 1. Gunakan perintah azd dalam skrip pipeline yang sudah ada
 2. Standarkan template azd di seluruh tim
@@ -356,39 +362,39 @@ hooks:
 ### Q: Bisakah saya menggunakan azd dengan Azure DevOps?
 **A**: Ya, azd bekerja dengan sistem CI/CD apa pun. Buat pipeline Azure DevOps yang menggunakan perintah azd.
 
-### Q: Bagaimana cara berkontribusi pada azd atau membuat template komunitas?
+### Q: Bagaimana cara saya berkontribusi ke azd atau membuat template komunitas?
 **A**: 
 1. **Alat azd**: Berkontribusi ke [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Template**: Buat template sesuai panduan [template guidelines](https://github.com/Azure-Samples/awesome-azd)
-3. **Dokumentasi**: Berkontribusi ke dokumen di [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+2. **Template**: Buat template sesuai dengan [panduan template](https://github.com/Azure-Samples/awesome-azd)  
+3. **Dokumentasi**: Berkontribusi pada dokumentasi di [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
 
-### Q: Apa roadmap untuk azd?
-**A**: Periksa [roadmap resmi](https://github.com/Azure/azure-dev/projects) untuk fitur dan peningkatan yang direncanakan.
+### Q: Apa roadmap untuk azd?  
+**A**: Lihat [roadmap resmi](https://github.com/Azure/azure-dev/projects) untuk fitur dan peningkatan yang direncanakan.  
 
-### Q: Bagaimana cara migrasi dari alat deployment lain ke azd?
-**A**:
-1. Analisis arsitektur penyebaran saat ini  
+### Q: Bagaimana cara migrasi dari alat deployment lain ke azd?  
+**A**:  
+1. Analisis arsitektur deployment saat ini  
 2. Buat template Bicep yang setara  
 3. Konfigurasikan `azure.yaml` agar sesuai dengan layanan saat ini  
 4. Uji secara menyeluruh di lingkungan pengembangan  
-5. Migrasikan lingkungan secara bertahap  
+5. Migrasi lingkungan secara bertahap  
 
 ---
 
-## Masih Ada Pertanyaan?
+## Masih Ada Pertanyaan?  
 
 ### **Cari Terlebih Dahulu**  
 - Periksa [dokumentasi resmi](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Cari [masalah di GitHub](https://github.com/Azure/azure-dev/issues) untuk masalah serupa  
+- Cari [isu GitHub](https://github.com/Azure/azure-dev/issues) untuk masalah serupa  
 
 ### **Dapatkan Bantuan**  
 - [Diskusi GitHub](https://github.com/Azure/azure-dev/discussions) - Dukungan komunitas  
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Pertanyaan teknis  
-- [Azure Discord](https://discord.gg/azure) - Obrolan komunitas secara real-time  
+- [Azure Discord](https://discord.gg/azure) - Obrolan komunitas real-time  
 
 ### **Laporkan Masalah**  
-- [Masalah GitHub](https://github.com/Azure/azure-dev/issues/new) - Laporan bug dan permintaan fitur  
-- Sertakan log yang relevan, pesan kesalahan, dan langkah-langkah untuk mereproduksi  
+- [Isu GitHub](https://github.com/Azure/azure-dev/issues/new) - Laporan bug dan permintaan fitur  
+- Sertakan log yang relevan, pesan error, dan langkah-langkah untuk mereproduksi  
 
 ### **Pelajari Lebih Lanjut**  
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  

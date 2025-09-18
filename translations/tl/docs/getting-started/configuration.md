@@ -1,48 +1,53 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:30:55+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T08:30:19+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tl"
 }
 -->
 # Gabay sa Konfigurasyon
 
-**Nakaraan:** [AZD Basics](azd-basics.md) | **Susunod:** [Unang Proyekto](first-project.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 3 - Konfigurasyon at Pagpapatunay
+- **⬅️ Nakaraan**: [Ang Iyong Unang Proyekto](first-project.md)
+- **➡️ Susunod**: [Gabay sa Pag-deploy](../deployment/deployment-guide.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 4: Infrastructure as Code](../deployment/deployment-guide.md)
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na workflows sa pag-develop at pag-deploy. Matutunan mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng environment, mga pamamaraan ng authentication, at mga advanced na pattern ng konfigurasyon na nagbibigay-daan sa mas epektibo at ligtas na Azure deployments.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na mga workflow ng pag-develop at pag-deploy. Matutunan mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng environment, mga pamamaraan ng pagpapatunay, at mga advanced na pattern ng konfigurasyon na nagbibigay-daan sa mas epektibo at ligtas na Azure deployments.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng araling ito, ikaw ay:
-- Magiging bihasa sa hierarchy ng konfigurasyon ng azd at mauunawaan kung paano inuuna ang mga settings
+- Magiging bihasa sa hierarchy ng konfigurasyon ng azd at mauunawaan kung paano inuuna ang mga setting
 - Epektibong makakapag-configure ng global at project-specific na mga setting
 - Makakapamahala ng maraming environment na may iba't ibang konfigurasyon
-- Makakapagpatupad ng ligtas na mga pattern ng authentication at authorization
+- Makakapagpatupad ng ligtas na mga pattern ng pagpapatunay at awtorisasyon
 - Mauunawaan ang mga advanced na pattern ng konfigurasyon para sa mas kumplikadong mga sitwasyon
 
 ## Mga Resulta ng Pag-aaral
 
-Pagkatapos makumpleto ang araling ito, magagawa mo ang sumusunod:
-- I-configure ang azd para sa optimal na workflows sa pag-develop
-- Mag-set up at mag-manage ng maraming deployment environments
+Pagkatapos makumpleto ang araling ito, magagawa mo:
+- I-configure ang azd para sa optimal na mga workflow ng pag-develop
+- Mag-set up at mag-manage ng maraming deployment environment
 - Magpatupad ng ligtas na mga kasanayan sa pamamahala ng konfigurasyon
 - Mag-troubleshoot ng mga isyu na may kaugnayan sa konfigurasyon
 - I-customize ang behavior ng azd para sa mga partikular na pangangailangan ng organisasyon
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na workflows sa pag-develop at pag-deploy.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na mga workflow ng pag-develop at pag-deploy.
 
 ## Hierarchy ng Konfigurasyon
 
 Ang azd ay gumagamit ng hierarchical na sistema ng konfigurasyon:
-1. **Command-line flags** (pinakamataas na priority)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (pinakamababang priority)
+1. **Mga flag sa command-line** (pinakamataas na priyoridad)
+2. **Mga environment variable**
+3. **Local na konfigurasyon ng proyekto** (`.azd/config.json`)
+4. **Global na konfigurasyon ng user** (`~/.azd/config.json`)
+5. **Mga default na halaga** (pinakamababang priyoridad)
 
 ## Global na Konfigurasyon
 
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Mga Setting na Specific sa Wika
+#### Mga Setting na Pangwika
 ```yaml
 services:
   node-app:
@@ -241,7 +246,7 @@ Ang bawat environment ay may sariling konfigurasyon sa `.azure/<env-name>/config
 }
 ```
 
-### Environment Variables
+### Mga Environment Variable
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -256,7 +261,7 @@ azd env unset DEBUG
 ```
 
 ### Mga Template ng Environment
-Gumawa ng `.azure/env.template` para sa consistent na setup ng environment:
+Gumawa ng `.azure/env.template` para sa pare-parehong setup ng environment:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -272,7 +277,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Konfigurasyon ng Authentication
+## 🔐 Konfigurasyon ng Pagpapatunay
 
 ### Integrasyon ng Azure CLI
 ```bash
@@ -286,7 +291,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Authentication gamit ang Service Principal
+### Pagpapatunay gamit ang Service Principal
 Para sa CI/CD pipelines:
 ```bash
 # Set environment variables
@@ -495,7 +500,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Ayusin ang mga File ng Konfigurasyon
+### 2. Ayusin ang Mga File ng Konfigurasyon
 ```
 .azure/
 ├── config.json              # Global project config
@@ -538,8 +543,8 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 ## Mga Susunod na Hakbang
 
 - [Ang Iyong Unang Proyekto](first-project.md) - I-apply ang konfigurasyon sa praktika
-- [Gabay sa Deployment](../deployment/deployment-guide.md) - Gamitin ang konfigurasyon para sa deployment
-- [Pag-provision ng Resources](../deployment/provisioning.md) - Mga konfigurasyon na handa para sa produksyon
+- [Gabay sa Pag-deploy](../deployment/deployment-guide.md) - Gamitin ang konfigurasyon para sa pag-deploy
+- [Pag-provision ng Mga Resource](../deployment/provisioning.md) - Mga konfigurasyon na handa para sa produksyon
 
 ## Mga Sanggunian
 
@@ -549,10 +554,14 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 
 ---
 
-**Nakaraan:** [AZD Basics](azd-basics.md) | **Susunod:** [Unang Proyekto](first-project.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 3 - Konfigurasyon at Pagpapatunay
+- **⬅️ Nakaraan**: [Ang Iyong Unang Proyekto](first-project.md)
+- **➡️ Susunod na Kabanata**: [Kabanata 4: Infrastructure as Code](../deployment/deployment-guide.md)
 - **Susunod na Aralin**: [Ang Iyong Unang Proyekto](first-project.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

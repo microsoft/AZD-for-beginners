@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:46:06+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T08:28:05+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "tl"
 }
 -->
 # Azure AI Foundry Integration with AZD
 
-**Nauna:** [Unang Proyekto](../getting-started/first-project.md) | **Susunod:** [Pag-deploy ng AI Model](ai-model-deployment.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
+- **⬅️ Nakaraang Kabanata**: [Kabanata 1: Ang Iyong Unang Proyekto](../getting-started/first-project.md)
+- **➡️ Susunod**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
 
 ## Pangkalahatang-ideya
 
-Ang gabay na ito ay nagpapakita kung paano i-integrate ang mga serbisyo ng Azure AI Foundry sa Azure Developer CLI (AZD) para sa mas maayos na pag-deploy ng mga AI application. Ang Azure AI Foundry ay nagbibigay ng komprehensibong platform para sa pagbuo, pag-deploy, at pamamahala ng mga AI application, habang ang AZD ay nagpapadali sa proseso ng imprastruktura at pag-deploy.
+Ang gabay na ito ay nagpapakita kung paano i-integrate ang mga serbisyo ng Azure AI Foundry sa Azure Developer CLI (AZD) para sa mas pinadaling pag-deploy ng mga AI application. Ang Azure AI Foundry ay nagbibigay ng komprehensibong platform para sa pagbuo, pag-deploy, at pamamahala ng mga AI application, habang ang AZD ay nagpapadali sa proseso ng imprastruktura at pag-deploy.
 
 ## Ano ang Azure AI Foundry?
 
@@ -22,14 +27,14 @@ Ang Azure AI Foundry ay ang pinag-isang platform ng Microsoft para sa AI develop
 - **Model Catalog**: Access sa mga makabagong AI model
 - **Prompt Flow**: Visual designer para sa mga AI workflow
 - **AI Foundry Portal**: Integrated development environment para sa mga AI application
-- **Deployment Options**: Iba't ibang hosting at scaling options
+- **Deployment Options**: Maraming pagpipilian para sa hosting at scaling
 - **Safety and Security**: Mga built-in na responsible AI features
 
 ## AZD + Azure AI Foundry: Mas Maganda Kapag Magkasama
 
 | Tampok | Azure AI Foundry | Benepisyo ng AZD Integration |
 |--------|------------------|-----------------------------|
-| **Model Deployment** | Manual na pag-deploy sa portal | Automated, repeatable deployments |
+| **Model Deployment** | Manual na deployment sa portal | Automated, repeatable deployments |
 | **Imprastruktura** | Click-through provisioning | Infrastructure as Code (Bicep) |
 | **Pamamahala ng Kapaligiran** | Nakatuon sa isang kapaligiran | Multi-environment (dev/staging/prod) |
 | **CI/CD Integration** | Limitado | Native GitHub Actions support |
@@ -42,11 +47,11 @@ Ang Azure AI Foundry ay ang pinag-isang platform ng Microsoft para sa AI develop
 - Access sa Azure OpenAI services
 - Pangunahing kaalaman sa Azure AI Foundry
 
-## Pangunahing Mga Pattern ng Integrasyon
+## Mga Pangunahing Pattern ng Integrasyon
 
 ### Pattern 1: Azure OpenAI Integration
 
-**Gamit:** Pag-deploy ng mga chat application gamit ang Azure OpenAI models
+**Gamitin Paraan**: Mag-deploy ng mga chat application gamit ang Azure OpenAI models
 
 ```yaml
 # azure.yaml
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Pattern 2: AI Search + RAG Integration
 
-**Gamit:** Pag-deploy ng retrieval-augmented generation (RAG) applications
+**Gamitin Paraan**: Mag-deploy ng retrieval-augmented generation (RAG) applications
 
 ```bicep
 // Azure AI Search
@@ -126,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### Pattern 3: Document Intelligence Integration
 
-**Gamit:** Mga workflow para sa pagproseso at pagsusuri ng dokumento
+**Gamitin Paraan**: Mga workflow para sa pagproseso at pagsusuri ng dokumento
 
 ```bicep
 // Document Intelligence service
@@ -157,11 +162,11 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Mga Pattern ng Konpigurasyon
+## 🔧 Mga Pattern ng Configuration
 
 ### Setup ng Environment Variables
 
-**Konpigurasyon para sa Produksyon:**
+**Configuration para sa Production:**
 ```bash
 # Core AI services
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
@@ -177,7 +182,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Konpigurasyon para sa Pag-develop:**
+**Configuration para sa Development:**
 ```bash
 # Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -220,9 +225,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Mga Workflow ng Pag-deploy
+## Mga Workflow ng Deployment
 
-### Pag-deploy gamit ang Single Command
+### Single Command Deployment
 
 ```bash
 # Deploy everything with one command
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### Pag-deploy Batay sa Kapaligiran
+### Deployments na Specific sa Kapaligiran
 
 ```bash
 # Development environment
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Konpigurasyon ng Auto-scaling
+### Configuration ng Auto-scaling
 
 ```bicep
 // Container App with auto-scaling
@@ -426,12 +431,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Pag-troubleshoot ng Karaniwang Mga Isyu
+## Pag-aayos ng Karaniwang Mga Isyu
 
 ### Isyu 1: Naubos ang OpenAI Quota
 
-**Sintomas:**
-- Nabigo ang pag-deploy dahil sa quota errors
+**Mga Sintomas:**
+- Nabigo ang deployment dahil sa quota errors
 - 429 errors sa application logs
 
 **Mga Solusyon:**
@@ -450,9 +455,9 @@ azd deploy
 
 ### Isyu 2: Mga Pagkabigo sa Authentication
 
-**Sintomas:**
+**Mga Sintomas:**
 - 401/403 errors kapag tumatawag sa AI services
-- Mga mensaheng "Access denied"
+- Mga mensahe ng "Access denied"
 
 **Mga Solusyon:**
 ```bash
@@ -466,11 +471,11 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Isyu 3: Mga Problema sa Pag-deploy ng Model
+### Isyu 3: Mga Problema sa Model Deployment
 
-**Sintomas:**
-- Hindi available ang mga model sa pag-deploy
-- Nabibigo ang partikular na mga bersyon ng model
+**Mga Sintomas:**
+- Hindi available ang mga model sa deployment
+- Nabibigo ang mga partikular na bersyon ng model
 
 **Mga Solusyon:**
 ```bash
@@ -521,26 +526,31 @@ azd up
 
 ## Mga Susunod na Hakbang
 
-1. **Subukan ang Mga Halimbawa**: Simulan sa isang pre-built template na tumutugma sa iyong use case
+1. **Subukan ang Mga Halimbawa**: Simulan sa isang pre-built na template na naaayon sa iyong pangangailangan
 2. **I-customize Ayon sa Iyong Pangangailangan**: Baguhin ang imprastruktura at application code
 3. **Magdagdag ng Monitoring**: Magpatupad ng komprehensibong observability
-4. **I-optimize ang Gastos**: Ayusin ang mga konpigurasyon ayon sa iyong budget
-5. **Siguraduhin ang Iyong Pag-deploy**: Magpatupad ng mga enterprise security pattern
-6. **I-scale sa Produksyon**: Magdagdag ng multi-region at high-availability features
+4. **I-optimize ang Gastos**: Ayusin ang mga configuration ayon sa iyong budget
+5. **Siguraduhin ang Iyong Deployment**: Magpatupad ng mga enterprise security pattern
+6. **Mag-scale sa Production**: Magdagdag ng multi-region at high-availability features
 
 ## Komunidad at Suporta
 
 - **Azure AI Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Mga Isyu at Diskusyon](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**: [Opisyal na Dokumentasyon](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Learn**: [Opisyal na dokumentasyon](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**Nauna:** [Unang Proyekto](../getting-started/first-project.md) | **Susunod:** [Pag-deploy ng AI Model](ai-model-deployment.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
+- **⬅️ Nakaraang Kabanata**: [Kabanata 1: Ang Iyong Unang Proyekto](../getting-started/first-project.md)
+- **➡️ Susunod**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
 
 **Kailangan ng Tulong?** Sumali sa aming mga diskusyon sa komunidad o magbukas ng isyu sa repositoryo. Ang komunidad ng Azure AI + AZD ay narito upang tulungan kang magtagumpay!
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

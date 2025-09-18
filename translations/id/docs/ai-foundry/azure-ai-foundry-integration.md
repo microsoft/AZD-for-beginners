@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:45:31+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T07:55:35+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "id"
 }
 -->
 # Integrasi Azure AI Foundry dengan AZD
 
-**Sebelumnya:** [Proyek Pertama](../getting-started/first-project.md) | **Selanjutnya:** [Penerapan Model AI](ai-model-deployment.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berbasis AI
+- **⬅️ Bab Sebelumnya**: [Bab 1: Proyek Pertama Anda](../getting-started/first-project.md)
+- **➡️ Selanjutnya**: [Penerapan Model AI](ai-model-deployment.md)
+- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 ## Ikhtisar
 
-Panduan ini menunjukkan cara mengintegrasikan layanan Azure AI Foundry dengan Azure Developer CLI (AZD) untuk mempermudah penerapan aplikasi AI. Azure AI Foundry menyediakan platform lengkap untuk membangun, menerapkan, dan mengelola aplikasi AI, sementara AZD menyederhanakan proses infrastruktur dan penerapan.
+Panduan ini menunjukkan cara mengintegrasikan layanan Azure AI Foundry dengan Azure Developer CLI (AZD) untuk penerapan aplikasi AI yang lebih efisien. Azure AI Foundry menyediakan platform lengkap untuk membangun, menerapkan, dan mengelola aplikasi AI, sementara AZD menyederhanakan proses infrastruktur dan penerapan.
 
 ## Apa itu Azure AI Foundry?
 
@@ -126,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### Pola 3: Integrasi Document Intelligence
 
-**Kasus Penggunaan**: Alur kerja analisis dan pemrosesan dokumen
+**Kasus Penggunaan**: Alur kerja pemrosesan dan analisis dokumen
 
 ```bicep
 // Document Intelligence service
@@ -220,7 +225,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Alur Penerapan
+## Alur Kerja Penerapan
 
 ### Penerapan dengan Satu Perintah
 
@@ -519,14 +524,14 @@ azd init --template contoso-chat
 azd up
 ```
 
-## Langkah Selanjutnya
+## Langkah Berikutnya
 
 1. **Coba Contoh**: Mulai dengan template yang sudah dibuat sesuai kasus penggunaan Anda
 2. **Sesuaikan dengan Kebutuhan Anda**: Modifikasi infrastruktur dan kode aplikasi
 3. **Tambahkan Pemantauan**: Implementasikan observabilitas yang komprehensif
 4. **Optimalkan Biaya**: Sesuaikan konfigurasi untuk anggaran Anda
 5. **Amankan Penerapan Anda**: Terapkan pola keamanan tingkat perusahaan
-6. **Skalakan ke Produksi**: Tambahkan fitur multi-region dan ketersediaan tinggi
+6. **Skala ke Produksi**: Tambahkan fitur multi-region dan ketersediaan tinggi
 
 ## Komunitas dan Dukungan
 
@@ -536,7 +541,12 @@ azd up
 
 ---
 
-**Sebelumnya:** [Proyek Pertama](../getting-started/first-project.md) | **Selanjutnya:** [Penerapan Model AI](ai-model-deployment.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berbasis AI
+- **⬅️ Bab Sebelumnya**: [Bab 1: Proyek Pertama Anda](../getting-started/first-project.md)
+- **➡️ Selanjutnya**: [Penerapan Model AI](ai-model-deployment.md)
+- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 **Butuh Bantuan?** Bergabunglah dalam diskusi komunitas kami atau buka masalah di repositori. Komunitas Azure AI + AZD siap membantu Anda sukses!
 

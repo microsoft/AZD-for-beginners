@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T21:40:32+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T07:39:44+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "vi"
 }
 -->
 # Hướng Dẫn Triển Khai - Làm Chủ Các Triển Khai AZD
+
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 4 - Hạ Tầng dưới dạng Mã & Triển Khai
+- **⬅️ Chương Trước**: [Chương 3: Cấu Hình](../getting-started/configuration.md)
+- **➡️ Tiếp Theo**: [Cấp Phát Tài Nguyên](provisioning.md)
+- **🚀 Chương Tiếp Theo**: [Chương 5: Giải Pháp AI Đa Tác Nhân](../../examples/retail-scenario.md)
 
 ## Giới Thiệu
 
@@ -17,7 +24,7 @@ Hướng dẫn toàn diện này bao gồm mọi thứ bạn cần biết về v
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
 - Làm chủ tất cả các lệnh và quy trình triển khai của Azure Developer CLI
-- Hiểu rõ toàn bộ vòng đời triển khai từ khởi tạo đến giám sát
+- Hiểu toàn bộ vòng đời triển khai từ cấp phát đến giám sát
 - Thực hiện các hook triển khai tùy chỉnh cho tự động hóa trước và sau triển khai
 - Cấu hình nhiều môi trường với các tham số riêng biệt cho từng môi trường
 - Thiết lập các chiến lược triển khai nâng cao bao gồm triển khai blue-green và canary
@@ -31,12 +38,12 @@ Sau khi hoàn thành, bạn sẽ có khả năng:
 - Cấu hình các triển khai sẵn sàng cho sản xuất với bảo mật và giám sát phù hợp
 - Quản lý các kịch bản triển khai phức tạp với nhiều môi trường
 - Tối ưu hóa hiệu suất triển khai và thực hiện các chiến lược rollback
-- Tích hợp các triển khai azd vào các thực tiễn DevOps của doanh nghiệp
+- Tích hợp các triển khai azd vào các thực tiễn DevOps doanh nghiệp
 
 ## Tổng Quan Về Triển Khai
 
 Azure Developer CLI cung cấp một số lệnh triển khai:
-- `azd up` - Quy trình hoàn chỉnh (khởi tạo + triển khai)
+- `azd up` - Quy trình hoàn chỉnh (cấp phát + triển khai)
 - `azd provision` - Chỉ tạo/cập nhật tài nguyên Azure
 - `azd deploy` - Chỉ triển khai mã ứng dụng
 - `azd package` - Xây dựng và đóng gói ứng dụng
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Hiểu Quy Trình Triển Khai
 
-### Giai Đoạn 1: Hook Trước Khởi Tạo
+### Giai Đoạn 1: Hook Trước Cấp Phát
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Giai Đoạn 2: Khởi Tạo Hạ Tầng
+### Giai Đoạn 2: Cấp Phát Hạ Tầng
 - Đọc các mẫu hạ tầng (Bicep/Terraform)
 - Tạo hoặc cập nhật tài nguyên Azure
 - Cấu hình mạng và bảo mật
 - Thiết lập giám sát và ghi nhật ký
 
-### Giai Đoạn 3: Hook Sau Khởi Tạo
+### Giai Đoạn 3: Hook Sau Cấp Phát
 ```yaml
 hooks:
   postprovision:
@@ -139,7 +146,7 @@ hooks:
 ### Giai Đoạn 6: Triển Khai Ứng Dụng
 - Triển khai các ứng dụng đã đóng gói lên các dịch vụ Azure
 - Cập nhật các cài đặt cấu hình
-- Khởi động/tái khởi động các dịch vụ
+- Bắt đầu/khởi động lại các dịch vụ
 
 ### Giai Đoạn 7: Hook Sau Triển Khai
 ```yaml
@@ -383,7 +390,7 @@ services:
         - .next/cache
 ```
 
-### Triển Khai Gia Tăng
+### Triển Khai Tăng Dần
 ```bash
 # Deploy only changed services
 azd deploy --incremental
@@ -453,7 +460,7 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Các Lưu Ý Về Bảo Mật
+## 🔐 Cân Nhắc Về Bảo Mật
 
 ### Quản Lý Bí Mật
 ```bash
@@ -631,10 +638,10 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Các Bước Tiếp Theo
 
-- [Khởi Tạo Tài Nguyên](provisioning.md) - Tìm hiểu sâu về quản lý hạ tầng
-- [Lập Kế Hoạch Trước Triển Khai](../pre-deployment/capacity-planning.md) - Lập kế hoạch chiến lược triển khai
+- [Cấp Phát Tài Nguyên](provisioning.md) - Tìm hiểu sâu về quản lý hạ tầng
+- [Lập Kế Hoạch Trước Triển Khai](../pre-deployment/capacity-planning.md) - Lập kế hoạch chiến lược triển khai của bạn
 - [Các Vấn Đề Thường Gặp](../troubleshooting/common-issues.md) - Giải quyết các vấn đề triển khai
-- [Phương Pháp Tốt Nhất](../troubleshooting/debugging.md) - Chiến lược triển khai sẵn sàng cho sản xuất
+- [Các Phương Pháp Tốt Nhất](../troubleshooting/debugging.md) - Chiến lược triển khai sẵn sàng cho sản xuất
 
 ## Tài Nguyên Bổ Sung
 
@@ -647,7 +654,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 **Điều Hướng**
 - **Bài Học Trước**: [Dự Án Đầu Tiên Của Bạn](../getting-started/first-project.md)
-- **Bài Học Tiếp Theo**: [Khởi Tạo Tài Nguyên](provisioning.md)
+- **Bài Học Tiếp Theo**: [Cấp Phát Tài Nguyên](provisioning.md)
 
 ---
 

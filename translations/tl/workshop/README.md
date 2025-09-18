@@ -1,43 +1,47 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T22:02:50+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T08:34:42+00:00",
   "source_file": "workshop/README.md",
   "language_code": "tl"
 }
 -->
 # AZD para sa AI Developers Workshop
 
-**Nakaraan:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Susunod:** [Workshop Lab Modules](../../../workshop)
+**Pag-navigate sa Workshop**
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../README.md)
+- **📖 Mga Kaugnay na Kabanata**: Saklaw ang [Kabanata 1](../README.md#-chapter-1-foundation--quick-start), [Kabanata 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), at [Kabanata 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Hands-On Lab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Mga Susunod na Hakbang**: [Mga Module ng Workshop Lab](../../../workshop)
 
-Maligayang pagdating sa hands-on workshop para matutunan ang Azure Developer CLI (AZD) na nakatuon sa pag-deploy ng AI applications. Ang workshop na ito ay idinisenyo upang dalhin ka mula sa mga pangunahing kaalaman ng AZD hanggang sa pag-deploy ng mga production-ready AI solutions.
+Maligayang pagdating sa hands-on workshop para matutunan ang Azure Developer CLI (AZD) na nakatuon sa pag-deploy ng AI applications. Ang workshop na ito ay idinisenyo upang dalhin ka mula sa mga pangunahing kaalaman ng AZD hanggang sa pag-deploy ng mga AI solution na handa para sa produksyon.
 
-## Pangkalahatang Ideya ng Workshop
+## Pangkalahatang-ideya ng Workshop
 
 **Tagal:** 2-3 oras  
 **Antas:** Baguhan hanggang Intermediate  
 **Mga Kinakailangan:** Pangunahing kaalaman sa Azure, mga command line tools, at mga konsepto ng AI
 
-### Ano ang Iyong Matututunan
+### Ano ang Matututunan Mo
 
 - **Mga Pangunahing Kaalaman ng AZD**: Pag-unawa sa Infrastructure as Code gamit ang AZD
 - 🤖 **Integrasyon ng AI Services**: Pag-deploy ng Azure OpenAI, AI Search, at iba pang AI services
 - **Pag-deploy ng Container**: Paggamit ng Azure Container Apps para sa AI applications
-- **Mga Pinakamahusay na Praktika sa Seguridad**: Pagpapatupad ng Managed Identity at secure configurations
+- **Mga Pinakamahusay na Kasanayan sa Seguridad**: Pagpapatupad ng Managed Identity at secure na mga configuration
 - **Pag-monitor at Observability**: Pag-set up ng Application Insights para sa AI workloads
-- **Mga Pattern para sa Produksyon**: Mga estratehiya sa enterprise-ready deployment
+- **Mga Pattern ng Produksyon**: Mga estratehiya sa pag-deploy na handa para sa enterprise
 
 ## Estruktura ng Workshop
 
-### Module 1: Mga Batayan ng AZD (30 minuto)
+### Module 1: Mga Pangunahing Kaalaman ng AZD (30 minuto)
 - Pag-install at pag-configure ng AZD
-- Pag-unawa sa istruktura ng AZD project
+- Pag-unawa sa istruktura ng proyekto ng AZD
 - Ang iyong unang AZD deployment
 - **Lab**: Mag-deploy ng simpleng web application
 
 ### Module 2: Integrasyon ng Azure OpenAI (45 minuto)
-- Pag-set up ng Azure OpenAI resources
+- Pag-set up ng mga Azure OpenAI resources
 - Mga estratehiya sa pag-deploy ng modelo
 - Pag-configure ng API access at authentication
 - **Lab**: Mag-deploy ng chat application gamit ang GPT-4
@@ -46,25 +50,25 @@ Maligayang pagdating sa hands-on workshop para matutunan ang Azure Developer CLI
 - Integrasyon ng Azure AI Search
 - Pagproseso ng dokumento gamit ang Azure Document Intelligence
 - Vector embeddings at semantic search
-- **Lab**: Gumawa ng document Q&A system
+- **Lab**: Bumuo ng document Q&A system
 
-### Module 4: Deployment para sa Produksyon (30 minuto)
+### Module 4: Pag-deploy sa Produksyon (30 minuto)
 - Configuration ng Container Apps
 - Pag-optimize ng scaling at performance
 - Pag-monitor at pag-log
 - **Lab**: Mag-deploy sa produksyon na may observability
 
 ### Module 5: Mga Advanced na Pattern (15 minuto)
-- Multi-environment deployments
+- Mga deployment sa multi-environment
 - Integrasyon ng CI/CD
 - Mga estratehiya sa pag-optimize ng gastos
-- **Wrap-up**: Production readiness checklist
+- **Wrap-up**: Checklist para sa kahandaan sa produksyon
 
 ## Mga Kinakailangan
 
 ### Mga Kinakailangang Tools
 
-Mangyaring i-install ang mga tools na ito bago ang workshop:
+Mangyaring i-install ang mga tool na ito bago ang workshop:
 
 ```bash
 # Azure Developer CLI
@@ -86,8 +90,8 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Setup ng Azure Account
 
-1. **Azure Subscription**: [Mag-sign up nang libre](https://azure.microsoft.com/free/)  
-2. **Access sa Azure OpenAI**: [Mag-request ng access](https://aka.ms/oai/access)  
+1. **Azure Subscription**: [Mag-sign up nang libre](https://azure.microsoft.com/free/)
+2. **Access sa Azure OpenAI**: [Mag-request ng access](https://aka.ms/oai/access)
 3. **Mga Kinakailangang Pahintulot**:
    - Contributor role sa subscription o resource group
    - User Access Administrator (para sa RBAC assignments)
@@ -144,22 +148,22 @@ echo "Setup verification complete!"
 
 Ang bawat module ay may kasamang hands-on labs na may starter code at step-by-step na mga tagubilin:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Ang iyong unang AZD deployment  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat application gamit ang Azure OpenAI  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG application gamit ang AI Search  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Mga pattern ng deployment para sa produksyon  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Mga advanced na deployment scenarios  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Ang iyong unang AZD deployment
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat application gamit ang Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG application gamit ang AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Mga pattern ng pag-deploy sa produksyon
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Mga advanced na senaryo ng pag-deploy
 
 ### Mga Reference Materials
 
-- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Komprehensibong mga pattern ng integrasyon  
-- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Mga pinakamahusay na praktika sa pag-deploy ng modelo  
-- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Mga pattern ng enterprise deployment  
-- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Mga karaniwang isyu at solusyon  
+- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Komprehensibong mga pattern ng integrasyon
+- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Mga pinakamahusay na kasanayan sa pag-deploy ng modelo
+- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Mga pattern ng pag-deploy para sa enterprise
+- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Mga karaniwang isyu at solusyon
 
 ### Mga Sample Templates
 
-Mga quick-start template para sa mga karaniwang AI scenarios:
+Mga quick-start template para sa mga karaniwang AI senaryo:
 
 ```
 workshop/templates/
@@ -199,11 +203,11 @@ cat README.md  # Follow the instructions
 
 ### Opsyon 3: Instructor-Led Workshop
 
-Kung ikaw ay dadalo sa isang instructor-led session:
+Kung dumadalo ka sa isang instructor-led session:
 
-- 🎥 **Workshop Recording**: [Available on demand](https://aka.ms/azd-ai-workshop)  
-- 💬 **Discord Community**: [Sumali para sa live support](https://aka.ms/foundry/discord)  
-- **Workshop Feedback**: [Ibahagi ang iyong karanasan](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Workshop Recording**: [Available on demand](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord Community**: [Sumali para sa live support](https://aka.ms/foundry/discord)
+- **Workshop Feedback**: [Ibahagi ang iyong karanasan](https://aka.ms/azd-workshop-feedback)
 
 ## Timeline ng Workshop
 
@@ -237,44 +241,44 @@ Sa pagtatapos ng workshop na ito, magagawa mo:
 
 ✅ **Mag-deploy ng AI applications** gamit ang AZD templates  
 ✅ **I-configure ang Azure OpenAI** services nang may tamang seguridad  
-✅ **Gumawa ng RAG applications** gamit ang integrasyon ng Azure AI Search  
-✅ **Magpatupad ng mga pattern para sa produksyon** para sa enterprise AI workloads  
+✅ **Bumuo ng RAG applications** gamit ang integrasyon ng Azure AI Search  
+✅ **Magpatupad ng mga pattern ng produksyon** para sa enterprise AI workloads  
 ✅ **Mag-monitor at mag-troubleshoot** ng AI application deployments  
 ✅ **Mag-apply ng mga estratehiya sa pag-optimize ng gastos** para sa AI workloads  
 
 ## Komunidad at Suporta
 
-### Habang Nasa Workshop
+### Sa Panahon ng Workshop
 
-- 🙋 **Mga Tanong**: Gamitin ang workshop chat o magtaas ng kamay  
-- 🐛 **Mga Isyu**: Tingnan ang [troubleshooting guide](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Mga Tips**: Ibahagi ang mga natuklasan sa ibang mga kalahok  
+- 🙋 **Mga Tanong**: Gamitin ang workshop chat o magtaas ng kamay
+- 🐛 **Mga Isyu**: Tingnan ang [troubleshooting guide](../docs/troubleshooting/ai-troubleshooting.md)
+- **Mga Tips**: Ibahagi ang mga natuklasan sa ibang mga kalahok
 
 ### Pagkatapos ng Workshop
 
-- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)  
-- **GitHub Issues**: [I-report ang mga isyu sa template](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Feedback**: [Workshop evaluation form](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
+- **GitHub Issues**: [I-report ang mga isyu sa template](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Feedback**: [Form ng pagsusuri ng workshop](https://aka.ms/azd-workshop-feedback)
 
 ## Mga Susunod na Hakbang
 
 ### Magpatuloy sa Pag-aaral
 
-1. **Mga Advanced na Scenarios**: Tuklasin ang [multi-region deployments](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Integrasyon ng CI/CD**: I-set up ang [GitHub Actions workflows](../docs/deployment/github-actions.md)  
-3. **Custom Templates**: Gumawa ng iyong sariling [AZD templates](../docs/getting-started/custom-templates.md)  
+1. **Mga Advanced na Senaryo**: Tuklasin ang [multi-region deployments](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Integrasyon ng CI/CD**: I-set up ang [GitHub Actions workflows](../docs/deployment/github-actions.md)
+3. **Custom Templates**: Gumawa ng sarili mong [AZD templates](../docs/getting-started/custom-templates.md)
 
 ### I-apply sa Iyong Mga Proyekto
 
-1. **Assessment**: Gamitin ang aming [readiness checklist](./production-readiness-checklist.md)  
-2. **Templates**: Simulan gamit ang aming [AI-specific templates](../../../workshop/templates)  
-3. **Suporta**: Sumali sa [Azure AI Foundry Discord](https://aka.ms/foundry/discord)  
+1. **Pagsusuri**: Gamitin ang aming [readiness checklist](./production-readiness-checklist.md)
+2. **Mga Template**: Simulan gamit ang aming [AI-specific templates](../../../workshop/templates)
+3. **Suporta**: Sumali sa [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
 ### Ibahagi ang Iyong Tagumpay
 
-- ⭐ **I-star ang repository** kung nakatulong sa iyo ang workshop na ito  
-- 🐦 **Ibahagi sa social media** gamit ang #AzureDeveloperCLI #AzureAI  
-- 📝 **Sumulat ng blog post** tungkol sa iyong AI deployment journey  
+- ⭐ **I-star ang repository** kung nakatulong sa iyo ang workshop na ito
+- 🐦 **Ibahagi sa social media** gamit ang #AzureDeveloperCLI #AzureAI
+- 📝 **Sumulat ng blog post** tungkol sa iyong AI deployment journey
 
 ---
 
@@ -290,17 +294,17 @@ Ang iyong feedback ay tumutulong sa amin na mapabuti ang karanasan sa workshop:
 | Antas ng Kahirapan | ⭐⭐⭐⭐⭐ | |
 | Kabuuang Karanasan | ⭐⭐⭐⭐⭐ | |
 
-**Mag-submit ng feedback**: [Workshop Evaluation Form](https://aka.ms/azd-workshop-feedback)
+**Mag-submit ng feedback**: [Form ng Pagsusuri ng Workshop](https://aka.ms/azd-workshop-feedback)
 
 ---
 
 **Nakaraan:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Susunod:** Simulan sa [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)
 
-**Handa ka na bang magsimulang magtayo ng AI applications gamit ang AZD?**
+**Handa ka na bang magsimulang bumuo ng AI applications gamit ang AZD?**
 
 [Simulan ang Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

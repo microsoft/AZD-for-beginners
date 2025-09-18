@@ -1,27 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:46:49+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T08:23:09+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "ms"
 }
 -->
 # Lembaran Rujukan Perintah - Perintah AZD Penting
 
+**Rujukan Pantas untuk Semua Bab**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../README.md)
+- **📖 Permulaan Pantas**: [Bab 1: Asas & Permulaan Pantas](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Perintah AI**: [Bab 2: Pembangunan Berasaskan AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Lanjutan**: [Bab 4: Infrastruktur sebagai Kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Pengenalan
 
-Lembaran rujukan yang komprehensif ini menyediakan rujukan pantas untuk perintah Azure Developer CLI yang paling kerap digunakan, disusun mengikut kategori dengan contoh praktikal. Sesuai untuk rujukan pantas semasa pembangunan, penyelesaian masalah, dan operasi harian dengan projek azd.
+Lembaran rujukan komprehensif ini menyediakan rujukan pantas untuk perintah Azure Developer CLI yang paling kerap digunakan, disusun mengikut kategori dengan contoh praktikal. Sesuai untuk rujukan pantas semasa pembangunan, penyelesaian masalah, dan operasi harian dengan projek azd.
 
 ## Matlamat Pembelajaran
 
 Dengan menggunakan lembaran rujukan ini, anda akan:
 - Mempunyai akses segera kepada perintah dan sintaks Azure Developer CLI yang penting
-- Memahami organisasi perintah mengikut kategori fungsi dan kes penggunaan
+- Memahami pengelompokan perintah mengikut kategori fungsi dan kes penggunaan
 - Merujuk contoh praktikal untuk senario pembangunan dan penyebaran biasa
 - Mengakses perintah penyelesaian masalah untuk penyelesaian isu dengan cepat
-- Menemui pilihan konfigurasi dan penyesuaian lanjutan dengan cekap
-- Menemui perintah pengurusan persekitaran dan aliran kerja pelbagai persekitaran
+- Menemukan pilihan konfigurasi dan penyesuaian lanjutan dengan cekap
+- Menyusun perintah pengurusan persekitaran dan aliran kerja pelbagai persekitaran
 
 ## Hasil Pembelajaran
 
@@ -30,10 +36,10 @@ Dengan rujukan kerap kepada lembaran rujukan ini, anda akan dapat:
 - Menyelesaikan isu biasa dengan cepat menggunakan perintah diagnostik yang sesuai
 - Menguruskan pelbagai persekitaran dan senario penyebaran dengan cekap
 - Menggunakan ciri dan pilihan konfigurasi azd lanjutan apabila diperlukan
-- Menyelesaikan isu penyebaran menggunakan urutan perintah yang sistematik
+- Menyelesaikan masalah penyebaran menggunakan urutan perintah yang sistematik
 - Mengoptimumkan aliran kerja melalui penggunaan pintasan dan pilihan azd yang berkesan
 
-## Perintah Memulakan
+## Perintah Permulaan
 
 ### Pengesahan
 ```bash
@@ -243,7 +249,7 @@ azd info
 
 ## 🔧 Perintah Lanjutan
 
-### Pipeline dan CI/CD
+### Saluran Paip dan CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -336,9 +342,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Perintah Debugging
+## 🔍 Perintah Penyahpepijatan
 
-### Maklumat Debug
+### Maklumat Penyahpepijatan
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -354,7 +360,7 @@ azd info
 az account show
 ```
 
-### Debug Template
+### Penyahpepijatan Templat
 ```bash
 # List available templates with details
 azd template list --output json
@@ -413,7 +419,7 @@ azd env show
 azd logs --level error --since 10m
 ```
 
-### Validasi Penyebaran
+### Pengesahan Penyebaran
 ```bash
 #!/bin/bash
 # Pre-deployment validation

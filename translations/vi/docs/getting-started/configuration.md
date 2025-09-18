@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:22:11+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T07:38:39+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "vi"
 }
 -->
 # Hướng Dẫn Cấu Hình
 
-**Trước:** [AZD Cơ Bản](azd-basics.md) | **Tiếp Theo:** [Dự Án Đầu Tiên](first-project.md)
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD Dành Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 3 - Cấu Hình & Xác Thực
+- **⬅️ Trước**: [Dự Án Đầu Tiên Của Bạn](first-project.md)
+- **➡️ Tiếp Theo**: [Hướng Dẫn Triển Khai](../deployment/deployment-guide.md)
+- **🚀 Chương Tiếp Theo**: [Chương 4: Hạ Tầng dưới dạng Mã](../deployment/deployment-guide.md)
 
 ## Giới Thiệu
 
@@ -18,10 +23,10 @@ Hướng dẫn toàn diện này bao gồm tất cả các khía cạnh của vi
 ## Mục Tiêu Học Tập
 
 Sau khi hoàn thành bài học này, bạn sẽ:
-- Nắm vững hệ thống cấu hình của azd và hiểu cách ưu tiên các thiết lập
-- Cấu hình hiệu quả các thiết lập toàn cục và dành riêng cho dự án
+- Nắm vững hệ thống cấu hình azd và hiểu cách ưu tiên các thiết lập
+- Cấu hình hiệu quả các thiết lập toàn cục và cụ thể cho dự án
 - Quản lý nhiều môi trường với các cấu hình khác nhau
-- Áp dụng các mẫu xác thực và ủy quyền an toàn
+- Thực hiện các mẫu xác thực và ủy quyền an toàn
 - Hiểu các mẫu cấu hình nâng cao cho các tình huống phức tạp
 
 ## Kết Quả Học Tập
@@ -29,7 +34,7 @@ Sau khi hoàn thành bài học này, bạn sẽ:
 Sau khi hoàn thành bài học này, bạn sẽ có thể:
 - Cấu hình azd để tối ưu hóa quy trình phát triển
 - Thiết lập và quản lý nhiều môi trường triển khai
-- Áp dụng các thực hành quản lý cấu hình an toàn
+- Thực hiện các thực hành quản lý cấu hình an toàn
 - Khắc phục sự cố liên quan đến cấu hình
 - Tùy chỉnh hành vi của azd theo yêu cầu của tổ chức
 
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Cài Đặt Theo Ngôn Ngữ
+#### Thiết Lập Theo Ngôn Ngữ
 ```yaml
 services:
   node-app:
@@ -384,7 +389,7 @@ Ví dụ `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/az
 
 ## 🔧 Cấu Hình Nâng Cao
 
-### Đặt Tên Tài Nguyên Tùy Chỉnh
+### Tùy Chỉnh Tên Tài Nguyên
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Cân Nhắc Khi Sử Dụng Quản Lý Phiên Bản
+### 3. Cân Nhắc Khi Sử Dụng Kiểm Soát Phiên Bản
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -537,7 +542,7 @@ Ghi lại cấu hình của bạn trong `CONFIG.md`:
 
 ## Bước Tiếp Theo
 
-- [Dự Án Đầu Tiên](first-project.md) - Áp dụng cấu hình vào thực tế
+- [Dự Án Đầu Tiên Của Bạn](first-project.md) - Áp dụng cấu hình vào thực tế
 - [Hướng Dẫn Triển Khai](../deployment/deployment-guide.md) - Sử dụng cấu hình để triển khai
 - [Cung Cấp Tài Nguyên](../deployment/provisioning.md) - Cấu hình sẵn sàng cho sản xuất
 
@@ -549,8 +554,12 @@ Ghi lại cấu hình của bạn trong `CONFIG.md`:
 
 ---
 
-**Trước:** [AZD Cơ Bản](azd-basics.md) | **Tiếp Theo:** [Dự Án Đầu Tiên](first-project.md)
-- **Bài Học Tiếp Theo**: [Dự Án Đầu Tiên](first-project.md)
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD Dành Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 3 - Cấu Hình & Xác Thực
+- **⬅️ Trước**: [Dự Án Đầu Tiên Của Bạn](first-project.md)
+- **➡️ Chương Tiếp Theo**: [Chương 4: Hạ Tầng dưới dạng Mã](../deployment/deployment-guide.md)
+- **Bài Học Tiếp Theo**: [Dự Án Đầu Tiên Của Bạn](first-project.md)
 
 ---
 

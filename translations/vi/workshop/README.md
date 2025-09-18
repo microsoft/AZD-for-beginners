@@ -1,58 +1,62 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T22:01:36+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T07:44:04+00:00",
   "source_file": "workshop/README.md",
   "language_code": "vi"
 }
 -->
 # Hội Thảo AZD dành cho Nhà Phát Triển AI
 
-**Trước:** [Hướng Dẫn Khắc Phục Sự Cố AI](../docs/troubleshooting/ai-troubleshooting.md) | **Tiếp Theo:** [Các Module Thực Hành Hội Thảo](../../../workshop)
+**Điều Hướng Hội Thảo**
+- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../README.md)
+- **📖 Các Chương Liên Quan**: Bao gồm [Chương 1](../README.md#-chapter-1-foundation--quick-start), [Chương 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), và [Chương 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Phòng Thực Hành**: [Phòng Thực Hành AI](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Bước Tiếp Theo**: [Các Module Hội Thảo](../../../workshop)
 
-Chào mừng bạn đến với hội thảo thực hành học Azure Developer CLI (AZD) với trọng tâm là triển khai ứng dụng AI. Hội thảo này được thiết kế để giúp bạn từ những kiến thức cơ bản về AZD đến triển khai các giải pháp AI sẵn sàng cho sản xuất.
+Chào mừng bạn đến với hội thảo thực hành học Azure Developer CLI (AZD) tập trung vào triển khai ứng dụng AI. Hội thảo này được thiết kế để giúp bạn từ những kiến thức cơ bản về AZD đến triển khai các giải pháp AI sẵn sàng cho sản xuất.
 
 ## Tổng Quan Hội Thảo
 
 **Thời lượng:** 2-3 giờ  
-**Cấp độ:** Người mới bắt đầu đến trung cấp  
+**Trình độ:** Người mới bắt đầu đến trung cấp  
 **Yêu cầu:** Kiến thức cơ bản về Azure, công cụ dòng lệnh, và các khái niệm AI
 
-### Những Điều Bạn Sẽ Học
+### Những Gì Bạn Sẽ Học
 
-- **Kiến thức cơ bản về AZD**: Hiểu về Infrastructure as Code với AZD
-- 🤖 **Tích hợp dịch vụ AI**: Triển khai Azure OpenAI, AI Search, và các dịch vụ AI khác
-- **Triển khai Container**: Sử dụng Azure Container Apps cho các ứng dụng AI
-- **Thực hành bảo mật**: Áp dụng Managed Identity và cấu hình an toàn
-- **Giám sát & Quan sát**: Thiết lập Application Insights cho các khối lượng công việc AI
-- **Mô hình sản xuất**: Chiến lược triển khai sẵn sàng cho doanh nghiệp
+- **Kiến Thức Cơ Bản về AZD**: Hiểu về Infrastructure as Code với AZD
+- 🤖 **Tích Hợp Dịch Vụ AI**: Triển khai Azure OpenAI, AI Search, và các dịch vụ AI khác
+- **Triển Khai Container**: Sử dụng Azure Container Apps cho các ứng dụng AI
+- **Thực Hành Bảo Mật**: Áp dụng Managed Identity và cấu hình an toàn
+- **Giám Sát & Quan Sát**: Thiết lập Application Insights cho các khối lượng công việc AI
+- **Mô Hình Sản Xuất**: Chiến lược triển khai sẵn sàng cho doanh nghiệp
 
 ## Cấu Trúc Hội Thảo
 
-### Module 1: Nền Tảng AZD (30 phút)
+### Module 1: Kiến Thức Cơ Bản về AZD (30 phút)
 - Cài đặt và cấu hình AZD
 - Hiểu cấu trúc dự án AZD
 - Triển khai AZD đầu tiên của bạn
-- **Thực hành**: Triển khai một ứng dụng web đơn giản
+- **Phòng Thực Hành**: Triển khai một ứng dụng web đơn giản
 
 ### Module 2: Tích Hợp Azure OpenAI (45 phút)
 - Thiết lập tài nguyên Azure OpenAI
 - Chiến lược triển khai mô hình
 - Cấu hình truy cập API và xác thực
-- **Thực hành**: Triển khai ứng dụng chat với GPT-4
+- **Phòng Thực Hành**: Triển khai ứng dụng chat với GPT-4
 
 ### Module 3: Ứng Dụng RAG (45 phút)
 - Tích hợp Azure AI Search
 - Xử lý tài liệu với Azure Document Intelligence
 - Vector embeddings và tìm kiếm ngữ nghĩa
-- **Thực hành**: Xây dựng hệ thống hỏi đáp tài liệu
+- **Phòng Thực Hành**: Xây dựng hệ thống hỏi đáp tài liệu
 
 ### Module 4: Triển Khai Sản Xuất (30 phút)
 - Cấu hình Container Apps
 - Tối ưu hóa hiệu suất và khả năng mở rộng
 - Giám sát và ghi nhật ký
-- **Thực hành**: Triển khai sản xuất với khả năng quan sát
+- **Phòng Thực Hành**: Triển khai sản xuất với khả năng quan sát
 
 ### Module 5: Mô Hình Nâng Cao (15 phút)
 - Triển khai đa môi trường
@@ -86,11 +90,11 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Thiết Lập Tài Khoản Azure
 
-1. **Đăng ký Azure**: [Đăng ký miễn phí](https://azure.microsoft.com/free/)  
-2. **Truy cập Azure OpenAI**: [Yêu cầu quyền truy cập](https://aka.ms/oai/access)  
-3. **Quyền cần thiết**:  
-   - Vai trò Contributor trên subscription hoặc resource group  
-   - User Access Administrator (cho các phân quyền RBAC)  
+1. **Đăng Ký Azure**: [Đăng ký miễn phí](https://azure.microsoft.com/free/)
+2. **Truy Cập Azure OpenAI**: [Yêu cầu truy cập](https://aka.ms/oai/access)
+3. **Quyền Cần Thiết**:
+   - Vai trò Contributor trên subscription hoặc resource group
+   - User Access Administrator (cho các phân quyền RBAC)
 
 ### Xác Minh Yêu Cầu
 
@@ -144,18 +148,18 @@ echo "Setup verification complete!"
 
 Mỗi module bao gồm các bài thực hành với mã khởi đầu và hướng dẫn từng bước:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Triển khai AZD đầu tiên của bạn  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Ứng dụng chat với Azure OpenAI  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Ứng dụng RAG với AI Search  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Mô hình triển khai sản xuất  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Kịch bản triển khai nâng cao  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Triển khai AZD đầu tiên của bạn
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Ứng dụng chat với Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Ứng dụng RAG với AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Mô hình triển khai sản xuất
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Các kịch bản triển khai nâng cao
 
 ### Tài Liệu Tham Khảo
 
-- **[Hướng Dẫn Tích Hợp AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Các mô hình tích hợp toàn diện  
-- **[Hướng Dẫn Triển Khai Mô Hình AI](../docs/ai-foundry/ai-model-deployment.md)** - Thực hành triển khai mô hình  
-- **[Thực Hành AI Sản Xuất](../docs/ai-foundry/production-ai-practices.md)** - Mô hình triển khai doanh nghiệp  
-- **[Hướng Dẫn Khắc Phục Sự Cố AI](../docs/troubleshooting/ai-troubleshooting.md)** - Các vấn đề thường gặp và giải pháp  
+- **[Hướng Dẫn Tích Hợp AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Các mô hình tích hợp toàn diện
+- **[Hướng Dẫn Triển Khai Mô Hình AI](../docs/ai-foundry/ai-model-deployment.md)** - Thực hành triển khai mô hình tốt nhất
+- **[Thực Hành AI Sản Xuất](../docs/ai-foundry/production-ai-practices.md)** - Các mô hình triển khai doanh nghiệp
+- **[Hướng Dẫn Khắc Phục Sự Cố AI](../docs/troubleshooting/ai-troubleshooting.md)** - Các vấn đề thường gặp và giải pháp
 
 ### Mẫu Template
 
@@ -179,19 +183,19 @@ Cách nhanh nhất để bắt đầu hội thảo:
 
 ### Tùy Chọn 2: Phát Triển Cục Bộ
 
-1. **Clone repository hội thảo:**  
+1. **Clone repository hội thảo:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Đăng nhập vào Azure:**  
+2. **Đăng nhập vào Azure:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **Bắt đầu với Lab 1:**  
+3. **Bắt đầu với Lab 1:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
@@ -201,13 +205,13 @@ cat README.md  # Follow the instructions
 
 Nếu bạn tham gia một buổi hướng dẫn:
 
-- 🎥 **Ghi hình hội thảo**: [Có sẵn theo yêu cầu](https://aka.ms/azd-ai-workshop)  
-- 💬 **Cộng đồng Discord**: [Tham gia để được hỗ trợ trực tiếp](https://aka.ms/foundry/discord)  
-- **Phản hồi hội thảo**: [Chia sẻ trải nghiệm của bạn](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Ghi Hình Hội Thảo**: [Có sẵn theo yêu cầu](https://aka.ms/azd-ai-workshop)
+- 💬 **Cộng Đồng Discord**: [Tham gia để được hỗ trợ trực tiếp](https://aka.ms/foundry/discord)
+- **Phản Hồi Hội Thảo**: [Chia sẻ trải nghiệm của bạn](https://aka.ms/azd-workshop-feedback)
 
 ## Lịch Trình Hội Thảo
 
-### Tự Học (3 giờ)
+### Học Tự Chọn (3 giờ)
 
 ```
 ⏰ 00:00 - 00:30  Module 1: AZD Foundations
@@ -246,35 +250,35 @@ Kết thúc hội thảo, bạn sẽ có thể:
 
 ### Trong Hội Thảo
 
-- 🙋 **Câu hỏi**: Sử dụng chat hội thảo hoặc giơ tay  
-- 🐛 **Vấn đề**: Kiểm tra [hướng dẫn khắc phục sự cố](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Mẹo**: Chia sẻ khám phá với các người tham gia khác  
+- 🙋 **Câu Hỏi**: Sử dụng chat hội thảo hoặc giơ tay
+- 🐛 **Vấn Đề**: Kiểm tra [hướng dẫn khắc phục sự cố](../docs/troubleshooting/ai-troubleshooting.md)
+- **Mẹo**: Chia sẻ khám phá với các người tham gia khác
 
 ### Sau Hội Thảo
 
-- 💬 **Discord**: [Cộng đồng Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **GitHub Issues**: [Báo cáo vấn đề về template](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Phản hồi**: [Biểu mẫu đánh giá hội thảo](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Cộng Đồng Azure AI Foundry](https://aka.ms/foundry/discord)
+- **GitHub Issues**: [Báo cáo vấn đề về template](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Phản Hồi**: [Biểu mẫu đánh giá hội thảo](https://aka.ms/azd-workshop-feedback)
 
 ## Bước Tiếp Theo
 
 ### Tiếp Tục Học
 
-1. **Kịch bản nâng cao**: Khám phá [triển khai đa vùng](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Tích hợp CI/CD**: Thiết lập [GitHub Actions workflows](../docs/deployment/github-actions.md)  
-3. **Template tùy chỉnh**: Tạo [template AZD của riêng bạn](../docs/getting-started/custom-templates.md)  
+1. **Kịch Bản Nâng Cao**: Khám phá [triển khai đa vùng](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Tích Hợp CI/CD**: Thiết lập [GitHub Actions workflows](../docs/deployment/github-actions.md)
+3. **Template Tùy Chỉnh**: Tạo [template AZD của riêng bạn](../docs/getting-started/custom-templates.md)
 
 ### Áp Dụng Vào Dự Án Của Bạn
 
-1. **Đánh giá**: Sử dụng [danh sách kiểm tra sẵn sàng](./production-readiness-checklist.md)  
-2. **Template**: Bắt đầu với [template dành riêng cho AI](../../../workshop/templates)  
-3. **Hỗ trợ**: Tham gia [Discord Azure AI Foundry](https://aka.ms/foundry/discord)  
+1. **Đánh Giá**: Sử dụng [danh sách kiểm tra sẵn sàng](./production-readiness-checklist.md)
+2. **Template**: Bắt đầu với [template dành riêng cho AI](../../../workshop/templates)
+3. **Hỗ Trợ**: Tham gia [Discord Azure AI Foundry](https://aka.ms/foundry/discord)
 
 ### Chia Sẻ Thành Công Của Bạn
 
-- ⭐ **Gắn sao repository** nếu hội thảo này giúp bạn  
-- 🐦 **Chia sẻ trên mạng xã hội** với #AzureDeveloperCLI #AzureAI  
-- 📝 **Viết bài blog** về hành trình triển khai AI của bạn  
+- ⭐ **Gắn sao repository** nếu hội thảo này giúp ích cho bạn
+- 🐦 **Chia sẻ trên mạng xã hội** với #AzureDeveloperCLI #AzureAI
+- 📝 **Viết bài blog** về hành trình triển khai AI của bạn
 
 ---
 
@@ -282,23 +286,23 @@ Kết thúc hội thảo, bạn sẽ có thể:
 
 Phản hồi của bạn giúp chúng tôi cải thiện trải nghiệm hội thảo:
 
-| Khía cạnh | Đánh giá (1-5) | Bình luận |
-|----------|----------------|-----------|
-| Chất lượng nội dung | ⭐⭐⭐⭐⭐ | |
-| Bài tập thực hành | ⭐⭐⭐⭐⭐ | |
-| Tài liệu | ⭐⭐⭐⭐⭐ | |
-| Mức độ khó | ⭐⭐⭐⭐⭐ | |
-| Trải nghiệm tổng thể | ⭐⭐⭐⭐⭐ | |
+| Khía Cạnh | Đánh Giá (1-5) | Bình Luận |
+|-----------|----------------|-----------|
+| Chất Lượng Nội Dung | ⭐⭐⭐⭐⭐ | |
+| Bài Tập Thực Hành | ⭐⭐⭐⭐⭐ | |
+| Tài Liệu | ⭐⭐⭐⭐⭐ | |
+| Mức Độ Khó | ⭐⭐⭐⭐⭐ | |
+| Trải Nghiệm Tổng Thể | ⭐⭐⭐⭐⭐ | |
 
 **Gửi phản hồi**: [Biểu mẫu đánh giá hội thảo](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**Trước:** [Hướng Dẫn Khắc Phục Sự Cố AI](../docs/troubleshooting/ai-troubleshooting.md) | **Tiếp Theo:** Bắt đầu với [Lab 1: Nền Tảng AZD](../../../workshop/lab-1-azd-basics)
+**Trước:** [Hướng Dẫn Khắc Phục Sự Cố AI](../docs/troubleshooting/ai-troubleshooting.md) | **Tiếp Theo:** Bắt đầu với [Lab 1: Kiến Thức Cơ Bản về AZD](../../../workshop/lab-1-azd-basics)
 
 **Sẵn sàng bắt đầu xây dựng ứng dụng AI với AZD?**
 
-[Bắt đầu Lab 1: Nền Tảng AZD →](./lab-1-azd-basics/README.md)
+[Tiến hành Lab 1: Kiến Thức Cơ Bản về AZD →](./lab-1-azd-basics/README.md)
 
 ---
 

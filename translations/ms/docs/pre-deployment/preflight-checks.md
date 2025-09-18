@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T21:57:28+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T08:16:18+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "ms"
 }
 -->
-# Pemeriksaan Pra-Penerbangan - Pengesahan Kesiapan Penerapan
+# Pemeriksaan Pra-Penerbangan untuk Penerapan AZD
+
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 6 - Pengesahan & Perancangan Pra-Penerapan
+- **⬅️ Sebelumnya**: [Pemilihan SKU](sku-selection.md)
+- **➡️ Bab Seterusnya**: [Bab 7: Penyelesaian Masalah](../troubleshooting/common-issues.md)
+- **🔧 Berkaitan**: [Bab 4: Panduan Penerapan](../deployment/deployment-guide.md)
 
 ## Pengenalan
 
-Panduan komprehensif ini menyediakan skrip dan prosedur pengesahan pra-penerapan untuk memastikan kejayaan penerapan Azure Developer CLI sebelum ia bermula. Pelajari cara melaksanakan pemeriksaan automatik untuk pengesahan, ketersediaan sumber, kuota, pematuhan keselamatan, dan keperluan prestasi untuk mencegah kegagalan penerapan dan mengoptimumkan kadar kejayaan penerapan.
+Panduan menyeluruh ini menyediakan skrip dan prosedur pengesahan pra-penerapan untuk memastikan kejayaan penerapan Azure Developer CLI sebelum ia bermula. Pelajari cara melaksanakan pemeriksaan automatik untuk pengesahan, ketersediaan sumber, kuota, pematuhan keselamatan, dan keperluan prestasi untuk mencegah kegagalan penerapan dan mengoptimumkan kadar kejayaan penerapan.
 
 ## Matlamat Pembelajaran
 
@@ -29,7 +36,7 @@ Setelah selesai, anda akan dapat:
 - Mencipta dan melaksanakan skrip pengesahan pra-penerbangan yang menyeluruh
 - Merancang aliran kerja pemeriksaan automatik untuk senario penerapan yang berbeza
 - Melaksanakan prosedur dan polisi pengesahan khusus persekitaran
-- Mengkonfigurasi pemantauan proaktif dan amaran untuk kesiapan penerapan
+- Mengkonfigurasi pemantauan proaktif dan amaran untuk kesediaan penerapan
 - Menyelesaikan masalah pra-penerapan dan melaksanakan tindakan pembetulan
 - Mengintegrasikan pemeriksaan pra-penerbangan ke dalam saluran DevOps dan aliran kerja automasi
 
@@ -42,7 +49,7 @@ Setelah selesai, anda akan dapat:
 - [Pengesahan Sumber](../../../../docs/pre-deployment)
 - [Pemeriksaan Keselamatan & Pematuhan](../../../../docs/pre-deployment)
 - [Perancangan Prestasi & Kapasiti](../../../../docs/pre-deployment)
-- [Penyelesaian Masalah Umum](../../../../docs/pre-deployment)
+- [Penyelesaian Masalah Biasa](../../../../docs/pre-deployment)
 
 ---
 
@@ -52,7 +59,7 @@ Pemeriksaan pra-penerbangan adalah pengesahan penting yang dilakukan sebelum pen
 
 - **Ketersediaan sumber** dan kuota di kawasan sasaran
 - **Pengesahan dan kebenaran** dikonfigurasi dengan betul
-- **Kesahan templat** dan ketepatan parameter
+- **Kesahihan templat** dan ketepatan parameter
 - **Kesambungan rangkaian** dan kebergantungan
 - **Pematuhan keselamatan** dengan polisi organisasi
 - **Anggaran kos** dalam had bajet
@@ -794,12 +801,12 @@ Cetak senarai semak ini dan sahkan setiap item sebelum penerapan:
 - [ ] Azure CLI dipasang dan disahkan
 - [ ] Langganan Azure yang betul dipilih
 - [ ] Nama persekitaran adalah unik dan mengikuti konvensyen penamaan
-- [ ] Kumpulan sumber sasaran dikenal pasti atau boleh dicipta
+- [ ] Kumpulan sumber sasaran dikenal pasti atau boleh dibuat
 
 #### ✅ Pengesahan & Kebenaran
 - [ ] Berjaya disahkan dengan `azd auth login`
 - [ ] Pengguna mempunyai peranan Contributor pada langganan/kumpulan sumber sasaran
-- [ ] Service principal dikonfigurasi untuk CI/CD (jika berkenaan)
+- [ ] Prinsipal perkhidmatan dikonfigurasi untuk CI/CD (jika berkenaan)
 - [ ] Tiada sijil atau kelayakan yang telah tamat tempoh
 
 #### ✅ Pengesahan Templat
@@ -808,7 +815,7 @@ Cetak senarai semak ini dan sahkan setiap item sebelum penerapan:
 - [ ] Templat Bicep dalam direktori `infra/` hadir
 - [ ] `main.bicep` disusun tanpa ralat (`az bicep build --file infra/main.bicep`)
 - [ ] Semua parameter yang diperlukan mempunyai nilai lalai atau akan disediakan
-- [ ] Tiada rahsia yang dikodkan secara langsung dalam templat
+- [ ] Tiada rahsia yang dikodkan secara keras dalam templat
 
 #### ✅ Perancangan Sumber
 - [ ] Kawasan Azure sasaran dipilih dan disahkan
@@ -827,7 +834,7 @@ Cetak senarai semak ini dan sahkan setiap item sebelum penerapan:
 #### ✅ Pengurusan Kos
 - [ ] Anggaran kos dikira menggunakan Kalkulator Harga Azure
 - [ ] Amaran bajet dikonfigurasi jika diperlukan
-- [ ] SKUs yang sesuai dipilih untuk jenis persekitaran
+- [ ] SKU yang sesuai dipilih untuk jenis persekitaran
 - [ ] Kapasiti terpelihara dipertimbangkan untuk beban kerja produksi
 
 #### ✅ Pemantauan & Pemerhatian
@@ -1282,11 +1289,11 @@ steps:
 
 1. **Automasi Di Mana Mungkin**
    - Integrasikan pemeriksaan ke dalam saluran CI/CD
-   - Gunakan skrip untuk pengesahan yang berulang
+   - Gunakan skrip untuk pengesahan berulang
    - Simpan hasil untuk jejak audit
 
 2. **Pengesahan Khusus Persekitaran**
-   - Pemeriksaan berbeza untuk pembangunan/pentas/produksi
+   - Pemeriksaan berbeza untuk dev/staging/prod
    - Keperluan keselamatan yang sesuai untuk setiap persekitaran
    - Pengoptimuman kos untuk persekitaran bukan produksi
 
@@ -1301,31 +1308,31 @@ steps:
    - Mesej ralat terperinci dengan langkah pembaikan
    - Laporan ringkasan untuk penilaian pantas
 
-5. **Hentikan Cepat**
+5. **Gagal Cepat**
    - Hentikan penerapan jika pemeriksaan kritikal gagal
    - Berikan panduan jelas untuk resolusi
    - Benarkan pemeriksaan dijalankan semula dengan mudah
 
-### Perangkap Umum Pemeriksaan Pra-Penerbangan
+### Kesilapan Umum Pemeriksaan Pra-Penerbangan
 
 1. **Melangkau pengesahan** untuk penerapan "cepat"
 2. **Pemeriksaan kebenaran** yang tidak mencukupi sebelum penerapan
 3. **Mengabaikan had kuota** sehingga penerapan gagal
 4. **Tidak mengesahkan templat** dalam saluran CI/CD
-5. **Pemeriksaan keselamatan yang terlepas** untuk persekitaran produksi
+5. **Kekurangan pemeriksaan keselamatan** untuk persekitaran produksi
 6. **Anggaran kos yang tidak mencukupi** menyebabkan kejutan bajet
 
 ---
 
-**Tip Profesional**: Jalankan pemeriksaan pra-penerbangan sebagai tugas berasingan dalam saluran CI/CD anda sebelum tugas penerapan sebenar. Ini membolehkan anda menangkap isu lebih awal dan memberikan maklum balas yang lebih cepat kepada pembangun.
+**Tip Pro**: Jalankan pemeriksaan pra-penerbangan sebagai tugas berasingan dalam saluran CI/CD anda sebelum tugas penerapan sebenar. Ini membolehkan anda menangkap isu lebih awal dan memberikan maklum balas yang lebih cepat kepada pembangun.
 
 ---
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Pemilihan SKU](sku-selection.md)
-- **Pelajaran Seterusnya**: [Lembaran Rujukan](../../resources/cheat-sheet.md)
+- **Pelajaran Seterusnya**: [Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

@@ -1,44 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T21:30:16+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-18T08:29:21+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "tl"
 }
 -->
-# Ang Iyong Unang Proyekto - Hands-On Tutorial
+# Ang Iyong Unang Proyekto - Tutorial na Hands-On
 
-**Nakaraan:** [Configuration](configuration.md) | **Susunod:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Simula
+- **⬅️ Nakaraan**: [Pag-install at Setup](installation.md)
+- **➡️ Susunod**: [Konpigurasyon](configuration.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Panimula
 
-Maligayang pagdating sa iyong unang proyekto gamit ang Azure Developer CLI! Ang komprehensibong hands-on tutorial na ito ay magbibigay sa iyo ng kumpletong walkthrough sa paggawa, pag-deploy, at pamamahala ng isang full-stack application sa Azure gamit ang azd. Magtatrabaho ka sa isang totoong todo application na may React frontend, Node.js API backend, at MongoDB database.
+Maligayang pagdating sa iyong unang proyekto gamit ang Azure Developer CLI! Ang komprehensibong tutorial na ito ay nagbibigay ng kumpletong walkthrough sa paggawa, pag-deploy, at pamamahala ng isang full-stack na application sa Azure gamit ang azd. Magtatrabaho ka sa isang totoong todo application na may React frontend, Node.js API backend, at MongoDB database.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng tutorial na ito, ikaw ay:
-- Magiging bihasa sa workflow ng azd project initialization gamit ang mga template
-- Maiintindihan ang istruktura ng proyekto at mga configuration file ng Azure Developer CLI
-- Makakapag-deploy ng kumpletong application sa Azure kasama ang infrastructure provisioning
-- Makakapagpatupad ng mga update sa application at mga estratehiya sa redeployment
+- Magiging bihasa sa workflow ng pag-initialize ng azd project gamit ang mga template
+- Maiintindihan ang istruktura ng proyekto ng Azure Developer CLI at mga configuration file
+- Maisasagawa ang kumpletong pag-deploy ng application sa Azure kasama ang provisioning ng infrastructure
+- Makakagawa ng mga update sa application at mga estratehiya sa redeployment
 - Makakapamahala ng maraming environment para sa development at staging
 - Makakapagpatupad ng mga kasanayan sa resource cleanup at cost management
 
 ## Mga Resulta ng Pag-aaral
 
-Sa pagtatapos, ikaw ay:
-- Makakapag-initialize at makakapag-configure ng mga azd project mula sa mga template nang mag-isa
-- Makakapag-navigate at makakapag-modify ng mga istruktura ng azd project nang epektibo
-- Makakapag-deploy ng full-stack application sa Azure gamit ang isang command
-- Makakapag-troubleshoot ng mga karaniwang isyu sa deployment at authentication
-- Makakapamahala ng maraming Azure environment para sa iba't ibang deployment stages
-- Makakapagpatupad ng mga workflow para sa tuloy-tuloy na deployment ng mga update sa application
+Sa pagtatapos, magagawa mo:
+- Mag-initialize at mag-configure ng mga azd project mula sa mga template nang mag-isa
+- Mag-navigate at mag-modify ng mga istruktura ng azd project nang epektibo
+- Mag-deploy ng full-stack na application sa Azure gamit ang isang command
+- Mag-troubleshoot ng mga karaniwang isyu sa deployment at authentication
+- Mag-manage ng maraming Azure environment para sa iba't ibang yugto ng deployment
+- Magpatupad ng mga workflow para sa tuloy-tuloy na pag-deploy ng mga update sa application
 
 ## Pagsisimula
 
 ### Checklist ng Mga Kinakailangan
-- ✅ Na-install ang Azure Developer CLI ([Installation Guide](installation.md))
+- ✅ Na-install ang Azure Developer CLI ([Gabay sa Pag-install](installation.md))
 - ✅ Na-install at authenticated ang Azure CLI
 - ✅ Na-install ang Git sa iyong sistema
 - ✅ Node.js 16+ (para sa tutorial na ito)
@@ -49,20 +54,20 @@ Sa pagtatapos, ikaw ay:
 # Check azd installation
 azd version
 ```
-### I-verify ang Azure authentication
+### I-verify ang Authentication sa Azure
 
 ```bash
 az account show
 ```
 
-### Suriin ang Node.js version
+### Suriin ang Bersyon ng Node.js
 ```bash
 node --version
 ```
 
-## Hakbang 1: Pumili at I-initialize ang Template
+## Hakbang 1: Pumili at Mag-initialize ng Template
 
-Simulan natin sa isang sikat na todo application template na may React frontend at Node.js API backend.
+Simulan natin sa isang sikat na template ng todo application na may React frontend at Node.js API backend.
 
 ```bash
 # Browse available templates
@@ -80,14 +85,14 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### Ano ang Nangyari?
-- Na-download ang template code sa iyong lokal na directory
+- Na-download ang code ng template sa iyong lokal na direktoryo
 - Nilikha ang `azure.yaml` file na may mga service definition
-- Na-setup ang infrastructure code sa `infra/` directory
-- Nilikha ang environment configuration
+- Na-setup ang infrastructure code sa direktoryong `infra/`
+- Nilikha ang configuration ng environment
 
 ## Hakbang 2: Tuklasin ang Istruktura ng Proyekto
 
-Suriin natin kung ano ang ginawa ng azd para sa atin:
+Suriin natin kung ano ang nilikha ng azd para sa atin:
 
 ```bash
 # View the project structure
@@ -131,7 +136,7 @@ my-first-azd-app/
 cat azure.yaml
 ```
 
-**infra/main.bicep** - Infrastructure definition:
+**infra/main.bicep** - Depinisyon ng infrastructure:
 ```bash
 # View the infrastructure code
 head -30 infra/main.bicep
@@ -153,7 +158,7 @@ Gumawa ng simpleng pagbabago:
 <h1>My Awesome Todo App</h1>
 ```
 
-### I-configure ang Environment Variables
+### I-configure ang Mga Environment Variable
 ```bash
 # Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
@@ -164,7 +169,7 @@ azd env get-values
 
 ## Hakbang 4: I-deploy sa Azure
 
-Ngayon ang pinakakapana-panabik na bahagi - i-deploy ang lahat sa Azure!
+Narito na ang kapanapanabik na bahagi - i-deploy ang lahat sa Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -180,9 +185,9 @@ azd up
 ### Ano ang Nangyayari Habang Nagde-deploy?
 
 Ang `azd up` command ay gumagawa ng mga sumusunod na hakbang:
-1. **Provision** (`azd provision`) - Gumagawa ng mga Azure resources
-2. **Package** - Binubuo ang application code
-3. **Deploy** (`azd deploy`) - Ipinapadala ang code sa Azure resources
+1. **Provision** (`azd provision`) - Lumilikha ng mga resource sa Azure
+2. **Package** - Binubuo ang code ng iyong application
+3. **Deploy** (`azd deploy`) - Ipinapadala ang code sa mga resource ng Azure
 
 ### Inaasahang Output
 ```
@@ -225,7 +230,7 @@ azd logs
 
 ## Hakbang 6: Gumawa ng Mga Pagbabago at I-redeploy
 
-Gumawa tayo ng pagbabago at tingnan kung gaano kadali ang pag-update:
+Gumawa tayo ng pagbabago at tingnan kung gaano kadali ang mag-update:
 
 ### I-modify ang API
 ```bash
@@ -233,7 +238,7 @@ Gumawa tayo ng pagbabago at tingnan kung gaano kadali ang pag-update:
 code src/api/src/routes/lists.js
 ```
 
-Magdagdag ng custom response header:
+Magdagdag ng custom na response header:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -278,7 +283,7 @@ azd show
 
 ## Hakbang 8: Linisin ang Mga Resource
 
-Kapag tapos ka na sa eksperimento, linisin ang mga resource para maiwasan ang patuloy na bayarin:
+Kapag tapos ka nang mag-eksperimento, linisin ang mga resource para maiwasan ang patuloy na singil:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -297,7 +302,7 @@ azd down --force --purge
 Binabati kita! Matagumpay mong:
 - Na-initialize ang isang azd project mula sa template
 - Nasuri ang istruktura ng proyekto at mga pangunahing file
-- Na-deploy ang isang full-stack application sa Azure
+- Na-deploy ang isang full-stack na application sa Azure
 - Gumawa ng mga pagbabago sa code at na-redeploy
 - Napamahalaan ang maraming environment
 - Nalinis ang mga resource
@@ -342,17 +347,17 @@ netstat -an | grep :3100
 Ngayon na natapos mo ang iyong unang proyekto, tuklasin ang mga advanced na paksa:
 
 ### 1. I-customize ang Infrastructure
-- [Infrastructure as Code](../deployment/provisioning.md)
+- [Infrastructure bilang Code](../deployment/provisioning.md)
 - [Magdagdag ng mga database, storage, at iba pang serbisyo](../deployment/provisioning.md#adding-services)
 
-### 2. I-setup ang CI/CD
-- [GitHub Actions Integration](../deployment/cicd-integration.md)
+### 2. Mag-setup ng CI/CD
+- [Integrasyon ng GitHub Actions](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Mga Best Practice sa Production
+### 3. Mga Praktika para sa Production
 - [Mga configuration sa seguridad](../deployment/best-practices.md#security)
 - [Pag-optimize ng performance](../deployment/best-practices.md#performance)
-- [Monitoring at logging](../deployment/best-practices.md#monitoring)
+- [Pag-monitor at pag-log](../deployment/best-practices.md#monitoring)
 
 ### 4. Tuklasin ang Higit Pang Mga Template
 ```bash
@@ -376,13 +381,13 @@ azd init --template todo-java-mongo
 
 ### Komunidad at Suporta
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Komunidad ng Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Mga Template at Halimbawa
 - [Opisyal na Template Gallery](https://azure.github.io/awesome-azd/)
 - [Mga Template ng Komunidad](https://github.com/Azure-Samples/azd-templates)
-- [Mga Pattern ng Enterprise](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Mga Pattern para sa Enterprise](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
@@ -390,10 +395,15 @@ azd init --template todo-java-mongo
 
 ---
 
-**Nakaraan:** [Configuration](configuration.md) | **Susunod:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
-- **Susunod na Aralin**: [Deployment Guide](../deployment/deployment-guide.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Simula
+- **⬅️ Nakaraan**: [Pag-install at Setup](installation.md)
+- **➡️ Susunod**: [Konpigurasyon](configuration.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **Susunod na Aralin**: [Gabay sa Deployment](../deployment/deployment-guide.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

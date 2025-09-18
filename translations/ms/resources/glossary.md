@@ -1,25 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "59cb1c1635512e212da16d50f3259ca4",
-  "translation_date": "2025-09-09T22:53:55+00:00",
+  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
+  "translation_date": "2025-09-18T08:23:27+00:00",
   "source_file": "resources/glossary.md",
   "language_code": "ms"
 }
 -->
-# Glosari - Istilah Azure Developer CLI
+# Glosari - Istilah Azure dan AZD
+
+**Rujukan untuk Semua Bab**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../README.md)
+- **📖 Belajar Asas**: [Bab 1: Asas AZD](../docs/getting-started/azd-basics.md)
+- **🤖 Istilah AI**: [Bab 2: Pembangunan Berasaskan AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
 
 ## Pengenalan
 
-Glosari komprehensif ini menyediakan definisi untuk istilah, konsep, dan akronim yang digunakan dalam Azure Developer CLI dan pembangunan awan Azure. Ia adalah rujukan penting untuk memahami dokumentasi teknikal, menyelesaikan masalah, dan berkomunikasi dengan berkesan tentang projek azd dan perkhidmatan Azure.
+Glosari komprehensif ini menyediakan definisi untuk istilah, konsep, dan akronim yang digunakan dalam Azure Developer CLI dan pembangunan awan Azure. Rujukan penting untuk memahami dokumentasi teknikal, menyelesaikan masalah, dan berkomunikasi dengan berkesan tentang projek azd dan perkhidmatan Azure.
 
 ## Matlamat Pembelajaran
 
 Dengan menggunakan glosari ini, anda akan:
 - Memahami istilah dan konsep penting Azure Developer CLI
 - Menguasai kosa kata pembangunan awan Azure dan istilah teknikal
-- Merujuk istilah Infrastruktur sebagai Kod dan pengurusan penyebaran dengan cekap
-- Memahami nama perkhidmatan Azure, akronim, dan tujuan mereka
+- Merujuk istilah Infrastruktur sebagai Kod dan istilah penyebaran dengan cekap
+- Memahami nama perkhidmatan Azure, akronim, dan tujuannya
 - Mengakses definisi untuk istilah penyelesaian masalah dan debugging
 - Mempelajari konsep pembangunan dan seni bina Azure yang lebih maju
 
@@ -39,10 +44,10 @@ Dengan rujukan berkala kepada glosari ini, anda akan dapat:
 Templat Azure Resource Manager. Format Infrastruktur sebagai Kod berasaskan JSON yang digunakan untuk mentakrifkan dan menyebarkan sumber Azure secara deklaratif.
 
 **App Service**  
-Tawaran platform-as-a-service (PaaS) Azure untuk mengehos aplikasi web, REST API, dan backend mudah alih tanpa menguruskan infrastruktur.
+Tawaran platform-as-a-service (PaaS) Azure untuk hosting aplikasi web, REST API, dan backend mudah alih tanpa menguruskan infrastruktur.
 
 **Application Insights**  
-Perkhidmatan pemantauan prestasi aplikasi (APM) Azure yang menyediakan wawasan mendalam tentang prestasi, ketersediaan, dan penggunaan aplikasi.
+Perkhidmatan pemantauan prestasi aplikasi (APM) Azure yang menyediakan pandangan mendalam tentang prestasi, ketersediaan, dan penggunaan aplikasi.
 
 **Azure CLI**  
 Antara muka baris perintah untuk menguruskan sumber Azure. Digunakan oleh azd untuk pengesahan dan beberapa operasi.
@@ -70,13 +75,13 @@ Strategi penyebaran yang menggunakan dua persekitaran pengeluaran yang sama (bir
 ## C
 
 **Container Apps**  
-Perkhidmatan kontena tanpa pelayan Azure yang membolehkan aplikasi kontena dijalankan tanpa menguruskan infrastruktur yang kompleks.
+Perkhidmatan kontena tanpa pelayan Azure yang membolehkan menjalankan aplikasi yang dikontena tanpa menguruskan infrastruktur yang kompleks.
 
 **CI/CD**  
 Integrasi Berterusan/Penyebaran Berterusan. Amalan automatik untuk mengintegrasikan perubahan kod dan menyebarkan aplikasi.
 
 **Cosmos DB**  
-Perkhidmatan pangkalan data pelbagai model yang diedarkan secara global oleh Azure yang menyediakan SLA komprehensif untuk throughput, latensi, ketersediaan, dan konsistensi.
+Perkhidmatan pangkalan data multi-model yang diedarkan secara global oleh Azure yang menyediakan SLA komprehensif untuk throughput, latensi, ketersediaan, dan konsistensi.
 
 **Configuration**  
 Tetapan dan parameter yang mengawal tingkah laku aplikasi dan pilihan penyebaran.
@@ -84,7 +89,7 @@ Tetapan dan parameter yang mengawal tingkah laku aplikasi dan pilihan penyebaran
 ## D
 
 **Deployment**  
-Proses memasang dan mengkonfigurasi aplikasi dan kebergantungannya pada infrastruktur sasaran.
+Proses memasang dan mengkonfigurasi aplikasi dan kebergantungan mereka pada infrastruktur sasaran.
 
 **Docker**  
 Platform untuk membangunkan, menghantar, dan menjalankan aplikasi menggunakan teknologi kontena.
@@ -106,7 +111,7 @@ URL atau alamat rangkaian di mana aplikasi atau perkhidmatan boleh diakses.
 ## F
 
 **Function App**  
-Perkhidmatan pengiraan tanpa pelayan Azure yang membolehkan kod berasaskan acara dijalankan tanpa menguruskan infrastruktur.
+Perkhidmatan pengiraan tanpa pelayan Azure yang membolehkan menjalankan kod yang didorong oleh acara tanpa menguruskan infrastruktur.
 
 ## G
 
@@ -130,7 +135,7 @@ Jenis perkhidmatan Azure di mana aplikasi akan disebarkan (contohnya, appservice
 Amalan mentakrifkan dan menguruskan infrastruktur melalui kod dan bukannya proses manual.
 
 **Init**  
-Proses memulakan projek azd baru, biasanya daripada templat.
+Proses memulakan projek azd baharu, biasanya daripada templat.
 
 ## J
 
@@ -159,7 +164,7 @@ Perkhidmatan Azure untuk mengumpul, menganalisis, dan bertindak berdasarkan data
 ## M
 
 **Managed Identity**  
-Ciri Azure yang menyediakan perkhidmatan Azure dengan identiti yang diuruskan secara automatik untuk pengesahan ke perkhidmatan Azure lain.
+Ciri Azure yang menyediakan perkhidmatan Azure dengan identiti yang diuruskan secara automatik untuk pengesahan kepada perkhidmatan Azure lain.
 
 **Microservices**  
 Pendekatan seni bina di mana aplikasi dibina sebagai koleksi perkhidmatan kecil dan bebas.
@@ -189,7 +194,7 @@ Proses menyediakan kod aplikasi dan kebergantungan untuk penyebaran.
 Nilai input yang dihantar kepada templat infrastruktur untuk menyesuaikan penyebaran.
 
 **PostgreSQL**  
-Sistem pangkalan data hubungan sumber terbuka yang disokong sebagai perkhidmatan terurus di Azure.
+Sistem pangkalan data relasi sumber terbuka yang disokong sebagai perkhidmatan terurus dalam Azure.
 
 **Provisioning**  
 Proses mencipta dan mengkonfigurasi sumber Azure yang ditakrifkan dalam templat infrastruktur.
@@ -205,13 +210,13 @@ Had pada jumlah sumber yang boleh dicipta dalam langganan atau wilayah Azure.
 Bekas logik untuk sumber Azure yang berkongsi kitaran hayat, kebenaran, dan dasar yang sama.
 
 **Resource Token**  
-Rentetan unik yang dijana oleh azd untuk memastikan nama sumber adalah unik di seluruh penyebaran.
+String unik yang dijana oleh azd untuk memastikan nama sumber adalah unik merentasi penyebaran.
 
 **REST API**  
 Gaya seni bina untuk mereka bentuk aplikasi rangkaian menggunakan kaedah HTTP.
 
 **Rollback**  
-Proses mengembalikan kepada versi aplikasi atau konfigurasi infrastruktur sebelumnya.
+Proses mengembalikan kepada versi sebelumnya aplikasi atau konfigurasi infrastruktur.
 
 ## S
 
@@ -219,13 +224,13 @@ Proses mengembalikan kepada versi aplikasi atau konfigurasi infrastruktur sebelu
 Komponen aplikasi anda yang ditakrifkan dalam azure.yaml (contohnya, frontend web, backend API, pangkalan data).
 
 **SKU**  
-Stock Keeping Unit. Mewakili tahap perkhidmatan atau prestasi yang berbeza untuk sumber Azure.
+Unit Penyimpanan Stok. Mewakili tahap perkhidmatan atau prestasi yang berbeza untuk sumber Azure.
 
 **SQL Database**  
-Perkhidmatan pangkalan data hubungan terurus Azure berdasarkan Microsoft SQL Server.
+Perkhidmatan pangkalan data relasi terurus Azure berdasarkan Microsoft SQL Server.
 
 **Static Web Apps**  
-Perkhidmatan Azure untuk membina dan menyebarkan aplikasi web penuh dari repositori kod sumber.
+Perkhidmatan Azure untuk membina dan menyebarkan aplikasi web full-stack dari repositori kod sumber.
 
 **Storage Account**  
 Perkhidmatan Azure yang menyediakan storan awan untuk objek data termasuk blob, fail, barisan, dan jadual.
@@ -242,28 +247,28 @@ Struktur projek pra-bina yang mengandungi kod aplikasi, definisi infrastruktur, 
 Alat Infrastruktur sebagai Kod sumber terbuka yang menyokong pelbagai penyedia awan termasuk Azure.
 
 **Traffic Manager**  
-Penyeimbang beban DNS berasaskan Azure untuk mengagihkan trafik di seluruh wilayah Azure global.
+Penyeimbang beban trafik berasaskan DNS Azure untuk mengagihkan trafik merentasi wilayah Azure global.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. Rentetan yang mengenal pasti sumber tertentu.
+Pengenal Sumber Seragam. String yang mengenal pasti sumber tertentu.
 
 **URL**  
-Uniform Resource Locator. Jenis URI yang menentukan lokasi sumber dan cara mendapatkannya.
+Lokasi Sumber Seragam. Jenis URI yang menentukan lokasi sumber dan cara untuk mendapatkannya.
 
 ## V
 
 **Virtual Network (VNet)**  
-Blok asas untuk rangkaian peribadi di Azure, menyediakan pengasingan dan segmentasi.
+Blok binaan asas untuk rangkaian peribadi dalam Azure, menyediakan pengasingan dan segmentasi.
 
 **VS Code**  
-Visual Studio Code. Penyunting kod popular dengan integrasi Azure dan azd yang sangat baik.
+Visual Studio Code. Editor kod popular dengan integrasi Azure dan azd yang sangat baik.
 
 ## W
 
 **Webhook**  
-Panggilan balik HTTP yang dicetuskan oleh peristiwa tertentu, biasanya digunakan dalam saluran CI/CD.
+Panggilan balik HTTP yang dicetuskan oleh acara tertentu, biasanya digunakan dalam saluran CI/CD.
 
 **What-if**  
 Ciri Azure yang menunjukkan perubahan yang akan dibuat oleh penyebaran tanpa benar-benar melaksanakannya.
@@ -302,12 +307,12 @@ Lokasi fizikal yang berasingan dalam wilayah Azure yang menyediakan redundansi d
 | REST | Representational State Transfer | Gaya seni bina untuk perkhidmatan web |
 | SDK | Software Development Kit | Koleksi alat pembangunan |
 | SLA | Service Level Agreement | Komitmen kepada ketersediaan/prestasi perkhidmatan |
-| SQL | Structured Query Language | Bahasa untuk menguruskan pangkalan data hubungan |
+| SQL | Structured Query Language | Bahasa untuk menguruskan pangkalan data relasi |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Protokol kriptografi |
-| URI | Uniform Resource Identifier | Rentetan yang mengenal pasti sumber |
+| URI | Uniform Resource Identifier | String yang mengenal pasti sumber |
 | URL | Uniform Resource Locator | Jenis URI yang menentukan lokasi sumber |
 | VM | Virtual Machine | Emulasi sistem komputer |
-| VNet | Virtual Network | Rangkaian peribadi di Azure |
+| VNet | Virtual Network | Rangkaian peribadi dalam Azure |
 | YAML | YAML Ain't Markup Language | Standard penyusunan data |
 
 ---
@@ -336,19 +341,19 @@ Lokasi fizikal yang berasingan dalam wilayah Azure yang menyediakan redundansi d
 - **Hot Reload**: Mengemas kini aplikasi secara automatik semasa pembangunan tanpa memulakan semula
 - **Build Pipeline**: Proses automatik untuk membina dan menguji kod
 - **Deployment Slot**: Persekitaran pementasan dalam App Service
-- **Environment Parity**: Mengekalkan kesamaan antara persekitaran pembangunan, pementasan, dan pengeluaran
+- **Environment Parity**: Menjaga persekitaran pembangunan, pementasan, dan pengeluaran serupa
 
 ### Istilah Keselamatan
 - **Managed Identity**: Ciri Azure yang menyediakan pengurusan kelayakan automatik
 - **Key Vault**: Storan selamat untuk rahsia, kunci, dan sijil
-- **RBAC**: Kawalan akses berdasarkan peranan untuk sumber Azure
+- **RBAC**: Kawalan akses berasaskan peranan untuk sumber Azure
 - **Network Security Group**: Firewall maya untuk mengawal trafik rangkaian
 
 ### Istilah Pemantauan
-- **Telemetry**: Pengumpulan data dan ukuran secara automatik
+- **Telemetry**: Pengumpulan automatik ukuran dan data
 - **Application Performance Monitoring (APM)**: Pemantauan prestasi perisian
 - **Log Analytics**: Perkhidmatan untuk mengumpul dan menganalisis data log
-- **Alert Rules**: Pemberitahuan automatik berdasarkan metrik atau syarat
+- **Alert Rules**: Pemberitahuan automatik berdasarkan metrik atau keadaan
 
 ### Istilah Penyebaran
 - **Blue-Green Deployment**: Strategi penyebaran tanpa masa henti
@@ -358,7 +363,7 @@ Lokasi fizikal yang berasingan dalam wilayah Azure yang menyediakan redundansi d
 
 ---
 
-**Petua Penggunaan**: Gunakan `Ctrl+F` untuk mencari istilah tertentu dalam glosari ini dengan cepat. Istilah dirujuk silang di mana sesuai.
+**Tip Penggunaan**: Gunakan `Ctrl+F` untuk mencari istilah tertentu dalam glosari ini dengan cepat. Istilah dirujuk silang di mana berkenaan.
 
 ---
 

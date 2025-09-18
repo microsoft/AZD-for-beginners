@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:07:49+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T08:16:48+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "ms"
 }
 -->
 # Panduan Pemilihan SKU - Memilih Tahap Perkhidmatan Azure yang Tepat
 
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 6 - Pengesahan & Perancangan Pra-Pelaksanaan
+- **⬅️ Sebelumnya**: [Perancangan Kapasiti](capacity-planning.md)
+- **➡️ Seterusnya**: [Pemeriksaan Awal](preflight-checks.md)
+- **🚀 Bab Seterusnya**: [Bab 7: Penyelesaian Masalah](../troubleshooting/common-issues.md)
+
 ## Pengenalan
 
-Panduan komprehensif ini membantu anda memilih SKU (Stock Keeping Units) perkhidmatan Azure yang optimum untuk pelbagai persekitaran, beban kerja, dan keperluan. Pelajari cara menganalisis keperluan prestasi, pertimbangan kos, dan keperluan skalabiliti untuk memilih tahap perkhidmatan yang paling sesuai bagi penyebaran Azure Developer CLI anda.
+Panduan komprehensif ini membantu anda memilih SKU (Stock Keeping Units) perkhidmatan Azure yang optimum untuk pelbagai persekitaran, beban kerja, dan keperluan. Pelajari cara menganalisis keperluan prestasi, pertimbangan kos, dan keperluan skalabiliti untuk memilih tahap perkhidmatan yang paling sesuai bagi pelaksanaan Azure Developer CLI anda.
 
 ## Matlamat Pembelajaran
 
@@ -20,12 +27,12 @@ Dengan melengkapkan panduan ini, anda akan:
 - Menguasai strategi pemilihan SKU berdasarkan persekitaran untuk pembangunan, staging, dan pengeluaran
 - Menganalisis keperluan beban kerja dan memadankannya dengan tahap perkhidmatan yang sesuai
 - Melaksanakan strategi pengoptimuman kos melalui pemilihan SKU yang bijak
-- Mengaplikasikan teknik ujian prestasi dan pengesahan untuk pilihan SKU
+- Menggunakan teknik ujian prestasi dan pengesahan untuk pilihan SKU
 - Mengkonfigurasi cadangan SKU automatik dan pemantauan
 
 ## Hasil Pembelajaran
 
-Setelah selesai, anda akan dapat:
+Selepas selesai, anda akan dapat:
 - Memilih SKU perkhidmatan Azure yang sesuai berdasarkan keperluan dan kekangan beban kerja
 - Merancang seni bina pelbagai persekitaran yang kos efektif dengan pemilihan tahap yang betul
 - Melaksanakan penanda aras prestasi dan pengesahan untuk pilihan SKU
@@ -47,7 +54,7 @@ Setelah selesai, anda akan dapat:
 
 ## Memahami SKU
 
-### Apa itu SKU?
+### Apakah SKU?
 
 SKU (Stock Keeping Units) mewakili tahap perkhidmatan dan tahap prestasi yang berbeza untuk sumber Azure. Setiap SKU menawarkan:
 
@@ -59,7 +66,7 @@ SKU (Stock Keeping Units) mewakili tahap perkhidmatan dan tahap prestasi yang be
 ### Faktor Utama dalam Pemilihan SKU
 
 1. **Keperluan Beban Kerja**
-   - Corak trafik/beban yang dijangkakan
+   - Corak trafik/beban yang dijangka
    - Keperluan prestasi (CPU, memori, I/O)
    - Keperluan storan dan corak akses
 
@@ -148,7 +155,7 @@ skus:
 
 #### Ciri-ciri
 - **Ketersediaan tinggi**: Keperluan SLA 99.9%+
-- **Prestasi**: Sumber khusus, throughput tinggi
+- **Prestasi**: Sumber berdedikasi, throughput tinggi
 - **Keselamatan**: Ciri keselamatan premium
 - **Penskalaan**: Keupayaan penskalaan automatik penuh
 - **Pemantauan**: Pemerhatian yang komprehensif
@@ -166,8 +173,8 @@ skus:
 | Pembangunan/Pengujian | F1 (Percuma) atau B1 (Asas) | Kos efektif, mencukupi untuk ujian |
 | Aplikasi pengeluaran kecil | S1 (Standard) | Domain tersuai, SSL, penskalaan automatik |
 | Aplikasi pengeluaran sederhana | P1V3 (Premium V3) | Prestasi lebih baik, lebih banyak ciri |
-| Aplikasi trafik tinggi | P2V3 atau P3V3 | Sumber khusus, prestasi tinggi |
-| Aplikasi kritikal | I1V2 (Isolated V2) | Pengasingan rangkaian, perkakasan khusus |
+| Aplikasi trafik tinggi | P2V3 atau P3V3 | Sumber berdedikasi, prestasi tinggi |
+| Aplikasi kritikal | I1V2 (Isolated V2) | Pengasingan rangkaian, perkakasan berdedikasi |
 
 #### Contoh Konfigurasi
 
@@ -210,12 +217,12 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 1. **Berdasarkan DTU (Database Transaction Units)**
    - **Asas**: 5 DTU - Pembangunan/pengujian
    - **Standard**: S0-S12 (10-3000 DTU) - Tujuan umum
-   - **Premium**: P1-P15 (125-4000 DTU) - Prestasi kritikal
+   - **Premium**: P1-P15 (125-4000 DTU) - Kritikal prestasi
 
 2. **Berdasarkan vCore** (Disyorkan untuk pengeluaran)
    - **Tujuan Umum**: Komputasi dan storan seimbang
    - **Kritikal Perniagaan**: Latensi rendah, IOPS tinggi
-   - **Hyperscale**: Storan yang sangat boleh diskalakan (sehingga 100TB)
+   - **Hyperscale**: Storan yang sangat skalabel (sehingga 100TB)
 
 #### Contoh Konfigurasi
 
@@ -259,10 +266,10 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 1. **Berdasarkan Penggunaan**
    - Harga bayar mengikut penggunaan
    - Sesuai untuk pembangunan dan beban kerja berubah-ubah
-   - Infrastruktur yang dikongsi
+   - Infrastruktur dikongsi
 
-2. **Dedikasi (Profil Beban Kerja)**
-   - Sumber komputasi khusus
+2. **Berdedikasi (Profil Beban Kerja)**
+   - Sumber komputasi berdedikasi
    - Prestasi yang boleh diramal
    - Lebih baik untuk beban kerja pengeluaran
 
@@ -307,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Pengeluaran (Dedikasi)**
+**Pengeluaran (Berdedikasi)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-prod'
@@ -339,8 +346,8 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
    - Baik untuk beban kerja berubah-ubah
 
 3. **Serverless**
-   - Bayar per permintaan
-   - Tiada throughput yang disediakan
+   - Bayar mengikut permintaan
+   - Tiada throughput provisioned
    - Ideal untuk pembangunan dan beban kerja berselang-seli
 
 #### Contoh SKU
@@ -540,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Penskalaan Berjadual
 
-Turunkan skala semasa waktu tidak sibuk:
+Kurangkan skala semasa waktu tidak sibuk:
 
 ```json
 {
@@ -607,7 +614,7 @@ performance_requirements:
 
 ### Ujian Beban
 
-Uji pelbagai SKU untuk mengesahkan prestasi:
+Uji SKU yang berbeza untuk mengesahkan prestasi:
 
 ```bash
 # Azure Load Testing service
@@ -656,7 +663,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | B1 | Asas | 1 | 1.75GB | 10GB | $ | Aplikasi kecil |
 | S1 | Standard | 1 | 1.75GB | 50GB | $$ | Pengeluaran |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Prestasi tinggi |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
+| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Perusahaan |
 
 ### Rujukan Pantas SKU SQL Database
 
@@ -666,15 +673,15 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | S2 | Standard | 50 DTU | 250GB | $$ | Pengeluaran kecil |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Prestasi tinggi |
 | GP_Gen5_4 | Tujuan Umum | 4 vCore | 4TB | $$$ | Seimbang |
-| BC_Gen5_8 | Kritikal Perniagaan | 8 vCore | 4TB | $$$$ | Misi kritikal |
+| BC_Gen5_8 | Kritikal Perniagaan | 8 vCore | 4TB | $$$$ | Kritikal misi |
 
 ### Rujukan Pantas SKU Container Apps
 
 | Model | Harga | CPU/Memori | Kes Penggunaan |
 |-------|-------|------------|----------------|
 | Penggunaan | Bayar mengikut penggunaan | 0.25-2 vCPU | Pembangunan, beban berubah |
-| Dedikasi D4 | Terpelihara | 4 vCPU, 16GB | Pengeluaran |
-| Dedikasi D8 | Terpelihara | 8 vCPU, 32GB | Prestasi tinggi |
+| Berdedikasi D4 | Terpelihara | 4 vCPU, 16GB | Pengeluaran |
+| Berdedikasi D8 | Terpelihara | 8 vCPU, 32GB | Prestasi tinggi |
 
 ---
 
@@ -793,7 +800,7 @@ test_configuration:
 2. **Gunakan SKU yang berbeza untuk persekitaran yang berbeza**
 3. **Pantau prestasi dan kos secara berterusan**
 4. **Manfaatkan kapasiti terpelihara untuk beban kerja pengeluaran**
-5. **Laksanakan penskalaan automatik di mana sesuai**
+5. **Laksanakan penskalaan automatik di tempat yang sesuai**
 6. **Uji prestasi dengan beban kerja yang realistik**
 7. **Rancang untuk pertumbuhan tetapi elakkan penyediaan berlebihan**
 8. **Gunakan tahap percuma untuk pembangunan jika boleh**

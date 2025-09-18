@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "668bc93b35c9249e52245a0b037b6011",
-  "translation_date": "2025-09-12T21:40:07+00:00",
+  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
+  "translation_date": "2025-09-18T07:35:14+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "vi"
 }
 -->
 # AI Workshop Lab: Làm cho Giải pháp AI của bạn có thể triển khai với AZD
 
-**Trước:** [Triển khai Mô hình AI](ai-model-deployment.md) | **Tiếp theo:** [Thực hành AI Sản xuất](production-ai-practices.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD For Beginners](../../README.md)
+- **📖 Chương hiện tại**: Chương 2 - Phát triển AI-First
+- **⬅️ Trước đó**: [Triển khai Mô hình AI](ai-model-deployment.md)
+- **➡️ Tiếp theo**: [Thực hành AI Sản xuất Tốt nhất](production-ai-practices.md)
+- **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../getting-started/configuration.md)
 
 ## Tổng quan về Workshop
 
-Workshop thực hành này hướng dẫn các nhà phát triển cách chuyển đổi một ứng dụng AI hiện có để có thể triển khai bằng Azure Developer CLI (AZD). Bạn sẽ học các mẫu thiết yếu cho triển khai AI sản xuất sử dụng các dịch vụ Azure AI Foundry.
+Buổi thực hành này hướng dẫn các nhà phát triển cách biến một ứng dụng AI hiện có thành có thể triển khai bằng Azure Developer CLI (AZD). Bạn sẽ học các mẫu thiết yếu để triển khai AI sản xuất bằng các dịch vụ Azure AI Foundry.
 
 **Thời lượng:** 2-3 giờ  
 **Cấp độ:** Trung cấp  
@@ -42,7 +47,7 @@ Kết thúc workshop này, bạn sẽ có thể:
 - Quyền tạo nhóm tài nguyên
 
 ### Kiến thức yêu cầu
-- Hiểu cơ bản về các dịch vụ Azure
+- Hiểu biết cơ bản về các dịch vụ Azure
 - Quen thuộc với giao diện dòng lệnh
 - Các khái niệm cơ bản về AI/ML (API, mô hình, prompts)
 
@@ -50,7 +55,7 @@ Kết thúc workshop này, bạn sẽ có thể:
 
 ### Bước 1: Chuẩn bị môi trường
 
-1. **Xác minh các công cụ đã cài đặt:**
+1. **Xác minh cài đặt công cụ:**
 ```bash
 # Check AZD installation
 azd version
@@ -71,7 +76,7 @@ cd azure-search-openai-demo
 
 ## Module 1: Hiểu cấu trúc AZD cho ứng dụng AI
 
-### Cấu trúc mẫu AZD sẵn sàng cho AI
+### Cấu trúc của một mẫu AZD sẵn sàng cho AI
 
 Khám phá các tệp chính trong một mẫu AZD sẵn sàng cho AI:
 
@@ -100,7 +105,7 @@ cat azure.yaml
 **Những điều cần tìm:**
 - Định nghĩa dịch vụ cho các thành phần AI
 - Ánh xạ biến môi trường
-- Cấu hình host
+- Cấu hình máy chủ
 
 2. **Xem lại cơ sở hạ tầng main.bicep:**
 ```bash
@@ -117,7 +122,7 @@ cat infra/main.bicep
 
 - **Phụ thuộc dịch vụ**: Ứng dụng AI thường yêu cầu nhiều dịch vụ phối hợp
 - **Bảo mật**: API keys và endpoints cần được quản lý an toàn
-- **Khả năng mở rộng**: Khối lượng công việc AI có yêu cầu mở rộng đặc biệt
+- **Khả năng mở rộng**: Khối lượng công việc AI có yêu cầu mở rộng độc đáo
 - **Quản lý chi phí**: Dịch vụ AI có thể tốn kém nếu không được cấu hình đúng cách
 
 ## Module 2: Triển khai ứng dụng AI đầu tiên của bạn
@@ -170,7 +175,7 @@ azd show --output json | grep "webAppUrl"
 3. **Kiểm tra chức năng AI:**
    - Điều hướng đến ứng dụng web
    - Thử các truy vấn mẫu
-   - Xác minh phản hồi AI hoạt động
+   - Xác minh các phản hồi AI hoạt động
 
 ### **Bài tập Lab 2.1: Thực hành khắc phục sự cố**
 
@@ -259,7 +264,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 - Sử dụng tier Basic cho Search Service trong phát triển
 - Cân nhắc sử dụng Consumption plan cho Functions
 
-## Module 4: Bảo mật và Thực hành Sản xuất Tốt nhất
+## Module 4: Bảo mật và Thực hành Tốt nhất cho Sản xuất
 
 ### Bước 4.1: Quản lý thông tin đăng nhập an toàn
 
@@ -343,7 +348,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 **Nhiệm vụ**: Xem lại triển khai của bạn để đảm bảo thực hành bảo mật tốt nhất.
 
 **Danh sách kiểm tra:**
-- [ ] Không có secrets hardcoded trong mã hoặc cấu hình
+- [ ] Không có bí mật hardcode trong mã hoặc cấu hình
 - [ ] Managed Identity được sử dụng cho xác thực giữa các dịch vụ
 - [ ] Key Vault lưu trữ cấu hình nhạy cảm
 - [ ] Truy cập mạng được hạn chế đúng cách
@@ -513,12 +518,12 @@ az role assignment create \
 
 #### Vấn đề 4: Phản hồi AI chậm
 **Các bước điều tra:**
-1. Kiểm tra Application Insights cho các chỉ số hiệu suất
-2. Xem lại các chỉ số dịch vụ OpenAI trong cổng Azure
+1. Kiểm tra Application Insights để lấy chỉ số hiệu suất
+2. Xem lại chỉ số dịch vụ OpenAI trong cổng Azure
 3. Xác minh kết nối mạng và độ trễ
 
 **Giải pháp:**
-- Triển khai caching cho các truy vấn phổ biến
+- Triển khai bộ nhớ đệm cho các truy vấn phổ biến
 - Sử dụng mô hình OpenAI phù hợp với trường hợp sử dụng của bạn
 - Cân nhắc sử dụng bản sao đọc cho các kịch bản tải cao
 
@@ -535,7 +540,7 @@ az role assignment create \
 **Công cụ sử dụng:**
 - `azd show` để xem tổng quan triển khai
 - Cổng Azure để xem chi tiết nhật ký dịch vụ
-- Application Insights để xem telemetry ứng dụng
+- Application Insights để lấy dữ liệu ứng dụng
 
 ## Module 7: Giám sát và Tối ưu hóa
 
@@ -571,34 +576,34 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 2. **Triển khai kiểm soát chi phí:**
 - Thiết lập cảnh báo ngân sách
 - Sử dụng chính sách tự động mở rộng
-- Triển khai caching yêu cầu
-- Theo dõi sử dụng token cho OpenAI
+- Triển khai bộ nhớ đệm yêu cầu
+- Theo dõi việc sử dụng token cho OpenAI
 
 ### **Bài tập Lab 7.1: Tối ưu hóa hiệu suất**
 
 **Nhiệm vụ**: Tối ưu hóa ứng dụng AI của bạn về cả hiệu suất và chi phí.
 
-**Các chỉ số cần cải thiện:**
+**Chỉ số cần cải thiện:**
 - Giảm thời gian phản hồi trung bình 20%
 - Giảm chi phí hàng tháng 15%
 - Duy trì thời gian hoạt động 99.9%
 
 **Chiến lược thử nghiệm:**
-- Triển khai caching phản hồi
+- Triển khai bộ nhớ đệm phản hồi
 - Tối ưu hóa prompts để sử dụng token hiệu quả
-- Sử dụng các SKUs tính toán phù hợp
-- Thiết lập chính sách tự động mở rộng đúng cách
+- Sử dụng SKUs tính toán phù hợp
+- Thiết lập tự động mở rộng đúng cách
 
 ## Thử thách cuối cùng: Triển khai từ đầu đến cuối
 
 ### Kịch bản thử thách
 
-Bạn được giao nhiệm vụ tạo chatbot dịch vụ khách hàng AI sẵn sàng sản xuất với các yêu cầu sau:
+Bạn được giao nhiệm vụ tạo một chatbot dịch vụ khách hàng hỗ trợ AI sẵn sàng sản xuất với các yêu cầu sau:
 
 **Yêu cầu chức năng:**
 - Giao diện web cho tương tác khách hàng
 - Tích hợp với Azure OpenAI để phản hồi
-- Khả năng tìm kiếm tài liệu sử dụng Cognitive Search
+- Khả năng tìm kiếm tài liệu bằng Cognitive Search
 - Tích hợp với cơ sở dữ liệu khách hàng hiện có
 - Hỗ trợ đa ngôn ngữ
 
@@ -640,36 +645,41 @@ Bạn được giao nhiệm vụ tạo chatbot dịch vụ khách hàng AI sẵn
 
 ### Tài nguyên cộng đồng
 - [Discord Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Chứng chỉ hoàn thành
 
-Chúc mừng! Bạn đã hoàn thành AI Workshop Lab. Giờ đây bạn có thể:
+Chúc mừng! Bạn đã hoàn thành buổi thực hành AI Workshop Lab. Giờ đây bạn có thể:
 
-- ✅ Chuyển đổi ứng dụng AI hiện có sang mẫu AZD
-- ✅ Triển khai ứng dụng AI sẵn sàng sản xuất
-- ✅ Thực hiện các phương pháp bảo mật tốt nhất cho khối lượng công việc AI  
-- ✅ Giám sát và tối ưu hóa hiệu suất ứng dụng AI  
-- ✅ Khắc phục sự cố triển khai phổ biến  
+- ✅ Chuyển đổi các ứng dụng AI hiện có thành mẫu AZD
+- ✅ Triển khai ứng dụng AI sẵn sàng cho môi trường sản xuất
+- ✅ Áp dụng các thực hành tốt nhất về bảo mật cho khối lượng công việc AI
+- ✅ Giám sát và tối ưu hóa hiệu suất ứng dụng AI
+- ✅ Khắc phục các vấn đề triển khai phổ biến
 
-### Các bước tiếp theo  
-1. Áp dụng các mẫu này vào dự án AI của bạn  
-2. Đóng góp các mẫu trở lại cộng đồng  
-3. Tham gia Discord Azure AI Foundry để nhận hỗ trợ liên tục  
-4. Khám phá các chủ đề nâng cao như triển khai đa vùng  
-
----
-
-**Phản hồi về hội thảo**: Giúp chúng tôi cải thiện hội thảo này bằng cách chia sẻ trải nghiệm của bạn trong [kênh #Azure trên Discord Azure AI Foundry](https://discord.gg/microsoft-azure).  
+### Bước tiếp theo
+1. Áp dụng các mẫu này vào dự án AI của riêng bạn
+2. Đóng góp các mẫu trở lại cộng đồng
+3. Tham gia Discord Azure AI Foundry để nhận hỗ trợ liên tục
+4. Khám phá các chủ đề nâng cao như triển khai đa vùng
 
 ---
 
-**Trước:** [Triển khai mô hình AI](ai-model-deployment.md) | **Tiếp theo:** [Thực hành AI trong sản xuất](production-ai-practices.md)  
+**Phản hồi về Workshop**: Giúp chúng tôi cải thiện buổi workshop này bằng cách chia sẻ trải nghiệm của bạn trong [kênh Discord Azure AI Foundry #Azure](https://discord.gg/microsoft-azure).
 
-**Cần hỗ trợ?** Tham gia cộng đồng của chúng tôi để nhận hỗ trợ và thảo luận về AZD và triển khai AI.  
+---
+
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD Dành Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 2 - Phát triển ưu tiên AI
+- **⬅️ Trước**: [Triển khai mô hình AI](ai-model-deployment.md)
+- **➡️ Tiếp theo**: [Thực hành tốt nhất cho AI trong môi trường sản xuất](production-ai-practices.md)
+- **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../getting-started/configuration.md)
+
+**Cần hỗ trợ?** Tham gia cộng đồng của chúng tôi để nhận hỗ trợ và thảo luận về AZD và triển khai AI.
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

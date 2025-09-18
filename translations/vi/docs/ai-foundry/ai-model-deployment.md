@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:52:34+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T07:37:09+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "vi"
 }
 -->
 # Triển khai Mô hình AI với Azure Developer CLI
 
-**Trước:** [Tích hợp Azure AI Foundry](azure-ai-foundry-integration.md) | **Tiếp theo:** [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD For Beginners](../../README.md)
+- **📖 Chương hiện tại**: Chương 2 - Phát triển AI-First
+- **⬅️ Trước đó**: [Tích hợp Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Tiếp theo**: [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
+- **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../getting-started/configuration.md)
 
 Hướng dẫn này cung cấp các chỉ dẫn chi tiết để triển khai mô hình AI bằng các mẫu AZD, bao gồm từ việc chọn mô hình đến các mẫu triển khai trong môi trường sản xuất.
 
@@ -19,8 +24,8 @@ Hướng dẫn này cung cấp các chỉ dẫn chi tiết để triển khai m�
 - [Cấu hình AZD cho mô hình AI](../../../../docs/ai-foundry)
 - [Mẫu triển khai](../../../../docs/ai-foundry)
 - [Quản lý mô hình](../../../../docs/ai-foundry)
-- [Các yếu tố cần cân nhắc trong sản xuất](../../../../docs/ai-foundry)
-- [Giám sát và khả năng quan sát](../../../../docs/ai-foundry)
+- [Cân nhắc trong sản xuất](../../../../docs/ai-foundry)
+- [Giám sát và quan sát](../../../../docs/ai-foundry)
 
 ## Chiến lược chọn mô hình
 
@@ -153,12 +158,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Phù hợp với:
+Phù hợp cho:
 - Phát triển và thử nghiệm
-- Ứng dụng cho một thị trường
+- Ứng dụng thị trường đơn
 - Tối ưu hóa chi phí
 
-### Mẫu 2: Triển khai nhiều khu vực
+### Mẫu 2: Triển khai đa khu vực
 
 ```bicep
 // Multi-region deployment
@@ -171,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Phù hợp với:
+Phù hợp cho:
 - Ứng dụng toàn cầu
 - Yêu cầu độ khả dụng cao
 - Phân phối tải
@@ -211,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kiểm soát phiên bản
 
-Theo dõi các phiên bản mô hình trong cấu hình AZD của bạn:
+Theo dõi phiên bản mô hình trong cấu hình AZD của bạn:
 
 ```json
 {
@@ -231,7 +236,7 @@ Theo dõi các phiên bản mô hình trong cấu hình AZD của bạn:
 
 ### Cập nhật mô hình
 
-Sử dụng các hooks AZD để cập nhật mô hình:
+Sử dụng các hooks của AZD để cập nhật mô hình:
 
 ```bash
 #!/bin/bash
@@ -244,7 +249,7 @@ az cognitiveservices account list-models \
   --query "[?name=='gpt-4o-mini']"
 ```
 
-### Thử nghiệm A/B
+### Kiểm tra A/B
 
 Triển khai nhiều phiên bản mô hình:
 
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Các yếu tố cần cân nhắc trong sản xuất
+## Cân nhắc trong sản xuất
 
 ### Lập kế hoạch dung lượng
 
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Giám sát và khả năng quan sát
+## Giám sát và quan sát
 
 ### Tích hợp Application Insights
 
@@ -475,25 +480,30 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Các bước tiếp theo
+## Bước tiếp theo
 
-1. **Xem lại [Hướng dẫn Tích hợp Azure AI Foundry](azure-ai-foundry-integration.md)** để biết các mẫu tích hợp dịch vụ
+1. **Xem lại [Hướng dẫn tích hợp Azure AI Foundry](azure-ai-foundry-integration.md)** để biết các mẫu tích hợp dịch vụ
 2. **Hoàn thành [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)** để có trải nghiệm thực hành
 3. **Thực hiện [Thực hành AI trong sản xuất](production-ai-practices.md)** cho các triển khai doanh nghiệp
-4. **Khám phá [Hướng dẫn Khắc phục sự cố AI](../troubleshooting/ai-troubleshooting.md)** để giải quyết các vấn đề thường gặp
+4. **Khám phá [Hướng dẫn khắc phục sự cố AI](../troubleshooting/ai-troubleshooting.md)** để giải quyết các vấn đề thường gặp
 
 ## Tài nguyên
 
-- [Khả dụng của Mô hình Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Khả dụng của mô hình Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Tài liệu Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Tự động mở rộng Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Mở rộng Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Tối ưu hóa chi phí mô hình AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Trước:** [Tích hợp Azure AI Foundry](azure-ai-foundry-integration.md) | **Tiếp theo:** [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD For Beginners](../../README.md)
+- **📖 Chương hiện tại**: Chương 2 - Phát triển AI-First
+- **⬅️ Trước đó**: [Tích hợp Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Tiếp theo**: [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
+- **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../getting-started/configuration.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

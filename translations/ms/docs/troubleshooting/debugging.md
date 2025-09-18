@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:21:10+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T08:15:25+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ms"
 }
 -->
-# Panduan Debugging - Teknik Analisis Log Penyelesaian Masalah Lanjutan
+# Panduan Debugging untuk Pemasangan AZD
+
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 7 - Penyelesaian Masalah & Debugging
+- **⬅️ Sebelumnya**: [Isu Umum](common-issues.md)
+- **➡️ Seterusnya**: [Penyelesaian Masalah Khusus AI](ai-troubleshooting.md)
+- **🚀 Bab Seterusnya**: [Bab 8: Corak Pengeluaran & Perusahaan](../ai-foundry/production-ai-practices.md)
 
 ## Pengenalan
 
-Panduan komprehensif ini menyediakan strategi debugging lanjutan, alat, dan teknik untuk mendiagnosis dan menyelesaikan isu kompleks dengan pengedaran Azure Developer CLI. Pelajari metodologi penyelesaian masalah secara sistematik, teknik analisis log, profil prestasi, dan alat diagnostik lanjutan untuk menyelesaikan isu pengedaran dan runtime dengan cekap.
+Panduan komprehensif ini menyediakan strategi debugging lanjutan, alat, dan teknik untuk mendiagnosis dan menyelesaikan isu kompleks dengan pemasangan Azure Developer CLI. Pelajari metodologi penyelesaian masalah secara sistematik, teknik analisis log, profil prestasi, dan alat diagnostik lanjutan untuk menyelesaikan isu pemasangan dan runtime dengan cekap.
 
 ## Matlamat Pembelajaran
 
@@ -20,23 +27,23 @@ Dengan melengkapkan panduan ini, anda akan:
 - Memahami konfigurasi log lanjutan dan teknik analisis log
 - Melaksanakan strategi profil prestasi dan pemantauan
 - Menggunakan alat dan perkhidmatan diagnostik Azure untuk penyelesaian masalah kompleks
-- Menerapkan teknik debugging rangkaian dan penyelesaian masalah keselamatan
-- Mengkonfigurasi pemantauan dan amaran komprehensif untuk pengesanan isu secara proaktif
+- Mengaplikasikan teknik debugging rangkaian dan keselamatan
+- Mengkonfigurasi pemantauan dan amaran yang komprehensif untuk pengesanan isu secara proaktif
 
 ## Hasil Pembelajaran
 
-Setelah selesai, anda akan dapat:
-- Menerapkan metodologi TRIAGE untuk debugging isu pengedaran kompleks secara sistematik
+Selepas melengkapkan panduan ini, anda akan dapat:
+- Mengaplikasikan metodologi TRIAGE untuk debugging isu pemasangan kompleks secara sistematik
 - Mengkonfigurasi dan menganalisis maklumat log dan penjejakan yang komprehensif
 - Menggunakan Azure Monitor, Application Insights, dan alat diagnostik dengan berkesan
 - Debug isu sambungan rangkaian, pengesahan, dan kebenaran secara bebas
 - Melaksanakan strategi pemantauan dan pengoptimuman prestasi
-- Membuat skrip debugging tersuai dan automasi untuk isu berulang
+- Mencipta skrip debugging tersuai dan automasi untuk isu berulang
 
 ## Metodologi Debugging
 
 ### Pendekatan TRIAGE
-- **T**ime: Bila isu bermula?
+- **T**ime: Bila isu mula berlaku?
 - **R**eproduce: Bolehkah anda sentiasa menghasilkan semula isu tersebut?
 - **I**solate: Komponen mana yang gagal?
 - **A**nalyze: Apa yang log beritahu kita?
@@ -652,10 +659,10 @@ aggregate_logs() {
 ## 🔗 Sumber Lanjutan
 
 ### Skrip Debug Tersuai
-Buat direktori `scripts/debug/` dengan:
+Cipta direktori `scripts/debug/` dengan:
 - `health-check.sh` - Pemeriksaan kesihatan yang komprehensif
 - `performance-test.sh` - Ujian prestasi automatik
-- `log-analyzer.py` - Penapisan dan analisis log lanjutan
+- `log-analyzer.py` - Penguraian dan analisis log lanjutan
 - `resource-validator.sh` - Pengesahan infrastruktur
 
 ### Integrasi Pemantauan
@@ -678,17 +685,17 @@ hooks:
 ## Amalan Terbaik
 
 1. **Sentiasa aktifkan log debug** dalam persekitaran bukan pengeluaran
-2. **Buat kes ujian yang boleh dihasilkan semula** untuk isu
+2. **Cipta kes ujian yang boleh dihasilkan semula** untuk isu
 3. **Dokumentasikan prosedur debugging** untuk pasukan anda
 4. **Automasi pemeriksaan kesihatan** dan pemantauan
-5. **Pastikan alat debugging dikemas kini** dengan perubahan aplikasi anda
+5. **Pastikan alat debug sentiasa dikemas kini** dengan perubahan aplikasi anda
 6. **Latih prosedur debugging** semasa waktu bukan insiden
 
 ## Langkah Seterusnya
 
 - [Perancangan Kapasiti](../pre-deployment/capacity-planning.md) - Rancang keperluan sumber
 - [Pemilihan SKU](../pre-deployment/sku-selection.md) - Pilih tingkat perkhidmatan yang sesuai
-- [Pemeriksaan Awal](../pre-deployment/preflight-checks.md) - Pengesahan sebelum pengedaran
+- [Pemeriksaan Awal](../pre-deployment/preflight-checks.md) - Pengesahan sebelum pemasangan
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Rujukan pantas untuk arahan
 
 ---

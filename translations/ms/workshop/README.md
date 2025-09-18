@@ -1,17 +1,21 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T22:02:24+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T08:17:35+00:00",
   "source_file": "workshop/README.md",
   "language_code": "ms"
 }
 -->
 # Bengkel AZD untuk Pembangun AI
 
-**Sebelumnya:** [Panduan Penyelesaian Masalah AI](../docs/troubleshooting/ai-troubleshooting.md) | **Seterusnya:** [Modul Makmal Bengkel](../../../workshop)
+**Navigasi Bengkel**
+- **📚 Halaman Kursus**: [AZD Untuk Pemula](../README.md)
+- **📖 Bab Berkaitan**: Meliputi [Bab 1](../README.md#-chapter-1-foundation--quick-start), [Bab 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), dan [Bab 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Makmal Praktikal**: [Makmal Bengkel AI](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Langkah Seterusnya**: [Modul Makmal Bengkel](../../../workshop)
 
-Selamat datang ke bengkel praktikal untuk mempelajari Azure Developer CLI (AZD) dengan fokus pada penyebaran aplikasi AI. Bengkel ini direka untuk membawa anda dari asas AZD hingga kepada penyelesaian AI yang sedia untuk pengeluaran.
+Selamat datang ke bengkel praktikal untuk mempelajari Azure Developer CLI (AZD) dengan fokus pada penyebaran aplikasi AI. Bengkel ini direka untuk membawa anda dari asas AZD kepada penyebaran penyelesaian AI yang sedia untuk produksi.
 
 ## Gambaran Keseluruhan Bengkel
 
@@ -26,7 +30,7 @@ Selamat datang ke bengkel praktikal untuk mempelajari Azure Developer CLI (AZD) 
 - **Penyebaran Kontena**: Menggunakan Azure Container Apps untuk aplikasi AI
 - **Amalan Keselamatan Terbaik**: Melaksanakan Identiti Terurus dan konfigurasi yang selamat
 - **Pemantauan & Pemerhatian**: Menyediakan Application Insights untuk beban kerja AI
-- **Corak Pengeluaran**: Strategi penyebaran yang sedia untuk perusahaan
+- **Corak Produksi**: Strategi penyebaran yang sedia untuk perusahaan
 
 ## Struktur Bengkel
 
@@ -48,17 +52,17 @@ Selamat datang ke bengkel praktikal untuk mempelajari Azure Developer CLI (AZD) 
 - Embedding vektor dan carian semantik
 - **Makmal**: Membina sistem soal jawab dokumen
 
-### Modul 4: Penyebaran Pengeluaran (30 minit)
+### Modul 4: Penyebaran Produksi (30 minit)
 - Konfigurasi Container Apps
 - Pengoptimuman skala dan prestasi
 - Pemantauan dan log
-- **Makmal**: Menyebarkan ke pengeluaran dengan pemerhatian
+- **Makmal**: Menyebarkan ke produksi dengan pemerhatian
 
 ### Modul 5: Corak Lanjutan (15 minit)
 - Penyebaran pelbagai persekitaran
 - Integrasi CI/CD
 - Strategi pengoptimuman kos
-- **Penutup**: Senarai semak kesediaan pengeluaran
+- **Penutup**: Senarai semak kesediaan produksi
 
 ## Prasyarat
 
@@ -86,11 +90,11 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Persediaan Akaun Azure
 
-1. **Langganan Azure**: [Daftar secara percuma](https://azure.microsoft.com/free/)  
-2. **Akses Azure OpenAI**: [Mohon akses](https://aka.ms/oai/access)  
-3. **Kebenaran Diperlukan**:  
-   - Peranan Contributor pada langganan atau kumpulan sumber  
-   - User Access Administrator (untuk tugasan RBAC)  
+1. **Langganan Azure**: [Daftar secara percuma](https://azure.microsoft.com/free/)
+2. **Akses Azure OpenAI**: [Mohon akses](https://aka.ms/oai/access)
+3. **Kebenaran Diperlukan**:
+   - Peranan Contributor pada langganan atau kumpulan sumber
+   - User Access Administrator (untuk tugasan RBAC)
 
 ### Sahkan Prasyarat
 
@@ -144,18 +148,18 @@ echo "Setup verification complete!"
 
 Setiap modul termasuk makmal praktikal dengan kod permulaan dan arahan langkah demi langkah:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Penyebaran AZD pertama anda  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplikasi sembang dengan Azure OpenAI  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Aplikasi RAG dengan AI Search  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Corak penyebaran pengeluaran  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Senario penyebaran lanjutan  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Penyebaran AZD pertama anda
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplikasi sembang dengan Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Aplikasi RAG dengan AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Corak penyebaran produksi
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Senario penyebaran lanjutan
 
 ### Bahan Rujukan
 
-- **[Panduan Integrasi AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Corak integrasi yang komprehensif  
-- **[Panduan Penyebaran Model AI](../docs/ai-foundry/ai-model-deployment.md)** - Amalan terbaik penyebaran model  
-- **[Amalan AI Pengeluaran](../docs/ai-foundry/production-ai-practices.md)** - Corak penyebaran perusahaan  
-- **[Panduan Penyelesaian Masalah AI](../docs/troubleshooting/ai-troubleshooting.md)** - Isu biasa dan penyelesaian  
+- **[Panduan Integrasi AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Corak integrasi yang komprehensif
+- **[Panduan Penyebaran Model AI](../docs/ai-foundry/ai-model-deployment.md)** - Amalan terbaik penyebaran model
+- **[Amalan AI Produksi](../docs/ai-foundry/production-ai-practices.md)** - Corak penyebaran perusahaan
+- **[Panduan Penyelesaian Masalah AI](../docs/troubleshooting/ai-troubleshooting.md)** - Isu biasa dan penyelesaian
 
 ### Templat Contoh
 
@@ -179,7 +183,7 @@ Cara terpantas untuk memulakan bengkel:
 
 ### Pilihan 2: Pembangunan Tempatan
 
-1. **Clone repositori bengkel:**
+1. **Klon repositori bengkel:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
@@ -197,13 +201,13 @@ cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### Pilihan 3: Bengkel Dipimpin Pengajar
+### Pilihan 3: Bengkel Dipandu Pengajar
 
-Jika anda menghadiri sesi yang dipimpin pengajar:
+Jika anda menghadiri sesi yang dipandu pengajar:
 
-- 🎥 **Rakaman Bengkel**: [Tersedia atas permintaan](https://aka.ms/azd-ai-workshop)  
-- 💬 **Komuniti Discord**: [Sertai untuk sokongan langsung](https://aka.ms/foundry/discord)  
-- **Maklum Balas Bengkel**: [Kongsi pengalaman anda](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Rakaman Bengkel**: [Tersedia atas permintaan](https://aka.ms/azd-ai-workshop)
+- 💬 **Komuniti Discord**: [Sertai untuk sokongan langsung](https://aka.ms/foundry/discord)
+- **Maklum Balas Bengkel**: [Kongsi pengalaman anda](https://aka.ms/azd-workshop-feedback)
 
 ## Garis Masa Bengkel
 
@@ -218,7 +222,7 @@ Jika anda menghadiri sesi yang dipimpin pengajar:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Sesi Dipimpin Pengajar (2.5 jam)
+### Sesi Dipandu Pengajar (2.5 jam)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -238,7 +242,7 @@ Menjelang akhir bengkel ini, anda akan dapat:
 ✅ **Menyebarkan aplikasi AI** menggunakan templat AZD  
 ✅ **Mengkonfigurasi Azure OpenAI** dengan keselamatan yang betul  
 ✅ **Membina aplikasi RAG** dengan integrasi Azure AI Search  
-✅ **Melaksanakan corak pengeluaran** untuk beban kerja AI perusahaan  
+✅ **Melaksanakan corak produksi** untuk beban kerja AI perusahaan  
 ✅ **Memantau dan menyelesaikan masalah** penyebaran aplikasi AI  
 ✅ **Mengaplikasikan strategi pengoptimuman kos** untuk beban kerja AI  
 
@@ -246,35 +250,35 @@ Menjelang akhir bengkel ini, anda akan dapat:
 
 ### Semasa Bengkel
 
-- 🙋 **Soalan**: Gunakan sembang bengkel atau angkat tangan  
-- 🐛 **Isu**: Semak [panduan penyelesaian masalah](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Petua**: Kongsi penemuan dengan peserta lain  
+- 🙋 **Soalan**: Gunakan sembang bengkel atau angkat tangan
+- 🐛 **Isu**: Semak [panduan penyelesaian masalah](../docs/troubleshooting/ai-troubleshooting.md)
+- **Petua**: Kongsi penemuan dengan peserta lain
 
 ### Selepas Bengkel
 
-- 💬 **Discord**: [Komuniti Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **GitHub Issues**: [Laporkan isu templat](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Maklum Balas**: [Borang penilaian bengkel](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Komuniti Azure AI Foundry](https://aka.ms/foundry/discord)
+- **Isu GitHub**: [Laporkan isu templat](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Maklum Balas**: [Borang penilaian bengkel](https://aka.ms/azd-workshop-feedback)
 
 ## Langkah Seterusnya
 
 ### Teruskan Pembelajaran
 
-1. **Senario Lanjutan**: Terokai [penyebaran pelbagai wilayah](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Integrasi CI/CD**: Sediakan [aliran kerja GitHub Actions](../docs/deployment/github-actions.md)  
-3. **Templat Tersuai**: Cipta [templat AZD anda sendiri](../docs/getting-started/custom-templates.md)  
+1. **Senario Lanjutan**: Terokai [penyebaran pelbagai wilayah](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Integrasi CI/CD**: Sediakan [aliran kerja GitHub Actions](../docs/deployment/github-actions.md)
+3. **Templat Tersuai**: Cipta [templat AZD anda sendiri](../docs/getting-started/custom-templates.md)
 
 ### Terapkan dalam Projek Anda
 
-1. **Penilaian**: Gunakan [senarai semak kesediaan](./production-readiness-checklist.md)  
-2. **Templat**: Mulakan dengan [templat khusus AI](../../../workshop/templates)  
-3. **Sokongan**: Sertai [Discord Azure AI Foundry](https://aka.ms/foundry/discord)  
+1. **Penilaian**: Gunakan [senarai semak kesediaan](./production-readiness-checklist.md)
+2. **Templat**: Mulakan dengan [templat khusus AI kami](../../../workshop/templates)
+3. **Sokongan**: Sertai [Discord Azure AI Foundry](https://aka.ms/foundry/discord)
 
 ### Kongsi Kejayaan Anda
 
-- ⭐ **Bintang repositori** jika bengkel ini membantu anda  
-- 🐦 **Kongsi di media sosial** dengan #AzureDeveloperCLI #AzureAI  
-- 📝 **Tulis catatan blog** tentang perjalanan penyebaran AI anda  
+- ⭐ **Bintang repositori** jika bengkel ini membantu anda
+- 🐦 **Kongsi di media sosial** dengan #AzureDeveloperCLI #AzureAI
+- 📝 **Tulis catatan blog** tentang perjalanan penyebaran AI anda
 
 ---
 

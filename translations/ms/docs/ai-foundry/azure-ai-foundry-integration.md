@@ -1,38 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:45:46+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T08:11:22+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "ms"
 }
 -->
 # Integrasi Azure AI Foundry dengan AZD
 
-**Sebelumnya:** [Projek Pertama](../getting-started/first-project.md) | **Seterusnya:** [Penyebaran Model AI](ai-model-deployment.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan Berasaskan AI
+- **⬅️ Bab Sebelumnya**: [Bab 1: Projek Pertama Anda](../getting-started/first-project.md)
+- **➡️ Seterusnya**: [Penggunaan Model AI](ai-model-deployment.md)
+- **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 ## Gambaran Keseluruhan
 
-Panduan ini menunjukkan cara mengintegrasikan perkhidmatan Azure AI Foundry dengan Azure Developer CLI (AZD) untuk penyebaran aplikasi AI yang lebih lancar. Azure AI Foundry menyediakan platform komprehensif untuk membina, menyebarkan, dan mengurus aplikasi AI, manakala AZD mempermudah proses infrastruktur dan penyebaran.
+Panduan ini menunjukkan cara mengintegrasikan perkhidmatan Azure AI Foundry dengan Azure Developer CLI (AZD) untuk mempermudah penggunaan aplikasi AI. Azure AI Foundry menyediakan platform komprehensif untuk membina, menggunakan, dan mengurus aplikasi AI, manakala AZD mempermudah proses infrastruktur dan penggunaan.
 
 ## Apa itu Azure AI Foundry?
 
 Azure AI Foundry ialah platform bersatu Microsoft untuk pembangunan AI yang merangkumi:
 
 - **Model Catalog**: Akses kepada model AI terkini
-- **Prompt Flow**: Pereka bentuk visual untuk aliran kerja AI
+- **Prompt Flow**: Pereka visual untuk aliran kerja AI
 - **AI Foundry Portal**: Persekitaran pembangunan bersepadu untuk aplikasi AI
-- **Pilihan Penyebaran**: Pelbagai pilihan hosting dan penskalaan
+- **Pilihan Penggunaan**: Pelbagai pilihan hosting dan penskalaan
 - **Keselamatan dan Perlindungan**: Ciri AI bertanggungjawab terbina dalam
 
 ## AZD + Azure AI Foundry: Lebih Baik Bersama
 
 | Ciri | Azure AI Foundry | Manfaat Integrasi AZD |
 |------|------------------|-----------------------|
-| **Penyebaran Model** | Penyebaran manual melalui portal | Penyebaran automatik dan berulang |
+| **Penggunaan Model** | Penggunaan manual melalui portal | Penggunaan automatik dan berulang |
 | **Infrastruktur** | Penyediaan klik melalui portal | Infrastruktur sebagai Kod (Bicep) |
 | **Pengurusan Persekitaran** | Fokus pada satu persekitaran | Pelbagai persekitaran (dev/staging/prod) |
-| **Integrasi CI/CD** | Terhad | Sokongan asli GitHub Actions |
+| **Integrasi CI/CD** | Terhad | Sokongan GitHub Actions asli |
 | **Pengurusan Kos** | Pemantauan asas | Pengoptimuman kos khusus persekitaran |
 
 ## Prasyarat
@@ -46,7 +51,7 @@ Azure AI Foundry ialah platform bersatu Microsoft untuk pembangunan AI yang mera
 
 ### Corak 1: Integrasi Azure OpenAI
 
-**Kes Penggunaan**: Menyebarkan aplikasi sembang dengan model Azure OpenAI
+**Kes Penggunaan**: Menggunakan aplikasi sembang dengan model Azure OpenAI
 
 ```yaml
 # azure.yaml
@@ -94,9 +99,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Corak 2: AI Search + Integrasi RAG
+### Corak 2: Integrasi AI Search + RAG
 
-**Kes Penggunaan**: Menyebarkan aplikasi retrieval-augmented generation (RAG)
+**Kes Penggunaan**: Menggunakan aplikasi retrieval-augmented generation (RAG)
 
 ```bicep
 // Azure AI Search
@@ -220,9 +225,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Aliran Kerja Penyebaran
+## Aliran Kerja Penggunaan
 
-### Penyebaran Satu Perintah
+### Penggunaan dengan Satu Perintah
 
 ```bash
 # Deploy everything with one command
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### Penyebaran Khusus Persekitaran
+### Penggunaan Khusus Persekitaran
 
 ```bash
 # Development environment
@@ -428,10 +433,10 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## Penyelesaian Masalah Umum
 
-### Isu 1: Kuota OpenAI Melebihi
+### Isu 1: Kuota OpenAI Melebihi Had
 
 **Gejala:**
-- Penyebaran gagal dengan ralat kuota
+- Penggunaan gagal dengan ralat kuota
 - Ralat 429 dalam log aplikasi
 
 **Penyelesaian:**
@@ -466,10 +471,10 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Isu 3: Masalah Penyebaran Model
+### Isu 3: Masalah Penggunaan Model
 
 **Gejala:**
-- Model tidak tersedia dalam penyebaran
+- Model tidak tersedia dalam penggunaan
 - Versi model tertentu gagal
 
 **Penyelesaian:**
@@ -525,22 +530,27 @@ azd up
 2. **Sesuaikan untuk Keperluan Anda**: Ubah suai infrastruktur dan kod aplikasi
 3. **Tambah Pemantauan**: Laksanakan pemerhatian yang komprehensif
 4. **Optimumkan Kos**: Laraskan konfigurasi mengikut bajet anda
-5. **Amankan Penyebaran Anda**: Laksanakan corak keselamatan perusahaan
-6. **Skala ke Pengeluaran**: Tambah ciri multi-region dan ketersediaan tinggi
+5. **Amankan Penggunaan Anda**: Laksanakan corak keselamatan perusahaan
+6. **Skala ke Pengeluaran**: Tambahkan ciri multi-region dan ketersediaan tinggi
 
 ## Komuniti dan Sokongan
 
-- **Discord Azure AI Foundry**: [Saluran #Azure](https://discord.gg/microsoft-azure)
+- **Discord Azure AI Foundry**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **GitHub AZD**: [Isu dan perbincangan](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Dokumentasi rasmi](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**Sebelumnya:** [Projek Pertama](../getting-started/first-project.md) | **Seterusnya:** [Penyebaran Model AI](ai-model-deployment.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan Berasaskan AI
+- **⬅️ Bab Sebelumnya**: [Bab 1: Projek Pertama Anda](../getting-started/first-project.md)
+- **➡️ Seterusnya**: [Penggunaan Model AI](ai-model-deployment.md)
+- **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 **Perlu Bantuan?** Sertai perbincangan komuniti kami atau buka isu dalam repositori. Komuniti Azure AI + AZD sedia membantu anda berjaya!
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

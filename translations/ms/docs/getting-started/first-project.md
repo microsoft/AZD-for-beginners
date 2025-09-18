@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T21:27:22+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-18T08:12:32+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ms"
 }
 -->
 # Projek Pertama Anda - Tutorial Praktikal
 
-**Sebelumnya:** [Konfigurasi](configuration.md) | **Seterusnya:** [Integrasi Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 1 - Asas & Permulaan Cepat
+- **⬅️ Sebelumnya**: [Pemasangan & Persediaan](installation.md)
+- **➡️ Seterusnya**: [Konfigurasi](configuration.md)
+- **🚀 Bab Seterusnya**: [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Pengenalan
 
@@ -22,12 +27,12 @@ Dengan melengkapkan tutorial ini, anda akan:
 - Memahami struktur projek Azure Developer CLI dan fail konfigurasi
 - Melaksanakan pelancaran aplikasi lengkap ke Azure dengan penyediaan infrastruktur
 - Melaksanakan kemas kini aplikasi dan strategi pelancaran semula
-- Menguruskan pelbagai persekitaran untuk pembangunan dan staging
-- Mengamalkan pembersihan sumber dan pengurusan kos
+- Menguruskan pelbagai persekitaran untuk pembangunan dan pementasan
+- Menerapkan amalan pembersihan sumber dan pengurusan kos
 
 ## Hasil Pembelajaran
 
-Selepas selesai, anda akan dapat:
+Setelah selesai, anda akan dapat:
 - Memulakan dan mengkonfigurasi projek azd daripada templat secara bebas
 - Menavigasi dan mengubah struktur projek azd dengan berkesan
 - Melancarkan aplikasi full-stack ke Azure menggunakan arahan tunggal
@@ -49,13 +54,13 @@ Selepas selesai, anda akan dapat:
 # Check azd installation
 azd version
 ```
-### Sahkan Pengesahan Azure
+### Sahkan pengesahan Azure
 
 ```bash
 az account show
 ```
 
-### Periksa Versi Node.js
+### Periksa versi Node.js
 ```bash
 node --version
 ```
@@ -164,7 +169,7 @@ azd env get-values
 
 ## Langkah 4: Lancarkan ke Azure
 
-Sekarang untuk bahagian yang menarik - lancarkan semuanya ke Azure!
+Sekarang bahagian yang menarik - lancarkan semuanya ke Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -200,7 +205,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Langkah 5: Uji Aplikasi Anda
 
 ### Akses Aplikasi Anda
-Klik pada URL yang diberikan dalam output pelancaran, atau dapatkan bila-bila masa:
+Klik pada URL yang disediakan dalam output pelancaran, atau dapatkan bila-bila masa:
 ```bash
 # Get application endpoints
 azd show
@@ -249,7 +254,7 @@ azd deploy
 
 ## Langkah 7: Uruskan Pelbagai Persekitaran
 
-Cipta persekitaran staging untuk menguji perubahan sebelum produksi:
+Cipta persekitaran pementasan untuk menguji perubahan sebelum pengeluaran:
 
 ```bash
 # Create a new staging environment
@@ -349,7 +354,7 @@ Sekarang setelah anda melengkapkan projek pertama anda, terokai topik lanjutan i
 - [Integrasi GitHub Actions](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Amalan Terbaik Produksi
+### 3. Amalan Terbaik Pengeluaran
 - [Konfigurasi keselamatan](../deployment/best-practices.md#security)
 - [Pengoptimuman prestasi](../deployment/best-practices.md#performance)
 - [Pemantauan dan log](../deployment/best-practices.md#monitoring)
@@ -371,7 +376,7 @@ azd init --template todo-java-mongo
 
 ### Bahan Pembelajaran
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Pusat Arkitektur Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Kerangka Well-Architected Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Komuniti & Sokongan
@@ -390,7 +395,12 @@ azd init --template todo-java-mongo
 
 ---
 
-**Sebelumnya:** [Konfigurasi](configuration.md) | **Seterusnya:** [Integrasi Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 1 - Asas & Permulaan Cepat
+- **⬅️ Sebelumnya**: [Pemasangan & Persediaan](installation.md)
+- **➡️ Seterusnya**: [Konfigurasi](configuration.md)
+- **🚀 Bab Seterusnya**: [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 - **Pelajaran Seterusnya**: [Panduan Pelancaran](../deployment/deployment-guide.md)
 
 ---

@@ -1,37 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:47:03+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T08:39:59+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "tl"
 }
 -->
 # Command Cheat Sheet - Mahahalagang AZD Commands
 
+**Mabilisang Gabay para sa Lahat ng Kabanata**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../README.md)
+- **📖 Mabilisang Simula**: [Kabanata 1: Pundasyon at Mabilisang Simula](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Commands**: [Kabanata 2: AI-First Development](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Advanced**: [Kabanata 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Panimula
 
-Ang komprehensibong cheat sheet na ito ay nagbibigay ng mabilisang sanggunian para sa mga pinakaginagamit na Azure Developer CLI commands, inayos ayon sa kategorya na may mga praktikal na halimbawa. Perpekto para sa mabilisang pagtingin habang nasa development, troubleshooting, at pang-araw-araw na operasyon gamit ang mga azd project.
+Ang komprehensibong cheat sheet na ito ay nagbibigay ng mabilisang gabay sa mga karaniwang ginagamit na Azure Developer CLI commands, inayos ayon sa kategorya na may mga praktikal na halimbawa. Perpekto para sa mabilisang paghanap habang nagde-develop, nag-aayos ng problema, at sa pang-araw-araw na operasyon gamit ang mga azd projects.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa paggamit ng cheat sheet na ito, ikaw ay:
-- Magkakaroon ng agarang access sa mahahalagang Azure Developer CLI commands at syntax
-- Maiintindihan ang organisasyon ng mga command ayon sa mga functional na kategorya at mga use case
-- Makakahanap ng mga praktikal na halimbawa para sa mga karaniwang development at deployment na senaryo
-- Makakagamit ng mga troubleshooting commands para sa mabilisang pagresolba ng mga isyu
-- Makakahanap ng mga advanced na opsyon para sa configuration at customization
-- Makakahanap ng mga command para sa pamamahala ng environment at multi-environment workflow
+- Magkakaroon ng instant na access sa mahahalagang Azure Developer CLI commands at syntax
+- Maiintindihan ang organisasyon ng mga command ayon sa functional na kategorya at mga use case
+- Makakahanap ng mga praktikal na halimbawa para sa karaniwang development at deployment scenarios
+- Makakagamit ng troubleshooting commands para sa mabilisang pag-aayos ng problema
+- Makakahanap ng advanced na configuration at customization options nang madali
+- Makakagamit ng mga command para sa pamamahala ng environment at multi-environment workflow
 
-## Mga Resulta ng Pag-aaral
+## Mga Resulta sa Pag-aaral
 
-Sa regular na paggamit ng cheat sheet na ito, ikaw ay magiging:
-- Kumpiyansa sa pag-execute ng azd commands nang hindi kailangang tumingin sa buong dokumentasyon
-- Mabilis na makakapagresolba ng mga karaniwang isyu gamit ang tamang diagnostic commands
-- Epektibong makakapamahala ng maraming environment at deployment na senaryo
-- Makakapag-apply ng mga advanced na azd features at configuration options kung kinakailangan
-- Makakapag-troubleshoot ng mga deployment issues gamit ang sistematikong command sequences
-- Makakapag-optimize ng workflows sa pamamagitan ng epektibong paggamit ng azd shortcuts at options
+Sa regular na paggamit ng cheat sheet na ito, ikaw ay:
+- Makakapagpatakbo ng azd commands nang may kumpiyansa nang hindi kailangang tingnan ang buong dokumentasyon
+- Mabilis na makakapag-ayos ng karaniwang problema gamit ang tamang diagnostic commands
+- Epektibong makakapamahala ng maraming environment at deployment scenarios
+- Makakagamit ng advanced na azd features at configuration options kung kinakailangan
+- Makakapag-troubleshoot ng deployment issues gamit ang sistematikong command sequences
+- Mai-optimize ang workflows sa pamamagitan ng epektibong paggamit ng azd shortcuts at options
 
 ## Mga Pangunahing Command sa Pagsisimula
 
@@ -64,7 +70,7 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Mga Pangunahing Deployment Command
+## Mga Core Deployment Commands
 
 ### Kumpletong Deployment Workflow
 ```bash
@@ -152,7 +158,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Mga Command sa Configuration
+## ⚙️ Mga Configuration Commands
 
 ### Global Configuration
 ```bash
@@ -212,7 +218,7 @@ azd monitor
 azd monitor --insights
 ```
 
-## 🛠️ Mga Command sa Maintenance
+## 🛠️ Mga Maintenance Commands
 
 ### Cleanup
 ```bash
@@ -336,7 +342,7 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Mga Command sa Debugging
+## 🔍 Mga Debugging Commands
 
 ### Debug Information
 ```bash
@@ -381,7 +387,7 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Pag-format ng Output
+## 🎨 Output Formatting
 
 ### JSON Output
 ```bash
@@ -446,7 +452,7 @@ done
 
 ## 📝 Mga Variable ng Environment
 
-### Karaniwang Mga Variable ng Environment
+### Karaniwang Variable ng Environment
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -463,7 +469,7 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Mga Emergency Command
+## 🚨 Mga Emergency Commands
 
 ### Mabilisang Pag-aayos
 ```bash
@@ -481,7 +487,7 @@ azd service restart --all
 azd deploy --rollback
 ```
 
-### Mga Recovery Command
+### Mga Recovery Commands
 ```bash
 # Recover from failed deployment
 azd provision --continue-on-error
@@ -494,7 +500,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Mga Pro Tips
 
-### Mga Alias para sa Mas Mabilis na Workflow
+### Aliases para sa Mas Mabilis na Workflow
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -503,7 +509,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Mga Shortcut sa Function
+### Mga Shortcut ng Function
 ```bash
 # Quick environment switching
 azd-env() {
@@ -552,7 +558,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: I-bookmark ang cheat sheet na ito at gamitin ang `Ctrl+F` para mabilis na mahanap ang mga command na kailangan mo!
+**Tip**: I-bookmark ang cheat sheet na ito at gamitin ang `Ctrl+F` para mabilisang mahanap ang mga command na kailangan mo!
 
 ---
 

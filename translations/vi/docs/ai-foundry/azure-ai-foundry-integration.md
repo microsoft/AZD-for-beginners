@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:45:13+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T07:36:11+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "vi"
 }
 -->
 # Tích hợp Azure AI Foundry với AZD
 
-**Trước:** [Dự án đầu tiên](../getting-started/first-project.md) | **Tiếp theo:** [Triển khai mô hình AI](ai-model-deployment.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD Dành Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 2 - Phát triển ưu tiên AI
+- **⬅️ Chương trước**: [Chương 1: Dự án đầu tiên của bạn](../getting-started/first-project.md)
+- **➡️ Tiếp theo**: [Triển khai mô hình AI](ai-model-deployment.md)
+- **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../getting-started/configuration.md)
 
 ## Tổng quan
 
@@ -19,20 +24,20 @@ Hướng dẫn này trình bày cách tích hợp các dịch vụ Azure AI Foun
 
 Azure AI Foundry là nền tảng thống nhất của Microsoft dành cho phát triển AI, bao gồm:
 
-- **Model Catalog**: Truy cập các mô hình AI tiên tiến
-- **Prompt Flow**: Công cụ thiết kế trực quan cho quy trình AI
-- **AI Foundry Portal**: Môi trường phát triển tích hợp cho ứng dụng AI
-- **Deployment Options**: Nhiều tùy chọn lưu trữ và mở rộng
-- **Safety and Security**: Các tính năng AI có trách nhiệm được tích hợp sẵn
+- **Danh mục mô hình**: Truy cập các mô hình AI tiên tiến
+- **Prompt Flow**: Công cụ thiết kế trực quan cho các luồng công việc AI
+- **Cổng AI Foundry**: Môi trường phát triển tích hợp cho các ứng dụng AI
+- **Tùy chọn triển khai**: Nhiều tùy chọn lưu trữ và mở rộng
+- **An toàn và bảo mật**: Các tính năng AI có trách nhiệm được tích hợp sẵn
 
-## AZD + Azure AI Foundry: Kết hợp tốt hơn
+## AZD + Azure AI Foundry: Tốt hơn khi kết hợp
 
-| Tính năng | Azure AI Foundry | Lợi ích từ tích hợp AZD |
-|-----------|------------------|-------------------------|
-| **Triển khai mô hình** | Triển khai thủ công qua portal | Triển khai tự động, có thể lặp lại |
-| **Hạ tầng** | Cấu hình qua giao diện | Hạ tầng dưới dạng mã (Bicep) |
+| Tính năng | Azure AI Foundry | Lợi ích tích hợp với AZD |
+|-----------|------------------|--------------------------|
+| **Triển khai mô hình** | Triển khai thủ công qua cổng | Triển khai tự động, có thể lặp lại |
+| **Hạ tầng** | Cung cấp qua giao diện nhấp chuột | Hạ tầng dưới dạng mã (Bicep) |
 | **Quản lý môi trường** | Tập trung vào một môi trường | Đa môi trường (dev/staging/prod) |
-| **Tích hợp CI/CD** | Hạn chế | Hỗ trợ GitHub Actions tích hợp sẵn |
+| **Tích hợp CI/CD** | Hạn chế | Hỗ trợ GitHub Actions tích hợp |
 | **Quản lý chi phí** | Giám sát cơ bản | Tối ưu hóa chi phí theo môi trường |
 
 ## Yêu cầu trước
@@ -40,13 +45,13 @@ Azure AI Foundry là nền tảng thống nhất của Microsoft dành cho phát
 - Đăng ký Azure với quyền phù hợp
 - Đã cài đặt Azure Developer CLI
 - Truy cập vào dịch vụ Azure OpenAI
-- Kiến thức cơ bản về Azure AI Foundry
+- Hiểu biết cơ bản về Azure AI Foundry
 
-## Mẫu tích hợp cốt lõi
+## Các mẫu tích hợp cốt lõi
 
 ### Mẫu 1: Tích hợp Azure OpenAI
 
-**Trường hợp sử dụng**: Triển khai ứng dụng chat với các mô hình Azure OpenAI
+**Trường hợp sử dụng**: Triển khai ứng dụng trò chuyện với các mô hình Azure OpenAI
 
 ```yaml
 # azure.yaml
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Mẫu 2: Tích hợp AI Search + RAG
 
-**Trường hợp sử dụng**: Triển khai ứng dụng tạo nội dung dựa trên truy xuất (RAG)
+**Trường hợp sử dụng**: Triển khai các ứng dụng tạo nội dung dựa trên truy xuất (RAG)
 
 ```bicep
 // Azure AI Search
@@ -126,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### Mẫu 3: Tích hợp Document Intelligence
 
-**Trường hợp sử dụng**: Quy trình xử lý và phân tích tài liệu
+**Trường hợp sử dụng**: Xử lý và phân tích tài liệu
 
 ```bicep
 // Document Intelligence service
@@ -157,7 +162,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Mẫu cấu hình
+## 🔧 Các mẫu cấu hình
 
 ### Thiết lập biến môi trường
 
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### Triển khai theo môi trường cụ thể
+### Triển khai theo môi trường
 
 ```bash
 # Development environment
@@ -313,7 +318,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Các thực hành bảo mật tốt nhất
+## 🔐 Các thực tiễn bảo mật tốt nhất
 
 ### Cấu hình Managed Identity
 
@@ -428,7 +433,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## Xử lý sự cố thường gặp
 
-### Vấn đề 1: Vượt hạn mức OpenAI
+### Sự cố 1: Vượt quá hạn mức OpenAI
 
 **Triệu chứng:**
 - Triển khai thất bại với lỗi hạn mức
@@ -448,10 +453,10 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Vấn đề 2: Lỗi xác thực
+### Sự cố 2: Lỗi xác thực
 
 **Triệu chứng:**
-- Lỗi 401/403 khi gọi dịch vụ AI
+- Lỗi 401/403 khi gọi các dịch vụ AI
 - Thông báo "Truy cập bị từ chối"
 
 **Giải pháp:**
@@ -466,7 +471,7 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Vấn đề 3: Lỗi triển khai mô hình
+### Sự cố 3: Vấn đề triển khai mô hình
 
 **Triệu chứng:**
 - Mô hình không khả dụng trong triển khai
@@ -483,7 +488,7 @@ az cognitiveservices model list --location eastus
 
 ## Mẫu ví dụ
 
-### Ứng dụng chat cơ bản
+### Ứng dụng trò chuyện cơ bản
 
 **Kho lưu trữ**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
@@ -507,7 +512,7 @@ azd init --template ai-document-processing
 azd up
 ```
 
-### Chat doanh nghiệp với RAG
+### Trò chuyện doanh nghiệp với RAG
 
 **Kho lưu trữ**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
@@ -519,24 +524,29 @@ azd init --template contoso-chat
 azd up
 ```
 
-## Bước tiếp theo
+## Các bước tiếp theo
 
 1. **Thử các ví dụ**: Bắt đầu với một mẫu dựng sẵn phù hợp với trường hợp sử dụng của bạn
 2. **Tùy chỉnh theo nhu cầu**: Sửa đổi hạ tầng và mã ứng dụng
 3. **Thêm giám sát**: Triển khai khả năng quan sát toàn diện
 4. **Tối ưu hóa chi phí**: Tinh chỉnh cấu hình phù hợp với ngân sách của bạn
 5. **Bảo mật triển khai**: Áp dụng các mẫu bảo mật doanh nghiệp
-6. **Mở rộng đến sản xuất**: Thêm tính năng đa vùng và khả năng sẵn sàng cao
+6. **Mở rộng quy mô sản xuất**: Thêm tính năng đa vùng và khả năng sẵn sàng cao
 
 ## Cộng đồng và hỗ trợ
 
-- **Discord Azure AI Foundry**: [Kênh #Azure](https://discord.gg/microsoft-azure)
+- **Discord Azure AI Foundry**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Vấn đề và thảo luận](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Tài liệu chính thức](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**Trước:** [Dự án đầu tiên](../getting-started/first-project.md) | **Tiếp theo:** [Triển khai mô hình AI](ai-model-deployment.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD Dành Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 2 - Phát triển ưu tiên AI
+- **⬅️ Chương trước**: [Chương 1: Dự án đầu tiên của bạn](../getting-started/first-project.md)
+- **➡️ Tiếp theo**: [Triển khai mô hình AI](ai-model-deployment.md)
+- **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../getting-started/configuration.md)
 
 **Cần hỗ trợ?** Tham gia thảo luận cộng đồng hoặc mở một vấn đề trong kho lưu trữ. Cộng đồng Azure AI + AZD luôn sẵn sàng giúp bạn thành công!
 

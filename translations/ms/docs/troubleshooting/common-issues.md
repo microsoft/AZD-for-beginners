@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:48:53+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T08:14:57+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "ms"
 }
 -->
-# Isu & Penyelesaian Umum
+# Isu dan Penyelesaian Umum
+
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 7 - Penyelesaian Masalah & Debugging
+- **⬅️ Bab Sebelumnya**: [Bab 6: Pemeriksaan Awal](../pre-deployment/preflight-checks.md)
+- **➡️ Seterusnya**: [Panduan Debugging](debugging.md)
+- **🚀 Bab Seterusnya**: [Bab 8: Corak Pengeluaran & Enterprise](../ai-foundry/production-ai-practices.md)
 
 ## Pengenalan
 
-Panduan penyelesaian masalah yang komprehensif ini merangkumi isu yang paling kerap berlaku semasa menggunakan Azure Developer CLI. Pelajari cara mendiagnosis, menyelesaikan masalah, dan menangani isu biasa berkaitan pengesahan, penyebaran, penyediaan infrastruktur, dan konfigurasi aplikasi. Setiap isu disertakan dengan simptom terperinci, punca utama, dan langkah-langkah penyelesaian.
+Panduan penyelesaian masalah ini merangkumi isu yang paling kerap berlaku semasa menggunakan Azure Developer CLI. Pelajari cara mendiagnosis, menyelesaikan masalah, dan mengatasi isu berkaitan pengesahan, penyebaran, penyediaan infrastruktur, dan konfigurasi aplikasi. Setiap isu disertakan dengan simptom, punca utama, dan langkah-langkah penyelesaian yang terperinci.
 
 ## Matlamat Pembelajaran
 
@@ -19,7 +26,7 @@ Dengan melengkapkan panduan ini, anda akan:
 - Menguasai teknik diagnostik untuk isu Azure Developer CLI
 - Memahami masalah pengesahan dan kebenaran yang biasa serta penyelesaiannya
 - Menyelesaikan kegagalan penyebaran, kesilapan penyediaan infrastruktur, dan isu konfigurasi
-- Melaksanakan strategi pemantauan dan penyahpepijat secara proaktif
+- Melaksanakan strategi pemantauan dan debugging secara proaktif
 - Mengaplikasikan metodologi penyelesaian masalah secara sistematik untuk isu kompleks
 - Mengkonfigurasi log dan pemantauan yang betul untuk mencegah isu di masa hadapan
 
@@ -27,15 +34,15 @@ Dengan melengkapkan panduan ini, anda akan:
 
 Selepas melengkapkan panduan ini, anda akan dapat:
 - Mendiagnosis isu Azure Developer CLI menggunakan alat diagnostik terbina
-- Menyelesaikan masalah pengesahan, langganan, dan kebenaran secara berdikari
+- Menyelesaikan masalah pengesahan, langganan, dan kebenaran secara bebas
 - Menyelesaikan kegagalan penyebaran dan kesilapan penyediaan infrastruktur dengan berkesan
-- Menyahpepijat isu konfigurasi aplikasi dan masalah spesifik persekitaran
-- Melaksanakan pemantauan dan amaran untuk mengenal pasti isu yang berpotensi secara proaktif
-- Mengaplikasikan amalan terbaik untuk log, penyahpepijat, dan aliran kerja penyelesaian masalah
+- Debug isu konfigurasi aplikasi dan masalah spesifik persekitaran
+- Melaksanakan pemantauan dan amaran untuk mengenal pasti isu berpotensi secara proaktif
+- Mengaplikasikan amalan terbaik untuk log, debugging, dan aliran kerja penyelesaian masalah
 
 ## Diagnostik Pantas
 
-Sebelum menyelami isu tertentu, jalankan arahan berikut untuk mengumpul maklumat diagnostik:
+Sebelum menyelami isu tertentu, jalankan arahan berikut untuk mengumpulkan maklumat diagnostik:
 
 ```bash
 # Check azd version and health
@@ -133,7 +140,7 @@ azd down --force --purge
 
 ### Isu: Lokasi/Region tidak tersedia
 **Simptom:**
-- "Lokasi 'xyz' tidak tersedia untuk jenis sumber"
+- Kesilapan "Lokasi 'xyz' tidak tersedia untuk jenis sumber"
 - SKU tertentu tidak tersedia di region yang dipilih
 
 **Penyelesaian:**
@@ -153,7 +160,7 @@ azd env set AZURE_LOCATION eastus2
 ### Isu: Kesilapan kuota melebihi
 **Simptom:**
 - "Kuota melebihi untuk jenis sumber"
-- "Bilangan maksimum sumber telah dicapai"
+- "Bilangan maksimum sumber dicapai"
 
 **Penyelesaian:**
 ```bash
@@ -398,7 +405,7 @@ azd config set defaults.location eastus2
 
 ### Isu: Masalah prestasi aplikasi
 **Simptom:**
-- Masa tindak balas yang perlahan
+- Masa tindak balas perlahan
 - Penggunaan sumber yang tinggi
 
 **Penyelesaian:**
@@ -450,7 +457,7 @@ az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Penyiasatan Sumber
+### Penyelidikan Sumber
 ```bash
 # List all resources
 az resource list --resource-group myrg -o table
@@ -464,7 +471,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ## 🆘 Mendapatkan Bantuan Tambahan
 
-### Bila Perlu Meningkatkan Isu
+### Bila Perlu Meningkatkan
 - Masalah pengesahan berterusan selepas mencuba semua penyelesaian
 - Masalah infrastruktur dengan perkhidmatan Azure
 - Isu berkaitan bil atau langganan
@@ -484,7 +491,7 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Maklumat untuk Dikumpul
+### Maklumat untuk Dikumpulkan
 Sebelum menghubungi sokongan, kumpulkan:
 - Output `azd version`
 - Output `azd info`
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Pencegahan Isu
 
-### Senarai Semak Pra-Penyebaran
+### Senarai Semak Pra-penyebaran
 ```bash
 # 1. Validate authentication
 az account show
@@ -568,20 +575,20 @@ az security assessment list --resource-group myrg
 
 ## Sumber Berkaitan
 
-- [Panduan Penyahpepijat](debugging.md) - Teknik penyahpepijat lanjutan
+- [Panduan Debugging](debugging.md) - Teknik debugging lanjutan
 - [Penyediaan Sumber](../deployment/provisioning.md) - Penyelesaian masalah infrastruktur
 - [Perancangan Kapasiti](../pre-deployment/capacity-planning.md) - Panduan perancangan sumber
 - [Pemilihan SKU](../pre-deployment/sku-selection.md) - Cadangan peringkat perkhidmatan
 
 ---
 
-**Tip**: Simpan panduan ini sebagai penanda buku dan rujuk apabila anda menghadapi isu. Kebanyakan masalah telah pernah berlaku sebelum ini dan mempunyai penyelesaian yang telah ditetapkan!
+**Tip**: Simpan panduan ini sebagai penanda buku dan rujuk apabila anda menghadapi isu. Kebanyakan masalah telah dikenal pasti sebelum ini dan mempunyai penyelesaian yang ditetapkan!
 
 ---
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Penyediaan Sumber](../deployment/provisioning.md)
-- **Pelajaran Seterusnya**: [Panduan Penyahpepijat](debugging.md)
+- **Pelajaran Seterusnya**: [Panduan Debugging](debugging.md)
 
 ---
 

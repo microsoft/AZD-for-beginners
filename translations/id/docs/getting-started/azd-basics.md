@@ -1,19 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T21:25:23+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T07:57:51+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "id"
 }
 -->
-# Dasar-Dasar AZD - Memahami Azure Developer CLI
+# AZD Dasar - Memahami Azure Developer CLI
 
-**Sebelumnya:** [Instalasi & Pengaturan](installation.md) | **Selanjutnya:** [Konfigurasi](configuration.md)
+# AZD Dasar - Konsep Inti dan Fundamental
+
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
+- **⬅️ Sebelumnya**: [Ikhtisar Kursus](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Selanjutnya**: [Instalasi & Pengaturan](installation.md)
+- **🚀 Bab Berikutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Pendahuluan
 
-Pelajaran ini memperkenalkan Anda pada Azure Developer CLI (azd), alat baris perintah yang kuat yang mempercepat perjalanan Anda dari pengembangan lokal ke penerapan di Azure. Anda akan mempelajari konsep dasar, fitur utama, dan memahami bagaimana azd menyederhanakan penerapan aplikasi cloud-native.
+Pelajaran ini memperkenalkan Anda pada Azure Developer CLI (azd), alat baris perintah yang kuat yang mempercepat perjalanan Anda dari pengembangan lokal ke penerapan di Azure. Anda akan mempelajari konsep dasar, fitur inti, dan memahami bagaimana azd menyederhanakan penerapan aplikasi cloud-native.
 
 ## Tujuan Pembelajaran
 
@@ -40,7 +47,7 @@ Azure Developer CLI (azd) adalah alat baris perintah yang dirancang untuk memper
 ## Konsep Inti
 
 ### Template
-Template adalah dasar dari azd. Template mencakup:
+Template adalah dasar dari azd. Template berisi:
 - **Kode aplikasi** - Kode sumber dan dependensi Anda
 - **Definisi infrastruktur** - Sumber daya Azure yang didefinisikan dalam Bicep atau Terraform
 - **File konfigurasi** - Pengaturan dan variabel lingkungan
@@ -197,7 +204,7 @@ Perintah `azd down --force --purge` adalah cara yang ampuh untuk sepenuhnya meng
 ```
 - Melewati prompt konfirmasi.
 - Berguna untuk otomatisasi atau skrip di mana input manual tidak memungkinkan.
-- Memastikan penghentian berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidakkonsistenan.
+- Memastikan penghentian berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidaksesuaian.
 
 ```
 --purge
@@ -209,7 +216,7 @@ Info penerapan yang di-cache
 Mencegah azd "mengingat" penerapan sebelumnya, yang dapat menyebabkan masalah seperti grup sumber daya yang tidak cocok atau referensi registri yang usang.
 
 ### Mengapa menggunakan keduanya?
-Ketika Anda mengalami masalah dengan `azd up` karena status yang tertinggal atau penerapan parsial, kombinasi ini memastikan **awal yang bersih**.
+Ketika Anda mengalami masalah dengan `azd up` karena status yang tersisa atau penerapan parsial, kombinasi ini memastikan **awal yang bersih**.
 
 Ini sangat berguna setelah penghapusan sumber daya manual di portal Azure atau saat beralih template, lingkungan, atau konvensi penamaan grup sumber daya.
 
@@ -265,7 +272,7 @@ azd init --template template1
 
 ### 2. Manfaatkan Template
 - Mulai dengan template yang ada
-- Sesuaikan dengan kebutuhan Anda
+- Sesuaikan sesuai kebutuhan Anda
 - Buat template yang dapat digunakan kembali untuk organisasi Anda
 
 ### 3. Isolasi Lingkungan
@@ -300,22 +307,30 @@ azd init --template template1
 
 ## Langkah Selanjutnya
 
+**📖 Lanjutkan Pembelajaran Bab 1:**
 - [Instalasi & Pengaturan](installation.md) - Instal dan konfigurasi azd
-- [Proyek Pertama Anda](first-project.md) - Tutorial langsung
+- [Proyek Pertama Anda](first-project.md) - Selesaikan tutorial langsung
 - [Panduan Konfigurasi](configuration.md) - Opsi konfigurasi lanjutan
+
+**🎯 Siap untuk Bab Berikutnya?**
+- [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md) - Mulai membangun aplikasi AI
 
 ## Sumber Daya Tambahan
 
-- [Azure Developer CLI Overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Samples](https://github.com/Azure-Samples)
+- [Ikhtisar Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Galeri Template](https://azure.github.io/awesome-azd/)
+- [Contoh Komunitas](https://github.com/Azure-Samples)
 
 ---
 
-**Sebelumnya:** [Instalasi & Pengaturan](installation.md) | **Selanjutnya:** [Konfigurasi](configuration.md)  
-- **Pelajaran Selanjutnya**: [Instalasi & Pengaturan](installation.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat  
+- **⬅️ Sebelumnya**: [Ikhtisar Kursus](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Selanjutnya**: [Instalasi & Pengaturan](installation.md)
+- **🚀 Bab Berikutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

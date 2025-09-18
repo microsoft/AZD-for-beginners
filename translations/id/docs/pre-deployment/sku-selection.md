@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:07:16+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T08:00:37+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "id"
 }
 -->
-# Panduan Pemilihan SKU - Memilih Tingkat Layanan Azure yang Tepat
+# Panduan Pemilihan SKU - Memilih Tingkatan Layanan Azure yang Tepat
+
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 6 - Validasi & Perencanaan Pra-Penerapan
+- **⬅️ Sebelumnya**: [Perencanaan Kapasitas](capacity-planning.md)
+- **➡️ Selanjutnya**: [Pemeriksaan Awal](preflight-checks.md)
+- **🚀 Bab Berikutnya**: [Bab 7: Pemecahan Masalah](../troubleshooting/common-issues.md)
 
 ## Pendahuluan
 
-Panduan lengkap ini membantu Anda memilih SKU (Stock Keeping Units) layanan Azure yang optimal untuk berbagai lingkungan, beban kerja, dan kebutuhan. Pelajari cara menganalisis kebutuhan kinerja, pertimbangan biaya, dan kebutuhan skalabilitas untuk memilih tingkat layanan yang paling sesuai untuk penerapan Azure Developer CLI Anda.
+Panduan ini membantu Anda memilih SKU (Stock Keeping Units) layanan Azure yang optimal untuk berbagai lingkungan, beban kerja, dan kebutuhan. Pelajari cara menganalisis kebutuhan kinerja, pertimbangan biaya, dan persyaratan skalabilitas untuk memilih tingkatan layanan yang paling sesuai untuk penerapan Azure Developer CLI Anda.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
 - Memahami konsep SKU Azure, model harga, dan perbedaan fitur
 - Menguasai strategi pemilihan SKU berdasarkan lingkungan untuk pengembangan, staging, dan produksi
-- Menganalisis kebutuhan beban kerja dan mencocokkannya dengan tingkat layanan yang sesuai
+- Menganalisis kebutuhan beban kerja dan mencocokkannya dengan tingkatan layanan yang sesuai
 - Menerapkan strategi optimasi biaya melalui pemilihan SKU yang cerdas
 - Menggunakan teknik pengujian kinerja dan validasi untuk pilihan SKU
 - Mengonfigurasi rekomendasi SKU otomatis dan pemantauan
 
 ## Hasil Pembelajaran
 
-Setelah selesai, Anda akan mampu:
+Setelah selesai, Anda akan dapat:
 - Memilih SKU layanan Azure yang sesuai berdasarkan kebutuhan dan batasan beban kerja
-- Merancang arsitektur multi-lingkungan yang hemat biaya dengan pemilihan tingkat yang tepat
-- Melakukan benchmarking kinerja dan validasi untuk pilihan SKU
+- Merancang arsitektur multi-lingkungan yang hemat biaya dengan pemilihan tingkatan yang tepat
+- Menerapkan benchmarking kinerja dan validasi untuk pilihan SKU
 - Membuat alat otomatis untuk rekomendasi SKU dan optimasi biaya
 - Merencanakan migrasi SKU dan strategi skalabilitas untuk kebutuhan yang berubah
-- Menerapkan prinsip Azure Well-Architected Framework untuk pemilihan tingkat layanan
+- Menerapkan prinsip Kerangka Kerja Azure Well-Architected untuk pemilihan tingkatan layanan
 
 ## Daftar Isi
 
@@ -49,7 +56,7 @@ Setelah selesai, Anda akan mampu:
 
 ### Apa itu SKUs?
 
-SKU (Stock Keeping Units) mewakili berbagai tingkat layanan dan tingkat kinerja untuk sumber daya Azure. Setiap SKU menawarkan:
+SKU (Stock Keeping Units) mewakili tingkatan layanan dan tingkat kinerja yang berbeda untuk sumber daya Azure. Setiap SKU menawarkan:
 
 - **Karakteristik kinerja** (CPU, memori, throughput)
 - **Ketersediaan fitur** (opsi skalabilitas, tingkat SLA)
@@ -60,12 +67,12 @@ SKU (Stock Keeping Units) mewakili berbagai tingkat layanan dan tingkat kinerja 
 
 1. **Kebutuhan Beban Kerja**
    - Pola lalu lintas/beban yang diharapkan
-   - Kebutuhan kinerja (CPU, memori, I/O)
+   - Persyaratan kinerja (CPU, memori, I/O)
    - Kebutuhan penyimpanan dan pola akses
 
 2. **Jenis Lingkungan**
    - Pengembangan/pengujian vs. produksi
-   - Kebutuhan ketersediaan
+   - Persyaratan ketersediaan
    - Kebutuhan keamanan dan kepatuhan
 
 3. **Keterbatasan Anggaran**
@@ -74,7 +81,7 @@ SKU (Stock Keeping Units) mewakili berbagai tingkat layanan dan tingkat kinerja 
    - Implikasi biaya auto-scaling
 
 4. **Proyeksi Pertumbuhan**
-   - Kebutuhan skalabilitas
+   - Persyaratan skalabilitas
    - Kebutuhan fitur di masa depan
    - Kompleksitas migrasi
 
@@ -84,7 +91,7 @@ SKU (Stock Keeping Units) mewakili berbagai tingkat layanan dan tingkat kinerja 
 
 ### Lingkungan Pengembangan
 
-**Prioritas**: Optimasi biaya, fungsi dasar, kemudahan penyediaan/pencabutan
+**Prioritas**: Optimasi biaya, fungsionalitas dasar, kemudahan penyediaan/penghapusan
 
 #### SKU yang Direkomendasikan
 ```yaml
@@ -101,7 +108,7 @@ skus:
 
 #### Karakteristik
 - **App Service**: F1 (Gratis) atau B1 (Dasar) untuk pengujian sederhana
-- **Database**: Tingkat dasar dengan sumber daya minimal
+- **Database**: Tingkatan dasar dengan sumber daya minimal
 - **Penyimpanan**: Standar dengan redundansi lokal saja
 - **Komputasi**: Sumber daya bersama dapat diterima
 - **Jaringan**: Konfigurasi dasar
@@ -167,7 +174,7 @@ skus:
 | Aplikasi produksi kecil | S1 (Standar) | Domain khusus, SSL, auto-scaling |
 | Aplikasi produksi menengah | P1V3 (Premium V3) | Kinerja lebih baik, lebih banyak fitur |
 | Aplikasi dengan lalu lintas tinggi | P2V3 atau P3V3 | Sumber daya khusus, kinerja tinggi |
-| Aplikasi kritis | I1V2 (Isolated V2) | Isolasi jaringan, perangkat keras khusus |
+| Aplikasi penting | I1V2 (Isolated V2) | Isolasi jaringan, perangkat keras khusus |
 
 #### Contoh Konfigurasi
 
@@ -210,11 +217,11 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 1. **Berbasis DTU (Database Transaction Units)**
    - **Dasar**: 5 DTU - Pengembangan/pengujian
    - **Standar**: S0-S12 (10-3000 DTU) - Tujuan umum
-   - **Premium**: P1-P15 (125-4000 DTU) - Kritis kinerja
+   - **Premium**: P1-P15 (125-4000 DTU) - Kinerja kritis
 
 2. **Berbasis vCore** (Direkomendasikan untuk produksi)
    - **Tujuan Umum**: Komputasi dan penyimpanan seimbang
-   - **Kritis Bisnis**: Latensi rendah, IOPS tinggi
+   - **Bisnis Kritis**: Latensi rendah, IOPS tinggi
    - **Hyperscale**: Penyimpanan sangat skalabel (hingga 100TB)
 
 #### Contoh Konfigurasi
@@ -331,7 +338,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 1. **Throughput yang Disediakan Manual**
    - Kinerja yang dapat diprediksi
    - Diskon kapasitas yang dipesan
-   - Terbaik untuk beban kerja stabil
+   - Terbaik untuk beban kerja yang stabil
 
 2. **Throughput yang Disediakan Autoscale**
    - Skalabilitas otomatis berdasarkan penggunaan
@@ -407,7 +414,7 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 3. **Premium_LRS** - Aplikasi berkinerja tinggi
 4. **Premium_ZRS** - Ketersediaan tinggi dengan redundansi zona
 
-#### Tingkat Kinerja
+#### Tingkatan Kinerja
 
 - **Standar**: Tujuan umum, hemat biaya
 - **Premium**: Kinerja tinggi, skenario latensi rendah
@@ -650,8 +657,8 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ### Referensi Cepat SKU App Service
 
-| SKU | Tingkat | vCPU | RAM | Penyimpanan | Rentang Harga | Kasus Penggunaan |
-|-----|---------|------|-----|-------------|---------------|------------------|
+| SKU | Tingkatan | vCPU | RAM | Penyimpanan | Rentang Harga | Kasus Penggunaan |
+|-----|----------|------|-----|-------------|---------------|------------------|
 | F1 | Gratis | Bersama | 1GB | 1GB | Gratis | Pengembangan |
 | B1 | Dasar | 1 | 1.75GB | 10GB | $ | Aplikasi kecil |
 | S1 | Standar | 1 | 1.75GB | 50GB | $$ | Produksi |
@@ -660,13 +667,13 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ### Referensi Cepat SKU SQL Database
 
-| SKU | Tingkat | DTU/vCore | Penyimpanan | Rentang Harga | Kasus Penggunaan |
-|-----|---------|-----------|-------------|---------------|------------------|
+| SKU | Tingkatan | DTU/vCore | Penyimpanan | Rentang Harga | Kasus Penggunaan |
+|-----|----------|-----------|-------------|---------------|------------------|
 | Dasar | Dasar | 5 DTU | 2GB | $ | Pengembangan |
 | S2 | Standar | 50 DTU | 250GB | $$ | Produksi kecil |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Kinerja tinggi |
 | GP_Gen5_4 | Tujuan Umum | 4 vCore | 4TB | $$$ | Seimbang |
-| BC_Gen5_8 | Kritis Bisnis | 8 vCore | 4TB | $$$$ | Kritis misi |
+| BC_Gen5_8 | Bisnis Kritis | 8 vCore | 4TB | $$$$ | Penting |
 
 ### Referensi Cepat SKU Container Apps
 
@@ -680,7 +687,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Alat Validasi
 
-### Pengecek Ketersediaan SKU
+### Pemeriksa Ketersediaan SKU
 
 ```bash
 #!/bin/bash
@@ -796,7 +803,7 @@ test_configuration:
 5. **Terapkan auto-scaling jika sesuai**
 6. **Uji kinerja dengan beban kerja realistis**
 7. **Rencanakan pertumbuhan tetapi hindari over-provisioning**
-8. **Gunakan tingkat gratis untuk pengembangan jika memungkinkan**
+8. **Gunakan tingkatan gratis untuk pengembangan jika memungkinkan**
 
 ### Yang Tidak Harus Dilakukan
 
@@ -805,13 +812,13 @@ test_configuration:
 3. **Jangan lupakan biaya transfer data**
 4. **Jangan over-provision tanpa alasan**
 5. **Jangan abaikan dampak dari dependensi**
-6. **Jangan atur batas auto-scaling terlalu tinggi**
+6. **Jangan tetapkan batas auto-scaling terlalu tinggi**
 7. **Jangan lupakan persyaratan kepatuhan**
 8. **Jangan membuat keputusan hanya berdasarkan harga**
 
 ---
 
-**Tips Profesional**: Gunakan Azure Cost Management dan Advisor untuk mendapatkan rekomendasi yang dipersonalisasi untuk mengoptimalkan pemilihan SKU Anda berdasarkan pola penggunaan aktual.
+**Tips Profesional**: Gunakan Azure Cost Management dan Advisor untuk mendapatkan rekomendasi yang dipersonalisasi untuk mengoptimalkan pilihan SKU Anda berdasarkan pola penggunaan aktual.
 
 ---
 

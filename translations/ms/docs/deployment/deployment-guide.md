@@ -1,33 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T21:41:10+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T08:14:06+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "ms"
 }
 -->
-# Panduan Penerapan - Menguasai Penerapan AZD
+# Panduan Penggunaan - Menguasai Penerapan AZD
+
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 4 - Infrastruktur sebagai Kod & Penerapan
+- **⬅️ Bab Sebelumnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
+- **➡️ Seterusnya**: [Penyediaan Sumber](provisioning.md)
+- **🚀 Bab Seterusnya**: [Bab 5: Penyelesaian AI Multi-Ejen](../../examples/retail-scenario.md)
 
 ## Pengenalan
 
-Panduan komprehensif ini merangkumi segala yang anda perlu tahu tentang menerapkan aplikasi menggunakan Azure Developer CLI, daripada penerapan satu arahan asas kepada senario pengeluaran lanjutan dengan hook tersuai, pelbagai persekitaran, dan integrasi CI/CD. Kuasai keseluruhan kitaran hayat penerapan dengan contoh praktikal dan amalan terbaik.
+Panduan komprehensif ini merangkumi segala yang anda perlu tahu tentang menerapkan aplikasi menggunakan Azure Developer CLI, daripada penerapan asas dengan satu arahan kepada senario pengeluaran lanjutan dengan cangkuk tersuai, pelbagai persekitaran, dan integrasi CI/CD. Kuasai keseluruhan kitaran hayat penerapan dengan contoh praktikal dan amalan terbaik.
 
 ## Matlamat Pembelajaran
 
 Dengan melengkapkan panduan ini, anda akan:
 - Menguasai semua arahan dan aliran kerja penerapan Azure Developer CLI
 - Memahami keseluruhan kitaran hayat penerapan daripada penyediaan kepada pemantauan
-- Melaksanakan hook penerapan tersuai untuk automasi sebelum dan selepas penerapan
+- Melaksanakan cangkuk penerapan tersuai untuk automasi sebelum dan selepas penerapan
 - Mengkonfigurasi pelbagai persekitaran dengan parameter khusus persekitaran
 - Menyediakan strategi penerapan lanjutan termasuk penerapan biru-hijau dan canary
-- Mengintegrasikan penerapan azd dengan pipeline CI/CD dan aliran kerja DevOps
+- Mengintegrasikan penerapan azd dengan saluran CI/CD dan aliran kerja DevOps
 
 ## Hasil Pembelajaran
 
-Setelah selesai, anda akan dapat:
+Selepas selesai, anda akan dapat:
 - Melaksanakan dan menyelesaikan masalah semua aliran kerja penerapan azd secara bebas
-- Merancang dan melaksanakan automasi penerapan tersuai menggunakan hook
+- Merancang dan melaksanakan automasi penerapan tersuai menggunakan cangkuk
 - Mengkonfigurasi penerapan bersedia untuk pengeluaran dengan keselamatan dan pemantauan yang betul
 - Mengurus senario penerapan pelbagai persekitaran yang kompleks
 - Mengoptimumkan prestasi penerapan dan melaksanakan strategi rollback
@@ -37,8 +44,8 @@ Setelah selesai, anda akan dapat:
 
 Azure Developer CLI menyediakan beberapa arahan penerapan:
 - `azd up` - Aliran kerja lengkap (penyediaan + penerapan)
-- `azd provision` - Membuat/mengemas kini sumber Azure sahaja
-- `azd deploy` - Menerapkan kod aplikasi sahaja
+- `azd provision` - Hanya mencipta/mengemas kini sumber Azure
+- `azd deploy` - Hanya menerapkan kod aplikasi
 - `azd package` - Membina dan membungkus aplikasi
 
 ## Aliran Kerja Penerapan Asas
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Memahami Proses Penerapan
 
-### Fasa 1: Hook Pra-Penyediaan
+### Fasa 1: Cangkuk Pra-Penyediaan
 ```yaml
 # azure.yaml
 hooks:
@@ -101,11 +108,11 @@ hooks:
 
 ### Fasa 2: Penyediaan Infrastruktur
 - Membaca templat infrastruktur (Bicep/Terraform)
-- Membuat atau mengemas kini sumber Azure
+- Mencipta atau mengemas kini sumber Azure
 - Mengkonfigurasi rangkaian dan keselamatan
 - Menyediakan pemantauan dan log
 
-### Fasa 3: Hook Pasca-Penyediaan
+### Fasa 3: Cangkuk Pasca-Penyediaan
 ```yaml
 hooks:
   postprovision:
@@ -120,10 +127,10 @@ hooks:
 
 ### Fasa 4: Pembungkusan Aplikasi
 - Membina kod aplikasi
-- Membuat artifak penerapan
+- Mencipta artifak penerapan
 - Membungkus untuk platform sasaran (kontena, fail ZIP, dll.)
 
-### Fasa 5: Hook Pra-Penerapan
+### Fasa 5: Cangkuk Pra-Penerapan
 ```yaml
 hooks:
   predeploy:
@@ -137,11 +144,11 @@ hooks:
 ```
 
 ### Fasa 6: Penerapan Aplikasi
-- Menerapkan aplikasi yang telah dibungkus ke perkhidmatan Azure
+- Menerapkan aplikasi yang dibungkus ke perkhidmatan Azure
 - Mengemas kini tetapan konfigurasi
 - Memulakan/memulihkan perkhidmatan
 
-### Fasa 7: Hook Pasca-Penerapan
+### Fasa 7: Cangkuk Pasca-Penerapan
 ```yaml
 hooks:
   postdeploy:
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. Integrasi Ujian
+### 3. Pengujian Integrasi
 ```yaml
 hooks:
   predeploy:
