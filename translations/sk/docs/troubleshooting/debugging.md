@@ -1,21 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:33:09+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T10:04:42+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "sk"
 }
 -->
-# Príručka na ladenie - Pokročilé techniky analýzy logov
+# Príručka na ladenie AZD nasadení
+
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 7 - Riešenie problémov a ladenie
+- **⬅️ Predchádzajúca**: [Bežné problémy](common-issues.md)
+- **➡️ Nasledujúca**: [Riešenie problémov špecifických pre AI](ai-troubleshooting.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 8: Produkčné a podnikové vzory](../ai-foundry/production-ai-practices.md)
 
 ## Úvod
 
-Táto komplexná príručka poskytuje pokročilé stratégie, nástroje a techniky na diagnostiku a riešenie zložitých problémov s nasadením Azure Developer CLI. Naučte sa systematické metodológie ladenia, techniky analýzy logov, profilovanie výkonu a pokročilé diagnostické nástroje na efektívne riešenie problémov s nasadením a behom aplikácií.
+Táto komplexná príručka poskytuje pokročilé stratégie, nástroje a techniky na diagnostiku a riešenie zložitých problémov s nasadeniami Azure Developer CLI. Naučte sa systematické metodológie riešenia problémov, techniky analýzy logov, profilovanie výkonu a pokročilé diagnostické nástroje na efektívne riešenie problémov s nasadením a behom aplikácií.
 
 ## Ciele učenia
 
-Po absolvovaní tejto príručky budete:
+Po dokončení tejto príručky budete:
 - Ovládať systematické metodológie ladenia problémov s Azure Developer CLI
 - Rozumieť pokročilej konfigurácii logovania a technikám analýzy logov
 - Implementovať stratégie profilovania výkonu a monitorovania
@@ -27,7 +34,7 @@ Po absolvovaní tejto príručky budete:
 
 Po dokončení budete schopní:
 - Aplikovať metodológiu TRIAGE na systematické ladenie zložitých problémov s nasadením
-- Konfigurovať a analyzovať komplexné informácie o logovaní a trasovaní
+- Konfigurovať a analyzovať komplexné informácie o logovaní a sledovaní
 - Efektívne používať Azure Monitor, Application Insights a diagnostické nástroje
 - Samostatne ladiť problémy s konektivitou siete, autentifikáciou a povoleniami
 - Implementovať stratégie monitorovania výkonu a optimalizácie
@@ -41,7 +48,7 @@ Po dokončení budete schopní:
 - **I**solate: Ktorá komponenta zlyháva?
 - **A**nalyze: Čo nám hovoria logy?
 - **G**ather: Zbierajte všetky relevantné informácie
-- **E**scalate: Kedy je potrebné vyhľadať ďalšiu pomoc
+- **E**scalate: Kedy vyhľadať ďalšiu pomoc
 
 ## Aktivácia režimu ladenia
 
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Ladenie záťažových testov
+### Testovanie záťaže na ladenie
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -399,7 +406,7 @@ analyze_resources() {
 
 ## 🔒 Ladenie zabezpečenia
 
-### Ladenie autentifikačných tokov
+### Ladenie toku autentifikácie
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -482,7 +489,7 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Ladenie dotazov do databázy
+### Ladenie dotazov na databázu
 ```javascript
 // database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
@@ -602,7 +609,7 @@ quick_rollback() {
 }
 ```
 
-## 📊 Dashboardy na ladenie
+## 📊 Nástroje na monitorovanie ladenia
 
 ### Vlastný monitorovací dashboard
 ```bash
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

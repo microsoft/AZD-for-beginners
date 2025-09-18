@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:27:09+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T10:04:05+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "sk"
 }
 -->
 # Bežné problémy a riešenia
 
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 7 - Riešenie problémov a ladenie
+- **⬅️ Predchádzajúca kapitola**: [Kapitola 6: Kontroly pred nasadením](../pre-deployment/preflight-checks.md)
+- **➡️ Ďalej**: [Príručka na ladenie](debugging.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 8: Produkčné a podnikové vzory](../ai-foundry/production-ai-practices.md)
+
 ## Úvod
 
-Tento komplexný sprievodca riešením problémov pokrýva najčastejšie problémy pri používaní Azure Developer CLI. Naučte sa diagnostikovať, riešiť a odstraňovať bežné problémy s autentifikáciou, nasadzovaním, poskytovaním infraštruktúry a konfiguráciou aplikácií. Každý problém obsahuje podrobné príznaky, hlavné príčiny a postupy krok za krokom na jeho vyriešenie.
+Táto komplexná príručka na riešenie problémov pokrýva najčastejšie problémy pri používaní Azure Developer CLI. Naučte sa diagnostikovať, riešiť a odstraňovať bežné problémy s autentifikáciou, nasadením, poskytovaním infraštruktúry a konfiguráciou aplikácií. Každý problém obsahuje podrobné príznaky, hlavné príčiny a postupné kroky na jeho vyriešenie.
 
 ## Ciele učenia
 
-Po dokončení tohto sprievodcu budete:
+Po dokončení tejto príručky budete:
 - Ovládať diagnostické techniky pre problémy s Azure Developer CLI
 - Rozumieť bežným problémom s autentifikáciou a oprávneniami a ich riešeniam
-- Riešiť zlyhania nasadzovania, chyby pri poskytovaní infraštruktúry a problémy s konfiguráciou
+- Riešiť zlyhania nasadenia, chyby pri poskytovaní infraštruktúry a problémy s konfiguráciou
 - Implementovať proaktívne stratégie monitorovania a ladenia
 - Používať systematické metodológie riešenia problémov pri zložitých situáciách
-- Nastaviť správne logovanie a monitorovanie na prevenciu budúcich problémov
+- Konfigurovať správne logovanie a monitorovanie na prevenciu budúcich problémov
 
 ## Výsledky učenia
 
 Po dokončení budete schopní:
 - Diagnostikovať problémy s Azure Developer CLI pomocou vstavaných diagnostických nástrojov
 - Samostatne riešiť problémy s autentifikáciou, predplatným a oprávneniami
-- Efektívne riešiť zlyhania nasadzovania a chyby pri poskytovaní infraštruktúry
+- Efektívne riešiť zlyhania nasadenia a chyby pri poskytovaní infraštruktúry
 - Ladenie problémov s konfiguráciou aplikácií a problémov špecifických pre prostredie
-- Implementovať monitorovanie a upozornenia na proaktívne identifikovanie potenciálnych problémov
-- Používať osvedčené postupy pre logovanie, ladenie a pracovné postupy riešenia problémov
+- Implementovať monitorovanie a upozornenia na proaktívnu identifikáciu potenciálnych problémov
+- Používať osvedčené postupy pre logovanie, ladenie a pracovné postupy na riešenie problémov
 
 ## Rýchla diagnostika
 
@@ -80,9 +87,9 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Problém: "Nedostatočné oprávnenia" počas nasadzovania
+### Problém: "Nedostatočné oprávnenia" počas nasadenia
 **Príznaky:**
-- Nasadzovanie zlyháva s chybami oprávnení
+- Nasadenie zlyháva s chybami oprávnení
 - Nie je možné vytvoriť určité Azure zdroje
 
 **Riešenia:**
@@ -115,7 +122,7 @@ az account clear
 ### Problém: Konflikty názvov zdrojov
 **Príznaky:**
 - Chyby "Názov zdroja už existuje"
-- Nasadzovanie zlyháva počas vytvárania zdrojov
+- Nasadenie zlyháva počas vytvárania zdrojov
 
 **Riešenia:**
 ```bash
@@ -133,8 +140,8 @@ azd down --force --purge
 
 ### Problém: Nedostupná lokalita/oblasť
 **Príznaky:**
-- "Lokalita 'xyz' nie je dostupná pre daný typ zdroja"
-- Niektoré SKUs nie sú dostupné vo vybranej oblasti
+- "Lokalita 'xyz' nie je dostupná pre typ zdroja"
+- Určité SKUs nie sú dostupné vo vybranej oblasti
 
 **Riešenia:**
 ```bash
@@ -152,7 +159,7 @@ azd env set AZURE_LOCATION eastus2
 
 ### Problém: Prekročené kvóty
 **Príznaky:**
-- "Kvóta prekročená pre daný typ zdroja"
+- "Kvóta prekročená pre typ zdroja"
 - "Dosiahnutý maximálny počet zdrojov"
 
 **Riešenia:**
@@ -177,8 +184,8 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 ### Problém: Chyby v Bicep šablónach
 **Príznaky:**
-- Zlyhanie validácie šablón
-- Syntaktické chyby v Bicep súboroch
+- Zlyhanie validácie šablóny
+- Chyby syntaxe v Bicep súboroch
 
 **Riešenia:**
 ```bash
@@ -195,11 +202,11 @@ cat infra/main.parameters.json | jq '.'
 azd provision --preview
 ```
 
-## 🚀 Zlyhania nasadzovania
+## 🚀 Zlyhania nasadenia
 
 ### Problém: Zlyhania zostavenia
 **Príznaky:**
-- Aplikácia zlyháva pri zostavovaní počas nasadzovania
+- Aplikácia zlyháva pri zostavení počas nasadenia
 - Chyby pri inštalácii balíkov
 
 **Riešenia:**
@@ -226,7 +233,7 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problém: Zlyhania nasadzovania kontajnerov
+### Problém: Zlyhania nasadenia kontajnerov
 **Príznaky:**
 - Kontajnerové aplikácie sa nespustia
 - Chyby pri sťahovaní obrazu
@@ -270,10 +277,10 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 Problémy s konfiguráciou
 
-### Problém: Nefunkčné environmentálne premenné
+### Problém: Prostredné premenné nefungujú
 **Príznaky:**
 - Aplikácia nemôže čítať konfiguračné hodnoty
-- Environmentálne premenné sa zobrazujú ako prázdne
+- Prostredné premenné sa zdajú byť prázdne
 
 **Riešenia:**
 ```bash
@@ -294,7 +301,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 ### Problém: Problémy s SSL/TLS certifikátmi
 **Príznaky:**
 - HTTPS nefunguje
-- Chyby validácie certifikátov
+- Chyby validácie certifikátu
 
 **Riešenia:**
 ```bash
@@ -373,10 +380,10 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Problémy s výkonom
 
-### Problém: Pomalé časy nasadzovania
+### Problém: Pomalé časy nasadenia
 **Príznaky:**
-- Nasadzovanie trvá príliš dlho
-- Časové limity počas nasadzovania
+- Nasadenia trvajú príliš dlho
+- Časové limity počas nasadenia
 
 **Riešenia:**
 ```bash
@@ -488,7 +495,7 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 Pred kontaktovaním podpory zhromaždite:
 - Výstup `azd version`
 - Výstup `azd info`
-- Chybové hlásenia (celý text)
+- Chybové správy (celý text)
 - Kroky na reprodukciu problému
 - Detaily prostredia (`azd env show`)
 - Časovú os, kedy problém začal
@@ -568,22 +575,22 @@ az security assessment list --resource-group myrg
 
 ## Súvisiace zdroje
 
-- [Sprievodca ladením](debugging.md) - Pokročilé techniky ladenia
+- [Príručka na ladenie](debugging.md) - Pokročilé techniky ladenia
 - [Poskytovanie zdrojov](../deployment/provisioning.md) - Riešenie problémov s infraštruktúrou
-- [Plánovanie kapacity](../pre-deployment/capacity-planning.md) - Usmernenia pre plánovanie zdrojov
+- [Plánovanie kapacity](../pre-deployment/capacity-planning.md) - Usmernenie pre plánovanie zdrojov
 - [Výber SKU](../pre-deployment/sku-selection.md) - Odporúčania pre úrovne služieb
 
 ---
 
-**Tip**: Uložte si tento sprievodca do záložiek a odkazujte naň vždy, keď narazíte na problémy. Väčšina problémov už bola zaznamenaná a má stanovené riešenia!
+**Tip**: Uložte si túto príručku a odkazujte na ňu vždy, keď narazíte na problémy. Väčšina problémov už bola zaznamenaná a má stanovené riešenia!
 
 ---
 
 **Navigácia**
 - **Predchádzajúca lekcia**: [Poskytovanie zdrojov](../deployment/provisioning.md)
-- **Nasledujúca lekcia**: [Sprievodca ladením](debugging.md)
+- **Nasledujúca lekcia**: [Príručka na ladenie](debugging.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

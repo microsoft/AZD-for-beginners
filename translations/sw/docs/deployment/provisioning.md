@@ -1,24 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:21:02+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T08:58:20+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "sw"
 }
 -->
-# Kuweka Rasilimali - Miundombinu kama Nambari na AZD
+# Kuweka Rasilimali za Azure kwa AZD
+
+**Ukurasa wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 4 - Miundombinu kama Nambari & Uwekaji
+- **⬅️ Iliyopita**: [Mwongozo wa Uwekaji](deployment-guide.md)
+- **➡️ Sura Inayofuata**: [Sura ya 5: Suluhisho za AI za Wakala Wengi](../../examples/retail-scenario.md)
+- **🔧 Inayohusiana**: [Sura ya 6: Uthibitishaji Kabla ya Uwekaji](../pre-deployment/capacity-planning.md)
 
 ## Utangulizi
 
-Mwongozo huu wa kina unashughulikia kila kitu unachohitaji kujua kuhusu kuweka na kusimamia rasilimali za Azure ukitumia Azure Developer CLI. Jifunze kutekeleza mifumo ya Miundombinu kama Nambari (IaC) kuanzia uundaji wa rasilimali za msingi hadi miundombinu ya hali ya juu ya kiwango cha biashara ukitumia Bicep, ARM templates, Terraform, na Pulumi.
+Mwongozo huu wa kina unashughulikia kila kitu unachohitaji kujua kuhusu kuweka na kusimamia rasilimali za Azure kwa kutumia Azure Developer CLI. Jifunze kutekeleza mifumo ya Miundombinu kama Nambari (IaC) kuanzia uundaji wa rasilimali za msingi hadi miundombinu ya hali ya juu ya daraja la biashara kwa kutumia Bicep, ARM templates, Terraform, na Pulumi.
 
 ## Malengo ya Kujifunza
 
 Kwa kukamilisha mwongozo huu, utaweza:
-- Kumiliki kanuni za Miundombinu kama Nambari na kuweka rasilimali za Azure
+- Kumiliki kanuni za Miundombinu kama Nambari na uwekaji wa rasilimali za Azure
 - Kuelewa watoa huduma mbalimbali wa IaC wanaoungwa mkono na Azure Developer CLI
-- Kubuni na kutekeleza templeti za Bicep kwa miundombinu ya kawaida ya programu
+- Kubuni na kutekeleza templates za Bicep kwa miundombinu ya kawaida ya programu
 - Kuseti vigezo vya rasilimali, mabadiliko, na mipangilio maalum ya mazingira
 - Kutekeleza mifumo ya hali ya juu ya miundombinu ikijumuisha mitandao na usalama
 - Kusimamia mzunguko wa maisha wa rasilimali, masasisho, na utatuzi wa utegemezi
@@ -26,24 +33,24 @@ Kwa kukamilisha mwongozo huu, utaweza:
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha, utaweza:
-- Kubuni na kuweka miundombinu ya Azure ukitumia Bicep na ARM templates
+- Kubuni na kuweka miundombinu ya Azure kwa kutumia Bicep na ARM templates
 - Kuseti miundombinu changamano ya huduma nyingi na utegemezi sahihi wa rasilimali
-- Kutekeleza templeti zenye vigezo kwa mazingira na mipangilio mbalimbali
-- Kutatua matatizo ya kuweka miundombinu na kushughulikia kushindwa kwa usambazaji
+- Kutekeleza templates zenye vigezo kwa mazingira na mipangilio mbalimbali
+- Kutatua matatizo ya uwekaji wa miundombinu na kushughulikia kushindwa kwa uwekaji
 - Kutumia kanuni za Mfumo wa Azure Well-Architected katika kubuni miundombinu
 - Kusimamia masasisho ya miundombinu na kutekeleza mikakati ya toleo la miundombinu
 
-## Muhtasari wa Kuweka Miundombinu
+## Muhtasari wa Uwekaji wa Miundombinu
 
 Azure Developer CLI inaunga mkono watoa huduma mbalimbali wa Miundombinu kama Nambari (IaC):
 - **Bicep** (inapendekezwa) - Lugha maalum ya Azure
-- **ARM Templates** - Templeti za Azure Resource Manager zinazotumia JSON
+- **ARM Templates** - Templates za Azure Resource Manager zinazotumia JSON
 - **Terraform** - Zana ya miundombinu ya wingu nyingi
-- **Pulumi** - Miundombinu ya kisasa kama nambari ukitumia lugha za programu
+- **Pulumi** - Miundombinu ya kisasa kama nambari kwa kutumia lugha za programu
 
 ## Kuelewa Rasilimali za Azure
 
-### Uhierakia wa Rasilimali
+### Hierakia ya Rasilimali
 ```
 Azure Account
 └── Subscriptions
@@ -58,9 +65,9 @@ Azure Account
 - **Security**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Templeti za Miundombinu ya Bicep
+## Templates za Miundombinu ya Bicep
 
-### Muundo wa Msingi wa Templeti ya Bicep
+### Muundo wa Msingi wa Template ya Bicep
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,9 +137,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Mifumo ya Hali ya Juu ya Bicep
+### Mifumo ya Juu ya Bicep
 
-#### Miundombinu ya Kijimodu
+#### Miundombinu ya Kawaida
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Kuweka Hifadhidata
+## 🗃️ Uwekaji wa Hifadhidata
 
 ### Cosmos DB
 ```bicep
@@ -372,7 +379,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Mitandao na Muunganisho
 
-### Usanidi wa Virtual Network
+### Usanidi wa Mtandao wa Virtual
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Uundaji wa Rasilimali kwa Masharti
+### Uwekaji wa Rasilimali kwa Masharti
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Mifumo ya Kuweka ya Hali ya Juu
+## 🚀 Mifumo ya Juu ya Uwekaji
 
-### Usambazaji wa Kanda Nyingi
+### Uwekaji wa Kanda Nyingi
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -802,7 +809,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Mazoea Bora
 
-### 1. Mikataba ya Uwekaji Majina ya Rasilimali
+### 1. Mifumo ya Uwekaji Majina ya Rasilimali
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -859,25 +866,25 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Hatua Zifuatazo
 
-- [Mipango Kabla ya Usambazaji](../pre-deployment/capacity-planning.md) - Thibitisha upatikanaji wa rasilimali
+- [Mipango Kabla ya Uwekaji](../pre-deployment/capacity-planning.md) - Thibitisha upatikanaji wa rasilimali
 - [Masuala ya Kawaida](../troubleshooting/common-issues.md) - Shughulikia matatizo ya miundombinu
-- [Mwongozo wa Urekebishaji](../troubleshooting/debugging.md) - Rekebisha matatizo ya usambazaji
+- [Mwongozo wa Urekebishaji](../troubleshooting/debugging.md) - Rekebisha matatizo ya uwekaji
 - [Uchaguzi wa SKU](../pre-deployment/sku-selection.md) - Chagua viwango sahihi vya huduma
 
 ## Rasilimali za Ziada
 
 - [Nyaraka za Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Templeti za Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Templates za Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Kituo cha Miundombinu ya Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Mfumo wa Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Urambazaji**
-- **Somo la Awali**: [Mwongozo wa Usambazaji](deployment-guide.md)
+**Ukurasa wa Sura**
+- **Somo Lililopita**: [Mwongozo wa Uwekaji](deployment-guide.md)
 - **Somo Linalofuata**: [Mipango ya Uwezo](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia huduma ya tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

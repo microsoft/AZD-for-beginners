@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T23:23:56+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T08:59:49+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "sw"
 }
 -->
-# Mwongozo wa Kutatua Matatizo ya AI kwa Azure Developer CLI
+# Mwongozo wa Kutatua Matatizo ya AI
 
-**Iliyopita:** [Mbinu za AI za Uzalishaji](../ai-foundry/production-ai-practices.md) | **Inayofuata:** [Kuanza na AZD](../getting-started/README.md)
+**Ukurasa wa Sehemu:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Kompyuta](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 7 - Kutatua Matatizo & Ufuatiliaji wa Hitilafu
+- **⬅️ Iliyopita**: [Mwongozo wa Ufuatiliaji wa Hitilafu](debugging.md)
+- **➡️ Sura Inayofuata**: [Sura ya 8: Mifumo ya Uzalishaji & Biashara](../ai-foundry/production-ai-practices.md)
+- **🤖 Inayohusiana**: [Sura ya 2: Maendeleo ya AI Kwanza](../ai-foundry/azure-ai-foundry-integration.md)
 
-Mwongozo huu wa kina unashughulikia masuala ya kawaida yanayotokea wakati wa kupeleka suluhisho za AI kwa kutumia AZD, ukitoa suluhisho na mbinu za kutatua matatizo maalum kwa huduma za Azure AI.
+**Iliyopita:** [Mazoea ya AI ya Uzalishaji](../ai-foundry/production-ai-practices.md) | **Inayofuata:** [Kuanza na AZD](../getting-started/README.md)
 
-## Jedwali la Yaliyomo
+Mwongozo huu wa kina wa kutatua matatizo unashughulikia changamoto za kawaida wakati wa kupeleka suluhisho za AI kwa kutumia AZD, ukitoa suluhisho na mbinu za ufuatiliaji wa hitilafu zinazohusiana na huduma za Azure AI.
+
+## Jedwali la Maudhui
 
 - [Masuala ya Huduma ya Azure OpenAI](../../../../docs/troubleshooting)
-- [Matatizo ya Azure AI Search](../../../../docs/troubleshooting)
-- [Changamoto za Upelekaji wa Container Apps](../../../../docs/troubleshooting)
+- [Changamoto za Azure AI Search](../../../../docs/troubleshooting)
+- [Masuala ya Upelekaji wa Programu za Kontena](../../../../docs/troubleshooting)
 - [Hitilafu za Uthibitishaji na Ruhusa](../../../../docs/troubleshooting)
 - [Kushindwa kwa Upelekaji wa Modeli](../../../../docs/troubleshooting)
-- [Masuala ya Utendaji na Uwezo wa Kupanuka](../../../../docs/troubleshooting)
+- [Masuala ya Utendaji na Upanuzi](../../../../docs/troubleshooting)
 - [Usimamizi wa Gharama na Kiwango](../../../../docs/troubleshooting)
-- [Zana na Mbinu za Kutatua Matatizo](../../../../docs/troubleshooting)
+- [Zana na Mbinu za Ufuatiliaji wa Hitilafu](../../../../docs/troubleshooting)
 
 ## Masuala ya Huduma ya Azure OpenAI
 
-### Tatizo: Huduma ya OpenAI Haipatikani katika Eneo
+### Tatizo: Huduma ya OpenAI Haipatikani Katika Eneo
 
 **Dalili:**
 ```
@@ -140,7 +147,7 @@ az rest --method get \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Matatizo ya Azure AI Search
+## Changamoto za Azure AI Search
 
 ### Tatizo: Kiwango cha Bei ya Huduma ya Search Hakitoshi
 
@@ -216,7 +223,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Tumia Managed Identity:**
+3. **Tumia Utambulisho Ulio Simamiwa:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -230,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Changamoto za Upelekaji wa Container Apps
+## Masuala ya Upelekaji wa Programu za Kontena
 
-### Tatizo: Kushindwa Kujenga Container
+### Tatizo: Kushindwa Kujenga Kontena
 
 **Dalili:**
 ```
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Tatizo: Kushindwa kwa Container App Kuanzisha
+### Tatizo: Kushindwa Kuanza Programu ya Kontena
 
 **Dalili:**
 ```
@@ -296,7 +303,7 @@ Error: Container failed to start within timeout period
 
 **Suluhisho:**
 
-1. **Ongeza Muda wa Kuanzisha:**
+1. **Ongeza Muda wa Kuanza:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -361,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Hitilafu za Uthibitishaji na Ruhusa
 
-### Tatizo: Ruhusa ya Managed Identity Imekataliwa
+### Tatizo: Ruhusa ya Utambulisho Ulio Simamiwa Imekataliwa
 
 **Dalili:**
 ```
@@ -523,9 +530,9 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Masuala ya Utendaji na Uwezo wa Kupanuka
+## Masuala ya Utendaji na Upanuzi
 
-### Tatizo: Majibu ya Latency ya Juu
+### Tatizo: Majibu ya Muda Mrefu Sana
 
 **Dalili:**
 - Muda wa majibu > sekunde 30
@@ -549,7 +556,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Ongeza Caching ya Majibu:**
+2. **Ongeza Uwekaji wa Akiba wa Majibu:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -569,7 +576,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Sanidi Auto-scaling:**
+3. **Sanidi Upanuzi wa Kiotomatiki:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Tatizo: Hitilafu za Kukosa Kumbukumbu
+### Tatizo: Hitilafu za Kumbukumbu Kuisha
 
 **Dalili:**
 ```
@@ -662,7 +669,7 @@ class MemoryOptimizedAI:
 **Dalili:**
 - Ankara ya Azure juu kuliko ilivyotarajiwa
 - Matumizi ya tokeni yanazidi makadirio
-- Arifa za bajeti zimeanzishwa
+- Arifa za bajeti zinawashwa
 
 **Suluhisho:**
 
@@ -729,9 +736,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## Zana na Mbinu za Kutatua Matatizo
+## Zana na Mbinu za Ufuatiliaji wa Hitilafu
 
-### Amri za Kutatua Matatizo za AZD
+### Amri za Ufuatiliaji wa AZD
 
 ```bash
 # Enable verbose logging
@@ -747,9 +754,9 @@ azd logs --follow
 azd env get-values
 ```
 
-### Kutatua Matatizo ya Programu
+### Ufuatiliaji wa Programu
 
-1. **Kumbukumbu Iliyopangwa:**
+1. **Kumbukumbu Zilizopangwa:**
 ```python
 import logging
 import json
@@ -773,7 +780,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Endpoints za Ukaguzi wa Afya:**
+2. **Vituo vya Ukaguzi wa Afya:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
@@ -837,31 +844,36 @@ def monitor_performance(func):
 
 | Nambari ya Hitilafu | Maelezo | Suluhisho |
 |---------------------|----------|-----------|
-| 401 | Haijathibitishwa | Angalia funguo za API na usanidi wa managed identity |
+| 401 | Haijathibitishwa | Angalia funguo za API na usanidi wa utambulisho ulio simamiwa |
 | 403 | Imekataliwa | Thibitisha uteuzi wa majukumu ya RBAC |
-| 429 | Kiwango Kimezidi | Tekeleza mantiki ya kurudia na backoff ya kielelezo |
-| 500 | Hitilafu ya Ndani ya Server | Angalia hali ya upelekaji wa modeli na kumbukumbu |
+| 429 | Kiwango Kimezidi | Tekeleza mantiki ya kurudia na kurudi nyuma kwa kasi |
+| 500 | Hitilafu ya Ndani ya Seva | Angalia hali ya upelekaji wa modeli na kumbukumbu |
 | 503 | Huduma Haipatikani | Thibitisha afya ya huduma na upatikanaji wa eneo |
 
 ## Hatua Zifuatazo
 
-1. **Pitia [Mwongozo wa Upelekaji wa Modeli ya AI](ai-model-deployment.md)** kwa mbinu bora za upelekaji
-2. **Kamilisha [Mbinu za AI za Uzalishaji](production-ai-practices.md)** kwa suluhisho tayari kwa biashara
+1. **Pitia [Mwongozo wa Upelekaji wa Modeli ya AI](ai-model-deployment.md)** kwa mazoea bora ya upelekaji
+2. **Kamilisha [Mazoea ya AI ya Uzalishaji](production-ai-practices.md)** kwa suluhisho tayari kwa biashara
 3. **Jiunge na [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** kwa msaada wa jamii
-4. **Wasilisha masuala** kwenye [AZD GitHub repository](https://github.com/Azure/azure-dev) kwa matatizo maalum ya AZD
+4. **Wasilisha masuala** kwenye [hifadhi ya GitHub ya AZD](https://github.com/Azure/azure-dev) kwa matatizo maalum ya AZD
 
 ## Rasilimali
 
 - [Kutatua Matatizo ya Huduma ya Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Kutatua Matatizo ya Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Kutatua Matatizo ya Programu za Kontena](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Kutatua Matatizo ya Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**Iliyopita:** [Mbinu za AI za Uzalishaji](../ai-foundry/production-ai-practices.md) | **Inayofuata:** [Warsha](../../workshop/README.md)
+**Ukurasa wa Sehemu:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Kompyuta](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 7 - Kutatua Matatizo & Ufuatiliaji wa Hitilafu
+- **⬅️ Iliyopita**: [Mwongozo wa Ufuatiliaji wa Hitilafu](debugging.md)
+- **➡️ Sura Inayofuata**: [Sura ya 8: Mifumo ya Uzalishaji & Biashara](../ai-foundry/production-ai-practices.md)
+- **🤖 Inayohusiana**: [Sura ya 2: Maendeleo ya AI Kwanza](../ai-foundry/azure-ai-foundry-integration.md)
 - [Kutatua Matatizo ya Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asilia katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

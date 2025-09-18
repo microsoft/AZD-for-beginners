@@ -1,34 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-10T06:37:51+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T09:45:03+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "cs"
 }
 -->
-# Kontrola před nasazením - Ověření připravenosti k nasazení
+# Kontroly před nasazením pro AZD
+
+**Navigace kapitol:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 6 - Validace a plánování před nasazením
+- **⬅️ Předchozí**: [Výběr SKU](sku-selection.md)
+- **➡️ Další kapitola**: [Kapitola 7: Řešení problémů](../troubleshooting/common-issues.md)
+- **🔧 Související**: [Kapitola 4: Průvodce nasazením](../deployment/deployment-guide.md)
 
 ## Úvod
 
-Tento komplexní průvodce poskytuje skripty a postupy pro ověření před nasazením, které zajistí úspěšné nasazení pomocí Azure Developer CLI ještě před jejich zahájením. Naučte se implementovat automatizované kontroly autentizace, dostupnosti zdrojů, kvót, souladu s bezpečnostními požadavky a výkonových požadavků, abyste předešli selháním nasazení a optimalizovali úspěšnost nasazení.
+Tento komplexní průvodce poskytuje skripty a postupy pro validaci před nasazením, které zajistí úspěšné nasazení pomocí Azure Developer CLI ještě před jeho zahájením. Naučíte se implementovat automatizované kontroly autentizace, dostupnosti zdrojů, kvót, souladu s bezpečnostními požadavky a výkonových požadavků, abyste předešli selhání nasazení a optimalizovali úspěšnost nasazení.
 
 ## Cíle učení
 
 Po dokončení tohoto průvodce budete:
-- Mistrovsky ovládat techniky a skripty pro automatizované ověření před nasazením
-- Rozumět komplexním strategiím kontroly autentizace, oprávnění a kvót
-- Implementovat postupy ověření dostupnosti a kapacity zdrojů
+- Ovládat techniky a skripty pro automatizovanou validaci před nasazením
+- Rozumět komplexním strategiím kontrol autentizace, oprávnění a kvót
+- Implementovat postupy validace dostupnosti a kapacity zdrojů
 - Konfigurovat kontroly bezpečnosti a souladu s organizačními politikami
-- Navrhovat pracovní postupy pro odhad nákladů a ověření rozpočtu
+- Navrhovat pracovní postupy pro odhad nákladů a validaci rozpočtu
 - Vytvářet vlastní automatizaci kontrol před nasazením pro CI/CD pipeline
 
 ## Výsledky učení
 
 Po dokončení budete schopni:
-- Vytvářet a spouštět komplexní skripty pro ověření před nasazením
-- Navrhovat automatizované pracovní postupy pro různé scénáře nasazení
-- Implementovat postupy a politiky ověření specifické pro prostředí
+- Vytvářet a spouštět komplexní skripty pro validaci před nasazením
+- Navrhovat automatizované pracovní postupy kontrol pro různé scénáře nasazení
+- Implementovat postupy a politiky validace specifické pro prostředí
 - Konfigurovat proaktivní monitorování a upozornění na připravenost k nasazení
 - Řešit problémy před nasazením a implementovat nápravná opatření
 - Integrovat kontroly před nasazením do DevOps pipeline a automatizačních pracovních postupů
@@ -36,10 +43,10 @@ Po dokončení budete schopni:
 ## Obsah
 
 - [Přehled](../../../../docs/pre-deployment)
-- [Automatizovaný skript pro kontrolu před nasazením](../../../../docs/pre-deployment)
+- [Automatizovaný skript před nasazením](../../../../docs/pre-deployment)
 - [Ruční kontrolní seznam](../../../../docs/pre-deployment)
-- [Ověření prostředí](../../../../docs/pre-deployment)
-- [Ověření zdrojů](../../../../docs/pre-deployment)
+- [Validace prostředí](../../../../docs/pre-deployment)
+- [Validace zdrojů](../../../../docs/pre-deployment)
 - [Kontroly bezpečnosti a souladu](../../../../docs/pre-deployment)
 - [Plánování výkonu a kapacity](../../../../docs/pre-deployment)
 - [Řešení běžných problémů](../../../../docs/pre-deployment)
@@ -48,7 +55,7 @@ Po dokončení budete schopni:
 
 ## Přehled
 
-Kontroly před nasazením jsou klíčové ověření prováděné před nasazením, které zajišťují:
+Kontroly před nasazením jsou klíčové validace prováděné před nasazením, které zajišťují:
 
 - **Dostupnost zdrojů** a kvóty v cílových regionech
 - **Autentizace a oprávnění** jsou správně nakonfigurovány
@@ -67,7 +74,7 @@ Kontroly před nasazením jsou klíčové ověření prováděné před nasazen�
 
 ---
 
-## Automatizovaný skript pro kontrolu před nasazením
+## Automatizovaný skript před nasazením
 
 ### PowerShell kontrola před nasazením
 
@@ -787,7 +794,7 @@ main "$@"
 
 ### Kontrolní seznam před nasazením
 
-Vytiskněte tento kontrolní seznam a ověřte každý bod před nasazením:
+Vytiskněte si tento seznam a ověřte každý bod před nasazením:
 
 #### ✅ Nastavení prostředí
 - [ ] AZD CLI nainstalováno a aktualizováno na nejnovější verzi
@@ -799,19 +806,19 @@ Vytiskněte tento kontrolní seznam a ověřte každý bod před nasazením:
 #### ✅ Autentizace a oprávnění
 - [ ] Úspěšně autentizováno pomocí `azd auth login`
 - [ ] Uživatel má roli Contributor na cílovém předplatném/skupině zdrojů
-- [ ] Konfigurován service principal pro CI/CD (pokud je relevantní)
+- [ ] Konfigurován servisní účet pro CI/CD (pokud je relevantní)
 - [ ] Žádné vypršelé certifikáty nebo přihlašovací údaje
 
-#### ✅ Ověření šablon
+#### ✅ Validace šablon
 - [ ] `azure.yaml` existuje a je validní YAML
 - [ ] Všechny služby definované v azure.yaml mají odpovídající zdrojový kód
-- [ ] Šablony Bicep v adresáři `infra/` jsou přítomné
+- [ ] Bicep šablony v adresáři `infra/` jsou přítomny
 - [ ] `main.bicep` se kompiluje bez chyb (`az bicep build --file infra/main.bicep`)
 - [ ] Všechny požadované parametry mají výchozí hodnoty nebo budou poskytnuty
 - [ ] Žádné pevně zakódované tajné údaje v šablonách
 
 #### ✅ Plánování zdrojů
-- [ ] Vybrán a ověřen cílový region Azure
+- [ ] Vybrán a validován cílový region Azure
 - [ ] Požadované služby Azure dostupné v cílovém regionu
 - [ ] Dostupné kvóty pro plánované zdroje
 - [ ] Zkontrolovány konflikty v pojmenování zdrojů
@@ -822,7 +829,7 @@ Vytiskněte tento kontrolní seznam a ověřte každý bod před nasazením:
 - [ ] Konfigurována nastavení firewallu/proxy, pokud je potřeba
 - [ ] Key Vault nakonfigurován pro správu tajných údajů
 - [ ] Použity spravované identity, kde je to možné
-- [ ] Povinné HTTPS pro webové aplikace
+- [ ] Vynuceno HTTPS pro webové aplikace
 
 #### ✅ Správa nákladů
 - [ ] Odhad nákladů vypočítán pomocí Azure Pricing Calculator
@@ -830,7 +837,7 @@ Vytiskněte tento kontrolní seznam a ověřte každý bod před nasazením:
 - [ ] Vybrány vhodné SKU pro typ prostředí
 - [ ] Zvážena rezervovaná kapacita pro produkční zátěže
 
-#### ✅ Monitorování a pozorovatelnost
+#### ✅ Monitoring a pozorovatelnost
 - [ ] Application Insights nakonfigurováno v šablonách
 - [ ] Plánováno Log Analytics workspace
 - [ ] Definována pravidla upozornění pro kritické metriky
@@ -844,9 +851,9 @@ Vytiskněte tento kontrolní seznam a ověřte každý bod před nasazením:
 
 ---
 
-## Ověření prostředí
+## Validace prostředí
 
-### Ověření vývojového prostředí
+### Validace vývojového prostředí
 
 ```bash
 #!/bin/bash
@@ -878,7 +885,7 @@ validate_dev_environment() {
 }
 ```
 
-### Ověření produkčního prostředí
+### Validace produkčního prostředí
 
 ```bash
 #!/bin/bash
@@ -919,9 +926,9 @@ validate_prod_environment() {
 
 ---
 
-## Ověření zdrojů
+## Validace zdrojů
 
-### Skript pro ověření kvót
+### Skript pro validaci kvót
 
 ```python
 #!/usr/bin/env python3
@@ -1046,7 +1053,7 @@ if __name__ == "__main__":
 
 ## Kontroly bezpečnosti a souladu
 
-### Skript pro ověření bezpečnosti
+### Skript pro validaci bezpečnosti
 
 ```bash
 #!/bin/bash
@@ -1282,38 +1289,38 @@ steps:
 
 1. **Automatizace, kde je to možné**
    - Integrace kontrol do CI/CD pipeline
-   - Použití skriptů pro opakovatelné ověření
+   - Použití skriptů pro opakovatelné validace
    - Ukládání výsledků pro auditní záznamy
 
-2. **Ověření specifické pro prostředí**
+2. **Validace specifická pro prostředí**
    - Různé kontroly pro vývoj/staging/produkci
    - Odpovídající bezpečnostní požadavky pro každé prostředí
    - Optimalizace nákladů pro neprodukční prostředí
 
 3. **Komplexní pokrytí**
    - Autentizace a oprávnění
-   - Kvóty a dostupnost zdrojů
-   - Ověření šablon a syntaxe
+   - Kvóty zdrojů a dostupnost
+   - Validace šablon a syntaxe
    - Požadavky na bezpečnost a soulad
 
 4. **Jasné reportování**
    - Barevně odlišené indikátory stavu
-   - Podrobné chybové zprávy s kroky k nápravě
+   - Podrobné chybové zprávy s kroky nápravy
    - Souhrnné zprávy pro rychlé posouzení
 
 5. **Rychlé zastavení**
    - Zastavení nasazení, pokud selžou kritické kontroly
-   - Poskytnutí jasného návodu k řešení
+   - Poskytnutí jasného návodu na řešení
    - Možnost snadného opětovného spuštění kontrol
 
 ### Běžné chyby při kontrolách před nasazením
 
-1. **Přeskakování ověření** pro "rychlá" nasazení
-2. **Nedostatečné ověření oprávnění** před nasazením
+1. **Přeskakování validace** pro "rychlá" nasazení
+2. **Nedostatečné kontroly oprávnění** před nasazením
 3. **Ignorování limitů kvót** až do selhání nasazení
-4. **Nevyhodnocení šablon** v CI/CD pipeline
-5. **Chybějící bezpečnostní ověření** pro produkční prostředí
-6. **Nedostatečný odhad nákladů** vedoucí k překvapení v rozpočtu
+4. **Nevalidování šablon** v CI/CD pipeline
+5. **Vynechání bezpečnostní validace** pro produkční prostředí
+6. **Nedostatečný odhad nákladů**, což vede k překvapení v rozpočtu
 
 ---
 
@@ -1328,4 +1335,4 @@ steps:
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

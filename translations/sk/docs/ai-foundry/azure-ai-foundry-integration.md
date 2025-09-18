@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T23:12:32+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T09:59:51+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "sk"
 }
 -->
 # Integrácia Azure AI Foundry s AZD
 
-**Predchádzajúce:** [Prvý projekt](../getting-started/first-project.md) | **Ďalšie:** [Nasadenie AI modelu](ai-model-deployment.md)
+**Navigácia v kapitole:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj orientovaný na AI
+- **⬅️ Predchádzajúca kapitola**: [Kapitola 1: Váš prvý projekt](../getting-started/first-project.md)
+- **➡️ Ďalej**: [Nasadenie AI modelu](ai-model-deployment.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 3: Konfigurácia](../getting-started/configuration.md)
 
 ## Prehľad
 
@@ -21,23 +26,23 @@ Azure AI Foundry je jednotná platforma od Microsoftu pre vývoj AI, ktorá zah�
 
 - **Katalóg modelov**: Prístup k najmodernejším AI modelom
 - **Prompt Flow**: Vizualizér pre AI pracovné postupy
-- **Portál AI Foundry**: Integrované vývojové prostredie pre AI aplikácie
+- **AI Foundry Portal**: Integrované vývojové prostredie pre AI aplikácie
 - **Možnosti nasadenia**: Viacero možností hostingu a škálovania
 - **Bezpečnosť a ochrana**: Zabudované funkcie zodpovednej AI
 
 ## AZD + Azure AI Foundry: Lepšie spolu
 
-| Funkcia | Azure AI Foundry | Výhody integrácie s AZD |
-|---------|------------------|-------------------------|
+| Funkcia | Azure AI Foundry | Výhoda integrácie s AZD |
+|---------|-----------------|------------------------|
 | **Nasadenie modelov** | Manuálne nasadenie cez portál | Automatizované, opakovateľné nasadenia |
-| **Infraštruktúra** | Klikacie nastavenie | Infraštruktúra ako kód (Bicep) |
-| **Správa prostredí** | Zameranie na jedno prostredie | Viac prostredí (dev/staging/prod) |
+| **Infraštruktúra** | Klikacie zriadenie | Infraštruktúra ako kód (Bicep) |
+| **Správa prostredí** | Zameranie na jedno prostredie | Viac prostredí (vývoj/testovanie/produkcia) |
 | **Integrácia CI/CD** | Obmedzená | Natívna podpora GitHub Actions |
 | **Správa nákladov** | Základné monitorovanie | Optimalizácia nákladov podľa prostredia |
 
 ## Predpoklady
 
-- Azure predplatné s vhodnými oprávneniami
+- Azure predplatné s príslušnými oprávneniami
 - Nainštalovaný Azure Developer CLI
 - Prístup k službám Azure OpenAI
 - Základná znalosť Azure AI Foundry
@@ -94,9 +99,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Vzor 2: AI vyhľadávanie + RAG integrácia
+### Vzor 2: Integrácia AI Search + RAG
 
-**Použitie**: Nasadenie aplikácií s generovaním podporovaným vyhľadávaním (RAG)
+**Použitie**: Nasadenie aplikácií s retrieval-augmented generation (RAG)
 
 ```bicep
 // Azure AI Search
@@ -124,7 +129,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Vzor 3: Integrácia dokumentovej inteligencie
+### Vzor 3: Integrácia Document Intelligence
 
 **Použitie**: Pracovné postupy na spracovanie a analýzu dokumentov
 
@@ -157,7 +162,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Konfiguračné vzory
+## 🔧 Vzory konfigurácie
 
 ### Nastavenie premenných prostredia
 
@@ -233,7 +238,7 @@ azd provision  # Infrastructure only
 azd deploy     # Application only
 ```
 
-### Nasadenia podľa prostredia
+### Nasadenia špecifické pre prostredie
 
 ```bash
 # Development environment
@@ -252,7 +257,7 @@ azd up
 
 ## Monitorovanie a pozorovateľnosť
 
-### Integrácia Application Insights
+### Integrácia s Application Insights
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -315,7 +320,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 Najlepšie bezpečnostné postupy
 
-### Konfigurácia spravovanej identity
+### Konfigurácia Managed Identity
 
 ```bicep
 // Managed identity for the web application
@@ -362,7 +367,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Optimalizácia výkonu
 
-### Stratégie ukladania do vyrovnávacej pamäte
+### Stratégie cachovania
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -431,7 +436,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 ### Problém 1: Prekročenie kvóty OpenAI
 
 **Príznaky:**
-- Nasadenie zlyhá kvôli chybám kvóty
+- Nasadenie zlyhá s chybami kvóty
 - Chyby 429 v logoch aplikácie
 
 **Riešenia:**
@@ -448,11 +453,11 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Problém 2: Zlyhanie autentifikácie
+### Problém 2: Chyby autentifikácie
 
 **Príznaky:**
 - Chyby 401/403 pri volaní AI služieb
-- Hlásenia "Prístup zamietnutý"
+- Hlásenia „Prístup zamietnutý“
 
 **Riešenia:**
 ```bash
@@ -485,7 +490,7 @@ az cognitiveservices model list --location eastus
 
 ### Základná chatovacia aplikácia
 
-**Repozitár**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**Úložisko**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Služby**: Azure OpenAI + Cognitive Search + App Service
 
@@ -497,7 +502,7 @@ azd up
 
 ### Pipeline na spracovanie dokumentov
 
-**Repozitár**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**Úložisko**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
 **Služby**: Document Intelligence + Storage + Functions
 
@@ -509,7 +514,7 @@ azd up
 
 ### Podnikový chat s RAG
 
-**Repozitár**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**Úložisko**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **Služby**: Azure OpenAI + Search + Container Apps + Cosmos DB
 
@@ -521,8 +526,8 @@ azd up
 
 ## Ďalšie kroky
 
-1. **Vyskúšajte príklady**: Začnite s predpripravenou šablónou, ktorá zodpovedá vášmu použitiu
-2. **Prispôsobte si podľa potreby**: Upravte infraštruktúru a kód aplikácie
+1. **Vyskúšajte príklady**: Začnite s predpripravenou šablónou, ktorá zodpovedá vášmu prípadu použitia
+2. **Prispôsobte si riešenie**: Upravte infraštruktúru a kód aplikácie
 3. **Pridajte monitorovanie**: Implementujte komplexnú pozorovateľnosť
 4. **Optimalizujte náklady**: Doladte konfigurácie podľa vášho rozpočtu
 5. **Zabezpečte nasadenie**: Implementujte bezpečnostné vzory pre podniky
@@ -536,11 +541,16 @@ azd up
 
 ---
 
-**Predchádzajúce:** [Prvý projekt](../getting-started/first-project.md) | **Ďalšie:** [Nasadenie AI modelu](ai-model-deployment.md)
+**Navigácia v kapitole:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj orientovaný na AI
+- **⬅️ Predchádzajúca kapitola**: [Kapitola 1: Váš prvý projekt](../getting-started/first-project.md)
+- **➡️ Ďalej**: [Nasadenie AI modelu](ai-model-deployment.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 3: Konfigurácia](../getting-started/configuration.md)
 
-**Potrebujete pomoc?** Pripojte sa k diskusiám komunity alebo otvorte problém v repozitári. Komunita Azure AI + AZD je tu, aby vám pomohla uspieť!
+**Potrebujete pomoc?** Pripojte sa k diskusiám komunity alebo otvorte problém v úložisku. Komunita Azure AI + AZD je tu, aby vám pomohla uspieť!
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:21:10+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T09:40:27+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "cs"
 }
 -->
 # Nasazení AI modelů pomocí Azure Developer CLI
 
-**Předchozí:** [Integrace Azure AI Foundry](azure-ai-foundry-integration.md) | **Další:** [AI Workshop Lab](ai-workshop-lab.md)
+**Navigace kapitol:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+- **⬅️ Předchozí**: [Integrace Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Další**: [Laboratoř AI Workshop](ai-workshop-lab.md)
+- **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
-Tento průvodce poskytuje podrobné instrukce pro nasazení AI modelů pomocí šablon AZD, od výběru modelu až po vzory nasazení do produkčního prostředí.
+Tento průvodce poskytuje komplexní pokyny pro nasazení AI modelů pomocí šablon AZD, od výběru modelu až po vzory nasazení do produkce.
 
 ## Obsah
 
@@ -19,7 +24,7 @@ Tento průvodce poskytuje podrobné instrukce pro nasazení AI modelů pomocí �
 - [Konfigurace AZD pro AI modely](../../../../docs/ai-foundry)
 - [Vzory nasazení](../../../../docs/ai-foundry)
 - [Správa modelů](../../../../docs/ai-foundry)
-- [Produkční aspekty](../../../../docs/ai-foundry)
+- [Úvahy o produkci](../../../../docs/ai-foundry)
 - [Monitoring a pozorovatelnost](../../../../docs/ai-foundry)
 
 ## Strategie výběru modelu
@@ -56,8 +61,8 @@ services:
 
 ### Plánování kapacity modelu
 
-| Typ modelu | Případ použití | Doporučená kapacita | Nákladové aspekty |
-|------------|---------------|---------------------|-------------------|
+| Typ modelu | Případ použití | Doporučená kapacita | Náklady |
+|------------|---------------|---------------------|---------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Nákladově efektivní pro většinu úloh |
 | GPT-4 | Komplexní uvažování | 20-100 TPM | Vyšší náklady, vhodné pro prémiové funkce |
 | Text-embedding-ada-002 | Vyhledávání, RAG | 30-120 TPM | Nezbytné pro sémantické vyhledávání |
@@ -231,7 +236,7 @@ Sledujte verze modelů ve vaší konfiguraci AZD:
 
 ### Aktualizace modelů
 
-Používejte AZD hooks pro aktualizace modelů:
+Použijte AZD hooks pro aktualizace modelů:
 
 ```bash
 #!/bin/bash
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Produkční aspekty
+## Úvahy o produkci
 
 ### Plánování kapacity
 
@@ -478,7 +483,7 @@ async def check_ai_models():
 ## Další kroky
 
 1. **Projděte si [Průvodce integrací Azure AI Foundry](azure-ai-foundry-integration.md)** pro vzory integrace služeb
-2. **Dokončete [AI Workshop Lab](ai-workshop-lab.md)** pro praktické zkušenosti
+2. **Dokončete [Laboratoř AI Workshop](ai-workshop-lab.md)** pro praktické zkušenosti
 3. **Implementujte [Produkční AI praktiky](production-ai-practices.md)** pro podniková nasazení
 4. **Prozkoumejte [Průvodce řešením problémů s AI](../troubleshooting/ai-troubleshooting.md)** pro běžné problémy
 
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**Předchozí:** [Integrace Azure AI Foundry](azure-ai-foundry-integration.md) | **Další:** [AI Workshop Lab](ai-workshop-lab.md)
+**Navigace kapitol:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+- **⬅️ Předchozí**: [Integrace Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Další**: [Laboratoř AI Workshop](ai-workshop-lab.md)
+- **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

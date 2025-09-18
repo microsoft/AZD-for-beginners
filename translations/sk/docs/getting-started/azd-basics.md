@@ -1,19 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T22:25:38+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T10:02:42+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sk"
 }
 -->
 # AZD Základy - Porozumenie Azure Developer CLI
 
-**Predchádzajúce:** [Inštalácia a nastavenie](installation.md) | **Ďalšie:** [Konfigurácia](configuration.md)
+# AZD Základy - Hlavné koncepty a základy
+
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly štart
+- **⬅️ Predchádzajúca**: [Prehľad kurzu](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Ďalšia**: [Inštalácia & Nastavenie](installation.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Úvod
 
-Táto lekcia vás zoznámi s Azure Developer CLI (azd), výkonným nástrojom príkazového riadku, ktorý urýchľuje váš prechod od lokálneho vývoja k nasadeniu na Azure. Naučíte sa základné koncepty, kľúčové funkcie a pochopíte, ako azd zjednodušuje nasadenie cloudových aplikácií.
+Táto lekcia vás zoznámi s Azure Developer CLI (azd), výkonným nástrojom príkazového riadku, ktorý urýchľuje váš prechod od lokálneho vývoja k nasadeniu na Azure. Naučíte sa základné koncepty, hlavné funkcie a pochopíte, ako azd zjednodušuje nasadenie cloud-native aplikácií.
 
 ## Ciele učenia
 
@@ -35,16 +42,16 @@ Po dokončení tejto lekcie budete schopní:
 
 ## Čo je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchlenie vášho prechodu od lokálneho vývoja k nasadeniu na Azure. Zjednodušuje proces budovania, nasadzovania a správy cloudových aplikácií na Azure.
+Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchlenie vášho prechodu od lokálneho vývoja k nasadeniu na Azure. Zjednodušuje proces budovania, nasadzovania a správy cloud-native aplikácií na Azure.
 
 ## Základné koncepty
 
 ### Šablóny
 Šablóny sú základom azd. Obsahujú:
-- **Aplikačný kód** - Váš zdrojový kód a závislosti
+- **Kód aplikácie** - Váš zdrojový kód a závislosti
 - **Definície infraštruktúry** - Azure zdroje definované v Bicep alebo Terraform
 - **Konfiguračné súbory** - Nastavenia a environmentálne premenné
-- **Nasadzovacie skripty** - Automatizované pracovné postupy nasadenia
+- **Skripty nasadenia** - Automatizované pracovné postupy nasadenia
 
 ### Prostredia
 Prostredia predstavujú rôzne ciele nasadenia:
@@ -190,7 +197,7 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## Porozumenie `azd down --force --purge`
+## Pochopenie `azd down --force --purge`
 Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť vaše prostredie azd a všetky súvisiace zdroje. Tu je rozpis, čo jednotlivé flagy robia:
 ```
 --force
@@ -204,9 +211,9 @@ Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť 
 ```
 Odstráni **všetky súvisiace metadáta**, vrátane:
 Stav prostredia
-Lokálny priečinok `.azure`
-Cache informácie o nasadení
-Zabraňuje azd "pamätať si" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nesúlad resource groups alebo zastarané registry.
+Lokálny `.azure` priečinok
+Cache informácií o nasadení
+Zabraňuje azd "pamätať si" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nesprávne resource groups alebo zastarané registry.
 
 ### Prečo použiť oboje?
 Keď narazíte na problémy s `azd up` kvôli pretrvávajúcemu stavu alebo čiastočným nasadeniam, táto kombinácia zabezpečí **čistý štart**.
@@ -265,7 +272,7 @@ azd init --template template1
 
 ### 2. Využívajte šablóny
 - Začnite s existujúcimi šablónami
-- Prispôsobte si ich podľa svojich potrieb
+- Prispôsobte ich svojim potrebám
 - Vytvorte opakovane použiteľné šablóny pre vašu organizáciu
 
 ### 3. Izolácia prostredí
@@ -275,7 +282,7 @@ azd init --template template1
 
 ### 4. Správa konfigurácie
 - Používajte environmentálne premenné pre citlivé údaje
-- Uchovávajte konfiguráciu vo verziovacom systéme
+- Udržujte konfiguráciu vo verziovacej kontrole
 - Dokumentujte nastavenia špecifické pre prostredie
 
 ## Postup učenia
@@ -289,7 +296,7 @@ azd init --template template1
 ### Stredne pokročilý (3-4 týždne)
 1. Prispôsobte šablóny
 2. Spravujte viaceré prostredia
-3. Pochopte infraštruktúrny kód
+3. Pochopte kód infraštruktúry
 4. Nastavte CI/CD pipelines
 
 ### Pokročilý (5+ týždňov)
@@ -300,11 +307,15 @@ azd init --template template1
 
 ## Ďalšie kroky
 
-- [Inštalácia a nastavenie](installation.md) - Nainštalujte a nakonfigurujte azd
-- [Váš prvý projekt](first-project.md) - Praktický tutoriál
-- [Príručka konfigurácie](configuration.md) - Pokročilé možnosti konfigurácie
+**📖 Pokračujte v učení kapitoly 1:**
+- [Inštalácia & Nastavenie](installation.md) - Nainštalujte a nakonfigurujte azd
+- [Váš prvý projekt](first-project.md) - Dokončite praktický tutoriál
+- [Konfiguračný sprievodca](configuration.md) - Pokročilé možnosti konfigurácie
 
-## Dodatočné zdroje
+**🎯 Pripravení na ďalšiu kapitolu?**
+- [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md) - Začnite budovať AI aplikácie
+
+## Ďalšie zdroje
 
 - [Prehľad Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galéria šablón](https://azure.github.io/awesome-azd/)
@@ -312,8 +323,12 @@ azd init --template template1
 
 ---
 
-**Predchádzajúce:** [Inštalácia a nastavenie](installation.md) | **Ďalšie:** [Konfigurácia](configuration.md)
-- **Ďalšia lekcia**: [Inštalácia a nastavenie](installation.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly štart  
+- **⬅️ Predchádzajúca**: [Prehľad kurzu](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Ďalšia**: [Inštalácia & Nastavenie](installation.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:20:42+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T08:55:52+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "sw"
 }
 -->
 # Utekelezaji wa Modeli za AI kwa Azure Developer CLI
 
-**Iliyopita:** [Muunganisho wa Azure AI Foundry](azure-ai-foundry-integration.md) | **Inayofuata:** [Maabara ya Warsha ya AI](ai-workshop-lab.md)
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza
+- **⬅️ Iliyopita**: [Muunganisho wa Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Inayofuata**: [Maabara ya Warsha ya AI](ai-workshop-lab.md)
+- **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)
 
-Mwongozo huu unatoa maelekezo ya kina ya kupeleka modeli za AI kwa kutumia templeti za AZD, kuanzia uteuzi wa modeli hadi mifumo ya utekelezaji wa uzalishaji.
+Mwongozo huu unatoa maelekezo ya kina kuhusu jinsi ya kupeleka modeli za AI kwa kutumia templeti za AZD, kuanzia kuchagua modeli hadi mifumo ya utekelezaji wa uzalishaji.
 
 ## Jedwali la Maudhui
 
-- [Mkakati wa Uteuzi wa Modeli](../../../../docs/ai-foundry)
+- [Mkakati wa Uchaguzi wa Modeli](../../../../docs/ai-foundry)
 - [Usanidi wa AZD kwa Modeli za AI](../../../../docs/ai-foundry)
 - [Mifumo ya Utekelezaji](../../../../docs/ai-foundry)
 - [Usimamizi wa Modeli](../../../../docs/ai-foundry)
 - [Masuala ya Uzalishaji](../../../../docs/ai-foundry)
 - [Ufuatiliaji na Uangalizi](../../../../docs/ai-foundry)
 
-## Mkakati wa Uteuzi wa Modeli
+## Mkakati wa Uchaguzi wa Modeli
 
 ### Modeli za Azure OpenAI
 
@@ -59,13 +64,13 @@ services:
 | Aina ya Modeli | Matumizi | Uwezo Unaopendekezwa | Masuala ya Gharama |
 |----------------|----------|---------------------|-------------------|
 | GPT-4o-mini | Gumzo, Maswali na Majibu | 10-50 TPM | Gharama nafuu kwa kazi nyingi |
-| GPT-4 | Udadisi wa hali ya juu | 20-100 TPM | Gharama ya juu, tumia kwa vipengele vya premium |
+| GPT-4 | Utoaji wa hoja ngumu | 20-100 TPM | Gharama ya juu, tumia kwa vipengele vya premium |
 | Text-embedding-ada-002 | Utafutaji, RAG | 30-120 TPM | Muhimu kwa utafutaji wa semantiki |
 | Whisper | Hotuba hadi maandishi | 10-50 TPM | Kazi za usindikaji wa sauti |
 
 ## Usanidi wa AZD kwa Modeli za AI
 
-### Usanidi wa Templeti za Bicep
+### Usanidi wa Templeti ya Bicep
 
 Unda utekelezaji wa modeli kupitia templeti za Bicep:
 
@@ -173,7 +178,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Inafaa kwa:
 - Programu za kimataifa
-- Mahitaji ya upatikanaji wa hali ya juu
+- Mahitaji ya upatikanaji wa juu
 - Usambazaji wa mzigo
 
 ### Mfumo 3: Utekelezaji wa Mseto
@@ -231,7 +236,7 @@ Fuatilia matoleo ya modeli katika usanidi wako wa AZD:
 
 ### Sasisho za Modeli
 
-Tumia ndoano za AZD kwa sasisho za modeli:
+Tumia AZD hooks kwa sasisho za modeli:
 
 ```bash
 #!/bin/bash
@@ -371,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Muunganisho wa Application Insights
 
-Sanidi ufuatiliaji wa kazi za AI:
+Sanidi ufuatiliaji kwa kazi za AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -475,7 +480,7 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Hatua Zinazofuata
+## Hatua Zingine
 
 1. **Pitia [Mwongozo wa Muunganisho wa Azure AI Foundry](azure-ai-foundry-integration.md)** kwa mifumo ya muunganisho wa huduma
 2. **Kamilisha [Maabara ya Warsha ya AI](ai-workshop-lab.md)** kwa uzoefu wa vitendo
@@ -491,7 +496,12 @@ async def check_ai_models():
 
 ---
 
-**Iliyopita:** [Muunganisho wa Azure AI Foundry](azure-ai-foundry-integration.md) | **Inayofuata:** [Maabara ya Warsha ya AI](ai-workshop-lab.md)
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza
+- **⬅️ Iliyopita**: [Muunganisho wa Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Inayofuata**: [Maabara ya Warsha ya AI](ai-workshop-lab.md)
+- **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)
 
 ---
 

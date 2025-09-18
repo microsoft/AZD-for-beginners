@@ -1,35 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T23:15:46+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T08:55:22+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "sw"
 }
 -->
-# Mazoezi Bora ya Kazi za AI za Uzalishaji na AZD
+# Mazoezi Bora ya Kazi za AI Katika Uzalishaji kwa AZD
 
-**Iliyopita:** [AI Workshop Lab](ai-workshop-lab.md) | **Inayofuata:** [Mwongozo wa Kutatua Matatizo ya AI](../troubleshooting/ai-troubleshooting.md)
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 8 - Mifumo ya Uzalishaji na Biashara
+- **⬅️ Sura Iliyopita**: [Sura ya 7: Utatuzi wa Shida](../troubleshooting/debugging.md)
+- **⬅️ Pia Inahusiana**: [Maabara ya AI Workshop](ai-workshop-lab.md)
+- **🎯 Kozi Imekamilika**: [AZD Kwa Wanaoanza](../../README.md)
 
 ## Muhtasari
 
-Mwongozo huu unatoa mazoezi bora ya kina kwa kupeleka kazi za AI zilizo tayari kwa uzalishaji kwa kutumia Azure Developer CLI (AZD). Umejengwa kwa maoni kutoka kwa jamii ya Azure AI Foundry Discord na utekelezaji halisi wa wateja, mazoezi haya yanashughulikia changamoto za kawaida katika mifumo ya AI ya uzalishaji.
+Mwongozo huu unatoa mazoea bora ya kina kwa ajili ya kupeleka kazi za AI zilizo tayari kwa uzalishaji kwa kutumia Azure Developer CLI (AZD). Ukitegemea maoni kutoka kwa jamii ya Azure AI Foundry Discord na utekelezaji wa wateja halisi, mazoea haya yanashughulikia changamoto za kawaida katika mifumo ya AI ya uzalishaji.
 
 ## Changamoto Muhimu Zinazoshughulikiwa
 
 Kulingana na matokeo ya kura ya jamii yetu, hizi ndizo changamoto kuu ambazo watengenezaji wanakutana nazo:
 
-- **45%** wanapata ugumu katika kupeleka AI yenye huduma nyingi
-- **38%** wanakumbana na matatizo ya usimamizi wa hati na siri  
-- **35%** wanapata ugumu wa utayari wa uzalishaji na upanuzi
+- **45%** wanapata ugumu na utekelezaji wa huduma nyingi za AI
+- **38%** wanakumbana na matatizo ya usimamizi wa sifa na siri  
+- **35%** wanapata ugumu katika utayari wa uzalishaji na upanuzi
 - **32%** wanahitaji mikakati bora ya kupunguza gharama
-- **29%** wanahitaji ufuatiliaji na utatuzi bora zaidi
+- **29%** wanahitaji ufuatiliaji na utatuzi wa shida ulioimarishwa
 
-## Miundo ya Usanifu kwa AI ya Uzalishaji
+## Mifumo ya Usanifu kwa AI ya Uzalishaji
 
-### Muundo 1: Usanifu wa AI wa Huduma Ndogo
+### Mfano 1: Usanifu wa AI wa Huduma Ndogo
 
-**Wakati wa kutumia**: Programu za AI ngumu zenye uwezo mwingi
+**Wakati wa kutumia**: Programu changamano za AI zenye uwezo mwingi
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -71,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Muundo 2: Usindikaji wa AI Unaotegemea Matukio
+### Mfano 2: Usindikaji wa AI Unaotegemea Matukio
 
-**Wakati wa kutumia**: Usindikaji wa kundi, uchambuzi wa nyaraka, kazi za async
+**Wakati wa kutumia**: Usindikaji wa kundi, uchambuzi wa nyaraka, michakato isiyo ya wakati mmoja
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -120,15 +125,15 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Mazoezi Bora ya Usalama
+## Mazoea Bora ya Usalama
 
 ### 1. Mfano wa Usalama wa Zero-Trust
 
 **Mkakati wa Utekelezaji**:
-- Hakuna mawasiliano ya huduma kwa huduma bila uthibitisho
-- Simu zote za API zinatumia vitambulisho vilivyodhibitiwa
-- Kutengwa kwa mtandao na vituo vya mwisho vya kibinafsi
-- Udhibiti wa ufikiaji wa kiwango cha chini
+- Hakuna mawasiliano ya huduma kwa huduma bila uthibitishaji
+- Simu zote za API zinatumia managed identities
+- Kutengwa kwa mtandao kwa kutumia private endpoints
+- Udhibiti wa ufikiaji wa kiwango cha chini zaidi
 
 ```bicep
 // Managed Identity for each service
@@ -151,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Usimamizi Salama wa Siri
 
-**Muundo wa Ujumuishaji wa Key Vault**:
+**Mfano wa Ujumuishaji wa Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -186,7 +191,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Usalama wa Mtandao
 
-**Usanidi wa Vituo vya Mwisho vya Kibinafsi**:
+**Usanidi wa Private Endpoint**:
 
 ```bicep
 // Virtual Network for AI services
@@ -248,7 +253,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. Mikakati ya Kujiendesha kwa Upanuzi
 
-**Kujiendesha kwa Upanuzi wa Programu za Kontena**:
+**Upanuzi wa Programu za Kontena**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -292,7 +297,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Mikakati ya Kuhifadhi
+### 2. Mikakati ya Caching
 
 **Redis Cache kwa Majibu ya AI**:
 
@@ -322,9 +327,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Usimamizi wa Mizigo na Trafiki
+### 3. Usawazishaji wa Mzigo na Usimamizi wa Trafiki
 
-**Lango la Programu na WAF**:
+**Application Gateway na WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -362,7 +367,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Kupunguza Gharama
 
-### 1. Usanidi wa Rasilimali Sahihi
+### 1. Usanidi wa Rasilimali kwa Usahihi
 
 **Usanidi Maalum wa Mazingira**:
 
@@ -456,7 +461,7 @@ class TokenOptimizer {
 
 ## Ufuatiliaji na Uangalizi
 
-### 1. Ufuatiliaji Kamili wa Programu
+### 1. Ufuatiliaji Kamili wa Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -601,9 +606,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Urejeshaji wa Maafa na Upatikanaji wa Juu
+## Urejeshaji wa Majanga na Upatikanaji wa Juu
 
-### 1. Upelekwaji wa Kanda Nyingi
+### 1. Utekelezaji wa Kanda Nyingi
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -835,42 +840,42 @@ echo "Infrastructure validation completed successfully!"
 ## Orodha ya Utayari wa Uzalishaji
 
 ### Usalama ✅
-- [ ] Huduma zote zinatumia vitambulisho vilivyodhibitiwa
+- [ ] Huduma zote zinatumia managed identities
 - [ ] Siri zimehifadhiwa kwenye Key Vault
-- [ ] Vituo vya mwisho vya kibinafsi vimewekwa
+- [ ] Private endpoints zimewekwa
 - [ ] Vikundi vya usalama wa mtandao vimewekwa
-- [ ] RBAC na ufikiaji wa kiwango cha chini
-- [ ] WAF imewezeshwa kwenye vituo vya mwisho vya umma
+- [ ] RBAC na ufikiaji wa kiwango cha chini zaidi
+- [ ] WAF imewezeshwa kwenye endpoints za umma
 
 ### Utendaji ✅
-- [ ] Kujiendesha kwa upanuzi kumewekwa
-- [ ] Kuhifadhi kumewekwa
-- [ ] Usawazishaji wa mizigo umewekwa
-- [ ] CDN kwa maudhui ya tuli
-- [ ] Uunganishaji wa hifadhidata umeboreshwa
+- [ ] Upanuzi wa kiotomatiki umewekwa
+- [ ] Caching imetekelezwa
+- [ ] Usawazishaji wa mzigo umewekwa
+- [ ] CDN kwa maudhui tuli
+- [ ] Pooling ya muunganisho wa hifadhidata
 - [ ] Uboreshaji wa matumizi ya tokeni
 
 ### Ufuatiliaji ✅
-- [ ] Ufuatiliaji wa Programu umewekwa
-- [ ] Vipimo maalum vimefafanuliwa
+- [ ] Application Insights imewekwa
+- [ ] Vipimo maalum vimeainishwa
 - [ ] Sheria za tahadhari zimewekwa
 - [ ] Dashibodi imeundwa
-- [ ] Ukaguzi wa afya umewekwa
+- [ ] Ukaguzi wa afya umetumika
 - [ ] Sera za uhifadhi wa kumbukumbu
 
 ### Uaminifu ✅
-- [ ] Upelekwaji wa kanda nyingi
+- [ ] Utekelezaji wa kanda nyingi
 - [ ] Mpango wa hifadhi na urejeshaji
-- [ ] Vizuizi vya mzunguko vimewekwa
-- [ ] Sera za kurudia zimewekwa
-- [ ] Kupungua kwa neema
-- [ ] Vituo vya ukaguzi wa afya
+- [ ] Circuit breakers zimetekelezwa
+- [ ] Sera za majaribio zimewekwa
+- [ ] Kupungua kwa utendaji kwa neema
+- [ ] Endpoints za ukaguzi wa afya
 
 ### Usimamizi wa Gharama ✅
 - [ ] Tahadhari za bajeti zimewekwa
-- [ ] Usanidi wa rasilimali sahihi
+- [ ] Usanidi wa rasilimali kwa usahihi
 - [ ] Punguzo la dev/test limetumika
-- [ ] Vipindi vilivyohifadhiwa vimenunuliwa
+- [ ] Instances zilizohifadhiwa zimenunuliwa
 - [ ] Dashibodi ya ufuatiliaji wa gharama
 - [ ] Mapitio ya gharama ya mara kwa mara
 
@@ -878,7 +883,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Mahitaji ya makazi ya data yametimizwa
 - [ ] Kumbukumbu za ukaguzi zimewezeshwa
 - [ ] Sera za uzingatiaji zimetumika
-- [ ] Misingi ya usalama imewekwa
+- [ ] Misingi ya usalama imetekelezwa
 - [ ] Tathmini za usalama za mara kwa mara
 - [ ] Mpango wa kukabiliana na matukio
 
@@ -888,14 +893,14 @@ echo "Infrastructure validation completed successfully!"
 
 | Kipimo | Lengo | Ufuatiliaji |
 |--------|--------|------------|
-| **Muda wa Majibu** | < sekunde 2 | Ufuatiliaji wa Programu |
+| **Muda wa Majibu** | < Sekunde 2 | Application Insights |
 | **Upatikanaji** | 99.9% | Ufuatiliaji wa Uptime |
 | **Kiwango cha Makosa** | < 0.1% | Kumbukumbu za Programu |
 | **Matumizi ya Tokeni** | < $500/mwezi | Usimamizi wa Gharama |
-| **Watumiaji Wakati Ule Ule** | 1000+ | Upimaji wa Mizigo |
-| **Muda wa Urejeshaji** | < saa 1 | Majaribio ya Urejeshaji wa Maafa |
+| **Watumiaji Wakati Mmoja** | 1000+ | Jaribio la Mzigo |
+| **Muda wa Urejeshaji** | < Saa 1 | Majaribio ya Urejeshaji wa Majanga |
 
-### Upimaji wa Mizigo
+### Jaribio la Mzigo
 
 ```bash
 # Load testing script for AI applications
@@ -906,24 +911,24 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Mazoezi Bora ya Jamii
+## 🤝 Mazoea Bora ya Jamii
 
 Kulingana na maoni ya jamii ya Azure AI Foundry Discord:
 
-### Mapendekezo Bora kutoka kwa Jamii:
+### Mapendekezo Muhimu kutoka kwa Jamii:
 
 1. **Anza Kidogo, Panua Polepole**: Anza na SKUs za msingi na panua kulingana na matumizi halisi
 2. **Fuatilia Kila Kitu**: Weka ufuatiliaji wa kina tangu siku ya kwanza
 3. **Usalama wa Kiotomatiki**: Tumia miundombinu kama msimbo kwa usalama thabiti
-4. **Jaribu Kwa Kina**: Jumuisha upimaji maalum wa AI kwenye mkondo wako
+4. **Jaribu Kikamilifu**: Jumuisha majaribio maalum ya AI kwenye mtiririko wako
 5. **Panga Gharama**: Fuatilia matumizi ya tokeni na weka tahadhari za bajeti mapema
 
 ### Makosa ya Kawaida ya Kuepuka:
 
-- ❌ Kuhifadhi funguo za API moja kwa moja kwenye msimbo
+- ❌ Kuhifadhi API keys kwenye msimbo
 - ❌ Kutoweka ufuatiliaji sahihi
 - ❌ Kupuuza uboreshaji wa gharama
-- ❌ Kutokujaribu hali za kushindwa
+- ❌ Kutofanya majaribio ya hali za kushindwa
 - ❌ Kuweka bila ukaguzi wa afya
 
 ## Rasilimali za Ziada
@@ -935,11 +940,16 @@ Kulingana na maoni ya jamii ya Azure AI Foundry Discord:
 
 ---
 
-**Iliyopita:** [AI Workshop Lab](ai-workshop-lab.md) | **Inayofuata:** [Mwongozo wa Kutatua Matatizo ya AI](../troubleshooting/ai-troubleshooting.md)
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 8 - Mifumo ya Uzalishaji na Biashara
+- **⬅️ Sura Iliyopita**: [Sura ya 7: Utatuzi wa Shida](../troubleshooting/debugging.md)
+- **⬅️ Pia Inahusiana**: [Maabara ya AI Workshop](ai-workshop-lab.md)
+- **🎆 Kozi Imekamilika**: [AZD Kwa Wanaoanza](../../README.md)
 
-**Kumbuka**: Kazi za AI za uzalishaji zinahitaji mipango makini, ufuatiliaji, na uboreshaji endelevu. Anza na miundo hii na uirekebishe kulingana na mahitaji yako maalum.
+**Kumbuka**: Kazi za AI za uzalishaji zinahitaji mipango makini, ufuatiliaji, na uboreshaji wa mara kwa mara. Anza na mifumo hii na uibadilishe kulingana na mahitaji yako maalum.
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

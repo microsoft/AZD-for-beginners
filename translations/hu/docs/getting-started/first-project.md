@@ -1,27 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T22:15:33+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-18T09:17:56+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "hu"
 }
 -->
 # Az első projekted - Gyakorlati útmutató
 
-**Előző:** [Konfiguráció](configuration.md) | **Következő:** [Azure AI Foundry integráció](../ai-foundry/azure-ai-foundry-integration.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 1. fejezet - Alapok és gyors kezdés
+- **⬅️ Előző**: [Telepítés és beállítás](installation.md)
+- **➡️ Következő**: [Konfiguráció](configuration.md)
+- **🚀 Következő fejezet**: [2. fejezet: AI-First fejlesztés](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Bevezetés
 
-Üdvözlünk az első Azure Developer CLI projektedben! Ez az átfogó gyakorlati útmutató végigvezet egy teljes körű alkalmazás létrehozásán, telepítésén és kezelésén az Azure-on az azd használatával. Egy valós todo alkalmazással fogsz dolgozni, amely React frontendet, Node.js API backendet és MongoDB adatbázist tartalmaz.
+Üdvözlünk az első Azure Developer CLI projektedben! Ez az átfogó gyakorlati útmutató bemutatja, hogyan hozhatsz létre, telepíthetsz és kezelhetsz egy teljes körű alkalmazást az Azure-on az azd segítségével. Egy valós todo alkalmazással fogsz dolgozni, amely React frontendet, Node.js API backendet és MongoDB adatbázist tartalmaz.
 
 ## Tanulási célok
 
 A tutorial elvégzésével:
 - Elsajátítod az azd projekt inicializálási folyamatát sablonok használatával
-- Megérted az Azure Developer CLI projektstruktúráját és konfigurációs fájljait
-- Teljes alkalmazást telepítesz az Azure-ra, beleértve az infrastruktúra létrehozását
-- Alkalmazásfrissítési és újratelepítési stratégiákat valósítasz meg
+- Megérted az Azure Developer CLI projekt struktúráját és konfigurációs fájljait
+- Teljes alkalmazás telepítést hajtasz végre az Azure-ra, beleértve az infrastruktúra létrehozását
+- Alkalmazásfrissítéseket és újratelepítési stratégiákat valósítasz meg
 - Több környezetet kezelsz fejlesztéshez és teszteléshez
 - Erőforrások tisztítását és költségkezelési gyakorlatokat alkalmazol
 
@@ -29,7 +34,7 @@ A tutorial elvégzésével:
 
 A tutorial befejezése után képes leszel:
 - Önállóan inicializálni és konfigurálni azd projekteket sablonokból
-- Hatékonyan navigálni és módosítani azd projektstruktúrákat
+- Hatékonyan navigálni és módosítani azd projekt struktúrákat
 - Teljes körű alkalmazásokat telepíteni az Azure-ra egyetlen parancs segítségével
 - Gyakori telepítési problémákat és hitelesítési hibákat elhárítani
 - Több Azure környezetet kezelni különböző telepítési szakaszokhoz
@@ -80,7 +85,7 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### Mi történt?
-- Letöltöttük a sablonkódot a helyi könyvtáradba
+- Letöltöttük a sablon kódját a helyi könyvtáradba
 - Létrehoztunk egy `azure.yaml` fájlt szolgáltatásdefiníciókkal
 - Beállítottuk az infrastruktúra kódot az `infra/` könyvtárban
 - Létrehoztunk egy környezetkonfigurációt
@@ -125,7 +130,7 @@ my-first-azd-app/
 
 ### Fontos fájlok, amelyeket meg kell érteni
 
-**azure.yaml** - Az azd projekt központi eleme:
+**azure.yaml** - Az azd projekt szíve:
 ```bash
 # View the project configuration
 cat azure.yaml
@@ -181,7 +186,7 @@ azd up
 
 Az `azd up` parancs a következő lépéseket hajtja végre:
 1. **Provision** (`azd provision`) - Azure erőforrások létrehozása
-2. **Package** - Az alkalmazáskód összeállítása
+2. **Package** - Az alkalmazás kódjának összeállítása
 3. **Deploy** (`azd deploy`) - Kód telepítése az Azure erőforrásokra
 
 ### Várható kimenet
@@ -199,8 +204,8 @@ https://app-web-abc123def.azurewebsites.net
 
 ## 5. lépés: Teszteld az alkalmazást
 
-### Az alkalmazás elérése
-Kattints a telepítési kimenetben megadott URL-re, vagy bármikor lekérheted:
+### Hozzáférés az alkalmazáshoz
+Kattints a telepítési kimenetben megadott URL-re, vagy bármikor elérheted:
 ```bash
 # Get application endpoints
 azd show
@@ -214,7 +219,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 2. **Jelöld késznek** - Pipáld ki a kész elemeket
 3. **Töröld az elemeket** - Távolítsd el a már nem szükséges todo-kat
 
-### Az alkalmazás monitorozása
+### Figyeld az alkalmazást
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -239,7 +244,7 @@ Adj hozzá egy egyedi válaszfejlécet:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Csak a kódváltozások telepítése
+### Csak a kódváltozásokat telepítsd
 ```bash
 # Deploy only the application code (skip infrastructure)
 azd deploy
@@ -249,7 +254,7 @@ azd deploy
 
 ## 7. lépés: Több környezet kezelése
 
-Hozz létre egy tesztkörnyezetet, hogy a változtatásokat élesítés előtt tesztelhesd:
+Hozz létre egy tesztkörnyezetet, hogy a változtatásokat a produkció előtt tesztelhesd:
 
 ```bash
 # Create a new staging environment
@@ -298,9 +303,9 @@ Gratulálunk! Sikeresen:
 - Inicializáltál egy azd projektet sablonból
 - Felfedezted a projekt struktúráját és kulcsfontosságú fájljait
 - Telepítettél egy teljes körű alkalmazást az Azure-ra
-- Kódváltoztatásokat végeztél és újratelepítettél
+- Kódváltoztatásokat végeztél és újratelepítetted az alkalmazást
 - Több környezetet kezeltél
-- Erőforrásokat tisztítottál meg
+- Tisztítottad az erőforrásokat
 
 ## Gyakori problémák elhárítása
 
@@ -324,13 +329,13 @@ azd logs --service api
 azd logs --service web
 ```
 
-### Erőforrásnév ütközések
+### Erőforrás névütközések
 ```bash
 # Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Port/Hálózati problémák
+### Port/hálózati problémák
 ```bash
 # Check if ports are available
 netstat -an | grep :3000
@@ -349,10 +354,10 @@ Most, hogy befejezted az első projektedet, fedezd fel ezeket a haladó témáka
 - [GitHub Actions integráció](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Éles környezet legjobb gyakorlatai
+### 3. Produkciós legjobb gyakorlatok
 - [Biztonsági konfigurációk](../deployment/best-practices.md#security)
 - [Teljesítmény optimalizálás](../deployment/best-practices.md#performance)
-- [Monitorozás és naplózás](../deployment/best-practices.md#monitoring)
+- [Monitoring és naplózás](../deployment/best-practices.md#monitoring)
 
 ### 4. További sablonok felfedezése
 ```bash
@@ -386,14 +391,19 @@ azd init --template todo-java-mongo
 
 ---
 
-**Gratulálunk az első azd projekted befejezéséhez!** Most már magabiztosan építhetsz és telepíthetsz lenyűgöző alkalmazásokat az Azure-on.
+**Gratulálunk az első azd projekted befejezéséhez!** Most már készen állsz arra, hogy magabiztosan építs és telepíts lenyűgöző alkalmazásokat az Azure-on.
 
 ---
 
-**Előző:** [Konfiguráció](configuration.md) | **Következő:** [Azure AI Foundry integráció](../ai-foundry/azure-ai-foundry-integration.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 1. fejezet - Alapok és gyors kezdés
+- **⬅️ Előző**: [Telepítés és beállítás](installation.md)
+- **➡️ Következő**: [Konfiguráció](configuration.md)
+- **🚀 Következő fejezet**: [2. fejezet: AI-First fejlesztés](../ai-foundry/azure-ai-foundry-integration.md)
 - **Következő lecke**: [Telepítési útmutató](../deployment/deployment-guide.md)
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

@@ -1,64 +1,68 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T23:29:04+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T09:01:51+00:00",
   "source_file": "workshop/README.md",
   "language_code": "sw"
 }
 -->
 # Warsha ya AZD kwa Waendelezaji wa AI
 
-**Iliyopita:** [Mwongozo wa Kutatua Matatizo ya AI](../docs/troubleshooting/ai-troubleshooting.md) | **Inayofuata:** [Moduli za Maabara ya Warsha](../../../workshop)
+**Uelekezaji wa Warsha**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Anayeanza](../README.md)
+- **📖 Sura Zinazohusiana**: Inashughulikia [Sura ya 1](../README.md#-chapter-1-foundation--quick-start), [Sura ya 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), na [Sura ya 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Maabara ya Vitendo**: [Maabara ya Warsha ya AI](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Hatua Zifuatazo**: [Moduli za Maabara ya Warsha](../../../workshop)
 
-Karibu kwenye warsha ya vitendo ya kujifunza Azure Developer CLI (AZD) kwa lengo la kupeleka programu za AI. Warsha hii imeundwa kukuchukua kutoka misingi ya AZD hadi kupeleka suluhisho za AI tayari kwa uzalishaji.
+Karibu kwenye warsha ya vitendo ya kujifunza Azure Developer CLI (AZD) kwa kuzingatia usambazaji wa programu za AI. Warsha hii imeundwa kukuchukua kutoka misingi ya AZD hadi usambazaji wa suluhisho za AI tayari kwa uzalishaji.
 
 ## Muhtasari wa Warsha
 
 **Muda:** Saa 2-3  
-**Kiwango:** Mwanzoni hadi Kati  
+**Kiwango:** Anayeanza hadi Kati  
 **Mahitaji ya Awali:** Maarifa ya msingi ya Azure, zana za mstari wa amri, na dhana za AI
 
 ### Unachojifunza
 
-- **Misingi ya AZD**: Kuelewa Miundombinu kama Nambari kwa kutumia AZD  
-- 🤖 **Ujumuishaji wa Huduma za AI**: Kupeleka Azure OpenAI, AI Search, na huduma nyingine za AI  
-- **Upelekaji wa Kontena**: Kutumia Azure Container Apps kwa programu za AI  
-- **Mbinu Bora za Usalama**: Kutekeleza Managed Identity na usanidi salama  
-- **Ufuatiliaji na Uangalizi**: Kuweka Application Insights kwa mzigo wa kazi za AI  
-- **Mifumo ya Uzalishaji**: Mikakati ya upelekaji tayari kwa biashara  
+- **Misingi ya AZD**: Kuelewa Miundombinu kama Nambari kwa kutumia AZD
+- 🤖 **Ujumuishaji wa Huduma za AI**: Kusambaza Azure OpenAI, AI Search, na huduma nyingine za AI
+- **Usambazaji wa Kontena**: Kutumia Azure Container Apps kwa programu za AI
+- **Mbinu Bora za Usalama**: Kutekeleza Managed Identity na usanidi salama
+- **Ufuatiliaji na Uangalizi**: Kuweka Application Insights kwa mzigo wa kazi wa AI
+- **Mifumo ya Uzalishaji**: Mikakati ya usambazaji tayari kwa biashara
 
 ## Muundo wa Warsha
 
 ### Moduli ya 1: Misingi ya AZD (Dakika 30)
-- Kusakinisha na kusanidi AZD  
-- Kuelewa muundo wa mradi wa AZD  
-- Upelekaji wako wa kwanza wa AZD  
-- **Maabara**: Peleka programu rahisi ya wavuti  
+- Kusakinisha na kusanidi AZD
+- Kuelewa muundo wa mradi wa AZD
+- Usambazaji wako wa kwanza wa AZD
+- **Maabara**: Sambaza programu rahisi ya wavuti
 
 ### Moduli ya 2: Ujumuishaji wa Azure OpenAI (Dakika 45)
-- Kuweka rasilimali za Azure OpenAI  
-- Mikakati ya upelekaji wa modeli  
-- Kusimamia ufikiaji wa API na uthibitishaji  
-- **Maabara**: Peleka programu ya mazungumzo na GPT-4  
+- Kuweka rasilimali za Azure OpenAI
+- Mikakati ya usambazaji wa modeli
+- Kusimamia ufikiaji wa API na uthibitishaji
+- **Maabara**: Sambaza programu ya mazungumzo na GPT-4
 
 ### Moduli ya 3: Programu za RAG (Dakika 45)
-- Ujumuishaji wa Azure AI Search  
-- Usindikaji wa hati kwa kutumia Azure Document Intelligence  
-- Uwekaji wa vekta na utafutaji wa semantiki  
-- **Maabara**: Tengeneza mfumo wa maswali na majibu wa hati  
+- Ujumuishaji wa Azure AI Search
+- Usindikaji wa hati kwa kutumia Azure Document Intelligence
+- Embeddings za vekta na utafutaji wa semantiki
+- **Maabara**: Jenga mfumo wa Q&A wa hati
 
-### Moduli ya 4: Upelekaji wa Uzalishaji (Dakika 30)
-- Usanidi wa Container Apps  
-- Uboreshaji wa utendaji na upanuzi  
-- Ufuatiliaji na kumbukumbu  
-- **Maabara**: Peleka kwa uzalishaji na uangalizi  
+### Moduli ya 4: Usambazaji wa Uzalishaji (Dakika 30)
+- Usanidi wa Container Apps
+- Uboreshaji wa utendaji na upanuzi
+- Ufuatiliaji na uandishi wa kumbukumbu
+- **Maabara**: Sambaza kwa uzalishaji na uangalizi
 
 ### Moduli ya 5: Mifumo ya Juu (Dakika 15)
-- Upelekaji wa mazingira mengi  
-- Ujumuishaji wa CI/CD  
-- Mikakati ya uboreshaji wa gharama  
-- **Hitimisho**: Orodha ya ukaguzi wa utayari wa uzalishaji  
+- Usambazaji wa mazingira mengi
+- Ujumuishaji wa CI/CD
+- Mikakati ya uboreshaji wa gharama
+- **Hitimisho**: Orodha ya ukaguzi wa utayari wa uzalishaji
 
 ## Mahitaji ya Awali
 
@@ -86,15 +90,15 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Usanidi wa Akaunti ya Azure
 
-1. **Usajili wa Azure**: [Jisajili bure](https://azure.microsoft.com/free/)  
-2. **Ufikiaji wa Azure OpenAI**: [Omba ufikiaji](https://aka.ms/oai/access)  
-3. **Ruhusa Zinazohitajika**:  
-   - Jukumu la Mchangiaji kwenye usajili au kikundi cha rasilimali  
-   - Msimamizi wa Ufikiaji wa Mtumiaji (kwa ugawaji wa RBAC)  
+1. **Usajili wa Azure**: [Jisajili bure](https://azure.microsoft.com/free/)
+2. **Ufikiaji wa Azure OpenAI**: [Omba ufikiaji](https://aka.ms/oai/access)
+3. **Ruhusa Zinazohitajika**:
+   - Jukumu la Contributor kwenye usajili au kikundi cha rasilimali
+   - User Access Administrator (kwa ugawaji wa RBAC)
 
 ### Thibitisha Mahitaji ya Awali
 
-Endesha script hii ili kuthibitisha usanidi wako:
+Endesha script hii kuthibitisha usanidi wako:
 
 ```bash
 #!/bin/bash
@@ -144,18 +148,18 @@ echo "Setup verification complete!"
 
 Kila moduli inajumuisha maabara ya vitendo na nambari ya kuanzia na maelekezo ya hatua kwa hatua:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Upelekaji wako wa kwanza wa AZD  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Programu ya mazungumzo na Azure OpenAI  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Programu ya RAG na AI Search  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Mifumo ya upelekaji wa uzalishaji  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Mifumo ya upelekaji wa hali ya juu  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Usambazaji wako wa kwanza wa AZD
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Programu ya mazungumzo na Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Programu ya RAG na AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Mifumo ya usambazaji wa uzalishaji
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Mifumo ya usambazaji wa hali ya juu
 
 ### Vifaa vya Marejeleo
 
-- **[Mwongozo wa Ujumuishaji wa AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Mifumo ya ujumuishaji wa kina  
-- **[Mwongozo wa Upelekaji wa Modeli za AI](../docs/ai-foundry/ai-model-deployment.md)** - Mbinu bora za upelekaji wa modeli  
-- **[Mbinu za AI za Uzalishaji](../docs/ai-foundry/production-ai-practices.md)** - Mifumo ya upelekaji wa biashara  
-- **[Mwongozo wa Kutatua Matatizo ya AI](../docs/troubleshooting/ai-troubleshooting.md)** - Masuala ya kawaida na suluhisho  
+- **[Mwongozo wa Ujumuishaji wa AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Mifumo ya ujumuishaji wa kina
+- **[Mwongozo wa Usambazaji wa Modeli za AI](../docs/ai-foundry/ai-model-deployment.md)** - Mbinu bora za usambazaji wa modeli
+- **[Mbinu za AI za Uzalishaji](../docs/ai-foundry/production-ai-practices.md)** - Mifumo ya usambazaji tayari kwa biashara
+- **[Mwongozo wa Kutatua Matatizo ya AI](../docs/troubleshooting/ai-troubleshooting.md)** - Masuala ya kawaida na suluhisho
 
 ### Violezo vya Mfano
 
@@ -179,19 +183,19 @@ Njia ya haraka zaidi ya kuanza warsha:
 
 ### Chaguo 2: Maendeleo ya Kawaida
 
-1. **Clone hifadhi ya warsha:**  
+1. **Clone hifadhi ya warsha:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Ingia kwenye Azure:**  
+2. **Ingia kwenye Azure:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **Anza na Maabara ya 1:**  
+3. **Anza na Maabara ya 1:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
@@ -201,9 +205,9 @@ cat README.md  # Follow the instructions
 
 Ikiwa unahudhuria kikao kinachoongozwa na mwalimu:
 
-- 🎥 **Rekodi ya Warsha**: [Inapatikana kwa mahitaji](https://aka.ms/azd-ai-workshop)  
-- 💬 **Jumuiya ya Discord**: [Jiunge kwa msaada wa moja kwa moja](https://aka.ms/foundry/discord)  
-- **Maoni ya Warsha**: [Shiriki uzoefu wako](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Rekodi ya Warsha**: [Inapatikana kwa mahitaji](https://aka.ms/azd-ai-workshop)
+- 💬 **Jamii ya Discord**: [Jiunge kwa msaada wa moja kwa moja](https://aka.ms/foundry/discord)
+- **Maoni ya Warsha**: [Shiriki uzoefu wako](https://aka.ms/azd-workshop-feedback)
 
 ## Ratiba ya Warsha
 
@@ -235,46 +239,46 @@ Ikiwa unahudhuria kikao kinachoongozwa na mwalimu:
 
 Mwisho wa warsha hii, utaweza:
 
-✅ **Kupeleka programu za AI** kwa kutumia violezo vya AZD  
-✅ **Kusanidi Azure OpenAI** kwa usalama sahihi  
+✅ **Kusambaza programu za AI** kwa kutumia violezo vya AZD  
+✅ **Kusanidi huduma za Azure OpenAI** kwa usalama sahihi  
 ✅ **Kujenga programu za RAG** na ujumuishaji wa Azure AI Search  
-✅ **Kutumia mifumo ya uzalishaji** kwa mzigo wa kazi za AI za biashara  
-✅ **Kufuatilia na kutatua matatizo** ya upelekaji wa programu za AI  
-✅ **Kutumia mikakati ya uboreshaji wa gharama** kwa mzigo wa kazi za AI  
+✅ **Kutumia mifumo ya uzalishaji** kwa mzigo wa kazi wa AI wa biashara  
+✅ **Kufuatilia na kutatua matatizo** ya usambazaji wa programu za AI  
+✅ **Kutumia mikakati ya uboreshaji wa gharama** kwa mzigo wa kazi wa AI  
 
-## Jumuiya na Msaada
+## Jamii na Msaada
 
 ### Wakati wa Warsha
 
-- 🙋 **Maswali**: Tumia mazungumzo ya warsha au inua mkono wako  
-- 🐛 **Masuala**: Angalia [mwongozo wa kutatua matatizo](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Vidokezo**: Shiriki ugunduzi na washiriki wengine  
+- 🙋 **Maswali**: Tumia mazungumzo ya warsha au inua mkono wako
+- 🐛 **Masuala**: Angalia [mwongozo wa kutatua matatizo](../docs/troubleshooting/ai-troubleshooting.md)
+- **Vidokezo**: Shiriki ugunduzi na washiriki wengine
 
 ### Baada ya Warsha
 
-- 💬 **Discord**: [Jumuiya ya Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **Masuala ya GitHub**: [Ripoti masuala ya violezo](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Maoni**: [Fomu ya tathmini ya warsha](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Jamii ya Azure AI Foundry](https://aka.ms/foundry/discord)
+- **Masuala ya GitHub**: [Ripoti masuala ya violezo](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Maoni**: [Fomu ya tathmini ya warsha](https://aka.ms/azd-workshop-feedback)
 
 ## Hatua Zifuatazo
 
 ### Endelea Kujifunza
 
-1. **Hali za Juu**: Chunguza [upelekaji wa maeneo mengi](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Ujumuishaji wa CI/CD**: Sanidi [mifumo ya GitHub Actions](../docs/deployment/github-actions.md)  
-3. **Violezo Maalum**: Tengeneza [violezo vyako vya AZD](../docs/getting-started/custom-templates.md)  
+1. **Hali za Juu**: Chunguza [usambazaji wa maeneo mengi](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Ujumuishaji wa CI/CD**: Sanidi [mifumo ya GitHub Actions](../docs/deployment/github-actions.md)
+3. **Violezo Maalum**: Unda [violezo vyako vya AZD](../docs/getting-started/custom-templates.md)
 
 ### Tumia katika Miradi Yako
 
-1. **Tathmini**: Tumia [orodha yetu ya ukaguzi wa utayari](./production-readiness-checklist.md)  
-2. **Violezo**: Anza na [violezo maalum vya AI](../../../workshop/templates)  
-3. **Msaada**: Jiunge na [Discord ya Azure AI Foundry](https://aka.ms/foundry/discord)  
+1. **Tathmini**: Tumia [orodha yetu ya ukaguzi wa utayari](./production-readiness-checklist.md)
+2. **Violezo**: Anza na [violezo maalum vya AI](../../../workshop/templates)
+3. **Msaada**: Jiunge na [Discord ya Azure AI Foundry](https://aka.ms/foundry/discord)
 
 ### Shiriki Mafanikio Yako
 
-- ⭐ **Ongeza nyota kwenye hifadhi** ikiwa warsha hii imekusaidia  
-- 🐦 **Shiriki kwenye mitandao ya kijamii** na #AzureDeveloperCLI #AzureAI  
-- 📝 **Andika chapisho la blogu** kuhusu safari yako ya upelekaji wa AI  
+- ⭐ **Ongeza nyota kwenye hifadhi** ikiwa warsha hii imekusaidia
+- 🐦 **Shiriki kwenye mitandao ya kijamii** na #AzureDeveloperCLI #AzureAI
+- 📝 **Andika chapisho la blogu** kuhusu safari yako ya usambazaji wa AI
 
 ---
 
@@ -294,13 +298,13 @@ Maoni yako yanatusaidia kuboresha uzoefu wa warsha:
 
 ---
 
-**Iliyopita:** [Mwongozo wa Kutatua Matatizo ya AI](../docs/troubleshooting/ai-troubleshooting.md) | **Inayofuata:** Anza na [Maabara ya 1: Misingi ya AZD](../../../workshop/lab-1-azd-basics)
+**Iliyotangulia:** [Mwongozo wa Kutatua Matatizo ya AI](../docs/troubleshooting/ai-troubleshooting.md) | **Inayofuata:** Anza na [Maabara ya 1: Misingi ya AZD](../../../workshop/lab-1-azd-basics)
 
-**Uko tayari kuanza kujenga programu za AI kwa AZD?**
+**Uko tayari kuanza kujenga programu za AI kwa kutumia AZD?**
 
 [Anza Maabara ya 1: Misingi ya AZD →](./lab-1-azd-basics/README.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

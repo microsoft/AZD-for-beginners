@@ -1,33 +1,38 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T23:16:11+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T09:16:48+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "hu"
 }
 -->
 # AI Munkaterhelések Legjobb Gyakorlatai AZD-vel
 
-**Előző:** [AI Workshop Lab](ai-workshop-lab.md) | **Következő:** [AI Hibakeresési Útmutató](../troubleshooting/ai-troubleshooting.md)
+**Fejezet Navigáció:**
+- **📚 Kurzus Kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális Fejezet**: 8. fejezet - Produkciós és Vállalati Minták
+- **⬅️ Előző Fejezet**: [7. fejezet: Hibakeresés](../troubleshooting/debugging.md)
+- **⬅️ Kapcsolódó Téma**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurzus Befejezve**: [AZD Kezdőknek](../../README.md)
 
 ## Áttekintés
 
-Ez az útmutató átfogó legjobb gyakorlatokat nyújt a termelésre kész AI munkaterhelések Azure Developer CLI (AZD) segítségével történő telepítéséhez. Az Azure AI Foundry Discord közösség visszajelzései és valós ügyféltelepítések alapján ezek a gyakorlatok a termelési AI rendszerek leggyakoribb kihívásait kezelik.
+Ez az útmutató átfogó legjobb gyakorlatokat nyújt produkcióra kész AI munkaterhelések Azure Developer CLI (AZD) segítségével történő telepítéséhez. Az Azure AI Foundry Discord közösség visszajelzései és valós ügyféltelepítések alapján ezek a gyakorlatok a produkciós AI rendszerek leggyakoribb kihívásait célozzák meg.
 
 ## Főbb Kihívások
 
 A közösségi szavazás eredményei alapján ezek a leggyakoribb problémák, amelyekkel a fejlesztők szembesülnek:
 
-- **45%** küzd a több szolgáltatást érintő AI telepítésekkel
-- **38%** problémái vannak a hitelesítési adatok és titkok kezelésével  
-- **35%** nehézséget okoz a termelési készenlét és a skálázás
-- **32%** jobb költségoptimalizálási stratégiákra van szükségük
-- **29%** hatékonyabb monitorozást és hibakeresést igényel
+- **45%** küzd több szolgáltatást érintő AI telepítésekkel
+- **38%** problémákat tapasztal hitelesítési adatok és titkok kezelésében  
+- **35%** nehézségei vannak a produkciós felkészültséggel és skálázással
+- **32%** jobb költségoptimalizálási stratégiákra van szüksége
+- **29%** fejlettebb monitorozási és hibakeresési megoldásokat igényel
 
-## Architektúra Minták Termelési AI-hoz
+## Architektúra Minták Produkciós AI-hoz
 
-### Minta 1: Mikroszolgáltatás Alapú AI Architektúra
+### Minta 1: Mikroszolgáltatás AI Architektúra
 
 **Mikor használjuk**: Összetett AI alkalmazások több funkcióval
 
@@ -73,7 +78,7 @@ services:
 
 ### Minta 2: Eseményvezérelt AI Feldolgozás
 
-**Mikor használjuk**: Kötegelt feldolgozás, dokumentumelemzés, aszinkron munkafolyamatok
+**Mikor használjuk**: Batch feldolgozás, dokumentumelemzés, aszinkron munkafolyamatok
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -601,7 +606,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Katasztrófaelhárítás és Magas Rendelkezésre Állás
+## Katasztrófaelhárítás és Magas Elérhetőség
 
 ### 1. Több Régiós Telepítés
 
@@ -799,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastruktúra Validálás
+### 2. Infrastruktúra Validáció
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -832,19 +837,19 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Termelési Készenléti Ellenőrzőlista
+## Produkciós Felkészültségi Ellenőrzőlista
 
 ### Biztonság ✅
 - [ ] Minden szolgáltatás menedzselt identitásokat használ
 - [ ] Titkok Key Vault-ban tárolva
 - [ ] Privát végpontok konfigurálva
-- [ ] Hálózati biztonsági csoportok megvalósítva
+- [ ] Hálózati biztonsági csoportok implementálva
 - [ ] RBAC legkisebb jogosultsággal
-- [ ] WAF engedélyezve a nyilvános végpontokon
+- [ ] WAF engedélyezve nyilvános végpontokon
 
 ### Teljesítmény ✅
 - [ ] Automatikus skálázás konfigurálva
-- [ ] Gyorsítótárazás megvalósítva
+- [ ] Gyorsítótárazás implementálva
 - [ ] Terheléselosztás beállítva
 - [ ] CDN statikus tartalomhoz
 - [ ] Adatbázis kapcsolat pooling
@@ -855,13 +860,13 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Egyedi metrikák definiálva
 - [ ] Riasztási szabályok beállítva
 - [ ] Dashboard létrehozva
-- [ ] Egészségügyi ellenőrzések megvalósítva
+- [ ] Egészségügyi ellenőrzések implementálva
 - [ ] Naplómegőrzési szabályok
 
 ### Megbízhatóság ✅
 - [ ] Több régiós telepítés
 - [ ] Mentési és helyreállítási terv
-- [ ] Circuit breakers megvalósítva
+- [ ] Circuit breakers implementálva
 - [ ] Újrapróbálkozási szabályok konfigurálva
 - [ ] Fokozatos degradáció
 - [ ] Egészségügyi ellenőrzési végpontok
@@ -870,7 +875,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Költségvetési riasztások konfigurálva
 - [ ] Erőforrások méretezése
 - [ ] Fejlesztési/tesztelési kedvezmények alkalmazva
-- [ ] Fenntartott példányok vásárolva
+- [ ] Fenntartott példányok vásárlása
 - [ ] Költségfigyelő dashboard
 - [ ] Rendszeres költségfelülvizsgálatok
 
@@ -878,18 +883,18 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Adatrezidencia követelmények teljesítve
 - [ ] Audit naplózás engedélyezve
 - [ ] Megfelelőségi szabályzatok alkalmazva
-- [ ] Biztonsági alapvonalak megvalósítva
+- [ ] Biztonsági alapvonalak implementálva
 - [ ] Rendszeres biztonsági értékelések
-- [ ] Incidenskezelési terv
+- [ ] Incidens választerv
 
 ## Teljesítmény Benchmarkok
 
-### Tipikus Termelési Metrikák
+### Tipikus Produkciós Metrikák
 
 | Metrika | Cél | Monitorozás |
 |--------|--------|------------|
 | **Válaszidő** | < 2 másodperc | Alkalmazás Insights |
-| **Rendelkezésre állás** | 99.9% | Üzemidő monitorozás |
+| **Elérhetőség** | 99.9% | Üzemidő monitorozás |
 | **Hibaarány** | < 0.1% | Alkalmazás naplók |
 | **Tokenhasználat** | < $500/hónap | Költségkezelés |
 | **Egyidejű Felhasználók** | 1000+ | Terhelés tesztelés |
@@ -913,14 +918,14 @@ Az Azure AI Foundry Discord közösség visszajelzései alapján:
 ### Közösség Legjobb Ajánlásai:
 
 1. **Kezdj Kicsiben, Skálázz Fokozatosan**: Indíts alapvető SKU-kkal, és skálázz a tényleges használat alapján
-2. **Monitorozz Mindent**: Állíts be átfogó monitorozást már az első naptól
-3. **Automatizáld a Biztonságot**: Használj infrastruktúrát kódként a következetes biztonság érdekében
-4. **Tesztelj Alaposan**: Vegyél fel AI-specifikus tesztelést a pipeline-ba
+2. **Monitorozz Mindent**: Átfogó monitorozás beállítása az első naptól kezdve
+3. **Automatizáld a Biztonságot**: Használj infrastruktúrát kódként a konzisztens biztonság érdekében
+4. **Tesztelj Alaposan**: AI-specifikus tesztelést is vegyél bele a folyamatba
 5. **Tervezd a Költségeket**: Figyeld a tokenhasználatot, és állíts be költségvetési riasztásokat korán
 
 ### Gyakori Hibák, Amiket Kerülni Kell:
 
-- ❌ API kulcsok kódba való beágyazása
+- ❌ API kulcsok kódba ágyazása
 - ❌ Megfelelő monitorozás hiánya
 - ❌ Költségoptimalizálás figyelmen kívül hagyása
 - ❌ Hibahelyzetek tesztelésének elhanyagolása
@@ -928,18 +933,23 @@ Az Azure AI Foundry Discord közösség visszajelzései alapján:
 
 ## További Források
 
-- **Azure Well-Architected Framework**: [AI munkaterhelés útmutató](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Jól Megtervezett Keretrendszer**: [AI munkaterhelés útmutató](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Azure AI Foundry Dokumentáció**: [Hivatalos dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
 - **Közösségi Sablonok**: [Azure Minták](https://github.com/Azure-Samples)
 - **Discord Közösség**: [#Azure csatorna](https://discord.gg/microsoft-azure)
 
 ---
 
-**Előző:** [AI Workshop Lab](ai-workshop-lab.md) | **Következő:** [AI Hibakeresési Útmutató](../troubleshooting/ai-troubleshooting.md)
+**Fejezet Navigáció:**
+- **📚 Kurzus Kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális Fejezet**: 8. fejezet - Produkciós és Vállalati Minták
+- **⬅️ Előző Fejezet**: [7. fejezet: Hibakeresés](../troubleshooting/debugging.md)
+- **⬅️ Kapcsolódó Téma**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kurzus Befejezve**: [AZD Kezdőknek](../../README.md)
 
-**Ne feledd**: A termelési AI munkaterhelések gondos tervezést, monitorozást és folyamatos optimalizálást igényelnek. Kezdd ezekkel a mintákkal, és igazítsd őket az egyedi igényeidhez.
+**Ne feledd**: Produkciós AI munkaterhelések gondos tervezést, monitorozást és folyamatos optimalizálást igényelnek. Kezdd ezekkel a mintákkal, és igazítsd őket az egyedi igényeidhez.
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

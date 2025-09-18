@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:21:25+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T10:00:57+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "sk"
 }
 -->
-# Nasadenie AI modelov pomocou Azure Developer CLI
+# Nasadenie AI modelov s Azure Developer CLI
 
-**Predchádzajúce:** [Integrácia Azure AI Foundry](azure-ai-foundry-integration.md) | **Ďalšie:** [AI Workshop Lab](ai-workshop-lab.md)
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj zameraný na AI
+- **⬅️ Predchádzajúca**: [Integrácia Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Ďalšia**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 3: Konfigurácia](../getting-started/configuration.md)
 
 Tento návod poskytuje komplexné pokyny na nasadenie AI modelov pomocou AZD šablón, od výberu modelu až po vzory nasadenia do produkcie.
 
@@ -128,7 +133,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Premenné prostredia
 
-Nakonfigurujte prostredie vašej aplikácie:
+Konfigurujte prostredie vašej aplikácie:
 
 ```bash
 # .env configuration
@@ -211,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kontrola verzií
 
-Sledujte verzie modelov vo vašej AZD konfigurácii:
+Sledujte verzie modelov vo vašej konfigurácii AZD:
 
 ```json
 {
@@ -272,7 +277,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Plánovanie kapacity
 
-Vypočítajte potrebnú kapacitu na základe vzorcov používania:
+Vypočítajte požadovanú kapacitu na základe vzorcov používania:
 
 ```python
 # Capacity calculation example
@@ -299,7 +304,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Konfigurácia automatického škálovania
 
-Nakonfigurujte automatické škálovanie pre Container Apps:
+Konfigurujte automatické škálovanie pre Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -371,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integrácia Application Insights
 
-Nakonfigurujte monitorovanie pre AI pracovné záťaže:
+Konfigurujte monitorovanie pre AI pracovné záťaže:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -477,10 +482,10 @@ async def check_ai_models():
 
 ## Ďalšie kroky
 
-1. **Preštudujte si [Návod na integráciu Azure AI Foundry](azure-ai-foundry-integration.md)** pre vzory integrácie služieb
+1. **Preštudujte si [Príručku integrácie Azure AI Foundry](azure-ai-foundry-integration.md)** pre vzory integrácie služieb
 2. **Dokončite [AI Workshop Lab](ai-workshop-lab.md)** pre praktické skúsenosti
 3. **Implementujte [Produkčné AI postupy](production-ai-practices.md)** pre podnikové nasadenia
-4. **Preskúmajte [Návod na riešenie problémov s AI](../troubleshooting/ai-troubleshooting.md)** pre bežné problémy
+4. **Preskúmajte [Príručku riešenia problémov s AI](../troubleshooting/ai-troubleshooting.md)** pre bežné problémy
 
 ## Zdroje
 
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**Predchádzajúce:** [Integrácia Azure AI Foundry](azure-ai-foundry-integration.md) | **Ďalšie:** [AI Workshop Lab](ai-workshop-lab.md)
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj zameraný na AI
+- **⬅️ Predchádzajúca**: [Integrácia Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Ďalšia**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 3: Konfigurácia](../getting-started/configuration.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

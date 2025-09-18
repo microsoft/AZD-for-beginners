@@ -1,32 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "668bc93b35c9249e52245a0b037b6011",
-  "translation_date": "2025-09-12T23:00:08+00:00",
+  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
+  "translation_date": "2025-09-18T08:54:00+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "sw"
 }
 -->
 # AI Workshop Lab: Kufanya Suluhisho Zako za AI Ziweze Kupelekwa kwa AZD
 
-**Iliyopita:** [Upelekaji wa Modeli ya AI](ai-model-deployment.md) | **Inayofuata:** [Mbinu za AI za Uzalishaji](production-ai-practices.md)
+**Ukurasa wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza
+- **⬅️ Iliyopita**: [Upelekaji wa Modeli ya AI](ai-model-deployment.md)
+- **➡️ Inayofuata**: [Mbinu Bora za AI kwa Uzalishaji](production-ai-practices.md)
+- **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)
 
 ## Muhtasari wa Warsha
 
-Warsha hii ya vitendo inawaongoza watengenezaji kupitia mchakato wa kuchukua programu ya AI iliyopo na kuifanya iweze kupelekwa kwa kutumia Azure Developer CLI (AZD). Utajifunza mifumo muhimu kwa upelekaji wa AI wa uzalishaji kwa kutumia huduma za Azure AI Foundry.
+Warsha hii ya vitendo inawaongoza watengenezaji kupitia mchakato wa kuchukua programu ya AI iliyopo na kuifanya iweze kupelekwa kwa kutumia Azure Developer CLI (AZD). Utajifunza mifumo muhimu kwa upelekaji wa AI kwa uzalishaji kwa kutumia huduma za Azure AI Foundry.
 
 **Muda:** Saa 2-3  
 **Kiwango:** Kati  
-**Mahitaji ya awali:** Maarifa ya msingi ya Azure, ufahamu wa dhana za AI/ML
+**Mahitaji ya Awali:** Maarifa ya msingi ya Azure, ufahamu wa dhana za AI/ML
 
 ## 🎓 Malengo ya Kujifunza
 
 Mwisho wa warsha hii, utaweza:
 - ✅ Kubadilisha programu ya AI iliyopo ili kutumia templeti za AZD
-- ✅ Kuseti huduma za Azure AI Foundry kwa AZD
+- ✅ Kusanikisha huduma za Azure AI Foundry kwa AZD
 - ✅ Kutekeleza usimamizi salama wa hati za huduma za AI
 - ✅ Kuweka programu za AI tayari kwa uzalishaji na ufuatiliaji
-- ✅ Kutatua changamoto za kawaida za upelekaji wa AI
+- ✅ Kutatua masuala ya kawaida ya upelekaji wa AI
 
 ## Mahitaji ya Awali
 
@@ -37,16 +42,16 @@ Mwisho wa warsha hii, utaweza:
 - Hariri ya msimbo (VS Code inapendekezwa)
 
 ### Rasilimali za Azure
-- Usajili wa Azure wenye ruhusa ya mchangiaji
+- Usajili wa Azure na ufikiaji wa mchango
 - Ufikiaji wa huduma za Azure OpenAI (au uwezo wa kuomba ufikiaji)
 - Ruhusa za kuunda kikundi cha rasilimali
 
 ### Maarifa ya Awali
 - Ufahamu wa msingi wa huduma za Azure
-- Uzoefu wa kutumia kiolesura cha mstari wa amri
+- Uzoefu wa kutumia interface ya mstari wa amri
 - Dhana za msingi za AI/ML (API, modeli, maelekezo)
 
-## Mpangilio wa Warsha
+## Usanidi wa Warsha
 
 ### Hatua ya 1: Maandalizi ya Mazingira
 
@@ -73,7 +78,7 @@ cd azure-search-openai-demo
 
 ### Muundo wa Templeti ya AZD Tayari kwa AI
 
-Chunguza faili muhimu katika templeti ya AZD inayofaa kwa AI:
+Chunguza faili muhimu katika templeti ya AZD tayari kwa AI:
 
 ```
 azure-search-openai-demo/
@@ -109,7 +114,7 @@ cat infra/main.bicep
 
 **Mifumo muhimu ya AI ya kutambua:**
 - Utoaji wa huduma za Azure OpenAI
-- Ujumuishaji wa Cognitive Search
+- Ushirikiano wa Utafutaji wa Kifahamu
 - Usimamizi salama wa funguo
 - Usanidi wa usalama wa mtandao
 
@@ -118,7 +123,7 @@ cat infra/main.bicep
 - **Utegemezi wa Huduma**: Programu za AI mara nyingi zinahitaji huduma nyingi zinazoratibiwa
 - **Usalama**: Funguo za API na viunganishi vinahitaji usimamizi salama
 - **Uwezo wa Kupanuka**: Mizigo ya AI ina mahitaji ya kipekee ya kupanuka
-- **Usimamizi wa Gharama**: Huduma za AI zinaweza kuwa ghali ikiwa hazijasetiwa vizuri
+- **Usimamizi wa Gharama**: Huduma za AI zinaweza kuwa ghali ikiwa hazijasimamiwa vizuri
 
 ## Moduli ya 2: Peleka Programu Yako ya Kwanza ya AI
 
@@ -147,13 +152,13 @@ azd up
 
 **Kinachotokea wakati wa `azd up`:**
 - ✅ Inatoa huduma ya Azure OpenAI
-- ✅ Inaunda huduma ya Cognitive Search
-- ✅ Inaseti App Service kwa programu ya wavuti
-- ✅ Inaseti mtandao na usalama
+- ✅ Inaunda huduma ya Utafutaji wa Kifahamu
+- ✅ Inasanidi Huduma ya Programu kwa programu ya wavuti
+- ✅ Inasanidi mtandao na usalama
 - ✅ Inapeleka msimbo wa programu
-- ✅ Inaseti ufuatiliaji na kumbukumbu
+- ✅ Inasanidi ufuatiliaji na kumbukumbu
 
-2. **Fuatilia maendeleo ya upelekaji** na angalia rasilimali zinazoundwa.
+2. **Fuatilia maendeleo ya upelekaji** na kumbuka rasilimali zinazoundwa.
 
 ### Hatua ya 2.3: Thibitisha Upelekaji Wako
 
@@ -172,17 +177,17 @@ azd show --output json | grep "webAppUrl"
    - Jaribu maswali ya mfano
    - Thibitisha majibu ya AI yanavyofanya kazi
 
-### **Zoezi la Maabara 2.1: Mazoezi ya Kutatua Changamoto**
+### **Zoezi la Maabara 2.1: Mazoezi ya Kutatua Tatizo**
 
-**Hali:** Upelekaji wako umefanikiwa lakini AI haijibu.
+**Hali**: Upelekaji wako umefanikiwa lakini AI haijibu.
 
 **Masuala ya kawaida ya kuangalia:**
-1. **Funguo za API za OpenAI**: Thibitisha zimewekwa vizuri
+1. **Funguo za API za OpenAI**: Thibitisha zimewekwa kwa usahihi
 2. **Upatikanaji wa modeli**: Angalia ikiwa eneo lako linaunga mkono modeli
 3. **Muunganisho wa mtandao**: Hakikisha huduma zinaweza kuwasiliana
 4. **Ruhusa za RBAC**: Thibitisha programu inaweza kufikia OpenAI
 
-**Amri za kutatua changamoto:**
+**Amri za kutatua tatizo:**
 ```bash
 # Check environment variables
 azd env get-values
@@ -209,7 +214,7 @@ azd deploy
 
 2. **Ongeza huduma za ziada za AI:**
 
-Hariri `infra/main.bicep` ili kuongeza Document Intelligence:
+Hariri `infra/main.bicep` ili kuongeza Ujasusi wa Nyaraka:
 
 ```bicep
 // Add to main.bicep
@@ -247,17 +252,17 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 ### **Zoezi la Maabara 3.1: Uboreshaji wa Gharama**
 
-**Changamoto**: Sakinisha templeti kwa maendeleo ya gharama nafuu.
+**Changamoto**: Sanidi templeti kwa maendeleo ya gharama nafuu.
 
 **Majukumu:**
 1. Tambua ni SKUs zipi zinaweza kuwekwa kwa viwango vya bure/msingi
-2. Sakinisha vigezo vya mazingira kwa gharama ndogo
+2. Sanidi vigezo vya mazingira kwa gharama ndogo
 3. Peleka na linganisha gharama na usanidi wa uzalishaji
 
 **Vidokezo vya suluhisho:**
-- Tumia kiwango cha F0 (bure) kwa Huduma za Utambuzi inapowezekana
+- Tumia kiwango cha F0 (bure) kwa Huduma za Kifahamu inapowezekana
 - Tumia kiwango cha Msingi kwa Huduma ya Utafutaji katika maendeleo
-- Fikiria kutumia mpango wa Matumizi kwa Functions
+- Fikiria kutumia mpango wa Matumizi kwa Kazi
 
 ## Moduli ya 4: Usalama na Mbinu Bora za Uzalishaji
 
@@ -265,7 +270,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 **Changamoto ya sasa**: Programu nyingi za AI huweka funguo za API au hutumia hifadhi isiyo salama.
 
-**Suluhisho la AZD**: Utambulisho Ulioendeshwa + Ujumuishaji wa Key Vault.
+**Suluhisho la AZD**: Utambulisho Ulio Simamiwa + Ushirikiano wa Key Vault.
 
 1. **Kagua usanidi wa usalama katika templeti yako:**
 ```bash
@@ -273,7 +278,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Thibitisha Utambulisho Ulioendeshwa unafanya kazi:**
+2. **Thibitisha Utambulisho Ulio Simamiwa unafanya kazi:**
 ```bash
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
@@ -281,7 +286,7 @@ az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 
 ### Hatua ya 4.2: Usalama wa Mtandao
 
-1. **Wezesha viunganishi vya kibinafsi** (ikiwa havijasetiwa tayari):
+1. **Wezesha viunganishi vya kibinafsi** (ikiwa havijasanikishwa tayari):
 
 Ongeza kwenye templeti yako ya bicep:
 ```bicep
@@ -308,14 +313,14 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### Hatua ya 4.3: Ufuatiliaji na Uangalizi
 
-1. **Sakinisha Application Insights:**
+1. **Sanidi Uelewa wa Programu:**
 ```bash
 # Application Insights should be automatically configured
 # Check the configuration:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Sakinisha ufuatiliaji maalum wa AI:**
+2. **Sanidi ufuatiliaji maalum wa AI:**
 
 Ongeza vipimo maalum kwa operesheni za AI:
 ```bicep
@@ -344,10 +349,10 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 **Orodha ya ukaguzi:**
 - [ ] Hakuna siri zilizowekwa moja kwa moja kwenye msimbo au usanidi
-- [ ] Utambulisho Ulioendeshwa unatumika kwa uthibitishaji wa huduma kwa huduma
-- [ ] Key Vault inahifadhi usanidi nyeti
+- [ ] Utambulisho Ulio Simamiwa umetumika kwa uthibitishaji wa huduma kwa huduma
+- [ ] Key Vault huhifadhi usanidi nyeti
 - [ ] Ufikiaji wa mtandao umepunguzwa ipasavyo
-- [ ] Ufuatiliaji na kumbukumbu vimewezeshwa
+- [ ] Ufuatiliaji na kumbukumbu zimewezeshwa
 
 ## Moduli ya 5: Kubadilisha Programu Yako ya AI
 
@@ -359,11 +364,11 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Ni huduma gani za AI programu yako inatumia?
    - Inahitaji rasilimali gani za kompyuta?
    - Je, inahitaji hifadhidata?
-   - Kuna utegemezi gani kati ya huduma?
+   - Ni utegemezi gani kati ya huduma?
 
 2. **Mahitaji ya Usalama:**
-   - Je, programu yako inashughulikia data nyeti gani?
-   - Una mahitaji gani ya kufuata sheria?
+   - Je, programu yako inashughulikia data gani nyeti?
+   - Una mahitaji gani ya kufuata?
    - Je, unahitaji mtandao wa kibinafsi?
 
 3. **Mahitaji ya Kupanuka:**
@@ -453,25 +458,25 @@ output name string = openAIAccount.name
 
 ### **Zoezi la Maabara 5.1: Changamoto ya Uundaji wa Templeti**
 
-**Changamoto**: Unda templeti ya AZD kwa programu ya AI ya usindikaji wa hati.
+**Changamoto**: Unda templeti ya AZD kwa programu ya AI ya usindikaji wa nyaraka.
 
 **Mahitaji:**
 - Azure OpenAI kwa uchambuzi wa maudhui
-- Document Intelligence kwa OCR
-- Akaunti ya Hifadhi kwa upakiaji wa hati
-- Function App kwa mantiki ya usindikaji
+- Ujasusi wa Nyaraka kwa OCR
+- Akaunti ya Hifadhi kwa upakiaji wa nyaraka
+- Programu ya Kazi kwa mantiki ya usindikaji
 - Programu ya wavuti kwa kiolesura cha mtumiaji
 
 **Pointi za ziada:**
 - Ongeza usimamizi sahihi wa makosa
 - Jumuisha makadirio ya gharama
-- Sakinisha dashibodi za ufuatiliaji
+- Sanidi dashibodi za ufuatiliaji
 
-## Moduli ya 6: Kutatua Changamoto za Kawaida
+## Moduli ya 6: Kutatua Masuala ya Kawaida
 
-### Changamoto za Kawaida za Upelekaji
+### Masuala ya Kawaida ya Upelekaji
 
-#### Changamoto 1: Kiwango cha Huduma ya OpenAI Kimezidi
+#### Tatizo 1: Kiwango cha Huduma ya OpenAI Kimezidi
 **Dalili:** Upelekaji unashindwa na kosa la kiwango
 **Suluhisho:**
 ```bash
@@ -483,7 +488,7 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Changamoto 2: Modeli Haipatikani Katika Eneo
+#### Tatizo 2: Modeli Haipatikani katika Eneo
 **Dalili:** Majibu ya AI yanashindwa au makosa ya upelekaji wa modeli
 **Suluhisho:**
 ```bash
@@ -495,7 +500,7 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
-#### Changamoto 3: Masuala ya Ruhusa
+#### Tatizo 3: Masuala ya Ruhusa
 **Dalili:** Makosa ya 403 Forbidden wakati wa kupiga huduma za AI
 **Suluhisho:**
 ```bash
@@ -509,24 +514,24 @@ az role assignment create \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### Changamoto za Utendaji
+### Masuala ya Utendaji
 
-#### Changamoto 4: Majibu ya AI Polepole
+#### Tatizo 4: Majibu ya AI Polepole
 **Hatua za uchunguzi:**
-1. Angalia Application Insights kwa vipimo vya utendaji
+1. Angalia Uelewa wa Programu kwa vipimo vya utendaji
 2. Kagua vipimo vya huduma ya OpenAI katika portal ya Azure
 3. Thibitisha muunganisho wa mtandao na ucheleweshaji
 
 **Suluhisho:**
-- Tekeleza uhifadhi wa maswali ya kawaida
+- Tekeleza akiba kwa maswali ya kawaida
 - Tumia modeli sahihi ya OpenAI kwa matumizi yako
 - Fikiria nakala za kusoma kwa hali ya mzigo mkubwa
 
-### **Zoezi la Maabara 6.1: Changamoto ya Kutatua Changamoto**
+### **Zoezi la Maabara 6.1: Changamoto ya Kutatua Tatizo**
 
-**Hali:** Upelekaji wako umefanikiwa, lakini programu inarudisha makosa ya 500.
+**Hali**: Upelekaji wako umefanikiwa, lakini programu inarudisha makosa ya 500.
 
-**Majukumu ya kutatua changamoto:**
+**Majukumu ya kutatua tatizo:**
 1. Angalia kumbukumbu za programu
 2. Thibitisha muunganisho wa huduma
 3. Jaribu uthibitishaji
@@ -535,11 +540,11 @@ az role assignment create \
 **Zana za kutumia:**
 - `azd show` kwa muhtasari wa upelekaji
 - Portal ya Azure kwa kumbukumbu za kina za huduma
-- Application Insights kwa telemetry ya programu
+- Uelewa wa Programu kwa telemetry ya programu
 
 ## Moduli ya 7: Ufuatiliaji na Uboreshaji
 
-### Hatua ya 7.1: Sakinisha Ufuatiliaji Kamili
+### Hatua ya 7.1: Sanidi Ufuatiliaji wa Kina
 
 1. **Unda dashibodi maalum:**
 
@@ -549,7 +554,7 @@ Tembelea portal ya Azure na unda dashibodi yenye:
 - Matumizi ya rasilimali
 - Ufuatiliaji wa gharama
 
-2. **Sakinisha arifa:**
+2. **Sanidi arifa:**
 ```bash
 # Alert for high error rate
 az monitor metrics alert create \
@@ -569,9 +574,9 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
 2. **Tekeleza udhibiti wa gharama:**
-- Sakinisha arifa za bajeti
+- Sanidi arifa za bajeti
 - Tumia sera za upanuzi wa kiotomatiki
-- Tekeleza uhifadhi wa maombi
+- Tekeleza akiba ya maombi
 - Fuatilia matumizi ya tokeni kwa OpenAI
 
 ### **Zoezi la Maabara 7.1: Uboreshaji wa Utendaji**
@@ -584,10 +589,10 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - Dumisha uptime ya 99.9%
 
 **Mikakati ya kujaribu:**
-- Tekeleza uhifadhi wa majibu
+- Tekeleza akiba ya majibu
 - Boresha maelekezo kwa ufanisi wa tokeni
 - Tumia SKUs sahihi za kompyuta
-- Sakinisha upanuzi wa kiotomatiki ipasavyo
+- Sanidi upanuzi wa kiotomatiki ipasavyo
 
 ## Changamoto ya Mwisho: Utekelezaji wa Mwisho hadi Mwisho
 
@@ -597,9 +602,9 @@ Umepewa jukumu la kuunda chatbot ya huduma kwa wateja inayotumia AI tayari kwa u
 
 **Mahitaji ya Kazi:**
 - Kiolesura cha wavuti kwa mwingiliano wa wateja
-- Ujumuishaji na Azure OpenAI kwa majibu
-- Uwezo wa utafutaji wa hati kwa kutumia Cognitive Search
-- Ujumuishaji na hifadhidata ya wateja iliyopo
+- Ushirikiano na Azure OpenAI kwa majibu
+- Uwezo wa utafutaji wa nyaraka kwa kutumia Utafutaji wa Kifahamu
+- Ushirikiano na hifadhidata ya wateja iliyopo
 - Usaidizi wa lugha nyingi
 
 **Mahitaji Yasiyo ya Kazi:**
@@ -607,14 +612,14 @@ Umepewa jukumu la kuunda chatbot ya huduma kwa wateja inayotumia AI tayari kwa u
 - SLA ya uptime ya 99.9%
 - Ufuataji wa SOC 2
 - Gharama chini ya $500/mwezi
-- Upelekaji kwa mazingira mengi (maendeleo, majaribio, uzalishaji)
+- Peleka kwa mazingira mengi (maendeleo, majaribio, uzalishaji)
 
 ### Hatua za Utekelezaji
 
-1. **Buni muundo wa usanifu**
+1. **Buni muundo**
 2. **Unda templeti ya AZD**
 3. **Tekeleza hatua za usalama**
-4. **Sakinisha ufuatiliaji na arifa**
+4. **Sanidi ufuatiliaji na arifa**
 5. **Unda njia za upelekaji**
 6. **Andika nyaraka za suluhisho**
 
@@ -636,35 +641,38 @@ Umepewa jukumu la kuunda chatbot ya huduma kwa wateja inayotumia AI tayari kwa u
 ### Templeti za Mfano
 - [Programu ya Mazungumzo ya Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [Mwongozo wa Haraka wa Programu ya Mazungumzo ya OpenAI](https://github.com/Azure-Samples/openai-chat-app-quickstart)
-- [Mazungumzo ya Contoso](https://github.com/Azure-Samples/contoso-chat)
+- [Mazungum
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)  
+- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)  
 
-### Rasilimali za Jamii
-- [Discord ya Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [GitHub ya Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [Templeti za Ajabu za AZD](https://azure.github.io/awesome-azd/)
+## 🎓 Cheti cha Kukamilisha  
 
-## 🎓 Cheti cha Kukamilisha
+Hongera! Umefanikiwa kukamilisha mafunzo ya AI Workshop Lab. Sasa unapaswa kuwa na uwezo wa:  
 
-Hongera! Umehitimisha Warsha ya AI. Sasa unapaswa kuwa na uwezo wa:
-
-- ✅ Kubadilisha programu za AI
-- ✅ Tekeleza mbinu bora za usalama kwa mzigo wa kazi wa AI  
-- ✅ Fuatilia na boresha utendaji wa programu za AI  
-- ✅ Tatua changamoto za kawaida za usambazaji  
+- ✅ Kubadilisha programu zilizopo za AI kuwa AZD templates  
+- ✅ Kusambaza programu za AI zilizo tayari kwa uzalishaji  
+- ✅ Kutekeleza mbinu bora za usalama kwa kazi za AI  
+- ✅ Kufuatilia na kuboresha utendaji wa programu za AI  
+- ✅ Kutatua changamoto za kawaida za usambazaji  
 
 ### Hatua Zifuatazo  
 1. Tumia mifumo hii kwenye miradi yako ya AI  
-2. Changia templeti kurudi kwa jamii  
-3. Jiunge na Discord ya Azure AI Foundry kwa msaada unaoendelea  
-4. Chunguza mada za juu kama usambazaji wa maeneo mengi  
+2. Changia templates kwa jamii  
+3. Jiunge na Azure AI Foundry Discord kwa msaada wa mara kwa mara  
+4. Chunguza mada za hali ya juu kama usambazaji wa maeneo mengi  
 
----
+---  
 
-**Maoni ya Warsha**: Tusaidie kuboresha warsha hii kwa kushiriki uzoefu wako katika [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).  
+**Maoni ya Mafunzo**: Tusaidie kuboresha mafunzo haya kwa kushiriki uzoefu wako katika [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).  
 
----
+---  
 
-**Iliyopita:** [Usambazaji wa Modeli ya AI](ai-model-deployment.md) | **Inayofuata:** [Mbinu za AI za Uzalishaji](production-ai-practices.md)  
+**Urambazaji wa Sura:**  
+- **📚 Mwanzo wa Kozi**: [AZD Kwa Anayeanza](../../README.md)  
+- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza  
+- **⬅️ Iliyopita**: [Usambazaji wa Mfano wa AI](ai-model-deployment.md)  
+- **➡️ Inayofuata**: [Mbinu Bora za AI za Uzalishaji](production-ai-practices.md)  
+- **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)  
 
 **Unahitaji Msaada?** Jiunge na jamii yetu kwa msaada na mijadala kuhusu AZD na usambazaji wa AI.  
 

@@ -1,37 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T23:11:57+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T09:16:17+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "hu"
 }
 -->
 # Azure AI Foundry integráció AZD-vel
 
-**Előző:** [Első projekt](../getting-started/first-project.md) | **Következő:** [AI modell telepítése](ai-model-deployment.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 2. fejezet - AI-első fejlesztés
+- **⬅️ Előző fejezet**: [1. fejezet: Az első projekted](../getting-started/first-project.md)
+- **➡️ Következő**: [AI modell telepítése](ai-model-deployment.md)
+- **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../getting-started/configuration.md)
 
 ## Áttekintés
 
-Ez az útmutató bemutatja, hogyan integrálhatók az Azure AI Foundry szolgáltatások az Azure Developer CLI (AZD) eszközzel, hogy egyszerűsítsék az AI alkalmazások telepítését. Az Azure AI Foundry átfogó platformot kínál AI alkalmazások fejlesztéséhez, telepítéséhez és kezeléséhez, míg az AZD leegyszerűsíti az infrastruktúra és telepítési folyamatokat.
+Ez az útmutató bemutatja, hogyan integrálhatók az Azure AI Foundry szolgáltatások az Azure Developer CLI-vel (AZD), hogy egyszerűsítsük az AI alkalmazások telepítését. Az Azure AI Foundry átfogó platformot kínál AI alkalmazások építéséhez, telepítéséhez és kezeléséhez, míg az AZD leegyszerűsíti az infrastruktúra és telepítési folyamatokat.
 
 ## Mi az Azure AI Foundry?
 
-Az Azure AI Foundry a Microsoft egységes AI fejlesztési platformja, amely magában foglalja:
+Az Azure AI Foundry a Microsoft egységes platformja az AI fejlesztéshez, amely tartalmazza:
 
-- **Modellek katalógusa**: Hozzáférés a legmodernebb AI modellekhez
+- **Modellkatalógus**: Hozzáférés a legmodernebb AI modellekhez
 - **Prompt Flow**: Vizualizációs tervező AI munkafolyamatokhoz
-- **AI Foundry portál**: Integrált fejlesztési környezet AI alkalmazásokhoz
+- **AI Foundry Portál**: Integrált fejlesztési környezet AI alkalmazásokhoz
 - **Telepítési lehetőségek**: Többféle hosztolási és skálázási opció
 - **Biztonság és védelem**: Beépített felelős AI funkciók
 
-## AZD + Azure AI Foundry: Jobb együtt
+## AZD + Azure AI Foundry: Együtt még jobb
 
 | Funkció | Azure AI Foundry | AZD integráció előnye |
 |---------|-----------------|------------------------|
 | **Modell telepítése** | Manuális portál telepítés | Automatizált, ismételhető telepítések |
-| **Infrastruktúra** | Kattintás-alapú létrehozás | Infrastructure as Code (Bicep) |
-| **Környezetkezelés** | Egyetlen környezetre fókuszál | Több környezet (fejlesztés/tesztelés/éles) |
+| **Infrastruktúra** | Kattintásos előkészítés | Infrastruktúra kódként (Bicep) |
+| **Környezetkezelés** | Egyetlen környezet fókusz | Több környezet (fejlesztés/staging/éles) |
 | **CI/CD integráció** | Korlátozott | Natív GitHub Actions támogatás |
 | **Költségkezelés** | Alapvető monitorozás | Környezet-specifikus költségoptimalizálás |
 
@@ -185,7 +190,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Biztonságos konfiguráció Key Vault segítségével
+### Biztonságos konfiguráció Key Vault-tal
 
 ```bicep
 // Key Vault for secrets
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Automatikus skálázás konfiguráció
+### Automatikus skálázási konfiguráció
 
 ```bicep
 // Container App with auto-scaling
@@ -432,7 +437,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 **Tünetek:**
 - Telepítés kvóta hibákkal meghiúsul
-- 429-es hibák az alkalmazásnaplókban
+- 429 hibák az alkalmazásnaplókban
 
 **Megoldások:**
 ```bash
@@ -451,7 +456,7 @@ azd deploy
 ### Probléma 2: Hitelesítési hibák
 
 **Tünetek:**
-- 401/403-as hibák AI szolgáltatások hívásakor
+- 401/403 hibák AI szolgáltatások hívásakor
 - "Hozzáférés megtagadva" üzenetek
 
 **Megoldások:**
@@ -499,7 +504,7 @@ azd up
 
 **Repository**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
-**Szolgáltatások**: Dokumentum intelligencia + Tárhely + Funkciók
+**Szolgáltatások**: Dokumentum intelligencia + Tárolás + Funkciók
 
 **Gyors kezdés**:
 ```bash
@@ -507,11 +512,11 @@ azd init --template ai-document-processing
 azd up
 ```
 
-### Vállalati chat RAG segítségével
+### Vállalati chat RAG-gal
 
 **Repository**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Szolgáltatások**: Azure OpenAI + Keresés + Konténeres alkalmazások + Cosmos DB
+**Szolgáltatások**: Azure OpenAI + Keresés + Konténeralkalmazások + Cosmos DB
 
 **Gyors kezdés**:
 ```bash
@@ -521,7 +526,7 @@ azd up
 
 ## Következő lépések
 
-1. **Próbáld ki a példákat**: Kezdd egy előre elkészített sablonnal, amely megfelel az igényeidnek
+1. **Próbáld ki a példákat**: Kezdj egy előre elkészített sablonnal, amely megfelel az esetednek
 2. **Testreszabás**: Módosítsd az infrastruktúrát és az alkalmazáskódot
 3. **Monitorozás hozzáadása**: Valósíts meg átfogó megfigyelhetőséget
 4. **Költségoptimalizálás**: Finomhangold a konfigurációkat a költségvetésedhez
@@ -531,16 +536,21 @@ azd up
 ## Közösség és támogatás
 
 - **Azure AI Foundry Discord**: [#Azure csatorna](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Problémák és megbeszélések](https://github.com/Azure/azure-dev)
+- **AZD GitHub**: [Problémák és viták](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Hivatalos dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**Előző:** [Első projekt](../getting-started/first-project.md) | **Következő:** [AI modell telepítése](ai-model-deployment.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 2. fejezet - AI-első fejlesztés
+- **⬅️ Előző fejezet**: [1. fejezet: Az első projekted](../getting-started/first-project.md)
+- **➡️ Következő**: [AI modell telepítése](ai-model-deployment.md)
+- **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../getting-started/configuration.md)
 
-**Segítségre van szükséged?** Csatlakozz a közösségi beszélgetésekhez, vagy nyiss egy problémát a repository-ban. Az Azure AI + AZD közösség azért van, hogy segítsen neked sikerrel járni!
+**Segítségre van szükséged?** Csatlakozz a közösségi vitákhoz, vagy nyiss egy problémát a repository-ban. Az Azure AI + AZD közösség azért van, hogy segítsen neked sikeresnek lenni!
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

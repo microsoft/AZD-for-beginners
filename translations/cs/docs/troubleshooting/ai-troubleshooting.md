@@ -1,24 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T23:24:44+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T09:44:28+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "cs"
 }
 -->
-# Průvodce řešením problémů s AI pro Azure Developer CLI
+# Průvodce řešením problémů specifických pro AI
+
+**Navigace kapitolou:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
+- **⬅️ Předchozí**: [Průvodce laděním](debugging.md)
+- **➡️ Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../ai-foundry/production-ai-practices.md)
+- **🤖 Související**: [Kapitola 2: Vývoj zaměřený na AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 **Předchozí:** [Produkční AI praktiky](../ai-foundry/production-ai-practices.md) | **Další:** [Začínáme s AZD](../getting-started/README.md)
 
-Tento komplexní průvodce řešením problémů se zaměřuje na běžné potíže při nasazování AI řešení pomocí AZD, poskytuje řešení a techniky ladění specifické pro Azure AI služby.
+Tento komplexní průvodce řešením problémů se zabývá běžnými problémy při nasazování AI řešení s AZD a poskytuje řešení a techniky ladění specifické pro služby Azure AI.
 
 ## Obsah
 
 - [Problémy s Azure OpenAI službou](../../../../docs/troubleshooting)
-- [Potíže s Azure AI Search](../../../../docs/troubleshooting)
+- [Problémy s Azure AI Search](../../../../docs/troubleshooting)
 - [Problémy s nasazením Container Apps](../../../../docs/troubleshooting)
-- [Chyby ověřování a oprávnění](../../../../docs/troubleshooting)
+- [Chyby autentizace a oprávnění](../../../../docs/troubleshooting)
 - [Selhání nasazení modelu](../../../../docs/troubleshooting)
 - [Problémy s výkonem a škálováním](../../../../docs/troubleshooting)
 - [Správa nákladů a kvót](../../../../docs/troubleshooting)
@@ -140,9 +147,9 @@ az rest --method get \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Potíže s Azure AI Search
+## Problémy s Azure AI Search
 
-### Problém: Nedostatečná cenová úroveň Search služby
+### Problém: Nedostatečná cenová úroveň služby Search
 
 **Příznaky:**
 ```
@@ -192,7 +199,7 @@ Error: Cannot create index, insufficient permissions
 
 **Řešení:**
 
-1. **Ověřte klíče Search služby:**
+1. **Ověřte klíče služby Search:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problém: Selhání při spuštění Container App
+### Problém: Selhání při spuštění aplikace v kontejneru
 
 **Příznaky:**
 ```
@@ -359,7 +366,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Chyby ověřování a oprávnění
+## Chyby autentizace a oprávnění
 
 ### Problém: Odepření oprávnění spravované identity
 
@@ -395,7 +402,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Otestujte ověřování:**
+3. **Otestujte autentizaci:**
 ```python
 # Test managed identity authentication
 from azure.identity import DefaultAzureCredential
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problém: Chyby z nedostatku paměti
+### Problém: Chyby nedostatku paměti
 
 **Příznaky:**
 ```
@@ -846,7 +853,7 @@ def monitor_performance(func):
 ## Další kroky
 
 1. **Projděte si [Průvodce nasazením AI modelů](ai-model-deployment.md)** pro osvědčené postupy nasazení
-2. **Dokončete [Produkční AI praktiky](production-ai-practices.md)** pro řešení připravená pro podniky
+2. **Dokončete [Produkční AI praktiky](production-ai-practices.md)** pro řešení připravená pro podnikové prostředí
 3. **Připojte se k [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** pro podporu komunity
 4. **Podávejte problémy** do [AZD GitHub repozitáře](https://github.com/Azure/azure-dev) pro problémy specifické pro AZD
 
@@ -858,10 +865,15 @@ def monitor_performance(func):
 
 ---
 
-**Předchozí:** [Produkční AI praktiky](../ai-foundry/production-ai-practices.md) | **Další:** [Workshop](../../workshop/README.md)
+**Navigace kapitolou:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
+- **⬅️ Předchozí**: [Průvodce laděním](debugging.md)
+- **➡️ Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../ai-foundry/production-ai-practices.md)
+- **🤖 Související**: [Kapitola 2: Vývoj zaměřený na AI](../ai-foundry/azure-ai-foundry-integration.md)
 - [Řešení problémů s Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

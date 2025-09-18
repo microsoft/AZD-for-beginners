@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:25:20+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T10:02:18+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sk"
 }
 -->
-# Príručka konfigurácie
+# Konfiguračný sprievodca
 
-**Predchádzajúce:** [AZD Základy](azd-basics.md) | **Ďalšie:** [Prvý projekt](first-project.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 3 - Konfigurácia a autentifikácia
+- **⬅️ Predchádzajúca**: [Váš prvý projekt](first-project.md)
+- **➡️ Ďalšia**: [Sprievodca nasadením](../deployment/deployment-guide.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 4: Infrastruktúra ako kód](../deployment/deployment-guide.md)
 
 ## Úvod
 
-Táto komplexná príručka pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy. Naučíte sa o hierarchii konfigurácie, správe prostredí, metódach autentifikácie a pokročilých vzoroch konfigurácie, ktoré umožňujú efektívne a bezpečné nasadenie v Azure.
+Tento komplexný sprievodca pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy. Naučíte sa o hierarchii konfigurácie, správe prostredí, metódach autentifikácie a pokročilých vzoroch konfigurácie, ktoré umožňujú efektívne a bezpečné nasadenia v Azure.
 
 ## Ciele učenia
 
@@ -33,12 +38,12 @@ Po dokončení tejto lekcie budete schopní:
 - Riešiť problémy súvisiace s konfiguráciou
 - Prispôsobiť správanie azd pre špecifické požiadavky organizácie
 
-Táto komplexná príručka pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy.
+Tento komplexný sprievodca pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy.
 
 ## Hierarchia konfigurácie
 
 azd používa hierarchický systém konfigurácie:
-1. **Príkazové parametre** (najvyššia priorita)
+1. **Príkazové vlajky** (najvyššia priorita)
 2. **Premenné prostredia**
 3. **Lokálna projektová konfigurácia** (`.azd/config.json`)
 4. **Globálna užívateľská konfigurácia** (`~/.azd/config.json`)
@@ -83,7 +88,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Projektová konfigurácia
 
 ### Štruktúra azure.yaml
-Súbor `azure.yaml` je srdcom vášho azd projektu:
+Súbor `azure.yaml` je srdcom vášho projektu azd:
 
 ```yaml
 # Minimum configuration
@@ -161,7 +166,7 @@ pipeline:
 
 ### Možnosti konfigurácie služieb
 
-#### Typy hostingu
+#### Typy hostiteľov
 ```yaml
 services:
   web-static:
@@ -274,7 +279,7 @@ LOG_LEVEL=info
 
 ## 🔐 Konfigurácia autentifikácie
 
-### Integrácia s Azure CLI
+### Integrácia Azure CLI
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -333,7 +338,7 @@ Konfigurujte parametre infraštruktúry v `infra/main.parameters.json`:
 ```
 
 ### Konfigurácia Terraform
-Pre projekty Terraform konfigurujte v `infra/terraform.tfvars`:
+Pre projekty Terraform, konfigurujte v `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -538,21 +543,25 @@ Dokumentujte svoju konfiguráciu v `CONFIG.md`:
 ## Ďalšie kroky
 
 - [Váš prvý projekt](first-project.md) - Aplikujte konfiguráciu v praxi
-- [Príručka nasadenia](../deployment/deployment-guide.md) - Použite konfiguráciu na nasadenie
-- [Provisioning zdrojov](../deployment/provisioning.md) - Konfigurácie pripravené na produkciu
+- [Sprievodca nasadením](../deployment/deployment-guide.md) - Použite konfiguráciu na nasadenie
+- [Provisioning Resources](../deployment/provisioning.md) - Konfigurácie pripravené na produkciu
 
 ## Referencie
 
-- [Referenčná príručka konfigurácie azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Referenčná dokumentácia konfigurácie azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schéma azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Premenné prostredia](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Predchádzajúce:** [AZD Základy](azd-basics.md) | **Ďalšie:** [Prvý projekt](first-project.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 3 - Konfigurácia a autentifikácia
+- **⬅️ Predchádzajúca**: [Váš prvý projekt](first-project.md)
+- **➡️ Ďalšia kapitola**: [Kapitola 4: Infrastruktúra ako kód](../deployment/deployment-guide.md)
 - **Ďalšia lekcia**: [Váš prvý projekt](first-project.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

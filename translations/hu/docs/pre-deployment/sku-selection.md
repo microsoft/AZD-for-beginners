@@ -1,43 +1,50 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-10T06:48:55+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T09:23:55+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "hu"
 }
 -->
-# SKU kiválasztási útmutató - Az Azure szolgáltatási szintek helyes megválasztása
+# SKU Kiválasztási Útmutató - Az Azure Szolgáltatási Szintek Megfelelő Kiválasztása
+
+**Fejezet Navigáció:**
+- **📚 Kurzus Kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális Fejezet**: 6. fejezet - Telepítés előtti validáció és tervezés
+- **⬅️ Előző**: [Kapacitástervezés](capacity-planning.md)
+- **➡️ Következő**: [Előzetes ellenőrzések](preflight-checks.md)
+- **🚀 Következő Fejezet**: [7. fejezet: Hibakeresés](../troubleshooting/common-issues.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató segít kiválasztani az optimális Azure SKU-kat (Stock Keeping Units) különböző környezetekhez, munkaterhelésekhez és igényekhez. Ismerje meg, hogyan elemezheti a teljesítményigényeket, költségszempontokat és skálázhatósági követelményeket, hogy a legmegfelelőbb szolgáltatási szinteket válassza az Azure Developer CLI telepítéseihez.
+Ez az átfogó útmutató segít kiválasztani az optimális Azure szolgáltatási SKU-kat (Stock Keeping Units) különböző környezetekhez, munkaterhelésekhez és igényekhez. Ismerje meg, hogyan elemezheti a teljesítményigényeket, költségszempontokat és skálázhatósági követelményeket, hogy a legmegfelelőbb szolgáltatási szinteket válassza az Azure Developer CLI telepítéseihez.
 
-## Tanulási célok
+## Tanulási Célok
 
 Az útmutató elvégzésével:
 - Megérti az Azure SKU fogalmát, árképzési modelleket és funkcióbeli különbségeket
 - Elsajátítja a környezet-specifikus SKU kiválasztási stratégiákat fejlesztéshez, teszteléshez és éles környezethez
 - Elemzi a munkaterhelési igényeket, és ezekhez illeszkedő szolgáltatási szinteket választ
-- Költségoptimalizálási stratégiákat valósít meg intelligens SKU kiválasztással
-- Alkalmazza a teljesítménytesztelési és validációs technikákat az SKU választásokhoz
-- Konfigurálja az automatikus SKU ajánlásokat és monitorozást
+- Költségoptimalizálási stratégiákat alkalmaz intelligens SKU kiválasztással
+- Teljesítménytesztelési és validációs technikákat alkalmaz a SKU választásokhoz
+- Automatizált SKU ajánlásokat és monitorozást konfigurál
 
-## Tanulási eredmények
+## Tanulási Eredmények
 
 Az útmutató elvégzése után képes lesz:
-- Az igények és korlátok alapján megfelelő Azure SKU-kat választani
+- Az igények és korlátok alapján megfelelő Azure szolgáltatási SKU-kat választani
 - Költséghatékony, több környezetet támogató architektúrákat tervezni megfelelő szintválasztással
-- Teljesítmény-benchmarkokat és validációt végrehajtani az SKU választásokhoz
-- Automatikus eszközöket létrehozni SKU ajánlásokhoz és költségoptimalizáláshoz
+- Teljesítmény-benchmarkingot és validációt végrehajtani a SKU választásokhoz
+- Automatizált eszközöket létrehozni SKU ajánlásokhoz és költségoptimalizáláshoz
 - SKU migrációs és skálázási stratégiákat tervezni változó igényekhez
 - Az Azure Well-Architected Framework elveit alkalmazni a szolgáltatási szintek kiválasztásában
 
 ## Tartalomjegyzék
 
-- [Az SKU-k megértése](../../../../docs/pre-deployment)
+- [SKU-k megértése](../../../../docs/pre-deployment)
 - [Környezet-alapú kiválasztás](../../../../docs/pre-deployment)
-- [Szolgáltatás-specifikus útmutatók](../../../../docs/pre-deployment)
+- [Szolgáltatás-specifikus irányelvek](../../../../docs/pre-deployment)
 - [Költségoptimalizálási stratégiák](../../../../docs/pre-deployment)
 - [Teljesítmény szempontok](../../../../docs/pre-deployment)
 - [Gyors referencia táblázatok](../../../../docs/pre-deployment)
@@ -45,15 +52,15 @@ Az útmutató elvégzése után képes lesz:
 
 ---
 
-## Az SKU-k megértése
+## SKU-k megértése
 
 ### Mik azok az SKU-k?
 
-Az SKU-k (Stock Keeping Units) az Azure erőforrások különböző szolgáltatási szintjeit és teljesítményét képviselik. Minden SKU különböző jellemzőket kínál:
+Az SKU-k (Stock Keeping Units) az Azure erőforrások különböző szolgáltatási szintjeit és teljesítménykategóriáit képviselik. Minden SKU különböző jellemzőket kínál:
 
-- **Teljesítményjellemzők** (CPU, memória, átbocsátás)
+- **Teljesítmény jellemzők** (CPU, memória, átbocsátóképesség)
 - **Funkciók elérhetősége** (skálázási opciók, SLA szintek)
-- **Árképzési modellek** (fogyasztás-alapú, lefoglalt kapacitás)
+- **Árképzési modellek** (fogyasztás-alapú, fenntartott kapacitás)
 - **Regionális elérhetőség** (nem minden SKU érhető el minden régióban)
 
 ### Kulcsfontosságú tényezők az SKU kiválasztásában
@@ -61,7 +68,7 @@ Az SKU-k (Stock Keeping Units) az Azure erőforrások különböző szolgáltat�
 1. **Munkaterhelési igények**
    - Várható forgalom/terhelési minták
    - Teljesítményigények (CPU, memória, I/O)
-   - Tárhelyigények és hozzáférési minták
+   - Tárolási igények és hozzáférési minták
 
 2. **Környezet típusa**
    - Fejlesztés/tesztelés vs. éles környezet
@@ -70,7 +77,7 @@ Az SKU-k (Stock Keeping Units) az Azure erőforrások különböző szolgáltat�
 
 3. **Költségkorlátok**
    - Kezdeti költségek vs. működési költségek
-   - Lefoglalt kapacitás kedvezmények
+   - Fenntartott kapacitás kedvezmények
    - Automatikus skálázás költségvonzatai
 
 4. **Növekedési előrejelzések**
@@ -102,11 +109,11 @@ skus:
 #### Jellemzők
 - **App Service**: F1 (Ingyenes) vagy B1 (Alap) egyszerű teszteléshez
 - **Adatbázisok**: Alap szint minimális erőforrásokkal
-- **Tárhely**: Standard, csak helyi redundanciával
+- **Tárolás**: Standard, csak helyi redundanciával
 - **Számítási kapacitás**: Megosztott erőforrások elfogadhatók
 - **Hálózat**: Alap konfigurációk
 
-### Tesztelési környezet
+### Tesztelési/Staging környezet
 
 **Prioritások**: Éles környezethez hasonló konfiguráció, költség-egyensúly, teljesítménytesztelési képesség
 
@@ -124,7 +131,7 @@ skus:
 
 #### Jellemzők
 - **Teljesítmény**: Az éles kapacitás 70-80%-a
-- **Funkciók**: Az éles környezet legtöbb funkciója engedélyezve
+- **Funkciók**: Az éles környezet funkcióinak többsége engedélyezve
 - **Redundancia**: Néhány földrajzi redundancia
 - **Skálázás**: Korlátozott automatikus skálázás teszteléshez
 - **Monitorozás**: Teljes monitorozási stack
@@ -148,25 +155,25 @@ skus:
 
 #### Jellemzők
 - **Magas elérhetőség**: 99.9%+ SLA követelmények
-- **Teljesítmény**: Dedikált erőforrások, nagy átbocsátás
+- **Teljesítmény**: Dedikált erőforrások, magas átbocsátóképesség
 - **Biztonság**: Prémium biztonsági funkciók
 - **Skálázás**: Teljes automatikus skálázási képességek
 - **Monitorozás**: Átfogó megfigyelhetőség
 
 ---
 
-## Szolgáltatás-specifikus útmutatók
+## Szolgáltatás-specifikus irányelvek
 
 ### Azure App Service
 
-#### SKU döntési mátrix
+#### SKU Döntési Mátrix
 
-| Használati eset | Ajánlott SKU | Indoklás |
-|-----------------|-------------|----------|
+| Felhasználási eset | Ajánlott SKU | Indoklás |
+|--------------------|-------------|----------|
 | Fejlesztés/tesztelés | F1 (Ingyenes) vagy B1 (Alap) | Költséghatékony, elegendő teszteléshez |
-| Kis éles alkalmazások | S1 (Standard) | Egyedi domain, SSL, automatikus skálázás |
+| Kis éles alkalmazások | S1 (Standard) | Egyedi domainek, SSL, automatikus skálázás |
 | Közepes éles alkalmazások | P1V3 (Prémium V3) | Jobb teljesítmény, több funkció |
-| Nagy forgalmú alkalmazások | P2V3 vagy P3V3 | Dedikált erőforrások, nagy teljesítmény |
+| Nagy forgalmú alkalmazások | P2V3 vagy P3V3 | Dedikált erőforrások, magas teljesítmény |
 | Kritikus alkalmazások | I1V2 (Izolált V2) | Hálózati izoláció, dedikált hardver |
 
 #### Konfigurációs példák
@@ -203,19 +210,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-### Azure SQL Database
+### Azure SQL Adatbázis
 
-#### SKU kiválasztási keretrendszer
+#### SKU Kiválasztási Keretrendszer
 
-1. **DTU-alapú (Database Transaction Units)**
+1. **DTU-alapú (Adatbázis Tranzakciós Egységek)**
    - **Alap**: 5 DTU - Fejlesztés/tesztelés
    - **Standard**: S0-S12 (10-3000 DTU) - Általános célú
    - **Prémium**: P1-P15 (125-4000 DTU) - Teljesítménykritikus
 
 2. **vCore-alapú** (Ajánlott éles környezethez)
-   - **Általános célú**: Kiegyensúlyozott számítási és tárhely
+   - **Általános célú**: Kiegyensúlyozott számítási és tárolási kapacitás
    - **Üzleti kritikus**: Alacsony késleltetés, magas IOPS
-   - **Hyperscale**: Nagyon skálázható tárhely (akár 100TB)
+   - **Hyperscale**: Nagyon skálázható tárolás (akár 100TB)
 
 #### Példa konfigurációk
 
@@ -261,7 +268,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
    - Fejlesztéshez és változó terhelésekhez alkalmas
    - Megosztott infrastruktúra
 
-2. **Dedikált (Munkaterhelési profilok)**
+2. **Dedikált (Munkaterhelési Profilok)**
    - Dedikált számítási erőforrások
    - Kiszámítható teljesítmény
    - Jobb éles környezethez
@@ -326,24 +333,24 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 ### Azure Cosmos DB
 
-#### Átbocsátási modellek
+#### Átbocsátási Modellek
 
-1. **Manuálisan előre meghatározott átbocsátás**
+1. **Manuálisan Provisionált Átbocsátás**
    - Kiszámítható teljesítmény
-   - Lefoglalt kapacitás kedvezmények
+   - Fenntartott kapacitás kedvezmények
    - Legjobb állandó terhelésekhez
 
-2. **Automatikus skálázású átbocsátás**
+2. **Automatikusan Skálázott Átbocsátás**
    - Automatikus skálázás használat alapján
    - Csak a tényleges használatért fizet (minimum mellett)
    - Jó változó terhelésekhez
 
 3. **Szerver nélküli**
    - Kérés-alapú fizetés
-   - Nincs előre meghatározott átbocsátás
+   - Nincs provisionált átbocsátás
    - Ideális fejlesztéshez és időszakos terhelésekhez
 
-#### SKU példák
+#### SKU Példák
 
 ```bicep
 // Development - Serverless
@@ -400,14 +407,14 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 ### Azure Storage Account
 
-#### Tárhely fiók típusok
+#### Tárolási Fiók Típusok
 
 1. **Standard_LRS** - Fejlesztés, nem kritikus adatok
 2. **Standard_GRS** - Éles környezet, földrajzi redundancia szükséges
 3. **Premium_LRS** - Nagy teljesítményű alkalmazások
 4. **Premium_ZRS** - Magas elérhetőség zónai redundanciával
 
-#### Teljesítmény szintek
+#### Teljesítmény Szintek
 
 - **Standard**: Általános célú, költséghatékony
 - **Prémium**: Nagy teljesítményű, alacsony késleltetésű forgatókönyvek
@@ -451,11 +458,11 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## Költségoptimalizálási stratégiák
+## Költségoptimalizálási Stratégiák
 
-### 1. Lefoglalt kapacitás
+### 1. Fenntartott Kapacitás
 
-Erőforrások lefoglalása 1-3 évre jelentős kedvezményekért:
+Erőforrások fenntartása 1-3 évre jelentős kedvezményekért:
 
 ```bash
 # Check reservation options
@@ -463,7 +470,7 @@ az reservations catalog show --reserved-resource-type SqlDatabase
 az reservations catalog show --reserved-resource-type CosmosDb
 ```
 
-### 2. Méretre szabás
+### 2. Méretre Igazítás
 
 Kisebb SKU-kkal kezdés, majd skálázás a tényleges használat alapján:
 
@@ -479,7 +486,7 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Automatikus skálázás konfiguráció
+### 3. Automatikus Skálázási Konfiguráció
 
 Intelligens skálázás megvalósítása a költségek optimalizálásához:
 
@@ -538,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Ütemezett skálázás
+### 4. Ütemezett Skálázás
 
-Skálázás csökkentése a csúcsidőn kívül:
+Skálázás csökkentése csúcsidőn kívül:
 
 ```json
 {
@@ -585,11 +592,11 @@ Skálázás csökkentése a csúcsidőn kívül:
 
 ---
 
-## Teljesítmény szempontok
+## Teljesítmény Szempontok
 
-### Alapvető teljesítményigények
+### Alapvető Teljesítménykövetelmények
 
-Határozza meg egyértelműen a teljesítményigényeket az SKU kiválasztás előtt:
+Világos teljesítménykövetelmények meghatározása az SKU kiválasztás előtt:
 
 ```yaml
 performance_requirements:
@@ -605,9 +612,9 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Terheléses tesztelés
+### Terhelés Tesztelés
 
-Tesztelje különböző SKU-kat a teljesítmény validálásához:
+Különböző SKU-k tesztelése a teljesítmény validálásához:
 
 ```bash
 # Azure Load Testing service
@@ -617,7 +624,7 @@ az load test create \
   --load-test-config @load-test-config.yaml
 ```
 
-### Monitorozás és optimalizálás
+### Monitorozás és Optimalizálás
 
 Átfogó monitorozás beállítása:
 
@@ -646,41 +653,41 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Gyors referencia táblázatok
+## Gyors Referencia Táblázatok
 
-### App Service SKU gyors referencia
+### App Service SKU Gyors Referencia
 
-| SKU | Szint | vCPU | RAM | Tárhely | Ár tartomány | Használati eset |
-|-----|-------|------|-----|---------|--------------|-----------------|
+| SKU | Szint | vCPU | RAM | Tárolás | Árkategória | Felhasználási eset |
+|-----|-------|------|-----|---------|-------------|--------------------|
 | F1 | Ingyenes | Megosztott | 1GB | 1GB | Ingyenes | Fejlesztés |
 | B1 | Alap | 1 | 1.75GB | 10GB | $ | Kis alkalmazások |
 | S1 | Standard | 1 | 1.75GB | 50GB | $$ | Éles környezet |
-| P1V3 | Prémium V3 | 2 | 8GB | 250GB | $$$ | Nagy teljesítmény |
+| P1V3 | Prémium V3 | 2 | 8GB | 250GB | $$$ | Magas teljesítmény |
 | I1V2 | Izolált V2 | 2 | 8GB | 1TB | $$$$ | Vállalati |
 
-### SQL Database SKU gyors referencia
+### SQL Adatbázis SKU Gyors Referencia
 
-| SKU | Szint | DTU/vCore | Tárhely | Ár tartomány | Használati eset |
-|-----|-------|-----------|---------|--------------|-----------------|
+| SKU | Szint | DTU/vCore | Tárolás | Árkategória | Felhasználási eset |
+|-----|-------|-----------|---------|-------------|--------------------|
 | Alap | Alap | 5 DTU | 2GB | $ | Fejlesztés |
 | S2 | Standard | 50 DTU | 250GB | $$ | Kis éles környezet |
-| P2 | Prémium | 250 DTU | 1TB | $$$ | Nagy teljesítmény |
+| P2 | Prémium | 250 DTU | 1TB | $$$ | Magas teljesítmény |
 | GP_Gen5_4 | Általános célú | 4 vCore | 4TB | $$$ | Kiegyensúlyozott |
 | BC_Gen5_8 | Üzleti kritikus | 8 vCore | 4TB | $$$$ | Kritikus |
 
-### Container Apps SKU gyors referencia
+### Container Apps SKU Gyors Referencia
 
-| Modell | Árképzés | CPU/Memória | Használati eset |
-|--------|----------|-------------|-----------------|
+| Modell | Árképzés | CPU/Memória | Felhasználási eset |
+|--------|---------|-------------|--------------------|
 | Fogyasztás | Használat-alapú | 0.25-2 vCPU | Fejlesztés, változó terhelés |
-| Dedikált D4 | Lefoglalt | 4 vCPU, 16GB | Éles környezet |
-| Dedikált D8 | Lefoglalt | 8 vCPU, 32GB | Nagy teljesítmény |
+| Dedikált D4 | Fenntartott | 4 vCPU, 16GB | Éles környezet |
+| Dedikált D8 | Fenntartott | 8 vCPU, 32GB | Magas teljesítmény |
 
 ---
 
-## Validációs eszközök
+## Validációs Eszközök
 
-### SKU elérhetőség ellenőrző
+### SKU Elérhetőség Ellenőrző
 
 ```bash
 #!/bin/bash
@@ -713,7 +720,7 @@ check_sku_availability() {
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Költségbecslési szkript
+### Költségbecslési Script
 
 ```powershell
 # PowerShell script for cost estimation
@@ -750,7 +757,7 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Teljesítmény validáció
+### Teljesítmény Validáció
 
 ```yaml
 # Load test configuration for SKU validation
@@ -785,18 +792,18 @@ test_configuration:
 
 ---
 
-## Legjobb gyakorlatok összefoglalása
+## Legjobb Gyakorlatok Összefoglalója
 
 ### Amit érdemes megtenni
 
-1. **Kezdje kicsiben, és skálázza fel** a tényleges használat alapján
-2. **Használjon különböző SKU-kat különböző környezetekhez**
+1. **Kis mérettel kezdjen, és skálázzon fel** a tényleges használat alapján
+2. **Különböző SKU-kat használjon különböző környezetekhez**
 3. **Folyamatosan monitorozza a teljesítményt és költségeket**
-4. **Használja a lefoglalt kapacitást éles környezethez**
-5. **Valósítson meg automatikus skálázást, ahol szükséges**
-6. **Tesztelje a teljesítményt valósághű terhelésekkel**
+4. **Fenntartott kapacitást használjon éles környezethez**
+5. **Automatikus skálázást valósítson meg, ahol szükséges**
+6. **Tesztelje a teljesítményt valós munkaterhelésekkel**
 7. **Tervezzen növekedésre, de kerülje a túlméretezést**
-8. **Használja az ingyenes szinteket fejlesztéshez, amikor lehetséges**
+8. **Fejlesztéshez használja az ingyenes szinteket, ha lehetséges**
 
 ### Amit érdemes elkerülni
 
@@ -805,21 +812,21 @@ test_configuration:
 3. **Ne feledkezzen meg az adatátviteli költségekről**
 4. **Ne méretezzen túl indokolatlanul**
 5. **Ne hagyja figyelmen kívül a függőségek hatását**
-6. **Ne állítsa túl magasra az automatikus skálázási korlátokat**
+6. **Ne állítson túl magas automatikus skálázási korlátokat**
 7. **Ne feledkezzen meg a megfelelőségi követelményekről**
 8. **Ne hozzon döntéseket kizárólag az ár alapján**
 
 ---
 
-**Profi tipp**: Használja az Azure Cost Management és Advisor eszközöket, hogy személyre szabott ajánlásokat kapjon az SKU kiválasztás optimalizálásához a tényleges használati minták alapján.
+**Profi Tipp**: Használja az Azure Cost Management és Advisor eszközöket, hogy személyre szabott ajánlásokat kapjon az SKU kiválasztás optimalizálásához a tényleges használati minták alapján.
 
 ---
 
 **Navigáció**
-- **Előző lecke**: [Kapacitástervezés](capacity-planning.md)
-- **Következő lecke**: [Előzetes ellenőrzések](preflight-checks.md)
+- **Előző Lecke**: [Kapacitástervezés](capacity-planning.md)
+- **Következő Lecke**: [Előzetes ellenőrzések](preflight-checks.md)
 
 ---
 
-**Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősség kizárása**:  
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

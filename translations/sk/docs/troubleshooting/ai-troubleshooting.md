@@ -1,25 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T23:25:06+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T10:05:04+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "sk"
 }
 -->
-# AI Príručka na riešenie problémov pre Azure Developer CLI
+# Sprievodca riešením problémov špecifických pre AI
 
-**Predchádzajúce:** [Produkčné AI Praktiky](../ai-foundry/production-ai-practices.md) | **Ďalšie:** [Začíname s AZD](../getting-started/README.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 7 - Riešenie problémov a ladenie
+- **⬅️ Predchádzajúca**: [Sprievodca ladením](debugging.md)
+- **➡️ Ďalšia kapitola**: [Kapitola 8: Produkčné a podnikové vzory](../ai-foundry/production-ai-practices.md)
+- **🤖 Súvisiace**: [Kapitola 2: Vývoj orientovaný na AI](../ai-foundry/azure-ai-foundry-integration.md)
 
-Táto komplexná príručka na riešenie problémov sa zaoberá bežnými problémami pri nasadzovaní AI riešení pomocou AZD, poskytuje riešenia a techniky ladenia špecifické pre služby Azure AI.
+**Predchádzajúca:** [Produkčné AI praktiky](../ai-foundry/production-ai-practices.md) | **Ďalšia:** [Začíname s AZD](../getting-started/README.md)
+
+Tento komplexný sprievodca riešením problémov sa zaoberá bežnými problémami pri nasadzovaní AI riešení s AZD, pričom poskytuje riešenia a techniky ladenia špecifické pre služby Azure AI.
 
 ## Obsah
 
 - [Problémy so službou Azure OpenAI](../../../../docs/troubleshooting)
 - [Problémy s Azure AI Search](../../../../docs/troubleshooting)
 - [Problémy s nasadzovaním aplikácií v kontajneroch](../../../../docs/troubleshooting)
-- [Chyby autentifikácie a povolení](../../../../docs/troubleshooting)
-- [Zlyhania nasadenia modelov](../../../../docs/troubleshooting)
+- [Chyby autentifikácie a oprávnení](../../../../docs/troubleshooting)
+- [Zlyhania nasadzovania modelov](../../../../docs/troubleshooting)
 - [Problémy s výkonom a škálovaním](../../../../docs/troubleshooting)
 - [Správa nákladov a kvót](../../../../docs/troubleshooting)
 - [Nástroje a techniky ladenia](../../../../docs/troubleshooting)
@@ -36,7 +43,7 @@ Error: The requested resource type is not available in the location 'westus'
 **Príčiny:**
 - Azure OpenAI nie je dostupná vo vybranom regióne
 - Vyčerpaná kvóta v preferovaných regiónoch
-- Obmedzenia kapacity regiónu
+- Obmedzenia kapacity v regióne
 
 **Riešenia:**
 
@@ -72,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Problém: Prekročená kvóta nasadenia modelu
+### Problém: Prekročená kvóta nasadzovania modelu
 
 **Príznaky:**
 ```
@@ -142,7 +149,7 @@ az rest --method get \
 
 ## Problémy s Azure AI Search
 
-### Problém: Nedostatočný cenový plán služby Search
+### Problém: Nedostatočná úroveň cenového plánu služby Search
 
 **Príznaky:**
 ```
@@ -151,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Riešenia:**
 
-1. **Aktualizujte cenový plán:**
+1. **Inovujte cenový plán:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -169,7 +176,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Vypnite semantické vyhľadávanie (pre vývoj):**
+2. **Vypnite sémantické vyhľadávanie (pre vývoj):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problém: Zlyhania pri spúšťaní aplikácie v kontajneri
+### Problém: Zlyhania pri spustení aplikácie v kontajneri
 
 **Príznaky:**
 ```
@@ -359,9 +366,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Chyby autentifikácie a povolení
+## Chyby autentifikácie a oprávnení
 
-### Problém: Odmietnuté povolenie spravovanej identity
+### Problém: Odmietnuté oprávnenie spravovanej identity
 
 **Príznaky:**
 ```
@@ -410,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Problém: Odmietnutý prístup k Key Vault
+### Problém: Odmietnutý prístup k trezoru kľúčov
 
 **Príznaky:**
 ```
@@ -419,7 +426,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Riešenia:**
 
-1. **Udeľte povolenia pre Key Vault:**
+1. **Udeľte oprávnenia k trezoru kľúčov:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -451,7 +458,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Zlyhania nasadenia modelov
+## Zlyhania nasadzovania modelov
 
 ### Problém: Verzia modelu nie je dostupná
 
@@ -528,7 +535,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 ### Problém: Vysoká latencia odpovedí
 
 **Príznaky:**
-- Časy odpovedí > 30 sekúnd
+- Časy odozvy > 30 sekúnd
 - Chyby časového limitu
 - Slabá používateľská skúsenosť
 
@@ -569,7 +576,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Konfigurujte automatické škálovanie:**
+3. **Nakonfigurujte automatické škálovanie:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problém: Chyby nedostatku pamäte
+### Problém: Nedostatok pamäte
 
 **Príznaky:**
 ```
@@ -661,7 +668,7 @@ class MemoryOptimizedAI:
 
 **Príznaky:**
 - Vyšší účet za Azure, než sa očakávalo
-- Použitie tokenov presahujúce odhady
+- Spotreba tokenov presahujúca odhady
 - Spustené upozornenia na rozpočet
 
 **Riešenia:**
@@ -838,17 +845,17 @@ def monitor_performance(func):
 | Chybový kód | Popis | Riešenie |
 |-------------|-------|----------|
 | 401 | Neautorizované | Skontrolujte API kľúče a konfiguráciu spravovanej identity |
-| 403 | Zakázané | Overte priradenie rolí RBAC |
+| 403 | Zakázané | Overte priradenie RBAC rolí |
 | 429 | Obmedzené rýchlosťou | Implementujte logiku opakovania s exponenciálnym oneskorením |
 | 500 | Interná chyba servera | Skontrolujte stav nasadenia modelu a logy |
-| 503 | Služba nedostupná | Overte zdravie služby a dostupnosť regiónu |
+| 503 | Služba nedostupná | Overte stav služby a dostupnosť regiónu |
 
 ## Ďalšie kroky
 
-1. **Preštudujte [Príručku nasadenia AI modelov](ai-model-deployment.md)** pre najlepšie postupy nasadenia
-2. **Dokončite [Produkčné AI Praktiky](production-ai-practices.md)** pre riešenia pripravené na podnikové prostredie
+1. **Preštudujte si [Sprievodcu nasadzovaním AI modelov](ai-model-deployment.md)** pre najlepšie postupy nasadzovania
+2. **Dokončite [Produkčné AI praktiky](production-ai-practices.md)** pre riešenia pripravené na podnikové prostredie
 3. **Pripojte sa k [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** pre podporu komunity
-4. **Odosielajte problémy** do [AZD GitHub repozitára](https://github.com/Azure/azure-dev) pre problémy špecifické pre AZD
+4. **Nahláste problémy** do [AZD GitHub repozitára](https://github.com/Azure/azure-dev) pre problémy špecifické pre AZD
 
 ## Zdroje
 
@@ -858,10 +865,15 @@ def monitor_performance(func):
 
 ---
 
-**Predchádzajúce:** [Produkčné AI Praktiky](../ai-foundry/production-ai-practices.md) | **Ďalšie:** [Workshop](../../workshop/README.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 7 - Riešenie problémov a ladenie
+- **⬅️ Predchádzajúca**: [Sprievodca ladením](debugging.md)
+- **➡️ Ďalšia kapitola**: [Kapitola 8: Produkčné a podnikové vzory](../ai-foundry/production-ai-practices.md)
+- **🤖 Súvisiace**: [Kapitola 2: Vývoj orientovaný na AI](../ai-foundry/azure-ai-foundry-integration.md)
 - [Riešenie problémov s Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

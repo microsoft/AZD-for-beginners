@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T23:24:18+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T09:21:57+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "hu"
 }
 -->
-# AI Hibakeresési Útmutató az Azure Developer CLI-hez
+# AI-specifikus hibaelhárítási útmutató
 
-**Előző:** [AI Gyártási Gyakorlatok](../ai-foundry/production-ai-practices.md) | **Következő:** [AZD Kezdő Útmutató](../getting-started/README.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlapja**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 7. fejezet - Hibaelhárítás és hibakeresés
+- **⬅️ Előző**: [Hibakeresési útmutató](debugging.md)
+- **➡️ Következő fejezet**: [8. fejezet: Produkciós és vállalati minták](../ai-foundry/production-ai-practices.md)
+- **🤖 Kapcsolódó**: [2. fejezet: AI-első fejlesztés](../ai-foundry/azure-ai-foundry-integration.md)
 
-Ez az átfogó hibakeresési útmutató az AZD használatával történő AI megoldások telepítése során felmerülő gyakori problémákat tárgyalja, megoldásokat és hibakeresési technikákat kínálva az Azure AI szolgáltatásokhoz.
+**Előző:** [Produkciós AI gyakorlatok](../ai-foundry/production-ai-practices.md) | **Következő:** [AZD kezdő lépések](../getting-started/README.md)
+
+Ez az átfogó hibaelhárítási útmutató az AZD használatával történő AI megoldások telepítése során felmerülő gyakori problémákat tárgyalja, megoldásokat és Azure AI szolgáltatásokra specifikus hibakeresési technikákat kínálva.
 
 ## Tartalomjegyzék
 
-- [Azure OpenAI Szolgáltatás Problémák](../../../../docs/troubleshooting)
-- [Azure AI Keresési Hibák](../../../../docs/troubleshooting)
-- [Konténer Alkalmazások Telepítési Problémák](../../../../docs/troubleshooting)
-- [Hitelesítési és Jogosultsági Hibák](../../../../docs/troubleshooting)
-- [Modellek Telepítési Hibái](../../../../docs/troubleshooting)
-- [Teljesítmény és Skálázási Problémák](../../../../docs/troubleshooting)
-- [Költség- és Kvóta Kezelés](../../../../docs/troubleshooting)
-- [Hibakeresési Eszközök és Technikák](../../../../docs/troubleshooting)
+- [Azure OpenAI szolgáltatási problémák](../../../../docs/troubleshooting)
+- [Azure AI keresési problémák](../../../../docs/troubleshooting)
+- [Konténeralkalmazások telepítési problémái](../../../../docs/troubleshooting)
+- [Hitelesítési és jogosultsági hibák](../../../../docs/troubleshooting)
+- [Modellek telepítési hibái](../../../../docs/troubleshooting)
+- [Teljesítmény- és skálázási problémák](../../../../docs/troubleshooting)
+- [Költség- és kvótakezelés](../../../../docs/troubleshooting)
+- [Hibakeresési eszközök és technikák](../../../../docs/troubleshooting)
 
-## Azure OpenAI Szolgáltatás Problémák
+## Azure OpenAI szolgáltatási problémák
 
-### Probléma: OpenAI Szolgáltatás Nem Elérhető a Régióban
+### Probléma: OpenAI szolgáltatás nem érhető el a régióban
 
 **Tünetek:**
 ```
@@ -35,12 +42,12 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Okok:**
 - Az Azure OpenAI nem érhető el a kiválasztott régióban
-- A kvóta kimerült az előnyben részesített régiókban
+- A preferált régiókban kimerült a kvóta
 - Regionális kapacitáskorlátok
 
 **Megoldások:**
 
-1. **Régió Elérhetőségének Ellenőrzése:**
+1. **Régió elérhetőségének ellenőrzése:**
 ```bash
 # List available regions for OpenAI
 az cognitiveservices account list-skus \
@@ -49,7 +56,7 @@ az cognitiveservices account list-skus \
   --output table
 ```
 
-2. **AZD Konfiguráció Frissítése:**
+2. **AZD konfiguráció frissítése:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -60,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **Alternatív Régiók Használata:**
+3. **Alternatív régiók használata:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -72,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Probléma: Modell Telepítési Kvóta Túllépve
+### Probléma: Modell telepítési kvóta túllépése
 
 **Tünetek:**
 ```
@@ -81,7 +88,7 @@ Error: Deployment failed due to insufficient quota
 
 **Megoldások:**
 
-1. **Aktuális Kvóta Ellenőrzése:**
+1. **Aktuális kvóta ellenőrzése:**
 ```bash
 # Check quota usage
 az cognitiveservices usage list \
@@ -89,7 +96,7 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **Kvóta Növelés Kérése:**
+2. **Kvóta növelésének kérése:**
 ```bash
 # Submit quota increase request
 az support tickets create \
@@ -99,7 +106,7 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **Modell Kapacitás Optimalizálása:**
+3. **Modell kapacitás optimalizálása:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -117,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### Probléma: Érvénytelen API Verzió
+### Probléma: Érvénytelen API verzió
 
 **Tünetek:**
 ```
@@ -126,13 +133,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Megoldások:**
 
-1. **Támogatott API Verzió Használata:**
+1. **Támogatott API verzió használata:**
 ```python
 # Use latest supported version
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
-2. **API Verzió Kompatibilitás Ellenőrzése:**
+2. **API verzió kompatibilitásának ellenőrzése:**
 ```bash
 # List supported API versions
 az rest --method get \
@@ -140,9 +147,9 @@ az rest --method get \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI Keresési Hibák
+## Azure AI keresési problémák
 
-### Probléma: Keresési Szolgáltatás Árazási Szint Nem Megfelelő
+### Probléma: Keresési szolgáltatás árazási szintje nem elegendő
 
 **Tünetek:**
 ```
@@ -151,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Megoldások:**
 
-1. **Árazási Szint Frissítése:**
+1. **Árazási szint frissítése:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -169,7 +176,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Szemantikus Keresés Kikapcsolása (Fejlesztés):**
+2. **Szemantikus keresés letiltása (fejlesztési környezetben):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -183,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Probléma: Index Létrehozási Hibák
+### Probléma: Index létrehozási hibák
 
 **Tünetek:**
 ```
@@ -192,7 +199,7 @@ Error: Cannot create index, insufficient permissions
 
 **Megoldások:**
 
-1. **Keresési Szolgáltatás Kulcsok Ellenőrzése:**
+1. **Keresési szolgáltatás kulcsainak ellenőrzése:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -200,7 +207,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Index Séma Ellenőrzése:**
+2. **Index séma ellenőrzése:**
 ```python
 # Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
@@ -216,7 +223,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Felügyelt Identitás Használata:**
+3. **Felügyelt identitás használata:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -230,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Konténer Alkalmazások Telepítési Problémák
+## Konténeralkalmazások telepítési problémái
 
-### Probléma: Konténer Építési Hibák
+### Probléma: Konténer építési hibák
 
 **Tünetek:**
 ```
@@ -241,7 +248,7 @@ Error: Failed to build container image
 
 **Megoldások:**
 
-1. **Dockerfile Szintaxis Ellenőrzése:**
+1. **Dockerfile szintaxis ellenőrzése:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -263,7 +270,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Függőségek Validálása:**
+2. **Függőségek validálása:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -275,7 +282,7 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **Egészségügyi Ellenőrzés Hozzáadása:**
+3. **Egészségügyi ellenőrzés hozzáadása:**
 ```python
 # main.py - Add health check endpoint
 from fastapi import FastAPI
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Probléma: Konténer Alkalmazás Indítási Hibák
+### Probléma: Konténeralkalmazás indítási hibák
 
 **Tünetek:**
 ```
@@ -296,7 +303,7 @@ Error: Container failed to start within timeout period
 
 **Megoldások:**
 
-1. **Indítási Időtúllépés Növelése:**
+1. **Indítási időkorlát növelése:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -329,7 +336,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Modell Betöltés Optimalizálása:**
+2. **Modell betöltés optimalizálása:**
 ```python
 # Lazy load models to reduce startup time
 import asyncio
@@ -359,9 +366,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Hitelesítési és Jogosultsági Hibák
+## Hitelesítési és jogosultsági hibák
 
-### Probléma: Felügyelt Identitás Jogosultság Megtagadva
+### Probléma: Felügyelt identitás jogosultság megtagadva
 
 **Tünetek:**
 ```
@@ -370,7 +377,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 **Megoldások:**
 
-1. **Szerepkör Hozzárendelések Ellenőrzése:**
+1. **Szerepkör-hozzárendelések ellenőrzése:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -378,7 +385,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Szükséges Szerepkörök Hozzárendelése:**
+2. **Szükséges szerepkörök hozzárendelése:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -395,7 +402,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Hitelesítés Tesztelése:**
+3. **Hitelesítés tesztelése:**
 ```python
 # Test managed identity authentication
 from azure.identity import DefaultAzureCredential
@@ -410,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Probléma: Key Vault Hozzáférés Megtagadva
+### Probléma: Key Vault hozzáférés megtagadva
 
 **Tünetek:**
 ```
@@ -419,7 +426,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Megoldások:**
 
-1. **Key Vault Jogosultságok Megadása:**
+1. **Key Vault jogosultságok megadása:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -438,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **RBAC Használata Hozzáférési Szabályzatok Helyett:**
+2. **RBAC használata hozzáférési szabályok helyett:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -451,9 +458,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Modellek Telepítési Hibái
+## Modellek telepítési hibái
 
-### Probléma: Modell Verzió Nem Elérhető
+### Probléma: Modell verzió nem érhető el
 
 **Tünetek:**
 ```
@@ -462,7 +469,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 **Megoldások:**
 
-1. **Elérhető Modellek Ellenőrzése:**
+1. **Elérhető modellek ellenőrzése:**
 ```bash
 # List available models
 az cognitiveservices account list-models \
@@ -472,7 +479,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Modell Tartalékok Használata:**
+2. **Modell tartalékok használata:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -501,7 +508,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Modell Validálása Telepítés Előtt:**
+3. **Modell validálása telepítés előtt:**
 ```python
 # Pre-deployment model validation
 import httpx
@@ -523,9 +530,9 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Teljesítmény és Skálázási Problémák
+## Teljesítmény- és skálázási problémák
 
-### Probléma: Magas Késleltetésű Válaszok
+### Probléma: Magas késleltetésű válaszok
 
 **Tünetek:**
 - Válaszidők > 30 másodperc
@@ -534,7 +541,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **Megoldások:**
 
-1. **Kérés Időtúllépések Beállítása:**
+1. **Kérés időkorlátok beállítása:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -549,7 +556,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Válasz Gyorsítótárazás Hozzáadása:**
+2. **Válasz gyorsítótárazás hozzáadása:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -569,7 +576,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Automatikus Skálázás Konfigurálása:**
+3. **Automatikus skálázás konfigurálása:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Probléma: Memória Kimerülési Hibák
+### Probléma: Memória kifogyási hibák
 
 **Tünetek:**
 ```
@@ -612,7 +619,7 @@ Error: Container killed due to memory limit exceeded
 
 **Megoldások:**
 
-1. **Memória Allokáció Növelése:**
+1. **Memória allokáció növelése:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -631,7 +638,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Memória Használat Optimalizálása:**
+2. **Memóriahasználat optimalizálása:**
 ```python
 # Memory-efficient model handling
 import gc
@@ -655,18 +662,18 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Költség- és Kvóta Kezelés
+## Költség- és kvótakezelés
 
-### Probléma: Váratlan Magas Költségek
+### Probléma: Váratlanul magas költségek
 
 **Tünetek:**
 - Azure számla magasabb a vártnál
-- Token használat meghaladja a becsléseket
-- Költségriasztások aktiválva
+- Tokenhasználat meghaladja a becsléseket
+- Költségriasztások aktiválódnak
 
 **Megoldások:**
 
-1. **Költségkontrollok Bevezetése:**
+1. **Költségkontrollok bevezetése:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -685,7 +692,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **Költségriasztások Beállítása:**
+2. **Költségriasztások beállítása:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -710,7 +717,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **Modell Kiválasztás Optimalizálása:**
+3. **Modellválasztás optimalizálása:**
 ```python
 # Cost-aware model selection
 MODEL_COSTS = {
@@ -729,9 +736,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## Hibakeresési Eszközök és Technikák
+## Hibakeresési eszközök és technikák
 
-### AZD Hibakeresési Parancsok
+### AZD hibakeresési parancsok
 
 ```bash
 # Enable verbose logging
@@ -747,9 +754,9 @@ azd logs --follow
 azd env get-values
 ```
 
-### Alkalmazás Hibakeresés
+### Alkalmazás hibakeresés
 
-1. **Strukturált Naplózás:**
+1. **Strukturált naplózás:**
 ```python
 import logging
 import json
@@ -773,7 +780,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Egészségügyi Ellenőrzési Végpontok:**
+2. **Egészségügyi ellenőrzési végpontok:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
@@ -833,35 +840,40 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Gyakori Hibakódok és Megoldások
+## Gyakori hibakódok és megoldások
 
 | Hibakód | Leírás | Megoldás |
 |---------|--------|----------|
 | 401 | Jogosulatlan | API kulcsok és felügyelt identitás konfiguráció ellenőrzése |
-| 403 | Tiltott | RBAC szerepkör hozzárendelések ellenőrzése |
-| 429 | Korlátozott | Újrapróbálkozási logika bevezetése exponenciális visszalépéssel |
-| 500 | Belső Szerver Hiba | Modell telepítési állapot és naplók ellenőrzése |
-| 503 | Szolgáltatás Nem Elérhető | Szolgáltatás állapotának és regionális elérhetőség ellenőrzése |
+| 403 | Tiltott | RBAC szerepkör-hozzárendelések ellenőrzése |
+| 429 | Korlátozott | Újrapróbálkozási logika implementálása exponenciális visszalépéssel |
+| 500 | Belső szerverhiba | Modell telepítési állapot és naplók ellenőrzése |
+| 503 | Szolgáltatás nem érhető el | Szolgáltatás állapotának és regionális elérhetőség ellenőrzése |
 
-## Következő Lépések
+## Következő lépések
 
-1. **Tekintse át az [AI Modell Telepítési Útmutatót](ai-model-deployment.md)** a telepítési legjobb gyakorlatokért
-2. **Fejezze be az [AI Gyártási Gyakorlatokat](production-ai-practices.md)** vállalati szintű megoldásokért
+1. **Tekintse át az [AI modell telepítési útmutatót](ai-model-deployment.md)** a telepítési legjobb gyakorlatokért
+2. **Fejezze be a [Produkciós AI gyakorlatokat](production-ai-practices.md)** vállalati megoldásokhoz
 3. **Csatlakozzon az [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** közösségi támogatásért
-4. **Nyújtson be hibajelentéseket** az [AZD GitHub repóba](https://github.com/Azure/azure-dev) AZD-specifikus problémák esetén
+4. **Nyújtson be problémákat** az [AZD GitHub tárolóba](https://github.com/Azure/azure-dev) AZD-specifikus problémák esetén
 
 ## Források
 
-- [Azure OpenAI Szolgáltatás Hibakeresés](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Konténer Alkalmazások Hibakeresés](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Keresés Hibakeresés](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure OpenAI szolgáltatás hibaelhárítás](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Konténeralkalmazások hibaelhárítás](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI keresés hibaelhárítás](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**Előző:** [AI Gyártási Gyakorlatok](../ai-foundry/production-ai-practices.md) | **Következő:** [Workshop](../../workshop/README.md)
-- [Azure Developer CLI Hibakeresés](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlapja**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 7. fejezet - Hibaelhárítás és hibakeresés
+- **⬅️ Előző**: [Hibakeresési útmutató](debugging.md)
+- **➡️ Következő fejezet**: [8. fejezet: Produkciós és vállalati minták](../ai-foundry/production-ai-practices.md)
+- **🤖 Kapcsolódó**: [2. fejezet: AI-első fejlesztés](../ai-foundry/azure-ai-foundry-integration.md)
+- [Azure Developer CLI hibaelhárítás](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

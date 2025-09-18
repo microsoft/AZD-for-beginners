@@ -1,26 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-10T07:28:10+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-18T10:11:49+00:00",
   "source_file": "resources/faq.md",
   "language_code": "sk"
 }
 -->
 # Často kladené otázky (FAQ)
 
+**Pomoc podľa kapitol**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../README.md)
+- **🚆 Problémy s inštaláciou**: [Kapitola 1: Inštalácia a nastavenie](../docs/getting-started/installation.md)
+- **🤖 Otázky o AI**: [Kapitola 2: Vývoj orientovaný na AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Riešenie problémov**: [Kapitola 7: Riešenie problémov a ladenie](../docs/troubleshooting/common-issues.md)
+
 ## Úvod
 
-Tento komplexný FAQ poskytuje odpovede na najčastejšie otázky o Azure Developer CLI (azd) a nasadeniach v Azure. Nájdite rýchle riešenia bežných problémov, pochopte osvedčené postupy a získajte objasnenie konceptov a pracovných postupov azd.
+Tento komplexný FAQ poskytuje odpovede na najčastejšie otázky týkajúce sa Azure Developer CLI (azd) a nasadení v Azure. Nájdete tu rýchle riešenia bežných problémov, pochopíte osvedčené postupy a získate objasnenie konceptov a pracovných postupov azd.
 
 ## Ciele učenia
 
 Preskúmaním tohto FAQ sa naučíte:
 - Nájsť rýchle odpovede na bežné otázky a problémy s Azure Developer CLI
 - Pochopiť kľúčové koncepty a terminológiu prostredníctvom praktického formátu otázok a odpovedí
-- Získať riešenia na riešenie problémov a chybových scenárov
-- Naučiť sa osvedčené postupy prostredníctvom často kladených otázok o optimalizácii
-- Objaviť pokročilé funkcie a schopnosti prostredníctvom otázok na expertnú úroveň
+- Získať riešenia na riešenie častých problémov a chýb
+- Osvojiť si osvedčené postupy prostredníctvom často kladených otázok o optimalizácii
+- Objaviť pokročilé funkcie a možnosti prostredníctvom otázok na expertnú úroveň
 - Efektívne odkazovať na odporúčania týkajúce sa nákladov, bezpečnosti a stratégie nasadenia
 
 ## Výsledky učenia
@@ -71,12 +77,12 @@ Pravidelným odkazovaním na tento FAQ budete schopní:
 - Go
 - PHP
 - Statické webové stránky
-- Kontajnerové aplikácie
+- Kontajnerizované aplikácie
 
 ### Otázka: Môžem používať azd s existujúcimi projektmi?
 **Odpoveď**: Áno! Môžete:
 1. Použiť `azd init` na pridanie konfigurácie azd do existujúcich projektov
-2. Prispôsobiť existujúce projekty tak, aby zodpovedali štruktúre šablóny azd
+2. Prispôsobiť existujúce projekty štruktúre šablóny azd
 3. Vytvoriť vlastné šablóny na základe vašej existujúcej architektúry
 
 ---
@@ -84,22 +90,22 @@ Pravidelným odkazovaním na tento FAQ budete schopní:
 ## Autentifikácia a prístup
 
 ### Otázka: Ako sa autentifikujem v Azure pomocou azd?
-**Odpoveď**: Použite `azd auth login`, ktorý otvorí okno prehliadača na autentifikáciu v Azure. Pre scenáre CI/CD použite servisné princípy alebo spravované identity.
+**Odpoveď**: Použite `azd auth login`, ktorý otvorí okno prehliadača na autentifikáciu v Azure. Pre scenáre CI/CD použite servisné identity alebo spravované identity.
 
-### Otázka: Môžem používať azd s viacerými predplatnými Azure?
-**Odpoveď**: Áno. Použite `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` na špecifikovanie, ktoré predplatné sa má použiť pre každé prostredie.
+### Otázka: Môžem používať azd s viacerými Azure predplatnými?
+**Odpoveď**: Áno. Použite `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` na špecifikovanie predplatného pre každé prostredie.
 
 ### Otázka: Aké oprávnenia potrebujem na nasadenie pomocou azd?
 **Odpoveď**: Typicky potrebujete:
 - **Rolu prispievateľa (Contributor)** na skupine zdrojov alebo predplatnom
 - **Správcu prístupu používateľov (User Access Administrator)**, ak nasadzujete zdroje, ktoré vyžadujú priradenie rolí
-- Konkrétne oprávnenia sa líšia podľa šablóny a nasadzovaných zdrojov
+- Konkrétne oprávnenia závisia od šablóny a nasadzovaných zdrojov
 
 ### Otázka: Môžem používať azd v CI/CD pipeline?
-**Odpoveď**: Samozrejme! azd je navrhnutý na integráciu s CI/CD. Použite servisné princípy na autentifikáciu a nastavte premenné prostredia na konfiguráciu.
+**Odpoveď**: Samozrejme! azd je navrhnutý na integráciu s CI/CD. Použite servisné identity na autentifikáciu a nastavte premenné prostredia na konfiguráciu.
 
 ### Otázka: Ako riešim autentifikáciu v GitHub Actions?
-**Odpoveď**: Použite akciu Azure Login so servisnými princípmi:
+**Odpoveď**: Použite Azure Login akciu so servisnými identitami:
 ```yaml
 - uses: azure/login@v1
   with:
@@ -114,7 +120,7 @@ Pravidelným odkazovaním na tento FAQ budete schopní:
 ### Otázka: Kde nájdem šablóny azd?
 **Odpoveď**: 
 - Oficiálne šablóny: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Šablóny komunity: Vyhľadajte na GitHube "azd-template"
+- Komunitné šablóny: Vyhľadajte na GitHube "azd-template"
 - Použite `azd template list` na prehliadanie dostupných šablón
 
 ### Otázka: Ako vytvorím vlastnú šablónu?
@@ -129,8 +135,8 @@ Pravidelným odkazovaním na tento FAQ budete schopní:
 
 ### Otázka: Aký je rozdiel medzi oficiálnymi a komunitnými šablónami?
 **Odpoveď**: 
-- **Oficiálne šablóny**: Udržiavané spoločnosťou Microsoft, pravidelne aktualizované, s komplexnou dokumentáciou
-- **Komunitné šablóny**: Vytvorené vývojármi, môžu mať špecifické prípady použitia, rôznu kvalitu a údržbu
+- **Oficiálne šablóny**: Udržiavané Microsoftom, pravidelne aktualizované, s komplexnou dokumentáciou
+- **Komunitné šablóny**: Vytvorené vývojármi, môžu mať špecifické použitia, rôznu kvalitu a údržbu
 
 ### Otázka: Ako aktualizujem šablónu vo svojom projekte?
 **Odpoveď**: Šablóny sa neaktualizujú automaticky. Môžete:
@@ -141,31 +147,39 @@ Pravidelným odkazovaním na tento FAQ budete schopní:
 ---
 
 ...
-1. Analyzujte aktuálnu architektúru nasadenia  
-2. Vytvorte ekvivalentné Bicep šablóny  
+2. **Šablóny**: Vytvárajte šablóny podľa [pokynov pre šablóny](https://github.com/Azure-Samples/awesome-azd)  
+3. **Dokumentácia**: Prispievajte do dokumentácie na [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
+
+### Otázka: Aký je plán pre azd?  
+**Odpoveď**: Pozrite si [oficiálny plán](https://github.com/Azure/azure-dev/projects) pre plánované funkcie a vylepšenia.  
+
+### Otázka: Ako môžem migrovať z iných nástrojov na nasadzovanie na azd?  
+**Odpoveď**:  
+1. Analyzujte aktuálnu architektúru nasadzovania  
+2. Vytvorte ekvivalentné šablóny Bicep  
 3. Nakonfigurujte `azure.yaml`, aby zodpovedal aktuálnym službám  
-4. Dôkladne otestujte v prostredí vývoja  
+4. Dôkladne otestujte v prostredí pre vývoj  
 5. Postupne migrujte prostredia  
 
 ---
 
-## Máte ešte otázky?
+## Máte stále otázky?  
 
-### **Najskôr vyhľadajte**  
-- Skontrolujte [oficiálnu dokumentáciu](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Vyhľadajte [GitHub issues](https://github.com/Azure/azure-dev/issues) pre podobné problémy  
+### **Najprv hľadajte**  
+- Prezrite si [oficiálnu dokumentáciu](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- Vyhľadajte [problémy na GitHube](https://github.com/Azure/azure-dev/issues) pre podobné problémy  
 
 ### **Získajte pomoc**  
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Podpora od komunity  
+- [Diskusie na GitHube](https://github.com/Azure/azure-dev/discussions) - Podpora od komunity  
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Technické otázky  
 - [Azure Discord](https://discord.gg/azure) - Chat komunity v reálnom čase  
 
 ### **Nahláste problémy**  
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Hlásenia chýb a požiadavky na funkcie  
+- [Problémy na GitHube](https://github.com/Azure/azure-dev/issues/new) - Hlásenia chýb a požiadavky na funkcie  
 - Priložte relevantné logy, chybové hlásenia a kroky na reprodukciu  
 
 ### **Zistite viac**  
-- [Dokumentácia Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Dokumentácia k Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 - [Centrum architektúry Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [Rámec dobre navrhnutej architektúry Azure](https://learn.microsoft.com/en-us/azure/well-architected/)  
 
@@ -182,4 +196,4 @@ Pravidelným odkazovaním na tento FAQ budete schopní:
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

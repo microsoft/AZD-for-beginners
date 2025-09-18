@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9736db53ea878e07688670ebcc8906bc",
-  "translation_date": "2025-09-12T22:10:56+00:00",
+  "original_hash": "73f4ab6147d5fac5f8c5ad72742e8e1d",
+  "translation_date": "2025-09-18T08:52:06+00:00",
   "source_file": "changelog.md",
   "language_code": "sw"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Utangulizi
 
-Changelog hii inaandika mabadiliko yote muhimu, masasisho, na maboresho kwenye hifadhi ya AZD Kwa Kompyuta. Tunafuata kanuni za toleo la semantic na tunadumisha logi hii ili kusaidia watumiaji kuelewa kilichobadilika kati ya matoleo.
+Changelog hii inaandika mabadiliko yote muhimu, masasisho, na maboresho kwenye hifadhi ya AZD Kwa Kompyuta. Tunafuata kanuni za toleo la semantiki na tunadumisha logi hii ili kusaidia watumiaji kuelewa kilichobadilika kati ya matoleo.
 
 ## Malengo ya Kujifunza
 
@@ -19,74 +19,159 @@ Kwa kupitia changelog hii, utaweza:
 - Kujua kuhusu vipengele vipya na nyongeza za maudhui
 - Kuelewa maboresho yaliyofanywa kwenye nyaraka zilizopo
 - Kufuatilia marekebisho ya hitilafu ili kuhakikisha usahihi
-- Kufuatilia mabadiliko ya vifaa vya kujifunzia kwa muda
+- Kufuatilia mabadiliko ya nyenzo za kujifunza kwa muda
 
 ## Matokeo ya Kujifunza
 
 Baada ya kupitia maingizo ya changelog, utaweza:
 - Kutambua maudhui na rasilimali mpya zinazopatikana kwa kujifunza
 - Kuelewa ni sehemu zipi zimeboreshwa au kusasishwa
-- Kupanga njia yako ya kujifunza kulingana na vifaa vya kisasa zaidi
+- Kupanga njia yako ya kujifunza kulingana na nyenzo za kisasa zaidi
 - Kutoa maoni na mapendekezo kwa maboresho ya baadaye
 
 ## Historia ya Toleo
 
-### [v3.0.0] - 2025-09-12
+### [v3.2.0] - 2025-09-17
 
-#### Mabadiliko Makubwa - Kuzingatia Watengenezaji wa AI na Muunganisho wa Azure AI Foundry
-**Toleo hili linabadilisha hifadhi kuwa rasilimali kamili ya kujifunza inayozingatia AI na muunganisho wa Azure AI Foundry.**
+#### Urekebishaji Mkubwa wa Uelekezaji na Mfumo wa Kujifunza kwa Sura
+**Toleo hili linaanzisha muundo wa kujifunza kwa sura na uelekezaji ulioboreshwa katika hifadhi nzima.**
 
 #### Imeongezwa
-- **🤖 Njia ya Kujifunza Inayozingatia AI**: Muundo kamili unaoweka kipaumbele kwa watengenezaji wa AI na wahandisi
-- **Mwongozo wa Muunganisho wa Azure AI Foundry**: Nyaraka za kina za kuunganisha AZD na huduma za Azure AI Foundry
-- **Mchoro wa Utekelezaji wa Miundo ya AI**: Mwongozo wa kina unaofunika uteuzi wa modeli, usanidi, na mikakati ya utekelezaji wa uzalishaji
-- **Maabara ya Warsha ya AI**: Warsha ya vitendo ya saa 2-3 ya kubadilisha programu za AI kuwa suluhisho zinazoweza kutekelezwa na AZD
-- **Mbinu Bora za AI za Uzalishaji**: Mchoro wa biashara kwa kupima, kufuatilia, na kulinda mzigo wa kazi wa AI
-- **Mwongozo wa Kutatua Matatizo ya AI**: Mwongozo wa kina wa kutatua matatizo ya Azure OpenAI, Huduma za Utambuzi, na masuala ya utekelezaji wa AI
-- **Matunzio ya Violezo vya AI**: Mkusanyiko wa violezo vya Azure AI Foundry vilivyoangaziwa na viwango vya ugumu
-- **Vifaa vya Warsha**: Muundo kamili wa warsha na maabara ya vitendo na vifaa vya rejea
+- **📚 Mfumo wa Kujifunza kwa Sura**: Kozi nzima imepangwa upya kuwa sura 8 za kujifunza kwa hatua:
+  - Sura ya 1: Msingi & Kuanza Haraka (⭐ - Dakika 30-45)
+  - Sura ya 2: Maendeleo ya AI Kwanza (⭐⭐ - Saa 1-2)
+  - Sura ya 3: Usanidi & Uthibitishaji (⭐⭐ - Dakika 45-60)
+  - Sura ya 4: Miundombinu kama Nambari & Utekelezaji (⭐⭐⭐ - Saa 1-1.5)
+  - Sura ya 5: Suluhisho za AI za Wakala Wengi (⭐⭐⭐⭐ - Saa 2-3)
+  - Sura ya 6: Uthibitishaji Kabla ya Utekelezaji & Mipango (⭐⭐ - Saa 1)
+  - Sura ya 7: Utatuzi wa Hitilafu & Urekebishaji (⭐⭐ - Saa 1-1.5)
+  - Sura ya 8: Mifumo ya Uzalishaji & Biashara (⭐⭐⭐⭐ - Saa 2-3)
+- **📚 Mfumo wa Uelekezaji Kamili**: Vichwa vya uelekezaji na vichwa vya chini vinavyofanana katika nyaraka zote
+- **🎯 Ufuatiliaji wa Maendeleo**: Orodha ya ukamilishaji wa kozi na mfumo wa uthibitishaji wa kujifunza
+- **🗺️ Mwongozo wa Njia ya Kujifunza**: Sehemu za kuanzia wazi kwa viwango tofauti vya uzoefu na malengo
+- **🔗 Uelekezaji wa Marejeleo**: Sura zinazohusiana na mahitaji ya awali zimeunganishwa wazi
 
 #### Imeboreshwa
-- **Muundo wa README**: Kuzingatia watengenezaji wa AI na data ya asilimia 45 ya maslahi ya jamii kutoka Discord ya Azure AI Foundry
-- **Njia za Kujifunza**: Safari ya kujifunza ya watengenezaji wa AI pamoja na njia za jadi kwa wanafunzi na wahandisi wa DevOps
-- **Mapendekezo ya Violezo**: Violezo vya AI vilivyoangaziwa ikiwa ni pamoja na azure-search-openai-demo, contoso-chat, na openai-chat-app-quickstart
-- **Muunganisho wa Jamii**: Usaidizi wa jamii ya Discord ulioboreshwa na njia maalum za AI na mijadala
+- **Muundo wa README**: Umebadilishwa kuwa jukwaa la kujifunza lenye mpangilio wa sura
+- **Uelekezaji wa Nyaraka**: Kila ukurasa sasa unajumuisha muktadha wa sura na mwongozo wa maendeleo
+- **Muundo wa Violezo**: Mifano na violezo vimepangwa kulingana na sura za kujifunza
+- **Ujumuishaji wa Rasilimali**: Karatasi za mkato, maswali ya mara kwa mara, na miongozo ya masomo imeunganishwa na sura husika
+- **Ujumuishaji wa Warsha**: Maabara ya vitendo imepangwa kulingana na malengo ya kujifunza ya sura nyingi
 
-#### Kuzingatia Usalama na Uzalishaji
-- **Mchoro wa Utambulisho Ulioendeshwa**: Usanidi wa uthibitisho na usalama maalum wa AI
+#### Imebadilishwa
+- **Maendeleo ya Kujifunza**: Kutoka nyaraka za mstari hadi kujifunza kwa sura zinazobadilika
+- **Nafasi ya Usanidi**: Mwongozo wa usanidi umewekwa upya kama Sura ya 3 kwa mtiririko bora wa kujifunza
+- **Ujumuishaji wa Maudhui ya AI**: Ujumuishaji bora wa maudhui maalum ya AI katika safari ya kujifunza
+- **Maudhui ya Uzalishaji**: Mifumo ya hali ya juu imeunganishwa katika Sura ya 8 kwa wanaojifunza wa biashara
+
+#### Imeimarishwa
+- **Uzoefu wa Mtumiaji**: Vidokezo vya uelekezaji vilivyo wazi na viashiria vya maendeleo ya sura
+- **Upatikanaji**: Mifumo ya uelekezaji inayofanana kwa urahisi wa kusafiri katika kozi
+- **Uwasilishaji wa Kitaalamu**: Muundo wa kozi wa mtindo wa chuo kikuu unaofaa kwa mafunzo ya kitaaluma na ya shirika
+- **Ufanisi wa Kujifunza**: Muda uliopunguzwa wa kutafuta maudhui yanayofaa kupitia mpangilio ulioboreshwa
+
+#### Utekelezaji wa Kiufundi
+- **Vichwa vya Uelekezaji**: Uelekezaji wa sura uliosawazishwa katika faili zaidi ya 40 za nyaraka
+- **Uelekezaji wa Vichwa vya Chini**: Mwongozo wa maendeleo thabiti na viashiria vya ukamilishaji wa sura
+- **Uunganishaji wa Ndani**: Mfumo wa uunganishaji wa ndani unaounganisha dhana zinazohusiana
+- **Upangaji wa Sura**: Violezo na mifano imeunganishwa wazi na malengo ya kujifunza
+
+#### Uboreshaji wa Mwongozo wa Masomo
+- **📚 Malengo Kamili ya Kujifunza**: Mwongozo wa masomo umebadilishwa ili kuendana na mfumo wa sura 8
+- **🎯 Tathmini ya Kila Sura**: Kila sura inajumuisha malengo maalum ya kujifunza na mazoezi ya vitendo
+- **📋 Ufuatiliaji wa Maendeleo**: Ratiba ya kujifunza ya kila wiki yenye matokeo yanayopimika na orodha za ukamilishaji
+- **❓ Maswali ya Tathmini**: Maswali ya uthibitishaji wa maarifa kwa kila sura yenye matokeo ya kitaaluma
+- **🛠️ Mazoezi ya Vitendo**: Shughuli za vitendo na hali halisi za utekelezaji na utatuzi wa hitilafu
+- **📊 Maendeleo ya Ujuzi**: Maendeleo wazi kutoka dhana za msingi hadi mifumo ya biashara yenye mtazamo wa maendeleo ya kazi
+- **🎓 Mfumo wa Vyeti**: Matokeo ya maendeleo ya kitaaluma na mfumo wa kutambuliwa na jamii
+- **⏱️ Usimamizi wa Muda**: Mpango wa kujifunza wa wiki 10 wenye uthibitishaji wa hatua muhimu
+
+### [v3.1.0] - 2025-09-17
+
+#### Uboreshaji wa Suluhisho za AI za Wakala Wengi
+**Toleo hili linaboresha suluhisho la rejareja la wakala wengi kwa kuboresha majina ya wakala na nyaraka zilizoboreshwa.**
+
+#### Imebadilishwa
+- **Terminolojia ya Wakala Wengi**: "Wakala Cora" imebadilishwa kuwa "Wakala wa Wateja" katika suluhisho la rejareja la wakala wengi kwa uelewa bora
+- **Muundo wa Wakala**: Nyaraka zote, violezo vya ARM, na mifano ya nambari zimesasishwa kutumia jina thabiti la "Wakala wa Wateja"
+- **Mifano ya Usanidi**: Mifumo ya usanidi wa wakala imeboreshwa na majina yaliyosasishwa
+- **Ulinganifu wa Nyaraka**: Marejeleo yote yanatumia majina ya wakala ya kitaaluma na ya kueleweka
+
+#### Imeboreshwa
+- **Kifurushi cha Violezo vya ARM**: Violezo vya retail-multiagent-arm-template vimesasishwa na marejeleo ya Wakala wa Wateja
+- **Michoro ya Muundo**: Michoro ya Mermaid imesasishwa na majina ya wakala yaliyoboreshwa
+- **Mifano ya Nambari**: Madarasa ya Python na mifano ya utekelezaji sasa yanatumia jina la CustomerAgent
+- **Vigezo vya Mazingira**: Hati zote za utekelezaji zimesasishwa kutumia mikataba ya CUSTOMER_AGENT_NAME
+
+#### Imeimarishwa
+- **Uzoefu wa Msanidi Programu**: Majukumu ya wakala yaliyo wazi zaidi katika nyaraka
+- **Uwezo wa Uzalishaji**: Ulinganifu bora na mikataba ya majina ya biashara
+- **Nyenzo za Kujifunza**: Majina ya wakala yanayoeleweka zaidi kwa madhumuni ya elimu
+- **Urahisi wa Violezo**: Uelewa rahisi wa kazi za wakala na mifumo ya utekelezaji
+
+#### Maelezo ya Kiufundi
+- Michoro ya Mermaid ya muundo imesasishwa na marejeleo ya CustomerAgent
+- Majina ya madarasa ya CoraAgent yamebadilishwa kuwa CustomerAgent katika mifano ya Python
+- Usanidi wa JSON wa violezo vya ARM umebadilishwa kutumia aina ya wakala "customer"
+- Vigezo vya mazingira vimebadilishwa kutoka CORA_AGENT_* hadi CUSTOMER_AGENT_*
+- Amri zote za utekelezaji na usanidi wa kontena vimesasishwa
+
+### [v3.0.0] - 2025-09-12
+
+#### Mabadiliko Makubwa - Mtazamo wa Msanidi Programu wa AI na Ujumuishaji wa Azure AI Foundry
+**Toleo hili linabadilisha hifadhi kuwa rasilimali kamili ya kujifunza inayolenga AI na ujumuishaji wa Azure AI Foundry.**
+
+#### Imeongezwa
+- **🤖 Njia ya Kujifunza AI Kwanza**: Muundo kamili unaolenga wasanidi programu wa AI na wahandisi
+- **Mwongozo wa Ujumuishaji wa Azure AI Foundry**: Nyaraka kamili za kuunganisha AZD na huduma za Azure AI Foundry
+- **Mifumo ya Utekelezaji wa AI**: Mwongozo wa kina unaofunika uteuzi wa modeli, usanidi, na mikakati ya utekelezaji wa uzalishaji
+- **Maabara ya Warsha ya AI**: Warsha ya vitendo ya saa 2-3 ya kubadilisha programu za AI kuwa suluhisho zinazoweza kutekelezwa na AZD
+- **Mifumo Bora ya AI ya Uzalishaji**: Mifumo inayofaa kwa biashara ya kupima, kufuatilia, na kulinda mzigo wa kazi wa AI
+- **Mwongozo wa Utatuzi wa AI**: Utatuzi wa kina wa Azure OpenAI, Huduma za Utambuzi, na masuala ya utekelezaji wa AI
+- **Matunzio ya Violezo vya AI**: Mkusanyiko wa violezo vya Azure AI Foundry vilivyoangaziwa na viwango vya ugumu
+- **Nyenzo za Warsha**: Muundo kamili wa warsha na maabara ya vitendo na nyenzo za marejeleo
+
+#### Imeboreshwa
+- **Muundo wa README**: Umebadilishwa kulenga wasanidi programu wa AI na data ya riba ya jamii ya 45% kutoka Discord ya Azure AI Foundry
+- **Njia za Kujifunza**: Safari ya msanidi programu wa AI iliyopewa kipaumbele pamoja na njia za jadi kwa wanafunzi na wahandisi wa DevOps
+- **Mapendekezo ya Violezo**: Violezo vya AI vilivyoangaziwa ikiwa ni pamoja na azure-search-openai-demo, contoso-chat, na openai-chat-app-quickstart
+- **Ujumuishaji wa Jamii**: Usaidizi wa jamii ya Discord ulioboreshwa na njia maalum za AI na mijadala
+
+#### Mtazamo wa Usalama & Uzalishaji
+- **Mifumo ya Utambulisho Inayosimamiwa**: Usanidi wa uthibitishaji na usalama maalum wa AI
 - **Uboreshaji wa Gharama**: Ufuatiliaji wa matumizi ya tokeni na udhibiti wa bajeti kwa mzigo wa kazi wa AI
 - **Utekelezaji wa Kanda Nyingi**: Mikakati ya utekelezaji wa programu za AI duniani kote
-- **Ufuatiliaji wa Utendaji**: Vipimo maalum vya AI na muunganisho wa Application Insights
+- **Ufuatiliaji wa Utendaji**: Vipimo maalum vya AI na ujumuishaji wa Application Insights
 
 #### Ubora wa Nyaraka
-- **Muundo wa Kozi ya Mstari**: Maendeleo ya kimantiki kutoka kwa muundo wa msingi hadi mifumo ya utekelezaji wa AI ya hali ya juu
-- **URL Zilizothibitishwa**: Viungo vyote vya hifadhi ya nje vimehakikishwa na vinapatikana
-- **Rejea Kamili**: Viungo vyote vya nyaraka za ndani vimehakikishwa na vinafanya kazi
-- **Tayari kwa Uzalishaji**: Mchoro wa utekelezaji wa biashara na mifano ya ulimwengu halisi
+- **Muundo wa Kozi ya Mstari**: Maendeleo ya kimantiki kutoka kwa mwanzo hadi mifumo ya hali ya juu ya utekelezaji wa AI
+- **URL Zilizothibitishwa**: Viungo vyote vya hifadhi ya nje vimehakikishwa na kupatikana
+- **Marejeleo Kamili**: Viungo vyote vya nyaraka za ndani vimehakikishwa na vinafanya kazi
+- **Uwezo wa Uzalishaji**: Mifumo ya utekelezaji wa biashara yenye mifano halisi
 
 ### [v2.0.0] - 2025-09-09
 
-#### Mabadiliko Makubwa - Muundo wa Hifadhi na Uboreshaji wa Kitaaluma
+#### Mabadiliko Makubwa - Urekebishaji wa Hifadhi na Uboreshaji wa Kitaalamu
 **Toleo hili linawakilisha mabadiliko makubwa ya muundo wa hifadhi na uwasilishaji wa maudhui.**
 
 #### Imeongezwa
-- **Muundo wa Kujifunza Ulioandaliwa**: Kurasa zote za nyaraka sasa zinajumuisha Utangulizi, Malengo ya Kujifunza, na Matokeo ya Kujifunza
-- **Mfumo wa Uabiri**: Viungo vya somo la awali/lijalo vimeongezwa katika nyaraka zote kwa maendeleo ya kujifunza yanayoongozwa
-- **Mwongozo wa Kujifunza**: study-guide.md ya kina yenye malengo ya kujifunza, mazoezi ya vitendo, na vifaa vya tathmini
-- **Uwasilishaji wa Kitaaluma**: Emoji zote zimeondolewa kwa kuboresha upatikanaji na mwonekano wa kitaaluma
-- **Muundo wa Maudhui Ulioboreshwa**: Uboreshaji wa mpangilio na mtiririko wa vifaa vya kujifunzia
+- **Mfumo wa Kujifunza Ulioandaliwa**: Kurasa zote za nyaraka sasa zinajumuisha sehemu za Utangulizi, Malengo ya Kujifunza, na Matokeo ya Kujifunza
+- **Mfumo wa Uelekezaji**: Viungo vya somo la awali/linalofuata vimeongezwa katika nyaraka zote kwa maendeleo ya kujifunza yanayoongozwa
+- **Mwongozo wa Masomo**: Mwongozo wa masomo wa kina (study-guide.md) wenye malengo ya kujifunza, mazoezi ya vitendo, na nyenzo za tathmini
+- **Uwasilishaji wa Kitaalamu**: Emoji zote zimeondolewa kwa upatikanaji bora na mwonekano wa kitaaluma
+- **Muundo wa Maudhui Ulioboreshwa**: Mpangilio na mtiririko wa nyenzo za kujifunza umeimarishwa
 
 #### Imebadilishwa
-- **Muundo wa Nyaraka**: Nyaraka zote zimewekwa katika muundo wa kujifunza unaoendana
-- **Mtiririko wa Uabiri**: Utekelezaji wa maendeleo ya kimantiki kupitia vifaa vyote vya kujifunzia
-- **Uwasilishaji wa Maudhui**: Vipengele vya mapambo vimeondolewa kwa ajili ya muundo wazi na wa kitaaluma
-- **Muundo wa Viungo**: Viungo vyote vya ndani vimesasishwa ili kusaidia mfumo mpya wa uabiri
+- **Muundo wa Nyaraka**: Nyaraka zote zimewekwa kiwango na muundo wa kujifunza unaofanana
+- **Mtiririko wa Uelekezaji**: Maendeleo ya kimantiki yameanzishwa katika nyenzo zote za kujifunza
+- **Uwasilishaji wa Maudhui**: Vipengele vya mapambo vimeondolewa kwa uwasilishaji wazi na wa kitaaluma
+- **Muundo wa Viungo**: Viungo vyote vya ndani vimesasishwa kusaidia mfumo mpya wa uelekezaji
 
-#### Imeboreshwa
+#### Imeimarishwa
 - **Upatikanaji**: Utegemezi wa emoji umeondolewa kwa utangamano bora wa wasomaji wa skrini
 - **Mwonekano wa Kitaaluma**: Uwasilishaji safi wa mtindo wa kitaaluma unaofaa kwa kujifunza kwa biashara
 - **Uzoefu wa Kujifunza**: Mbinu iliyopangwa yenye malengo na matokeo wazi kwa kila somo
-- **Mpangilio wa Maudhui**: Mtiririko bora wa kimantiki na muunganisho kati ya mada zinazohusiana
+- **Muundo wa Maudhui**: Mtiririko bora wa kimantiki na uhusiano kati ya mada zinazohusiana
 
 ### [v1.0.0] - 2025-09-09
 
@@ -96,7 +181,7 @@ Baada ya kupitia maingizo ya changelog, utaweza:
 - **Muundo wa Nyaraka za Msingi**
   - Mfululizo kamili wa mwongozo wa kuanza
   - Nyaraka za kina za utekelezaji na utoaji
-  - Rasilimali za kutatua matatizo na miongozo ya urekebishaji
+  - Rasilimali za utatuzi wa hitilafu na miongozo ya urekebishaji
   - Zana na taratibu za uthibitishaji kabla ya utekelezaji
 
 - **Moduli ya Kuanza**
@@ -107,105 +192,51 @@ Baada ya kupitia maingizo ya changelog, utaweza:
 
 - **Moduli ya Utekelezaji na Utoaji**
   - Mwongozo wa Utekelezaji: Nyaraka kamili za mtiririko wa kazi
-  - Mwongozo wa Utoaji: Miundombinu kama Kanuni kwa kutumia Bicep
-  - Mbinu bora za utekelezaji wa uzalishaji
-  - Mchoro wa usanifu wa huduma nyingi
+  - Mwongozo wa Utoaji: Miundombinu kama Nambari kwa kutumia Bicep
+  - Mifumo bora ya utekelezaji wa uzalishaji
+  - Mifumo ya usanifu wa huduma nyingi
 
 - **Moduli ya Uthibitishaji Kabla ya Utekelezaji**
   - Mipango ya Uwezo: Uthibitishaji wa upatikanaji wa rasilimali za Azure
   - Uchaguzi wa SKU: Mwongozo wa kina wa viwango vya huduma
   - Ukaguzi wa Awali: Hati za uthibitishaji otomatiki (PowerShell na Bash)
-  - Zana za makadirio ya gharama na upangaji wa bajeti
+  - Zana za makadirio ya gharama na mipango ya bajeti
 
-- **Moduli ya Kutatua Matatizo**
-  - Masuala ya Kawaida: Matatizo yanayokutana mara kwa mara na suluhisho
-  - Mwongozo wa Urekebishaji: Mbinu za kutatua matatizo kwa utaratibu
-  - Mbinu na zana za uchunguzi wa hali ya juu
-  - Ufuatiliaji wa utendaji na uboreshaji
-
-- **Rasilimali na Rejea**
-  - Karatasi ya Amri: Rejea ya haraka kwa amri muhimu
-  - Kamusi: Ufafanuzi wa istilahi na vifupisho vya kina
-  - Maswali Yanayoulizwa Mara kwa Mara: Majibu ya kina kwa maswali ya kawaida
-  - Viungo vya rasilimali za nje na muunganisho wa jamii
-
-- **Mifano na Violezo**
-  - Mfano wa Programu Rahisi ya Wavuti
-  - Kiolezo cha utekelezaji wa Tovuti Tuli
-  - Usanidi wa Programu ya Kontena
-  - Mchoro wa muunganisho wa hifadhidata
-  - Mifano ya usanifu wa huduma ndogo
-  - Utekelezaji wa kazi za serverless
-
-#### Vipengele
-- **Usaidizi wa Majukwaa Mbalimbali**: Miongozo ya usakinishaji na usanidi kwa Windows, macOS, na Linux
-- **Viwango Mbalimbali vya Ujuzi**: Maudhui yaliyoundwa kwa wanafunzi hadi watengenezaji wa kitaaluma
-- **Mtazamo wa Vitendo**: Mifano ya vitendo na hali halisi za ulimwengu
-- **Ufunikaji Kamili**: Kutoka dhana za msingi hadi mifumo ya hali ya juu ya biashara
-- **Mbinu ya Kwanza ya Usalama**: Mbinu bora za usalama zimejumuishwa kote
-- **Uboreshaji wa Gharama**: Mwongozo wa utekelezaji wa gharama nafuu na usimamizi wa rasilimali
-
-#### Ubora wa Nyaraka
-- **Mifano ya Kanuni za Kina**: Sampuli za kanuni za vitendo zilizojaribiwa
-- **Maelekezo Hatua kwa Hatua**: Mwongozo wazi na wa kutekelezeka
-- **Ushughulikiaji wa Hitilafu wa Kina**: Kutatua matatizo ya kawaida
-- **Muunganisho wa Mbinu Bora**: Viwango vya tasnia na mapendekezo
-- **Utangamano wa Toleo**: Sasisho za kisasa na huduma za Azure na vipengele vya azd
-
-## Maboresho Yanayopangwa kwa Baadaye
-
-### Toleo 3.1.0 (Limepangwa)
-#### Upanuzi wa Jukwaa la AI
-- **Usaidizi wa Miundo Mingi**: Mchoro wa muunganisho kwa Hugging Face, Azure Machine Learning, na miundo maalum
-- **Mifumo ya Mawakala wa AI**: Violezo vya LangChain, Semantic Kernel, na utekelezaji wa AutoGen
-- **Mchoro wa RAG wa Hali ya Juu**: Chaguo za hifadhidata ya vekta zaidi ya Azure AI Search (Pinecone, Weaviate, nk.)
-- **Ufuatiliaji wa AI**: Ufuatiliaji ulioboreshwa wa utendaji wa modeli, matumizi ya tokeni, na ubora wa majibu
-
-#### Uzoefu wa Watengenezaji
-- **Kiendelezi cha VS Code**: Uzoefu wa maendeleo wa AZD + AI Foundry uliojumuishwa
-- **Muunganisho wa GitHub Copilot**: Uundaji wa violezo vya AZD unaosaidiwa na AI
-- **Mafunzo ya Kuingiliana**: Mazoezi ya vitendo ya usimbaji na uthibitishaji otomatiki kwa hali za AI
-- **Maudhui ya Video**: Mafunzo ya video ya ziada kwa wanaojifunza kwa kuona yanayozingatia utekelezaji wa AI
-
-### Toleo 4.0.0 (Limepangwa)
-#### Mchoro wa AI wa Biashara
-- **Mfumo wa Utawala**: Utawala wa modeli za AI, uzingatiaji, na nyayo za ukaguzi
-- **AI ya Wateja Wengi**: Mchoro wa kuhudumia wateja wengi na huduma za AI zilizotengwa
-- **Utekelezaji wa AI wa Kando**: Muunganisho na Azure IoT Edge na matukio ya kontena
-- **AI ya Wingu Mseto**: Mchoro wa utekelezaji wa wingu mseto na mzigo wa kazi wa AI
-
-#### Vipengele vya Hali ya Juu
-- **Utekelezaji wa Kiotomatiki wa Njia za AI**: Muunganisho wa MLOps na njia za Azure Machine Learning
-- **Usalama wa Hali ya Juu**: Mchoro wa uaminifu wa sifuri, viunganisho vya kibinafsi, na ulinzi wa hali ya juu dhidi ya vitisho
-- **Uboreshaji wa Utendaji**: Mbinu za hali ya juu za kurekebisha na kupima programu za AI zenye mtiririko wa juu
-- **Usambazaji wa Ulimwenguni**: Mchoro wa utoaji wa maudhui na muundo wa akiba ya kando kwa programu za AI
+- **Moduli ya Utatuzi wa Hitilafu**
+  - Masuala ya Kawaida: Matatizo yanayokutana mara kwa mara na suluhisho zake
+  - Mwongozo wa Urekebishaji: Mbinu za utatuzi wa hitilafu kwa utaratibu
+  - Mbinu na zana za uchunguzi wa
+- **Uendeshaji wa AI Pipeline**: Muunganiko wa MLOps na mifumo ya Azure Machine Learning
+- **Usalama wa Juu**: Mifumo ya zero-trust, endpoints za kibinafsi, na ulinzi wa hali ya juu dhidi ya vitisho
+- **Uboreshaji wa Utendaji**: Mikakati ya hali ya juu ya kurekebisha na kupanua programu za AI zenye kasi kubwa
+- **Usambazaji wa Kimataifa**: Mifumo ya utoaji wa maudhui na kuhifadhi kwenye ukingo kwa programu za AI
 
 ### Toleo 3.0.0 (Limepangwa) - Limezidiwa na Toleo la Sasa
-#### Mapendekezo ya Nyongeza - Sasa Yamefanyika katika v3.0.0
-- ✅ **Maudhui Yanayozingatia AI**: Muunganisho kamili wa Azure AI Foundry (Imekamilika)
-- ✅ **Mafunzo ya Kuingiliana**: Maabara ya warsha ya AI ya vitendo (Imekamilika)
-- ✅ **Moduli ya Usalama wa Hali ya Juu**: Mchoro wa usalama maalum wa AI (Imekamilika)
+#### Mapendekezo ya Nyongeza - Sasa Yamejumuishwa katika v3.0.0
+- ✅ **Maudhui Yanayolenga AI**: Muunganiko kamili wa Azure AI Foundry (Imekamilika)
+- ✅ **Mafunzo ya Kuingiliana**: Warsha ya mafunzo ya AI kwa vitendo (Imekamilika)
+- ✅ **Moduli ya Usalama wa Juu**: Mifumo ya usalama maalum kwa AI (Imekamilika)
 - ✅ **Uboreshaji wa Utendaji**: Mikakati ya kurekebisha mzigo wa kazi wa AI (Imekamilika)
 
-### Toleo 2.1.0 (Limepangwa) - Sehemu Zilizotekelezwa katika Toleo la Sasa
-#### Maboresho Madogo - Baadhi Yamekamilika katika Toleo la Sasa
-- ✅ **Mifano ya Ziada**: Hali za utekelezaji zinazozingatia AI (Imekamilika)
-- ✅ **Maswali Yanayoulizwa Mara kwa Mara Yaliyopanuliwa**: Maswali maalum ya AI na kutatua matatizo (Imekamilika)
-- **Muunganisho wa Zana**: Miongozo ya muunganisho wa IDE na wahariri iliyoboreshwa
-- ✅ **Upanuzi wa Ufuatiliaji**: Mchoro wa ufuatiliaji na mifumo ya tahadhari maalum ya AI (Imekamilika)
+### Toleo 2.1.0 (Limepangwa) - Limejumuishwa Sehemu katika v3.0.0
+#### Uboreshaji Mdogo - Baadhi Yamekamilika katika Toleo la Sasa
+- ✅ **Mifano ya Ziada**: Mifano ya usambazaji inayolenga AI (Imekamilika)
+- ✅ **Maswali Yanayoulizwa Mara kwa Mara Yaliyopanuliwa**: Maswali maalum kwa AI na utatuzi wa matatizo (Imekamilika)
+- **Muunganiko wa Zana**: Mwongozo wa kuunganisha IDE na wahariri ulioboreshwa
+- ✅ **Upanuzi wa Ufuatiliaji**: Mifumo ya ufuatiliaji na tahadhari maalum kwa AI (Imekamilika)
 
 #### Bado Limepangwa kwa Toleo la Baadaye
 - **Nyaraka Zinazofaa kwa Simu**: Muundo unaojibika kwa kujifunza kupitia simu
-- **Ufikiaji wa Nje ya Mtandao**: Pakiti za nyaraka zinazoweza kupakuliwa
-- **Muunganisho wa IDE Ulioboreshwa**: Kiendelezi cha VS Code kwa AZD + AI
-- **Dashibodi ya Jamii**: Vipimo vya jamii vya wakati halisi na ufuatiliaji wa michango
+- **Ufikiaji Nje ya Mtandao**: Pakiti za nyaraka zinazoweza kupakuliwa
+- **Muunganiko wa IDE Ulioboreshwa**: Kiendelezi cha VS Code kwa AZD + AI workflows
+- **Dashibodi ya Jamii**: Takwimu za jamii kwa muda halisi na ufuatiliaji wa michango
 
 ## Kuchangia kwenye Changelog
 
 ### Kuripoti Mabadiliko
-Unapochangia kwenye hifadhi hii, tafadhali hakikisha maingizo ya changelog yanajumuisha:
+Unapochangia kwenye hifadhi hii, hakikisha maingizo ya changelog yanajumuisha:
 
-1. **Nambari ya Toleo**: Kufuatia toleo la semantic (kubwa.ndogo.marekebisho)
+1. **Nambari ya Toleo**: Kwa kufuata semantic versioning (kubwa.ndogo.marekebisho)
 2. **Tarehe**: Tarehe ya kutolewa au sasisho katika muundo wa YYYY-MM-DD
 3. **Kategoria**: Imeongezwa, Imebadilishwa, Imeachwa, Imeondolewa, Imetatuliwa, Usalama
 4. **Maelezo ya Wazi**: Maelezo mafupi ya kilichobadilika
@@ -215,42 +246,113 @@ Unapochangia kwenye hifadhi hii, tafadhali hakikisha maingizo ya changelog yanaj
 
 #### Imeongezwa
 - Vipengele vipya, sehemu za nyaraka, au uwezo
-- Mifano mpya, violezo, au rasilimali za kujifunza
-- Zana za ziada, hati, au huduma
+- Mifano mpya, templates, au rasilimali za kujifunza
+- Zana za ziada, scripts, au utilities
 
 #### Imebadilishwa
 - Marekebisho ya utendaji uliopo au nyaraka
 - Sasisho za kuboresha uwazi au usahihi
-- Muundo wa maudhui au mpangilio uliorekebishwa
+- Urekebishaji wa maudhui au mpangilio
 
 #### Imeachwa
-- Vipengele au mbinu zinazopunguzwa
+- Vipengele au mbinu zinazokaribia kuondolewa
 - Sehemu za nyaraka zilizopangwa kuondolewa
 - Mbinu zilizo na mbadala bora
 
 #### Imeondolewa
 - Vipengele, nyaraka, au mifano ambayo si muhimu tena
-- Taarifa za zamani au mb
-- **Toleo Kuu la Hivi Karibuni**: Msaada kamili na masasisho ya mara kwa mara  
-- **Toleo Kuu la Awali**: Masasisho ya usalama na marekebisho muhimu kwa miezi 12  
-- **Matoleo ya Zamani**: Msaada wa jamii pekee, hakuna masasisho rasmi  
+- Taarifa zilizopitwa na wakati au mbinu zilizopitwa na wakati
+- Maudhui ya ziada au yaliyofutwa
 
-### Mwongozo wa Kuhama  
-Wakati matoleo makuu yanapotolewa, tunatoa:  
-- **Miongozo ya Kuhama**: Maelekezo ya hatua kwa hatua ya mpito  
-- **Maelezo ya Ulinganifu**: Maelezo kuhusu mabadiliko yanayovunja ulinganifu  
-- **Msaada wa Zana**: Scripti au zana za kusaidia katika kuhama  
-- **Msaada wa Jamii**: Majukwaa maalum kwa maswali ya kuhama  
+#### Imetatuliwa
+- Marekebisho ya makosa katika nyaraka au code
+- Utatuzi wa masuala au matatizo yaliyoripotiwa
+- Uboreshaji wa usahihi au utendaji
+
+#### Usalama
+- Uboreshaji au marekebisho yanayohusiana na usalama
+- Sasisho za mbinu bora za usalama
+- Utatuzi wa udhaifu wa usalama
+
+### Miongozo ya Semantic Versioning
+
+#### Toleo Kubwa (X.0.0)
+- Mabadiliko makubwa yanayohitaji hatua za mtumiaji
+- Urekebishaji mkubwa wa maudhui au mpangilio
+- Mabadiliko yanayobadilisha mbinu au njia ya msingi
+
+#### Toleo Ndogo (X.Y.0)
+- Vipengele vipya au nyongeza za maudhui
+- Uboreshaji unaohifadhi utangamano wa nyuma
+- Mifano ya ziada, zana, au rasilimali
+
+#### Toleo la Marekebisho (X.Y.Z)
+- Marekebisho ya makosa na urekebishaji
+- Uboreshaji mdogo wa maudhui yaliyopo
+- Ufafanuzi na nyongeza ndogo
+
+## Maoni na Mapendekezo ya Jamii
+
+Tunakaribisha maoni ya jamii ili kuboresha rasilimali hii ya kujifunza:
+
+### Jinsi ya Kutoa Maoni
+- **Masuala ya GitHub**: Ripoti matatizo au pendekeza maboresho (masuala maalum kwa AI yanakaribishwa)
+- **Majadiliano ya Discord**: Shiriki mawazo na ushirikiane na jamii ya Azure AI Foundry
+- **Pull Requests**: Changia maboresho ya moja kwa moja kwenye maudhui, hasa templates na miongozo ya AI
+- **Discord ya Azure AI Foundry**: Shiriki katika #Azure channel kwa majadiliano ya AZD + AI
+- **Majukwaa ya Jamii**: Shiriki katika majadiliano mapana ya watengenezaji wa Azure
+
+### Kategoria za Maoni
+- **Usahihi wa Maudhui ya AI**: Marekebisho ya taarifa za muunganiko wa huduma za AI na usambazaji
+- **Uzoefu wa Kujifunza**: Mapendekezo ya mtiririko bora wa kujifunza kwa watengenezaji wa AI
+- **Maudhui ya AI Yanayokosekana**: Maombi ya templates, mifumo, au mifano ya ziada ya AI
+- **Ufikiaji**: Uboreshaji kwa mahitaji tofauti ya kujifunza
+- **Muunganiko wa Zana za AI**: Mapendekezo ya muunganiko bora wa workflow ya maendeleo ya AI
+- **Mifumo ya AI ya Uzalishaji**: Maombi ya mifumo ya usambazaji wa AI kwa biashara
+
+### Ahadi ya Kujibu
+- **Jibu la Masuala**: Ndani ya masaa 48 kwa matatizo yaliyoripotiwa
+- **Maombi ya Vipengele**: Tathmini ndani ya wiki moja
+- **Michango ya Jamii**: Mapitio ndani ya wiki moja
+- **Masuala ya Usalama**: Kipaumbele cha haraka na jibu la haraka
+
+## Ratiba ya Matengenezo
+
+### Sasisho za Kawaida
+- **Mapitio ya Kila Mwezi**: Usahihi wa maudhui na uthibitishaji wa viungo
+- **Sasisho za Robo Mwaka**: Nyongeza kubwa za maudhui na maboresho
+- **Mapitio ya Nusu Mwaka**: Urekebishaji wa kina na uboreshaji
+- **Toleo la Kila Mwaka**: Sasisho kubwa za toleo na maboresho makubwa
+
+### Ufuatiliaji na Uhakikisho wa Ubora
+- **Upimaji wa Kiotomatiki**: Uthibitishaji wa kawaida wa mifano ya code na viungo
+- **Muunganiko wa Maoni ya Jamii**: Ujumuishaji wa mara kwa mara wa mapendekezo ya watumiaji
+- **Sasisho za Teknolojia**: Ulinganifu na huduma za Azure za hivi karibuni na matoleo ya azd
+- **Ukaguzi wa Ufikiaji**: Mapitio ya mara kwa mara kwa kanuni za muundo jumuishi
+
+## Sera ya Usaidizi wa Toleo
+
+### Usaidizi wa Toleo la Sasa
+- **Toleo Kubwa la Hivi Karibuni**: Usaidizi kamili na sasisho za kawaida
+- **Toleo Kubwa la Awali**: Sasisho za usalama na marekebisho muhimu kwa miezi 12
+- **Matoleo ya Urithi**: Usaidizi wa jamii pekee, hakuna sasisho rasmi
+
+### Mwongozo wa Uhamiaji
+Wakati matoleo makubwa yanatolewa, tunatoa:
+- **Miongozo ya Uhamiaji**: Maelekezo ya hatua kwa hatua ya mpito
+- **Maelezo ya Utangamano**: Maelezo kuhusu mabadiliko makubwa
+- **Usaidizi wa Zana**: Scripts au utilities kusaidia uhamiaji
+- **Usaidizi wa Jamii**: Majukwaa maalum kwa maswali ya uhamiaji
 
 ---
 
-**Urambazaji**  
-- **Somo la Awali**: [Mwongozo wa Masomo](resources/study-guide.md)  
-- **Somo Linalofuata**: Rudi kwa [README Kuu](README.md)  
+**Urambazaji**
+- **Somo la Awali**: [Mwongozo wa Kujifunza](resources/study-guide.md)
+- **Somo Lijalo**: Rudi kwenye [README Kuu](README.md)
 
-**Endelea Kusasishwa**: Fuata hifadhi hii kwa arifa kuhusu matoleo mapya na masasisho muhimu ya vifaa vya kujifunzia.  
+**Endelea Kusasishwa**: Fuata hifadhi hii kwa arifa kuhusu matoleo mapya na sasisho muhimu kwa vifaa vya kujifunza.
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutokuelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

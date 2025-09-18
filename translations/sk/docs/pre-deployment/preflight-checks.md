@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-10T06:38:18+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T10:05:35+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "sk"
 }
 -->
-# Kontrola pred nasadením - Validácia pripravenosti na nasadenie
+# Kontroly pred nasadením pre AZD
+
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 6 - Validácia a plánovanie pred nasadením
+- **⬅️ Predchádzajúca**: [Výber SKU](sku-selection.md)
+- **➡️ Nasledujúca kapitola**: [Kapitola 7: Riešenie problémov](../troubleshooting/common-issues.md)
+- **🔧 Súvisiace**: [Kapitola 4: Príručka nasadenia](../deployment/deployment-guide.md)
 
 ## Úvod
 
-Tento komplexný sprievodca poskytuje skripty a postupy na validáciu pred nasadením, aby sa zabezpečilo úspešné nasadenie pomocou Azure Developer CLI ešte pred jeho začiatkom. Naučte sa implementovať automatizované kontroly autentifikácie, dostupnosti zdrojov, kvót, súladu so zabezpečením a požiadaviek na výkon, aby ste predišli zlyhaniam nasadenia a optimalizovali úspešnosť nasadení.
+Tento komplexný sprievodca poskytuje skripty a postupy na validáciu pred nasadením, aby sa zabezpečilo úspešné nasadenie pomocou Azure Developer CLI ešte pred jeho začiatkom. Naučte sa implementovať automatizované kontroly autentifikácie, dostupnosti zdrojov, kvót, súladu so zabezpečením a požiadaviek na výkon, aby ste predišli zlyhaniam nasadenia a optimalizovali úspešnosť nasadenia.
 
 ## Ciele učenia
 
@@ -54,7 +61,7 @@ Kontroly pred nasadením sú nevyhnutné validácie vykonávané pred nasadením
 - **Autentifikácie a oprávnení**, ktoré sú správne nakonfigurované
 - **Platnosti šablón** a správnosti parametrov
 - **Sieťovej konektivity** a závislostí
-- **Súladu so zabezpečením** podľa organizačných politík
+- **Súladu so zabezpečením** s organizačnými politikami
 - **Odhadu nákladov** v rámci rozpočtových obmedzení
 
 ### Kedy vykonávať kontroly pred nasadením
@@ -62,7 +69,7 @@ Kontroly pred nasadením sú nevyhnutné validácie vykonávané pred nasadením
 - **Pred prvým nasadením** do nového prostredia
 - **Po významných zmenách šablón**
 - **Pred nasadeniami do produkcie**
-- **Pri zmene Azure regiónov**
+- **Pri zmene regiónov Azure**
 - **Ako súčasť CI/CD pipeline**
 
 ---
@@ -787,17 +794,17 @@ main "$@"
 
 ### Kontrolný zoznam pred nasadením
 
-Vytlačte si tento zoznam a overte každý bod pred nasadením:
+Vytlačte tento zoznam a overte každý bod pred nasadením:
 
 #### ✅ Nastavenie prostredia
 - [ ] AZD CLI nainštalovaný a aktualizovaný na najnovšiu verziu
 - [ ] Azure CLI nainštalovaný a autentifikovaný
-- [ ] Vybrané správne Azure predplatné
+- [ ] Vybrané správne predplatné Azure
 - [ ] Názov prostredia je jedinečný a dodržiava konvencie pomenovania
 - [ ] Identifikovaná cieľová skupina zdrojov alebo je možné ju vytvoriť
 
 #### ✅ Autentifikácia a oprávnenia
-- [ ] Úspešne autentifikovaný pomocou `azd auth login`
+- [ ] Úspešne autentifikované pomocou `azd auth login`
 - [ ] Používateľ má rolu Contributor na cieľovom predplatnom/skupine zdrojov
 - [ ] Konfigurovaný service principal pre CI/CD (ak je to relevantné)
 - [ ] Žiadne expirované certifikáty alebo poverenia
@@ -811,23 +818,23 @@ Vytlačte si tento zoznam a overte každý bod pred nasadením:
 - [ ] Žiadne pevne zakódované tajomstvá v šablónach
 
 #### ✅ Plánovanie zdrojov
-- [ ] Vybraný a validovaný cieľový Azure región
-- [ ] Požadované Azure služby dostupné v cieľovom regióne
+- [ ] Vybraný a validovaný cieľový región Azure
+- [ ] Požadované služby Azure dostupné v cieľovom regióne
 - [ ] Dostupné dostatočné kvóty pre plánované zdroje
 - [ ] Skontrolované konflikty pomenovania zdrojov
 - [ ] Pochopené závislosti medzi zdrojmi
 
 #### ✅ Sieť a zabezpečenie
 - [ ] Overená sieťová konektivita k Azure endpointom
-- [ ] Firewall/proxy nastavenia nakonfigurované, ak je to potrebné
+- [ ] Konfigurované nastavenia firewallu/proxy, ak je to potrebné
 - [ ] Key Vault nakonfigurovaný na správu tajomstiev
 - [ ] Použité spravované identity, kde je to možné
 - [ ] Povolené HTTPS pre webové aplikácie
 
-#### ✅ Správa nákladov
+#### ✅ Riadenie nákladov
 - [ ] Odhady nákladov vypočítané pomocou Azure Pricing Calculator
 - [ ] Konfigurované upozornenia na rozpočet, ak je to potrebné
-- [ ] Vybrané vhodné SKUs pre typ prostredia
+- [ ] Vybrané vhodné SKU pre typ prostredia
 - [ ] Zvážená rezervovaná kapacita pre produkčné pracovné zaťaženia
 
 #### ✅ Monitorovanie a pozorovateľnosť
@@ -1278,12 +1285,12 @@ steps:
 
 ## Zhrnutie najlepších postupov
 
-### ✅ Najlepšie postupy pre kontroly pred nasadením
+### ✅ Najlepšie postupy kontrol pred nasadením
 
 1. **Automatizujte, kde je to možné**
    - Integrujte kontroly do CI/CD pipeline
    - Používajte skripty na opakovateľné validácie
-   - Ukladajte výsledky na auditné účely
+   - Uchovávajte výsledky pre auditné záznamy
 
 2. **Validácia špecifická pre prostredie**
    - Rôzne kontroly pre vývoj/testovanie/produkciu
@@ -1313,7 +1320,7 @@ steps:
 3. **Ignorovanie limitov kvót** až do zlyhania nasadenia
 4. **Nevykonávanie validácie šablón** v CI/CD pipeline
 5. **Vynechanie validácie zabezpečenia** pre produkčné prostredia
-6. **Nedostatočný odhad nákladov**, čo vedie k rozpočtovým prekvapeniam
+6. **Nedostatočný odhad nákladov**, čo vedie k prekvapeniam v rozpočte
 
 ---
 
@@ -1328,4 +1335,4 @@ steps:
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

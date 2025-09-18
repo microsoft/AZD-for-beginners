@@ -1,27 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T22:17:14+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T09:19:30+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "hu"
 }
 -->
-# AZD Alapok - Az Azure Developer CLI megértése
+# AZD Alapok - Azure Developer CLI megértése
 
-**Előző:** [Telepítés és beállítás](installation.md) | **Következő:** [Konfiguráció](configuration.md)
+# AZD Alapok - Alapfogalmak és alapelvek
+
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 1. fejezet - Alapok és gyors kezdés
+- **⬅️ Előző**: [Kurzus áttekintése](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Következő**: [Telepítés és beállítás](installation.md)
+- **🚀 Következő fejezet**: [2. fejezet: AI-First fejlesztés](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Bevezetés
 
-Ez a lecke bemutatja az Azure Developer CLI-t (azd), egy hatékony parancssori eszközt, amely felgyorsítja az utat a helyi fejlesztéstől az Azure-ba történő telepítésig. Megismerheted az alapvető fogalmakat, a főbb funkciókat, és megértheted, hogyan egyszerűsíti az azd a felhőalapú alkalmazások telepítését.
+Ez a lecke bemutatja az Azure Developer CLI-t (azd), egy hatékony parancssori eszközt, amely felgyorsítja az utat a helyi fejlesztéstől az Azure-ba történő telepítésig. Megismerheted az alapfogalmakat, a főbb funkciókat, és megértheted, hogyan egyszerűsíti az azd a felhőalapú alkalmazások telepítését.
 
 ## Tanulási célok
 
 A lecke végére:
 - Megérted, mi az Azure Developer CLI és mi a fő célja
-- Megtanulod a sablonok, környezetek és szolgáltatások alapfogalmait
-- Felfedezed a kulcsfontosságú funkciókat, mint például a sablonvezérelt fejlesztés és az infrastruktúra kód formájában
-- Megérted az azd projektstruktúrát és munkafolyamatot
+- Megtanulod az alapfogalmakat, mint sablonok, környezetek és szolgáltatások
+- Felfedezed a kulcsfontosságú funkciókat, például a sablonvezérelt fejlesztést és az infrastruktúra kód formájában történő kezelését
+- Megérted az azd projektstruktúráját és munkafolyamatát
 - Felkészülsz az azd telepítésére és konfigurálására a fejlesztési környezetedben
 
 ## Tanulási eredmények
@@ -30,7 +37,7 @@ A lecke elvégzése után képes leszel:
 - Elmagyarázni az azd szerepét a modern felhőfejlesztési munkafolyamatokban
 - Azonosítani az azd projektstruktúra elemeit
 - Leírni, hogyan működnek együtt a sablonok, környezetek és szolgáltatások
-- Megérteni az infrastruktúra kód formájában történő előnyeit az azd segítségével
+- Megérteni az infrastruktúra kód formájában történő kezelésének előnyeit az azd segítségével
 - Felismerni az azd különböző parancsait és azok célját
 
 ## Mi az Azure Developer CLI (azd)?
@@ -40,8 +47,8 @@ Az Azure Developer CLI (azd) egy parancssori eszköz, amelyet arra terveztek, ho
 ## Alapfogalmak
 
 ### Sablonok
-A sablonok az azd alapját képezik. Ezek tartalmazzák:
-- **Alkalmazáskód** - Forráskódod és függőségeid
+A sablonok az azd alapját képezik. Tartalmazzák:
+- **Alkalmazáskód** - Forráskód és függőségek
 - **Infrastruktúra definíciók** - Azure erőforrások Bicep vagy Terraform segítségével definiálva
 - **Konfigurációs fájlok** - Beállítások és környezeti változók
 - **Telepítési szkriptek** - Automatizált telepítési munkafolyamatok
@@ -49,8 +56,8 @@ A sablonok az azd alapját képezik. Ezek tartalmazzák:
 ### Környezetek
 A környezetek különböző telepítési célokat képviselnek:
 - **Fejlesztés** - Tesztelésre és fejlesztésre
-- **Staging** - Előzetes termelési környezet
-- **Termelés** - Éles termelési környezet
+- **Staging** - Előzetes gyártási környezet
+- **Gyártás** - Éles gyártási környezet
 
 Minden környezet saját:
 - Azure erőforráscsoportot
@@ -58,13 +65,13 @@ Minden környezet saját:
 - Telepítési állapotot tart fenn
 
 ### Szolgáltatások
-A szolgáltatások az alkalmazásod építőelemei:
+A szolgáltatások az alkalmazás építőelemei:
 - **Frontend** - Webalkalmazások, SPÁ-k
 - **Backend** - API-k, mikroszolgáltatások
 - **Adatbázis** - Adattárolási megoldások
 - **Tárolás** - Fájl- és blobtárolás
 
-## Főbb funkciók
+## Kulcsfontosságú funkciók
 
 ### 1. Sablonvezérelt fejlesztés
 ```bash
@@ -76,7 +83,7 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastruktúra kód formájában
-- **Bicep** - Az Azure domain-specifikus nyelve
+- **Bicep** - Azure specifikus nyelv
 - **Terraform** - Többfelhős infrastruktúra eszköz
 - **ARM sablonok** - Azure Resource Manager sablonok
 
@@ -190,7 +197,7 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## Az `azd down --force --purge` megértése
+## Az `azd down --force --purge` parancs megértése
 Az `azd down --force --purge` parancs egy hatékony módja annak, hogy teljesen lebontsd az azd környezetet és az összes kapcsolódó erőforrást. Íme, mit csinálnak az egyes kapcsolók:
 ```
 --force
@@ -211,7 +218,7 @@ Megakadályozza, hogy az azd "emlékezzen" korábbi telepítésekre, amelyek pro
 ### Miért használjuk mindkettőt?
 Ha az `azd up` parancs akadályba ütközik a fennmaradó állapot vagy részleges telepítések miatt, ez a kombináció biztosítja a **tiszta lapot**.
 
-Különösen hasznos manuális erőforrás-törlések után az Azure portálon, vagy sablonok, környezetek vagy erőforráscsoport elnevezési konvenciók váltásakor.
+Különösen hasznos manuális erőforrás törlések után az Azure portálon, vagy sablonok, környezetek vagy erőforráscsoport elnevezési konvenciók váltásakor.
 
 ### Több környezet kezelése
 ```bash
@@ -264,14 +271,14 @@ azd init --template template1
 ```
 
 ### 2. Használd ki a sablonokat
-- Kezdd meglévő sablonokkal
+- Kezdj meglévő sablonokkal
 - Testreszabás az igényeid szerint
 - Hozz létre újrahasználható sablonokat a szervezeted számára
 
 ### 3. Környezetek elkülönítése
-- Használj külön környezeteket fejlesztéshez/staginghez/termeléshez
-- Soha ne telepíts közvetlenül termelésbe helyi gépről
-- Használj CI/CD csatornákat termelési telepítésekhez
+- Használj külön környezeteket fejlesztéshez/staginghez/gyártáshoz
+- Soha ne telepíts közvetlenül gyártásba helyi gépről
+- Használj CI/CD csatornákat gyártási telepítésekhez
 
 ### 4. Konfigurációkezelés
 - Használj környezeti változókat érzékeny adatokhoz
@@ -300,22 +307,30 @@ azd init --template template1
 
 ## Következő lépések
 
+**📖 Folytasd az 1. fejezet tanulását:**
 - [Telepítés és beállítás](installation.md) - Az azd telepítése és konfigurálása
-- [Az első projekted](first-project.md) - Gyakorlati útmutató
+- [Az első projekted](first-project.md) - Gyakorlati bemutató
 - [Konfigurációs útmutató](configuration.md) - Haladó konfigurációs lehetőségek
+
+**🎯 Készen állsz a következő fejezetre?**
+- [2. fejezet: AI-First fejlesztés](../ai-foundry/azure-ai-foundry-integration.md) - Kezdj el AI alkalmazásokat építeni
 
 ## További források
 
 - [Azure Developer CLI áttekintés](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Sablongaléria](https://azure.github.io/awesome-azd/)
+- [Sablon galéria](https://azure.github.io/awesome-azd/)
 - [Közösségi minták](https://github.com/Azure-Samples)
 
 ---
 
-**Előző:** [Telepítés és beállítás](installation.md) | **Következő:** [Konfiguráció](configuration.md)
-- **Következő lecke**: [Telepítés és beállítás](installation.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 1. fejezet - Alapok és gyors kezdés  
+- **⬅️ Előző**: [Kurzus áttekintése](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Következő**: [Telepítés és beállítás](installation.md)
+- **🚀 Következő fejezet**: [2. fejezet: AI-First fejlesztés](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
