@@ -1,42 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-10T06:48:13+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T09:01:10+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "sw"
 }
 -->
 # Mwongozo wa Kuchagua SKU - Kuchagua Viwango Sahihi vya Huduma za Azure
 
+**Ukurasa wa Sura:**
+- **📚 Mwanzo wa Kozi**: [AZD Kwa Anayeanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 6 - Uthibitishaji na Mipango Kabla ya Utekelezaji
+- **⬅️ Iliyopita**: [Mipango ya Uwezo](capacity-planning.md)
+- **➡️ Inayofuata**: [Ukaguzi wa Awali](preflight-checks.md)
+- **🚀 Sura Inayofuata**: [Sura ya 7: Utatuzi wa Shida](../troubleshooting/common-issues.md)
+
 ## Utangulizi
 
-Mwongozo huu wa kina utakusaidia kuchagua SKU (Stock Keeping Units) bora za huduma za Azure kwa mazingira tofauti, mzigo wa kazi, na mahitaji. Jifunze kuchambua mahitaji ya utendaji, gharama, na mahitaji ya kupanuka ili kuchagua viwango vya huduma vinavyofaa zaidi kwa usambazaji wa Azure Developer CLI.
+Mwongozo huu wa kina utakusaidia kuchagua SKU (Stock Keeping Units) bora za huduma za Azure kwa mazingira tofauti, mzigo wa kazi, na mahitaji. Jifunze kuchambua mahitaji ya utendaji, gharama, na mahitaji ya kupanuka ili kuchagua viwango vya huduma vinavyofaa zaidi kwa utekelezaji wa Azure Developer CLI.
 
 ## Malengo ya Kujifunza
 
 Kwa kukamilisha mwongozo huu, utaweza:
 - Kuelewa dhana za SKU za Azure, mifano ya bei, na tofauti za vipengele
-- Kumudu mikakati ya kuchagua SKU kulingana na mazingira kama maendeleo, majaribio, na uzalishaji
+- Kumudu mikakati ya kuchagua SKU kulingana na mazingira ya maendeleo, majaribio, na uzalishaji
 - Kuchambua mahitaji ya mzigo wa kazi na kuyalinganisha na viwango vya huduma vinavyofaa
 - Kutekeleza mikakati ya kupunguza gharama kupitia uchaguzi wa SKU wa busara
 - Kutumia mbinu za kupima utendaji na kuthibitisha chaguo za SKU
-- Kusakinisha mapendekezo ya SKU ya kiotomatiki na zana za ufuatiliaji
+- Kusimamia mapendekezo ya SKU na ufuatiliaji wa kiotomatiki
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha, utaweza:
 - Kuchagua SKU za huduma za Azure zinazofaa kulingana na mahitaji na vikwazo vya mzigo wa kazi
 - Kubuni miundombinu ya gharama nafuu kwa mazingira mengi kwa kuchagua viwango sahihi
-- Kutekeleza upimaji wa utendaji na uthibitisho wa chaguo za SKU
+- Kutekeleza upimaji wa utendaji na uthibitishaji wa chaguo za SKU
 - Kuunda zana za kiotomatiki za mapendekezo ya SKU na uboreshaji wa gharama
 - Kupanga uhamishaji wa SKU na mikakati ya kupanua kulingana na mahitaji yanayobadilika
-- Kutumia kanuni za Azure Well-Architected Framework katika kuchagua viwango vya huduma
+- Kutumia kanuni za Mfumo wa Azure Well-Architected katika kuchagua viwango vya huduma
 
 ## Jedwali la Yaliyomo
 
 - [Kuelewa SKUs](../../../../docs/pre-deployment)
-- [Uchaguzi wa Kulingana na Mazingira](../../../../docs/pre-deployment)
+- [Uchaguzi Kulingana na Mazingira](../../../../docs/pre-deployment)
 - [Miongozo Maalum ya Huduma](../../../../docs/pre-deployment)
 - [Mikakati ya Kupunguza Gharama](../../../../docs/pre-deployment)
 - [Mambo ya Kuzingatia Kuhusu Utendaji](../../../../docs/pre-deployment)
@@ -51,10 +58,10 @@ Baada ya kukamilisha, utaweza:
 
 SKU (Stock Keeping Units) zinawakilisha viwango tofauti vya huduma na viwango vya utendaji kwa rasilimali za Azure. Kila SKU inatoa tofauti katika:
 
-- **Tabia za utendaji** (CPU, kumbukumbu, kasi ya data)
+- **Tabia za utendaji** (CPU, kumbukumbu, kasi ya usindikaji)
 - **Upatikanaji wa vipengele** (chaguzi za kupanua, viwango vya SLA)
 - **Mifano ya bei** (kulingana na matumizi, uwezo uliowekwa)
-- **Upatikanaji wa kieneo** (si SKU zote zinapatikana katika maeneo yote)
+- **Upatikanaji wa kanda** (si SKU zote zinapatikana katika kanda zote)
 
 ### Mambo Muhimu Katika Kuchagua SKU
 
@@ -66,7 +73,7 @@ SKU (Stock Keeping Units) zinawakilisha viwango tofauti vya huduma na viwango vy
 2. **Aina ya Mazingira**
    - Maendeleo/majaribio dhidi ya uzalishaji
    - Mahitaji ya upatikanaji
-   - Mahitaji ya usalama na uzingatiaji
+   - Mahitaji ya usalama na kufuata sheria
 
 3. **Vikwazo vya Bajeti**
    - Gharama za awali dhidi ya gharama za uendeshaji
@@ -80,11 +87,11 @@ SKU (Stock Keeping Units) zinawakilisha viwango tofauti vya huduma na viwango vy
 
 ---
 
-## Uchaguzi wa Kulingana na Mazingira
+## Uchaguzi Kulingana na Mazingira
 
 ### Mazingira ya Maendeleo
 
-**Vipaumbele**: Kupunguza gharama, utendaji wa msingi, urahisi wa kusanidi/kufuta
+**Vipaumbele**: Kupunguza gharama, utendaji wa msingi, urahisi wa kuanzisha/kusitisha
 
 #### SKU Zinazopendekezwa
 ```yaml
@@ -100,11 +107,11 @@ skus:
 ```
 
 #### Tabia
-- **App Service**: F1 (Bure) au B1 (Msingi) kwa majaribio rahisi
+- **Huduma ya Programu**: F1 (Bure) au B1 (Msingi) kwa majaribio rahisi
 - **Hifadhidata**: Kiwango cha msingi chenye rasilimali ndogo
-- **Hifadhi**: Kawaida na upungufu wa ndani pekee
+- **Hifadhi**: Kawaida na nakala za ndani pekee
 - **Kompyuta**: Rasilimali za pamoja zinakubalika
-- **Mitandao**: Usanidi wa msingi
+- **Mitandao**: Mipangilio ya msingi
 
 ### Mazingira ya Majaribio
 
@@ -125,13 +132,13 @@ skus:
 #### Tabia
 - **Utendaji**: 70-80% ya uwezo wa uzalishaji
 - **Vipengele**: Vipengele vingi vya uzalishaji vimewezeshwa
-- **Redundancy**: Redundancy ya kieneo kwa kiasi
-- **Kupima**: Kupanua kiotomatiki kwa kiwango kidogo kwa majaribio
+- **Redundancy**: Redundancy ya kijiografia kiasi
+- **Kupima**: Kupima kupanua kwa kiwango kidogo
 - **Ufuatiliaji**: Mfumo kamili wa ufuatiliaji
 
 ### Mazingira ya Uzalishaji
 
-**Vipaumbele**: Utendaji, upatikanaji, usalama, uzingatiaji, kupanuka
+**Vipaumbele**: Utendaji, upatikanaji, usalama, kufuata sheria, kupanuka
 
 #### SKU Zinazopendekezwa
 ```yaml
@@ -157,16 +164,16 @@ skus:
 
 ## Miongozo Maalum ya Huduma
 
-### Azure App Service
+### Huduma ya Programu ya Azure
 
-#### Jedwali la Maamuzi ya SKU
+#### Jedwali la Uamuzi wa SKU
 
 | Matumizi | SKU Inayopendekezwa | Sababu |
 |----------|---------------------|--------|
 | Maendeleo/Majaribio | F1 (Bure) au B1 (Msingi) | Gharama nafuu, inatosha kwa majaribio |
 | Programu ndogo za uzalishaji | S1 (Kawaida) | Vikoa maalum, SSL, kupanua kiotomatiki |
 | Programu za kati za uzalishaji | P1V3 (Premium V3) | Utendaji bora, vipengele zaidi |
-| Programu zenye trafiki kubwa | P2V3 au P3V3 | Rasilimali zilizojitolea, utendaji wa hali ya juu |
+| Programu za trafiki kubwa | P2V3 au P3V3 | Rasilimali zilizojitolea, utendaji wa hali ya juu |
 | Programu muhimu | I1V2 (Isolated V2) | Kutengwa kwa mtandao, vifaa maalum |
 
 #### Mifano ya Usanidi
@@ -203,7 +210,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-### Azure SQL Database
+### Hifadhidata ya Azure SQL
 
 #### Mfumo wa Uchaguzi wa SKU
 
@@ -213,8 +220,8 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
    - **Premium**: P1-P15 (125-4000 DTU) - Utendaji wa hali ya juu
 
 2. **Kulingana na vCore** (Inapendekezwa kwa uzalishaji)
-   - **General Purpose**: Uwiano wa kompyuta na hifadhi
-   - **Business Critical**: Ucheleweshaji mdogo, IOPS ya juu
+   - **Madhumuni ya Jumla**: Uwiano wa usindikaji na hifadhi
+   - **Biashara Muhimu**: Latency ya chini, IOPS ya juu
    - **Hyperscale**: Hifadhi inayopanuka sana (hadi 100TB)
 
 #### Mifano ya Usanidi
@@ -252,19 +259,19 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 }
 ```
 
-### Azure Container Apps
+### Huduma za Kontena za Azure
 
 #### Aina za Mazingira
 
 1. **Kulingana na Matumizi**
    - Bei kulingana na matumizi
-   - Inafaa kwa maendeleo na mzigo unaobadilika
+   - Inafaa kwa maendeleo na mzigo wa kazi unaobadilika
    - Miundombinu ya pamoja
 
-2. **Iliyotengwa (Profaili za Mzigo)**
+2. **Iliyotengwa (Profaili za Mzigo wa Kazi)**
    - Rasilimali za kompyuta zilizojitolea
    - Utendaji wa kutabirika
-   - Bora kwa mzigo wa uzalishaji
+   - Bora kwa mzigo wa kazi wa uzalishaji
 
 #### Mifano ya Usanidi
 
@@ -326,21 +333,21 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 ### Azure Cosmos DB
 
-#### Miundo ya Kasi ya Data
+#### Miundo ya Kasi ya Usindikaji
 
-1. **Kasi ya Data Iliyoainishwa kwa Mkono**
+1. **Kasi ya Usindikaji Iliyoainishwa kwa Mkono**
    - Utendaji wa kutabirika
    - Punguzo la uwezo uliowekwa
    - Bora kwa mzigo wa kazi wa kawaida
 
-2. **Kasi ya Data ya Kupanua Kiotomatiki**
+2. **Kasi ya Usindikaji Inayojipanua Kiotomatiki**
    - Kupanua kiotomatiki kulingana na matumizi
-   - Lipa kwa kile unachotumia (na kiwango cha chini)
+   - Kulipa kwa kile unachotumia (na kiwango cha chini)
    - Nzuri kwa mzigo wa kazi unaobadilika
 
 3. **Serverless**
-   - Lipa kwa ombi
-   - Hakuna kasi ya data iliyowekwa
+   - Kulipa kwa ombi
+   - Hakuna kasi ya usindikaji iliyowekwa
    - Inafaa kwa maendeleo na mzigo wa kazi wa mara kwa mara
 
 #### Mifano ya SKU
@@ -398,19 +405,19 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Akaunti ya Hifadhi ya Azure
 
 #### Aina za Akaunti za Hifadhi
 
 1. **Standard_LRS** - Maendeleo, data isiyo muhimu
-2. **Standard_GRS** - Uzalishaji, inahitaji redundancy ya kieneo
+2. **Standard_GRS** - Uzalishaji, inahitaji redundancy ya kijiografia
 3. **Premium_LRS** - Programu za utendaji wa hali ya juu
 4. **Premium_ZRS** - Upatikanaji wa hali ya juu na redundancy ya eneo
 
 #### Viwango vya Utendaji
 
-- **Kawaida**: Matumizi ya jumla, gharama nafuu
-- **Premium**: Utendaji wa hali ya juu, ucheleweshaji mdogo
+- **Kawaida**: Madhumuni ya jumla, gharama nafuu
+- **Premium**: Utendaji wa hali ya juu, hali ya chini ya latency
 
 ```bicep
 // Development
@@ -481,7 +488,7 @@ production:
 
 ### 3. Usanidi wa Kupanua Kiotomatiki
 
-Tekeleza kupanua kiotomatiki kwa busara ili kupunguza gharama:
+Tekeleza kupanua kwa busara ili kuboresha gharama:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -648,7 +655,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Jedwali la Marejeleo ya Haraka
 
-### Marejeleo ya Haraka ya SKU za App Service
+### Marejeleo ya Haraka ya SKU za Huduma ya Programu
 
 | SKU | Kiwango | vCPU | RAM | Hifadhi | Kiwango cha Bei | Matumizi |
 |-----|---------|------|-----|---------|-----------------|----------|
@@ -658,21 +665,21 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Utendaji wa hali ya juu |
 | I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Biashara |
 
-### Marejeleo ya Haraka ya SKU za SQL Database
+### Marejeleo ya Haraka ya SKU za Hifadhidata ya SQL
 
 | SKU | Kiwango | DTU/vCore | Hifadhi | Kiwango cha Bei | Matumizi |
 |-----|---------|-----------|---------|-----------------|----------|
-| Basic | Msingi | 5 DTU | 2GB | $ | Maendeleo |
+| Msingi | Msingi | 5 DTU | 2GB | $ | Maendeleo |
 | S2 | Kawaida | 50 DTU | 250GB | $$ | Uzalishaji mdogo |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Utendaji wa hali ya juu |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Uwiano |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Muhimu |
+| GP_Gen5_4 | Madhumuni ya Jumla | 4 vCore | 4TB | $$$ | Uwiano |
+| BC_Gen5_8 | Biashara Muhimu | 8 vCore | 4TB | $$$$ | Muhimu |
 
-### Marejeleo ya Haraka ya SKU za Container Apps
+### Marejeleo ya Haraka ya SKU za Huduma za Kontena
 
 | Mfano | Bei | CPU/Kumbukumbu | Matumizi |
 |-------|-----|---------------|----------|
-| Kulingana na Matumizi | Lipa-kwa-matumizi | 0.25-2 vCPU | Maendeleo, mzigo unaobadilika |
+| Kulingana na Matumizi | Kulipa kwa matumizi | 0.25-2 vCPU | Maendeleo, mzigo wa kazi unaobadilika |
 | Iliyotengwa D4 | Imehifadhiwa | 4 vCPU, 16GB | Uzalishaji |
 | Iliyotengwa D8 | Imehifadhiwa | 8 vCPU, 32GB | Utendaji wa hali ya juu |
 
@@ -792,22 +799,22 @@ test_configuration:
 1. **Anza kidogo na kupanua** kulingana na matumizi halisi
 2. **Tumia SKU tofauti kwa mazingira tofauti**
 3. **Fuatilia utendaji na gharama mara kwa mara**
-4. **Tumia uwezo uliowekwa kwa mzigo wa uzalishaji**
+4. **Tumia uwezo uliowekwa kwa mzigo wa kazi wa uzalishaji**
 5. **Tekeleza kupanua kiotomatiki inapofaa**
 6. **Pima utendaji kwa mzigo wa kazi wa kweli**
-7. **Panga ukuaji lakini epuka kupitiliza**
+7. **Panga ukuaji lakini epuka kupanua kupita kiasi**
 8. **Tumia viwango vya bure kwa maendeleo inapowezekana**
 
 ### Mambo ya Kuepuka
 
 1. **Usitumie SKU za uzalishaji kwa maendeleo**
-2. **Usipuuze upatikanaji wa SKU wa kieneo**
+2. **Usipuuze upatikanaji wa SKU wa kanda**
 3. **Usisahau gharama za uhamishaji wa data**
-4. **Usipitishe ukubwa bila sababu**
+4. **Usipanue kupita kiasi bila sababu**
 5. **Usipuuze athari za utegemezi**
 6. **Usisanidi mipaka ya kupanua kiotomatiki kuwa juu sana**
-7. **Usisahau mahitaji ya uzingatiaji**
-8. **Usifanye maamuzi kwa kuzingatia bei pekee**
+7. **Usisahau mahitaji ya kufuata sheria**
+8. **Usifanye maamuzi kulingana na bei pekee**
 
 ---
 
@@ -817,7 +824,7 @@ test_configuration:
 
 **Urambazaji**
 - **Somo Lililopita**: [Mipango ya Uwezo](capacity-planning.md)
-- **Somo Linalofuata**: [Ukaguzi wa Kabla ya Usambazaji](preflight-checks.md)
+- **Somo Linalofuata**: [Ukaguzi wa Awali](preflight-checks.md)
 
 ---
 

@@ -1,33 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-10T07:42:15+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T09:52:44+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "cs"
 }
 -->
-# Příručka příkazů - Základní příkazy AZD
+# Přehled příkazů - Základní příkazy AZD
+
+**Rychlý přehled všech kapitol**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../README.md)
+- **📖 Rychlý start**: [Kapitola 1: Základy a rychlý start](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Příkazy pro AI**: [Kapitola 2: Vývoj zaměřený na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Pokročilé**: [Kapitola 4: Infrastruktura jako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Úvod
 
-Tato komplexní příručka poskytuje rychlý přehled nejčastěji používaných příkazů Azure Developer CLI, uspořádaných podle kategorií s praktickými příklady. Ideální pro rychlé vyhledávání během vývoje, řešení problémů a každodenní práci s projekty azd.
+Tento komplexní přehled příkazů poskytuje rychlý přístup k nejčastěji používaným příkazům Azure Developer CLI, uspořádaným podle kategorií s praktickými příklady. Ideální pro rychlé vyhledávání během vývoje, řešení problémů a každodenní práci s projekty azd.
 
 ## Cíle učení
 
-Používáním této příručky:
+Používáním tohoto přehledu příkazů:
 - Získáte okamžitý přístup k základním příkazům a syntaxi Azure Developer CLI
 - Porozumíte organizaci příkazů podle funkčních kategorií a případů použití
 - Budete mít k dispozici praktické příklady pro běžné scénáře vývoje a nasazení
-- Najdete příkazy pro řešení problémů pro rychlé odstranění potíží
+- Najdete příkazy pro řešení problémů pro rychlé odstranění chyb
 - Efektivně vyhledáte možnosti pokročilé konfigurace a přizpůsobení
-- Získáte přehled o příkazech pro správu prostředí a práci s více prostředími
+- Snadno najdete příkazy pro správu prostředí a práci s více prostředími
 
 ## Výsledky učení
 
-Pravidelným používáním této příručky budete schopni:
+Pravidelným používáním tohoto přehledu příkazů budete schopni:
 - Sebevědomě používat příkazy azd bez nutnosti procházet kompletní dokumentaci
-- Rychle řešit běžné problémy pomocí vhodných diagnostických příkazů
+- Rychle řešit běžné problémy pomocí diagnostických příkazů
 - Efektivně spravovat více prostředí a scénáře nasazení
 - Používat pokročilé funkce azd a možnosti konfigurace podle potřeby
 - Systémově řešit problémy s nasazením pomocí sekvencí příkazů
@@ -336,9 +342,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Ladicí příkazy
+## 🔍 Příkazy pro ladění
 
-### Ladicí informace
+### Informace o ladění
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -552,7 +558,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Uložte si tuto příručku do záložek a použijte `Ctrl+F` pro rychlé vyhledání potřebných příkazů!
+**Tip**: Uložte si tento přehled příkazů do záložek a použijte `Ctrl+F` pro rychlé vyhledání potřebných příkazů!
 
 ---
 
@@ -562,5 +568,5 @@ azd template show <template-name> --docs
 
 ---
 
-**Upozornění**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+**Prohlášení**:  
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nenese odpovědnost za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:32:26+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T09:21:30+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "hu"
 }
 -->
-# Hibakeresési útmutató - Haladó hibaelemzési technikák
+# Hibakeresési útmutató AZD telepítésekhez
+
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlapja**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 7. fejezet - Hibakeresés és hibaelhárítás
+- **⬅️ Előző**: [Gyakori problémák](common-issues.md)
+- **➡️ Következő**: [AI-specifikus hibakeresés](ai-troubleshooting.md)
+- **🚀 Következő fejezet**: [8. fejezet: Produkciós és vállalati minták](../ai-foundry/production-ai-practices.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató fejlett hibakeresési stratégiákat, eszközöket és technikákat mutat be az Azure Developer CLI telepítések során felmerülő összetett problémák diagnosztizálására és megoldására. Ismerje meg a rendszerezett hibakeresési módszereket, naplóelemzési technikákat, teljesítményprofilozást és fejlett diagnosztikai eszközöket, hogy hatékonyan kezelje a telepítési és futási problémákat.
+Ez az átfogó útmutató fejlett hibakeresési stratégiákat, eszközöket és technikákat mutat be az Azure Developer CLI telepítések összetett problémáinak diagnosztizálásához és megoldásához. Ismerje meg a rendszerezett hibakeresési módszereket, naplóelemzési technikákat, teljesítményprofilozást és fejlett diagnosztikai eszközöket, hogy hatékonyan kezelje a telepítési és futási problémákat.
 
 ## Tanulási célok
 
@@ -20,13 +27,13 @@ Az útmutató elvégzésével:
 - Megérti a fejlett naplózási konfigurációt és naplóelemzési technikákat
 - Teljesítményprofilozási és monitorozási stratégiákat valósít meg
 - Használja az Azure diagnosztikai eszközeit és szolgáltatásait összetett problémák megoldására
-- Alkalmaz hálózati hibakeresési és biztonsági problémamegoldási technikákat
+- Alkalmaz hálózati hibakeresési és biztonsági hibaelhárítási technikákat
 - Konfigurálja az átfogó monitorozást és riasztásokat a proaktív problémadetektálás érdekében
 
 ## Tanulási eredmények
 
 Az útmutató elvégzése után képes lesz:
-- Alkalmazni a TRIAGE módszertant az összetett telepítési problémák rendszerezett hibakeresésére
+- Alkalmazni a TRIAGE módszertant az összetett telepítési problémák rendszerezett hibakereséséhez
 - Konfigurálni és elemezni az átfogó naplózási és nyomkövetési információkat
 - Hatékonyan használni az Azure Monitor, Application Insights és diagnosztikai eszközöket
 - Önállóan hibakeresni hálózati kapcsolódási, hitelesítési és jogosultsági problémákat
@@ -121,7 +128,7 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Haladó hibakeresési eszközök
+## 🛠️ Fejlett hibakeresési eszközök
 
 ### Azure Resource Graph lekérdezések
 ```bash
@@ -195,7 +202,7 @@ debug_database() {
 }
 ```
 
-## 🔬 Teljesítményhibakeresés
+## 🔬 Teljesítmény hibakeresés
 
 ### Alkalmazás teljesítményfigyelés
 ```bash
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Terhelési tesztelés hibakereséshez
+### Terheléses tesztelés hibakereséshez
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -514,7 +521,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 Vészhelyzeti hibakeresési eljárások
 
-### Éles környezetben felmerülő problémák kezelése
+### Produkciós probléma kezelése
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -649,7 +656,7 @@ aggregate_logs() {
 }
 ```
 
-## 🔗 Haladó források
+## 🔗 Fejlett források
 
 ### Egyedi hibakeresési szkriptek
 Hozzon létre egy `scripts/debug/` könyvtárat az alábbiakkal:
@@ -677,7 +684,7 @@ hooks:
 
 ## Legjobb gyakorlatok
 
-1. **Mindig engedélyezze a hibakeresési naplózást** nem éles környezetekben
+1. **Mindig engedélyezze a hibakeresési naplózást** nem produkciós környezetekben
 2. **Hozzon létre reprodukálható teszteseteket** a problémákhoz
 3. **Dokumentálja a hibakeresési eljárásokat** a csapat számára
 4. **Automatizálja az állapotellenőrzéseket** és a monitorozást
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T22:12:32+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T08:57:23+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sw"
 }
 -->
 # AZD Msingi - Kuelewa Azure Developer CLI
 
-**Iliyopita:** [Usakinishaji na Usanidi](installation.md) | **Inayofuata:** [Usanidi](configuration.md)
+# AZD Msingi - Dhana za Msingi na Mambo Muhimu
+
+**Ukurasa wa Sehemu:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 1 - Msingi & Kuanza Haraka
+- **⬅️ Iliyopita**: [Muhtasari wa Kozi](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Inayofuata**: [Usakinishaji & Usanidi](installation.md)
+- **🚀 Sura Inayofuata**: [Sura ya 2: Maendeleo ya AI Kwanza](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Utangulizi
 
-Somo hili linakutambulisha kwa Azure Developer CLI (azd), zana yenye nguvu ya mstari wa amri inayoharakisha safari yako kutoka kwa maendeleo ya ndani hadi usambazaji wa Azure. Utajifunza dhana za msingi, vipengele vya msingi, na kuelewa jinsi azd inavyorahisisha usambazaji wa programu za wingu.
+Somo hili linakutambulisha kwa Azure Developer CLI (azd), zana yenye nguvu ya mstari wa amri inayoharakisha safari yako kutoka maendeleo ya ndani hadi usambazaji wa Azure. Utajifunza dhana za msingi, vipengele muhimu, na kuelewa jinsi azd inavyorahisisha usambazaji wa programu za wingu.
 
 ## Malengo ya Kujifunza
 
 Mwisho wa somo hili, utaweza:
-- Kuelewa Azure Developer CLI ni nini na kusudi lake kuu
-- Kujifunza dhana za msingi za templates, environments, na services
-- Kuchunguza vipengele muhimu ikiwa ni pamoja na maendeleo yanayoendeshwa na templates na Infrastructure as Code
+- Kuelewa Azure Developer CLI ni nini na madhumuni yake ya msingi
+- Kujifunza dhana za msingi za templeti, mazingira, na huduma
+- Kuchunguza vipengele muhimu ikiwa ni pamoja na maendeleo yanayoendeshwa na templeti na Miundombinu kama Kanuni
 - Kuelewa muundo wa mradi wa azd na mtiririko wa kazi
 - Kuwa tayari kusakinisha na kusanidi azd kwa mazingira yako ya maendeleo
 
@@ -29,25 +36,25 @@ Mwisho wa somo hili, utaweza:
 Baada ya kukamilisha somo hili, utaweza:
 - Kuelezea jukumu la azd katika mtiririko wa kazi wa maendeleo ya wingu la kisasa
 - Kutambua vipengele vya muundo wa mradi wa azd
-- Kufafanua jinsi templates, environments, na services zinavyofanya kazi pamoja
-- Kuelewa faida za Infrastructure as Code na azd
+- Kufafanua jinsi templeti, mazingira, na huduma zinavyofanya kazi pamoja
+- Kuelewa faida za Miundombinu kama Kanuni kwa kutumia azd
 - Kutambua amri tofauti za azd na madhumuni yake
 
 ## Azure Developer CLI (azd) ni nini?
 
-Azure Developer CLI (azd) ni zana ya mstari wa amri iliyoundwa kuharakisha safari yako kutoka kwa maendeleo ya ndani hadi usambazaji wa Azure. Inarahisisha mchakato wa kujenga, kusambaza, na kusimamia programu za wingu kwenye Azure.
+Azure Developer CLI (azd) ni zana ya mstari wa amri iliyoundwa kuharakisha safari yako kutoka maendeleo ya ndani hadi usambazaji wa Azure. Inarahisisha mchakato wa kujenga, kusambaza, na kusimamia programu za wingu kwenye Azure.
 
 ## Dhana za Msingi
 
-### Templates
-Templates ni msingi wa azd. Zinajumuisha:
+### Templeti
+Templeti ni msingi wa azd. Zinajumuisha:
 - **Msimbo wa programu** - Chanzo chako cha msimbo na utegemezi
 - **Ufafanuzi wa miundombinu** - Rasilimali za Azure zilizoainishwa kwa Bicep au Terraform
 - **Faili za usanidi** - Mipangilio na vigezo vya mazingira
-- **Skripti za usambazaji** - Mtiririko wa kazi wa usambazaji uliojiendesha
+- **Skripti za usambazaji** - Mtiririko wa kazi wa usambazaji wa kiotomatiki
 
-### Environments
-Environments zinawakilisha malengo tofauti ya usambazaji:
+### Mazingira
+Mazingira yanawakilisha malengo tofauti ya usambazaji:
 - **Maendeleo** - Kwa majaribio na maendeleo
 - **Staging** - Mazingira ya kabla ya uzalishaji
 - **Uzalishaji** - Mazingira ya uzalishaji wa moja kwa moja
@@ -57,16 +64,16 @@ Kila mazingira yanadumisha:
 - Mipangilio ya usanidi
 - Hali ya usambazaji
 
-### Services
-Services ni sehemu za kujenga programu yako:
+### Huduma
+Huduma ni sehemu za msingi za programu yako:
 - **Frontend** - Programu za wavuti, SPAs
-- **Backend** - APIs, huduma ndogo
-- **Database** - Suluhisho za hifadhi ya data
-- **Storage** - Hifadhi ya faili na blob
+- **Backend** - API, huduma ndogo
+- **Hifadhidata** - Suluhisho za kuhifadhi data
+- **Hifadhi** - Hifadhi ya faili na blob
 
 ## Vipengele Muhimu
 
-### 1. Maendeleo Yanayoendeshwa na Templates
+### 1. Maendeleo Yanayoendeshwa na Templeti
 ```bash
 # Browse available templates
 azd template list
@@ -75,12 +82,12 @@ azd template list
 azd init --template <template-name>
 ```
 
-### 2. Infrastructure as Code
+### 2. Miundombinu kama Kanuni
 - **Bicep** - Lugha maalum ya Azure
 - **Terraform** - Zana ya miundombinu ya wingu nyingi
-- **ARM Templates** - Templates za Azure Resource Manager
+- **ARM Templates** - Templeti za Azure Resource Manager
 
-### 3. Mtiririko wa Kazi Uliojiendesha
+### 3. Mtiririko wa Kazi Ulioambatanishwa
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
@@ -191,27 +198,27 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Kuelewa `azd down --force --purge`
-Amri ya `azd down --force --purge` ni njia yenye nguvu ya kuondoa kabisa mazingira yako ya azd na rasilimali zote zinazohusiana. Hapa kuna maelezo ya kila bendera:
+Amri ya `azd down --force --purge` ni njia yenye nguvu ya kuondoa kabisa mazingira yako ya azd na rasilimali zote zinazohusiana. Hapa kuna muhtasari wa kila bendera:
 ```
 --force
 ```
 - Inaruka maonyo ya uthibitisho.
-- Inafaa kwa otomatiki au scripting ambapo pembejeo ya mwongozo si rahisi.
+- Inafaa kwa otomatiki au maandishi ambapo pembejeo ya mwongozo si rahisi.
 - Inahakikisha mchakato wa kuondoa unaendelea bila usumbufu, hata kama CLI inagundua kutofautiana.
 
 ```
 --purge
 ```
-Inafuta **metadata yote inayohusiana**, ikiwa ni pamoja na:
+Inafuta **metadata zote zinazohusiana**, ikiwa ni pamoja na:
 Hali ya mazingira
 Folda ya ndani `.azure`
 Taarifa ya usambazaji iliyohifadhiwa
 Inazuia azd "kukumbuka" usambazaji wa awali, ambayo inaweza kusababisha masuala kama vikundi vya rasilimali visivyolingana au marejeleo ya rejista yaliyopitwa na wakati.
 
-### Kwa nini utumie zote?
-Unapokumbana na matatizo na `azd up` kutokana na hali iliyosalia au usambazaji wa sehemu, mchanganyiko huu unahakikisha **ukurasa safi**.
+### Kwa nini utumie zote mbili?
+Unapokumbana na tatizo na `azd up` kutokana na hali iliyosalia au usambazaji wa sehemu, mchanganyiko huu unahakikisha **mwanzo safi**.
 
-Ni muhimu hasa baada ya kufuta rasilimali kwa mikono kwenye portal ya Azure au unapobadilisha templates, environments, au mikataba ya majina ya vikundi vya rasilimali.
+Ni muhimu hasa baada ya kufuta rasilimali kwa mikono kwenye portal ya Azure au unapobadilisha templeti, mazingira, au mikataba ya majina ya vikundi vya rasilimali.
 
 ### Kusimamia Mazingira Mengi
 ```bash
@@ -263,15 +270,15 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Tumia Templates
-- Anza na templates zilizopo
-- Badilisha kwa mahitaji yako
-- Unda templates zinazoweza kutumika tena kwa shirika lako
+### 2. Tumia Templeti
+- Anza na templeti zilizopo
+- Badilisha kulingana na mahitaji yako
+- Unda templeti zinazoweza kutumika tena kwa shirika lako
 
 ### 3. Kutenganisha Mazingira
 - Tumia mazingira tofauti kwa maendeleo/staging/uzalishaji
 - Usambaze moja kwa moja kwenye uzalishaji kutoka kwa mashine ya ndani
-- Tumia njia za CI/CD kwa usambazaji wa uzalishaji
+- Tumia mabomba ya CI/CD kwa usambazaji wa uzalishaji
 
 ### 4. Usimamizi wa Usanidi
 - Tumia vigezo vya mazingira kwa data nyeti
@@ -282,40 +289,48 @@ azd init --template template1
 
 ### Mwanzoni (Wiki 1-2)
 1. Sakinisha azd na uthibitishe
-2. Sambaza template rahisi
+2. Sambaza templeti rahisi
 3. Elewa muundo wa mradi
 4. Jifunze amri za msingi (up, down, deploy)
 
 ### Kati (Wiki 3-4)
-1. Badilisha templates
+1. Badilisha templeti
 2. Simamia mazingira mengi
-3. Elewa miundombinu ya msimbo
-4. Sanidi njia za CI/CD
+3. Elewa kanuni za miundombinu
+4. Sanidi mabomba ya CI/CD
 
 ### Juu (Wiki 5+)
-1. Unda templates maalum
+1. Unda templeti maalum
 2. Mifumo ya miundombinu ya hali ya juu
 3. Usambazaji wa maeneo mengi
 4. Usanidi wa kiwango cha biashara
 
 ## Hatua Zifuatazo
 
-- [Usakinishaji na Usanidi](installation.md) - Sakinisha na sanidi azd
-- [Mradi Wako wa Kwanza](first-project.md) - Mafunzo ya vitendo
+**📖 Endelea Kujifunza Sura ya 1:**
+- [Usakinishaji & Usanidi](installation.md) - Sakinisha na usanidi azd
+- [Mradi Wako wa Kwanza](first-project.md) - Kamilisha mafunzo ya vitendo
 - [Mwongozo wa Usanidi](configuration.md) - Chaguo za usanidi wa hali ya juu
+
+**🎯 Tayari kwa Sura Inayofuata?**
+- [Sura ya 2: Maendeleo ya AI Kwanza](../ai-foundry/azure-ai-foundry-integration.md) - Anza kujenga programu za AI
 
 ## Rasilimali za Ziada
 
 - [Muhtasari wa Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Matunzio ya Templates](https://azure.github.io/awesome-azd/)
+- [Matunzio ya Templeti](https://azure.github.io/awesome-azd/)
 - [Mifano ya Jamii](https://github.com/Azure-Samples)
 
 ---
 
-**Iliyopita:** [Usakinishaji na Usanidi](installation.md) | **Inayofuata:** [Usanidi](configuration.md)
-- **Somo Linalofuata**: [Usakinishaji na Usanidi](installation.md)
+**Ukurasa wa Sehemu:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 1 - Msingi & Kuanza Haraka  
+- **⬅️ Iliyopita**: [Muhtasari wa Kozi](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Inayofuata**: [Usakinishaji & Usanidi](installation.md)
+- **🚀 Sura Inayofuata**: [Sura ya 2: Maendeleo ya AI Kwanza](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

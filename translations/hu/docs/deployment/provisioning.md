@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:21:21+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T09:20:28+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "hu"
 }
 -->
-# Erőforrások Létrehozása - Infrastrukturális Kód AZD-vel
+# Azure erőforrások előkészítése AZD-vel
+
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 4. fejezet - Infrastrukturális kód és telepítés
+- **⬅️ Előző**: [Telepítési útmutató](deployment-guide.md)
+- **➡️ Következő fejezet**: [5. fejezet: Többügynökös AI megoldások](../../examples/retail-scenario.md)
+- **🔧 Kapcsolódó**: [6. fejezet: Telepítés előtti validáció](../pre-deployment/capacity-planning.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató mindent lefed, amit az Azure erőforrások létrehozásáról és kezeléséről tudni kell az Azure Developer CLI használatával. Ismerje meg, hogyan valósíthatja meg az Infrastrukturális Kód (IaC) mintákat az egyszerű erőforrás-létrehozástól a fejlett, vállalati szintű infrastruktúra-architektúrákig Bicep, ARM sablonok, Terraform és Pulumi segítségével.
+Ez az átfogó útmutató mindent lefed, amit az Azure erőforrások előkészítéséről és kezeléséről tudni kell az Azure Developer CLI használatával. Ismerje meg, hogyan valósíthatja meg az Infrastrukturális kód (IaC) mintákat az alapvető erőforrás létrehozástól a fejlett, vállalati szintű infrastruktúra architektúrákig Bicep, ARM sablonok, Terraform és Pulumi segítségével.
 
 ## Tanulási célok
 
 Az útmutató elvégzésével:
-- Elsajátítja az Infrastrukturális Kód alapelveit és az Azure erőforrások létrehozását
+- Elsajátítja az Infrastrukturális kód alapelveit és az Azure erőforrások előkészítését
 - Megérti az Azure Developer CLI által támogatott különböző IaC szolgáltatókat
-- Megtervezi és megvalósítja a Bicep sablonokat gyakori alkalmazás-architektúrákhoz
-- Konfigurálja az erőforrás paramétereit, változóit és környezet-specifikus beállításait
-- Megvalósít fejlett infrastruktúra-mintákat, beleértve a hálózatot és biztonságot
-- Kezeli az erőforrások életciklusát, frissítéseit és függőségeinek megoldását
+- Megtervezi és megvalósítja a Bicep sablonokat gyakori alkalmazásarchitektúrákhoz
+- Konfigurálja az erőforrás paramétereket, változókat és környezet-specifikus beállításokat
+- Fejlett infrastruktúra mintákat valósít meg, beleértve a hálózatot és biztonságot
+- Kezeli az erőforrás életciklusát, frissítéseket és függőségek megoldását
 
 ## Tanulási eredmények
 
 Az útmutató elvégzése után képes lesz:
-- Azure infrastruktúrát tervezni és létrehozni Bicep és ARM sablonok segítségével
-- Összetett, több szolgáltatást tartalmazó architektúrákat konfigurálni megfelelő erőforrás-függőségekkel
+- Azure infrastruktúrát tervezni és előkészíteni Bicep és ARM sablonok segítségével
+- Összetett, több szolgáltatásból álló architektúrákat konfigurálni megfelelő erőforrás-függőségekkel
 - Paraméterezett sablonokat megvalósítani több környezethez és konfigurációhoz
-- Infrastrukturális problémákat elhárítani és telepítési hibákat megoldani
-- Az Azure Well-Architected Framework alapelveit alkalmazni az infrastruktúra tervezésében
-- Infrastrukturális frissítéseket kezelni és verziókezelési stratégiákat megvalósítani
+- Infrastrukturális előkészítési problémákat elhárítani és telepítési hibákat megoldani
+- Az Azure jól megtervezett keretrendszerének alapelveit alkalmazni az infrastruktúra tervezésében
+- Infrastrukturális frissítéseket kezelni és verziózási stratégiákat megvalósítani
 
-## Infrastrukturális Létrehozás Áttekintése
+## Infrastrukturális előkészítés áttekintése
 
-Az Azure Developer CLI több Infrastrukturális Kód (IaC) szolgáltatót támogat:
-- **Bicep** (ajánlott) - Az Azure domain-specifikus nyelve
-- **ARM sablonok** - JSON-alapú Azure Resource Manager sablonok
+Az Azure Developer CLI több Infrastrukturális kód (IaC) szolgáltatót támogat:
+- **Bicep** (ajánlott) - Azure specifikus nyelv
+- **ARM sablonok** - JSON alapú Azure Resource Manager sablonok
 - **Terraform** - Többfelhős infrastruktúra eszköz
 - **Pulumi** - Modern infrastruktúra kód programozási nyelvekkel
 
-## Az Azure Erőforrások Megértése
+## Azure erőforrások megértése
 
-### Erőforrás Hierarchia
+### Erőforrás hierarchia
 ```
 Azure Account
 └── Subscriptions
@@ -51,16 +58,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Gyakori Azure Szolgáltatások Alkalmazásokhoz
+### Gyakori Azure szolgáltatások alkalmazásokhoz
 - **Számítás**: App Service, Container Apps, Functions, Virtual Machines
 - **Tárolás**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Hálózat**: Virtual Network, Application Gateway, CDN
 - **Biztonság**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep Infrastrukturális Sablonok
+## Bicep infrastruktúra sablonok
 
-### Alapvető Bicep Sablon Struktúra
+### Alapvető Bicep sablon struktúra
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,9 +137,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Fejlett Bicep Minták
+### Fejlett Bicep minták
 
-#### Moduláris Infrastruktúra
+#### Moduláris infrastruktúra
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -181,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Feltételes Erőforrás Létrehozás
+#### Feltételes erőforrás létrehozás
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Adatbázis Létrehozás
+## 🗃️ Adatbázis előkészítés
 
 ### Cosmos DB
 ```bicep
@@ -300,9 +307,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Biztonság és Titkok Kezelése
+## 🔒 Biztonság és titkok kezelése
 
-### Key Vault Integráció
+### Key Vault integráció
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -344,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Kezelt Identitás Konfiguráció
+### Kezelt identitás konfiguráció
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,9 +377,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Hálózat és Kapcsolódás
+## 🌍 Hálózat és kapcsolódás
 
-### Virtuális Hálózat Konfiguráció
+### Virtuális hálózat konfiguráció
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Monitoring és Megfigyelhetőség
+## 📊 Monitoring és megfigyelhetőség
 
 ### Application Insights
 ```bicep
@@ -529,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Egyedi Metrikák és Riasztások
+### Egyedi metrikák és riasztások
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -563,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Környezet-specifikus Konfigurációk
+## 🔧 Környezet-specifikus konfigurációk
 
-### Paraméterfájlok Különböző Környezetekhez
+### Paraméter fájlok különböző környezetekhez
 ```json
 // infra/main.parameters.dev.json
 {
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Feltételes Erőforrás Létrehozás
+### Feltételes erőforrás előkészítés
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Fejlett Létrehozási Minták
+## 🚀 Fejlett előkészítési minták
 
-### Több Régiós Telepítés
+### Több régiós telepítés
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -721,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Infrastrukturális Tesztelés
+### Infrastrukturális tesztelés
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -757,9 +764,9 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Erőforrás Frissítések és Migrációk
+## 🔄 Erőforrás frissítések és migrációk
 
-### Biztonságos Erőforrás Frissítések
+### Biztonságos erőforrás frissítések
 ```bash
 # Preview infrastructure changes
 azd provision --preview
@@ -771,7 +778,7 @@ azd provision --confirm-with-no-prompt
 azd provision --rollback
 ```
 
-### Adatbázis Migrációk
+### Adatbázis migrációk
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -800,9 +807,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Legjobb Gyakorlatok
+## 🎯 Legjobb gyakorlatok
 
-### 1. Erőforrás Elnevezési Konvenciók
+### 1. Erőforrás elnevezési konvenciók
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -813,7 +820,7 @@ var naming = {
 }
 ```
 
-### 2. Címkézési Stratégia
+### 2. Címkézési stratégia
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -826,7 +833,7 @@ var commonTags = {
 }
 ```
 
-### 3. Paraméter Ellenőrzés
+### 3. Paraméter validáció
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -842,7 +849,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Kimenet Szervezése
+### 4. Kimenet szervezése
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -857,27 +864,27 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Következő Lépések
+## Következő lépések
 
-- [Előzetes Telepítési Tervezés](../pre-deployment/capacity-planning.md) - Erőforrás elérhetőség ellenőrzése
-- [Gyakori Problémák](../troubleshooting/common-issues.md) - Infrastrukturális problémák elhárítása
-- [Hibakeresési Útmutató](../troubleshooting/debugging.md) - Telepítési problémák hibakeresése
-- [SKU Kiválasztás](../pre-deployment/sku-selection.md) - Megfelelő szolgáltatási szintek kiválasztása
+- [Telepítés előtti tervezés](../pre-deployment/capacity-planning.md) - Erőforrás elérhetőség validálása
+- [Gyakori problémák](../troubleshooting/common-issues.md) - Infrastrukturális problémák elhárítása
+- [Hibakeresési útmutató](../troubleshooting/debugging.md) - Előkészítési problémák hibakeresése
+- [SKU kiválasztás](../pre-deployment/sku-selection.md) - Megfelelő szolgáltatási szintek kiválasztása
 
-## További Források
+## További források
 
-- [Azure Bicep Dokumentáció](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Sablonok](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Bicep dokumentáció](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager sablonok](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure Architektúra Központ](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure jól megtervezett keretrendszer](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigáció**
-- **Előző Lecke**: [Telepítési Útmutató](deployment-guide.md)
-- **Következő Lecke**: [Kapacitás Tervezés](../pre-deployment/capacity-planning.md)
+- **Előző lecke**: [Telepítési útmutató](deployment-guide.md)
+- **Következő lecke**: [Kapacitás tervezés](../pre-deployment/capacity-planning.md)
 
 ---
 
-**Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt a professzionális, emberi fordítás igénybevétele. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősség kizárása**:  
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

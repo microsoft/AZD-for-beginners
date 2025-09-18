@@ -1,17 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:20:56+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T09:17:34+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "hu"
 }
 -->
-# AI Modellek Telepítése az Azure Developer CLI segítségével
+# AI modellek telepítése az Azure Developer CLI segítségével
 
-**Előző:** [Azure AI Foundry Integráció](azure-ai-foundry-integration.md) | **Következő:** [AI Workshop Lab](ai-workshop-lab.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 2. fejezet - AI-első fejlesztés
+- **⬅️ Előző**: [Azure AI Foundry integráció](azure-ai-foundry-integration.md)
+- **➡️ Következő**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../getting-started/configuration.md)
 
-Ez az útmutató átfogó instrukciókat nyújt az AI modellek telepítéséhez AZD sablonokkal, a modell kiválasztásától kezdve egészen a termelési telepítési mintákig.
+Ez az útmutató átfogó instrukciókat nyújt az AI modellek telepítéséhez AZD sablonok segítségével, a modell kiválasztásától kezdve egészen a termelési telepítési mintákig.
 
 ## Tartalomjegyzék
 
@@ -54,7 +59,7 @@ services:
         ]
 ```
 
-### Modellkapacitás tervezés
+### Modell kapacitástervezés
 
 | Modell típusa | Felhasználási eset | Ajánlott kapacitás | Költségszempontok |
 |---------------|--------------------|--------------------|-------------------|
@@ -67,7 +72,7 @@ services:
 
 ### Bicep sablon konfiguráció
 
-Hozzon létre modelltelepítéseket Bicep sablonokkal:
+Hozzon létre modelltelepítéseket Bicep sablonok segítségével:
 
 ```bicep
 // infra/main.bicep
@@ -477,23 +482,28 @@ async def check_ai_models():
 
 ## Következő lépések
 
-1. **Tekintse át az [Azure AI Foundry Integrációs Útmutatót](azure-ai-foundry-integration.md)** a szolgáltatásintegrációs mintákért
+1. **Tekintse át az [Azure AI Foundry integrációs útmutatót](azure-ai-foundry-integration.md)** a szolgáltatási integrációs mintákért
 2. **Teljesítse az [AI Workshop Lab](ai-workshop-lab.md)** gyakorlati tapasztalatokért
-3. **Valósítsa meg a [Termelési AI Gyakorlatokat](production-ai-practices.md)** vállalati telepítésekhez
-4. **Fedezze fel az [AI Hibakeresési Útmutatót](../troubleshooting/ai-troubleshooting.md)** a gyakori problémákhoz
+3. **Valósítsa meg a [Termelési AI gyakorlatokat](production-ai-practices.md)** vállalati telepítésekhez
+4. **Fedezze fel az [AI hibakeresési útmutatót](../troubleshooting/ai-troubleshooting.md)** a gyakori problémákhoz
 
 ## Források
 
-- [Azure OpenAI Modellek Elérhetősége](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Skálázás](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI Modell Költségoptimalizálás](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Azure OpenAI modellek elérhetősége](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps skálázás](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI modell költségoptimalizálás](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Előző:** [Azure AI Foundry Integráció](azure-ai-foundry-integration.md) | **Következő:** [AI Workshop Lab](ai-workshop-lab.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 2. fejezet - AI-első fejlesztés
+- **⬅️ Előző**: [Azure AI Foundry integráció](azure-ai-foundry-integration.md)
+- **➡️ Következő**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../getting-started/configuration.md)
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

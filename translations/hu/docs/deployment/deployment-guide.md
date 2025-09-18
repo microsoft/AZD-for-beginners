@@ -1,42 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:16:35+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T09:20:00+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "hu"
 }
 -->
-# Telepítési útmutató - AZD telepítések elsajátítása
+# Telepítési útmutató - AZD telepítések mesterfokon
+
+**Fejezetek navigációja:**
+- **📚 Kurzus kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 4. fejezet - Infrastruktúra kódként és telepítés
+- **⬅️ Előző fejezet**: [3. fejezet: Konfiguráció](../getting-started/configuration.md)
+- **➡️ Következő**: [Erőforrások előkészítése](provisioning.md)
+- **🚀 Következő fejezet**: [5. fejezet: Többügynökös AI megoldások](../../examples/retail-scenario.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató mindent lefed, amit az Azure Developer CLI használatával történő alkalmazástelepítésről tudni kell, az alapvető egyparancsos telepítésektől kezdve a fejlett, gyártási forgatókönyvekig, egyedi horgokkal, több környezettel és CI/CD integrációval. Gyakorlatias példák és bevált módszerek segítségével sajátíthatod el a teljes telepítési életciklust.
+Ez az átfogó útmutató mindent lefed, amit az Azure Developer CLI használatával történő alkalmazástelepítésről tudni kell, az egyszerű egyparancsos telepítésektől kezdve a fejlett, egyedi horgokkal, több környezettel és CI/CD integrációval rendelkező produkciós forgatókönyvekig. Gyakorlati példák és bevált módszerek segítségével sajátíthatod el a teljes telepítési életciklust.
 
 ## Tanulási célok
 
 Az útmutató elvégzésével:
-- Elsajátítod az összes Azure Developer CLI telepítési parancsot és munkafolyamatot
-- Megérted a teljes telepítési életciklust a létrehozástól a monitorozásig
+- Mesteri szinten elsajátítod az Azure Developer CLI telepítési parancsait és munkafolyamatait
+- Megérted a teljes telepítési életciklust az előkészítéstől a monitorozásig
 - Egyedi telepítési horgokat valósítasz meg az automatikus elő- és utótelepítéshez
 - Több környezetet konfigurálsz környezetspecifikus paraméterekkel
-- Fejlett telepítési stratégiákat állítasz be, beleértve a blue-green és canary telepítéseket
-- Integrálod az azd telepítéseket CI/CD csővezetékekbe és DevOps munkafolyamatokba
+- Fejlett telepítési stratégiákat állítasz be, mint például blue-green és canary telepítések
+- Integrálod az azd telepítéseket CI/CD csatornákba és DevOps munkafolyamatokba
 
 ## Tanulási eredmények
 
-Az útmutató befejezése után képes leszel:
-- Önállóan végrehajtani és hibakeresni az összes azd telepítési munkafolyamatot
-- Egyedi telepítési automatizálást tervezni és megvalósítani horgok segítségével
-- Gyártásra kész telepítéseket konfigurálni megfelelő biztonsággal és monitorozással
-- Bonyolult, több környezetet érintő telepítési forgatókönyveket kezelni
-- Optimalizálni a telepítési teljesítményt és visszaállítási stratégiákat megvalósítani
+Az útmutató elvégzése után képes leszel:
+- Az azd telepítési munkafolyamatokat önállóan végrehajtani és hibakeresni
+- Egyedi telepítési automatizációt tervezni és megvalósítani horgok segítségével
+- Produkcióra kész telepítéseket konfigurálni megfelelő biztonsággal és monitorozással
+- Összetett, több környezetet érintő telepítési forgatókönyveket kezelni
+- Optimalizálni a telepítési teljesítményt és visszaállítási stratégiákat alkalmazni
 - Az azd telepítéseket vállalati DevOps gyakorlatokba integrálni
 
 ## Telepítési áttekintés
 
 Az Azure Developer CLI több telepítési parancsot kínál:
-- `azd up` - Teljes munkafolyamat (létrehozás + telepítés)
+- `azd up` - Teljes munkafolyamat (előkészítés + telepítés)
 - `azd provision` - Csak Azure erőforrások létrehozása/frissítése
 - `azd deploy` - Csak alkalmazáskód telepítése
 - `azd package` - Alkalmazások építése és csomagolása
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ A telepítési folyamat megértése
 
-### 1. fázis: Elő-létrehozási horgok
+### 1. fázis: Elő-telepítési horgok
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### 2. fázis: Infrastruktúra létrehozása
+### 2. fázis: Infrastruktúra előkészítése
 - Infrastruktúra sablonok (Bicep/Terraform) olvasása
 - Azure erőforrások létrehozása vagy frissítése
 - Hálózat és biztonság konfigurálása
 - Monitorozás és naplózás beállítása
 
-### 3. fázis: Utó-létrehozási horgok
+### 3. fázis: Utó-telepítési horgok
 ```yaml
 hooks:
   postprovision:
@@ -156,7 +163,7 @@ hooks:
 
 ## 🎛️ Telepítési konfiguráció
 
-### Szolgáltatás-specifikus telepítési beállítások
+### Szolgáltatásspecifikus telepítési beállítások
 ```yaml
 # azure.yaml
 services:
@@ -208,7 +215,7 @@ azd env set LOG_LEVEL error
 
 ## 🔧 Fejlett telepítési forgatókönyvek
 
-### Több szolgáltatásból álló alkalmazások
+### Több szolgáltatást érintő alkalmazások
 ```yaml
 # Complex application with multiple services
 services:
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Többlépcsős Dockerfile optimalizálás
+### Többlépcsős Dockerfile optimalizáció
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. Tesztelési integráció
+### 3. Integrációs tesztelés
 ```yaml
 hooks:
   predeploy:
@@ -631,10 +638,10 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Következő lépések
 
-- [Erőforrások létrehozása](provisioning.md) - Mélyebb betekintés az infrastruktúra kezelésébe
+- [Erőforrások előkészítése](provisioning.md) - Mélyebb betekintés az infrastruktúra kezelésébe
 - [Elő-telepítési tervezés](../pre-deployment/capacity-planning.md) - Telepítési stratégia megtervezése
 - [Gyakori problémák](../troubleshooting/common-issues.md) - Telepítési problémák megoldása
-- [Bevált gyakorlatok](../troubleshooting/debugging.md) - Gyártásra kész telepítési stratégiák
+- [Bevált gyakorlatok](../troubleshooting/debugging.md) - Produkcióra kész telepítési stratégiák
 
 ## További források
 
@@ -647,9 +654,9 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 **Navigáció**
 - **Előző lecke**: [Az első projekted](../getting-started/first-project.md)
-- **Következő lecke**: [Erőforrások létrehozása](provisioning.md)
+- **Következő lecke**: [Erőforrások előkészítése](provisioning.md)
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy téves értelmezésekért.
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

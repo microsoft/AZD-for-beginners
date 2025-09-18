@@ -1,44 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:12:14+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T08:57:03+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sw"
 }
 -->
 # Mwongozo wa Usanidi
 
-**Iliyopita:** [AZD Basics](azd-basics.md) | **Inayofuata:** [First Project](first-project.md)
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Anayeanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 3 - Usanidi na Uthibitishaji
+- **⬅️ Iliyotangulia**: [Mradi Wako wa Kwanza](first-project.md)
+- **➡️ Inayofuata**: [Mwongozo wa Utekelezaji](../deployment/deployment-guide.md)
+- **🚀 Sura Inayofuata**: [Sura ya 4: Miundombinu kama Kanuni](../deployment/deployment-guide.md)
 
 ## Utangulizi
 
-Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya kazi bora za maendeleo na utekelezaji. Utajifunza kuhusu mfumo wa usanidi, usimamizi wa mazingira, mbinu za uthibitishaji, na mifumo ya usanidi ya hali ya juu inayowezesha utekelezaji salama na bora wa Azure.
+Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mchakato bora wa maendeleo na utekelezaji. Utajifunza kuhusu mpangilio wa usanidi, usimamizi wa mazingira, mbinu za uthibitishaji, na mifumo ya usanidi ya hali ya juu inayowezesha utekelezaji wa Azure kwa ufanisi na usalama.
 
 ## Malengo ya Kujifunza
 
 Mwisho wa somo hili, utaweza:
-- Kuelewa mfumo wa usanidi wa azd na jinsi mipangilio inavyopewa kipaumbele
-- Kusimamia mipangilio ya kimataifa na ya mradi kwa ufanisi
+- Kumudu mpangilio wa usanidi wa azd na kuelewa jinsi mipangilio inavyopangwa kwa kipaumbele
+- Kusimamia mipangilio ya kimataifa na ya mradi maalum kwa ufanisi
 - Kusimamia mazingira mengi yenye usanidi tofauti
-- Kutekeleza mifumo salama ya uthibitishaji na idhini
+- Kutekeleza mifumo salama ya uthibitishaji na ruhusa
 - Kuelewa mifumo ya usanidi ya hali ya juu kwa hali ngumu
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha somo hili, utaweza:
-- Kusanidi azd kwa kazi bora za maendeleo
-- Kuanzisha na kusimamia mazingira mengi ya utekelezaji
+- Kusimamia azd kwa mchakato bora wa maendeleo
+- Kuweka na kusimamia mazingira mengi ya utekelezaji
 - Kutekeleza mbinu salama za usimamizi wa usanidi
 - Kutatua matatizo yanayohusiana na usanidi
-- Kubadilisha tabia ya azd kwa mahitaji maalum ya shirika
+- Kubinafsisha tabia ya azd kwa mahitaji maalum ya shirika
 
-Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya kazi bora za maendeleo na utekelezaji.
+Mwongozo huu wa kina unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mchakato bora wa maendeleo na utekelezaji.
 
-## Mfumo wa Usanidi
+## Mpangilio wa Usanidi
 
-azd hutumia mfumo wa usanidi wa kihierarkia:
-1. **Bendera za mstari wa amri** (kipaumbele cha juu zaidi)
+azd hutumia mfumo wa usanidi wa mpangilio:
+1. **Bendera za amri** (kipaumbele cha juu zaidi)
 2. **Vigezo vya mazingira**
 3. **Usanidi wa mradi wa ndani** (`.azd/config.json`)
 4. **Usanidi wa mtumiaji wa kimataifa** (`~/.azd/config.json`)
@@ -46,7 +51,7 @@ azd hutumia mfumo wa usanidi wa kihierarkia:
 
 ## Usanidi wa Kimataifa
 
-### Kuweka Mipangilio ya Kimataifa
+### Kuweka Chaguo-msingi za Kimataifa
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -83,7 +88,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Usanidi wa Mradi
 
 ### Muundo wa azure.yaml
-Faili ya `azure.yaml` ni msingi wa mradi wako wa azd:
+Faili ya `azure.yaml` ni moyo wa mradi wako wa azd:
 
 ```yaml
 # Minimum configuration
@@ -161,7 +166,7 @@ pipeline:
 
 ### Chaguo za Usanidi wa Huduma
 
-#### Aina za Mwenyeji
+#### Aina za Wenyeji
 ```yaml
 services:
   web-static:
@@ -274,7 +279,7 @@ LOG_LEVEL=info
 
 ## 🔐 Usanidi wa Uthibitishaji
 
-### Muunganisho wa Azure CLI
+### Ushirikiano wa Azure CLI
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -299,7 +304,7 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
+### Utambulisho Uliofanywa
 Kwa mazingira yanayohifadhiwa na Azure:
 ```bash
 # Enable managed identity authentication
@@ -482,7 +487,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Mazoea Bora
+## 🎓 Mbinu Bora
 
 ### 1. Tumia Vigezo vya Mazingira
 ```yaml
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Mazingatio ya Udhibiti wa Toleo
+### 3. Mambo ya Kuzingatia Katika Udhibiti wa Toleo
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -520,7 +525,7 @@ database:
 ```
 
 ### 4. Nyaraka za Usanidi
-Andika nyaraka za usanidi katika `CONFIG.md`:
+Andika nyaraka za usanidi wako katika `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -535,22 +540,26 @@ Andika nyaraka za usanidi katika `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## Hatua Zinazofuata
+## Hatua Zifuatazo
 
-- [Your First Project](first-project.md) - Tumia usanidi kwa vitendo
-- [Deployment Guide](../deployment/deployment-guide.md) - Tumia usanidi kwa utekelezaji
-- [Provisioning Resources](../deployment/provisioning.md) - Usanidi wa hali ya uzalishaji
+- [Mradi Wako wa Kwanza](first-project.md) - Tumia usanidi kwa vitendo
+- [Mwongozo wa Utekelezaji](../deployment/deployment-guide.md) - Tumia usanidi kwa utekelezaji
+- [Utoaji wa Rasilimali](../deployment/provisioning.md) - Usanidi wa hali ya uzalishaji
 
 ## Marejeleo
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [Marejeleo ya Usanidi wa azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Schema ya azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Vigezo vya Mazingira](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Iliyopita:** [AZD Basics](azd-basics.md) | **Inayofuata:** [First Project](first-project.md)
-- **Somo Linalofuata**: [Your First Project](first-project.md)
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Anayeanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 3 - Usanidi na Uthibitishaji
+- **⬅️ Iliyotangulia**: [Mradi Wako wa Kwanza](first-project.md)
+- **➡️ Sura Inayofuata**: [Sura ya 4: Miundombinu kama Kanuni](../deployment/deployment-guide.md)
+- **Somo Linalofuata**: [Mradi Wako wa Kwanza](first-project.md)
 
 ---
 

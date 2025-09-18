@@ -1,22 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:32:48+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T09:44:08+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "cs"
 }
 -->
-# Průvodce laděním - Pokročilé techniky analýzy logů
+# Průvodce laděním pro nasazení AZD
+
+**Navigace kapitol:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
+- **⬅️ Předchozí**: [Běžné problémy](common-issues.md)
+- **➡️ Další**: [Řešení problémů specifických pro AI](ai-troubleshooting.md)
+- **🚀 Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../ai-foundry/production-ai-practices.md)
 
 ## Úvod
 
-Tento komplexní průvodce poskytuje pokročilé strategie, nástroje a techniky pro diagnostiku a řešení složitých problémů s nasazením Azure Developer CLI. Naučte se systematické metodiky ladění, techniky analýzy logů, profilování výkonu a pokročilé diagnostické nástroje pro efektivní řešení problémů s nasazením a běhovým prostředím.
+Tento komplexní průvodce poskytuje pokročilé strategie, nástroje a techniky pro diagnostiku a řešení složitých problémů s nasazením Azure Developer CLI. Naučte se systematické metodiky řešení problémů, techniky analýzy logů, profilování výkonu a pokročilé diagnostické nástroje pro efektivní řešení problémů při nasazení a běhu aplikací.
 
 ## Cíle učení
 
 Po dokončení tohoto průvodce budete:
-- Mistrovsky ovládat systematické metodiky ladění problémů s Azure Developer CLI
+- Ovládat systematické metodiky ladění problémů s Azure Developer CLI
 - Rozumět pokročilé konfiguraci logování a technikám analýzy logů
 - Implementovat strategie profilování výkonu a monitorování
 - Používat diagnostické nástroje a služby Azure pro řešení složitých problémů
@@ -26,7 +33,7 @@ Po dokončení tohoto průvodce budete:
 ## Výsledky učení
 
 Po dokončení budete schopni:
-- Aplikovat metodiku TRIAGE pro systematické ladění složitých problémů s nasazením
+- Používat metodiku TRIAGE pro systematické ladění složitých problémů s nasazením
 - Konfigurovat a analyzovat komplexní informace o logování a trasování
 - Efektivně používat Azure Monitor, Application Insights a diagnostické nástroje
 - Samostatně ladit problémy s konektivitou sítě, autentizací a oprávněními
@@ -399,7 +406,7 @@ analyze_resources() {
 
 ## 🔒 Ladění zabezpečení
 
-### Ladění autentizačních toků
+### Ladění toku autentizace
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -514,7 +521,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 Postupy pro nouzové ladění
 
-### Reakce na problémy v produkčním prostředí
+### Reakce na problémy v produkci
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -602,9 +609,9 @@ quick_rollback() {
 }
 ```
 
-## 📊 Ladicí panely
+## 📊 Ladicí dashboardy
 
-### Vlastní monitorovací panel
+### Vlastní monitorovací dashboard
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -653,7 +660,7 @@ aggregate_logs() {
 
 ### Vlastní ladicí skripty
 Vytvořte adresář `scripts/debug/` s:
-- `health-check.sh` - Komplexní kontrola stavu
+- `health-check.sh` - Komplexní kontrola zdraví
 - `performance-test.sh` - Automatizované testování výkonu
 - `log-analyzer.py` - Pokročilá analýza logů
 - `resource-validator.sh` - Validace infrastruktury
@@ -677,10 +684,10 @@ hooks:
 
 ## Osvědčené postupy
 
-1. **Vždy aktivujte ladicí logování** v neprodukčních prostředích
+1. **Vždy aktivujte ladění logů** v neprodukčních prostředích
 2. **Vytvářejte reprodukovatelné testovací případy** pro problémy
 3. **Dokumentujte postupy ladění** pro váš tým
-4. **Automatizujte kontroly stavu** a monitorování
+4. **Automatizujte kontroly zdraví** a monitorování
 5. **Udržujte ladicí nástroje aktuální** s vašimi změnami aplikace
 6. **Procvičujte postupy ladění** během nekrizových období
 
@@ -693,7 +700,7 @@ hooks:
 
 ---
 
-**Pamatujte**: Dobré ladění spočívá v systematičnosti, důkladnosti a trpělivosti. Tyto nástroje a techniky vám pomohou diagnostikovat problémy rychleji a efektivněji.
+**Pamatujte**: Dobré ladění spočívá v systematickém, důkladném a trpělivém přístupu. Tyto nástroje a techniky vám pomohou diagnostikovat problémy rychleji a efektivněji.
 
 ---
 
@@ -704,5 +711,5 @@ hooks:
 
 ---
 
-**Upozornění**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+**Prohlášení**:  
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

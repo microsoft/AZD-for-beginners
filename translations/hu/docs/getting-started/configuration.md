@@ -1,41 +1,46 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:16:56+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T09:19:06+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "hu"
 }
 -->
 # Konfigurációs Útmutató
 
-**Előző:** [AZD Alapok](azd-basics.md) | **Következő:** [Első Projekt](first-project.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 3. fejezet - Konfiguráció és Hitelesítés
+- **⬅️ Előző**: [Az első projekted](first-project.md)
+- **➡️ Következő**: [Telepítési útmutató](../deployment/deployment-guide.md)
+- **🚀 Következő fejezet**: [4. fejezet: Infrastruktúra mint kód](../deployment/deployment-guide.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató bemutatja az Azure Developer CLI konfigurálásának minden aspektusát, hogy optimalizálja a fejlesztési és telepítési munkafolyamatokat. Megismerheted a konfigurációs hierarchiát, a környezetek kezelését, az autentikációs módszereket, valamint azokat a fejlett konfigurációs mintákat, amelyek hatékony és biztonságos Azure telepítéseket tesznek lehetővé.
+Ez az átfogó útmutató bemutatja az Azure Developer CLI konfigurálásának minden aspektusát az optimális fejlesztési és telepítési munkafolyamatok érdekében. Megismerheted a konfigurációs hierarchiát, a környezetek kezelését, a hitelesítési módszereket, valamint azokat a fejlett konfigurációs mintákat, amelyek hatékony és biztonságos Azure telepítéseket tesznek lehetővé.
 
-## Tanulási Célok
+## Tanulási célok
 
-A lecke végére:
-- Elsajátítod az azd konfigurációs hierarchiát, és megérted, hogyan kerülnek prioritásba a beállítások
-- Hatékonyan konfigurálod a globális és projekt-specifikus beállításokat
-- Több környezetet kezelsz különböző konfigurációkkal
-- Biztonságos autentikációs és autorizációs mintákat valósítasz meg
-- Megérted a fejlett konfigurációs mintákat összetett helyzetekhez
+A lecke végére képes leszel:
+- Elsajátítani az azd konfigurációs hierarchiát, és megérteni, hogyan kerülnek prioritásba a beállítások
+- Hatékonyan konfigurálni globális és projekt-specifikus beállításokat
+- Több környezetet kezelni különböző konfigurációkkal
+- Biztonságos hitelesítési és jogosultsági mintákat alkalmazni
+- Megérteni a fejlett konfigurációs mintákat összetett helyzetekhez
 
-## Tanulási Eredmények
+## Tanulási eredmények
 
 A lecke elvégzése után képes leszel:
-- Az azd konfigurálására a fejlesztési munkafolyamatok optimalizálása érdekében
+- Az azd konfigurálására az optimális fejlesztési munkafolyamatok érdekében
 - Több telepítési környezet beállítására és kezelésére
-- Biztonságos konfigurációs gyakorlatok megvalósítására
+- Biztonságos konfigurációs kezelési gyakorlatok megvalósítására
 - Konfigurációval kapcsolatos problémák elhárítására
 - Az azd viselkedésének testreszabására specifikus szervezeti igényekhez
 
-Ez az átfogó útmutató bemutatja az Azure Developer CLI konfigurálásának minden aspektusát, hogy optimalizálja a fejlesztési és telepítési munkafolyamatokat.
+Ez az átfogó útmutató bemutatja az Azure Developer CLI konfigurálásának minden aspektusát az optimális fejlesztési és telepítési munkafolyamatok érdekében.
 
-## Konfigurációs Hierarchia
+## Konfigurációs hierarchia
 
 Az azd hierarchikus konfigurációs rendszert használ:
 1. **Parancssori kapcsolók** (legmagasabb prioritás)
@@ -44,9 +49,9 @@ Az azd hierarchikus konfigurációs rendszert használ:
 4. **Globális felhasználói konfiguráció** (`~/.azd/config.json`)
 5. **Alapértelmezett értékek** (legalacsonyabb prioritás)
 
-## Globális Konfiguráció
+## Globális konfiguráció
 
-### Globális Alapértelmezések Beállítása
+### Globális alapértelmezések beállítása
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -64,7 +69,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Gyakori Globális Beállítások
+### Gyakori globális beállítások
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -80,9 +85,9 @@ azd config set provision.parallelism 5             # Parallel resource creation
 azd config set deploy.timeout 30m                  # Deployment timeout
 ```
 
-## 🏗️ Projekt Konfiguráció
+## 🏗️ Projekt konfiguráció
 
-### azure.yaml Felépítése
+### azure.yaml felépítése
 Az `azure.yaml` fájl az azd projekt központi eleme:
 
 ```yaml
@@ -159,9 +164,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Szolgáltatás Konfigurációs Opciók
+### Szolgáltatás konfigurációs lehetőségek
 
-#### Host Típusok
+#### Host típusok
 ```yaml
 services:
   web-static:
@@ -180,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Nyelvspecifikus Beállítások
+#### Nyelv-specifikus beállítások
 ```yaml
 services:
   node-app:
@@ -206,7 +211,7 @@ services:
 
 ## 🌟 Környezetkezelés
 
-### Környezetek Létrehozása
+### Környezetek létrehozása
 ```bash
 # Create a new environment
 azd env new development
@@ -218,7 +223,7 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Környezet Konfiguráció
+### Környezet konfiguráció
 Minden környezet saját konfigurációval rendelkezik a `.azure/<env-name>/config.json` fájlban:
 
 ```json
@@ -241,7 +246,7 @@ Minden környezet saját konfigurációval rendelkezik a `.azure/<env-name>/conf
 }
 ```
 
-### Környezeti Változók
+### Környezeti változók
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -255,7 +260,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-### Környezet Sablonok
+### Környezet sablonok
 Hozz létre `.azure/env.template` fájlt a következetes környezetbeállításhoz:
 ```bash
 # Required variables
@@ -272,9 +277,9 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Autentikációs Konfiguráció
+## 🔐 Hitelesítési konfiguráció
 
-### Azure CLI Integráció
+### Azure CLI integráció
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -286,7 +291,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Szolgáltatás Principális Autentikáció
+### Szolgáltatásfiók hitelesítés
 CI/CD folyamatokhoz:
 ```bash
 # Set environment variables
@@ -299,17 +304,17 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Kezelt Identitás
-Azure-ban hosztolt környezetekhez:
+### Kezelt identitás
+Azure által hosztolt környezetekhez:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastruktúra Konfiguráció
+## 🏗️ Infrastruktúra konfiguráció
 
-### Bicep Paraméterek
+### Bicep paraméterek
 Infrastruktúra paraméterek konfigurálása az `infra/main.parameters.json` fájlban:
 ```json
 {
@@ -332,8 +337,8 @@ Infrastruktúra paraméterek konfigurálása az `infra/main.parameters.json` fá
 }
 ```
 
-### Terraform Konfiguráció
-Terraform projektekhez konfigurálás az `infra/terraform.tfvars` fájlban:
+### Terraform konfiguráció
+Terraform projektekhez konfigurálj az `infra/terraform.tfvars` fájlban:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -341,9 +346,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Telepítési Konfiguráció
+## 🚀 Telepítési konfiguráció
 
-### Build Konfiguráció
+### Build konfiguráció
 ```yaml
 # In azure.yaml
 services:
@@ -366,7 +371,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Konfiguráció
+### Docker konfiguráció
 ```yaml
 services:
   api:
@@ -382,9 +387,9 @@ services:
 ```
 Példa `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Fejlett Konfiguráció
+## 🔧 Fejlett konfiguráció
 
-### Egyedi Erőforrás Nevezés
+### Egyedi erőforrás elnevezés
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -392,7 +397,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Hálózati Konfiguráció
+### Hálózati konfiguráció
 ```yaml
 # In azure.yaml
 infra:
@@ -403,7 +408,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Konfiguráció
+### Monitoring konfiguráció
 ```yaml
 # In azure.yaml
 monitoring:
@@ -415,9 +420,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Környezet-specifikus Konfigurációk
+## 🎯 Környezet-specifikus konfigurációk
 
-### Fejlesztési Környezet
+### Fejlesztési környezet
 ```bash
 # .azure/development/.env
 DEBUG=true
@@ -426,7 +431,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Tesztelési Környezet
+### Tesztelési környezet
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -435,7 +440,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Éles Környezet
+### Éles környezet
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -444,9 +449,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Konfiguráció Ellenőrzése
+## 🔍 Konfiguráció érvényesítése
 
-### Konfiguráció Ellenőrzése
+### Konfiguráció érvényesítése
 ```bash
 # Check configuration syntax
 azd config validate
@@ -458,8 +463,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Konfigurációs Szkriptek
-Hozz létre ellenőrző szkripteket a `scripts/` mappában:
+### Konfigurációs szkriptek
+Hozz létre érvényesítési szkripteket a `scripts/` mappában:
 
 ```bash
 #!/bin/bash
@@ -482,9 +487,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Legjobb Gyakorlatok
+## 🎓 Legjobb gyakorlatok
 
-### 1. Használj Környezeti Változókat
+### 1. Használj környezeti változókat
 ```yaml
 # Good: Use environment variables
 database:
@@ -495,7 +500,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Szervezd a Konfigurációs Fájlokat
+### 2. Szervezd a konfigurációs fájlokat
 ```
 .azure/
 ├── config.json              # Global project config
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Verziókezelési Szempontok
+### 3. Verziókezelési szempontok
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -519,7 +524,7 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Konfiguráció Dokumentálása
+### 4. Konfiguráció dokumentációja
 Dokumentáld a konfigurációt a `CONFIG.md` fájlban:
 ```markdown
 # Configuration Guide
@@ -535,24 +540,28 @@ Dokumentáld a konfigurációt a `CONFIG.md` fájlban:
 - Production: Uses production database, error logging only
 ```
 
-## Következő Lépések
+## Következő lépések
 
-- [Az Első Projekted](first-project.md) - Alkalmazd a konfigurációt gyakorlatban
-- [Telepítési Útmutató](../deployment/deployment-guide.md) - Használd a konfigurációt telepítéshez
-- [Erőforrások Létrehozása](../deployment/provisioning.md) - Éles környezetre kész konfigurációk
+- [Az első projekted](first-project.md) - Alkalmazd a konfigurációt gyakorlatban
+- [Telepítési útmutató](../deployment/deployment-guide.md) - Használd a konfigurációt telepítéshez
+- [Erőforrások előkészítése](../deployment/provisioning.md) - Éles környezetre kész konfigurációk
 
 ## Hivatkozások
 
 - [azd Konfigurációs Referencia](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml Sémája](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Környezeti Változók](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [Környezeti változók](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Előző:** [AZD Alapok](azd-basics.md) | **Következő:** [Első Projekt](first-project.md)
-- **Következő Lecke**: [Az Első Projekted](first-project.md)
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 3. fejezet - Konfiguráció és Hitelesítés
+- **⬅️ Előző**: [Az első projekted](first-project.md)
+- **➡️ Következő fejezet**: [4. fejezet: Infrastruktúra mint kód](../deployment/deployment-guide.md)
+- **Következő lecke**: [Az első projekted](first-project.md)
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

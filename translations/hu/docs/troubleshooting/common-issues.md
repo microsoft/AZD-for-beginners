@@ -1,25 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:26:18+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T09:20:57+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "hu"
 }
 -->
 # Gyakori problémák és megoldások
 
+**Fejezet navigáció:**
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 7. fejezet - Hibakeresés és hibaelhárítás
+- **⬅️ Előző fejezet**: [6. fejezet: Előzetes ellenőrzések](../pre-deployment/preflight-checks.md)
+- **➡️ Következő**: [Hibakeresési útmutató](debugging.md)
+- **🚀 Következő fejezet**: [8. fejezet: Produkciós és vállalati minták](../ai-foundry/production-ai-practices.md)
+
 ## Bevezetés
 
-Ez az átfogó hibaelhárítási útmutató az Azure Developer CLI használata során leggyakrabban előforduló problémákat tárgyalja. Ismerje meg, hogyan diagnosztizálhatja, háríthatja el és oldhatja meg az autentikációval, telepítéssel, infrastruktúra létrehozással és alkalmazáskonfigurációval kapcsolatos problémákat. Minden probléma részletes tüneteket, kiváltó okokat és lépésről lépésre történő megoldási eljárásokat tartalmaz.
+Ez az átfogó hibaelhárítási útmutató bemutatja a leggyakrabban előforduló problémákat az Azure Developer CLI használata során. Megtanulhatja, hogyan diagnosztizálja, hárítsa el és oldja meg az autentikációval, telepítéssel, infrastruktúra létrehozással és alkalmazáskonfigurációval kapcsolatos problémákat. Minden probléma részletes tüneteket, okokat és lépésről lépésre történő megoldási eljárásokat tartalmaz.
 
 ## Tanulási célok
 
 Az útmutató elvégzésével:
 - Elsajátítja az Azure Developer CLI problémák diagnosztikai technikáit
-- Megérti az autentikációval és jogosultságokkal kapcsolatos gyakori problémákat és azok megoldásait
+- Megérti az autentikációval és jogosultságokkal kapcsolatos gyakori problémákat és megoldásaikat
 - Megoldja a telepítési hibákat, infrastruktúra létrehozási problémákat és konfigurációs nehézségeket
-- Proaktív monitorozási és hibakeresési stratégiákat alkalmaz
+- Proaktív monitoring és hibakeresési stratégiákat alkalmaz
 - Szisztematikus hibaelhárítási módszereket alkalmaz összetett problémák esetén
 - Megfelelő naplózást és monitorozást állít be a jövőbeli problémák megelőzése érdekében
 
@@ -28,14 +35,14 @@ Az útmutató elvégzésével:
 Az útmutató elvégzése után képes lesz:
 - Diagnosztizálni az Azure Developer CLI problémáit beépített diagnosztikai eszközökkel
 - Önállóan megoldani az autentikációval, előfizetéssel és jogosultságokkal kapcsolatos problémákat
-- Hatékonyan hárítani a telepítési hibákat és infrastruktúra létrehozási problémákat
+- Hatékonyan hibaelhárítani a telepítési hibákat és infrastruktúra létrehozási problémákat
 - Hibakeresni az alkalmazáskonfigurációs és környezet-specifikus problémákat
-- Monitorozást és riasztásokat beállítani a potenciális problémák proaktív azonosításához
+- Monitoringot és riasztásokat beállítani a potenciális problémák proaktív azonosítására
 - Alkalmazni a naplózás, hibakeresés és problémamegoldási munkafolyamatok legjobb gyakorlatait
 
 ## Gyors diagnosztika
 
-Mielőtt konkrét problémákba mélyedne, futtassa ezeket a parancsokat diagnosztikai információk gyűjtéséhez:
+Mielőtt konkrét problémákba merülne, futtassa ezeket a parancsokat diagnosztikai információk gyűjtéséhez:
 
 ```bash
 # Check azd version and health
@@ -60,7 +67,7 @@ azd <command> --debug
 ### Probléma: "Nem sikerült hozzáférési tokent szerezni"
 **Tünetek:**
 - Az `azd up` autentikációs hibákkal meghiúsul
-- A parancsok "nem engedélyezett" vagy "hozzáférés megtagadva" üzenetet adnak vissza
+- A parancsok "nem engedélyezett" vagy "hozzáférés megtagadva" üzeneteket adnak vissza
 
 **Megoldások:**
 ```bash
@@ -97,7 +104,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 3. Contact your Azure administrator for proper permissions
 ```
 
-### Probléma: Több-bérlős autentikációs problémák
+### Probléma: Több bérlős autentikációs problémák
 **Megoldások:**
 ```bash
 # 1. Login with specific tenant
@@ -133,8 +140,8 @@ azd down --force --purge
 
 ### Probléma: Helyszín/régió nem elérhető
 **Tünetek:**
-- "A(z) 'xyz' helyszín nem elérhető az erőforrástípushoz"
-- Bizonyos SKU-k nem érhetők el a kiválasztott régióban
+- "A 'xyz' helyszín nem elérhető az erőforrástípushoz"
+- Bizonyos SKU-k nem elérhetők a kiválasztott régióban
 
 **Megoldások:**
 ```bash
@@ -229,7 +236,7 @@ docker run --rm test-image
 ### Probléma: Konténer telepítési hibák
 **Tünetek:**
 - A konténeres alkalmazások nem indulnak el
-- Kép letöltési hibák
+- Képfelhúzási hibák
 
 **Megoldások:**
 ```bash
@@ -419,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Hibaelhárítási eszközök és parancsok
+## 🛠️ Hibakeresési eszközök és parancsok
 
 ### Hibakeresési parancsok
 ```bash
@@ -464,7 +471,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ## 🆘 További segítség kérése
 
-### Mikor érdemes továbbítani
+### Mikor kell továbbítani
 - Az autentikációs problémák nem oldódnak meg az összes megoldás kipróbálása után
 - Infrastruktúra problémák az Azure szolgáltatásokkal
 - Számlázási vagy előfizetési problémák
@@ -491,9 +498,9 @@ Mielőtt kapcsolatba lépne a támogatással, gyűjtse össze:
 - Hibaüzenetek (teljes szöveg)
 - A probléma reprodukálásának lépései
 - Környezet részletei (`azd env show`)
-- A probléma kezdési időpontja
+- A probléma kezdési idővonala
 
-### Naplógyűjtő szkript
+### Naplógyűjtési script
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -538,7 +545,7 @@ npm run test
 azd provision --preview
 ```
 
-### Monitorozás beállítása
+### Monitoring beállítása
 ```bash
 # Enable Application Insights
 # Add to main.bicep:
@@ -585,5 +592,5 @@ az security assessment list --resource-group myrg
 
 ---
 
-**Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősség kizárása**:  
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

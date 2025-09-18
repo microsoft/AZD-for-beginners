@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-10T06:50:20+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T10:06:05+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "sk"
 }
 -->
 # Sprievodca výberom SKU - Výber správnych úrovní služieb Azure
 
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 6 - Validácia a plánovanie pred nasadením
+- **⬅️ Predchádzajúca**: [Plánovanie kapacity](capacity-planning.md)
+- **➡️ Nasledujúca**: [Kontroly pred nasadením](preflight-checks.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 7: Riešenie problémov](../troubleshooting/common-issues.md)
+
 ## Úvod
 
-Tento komplexný sprievodca vám pomôže vybrať optimálne SKU (Stock Keeping Units) služieb Azure pre rôzne prostredia, pracovné zaťaženia a požiadavky. Naučte sa analyzovať potreby výkonu, náklady a požiadavky na škálovateľnosť, aby ste si vybrali najvhodnejšie úrovne služieb pre nasadenia Azure Developer CLI.
+Tento komplexný sprievodca vám pomôže vybrať optimálne SKU (Stock Keeping Units) služieb Azure pre rôzne prostredia, pracovné zaťaženia a požiadavky. Naučte sa analyzovať potreby výkonu, nákladové faktory a požiadavky na škálovateľnosť, aby ste si vybrali najvhodnejšie úrovne služieb pre vaše nasadenia Azure Developer CLI.
 
 ## Ciele učenia
 
 Po dokončení tohto sprievodcu budete:
 - Rozumieť konceptom SKU Azure, modelom cien a rozdielom vo funkciách
-- Ovládať stratégie výberu SKU špecifické pre prostredie, ako je vývoj, testovanie a produkcia
+- Ovládať stratégie výberu SKU špecifické pre prostredie (vývoj, staging, produkcia)
 - Analyzovať požiadavky pracovného zaťaženia a priradiť ich k vhodným úrovniam služieb
 - Implementovať stratégie optimalizácie nákladov prostredníctvom inteligentného výberu SKU
 - Používať techniky testovania výkonu a validácie pre výber SKU
@@ -31,7 +38,7 @@ Po dokončení budete schopní:
 - Implementovať benchmarking výkonu a validáciu pre výber SKU
 - Vytvoriť automatizované nástroje na odporúčanie SKU a optimalizáciu nákladov
 - Plánovať migrácie SKU a stratégie škálovania pre meniace sa požiadavky
-- Používať princípy Azure Well-Architected Framework pri výbere úrovní služieb
+- Aplikovať princípy Azure Well-Architected Framework na výber úrovní služieb
 
 ## Obsah
 
@@ -40,8 +47,8 @@ Po dokončení budete schopní:
 - [Pokyny špecifické pre služby](../../../../docs/pre-deployment)
 - [Stratégie optimalizácie nákladov](../../../../docs/pre-deployment)
 - [Úvahy o výkone](../../../../docs/pre-deployment)
-- [Tabuľky rýchleho odkazu](../../../../docs/pre-deployment)
-- [Nástroje validácie](../../../../docs/pre-deployment)
+- [Rýchle referenčné tabuľky](../../../../docs/pre-deployment)
+- [Nástroje na validáciu](../../../../docs/pre-deployment)
 
 ---
 
@@ -54,12 +61,12 @@ SKU (Stock Keeping Units) predstavujú rôzne úrovne služieb a výkonnostné �
 - **Výkonnostné charakteristiky** (CPU, pamäť, priepustnosť)
 - **Dostupnosť funkcií** (možnosti škálovania, úrovne SLA)
 - **Modely cien** (na základe spotreby, rezervovanej kapacity)
-- **Regionálna dostupnosť** (nie všetky SKU sú dostupné vo všetkých regiónoch)
+- **Regionálnu dostupnosť** (nie všetky SKU sú dostupné vo všetkých regiónoch)
 
 ### Kľúčové faktory pri výbere SKU
 
 1. **Požiadavky pracovného zaťaženia**
-   - Očakávané vzory prevádzky/záťaže
+   - Očakávané vzory prevádzky/zaťaženia
    - Požiadavky na výkon (CPU, pamäť, I/O)
    - Potreby úložiska a vzory prístupu
 
@@ -68,7 +75,7 @@ SKU (Stock Keeping Units) predstavujú rôzne úrovne služieb a výkonnostné �
    - Požiadavky na dostupnosť
    - Potreby bezpečnosti a súladu
 
-3. **Obmedzenia rozpočtu**
+3. **Rozpočtové obmedzenia**
    - Počiatočné náklady vs. prevádzkové náklady
    - Zľavy na rezervovanú kapacitu
    - Dopady nákladov na automatické škálovanie
@@ -76,13 +83,13 @@ SKU (Stock Keeping Units) predstavujú rôzne úrovne služieb a výkonnostné �
 4. **Projekcie rastu**
    - Požiadavky na škálovateľnosť
    - Budúce potreby funkcií
-   - Zložitosť migrácie
+   - Komplexnosť migrácie
 
 ---
 
 ## Výber na základe prostredia
 
-### Prostredie vývoja
+### Vývojové prostredie
 
 **Priority**: Optimalizácia nákladov, základná funkcionalita, jednoduché zriadenie/zrušenie
 
@@ -103,10 +110,10 @@ skus:
 - **App Service**: F1 (Free) alebo B1 (Basic) pre jednoduché testovanie
 - **Databázy**: Základná úroveň s minimálnymi zdrojmi
 - **Úložisko**: Štandardné s lokálnou redundanciou
-- **Výpočty**: Zdieľané zdroje sú prijateľné
+- **Výpočty**: Zdieľané zdroje sú akceptovateľné
 - **Sieť**: Základné konfigurácie
 
-### Prostredie testovania/stagingu
+### Staging/testovacie prostredie
 
 **Priority**: Konfigurácia podobná produkcii, rovnováha nákladov, schopnosť testovania výkonu
 
@@ -147,7 +154,7 @@ skus:
 ```
 
 #### Charakteristiky
-- **Vysoká dostupnosť**: Požiadavky SLA 99.9%+
+- **Vysoká dostupnosť**: Požiadavky na SLA 99.9%+
 - **Výkon**: Dedikované zdroje, vysoká priepustnosť
 - **Bezpečnosť**: Prémiové bezpečnostné funkcie
 - **Škálovanie**: Kompletné možnosti automatického škálovania
@@ -268,7 +275,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 #### Príklady konfigurácie
 
-**Vývoj (spotreba)**
+**Vývoj (Spotreba)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -307,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Produkcia (dedikované)**
+**Produkcia (Dedikované)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-prod'
@@ -328,7 +335,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 #### Modely priepustnosti
 
-1. **Manuálne nastavená priepustnosť**
+1. **Manuálne pridelená priepustnosť**
    - Predvídateľný výkon
    - Zľavy na rezervovanú kapacitu
    - Najlepšie pre stabilné pracovné zaťaženia
@@ -340,7 +347,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 3. **Serverless**
    - Platba za požiadavku
-   - Bez nastavenej priepustnosti
+   - Žiadna pridelená priepustnosť
    - Ideálne pre vývoj a prerušované pracovné zaťaženia
 
 #### Príklady SKU
@@ -540,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Plánované škálovanie
 
-Znížte škálovanie počas neaktívnych hodín:
+Škálujte nadol počas neaktívnych hodín:
 
 ```json
 {
@@ -605,7 +612,7 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Testovanie záťaže
+### Testovanie zaťaženia
 
 Testujte rôzne SKU na validáciu výkonu:
 
@@ -646,9 +653,9 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Tabuľky rýchleho odkazu
+## Rýchle referenčné tabuľky
 
-### Rýchly odkaz na SKU App Service
+### Rýchla referencia SKU pre App Service
 
 | SKU | Úroveň | vCPU | RAM | Úložisko | Cenové rozpätie | Použitie |
 |-----|--------|------|-----|----------|-----------------|----------|
@@ -658,7 +665,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Vysoký výkon |
 | I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Podnikové |
 
-### Rýchly odkaz na SKU SQL Database
+### Rýchla referencia SKU pre SQL Database
 
 | SKU | Úroveň | DTU/vCore | Úložisko | Cenové rozpätie | Použitie |
 |-----|--------|-----------|----------|-----------------|----------|
@@ -668,17 +675,17 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Vyvážené |
 | BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Kritické |
 
-### Rýchly odkaz na SKU Container Apps
+### Rýchla referencia SKU pre Container Apps
 
 | Model | Ceny | CPU/Pamäť | Použitie |
 |-------|------|-----------|----------|
-| Spotreba | Platba za použitie | 0.25-2 vCPU | Vývoj, variabilná záťaž |
+| Spotreba | Platba za použitie | 0.25-2 vCPU | Vývoj, variabilné zaťaženie |
 | Dedikované D4 | Rezervované | 4 vCPU, 16GB | Produkcia |
 | Dedikované D8 | Rezervované | 8 vCPU, 32GB | Vysoký výkon |
 
 ---
 
-## Nástroje validácie
+## Nástroje na validáciu
 
 ### Kontrola dostupnosti SKU
 
@@ -822,4 +829,4 @@ test_configuration:
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

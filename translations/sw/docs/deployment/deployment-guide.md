@@ -1,50 +1,57 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:16:13+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T08:57:53+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "sw"
 }
 -->
-# Mwongozo wa Utekelezaji - Kuweza Kusimamia Utekelezaji wa AZD
+# Mwongozo wa Utekelezaji - Kuelewa Utekelezaji wa AZD
+
+**Ukurasa wa Sehemu:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 4 - Miundombinu kama Nambari & Utekelezaji
+- **⬅️ Sura Iliyopita**: [Sura ya 3: Usanidi](../getting-started/configuration.md)
+- **➡️ Inayofuata**: [Utoaji wa Rasilimali](provisioning.md)
+- **🚀 Sura Inayofuata**: [Sura ya 5: Suluhisho za AI za Wakala Wengi](../../examples/retail-scenario.md)
 
 ## Utangulizi
 
-Mwongozo huu wa kina unashughulikia kila kitu unachohitaji kujua kuhusu kusimamia programu kwa kutumia Azure Developer CLI, kuanzia utekelezaji wa amri moja hadi hali za juu za uzalishaji zenye hooks maalum, mazingira mengi, na ujumuishaji wa CI/CD. Jifunze mzunguko mzima wa utekelezaji kwa mifano ya vitendo na mbinu bora.
+Mwongozo huu wa kina unashughulikia kila kitu unachohitaji kujua kuhusu kutekeleza programu kwa kutumia Azure Developer CLI, kuanzia utekelezaji wa amri moja hadi hali za uzalishaji za hali ya juu zenye hooks maalum, mazingira mengi, na ujumuishaji wa CI/CD. Jifunze mzunguko mzima wa utekelezaji kwa mifano ya vitendo na mbinu bora.
 
 ## Malengo ya Kujifunza
 
 Kwa kukamilisha mwongozo huu, utaweza:
-- Kuelewa amri zote za utekelezaji za Azure Developer CLI na mtiririko wa kazi
+- Kumudu amri zote za utekelezaji za Azure Developer CLI na mtiririko wa kazi
 - Kuelewa mzunguko mzima wa utekelezaji kuanzia utoaji hadi ufuatiliaji
 - Kutekeleza hooks maalum za utekelezaji kwa ajili ya otomatiki kabla na baada ya utekelezaji
-- Kuseti mazingira mengi yenye vigezo maalum kwa kila mazingira
-- Kuanzisha mikakati ya juu ya utekelezaji ikiwemo blue-green na canary deployments
-- Kujumuisha utekelezaji wa azd na CI/CD pamoja na mtiririko wa kazi wa DevOps
+- Kuseti mazingira mengi yenye vigezo maalum vya mazingira
+- Kuanzisha mikakati ya hali ya juu ya utekelezaji ikiwemo blue-green na canary deployments
+- Kujumuisha utekelezaji wa azd na CI/CD na mtiririko wa kazi wa DevOps
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha, utaweza:
-- Kutekeleza na kutatua changamoto za mtiririko wa kazi wa utekelezaji wa azd kwa uhuru
+- Kutekeleza na kutatua matatizo ya mtiririko wa kazi wa utekelezaji wa azd kwa uhuru
 - Kubuni na kutekeleza otomatiki ya utekelezaji maalum kwa kutumia hooks
 - Kuseti utekelezaji wa kiwango cha uzalishaji wenye usalama na ufuatiliaji sahihi
-- Kusimamia hali ngumu za utekelezaji katika mazingira mengi
-- Kuboresha utendaji wa utekelezaji na kutekeleza mikakati ya kurudisha hali ya awali
+- Kusimamia hali ngumu za utekelezaji wa mazingira mengi
+- Kuboresha utendaji wa utekelezaji na kutekeleza mikakati ya kurudisha nyuma
 - Kujumuisha utekelezaji wa azd katika mazoea ya DevOps ya biashara
 
 ## Muhtasari wa Utekelezaji
 
 Azure Developer CLI inatoa amri kadhaa za utekelezaji:
 - `azd up` - Mtiririko kamili (utoaji + utekelezaji)
-- `azd provision` - Kuunda/kusasisha rasilimali za Azure pekee
-- `azd deploy` - Kusimamia tu msimbo wa programu
-- `azd package` - Kujenga na kufunga programu
+- `azd provision` - Unda/sasisha rasilimali za Azure pekee
+- `azd deploy` - Tekeleza msimbo wa programu pekee
+- `azd package` - Jenga na pakia programu
 
-## Mtiririko wa Kazi wa Msingi wa Utekelezaji
+## Mtiririko wa Kazi wa Utekelezaji wa Msingi
 
 ### Utekelezaji Kamili (azd up)
-Mtiririko wa kawaida kwa miradi mipya:
+Mtiririko wa kazi wa kawaida kwa miradi mipya:
 ```bash
 # Deploy everything from scratch
 azd up
@@ -57,7 +64,7 @@ azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Utoaji wa Miundombinu Pekee
-Wakati unahitaji tu kusasisha rasilimali za Azure:
+Wakati unahitaji kusasisha rasilimali za Azure pekee:
 ```bash
 # Provision/update infrastructure
 azd provision
@@ -70,7 +77,7 @@ azd provision --service database
 ```
 
 ### Utekelezaji wa Msimbo Pekee
-Kwa sasisho za haraka za programu:
+Kwa masasisho ya haraka ya programu:
 ```bash
 # Deploy all services
 azd deploy
@@ -103,7 +110,7 @@ hooks:
 - Husoma templates za miundombinu (Bicep/Terraform)
 - Huunda au kusasisha rasilimali za Azure
 - Huseti mitandao na usalama
-- Huanzisha ufuatiliaji na kurekodi
+- Huanzisha ufuatiliaji na ulogi
 
 ### Awamu ya 3: Hooks Baada ya Utoaji
 ```yaml
@@ -118,10 +125,10 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Awamu ya 4: Kufunga Programu
+### Awamu ya 4: Upakiaji wa Programu
 - Huunda msimbo wa programu
 - Huunda artifacts za utekelezaji
-- Hufunga kwa jukwaa lengwa (containers, faili za ZIP, nk.)
+- Hupakia kwa jukwaa lengwa (containers, faili za ZIP, nk.)
 
 ### Awamu ya 5: Hooks Kabla ya Utekelezaji
 ```yaml
@@ -137,7 +144,7 @@ hooks:
 ```
 
 ### Awamu ya 6: Utekelezaji wa Programu
-- Husimamia programu zilizofungwa kwenye huduma za Azure
+- Hutekeleza programu zilizopakiwa kwenye huduma za Azure
 - Husasisha mipangilio ya usanidi
 - Huanzisha/kusimamisha huduma
 
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Uboreshaji wa Dockerfile ya Hatua Nyingi
+### Uboreshaji wa Multi-Stage Dockerfile
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -369,7 +376,7 @@ azd config set deploy.parallelism 5
 azd deploy --parallel
 ```
 
-### Caching ya Kujenga
+### Caching ya Ujenzi
 ```yaml
 # azure.yaml - Enable build caching
 services:
@@ -383,7 +390,7 @@ services:
         - .next/cache
 ```
 
-### Utekelezaji wa Kiongezeko
+### Utekelezaji wa Kiongezi
 ```bash
 # Deploy only changed services
 azd deploy --incremental
@@ -501,9 +508,9 @@ services:
           - external-api-key
 ```
 
-## 🚨 Mikakati ya Kurudisha Hali ya Awali
+## 🚨 Mikakati ya Kurudisha Nyuma
 
-### Kurudisha Haraka
+### Kurudisha Nyuma Haraka
 ```bash
 # Rollback to previous deployment
 azd deploy --rollback
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### Kurudisha Miundombinu
+### Kurudisha Nyuma Miundombinu
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -524,7 +531,7 @@ azd provision --rollback
 azd provision --rollback --preview
 ```
 
-### Kurudisha Uhamishaji wa Hifadhidata
+### Kurudisha Nyuma Uhamishaji wa Hifadhidata
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -540,7 +547,7 @@ echo "Database rollback completed"
 
 ## 📊 Vipimo vya Utekelezaji
 
-### Kufuatilia Utendaji wa Utekelezaji
+### Fuatilia Utendaji wa Utekelezaji
 ```bash
 # Enable deployment metrics
 azd config set telemetry.deployment.enabled true
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. Ujumuishaji wa Upimaji
+### 3. Upimaji wa Muunganisho
 ```yaml
 hooks:
   predeploy:
@@ -621,7 +628,7 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Uandishi wa Nyaraka na Kurekodi
+### 4. Uandishi wa Nyaraka na Ulogi
 ```bash
 # Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
@@ -633,7 +640,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 - [Utoaji wa Rasilimali](provisioning.md) - Uchambuzi wa kina wa usimamizi wa miundombinu
 - [Mipango Kabla ya Utekelezaji](../pre-deployment/capacity-planning.md) - Panga mkakati wako wa utekelezaji
-- [Masuala ya Kawaida](../troubleshooting/common-issues.md) - Suluhisha changamoto za utekelezaji
+- [Masuala ya Kawaida](../troubleshooting/common-issues.md) - Tatua matatizo ya utekelezaji
 - [Mbinu Bora](../troubleshooting/debugging.md) - Mikakati ya utekelezaji wa kiwango cha uzalishaji
 
 ## Rasilimali za Ziada
@@ -645,11 +652,11 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
-**Urambazaji**
-- **Somo la Awali**: [Mradi Wako wa Kwanza](../getting-started/first-project.md)
+**Ukurasa wa Sehemu**
+- **Somo Lililopita**: [Mradi Wako wa Kwanza](../getting-started/first-project.md)
 - **Somo Linalofuata**: [Utoaji wa Rasilimali](provisioning.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia huduma ya tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutokuelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

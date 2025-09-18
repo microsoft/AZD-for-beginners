@@ -1,41 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:25:36+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T08:58:50+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "sw"
 }
 -->
 # Masuala ya Kawaida na Suluhisho
 
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 7 - Utatuzi wa Matatizo & Ufuatiliaji
+- **⬅️ Sura Iliyopita**: [Sura ya 6: Ukaguzi Kabla ya Utekelezaji](../pre-deployment/preflight-checks.md)
+- **➡️ Ifuatayo**: [Mwongozo wa Ufuatiliaji](debugging.md)
+- **🚀 Sura Ifuatayo**: [Sura ya 8: Mifumo ya Uzalishaji & Biashara](../ai-foundry/production-ai-practices.md)
+
 ## Utangulizi
 
-Mwongozo huu wa kina wa utatuzi unashughulikia masuala yanayokumbwa mara kwa mara wakati wa kutumia Azure Developer CLI. Jifunze jinsi ya kugundua, kutatua, na kushughulikia matatizo ya kawaida yanayohusiana na uthibitishaji, uwekaji, utoaji wa miundombinu, na usanidi wa programu. Kila suala linaeleza dalili, sababu kuu, na hatua za hatua kwa hatua za kutatua.
+Mwongozo huu wa kina wa utatuzi wa matatizo unashughulikia masuala yanayokutana mara kwa mara wakati wa kutumia Azure Developer CLI. Jifunze jinsi ya kugundua, kutatua, na kusuluhisha matatizo ya kawaida yanayohusiana na uthibitishaji, utekelezaji, utoaji wa miundombinu, na usanidi wa programu. Kila tatizo linajumuisha dalili za kina, sababu za msingi, na hatua za utatuzi.
 
 ## Malengo ya Kujifunza
 
 Kwa kukamilisha mwongozo huu, utaweza:
-- Kumudu mbinu za uchunguzi wa matatizo ya Azure Developer CLI
+- Kumiliki mbinu za uchunguzi wa matatizo ya Azure Developer CLI
 - Kuelewa matatizo ya kawaida ya uthibitishaji na ruhusa pamoja na suluhisho zake
-- Kutatua matatizo ya uwekaji, makosa ya utoaji wa miundombinu, na matatizo ya usanidi
-- Kutekeleza mikakati ya ufuatiliaji na urekebishaji wa matatizo kwa njia ya kujihadhari
+- Kutatua matatizo ya utekelezaji, makosa ya utoaji wa miundombinu, na matatizo ya usanidi
+- Kutekeleza mikakati ya ufuatiliaji na ufuatiliaji wa matatizo kwa njia ya kujihami
 - Kutumia mbinu za utatuzi wa matatizo kwa mifumo changamano
-- Kusimamia ufuatiliaji na ukaguzi sahihi ili kuzuia matatizo ya baadaye
+- Kuseti ufuatiliaji sahihi na ukaguzi ili kuzuia matatizo ya baadaye
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha, utaweza:
 - Kugundua matatizo ya Azure Developer CLI kwa kutumia zana za uchunguzi zilizojengwa ndani
-- Kutatua matatizo yanayohusiana na uthibitishaji, usajili, na ruhusa kwa uhuru
-- Kushughulikia matatizo ya uwekaji na makosa ya utoaji wa miundombinu kwa ufanisi
-- Kurekebisha matatizo ya usanidi wa programu na matatizo maalum ya mazingira
+- Kutatua matatizo yanayohusiana na uthibitishaji, usajili, na ruhusa kwa kujitegemea
+- Kutatua matatizo ya utekelezaji na makosa ya utoaji wa miundombinu kwa ufanisi
+- Kufuatilia matatizo ya usanidi wa programu na matatizo maalum ya mazingira
 - Kutekeleza ufuatiliaji na tahadhari ili kutambua matatizo yanayoweza kutokea mapema
-- Kutumia mbinu bora za ukaguzi, urekebishaji, na mtiririko wa kazi wa kutatua matatizo
+- Kutumia mbinu bora za ukaguzi, ufuatiliaji, na utatuzi wa matatizo
 
 ## Uchunguzi wa Haraka
 
-Kabla ya kuingia kwenye masuala maalum, endesha amri hizi ili kukusanya taarifa za uchunguzi:
+Kabla ya kuingia kwenye matatizo maalum, tumia amri hizi kukusanya taarifa za uchunguzi:
 
 ```bash
 # Check azd version and health
@@ -57,10 +64,10 @@ azd <command> --debug
 
 ## Masuala ya Uthibitishaji
 
-### Suala: "Imeshindwa kupata tokeni ya ufikiaji"
+### Tatizo: "Imeshindwa kupata tokeni ya ufikiaji"
 **Dalili:**
 - `azd up` inashindwa na makosa ya uthibitishaji
-- Amri zinarudisha "haijaruhusiwa" au "ufikiaji umekataliwa"
+- Amri zinarejesha "haijathibitishwa" au "ufikiaji umekataliwa"
 
 **Suluhisho:**
 ```bash
@@ -80,10 +87,10 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Suala: "Ruhusa haitoshi" wakati wa uwekaji
+### Tatizo: "Ruhusa hazitoshi" wakati wa utekelezaji
 **Dalili:**
-- Uwekaji unashindwa na makosa ya ruhusa
-- Huwezi kuunda rasilimali fulani za Azure
+- Utekelezaji unashindwa na makosa ya ruhusa
+- Haiwezi kuunda rasilimali fulani za Azure
 
 **Suluhisho:**
 ```bash
@@ -97,7 +104,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 3. Contact your Azure administrator for proper permissions
 ```
 
-### Suala: Matatizo ya uthibitishaji wa wateja wengi
+### Tatizo: Matatizo ya uthibitishaji wa wateja wengi
 **Suluhisho:**
 ```bash
 # 1. Login with specific tenant
@@ -112,10 +119,10 @@ az account clear
 
 ## 🏗️ Makosa ya Utoaji wa Miundombinu
 
-### Suala: Migongano ya majina ya rasilimali
+### Tatizo: Migongano ya majina ya rasilimali
 **Dalili:**
 - Makosa ya "Jina la rasilimali tayari lipo"
-- Uwekaji unashindwa wakati wa uundaji wa rasilimali
+- Utekelezaji unashindwa wakati wa uundaji wa rasilimali
 
 **Suluhisho:**
 ```bash
@@ -131,7 +138,7 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### Suala: Eneo/Ukanda haupatikani
+### Tatizo: Eneo/Sehemu haipatikani
 **Dalili:**
 - "Eneo 'xyz' halipatikani kwa aina ya rasilimali"
 - SKUs fulani hazipatikani katika eneo lililochaguliwa
@@ -150,9 +157,9 @@ azd env set AZURE_LOCATION eastus2
 # Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Suala: Makosa ya kikomo cha idadi
+### Tatizo: Makosa ya kupitisha kiwango
 **Dalili:**
-- "Kikomo cha idadi kimezidi kwa aina ya rasilimali"
+- "Kiwango kimepitishwa kwa aina ya rasilimali"
 - "Idadi ya juu ya rasilimali imefikiwa"
 
 **Suluhisho:**
@@ -175,7 +182,7 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Suala: Makosa ya templeti ya Bicep
+### Tatizo: Makosa ya templeti ya Bicep
 **Dalili:**
 - Makosa ya uthibitishaji wa templeti
 - Makosa ya sintaksia katika faili za Bicep
@@ -195,11 +202,11 @@ cat infra/main.parameters.json | jq '.'
 azd provision --preview
 ```
 
-## 🚀 Kushindwa kwa Uwekaji
+## 🚀 Kushindwa kwa Utekelezaji
 
-### Suala: Kushindwa kwa ujenzi
+### Tatizo: Kushindwa kwa ujenzi
 **Dalili:**
-- Programu inashindwa kujengwa wakati wa uwekaji
+- Programu inashindwa kujengwa wakati wa utekelezaji
 - Makosa ya usakinishaji wa kifurushi
 
 **Suluhisho:**
@@ -226,7 +233,7 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Suala: Kushindwa kwa uwekaji wa kontena
+### Tatizo: Kushindwa kwa utekelezaji wa kontena
 **Dalili:**
 - Programu za kontena zinashindwa kuanza
 - Makosa ya kuvuta picha
@@ -247,7 +254,7 @@ az acr login --name myregistry
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Suala: Kushindwa kwa muunganisho wa hifadhidata
+### Tatizo: Kushindwa kwa muunganisho wa hifadhidata
 **Dalili:**
 - Programu haiwezi kuunganishwa na hifadhidata
 - Makosa ya muda wa muunganisho
@@ -270,10 +277,10 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 Masuala ya Usanidi
 
-### Suala: Mabadiliko ya mazingira hayafanyi kazi
+### Tatizo: Vigezo vya mazingira havifanyi kazi
 **Dalili:**
-- Programu haiwezi kusoma maadili ya usanidi
-- Mabadiliko ya mazingira yanaonekana tupu
+- Programu haiwezi kusoma thamani za usanidi
+- Vigezo vya mazingira vinaonekana kuwa tupu
 
 **Suluhisho:**
 ```bash
@@ -291,7 +298,7 @@ azd deploy --service web
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Suala: Matatizo ya cheti cha SSL/TLS
+### Tatizo: Matatizo ya cheti cha SSL/TLS
 **Dalili:**
 - HTTPS haifanyi kazi
 - Makosa ya uthibitishaji wa cheti
@@ -308,9 +315,9 @@ az webapp update --name myapp --resource-group myrg --https-only true
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Suala: Matatizo ya usanidi wa CORS
+### Tatizo: Matatizo ya usanidi wa CORS
 **Dalili:**
-- Sehemu ya mbele haiwezi kuita API
+- Sehemu ya mbele haiwezi kupiga API
 - Ombi la asili tofauti limezuiwa
 
 **Suluhisho:**
@@ -331,10 +338,10 @@ azd show
 
 ## 🌍 Masuala ya Usimamizi wa Mazingira
 
-### Suala: Matatizo ya kubadilisha mazingira
+### Tatizo: Matatizo ya kubadilisha mazingira
 **Dalili:**
 - Mazingira yasiyo sahihi yanatumika
-- Usanidi hauendi sambamba na mabadiliko
+- Usanidi haujabadilika ipasavyo
 
 **Suluhisho:**
 ```bash
@@ -352,10 +359,10 @@ azd env new production-new
 azd env select production-new
 ```
 
-### Suala: Uharibifu wa mazingira
+### Tatizo: Uharibifu wa mazingira
 **Dalili:**
 - Mazingira yanaonyesha hali isiyo sahihi
-- Rasilimali haziendani na usanidi
+- Rasilimali hazilingani na usanidi
 
 **Suluhisho:**
 ```bash
@@ -373,10 +380,10 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Masuala ya Utendaji
 
-### Suala: Muda mrefu wa uwekaji
+### Tatizo: Muda mrefu wa utekelezaji
 **Dalili:**
-- Uwekaji unachukua muda mrefu sana
-- Muda wa kusubiri unazidi wakati wa uwekaji
+- Utekelezaji unachukua muda mrefu
+- Makosa ya muda wakati wa utekelezaji
 
 **Suluhisho:**
 ```bash
@@ -396,9 +403,9 @@ azd deploy --incremental
 azd config set defaults.location eastus2
 ```
 
-### Suala: Matatizo ya utendaji wa programu
+### Tatizo: Matatizo ya utendaji wa programu
 **Dalili:**
-- Muda wa majibu ni mrefu
+- Muda mrefu wa majibu
 - Matumizi makubwa ya rasilimali
 
 **Suluhisho:**
@@ -421,7 +428,7 @@ azd logs --service api --follow
 
 ## 🛠️ Zana na Amri za Utatuzi
 
-### Amri za Urekebishaji
+### Amri za Ufuatiliaji
 ```bash
 # Comprehensive debugging
 export AZD_DEBUG=true
@@ -462,9 +469,9 @@ az webapp show --name myapp --resource-group myrg --query state
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Kupata Msaada wa Ziada
+## 🆘 Kupata Msaada Zaidi
 
-### Wakati wa Kupandisha Kesi
+### Wakati wa Kupeleka Tatizo
 - Masuala ya uthibitishaji yanaendelea baada ya kujaribu suluhisho zote
 - Matatizo ya miundombinu na huduma za Azure
 - Masuala yanayohusiana na bili au usajili
@@ -489,11 +496,11 @@ Kabla ya kuwasiliana na msaada, kusanya:
 - Matokeo ya `azd version`
 - Matokeo ya `azd info`
 - Ujumbe wa makosa (maandishi kamili)
-- Hatua za kuzalisha tatizo
+- Hatua za kurudia tatizo
 - Maelezo ya mazingira (`azd env show`)
 - Muda wa kuanza kwa tatizo
 
-### Script ya Kukusanya Magogo
+### Script ya Ukusanyaji wa Magogo
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Kuzuia Masuala
 
-### Orodha ya Kukagua Kabla ya Uwekaji
+### Orodha ya Ukaguzi Kabla ya Utekelezaji
 ```bash
 # 1. Validate authentication
 az account show
@@ -568,20 +575,20 @@ az security assessment list --resource-group myrg
 
 ## Rasilimali Zinazohusiana
 
-- [Mwongozo wa Urekebishaji](debugging.md) - Mbinu za hali ya juu za urekebishaji
+- [Mwongozo wa Ufuatiliaji](debugging.md) - Mbinu za ufuatiliaji wa hali ya juu
 - [Utoaji wa Rasilimali](../deployment/provisioning.md) - Utatuzi wa miundombinu
 - [Mipango ya Uwezo](../pre-deployment/capacity-planning.md) - Mwongozo wa upangaji wa rasilimali
 - [Uchaguzi wa SKU](../pre-deployment/sku-selection.md) - Mapendekezo ya viwango vya huduma
 
 ---
 
-**Kidokezo**: Hifadhi mwongozo huu na rejea kila unapokutana na matatizo. Masuala mengi yamewahi kutokea na yana suluhisho zilizothibitishwa!
+**Kidokezo**: Weka mwongozo huu mahali pa karibu na rejea kila unapokutana na matatizo. Matatizo mengi yameshughulikiwa hapo awali na yana suluhisho zilizowekwa!
 
 ---
 
 **Urambazaji**
 - **Somo Lililopita**: [Utoaji wa Rasilimali](../deployment/provisioning.md)
-- **Somo Linalofuata**: [Mwongozo wa Urekebishaji](debugging.md)
+- **Somo Linalofuata**: [Mwongozo wa Ufuatiliaji](debugging.md)
 
 ---
 

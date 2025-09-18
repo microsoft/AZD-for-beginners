@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T22:24:38+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-18T10:01:18+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "sk"
 }
 -->
 # Váš prvý projekt - Praktický tutoriál
 
-**Predchádzajúce:** [Konfigurácia](configuration.md) | **Ďalšie:** [Integrácia Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly štart
+- **⬅️ Predchádzajúca**: [Inštalácia & Nastavenie](installation.md)
+- **➡️ Ďalšia**: [Konfigurácia](configuration.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Úvod
 
-Vitajte vo vašom prvom projekte s Azure Developer CLI! Tento komplexný praktický tutoriál vás prevedie celým procesom vytvorenia, nasadenia a správy full-stack aplikácie na Azure pomocou azd. Budete pracovať s reálnou aplikáciou na správu úloh, ktorá zahŕňa React frontend, Node.js API backend a databázu MongoDB.
+Vitajte vo vašom prvom projekte s Azure Developer CLI! Tento komplexný praktický tutoriál vás prevedie celým procesom vytvorenia, nasadenia a správy full-stack aplikácie na Azure pomocou azd. Budete pracovať s reálnou todo aplikáciou, ktorá zahŕňa React frontend, Node.js API backend a MongoDB databázu.
 
 ## Ciele učenia
 
@@ -21,7 +26,7 @@ Po dokončení tohto tutoriálu budete:
 - Ovládať workflow inicializácie projektu azd pomocou šablón
 - Rozumieť štruktúre projektu Azure Developer CLI a konfiguračným súborom
 - Vykonávať kompletné nasadenie aplikácie na Azure vrátane provisioningu infraštruktúry
-- Implementovať aktualizácie aplikácie a stratégie opätovného nasadenia
+- Implementovať stratégie aktualizácie aplikácie a opätovného nasadenia
 - Spravovať viacero prostredí pre vývoj a staging
 - Aplikovať postupy na čistenie zdrojov a správu nákladov
 
@@ -30,7 +35,7 @@ Po dokončení tohto tutoriálu budete:
 Po dokončení budete schopní:
 - Samostatne inicializovať a konfigurovať projekty azd zo šablón
 - Efektívne navigovať a upravovať štruktúru projektov azd
-- Nasadzovať full-stack aplikácie na Azure pomocou jediných príkazov
+- Nasadzovať full-stack aplikácie na Azure pomocou jediného príkazu
 - Riešiť bežné problémy s nasadením a autentifikáciou
 - Spravovať viacero prostredí Azure pre rôzne fázy nasadenia
 - Implementovať workflowy kontinuálneho nasadenia pre aktualizácie aplikácií
@@ -38,7 +43,7 @@ Po dokončení budete schopní:
 ## Začíname
 
 ### Kontrolný zoznam predpokladov
-- ✅ Nainštalovaný Azure Developer CLI ([Príručka inštalácie](installation.md))
+- ✅ Nainštalovaný Azure Developer CLI ([Sprievodca inštaláciou](installation.md))
 - ✅ Nainštalovaný a autentifikovaný Azure CLI
 - ✅ Nainštalovaný Git na vašom systéme
 - ✅ Node.js 16+ (pre tento tutoriál)
@@ -62,7 +67,7 @@ node --version
 
 ## Krok 1: Výber a inicializácia šablóny
 
-Začnime populárnou šablónou aplikácie na správu úloh, ktorá zahŕňa React frontend a Node.js API backend.
+Začnime populárnou šablónou todo aplikácie, ktorá zahŕňa React frontend a Node.js API backend.
 
 ```bash
 # Browse available templates
@@ -82,7 +87,7 @@ azd init --template todo-nodejs-mongo
 ### Čo sa práve stalo?
 - Stiahli ste kód šablóny do lokálneho adresára
 - Vytvorili ste súbor `azure.yaml` s definíciami služieb
-- Nastavili ste kód infraštruktúry v adresári `infra/`
+- Nastavili ste infraštruktúrny kód v adresári `infra/`
 - Vytvorili ste konfiguráciu prostredia
 
 ## Krok 2: Preskúmanie štruktúry projektu
@@ -199,7 +204,7 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Krok 5: Testovanie aplikácie
 
-### Prístup k vašej aplikácii
+### Prístup k aplikácii
 Kliknite na URL uvedenú vo výstupe nasadenia alebo ju získajte kedykoľvek:
 ```bash
 # Get application endpoints
@@ -209,10 +214,10 @@ azd show
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Testovanie aplikácie na správu úloh
-1. **Pridajte položku úlohy** - Kliknite na "Add Todo" a zadajte úlohu
+### Testovanie Todo aplikácie
+1. **Pridajte položku todo** - Kliknite na "Add Todo" a zadajte úlohu
 2. **Označte ako dokončené** - Zaškrtnite dokončené položky
-3. **Odstráňte položky** - Odstráňte úlohy, ktoré už nepotrebujete
+3. **Odstráňte položky** - Odstráňte todo, ktoré už nepotrebujete
 
 ### Monitorovanie aplikácie
 ```bash
@@ -223,9 +228,9 @@ azd monitor
 azd logs
 ```
 
-## Krok 6: Urobte zmeny a opätovne nasadzujte
+## Krok 6: Zmeny a opätovné nasadenie
 
-Urobme zmenu a pozrime sa, aké jednoduché je aktualizovať:
+Urobme zmenu a uvidíme, aké jednoduché je aktualizovať:
 
 ### Úprava API
 ```bash
@@ -233,7 +238,7 @@ Urobme zmenu a pozrime sa, aké jednoduché je aktualizovať:
 code src/api/src/routes/lists.js
 ```
 
-Pridajte vlastný hlavičkový odpoveď:
+Pridajte vlastný odpovedný header:
 ```javascript
 // Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -350,11 +355,11 @@ Teraz, keď ste dokončili svoj prvý projekt, preskúmajte tieto pokročilé t�
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
 ### 3. Najlepšie praktiky pre produkciu
-- [Konfigurácie zabezpečenia](../deployment/best-practices.md#security)
+- [Konfigurácie bezpečnosti](../deployment/best-practices.md#security)
 - [Optimalizácia výkonu](../deployment/best-practices.md#performance)
 - [Monitorovanie a logovanie](../deployment/best-practices.md#monitoring)
 
-### 4. Preskúmajte ďalšie šablóny
+### 4. Preskúmanie ďalších šablón
 ```bash
 # Browse templates by category
 azd template list --filter web
@@ -374,12 +379,12 @@ azd init --template todo-java-mongo
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### Komunita a podpora
+### Komunita & Podpora
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Komunita Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### Šablóny a príklady
+### Šablóny & Príklady
 - [Oficiálna galéria šablón](https://azure.github.io/awesome-azd/)
 - [Komunitné šablóny](https://github.com/Azure-Samples/azd-templates)
 - [Podnikové vzory](https://github.com/Azure/azure-dev/tree/main/templates)
@@ -390,10 +395,15 @@ azd init --template todo-java-mongo
 
 ---
 
-**Predchádzajúce:** [Konfigurácia](configuration.md) | **Ďalšie:** [Integrácia Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
-- **Ďalšia lekcia**: [Príručka nasadenia](../deployment/deployment-guide.md)
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly štart
+- **⬅️ Predchádzajúca**: [Inštalácia & Nastavenie](installation.md)
+- **➡️ Ďalšia**: [Konfigurácia](configuration.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md)
+- **Ďalšia lekcia**: [Sprievodca nasadením](../deployment/deployment-guide.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

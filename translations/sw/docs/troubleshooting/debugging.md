@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:32:06+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T08:59:21+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "sw"
 }
 -->
-# Mwongozo wa Urekebishaji - Mbinu za Uchambuzi wa Magogo kwa Utatuzi wa Masuala ya Juu
+# Mwongozo wa Kutatua Hitilafu kwa AZD Deployments
+
+**Ukurasa wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 7 - Kutatua Hitilafu & Uchanganuzi
+- **⬅️ Iliyopita**: [Masuala ya Kawaida](common-issues.md)
+- **➡️ Inayofuata**: [Kutatua Hitilafu za AI](ai-troubleshooting.md)
+- **🚀 Sura Inayofuata**: [Sura ya 8: Mifumo ya Uzalishaji & Biashara](../ai-foundry/production-ai-practices.md)
 
 ## Utangulizi
 
-Mwongozo huu wa kina unatoa mikakati ya hali ya juu ya urekebishaji, zana, na mbinu za kugundua na kutatua masuala magumu yanayohusiana na usambazaji wa Azure Developer CLI. Jifunze mbinu za utatuzi wa matatizo kwa utaratibu, uchambuzi wa magogo, upimaji wa utendaji, na zana za hali ya juu za uchunguzi ili kutatua masuala ya usambazaji na wakati wa kukimbia kwa ufanisi.
+Mwongozo huu wa kina unatoa mbinu za hali ya juu za kutatua hitilafu, zana, na mbinu za kugundua na kutatua masuala magumu yanayohusiana na deployments za Azure Developer CLI. Jifunze mbinu za utatuzi wa matatizo kwa utaratibu, uchambuzi wa logi, uchanganuzi wa utendaji, na zana za hali ya juu za uchunguzi ili kutatua masuala ya deployment na runtime kwa ufanisi.
 
 ## Malengo ya Kujifunza
 
 Kwa kukamilisha mwongozo huu, utaweza:
 - Kumiliki mbinu za utatuzi wa matatizo kwa utaratibu kwa masuala ya Azure Developer CLI
-- Kuelewa usanidi wa hali ya juu wa magogo na mbinu za uchambuzi wa magogo
-- Kutekeleza mikakati ya upimaji wa utendaji na ufuatiliaji
+- Kuelewa usanidi wa hali ya juu wa logi na mbinu za uchambuzi wa logi
+- Kutekeleza mbinu za uchanganuzi wa utendaji na ufuatiliaji
 - Kutumia zana na huduma za uchunguzi za Azure kwa utatuzi wa matatizo magumu
 - Kutumia mbinu za utatuzi wa matatizo ya mtandao na usalama
-- Kuseti ufuatiliaji wa kina na tahadhari kwa kugundua masuala mapema
+- Kuseti ufuatiliaji wa kina na arifa kwa kugundua masuala mapema
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha, utaweza:
-- Kutumia mbinu ya TRIAGE ili kutatua masuala magumu ya usambazaji kwa utaratibu
-- Kuseti na kuchambua taarifa za magogo na ufuatiliaji kwa kina
+- Kutumia mbinu ya TRIAGE kutatua masuala magumu ya deployment kwa utaratibu
+- Kuseti na kuchambua taarifa za logi na ufuatiliaji kwa kina
 - Kutumia Azure Monitor, Application Insights, na zana za uchunguzi kwa ufanisi
 - Kutatua masuala ya mtandao, uthibitishaji, na ruhusa kwa kujitegemea
-- Kutekeleza mikakati ya ufuatiliaji wa utendaji na uboreshaji
-- Kuunda hati za urekebishaji na otomatiki kwa masuala yanayojirudia
+- Kutekeleza mbinu za ufuatiliaji wa utendaji na uboreshaji
+- Kuunda script za kutatua hitilafu na otomatiki kwa masuala yanayojirudia
 
-## Mbinu za Urekebishaji
+## Mbinu za Kutatua Hitilafu
 
 ### Mbinu ya TRIAGE
 - **T**ime: Lini tatizo lilianza?
 - **R**eproduce: Je, unaweza kulirudia mara kwa mara?
 - **I**solate: Ni sehemu gani inashindwa?
-- **A**nalyze: Magogo yanatuambia nini?
+- **A**nalyze: Logi zinaonyesha nini?
 - **G**ather: Kusanya taarifa zote muhimu
 - **E**scalate: Wakati wa kutafuta msaada wa ziada
 
-## Kuwasha Hali ya Urekebishaji
+## Kuwasha Hali ya Debug
 
 ### Vigezo vya Mazingira
 ```bash
@@ -59,7 +66,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Usanidi wa Urekebishaji
+### Usanidi wa Debug
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -71,9 +78,9 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Mbinu za Uchambuzi wa Magogo
+## 📊 Mbinu za Uchambuzi wa Logi
 
-### Kuelewa Viwango vya Magogo
+### Kuelewa Viwango vya Logi
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,7 +90,7 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Uchambuzi wa Magogo Ulioandaliwa
+### Uchambuzi wa Logi Iliyopangwa
 ```bash
 # Filter logs by level
 azd logs --level error --since 1h
@@ -98,7 +105,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### Uhusiano wa Magogo
+### Uhusiano wa Logi
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -121,7 +128,7 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Zana za Urekebishaji wa Hali ya Juu
+## 🛠️ Zana za Hali ya Juu za Kutatua Hitilafu
 
 ### Maswali ya Azure Resource Graph
 ```bash
@@ -135,7 +142,7 @@ az graph query -q "ResourceContainers | where type == 'microsoft.resources/resou
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Urekebishaji wa Mtandao
+### Utatuzi wa Mtandao
 ```bash
 # Test connectivity between services
 test_connectivity() {
@@ -156,7 +163,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Urekebishaji wa Kontena
+### Utatuzi wa Kontena
 ```bash
 # Debug container app issues
 debug_container() {
@@ -176,7 +183,7 @@ debug_container() {
 }
 ```
 
-### Urekebishaji wa Muunganisho wa Hifadhidata
+### Utatuzi wa Muunganisho wa Database
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,7 +202,7 @@ debug_database() {
 }
 ```
 
-## 🔬 Urekebishaji wa Utendaji
+## 🔬 Utatuzi wa Utendaji
 
 ### Ufuatiliaji wa Utendaji wa Programu
 ```bash
@@ -257,7 +264,7 @@ monitor_resources() {
 
 ## 🧪 Upimaji na Uthibitishaji
 
-### Urekebishaji wa Upimaji wa Muunganisho
+### Utatuzi wa Upimaji wa Muunganisho
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Upimaji wa Mzigo kwa Urekebishaji
+### Upimaji wa Mzigo kwa Utatuzi
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -328,9 +335,9 @@ load_test() {
 }
 ```
 
-## 🔧 Urekebishaji wa Miundombinu
+## 🔧 Utatuzi wa Miundombinu
 
-### Urekebishaji wa Templeti za Bicep
+### Utatuzi wa Bicep Template
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -397,9 +404,9 @@ analyze_resources() {
 }
 ```
 
-## 🔒 Urekebishaji wa Usalama
+## 🔒 Utatuzi wa Usalama
 
-### Urekebishaji wa Mtiririko wa Uthibitishaji
+### Utatuzi wa Mtiririko wa Uthibitishaji
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -433,7 +440,7 @@ debug_keyvault() {
 }
 ```
 
-### Urekebishaji wa Usalama wa Mtandao
+### Utatuzi wa Usalama wa Mtandao
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -451,9 +458,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 Urekebishaji Maalum wa Programu
+## 📱 Utatuzi wa Programu Maalum
 
-### Urekebishaji wa Programu za Node.js
+### Utatuzi wa Programu ya Node.js
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -482,7 +489,7 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Urekebishaji wa Maswali ya Hifadhidata
+### Utatuzi wa Maswali ya Database
 ```javascript
 // database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
@@ -512,7 +519,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Taratibu za Dharura za Urekebishaji
+## 🚨 Taratibu za Dharura za Kutatua Hitilafu
 
 ### Jibu la Masuala ya Uzalishaji
 ```bash
@@ -575,7 +582,7 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Taratibu za Kurejesha
+### Taratibu za Kurudisha Nyuma
 ```bash
 # Quick rollback script
 quick_rollback() {
@@ -602,7 +609,7 @@ quick_rollback() {
 }
 ```
 
-## 📊 Dashibodi za Urekebishaji
+## 📊 Dashibodi za Kutatua Hitilafu
 
 ### Dashibodi ya Ufuatiliaji Maalum
 ```bash
@@ -627,7 +634,7 @@ create_debug_queries() {
 }
 ```
 
-### Muungano wa Magogo
+### Muunganisho wa Logi
 ```bash
 # Aggregate logs from multiple sources
 aggregate_logs() {
@@ -651,14 +658,14 @@ aggregate_logs() {
 
 ## 🔗 Rasilimali za Hali ya Juu
 
-### Hati Maalum za Urekebishaji
+### Script Maalum za Kutatua Hitilafu
 Unda saraka `scripts/debug/` yenye:
 - `health-check.sh` - Ukaguzi wa afya wa kina
-- `performance-test.sh` - Upimaji wa utendaji wa kiotomatiki
-- `log-analyzer.py` - Uchambuzi wa magogo wa hali ya juu
+- `performance-test.sh` - Upimaji wa utendaji otomatiki
+- `log-analyzer.py` - Uchambuzi wa logi wa hali ya juu
 - `resource-validator.sh` - Uthibitishaji wa miundombinu
 
-### Ujumuishaji wa Ufuatiliaji
+### Muunganisho wa Ufuatiliaji
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
@@ -677,32 +684,32 @@ hooks:
 
 ## Mazoea Bora
 
-1. **Washa magogo ya urekebishaji** katika mazingira yasiyo ya uzalishaji
+1. **Washa logi za debug** katika mazingira yasiyo ya uzalishaji
 2. **Unda kesi za majaribio zinazoweza kurudiwa** kwa masuala
-3. **Andika taratibu za urekebishaji** kwa timu yako
+3. **Andika taratibu za kutatua hitilafu** kwa timu yako
 4. **Otomatisha ukaguzi wa afya** na ufuatiliaji
-5. **Hakikisha zana za urekebishaji zinasasishwa** kulingana na mabadiliko ya programu yako
-6. **Fanya mazoezi ya taratibu za urekebishaji** wakati wa nyakati zisizo za tukio
+5. **Sasisha zana za debug** kulingana na mabadiliko ya programu yako
+6. **Fanya mazoezi ya taratibu za kutatua hitilafu** wakati wa nyakati zisizo za tukio
 
-## Hatua Zifuatazo
+## Hatua Zingine
 
 - [Mipango ya Uwezo](../pre-deployment/capacity-planning.md) - Panga mahitaji ya rasilimali
 - [Uchaguzi wa SKU](../pre-deployment/sku-selection.md) - Chagua viwango vya huduma vinavyofaa
-- [Ukaguzi wa Awali](../pre-deployment/preflight-checks.md) - Uthibitishaji kabla ya usambazaji
-- [Karatasi ya Msaada](../../resources/cheat-sheet.md) - Amri za rejeleo la haraka
+- [Ukaguzi wa Awali](../pre-deployment/preflight-checks.md) - Uthibitishaji kabla ya deployment
+- [Karatasi ya Msaada](../../resources/cheat-sheet.md) - Amri za rejea ya haraka
 
 ---
 
-**Kumbuka**: Urekebishaji mzuri unahusu kuwa na utaratibu, makini, na uvumilivu. Zana na mbinu hizi zitakusaidia kugundua masuala haraka na kwa ufanisi zaidi.
+**Kumbuka**: Kutatua hitilafu vizuri kunahusu kuwa na utaratibu, makini, na uvumilivu. Zana na mbinu hizi zitakusaidia kugundua masuala haraka na kwa ufanisi.
 
 ---
 
-**Urambazaji**
-- **Somo la Awali**: [Masuala ya Kawaida](common-issues.md)
+**Ukurasa wa Sura**
+- **Somo Lililopita**: [Masuala ya Kawaida](common-issues.md)
 
 - **Somo Linalofuata**: [Mipango ya Uwezo](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asilia katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9736db53ea878e07688670ebcc8906bc",
-  "translation_date": "2025-09-12T22:14:47+00:00",
+  "original_hash": "73f4ab6147d5fac5f8c5ad72742e8e1d",
+  "translation_date": "2025-09-18T09:12:11+00:00",
   "source_file": "changelog.md",
   "language_code": "hu"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Bevezetés
 
-Ez a változásnapló dokumentálja az AZD Kezdőknek repozitórium minden jelentős változását, frissítését és fejlesztését. Követjük a szemantikus verziózás elveit, és fenntartjuk ezt a naplót, hogy segítsük a felhasználókat megérteni, mi változott az egyes verziók között.
+Ez a változásnapló dokumentálja az AZD Kezdőknek tárhely minden jelentős változását, frissítését és fejlesztését. Követjük a szemantikus verziózás elveit, és fenntartjuk ezt a naplót, hogy segítsük a felhasználókat megérteni, mi változott a verziók között.
 
 ## Tanulási célok
 
@@ -26,78 +26,163 @@ A változásnapló áttekintésével:
 A változásnapló bejegyzéseinek áttekintése után képes lesz:
 - Azonosítani az új tanulási tartalmakat és forrásokat
 - Megérteni, mely szakaszokat frissítették vagy fejlesztették
-- Megtervezni tanulási útját a legfrissebb anyagok alapján
+- Megtervezni tanulási útját a legaktuálisabb anyagok alapján
 - Visszajelzést és javaslatokat adni a jövőbeli fejlesztésekhez
 
 ## Verziótörténet
 
+### [v3.2.0] - 2025-09-17
+
+#### Jelentős navigációs átalakítás és fejezet-alapú tanulási rendszer
+**Ez a verzió átfogó fejezet-alapú tanulási struktúrát vezet be, amely javított navigációt kínál a teljes tárhelyen.**
+
+#### Hozzáadva
+- **📚 Fejezet-alapú tanulási rendszer**: Az egész kurzus átszervezése 8 egymásra épülő tanulási fejezetbe
+  - 1. fejezet: Alapok és gyors kezdés (⭐ - 30-45 perc)
+  - 2. fejezet: AI-első fejlesztés (⭐⭐ - 1-2 óra)
+  - 3. fejezet: Konfiguráció és hitelesítés (⭐⭐ - 45-60 perc)
+  - 4. fejezet: Infrastruktúra kódként és telepítés (⭐⭐⭐ - 1-1,5 óra)
+  - 5. fejezet: Többügynökös AI megoldások (⭐⭐⭐⭐ - 2-3 óra)
+  - 6. fejezet: Telepítés előtti validáció és tervezés (⭐⭐ - 1 óra)
+  - 7. fejezet: Hibakeresés és hibaelhárítás (⭐⭐ - 1-1,5 óra)
+  - 8. fejezet: Produkciós és vállalati minták (⭐⭐⭐⭐ - 2-3 óra)
+- **📚 Átfogó navigációs rendszer**: Egységes navigációs fejlécek és láblécek minden dokumentációban
+- **🎯 Haladáskövetés**: Kurzus befejezési ellenőrzőlista és tanulási verifikációs rendszer
+- **🗺️ Tanulási útmutató**: Egyértelmű belépési pontok különböző tapasztalati szintekhez és célokhoz
+- **🔗 Kereszthivatkozás navigáció**: Kapcsolódó fejezetek és előfeltételek egyértelműen összekapcsolva
+
+#### Fejlesztve
+- **README struktúra**: Átalakítva strukturált tanulási platformmá fejezet-alapú szervezéssel
+- **Dokumentációs navigáció**: Minden oldal tartalmazza a fejezet kontextusát és haladási útmutatót
+- **Sablonok szervezése**: Példák és sablonok hozzárendelve a megfelelő tanulási fejezetekhez
+- **Erőforrás integráció**: Segédletek, GYIK és tanulmányi útmutatók kapcsolva a releváns fejezetekhez
+- **Workshop integráció**: Gyakorlati laborok hozzárendelve több fejezet tanulási céljaihoz
+
+#### Módosítva
+- **Tanulási haladás**: Lineáris dokumentációról rugalmas fejezet-alapú tanulásra váltva
+- **Konfiguráció elhelyezése**: A konfigurációs útmutató áthelyezve a 3. fejezetbe a jobb tanulási folyamat érdekében
+- **AI tartalom integráció**: AI-specifikus tartalom jobb integrációja a tanulási út során
+- **Produkciós tartalom**: Haladó minták összevonva a 8. fejezetbe vállalati tanulók számára
+
+#### Javítva
+- **Felhasználói élmény**: Egyértelmű navigációs útmutatók és fejezet-haladási indikátorok
+- **Hozzáférhetőség**: Egységes navigációs minták az egyszerűbb kurzus bejárás érdekében
+- **Professzionális megjelenés**: Egyetemi stílusú kurzus struktúra, amely alkalmas akadémiai és vállalati képzésre
+- **Tanulási hatékonyság**: Csökkentett idő a releváns tartalom megtalálásához a jobb szervezés révén
+
+#### Technikai megvalósítás
+- **Navigációs fejlécek**: Standardizált fejezet navigáció több mint 40 dokumentációs fájlban
+- **Lábléc navigáció**: Egységes haladási útmutatók és fejezet befejezési indikátorok
+- **Kereszthivatkozás**: Átfogó belső hivatkozási rendszer, amely összekapcsolja a kapcsolódó fogalmakat
+- **Fejezet-térkép**: Sablonok és példák egyértelműen hozzárendelve a tanulási célokhoz
+
+#### Tanulmányi útmutató fejlesztés
+- **📚 Átfogó tanulási célok**: Átszervezett tanulmányi útmutató az 8-fejezetes rendszerhez igazítva
+- **🎯 Fejezet-alapú értékelés**: Minden fejezet tartalmaz specifikus tanulási célokat és gyakorlati feladatokat
+- **📋 Haladáskövetés**: Heti tanulási ütemterv mérhető eredményekkel és befejezési ellenőrzőlistákkal
+- **❓ Értékelési kérdések**: Tudásellenőrző kérdések minden fejezethez professzionális eredményekkel
+- **🛠️ Gyakorlati feladatok**: Gyakorlati tevékenységek valós telepítési forgatókönyvekkel és hibaelhárítással
+- **📊 Készségfejlődés**: Egyértelmű előrehaladás az alapfogalmaktól a vállalati mintákig karrierfejlesztési fókuszban
+- **🎓 Tanúsítási keretrendszer**: Professzionális fejlődési eredmények és közösségi elismerési rendszer
+- **⏱️ Idővonal kezelés**: Strukturált 10 hetes tanulási terv mérföldkő-ellenőrzéssel
+
+### [v3.1.0] - 2025-09-17
+
+#### Többügynökös AI megoldások fejlesztése
+**Ez a verzió javítja a többügynökös kiskereskedelmi megoldást jobb ügynöknevezéssel és fejlesztett dokumentációval.**
+
+#### Módosítva
+- **Többügynökös terminológia**: A "Cora ügynök" helyett "Ügyfél ügynök" elnevezés használata a kiskereskedelmi többügynökös megoldásban a jobb érthetőség érdekében
+- **Ügynök architektúra**: Minden dokumentáció, ARM sablon és kódpélda frissítve az egységes "Ügyfél ügynök" elnevezésre
+- **Konfigurációs példák**: Modernizált ügynök konfigurációs minták frissített elnevezési konvenciókkal
+- **Dokumentációs konzisztencia**: Minden hivatkozás professzionális, leíró ügynökneveket használ
+
+#### Fejlesztve
+- **ARM sablon csomag**: Frissített kiskereskedelmi-többügynökös-arm-sablon Ügyfél ügynök hivatkozásokkal
+- **Architektúra diagramok**: Frissített Mermaid diagramok az új ügynöknevezéssel
+- **Kódpéldák**: Python osztályok és implementációs példák most ÜgyfélÜgynök elnevezést használnak
+- **Környezeti változók**: Minden telepítési szkript frissítve CUSTOMER_AGENT_NAME konvenciókra
+
+#### Javítva
+- **Fejlesztői élmény**: Egyértelműbb ügynökszerepek és felelősségek a dokumentációban
+- **Produkciós készség**: Jobb igazodás a vállalati elnevezési konvenciókhoz
+- **Tanulási anyagok**: Intuitívabb ügynöknevezés oktatási célokra
+- **Sablon használhatóság**: Egyszerűbb ügynökfunkciók és telepítési minták megértése
+
+#### Technikai részletek
+- Frissített Mermaid architektúra diagramok ÜgyfélÜgynök hivatkozásokkal
+- CoraAgent osztálynevek cseréje ÜgyfélÜgynök-re Python példákban
+- ARM sablon JSON konfigurációk módosítása "ügyfél" ügynöktípus használatára
+- Környezeti változók frissítése CORA_AGENT_*-ről CUSTOMER_AGENT_* mintákra
+- Minden telepítési parancs és konténer konfiguráció frissítése
+
 ### [v3.0.0] - 2025-09-12
 
 #### Jelentős változások - AI fejlesztői fókusz és Azure AI Foundry integráció
-**Ez a verzió átalakítja a repozitóriumot egy átfogó AI-központú tanulási forrássá az Azure AI Foundry integrációval.**
+**Ez a verzió átalakítja a tárhelyet átfogó AI-fókuszú tanulási forrássá Azure AI Foundry integrációval.**
 
 #### Hozzáadva
-- **🤖 AI-első tanulási útvonal**: Teljes átszervezés, amely az AI fejlesztőket és mérnököket helyezi előtérbe
-- **Azure AI Foundry integrációs útmutató**: Átfogó dokumentáció az AZD és az Azure AI Foundry szolgáltatások összekapcsolásához
-- **AI modell telepítési minták**: Részletes útmutató a modell kiválasztásáról, konfigurációjáról és termelési telepítési stratégiákról
-- **AI workshop labor**: 2-3 órás gyakorlati workshop az AI alkalmazások AZD-kompatibilis megoldásokká alakításához
-- **Termelési AI legjobb gyakorlatok**: Vállalati szintű minták az AI munkaterhelések skálázásához, monitorozásához és biztosításához
-- **AI-specifikus hibaelhárítási útmutató**: Átfogó hibaelhárítás az Azure OpenAI, Cognitive Services és AI telepítési problémákhoz
+- **🤖 AI-első tanulási út**: Teljes átszervezés, amely az AI fejlesztőket és mérnököket helyezi előtérbe
+- **Azure AI Foundry integrációs útmutató**: Átfogó dokumentáció az AZD és Azure AI Foundry szolgáltatások összekapcsolásához
+- **AI modell telepítési minták**: Részletes útmutató modellválasztásról, konfigurációról és produkciós telepítési stratégiákról
+- **AI workshop labor**: 2-3 órás gyakorlati workshop AI alkalmazások AZD-kompatibilis megoldásokká alakításához
+- **Produkciós AI legjobb gyakorlatok**: Vállalati kész minták AI terhelések skálázására, monitorozására és biztosítására
+- **AI-specifikus hibaelhárítási útmutató**: Átfogó hibaelhárítás Azure OpenAI, Cognitive Services és AI telepítési problémákhoz
 - **AI sablongaléria**: Kiemelt Azure AI Foundry sablonok gyűjteménye komplexitási értékelésekkel
 - **Workshop anyagok**: Teljes workshop struktúra gyakorlati laborokkal és referenciaanyagokkal
 
 #### Fejlesztve
-- **README struktúra**: AI-fejlesztői fókuszú, 45%-os közösségi érdeklődési adatokkal az Azure AI Foundry Discordról
-- **Tanulási útvonalak**: Dedikált AI fejlesztői útvonal a hagyományos diákok és DevOps mérnökök útvonalai mellett
-- **Sablonajánlások**: Kiemelt AI sablonok, beleértve az azure-search-openai-demo, contoso-chat és openai-chat-app-quickstart sablonokat
+- **README struktúra**: AI-fejlesztői fókuszú, 45%-os közösségi érdeklődési adatokkal az Azure AI Foundry Discordból
+- **Tanulási utak**: Dedikált AI fejlesztői út a hagyományos utak mellett diákok és DevOps mérnökök számára
+- **Sablon ajánlások**: Kiemelt AI sablonok, beleértve az azure-search-openai-demo, contoso-chat és openai-chat-app-quickstart sablonokat
 - **Közösségi integráció**: Fejlesztett Discord közösségi támogatás AI-specifikus csatornákkal és beszélgetésekkel
 
-#### Biztonság és termelési fókusz
+#### Biztonság és produkciós fókusz
 - **Kezelt identitás minták**: AI-specifikus hitelesítési és biztonsági konfigurációk
-- **Költségoptimalizálás**: Tokenhasználat nyomon követése és költségkontroll az AI munkaterhelésekhez
+- **Költségoptimalizáció**: Tokenhasználat követése és költségkontroll AI terhelésekhez
 - **Több régiós telepítés**: Stratégiák globális AI alkalmazások telepítéséhez
-- **Teljesítményfigyelés**: AI-specifikus metrikák és Application Insights integráció
+- **Teljesítmény monitorozás**: AI-specifikus metrikák és Application Insights integráció
 
 #### Dokumentáció minősége
-- **Lineáris kurzusstruktúra**: Logikus előrehaladás kezdőtől a haladó AI telepítési mintákig
-- **Ellenőrzött URL-ek**: Minden külső repozitórium link ellenőrizve és elérhető
-- **Teljes referencia**: Minden belső dokumentációs link ellenőrizve és működőképes
-- **Termelésre kész**: Vállalati telepítési minták valós példákkal
+- **Lineáris kurzus struktúra**: Logikus előrehaladás kezdőtől haladó AI telepítési mintákig
+- **Validált URL-ek**: Minden külső tárhely hivatkozás ellenőrizve és elérhető
+- **Teljes referencia**: Minden belső dokumentációs hivatkozás ellenőrizve és működőképes
+- **Produkciós készség**: Vállalati telepítési minták valós példákkal
 
 ### [v2.0.0] - 2025-09-09
 
-#### Jelentős változások - Repó átszervezése és professzionális fejlesztés
-**Ez a verzió jelentős átalakítást jelent a repozitórium struktúrájában és tartalom bemutatásában.**
+#### Jelentős változások - Tárhely átszervezés és professzionális fejlesztés
+**Ez a verzió jelentős átalakítást képvisel a tárhely struktúrájában és tartalom bemutatásában.**
 
 #### Hozzáadva
-- **Strukturált tanulási keretrendszer**: Minden dokumentációs oldal tartalmazza a Bevezetés, Tanulási célok és Tanulási eredmények szakaszokat
-- **Navigációs rendszer**: Hozzáadva Előző/Következő lecke linkek az összes dokumentációban az irányított tanulási előrehaladáshoz
-- **Tanulási útmutató**: Átfogó study-guide.md tanulási célokkal, gyakorlati feladatokkal és értékelési anyagokkal
+- **Strukturált tanulási keretrendszer**: Minden dokumentációs oldal tartalmaz Bevezetés, Tanulási célok és Tanulási eredmények szakaszokat
+- **Navigációs rendszer**: Hozzáadva Előző/Következő lecke linkek minden dokumentációban az irányított tanulási haladás érdekében
+- **Tanulmányi útmutató**: Átfogó study-guide.md tanulási célokkal, gyakorlati feladatokkal és értékelési anyagokkal
 - **Professzionális megjelenés**: Minden emoji ikon eltávolítva a jobb hozzáférhetőség és professzionális megjelenés érdekében
-- **Fejlesztett tartalmi struktúra**: Javított szervezés és tananyagok folyamatossága
+- **Fejlesztett tartalmi struktúra**: Javított tananyagok szervezése és folyamatossága
 
 #### Módosítva
-- **Dokumentáció formátuma**: Minden dokumentáció szabványosított, egységes tanulásközpontú struktúrával
-- **Navigációs folyamat**: Logikus előrehaladás megvalósítása az összes tananyagban
+- **Dokumentációs formátum**: Minden dokumentáció standardizálva egységes tanulásközpontú struktúrával
+- **Navigációs folyamat**: Logikus haladás megvalósítása minden tananyagban
 - **Tartalom bemutatása**: Dekoratív elemek eltávolítása a tiszta, professzionális formázás érdekében
-- **Linkstruktúra**: Minden belső link frissítve az új navigációs rendszer támogatásához
+- **Link struktúra**: Minden belső hivatkozás frissítve az új navigációs rendszer támogatására
 
 #### Javítva
-- **Hozzáférhetőség**: Emoji függőségek eltávolítva a jobb képernyőolvasó kompatibilitás érdekében
+- **Hozzáférhetőség**: Emoji függőségek eltávolítása a jobb képernyőolvasó kompatibilitás érdekében
 - **Professzionális megjelenés**: Tiszta, akadémiai stílusú bemutatás, amely alkalmas vállalati tanulásra
-- **Tanulási élmény**: Strukturált megközelítés, egyértelmű célokkal és eredményekkel minden leckéhez
-- **Tartalom szervezése**: Jobb logikai folyamatosság és kapcsolódás a kapcsolódó témák között
+- **Tanulási élmény**: Strukturált megközelítés egyértelmű célokkal és eredményekkel minden leckéhez
+- **Tartalom szervezése**: Jobb logikai folyamat és kapcsolat a kapcsolódó témák között
 
 ### [v1.0.0] - 2025-09-09
 
-#### Kezdeti kiadás - Átfogó AZD tanulási repozitórium
+#### Első kiadás - Átfogó AZD tanulási tárhely
 
 #### Hozzáadva
 - **Alapvető dokumentációs struktúra**
   - Teljes kezdő útmutató sorozat
   - Átfogó telepítési és előkészítési dokumentáció
   - Részletes hibaelhárítási források és hibakeresési útmutatók
-  - Előtelepítési validációs eszközök és eljárások
+  - Telepítés előtti validációs eszközök és eljárások
 
 - **Kezdő modul**
   - AZD alapok: Alapfogalmak és terminológia
@@ -107,138 +192,157 @@ A változásnapló bejegyzéseinek áttekintése után képes lesz:
 
 - **Telepítési és előkészítési modul**
   - Telepítési útmutató: Teljes munkafolyamat dokumentáció
-  - Előkészítési útmutató: Infrastruktúra kód formájában Bicep segítségével
-  - Legjobb gyakorlatok termelési telepítésekhez
+  - Előkészítési útmutató: Infrastruktúra kódként Bicep segítségével
+  - Legjobb gyakorlatok produkciós telepítésekhez
   - Több szolgáltatásból álló architektúra minták
 
-- **Előtelepítési validációs modul**
-  - Kapacitástervezés: Azure erőforrás elérhetőség validáció
-  - SKU kiválasztás: Átfogó szolgáltatási szint útmutató
-  - Előzetes ellenőrzések: Automatikus validációs szkriptek (PowerShell és Bash)
-  - Költségbecslési és költségtervezési eszközök
+- **Telepítés előtti validációs modul**
+  - Kapacitás tervezés
+- **AI Folyamatok Automatizálása**: MLOps integráció az Azure Machine Learning folyamatokkal  
+- **Fejlett Biztonság**: Zero-trust minták, privát végpontok és fejlett fenyegetésvédelem  
+- **Teljesítményoptimalizálás**: Haladó hangolási és skálázási stratégiák nagy áteresztőképességű AI alkalmazásokhoz  
+- **Globális Terjesztés**: Tartalomszolgáltatási és edge caching minták AI alkalmazásokhoz  
 
-- **Hibaelhárítási modul**
-  - Gyakori problémák: Gyakran előforduló problémák és megoldások
-  - Hibakeresési útmutató: Szisztematikus hibaelhárítási módszerek
-  - Haladó diagnosztikai technikák és eszközök
-  - Teljesítményfigyelés és optimalizálás
+### 3.0.0 verzió (Tervezett) - Felváltva az aktuális kiadással  
+#### Javasolt Kiegészítések - Most megvalósítva a 3.0.0 verzióban  
+- ✅ **AI-Központú Tartalom**: Átfogó Azure AI Foundry integráció (Befejezve)  
+- ✅ **Interaktív Oktatóanyagok**: Gyakorlati AI workshop labor (Befejezve)  
+- ✅ **Fejlett Biztonsági Modul**: AI-specifikus biztonsági minták (Befejezve)  
+- ✅ **Teljesítményoptimalizálás**: AI munkaterhelés hangolási stratégiák (Befejezve)  
 
-- **Források és referenciák**
-  - Parancsok gyorsreferenciája: Alapvető parancsok gyors elérése
-  - Szószedet: Átfogó terminológia és rövidítések definíciói
-  - GYIK: Részletes válaszok gyakori kérdésekre
-  - Külső források linkjei és közösségi kapcsolatok
+### 2.1.0 verzió (Tervezett) - Részben megvalósítva a 3.0.0 verzióban  
+#### Kisebb Fejlesztések - Néhány befejezve az aktuális kiadásban  
+- ✅ **További Példák**: AI-központú telepítési forgatókönyvek (Befejezve)  
+- ✅ **Bővített GYIK**: AI-specifikus kérdések és hibakeresés (Befejezve)  
+- **Eszközintegráció**: Fejlesztett IDE és szerkesztő integrációs útmutatók  
+- ✅ **Monitorozás Bővítése**: AI-specifikus monitorozási és riasztási minták (Befejezve)  
 
-- **Példák és sablonok**
-  - Egyszerű webalkalmazás példa
-  - Statikus weboldal telepítési sablon
-  - Konténeralkalmazás konfiguráció
-  - Adatbázis integrációs minták
-  - Mikroszolgáltatások architektúra példák
-  - Szerver nélküli funkciók implementációi
+#### Továbbra is Tervezett Jövőbeli Kiadásokhoz  
+- **Mobilbarát Dokumentáció**: Reszponzív dizájn mobil tanuláshoz  
+- **Offline Hozzáférés**: Letölthető dokumentációs csomagok  
+- **Fejlesztett IDE Integráció**: VS Code kiterjesztés AZD + AI munkafolyamatokhoz  
+- **Közösségi Irányítópult**: Valós idejű közösségi metrikák és hozzájáruláskövetés  
 
-#### Funkciók
-- **Többplatformos támogatás**: Telepítési és konfigurációs útmutatók Windows, macOS és Linux rendszerekhez
-- **Több szintű készség**: Tartalom diákoknak és professzionális fejlesztőknek
-- **Gyakorlati fókusz**: Gyakorlati példák és valós forgatókönyvek
-- **Átfogó lefedettség**: Alapfogalmaktól a haladó vállalati mintákig
-- **Biztonságközpontú megközelítés**: Biztonsági legjobb gyakorlatok integrálva
-- **Költségoptimalizálás**: Útmutatás költséghatékony telepítésekhez és erőforrás-kezeléshez
+## Hozzájárulás a Változásnaplóhoz  
 
-#### Dokumentáció minősége
-- **Részletes kódpéldák**: Gyakorlati, tesztelt kódminták
-- **Lépésről lépésre utasítások**: Tiszta, cselekvésre ösztönző útmutatás
-- **Átfogó hibaelhárítás**: Gyakori problémák hibaelhárítása
-- **Legjobb gyakorlatok integrációja**: Iparági szabványok és ajánlások
-- **Verziókompatibilitás**: Naprakész a legújabb Azure szolgáltatásokkal és azd funkciókkal
+### Változások Jelentése  
+Amikor hozzájárulsz ehhez a repóhoz, győződj meg róla, hogy a változásnapló bejegyzései tartalmazzák:  
 
-## Tervezett jövőbeli fejlesztések
+1. **Verziószám**: Szemantikus verziózás szerint (fő.verzió.alverzió)  
+2. **Dátum**: Kiadás vagy frissítés dátuma YYYY-MM-DD formátumban  
+3. **Kategória**: Hozzáadva, Módosítva, Elavult, Eltávolítva, Javítva, Biztonság  
+4. **Egyértelmű Leírás**: Rövid leírás a változásokról  
+5. **Hatásértékelés**: Hogyan érinti a változás a meglévő felhasználókat  
 
-### Verzió 3.1.0 (Tervezett)
-#### AI platform bővítés
-- **Többmodell támogatás**: Integrációs minták Hugging Face, Azure Machine Learning és egyedi modellekhez
-- **AI ügynök keretrendszerek**: Sablonok LangChain, Semantic Kernel és AutoGen telepítésekhez
-- **Haladó RAG minták**: Vektordatabase opciók az Azure AI Search-en túl (Pinecone, Weaviate stb.)
-- **AI megfigyelhetőség**: Fejlesztett monitorozás modell teljesítményhez, tokenhasználathoz és válaszminőséghez
+### Változás Kategóriák  
 
-#### Fejlesztői élmény
-- **VS Code bővítmény**: Integrált AZD + AI Foundry fejlesztési élmény
-- **GitHub Copilot integráció**: AI által támogatott AZD sablongenerálás
-- **Interaktív oktatóanyagok**: Gyakorlati kódolási feladatok automatikus validációval AI forgatókönyvekhez
-- **Videós tartalom**: Kiegészítő videós oktatóanyagok vizuális tanulók számára, AI telepítésekre fókuszálva
+#### Hozzáadva  
+- Új funkciók, dokumentációs szakaszok vagy képességek  
+- Új példák, sablonok vagy tanulási források  
+- További eszközök, szkriptek vagy segédprogramok  
 
-### Verzió 4.0.0 (Tervezett)
-#### Vállalati AI minták
-- **Irányítási keretrendszer**: AI modell irányítás, megfelelőség és audit nyomvonalak
-- **Több bérlős AI**: Minták több ügyfél kiszolgálására izolált AI szolgáltatásokkal
-- **Edge AI telepítés**: Integráció Azure IoT Edge és konténerpéldányokkal
-- **Hibrid felhős AI**: Többfelhős és hibrid telepítési minták AI munkaterhelésekhez
+#### Módosítva  
+- Meglévő funkciók vagy dokumentáció módosítása  
+- Frissítések a pontosság vagy érthetőség javítására  
+- Tartalom vagy szerkezet átszervezése  
 
-#### Haladó funkciók
-- **AI csővezeték automatizálás**: MLOps integráció Azure Machine Learning csővezetékekkel
-- **Haladó biztonság**: Zero-trust minták, privát végpontok és fejlett fenyegetésvédelem
-- **Teljesítményoptimalizálás**: Haladó hangolási és skálázási stratégiák nagy áteresztőképességű AI alkalmazásokhoz
-- **Globális elosztás**: Tartalomkézbesítési és edge caching minták AI alkalmazásokhoz
+#### Elavult  
+- Kivezetés alatt álló funkciók vagy megközelítések  
+- Eltávolításra tervezett dokumentációs szakaszok  
+- Jobb alternatívákkal rendelkező módszerek  
 
-### Verzió 3.0.0 (Tervezett) - Felülírva az aktuális kiadással
-#### Javasolt bővítések - Most megvalósítva a v3.0.0-ban
-- ✅ **AI-központú tartalom**: Átfogó Azure AI Foundry integráció (Kész)
-- ✅ **Interaktív oktatóanyagok**: Gyakorlati AI workshop labor (Kész)
-- ✅ **Haladó biztonsági modul**: AI-specifikus biztonsági minták (Kész)
-- ✅ **Teljesítményoptimalizálás**: AI munkaterhelés hangolási stratégiák (Kész)
+#### Eltávolítva  
+- Már nem releváns funkciók, dokumentáció vagy példák  
+- Elavult információk vagy elavult megközelítések  
+- Felesleges vagy összevont tartalom  
 
-### Verzió 2.1.0 (Tervezett) - Részben megvalósítva a v3.0.0-ban
-#### Kisebb fejlesztések - Néhány megvalósítva az aktuális kiadásban
-- ✅ **További példák**: AI-központú telepítési forgatókönyvek (Kész)
-- ✅ **Bővített GYIK**: AI-specifikus kérdések és hibaelhárítás (Kész)
-- **Eszközintegráció**: Fejlesztett IDE és szerkesztő integrációs útmutatók
-- ✅ **Monitorozás bővítése**: AI-specifikus monitorozási és riasztási minták (Kész)
+#### Javítva  
+- Hibák javítása a dokumentációban vagy kódban  
+- Jelentett problémák vagy hibák megoldása  
+- Pontosság vagy funkcionalitás javítása  
 
-#### Még tervezett jövőbeli kiadásra
-- **Mobilbarát dokumentáció**: Reszponzív design mobil tanuláshoz
-- **Offline hozzáférés**: Letölthető dokumentációs csomagok
-- **Fejlesztett IDE integráció**: VS Code bővítmény AZD + AI munkafolyamatokhoz
-- **Közösségi irányítópult**: Valós idejű közösségi metrikák és hozzájáruláskövetés
+#### Biztonság  
+- Biztonsággal kapcsolatos fejlesztések vagy javítások  
+- Biztonsági legjobb gyakorlatok frissítése  
+- Biztonsági sebezhetőségek megoldása  
 
-## Hozzájárulás a változásnaplóhoz
+### Szemantikus Verziózás Irányelvek  
 
-### Változások jelentése
-Amikor hozzájárul ehhez a repozitóriumhoz, kérjük, győződjön meg róla, hogy a változásnapló bejegyzések tartalmazzák:
+#### Fő Verzió (X.0.0)  
+- Felhasználói beavatkozást igénylő változások  
+- Jelentős tartalmi vagy szerkezeti átalakítások  
+- Az alapvető megközelítés vagy módszertan megváltoztatása  
 
-1. **Verziószám**: Szemantikus verziózás szerint (major.minor.patch)
-2. **Dátum**: Kiadás vagy frissítés dátuma YYYY-MM-DD formátumban
-3. **Kategória**: Hozzáadva, Módosítva, Elavult, Eltávolítva, Javítva, Biztonság
-4. **Egyértelmű leírás**: Rövid leírás arról, mi változott
-5. **Hatásértékelés**: Hogyan érinti a változás a meglévő felhasználókat
+#### Kisebb Verzió (X.Y.0)  
+- Új funkciók vagy tartalmi bővítések  
+- Visszafelé kompatibilis fejlesztések  
+- További példák, eszközök vagy források  
 
-### Változás kategóriák
+#### Javító Verzió (X.Y.Z)  
+- Hibajavítások és korrekciók  
+- Kisebb fejlesztések a meglévő tartalomban  
+- Pontosítások és apró bővítések  
 
-#### Hozzáadva
-- Új funkciók, dokumentációs szakaszok vagy képességek
-- Új példák, sablonok vagy tanulási források
-- További eszközök, szkriptek vagy segédprogramok
+## Közösségi Visszajelzés és Javaslatok  
 
-#### Módosítva
-- Módosítások meglévő funkciókban vagy dokumentációban
-- Frissítések a tisztaság vagy pontosság javítása
-- **Legújabb főverzió**: Teljes támogatás rendszeres frissítésekkel  
-- **Előző főverzió**: Biztonsági frissítések és kritikus javítások 12 hónapon keresztül  
-- **Régi verziók**: Csak közösségi támogatás, hivatalos frissítések nélkül  
+Aktívan bátorítjuk a közösségi visszajelzéseket, hogy javítsuk ezt a tanulási forrást:  
 
-### Migrációs útmutató  
-Amikor új főverziók jelennek meg, biztosítunk:  
-- **Migrációs útmutatók**: Lépésről lépésre szóló átállási instrukciók  
-- **Kompatibilitási megjegyzések**: Részletek a kompatibilitási problémákról  
-- **Eszköztámogatás**: Szkriptek vagy segédprogramok a migráció megkönnyítésére  
-- **Közösségi támogatás**: Dedikált fórumok migrációs kérdésekhez  
+### Hogyan Adhatsz Visszajelzést  
+- **GitHub Problémák**: Jelents problémákat vagy javasolj fejlesztéseket (AI-specifikus problémák is szívesen látottak)  
+- **Discord Beszélgetések**: Oszd meg ötleteidet és vegyél részt az Azure AI Foundry közösségben  
+- **Pull Kérések**: Közvetlen fejlesztések hozzájárulása, különösen AI sablonok és útmutatók esetében  
+- **Azure AI Foundry Discord**: Vegyél részt az #Azure csatornán AZD + AI beszélgetésekhez  
+- **Közösségi Fórumok**: Vegyél részt szélesebb Azure fejlesztői beszélgetésekben  
+
+### Visszajelzés Kategóriák  
+- **AI Tartalom Pontossága**: Javítások az AI szolgáltatások integrációjával és telepítésével kapcsolatban  
+- **Tanulási Élmény**: Javaslatok az AI fejlesztői tanulási folyamat javítására  
+- **Hiányzó AI Tartalom**: Kérések további AI sablonokra, mintákra vagy példákra  
+- **Hozzáférhetőség**: Fejlesztések a különböző tanulási igényekhez  
+- **AI Eszközintegráció**: Javaslatok az AI fejlesztési munkafolyamatok jobb integrációjára  
+- **AI Minták a Gyakorlatban**: Vállalati AI telepítési minták kérései  
+
+### Válaszadási Kötelezettség  
+- **Problémákra Válasz**: 48 órán belül a jelentett problémákra  
+- **Funkciókérések**: Értékelés egy héten belül  
+- **Közösségi Hozzájárulások**: Áttekintés egy héten belül  
+- **Biztonsági Problémák**: Azonnali prioritás gyorsított válasszal  
+
+## Karbantartási Ütemterv  
+
+### Rendszeres Frissítések  
+- **Havi Ellenőrzések**: Tartalmi pontosság és linkek érvényessége  
+- **Negyedéves Frissítések**: Jelentős tartalmi bővítések és fejlesztések  
+- **Féléves Ellenőrzések**: Átfogó átszervezés és fejlesztés  
+- **Éves Kiadások**: Jelentős verziófrissítések jelentős fejlesztésekkel  
+
+### Monitorozás és Minőségbiztosítás  
+- **Automatizált Tesztelés**: Kódpéldák és linkek rendszeres érvényesítése  
+- **Közösségi Visszajelzés Integrációja**: Felhasználói javaslatok rendszeres beépítése  
+- **Technológiai Frissítések**: Igazítás a legújabb Azure szolgáltatásokhoz és az azd kiadásokhoz  
+- **Hozzáférhetőségi Auditok**: Rendszeres felülvizsgálat az inkluzív tervezési elvek szerint  
+
+## Verziótámogatási Irányelv  
+
+### Aktuális Verzió Támogatás  
+- **Legújabb Fő Verzió**: Teljes támogatás rendszeres frissítésekkel  
+- **Előző Fő Verzió**: Biztonsági frissítések és kritikus javítások 12 hónapig  
+- **Régi Verziók**: Csak közösségi támogatás, hivatalos frissítések nélkül  
+
+### Migrációs Útmutatás  
+Amikor fő verziók jelennek meg, biztosítunk:  
+- **Migrációs Útmutatók**: Lépésről lépésre szóló átállási útmutatók  
+- **Kompatibilitási Megjegyzések**: Részletek a törő változásokról  
+- **Eszköztámogatás**: Szkriptek vagy segédprogramok a migrációhoz  
+- **Közösségi Támogatás**: Dedikált fórumok a migrációs kérdésekhez  
 
 ---
 
 **Navigáció**  
-- **Előző lecke**: [Tanulási útmutató](resources/study-guide.md)  
-- **Következő lecke**: Vissza a [Fő README](README.md) fájlhoz  
+- **Előző Lecke**: [Tanulási Útmutató](resources/study-guide.md)  
+- **Következő Lecke**: Vissza a [Fő README](README.md)  
 
-**Maradj naprakész**: Kövesd ezt a repót, hogy értesítéseket kapj az új kiadásokról és a tananyagok fontos frissítéseiről.  
+**Maradj Naprakész**: Kövesd ezt a repót értesítésekért az új kiadásokról és a tananyag fontos frissítéseiről.  
 
 ---
 

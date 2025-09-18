@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T23:12:14+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T09:39:31+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "cs"
 }
 -->
 # Integrace Azure AI Foundry s AZD
 
-**Předchozí:** [První projekt](../getting-started/first-project.md) | **Další:** [Nasazení AI modelu](ai-model-deployment.md)
+**Navigace kapitol:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+- **⬅️ Předchozí kapitola**: [Kapitola 1: Váš první projekt](../getting-started/first-project.md)
+- **➡️ Další**: [Nasazení AI modelu](ai-model-deployment.md)
+- **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
 ## Přehled
 
@@ -19,27 +24,27 @@ Tento průvodce ukazuje, jak integrovat služby Azure AI Foundry s Azure Develop
 
 Azure AI Foundry je jednotná platforma Microsoftu pro vývoj AI, která zahrnuje:
 
-- **Model Catalog**: Přístup k nejmodernějším AI modelům
-- **Prompt Flow**: Vizualní návrhář pro AI pracovní postupy
-- **AI Foundry Portal**: Integrované vývojové prostředí pro AI aplikace
+- **Katalog modelů**: Přístup k nejmodernějším AI modelům
+- **Prompt Flow**: Vizualizér pro AI pracovní postupy
+- **Portál AI Foundry**: Integrované vývojové prostředí pro AI aplikace
 - **Možnosti nasazení**: Různé možnosti hostování a škálování
 - **Bezpečnost a ochrana**: Vestavěné funkce odpovědné AI
 
 ## AZD + Azure AI Foundry: Lepší společně
 
-| Funkce | Azure AI Foundry | Výhody integrace s AZD |
+| Funkce | Azure AI Foundry | Výhoda integrace s AZD |
 |--------|------------------|------------------------|
 | **Nasazení modelu** | Manuální nasazení přes portál | Automatizované, opakovatelné nasazení |
 | **Infrastruktura** | Klikací zřizování | Infrastruktura jako kód (Bicep) |
-| **Správa prostředí** | Zaměření na jedno prostředí | Více prostředí (dev/staging/prod) |
+| **Správa prostředí** | Zaměření na jedno prostředí | Více prostředí (vývoj/test/produkce) |
 | **Integrace CI/CD** | Omezená | Nativní podpora GitHub Actions |
-| **Správa nákladů** | Základní monitorování | Optimalizace nákladů specifická pro prostředí |
+| **Správa nákladů** | Základní monitorování | Optimalizace nákladů podle prostředí |
 
 ## Předpoklady
 
 - Azure předplatné s odpovídajícími oprávněními
 - Nainstalovaný Azure Developer CLI
-- Přístup k Azure OpenAI službám
+- Přístup ke službám Azure OpenAI
 - Základní znalost Azure AI Foundry
 
 ## Základní integrační vzory
@@ -94,9 +99,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Vzor 2: AI Search + RAG integrace
+### Vzor 2: AI vyhledávání + RAG integrace
 
-**Použití**: Nasazení aplikací s retrieval-augmented generation (RAG)
+**Použití**: Nasazení aplikací s generováním obohaceným o vyhledávání (RAG)
 
 ```bicep
 // Azure AI Search
@@ -124,7 +129,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Vzor 3: Integrace Document Intelligence
+### Vzor 3: Integrace inteligence dokumentů
 
 **Použití**: Pracovní postupy pro zpracování a analýzu dokumentů
 
@@ -161,7 +166,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### Nastavení proměnných prostředí
 
-**Konfigurace pro produkci:**
+**Konfigurace produkce:**
 ```bash
 # Core AI services
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
@@ -177,7 +182,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Konfigurace pro vývoj:**
+**Konfigurace vývoje:**
 ```bash
 # Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -185,7 +190,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Bezpečná konfigurace s Key Vault
+### Bezpečná konfigurace pomocí Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -522,25 +527,30 @@ azd up
 ## Další kroky
 
 1. **Vyzkoušejte příklady**: Začněte s předpřipravenou šablonou, která odpovídá vašemu použití
-2. **Přizpůsobte si**: Upravte infrastrukturu a aplikační kód
+2. **Přizpůsobte si řešení**: Upravte infrastrukturu a aplikační kód
 3. **Přidejte monitorování**: Implementujte komplexní pozorovatelnost
 4. **Optimalizujte náklady**: Doladěte konfigurace podle svého rozpočtu
-5. **Zabezpečte nasazení**: Implementujte bezpečnostní vzory pro podniky
+5. **Zabezpečte nasazení**: Implementujte bezpečnostní vzory pro podnikové prostředí
 6. **Škálujte do produkce**: Přidejte funkce pro více regionů a vysokou dostupnost
 
 ## Komunita a podpora
 
-- **Azure AI Foundry Discord**: [#Azure kanál](https://discord.gg/microsoft-azure)
+- **Discord Azure AI Foundry**: [#Azure kanál](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Problémy a diskuze](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Oficiální dokumentace](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**Předchozí:** [První projekt](../getting-started/first-project.md) | **Další:** [Nasazení AI modelu](ai-model-deployment.md)
+**Navigace kapitol:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+- **⬅️ Předchozí kapitola**: [Kapitola 1: Váš první projekt](../getting-started/first-project.md)
+- **➡️ Další**: [Nasazení AI modelu](ai-model-deployment.md)
+- **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
 **Potřebujete pomoc?** Připojte se k diskuzím komunity nebo otevřete problém v repozitáři. Komunita Azure AI + AZD je tu, aby vám pomohla uspět!
 
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

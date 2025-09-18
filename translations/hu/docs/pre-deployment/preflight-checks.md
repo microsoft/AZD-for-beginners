@@ -1,54 +1,61 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-10T06:37:13+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T09:22:36+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "hu"
 }
 -->
-# Előzetes Ellenőrzések - Telepítési Készenlét Validálása
+# AZD Telepítések Előzetes Ellenőrzése
+
+**Fejezet Navigáció:**
+- **📚 Kurzus Kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális Fejezet**: 6. fejezet - Telepítés előtti validáció és tervezés
+- **⬅️ Előző**: [SKU Kiválasztás](sku-selection.md)
+- **➡️ Következő Fejezet**: [7. fejezet: Hibakeresés](../troubleshooting/common-issues.md)
+- **🔧 Kapcsolódó**: [4. fejezet: Telepítési Útmutató](../deployment/deployment-guide.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató előtelepítési validációs szkripteket és eljárásokat biztosít, amelyek segítenek az Azure Developer CLI telepítések sikerességének biztosításában még a folyamat megkezdése előtt. Ismerje meg, hogyan valósíthat meg automatizált ellenőrzéseket az autentikáció, erőforrások elérhetősége, kvóták, biztonsági megfelelőség és teljesítménykövetelmények terén, hogy elkerülje a telepítési hibákat és optimalizálja a telepítési sikerességi arányt.
+Ez az átfogó útmutató telepítés előtti validációs szkripteket és eljárásokat biztosít, amelyek segítenek az Azure Developer CLI telepítések sikerességének biztosításában. Ismerje meg, hogyan valósíthat meg automatizált ellenőrzéseket az autentikáció, erőforrások elérhetősége, kvóták, biztonsági megfelelőség és teljesítménykövetelmények terén, hogy elkerülje a telepítési hibákat és optimalizálja a sikeres telepítések arányát.
 
 ## Tanulási Célok
 
 Az útmutató elvégzésével:
-- Elsajátítja az automatizált előtelepítési validációs technikákat és szkripteket
+- Elsajátítja az automatizált telepítés előtti validációs technikákat és szkripteket
 - Megérti az autentikáció, jogosultságok és kvóták átfogó ellenőrzési stratégiáit
-- Megvalósítja az erőforrások elérhetőségének és kapacitásának validálási eljárásait
+- Megvalósítja az erőforrások elérhetőségének és kapacitásának validációs eljárásait
 - Konfigurálja a biztonsági és megfelelőségi ellenőrzéseket szervezeti szabályzatok szerint
-- Megtervezi a költségbecslési és költségvetési validálási munkafolyamatokat
-- Egyedi előzetes ellenőrzési automatizációt hoz létre CI/CD csővezetékekhez
+- Tervez költségbecslési és költségvetési validációs munkafolyamatokat
+- Egyedi telepítés előtti ellenőrzési automatizációt hoz létre CI/CD csővezetékekhez
 
 ## Tanulási Eredmények
 
-Az útmutató elvégzése után képes lesz:
-- Átfogó előzetes validációs szkripteket létrehozni és futtatni
+Az útmutató befejezése után képes lesz:
+- Átfogó telepítés előtti validációs szkripteket létrehozni és futtatni
 - Automatizált ellenőrzési munkafolyamatokat tervezni különböző telepítési forgatókönyvekhez
-- Környezet-specifikus validálási eljárásokat és szabályokat megvalósítani
+- Környezet-specifikus validációs eljárásokat és szabályzatokat megvalósítani
 - Proaktív monitorozást és riasztásokat konfigurálni a telepítési készenlét érdekében
-- Elhárítani előtelepítési problémákat és korrekciós intézkedéseket végrehajtani
-- Integrálni az előzetes ellenőrzéseket DevOps csővezetékekbe és automatizációs munkafolyamatokba
+- Telepítés előtti problémákat elhárítani és javító intézkedéseket végrehajtani
+- Telepítés előtti ellenőrzéseket integrálni DevOps csővezetékekbe és automatizációs munkafolyamatokba
 
 ## Tartalomjegyzék
 
 - [Áttekintés](../../../../docs/pre-deployment)
-- [Automatizált Előzetes Ellenőrzési Szkript](../../../../docs/pre-deployment)
-- [Manuális Validálási Ellenőrzőlista](../../../../docs/pre-deployment)
-- [Környezet Validálása](../../../../docs/pre-deployment)
-- [Erőforrás Validálása](../../../../docs/pre-deployment)
+- [Automatizált Telepítés Előtti Szkript](../../../../docs/pre-deployment)
+- [Manuális Validációs Ellenőrzőlista](../../../../docs/pre-deployment)
+- [Környezet Validáció](../../../../docs/pre-deployment)
+- [Erőforrás Validáció](../../../../docs/pre-deployment)
 - [Biztonsági és Megfelelőségi Ellenőrzések](../../../../docs/pre-deployment)
 - [Teljesítmény és Kapacitás Tervezés](../../../../docs/pre-deployment)
-- [Gyakori Problémák Hibakeresése](../../../../docs/pre-deployment)
+- [Gyakori Hibák Hibakeresése](../../../../docs/pre-deployment)
 
 ---
 
 ## Áttekintés
 
-Az előzetes ellenőrzések olyan alapvető validációk, amelyeket a telepítés előtt hajtanak végre annak érdekében, hogy:
+A telepítés előtti ellenőrzések olyan alapvető validációk, amelyeket a telepítés előtt hajtanak végre annak érdekében, hogy:
 
 - **Erőforrások elérhetősége** és kvóták a célterületeken
 - **Autentikáció és jogosultságok** megfelelően konfigurálva legyenek
@@ -57,7 +64,7 @@ Az előzetes ellenőrzések olyan alapvető validációk, amelyeket a telepíté
 - **Biztonsági megfelelőség** a szervezeti szabályzatokkal
 - **Költségbecslés** a költségvetési korlátokon belül
 
-### Mikor kell futtatni az előzetes ellenőrzéseket
+### Mikor kell telepítés előtti ellenőrzéseket futtatni?
 
 - **Első telepítés előtt** egy új környezetbe
 - **Jelentős sablonváltozások után**
@@ -67,9 +74,9 @@ Az előzetes ellenőrzések olyan alapvető validációk, amelyeket a telepíté
 
 ---
 
-## Automatizált Előzetes Ellenőrzési Szkript
+## Automatizált Telepítés Előtti Szkript
 
-### PowerShell Előzetes Ellenőrző
+### PowerShell Telepítés Előtti Ellenőrző
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Előzetes Ellenőrző
+### Bash Telepítés Előtti Ellenőrző
 
 ```bash
 #!/bin/bash
@@ -783,7 +790,7 @@ main "$@"
 
 ---
 
-## Manuális Validálási Ellenőrzőlista
+## Manuális Validációs Ellenőrzőlista
 
 ### Telepítés Előtti Ellenőrzőlista
 
@@ -791,20 +798,20 @@ Nyomtassa ki ezt az ellenőrzőlistát, és ellenőrizze az egyes elemeket telep
 
 #### ✅ Környezet Beállítása
 - [ ] AZD CLI telepítve és frissítve a legújabb verzióra
-- [ ] Azure CLI telepítve és hitelesítve
+- [ ] Azure CLI telepítve és autentikálva
 - [ ] Helyes Azure előfizetés kiválasztva
 - [ ] Környezet neve egyedi és megfelel az elnevezési konvencióknak
 - [ ] Cél erőforráscsoport azonosítva vagy létrehozható
 
 #### ✅ Autentikáció és Jogosultságok
-- [ ] Sikeresen hitelesítve `azd auth login` használatával
-- [ ] A felhasználó rendelkezik Hozzájáruló szerepkörrel a cél előfizetésben/erőforráscsoportban
-- [ ] Szolgáltatásnév konfigurálva CI/CD-hez (ha alkalmazható)
+- [ ] Sikeresen autentikálva `azd auth login` segítségével
+- [ ] Felhasználó rendelkezik Hozzájáruló szerepkörrel a cél előfizetésben/erőforráscsoportban
+- [ ] Szolgáltatási főazonosító konfigurálva CI/CD-hez (ha alkalmazható)
 - [ ] Nincsenek lejárt tanúsítványok vagy hitelesítő adatok
 
-#### ✅ Sablon Validálása
+#### ✅ Sablon Validáció
 - [ ] `azure.yaml` létezik és érvényes YAML
-- [ ] Az azure.yaml-ben meghatározott összes szolgáltatásnak van megfelelő forráskódja
+- [ ] Az azure.yaml-ben definiált összes szolgáltatásnak van megfelelő forráskódja
 - [ ] Bicep sablonok az `infra/` könyvtárban jelen vannak
 - [ ] `main.bicep` hibák nélkül fordul (`az bicep build --file infra/main.bicep`)
 - [ ] Minden szükséges paraméternek van alapértelmezett értéke vagy meg lesz adva
@@ -833,20 +840,20 @@ Nyomtassa ki ezt az ellenőrzőlistát, és ellenőrizze az egyes elemeket telep
 #### ✅ Monitorozás és Megfigyelhetőség
 - [ ] Application Insights konfigurálva a sablonokban
 - [ ] Log Analytics munkaterület tervezve
-- [ ] Riasztási szabályok meghatározva kritikus metrikákhoz
+- [ ] Riasztási szabályok definiálva kritikus metrikákhoz
 - [ ] Egészségügyi ellenőrzési végpontok implementálva az alkalmazásokban
 
 #### ✅ Biztonsági Mentés és Helyreállítás
-- [ ] Biztonsági mentési stratégia meghatározva adatforrásokhoz
+- [ ] Biztonsági mentési stratégia definiálva adatforrásokhoz
 - [ ] Helyreállítási idő célok (RTO) dokumentálva
 - [ ] Helyreállítási pont célok (RPO) dokumentálva
 - [ ] Katasztrófa-helyreállítási terv éles környezethez
 
 ---
 
-## Környezet Validálása
+## Környezet Validáció
 
-### Fejlesztési Környezet Validálása
+### Fejlesztési Környezet Validáció
 
 ```bash
 #!/bin/bash
@@ -878,7 +885,7 @@ validate_dev_environment() {
 }
 ```
 
-### Éles Környezet Validálása
+### Éles Környezet Validáció
 
 ```bash
 #!/bin/bash
@@ -919,9 +926,9 @@ validate_prod_environment() {
 
 ---
 
-## Erőforrás Validálása
+## Erőforrás Validáció
 
-### Kvóta Validálási Szkript
+### Kvóta Validációs Szkript
 
 ```python
 #!/usr/bin/env python3
@@ -1046,7 +1053,7 @@ if __name__ == "__main__":
 
 ## Biztonsági és Megfelelőségi Ellenőrzések
 
-### Biztonsági Validálási Szkript
+### Biztonsági Validációs Szkript
 
 ```bash
 #!/bin/bash
@@ -1278,14 +1285,14 @@ steps:
 
 ## Legjobb Gyakorlatok Összefoglalása
 
-### ✅ Előzetes Ellenőrzési Legjobb Gyakorlatok
+### ✅ Telepítés Előtti Ellenőrzési Legjobb Gyakorlatok
 
 1. **Automatizálás, ahol lehetséges**
-   - Integrálja az ellenőrzéseket CI/CD csővezetékekbe
-   - Használjon szkripteket ismételhető validációkhoz
-   - Tárolja az eredményeket audit nyomvonalakhoz
+   - Ellenőrzések integrálása CI/CD csővezetékekbe
+   - Szkriptek használata ismételhető validációkhoz
+   - Eredmények tárolása audit nyomokhoz
 
-2. **Környezet-specifikus Validálás**
+2. **Környezet-specifikus Validáció**
    - Különböző ellenőrzések fejlesztési/staging/éles környezetekhez
    - Megfelelő biztonsági követelmények környezetenként
    - Költségoptimalizálás nem éles környezetekhez
@@ -1293,7 +1300,7 @@ steps:
 3. **Átfogó Lefedettség**
    - Autentikáció és jogosultságok
    - Erőforrás kvóták és elérhetőség
-   - Sablon validálás és szintaxis
+   - Sablon validáció és szintaxis
    - Biztonsági és megfelelőségi követelmények
 
 4. **Világos Jelentéskészítés**
@@ -1302,30 +1309,30 @@ steps:
    - Összefoglaló jelentések gyors értékeléshez
 
 5. **Gyors Hibakezelés**
-   - Állítsa le a telepítést, ha kritikus ellenőrzések megbuknak
-   - Nyújtson világos útmutatást a megoldáshoz
-   - Tegye lehetővé az ellenőrzések egyszerű újrafuttatását
+   - Telepítés leállítása kritikus ellenőrzések hibája esetén
+   - Világos útmutatás a megoldáshoz
+   - Ellenőrzések egyszerű újrafuttatása
 
-### Gyakori Előzetes Ellenőrzési Hibák
+### Gyakori Telepítés Előtti Hibák
 
-1. **Validálás kihagyása** "gyors" telepítésekhez
+1. **Validáció kihagyása** "gyors" telepítésekhez
 2. **Elégtelen jogosultságok** ellenőrzése telepítés előtt
-3. **Kvóta korlátok figyelmen kívül hagyása**, amíg a telepítés megbukik
-4. **Sablonok validálásának mellőzése** CI/CD csővezetékekben
-5. **Biztonsági validálás hiánya** éles környezetekhez
+3. **Kvóta korlátok figyelmen kívül hagyása**, amíg a telepítés meghiúsul
+4. **Sablonok validációjának elhanyagolása** CI/CD csővezetékekben
+5. **Biztonsági validáció hiánya** éles környezetekben
 6. **Nem megfelelő költségbecslés**, ami költségvetési meglepetésekhez vezet
 
 ---
 
-**Profi Tipp**: Futtassa az előzetes ellenőrzéseket különálló feladatként a CI/CD csővezetékben a tényleges telepítési feladat előtt. Ez lehetővé teszi a problémák korai felismerését és gyorsabb visszajelzést biztosít a fejlesztők számára.
+**Profi Tipp**: Futtassa a telepítés előtti ellenőrzéseket különálló munkaként a CI/CD csővezetékben, még a tényleges telepítési munka előtt. Ez lehetővé teszi, hogy korán észlelje a problémákat, és gyorsabb visszajelzést adjon a fejlesztőknek.
 
 ---
 
 **Navigáció**
 - **Előző Lecke**: [SKU Kiválasztás](sku-selection.md)
-- **Következő Lecke**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Következő Lecke**: [Gyorssegédlet](../../resources/cheat-sheet.md)
 
 ---
 
-**Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősség kizárása**:  
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

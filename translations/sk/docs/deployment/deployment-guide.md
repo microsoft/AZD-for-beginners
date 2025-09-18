@@ -1,24 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:17:20+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T10:03:17+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "sk"
 }
 -->
 # Príručka nasadenia - Ovládnutie nasadení AZD
 
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD Pre Začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 4 - Infrastruktúra ako kód & Nasadenie
+- **⬅️ Predchádzajúca kapitola**: [Kapitola 3: Konfigurácia](../getting-started/configuration.md)
+- **➡️ Ďalej**: [Zabezpečenie zdrojov](provisioning.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 5: Riešenia Multi-Agent AI](../../examples/retail-scenario.md)
+
 ## Úvod
 
-Táto komplexná príručka pokrýva všetko, čo potrebujete vedieť o nasadzovaní aplikácií pomocou Azure Developer CLI, od základných nasadení jedným príkazom až po pokročilé produkčné scenáre s vlastnými hookmi, viacerými prostrediami a integráciou CI/CD. Ovládnite celý životný cyklus nasadenia pomocou praktických príkladov a osvedčených postupov.
+Táto komplexná príručka pokrýva všetko, čo potrebujete vedieť o nasadení aplikácií pomocou Azure Developer CLI, od základných nasadení jedným príkazom až po pokročilé produkčné scenáre s vlastnými hákmi, viacerými prostrediami a integráciou CI/CD. Ovládnite celý životný cyklus nasadenia pomocou praktických príkladov a osvedčených postupov.
 
 ## Ciele učenia
 
-Po absolvovaní tejto príručky budete:
+Po dokončení tejto príručky budete:
 - Ovládať všetky príkazy a pracovné postupy nasadenia Azure Developer CLI
-- Rozumieť celému životnému cyklu nasadenia od zriadenia až po monitorovanie
-- Implementovať vlastné hooky pre automatizáciu pred a po nasadení
+- Rozumieť celému životnému cyklu nasadenia od zabezpečenia zdrojov po monitorovanie
+- Implementovať vlastné háky pre automatizáciu pred a po nasadení
 - Konfigurovať viaceré prostredia s parametrami špecifickými pre prostredie
 - Nastaviť pokročilé stratégie nasadenia vrátane blue-green a kanárskych nasadení
 - Integrovať nasadenia azd do CI/CD pipeline a DevOps pracovných postupov
@@ -27,7 +34,7 @@ Po absolvovaní tejto príručky budete:
 
 Po dokončení budete schopní:
 - Samostatne vykonávať a riešiť problémy všetkých pracovných postupov nasadenia azd
-- Navrhovať a implementovať vlastnú automatizáciu nasadenia pomocou hookov
+- Navrhovať a implementovať vlastnú automatizáciu nasadenia pomocou hákov
 - Konfigurovať produkčne pripravené nasadenia s primeranou bezpečnosťou a monitorovaním
 - Spravovať komplexné scenáre nasadenia vo viacerých prostrediach
 - Optimalizovať výkon nasadenia a implementovať stratégie návratu
@@ -36,7 +43,7 @@ Po dokončení budete schopní:
 ## Prehľad nasadenia
 
 Azure Developer CLI poskytuje niekoľko príkazov na nasadenie:
-- `azd up` - Kompletný pracovný postup (zriadenie + nasadenie)
+- `azd up` - Kompletný pracovný postup (zabezpečenie + nasadenie)
 - `azd provision` - Vytvorenie/aktualizácia iba Azure zdrojov
 - `azd deploy` - Nasadenie iba aplikačného kódu
 - `azd package` - Vytvorenie a balenie aplikácií
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Pochopenie procesu nasadenia
 
-### Fáza 1: Hooky pred zriadením
+### Fáza 1: Hák pred zabezpečením
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Fáza 2: Zriadenie infraštruktúry
+### Fáza 2: Zabezpečenie infraštruktúry
 - Číta šablóny infraštruktúry (Bicep/Terraform)
 - Vytvára alebo aktualizuje Azure zdroje
 - Konfiguruje sieťovanie a bezpečnosť
 - Nastavuje monitorovanie a logovanie
 
-### Fáza 3: Hooky po zriadení
+### Fáza 3: Hák po zabezpečení
 ```yaml
 hooks:
   postprovision:
@@ -123,7 +130,7 @@ hooks:
 - Vytvára artefakty nasadenia
 - Balenie pre cieľovú platformu (kontajnery, ZIP súbory, atď.)
 
-### Fáza 5: Hooky pred nasadením
+### Fáza 5: Hák pred nasadením
 ```yaml
 hooks:
   predeploy:
@@ -141,7 +148,7 @@ hooks:
 - Aktualizuje konfiguračné nastavenia
 - Spúšťa/reštartuje služby
 
-### Fáza 7: Hooky po nasadení
+### Fáza 7: Hák po nasadení
 ```yaml
 hooks:
   postdeploy:
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimalizácia Dockerfile s viacerými fázami
+### Optimalizácia Dockerfile pre viac fáz
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -486,7 +493,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Správa identít a prístupu
+### Správa identity a prístupu
 ```yaml
 services:
   api:
@@ -538,7 +545,7 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Metriky nasadenia
+## 📊 Metódy nasadenia
 
 ### Sledovanie výkonu nasadenia
 ```bash
@@ -552,7 +559,7 @@ azd history
 azd metrics --type deployment
 ```
 
-### Zber vlastných metrík
+### Zber vlastných metód
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -592,7 +599,7 @@ azd provision --what-if
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. Integrácia testovania
+### 3. Testovanie integrácie
 ```yaml
 hooks:
   predeploy:
@@ -631,12 +638,12 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Ďalšie kroky
 
-- [Zriadenie zdrojov](provisioning.md) - Podrobný pohľad na správu infraštruktúry
+- [Zabezpečenie zdrojov](provisioning.md) - Detailný pohľad na správu infraštruktúry
 - [Plánovanie pred nasadením](../pre-deployment/capacity-planning.md) - Naplánujte si stratégiu nasadenia
 - [Bežné problémy](../troubleshooting/common-issues.md) - Riešenie problémov s nasadením
 - [Osvedčené postupy](../troubleshooting/debugging.md) - Produkčne pripravené stratégie nasadenia
 
-## Ďalšie zdroje
+## Dodatočné zdroje
 
 - [Referenčná príručka nasadenia Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Nasadenie Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
@@ -647,9 +654,9 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 **Navigácia**
 - **Predchádzajúca lekcia**: [Váš prvý projekt](../getting-started/first-project.md)
-- **Nasledujúca lekcia**: [Zriadenie zdrojov](provisioning.md)
+- **Nasledujúca lekcia**: [Zabezpečenie zdrojov](provisioning.md)
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

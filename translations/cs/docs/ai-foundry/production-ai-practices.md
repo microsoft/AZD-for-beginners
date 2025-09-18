@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T23:16:34+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T09:39:58+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "cs"
 }
 -->
 # Nejlepší postupy pro produkční AI pracovní zátěže s AZD
 
-**Předchozí:** [AI Workshop Lab](ai-workshop-lab.md) | **Další:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigace kapitol:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 8 - Produkční a podnikové vzory
+- **⬅️ Předchozí kapitola**: [Kapitola 7: Řešení problémů](../troubleshooting/debugging.md)
+- **⬅️ Také související**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurz dokončen**: [AZD pro začátečníky](../../README.md)
 
 ## Přehled
 
@@ -19,15 +24,15 @@ Tento průvodce poskytuje komplexní nejlepší postupy pro nasazení produkčn�
 
 Na základě výsledků ankety v naší komunitě jsou toto hlavní výzvy, kterým vývojáři čelí:
 
-- **45 %** má potíže s nasazením AI aplikací využívajících více služeb
-- **38 %** má problémy se správou přihlašovacích údajů a tajných klíčů  
+- **45 %** má potíže s nasazením AI s více službami
+- **38 %** má problémy se správou přihlašovacích údajů a tajemství  
 - **35 %** považuje produkční připravenost a škálování za obtížné
-- **32 %** potřebuje lepší strategie pro optimalizaci nákladů
+- **32 %** potřebuje lepší strategie optimalizace nákladů
 - **29 %** vyžaduje zlepšené monitorování a řešení problémů
 
 ## Architektonické vzory pro produkční AI
 
-### Vzor 1: Architektura AI založená na mikroservisech
+### Vzor 1: Architektura AI mikroservisů
 
 **Kdy použít**: Komplexní AI aplikace s více funkcemi
 
@@ -48,7 +53,7 @@ Na základě výsledků ankety v naší komunitě jsou toto hlavní výzvy, kter
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**Implementace v AZD**:
+**Implementace AZD**:
 
 ```yaml
 # azure.yaml
@@ -120,15 +125,15 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Nejlepší postupy pro zabezpečení
+## Nejlepší postupy zabezpečení
 
 ### 1. Model zabezpečení Zero-Trust
 
 **Strategie implementace**:
 - Žádná komunikace mezi službami bez autentizace
-- Všechny API volání využívají spravované identity
+- Všechny API volání používají spravované identity
 - Izolace sítě pomocí privátních koncových bodů
-- Přístupová práva podle principu nejmenšího oprávnění
+- Přístupová práva s minimálními oprávněními
 
 ```bicep
 // Managed Identity for each service
@@ -149,7 +154,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Bezpečná správa tajných klíčů
+### 2. Bezpečná správa tajemství
 
 **Vzor integrace Key Vault**:
 
@@ -427,7 +432,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Optimalizace využití tokenů
 
-**Správa nákladů na OpenAI**:
+**Správa nákladů OpenAI**:
 
 ```typescript
 // Application-level token optimization
@@ -835,11 +840,11 @@ echo "Infrastructure validation completed successfully!"
 ## Kontrolní seznam produkční připravenosti
 
 ### Zabezpečení ✅
-- [ ] Všechny služby využívají spravované identity
-- [ ] Tajné klíče jsou uloženy v Key Vault
+- [ ] Všechny služby používají spravované identity
+- [ ] Tajemství jsou uložena v Key Vault
 - [ ] Privátní koncové body jsou nakonfigurovány
 - [ ] Implementovány skupiny zabezpečení sítě
-- [ ] RBAC podle principu nejmenšího oprávnění
+- [ ] RBAC s minimálními oprávněními
 - [ ] WAF povolen na veřejných koncových bodech
 
 ### Výkon ✅
@@ -862,7 +867,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Nasazení do více regionů
 - [ ] Plán zálohování a obnovy
 - [ ] Implementovány obvody přerušení
-- [ ] Nakonfigurovány retry politiky
+- [ ] Nakonfigurovány politiky opakování
 - [ ] Elegantní degradace
 - [ ] Koncové body kontrol stavu
 
@@ -871,8 +876,8 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Správné dimenzování zdrojů
 - [ ] Aplikovány slevy pro vývoj/testování
 - [ ] Zakoupeny rezervované instance
-- [ ] Dashboard pro monitorování nákladů
-- [ ] Pravidelné revize nákladů
+- [ ] Dashboard monitorování nákladů
+- [ ] Pravidelné přezkumy nákladů
 
 ### Soulad ✅
 - [ ] Splněny požadavky na umístění dat
@@ -908,15 +913,15 @@ python scripts/load_test.py \
 
 ## 🤝 Nejlepší postupy komunity
 
-Na základě zpětné vazby od komunity Azure AI Foundry na Discordu:
+Na základě zpětné vazby komunity Azure AI Foundry na Discordu:
 
 ### Nejlepší doporučení od komunity:
 
-1. **Začněte v malém, škálujte postupně**: Začněte s základními SKU a škálujte na základě skutečného využití
+1. **Začněte v malém, škálujte postupně**: Začněte s základními SKU a škálujte podle skutečného využití
 2. **Monitorujte vše**: Nastavte komplexní monitorování od prvního dne
 3. **Automatizujte zabezpečení**: Používejte infrastrukturu jako kód pro konzistentní zabezpečení
-4. **Testujte důkladně**: Zahrňte testování specifické pro AI do svého pipeline
-5. **Plánujte náklady**: Monitorujte využití tokenů a nastavte upozornění na rozpočet včas
+4. **Důkladně testujte**: Zahrňte testování specifické pro AI do svého pipeline
+5. **Plánujte náklady**: Sledujte využití tokenů a nastavte upozornění na rozpočet včas
 
 ### Běžné chyby, kterým se vyhnout:
 
@@ -935,11 +940,16 @@ Na základě zpětné vazby od komunity Azure AI Foundry na Discordu:
 
 ---
 
-**Předchozí:** [AI Workshop Lab](ai-workshop-lab.md) | **Další:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigace kapitol:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 8 - Produkční a podnikové vzory
+- **⬅️ Předchozí kapitola**: [Kapitola 7: Řešení problémů](../troubleshooting/debugging.md)
+- **⬅️ Také související**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kurz dokončen**: [AZD pro začátečníky](../../README.md)
 
 **Pamatujte**: Produkční AI pracovní zátěže vyžadují pečlivé plánování, monitorování a průběžnou optimalizaci. Začněte s těmito vzory a přizpůsobte je svým specifickým požadavkům.
 
 ---
 
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+**Upozornění**:  
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.

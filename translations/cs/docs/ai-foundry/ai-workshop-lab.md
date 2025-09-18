@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "668bc93b35c9249e52245a0b037b6011",
-  "translation_date": "2025-09-12T23:02:23+00:00",
+  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
+  "translation_date": "2025-09-18T09:38:34+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "cs"
 }
 -->
-# AI Workshop Lab: Jak vytvořit AI řešení připravené pro nasazení pomocí AZD
+# AI Workshop Lab: Jak učinit vaše AI řešení nasaditelnými pomocí AZD
 
-**Předchozí:** [Nasazení AI modelu](ai-model-deployment.md) | **Další:** [Praktiky pro produkční AI](production-ai-practices.md)
+**Navigace kapitol:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+- **⬅️ Předchozí**: [Nasazení AI modelu](ai-model-deployment.md)
+- **➡️ Další**: [Nejlepší postupy pro produkční AI](production-ai-practices.md)
+- **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
 ## Přehled workshopu
 
-Tento praktický workshop provede vývojáře procesem úpravy existující AI aplikace tak, aby byla připravena na nasazení pomocí Azure Developer CLI (AZD). Naučíte se klíčové vzory pro nasazení AI řešení do produkce s využitím služeb Azure AI Foundry.
+Tento praktický workshop provede vývojáře procesem úpravy existující AI aplikace tak, aby byla nasaditelná pomocí Azure Developer CLI (AZD). Naučíte se klíčové vzory pro produkční nasazení AI pomocí služeb Azure AI Foundry.
 
 **Délka:** 2-3 hodiny  
 **Úroveň:** Středně pokročilá  
@@ -25,15 +30,15 @@ Na konci tohoto workshopu budete schopni:
 - ✅ Převést existující AI aplikaci na použití AZD šablon
 - ✅ Konfigurovat služby Azure AI Foundry pomocí AZD
 - ✅ Implementovat bezpečnou správu přihlašovacích údajů pro AI služby
-- ✅ Nasadit AI aplikace připravené pro produkci s monitoringem
+- ✅ Nasadit produkčně připravené AI aplikace s monitoringem
 - ✅ Řešit běžné problémy při nasazení AI
 
 ## Předpoklady
 
-### Potřebné nástroje
-- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) nainstalovaný
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) nainstalovaný
-- [Git](https://git-scm.com/) nainstalovaný
+### Požadované nástroje
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) nainstalováno
+- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) nainstalováno
+- [Git](https://git-scm.com/) nainstalováno
 - Editor kódu (doporučeno VS Code)
 
 ### Azure zdroje
@@ -228,7 +233,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Krok 3.2: Konfigurace specifické pro prostředí
 
-**Nejlepší praxe**: Různé konfigurace pro vývoj a produkci.
+**Nejlepší praxe**: Různé konfigurace pro vývoj vs produkci.
 
 1. **Vytvořte produkční prostředí:**
 ```bash
@@ -250,7 +255,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **Výzva**: Nakonfigurujte šablonu pro nákladově efektivní vývoj.
 
 **Úkoly:**
-1. Identifikujte, které SKUs lze nastavit na bezplatné/základní úrovně
+1. Identifikujte, které SKU lze nastavit na bezplatné/základní úrovně
 2. Nakonfigurujte proměnné prostředí pro minimální náklady
 3. Nasazení a porovnání nákladů s produkční konfigurací
 
@@ -259,11 +264,11 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 - Použijte základní úroveň pro Search Service ve vývoji
 - Zvažte použití Consumption plánu pro Functions
 
-## Modul 4: Bezpečnost a nejlepší praxe pro produkci
+## Modul 4: Bezpečnost a nejlepší postupy pro produkci
 
 ### Krok 4.1: Bezpečná správa přihlašovacích údajů
 
-**Současná výzva**: Mnoho AI aplikací tvrdě kóduje API klíče nebo používá nezabezpečené úložiště.
+**Současná výzva**: Mnoho AI aplikací má pevně zakódované API klíče nebo používá nezabezpečené úložiště.
 
 **Řešení AZD**: Integrace Managed Identity + Key Vault.
 
@@ -340,18 +345,18 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### **Cvičení 4.1: Bezpečnostní audit**
 
-**Úkol**: Zkontrolujte vaše nasazení z hlediska bezpečnostních nejlepších praktik.
+**Úkol**: Zkontrolujte své nasazení podle bezpečnostních nejlepších postupů.
 
 **Kontrolní seznam:**
-- [ ] Žádné tvrdě kódované tajné údaje v kódu nebo konfiguraci
+- [ ] Žádné pevně zakódované tajné údaje v kódu nebo konfiguraci
 - [ ] Použití Managed Identity pro autentizaci mezi službami
 - [ ] Key Vault ukládá citlivou konfiguraci
 - [ ] Síťový přístup je správně omezen
 - [ ] Monitoring a logování jsou povoleny
 
-## Modul 5: Převod vlastní AI aplikace
+## Modul 5: Převod vaší vlastní AI aplikace
 
-### Krok 5.1: Hodnotící dotazník
+### Krok 5.1: Hodnotící pracovní list
 
 **Před převodem vaší aplikace** odpovězte na tyto otázky:
 
@@ -367,11 +372,11 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Potřebujete privátní síť?
 
 3. **Požadavky na škálování:**
-   - Jaké zatížení očekáváte?
+   - Jaké je vaše očekávané zatížení?
    - Potřebujete automatické škálování?
-   - Jsou zde regionální požadavky?
+   - Existují regionální požadavky?
 
-### Krok 5.2: Vytvoření AZD šablony
+### Krok 5.2: Vytvořte svou AZD šablonu
 
 **Postupujte podle tohoto vzoru pro převod vaší aplikace:**
 
@@ -459,7 +464,7 @@ output name string = openAIAccount.name
 - Azure OpenAI pro analýzu obsahu
 - Document Intelligence pro OCR
 - Úložiště pro nahrávání dokumentů
-- Function App pro logiku zpracování
+- Function App pro zpracování logiky
 - Webová aplikace pro uživatelské rozhraní
 
 **Bonusové body:**
@@ -471,8 +476,8 @@ output name string = openAIAccount.name
 
 ### Běžné problémy při nasazení
 
-#### Problém 1: Překročený limit služby OpenAI
-**Příznaky:** Nasazení selže s chybou limitu
+#### Problém 1: Překročená kvóta služby OpenAI
+**Příznaky:** Nasazení selže s chybou kvóty
 **Řešení:**
 ```bash
 # Check current quotas
@@ -520,7 +525,7 @@ az role assignment create \
 **Řešení:**
 - Implementujte cache pro běžné dotazy
 - Použijte vhodný model OpenAI pro váš případ použití
-- Zvažte read replica pro scénáře s vysokým zatížením
+- Zvažte čtecí repliky pro vysokou zátěž
 
 ### **Cvičení 6.1: Výzva k ladění**
 
@@ -530,7 +535,7 @@ az role assignment create \
 1. Zkontrolujte logy aplikace
 2. Ověřte konektivitu služeb
 3. Otestujte autentizaci
-4. Prohlédněte si konfiguraci
+4. Projděte konfiguraci
 
 **Nástroje k použití:**
 - `azd show` pro přehled nasazení
@@ -539,13 +544,13 @@ az role assignment create \
 
 ## Modul 7: Monitoring a optimalizace
 
-### Krok 7.1: Nastavení komplexního monitoringu
+### Krok 7.1: Nastavte komplexní monitoring
 
 1. **Vytvořte vlastní panely:**
 
 Přejděte do Azure portálu a vytvořte panel s:
-- Počtem požadavků na OpenAI a latencí
-- Chybovostí aplikace
+- Počtem požadavků OpenAI a latencí
+- Mírou chyb aplikace
 - Využitím zdrojů
 - Sledováním nákladů
 
@@ -576,34 +581,34 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ### **Cvičení 7.1: Optimalizace výkonu**
 
-**Úkol**: Optimalizujte vaši AI aplikaci z hlediska výkonu i nákladů.
+**Úkol**: Optimalizujte svou AI aplikaci pro výkon i náklady.
 
 **Metriky ke zlepšení:**
-- Snížit průměrnou dobu odpovědi o 20 %
-- Snížit měsíční náklady o 15 %
-- Udržet dostupnost 99,9 %
+- Snižte průměrnou dobu odpovědi o 20 %
+- Snižte měsíční náklady o 15 %
+- Udržujte dostupnost 99,9 %
 
 **Strategie k vyzkoušení:**
 - Implementujte cache odpovědí
 - Optimalizujte prompty pro efektivitu tokenů
-- Použijte vhodné SKUs pro výpočetní zdroje
+- Použijte vhodné SKU pro výpočetní zdroje
 - Nastavte správné automatické škálování
 
 ## Závěrečná výzva: Implementace od začátku do konce
 
 ### Scénář výzvy
 
-Vaším úkolem je vytvořit produkčně připravený AI chatbot pro zákaznickou podporu s těmito požadavky:
+Vaším úkolem je vytvořit produkčně připravený AI chatbot pro zákaznický servis s těmito požadavky:
 
 **Funkční požadavky:**
 - Webové rozhraní pro interakce se zákazníky
 - Integrace s Azure OpenAI pro odpovědi
-- Vyhledávání dokumentů pomocí Cognitive Search
+- Možnost vyhledávání dokumentů pomocí Cognitive Search
 - Integrace s existující databází zákazníků
 - Podpora více jazyků
 
 **Nefunkční požadavky:**
-- Zvládnout 1000 současných uživatelů
+- Zvládnutí 1000 současných uživatelů
 - SLA dostupnosti 99,9 %
 - Shoda se SOC 2
 - Náklady pod $500/měsíc
@@ -621,7 +626,7 @@ Vaším úkolem je vytvořit produkčně připravený AI chatbot pro zákaznicko
 ### Kritéria hodnocení
 
 - ✅ **Funkčnost**: Splňuje všechny požadavky?
-- ✅ **Bezpečnost**: Jsou implementovány nejlepší praxe?
+- ✅ **Bezpečnost**: Jsou implementovány nejlepší postupy?
 - ✅ **Škálovatelnost**: Zvládne zátěž?
 - ✅ **Udržovatelnost**: Je kód a infrastruktura dobře organizovaná?
 - ✅ **Náklady**: Zůstává v rámci rozpočtu?
@@ -630,7 +635,7 @@ Vaším úkolem je vytvořit produkčně připravený AI chatbot pro zákaznicko
 
 ### Dokumentace Microsoftu
 - [Dokumentace Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Dokumentace služby Azure OpenAI](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Dokumentace Azure OpenAI služby](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Dokumentace Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Ukázkové šablony
@@ -640,24 +645,24 @@ Vaším úkolem je vytvořit produkčně připravený AI chatbot pro zákaznicko
 
 ### Komunitní zdroje
 - [Discord Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Certifikát o dokončení
 
-Gratulujeme! Dokončili jste AI Workshop Lab. Nyní byste měli být schopni:
+Gratulujeme! Úspěšně jste dokončili AI Workshop Lab. Nyní byste měli být schopni:
 
 - ✅ Převést existující AI aplikace na AZD šablony
-- ✅ Nasadit AI aplikace připravené pro produkci
-- ✅ Implementujte osvědčené postupy zabezpečení pro pracovní zátěže AI
-- ✅ Sledujte a optimalizujte výkon AI aplikací
-- ✅ Řešte běžné problémy při nasazení
+- ✅ Nasadit AI aplikace připravené pro produkční prostředí
+- ✅ Implementovat nejlepší bezpečnostní postupy pro AI pracovní zátěže
+- ✅ Monitorovat a optimalizovat výkon AI aplikací
+- ✅ Řešit běžné problémy při nasazení
 
 ### Další kroky
 1. Použijte tyto vzory ve svých vlastních AI projektech
 2. Přispějte šablonami zpět komunitě
 3. Připojte se na Discord Azure AI Foundry pro průběžnou podporu
-4. Prozkoumejte pokročilá témata, jako jsou nasazení ve více regionech
+4. Prozkoumejte pokročilá témata, jako jsou nasazení do více regionů
 
 ---
 
@@ -665,11 +670,16 @@ Gratulujeme! Dokončili jste AI Workshop Lab. Nyní byste měli být schopni:
 
 ---
 
-**Předchozí:** [Nasazení AI modelu](ai-model-deployment.md) | **Další:** [Postupy pro produkční AI](production-ai-practices.md)
+**Navigace kapitolami:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+- **⬅️ Předchozí**: [Nasazení AI modelu](ai-model-deployment.md)
+- **➡️ Další**: [Nejlepší postupy pro produkční AI](production-ai-practices.md)
+- **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
-**Potřebujete pomoc?** Připojte se ke komunitě pro podporu a diskuse o AZD a nasazeních AI.
+**Potřebujete pomoc?** Připojte se ke komunitě pro podporu a diskuse o AZD a nasazení AI.
 
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

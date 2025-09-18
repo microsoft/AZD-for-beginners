@@ -1,39 +1,45 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-10T07:41:55+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T09:31:57+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "hu"
 }
 -->
-# Parancsok Gyorsreferencia - Alapvető AZD Parancsok
+# Parancsok Gyorssegédlet - Alapvető AZD Parancsok
+
+**Gyors áttekintés az összes fejezethez**
+- **📚 Kurzus kezdőlapja**: [AZD Kezdőknek](../README.md)
+- **📖 Gyors kezdés**: [1. fejezet: Alapok és gyors kezdés](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Parancsok**: [2. fejezet: AI-első fejlesztés](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Haladó**: [4. fejezet: Infrastruktúra kódként](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Bevezetés
 
-Ez az átfogó gyorsreferencia a leggyakrabban használt Azure Developer CLI parancsokat tartalmazza, kategóriák szerint rendszerezve, gyakorlati példákkal. Tökéletes gyors keresésekhez fejlesztés, hibakeresés és az azd projektek napi működése során.
+Ez az átfogó gyorssegédlet kategóriák szerint rendszerezve nyújt gyors hozzáférést a leggyakrabban használt Azure Developer CLI parancsokhoz, gyakorlati példákkal. Tökéletes fejlesztés, hibakeresés és az azd projektek napi működése során történő gyors keresésekhez.
 
-## Tanulási Célok
+## Tanulási célok
 
-Ezzel a gyorsreferenciával:
-- Azonnali hozzáférést kapsz az alapvető Azure Developer CLI parancsokhoz és szintaxisokhoz
-- Megérted a parancsok kategóriák és felhasználási esetek szerinti rendszerezését
-- Gyakorlati példákat találsz a gyakori fejlesztési és telepítési forgatókönyvekre
-- Hibakeresési parancsokat érhetsz el gyors problémamegoldáshoz
-- Hatékonyan találhatsz fejlett konfigurációs és testreszabási lehetőségeket
-- Könnyen kezelheted a környezeteket és a többkörnyezetes munkafolyamatokat
+Ezzel a gyorssegédlettel:
+- Azonnali hozzáférést kap az alapvető Azure Developer CLI parancsokhoz és szintaxisokhoz
+- Megérti a parancsok kategóriák és felhasználási esetek szerinti szervezését
+- Gyakorlati példákat talál a gyakori fejlesztési és telepítési forgatókönyvekhez
+- Hibakeresési parancsokat érhet el gyors problémamegoldáshoz
+- Hatékonyan találja meg a haladó konfigurációs és testreszabási lehetőségeket
+- Környezetkezelési és több környezetes munkafolyamat parancsokat talál
 
-## Tanulási Eredmények
+## Tanulási eredmények
 
-A gyorsreferencia rendszeres használatával képes leszel:
-- Magabiztosan végrehajtani az azd parancsokat anélkül, hogy a teljes dokumentációt kellene böngészned
-- Gyorsan megoldani a gyakori problémákat a megfelelő diagnosztikai parancsokkal
-- Hatékonyan kezelni több környezetet és telepítési forgatókönyvet
-- Alkalmazni az azd fejlett funkcióit és konfigurációs lehetőségeit
-- Rendszeresen használni hibakeresési parancssorozatokat a telepítési problémák megoldására
+A gyorssegédlet rendszeres használatával képes lesz:
+- Magabiztosan végrehajtani az azd parancsokat teljes dokumentáció nélkül
+- Gyorsan megoldani gyakori problémákat megfelelő diagnosztikai parancsokkal
+- Hatékonyan kezelni több környezetet és telepítési forgatókönyveket
+- Alkalmazni az azd haladó funkcióit és konfigurációs lehetőségeit szükség szerint
+- Rendszeresen hibát elhárítani telepítési problémák esetén parancssorozatokkal
 - Optimalizálni a munkafolyamatokat az azd gyorsbillentyűk és opciók hatékony használatával
 
-## Kezdő Parancsok
+## Kezdő parancsok
 
 ### Hitelesítés
 ```bash
@@ -48,7 +54,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Projekt Inicializálása
+### Projekt inicializálása
 ```bash
 # Browse available templates
 azd template list
@@ -64,9 +70,9 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Alapvető Telepítési Parancsok
+## Alapvető telepítési parancsok
 
-### Teljes Telepítési Folyamat
+### Teljes telepítési munkafolyamat
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -81,7 +87,7 @@ azd up --environment production
 azd up --parameter location=westus2
 ```
 
-### Csak Infrastruktúra
+### Csak infrastruktúra
 ```bash
 # Provision Azure resources
 azd provision
@@ -93,7 +99,7 @@ azd provision --preview
 azd provision --what-if
 ```
 
-### Csak Alkalmazás
+### Csak alkalmazás
 ```bash
 # Deploy application code
 azd deploy
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Build és Csomagolás
+### Építés és csomagolás
 ```bash
 # Build applications
 azd package
@@ -117,7 +123,7 @@ azd package --service api
 
 ## 🌍 Környezetkezelés
 
-### Környezet Műveletek
+### Környezet műveletek
 ```bash
 # List all environments
 azd env list
@@ -136,7 +142,7 @@ azd env show
 azd env refresh
 ```
 
-### Környezeti Változók
+### Környezeti változók
 ```bash
 # Set environment variable
 azd env set API_KEY "your-secret-key"
@@ -152,9 +158,9 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Konfigurációs Parancsok
+## ⚙️ Konfigurációs parancsok
 
-### Globális Konfiguráció
+### Globális konfiguráció
 ```bash
 # List all configuration
 azd config list
@@ -170,7 +176,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Projekt Konfiguráció
+### Projekt konfiguráció
 ```bash
 # Validate azure.yaml
 azd config validate
@@ -182,9 +188,9 @@ azd show
 azd show --output json
 ```
 
-## 📊 Monitorozás és Naplók
+## 📊 Monitoring és naplók
 
-### Alkalmazás Naplók
+### Alkalmazás naplók
 ```bash
 # View logs from all services
 azd logs
@@ -203,7 +209,7 @@ azd logs --since "2024-01-01 10:00:00"
 azd logs --level error
 ```
 
-### Monitorozás
+### Monitoring
 ```bash
 # Open Azure portal for monitoring
 azd monitor
@@ -212,7 +218,7 @@ azd monitor
 azd monitor --insights
 ```
 
-## 🛠️ Karbantartási Parancsok
+## 🛠️ Karbantartási parancsok
 
 ### Tisztítás
 ```bash
@@ -241,7 +247,7 @@ azd version
 azd info
 ```
 
-## 🔧 Haladó Parancsok
+## 🔧 Haladó parancsok
 
 ### Pipeline és CI/CD
 ```bash
@@ -255,7 +261,7 @@ azd pipeline config --provider azdo
 azd pipeline show
 ```
 
-### Infrastruktúra Kezelés
+### Infrastruktúra kezelése
 ```bash
 # Import existing resources
 azd infra import
@@ -267,7 +273,7 @@ azd infra export
 azd infra validate
 ```
 
-### Szolgáltatás Kezelés
+### Szolgáltatás kezelése
 ```bash
 # List all services
 azd service list
@@ -279,9 +285,9 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 Gyors Munkafolyamatok
+## 🎯 Gyors munkafolyamatok
 
-### Fejlesztési Munkafolyamat
+### Fejlesztési munkafolyamat
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -298,7 +304,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Többkörnyezetes Munkafolyamat
+### Több környezetes munkafolyamat
 ```bash
 # Set up environments
 azd env new dev
@@ -318,7 +324,7 @@ azd env select production
 azd up
 ```
 
-### Hibakeresési Munkafolyamat
+### Hibakeresési munkafolyamat
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -336,9 +342,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Hibakeresési Parancsok
+## 🔍 Hibakeresési parancsok
 
-### Hibakeresési Információk
+### Hibakeresési információk
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -354,7 +360,7 @@ azd info
 az account show
 ```
 
-### Sablon Hibakeresés
+### Sablon hibakeresés
 ```bash
 # List available templates with details
 azd template list --output json
@@ -366,9 +372,9 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 Fájl- és Könyvtárparancsok
+## 📁 Fájl- és könyvtárparancsok
 
-### Projekt Struktúra
+### Projekt struktúra
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -381,9 +387,9 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Kimeneti Formázás
+## 🎨 Kimenet formázása
 
-### JSON Kimenet
+### JSON kimenet
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -395,16 +401,16 @@ azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Táblázatos Kimenet
+### Táblázatos kimenet
 ```bash
 # Format as table
 azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Gyakori Parancskombinációk
+## 🔧 Gyakori parancskombinációk
 
-### Egészségügyi Ellenőrző Script
+### Egészségügyi ellenőrző script
 ```bash
 #!/bin/bash
 # Quick health check
@@ -413,7 +419,7 @@ azd env show
 azd logs --level error --since 10m
 ```
 
-### Telepítési Érvényesítés
+### Telepítési validáció
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -422,7 +428,7 @@ azd provision --preview
 az account show
 ```
 
-### Környezet Összehasonlítás
+### Környezet összehasonlítás
 ```bash
 #!/bin/bash
 # Compare environments
@@ -433,7 +439,7 @@ for env in dev staging production; do
 done
 ```
 
-### Erőforrás Tisztító Script
+### Erőforrás tisztító script
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -444,9 +450,9 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 Környezeti Változók
+## 📝 Környezeti változók
 
-### Gyakori Környezeti Változók
+### Gyakori környezeti változók
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -463,9 +469,9 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Vészhelyzeti Parancsok
+## 🚨 Vészhelyzeti parancsok
 
-### Gyors Javítások
+### Gyors javítások
 ```bash
 # Reset authentication
 az account clear
@@ -481,7 +487,7 @@ azd service restart --all
 azd deploy --rollback
 ```
 
-### Helyreállítási Parancsok
+### Helyreállítási parancsok
 ```bash
 # Recover from failed deployment
 azd provision --continue-on-error
@@ -492,9 +498,9 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Profi Tippek
+## 💡 Profi tippek
 
-### Aliasok a Gyorsabb Munkafolyamatért
+### Aliasok a gyorsabb munkafolyamatért
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -503,7 +509,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funkció Gyorsbillentyűk
+### Funkció gyorsbillentyűk
 ```bash
 # Quick environment switching
 azd-env() {
@@ -523,9 +529,9 @@ azd-status() {
 }
 ```
 
-## 📖 Súgó és Dokumentáció
+## 📖 Segítség és dokumentáció
 
-### Súgó Kérése
+### Segítség kérése
 ```bash
 # General help
 azd --help
@@ -541,7 +547,7 @@ azd version
 azd version --output json
 ```
 
-### Dokumentációs Linkek
+### Dokumentációs linkek
 ```bash
 # Open documentation in browser
 azd docs
@@ -552,15 +558,15 @@ azd template show <template-name> --docs
 
 ---
 
-**Tipp**: Jelöld meg könyvjelzővel ezt a gyorsreferenciát, és használd a `Ctrl+F` billentyűkombinációt a szükséges parancsok gyors megtalálásához!
+**Tipp**: Jelölje meg könyvjelzővel ezt a gyorssegédletet, és használja a `Ctrl+F` billentyűkombinációt a szükséges parancsok gyors megtalálásához!
 
 ---
 
 **Navigáció**
-- **Előző Lecke**: [Előzetes Ellenőrzések](../docs/pre-deployment/preflight-checks.md)
-- **Következő Lecke**: [Szójegyzék](glossary.md)
+- **Előző lecke**: [Előzetes ellenőrzések](../docs/pre-deployment/preflight-checks.md)
+- **Következő lecke**: [Szójegyzék](glossary.md)
 
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

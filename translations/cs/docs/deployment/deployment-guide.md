@@ -1,34 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:16:59+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T09:42:43+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "cs"
 }
 -->
 # Průvodce nasazením - Ovládnutí nasazení pomocí AZD
 
+**Navigace kapitol:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 4 - Infrastruktura jako kód a nasazení
+- **⬅️ Předchozí kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
+- **➡️ Další**: [Zajištění prostředků](provisioning.md)
+- **🚀 Další kapitola**: [Kapitola 5: Řešení s více agenty AI](../../examples/retail-scenario.md)
+
 ## Úvod
 
-Tento komplexní průvodce pokrývá vše, co potřebujete vědět o nasazování aplikací pomocí Azure Developer CLI, od základních nasazení jedním příkazem až po pokročilé produkční scénáře s vlastními hooky, více prostředími a integrací CI/CD. Ovládněte celý životní cyklus nasazení pomocí praktických příkladů a osvědčených postupů.
+Tento komplexní průvodce pokrývá vše, co potřebujete vědět o nasazení aplikací pomocí Azure Developer CLI, od základních nasazení jedním příkazem až po pokročilé produkční scénáře s vlastními hooky, více prostředími a integrací CI/CD. Ovládněte celý životní cyklus nasazení pomocí praktických příkladů a osvědčených postupů.
 
 ## Cíle učení
 
-Po dokončení tohoto průvodce budete:
-- Ovládat všechny příkazy a pracovní postupy nasazení Azure Developer CLI
-- Rozumět celému životnímu cyklu nasazení od zajištění zdrojů po monitorování
-- Implementovat vlastní hooky pro automatizaci před a po nasazení
-- Konfigurovat více prostředí s parametry specifickými pro prostředí
-- Nastavovat pokročilé strategie nasazení, včetně blue-green a kanárkových nasazení
-- Integrovat nasazení pomocí azd do CI/CD pipeline a DevOps pracovních postupů
+Po dokončení tohoto průvodce:
+- Ovládnete všechny příkazy a pracovní postupy nasazení pomocí Azure Developer CLI
+- Porozumíte celému životnímu cyklu nasazení od zajištění prostředků po monitorování
+- Implementujete vlastní hooky pro automatizaci před a po nasazení
+- Nakonfigurujete více prostředí s parametry specifickými pro prostředí
+- Nastavíte pokročilé strategie nasazení, včetně blue-green a kanárských nasazení
+- Integrujete nasazení pomocí azd do CI/CD pipeline a DevOps pracovních postupů
 
 ## Výsledky učení
 
 Po dokončení budete schopni:
 - Samostatně provádět a řešit problémy všech pracovních postupů nasazení pomocí azd
-- Navrhovat a implementovat vlastní automatizaci nasazení pomocí hooků
-- Konfigurovat produkční nasazení s odpovídající bezpečností a monitorováním
+- Navrhnout a implementovat vlastní automatizaci nasazení pomocí hooků
+- Nakonfigurovat produkční nasazení s odpovídající bezpečností a monitorováním
 - Spravovat složité scénáře nasazení s více prostředími
 - Optimalizovat výkon nasazení a implementovat strategie pro návrat zpět
 - Integrovat nasazení pomocí azd do podnikových DevOps praktik
@@ -37,7 +44,7 @@ Po dokončení budete schopni:
 
 Azure Developer CLI poskytuje několik příkazů pro nasazení:
 - `azd up` - Kompletní pracovní postup (zajištění + nasazení)
-- `azd provision` - Pouze vytvoření/aktualizace Azure zdrojů
+- `azd provision` - Pouze vytvoření/aktualizace prostředků Azure
 - `azd deploy` - Pouze nasazení aplikačního kódu
 - `azd package` - Sestavení a balení aplikací
 
@@ -57,7 +64,7 @@ azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Pouze zajištění infrastruktury
-Když potřebujete aktualizovat pouze Azure zdroje:
+Když potřebujete aktualizovat pouze prostředky Azure:
 ```bash
 # Provision/update infrastructure
 azd provision
@@ -101,7 +108,7 @@ hooks:
 
 ### Fáze 2: Zajištění infrastruktury
 - Čte šablony infrastruktury (Bicep/Terraform)
-- Vytváří nebo aktualizuje Azure zdroje
+- Vytváří nebo aktualizuje prostředky Azure
 - Konfiguruje síť a bezpečnost
 - Nastavuje monitorování a logování
 
@@ -120,7 +127,7 @@ hooks:
 
 ### Fáze 4: Balení aplikace
 - Sestavuje aplikační kód
-- Vytváří artefakty pro nasazení
+- Vytváří artefakty nasazení
 - Balí pro cílovou platformu (kontejnery, ZIP soubory, atd.)
 
 ### Fáze 5: Hooky před nasazením
@@ -137,7 +144,7 @@ hooks:
 ```
 
 ### Fáze 6: Nasazení aplikace
-- Nasazuje zabalené aplikace do Azure služeb
+- Nasazuje zabalené aplikace do služeb Azure
 - Aktualizuje konfigurační nastavení
 - Spouští/restartuje služby
 
@@ -261,7 +268,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Kanárková nasazení
+### Kanárská nasazení
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimalizace Dockerfile pro více fází
+### Optimalizace Dockerfile s více fázemi
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -455,7 +462,7 @@ echo "✅ Deployment validation completed successfully"
 
 ## 🔐 Bezpečnostní aspekty
 
-### Správa tajných klíčů
+### Správa tajemství
 ```bash
 # Store secrets securely
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
@@ -475,7 +482,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Síťová bezpečnost
+### Bezpečnost sítě
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -631,14 +638,14 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Další kroky
 
-- [Zajištění zdrojů](provisioning.md) - Podrobný pohled na správu infrastruktury
+- [Zajištění prostředků](provisioning.md) - Podrobný pohled na správu infrastruktury
 - [Plánování před nasazením](../pre-deployment/capacity-planning.md) - Naplánujte svou strategii nasazení
 - [Běžné problémy](../troubleshooting/common-issues.md) - Řešení problémů s nasazením
 - [Osvědčené postupy](../troubleshooting/debugging.md) - Strategie pro produkční nasazení
 
 ## Další zdroje
 
-- [Referenční příručka nasazení Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Referenční příručka nasazení pomocí Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Nasazení Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [Nasazení Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Nasazení Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
@@ -647,9 +654,9 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 **Navigace**
 - **Předchozí lekce**: [Váš první projekt](../getting-started/first-project.md)
-- **Další lekce**: [Zajištění zdrojů](provisioning.md)
+- **Další lekce**: [Zajištění prostředků](provisioning.md)
 
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

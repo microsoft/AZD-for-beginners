@@ -1,37 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-10T07:24:52+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-18T09:30:57+00:00",
   "source_file": "resources/faq.md",
   "language_code": "hu"
 }
 -->
 # Gyakran Ismételt Kérdések (GYIK)
 
+**Segítség fejezetenként**
+- **📚 Kurzus kezdőlapja**: [AZD Kezdőknek](../README.md)
+- **🚆 Telepítési problémák**: [1. fejezet: Telepítés és beállítás](../docs/getting-started/installation.md)
+- **🤖 AI kérdések**: [2. fejezet: AI-első fejlesztés](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Hibakeresés**: [7. fejezet: Hibakeresés és hibaelhárítás](../docs/troubleshooting/common-issues.md)
+
 ## Bevezetés
 
-Ez az átfogó GYIK választ ad a leggyakoribb kérdésekre az Azure Developer CLI (azd) és az Azure telepítések kapcsán. Gyors megoldásokat találhatsz gyakori problémákra, megértheted a legjobb gyakorlatokat, és tisztázhatod az azd koncepcióit és munkafolyamatait.
+Ez az átfogó GYIK választ ad a leggyakoribb kérdésekre az Azure Developer CLI (azd) és az Azure telepítések kapcsán. Gyors megoldásokat találhatsz gyakori problémákra, megértheted a legjobb gyakorlatokat, és tisztázhatod az azd fogalmakat és munkafolyamatokat.
 
 ## Tanulási célok
 
 A GYIK áttekintésével:
 - Gyors válaszokat találhatsz az Azure Developer CLI-vel kapcsolatos kérdésekre és problémákra
 - Gyakorlati kérdés-válasz formában megértheted a kulcsfogalmakat és terminológiát
-- Hozzáférhetsz hibaelhárítási megoldásokhoz gyakori problémák és hibák esetén
-- Megismerheted az optimalizálással kapcsolatos legjobb gyakorlatokat
-- Felfedezheted a haladó funkciókat és képességeket szakértői szintű kérdéseken keresztül
+- Hibaelhárítási megoldásokat érhetsz el gyakori problémák és hibák esetén
+- Megismerheted a legjobb gyakorlatokat az optimalizálás kapcsán
+- Felfedezheted az azd fejlett funkcióit és képességeit szakértői szintű kérdések révén
 - Hatékonyan hivatkozhatsz költség-, biztonsági és telepítési stratégiákra vonatkozó útmutatásokra
 
 ## Tanulási eredmények
 
 A GYIK rendszeres használatával képes leszel:
-- Önállóan megoldani az Azure Developer CLI-vel kapcsolatos gyakori problémákat a megadott megoldások alapján
+- Önállóan megoldani az Azure Developer CLI-vel kapcsolatos gyakori problémákat a megadott megoldások segítségével
 - Megalapozott döntéseket hozni a telepítési stratégiákról és konfigurációkról
 - Megérteni az azd és más Azure eszközök és szolgáltatások közötti kapcsolatot
 - Alkalmazni a közösségi tapasztalatok és szakértői ajánlások alapján kialakított legjobb gyakorlatokat
-- Hatékonyan elhárítani hitelesítési, telepítési és konfigurációs problémákat
-- Optimalizálni a költségeket és a teljesítményt a GYIK-ban található betekintések és ajánlások alapján
+- Hatékonyan hibaelhárítani az autentikációval, telepítéssel és konfigurációval kapcsolatos problémákat
+- Optimalizálni a költségeket és teljesítményt a GYIK által nyújtott betekintések és ajánlások alapján
 
 ## Tartalomjegyzék
 
@@ -49,18 +55,18 @@ A GYIK rendszeres használatával képes leszel:
 
 ## Első lépések
 
-### K: Mi az az Azure Developer CLI (azd)?
-**V**: Az Azure Developer CLI (azd) egy fejlesztőközpontú parancssori eszköz, amely felgyorsítja az alkalmazások helyi fejlesztési környezetből az Azure-ba történő eljuttatásának idejét. Sablonokon keresztül biztosítja a legjobb gyakorlatokat, és segíti a teljes telepítési életciklust.
+### K: Mi az Azure Developer CLI (azd)?
+**V**: Az Azure Developer CLI (azd) egy fejlesztőközpontú parancssori eszköz, amely felgyorsítja az alkalmazás helyi fejlesztési környezetből Azure-ba történő eljuttatásának idejét. Sablonokon keresztül biztosítja a legjobb gyakorlatokat, és segít a teljes telepítési életciklusban.
 
 ### K: Miben különbözik az azd az Azure CLI-től?
 **V**: 
-- **Azure CLI**: Általános célú eszköz az Azure erőforrások kezelésére
+- **Azure CLI**: Általános célú eszköz Azure erőforrások kezelésére
 - **azd**: Fejlesztőközpontú eszköz alkalmazástelepítési munkafolyamatokhoz
-- Az azd belsőleg használja az Azure CLI-t, de magasabb szintű absztrakciókat nyújt a gyakori fejlesztési forgatókönyvekhez
+- Az azd belsőleg használja az Azure CLI-t, de magasabb szintű absztrakciókat kínál gyakori fejlesztési forgatókönyvekhez
 - Az azd tartalmaz sablonokat, környezetkezelést és telepítési automatizálást
 
-### K: Szükségem van az Azure CLI telepítésére az azd használatához?
-**V**: Igen, az azd az Azure CLI-t használja a hitelesítéshez és néhány művelethez. Először telepítsd az Azure CLI-t, majd az azd-t.
+### K: Szükséges az Azure CLI telepítése az azd használatához?
+**V**: Igen, az azd az Azure CLI-t használja hitelesítéshez és bizonyos műveletekhez. Először telepítsd az Azure CLI-t, majd az azd-t.
 
 ### K: Milyen programozási nyelveket támogat az azd?
 **V**: Az azd nyelvfüggetlen. Támogatja:
@@ -71,35 +77,35 @@ A GYIK rendszeres használatával képes leszel:
 - Go
 - PHP
 - Statikus weboldalak
-- Konténerizált alkalmazások
+- Konténeres alkalmazások
 
 ### K: Használhatom az azd-t meglévő projektekkel?
 **V**: Igen! Két lehetőséged van:
 1. Használd az `azd init` parancsot az azd konfiguráció hozzáadásához meglévő projektekhez
-2. Igazítsd a meglévő projekteket az azd sablonstruktúrájához
-3. Hozz létre egyedi sablonokat a meglévő architektúrád alapján
+2. Alakítsd át meglévő projektjeidet az azd sablonstruktúrájának megfelelően
+3. Hozz létre egyedi sablonokat meglévő architektúrád alapján
 
 ---
 
 ## Hitelesítés és hozzáférés
 
-### K: Hogyan hitelesíthetek az Azure-ban az azd használatával?
+### K: Hogyan hitelesíthetek az Azure-ban az azd segítségével?
 **V**: Használd az `azd auth login` parancsot, amely megnyit egy böngészőablakot az Azure hitelesítéshez. CI/CD forgatókönyvekhez használj szolgáltatásneveket vagy kezelt identitásokat.
 
-### K: Használhatom az azd-t több Azure-előfizetéssel?
+### K: Használhatom az azd-t több Azure előfizetéssel?
 **V**: Igen. Használd az `azd env set AZURE_SUBSCRIPTION_ID <előfizetés-azonosító>` parancsot, hogy megadd, melyik előfizetést használja az adott környezet.
 
 ### K: Milyen jogosultságokra van szükségem az azd telepítéséhez?
 **V**: Általában szükséged van:
 - **Hozzájáruló** szerepkörre az erőforráscsoporton vagy előfizetésen
-- **Felhasználói hozzáférés adminisztrátora** szerepkörre, ha olyan erőforrásokat telepítesz, amelyekhez szerepkör-hozzárendelések szükségesek
-- A konkrét jogosultságok a sablontól és a telepített erőforrásoktól függenek
+- **Felhasználói hozzáférés adminisztrátora** szerepkörre, ha olyan erőforrásokat telepítesz, amelyekhez szerepkör-hozzárendelés szükséges
+- A konkrét jogosultságok a sablontól és a telepített erőforrásoktól függnek
 
-### K: Használhatom az azd-t CI/CD folyamatokban?
-**V**: Természetesen! Az azd CI/CD integrációra lett tervezve. Használj szolgáltatásneveket a hitelesítéshez, és állítsd be a környezeti változókat a konfigurációhoz.
+### K: Használhatom az azd-t CI/CD csővezetékekben?
+**V**: Természetesen! Az azd CI/CD integrációra lett tervezve. Használj szolgáltatásneveket hitelesítéshez, és állítsd be a környezeti változókat konfigurációhoz.
 
-### K: Hogyan kezeljem a hitelesítést a GitHub Actions-ben?
-**V**: Használd az Azure Login műveletet szolgáltatásnév-hitelesítéssel:
+### K: Hogyan kezeljem a hitelesítést GitHub Actions-ben?
+**V**: Használd az Azure Login akciót szolgáltatásnév hitelesítési adatokkal:
 ```yaml
 - uses: azure/login@v1
   with:
@@ -120,23 +126,23 @@ A GYIK rendszeres használatával képes leszel:
 ### K: Hogyan hozhatok létre egyedi sablont?
 **V**: 
 1. Kezdd egy meglévő sablonstruktúrával
-2. Módosítsd az `azure.yaml`, infrastruktúra fájlokat és az alkalmazáskódot
-3. Teszteld alaposan az `azd up` paranccsal
-4. Tedd közzé a GitHubon megfelelő címkékkel
+2. Módosítsd az `azure.yaml`, infrastruktúra fájlokat és alkalmazáskódot
+3. Teszteld alaposan az `azd up` parancs segítségével
+4. Publikáld GitHub-ra megfelelő címkékkel
 
 ### K: Használhatom az azd-t sablon nélkül?
 **V**: Igen, használd az `azd init` parancsot egy meglévő projektben a szükséges konfigurációs fájlok létrehozásához. Manuálisan kell konfigurálnod az `azure.yaml` és infrastruktúra fájlokat.
 
-### K: Mi a különbség a hivatalos és a közösségi sablonok között?
+### K: Mi a különbség a hivatalos és közösségi sablonok között?
 **V**: 
 - **Hivatalos sablonok**: Microsoft által karbantartott, rendszeresen frissített, átfogó dokumentációval
-- **Közösségi sablonok**: Fejlesztők által készített, speciális felhasználási esetekkel, változó minőséggel és karbantartással
+- **Közösségi sablonok**: Fejlesztők által készített, lehetnek speciális felhasználási esetek, változó minőség és karbantartás
 
 ### K: Hogyan frissíthetem a sablont a projektben?
-**V**: A sablonok nem frissülnek automatikusan. Az alábbiakat teheted:
-1. Kézzel hasonlítsd össze és egyesítsd a változásokat a forrássablonból
-2. Kezdd újra az `azd init` paranccsal az új sablon használatával
-3. Csak a szükséges fejlesztéseket vedd át a frissített sablonokból
+**V**: A sablonok nem frissülnek automatikusan. Lehetőségek:
+1. Kézzel összehasonlíthatod és egyesítheted a változásokat a forrás sablonból
+2. Újraindíthatod az `azd init` parancsot az új sablonnal
+3. Kiválaszthatod az új sablonok konkrét fejlesztéseit
 
 ---
 
@@ -150,9 +156,9 @@ A GYIK rendszeres használatával képes leszel:
 - Hálózat, biztonság és monitorozási erőforrások
 
 ### K: Telepíthetek több régióba?
-**V**: Igen, konfiguráld a Bicep sablonjaidban a több régiót, és állítsd be megfelelően a hely paramétert minden környezethez.
+**V**: Igen, konfiguráld a Bicep sablonjaidat több régióval, és állítsd be megfelelően a hely paramétert minden környezethez.
 
-### K: Hogyan kezeljem az adatbázis sémafrissítéseket?
+### K: Hogyan kezeljem az adatbázis séma migrációkat?
 **V**: Használj telepítési horgokat az `azure.yaml` fájlban:
 ```yaml
 hooks:
@@ -164,23 +170,23 @@ hooks:
 ```
 
 ### K: Telepíthetek csak infrastruktúrát alkalmazások nélkül?
-**V**: Igen, használd az `azd provision` parancsot, hogy csak az infrastruktúra komponenseket telepítsd.
+**V**: Igen, használd az `azd provision` parancsot, hogy csak az infrastruktúra elemeket telepítsd, amelyeket a sablonok definiálnak.
 
 ### K: Hogyan telepíthetek meglévő Azure erőforrásokra?
-**V**: Ez összetett és nem közvetlenül támogatott. Az alábbiakat teheted:
+**V**: Ez összetett és nem közvetlenül támogatott. Lehetőségek:
 1. Importáld a meglévő erőforrásokat a Bicep sablonjaidba
 2. Használj meglévő erőforrás hivatkozásokat a sablonokban
 3. Módosítsd a sablonokat, hogy feltételesen hozzanak létre vagy hivatkozzanak erőforrásokra
 
-### K: Használhatok Terraformot a Bicep helyett?
-**V**: Jelenleg az azd elsősorban a Bicep/ARM sablonokat támogatja. A Terraform támogatása hivatalosan nem érhető el, bár közösségi megoldások létezhetnek.
+### K: Használhatok Terraformot Bicep helyett?
+**V**: Jelenleg az azd elsősorban Bicep/ARM sablonokat támogat. A Terraform támogatás hivatalosan nem elérhető, bár közösségi megoldások létezhetnek.
 
 ---
 
 ## Konfiguráció és környezetek
 
-### K: Hogyan kezelhetem a különböző környezeteket (fejlesztés, tesztelés, éles)?
-**V**: Hozz létre külön környezeteket az `azd env new <környezet-név>` paranccsal, és konfiguráld külön a beállításokat:
+### K: Hogyan kezeljem a különböző környezeteket (fejlesztés, tesztelés, éles)?
+**V**: Hozz létre külön környezeteket az `azd env new <környezet-név>` parancs segítségével, és konfiguráld különböző beállításokat mindegyikhez:
 ```bash
 azd env new development
 azd env new staging  
@@ -188,23 +194,23 @@ azd env new production
 ```
 
 ### K: Hol tárolódnak a környezetkonfigurációk?
-**V**: A projektkönyvtár `.azure` mappájában. Minden környezetnek saját mappája van a konfigurációs fájlokkal.
+**V**: A projektkönyvtár `.azure` mappájában. Minden környezetnek saját mappája van konfigurációs fájlokkal.
 
-### K: Hogyan állíthatok be környezet-specifikus konfigurációt?
-**V**: Használd az `azd env set` parancsot a környezeti változók beállításához:
+### K: Hogyan állítsak be környezet-specifikus konfigurációt?
+**V**: Használd az `azd env set` parancsot környezeti változók konfigurálásához:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### K: Megoszthatom a környezetkonfigurációkat a csapattagokkal?
-**V**: A `.azure` mappa érzékeny információkat tartalmaz, ezért ne add hozzá a verziókezeléshez. Ehelyett:
+### K: Megoszthatom a környezetkonfigurációkat csapattagokkal?
+**V**: A `.azure` mappa érzékeny információkat tartalmaz, és nem szabad verziókezelésbe elkötelezni. Ehelyett:
 1. Dokumentáld a szükséges környezeti változókat
 2. Használj telepítési szkripteket a környezetek beállításához
-3. Használj Azure Key Vault-ot az érzékeny konfigurációkhoz
+3. Használj Azure Key Vault-ot érzékeny konfigurációhoz
 
 ### K: Hogyan írhatom felül a sablon alapértelmezéseit?
-**V**: Állítsd be a sablon paramétereinek megfelelő környezeti változókat:
+**V**: Állítsd be a sablon paramétereknek megfelelő környezeti változókat:
 ```bash
 azd env set LOCATION "West US 2"
 azd env set SKU_NAME "B1"
@@ -214,112 +220,109 @@ azd env set SKU_NAME "B1"
 
 ## Hibaelhárítás
 
-### K: Miért nem működik az `azd up` parancs?
+### K: Miért sikertelen az `azd up` parancs?
 **V**: Gyakori okok:
 1. **Hitelesítési problémák**: Futtasd az `azd auth login` parancsot
 2. **Elégtelen jogosultságok**: Ellenőrizd az Azure szerepkör-hozzárendeléseket
-3. **Erőforrásnév-ütközések**: Módosítsd az AZURE_ENV_NAME értékét
+3. **Erőforrás névütközések**: Módosítsd az AZURE_ENV_NAME értékét
 4. **Kvóta/kapacitás problémák**: Ellenőrizd a regionális elérhetőséget
-5. **Sablonhibák**: Ellenőrizd a Bicep sablonokat
+5. **Sablonhibák**: Érvényesítsd a Bicep sablonokat
 
-### K: Hogyan háríthatom el a telepítési hibákat?
+### K: Hogyan hibakereshetem a telepítési hibákat?
 **V**: 
-1. Használd az `azd deploy --debug` parancsot a részletes kimenethez
+1. Használd az `azd deploy --debug` parancsot részletes kimenethez
 2. Ellenőrizd az Azure portál telepítési előzményeit
-3. Nézd meg az Azure portál Tevékenységnaplóját
+3. Tekintsd meg az Azure portál tevékenységnaplóját
 4. Használd az `azd show` parancsot az aktuális környezet állapotának megjelenítéséhez
 
 ### K: Miért nem működnek a környezeti változóim?
 **V**: Ellenőrizd:
-1. A változónevek pontosan egyeznek a sablon paramétereivel
-2. Az értékek megfelelően vannak idézőjelezve, ha szóközt tartalmaznak
-3. A megfelelő környezet van kiválasztva: `azd env select <környezet>`
+1. A változónevek pontosan egyeznek a sablon paraméterekkel
+2. Az értékek megfelelően idézőjelezve vannak, ha szóközt tartalmaznak
+3. A környezet ki van választva: `azd env select <környezet>`
 4. A változók a megfelelő környezetben vannak beállítva
 
-### K: Hogyan tisztíthatom meg a sikertelen telepítéseket?
+### K: Hogyan tisztítsam meg a sikertelen telepítéseket?
 **V**: 
 ```bash
 azd down --force --purge
 ```
 Ez eltávolítja az összes erőforrást és környezetkonfigurációt.
 
-### K: Miért nem érhető el az alkalmazásom a telepítés után?
+### K: Miért nem érhető el az alkalmazásom telepítés után?
 **V**: Ellenőrizd:
 1. A telepítés sikeresen befejeződött
 2. Az alkalmazás fut (ellenőrizd a naplókat az Azure portálon)
-3. A hálózati biztonsági csoportok engedélyezik a forgalmat
-4. A DNS/egyéni domainek megfelelően vannak konfigurálva
+3. A hálózati biztonsági csoportok engedik a forgalmat
+4. A DNS/egyedi domainek megfelelően vannak konfigurálva
 
 ---
 
 ## Költségek és számlázás
 
 ### K: Mennyibe kerülnek az azd telepítések?
-**V**: A költségek az alábbiaktól függenek:
-- Telepített Azure szolgáltatások
-- Szolgáltatási szintek/SKU-k
-- Regionális árkülönbségek
-- Használati minták
+**V**: A költségek függnek:
+- A telepített Azure szolgáltatásoktól
+- A szolgáltatási szintektől/SKU-któl
+- Regionális árkülönbségektől
+- Használati mintáktól
 
 Használd az [Azure Árkalkulátort](https://azure.microsoft.com/pricing/calculator/) becslésekhez.
 
-### K: Hogyan szabályozhatom az azd telepítések költségeit?
+### K: Hogyan kontrollálhatom az azd telepítések költségeit?
 **V**: 
 1. Használj alacsonyabb szintű SKU-kat fejlesztési környezetekhez
-2. Állíts be Azure költségvetéseket és értesítéseket
-3. Használd az `azd down` parancsot az erőforrások eltávolításához, ha nincs rájuk szükség
-4. Válassz megfelelő régiókat (a költségek helyenként eltérnek)
+2. Állíts be Azure költségkereteket és értesítéseket
+3. Használd az `azd down` parancsot az erőforrások eltávolításához, amikor nincs rájuk szükség
+4. Válassz megfelelő régiókat (a költségek helyenként eltérőek)
 5. Használd az Azure Költségkezelési eszközöket
 
-### K: Vannak ingyenes szintű lehetőségek az azd sablonokhoz?
-**V**: Számos Azure szolgáltatás kínál ingyenes szinteket:
+### K: Vannak ingyenes szintű opciók az azd sablonokhoz?
+**V**: Számos Azure szolgáltatás kínál ingyenes szintet:
 - App Service: Ingyenes szint elérhető
-- Azure Functions: 1M ingyenes végrehajtás/hó
+- Azure Functions: Havonta 1M ingyenes végrehajtás
 - Cosmos DB: Ingyenes szint 400 RU/s kapacitással
-- Application Insights: Első 5GB/hó ingyenes
+- Application Insights: Havonta az első 5GB ingyenes
 
-Konfiguráld a sablonokat, hogy az ingyenes szinteket használják, ahol elérhetők.
+Konfiguráld a sablonokat, hogy az ingyenes szinteket használják, ahol elérhető.
 
-### K: Hogyan becsülhetem meg a költségeket a telepítés előtt?
+### K: Hogyan becsülhetem meg a költségeket telepítés előtt?
 **V**: 
-1. Nézd át a sablon `main.bicep` fájlját, hogy lásd, milyen erőforrások jönnek létre
-2. Használd az Azure Árkalkulátort konkrét SKU-kkal
-3. Telepítsd először egy fejlesztési környezetbe, hogy figyeld a valós költségeket
-4. Használd az Azure Költségkezelést részletes költségelemzéshez
+1. Tekintsd át a sablon `main.bicep` fájlját
+2. **Sablonok**: Készíts sablonokat a [sablon irányelvek](https://github.com/Azure-Samples/awesome-azd) alapján  
+3. **Dokumentáció**: Járulj hozzá a dokumentációhoz itt: [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
+
+### K: Mi az azd ütemterve?  
+**V**: Nézd meg az [hivatalos ütemtervet](https://github.com/Azure/azure-dev/projects) a tervezett funkciók és fejlesztések listájáért.  
+
+### K: Hogyan migrálhatok más telepítési eszközökről az azd-re?  
+**V**:  
+1. Elemezd a jelenlegi telepítési architektúrát  
+2. Készíts egyenértékű Bicep sablonokat  
+3. Konfiguráld az `azure.yaml` fájlt, hogy illeszkedjen a jelenlegi szolgáltatásokhoz  
+4. Teszteld alaposan a fejlesztési környezetben  
+5. Fokozatosan migráld a környezeteket  
 
 ---
 
-## Legjobb gyakorlatok
+## Még mindig vannak kérdéseid?  
 
-### K: Mik a legjobb gyakorlatok az azd projektstruktúrához?
-**V**: 
-1. Tartsd külön az alkalmazáskódot az
-1. Elemezze a jelenlegi telepítési architektúrát  
-2. Készítsen megfelelő Bicep sablonokat  
-3. Konfigurálja az `azure.yaml` fájlt a jelenlegi szolgáltatásoknak megfelelően  
-4. Tesztelje alaposan a fejlesztési környezetben  
-5. Fokozatosan migrálja a környezeteket  
+### **Először keress rá**  
+- Nézd meg az [hivatalos dokumentációt](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- Keress hasonló problémákat a [GitHub issues](https://github.com/Azure/azure-dev/issues) között  
 
----
-
-## Még mindig vannak kérdései?
-
-### **Először keressen**
-- Nézze meg az [hivatalos dokumentációt](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Keressen hasonló problémákat a [GitHub issues](https://github.com/Azure/azure-dev/issues) oldalon  
-
-### **Kérjen segítséget**
+### **Kérj segítséget**  
 - [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Közösségi támogatás  
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Technikai kérdések  
 - [Azure Discord](https://discord.gg/azure) - Valós idejű közösségi chat  
 
-### **Hibák jelentése**
+### **Jelents problémákat**  
 - [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Hibajelentések és funkciókérések  
-- Mellékelje a releváns naplókat, hibaüzeneteket és a reprodukálás lépéseit  
+- Mellékeld a releváns naplókat, hibaüzeneteket és a reprodukálás lépéseit  
 
-### **További információk**
+### **Tudj meg többet**  
 - [Azure Developer CLI dokumentáció](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Azure Architektúra Központ](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)  
 
 ---
@@ -329,10 +332,10 @@ Konfiguráld a sablonokat, hogy az ingyenes szinteket használják, ahol elérhe
 ---
 
 **Navigáció**  
-- **Előző lecke**: [Szójegyzék](glossary.md)  
+- **Előző lecke**: [Szószedet](glossary.md)  
 - **Következő lecke**: [Tanulmányi útmutató](study-guide.md)  
 
 ---
 
-**Felelősségkizárás**:  
-Ezt a dokumentumot az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével fordítottuk le. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt a professzionális, emberi fordítás igénybevétele. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősség kizárása**:  
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:22:04+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T10:03:43+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "sk"
 }
 -->
-# Provisioning Resources - Infrastructure as Code s AZD
+# Provisioning Azure Resources with AZD
+
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 4 - Infrastruktúra ako kód a nasadenie
+- **⬅️ Predchádzajúca**: [Príručka nasadenia](deployment-guide.md)
+- **➡️ Nasledujúca kapitola**: [Kapitola 5: Riešenia AI s viacerými agentmi](../../examples/retail-scenario.md)
+- **🔧 Súvisiace**: [Kapitola 6: Validácia pred nasadením](../pre-deployment/capacity-planning.md)
 
 ## Úvod
 
-Tento komplexný sprievodca pokrýva všetko, čo potrebujete vedieť o vytváraní a správe Azure zdrojov pomocou Azure Developer CLI. Naučte sa implementovať vzory Infrastructure as Code (IaC) od základného vytvárania zdrojov až po pokročilé infraštruktúrne architektúry na podnikovej úrovni pomocou Bicep, ARM šablón, Terraformu a Pulumi.
+Tento komplexný sprievodca pokrýva všetko, čo potrebujete vedieť o vytváraní a správe Azure zdrojov pomocou Azure Developer CLI. Naučíte sa implementovať vzory Infrastruktúry ako kód (IaC) od základného vytvárania zdrojov až po pokročilé infraštruktúrne architektúry na podnikovej úrovni pomocou Bicep, ARM šablón, Terraformu a Pulumi.
 
 ## Ciele učenia
 
 Po dokončení tohto sprievodcu budete:
-- Ovládať princípy Infrastructure as Code a vytváranie Azure zdrojov
-- Rozumieť rôznym IaC poskytovateľom podporovaným Azure Developer CLI
+- Ovládať princípy Infrastruktúry ako kód a vytváranie Azure zdrojov
+- Rozumieť rôznym poskytovateľom IaC podporovaným Azure Developer CLI
 - Navrhovať a implementovať Bicep šablóny pre bežné aplikačné architektúry
 - Konfigurovať parametre zdrojov, premenné a nastavenia špecifické pre prostredie
 - Implementovať pokročilé infraštruktúrne vzory vrátane sieťovania a bezpečnosti
@@ -29,13 +36,13 @@ Po dokončení budete schopní:
 - Navrhovať a vytvárať Azure infraštruktúru pomocou Bicep a ARM šablón
 - Konfigurovať komplexné architektúry s viacerými službami a správnymi závislosťami zdrojov
 - Implementovať parametrizované šablóny pre rôzne prostredia a konfigurácie
-- Riešiť problémy s vytváraním infraštruktúry a odstraňovať chyby nasadenia
+- Riešiť problémy pri vytváraní infraštruktúry a odstraňovať chyby nasadenia
 - Aplikovať princípy Azure Well-Architected Framework na návrh infraštruktúry
 - Spravovať aktualizácie infraštruktúry a implementovať stratégie verzovania infraštruktúry
 
 ## Prehľad vytvárania infraštruktúry
 
-Azure Developer CLI podporuje viacerých poskytovateľov Infrastructure as Code (IaC):
+Azure Developer CLI podporuje viacerých poskytovateľov Infrastruktúry ako kód (IaC):
 - **Bicep** (odporúčané) - Doménovo špecifický jazyk Azure
 - **ARM šablóny** - Šablóny Azure Resource Manager založené na JSON
 - **Terraform** - Nástroj pre infraštruktúru naprieč cloudmi
@@ -52,7 +59,7 @@ Azure Account
 ```
 
 ### Bežné Azure služby pre aplikácie
-- **Výpočtové služby**: App Service, Container Apps, Functions, Virtual Machines
+- **Výpočtový výkon**: App Service, Container Apps, Functions, Virtual Machines
 - **Úložisko**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Sieťovanie**: Virtual Network, Application Gateway, CDN
 - **Bezpečnosť**: Key Vault, Application Insights, Log Analytics
@@ -344,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfigurácia Managed Identity
+### Konfigurácia spravovanej identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -372,7 +379,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Sieťovanie a konektivita
 
-### Konfigurácia Virtual Network
+### Konfigurácia virtuálnej siete
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Monitoring a pozorovateľnosť
+## 📊 Monitorovanie a pozorovateľnosť
 
 ### Application Insights
 ```bicep
@@ -859,12 +866,12 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Ďalšie kroky
 
-- [Plánovanie pred nasadením](../pre-deployment/capacity-planning.md) - Overenie dostupnosti zdrojov
+- [Plánovanie pred nasadením](../pre-deployment/capacity-planning.md) - Validácia dostupnosti zdrojov
 - [Bežné problémy](../troubleshooting/common-issues.md) - Riešenie problémov s infraštruktúrou
-- [Sprievodca ladením](../troubleshooting/debugging.md) - Ladenie problémov s vytváraním
+- [Príručka na ladenie](../troubleshooting/debugging.md) - Ladenie problémov pri vytváraní
 - [Výber SKU](../pre-deployment/sku-selection.md) - Výber vhodných úrovní služieb
 
-## Ďalšie zdroje
+## Dodatočné zdroje
 
 - [Dokumentácia Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Šablóny Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
@@ -874,10 +881,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigácia**
-- **Predchádzajúca lekcia**: [Sprievodca nasadením](deployment-guide.md)
+- **Predchádzajúca lekcia**: [Príručka nasadenia](deployment-guide.md)
 - **Nasledujúca lekcia**: [Plánovanie kapacity](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

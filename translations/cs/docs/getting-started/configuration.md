@@ -1,24 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:21:05+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T09:41:44+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "cs"
 }
 -->
 # Průvodce konfigurací
 
-**Předchozí:** [AZD Základy](azd-basics.md) | **Další:** [První projekt](first-project.md)
+**Navigace kapitolou:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 3 - Konfigurace a autentizace
+- **⬅️ Předchozí**: [Váš první projekt](first-project.md)
+- **➡️ Další**: [Průvodce nasazením](../deployment/deployment-guide.md)
+- **🚀 Další kapitola**: [Kapitola 4: Infrastruktura jako kód](../deployment/deployment-guide.md)
 
 ## Úvod
 
-Tento komplexní průvodce pokrývá všechny aspekty konfigurace Azure Developer CLI pro optimální vývojové a nasazovací pracovní postupy. Naučíte se o hierarchii konfigurace, správě prostředí, metodách autentizace a pokročilých vzorcích konfigurace, které umožňují efektivní a bezpečné nasazení na Azure.
+Tento komplexní průvodce pokrývá všechny aspekty konfigurace Azure Developer CLI pro optimální vývojové a nasazovací pracovní postupy. Naučíte se o hierarchii konfigurace, správě prostředí, metodách autentizace a pokročilých vzorcích konfigurace, které umožňují efektivní a bezpečné nasazení v Azure.
 
 ## Cíle učení
 
 Na konci této lekce budete:
-- Mít přehled o hierarchii konfigurace azd a pochopíte, jak jsou nastavení prioritizována
+- Ovládat hierarchii konfigurace azd a rozumět tomu, jak jsou nastavení prioritizována
 - Efektivně konfigurovat globální a projektově specifická nastavení
 - Spravovat více prostředí s různými konfiguracemi
 - Implementovat bezpečné vzorce autentizace a autorizace
@@ -27,7 +32,7 @@ Na konci této lekce budete:
 ## Výsledky učení
 
 Po dokončení této lekce budete schopni:
-- Konfigurovat azd pro optimální pracovní postupy vývoje
+- Konfigurovat azd pro optimální vývojové pracovní postupy
 - Nastavit a spravovat více prostředí pro nasazení
 - Implementovat bezpečné postupy správy konfigurace
 - Řešit problémy související s konfigurací
@@ -40,7 +45,7 @@ Tento komplexní průvodce pokrývá všechny aspekty konfigurace Azure Develope
 azd používá hierarchický systém konfigurace:
 1. **Příznaky příkazového řádku** (nejvyšší priorita)
 2. **Proměnné prostředí**
-3. **Lokální konfigurace projektu** (`.azd/config.json`)
+3. **Místní konfigurace projektu** (`.azd/config.json`)
 4. **Globální uživatelská konfigurace** (`~/.azd/config.json`)
 5. **Výchozí hodnoty** (nejnižší priorita)
 
@@ -274,7 +279,7 @@ LOG_LEVEL=info
 
 ## 🔐 Konfigurace autentizace
 
-### Integrace Azure CLI
+### Integrace s Azure CLI
 ```bash
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
@@ -287,7 +292,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Autentizace pomocí Service Principal
-Pro CI/CD pipelines:
+Pro CI/CD pipeline:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -300,7 +305,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Spravovaná identita
-Pro prostředí hostovaná na Azure:
+Pro prostředí hostovaná v Azure:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -426,7 +431,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Testovací prostředí
+### Staging prostředí
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -482,7 +487,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Nejlepší postupy
+## 🎓 Osvědčené postupy
 
 ### 1. Používejte proměnné prostředí
 ```yaml
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Zvažte verzování konfigurace
+### 3. Zohledněte verzování
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -537,22 +542,26 @@ Dokumentujte svou konfiguraci v `CONFIG.md`:
 
 ## Další kroky
 
-- [Váš první projekt](first-project.md) - Použití konfigurace v praxi
-- [Průvodce nasazením](../deployment/deployment-guide.md) - Použití konfigurace pro nasazení
-- [Zajištění zdrojů](../deployment/provisioning.md) - Konfigurace připravené pro produkci
+- [Váš první projekt](first-project.md) - Aplikujte konfiguraci v praxi
+- [Průvodce nasazením](../deployment/deployment-guide.md) - Použijte konfiguraci pro nasazení
+- [Zajištění prostředků](../deployment/provisioning.md) - Konfigurace připravené pro produkci
 
 ## Odkazy
 
-- [Referenční příručka konfigurace azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Referenční příručka azd konfigurace](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schéma azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Proměnné prostředí](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Předchozí:** [AZD Základy](azd-basics.md) | **Další:** [První projekt](first-project.md)
+**Navigace kapitolou:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 3 - Konfigurace a autentizace
+- **⬅️ Předchozí**: [Váš první projekt](first-project.md)
+- **➡️ Další kapitola**: [Kapitola 4: Infrastruktura jako kód](../deployment/deployment-guide.md)
 - **Další lekce**: [Váš první projekt](first-project.md)
 
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:26:44+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T09:43:33+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "cs"
 }
 -->
 # Běžné problémy a jejich řešení
 
+**Navigace kapitol:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
+- **⬅️ Předchozí kapitola**: [Kapitola 6: Kontroly před nasazením](../pre-deployment/preflight-checks.md)
+- **➡️ Další**: [Průvodce laděním](debugging.md)
+- **🚀 Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../ai-foundry/production-ai-practices.md)
+
 ## Úvod
 
-Tento komplexní průvodce řešením problémů pokrývá nejčastější potíže při používání Azure Developer CLI. Naučte se diagnostikovat, řešit a odstraňovat běžné problémy s autentizací, nasazením, zajišťováním infrastruktury a konfigurací aplikací. Každý problém obsahuje podrobné příznaky, příčiny a postupy krok za krokem pro jeho vyřešení.
+Tento komplexní průvodce řešením problémů pokrývá nejčastěji se vyskytující problémy při používání Azure Developer CLI. Naučíte se diagnostikovat, řešit a odstraňovat běžné problémy s autentizací, nasazením, zajišťováním infrastruktury a konfigurací aplikací. Každý problém obsahuje podrobné příznaky, příčiny a postupy krok za krokem pro jeho řešení.
 
 ## Cíle učení
 
@@ -21,17 +28,17 @@ Po dokončení tohoto průvodce budete:
 - Řešit chyby při nasazení, problémy se zajišťováním infrastruktury a konfigurací
 - Implementovat proaktivní strategie monitorování a ladění
 - Aplikovat systematické metodiky řešení složitých problémů
-- Nastavit správné logování a monitorování, aby se předešlo budoucím problémům
+- Konfigurovat správné logování a monitorování, aby se předešlo budoucím problémům
 
 ## Výsledky učení
 
 Po dokončení budete schopni:
 - Diagnostikovat problémy s Azure Developer CLI pomocí vestavěných diagnostických nástrojů
 - Samostatně řešit problémy s autentizací, předplatným a oprávněními
-- Efektivně odstraňovat chyby při nasazení a problémy se zajišťováním infrastruktury
+- Efektivně řešit chyby při nasazení a problémy se zajišťováním infrastruktury
 - Ladit problémy s konfigurací aplikací a problémy specifické pro prostředí
 - Implementovat monitorování a upozornění pro proaktivní identifikaci potenciálních problémů
-- Aplikovat osvědčené postupy pro logování, ladění a pracovní postupy při řešení problémů
+- Aplikovat osvědčené postupy pro logování, ladění a pracovní postupy řešení problémů
 
 ## Rychlá diagnostika
 
@@ -59,7 +66,7 @@ azd <command> --debug
 
 ### Problém: "Nepodařilo se získat přístupový token"
 **Příznaky:**
-- `azd up` selhává s chybami autentizace
+- `azd up` selže s chybami autentizace
 - Příkazy vracejí "neautorizováno" nebo "přístup odepřen"
 
 **Řešení:**
@@ -82,7 +89,7 @@ azd config set defaults.subscription "your-subscription-id"
 
 ### Problém: "Nedostatečná oprávnění" během nasazení
 **Příznaky:**
-- Nasazení selhává s chybami oprávnění
+- Nasazení selže s chybami oprávnění
 - Nelze vytvořit určité Azure zdroje
 
 **Řešení:**
@@ -115,7 +122,7 @@ az account clear
 ### Problém: Konflikty názvů zdrojů
 **Příznaky:**
 - Chyby "Název zdroje již existuje"
-- Nasazení selhává během vytváření zdrojů
+- Nasazení selže během vytváření zdrojů
 
 **Řešení:**
 ```bash
@@ -131,10 +138,10 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### Problém: Nedostupnost lokace/regionu
+### Problém: Nedostupná lokalita/region
 **Příznaky:**
-- "Lokace 'xyz' není dostupná pro daný typ zdroje"
-- Určité SKU nejsou dostupné ve vybraném regionu
+- "Lokalita 'xyz' není dostupná pro typ zdroje"
+- Určité SKUs nejsou dostupné ve vybraném regionu
 
 **Řešení:**
 ```bash
@@ -152,8 +159,8 @@ azd env set AZURE_LOCATION eastus2
 
 ### Problém: Překročení kvóty
 **Příznaky:**
-- "Překročena kvóta pro daný typ zdroje"
-- "Byl dosažen maximální počet zdrojů"
+- "Kvóta překročena pro typ zdroje"
+- "Maximální počet zdrojů dosažen"
 
 **Řešení:**
 ```bash
@@ -197,9 +204,9 @@ azd provision --preview
 
 ## 🚀 Selhání nasazení
 
-### Problém: Chyby při sestavování
+### Problém: Selhání sestavení
 **Příznaky:**
-- Aplikaci se nepodaří sestavit během nasazení
+- Aplikace se nepodaří sestavit během nasazení
 - Chyby při instalaci balíčků
 
 **Řešení:**
@@ -228,8 +235,8 @@ docker run --rm test-image
 
 ### Problém: Selhání nasazení kontejnerů
 **Příznaky:**
-- Kontejnerové aplikace se nespustí
-- Chyby při stahování image
+- Kontejnerové aplikace se nepodaří spustit
+- Chyby při stahování obrazu
 
 **Řešení:**
 ```bash
@@ -270,10 +277,10 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 Problémy s konfigurací
 
-### Problém: Nefunkční proměnné prostředí
+### Problém: Prostředí proměnné nefungují
 **Příznaky:**
-- Aplikace nemůže číst konfigurační hodnoty
-- Proměnné prostředí se zdají prázdné
+- Aplikace nemůže číst hodnoty konfigurace
+- Prostředí proměnné se zdají prázdné
 
 **Řešení:**
 ```bash
@@ -294,7 +301,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 ### Problém: Problémy s SSL/TLS certifikáty
 **Příznaky:**
 - HTTPS nefunguje
-- Chyby při validaci certifikátů
+- Chyby validace certifikátu
 
 **Řešení:**
 ```bash
@@ -311,7 +318,7 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 ### Problém: Problémy s konfigurací CORS
 **Příznaky:**
 - Frontend nemůže volat API
-- Blokování požadavků mezi doménami
+- Blokování požadavků z jiného původu
 
 **Řešení:**
 ```bash
@@ -571,7 +578,7 @@ az security assessment list --resource-group myrg
 - [Průvodce laděním](debugging.md) - Pokročilé techniky ladění
 - [Zajišťování zdrojů](../deployment/provisioning.md) - Řešení problémů s infrastrukturou
 - [Plánování kapacity](../pre-deployment/capacity-planning.md) - Pokyny pro plánování zdrojů
-- [Výběr SKU](../pre-deployment/sku-selection.md) - Doporučení pro výběr úrovní služeb
+- [Výběr SKU](../pre-deployment/sku-selection.md) - Doporučení pro úrovně služeb
 
 ---
 
@@ -586,4 +593,4 @@ az security assessment list --resource-group myrg
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

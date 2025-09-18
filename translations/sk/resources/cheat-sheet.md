@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-10T07:42:33+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T10:12:24+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "sk"
 }
 -->
 # Príručka príkazov - Základné príkazy AZD
+
+**Rýchly prehľad všetkých kapitol**
+- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../README.md)
+- **📖 Rýchly štart**: [Kapitola 1: Základy a rýchly štart](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI príkazy**: [Kapitola 2: Vývoj orientovaný na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Pokročilé**: [Kapitola 4: Infrastruktúra ako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Úvod
 
@@ -15,13 +21,13 @@ Táto komplexná príručka poskytuje rýchly prehľad najčastejšie používan
 
 ## Ciele učenia
 
-Používaním tejto príručky budete:
-- Mať okamžitý prístup k základným príkazom a syntaxe Azure Developer CLI
-- Rozumieť organizácii príkazov podľa funkčných kategórií a prípadov použitia
-- Odkazovať na praktické príklady pre bežné scenáre vývoja a nasadenia
-- Pristupovať k príkazom na riešenie problémov pre rýchle odstránenie chýb
-- Efektívne vyhľadávať pokročilé možnosti konfigurácie a prispôsobenia
-- Nájsť príkazy na správu prostredí a pracovné postupy pre viacero prostredí
+Používaním tejto príručky:
+- Získate okamžitý prístup k základným príkazom a syntaxe Azure Developer CLI
+- Pochopíte organizáciu príkazov podľa funkčných kategórií a prípadov použitia
+- Nájdete praktické príklady pre bežné scenáre vývoja a nasadenia
+- Získate prístup k príkazom na riešenie problémov pre rýchle odstránenie chýb
+- Efektívne vyhľadáte možnosti pokročilej konfigurácie a prispôsobenia
+- Nájdete príkazy na správu prostredí a pracovné postupy pre viacero prostredí
 
 ## Výsledky učenia
 
@@ -33,7 +39,7 @@ Pravidelným používaním tejto príručky budete schopní:
 - Systematicky riešiť problémy s nasadením pomocou sekvencií príkazov
 - Optimalizovať pracovné postupy efektívnym využívaním skratiek a možností azd
 
-## Základné príkazy na začiatok
+## Príkazy na začiatok
 
 ### Autentifikácia
 ```bash
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Build a balíčkovanie
+### Build a balenie
 ```bash
 # Build applications
 azd package
@@ -492,7 +498,7 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Tipy od profesionálov
+## 💡 Tipy pre profesionálov
 
 ### Alias pre rýchlejší pracovný postup
 ```bash
@@ -563,4 +569,4 @@ azd template show <template-name> --docs
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za záväzný zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9736db53ea878e07688670ebcc8906bc",
-  "translation_date": "2025-09-12T22:23:50+00:00",
+  "original_hash": "73f4ab6147d5fac5f8c5ad72742e8e1d",
+  "translation_date": "2025-09-18T09:56:33+00:00",
   "source_file": "changelog.md",
   "language_code": "sk"
 }
@@ -11,201 +11,143 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tento záznam zmien dokumentuje všetky významné zmeny, aktualizácie a vylepšenia v repozitári AZD pre začiatočníkov. Dodržiavame princípy semantického verzovania a udržiavame tento záznam, aby sme používateľom pomohli pochopiť, čo sa zmenilo medzi jednotlivými verziami.
+Tento zoznam zmien dokumentuje všetky významné zmeny, aktualizácie a vylepšenia v repozitári AZD pre začiatočníkov. Dodržiavame princípy semantického verzovania a tento záznam udržiavame, aby sme používateľom pomohli pochopiť, čo sa zmenilo medzi jednotlivými verziami.
 
 ## Ciele učenia
 
-Preskúmaním tohto záznamu zmien:
+Preskúmaním tohto zoznamu zmien:
 - Zostanete informovaní o nových funkciách a pridanom obsahu
 - Pochopíte vylepšenia existujúcej dokumentácie
-- Sledujete opravy chýb a zabezpečíte presnosť
-- Sledujete vývoj vzdelávacích materiálov v priebehu času
+- Budete sledovať opravy chýb a zabezpečíte presnosť
+- Budete sledovať vývoj vzdelávacích materiálov v priebehu času
 
 ## Výsledky učenia
 
-Po preskúmaní záznamov zmien budete schopní:
-- Identifikovať nový obsah a dostupné zdroje na učenie
+Po preskúmaní záznamov o zmenách budete schopní:
+- Identifikovať nový obsah a zdroje dostupné na učenie
 - Pochopiť, ktoré sekcie boli aktualizované alebo vylepšené
-- Naplánovať si svoju cestu učenia na základe najaktuálnejších materiálov
+- Naplánovať si vzdelávaciu cestu na základe najaktuálnejších materiálov
 - Poskytnúť spätnú väzbu a návrhy na budúce vylepšenia
 
 ## História verzií
 
-### [v3.0.0] - 2025-09-12
+### [v3.2.0] - 2025-09-17
 
-#### Hlavné zmeny - Zameranie na AI vývojárov a integrácia Azure AI Foundry
-**Táto verzia transformuje repozitár na komplexný vzdelávací zdroj zameraný na AI s integráciou Azure AI Foundry.**
+#### Hlavná reštrukturalizácia navigácie a systém učenia založený na kapitolách
+**Táto verzia zavádza komplexnú štruktúru učenia založenú na kapitolách s vylepšenou navigáciou v celom repozitári.**
 
 #### Pridané
-- **🤖 AI-prvá vzdelávacia cesta**: Kompletná reštrukturalizácia prioritizujúca AI vývojárov a inžinierov
-- **Príručka integrácie Azure AI Foundry**: Komplexná dokumentácia na pripojenie AZD k službám Azure AI Foundry
-- **Vzory nasadenia AI modelov**: Podrobný sprievodca pokrývajúci výber modelov, konfiguráciu a stratégie nasadenia do produkcie
-- **AI Workshop Lab**: 2-3 hodinový praktický workshop na konverziu AI aplikácií na riešenia nasaditeľné pomocou AZD
-- **Najlepšie praktiky pre produkčné AI**: Vzory pripravené pre podniky na škálovanie, monitorovanie a zabezpečenie AI pracovných záťaží
-- **Príručka riešenia problémov špecifických pre AI**: Komplexné riešenie problémov pre Azure OpenAI, Cognitive Services a nasadenie AI
-- **Galéria šablón AI**: Vybraná kolekcia šablón Azure AI Foundry s hodnotením zložitosti
-- **Materiály na workshop**: Kompletná štruktúra workshopu s praktickými cvičeniami a referenčnými materiálmi
+- **📚 Systém učenia založený na kapitolách**: Reorganizácia celého kurzu do 8 progresívnych kapitol učenia
+  - Kapitola 1: Základy a rýchly štart (⭐ - 30-45 minút)
+  - Kapitola 2: Vývoj orientovaný na AI (⭐⭐ - 1-2 hodiny)
+  - Kapitola 3: Konfigurácia a autentifikácia (⭐⭐ - 45-60 minút)
+  - Kapitola 4: Infrastruktúra ako kód a nasadenie (⭐⭐⭐ - 1-1,5 hodiny)
+  - Kapitola 5: Riešenia s viacerými AI agentmi (⭐⭐⭐⭐ - 2-3 hodiny)
+  - Kapitola 6: Validácia a plánovanie pred nasadením (⭐⭐ - 1 hodina)
+  - Kapitola 7: Riešenie problémov a ladenie (⭐⭐ - 1-1,5 hodiny)
+  - Kapitola 8: Produkčné a podnikové vzory (⭐⭐⭐⭐ - 2-3 hodiny)
+- **📚 Komplexný navigačný systém**: Konzistentné navigačné hlavičky a päty vo všetkej dokumentácii
+- **🎯 Sledovanie pokroku**: Kontrolný zoznam dokončenia kurzu a systém overovania učenia
+- **🗺️ Usmernenie vzdelávacej cesty**: Jasné vstupné body pre rôzne úrovne skúseností a ciele
+- **🔗 Navigácia s krížovými odkazmi**: Jasne prepojené súvisiace kapitoly a predpoklady
 
 #### Vylepšené
-- **Štruktúra README**: Zameraná na AI vývojárov s 45% údajmi o záujme komunity z Discordu Azure AI Foundry
-- **Vzdelávacie cesty**: Dedikovaná cesta pre AI vývojárov spolu s tradičnými cestami pre študentov a DevOps inžinierov
-- **Odporúčania šablón**: Vybrané AI šablóny vrátane azure-search-openai-demo, contoso-chat a openai-chat-app-quickstart
-- **Integrácia komunity**: Rozšírená podpora komunity na Discorde s kanálmi a diskusiami špecifickými pre AI
-
-#### Zameranie na bezpečnosť a produkciu
-- **Vzory spravovaných identít**: Konfigurácie autentifikácie a zabezpečenia špecifické pre AI
-- **Optimalizácia nákladov**: Sledovanie používania tokenov a kontrola rozpočtu pre AI pracovné záťaže
-- **Nasadenie vo viacerých regiónoch**: Stratégie pre globálne nasadenie AI aplikácií
-- **Monitorovanie výkonu**: Metriky špecifické pre AI a integrácia Application Insights
-
-#### Kvalita dokumentácie
-- **Lineárna štruktúra kurzu**: Logický postup od začiatočníka po pokročilé vzory nasadenia AI
-- **Overené URL adresy**: Všetky externé odkazy na repozitár overené a prístupné
-- **Kompletný referenčný materiál**: Všetky interné odkazy na dokumentáciu overené a funkčné
-- **Pripravené na produkciu**: Vzory nasadenia pre podniky s príkladmi z reálneho sveta
-
-### [v2.0.0] - 2025-09-09
-
-#### Hlavné zmeny - Reštrukturalizácia repozitára a profesionálne vylepšenie
-**Táto verzia predstavuje významnú prestavbu štruktúry repozitára a prezentácie obsahu.**
-
-#### Pridané
-- **Štruktúrovaný vzdelávací rámec**: Všetky stránky dokumentácie teraz obsahujú sekcie Úvod, Ciele učenia a Výsledky učenia
-- **Navigačný systém**: Pridané odkazy na predchádzajúce/nasledujúce lekcie v celej dokumentácii pre vedený postup učenia
-- **Študijný sprievodca**: Komplexný study-guide.md s cieľmi učenia, praktickými cvičeniami a hodnotiacimi materiálmi
-- **Profesionálna prezentácia**: Odstránené všetky emoji ikony pre lepšiu prístupnosť a profesionálny vzhľad
-- **Vylepšená štruktúra obsahu**: Zlepšená organizácia a tok vzdelávacích materiálov
+- **Štruktúra README**: Transformovaná na štruktúrovanú vzdelávaciu platformu s organizáciou podľa kapitol
+- **Navigácia v dokumentácii**: Každá stránka teraz obsahuje kontext kapitoly a usmernenie pre postup
+- **Organizácia šablón**: Príklady a šablóny priradené k príslušným kapitolám učenia
+- **Integrácia zdrojov**: Pomôcky, FAQ a študijné príručky prepojené s relevantnými kapitolami
+- **Integrácia workshopov**: Praktické laboratóriá priradené k viacerým cieľom učenia kapitol
 
 #### Zmenené
-- **Formát dokumentácie**: Štandardizovaná dokumentácia s konzistentnou štruktúrou zameranou na učenie
-- **Tok navigácie**: Implementovaný logický postup cez všetky vzdelávacie materiály
-- **Prezentácia obsahu**: Odstránené dekoratívne prvky v prospech jasného, profesionálneho formátovania
-- **Štruktúra odkazov**: Aktualizované všetky interné odkazy na podporu nového navigačného systému
+- **Postup učenia**: Presun od lineárnej dokumentácie k flexibilnému učeniu založenému na kapitolách
+- **Umiestnenie konfigurácie**: Presunutie sprievodcu konfiguráciou na kapitolu 3 pre lepší tok učenia
+- **Integrácia AI obsahu**: Lepšia integrácia obsahu špecifického pre AI v celom vzdelávacom procese
+- **Produkčný obsah**: Pokročilé vzory konsolidované v kapitole 8 pre podnikových používateľov
+
+#### Zlepšené
+- **Používateľská skúsenosť**: Jasné navigačné stopy a indikátory postupu kapitol
+- **Prístupnosť**: Konzistentné navigačné vzory pre jednoduchšie prechádzanie kurzom
+- **Profesionálna prezentácia**: Štruktúra kurzu v štýle univerzity vhodná pre akademické a firemné školenia
+- **Efektivita učenia**: Skrátený čas na nájdenie relevantného obsahu vďaka lepšej organizácii
+
+#### Technická implementácia
+- **Navigačné hlavičky**: Štandardizovaná navigácia kapitol vo viac ako 40 dokumentačných súboroch
+- **Navigácia v päte**: Konzistentné usmernenie pre postup a indikátory dokončenia kapitol
+- **Krížové prepojenia**: Komplexný interný prepojený systém spájajúci súvisiace koncepty
+- **Mapovanie kapitol**: Šablóny a príklady jasne priradené k cieľom učenia
+
+#### Vylepšenie študijnej príručky
+- **📚 Komplexné ciele učenia**: Prepracovaná študijná príručka na zosúladenie so systémom 8 kapitol
+- **🎯 Hodnotenie podľa kapitol**: Každá kapitola obsahuje špecifické ciele učenia a praktické cvičenia
+- **📋 Sledovanie pokroku**: Týždenný plán učenia s merateľnými výsledkami a kontrolnými zoznamami
+- **❓ Otázky na hodnotenie**: Otázky na overenie znalostí pre každú kapitolu s profesionálnymi výsledkami
+- **🛠️ Praktické cvičenia**: Praktické aktivity so skutočnými scenármi nasadenia a riešenia problémov
+- **📊 Postup zručností**: Jasný pokrok od základných konceptov k podnikovým vzorom s dôrazom na kariérny rozvoj
+- **🎓 Certifikačný rámec**: Výsledky profesionálneho rozvoja a systém uznania v komunite
+- **⏱️ Riadenie časového plánu**: Štruktúrovaný 10-týždňový plán učenia s overením míľnikov
+
+### [v3.1.0] - 2025-09-17
+
+#### Vylepšené riešenia s viacerými AI agentmi
+**Táto verzia zlepšuje maloobchodné riešenie s viacerými agentmi s lepším pomenovaním agentov a vylepšenou dokumentáciou.**
+
+#### Zmenené
+- **Terminológia viacerých agentov**: Nahradenie "Cora agent" za "Customer agent" v celom maloobchodnom riešení s viacerými agentmi pre jasnejšie pochopenie
+- **Architektúra agentov**: Aktualizácia všetkej dokumentácie, ARM šablón a príkladov kódu na používanie konzistentného pomenovania "Customer agent"
+- **Príklady konfigurácie**: Modernizované vzory konfigurácie agentov s aktualizovanými názvami
+- **Konzistentnosť dokumentácie**: Zabezpečenie, že všetky odkazy používajú profesionálne a popisné názvy agentov
 
 #### Vylepšené
-- **Prístupnosť**: Odstránené závislosti na emoji pre lepšiu kompatibilitu s čítačkami obrazovky
-- **Profesionálny vzhľad**: Čistá, akademická prezentácia vhodná pre podnikové vzdelávanie
-- **Skúsenosť učenia**: Štruktúrovaný prístup s jasnými cieľmi a výsledkami pre každú lekciu
-- **Organizácia obsahu**: Lepší logický tok a spojenie medzi súvisiacimi témami
+- **Balík ARM šablón**: Aktualizované retail-multiagent-arm-template s odkazmi na Customer agent
+- **Diagramy architektúry**: Obnovené diagramy Mermaid s aktualizovaným pomenovaním agentov
+- **Príklady kódu**: Python triedy a implementačné príklady teraz používajú pomenovanie CustomerAgent
+- **Premenné prostredia**: Aktualizované všetky skripty nasadenia na používanie konvencií CUSTOMER_AGENT_NAME
 
-### [v1.0.0] - 2025-09-09
+#### Zlepšené
+- **Skúsenosť vývojára**: Jasnejšie úlohy a zodpovednosti agentov v dokumentácii
+- **Pripravenosť na produkciu**: Lepšie zosúladenie s podnikateľskými konvenciami pomenovania
+- **Vzdelávacie materiály**: Intuitívnejšie pomenovanie agentov na vzdelávacie účely
+- **Použiteľnosť šablón**: Zjednodušené pochopenie funkcií agentov a vzorov nasadenia
 
-#### Počiatočné vydanie - Komplexný vzdelávací repozitár AZD
+#### Technické detaily
+- Aktualizované diagramy architektúry Mermaid s odkazmi na CustomerAgent
+- Nahradené názvy tried CoraAgent za CustomerAgent v Python príkladoch
+- Upravené konfigurácie ARM šablón JSON na používanie typu agenta "customer"
+- Aktualizované premenné prostredia z CORA_AGENT_* na CUSTOMER_AGENT_* vzory
+- Obnovené všetky príkazy nasadenia a konfigurácie kontajnerov
 
-#### Pridané
-- **Základná štruktúra dokumentácie**
-  - Kompletná séria sprievodcov pre začiatočníkov
-  - Komplexná dokumentácia nasadenia a zriaďovania
-  - Podrobné zdroje na riešenie problémov a sprievodcov ladením
-  - Nástroje a postupy na validáciu pred nasadením
-
-- **Modul pre začiatočníkov**
-  - Základy AZD: Základné koncepty a terminológia
-  - Sprievodca inštaláciou: Pokyny na nastavenie pre konkrétne platformy
-  - Sprievodca konfiguráciou: Nastavenie prostredia a autentifikácia
-  - Prvý projekt: Praktické učenie krok za krokom
-
-- **Modul nasadenia a zriaďovania**
-  - Sprievodca nasadením: Kompletná dokumentácia pracovného postupu
-  - Sprievodca zriaďovaním: Infrastruktúra ako kód pomocou Bicep
-  - Najlepšie praktiky pre produkčné nasadenia
-  - Vzory architektúry pre viac služieb
-
-- **Modul validácie pred nasadením**
-  - Plánovanie kapacity: Validácia dostupnosti zdrojov Azure
-  - Výber SKU: Komplexné pokyny pre výber úrovne služieb
-  - Kontroly pred nasadením: Automatizované validačné skripty (PowerShell a Bash)
-  - Nástroje na odhad nákladov a plánovanie rozpočtu
-
-- **Modul riešenia problémov**
-  - Bežné problémy: Často sa vyskytujúce problémy a ich riešenia
-  - Sprievodca ladením: Systematické metodiky riešenia problémov
-  - Pokročilé diagnostické techniky a nástroje
-  - Monitorovanie výkonu a optimalizácia
-
-- **Zdroje a referencie**
-  - Cheat Sheet príkazov: Rýchly referenčný materiál pre základné príkazy
-  - Slovník pojmov: Komplexné definície terminológie a skratiek
-  - FAQ: Podrobné odpovede na bežné otázky
-  - Odkazy na externé zdroje a spojenia s komunitou
-
-- **Príklady a šablóny**
-  - Príklad jednoduchej webovej aplikácie
-  - Šablóna nasadenia statickej webovej stránky
-  - Konfigurácia aplikácie v kontajneri
-  - Vzory integrácie databázy
-  - Príklady architektúry mikroslužieb
-  - Implementácie serverless funkcií
-
-#### Funkcie
-- **Podpora viacerých platforiem**: Sprievodcovia inštaláciou a konfiguráciou pre Windows, macOS a Linux
-- **Rôzne úrovne zručností**: Obsah navrhnutý pre študentov až po profesionálnych vývojárov
-- **Praktické zameranie**: Praktické príklady a scenáre z reálneho sveta
-- **Komplexné pokrytie**: Od základných konceptov po pokročilé podnikové vzory
-- **Zabezpečenie na prvom mieste**: Najlepšie praktiky zabezpečenia integrované v celom obsahu
-- **Optimalizácia nákladov**: Pokyny na nákladovo efektívne nasadenia a správu zdrojov
-
-#### Kvalita dokumentácie
-- **Podrobné príklady kódu**: Praktické, testované ukážky kódu
-- **Pokyny krok za krokom**: Jasné, akčné pokyny
-- **Komplexné riešenie chýb**: Riešenie bežných problémov
-- **Integrácia najlepších praktík**: Priemyselné štandardy a odporúčania
-- **Kompatibilita verzií**: Aktualizované podľa najnovších služieb Azure a funkcií azd
-
-## Plánované budúce vylepšenia
-
-### Verzia 3.1.0 (Plánovaná)
-#### Rozšírenie AI platformy
-- **Podpora viacerých modelov**: Vzory integrácie pre Hugging Face, Azure Machine Learning a vlastné modely
-- **Rámce AI agentov**: Šablóny pre nasadenia LangChain, Semantic Kernel a AutoGen
-- **Pokročilé vzory RAG**: Možnosti vektorových databáz mimo Azure AI Search (Pinecone, Weaviate, atď.)
-- **Pozorovateľnosť AI**: Rozšírené monitorovanie výkonu modelov, používania tokenov a kvality odpovedí
-
-#### Skúsenosť vývojára
-- **Rozšírenie VS Code**: Integrované prostredie AZD + AI Foundry
-- **Integrácia GitHub Copilot**: AI-asistované generovanie šablón AZD
-- **Interaktívne tutoriály**: Praktické cvičenia s automatizovanou validáciou pre AI scenáre
-- **Video obsah**: Doplnkové video tutoriály pre vizuálnych študentov zamerané na nasadenia AI
-
-### Verzia 4.0.0 (Plánovaná)
-#### Podnikové vzory AI
-- **Rámec správy**: Správa modelov AI, súlad a auditné stopy
-- **AI pre viacerých nájomcov**: Vzory na poskytovanie služieb AI viacerým zákazníkom s izolovanými službami
-- **Nasadenie AI na okraji siete**: Integrácia s Azure IoT Edge a kontajnerovými inštanciami
-- **Hybridné cloudové AI**: Vzory nasadenia AI pracovných záťaží v multi-cloud a hybridnom prostredí
-
-#### Pokročilé funkcie
-- **Automatizácia AI pipeline**: Integrácia MLOps s pipeline Azure Machine Learning
-- **Pokročilé zabezpečenie**: Vzory nulovej dôvery, privátne koncové body a pokročilá ochrana pred hrozbami
-- **Optimalizácia výkonu**: Pokročilé stratégie ladenia a škálovania pre aplikácie AI s vysokou priepustnosťou
-- **Globálna distribúcia**: Vzory doručovania obsahu a vyrovnávania záťaže na okraji siete pre AI aplikácie
+...
+- **Automatizácia AI Pipeline**: Integrácia MLOps s Azure Machine Learning pipeline
+- **Pokročilá bezpečnosť**: Vzory nulovej dôvery, privátne koncové body a pokročilá ochrana pred hrozbami
+- **Optimalizácia výkonu**: Pokročilé stratégie ladenia a škálovania pre AI aplikácie s vysokou priepustnosťou
+- **Globálna distribúcia**: Vzory doručovania obsahu a vyrovnávacieho ukladania na okraji pre AI aplikácie
 
 ### Verzia 3.0.0 (Plánovaná) - Nahradená aktuálnym vydaním
-#### Navrhované doplnky - Teraz implementované vo verzii v3.0.0
+#### Navrhované doplnky - Teraz implementované vo verzii 3.0.0
 - ✅ **Obsah zameraný na AI**: Komplexná integrácia Azure AI Foundry (Dokončené)
-- ✅ **Interaktívne tutoriály**: Praktický workshop AI (Dokončené)
-- ✅ **Pokročilý bezpečnostný modul**: Vzory zabezpečenia špecifické pre AI (Dokončené)
+- ✅ **Interaktívne tutoriály**: Praktické laboratórium AI workshopu (Dokončené)
+- ✅ **Modul pokročilej bezpečnosti**: Bezpečnostné vzory špecifické pre AI (Dokončené)
 - ✅ **Optimalizácia výkonu**: Stratégie ladenia pracovných záťaží AI (Dokončené)
 
-### Verzia 2.1.0 (Plánovaná) - Čiastočne implementovaná vo verzii v3.0.0
+### Verzia 2.1.0 (Plánovaná) - Čiastočne implementovaná vo verzii 3.0.0
 #### Menšie vylepšenia - Niektoré dokončené v aktuálnom vydaní
 - ✅ **Ďalšie príklady**: Scenáre nasadenia zamerané na AI (Dokončené)
 - ✅ **Rozšírené FAQ**: Otázky a riešenie problémov špecifické pre AI (Dokončené)
-- **Integrácia nástrojov**: Rozšírené pokyny na integráciu IDE a editorov
+- **Integrácia nástrojov**: Vylepšené návody na integráciu IDE a editorov
 - ✅ **Rozšírené monitorovanie**: Vzory monitorovania a upozornení špecifické pre AI (Dokončené)
 
-#### Stále plánované na budúce vydanie
-- **Dokumentácia priateľská k mobilným zariadeniam**: Responzívny dizajn pre mobilné učenie
+#### Stále plánované pre budúce vydanie
+- **Dokumentácia prispôsobená mobilným zariadeniam**: Responzívny dizajn pre mobilné vzdelávanie
 - **Offline prístup**: Balíčky dokumentácie na stiahnutie
-- **Rozšírená integrácia IDE**: Rozšírenie VS Code pre pracovné postupy AZD + AI
-- **Dashboard komunity**: Metriky komunity v reálnom čase a sledovanie príspevkov
+- **Vylepšená integrácia IDE**: Rozšírenie VS Code pre AZD + AI pracovné postupy
+- **Komunitný dashboard**: Sledovanie metriky komunity v reálnom čase a príspevkov
 
-## Prispievanie do záznamu zmien
+## Prispievanie do changelogu
 
-### Hlásenie zmien
-Pri prispievaní do tohto repozitára, prosím, zabezpečte, aby záznamy zmien obsahovali:
+### Nahlasovanie zmien
+Pri prispievaní do tohto repozitára sa uistite, že záznamy v changelogu obsahujú:
 
-1. **Číslo verzie**: Podľa semantického verzovania (hlavná.menšia.oprava)
+1. **Číslo verzie**: Podľa semantického verzovania (major.minor.patch)
 2. **Dátum**: Dátum vydania alebo aktualizácie vo formáte YYYY-MM-DD
 3. **Kategória**: Pridané, Zmenené, Zastaralé, Odstránené, Opravené, Bezpečnosť
 4. **Jasný popis**: Stručný popis toho, čo sa zmenilo
@@ -221,7 +163,7 @@ Pri prispievaní do tohto repozitára, prosím, zabezpečte, aby záznamy zmien 
 #### Zmenené
 - Úpravy existujúcej funkcionality alebo dokumentácie
 - Aktualizácie na zlepšenie jasnosti alebo presnosti
-- Reštrukturalizácia obsahu alebo organizácie
+- Preorganizovanie obsahu alebo štruktúry
 
 #### Zastaralé
 - Funkcie alebo prístupy, ktoré sa postupne vyraďujú
@@ -235,25 +177,83 @@ Pri prispievaní do tohto repozitára, prosím, zabezpečte, aby záznamy zmien 
 
 #### Opravené
 - Opravy chýb v dokumentácii alebo kóde
-- Riešenie hlásených problémov alebo chýb
+- Riešenie nahlásených problémov alebo chýb
 - Zlepšenia presnosti alebo funkcionality
 
 #### Bezpečnosť
 - Vylepšenia alebo opravy súvisiace s bezpečnosťou
-- Aktualizácie najlepších praktík zabezpečenia
+- Aktualizácie bezpečnostných najlepších praktík
 - Riešenie bezpečnostných zraniteľností
 
+### Pokyny pre semantické verzovanie
 
+#### Hlavná verzia (X.0.0)
+- Zmeny, ktoré vyžadujú zásah používateľa
+- Významné preorganizovanie obsahu alebo štruktúry
+- Zmeny, ktoré menia základný prístup alebo metodológiu
+
+#### Menšia verzia (X.Y.0)
+- Nové funkcie alebo doplnky obsahu
+- Vylepšenia, ktoré zachovávajú spätnú kompatibilitu
+- Dodatočné príklady, nástroje alebo zdroje
+
+#### Opravná verzia (X.Y.Z)
+- Opravy chýb a korekcie
+- Menšie vylepšenia existujúceho obsahu
+- Ujasnenia a malé vylepšenia
+
+## Spätná väzba a návrhy od komunity
+
+Aktívne podporujeme spätnú väzbu od komunity na zlepšenie tohto vzdelávacieho zdroja:
+
+### Ako poskytnúť spätnú väzbu
+- **GitHub Issues**: Nahláste problémy alebo navrhnite vylepšenia (problémy špecifické pre AI sú vítané)
+- **Diskusie na Discorde**: Zdieľajte nápady a zapojte sa do komunity Azure AI Foundry
+- **Pull Requests**: Prispievajte priamymi vylepšeniami obsahu, najmä AI šablón a návodov
+- **Azure AI Foundry Discord**: Zúčastnite sa diskusií v kanáli #Azure pre AZD + AI
+- **Komunitné fóra**: Zúčastnite sa širších diskusií vývojárov Azure
+
+### Kategórie spätnej väzby
+- **Presnosť AI obsahu**: Opravy informácií o integrácii a nasadení AI služieb
+- **Vzdelávacia skúsenosť**: Návrhy na zlepšenie vzdelávacieho toku pre AI vývojárov
+- **Chýbajúci AI obsah**: Požiadavky na dodatočné AI šablóny, vzory alebo príklady
+- **Prístupnosť**: Vylepšenia pre rôzne vzdelávacie potreby
+- **Integrácia AI nástrojov**: Návrhy na lepšiu integráciu pracovných postupov AI vývoja
+- **Vzory produkčného AI**: Požiadavky na vzory nasadenia AI v podnikoch
+
+### Záväzok odpovede
+- **Odpoveď na problémy**: Do 48 hodín pre nahlásené problémy
+- **Požiadavky na funkcie**: Vyhodnotenie do jedného týždňa
+- **Príspevky komunity**: Preskúmanie do jedného týždňa
+- **Bezpečnostné problémy**: Okamžitá priorita s urýchlenou odpoveďou
+
+## Plán údržby
+
+### Pravidelné aktualizácie
+- **Mesačné kontroly**: Presnosť obsahu a validácia odkazov
+- **Štvrťročné aktualizácie**: Hlavné doplnky a vylepšenia obsahu
+- **Polročné kontroly**: Komplexné preorganizovanie a vylepšenie
+- **Ročné vydania**: Hlavné aktualizácie verzií s významnými vylepšeniami
+
+### Monitorovanie a zabezpečenie kvality
+- **Automatizované testovanie**: Pravidelná validácia príkladov kódu a odkazov
+- **Integrácia spätnej väzby komunity**: Pravidelné začlenenie návrhov používateľov
+- **Technologické aktualizácie**: Zarovnanie s najnovšími službami Azure a vydaniami azd
+- **Audity prístupnosti**: Pravidelné kontroly pre inkluzívne dizajnové princípy
+
+## Politika podpory verzií
+
+### Podpora aktuálnej verzie
 - **Najnovšia hlavná verzia**: Plná podpora s pravidelnými aktualizáciami
-- **Predchádzajúca hlavná verzia**: Bezpečnostné aktualizácie a kritické opravy počas 12 mesiacov
-- **Staršie verzie**: Podpora od komunity, bez oficiálnych aktualizácií
+- **Predchádzajúca hlavná verzia**: Bezpečnostné aktualizácie a kritické opravy na 12 mesiacov
+- **Staršie verzie**: Podpora komunity, bez oficiálnych aktualizácií
 
-### Pokyny k migrácii
+### Pokyny pre migráciu
 Keď sú vydané hlavné verzie, poskytujeme:
-- **Príručky k migrácii**: Podrobné pokyny na prechod
-- **Poznámky o kompatibilite**: Informácie o zásadných zmenách
-- **Podpora nástrojov**: Skripty alebo nástroje na pomoc pri migrácii
-- **Podpora od komunity**: Vyhradené fóra na otázky týkajúce sa migrácie
+- **Návody na migráciu**: Krok za krokom inštrukcie pre prechod
+- **Poznámky o kompatibilite**: Detaily o zmenách, ktoré narušujú kompatibilitu
+- **Podpora nástrojov**: Skripty alebo utility na pomoc pri migrácii
+- **Podpora komunity**: Vyhradené fóra pre otázky o migrácii
 
 ---
 
@@ -261,9 +261,9 @@ Keď sú vydané hlavné verzie, poskytujeme:
 - **Predchádzajúca lekcia**: [Študijný sprievodca](resources/study-guide.md)
 - **Nasledujúca lekcia**: Návrat na [Hlavný README](README.md)
 
-**Buďte informovaní**: Sledujte toto úložisko, aby ste dostávali upozornenia o nových vydaniach a dôležitých aktualizáciách vzdelávacích materiálov.
+**Zostaňte informovaní**: Sledujte tento repozitár pre upozornenia o nových vydaniach a dôležitých aktualizáciách vzdelávacích materiálov.
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
