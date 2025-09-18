@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T21:30:35+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T08:29:55+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "tl"
 }
 -->
 # Gabay sa Pag-install at Setup
 
-**Nakaraan:** [Pangunahing Dokumentasyon](../../README.md) | **Susunod:** [Mga Pangunahing Kaalaman sa AZD](azd-basics.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Simula
+- **⬅️ Nakaraan**: [Mga Pangunahing Kaalaman ng AZD](azd-basics.md)
+- **➡️ Susunod**: [Ang Iyong Unang Proyekto](first-project.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Panimula
 
@@ -21,7 +26,7 @@ Sa pagtatapos ng araling ito, ikaw ay:
 - Matagumpay na makakapag-install ng Azure Developer CLI sa iyong operating system
 - Makakapag-configure ng authentication sa Azure gamit ang iba't ibang paraan
 - Makakapag-setup ng iyong development environment kasama ang mga kinakailangang prerequisites
-- Maiintindihan ang iba't ibang opsyon sa pag-install at kung kailan gagamitin ang bawat isa
+- Maiintindihan ang iba't ibang opsyon sa pag-install at kailan gagamitin ang bawat isa
 - Makakapag-troubleshoot ng mga karaniwang isyu sa pag-install at setup
 
 ## Mga Resulta ng Pag-aaral
@@ -128,9 +133,9 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Pag-verify ng Pag-install
+## ✅ I-verify ang Pag-install
 
-Pagkatapos ng pag-install, tiyakin na gumagana nang maayos ang azd:
+Pagkatapos ng pag-install, tiyakin na gumagana nang tama ang azd:
 
 ```bash
 # Check version
@@ -238,7 +243,7 @@ Gumawa ng `.devcontainer/devcontainer.json`:
 2. I-configure ang Azure credentials
 3. Gamitin ang integrated terminal para sa mga utos ng azd
 
-## 🐛 Pag-troubleshoot ng Pag-install
+## 🐛 Troubleshooting ng Pag-install
 
 ### Mga Karaniwang Isyu
 
@@ -330,7 +335,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ## Suporta
 
-Kung makakaranas ng mga isyu:
+Kung makaranas ng mga isyu:
 - [Opisyal na Dokumentasyon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Mag-report ng mga Isyu](https://github.com/Azure/azure-dev/issues)
 - [Mga Diskusyon ng Komunidad](https://github.com/Azure/azure-dev/discussions)
@@ -338,9 +343,14 @@ Kung makakaranas ng mga isyu:
 
 ---
 
-**Nakaraan:** [Pangunahing Dokumentasyon](../../README.md) | **Susunod:** [Mga Pangunahing Kaalaman sa AZD](azd-basics.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Simula
+- **⬅️ Nakaraan**: [Mga Pangunahing Kaalaman ng AZD](azd-basics.md) 
+- **➡️ Susunod**: [Ang Iyong Unang Proyekto](first-project.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Tapos na ang Pag-install!** Magpatuloy sa [Iyong Unang Proyekto](first-project.md) upang simulan ang paggawa gamit ang azd.
+**✅ Kumpleto na ang Pag-install!** Magpatuloy sa [Ang Iyong Unang Proyekto](first-project.md) upang simulan ang paggawa gamit ang azd.
 
 ---
 

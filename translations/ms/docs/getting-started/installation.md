@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T21:27:43+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T08:12:55+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "ms"
 }
 -->
 # Panduan Pemasangan & Persediaan
 
-**Sebelumnya:** [Dokumentasi Utama](../../README.md) | **Seterusnya:** [Asas AZD](azd-basics.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 1 - Asas & Permulaan Pantas
+- **⬅️ Sebelumnya**: [Asas AZD](azd-basics.md)
+- **➡️ Seterusnya**: [Projek Pertama Anda](first-project.md)
+- **🚀 Bab Seterusnya**: [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Pengenalan
 
@@ -29,9 +34,9 @@ Pada akhir pelajaran ini, anda akan:
 Selepas melengkapkan pelajaran ini, anda akan dapat:
 - Memasang azd menggunakan kaedah yang sesuai untuk platform anda
 - Mengesahkan dengan Azure menggunakan `azd auth login`
-- Memastikan pemasangan anda berfungsi dan menguji arahan asas azd
+- Memeriksa pemasangan anda dan menguji arahan asas azd
 - Mengkonfigurasi persekitaran pembangunan anda untuk penggunaan azd yang optimum
-- Menyelesaikan masalah pemasangan biasa secara berdikari
+- Menyelesaikan masalah pemasangan secara berdikari
 
 Panduan ini akan membantu anda memasang dan mengkonfigurasi Azure Developer CLI pada sistem anda, tanpa mengira sistem operasi atau persekitaran pembangunan anda.
 
@@ -40,7 +45,7 @@ Panduan ini akan membantu anda memasang dan mengkonfigurasi Azure Developer CLI 
 Sebelum memasang azd, pastikan anda mempunyai:
 - **Langganan Azure** - [Buat akaun percuma](https://azure.microsoft.com/free/)
 - **Azure CLI** - Untuk pengesahan dan pengurusan sumber
-- **Git** - Untuk menyalin templat dan kawalan versi
+- **Git** - Untuk klon templat dan kawalan versi
 - **Docker** (pilihan) - Untuk aplikasi berasaskan kontena
 
 ## Kaedah Pemasangan
@@ -66,7 +71,7 @@ choco install azd
 #### Pilihan 4: Pemasangan Manual
 1. Muat turun keluaran terkini dari [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Ekstrak ke `C:\Program Files\azd\`
-3. Tambahkan ke pemboleh ubah PATH persekitaran
+3. Tambahkan ke pemboleh ubah PATH
 
 ### macOS
 
@@ -116,7 +121,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd telah dipasang terlebih dahulu dalam GitHub Codespaces. Hanya buat codespace dan mula menggunakan azd dengan segera.
+azd telah dipasang terlebih dahulu dalam GitHub Codespaces. Cipta sahaja codespace dan mula menggunakan azd dengan segera.
 
 ### Docker
 
@@ -128,9 +133,9 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Pengesahan Pemasangan
+## ✅ Periksa Pemasangan
 
-Selepas pemasangan, pastikan azd berfungsi dengan betul:
+Selepas pemasangan, periksa azd berfungsi dengan betul:
 
 ```bash
 # Check version
@@ -171,7 +176,7 @@ az login --use-device-code
 ```
 
 ### Prinsipal Perkhidmatan (CI/CD)
-Untuk persekitaran automasi:
+Untuk persekitaran automatik:
 ```bash
 az login --service-principal \
   --username <client-id> \
@@ -221,7 +226,7 @@ Ciri-ciri:
 - Pemantauan penggunaan
 
 ### GitHub Codespaces
-Buat `.devcontainer/devcontainer.json`:
+Cipta `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -283,7 +288,7 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### Mendapatkan Bantuan Lebih Lanjut
+### Mendapatkan Bantuan Tambahan
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -325,7 +330,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 1. **Lengkapkan pengesahan**: Pastikan anda boleh mengakses langganan Azure anda
 2. **Cuba penggunaan pertama anda**: Ikuti [Panduan Projek Pertama](first-project.md)
-3. **Terokai templat**: Lihat templat yang tersedia dengan `azd template list`
+3. **Terokai templat**: Semak templat yang tersedia dengan `azd template list`
 4. **Konfigurasi IDE anda**: Sediakan persekitaran pembangunan anda
 
 ## Sokongan
@@ -338,9 +343,14 @@ Jika anda menghadapi masalah:
 
 ---
 
-**Sebelumnya:** [Dokumentasi Utama](../../README.md) | **Seterusnya:** [Asas AZD](azd-basics.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 1 - Asas & Permulaan Pantas
+- **⬅️ Sebelumnya**: [Asas AZD](azd-basics.md) 
+- **➡️ Seterusnya**: [Projek Pertama Anda](first-project.md)
+- **🚀 Bab Seterusnya**: [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Pemasangan Selesai!** Teruskan ke [Projek Pertama Anda](first-project.md) untuk mula membina dengan azd.
+**✅ Pemasangan Selesai!** Teruskan ke [Projek Pertama Anda](first-project.md) untuk mula membina dengan azd.
 
 ---
 

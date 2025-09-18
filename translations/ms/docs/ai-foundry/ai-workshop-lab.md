@@ -1,32 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "668bc93b35c9249e52245a0b037b6011",
-  "translation_date": "2025-09-12T21:41:25+00:00",
+  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
+  "translation_date": "2025-09-18T08:10:27+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "ms"
 }
 -->
-# Bengkel AI: Menjadikan Penyelesaian AI Anda Boleh Dideploy dengan AZD
+# AI Workshop Lab: Menjadikan Penyelesaian AI Anda Boleh Dideploy dengan AZD
 
-**Sebelumnya:** [AI Model Deployment](ai-model-deployment.md) | **Seterusnya:** [Production AI Practices](production-ai-practices.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan Berorientasikan AI
+- **⬅️ Sebelumnya**: [Penyebaran Model AI](ai-model-deployment.md)
+- **➡️ Seterusnya**: [Amalan Terbaik AI Pengeluaran](production-ai-practices.md)
+- **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
-## Gambaran Bengkel
+## Gambaran Keseluruhan Bengkel
 
-Bengkel praktikal ini membimbing pembangun melalui proses mengambil aplikasi AI sedia ada dan menjadikannya boleh dideploy menggunakan Azure Developer CLI (AZD). Anda akan mempelajari corak penting untuk deployment AI dalam pengeluaran menggunakan perkhidmatan Azure AI Foundry.
+Bengkel ini memberikan panduan praktikal kepada pembangun untuk mengambil aplikasi AI sedia ada dan menjadikannya boleh dideploy menggunakan Azure Developer CLI (AZD). Anda akan mempelajari corak penting untuk penyebaran AI pengeluaran menggunakan perkhidmatan Azure AI Foundry.
 
 **Tempoh:** 2-3 jam  
 **Tahap:** Pertengahan  
-**Prasyarat:** Pengetahuan asas Azure, pemahaman konsep AI/ML
+**Prasyarat:** Pengetahuan asas Azure, pemahaman tentang konsep AI/ML
 
 ## 🎓 Objektif Pembelajaran
 
-Pada akhir bengkel ini, anda akan dapat:
+Menjelang akhir bengkel ini, anda akan dapat:
 - ✅ Menukar aplikasi AI sedia ada untuk menggunakan templat AZD
 - ✅ Mengkonfigurasi perkhidmatan Azure AI Foundry dengan AZD
 - ✅ Melaksanakan pengurusan kelayakan yang selamat untuk perkhidmatan AI
-- ✅ Mendeply aplikasi AI sedia pengeluaran dengan pemantauan
-- ✅ Menyelesaikan masalah biasa dalam deployment AI
+- ✅ Menyebarkan aplikasi AI sedia pengeluaran dengan pemantauan
+- ✅ Menyelesaikan masalah biasa dalam penyebaran AI
 
 ## Prasyarat
 
@@ -34,7 +39,7 @@ Pada akhir bengkel ini, anda akan dapat:
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) dipasang
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) dipasang
 - [Git](https://git-scm.com/) dipasang
-- Editor kod (VS Code disyorkan)
+- Penyunting kod (VS Code disyorkan)
 
 ### Sumber Azure
 - Langganan Azure dengan akses penyumbang
@@ -44,7 +49,7 @@ Pada akhir bengkel ini, anda akan dapat:
 ### Pengetahuan Prasyarat
 - Pemahaman asas tentang perkhidmatan Azure
 - Familiariti dengan antara muka baris perintah
-- Konsep asas AI/ML (API, model, prompt)
+- Konsep asas AI/ML (API, model, arahan)
 
 ## Persediaan Bengkel
 
@@ -63,7 +68,7 @@ az login
 azd auth login
 ```
 
-2. **Clone repositori bengkel:**
+2. **Klon repositori bengkel:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
@@ -97,7 +102,7 @@ azure-search-openai-demo/
 cat azure.yaml
 ```
 
-**Apa yang perlu dicari:**
+**Apa yang perlu diperhatikan:**
 - Definisi perkhidmatan untuk komponen AI
 - Pemetaan pembolehubah persekitaran
 - Konfigurasi hos
@@ -109,18 +114,18 @@ cat infra/main.bicep
 
 **Corak AI utama untuk dikenalpasti:**
 - Penyediaan perkhidmatan Azure OpenAI
-- Integrasi Cognitive Search
+- Integrasi Carian Kognitif
 - Pengurusan kunci yang selamat
 - Konfigurasi keselamatan rangkaian
 
 ### **Titik Perbincangan:** Mengapa Corak Ini Penting untuk AI
 
 - **Kebergantungan Perkhidmatan**: Aplikasi AI sering memerlukan pelbagai perkhidmatan yang diselaraskan
-- **Keselamatan**: Kunci API dan endpoint perlu diuruskan dengan selamat
+- **Keselamatan**: Kunci API dan titik akhir perlu pengurusan yang selamat
 - **Kebolehskalaan**: Beban kerja AI mempunyai keperluan penskalaan yang unik
-- **Pengurusan Kos**: Perkhidmatan AI boleh menjadi mahal jika tidak dikonfigurasi dengan betul
+- **Pengurusan Kos**: Perkhidmatan AI boleh mahal jika tidak dikonfigurasi dengan betul
 
-## Modul 2: Mendeply Aplikasi AI Pertama Anda
+## Modul 2: Menyebarkan Aplikasi AI Pertama Anda
 
 ### Langkah 2.1: Memulakan Persekitaran
 
@@ -138,31 +143,31 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### Langkah 2.2: Mendeply Infrastruktur dan Aplikasi
+### Langkah 2.2: Menyebarkan Infrastruktur dan Aplikasi
 
-1. **Deploy dengan AZD:**
+1. **Sediakan dengan AZD:**
 ```bash
 azd up
 ```
 
 **Apa yang berlaku semasa `azd up`:**
 - ✅ Menyediakan perkhidmatan Azure OpenAI
-- ✅ Mencipta perkhidmatan Cognitive Search
+- ✅ Mencipta perkhidmatan Carian Kognitif
 - ✅ Menyediakan App Service untuk aplikasi web
 - ✅ Mengkonfigurasi rangkaian dan keselamatan
-- ✅ Mendeply kod aplikasi
-- ✅ Menyediakan pemantauan dan logging
+- ✅ Menyebarkan kod aplikasi
+- ✅ Menyediakan pemantauan dan log
 
-2. **Pantau kemajuan deployment** dan perhatikan sumber yang sedang dicipta.
+2. **Pantau kemajuan penyebaran** dan perhatikan sumber yang sedang dicipta.
 
-### Langkah 2.3: Sahkan Deployment Anda
+### Langkah 2.3: Sahkan Penyebaran Anda
 
-1. **Periksa sumber yang telah dideploy:**
+1. **Periksa sumber yang disebarkan:**
 ```bash
 azd show
 ```
 
-2. **Buka aplikasi yang telah dideploy:**
+2. **Buka aplikasi yang disebarkan:**
 ```bash
 azd show --output json | grep "webAppUrl"
 ```
@@ -174,15 +179,15 @@ azd show --output json | grep "webAppUrl"
 
 ### **Latihan Makmal 2.1: Amalan Penyelesaian Masalah**
 
-**Senario**: Deployment anda berjaya tetapi AI tidak memberikan respons.
+**Senario**: Penyebaran anda berjaya tetapi AI tidak memberikan respons.
 
 **Isu biasa untuk diperiksa:**
-1. **Kunci API OpenAI**: Sahkan ia telah ditetapkan dengan betul
+1. **Kunci API OpenAI**: Sahkan ia ditetapkan dengan betul
 2. **Ketersediaan model**: Periksa jika wilayah anda menyokong model tersebut
 3. **Kesambungan rangkaian**: Pastikan perkhidmatan boleh berkomunikasi
 4. **Kebenaran RBAC**: Sahkan aplikasi boleh mengakses OpenAI
 
-**Perintah debugging:**
+**Perintah penyelesaian masalah:**
 ```bash
 # Check environment variables
 azd env get-values
@@ -250,13 +255,13 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **Cabaran**: Konfigurasikan templat untuk pembangunan yang kos efektif.
 
 **Tugas:**
-1. Kenalpasti SKU yang boleh ditetapkan kepada tier percuma/asas
+1. Kenalpasti SKU yang boleh ditetapkan kepada peringkat percuma/asas
 2. Konfigurasikan pembolehubah persekitaran untuk kos minimum
-3. Deploy dan bandingkan kos dengan konfigurasi pengeluaran
+3. Sebarkan dan bandingkan kos dengan konfigurasi pengeluaran
 
 **Petunjuk penyelesaian:**
-- Gunakan tier F0 (percuma) untuk Cognitive Services jika boleh
-- Gunakan tier Basic untuk Search Service dalam pembangunan
+- Gunakan peringkat F0 (percuma) untuk Cognitive Services jika boleh
+- Gunakan peringkat Asas untuk Search Service dalam pembangunan
 - Pertimbangkan menggunakan pelan Consumption untuk Functions
 
 ## Modul 4: Keselamatan dan Amalan Terbaik Pengeluaran
@@ -281,7 +286,7 @@ az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 
 ### Langkah 4.2: Keselamatan Rangkaian
 
-1. **Aktifkan endpoint peribadi** (jika belum dikonfigurasi):
+1. **Aktifkan titik akhir peribadi** (jika belum dikonfigurasi):
 
 Tambah ke templat bicep anda:
 ```bicep
@@ -306,7 +311,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Langkah 4.3: Pemantauan dan Observabiliti
+### Langkah 4.3: Pemantauan dan Kebolehlihatan
 
 1. **Konfigurasikan Application Insights:**
 ```bash
@@ -315,7 +320,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Tetapkan pemantauan khusus AI:**
+2. **Sediakan pemantauan khusus AI:**
 
 Tambah metrik khusus untuk operasi AI:
 ```bicep
@@ -340,14 +345,14 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### **Latihan Makmal 4.1: Audit Keselamatan**
 
-**Tugas**: Semak deployment anda untuk amalan terbaik keselamatan.
+**Tugas**: Semak penyebaran anda untuk amalan terbaik keselamatan.
 
 **Senarai Semak:**
 - [ ] Tiada rahsia yang disimpan secara hardcode dalam kod atau konfigurasi
 - [ ] Managed Identity digunakan untuk pengesahan perkhidmatan-ke-perkhidmatan
 - [ ] Key Vault menyimpan konfigurasi sensitif
 - [ ] Akses rangkaian dihadkan dengan betul
-- [ ] Pemantauan dan logging diaktifkan
+- [ ] Pemantauan dan log diaktifkan
 
 ## Modul 5: Menukar Aplikasi AI Anda Sendiri
 
@@ -357,17 +362,17 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 1. **Senibina Aplikasi:**
    - Perkhidmatan AI apa yang digunakan oleh aplikasi anda?
-   - Sumber pengkomputeran apa yang diperlukan?
+   - Sumber pengiraan apa yang diperlukan?
    - Adakah ia memerlukan pangkalan data?
    - Apakah kebergantungan antara perkhidmatan?
 
 2. **Keperluan Keselamatan:**
    - Data sensitif apa yang dikendalikan oleh aplikasi anda?
-   - Apakah keperluan pematuhan yang anda ada?
+   - Keperluan pematuhan apa yang anda ada?
    - Adakah anda memerlukan rangkaian peribadi?
 
 3. **Keperluan Penskalaan:**
-   - Apakah beban yang dijangkakan?
+   - Beban yang dijangkakan?
    - Adakah anda memerlukan penskalaan automatik?
    - Adakah terdapat keperluan wilayah?
 
@@ -465,14 +470,14 @@ output name string = openAIAccount.name
 **Bonus:** 
 - Tambah pengendalian ralat yang betul
 - Sertakan anggaran kos
-- Tetapkan papan pemuka pemantauan
+- Sediakan papan pemuka pemantauan
 
 ## Modul 6: Menyelesaikan Masalah Biasa
 
-### Isu Deployment Biasa
+### Isu Penyebaran Biasa
 
 #### Isu 1: Kuota Perkhidmatan OpenAI Melebihi
-**Gejala:** Deployment gagal dengan ralat kuota
+**Gejala:** Penyebaran gagal dengan ralat kuota
 **Penyelesaian:**
 ```bash
 # Check current quotas
@@ -484,7 +489,7 @@ azd up
 ```
 
 #### Isu 2: Model Tidak Tersedia di Wilayah
-**Gejala:** Respons AI gagal atau ralat deployment model
+**Gejala:** Respons AI gagal atau ralat penyebaran model
 **Penyelesaian:**
 ```bash
 # Check model availability by region
@@ -522,24 +527,24 @@ az role assignment create \
 - Gunakan model OpenAI yang sesuai untuk kes penggunaan anda
 - Pertimbangkan replika baca untuk senario beban tinggi
 
-### **Latihan Makmal 6.1: Cabaran Debugging**
+### **Latihan Makmal 6.1: Cabaran Penyelesaian Masalah**
 
-**Senario**: Deployment anda berjaya, tetapi aplikasi mengembalikan ralat 500.
+**Senario**: Penyebaran anda berjaya, tetapi aplikasi mengembalikan ralat 500.
 
-**Tugas debugging:**
+**Tugas penyelesaian masalah:**
 1. Periksa log aplikasi
 2. Sahkan kesambungan perkhidmatan
 3. Uji pengesahan
 4. Semak konfigurasi
 
 **Alat untuk digunakan:**
-- `azd show` untuk gambaran keseluruhan deployment
+- `azd show` untuk gambaran keseluruhan penyebaran
 - Portal Azure untuk log perkhidmatan terperinci
 - Application Insights untuk telemetri aplikasi
 
 ## Modul 7: Pemantauan dan Pengoptimuman
 
-### Langkah 7.1: Tetapkan Pemantauan Komprehensif
+### Langkah 7.1: Sediakan Pemantauan Komprehensif
 
 1. **Cipta papan pemuka tersuai:**
 
@@ -549,7 +554,7 @@ Navigasi ke portal Azure dan cipta papan pemuka dengan:
 - Penggunaan sumber
 - Penjejakan kos
 
-2. **Tetapkan amaran:**
+2. **Sediakan amaran:**
 ```bash
 # Alert for high error rate
 az monitor metrics alert create \
@@ -569,7 +574,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
 2. **Laksanakan kawalan kos:**
-- Tetapkan amaran bajet
+- Sediakan amaran bajet
 - Gunakan polisi penskalaan automatik
 - Laksanakan caching permintaan
 - Pantau penggunaan token untuk OpenAI
@@ -585,9 +590,9 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 **Strategi untuk dicuba:**
 - Laksanakan caching respons
-- Optimumkan prompt untuk kecekapan token
-- Gunakan SKU pengkomputeran yang sesuai
-- Tetapkan penskalaan automatik yang betul
+- Optimumkan arahan untuk kecekapan token
+- Gunakan SKU pengiraan yang sesuai
+- Sediakan penskalaan automatik yang betul
 
 ## Cabaran Akhir: Pelaksanaan Hujung-ke-Hujung
 
@@ -602,20 +607,20 @@ Anda ditugaskan untuk mencipta chatbot perkhidmatan pelanggan berkuasa AI yang s
 - Integrasi dengan pangkalan data pelanggan sedia ada
 - Sokongan pelbagai bahasa
 
-**Keperluan Tidak Fungsional:**
+**Keperluan Bukan Fungsional:**
 - Menangani 1000 pengguna serentak
 - SLA uptime 99.9%
 - Pematuhan SOC 2
 - Kos di bawah $500/bulan
-- Deploy ke pelbagai persekitaran (dev, staging, prod)
+- Penyebaran ke pelbagai persekitaran (pembangunan, staging, pengeluaran)
 
 ### Langkah Pelaksanaan
 
 1. **Reka bentuk senibina**
 2. **Cipta templat AZD**
 3. **Laksanakan langkah keselamatan**
-4. **Tetapkan pemantauan dan amaran**
-5. **Cipta pipeline deployment**
+4. **Sediakan pemantauan dan amaran**
+5. **Cipta saluran penyebaran**
 6. **Dokumentasikan penyelesaian**
 
 ### Kriteria Penilaian
@@ -640,34 +645,39 @@ Anda ditugaskan untuk mencipta chatbot perkhidmatan pelanggan berkuasa AI yang s
 
 ### Sumber Komuniti
 - [Discord Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [Templat AZD Hebat](https://azure.github.io/awesome-azd/)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Sijil Penyelesaian
 
-Tahniah! Anda telah menyelesaikan Bengkel AI. Anda kini sepatutnya dapat:
+Tahniah! Anda telah menyelesaikan Bengkel AI Lab. Anda kini sepatutnya mampu:
 
 - ✅ Menukar aplikasi AI sedia ada kepada templat AZD
-- ✅ Mendeply aplikasi AI sedia pengeluaran
-- ✅ Laksanakan amalan terbaik keselamatan untuk beban kerja AI  
-- ✅ Pantau dan optimalkan prestasi aplikasi AI  
-- ✅ Selesaikan masalah biasa semasa penyebaran  
+- ✅ Melancarkan aplikasi AI yang sedia untuk pengeluaran
+- ✅ Melaksanakan amalan terbaik keselamatan untuk beban kerja AI
+- ✅ Memantau dan mengoptimumkan prestasi aplikasi AI
+- ✅ Menyelesaikan masalah biasa semasa pelancaran
 
-### Langkah Seterusnya  
-1. Gunakan corak ini pada projek AI anda sendiri  
-2. Sumbangkan templat kembali kepada komuniti  
-3. Sertai Discord Azure AI Foundry untuk sokongan berterusan  
-4. Terokai topik lanjutan seperti penyebaran pelbagai wilayah  
-
----
-
-**Maklum Balas Bengkel**: Bantu kami meningkatkan bengkel ini dengan berkongsi pengalaman anda di [saluran Azure Discord Azure AI Foundry](https://discord.gg/microsoft-azure).  
+### Langkah Seterusnya
+1. Gunakan corak ini pada projek AI anda sendiri
+2. Sumbangkan templat kembali kepada komuniti
+3. Sertai Discord Azure AI Foundry untuk sokongan berterusan
+4. Terokai topik lanjutan seperti pelancaran pelbagai wilayah
 
 ---
 
-**Sebelumnya:** [Penyebaran Model AI](ai-model-deployment.md) | **Seterusnya:** [Amalan AI Pengeluaran](production-ai-practices.md)  
+**Maklum Balas Bengkel**: Bantu kami meningkatkan bengkel ini dengan berkongsi pengalaman anda di [saluran Azure Discord Azure AI Foundry](https://discord.gg/microsoft-azure).
 
-**Perlu Bantuan?** Sertai komuniti kami untuk sokongan dan perbincangan tentang AZD dan penyebaran AI.  
+---
+
+**Navigasi Bab:**
+- **📚 Halaman Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan AI-First
+- **⬅️ Sebelumnya**: [Pelancaran Model AI](ai-model-deployment.md)
+- **➡️ Seterusnya**: [Amalan Terbaik AI Pengeluaran](production-ai-practices.md)
+- **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
+
+**Perlu Bantuan?** Sertai komuniti kami untuk sokongan dan perbincangan tentang AZD dan pelancaran AI.
 
 ---
 

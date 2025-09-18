@@ -1,19 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T21:28:15+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T08:13:40+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "ms"
 }
 -->
 # AZD Asas - Memahami Azure Developer CLI
 
-**Sebelumnya:** [Pemasangan & Persediaan](installation.md) | **Seterusnya:** [Konfigurasi](configuration.md)
+# AZD Asas - Konsep Teras dan Asas
+
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 1 - Asas & Permulaan Pantas
+- **⬅️ Sebelumnya**: [Gambaran Keseluruhan Kursus](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Seterusnya**: [Pemasangan & Persediaan](installation.md)
+- **🚀 Bab Seterusnya**: [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Pengenalan
 
-Pelajaran ini memperkenalkan anda kepada Azure Developer CLI (azd), alat baris perintah yang berkuasa untuk mempercepatkan perjalanan anda daripada pembangunan tempatan kepada penyebaran di Azure. Anda akan mempelajari konsep asas, ciri utama, dan memahami bagaimana azd mempermudah penyebaran aplikasi cloud-native.
+Pelajaran ini memperkenalkan anda kepada Azure Developer CLI (azd), alat baris perintah yang berkuasa yang mempercepatkan perjalanan anda dari pembangunan tempatan ke penyebaran Azure. Anda akan mempelajari konsep asas, ciri utama, dan memahami bagaimana azd mempermudah penyebaran aplikasi cloud-native.
 
 ## Matlamat Pembelajaran
 
@@ -27,7 +34,7 @@ Pada akhir pelajaran ini, anda akan:
 ## Hasil Pembelajaran
 
 Selepas menyelesaikan pelajaran ini, anda akan dapat:
-- Menerangkan peranan azd dalam aliran kerja pembangunan cloud moden
+- Menerangkan peranan azd dalam aliran kerja pembangunan awan moden
 - Mengenal pasti komponen struktur projek azd
 - Menggambarkan bagaimana templat, persekitaran, dan perkhidmatan berfungsi bersama
 - Memahami manfaat Infrastruktur sebagai Kod dengan azd
@@ -35,12 +42,12 @@ Selepas menyelesaikan pelajaran ini, anda akan dapat:
 
 ## Apa itu Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) ialah alat baris perintah yang direka untuk mempercepatkan perjalanan anda daripada pembangunan tempatan kepada penyebaran di Azure. Ia mempermudah proses membina, menyebarkan, dan mengurus aplikasi cloud-native di Azure.
+Azure Developer CLI (azd) ialah alat baris perintah yang direka untuk mempercepatkan perjalanan anda dari pembangunan tempatan ke penyebaran Azure. Ia mempermudah proses membina, menyebarkan, dan mengurus aplikasi cloud-native di Azure.
 
-## Konsep Asas
+## Konsep Teras
 
 ### Templat
-Templat adalah asas kepada azd. Ia mengandungi:
+Templat adalah asas azd. Ia mengandungi:
 - **Kod aplikasi** - Kod sumber dan kebergantungan anda
 - **Definisi infrastruktur** - Sumber Azure yang ditakrifkan dalam Bicep atau Terraform
 - **Fail konfigurasi** - Tetapan dan pembolehubah persekitaran
@@ -99,7 +106,7 @@ azd env list
 
 ## 📁 Struktur Projek
 
-Struktur projek azd yang biasa:
+Struktur projek azd biasa:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -191,13 +198,13 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Memahami `azd down --force --purge`
-Perintah `azd down --force --purge` adalah cara yang berkuasa untuk meruntuhkan sepenuhnya persekitaran azd anda dan semua sumber yang berkaitan. Berikut adalah pecahan setiap bendera:
+Perintah `azd down --force --purge` adalah cara yang berkuasa untuk sepenuhnya meruntuhkan persekitaran azd anda dan semua sumber yang berkaitan. Berikut adalah pecahan setiap bendera:
 ```
 --force
 ```
 - Melangkau arahan pengesahan.
 - Berguna untuk automasi atau skrip di mana input manual tidak praktikal.
-- Memastikan proses penurunan berjalan tanpa gangguan, walaupun CLI mengesan ketidakkonsistenan.
+- Memastikan proses runtuhan berjalan tanpa gangguan, walaupun CLI mengesan ketidakkonsistenan.
 
 ```
 --purge
@@ -205,13 +212,13 @@ Perintah `azd down --force --purge` adalah cara yang berkuasa untuk meruntuhkan 
 Memadamkan **semua metadata yang berkaitan**, termasuk:
 Keadaan persekitaran
 Folder `.azure` tempatan
-Maklumat penyebaran yang disimpan
+Maklumat penyebaran yang di-cache
 Menghalang azd daripada "mengingati" penyebaran sebelumnya, yang boleh menyebabkan masalah seperti kumpulan sumber yang tidak sepadan atau rujukan daftar yang usang.
 
 ### Mengapa menggunakan kedua-duanya?
-Apabila anda menghadapi masalah dengan `azd up` disebabkan keadaan yang tertinggal atau penyebaran separa, gabungan ini memastikan permulaan yang **bersih**.
+Apabila anda menghadapi masalah dengan `azd up` disebabkan oleh keadaan yang tertinggal atau penyebaran separa, gabungan ini memastikan **permulaan baru**.
 
-Ia sangat berguna selepas penghapusan sumber secara manual di portal Azure atau apabila menukar templat, persekitaran, atau konvensyen penamaan kumpulan sumber.
+Ia sangat berguna selepas penghapusan sumber manual di portal Azure atau apabila menukar templat, persekitaran, atau konvensyen penamaan kumpulan sumber.
 
 ### Menguruskan Pelbagai Persekitaran
 ```bash
@@ -296,13 +303,17 @@ azd init --template template1
 1. Cipta templat tersuai
 2. Corak infrastruktur lanjutan
 3. Penyebaran multi-region
-4. Konfigurasi tahap perusahaan
+4. Konfigurasi gred perusahaan
 
 ## Langkah Seterusnya
 
+**📖 Teruskan Pembelajaran Bab 1:**
 - [Pemasangan & Persediaan](installation.md) - Pasang dan konfigurasikan azd
-- [Projek Pertama Anda](first-project.md) - Tutorial praktikal
+- [Projek Pertama Anda](first-project.md) - Lengkapkan tutorial praktikal
 - [Panduan Konfigurasi](configuration.md) - Pilihan konfigurasi lanjutan
+
+**🎯 Sedia untuk Bab Seterusnya?**
+- [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md) - Mulakan membina aplikasi AI
 
 ## Sumber Tambahan
 
@@ -312,8 +323,12 @@ azd init --template template1
 
 ---
 
-**Sebelumnya:** [Pemasangan & Persediaan](installation.md) | **Seterusnya:** [Konfigurasi](configuration.md)
-- **Pelajaran Seterusnya**: [Pemasangan & Persediaan](installation.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 1 - Asas & Permulaan Pantas  
+- **⬅️ Sebelumnya**: [Gambaran Keseluruhan Kursus](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Seterusnya**: [Pemasangan & Persediaan](installation.md)
+- **🚀 Bab Seterusnya**: [Bab 2: Pembangunan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

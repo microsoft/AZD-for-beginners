@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T21:24:52+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T07:57:06+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "id"
 }
 -->
 # Panduan Instalasi & Pengaturan
 
-**Sebelumnya:** [Dokumentasi Utama](../../README.md) | **Selanjutnya:** [Dasar-Dasar AZD](azd-basics.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Memulai Cepat
+- **⬅️ Sebelumnya**: [Dasar-Dasar AZD](azd-basics.md)
+- **➡️ Selanjutnya**: [Proyek Pertama Anda](first-project.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Pendahuluan
 
-Panduan lengkap ini akan membantu Anda menginstal dan mengonfigurasi Azure Developer CLI (azd) di sistem Anda. Anda akan mempelajari berbagai metode instalasi untuk sistem operasi yang berbeda, pengaturan autentikasi, dan konfigurasi awal untuk mempersiapkan lingkungan pengembangan Anda untuk deployment di Azure.
+Panduan lengkap ini akan membantu Anda menginstal dan mengonfigurasi Azure Developer CLI (azd) di sistem Anda. Anda akan mempelajari berbagai metode instalasi untuk sistem operasi yang berbeda, pengaturan autentikasi, dan konfigurasi awal untuk mempersiapkan lingkungan pengembangan Anda untuk penerapan di Azure.
 
 ## Tujuan Pembelajaran
 
@@ -40,8 +45,8 @@ Panduan ini akan membantu Anda menginstal dan mengonfigurasi Azure Developer CLI
 Sebelum menginstal azd, pastikan Anda memiliki:
 - **Langganan Azure** - [Buat akun gratis](https://azure.microsoft.com/free/)
 - **Azure CLI** - Untuk autentikasi dan pengelolaan sumber daya
-- **Git** - Untuk cloning template dan kontrol versi
-- **Docker** (opsional) - Untuk aplikasi berbasis container
+- **Git** - Untuk mengkloning template dan kontrol versi
+- **Docker** (opsional) - Untuk aplikasi berbasis kontainer
 
 ## Metode Instalasi
 
@@ -76,7 +81,7 @@ brew tap azure/azd
 brew install azd
 ```
 
-#### Opsi 2: Script Instalasi
+#### Opsi 2: Skrip Instalasi
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
@@ -89,12 +94,12 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### Opsi 1: Script Instalasi (Direkomendasikan)
+#### Opsi 1: Skrip Instalasi (Direkomendasikan)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Opsi 2: Package Manager
+#### Opsi 2: Pengelola Paket
 
 **Ubuntu/Debian:**
 ```bash
@@ -165,7 +170,7 @@ az account show
 ```
 
 ### Autentikasi Kode Perangkat
-Jika Anda menggunakan sistem tanpa antarmuka atau mengalami masalah dengan browser:
+Jika Anda menggunakan sistem tanpa kepala atau mengalami masalah dengan browser:
 ```bash
 az login --use-device-code
 ```
@@ -208,17 +213,17 @@ export AZD_DEBUG=true  # Enable debug logging
 ## Integrasi IDE
 
 ### Visual Studio Code
-Instal ekstensi Azure Developer CLI:
+Pasang ekstensi Azure Developer CLI:
 1. Buka VS Code
 2. Pergi ke Extensions (Ctrl+Shift+X)
 3. Cari "Azure Developer CLI"
-4. Instal ekstensi tersebut
+4. Pasang ekstensi tersebut
 
 Fitur:
 - IntelliSense untuk azure.yaml
 - Perintah terminal terintegrasi
 - Penjelajahan template
-- Pemantauan deployment
+- Pemantauan penerapan
 
 ### GitHub Codespaces
 Buat file `.devcontainer/devcontainer.json`:
@@ -234,8 +239,8 @@ Buat file `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Instal plugin Azure
-2. Konfigurasi kredensial Azure
+1. Pasang plugin Azure
+2. Konfigurasikan kredensial Azure
 3. Gunakan terminal terintegrasi untuk perintah azd
 
 ## 🐛 Pemecahan Masalah Instalasi
@@ -249,7 +254,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### Masalah PATH
-Tambahkan azd secara manual ke PATH:
+Tambahkan azd secara manual ke PATH Anda:
 
 **Windows:**
 ```cmd
@@ -324,9 +329,9 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Langkah Selanjutnya
 
 1. **Selesaikan autentikasi**: Pastikan Anda dapat mengakses langganan Azure Anda
-2. **Coba deployment pertama Anda**: Ikuti [Panduan Proyek Pertama](first-project.md)
+2. **Coba penerapan pertama Anda**: Ikuti [Panduan Proyek Pertama](first-project.md)
 3. **Jelajahi template**: Telusuri template yang tersedia dengan `azd template list`
-4. **Konfigurasi IDE Anda**: Siapkan lingkungan pengembangan Anda
+4. **Konfigurasikan IDE Anda**: Siapkan lingkungan pengembangan Anda
 
 ## Dukungan
 
@@ -338,9 +343,14 @@ Jika Anda mengalami masalah:
 
 ---
 
-**Sebelumnya:** [Dokumentasi Utama](../../README.md) | **Selanjutnya:** [Dasar-Dasar AZD](azd-basics.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Memulai Cepat
+- **⬅️ Sebelumnya**: [Dasar-Dasar AZD](azd-basics.md) 
+- **➡️ Selanjutnya**: [Proyek Pertama Anda](first-project.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Instalasi Selesai!** Lanjutkan ke [Proyek Pertama Anda](first-project.md) untuk mulai membangun dengan azd.
+**✅ Instalasi Selesai!** Lanjutkan ke [Proyek Pertama Anda](first-project.md) untuk mulai membangun dengan azd.
 
 ---
 

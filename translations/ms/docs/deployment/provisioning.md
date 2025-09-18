@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:44:34+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T08:14:35+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "ms"
 }
 -->
-# Penyediaan Sumber - Infrastruktur sebagai Kod dengan AZD
+# Penyediaan Sumber Azure dengan AZD
+
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 4 - Infrastruktur sebagai Kod & Penghantaran
+- **⬅️ Sebelumnya**: [Panduan Penghantaran](deployment-guide.md)
+- **➡️ Bab Seterusnya**: [Bab 5: Penyelesaian AI Multi-Ejen](../../examples/retail-scenario.md)
+- **🔧 Berkaitan**: [Bab 6: Pengesahan Pra-Penghantaran](../pre-deployment/capacity-planning.md)
 
 ## Pengenalan
 
-Panduan komprehensif ini merangkumi segala yang anda perlu tahu tentang penyediaan dan pengurusan sumber Azure menggunakan Azure Developer CLI. Pelajari cara melaksanakan corak Infrastruktur sebagai Kod (IaC) daripada penciptaan sumber asas hingga seni bina infrastruktur peringkat perusahaan yang maju menggunakan Bicep, templat ARM, Terraform, dan Pulumi.
+Panduan komprehensif ini merangkumi segala yang anda perlu tahu tentang penyediaan dan pengurusan sumber Azure menggunakan Azure Developer CLI. Pelajari cara melaksanakan corak Infrastruktur sebagai Kod (IaC) daripada penciptaan sumber asas kepada seni bina infrastruktur peringkat perusahaan menggunakan Bicep, templat ARM, Terraform, dan Pulumi.
 
 ## Matlamat Pembelajaran
 
@@ -20,7 +27,7 @@ Dengan melengkapkan panduan ini, anda akan:
 - Memahami pelbagai penyedia IaC yang disokong oleh Azure Developer CLI
 - Merancang dan melaksanakan templat Bicep untuk seni bina aplikasi biasa
 - Mengkonfigurasi parameter sumber, pembolehubah, dan tetapan khusus persekitaran
-- Melaksanakan corak infrastruktur maju termasuk rangkaian dan keselamatan
+- Melaksanakan corak infrastruktur lanjutan termasuk rangkaian dan keselamatan
 - Mengurus kitaran hayat sumber, kemas kini, dan penyelesaian kebergantungan
 
 ## Hasil Pembelajaran
@@ -29,8 +36,8 @@ Setelah selesai, anda akan dapat:
 - Merancang dan menyediakan infrastruktur Azure menggunakan Bicep dan templat ARM
 - Mengkonfigurasi seni bina pelbagai perkhidmatan yang kompleks dengan kebergantungan sumber yang betul
 - Melaksanakan templat berparameter untuk pelbagai persekitaran dan konfigurasi
-- Menyelesaikan masalah penyediaan infrastruktur dan mengatasi kegagalan penyebaran
-- Menerapkan prinsip Rangka Kerja Azure Well-Architected kepada reka bentuk infrastruktur
+- Menyelesaikan masalah penyediaan infrastruktur dan kegagalan penghantaran
+- Mengaplikasikan prinsip Rangka Kerja Azure Well-Architected kepada reka bentuk infrastruktur
 - Mengurus kemas kini infrastruktur dan melaksanakan strategi versi infrastruktur
 
 ## Gambaran Keseluruhan Penyediaan Infrastruktur
@@ -653,7 +660,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Corak Penyediaan Lanjutan
 
-### Penyebaran Pelbagai Wilayah
+### Penghantaran Multi-Region
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -859,8 +866,8 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Langkah Seterusnya
 
-- [Perancangan Pra-Penyebaran](../pre-deployment/capacity-planning.md) - Sahkan ketersediaan sumber
-- [Isu Biasa](../troubleshooting/common-issues.md) - Selesaikan masalah infrastruktur
+- [Perancangan Pra-Penghantaran](../pre-deployment/capacity-planning.md) - Sahkan ketersediaan sumber
+- [Masalah Biasa](../troubleshooting/common-issues.md) - Selesaikan masalah infrastruktur
 - [Panduan Penyahpepijatan](../troubleshooting/debugging.md) - Penyahpepijatan isu penyediaan
 - [Pemilihan SKU](../pre-deployment/sku-selection.md) - Pilih peringkat perkhidmatan yang sesuai
 
@@ -874,7 +881,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Panduan Penyebaran](deployment-guide.md)
+- **Pelajaran Sebelumnya**: [Panduan Penghantaran](deployment-guide.md)
 - **Pelajaran Seterusnya**: [Perancangan Kapasiti](../pre-deployment/capacity-planning.md)
 
 ---

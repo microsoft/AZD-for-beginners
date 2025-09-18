@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:20:33+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T07:41:23+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "vi"
 }
 -->
-# Hướng Dẫn Gỡ Lỗi - Kỹ Thuật Phân Tích Nhật Ký Xử Lý Sự Cố Nâng Cao
+# Hướng Dẫn Gỡ Lỗi Cho Triển Khai AZD
+
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD Dành Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 7 - Xử Lý Sự Cố & Gỡ Lỗi
+- **⬅️ Trước**: [Các Vấn Đề Thường Gặp](common-issues.md)
+- **➡️ Tiếp Theo**: [Xử Lý Sự Cố Liên Quan Đến AI](ai-troubleshooting.md)
+- **🚀 Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../ai-foundry/production-ai-practices.md)
 
 ## Giới Thiệu
 
-Hướng dẫn toàn diện này cung cấp các chiến lược, công cụ, và kỹ thuật gỡ lỗi nâng cao để chẩn đoán và giải quyết các vấn đề phức tạp liên quan đến triển khai Azure Developer CLI. Tìm hiểu các phương pháp xử lý sự cố có hệ thống, kỹ thuật phân tích nhật ký, phân tích hiệu suất, và các công cụ chẩn đoán nâng cao để giải quyết hiệu quả các vấn đề triển khai và vận hành.
+Hướng dẫn toàn diện này cung cấp các chiến lược, công cụ và kỹ thuật gỡ lỗi nâng cao để chẩn đoán và giải quyết các vấn đề phức tạp trong triển khai Azure Developer CLI. Học các phương pháp xử lý sự cố có hệ thống, kỹ thuật phân tích nhật ký, phân tích hiệu suất, và các công cụ chẩn đoán nâng cao để giải quyết hiệu quả các vấn đề triển khai và thời gian chạy.
 
 ## Mục Tiêu Học Tập
 
-Sau khi hoàn thành hướng dẫn này, bạn sẽ:
-- Thành thạo các phương pháp gỡ lỗi có hệ thống cho các vấn đề Azure Developer CLI
+Khi hoàn thành hướng dẫn này, bạn sẽ:
+- Thành thạo các phương pháp gỡ lỗi có hệ thống cho các vấn đề của Azure Developer CLI
 - Hiểu cấu hình nhật ký nâng cao và kỹ thuật phân tích nhật ký
-- Áp dụng chiến lược phân tích hiệu suất và giám sát
+- Thực hiện các chiến lược phân tích hiệu suất và giám sát
 - Sử dụng các công cụ và dịch vụ chẩn đoán của Azure để giải quyết các vấn đề phức tạp
-- Áp dụng kỹ thuật gỡ lỗi mạng và xử lý sự cố bảo mật
+- Áp dụng các kỹ thuật gỡ lỗi mạng và bảo mật
 - Cấu hình giám sát toàn diện và cảnh báo để phát hiện vấn đề chủ động
 
 ## Kết Quả Học Tập
@@ -29,15 +36,15 @@ Sau khi hoàn thành, bạn sẽ có thể:
 - Áp dụng phương pháp TRIAGE để gỡ lỗi có hệ thống các vấn đề triển khai phức tạp
 - Cấu hình và phân tích thông tin nhật ký và truy vết toàn diện
 - Sử dụng Azure Monitor, Application Insights, và các công cụ chẩn đoán một cách hiệu quả
-- Gỡ lỗi các vấn đề về kết nối mạng, xác thực, và quyền truy cập một cách độc lập
-- Áp dụng chiến lược giám sát và tối ưu hóa hiệu suất
+- Tự gỡ lỗi các vấn đề về kết nối mạng, xác thực, và quyền hạn
+- Thực hiện các chiến lược giám sát và tối ưu hóa hiệu suất
 - Tạo các script gỡ lỗi tùy chỉnh và tự động hóa cho các vấn đề lặp lại
 
 ## Phương Pháp Gỡ Lỗi
 
 ### Phương Pháp TRIAGE
 - **T**ime: Vấn đề bắt đầu từ khi nào?
-- **R**eproduce: Có thể tái hiện vấn đề một cách nhất quán không?
+- **R**eproduce: Bạn có thể tái hiện vấn đề một cách nhất quán không?
 - **I**solate: Thành phần nào đang gặp lỗi?
 - **A**nalyze: Nhật ký cho chúng ta biết điều gì?
 - **G**ather: Thu thập tất cả thông tin liên quan
@@ -514,7 +521,7 @@ module.exports = DebuggingPool;
 
 ## 🚨 Quy Trình Gỡ Lỗi Khẩn Cấp
 
-### Phản Hồi Sự Cố Sản Xuất
+### Phản Hồi Vấn Đề Sản Xuất
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -627,7 +634,7 @@ create_debug_queries() {
 }
 ```
 
-### Tổng Hợp Nhật Ký
+### Tập Hợp Nhật Ký
 ```bash
 # Aggregate logs from multiple sources
 aggregate_logs() {
@@ -684,12 +691,12 @@ hooks:
 5. **Cập nhật công cụ gỡ lỗi** theo thay đổi của ứng dụng
 6. **Thực hành quy trình gỡ lỗi** trong thời gian không có sự cố
 
-## Các Bước Tiếp Theo
+## Bước Tiếp Theo
 
 - [Lập Kế Hoạch Năng Lực](../pre-deployment/capacity-planning.md) - Lập kế hoạch yêu cầu tài nguyên
 - [Lựa Chọn SKU](../pre-deployment/sku-selection.md) - Chọn cấp dịch vụ phù hợp
-- [Kiểm Tra Trước Triển Khai](../pre-deployment/preflight-checks.md) - Xác thực trước triển khai
-- [Tài Liệu Tham Khảo Nhanh](../../resources/cheat-sheet.md) - Các lệnh tham khảo nhanh
+- [Kiểm Tra Trước Khi Triển Khai](../pre-deployment/preflight-checks.md) - Xác thực trước khi triển khai
+- [Tài Liệu Tóm Tắt](../../resources/cheat-sheet.md) - Lệnh tham khảo nhanh
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

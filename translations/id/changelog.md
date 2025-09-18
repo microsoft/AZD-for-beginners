@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9736db53ea878e07688670ebcc8906bc",
-  "translation_date": "2025-09-12T21:23:44+00:00",
+  "original_hash": "73f4ab6147d5fac5f8c5ad72742e8e1d",
+  "translation_date": "2025-09-18T07:53:13+00:00",
   "source_file": "changelog.md",
   "language_code": "id"
 }
@@ -31,24 +31,109 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
 
 ## Riwayat Versi
 
+### [v3.2.0] - 2025-09-17
+
+#### Restrukturisasi Navigasi Utama dan Sistem Pembelajaran Berbasis Bab
+**Versi ini memperkenalkan struktur pembelajaran berbasis bab yang komprehensif dengan navigasi yang ditingkatkan di seluruh repositori.**
+
+#### Ditambahkan
+- **📚 Sistem Pembelajaran Berbasis Bab**: Kursus diatur ulang menjadi 8 bab pembelajaran progresif
+  - Bab 1: Dasar & Memulai Cepat (⭐ - 30-45 menit)
+  - Bab 2: Pengembangan Berbasis AI (⭐⭐ - 1-2 jam)
+  - Bab 3: Konfigurasi & Autentikasi (⭐⭐ - 45-60 menit)
+  - Bab 4: Infrastruktur sebagai Kode & Penerapan (⭐⭐⭐ - 1-1,5 jam)
+  - Bab 5: Solusi AI Multi-Agen (⭐⭐⭐⭐ - 2-3 jam)
+  - Bab 6: Validasi Pra-Penerapan & Perencanaan (⭐⭐ - 1 jam)
+  - Bab 7: Pemecahan Masalah & Debugging (⭐⭐ - 1-1,5 jam)
+  - Bab 8: Pola Produksi & Perusahaan (⭐⭐⭐⭐ - 2-3 jam)
+- **📚 Sistem Navigasi Komprehensif**: Header dan footer navigasi konsisten di seluruh dokumentasi
+- **🎯 Pelacakan Kemajuan**: Daftar periksa penyelesaian kursus dan sistem verifikasi pembelajaran
+- **🗺️ Panduan Jalur Pembelajaran**: Titik masuk yang jelas untuk berbagai tingkat pengalaman dan tujuan
+- **🔗 Navigasi Referensi Silang**: Bab terkait dan prasyarat yang terhubung dengan jelas
+
+#### Ditingkatkan
+- **Struktur README**: Diubah menjadi platform pembelajaran terstruktur dengan organisasi berbasis bab
+- **Navigasi Dokumentasi**: Setiap halaman sekarang mencakup konteks bab dan panduan kemajuan
+- **Organisasi Template**: Contoh dan template dipetakan ke bab pembelajaran yang sesuai
+- **Integrasi Sumber Daya**: Cheat sheet, FAQ, dan panduan studi terhubung ke bab yang relevan
+- **Integrasi Workshop**: Lab praktis dipetakan ke beberapa tujuan pembelajaran bab
+
+#### Diubah
+- **Kemajuan Pembelajaran**: Beralih dari dokumentasi linear ke pembelajaran berbasis bab yang fleksibel
+- **Penempatan Konfigurasi**: Panduan konfigurasi diposisikan ulang sebagai Bab 3 untuk alur pembelajaran yang lebih baik
+- **Integrasi Konten AI**: Integrasi konten AI yang lebih baik di seluruh perjalanan pembelajaran
+- **Konten Produksi**: Pola lanjutan dikonsolidasikan di Bab 8 untuk pelajar perusahaan
+
+#### Diperbaiki
+- **Pengalaman Pengguna**: Breadcrumb navigasi yang jelas dan indikator kemajuan bab
+- **Aksesibilitas**: Pola navigasi konsisten untuk mempermudah penelusuran kursus
+- **Presentasi Profesional**: Struktur kursus gaya universitas yang cocok untuk pelatihan akademik dan korporat
+- **Efisiensi Pembelajaran**: Waktu yang lebih singkat untuk menemukan konten yang relevan melalui organisasi yang lebih baik
+
+#### Implementasi Teknis
+- **Header Navigasi**: Navigasi bab yang distandarisasi di lebih dari 40 file dokumentasi
+- **Footer Navigasi**: Panduan kemajuan konsisten dan indikator penyelesaian bab
+- **Referensi Silang**: Sistem penghubung internal yang komprehensif menghubungkan konsep terkait
+- **Pemetaan Bab**: Template dan contoh jelas terkait dengan tujuan pembelajaran
+
+#### Peningkatan Panduan Studi
+- **📚 Tujuan Pembelajaran Komprehensif**: Panduan studi disusun ulang untuk selaras dengan sistem 8 bab
+- **🎯 Penilaian Berbasis Bab**: Setiap bab mencakup tujuan pembelajaran spesifik dan latihan praktis
+- **📋 Pelacakan Kemajuan**: Jadwal pembelajaran mingguan dengan hasil yang terukur dan daftar periksa penyelesaian
+- **❓ Pertanyaan Penilaian**: Pertanyaan validasi pengetahuan untuk setiap bab dengan hasil profesional
+- **🛠️ Latihan Praktis**: Aktivitas langsung dengan skenario penerapan nyata dan pemecahan masalah
+- **📊 Kemajuan Keterampilan**: Kemajuan yang jelas dari konsep dasar ke pola perusahaan dengan fokus pengembangan karier
+- **🎓 Kerangka Sertifikasi**: Hasil pengembangan profesional dan sistem pengakuan komunitas
+- **⏱️ Manajemen Timeline**: Rencana pembelajaran 10 minggu yang terstruktur dengan validasi tonggak
+
+### [v3.1.0] - 2025-09-17
+
+#### Peningkatan Solusi AI Multi-Agen
+**Versi ini meningkatkan solusi ritel multi-agen dengan penamaan agen yang lebih baik dan dokumentasi yang ditingkatkan.**
+
+#### Diubah
+- **Terminologi Multi-Agen**: Mengganti "agen Cora" dengan "agen Pelanggan" di seluruh solusi ritel multi-agen untuk pemahaman yang lebih jelas
+- **Arsitektur Agen**: Memperbarui semua dokumentasi, template ARM, dan contoh kode untuk menggunakan penamaan "agen Pelanggan" yang konsisten
+- **Contoh Konfigurasi**: Memodernisasi pola konfigurasi agen dengan konvensi penamaan yang diperbarui
+- **Konsistensi Dokumentasi**: Memastikan semua referensi menggunakan nama agen yang profesional dan deskriptif
+
+#### Ditingkatkan
+- **Paket Template ARM**: Memperbarui retail-multiagent-arm-template dengan referensi agen Pelanggan
+- **Diagram Arsitektur**: Menyegarkan diagram Mermaid dengan penamaan agen yang diperbarui
+- **Contoh Kode**: Kelas Python dan contoh implementasi sekarang menggunakan penamaan CustomerAgent
+- **Variabel Lingkungan**: Memperbarui semua skrip penerapan untuk menggunakan konvensi CUSTOMER_AGENT_NAME
+
+#### Diperbaiki
+- **Pengalaman Pengembang**: Peran dan tanggung jawab agen yang lebih jelas dalam dokumentasi
+- **Kesiapan Produksi**: Penyesuaian yang lebih baik dengan konvensi penamaan perusahaan
+- **Materi Pembelajaran**: Penamaan agen yang lebih intuitif untuk tujuan pendidikan
+- **Kemudahan Template**: Pemahaman yang disederhanakan tentang fungsi agen dan pola penerapan
+
+#### Detail Teknis
+- Memperbarui diagram arsitektur Mermaid dengan referensi CustomerAgent
+- Mengganti nama kelas CoraAgent dengan CustomerAgent dalam contoh Python
+- Memodifikasi konfigurasi JSON template ARM untuk menggunakan tipe agen "pelanggan"
+- Memperbarui variabel lingkungan dari CORA_AGENT_* ke pola CUSTOMER_AGENT_*
+- Menyegarkan semua perintah penerapan dan konfigurasi kontainer
+
 ### [v3.0.0] - 2025-09-12
 
-#### Perubahan Utama - Fokus Pengembang AI dan Integrasi Azure AI Foundry
-**Versi ini mengubah repositori menjadi sumber pembelajaran yang komprehensif dengan fokus pada AI dan integrasi Azure AI Foundry.**
+#### Perubahan Besar - Fokus Pengembang AI dan Integrasi Azure AI Foundry
+**Versi ini mengubah repositori menjadi sumber pembelajaran yang komprehensif berfokus pada AI dengan integrasi Azure AI Foundry.**
 
 #### Ditambahkan
 - **🤖 Jalur Pembelajaran Berbasis AI**: Restrukturisasi lengkap yang memprioritaskan pengembang dan insinyur AI
-- **Panduan Integrasi Azure AI Foundry**: Dokumentasi lengkap untuk menghubungkan AZD dengan layanan Azure AI Foundry
-- **Pola Penerapan Model AI**: Panduan rinci tentang pemilihan model, konfigurasi, dan strategi penerapan produksi
-- **Lab Workshop AI**: Workshop praktis selama 2-3 jam untuk mengonversi aplikasi AI menjadi solusi yang dapat diterapkan dengan AZD
-- **Praktik Terbaik AI Produksi**: Pola siap perusahaan untuk penskalaan, pemantauan, dan pengamanan beban kerja AI
-- **Panduan Pemecahan Masalah Khusus AI**: Pemecahan masalah komprehensif untuk Azure OpenAI, Cognitive Services, dan masalah penerapan AI
-- **Galeri Template AI**: Koleksi unggulan template Azure AI Foundry dengan penilaian kompleksitas
-- **Materi Workshop**: Struktur workshop lengkap dengan lab praktis dan materi referensi
+- **Panduan Integrasi Azure AI Foundry**: Dokumentasi komprehensif untuk menghubungkan AZD dengan layanan Azure AI Foundry
+- **Pola Penerapan Model AI**: Panduan terperinci tentang pemilihan model, konfigurasi, dan strategi penerapan produksi
+- **Lab Workshop AI**: Workshop langsung 2-3 jam untuk mengonversi aplikasi AI menjadi solusi yang dapat diterapkan dengan AZD
+- **Praktik Terbaik Produksi AI**: Pola siap perusahaan untuk penskalaan, pemantauan, dan pengamanan beban kerja AI
+- **Panduan Pemecahan Masalah AI**: Pemecahan masalah komprehensif untuk Azure OpenAI, Cognitive Services, dan masalah penerapan AI
+- **Galeri Template AI**: Koleksi unggulan template Azure AI Foundry dengan peringkat kompleksitas
+- **Materi Workshop**: Struktur workshop lengkap dengan lab langsung dan materi referensi
 
 #### Ditingkatkan
 - **Struktur README**: Berfokus pada pengembang AI dengan data minat komunitas 45% dari Discord Azure AI Foundry
-- **Jalur Pembelajaran**: Perjalanan pengembang AI yang didedikasikan bersama jalur tradisional untuk pelajar dan insinyur DevOps
+- **Jalur Pembelajaran**: Perjalanan pengembang AI khusus di samping jalur tradisional untuk pelajar dan insinyur DevOps
 - **Rekomendasi Template**: Template AI unggulan termasuk azure-search-openai-demo, contoso-chat, dan openai-chat-app-quickstart
 - **Integrasi Komunitas**: Dukungan komunitas Discord yang ditingkatkan dengan saluran dan diskusi khusus AI
 
@@ -59,31 +144,31 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
 - **Pemantauan Kinerja**: Metrik khusus AI dan integrasi Application Insights
 
 #### Kualitas Dokumentasi
-- **Struktur Kursus Linear**: Kemajuan logis dari pola penerapan AI pemula hingga lanjutan
-- **URL yang Valid**: Semua tautan repositori eksternal diverifikasi dan dapat diakses
-- **Referensi Lengkap**: Semua tautan dokumentasi internal divalidasi dan berfungsi
+- **Struktur Kursus Linear**: Kemajuan logis dari pemula hingga pola penerapan AI tingkat lanjut
+- **URL Tervalidasi**: Semua tautan repositori eksternal diverifikasi dan dapat diakses
+- **Referensi Lengkap**: Semua tautan dokumentasi internal tervalidasi dan berfungsi
 - **Siap Produksi**: Pola penerapan perusahaan dengan contoh dunia nyata
 
 ### [v2.0.0] - 2025-09-09
 
-#### Perubahan Utama - Restrukturisasi Repositori dan Peningkatan Profesional
-**Versi ini mewakili perombakan signifikan pada struktur repositori dan penyajian konten.**
+#### Perubahan Besar - Restrukturisasi Repositori dan Peningkatan Profesional
+**Versi ini mewakili perombakan signifikan pada struktur repositori dan presentasi konten.**
 
 #### Ditambahkan
 - **Kerangka Pembelajaran Terstruktur**: Semua halaman dokumentasi sekarang mencakup bagian Pendahuluan, Tujuan Pembelajaran, dan Hasil Pembelajaran
-- **Sistem Navigasi**: Ditambahkan tautan pelajaran Sebelumnya/Berikutnya di seluruh dokumentasi untuk kemajuan pembelajaran yang terarah
-- **Panduan Belajar**: study-guide.md yang komprehensif dengan tujuan pembelajaran, latihan praktik, dan materi penilaian
-- **Presentasi Profesional**: Semua ikon emoji dihapus untuk meningkatkan aksesibilitas dan tampilan profesional
+- **Sistem Navigasi**: Menambahkan tautan pelajaran Sebelumnya/Berikutnya di seluruh dokumentasi untuk kemajuan pembelajaran yang dipandu
+- **Panduan Studi**: study-guide.md yang komprehensif dengan tujuan pembelajaran, latihan praktik, dan materi penilaian
+- **Presentasi Profesional**: Menghapus semua ikon emoji untuk meningkatkan aksesibilitas dan tampilan profesional
 - **Struktur Konten yang Ditingkatkan**: Organisasi dan alur materi pembelajaran yang lebih baik
 
 #### Diubah
-- **Format Dokumentasi**: Standarisasi semua dokumentasi dengan struktur pembelajaran yang konsisten
-- **Alur Navigasi**: Implementasi kemajuan logis melalui semua materi pembelajaran
-- **Penyajian Konten**: Elemen dekoratif dihapus demi format yang jelas dan profesional
-- **Struktur Tautan**: Semua tautan internal diperbarui untuk mendukung sistem navigasi baru
+- **Format Dokumentasi**: Menstandarkan semua dokumentasi dengan struktur pembelajaran yang konsisten
+- **Alur Navigasi**: Menerapkan kemajuan logis melalui semua materi pembelajaran
+- **Presentasi Konten**: Menghapus elemen dekoratif demi format yang jelas dan profesional
+- **Struktur Tautan**: Memperbarui semua tautan internal untuk mendukung sistem navigasi baru
 
-#### Ditingkatkan
-- **Aksesibilitas**: Ketergantungan emoji dihapus untuk kompatibilitas pembaca layar yang lebih baik
+#### Diperbaiki
+- **Aksesibilitas**: Menghapus ketergantungan emoji untuk kompatibilitas pembaca layar yang lebih baik
 - **Tampilan Profesional**: Presentasi gaya akademik yang bersih, cocok untuk pembelajaran perusahaan
 - **Pengalaman Pembelajaran**: Pendekatan terstruktur dengan tujuan dan hasil yang jelas untuk setiap pelajaran
 - **Organisasi Konten**: Alur logis yang lebih baik dan koneksi antara topik terkait
@@ -94,16 +179,16 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
 
 #### Ditambahkan
 - **Struktur Dokumentasi Inti**
-  - Seri panduan memulai yang lengkap
+  - Seri panduan memulai lengkap
   - Dokumentasi penerapan dan penyediaan yang komprehensif
   - Sumber daya pemecahan masalah dan panduan debugging yang terperinci
   - Alat dan prosedur validasi pra-penerapan
 
 - **Modul Memulai**
-  - Dasar-dasar AZD: Konsep inti dan terminologi
+  - Dasar AZD: Konsep inti dan terminologi
   - Panduan Instalasi: Instruksi pengaturan spesifik platform
   - Panduan Konfigurasi: Pengaturan lingkungan dan autentikasi
-  - Tutorial Proyek Pertama: Pembelajaran praktis langkah demi langkah
+  - Tutorial Proyek Pertama: Pembelajaran langsung langkah demi langkah
 
 - **Modul Penerapan dan Penyediaan**
   - Panduan Penerapan: Dokumentasi alur kerja lengkap
@@ -115,7 +200,7 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
   - Perencanaan Kapasitas: Validasi ketersediaan sumber daya Azure
   - Pemilihan SKU: Panduan tingkat layanan yang komprehensif
   - Pemeriksaan Pra-Penerbangan: Skrip validasi otomatis (PowerShell dan Bash)
-  - Alat perencanaan biaya dan anggaran
+  - Alat estimasi biaya dan perencanaan anggaran
 
 - **Modul Pemecahan Masalah**
   - Masalah Umum: Masalah yang sering ditemui dan solusinya
@@ -124,7 +209,7 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
   - Pemantauan dan optimasi kinerja
 
 - **Sumber Daya dan Referensi**
-  - Lembar Cheat Perintah: Referensi cepat untuk perintah penting
+  - Cheat Sheet Perintah: Referensi cepat untuk perintah penting
   - Glosarium: Definisi terminologi dan akronim yang komprehensif
   - FAQ: Jawaban terperinci untuk pertanyaan umum
   - Tautan sumber daya eksternal dan koneksi komunitas
@@ -141,18 +226,18 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
 - **Dukungan Multi-Platform**: Panduan instalasi dan konfigurasi untuk Windows, macOS, dan Linux
 - **Berbagai Tingkat Keterampilan**: Konten dirancang untuk pelajar hingga pengembang profesional
 - **Fokus Praktis**: Contoh langsung dan skenario dunia nyata
-- **Cakupan Komprehensif**: Dari konsep dasar hingga pola perusahaan yang canggih
-- **Pendekatan Keamanan**: Praktik terbaik keamanan terintegrasi di seluruh konten
+- **Cakupan Komprehensif**: Dari konsep dasar hingga pola perusahaan tingkat lanjut
+- **Pendekatan Keamanan**: Praktik terbaik keamanan terintegrasi di seluruh
 - **Optimasi Biaya**: Panduan untuk penerapan yang hemat biaya dan manajemen sumber daya
 
 #### Kualitas Dokumentasi
-- **Contoh Kode yang Terperinci**: Contoh kode yang praktis dan teruji
-- **Instruksi Langkah Demi Langkah**: Panduan yang jelas dan dapat ditindaklanjuti
+- **Contoh Kode Terperinci**: Contoh kode yang praktis dan teruji
+- **Instruksi Langkah-demi-Langkah**: Panduan yang jelas dan dapat dilakukan
 - **Penanganan Kesalahan yang Komprehensif**: Pemecahan masalah untuk masalah umum
 - **Integrasi Praktik Terbaik**: Standar industri dan rekomendasi
 - **Kompatibilitas Versi**: Selalu diperbarui dengan layanan Azure terbaru dan fitur azd
 
-## Rencana Peningkatan di Masa Depan
+## Peningkatan yang Direncanakan
 
 ### Versi 3.1.0 (Direncanakan)
 #### Ekspansi Platform AI
@@ -164,8 +249,8 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
 #### Pengalaman Pengembang
 - **Ekstensi VS Code**: Pengalaman pengembangan terintegrasi AZD + AI Foundry
 - **Integrasi GitHub Copilot**: Generasi template AZD yang dibantu AI
-- **Tutorial Interaktif**: Latihan coding praktis dengan validasi otomatis untuk skenario AI
-- **Konten Video**: Tutorial video tambahan untuk pembelajar visual yang berfokus pada penerapan AI
+- **Tutorial Interaktif**: Latihan coding langsung dengan validasi otomatis untuk skenario AI
+- **Konten Video**: Tutorial video tambahan untuk pelajar visual yang berfokus pada penerapan AI
 
 ### Versi 4.0.0 (Direncanakan)
 #### Pola AI Perusahaan
@@ -175,148 +260,148 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
 - **AI Cloud Hybrid**: Pola penerapan multi-cloud dan hybrid untuk beban kerja AI
 
 #### Fitur Lanjutan
-- **Otomasi Pipeline AI**: Integrasi MLOps dengan pipeline Azure Machine Learning
-- **Keamanan Lanjutan**: Pola zero-trust, endpoint privat, dan perlindungan ancaman tingkat lanjut
-- **Optimasi Kinerja**: Strategi penyetelan dan penskalaan lanjutan untuk aplikasi AI throughput tinggi
-- **Distribusi Global**: Pola pengiriman konten dan caching edge untuk aplikasi AI
+- **Otomasi Pipeline AI**: Integrasi MLOps dengan pipeline Azure Machine Learning  
+- **Keamanan Lanjutan**: Pola zero-trust, private endpoint, dan perlindungan ancaman tingkat lanjut  
+- **Optimasi Performa**: Strategi tuning dan scaling lanjutan untuk aplikasi AI dengan throughput tinggi  
+- **Distribusi Global**: Pola pengiriman konten dan caching di edge untuk aplikasi AI  
 
-### Versi 3.0.0 (Direncanakan) - Digantikan oleh Rilis Saat Ini
-#### Penambahan yang Diusulkan - Kini Diimplementasikan di v3.0.0
-- ✅ **Konten Berfokus AI**: Integrasi Azure AI Foundry yang komprehensif (Selesai)
-- ✅ **Tutorial Interaktif**: Lab workshop AI praktis (Selesai)
-- ✅ **Modul Keamanan Lanjutan**: Pola keamanan khusus AI (Selesai)
-- ✅ **Optimasi Kinerja**: Strategi penyetelan beban kerja AI (Selesai)
+### Versi 3.0.0 (Direncanakan) - Digantikan oleh Rilis Saat Ini  
+#### Penambahan yang Diusulkan - Kini Diimplementasikan di v3.0.0  
+- ✅ **Konten Berfokus AI**: Integrasi komprehensif Azure AI Foundry (Selesai)  
+- ✅ **Tutorial Interaktif**: Lab workshop AI langsung (Selesai)  
+- ✅ **Modul Keamanan Lanjutan**: Pola keamanan khusus AI (Selesai)  
+- ✅ **Optimasi Performa**: Strategi tuning beban kerja AI (Selesai)  
 
-### Versi 2.1.0 (Direncanakan) - Sebagian Diimplementasikan di v3.0.0
-#### Peningkatan Minor - Beberapa Selesai di Rilis Saat Ini
-- ✅ **Contoh Tambahan**: Skenario penerapan berfokus AI (Selesai)
-- ✅ **FAQ yang Diperluas**: Pertanyaan dan pemecahan masalah khusus AI (Selesai)
-- **Integrasi Alat**: Panduan integrasi IDE dan editor yang ditingkatkan
-- ✅ **Ekspansi Pemantauan**: Pola pemantauan dan peringatan khusus AI (Selesai)
+### Versi 2.1.0 (Direncanakan) - Sebagian Diimplementasikan di v3.0.0  
+#### Peningkatan Minor - Beberapa Selesai di Rilis Saat Ini  
+- ✅ **Contoh Tambahan**: Skenario penerapan berfokus AI (Selesai)  
+- ✅ **FAQ Diperluas**: Pertanyaan dan pemecahan masalah khusus AI (Selesai)  
+- **Integrasi Alat**: Panduan integrasi IDE dan editor yang ditingkatkan  
+- ✅ **Perluasan Pemantauan**: Pola pemantauan dan peringatan khusus AI (Selesai)  
 
-#### Masih Direncanakan untuk Rilis Mendatang
-- **Dokumentasi Ramah Mobile**: Desain responsif untuk pembelajaran mobile
-- **Akses Offline**: Paket dokumentasi yang dapat diunduh
-- **Integrasi IDE yang Ditingkatkan**: Ekstensi VS Code untuk alur kerja AZD + AI
-- **Dasbor Komunitas**: Metrik komunitas real-time dan pelacakan kontribusi
+#### Masih Direncanakan untuk Rilis Mendatang  
+- **Dokumentasi Ramah Mobile**: Desain responsif untuk pembelajaran di perangkat mobile  
+- **Akses Offline**: Paket dokumentasi yang dapat diunduh  
+- **Integrasi IDE yang Ditingkatkan**: Ekstensi VS Code untuk alur kerja AZD + AI  
+- **Dasbor Komunitas**: Metrik komunitas real-time dan pelacakan kontribusi  
 
-## Berkontribusi pada Catatan Perubahan
+## Berkontribusi pada Changelog  
 
-### Melaporkan Perubahan
-Saat berkontribusi ke repositori ini, pastikan entri catatan perubahan mencakup:
+### Melaporkan Perubahan  
+Saat berkontribusi ke repositori ini, pastikan entri changelog mencakup:  
 
-1. **Nomor Versi**: Mengikuti versi semantik (major.minor.patch)
-2. **Tanggal**: Tanggal rilis atau pembaruan dalam format YYYY-MM-DD
-3. **Kategori**: Ditambahkan, Diubah, Dihapus, Diperbaiki, Keamanan
-4. **Deskripsi Jelas**: Deskripsi singkat tentang apa yang berubah
-5. **Penilaian Dampak**: Bagaimana perubahan memengaruhi pengguna yang ada
+1. **Nomor Versi**: Mengikuti versi semantik (major.minor.patch)  
+2. **Tanggal**: Tanggal rilis atau pembaruan dalam format YYYY-MM-DD  
+3. **Kategori**: Ditambahkan, Diubah, Dihapus, Diperbaiki, Keamanan  
+4. **Deskripsi Jelas**: Deskripsi singkat tentang apa yang berubah  
+5. **Penilaian Dampak**: Bagaimana perubahan memengaruhi pengguna yang ada  
 
-### Kategori Perubahan
+### Kategori Perubahan  
 
-#### Ditambahkan
-- Fitur baru, bagian dokumentasi, atau kemampuan
-- Contoh baru, template, atau sumber daya pembelajaran
-- Alat, skrip, atau utilitas tambahan
+#### Ditambahkan  
+- Fitur baru, bagian dokumentasi, atau kapabilitas  
+- Contoh baru, template, atau sumber belajar  
+- Alat tambahan, skrip, atau utilitas  
 
-#### Diubah
-- Modifikasi pada fungsionalitas atau dokumentasi yang ada
-- Pembaruan untuk meningkatkan kejelasan atau akurasi
-- Restrukturisasi konten atau organisasi
+#### Diubah  
+- Modifikasi pada fungsionalitas atau dokumentasi yang ada  
+- Pembaruan untuk meningkatkan kejelasan atau akurasi  
+- Restrukturisasi konten atau organisasi  
 
-#### Dihapus
-- Fitur, dokumentasi, atau contoh yang tidak relevan lagi
-- Informasi usang atau pendekatan yang tidak digunakan lagi
-- Konten yang redundan atau telah dikonsolidasi
+#### Dihapus  
+- Fitur atau pendekatan yang sedang dihentikan  
+- Bagian dokumentasi yang dijadwalkan untuk dihapus  
+- Metode yang memiliki alternatif yang lebih baik  
 
-#### Diperbaiki
-- Koreksi kesalahan dalam dokumentasi atau kode
-- Penyelesaian masalah atau masalah yang dilaporkan
-- Peningkatan akurasi atau fungsionalitas
+#### Diperbaiki  
+- Koreksi pada kesalahan dalam dokumentasi atau kode  
+- Penyelesaian masalah atau masalah yang dilaporkan  
+- Peningkatan akurasi atau fungsionalitas  
 
-#### Keamanan
-- Peningkatan atau perbaikan terkait keamanan
-- Pembaruan praktik terbaik keamanan
-- Penyelesaian kerentanan keamanan
+#### Keamanan  
+- Peningkatan atau perbaikan terkait keamanan  
+- Pembaruan pada praktik terbaik keamanan  
+- Penyelesaian kerentanan keamanan  
 
-### Panduan Versi Semantik
+### Panduan Versi Semantik  
 
-#### Versi Utama (X.0.0)
-- Perubahan besar yang memerlukan tindakan pengguna
-- Restrukturisasi signifikan konten atau organisasi
-- Perubahan yang mengubah pendekatan atau metodologi mendasar
+#### Versi Utama (X.0.0)  
+- Perubahan besar yang memerlukan tindakan pengguna  
+- Restrukturisasi signifikan pada konten atau organisasi  
+- Perubahan yang mengubah pendekatan atau metodologi mendasar  
 
-#### Versi Minor (X.Y.0)
-- Fitur baru atau penambahan konten
-- Peningkatan yang tetap kompatibel ke belakang
-- Contoh, alat, atau sumber daya tambahan
+#### Versi Minor (X.Y.0)  
+- Fitur baru atau penambahan konten  
+- Peningkatan yang tetap kompatibel ke belakang  
+- Contoh, alat, atau sumber daya tambahan  
 
-#### Versi Patch (X.Y.Z)
-- Perbaikan bug dan koreksi
-- Peningkatan kecil pada konten yang ada
-- Klarifikasi dan peningkatan kecil
+#### Versi Patch (X.Y.Z)  
+- Perbaikan bug dan koreksi  
+- Peningkatan kecil pada konten yang ada  
+- Klarifikasi dan peningkatan kecil  
 
-## Umpan Balik dan Saran Komunitas
+## Umpan Balik dan Saran Komunitas  
 
-Kami secara aktif mendorong umpan balik komunitas untuk meningkatkan sumber pembelajaran ini:
+Kami sangat mendorong umpan balik komunitas untuk meningkatkan sumber belajar ini:  
 
-### Cara Memberikan Umpan Balik
-- **GitHub Issues**: Laporkan masalah atau sarankan peningkatan (masalah khusus AI diterima)
-- **Diskusi Discord**: Bagikan ide dan berinteraksi dengan komunitas Azure AI Foundry
-- **Pull Requests**: Berkontribusi langsung pada peningkatan konten, terutama template dan panduan AI
-- **Discord Azure AI Foundry**: Berpartisipasi di saluran #Azure untuk diskusi AZD + AI
-- **Forum Komunitas**: Berpartisipasi dalam diskusi pengembang Azure yang lebih luas
+### Cara Memberikan Umpan Balik  
+- **GitHub Issues**: Laporkan masalah atau sarankan perbaikan (masalah khusus AI diterima)  
+- **Diskusi Discord**: Bagikan ide dan berinteraksi dengan komunitas Azure AI Foundry  
+- **Pull Request**: Berkontribusi langsung pada perbaikan konten, terutama template dan panduan AI  
+- **Discord Azure AI Foundry**: Ikut serta di saluran #Azure untuk diskusi AZD + AI  
+- **Forum Komunitas**: Ikut serta dalam diskusi pengembang Azure yang lebih luas  
 
-### Kategori Umpan Balik
-- **Akurasi Konten AI**: Koreksi informasi integrasi dan penerapan layanan AI
-- **Pengalaman Pembelajaran**: Saran untuk alur pembelajaran pengembang AI yang lebih baik
-- **Konten AI yang Hilang**: Permintaan untuk template, pola, atau contoh AI tambahan
-- **Aksesibilitas**: Peningkatan untuk kebutuhan pembelajaran yang beragam
-- **Integrasi Alat AI**: Saran untuk integrasi alur kerja pengembangan AI yang lebih baik
-- **Pola AI Produksi**: Permintaan pola penerapan AI perusahaan
+### Kategori Umpan Balik  
+- **Akurasi Konten AI**: Koreksi pada informasi integrasi dan penerapan layanan AI  
+- **Pengalaman Belajar**: Saran untuk alur pembelajaran pengembang AI yang lebih baik  
+- **Konten AI yang Hilang**: Permintaan untuk template, pola, atau contoh AI tambahan  
+- **Aksesibilitas**: Peningkatan untuk kebutuhan pembelajaran yang beragam  
+- **Integrasi Alat AI**: Saran untuk integrasi alur kerja pengembangan AI yang lebih baik  
+- **Pola AI Produksi**: Permintaan pola penerapan AI untuk perusahaan  
 
-### Komitmen Respons
-- **Respons Masalah**: Dalam 48 jam untuk masalah yang dilaporkan
-- **Permintaan Fitur**: Evaluasi dalam satu minggu
-- **Kontribusi Komunitas**: Tinjauan dalam satu minggu
-- **Masalah Keamanan**: Prioritas segera dengan respons yang dipercepat
+### Komitmen Respons  
+- **Respons Masalah**: Dalam 48 jam untuk masalah yang dilaporkan  
+- **Permintaan Fitur**: Evaluasi dalam satu minggu  
+- **Kontribusi Komunitas**: Tinjauan dalam satu minggu  
+- **Masalah Keamanan**: Prioritas langsung dengan respons yang dipercepat  
 
-## Jadwal Pemeliharaan
+## Jadwal Pemeliharaan  
 
-### Pembaruan Reguler
-- **Tinjauan Bulanan**: Akurasi konten dan validasi tautan
-- **Pembaruan Triwulanan**: Penambahan dan peningkatan konten utama
-- **Tinjauan Semi-Tahunan**: Restrukturisasi dan peningkatan komprehensif
-- **Rilis Tahunan**: Pembaruan versi utama dengan peningkatan signifikan
+### Pembaruan Reguler  
+- **Tinjauan Bulanan**: Akurasi konten dan validasi tautan  
+- **Pembaruan Triwulanan**: Penambahan dan peningkatan konten utama  
+- **Tinjauan Setengah Tahunan**: Restrukturisasi dan peningkatan komprehensif  
+- **Rilis Tahunan**: Pembaruan versi utama dengan peningkatan signifikan  
 
-### Pemantauan dan Jaminan Kualitas
-- **Pengujian Otomatis**: Validasi reguler contoh kode dan tautan
-- **Integrasi Umpan Balik Komunitas**: Incorporasi reguler saran pengguna
-- **Pembaruan Teknologi**: Penyesuaian dengan layanan Azure terbaru dan rilis azd
-- **Audit Aksesibilitas**: Tinjauan reguler untuk prinsip desain inklusif
+### Pemantauan dan Jaminan Kualitas  
+- **Pengujian Otomatis**: Validasi reguler pada contoh kode dan tautan  
+- **Integrasi Umpan Balik Komunitas**: Penggabungan rutin saran pengguna  
+- **Pembaruan Teknologi**: Penyesuaian dengan layanan Azure terbaru dan rilis azd  
+- **Audit Aksesibilitas**: Tinjauan rutin untuk prinsip desain inklusif  
 
-## Kebijakan Dukungan Versi
+## Kebijakan Dukungan Versi  
 
-### Dukungan Versi Saat Ini
-- **Versi Utama Terbaru**: Dukungan penuh dengan pembaruan rutin
-- **Versi Utama Sebelumnya**: Pembaruan keamanan dan perbaikan kritis selama 12 bulan
-- **Versi Lama**: Dukungan komunitas saja, tanpa pembaruan resmi
+### Dukungan Versi Saat Ini  
+- **Versi Utama Terbaru**: Dukungan penuh dengan pembaruan reguler  
+- **Versi Utama Sebelumnya**: Pembaruan keamanan dan perbaikan kritis selama 12 bulan  
+- **Versi Lama**: Hanya dukungan komunitas, tanpa pembaruan resmi  
 
-### Panduan Migrasi
-Ketika versi utama dirilis, kami menyediakan:
-- **Panduan Migrasi**: Instruksi langkah demi langkah untuk transisi
-- **Catatan Kompatibilitas**: Detail tentang perubahan yang tidak kompatibel
-- **Dukungan Alat**: Skrip atau utilitas untuk membantu migrasi
-- **Dukungan Komunitas**: Forum khusus untuk pertanyaan terkait migrasi
+### Panduan Migrasi  
+Saat versi utama dirilis, kami menyediakan:  
+- **Panduan Migrasi**: Instruksi transisi langkah demi langkah  
+- **Catatan Kompatibilitas**: Detail tentang perubahan besar  
+- **Dukungan Alat**: Skrip atau utilitas untuk membantu migrasi  
+- **Dukungan Komunitas**: Forum khusus untuk pertanyaan migrasi  
 
 ---
 
-**Navigasi**
-- **Pelajaran Sebelumnya**: [Panduan Belajar](resources/study-guide.md)
-- **Pelajaran Selanjutnya**: Kembali ke [README Utama](README.md)
+**Navigasi**  
+- **Pelajaran Sebelumnya**: [Panduan Belajar](resources/study-guide.md)  
+- **Pelajaran Berikutnya**: Kembali ke [README Utama](README.md)  
 
-**Tetap Terupdate**: Pantau repositori ini untuk mendapatkan notifikasi tentang rilis baru dan pembaruan penting pada materi pembelajaran.
+**Tetap Terupdate**: Pantau repositori ini untuk pemberitahuan tentang rilis baru dan pembaruan penting pada materi pembelajaran.  
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

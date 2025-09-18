@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:44:01+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T07:40:20+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "vi"
 }
 -->
-# Cấp Phát Tài Nguyên - Hạ Tầng dưới dạng Mã với AZD
+# Cung cấp tài nguyên Azure với AZD
 
-## Giới Thiệu
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 4 - Hạ tầng dưới dạng mã & Triển khai
+- **⬅️ Trước đó**: [Hướng dẫn triển khai](deployment-guide.md)
+- **➡️ Chương tiếp theo**: [Chương 5: Giải pháp AI đa tác nhân](../../examples/retail-scenario.md)
+- **🔧 Liên quan**: [Chương 6: Xác thực trước triển khai](../pre-deployment/capacity-planning.md)
 
-Hướng dẫn toàn diện này bao gồm mọi thứ bạn cần biết về việc cấp phát và quản lý tài nguyên Azure bằng Azure Developer CLI. Tìm hiểu cách triển khai các mẫu Hạ Tầng dưới dạng Mã (IaC) từ việc tạo tài nguyên cơ bản đến các kiến trúc hạ tầng cấp doanh nghiệp tiên tiến sử dụng Bicep, ARM templates, Terraform, và Pulumi.
+## Giới thiệu
 
-## Mục Tiêu Học Tập
+Hướng dẫn toàn diện này bao gồm mọi thứ bạn cần biết về việc cung cấp và quản lý tài nguyên Azure bằng Azure Developer CLI. Học cách triển khai các mẫu Hạ tầng dưới dạng mã (IaC) từ việc tạo tài nguyên cơ bản đến các kiến trúc hạ tầng cấp doanh nghiệp tiên tiến sử dụng Bicep, ARM templates, Terraform, và Pulumi.
+
+## Mục tiêu học tập
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
-- Nắm vững các nguyên tắc Hạ Tầng dưới dạng Mã và cách cấp phát tài nguyên Azure
-- Hiểu rõ các nhà cung cấp IaC được hỗ trợ bởi Azure Developer CLI
+- Thành thạo các nguyên tắc Hạ tầng dưới dạng mã và cung cấp tài nguyên Azure
+- Hiểu các nhà cung cấp IaC khác nhau được hỗ trợ bởi Azure Developer CLI
 - Thiết kế và triển khai các mẫu Bicep cho các kiến trúc ứng dụng phổ biến
 - Cấu hình các tham số tài nguyên, biến, và cài đặt dành riêng cho môi trường
 - Triển khai các mẫu hạ tầng tiên tiến bao gồm mạng và bảo mật
 - Quản lý vòng đời tài nguyên, cập nhật, và giải quyết phụ thuộc
 
-## Kết Quả Học Tập
+## Kết quả học tập
 
 Sau khi hoàn thành, bạn sẽ có khả năng:
-- Thiết kế và cấp phát hạ tầng Azure bằng Bicep và ARM templates
+- Thiết kế và cung cấp hạ tầng Azure bằng Bicep và ARM templates
 - Cấu hình các kiến trúc đa dịch vụ phức tạp với các phụ thuộc tài nguyên phù hợp
-- Triển khai các mẫu được tham số hóa cho nhiều môi trường và cấu hình khác nhau
-- Khắc phục sự cố cấp phát hạ tầng và giải quyết các lỗi triển khai
-- Áp dụng các nguyên tắc của Khung Kiến Trúc Tốt của Azure vào thiết kế hạ tầng
+- Triển khai các mẫu có tham số hóa cho nhiều môi trường và cấu hình
+- Khắc phục sự cố cung cấp hạ tầng và giải quyết các lỗi triển khai
+- Áp dụng các nguyên tắc của Khung Kiến trúc Tốt của Azure vào thiết kế hạ tầng
 - Quản lý cập nhật hạ tầng và triển khai các chiến lược phiên bản hạ tầng
 
-## Tổng Quan về Cấp Phát Hạ Tầng
+## Tổng quan về cung cấp hạ tầng
 
-Azure Developer CLI hỗ trợ nhiều nhà cung cấp Hạ Tầng dưới dạng Mã (IaC):
+Azure Developer CLI hỗ trợ nhiều nhà cung cấp Hạ tầng dưới dạng mã (IaC):
 - **Bicep** (khuyến nghị) - Ngôn ngữ chuyên biệt của Azure
 - **ARM Templates** - Các mẫu JSON của Azure Resource Manager
 - **Terraform** - Công cụ hạ tầng đa đám mây
 - **Pulumi** - Hạ tầng hiện đại dưới dạng mã với các ngôn ngữ lập trình
 
-## Hiểu Về Tài Nguyên Azure
+## Hiểu về tài nguyên Azure
 
-### Cấu Trúc Tài Nguyên
+### Cấu trúc phân cấp tài nguyên
 ```
 Azure Account
 └── Subscriptions
@@ -51,16 +58,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Các Dịch Vụ Azure Phổ Biến cho Ứng Dụng
-- **Tính Toán**: App Service, Container Apps, Functions, Virtual Machines
-- **Lưu Trữ**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+### Các dịch vụ Azure phổ biến cho ứng dụng
+- **Tính toán**: App Service, Container Apps, Functions, Virtual Machines
+- **Lưu trữ**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Mạng**: Virtual Network, Application Gateway, CDN
-- **Bảo Mật**: Key Vault, Application Insights, Log Analytics
+- **Bảo mật**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Mẫu Hạ Tầng Bicep
+## Mẫu hạ tầng Bicep
 
-### Cấu Trúc Mẫu Bicep Cơ Bản
+### Cấu trúc mẫu Bicep cơ bản
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,9 +137,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Các Mẫu Bicep Nâng Cao
+### Các mẫu Bicep nâng cao
 
-#### Hạ Tầng Theo Mô-đun
+#### Hạ tầng mô-đun
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -181,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Tạo Tài Nguyên Có Điều Kiện
+#### Tạo tài nguyên có điều kiện
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Cấp Phát Cơ Sở Dữ Liệu
+## 🗃️ Cung cấp cơ sở dữ liệu
 
 ### Cosmos DB
 ```bicep
@@ -300,9 +307,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Quản Lý Bảo Mật và Bí Mật
+## 🔒 Quản lý bảo mật và bí mật
 
-### Tích Hợp Key Vault
+### Tích hợp Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -344,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Cấu Hình Managed Identity
+### Cấu hình Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,9 +377,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Mạng và Kết Nối
+## 🌍 Mạng và kết nối
 
-### Cấu Hình Virtual Network
+### Cấu hình Virtual Network
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Giám Sát và Khả Năng Quan Sát
+## 📊 Giám sát và quan sát
 
 ### Application Insights
 ```bicep
@@ -529,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Các Chỉ Số Tùy Chỉnh và Cảnh Báo
+### Các chỉ số tùy chỉnh và cảnh báo
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -563,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Cấu Hình Dành Riêng cho Môi Trường
+## 🔧 Cấu hình dành riêng cho môi trường
 
-### Tệp Tham Số cho Các Môi Trường Khác Nhau
+### Tệp tham số cho các môi trường khác nhau
 ```json
 // infra/main.parameters.dev.json
 {
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Cấp Phát Tài Nguyên Có Điều Kiện
+### Cung cấp tài nguyên có điều kiện
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Các Mẫu Cấp Phát Nâng Cao
+## 🚀 Các mẫu cung cấp nâng cao
 
-### Triển Khai Đa Vùng
+### Triển khai đa vùng
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -721,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Kiểm Tra Hạ Tầng
+### Kiểm tra hạ tầng
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -757,9 +764,9 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Cập Nhật và Di Chuyển Tài Nguyên
+## 🔄 Cập nhật và di chuyển tài nguyên
 
-### Cập Nhật Tài Nguyên An Toàn
+### Cập nhật tài nguyên an toàn
 ```bash
 # Preview infrastructure changes
 azd provision --preview
@@ -771,7 +778,7 @@ azd provision --confirm-with-no-prompt
 azd provision --rollback
 ```
 
-### Di Chuyển Cơ Sở Dữ Liệu
+### Di chuyển cơ sở dữ liệu
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -800,9 +807,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Các Thực Hành Tốt Nhất
+## 🎯 Các thực hành tốt nhất
 
-### 1. Quy Ước Đặt Tên Tài Nguyên
+### 1. Quy ước đặt tên tài nguyên
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -813,7 +820,7 @@ var naming = {
 }
 ```
 
-### 2. Chiến Lược Gắn Thẻ
+### 2. Chiến lược gắn thẻ
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -826,7 +833,7 @@ var commonTags = {
 }
 ```
 
-### 3. Xác Thực Tham Số
+### 3. Xác thực tham số
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -842,7 +849,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Tổ Chức Kết Quả Đầu Ra
+### 4. Tổ chức đầu ra
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -857,25 +864,25 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Bước Tiếp Theo
+## Bước tiếp theo
 
-- [Lập Kế Hoạch Trước Triển Khai](../pre-deployment/capacity-planning.md) - Xác thực khả năng tài nguyên
-- [Các Vấn Đề Thường Gặp](../troubleshooting/common-issues.md) - Khắc phục sự cố hạ tầng
-- [Hướng Dẫn Gỡ Lỗi](../troubleshooting/debugging.md) - Gỡ lỗi các vấn đề cấp phát
-- [Lựa Chọn SKU](../pre-deployment/sku-selection.md) - Chọn các cấp dịch vụ phù hợp
+- [Lập kế hoạch trước triển khai](../pre-deployment/capacity-planning.md) - Xác thực tính khả dụng của tài nguyên
+- [Các vấn đề phổ biến](../troubleshooting/common-issues.md) - Khắc phục sự cố hạ tầng
+- [Hướng dẫn gỡ lỗi](../troubleshooting/debugging.md) - Gỡ lỗi các vấn đề cung cấp
+- [Lựa chọn SKU](../pre-deployment/sku-selection.md) - Chọn các cấp dịch vụ phù hợp
 
-## Tài Nguyên Bổ Sung
+## Tài liệu bổ sung
 
-- [Tài Liệu Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Tài liệu Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Mẫu Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Trung Tâm Kiến Trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Khung Kiến Trúc Tốt của Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Trung tâm Kiến trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Khung Kiến trúc Tốt của Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Điều Hướng**
-- **Bài Học Trước**: [Hướng Dẫn Triển Khai](deployment-guide.md)
-- **Bài Học Tiếp Theo**: [Lập Kế Hoạch Năng Lực](../pre-deployment/capacity-planning.md)
+**Điều hướng**
+- **Bài học trước**: [Hướng dẫn triển khai](deployment-guide.md)
+- **Bài học tiếp theo**: [Lập kế hoạch năng lực](../pre-deployment/capacity-planning.md)
 
 ---
 

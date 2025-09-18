@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T21:41:27+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T08:31:06+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "tl"
 }
 -->
 # Gabay sa Deployment - Pag-master ng AZD Deployments
 
+**Pag-navigate sa Kabanata:**
+- **📚 Kurso Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 4 - Infrastructure as Code at Deployment
+- **⬅️ Nakaraang Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
+- **➡️ Susunod**: [Pagpo-provision ng Resources](provisioning.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+
 ## Panimula
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng kailangan mong malaman tungkol sa pag-deploy ng mga application gamit ang Azure Developer CLI, mula sa simpleng single-command deployments hanggang sa mga advanced na production scenarios na may custom hooks, maraming environment, at CI/CD integration. Masterin ang buong deployment lifecycle gamit ang mga praktikal na halimbawa at pinakamahusay na mga kasanayan.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng kailangan mong malaman tungkol sa pag-deploy ng mga application gamit ang Azure Developer CLI, mula sa simpleng single-command deployments hanggang sa mga advanced na production scenario na may custom hooks, maraming environment, at CI/CD integration. Masterin ang buong deployment lifecycle gamit ang mga praktikal na halimbawa at pinakamahusay na mga kasanayan.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng gabay na ito, ikaw ay:
 - Magiging bihasa sa lahat ng Azure Developer CLI deployment commands at workflows
-- Maiintindihan ang buong deployment lifecycle mula sa provisioning hanggang sa monitoring
+- Maiintindihan ang buong deployment lifecycle mula provisioning hanggang monitoring
 - Makakapagpatupad ng custom deployment hooks para sa pre at post-deployment automation
 - Makakapag-configure ng maraming environment na may environment-specific parameters
 - Makakapag-set up ng advanced deployment strategies kabilang ang blue-green at canary deployments
@@ -25,23 +32,23 @@ Sa pagtatapos ng gabay na ito, ikaw ay:
 
 ## Mga Resulta ng Pag-aaral
 
-Sa pagtatapos, magagawa mo:
-- I-execute at i-troubleshoot ang lahat ng azd deployment workflows nang mag-isa
-- Magdisenyo at magpatupad ng custom deployment automation gamit ang hooks
-- Mag-configure ng production-ready deployments na may tamang seguridad at monitoring
-- Mag-manage ng mga kumplikadong multi-environment deployment scenarios
-- Mag-optimize ng deployment performance at magpatupad ng rollback strategies
-- Mag-integrate ng azd deployments sa enterprise DevOps practices
+Kapag natapos, ikaw ay:
+- Makakapagpatupad at makakapag-troubleshoot ng lahat ng azd deployment workflows nang mag-isa
+- Makakapagdisenyo at makakapagpatupad ng custom deployment automation gamit ang hooks
+- Makakapag-configure ng production-ready deployments na may tamang seguridad at monitoring
+- Makakapamahala ng mga kumplikadong multi-environment deployment scenarios
+- Makakapag-optimize ng deployment performance at makakapagpatupad ng rollback strategies
+- Makakapag-integrate ng azd deployments sa enterprise DevOps practices
 
 ## Pangkalahatang Deployment
 
 Ang Azure Developer CLI ay nagbibigay ng ilang deployment commands:
 - `azd up` - Kumpletong workflow (provision + deploy)
 - `azd provision` - Gumawa/mag-update ng Azure resources lamang
-- `azd deploy` - Mag-deploy ng application code lamang
-- `azd package` - Mag-build at mag-package ng applications
+- `azd deploy` - I-deploy ang application code lamang
+- `azd package` - I-build at i-package ang mga application
 
-## Mga Pangunahing Deployment Workflows
+## Mga Pangunahing Deployment Workflow
 
 ### Kumpletong Deployment (azd up)
 Ang pinakakaraniwang workflow para sa mga bagong proyekto:
@@ -57,7 +64,7 @@ azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Infrastructure-Only Deployment
-Kapag kailangan mo lang i-update ang Azure resources:
+Kapag kailangan mo lamang i-update ang Azure resources:
 ```bash
 # Provision/update infrastructure
 azd provision
@@ -100,10 +107,10 @@ hooks:
 ```
 
 ### Phase 2: Infrastructure Provisioning
-- Binabasa ang infrastructure templates (Bicep/Terraform)
+- Binabasa ang mga infrastructure templates (Bicep/Terraform)
 - Gumagawa o nag-a-update ng Azure resources
-- Nagko-configure ng networking at security
-- Nagse-set up ng monitoring at logging
+- Nagko-configure ng networking at seguridad
+- Nagsa-set up ng monitoring at logging
 
 ### Phase 3: Post-Provision Hooks
 ```yaml
@@ -121,7 +128,7 @@ hooks:
 ### Phase 4: Application Packaging
 - Binubuo ang application code
 - Gumagawa ng deployment artifacts
-- Nagpa-package para sa target platform (containers, ZIP files, atbp.)
+- Ipinapackage para sa target platform (containers, ZIP files, atbp.)
 
 ### Phase 5: Pre-Deploy Hooks
 ```yaml
@@ -137,9 +144,9 @@ hooks:
 ```
 
 ### Phase 6: Application Deployment
-- Nagde-deploy ng packaged applications sa Azure services
-- Nag-a-update ng configuration settings
-- Nag-i-start/restart ng services
+- Ipinapadala ang packaged applications sa Azure services
+- Ina-update ang configuration settings
+- Sinisimulan/re-restart ang mga serbisyo
 
 ### Phase 7: Post-Deploy Hooks
 ```yaml
@@ -186,7 +193,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### Mga Configurations para sa Bawat Environment
+### Mga Configuration na Specific sa Environment
 ```bash
 # Development environment
 azd env set NODE_ENV development
@@ -206,7 +213,7 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Mga Advanced na Deployment Scenarios
+## 🔧 Mga Advanced na Deployment Scenario
 
 ### Multi-Service Applications
 ```yaml
@@ -453,7 +460,7 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Mga Konsiderasyon sa Seguridad
+## 🔐 Mga Pagsasaalang-alang sa Seguridad
 
 ### Secrets Management
 ```bash
@@ -501,7 +508,7 @@ services:
           - external-api-key
 ```
 
-## 🚨 Mga Rollback Strategies
+## 🚨 Mga Rollback Strategy
 
 ### Mabilisang Rollback
 ```bash
@@ -538,9 +545,9 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Deployment Metrics
+## 📊 Mga Deployment Metrics
 
-### Subaybayan ang Deployment Performance
+### Subaybayan ang Performance ng Deployment
 ```bash
 # Enable deployment metrics
 azd config set telemetry.deployment.enabled true
@@ -631,10 +638,10 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Mga Susunod na Hakbang
 
-- [Provisioning Resources](provisioning.md) - Masusing talakayan sa pamamahala ng infrastructure
+- [Pagpo-provision ng Resources](provisioning.md) - Masusing pag-aaral sa pamamahala ng infrastructure
 - [Pre-Deployment Planning](../pre-deployment/capacity-planning.md) - Planuhin ang iyong deployment strategy
-- [Common Issues](../troubleshooting/common-issues.md) - Lutasin ang mga isyu sa deployment
-- [Best Practices](../troubleshooting/debugging.md) - Mga production-ready deployment strategies
+- [Mga Karaniwang Isyu](../troubleshooting/common-issues.md) - Lutasin ang mga isyu sa deployment
+- [Mga Pinakamahusay na Kasanayan](../troubleshooting/debugging.md) - Mga production-ready deployment strategies
 
 ## Karagdagang Resources
 
@@ -645,11 +652,11 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
-**Navigation**
+**Pag-navigate**
 - **Nakaraang Aralin**: [Ang Iyong Unang Proyekto](../getting-started/first-project.md)
-- **Susunod na Aralin**: [Provisioning Resources](provisioning.md)
+- **Susunod na Aralin**: [Pagpo-provision ng Resources](provisioning.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

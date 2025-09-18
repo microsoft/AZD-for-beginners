@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T21:57:00+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T07:59:44+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "id"
 }
 -->
-# Panduan Pemecahan Masalah AI untuk Azure Developer CLI
+# Panduan Pemecahan Masalah Khusus AI
+
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 7 - Pemecahan Masalah & Debugging
+- **⬅️ Sebelumnya**: [Panduan Debugging](debugging.md)
+- **➡️ Bab Berikutnya**: [Bab 8: Pola Produksi & Perusahaan](../ai-foundry/production-ai-practices.md)
+- **🤖 Terkait**: [Bab 2: Pengembangan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 **Sebelumnya:** [Praktik AI Produksi](../ai-foundry/production-ai-practices.md) | **Berikutnya:** [Memulai dengan AZD](../getting-started/README.md)
 
-Panduan pemecahan masalah yang komprehensif ini membahas masalah umum saat menerapkan solusi AI dengan AZD, memberikan solusi dan teknik debugging khusus untuk layanan Azure AI.
+Panduan pemecahan masalah yang komprehensif ini membahas masalah umum saat menerapkan solusi AI dengan AZD, serta memberikan solusi dan teknik debugging khusus untuk layanan Azure AI.
 
 ## Daftar Isi
 
 - [Masalah Layanan Azure OpenAI](../../../../docs/troubleshooting)
 - [Masalah Pencarian Azure AI](../../../../docs/troubleshooting)
-- [Masalah Penerapan Container Apps](../../../../docs/troubleshooting)
+- [Masalah Penerapan Aplikasi Kontainer](../../../../docs/troubleshooting)
 - [Kesalahan Autentikasi dan Izin](../../../../docs/troubleshooting)
 - [Kegagalan Penerapan Model](../../../../docs/troubleshooting)
 - [Masalah Kinerja dan Skalabilitas](../../../../docs/troubleshooting)
@@ -36,7 +43,7 @@ Error: The requested resource type is not available in the location 'westus'
 **Penyebab:**
 - Azure OpenAI tidak tersedia di wilayah yang dipilih
 - Kuota habis di wilayah yang diinginkan
-- Kendala kapasitas regional
+- Kendala kapasitas wilayah
 
 **Solusi:**
 
@@ -230,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Masalah Penerapan Container Apps
+## Masalah Penerapan Aplikasi Kontainer
 
-### Masalah: Kegagalan Pembuatan Container
+### Masalah: Kegagalan Pembuatan Kontainer
 
 **Gejala:**
 ```
@@ -263,7 +270,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Validasi Dependensi:**
+2. **Validasi Ketergantungan:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Masalah: Kegagalan Startup Container App
+### Masalah: Kegagalan Startup Aplikasi Kontainer
 
 **Gejala:**
 ```
@@ -329,7 +336,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimalkan Pemrosesan Model:**
+2. **Optimalkan Pemuatan Model:**
 ```python
 # Lazy load models to reduce startup time
 import asyncio
@@ -841,27 +848,32 @@ def monitor_performance(func):
 | 403 | Dilarang | Verifikasi penugasan peran RBAC |
 | 429 | Terbatas | Terapkan logika retry dengan backoff eksponensial |
 | 500 | Kesalahan Server Internal | Periksa status penerapan model dan log |
-| 503 | Layanan Tidak Tersedia | Verifikasi kesehatan layanan dan ketersediaan regional |
+| 503 | Layanan Tidak Tersedia | Verifikasi kesehatan layanan dan ketersediaan wilayah |
 
 ## Langkah Berikutnya
 
 1. **Tinjau [Panduan Penerapan Model AI](ai-model-deployment.md)** untuk praktik terbaik penerapan
 2. **Selesaikan [Praktik AI Produksi](production-ai-practices.md)** untuk solusi siap perusahaan
 3. **Bergabunglah dengan [Discord Azure AI Foundry](https://aka.ms/foundry/discord)** untuk dukungan komunitas
-4. **Kirim masalah** ke [repositori GitHub AZD](https://github.com/Azure/azure-dev) untuk masalah spesifik AZD
+4. **Kirim masalah** ke [repositori GitHub AZD](https://github.com/Azure/azure-dev) untuk masalah khusus AZD
 
 ## Sumber Daya
 
 - [Pemecahan Masalah Layanan Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Pemecahan Masalah Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Pemecahan Masalah Aplikasi Kontainer](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Pemecahan Masalah Pencarian Azure AI](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**Sebelumnya:** [Praktik AI Produksi](../ai-foundry/production-ai-practices.md) | **Berikutnya:** [Workshop](../../workshop/README.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 7 - Pemecahan Masalah & Debugging
+- **⬅️ Sebelumnya**: [Panduan Debugging](debugging.md)
+- **➡️ Bab Berikutnya**: [Bab 8: Pola Produksi & Perusahaan](../ai-foundry/production-ai-practices.md)
+- **🤖 Terkait**: [Bab 2: Pengembangan AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 - [Pemecahan Masalah Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

@@ -1,27 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T21:49:38+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T07:55:57+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "id"
 }
 -->
 # Praktik Terbaik Beban Kerja AI Produksi dengan AZD
 
-**Sebelumnya:** [AI Workshop Lab](ai-workshop-lab.md) | **Berikutnya:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 8 - Pola Produksi & Perusahaan
+- **⬅️ Bab Sebelumnya**: [Bab 7: Pemecahan Masalah](../troubleshooting/debugging.md)
+- **⬅️ Juga Terkait**: [Lab Lokakarya AI](ai-workshop-lab.md)
+- **🎯 Kursus Selesai**: [AZD Untuk Pemula](../../README.md)
 
 ## Ikhtisar
 
-Panduan ini memberikan praktik terbaik yang komprehensif untuk menerapkan beban kerja AI siap produksi menggunakan Azure Developer CLI (AZD). Berdasarkan masukan dari komunitas Discord Azure AI Foundry dan implementasi pelanggan di dunia nyata, praktik ini mengatasi tantangan paling umum dalam sistem AI produksi.
+Panduan ini memberikan praktik terbaik yang komprehensif untuk menerapkan beban kerja AI yang siap produksi menggunakan Azure Developer CLI (AZD). Berdasarkan umpan balik dari komunitas Discord Azure AI Foundry dan penerapan pelanggan di dunia nyata, praktik ini mengatasi tantangan paling umum dalam sistem AI produksi.
 
 ## Tantangan Utama yang Diatasi
 
 Berdasarkan hasil jajak pendapat komunitas kami, berikut adalah tantangan utama yang dihadapi pengembang:
 
 - **45%** kesulitan dengan penerapan AI multi-layanan
-- **38%** mengalami masalah dengan pengelolaan kredensial dan rahasia  
-- **35%** merasa kesulitan dengan kesiapan produksi dan skalabilitas
+- **38%** memiliki masalah dengan pengelolaan kredensial dan rahasia  
+- **35%** merasa kesulitan dengan kesiapan produksi dan penskalaan
 - **32%** membutuhkan strategi optimasi biaya yang lebih baik
 - **29%** memerlukan peningkatan pemantauan dan pemecahan masalah
 
@@ -244,7 +249,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Performa dan Skalabilitas
+## Performa dan Penskalakan
 
 ### 1. Strategi Auto-Scaling
 
@@ -322,7 +327,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Load Balancing dan Manajemen Trafik
+### 3. Load Balancing dan Manajemen Lalu Lintas
 
 **Application Gateway dengan WAF**:
 
@@ -362,7 +367,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Optimasi Biaya
 
-### 1. Penyesuaian Ukuran Sumber Daya
+### 1. Penyesuaian Sumber Daya
 
 **Konfigurasi Spesifik Lingkungan**:
 
@@ -456,7 +461,7 @@ class TokenOptimizer {
 
 ## Pemantauan dan Observabilitas
 
-### 1. Insights Aplikasi yang Komprehensif
+### 1. Application Insights yang Komprehensif
 
 ```bicep
 // Application Insights with advanced features
@@ -503,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. Pemantauan Khusus AI
 
-**Dashboard Kustom untuk Metrik AI**:
+**Dasbor Kustom untuk Metrik AI**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -665,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Backup dan Pemulihan Data
+### 2. Cadangan Data dan Pemulihan
 
 ```bicep
 // Backup configuration for critical data
@@ -718,7 +723,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 
 ## DevOps dan Integrasi CI/CD
 
-### 1. Workflow GitHub Actions
+### 1. Alur Kerja GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -845,7 +850,7 @@ echo "Infrastructure validation completed successfully!"
 ### Performa ✅
 - [ ] Auto-scaling dikonfigurasi
 - [ ] Caching diterapkan
-- [ ] Load balancing disiapkan
+- [ ] Load balancing diatur
 - [ ] CDN untuk konten statis
 - [ ] Pooling koneksi database
 - [ ] Optimasi penggunaan token
@@ -853,29 +858,29 @@ echo "Infrastructure validation completed successfully!"
 ### Pemantauan ✅
 - [ ] Application Insights dikonfigurasi
 - [ ] Metrik kustom didefinisikan
-- [ ] Aturan peringatan disiapkan
-- [ ] Dashboard dibuat
+- [ ] Aturan peringatan diatur
+- [ ] Dasbor dibuat
 - [ ] Pemeriksaan kesehatan diterapkan
 - [ ] Kebijakan retensi log
 
 ### Keandalan ✅
 - [ ] Penerapan multi-region
-- [ ] Rencana backup dan pemulihan
-- [ ] Circuit breakers diterapkan
+- [ ] Rencana cadangan dan pemulihan
+- [ ] Circuit breaker diterapkan
 - [ ] Kebijakan retry dikonfigurasi
-- [ ] Degradasi yang terkelola
+- [ ] Degradasi yang terkontrol
 - [ ] Endpoint pemeriksaan kesehatan
 
 ### Manajemen Biaya ✅
 - [ ] Peringatan anggaran dikonfigurasi
-- [ ] Penyesuaian ukuran sumber daya
+- [ ] Penyesuaian sumber daya
 - [ ] Diskon dev/test diterapkan
-- [ ] Instansi yang dipesan dibeli
-- [ ] Dashboard pemantauan biaya
+- [ ] Reserved instances dibeli
+- [ ] Dasbor pemantauan biaya
 - [ ] Tinjauan biaya rutin
 
 ### Kepatuhan ✅
-- [ ] Persyaratan residensi data terpenuhi
+- [ ] Persyaratan residensi data dipenuhi
 - [ ] Logging audit diaktifkan
 - [ ] Kebijakan kepatuhan diterapkan
 - [ ] Standar keamanan diterapkan
@@ -908,38 +913,43 @@ python scripts/load_test.py \
 
 ## 🤝 Praktik Terbaik Komunitas
 
-Berdasarkan masukan dari komunitas Discord Azure AI Foundry:
+Berdasarkan umpan balik komunitas Discord Azure AI Foundry:
 
 ### Rekomendasi Teratas dari Komunitas:
 
 1. **Mulai Kecil, Skalakan Secara Bertahap**: Mulailah dengan SKU dasar dan skalakan berdasarkan penggunaan aktual
 2. **Pantau Segalanya**: Siapkan pemantauan yang komprehensif sejak hari pertama
-3. **Otomatisasi Keamanan**: Gunakan infrastruktur sebagai kode untuk keamanan yang konsisten
+3. **Otomatiskan Keamanan**: Gunakan infrastruktur sebagai kode untuk keamanan yang konsisten
 4. **Uji Secara Menyeluruh**: Sertakan pengujian khusus AI dalam pipeline Anda
-5. **Rencanakan Biaya**: Pantau penggunaan token dan siapkan peringatan anggaran lebih awal
+5. **Rencanakan Biaya**: Pantau penggunaan token dan atur peringatan anggaran sejak awal
 
 ### Kesalahan Umum yang Harus Dihindari:
 
-- ❌ Menyimpan API key secara hardcoded dalam kode
-- ❌ Tidak menyiapkan pemantauan yang tepat
+- ❌ Hardcoding API key dalam kode
+- ❌ Tidak menyiapkan pemantauan yang memadai
 - ❌ Mengabaikan optimasi biaya
 - ❌ Tidak menguji skenario kegagalan
 - ❌ Menerapkan tanpa pemeriksaan kesehatan
 
 ## Sumber Daya Tambahan
 
-- **Kerangka Kerja Arsitektur Azure yang Baik**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Kerangka Kerja Azure Well-Architected**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Dokumentasi Azure AI Foundry**: [Dokumen resmi](https://learn.microsoft.com/azure/ai-studio/)
 - **Template Komunitas**: [Contoh Azure](https://github.com/Azure-Samples)
 - **Komunitas Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 
 ---
 
-**Sebelumnya:** [AI Workshop Lab](ai-workshop-lab.md) | **Berikutnya:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 8 - Pola Produksi & Perusahaan
+- **⬅️ Bab Sebelumnya**: [Bab 7: Pemecahan Masalah](../troubleshooting/debugging.md)
+- **⬅️ Juga Terkait**: [Lab Lokakarya AI](ai-workshop-lab.md)
+- **🎆 Kursus Selesai**: [AZD Untuk Pemula](../../README.md)
 
-**Ingat**: Beban kerja AI produksi memerlukan perencanaan yang cermat, pemantauan, dan optimasi berkelanjutan. Mulailah dengan pola ini dan sesuaikan dengan kebutuhan spesifik Anda.
+**Ingat**: Beban kerja AI produksi memerlukan perencanaan yang matang, pemantauan, dan optimasi berkelanjutan. Mulailah dengan pola ini dan sesuaikan dengan kebutuhan spesifik Anda.
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T21:24:34+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-18T07:56:42+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "id"
 }
 -->
 # Proyek Pertama Anda - Tutorial Praktis
 
-**Sebelumnya:** [Konfigurasi](configuration.md) | **Selanjutnya:** [Integrasi Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
+- **⬅️ Sebelumnya**: [Instalasi & Pengaturan](installation.md)
+- **➡️ Selanjutnya**: [Konfigurasi](configuration.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Pendahuluan
 
@@ -19,7 +24,7 @@ Selamat datang di proyek pertama Anda dengan Azure Developer CLI! Tutorial prakt
 
 Dengan menyelesaikan tutorial ini, Anda akan:
 - Menguasai alur kerja inisialisasi proyek azd menggunakan template
-- Memahami struktur proyek Azure Developer CLI dan file konfigurasi
+- Memahami struktur proyek dan file konfigurasi Azure Developer CLI
 - Melakukan penerapan aplikasi lengkap ke Azure dengan penyediaan infrastruktur
 - Menerapkan pembaruan aplikasi dan strategi penerapan ulang
 - Mengelola beberapa lingkungan untuk pengembangan dan staging
@@ -27,19 +32,19 @@ Dengan menyelesaikan tutorial ini, Anda akan:
 
 ## Hasil Pembelajaran
 
-Setelah selesai, Anda akan mampu:
+Setelah selesai, Anda akan dapat:
 - Menginisialisasi dan mengonfigurasi proyek azd dari template secara mandiri
-- Menavigasi dan memodifikasi struktur proyek azd dengan efektif
+- Menavigasi dan memodifikasi struktur proyek azd secara efektif
 - Menerapkan aplikasi full-stack ke Azure menggunakan perintah tunggal
-- Memecahkan masalah umum penerapan dan autentikasi
-- Mengelola beberapa lingkungan Azure untuk tahap penerapan yang berbeda
+- Memecahkan masalah umum penerapan dan masalah autentikasi
+- Mengelola beberapa lingkungan Azure untuk berbagai tahap penerapan
 - Menerapkan alur kerja penerapan berkelanjutan untuk pembaruan aplikasi
 
 ## Memulai
 
 ### Daftar Prasyarat
 - ✅ Azure Developer CLI terinstal ([Panduan Instalasi](installation.md))
-- ✅ Azure CLI terinstal dan terautentikasi
+- ✅ Azure CLI terinstal dan diautentikasi
 - ✅ Git terinstal di sistem Anda
 - ✅ Node.js 16+ (untuk tutorial ini)
 - ✅ Visual Studio Code (disarankan)
@@ -200,7 +205,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Langkah 5: Uji Aplikasi Anda
 
 ### Akses Aplikasi Anda
-Klik URL yang diberikan dalam output penerapan, atau dapatkan kapan saja:
+Klik URL yang disediakan dalam output penerapan, atau dapatkan kapan saja:
 ```bash
 # Get application endpoints
 azd show
@@ -225,7 +230,7 @@ azd logs
 
 ## Langkah 6: Lakukan Perubahan dan Terapkan Ulang
 
-Mari lakukan perubahan dan lihat betapa mudahnya memperbarui:
+Mari kita lakukan perubahan dan lihat betapa mudahnya memperbarui:
 
 ### Modifikasi API
 ```bash
@@ -278,7 +283,7 @@ azd show
 
 ## Langkah 8: Bersihkan Sumber Daya
 
-Setelah selesai bereksperimen, bersihkan untuk menghindari biaya yang terus berjalan:
+Saat Anda selesai bereksperimen, bersihkan untuk menghindari biaya yang terus berjalan:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -339,7 +344,7 @@ netstat -an | grep :3100
 
 ## Langkah Selanjutnya
 
-Setelah menyelesaikan proyek pertama Anda, jelajahi topik lanjutan berikut:
+Sekarang setelah Anda menyelesaikan proyek pertama Anda, jelajahi topik lanjutan berikut:
 
 ### 1. Sesuaikan Infrastruktur
 - [Infrastructure as Code](../deployment/provisioning.md)
@@ -371,8 +376,8 @@ azd init --template todo-java-mongo
 
 ### Materi Pembelajaran
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Pusat Arsitektur Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Kerangka Kerja Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Komunitas & Dukungan
 - [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -390,10 +395,15 @@ azd init --template todo-java-mongo
 
 ---
 
-**Sebelumnya:** [Konfigurasi](configuration.md) | **Selanjutnya:** [Integrasi Azure AI Foundry](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
+- **⬅️ Sebelumnya**: [Instalasi & Pengaturan](installation.md)
+- **➡️ Selanjutnya**: [Konfigurasi](configuration.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
 - **Pelajaran Selanjutnya**: [Panduan Penerapan](../deployment/deployment-guide.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:19:39+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-18T08:01:49+00:00",
   "source_file": "examples/README.md",
   "language_code": "id"
 }
 -->
-# Contoh - Template dan Konfigurasi Praktis AZD
+# Contoh - Template dan Konfigurasi AZD Praktis
+
+**Belajar dengan Contoh - Terorganisir berdasarkan Bab**
+- **📚 Halaman Utama Kursus**: [AZD Untuk Pemula](../README.md)
+- **📖 Pemetaan Bab**: Contoh terorganisir berdasarkan kompleksitas pembelajaran
+- **🚀 Mulai Sederhana**: [Contoh Bab 1](../../../examples)
+- **🤖 Contoh AI**: [Contoh Bab 2 & 5 Solusi AI](../../../examples)
 
 ## Pendahuluan
 
@@ -21,11 +27,11 @@ Dengan mempelajari contoh-contoh ini, Anda akan:
 - Menguasai pola Infrastructure as Code untuk berbagai layanan Azure
 - Menerapkan manajemen konfigurasi dan strategi penerapan spesifik lingkungan
 - Mengimplementasikan pola pemantauan, keamanan, dan penskalaan dalam konteks praktis
-- Membangun pengalaman dalam pemecahan masalah dan debugging skenario penerapan nyata
+- Membangun pengalaman dengan pemecahan masalah dan debugging skenario penerapan nyata
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan contoh-contoh ini, Anda akan dapat:
+Setelah menyelesaikan contoh-contoh ini, Anda akan mampu:
 - Menerapkan berbagai jenis aplikasi menggunakan Azure Developer CLI dengan percaya diri
 - Menyesuaikan template yang disediakan untuk kebutuhan aplikasi Anda sendiri
 - Merancang dan mengimplementasikan pola infrastruktur khusus menggunakan Bicep
@@ -49,11 +55,11 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## Contoh Memulai Cepat
+## Contoh Mulai Cepat
 
 ### Untuk Pemula
 1. **[Aplikasi Web Sederhana - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Menerapkan aplikasi web Node.js Express dengan MongoDB
-2. **[Situs Statis - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Hosting situs web statis React dengan Azure Static Web Apps
+2. **[Situs Statis - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Hosting situs statis React dengan Azure Static Web Apps
 3. **[Aplikasi Kontainer - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Menerapkan aplikasi Python Flask yang dikontainerkan
 
 ### Untuk Pengguna Menengah
@@ -64,8 +70,29 @@ Azure Samples AZD Templates (linked externally):
 ### Template Azure AI Foundry
 
 1. **[Aplikasi Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Aplikasi chat cerdas dengan Azure OpenAI
-2. **[Pemrosesan Dokumen AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analisis dokumen menggunakan layanan Azure AI
+2. **[Pemrosesan Dokumen AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analisis dokumen menggunakan layanan AI Azure
 3. **[Pipeline Pembelajaran Mesin](https://github.com/Azure-Samples/mlops-v2)** - Alur kerja MLOps dengan Azure Machine Learning
+
+### Skenario Dunia Nyata
+
+#### **Solusi Multi-Agen Ritel** 🆕
+**[Panduan Implementasi Lengkap](./retail-scenario.md)**
+
+Solusi dukungan pelanggan multi-agen yang komprehensif dan siap produksi yang menunjukkan penerapan aplikasi AI tingkat perusahaan dengan AZD. Skenario ini menyediakan:
+
+- **Arsitektur Lengkap**: Sistem multi-agen dengan agen layanan pelanggan dan manajemen inventaris khusus
+- **Infrastruktur Produksi**: Penerapan Azure OpenAI multi-region, AI Search, Container Apps, dan pemantauan yang komprehensif
+- **Template ARM Siap Penerapan**: Penerapan satu klik dengan beberapa mode konfigurasi (Minimal/Standar/Premium)
+- **Fitur Lanjutan**: Validasi keamanan red teaming, kerangka evaluasi agen, optimasi biaya, dan panduan pemecahan masalah
+- **Konteks Bisnis Nyata**: Kasus penggunaan dukungan pelanggan ritel dengan unggahan file, integrasi pencarian, dan penskalaan dinamis
+
+**Teknologi**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Kompleksitas**: ⭐⭐⭐⭐ (Lanjutan - Siap Produksi Perusahaan)
+
+**Cocok untuk**: Pengembang AI, arsitek solusi, dan tim yang membangun sistem multi-agen produksi
+
+**Mulai Cepat**: Terapkan solusi lengkap dalam waktu kurang dari 30 menit menggunakan template ARM yang disertakan dengan `./deploy.sh -g myResourceGroup`
 
 ## 📋 Instruksi Penggunaan
 
@@ -93,7 +120,7 @@ Azure Samples AZD Templates (linked externally):
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
 
-4. **Penerapan**
+4. **Terapkan**
    ```bash
    # Deploy infrastructure and application
    azd up
@@ -160,7 +187,7 @@ Setiap contoh mencakup:
 ### Microservices - Java Spring Boot
 **Teknologi**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Kompleksitas**: Menengah  
-**Konsep**: Komunikasi microservices, sistem terdistribusi, pola enterprise
+**Konsep**: Komunikasi microservices, sistem terdistribusi, pola perusahaan
 
 ### Contoh Azure AI Foundry
 
@@ -203,7 +230,7 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 
 ## 🔧 Panduan Penyesuaian
 
-### Menyesuaikan Contoh untuk Kebutuhan Anda
+### Menyesuaikan Contoh untuk Kasus Penggunaan Anda
 
 1. **Tinjau Prasyarat**
    - Periksa persyaratan layanan Azure
@@ -223,7 +250,7 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 4. **Tinjauan Keamanan**
    - Tinjau kontrol akses
    - Implementasikan manajemen rahasia
-   - Aktifkan pemantauan dan peringatan
+   - Aktifkan pemantauan dan pemberitahuan
 
 ## 📊 Matriks Perbandingan
 
@@ -238,6 +265,7 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 | Azure OpenAI Chat | 3 | ✅ | Lengkap | Lengkap | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Dasar | Lengkap | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Lengkap | Lengkap | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **Perusahaan** | **Lanjutan** | **⭐⭐⭐⭐** |
 
 ## 🎓 Jalur Pembelajaran
 
@@ -250,7 +278,7 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 
 2. **Coba Situs Statis**
    - Jelajahi opsi hosting yang berbeda
-   - Pelajari integrasi CDN
+   - Pelajari tentang integrasi CDN
    - Pahami konfigurasi DNS
 
 3. **Lanjutkan ke Aplikasi Kontainer**
@@ -283,52 +311,57 @@ Direktori `configurations/` berisi komponen yang dapat digunakan kembali:
 - **React**: React SPA + Functions
 - **Kontainer**: Python Flask Container App, Java Microservices
 - **Database**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Sistem Multi-Agen**: **Retail Multi-Agent Solution**
+- **Produksi Perusahaan**: **Retail Multi-Agent Solution**
 
 ### Berdasarkan Pola Arsitektur
 - **Monolitik**: Node.js Express Todo, C# Web API + SQL
 - **Statis + Serverless**: React SPA + Functions, Python Functions + SPA
 - **Microservices**: Java Spring Boot Microservices
 - **Kontainerisasi**: Python Flask Container App
-- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **Didukung AI**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Arsitektur Multi-Agen**: **Retail Multi-Agent Solution**
+- **Multi-Layanan Perusahaan**: **Retail Multi-Agent Solution**
 
 ### Berdasarkan Tingkat Kompleksitas
 - **Pemula**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
 - **Menengah**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
 - **Lanjutan**: ML Pipeline
+- **Siap Produksi Perusahaan**: **Retail Multi-Agent Solution** (Sistem multi-agen lengkap dengan penerapan template ARM)
 
 ## 📚 Sumber Daya Tambahan
 
 ### Tautan Dokumentasi
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Template AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentasi Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Pusat Arsitektur Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Contoh Komunitas
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Template AZD Contoh Azure](https://github.com/Azure-Samples/azd-templates)
+- [Template Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Galeri Azure Developer CLI](https://azure.github.io/awesome-azd/)
-- [Todo App dengan C# dan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Todo App dengan Python dan MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
-- [Todo App dengan Node.js dan PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React Web App dengan C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Aplikasi Todo dengan C# dan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Aplikasi Todo dengan Python dan MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Aplikasi Todo dengan Node.js dan PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [Aplikasi Web React dengan API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions dengan Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Praktik Terbaik
-- [Kerangka Kerja Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Kerangka Adopsi Cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Kerangka Kerja Arsitektur Azure yang Baik](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Kerangka Kerja Adopsi Cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Berkontribusi pada Contoh
+## 🤝 Berkontribusi dengan Contoh
 
-Punya contoh berguna untuk dibagikan? Kami menyambut kontribusi!
+Punya contoh yang bermanfaat untuk dibagikan? Kami menyambut kontribusi Anda!
 
-### Panduan Pengiriman
-1. Ikuti struktur direktori yang telah ditetapkan
-2. Sertakan README.md yang komprehensif
+### Panduan Pengajuan
+1. Ikuti struktur direktori yang sudah ditentukan
+2. Sertakan README.md yang lengkap
 3. Tambahkan komentar pada file konfigurasi
-4. Uji secara menyeluruh sebelum mengirimkan
+4. Uji dengan teliti sebelum mengajukan
 5. Sertakan estimasi biaya dan prasyarat
 
 ### Struktur Template Contoh
@@ -347,12 +380,12 @@ example-name/
 
 ---
 
-**Tips Profesional**: Mulailah dengan contoh paling sederhana yang sesuai dengan teknologi Anda, lalu secara bertahap tingkatkan ke skenario yang lebih kompleks. Setiap contoh membangun konsep dari yang sebelumnya!
+**Tips Profesional**: Mulailah dengan contoh paling sederhana yang sesuai dengan teknologi Anda, lalu secara bertahap lanjutkan ke skenario yang lebih kompleks. Setiap contoh membangun konsep dari contoh sebelumnya!
 
 **Langkah Selanjutnya**: 
 - Pilih contoh yang sesuai dengan tingkat keahlian Anda
 - Ikuti instruksi pengaturan di README contoh
-- Bereksperimen dengan penyesuaian
+- Bereksperimen dengan kustomisasi
 - Bagikan pembelajaran Anda dengan komunitas
 
 ---
@@ -364,4 +397,4 @@ example-name/
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

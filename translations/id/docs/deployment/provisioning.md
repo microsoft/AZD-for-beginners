@@ -1,36 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:44:18+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T07:58:39+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "id"
 }
 -->
-# Provisioning Resources - Infrastruktur sebagai Kode dengan AZD
+# Provisioning Azure Resources dengan AZD
+
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 4 - Infrastruktur sebagai Kode & Deployment
+- **⬅️ Sebelumnya**: [Panduan Deployment](deployment-guide.md)
+- **➡️ Bab Berikutnya**: [Bab 5: Solusi AI Multi-Agent](../../examples/retail-scenario.md)
+- **🔧 Terkait**: [Bab 6: Validasi Pra-Deployment](../pre-deployment/capacity-planning.md)
 
 ## Pendahuluan
 
-Panduan lengkap ini mencakup semua yang perlu Anda ketahui tentang penyediaan dan pengelolaan sumber daya Azure menggunakan Azure Developer CLI. Pelajari cara menerapkan pola Infrastruktur sebagai Kode (IaC) mulai dari pembuatan sumber daya dasar hingga arsitektur infrastruktur tingkat perusahaan menggunakan Bicep, template ARM, Terraform, dan Pulumi.
+Panduan lengkap ini mencakup semua yang perlu Anda ketahui tentang penyediaan dan pengelolaan sumber daya Azure menggunakan Azure Developer CLI. Pelajari cara menerapkan pola Infrastruktur sebagai Kode (IaC) mulai dari pembuatan sumber daya dasar hingga arsitektur infrastruktur tingkat perusahaan menggunakan Bicep, ARM templates, Terraform, dan Pulumi.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
 - Menguasai prinsip Infrastruktur sebagai Kode dan penyediaan sumber daya Azure
 - Memahami berbagai penyedia IaC yang didukung oleh Azure Developer CLI
-- Merancang dan menerapkan template Bicep untuk arsitektur aplikasi umum
-- Mengonfigurasi parameter sumber daya, variabel, dan pengaturan khusus lingkungan
+- Merancang dan mengimplementasikan template Bicep untuk arsitektur aplikasi umum
+- Mengonfigurasi parameter sumber daya, variabel, dan pengaturan spesifik lingkungan
 - Menerapkan pola infrastruktur tingkat lanjut termasuk jaringan dan keamanan
 - Mengelola siklus hidup sumber daya, pembaruan, dan resolusi ketergantungan
 
 ## Hasil Pembelajaran
 
 Setelah selesai, Anda akan mampu:
-- Merancang dan menyediakan infrastruktur Azure menggunakan Bicep dan template ARM
+- Merancang dan menyediakan infrastruktur Azure menggunakan Bicep dan ARM templates
 - Mengonfigurasi arsitektur multi-layanan yang kompleks dengan ketergantungan sumber daya yang tepat
 - Menerapkan template yang diparameterisasi untuk berbagai lingkungan dan konfigurasi
-- Memecahkan masalah penyediaan infrastruktur dan menyelesaikan kegagalan penerapan
-- Menerapkan prinsip-prinsip Kerangka Kerja Azure Well-Architected pada desain infrastruktur
+- Memecahkan masalah penyediaan infrastruktur dan menyelesaikan kegagalan deployment
+- Menerapkan prinsip-prinsip Azure Well-Architected Framework pada desain infrastruktur
 - Mengelola pembaruan infrastruktur dan menerapkan strategi versi infrastruktur
 
 ## Gambaran Umum Penyediaan Infrastruktur
@@ -300,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Keamanan dan Pengelolaan Rahasia
+## 🔒 Manajemen Keamanan dan Rahasia
 
 ### Integrasi Key Vault
 ```bicep
@@ -344,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfigurasi Identitas Terkelola
+### Konfigurasi Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -563,7 +570,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Konfigurasi Khusus Lingkungan
+## 🔧 Konfigurasi Spesifik Lingkungan
 
 ### File Parameter untuk Lingkungan yang Berbeda
 ```json
@@ -653,7 +660,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Pola Penyediaan Tingkat Lanjut
 
-### Penerapan Multi-Region
+### Deployment Multi-Region
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -859,7 +866,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Langkah Selanjutnya
 
-- [Perencanaan Pra-Penerapan](../pre-deployment/capacity-planning.md) - Validasi ketersediaan sumber daya
+- [Perencanaan Pra-Deployment](../pre-deployment/capacity-planning.md) - Validasi ketersediaan sumber daya
 - [Masalah Umum](../troubleshooting/common-issues.md) - Memecahkan masalah infrastruktur
 - [Panduan Debugging](../troubleshooting/debugging.md) - Debug masalah penyediaan
 - [Pemilihan SKU](../pre-deployment/sku-selection.md) - Pilih tingkat layanan yang sesuai
@@ -874,10 +881,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Panduan Penerapan](deployment-guide.md)
+- **Pelajaran Sebelumnya**: [Panduan Deployment](deployment-guide.md)
 - **Pelajaran Berikutnya**: [Perencanaan Kapasitas](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

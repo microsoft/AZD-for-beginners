@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:48:10+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T07:40:48+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "vi"
 }
 -->
-# Các Vấn Đề Thường Gặp & Giải Pháp
+# Các Vấn Đề Thường Gặp và Giải Pháp
+
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 7 - Xử Lý Sự Cố & Gỡ Lỗi
+- **⬅️ Chương Trước**: [Chương 6: Kiểm Tra Trước Khi Triển Khai](../pre-deployment/preflight-checks.md)
+- **➡️ Tiếp Theo**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
+- **🚀 Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../ai-foundry/production-ai-practices.md)
 
 ## Giới Thiệu
 
-Hướng dẫn khắc phục sự cố toàn diện này bao gồm các vấn đề thường gặp nhất khi sử dụng Azure Developer CLI. Học cách chẩn đoán, khắc phục và giải quyết các vấn đề phổ biến liên quan đến xác thực, triển khai, cung cấp hạ tầng, và cấu hình ứng dụng. Mỗi vấn đề đều có các triệu chứng chi tiết, nguyên nhân gốc rễ, và quy trình giải quyết từng bước.
+Hướng dẫn xử lý sự cố toàn diện này bao gồm các vấn đề thường gặp nhất khi sử dụng Azure Developer CLI. Học cách chẩn đoán, xử lý sự cố và giải quyết các vấn đề phổ biến liên quan đến xác thực, triển khai, cung cấp hạ tầng, và cấu hình ứng dụng. Mỗi vấn đề đều có các triệu chứng chi tiết, nguyên nhân gốc rễ, và quy trình giải quyết từng bước.
 
 ## Mục Tiêu Học Tập
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
 - Thành thạo các kỹ thuật chẩn đoán vấn đề với Azure Developer CLI
-- Hiểu các vấn đề phổ biến về xác thực và quyền hạn cùng giải pháp của chúng
-- Giải quyết các lỗi triển khai, lỗi cung cấp hạ tầng, và vấn đề cấu hình
+- Hiểu rõ các vấn đề phổ biến về xác thực và quyền hạn cùng giải pháp của chúng
+- Giải quyết các lỗi triển khai, cung cấp hạ tầng, và vấn đề cấu hình
 - Áp dụng chiến lược giám sát và gỡ lỗi chủ động
-- Thực hiện phương pháp khắc phục sự cố có hệ thống cho các vấn đề phức tạp
+- Thực hiện phương pháp xử lý sự cố có hệ thống cho các vấn đề phức tạp
 - Cấu hình ghi nhật ký và giám sát đúng cách để ngăn ngừa các vấn đề trong tương lai
 
 ## Kết Quả Học Tập
 
 Sau khi hoàn thành, bạn sẽ có khả năng:
-- Chẩn đoán các vấn đề Azure Developer CLI bằng các công cụ chẩn đoán tích hợp
+- Chẩn đoán các vấn đề Azure Developer CLI bằng công cụ chẩn đoán tích hợp
 - Tự giải quyết các vấn đề liên quan đến xác thực, đăng ký, và quyền hạn
-- Khắc phục hiệu quả các lỗi triển khai và cung cấp hạ tầng
-- Gỡ lỗi các vấn đề cấu hình ứng dụng và các vấn đề đặc thù môi trường
+- Xử lý hiệu quả các lỗi triển khai và cung cấp hạ tầng
+- Gỡ lỗi các vấn đề cấu hình ứng dụng và vấn đề đặc thù môi trường
 - Triển khai giám sát và cảnh báo để nhận diện các vấn đề tiềm năng một cách chủ động
-- Áp dụng các phương pháp tốt nhất cho quy trình ghi nhật ký, gỡ lỗi, và giải quyết vấn đề
+- Áp dụng các phương pháp tốt nhất cho ghi nhật ký, gỡ lỗi, và quy trình giải quyết vấn đề
 
 ## Chẩn Đoán Nhanh
 
@@ -59,8 +66,8 @@ azd <command> --debug
 
 ### Vấn Đề: "Không thể lấy mã thông báo truy cập"
 **Triệu Chứng:**
-- `azd up` gặp lỗi xác thực
-- Các lệnh trả về "unauthorized" hoặc "access denied"
+- `azd up` thất bại với lỗi xác thực
+- Các lệnh trả về "không được phép" hoặc "truy cập bị từ chối"
 
 **Giải Pháp:**
 ```bash
@@ -80,7 +87,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Vấn Đề: "Không đủ quyền" trong quá trình triển khai
+### Vấn Đề: "Quyền hạn không đủ" trong quá trình triển khai
 **Triệu Chứng:**
 - Triển khai thất bại với lỗi quyền hạn
 - Không thể tạo một số tài nguyên Azure
@@ -97,7 +104,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 3. Contact your Azure administrator for proper permissions
 ```
 
-### Vấn Đề: Các vấn đề xác thực đa tenant
+### Vấn Đề: Vấn đề xác thực đa tenant
 **Giải Pháp:**
 ```bash
 # 1. Login with specific tenant
@@ -152,7 +159,7 @@ azd env set AZURE_LOCATION eastus2
 
 ### Vấn Đề: Lỗi vượt quá hạn mức
 **Triệu Chứng:**
-- Lỗi "Quota exceeded for resource type"
+- Lỗi "Hạn mức vượt quá cho loại tài nguyên"
 - "Số lượng tài nguyên tối đa đã đạt"
 
 **Giải Pháp:**
@@ -419,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Công Cụ và Lệnh Khắc Phục Sự Cố
+## 🛠️ Công Cụ và Lệnh Xử Lý Sự Cố
 
 ### Lệnh Gỡ Lỗi
 ```bash
@@ -464,11 +471,11 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ## 🆘 Nhận Hỗ Trợ Thêm
 
-### Khi Nào Cần Nâng Cấp Vấn Đề
+### Khi Nào Nên Nâng Cấp Vấn Đề
 - Vấn đề xác thực vẫn tồn tại sau khi thử tất cả các giải pháp
 - Vấn đề hạ tầng với các dịch vụ Azure
 - Vấn đề liên quan đến thanh toán hoặc đăng ký
-- Các mối lo ngại hoặc sự cố về bảo mật
+- Các mối lo ngại về bảo mật hoặc sự cố
 
 ### Kênh Hỗ Trợ
 ```bash
@@ -488,8 +495,8 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 Trước khi liên hệ hỗ trợ, hãy thu thập:
 - Kết quả `azd version`
 - Kết quả `azd info`
-- Các thông báo lỗi (toàn bộ nội dung)
-- Các bước để tái hiện vấn đề
+- Tin nhắn lỗi (toàn bộ nội dung)
+- Các bước để tái tạo vấn đề
 - Chi tiết môi trường (`azd env show`)
 - Dòng thời gian khi vấn đề bắt đầu
 
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Ngăn Ngừa Vấn Đề
 
-### Danh Sách Kiểm Tra Trước Triển Khai
+### Danh Sách Kiểm Tra Trước Khi Triển Khai
 ```bash
 # 1. Validate authentication
 az account show
@@ -538,7 +545,7 @@ npm run test
 azd provision --preview
 ```
 
-### Cài Đặt Giám Sát
+### Thiết Lập Giám Sát
 ```bash
 # Enable Application Insights
 # Add to main.bicep:
@@ -569,13 +576,13 @@ az security assessment list --resource-group myrg
 ## Tài Nguyên Liên Quan
 
 - [Hướng Dẫn Gỡ Lỗi](debugging.md) - Kỹ thuật gỡ lỗi nâng cao
-- [Cung Cấp Tài Nguyên](../deployment/provisioning.md) - Khắc phục sự cố hạ tầng
+- [Cung Cấp Tài Nguyên](../deployment/provisioning.md) - Xử lý sự cố hạ tầng
 - [Lập Kế Hoạch Năng Lực](../pre-deployment/capacity-planning.md) - Hướng dẫn lập kế hoạch tài nguyên
 - [Lựa Chọn SKU](../pre-deployment/sku-selection.md) - Khuyến nghị về cấp dịch vụ
 
 ---
 
-**Mẹo**: Hãy đánh dấu hướng dẫn này và tham khảo bất cứ khi nào bạn gặp vấn đề. Hầu hết các vấn đề đã từng xảy ra trước đây và đều có giải pháp được thiết lập!
+**Mẹo**: Hãy đánh dấu hướng dẫn này và tham khảo bất cứ khi nào bạn gặp vấn đề. Hầu hết các vấn đề đã được gặp trước đây và có giải pháp đã được thiết lập!
 
 ---
 
@@ -586,4 +593,4 @@ az security assessment list --resource-group myrg
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

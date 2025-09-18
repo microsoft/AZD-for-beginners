@@ -1,33 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:20:15+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-18T08:18:03+00:00",
   "source_file": "examples/README.md",
   "language_code": "ms"
 }
 -->
 # Contoh - Templat dan Konfigurasi AZD Praktikal
 
+**Belajar Melalui Contoh - Diatur Mengikut Bab**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../README.md)
+- **📖 Pemetaan Bab**: Contoh diatur mengikut tahap kesukaran pembelajaran
+- **🚀 Mulakan Dengan Mudah**: [Contoh Bab 1](../../../examples)
+- **🤖 Contoh AI**: [Contoh Bab 2 & 5 Penyelesaian AI](../../../examples)
+
 ## Pengenalan
 
-Direktori ini mengandungi contoh praktikal, templat, dan senario dunia sebenar untuk membantu anda mempelajari Azure Developer CLI melalui latihan secara langsung. Setiap contoh menyediakan kod kerja lengkap, templat infrastruktur, dan arahan terperinci untuk pelbagai seni bina aplikasi dan corak penyebaran.
+Direktori ini mengandungi contoh praktikal, templat, dan senario dunia sebenar untuk membantu anda mempelajari Azure Developer CLI melalui latihan langsung. Setiap contoh menyediakan kod lengkap yang berfungsi, templat infrastruktur, dan arahan terperinci untuk pelbagai seni bina aplikasi dan corak penyebaran.
 
 ## Matlamat Pembelajaran
 
 Dengan mengerjakan contoh-contoh ini, anda akan:
 - Berlatih aliran kerja Azure Developer CLI dengan senario aplikasi yang realistik
 - Memahami pelbagai seni bina aplikasi dan pelaksanaan azd mereka
-- Menguasai corak Infrastructure as Code untuk pelbagai perkhidmatan Azure
+- Menguasai corak Infrastruktur sebagai Kod untuk pelbagai perkhidmatan Azure
 - Menerapkan pengurusan konfigurasi dan strategi penyebaran khusus persekitaran
 - Melaksanakan corak pemantauan, keselamatan, dan penskalaan dalam konteks praktikal
-- Membangun pengalaman dengan penyelesaian masalah dan debugging senario penyebaran sebenar
+- Membina pengalaman dengan menyelesaikan masalah dan debugging senario penyebaran sebenar
 
 ## Hasil Pembelajaran
 
-Setelah melengkapkan contoh-contoh ini, anda akan dapat:
+Setelah menyelesaikan contoh-contoh ini, anda akan dapat:
 - Menyebarkan pelbagai jenis aplikasi menggunakan Azure Developer CLI dengan yakin
-- Menyesuaikan templat yang disediakan kepada keperluan aplikasi anda sendiri
+- Menyesuaikan templat yang disediakan untuk keperluan aplikasi anda sendiri
 - Merancang dan melaksanakan corak infrastruktur tersuai menggunakan Bicep
 - Mengkonfigurasi aplikasi multi-perkhidmatan yang kompleks dengan kebergantungan yang betul
 - Menerapkan amalan terbaik keselamatan, pemantauan, dan prestasi dalam senario sebenar
@@ -64,14 +70,35 @@ Azure Samples AZD Templates (linked externally):
 ### Templat Azure AI Foundry
 
 1. **[Aplikasi Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Aplikasi chat pintar dengan Azure OpenAI
-2. **[Pemprosesan Dokumen AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analisis dokumen menggunakan perkhidmatan Azure AI
+2. **[Pemprosesan Dokumen AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analisis dokumen menggunakan perkhidmatan AI Azure
 3. **[Pipeline Pembelajaran Mesin](https://github.com/Azure-Samples/mlops-v2)** - Aliran kerja MLOps dengan Azure Machine Learning
+
+### Senario Dunia Sebenar
+
+#### **Penyelesaian Multi-Ejen Runcit** 🆕
+**[Panduan Pelaksanaan Lengkap](./retail-scenario.md)**
+
+Penyelesaian sokongan pelanggan multi-ejen yang komprehensif dan sedia untuk pengeluaran yang menunjukkan penyebaran aplikasi AI peringkat perusahaan dengan AZD. Senario ini menyediakan:
+
+- **Seni Bina Lengkap**: Sistem multi-ejen dengan ejen sokongan pelanggan dan pengurusan inventori yang khusus
+- **Infrastruktur Pengeluaran**: Penyebaran Azure OpenAI multi-wilayah, AI Search, Container Apps, dan pemantauan menyeluruh
+- **Templat ARM Sedia Untuk Disebarkan**: Penyebaran satu klik dengan pelbagai mod konfigurasi (Minimal/Standard/Premium)
+- **Ciri Lanjutan**: Validasi keselamatan red teaming, rangka kerja penilaian ejen, pengoptimuman kos, dan panduan penyelesaian masalah
+- **Konteks Perniagaan Sebenar**: Kes penggunaan sokongan pelanggan peruncit dengan muat naik fail, integrasi carian, dan penskalaan dinamik
+
+**Teknologi**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Kerumitan**: ⭐⭐⭐⭐ (Lanjutan - Sedia Untuk Pengeluaran Perusahaan)
+
+**Sesuai untuk**: Pembangun AI, arkitek penyelesaian, dan pasukan yang membina sistem multi-ejen pengeluaran
+
+**Permulaan Cepat**: Sebarkan penyelesaian lengkap dalam masa kurang daripada 30 minit menggunakan templat ARM yang disertakan dengan `./deploy.sh -g myResourceGroup`
 
 ## 📋 Arahan Penggunaan
 
 ### Menjalankan Contoh Secara Tempatan
 
-1. **Clone atau Salin Contoh**
+1. **Klon atau Salin Contoh**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
@@ -93,7 +120,7 @@ Azure Samples AZD Templates (linked externally):
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
 
-4. **Sediakan**
+4. **Sebarkan**
    ```bash
    # Deploy infrastructure and application
    azd up
@@ -102,7 +129,7 @@ Azure Samples AZD Templates (linked externally):
 ### Menyesuaikan Contoh
 
 Setiap contoh termasuk:
-- **README.md** - Arahan penyiapan dan penyesuaian terperinci
+- **README.md** - Arahan persediaan dan penyesuaian terperinci
 - **azure.yaml** - Konfigurasi AZD dengan komen
 - **infra/** - Templat Bicep dengan penjelasan parameter
 - **src/** - Kod aplikasi contoh
@@ -116,7 +143,7 @@ Setiap contoh termasuk:
 - Aplikasi satu perkhidmatan
 - Corak infrastruktur mudah
 - Pengurusan konfigurasi asas
-- Tetapan pembangunan yang kos efektif
+- Tetapan pembangunan kos efektif
 
 #### **Senario Lanjutan**
 - Seni bina multi-perkhidmatan
@@ -126,9 +153,9 @@ Setiap contoh termasuk:
 
 #### **Corak Sedia Pengeluaran**
 - Konfigurasi ketersediaan tinggi
-- Pemantauan dan pemerhatian
+- Pemantauan dan kebolehlihatan
 - Integrasi CI/CD
-- Tetapan pemulihan bencana
+- Persediaan pemulihan bencana
 
 ## 📖 Penerangan Contoh
 
@@ -140,7 +167,7 @@ Setiap contoh termasuk:
 ### Laman Web Statik - React SPA
 **Teknologi**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Kerumitan**: Pemula  
-**Konsep**: Penghosan statik, backend tanpa pelayan, pembangunan web moden
+**Konsep**: Hosting statik, backend tanpa pelayan, pembangunan web moden
 
 ### Aplikasi Kontena - Python Flask
 **Teknologi**: Python Flask, Docker, Container Apps, Container Registry  
@@ -187,18 +214,18 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
 - Tetapan persekitaran pembangunan
 - Konfigurasi persekitaran staging
 - Konfigurasi sedia pengeluaran
-- Tetapan penyebaran multi-region
+- Persediaan penyebaran multi-wilayah
 
 ### Modul Bicep
 - Komponen infrastruktur yang boleh digunakan semula
 - Corak sumber biasa
-- Templat yang diperkuat keselamatan
+- Templat yang diperkuatkan keselamatan
 - Konfigurasi yang dioptimumkan kos
 
 ### Skrip Pembantu
-- Automasi penyiapan persekitaran
+- Automasi persediaan persekitaran
 - Skrip migrasi pangkalan data
-- Alat pengesahan penyebaran
+- Alat validasi penyebaran
 - Utiliti pemantauan kos
 
 ## 🔧 Panduan Penyesuaian
@@ -216,7 +243,7 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
    - Laraskan pembolehubah persekitaran
 
 3. **Uji Secara Menyeluruh**
-   - Sediakan ke persekitaran pembangunan terlebih dahulu
+   - Sebarkan ke persekitaran pembangunan terlebih dahulu
    - Sahkan fungsi
    - Uji penskalaan dan prestasi
 
@@ -238,18 +265,19 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
 | Azure OpenAI Chat | 3 | ✅ | Penuh | Penuh | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Asas | Penuh | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Penuh | Penuh | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **Perusahaan** | **Lanjutan** | **⭐⭐⭐⭐** |
 
 ## 🎓 Laluan Pembelajaran
 
-### Perkembangan yang Disyorkan
+### Perkembangan Yang Disyorkan
 
-1. **Mulakan dengan Aplikasi Web Mudah**
+1. **Mulakan Dengan Aplikasi Web Mudah**
    - Pelajari konsep asas AZD
    - Fahami aliran kerja penyebaran
    - Berlatih pengurusan persekitaran
 
 2. **Cuba Laman Web Statik**
-   - Terokai pilihan penghosan yang berbeza
+   - Terokai pilihan hosting yang berbeza
    - Pelajari tentang integrasi CDN
    - Fahami konfigurasi DNS
 
@@ -273,7 +301,7 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
    - Fahami sistem teragih
    - Berlatih penyebaran kompleks
 
-## 🔍 Mencari Contoh yang Sesuai
+## 🔍 Mencari Contoh Yang Sesuai
 
 ### Mengikut Teknologi
 - **Node.js**: Node.js Express Todo App
@@ -283,50 +311,55 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
 - **React**: React SPA + Functions
 - **Kontena**: Python Flask Container App, Java Microservices
 - **Pangkalan Data**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Sistem Multi-Ejen**: **Retail Multi-Agent Solution**
+- **Pengeluaran Perusahaan**: **Retail Multi-Agent Solution**
 
 ### Mengikut Corak Seni Bina
 - **Monolitik**: Node.js Express Todo, C# Web API + SQL
 - **Statik + Tanpa Pelayan**: React SPA + Functions, Python Functions + SPA
 - **Mikroservis**: Java Spring Boot Microservices
 - **Dikontena**: Python Flask Container App
-- **Dikuasakan AI**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **Dikuasakan AI**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Seni Bina Multi-Ejen**: **Retail Multi-Agent Solution**
+- **Multi-Perkhidmatan Perusahaan**: **Retail Multi-Agent Solution**
 
 ### Mengikut Tahap Kerumitan
 - **Pemula**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
 - **Pertengahan**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
 - **Lanjutan**: ML Pipeline
+- **Sedia Pengeluaran Perusahaan**: **Retail Multi-Agent Solution** (Sistem multi-ejen lengkap dengan penyebaran templat ARM)
 
 ## 📚 Sumber Tambahan
 
 ### Pautan Dokumentasi
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Templat Azure AI Foundry AZD](https://github.com/Azure/ai-foundry-templates)
+- [Templat AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Dokumentasi Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Contoh Komuniti
-- [Templat AZD Azure Samples](https://github.com/Azure-Samples/azd-templates)
+- [Templat AZD Contoh Azure](https://github.com/Azure-Samples/azd-templates)
 - [Templat Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)
 - [Galeri Azure Developer CLI](https://azure.github.io/awesome-azd/)
 - [Aplikasi Todo dengan C# dan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
 - [Aplikasi Todo dengan Python dan MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
 - [Aplikasi Todo dengan Node.js dan PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
 - [Aplikasi Web React dengan API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Kerja Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions dengan Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Amalan Terbaik
-- [Kerangka Seni Bina Azure yang Baik](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Kerangka Pengambilan Cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Kerangka Kerja Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Kerangka Kerja Pengambilan Awan](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Menyumbang Contoh
 
-Ada contoh berguna untuk dikongsi? Kami mengalu-alukan sumbangan!
+Ada contoh berguna untuk dikongsi? Kami mengalu-alukan sumbangan anda!
 
 ### Garis Panduan Penyerahan
-1. Ikuti struktur direktori yang ditetapkan
-2. Sertakan README.md yang komprehensif
+1. Ikuti struktur direktori yang telah ditetapkan
+2. Sertakan README.md yang lengkap
 3. Tambahkan komen pada fail konfigurasi
 4. Uji dengan teliti sebelum menyerahkan
 5. Sertakan anggaran kos dan prasyarat
@@ -347,12 +380,12 @@ example-name/
 
 ---
 
-**Tip Profesional**: Mulakan dengan contoh paling mudah yang sesuai dengan teknologi anda, kemudian secara beransur-ansur tingkatkan kepada senario yang lebih kompleks. Setiap contoh membina konsep daripada yang sebelumnya!
+**Petua Profesional**: Mulakan dengan contoh paling mudah yang sesuai dengan teknologi anda, kemudian secara beransur-ansur beralih kepada senario yang lebih kompleks. Setiap contoh membina konsep daripada yang sebelumnya!
 
 **Langkah Seterusnya**: 
 - Pilih contoh yang sesuai dengan tahap kemahiran anda
-- Ikuti arahan penyiapan dalam README contoh
-- Bereksperimen dengan penyesuaian
+- Ikuti arahan penyediaan dalam README contoh tersebut
+- Cuba sesuaikan mengikut keperluan anda
 - Kongsi pembelajaran anda dengan komuniti
 
 ---

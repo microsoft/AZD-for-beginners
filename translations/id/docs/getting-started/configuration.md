@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:25:08+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T07:57:31+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "id"
 }
 -->
 # Panduan Konfigurasi
 
-**Sebelumnya:** [AZD Dasar](azd-basics.md) | **Berikutnya:** [Proyek Pertama](first-project.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 3 - Konfigurasi & Autentikasi
+- **⬅️ Sebelumnya**: [Proyek Pertama Anda](first-project.md)
+- **➡️ Berikutnya**: [Panduan Penerapan](../deployment/deployment-guide.md)
+- **🚀 Bab Berikutnya**: [Bab 4: Infrastruktur sebagai Kode](../deployment/deployment-guide.md)
 
 ## Pendahuluan
 
-Panduan lengkap ini mencakup semua aspek konfigurasi Azure Developer CLI untuk alur kerja pengembangan dan penerapan yang optimal. Anda akan mempelajari hierarki konfigurasi, manajemen lingkungan, metode autentikasi, dan pola konfigurasi lanjutan yang memungkinkan penerapan Azure yang efisien dan aman.
+Panduan lengkap ini mencakup semua aspek dalam mengonfigurasi Azure Developer CLI untuk alur kerja pengembangan dan penerapan yang optimal. Anda akan mempelajari hierarki konfigurasi, manajemen lingkungan, metode autentikasi, dan pola konfigurasi lanjutan yang memungkinkan penerapan Azure yang efisien dan aman.
 
 ## Tujuan Pembelajaran
 
-Pada akhir pelajaran ini, Anda akan:
-- Menguasai hierarki konfigurasi azd dan memahami bagaimana pengaturan diprioritaskan
+Di akhir pelajaran ini, Anda akan:
+- Menguasai hierarki konfigurasi azd dan memahami cara prioritas pengaturan
 - Mengonfigurasi pengaturan global dan spesifik proyek secara efektif
 - Mengelola beberapa lingkungan dengan konfigurasi yang berbeda
 - Menerapkan pola autentikasi dan otorisasi yang aman
-- Memahami pola konfigurasi lanjutan untuk skenario yang kompleks
+- Memahami pola konfigurasi lanjutan untuk skenario kompleks
 
 ## Hasil Pembelajaran
 
@@ -33,12 +38,12 @@ Setelah menyelesaikan pelajaran ini, Anda akan dapat:
 - Memecahkan masalah terkait konfigurasi
 - Menyesuaikan perilaku azd untuk kebutuhan organisasi tertentu
 
-Panduan lengkap ini mencakup semua aspek konfigurasi Azure Developer CLI untuk alur kerja pengembangan dan penerapan yang optimal.
+Panduan lengkap ini mencakup semua aspek dalam mengonfigurasi Azure Developer CLI untuk alur kerja pengembangan dan penerapan yang optimal.
 
 ## Hierarki Konfigurasi
 
 azd menggunakan sistem konfigurasi hierarkis:
-1. **Flag baris perintah** (prioritas tertinggi)
+1. **Bendera baris perintah** (prioritas tertinggi)
 2. **Variabel lingkungan**
 3. **Konfigurasi proyek lokal** (`.azd/config.json`)
 4. **Konfigurasi pengguna global** (`~/.azd/config.json`)
@@ -46,7 +51,7 @@ azd menggunakan sistem konfigurasi hierarkis:
 
 ## Konfigurasi Global
 
-### Menetapkan Default Global
+### Mengatur Default Global
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -310,7 +315,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Konfigurasi Infrastruktur
 
 ### Parameter Bicep
-Konfigurasi parameter infrastruktur di `infra/main.parameters.json`:
+Konfigurasikan parameter infrastruktur di `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -333,7 +338,7 @@ Konfigurasi parameter infrastruktur di `infra/main.parameters.json`:
 ```
 
 ### Konfigurasi Terraform
-Untuk proyek Terraform, konfigurasi di `infra/terraform.tfvars`:
+Untuk proyek Terraform, konfigurasikan di `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -384,7 +389,7 @@ Contoh `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azur
 
 ## 🔧 Konfigurasi Lanjutan
 
-### Penamaan Resource Kustom
+### Penamaan Sumber Daya Kustom
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -403,7 +408,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Konfigurasi Monitoring
+### Konfigurasi Pemantauan
 ```yaml
 # In azure.yaml
 monitoring:
@@ -539,7 +544,7 @@ Dokumentasikan konfigurasi Anda di `CONFIG.md`:
 
 - [Proyek Pertama Anda](first-project.md) - Terapkan konfigurasi dalam praktik
 - [Panduan Penerapan](../deployment/deployment-guide.md) - Gunakan konfigurasi untuk penerapan
-- [Penyediaan Resource](../deployment/provisioning.md) - Konfigurasi siap produksi
+- [Penyediaan Sumber Daya](../deployment/provisioning.md) - Konfigurasi siap produksi
 
 ## Referensi
 
@@ -549,7 +554,11 @@ Dokumentasikan konfigurasi Anda di `CONFIG.md`:
 
 ---
 
-**Sebelumnya:** [AZD Dasar](azd-basics.md) | **Berikutnya:** [Proyek Pertama](first-project.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 3 - Konfigurasi & Autentikasi
+- **⬅️ Sebelumnya**: [Proyek Pertama Anda](first-project.md)
+- **➡️ Bab Berikutnya**: [Bab 4: Infrastruktur sebagai Kode](../deployment/deployment-guide.md)
 - **Pelajaran Berikutnya**: [Proyek Pertama Anda](first-project.md)
 
 ---

@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T21:49:58+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T08:11:41+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "ms"
 }
 -->
 # Amalan Terbaik Beban Kerja AI Pengeluaran dengan AZD
 
-**Sebelumnya:** [AI Workshop Lab](ai-workshop-lab.md) | **Seterusnya:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 8 - Corak Pengeluaran & Perusahaan
+- **⬅️ Bab Sebelumnya**: [Bab 7: Penyelesaian Masalah](../troubleshooting/debugging.md)
+- **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](ai-workshop-lab.md)
+- **🎯 Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
 
 ## Gambaran Keseluruhan
 
@@ -19,7 +24,7 @@ Panduan ini menyediakan amalan terbaik yang komprehensif untuk melaksanakan beba
 
 Berdasarkan hasil tinjauan komuniti kami, berikut adalah cabaran utama yang dihadapi oleh pembangun:
 
-- **45%** menghadapi kesukaran dengan pelaksanaan AI berbilang perkhidmatan
+- **45%** menghadapi kesukaran dengan pelaksanaan AI pelbagai perkhidmatan
 - **38%** mempunyai masalah dengan pengurusan kelayakan dan rahsia  
 - **35%** mendapati kesediaan pengeluaran dan penskalaan sukar
 - **32%** memerlukan strategi pengoptimuman kos yang lebih baik
@@ -128,7 +133,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 - Tiada komunikasi perkhidmatan-ke-perkhidmatan tanpa pengesahan
 - Semua panggilan API menggunakan identiti terurus
 - Pengasingan rangkaian dengan titik akhir peribadi
-- Kawalan akses dengan keistimewaan minimum
+- Kawalan akses keistimewaan minimum
 
 ```bicep
 // Managed Identity for each service
@@ -246,9 +251,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Prestasi dan Penskalaan
 
-### 1. Strategi Auto-Skala
+### 1. Strategi Penskalaan Automatik
 
-**Auto-scaling Aplikasi Kontena**:
+**Penskalaan Automatik Aplikasi Kontena**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -324,7 +329,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. Pengimbangan Beban dan Pengurusan Trafik
 
-**Application Gateway dengan WAF**:
+**Gerbang Aplikasi dengan WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -456,7 +461,7 @@ class TokenOptimizer {
 
 ## Pemantauan dan Pemerhatian
 
-### 1. Aplikasi Insights yang Komprehensif
+### 1. Wawasan Aplikasi yang Komprehensif
 
 ```bicep
 // Application Insights with advanced features
@@ -603,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Pemulihan Bencana dan Ketersediaan Tinggi
 
-### 1. Pelaksanaan Berbilang Wilayah
+### 1. Pelaksanaan Pelbagai Wilayah
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -843,15 +848,15 @@ echo "Infrastructure validation completed successfully!"
 - [ ] WAF diaktifkan pada titik akhir awam
 
 ### Prestasi ✅
-- [ ] Auto-scaling dikonfigurasi
+- [ ] Penskalaan automatik dikonfigurasi
 - [ ] Caching dilaksanakan
 - [ ] Pengimbangan beban disediakan
 - [ ] CDN untuk kandungan statik
-- [ ] Pooling sambungan pangkalan data
+- [ ] Pengumpulan sambungan pangkalan data
 - [ ] Pengoptimuman penggunaan token
 
 ### Pemantauan ✅
-- [ ] Aplikasi Insights dikonfigurasi
+- [ ] Wawasan Aplikasi dikonfigurasi
 - [ ] Metrik tersuai ditakrifkan
 - [ ] Peraturan amaran disediakan
 - [ ] Papan pemuka dicipta
@@ -859,18 +864,18 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Polisi pengekalan log
 
 ### Kebolehpercayaan ✅
-- [ ] Pelaksanaan berbilang wilayah
+- [ ] Pelaksanaan pelbagai wilayah
 - [ ] Pelan sandaran dan pemulihan
-- [ ] Circuit breakers dilaksanakan
-- [ ] Polisi retry dikonfigurasi
-- [ ] Degradasi yang teratur
+- [ ] Pemutus litar dilaksanakan
+- [ ] Polisi percubaan dikonfigurasi
+- [ ] Kemerosotan yang beransur-ansur
 - [ ] Titik akhir pemeriksaan kesihatan
 
 ### Pengurusan Kos ✅
 - [ ] Amaran belanjawan dikonfigurasi
 - [ ] Saiz sumber yang tepat
 - [ ] Diskaun dev/test digunakan
-- [ ] Instans terpelihara dibeli
+- [ ] Insiden terpelihara dibeli
 - [ ] Papan pemantauan kos
 - [ ] Kajian kos berkala
 
@@ -888,7 +893,7 @@ echo "Infrastructure validation completed successfully!"
 
 | Metrik | Sasaran | Pemantauan |
 |--------|--------|------------|
-| **Masa Respons** | < 2 saat | Aplikasi Insights |
+| **Masa Respons** | < 2 saat | Wawasan Aplikasi |
 | **Ketersediaan** | 99.9% | Pemantauan waktu operasi |
 | **Kadar Ralat** | < 0.1% | Log aplikasi |
 | **Penggunaan Token** | < $500/bulan | Pengurusan kos |
@@ -916,11 +921,11 @@ Berdasarkan maklum balas komuniti Discord Azure AI Foundry:
 2. **Pantau Segalanya**: Sediakan pemantauan yang komprehensif dari hari pertama
 3. **Automasi Keselamatan**: Gunakan infrastruktur sebagai kod untuk keselamatan yang konsisten
 4. **Uji Secara Menyeluruh**: Sertakan ujian khusus AI dalam saluran anda
-5. **Rancang Kos**: Pantau penggunaan token dan tetapkan amaran belanjawan awal
+5. **Rancang Kos**: Pantau penggunaan token dan tetapkan amaran belanjawan lebih awal
 
 ### Kesilapan Biasa untuk Dielakkan:
 
-- ❌ Menyimpan kunci API secara hardcoding dalam kod
+- ❌ Menyimpan kunci API secara keras dalam kod
 - ❌ Tidak menyediakan pemantauan yang betul
 - ❌ Mengabaikan pengoptimuman kos
 - ❌ Tidak menguji senario kegagalan
@@ -928,14 +933,19 @@ Berdasarkan maklum balas komuniti Discord Azure AI Foundry:
 
 ## Sumber Tambahan
 
-- **Kerangka Azure Well-Architected**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Kerangka Seni Bina Azure yang Baik**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Dokumentasi Azure AI Foundry**: [Dok rasmi](https://learn.microsoft.com/azure/ai-studio/)
 - **Templat Komuniti**: [Contoh Azure](https://github.com/Azure-Samples)
-- **Komuniti Discord**: [Saluran #Azure](https://discord.gg/microsoft-azure)
+- **Komuniti Discord**: [#Saluran Azure](https://discord.gg/microsoft-azure)
 
 ---
 
-**Sebelumnya:** [AI Workshop Lab](ai-workshop-lab.md) | **Seterusnya:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigasi Bab:**
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 8 - Corak Pengeluaran & Perusahaan
+- **⬅️ Bab Sebelumnya**: [Bab 7: Penyelesaian Masalah](../troubleshooting/debugging.md)
+- **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](ai-workshop-lab.md)
+- **🎆 Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
 
 **Ingat**: Beban kerja AI pengeluaran memerlukan perancangan yang teliti, pemantauan, dan pengoptimuman berterusan. Mulakan dengan corak ini dan sesuaikan mengikut keperluan khusus anda.
 

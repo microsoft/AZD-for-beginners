@@ -1,35 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:06:35+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T07:43:18+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "vi"
 }
 -->
 # Hướng Dẫn Chọn SKU - Lựa Chọn Các Tầng Dịch Vụ Azure Phù Hợp
 
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 6 - Xác Thực & Lập Kế Hoạch Trước Triển Khai
+- **⬅️ Trước**: [Lập Kế Hoạch Năng Lực](capacity-planning.md)
+- **➡️ Tiếp Theo**: [Kiểm Tra Trước Triển Khai](preflight-checks.md)
+- **🚀 Chương Tiếp Theo**: [Chương 7: Xử Lý Sự Cố](../troubleshooting/common-issues.md)
+
 ## Giới Thiệu
 
-Hướng dẫn toàn diện này giúp bạn chọn các SKU (Stock Keeping Units) dịch vụ Azure tối ưu cho các môi trường, khối lượng công việc, và yêu cầu khác nhau. Tìm hiểu cách phân tích nhu cầu hiệu suất, cân nhắc chi phí, và yêu cầu mở rộng để chọn tầng dịch vụ phù hợp nhất cho các triển khai Azure Developer CLI của bạn.
+Hướng dẫn toàn diện này giúp bạn chọn các SKU (Stock Keeping Units) dịch vụ Azure tối ưu cho các môi trường, khối lượng công việc, và yêu cầu khác nhau. Tìm hiểu cách phân tích nhu cầu hiệu suất, cân nhắc chi phí, và yêu cầu mở rộng để chọn các tầng dịch vụ phù hợp nhất cho triển khai Azure Developer CLI của bạn.
 
 ## Mục Tiêu Học Tập
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
 - Hiểu các khái niệm về SKU Azure, mô hình giá cả, và sự khác biệt về tính năng
-- Nắm vững chiến lược chọn SKU theo môi trường cho phát triển, thử nghiệm, và sản xuất
+- Thành thạo chiến lược chọn SKU theo môi trường cho phát triển, thử nghiệm, và sản xuất
 - Phân tích yêu cầu khối lượng công việc và ghép nối chúng với các tầng dịch vụ phù hợp
-- Áp dụng chiến lược tối ưu hóa chi phí thông qua việc chọn SKU thông minh
-- Thực hiện kiểm tra hiệu suất và kỹ thuật xác thực cho các lựa chọn SKU
-- Cấu hình các khuyến nghị SKU tự động và giám sát
+- Thực hiện các chiến lược tối ưu hóa chi phí thông qua việc chọn SKU thông minh
+- Áp dụng các kỹ thuật kiểm tra hiệu suất và xác thực cho các lựa chọn SKU
+- Cấu hình các đề xuất SKU tự động và giám sát
 
 ## Kết Quả Học Tập
 
-Sau khi hoàn thành, bạn sẽ có khả năng:
-- Chọn các SKU dịch vụ Azure phù hợp dựa trên yêu cầu và giới hạn khối lượng công việc
-- Thiết kế kiến trúc đa môi trường hiệu quả về chi phí với lựa chọn tầng phù hợp
+Sau khi hoàn thành, bạn sẽ có thể:
+- Chọn các SKU dịch vụ Azure phù hợp dựa trên yêu cầu và hạn chế của khối lượng công việc
+- Thiết kế kiến trúc đa môi trường hiệu quả về chi phí với việc chọn tầng phù hợp
 - Thực hiện kiểm tra hiệu suất và xác thực cho các lựa chọn SKU
-- Tạo công cụ tự động để khuyến nghị SKU và tối ưu hóa chi phí
+- Tạo công cụ tự động để đề xuất SKU và tối ưu hóa chi phí
 - Lập kế hoạch di chuyển SKU và chiến lược mở rộng cho các yêu cầu thay đổi
 - Áp dụng các nguyên tắc của Azure Well-Architected Framework vào việc chọn tầng dịch vụ
 
@@ -37,7 +44,7 @@ Sau khi hoàn thành, bạn sẽ có khả năng:
 
 - [Hiểu Về SKU](../../../../docs/pre-deployment)
 - [Lựa Chọn Theo Môi Trường](../../../../docs/pre-deployment)
-- [Hướng Dẫn Cụ Thể Theo Dịch Vụ](../../../../docs/pre-deployment)
+- [Hướng Dẫn Theo Dịch Vụ](../../../../docs/pre-deployment)
 - [Chiến Lược Tối Ưu Hóa Chi Phí](../../../../docs/pre-deployment)
 - [Cân Nhắc Hiệu Suất](../../../../docs/pre-deployment)
 - [Bảng Tham Khảo Nhanh](../../../../docs/pre-deployment)
@@ -52,9 +59,9 @@ Sau khi hoàn thành, bạn sẽ có khả năng:
 SKU (Stock Keeping Units) đại diện cho các tầng dịch vụ và mức hiệu suất khác nhau của tài nguyên Azure. Mỗi SKU cung cấp các đặc điểm khác nhau:
 
 - **Đặc điểm hiệu suất** (CPU, bộ nhớ, thông lượng)
-- **Tính năng khả dụng** (tùy chọn mở rộng, mức SLA)
+- **Khả năng tính năng** (tùy chọn mở rộng, mức SLA)
 - **Mô hình giá cả** (dựa trên tiêu thụ, dung lượng đặt trước)
-- **Khả dụng theo khu vực** (không phải tất cả SKU đều có ở mọi khu vực)
+- **Khả năng khu vực** (không phải tất cả SKU đều có sẵn ở mọi khu vực)
 
 ### Các Yếu Tố Chính Trong Việc Chọn SKU
 
@@ -68,7 +75,7 @@ SKU (Stock Keeping Units) đại diện cho các tầng dịch vụ và mức hi
    - Yêu cầu khả dụng
    - Nhu cầu bảo mật và tuân thủ
 
-3. **Giới Hạn Ngân Sách**
+3. **Hạn Chế Ngân Sách**
    - Chi phí ban đầu so với chi phí vận hành
    - Giảm giá dung lượng đặt trước
    - Tác động chi phí của tự động mở rộng
@@ -76,7 +83,7 @@ SKU (Stock Keeping Units) đại diện cho các tầng dịch vụ và mức hi
 4. **Dự Báo Tăng Trưởng**
    - Yêu cầu mở rộng
    - Nhu cầu tính năng trong tương lai
-   - Độ phức tạp của việc di chuyển
+   - Độ phức tạp của di chuyển
 
 ---
 
@@ -86,7 +93,7 @@ SKU (Stock Keeping Units) đại diện cho các tầng dịch vụ và mức hi
 
 **Ưu Tiên**: Tối ưu hóa chi phí, chức năng cơ bản, dễ dàng cung cấp/hủy cung cấp
 
-#### SKU Được Khuyến Nghị
+#### SKU Đề Xuất
 ```yaml
 # Development environment configuration
 environment: development
@@ -102,7 +109,7 @@ skus:
 #### Đặc Điểm
 - **App Service**: F1 (Miễn phí) hoặc B1 (Cơ bản) cho thử nghiệm đơn giản
 - **Cơ Sở Dữ Liệu**: Tầng cơ bản với tài nguyên tối thiểu
-- **Lưu Trữ**: Tiêu chuẩn với chỉ sao lưu cục bộ
+- **Lưu Trữ**: Tiêu chuẩn với chỉ dự phòng cục bộ
 - **Tính Toán**: Chấp nhận tài nguyên chia sẻ
 - **Mạng**: Cấu hình cơ bản
 
@@ -110,7 +117,7 @@ skus:
 
 **Ưu Tiên**: Cấu hình giống sản xuất, cân bằng chi phí, khả năng kiểm tra hiệu suất
 
-#### SKU Được Khuyến Nghị
+#### SKU Đề Xuất
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -125,15 +132,15 @@ skus:
 #### Đặc Điểm
 - **Hiệu Suất**: 70-80% công suất sản xuất
 - **Tính Năng**: Hầu hết các tính năng sản xuất được kích hoạt
-- **Sao Lưu**: Một số sao lưu địa lý
+- **Dự Phòng**: Một số dự phòng địa lý
 - **Mở Rộng**: Tự động mở rộng giới hạn để thử nghiệm
 - **Giám Sát**: Bộ giám sát đầy đủ
 
 ### Môi Trường Sản Xuất
 
-**Ưu Tiên**: Hiệu suất, khả dụng, bảo mật, tuân thủ, khả năng mở rộng
+**Ưu Tiên**: Hiệu suất, khả dụng, bảo mật, tuân thủ, mở rộng
 
-#### SKU Được Khuyến Nghị
+#### SKU Đề Xuất
 ```yaml
 # Production environment configuration
 environment: production
@@ -149,20 +156,20 @@ skus:
 #### Đặc Điểm
 - **Khả Dụng Cao**: Yêu cầu SLA 99.9%+
 - **Hiệu Suất**: Tài nguyên chuyên dụng, thông lượng cao
-- **Bảo Mật**: Các tính năng bảo mật cao cấp
+- **Bảo Mật**: Tính năng bảo mật cao cấp
 - **Mở Rộng**: Khả năng tự động mở rộng đầy đủ
 - **Giám Sát**: Khả năng quan sát toàn diện
 
 ---
 
-## Hướng Dẫn Cụ Thể Theo Dịch Vụ
+## Hướng Dẫn Theo Dịch Vụ
 
 ### Azure App Service
 
 #### Ma Trận Quyết Định SKU
 
-| Trường Hợp Sử Dụng | SKU Được Khuyến Nghị | Lý Do |
-|--------------------|----------------------|-------|
+| Trường Hợp Sử Dụng | SKU Đề Xuất | Lý Do |
+|---------------------|-------------|-------|
 | Phát triển/thử nghiệm | F1 (Miễn phí) hoặc B1 (Cơ bản) | Chi phí thấp, đủ cho thử nghiệm |
 | Ứng dụng sản xuất nhỏ | S1 (Tiêu chuẩn) | Tên miền tùy chỉnh, SSL, tự động mở rộng |
 | Ứng dụng sản xuất trung bình | P1V3 (Premium V3) | Hiệu suất tốt hơn, nhiều tính năng hơn |
@@ -257,11 +264,11 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 #### Loại Môi Trường
 
 1. **Dựa Trên Tiêu Thụ**
-   - Giá theo mức sử dụng
+   - Giá theo sử dụng
    - Phù hợp cho phát triển và khối lượng công việc biến đổi
    - Hạ tầng chia sẻ
 
-2. **Dành Riêng (Hồ Sơ Công Việc)**
+2. **Chuyên Dụng (Hồ Sơ Khối Lượng Công Việc)**
    - Tài nguyên tính toán chuyên dụng
    - Hiệu suất dự đoán
    - Tốt hơn cho khối lượng công việc sản xuất
@@ -307,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Sản Xuất (Dành Riêng)**
+**Sản Xuất (Chuyên Dụng)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-prod'
@@ -333,8 +340,8 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
    - Giảm giá dung lượng đặt trước
    - Tốt nhất cho khối lượng công việc ổn định
 
-2. **Thông Lượng Được Cung Cấp Tự Động**
-   - Tự động mở rộng dựa trên mức sử dụng
+2. **Thông Lượng Tự Động Mở Rộng**
+   - Tự động mở rộng dựa trên sử dụng
    - Trả tiền theo mức sử dụng (với mức tối thiểu)
    - Tốt cho khối lượng công việc biến đổi
 
@@ -403,9 +410,9 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 #### Loại Tài Khoản Lưu Trữ
 
 1. **Standard_LRS** - Phát triển, dữ liệu không quan trọng
-2. **Standard_GRS** - Sản xuất, cần sao lưu địa lý
+2. **Standard_GRS** - Sản xuất, cần dự phòng địa lý
 3. **Premium_LRS** - Ứng dụng hiệu suất cao
-4. **Premium_ZRS** - Khả dụng cao với sao lưu theo vùng
+4. **Premium_ZRS** - Khả dụng cao với dự phòng theo vùng
 
 #### Tầng Hiệu Suất
 
@@ -662,7 +669,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 | SKU | Tầng | DTU/vCore | Lưu Trữ | Phạm Vi Giá | Trường Hợp Sử Dụng |
 |-----|------|-----------|---------|-------------|--------------------|
-| Basic | Cơ bản | 5 DTU | 2GB | $ | Phát triển |
+| Cơ Bản | Cơ bản | 5 DTU | 2GB | $ | Phát triển |
 | S2 | Tiêu chuẩn | 50 DTU | 250GB | $$ | Sản xuất nhỏ |
 | P2 | Cao cấp | 250 DTU | 1TB | $$$ | Hiệu suất cao |
 | GP_Gen5_4 | Mục đích chung | 4 vCore | 4TB | $$$ | Cân bằng |
@@ -672,9 +679,9 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 | Mô Hình | Giá | CPU/Bộ Nhớ | Trường Hợp Sử Dụng |
 |---------|-----|------------|--------------------|
-| Tiêu thụ | Trả theo mức sử dụng | 0.25-2 vCPU | Phát triển, tải biến đổi |
-| Dành riêng D4 | Đặt trước | 4 vCPU, 16GB | Sản xuất |
-| Dành riêng D8 | Đặt trước | 8 vCPU, 32GB | Hiệu suất cao |
+| Tiêu thụ | Trả theo sử dụng | 0.25-2 vCPU | Phát triển, tải biến đổi |
+| Chuyên dụng D4 | Đặt trước | 4 vCPU, 16GB | Sản xuất |
+| Chuyên dụng D8 | Đặt trước | 8 vCPU, 32GB | Hiệu suất cao |
 
 ---
 
@@ -811,15 +818,15 @@ test_configuration:
 
 ---
 
-**Mẹo Chuyên Nghiệp**: Sử dụng Azure Cost Management và Advisor để nhận các khuyến nghị cá nhân hóa nhằm tối ưu hóa lựa chọn SKU của bạn dựa trên mẫu sử dụng thực tế.
+**Mẹo Chuyên Nghiệp**: Sử dụng Azure Cost Management và Advisor để nhận các đề xuất cá nhân hóa nhằm tối ưu hóa lựa chọn SKU của bạn dựa trên mẫu sử dụng thực tế.
 
 ---
 
 **Điều Hướng**
-- **Bài Học Trước**: [Lập Kế Hoạch Dung Lượng](capacity-planning.md)
-- **Bài Học Tiếp Theo**: [Kiểm Tra Trước Khi Triển Khai](preflight-checks.md)
+- **Bài Học Trước**: [Lập Kế Hoạch Năng Lực](capacity-planning.md)
+- **Bài Học Tiếp Theo**: [Kiểm Tra Trước Triển Khai](preflight-checks.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

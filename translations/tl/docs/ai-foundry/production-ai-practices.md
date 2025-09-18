@@ -1,29 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T21:50:17+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T08:28:34+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "tl"
 }
 -->
 # Mga Pinakamahusay na Praktika para sa Production AI Workload gamit ang AZD
 
-**Nakaraan:** [AI Workshop Lab](ai-workshop-lab.md) | **Susunod:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 8 - Mga Pattern para sa Produksyon at Enterprise
+- **⬅️ Nakaraang Kabanata**: [Kabanata 7: Pag-troubleshoot](../troubleshooting/debugging.md)
+- **⬅️ Kaugnay Din**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Tapos na ang Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
 
 ## Pangkalahatang-ideya
 
-Ang gabay na ito ay nagbibigay ng komprehensibong pinakamahusay na praktika para sa pag-deploy ng production-ready AI workloads gamit ang Azure Developer CLI (AZD). Batay sa feedback mula sa Azure AI Foundry Discord community at mga aktwal na deployment ng customer, tinutugunan ng mga praktika na ito ang mga karaniwang hamon sa mga production AI system.
+Ang gabay na ito ay nagbibigay ng komprehensibong pinakamahusay na praktika para sa pag-deploy ng mga AI workload na handa para sa produksyon gamit ang Azure Developer CLI (AZD). Batay sa feedback mula sa Azure AI Foundry Discord community at mga aktwal na deployment ng customer, tinutugunan ng mga praktika na ito ang mga karaniwang hamon sa mga production AI system.
 
 ## Mga Pangunahing Hamon na Tinutugunan
 
 Batay sa resulta ng poll ng aming komunidad, ito ang mga pangunahing hamon na nararanasan ng mga developer:
 
-- **45%** nahihirapan sa multi-service AI deployments  
-- **38%** may problema sa pamamahala ng mga kredensyal at lihim  
-- **35%** nahihirapan sa production readiness at scaling  
-- **32%** nangangailangan ng mas mahusay na mga estratehiya sa cost optimization  
-- **29%** nangangailangan ng mas mahusay na monitoring at troubleshooting  
+- **45%** nahihirapan sa multi-service AI deployments
+- **38%** may problema sa pamamahala ng mga kredensyal at sikreto  
+- **35%** nahihirapan sa pagiging handa para sa produksyon at pag-scale
+- **32%** nangangailangan ng mas mahusay na mga estratehiya para sa pag-optimize ng gastos
+- **29%** nangangailangan ng mas mahusay na monitoring at pag-troubleshoot
 
 ## Mga Pattern ng Arkitektura para sa Production AI
 
@@ -48,7 +53,7 @@ Batay sa resulta ng poll ng aming komunidad, ito ang mga pangunahing hamon na na
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**Implementasyon gamit ang AZD**:
+**Pagpapatupad gamit ang AZD**:
 
 ```yaml
 # azure.yaml
@@ -124,11 +129,11 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### 1. Zero-Trust Security Model
 
-**Estratehiya ng Implementasyon**:
-- Walang komunikasyon sa pagitan ng mga serbisyo nang walang authentication  
-- Lahat ng API calls ay gumagamit ng managed identities  
-- Network isolation gamit ang private endpoints  
-- Least privilege access controls  
+**Estratehiya sa Pagpapatupad**:
+- Walang komunikasyon sa pagitan ng mga serbisyo nang walang authentication
+- Lahat ng API calls ay gumagamit ng managed identities
+- Network isolation gamit ang private endpoints
+- Least privilege access controls
 
 ```bicep
 // Managed Identity for each service
@@ -244,7 +249,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Pagganap at Scaling
+## Pagganap at Pag-scale
 
 ### 1. Mga Estratehiya sa Auto-Scaling
 
@@ -364,7 +369,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Tamang Sukat ng Mga Resource
 
-**Mga Konfigurasyon na Nakabatay sa Kapaligiran**:
+**Mga Konfigurasyon na Tukoy sa Kapaligiran**:
 
 ```bash
 # Development environment
@@ -501,7 +506,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-Specific Monitoring
+### 2. Monitoring na Tukoy sa AI
 
 **Custom Dashboards para sa AI Metrics**:
 
@@ -532,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Health Checks at Uptime Monitoring
+### 3. Health Checks at Monitoring ng Uptime
 
 ```bicep
 // Application Insights availability tests
@@ -716,7 +721,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps at CI/CD Integration
+## DevOps at Integrasyon ng CI/CD
 
 ### 1. Workflow ng GitHub Actions
 
@@ -832,68 +837,68 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Production Readiness Checklist
+## Checklist para sa Production Readiness
 
 ### Seguridad ✅
-- [ ] Lahat ng serbisyo ay gumagamit ng managed identities  
-- [ ] Mga lihim ay nakaimbak sa Key Vault  
-- [ ] Nakakonfigura ang private endpoints  
-- [ ] Naipatupad ang network security groups  
-- [ ] RBAC na may least privilege  
-- [ ] WAF na naka-enable sa mga pampublikong endpoint  
+- [ ] Lahat ng serbisyo ay gumagamit ng managed identities
+- [ ] Mga sikreto ay nakaimbak sa Key Vault
+- [ ] Nakakonfigura ang private endpoints
+- [ ] Naipatupad ang network security groups
+- [ ] RBAC na may least privilege
+- [ ] WAF na naka-enable sa public endpoints
 
 ### Pagganap ✅
-- [ ] Nakakonfigura ang auto-scaling  
-- [ ] Naipatupad ang caching  
-- [ ] Nakasetup ang load balancing  
-- [ ] CDN para sa static content  
-- [ ] Database connection pooling  
-- [ ] Pag-optimize ng paggamit ng token  
+- [ ] Nakakonfigura ang auto-scaling
+- [ ] Naipatupad ang caching
+- [ ] Nakasetup ang load balancing
+- [ ] CDN para sa static content
+- [ ] Database connection pooling
+- [ ] Pag-optimize ng paggamit ng token
 
 ### Monitoring ✅
-- [ ] Nakakonfigura ang Application Insights  
-- [ ] Na-define ang custom metrics  
-- [ ] Nakasetup ang alerting rules  
-- [ ] Nalikha ang dashboard  
-- [ ] Naipatupad ang health checks  
-- [ ] Mga polisiya sa log retention  
+- [ ] Nakakonfigura ang Application Insights
+- [ ] Na-define ang custom metrics
+- [ ] Nakasetup ang alerting rules
+- [ ] Nalikha ang dashboard
+- [ ] Naipatupad ang health checks
+- [ ] Mga polisiya sa log retention
 
 ### Reliability ✅
-- [ ] Multi-region deployment  
-- [ ] Plano para sa backup at recovery  
-- [ ] Naipatupad ang circuit breakers  
-- [ ] Nakakonfigura ang retry policies  
-- [ ] Graceful degradation  
-- [ ] Health check endpoints  
+- [ ] Multi-region deployment
+- [ ] Plano para sa backup at recovery
+- [ ] Naipatupad ang circuit breakers
+- [ ] Nakakonfigura ang retry policies
+- [ ] Graceful degradation
+- [ ] Health check endpoints
 
 ### Pamamahala ng Gastos ✅
-- [ ] Nakakonfigura ang budget alerts  
-- [ ] Tamang sukat ng mga resource  
-- [ ] Na-apply ang dev/test discounts  
-- [ ] Nabili ang reserved instances  
-- [ ] Dashboard para sa pagsubaybay sa gastos  
-- [ ] Regular na pagsusuri ng gastos  
+- [ ] Nakakonfigura ang budget alerts
+- [ ] Tamang sukat ng mga resource
+- [ ] Na-apply ang dev/test discounts
+- [ ] Nabili ang reserved instances
+- [ ] Dashboard para sa pagsubaybay sa gastos
+- [ ] Regular na pagsusuri ng gastos
 
 ### Pagsunod ✅
-- [ ] Natugunan ang mga kinakailangan sa data residency  
-- [ ] Naka-enable ang audit logging  
-- [ ] Na-apply ang compliance policies  
-- [ ] Naipatupad ang security baselines  
-- [ ] Regular na pagsusuri sa seguridad  
-- [ ] Plano para sa incident response  
+- [ ] Natugunan ang mga kinakailangan sa data residency
+- [ ] Na-enable ang audit logging
+- [ ] Na-apply ang compliance policies
+- [ ] Naipatupad ang security baselines
+- [ ] Regular na pagsusuri sa seguridad
+- [ ] Plano para sa incident response
 
 ## Mga Benchmark ng Pagganap
 
-### Karaniwang Production Metrics
+### Karaniwang Metrics para sa Produksyon
 
 | Metric | Target | Monitoring |
 |--------|--------|------------|
 | **Response Time** | < 2 segundo | Application Insights |
-| **Availability** | 99.9% | Uptime monitoring |
+| **Availability** | 99.9% | Monitoring ng Uptime |
 | **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/buwan | Pamamahala ng gastos |
+| **Token Usage** | < $500/buwan | Pamamahala ng Gastos |
 | **Concurrent Users** | 1000+ | Load testing |
-| **Recovery Time** | < 1 oras | Mga pagsubok sa disaster recovery |
+| **Recovery Time** | < 1 oras | Mga Pagsubok sa Disaster Recovery |
 
 ### Load Testing
 
@@ -912,34 +917,39 @@ Batay sa feedback ng Azure AI Foundry Discord community:
 
 ### Mga Nangungunang Rekomendasyon mula sa Komunidad:
 
-1. **Magsimula ng Maliit, Mag-scale ng Paunti-unti**: Magsimula sa basic SKUs at mag-scale batay sa aktwal na paggamit  
-2. **I-monitor ang Lahat**: Mag-set up ng komprehensibong monitoring mula sa simula  
-3. **I-automate ang Seguridad**: Gumamit ng infrastructure as code para sa consistent na seguridad  
-4. **Subukan nang Mabuti**: Isama ang AI-specific testing sa iyong pipeline  
-5. **Magplano para sa Gastos**: I-monitor ang paggamit ng token at mag-set ng budget alerts nang maaga  
+1. **Magsimula ng Maliit, Mag-scale ng Unti-unti**: Magsimula sa mga basic SKUs at mag-scale batay sa aktwal na paggamit
+2. **I-monitor ang Lahat**: Mag-set up ng komprehensibong monitoring mula sa simula
+3. **I-automate ang Seguridad**: Gumamit ng infrastructure as code para sa consistent na seguridad
+4. **Subukan nang Mabuti**: Isama ang AI-specific testing sa iyong pipeline
+5. **Magplano para sa Gastos**: I-monitor ang paggamit ng token at mag-set ng budget alerts nang maaga
 
 ### Mga Karaniwang Pagkakamali na Dapat Iwasan:
 
-- ❌ Pag-hardcode ng API keys sa code  
-- ❌ Hindi pag-set up ng tamang monitoring  
-- ❌ Pagpapabaya sa cost optimization  
-- ❌ Hindi pagsubok sa mga failure scenarios  
-- ❌ Pag-deploy nang walang health checks  
+- ❌ Pag-hardcode ng API keys sa code
+- ❌ Hindi pag-set up ng tamang monitoring
+- ❌ Pagpapabaya sa pag-optimize ng gastos
+- ❌ Hindi pagsubok sa mga failure scenarios
+- ❌ Pag-deploy nang walang health checks
 
-## Karagdagang Mga Mapagkukunan
+## Karagdagang Mga Resource
 
-- **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)  
-- **Azure AI Foundry Documentation**: [Opisyal na dokumentasyon](https://learn.microsoft.com/azure/ai-studio/)  
-- **Mga Template ng Komunidad**: [Azure Samples](https://github.com/Azure-Samples)  
-- **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)  
+- **Azure Well-Architected Framework**: [Gabay sa AI workload](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Dokumentasyon ng Azure AI Foundry**: [Opisyal na docs](https://learn.microsoft.com/azure/ai-studio/)
+- **Mga Template ng Komunidad**: [Azure Samples](https://github.com/Azure-Samples)
+- **Komunidad sa Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 
 ---
 
-**Nakaraan:** [AI Workshop Lab](ai-workshop-lab.md) | **Susunod:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 8 - Mga Pattern para sa Produksyon at Enterprise
+- **⬅️ Nakaraang Kabanata**: [Kabanata 7: Pag-troubleshoot](../troubleshooting/debugging.md)
+- **⬅️ Kaugnay Din**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Tapos na ang Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
 
 **Tandaan**: Ang mga production AI workload ay nangangailangan ng maingat na pagpaplano, monitoring, at tuloy-tuloy na pag-optimize. Magsimula sa mga pattern na ito at iangkop ang mga ito sa iyong partikular na pangangailangan.
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.

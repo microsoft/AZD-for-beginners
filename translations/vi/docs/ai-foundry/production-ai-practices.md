@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T21:49:17+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T07:36:36+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "vi"
 }
 -->
 # Thực hành tốt nhất cho khối lượng công việc AI sản xuất với AZD
 
-**Trước:** [AI Workshop Lab](ai-workshop-lab.md) | **Tiếp theo:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 8 - Mô hình sản xuất & doanh nghiệp
+- **⬅️ Chương trước**: [Chương 7: Xử lý sự cố](../troubleshooting/debugging.md)
+- **⬅️ Cũng liên quan**: [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
+- **🎯 Hoàn thành khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
 
 ## Tổng quan
 
-Hướng dẫn này cung cấp các thực hành tốt nhất toàn diện để triển khai khối lượng công việc AI sẵn sàng sản xuất bằng Azure Developer CLI (AZD). Dựa trên phản hồi từ cộng đồng Discord của Azure AI Foundry và các triển khai thực tế của khách hàng, các thực hành này giải quyết những thách thức phổ biến nhất trong hệ thống AI sản xuất.
+Hướng dẫn này cung cấp các thực hành tốt nhất toàn diện để triển khai khối lượng công việc AI sẵn sàng sản xuất bằng Azure Developer CLI (AZD). Dựa trên phản hồi từ cộng đồng Discord Azure AI Foundry và các triển khai thực tế của khách hàng, các thực hành này giải quyết những thách thức phổ biến nhất trong hệ thống AI sản xuất.
 
 ## Những thách thức chính được giải quyết
 
@@ -23,11 +28,11 @@ Dựa trên kết quả khảo sát cộng đồng, đây là những thách th�
 - **38%** gặp vấn đề với quản lý thông tin xác thực và bí mật  
 - **35%** thấy khó khăn trong việc chuẩn bị sản xuất và mở rộng quy mô
 - **32%** cần chiến lược tối ưu hóa chi phí tốt hơn
-- **29%** yêu cầu cải thiện giám sát và khắc phục sự cố
+- **29%** yêu cầu cải thiện giám sát và xử lý sự cố
 
-## Mẫu kiến trúc cho AI sản xuất
+## Mô hình kiến trúc cho AI sản xuất
 
-### Mẫu 1: Kiến trúc AI Microservices
+### Mô hình 1: Kiến trúc AI Microservices
 
 **Khi nào sử dụng**: Ứng dụng AI phức tạp với nhiều khả năng
 
@@ -48,7 +53,7 @@ Dựa trên kết quả khảo sát cộng đồng, đây là những thách th�
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**Triển khai với AZD**:
+**Triển khai AZD**:
 
 ```yaml
 # azure.yaml
@@ -71,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Mẫu 2: Xử lý AI theo sự kiện
+### Mô hình 2: Xử lý AI theo sự kiện
 
-**Khi nào sử dụng**: Xử lý theo lô, phân tích tài liệu, quy trình làm việc không đồng bộ
+**Khi nào sử dụng**: Xử lý theo lô, phân tích tài liệu, quy trình không đồng bộ
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -151,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Quản lý bí mật an toàn
 
-**Mẫu tích hợp Key Vault**:
+**Mô hình tích hợp Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -364,7 +369,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Điều chỉnh kích thước tài nguyên
 
-**Cấu hình theo môi trường**:
+**Cấu hình cụ thể cho môi trường**:
 
 ```bash
 # Development environment
@@ -851,7 +856,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Tối ưu hóa sử dụng token
 
 ### Giám sát ✅
-- [ ] Application Insights được cấu hình
+- [ ] Thông tin ứng dụng được cấu hình
 - [ ] Các chỉ số tùy chỉnh được định nghĩa
 - [ ] Quy tắc cảnh báo được thiết lập
 - [ ] Bảng điều khiển được tạo
@@ -861,16 +866,16 @@ echo "Infrastructure validation completed successfully!"
 ### Độ tin cậy ✅
 - [ ] Triển khai đa vùng
 - [ ] Kế hoạch sao lưu và khôi phục
-- [ ] Circuit breakers được triển khai
+- [ ] Bộ ngắt mạch được triển khai
 - [ ] Chính sách thử lại được cấu hình
-- [ ] Giảm thiểu thiệt hại một cách hợp lý
+- [ ] Giảm thiểu rủi ro một cách hợp lý
 - [ ] Điểm cuối kiểm tra sức khỏe
 
 ### Quản lý chi phí ✅
 - [ ] Cảnh báo ngân sách được cấu hình
 - [ ] Điều chỉnh kích thước tài nguyên
 - [ ] Giảm giá cho môi trường dev/test được áp dụng
-- [ ] Các phiên bản đặt trước được mua
+- [ ] Mua các phiên bản dự trữ
 - [ ] Bảng điều khiển giám sát chi phí
 - [ ] Đánh giá chi phí thường xuyên
 
@@ -888,8 +893,8 @@ echo "Infrastructure validation completed successfully!"
 
 | Chỉ số | Mục tiêu | Giám sát |
 |--------|----------|----------|
-| **Thời gian phản hồi** | < 2 giây | Application Insights |
-| **Tính khả dụng** | 99.9% | Giám sát thời gian hoạt động |
+| **Thời gian phản hồi** | < 2 giây | Thông tin ứng dụng |
+| **Khả dụng** | 99.9% | Giám sát thời gian hoạt động |
 | **Tỷ lệ lỗi** | < 0.1% | Nhật ký ứng dụng |
 | **Sử dụng token** | < $500/tháng | Quản lý chi phí |
 | **Người dùng đồng thời** | 1000+ | Kiểm tra tải |
@@ -908,7 +913,7 @@ python scripts/load_test.py \
 
 ## 🤝 Thực hành tốt nhất từ cộng đồng
 
-Dựa trên phản hồi từ cộng đồng Discord của Azure AI Foundry:
+Dựa trên phản hồi từ cộng đồng Discord Azure AI Foundry:
 
 ### Các khuyến nghị hàng đầu từ cộng đồng:
 
@@ -928,18 +933,23 @@ Dựa trên phản hồi từ cộng đồng Discord của Azure AI Foundry:
 
 ## Tài nguyên bổ sung
 
-- **Khung kiến trúc tốt của Azure**: [Hướng dẫn khối lượng công việc AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Khung Kiến trúc Tốt của Azure**: [Hướng dẫn khối lượng công việc AI](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Tài liệu Azure AI Foundry**: [Tài liệu chính thức](https://learn.microsoft.com/azure/ai-studio/)
-- **Mẫu cộng đồng**: [Azure Samples](https://github.com/Azure-Samples)
+- **Mẫu cộng đồng**: [Mẫu Azure](https://github.com/Azure-Samples)
 - **Cộng đồng Discord**: [Kênh #Azure](https://discord.gg/microsoft-azure)
 
 ---
 
-**Trước:** [AI Workshop Lab](ai-workshop-lab.md) | **Tiếp theo:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 8 - Mô hình sản xuất & doanh nghiệp
+- **⬅️ Chương trước**: [Chương 7: Xử lý sự cố](../troubleshooting/debugging.md)
+- **⬅️ Cũng liên quan**: [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
+- **🎆 Hoàn thành khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
 
-**Nhớ rằng**: Khối lượng công việc AI sản xuất yêu cầu lập kế hoạch cẩn thận, giám sát và tối ưu hóa liên tục. Bắt đầu với các mẫu này và điều chỉnh chúng theo yêu cầu cụ thể của bạn.
+**Nhớ rằng**: Khối lượng công việc AI sản xuất yêu cầu lập kế hoạch cẩn thận, giám sát và tối ưu hóa liên tục. Bắt đầu với các mô hình này và điều chỉnh chúng theo yêu cầu cụ thể của bạn.
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

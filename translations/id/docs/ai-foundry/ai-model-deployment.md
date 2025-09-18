@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:52:48+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T07:56:23+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "id"
 }
 -->
 # Penyebaran Model AI dengan Azure Developer CLI
 
-**Sebelumnya:** [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md) | **Berikutnya:** [Lab Workshop AI](ai-workshop-lab.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berbasis AI
+- **⬅️ Sebelumnya**: [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Selanjutnya**: [Lab Workshop AI](ai-workshop-lab.md)
+- **🚀 Bab Selanjutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 Panduan ini memberikan instruksi lengkap untuk menyebarkan model AI menggunakan template AZD, mencakup segala hal mulai dari pemilihan model hingga pola penyebaran produksi.
 
@@ -173,10 +178,10 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Cocok untuk:
 - Aplikasi global
-- Kebutuhan ketersediaan tinggi
+- Persyaratan ketersediaan tinggi
 - Distribusi beban
 
-### Pola 3: Penyebaran Hybrid
+### Pola 3: Penyebaran Hibrid
 
 Gabungkan Azure OpenAI dengan layanan AI lainnya:
 
@@ -475,7 +480,7 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Langkah Berikutnya
+## Langkah Selanjutnya
 
 1. **Tinjau [Panduan Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)** untuk pola integrasi layanan
 2. **Selesaikan [Lab Workshop AI](ai-workshop-lab.md)** untuk pengalaman langsung
@@ -486,12 +491,17 @@ async def check_ai_models():
 
 - [Ketersediaan Model Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Skala Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Scaling Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optimasi Biaya Model AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Sebelumnya:** [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md) | **Berikutnya:** [Lab Workshop AI](ai-workshop-lab.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berbasis AI
+- **⬅️ Sebelumnya**: [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Selanjutnya**: [Lab Workshop AI](ai-workshop-lab.md)
+- **🚀 Bab Selanjutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 ---
 

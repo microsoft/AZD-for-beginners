@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:48:32+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T07:58:58+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "id"
 }
 -->
-# Masalah Umum & Solusi
+# Masalah Umum dan Solusi
+
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 7 - Pemecahan Masalah & Debugging
+- **⬅️ Bab Sebelumnya**: [Bab 6: Pemeriksaan Pra-penerapan](../pre-deployment/preflight-checks.md)
+- **➡️ Selanjutnya**: [Panduan Debugging](debugging.md)
+- **🚀 Bab Berikutnya**: [Bab 8: Pola Produksi & Perusahaan](../ai-foundry/production-ai-practices.md)
 
 ## Pendahuluan
 
-Panduan pemecahan masalah yang komprehensif ini mencakup masalah yang paling sering ditemui saat menggunakan Azure Developer CLI. Pelajari cara mendiagnosis, memecahkan masalah, dan menyelesaikan masalah umum terkait autentikasi, deployment, penyediaan infrastruktur, dan konfigurasi aplikasi. Setiap masalah mencakup gejala, penyebab utama, dan prosedur penyelesaian langkah demi langkah.
+Panduan pemecahan masalah yang komprehensif ini mencakup masalah yang paling sering ditemui saat menggunakan Azure Developer CLI. Pelajari cara mendiagnosis, memecahkan masalah, dan menyelesaikan masalah umum terkait autentikasi, penerapan, penyediaan infrastruktur, dan konfigurasi aplikasi. Setiap masalah dilengkapi dengan gejala, penyebab utama, dan langkah-langkah penyelesaian yang terperinci.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
 - Menguasai teknik diagnostik untuk masalah Azure Developer CLI
 - Memahami masalah umum terkait autentikasi dan izin serta solusinya
-- Menyelesaikan kegagalan deployment, kesalahan penyediaan infrastruktur, dan masalah konfigurasi
+- Menyelesaikan kegagalan penerapan, kesalahan penyediaan infrastruktur, dan masalah konfigurasi
 - Menerapkan strategi pemantauan dan debugging secara proaktif
 - Menggunakan metodologi pemecahan masalah yang sistematis untuk masalah kompleks
-- Mengonfigurasi logging dan pemantauan yang tepat untuk mencegah masalah di masa depan
+- Mengonfigurasi pencatatan dan pemantauan yang tepat untuk mencegah masalah di masa depan
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan panduan ini, Anda akan dapat:
+Setelah selesai, Anda akan dapat:
 - Mendiagnosis masalah Azure Developer CLI menggunakan alat diagnostik bawaan
-- Menyelesaikan masalah terkait autentikasi, langganan, dan izin secara mandiri
-- Memecahkan kegagalan deployment dan kesalahan penyediaan infrastruktur secara efektif
+- Menyelesaikan masalah autentikasi, langganan, dan izin secara mandiri
+- Memecahkan kegagalan penerapan dan kesalahan penyediaan infrastruktur secara efektif
 - Debug masalah konfigurasi aplikasi dan masalah spesifik lingkungan
 - Menerapkan pemantauan dan peringatan untuk mengidentifikasi potensi masalah secara proaktif
-- Menggunakan praktik terbaik untuk logging, debugging, dan alur kerja penyelesaian masalah
+- Menggunakan praktik terbaik untuk pencatatan, debugging, dan alur kerja penyelesaian masalah
 
 ## Diagnostik Cepat
 
@@ -60,7 +67,7 @@ azd <command> --debug
 ### Masalah: "Gagal mendapatkan token akses"
 **Gejala:**
 - `azd up` gagal dengan kesalahan autentikasi
-- Perintah mengembalikan "unauthorized" atau "access denied"
+- Perintah mengembalikan "tidak diotorisasi" atau "akses ditolak"
 
 **Solusi:**
 ```bash
@@ -80,9 +87,9 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Masalah: "Hak istimewa tidak mencukupi" selama deployment
+### Masalah: "Hak istimewa tidak mencukupi" saat penerapan
 **Gejala:**
-- Deployment gagal dengan kesalahan izin
+- Penerapan gagal dengan kesalahan izin
 - Tidak dapat membuat sumber daya Azure tertentu
 
 **Solusi:**
@@ -115,7 +122,7 @@ az account clear
 ### Masalah: Konflik nama sumber daya
 **Gejala:**
 - Kesalahan "Nama sumber daya sudah ada"
-- Deployment gagal saat pembuatan sumber daya
+- Penerapan gagal saat pembuatan sumber daya
 
 **Solusi:**
 ```bash
@@ -133,7 +140,7 @@ azd down --force --purge
 
 ### Masalah: Lokasi/Region tidak tersedia
 **Gejala:**
-- "Lokasi 'xyz' tidak tersedia untuk jenis sumber daya"
+- Kesalahan "Lokasi 'xyz' tidak tersedia untuk jenis sumber daya"
 - SKU tertentu tidak tersedia di region yang dipilih
 
 **Solusi:**
@@ -177,7 +184,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 ### Masalah: Kesalahan template Bicep
 **Gejala:**
-- Validasi template gagal
+- Kegagalan validasi template
 - Kesalahan sintaks dalam file Bicep
 
 **Solusi:**
@@ -195,11 +202,11 @@ cat infra/main.parameters.json | jq '.'
 azd provision --preview
 ```
 
-## 🚀 Kegagalan Deployment
+## 🚀 Kegagalan Penerapan
 
 ### Masalah: Kegagalan build
 **Gejala:**
-- Aplikasi gagal dibangun selama deployment
+- Aplikasi gagal dibangun saat penerapan
 - Kesalahan instalasi paket
 
 **Solusi:**
@@ -226,9 +233,9 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Masalah: Kegagalan deployment container
+### Masalah: Kegagalan penerapan container
 **Gejala:**
-- Aplikasi container gagal dimulai
+- Aplikasi container gagal memulai
 - Kesalahan pengambilan gambar
 
 **Solusi:**
@@ -331,10 +338,10 @@ azd show
 
 ## 🌍 Masalah Manajemen Lingkungan
 
-### Masalah: Masalah pergantian lingkungan
+### Masalah: Masalah pengalihan lingkungan
 **Gejala:**
 - Lingkungan yang salah digunakan
-- Konfigurasi tidak berganti dengan benar
+- Konfigurasi tidak beralih dengan benar
 
 **Solusi:**
 ```bash
@@ -371,12 +378,12 @@ azd env set DATABASE_URL "your-value"
 # Manually update .azure/production/config.json with resource IDs
 ```
 
-## 🔍 Masalah Performa
+## 🔍 Masalah Kinerja
 
-### Masalah: Waktu deployment lambat
+### Masalah: Waktu penerapan lambat
 **Gejala:**
-- Deployment memakan waktu terlalu lama
-- Waktu habis selama deployment
+- Penerapan memakan waktu terlalu lama
+- Waktu habis selama penerapan
 
 **Solusi:**
 ```bash
@@ -396,7 +403,7 @@ azd deploy --incremental
 azd config set defaults.location eastus2
 ```
 
-### Masalah: Masalah performa aplikasi
+### Masalah: Masalah kinerja aplikasi
 **Gejala:**
 - Waktu respons lambat
 - Penggunaan sumber daya tinggi
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Pencegahan Masalah
 
-### Daftar Periksa Pra-deployment
+### Daftar Periksa Pra-penerapan
 ```bash
 # 1. Validate authentication
 az account show
@@ -575,13 +582,13 @@ az security assessment list --resource-group myrg
 
 ---
 
-**Tip**: Simpan panduan ini sebagai bookmark dan rujuk kapan pun Anda menghadapi masalah. Sebagian besar masalah telah pernah terjadi sebelumnya dan memiliki solusi yang sudah ditetapkan!
+**Tip**: Simpan panduan ini sebagai bookmark dan rujuk kapan pun Anda menghadapi masalah. Sebagian besar masalah telah ditemukan sebelumnya dan memiliki solusi yang sudah ditetapkan!
 
 ---
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Penyediaan Sumber Daya](../deployment/provisioning.md)
-- **Pelajaran Selanjutnya**: [Panduan Debugging](debugging.md)
+- **Pelajaran Berikutnya**: [Panduan Debugging](debugging.md)
 
 ---
 
