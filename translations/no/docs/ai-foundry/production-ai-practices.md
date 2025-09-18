@@ -1,35 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T21:47:51+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T06:14:45+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "no"
 }
 -->
 # Beste praksis for produksjonsklare AI-arbeidsbelastninger med AZD
 
-**Forrige:** [AI Workshop Lab](ai-workshop-lab.md) | **Neste:** [AI Feilsøkingsguide](../troubleshooting/ai-troubleshooting.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 8 - Produksjon & Bedriftsmønstre
+- **⬅️ Forrige Kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/debugging.md)
+- **⬅️ Også Relevant**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurs Fullført**: [AZD For Nybegynnere](../../README.md)
 
 ## Oversikt
 
-Denne guiden gir omfattende beste praksis for å distribuere produksjonsklare AI-arbeidsbelastninger ved bruk av Azure Developer CLI (AZD). Basert på tilbakemeldinger fra Azure AI Foundry Discord-fellesskapet og reelle kundedistribusjoner, adresserer disse praksisene de vanligste utfordringene i produksjonssystemer for AI.
+Denne veiledningen gir omfattende beste praksis for å distribuere produksjonsklare AI-arbeidsbelastninger ved bruk av Azure Developer CLI (AZD). Basert på tilbakemeldinger fra Azure AI Foundry Discord-fellesskapet og reelle kundedistribusjoner, adresserer disse praksisene de vanligste utfordringene i produksjonssystemer for AI.
 
-## Viktige utfordringer som adresseres
+## Nøkkelutfordringer som adresseres
 
 Basert på resultatene fra vår fellesskapsundersøkelse, er dette de største utfordringene utviklere står overfor:
 
-- **45%** sliter med AI-distribusjoner som involverer flere tjenester  
+- **45%** sliter med AI-distribusjoner som involverer flere tjenester
 - **38%** har problemer med håndtering av legitimasjon og hemmeligheter  
-- **35%** synes produksjonsklarhet og skalering er vanskelig  
-- **32%** trenger bedre strategier for kostnadsoptimalisering  
-- **29%** krever forbedret overvåking og feilsøking  
+- **35%** synes produksjonsklarhet og skalering er vanskelig
+- **32%** trenger bedre strategier for kostnadsoptimalisering
+- **29%** krever forbedret overvåking og feilsøking
 
 ## Arkitekturmønstre for produksjonsklare AI-systemer
 
 ### Mønster 1: Mikrotjenestearkitektur for AI
 
-**Når brukes**: Komplekse AI-applikasjoner med flere funksjoner
+**Når skal det brukes**: Komplekse AI-applikasjoner med flere funksjoner
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -48,7 +53,7 @@ Basert på resultatene fra vår fellesskapsundersøkelse, er dette de største u
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZD-implementering**:
+**AZD Implementering**:
 
 ```yaml
 # azure.yaml
@@ -71,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Mønster 2: Hendelsesdrevet AI-behandling
+### Mønster 2: Hendelsesdrevet AI-prosessering
 
-**Når brukes**: Batchbehandling, dokumentanalyse, asynkrone arbeidsflyter
+**Når skal det brukes**: Batchprosessering, dokumentanalyse, asynkrone arbeidsflyter
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -122,13 +127,13 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ## Sikkerhetsbeste praksis
 
-### 1. Zero-Trust sikkerhetsmodell
+### 1. Nulltillit-sikkerhetsmodell
 
 **Implementeringsstrategi**:
-- Ingen tjeneste-til-tjeneste-kommunikasjon uten autentisering  
-- Alle API-kall bruker administrerte identiteter  
-- Nettverksisolasjon med private endepunkter  
-- Tilgangskontroller basert på minst privilegium  
+- Ingen tjeneste-til-tjeneste-kommunikasjon uten autentisering
+- Alle API-kall bruker administrerte identiteter
+- Nettverksisolasjon med private endepunkter
+- Tilgangskontroller med minst privilegium
 
 ```bicep
 // Managed Identity for each service
@@ -151,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Sikker håndtering av hemmeligheter
 
-**Mønster for integrasjon med Key Vault**:
+**Mønster for Key Vault-integrasjon**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -364,7 +369,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Riktig dimensjonering av ressurser
 
-**Konfigurasjoner spesifikke for miljø**:
+**Konfigurasjoner for spesifikke miljøer**:
 
 ```bash
 # Development environment
@@ -384,7 +389,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Kostnadsmonitorering og budsjetter
+### 2. Kostnadsovervåking og budsjetter
 
 ```bicep
 // Cost management and budgets
@@ -427,7 +432,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Optimalisering av tokenbruk
 
-**Administrasjon av OpenAI-kostnader**:
+**OpenAI kostnadsstyring**:
 
 ```typescript
 // Application-level token optimization
@@ -835,52 +840,52 @@ echo "Infrastructure validation completed successfully!"
 ## Sjekkliste for produksjonsklarhet
 
 ### Sikkerhet ✅
-- [ ] Alle tjenester bruker administrerte identiteter  
-- [ ] Hemmeligheter lagret i Key Vault  
-- [ ] Private endepunkter konfigurert  
-- [ ] Nettverkssikkerhetsgrupper implementert  
-- [ ] RBAC med minst privilegium  
-- [ ] WAF aktivert på offentlige endepunkter  
+- [ ] Alle tjenester bruker administrerte identiteter
+- [ ] Hemmeligheter lagret i Key Vault
+- [ ] Private endepunkter konfigurert
+- [ ] Nettverkssikkerhetsgrupper implementert
+- [ ] RBAC med minst privilegium
+- [ ] WAF aktivert på offentlige endepunkter
 
 ### Ytelse ✅
-- [ ] Automatisk skalering konfigurert  
-- [ ] Hurtigbuffer implementert  
-- [ ] Lastbalansering satt opp  
-- [ ] CDN for statisk innhold  
-- [ ] Tilkoblingspooling for databaser  
-- [ ] Optimalisering av tokenbruk  
+- [ ] Automatisk skalering konfigurert
+- [ ] Hurtigbuffer implementert
+- [ ] Lastbalansering satt opp
+- [ ] CDN for statisk innhold
+- [ ] Databaseforbindelsespooling
+- [ ] Optimalisering av tokenbruk
 
 ### Overvåking ✅
-- [ ] Application Insights konfigurert  
-- [ ] Egendefinerte metrikker definert  
-- [ ] Varslingsregler satt opp  
-- [ ] Dashbord opprettet  
-- [ ] Helsetester implementert  
-- [ ] Retensjonspolicyer for logger  
+- [ ] Application Insights konfigurert
+- [ ] Egendefinerte metrikker definert
+- [ ] Varslingsregler satt opp
+- [ ] Dashbord opprettet
+- [ ] Helsetester implementert
+- [ ] Retningslinjer for loggoppbevaring
 
 ### Pålitelighet ✅
-- [ ] Distribusjon på tvers av regioner  
-- [ ] Backup- og gjenopprettingsplan  
-- [ ] Circuit breakers implementert  
-- [ ] Retry-policyer konfigurert  
-- [ ] Grasiøs degradering  
-- [ ] Endepunkter for helsetester  
+- [ ] Distribusjon på tvers av regioner
+- [ ] Backup- og gjenopprettingsplan
+- [ ] Kretsbrytere implementert
+- [ ] Retningslinjer for gjentatte forsøk konfigurert
+- [ ] Grasiøs degradering
+- [ ] Endepunkter for helsetester
 
 ### Kostnadsstyring ✅
-- [ ] Budsjettvarsler konfigurert  
-- [ ] Riktig dimensjonering av ressurser  
-- [ ] Rabatter for utvikling/test brukt  
-- [ ] Reservasjonsinstanser kjøpt  
-- [ ] Dashbord for kostnadsmonitorering  
-- [ ] Regelmessige kostnadsanmeldelser  
+- [ ] Budsjettvarsler konfigurert
+- [ ] Riktig dimensjonering av ressurser
+- [ ] Rabatter for utvikling/test brukt
+- [ ] Reservasjonsinstanser kjøpt
+- [ ] Kostnadsovervåkingsdashbord
+- [ ] Regelmessige kostnadsanmeldelser
 
 ### Samsvar ✅
-- [ ] Krav til dataresidens oppfylt  
-- [ ] Revisorlogging aktivert  
-- [ ] Samsvarspolicyer brukt  
-- [ ] Sikkerhetsgrunnlinjer implementert  
-- [ ] Regelmessige sikkerhetsvurderinger  
-- [ ] Plan for hendelsesrespons  
+- [ ] Krav til dataopphold oppfylt
+- [ ] Revisjonslogging aktivert
+- [ ] Samsvarspolicyer brukt
+- [ ] Sikkerhetsgrunnlinjer implementert
+- [ ] Regelmessige sikkerhetsvurderinger
+- [ ] Plan for hendelsesrespons
 
 ## Ytelsesbenchmarking
 
@@ -912,30 +917,35 @@ Basert på tilbakemeldinger fra Azure AI Foundry Discord-fellesskapet:
 
 ### Topp anbefalinger fra fellesskapet:
 
-1. **Start smått, skaler gradvis**: Begynn med grunnleggende SKUs og skaler opp basert på faktisk bruk  
-2. **Overvåk alt**: Sett opp omfattende overvåking fra dag én  
-3. **Automatiser sikkerhet**: Bruk infrastruktur som kode for konsistent sikkerhet  
-4. **Test grundig**: Inkluder AI-spesifikke tester i din pipeline  
-5. **Planlegg kostnader**: Overvåk tokenbruk og sett opp budsjettvarsler tidlig  
+1. **Start smått, skaler gradvis**: Begynn med grunnleggende SKUs og skaler opp basert på faktisk bruk
+2. **Overvåk alt**: Sett opp omfattende overvåking fra dag én
+3. **Automatiser sikkerhet**: Bruk infrastruktur som kode for konsistent sikkerhet
+4. **Test grundig**: Inkluder AI-spesifikk testing i din pipeline
+5. **Planlegg for kostnader**: Overvåk tokenbruk og sett opp budsjettvarsler tidlig
 
 ### Vanlige fallgruver å unngå:
 
-- ❌ Hardkoding av API-nøkler i kode  
-- ❌ Ikke sette opp riktig overvåking  
-- ❌ Ignorere kostnadsoptimalisering  
-- ❌ Ikke teste feilhåndteringsscenarier  
-- ❌ Distribuere uten helsetester  
+- ❌ Hardkoding av API-nøkler i kode
+- ❌ Ikke sette opp riktig overvåking
+- ❌ Ignorere kostnadsoptimalisering
+- ❌ Ikke teste feilsituasjoner
+- ❌ Distribuere uten helsetester
 
 ## Tilleggsressurser
 
-- **Azure Well-Architected Framework**: [Veiledning for AI-arbeidsbelastninger](https://learn.microsoft.com/azure/well-architected/ai/)  
-- **Azure AI Foundry Dokumentasjon**: [Offisielle dokumenter](https://learn.microsoft.com/azure/ai-studio/)  
-- **Fellesskapsmaler**: [Azure Eksempler](https://github.com/Azure-Samples)  
-- **Discord-fellesskap**: [#Azure kanal](https://discord.gg/microsoft-azure)  
+- **Azure Well-Architected Framework**: [Veiledning for AI-arbeidsbelastninger](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure AI Foundry Dokumentasjon**: [Offisielle dokumenter](https://learn.microsoft.com/azure/ai-studio/)
+- **Fellesskapsmaler**: [Azure Eksempler](https://github.com/Azure-Samples)
+- **Discord-fellesskap**: [#Azure kanal](https://discord.gg/microsoft-azure)
 
 ---
 
-**Forrige:** [AI Workshop Lab](ai-workshop-lab.md) | **Neste:** [AI Feilsøkingsguide](../troubleshooting/ai-troubleshooting.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 8 - Produksjon & Bedriftsmønstre
+- **⬅️ Forrige Kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/debugging.md)
+- **⬅️ Også Relevant**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kurs Fullført**: [AZD For Nybegynnere](../../README.md)
 
 **Husk**: Produksjonsklare AI-arbeidsbelastninger krever nøye planlegging, overvåking og kontinuerlig optimalisering. Start med disse mønstrene og tilpass dem til dine spesifikke behov.
 

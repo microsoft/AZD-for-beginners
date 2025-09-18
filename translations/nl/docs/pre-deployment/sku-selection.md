@@ -1,41 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:05:30+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T06:55:15+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "nl"
 }
 -->
-# SKU Selectiegids - Het kiezen van de juiste Azure-serviceniveaus
+# SKU Selectiegids - Het kiezen van de juiste Azure servicelagen
+
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 6 - Validatie & Planning vóór implementatie
+- **⬅️ Vorige**: [Capaciteitsplanning](capacity-planning.md)
+- **➡️ Volgende**: [Pre-flight Checks](preflight-checks.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../troubleshooting/common-issues.md)
 
 ## Introductie
 
-Deze uitgebreide gids helpt je bij het selecteren van optimale Azure-service-SKU's (Stock Keeping Units) voor verschillende omgevingen, workloads en vereisten. Leer hoe je prestatiebehoeften, kostenoverwegingen en schaalbaarheidsvereisten kunt analyseren om de meest geschikte serviceniveaus te kiezen voor je Azure Developer CLI-implementaties.
+Deze uitgebreide gids helpt je bij het selecteren van optimale Azure service SKUs (Stock Keeping Units) voor verschillende omgevingen, workloads en vereisten. Leer hoe je prestatiebehoeften, kostenoverwegingen en schaalbaarheidsvereisten kunt analyseren om de meest geschikte servicelagen te kiezen voor je Azure Developer CLI-implementaties.
 
 ## Leerdoelen
 
-Na het voltooien van deze gids, zul je:
-- Begrip hebben van Azure SKU-concepten, prijsmodellen en functievergelijkingen
-- Strategieën beheersen voor SKU-selectie per omgeving, zoals ontwikkeling, staging en productie
-- Workloadvereisten analyseren en koppelen aan geschikte serviceniveaus
-- Kostenoptimalisatiestrategieën implementeren door intelligente SKU-selectie
-- Prestatie- en validatietechnieken toepassen voor SKU-keuzes
+Door deze gids te voltooien, leer je:
+- Begrip van Azure SKU-concepten, prijsmodellen en functievergelijkingen
+- Strategieën voor SKU-selectie per omgeving voor ontwikkeling, staging en productie
+- Workloadvereisten analyseren en koppelen aan geschikte servicelagen
+- Kostenoptimalisatiestrategieën implementeren door slimme SKU-selectie
+- Prestatie testen en validatietechnieken toepassen voor SKU-keuzes
 - Geautomatiseerde SKU-aanbevelingen en monitoring configureren
 
 ## Leerresultaten
 
-Na voltooiing ben je in staat om:
-- Geschikte Azure-service-SKU's te selecteren op basis van workloadvereisten en beperkingen
-- Kosteneffectieve architecturen voor meerdere omgevingen te ontwerpen met de juiste niveaukeuze
-- Prestatiebenchmarking en validatie voor SKU-keuzes te implementeren
-- Geautomatiseerde tools te maken voor SKU-aanbevelingen en kostenoptimalisatie
-- SKU-migraties en schaalstrategieën te plannen voor veranderende vereisten
-- Principes van het Azure Well-Architected Framework toe te passen op serviceniveaukeuze
+Na voltooiing kun je:
+- Geschikte Azure service SKUs selecteren op basis van workloadvereisten en beperkingen
+- Kosteneffectieve architecturen voor meerdere omgevingen ontwerpen met de juiste laagselectie
+- Prestatiebenchmarking en validatie implementeren voor SKU-keuzes
+- Geautomatiseerde tools maken voor SKU-aanbevelingen en kostenoptimalisatie
+- SKU-migraties en schaalstrategieën plannen voor veranderende vereisten
+- Principes van het Azure Well-Architected Framework toepassen op servicelaagselectie
 
 ## Inhoudsopgave
 
-- [Begrip van SKU's](../../../../docs/pre-deployment)
+- [Begrip van SKUs](../../../../docs/pre-deployment)
 - [Selectie op basis van omgeving](../../../../docs/pre-deployment)
 - [Richtlijnen per service](../../../../docs/pre-deployment)
 - [Kostenoptimalisatiestrategieën](../../../../docs/pre-deployment)
@@ -45,16 +52,16 @@ Na voltooiing ben je in staat om:
 
 ---
 
-## Begrip van SKU's
+## Begrip van SKUs
 
-### Wat zijn SKU's?
+### Wat zijn SKUs?
 
-SKU's (Stock Keeping Units) vertegenwoordigen verschillende serviceniveaus en prestatieniveaus voor Azure-resources. Elke SKU biedt verschillende:
+SKUs (Stock Keeping Units) vertegenwoordigen verschillende servicelagen en prestatieniveaus voor Azure-resources. Elke SKU biedt verschillende:
 
 - **Prestatiekenmerken** (CPU, geheugen, doorvoer)
 - **Functie beschikbaarheid** (schaalopties, SLA-niveaus)
 - **Prijsmodellen** (verbruik-gebaseerd, gereserveerde capaciteit)
-- **Regionale beschikbaarheid** (niet alle SKU's zijn beschikbaar in alle regio's)
+- **Regionale beschikbaarheid** (niet alle SKUs zijn beschikbaar in alle regio's)
 
 ### Belangrijke factoren bij SKU-selectie
 
@@ -71,9 +78,9 @@ SKU's (Stock Keeping Units) vertegenwoordigen verschillende serviceniveaus en pr
 3. **Budgetbeperkingen**
    - Initiële kosten versus operationele kosten
    - Kortingen voor gereserveerde capaciteit
-   - Kostenimplicaties van autoscaling
+   - Kostenimplicaties van automatisch schalen
 
-4. **Groei-voorspellingen**
+4. **Groei voorspellingen**
    - Schaalbaarheidsvereisten
    - Toekomstige functiebehoeften
    - Migratiecomplexiteit
@@ -86,7 +93,7 @@ SKU's (Stock Keeping Units) vertegenwoordigen verschillende serviceniveaus en pr
 
 **Prioriteiten**: Kostenoptimalisatie, basisfunctionaliteit, eenvoudige provisioning/de-provisioning
 
-#### Aanbevolen SKU's
+#### Aanbevolen SKUs
 ```yaml
 # Development environment configuration
 environment: development
@@ -108,9 +115,9 @@ skus:
 
 ### Staging/Testomgeving
 
-**Prioriteiten**: Productieachtige configuratie, kostenbalans, prestatietestmogelijkheden
+**Prioriteiten**: Productie-achtige configuratie, kostenbalans, prestatietestmogelijkheden
 
-#### Aanbevolen SKU's
+#### Aanbevolen SKUs
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -123,17 +130,17 @@ skus:
 ```
 
 #### Kenmerken
-- **Prestaties**: 70-80% van productiecapaciteit
+- **Prestatie**: 70-80% van productiecapaciteit
 - **Functies**: Meeste productiefuncties ingeschakeld
 - **Redundantie**: Enige geografische redundantie
-- **Schaalbaarheid**: Beperkte autoscaling voor testen
+- **Schalen**: Beperkt automatisch schalen voor testen
 - **Monitoring**: Volledige monitoringstack
 
 ### Productieomgeving
 
-**Prioriteiten**: Prestaties, beschikbaarheid, beveiliging, naleving, schaalbaarheid
+**Prioriteiten**: Prestatie, beschikbaarheid, beveiliging, naleving, schaalbaarheid
 
-#### Aanbevolen SKU's
+#### Aanbevolen SKUs
 ```yaml
 # Production environment configuration
 environment: production
@@ -148,9 +155,9 @@ skus:
 
 #### Kenmerken
 - **Hoge beschikbaarheid**: 99,9%+ SLA-vereisten
-- **Prestaties**: Toegewijde resources, hoge doorvoer
+- **Prestatie**: Toegewijde resources, hoge doorvoer
 - **Beveiliging**: Premium beveiligingsfuncties
-- **Schaalbaarheid**: Volledige autoscaling-mogelijkheden
+- **Schalen**: Volledige mogelijkheden voor automatisch schalen
 - **Monitoring**: Uitgebreide observatie
 
 ---
@@ -159,15 +166,15 @@ skus:
 
 ### Azure App Service
 
-#### SKU-beslissingsmatrix
+#### SKU Beslissingsmatrix
 
 | Gebruiksscenario | Aanbevolen SKU | Reden |
 |------------------|----------------|-------|
 | Ontwikkeling/Testen | F1 (Gratis) of B1 (Basic) | Kosteneffectief, voldoende voor testen |
-| Kleine productie-apps | S1 (Standaard) | Aangepaste domeinen, SSL, autoscaling |
+| Kleine productie-apps | S1 (Standaard) | Aangepaste domeinen, SSL, automatisch schalen |
 | Middelgrote productie-apps | P1V3 (Premium V3) | Betere prestaties, meer functies |
 | Apps met veel verkeer | P2V3 of P3V3 | Toegewijde resources, hoge prestaties |
-| Missiekritieke apps | I1V2 (Geïsoleerd V2) | Netwerkisolatie, toegewijde hardware |
+| Missie-kritieke apps | I1V2 (Geïsoleerd V2) | Netwerkisolatie, toegewijde hardware |
 
 #### Configuratievoorbeelden
 
@@ -205,7 +212,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### SKU-selectiekader
+#### SKU Selectiekader
 
 1. **DTU-gebaseerd (Database Transaction Units)**
    - **Basic**: 5 DTU - Ontwikkeling/testen
@@ -261,10 +268,10 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
    - Geschikt voor ontwikkeling en variabele workloads
    - Gedeelde infrastructuur
 
-2. **Toegewijd (Workloadprofielen)**
-   - Toegewijde compute-resources
+2. **Toegewijd (Workload Profielen)**
+   - Toegewijde compute resources
    - Voorspelbare prestaties
-   - Beter voor productie-workloads
+   - Beter voor productie workloads
 
 #### Configuratievoorbeelden
 
@@ -334,16 +341,16 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
    - Beste voor stabiele workloads
 
 2. **Autoscale Geprovisioneerde Doorvoer**
-   - Automatische schaalvergroting op basis van gebruik
+   - Automatisch schalen op basis van gebruik
    - Betalen voor wat je gebruikt (met minimum)
    - Goed voor variabele workloads
 
-3. **Serverless**
-   - Betalen per verzoek
+3. **Serverloos**
+   - Betalen per aanvraag
    - Geen geprovisioneerde doorvoer
    - Ideaal voor ontwikkeling en intermitterende workloads
 
-#### SKU-voorbeelden
+#### SKU Voorbeelden
 
 ```bicep
 // Development - Serverless
@@ -404,13 +411,13 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 1. **Standard_LRS** - Ontwikkeling, niet-kritieke gegevens
 2. **Standard_GRS** - Productie, geo-redundantie nodig
-3. **Premium_LRS** - Hoogpresterende applicaties
+3. **Premium_LRS** - Hoge prestaties toepassingen
 4. **Premium_ZRS** - Hoge beschikbaarheid met zone-redundantie
 
-#### Prestatieniveaus
+#### Prestatie Tiers
 
 - **Standaard**: Algemeen gebruik, kosteneffectief
-- **Premium**: Hoge prestaties, lage latentie-scenario's
+- **Premium**: Hoge prestaties, lage latentie scenario's
 
 ```bicep
 // Development
@@ -453,7 +460,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## Kostenoptimalisatiestrategieën
 
-### 1. Gereserveerde capaciteit
+### 1. Gereserveerde Capaciteit
 
 Reserveer resources voor 1-3 jaar voor aanzienlijke kortingen:
 
@@ -463,9 +470,9 @@ az reservations catalog show --reserved-resource-type SqlDatabase
 az reservations catalog show --reserved-resource-type CosmosDb
 ```
 
-### 2. Juiste maatvoering
+### 2. Juiste Grootte
 
-Begin met kleinere SKU's en schaal op basis van daadwerkelijk gebruik:
+Begin met kleinere SKUs en schaal op basis van daadwerkelijk gebruik:
 
 ```yaml
 # Progressive scaling approach
@@ -479,9 +486,9 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Autoscaling-configuratie
+### 3. Configuratie voor Automatisch Schalen
 
-Implementeer intelligente schaalvergroting om kosten te optimaliseren:
+Implementeer intelligent schalen om kosten te optimaliseren:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -538,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Geplande schaalvergroting
+### 4. Geplande Schaling
 
-Schaal terug tijdens daluren:
+Schakel terug tijdens daluren:
 
 ```json
 {
@@ -589,7 +596,7 @@ Schaal terug tijdens daluren:
 
 ### Basisvereisten voor prestaties
 
-Definieer duidelijke prestatievereisten voordat je SKU's selecteert:
+Definieer duidelijke prestatievereisten vóór SKU-selectie:
 
 ```yaml
 performance_requirements:
@@ -605,9 +612,9 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Load Testing
+### Belastings testen
 
-Test verschillende SKU's om prestaties te valideren:
+Test verschillende SKUs om prestaties te valideren:
 
 ```bash
 # Azure Load Testing service
@@ -650,8 +657,8 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ### App Service SKU Snelle Referentie
 
-| SKU | Niveau | vCPU | RAM | Opslag | Prijsklasse | Gebruiksscenario |
-|-----|--------|------|-----|--------|-------------|------------------|
+| SKU | Tier | vCPU | RAM | Opslag | Prijsklasse | Gebruiksscenario |
+|-----|------|------|-----|--------|-------------|------------------|
 | F1 | Gratis | Gedeeld | 1GB | 1GB | Gratis | Ontwikkeling |
 | B1 | Basic | 1 | 1.75GB | 10GB | $ | Kleine apps |
 | S1 | Standaard | 1 | 1.75GB | 50GB | $$ | Productie |
@@ -660,19 +667,19 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ### SQL Database SKU Snelle Referentie
 
-| SKU | Niveau | DTU/vCore | Opslag | Prijsklasse | Gebruiksscenario |
-|-----|--------|-----------|--------|-------------|------------------|
+| SKU | Tier | DTU/vCore | Opslag | Prijsklasse | Gebruiksscenario |
+|-----|------|-----------|--------|-------------|------------------|
 | Basic | Basic | 5 DTU | 2GB | $ | Ontwikkeling |
 | S2 | Standaard | 50 DTU | 250GB | $$ | Kleine productie |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Hoge prestaties |
 | GP_Gen5_4 | Algemeen Doel | 4 vCore | 4TB | $$$ | Gebalanceerd |
-| BC_Gen5_8 | Bedrijfskritisch | 8 vCore | 4TB | $$$$ | Missiekritiek |
+| BC_Gen5_8 | Bedrijfskritisch | 8 vCore | 4TB | $$$$ | Missie-kritisch |
 
 ### Container Apps SKU Snelle Referentie
 
 | Model | Prijs | CPU/Geheugen | Gebruiksscenario |
 |-------|-------|--------------|------------------|
-| Verbruik | Betalen per gebruik | 0.25-2 vCPU | Ontwikkeling, variabele belasting |
+| Verbruik | Prijs per gebruik | 0.25-2 vCPU | Ontwikkeling, variabele belasting |
 | Toegewijd D4 | Gereserveerd | 4 vCPU, 16GB | Productie |
 | Toegewijd D8 | Gereserveerd | 8 vCPU, 32GB | Hoge prestaties |
 
@@ -680,7 +687,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Validatietools
 
-### SKU-beschikbaarheidchecker
+### SKU Beschikbaarheid Checker
 
 ```bash
 #!/bin/bash
@@ -713,7 +720,7 @@ check_sku_availability() {
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Kostenramingsscript
+### Kostenraming Script
 
 ```powershell
 # PowerShell script for cost estimation
@@ -785,27 +792,27 @@ test_configuration:
 
 ---
 
-## Samenvatting van best practices
+## Samenvatting Beste Praktijken
 
 ### Do's
 
 1. **Begin klein en schaal op** op basis van daadwerkelijk gebruik
-2. **Gebruik verschillende SKU's voor verschillende omgevingen**
+2. **Gebruik verschillende SKUs voor verschillende omgevingen**
 3. **Monitor prestaties en kosten continu**
-4. **Maak gebruik van gereserveerde capaciteit voor productie-workloads**
-5. **Implementeer autoscaling waar nodig**
+4. **Maak gebruik van gereserveerde capaciteit voor productie workloads**
+5. **Implementeer automatisch schalen waar nodig**
 6. **Test prestaties met realistische workloads**
-7. **Plan voor groei maar vermijd overprovisioning**
-8. **Gebruik gratis niveaus voor ontwikkeling waar mogelijk**
+7. **Plan voor groei maar vermijd over-provisioning**
+8. **Gebruik gratis tiers voor ontwikkeling waar mogelijk**
 
 ### Don'ts
 
-1. **Gebruik geen productie-SKU's voor ontwikkeling**
+1. **Gebruik geen productie SKUs voor ontwikkeling**
 2. **Negeer regionale SKU-beschikbaarheid niet**
 3. **Vergeet de kosten van gegevensoverdracht niet**
-4. **Overprovision zonder rechtvaardiging**
+4. **Over-provisioneer niet zonder rechtvaardiging**
 5. **Negeer de impact van afhankelijkheden niet**
-6. **Stel autoscalinglimieten niet te hoog in**
+6. **Stel limieten voor automatisch schalen niet te hoog in**
 7. **Vergeet nalevingsvereisten niet**
 8. **Maak geen beslissingen alleen op basis van prijs**
 
@@ -822,4 +829,4 @@ test_configuration:
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

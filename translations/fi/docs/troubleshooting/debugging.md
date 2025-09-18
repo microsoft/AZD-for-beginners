@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:19:41+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T06:36:49+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "fi"
 }
 -->
-# Vianetsintäopas - Edistyneet vianetsintä- ja lokianalyysitekniikat
+# Vianetsintäopas AZD-järjestelmien käyttöönottoon
+
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 7 - Vianetsintä ja virheiden korjaus
+- **⬅️ Edellinen**: [Yleiset ongelmat](common-issues.md)
+- **➡️ Seuraava**: [AI-spesifinen vianetsintä](ai-troubleshooting.md)
+- **🚀 Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../ai-foundry/production-ai-practices.md)
 
 ## Johdanto
 
-Tämä kattava opas tarjoaa edistyneitä vianetsintästrategioita, työkaluja ja tekniikoita Azure Developer CLI -asennusten monimutkaisten ongelmien diagnosointiin ja ratkaisemiseen. Opit systemaattisia vianetsintämenetelmiä, lokianalyysitekniikoita, suorituskyvyn profilointia ja edistyneitä diagnostiikkatyökaluja, joiden avulla voit tehokkaasti ratkaista asennus- ja käyttöaikaisia ongelmia.
+Tämä kattava opas tarjoaa edistyneitä vianetsintästrategioita, työkaluja ja tekniikoita Azure Developer CLI -järjestelmien käyttöönoton ja suoritusajan monimutkaisten ongelmien diagnosointiin ja ratkaisemiseen. Opit järjestelmällisiä vianetsintämenetelmiä, lokianalyysitekniikoita, suorituskyvyn profilointia ja edistyneitä diagnostiikkatyökaluja, jotka auttavat ratkaisemaan ongelmat tehokkaasti.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
-- Hallitsemaan systemaattisia vianetsintämenetelmiä Azure Developer CLI -ongelmien ratkaisemiseksi
+- Hallitsemaan järjestelmällisiä vianetsintämenetelmiä Azure Developer CLI -ongelmien ratkaisemiseksi
 - Ymmärtämään edistyneitä lokien konfigurointi- ja analyysitekniikoita
 - Toteuttamaan suorituskyvyn profilointi- ja seurantastrategioita
-- Käyttämään Azure-diagnostiikkatyökaluja ja -palveluita monimutkaisten ongelmien ratkaisemiseksi
+- Käyttämään Azure-diagnostiikkatyökaluja ja -palveluita monimutkaisten ongelmien ratkaisemiseen
 - Soveltamaan verkon vianetsintä- ja tietoturvaongelmien ratkaisumenetelmiä
 - Konfiguroimaan kattavaa seurantaa ja hälytyksiä ongelmien ennakoivaan havaitsemiseen
 
 ## Oppimistulokset
 
-Oppaan suorittamisen jälkeen osaat:
-- Soveltaa TRIAGE-menetelmää monimutkaisten asennusongelmien systemaattiseen vianetsintään
-- Konfiguroida ja analysoida kattavia loki- ja jäljitystietoja
-- Käyttää Azure Monitoria, Application Insightsia ja diagnostiikkatyökaluja tehokkaasti
-- Vianetsintää verkon yhteyksissä, autentikoinnissa ja käyttöoikeusongelmissa itsenäisesti
-- Toteuttaa suorituskyvyn seurantaa ja optimointistrategioita
-- Luoda mukautettuja vianetsintäskriptejä ja automaatioita toistuvien ongelmien ratkaisemiseksi
+Oppaan suorittamisen jälkeen pystyt:
+- Soveltamaan TRIAGE-menetelmää monimutkaisten käyttöönotto-ongelmien järjestelmälliseen vianetsintään
+- Konfiguroimaan ja analysoimaan kattavia loki- ja jäljitystietoja
+- Käyttämään Azure Monitoria, Application Insightsia ja diagnostiikkatyökaluja tehokkaasti
+- Vianetsimään verkon yhteys-, autentikointi- ja käyttöoikeusongelmia itsenäisesti
+- Toteuttamaan suorituskyvyn seurantaan ja optimointiin liittyviä strategioita
+- Luomaan mukautettuja vianetsintäskriptejä ja automaatioita toistuvien ongelmien ratkaisemiseksi
 
 ## Vianetsintämenetelmä
 
@@ -41,7 +48,7 @@ Oppaan suorittamisen jälkeen osaat:
 - **I**solate: Mikä komponentti epäonnistuu?
 - **A**nalyze: Mitä lokit kertovat?
 - **G**ather: Kerää kaikki asiaankuuluvat tiedot
-- **E**scalate: Milloin pyytää lisäapua?
+- **E**scalate: Milloin on aika pyytää lisäapua?
 
 ## Debug-tilan ottaminen käyttöön
 
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Kuormitustestauksen vianetsintä
+### Kuormitustestit vianetsintään
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -655,7 +662,7 @@ aggregate_logs() {
 Luo `scripts/debug/`-hakemisto, jossa on:
 - `health-check.sh` - Kattava terveystarkistus
 - `performance-test.sh` - Automaattinen suorituskykytestaus
-- `log-analyzer.py` - Edistynyt lokien jäsentäminen ja analyysi
+- `log-analyzer.py` - Edistynyt lokien jäsennys ja analyysi
 - `resource-validator.sh` - Infrastruktuurin validointi
 
 ### Seurannan integrointi
@@ -684,25 +691,25 @@ hooks:
 5. **Pidä vianetsintätyökalut ajan tasalla** sovelluksen muutosten kanssa
 6. **Harjoittele vianetsintämenetelmiä** ei-ongelmatilanteissa
 
-## Seuraavat vaiheet
+## Seuraavat askeleet
 
-- [Resurssien suunnittelu](../pre-deployment/capacity-planning.md) - Suunnittele resurssivaatimukset
-- [SKU-valinta](../pre-deployment/sku-selection.md) - Valitse sopivat palvelutasot
-- [Esitarkistukset](../pre-deployment/preflight-checks.md) - Asennuksen ennakkovarmistus
-- [Pikaopas](../../resources/cheat-sheet.md) - Nopea viite komentoihin
+- [Kapasiteettisuunnittelu](../pre-deployment/capacity-planning.md) - Resurssivaatimusten suunnittelu
+- [SKU-valinta](../pre-deployment/sku-selection.md) - Sopivien palvelutasojen valinta
+- [Esitarkistukset](../pre-deployment/preflight-checks.md) - Käyttöönoton validointi
+- [Pikaopas](../../resources/cheat-sheet.md) - Nopeat viitekomennot
 
 ---
 
-**Muista**: Hyvä vianetsintä on systemaattista, perusteellista ja kärsivällistä. Nämä työkalut ja tekniikat auttavat sinua diagnosoimaan ongelmia nopeammin ja tehokkaammin.
+**Muista**: Hyvä vianetsintä perustuu järjestelmällisyyteen, perusteellisuuteen ja kärsivällisyyteen. Nämä työkalut ja tekniikat auttavat sinua diagnosoimaan ongelmat nopeammin ja tehokkaammin.
 
 ---
 
 **Navigointi**
-- **Edellinen osio**: [Yleiset ongelmat](common-issues.md)
+- **Edellinen oppitunti**: [Yleiset ongelmat](common-issues.md)
 
-- **Seuraava osio**: [Resurssien suunnittelu](../pre-deployment/capacity-planning.md)
+- **Seuraava oppitunti**: [Kapasiteettisuunnittelu](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

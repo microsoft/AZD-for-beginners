@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T21:08:17+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T06:15:56+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "no"
 }
 -->
 # Installasjons- og oppsettsveiledning
 
-**Forrige:** [Hoveddokumentasjon](../../README.md) | **Neste:** [AZD Grunnleggende](azd-basics.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 1 - Grunnlag og rask start
+- **⬅️ Forrige**: [AZD Grunnleggende](azd-basics.md)
+- **➡️ Neste**: [Ditt første prosjekt](first-project.md)
+- **🚀 Neste kapittel**: [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduksjon
 
-Denne omfattende veiledningen vil lede deg gjennom installasjon og konfigurering av Azure Developer CLI (azd) på systemet ditt. Du vil lære flere installasjonsmetoder for ulike operativsystemer, autentiseringsoppsett og grunnleggende konfigurasjon for å forberede utviklingsmiljøet ditt for Azure-utplasseringer.
+Denne omfattende veiledningen vil lede deg gjennom installasjon og konfigurasjon av Azure Developer CLI (azd) på systemet ditt. Du vil lære flere installasjonsmetoder for ulike operativsystemer, autentiseringsoppsett og grunnleggende konfigurasjon for å forberede utviklingsmiljøet ditt for Azure-utplasseringer.
 
 ## Læringsmål
 
@@ -37,7 +42,7 @@ Denne veiledningen vil hjelpe deg med å installere og konfigurere Azure Develop
 
 ## Forutsetninger
 
-Før du installerer azd, må du sørge for at du har:
+Før du installerer azd, sørg for at du har:
 - **Azure-abonnement** - [Opprett en gratis konto](https://azure.microsoft.com/free/)
 - **Azure CLI** - For autentisering og ressursadministrasjon
 - **Git** - For kloning av maler og versjonskontroll
@@ -128,9 +133,9 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verifiser installasjonen
+## ✅ Verifiser installasjon
 
-Etter installasjonen, verifiser at azd fungerer korrekt:
+Etter installasjon, verifiser at azd fungerer korrekt:
 
 ```bash
 # Check version
@@ -194,7 +199,7 @@ azd config list
 ```
 
 ### Miljøvariabler
-Legg til i skallets profil (`.bashrc`, `.zshrc`, `.profile`):
+Legg til i din shell-profil (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -324,7 +329,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Neste steg
 
 1. **Fullfør autentisering**: Sørg for at du kan få tilgang til Azure-abonnementet ditt
-2. **Prøv din første utplassering**: Følg [Første prosjektveiledning](first-project.md)
+2. **Prøv din første utplassering**: Følg [Første prosjekt-veiledningen](first-project.md)
 3. **Utforsk maler**: Bla gjennom tilgjengelige maler med `azd template list`
 4. **Konfigurer IDE-en din**: Sett opp utviklingsmiljøet ditt
 
@@ -338,9 +343,14 @@ Hvis du støter på problemer:
 
 ---
 
-**Forrige:** [Hoveddokumentasjon](../../README.md) | **Neste:** [AZD Grunnleggende](azd-basics.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 1 - Grunnlag og rask start
+- **⬅️ Forrige**: [AZD Grunnleggende](azd-basics.md) 
+- **➡️ Neste**: [Ditt første prosjekt](first-project.md)
+- **🚀 Neste kapittel**: [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Installasjon fullført!** Fortsett til [Ditt første prosjekt](first-project.md) for å begynne å bygge med azd.
+**✅ Installasjon fullført!** Fortsett til [Ditt første prosjekt](first-project.md) for å begynne å bygge med azd.
 
 ---
 

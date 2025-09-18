@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:42:58+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T06:17:27+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "no"
 }
 -->
-# Klargjøring av ressurser - Infrastruktur som kode med AZD
+# Klargjøring av Azure-ressurser med AZD
+
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 4 - Infrastruktur som kode & Utrulling
+- **⬅️ Forrige**: [Utrullingsguide](deployment-guide.md)
+- **➡️ Neste Kapittel**: [Kapittel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
+- **🔧 Relatert**: [Kapittel 6: Validering før utrulling](../pre-deployment/capacity-planning.md)
 
 ## Introduksjon
 
-Denne omfattende veiledningen dekker alt du trenger å vite om klargjøring og administrasjon av Azure-ressurser ved bruk av Azure Developer CLI. Lær å implementere mønstre for Infrastruktur som kode (IaC), fra enkel ressursoppretting til avanserte bedriftsarkitekturer ved bruk av Bicep, ARM-maler, Terraform og Pulumi.
+Denne omfattende guiden dekker alt du trenger å vite om klargjøring og administrasjon av Azure-ressurser ved bruk av Azure Developer CLI. Lær å implementere mønstre for Infrastruktur som kode (IaC), fra enkel ressursoppretting til avanserte bedriftsarkitekturer ved bruk av Bicep, ARM-maler, Terraform og Pulumi.
 
 ## Læringsmål
 
-Ved å fullføre denne veiledningen vil du:
+Ved å fullføre denne guiden vil du:
 - Mestre prinsippene for Infrastruktur som kode og klargjøring av Azure-ressurser
 - Forstå flere IaC-leverandører som støttes av Azure Developer CLI
 - Designe og implementere Bicep-maler for vanlige applikasjonsarkitekturer
 - Konfigurere ressursparametere, variabler og miljøspesifikke innstillinger
-- Implementere avanserte infrastrukturmønstre, inkludert nettverk og sikkerhet
+- Implementere avanserte infrastrukturmønstre inkludert nettverk og sikkerhet
 - Administrere ressurslivssyklus, oppdateringer og avhengighetsløsning
 
 ## Læringsutbytte
@@ -29,11 +36,11 @@ Etter fullføring vil du kunne:
 - Designe og klargjøre Azure-infrastruktur ved bruk av Bicep og ARM-maler
 - Konfigurere komplekse arkitekturer med flere tjenester og riktige ressursavhengigheter
 - Implementere parameteriserte maler for flere miljøer og konfigurasjoner
-- Feilsøke problemer med infrastrukturklargjøring og løse distribusjonsfeil
-- Anvende prinsippene fra Azure Well-Architected Framework til infrastrukturdesign
+- Feilsøke problemer med infrastrukturklargjøring og løse utrullingsfeil
+- Anvende prinsippene fra Azure Well-Architected Framework i infrastrukturdesign
 - Administrere infrastrukturendringer og implementere strategier for versjonering av infrastruktur
 
-## Oversikt over infrastrukturklargjøring
+## Oversikt over klargjøring av infrastruktur
 
 Azure Developer CLI støtter flere leverandører for Infrastruktur som kode (IaC):
 - **Bicep** (anbefalt) - Azures domene-spesifikke språk
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Betinget ressursklargjøring
+### Betinget klargjøring av ressurser
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -653,7 +660,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Avanserte klargjøringsmønstre
 
-### Distribusjon i flere regioner
+### Utrulling i flere regioner
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -859,9 +866,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Neste steg
 
-- [Planlegging før distribusjon](../pre-deployment/capacity-planning.md) - Valider tilgjengelighet av ressurser
+- [Planlegging før utrulling](../pre-deployment/capacity-planning.md) - Valider tilgjengeligheten av ressurser
 - [Vanlige problemer](../troubleshooting/common-issues.md) - Feilsøk infrastrukturproblemer
-- [Feilsøkingsveiledning](../troubleshooting/debugging.md) - Feilsøk klargjøringsproblemer
+- [Feilsøkingsguide](../troubleshooting/debugging.md) - Feilsøk klargjøringsproblemer
 - [Valg av SKU](../pre-deployment/sku-selection.md) - Velg passende tjenestenivåer
 
 ## Tilleggsressurser
@@ -874,10 +881,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [Distribusjonsveiledning](deployment-guide.md)
+- **Forrige leksjon**: [Utrullingsguide](deployment-guide.md)
 - **Neste leksjon**: [Kapasitetsplanlegging](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

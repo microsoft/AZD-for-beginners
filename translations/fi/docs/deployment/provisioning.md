@@ -1,42 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:43:13+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T06:35:53+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "fi"
 }
 -->
-# Resurssien provisiointi - Infrastructure as Code AZD:n avulla
+# Azure-resurssien provisiointi AZD:llä
+
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 4 - Infrastructure as Code & Deployment
+- **⬅️ Edellinen**: [Deployment Guide](deployment-guide.md)
+- **➡️ Seuraava luku**: [Luku 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 Liittyvä**: [Luku 6: Pre-Deployment Validation](../pre-deployment/capacity-planning.md)
 
 ## Johdanto
 
-Tämä kattava opas sisältää kaiken, mitä sinun tarvitsee tietää Azure-resurssien provisioinnista ja hallinnasta Azure Developer CLI:n avulla. Opit toteuttamaan Infrastructure as Code (IaC) -malleja yksinkertaisista resurssien luomisista aina edistyneisiin yritystason infrastruktuuriarkkitehtuureihin käyttämällä Bicepiä, ARM-malleja, Terraformia ja Pulumia.
+Tämä kattava opas sisältää kaiken, mitä sinun tarvitsee tietää Azure-resurssien provisioinnista ja hallinnasta Azure Developer CLI:llä. Opit toteuttamaan Infrastructure as Code (IaC) -malleja perusresurssien luomisesta aina edistyneisiin yritystason infrastruktuuriarkkitehtuureihin käyttäen Bicepiä, ARM-malleja, Terraformia ja Pulumia.
 
 ## Oppimistavoitteet
 
-Tämän oppaan suorittamalla:
-- Hallitset Infrastructure as Code -periaatteet ja Azure-resurssien provisioinnin
-- Ymmärrät Azure Developer CLI:n tukemat IaC-tarjoajat
-- Suunnittelet ja toteutat Bicep-malleja yleisiin sovellusarkkitehtuureihin
-- Konfiguroit resurssien parametrit, muuttujat ja ympäristökohtaiset asetukset
-- Toteutat edistyneitä infrastruktuurimalleja, kuten verkottamista ja tietoturvaa
-- Hallitset resurssien elinkaaren, päivitykset ja riippuvuuksien ratkaisemisen
+Tämän oppaan suorittamalla opit:
+- Hallitsemaan Infrastructure as Code -periaatteet ja Azure-resurssien provisioinnin
+- Ymmärtämään Azure Developer CLI:n tukemat IaC-palveluntarjoajat
+- Suunnittelemaan ja toteuttamaan Bicep-malleja yleisiin sovellusarkkitehtuureihin
+- Konfiguroimaan resurssiparametreja, muuttujia ja ympäristökohtaisia asetuksia
+- Toteuttamaan edistyneitä infrastruktuurimalleja, kuten verkottamista ja tietoturvaa
+- Hallitsemaan resurssien elinkaarta, päivityksiä ja riippuvuuksien ratkaisemista
 
 ## Oppimistulokset
 
-Oppaan suorittamisen jälkeen osaat:
-- Suunnitella ja provisioida Azure-infrastruktuuria Bicepin ja ARM-mallien avulla
-- Konfiguroida monimutkaisia monipalveluarkkitehtuureja oikeilla resurssiriippuvuuksilla
-- Toteuttaa parametrisoituja malleja useille ympäristöille ja konfiguraatioille
-- Ratkaista infrastruktuurin provisiointiongelmia ja korjata käyttöönoton epäonnistumisia
-- Soveltaa Azure Well-Architected Framework -periaatteita infrastruktuurin suunnittelussa
-- Hallita infrastruktuurin päivityksiä ja toteuttaa infrastruktuurin versiointistrategioita
+Oppaan suorittamisen jälkeen pystyt:
+- Suunnittelemaan ja provisioimaan Azure-infrastruktuuria käyttäen Bicepiä ja ARM-malleja
+- Konfiguroimaan monimutkaisia monipalveluarkkitehtuureja oikeilla resurssiriippuvuuksilla
+- Toteuttamaan parametrisoituja malleja useille ympäristöille ja konfiguraatioille
+- Ratkaisemaan infrastruktuurin provisiointiongelmia ja korjaamaan käyttöönoton epäonnistumisia
+- Soveltamaan Azure Well-Architected Framework -periaatteita infrastruktuurin suunnittelussa
+- Hallitsemaan infrastruktuurin päivityksiä ja toteuttamaan infrastruktuurin versiointistrategioita
 
 ## Infrastruktuurin provisioinnin yleiskatsaus
 
-Azure Developer CLI tukee useita Infrastructure as Code (IaC) -tarjoajia:
-- **Bicep** (suositeltu) - Azuren oma domain-spesifinen kieli
+Azure Developer CLI tukee useita Infrastructure as Code (IaC) -palveluntarjoajia:
+- **Bicep** (suositeltu) - Azuren alakohtainen kieli
 - **ARM-mallit** - JSON-pohjaiset Azure Resource Manager -mallit
 - **Terraform** - Monipilvi-infrastruktuurityökalu
 - **Pulumi** - Moderni Infrastructure as Code -ratkaisu ohjelmointikielillä
@@ -60,7 +67,7 @@ Azure Account
 
 ## Bicep-infrastruktuurimallit
 
-### Perusrakenne Bicep-mallille
+### Perus Bicep-mallin rakenne
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -813,7 +820,7 @@ var naming = {
 }
 ```
 
-### 2. Tunnisteiden strategia
+### 2. Tunnistusstrategia
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -859,9 +866,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Seuraavat askeleet
 
-- [Ennakkoon tehtävä suunnittelu](../pre-deployment/capacity-planning.md) - Varmista resurssien saatavuus
-- [Yleiset ongelmat](../troubleshooting/common-issues.md) - Ratkaise infrastruktuuriongelmia
-- [Vianetsintäopas](../troubleshooting/debugging.md) - Selvitä provisiointiongelmia
+- [Ennakkoon suunnittelu](../pre-deployment/capacity-planning.md) - Varmista resurssien saatavuus
+- [Yleiset ongelmat](../troubleshooting/common-issues.md) - Ratkaise infrastruktuuriongelmat
+- [Vianetsintäopas](../troubleshooting/debugging.md) - Vianetsintä provisiointiongelmissa
 - [SKU-valinta](../pre-deployment/sku-selection.md) - Valitse sopivat palvelutasot
 
 ## Lisäresurssit
@@ -874,10 +881,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigointi**
-- **Edellinen osio**: [Käyttöönotto-opas](deployment-guide.md)
-- **Seuraava osio**: [Kapsiteettisuunnittelu](../pre-deployment/capacity-planning.md)
+- **Edellinen oppitunti**: [Deployment Guide](deployment-guide.md)
+- **Seuraava oppitunti**: [Capacity Planning](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

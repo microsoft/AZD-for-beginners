@@ -1,22 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:52:07+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T06:50:59+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "nl"
 }
 -->
 # AI Model Deployment met Azure Developer CLI
 
-**Vorige:** [Azure AI Foundry Integratie](azure-ai-foundry-integration.md) | **Volgende:** [AI Workshop Lab](ai-workshop-lab.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
+- **⬅️ Vorige**: [Azure AI Foundry Integratie](azure-ai-foundry-integration.md)
+- **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../getting-started/configuration.md)
 
-Deze gids biedt uitgebreide instructies voor het implementeren van AI-modellen met behulp van AZD-sjablonen, van modelselectie tot productie-implementatiepatronen.
+Deze handleiding biedt uitgebreide instructies voor het implementeren van AI-modellen met behulp van AZD-sjablonen, van modelselectie tot productie-implementatiepatronen.
 
 ## Inhoudsopgave
 
 - [Strategie voor Modelselectie](../../../../docs/ai-foundry)
-- [AZD-configuratie voor AI-modellen](../../../../docs/ai-foundry)
+- [AZD Configuratie voor AI-Modellen](../../../../docs/ai-foundry)
 - [Implementatiepatronen](../../../../docs/ai-foundry)
 - [Modelbeheer](../../../../docs/ai-foundry)
 - [Overwegingen voor Productie](../../../../docs/ai-foundry)
@@ -59,13 +64,13 @@ services:
 | Modeltype | Gebruiksscenario | Aanbevolen Capaciteit | Kostenoverwegingen |
 |-----------|------------------|-----------------------|--------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kosteneffectief voor de meeste workloads |
-| GPT-4 | Complexe redenering | 20-100 TPM | Hogere kosten, gebruik voor premiumfuncties |
+| GPT-4 | Complexe redenering | 20-100 TPM | Hogere kosten, gebruik voor premium functies |
 | Text-embedding-ada-002 | Zoeken, RAG | 30-120 TPM | Essentieel voor semantisch zoeken |
 | Whisper | Spraak-naar-tekst | 10-50 TPM | Workloads voor audioprocessing |
 
-## AZD-configuratie voor AI-modellen
+## AZD Configuratie voor AI-Modellen
 
-### Bicep-sjabloonconfiguratie
+### Bicep Template Configuratie
 
 Creëer modelimplementaties via Bicep-sjablonen:
 
@@ -153,7 +158,7 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Beste voor:
+Geschikt voor:
 - Ontwikkeling en testen
 - Applicaties voor één markt
 - Kostenoptimalisatie
@@ -171,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Beste voor:
+Geschikt voor:
 - Wereldwijde applicaties
 - Hoge beschikbaarheidseisen
 - Loadverdeling
@@ -244,7 +249,7 @@ az cognitiveservices account list-models \
   --query "[?name=='gpt-4o-mini']"
 ```
 
-### A/B-testen
+### A/B Testen
 
 Implementeer meerdere modelversies:
 
@@ -475,23 +480,28 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Volgende stappen
+## Volgende Stappen
 
-1. **Bekijk de [Azure AI Foundry Integratiegids](azure-ai-foundry-integration.md)** voor integratiepatronen van diensten
+1. **Bekijk de [Azure AI Foundry Integratie Handleiding](azure-ai-foundry-integration.md)** voor integratiepatronen van diensten
 2. **Voltooi de [AI Workshop Lab](ai-workshop-lab.md)** voor praktische ervaring
-3. **Implementeer [Productie AI-praktijken](production-ai-practices.md)** voor bedrijfsimplementaties
-4. **Verken de [AI Probleemoplossingsgids](../troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
+3. **Implementeer [Productie AI Praktijken](production-ai-practices.md)** voor bedrijfsimplementaties
+4. **Verken de [AI Probleemoplossingshandleiding](../troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
 
 ## Bronnen
 
-- [Beschikbaarheid van Azure OpenAI Modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Documentatie van Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Schalen van Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Kostenoptimalisatie voor AI-modellen](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Azure OpenAI Model Beschikbaarheid](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Documentatie](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Schalen](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Kostenoptimalisatie](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Vorige:** [Azure AI Foundry Integratie](azure-ai-foundry-integration.md) | **Volgende:** [AI Workshop Lab](ai-workshop-lab.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
+- **⬅️ Vorige**: [Azure AI Foundry Integratie](azure-ai-foundry-integration.md)
+- **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../getting-started/configuration.md)
 
 ---
 

@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T21:39:16+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T06:17:05+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "no"
 }
 -->
-# Veiledningsguide - Mestre AZD-utrullinger
+# Veiledningsguide - Mestre AZD-deployeringer
+
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 4 - Infrastruktur som kode & deployering
+- **⬅️ Forrige Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
+- **➡️ Neste**: [Ressursprovisjonering](provisioning.md)
+- **🚀 Neste Kapittel**: [Kapittel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
 
 ## Introduksjon
 
-Denne omfattende guiden dekker alt du trenger å vite om å rulle ut applikasjoner ved hjelp av Azure Developer CLI, fra grunnleggende utrullinger med én kommando til avanserte produksjonsscenarier med tilpassede hooks, flere miljøer og CI/CD-integrasjon. Mestre hele utrullingslivssyklusen med praktiske eksempler og beste praksis.
+Denne omfattende guiden dekker alt du trenger å vite om å deployere applikasjoner med Azure Developer CLI, fra grunnleggende deployering med én kommando til avanserte produksjonsscenarier med tilpassede hooks, flere miljøer og CI/CD-integrasjon. Mestre hele deployeringssyklusen med praktiske eksempler og beste praksis.
 
 ## Læringsmål
 
 Ved å fullføre denne guiden vil du:
-- Mestre alle Azure Developer CLI-kommandoer og arbeidsflyter for utrulling
-- Forstå hele utrullingslivssyklusen fra klargjøring til overvåking
-- Implementere tilpassede hooks for automatisering før og etter utrulling
+- Mestre alle Azure Developer CLI-deployeringskommandoer og arbeidsflyter
+- Forstå hele deployeringssyklusen fra provisjonering til overvåking
+- Implementere tilpassede deployeringshooks for automatisering før og etter deployering
 - Konfigurere flere miljøer med miljøspesifikke parametere
-- Sette opp avanserte utrullingsstrategier som blå-grønn og kanarifuglutrulling
-- Integrere AZD-utrullinger med CI/CD-pipelines og DevOps-arbeidsflyter
+- Sette opp avanserte deployeringsstrategier som blue-green og canary deployeringer
+- Integrere azd-deployeringer med CI/CD-pipelines og DevOps-arbeidsflyter
 
 ## Læringsutbytte
 
 Etter fullføring vil du kunne:
-- Utføre og feilsøke alle AZD-utrullingsarbeidsflyter selvstendig
-- Designe og implementere tilpasset utrullingsautomatisering ved hjelp av hooks
-- Konfigurere produksjonsklare utrullinger med riktig sikkerhet og overvåking
-- Administrere komplekse utrullingsscenarier med flere miljøer
-- Optimalisere utrullingsytelse og implementere strategier for tilbakestilling
-- Integrere AZD-utrullinger i virksomhetens DevOps-praksis
+- Utføre og feilsøke alle azd-deployeringsarbeidsflyter selvstendig
+- Designe og implementere tilpasset deployeringsautomatisering ved hjelp av hooks
+- Konfigurere produksjonsklare deployeringer med riktig sikkerhet og overvåking
+- Administrere komplekse deployeringsscenarier med flere miljøer
+- Optimalisere deployeringsytelse og implementere rollback-strategier
+- Integrere azd-deployeringer i virksomhetspraksis for DevOps
 
-## Oversikt over utrulling
+## Oversikt over deployering
 
-Azure Developer CLI tilbyr flere kommandoer for utrulling:
-- `azd up` - Komplett arbeidsflyt (klargjøring + utrulling)
+Azure Developer CLI tilbyr flere deployeringskommandoer:
+- `azd up` - Komplett arbeidsflyt (provisjon + deployering)
 - `azd provision` - Opprett/oppdater kun Azure-ressurser
-- `azd deploy` - Rull ut kun applikasjonskode
+- `azd deploy` - Deployere kun applikasjonskode
 - `azd package` - Bygg og pakk applikasjoner
 
-## Grunnleggende arbeidsflyter for utrulling
+## Grunnleggende deployeringsarbeidsflyter
 
-### Komplett utrulling (azd up)
+### Komplett deployering (azd up)
 Den vanligste arbeidsflyten for nye prosjekter:
 ```bash
 # Deploy everything from scratch
@@ -56,7 +63,7 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Kun infrastrukturutrulling
+### Kun infrastruktur-deployering
 Når du kun trenger å oppdatere Azure-ressurser:
 ```bash
 # Provision/update infrastructure
@@ -69,8 +76,8 @@ azd provision --preview
 azd provision --service database
 ```
 
-### Kun kodeutrulling
-For raske oppdateringer av applikasjonen:
+### Kun kode-deployering
+For raske applikasjonsoppdateringer:
 ```bash
 # Deploy all services
 azd deploy
@@ -83,9 +90,9 @@ azd deploy --service api
 azd deploy --service api --build-arg NODE_ENV=production
 ```
 
-## 🏗️ Forstå utrullingsprosessen
+## 🏗️ Forstå deployeringsprosessen
 
-### Fase 1: Hooks før klargjøring
+### Fase 1: Hooks før provisjonering
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Fase 2: Klargjøring av infrastruktur
+### Fase 2: Infrastrukturprovisjonering
 - Leser infrastrukturmaler (Bicep/Terraform)
 - Oppretter eller oppdaterer Azure-ressurser
 - Konfigurerer nettverk og sikkerhet
 - Setter opp overvåking og logging
 
-### Fase 3: Hooks etter klargjøring
+### Fase 3: Hooks etter provisjonering
 ```yaml
 hooks:
   postprovision:
@@ -120,10 +127,10 @@ hooks:
 
 ### Fase 4: Applikasjonspakking
 - Bygger applikasjonskode
-- Oppretter utrullingsartefakter
+- Oppretter deployeringsartefakter
 - Pakker for målplattform (containere, ZIP-filer, etc.)
 
-### Fase 5: Hooks før utrulling
+### Fase 5: Hooks før deployering
 ```yaml
 hooks:
   predeploy:
@@ -136,12 +143,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Fase 6: Applikasjonsutrulling
-- Ruller ut pakkede applikasjoner til Azure-tjenester
+### Fase 6: Applikasjonsdeployering
+- Deployerer pakkede applikasjoner til Azure-tjenester
 - Oppdaterer konfigurasjonsinnstillinger
-- Starter/omstarter tjenester
+- Starter/restarter tjenester
 
-### Fase 7: Hooks etter utrulling
+### Fase 7: Hooks etter deployering
 ```yaml
 hooks:
   postdeploy:
@@ -154,9 +161,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Konfigurasjon av utrulling
+## 🎛️ Deployeringskonfigurasjon
 
-### Tjenestespesifikke innstillinger for utrulling
+### Tjenestespesifikke deployeringsinnstillinger
 ```yaml
 # azure.yaml
 services:
@@ -206,7 +213,7 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Avanserte utrullingsscenarier
+## 🔧 Avanserte deployeringsscenarier
 
 ### Applikasjoner med flere tjenester
 ```yaml
@@ -244,7 +251,7 @@ services:
     host: function
 ```
 
-### Blå-grønn utrulling
+### Blue-Green deployeringer
 ```bash
 # Create blue environment
 azd env new production-blue
@@ -261,7 +268,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Kanarifuglutrulling
+### Canary deployeringer
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -275,7 +282,7 @@ services:
         percentage: 10
 ```
 
-### Trinnvis utrulling
+### Trinnvise deployeringer
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -306,9 +313,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Utrulling av containere
+## 🐳 Container-deployeringer
 
-### Utrulling av containerapplikasjoner
+### Deployering av containerapplikasjoner
 ```yaml
 services:
   api:
@@ -360,7 +367,7 @@ CMD ["npm", "start"]
 
 ## ⚡ Ytelsesoptimalisering
 
-### Parallelle utrullinger
+### Parallelle deployeringer
 ```bash
 # Configure parallel deployment
 azd config set deploy.parallelism 5
@@ -383,7 +390,7 @@ services:
         - .next/cache
 ```
 
-### Inkrementelle utrullinger
+### Inkrementelle deployeringer
 ```bash
 # Deploy only changed services
 azd deploy --incremental
@@ -392,9 +399,9 @@ azd deploy --incremental
 azd deploy --detect-changes
 ```
 
-## 🔍 Overvåking av utrulling
+## 🔍 Overvåking av deployering
 
-### Sanntidsovervåking av utrulling
+### Sanntids overvåking av deployering
 ```bash
 # Monitor deployment progress
 azd deploy --follow
@@ -420,7 +427,7 @@ services:
       retries: 3
 ```
 
-### Validering etter utrulling
+### Validering etter deployering
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
@@ -501,9 +508,9 @@ services:
           - external-api-key
 ```
 
-## 🚨 Strategier for tilbakestilling
+## 🚨 Rollback-strategier
 
-### Rask tilbakestilling
+### Rask rollback
 ```bash
 # Rollback to previous deployment
 azd deploy --rollback
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### Tilbakestilling av infrastruktur
+### Rollback av infrastruktur
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -524,7 +531,7 @@ azd provision --rollback
 azd provision --rollback --preview
 ```
 
-### Tilbakestilling av databaseendringer
+### Rollback av database-migrering
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -538,9 +545,9 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Utrullingsmetrikker
+## 📊 Deployeringsmetrikker
 
-### Spor utrullingsytelse
+### Spor deployeringsytelse
 ```bash
 # Enable deployment metrics
 azd config set telemetry.deployment.enabled true
@@ -571,7 +578,7 @@ hooks:
 
 ## 🎯 Beste praksis
 
-### 1. Konsistens mellom miljøer
+### 1. Konsistens i miljøer
 ```bash
 # Use consistent naming
 azd env new dev-$(whoami)
@@ -631,25 +638,25 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Neste steg
 
-- [Klargjøring av ressurser](provisioning.md) - Dypdykk i infrastrukturadministrasjon
-- [Planlegging før utrulling](../pre-deployment/capacity-planning.md) - Planlegg din utrullingsstrategi
-- [Vanlige problemer](../troubleshooting/common-issues.md) - Løs utrullingsproblemer
-- [Beste praksis](../troubleshooting/debugging.md) - Produksjonsklare utrullingsstrategier
+- [Ressursprovisjonering](provisioning.md) - Dypdykk i infrastrukturadministrasjon
+- [Planlegging før deployering](../pre-deployment/capacity-planning.md) - Planlegg din deployeringsstrategi
+- [Vanlige problemer](../troubleshooting/common-issues.md) - Løs deployeringsproblemer
+- [Beste praksis](../troubleshooting/debugging.md) - Produksjonsklare deployeringsstrategier
 
 ## Tilleggsressurser
 
-- [Azure Developer CLI Utrullingsreferanse](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Utrulling](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Utrulling](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Utrulling](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployeringsreferanse](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployering](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployering](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployering](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [Ditt første prosjekt](../getting-started/first-project.md)
-- **Neste leksjon**: [Klargjøring av ressurser](provisioning.md)
+- **Forrige Leksjon**: [Ditt Første Prosjekt](../getting-started/first-project.md)
+- **Neste Leksjon**: [Ressursprovisjonering](provisioning.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

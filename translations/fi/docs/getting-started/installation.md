@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T21:12:30+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T06:34:10+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "fi"
 }
 -->
-# Asennus- ja käyttöönotto-opas
+# Asennus- ja aloitusopas
 
-**Edellinen:** [Päädokumentaatio](../../README.md) | **Seuraava:** [AZD Perusteet](azd-basics.md)
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 1 - Perusteet ja pika-aloitus
+- **⬅️ Edellinen**: [AZD Perusteet](azd-basics.md)
+- **➡️ Seuraava**: [Ensimmäinen projekti](first-project.md)
+- **🚀 Seuraava luku**: [Luku 2: AI-First Kehitys](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Johdanto
 
-Tämä kattava opas opastaa sinut Azure Developer CLI:n (azd) asentamisessa ja konfiguroinnissa järjestelmääsi. Opit useita asennusmenetelmiä eri käyttöjärjestelmille, autentikoinnin asetuksia ja alkuperäistä konfigurointia, jotta kehitysympäristösi on valmis Azure-järjestelmän käyttöönottoon.
+Tämä kattava opas opastaa sinut Azure Developer CLI:n (azd) asentamisessa ja konfiguroinnissa järjestelmääsi. Opit useita asennusmenetelmiä eri käyttöjärjestelmille, autentikoinnin asetuksia ja alkuperäistä konfigurointia, jotta kehitysympäristösi on valmis Azure-järjestelmiä varten.
 
 ## Oppimistavoitteet
 
@@ -22,14 +27,14 @@ Tämän oppitunnin lopussa osaat:
 - Konfiguroida autentikoinnin Azureen eri menetelmillä
 - Valmistella kehitysympäristösi tarvittavilla edellytyksillä
 - Ymmärtää eri asennusvaihtoehdot ja milloin käyttää niitä
-- Ratkaista yleisiä asennus- ja käyttöönotto-ongelmia
+- Ratkaista yleisiä asennus- ja konfigurointiongelmia
 
 ## Oppimistulokset
 
 Oppitunnin suorittamisen jälkeen pystyt:
 - Asentamaan azd:n sopivalla menetelmällä alustallesi
 - Autentikoitumaan Azureen komennolla `azd auth login`
-- Varmistamaan asennuksen ja testaamaan peruskomentoja azd:llä
+- Varmistamaan asennuksen ja testaamaan peruskomentoja
 - Konfiguroimaan kehitysympäristösi optimaalista azd:n käyttöä varten
 - Ratkaisemaan yleisiä asennusongelmia itsenäisesti
 
@@ -116,7 +121,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd on esiasennettu GitHub Codespacesissa. Luo vain codespace ja aloita azd:n käyttö välittömästi.
+azd on esiasennettu GitHub Codespacesissa. Luo vain Codespace ja aloita azd:n käyttö välittömästi.
 
 ### Docker
 
@@ -128,7 +133,7 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Asennuksen varmistaminen
+## ✅ Asennuksen vahvistaminen
 
 Asennuksen jälkeen varmista, että azd toimii oikein:
 
@@ -210,15 +215,15 @@ export AZD_DEBUG=true  # Enable debug logging
 ### Visual Studio Code
 Asenna Azure Developer CLI -laajennus:
 1. Avaa VS Code
-2. Siirry laajennuksiin (Ctrl+Shift+X)
+2. Siirry Laajennuksiin (Ctrl+Shift+X)
 3. Etsi "Azure Developer CLI"
 4. Asenna laajennus
 
 Ominaisuudet:
 - IntelliSense azure.yaml-tiedostoille
-- Integroitu terminaalikomentojen käyttö
+- Integroitu terminaalikomennot
 - Mallien selaus
-- Käyttöönoton seuranta
+- Julkaisun seuranta
 
 ### GitHub Codespaces
 Luo `.devcontainer/devcontainer.json`:
@@ -236,7 +241,7 @@ Luo `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Asenna Azure-laajennus
 2. Konfiguroi Azure-tunnukset
-3. Käytä integroitua terminaalia azd-komentoihin
+3. Käytä integroituja terminaalikomentoja azd:lle
 
 ## 🐛 Asennuksen vianmääritys
 
@@ -324,8 +329,8 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Seuraavat vaiheet
 
 1. **Viimeistele autentikointi**: Varmista, että pääset Azure-tilaukseesi
-2. **Kokeile ensimmäistä käyttöönottoa**: Seuraa [Ensimmäisen projektin opasta](first-project.md)
-3. **Tutustu malleihin**: Selaa saatavilla olevia malleja komennolla `azd template list`
+2. **Kokeile ensimmäistä julkaisua**: Seuraa [Ensimmäisen projektin opasta](first-project.md)
+3. **Tutki malleja**: Selaa saatavilla olevia malleja komennolla `azd template list`
 4. **Konfiguroi IDE**: Valmistele kehitysympäristösi
 
 ## Tuki
@@ -338,9 +343,14 @@ Jos kohtaat ongelmia:
 
 ---
 
-**Edellinen:** [Päädokumentaatio](../../README.md) | **Seuraava:** [AZD Perusteet](azd-basics.md)
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 1 - Perusteet ja pika-aloitus
+- **⬅️ Edellinen**: [AZD Perusteet](azd-basics.md) 
+- **➡️ Seuraava**: [Ensimmäinen projekti](first-project.md)
+- **🚀 Seuraava luku**: [Luku 2: AI-First Kehitys](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Asennus valmis!** Jatka [Ensimmäiseen projektiin](first-project.md) ja aloita työskentely azd:n kanssa.
+**✅ Asennus valmis!** Jatka [Ensimmäiseen projektiin](first-project.md) ja aloita työskentely azd:n kanssa.
 
 ---
 

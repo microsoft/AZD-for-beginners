@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:04:53+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T06:38:19+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "fi"
 }
 -->
 # SKU-valintaopas - Oikean Azure-palvelutason valinta
 
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD For Beginners](../../README.md)
+- **📖 Nykyinen luku**: Luku 6 - Esivalidointi ja suunnittelu
+- **⬅️ Edellinen**: [Kapasiteettisuunnittelu](capacity-planning.md)
+- **➡️ Seuraava**: [Lähtötarkistukset](preflight-checks.md)
+- **🚀 Seuraava luku**: [Luku 7: Vianmääritys](../troubleshooting/common-issues.md)
+
 ## Johdanto
 
-Tämä kattava opas auttaa sinua valitsemaan optimaaliset Azure-palvelu-SKU:t (Stock Keeping Units) eri ympäristöihin, työkuormiin ja vaatimuksiin. Opit analysoimaan suorituskykytarpeita, kustannusnäkökulmia ja skaalautuvuusvaatimuksia, jotta voit valita sopivimmat palvelutasot Azure Developer CLI -käyttöönottoihin.
+Tämä kattava opas auttaa sinua valitsemaan optimaaliset Azure-palvelu-SKU:t (Stock Keeping Units) eri ympäristöille, työkuormille ja vaatimuksille. Opit analysoimaan suorituskykyvaatimuksia, kustannusnäkökulmia ja skaalautuvuusvaatimuksia, jotta voit valita sopivimmat palvelutasot Azure Developer CLI -käyttöönottoihin.
 
 ## Oppimistavoitteet
 
-Tämän oppaan avulla opit:
+Tämän oppaan suorittamalla opit:
 - Ymmärtämään Azure SKU -konseptit, hinnoittelumallit ja ominaisuuserot
-- Hallitsemaan ympäristökohtaisia SKU-valintastrategioita kehitykseen, testaukseen ja tuotantoon
+- Hallitsemaan ympäristökohtaisia SKU-valintastrategioita kehitys-, testaus- ja tuotantoympäristöille
 - Analysoimaan työkuormavaatimuksia ja yhdistämään ne sopiviin palvelutasoihin
 - Toteuttamaan kustannusoptimointistrategioita älykkään SKU-valinnan avulla
 - Soveltamaan suorituskykytestausta ja validointitekniikoita SKU-valinnoille
@@ -26,11 +33,11 @@ Tämän oppaan avulla opit:
 ## Oppimistulokset
 
 Oppaan suorittamisen jälkeen pystyt:
-- Valitsemaan sopivat Azure-palvelu-SKU:t työkuormavaatimusten ja rajoitteiden perusteella
+- Valitsemaan sopivat Azure-palvelu-SKU:t työkuormavaatimusten ja rajoitusten perusteella
 - Suunnittelemaan kustannustehokkaita monen ympäristön arkkitehtuureja oikeilla tasovalinnoilla
 - Toteuttamaan suorituskykyvertailuja ja validointia SKU-valinnoille
 - Luomaan automatisoituja työkaluja SKU-suosituksiin ja kustannusoptimointiin
-- Suunnittelemaan SKU-siirtymiä ja skaalautumisstrategioita muuttuvien vaatimusten mukaan
+- Suunnittelemaan SKU-siirtymiä ja skaalautumisstrategioita muuttuville vaatimuksille
 - Soveltamaan Azure Well-Architected Framework -periaatteita palvelutason valintaan
 
 ## Sisällysluettelo
@@ -51,7 +58,7 @@ Oppaan suorittamisen jälkeen pystyt:
 
 SKU:t (Stock Keeping Units) edustavat eri palvelutasoja ja suorituskykytasoja Azure-resursseille. Jokainen SKU tarjoaa erilaisia:
 
-- **Suorituskykyominaisuuksia** (CPU, muisti, läpimeno)
+- **Suorituskykyominaisuuksia** (CPU, muisti, läpäisykyky)
 - **Ominaisuuksien saatavuutta** (skaalausvaihtoehdot, SLA-tasot)
 - **Hinnoittelumalleja** (kulutuspohjainen, varattu kapasiteetti)
 - **Alueellista saatavuutta** (kaikki SKU:t eivät ole saatavilla kaikilla alueilla)
@@ -66,12 +73,12 @@ SKU:t (Stock Keeping Units) edustavat eri palvelutasoja ja suorituskykytasoja Az
 2. **Ympäristötyyppi**
    - Kehitys/testaus vs. tuotanto
    - Saatavuusvaatimukset
-   - Turvallisuus- ja vaatimustenmukaisuustarpeet
+   - Turvallisuus- ja vaatimustenmukaisuusvaatimukset
 
-3. **Budjettirajoitteet**
+3. **Budjettirajoitukset**
    - Alkuperäiset kustannukset vs. operatiiviset kustannukset
    - Varatun kapasiteetin alennukset
-   - Automaattisen skaalauksen kustannusvaikutukset
+   - Automaattisen skaalaamisen kustannusvaikutukset
 
 4. **Kasvuprojektiot**
    - Skaalautuvuusvaatimukset
@@ -84,7 +91,7 @@ SKU:t (Stock Keeping Units) edustavat eri palvelutasoja ja suorituskykytasoja Az
 
 ### Kehitysympäristö
 
-**Prioriteetit**: Kustannusoptimointi, perustoiminnallisuus, helppo käyttöönotto ja poisto
+**Prioriteetit**: Kustannusoptimointi, perustoiminnallisuus, helppo käyttöönotto/poisto
 
 #### Suositellut SKU:t
 ```yaml
@@ -100,7 +107,7 @@ skus:
 ```
 
 #### Ominaisuudet
-- **App Service**: F1 (ilmainen) tai B1 (perus) yksinkertaiseen testaukseen
+- **App Service**: F1 (Ilmainen) tai B1 (Perus) yksinkertaiseen testaukseen
 - **Tietokannat**: Perustaso, jossa minimaaliset resurssit
 - **Tallennus**: Standardi, vain paikallinen redundanssi
 - **Laskenta**: Jaetut resurssit hyväksyttäviä
@@ -108,7 +115,7 @@ skus:
 
 ### Testaus-/vaiheympäristö
 
-**Prioriteetit**: Tuotantomaiset konfiguraatiot, kustannustasapaino, suorituskykytestausmahdollisuus
+**Prioriteetit**: Tuotantomainen konfiguraatio, kustannustasapaino, suorituskykytestausmahdollisuus
 
 #### Suositellut SKU:t
 ```yaml
@@ -123,7 +130,7 @@ skus:
 ```
 
 #### Ominaisuudet
-- **Suorituskyky**: 70–80 % tuotantokapasiteetista
+- **Suorituskyky**: 70-80 % tuotantokapasiteetista
 - **Ominaisuudet**: Suurin osa tuotanto-ominaisuuksista käytössä
 - **Redundanssi**: Jonkin verran maantieteellistä redundanssia
 - **Skaalaus**: Rajoitettu automaattinen skaalaus testaukseen
@@ -148,10 +155,10 @@ skus:
 
 #### Ominaisuudet
 - **Korkea saatavuus**: 99,9 %+ SLA-vaatimukset
-- **Suorituskyky**: Dedikoidut resurssit, korkea läpimeno
+- **Suorituskyky**: Dedikoidut resurssit, korkea läpäisykyky
 - **Turvallisuus**: Premium-turvaominaisuudet
-- **Skaalaus**: Täydet automaattiset skaalausominaisuudet
-- **Seuranta**: Kattava näkyvyys
+- **Skaalaus**: Täydet automaattisen skaalaamisen ominaisuudet
+- **Seuranta**: Kattava havaittavuus
 
 ---
 
@@ -163,11 +170,11 @@ skus:
 
 | Käyttötapaus | Suositeltu SKU | Perustelu |
 |--------------|----------------|-----------|
-| Kehitys/testaus | F1 (ilmainen) tai B1 (perus) | Kustannustehokas, riittävä testaukseen |
-| Pienet tuotantosovellukset | S1 (standardi) | Mukautetut verkkotunnukset, SSL, automaattinen skaalaus |
+| Kehitys/testaus | F1 (Ilmainen) tai B1 (Perus) | Kustannustehokas, riittävä testaukseen |
+| Pienet tuotantosovellukset | S1 (Standardi) | Mukautetut domainit, SSL, automaattinen skaalaus |
 | Keskikokoiset tuotantosovellukset | P1V3 (Premium V3) | Parempi suorituskyky, enemmän ominaisuuksia |
-| Suuren liikenteen sovellukset | P2V3 tai P3V3 | Dedikoidut resurssit, korkea suorituskyky |
-| Kriittiset sovellukset | I1V2 (Isolated V2) | Verkkoyksityisyys, dedikoitu laitteisto |
+| Suuriliikenteiset sovellukset | P2V3 tai P3V3 | Dedikoidut resurssit, korkea suorituskyky |
+| Kriittiset sovellukset | I1V2 (Eristetty V2) | Verkkoyksityisyys, dedikoitu laitteisto |
 
 #### Konfiguraatioesimerkit
 
@@ -209,12 +216,12 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 1. **DTU-pohjainen (Database Transaction Units)**
    - **Perus**: 5 DTU - Kehitys/testaus
-   - **Standardi**: S0-S12 (10–3000 DTU) - Yleiskäyttö
-   - **Premium**: P1-P15 (125–4000 DTU) - Suorituskykykriittinen
+   - **Standardi**: S0-S12 (10-3000 DTU) - Yleiskäyttö
+   - **Premium**: P1-P15 (125-4000 DTU) - Suorituskykykriittinen
 
 2. **vCore-pohjainen** (suositeltu tuotantoon)
    - **Yleiskäyttö**: Tasapainotettu laskenta ja tallennus
-   - **Liiketoimintakriittinen**: Matala viive, korkea IOPS
+   - **Liiketoimintakriittinen**: Matala latenssi, korkea IOPS
    - **Hyperscale**: Erittäin skaalautuva tallennus (jopa 100TB)
 
 #### Esimerkkikonfiguraatiot
@@ -261,14 +268,14 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
    - Sopii kehitykseen ja vaihteleviin työkuormiin
    - Jaettu infrastruktuuri
 
-2. **Dedikoitu (työkuormaprofiilit)**
+2. **Dedikoitu (Työkuormaprofiilit)**
    - Dedikoidut laskentaresurssit
    - Ennustettava suorituskyky
    - Parempi tuotantotyökuormille
 
 #### Konfiguraatioesimerkit
 
-**Kehitys (kulutus)**
+**Kehitys (Kulutus)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -307,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Tuotanto (dedikoitu)**
+**Tuotanto (Dedikoitu)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-prod'
@@ -326,22 +333,22 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 ### Azure Cosmos DB
 
-#### Läpimenomallit
+#### Läpäisymallit
 
-1. **Manuaalisesti varattu läpimeno**
+1. **Manuaalisesti varattu läpäisykyky**
    - Ennustettava suorituskyky
    - Varatun kapasiteetin alennukset
    - Paras tasaisille työkuormille
 
-2. **Automaattisesti skaalautuva läpimeno**
+2. **Automaattisesti skaalautuva läpäisykyky**
    - Automaattinen skaalaus käytön mukaan
-   - Maksu käytön mukaan (minimivaatimuksella)
+   - Maksu käytön mukaan (minimillä)
    - Hyvä vaihteleville työkuormille
 
-3. **Palveluton**
+3. **Palvelimeton**
    - Maksu per pyyntö
-   - Ei varattua läpimenoa
-   - Sopii kehitykseen ja satunnaisiin työkuormiin
+   - Ei varattua läpäisykykyä
+   - Ihanteellinen kehitykseen ja satunnaisiin työkuormiin
 
 #### SKU-esimerkit
 
@@ -404,13 +411,13 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 1. **Standard_LRS** - Kehitys, ei-kriittinen data
 2. **Standard_GRS** - Tuotanto, maantieteellinen redundanssi tarpeen
-3. **Premium_LRS** - Suorituskykyiset sovellukset
+3. **Premium_LRS** - Korkean suorituskyvyn sovellukset
 4. **Premium_ZRS** - Korkea saatavuus vyöhykeredundanssilla
 
 #### Suorituskykytasot
 
 - **Standardi**: Yleiskäyttö, kustannustehokas
-- **Premium**: Suorituskykyiset, matalan viiveen skenaariot
+- **Premium**: Korkean suorituskyvyn, matalan latenssin skenaariot
 
 ```bicep
 // Development
@@ -455,7 +462,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. Varattu kapasiteetti
 
-Varaa resursseja 1–3 vuodeksi merkittäviä alennuksia varten:
+Varaa resursseja 1-3 vuodeksi merkittäviä alennuksia varten:
 
 ```bash
 # Check reservation options
@@ -479,7 +486,7 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Automaattisen skaalauksen konfigurointi
+### 3. Automaattisen skaalaamisen konfiguraatio
 
 Toteuta älykäs skaalaus kustannusten optimoimiseksi:
 
@@ -589,7 +596,7 @@ Skaalaa alas hiljaisina aikoina:
 
 ### Perussuorituskykyvaatimukset
 
-Määrittele selkeät suorituskykyvaatimukset ennen SKU-valintaa:
+Määritä selkeät suorituskykyvaatimukset ennen SKU-valintaa:
 
 ```yaml
 performance_requirements:
@@ -648,7 +655,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Pikaviittaustaulukot
 
-### App Service SKU -pikaviittaus
+### App Service SKU -pikaviite
 
 | SKU | Taso | vCPU | RAM | Tallennus | Hintaluokka | Käyttötapaus |
 |-----|------|------|-----|-----------|-------------|--------------|
@@ -656,9 +663,9 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | B1 | Perus | 1 | 1.75GB | 10GB | $ | Pienet sovellukset |
 | S1 | Standardi | 1 | 1.75GB | 50GB | $$ | Tuotanto |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Korkea suorituskyky |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Yrityskäyttö |
+| I1V2 | Eristetty V2 | 2 | 8GB | 1TB | $$$$ | Yritys |
 
-### SQL Database SKU -pikaviittaus
+### SQL Database SKU -pikaviite
 
 | SKU | Taso | DTU/vCore | Tallennus | Hintaluokka | Käyttötapaus |
 |-----|------|-----------|-----------|-------------|--------------|
@@ -668,11 +675,11 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | GP_Gen5_4 | Yleiskäyttö | 4 vCore | 4TB | $$$ | Tasapainotettu |
 | BC_Gen5_8 | Liiketoimintakriittinen | 8 vCore | 4TB | $$$$ | Kriittinen |
 
-### Container Apps SKU -pikaviittaus
+### Container Apps SKU -pikaviite
 
 | Malli | Hinnoittelu | CPU/Muisti | Käyttötapaus |
 |-------|-------------|------------|--------------|
-| Kulutus | Maksu käytön mukaan | 0.25–2 vCPU | Kehitys, vaihteleva kuorma |
+| Kulutus | Maksu käytön mukaan | 0.25-2 vCPU | Kehitys, vaihteleva kuorma |
 | Dedikoitu D4 | Varattu | 4 vCPU, 16GB | Tuotanto |
 | Dedikoitu D8 | Varattu | 8 vCPU, 32GB | Korkea suorituskyky |
 
@@ -805,7 +812,7 @@ test_configuration:
 3. **Älä unohda datansiirtokustannuksia**
 4. **Älä ylisuunnittele ilman perusteluja**
 5. **Älä jätä huomiotta riippuvuuksien vaikutusta**
-6. **Älä aseta automaattisen skaalauksen rajoja liian korkealle**
+6. **Älä aseta automaattisen skaalaamisen rajoja liian korkealle**
 7. **Älä unohda vaatimustenmukaisuusvaatimuksia**
 8. **Älä tee päätöksiä pelkästään hinnan perusteella**
 
@@ -816,10 +823,10 @@ test_configuration:
 ---
 
 **Navigointi**
-- **Edellinen osio**: [Kapasiteettisuunnittelu](capacity-planning.md)
-- **Seuraava osio**: [Esitarkistukset](preflight-checks.md)
+- **Edellinen oppitunti**: [Kapasiteettisuunnittelu](capacity-planning.md)
+- **Seuraava oppitunti**: [Lähtötarkistukset](preflight-checks.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

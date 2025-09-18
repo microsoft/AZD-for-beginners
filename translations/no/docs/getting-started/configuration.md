@@ -1,35 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:08:37+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T06:16:22+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "no"
 }
 -->
 # Konfigurasjonsveiledning
 
-**Forrige:** [AZD Grunnleggende](azd-basics.md) | **Neste:** [Første Prosjekt](first-project.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 3 - Konfigurasjon & Autentisering
+- **⬅️ Forrige**: [Ditt Første Prosjekt](first-project.md)
+- **➡️ Neste**: [Distribusjonsveiledning](../deployment/deployment-guide.md)
+- **🚀 Neste Kapittel**: [Kapittel 4: Infrastruktur som kode](../deployment/deployment-guide.md)
 
 ## Introduksjon
 
-Denne omfattende veiledningen dekker alle aspekter ved å konfigurere Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter. Du vil lære om konfigurasjonshierarkiet, miljøhåndtering, autentiseringsmetoder og avanserte konfigurasjonsmønstre som muliggjør effektive og sikre Azure-distribusjoner.
+Denne omfattende veiledningen dekker alle aspekter ved å konfigurere Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter. Du vil lære om konfigurasjonshierarkiet, miljøadministrasjon, autentiseringsmetoder og avanserte konfigurasjonsmønstre som muliggjør effektive og sikre Azure-distribusjoner.
 
 ## Læringsmål
 
 Ved slutten av denne leksjonen vil du:
 - Mestre azd-konfigurasjonshierarkiet og forstå hvordan innstillinger prioriteres
 - Konfigurere globale og prosjektspesifikke innstillinger effektivt
-- Håndtere flere miljøer med ulike konfigurasjoner
+- Administrere flere miljøer med ulike konfigurasjoner
 - Implementere sikre autentiserings- og autorisasjonsmønstre
 - Forstå avanserte konfigurasjonsmønstre for komplekse scenarier
 
 ## Læringsutbytte
 
-Etter å ha fullført denne leksjonen, vil du kunne:
+Etter å ha fullført denne leksjonen vil du kunne:
 - Konfigurere azd for optimale utviklingsarbeidsflyter
 - Sette opp og administrere flere distribusjonsmiljøer
-- Implementere sikre konfigurasjonsstyringspraksiser
+- Implementere sikre konfigurasjonsadministrasjonspraksiser
 - Feilsøke konfigurasjonsrelaterte problemer
 - Tilpasse azd-oppførsel for spesifikke organisatoriske behov
 
@@ -204,7 +209,7 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Miljøhåndtering
+## 🌟 Miljøadministrasjon
 
 ### Opprette Miljøer
 ```bash
@@ -537,8 +542,8 @@ Dokumenter din konfigurasjon i `CONFIG.md`:
 
 ## Neste Steg
 
-- [Ditt Første Prosjekt](first-project.md) - Bruk konfigurasjon i praksis
-- [Distribusjonsveiledning](../deployment/deployment-guide.md) - Bruk konfigurasjon for distribusjon
+- [Ditt Første Prosjekt](first-project.md) - Bruk konfigurasjonen i praksis
+- [Distribusjonsveiledning](../deployment/deployment-guide.md) - Bruk konfigurasjonen for distribusjon
 - [Ressursprovisjonering](../deployment/provisioning.md) - Produksjonsklare konfigurasjoner
 
 ## Referanser
@@ -549,10 +554,14 @@ Dokumenter din konfigurasjon i `CONFIG.md`:
 
 ---
 
-**Forrige:** [AZD Grunnleggende](azd-basics.md) | **Neste:** [Første Prosjekt](first-project.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 3 - Konfigurasjon & Autentisering
+- **⬅️ Forrige**: [Ditt Første Prosjekt](first-project.md)
+- **➡️ Neste Kapittel**: [Kapittel 4: Infrastruktur som kode](../deployment/deployment-guide.md)
 - **Neste Leksjon**: [Ditt Første Prosjekt](first-project.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

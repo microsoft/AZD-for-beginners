@@ -1,75 +1,82 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T21:55:34+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T06:37:47+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "fi"
 }
 -->
-# Ennakkotarkistukset - Valmius tarkistaa käyttöönotto
+# AZD-järjestelmien käyttöönoton esivalmistelut
+
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 6 - Käyttöönoton validointi ja suunnittelu
+- **⬅️ Edellinen**: [SKU-valinta](sku-selection.md)
+- **➡️ Seuraava luku**: [Luku 7: Vianetsintä](../troubleshooting/common-issues.md)
+- **🔧 Liittyvä**: [Luku 4: Käyttöönotto-opas](../deployment/deployment-guide.md)
 
 ## Johdanto
 
-Tämä kattava opas tarjoaa ennakkotarkistusskriptit ja -menettelyt, jotka varmistavat onnistuneet Azure Developer CLI -käyttöönotot ennen niiden alkamista. Opi toteuttamaan automatisoituja tarkistuksia autentikoinnille, resurssien saatavuudelle, kiintiöille, turvallisuusvaatimusten noudattamiselle ja suorituskykyvaatimuksille, jotta voit estää käyttöönoton epäonnistumiset ja optimoida onnistumisprosentit.
+Tämä kattava opas tarjoaa validointiskriptit ja -menettelyt, jotka varmistavat onnistuneet Azure Developer CLI -käyttöönotot ennen niiden alkamista. Opit toteuttamaan automatisoituja tarkistuksia, jotka liittyvät autentikointiin, resurssien saatavuuteen, kiintiöihin, turvallisuusvaatimusten noudattamiseen ja suorituskykyyn, jotta käyttöönoton epäonnistumiset voidaan estää ja onnistumisprosentti optimoida.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
-- Hallitsemaan automatisoituja ennakkotarkistustekniikoita ja -skriptejä
+- Hallitsemaan automatisoituja validointitekniikoita ja -skriptejä ennen käyttöönottoa
 - Ymmärtämään kattavat tarkistusstrategiat autentikoinnille, käyttöoikeuksille ja kiintiöille
-- Toteuttamaan resurssien saatavuuden ja kapasiteetin tarkistusmenettelyt
-- Konfiguroimaan turvallisuus- ja vaatimustenmukaisuustarkistukset organisaation politiikoille
-- Suunnittelemaan kustannusarvio- ja budjettitarkistusprosessit
-- Luomaan räätälöityjä ennakkotarkistusautomaatioita CI/CD-putkille
+- Toteuttamaan resurssien saatavuuden ja kapasiteetin validointimenettelyt
+- Konfiguroimaan turvallisuus- ja vaatimustenmukaisuustarkistukset organisaation politiikkojen mukaisesti
+- Suunnittelemaan kustannusarvio- ja budjettivalidointityönkulut
+- Luomaan räätälöityjä esivalmistelujen automaatioita CI/CD-putkistoille
 
 ## Oppimistulokset
 
 Oppaan suorittamisen jälkeen pystyt:
-- Luomaan ja suorittamaan kattavia ennakkotarkistusskriptejä
-- Suunnittelemaan automatisoituja tarkistusprosesseja eri käyttöönoton skenaarioille
-- Toteuttamaan ympäristökohtaisia tarkistusmenettelyjä ja -politiikoita
-- Konfiguroimaan ennakoivaa seurantaa ja hälytyksiä käyttöönoton valmiudelle
-- Ratkaisemaan ennakkotarkistusongelmia ja toteuttamaan korjaavia toimenpiteitä
-- Integroimaan ennakkotarkistukset DevOps-putkiin ja automaatioihin
+- Luomaan ja suorittamaan kattavia validointiskriptejä ennen käyttöönottoa
+- Suunnittelemaan automatisoituja tarkistustyönkulkuja eri käyttöönoton skenaarioille
+- Toteuttamaan ympäristökohtaisia validointimenettelyjä ja -politiikkoja
+- Konfiguroimaan ennakoivaa seurantaa ja hälytyksiä käyttöönoton valmiuden varmistamiseksi
+- Ratkaisemaan validointivaiheen ongelmia ja toteuttamaan korjaavia toimenpiteitä
+- Integroimaan esivalmistelut DevOps-putkistoihin ja automaatiotyönkulkuihin
 
 ## Sisällysluettelo
 
 - [Yleiskatsaus](../../../../docs/pre-deployment)
-- [Automatisoitu ennakkotarkistusskripti](../../../../docs/pre-deployment)
-- [Manuaalinen tarkistuslista](../../../../docs/pre-deployment)
-- [Ympäristön tarkistus](../../../../docs/pre-deployment)
-- [Resurssien tarkistus](../../../../docs/pre-deployment)
+- [Automatisoitu esivalmisteluskripti](../../../../docs/pre-deployment)
+- [Manuaalinen validointilista](../../../../docs/pre-deployment)
+- [Ympäristön validointi](../../../../docs/pre-deployment)
+- [Resurssien validointi](../../../../docs/pre-deployment)
 - [Turvallisuus- ja vaatimustenmukaisuustarkistukset](../../../../docs/pre-deployment)
 - [Suorituskyky- ja kapasiteettisuunnittelu](../../../../docs/pre-deployment)
-- [Yleisimpien ongelmien vianmääritys](../../../../docs/pre-deployment)
+- [Yleisten ongelmien vianetsintä](../../../../docs/pre-deployment)
 
 ---
 
 ## Yleiskatsaus
 
-Ennakkotarkistukset ovat olennaisia validointeja, jotka suoritetaan ennen käyttöönottoa varmistaakseen:
+Esivalmistelut ovat olennaisia validointeja, jotka suoritetaan ennen käyttöönottoa varmistaen:
 
-- **Resurssien saatavuuden** ja kiintiöt kohdealueilla
-- **Autentikoinnin ja käyttöoikeuksien** oikean konfiguroinnin
-- **Mallien validiteetin** ja parametrien oikeellisuuden
-- **Verkkoyhteyden** ja riippuvuuksien toimivuuden
-- **Turvallisuusvaatimusten noudattamisen** organisaation politiikoille
-- **Kustannusarvion** pysymisen budjettirajoissa
+- **Resurssien saatavuus** ja kiintiöt kohdealueilla
+- **Autentikointi ja käyttöoikeudet** ovat oikein konfiguroitu
+- **Mallien validiteetti** ja parametrien oikeellisuus
+- **Verkkoyhteydet** ja riippuvuudet
+- **Turvallisuusvaatimusten noudattaminen** organisaation politiikkojen mukaisesti
+- **Kustannusarvio** budjettirajoitusten puitteissa
 
-### Milloin suorittaa ennakkotarkistukset
+### Milloin suorittaa esivalmistelut
 
 - **Ennen ensimmäistä käyttöönottoa** uuteen ympäristöön
 - **Merkittävien mallimuutosten jälkeen**
 - **Ennen tuotantokäyttöönottoa**
 - **Azure-alueiden vaihdon yhteydessä**
-- **Osana CI/CD-putkia**
+- **Osana CI/CD-putkistoja**
 
 ---
 
-## Automatisoitu ennakkotarkistusskripti
+## Automatisoitu esivalmisteluskripti
 
-### PowerShell-ennakkotarkistusskripti
+### PowerShell-esivalmistelutarkistin
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash-ennakkotarkistusskripti
+### Bash-esivalmistelutarkistin
 
 ```bash
 #!/bin/bash
@@ -783,17 +790,17 @@ main "$@"
 
 ---
 
-## Manuaalinen tarkistuslista
+## Manuaalinen validointilista
 
 ### Käyttöönoton tarkistuslista
 
-Tulosta tämä tarkistuslista ja varmista jokainen kohta ennen käyttöönottoa:
+Tulosta tämä lista ja varmista jokainen kohta ennen käyttöönottoa:
 
 #### ✅ Ympäristön asennus
 - [ ] AZD CLI asennettu ja päivitetty uusimpaan versioon
 - [ ] Azure CLI asennettu ja autentikoitu
 - [ ] Oikea Azure-tilaus valittu
-- [ ] Ympäristön nimi on ainutlaatuinen ja noudattaa nimeämiskäytäntöjä
+- [ ] Ympäristön nimi on uniikki ja noudattaa nimeämiskäytäntöjä
 - [ ] Kohderesurssiryhmä tunnistettu tai voidaan luoda
 
 #### ✅ Autentikointi ja käyttöoikeudet
@@ -802,7 +809,7 @@ Tulosta tämä tarkistuslista ja varmista jokainen kohta ennen käyttöönottoa:
 - [ ] Palveluperiaate konfiguroitu CI/CD:lle (jos sovellettavissa)
 - [ ] Ei vanhentuneita sertifikaatteja tai tunnuksia
 
-#### ✅ Mallin validointi
+#### ✅ Mallien validointi
 - [ ] `azure.yaml` olemassa ja validi YAML
 - [ ] Kaikilla azure.yaml:ssa määritellyillä palveluilla on vastaava lähdekoodi
 - [ ] Bicep-mallit `infra/`-hakemistossa ovat olemassa
@@ -815,14 +822,14 @@ Tulosta tämä tarkistuslista ja varmista jokainen kohta ennen käyttöönottoa:
 - [ ] Vaaditut Azure-palvelut saatavilla kohdealueella
 - [ ] Riittävät kiintiöt suunnitelluille resursseille
 - [ ] Resurssien nimeämiskonfliktit tarkistettu
-- [ ] Riippuvuudet resursseista ymmärretty
+- [ ] Riippuvuudet resurssien välillä ymmärretty
 
 #### ✅ Verkko ja turvallisuus
-- [ ] Verkkoyhteys Azure-päätepisteisiin vahvistettu
+- [ ] Verkkoyhteydet Azure-päätepisteisiin tarkistettu
 - [ ] Palomuuri/proxy-asetukset konfiguroitu tarvittaessa
 - [ ] Key Vault konfiguroitu salaisuuksien hallintaan
 - [ ] Hallitut identiteetit käytössä, jos mahdollista
-- [ ] HTTPS-pakotus käytössä verkkosovelluksille
+- [ ] HTTPS-pakotus aktivoitu verkkosovelluksille
 
 #### ✅ Kustannusten hallinta
 - [ ] Kustannusarviot laskettu Azure Pricing Calculatorilla
@@ -837,16 +844,16 @@ Tulosta tämä tarkistuslista ja varmista jokainen kohta ennen käyttöönottoa:
 - [ ] Terveystarkistuspäätepisteet toteutettu sovelluksissa
 
 #### ✅ Varmuuskopiointi ja palautus
-- [ ] Varmuuskopiointistrategia määritelty datalähteille
+- [ ] Varmuuskopiosuunnitelma määritelty datalähteille
 - [ ] Palautusaikatavoitteet (RTO) dokumentoitu
 - [ ] Palautuspisteen tavoitteet (RPO) dokumentoitu
 - [ ] Katastrofipalautussuunnitelma olemassa tuotantoa varten
 
 ---
 
-## Ympäristön tarkistus
+## Ympäristön validointi
 
-### Kehitysympäristön tarkistus
+### Kehitysympäristön validointi
 
 ```bash
 #!/bin/bash
@@ -878,7 +885,7 @@ validate_dev_environment() {
 }
 ```
 
-### Tuotantoympäristön tarkistus
+### Tuotantoympäristön validointi
 
 ```bash
 #!/bin/bash
@@ -919,9 +926,9 @@ validate_prod_environment() {
 
 ---
 
-## Resurssien tarkistus
+## Resurssien validointi
 
-### Kiintiötarkistusskripti
+### Kiintiöiden validointiskripti
 
 ```python
 #!/usr/bin/env python3
@@ -1046,7 +1053,7 @@ if __name__ == "__main__":
 
 ## Turvallisuus- ja vaatimustenmukaisuustarkistukset
 
-### Turvallisuustarkistusskripti
+### Turvallisuuden validointiskripti
 
 ```bash
 #!/bin/bash
@@ -1278,10 +1285,10 @@ steps:
 
 ## Parhaiden käytäntöjen yhteenveto
 
-### ✅ Ennakkotarkistusten parhaat käytännöt
+### ✅ Esivalmistelujen parhaat käytännöt
 
 1. **Automatisoi mahdollisuuksien mukaan**
-   - Integroi tarkistukset CI/CD-putkiin
+   - Integroi tarkistukset CI/CD-putkistoihin
    - Käytä skriptejä toistettaviin validointeihin
    - Tallenna tulokset auditointia varten
 
@@ -1306,26 +1313,26 @@ steps:
    - Tarjoa selkeät ohjeet ongelman ratkaisemiseksi
    - Mahdollista tarkistusten helppo uudelleensuoritus
 
-### Yleiset ennakkotarkistusten sudenkuopat
+### Yleiset esivalmistelujen sudenkuopat
 
-1. **Tarkistusten ohittaminen** "nopeiden" käyttöönottojen vuoksi
+1. **Validoinnin ohittaminen** "nopeiden" käyttöönottojen vuoksi
 2. **Riittämätön käyttöoikeuksien tarkistus** ennen käyttöönottoa
-3. **Kiintiörajojen huomiotta jättäminen** ennen epäonnistumista
-4. **Mallien validoinnin laiminlyönti** CI/CD-putkissa
+3. **Kiintiöiden rajoitusten huomiotta jättäminen** ennen epäonnistumista
+4. **Mallien validoinnin laiminlyönti** CI/CD-putkistoissa
 5. **Turvallisuustarkistusten puuttuminen** tuotantoympäristöissä
-6. **Riittämätön kustannusarviointi** johtaa budjettiyllätyksiin
+6. **Riittämätön kustannusarvio** johtaa budjettiyllätyksiin
 
 ---
 
-**Vinkki**: Suorita ennakkotarkistukset erillisenä työnä CI/CD-putkessasi ennen varsinaista käyttöönottoa. Tämä auttaa havaitsemaan ongelmat ajoissa ja tarjoaa nopeampaa palautetta kehittäjille.
+**Vinkki**: Suorita esivalmistelut erillisenä työnä CI/CD-putkistossa ennen varsinaista käyttöönottoa. Tämä auttaa havaitsemaan ongelmat ajoissa ja tarjoaa nopeampaa palautetta kehittäjille.
 
 ---
 
 **Navigointi**
-- **Edellinen osio**: [SKU-valinta](sku-selection.md)
-- **Seuraava osio**: [Pikaopas](../../resources/cheat-sheet.md)
+- **Edellinen oppitunti**: [SKU-valinta](sku-selection.md)
+- **Seuraava oppitunti**: [Pikaopas](../../resources/cheat-sheet.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

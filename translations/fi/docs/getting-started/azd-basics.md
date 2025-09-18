@@ -1,50 +1,57 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T21:13:09+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T06:34:58+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "fi"
 }
 -->
-# AZD Perusteet - Ymmärrä Azure Developer CLI
+# AZD Perusteet - Azure Developer CLI:n Ymmärtäminen
 
-**Edellinen:** [Asennus ja käyttöönotto](installation.md) | **Seuraava:** [Konfigurointi](configuration.md)
+# AZD Perusteet - Keskeiset Käsitteet ja Perusasiat
+
+**Luvun Navigointi:**
+- **📚 Kurssin Etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen Luku**: Luku 1 - Perusta & Nopea Aloitus
+- **⬅️ Edellinen**: [Kurssin Yleiskatsaus](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Seuraava**: [Asennus & Käyttöönotto](installation.md)
+- **🚀 Seuraava Luku**: [Luku 2: AI-Ensisijainen Kehitys](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Johdanto
 
-Tässä osiossa tutustut Azure Developer CLI:hin (azd), tehokkaaseen komentorivityökaluun, joka nopeuttaa siirtymistä paikallisesta kehityksestä Azure-järjestelmään. Opit peruskäsitteet, keskeiset ominaisuudet ja ymmärrät, kuinka azd yksinkertaistaa pilvipohjaisten sovellusten käyttöönottoa.
+Tässä osiossa tutustut Azure Developer CLI:hin (azd), tehokkaaseen komentorivityökaluun, joka nopeuttaa siirtymistä paikallisesta kehityksestä Azure-järjestelmään. Opit keskeiset käsitteet, tärkeimmät ominaisuudet ja ymmärrät, kuinka azd yksinkertaistaa pilvinatiivien sovellusten käyttöönottoa.
 
 ## Oppimistavoitteet
 
 Tämän osion lopussa:
 - Ymmärrät, mitä Azure Developer CLI on ja sen pääasiallisen tarkoituksen
 - Opit keskeiset käsitteet, kuten templatet, ympäristöt ja palvelut
-- Tutustut tärkeisiin ominaisuuksiin, kuten template-pohjaiseen kehitykseen ja Infrastructure as Code -lähestymistapaan
+- Tutustut tärkeimpiin ominaisuuksiin, kuten template-pohjaiseen kehitykseen ja Infrastructure as Codeen
 - Ymmärrät azd-projektin rakenteen ja työnkulun
 - Olet valmis asentamaan ja konfiguroimaan azd:n kehitysympäristöäsi varten
 
 ## Oppimistulokset
 
-Osion suorittamisen jälkeen osaat:
-- Selittää azd:n roolin modernissa pilvikehityksen työnkulussa
-- Tunnistaa azd-projektin rakenteen osat
-- Kuvailla, kuinka templatet, ympäristöt ja palvelut toimivat yhdessä
-- Ymmärtää Infrastructure as Code -lähestymistavan hyödyt azd:n avulla
-- Tunnistaa eri azd-komennot ja niiden tarkoitukset
+Osion suorittamisen jälkeen pystyt:
+- Selittämään azd:n roolin modernissa pilvikehityksen työnkulussa
+- Tunnistamaan azd-projektin rakenteen osat
+- Kuvailemaan, kuinka templatet, ympäristöt ja palvelut toimivat yhdessä
+- Ymmärtämään Infrastructure as Code -lähestymistavan hyödyt azd:n avulla
+- Tunnistamaan eri azd-komennot ja niiden tarkoitukset
 
 ## Mikä on Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) on komentorivityökalu, joka on suunniteltu nopeuttamaan siirtymistä paikallisesta kehityksestä Azure-järjestelmään. Se yksinkertaistaa pilvipohjaisten sovellusten rakentamista, käyttöönottoa ja hallintaa Azure-alustalla.
+Azure Developer CLI (azd) on komentorivityökalu, joka on suunniteltu nopeuttamaan siirtymistä paikallisesta kehityksestä Azure-järjestelmään. Se yksinkertaistaa pilvinatiivien sovellusten rakentamista, käyttöönottoa ja hallintaa Azure-alustalla.
 
-## Keskeiset käsitteet
+## Keskeiset Käsitteet
 
 ### Templatet
 Templatet ovat azd:n perusta. Ne sisältävät:
 - **Sovelluskoodi** - Lähdekoodisi ja riippuvuudet
 - **Infrastruktuurin määritelmät** - Azure-resurssit määriteltynä Bicepillä tai Terraformilla
-- **Konfigurointitiedostot** - Asetukset ja ympäristömuuttujat
-- **Käyttöönotto-skriptit** - Automatisoidut käyttöönoton työnkulut
+- **Konfiguraatiotiedostot** - Asetukset ja ympäristömuuttujat
+- **Käyttöönottoskriptit** - Automatisoidut käyttöönoton työnkulut
 
 ### Ympäristöt
 Ympäristöt edustavat eri käyttöönoton kohteita:
@@ -52,21 +59,21 @@ Ympäristöt edustavat eri käyttöönoton kohteita:
 - **Staging** - Esituotantoympäristö
 - **Tuotanto** - Käytössä oleva tuotantoympäristö
 
-Jokaisella ympäristöllä on omat:
-- Azure-resurssiryhmät
-- Konfigurointiasetukset
-- Käyttöönoton tila
+Jokainen ympäristö ylläpitää omia:
+- Azure-resurssiryhmiä
+- Konfiguraatioasetuksia
+- Käyttöönottotilaa
 
 ### Palvelut
 Palvelut ovat sovelluksesi rakennuspalikoita:
-- **Frontend** - Verkkosovellukset, yksisivuiset sovellukset
+- **Frontend** - Verkkosovellukset, SPAt
 - **Backend** - API:t, mikropalvelut
 - **Tietokanta** - Tietojen tallennusratkaisut
 - **Tallennus** - Tiedosto- ja blob-tallennus
 
-## Keskeiset ominaisuudet
+## Tärkeimmät Ominaisuudet
 
-### 1. Template-pohjainen kehitys
+### 1. Template-Pohjainen Kehitys
 ```bash
 # Browse available templates
 azd template list
@@ -78,9 +85,9 @@ azd init --template <template-name>
 ### 2. Infrastructure as Code
 - **Bicep** - Azuren oma domain-spesifinen kieli
 - **Terraform** - Monipilvi-infrastruktuurityökalu
-- **ARM-templatet** - Azure Resource Manager -templatet
+- **ARM Templatet** - Azure Resource Manager -templatet
 
-### 3. Integroitu työnkulku
+### 3. Integroitu Työnkulku
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
@@ -89,7 +96,7 @@ azd deploy        # Deploy application code or redeploy application code once up
 azd down          # Clean up resources
 ```
 
-### 4. Ympäristön hallinta
+### 4. Ympäristön Hallinta
 ```bash
 # Create and manage environments
 azd env new <environment-name>
@@ -97,7 +104,7 @@ azd env select <environment-name>
 azd env list
 ```
 
-## 📁 Projektin rakenne
+## 📁 Projektin Rakenne
 
 Tyypillinen azd-projektin rakenne:
 ```
@@ -119,10 +126,10 @@ my-app/
 └── README.md
 ```
 
-## 🔧 Konfigurointitiedostot
+## 🔧 Konfiguraatiotiedostot
 
 ### azure.yaml
-Pääprojektin konfigurointitiedosto:
+Pääprojektin konfiguraatiotiedosto:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -145,7 +152,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Ympäristökohtainen konfigurointi:
+Ympäristökohtainen konfiguraatio:
 ```json
 {
   "version": 1,
@@ -159,9 +166,9 @@ Ympäristökohtainen konfigurointi:
 }
 ```
 
-## 🎪 Yleiset työnkulut
+## 🎪 Yleiset Työnkulut
 
-### Uuden projektin aloittaminen
+### Uuden Projektin Aloittaminen
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -190,13 +197,12 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## Ymmärrä `azd down --force --purge`
-
+## `azd down --force --purge` -komennon Ymmärtäminen
 `azd down --force --purge` -komento on tehokas tapa purkaa kokonaan azd-ympäristösi ja kaikki siihen liittyvät resurssit. Tässä on erittely, mitä kukin lippu tekee:
 ```
 --force
 ```
-- Ohittaa vahvistuspyynnöt.
+- Ohittaa vahvistuskehotteet.
 - Kätevä automaatiossa tai skriptauksessa, jossa manuaalinen syöttö ei ole mahdollista.
 - Varmistaa, että purku etenee keskeytyksettä, vaikka CLI havaitsee epäjohdonmukaisuuksia.
 
@@ -206,15 +212,15 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 Poistaa **kaiken siihen liittyvän metadatan**, mukaan lukien:
 Ympäristön tila
 Paikallinen `.azure`-kansio
-Välimuistiin tallennetut käyttöönoton tiedot
-Estää azd:tä "muistamasta" aiempia käyttöönottoja, mikä voi aiheuttaa ongelmia, kuten ristiriitaisia resurssiryhmiä tai vanhentuneita rekisteriviittauksia.
+Välimuistissa olevat käyttöönoton tiedot
+Estää azd:tä "muistamasta" aiempia käyttöönottoja, mikä voi aiheuttaa ongelmia, kuten epäyhteensopivia resurssiryhmiä tai vanhentuneita rekisteriviittauksia.
 
 ### Miksi käyttää molempia?
 Kun `azd up` -komento ei toimi odotetusti johtuen jäljellä olevasta tilasta tai osittaisista käyttöönotosta, tämä yhdistelmä varmistaa **puhtaan aloituksen**.
 
-Se on erityisen hyödyllinen manuaalisten resurssien poistamisen jälkeen Azure-portaalissa tai kun vaihdat templatet, ympäristöt tai resurssiryhmien nimeämiskäytännöt.
+Se on erityisen hyödyllinen manuaalisten resurssien poistamisen jälkeen Azure-portaalissa tai vaihdettaessa templatet, ympäristöt tai resurssiryhmien nimeämiskäytännöt.
 
-### Useiden ympäristöjen hallinta
+### Useiden Ympäristöjen Hallinta
 ```bash
 # Create staging environment
 azd env new staging
@@ -251,9 +257,9 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Parhaat käytännöt
+## Parhaat Käytännöt
 
-### 1. Käytä merkityksellisiä nimiä
+### 1. Käytä Merkityksellisiä Nimiä
 ```bash
 # Good
 azd env new production-east
@@ -264,22 +270,22 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Hyödynnä templatet
-- Aloita olemassa olevista templateista
+### 2. Hyödynnä Templatet
+- Aloita olemassa olevilla templateilla
 - Mukauta tarpeidesi mukaan
 - Luo organisaatiollesi uudelleenkäytettäviä templateja
 
-### 3. Ympäristöjen eristäminen
+### 3. Ympäristöjen Eristäminen
 - Käytä erillisiä ympäristöjä kehitykseen/stagingiin/tuotantoon
-- Älä koskaan ota tuotantoa käyttöön suoraan paikalliselta koneelta
+- Älä koskaan ota käyttöön suoraan tuotantoon paikalliselta koneelta
 - Käytä CI/CD-putkia tuotantokäyttöönottoihin
 
-### 4. Konfiguroinnin hallinta
+### 4. Konfiguraation Hallinta
 - Käytä ympäristömuuttujia arkaluontoisille tiedoille
-- Pidä konfigurointi versionhallinnassa
+- Pidä konfiguraatio versionhallinnassa
 - Dokumentoi ympäristökohtaiset asetukset
 
-## Oppimisen eteneminen
+## Oppimisen Eteneminen
 
 ### Aloittelija (Viikot 1-2)
 1. Asenna azd ja autentikoi
@@ -288,7 +294,7 @@ azd init --template template1
 4. Opettele peruskomennot (up, down, deploy)
 
 ### Keskitaso (Viikot 3-4)
-1. Mukauta templatet
+1. Mukauta templateja
 2. Hallitse useita ympäristöjä
 3. Ymmärrä infrastruktuurikoodi
 4. Määritä CI/CD-putket
@@ -297,24 +303,32 @@ azd init --template template1
 1. Luo omia templateja
 2. Kehittyneet infrastruktuurimallit
 3. Monialueiset käyttöönotot
-4. Yritystason konfiguroinnit
+4. Yritystason konfiguraatiot
 
-## Seuraavat askeleet
+## Seuraavat Askeleet
 
-- [Asennus ja käyttöönotto](installation.md) - Asenna ja konfiguroi azd
-- [Ensimmäinen projekti](first-project.md) - Käytännön opas
-- [Konfigurointiopas](configuration.md) - Edistyneet konfigurointivaihtoehdot
+**📖 Jatka Luvun 1 Oppimista:**
+- [Asennus & Käyttöönotto](installation.md) - Asenna ja konfiguroi azd
+- [Ensimmäinen Projektisi](first-project.md) - Käytännön opetusohjelma
+- [Konfiguraatio-Opas](configuration.md) - Edistyneet konfiguraatiovaihtoehdot
+
+**🎯 Valmis Seuraavaan Lukuun?**
+- [Luku 2: AI-Ensisijainen Kehitys](../ai-foundry/azure-ai-foundry-integration.md) - Aloita AI-sovellusten rakentaminen
 
 ## Lisäresurssit
 
-- [Azure Developer CLI -yleiskatsaus](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Template-galleria](https://azure.github.io/awesome-azd/)
-- [Yhteisön esimerkit](https://github.com/Azure-Samples)
+- [Azure Developer CLI Yleiskatsaus](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Template-Galleria](https://azure.github.io/awesome-azd/)
+- [Yhteisön Näytteet](https://github.com/Azure-Samples)
 
 ---
 
-**Edellinen:** [Asennus ja käyttöönotto](installation.md) | **Seuraava:** [Konfigurointi](configuration.md)
-- **Seuraava osio**: [Asennus ja käyttöönotto](installation.md)
+**Luvun Navigointi:**
+- **📚 Kurssin Etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen Luku**: Luku 1 - Perusta & Nopea Aloitus  
+- **⬅️ Edellinen**: [Kurssin Yleiskatsaus](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Seuraava**: [Asennus & Käyttöönotto](installation.md)
+- **🚀 Seuraava Luku**: [Luku 2: AI-Ensisijainen Kehitys](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

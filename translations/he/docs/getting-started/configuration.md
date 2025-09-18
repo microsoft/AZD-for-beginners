@@ -1,26 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:18:53+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T07:10:12+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "he"
 }
 -->
 # מדריך תצורה
 
-**קודם:** [AZD Basics](azd-basics.md) | **הבא:** [First Project](first-project.md)
+**ניווט בין פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 3 - תצורה ואימות
+- **⬅️ קודם**: [הפרויקט הראשון שלך](first-project.md)
+- **➡️ הבא**: [מדריך פריסה](../deployment/deployment-guide.md)
+- **🚀 פרק הבא**: [פרק 4: תשתית כקוד](../deployment/deployment-guide.md)
 
 ## מבוא
 
-מדריך מקיף זה מכסה את כל ההיבטים של הגדרת Azure Developer CLI לעבודה מיטבית עם תהליכי פיתוח ופריסה. תלמדו על היררכיית התצורה, ניהול סביבות, שיטות אימות, ודפוסי תצורה מתקדמים שמאפשרים פריסות יעילות ובטוחות ב-Azure.
+מדריך מקיף זה מכסה את כל ההיבטים של הגדרת Azure Developer CLI לעבודה מיטבית עם תהליכי פיתוח ופריסה. תלמדו על היררכיית התצורה, ניהול סביבות, שיטות אימות, ודפוסי תצורה מתקדמים המאפשרים פריסות יעילות ובטוחות ב-Azure.
 
 ## מטרות למידה
 
 בסיום השיעור הזה, תוכלו:
 - לשלוט בהיררכיית התצורה של azd ולהבין כיצד ההגדרות מקבלות עדיפות
 - להגדיר הגדרות גלובליות והגדרות ספציפיות לפרויקט בצורה יעילה
-- לנהל מספר סביבות עם תצורות שונות
+- לנהל סביבות מרובות עם תצורות שונות
 - ליישם דפוסי אימות והרשאה מאובטחים
 - להבין דפוסי תצורה מתקדמים עבור תרחישים מורכבים
 
@@ -28,7 +33,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 לאחר השלמת השיעור, תוכלו:
 - להגדיר את azd לעבודה מיטבית עם תהליכי פיתוח
-- להקים ולנהל מספר סביבות פריסה
+- להקים ולנהל סביבות פריסה מרובות
 - ליישם שיטות ניהול תצורה מאובטחות
 - לפתור בעיות הקשורות לתצורה
 - להתאים את התנהגות azd לדרישות ארגוניות ספציפיות
@@ -41,12 +46,12 @@ azd משתמש במערכת תצורה היררכית:
 1. **דגלי שורת פקודה** (עדיפות גבוהה ביותר)
 2. **משתני סביבה**
 3. **תצורת פרויקט מקומית** (`.azd/config.json`)
-4. **תצורת משתמש גלובלית** (`~/.azd/config.json`)
+4. **תצורה גלובלית של משתמש** (`~/.azd/config.json`)
 5. **ערכי ברירת מחדל** (עדיפות נמוכה ביותר)
 
 ## תצורה גלובלית
 
-### הגדרת ברירות מחדל גלובליות
+### הגדרת ערכי ברירת מחדל גלובליים
 ```bash
 # Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -256,7 +261,7 @@ azd env unset DEBUG
 ```
 
 ### תבניות סביבה
-צרו `.azure/env.template` עבור הגדרת סביבה עקבית:
+צרו `.azure/env.template` להגדרת סביבה עקבית:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -286,8 +291,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### אימות Service Principal
-עבור צינורות CI/CD:
+### אימות באמצעות Service Principal
+עבור תהליכי CI/CD:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -300,7 +305,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### זהות מנוהלת
-עבור סביבות שמתארחות ב-Azure:
+עבור סביבות המתארחות ב-Azure:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -310,7 +315,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ תצורת תשתית
 
 ### פרמטרים של Bicep
-הגדירו פרמטרי תשתית ב-`infra/main.parameters.json`:
+הגדירו פרמטרים של תשתית ב-`infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -384,7 +389,7 @@ services:
 
 ## 🔧 תצורה מתקדמת
 
-### מתן שמות מותאמים אישית למשאבים
+### התאמה אישית של שמות משאבים
 ```bash
 # Set naming conventions
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -511,7 +516,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. שיקולי בקרת גרסאות
+### 3. שיקולים לניהול גרסאות
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (contain resource IDs)
@@ -537,9 +542,9 @@ database:
 
 ## צעדים הבאים
 
-- [Your First Project](first-project.md) - יישום תצורה בפועל
-- [Deployment Guide](../deployment/deployment-guide.md) - שימוש בתצורה לפריסה
-- [Provisioning Resources](../deployment/provisioning.md) - תצורות מוכנות לייצור
+- [הפרויקט הראשון שלך](first-project.md) - יישום תצורה בפועל
+- [מדריך פריסה](../deployment/deployment-guide.md) - שימוש בתצורה לפריסה
+- [הקצאת משאבים](../deployment/provisioning.md) - תצורות מוכנות לייצור
 
 ## מקורות
 
@@ -549,10 +554,14 @@ database:
 
 ---
 
-**קודם:** [AZD Basics](azd-basics.md) | **הבא:** [First Project](first-project.md)
-- **השיעור הבא**: [Your First Project](first-project.md)
+**ניווט בין פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 3 - תצורה ואימות
+- **⬅️ קודם**: [הפרויקט הראשון שלך](first-project.md)
+- **➡️ פרק הבא**: [פרק 4: תשתית כקוד](../deployment/deployment-guide.md)
+- **שיעור הבא**: [הפרויקט הראשון שלך](first-project.md)
 
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. אנו לא נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור הסמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

@@ -1,63 +1,70 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T21:55:09+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T06:18:56+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "no"
 }
 -->
-# Forhåndssjekk - Validering av klarhet for utrulling
+# Sjekkliste før AZD-utrullinger
+
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 6 - Validering og Planlegging før Utrulling
+- **⬅️ Forrige**: [Valg av SKU](sku-selection.md)
+- **➡️ Neste Kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/common-issues.md)
+- **🔧 Relatert**: [Kapittel 4: Utrullingsveiledning](../deployment/deployment-guide.md)
 
 ## Introduksjon
 
-Denne omfattende veiledningen gir skript og prosedyrer for validering før utrulling, for å sikre vellykkede utrullinger med Azure Developer CLI før de starter. Lær å implementere automatiske sjekker for autentisering, ressurs tilgjengelighet, kvoter, sikkerhetskrav og ytelsesbehov for å forhindre feil og optimalisere suksessraten for utrullinger.
+Denne omfattende veiledningen gir valideringsskript og prosedyrer før utrulling for å sikre vellykkede utrullinger med Azure Developer CLI. Lær å implementere automatiserte kontroller for autentisering, ressurs tilgjengelighet, kvoter, sikkerhetskrav og ytelsesbehov for å forhindre feil og optimalisere suksessraten for utrullinger.
 
 ## Læringsmål
 
 Ved å fullføre denne veiledningen vil du:
 - Mestre automatiserte valideringsteknikker og skript før utrulling
-- Forstå omfattende strategier for sjekking av autentisering, tillatelser og kvoter
-- Implementere prosedyrer for validering av ressurs tilgjengelighet og kapasitet
-- Konfigurere sikkerhets- og samsvarssjekker for organisasjonens retningslinjer
-- Designe kostnadsestimering og valideringsarbeidsflyter for budsjett
-- Lage tilpasset automatisering for forhåndssjekk i CI/CD-pipelines
+- Forstå omfattende kontrollstrategier for autentisering, tillatelser og kvoter
+- Implementere valideringsprosedyrer for ressurs tilgjengelighet og kapasitet
+- Konfigurere sikkerhets- og samsvarskontroller for organisasjonens retningslinjer
+- Utforme kostnadsestimering og budsjettvalideringsarbeidsflyter
+- Lage tilpasset automatisering for sjekklister før utrulling i CI/CD-pipelines
 
 ## Læringsutbytte
 
 Etter fullføring vil du kunne:
 - Lage og utføre omfattende valideringsskript før utrulling
-- Designe automatiserte sjekker for ulike utrullingsscenarier
+- Utforme automatiserte kontrollarbeidsflyter for ulike utrullingsscenarier
 - Implementere miljøspesifikke valideringsprosedyrer og retningslinjer
-- Konfigurere proaktiv overvåking og varsling for utrullingsklarhet
+- Konfigurere proaktiv overvåking og varsling for utrullingsberedskap
 - Feilsøke problemer før utrulling og implementere korrigerende tiltak
-- Integrere forhåndssjekker i DevOps-pipelines og automatiseringsarbeidsflyter
+- Integrere sjekklister før utrulling i DevOps-pipelines og automatiseringsarbeidsflyter
 
 ## Innholdsfortegnelse
 
 - [Oversikt](../../../../docs/pre-deployment)
-- [Automatisert forhåndssjekk-skript](../../../../docs/pre-deployment)
-- [Manuell valideringssjekkliste](../../../../docs/pre-deployment)
+- [Automatisert Sjekkliste før Utrulling](../../../../docs/pre-deployment)
+- [Manuell Valideringssjekkliste](../../../../docs/pre-deployment)
 - [Miljøvalidering](../../../../docs/pre-deployment)
 - [Ressursvalidering](../../../../docs/pre-deployment)
-- [Sikkerhets- og samsvarssjekker](../../../../docs/pre-deployment)
-- [Ytelse og kapasitetsplanlegging](../../../../docs/pre-deployment)
-- [Feilsøking av vanlige problemer](../../../../docs/pre-deployment)
+- [Sikkerhets- og Samsvarskontroller](../../../../docs/pre-deployment)
+- [Ytelse og Kapasitetsplanlegging](../../../../docs/pre-deployment)
+- [Feilsøking av Vanlige Problemer](../../../../docs/pre-deployment)
 
 ---
 
 ## Oversikt
 
-Forhåndssjekker er essensielle valideringer som utføres før utrulling for å sikre:
+Sjekklister før utrulling er essensielle valideringer som utføres før utrulling for å sikre:
 
-- **Ressurs tilgjengelighet** og kvoter i målregioner
+- **Ressurs tilgjengelighet** og kvoter i målområder
 - **Autentisering og tillatelser** er riktig konfigurert
 - **Malens gyldighet** og korrekthet av parametere
 - **Nettverksforbindelse** og avhengigheter
 - **Sikkerhetssamsvar** med organisasjonens retningslinjer
 - **Kostnadsestimering** innenfor budsjettbegrensninger
 
-### Når bør forhåndssjekker utføres?
+### Når bør sjekklister før utrulling kjøres?
 
 - **Før første utrulling** til et nytt miljø
 - **Etter betydelige endringer i maler**
@@ -67,9 +74,9 @@ Forhåndssjekker er essensielle valideringer som utføres før utrulling for å 
 
 ---
 
-## Automatisert forhåndssjekk-skript
+## Automatisert Sjekkliste før Utrulling
 
-### PowerShell Forhåndssjekk
+### PowerShell-sjekker før utrulling
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Forhåndssjekk
+### Bash-sjekker før utrulling
 
 ```bash
 #!/bin/bash
@@ -783,7 +790,7 @@ main "$@"
 
 ---
 
-## Manuell valideringssjekkliste
+## Manuell Valideringssjekkliste
 
 ### Sjekkliste før utrulling
 
@@ -796,10 +803,10 @@ Skriv ut denne sjekklisten og verifiser hvert punkt før utrulling:
 - [ ] Miljønavn er unikt og følger navnekonvensjoner
 - [ ] Målressursgruppe identifisert eller kan opprettes
 
-#### ✅ Autentisering og tillatelser
+#### ✅ Autentisering og Tillatelser
 - [ ] Vellykket autentisering med `azd auth login`
 - [ ] Bruker har Contributor-rolle på målabonnement/ressursgruppe
-- [ ] Service principal konfigurert for CI/CD (hvis aktuelt)
+- [ ] Tjenesteprinsipp konfigurert for CI/CD (hvis aktuelt)
 - [ ] Ingen utløpte sertifikater eller legitimasjon
 
 #### ✅ Malvalidering
@@ -812,17 +819,17 @@ Skriv ut denne sjekklisten og verifiser hvert punkt før utrulling:
 
 #### ✅ Ressursplanlegging
 - [ ] Mål Azure-region valgt og validert
-- [ ] Nødvendige Azure-tjenester tilgjengelige i målregion
+- [ ] Nødvendige Azure-tjenester tilgjengelige i målregionen
 - [ ] Tilstrekkelige kvoter tilgjengelige for planlagte ressurser
-- [ ] Navnekonflikter for ressurser sjekket
+- [ ] Konflikter i ressursnavn sjekket
 - [ ] Avhengigheter mellom ressurser forstått
 
-#### ✅ Nettverk og sikkerhet
+#### ✅ Nettverk og Sikkerhet
 - [ ] Nettverksforbindelse til Azure-endepunkter verifisert
 - [ ] Brannmur/proxy-innstillinger konfigurert hvis nødvendig
 - [ ] Key Vault konfigurert for hemmelighetsstyring
 - [ ] Administrerte identiteter brukt der det er mulig
-- [ ] HTTPS tvunget for webapplikasjoner
+- [ ] HTTPS-krav aktivert for webapplikasjoner
 
 #### ✅ Kostnadsstyring
 - [ ] Kostnadsestimater beregnet med Azure Pricing Calculator
@@ -830,13 +837,13 @@ Skriv ut denne sjekklisten og verifiser hvert punkt før utrulling:
 - [ ] Passende SKUs valgt for miljøtype
 - [ ] Reservert kapasitet vurdert for produksjonsarbeidsbelastninger
 
-#### ✅ Overvåking og observasjon
+#### ✅ Overvåking og Observasjon
 - [ ] Application Insights konfigurert i maler
 - [ ] Log Analytics-arbeidsområde planlagt
 - [ ] Varslingsregler definert for kritiske metrikker
 - [ ] Helsekontroll-endepunkter implementert i applikasjoner
 
-#### ✅ Backup og gjenoppretting
+#### ✅ Backup og Gjenoppretting
 - [ ] Backup-strategi definert for dataressurser
 - [ ] Gjenopprettingstidsmål (RTO) dokumentert
 - [ ] Gjenopprettingspunktsmål (RPO) dokumentert
@@ -846,7 +853,7 @@ Skriv ut denne sjekklisten og verifiser hvert punkt før utrulling:
 
 ## Miljøvalidering
 
-### Validering av utviklingsmiljø
+### Validering av Utviklingsmiljø
 
 ```bash
 #!/bin/bash
@@ -878,7 +885,7 @@ validate_dev_environment() {
 }
 ```
 
-### Validering av produksjonsmiljø
+### Validering av Produksjonsmiljø
 
 ```bash
 #!/bin/bash
@@ -1044,7 +1051,7 @@ if __name__ == "__main__":
 
 ---
 
-## Sikkerhets- og samsvarssjekker
+## Sikkerhets- og Samsvarskontroller
 
 ### Sikkerhetsvalideringsskript
 
@@ -1276,54 +1283,54 @@ steps:
 
 ---
 
-## Sammendrag av beste praksis
+## Sammendrag av Beste Praksis
 
-### ✅ Beste praksis for forhåndssjekk
+### ✅ Beste Praksis for Sjekklister før Utrulling
 
 1. **Automatiser der det er mulig**
-   - Integrer sjekker i CI/CD-pipelines
+   - Integrer kontroller i CI/CD-pipelines
    - Bruk skript for repeterbare valideringer
    - Lagre resultater for revisjonsspor
 
-2. **Miljøspesifikk validering**
-   - Ulike sjekker for utvikling/staging/produksjon
+2. **Miljøspesifikk Validering**
+   - Ulike kontroller for utvikling/staging/produksjon
    - Passende sikkerhetskrav per miljø
    - Kostnadsoptimalisering for ikke-produksjonsmiljøer
 
-3. **Omfattende dekning**
+3. **Omfattende Dekning**
    - Autentisering og tillatelser
    - Ressurskvoter og tilgjengelighet
    - Malvalidering og syntaks
    - Sikkerhets- og samsvarskrav
 
-4. **Klar rapportering**
+4. **Klar Rapportering**
    - Fargekodede statusindikatorer
    - Detaljerte feilmeldinger med løsningsforslag
    - Sammendragsrapporter for rask vurdering
 
-5. **Feil tidlig**
-   - Stopp utrulling hvis kritiske sjekker feiler
+5. **Stopp Tidlig**
+   - Stopp utrulling hvis kritiske kontroller feiler
    - Gi klar veiledning for løsning
-   - Muliggjør enkel gjenkjøring av sjekker
+   - Muliggjør enkel gjenkjøring av kontroller
 
-### Vanlige fallgruver ved forhåndssjekk
+### Vanlige Fallgruver før Utrulling
 
-1. **Hoppe over validering** for "raske" utrullinger
+1. **Hopper over validering** for "raske" utrullinger
 2. **Utilstrekkelig tillatelsessjekk** før utrulling
-3. **Ignorere kvotegrenser** til utrulling feiler
-4. **Ikke validere maler** i CI/CD-pipelines
+3. **Ignorerer kvotegrenser** til utrulling feiler
+4. **Unnlater å validere maler** i CI/CD-pipelines
 5. **Manglende sikkerhetsvalidering** for produksjonsmiljøer
 6. **Utilstrekkelig kostnadsestimering** som fører til budsjettoverskridelser
 
 ---
 
-**Tips**: Kjør forhåndssjekker som en separat jobb i CI/CD-pipelinen før den faktiske utrullingsjobben. Dette lar deg fange opp problemer tidlig og gir raskere tilbakemelding til utviklere.
+**Tips**: Kjør sjekklister før utrulling som en separat jobb i CI/CD-pipelinen før den faktiske utrullingsjobben. Dette lar deg fange opp problemer tidlig og gir raskere tilbakemelding til utviklere.
 
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [SKU-valg](sku-selection.md)
-- **Neste leksjon**: [Hurtigreferanse](../../resources/cheat-sheet.md)
+- **Forrige Leksjon**: [Valg av SKU](sku-selection.md)
+- **Neste Leksjon**: [Hurtigreferanse](../../resources/cheat-sheet.md)
 
 ---
 

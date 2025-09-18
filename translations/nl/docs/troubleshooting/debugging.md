@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:20:00+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T06:53:59+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "nl"
 }
 -->
-# Debugging Gids - Geavanceerde Technieken voor Loganalyse en Probleemoplossing
+# Debugging Gids voor AZD Implementaties
+
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 7 - Problemen oplossen & Debuggen
+- **⬅️ Vorige**: [Veelvoorkomende Problemen](common-issues.md)
+- **➡️ Volgende**: [AI-Specifieke Probleemoplossing](ai-troubleshooting.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 8: Productie & Enterprise Patronen](../ai-foundry/production-ai-practices.md)
 
 ## Introductie
 
-Deze uitgebreide gids biedt geavanceerde strategieën, tools en technieken voor het debuggen en oplossen van complexe problemen met Azure Developer CLI-implementaties. Leer systematische probleemoplossingsmethodologieën, loganalyse technieken, prestatieprofilering en geavanceerde diagnostische tools om implementatie- en runtimeproblemen efficiënt op te lossen.
+Deze uitgebreide gids biedt geavanceerde strategieën, tools en technieken voor het debuggen van complexe problemen met Azure Developer CLI-implementaties. Leer systematische probleemoplossingsmethodologieën, loganalyse technieken, prestatieprofilering en geavanceerde diagnostische tools om implementatie- en runtimeproblemen efficiënt op te lossen.
 
 ## Leerdoelen
 
@@ -25,17 +32,17 @@ Door deze gids te voltooien, leer je:
 
 ## Leerresultaten
 
-Na voltooiing kun je:
-- De TRIAGE-methodologie toepassen om complexe implementatieproblemen systematisch te debuggen
-- Uitgebreide log- en traceerinformatie configureren en analyseren
-- Azure Monitor, Application Insights en diagnostische tools effectief gebruiken
-- Netwerkconnectiviteit, authenticatie en machtigingsproblemen zelfstandig debuggen
-- Prestatiemonitoring en optimalisatiestrategieën implementeren
-- Aangepaste debugscripts en automatisering maken voor terugkerende problemen
+Na voltooiing ben je in staat om:
+- De TRIAGE-methodologie toe te passen om complexe implementatieproblemen systematisch te debuggen
+- Uitgebreide log- en traceerinformatie te configureren en analyseren
+- Azure Monitor, Application Insights en diagnostische tools effectief te gebruiken
+- Netwerkconnectiviteit, authenticatie en machtigingsproblemen zelfstandig te debuggen
+- Prestatiemonitoring en optimalisatiestrategieën te implementeren
+- Aangepaste debugscripts en automatisering te maken voor terugkerende problemen
 
-## Debugmethodologie
+## Debugging Methodologie
 
-### De TRIAGE-aanpak
+### De TRIAGE Aanpak
 - **T**ijd: Wanneer begon het probleem?
 - **R**eproduceren: Kun je het consistent reproduceren?
 - **I**soleren: Welk onderdeel faalt?
@@ -43,7 +50,7 @@ Na voltooiing kun je:
 - **V**erzamelen: Verzamel alle relevante informatie
 - **E**scaleren: Wanneer moet je extra hulp inschakelen?
 
-## Debugmodus inschakelen
+## Debugmodus Inschakelen
 
 ### Omgevingsvariabelen
 ```bash
@@ -59,7 +66,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Debugconfiguratie
+### Debug Configuratie
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -330,7 +337,7 @@ load_test() {
 
 ## 🔧 Infrastructuur Debugging
 
-### Debugging van Bicep Templates
+### Bicep Template Debugging
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -451,7 +458,7 @@ debug_network_security() {
 }
 ```
 
-## 📱 Applicatie-specifieke Debugging
+## 📱 Applicatie-Specifieke Debugging
 
 ### Debugging van Node.js Applicaties
 ```javascript
@@ -604,7 +611,7 @@ quick_rollback() {
 
 ## 📊 Debugging Dashboards
 
-### Aangepaste Monitoring Dashboard
+### Aangepast Monitoring Dashboard
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -627,7 +634,7 @@ create_debug_queries() {
 }
 ```
 
-### Logaggregatie
+### Log Aggregatie
 ```bash
 # Aggregate logs from multiple sources
 aggregate_logs() {
@@ -651,7 +658,7 @@ aggregate_logs() {
 
 ## 🔗 Geavanceerde Bronnen
 
-### Aangepaste Debugscripts
+### Aangepaste Debug Scripts
 Maak een `scripts/debug/` directory met:
 - `health-check.sh` - Uitgebreide gezondheidscontrole
 - `performance-test.sh` - Geautomatiseerde prestatietests
@@ -687,7 +694,7 @@ hooks:
 ## Volgende Stappen
 
 - [Capaciteitsplanning](../pre-deployment/capacity-planning.md) - Plan resourcevereisten
-- [SKU-selectie](../pre-deployment/sku-selection.md) - Kies geschikte servicetiers
+- [SKU Selectie](../pre-deployment/sku-selection.md) - Kies geschikte servicetiers
 - [Preflight Checks](../pre-deployment/preflight-checks.md) - Validatie vóór implementatie
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Snelle referentiecommando's
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

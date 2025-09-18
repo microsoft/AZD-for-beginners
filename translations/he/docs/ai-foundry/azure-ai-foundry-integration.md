@@ -1,26 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T21:44:55+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T07:08:03+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "he"
 }
 -->
 # אינטגרציה של Azure AI Foundry עם AZD
 
-**קודם:** [פרויקט ראשון](../getting-started/first-project.md) | **הבא:** [פריסת מודל AI](ai-model-deployment.md)
+**ניווט פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס AI
+- **⬅️ פרק קודם**: [פרק 1: הפרויקט הראשון שלך](../getting-started/first-project.md)
+- **➡️ הבא**: [פריסת מודל AI](ai-model-deployment.md)
+- **🚀 פרק הבא**: [פרק 3: תצורה](../getting-started/configuration.md)
 
 ## סקירה כללית
 
-מדריך זה מציג כיצד לשלב את שירותי Azure AI Foundry עם Azure Developer CLI (AZD) כדי לייעל את תהליכי הפריסה של יישומי AI. Azure AI Foundry מספק פלטפורמה מקיפה לבנייה, פריסה וניהול של יישומי AI, בעוד ש-AZD מפשט את תהליך התשתית והפריסה.
+מדריך זה מציג כיצד לשלב את שירותי Azure AI Foundry עם Azure Developer CLI (AZD) כדי לייעל את תהליכי הפריסה של יישומי AI. Azure AI Foundry מספק פלטפורמה מקיפה לבנייה, פריסה וניהול של יישומי AI, בעוד ש-AZD מפשט את תהליכי התשתית והפריסה.
 
 ## מהו Azure AI Foundry?
 
 Azure AI Foundry הוא פלטפורמה מאוחדת של מיקרוסופט לפיתוח AI הכוללת:
 
 - **קטלוג מודלים**: גישה למודלים מתקדמים של AI
-- **Prompt Flow**: מעצב חזותי לתהליכי AI
+- **Prompt Flow**: מעצב חזותי לזרימות עבודה של AI
 - **AI Foundry Portal**: סביבת פיתוח משולבת ליישומי AI
 - **אפשרויות פריסה**: מגוון אפשרויות אירוח והרחבה
 - **בטיחות ואבטחה**: תכונות מובנות של AI אחראי
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### דפוס 2: חיפוש AI + אינטגרציה עם RAG
 
-**שימוש**: פריסת יישומים עם יצירת מידע מוגברת (RAG)
+**שימוש**: פריסת יישומים מבוססי חיפוש מוגבר (RAG)
 
 ```bicep
 // Azure AI Search
@@ -124,7 +129,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### דפוס 3: אינטגרציה עם Document Intelligence
+### דפוס 3: אינטגרציה של ניתוח מסמכים
 
 **שימוש**: תהליכי עיבוד וניתוח מסמכים
 
@@ -315,7 +320,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 שיטות אבטחה מומלצות
 
-### תצורת Managed Identity
+### תצורת זהות מנוהלת
 
 ```bicep
 // Managed identity for the web application
@@ -362,7 +367,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## אופטימיזציה לביצועים
 
-### אסטרטגיות קאשינג
+### אסטרטגיות מטמון
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -392,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### תצורת Auto-scaling
+### תצורת הרחבה אוטומטית
 
 ```bicep
 // Container App with auto-scaling
@@ -536,7 +541,12 @@ azd up
 
 ---
 
-**קודם:** [פרויקט ראשון](../getting-started/first-project.md) | **הבא:** [פריסת מודל AI](ai-model-deployment.md)
+**ניווט פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס AI
+- **⬅️ פרק קודם**: [פרק 1: הפרויקט הראשון שלך](../getting-started/first-project.md)
+- **➡️ הבא**: [פריסת מודל AI](ai-model-deployment.md)
+- **🚀 פרק הבא**: [פרק 3: תצורה](../getting-started/configuration.md)
 
 **זקוקים לעזרה?** הצטרפו לדיוני הקהילה או פתחו בעיה במאגר. קהילת Azure AI + AZD כאן כדי לעזור לכם להצליח!
 

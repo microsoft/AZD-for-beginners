@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:47:30+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T06:53:37+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "nl"
 }
 -->
-# Veelvoorkomende Problemen & Oplossingen
+# Veelvoorkomende Problemen en Oplossingen
+
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 7 - Problemen Oplossen & Debuggen
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 6: Pre-flight Checks](../pre-deployment/preflight-checks.md)
+- **➡️ Volgende**: [Debugging Gids](debugging.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 8: Productie & Enterprise Patronen](../ai-foundry/production-ai-practices.md)
 
 ## Introductie
 
@@ -19,7 +26,7 @@ Door deze gids te voltooien, leer je:
 - Diagnosetechnieken voor Azure Developer CLI-problemen beheersen
 - Veelvoorkomende authenticatie- en machtigingsproblemen begrijpen en oplossen
 - Implementatiefouten, infrastructuurvoorzieningsproblemen en configuratieproblemen verhelpen
-- Proactieve monitoring- en debuggingstrategieën implementeren
+- Proactieve monitoring- en debugstrategieën implementeren
 - Systematische probleemoplossingsmethodologieën toepassen voor complexe problemen
 - Correcte logging en monitoring configureren om toekomstige problemen te voorkomen
 
@@ -28,14 +35,14 @@ Door deze gids te voltooien, leer je:
 Na voltooiing kun je:
 - Azure Developer CLI-problemen diagnosticeren met ingebouwde diagnostische tools
 - Authenticatie-, abonnement- en machtigingsproblemen zelfstandig oplossen
-- Implementatiefouten en infrastructuurvoorzieningsproblemen effectief aanpakken
+- Implementatiefouten en infrastructuurvoorzieningsproblemen effectief oplossen
 - Applicatieconfiguratieproblemen en omgevingsspecifieke problemen debuggen
 - Monitoring en waarschuwingen implementeren om potentiële problemen proactief te identificeren
 - Best practices toepassen voor logging, debugging en workflows voor probleemoplossing
 
 ## Snelle Diagnostiek
 
-Voordat je specifieke problemen aanpakt, voer deze commando's uit om diagnostische informatie te verzamelen:
+Voordat je specifieke problemen onderzoekt, voer deze commando's uit om diagnostische informatie te verzamelen:
 
 ```bash
 # Check azd version and health
@@ -97,7 +104,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 3. Contact your Azure administrator for proper permissions
 ```
 
-### Probleem: Problemen met multi-tenant authenticatie
+### Probleem: Multi-tenant authenticatieproblemen
 **Oplossingen:**
 ```bash
 # 1. Login with specific tenant
@@ -115,7 +122,7 @@ az account clear
 ### Probleem: Resource naamconflicten
 **Symptomen:**
 - Fouten zoals "De resource naam bestaat al"
-- Implementatie faalt tijdens het aanmaken van resources
+- Implementatie faalt tijdens resourcecreatie
 
 **Oplossingen:**
 ```bash
@@ -133,8 +140,8 @@ azd down --force --purge
 
 ### Probleem: Locatie/regio niet beschikbaar
 **Symptomen:**
-- "De locatie 'xyz' is niet beschikbaar voor het resourcetype"
-- Bepaalde SKUs niet beschikbaar in de geselecteerde regio
+- "De locatie 'xyz' is niet beschikbaar voor resourcetype"
+- Bepaalde SKUs niet beschikbaar in geselecteerde regio
 
 **Oplossingen:**
 ```bash
@@ -178,7 +185,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 ### Probleem: Bicep template fouten
 **Symptomen:**
 - Validatiefouten in templates
-- Syntaxfouten in Bicep-bestanden
+- Syntaxisfouten in Bicep-bestanden
 
 **Oplossingen:**
 ```bash
@@ -199,7 +206,7 @@ azd provision --preview
 
 ### Probleem: Build fouten
 **Symptomen:**
-- Applicatie faalt tijdens het bouwen bij implementatie
+- Applicatie faalt tijdens buildproces
 - Fouten bij het installeren van pakketten
 
 **Oplossingen:**
@@ -249,7 +256,7 @@ az containerapp show --name my-app --resource-group my-rg
 
 ### Probleem: Database verbindingsfouten
 **Symptomen:**
-- Applicatie kan geen verbinding maken met de database
+- Applicatie kan geen verbinding maken met database
 - Time-out fouten bij verbinding
 
 **Oplossingen:**
@@ -294,7 +301,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 ### Probleem: SSL/TLS certificaatproblemen
 **Symptomen:**
 - HTTPS werkt niet
-- Fouten bij certificaatvalidatie
+- Validatiefouten bij certificaten
 
 **Oplossingen:**
 ```bash
@@ -329,7 +336,7 @@ app.use(cors({
 azd show
 ```
 
-## 🌍 Problemen met Omgevingsbeheer
+## 🌍 Omgevingsbeheer Problemen
 
 ### Probleem: Problemen bij het wisselen van omgeving
 **Symptomen:**
@@ -396,7 +403,7 @@ azd deploy --incremental
 azd config set defaults.location eastus2
 ```
 
-### Probleem: Applicatieprestatieproblemen
+### Probleem: Applicatie prestatieproblemen
 **Symptomen:**
 - Trage reactietijden
 - Hoog resourcegebruik
@@ -419,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Probleemoplossing Tools en Commando's
+## 🛠️ Probleemoplossingshulpmiddelen en Commando's
 
 ### Debug Commando's
 ```bash
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Voorkomen van Problemen
 
-### Checklist voor Implementatie
+### Pre-implementatie Checklist
 ```bash
 # 1. Validate authentication
 az account show
@@ -568,8 +575,8 @@ az security assessment list --resource-group myrg
 
 ## Gerelateerde Bronnen
 
-- [Debugging Gids](debugging.md) - Geavanceerde debuggingtechnieken
-- [Resources Voorzien](../deployment/provisioning.md) - Probleemoplossing voor infrastructuur
+- [Debugging Gids](debugging.md) - Geavanceerde debugging technieken
+- [Resources Voorzien](../deployment/provisioning.md) - Problemen met infrastructuur oplossen
 - [Capaciteitsplanning](../pre-deployment/capacity-planning.md) - Richtlijnen voor resourceplanning
 - [SKU Selectie](../pre-deployment/sku-selection.md) - Aanbevelingen voor servicetiers
 

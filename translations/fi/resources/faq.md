@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T22:38:25+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-18T06:43:38+00:00",
   "source_file": "resources/faq.md",
   "language_code": "fi"
 }
 -->
 # Usein kysytyt kysymykset (FAQ)
+
+**Apua luvun mukaan**
+- **📚 Kurssin kotisivu**: [AZD For Beginners](../README.md)
+- **🚆 Asennusongelmat**: [Luku 1: Asennus ja käyttöönotto](../docs/getting-started/installation.md)
+- **🤖 AI-kysymykset**: [Luku 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Vianmääritys**: [Luku 7: Vianmääritys ja virheenkorjaus](../docs/troubleshooting/common-issues.md)
 
 ## Johdanto
 
@@ -18,10 +24,10 @@ Tämä kattava FAQ tarjoaa vastauksia yleisimpiin kysymyksiin Azure Developer CL
 Tämän FAQ:n avulla voit:
 - Löytää nopeita vastauksia yleisiin Azure Developer CLI -kysymyksiin ja ongelmiin
 - Ymmärtää keskeisiä käsitteitä ja terminologiaa käytännön kysymys-vastaus-muodossa
-- Saada ratkaisuja vianetsintään yleisissä ongelmissa ja virhetilanteissa
-- Oppia parhaita käytäntöjä optimointiin liittyvistä kysymyksistä
-- Tutustua edistyneisiin ominaisuuksiin ja toimintoihin asiantuntijatason kysymysten kautta
-- Viitata kustannuksiin, turvallisuuteen ja käyttöönoton strategioihin tehokkaasti
+- Päästä käsiksi vianmääritysratkaisuihin yleisiin ongelmiin ja virhetilanteisiin
+- Oppia parhaat käytännöt optimointiin liittyvistä kysymyksistä
+- Tutustua edistyneisiin ominaisuuksiin ja kyvykkyyksiin asiantuntijatason kysymysten kautta
+- Viitata kustannuksiin, turvallisuuteen ja käyttöönoton strategiaohjeisiin tehokkaasti
 
 ## Oppimistulokset
 
@@ -29,8 +35,8 @@ Säännöllisesti viittaamalla tähän FAQ:hen pystyt:
 - Ratkaisemaan yleisiä Azure Developer CLI -ongelmia itsenäisesti annettujen ratkaisujen avulla
 - Tekemään tietoisia päätöksiä käyttöönoton strategioista ja konfiguraatioista
 - Ymmärtämään azd:n ja muiden Azure-työkalujen ja -palveluiden välisen suhteen
-- Soveltamaan parhaita käytäntöjä yhteisön kokemusten ja asiantuntijoiden suositusten perusteella
-- Vianetsimään tehokkaasti autentikointiin, käyttöönottoon ja konfiguraatioon liittyviä ongelmia
+- Soveltamaan yhteisön kokemuksiin ja asiantuntijoiden suosituksiin perustuvia parhaita käytäntöjä
+- Vianmäärittämään autentikointiin, käyttöönottoon ja konfiguraatioon liittyviä ongelmia tehokkaasti
 - Optimoimaan kustannuksia ja suorituskykyä FAQ:n tarjoamien oivallusten ja suositusten avulla
 
 ## Sisällysluettelo
@@ -40,7 +46,7 @@ Säännöllisesti viittaamalla tähän FAQ:hen pystyt:
 - [Pohjat ja projektit](../../../resources)
 - [Käyttöönotto ja infrastruktuuri](../../../resources)
 - [Konfiguraatio ja ympäristöt](../../../resources)
-- [Vianetsintä](../../../resources)
+- [Vianmääritys](../../../resources)
 - [Kustannukset ja laskutus](../../../resources)
 - [Parhaat käytännöt](../../../resources)
 - [Edistyneet aiheet](../../../resources)
@@ -70,14 +76,14 @@ Säännöllisesti viittaamalla tähän FAQ:hen pystyt:
 - Java
 - Go
 - PHP
-- Staattiset verkkosivustot
+- Staattiset verkkosivut
 - Konttipohjaiset sovellukset
 
 ### K: Voinko käyttää azd:tä olemassa olevien projektien kanssa?
 **V**: Kyllä! Voit joko:
-1. Käyttää `azd init` -komentoa lisätäksesi azd-konfiguraation olemassa oleviin projekteihin
-2. Mukauttaa olemassa olevat projektit vastaamaan azd-pohjan rakennetta
-3. Luoda mukautettuja pohjia nykyisen arkkitehtuurisi pohjalta
+1. Käyttää `azd init` lisätäksesi azd-konfiguraation olemassa oleviin projekteihin
+2. Mukauttaa olemassa olevia projekteja vastaamaan azd-pohjan rakennetta
+3. Luoda mukautettuja pohjia olemassa olevan arkkitehtuurisi pohjalta
 
 ---
 
@@ -89,11 +95,11 @@ Säännöllisesti viittaamalla tähän FAQ:hen pystyt:
 ### K: Voinko käyttää azd:tä useiden Azure-tilausten kanssa?
 **V**: Kyllä. Käytä `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` määrittääksesi, mitä tilausta käytetään kullekin ympäristölle.
 
-### K: Mitä oikeuksia tarvitsen käyttöönottoon azd:n avulla?
+### K: Mitä oikeuksia tarvitsen käyttöönottoon azd:llä?
 **V**: Tyypillisesti tarvitset:
 - **Contributor**-roolin resurssiryhmään tai tilaukseen
 - **User Access Administrator**, jos otat käyttöön resursseja, jotka vaativat roolien määrittämistä
-- Tarkat oikeudet vaihtelevat pohjan ja käyttöönotettavien resurssien mukaan
+- Tarkat oikeudet vaihtelevat pohjan ja otettavien resurssien mukaan
 
 ### K: Voinko käyttää azd:tä CI/CD-putkissa?
 **V**: Ehdottomasti! azd on suunniteltu CI/CD-integraatiota varten. Käytä palveluperiaatteita autentikointiin ja aseta ympäristömuuttujat konfiguraatiota varten.
@@ -120,9 +126,9 @@ Säännöllisesti viittaamalla tähän FAQ:hen pystyt:
 ### K: Miten luon mukautetun pohjan?
 **V**: 
 1. Aloita olemassa olevan pohjan rakenteesta
-2. Muokkaa `azure.yaml`-, infrastruktuuritiedostoja ja sovelluskoodia
-3. Testaa huolellisesti `azd up` -komennolla
-4. Julkaise GitHubiin sopivilla tunnisteilla
+2. Muokkaa `azure.yaml`-tiedostoa, infrastruktuuritiedostoja ja sovelluskoodia
+3. Testaa huolellisesti `azd up`-komennolla
+4. Julkaise GitHubiin asianmukaisilla tunnisteilla
 
 ### K: Voinko käyttää azd:tä ilman pohjaa?
 **V**: Kyllä, käytä `azd init` olemassa olevassa projektissa luodaksesi tarvittavat konfiguraatiotiedostot. Sinun täytyy manuaalisesti konfiguroida `azure.yaml` ja infrastruktuuritiedostot.
@@ -130,12 +136,12 @@ Säännöllisesti viittaamalla tähän FAQ:hen pystyt:
 ### K: Mikä ero on virallisilla ja yhteisön pohjilla?
 **V**: 
 - **Viralliset pohjat**: Microsoftin ylläpitämiä, säännöllisesti päivitettyjä, kattava dokumentaatio
-- **Yhteisön pohjat**: Kehittäjien luomia, voivat sisältää erikoistuneita käyttötapauksia, vaihteleva laatu ja ylläpito
+- **Yhteisön pohjat**: Kehittäjien luomia, voivat olla erikoistuneita käyttötapauksia varten, vaihteleva laatu ja ylläpito
 
 ### K: Miten päivitän pohjan projektissani?
 **V**: Pohjia ei päivitetä automaattisesti. Voit:
 1. Manuaalisesti verrata ja yhdistää muutokset lähdepohjasta
-2. Aloittaa alusta `azd init` -komennolla käyttäen päivitettyä pohjaa
+2. Aloittaa alusta `azd init`-komennolla käyttäen päivitettyä pohjaa
 3. Valikoida tiettyjä parannuksia päivitetystä pohjasta
 
 ---
@@ -147,9 +153,9 @@ Säännöllisesti viittaamalla tähän FAQ:hen pystyt:
 - App Services, Container Apps, Functions
 - Tietokannat (SQL, PostgreSQL, Cosmos DB)
 - Tallennus, Key Vault, Application Insights
-- Verkko-, turvallisuus- ja valvontaresurssit
+- Verkko, turvallisuus ja valvontaresurssit
 
-### K: Voinko ottaa käyttöön useissa alueissa?
+### K: Voinko ottaa käyttöön useisiin alueisiin?
 **V**: Kyllä, konfiguroi useita alueita Bicep-pohjissasi ja aseta sijaintiparametri sopivasti kullekin ympäristölle.
 
 ### K: Miten käsittelen tietokannan skeemamuutoksia?
@@ -179,8 +185,8 @@ hooks:
 
 ## Konfiguraatio ja ympäristöt
 
-### K: Miten hallitsen eri ympäristöjä (kehitys, testaus, tuotanto)?
-**V**: Luo erilliset ympäristöt `azd env new <environment-name>` -komennolla ja konfiguroi eri asetukset kullekin:
+### K: Miten hallitsen eri ympäristöjä (dev, staging, prod)?
+**V**: Luo erilliset ympäristöt `azd env new <environment-name>`-komennolla ja konfiguroi eri asetukset kullekin:
 ```bash
 azd env new development
 azd env new staging  
@@ -191,14 +197,14 @@ azd env new production
 **V**: `.azure`-kansiossa projektisi hakemistossa. Jokaisella ympäristöllä on oma kansio konfiguraatiotiedostoineen.
 
 ### K: Miten asetan ympäristökohtaisen konfiguraation?
-**V**: Käytä `azd env set` -komentoa ympäristömuuttujien konfigurointiin:
+**V**: Käytä `azd env set` ympäristömuuttujien konfigurointiin:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
 ### K: Voinko jakaa ympäristökonfiguraatiot tiimin jäsenten kesken?
-**V**: `.azure`-kansio sisältää arkaluontoista tietoa eikä sitä pitäisi lisätä versionhallintaan. Sen sijaan:
+**V**: `.azure`-kansio sisältää arkaluontoista tietoa eikä sitä pitäisi sitoa versionhallintaan. Sen sijaan:
 1. Dokumentoi tarvittavat ympäristömuuttujat
 2. Käytä käyttöönotto-skriptejä ympäristöjen asettamiseen
 3. Käytä Azure Key Vaultia arkaluontoiseen konfiguraatioon
@@ -212,7 +218,7 @@ azd env set SKU_NAME "B1"
 
 ---
 
-## Vianetsintä
+## Vianmääritys
 
 ### K: Miksi `azd up` epäonnistuu?
 **V**: Yleisiä syitä:
@@ -231,8 +237,8 @@ azd env set SKU_NAME "B1"
 
 ### K: Miksi ympäristömuuttujani eivät toimi?
 **V**: Tarkista:
-1. Muuttujien nimet vastaavat pohjan parametreja täsmälleen
-2. Arvot on lainausmerkitty, jos ne sisältävät välilyöntejä
+1. Muuttujien nimet vastaavat pohjan parametreja tarkasti
+2. Arvot on lainausmerkitty oikein, jos ne sisältävät välilyöntejä
 3. Ympäristö on valittu: `azd env select <environment>`
 4. Muuttujat on asetettu oikeaan ympäristöön
 
@@ -257,9 +263,9 @@ Tämä poistaa kaikki resurssit ja ympäristökonfiguraation.
 ### K: Kuinka paljon azd-käyttöönotot maksavat?
 **V**: Kustannukset riippuvat:
 - Käyttöönotetuista Azure-palveluista
-- Palvelutasojen/SKU:iden valinnasta
+- Palvelutasosta/SKU:sta
 - Alueellisista hintavaihteluista
-- Käyttötottumuksista
+- Käyttömallista
 
 Käytä [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) arvioiden tekemiseen.
 
@@ -271,14 +277,14 @@ Käytä [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculato
 4. Valitse sopivat alueet (kustannukset vaihtelevat sijainnin mukaan)
 5. Käytä Azure Cost Management -työkaluja
 
-### K: Onko azd-pohjille ilmaisia tasoja?
+### K: Onko azd-pohjille ilmaisia vaihtoehtoja?
 **V**: Monet Azure-palvelut tarjoavat ilmaisia tasoja:
 - App Service: Ilmainen taso saatavilla
 - Azure Functions: 1M ilmaista suoritusta/kuukausi
 - Cosmos DB: Ilmainen taso 400 RU/s
 - Application Insights: Ensimmäiset 5GB/kuukausi ilmaiseksi
 
-Konfiguroi pohjat käyttämään ilmaisia tasoja, jos mahdollista.
+Konfiguroi pohjat käyttämään ilmaisia tasoja, kun mahdollista.
 
 ### K: Miten arvioin kustannuksia ennen käyttöönottoa?
 **V**: 
@@ -311,7 +317,7 @@ Konfiguroi pohjat käyttämään ilmaisia tasoja, jos mahdollista.
 └── README.md         # Project documentation
 ```
 
-### K: Pitäisikö `.azure`-kansio lisätä versionhallintaan?
+### K: Pitäisikö `.azure`-kansio sitoa versionhallintaan?
 **V**: **Ei!** `.azure`-kansio sisältää arkaluontoista tietoa. Lisää se `.gitignore`-tiedostoon:
 ```gitignore
 .azure/
@@ -321,12 +327,12 @@ Konfiguroi pohjat käyttämään ilmaisia tasoja, jos mahdollista.
 **V**: 
 1. Käytä Azure Key Vaultia salaisuuksiin
 2. Viittaa Key Vault -salaisuuksiin sovelluksen konfiguraatiossa
-3. Älä koskaan lisää salaisuuksia versionhallintaan
+3. Älä koskaan sido salaisuuksia versionhallintaan
 4. Käytä hallittuja identiteettejä palveluiden väliseen autentikointiin
 
 ### K: Mikä on suositeltu lähestymistapa CI/CD:hen azd:n kanssa?
 **V**: 
-1. Käytä erillisiä ympäristöjä kullekin vaiheelle (kehitys/testaus/tuotanto)
+1. Käytä erillisiä ympäristöjä jokaiselle vaiheelle (dev/staging/prod)
 2. Toteuta automatisoitu testaus ennen käyttöönottoa
 3. Käytä palveluperiaatteita autentikointiin
 4. Tallenna arkaluontoinen konfiguraatio putken salaisuuksiin/muuttujiin
@@ -334,49 +340,41 @@ Konfiguroi pohjat käyttämään ilmaisia tasoja, jos mahdollista.
 
 ---
 
-## Edistyneet aiheet
 
-### K: Voinko laajentaa azd:tä mukautetulla toiminnallisuudella?
-**V**: Kyllä, käyttöönottohakujen kautta `azure.yaml`-tiedostossa:
-```yaml
-hooks:
-  predeploy:
-    run: ./scripts/custom-setup.sh
-  postdeploy:
-    run: ./scripts/custom-config.sh
-```
+2. **Pohjat**: Luo pohjia noudattaen [pohjaohjeita](https://github.com/Azure-Samples/awesome-azd)  
+3. **Dokumentaatio**: Osallistu dokumentaation kehittämiseen [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
 
-### K: Miten integroin azd:n olemassa oleviin DevOps-prosesseihin?
-**V**: 
-1. Käytä azd-komentoja olemassa olevissa putkiskripteissä
-2. Standardisoi azd-pohjat tiimien välillä
-3. Integroi olemassa olevaan valvontaan ja hälyty
+### K: Mikä on azd:n tiekartta?  
+**V**: Katso [virallinen tiekartta](https://github.com/Azure/azure-dev/projects) suunnitelluista ominaisuuksista ja parannuksista.  
+
+### K: Kuinka siirryn muista käyttöönoton työkaluista azd:hen?  
+**V**:  
 1. Analysoi nykyinen käyttöönottoarkkitehtuuri  
-2. Luo vastaavat Bicep-mallit  
+2. Luo vastaavat Bicep-pohjat  
 3. Määritä `azure.yaml` vastaamaan nykyisiä palveluita  
-4. Testaa perusteellisesti kehitysympäristössä  
-5. Siirrä ympäristöt asteittain  
+4. Testaa huolellisesti kehitysympäristössä  
+5. Siirry ympäristöihin asteittain  
 
 ---
 
-## Onko vielä kysyttävää?
+## Onko vielä kysyttävää?  
 
-### **Etsi ensin**
-- Tarkista [virallinen dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+### **Etsi ensin**  
+- Katso [virallinen dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 - Etsi [GitHub-ongelmista](https://github.com/Azure/azure-dev/issues) samankaltaisia ongelmia  
 
-### **Hanki apua**
+### **Hanki apua**  
 - [GitHub-keskustelut](https://github.com/Azure/azure-dev/discussions) - Yhteisön tuki  
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Teknisiä kysymyksiä  
 - [Azure Discord](https://discord.gg/azure) - Yhteisön reaaliaikainen chat  
 
-### **Ilmoita ongelmista**
+### **Ilmoita ongelmista**  
 - [GitHub-ongelmat](https://github.com/Azure/azure-dev/issues/new) - Virheilmoitukset ja ominaisuuspyynnöt  
-- Sisällytä asiaankuuluvat lokit, virheilmoitukset ja toistettavat vaiheet  
+- Sisällytä mukaan asiaankuuluvat lokit, virheilmoitukset ja toistamisvaiheet  
 
-### **Lisätietoja**
+### **Lisätietoja**  
 - [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Azure-arkkitehtuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)  
 
 ---
@@ -392,4 +390,4 @@ hooks:
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

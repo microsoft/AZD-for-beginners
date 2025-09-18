@@ -1,23 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T22:01:12+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T07:14:10+00:00",
   "source_file": "workshop/README.md",
   "language_code": "he"
 }
 -->
 # סדנת AZD למפתחי AI
 
-**קודם:** [מדריך פתרון בעיות AI](../docs/troubleshooting/ai-troubleshooting.md) | **הבא:** [מודולי מעבדה בסדנה](../../../workshop)
+**ניווט בסדנה**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../README.md)
+- **📖 פרקים קשורים**: כולל [פרק 1](../README.md#-chapter-1-foundation--quick-start), [פרק 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), ו-[פרק 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ מעבדה מעשית**: [מעבדת סדנת AI](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 צעדים הבאים**: [מודולי מעבדת הסדנה](../../../workshop)
 
-ברוכים הבאים לסדנה מעשית ללימוד Azure Developer CLI (AZD) עם דגש על פריסת יישומי AI. הסדנה נועדה להוביל אתכם מהבסיס של AZD ועד לפריסת פתרונות AI מוכנים לייצור.
+ברוכים הבאים לסדנה המעשית ללימוד Azure Developer CLI (AZD) עם דגש על פריסת יישומי AI. הסדנה נועדה להוביל אתכם מהבסיס של AZD ועד לפריסת פתרונות AI מוכנים לייצור.
 
 ## סקירת הסדנה
 
 **משך:** 2-3 שעות  
 **רמה:** מתחילים עד בינוניים  
-**דרישות מקדימות:** ידע בסיסי ב-Azure, כלי שורת פקודה ומושגים ב-AI
+**דרישות מקדימות:** ידע בסיסי ב-Azure, כלי שורת פקודה, ומושגים ב-AI
 
 ### מה תלמדו
 
@@ -50,7 +54,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### מודול 4: פריסה לייצור (30 דקות)
 - הגדרת Container Apps  
-- אופטימיזציה לביצועים ולסקיילינג  
+- אופטימיזציה של ביצועים וקנה מידה  
 - מעקב ורישום  
 - **מעבדה**: פריסה לייצור עם תצפיות  
 
@@ -155,7 +159,7 @@ echo "Setup verification complete!"
 - **[מדריך שילוב AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - תבניות שילוב מקיפות  
 - **[מדריך פריסת מודלים AI](../docs/ai-foundry/ai-model-deployment.md)** - שיטות עבודה מומלצות לפריסת מודלים  
 - **[שיטות עבודה ל-AI בייצור](../docs/ai-foundry/production-ai-practices.md)** - תבניות פריסה ארגוניות  
-- **[מדריך פתרון בעיות AI](../docs/troubleshooting/ai-troubleshooting.md)** - בעיות נפוצות ופתרונות  
+- **[מדריך פתרון תקלות AI](../docs/troubleshooting/ai-troubleshooting.md)** - בעיות נפוצות ופתרונות  
 
 ### תבניות לדוגמה
 
@@ -199,7 +203,7 @@ cat README.md  # Follow the instructions
 
 ### אפשרות 3: סדנה בהנחיית מדריך
 
-אם אתם משתתפים במפגש בהנחיית מדריך:
+אם אתם משתתפים בסדנה בהנחיית מדריך:
 
 - 🎥 **הקלטת הסדנה**: [זמינה לפי דרישה](https://aka.ms/azd-ai-workshop)  
 - 💬 **קהילת Discord**: [הצטרפו לתמיכה בזמן אמת](https://aka.ms/foundry/discord)  
@@ -239,7 +243,7 @@ cat README.md  # Follow the instructions
 ✅ **להגדיר שירותי Azure OpenAI** עם אבטחה מתאימה  
 ✅ **לבנות יישומי RAG** עם שילוב AI Search של Azure  
 ✅ **ליישם תבניות ייצור** לעומסי עבודה ארגוניים של AI  
-✅ **לעקוב ולפתור בעיות** בפריסות יישומי AI  
+✅ **לעקוב ולפתור תקלות** בפריסות יישומי AI  
 ✅ **ליישם אסטרטגיות אופטימיזציה עלויות** לעומסי עבודה של AI  
 
 ## קהילה ותמיכה
@@ -247,7 +251,7 @@ cat README.md  # Follow the instructions
 ### במהלך הסדנה
 
 - 🙋 **שאלות**: השתמשו בצ'אט הסדנה או הרימו יד  
-- 🐛 **בעיות**: עיינו ב-[מדריך פתרון בעיות](../docs/troubleshooting/ai-troubleshooting.md)  
+- 🐛 **תקלות**: בדקו את [מדריך פתרון התקלות](../docs/troubleshooting/ai-troubleshooting.md)  
 - **טיפים**: שתפו תגליות עם משתתפים אחרים  
 
 ### לאחר הסדנה
@@ -258,7 +262,7 @@ cat README.md  # Follow the instructions
 
 ## צעדים הבאים
 
-### המשך הלמידה
+### המשיכו ללמוד
 
 1. **תרחישים מתקדמים**: חקרו [פריסות רב-אזוריות](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
 2. **שילוב CI/CD**: הגדירו [תהליכי עבודה של GitHub Actions](../docs/deployment/github-actions.md)  
@@ -267,7 +271,7 @@ cat README.md  # Follow the instructions
 ### יישום בפרויקטים שלכם
 
 1. **הערכה**: השתמשו ב-[רשימת הבדיקות שלנו](./production-readiness-checklist.md)  
-2. **תבניות**: התחילו עם [תבניות ספציפיות ל-AI](../../../workshop/templates)  
+2. **תבניות**: התחילו עם [תבניות ייעודיות ל-AI](../../../workshop/templates)  
 3. **תמיכה**: הצטרפו ל-[Discord של Azure AI Foundry](https://aka.ms/foundry/discord)  
 
 ### שתפו את ההצלחה שלכם
@@ -294,11 +298,11 @@ cat README.md  # Follow the instructions
 
 ---
 
-**קודם:** [מדריך פתרון בעיות AI](../docs/troubleshooting/ai-troubleshooting.md) | **הבא:** התחילו עם [מעבדה 1: יסודות AZD](../../../workshop/lab-1-azd-basics)
+**קודם:** [מדריך פתרון תקלות AI](../docs/troubleshooting/ai-troubleshooting.md) | **הבא:** התחילו עם [מעבדה 1: יסודות AZD](../../../workshop/lab-1-azd-basics)
 
 **מוכנים להתחיל לבנות יישומי AI עם AZD?**
 
-[התחילו מעבדה 1: יסודות AZD →](./lab-1-azd-basics/README.md)
+[התחילו מעבדה 1: יסודות AZD →](./lab-1-azd-basics/README.md)  
 
 ---
 

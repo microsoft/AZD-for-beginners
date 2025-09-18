@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T21:07:57+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-18T06:15:27+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "no"
 }
 -->
 # Ditt Første Prosjekt - Praktisk Veiledning
 
-**Forrige:** [Konfigurasjon](configuration.md) | **Neste:** [Azure AI Foundry Integrasjon](../ai-foundry/azure-ai-foundry-integration.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Hurtigstart
+- **⬅️ Forrige**: [Installasjon & Oppsett](installation.md)
+- **➡️ Neste**: [Konfigurasjon](configuration.md)
+- **🚀 Neste Kapittel**: [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduksjon
 
@@ -18,7 +23,7 @@ Velkommen til ditt første Azure Developer CLI-prosjekt! Denne omfattende prakti
 ## Læringsmål
 
 Ved å fullføre denne veiledningen vil du:
-- Mestre arbeidsflyten for initialisering av azd-prosjekter ved hjelp av maler
+- Mestre arbeidsflyten for azd-prosjektinitiering ved hjelp av maler
 - Forstå strukturen og konfigurasjonsfilene i Azure Developer CLI-prosjekter
 - Utføre fullstendig applikasjonsdistribusjon til Azure med infrastrukturprovisjonering
 - Implementere strategier for applikasjonsoppdateringer og ny distribusjon
@@ -28,7 +33,7 @@ Ved å fullføre denne veiledningen vil du:
 ## Læringsutbytte
 
 Etter fullføring vil du kunne:
-- Initialisere og konfigurere azd-prosjekter fra maler på egen hånd
+- Uavhengig initiere og konfigurere azd-prosjekter fra maler
 - Navigere og endre azd-prosjektstrukturer effektivt
 - Distribuere fullstack-applikasjoner til Azure med enkle kommandoer
 - Feilsøke vanlige distribusjonsproblemer og autentiseringsfeil
@@ -80,10 +85,10 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### Hva Skjedde Akkurat?
-- Malens kode ble lastet ned til din lokale katalog
-- En `azure.yaml`-fil med tjenestedefinisjoner ble opprettet
-- Infrastrukturkode ble satt opp i `infra/`-katalogen
-- Et miljøkonfigurasjon ble opprettet
+- Lastet ned malens kode til din lokale katalog
+- Opprettet en `azure.yaml`-fil med tjenestedefinisjoner
+- Satt opp infrastrukturkode i `infra/`-katalogen
+- Opprettet en miljøkonfigurasjon
 
 ## Steg 2: Utforsk Prosjektstrukturen
 
@@ -179,7 +184,7 @@ azd up
 
 ### Hva Skjer Under Distribusjonen?
 
-Kommandoen `azd up` utfører disse stegene:
+Kommandoen `azd up` utfører følgende steg:
 1. **Provisjon** (`azd provision`) - Oppretter Azure-ressurser
 2. **Pakke** - Bygger applikasjonskoden din
 3. **Distribuer** (`azd deploy`) - Distribuerer kode til Azure-ressurser
@@ -197,10 +202,10 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Steg 5: Test Applikasjonen
+## Steg 5: Test Applikasjonen Din
 
 ### Få Tilgang til Applikasjonen
-Klikk på URL-en som ble gitt i distribusjonsutdataene, eller hent den når som helst:
+Klikk på URL-en som er oppgitt i distribusjonsutdataene, eller hent den når som helst:
 ```bash
 # Get application endpoints
 azd show
@@ -210,11 +215,11 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Test Todo-Appen
-1. **Legg til en todo-oppgave** - Klikk "Add Todo" og skriv inn en oppgave
+1. **Legg til en todo** - Klikk "Add Todo" og skriv inn en oppgave
 2. **Marker som fullført** - Kryss av fullførte oppgaver
-3. **Slett oppgaver** - Fjern todo-oppgaver du ikke lenger trenger
+3. **Slett oppgaver** - Fjern todos du ikke lenger trenger
 
-### Overvåk Applikasjonen
+### Overvåk Applikasjonen Din
 ```bash
 # Open Azure portal for your resources
 azd monitor
@@ -223,7 +228,7 @@ azd monitor
 azd logs
 ```
 
-## Steg 6: Gjør Endringer og Distribuer på Nytt
+## Steg 6: Gjør Endringer og Distribuer På Nytt
 
 La oss gjøre en endring og se hvor enkelt det er å oppdatere:
 
@@ -346,10 +351,10 @@ Nå som du har fullført ditt første prosjekt, utforsk disse avanserte temaene:
 - [Legg til databaser, lagring og andre tjenester](../deployment/provisioning.md#adding-services)
 
 ### 2. Sett Opp CI/CD
-- [GitHub Actions Integrasjon](../deployment/cicd-integration.md)
+- [GitHub Actions-integrasjon](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
-### 3. Beste Praksiser for Produksjon
+### 3. Beste Praksis for Produksjon
 - [Sikkerhetskonfigurasjoner](../deployment/best-practices.md#security)
 - [Ytelsesoptimalisering](../deployment/best-practices.md#performance)
 - [Overvåking og logging](../deployment/best-practices.md#monitoring)
@@ -374,12 +379,12 @@ azd init --template todo-java-mongo
 - [Azure Arkitektursenter](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### Fellesskap og Støtte
+### Fellesskap & Støtte
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### Maler og Eksempler
+### Maler & Eksempler
 - [Offisiell Malgalleri](https://azure.github.io/awesome-azd/)
 - [Fellesskapsmaler](https://github.com/Azure-Samples/azd-templates)
 - [Enterprise Mønstre](https://github.com/Azure/azure-dev/tree/main/templates)
@@ -390,7 +395,12 @@ azd init --template todo-java-mongo
 
 ---
 
-**Forrige:** [Konfigurasjon](configuration.md) | **Neste:** [Azure AI Foundry Integrasjon](../ai-foundry/azure-ai-foundry-integration.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Hurtigstart
+- **⬅️ Forrige**: [Installasjon & Oppsett](installation.md)
+- **➡️ Neste**: [Konfigurasjon](configuration.md)
+- **🚀 Neste Kapittel**: [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md)
 - **Neste Leksjon**: [Distribusjonsveiledning](../deployment/deployment-guide.md)
 
 ---

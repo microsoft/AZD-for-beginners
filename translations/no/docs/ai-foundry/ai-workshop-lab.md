@@ -1,23 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "668bc93b35c9249e52245a0b037b6011",
-  "translation_date": "2025-09-12T21:37:33+00:00",
+  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
+  "translation_date": "2025-09-18T06:13:39+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "no"
 }
 -->
-# AI Workshop Lab: Gjør AI-løsningene dine klare for AZD-deployering
+# AI Workshop Lab: Gjør AI-løsningene dine AZD-klare
 
-**Forrige:** [AI Model Deployment](ai-model-deployment.md) | **Neste:** [Production AI Practices](production-ai-practices.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
+- **⬅️ Forrige**: [AI Modellutplassering](ai-model-deployment.md)
+- **➡️ Neste**: [Beste Praksis for Produksjons-AI](production-ai-practices.md)
+- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
-## Workshop Oversikt
+## Workshopoversikt
 
-Denne praktiske laben veileder utviklere gjennom prosessen med å ta en eksisterende AI-applikasjon og gjøre den klar for deployering ved hjelp av Azure Developer CLI (AZD). Du vil lære essensielle mønstre for produksjonsklare AI-deployeringer ved bruk av Azure AI Foundry-tjenester.
+Denne praktiske laben veileder utviklere gjennom prosessen med å ta en eksisterende AI-applikasjon og gjøre den klar for utplassering ved hjelp av Azure Developer CLI (AZD). Du vil lære essensielle mønstre for produksjonsutplassering av AI ved bruk av Azure AI Foundry-tjenester.
 
 **Varighet:** 2-3 timer  
 **Nivå:** Middels  
-**Forutsetninger:** Grunnleggende kunnskap om Azure, kjennskap til AI/ML-konsepter
+**Forutsetninger:** Grunnleggende Azure-kunnskap, kjennskap til AI/ML-konsepter
 
 ## 🎓 Læringsmål
 
@@ -25,8 +30,8 @@ Ved slutten av denne workshoppen vil du kunne:
 - ✅ Konvertere en eksisterende AI-applikasjon til å bruke AZD-maler
 - ✅ Konfigurere Azure AI Foundry-tjenester med AZD
 - ✅ Implementere sikker håndtering av legitimasjon for AI-tjenester
-- ✅ Deployere produksjonsklare AI-applikasjoner med overvåking
-- ✅ Feilsøke vanlige problemer med AI-deployering
+- ✅ Utplassere produksjonsklare AI-applikasjoner med overvåking
+- ✅ Feilsøke vanlige problemer med AI-utplassering
 
 ## Forutsetninger
 
@@ -46,7 +51,7 @@ Ved slutten av denne workshoppen vil du kunne:
 - Kjennskap til kommandolinjegrensesnitt
 - Grunnleggende AI/ML-konsepter (API-er, modeller, prompts)
 
-## Lab Oppsett
+## Laboppsett
 
 ### Steg 1: Forberedelse av Miljø
 
@@ -90,7 +95,7 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Lab Øvelse 1.1: Utforsk Konfigurasjonen**
+### **Labøvelse 1.1: Utforsk Konfigurasjonen**
 
 1. **Undersøk azure.yaml-filen:**
 ```bash
@@ -99,7 +104,7 @@ cat azure.yaml
 
 **Hva du bør se etter:**
 - Tjenestedefinisjoner for AI-komponenter
-- Miljøvariabel-mappinger
+- Miljøvariabelkartlegginger
 - Vertskonfigurasjoner
 
 2. **Gå gjennom main.bicep-infrastrukturen:**
@@ -108,19 +113,19 @@ cat infra/main.bicep
 ```
 
 **Viktige AI-mønstre å identifisere:**
-- Opprettelse av Azure OpenAI-tjeneste
+- Klargjøring av Azure OpenAI-tjeneste
 - Integrasjon med Cognitive Search
-- Sikker nøkkelhåndtering
+- Sikker håndtering av nøkler
 - Nettverkssikkerhetskonfigurasjoner
 
-### **Diskusjonspunkt:** Hvorfor disse mønstrene er viktige for AI
+### **Diskusjonspunkt:** Hvorfor Disse Mønstrene Er Viktige for AI
 
 - **Tjenesteavhengigheter**: AI-applikasjoner krever ofte flere koordinerte tjenester
 - **Sikkerhet**: API-nøkler og endepunkter må håndteres sikkert
 - **Skalerbarhet**: AI-arbeidsmengder har unike krav til skalering
-- **Kostnadsstyring**: AI-tjenester kan bli dyre hvis de ikke er riktig konfigurert
+- **Kostnadsstyring**: AI-tjenester kan være dyre hvis de ikke er riktig konfigurert
 
-## Modul 2: Deploy Din Første AI-applikasjon
+## Modul 2: Utplassering av Din Første AI-applikasjon
 
 ### Steg 2.1: Initialiser Miljøet
 
@@ -138,31 +143,31 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### Steg 2.2: Deploy Infrastruktur og Applikasjon
+### Steg 2.2: Utplassering av Infrastruktur og Applikasjon
 
-1. **Deploy med AZD:**
+1. **Utplasser med AZD:**
 ```bash
 azd up
 ```
 
-**Hva skjer under `azd up`:**
-- ✅ Oppretter Azure OpenAI-tjeneste
+**Hva som skjer under `azd up`:**
+- ✅ Klargjør Azure OpenAI-tjeneste
 - ✅ Oppretter Cognitive Search-tjeneste
 - ✅ Setter opp App Service for webapplikasjonen
 - ✅ Konfigurerer nettverk og sikkerhet
-- ✅ Deployerer applikasjonskode
+- ✅ Utplasserer applikasjonskode
 - ✅ Setter opp overvåking og logging
 
-2. **Overvåk deployeringsfremdriften** og noter ressursene som opprettes.
+2. **Overvåk utplasseringsfremdriften** og noter ressursene som opprettes.
 
-### Steg 2.3: Verifiser Din Deployering
+### Steg 2.3: Verifiser Din Utplassering
 
-1. **Sjekk de deployerte ressursene:**
+1. **Sjekk de utplasserte ressursene:**
 ```bash
 azd show
 ```
 
-2. **Åpne den deployerte applikasjonen:**
+2. **Åpne den utplasserte applikasjonen:**
 ```bash
 azd show --output json | grep "webAppUrl"
 ```
@@ -172,15 +177,15 @@ azd show --output json | grep "webAppUrl"
    - Prøv eksempelforespørsler
    - Verifiser at AI-responsene fungerer
 
-### **Lab Øvelse 2.1: Feilsøkingspraksis**
+### **Labøvelse 2.1: Feilsøkingspraksis**
 
-**Scenario**: Deployeringen lyktes, men AI svarer ikke.
+**Scenario**: Utplasseringen din lyktes, men AI svarer ikke.
 
 **Vanlige problemer å sjekke:**
-1. **OpenAI API-nøkler**: Verifiser at de er riktig satt
-2. **Modelltilgjengelighet**: Sjekk om din region støtter modellen
+1. **OpenAI API-nøkler**: Bekreft at de er riktig satt
+2. **Modelltilgjengelighet**: Sjekk om regionen din støtter modellen
 3. **Nettverkstilkobling**: Sørg for at tjenestene kan kommunisere
-4. **RBAC-tillatelser**: Verifiser at appen kan få tilgang til OpenAI
+4. **RBAC-tillatelser**: Bekreft at appen kan få tilgang til OpenAI
 
 **Feilsøkingskommandoer:**
 ```bash
@@ -194,7 +199,7 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Modul 3: Tilpass AI-applikasjoner til Dine Behov
+## Modul 3: Tilpasning av AI-applikasjoner til Dine Behov
 
 ### Steg 3.1: Endre AI-konfigurasjonen
 
@@ -245,14 +250,14 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab Øvelse 3.1: Kostnadsoptimalisering**
+### **Labøvelse 3.1: Kostnadsoptimalisering**
 
 **Utfordring**: Konfigurer malen for kostnadseffektiv utvikling.
 
 **Oppgaver:**
 1. Identifiser hvilke SKUs som kan settes til gratis/grunnleggende nivåer
 2. Konfigurer miljøvariabler for minimal kostnad
-3. Deploy og sammenlign kostnader med produksjonskonfigurasjonen
+3. Utplasser og sammenlign kostnader med produksjonskonfigurasjonen
 
 **Løsningshint:**
 - Bruk F0 (gratis) nivå for Cognitive Services når mulig
@@ -273,7 +278,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Verifiser at Managed Identity fungerer:**
+2. **Bekreft at Managed Identity fungerer:**
 ```bash
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
@@ -338,9 +343,9 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Lab Øvelse 4.1: Sikkerhetsrevisjon**
+### **Labøvelse 4.1: Sikkerhetsrevisjon**
 
-**Oppgave**: Gå gjennom deployeringen din for beste praksis innen sikkerhet.
+**Oppgave**: Gå gjennom utplasseringen din for beste praksis innen sikkerhet.
 
 **Sjekkliste:**
 - [ ] Ingen hardkodede hemmeligheter i kode eller konfigurasjon
@@ -349,7 +354,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 - [ ] Nettverkstilgang er riktig begrenset
 - [ ] Overvåking og logging er aktivert
 
-## Modul 5: Konverter Din Egen AI-applikasjon
+## Modul 5: Konvertering av Din Egen AI-applikasjon
 
 ### Steg 5.1: Vurderingsskjema
 
@@ -357,7 +362,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 1. **Applikasjonsarkitektur:**
    - Hvilke AI-tjenester bruker appen din?
-   - Hvilke beregningsressurser trenger den?
+   - Hvilke databehandlingsressurser trenger den?
    - Trenger den en database?
    - Hva er avhengighetene mellom tjenestene?
 
@@ -451,7 +456,7 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Lab Øvelse 5.1: Malutfordring**
+### **Labøvelse 5.1: Malutfordring**
 
 **Utfordring**: Opprett en AZD-mal for en dokumentbehandlings-AI-app.
 
@@ -469,10 +474,10 @@ output name string = openAIAccount.name
 
 ## Modul 6: Feilsøking av Vanlige Problemer
 
-### Vanlige Deployeringsproblemer
+### Vanlige Utplasseringsproblemer
 
-#### Problem 1: OpenAI-tjenestekvote overskredet
-**Symptomer:** Deployering feiler med kvotefeil
+#### Problem 1: OpenAI-tjenestekvote Overskredet
+**Symptomer:** Utplassering mislykkes med kvotefeil
 **Løsninger:**
 ```bash
 # Check current quotas
@@ -484,7 +489,7 @@ azd up
 ```
 
 #### Problem 2: Modell Ikke Tilgjengelig i Region
-**Symptomer:** AI-responsene feiler eller modelldeployering gir feil
+**Symptomer:** AI-responser mislykkes eller modellutplasseringsfeil
 **Løsninger:**
 ```bash
 # Check model availability by region
@@ -515,25 +520,25 @@ az role assignment create \
 **Undersøkelsestrinn:**
 1. Sjekk Application Insights for ytelsesmetrikker
 2. Gå gjennom OpenAI-tjenestemetrikker i Azure-portalen
-3. Verifiser nettverkstilkobling og forsinkelse
+3. Bekreft nettverkstilkobling og forsinkelse
 
 **Løsninger:**
 - Implementer caching for vanlige forespørsler
 - Bruk passende OpenAI-modell for ditt brukstilfelle
-- Vurder lesereplikater for høy belastning
+- Vurder lese-replikater for høy belastning
 
-### **Lab Øvelse 6.1: Feilsøkingsutfordring**
+### **Labøvelse 6.1: Feilsøkingsutfordring**
 
-**Scenario**: Deployeringen lyktes, men applikasjonen returnerer 500-feil.
+**Scenario**: Utplasseringen din lyktes, men applikasjonen returnerer 500-feil.
 
 **Feilsøkingsoppgaver:**
 1. Sjekk applikasjonslogger
-2. Verifiser tjenestetilkobling
+2. Bekreft tjenestetilkobling
 3. Test autentisering
 4. Gå gjennom konfigurasjonen
 
 **Verktøy å bruke:**
-- `azd show` for oversikt over deployeringen
+- `azd show` for utplasseringsoversikt
 - Azure-portalen for detaljerte tjenestelogger
 - Application Insights for applikasjonstelemetri
 
@@ -574,19 +579,19 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - Implementer forespørselscaching
 - Overvåk tokenbruk for OpenAI
 
-### **Lab Øvelse 7.1: Ytelsesoptimalisering**
+### **Labøvelse 7.1: Ytelsesoptimalisering**
 
 **Oppgave**: Optimaliser AI-applikasjonen din for både ytelse og kostnad.
 
 **Metrikker å forbedre:**
 - Reduser gjennomsnittlig responstid med 20%
 - Reduser månedlige kostnader med 15%
-- Oppretthold 99,9% oppetid
+- Oppretthold 99.9% oppetid
 
 **Strategier å prøve:**
 - Implementer responscaching
-- Optimaliser prompts for token-effektivitet
-- Bruk passende beregnings-SKUs
+- Optimaliser prompts for tokeneffektivitet
+- Bruk passende databehandlings-SKUs
 - Sett opp riktig autoskalering
 
 ## Endelig Utfordring: Implementering fra Start til Slutt
@@ -598,16 +603,16 @@ Du har fått i oppdrag å lage en produksjonsklar AI-drevet kundeservice-chatbot
 **Funksjonelle Krav:**
 - Webgrensesnitt for kundesamtaler
 - Integrasjon med Azure OpenAI for svar
-- Dokumentssøkfunksjon ved bruk av Cognitive Search
+- Dokumentssøkfunksjonalitet ved bruk av Cognitive Search
 - Integrasjon med eksisterende kundedatabase
 - Støtte for flere språk
 
 **Ikke-funksjonelle Krav:**
 - Håndtere 1000 samtidige brukere
-- 99,9% oppetid SLA
+- 99.9% oppetid SLA
 - SOC 2-samsvar
 - Kostnad under $500/måned
-- Deployering til flere miljøer (utvikling, staging, produksjon)
+- Utplassering til flere miljøer (utvikling, staging, produksjon)
 
 ### Implementeringstrinn
 
@@ -615,7 +620,7 @@ Du har fått i oppdrag å lage en produksjonsklar AI-drevet kundeservice-chatbot
 2. **Opprett AZD-malen**
 3. **Implementer sikkerhetstiltak**
 4. **Sett opp overvåking og varsling**
-5. **Opprett deployeringspipelines**
+5. **Opprett utplasseringspipelines**
 6. **Dokumenter løsningen**
 
 ### Evalueringskriterier
@@ -623,10 +628,10 @@ Du har fått i oppdrag å lage en produksjonsklar AI-drevet kundeservice-chatbot
 - ✅ **Funksjonalitet**: Oppfyller den alle kravene?
 - ✅ **Sikkerhet**: Er beste praksis implementert?
 - ✅ **Skalerbarhet**: Kan den håndtere belastningen?
-- ✅ **Vedlikeholdbarhet**: Er kode og infrastruktur godt organisert?
+- ✅ **Vedlikeholdbarhet**: Er koden og infrastrukturen godt organisert?
 - ✅ **Kostnad**: Holder den seg innenfor budsjettet?
 
-## Ekstra Ressurser
+## Tilleggsressurser
 
 ### Microsoft Dokumentasjon
 - [Azure Developer CLI Dokumentasjon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
@@ -648,16 +653,16 @@ Du har fått i oppdrag å lage en produksjonsklar AI-drevet kundeservice-chatbot
 Gratulerer! Du har fullført AI Workshop Lab. Du bør nå kunne:
 
 - ✅ Konvertere eksisterende AI-applikasjoner til AZD-maler
-- ✅ Deployere produksjonsklare AI-applikasjoner
-- ✅ Implementer beste praksis for sikkerhet for AI-arbeidsbelastninger
-- ✅ Overvåk og optimaliser ytelsen til AI-applikasjoner
-- ✅ Feilsøk vanlige problemer ved utrulling
+- ✅ Distribuere produksjonsklare AI-applikasjoner
+- ✅ Implementere sikkerhetspraksis for AI-arbeidsbelastninger
+- ✅ Overvåke og optimalisere ytelsen til AI-applikasjoner
+- ✅ Feilsøke vanlige distribusjonsproblemer
 
 ### Neste steg
 1. Bruk disse mønstrene i dine egne AI-prosjekter
 2. Bidra med maler tilbake til fellesskapet
-3. Bli med på Azure AI Foundry Discord for løpende støtte
-4. Utforsk avanserte emner som utrulling på tvers av regioner
+3. Bli med på Azure AI Foundry Discord for kontinuerlig støtte
+4. Utforsk avanserte emner som distribusjon på tvers av regioner
 
 ---
 
@@ -665,9 +670,14 @@ Gratulerer! Du har fullført AI Workshop Lab. Du bør nå kunne:
 
 ---
 
-**Forrige:** [AI Model Deployment](ai-model-deployment.md) | **Neste:** [Production AI Practices](production-ai-practices.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 2 - AI-First Development
+- **⬅️ Forrige**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Neste**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 Neste kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
-**Trenger du hjelp?** Bli med i vårt fellesskap for støtte og diskusjoner om AZD og AI-utrullinger.
+**Trenger du hjelp?** Bli med i vårt fellesskap for støtte og diskusjoner om AZD og AI-distribusjoner.
 
 ---
 

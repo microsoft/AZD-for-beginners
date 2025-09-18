@@ -1,23 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T21:18:33+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T07:09:51+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "he"
 }
 -->
 # מדריך התקנה והגדרות
 
-**קודם:** [תיעוד ראשי](../../README.md) | **הבא:** [יסודות AZD](azd-basics.md)
+**ניווט בין פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 1 - יסודות והתחלה מהירה
+- **⬅️ קודם**: [יסודות AZD](azd-basics.md)
+- **➡️ הבא**: [הפרויקט הראשון שלך](first-project.md)
+- **🚀 פרק הבא**: [פרק 2: פיתוח מבוסס AI](../ai-foundry/azure-ai-foundry-integration.md)
 
-## מבוא
+## הקדמה
 
-מדריך מקיף זה ילווה אותך בתהליך ההתקנה וההגדרה של Azure Developer CLI (azd) במערכת שלך. תלמד שיטות התקנה שונות למערכות הפעלה שונות, הגדרת אימות, והגדרות ראשוניות להכנת סביבת הפיתוח שלך לפריסות ב-Azure.
+מדריך מקיף זה ילווה אותך בתהליך ההתקנה וההגדרה של Azure Developer CLI (azd) במערכת שלך. תלמד שיטות התקנה שונות למערכות הפעלה שונות, הגדרת אימות והגדרות ראשוניות להכנת סביבת הפיתוח שלך לפריסות ב-Azure.
 
 ## מטרות למידה
 
-בסיום השיעור הזה, תוכל:
+בסיום השיעור, תוכל:
 - להתקין בהצלחה את Azure Developer CLI במערכת ההפעלה שלך
 - להגדיר אימות עם Azure באמצעות שיטות שונות
 - להגדיר את סביבת הפיתוח שלך עם הדרישות הנחוצות
@@ -27,8 +32,8 @@ CO_OP_TRANSLATOR_METADATA:
 ## תוצאות למידה
 
 לאחר השלמת השיעור, תוכל:
-- להתקין את azd באמצעות השיטה המתאימה לפלטפורמה שלך
-- לבצע אימות עם Azure באמצעות הפקודה azd auth login
+- להתקין את azd בשיטה המתאימה לפלטפורמה שלך
+- לבצע אימות עם Azure באמצעות `azd auth login`
 - לוודא את ההתקנה ולבדוק פקודות בסיסיות של azd
 - להגדיר את סביבת הפיתוח שלך לשימוש מיטבי ב-azd
 - לפתור בעיות התקנה נפוצות באופן עצמאי
@@ -53,7 +58,7 @@ CO_OP_TRANSLATOR_METADATA:
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### אפשרות 2: מנהל חבילות Windows (winget)
+#### אפשרות 2: מנהל החבילות של Windows (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
@@ -208,11 +213,11 @@ export AZD_DEBUG=true  # Enable debug logging
 ## אינטגרציה עם IDE
 
 ### Visual Studio Code
-התקן את התוסף Azure Developer CLI:
+התקן את הרחבה של Azure Developer CLI:
 1. פתח את VS Code
-2. עבור לתוספים (Ctrl+Shift+X)
+2. עבור ל-Extensions (Ctrl+Shift+X)
 3. חפש "Azure Developer CLI"
-4. התקן את התוסף
+4. התקן את הרחבה
 
 תכונות:
 - IntelliSense עבור azure.yaml
@@ -234,7 +239,7 @@ export AZD_DEBUG=true  # Enable debug logging
 ```
 
 ### IntelliJ/JetBrains
-1. התקן את התוסף Azure
+1. התקן את התוסף של Azure
 2. הגדר אישורי Azure
 3. השתמש בטרמינל המשולב לפקודות azd
 
@@ -325,7 +330,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 1. **השלם את האימות**: ודא שאתה יכול לגשת למנוי Azure שלך
 2. **נסה את הפריסה הראשונה שלך**: עקוב אחר [מדריך הפרויקט הראשון](first-project.md)
-3. **חקור תבניות**: עיין בתבניות זמינות באמצעות `azd template list`
+3. **חקור תבניות**: עיין בתבניות זמינות עם `azd template list`
 4. **הגדר את ה-IDE שלך**: הגדר את סביבת הפיתוח שלך
 
 ## תמיכה
@@ -333,16 +338,21 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 אם נתקלת בבעיות:
 - [תיעוד רשמי](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [דיווח על בעיות](https://github.com/Azure/azure-dev/issues)
-- [דיונים קהילתיים](https://github.com/Azure/azure-dev/discussions)
-- [תמיכת Azure](https://azure.microsoft.com/support/)
+- [דיונים בקהילה](https://github.com/Azure/azure-dev/discussions)
+- [תמיכה של Azure](https://azure.microsoft.com/support/)
 
 ---
 
-**קודם:** [תיעוד ראשי](../../README.md) | **הבא:** [יסודות AZD](azd-basics.md)
+**ניווט בין פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 1 - יסודות והתחלה מהירה
+- **⬅️ קודם**: [יסודות AZD](azd-basics.md) 
+- **➡️ הבא**: [הפרויקט הראשון שלך](first-project.md)
+- **🚀 פרק הבא**: [פרק 2: פיתוח מבוסס AI](../ai-foundry/azure-ai-foundry-integration.md)
 
-**ההתקנה הושלמה!** המשך ל-[הפרויקט הראשון שלך](first-project.md) כדי להתחיל לעבוד עם azd.
+**✅ ההתקנה הושלמה!** המשך ל-[הפרויקט הראשון שלך](first-project.md) כדי להתחיל לעבוד עם azd.
 
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו אחראים לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

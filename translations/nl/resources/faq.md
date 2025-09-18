@@ -1,36 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T22:39:14+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-18T07:01:16+00:00",
   "source_file": "resources/faq.md",
   "language_code": "nl"
 }
 -->
 # Veelgestelde Vragen (FAQ)
 
+**Hulp per hoofdstuk**
+- **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
+- **🚆 Installatieproblemen**: [Hoofdstuk 1: Installatie & Setup](../docs/getting-started/installation.md)
+- **🤖 AI Vragen**: [Hoofdstuk 2: AI-First Ontwikkeling](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Problemen oplossen**: [Hoofdstuk 7: Problemen oplossen & Debuggen](../docs/troubleshooting/common-issues.md)
+
 ## Introductie
 
-Deze uitgebreide FAQ biedt antwoorden op de meest voorkomende vragen over Azure Developer CLI (azd) en Azure-deployments. Vind snelle oplossingen voor veelvoorkomende problemen, begrijp best practices en krijg verduidelijking over azd-concepten en workflows.
+Deze uitgebreide FAQ biedt antwoorden op de meest voorkomende vragen over Azure Developer CLI (azd) en Azure-implementaties. Vind snelle oplossingen voor veelvoorkomende problemen, begrijp best practices en krijg verduidelijking over azd-concepten en workflows.
 
 ## Leerdoelen
 
-Door deze FAQ te bekijken, kun je:
-- Snel antwoorden vinden op veelvoorkomende vragen en problemen met Azure Developer CLI
-- Belangrijke concepten en terminologie begrijpen via een praktische Q&A-indeling
-- Oplossingen voor probleemoplossing bij frequente problemen en foutscenario's vinden
-- Best practices leren via veelgestelde vragen over optimalisatie
-- Geavanceerde functies en mogelijkheden ontdekken via vragen op expert-niveau
-- Efficiënt verwijzen naar richtlijnen over kosten, beveiliging en deploymentstrategieën
+Door deze FAQ te bekijken, leer je:
+- Snel antwoorden te vinden op veelvoorkomende vragen en problemen met Azure Developer CLI
+- Belangrijke concepten en terminologie te begrijpen via een praktische Q&A-indeling
+- Oplossingen voor veelvoorkomende problemen en foutscenario's te vinden
+- Best practices te leren via veelgestelde vragen over optimalisatie
+- Geavanceerde functies en mogelijkheden te ontdekken via vragen op expertniveau
+- Efficiënt advies te raadplegen over kosten, beveiliging en implementatiestrategieën
 
 ## Leerresultaten
 
-Met regelmatige verwijzing naar deze FAQ kun je:
+Door regelmatig naar deze FAQ te verwijzen, kun je:
 - Veelvoorkomende problemen met Azure Developer CLI zelfstandig oplossen met de geboden oplossingen
-- Geïnformeerde beslissingen nemen over deploymentstrategieën en configuraties
+- Geïnformeerde beslissingen nemen over implementatiestrategieën en configuraties
 - De relatie tussen azd en andere Azure-tools en -services begrijpen
 - Best practices toepassen op basis van ervaringen uit de community en aanbevelingen van experts
-- Problemen met authenticatie, deployment en configuratie effectief oplossen
+- Problemen met authenticatie, implementatie en configuratie effectief oplossen
 - Kosten en prestaties optimaliseren met inzichten en aanbevelingen uit de FAQ
 
 ## Inhoudsopgave
@@ -38,9 +44,9 @@ Met regelmatige verwijzing naar deze FAQ kun je:
 - [Aan de slag](../../../resources)
 - [Authenticatie & Toegang](../../../resources)
 - [Templates & Projecten](../../../resources)
-- [Deployment & Infrastructuur](../../../resources)
+- [Implementatie & Infrastructuur](../../../resources)
 - [Configuratie & Omgevingen](../../../resources)
-- [Probleemoplossing](../../../resources)
+- [Problemen oplossen](../../../resources)
 - [Kosten & Facturering](../../../resources)
 - [Best Practices](../../../resources)
 - [Geavanceerde Onderwerpen](../../../resources)
@@ -50,14 +56,14 @@ Met regelmatige verwijzing naar deze FAQ kun je:
 ## Aan de slag
 
 ### V: Wat is Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) is een ontwikkelaarsgerichte command-line tool die de tijd verkort om je applicatie van je lokale ontwikkelomgeving naar Azure te krijgen. Het biedt best practices via templates en helpt bij de volledige deployment lifecycle.
+**A**: Azure Developer CLI (azd) is een ontwikkelaarsgerichte command-line tool die de tijd verkort om je applicatie van je lokale ontwikkelomgeving naar Azure te krijgen. Het biedt best practices via templates en helpt bij de volledige implementatiecyclus.
 
 ### V: Hoe verschilt azd van Azure CLI?
 **A**: 
 - **Azure CLI**: Algemeen hulpmiddel voor het beheren van Azure-resources
-- **azd**: Ontwikkelaarsgericht hulpmiddel voor applicatiedeployment-workflows
+- **azd**: Ontwikkelaarsgericht hulpmiddel voor applicatie-implementatieworkflows
 - azd gebruikt Azure CLI intern, maar biedt hogere abstracties voor veelvoorkomende ontwikkelscenario's
-- azd bevat templates, omgevingsbeheer en deploymentautomatisering
+- azd bevat templates, omgevingsbeheer en implementatie-automatisering
 
 ### V: Moet ik Azure CLI geïnstalleerd hebben om azd te gebruiken?
 **A**: Ja, azd vereist Azure CLI voor authenticatie en sommige bewerkingen. Installeer eerst Azure CLI en daarna azd.
@@ -84,21 +90,21 @@ Met regelmatige verwijzing naar deze FAQ kun je:
 ## Authenticatie & Toegang
 
 ### V: Hoe authenticeer ik met Azure via azd?
-**A**: Gebruik `azd auth login`, wat een browservenster opent voor Azure-authenticatie. Voor CI/CD-scenario's kun je serviceprincipals of managed identities gebruiken.
+**A**: Gebruik `azd auth login`, wat een browservenster opent voor Azure-authenticatie. Voor CI/CD-scenario's gebruik je serviceprincipals of managed identities.
 
 ### V: Kan ik azd gebruiken met meerdere Azure-abonnementen?
 **A**: Ja. Gebruik `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` om aan te geven welk abonnement je wilt gebruiken voor elke omgeving.
 
-### V: Welke rechten heb ik nodig om te deployen met azd?
+### V: Welke rechten heb ik nodig om te implementeren met azd?
 **A**: Meestal heb je nodig:
 - **Contributor**-rol op de resourcegroep of het abonnement
-- **User Access Administrator** als je resources deployt die roltoewijzingen vereisen
-- Specifieke rechten variëren per template en de te deployen resources
+- **User Access Administrator** als je resources implementeert die roltoewijzingen vereisen
+- Specifieke rechten variëren per template en de te implementeren resources
 
 ### V: Kan ik azd gebruiken in CI/CD-pipelines?
 **A**: Absoluut! azd is ontworpen voor CI/CD-integratie. Gebruik serviceprincipals voor authenticatie en stel omgevingsvariabelen in voor configuratie.
 
-### V: Hoe ga ik om met authenticatie in GitHub Actions?
+### V: Hoe behandel ik authenticatie in GitHub Actions?
 **A**: Gebruik de Azure Login-actie met serviceprincipal-credentials:
 ```yaml
 - uses: azure/login@v1
@@ -136,24 +142,24 @@ Met regelmatige verwijzing naar deze FAQ kun je:
 **A**: Templates worden niet automatisch bijgewerkt. Je kunt:
 1. Handmatig wijzigingen vergelijken en samenvoegen van de brontemplate
 2. Opnieuw beginnen met `azd init` met de bijgewerkte template
-3. Specifieke verbeteringen uit bijgewerkte templates overnemen
+3. Specifieke verbeteringen selecteren uit bijgewerkte templates
 
 ---
 
-## Deployment & Infrastructuur
+## Implementatie & Infrastructuur
 
-### V: Welke Azure-services kan azd deployen?
-**A**: azd kan elke Azure-service deployen via Bicep/ARM-templates, waaronder:
+### V: Welke Azure-services kan azd implementeren?
+**A**: azd kan elke Azure-service implementeren via Bicep/ARM-templates, waaronder:
 - App Services, Container Apps, Functions
 - Databases (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
 - Netwerken, beveiliging en monitoringresources
 
-### V: Kan ik deployen naar meerdere regio's?
-**A**: Ja, configureer meerdere regio's in je Bicep-templates en stel de locatieparameter in voor elke omgeving.
+### V: Kan ik implementeren in meerdere regio's?
+**A**: Ja, configureer meerdere regio's in je Bicep-templates en stel de locatieparameter correct in voor elke omgeving.
 
-### V: Hoe ga ik om met database-schema-migraties?
-**A**: Gebruik deployment hooks in `azure.yaml`:
+### V: Hoe behandel ik database-schema-migraties?
+**A**: Gebruik implementatiehooks in `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -163,17 +169,17 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### V: Kan ik alleen infrastructuur deployen zonder applicaties?
-**A**: Ja, gebruik `azd provision` om alleen de infrastructuurcomponenten te deployen die in je templates zijn gedefinieerd.
+### V: Kan ik alleen infrastructuur implementeren zonder applicaties?
+**A**: Ja, gebruik `azd provision` om alleen de infrastructuurcomponenten te implementeren die in je templates zijn gedefinieerd.
 
-### V: Hoe deploy ik naar bestaande Azure-resources?
+### V: Hoe implementeer ik naar bestaande Azure-resources?
 **A**: Dit is complex en niet direct ondersteund. Je kunt:
 1. Bestaande resources importeren in je Bicep-templates
 2. Verwijzingen naar bestaande resources gebruiken in templates
 3. Templates aanpassen om conditioneel resources te maken of te verwijzen
 
 ### V: Kan ik Terraform gebruiken in plaats van Bicep?
-**A**: Momenteel ondersteunt azd voornamelijk Bicep/ARM-templates. Terraform-ondersteuning is niet officieel beschikbaar, hoewel er community-oplossingen kunnen bestaan.
+**A**: Momenteel ondersteunt azd voornamelijk Bicep/ARM-templates. Terraform-ondersteuning is niet officieel beschikbaar, hoewel er mogelijk community-oplossingen bestaan.
 
 ---
 
@@ -188,7 +194,7 @@ azd env new production
 ```
 
 ### V: Waar worden omgevingsconfiguraties opgeslagen?
-**A**: In de `.azure`-map binnen je projectdirectory. Elke omgeving heeft een eigen map met configuratiebestanden.
+**A**: In de `.azure`-map binnen je projectdirectory. Elke omgeving heeft zijn eigen map met configuratiebestanden.
 
 ### V: Hoe stel ik omgevingsspecifieke configuratie in?
 **A**: Gebruik `azd env set` om omgevingsvariabelen te configureren:
@@ -198,9 +204,9 @@ azd env set DATABASE_TIER Basic
 ```
 
 ### V: Kan ik omgevingsconfiguraties delen met teamleden?
-**A**: De `.azure`-map bevat gevoelige informatie en moet niet worden opgenomen in versiebeheer. In plaats daarvan:
+**A**: De `.azure`-map bevat gevoelige informatie en mag niet worden gecommit naar versiebeheer. In plaats daarvan:
 1. Documenteer vereiste omgevingsvariabelen
-2. Gebruik deployment scripts om omgevingen in te stellen
+2. Gebruik implementatiescripts om omgevingen in te stellen
 3. Gebruik Azure Key Vault voor gevoelige configuratie
 
 ### V: Hoe overschrijf ik standaardwaarden van templates?
@@ -212,41 +218,41 @@ azd env set SKU_NAME "B1"
 
 ---
 
-## Probleemoplossing
+## Problemen oplossen
 
 ### V: Waarom faalt `azd up`?
 **A**: Veelvoorkomende oorzaken:
 1. **Authenticatieproblemen**: Voer `azd auth login` uit
 2. **Onvoldoende rechten**: Controleer je Azure-roltoewijzingen
-3. **Resource-naamconflicten**: Wijzig AZURE_ENV_NAME
+3. **Conflicten in resourcenamen**: Wijzig AZURE_ENV_NAME
 4. **Quota/capaciteitsproblemen**: Controleer regionale beschikbaarheid
 5. **Templatefouten**: Valideer Bicep-templates
 
-### V: Hoe debug ik deployment-fouten?
+### V: Hoe debug ik implementatiefouten?
 **A**: 
 1. Gebruik `azd deploy --debug` voor gedetailleerde uitvoer
-2. Controleer de deploymentgeschiedenis in de Azure-portal
-3. Bekijk het Activiteitenlogboek in de Azure-portal
+2. Controleer implementatiegeschiedenis in Azure Portal
+3. Bekijk Activiteitenlogboek in Azure Portal
 4. Gebruik `azd show` om de huidige omgevingsstatus weer te geven
 
 ### V: Waarom werken mijn omgevingsvariabelen niet?
 **A**: Controleer:
 1. Variabelenamen komen exact overeen met templateparameters
 2. Waarden zijn correct geciteerd als ze spaties bevatten
-3. De juiste omgeving is geselecteerd: `azd env select <environment>`
+3. Omgeving is geselecteerd: `azd env select <environment>`
 4. Variabelen zijn ingesteld in de juiste omgeving
 
-### V: Hoe ruim ik mislukte deployments op?
+### V: Hoe ruim ik mislukte implementaties op?
 **A**: 
 ```bash
 azd down --force --purge
 ```
 Dit verwijdert alle resources en omgevingsconfiguratie.
 
-### V: Waarom is mijn applicatie niet toegankelijk na deployment?
+### V: Waarom is mijn applicatie niet toegankelijk na implementatie?
 **A**: Controleer:
-1. Deployment is succesvol voltooid
-2. Applicatie draait (controleer logs in de Azure-portal)
+1. Implementatie is succesvol voltooid
+2. Applicatie draait (controleer logs in Azure Portal)
 3. Netwerkbeveiligingsgroepen staan verkeer toe
 4. DNS/aangepaste domeinen zijn correct geconfigureerd
 
@@ -254,16 +260,16 @@ Dit verwijdert alle resources en omgevingsconfiguratie.
 
 ## Kosten & Facturering
 
-### V: Hoeveel kosten azd-deployments?
+### V: Hoeveel kosten azd-implementaties?
 **A**: Kosten zijn afhankelijk van:
-- Azure-services die worden gedeployed
-- Service tiers/SKU's die worden geselecteerd
+- Azure-services die worden geïmplementeerd
+- Service tiers/SKU's die zijn geselecteerd
 - Regionale prijsverschillen
 - Gebruikerspatronen
 
 Gebruik de [Azure Prijscalculator](https://azure.microsoft.com/pricing/calculator/) voor schattingen.
 
-### V: Hoe beheer ik kosten in azd-deployments?
+### V: Hoe beheer ik kosten in azd-implementaties?
 **A**: 
 1. Gebruik lagere SKU's voor ontwikkelomgevingen
 2. Stel Azure-budgetten en waarschuwingen in
@@ -278,13 +284,13 @@ Gebruik de [Azure Prijscalculator](https://azure.microsoft.com/pricing/calculato
 - Cosmos DB: Gratis tier met 400 RU/s
 - Application Insights: Eerste 5GB/maand gratis
 
-Configureer templates om gratis opties te gebruiken waar beschikbaar.
+Configureer templates om gratis tiers te gebruiken waar beschikbaar.
 
-### V: Hoe schat ik kosten in voordat ik deploy?
+### V: Hoe schat ik kosten voorafgaand aan implementatie?
 **A**: 
 1. Bekijk de `main.bicep` van de template om te zien welke resources worden gemaakt
-2. Gebruik de Azure Prijscalculator met specifieke SKU's
-3. Deploy eerst naar een ontwikkelomgeving om werkelijke kosten te monitoren
+2. Gebruik Azure Prijscalculator met specifieke SKU's
+3. Implementeer eerst naar een ontwikkelomgeving om werkelijke kosten te monitoren
 4. Gebruik Azure Cost Management voor gedetailleerde kostenanalyse
 
 ---
@@ -311,33 +317,33 @@ Configureer templates om gratis opties te gebruiken waar beschikbaar.
 └── README.md         # Project documentation
 ```
 
-### V: Moet ik de `.azure`-map opnemen in versiebeheer?
+### V: Moet ik de `.azure`-map committen naar versiebeheer?
 **A**: **Nee!** De `.azure`-map bevat gevoelige informatie. Voeg deze toe aan `.gitignore`:
 ```gitignore
 .azure/
 ```
 
-### V: Hoe ga ik om met geheimen en gevoelige configuratie?
+### V: Hoe behandel ik geheimen en gevoelige configuratie?
 **A**: 
 1. Gebruik Azure Key Vault voor geheimen
 2. Verwijs naar Key Vault-geheimen in applicatieconfiguratie
-3. Nooit geheimen opnemen in versiebeheer
-4. Gebruik managed identities voor service-to-service authenticatie
+3. Commit nooit geheimen naar versiebeheer
+4. Gebruik managed identities voor service-naar-service-authenticatie
 
 ### V: Wat is de aanbevolen aanpak voor CI/CD met azd?
 **A**: 
 1. Gebruik aparte omgevingen voor elke fase (dev/staging/prod)
-2. Implementeer geautomatiseerde tests vóór deployment
+2. Implementeer geautomatiseerde tests vóór implementatie
 3. Gebruik serviceprincipals voor authenticatie
 4. Sla gevoelige configuratie op in pipeline-geheimen/variabelen
-5. Implementeer goedkeuringsstappen voor productie-deployments
+5. Implementeer goedkeuringsstappen voor productie-implementaties
 
 ---
 
 ## Geavanceerde Onderwerpen
 
 ### V: Kan ik azd uitbreiden met aangepaste functionaliteit?
-**A**: Ja, via deployment hooks in `azure.yaml`:
+**A**: Ja, via implementatiehooks in `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -349,7 +355,7 @@ hooks:
 ### V: Hoe integreer ik azd met bestaande DevOps-processen?
 **A**: 
 1. Gebruik azd-commando's in bestaande pipeline-scripts
-2. Standaardiseer azd-templates binnen teams
+2. Standaardiseer op azd-templates binnen teams
 3. Integreer met bestaande monitoring en waarschuwingen
 4. Gebruik de JSON-uitvoer van azd voor pipeline-integratie
 
@@ -359,51 +365,72 @@ hooks:
 ### V: Hoe draag ik bij aan azd of maak ik community-templates?
 **A**: 
 1. **azd-tool**: Draag bij aan [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Templates**: Maak templates volgens de [templategids](https://github.com/Azure-Samples/awesome-azd)
-3. **Documentatie**: Draag bij aan documentatie via [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+## Veelgestelde vragen over Azure Developer CLI (azd)
 
-### V: Wat is de roadmap voor azd?
-**A**: Bekijk de [officiële roadmap](https://github.com/Azure/azure-dev/projects) voor geplande functies en verbeteringen.
+### Vraag: Wat is azd?
+**Antwoord**: Azure Developer CLI (azd) is een tool die ontwikkelaars helpt bij het bouwen, implementeren en beheren van applicaties in Azure. Het biedt een gestroomlijnde ervaring voor het werken met Azure-resources.
 
-### V: Hoe migreer ik van andere deployment-tools naar azd?
-**A**:
-1. Analyseer de huidige implementatiearchitectuur  
-2. Maak gelijkwaardige Bicep-sjablonen  
-3. Configureer `azure.yaml` om overeen te komen met de huidige services  
-4. Test grondig in de ontwikkelomgeving  
-5. Migreer omgevingen geleidelijk  
+---
+
+### Vraag: Hoe kan ik bijdragen aan azd?
+**Antwoord**: Er zijn verschillende manieren om bij te dragen:
+
+1. **Code**: Draag bij aan de broncode via [GitHub](https://github.com/Azure/azure-dev).
+2. **Templates**: Maak templates volgens de [template richtlijnen](https://github.com/Azure-Samples/awesome-azd).
+3. **Documentatie**: Draag bij aan de documentatie via [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs).
+
+---
+
+### Vraag: Wat is de roadmap voor azd?
+**Antwoord**: Bekijk de [officiële roadmap](https://github.com/Azure/azure-dev/projects) voor geplande functies en verbeteringen.
+
+---
+
+### Vraag: Hoe migreer ik van andere implementatietools naar azd?
+**Antwoord**: 
+1. Analyseer de huidige implementatiearchitectuur.
+2. Maak equivalente Bicep-templates.
+3. Configureer `azure.yaml` om overeen te komen met de huidige services.
+4. Test grondig in de ontwikkelomgeving.
+5. Migreer omgevingen geleidelijk.
 
 ---
 
 ## Nog vragen?
 
 ### **Eerst zoeken**
-- Bekijk de [officiële documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Zoek naar vergelijkbare problemen in [GitHub issues](https://github.com/Azure/azure-dev/issues)  
+- Bekijk de [officiële documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/).
+- Zoek naar vergelijkbare problemen in [GitHub issues](https://github.com/Azure/azure-dev/issues).
+
+---
 
 ### **Hulp krijgen**
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Ondersteuning vanuit de community  
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Technische vragen  
-- [Azure Discord](https://discord.gg/azure) - Real-time communitychat  
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Ondersteuning vanuit de community.
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Technische vragen.
+- [Azure Discord](https://discord.gg/azure) - Real-time community chat.
+
+---
 
 ### **Problemen melden**
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Voor het melden van bugs en het indienen van functieverzoeken  
-- Voeg relevante logs, foutmeldingen en stappen om het probleem te reproduceren toe  
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Bugrapporten en functieverzoeken.
+- Voeg relevante logs, foutmeldingen en stappen om te reproduceren toe.
+
+---
 
 ### **Meer leren**
-- [Azure Developer CLI-documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)  
+- [Azure Developer CLI documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/).
+- [Azure Architectuurcentrum](https://learn.microsoft.com/en-us/azure/architecture/).
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/).
 
 ---
 
-*Deze FAQ wordt regelmatig bijgewerkt. Laatst bijgewerkt: 9 september 2025*  
+*Deze FAQ wordt regelmatig bijgewerkt. Laatst bijgewerkt: 9 september 2025.*
 
 ---
 
-**Navigatie**  
-- **Vorige les**: [Woordenlijst](glossary.md)  
-- **Volgende les**: [Studiegids](study-guide.md)  
+**Navigatie**
+- **Vorige les**: [Glossary](glossary.md)
+- **Volgende les**: [Study Guide](study-guide.md)
 
 ---
 

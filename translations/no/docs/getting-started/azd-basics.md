@@ -1,47 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T21:08:54+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T06:16:43+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "no"
 }
 -->
 # AZD Grunnleggende - Forstå Azure Developer CLI
 
-**Forrige:** [Installasjon og Oppsett](installation.md) | **Neste:** [Konfigurasjon](configuration.md)
+# AZD Grunnleggende - Kjernebegreper og Fundament
+
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Hurtigstart
+- **⬅️ Forrige**: [Kursoversikt](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Neste**: [Installasjon & Oppsett](installation.md)
+- **🚀 Neste Kapittel**: [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduksjon
 
-Denne leksjonen introduserer deg for Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen din fra lokal utvikling til Azure-deployering. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler deployering av skybaserte applikasjoner.
+Denne leksjonen introduserer deg til Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen fra lokal utvikling til Azure-deployering. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler deployering av skybaserte applikasjoner.
 
 ## Læringsmål
 
 Ved slutten av denne leksjonen vil du:
 - Forstå hva Azure Developer CLI er og dets hovedformål
-- Lære de grunnleggende konseptene som maler, miljøer og tjenester
+- Lære kjernebegrepene som maler, miljøer og tjenester
 - Utforske nøkkelfunksjoner som malbasert utvikling og Infrastructure as Code
-- Forstå azd-projektstrukturen og arbeidsflyten
+- Forstå azd-prosjektstrukturen og arbeidsflyten
 - Være klar til å installere og konfigurere azd for ditt utviklingsmiljø
 
 ## Læringsutbytte
 
 Etter å ha fullført denne leksjonen vil du kunne:
 - Forklare rollen til azd i moderne skyutviklingsarbeidsflyter
-- Identifisere komponentene i en azd-projektstruktur
+- Identifisere komponentene i en azd-prosjektstruktur
 - Beskrive hvordan maler, miljøer og tjenester fungerer sammen
 - Forstå fordelene med Infrastructure as Code med azd
 - Gjenkjenne ulike azd-kommandoer og deres formål
 
 ## Hva er Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen din fra lokal utvikling til Azure-deployering. Det forenkler prosessen med å bygge, deployere og administrere skybaserte applikasjoner på Azure.
+Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen fra lokal utvikling til Azure-deployering. Det forenkler prosessen med å bygge, deployere og administrere skybaserte applikasjoner på Azure.
 
-## Grunnleggende Konsepter
+## Kjernebegreper
 
 ### Maler
 Maler er grunnlaget for azd. De inneholder:
-- **Applikasjonskode** - Kildekoden din og avhengigheter
+- **Applikasjonskode** - Kildekode og avhengigheter
 - **Infrastrukturdefinisjoner** - Azure-ressurser definert i Bicep eller Terraform
 - **Konfigurasjonsfiler** - Innstillinger og miljøvariabler
 - **Deployeringsskript** - Automatiserte deployeringsarbeidsflyter
@@ -99,7 +106,7 @@ azd env list
 
 ## 📁 Prosjektstruktur
 
-En typisk azd-projektstruktur:
+En typisk azd-prosjektstruktur:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -191,7 +198,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Forstå `azd down --force --purge`
-Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned azd-miljøet ditt og alle tilknyttede ressurser. Her er en oversikt over hva hver flagg gjør:
+Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned azd-miljøet og alle tilknyttede ressurser. Her er en oversikt over hva hver flagg gjør:
 ```
 --force
 ```
@@ -203,9 +210,9 @@ Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ne
 --purge
 ```
 Sletter **all tilknyttet metadata**, inkludert:
-Miljøtilstand
-Lokal `.azure`-mappe
-Bufret deployeringsinformasjon
+Miljøtilstand  
+Lokal `.azure`-mappe  
+Bufret deployeringsinformasjon  
 Forhindrer azd fra å "huske" tidligere deployeringer, som kan forårsake problemer som feil ressursgrupper eller utdaterte registerreferanser.
 
 ### Hvorfor bruke begge?
@@ -283,10 +290,10 @@ azd init --template template1
 ### Nybegynner (Uke 1-2)
 1. Installer azd og autentiser
 2. Deploy en enkel mal
-3. Forstå prosjektstruktur
+3. Forstå prosjektstrukturen
 4. Lær grunnleggende kommandoer (up, down, deploy)
 
-### Middels (Uke 3-4)
+### Middels Erfaren (Uke 3-4)
 1. Tilpass maler
 2. Administrer flere miljøer
 3. Forstå infrastrukturkode
@@ -300,11 +307,15 @@ azd init --template template1
 
 ## Neste Steg
 
-- [Installasjon og Oppsett](installation.md) - Få azd installert og konfigurert
-- [Ditt Første Prosjekt](first-project.md) - Praktisk veiledning
+**📖 Fortsett Kapittel 1 Læring:**
+- [Installasjon & Oppsett](installation.md) - Installer og konfigurer azd
+- [Ditt Første Prosjekt](first-project.md) - Fullfør praktisk opplæring
 - [Konfigurasjonsguide](configuration.md) - Avanserte konfigurasjonsalternativer
 
-## Tilleggsressurser
+**🎯 Klar for Neste Kapittel?**
+- [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md) - Begynn å bygge AI-applikasjoner
+
+## Ekstra Ressurser
 
 - [Azure Developer CLI Oversikt](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Malbibliotek](https://azure.github.io/awesome-azd/)
@@ -312,10 +323,14 @@ azd init --template template1
 
 ---
 
-**Forrige:** [Installasjon og Oppsett](installation.md) | **Neste:** [Konfigurasjon](configuration.md)
-- **Neste Leksjon**: [Installasjon og Oppsett](installation.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Hurtigstart  
+- **⬅️ Forrige**: [Kursoversikt](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Neste**: [Installasjon & Oppsett](installation.md)
+- **🚀 Neste Kapittel**: [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

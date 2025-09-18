@@ -1,25 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:51:51+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T06:33:20+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "fi"
 }
 -->
 # AI-mallin käyttöönotto Azure Developer CLI:llä
 
-**Edellinen:** [Azure AI Foundry -integraatio](azure-ai-foundry-integration.md) | **Seuraava:** [AI Workshop Lab](ai-workshop-lab.md)
+**Luvun navigointi:**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
+- **⬅️ Edellinen**: [Azure AI Foundry -integraatio](azure-ai-foundry-integration.md)
+- **➡️ Seuraava**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../getting-started/configuration.md)
 
-Tämä opas tarjoaa kattavat ohjeet AI-mallien käyttöönottoon AZD-mallipohjien avulla, sisältäen kaiken mallin valinnasta tuotantokäyttöön liittyviin toimintamalleihin.
+Tämä opas tarjoaa kattavat ohjeet AI-mallien käyttöönottoon AZD-mallipohjien avulla, sisältäen kaiken mallin valinnasta tuotantokäyttöön liittyviin käyttöönoton malleihin.
 
 ## Sisällysluettelo
 
 - [Mallin valintastrategia](../../../../docs/ai-foundry)
 - [AZD-konfigurointi AI-malleille](../../../../docs/ai-foundry)
-- [Käyttöönoton toimintamallit](../../../../docs/ai-foundry)
+- [Käyttöönoton mallit](../../../../docs/ai-foundry)
 - [Mallien hallinta](../../../../docs/ai-foundry)
-- [Tuotantokäytön huomioitavat asiat](../../../../docs/ai-foundry)
+- [Tuotantokäytön huomioita](../../../../docs/ai-foundry)
 - [Seuranta ja näkyvyys](../../../../docs/ai-foundry)
 
 ## Mallin valintastrategia
@@ -138,9 +143,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Käyttöönoton toimintamallit
+## Käyttöönoton mallit
 
-### Toimintamalli 1: Yhden alueen käyttöönotto
+### Malli 1: Yhden alueen käyttöönotto
 
 ```yaml
 # azure.yaml - Single region
@@ -153,12 +158,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Paras valinta:
+Paras seuraaviin:
 - Kehitys ja testaus
 - Yhden markkina-alueen sovellukset
 - Kustannusten optimointi
 
-### Toimintamalli 2: Monialueen käyttöönotto
+### Malli 2: Monialueen käyttöönotto
 
 ```bicep
 // Multi-region deployment
@@ -171,12 +176,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Paras valinta:
+Paras seuraaviin:
 - Globaalit sovellukset
 - Korkean saatavuuden vaatimukset
 - Kuormituksen jakaminen
 
-### Toimintamalli 3: Hybridikäyttöönotto
+### Malli 3: Hybridikäyttöönotto
 
 Yhdistä Azure OpenAI muihin AI-palveluihin:
 
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Tuotantokäytön huomioitavat asiat
+## Tuotantokäytön huomioita
 
 ### Kapasiteettisuunnittelu
 
@@ -337,7 +342,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Kustannusten optimointi
 
-Ota käyttöön kustannusten hallintakeinot:
+Ota käyttöön kustannusten hallintatoimenpiteet:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -478,8 +483,8 @@ async def check_ai_models():
 ## Seuraavat askeleet
 
 1. **Tutustu [Azure AI Foundry -integraatio-oppaaseen](azure-ai-foundry-integration.md)** palveluiden integrointimalleista
-2. **Suorita [AI Workshop Lab](ai-workshop-lab.md)** käytännön kokemuksen saamiseksi
-3. **Ota käyttöön [Tuotannon AI-käytännöt](production-ai-practices.md)** yrityskäyttöön
+2. **Suorita [AI Workshop Lab](ai-workshop-lab.md)** saadaksesi käytännön kokemusta
+3. **Ota käyttöön [Tuotannon AI-käytännöt](production-ai-practices.md)** yrityskäyttöönottoja varten
 4. **Tutustu [AI-vianmääritysoppaaseen](../troubleshooting/ai-troubleshooting.md)** yleisten ongelmien ratkaisemiseksi
 
 ## Resurssit
@@ -487,11 +492,16 @@ async def check_ai_models():
 - [Azure OpenAI -mallien saatavuus](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps -skaalaus](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI-mallien kustannusoptimointi](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [AI-mallien kustannusten optimointi](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Edellinen:** [Azure AI Foundry -integraatio](azure-ai-foundry-integration.md) | **Seuraava:** [AI Workshop Lab](ai-workshop-lab.md)
+**Luvun navigointi:**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
+- **⬅️ Edellinen**: [Azure AI Foundry -integraatio](azure-ai-foundry-integration.md)
+- **➡️ Seuraava**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../getting-started/configuration.md)
 
 ---
 

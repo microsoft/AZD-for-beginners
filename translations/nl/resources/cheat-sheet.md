@@ -1,21 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:45:48+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T07:02:11+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "nl"
 }
 -->
 # Command Cheat Sheet - Essentiële AZD-commando's
 
+**Snelle Referentie voor Alle Hoofdstukken**
+- **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
+- **📖 Snelle Start**: [Hoofdstuk 1: Basis & Snelle Start](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-commando's**: [Hoofdstuk 2: AI-First Ontwikkeling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Geavanceerd**: [Hoofdstuk 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Introductie
 
-Deze uitgebreide cheat sheet biedt een snel overzicht van de meest gebruikte Azure Developer CLI-commando's, georganiseerd per categorie met praktische voorbeelden. Perfect voor snelle opzoekingen tijdens ontwikkeling, probleemoplossing en dagelijkse werkzaamheden met azd-projecten.
+Dit uitgebreide overzicht biedt een snelle referentie voor de meest gebruikte Azure Developer CLI-commando's, georganiseerd per categorie met praktische voorbeelden. Perfect voor snelle opzoekingen tijdens ontwikkeling, probleemoplossing en dagelijkse werkzaamheden met azd-projecten.
 
 ## Leerdoelen
 
-Door gebruik te maken van deze cheat sheet, kun je:
+Door gebruik te maken van dit overzicht, kun je:
 - Direct toegang krijgen tot essentiële Azure Developer CLI-commando's en syntaxis
 - Begrijpen hoe commando's zijn georganiseerd op basis van functionele categorieën en gebruiksscenario's
 - Praktische voorbeelden raadplegen voor veelvoorkomende ontwikkelings- en implementatiescenario's
@@ -25,15 +31,15 @@ Door gebruik te maken van deze cheat sheet, kun je:
 
 ## Leerresultaten
 
-Door regelmatig naar deze cheat sheet te verwijzen, kun je:
-- Zelfverzekerd azd-commando's uitvoeren zonder volledige documentatie te raadplegen
+Door regelmatig naar dit overzicht te verwijzen, kun je:
+- AZD-commando's zelfverzekerd uitvoeren zonder volledige documentatie te raadplegen
 - Veelvoorkomende problemen snel oplossen met de juiste diagnostische commando's
-- Efficiënt meerdere omgevingen en implementatiescenario's beheren
-- Geavanceerde azd-functies en configuratieopties toepassen wanneer nodig
+- Meerdere omgevingen en implementatiescenario's efficiënt beheren
+- Geavanceerde AZD-functies en configuratieopties toepassen wanneer nodig
 - Implementatieproblemen oplossen met systematische commando-reeksen
-- Workflows optimaliseren door effectief gebruik te maken van azd-sneltoetsen en opties
+- Workflows optimaliseren door effectief gebruik van AZD-sneltoetsen en opties
 
-## Aan de slag-commando's
+## Aan de slag met commando's
 
 ### Authenticatie
 ```bash
@@ -48,7 +54,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Projectinitialisatie
+### Project Initialisatie
 ```bash
 # Browse available templates
 azd template list
@@ -66,7 +72,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Kernimplementatiecommando's
 
-### Volledige implementatieworkflow
+### Complete Implementatieworkflow
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -81,7 +87,7 @@ azd up --environment production
 azd up --parameter location=westus2
 ```
 
-### Alleen infrastructuur
+### Alleen Infrastructuur
 ```bash
 # Provision Azure resources
 azd provision
@@ -93,7 +99,7 @@ azd provision --preview
 azd provision --what-if
 ```
 
-### Alleen applicatie
+### Alleen Applicatie
 ```bash
 # Deploy application code
 azd deploy
@@ -106,7 +112,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Build en pakket
+### Build en Package
 ```bash
 # Build applications
 azd package
@@ -154,7 +160,7 @@ azd env unset DEBUG
 
 ## ⚙️ Configuratiecommando's
 
-### Globale configuratie
+### Globale Configuratie
 ```bash
 # List all configuration
 azd config list
@@ -182,7 +188,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 Monitoring en logs
+## 📊 Monitoring en Logs
 
 ### Applicatielogs
 ```bash
@@ -279,7 +285,7 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 Snelle workflows
+## 🎯 Snelle Workflows
 
 ### Ontwikkelingsworkflow
 ```bash
@@ -298,7 +304,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Workflow met meerdere omgevingen
+### Workflow met Meerdere Omgevingen
 ```bash
 # Set up environments
 azd env new dev
@@ -336,7 +342,7 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Debugging-commando's
+## 🔍 Debuggingcommando's
 
 ### Debuginformatie
 ```bash
@@ -354,7 +360,7 @@ azd info
 az account show
 ```
 
-### Sjabloondebugging
+### Template Debugging
 ```bash
 # List available templates with details
 azd template list --output json
@@ -366,7 +372,7 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 Bestands- en mapcommando's
+## 📁 Bestands- en Directorycommando's
 
 ### Projectstructuur
 ```bash
@@ -381,9 +387,9 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Outputformattering
+## 🎨 Output Formatting
 
-### JSON-output
+### JSON Output
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -395,16 +401,16 @@ azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tabeloutput
+### Tabel Output
 ```bash
 # Format as table
 azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Veelvoorkomende commando-combinaties
+## 🔧 Veelvoorkomende Commandocombinaties
 
-### Script voor gezondheidscontrole
+### Health Check Script
 ```bash
 #!/bin/bash
 # Quick health check
@@ -413,7 +419,7 @@ azd env show
 azd logs --level error --since 10m
 ```
 
-### Validatie van implementatie
+### Implementatievalidatie
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -422,7 +428,7 @@ azd provision --preview
 az account show
 ```
 
-### Vergelijking van omgevingen
+### Omgevingsvergelijking
 ```bash
 #!/bin/bash
 # Compare environments
@@ -433,7 +439,7 @@ for env in dev staging production; do
 done
 ```
 
-### Script voor opschonen van resources
+### Resource Opschoonscript
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -446,7 +452,7 @@ done
 
 ## 📝 Omgevingsvariabelen
 
-### Veelvoorkomende omgevingsvariabelen
+### Veelvoorkomende Omgevingsvariabelen
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -465,7 +471,7 @@ export LOG_LEVEL="info"
 
 ## 🚨 Noodcommando's
 
-### Snelle oplossingen
+### Snelle Oplossingen
 ```bash
 # Reset authentication
 az account clear
@@ -494,7 +500,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Pro Tips
 
-### Aliassen voor snellere workflows
+### Aliassen voor Snellere Workflows
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -503,7 +509,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Functiesneltoetsen
+### Functie Sneltoetsen
 ```bash
 # Quick environment switching
 azd-env() {
@@ -523,9 +529,9 @@ azd-status() {
 }
 ```
 
-## 📖 Hulp en documentatie
+## 📖 Hulp en Documentatie
 
-### Hulp krijgen
+### Hulp Krijgen
 ```bash
 # General help
 azd --help
@@ -552,15 +558,15 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Maak een bladwijzer van deze cheat sheet en gebruik `Ctrl+F` om snel de commando's te vinden die je nodig hebt!
+**Tip**: Maak een bladwijzer van dit overzicht en gebruik `Ctrl+F` om snel de commando's te vinden die je nodig hebt!
 
 ---
 
 **Navigatie**
-- **Vorige les**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
-- **Volgende les**: [Glossary](glossary.md)
+- **Vorige Les**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
+- **Volgende Les**: [Glossary](glossary.md)
 
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

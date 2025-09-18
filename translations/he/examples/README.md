@@ -1,39 +1,45 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:18:17+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-18T07:14:40+00:00",
   "source_file": "examples/README.md",
   "language_code": "he"
 }
 -->
 # דוגמאות - תבניות וקונפיגורציות מעשיות של AZD
 
+**לימוד דרך דוגמאות - מאורגן לפי פרקים**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../README.md)
+- **📖 מיפוי פרקים**: דוגמאות מאורגנות לפי רמת מורכבות הלמידה
+- **🚀 להתחיל פשוט**: [דוגמאות פרק 1](../../../examples)
+- **🤖 דוגמאות AI**: [דוגמאות פרק 2 ו-5 פתרונות AI](../../../examples)
+
 ## הקדמה
 
-התיקייה הזו מכילה דוגמאות מעשיות, תבניות ותסריטים מהעולם האמיתי שיעזרו לך ללמוד את Azure Developer CLI דרך תרגול מעשי. כל דוגמה מספקת קוד עובד מלא, תבניות תשתית והוראות מפורטות עבור ארכיטקטורות יישומים ודפוסי פריסה שונים.
+התיקייה הזו מכילה דוגמאות מעשיות, תבניות ותסריטים מהעולם האמיתי שיעזרו לך ללמוד את Azure Developer CLI דרך תרגול מעשי. כל דוגמה כוללת קוד עובד מלא, תבניות תשתית והוראות מפורטות עבור ארכיטקטורות אפליקציה ודפוסי פריסה שונים.
 
 ## מטרות למידה
 
-על ידי עבודה עם הדוגמאות הללו, תלמד:
-- לתרגל תהליכי עבודה של Azure Developer CLI עם תסריטי יישומים מציאותיים
-- להבין ארכיטקטורות יישומים שונות ואת היישום שלהן ב-azd
+על ידי עבודה עם הדוגמאות הללו, תוכל:
+- לתרגל תהליכי עבודה של Azure Developer CLI עם תסריטי אפליקציה מציאותיים
+- להבין ארכיטקטורות אפליקציה שונות והיישומים שלהן ב-AZD
 - לשלוט בדפוסי Infrastructure as Code עבור שירותי Azure שונים
 - ליישם ניהול קונפיגורציה ואסטרטגיות פריסה מותאמות לסביבה
-- ליישם דפוסי ניטור, אבטחה וסקיילינג בהקשרים מעשיים
+- ליישם דפוסי ניטור, אבטחה והרחבה בהקשרים מעשיים
 - לצבור ניסיון בפתרון בעיות ובדיבוג תסריטי פריסה אמיתיים
 
 ## תוצאות למידה
 
 לאחר השלמת הדוגמאות הללו, תוכל:
-- לפרוס סוגי יישומים שונים באמצעות Azure Developer CLI בביטחון
-- להתאים את התבניות המסופקות לדרישות היישום שלך
+- לפרוס סוגי אפליקציות שונים באמצעות Azure Developer CLI בביטחון
+- להתאים את התבניות המסופקות לדרישות האפליקציה שלך
 - לעצב וליישם דפוסי תשתית מותאמים אישית באמצעות Bicep
-- להגדיר יישומים מורכבים מרובי שירותים עם תלות נכונה
+- להגדיר אפליקציות מורכבות מרובות שירותים עם תלות נכונה
 - ליישם שיטות עבודה מומלצות לאבטחה, ניטור וביצועים בתסריטים אמיתיים
 - לפתור בעיות ולייעל פריסות על בסיס ניסיון מעשי
 
-## מבנה התיקייה
+## מבנה תיקייה
 
 ```
 Azure Samples AZD Templates (linked externally):
@@ -59,7 +65,7 @@ Azure Samples AZD Templates (linked externally):
 ### למשתמשים בינוניים
 4. **[אפליקציית בסיס נתונים - C# עם Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - אפליקציית ווב עם API ב-C# ובסיס נתונים Azure SQL  
 5. **[פונקציה ללא שרת - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - פונקציות Azure Python עם טריגרים HTTP ו-Cosmos DB  
-6. **[מיקרו-שירותים - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - אפליקציית Java מרובת שירותים עם Container Apps ו-API Gateway  
+6. **[מיקרו-שירותים - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - אפליקציית Java מרובת שירותים עם Container Apps ושער API  
 
 ### תבניות Azure AI Foundry
 
@@ -67,37 +73,58 @@ Azure Samples AZD Templates (linked externally):
 2. **[עיבוד מסמכים AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - ניתוח מסמכים באמצעות שירותי Azure AI  
 3. **[צינור למידת מכונה](https://github.com/Azure-Samples/mlops-v2)** - תהליך MLOps עם Azure Machine Learning  
 
+### תסריטים מהעולם האמיתי
+
+#### **פתרון רב-סוכנים לקמעונאות** 🆕  
+**[מדריך יישום מלא](./retail-scenario.md)**  
+
+פתרון תמיכה לקוחות רב-סוכנים מקיף ומוכן לייצור שמדגים פריסת אפליקציות AI ברמה ארגונית עם AZD. התסריט הזה מספק:
+
+- **ארכיטקטורה מלאה**: מערכת רב-סוכנים עם סוכנים מיוחדים לשירות לקוחות וניהול מלאי  
+- **תשתית ייצור**: פריסות Azure OpenAI מרובות אזורים, AI Search, Container Apps וניטור מקיף  
+- **תבנית ARM מוכנה לפריסה**: פריסה בלחיצה אחת עם מצבי קונפיגורציה מרובים (מינימלי/סטנדרטי/פרימיום)  
+- **תכונות מתקדמות**: אימות אבטחה, מסגרת הערכת סוכנים, אופטימיזציה עלויות ומדריכי פתרון בעיות  
+- **הקשר עסקי אמיתי**: תסריט תמיכה לקוחות לקמעונאים עם העלאת קבצים, אינטגרציית חיפוש והרחבה דינמית  
+
+**טכנולוגיות**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API  
+
+**מורכבות**: ⭐⭐⭐⭐ (מתקדם - מוכן לייצור ארגוני)  
+
+**מושלם עבור**: מפתחי AI, ארכיטקטי פתרונות וצוותים שבונים מערכות רב-סוכנים לייצור  
+
+**התחלה מהירה**: פרוס את הפתרון המלא בפחות מ-30 דקות באמצעות תבנית ARM הכלולה עם `./deploy.sh -g myResourceGroup`  
+
 ## 📋 הוראות שימוש
 
 ### הרצת דוגמאות באופן מקומי
 
-1. **שכפול או העתקת דוגמה**  
+1. **שכפל או העתק דוגמה**  
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
-   ```
+   ```  
 
-2. **הגדרת סביבת AZD**  
+2. **אתחל סביבה של AZD**  
    ```bash
    # Initialize with existing template
    azd init
    
    # Or create new environment
    azd env new my-environment
-   ```
+   ```  
 
-3. **הגדרת סביבה**  
+3. **הגדר סביבה**  
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
-   ```
+   ```  
 
-4. **פריסה**  
+4. **פרוס**  
    ```bash
    # Deploy infrastructure and application
    azd up
-   ```
+   ```  
 
 ### התאמת דוגמאות
 
@@ -105,7 +132,7 @@ Azure Samples AZD Templates (linked externally):
 - **README.md** - הוראות מפורטות להגדרה והתאמה אישית  
 - **azure.yaml** - קונפיגורציית AZD עם הערות  
 - **infra/** - תבניות Bicep עם הסברים על פרמטרים  
-- **src/** - קוד יישום לדוגמה  
+- **src/** - קוד אפליקציה לדוגמה  
 - **scripts/** - סקריפטים עזר למשימות נפוצות  
 
 ## 🎯 מטרות למידה
@@ -113,10 +140,10 @@ Azure Samples AZD Templates (linked externally):
 ### קטגוריות דוגמאות
 
 #### **פריסות בסיסיות**
-- יישומים עם שירות יחיד  
+- אפליקציות שירות יחיד  
 - דפוסי תשתית פשוטים  
 - ניהול קונפיגורציה בסיסי  
-- הגדרות פיתוח חסכוניות  
+- סביבות פיתוח חסכוניות  
 
 #### **תסריטים מתקדמים**
 - ארכיטקטורות מרובות שירותים  
@@ -197,7 +224,7 @@ Azure Samples AZD Templates (linked externally):
 
 ### סקריפטים עזר
 - אוטומציה להגדרת סביבה  
-- סקריפטים למיגרציית בסיסי נתונים  
+- סקריפטים למיגרציית בסיס נתונים  
 - כלים לאימות פריסה  
 - כלי ניטור עלויות  
 
@@ -205,22 +232,22 @@ Azure Samples AZD Templates (linked externally):
 
 ### התאמת דוגמאות לצרכים שלך
 
-1. **סקירת דרישות מקדימות**
-   - בדוק את דרישות שירותי Azure  
+1. **סקור דרישות מקדימות**
+   - בדוק דרישות שירותי Azure  
    - וודא מגבלות מנוי  
    - הבן השלכות עלויות  
 
-2. **שינוי קונפיגורציה**
-   - עדכן את הגדרות השירות ב-`azure.yaml`  
-   - התאמה אישית של תבניות Bicep  
-   - התאמת משתני סביבה  
+2. **שנה קונפיגורציה**
+   - עדכן הגדרות שירות ב-`azure.yaml`  
+   - התאם תבניות Bicep  
+   - שנה משתני סביבה  
 
-3. **בדיקה יסודית**
-   - פרוס תחילה לסביבת פיתוח  
-   - אמת את הפונקציונליות  
-   - בדוק סקיילינג וביצועים  
+3. **בדוק ביסודיות**
+   - פרוס קודם לסביבת פיתוח  
+   - אמת פונקציונליות  
+   - בדוק הרחבה וביצועים  
 
-4. **סקירת אבטחה**
+4. **סקור אבטחה**
    - בדוק בקרות גישה  
    - יישם ניהול סודות  
    - הפעל ניטור והתראות  
@@ -238,6 +265,7 @@ Azure Samples AZD Templates (linked externally):
 | Azure OpenAI Chat | 3 | ✅ | מלא | מלא | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | בסיסי | מלא | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | מלא | מלא | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **ארגוני** | **מתקדם** | **⭐⭐⭐⭐** |
 
 ## 🎓 מסלול למידה
 
@@ -245,17 +273,17 @@ Azure Samples AZD Templates (linked externally):
 
 1. **התחל עם אפליקציית ווב פשוטה**
    - למד מושגי AZD בסיסיים  
-   - הבן את תהליך הפריסה  
+   - הבן תהליך פריסה  
    - תרגל ניהול סביבה  
 
 2. **נסה אתר סטטי**
    - חקור אפשרויות אירוח שונות  
-   - למד על אינטגרציה עם CDN  
+   - למד על אינטגרציית CDN  
    - הבן קונפיגורציית DNS  
 
 3. **עבור לאפליקציית קונטיינר**
-   - למד את יסודות הקונטיינריזציה  
-   - הבן מושגי סקיילינג  
+   - למד יסודות קונטיינריזציה  
+   - הבן מושגי הרחבה  
    - תרגל עם Docker  
 
 4. **הוסף אינטגרציה עם בסיס נתונים**
@@ -278,60 +306,65 @@ Azure Samples AZD Templates (linked externally):
 ### לפי טכנולוגיה
 - **Node.js**: אפליקציית Node.js Express Todo  
 - **Python**: אפליקציית Python Flask Container, Python Functions + SPA  
-- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline  
-- **Java**: Java Spring Boot Microservices  
+- **C#**: C# Web API + SQL Database, אפליקציית צ'אט Azure OpenAI, צינור ML  
+- **Java**: מיקרו-שירותי Java Spring Boot  
 - **React**: React SPA + Functions  
-- **קונטיינרים**: Python Flask Container App, Java Microservices  
+- **קונטיינרים**: אפליקציית Python Flask Container, מיקרו-שירותים Java  
 - **בסיסי נתונים**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
-- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline  
+- **AI/ML**: אפליקציית צ'אט Azure OpenAI, עיבוד מסמכים AI, צינור ML, **פתרון רב-סוכנים לקמעונאות**  
+- **מערכות רב-סוכנים**: **פתרון רב-סוכנים לקמעונאות**  
+- **ייצור ארגוני**: **פתרון רב-סוכנים לקמעונאות**  
 
 ### לפי דפוס ארכיטקטורה
 - **מונוליטי**: Node.js Express Todo, C# Web API + SQL  
 - **סטטי + ללא שרת**: React SPA + Functions, Python Functions + SPA  
-- **מיקרו-שירותים**: Java Spring Boot Microservices  
-- **בקונטיינר**: Python Flask Container App  
-- **מונע AI**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline  
+- **מיקרו-שירותים**: מיקרו-שירותי Java Spring Boot  
+- **מוכוון קונטיינרים**: אפליקציית Python Flask Container  
+- **מונע AI**: אפליקציית צ'אט Azure OpenAI, עיבוד מסמכים AI, צינור ML, **פתרון רב-סוכנים לקמעונאות**  
+- **ארכיטקטורת רב-סוכנים**: **פתרון רב-סוכנים לקמעונאות**  
+- **מרובה שירותים ארגוני**: **פתרון רב-סוכנים לקמעונאות**  
 
 ### לפי רמת מורכבות
-- **מתחילים**: Node.js Express Todo, React SPA + Functions, Python Flask Container App  
-- **בינוני**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing  
-- **מתקדם**: ML Pipeline  
+- **מתחילים**: Node.js Express Todo, React SPA + Functions, אפליקציית Python Flask Container  
+- **בינוני**: C# Web API + SQL, Python Functions + SPA, מיקרו-שירותים Java, אפליקציית צ'אט Azure OpenAI, עיבוד מסמכים AI  
+- **מתקדם**: צינור ML  
+- **מוכן לייצור ארגוני**: **פתרון רב-סוכנים לקמעונאות** (מערכת רב-סוכנים מלאה עם פריסת ARM)  
 
 ## 📚 משאבים נוספים
 
-### קישורים לתיעוד
+### קישורי תיעוד
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)  
 - [תבניות AZD של Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)  
 - [תיעוד Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-- [מרכז הארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [מרכז ארכיטקטורת Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
 
 ### דוגמאות קהילתיות
 - [תבניות AZD של Azure Samples](https://github.com/Azure-Samples/azd-templates)  
 - [תבניות Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)  
 - [גלריית Azure Developer CLI](https://azure.github.io/awesome-azd/)  
-- [אפליקציית Todo עם C# ו-Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)  
-- [אפליקציית Todo עם Python ו-MongoDB](https://github.com/Azure-Samples/todo-python-mongo)  
-- [אפליקציית Todo עם Node.js ו-PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)  
+- [אפליקציית משימות עם C# ו-Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)  
+- [אפליקציית משימות עם Python ו-MongoDB](https://github.com/Azure-Samples/todo-python-mongo)  
+- [אפליקציית משימות עם Node.js ו-PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)  
 - [אפליקציית ווב React עם API ב-C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)  
-- [משימת Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)  
-- [פונקציות Azure עם Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)  
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)  
+- [Azure Functions עם Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)  
 
-### שיטות עבודה מומלצות
-- [מסגרת הארכיטקטורה המומלצת של Azure](https://learn.microsoft.com/en-us/azure/well-architected/)  
+### שיטות עבודה מומלצות  
+- [מסגרת הארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/well-architected/)  
 - [מסגרת אימוץ הענן](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)  
 
-## 🤝 תרומת דוגמאות
+## 🤝 דוגמאות לתרומה  
 
-יש לך דוגמה שימושית לשתף? נשמח לקבל תרומות!
+יש לכם דוגמה שימושית לשתף? נשמח לקבל תרומות!  
 
-### הנחיות להגשה
-1. עקוב אחר מבנה התיקייה הקיים  
-2. כלול README.md מקיף  
-3. הוסף הערות לקבצי הקונפיגורציה  
-4. בדוק היטב לפני ההגשה  
-5. כלול הערכות עלויות ודרישות מקדימות  
+### הנחיות להגשה  
+1. עקבו אחר מבנה התיקיות הקיים  
+2. כללו README.md מפורט  
+3. הוסיפו הערות לקבצי הקונפיגורציה  
+4. בדקו היטב לפני ההגשה  
+5. כללו הערכות עלויות ודרישות מקדימות  
 
-### מבנה תבנית לדוגמה
+### מבנה תבנית לדוגמה  
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -343,25 +376,25 @@ example-name/
 ├── scripts/            # Helper scripts
 ├── .gitignore         # Git ignore rules
 └── docs/              # Additional documentation
-```
+```  
 
 ---
 
-**טיפ מקצועי**: התחל עם הדוגמה הפשוטה ביותר שמתאימה לערימת הטכנולוגיה שלך, ואז התקדם בהדרגה לתסריטים מורכבים יותר. כל דוגמה בונה על מושגים מהקודמות!
+**טיפ מקצועי**: התחילו עם הדוגמה הפשוטה ביותר שמתאימה לטכנולוגיה שלכם, ואז התקדמו בהדרגה לתרחישים מורכבים יותר. כל דוגמה בונה על מושגים מהדוגמאות הקודמות!  
 
-**צעדים הבאים**:  
-- בחר דוגמה שמתאימה לרמת המיומנות שלך  
-- עקוב אחר הוראות ההגדרה ב-README של הדוגמה  
-- נסה התאמות אישיות  
-- שתף את הלמידות שלך עם הקהילה  
+**השלבים הבאים**:  
+- בחרו דוגמה שמתאימה לרמת המיומנות שלכם  
+- עקבו אחר הוראות ההגדרה ב-README של הדוגמה  
+- נסו לבצע התאמות אישיות  
+- שתפו את התובנות שלכם עם הקהילה  
 
 ---
 
 **ניווט**  
 - **שיעור קודם**: [מדריך לימוד](../resources/study-guide.md)  
-- **חזרה ל**: [README ראשי](../README.md)  
+- **חזרה אל**: [README הראשי](../README.md)  
 
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

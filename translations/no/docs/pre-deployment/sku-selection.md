@@ -1,24 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-09T22:04:15+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T06:19:25+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "no"
 }
 -->
-# Veiledning for SKU-valg - Velge riktig Azure-tjenestenivåer
+# Veiledning for SKU-valg - Velg riktig Azure-tjenestenivå
+
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 6 - Validering og planlegging før utrulling
+- **⬅️ Forrige**: [Kapasitetsplanlegging](capacity-planning.md)
+- **➡️ Neste**: [Sjekk før utrulling](preflight-checks.md)
+- **🚀 Neste Kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/common-issues.md)
 
 ## Introduksjon
 
-Denne omfattende veiledningen hjelper deg med å velge optimale Azure-tjeneste-SKUer (Stock Keeping Units) for ulike miljøer, arbeidsbelastninger og krav. Lær å analysere ytelsesbehov, kostnadshensyn og skaleringskrav for å velge de mest passende tjenestenivåene for dine Azure Developer CLI-implementeringer.
+Denne omfattende veiledningen hjelper deg med å velge optimale Azure-tjeneste-SKUer (Stock Keeping Units) for ulike miljøer, arbeidsbelastninger og krav. Lær å analysere ytelsesbehov, kostnadshensyn og skalerbarhetskrav for å velge de mest passende tjenestenivåene for dine Azure Developer CLI-utrullinger.
 
 ## Læringsmål
 
 Ved å fullføre denne veiledningen vil du:
 - Forstå Azure SKU-konsepter, prismodeller og funksjonsforskjeller
 - Mestre miljøspesifikke SKU-valgstrategier for utvikling, staging og produksjon
-- Analysere arbeidsbelastningskrav og matche dem til passende tjenestenivåer
+- Analysere arbeidsbelastningskrav og matche dem med passende tjenestenivåer
 - Implementere kostnadsoptimaliseringsstrategier gjennom intelligent SKU-valg
 - Bruke ytelsestesting og valideringsteknikker for SKU-valg
 - Konfigurere automatiserte SKU-anbefalinger og overvåking
@@ -29,7 +36,7 @@ Etter fullføring vil du kunne:
 - Velge passende Azure-tjeneste-SKUer basert på arbeidsbelastningskrav og begrensninger
 - Designe kostnadseffektive arkitekturer for flere miljøer med riktig nivåvalg
 - Implementere ytelsesbenchmarking og validering for SKU-valg
-- Lage automatiserte verktøy for SKU-anbefalinger og kostnadsoptimalisering
+- Lage automatiserte verktøy for SKU-anbefaling og kostnadsoptimalisering
 - Planlegge SKU-migreringer og skaleringsstrategier for endrede krav
 - Bruke prinsippene fra Azure Well-Architected Framework til tjenestenivåvalg
 
@@ -74,7 +81,7 @@ SKUer (Stock Keeping Units) representerer ulike tjenestenivåer og ytelsesnivåe
    - Kostnadsimplikasjoner ved autoskalering
 
 4. **Vekstprognoser**
-   - Skaleringskrav
+   - Skalerbarhetskrav
    - Fremtidige funksjonsbehov
    - Migrasjonskompleksitet
 
@@ -127,7 +134,7 @@ skus:
 - **Funksjoner**: De fleste produksjonsfunksjoner aktivert
 - **Redundans**: Noe geografisk redundans
 - **Skalering**: Begrenset autoskalering for testing
-- **Overvåking**: Full overvåkingsstabel
+- **Overvåking**: Full overvåkingspakke
 
 ### Produksjonsmiljø
 
@@ -150,7 +157,7 @@ skus:
 - **Høy tilgjengelighet**: 99,9%+ SLA-krav
 - **Ytelse**: Dedikerte ressurser, høy gjennomstrømning
 - **Sikkerhet**: Premium sikkerhetsfunksjoner
-- **Skalering**: Full autoskaleringskapasitet
+- **Skalering**: Full autoskaleringsevne
 - **Overvåking**: Omfattende observasjon
 
 ---
@@ -205,7 +212,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Rammeverk for SKU-valg
+#### SKU-valgsrammeverk
 
 1. **DTU-basert (Database Transaction Units)**
    - **Basic**: 5 DTU - Utvikling/testing
@@ -257,7 +264,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 #### Miljøtyper
 
 1. **Forbruksbasert**
-   - Betal-per-bruk-prising
+   - Betal per bruk-prising
    - Egnet for utvikling og variable arbeidsbelastninger
    - Delt infrastruktur
 
@@ -333,13 +340,13 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
    - Rabatter for reservert kapasitet
    - Best for jevne arbeidsbelastninger
 
-2. **Autoskalering klargjort gjennomstrømming**
+2. **Autoskalering av klargjort gjennomstrømming**
    - Automatisk skalering basert på bruk
    - Betal for det du bruker (med minimum)
    - Bra for variable arbeidsbelastninger
 
 3. **Serverløs**
-   - Betal-per-forespørsel
+   - Betal per forespørsel
    - Ingen klargjort gjennomstrømming
    - Ideelt for utvikling og sporadiske arbeidsbelastninger
 
@@ -656,7 +663,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 | B1 | Basic | 1 | 1.75GB | 10GB | $ | Små apper |
 | S1 | Standard | 1 | 1.75GB | 50GB | $$ | Produksjon |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Høy ytelse |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
+| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Bedrift |
 
 ### SQL Database SKU Hurtigreferanse
 
@@ -672,7 +679,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 | Modell | Prising | CPU/Minne | Bruksområde |
 |--------|---------|-----------|-------------|
-| Forbruk | Betal-per-bruk | 0.25-2 vCPU | Utvikling, variabel belastning |
+| Forbruk | Betal per bruk | 0.25-2 vCPU | Utvikling, variabel belastning |
 | Dedikert D4 | Reservert | 4 vCPU, 16GB | Produksjon |
 | Dedikert D8 | Reservert | 8 vCPU, 32GB | Høy ytelse |
 
@@ -817,9 +824,9 @@ test_configuration:
 
 **Navigasjon**
 - **Forrige leksjon**: [Kapasitetsplanlegging](capacity-planning.md)
-- **Neste leksjon**: [Preflight-sjekker](preflight-checks.md)
+- **Neste leksjon**: [Sjekk før utrulling](preflight-checks.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

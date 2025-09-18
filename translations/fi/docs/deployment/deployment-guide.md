@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T21:39:35+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T06:35:27+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "fi"
 }
 -->
 # Käyttöönotto-opas - AZD-käyttöönottojen hallinta
 
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 4 - Infrastruktuuri koodina & käyttöönotto
+- **⬅️ Edellinen luku**: [Luku 3: Konfigurointi](../getting-started/configuration.md)
+- **➡️ Seuraava**: [Resurssien provisiointi](provisioning.md)
+- **🚀 Seuraava luku**: [Luku 5: Moniagenttiset tekoälyratkaisut](../../examples/retail-scenario.md)
+
 ## Johdanto
 
-Tämä kattava opas sisältää kaiken, mitä sinun tarvitsee tietää sovellusten käyttöönotosta Azure Developer CLI:llä. Se kattaa peruskäyttöönotot yhdellä komennolla sekä edistyneet tuotantotilanteet, joissa käytetään mukautettuja koukkuja, useita ympäristöjä ja CI/CD-integraatiota. Hallitse koko käyttöönoton elinkaari käytännön esimerkkien ja parhaiden käytäntöjen avulla.
+Tämä kattava opas käsittelee kaiken, mitä sinun tarvitsee tietää sovellusten käyttöönotosta Azure Developer CLI:n avulla, yksinkertaisista yhden komennon käyttöönotosta edistyneisiin tuotantotilanteisiin, joissa on mukautettuja koukkuja, useita ympäristöjä ja CI/CD-integraatio. Hallitse koko käyttöönoton elinkaari käytännön esimerkkien ja parhaiden käytäntöjen avulla.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
 - Hallitsemaan kaikki Azure Developer CLI:n käyttöönotto-komennot ja työnkulut
-- Ymmärtämään käyttöönoton koko elinkaaren, alkaen resurssien provisioinnista aina seurantaan asti
+- Ymmärtämään käyttöönoton koko elinkaaren provisioinnista seurantaan
 - Toteuttamaan mukautettuja käyttöönotto-koukkuja automaatiota varten ennen ja jälkeen käyttöönoton
 - Konfiguroimaan useita ympäristöjä ympäristökohtaisilla parametreilla
 - Ottamaan käyttöön edistyneitä käyttöönotto-strategioita, kuten blue-green- ja canary-käyttöönotot
@@ -26,9 +33,9 @@ Tämän oppaan suorittamalla opit:
 ## Oppimistulokset
 
 Oppaan suorittamisen jälkeen pystyt:
-- Suorittamaan ja vianetsimään kaikki azd-käyttöönotto-työnkulut itsenäisesti
+- Suorittamaan ja vianetsimään itsenäisesti kaikki azd-käyttöönotto-työnkulut
 - Suunnittelemaan ja toteuttamaan mukautettua käyttöönotto-automaatioita koukkujen avulla
-- Konfiguroimaan tuotantovalmiit käyttöönotot asianmukaisella tietoturvalla ja seurannalla
+- Konfiguroimaan tuotantovalmiit käyttöönotot asianmukaisella turvallisuudella ja seurannalla
 - Hallitsemaan monimutkaisia monen ympäristön käyttöönotto-skenaarioita
 - Optimoimaan käyttöönoton suorituskykyä ja toteuttamaan palautusstrategioita
 - Integroimaan azd-käyttöönotot yrityksen DevOps-käytäntöihin
@@ -101,8 +108,8 @@ hooks:
 
 ### Vaihe 2: Infrastruktuurin provisiointi
 - Lukee infrastruktuurimallit (Bicep/Terraform)
-- Luo tai päivittää Azure-resursseja
-- Konfiguroi verkot ja tietoturvan
+- Luo tai päivittää Azure-resurssit
+- Konfiguroi verkot ja turvallisuuden
 - Asettaa seurannan ja lokituksen
 
 ### Vaihe 3: Provisioinnin jälkeiset koukut
@@ -138,7 +145,7 @@ hooks:
 
 ### Vaihe 6: Sovelluksen käyttöönotto
 - Ottaa pakatut sovellukset käyttöön Azure-palveluissa
-- Päivittää konfiguraatioasetukset
+- Päivittää konfigurointiasetukset
 - Käynnistää/pysäyttää palvelut
 
 ### Vaihe 7: Käyttöönoton jälkeiset koukut
@@ -308,7 +315,7 @@ fi
 
 ## 🐳 Konttikäyttöönotot
 
-### Container App -käyttöönotot
+### Konttisovellusten käyttöönotto
 ```yaml
 services:
   api:
@@ -453,7 +460,7 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Tietoturva-asiat
+## 🔐 Turvallisuushuomiot
 
 ### Salaisuuksien hallinta
 ```bash
@@ -632,7 +639,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ## Seuraavat askeleet
 
 - [Resurssien provisiointi](provisioning.md) - Syväsukellus infrastruktuurin hallintaan
-- [Ennen käyttöönottoa suunnittelu](../pre-deployment/capacity-planning.md) - Suunnittele käyttöönotto-strategiasi
+- [Ennen käyttöönottoa -suunnittelu](../pre-deployment/capacity-planning.md) - Suunnittele käyttöönotto-strategiasi
 - [Yleiset ongelmat](../troubleshooting/common-issues.md) - Ratkaise käyttöönotto-ongelmat
 - [Parhaat käytännöt](../troubleshooting/debugging.md) - Tuotantovalmiit käyttöönotto-strategiat
 
@@ -646,8 +653,8 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Navigointi**
-- **Edellinen osio**: [Ensimmäinen projektisi](../getting-started/first-project.md)
-- **Seuraava osio**: [Resurssien provisiointi](provisioning.md)
+- **Edellinen oppitunti**: [Ensimmäinen projektisi](../getting-started/first-project.md)
+- **Seuraava oppitunti**: [Resurssien provisiointi](provisioning.md)
 
 ---
 
