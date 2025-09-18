@@ -1,36 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T15:54:35+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-18T12:49:41+00:00",
   "source_file": "examples/README.md",
   "language_code": "en"
 }
 -->
 # Examples - Practical AZD Templates and Configurations
 
+**Learning by Example - Organized by Chapter**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Chapter Mapping**: Examples organized by learning complexity
+- **🚀 Start Simple**: [Chapter 1 Examples](../../../examples)
+- **🤖 AI Examples**: [Chapter 2 & 5 AI Solutions](../../../examples)
+
 ## Introduction
 
-This directory provides practical examples, templates, and real-world scenarios to help you learn Azure Developer CLI through hands-on practice. Each example includes complete working code, infrastructure templates, and detailed instructions for various application architectures and deployment patterns.
+This directory contains practical examples, templates, and real-world scenarios to help you learn Azure Developer CLI through hands-on practice. Each example provides complete working code, infrastructure templates, and detailed instructions for different application architectures and deployment patterns.
 
 ## Learning Goals
 
-By exploring these examples, you will:
-- Gain hands-on experience with Azure Developer CLI workflows in realistic application scenarios
-- Understand different application architectures and their implementations using azd
-- Learn Infrastructure as Code patterns for various Azure services
-- Apply configuration management and deployment strategies tailored to specific environments
+By working through these examples, you will:
+- Practice Azure Developer CLI workflows with realistic application scenarios
+- Understand different application architectures and their azd implementations
+- Master Infrastructure as Code patterns for various Azure services
+- Apply configuration management and environment-specific deployment strategies
 - Implement monitoring, security, and scaling patterns in practical contexts
-- Build skills in troubleshooting and debugging deployment issues
+- Build experience with troubleshooting and debugging real deployment scenarios
 
 ## Learning Outcomes
 
-After completing these examples, you will be able to:
-- Confidently deploy various application types using Azure Developer CLI
-- Customize provided templates to suit your application needs
+Upon completing these examples, you will be able to:
+- Deploy various application types using Azure Developer CLI confidently
+- Adapt provided templates to your own application requirements
 - Design and implement custom infrastructure patterns using Bicep
 - Configure complex multi-service applications with proper dependencies
-- Apply best practices for security, monitoring, and performance in real-world scenarios
+- Apply security, monitoring, and performance best practices in real scenarios
 - Troubleshoot and optimize deployments based on practical experience
 
 ## Directory Structure
@@ -53,19 +59,40 @@ Azure Samples AZD Templates (linked externally):
 
 ### For Beginners
 1. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Deploy a Node.js Express web application with MongoDB
-2. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Host a React static website using Azure Static Web Apps
+2. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Host a React static website with Azure Static Web Apps
 3. **[Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Deploy a containerized Python Flask application
 
 ### For Intermediate Users
-4. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Web application with a C# API and Azure SQL Database
+4. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Web application with C# API and Azure SQL Database
 5. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions with HTTP triggers and Cosmos DB
-6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Multi-service Java application with Container Apps and an API gateway
+6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Multi-service Java application with Container Apps and API gateway
 
 ### Azure AI Foundry Templates
 
-1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Intelligent chat application using Azure OpenAI
-2. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** - Document analysis with Azure AI services
-3. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps workflow using Azure Machine Learning
+1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Intelligent chat application with Azure OpenAI
+2. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** - Document analysis using Azure AI services
+3. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps workflow with Azure Machine Learning
+
+### Real-World Scenarios
+
+#### **Retail Multi-Agent Solution** 🆕
+**[Complete Implementation Guide](./retail-scenario.md)**
+
+A comprehensive, production-ready multi-agent customer support solution that demonstrates enterprise-grade AI application deployment with AZD. This scenario provides:
+
+- **Complete Architecture**: Multi-agent system with specialized customer service and inventory management agents
+- **Production Infrastructure**: Multi-region Azure OpenAI deployments, AI Search, Container Apps, and comprehensive monitoring
+- **Ready-to-Deploy ARM Template**: One-click deployment with multiple configuration modes (Minimal/Standard/Premium)
+- **Advanced Features**: Red teaming security validation, agent evaluation framework, cost optimization, and troubleshooting guides
+- **Real Business Context**: Retailer customer support use case with file uploads, search integration, and dynamic scaling
+
+**Technologies**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)
+
+**Perfect for**: AI developers, solution architects, and teams building production multi-agent systems
+
+**Quick Start**: Deploy the complete solution in under 30 minutes using the included ARM template with `./deploy.sh -g myResourceGroup`
 
 ## 📋 Usage Instructions
 
@@ -238,6 +265,7 @@ The `configurations/` directory contains reusable components:
 | Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
 ## 🎓 Learning Path
 
@@ -283,19 +311,24 @@ The `configurations/` directory contains reusable components:
 - **React**: React SPA + Functions
 - **Containers**: Python Flask Container App, Java Microservices
 - **Databases**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Systems**: **Retail Multi-Agent Solution**
+- **Enterprise Production**: **Retail Multi-Agent Solution**
 
 ### By Architecture Pattern
 - **Monolithic**: Node.js Express Todo, C# Web API + SQL
 - **Static + Serverless**: React SPA + Functions, Python Functions + SPA
 - **Microservices**: Java Spring Boot Microservices
 - **Containerized**: Python Flask Container App
-- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline
+- **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
+- **Enterprise Multi-Service**: **Retail Multi-Agent Solution**
 
 ### By Complexity Level
 - **Beginner**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
 - **Intermediate**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
 - **Advanced**: ML Pipeline
+- **Enterprise Production-Ready**: **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
 
 ## 📚 Additional Resources
 
@@ -322,11 +355,11 @@ The `configurations/` directory contains reusable components:
 
 ## 🤝 Contributing Examples
 
-Have a useful example to share? Contributions are welcome!
+Have a useful example to share? Contributions are always welcome!
 
 ### Submission Guidelines
-1. Follow the established directory structure
-2. Include a comprehensive README.md
+1. Stick to the existing directory structure
+2. Provide a detailed README.md
 3. Add comments to configuration files
 4. Test thoroughly before submitting
 5. Include cost estimates and prerequisites
@@ -347,13 +380,13 @@ example-name/
 
 ---
 
-**Pro Tip**: Start with the simplest example that matches your technology stack, then gradually progress to more complex scenarios. Each example builds on concepts from the previous ones!
+**Pro Tip**: Begin with the simplest example that aligns with your technology stack, then gradually progress to more advanced scenarios. Each example builds on the concepts introduced in the previous ones!
 
 **Next Steps**: 
-- Choose an example that matches your skill level
+- Pick an example that matches your expertise
 - Follow the setup instructions in the example's README
 - Experiment with customizations
-- Share your learnings with the community
+- Share your insights with the community
 
 ---
 
@@ -364,4 +397,4 @@ example-name/
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

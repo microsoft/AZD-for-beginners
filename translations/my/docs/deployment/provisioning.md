@@ -1,49 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:24:09+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T13:22:49+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "my"
 }
 -->
-# Azure အတွက် အခြေခံအဆောက်အဦးများ - AZD ဖြင့် Infrastructure as Code
+# Azure အရင်းအမြစ်များကို AZD ဖြင့် Provision လုပ်ခြင်း
 
-## နိဒါန်း
+**အခန်းအကြောင်းအရာများ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD အခြေခံသင်ခန်းစာ](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၄ - Infrastructure as Code & Deployment
+- **⬅️ ယခင်**: [Deployment လမ်းညွှန်](deployment-guide.md)
+- **➡️ နောက်အခန်း**: [အခန်း ၅: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 ဆက်စပ်**: [အခန်း ၆: Pre-Deployment Validation](../pre-deployment/capacity-planning.md)
 
-ဒီလမ်းညွှန်စာအုပ်က Azure Developer CLI ကို အသုံးပြု၍ Azure အရင်းအမြစ်များကို Provision နှင့် စီမံခန့်ခွဲရန် လိုအပ်သော အရာအားလုံးကို ဖော်ပြထားသည်။ Bicep, ARM templates, Terraform, နှင့် Pulumi တို့ကို အသုံးပြု၍ အခြေခံအရင်းအမြစ်ဖန်တီးမှုမှ စ၍ အဆင့်မြင့် စီးပွားရေးအဆင့်အဆောက်အဦးများအထိ Infrastructure as Code (IaC) ပုံစံများကို အကောင်အထည်ဖော်ရန် လေ့လာနိုင်ပါသည်။
+## မိတ်ဆက်
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ
+ဒီလမ်းညွှန်မှာ Azure Developer CLI ကို အသုံးပြုပြီး Azure အရင်းအမြစ်များကို Provision လုပ်ခြင်းနှင့် စီမံခန့်ခွဲခြင်းအကြောင်းကို အပြည့်အစုံလေ့လာနိုင်ပါမည်။ Infrastructure as Code (IaC) ပုံစံများကို အခြေခံအရင်းအမြစ်ဖန်တီးခြင်းမှ စ၍ Bicep, ARM templates, Terraform, နှင့် Pulumi ကို အသုံးပြုသော အဆင့်မြင့်လုပ်ငန်းဆောင်တာများအထိ လေ့လာနိုင်ပါမည်။
 
-ဒီလမ်းညွှန်ကို ပြီးမြောက်စွာ လေ့လာပြီးနောက်၊ သင်သည်:
-- Infrastructure as Code အခြေခံအယူအဆများနှင့် Azure အရင်းအမြစ် Provisioning ကို ကျွမ်းကျင်စွာ လုပ်နိုင်မည်
-- Azure Developer CLI မှ ထောက်ပံ့သော IaC ပံ့ပိုးသူများကို နားလည်မည်
-- ပုံမှန် Application အဆောက်အဦးများအတွက် Bicep templates များကို ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်နိုင်မည်
-- အရင်းအမြစ် Parameters, Variables, နှင့် ပတ်ဝန်းကျင်အထူးပြု ဆက်တင်များကို Configure လုပ်နိုင်မည်
-- Networking နှင့် Security အပါအဝင် အဆင့်မြင့် အဆောက်အဦးပုံစံများကို အကောင်အထည်ဖော်နိုင်မည်
-- အရင်းအမြစ်၏ အသက်တာစဉ်, အပ်ဒိတ်များ, နှင့် အချင်းချင်းမူမမှန်မှုများကို စီမံနိုင်မည်
+## သင်ယူရမည့်အရာများ
 
-## သင်ယူပြီးနောက် ရလဒ်များ
+ဒီလမ်းညွှန်ကို ပြီးမြောက်ပါက သင်သည်:
+- Infrastructure as Code အခြေခံအယူအဆများနှင့် Azure အရင်းအမြစ် Provision လုပ်ခြင်းကို ကျွမ်းကျင်စွာ လေ့လာနိုင်မည်
+- Azure Developer CLI မှထောက်ပံ့သော IaC ပံ့ပိုးသူများကို နားလည်နိုင်မည်
+- အခြေခံ Application Architecture များအတွက် Bicep templates ကို ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်နိုင်မည်
+- အရင်းအမြစ် Parameters, Variables, နှင့် Environment-specific Settings များကို Configure လုပ်နိုင်မည်
+- Networking နှင့် Security အပါအဝင် အဆင့်မြင့် Infrastructure ပုံစံများကို အကောင်အထည်ဖော်နိုင်မည်
+- အရင်းအမြစ်များ၏ Lifecycles, Updates, နှင့် Dependency Resolution ကို စီမံနိုင်မည်
 
-ဒီလမ်းညွှန်ကို ပြီးမြောက်စွာ လေ့လာပြီးနောက်၊ သင်သည်:
-- Bicep နှင့် ARM templates ကို အသုံးပြု၍ Azure အဆောက်အဦးများကို ဒီဇိုင်းဆွဲပြီး Provision လုပ်နိုင်မည်
-- အရင်းအမြစ်အချင်းချင်း မူမမှန်မှုများကို သင့်တင့်စွာ Configure လုပ်ထားသော အဆင့်မြင့် Multi-Service အဆောက်အဦးများကို Configure လုပ်နိုင်မည်
-- ပတ်ဝန်းကျင်များနှင့် ဆက်တင်များအတွက် Parameterized templates များကို အကောင်အထည်ဖော်နိုင်မည်
-- အဆောက်အဦး Provisioning ပြဿနာများကို ဖြေရှင်းပြီး Deployment မအောင်မြင်မှုများကို ပြန်လည်ပြင်ဆင်နိုင်မည်
-- Azure Well-Architected Framework အခြေခံအယူအဆများကို အဆောက်အဦးဒီဇိုင်းတွင် အသုံးချနိုင်မည်
-- အဆောက်အဦးအပ်ဒိတ်များကို စီမံပြီး Infrastructure Versioning များကို အကောင်အထည်ဖော်နိုင်မည်
+## သင်ယူပြီးရရှိမည့်ရလဒ်များ
 
-## အဆောက်အဦး Provisioning အကျဉ်းချုပ်
+ဒီလမ်းညွှန်ကို ပြီးမြောက်ပါက သင်သည်:
+- Bicep နှင့် ARM templates ကို အသုံးပြု၍ Azure Infrastructure ကို ဒီဇိုင်းဆွဲပြီး Provision လုပ်နိုင်မည်
+- Resource Dependencies များကို သင့်တော်စွာ Configure လုပ်ထားသော Multi-Service Architectures များကို ဖန်တီးနိုင်မည်
+- အမျိုးမျိုးသော Environment များနှင့် Configuration များအတွက် Parameterized Templates များကို အကောင်အထည်ဖော်နိုင်မည်
+- Infrastructure Provisioning အခက်အခဲများကို Troubleshoot လုပ်ပြီး Deployment Failures များကို ဖြေရှင်းနိုင်မည်
+- Azure Well-Architected Framework Principles များကို Infrastructure Design တွင် အသုံးပြုနိုင်မည်
+- Infrastructure Updates များကို စီမံပြီး Infrastructure Versioning Strategies များကို အကောင်အထည်ဖော်နိုင်မည်
+
+## Infrastructure Provisioning အကျဉ်းချုပ်
 
 Azure Developer CLI သည် အောက်ပါ Infrastructure as Code (IaC) ပံ့ပိုးသူများကို ထောက်ပံ့သည်:
-- **Bicep** (အကြံပြုသည်) - Azure ၏ Domain-Specific Language
-- **ARM Templates** - JSON အခြေခံ Azure Resource Manager Templates
-- **Terraform** - Multi-Cloud Infrastructure Tool
-- **Pulumi** - Programming Languages ဖြင့် အဆင့်မြင့် Infrastructure as Code
+- **Bicep** (အကြံပြုထားသည်) - Azure ၏ Domain-Specific Language
+- **ARM Templates** - JSON-based Azure Resource Manager Templates
+- **Terraform** - Multi-cloud Infrastructure Tool
+- **Pulumi** - Programming Languages ဖြင့် Modern Infrastructure as Code
 
 ## Azure အရင်းအမြစ်များကို နားလည်ခြင်း
 
-### အရင်းအမြစ်အဆင့်ဆင့်
+### Resource Hierarchy
 ```
 Azure Account
 └── Subscriptions
@@ -51,7 +58,7 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Application များအတွက် ပုံမှန် Azure ဝန်ဆောင်မှုများ
+### Applications အတွက် အများဆုံးအသုံးပြုသော Azure Services
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
@@ -60,7 +67,7 @@ Azure Account
 
 ## Bicep Infrastructure Templates
 
-### အခြေခံ Bicep Template ဖွဲ့စည်းမှု
+### အခြေခံ Bicep Template ဖွဲ့စည်းပုံ
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ ဒေတာဘေ့စ် Provisioning
+## 🗃️ Database Provisioning
 
 ### Cosmos DB
 ```bicep
@@ -300,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 လုံခြုံရေးနှင့် အထူးအချက်အလက် စီမံခန့်ခွဲမှု
+## 🔒 Security နှင့် Secrets Management
 
 ### Key Vault Integration
 ```bicep
@@ -370,7 +377,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Networking နှင့် ချိတ်ဆက်မှု
+## 🌍 Networking နှင့် Connectivity
 
 ### Virtual Network Configuration
 ```bicep
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 စောင့်ကြည့်မှုနှင့် ကြည့်ရှုနိုင်မှု
+## 📊 Monitoring နှင့် Observability
 
 ### Application Insights
 ```bicep
@@ -563,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 ပတ်ဝန်းကျင်အထူးပြု ဆက်တင်များ
+## 🔧 Environment-Specific Configurations
 
-### ပတ်ဝန်းကျင်အလိုက် Parameter Files
+### အမျိုးမျိုးသော Environment များအတွက် Parameter Files
 ```json
 // infra/main.parameters.dev.json
 {
@@ -757,7 +764,7 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 အရင်းအမြစ် အပ်ဒိတ်များနှင့် ပြောင်းလဲမှုများ
+## 🔄 Resource Updates နှင့် Migrations
 
 ### Safe Resource Updates
 ```bash
@@ -800,9 +807,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
+## 🎯 အကောင်းဆုံးအလေ့အထများ
 
-### 1. အရင်းအမြစ်အမည်ပေးပုံ
+### 1. Resource Naming Conventions
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -860,11 +867,11 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## နောက်တစ်ဆင့်
 
 - [Pre-deployment Planning](../pre-deployment/capacity-planning.md) - အရင်းအမြစ်ရရှိနိုင်မှုကို အတည်ပြုပါ
-- [Common Issues](../troubleshooting/common-issues.md) - အဆောက်အဦးပြဿနာများကို ဖြေရှင်းပါ
-- [Debugging Guide](../troubleshooting/debugging.md) - Provisioning ပြဿနာများကို Debug လုပ်ပါ
-- [SKU Selection](../pre-deployment/sku-selection.md) - သင့်တော်သော ဝန်ဆောင်မှုအဆင့်များကို ရွေးချယ်ပါ
+- [Common Issues](../troubleshooting/common-issues.md) - Infrastructure အခက်အခဲများကို Troubleshoot လုပ်ပါ
+- [Debugging Guide](../troubleshooting/debugging.md) - Provisioning အခက်အခဲများကို Debug လုပ်ပါ
+- [SKU Selection](../pre-deployment/sku-selection.md) - သင့်တော်သော Service Tiers ကို ရွေးချယ်ပါ
 
-## အပိုဆောင်း အရင်းအမြစ်များ
+## အပိုဆောင်းအရင်းအမြစ်များ
 
 - [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
@@ -874,10 +881,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigation**
-- **Previous Lesson**: [Deployment Guide](deployment-guide.md)
-- **Next Lesson**: [Capacity Planning](../pre-deployment/capacity-planning.md)
+- **ယခင်သင်ခန်းစာ**: [Deployment လမ်းညွှန်](deployment-guide.md)
+- **နောက်သင်ခန်းစာ**: [Capacity Planning](../pre-deployment/capacity-planning.md)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူလဘာသာစကားဖြင့် အာဏာရှိသောအရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

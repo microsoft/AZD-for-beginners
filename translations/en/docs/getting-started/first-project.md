@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e131a5271d4c8eb0d44ae82302f8fd1a",
-  "translation_date": "2025-09-12T22:08:14+00:00",
+  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
+  "translation_date": "2025-09-18T12:45:15+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "en"
 }
 -->
 # Your First Project - Hands-On Tutorial
 
-**Previous:** [Configuration](configuration.md) | **Next:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Installation & Setup](installation.md)
+- **➡️ Next**: [Configuration](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduction
 
-Welcome to your first Azure Developer CLI project! This hands-on tutorial will guide you step-by-step through creating, deploying, and managing a full-stack application on Azure using azd. You'll work with a real todo application that includes a React frontend, a Node.js API backend, and a MongoDB database.
+Welcome to your first Azure Developer CLI project! This hands-on tutorial will guide you step-by-step through creating, deploying, and managing a full-stack application on Azure using azd. You'll work on a real-world todo application featuring a React frontend, Node.js API backend, and MongoDB database.
 
 ## Learning Goals
 
@@ -62,7 +67,7 @@ node --version
 
 ## Step 1: Choose and Initialize a Template
 
-Start with a popular todo application template that includes a React frontend and a Node.js API backend.
+Start by selecting a popular todo application template that includes a React frontend and Node.js API backend.
 
 ```bash
 # Browse available templates
@@ -87,7 +92,7 @@ azd init --template todo-nodejs-mongo
 
 ## Step 2: Explore the Project Structure
 
-Let’s take a closer look at what azd has created:
+Take a closer look at what azd has created for you:
 
 ```bash
 # View the project structure
@@ -139,7 +144,7 @@ head -30 infra/main.bicep
 
 ## Step 3: Customize Your Project (Optional)
 
-Before deploying, you can make changes to the application:
+Before deploying, you can personalize the application:
 
 ### Modify the Frontend
 ```bash
@@ -164,7 +169,7 @@ azd env get-values
 
 ## Step 4: Deploy to Azure
 
-Now for the exciting part—deploy everything to Azure!
+Now comes the exciting part—deploying everything to Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -212,7 +217,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ### Test the Todo App
 1. **Add a todo item** - Click "Add Todo" and enter a task
 2. **Mark as complete** - Check off completed items
-3. **Delete items** - Remove todos you no longer need
+3. **Delete items** - Remove tasks you no longer need
 
 ### Monitor Your Application
 ```bash
@@ -225,7 +230,7 @@ azd logs
 
 ## Step 6: Make Changes and Redeploy
 
-Let’s make a change and see how easy it is to update:
+Make a change and see how easy it is to update your application:
 
 ### Modify the API
 ```bash
@@ -278,7 +283,7 @@ azd show
 
 ## Step 8: Clean Up Resources
 
-When you’re done experimenting, clean up to avoid unnecessary charges:
+When you're done experimenting, clean up to avoid unnecessary charges:
 
 ```bash
 # Delete all Azure resources for current environment
@@ -294,7 +299,7 @@ azd down --force --purge
 
 ## What You've Learned
 
-Congratulations! You’ve successfully:
+Congratulations! You've successfully:
 - Initialized an azd project using a template
 - Explored the project structure and key files
 - Deployed a full-stack application to Azure
@@ -339,7 +344,7 @@ netstat -an | grep :3100
 
 ## Next Steps
 
-Now that you’ve completed your first project, explore these advanced topics:
+Now that you've completed your first project, dive into these advanced topics:
 
 ### 1. Customize Infrastructure
 - [Infrastructure as Code](../deployment/provisioning.md)
@@ -386,11 +391,16 @@ azd init --template todo-java-mongo
 
 ---
 
-**Congratulations on completing your first azd project!** You’re now ready to confidently build and deploy amazing applications on Azure.
+**Congratulations on completing your first azd project!** You're now equipped to confidently build and deploy amazing applications on Azure.
 
 ---
 
-**Previous:** [Configuration](configuration.md) | **Next:** [Azure AI Foundry Integration](../ai-foundry/azure-ai-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Installation & Setup](installation.md)
+- **➡️ Next**: [Configuration](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 - **Next Lesson**: [Deployment Guide](../deployment/deployment-guide.md)
 
 ---

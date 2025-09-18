@@ -1,26 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-10T07:22:24+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-18T12:53:38+00:00",
   "source_file": "resources/faq.md",
   "language_code": "en"
 }
 -->
 # Frequently Asked Questions (FAQ)
 
+**Get Help by Chapter**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **🚆 Installation Issues**: [Chapter 1: Installation & Setup](../docs/getting-started/installation.md)
+- **🤖 AI Questions**: [Chapter 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Troubleshooting**: [Chapter 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
+
 ## Introduction
 
-This FAQ provides answers to common questions about Azure Developer CLI (azd) and Azure deployments. It offers quick solutions to frequent issues, clarifies concepts and workflows, and shares best practices.
+This FAQ provides answers to common questions about Azure Developer CLI (azd) and Azure deployments. It offers quick solutions to frequent issues, clarifies concepts, and shares best practices for workflows and deployments.
 
 ## Learning Goals
 
-By reading this FAQ, you will:
+By using this FAQ, you will:
 - Quickly find answers to common Azure Developer CLI questions and problems
-- Understand key concepts and terminology through practical Q&A
+- Gain a practical understanding of key concepts and terminology
 - Access troubleshooting solutions for frequent errors
 - Learn optimization best practices through commonly asked questions
-- Explore advanced features and capabilities through expert-level topics
+- Explore advanced features and capabilities through expert-level queries
 - Efficiently reference guidance on cost, security, and deployment strategies
 
 ## Learning Outcomes
@@ -50,13 +56,13 @@ By regularly consulting this FAQ, you will:
 ## Getting Started
 
 ### Q: What is Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) is a command-line tool designed for developers to streamline the process of deploying applications from a local environment to Azure. It offers templates and automates the deployment lifecycle.
+**A**: Azure Developer CLI (azd) is a command-line tool designed for developers to streamline the process of deploying applications to Azure. It provides templates and automates the deployment lifecycle, helping you move from local development to Azure faster.
 
 ### Q: How is azd different from Azure CLI?
 **A**: 
 - **Azure CLI**: A general-purpose tool for managing Azure resources.
 - **azd**: A developer-focused tool for application deployment workflows.
-- azd uses Azure CLI internally but provides higher-level abstractions for common development scenarios.
+- azd uses Azure CLI internally but offers higher-level abstractions for common development scenarios.
 - azd includes templates, environment management, and deployment automation.
 
 ### Q: Do I need Azure CLI installed to use azd?
@@ -90,10 +96,10 @@ By regularly consulting this FAQ, you will:
 **A**: Yes. Use `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` to specify the subscription for each environment.
 
 ### Q: What permissions do I need to deploy with azd?
-**A**: Typically:
+**A**: Typically, you need:
 - **Contributor** role on the resource group or subscription.
-- **User Access Administrator** for resources requiring role assignments.
-- Permissions vary depending on the template and resources deployed.
+- **User Access Administrator** if deploying resources requiring role assignments.
+- Permissions vary depending on the template and resources being deployed.
 
 ### Q: Can I use azd in CI/CD pipelines?
 **A**: Absolutely! azd is designed for CI/CD integration. Use service principals for authentication and set environment variables for configuration.
@@ -358,52 +364,85 @@ hooks:
 
 ### Q: How do I contribute to azd or create community templates?
 **A**: 
-1. **azd tool**: Contribute to [Azure/azure-dev](https://github.com/Azure/azure-dev).
-2. **Templates**: Create templates following the [template guidelines](https://github.com/Azure-Samples/awesome-azd).
-3. **Documentation**: Contribute to docs at [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs).
+1. **azd tool**: Contribute to [Azure/azure-dev](https://github.com/Azure/azure-dev)
+# Azure Developer CLI (azd) FAQ
+
+## Frequently Asked Questions
+
+### Q: What is azd?
+**A**: Azure Developer CLI (azd) is a tool designed to simplify the development, deployment, and management of applications on Azure. It provides a unified experience for developers by integrating infrastructure as code, deployment pipelines, and application management.
+
+---
+
+### Q: How do I get started with azd?
+**A**: 
+1. Install azd by following the [installation guide](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd).
+2. Set up your environment using `azd init`.
+3. Deploy your application using `azd up`.
+
+---
+
+### Q: What languages and frameworks does azd support?
+**A**: azd supports popular programming languages and frameworks, including .NET, Python, JavaScript/Node.js, and Java. Check the [supported templates](https://github.com/Azure-Samples/awesome-azd) for more details.
+
+---
+
+### Q: Can I use azd with my existing Azure resources?
+**A**: Yes, azd can be configured to work with existing Azure resources. Update the `azure.yaml` file to reference your current resources and ensure compatibility with your deployment setup.
+
+---
+
+### Q: How do I contribute to azd?
+**A**: Contributions are welcome! You can help in the following ways:
+1. **Templates**: Create templates following the [template guidelines](https://github.com/Azure-Samples/awesome-azd).
+2. **Documentation**: Contribute to docs at [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs).
+
+---
 
 ### Q: What's the roadmap for azd?
 **A**: Check the [official roadmap](https://github.com/Azure/azure-dev/projects) for planned features and improvements.
 
+---
+
 ### Q: How do I migrate from other deployment tools to azd?
-**A**:
-1. Evaluate the current deployment architecture  
-2. Develop equivalent Bicep templates  
-3. Adjust `azure.yaml` to align with existing services  
-4. Conduct comprehensive testing in the development environment  
-5. Transition environments incrementally  
+**A**: 
+1. Analyze your current deployment architecture.
+2. Create equivalent Bicep templates.
+3. Configure `azure.yaml` to match your current services.
+4. Test thoroughly in a development environment.
+5. Gradually migrate environments.
 
 ---
 
 ## Still Have Questions?
 
-### **Search First**  
-- Refer to the [official documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Look through [GitHub issues](https://github.com/Azure/azure-dev/issues) for similar concerns  
+### **Search First**
+- Check the [official documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/).
+- Search [GitHub issues](https://github.com/Azure/azure-dev/issues) for similar problems.
 
-### **Get Help**  
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Community-driven support  
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Ask technical questions  
-- [Azure Discord](https://discord.gg/azure) - Engage in real-time community chats  
+### **Get Help**
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Community support.
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Technical questions.
+- [Azure Discord](https://discord.gg/azure) - Real-time community chat.
 
-### **Report Issues**  
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Submit bug reports or request features  
-- Provide relevant logs, error details, and reproduction steps  
+### **Report Issues**
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Bug reports and feature requests.
+- Include relevant logs, error messages, and steps to reproduce.
 
-### **Learn More**  
-- [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)  
-
----
-
-*This FAQ is updated regularly. Last updated: September 9, 2025*  
+### **Learn More**
+- [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/).
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/).
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/).
 
 ---
 
-**Navigation**  
-- **Previous Lesson**: [Glossary](glossary.md)  
-- **Next Lesson**: [Study Guide](study-guide.md)  
+*This FAQ is regularly updated. Last updated: September 9, 2025.*
+
+---
+
+**Navigation**
+- **Previous Lesson**: [Glossary](glossary.md)
+- **Next Lesson**: [Study Guide](study-guide.md)
 
 ---
 

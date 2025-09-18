@@ -1,49 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T22:56:39+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T14:06:27+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "lt"
 }
 -->
 # Diegimo ir nustatymo vadovas
 
-**Ankstesnis:** [Pagrindinė dokumentacija](../../README.md) | **Kitas:** [AZD pagrindai](azd-basics.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas startas
+- **⬅️ Ankstesnis**: [AZD pagrindai](azd-basics.md)
+- **➡️ Kitas**: [Jūsų pirmasis projektas](first-project.md)
+- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Įvadas
 
-Šis išsamus vadovas padės jums įdiegti ir sukonfigūruoti „Azure Developer CLI“ (azd) jūsų sistemoje. Sužinosite apie įvairius diegimo būdus skirtingoms operacinėms sistemoms, autentifikacijos nustatymą ir pradinę konfigūraciją, kad paruoštumėte savo kūrimo aplinką „Azure“ diegimams.
+Šis išsamus vadovas padės jums įdiegti ir sukonfigūruoti „Azure Developer CLI“ (azd) jūsų sistemoje. Sužinosite apie įvairius diegimo metodus skirtingoms operacinėms sistemoms, autentifikacijos nustatymą ir pradinę konfigūraciją, kad paruoštumėte savo vystymo aplinką „Azure“ diegimams.
 
 ## Mokymosi tikslai
 
-Šio skyriaus pabaigoje jūs:
+Šios pamokos pabaigoje jūs:
 - Sėkmingai įdiegsite „Azure Developer CLI“ savo operacinėje sistemoje
-- Sužinosite, kaip konfigūruoti autentifikaciją su „Azure“ naudojant kelis metodus
-- Paruošite savo kūrimo aplinką su būtinais reikalavimais
-- Suprasite skirtingas diegimo parinktis ir kada jas naudoti
-- Išmoksite spręsti dažniausiai pasitaikančias diegimo ir nustatymo problemas
+- Suaktyvinsite autentifikaciją su „Azure“ naudodami kelis metodus
+- Nustatysite savo vystymo aplinką su būtinais reikalavimais
+- Suprasite skirtingas diegimo galimybes ir kada jas naudoti
+- Išspręsite dažniausiai pasitaikančias diegimo ir nustatymo problemas
 
 ## Mokymosi rezultatai
 
-Baigę šį skyrių, galėsite:
+Baigę šią pamoką, galėsite:
 - Įdiegti azd naudodami tinkamą metodą savo platformai
-- Autentifikuotis su „Azure“ naudojant `azd auth login`
-- Patikrinti diegimą ir išbandyti pagrindines azd komandas
-- Suprasti, kaip optimizuoti savo kūrimo aplinką azd naudojimui
-- Savarankiškai spręsti dažniausiai pasitaikančias diegimo problemas
+- Autentifikuotis su „Azure“ naudodami azd auth login
+- Patikrinti savo diegimą ir išbandyti pagrindines azd komandas
+- Suaktyvinti savo vystymo aplinką optimaliai azd naudojimui
+- Savarankiškai išspręsti dažniausiai pasitaikančias diegimo problemas
 
-Šis vadovas padės jums įdiegti ir sukonfigūruoti „Azure Developer CLI“ jūsų sistemoje, nepriklausomai nuo operacinės sistemos ar kūrimo aplinkos.
+Šis vadovas padės jums įdiegti ir sukonfigūruoti „Azure Developer CLI“ jūsų sistemoje, nepriklausomai nuo operacinės sistemos ar vystymo aplinkos.
 
-## Būtinos sąlygos
+## Reikalavimai
 
 Prieš diegdami azd, įsitikinkite, kad turite:
 - **„Azure“ prenumeratą** - [Sukurkite nemokamą paskyrą](https://azure.microsoft.com/free/)
-- **„Azure CLI“** - Autentifikacijai ir išteklių valdymui
+- **„Azure CLI“** - Autentifikacijai ir resursų valdymui
 - **Git** - Šablonų klonavimui ir versijų valdymui
 - **Docker** (neprivaloma) - Konteinerizuotoms aplikacijoms
 
-## Diegimo būdai
+## Diegimo metodai
 
 ### Windows
 
@@ -66,7 +71,7 @@ choco install azd
 #### 4 variantas: Rankinis diegimas
 1. Atsisiųskite naujausią versiją iš [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Išskleiskite į `C:\Program Files\azd\`
-3. Pridėkite į PATH aplinkos kintamąjį
+3. Pridėkite prie PATH aplinkos kintamojo
 
 ### macOS
 
@@ -94,7 +99,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### 2 variantas: Paketų tvarkyklės
+#### 2 variantas: Paketų valdytojai
 
 **Ubuntu/Debian:**
 ```bash
@@ -116,7 +121,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd jau yra iš anksto įdiegtas „GitHub Codespaces“. Tiesiog sukurkite „codespace“ ir pradėkite naudoti azd iš karto.
+azd jau yra įdiegtas „GitHub Codespaces“. Tiesiog sukurkite „codespace“ ir pradėkite naudoti azd iš karto.
 
 ### Docker
 
@@ -164,8 +169,8 @@ az login
 az account show
 ```
 
-### Autentifikacija per įrenginio kodą
-Jei naudojate sistemą be grafinės sąsajos arba kyla problemų su naršykle:
+### Įrenginio kodo autentifikacija
+Jei naudojate sistemą be grafinės sąsajos arba turite naršyklės problemų:
 ```bash
 az login --use-device-code
 ```
@@ -181,7 +186,7 @@ az login --service-principal \
 
 ## Konfigūracija
 
-### Bendroji konfigūracija
+### Globali konfigūracija
 ```bash
 # Set default subscription
 azd config set defaults.subscription <subscription-id>
@@ -194,7 +199,7 @@ azd config list
 ```
 
 ### Aplinkos kintamieji
-Pridėkite į savo shell profilį (`.bashrc`, `.zshrc`, `.profile`):
+Pridėkite prie savo shell profilio (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -235,21 +240,21 @@ Sukurkite `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Įdiekite „Azure“ plėtinį
-2. Sukonfigūruokite „Azure“ kredencialus
+2. Suaktyvinkite „Azure“ kredencialus
 3. Naudokite integruotą terminalą azd komandoms
 
-## 🐛 Diegimo trikčių šalinimas
+## 🐛 Diegimo problemų sprendimas
 
 ### Dažniausios problemos
 
-#### Leidimų klaida (Windows)
+#### Leidimų trūkumas (Windows)
 ```powershell
 # Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### PATH problemos
-Rankiniu būdu pridėkite azd į PATH:
+Rankiniu būdu pridėkite azd prie PATH:
 
 **Windows:**
 ```cmd
@@ -321,12 +326,12 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## Kiti žingsniai
+## Tolimesni žingsniai
 
 1. **Užbaikite autentifikaciją**: Įsitikinkite, kad galite pasiekti savo „Azure“ prenumeratą
 2. **Išbandykite pirmąjį diegimą**: Sekite [Pirmojo projekto vadovą](first-project.md)
-3. **Naršykite šablonus**: Peržiūrėkite galimus šablonus su `azd template list`
-4. **Konfigūruokite savo IDE**: Paruoškite savo kūrimo aplinką
+3. **Naršykite šablonus**: Naršykite pasiekiamus šablonus su `azd template list`
+4. **Konfigūruokite savo IDE**: Nustatykite savo vystymo aplinką
 
 ## Pagalba
 
@@ -338,11 +343,16 @@ Jei susiduriate su problemomis:
 
 ---
 
-**Ankstesnis:** [Pagrindinė dokumentacija](../../README.md) | **Kitas:** [AZD pagrindai](azd-basics.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas startas
+- **⬅️ Ankstesnis**: [AZD pagrindai](azd-basics.md) 
+- **➡️ Kitas**: [Jūsų pirmasis projektas](first-project.md)
+- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Diegimas baigtas!** Tęskite [Pirmasis projektas](first-project.md), kad pradėtumėte kurti su azd.
+**✅ Diegimas baigtas!** Tęskite [Jūsų pirmasis projektas](first-project.md), kad pradėtumėte kurti su azd.
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

@@ -1,44 +1,51 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:23:52+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T13:03:07+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "sl"
 }
 -->
-# Provisioniranje virov - infrastruktura kot koda z AZD
+# Ustvarjanje Azure virov z AZD
+
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 4 - Infrastruktura kot koda in uvajanje
+- **⬅️ Prejšnje**: [Vodnik za uvajanje](deployment-guide.md)
+- **➡️ Naslednje poglavje**: [Poglavje 5: Večagentne AI rešitve](../../examples/retail-scenario.md)
+- **🔧 Povezano**: [Poglavje 6: Preverjanje pred uvajanjem](../pre-deployment/capacity-planning.md)
 
 ## Uvod
 
-Ta obsežen vodič zajema vse, kar morate vedeti o provisioniranju in upravljanju Azure virov z uporabo Azure Developer CLI. Naučite se implementirati vzorce infrastrukture kot kode (IaC), od osnovne ustvaritve virov do naprednih infrastrukturnih arhitektur na ravni podjetja z uporabo Bicep, ARM predlog, Terraform in Pulumi.
+Ta obsežen vodnik zajema vse, kar morate vedeti o ustvarjanju in upravljanju Azure virov z uporabo Azure Developer CLI. Naučili se boste uporabljati vzorce infrastrukture kot kode (IaC), od osnovnega ustvarjanja virov do naprednih arhitektur infrastrukture na ravni podjetja z uporabo Bicep, ARM predlog, Terraform in Pulumi.
 
 ## Cilji učenja
 
-Z dokončanjem tega vodiča boste:
-- Obvladali principe infrastrukture kot kode in provisioniranje Azure virov
+Z dokončanjem tega vodnika boste:
+- Obvladali načela infrastrukture kot kode in ustvarjanje Azure virov
 - Razumeli različne ponudnike IaC, ki jih podpira Azure Developer CLI
-- Oblikovali in implementirali Bicep predloge za običajne aplikacijske arhitekture
-- Konfigurirali parametre virov, spremenljivke in nastavitve, specifične za okolje
-- Implementirali napredne infrastrukturne vzorce, vključno z omrežjem in varnostjo
+- Oblikovali in implementirali Bicep predloge za običajne arhitekture aplikacij
+- Konfigurirali parametre virov, spremenljivke in nastavitve za specifična okolja
+- Uvedli napredne vzorce infrastrukture, vključno z omrežjem in varnostjo
 - Upravljali življenjski cikel virov, posodobitve in reševanje odvisnosti
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
-- Oblikovati in provisionirati Azure infrastrukturo z uporabo Bicep in ARM predlog
+- Oblikovati in ustvariti Azure infrastrukturo z uporabo Bicep in ARM predlog
 - Konfigurirati kompleksne arhitekture z več storitvami in ustreznimi odvisnostmi virov
-- Implementirati predloge s parametri za več okolij in konfiguracij
-- Odpravljati težave pri provisioniranju infrastrukture in reševati napake pri uvajanju
-- Uporabiti principe Azure Well-Architected Framework pri oblikovanju infrastrukture
+- Implementirati parametizirane predloge za več okolij in konfiguracij
+- Odpravljati težave pri ustvarjanju infrastrukture in reševati napake pri uvajanju
+- Uporabiti načela Azure Well-Architected Framework pri oblikovanju infrastrukture
 - Upravljati posodobitve infrastrukture in implementirati strategije različic infrastrukture
 
-## Pregled provisioniranja infrastrukture
+## Pregled ustvarjanja infrastrukture
 
 Azure Developer CLI podpira več ponudnikov infrastrukture kot kode (IaC):
 - **Bicep** (priporočeno) - Domensko specifičen jezik Azure
-- **ARM predloge** - Predloge Azure Resource Manager, ki temeljijo na JSON
-- **Terraform** - Orodje za infrastrukturo v več oblakih
+- **ARM predloge** - JSON predloge za Azure Resource Manager
+- **Terraform** - Orodje za večoblačno infrastrukturo
 - **Pulumi** - Sodobna infrastruktura kot koda z uporabo programskih jezikov
 
 ## Razumevanje Azure virov
@@ -58,7 +65,7 @@ Azure Account
 - **Varnost**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep infrastrukturne predloge
+## Bicep predloge za infrastrukturo
 
 ### Osnovna struktura Bicep predloge
 ```bicep
@@ -202,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Provisioniranje podatkovnih baz
+## 🗃️ Ustvarjanje podatkovnih baz
 
 ### Cosmos DB
 ```bicep
@@ -302,7 +309,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 Upravljanje varnosti in skrivnosti
 
-### Integracija Key Vault
+### Integracija z Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -563,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Konfiguracije, specifične za okolje
+## 🔧 Konfiguracije specifične za okolje
 
-### Datoteke parametrov za različna okolja
+### Datoteke s parametri za različna okolja
 ```json
 // infra/main.parameters.dev.json
 {
@@ -619,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Pogojno provisioniranje virov
+### Pogojno ustvarjanje virov
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,7 +658,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Napredni vzorci provisioniranja
+## 🚀 Napredni vzorci ustvarjanja
 
 ### Uvajanje v več regijah
 ```bicep
@@ -859,10 +866,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Naslednji koraki
 
-- [Načrtovanje pred uvajanjem](../pre-deployment/capacity-planning.md) - Validacija razpoložljivosti virov
-- [Pogoste težave](../troubleshooting/common-issues.md) - Odpravljanje težav z infrastrukturo
-- [Vodnik za odpravljanje napak](../troubleshooting/debugging.md) - Odpravljanje težav pri provisioniranju
-- [Izbira SKU](../pre-deployment/sku-selection.md) - Izbira ustreznih nivojev storitev
+- [Načrtovanje pred uvajanjem](../pre-deployment/capacity-planning.md) - Preverite razpoložljivost virov
+- [Pogoste težave](../troubleshooting/common-issues.md) - Odpravite težave z infrastrukturo
+- [Vodnik za odpravljanje napak](../troubleshooting/debugging.md) - Odpravite težave pri ustvarjanju
+- [Izbira SKU](../pre-deployment/sku-selection.md) - Izberite ustrezne nivoje storitev
 
 ## Dodatni viri
 
@@ -880,4 +887,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da se zavedate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

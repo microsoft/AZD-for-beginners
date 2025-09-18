@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:30:57+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T14:08:43+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "lt"
 }
 -->
 # Dažniausios problemos ir sprendimai
 
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 7 skyrius - Trikčių šalinimas ir derinimas
+- **⬅️ Ankstesnis skyrius**: [6 skyrius: Priešskrydžio patikrinimai](../pre-deployment/preflight-checks.md)
+- **➡️ Toliau**: [Derinimo vadovas](debugging.md)
+- **🚀 Kitas skyrius**: [8 skyrius: Produkcija ir įmonių modeliai](../ai-foundry/production-ai-practices.md)
+
 ## Įvadas
 
-Šis išsamus trikčių šalinimo vadovas apima dažniausiai pasitaikančias problemas, susijusias su Azure Developer CLI naudojimu. Sužinokite, kaip diagnozuoti, šalinti ir spręsti problemas, susijusias su autentifikacija, diegimu, infrastruktūros kūrimu ir programų konfigūracija. Kiekviena problema apima detalius simptomus, pagrindines priežastis ir žingsnis po žingsnio sprendimo procedūras.
+Šis išsamus trikčių šalinimo vadovas apima dažniausiai pasitaikančias problemas, susijusias su Azure Developer CLI naudojimu. Sužinokite, kaip diagnozuoti, šalinti ir spręsti problemas, susijusias su autentifikacija, diegimu, infrastruktūros kūrimu ir programų konfigūracija. Kiekviena problema apima išsamius simptomus, pagrindines priežastis ir žingsnis po žingsnio sprendimo procedūras.
 
 ## Mokymosi tikslai
 
 Baigę šį vadovą, jūs:
-- Įvaldysite Azure Developer CLI trikčių diagnostikos technikas
+- Įvaldysite diagnostikos metodus, skirtus Azure Developer CLI problemoms spręsti
 - Suprasite dažniausias autentifikacijos ir leidimų problemas bei jų sprendimus
 - Išmoksite spręsti diegimo klaidas, infrastruktūros kūrimo klaidas ir konfigūracijos problemas
 - Įgyvendinsite proaktyvias stebėjimo ir derinimo strategijas
-- Taikysite sistemingus trikčių šalinimo metodus sudėtingoms problemoms
-- Konfigūruosite tinkamą žurnalų ir stebėjimo sistemą, kad išvengtumėte būsimų problemų
+- Taikysite sistemingus trikčių šalinimo metodus sudėtingoms problemoms spręsti
+- Konfigūruosite tinkamą registravimą ir stebėjimą, kad išvengtumėte būsimų problemų
 
 ## Mokymosi rezultatai
 
-Baigę vadovą, galėsite:
+Baigę, galėsite:
 - Diagnozuoti Azure Developer CLI problemas naudojant integruotus diagnostikos įrankius
 - Savarankiškai spręsti autentifikacijos, prenumeratos ir leidimų problemas
 - Efektyviai šalinti diegimo klaidas ir infrastruktūros kūrimo problemas
-- Derinti programų konfigūracijos problemas ir aplinkos specifines klaidas
-- Įgyvendinti stebėjimo ir įspėjimo sistemas, kad proaktyviai identifikuotumėte galimas problemas
-- Taikyti geriausią praktiką žurnalų, derinimo ir problemų sprendimo procesuose
+- Derinti programų konfigūracijos problemas ir aplinkos specifines problemas
+- Įgyvendinti stebėjimą ir įspėjimus, kad proaktyviai nustatytumėte galimas problemas
+- Taikyti geriausią praktiką registravimo, derinimo ir problemų sprendimo darbo eigoms
 
 ## Greita diagnostika
 
@@ -134,7 +141,7 @@ azd down --force --purge
 ### Problema: Vietovė/regionas nepasiekiamas
 **Simptomai:**
 - Klaida „Vietovė 'xyz' nepasiekiama šio tipo ištekliams“
-- Tam tikri SKUs nepasiekiami pasirinktoje vietovėje
+- Tam tikri SKU nepasiekiami pasirinktoje vietovėje
 
 **Sprendimai:**
 ```bash
@@ -150,9 +157,9 @@ azd env set AZURE_LOCATION eastus2
 # Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problema: Kvotos viršijimo klaidos
+### Problema: Viršytos kvotos klaidos
 **Simptomai:**
-- Klaida „Kvota viršyta šio tipo ištekliams“
+- Klaida „Viršyta kvota šio tipo ištekliams“
 - „Pasiektas maksimalus išteklių skaičius“
 
 **Sprendimai:**
@@ -177,7 +184,7 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 ### Problema: Bicep šablonų klaidos
 **Simptomai:**
-- Šablonų validacijos klaidos
+- Šablono validacijos klaidos
 - Sintaksės klaidos Bicep failuose
 
 **Sprendimai:**
@@ -250,7 +257,7 @@ az containerapp show --name my-app --resource-group my-rg
 ### Problema: Duomenų bazės prisijungimo klaidos
 **Simptomai:**
 - Programa negali prisijungti prie duomenų bazės
-- Prisijungimo laiko viršijimo klaidos
+- Prisijungimo laiko limitas viršytas
 
 **Sprendimai:**
 ```bash
@@ -311,7 +318,7 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 ### Problema: CORS konfigūracijos problemos
 **Simptomai:**
 - Frontend negali pasiekti API
-- Užklausos iš kitos kilmės blokuojamos
+- Užblokuoti kryžminio domeno užklausos
 
 **Sprendimai:**
 ```bash
@@ -376,7 +383,7 @@ azd env set DATABASE_URL "your-value"
 ### Problema: Lėtas diegimo laikas
 **Simptomai:**
 - Diegimas užtrunka per ilgai
-- Diegimo metu įvyksta laiko viršijimo klaidos
+- Diegimo metu viršijami laiko limitai
 
 **Sprendimai:**
 ```bash
@@ -462,12 +469,12 @@ az webapp show --name myapp --resource-group myrg --query state
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Papildoma pagalba
+## 🆘 Papildomos pagalbos gavimas
 
-### Kada eskaluoti problemą
+### Kada eskaluoti
 - Autentifikacijos problemos išlieka po visų sprendimų išbandymo
 - Infrastruktūros problemos su Azure paslaugomis
-- Problemos, susijusios su sąskaitomis ar prenumeratomis
+- Sąskaitų ar prenumeratos susijusios problemos
 - Saugumo klausimai ar incidentai
 
 ### Pagalbos kanalai
@@ -568,7 +575,7 @@ az security assessment list --resource-group myrg
 
 ## Susiję ištekliai
 
-- [Derinimo vadovas](debugging.md) - Išplėstinės derinimo technikos
+- [Derinimo vadovas](debugging.md) - Išplėstiniai derinimo metodai
 - [Išteklių kūrimas](../deployment/provisioning.md) - Infrastruktūros trikčių šalinimas
 - [Talpos planavimas](../pre-deployment/capacity-planning.md) - Išteklių planavimo gairės
 - [SKU pasirinkimas](../pre-deployment/sku-selection.md) - Paslaugų lygio rekomendacijos
@@ -586,4 +593,4 @@ az security assessment list --resource-group myrg
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

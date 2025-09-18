@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:34:58+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T13:03:59+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "sl"
 }
 -->
-# Vodnik za odpravljanje napak - Napredne tehnike analize dnevnikov
+# Vodnik za odpravljanje napak pri AZD namestitvah
+
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in napak
+- **⬅️ Prejšnje**: [Pogoste težave](common-issues.md)
+- **➡️ Naslednje**: [Odpravljanje težav, povezanih z AI](ai-troubleshooting.md)
+- **🚀 Naslednje poglavje**: [Poglavje 8: Vzorce za produkcijo in podjetja](../ai-foundry/production-ai-practices.md)
 
 ## Uvod
 
-Ta obsežen vodnik ponuja napredne strategije odpravljanja napak, orodja in tehnike za diagnosticiranje in reševanje kompleksnih težav pri uvajanju Azure Developer CLI. Naučite se sistematičnih metodologij odpravljanja težav, tehnik analize dnevnikov, profiliranja zmogljivosti in uporabe naprednih diagnostičnih orodij za učinkovito reševanje težav pri uvajanju in delovanju.
+Ta obsežen vodnik ponuja napredne strategije, orodja in tehnike za odpravljanje napak pri namestitvah Azure Developer CLI. Naučite se sistematičnih metodologij za odpravljanje težav, tehnik analize dnevnikov, profiliranja zmogljivosti in uporabe naprednih diagnostičnih orodij za učinkovito reševanje težav pri namestitvah in delovanju.
 
 ## Cilji učenja
 
 Z dokončanjem tega vodnika boste:
-- Obvladali sistematične metodologije odpravljanja napak za težave z Azure Developer CLI
+- Obvladali sistematične metodologije za odpravljanje težav pri Azure Developer CLI
 - Razumeli napredno konfiguracijo dnevnikov in tehnike analize dnevnikov
-- Uvedli strategije profiliranja zmogljivosti in spremljanja
+- Uvedli strategije za profiliranje zmogljivosti in spremljanje
 - Uporabili diagnostična orodja in storitve Azure za reševanje kompleksnih težav
-- Uporabili tehnike odpravljanja težav z omrežjem in varnostjo
+- Uporabili tehnike za odpravljanje težav z omrežjem in varnostjo
 - Konfigurirali celovito spremljanje in opozarjanje za proaktivno odkrivanje težav
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
-- Uporabiti metodologijo TRIAGE za sistematično odpravljanje kompleksnih težav pri uvajanju
+- Uporabiti metodologijo TRIAGE za sistematično odpravljanje kompleksnih težav pri namestitvah
 - Konfigurirati in analizirati celovite informacije o beleženju in sledenju
 - Učinkovito uporabljati Azure Monitor, Application Insights in diagnostična orodja
 - Samostojno odpravljati težave z omrežno povezljivostjo, avtentikacijo in dovoljenji
-- Uvesti strategije spremljanja zmogljivosti in optimizacije
-- Ustvariti prilagojene skripte za odpravljanje napak in avtomatizacijo za ponavljajoče se težave
+- Uvesti strategije za spremljanje zmogljivosti in optimizacijo
+- Ustvariti prilagojene skripte za odpravljanje napak in avtomatizacijo ponavljajočih se težav
 
 ## Metodologija odpravljanja napak
 
@@ -433,7 +440,7 @@ debug_keyvault() {
 }
 ```
 
-### Odpravljanje težav z varnostjo omrežja
+### Odpravljanje težav z omrežno varnostjo
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -451,7 +458,7 @@ debug_network_security() {
 }
 ```
 
-## 📱 Odpravljanje težav specifičnih za aplikacije
+## 📱 Odpravljanje težav, specifičnih za aplikacije
 
 ### Odpravljanje težav z aplikacijami Node.js
 ```javascript
@@ -681,19 +688,19 @@ hooks:
 2. **Ustvarite reproducibilne testne primere** za težave
 3. **Dokumentirajte postopke odpravljanja napak** za svojo ekipo
 4. **Avtomatizirajte preverjanje stanja** in spremljanje
-5. **Posodabljajte orodja za odpravljanje napak** skladno s spremembami aplikacije
+5. **Posodabljajte orodja za odpravljanje napak** skupaj s spremembami aplikacije
 6. **Vadite postopke odpravljanja napak** v času, ko ni incidentov
 
 ## Naslednji koraki
 
-- [Načrtovanje zmogljivosti](../pre-deployment/capacity-planning.md) - Načrtujte zahteve za vire
-- [Izbira SKU](../pre-deployment/sku-selection.md) - Izberite ustrezne nivoje storitev
-- [Preflight preverjanja](../pre-deployment/preflight-checks.md) - Validacija pred uvajanjem
+- [Načrtovanje zmogljivosti](../pre-deployment/capacity-planning.md) - Načrtovanje potreb po virih
+- [Izbira SKU](../pre-deployment/sku-selection.md) - Izbira ustreznih nivojev storitev
+- [Preflight preverjanja](../pre-deployment/preflight-checks.md) - Validacija pred namestitvijo
 - [Pomožni list](../../resources/cheat-sheet.md) - Hitri referenčni ukazi
 
 ---
 
-**Zapomnite si**: Dobro odpravljanje napak zahteva sistematičnost, temeljitost in potrpežljivost. Ta orodja in tehnike vam bodo pomagale hitreje in učinkoviteje diagnosticirati težave.
+**Zapomnite si**: Dobro odpravljanje napak zahteva sistematičnost, temeljitost in potrpežljivost. Ta orodja in tehnike vam bodo pomagali hitreje in učinkoviteje diagnosticirati težave.
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

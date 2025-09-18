@@ -1,56 +1,63 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T22:45:29+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T13:02:09+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sl"
 }
 -->
-# Osnove AZD - Razumevanje Azure Developer CLI
+# AZD Osnove - Razumevanje Azure Developer CLI
 
-**Prejšnje:** [Namestitev in nastavitev](installation.md) | **Naslednje:** [Konfiguracija](configuration.md)
+# AZD Osnove - Ključni koncepti in temelji
+
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 1 - Osnove in hitri začetek
+- **⬅️ Prejšnje**: [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Naslednje**: [Namestitev in nastavitev](installation.md)
+- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj z AI v ospredju](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Uvod
 
-Ta lekcija vas uvaja v Azure Developer CLI (azd), zmogljivo orodje ukazne vrstice, ki pospeši prehod od lokalnega razvoja do uvajanja v Azure. Spoznali boste osnovne koncepte, ključne funkcije in razumeli, kako azd poenostavi uvajanje aplikacij, zasnovanih za oblak.
+Ta lekcija vas uvaja v Azure Developer CLI (azd), zmogljivo orodje ukazne vrstice, ki pospeši prehod od lokalnega razvoja do uvajanja v Azure. Spoznali boste temeljne koncepte, ključne funkcije in razumeli, kako azd poenostavi uvajanje aplikacij, zasnovanih za oblak.
 
 ## Cilji učenja
 
 Do konca te lekcije boste:
 - Razumeli, kaj je Azure Developer CLI in njegov glavni namen
-- Spoznali osnovne koncepte predlog, okolij in storitev
-- Raziskali ključne funkcije, vključno z razvojem na podlagi predlog in infrastrukturo kot kodo
-- Razumeli strukturo projekta azd in potek dela
-- Pripravljeni na namestitev in konfiguracijo azd za vaš razvojni okolje
+- Spoznali ključne koncepte, kot so predloge, okolja in storitve
+- Raziskali ključne funkcije, vključno z razvojem na osnovi predlog in infrastrukturo kot kodo
+- Razumeli strukturo in potek dela projekta azd
+- Pripravljeni na namestitev in konfiguracijo azd za vaše razvojno okolje
 
 ## Rezultati učenja
 
-Po zaključku te lekcije boste sposobni:
-- Pojasniti vlogo azd v sodobnih delovnih procesih razvoja za oblak
-- Prepoznati komponente strukture projekta azd
-- Opisati, kako predloge, okolja in storitve delujejo skupaj
-- Razumeti prednosti infrastrukture kot kode z azd
-- Prepoznati različne ukaze azd in njihove namene
+Po zaključku te lekcije boste lahko:
+- Razložili vlogo azd v sodobnih delovnih tokovih razvoja za oblak
+- Prepoznali komponente strukture projekta azd
+- Opisali, kako predloge, okolja in storitve delujejo skupaj
+- Razumeli prednosti infrastrukture kot kode z azd
+- Prepoznali različne ukaze azd in njihove namene
 
 ## Kaj je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je orodje ukazne vrstice, zasnovano za pospešitev prehoda od lokalnega razvoja do uvajanja v Azure. Poenostavi proces gradnje, uvajanja in upravljanja aplikacij, zasnovanih za oblak, na Azure.
+Azure Developer CLI (azd) je orodje ukazne vrstice, zasnovano za pospešitev prehoda od lokalnega razvoja do uvajanja v Azure. Poenostavi proces gradnje, uvajanja in upravljanja aplikacij, zasnovanih za oblak, na platformi Azure.
 
-## Osnovni koncepti
+## Ključni koncepti
 
 ### Predloge
 Predloge so temelj azd. Vsebujejo:
-- **Kodo aplikacije** - Vašo izvorno kodo in odvisnosti
+- **Kodo aplikacije** - Vaša izvorna koda in odvisnosti
 - **Definicije infrastrukture** - Azure viri, definirani v Bicep ali Terraform
 - **Konfiguracijske datoteke** - Nastavitve in okoljske spremenljivke
-- **Skripte za uvajanje** - Avtomatizirani poteki uvajanja
+- **Skripte za uvajanje** - Avtomatizirani poteki dela za uvajanje
 
 ### Okolja
 Okolja predstavljajo različne cilje uvajanja:
-- **Razvoj** - Za testiranje in razvoj
+- **Razvojno** - Za testiranje in razvoj
 - **Staging** - Predprodukcijsko okolje
-- **Produkcija** - Živo produkcijsko okolje
+- **Produkcijsko** - Živo produkcijsko okolje
 
 Vsako okolje ima svoje:
 - Azure skupine virov
@@ -62,11 +69,11 @@ Storitve so gradniki vaše aplikacije:
 - **Frontend** - Spletne aplikacije, SPAs
 - **Backend** - API-ji, mikrostoritve
 - **Baza podatkov** - Rešitve za shranjevanje podatkov
-- **Shranjevanje** - Shranjevanje datotek in blobov
+- **Shranjevanje** - Datotečno in blob shranjevanje
 
 ## Ključne funkcije
 
-### 1. Razvoj na podlagi predlog
+### 1. Razvoj na osnovi predlog
 ```bash
 # Browse available templates
 azd template list
@@ -76,9 +83,9 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastruktura kot koda
-- **Bicep** - Domensko specifičen jezik Azure
+- **Bicep** - Domensko specifičen jezik za Azure
 - **Terraform** - Orodje za infrastrukturo v več oblakih
-- **ARM predloge** - Predloge Azure Resource Manager
+- **ARM predloge** - Predloge za Azure Resource Manager
 
 ### 3. Integrirani poteki dela
 ```bash
@@ -191,27 +198,27 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Razumevanje `azd down --force --purge`
-Ukaz `azd down --force --purge` je zmogljiv način za popolno odstranitev vašega azd okolja in vseh povezanih virov. Tukaj je razčlenitev, kaj vsak parameter naredi:
+Ukaz `azd down --force --purge` je zmogljiv način za popolno odstranitev vašega azd okolja in vseh povezanih virov. Tukaj je razčlenitev, kaj posamezna zastavica naredi:
 ```
 --force
 ```
 - Preskoči potrditvene pozive.
-- Koristno za avtomatizacijo ali skriptiranje, kjer ročni vnos ni izvedljiv.
-- Zagotovi, da se odstranitev nadaljuje brez prekinitve, tudi če CLI zazna neskladnosti.
+- Uporabno za avtomatizacijo ali skripte, kjer ročni vnos ni izvedljiv.
+- Zagotavlja, da odstranitev poteka brez prekinitev, tudi če CLI zazna neskladja.
 
 ```
 --purge
 ```
 Izbriše **vse povezane metapodatke**, vključno z:
-Stanje okolja
-Lokalna mapa `.azure`
-Predpomnjene informacije o uvajanju
-Prepreči, da bi azd "zapomnil" prejšnja uvajanja, kar lahko povzroči težave, kot so neskladne skupine virov ali zastarele reference registracije.
+Stanje okolja  
+Lokalna mapa `.azure`  
+Predpomnjene informacije o uvajanju  
+Preprečuje, da bi azd "zapomnil" prejšnja uvajanja, kar lahko povzroči težave, kot so neusklajene skupine virov ali zastareli sklici na registre.
 
 ### Zakaj uporabiti oboje?
-Ko naletite na težave z `azd up` zaradi preostalega stanja ali delnih uvajanj, ta kombinacija zagotovi **čisto stanje**.
+Ko naletite na težave z `azd up` zaradi preostalega stanja ali delnih uvajanj, ta kombinacija zagotavlja **čisto stanje**.
 
-To je še posebej koristno po ročnih brisanjih virov v Azure portalu ali pri preklapljanju predlog, okolij ali konvencij poimenovanja skupin virov.
+To je še posebej koristno po ročnih brisanjih virov v Azure portalu ali pri preklapljanju predlog, okolij ali poimenovalnih konvencij skupin virov.
 
 ### Upravljanje več okolij
 ```bash
@@ -273,7 +280,7 @@ azd init --template template1
 - Nikoli ne uvajajte neposredno v produkcijo z lokalnega računalnika
 - Uporabljajte CI/CD pipeline za produkcijska uvajanja
 
-### 4. Upravljanje konfiguracije
+### 4. Upravljanje konfiguracij
 - Uporabljajte okoljske spremenljivke za občutljive podatke
 - Hranite konfiguracijo v sistemu za nadzor različic
 - Dokumentirajte nastavitve, specifične za okolje
@@ -286,13 +293,13 @@ azd init --template template1
 3. Razumite strukturo projekta
 4. Naučite se osnovnih ukazov (up, down, deploy)
 
-### Srednji nivo (3-4 tedna)
+### Srednje napredni (3-4 tedne)
 1. Prilagodite predloge
 2. Upravljajte več okolij
 3. Razumite infrastrukturo kot kodo
 4. Nastavite CI/CD pipeline
 
-### Napredni nivo (5+ tednov)
+### Napredni (5+ tednov)
 1. Ustvarite lastne predloge
 2. Napredni vzorci infrastrukture
 3. Uvajanja v več regijah
@@ -300,9 +307,13 @@ azd init --template template1
 
 ## Naslednji koraki
 
+**📖 Nadaljujte z učenjem v poglavju 1:**
 - [Namestitev in nastavitev](installation.md) - Namestite in konfigurirajte azd
-- [Vaš prvi projekt](first-project.md) - Praktični vodič
+- [Vaš prvi projekt](first-project.md) - Zaključite praktični vodič
 - [Vodnik za konfiguracijo](configuration.md) - Napredne možnosti konfiguracije
+
+**🎯 Pripravljeni na naslednje poglavje?**
+- [Poglavje 2: Razvoj z AI v ospredju](../ai-foundry/azure-ai-foundry-integration.md) - Začnite graditi AI aplikacije
 
 ## Dodatni viri
 
@@ -312,8 +323,12 @@ azd init --template template1
 
 ---
 
-**Prejšnje:** [Namestitev in nastavitev](installation.md) | **Naslednje:** [Konfiguracija](configuration.md)
-- **Naslednja lekcija**: [Namestitev in nastavitev](installation.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 1 - Osnove in hitri začetek  
+- **⬅️ Prejšnje**: [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Naslednje**: [Namestitev in nastavitev](installation.md)
+- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj z AI v ospredju](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 

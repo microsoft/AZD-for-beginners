@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-10T06:47:36+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T12:48:38+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "en"
 }
 -->
 # SKU Selection Guide - Choosing the Right Azure Service Tiers
 
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 6 - Pre-Deployment Validation & Planning
+- **⬅️ Previous**: [Capacity Planning](capacity-planning.md)
+- **➡️ Next**: [Pre-flight Checks](preflight-checks.md)
+- **🚀 Next Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/common-issues.md)
+
 ## Introduction
 
-This guide provides detailed instructions to help you choose the best Azure service SKUs (Stock Keeping Units) for various environments, workloads, and requirements. Learn how to evaluate performance needs, cost factors, and scalability requirements to select the most suitable service tiers for your Azure Developer CLI deployments.
+This guide provides a detailed approach to selecting the best Azure service SKUs (Stock Keeping Units) for various environments, workloads, and requirements. It covers how to evaluate performance needs, cost factors, and scalability to make informed decisions for Azure Developer CLI deployments.
 
 ## Learning Goals
 
-By following this guide, you will:
-- Gain an understanding of Azure SKU concepts, pricing structures, and feature differences
-- Develop strategies for selecting SKUs tailored to development, staging, and production environments
-- Assess workload requirements and align them with appropriate service tiers
-- Implement cost-saving strategies through informed SKU selection
-- Use performance testing and validation methods to confirm SKU choices
-- Set up automated SKU recommendations and monitoring systems
+By the end of this guide, you will:
+- Gain a clear understanding of Azure SKU concepts, pricing structures, and feature differences
+- Learn strategies for selecting SKUs tailored to development, staging, and production environments
+- Match workload requirements to the most suitable service tiers
+- Optimize costs through smart SKU selection
+- Use performance testing and validation to ensure the right choices
+- Set up automated SKU recommendations and monitoring
 
 ## Learning Outcomes
 
 After completing this guide, you will be able to:
-- Choose Azure service SKUs that meet workload requirements and constraints
-- Design cost-efficient multi-environment architectures with appropriate tier selection
+- Choose Azure service SKUs that align with workload needs and constraints
+- Design cost-efficient architectures across multiple environments with appropriate tier selection
 - Conduct performance benchmarking and validation for SKU decisions
-- Build automated tools for SKU recommendations and cost optimization
-- Plan migrations and scaling strategies to adapt to evolving needs
-- Apply Azure Well-Architected Framework principles to service tier selection
+- Develop automated tools for SKU recommendations and cost optimization
+- Plan migrations and scaling strategies to adapt to evolving requirements
+- Apply Azure Well-Architected Framework principles to SKU selection
 
 ## Table of Contents
 
@@ -49,7 +56,7 @@ After completing this guide, you will be able to:
 
 ### What are SKUs?
 
-SKUs (Stock Keeping Units) represent the various service tiers and performance levels available for Azure resources. Each SKU offers distinct:
+SKUs (Stock Keeping Units) represent the different service tiers and performance levels available for Azure resources. Each SKU offers variations in:
 
 - **Performance characteristics** (CPU, memory, throughput)
 - **Feature availability** (scaling options, SLA levels)
@@ -59,7 +66,7 @@ SKUs (Stock Keeping Units) represent the various service tiers and performance l
 ### Key Factors in SKU Selection
 
 1. **Workload Requirements**
-   - Anticipated traffic/load patterns
+   - Anticipated traffic and load patterns
    - Performance needs (CPU, memory, I/O)
    - Storage requirements and access patterns
 
@@ -71,7 +78,7 @@ SKUs (Stock Keeping Units) represent the various service tiers and performance l
 3. **Budget Constraints**
    - Upfront costs vs. ongoing operational expenses
    - Discounts for reserved capacity
-   - Cost implications of auto-scaling
+   - Costs associated with auto-scaling
 
 4. **Growth Projections**
    - Scalability needs
@@ -101,7 +108,7 @@ skus:
 
 #### Characteristics
 - **App Service**: F1 (Free) or B1 (Basic) for simple testing
-- **Databases**: Basic tier with limited resources
+- **Databases**: Basic tier with minimal resources
 - **Storage**: Standard with local redundancy only
 - **Compute**: Shared resources are acceptable
 - **Networking**: Basic configurations
@@ -127,7 +134,7 @@ skus:
 - **Features**: Most production features enabled
 - **Redundancy**: Some geographic redundancy
 - **Scaling**: Limited auto-scaling for testing purposes
-- **Monitoring**: Full monitoring stack enabled
+- **Monitoring**: Full monitoring stack
 
 ### Production Environment
 
@@ -147,9 +154,9 @@ skus:
 ```
 
 #### Characteristics
-- **High availability**: SLA requirements of 99.9% or higher
+- **High availability**: SLA of 99.9% or higher
 - **Performance**: Dedicated resources, high throughput
-- **Security**: Advanced security features
+- **Security**: Premium security features
 - **Scaling**: Full auto-scaling capabilities
 - **Monitoring**: Comprehensive observability tools
 
@@ -165,7 +172,7 @@ skus:
 |----------|----------------|-----------|
 | Development/Testing | F1 (Free) or B1 (Basic) | Cost-effective, sufficient for testing |
 | Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| Medium production apps | P1V3 (Premium V3) | Enhanced performance, additional features |
+| Medium production apps | P1V3 (Premium V3) | Better performance, more features |
 | High-traffic apps | P2V3 or P3V3 | Dedicated resources, high performance |
 | Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
 
@@ -208,9 +215,9 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 #### SKU Selection Framework
 
 1. **DTU-based (Database Transaction Units)**
-   - **Basic**: 5 DTU - Suitable for development/testing
-   - **Standard**: S0-S12 (10-3000 DTU) - General-purpose workloads
-   - **Premium**: P1-P15 (125-4000 DTU) - Performance-critical applications
+   - **Basic**: 5 DTU - Development/testing
+   - **Standard**: S0-S12 (10-3000 DTU) - General purpose
+   - **Premium**: P1-P15 (125-4000 DTU) - Performance-critical
 
 2. **vCore-based** (Recommended for production)
    - **General Purpose**: Balanced compute and storage
@@ -258,13 +265,13 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 1. **Consumption-based**
    - Pay-per-use pricing
-   - Ideal for development and variable workloads
+   - Suitable for development and variable workloads
    - Shared infrastructure
 
 2. **Dedicated (Workload Profiles)**
-   - Reserved compute resources
+   - Dedicated compute resources
    - Predictable performance
-   - Suitable for production workloads
+   - Better for production workloads
 
 #### Configuration Examples
 
@@ -334,14 +341,14 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
    - Best for steady workloads
 
 2. **Autoscale Provisioned Throughput**
-   - Automatically adjusts based on usage
-   - Pay for what you use (with a minimum)
-   - Ideal for variable workloads
+   - Automatic scaling based on usage
+   - Pay for what you use (with minimum)
+   - Good for variable workloads
 
 3. **Serverless**
    - Pay-per-request
    - No provisioned throughput
-   - Perfect for development and intermittent workloads
+   - Ideal for development and intermittent workloads
 
 #### SKU Examples
 
@@ -403,13 +410,13 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 #### Storage Account Types
 
 1. **Standard_LRS** - Development, non-critical data
-2. **Standard_GRS** - Production, geo-redundancy required
+2. **Standard_GRS** - Production, geo-redundancy needed
 3. **Premium_LRS** - High-performance applications
 4. **Premium_ZRS** - High availability with zone redundancy
 
 #### Performance Tiers
 
-- **Standard**: General-purpose, cost-effective
+- **Standard**: General purpose, cost-effective
 - **Premium**: High-performance, low-latency scenarios
 
 ```bicep
@@ -455,7 +462,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. Reserved Capacity
 
-Reserve resources for 1-3 years to unlock significant discounts:
+Reserve resources for 1-3 years for significant discounts:
 
 ```bash
 # Check reservation options
@@ -465,7 +472,7 @@ az reservations catalog show --reserved-resource-type CosmosDb
 
 ### 2. Right-Sizing
 
-Begin with smaller SKUs and scale up based on actual usage:
+Start with smaller SKUs and scale up based on actual usage:
 
 ```yaml
 # Progressive scaling approach
@@ -481,7 +488,7 @@ production:
 
 ### 3. Auto-Scaling Configuration
 
-Set up intelligent scaling to optimize costs:
+Implement intelligent scaling to optimize costs:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -540,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Scheduled Scaling
 
-Reduce resource usage during off-peak hours:
+Scale down during off-hours:
 
 ```json
 {
@@ -589,7 +596,7 @@ Reduce resource usage during off-peak hours:
 
 ### Baseline Performance Requirements
 
-Clearly define performance needs before selecting SKUs:
+Define clear performance requirements before SKU selection:
 
 ```yaml
 performance_requirements:
@@ -607,7 +614,7 @@ performance_requirements:
 
 ### Load Testing
 
-Evaluate different SKUs to confirm performance suitability:
+Test different SKUs to validate performance:
 
 ```bash
 # Azure Load Testing service
@@ -619,7 +626,7 @@ az load test create \
 
 ### Monitoring and Optimization
 
-Implement robust monitoring systems:
+Set up comprehensive monitoring:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -822,4 +829,4 @@ test_configuration:
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

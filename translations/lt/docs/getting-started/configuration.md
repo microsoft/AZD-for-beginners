@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:56:59+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T14:06:52+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "lt"
 }
 -->
 # Konfigūracijos vadovas
 
-**Ankstesnis:** [AZD Pagrindai](azd-basics.md) | **Kitas:** [Pirmasis Projektas](first-project.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 3 skyrius - Konfigūracija ir autentifikacija
+- **⬅️ Ankstesnis**: [Jūsų pirmasis projektas](first-project.md)
+- **➡️ Kitas**: [Diegimo vadovas](../deployment/deployment-guide.md)
+- **🚀 Kitas skyrius**: [4 skyrius: Infrastruktūra kaip kodas](../deployment/deployment-guide.md)
 
 ## Įvadas
 
-Šis išsamus vadovas apima visus Azure Developer CLI konfigūracijos aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas. Sužinosite apie konfigūracijos hierarchiją, aplinkos valdymą, autentifikavimo metodus ir pažangius konfigūracijos modelius, kurie leidžia efektyviai ir saugiai diegti Azure.
+Šis išsamus vadovas apima visus Azure Developer CLI konfigūracijos aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas. Sužinosite apie konfigūracijos hierarchiją, aplinkos valdymą, autentifikacijos metodus ir pažangius konfigūracijos modelius, kurie leidžia efektyviai ir saugiai diegti Azure.
 
 ## Mokymosi tikslai
 
@@ -21,7 +26,7 @@ CO_OP_TRANSLATOR_METADATA:
 - Įvaldysite azd konfigūracijos hierarchiją ir suprasite, kaip nustatymai yra prioritetizuojami
 - Efektyviai konfigūruosite globalius ir projektui specifinius nustatymus
 - Valdysite kelias aplinkas su skirtingomis konfigūracijomis
-- Įgyvendinsite saugius autentifikavimo ir autorizacijos modelius
+- Įgyvendinsite saugius autentifikacijos ir autorizacijos modelius
 - Suprasite pažangius konfigūracijos modelius sudėtingiems scenarijams
 
 ## Mokymosi rezultatai
@@ -64,7 +69,7 @@ azd config list
 azd config unset defaults.location
 ```
 
-### Dažniausiai naudojami globalūs nustatymai
+### Dažni globalūs nustatymai
 ```bash
 # Development preferences
 azd config set alpha.enable true                    # Enable alpha features
@@ -83,7 +88,7 @@ azd config set deploy.timeout 30m                  # Deployment timeout
 ## 🏗️ Projekto konfigūracija
 
 ### azure.yaml struktūra
-`azure.yaml` failas yra jūsų azd projekto pagrindas:
+Failas `azure.yaml` yra jūsų azd projekto pagrindas:
 
 ```yaml
 # Minimum configuration
@@ -272,7 +277,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Autentifikavimo konfigūracija
+## 🔐 Autentifikacijos konfigūracija
 
 ### Azure CLI integracija
 ```bash
@@ -286,7 +291,7 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Paslaugų principo autentifikavimas
+### Paslaugų principo autentifikacija
 CI/CD procesams:
 ```bash
 # Set environment variables
@@ -543,16 +548,20 @@ Dokumentuokite savo konfigūraciją `CONFIG.md`:
 
 ## Nuorodos
 
-- [azd Konfigūracijos nuoroda](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [azd konfigūracijos nuoroda](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Aplinkos kintamieji](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Ankstesnis:** [AZD Pagrindai](azd-basics.md) | **Kitas:** [Pirmasis Projektas](first-project.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 3 skyrius - Konfigūracija ir autentifikacija
+- **⬅️ Ankstesnis**: [Jūsų pirmasis projektas](first-project.md)
+- **➡️ Kitas skyrius**: [4 skyrius: Infrastruktūra kaip kodas](../deployment/deployment-guide.md)
 - **Kita pamoka**: [Jūsų pirmasis projektas](first-project.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.

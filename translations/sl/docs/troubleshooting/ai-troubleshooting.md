@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T23:27:10+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T13:04:21+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "sl"
 }
 -->
-# Vodnik za odpravljanje težav z AI za Azure Developer CLI
+# Vodnik za odpravljanje težav, specifičnih za AI
 
-**Prejšnje:** [Prakse za produkcijski AI](../ai-foundry/production-ai-practices.md) | **Naslednje:** [Začetek z AZD](../getting-started/README.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in razhroščevanje
+- **⬅️ Prejšnje**: [Vodnik za razhroščevanje](debugging.md)
+- **➡️ Naslednje poglavje**: [Poglavje 8: Vzorci za produkcijo in podjetja](../ai-foundry/production-ai-practices.md)
+- **🤖 Povezano**: [Poglavje 2: Razvoj, osredotočen na AI](../ai-foundry/azure-ai-foundry-integration.md)
 
-Ta obsežen vodnik za odpravljanje težav obravnava pogoste težave pri uvajanju AI rešitev z AZD ter ponuja rešitve in tehnike za odpravljanje napak, specifične za storitve Azure AI.
+**Prejšnje:** [Prakse za produkcijo AI](../ai-foundry/production-ai-practices.md) | **Naslednje:** [Začetek z AZD](../getting-started/README.md)
+
+Ta obsežen vodnik za odpravljanje težav obravnava pogoste težave pri uvajanju AI rešitev z AZD ter ponuja rešitve in tehnike razhroščevanja, specifične za storitve Azure AI.
 
 ## Kazalo
 
@@ -19,10 +26,10 @@ Ta obsežen vodnik za odpravljanje težav obravnava pogoste težave pri uvajanju
 - [Težave z iskanjem Azure AI](../../../../docs/troubleshooting)
 - [Težave pri uvajanju aplikacij v kontejnerjih](../../../../docs/troubleshooting)
 - [Napake pri avtentikaciji in dovoljenjih](../../../../docs/troubleshooting)
-- [Neuspešne uvedbe modelov](../../../../docs/troubleshooting)
+- [Neuspehi pri uvajanju modelov](../../../../docs/troubleshooting)
 - [Težave z zmogljivostjo in skaliranjem](../../../../docs/troubleshooting)
 - [Upravljanje stroškov in kvot](../../../../docs/troubleshooting)
-- [Orodja in tehnike za odpravljanje napak](../../../../docs/troubleshooting)
+- [Orodja in tehnike za razhroščevanje](../../../../docs/troubleshooting)
 
 ## Težave s storitvijo Azure OpenAI
 
@@ -35,8 +42,8 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Vzroki:**
 - Azure OpenAI ni na voljo v izbrani regiji
-- Izčrpana kvota v želenih regijah
-- Omejitve zmogljivosti regije
+- Izčrpana kvota v prednostnih regijah
+- Omejitve zmogljivosti v regiji
 
 **Rešitve:**
 
@@ -72,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Težava: Presežena kvota za uvedbo modela
+### Težava: Presežena kvota za uvajanje modela
 
 **Simptomi:**
 ```
@@ -142,7 +149,7 @@ az rest --method get \
 
 ## Težave z iskanjem Azure AI
 
-### Težava: Nezadostna cenovna raven storitve iskanja
+### Težava: Nezadostna cenovna stopnja storitve iskanja
 
 **Simptomi:**
 ```
@@ -151,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Rešitve:**
 
-1. **Nadgradite cenovno raven:**
+1. **Nadgradite cenovno stopnjo:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -183,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Težava: Neuspešna ustvaritev indeksa
+### Težava: Neuspehi pri ustvarjanju indeksa
 
 **Simptomi:**
 ```
@@ -232,7 +239,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Težave pri uvajanju aplikacij v kontejnerjih
 
-### Težava: Neuspešna gradnja kontejnerja
+### Težava: Neuspehi pri gradnji kontejnerja
 
 **Simptomi:**
 ```
@@ -287,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Težava: Neuspešen zagon aplikacije v kontejnerju
+### Težava: Neuspehi pri zagonu aplikacije v kontejnerju
 
 **Simptomi:**
 ```
@@ -296,7 +303,7 @@ Error: Container failed to start within timeout period
 
 **Rešitve:**
 
-1. **Povečajte čas zagona:**
+1. **Povečajte časovno omejitev zagona:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -451,7 +458,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Neuspešne uvedbe modelov
+## Neuspehi pri uvajanju modelov
 
 ### Težava: Različica modela ni na voljo
 
@@ -501,7 +508,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Validirajte model pred uvedbo:**
+3. **Validirajte model pred uvajanjem:**
 ```python
 # Pre-deployment model validation
 import httpx
@@ -528,7 +535,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 ### Težava: Visoka zakasnitev odzivov
 
 **Simptomi:**
-- Čas odziva > 30 sekund
+- Časi odziva > 30 sekund
 - Napake časovne omejitve
 - Slaba uporabniška izkušnja
 
@@ -729,9 +736,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## Orodja in tehnike za odpravljanje napak
+## Orodja in tehnike za razhroščevanje
 
-### AZD ukazi za odpravljanje napak
+### Ukazi za razhroščevanje AZD
 
 ```bash
 # Enable verbose logging
@@ -747,7 +754,7 @@ azd logs --follow
 azd env get-values
 ```
 
-### Odpravljanje napak v aplikacijah
+### Razhroščevanje aplikacij
 
 1. **Strukturirano beleženje:**
 ```python
@@ -836,19 +843,19 @@ def monitor_performance(func):
 ## Pogoste kode napak in rešitve
 
 | Koda napake | Opis | Rešitev |
-|-------------|-------|---------|
+|-------------|------|---------|
 | 401 | Neavtorizirano | Preverite API ključe in konfiguracijo upravljane identitete |
 | 403 | Prepovedano | Preverite dodelitve vlog RBAC |
 | 429 | Omejitev hitrosti | Implementirajte logiko ponovnega poskusa z eksponentnim povečevanjem |
-| 500 | Napaka strežnika | Preverite stanje uvedbe modela in dnevnike |
+| 500 | Napaka strežnika | Preverite stanje uvajanja modela in dnevnike |
 | 503 | Storitve niso na voljo | Preverite zdravje storitve in razpoložljivost regije |
 
 ## Naslednji koraki
 
-1. **Preglejte [Vodnik za uvedbo AI modelov](ai-model-deployment.md)** za najboljše prakse uvedbe
-2. **Zaključite [Prakse za produkcijski AI](production-ai-practices.md)** za rešitve, pripravljene za podjetja
-3. **Pridružite se [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** za podporo skupnosti
-4. **Oddajte težave** v [AZD GitHub repozitorij](https://github.com/Azure/azure-dev) za težave, specifične za AZD
+1. **Preglejte [Vodnik za uvajanje AI modelov](ai-model-deployment.md)** za najboljše prakse uvajanja
+2. **Zaključite [Prakse za produkcijo AI](production-ai-practices.md)** za rešitve, pripravljene za podjetja
+3. **Pridružite se [Discord skupnosti Azure AI Foundry](https://aka.ms/foundry/discord)** za podporo skupnosti
+4. **Oddajte težave** v [GitHub repozitorij AZD](https://github.com/Azure/azure-dev) za težave, specifične za AZD
 
 ## Viri
 
@@ -858,10 +865,15 @@ def monitor_performance(func):
 
 ---
 
-**Prejšnje:** [Prakse za produkcijski AI](../ai-foundry/production-ai-practices.md) | **Naslednje:** [Delavnica](../../workshop/README.md)
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in razhroščevanje
+- **⬅️ Prejšnje**: [Vodnik za razhroščevanje](debugging.md)
+- **➡️ Naslednje poglavje**: [Poglavje 8: Vzorci za produkcijo in podjetja](../ai-foundry/production-ai-practices.md)
+- **🤖 Povezano**: [Poglavje 2: Razvoj, osredotočen na AI](../ai-foundry/azure-ai-foundry-integration.md)
 - [Odpravljanje težav z Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna napačna razumevanja ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.

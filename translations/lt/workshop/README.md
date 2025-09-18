@@ -1,31 +1,35 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T23:34:11+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T14:11:27+00:00",
   "source_file": "workshop/README.md",
   "language_code": "lt"
 }
 -->
 # AZD dirbtinio intelekto kūrėjų dirbtuvės
 
-**Ankstesnis:** [AI trikčių šalinimo vadovas](../docs/troubleshooting/ai-troubleshooting.md) | **Kitas:** [Dirbtuvių laboratorijos moduliai](../../../workshop)
+**Dirbtuvių navigacija**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../README.md)
+- **📖 Susiję skyriai**: Apima [1 skyrių](../README.md#-chapter-1-foundation--quick-start), [2 skyrių](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) ir [5 skyrių](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Praktinis darbas**: [Dirbtinio intelekto dirbtuvių laboratorija](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Kiti žingsniai**: [Dirbtuvių laboratorijos moduliai](../../../workshop)
 
-Sveiki atvykę į praktines dirbtuves, skirtas išmokti naudotis Azure Developer CLI (AZD), akcentuojant dirbtinio intelekto programų diegimą. Šios dirbtuvės padės jums pereiti nuo AZD pagrindų iki gamybai paruoštų AI sprendimų diegimo.
+Sveiki atvykę į praktines dirbtuves, skirtas išmokti naudotis Azure Developer CLI (AZD) su dėmesiu dirbtinio intelekto programų diegimui. Šios dirbtuvės padės jums pereiti nuo AZD pagrindų iki gamybai paruoštų dirbtinio intelekto sprendimų diegimo.
 
 ## Dirbtuvių apžvalga
 
 **Trukmė:** 2–3 valandos  
-**Lygis:** Pradedantysis iki vidutinio  
-**Būtinos žinios:** Pagrindinės Azure, komandų eilutės įrankių ir AI koncepcijų žinios
+**Lygis:** Pradedantysis iki vidutinio lygio  
+**Reikalavimai:** Pagrindinės žinios apie Azure, komandų eilutės įrankius ir dirbtinio intelekto koncepcijas
 
 ### Ką išmoksite
 
 - **AZD pagrindai**: Suprasti infrastruktūrą kaip kodą naudojant AZD
-- 🤖 **AI paslaugų integracija**: Azure OpenAI, AI Search ir kitų AI paslaugų diegimas
-- **Konteinerių diegimas**: Azure Container Apps naudojimas AI programoms
+- 🤖 **Dirbtinio intelekto paslaugų integracija**: Azure OpenAI, AI Search ir kitų paslaugų diegimas
+- **Konteinerių diegimas**: Azure Container Apps naudojimas dirbtinio intelekto programoms
 - **Saugumo geriausios praktikos**: Valdomos tapatybės ir saugių konfigūracijų įgyvendinimas
-- **Stebėjimas ir stebimumas**: Application Insights nustatymas AI darbo krūviams
+- **Stebėjimas ir stebimumas**: Application Insights nustatymas dirbtinio intelekto darbo krūviams
 - **Gamybos modeliai**: Įmonės lygio diegimo strategijos
 
 ## Dirbtuvių struktūra
@@ -38,13 +42,13 @@ Sveiki atvykę į praktines dirbtuves, skirtas išmokti naudotis Azure Developer
 
 ### 2 modulis: Azure OpenAI integracija (45 minutės)
 - Azure OpenAI resursų nustatymas
-- Modelių diegimo strategijos
+- Modelio diegimo strategijos
 - API prieigos ir autentifikacijos konfigūravimas
 - **Laboratorija**: Pokalbių programos su GPT-4 diegimas
 
 ### 3 modulis: RAG programos (45 minutės)
 - Azure AI Search integracija
-- Dokumentų apdorojimas naudojant Azure Document Intelligence
+- Dokumentų apdorojimas su Azure Document Intelligence
 - Vektoriniai įterpimai ir semantinė paieška
 - **Laboratorija**: Dokumentų klausimų ir atsakymų sistemos kūrimas
 
@@ -60,7 +64,7 @@ Sveiki atvykę į praktines dirbtuves, skirtas išmokti naudotis Azure Developer
 - Kaštų optimizavimo strategijos
 - **Apibendrinimas**: Gamybos pasirengimo kontrolinis sąrašas
 
-## Būtinos sąlygos
+## Reikalavimai
 
 ### Reikalingi įrankiai
 
@@ -86,13 +90,13 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Azure paskyros nustatymas
 
-1. **Azure prenumerata**: [Registruokitės nemokamai](https://azure.microsoft.com/free/)  
-2. **Azure OpenAI prieiga**: [Prašyti prieigos](https://aka.ms/oai/access)  
-3. **Reikalingi leidimai**:  
-   - Contributor rolė prenumeratoje arba resursų grupėje  
+1. **Azure prenumerata**: [Registruokitės nemokamai](https://azure.microsoft.com/free/)
+2. **Azure OpenAI prieiga**: [Prašyti prieigos](https://aka.ms/oai/access)
+3. **Reikalingi leidimai**:
+   - Contributor rolė prenumeratoje arba resursų grupėje
    - User Access Administrator (RBAC priskyrimams)
 
-### Patikrinkite būtinas sąlygas
+### Patikrinkite reikalavimus
 
 Paleiskite šį scenarijų, kad patikrintumėte savo nustatymus:
 
@@ -144,22 +148,22 @@ echo "Setup verification complete!"
 
 Kiekvienas modulis apima praktines laboratorijas su pradiniu kodu ir žingsnis po žingsnio instrukcijomis:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Pirmasis AZD diegimas  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Pokalbių programa su Azure OpenAI  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG programa su AI Search  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Gamybos diegimo modeliai  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Pažangūs diegimo scenarijai  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Pirmasis AZD diegimas
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Pokalbių programa su Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG programa su AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Gamybos diegimo modeliai
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Pažangūs diegimo scenarijai
 
 ### Nuorodų medžiaga
 
-- **[AI Foundry integracijos vadovas](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Išsamūs integracijos modeliai  
-- **[AI modelių diegimo vadovas](../docs/ai-foundry/ai-model-deployment.md)** - Modelių diegimo geriausios praktikos  
-- **[Gamybos AI praktikos](../docs/ai-foundry/production-ai-practices.md)** - Įmonės diegimo modeliai  
-- **[AI trikčių šalinimo vadovas](../docs/troubleshooting/ai-troubleshooting.md)** - Dažniausios problemos ir sprendimai  
+- **[AI Foundry integracijos vadovas](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Išsamūs integracijos modeliai
+- **[AI modelio diegimo vadovas](../docs/ai-foundry/ai-model-deployment.md)** - Modelio diegimo geriausios praktikos
+- **[Gamybos AI praktikos](../docs/ai-foundry/production-ai-practices.md)** - Įmonės diegimo modeliai
+- **[AI trikčių šalinimo vadovas](../docs/troubleshooting/ai-troubleshooting.md)** - Dažniausios problemos ir sprendimai
 
 ### Pavyzdiniai šablonai
 
-Greito starto šablonai dažniausiems AI scenarijams:
+Greito starto šablonai dažniausiems dirbtinio intelekto scenarijams:
 
 ```
 workshop/templates/
@@ -173,39 +177,39 @@ workshop/templates/
 
 ### 1 variantas: GitHub Codespaces (rekomenduojama)
 
-Greičiausias būdas pradėti dirbtuves:
+Greitas būdas pradėti dirbtuves:
 
 [![Atidaryti GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
-### 2 variantas: Vietinis kūrimas
+### 2 variantas: Vietinis vystymas
 
-1. **Klonuokite dirbtuvių saugyklą:**  
+1. **Klonuokite dirbtuvių saugyklą:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Prisijunkite prie Azure:**  
+2. **Prisijunkite prie Azure:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **Pradėkite nuo 1 laboratorijos:**  
+3. **Pradėkite nuo 1 laboratorijos:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### 3 variantas: Dirbtuvių su instruktoriumi sesija
+### 3 variantas: Instruktoriaus vedamos dirbtuvės
 
-Jei dalyvaujate sesijoje su instruktoriumi:
+Jei dalyvaujate instruktoriaus vedamame užsiėmime:
 
-- 🎥 **Dirbtuvių įrašas**: [Pasiekiamas pagal poreikį](https://aka.ms/azd-ai-workshop)  
-- 💬 **Discord bendruomenė**: [Prisijunkite prie tiesioginės pagalbos](https://aka.ms/foundry/discord)  
-- **Dirbtuvių atsiliepimai**: [Pasidalinkite savo patirtimi](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Dirbtuvių įrašas**: [Prieinamas pagal poreikį](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord bendruomenė**: [Prisijunkite gyvai pagalbai](https://aka.ms/foundry/discord)
+- **Dirbtuvių atsiliepimai**: [Pasidalinkite savo patirtimi](https://aka.ms/azd-workshop-feedback)
 
-## Dirbtuvių laiko planas
+## Dirbtuvių tvarkaraštis
 
 ### Mokymasis savarankiškai (3 valandos)
 
@@ -218,7 +222,7 @@ Jei dalyvaujate sesijoje su instruktoriumi:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Sesija su instruktoriumi (2,5 valandos)
+### Instruktoriaus vedamas užsiėmimas (2,5 valandos)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -233,48 +237,48 @@ Jei dalyvaujate sesijoje su instruktoriumi:
 
 ## Sėkmės kriterijai
 
-Dirbtuvių pabaigoje galėsite:
+Pasibaigus dirbtuvėms, galėsite:
 
-✅ **Diegti AI programas** naudodami AZD šablonus  
+✅ **Diegti dirbtinio intelekto programas** naudojant AZD šablonus  
 ✅ **Konfigūruoti Azure OpenAI** paslaugas su tinkamu saugumu  
 ✅ **Kurti RAG programas** su Azure AI Search integracija  
-✅ **Įgyvendinti gamybos modelius** įmonės AI darbo krūviams  
-✅ **Stebėti ir šalinti problemas** AI programų diegimuose  
-✅ **Taikyti kaštų optimizavimo** strategijas AI darbo krūviams  
+✅ **Įgyvendinti gamybos modelius** įmonės dirbtinio intelekto darbo krūviams  
+✅ **Stebėti ir šalinti problemas** dirbtinio intelekto programų diegimuose  
+✅ **Taikyti kaštų optimizavimo** strategijas dirbtinio intelekto darbo krūviams  
 
 ## Bendruomenė ir pagalba
 
 ### Dirbtuvių metu
 
-- 🙋 **Klausimai**: Naudokite dirbtuvių pokalbį arba pakelkite ranką  
-- 🐛 **Problemos**: Peržiūrėkite [trikčių šalinimo vadovą](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Patarimai**: Dalinkitės atradimais su kitais dalyviais  
+- 🙋 **Klausimai**: Naudokite dirbtuvių pokalbį arba pakelkite ranką
+- 🐛 **Problemos**: Peržiūrėkite [trikčių šalinimo vadovą](../docs/troubleshooting/ai-troubleshooting.md)
+- **Patarimai**: Dalinkitės atradimais su kitais dalyviais
 
 ### Po dirbtuvių
 
-- 💬 **Discord**: [Azure AI Foundry bendruomenė](https://aka.ms/foundry/discord)  
-- **GitHub problemos**: [Praneškite apie šablonų problemas](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Atsiliepimai**: [Dirbtuvių vertinimo forma](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Azure AI Foundry bendruomenė](https://aka.ms/foundry/discord)
+- **GitHub problemos**: [Praneškite apie šablonų problemas](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Atsiliepimai**: [Dirbtuvių vertinimo forma](https://aka.ms/azd-workshop-feedback)
 
 ## Kiti žingsniai
 
 ### Tęskite mokymąsi
 
-1. **Pažangūs scenarijai**: Tyrinėkite [diegimą keliuose regionuose](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **CI/CD integracija**: Nustatykite [GitHub Actions darbo eigas](../docs/deployment/github-actions.md)  
-3. **Individualūs šablonai**: Kurkite savo [AZD šablonus](../docs/getting-started/custom-templates.md)  
+1. **Pažangūs scenarijai**: Tyrinėkite [diegimą keliuose regionuose](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **CI/CD integracija**: Nustatykite [GitHub Actions darbo eigas](../docs/deployment/github-actions.md)
+3. **Individualūs šablonai**: Kurkite savo [AZD šablonus](../docs/getting-started/custom-templates.md)
 
 ### Taikykite savo projektuose
 
-1. **Vertinimas**: Naudokite mūsų [pasirengimo kontrolinį sąrašą](./production-readiness-checklist.md)  
-2. **Šablonai**: Pradėkite nuo mūsų [AI specifinių šablonų](../../../workshop/templates)  
-3. **Pagalba**: Prisijunkite prie [Azure AI Foundry Discord](https://aka.ms/foundry/discord)  
+1. **Vertinimas**: Naudokite mūsų [pasirengimo kontrolinį sąrašą](./production-readiness-checklist.md)
+2. **Šablonai**: Pradėkite nuo mūsų [dirbtinio intelekto specifinių šablonų](../../../workshop/templates)
+3. **Pagalba**: Prisijunkite prie [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
 ### Pasidalinkite savo sėkme
 
-- ⭐ **Pažymėkite saugyklą**, jei šios dirbtuvės jums padėjo  
-- 🐦 **Dalinkitės socialiniuose tinkluose** su #AzureDeveloperCLI #AzureAI  
-- 📝 **Rašykite tinklaraščio įrašą** apie savo AI diegimo kelionę  
+- ⭐ **Pažymėkite saugyklą** jei šios dirbtuvės jums padėjo
+- 🐦 **Dalinkitės socialiniuose tinkluose** su #AzureDeveloperCLI #AzureAI
+- 📝 **Parašykite tinklaraščio įrašą** apie savo dirbtinio intelekto diegimo kelionę
 
 ---
 
@@ -282,8 +286,8 @@ Dirbtuvių pabaigoje galėsite:
 
 Jūsų atsiliepimai padeda mums tobulinti dirbtuvių patirtį:
 
-| Aspektas | Įvertinimas (1–5) | Komentarai |
-|----------|-------------------|------------|
+| Aspektas | Įvertinimas (1-5) | Komentarai |
+|---------|------------------|-----------|
 | Turinys | ⭐⭐⭐⭐⭐ | |
 | Praktinės laboratorijos | ⭐⭐⭐⭐⭐ | |
 | Dokumentacija | ⭐⭐⭐⭐⭐ | |
@@ -296,11 +300,11 @@ Jūsų atsiliepimai padeda mums tobulinti dirbtuvių patirtį:
 
 **Ankstesnis:** [AI trikčių šalinimo vadovas](../docs/troubleshooting/ai-troubleshooting.md) | **Kitas:** Pradėkite nuo [1 laboratorijos: AZD pagrindai](../../../workshop/lab-1-azd-basics)
 
-**Pasiruošę pradėti kurti AI programas su AZD?**
+**Pasiruošę pradėti kurti dirbtinio intelekto programas su AZD?**
 
 [Pradėkite 1 laboratoriją: AZD pagrindai →](./lab-1-azd-basics/README.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.

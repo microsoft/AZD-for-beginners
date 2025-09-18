@@ -1,45 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:20:47+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T12:47:02+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "en"
 }
 -->
-# Provisioning Resources - Infrastructure as Code with AZD
+# Provisioning Azure Resources with AZD
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
+- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
+- **➡️ Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 Related**: [Chapter 6: Pre-Deployment Validation](../pre-deployment/capacity-planning.md)
 
 ## Introduction
 
-This detailed guide provides all the information you need to provision and manage Azure resources using Azure Developer CLI. Discover how to apply Infrastructure as Code (IaC) practices, ranging from basic resource creation to complex, enterprise-level infrastructure designs using Bicep, ARM templates, Terraform, and Pulumi.
+This guide provides a detailed walkthrough of provisioning and managing Azure resources using the Azure Developer CLI. You'll learn how to apply Infrastructure as Code (IaC) principles, from creating basic resources to building advanced, enterprise-grade infrastructure using tools like Bicep, ARM templates, Terraform, and Pulumi.
 
 ## Learning Goals
 
 By the end of this guide, you will:
-- Gain expertise in Infrastructure as Code principles and Azure resource provisioning
-- Learn about the various IaC providers supported by Azure Developer CLI
-- Create and implement Bicep templates for common application architectures
-- Configure resource parameters, variables, and settings for specific environments
+- Gain expertise in Infrastructure as Code and Azure resource provisioning
+- Understand the various IaC tools supported by Azure Developer CLI
+- Learn to design and implement Bicep templates for common application architectures
+- Configure resource parameters, variables, and environment-specific settings
 - Apply advanced infrastructure patterns, including networking and security
-- Manage resource lifecycles, updates, and resolve dependencies effectively
+- Manage the lifecycle of resources, handle updates, and resolve dependencies
 
 ## Learning Outcomes
 
 After completing this guide, you will be able to:
 - Design and provision Azure infrastructure using Bicep and ARM templates
 - Configure complex multi-service architectures with proper resource dependencies
-- Develop parameterized templates for diverse environments and configurations
-- Diagnose and resolve infrastructure provisioning issues and deployment failures
-- Incorporate Azure Well-Architected Framework principles into infrastructure design
-- Handle infrastructure updates and implement versioning strategies for resources
+- Create parameterized templates for multiple environments and configurations
+- Troubleshoot provisioning issues and resolve deployment failures
+- Incorporate Azure Well-Architected Framework principles into your infrastructure design
+- Manage infrastructure updates and implement versioning strategies
 
 ## Infrastructure Provisioning Overview
 
-Azure Developer CLI supports several Infrastructure as Code (IaC) providers:
-- **Bicep** (recommended) - Azure's domain-specific language
+Azure Developer CLI supports several Infrastructure as Code (IaC) tools:
+- **Bicep** (recommended) - Azure's domain-specific language for IaC
 - **ARM Templates** - JSON-based templates for Azure Resource Manager
-- **Terraform** - A tool for multi-cloud infrastructure management
-- **Pulumi** - Modern IaC using programming languages
+- **Terraform** - A multi-cloud infrastructure tool
+- **Pulumi** - A modern IaC tool that uses programming languages
 
 ## Understanding Azure Resources
 
@@ -859,10 +866,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Next Steps
 
-- [Pre-deployment Planning](../pre-deployment/capacity-planning.md) - Ensure resource availability
-- [Common Issues](../troubleshooting/common-issues.md) - Address infrastructure problems
-- [Debugging Guide](../troubleshooting/debugging.md) - Resolve provisioning issues
-- [SKU Selection](../pre-deployment/sku-selection.md) - Select appropriate service tiers
+- [Pre-deployment Planning](../pre-deployment/capacity-planning.md) - Validate resource availability
+- [Common Issues](../troubleshooting/common-issues.md) - Troubleshoot infrastructure problems
+- [Debugging Guide](../troubleshooting/debugging.md) - Debug provisioning issues
+- [SKU Selection](../pre-deployment/sku-selection.md) - Choose appropriate service tiers
 
 ## Additional Resources
 

@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:31:52+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T12:47:35+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "en"
 }
 -->
-# Debugging Guide - Advanced Troubleshooting Log Analysis Techniques
+# Debugging Guide for AZD Deployments
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
+- **⬅️ Previous**: [Common Issues](common-issues.md)
+- **➡️ Next**: [AI-Specific Troubleshooting](ai-troubleshooting.md)
+- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
 
 ## Introduction
 
-This detailed guide offers advanced strategies, tools, and techniques for debugging and resolving complex issues related to Azure Developer CLI deployments. It covers systematic troubleshooting methods, log analysis techniques, performance profiling, and advanced diagnostic tools to help you efficiently address deployment and runtime challenges.
+This guide offers advanced strategies, tools, and techniques for debugging and resolving complex issues in Azure Developer CLI deployments. You'll learn systematic troubleshooting methods, log analysis, performance profiling, and how to use advanced diagnostic tools to address deployment and runtime challenges effectively.
 
 ## Learning Goals
 
@@ -26,12 +33,12 @@ By the end of this guide, you will:
 ## Learning Outcomes
 
 After completing this guide, you will be able to:
-- Use the TRIAGE methodology to systematically debug complex deployment problems
+- Use the TRIAGE methodology to systematically debug complex deployment issues
 - Configure and analyze detailed logging and tracing information
 - Effectively use Azure Monitor, Application Insights, and diagnostic tools
 - Independently debug network connectivity, authentication, and permission issues
 - Implement strategies for performance monitoring and optimization
-- Develop custom debugging scripts and automation for recurring problems
+- Create custom debugging scripts and automation for recurring problems
 
 ## Debugging Methodology
 
@@ -41,7 +48,7 @@ After completing this guide, you will be able to:
 - **I**solate: Which component is failing?
 - **A**nalyze: What insights do the logs provide?
 - **G**ather: Collect all relevant data
-- **E**scalate: Determine when to seek additional support
+- **E**scalate: Know when to seek additional help
 
 ## Enabling Debug Mode
 
@@ -652,7 +659,7 @@ aggregate_logs() {
 ## 🔗 Advanced Resources
 
 ### Custom Debug Scripts
-Create a `scripts/debug/` directory containing:
+Create a `scripts/debug/` directory with:
 - `health-check.sh` - Comprehensive health checks
 - `performance-test.sh` - Automated performance testing
 - `log-analyzer.py` - Advanced log parsing and analysis
@@ -682,18 +689,18 @@ hooks:
 3. **Document debugging procedures** for your team
 4. **Automate health checks** and monitoring
 5. **Keep debug tools updated** alongside application changes
-6. **Practice debugging techniques** during non-critical times
+6. **Practice debugging procedures** during non-critical times
 
 ## Next Steps
 
 - [Capacity Planning](../pre-deployment/capacity-planning.md) - Plan resource requirements
-- [SKU Selection](../pre-deployment/sku-selection.md) - Choose the right service tiers
-- [Preflight Checks](../pre-deployment/preflight-checks.md) - Validate before deployment
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Quick reference for commands
+- [SKU Selection](../pre-deployment/sku-selection.md) - Choose appropriate service tiers
+- [Preflight Checks](../pre-deployment/preflight-checks.md) - Pre-deployment validation
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Quick reference commands
 
 ---
 
-**Remember**: Effective debugging requires a systematic, thorough, and patient approach. These tools and techniques will help you diagnose and resolve issues more efficiently.
+**Remember**: Effective debugging requires a systematic, thorough, and patient approach. These tools and techniques will help you diagnose issues more quickly and efficiently.
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

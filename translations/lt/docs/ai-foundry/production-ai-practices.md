@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T23:20:07+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T14:04:58+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "lt"
 }
 -->
 # Geriausios praktikos dirbant su gamybiniais AI krūviais naudojant AZD
 
-**Ankstesnis:** [AI Workshop Lab](ai-workshop-lab.md) | **Kitas:** [AI Trikčių šalinimo vadovas](../troubleshooting/ai-troubleshooting.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 8 skyrius - Gamybiniai ir įmonių modeliai
+- **⬅️ Ankstesnis skyrius**: [7 skyrius: Trikčių šalinimas](../troubleshooting/debugging.md)
+- **⬅️ Taip pat susiję**: [AI dirbtuvių laboratorija](ai-workshop-lab.md)
+- **🎯 Kurso pabaiga**: [AZD pradedantiesiems](../../README.md)
 
 ## Apžvalga
 
-Šis vadovas pateikia išsamias geriausias praktikas, kaip diegti gamybai paruoštus AI krūvius naudojant Azure Developer CLI (AZD). Remiantis Azure AI Foundry Discord bendruomenės atsiliepimais ir realiais klientų diegimais, šios praktikos sprendžia dažniausiai pasitaikančius iššūkius gamybiniuose AI sistemose.
+Šiame vadove pateikiamos išsamios geriausios praktikos, kaip diegti gamybai paruoštus AI krūvius naudojant Azure Developer CLI (AZD). Remiantis Azure AI Foundry Discord bendruomenės atsiliepimais ir realiais klientų diegimais, šios praktikos sprendžia dažniausiai pasitaikančius iššūkius gamybiniuose AI sistemose.
 
 ## Pagrindiniai sprendžiami iššūkiai
 
@@ -21,11 +26,11 @@ Remiantis mūsų bendruomenės apklausos rezultatais, tai yra pagrindiniai išš
 
 - **45%** susiduria su daugiapaslaugiais AI diegimais
 - **38%** turi problemų su kredencialų ir slaptažodžių valdymu  
-- **35%** sunkiai užtikrina gamybos pasirengimą ir mastelio keitimą
-- **32%** ieško geresnių kaštų optimizavimo strategijų
+- **35%** sunku užtikrinti gamybos pasirengimą ir mastelio keitimą
+- **32%** reikia geresnių kaštų optimizavimo strategijų
 - **29%** reikia geresnio stebėjimo ir trikčių šalinimo
 
-## Architektūros modeliai gamybiniam AI
+## Gamybinės AI architektūros modeliai
 
 ### Modelis 1: Mikroservisų AI architektūra
 
@@ -73,7 +78,7 @@ services:
 
 ### Modelis 2: Įvykių pagrindu veikiantis AI apdorojimas
 
-**Kada naudoti**: Partinis apdorojimas, dokumentų analizė, asinchroniniai darbo srautai
+**Kada naudoti**: Paketinis apdorojimas, dokumentų analizė, asinchroniniai darbo srautai
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -127,7 +132,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 **Įgyvendinimo strategija**:
 - Jokios paslaugų tarpusavio komunikacijos be autentifikacijos
 - Visi API skambučiai naudoja valdomas tapatybes
-- Tinklo izoliacija su privačiais galiniais taškais
+- Tinklo izoliacija naudojant privačius galinius taškus
 - Minimalios privilegijos prieigos kontrolė
 
 ```bicep
@@ -362,7 +367,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Kaštų optimizavimas
 
-### 1. Resursų tinkamas dydis
+### 1. Resursų tinkamas dydžio nustatymas
 
 **Konfigūracijos pagal aplinką**:
 
@@ -503,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI specifinis stebėjimas
 
-**Individualūs prietaisų skydeliai AI metrikoms**:
+**Individualūs skydeliai AI metrikoms**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -601,7 +606,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Atsigavimas po nelaimių ir aukštas prieinamumas
+## Atsargumo priemonės ir aukštas prieinamumas
 
 ### 1. Diegimas keliuose regionuose
 
@@ -799,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastruktūros patikrinimas
+### 2. Infrastruktūros validacija
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -837,7 +842,7 @@ echo "Infrastructure validation completed successfully!"
 ### Saugumas ✅
 - [ ] Visos paslaugos naudoja valdomas tapatybes
 - [ ] Slaptažodžiai saugomi Key Vault
-- [ ] Privačios galinės taškai sukonfigūruoti
+- [ ] Privačių galinių taškų konfigūracija
 - [ ] Tinklo saugumo grupės įgyvendintos
 - [ ] RBAC su minimaliomis privilegijomis
 - [ ] WAF įjungtas viešuose galiniuose taškuose
@@ -854,28 +859,28 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Programos įžvalgos sukonfigūruotos
 - [ ] Individualios metrikos apibrėžtos
 - [ ] Įspėjimų taisyklės nustatytos
-- [ ] Prietaisų skydelis sukurtas
+- [ ] Skydelis sukurtas
 - [ ] Sveikatos patikrinimai įgyvendinti
 - [ ] Žurnalų saugojimo politika
 
 ### Patikimumas ✅
 - [ ] Diegimas keliuose regionuose
 - [ ] Atsarginės kopijos ir atkūrimo planas
-- [ ] Apsaugos pertraukikliai įgyvendinti
+- [ ] Apsaugos mechanizmai įgyvendinti
 - [ ] Pakartojimo politikos sukonfigūruotos
 - [ ] Malonus degradavimas
 - [ ] Sveikatos patikrinimo galiniai taškai
 
 ### Kaštų valdymas ✅
 - [ ] Biudžeto įspėjimai sukonfigūruoti
-- [ ] Resursų tinkamas dydis
+- [ ] Resursų tinkamas dydžio nustatymas
 - [ ] Dev/test nuolaidos pritaikytos
 - [ ] Rezervuoti egzemplioriai įsigyti
-- [ ] Kaštų stebėjimo prietaisų skydelis
+- [ ] Kaštų stebėjimo skydelis
 - [ ] Reguliarūs kaštų peržiūros
 
 ### Atitiktis ✅
-- [ ] Duomenų rezidencijos reikalavimai įgyvendinti
+- [ ] Duomenų rezidencijos reikalavimai įvykdyti
 - [ ] Audito žurnalai įjungti
 - [ ] Atitikties politikos pritaikytos
 - [ ] Saugumo pagrindai įgyvendinti
@@ -884,16 +889,16 @@ echo "Infrastructure validation completed successfully!"
 
 ## Našumo etalonai
 
-### Tipiniai gamybos rodikliai
+### Tipiniai gamybos metrikos
 
-| Rodiklis | Tikslas | Stebėjimas |
-|----------|---------|------------|
+| Metrika | Tikslas | Stebėjimas |
+|--------|--------|------------|
 | **Atsako laikas** | < 2 sekundės | Programos įžvalgos |
 | **Prieinamumas** | 99.9% | Veikimo stebėjimas |
 | **Klaidos rodiklis** | < 0.1% | Programos žurnalai |
 | **Žetonų naudojimas** | < $500/mėn | Kaštų valdymas |
 | **Vartotojai vienu metu** | 1000+ | Apkrovos testavimas |
-| **Atkūrimo laikas** | < 1 valanda | Atsigavimo po nelaimių testai |
+| **Atkūrimo laikas** | < 1 valanda | Atsargumo priemonių testai |
 
 ### Apkrovos testavimas
 
@@ -912,7 +917,7 @@ Remiantis Azure AI Foundry Discord bendruomenės atsiliepimais:
 
 ### Pagrindinės bendruomenės rekomendacijos:
 
-1. **Pradėkite mažai, auginkite palaipsniui**: Pradėkite nuo paprastų SKU ir didinkite pagal realų naudojimą
+1. **Pradėkite mažai, auginkite palaipsniui**: Pradėkite nuo bazinių SKU ir didinkite pagal faktinį naudojimą
 2. **Stebėkite viską**: Nuo pirmos dienos nustatykite išsamų stebėjimą
 3. **Automatizuokite saugumą**: Naudokite infrastruktūrą kaip kodą nuosekliam saugumui
 4. **Testuokite kruopščiai**: Įtraukite AI specifinį testavimą į savo procesą
@@ -935,9 +940,14 @@ Remiantis Azure AI Foundry Discord bendruomenės atsiliepimais:
 
 ---
 
-**Ankstesnis:** [AI Workshop Lab](ai-workshop-lab.md) | **Kitas:** [AI Trikčių šalinimo vadovas](../troubleshooting/ai-troubleshooting.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 8 skyrius - Gamybiniai ir įmonių modeliai
+- **⬅️ Ankstesnis skyrius**: [7 skyrius: Trikčių šalinimas](../troubleshooting/debugging.md)
+- **⬅️ Taip pat susiję**: [AI dirbtuvių laboratorija](ai-workshop-lab.md)
+- **🎆 Kurso pabaiga**: [AZD pradedantiesiems](../../README.md)
 
-**Prisiminkite**: Gamybiniai AI krūviai reikalauja kruopštaus planavimo, stebėjimo ir nuolatinės optimizacijos. Pradėkite nuo šių modelių ir pritaikykite juos pagal savo specifinius poreikius.
+**Atminkite**: Gamybiniai AI krūviai reikalauja kruopštaus planavimo, stebėjimo ir nuolatinės optimizacijos. Pradėkite nuo šių modelių ir pritaikykite juos pagal savo specifinius poreikius.
 
 ---
 

@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:36:07+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T14:09:12+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "lt"
 }
 -->
-# Derinys klaidų šalinimo vadovas - pažangios žurnalų analizės technikos
+# Derinimo vadovas AZD diegimams
+
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 7 skyrius - Trikčių šalinimas ir derinimas
+- **⬅️ Ankstesnis**: [Dažnos problemos](common-issues.md)
+- **➡️ Kitas**: [AI-specifinis trikčių šalinimas](ai-troubleshooting.md)
+- **🚀 Kitas skyrius**: [8 skyrius: Produkcija ir įmonių modeliai](../ai-foundry/production-ai-practices.md)
 
 ## Įvadas
 
-Šis išsamus vadovas pateikia pažangias klaidų šalinimo strategijas, įrankius ir technikas, skirtas diagnozuoti ir spręsti sudėtingas problemas, susijusias su Azure Developer CLI diegimais. Sužinokite sistemingus klaidų šalinimo metodus, žurnalų analizės technikas, našumo profiliavimą ir pažangius diagnostikos įrankius, kad efektyviai išspręstumėte diegimo ir veikimo problemas.
+Šis išsamus vadovas pateikia pažangias derinimo strategijas, įrankius ir technikas, skirtas diagnozuoti ir spręsti sudėtingas problemas, susijusias su Azure Developer CLI diegimais. Sužinokite sistemingus trikčių šalinimo metodus, žurnalų analizės technikas, našumo profiliavimą ir pažangius diagnostikos įrankius, kad efektyviai spręstumėte diegimo ir veikimo problemas.
 
 ## Mokymosi tikslai
 
 Baigę šį vadovą, jūs:
-- Įvaldysite sistemingus klaidų šalinimo metodus, susijusius su Azure Developer CLI problemomis
-- Suprasite pažangias žurnalų konfigūracijos ir analizės technikas
+- Įvaldysite sistemingus derinimo metodus, skirtus Azure Developer CLI problemoms
+- Suprasite pažangų žurnalų konfigūravimą ir analizės technikas
 - Įgyvendinsite našumo profiliavimo ir stebėjimo strategijas
 - Naudosite Azure diagnostikos įrankius ir paslaugas sudėtingoms problemoms spręsti
-- Taikysite tinklo klaidų šalinimo ir saugumo problemų sprendimo technikas
+- Taikysite tinklo derinimo ir saugumo trikčių šalinimo technikas
 - Konfigūruosite išsamų stebėjimą ir įspėjimus, kad proaktyviai aptiktumėte problemas
 
 ## Mokymosi rezultatai
@@ -31,19 +38,19 @@ Baigę, galėsite:
 - Efektyviai naudoti Azure Monitor, Application Insights ir diagnostikos įrankius
 - Savarankiškai šalinti tinklo ryšio, autentifikacijos ir leidimų problemas
 - Įgyvendinti našumo stebėjimo ir optimizavimo strategijas
-- Kurti pasirinktinius klaidų šalinimo scenarijus ir automatizavimą pasikartojančioms problemoms
+- Kurti pasirinktinius derinimo scenarijus ir automatizavimą pasikartojančioms problemoms
 
-## Klaidų šalinimo metodologija
+## Derinimo metodologija
 
 ### TRIAGE metodas
 - **T**ime: Kada problema prasidėjo?
-- **R**eproduce: Ar galite ją nuolat atkurti?
+- **R**eproduce: Ar galite ją nuosekliai atkurti?
 - **I**solate: Kuris komponentas neveikia?
 - **A**nalyze: Ką rodo žurnalai?
 - **G**ather: Surinkite visą svarbią informaciją
 - **E**scalate: Kada kreiptis pagalbos?
 
-## Debug režimo įjungimas
+## Derinimo režimo įjungimas
 
 ### Aplinkos kintamieji
 ```bash
@@ -59,7 +66,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Debug konfigūracija
+### Derinimo konfigūracija
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -121,7 +128,7 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Pažangūs klaidų šalinimo įrankiai
+## 🛠️ Pažangūs derinimo įrankiai
 
 ### Azure Resource Graph užklausos
 ```bash
@@ -135,7 +142,7 @@ az graph query -q "ResourceContainers | where type == 'microsoft.resources/resou
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Tinklo klaidų šalinimas
+### Tinklo derinimas
 ```bash
 # Test connectivity between services
 test_connectivity() {
@@ -156,7 +163,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Konteinerių klaidų šalinimas
+### Konteinerių derinimas
 ```bash
 # Debug container app issues
 debug_container() {
@@ -176,7 +183,7 @@ debug_container() {
 }
 ```
 
-### Duomenų bazės ryšio klaidų šalinimas
+### Duomenų bazės ryšio derinimas
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,9 +202,9 @@ debug_database() {
 }
 ```
 
-## 🔬 Našumo klaidų šalinimas
+## 🔬 Našumo derinimas
 
-### Programų našumo stebėjimas
+### Programos našumo stebėjimas
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -257,7 +264,7 @@ monitor_resources() {
 
 ## 🧪 Testavimas ir validacija
 
-### Integracijos testų klaidų šalinimas
+### Integracijos testų derinimas
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Apkrovos testavimas klaidų šalinimui
+### Apkrovos testavimas derinimui
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -328,9 +335,9 @@ load_test() {
 }
 ```
 
-## 🔧 Infrastruktūros klaidų šalinimas
+## 🔧 Infrastruktūros derinimas
 
-### Bicep šablonų klaidų šalinimas
+### Bicep šablonų derinimas
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -397,9 +404,9 @@ analyze_resources() {
 }
 ```
 
-## 🔒 Saugumo klaidų šalinimas
+## 🔒 Saugumo derinimas
 
-### Autentifikacijos srauto klaidų šalinimas
+### Autentifikacijos srauto derinimas
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -433,7 +440,7 @@ debug_keyvault() {
 }
 ```
 
-### Tinklo saugumo klaidų šalinimas
+### Tinklo saugumo derinimas
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -451,9 +458,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 Programoms specifinis klaidų šalinimas
+## 📱 Programoms specifinis derinimas
 
-### Node.js programų klaidų šalinimas
+### Node.js programos derinimas
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -482,7 +489,7 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Duomenų bazės užklausų klaidų šalinimas
+### Duomenų bazės užklausų derinimas
 ```javascript
 // database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
@@ -512,9 +519,9 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Skubios klaidų šalinimo procedūros
+## 🚨 Avarinės derinimo procedūros
 
-### Reagavimas į gamybos problemas
+### Problemos produkcijoje sprendimas
 ```bash
 #!/bin/bash
 # emergency-debug.sh - Emergency production debugging
@@ -575,7 +582,7 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Atsisakymo procedūros
+### Atsukimo procedūros
 ```bash
 # Quick rollback script
 quick_rollback() {
@@ -602,9 +609,9 @@ quick_rollback() {
 }
 ```
 
-## 📊 Klaidų šalinimo prietaisų skydeliai
+## 📊 Derinimo skydeliai
 
-### Pasirinktinis stebėjimo prietaisų skydelis
+### Pasirinktinis stebėjimo skydelis
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -627,7 +634,7 @@ create_debug_queries() {
 }
 ```
 
-### Žurnalų agregacija
+### Žurnalų agregavimas
 ```bash
 # Aggregate logs from multiple sources
 aggregate_logs() {
@@ -651,7 +658,7 @@ aggregate_logs() {
 
 ## 🔗 Pažangūs ištekliai
 
-### Pasirinktiniai klaidų šalinimo scenarijai
+### Pasirinktiniai derinimo scenarijai
 Sukurkite `scripts/debug/` katalogą su:
 - `health-check.sh` - Išsamus sveikatos tikrinimas
 - `performance-test.sh` - Automatinis našumo testavimas
@@ -677,23 +684,23 @@ hooks:
 
 ## Geriausios praktikos
 
-1. **Visada įjunkite debug žurnalus** ne gamybos aplinkose
-2. **Sukurkite atkuriamus testų atvejus** problemoms
-3. **Dokumentuokite klaidų šalinimo procedūras** savo komandai
-4. **Automatizuokite sveikatos tikrinimus** ir stebėjimą
-5. **Nuolat atnaujinkite klaidų šalinimo įrankius** pagal programos pakeitimus
-6. **Praktikuokite klaidų šalinimo procedūras** ne incidentų metu
+1. **Visada įjunkite derinimo žurnalus** neprodukcinėje aplinkoje
+2. **Sukurkite atkuriamus testavimo scenarijus** problemoms
+3. **Dokumentuokite derinimo procedūras** savo komandai
+4. **Automatizuokite sveikatos tikrinimą** ir stebėjimą
+5. **Nuolat atnaujinkite derinimo įrankius** kartu su programos pakeitimais
+6. **Praktikuokite derinimo procedūras** ne incidentų metu
 
 ## Kiti žingsniai
 
 - [Talpos planavimas](../pre-deployment/capacity-planning.md) - Planuokite išteklių poreikius
 - [SKU pasirinkimas](../pre-deployment/sku-selection.md) - Pasirinkite tinkamus paslaugų lygius
 - [Priešskrydžio patikrinimai](../pre-deployment/preflight-checks.md) - Diegimo patvirtinimas
-- [Špargalkė](../../resources/cheat-sheet.md) - Greitos nuorodos komandos
+- [Špargalkė](../../resources/cheat-sheet.md) - Greitos komandos nuorodos
 
 ---
 
-**Atminkite**: Geras klaidų šalinimas yra sistemingas, kruopštus ir kantrus procesas. Šie įrankiai ir technikos padės jums greičiau ir efektyviau diagnozuoti problemas.
+**Atminkite**: Geras derinimas yra sistemingas, kruopštus ir kantrus procesas. Šie įrankiai ir technikos padės greičiau ir efektyviau diagnozuoti problemas.
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojame kreiptis į profesionalius vertėjus. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.

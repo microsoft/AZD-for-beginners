@@ -1,47 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-10T06:55:01+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T13:25:46+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "my"
 }
 -->
-# SKU ရွေးချယ်မှုလမ်းညွှန် - Azure ဝန်ဆောင်မှုအဆင့်များကိုမှန်ကန်စွာရွေးချယ်ခြင်း
+# SKU ရွေးချယ်မှုလမ်းညွှန် - Azure Service Tiers ကိုမှန်ကန်စွာရွေးချယ်ခြင်း
+
+**အခန်းအကြောင်းအရာ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၆ - Pre-Deployment Validation & Planning
+- **⬅️ ယခင်**: [Capacity Planning](capacity-planning.md)
+- **➡️ နောက်တစ်ခု**: [Pre-flight Checks](preflight-checks.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၇: Troubleshooting](../troubleshooting/common-issues.md)
 
 ## အကျဉ်းချုပ်
 
-ဤလမ်းညွှန်သည် အခြားအခြေအနေများ၊ အလုပ်ပုံစံများနှင့် လိုအပ်ချက်များအတွက် Azure ဝန်ဆောင်မှု SKUs (Stock Keeping Units) ကို အကောင်းဆုံးရွေးချယ်ရန် ကူညီပေးပါသည်။ Azure Developer CLI deployments အတွက် အဆင့်များကို ရွေးချယ်ရာတွင် စွမ်းဆောင်ရည်လိုအပ်ချက်များ၊ ကုန်ကျစရိတ်စဉ်းစားမှုများနှင့် အရွယ်အစားချဲ့ထွင်မှုလိုအပ်ချက်များကို လေ့လာသုံးသပ်ရန် လေ့လာပါ။
+ဒီလမ်းညွှန်စာအုပ်က Azure service SKUs (Stock Keeping Units) ကို အခြေအနေများ၊ workload များနှင့် လိုအပ်ချက်များအတွက် အကောင်းဆုံးရွေးချယ်နိုင်ရန် ကူညီပေးပါမည်။ Performance လိုအပ်ချက်များ၊ ကုန်ကျစရိတ်စဉ်းစားမှုများနှင့် scalability လိုအပ်ချက်များကို ခွဲခြမ်းစိတ်ဖြာပြီး Azure Developer CLI deployments အတွက် သင့်တော်သော service tiers ကို ရွေးချယ်နိုင်ရန် လေ့လာပါ။
 
-## လေ့လာရမည့်ရည်ရွယ်ချက်များ
+## သင်ယူရည်မှန်းချက်များ
 
-ဤလမ်းညွှန်ကိုပြီးစီးခြင်းဖြင့် သင်သည်:
-- Azure SKU အယူအဆများ၊ စျေးနှုန်းပုံစံများနှင့် အင်္ဂါရပ်ကွာခြားချက်များကို နားလည်မည်
-- ဖွံ့ဖြိုးရေး၊ စမ်းသပ်မှုနှင့် ထုတ်လုပ်မှုအတွက် အခြေအနေအလိုက် SKU ရွေးချယ်မှုနည်းဗျူဟာများကို ကျွမ်းကျင်မည်
-- အလုပ်ပုံစံလိုအပ်ချက်များကို သုံးသပ်ပြီး သင့်လျော်သော ဝန်ဆောင်မှုအဆင့်များနှင့် ကိုက်ညီစေရန် ရွေးချယ်မည်
-- SKU ရွေးချယ်မှုမှတဆင့် ကုန်ကျစရိတ်အခွင့်အရေးများကို အကျိုးရှိစွာ အကောင်အထည်ဖော်မည်
-- SKU ရွေးချယ်မှုများအတွက် စွမ်းဆောင်ရည်စမ်းသပ်မှုနှင့် အတည်ပြုနည်းလမ်းများကို အသုံးပြုမည်
-- SKU အကြံပြုချက်များနှင့် စောင့်ကြည့်မှုကို အလိုအလျောက်ဖွဲ့စည်းမည်
+ဒီလမ်းညွှန်ကိုပြီးမြောက်စွာလေ့လာပြီးနောက်၊ သင်သည်:
+- Azure SKU အကြောင်းအရာများ၊ စျေးနှုန်းပုံစံများနှင့် အင်္ဂါရပ်ကွာခြားချက်များကို နားလည်နိုင်မည်
+- Development, staging, production အတွက် environment-specific SKU ရွေးချယ်မှုနည်းလမ်းများကို ကျွမ်းကျင်နိုင်မည်
+- Workload လိုအပ်ချက်များကို ခွဲခြမ်းစိတ်ဖြာပြီး သင့်တော်သော service tiers နှင့် ကိုက်ညီစေရန် ရွေးချယ်နိုင်မည်
+- SKU ရွေးချယ်မှုမှတဆင့် ကုန်ကျစရိတ်ကို အကျိုးရှိစွာ လျှော့ချနိုင်မည်
+- SKU ရွေးချယ်မှုအတွက် performance စမ်းသပ်မှုနှင့် အတည်ပြုနည်းလမ်းများကို အသုံးချနိုင်မည်
+- SKU အကြံပြုမှုနှင့် မျှဝေမှုကို အလိုအလျောက် configure လုပ်နိုင်မည်
 
-## လေ့လာပြီးရရှိမည့်ရလဒ်များ
+## သင်ယူရလဒ်များ
 
-ပြီးစီးခြင်းဖြင့် သင်သည်:
-- အလုပ်ပုံစံလိုအပ်ချက်များနှင့် အကန့်အသတ်များအပေါ် အခြေခံ၍ သင့်လျော်သော Azure ဝန်ဆောင်မှု SKUs ကို ရွေးချယ်နိုင်မည်
-- အဆင့်ရွေးချယ်မှုမှန်ကန်သော အဆင့်များဖြင့် ကုန်ကျစရိတ်သက်သာသော အမျိုးမျိုးသောအခြေအနေများအတွက် architecture များကို ဒီဇိုင်းဆွဲနိုင်မည်
-- SKU ရွေးချယ်မှုများအတွက် စွမ်းဆောင်ရည် benchmarking နှင့် အတည်ပြုမှုကို အကောင်အထည်ဖော်နိုင်မည်
-- SKU အကြံပြုချက်နှင့် ကုန်ကျစရိတ်အခွင့်အရေးများအတွက် အလိုအလျောက် tools များကို ဖန်တီးနိုင်မည်
-- လိုအပ်ချက်များပြောင်းလဲမှုအတွက် SKU ပြောင်းရွှေ့မှုနှင့် အရွယ်အစားချဲ့ထွင်မှုနည်းဗျူဟာများကို စီမံနိုင်မည်
-- Azure Well-Architected Framework ကို ဝန်ဆောင်မှုအဆင့်ရွေးချယ်မှုတွင် အသုံးပြုနိုင်မည်
+ပြီးမြောက်ပြီးနောက်၊ သင်သည်:
+- Workload လိုအပ်ချက်များနှင့် အကန့်အသတ်များအပေါ် အခြေခံပြီး သင့်တော်သော Azure service SKUs ကို ရွေးချယ်နိုင်မည်
+- Multi-environment architectures ကို ကုန်ကျစရိတ်သက်သာစွာ ဒီဇိုင်းဆွဲနိုင်မည်
+- SKU ရွေးချယ်မှုအတွက် performance benchmarking နှင့် validation ကို အကောင်အထည်ဖော်နိုင်မည်
+- SKU recommendation နှင့် cost optimization အတွက် အလိုအလျောက် tools များကို ဖန်တီးနိုင်မည်
+- လိုအပ်ချက်များပြောင်းလဲလာသည်နှင့်အမျှ SKU migration နှင့် scaling strategies များကို စီမံနိုင်မည်
+- Azure Well-Architected Framework principles ကို service tier ရွေးချယ်မှုတွင် အသုံးချနိုင်မည်
 
 ## အကြောင်းအရာများ
 
 - [SKUs ကိုနားလည်ခြင်း](../../../../docs/pre-deployment)
-- [အခြေအနေအလိုက်ရွေးချယ်မှု](../../../../docs/pre-deployment)
-- [ဝန်ဆောင်မှုအလိုက်လမ်းညွှန်ချက်များ](../../../../docs/pre-deployment)
-- [ကုန်ကျစရိတ်သက်သာမှုနည်းဗျူဟာများ](../../../../docs/pre-deployment)
-- [စွမ်းဆောင်ရည်စဉ်းစားမှုများ](../../../../docs/pre-deployment)
-- [အမြန်ရည်ညွှန်းဇယားများ](../../../../docs/pre-deployment)
-- [အတည်ပြုမှု tools](../../../../docs/pre-deployment)
+- [Environment အခြေခံ ရွေးချယ်မှု](../../../../docs/pre-deployment)
+- [Service-Specific လမ်းညွှန်ချက်များ](../../../../docs/pre-deployment)
+- [ကုန်ကျစရိတ် လျှော့ချနည်းလမ်းများ](../../../../docs/pre-deployment)
+- [Performance ကိုစဉ်းစားခြင်း](../../../../docs/pre-deployment)
+- [Quick Reference Tables](../../../../docs/pre-deployment)
+- [Validation Tools](../../../../docs/pre-deployment)
 
 ---
 
@@ -49,42 +56,42 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### SKUs ဆိုတာဘာလဲ?
 
-SKUs (Stock Keeping Units) သည် Azure ရင်းမြစ်များအတွက် ဝန်ဆောင်မှုအဆင့်များနှင့် စွမ်းဆောင်ရည်အဆင့်များကို ကိုယ်စားပြုသည်။ SKU တစ်ခုစီတွင် အောက်ပါအချက်များကွာခြားမှုရှိသည်-
+SKUs (Stock Keeping Units) ဆိုတာ Azure resources အတွက် service tiers နှင့် performance အဆင့်များကို ကိုယ်စားပြုသည်။ SKU တစ်ခုစီမှာ အောက်ပါအရာများကို ကွဲပြားစွာပေးသည်။
 
-- **စွမ်းဆောင်ရည်လက္ခဏာများ** (CPU, memory, throughput)
+- **Performance လက္ခဏာများ** (CPU, memory, throughput)
 - **အင်္ဂါရပ်ရရှိနိုင်မှု** (scaling options, SLA အဆင့်များ)
-- **စျေးနှုန်းပုံစံများ** (သုံးစွဲမှုအပေါ်အခြေခံ, reserved capacity)
-- **ဒေသအလိုက်ရရှိနိုင်မှု** (SKUs အားလုံးသည် ဒေသအားလုံးတွင်ရရှိနိုင်မည်မဟုတ်)
+- **စျေးနှုန်းပုံစံများ** (consumption-based, reserved capacity)
+- **ဒေသအလိုက်ရရှိနိုင်မှု** (SKUs အားလုံးကို ဒေသအားလုံးတွင် မရရှိနိုင်)
 
-### SKU ရွေးချယ်မှုတွင် အရေးကြီးသောအချက်များ
+### SKU ရွေးချယ်မှုအတွက် အဓိကအချက်များ
 
-1. **အလုပ်ပုံစံလိုအပ်ချက်များ**
+1. **Workload လိုအပ်ချက်များ**
    - မျှော်မှန်းထားသော traffic/load ပုံစံများ
-   - စွမ်းဆောင်ရည်လိုအပ်ချက်များ (CPU, memory, I/O)
-   - သိုလှောင်မှုလိုအပ်ချက်များနှင့် အသုံးပြုမှုပုံစံများ
+   - Performance လိုအပ်ချက်များ (CPU, memory, I/O)
+   - Storage လိုအပ်ချက်များနှင့် access ပုံစံများ
 
-2. **အခြေအနေအမျိုးအစား**
-   - ဖွံ့ဖြိုးရေး/စမ်းသပ်မှုနှင့် ထုတ်လုပ်မှု
-   - ရရှိနိုင်မှုလိုအပ်ချက်များ
-   - လုံခြုံရေးနှင့် အညီအနေလိုအပ်ချက်များ
+2. **Environment အမျိုးအစား**
+   - Development/testing နှင့် production
+   - Availability လိုအပ်ချက်များ
+   - Security နှင့် compliance လိုအပ်ချက်များ
 
-3. **ဘတ်ဂျက်ကန့်သတ်ချက်များ**
+3. **Budget အကန့်အသတ်များ**
    - စတင်ကုန်ကျစရိတ်နှင့် လုပ်ငန်းစဉ်ကုန်ကျစရိတ်
-   - Reserved capacity လျော့စျေးများ
+   - Reserved capacity လျှော့စျေးများ
    - Auto-scaling ကုန်ကျစရိတ်ရလဒ်များ
 
-4. **တိုးတက်မှုခန့်မှန်းချက်များ**
-   - အရွယ်အစားချဲ့ထွင်မှုလိုအပ်ချက်များ
-   - အနာဂတ်အင်္ဂါရပ်လိုအပ်ချက်များ
-   - ပြောင်းရွှေ့မှုအခက်အခဲ
+4. **အနာဂတ်တိုးတက်မှုများ**
+   - Scalability လိုအပ်ချက်များ
+   - အနာဂတ် feature လိုအပ်ချက်များ
+   - Migration ရှုပ်ထွေးမှု
 
 ---
 
-## အခြေအနေအလိုက်ရွေးချယ်မှု
+## Environment အခြေခံ ရွေးချယ်မှု
 
-### ဖွံ့ဖြိုးရေးအခြေအနေ
+### Development Environment
 
-**အရေးထားရမည့်အချက်များ**: ကုန်ကျစရိတ်သက်သာမှု၊ အခြေခံလုပ်ဆောင်နိုင်မှု၊ အလွယ်တကူ provision/de-provision
+**အရေးပါချက်များ**: ကုန်ကျစရိတ်သက်သာမှု၊ အခြေခံ functionality၊ provisioning/de-provisioning လွယ်ကူမှု
 
 #### အကြံပြုထားသော SKUs
 ```yaml
@@ -100,15 +107,15 @@ skus:
 ```
 
 #### လက္ခဏာများ
-- **App Service**: F1 (Free) သို့မဟုတ် B1 (Basic) - ရိုးရှင်းသောစမ်းသပ်မှုအတွက်
-- **Databases**: အနည်းဆုံး resources ဖြင့် Basic tier
-- **Storage**: Standard (ဒေသတွင်း redundancy)
-- **Compute**: Shared resources
-- **Networking**: ရိုးရှင်းသော configuration
+- **App Service**: F1 (Free) သို့မဟုတ် B1 (Basic) - ရိုးရှင်းသော စမ်းသပ်မှုအတွက်
+- **Databases**: အနည်းဆုံး resource များပါဝင်သော Basic tier
+- **Storage**: Standard နှင့် local redundancy သာ
+- **Compute**: Shared resources လက်ခံနိုင်
+- **Networking**: အခြေခံ configuration များ
 
-### စမ်းသပ်/စမ်းသပ်မှုအခြေအနေ
+### Staging/Testing Environment
 
-**အရေးထားရမည့်အချက်များ**: ထုတ်လုပ်မှုနှင့်တူသော configuration၊ ကုန်ကျစရိတ်နှင့် စွမ်းဆောင်ရည်စမ်းသပ်မှု
+**အရေးပါချက်များ**: Production-like configuration, ကုန်ကျစရိတ်နှင့် performance စမ်းသပ်မှုစွမ်းရည်
 
 #### အကြံပြုထားသော SKUs
 ```yaml
@@ -123,15 +130,15 @@ skus:
 ```
 
 #### လက္ခဏာများ
-- **စွမ်းဆောင်ရည်**: ထုတ်လုပ်မှုစွမ်းဆောင်ရည်၏ 70-80%
-- **အင်္ဂါရပ်များ**: ထုတ်လုပ်မှုအင်္ဂါရပ်များအများစုကို enabled
-- **Redundancy**: တချို့သောဒေသဆိုင်ရာ redundancy
-- **Scaling**: စမ်းသပ်မှုအတွက် အကန့်အသတ် auto-scaling
-- **Monitoring**: စုံလင်သော monitoring stack
+- **Performance**: Production capacity ၏ 70-80%
+- **Features**: Production features များအများစု enabled
+- **Redundancy**: အချို့ geographic redundancy
+- **Scaling**: စမ်းသပ်မှုအတွက် auto-scaling အနည်းငယ်
+- **Monitoring**: Full monitoring stack
 
-### ထုတ်လုပ်မှုအခြေအနေ
+### Production Environment
 
-**အရေးထားရမည့်အချက်များ**: စွမ်းဆောင်ရည်၊ ရရှိနိုင်မှု၊ လုံခြုံရေး၊ အညီအနေ၊ အရွယ်အစားချဲ့ထွင်မှု
+**အရေးပါချက်များ**: Performance, availability, security, compliance, scalability
 
 #### အကြံပြုထားသော SKUs
 ```yaml
@@ -147,31 +154,31 @@ skus:
 ```
 
 #### လက္ခဏာများ
-- **ရရှိနိုင်မှုမြင့်မားမှု**: 99.9%+ SLA လိုအပ်ချက်များ
-- **စွမ်းဆောင်ရည်**: Dedicated resources, throughput မြင့်မားမှု
-- **လုံခြုံရေး**: Premium လုံခြုံရေး features
-- **Scaling**: အပြည့်အဝ auto-scaling စွမ်းဆောင်ရည်
-- **Monitoring**: စုံလင်သော observability
+- **High availability**: 99.9%+ SLA လိုအပ်ချက်များ
+- **Performance**: Dedicated resources, high throughput
+- **Security**: Premium security features
+- **Scaling**: Full auto-scaling စွမ်းရည်များ
+- **Monitoring**: Comprehensive observability
 
 ---
 
-## ဝန်ဆောင်မှုအလိုက်လမ်းညွှန်ချက်များ
+## Service-Specific လမ်းညွှန်ချက်များ
 
 ### Azure App Service
 
-#### SKU ဆုံးဖြတ်ချက် Matrix
+#### SKU ရွေးချယ်မှု Matrix
 
 | အသုံးပြုမှု | အကြံပြုထားသော SKU | အကြောင်းပြချက် |
 |-------------|---------------------|----------------|
-| ဖွံ့ဖြိုးရေး/စမ်းသပ်မှု | F1 (Free) သို့မဟုတ် B1 (Basic) | ကုန်ကျစရိတ်သက်သာမှု၊ စမ်းသပ်မှုအတွက်လုံလောက်မှု |
-| အသေးစားထုတ်လုပ်မှု app များ | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| အလတ်စားထုတ်လုပ်မှု app များ | P1V3 (Premium V3) | စွမ်းဆောင်ရည်ပိုမိုကောင်းမွန်မှု၊ အင်္ဂါရပ်များပိုမိုများပြားမှု |
-| Traffic မြင့်မားသော app များ | P2V3 သို့မဟုတ် P3V3 | Dedicated resources, စွမ်းဆောင်ရည်မြင့်မားမှု |
-| အရေးကြီးသော app များ | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
+| Development/Testing | F1 (Free) သို့မဟုတ် B1 (Basic) | ကုန်ကျစရိတ်သက်သာမှု၊ စမ်းသပ်မှုအတွက် လုံလောက်သည် |
+| Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
+| Medium production apps | P1V3 (Premium V3) | ပိုမိုကောင်းမွန်သော performance၊ feature များပိုများ |
+| High-traffic apps | P2V3 သို့မဟုတ် P3V3 | Dedicated resources, high performance |
+| Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
 
 #### Configuration ဥပမာများ
 
-**ဖွံ့ဖြိုးရေး**
+**Development**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -187,7 +194,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**ထုတ်လုပ်မှု**
+**Production**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -208,16 +215,16 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 #### SKU ရွေးချယ်မှု Framework
 
 1. **DTU-based (Database Transaction Units)**
-   - **Basic**: 5 DTU - ဖွံ့ဖြိုးရေး/စမ်းသပ်မှု
+   - **Basic**: 5 DTU - Development/testing
    - **Standard**: S0-S12 (10-3000 DTU) - General purpose
-   - **Premium**: P1-P15 (125-4000 DTU) - စွမ်းဆောင်ရည်အရေးကြီး
+   - **Premium**: P1-P15 (125-4000 DTU) - Performance-critical
 
-2. **vCore-based** (ထုတ်လုပ်မှုအတွက်အကြံပြု)
+2. **vCore-based** (Production အတွက် အကြံပြုသည်)
    - **General Purpose**: Compute နှင့် storage အချိုးညီ
-   - **Business Critical**: Latency နည်း၊ IOPS မြင့်
-   - **Hyperscale**: Storage အလွန်ချဲ့နိုင်မှု (100TB အထိ)
+   - **Business Critical**: Low latency, high IOPS
+   - **Hyperscale**: Highly scalable storage (100TB အထိ)
 
-#### ဥပမာ Configuration များ
+#### Configuration ဥပမာများ
 
 ```bicep
 // Development
@@ -254,21 +261,21 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 ### Azure Container Apps
 
-#### အခြေအနေအမျိုးအစားများ
+#### Environment အမျိုးအစားများ
 
 1. **Consumption-based**
-   - သုံးသုံးလျှင်ပေး
-   - ဖွံ့ဖြိုးရေးနှင့် variable workloads အတွက်သင့်လျော်
+   - Pay-per-use စျေးနှုန်း
+   - Development နှင့် variable workloads အတွက် သင့်တော်သည်
    - Shared infrastructure
 
 2. **Dedicated (Workload Profiles)**
    - Dedicated compute resources
-   - စွမ်းဆောင်ရည်အတိအကျ
-   - ထုတ်လုပ်မှု workloads အတွက်ပိုမိုကောင်းမွန်
+   - Predictable performance
+   - Production workloads အတွက် ပိုကောင်းသည်
 
 #### Configuration ဥပမာများ
 
-**ဖွံ့ဖြိုးရေး (Consumption)**
+**Development (Consumption)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -307,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**ထုတ်လုပ်မှု (Dedicated)**
+**Production (Dedicated)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-prod'
@@ -329,19 +336,19 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 #### Throughput Models
 
 1. **Manual Provisioned Throughput**
-   - စွမ်းဆောင်ရည်အတိအကျ
-   - Reserved capacity လျော့စျေး
-   - Steady workloads အတွက်အကောင်းဆုံး
+   - Predictable performance
+   - Reserved capacity လျှော့စျေးများ
+   - Steady workloads အတွက် အကောင်းဆုံး
 
 2. **Autoscale Provisioned Throughput**
-   - အသုံးပြုမှုအပေါ်အခြေခံ၍ အလိုအလျောက်ချဲ့
-   - သုံးသုံးလျှင်ပေး (အနည်းဆုံးနှင့်အတူ)
-   - Variable workloads အတွက်သင့်လျော်
+   - Usage အပေါ်မူတည်ပြီး အလိုအလျောက် scaling
+   - Pay for what you use (minimum ပါရှိသည်)
+   - Variable workloads အတွက် သင့်တော်သည်
 
 3. **Serverless**
-   - Request တစ်ခုချင်းစီအပေါ်အခြေခံ၍ပေး
+   - Pay-per-request
    - Provisioned throughput မလိုအပ်
-   - ဖွံ့ဖြိုးရေးနှင့် intermittent workloads အတွက်သင့်လျော်
+   - Development နှင့် intermittent workloads အတွက် အကောင်းဆုံး
 
 #### SKU ဥပမာများ
 
@@ -402,15 +409,15 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### Storage Account အမျိုးအစားများ
 
-1. **Standard_LRS** - ဖွံ့ဖြိုးရေး၊ အရေးမကြီးသောဒေတာ
-2. **Standard_GRS** - ထုတ်လုပ်မှု၊ geo-redundancy လိုအပ်
-3. **Premium_LRS** - စွမ်းဆောင်ရည်မြင့်မားသော application များ
-4. **Premium_ZRS** - Zone redundancy ဖြင့်ရရှိနိုင်မှုမြင့်မားမှု
+1. **Standard_LRS** - Development, non-critical data
+2. **Standard_GRS** - Production, geo-redundancy လိုအပ်သော data
+3. **Premium_LRS** - High-performance applications
+4. **Premium_ZRS** - Zone redundancy ဖြင့် အမြင့်ဆုံး availability
 
-#### စွမ်းဆောင်ရည်အဆင့်များ
+#### Performance Tiers
 
-- **Standard**: General purpose, ကုန်ကျစရိတ်သက်သာမှု
-- **Premium**: စွမ်းဆောင်ရည်မြင့်မားမှု၊ latency နည်းသောအခြေအနေများ
+- **Standard**: General purpose, cost-effective
+- **Premium**: High-performance, low-latency scenarios
 
 ```bicep
 // Development
@@ -451,11 +458,11 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## ကုန်ကျစရိတ်သက်သာမှုနည်းဗျူဟာများ
+## ကုန်ကျစရိတ် လျှော့ချနည်းလမ်းများ
 
 ### 1. Reserved Capacity
 
-1-3 နှစ်အထိ resources ကို reserve လုပ်၍ လျော့စျေးရယူပါ:
+1-3 နှစ်အတွက် resources ကို reserve လုပ်ပြီး လျှော့စျေးရယူပါ:
 
 ```bash
 # Check reservation options
@@ -465,7 +472,7 @@ az reservations catalog show --reserved-resource-type CosmosDb
 
 ### 2. Right-Sizing
 
-အသုံးပြုမှုအပေါ်အခြေခံ၍ သေးငယ်သော SKUs ဖြင့်စတင်ပြီး တိုးချဲ့ပါ:
+အသုံးပြုမှုအပေါ်မူတည်ပြီး သေးငယ်သော SKUs ဖြင့် စတင်ပြီး အလိုအလျောက် တိုးမြှင့်ပါ:
 
 ```yaml
 # Progressive scaling approach
@@ -481,7 +488,7 @@ production:
 
 ### 3. Auto-Scaling Configuration
 
-စွမ်းဆောင်ရည်ကို optimize လုပ်ရန် intelligent scaling ကိုအသုံးပြုပါ:
+Intelligent scaling ကို အသုံးပြုပြီး ကုန်ကျစရိတ်ကို optimize လုပ်ပါ:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -585,11 +592,11 @@ Off-hours တွင် scale down လုပ်ပါ:
 
 ---
 
-## စွမ်းဆောင်ရည်စဉ်းစားမှုများ
+## Performance ကိုစဉ်းစားခြင်း
 
-### Baseline စွမ်းဆောင်ရည်လိုအပ်ချက်များ
+### Baseline Performance လိုအပ်ချက်များ
 
-SKU ရွေးချယ်မှုမပြုမီ စွမ်းဆောင်ရည်လိုအပ်ချက်များကိုရှင်းလင်းစွာသတ်မှတ်ပါ:
+SKU ရွေးချယ်မှုမပြုမီ performance လိုအပ်ချက်များကို ရှင်းလင်းစွာ သတ်မှတ်ပါ:
 
 ```yaml
 performance_requirements:
@@ -607,7 +614,7 @@ performance_requirements:
 
 ### Load Testing
 
-စွမ်းဆောင်ရည်ကိုအတည်ပြုရန် SKU များကိုစမ်းသပ်ပါ:
+Performance ကို အတည်ပြုရန် SKU များကို စမ်းသပ်ပါ:
 
 ```bash
 # Azure Load Testing service
@@ -619,7 +626,7 @@ az load test create \
 
 ### Monitoring နှင့် Optimization
 
-စုံလင်သော monitoring ကိုတည်ဆောက်ပါ:
+Comprehensive monitoring ကို စနစ်တကျ စီစဉ်ပါ:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -646,41 +653,41 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## အမြန်ရည်ညွှန်းဇယားများ
+## Quick Reference Tables
 
-### App Service SKU အမြန်ရည်ညွှန်း
+### App Service SKU Quick Reference
 
 | SKU | Tier | vCPU | RAM | Storage | Price Range | Use Case |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | ဖွံ့ဖြိုးရေး |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | အသေးစား app များ |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | ထုတ်လုပ်မှု |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | စွမ်းဆောင်ရည်မြင့်မားမှု |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | စီးပွားရေး |
+| F1 | Free | Shared | 1GB | 1GB | Free | Development |
+| B1 | Basic | 1 | 1.75GB | 10GB | $ | Small apps |
+| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Production |
+| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | High performance |
+| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
 
-### SQL Database SKU အမြန်ရည်ညွှန်း
+### SQL Database SKU Quick Reference
 
 | SKU | Tier | DTU/vCore | Storage | Price Range | Use Case |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | ဖွံ့ဖြိုးရေး |
-| S2 | Standard | 50 DTU | 250GB | $$ | အသေးစားထုတ်လုပ်မှု |
-| P2 | Premium | 250 DTU | 1TB | $$$ | စွမ်းဆောင်ရည်မြင့်မားမှု |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | အချိုးညီ |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | အရေးကြီး |
+| Basic | Basic | 5 DTU | 2GB | $ | Development |
+| S2 | Standard | 50 DTU | 250GB | $$ | Small production |
+| P2 | Premium | 250 DTU | 1TB | $$$ | High performance |
+| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanced |
+| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Mission critical |
 
-### Container Apps SKU အမြန်ရည်ညွှန်း
+### Container Apps SKU Quick Reference
 
 | Model | Pricing | CPU/Memory | Use Case |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | ဖွံ့ဖြိုးရေး၊ variable load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | ထုတ်လုပ်မှု |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | စွမ်းဆောင်ရည်မြင့်မားမှု |
+| Consumption | Pay-per-use | 0.25-2 vCPU | Development, variable load |
+| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
+| Dedicated D8 | Reserved | 8 vCPU, 32GB | High performance |
 
 ---
 
-## အတည်ပြုမှု tools
+## Validation Tools
 
-### SKU ရရှိနိုင်မှု Checker
+### SKU Availability Checker
 
 ```bash
 #!/bin/bash
@@ -713,7 +720,7 @@ check_sku_availability() {
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### ကုန်ကျစရိတ်ခန့်မှန်း Script
+### Cost Estimation Script
 
 ```powershell
 # PowerShell script for cost estimation
@@ -750,7 +757,7 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### စွမ်းဆောင်ရည်အတည်ပြုမှု
+### Performance Validation
 
 ```yaml
 # Load test configuration for SKU validation
@@ -785,15 +792,41 @@ test_configuration:
 
 ---
 
-## အကောင်းဆုံးအလေ့အကျင့်များအကျဉ်းချုပ်
+## အကောင်းဆုံးအလေ့အကျင့်များ
 
 ### လုပ်သင့်သောအရာများ
 
-1. **အသေးငယ်သော SKUs ဖြင့်စတင်ပြီး** အသုံးပြုမှုအပေါ်အခြေခံ၍ တိုးချဲ့ပါ
-2. **အခြေအနေအမျိုးအစားအလိုက် SKUs များကိုအသုံးပြုပါ**
-3. **စွမ်းဆောင်ရည်နှင့်ကုန်ကျစ
+1. **အသုံးပြုမှုအပေါ်မူတည်ပြီး သေးငယ်စွာစတင်ပြီး တိုးမြှင့်ပါ**
+2. **အခြားအခြေအနေများအတွက် ကွဲပြားသော SKUs ကို အသုံးပြုပါ**
+3. **Performance နှင့် ကုန်ကျစရိတ်ကို ဆက်လက်စောင့်ကြည့်ပါ**
+4. **Production workloads အတွက် reserved capacity ကို အသုံးပြုပါ**
+5. **သင့်တော်သောနေရာတွင် auto-scaling ကို အသုံးပြုပါ**
+6. **Workload အမှန်တကယ်ဖြင့် performance ကို စမ်းသပ်ပါ**
+7. **တိုးတက်မှုအတွက် စီမံကိန်းရေးဆွဲပါ၊ over-provisioning မလုပ်ပါနှင့်**
+8. **Development အတွက် free tiers ကို အသုံးပြုပါ**
+
+### မလုပ်သင့်သောအရာများ
+
+1. **Development အတွက် production SKUs ကို မသုံးပါနှင့်**
+2. **Regional SKU ရရှိနိုင်မှုကို မလွဲမသွေ စဉ်းစားပါ**
+3. **Data transfer ကုန်ကျစရိတ်ကို မမေ့ပါနှင့်**
+4. **အကြောင်းမရှိဘဲ over-provisioning မလုပ်ပါနှင့်**
+5. **Dependencies ၏ အကျိုးသက်ရောက်မှုကို မလွဲမသွေ စဉ်းစားပါ**
+6. **Auto-scaling limits ကို များလွန်းစွာ မထားပါနှင့်**
+7. **Compliance လိုအပ်ချက်များကို မမေ့ပါနှင့်**
+8. **စျေးနှုန်းအပေါ်သာမူတည်ပြီး ဆုံးဖြတ်ချက်မလုပ်ပါနှင့်**
+
+---
+
+**Pro Tip**: Azure Cost Management နှင့် Advisor ကို အသုံးပြုပြီး သင့် SKU ရွေးချယ်မှုများကို အသုံးပြုမှုပုံစံများအပေါ်မူတည်၍ အကောင်းဆုံး optimize လုပ်နိုင်ရန် အကြံပြုချက်များရယူပါ။
+
+---
+
+**Navigation**
+- **ယခင်သင်ခန်းစာ**: [Capacity Planning](capacity-planning.md)
+- **နောက်သင်ခန်းစာ**: [Preflight Checks](preflight-checks.md)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှားမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွဲအချော်များ သို့မဟုတ် အနားယူမှုမှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

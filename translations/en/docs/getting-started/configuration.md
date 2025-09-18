@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:08:45+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T12:46:07+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "en"
 }
 -->
 # Configuration Guide
 
-**Previous:** [AZD Basics](azd-basics.md) | **Next:** [First Project](first-project.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+- **⬅️ Previous**: [Your First Project](first-project.md)
+- **➡️ Next**: [Deployment Guide](../deployment/deployment-guide.md)
+- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../deployment/deployment-guide.md)
 
 ## Introduction
 
-This guide provides a detailed overview of how to configure Azure Developer CLI to streamline development and deployment workflows. You'll explore the configuration hierarchy, environment management, authentication methods, and advanced configuration techniques to ensure efficient and secure Azure deployments.
+This guide provides a detailed overview of how to configure Azure Developer CLI for streamlined development and deployment workflows. You'll explore the configuration hierarchy, environment management, authentication methods, and advanced configuration techniques to ensure efficient and secure Azure deployments.
 
 ## Learning Goals
 
@@ -21,19 +26,19 @@ By the end of this lesson, you will:
 - Understand the azd configuration hierarchy and how settings are prioritized
 - Learn to configure global and project-specific settings effectively
 - Manage multiple environments with unique configurations
-- Implement secure authentication and authorization practices
+- Implement secure authentication and authorization methods
 - Explore advanced configuration techniques for complex scenarios
 
 ## Learning Outcomes
 
 After completing this lesson, you will be able to:
 - Set up azd for efficient development workflows
-- Configure and manage multiple deployment environments
+- Manage multiple deployment environments
 - Apply secure configuration management practices
-- Diagnose and resolve configuration-related issues
-- Tailor azd settings to meet specific organizational needs
+- Resolve configuration-related issues
+- Tailor azd behavior to meet organizational needs
 
-This guide provides a detailed overview of how to configure Azure Developer CLI to streamline development and deployment workflows.
+This guide provides a detailed overview of how to configure Azure Developer CLI for streamlined development and deployment workflows.
 
 ## Configuration Hierarchy
 
@@ -219,7 +224,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Environment Configuration
-Each environment has its own configuration stored in `.azure/<env-name>/config.json`:
+Each environment has its own configuration in `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -287,7 +292,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Service Principal Authentication
-Ideal for CI/CD pipelines:
+For CI/CD pipelines:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -300,7 +305,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-Best suited for Azure-hosted environments:
+For Azure-hosted environments:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -333,7 +338,7 @@ Define infrastructure parameters in `infra/main.parameters.json`:
 ```
 
 ### Terraform Configuration
-For Terraform projects, use `infra/terraform.tfvars` for configuration:
+For Terraform projects, use `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -459,7 +464,7 @@ azd provision --dry-run
 ```
 
 ### Configuration Scripts
-Place validation scripts in the `scripts/` directory:
+Place validation scripts in `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -549,7 +554,11 @@ Document your configuration in `CONFIG.md`:
 
 ---
 
-**Previous:** [AZD Basics](azd-basics.md) | **Next:** [First Project](first-project.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+- **⬅️ Previous**: [Your First Project](first-project.md)
+- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../deployment/deployment-guide.md)
 - **Next Lesson**: [Your First Project](first-project.md)
 
 ---

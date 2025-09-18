@@ -1,70 +1,74 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T23:28:45+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T12:49:10+00:00",
   "source_file": "workshop/README.md",
   "language_code": "en"
 }
 -->
 # AZD for AI Developers Workshop
 
-**Previous:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Next:** [Workshop Lab Modules](../../../workshop)
+**Workshop Navigation**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Related Chapters**: Covers [Chapter 1](../README.md#-chapter-1-foundation--quick-start), [Chapter 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), and [Chapter 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Hands-On Lab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Next Steps**: [Workshop Lab Modules](../../../workshop)
 
-Welcome to this hands-on workshop where you'll learn how to use Azure Developer CLI (AZD) to deploy AI applications. This workshop will guide you from the basics of AZD to deploying AI solutions that are ready for production.
+Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop is designed to take you from AZD basics to deploying production-ready AI solutions.
 
 ## Workshop Overview
 
 **Duration:** 2-3 hours  
 **Level:** Beginner to Intermediate  
-**Prerequisites:** Basic understanding of Azure, command line tools, and AI concepts
+**Prerequisites:** Basic knowledge of Azure, command line tools, and AI concepts
 
 ### What You'll Learn
 
-- **AZD Fundamentals**: Learn how to use Infrastructure as Code with AZD
-- 🤖 **AI Service Integration**: Deploy Azure OpenAI, AI Search, and other AI services
-- **Container Deployment**: Use Azure Container Apps for AI applications
-- **Security Best Practices**: Implement Managed Identity and secure configurations
-- **Monitoring & Observability**: Set up Application Insights for AI workloads
-- **Production Patterns**: Explore strategies for enterprise-ready deployments
+- **AZD Fundamentals**: Understanding Infrastructure as Code with AZD
+- 🤖 **AI Service Integration**: Deploying Azure OpenAI, AI Search, and other AI services
+- **Container Deployment**: Using Azure Container Apps for AI applications
+- **Security Best Practices**: Implementing Managed Identity and secure configurations
+- **Monitoring & Observability**: Setting up Application Insights for AI workloads
+- **Production Patterns**: Enterprise-ready deployment strategies
 
 ## Workshop Structure
 
 ### Module 1: AZD Foundations (30 minutes)
-- Install and configure AZD
-- Understand the AZD project structure
-- Deploy your first AZD project
+- Installing and configuring AZD
+- Understanding AZD project structure
+- Your first AZD deployment
 - **Lab**: Deploy a simple web application
 
 ### Module 2: Azure OpenAI Integration (45 minutes)
-- Set up Azure OpenAI resources
-- Learn model deployment strategies
-- Configure API access and authentication
-- **Lab**: Deploy a chat application using GPT-4
+- Setting up Azure OpenAI resources
+- Model deployment strategies
+- Configuring API access and authentication
+- **Lab**: Deploy a chat application with GPT-4
 
 ### Module 3: RAG Applications (45 minutes)
-- Integrate Azure AI Search
-- Process documents with Azure Document Intelligence
-- Work with vector embeddings and semantic search
+- Azure AI Search integration
+- Document processing with Azure Document Intelligence
+- Vector embeddings and semantic search
 - **Lab**: Build a document Q&A system
 
 ### Module 4: Production Deployment (30 minutes)
-- Configure Container Apps
-- Optimize scaling and performance
-- Set up monitoring and logging
+- Container Apps configuration
+- Scaling and performance optimization
+- Monitoring and logging
 - **Lab**: Deploy to production with observability
 
 ### Module 5: Advanced Patterns (15 minutes)
-- Deploy to multiple environments
-- Integrate CI/CD pipelines
-- Apply cost optimization strategies
-- **Wrap-up**: Review the production readiness checklist
+- Multi-environment deployments
+- CI/CD integration
+- Cost optimization strategies
+- **Wrap-up**: Production readiness checklist
 
 ## Prerequisites
 
 ### Required Tools
 
-Please install the following tools before starting the workshop:
+Please install these tools before the workshop:
 
 ```bash
 # Azure Developer CLI
@@ -89,12 +93,12 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 1. **Azure Subscription**: [Sign up for free](https://azure.microsoft.com/free/)
 2. **Azure OpenAI Access**: [Request access](https://aka.ms/oai/access)
 3. **Required Permissions**:
-   - Contributor role on your subscription or resource group
+   - Contributor role on subscription or resource group
    - User Access Administrator (for RBAC assignments)
 
 ### Verify Prerequisites
 
-Run the following script to ensure your setup is ready:
+Run this script to verify your setup:
 
 ```bash
 #!/bin/bash
@@ -144,22 +148,22 @@ echo "Setup verification complete!"
 
 Each module includes hands-on labs with starter code and step-by-step instructions:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Deploy your first AZD project
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Build a chat application with Azure OpenAI
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Create a RAG application with AI Search
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Explore production deployment patterns
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Dive into advanced deployment scenarios
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Your first AZD deployment
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat application with Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG application with AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Production deployment patterns
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Advanced deployment scenarios
 
 ### Reference Materials
 
-- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Detailed integration patterns
-- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Best practices for deploying AI models
-- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Strategies for enterprise deployments
-- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Solutions to common issues
+- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Comprehensive integration patterns
+- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Model deployment best practices
+- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Enterprise deployment patterns
+- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Common issues and solutions
 
 ### Sample Templates
 
-Quick-start templates for popular AI scenarios:
+Quick-start templates for common AI scenarios:
 
 ```
 workshop/templates/
@@ -173,7 +177,7 @@ workshop/templates/
 
 ### Option 1: GitHub Codespaces (Recommended)
 
-The easiest way to start the workshop:
+The fastest way to start the workshop:
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
@@ -185,7 +189,7 @@ git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Log in to Azure:**
+2. **Login to Azure:**
 ```bash
 az login
 azd auth login
@@ -199,11 +203,11 @@ cat README.md  # Follow the instructions
 
 ### Option 3: Instructor-Led Workshop
 
-If you're attending a session led by an instructor:
+If you're attending an instructor-led session:
 
 - 🎥 **Workshop Recording**: [Available on demand](https://aka.ms/azd-ai-workshop)
 - 💬 **Discord Community**: [Join for live support](https://aka.ms/foundry/discord)
-- **Workshop Feedback**: [Share your thoughts](https://aka.ms/azd-workshop-feedback)
+- **Workshop Feedback**: [Share your experience](https://aka.ms/azd-workshop-feedback)
 
 ## Workshop Timeline
 
@@ -236,19 +240,19 @@ If you're attending a session led by an instructor:
 By the end of this workshop, you will be able to:
 
 ✅ **Deploy AI applications** using AZD templates  
-✅ **Configure Azure OpenAI** services securely  
+✅ **Configure Azure OpenAI** services with proper security  
 ✅ **Build RAG applications** with Azure AI Search integration  
 ✅ **Implement production patterns** for enterprise AI workloads  
-✅ **Monitor and troubleshoot** AI deployments  
-✅ **Optimize costs** for AI workloads  
+✅ **Monitor and troubleshoot** AI application deployments  
+✅ **Apply cost optimization** strategies for AI workloads  
 
 ## Community & Support
 
 ### During the Workshop
 
-- 🙋 **Questions**: Use the workshop chat or raise your hand
-- 🐛 **Issues**: Refer to the [troubleshooting guide](../docs/troubleshooting/ai-troubleshooting.md)
-- **Tips**: Share insights with other participants
+- 🙋 **Questions**: Use workshop chat or raise your hand
+- 🐛 **Issues**: Check the [troubleshooting guide](../docs/troubleshooting/ai-troubleshooting.md)
+- **Tips**: Share discoveries with other participants
 
 ### After the Workshop
 
@@ -260,27 +264,27 @@ By the end of this workshop, you will be able to:
 
 ### Continue Learning
 
-1. **Advanced Scenarios**: Learn about [multi-region deployments](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+1. **Advanced Scenarios**: Explore [multi-region deployments](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
 2. **CI/CD Integration**: Set up [GitHub Actions workflows](../docs/deployment/github-actions.md)
 3. **Custom Templates**: Create your own [AZD templates](../docs/getting-started/custom-templates.md)
 
 ### Apply in Your Projects
 
-1. **Assessment**: Use the [readiness checklist](./production-readiness-checklist.md)
-2. **Templates**: Start with [AI-specific templates](../../../workshop/templates)
+1. **Assessment**: Use our [readiness checklist](./production-readiness-checklist.md)
+2. **Templates**: Start with our [AI-specific templates](../../../workshop/templates)
 3. **Support**: Join the [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
 ### Share Your Success
 
-- ⭐ **Star the repository** if you found the workshop helpful
-- 🐦 **Share on social media** using #AzureDeveloperCLI #AzureAI
-- 📝 **Write a blog post** about your experience deploying AI applications
+- ⭐ **Star the repository** if this workshop helped you
+- 🐦 **Share on social media** with #AzureDeveloperCLI #AzureAI
+- 📝 **Write a blog post** about your AI deployment journey
 
 ---
 
 ## Workshop Feedback
 
-Your feedback helps us improve future workshops:
+Your feedback helps us improve the workshop experience:
 
 | Aspect | Rating (1-5) | Comments |
 |--------|--------------|----------|

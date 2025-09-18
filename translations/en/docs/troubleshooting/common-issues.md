@@ -1,41 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:25:17+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T12:47:17+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "en"
 }
 -->
-# Common Issues & Solutions
+# Common Issues and Solutions
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
+- **⬅️ Previous Chapter**: [Chapter 6: Pre-flight Checks](../pre-deployment/preflight-checks.md)
+- **➡️ Next**: [Debugging Guide](debugging.md)
+- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
 
 ## Introduction
 
-This comprehensive troubleshooting guide addresses the most common issues encountered when using Azure Developer CLI. Learn how to identify, troubleshoot, and resolve problems related to authentication, deployment, infrastructure provisioning, and application configuration. Each issue includes detailed symptoms, root causes, and step-by-step solutions.
+This guide provides a detailed overview of common issues encountered when using Azure Developer CLI. It includes instructions on diagnosing, troubleshooting, and resolving problems related to authentication, deployment, infrastructure provisioning, and application configuration. Each issue is accompanied by symptoms, root causes, and step-by-step solutions.
 
 ## Learning Goals
 
-By completing this guide, you will:
-- Master techniques for diagnosing Azure Developer CLI issues
-- Understand common authentication and permission problems and how to resolve them
-- Fix deployment failures, infrastructure provisioning errors, and configuration issues
+By working through this guide, you will:
+- Learn diagnostic techniques for Azure Developer CLI issues
+- Understand and resolve common authentication and permission problems
+- Address deployment failures, infrastructure provisioning errors, and configuration issues
 - Implement proactive monitoring and debugging strategies
 - Apply systematic troubleshooting methods for complex problems
 - Set up proper logging and monitoring to prevent future issues
 
 ## Learning Outcomes
 
-After completing this guide, you will be able to:
-- Diagnose Azure Developer CLI issues using built-in diagnostic tools
+By the end of this guide, you will be able to:
+- Diagnose Azure Developer CLI issues using built-in tools
 - Independently resolve authentication, subscription, and permission-related problems
 - Effectively troubleshoot deployment failures and infrastructure provisioning errors
 - Debug application configuration and environment-specific issues
-- Implement monitoring and alerting to identify potential problems proactively
-- Follow best practices for logging, debugging, and resolving issues
+- Implement monitoring and alerting to identify potential problems early
+- Use best practices for logging, debugging, and resolving issues
 
 ## Quick Diagnostics
 
-Before diving into specific issues, run these commands to collect diagnostic information:
+Before addressing specific issues, use these commands to collect diagnostic information:
 
 ```bash
 # Check azd version and health
@@ -114,7 +121,7 @@ az account clear
 
 ### Issue: Resource name conflicts
 **Symptoms:**
-- Errors like "The resource name already exists"
+- Errors indicating "The resource name already exists"
 - Deployment fails during resource creation
 
 **Solutions:**
@@ -152,7 +159,7 @@ azd env set AZURE_LOCATION eastus2
 
 ### Issue: Quota exceeded errors
 **Symptoms:**
-- Errors like "Quota exceeded for resource type"
+- Errors such as "Quota exceeded for resource type"
 - "Maximum number of resources reached"
 
 **Solutions:**
@@ -249,7 +256,7 @@ az containerapp show --name my-app --resource-group my-rg
 
 ### Issue: Database connection failures
 **Symptoms:**
-- Application cannot connect to the database
+- Application unable to connect to the database
 - Connection timeout errors
 
 **Solutions:**
@@ -272,7 +279,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ### Issue: Environment variables not working
 **Symptoms:**
-- Application cannot read configuration values
+- Application unable to read configuration values
 - Environment variables appear empty
 
 **Solutions:**
@@ -293,7 +300,7 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 ### Issue: SSL/TLS certificate problems
 **Symptoms:**
-- HTTPS not working
+- HTTPS not functioning
 - Certificate validation errors
 
 **Solutions:**
@@ -310,8 +317,8 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 ### Issue: CORS configuration problems
 **Symptoms:**
-- Frontend cannot call API
-- Cross-origin requests are blocked
+- Frontend unable to call API
+- Cross-origin requests blocked
 
 **Solutions:**
 ```bash
@@ -334,7 +341,7 @@ azd show
 ### Issue: Environment switching problems
 **Symptoms:**
 - Incorrect environment being used
-- Configuration does not switch properly
+- Configuration not switching as expected
 
 **Solutions:**
 ```bash
@@ -354,7 +361,7 @@ azd env select production-new
 
 ### Issue: Environment corruption
 **Symptoms:**
-- Environment is in an invalid state
+- Environment shows an invalid state
 - Resources do not match the configuration
 
 **Solutions:**
@@ -465,7 +472,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 ## 🆘 Getting Additional Help
 
 ### When to Escalate
-- Authentication issues persist despite trying all solutions
+- Persistent authentication issues after trying all solutions
 - Infrastructure problems with Azure services
 - Billing or subscription-related issues
 - Security concerns or incidents
@@ -485,13 +492,13 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ```
 
 ### Information to Gather
-Before contacting support, collect the following:
+Before reaching out for support, collect the following:
 - Output of `azd version`
 - Output of `azd info`
 - Full error messages
 - Steps to reproduce the issue
 - Environment details (`azd env show`)
-- Timeline of when the issue started
+- Timeline of when the issue began
 
 ### Log Collection Script
 ```bash
@@ -575,7 +582,7 @@ az security assessment list --resource-group myrg
 
 ---
 
-**Tip**: Bookmark this guide and refer to it whenever you encounter issues. Most problems have been encountered before and have established solutions!
+**Tip**: Bookmark this guide and refer to it whenever you encounter issues. Most problems have established solutions!
 
 ---
 
