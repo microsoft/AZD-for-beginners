@@ -1,45 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:23:34+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T12:02:39+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "hr"
 }
 -->
-# Provisioniranje resursa - Infrastruktura kao kod s AZD
+# Provisioniranje Azure resursa s AZD-om
+
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod i implementacija
+- **⬅️ Prethodno**: [Vodič za implementaciju](deployment-guide.md)
+- **➡️ Sljedeće poglavlje**: [Poglavlje 5: Višeagencijska AI rješenja](../../examples/retail-scenario.md)
+- **🔧 Povezano**: [Poglavlje 6: Validacija prije implementacije](../pre-deployment/capacity-planning.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pokriva sve što trebate znati o provisioniranju i upravljanju Azure resursima koristeći Azure Developer CLI. Naučite implementirati obrasce Infrastrukture kao koda (IaC) od osnovnog stvaranja resursa do naprednih arhitektura infrastrukture na razini poduzeća koristeći Bicep, ARM predloške, Terraform i Pulumi.
+Ovaj sveobuhvatni vodič pokriva sve što trebate znati o provisioniranju i upravljanju Azure resursima koristeći Azure Developer CLI. Naučite primijeniti obrasce Infrastrukture kao koda (IaC), od osnovnog kreiranja resursa do naprednih infrastruktura na razini poduzeća koristeći Bicep, ARM predloške, Terraform i Pulumi.
 
 ## Ciljevi učenja
 
 Završetkom ovog vodiča, naučit ćete:
-- Ovladati principima Infrastrukture kao koda i provisioniranjem Azure resursa
+- Savladati principe Infrastrukture kao koda i provisioniranje Azure resursa
 - Razumjeti različite IaC alate koje podržava Azure Developer CLI
 - Dizajnirati i implementirati Bicep predloške za uobičajene arhitekture aplikacija
 - Konfigurirati parametre resursa, varijable i postavke specifične za okruženje
-- Implementirati napredne obrasce infrastrukture uključujući mreže i sigurnost
+- Implementirati napredne infrastrukturne obrasce uključujući mreže i sigurnost
 - Upravljati životnim ciklusom resursa, ažuriranjima i rješavanjem ovisnosti
 
 ## Ishodi učenja
 
 Po završetku, moći ćete:
 - Dizajnirati i provisionirati Azure infrastrukturu koristeći Bicep i ARM predloške
-- Konfigurirati složene arhitekture s više servisa uz pravilne ovisnosti resursa
-- Implementirati predloške s parametrima za različita okruženja i konfiguracije
+- Konfigurirati složene arhitekture s više usluga s pravilnim ovisnostima resursa
+- Implementirati parametarske predloške za različita okruženja i konfiguracije
 - Rješavati probleme s provisioniranjem infrastrukture i otklanjati greške u implementaciji
-- Primijeniti principe Azure Well-Architected Frameworka u dizajnu infrastrukture
+- Primijeniti principe Azure Well-Architected Frameworka na dizajn infrastrukture
 - Upravljati ažuriranjima infrastrukture i implementirati strategije verzioniranja infrastrukture
 
 ## Pregled provisioniranja infrastrukture
 
-Azure Developer CLI podržava različite alate za Infrastrukturu kao kod (IaC):
+Azure Developer CLI podržava više alata za Infrastrukturu kao kod (IaC):
 - **Bicep** (preporučeno) - Azureov jezik specifičan za domenu
 - **ARM predlošci** - JSON-based predlošci za Azure Resource Manager
 - **Terraform** - Alat za infrastrukturu na više oblaka
-- **Pulumi** - Moderni pristup infrastrukturi kao kodu koristeći programske jezike
+- **Pulumi** - Moderni alat za infrastrukturu kao kod s programskim jezicima
 
 ## Razumijevanje Azure resursa
 
@@ -52,13 +59,13 @@ Azure Account
 ```
 
 ### Uobičajene Azure usluge za aplikacije
-- **Računalni resursi**: App Service, Container Apps, Functions, Virtual Machines
+- **Računalstvo**: App Service, Container Apps, Functions, Virtual Machines
 - **Pohrana**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Mreža**: Virtual Network, Application Gateway, CDN
+- **Mreže**: Virtual Network, Application Gateway, CDN
 - **Sigurnost**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep predlošci infrastrukture
+## Bicep predlošci za infrastrukturu
 
 ### Osnovna struktura Bicep predloška
 ```bicep
@@ -130,7 +137,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Napredni obrasci u Bicepu
+### Napredni obrasci za Bicep
 
 #### Modularna infrastruktura
 ```bicep
@@ -181,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Uvjetno stvaranje resursa
+#### Uvjetno kreiranje resursa
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -370,7 +377,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Mreža i povezivost
+## 🌍 Mreže i povezivost
 
 ### Konfiguracija virtualne mreže
 ```bicep
@@ -435,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway s SSL-om
+### Application Gateway sa SSL-om
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Praćenje i preglednost
+## 📊 Praćenje i promatranje
 
 ### Application Insights
 ```bicep
@@ -859,16 +866,16 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Sljedeći koraci
 
-- [Planiranje prije implementacije](../pre-deployment/capacity-planning.md) - Provjera dostupnosti resursa
+- [Planiranje prije implementacije](../pre-deployment/capacity-planning.md) - Validacija dostupnosti resursa
 - [Uobičajeni problemi](../troubleshooting/common-issues.md) - Rješavanje problema s infrastrukturom
-- [Vodič za otklanjanje grešaka](../troubleshooting/debugging.md) - Otklanjanje problema s provisioniranjem
+- [Vodič za otklanjanje grešaka](../troubleshooting/debugging.md) - Otklanjanje grešaka u provisioniranju
 - [Odabir SKU-a](../pre-deployment/sku-selection.md) - Odabir odgovarajućih razina usluga
 
 ## Dodatni resursi
 
 - [Dokumentacija za Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [ARM predlošci za Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Resource Manager predlošci](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure arhitekturni centar](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
@@ -880,4 +887,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.

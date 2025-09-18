@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-10T06:38:47+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T11:03:46+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "ro"
 }
 -->
-# Verificări Preliminare - Validarea Pregătirii pentru Implementare
+# Verificări Preliminare pentru Implementările AZD
+
+**Navigare în capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 6 - Validare și Planificare Pre-Implementare
+- **⬅️ Precedent**: [Selecția SKU](sku-selection.md)
+- **➡️ Capitol Următor**: [Capitolul 7: Depanare](../troubleshooting/common-issues.md)
+- **🔧 Legat**: [Capitolul 4: Ghid de Implementare](../deployment/deployment-guide.md)
 
 ## Introducere
 
@@ -25,7 +32,7 @@ După parcurgerea acestui ghid, vei:
 
 ## Rezultate de Învățare
 
-La final, vei putea:
+După finalizare, vei putea:
 - Crea și executa scripturi cuprinzătoare de validare preliminară
 - Proiecta fluxuri de lucru automate de verificare pentru diferite scenarii de implementare
 - Implementa proceduri și politici de validare specifice mediului
@@ -57,7 +64,7 @@ Verificările preliminare sunt validări esențiale efectuate înainte de implem
 - **Conformitatea cu securitatea** politicilor organizaționale
 - **Estimarea costurilor** în limitele bugetului
 
-### Când să Rulezi Verificările Preliminare
+### Când să rulezi verificările preliminare
 
 - **Înainte de prima implementare** într-un mediu nou
 - **După modificări semnificative ale șabloanelor**
@@ -797,7 +804,7 @@ Printează această listă și verifică fiecare element înainte de implementar
 - [ ] Grupul de resurse țintă identificat sau poate fi creat
 
 #### ✅ Autentificare și Permisiuni
-- [ ] Autentificare reușită cu `azd auth login`
+- [ ] Autentificat cu succes folosind `azd auth login`
 - [ ] Utilizatorul are rolul de Contributor pe abonamentul/grupul de resurse țintă
 - [ ] Principalul de serviciu configurat pentru CI/CD (dacă este aplicabil)
 - [ ] Niciun certificat sau acreditiv expirat
@@ -821,26 +828,26 @@ Printează această listă și verifică fiecare element înainte de implementar
 - [ ] Conectivitatea rețelei la punctele finale Azure verificată
 - [ ] Setările firewall/proxy configurate dacă este necesar
 - [ ] Key Vault configurat pentru gestionarea secretelor
-- [ ] Identități gestionate utilizate unde este posibil
+- [ ] Identități gestionate utilizate acolo unde este posibil
 - [ ] Aplicarea HTTPS activată pentru aplicațiile web
 
 #### ✅ Managementul Costurilor
 - [ ] Estimările costurilor calculate folosind Azure Pricing Calculator
 - [ ] Alertele de buget configurate dacă este necesar
-- [ ] SKUs corespunzătoare selectate pentru tipul de mediu
+- [ ] SKU-uri adecvate selectate pentru tipul de mediu
 - [ ] Capacitatea rezervată luată în considerare pentru sarcinile de producție
 
 #### ✅ Monitorizare și Observabilitate
 - [ ] Application Insights configurat în șabloane
 - [ ] Workspace Log Analytics planificat
 - [ ] Regulile de alertă definite pentru metrici critice
-- [ ] Puncte finale de verificare a sănătății implementate în aplicații
+- [ ] Puncte de verificare a sănătății implementate în aplicații
 
 #### ✅ Backup și Recuperare
 - [ ] Strategia de backup definită pentru resursele de date
 - [ ] Obiectivele de timp de recuperare (RTO) documentate
 - [ ] Obiectivele de punct de recuperare (RPO) documentate
-- [ ] Planul de recuperare în caz de dezastru în vigoare pentru producție
+- [ ] Planul de recuperare în caz de dezastru în loc pentru producție
 
 ---
 
@@ -1165,7 +1172,7 @@ main "$@"
 
 ## Integrare cu CI/CD
 
-### Integrare cu GitHub Actions
+### Integrare GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1224,7 +1231,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Integrare cu Azure DevOps
+### Integrare Azure DevOps
 
 ```yaml
 trigger: none
@@ -1278,7 +1285,7 @@ steps:
 
 ## Rezumat al Bunelor Practici
 
-### ✅ Cele Mai Bune Practici pentru Verificările Preliminare
+### ✅ Cele Mai Bune Practici pentru Verificări Preliminare
 
 1. **Automatizează Unde Este Posibil**
    - Integrează verificările în pipeline-urile CI/CD
@@ -1287,7 +1294,7 @@ steps:
 
 2. **Validare Specifică Mediului**
    - Verificări diferite pentru dev/staging/prod
-   - Cerințe de securitate adecvate fiecărui mediu
+   - Cerințe de securitate adecvate pentru fiecare mediu
    - Optimizarea costurilor pentru medii non-producție
 
 3. **Acoperire Cuprinzătoare**
@@ -1301,12 +1308,12 @@ steps:
    - Mesaje de eroare detaliate cu pași de remediere
    - Rapoarte sumare pentru evaluare rapidă
 
-5. **Eșuează Rapid**
+5. **Oprește Rapid**
    - Oprește implementarea dacă verificările critice eșuează
    - Oferă ghid clar pentru rezolvare
    - Permite rularea ușoară a verificărilor din nou
 
-### Capcane Comune ale Verificărilor Preliminare
+### Greșeli Comune în Verificările Preliminare
 
 1. **Omiterea validării** pentru implementări "rapide"
 2. **Verificarea insuficientă a permisiunilor** înainte de implementare
@@ -1317,7 +1324,7 @@ steps:
 
 ---
 
-**Sfat Util**: Rulează verificările preliminare ca un job separat în pipeline-ul CI/CD înainte de jobul de implementare propriu-zis. Acest lucru îți permite să identifici problemele devreme și oferă feedback rapid dezvoltatorilor.
+**Sfat Util**: Rulează verificările preliminare ca un job separat în pipeline-ul CI/CD înainte de jobul de implementare propriu-zis. Acest lucru îți permite să identifici problemele devreme și oferă feedback mai rapid dezvoltatorilor.
 
 ---
 
@@ -1328,4 +1335,4 @@ steps:
 ---
 
 **Declinarea responsabilității**:  
-Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

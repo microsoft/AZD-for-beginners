@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T23:12:52+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T10:59:04+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "ro"
 }
 -->
 # Integrarea Azure AI Foundry cu AZD
 
-**Anterior:** [Primul Proiect](../getting-started/first-project.md) | **Următor:** [Implementarea Modelului AI](ai-model-deployment.md)
+**Navigare capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 2 - Dezvoltare AI-First
+- **⬅️ Capitol Precedent**: [Capitolul 1: Primul Tău Proiect](../getting-started/first-project.md)
+- **➡️ Următor**: [Implementarea Modelului AI](ai-model-deployment.md)
+- **🚀 Capitol Următor**: [Capitolul 3: Configurare](../getting-started/configuration.md)
 
 ## Prezentare Generală
 
@@ -27,8 +32,8 @@ Azure AI Foundry este platforma unificată de dezvoltare AI de la Microsoft, car
 
 ## AZD + Azure AI Foundry: Mai Bine Împreună
 
-| Caracteristică | Azure AI Foundry | Beneficiul Integrării AZD |
-|----------------|------------------|---------------------------|
+| Caracteristică | Azure AI Foundry | Beneficiu Integrării AZD |
+|----------------|------------------|--------------------------|
 | **Implementarea Modelului** | Implementare manuală prin portal | Implementări automate, repetabile |
 | **Infrastructură** | Provizionare prin clicuri | Infrastructură ca Cod (Bicep) |
 | **Gestionarea Mediului** | Focus pe un singur mediu | Multi-mediu (dev/staging/prod) |
@@ -220,7 +225,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Fluxuri de Lucru pentru Implementare
+## Fluxuri de Implementare
 
 ### Implementare cu o Singură Comandă
 
@@ -362,7 +367,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Optimizarea Performanței
 
-### Strategii de Caching
+### Strategii de Cache
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -426,9 +431,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Depanarea Problemelor Comune
+## Rezolvarea Problemelor Comune
 
-### Problema 1: Depășirea Cotei OpenAI
+### Problemă 1: Depășirea Cotei OpenAI
 
 **Simptome:**
 - Implementarea eșuează cu erori de cotă
@@ -448,7 +453,7 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Problema 2: Eșecuri de Autentificare
+### Problemă 2: Eșecuri de Autentificare
 
 **Simptome:**
 - Erori 401/403 la apelarea serviciilor AI
@@ -466,7 +471,7 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Problema 3: Probleme de Implementare a Modelului
+### Problemă 3: Probleme de Implementare a Modelului
 
 **Simptome:**
 - Modelele nu sunt disponibile în implementare
@@ -521,7 +526,7 @@ azd up
 
 ## Pași Următori
 
-1. **Încearcă Exemplele**: Începe cu un șablon pre-construit care se potrivește cazului tău de utilizare
+1. **Testează Exemplele**: Începe cu un șablon pre-construit care se potrivește cazului tău de utilizare
 2. **Personalizează pentru Nevoile Tale**: Modifică infrastructura și codul aplicației
 3. **Adaugă Monitorizare**: Implementează observabilitate cuprinzătoare
 4. **Optimizează Costurile**: Ajustează configurațiile pentru bugetul tău
@@ -536,7 +541,12 @@ azd up
 
 ---
 
-**Anterior:** [Primul Proiect](../getting-started/first-project.md) | **Următor:** [Implementarea Modelului AI](ai-model-deployment.md)
+**Navigare capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 2 - Dezvoltare AI-First
+- **⬅️ Capitol Precedent**: [Capitolul 1: Primul Tău Proiect](../getting-started/first-project.md)
+- **➡️ Următor**: [Implementarea Modelului AI](ai-model-deployment.md)
+- **🚀 Capitol Următor**: [Capitolul 3: Configurare](../getting-started/configuration.md)
 
 **Ai nevoie de ajutor?** Alătură-te discuțiilor comunității sau deschide o problemă în repository. Comunitatea Azure AI + AZD este aici pentru a te ajuta să reușești!
 

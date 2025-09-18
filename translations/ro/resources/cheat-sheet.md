@@ -1,36 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-10T07:42:52+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T11:11:13+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "ro"
 }
 -->
 # Fișă de Comenzi - Comenzi Esențiale AZD
 
+**Referință Rapidă pentru Toate Capitolele**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../README.md)
+- **📖 Start Rapid**: [Capitolul 1: Fundament & Start Rapid](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Comenzi AI**: [Capitolul 2: Dezvoltare AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Avansat**: [Capitolul 4: Infrastructură ca și Cod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Introducere
 
-Această fișă cuprinzătoare oferă o referință rapidă pentru cele mai utilizate comenzi Azure Developer CLI, organizate pe categorii, cu exemple practice. Perfectă pentru consultări rapide în timpul dezvoltării, depanării și operațiunilor zilnice cu proiectele azd.
+Această fișă cuprinzătoare oferă o referință rapidă pentru cele mai utilizate comenzi Azure Developer CLI, organizate pe categorii cu exemple practice. Perfectă pentru consultări rapide în timpul dezvoltării, depanării și operațiunilor zilnice cu proiectele azd.
 
 ## Obiective de Învățare
 
 Prin utilizarea acestei fișe, vei:
-- Avea acces instant la comenzi și sintaxă esențială Azure Developer CLI
+- Avea acces instant la comenzi și sintaxă esențiale Azure Developer CLI
 - Înțelege organizarea comenzilor pe categorii funcționale și cazuri de utilizare
 - Consulta exemple practice pentru scenarii comune de dezvoltare și implementare
 - Accesa comenzi de depanare pentru rezolvarea rapidă a problemelor
-- Găsi eficient opțiuni avansate de configurare și personalizare
+- Găsi opțiuni avansate de configurare și personalizare eficient
 - Localiza comenzi pentru gestionarea mediilor și fluxurilor de lucru multi-mediu
 
 ## Rezultate de Învățare
 
 Cu referințe regulate la această fișă, vei putea:
-- Executa comenzi azd cu încredere, fără a consulta documentația completă
-- Rezolva rapid problemele comune folosind comenzile de diagnosticare potrivite
-- Gestiona eficient mai multe medii și scenarii de implementare
-- Aplica funcționalități avansate și opțiuni de configurare azd după nevoie
-- Depana problemele de implementare folosind secvențe sistematice de comenzi
+- Executa comenzi azd cu încredere fără a consulta documentația completă
+- Rezolva rapid probleme comune utilizând comenzile de diagnosticare potrivite
+- Gestiona eficient multiple medii și scenarii de implementare
+- Aplica funcționalități avansate azd și opțiuni de configurare după necesitate
+- Depana problemele de implementare utilizând secvențe sistematice de comenzi
 - Optimiza fluxurile de lucru prin utilizarea eficientă a scurtăturilor și opțiunilor azd
 
 ## Comenzi de Început
@@ -48,7 +54,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Inițializarea Proiectului
+### Inițializare Proiect
 ```bash
 # Browse available templates
 azd template list
@@ -81,7 +87,7 @@ azd up --environment production
 azd up --parameter location=westus2
 ```
 
-### Doar Infrastructura
+### Doar Infrastructură
 ```bash
 # Provision Azure resources
 azd provision
@@ -93,7 +99,7 @@ azd provision --preview
 azd provision --what-if
 ```
 
-### Doar Aplicația
+### Doar Aplicație
 ```bash
 # Deploy application code
 azd deploy
@@ -404,7 +410,7 @@ azd service list --output table
 
 ## 🔧 Combinații Comune de Comenzi
 
-### Script de Verificare a Sănătății
+### Script pentru Verificarea Sănătății
 ```bash
 #!/bin/bash
 # Quick health check
@@ -433,7 +439,7 @@ for env in dev staging production; do
 done
 ```
 
-### Script de Curățare a Resurselor
+### Script pentru Curățarea Resurselor
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -492,9 +498,9 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Sfaturi Utile
+## 💡 Sfaturi Profesionale
 
-### Aliasuri pentru Fluxuri de Lucru mai Rapide
+### Aliasuri pentru Fluxuri de Lucru Mai Rapide
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -557,10 +563,10 @@ azd template show <template-name> --docs
 ---
 
 **Navigare**
-- **Lecția Anterioară**: [Verificări Preliminare](../docs/pre-deployment/preflight-checks.md)
+- **Lecția Anterioară**: [Verificări Pre-Implementare](../docs/pre-deployment/preflight-checks.md)
 - **Lecția Următoare**: [Glosar](glossary.md)
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

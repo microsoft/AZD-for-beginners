@@ -1,64 +1,71 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T22:41:35+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T12:01:50+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "hr"
 }
 -->
-# Osnove AZD-a - Razumijevanje Azure Developer CLI
+# AZD Osnove - Razumijevanje Azure Developer CLI
 
-**Prethodno:** [Instalacija i postavljanje](installation.md) | **Sljedeće:** [Konfiguracija](configuration.md)
+# AZD Osnove - Ključni pojmovi i temelji
+
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 1 - Osnove i brzi početak
+- **⬅️ Prethodno**: [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Sljedeće**: [Instalacija i postavljanje](installation.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 2: Razvoj temeljen na umjetnoj inteligenciji](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Uvod
 
-Ova lekcija uvodi vas u Azure Developer CLI (azd), moćan alat naredbenog retka koji ubrzava vaš put od lokalnog razvoja do implementacije na Azure. Naučit ćete osnovne koncepte, ključne značajke i kako azd pojednostavljuje implementaciju aplikacija prilagođenih oblaku.
+Ova lekcija uvodi vas u Azure Developer CLI (azd), moćan alat naredbenog retka koji ubrzava vaš put od lokalnog razvoja do implementacije na Azure. Naučit ćete osnovne pojmove, ključne značajke i kako azd pojednostavljuje implementaciju aplikacija temeljenih na oblaku.
 
 ## Ciljevi učenja
 
 Na kraju ove lekcije, moći ćete:
-- Razumjeti što je Azure Developer CLI i njegovu primarnu svrhu
-- Naučiti osnovne koncepte poput predložaka, okruženja i usluga
+- Razumjeti što je Azure Developer CLI i koja je njegova glavna svrha
+- Naučiti osnovne pojmove poput predložaka, okruženja i usluga
 - Istražiti ključne značajke, uključujući razvoj temeljen na predlošcima i infrastrukturu kao kod
-- Razumjeti strukturu projekta azd-a i tijek rada
-- Biti spremni instalirati i konfigurirati azd za svoj razvojni okoliš
+- Razumjeti strukturu i tijek rada azd projekata
+- Biti spremni instalirati i konfigurirati azd za svoje razvojno okruženje
 
 ## Ishodi učenja
 
 Nakon završetka ove lekcije, moći ćete:
-- Objasniti ulogu azd-a u modernim radnim tijekovima razvoja oblaka
-- Identificirati komponente strukture projekta azd-a
+- Objasniti ulogu azd-a u modernim radnim procesima razvoja u oblaku
+- Prepoznati komponente strukture azd projekta
 - Opisati kako predlošci, okruženja i usluge međusobno djeluju
-- Razumjeti prednosti infrastrukture kao kod s azd-om
+- Razumjeti prednosti infrastrukture kao koda s azd-om
 - Prepoznati različite azd naredbe i njihove svrhe
 
 ## Što je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je alat naredbenog retka osmišljen za ubrzavanje vašeg puta od lokalnog razvoja do implementacije na Azure. Pojednostavljuje proces izgradnje, implementacije i upravljanja aplikacijama prilagođenim oblaku na Azureu.
+Azure Developer CLI (azd) je alat naredbenog retka osmišljen za ubrzavanje vašeg puta od lokalnog razvoja do implementacije na Azure. Pojednostavljuje proces izgradnje, implementacije i upravljanja aplikacijama temeljenim na oblaku na Azure.
 
-## Osnovni koncepti
+## Ključni pojmovi
 
 ### Predlošci
-Predlošci su temelj azd-a. Sadrže:
+Predlošci su temelj azd-a. Oni sadrže:
 - **Kod aplikacije** - Vaš izvorni kod i ovisnosti
-- **Definicije infrastrukture** - Azure resurse definirane u Bicep-u ili Terraform-u
+- **Definicije infrastrukture** - Azure resurse definirane u Bicep ili Terraform
 - **Konfiguracijske datoteke** - Postavke i varijable okruženja
 - **Skripte za implementaciju** - Automatizirani tijekovi implementacije
 
 ### Okruženja
 Okruženja predstavljaju različite ciljeve implementacije:
-- **Razvoj** - Za testiranje i razvoj
+- **Razvojno** - Za testiranje i razvoj
 - **Staging** - Predprodukcijsko okruženje
-- **Produkcija** - Aktivno produkcijsko okruženje
+- **Produkcijsko** - Aktivno produkcijsko okruženje
 
 Svako okruženje održava vlastite:
-- Azure resursne grupe
+- Azure grupe resursa
 - Konfiguracijske postavke
 - Stanje implementacije
 
 ### Usluge
-Usluge su građevni blokovi vaše aplikacije:
+Usluge su gradivni blokovi vaše aplikacije:
 - **Frontend** - Web aplikacije, SPA-ovi
 - **Backend** - API-ji, mikroservisi
 - **Baza podataka** - Rješenja za pohranu podataka
@@ -76,8 +83,8 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastruktura kao kod
-- **Bicep** - Specifični jezik za Azure
-- **Terraform** - Alat za infrastrukturu na više oblaka
+- **Bicep** - Azureov jezik specifičan za domenu
+- **Terraform** - Alat za infrastrukturu u više oblaka
 - **ARM predlošci** - Predlošci za Azure Resource Manager
 
 ### 3. Integrirani tijekovi rada
@@ -99,7 +106,7 @@ azd env list
 
 ## 📁 Struktura projekta
 
-Tipična struktura projekta azd-a:
+Tipična struktura azd projekta:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -196,22 +203,22 @@ Naredba `azd down --force --purge` moćan je način za potpuno uklanjanje vašeg
 --force
 ```
 - Preskače potvrde.
-- Korisno za automatizaciju ili skriptiranje gdje ručni unos nije izvediv.
+- Korisno za automatizaciju ili skriptiranje gdje ručni unos nije moguć.
 - Osigurava da se uklanjanje nastavi bez prekida, čak i ako CLI otkrije nedosljednosti.
 
 ```
 --purge
 ```
 Briše **sve povezane metapodatke**, uključujući:
-Stanje okruženja
-Lokalnu `.azure` mapu
-Keširane informacije o implementaciji
-Sprječava azd da "pamti" prethodne implementacije, što može uzrokovati probleme poput neusklađenih resursnih grupa ili zastarjelih referenci registra.
+- Stanje okruženja
+- Lokalnu `.azure` mapu
+- Keširane informacije o implementaciji
+- Sprječava azd da "pamti" prethodne implementacije, što može uzrokovati probleme poput neusklađenih grupa resursa ili zastarjelih referenci registra.
 
 ### Zašto koristiti oboje?
-Kada naiđete na probleme s `azd up` zbog preostalog stanja ili djelomičnih implementacija, ova kombinacija osigurava **čistu početnu točku**.
+Kada naiđete na probleme s `azd up` zbog zaostalog stanja ili djelomičnih implementacija, ova kombinacija osigurava **čistu početnu točku**.
 
-Posebno je korisno nakon ručnog brisanja resursa u Azure portalu ili prilikom promjene predložaka, okruženja ili konvencija imenovanja resursnih grupa.
+Posebno je korisno nakon ručnog brisanja resursa u Azure portalu ili prilikom promjene predložaka, okruženja ili konvencija imenovanja grupa resursa.
 
 ### Upravljanje višestrukim okruženjima
 ```bash
@@ -264,18 +271,18 @@ azd init --template template1
 ```
 
 ### 2. Iskoristite predloške
-- Započnite s postojećim predlošcima
+- Počnite s postojećim predlošcima
 - Prilagodite ih svojim potrebama
 - Kreirajte predloške za ponovnu upotrebu unutar svoje organizacije
 
 ### 3. Izolacija okruženja
 - Koristite odvojena okruženja za razvoj/staging/produkciju
-- Nikada ne implementirajte direktno u produkciju s lokalnog računala
+- Nikada ne implementirajte izravno u produkciju s lokalnog računala
 - Koristite CI/CD tijekove rada za produkcijske implementacije
 
 ### 4. Upravljanje konfiguracijom
 - Koristite varijable okruženja za osjetljive podatke
-- Držite konfiguraciju pod kontrolom verzija
+- Držite konfiguraciju pod verzijskom kontrolom
 - Dokumentirajte postavke specifične za okruženje
 
 ## Napredak u učenju
@@ -294,28 +301,36 @@ azd init --template template1
 
 ### Napredni nivo (5. tjedan i dalje)
 1. Kreirajte prilagođene predloške
-2. Napredni obrasci infrastrukture
+2. Napredni infrastrukturni obrasci
 3. Implementacije u više regija
 4. Konfiguracije na razini poduzeća
 
 ## Sljedeći koraci
 
+**📖 Nastavite s učenjem u Poglavlju 1:**
 - [Instalacija i postavljanje](installation.md) - Instalirajte i konfigurirajte azd
-- [Vaš prvi projekt](first-project.md) - Praktični vodič
+- [Vaš prvi projekt](first-project.md) - Završite praktični vodič
 - [Vodič za konfiguraciju](configuration.md) - Napredne opcije konfiguracije
+
+**🎯 Spremni za sljedeće poglavlje?**
+- [Poglavlje 2: Razvoj temeljen na umjetnoj inteligenciji](../ai-foundry/azure-ai-foundry-integration.md) - Počnite graditi AI aplikacije
 
 ## Dodatni resursi
 
-- [Pregled Azure Developer CLI-a](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Pregled Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galerija predložaka](https://azure.github.io/awesome-azd/)
 - [Primjeri iz zajednice](https://github.com/Azure-Samples)
 
 ---
 
-**Prethodno:** [Instalacija i postavljanje](installation.md) | **Sljedeće:** [Konfiguracija](configuration.md)
-- **Sljedeća lekcija**: [Instalacija i postavljanje](installation.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 1 - Osnove i brzi početak  
+- **⬅️ Prethodno**: [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Sljedeće**: [Instalacija i postavljanje](installation.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 2: Razvoj temeljen na umjetnoj inteligenciji](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.

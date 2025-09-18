@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "90202d23bcaf40c8fd99b6a444ddce4a",
-  "translation_date": "2025-09-12T22:28:52+00:00",
+  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
+  "translation_date": "2025-09-18T11:00:40+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "ro"
 }
 -->
 # Ghid de Instalare și Configurare
 
-**Anterior:** [Documentația Principală](../../README.md) | **Următor:** [Bazele AZD](azd-basics.md)
+**Navigare Capitole:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 1 - Fundamente și Start Rapid
+- **⬅️ Precedent**: [Bazele AZD](azd-basics.md)
+- **➡️ Următor**: [Primul Tău Proiect](first-project.md)
+- **🚀 Capitol Următor**: [Capitolul 2: Dezvoltare AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introducere
 
-Acest ghid cuprinzător te va ghida prin procesul de instalare și configurare a Azure Developer CLI (azd) pe sistemul tău. Vei învăța diverse metode de instalare pentru diferite sisteme de operare, configurarea autentificării și setările inițiale pentru a pregăti mediul de dezvoltare pentru implementările Azure.
+Acest ghid cuprinzător te va ghida prin procesul de instalare și configurare a Azure Developer CLI (azd) pe sistemul tău. Vei învăța metode multiple de instalare pentru diferite sisteme de operare, configurarea autentificării și setările inițiale pentru a pregăti mediul de dezvoltare pentru implementările Azure.
 
 ## Obiective de Învățare
 
-La finalul acestei lecții, vei:
+Până la finalul acestei lecții, vei:
 - Instala cu succes Azure Developer CLI pe sistemul tău de operare
-- Configura autentificarea cu Azure folosind mai multe metode
+- Configura autentificarea cu Azure folosind metode multiple
 - Configura mediul de dezvoltare cu cerințele necesare
-- Înțelege diferitele opțiuni de instalare și când să le folosești
-- Depana problemele comune de instalare și configurare
+- Înțelege opțiunile de instalare și când să le folosești
+- Depana probleme comune de instalare și configurare
 
 ## Rezultate de Învățare
 
@@ -31,7 +36,7 @@ După finalizarea acestei lecții, vei putea:
 - Autentifica cu Azure folosind `azd auth login`
 - Verifica instalarea și testa comenzile de bază azd
 - Configura mediul de dezvoltare pentru utilizarea optimă a azd
-- Rezolva independent problemele comune de instalare
+- Rezolva independent probleme comune de instalare
 
 Acest ghid te va ajuta să instalezi și să configurezi Azure Developer CLI pe sistemul tău, indiferent de sistemul de operare sau mediul de dezvoltare.
 
@@ -116,7 +121,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd vine preinstalat în GitHub Codespaces. Creează un codespace și începe să folosești azd imediat.
+azd vine preinstalat în GitHub Codespaces. Creează pur și simplu un codespace și începe să folosești azd imediat.
 
 ### Docker
 
@@ -150,7 +155,7 @@ azd version 1.5.0 (commit abc123)
 
 ## Configurarea Autentificării
 
-### Autentificare cu Azure CLI (Recomandată)
+### Autentificare Azure CLI (Recomandată)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
@@ -165,7 +170,7 @@ az account show
 ```
 
 ### Autentificare prin Cod Dispozitiv
-Dacă folosești un sistem fără interfață grafică sau întâmpini probleme cu browserul:
+Dacă ești pe un sistem fără interfață grafică sau întâmpini probleme cu browserul:
 ```bash
 az login --use-device-code
 ```
@@ -217,8 +222,8 @@ Instalează extensia Azure Developer CLI:
 Funcționalități:
 - IntelliSense pentru azure.yaml
 - Comenzi integrate în terminal
-- Navigare prin șabloane
-- Monitorizarea implementărilor
+- Navigare șabloane
+- Monitorizare implementări
 
 ### GitHub Codespaces
 Creează un fișier `.devcontainer/devcontainer.json`:
@@ -283,7 +288,7 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### Obținerea Mai Multor Ajutoare
+### Obținerea Mai Multor Informații
 ```bash
 # Enable debug logging
 export AZD_DEBUG=true
@@ -321,7 +326,7 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## Următorii Pași
+## Pași Următori
 
 1. **Finalizează autentificarea**: Asigură-te că poți accesa abonamentul Azure
 2. **Încearcă prima implementare**: Urmează [Ghidul Primului Proiect](first-project.md)
@@ -331,18 +336,23 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## Suport
 
 Dacă întâmpini probleme:
-- [Documentația Oficială](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Documentație Oficială](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Raportează Probleme](https://github.com/Azure/azure-dev/issues)
 - [Discuții Comunitare](https://github.com/Azure/azure-dev/discussions)
 - [Suport Azure](https://azure.microsoft.com/support/)
 
 ---
 
-**Anterior:** [Documentația Principală](../../README.md) | **Următor:** [Bazele AZD](azd-basics.md)
+**Navigare Capitole:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 1 - Fundamente și Start Rapid
+- **⬅️ Precedent**: [Bazele AZD](azd-basics.md) 
+- **➡️ Următor**: [Primul Tău Proiect](first-project.md)
+- **🚀 Capitol Următor**: [Capitolul 2: Dezvoltare AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
-**Instalare Finalizată!** Continuă cu [Primul Tău Proiect](first-project.md) pentru a începe să construiești cu azd.
+**✅ Instalare Finalizată!** Continuă cu [Primul Tău Proiect](first-project.md) pentru a începe să construiești cu azd.
 
 ---
 
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

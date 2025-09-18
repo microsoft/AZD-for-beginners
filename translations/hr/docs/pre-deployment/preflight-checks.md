@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-10T06:40:19+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-18T12:04:27+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "hr"
 }
 -->
-# Provjere prije implementacije - Validacija spremnosti za implementaciju
+# Provjere prije implementacije za AZD implementacije
+
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 6 - Validacija i planiranje prije implementacije
+- **⬅️ Prethodno**: [Odabir SKU-a](sku-selection.md)
+- **➡️ Sljedeće poglavlje**: [Poglavlje 7: Rješavanje problema](../troubleshooting/common-issues.md)
+- **🔧 Povezano**: [Poglavlje 4: Vodič za implementaciju](../deployment/deployment-guide.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pruža skripte i postupke za validaciju prije implementacije kako bi se osigurale uspješne implementacije Azure Developer CLI-a prije nego što započnu. Naučite kako implementirati automatizirane provjere za autentifikaciju, dostupnost resursa, kvote, usklađenost sa sigurnosnim zahtjevima i performanse kako biste spriječili neuspjehe implementacije i optimizirali stope uspjeha implementacije.
+Ovaj sveobuhvatni vodič pruža skripte i postupke za validaciju prije implementacije kako bi se osigurale uspješne implementacije pomoću Azure Developer CLI-a prije nego što započnu. Naučite kako implementirati automatizirane provjere za autentifikaciju, dostupnost resursa, kvote, usklađenost sa sigurnosnim zahtjevima i zahtjeve za performansama kako biste spriječili neuspjehe implementacije i optimizirali stope uspjeha implementacije.
 
 ## Ciljevi učenja
 
-Nakon završetka ovog vodiča, naučit ćete:
+Završetkom ovog vodiča, naučit ćete:
 - Ovladati tehnikama i skriptama za automatiziranu validaciju prije implementacije
 - Razumjeti strategije sveobuhvatne provjere autentifikacije, dozvola i kvota
 - Implementirati postupke validacije dostupnosti i kapaciteta resursa
-- Konfigurirati provjere sigurnosti i usklađenosti s organizacijskim politikama
-- Dizajnirati procjene troškova i radne tokove validacije budžeta
+- Konfigurirati provjere sigurnosti i usklađenosti prema organizacijskim politikama
+- Dizajnirati procese za procjenu troškova i validaciju budžeta
 - Kreirati prilagođenu automatizaciju provjera prije implementacije za CI/CD pipeline
 
 ## Ishodi učenja
 
 Po završetku, moći ćete:
 - Kreirati i izvršavati sveobuhvatne skripte za validaciju prije implementacije
-- Dizajnirati automatizirane radne tokove provjere za različite scenarije implementacije
+- Dizajnirati automatizirane procese provjere za različite scenarije implementacije
 - Implementirati postupke i politike validacije specifične za okruženje
-- Konfigurirati proaktivno praćenje i upozorenja za spremnost za implementaciju
+- Konfigurirati proaktivno praćenje i upozorenja za spremnost implementacije
 - Rješavati probleme prije implementacije i provoditi korektivne mjere
-- Integrirati provjere prije implementacije u DevOps pipeline i radne tokove automatizacije
+- Integrirati provjere prije implementacije u DevOps pipeline i automatizacijske procese
 
 ## Sadržaj
 
@@ -48,12 +55,12 @@ Po završetku, moći ćete:
 
 ## Pregled
 
-Provjere prije implementacije su ključne validacije koje se provode prije implementacije kako bi se osiguralo:
+Provjere prije implementacije ključne su validacije koje se provode prije implementacije kako bi se osiguralo:
 
 - **Dostupnost resursa** i kvote u ciljnim regijama
 - **Autentifikacija i dozvole** su pravilno konfigurirane
 - **Valjanost predloška** i ispravnost parametara
-- **Povezivost mreže** i ovisnosti
+- **Povezanost mreže** i ovisnosti
 - **Usklađenost sa sigurnosnim zahtjevima** organizacijskih politika
 - **Procjena troškova** unutar budžetskih ograničenja
 
@@ -63,7 +70,7 @@ Provjere prije implementacije su ključne validacije koje se provode prije imple
 - **Nakon značajnih promjena predloška**
 - **Prije implementacija u produkciju**
 - **Prilikom promjene Azure regija**
-- **Kao dio CI/CD pipelinea**
+- **Kao dio CI/CD pipeline-a**
 
 ---
 
@@ -785,16 +792,16 @@ main "$@"
 
 ## Ručno provjeravanje
 
-### Lista za provjeru prije implementacije
+### Popis za provjeru prije implementacije
 
-Ispišite ovu listu i provjerite svaki stavku prije implementacije:
+Ispišite ovaj popis i provjerite svaki stavku prije implementacije:
 
 #### ✅ Postavljanje okruženja
 - [ ] AZD CLI instaliran i ažuriran na najnoviju verziju
 - [ ] Azure CLI instaliran i autentificiran
 - [ ] Odabrana ispravna Azure pretplata
 - [ ] Naziv okruženja je jedinstven i slijedi konvencije imenovanja
-- [ ] Ciljna grupa resursa identificirana ili se može kreirati
+- [ ] Identificirana ciljana grupa resursa ili se može kreirati
 
 #### ✅ Autentifikacija i dozvole
 - [ ] Uspješno autentificirano pomoću `azd auth login`
@@ -808,13 +815,13 @@ Ispišite ovu listu i provjerite svaki stavku prije implementacije:
 - [ ] Bicep predlošci u direktoriju `infra/` su prisutni
 - [ ] `main.bicep` se kompajlira bez grešaka (`az bicep build --file infra/main.bicep`)
 - [ ] Svi potrebni parametri imaju zadane vrijednosti ili će biti osigurani
-- [ ] Nema hardkodiranih tajni u predlošcima
+- [ ] Nema tvrdokodiranih tajni u predlošcima
 
 #### ✅ Planiranje resursa
 - [ ] Odabrana i validirana ciljana Azure regija
 - [ ] Potrebne Azure usluge dostupne u ciljnoj regiji
 - [ ] Dostupne dovoljne kvote za planirane resurse
-- [ ] Provjereni konflikti u imenovanju resursa
+- [ ] Provjereni sukobi u imenovanju resursa
 - [ ] Razumijevanje ovisnosti između resursa
 
 #### ✅ Mreža i sigurnost
@@ -825,16 +832,16 @@ Ispišite ovu listu i provjerite svaki stavku prije implementacije:
 - [ ] Omogućeno prisilno korištenje HTTPS-a za web aplikacije
 
 #### ✅ Upravljanje troškovima
-- [ ] Procjene troškova izračunate pomoću Azure Pricing Calculatora
+- [ ] Procjene troškova izračunate pomoću Azure Pricing Calculator
 - [ ] Konfigurirana upozorenja za budžet ako je potrebno
-- [ ] Odabrani odgovarajući SKUs za tip okruženja
+- [ ] Odabrani odgovarajući SKU-ovi za tip okruženja
 - [ ] Razmotrena rezervirana kapaciteta za produkcijske radne opterećenja
 
 #### ✅ Praćenje i vidljivost
 - [ ] Application Insights konfiguriran u predlošcima
 - [ ] Planiran Log Analytics workspace
-- [ ] Definirana pravila upozorenja za kritične metrike
-- [ ] Implementirani endpointi za provjeru zdravlja u aplikacijama
+- [ ] Definirana pravila upozorenja za ključne metrike
+- [ ] Implementirane endpoint provjere zdravlja u aplikacijama
 
 #### ✅ Backup i oporavak
 - [ ] Definirana strategija backup-a za podatkovne resurse
@@ -1283,10 +1290,10 @@ steps:
 1. **Automatizirajte gdje je moguće**
    - Integrirajte provjere u CI/CD pipeline
    - Koristite skripte za ponovljive validacije
-   - Pohranite rezultate za potrebe revizije
+   - Pohranite rezultate za revizijske tragove
 
 2. **Validacija specifična za okruženje**
-   - Različite provjere za razvoj/staging/produkciju
+   - Različite provjere za razvoj/testiranje/produkciju
    - Odgovarajući sigurnosni zahtjevi po okruženju
    - Optimizacija troškova za neprodukcijska okruženja
 
@@ -1294,7 +1301,7 @@ steps:
    - Autentifikacija i dozvole
    - Kvote resursa i dostupnost
    - Validacija predloška i sintakse
-   - Sigurnosni i usklađenosni zahtjevi
+   - Sigurnosni i usklađenost zahtjevi
 
 4. **Jasno izvještavanje**
    - Statusni indikatori u boji
@@ -1303,7 +1310,7 @@ steps:
 
 5. **Brzo zaustavljanje**
    - Zaustavite implementaciju ako ključne provjere ne uspiju
-   - Pružite jasne smjernice za rješavanje problema
+   - Pružite jasne smjernice za rješavanje
    - Omogućite jednostavno ponovno pokretanje provjera
 
 ### Uobičajene greške u provjerama prije implementacije
@@ -1311,19 +1318,19 @@ steps:
 1. **Preskakanje validacije** za "brze" implementacije
 2. **Nedovoljna provjera dozvola** prije implementacije
 3. **Ignoriranje ograničenja kvota** dok implementacija ne uspije
-4. **Nevalidiranje predložaka** u CI/CD pipelineu
+4. **Nevalidiranje predložaka** u CI/CD pipeline-u
 5. **Izostavljanje sigurnosne validacije** za produkcijska okruženja
 6. **Nedovoljna procjena troškova** što dovodi do iznenađenja u budžetu
 
 ---
 
-**Savjet**: Provodite provjere prije implementacije kao zaseban posao u vašem CI/CD pipelineu prije stvarnog posla implementacije. Ovo omogućuje rano otkrivanje problema i pruža brže povratne informacije za developere.
+**Savjet**: Provodite provjere prije implementacije kao zaseban posao u vašem CI/CD pipeline-u prije stvarnog posla implementacije. To omogućuje rano otkrivanje problema i pruža brže povratne informacije za razvojne timove.
 
 ---
 
 **Navigacija**
 - **Prethodna lekcija**: [Odabir SKU-a](sku-selection.md)
-- **Sljedeća lekcija**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Sljedeća lekcija**: [Brzi vodič](../../resources/cheat-sheet.md)
 
 ---
 

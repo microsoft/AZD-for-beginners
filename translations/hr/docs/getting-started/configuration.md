@@ -1,24 +1,29 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:41:20+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T12:01:29+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "hr"
 }
 -->
 # Vodič za konfiguraciju
 
-**Prethodno:** [Osnove AZD-a](azd-basics.md) | **Sljedeće:** [Prvi projekt](first-project.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 3 - Konfiguracija i autentifikacija
+- **⬅️ Prethodno**: [Vaš prvi projekt](first-project.md)
+- **➡️ Sljedeće**: [Vodič za implementaciju](../deployment/deployment-guide.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 4: Infrastruktura kao kod](../deployment/deployment-guide.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pokriva sve aspekte konfiguriranja Azure Developer CLI-a za optimalne razvojne i implementacijske tijekove rada. Naučit ćete o hijerarhiji konfiguracije, upravljanju okruženjima, metodama autentifikacije i naprednim obrascima konfiguracije koji omogućuju učinkovite i sigurne implementacije na Azureu.
+Ovaj sveobuhvatni vodič pokriva sve aspekte konfiguracije Azure Developer CLI-a za optimalne razvojne i implementacijske procese. Naučit ćete o hijerarhiji konfiguracije, upravljanju okruženjima, metodama autentifikacije i naprednim obrascima konfiguracije koji omogućuju učinkovite i sigurne implementacije na Azureu.
 
 ## Ciljevi učenja
 
 Na kraju ove lekcije, moći ćete:
-- Savladati hijerarhiju konfiguracije azd-a i razumjeti kako se postavke prioritiziraju
+- Ovladati hijerarhijom konfiguracije azd-a i razumjeti kako se postavke prioritiziraju
 - Učinkovito konfigurirati globalne i projektno specifične postavke
 - Upravljati višestrukim okruženjima s različitim konfiguracijama
 - Implementirati sigurne obrasce autentifikacije i autorizacije
@@ -26,14 +31,14 @@ Na kraju ove lekcije, moći ćete:
 
 ## Ishodi učenja
 
-Nakon završetka ove lekcije, moći ćete:
-- Konfigurirati azd za optimalne razvojne tijekove rada
+Nakon završetka ove lekcije, bit ćete sposobni:
+- Konfigurirati azd za optimalne razvojne procese
 - Postaviti i upravljati višestrukim okruženjima za implementaciju
 - Provoditi sigurne prakse upravljanja konfiguracijom
 - Rješavati probleme povezane s konfiguracijom
 - Prilagoditi ponašanje azd-a specifičnim zahtjevima organizacije
 
-Ovaj sveobuhvatni vodič pokriva sve aspekte konfiguriranja Azure Developer CLI-a za optimalne razvojne i implementacijske tijekove rada.
+Ovaj sveobuhvatni vodič pokriva sve aspekte konfiguracije Azure Developer CLI-a za optimalne razvojne i implementacijske procese.
 
 ## Hijerarhija konfiguracije
 
@@ -219,7 +224,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Konfiguracija okruženja
-Svako okruženje ima svoju konfiguraciju u `.azure/<env-name>/config.json`:
+Svako okruženje ima vlastitu konfiguraciju u `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -287,7 +292,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Autentifikacija putem Service Principala
-Za CI/CD tijekove rada:
+Za CI/CD procese:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -300,7 +305,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Upravljani identitet
-Za okruženja hostirana na Azureu:
+Za okruženja hostana na Azureu:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -549,10 +554,14 @@ Dokumentirajte svoju konfiguraciju u `CONFIG.md`:
 
 ---
 
-**Prethodno:** [Osnove AZD-a](azd-basics.md) | **Sljedeće:** [Prvi projekt](first-project.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 3 - Konfiguracija i autentifikacija
+- **⬅️ Prethodno**: [Vaš prvi projekt](first-project.md)
+- **➡️ Sljedeće poglavlje**: [Poglavlje 4: Infrastruktura kao kod](../deployment/deployment-guide.md)
 - **Sljedeća lekcija**: [Vaš prvi projekt](first-project.md)
 
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.

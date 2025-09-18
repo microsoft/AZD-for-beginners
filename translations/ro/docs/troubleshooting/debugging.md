@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:33:29+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T11:02:58+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ro"
 }
 -->
-# Ghid de depanare - Tehnici avansate de analiză a jurnalelor
+# Ghid de depanare pentru implementările AZD
+
+**Navigare capitole:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 7 - Depanare și Debugging
+- **⬅️ Precedent**: [Probleme Comune](common-issues.md)
+- **➡️ Următor**: [Depanare Specifică AI](ai-troubleshooting.md)
+- **🚀 Capitol Următor**: [Capitolul 8: Practici de Producție și Enterprise](../ai-foundry/production-ai-practices.md)
 
 ## Introducere
 
-Acest ghid cuprinzător oferă strategii avansate de depanare, instrumente și tehnici pentru diagnosticarea și rezolvarea problemelor complexe legate de implementările Azure Developer CLI. Învață metodologii sistematice de depanare, tehnici de analiză a jurnalelor, profilare a performanței și utilizarea instrumentelor avansate de diagnostic pentru a rezolva eficient problemele de implementare și rulare.
+Acest ghid cuprinzător oferă strategii avansate de depanare, instrumente și tehnici pentru diagnosticarea și rezolvarea problemelor complexe legate de implementările Azure Developer CLI. Învață metodologii sistematice de depanare, tehnici de analiză a jurnalelor, profilarea performanței și utilizarea instrumentelor avansate de diagnostic pentru a rezolva eficient problemele de implementare și runtime.
 
 ## Obiective de învățare
 
-Parcurgând acest ghid, vei:
+După parcurgerea acestui ghid, vei:
 - Stăpâni metodologii sistematice de depanare pentru problemele Azure Developer CLI
 - Înțelege configurarea avansată a jurnalelor și tehnicile de analiză a acestora
 - Implementa strategii de profilare și monitorizare a performanței
 - Utiliza instrumentele și serviciile de diagnostic Azure pentru rezolvarea problemelor complexe
-- Aplica tehnici de depanare a rețelei și de securitate
-- Configura monitorizare și alerte cuprinzătoare pentru detectarea proactivă a problemelor
+- Aplica tehnici de depanare a rețelei și securității
+- Configura monitorizare și alertare cuprinzătoare pentru detectarea proactivă a problemelor
 
-## Rezultate așteptate
+## Rezultate de învățare
 
-La finalizarea ghidului, vei putea:
+După finalizare, vei putea:
 - Aplica metodologia TRIAGE pentru a depana sistematic probleme complexe de implementare
 - Configura și analiza informații detaliate de jurnalizare și trasare
-- Utiliza eficient Azure Monitor, Application Insights și instrumentele de diagnostic
-- Depana independent probleme de conectivitate a rețelei, autentificare și permisiuni
+- Utiliza Azure Monitor, Application Insights și instrumente de diagnostic în mod eficient
+- Depana probleme de conectivitate, autentificare și permisiuni în mod independent
 - Implementa strategii de monitorizare și optimizare a performanței
-- Crea scripturi personalizate de depanare și automatizări pentru probleme recurente
+- Crea scripturi personalizate de depanare și automatizare pentru probleme recurente
 
 ## Metodologia de depanare
 
@@ -41,7 +48,7 @@ La finalizarea ghidului, vei putea:
 - **I**zolare: Ce componentă eșuează?
 - **A**naliză: Ce ne spun jurnalele?
 - **C**olectare: Adună toate informațiile relevante
-- **E**scalare: Când să ceri ajutor suplimentar
+- **E**scaladare: Când să ceri ajutor suplimentar
 
 ## Activarea modului de depanare
 
@@ -59,7 +66,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Configurare pentru depanare
+### Configurare de depanare
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -176,7 +183,7 @@ debug_container() {
 }
 ```
 
-### Depanare conexiuni la baze de date
+### Depanare conexiuni baze de date
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,7 +202,7 @@ debug_database() {
 }
 ```
 
-## 🔬 Depanare a performanței
+## 🔬 Depanare performanță
 
 ### Monitorizarea performanței aplicațiilor
 ```bash
@@ -397,7 +404,7 @@ analyze_resources() {
 }
 ```
 
-## 🔒 Depanare de securitate
+## 🔒 Depanare securitate
 
 ### Depanare fluxuri de autentificare
 ```bash
@@ -512,7 +519,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Proceduri de urgență pentru depanare
+## 🚨 Proceduri de depanare de urgență
 
 ### Răspuns la probleme în producție
 ```bash
@@ -602,9 +609,9 @@ quick_rollback() {
 }
 ```
 
-## 📊 Panouri de depanare
+## 📊 Dashboard-uri de depanare
 
-### Panou personalizat de monitorizare
+### Dashboard personalizat de monitorizare
 ```bash
 # Create Application Insights queries for debugging
 create_debug_queries() {
@@ -653,9 +660,9 @@ aggregate_logs() {
 
 ### Scripturi personalizate de depanare
 Creează un director `scripts/debug/` cu:
-- `health-check.sh` - Verificare completă a stării
+- `health-check.sh` - Verificare completă a sănătății
 - `performance-test.sh` - Testare automată a performanței
-- `log-analyzer.py` - Analiză avansată a jurnalelor
+- `log-analyzer.py` - Parsare și analiză avansată a jurnalelor
 - `resource-validator.sh` - Validare infrastructură
 
 ### Integrare monitorizare
@@ -678,31 +685,31 @@ hooks:
 ## Cele mai bune practici
 
 1. **Activează întotdeauna jurnalizarea de depanare** în medii non-producție
-2. **Creează cazuri de testare reproductibile** pentru probleme
+2. **Creează cazuri de test reproducibile** pentru probleme
 3. **Documentează procedurile de depanare** pentru echipa ta
-4. **Automatizează verificările de stare** și monitorizarea
-5. **Menține instrumentele de depanare actualizate** cu modificările aplicației
+4. **Automatizează verificările de sănătate** și monitorizarea
+5. **Menține instrumentele de depanare actualizate** cu modificările aplicației tale
 6. **Exersează procedurile de depanare** în perioade fără incidente
 
-## Pașii următori
+## Pași următori
 
-- [Planificarea capacității](../pre-deployment/capacity-planning.md) - Planifică cerințele de resurse
+- [Planificarea Capacității](../pre-deployment/capacity-planning.md) - Planifică cerințele de resurse
 - [Selecția SKU](../pre-deployment/sku-selection.md) - Alege nivelurile de servicii potrivite
-- [Verificări preliminare](../pre-deployment/preflight-checks.md) - Validare înainte de implementare
-- [Fișă de referință](../../resources/cheat-sheet.md) - Comenzi rapide de referință
+- [Verificări Preflight](../pre-deployment/preflight-checks.md) - Validare înainte de implementare
+- [Fișă de Cheat](../../resources/cheat-sheet.md) - Comenzi de referință rapidă
 
 ---
 
-**Reține**: O bună depanare înseamnă să fii sistematic, meticulos și răbdător. Aceste instrumente și tehnici te vor ajuta să diagnostichezi problemele mai rapid și mai eficient.
+**Reține**: O depanare eficientă presupune să fii sistematic, atent și răbdător. Aceste instrumente și tehnici te vor ajuta să diagnostichezi problemele mai rapid și mai eficient.
 
 ---
 
 **Navigare**
-- **Lecția anterioară**: [Probleme comune](common-issues.md)
+- **Lecția Anterioară**: [Probleme Comune](common-issues.md)
 
-- **Lecția următoare**: [Planificarea capacității](../pre-deployment/capacity-planning.md)
+- **Lecția Următoare**: [Planificarea Capacității](../pre-deployment/capacity-planning.md)
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

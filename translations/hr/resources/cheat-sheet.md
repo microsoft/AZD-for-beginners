@@ -1,39 +1,45 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-10T07:43:47+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-18T12:10:41+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "hr"
 }
 -->
-# Popis naredbi - Osnovne AZD naredbe
+# Brzi vodič za naredbe - Osnovne AZD naredbe
+
+**Brzi pregled svih poglavlja**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../README.md)
+- **📖 Brzi početak**: [Poglavlje 1: Osnove i brzi početak](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI naredbe**: [Poglavlje 2: Razvoj usmjeren na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Napredno**: [Poglavlje 4: Infrastruktura kao kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Uvod
 
-Ovaj sveobuhvatni popis pruža brzi pregled najčešće korištenih naredbi Azure Developer CLI, organiziranih po kategorijama s praktičnim primjerima. Idealan za brze pretrage tijekom razvoja, otklanjanja poteškoća i svakodnevnog rada s azd projektima.
+Ovaj sveobuhvatni vodič pruža brzi pregled najčešće korištenih naredbi Azure Developer CLI-a, organiziranih po kategorijama s praktičnim primjerima. Idealan za brze pretrage tijekom razvoja, otklanjanja poteškoća i svakodnevnog rada s azd projektima.
 
 ## Ciljevi učenja
 
-Korištenjem ovog popisa, moći ćete:
-- Imati trenutačan pristup ključnim naredbama i sintaksi Azure Developer CLI-a
+Korištenjem ovog vodiča, moći ćete:
+- Imati trenutni pristup osnovnim naredbama i sintaksi Azure Developer CLI-a
 - Razumjeti organizaciju naredbi prema funkcionalnim kategorijama i slučajevima upotrebe
 - Referencirati praktične primjere za uobičajene scenarije razvoja i implementacije
-- Pristupiti naredbama za otklanjanje poteškoća radi brzog rješavanja problema
-- Učinkovito pronaći opcije za naprednu konfiguraciju i prilagodbu
-- Locirati naredbe za upravljanje okruženjima i rad s više okruženja
+- Pronaći naredbe za otklanjanje poteškoća za brzo rješavanje problema
+- Učinkovito pronaći napredne opcije konfiguracije i prilagodbe
+- Locirati naredbe za upravljanje okruženjem i rad s više okruženja
 
 ## Ishodi učenja
 
-Redovitim korištenjem ovog popisa, moći ćete:
-- Samouvjereno izvršavati azd naredbe bez potrebe za potpunom dokumentacijom
+Redovitim korištenjem ovog vodiča, moći ćete:
+- Pouzdano izvršavati azd naredbe bez potrebe za detaljnom dokumentacijom
 - Brzo rješavati uobičajene probleme koristeći odgovarajuće dijagnostičke naredbe
-- Učinkovito upravljati višestrukim okruženjima i scenarijima implementacije
+- Učinkovito upravljati više okruženja i scenarija implementacije
 - Primijeniti napredne značajke i opcije konfiguracije azd-a prema potrebi
-- Sustavno rješavati probleme s implementacijom koristeći sekvence naredbi
-- Optimizirati radne procese kroz učinkovito korištenje azd prečaca i opcija
+- Sustavno otklanjati poteškoće s implementacijom koristeći sekvence naredbi
+- Optimizirati radne procese kroz učinkovito korištenje prečaca i opcija azd-a
 
-## Početne naredbe
+## Naredbe za početak
 
 ### Autentifikacija
 ```bash
@@ -66,7 +72,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Osnovne naredbe za implementaciju
 
-### Cjelokupni tijek implementacije
+### Kompletan tijek implementacije
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -115,9 +121,9 @@ azd package
 azd package --service api
 ```
 
-## 🌍 Upravljanje okruženjima
+## 🌍 Upravljanje okruženjem
 
-### Operacije s okruženjima
+### Operacije s okruženjem
 ```bash
 # List all environments
 azd env list
@@ -243,7 +249,7 @@ azd info
 
 ## 🔧 Napredne naredbe
 
-### CI/CD i pipeline
+### Pipeline i CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -298,7 +304,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Rad s više okruženja
+### Radni proces s više okruženja
 ```bash
 # Set up environments
 azd env new dev
@@ -336,9 +342,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Naredbe za otklanjanje grešaka
+## 🔍 Naredbe za otklanjanje poteškoća
 
-### Informacije za otklanjanje grešaka
+### Informacije za otklanjanje poteškoća
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -354,7 +360,7 @@ azd info
 az account show
 ```
 
-### Otklanjanje grešaka u predlošcima
+### Otklanjanje poteškoća s predlošcima
 ```bash
 # List available templates with details
 azd template list --output json
@@ -492,9 +498,9 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Savjeti za profesionalce
+## 💡 Korisni savjeti
 
-### Alias za brži rad
+### Alias za brži radni proces
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -503,7 +509,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Prečaci za funkcije
+### Prečaci funkcija
 ```bash
 # Quick environment switching
 azd-env() {
@@ -541,7 +547,7 @@ azd version
 azd version --output json
 ```
 
-### Poveznice na dokumentaciju
+### Linkovi na dokumentaciju
 ```bash
 # Open documentation in browser
 azd docs
@@ -552,15 +558,15 @@ azd template show <template-name> --docs
 
 ---
 
-**Savjet**: Označite ovaj popis kao bookmark i koristite `Ctrl+F` za brzo pronalaženje potrebnih naredbi!
+**Savjet**: Označite ovaj vodič i koristite `Ctrl+F` za brzo pronalaženje potrebnih naredbi!
 
 ---
 
 **Navigacija**
-- **Prethodna lekcija**: [Preflight provjere](../docs/pre-deployment/preflight-checks.md)
+- **Prethodna lekcija**: [Provjere prije implementacije](../docs/pre-deployment/preflight-checks.md)
 - **Sljedeća lekcija**: [Pojmovnik](glossary.md)
 
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden korištenjem AI usluge za prijevod [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.

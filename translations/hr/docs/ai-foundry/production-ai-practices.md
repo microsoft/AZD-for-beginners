@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "db39cf7acc134578c846d7accd6bb04d",
-  "translation_date": "2025-09-12T23:18:30+00:00",
+  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
+  "translation_date": "2025-09-18T11:59:48+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "hr"
 }
 -->
 # Najbolje prakse za produkcijske AI radne opterećenja s AZD-om
 
-**Prethodno:** [AI Workshop Lab](ai-workshop-lab.md) | **Sljedeće:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 8 - Produkcijski i poslovni obrasci
+- **⬅️ Prethodno poglavlje**: [Poglavlje 7: Rješavanje problema](../troubleshooting/debugging.md)
+- **⬅️ Također povezano**: [AI radionica laboratorij](ai-workshop-lab.md)
+- **🎯 Završetak tečaja**: [AZD za početnike](../../README.md)
 
 ## Pregled
 
@@ -17,19 +22,19 @@ Ovaj vodič pruža sveobuhvatne najbolje prakse za implementaciju produkcijski s
 
 ## Ključni izazovi
 
-Na temelju rezultata ankete u zajednici, ovo su glavni izazovi s kojima se developeri suočavaju:
+Na temelju rezultata ankete u našoj zajednici, ovo su glavni izazovi s kojima se developeri suočavaju:
 
 - **45%** ima poteškoća s implementacijom AI sustava koji koriste više servisa
 - **38%** ima problema s upravljanjem vjerodajnicama i tajnama  
 - **35%** smatra da je produkcijska spremnost i skaliranje izazovno
 - **32%** treba bolje strategije za optimizaciju troškova
-- **29%** zahtijeva poboljšano praćenje i otklanjanje problema
+- **29%** zahtijeva poboljšano praćenje i rješavanje problema
 
 ## Arhitekturni obrasci za produkcijski AI
 
-### Obrazac 1: Mikroservisna AI arhitektura
+### Obrazac 1: Arhitektura mikroservisa za AI
 
-**Kada koristiti**: Kompleksne AI aplikacije s više funkcionalnosti
+**Kada koristiti**: Za složene AI aplikacije s više funkcionalnosti
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -71,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Obrazac 2: Obrada temeljena na događajima
+### Obrazac 2: Obrada AI-a temeljena na događajima
 
-**Kada koristiti**: Obrada u serijama, analiza dokumenata, asinkroni radni tokovi
+**Kada koristiti**: Za batch obradu, analizu dokumenata, asinkrone tijekove rada
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -384,7 +389,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Praćenje troškova i budžeti
+### 2. Praćenje troškova i proračuni
 
 ```bicep
 // Cost management and budgets
@@ -665,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Sigurnosne kopije i oporavak podataka
+### 2. Sigurnosne kopije podataka i oporavak
 
 ```bicep
 // Backup configuration for critical data
@@ -863,11 +868,11 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Plan sigurnosnih kopija i oporavka
 - [ ] Implementirani prekidači krugova
 - [ ] Konfigurirane politike ponovnog pokušaja
-- [ ] Postepena degradacija
+- [ ] Postupno degradiranje funkcionalnosti
 - [ ] Krajnje točke za provjeru zdravlja
 
 ### Upravljanje troškovima ✅
-- [ ] Konfigurirana upozorenja za budžet
+- [ ] Konfigurirana upozorenja za proračun
 - [ ] Prilagodba resursa
 - [ ] Primijenjeni popusti za razvoj/testiranje
 - [ ] Kupljene rezervirane instance
@@ -875,14 +880,14 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Redoviti pregledi troškova
 
 ### Usklađenost ✅
-- [ ] Zadovoljeni zahtjevi za lokaciju podataka
-- [ ] Omogućeno zapisivanje revizije
+- [ ] Zadovoljeni zahtjevi za rezidenciju podataka
+- [ ] Omogućeno zapisivanje audita
 - [ ] Primijenjene politike usklađenosti
-- [ ] Implementirani sigurnosni standardi
-- [ ] Redovite sigurnosne procjene
-- [ ] Plan za odgovor na incidente
+- [ ] Implementirani sigurnosni temelji
+- [ ] Redovite procjene sigurnosti
+- [ ] Plan odgovora na incidente
 
-## Benchmarkovi performansi
+## Referentne vrijednosti performansi
 
 ### Tipične produkcijske metrike
 
@@ -890,8 +895,8 @@ echo "Infrastructure validation completed successfully!"
 |--------|--------|------------|
 | **Vrijeme odgovora** | < 2 sekunde | Application Insights |
 | **Dostupnost** | 99.9% | Praćenje dostupnosti |
-| **Stopa grešaka** | < 0.1% | Logovi aplikacije |
-| **Korištenje tokena** | < $500/mjesečno | Upravljanje troškovima |
+| **Stopa pogrešaka** | < 0.1% | Logovi aplikacije |
+| **Korištenje tokena** | < $500/mjesec | Upravljanje troškovima |
 | **Istovremeni korisnici** | 1000+ | Testiranje opterećenja |
 | **Vrijeme oporavka** | < 1 sat | Testovi oporavka od katastrofe |
 
@@ -910,36 +915,41 @@ python scripts/load_test.py \
 
 Na temelju povratnih informacija iz Discord zajednice Azure AI Foundry:
 
-### Najbolje preporuke zajednice:
+### Najbolje preporuke iz zajednice:
 
 1. **Počnite s malim, skalirajte postupno**: Započnite s osnovnim SKU-ovima i skalirajte prema stvarnoj upotrebi
 2. **Pratite sve**: Postavite sveobuhvatno praćenje od prvog dana
 3. **Automatizirajte sigurnost**: Koristite infrastrukturu kao kod za dosljednu sigurnost
 4. **Temeljito testirajte**: Uključite testiranje specifično za AI u svoj pipeline
-5. **Planirajte troškove**: Pratite korištenje tokena i rano postavite upozorenja za budžet
+5. **Planirajte troškove**: Pratite korištenje tokena i rano postavite upozorenja za proračun
 
 ### Uobičajene greške koje treba izbjegavati:
 
 - ❌ Hardkodiranje API ključeva u kodu
-- ❌ Nepostavljanje odgovarajućeg praćenja
+- ❌ Nepostavljanje pravilnog praćenja
 - ❌ Ignoriranje optimizacije troškova
-- ❌ Nepostavljanje scenarija za otklanjanje grešaka
+- ❌ Nepostavljanje scenarija za testiranje grešaka
 - ❌ Implementacija bez provjera zdravlja
 
 ## Dodatni resursi
 
 - **Azure Well-Architected Framework**: [Vodič za AI radna opterećenja](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Dokumentacija**: [Službeni dokumenti](https://learn.microsoft.com/azure/ai-studio/)
-- **Predlošci zajednice**: [Azure Primjeri](https://github.com/Azure-Samples)
+- **Dokumentacija Azure AI Foundry**: [Službeni dokumenti](https://learn.microsoft.com/azure/ai-studio/)
+- **Predlošci zajednice**: [Azure uzorci](https://github.com/Azure-Samples)
 - **Discord zajednica**: [#Azure kanal](https://discord.gg/microsoft-azure)
 
 ---
 
-**Prethodno:** [AI Workshop Lab](ai-workshop-lab.md) | **Sljedeće:** [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 8 - Produkcijski i poslovni obrasci
+- **⬅️ Prethodno poglavlje**: [Poglavlje 7: Rješavanje problema](../troubleshooting/debugging.md)
+- **⬅️ Također povezano**: [AI radionica laboratorij](ai-workshop-lab.md)
+- **🎆 Završetak tečaja**: [AZD za početnike](../../README.md)
 
 **Zapamtite**: Produkcijska AI radna opterećenja zahtijevaju pažljivo planiranje, praćenje i kontinuiranu optimizaciju. Započnite s ovim obrascima i prilagodite ih svojim specifičnim zahtjevima.
 
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.

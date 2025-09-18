@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9a284fb7fdbdf2f5d737de7d08f0ade9",
-  "translation_date": "2025-09-12T23:13:49+00:00",
+  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
+  "translation_date": "2025-09-18T11:59:26+00:00",
   "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
   "language_code": "hr"
 }
 -->
 # Integracija Azure AI Foundry s AZD-om
 
-**Prethodno:** [Prvi projekt](../getting-started/first-project.md) | **Sljedeće:** [Implementacija AI modela](ai-model-deployment.md)
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 2 - Razvoj usmjeren na AI
+- **⬅️ Prethodno poglavlje**: [Poglavlje 1: Vaš prvi projekt](../getting-started/first-project.md)
+- **➡️ Sljedeće**: [Implementacija AI modela](ai-model-deployment.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../getting-started/configuration.md)
 
 ## Pregled
 
@@ -17,7 +22,7 @@ Ovaj vodič pokazuje kako integrirati usluge Azure AI Foundry s Azure Developer 
 
 ## Što je Azure AI Foundry?
 
-Azure AI Foundry je Microsoftova objedinjena platforma za AI razvoj koja uključuje:
+Azure AI Foundry je Microsoftova objedinjena platforma za razvoj AI-a koja uključuje:
 
 - **Katalog modela**: Pristup najnaprednijim AI modelima
 - **Prompt Flow**: Vizualni dizajner za AI tijekove rada
@@ -27,11 +32,11 @@ Azure AI Foundry je Microsoftova objedinjena platforma za AI razvoj koja uključ
 
 ## AZD + Azure AI Foundry: Bolje zajedno
 
-| Značajka | Azure AI Foundry | Prednost integracije s AZD-om |
-|----------|------------------|------------------------------|
+| Značajka | Azure AI Foundry | Prednosti integracije s AZD-om |
+|----------|------------------|-------------------------------|
 | **Implementacija modela** | Ručna implementacija putem portala | Automatizirane, ponovljive implementacije |
 | **Infrastruktura** | Klikom kroz proces postavljanja | Infrastruktura kao kod (Bicep) |
-| **Upravljanje okruženjem** | Fokus na jednom okruženju | Više okruženja (razvoj/staging/produkcija) |
+| **Upravljanje okruženjem** | Fokus na jednom okruženju | Više okruženja (razvoj/testiranje/produkcija) |
 | **Integracija CI/CD-a** | Ograničena | Izvorna podrška za GitHub Actions |
 | **Upravljanje troškovima** | Osnovno praćenje | Optimizacija troškova specifična za okruženje |
 
@@ -44,9 +49,9 @@ Azure AI Foundry je Microsoftova objedinjena platforma za AI razvoj koja uključ
 
 ## Osnovni obrasci integracije
 
-### Obrazac 1: Integracija Azure OpenAI
+### Obrazac 1: Integracija Azure OpenAI-a
 
-**Upotreba**: Implementacija aplikacija za chat s Azure OpenAI modelima
+**Primjena**: Implementacija aplikacija za chat s modelima Azure OpenAI
 
 ```yaml
 # azure.yaml
@@ -96,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Obrazac 2: AI pretraživanje + RAG integracija
 
-**Upotreba**: Implementacija aplikacija za generaciju uz podršku pretraživanja (RAG)
+**Primjena**: Implementacija aplikacija za generaciju uz podršku pretraživanja (RAG)
 
 ```bicep
 // Azure AI Search
@@ -126,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### Obrazac 3: Integracija inteligencije dokumenata
 
-**Upotreba**: Tijekovi rada za obradu i analizu dokumenata
+**Primjena**: Tijekovi rada za obradu i analizu dokumenata
 
 ```bicep
 // Document Intelligence service
@@ -428,7 +433,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## Rješavanje uobičajenih problema
 
-### Problem 1: Prekoračenje kvote OpenAI-a
+### Problem 1: Prekoračen OpenAI kvota
 
 **Simptomi:**
 - Implementacija ne uspijeva zbog grešaka kvote
@@ -521,12 +526,12 @@ azd up
 
 ## Sljedeći koraci
 
-1. **Isprobajte primjere**: Započnite s unaprijed izgrađenim predloškom koji odgovara vašem slučaju upotrebe
+1. **Isprobajte primjere**: Započnite s unaprijed izgrađenim predloškom koji odgovara vašem slučaju
 2. **Prilagodite svojim potrebama**: Modificirajte infrastrukturu i kod aplikacije
 3. **Dodajte praćenje**: Implementirajte sveobuhvatnu preglednost
 4. **Optimizirajte troškove**: Fino podesite konfiguracije prema svom budžetu
 5. **Osigurajte implementaciju**: Primijenite sigurnosne obrasce za poduzeća
-6. **Skalirajte za produkciju**: Dodajte značajke za više regija i visoku dostupnost
+6. **Skalirajte na produkciju**: Dodajte značajke za više regija i visoku dostupnost
 
 ## Zajednica i podrška
 
@@ -536,9 +541,14 @@ azd up
 
 ---
 
-**Prethodno:** [Prvi projekt](../getting-started/first-project.md) | **Sljedeće:** [Implementacija AI modela](ai-model-deployment.md)
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 2 - Razvoj usmjeren na AI
+- **⬅️ Prethodno poglavlje**: [Poglavlje 1: Vaš prvi projekt](../getting-started/first-project.md)
+- **➡️ Sljedeće**: [Implementacija AI modela](ai-model-deployment.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../getting-started/configuration.md)
 
-**Treba vam pomoć?** Pridružite se našim zajedničkim raspravama ili otvorite problem u repozitoriju. Zajednica Azure AI + AZD tu je da vam pomogne uspjeti!
+**Treba vam pomoć?** Pridružite se raspravama zajednice ili otvorite problem u repozitoriju. Zajednica Azure AI + AZD tu je da vam pomogne uspjeti!
 
 ---
 

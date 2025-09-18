@@ -1,26 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T22:29:28+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-18T11:01:24+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "ro"
 }
 -->
 # AZD Bazele - Înțelegerea Azure Developer CLI
 
-**Anterior:** [Instalare și Configurare](installation.md) | **Următor:** [Configurare](configuration.md)
+# AZD Bazele - Concepte de bază și fundamente
+
+**Navigare capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 1 - Fundamente & Start Rapid
+- **⬅️ Precedent**: [Prezentare Generală Curs](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Următor**: [Instalare & Configurare](installation.md)
+- **🚀 Capitol Următor**: [Capitolul 2: Dezvoltare AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introducere
 
-Această lecție te introduce în Azure Developer CLI (azd), un instrument puternic de linie de comandă care accelerează tranziția de la dezvoltarea locală la implementarea în Azure. Vei învăța conceptele fundamentale, funcțiile de bază și vei înțelege cum azd simplifică implementarea aplicațiilor cloud-native.
+Această lecție te introduce în Azure Developer CLI (azd), un instrument puternic de linie de comandă care accelerează tranziția de la dezvoltarea locală la implementarea în Azure. Vei învăța conceptele fundamentale, caracteristicile de bază și vei înțelege cum azd simplifică implementarea aplicațiilor cloud-native.
 
 ## Obiective de Învățare
 
-Până la finalul acestei lecții, vei:
+Până la sfârșitul acestei lecții, vei:
 - Înțelege ce este Azure Developer CLI și scopul său principal
-- Învăța conceptele de bază despre șabloane, medii și servicii
-- Explora funcțiile cheie, inclusiv dezvoltarea bazată pe șabloane și Infrastructure as Code
+- Învața conceptele de bază despre șabloane, medii și servicii
+- Explora caracteristicile cheie, inclusiv dezvoltarea bazată pe șabloane și Infrastructure as Code
 - Înțelege structura proiectului azd și fluxul de lucru
 - Fi pregătit să instalezi și să configurezi azd pentru mediul tău de dezvoltare
 
@@ -31,7 +38,7 @@ După finalizarea acestei lecții, vei putea:
 - Identifica componentele structurii unui proiect azd
 - Descrie cum funcționează împreună șabloanele, mediile și serviciile
 - Înțelege beneficiile Infrastructure as Code cu azd
-- Recunoaște diferitele comenzi azd și scopurile lor
+- Recunoaște diferite comenzi azd și scopurile lor
 
 ## Ce este Azure Developer CLI (azd)?
 
@@ -50,7 +57,7 @@ Azure Developer CLI (azd) este un instrument de linie de comandă conceput pentr
 Mediile reprezintă diferite ținte de implementare:
 - **Dezvoltare** - Pentru testare și dezvoltare
 - **Staging** - Mediu pre-producție
-- **Producție** - Mediu de producție activ
+- **Producție** - Mediu de producție live
 
 Fiecare mediu își menține propriile:
 - Grupuri de resurse Azure
@@ -64,7 +71,7 @@ Serviciile sunt blocurile de construcție ale aplicației tale:
 - **Bază de date** - Soluții de stocare a datelor
 - **Stocare** - Stocare de fișiere și blob-uri
 
-## Funcții Cheie
+## Caracteristici Cheie
 
 ### 1. Dezvoltare Bazată pe Șabloane
 ```bash
@@ -196,7 +203,7 @@ Comanda `azd down --force --purge` este o modalitate puternică de a elimina com
 --force
 ```
 - Sare peste solicitările de confirmare.
-- Utilă pentru automatizare sau scripting unde inputul manual nu este fezabil.
+- Util pentru automatizare sau scripting unde inputul manual nu este fezabil.
 - Asigură că procesul de eliminare continuă fără întreruperi, chiar dacă CLI detectează inconsistențe.
 
 ```
@@ -236,7 +243,7 @@ azd template show <template>   # Template details
 azd init --help               # Initialization options
 ```
 
-### Gestionarea Proiectelor
+### Gestionarea Proiectului
 ```bash
 azd show                     # Project overview
 azd env show                 # Current environment
@@ -263,7 +270,7 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Utilizează Șabloane
+### 2. Valorifică Șabloanele
 - Începe cu șabloane existente
 - Personalizează-le pentru nevoile tale
 - Creează șabloane reutilizabile pentru organizația ta
@@ -271,11 +278,11 @@ azd init --template template1
 ### 3. Izolarea Mediilor
 - Folosește medii separate pentru dev/staging/prod
 - Nu implementa direct în producție de pe mașina locală
-- Utilizează pipeline-uri CI/CD pentru implementările în producție
+- Folosește pipeline-uri CI/CD pentru implementări în producție
 
 ### 4. Gestionarea Configurării
 - Folosește variabile de mediu pentru date sensibile
-- Păstrează configurarea în controlul versiunilor
+- Păstrează configurația în controlul versiunilor
 - Documentează setările specifice mediului
 
 ## Progresul Învățării
@@ -296,13 +303,17 @@ azd init --template template1
 1. Creează șabloane personalizate
 2. Modele avansate de infrastructură
 3. Implementări multi-regiune
-4. Configurări de nivel enterprise
+4. Configurări la nivel de întreprindere
 
-## Următorii Pași
+## Pași Următori
 
-- [Instalare și Configurare](installation.md) - Instalează și configurează azd
-- [Primul Tău Proiect](first-project.md) - Tutorial practic
+**📖 Continuă Învățarea Capitolului 1:**
+- [Instalare & Configurare](installation.md) - Instalează și configurează azd
+- [Primul Tău Proiect](first-project.md) - Tutorial practic complet
 - [Ghid de Configurare](configuration.md) - Opțiuni avansate de configurare
+
+**🎯 Pregătit pentru Capitolul Următor?**
+- [Capitolul 2: Dezvoltare AI-First](../ai-foundry/azure-ai-foundry-integration.md) - Începe să construiești aplicații AI
 
 ## Resurse Suplimentare
 
@@ -312,10 +323,14 @@ azd init --template template1
 
 ---
 
-**Anterior:** [Instalare și Configurare](installation.md) | **Următor:** [Configurare](configuration.md)
-- **Următoarea Lecție**: [Instalare și Configurare](installation.md)
+**Navigare capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 1 - Fundamente & Start Rapid  
+- **⬅️ Precedent**: [Prezentare Generală Curs](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Următor**: [Instalare & Configurare](installation.md)
+- **🚀 Capitol Următor**: [Capitolul 2: Dezvoltare AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

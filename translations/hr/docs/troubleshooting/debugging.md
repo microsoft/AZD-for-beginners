@@ -1,36 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T06:34:36+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-18T12:03:29+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "hr"
 }
 -->
-# Vodič za otklanjanje pogrešaka - Napredne tehnike analize dnevnika
+# Vodič za otklanjanje pogrešaka u AZD implementacijama
+
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 7 - Otklanjanje pogrešaka i dijagnostika
+- **⬅️ Prethodno**: [Uobičajeni problemi](common-issues.md)
+- **➡️ Sljedeće**: [Otklanjanje pogrešaka specifičnih za AI](ai-troubleshooting.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 8: Obrasci za produkciju i poduzeća](../ai-foundry/production-ai-practices.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pruža napredne strategije, alate i tehnike za dijagnosticiranje i rješavanje složenih problema s implementacijama Azure Developer CLI-a. Naučite sustavne metodologije za otklanjanje pogrešaka, tehnike analize dnevnika, profiliranje performansi i napredne dijagnostičke alate za učinkovito rješavanje problema s implementacijom i izvođenjem.
+Ovaj sveobuhvatni vodič pruža napredne strategije, alate i tehnike za dijagnosticiranje i rješavanje složenih problema s implementacijama Azure Developer CLI-a. Naučite sustavne metodologije otklanjanja pogrešaka, tehnike analize logova, profiliranje performansi i napredne dijagnostičke alate za učinkovito rješavanje problema implementacije i izvođenja.
 
 ## Ciljevi učenja
 
 Nakon završetka ovog vodiča, naučit ćete:
-- Ovladati sustavnim metodologijama za otklanjanje pogrešaka vezanih uz Azure Developer CLI
-- Razumjeti naprednu konfiguraciju dnevnika i tehnike analize dnevnika
-- Implementirati strategije za profiliranje performansi i praćenje
+- Ovladati sustavnim metodologijama otklanjanja pogrešaka za probleme s Azure Developer CLI-jem
+- Razumjeti naprednu konfiguraciju logiranja i tehnike analize logova
+- Implementirati strategije profiliranja performansi i praćenja
 - Koristiti Azure dijagnostičke alate i usluge za rješavanje složenih problema
-- Primijeniti tehnike otklanjanja pogrešaka u mreži i sigurnosne analize
+- Primijeniti tehnike otklanjanja pogrešaka u mreži i sigurnosne dijagnostike
 - Konfigurirati sveobuhvatno praćenje i upozorenja za proaktivno otkrivanje problema
 
 ## Ishodi učenja
 
 Po završetku, moći ćete:
-- Primijeniti metodologiju TRIAGE za sustavno otklanjanje složenih problema s implementacijom
-- Konfigurirati i analizirati sveobuhvatne informacije o zapisivanju i praćenju
+- Primijeniti metodologiju TRIAGE za sustavno otklanjanje složenih problema implementacije
+- Konfigurirati i analizirati sveobuhvatne informacije o logiranju i praćenju
 - Učinkovito koristiti Azure Monitor, Application Insights i dijagnostičke alate
-- Samostalno otklanjati probleme s mrežnom povezivošću, autentifikacijom i dozvolama
-- Implementirati strategije za praćenje performansi i optimizaciju
+- Samostalno otklanjati probleme povezane s mrežnom povezivošću, autentifikacijom i dozvolama
+- Implementirati strategije praćenja performansi i optimizacije
 - Kreirati prilagođene skripte za otklanjanje pogrešaka i automatizaciju za ponavljajuće probleme
 
 ## Metodologija otklanjanja pogrešaka
@@ -39,7 +46,7 @@ Po završetku, moći ćete:
 - **T**ime: Kada je problem započeo?
 - **R**eproduce: Možete li ga dosljedno reproducirati?
 - **I**solate: Koja komponenta ne radi?
-- **A**nalyze: Što nam govore dnevnici?
+- **A**nalyze: Što nam govore logovi?
 - **G**ather: Prikupite sve relevantne informacije
 - **E**scalate: Kada zatražiti dodatnu pomoć
 
@@ -59,7 +66,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Konfiguracija za otklanjanje pogrešaka
+### Konfiguracija otklanjanja pogrešaka
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -71,9 +78,9 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Tehnike analize dnevnika
+## 📊 Tehnike analize logova
 
-### Razumijevanje razina dnevnika
+### Razumijevanje razina logova
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,7 +90,7 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Strukturalna analiza dnevnika
+### Strukturalna analiza logova
 ```bash
 # Filter logs by level
 azd logs --level error --since 1h
@@ -98,7 +105,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### Korelacija dnevnika
+### Korelacija logova
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -399,7 +406,7 @@ analyze_resources() {
 
 ## 🔒 Sigurnosno otklanjanje pogrešaka
 
-### Otklanjanje pogrešaka u autentifikacijskom procesu
+### Otklanjanje pogrešaka u autentifikacijskom toku
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -512,7 +519,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Postupci za hitno otklanjanje pogrešaka
+## 🚨 Postupci hitnog otklanjanja pogrešaka
 
 ### Odgovor na probleme u produkciji
 ```bash
@@ -627,7 +634,7 @@ create_debug_queries() {
 }
 ```
 
-### Agregacija dnevnika
+### Agregacija logova
 ```bash
 # Aggregate logs from multiple sources
 aggregate_logs() {
@@ -655,7 +662,7 @@ aggregate_logs() {
 Kreirajte direktorij `scripts/debug/` s:
 - `health-check.sh` - Sveobuhvatna provjera zdravlja
 - `performance-test.sh` - Automatizirano testiranje performansi
-- `log-analyzer.py` - Napredno parsiranje i analiza dnevnika
+- `log-analyzer.py` - Napredno parsiranje i analiza logova
 - `resource-validator.sh` - Validacija infrastrukture
 
 ### Integracija praćenja
@@ -677,7 +684,7 @@ hooks:
 
 ## Najbolje prakse
 
-1. **Uvijek omogućite zapisivanje za otklanjanje pogrešaka** u neprodukcijskim okruženjima
+1. **Uvijek omogućite logiranje otklanjanja pogrešaka** u neprodukcijskim okruženjima
 2. **Kreirajte reproducibilne testne slučajeve** za probleme
 3. **Dokumentirajte postupke otklanjanja pogrešaka** za svoj tim
 4. **Automatizirajte provjere zdravlja** i praćenje
@@ -689,11 +696,11 @@ hooks:
 - [Planiranje kapaciteta](../pre-deployment/capacity-planning.md) - Planirajte zahtjeve za resursima
 - [Odabir SKU-a](../pre-deployment/sku-selection.md) - Odaberite odgovarajuće razine usluga
 - [Provjere prije implementacije](../pre-deployment/preflight-checks.md) - Validacija prije implementacije
-- [Brzi vodič](../../resources/cheat-sheet.md) - Brze referentne naredbe
+- [Priručnik](../../resources/cheat-sheet.md) - Brzi referentni naredbeni popis
 
 ---
 
-**Zapamtite**: Dobro otklanjanje pogrešaka zahtijeva sustavnost, temeljitost i strpljenje. Ovi alati i tehnike pomoći će vam da brže i učinkovitije dijagnosticirate probleme.
+**Zapamtite**: Dobro otklanjanje pogrešaka temelji se na sustavnom, temeljitom i strpljivom pristupu. Ovi alati i tehnike pomoći će vam da brže i učinkovitije dijagnosticirate probleme.
 
 ---
 
@@ -705,4 +712,4 @@ hooks:
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden koristeći AI uslugu za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.

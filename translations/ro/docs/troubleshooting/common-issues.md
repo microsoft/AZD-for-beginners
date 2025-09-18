@@ -1,41 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-10T06:27:43+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-18T11:02:33+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "ro"
 }
 -->
-# Probleme Comune & Soluții
+# Probleme Comune și Soluții
+
+**Navigare Capitole:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 7 - Depanare și Debugging
+- **⬅️ Capitol Anterior**: [Capitolul 6: Verificări Preliminare](../pre-deployment/preflight-checks.md)
+- **➡️ Următor**: [Ghid de Debugging](debugging.md)
+- **🚀 Capitol Următor**: [Capitolul 8: Modele de Producție și Enterprise](../ai-foundry/production-ai-practices.md)
 
 ## Introducere
 
-Acest ghid cuprinzător de depanare acoperă cele mai frecvente probleme întâlnite în utilizarea Azure Developer CLI. Învață să diagnostichezi, să depanezi și să rezolvi probleme comune legate de autentificare, implementare, aprovizionarea infrastructurii și configurarea aplicațiilor. Fiecare problemă include simptome detaliate, cauze principale și proceduri pas cu pas pentru rezolvare.
+Acest ghid cuprinzător de depanare acoperă cele mai frecvente probleme întâlnite în utilizarea Azure Developer CLI. Învață să diagnostichezi, să depanezi și să rezolvi probleme comune legate de autentificare, implementare, provizionarea infrastructurii și configurarea aplicațiilor. Fiecare problemă include simptome detaliate, cauze principale și proceduri pas cu pas pentru rezolvare.
 
 ## Obiective de Învățare
 
 Parcurgând acest ghid, vei:
 - Stăpâni tehnici de diagnosticare pentru problemele Azure Developer CLI
-- Înțelege problemele comune de autentificare și permisiuni și soluțiile lor
-- Rezolva eșecuri de implementare, erori de aprovizionare a infrastructurii și probleme de configurare
-- Implementa strategii proactive de monitorizare și depanare
+- Înțelege problemele comune de autentificare și permisiuni și soluțiile acestora
+- Rezolva erori de implementare, probleme de provizionare a infrastructurii și probleme de configurare
+- Implementa strategii proactive de monitorizare și debugging
 - Aplica metodologii sistematice de depanare pentru probleme complexe
 - Configura logare și monitorizare adecvate pentru a preveni problemele viitoare
 
 ## Rezultate de Învățare
 
-La finalizarea ghidului, vei putea:
+După finalizare, vei putea:
 - Diagnostica problemele Azure Developer CLI folosind instrumentele de diagnosticare încorporate
 - Rezolva independent problemele legate de autentificare, abonamente și permisiuni
-- Depana eficient eșecuri de implementare și erori de aprovizionare a infrastructurii
-- Depana problemele de configurare a aplicațiilor și problemele specifice mediului
+- Depana eficient erorile de implementare și problemele de provizionare a infrastructurii
+- Debugga problemele de configurare ale aplicațiilor și problemele specifice mediului
 - Implementa monitorizare și alerte pentru a identifica proactiv problemele potențiale
-- Aplica cele mai bune practici pentru logare, depanare și fluxuri de lucru pentru rezolvarea problemelor
+- Aplica cele mai bune practici pentru logare, debugging și fluxuri de rezolvare a problemelor
 
 ## Diagnosticare Rapidă
 
-Înainte de a analiza problemele specifice, rulează aceste comenzi pentru a colecta informații de diagnosticare:
+Înainte de a intra în detalii despre probleme specifice, rulează aceste comenzi pentru a colecta informații de diagnosticare:
 
 ```bash
 # Check azd version and health
@@ -57,10 +64,10 @@ azd <command> --debug
 
 ## Probleme de Autentificare
 
-### Problemă: "Failed to get access token"
+### Problemă: "Nu s-a putut obține token-ul de acces"
 **Simptome:**
 - `azd up` eșuează cu erori de autentificare
-- Comenzile returnează "unauthorized" sau "access denied"
+- Comenzile returnează "neautorizat" sau "acces refuzat"
 
 **Soluții:**
 ```bash
@@ -80,7 +87,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Problemă: "Insufficient privileges" în timpul implementării
+### Problemă: "Privilegii insuficiente" în timpul implementării
 **Simptome:**
 - Implementarea eșuează cu erori de permisiuni
 - Nu se pot crea anumite resurse Azure
@@ -110,11 +117,11 @@ azd config set auth.tenantId "your-tenant-id"
 az account clear
 ```
 
-## 🏗️ Erori de Aprovizionare a Infrastructurii
+## 🏗️ Erori de Provizionare a Infrastructurii
 
 ### Problemă: Conflicte de nume ale resurselor
 **Simptome:**
-- Erori "The resource name already exists"
+- Erori "Numele resursei există deja"
 - Implementarea eșuează în timpul creării resurselor
 
 **Soluții:**
@@ -133,8 +140,8 @@ azd down --force --purge
 
 ### Problemă: Locația/Regiunea nu este disponibilă
 **Simptome:**
-- "The location 'xyz' is not available for resource type"
-- Anumite SKU-uri nu sunt disponibile în regiunea selectată
+- "Locația 'xyz' nu este disponibilă pentru tipul de resursă"
+- Anumite SKUs nu sunt disponibile în regiunea selectată
 
 **Soluții:**
 ```bash
@@ -152,8 +159,8 @@ azd env set AZURE_LOCATION eastus2
 
 ### Problemă: Erori de depășire a cotei
 **Simptome:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- "Cota depășită pentru tipul de resursă"
+- "Numărul maxim de resurse atins"
 
 **Soluții:**
 ```bash
@@ -175,9 +182,9 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problemă: Erori în șabloanele Bicep
+### Problemă: Erori în template-urile Bicep
 **Simptome:**
-- Eșecuri de validare a șabloanelor
+- Eșecuri de validare a template-urilor
 - Erori de sintaxă în fișierele Bicep
 
 **Soluții:**
@@ -197,9 +204,9 @@ azd provision --preview
 
 ## 🚀 Eșecuri de Implementare
 
-### Problemă: Eșecuri la compilare
+### Problemă: Eșecuri de build
 **Simptome:**
-- Aplicația nu se compilează în timpul implementării
+- Aplicația eșuează la build în timpul implementării
 - Erori la instalarea pachetelor
 
 **Soluții:**
@@ -228,8 +235,8 @@ docker run --rm test-image
 
 ### Problemă: Eșecuri la implementarea containerelor
 **Simptome:**
-- Aplicațiile containerizate nu pornesc
-- Erori la descărcarea imaginilor
+- Aplicațiile container nu pornesc
+- Erori la extragerea imaginilor
 
 **Soluții:**
 ```bash
@@ -247,10 +254,10 @@ az acr login --name myregistry
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problemă: Eșecuri de conexiune la baza de date
+### Problemă: Probleme de conectare la baza de date
 **Simptome:**
 - Aplicația nu se poate conecta la baza de date
-- Erori de timeout la conexiune
+- Erori de timeout la conectare
 
 **Soluții:**
 ```bash
@@ -311,7 +318,7 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 ### Problemă: Probleme de configurare CORS
 **Simptome:**
 - Frontend-ul nu poate apela API-ul
-- Cereri cross-origin blocate
+- Cerere cross-origin blocată
 
 **Soluții:**
 ```bash
@@ -329,11 +336,11 @@ app.use(cors({
 azd show
 ```
 
-## 🌍 Probleme de Gestionare a Mediului
+## 🌍 Probleme de Management al Mediului
 
 ### Problemă: Probleme la schimbarea mediului
 **Simptome:**
-- Este utilizat mediul greșit
+- Se folosește mediul greșit
 - Configurația nu se schimbă corect
 
 **Soluții:**
@@ -355,7 +362,7 @@ azd env select production-new
 ### Problemă: Coruperea mediului
 **Simptome:**
 - Mediul afișează o stare invalidă
-- Resursele nu corespund configurației
+- Resursele nu se potrivesc cu configurația
 
 **Soluții:**
 ```bash
@@ -373,7 +380,7 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Probleme de Performanță
 
-### Problemă: Timpuri lungi de implementare
+### Problemă: Timpuri de implementare lente
 **Simptome:**
 - Implementările durează prea mult
 - Timeout-uri în timpul implementării
@@ -437,7 +444,7 @@ azd config validate
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### Analiza Jurnalelor
+### Analiza Logurilor
 ```bash
 # Application logs
 azd logs --service web --follow
@@ -462,13 +469,13 @@ az webapp show --name myapp --resource-group myrg --query state
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Obținerea de Ajutor Suplimentar
+## 🆘 Obținerea Ajutorului Suplimentar
 
-### Când să Escaladezi
-- Problemele de autentificare persistă după ce ai încercat toate soluțiile
+### Când să Escalezi
+- Problemele de autentificare persistă după încercarea tuturor soluțiilor
 - Probleme de infrastructură cu serviciile Azure
 - Probleme legate de facturare sau abonamente
-- Probleme sau incidente de securitate
+- Probleme de securitate sau incidente
 
 ### Canale de Suport
 ```bash
@@ -486,14 +493,14 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 
 ### Informații de Colectat
 Înainte de a contacta suportul, colectează:
-- Rezultatul comenzii `azd version`
-- Rezultatul comenzii `azd info`
+- Output-ul `azd version`
+- Output-ul `azd info`
 - Mesajele de eroare (text complet)
-- Pașii pentru a reproduce problema
+- Pașii pentru reproducerea problemei
 - Detalii despre mediu (`azd env show`)
-- Cronologia momentului în care problema a început
+- Cronologia când problema a început
 
-### Script de Colectare a Jurnalelor
+### Script de Colectare a Logurilor
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -519,7 +526,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Prevenirea Problemelor
 
-### Lista de Verificare Pre-Implementare
+### Lista de Verificare Pre-implementare
 ```bash
 # 1. Validate authentication
 az account show
@@ -554,7 +561,7 @@ az monitor metrics alert create \
   --condition "avg Percentage CPU > 80"
 ```
 
-### Mentenanță Periodică
+### Mentenanță Regulată
 ```bash
 # Weekly health checks
 ./scripts/health-check.sh
@@ -566,10 +573,10 @@ az consumption usage list --billing-period-name 202401
 az security assessment list --resource-group myrg
 ```
 
-## Resurse Asociate
+## Resurse Conexe
 
-- [Ghid de Debugging](debugging.md) - Tehnici avansate de depanare
-- [Aprovizionarea Resurselor](../deployment/provisioning.md) - Depanarea infrastructurii
+- [Ghid de Debugging](debugging.md) - Tehnici avansate de debugging
+- [Provizionarea Resurselor](../deployment/provisioning.md) - Depanarea infrastructurii
 - [Planificarea Capacității](../pre-deployment/capacity-planning.md) - Ghid pentru planificarea resurselor
 - [Selecția SKU](../pre-deployment/sku-selection.md) - Recomandări pentru nivelurile de servicii
 
@@ -580,7 +587,7 @@ az security assessment list --resource-group myrg
 ---
 
 **Navigare**
-- **Lecția Anterioară**: [Aprovizionarea Resurselor](../deployment/provisioning.md)
+- **Lecția Anterioară**: [Provizionarea Resurselor](../deployment/provisioning.md)
 - **Lecția Următoare**: [Ghid de Debugging](debugging.md)
 
 ---

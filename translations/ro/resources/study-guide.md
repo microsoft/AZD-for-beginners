@@ -1,19 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7634850a19864a183bc82ab5ac993c8a",
-  "translation_date": "2025-09-10T07:11:48+00:00",
+  "original_hash": "ee6549c72fe4271931326578e2379243",
+  "translation_date": "2025-09-18T11:08:46+00:00",
   "source_file": "resources/study-guide.md",
   "language_code": "ro"
 }
 -->
-# Ghid de Studiu - AZD pentru Începători
+# Ghid de studiu - Obiective de învățare cuprinzătoare
+
+**Navigarea traseului de învățare**
+- **📚 Pagina principală a cursului**: [AZD Pentru Începători](../README.md)
+- **📖 Începe să înveți**: [Capitolul 1: Fundamente și Start Rapid](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Urmărirea progresului**: [Finalizarea cursului](../README.md#-course-completion--certification)
 
 ## Introducere
 
 Acest ghid de studiu cuprinzător oferă obiective de învățare structurate, concepte cheie, exerciții practice și materiale de evaluare pentru a te ajuta să stăpânești Azure Developer CLI (azd). Folosește acest ghid pentru a-ți urmări progresul și pentru a te asigura că ai acoperit toate subiectele esențiale.
 
-## Obiective de Învățare
+## Obiective de învățare
 
 Prin completarea acestui ghid de studiu, vei:
 - Stăpâni toate conceptele fundamentale și avansate ale Azure Developer CLI
@@ -21,7 +26,7 @@ Prin completarea acestui ghid de studiu, vei:
 - Câștiga încredere în depanarea și optimizarea implementărilor
 - Înțelege practicile de implementare pregătite pentru producție și considerațiile de securitate
 
-## Rezultate ale Învățării
+## Rezultate ale învățării
 
 După finalizarea tuturor secțiunilor acestui ghid de studiu, vei putea:
 - Proiecta, implementa și gestiona arhitecturi complete de aplicații folosind azd
@@ -29,239 +34,260 @@ După finalizarea tuturor secțiunilor acestui ghid de studiu, vei putea:
 - Depana independent probleme complexe de implementare
 - Crea șabloane personalizate și contribui la comunitatea azd
 
-## Structura Cursului
+## Structura de învățare în 8 capitole
 
-### Modulul 1: Începuturi (Săptămânile 1-2)
+### Capitolul 1: Fundamente și Start Rapid (Săptămâna 1)
+**Durată**: 30-45 minute | **Complexitate**: ⭐
 
-#### Obiective de Învățare
-- Înțelege fundamentele și conceptele de bază ale Azure Developer CLI
-- Instalează și configurează cu succes azd în mediul tău de dezvoltare
-- Realizează prima implementare folosind un șablon existent
-- Navighează structura proiectului azd și înțelege componentele cheie
+#### Obiective de învățare
+- Înțelege conceptele de bază și terminologia Azure Developer CLI
+- Instalează și configurează cu succes AZD pe platforma ta de dezvoltare
+- Implementează prima ta aplicație folosind un șablon existent
+- Navighează eficient interfața de linie de comandă AZD
 
-#### Concepte Cheie de Stăpânit
-- Șabloane, medii și servicii
-- Structura de configurare azure.yaml
-- Comenzi de bază azd (init, up, down, deploy)
-- Principiile Infrastructure as Code
-- Autentificarea și autorizarea în Azure
+#### Concepte cheie de stăpânit
+- Structura și componentele proiectului AZD (azure.yaml, infra/, src/)
+- Fluxuri de lucru bazate pe șabloane de implementare
+- Bazele configurării mediului
+- Gestionarea grupurilor de resurse și a abonamentelor
 
-#### Exerciții Practice
+#### Exerciții practice
+1. **Verificarea instalării**: Instalează AZD și verifică cu `azd version`
+2. **Prima implementare**: Implementează cu succes șablonul todo-nodejs-mongo
+3. **Configurarea mediului**: Configurează primele variabile de mediu
+4. **Explorarea resurselor**: Navighează resursele implementate în Azure Portal
 
-**Exercițiul 1.1: Instalare și Configurare**  
-```bash
-# Complete these tasks:
-1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
-3. Verify installation with: azd version
-4. Test connectivity with: azd auth login
-5. Explore available templates: azd template list
-```
+#### Întrebări de evaluare
+- Care sunt componentele de bază ale unui proiect AZD?
+- Cum inițializezi un proiect nou dintr-un șablon?
+- Care este diferența dintre `azd up` și `azd deploy`?
+- Cum gestionezi mai multe medii cu AZD?
 
-**Exercițiul 1.2: Prima Implementare**  
-```bash
-# Deploy a simple web application:
-1. Initialize project: azd init --template todo-nodejs-mongo
-2. Review project structure and configuration files
-3. Deploy to Azure: azd up
-4. Test the deployed application
-5. Clean up resources: azd down
-```
+---
 
-**Exercițiul 1.3: Analiza Structurii Proiectului**  
-```
-Analyze the following components:
-1. azure.yaml - service definitions and hooks
-2. infra/ directory - Bicep templates and modules
-3. src/ directory - application source code
-4. .azure/ directory - environment configurations
-```
+### Capitolul 2: Dezvoltare AI-First (Săptămâna 2)
+**Durată**: 1-2 ore | **Complexitate**: ⭐⭐
 
-#### Întrebări de Autoevaluare
-1. Care sunt cele trei concepte de bază ale arhitecturii azd?
-2. Care este scopul fișierului azure.yaml?
-3. Cum ajută mediile la gestionarea diferitelor ținte de implementare?
-4. Ce metode de autentificare pot fi utilizate cu azd?
-5. Ce se întâmplă când rulezi `azd up` pentru prima dată?
+#### Obiective de învățare
+- Integrează serviciile Azure AI Foundry cu fluxurile de lucru AZD
+- Implementează și configurează aplicații bazate pe AI
+- Înțelege modelele de implementare RAG (Retrieval-Augmented Generation)
+- Gestionează implementările și scalarea modelelor AI
 
-### Modulul 2: Configurare și Medii (Săptămâna 3)
+#### Concepte cheie de stăpânit
+- Integrarea serviciului Azure OpenAI și gestionarea API-urilor
+- Configurarea căutării AI și indexarea vectorială
+- Strategii de implementare a modelelor și planificarea capacității
+- Monitorizarea aplicațiilor AI și optimizarea performanței
 
-#### Obiective de Învățare
-- Stăpânește gestionarea și configurarea mediilor
-- Înțelege configurațiile avansate azure.yaml
-- Implementează setări și variabile specifice mediului
-- Configurează autentificarea pentru diferite scenarii
+#### Exerciții practice
+1. **Implementarea unui chat AI**: Implementează șablonul azure-search-openai-demo
+2. **Implementarea RAG**: Configurează indexarea și recuperarea documentelor
+3. **Configurarea modelelor**: Configurează mai multe modele AI cu scopuri diferite
+4. **Monitorizarea AI**: Implementează Application Insights pentru sarcinile AI
 
-#### Concepte Cheie de Stăpânit
-- Ierarhia mediilor și precedența variabilelor
-- Configurarea serviciilor și parametrilor
-- Hook-uri și evenimente de ciclu de viață
-- Metode de autentificare (utilizator, service principal, managed identity)
-- Gestionarea fișierelor de configurare
+#### Întrebări de evaluare
+- Cum configurezi serviciile Azure OpenAI într-un șablon AZD?
+- Care sunt componentele cheie ale unei arhitecturi RAG?
+- Cum gestionezi capacitatea și scalarea modelelor AI?
+- Ce metrici de monitorizare sunt importante pentru aplicațiile AI?
 
-#### Exerciții Practice
+---
 
-**Exercițiul 2.1: Configurare Multi-Mediu**  
-```bash
-# Create and configure multiple environments:
-1. Create development environment: azd env new development
-2. Create staging environment: azd env new staging
-3. Create production environment: azd env new production
-4. Configure different settings for each environment
-5. Deploy the same application to different environments
-```
+### Capitolul 3: Configurare și Autentificare (Săptămâna 3)
+**Durată**: 45-60 minute | **Complexitate**: ⭐⭐
 
-**Exercițiul 2.2: Configurare Avansată**  
-```yaml
-# Modify azure.yaml to include:
-1. Multiple services with different configurations
-2. Pre and post deployment hooks
-3. Environment-specific parameters
-4. Custom resource naming patterns
-```
+#### Obiective de învățare
+- Stăpânește strategiile de configurare și gestionare a mediului
+- Implementează modele de autentificare securizată și identitate gestionată
+- Organizează resursele cu convenții de denumire adecvate
+- Configurează implementări multi-mediu (dev, staging, prod)
 
-**Exercițiul 2.3: Configurare de Securitate**  
-```bash
-# Implement security best practices:
-1. Configure managed identity for service authentication
-2. Set up Azure Key Vault for secrets management
-3. Implement least-privilege access controls
-4. Enable HTTPS and secure communication protocols
-```
+#### Concepte cheie de stăpânit
+- Ierarhia mediului și precedența configurației
+- Autentificarea prin identitate gestionată și principal de serviciu
+- Integrarea Key Vault pentru gestionarea secretelor
+- Gestionarea parametrilor specifici mediului
 
-#### Întrebări de Autoevaluare
-1. Cum gestionează azd precedența variabilelor de mediu?
-2. Ce sunt hook-urile de implementare și când ar trebui să le folosești?
-3. Cum configurezi diferite SKU-uri pentru medii diferite?
-4. Care sunt implicațiile de securitate ale diferitelor metode de autentificare?
-5. Cum gestionezi secretele și datele sensibile de configurare?
+#### Exerciții practice
+1. **Configurare multi-mediu**: Configurează medii dev, staging și prod
+2. **Configurare de securitate**: Implementează autentificarea prin identitate gestionată
+3. **Gestionarea secretelor**: Integrează Azure Key Vault pentru date sensibile
+4. **Gestionarea parametrilor**: Creează configurații specifice mediului
 
-### Modulul 3: Implementare și Provizionare (Săptămâna 4)
+#### Întrebări de evaluare
+- Cum configurezi medii diferite cu AZD?
+- Care sunt beneficiile utilizării identității gestionate în locul principalilor de serviciu?
+- Cum gestionezi în siguranță secretele aplicației?
+- Care este ierarhia configurației în AZD?
 
-#### Obiective de Învățare
-- Stăpânește fluxurile de lucru și cele mai bune practici de implementare
-- Înțelege Infrastructure as Code cu șabloane Bicep
-- Implementează arhitecturi complexe multi-servicii
-- Optimizează performanța și fiabilitatea implementării
+---
 
-#### Concepte Cheie de Stăpânit
-- Structura și modulele șabloanelor Bicep
-- Dependențele și ordonarea resurselor
-- Strategii de implementare (blue-green, actualizări progresive)
-- Implementări multi-regiune
-- Migrarea bazelor de date și gestionarea datelor
+### Capitolul 4: Infrastructură ca Cod și Implementare (Săptămâna 4-5)
+**Durată**: 1-1.5 ore | **Complexitate**: ⭐⭐⭐
 
-#### Exerciții Practice
+#### Obiective de învățare
+- Creează și personalizează șabloane de infrastructură Bicep
+- Implementează modele și fluxuri de lucru avansate de implementare
+- Înțelege strategiile de aprovizionare a resurselor
+- Proiectează arhitecturi scalabile multi-serviciu
 
-**Exercițiul 3.1: Infrastructură Personalizată**  
-```bicep
-// Create custom Bicep templates for:
-1. Web application with custom domain and SSL
-2. Database with backup and high availability
-3. Storage account with access policies
-4. Monitoring and logging configuration
-5. Network security groups and virtual networks
-```
+#### Concepte cheie de stăpânit
+- Structura șabloanelor Bicep și bune practici
+- Dependențele resurselor și ordinea implementării
+- Fișiere de parametri și modularitatea șabloanelor
+- Hook-uri personalizate și automatizarea implementării
 
-**Exercițiul 3.2: Aplicație Multi-Servicii**  
-```bash
-# Deploy a microservices architecture:
-1. Frontend web application
-2. Backend API service
-3. Database service
-4. Message queue service
-5. Background worker service
-```
+#### Exerciții practice
+1. **Crearea unui șablon personalizat**: Construiește un șablon de aplicație multi-serviciu
+2. **Stăpânirea Bicep**: Creează componente de infrastructură modulare și reutilizabile
+3. **Automatizarea implementării**: Implementează hook-uri pre/post implementare
+4. **Proiectarea arhitecturii**: Implementează o arhitectură complexă de microservicii
 
-**Exercițiul 3.3: Integrare Bază de Date**  
-```bash
-# Implement database deployment patterns:
-1. Deploy PostgreSQL with connection pooling
-2. Implement schema migrations
-3. Configure backup and recovery procedures
-4. Set up read replicas for performance
-5. Implement data seeding for different environments
-```
+#### Întrebări de evaluare
+- Cum creezi șabloane Bicep personalizate pentru AZD?
+- Care sunt cele mai bune practici pentru organizarea codului de infrastructură?
+- Cum gestionezi dependențele resurselor în șabloane?
+- Ce modele de implementare susțin actualizările fără întreruperi?
 
-#### Întrebări de Autoevaluare
-1. Care sunt avantajele utilizării Bicep în loc de șabloane ARM?
-2. Cum gestionezi migrarea bazelor de date în implementările azd?
-3. Ce strategii există pentru implementări fără întreruperi?
-4. Cum gestionezi dependențele între servicii?
-5. Care sunt considerațiile pentru implementările multi-regiune?
+---
 
-### Modulul 4: Validare Pre-Implementare (Săptămâna 5)
+### Capitolul 5: Soluții AI Multi-Agent (Săptămâna 6-7)
+**Durată**: 2-3 ore | **Complexitate**: ⭐⭐⭐⭐
 
-#### Obiective de Învățare
-- Implementează verificări cuprinzătoare înainte de implementare
-- Stăpânește planificarea capacității și validarea resurselor
-- Înțelege selecția SKU-urilor și optimizarea costurilor
-- Construiește pipeline-uri automate de validare
+#### Obiective de învățare
+- Proiectează și implementează arhitecturi AI multi-agent
+- Ordonează coordonarea și comunicarea agenților
+- Implementează soluții AI pregătite pentru producție cu monitorizare
+- Înțelege specializarea agenților și modelele de flux de lucru
 
-#### Concepte Cheie de Stăpânit
-- Cote și limite ale resurselor Azure
-- Criterii de selecție a SKU-urilor și implicații de cost
-- Scripturi și instrumente automate de validare
-- Metodologii de planificare a capacității
-- Testarea și optimizarea performanței
+#### Concepte cheie de stăpânit
+- Modele de arhitectură multi-agent și principii de proiectare
+- Protocoale de comunicare între agenți și fluxul de date
+- Strategii de echilibrare a sarcinii și scalare pentru agenți AI
+- Monitorizarea producției pentru sisteme multi-agent
 
-#### Exerciții Practice
+#### Exerciții practice
+1. **Implementarea soluției de retail**: Implementează scenariul complet de retail multi-agent
+2. **Personalizarea agenților**: Modifică comportamentele agenților Customer și Inventory
+3. **Scalarea arhitecturii**: Implementează echilibrarea sarcinii și auto-scalarea
+4. **Monitorizarea producției**: Configurează monitorizare cuprinzătoare și alerte
 
-**Exercițiul 4.1: Planificarea Capacității**  
-```bash
-# Implement capacity validation:
-1. Create scripts to check Azure quotas
-2. Validate service availability in target regions
-3. Estimate resource costs for different SKUs
-4. Plan for scaling and growth requirements
-5. Document capacity requirements for each environment
-```
+#### Întrebări de evaluare
+- Cum proiectezi modele eficiente de comunicare între agenți?
+- Care sunt considerațiile cheie pentru scalarea sarcinilor agenților AI?
+- Cum monitorizezi și depanezi sistemele AI multi-agent?
+- Ce modele de producție asigură fiabilitatea agenților AI?
 
-**Exercițiul 4.2: Validare Pre-Implementare**  
-```powershell
-# Build comprehensive validation pipeline:
-1. Authentication and permissions validation
-2. Template syntax and parameter validation
-3. Resource naming and availability checks
-4. Network connectivity and security validation
-5. Cost estimation and budget verification
-```
+---
 
-**Exercițiul 4.3: Optimizarea SKU-urilor**  
-```bash
-# Optimize service configurations:
-1. Compare performance characteristics of different SKUs
-2. Implement cost-effective development configurations
-3. Design high-performance production configurations
-4. Create monitoring dashboards for resource utilization
-5. Set up auto-scaling policies
-```
+### Capitolul 6: Validare și Planificare Pre-Implementare (Săptămâna 8)
+**Durată**: 1 oră | **Complexitate**: ⭐⭐
 
-#### Întrebări de Autoevaluare
-1. Ce factori ar trebui să influențeze deciziile de selecție a SKU-urilor?
-2. Cum validezi disponibilitatea resurselor Azure înainte de implementare?
-3. Care sunt componentele cheie ale unui sistem de verificare pre-implementare?
-4. Cum estimezi și controlezi costurile implementării?
+#### Obiective de învățare
+- Realizează planificarea capacității și validarea resurselor
+- Selectează cele mai bune SKU-uri Azure pentru eficiență costurilor
+- Implementează verificări automate înainte de implementare
+- Planifică implementări cu strategii de optimizare a costurilor
+
+#### Concepte cheie de stăpânit
+- Cote de resurse Azure și limitări de capacitate
+- Criterii de selecție SKU și optimizarea costurilor
+- Scripturi automate de validare și testare
+- Planificarea implementării și evaluarea riscurilor
+
+#### Exerciții practice
+1. **Analiza capacității**: Analizează cerințele de resurse pentru aplicațiile tale
+2. **Optimizarea SKU-urilor**: Compară și selectează niveluri de servicii eficiente din punct de vedere al costurilor
+3. **Automatizarea validării**: Implementează scripturi de verificare înainte de implementare
+4. **Planificarea costurilor**: Creează estimări de costuri și bugete pentru implementare
+
+#### Întrebări de evaluare
+- Cum validezi capacitatea Azure înainte de implementare?
+- Ce factori influențează deciziile de selecție SKU?
+- Cum automatizezi validarea pre-implementare?
+- Ce strategii ajută la optimizarea costurilor de implementare?
+
+---
+
+### Capitolul 7: Depanare și Debugging (Săptămâna 9)
+**Durată**: 1-1.5 ore | **Complexitate**: ⭐⭐
+
+#### Obiective de învățare
+- Dezvoltă abordări sistematice de debugging pentru implementările AZD
+- Rezolvă probleme comune de implementare și configurare
+- Depanează probleme specifice AI și probleme de performanță
+- Implementează monitorizare și alerte pentru detectarea proactivă a problemelor
+
+#### Concepte cheie de stăpânit
+- Tehnici de diagnosticare și strategii de logare
+- Modele comune de eșec și soluțiile lor
+- Monitorizarea performanței și optimizarea
+- Proceduri de răspuns la incidente și recuperare
+
+#### Exerciții practice
+1. **Abilități de diagnosticare**: Exersează cu implementări intenționat defecte
+2. **Analiza logurilor**: Folosește Azure Monitor și Application Insights eficient
+3. **Optimizarea performanței**: Optimizează aplicațiile cu performanță redusă
+4. **Proceduri de recuperare**: Implementează backup și recuperare în caz de dezastru
+
+#### Întrebări de evaluare
+- Care sunt cele mai comune eșecuri de implementare AZD?
+- Cum depanezi problemele de autentificare și permisiuni?
+- Ce strategii de monitorizare ajută la prevenirea problemelor în producție?
+- Cum optimizezi performanța aplicațiilor în Azure?
+
+---
+
+### Capitolul 8: Modele de Producție și Enterprise (Săptămâna 10-11)
+**Durată**: 2-3 ore | **Complexitate**: ⭐⭐⭐⭐
+
+#### Obiective de învățare
+- Implementează strategii de implementare la nivel enterprise
+- Proiectează modele de securitate și cadre de conformitate
+- Stabilește monitorizare, guvernanță și gestionarea costurilor
+- Creează pipeline-uri CI/CD scalabile cu integrare AZD
+
+#### Concepte cheie de stăpânit
+- Cerințe de securitate și conformitate la nivel enterprise
+- Cadre de guvernanță și implementarea politicilor
+- Monitorizare avansată și gestionarea costurilor
+- Integrarea CI/CD și pipeline-uri automate de implementare
+
+#### Exerciții practice
+1. **Securitate enterprise**: Implementează modele cuprinzătoare de securitate
+2. **Cadru de guvernanță**: Configurează Azure Policy și gestionarea resurselor
+3. **Monitorizare avansată**: Creează dashboard-uri și alerte automate
+4. **Integrare CI/CD**: Construiește pipeline-uri automate de implementare
+
+#### Întrebări de evaluare
+- Cum implementezi securitatea enterprise în implementările AZD?
+- Ce modele de guvernanță asigură conformitatea și controlul costurilor?
+- Cum proiectezi monitorizarea scalabilă pentru sistemele de producție?
+- Ce modele CI/CD funcționează cel mai bine cu fluxurile de lucru AZD?
+2. Cum validezi disponibilitatea resurselor Azure înainte de implementare?  
+3. Care sunt componentele cheie ale unui sistem de verificare preliminară?  
+4. Cum estimezi și controlezi costurile de implementare?  
 5. Ce monitorizare este esențială pentru planificarea capacității?
 
 ### Modulul 5: Depanare și Debugging (Săptămâna 6)
 
-#### Obiective de Învățare
-- Stăpânește metodologii sistematice de depanare
-- Dezvoltă expertiză în debugging-ul problemelor complexe de implementare
-- Implementează monitorizare și alerte cuprinzătoare
-- Construiește proceduri de răspuns și recuperare în caz de incidente
+#### Obiective de învățare  
+- Stăpânirea metodologiilor sistematice de depanare  
+- Dezvoltarea expertizei în debugging-ul problemelor complexe de implementare  
+- Implementarea monitorizării și alertării cuprinzătoare  
+- Construirea procedurilor de răspuns și recuperare în caz de incidente  
 
-#### Concepte Cheie de Stăpânit
-- Modele comune de eșec al implementării
-- Tehnici de analiză și corelare a jurnalelor
-- Monitorizare și optimizare a performanței
-- Detectarea și răspunsul la incidente de securitate
-- Recuperare în caz de dezastru și continuitate a afacerii
+#### Concepte cheie de stăpânit  
+- Modele comune de eșec în implementare  
+- Analiza și corelarea jurnalelor  
+- Monitorizarea performanței și optimizarea  
+- Detectarea și răspunsul la incidente de securitate  
+- Recuperarea în caz de dezastru și continuitatea afacerii  
 
-#### Exerciții Practice
+#### Exerciții practice  
 
-**Exercițiul 5.1: Scenarii de Depanare**  
+**Exercițiul 5.1: Scenarii de depanare**  
 ```bash
 # Practice resolving common issues:
 1. Authentication and authorization failures
@@ -269,9 +295,9 @@ Analyze the following components:
 3. Application startup and runtime errors
 4. Network connectivity problems
 5. Performance and scaling issues
-```
+```  
 
-**Exercițiul 5.2: Implementarea Monitorizării**  
+**Exercițiul 5.2: Implementarea monitorizării**  
 ```bash
 # Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
@@ -279,9 +305,9 @@ Analyze the following components:
 3. Custom dashboards and alerting rules
 4. Log aggregation and analysis
 5. Health check endpoints and automated testing
-```
+```  
 
-**Exercițiul 5.3: Răspuns la Incidente**  
+**Exercițiul 5.3: Răspuns la incidente**  
 ```bash
 # Build incident response procedures:
 1. Create runbooks for common problems
@@ -289,33 +315,33 @@ Analyze the following components:
 3. Set up notification and escalation workflows
 4. Practice disaster recovery scenarios
 5. Document lessons learned and improvements
-```
+```  
 
-#### Întrebări de Autoevaluare
-1. Care este abordarea sistematică pentru depanarea implementărilor azd?
-2. Cum corelezi jurnalele între mai multe servicii și resurse?
-3. Ce metrici de monitorizare sunt cele mai critice pentru detectarea timpurie a problemelor?
-4. Cum implementezi proceduri eficiente de recuperare în caz de dezastru?
-5. Care sunt componentele cheie ale unui plan de răspuns la incidente?
+#### Întrebări de autoevaluare  
+1. Care este abordarea sistematică pentru depanarea implementărilor azd?  
+2. Cum corelezi jurnalele între mai multe servicii și resurse?  
+3. Ce metrici de monitorizare sunt cele mai critice pentru detectarea timpurie a problemelor?  
+4. Cum implementezi proceduri eficiente de recuperare în caz de dezastru?  
+5. Care sunt componentele cheie ale unui plan de răspuns la incidente?  
 
-### Modulul 6: Subiecte Avansate și Cele Mai Bune Practici (Săptămânile 7-8)
+### Modulul 6: Subiecte avansate și bune practici (Săptămâna 7-8)
 
-#### Obiective de Învățare
-- Implementează modele de implementare la nivel enterprise
-- Stăpânește integrarea și automatizarea CI/CD
-- Dezvoltă șabloane personalizate și contribuie la comunitate
-- Înțelege cerințele avansate de securitate și conformitate
+#### Obiective de învățare  
+- Implementarea modelelor de implementare la nivel de întreprindere  
+- Stăpânirea integrării și automatizării CI/CD  
+- Dezvoltarea de șabloane personalizate și contribuția la comunitate  
+- Înțelegerea cerințelor avansate de securitate și conformitate  
 
-#### Concepte Cheie de Stăpânit
-- Modele de integrare a pipeline-urilor CI/CD
-- Dezvoltarea și distribuirea șabloanelor personalizate
-- Guvernanță și conformitate la nivel enterprise
-- Configurații avansate de rețea și securitate
-- Optimizarea performanței și gestionarea costurilor
+#### Concepte cheie de stăpânit  
+- Modele de integrare a pipeline-urilor CI/CD  
+- Dezvoltarea și distribuirea de șabloane personalizate  
+- Guvernanța și conformitatea la nivel de întreprindere  
+- Configurații avansate de rețea și securitate  
+- Optimizarea performanței și gestionarea costurilor  
 
-#### Exerciții Practice
+#### Exerciții practice  
 
-**Exercițiul 6.1: Integrare CI/CD**  
+**Exercițiul 6.1: Integrarea CI/CD**  
 ```yaml
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
@@ -323,9 +349,9 @@ Analyze the following components:
 3. Multi-stage deployment with approvals
 4. Automated testing and quality gates
 5. Security scanning and compliance checks
-```
+```  
 
-**Exercițiul 6.2: Dezvoltarea Șabloanelor Personalizate**  
+**Exercițiul 6.2: Dezvoltarea de șabloane personalizate**  
 ```bash
 # Create and publish custom templates:
 1. Design template for your organization's architecture
@@ -333,9 +359,9 @@ Analyze the following components:
 3. Add comprehensive documentation and examples
 4. Test template across different environments
 5. Publish and maintain template in template gallery
-```
+```  
 
-**Exercițiul 6.3: Implementare la Nivel Enterprise**  
+**Exercițiul 6.3: Implementarea la nivel de întreprindere**  
 ```bash
 # Implement enterprise-grade features:
 1. Multi-tenant architecture with proper isolation
@@ -343,27 +369,280 @@ Analyze the following components:
 3. Compliance and governance controls
 4. Cost allocation and chargeback mechanisms
 5. Disaster recovery and business continuity
-```
+```  
 
-#### Întrebări de Autoevaluare
-1. Cum integrezi azd în fluxurile de lucru CI/CD existente?
-2. Care sunt considerațiile cheie pentru dezvoltarea șabloanelor personalizate?
-3. Cum implementezi guvernanța și conformitatea în implementările azd?
-4. Care sunt cele mai bune practici pentru implementările la scară enterprise?
-5. Cum contribui eficient la comunitatea azd?
-3. **Contribuie la Open Source**: Împărtășește șabloanele și soluțiile tale cu comunitatea  
-4. **Învață pe alții**: Explicarea conceptelor altora îți consolidează propria înțelegere  
-5. **Fii curios**: Explorează continuu servicii noi Azure și modele de integrare  
+#### Întrebări de autoevaluare  
+1. Cum integrezi azd în fluxurile de lucru CI/CD existente?  
+2. Care sunt considerațiile cheie pentru dezvoltarea de șabloane personalizate?  
+3. Cum implementezi guvernanța și conformitatea în implementările azd?  
+4. Care sunt cele mai bune practici pentru implementările la scară de întreprindere?  
+5. Cum contribui eficient la comunitatea azd?  
+
+## Proiecte practice  
+
+### Proiectul 1: Website de portofoliu personal  
+**Complexitate**: Începător  
+**Durată**: 1-2 săptămâni  
+
+Construiește și implementează un website de portofoliu personal folosind:  
+- Găzduire website static pe Azure Storage  
+- Configurarea unui domeniu personalizat  
+- Integrarea CDN pentru performanță globală  
+- Pipeline de implementare automatizată  
+
+**Livrabile**:  
+- Website funcțional implementat pe Azure  
+- Șablon azd personalizat pentru implementări de portofoliu  
+- Documentația procesului de implementare  
+- Recomandări pentru analiza și optimizarea costurilor  
+
+### Proiectul 2: Aplicație de gestionare a sarcinilor  
+**Complexitate**: Intermediar  
+**Durată**: 2-3 săptămâni  
+
+Creează o aplicație full-stack de gestionare a sarcinilor cu:  
+- Frontend React implementat pe App Service  
+- Backend API Node.js cu autentificare  
+- Bază de date PostgreSQL cu migrații  
+- Monitorizare cu Application Insights  
+
+**Livrabile**:  
+- Aplicație completă cu autentificare utilizator  
+- Schema bazei de date și scripturi de migrație  
+- Dashboard-uri de monitorizare și reguli de alertare  
+- Configurație de implementare pentru mai multe medii  
+
+### Proiectul 3: Platformă de e-commerce bazată pe microservicii  
+**Complexitate**: Avansat  
+**Durată**: 4-6 săptămâni  
+
+Proiectează și implementează o platformă de e-commerce bazată pe microservicii:  
+- Multiple servicii API (catalog, comenzi, plăți, utilizatori)  
+- Integrare cu cozi de mesaje folosind Service Bus  
+- Cache Redis pentru optimizarea performanței  
+- Jurnalizare și monitorizare cuprinzătoare  
+
+**Livrabile**:  
+- Arhitectură completă bazată pe microservicii  
+- Modele de comunicare între servicii  
+- Testare și optimizare a performanței  
+- Implementare de securitate pregătită pentru producție  
+
+## Evaluare și certificare  
+
+### Verificări de cunoștințe  
+
+Completează aceste evaluări după fiecare modul:  
+
+**Evaluare Modul 1**: Concepte de bază și instalare  
+- Întrebări cu răspunsuri multiple despre concepte de bază  
+- Sarcini practice de instalare și configurare  
+- Exercițiu simplu de implementare  
+
+**Evaluare Modul 2**: Configurare și medii  
+- Scenarii de gestionare a mediilor  
+- Exerciții de depanare a configurării  
+- Implementarea configurației de securitate  
+
+**Evaluare Modul 3**: Implementare și provizionare  
+- Provocări de design al infrastructurii  
+- Scenarii de implementare multi-servicii  
+- Exerciții de optimizare a performanței  
+
+**Evaluare Modul 4**: Validare pre-implementare  
+- Studii de caz pentru planificarea capacității  
+- Scenarii de optimizare a costurilor  
+- Implementarea pipeline-ului de validare  
+
+**Evaluare Modul 5**: Depanare și debugging  
+- Exerciții de diagnosticare a problemelor  
+- Sarcini de implementare a monitorizării  
+- Simulări de răspuns la incidente  
+
+**Evaluare Modul 6**: Subiecte avansate  
+- Design pipeline CI/CD  
+- Dezvoltarea de șabloane personalizate  
+- Scenarii de arhitectură la nivel de întreprindere  
+
+### Proiect final de capstone  
+
+Proiectează și implementează o soluție completă care demonstrează stăpânirea tuturor conceptelor:  
+
+**Cerințe**:  
+- Arhitectură aplicație multi-nivel  
+- Multiple medii de implementare  
+- Monitorizare și alertare cuprinzătoare  
+- Implementare de securitate și conformitate  
+- Optimizare costuri și performanță  
+- Documentație completă și ghiduri de utilizare  
+
+**Criterii de evaluare**:  
+- Calitatea implementării tehnice  
+- Completitudinea documentației  
+- Respectarea securității și bunelor practici  
+- Optimizarea performanței și costurilor  
+- Eficiența în depanare și monitorizare  
+
+## Resurse de studiu și referințe  
+
+### Documentație oficială  
+- [Documentația Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Documentația Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
+- [Centrul de arhitectură Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
+
+### Resurse comunitare  
+- [Galeria de șabloane AZD](https://azure.github.io/awesome-azd/)  
+- [Organizația GitHub Azure-Samples](https://github.com/Azure-Samples)  
+- [Repository-ul GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)  
+
+### Medii de practică  
+- [Cont gratuit Azure](https://azure.microsoft.com/free/)  
+- [Nivel gratuit Azure DevOps](https://azure.microsoft.com/services/devops/)  
+- [GitHub Actions](https://github.com/features/actions)  
+
+### Instrumente suplimentare  
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)  
+- [Visual Studio Code](https://code.visualstudio.com/)  
+- [Pachet de extensii Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
+
+## Recomandări pentru programul de studiu  
+
+### Studiu full-time (8 săptămâni)  
+- **Săptămânile 1-2**: Modulele 1-2 (Introducere, Configurare)  
+- **Săptămânile 3-4**: Modulele 3-4 (Implementare, Validare pre-implementare)  
+- **Săptămânile 5-6**: Modulele 5-6 (Depanare, Subiecte avansate)  
+- **Săptămânile 7-8**: Proiecte practice și evaluare finală  
+
+### Studiu part-time (16 săptămâni)  
+- **Săptămânile 1-4**: Modulul 1 (Introducere)  
+- **Săptămânile 5-7**: Modulul 2 (Configurare și medii)  
+- **Săptămânile 8-10**: Modulul 3 (Implementare și provizionare)  
+- **Săptămânile 11-12**: Modulul 4 (Validare pre-implementare)  
+- **Săptămânile 13-14**: Modulul 5 (Depanare și debugging)  
+- **Săptămânile 15-16**: Modulul 6 (Subiecte avansate și evaluare)  
 
 ---
 
-**Navigare**  
-- **Lecția anterioară**: [FAQ](faq.md)  
-- **Lecția următoare**: [Changelog](../changelog.md)  
+## Urmărirea progresului și cadrul de evaluare  
 
-**Urmărirea progresului de studiu**: Folosește acest ghid pentru a-ți urmări parcursul de învățare și pentru a asigura acoperirea completă a tuturor conceptelor și practicilor Azure Developer CLI.  
+### Lista de verificare pentru finalizarea capitolelor  
+
+Urmărește progresul prin fiecare capitol cu aceste rezultate măsurabile:  
+
+#### 📚 Capitolul 1: Fundamente și start rapid  
+- [ ] **Instalare completă**: AZD instalat și verificat pe platforma ta  
+- [ ] **Prima implementare**: Șablonul todo-nodejs-mongo implementat cu succes  
+- [ ] **Configurare mediu**: Variabilele de mediu configurate pentru prima dată  
+- [ ] **Navigare resurse**: Resursele implementate explorate în Azure Portal  
+- [ ] **Stăpânirea comenzilor**: Familiarizat cu comenzile de bază AZD  
+
+#### 🤖 Capitolul 2: Dezvoltare AI-First  
+- [ ] **Implementare șablon AI**: Șablonul azure-search-openai-demo implementat cu succes  
+- [ ] **Implementare RAG**: Configurarea indexării și recuperării documentelor  
+- [ ] **Configurare model**: Configurarea mai multor modele AI cu scopuri diferite  
+- [ ] **Monitorizare AI**: Implementarea Application Insights pentru sarcini AI  
+- [ ] **Optimizare performanță**: Ajustarea performanței aplicației AI  
+
+#### ⚙️ Capitolul 3: Configurare și autentificare  
+- [ ] **Configurare multi-mediu**: Configurarea mediilor dev, staging și prod  
+- [ ] **Implementare securitate**: Configurarea autentificării cu identitate gestionată  
+- [ ] **Gestionare secrete**: Integrarea Azure Key Vault pentru date sensibile  
+- [ ] **Gestionare parametri**: Crearea configurațiilor specifice mediului  
+- [ ] **Stăpânirea autentificării**: Implementarea modelelor de acces securizat  
+
+#### 🏗️ Capitolul 4: Infrastructură ca cod și implementare  
+- [ ] **Creare șablon personalizat**: Construirea unui șablon de aplicație multi-servicii  
+- [ ] **Stăpânirea Bicep**: Crearea componentelor de infrastructură modulare și reutilizabile  
+- [ ] **Automatizare implementare**: Implementarea hook-urilor pre/post implementare  
+- [ ] **Design arhitectură**: Implementarea unei arhitecturi complexe de microservicii  
+- [ ] **Optimizare șablon**: Optimizarea șabloanelor pentru performanță și cost  
+
+#### 🎯 Capitolul 5: Soluții AI multi-agent  
+- [ ] **Implementare soluție retail**: Scenariul complet multi-agent retail implementat  
+- [ ] **Personalizare agent**: Modificarea comportamentului agenților Customer și Inventory  
+- [ ] **Scalare arhitectură**: Implementarea balansării încărcării și auto-scalării  
+- [ ] **Monitorizare producție**: Configurarea monitorizării și alertării cuprinzătoare  
+- [ ] **Ajustare performanță**: Optimizarea performanței sistemului multi-agent  
+
+#### 🔍 Capitolul 6: Validare pre-implementare și planificare  
+- [ ] **Analiză capacitate**: Analizarea cerințelor de resurse pentru aplicații  
+- [ ] **Optimizare SKU**: Selectarea nivelurilor de servicii cost-eficiente  
+- [ ] **Automatizare validare**: Implementarea scripturilor de verificare pre-implementare  
+- [ ] **Planificare costuri**: Crearea estimărilor și bugetelor pentru costurile de implementare  
+- [ ] **Evaluare riscuri**: Identificarea și atenuarea riscurilor de implementare  
+
+#### 🚨 Capitolul 7: Depanare și debugging  
+- [ ] **Abilități de diagnosticare**: Debugging-ul implementărilor intenționat defecte  
+- [ ] **Analiză jurnale**: Utilizarea eficientă a Azure Monitor și Application Insights  
+- [ ] **Ajustare performanță**: Optimizarea aplicațiilor cu performanță redusă  
+- [ ] **Proceduri de recuperare**: Implementarea backup-ului și recuperării în caz de dezastru  
+- [ ] **Configurare monitorizare**: Crearea monitorizării proactive și alertării  
+
+#### 🏢 Capitolul 8: Modele de producție și întreprindere  
+- [ ] **Securitate la nivel de întreprindere**: Implementarea modelelor de securitate cuprinzătoare  
+- [ ] **Cadru de guvernanță**: Configurarea Azure Policy și gestionarea resurselor  
+- [ ] **Monitorizare avansată**: Crearea dashboard-urilor și alertării automate  
+- [ ] **Integrare CI/CD**: Construirea pipeline-urilor de implementare automatizate  
+- [ ] **Implementare conformitate**: Respectarea cerințelor de conformitate la nivel de întreprindere  
+
+### Cronologie de învățare și repere  
+
+#### Săptămâna 1-2: Construirea fundației  
+- **Reper**: Implementarea primei aplicații AI folosind AZD  
+- **Validare**: Aplicație funcțională accesibilă prin URL public  
+- **Abilități**: Fluxuri de lucru AZD de bază și integrarea serviciilor AI  
+
+#### Săptămâna 3-4: Stăpânirea configurării  
+- **Reper**: Implementare multi-mediu cu autentificare securizată  
+- **Validare**: Aceeași aplicație implementată în dev/staging/prod  
+- **Abilități**: Gestionarea mediilor și implementarea securității  
+
+#### Săptămâna 5-6: Expertiză în infrastructură  
+- **Reper**: Șablon personalizat pentru aplicație multi-servicii complexă  
+- **Validare**: Șablon reutilizabil implementat de un alt membru al echipei  
+- **Abilități**: Stăpânirea Bicep și automatizarea infrastructurii  
+
+#### Săptămâna 7-8: Implementare AI avansată  
+- **Reper**: Soluție AI multi-agent pregătită pentru producție  
+- **Validare**: Sistem care gestionează încărcarea reală cu monitorizare  
+- **Abilități**: Orchestrarea multi-agent și optimizarea performanței  
+
+#### Săptămâna 9-10: Pregătire pentru producție  
+- **Reper**: Implementare la nivel de întreprindere cu conformitate completă  
+- **Validare**: Trecerea reviziei de securitate și auditului de optimizare a costurilor  
+- **Abilități**: Guvernanță, monitorizare și integrare CI/CD  
+
+### Evaluare și certificare  
+
+#### Metode de validare a cunoștințelor  
+1. **Implementări practice**: Aplicații funcționale pentru fiecare capitol  
+2. **Recenzii de cod**: Evaluarea calității șabloanelor și configurațiilor  
+3. **Rezolvarea problemelor**: Scenarii de depanare și soluții  
+4. **Predare colegială**: Explicarea conceptelor altor cursanți  
+5. **Contribuție comunitară**: Partajarea șabloanelor sau îmbunătățirilor  
+
+#### Rezultate de dezvoltare profesională  
+- **Pro
+- **Documentație**: Contribuie la documentația comunității și exemple
+- **Ciclul de Feedback**: Oferă feedback despre conținutul cursului și serviciile Azure
+
+#### Dezvoltare Profesională
+- **Rețea Profesională**: Conectează-te cu experți Azure și AI
+- **Oportunități de Vorbire**: Prezintă ceea ce ai învățat la conferințe sau întâlniri
+- **Contribuție Open Source**: Contribuie la șabloane și instrumente AZD
+- **Mentorat**: Ghidează alți dezvoltatori în călătoria lor de învățare AZD
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Navigare Capitole:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../README.md)
+- **📖 Începe Să Înveți**: [Capitolul 1: Fundament & Start Rapid](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Urmărirea Progresului**: Urmărește-ți avansarea prin sistemul de învățare cu 8 capitole cuprinzătoare
+- **🤝 Comunitate**: [Azure Discord](https://discord.gg/microsoft-azure) pentru suport și discuții
+
+**Urmărirea Progresului Studiului**: Folosește acest ghid structurat pentru a stăpâni Azure Developer CLI prin învățare progresivă, practică, cu rezultate măsurabile și beneficii pentru dezvoltarea profesională.
+
+---
+
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

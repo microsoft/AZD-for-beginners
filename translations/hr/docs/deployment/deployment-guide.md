@@ -1,50 +1,57 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:18:55+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T12:02:17+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "hr"
 }
 -->
-# Vodič za implementaciju - Ovladavanje AZD implementacijama
+# Vodič za implementaciju - Savladavanje AZD implementacija
+
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod i implementacija
+- **⬅️ Prethodno poglavlje**: [Poglavlje 3: Konfiguracija](../getting-started/configuration.md)
+- **➡️ Sljedeće**: [Provisioning Resources](provisioning.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 5: Višeagentna AI rješenja](../../examples/retail-scenario.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pokriva sve što trebate znati o implementaciji aplikacija pomoću Azure Developer CLI, od osnovnih implementacija jednim naredbom do naprednih produkcijskih scenarija s prilagođenim hookovima, višestrukim okruženjima i integracijom CI/CD-a. Ovladajte kompletnim životnim ciklusom implementacije uz praktične primjere i najbolje prakse.
+Ovaj sveobuhvatni vodič pokriva sve što trebate znati o implementaciji aplikacija pomoću Azure Developer CLI-ja, od osnovnih implementacija jednim naredbom do naprednih produkcijskih scenarija s prilagođenim hookovima, višestrukim okruženjima i integracijom CI/CD-a. Savladajte cijeli životni ciklus implementacije uz praktične primjere i najbolje prakse.
 
 ## Ciljevi učenja
 
-Završetkom ovog vodiča, naučit ćete:
-- Ovladati svim naredbama i radnim procesima implementacije Azure Developer CLI-a
-- Razumjeti kompletan životni ciklus implementacije, od pripreme do praćenja
-- Implementirati prilagođene hookove za automatizaciju prije i poslije implementacije
+Nakon završetka ovog vodiča, naučit ćete:
+- Savladati sve naredbe i tijekove rada za implementaciju pomoću Azure Developer CLI-ja
+- Razumjeti cijeli životni ciklus implementacije, od provisioninga do praćenja
+- Implementirati prilagođene hookove za automatizaciju prije i nakon implementacije
 - Konfigurirati višestruka okruženja s parametrima specifičnim za okruženje
-- Postaviti napredne strategije implementacije, uključujući blue-green i canary implementacije
-- Integrirati azd implementacije s CI/CD pipelineovima i DevOps radnim procesima
+- Postaviti napredne strategije implementacije, uključujući blue-green i kanarijske implementacije
+- Integrirati azd implementacije s CI/CD pipelineovima i DevOps tijekovima rada
 
 ## Ishodi učenja
 
 Po završetku, moći ćete:
-- Samostalno izvršavati i rješavati probleme svih azd radnih procesa implementacije
+- Samostalno izvršavati i rješavati probleme svih azd tijekova implementacije
 - Dizajnirati i implementirati prilagođenu automatizaciju implementacije pomoću hookova
 - Konfigurirati produkcijske implementacije s odgovarajućom sigurnošću i praćenjem
 - Upravljati složenim scenarijima implementacije u više okruženja
-- Optimizirati performanse implementacije i implementirati strategije povratka na prethodno stanje
-- Integrirati azd implementacije u DevOps prakse na razini poduzeća
+- Optimizirati performanse implementacije i implementirati strategije povratka
+- Integrirati azd implementacije u korporativne DevOps prakse
 
 ## Pregled implementacije
 
-Azure Developer CLI pruža nekoliko naredbi za implementaciju:
-- `azd up` - Kompletan radni proces (priprema + implementacija)
-- `azd provision` - Samo kreiranje/ažuriranje Azure resursa
+Azure Developer CLI nudi nekoliko naredbi za implementaciju:
+- `azd up` - Kompletan tijek rada (provision + deploy)
+- `azd provision` - Samo kreiranje/azuriranje Azure resursa
 - `azd deploy` - Samo implementacija aplikacijskog koda
 - `azd package` - Izrada i pakiranje aplikacija
 
-## Osnovni radni procesi implementacije
+## Osnovni tijekovi implementacije
 
 ### Kompletna implementacija (azd up)
-Najčešći radni proces za nove projekte:
+Najčešći tijek rada za nove projekte:
 ```bash
 # Deploy everything from scratch
 azd up
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Razumijevanje procesa implementacije
 
-### Faza 1: Hookovi prije pripreme
+### Faza 1: Hookovi prije provisioninga
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Faza 2: Priprema infrastrukture
+### Faza 2: Provisioning infrastrukture
 - Čita predloške infrastrukture (Bicep/Terraform)
 - Kreira ili ažurira Azure resurse
 - Konfigurira mrežu i sigurnost
 - Postavlja praćenje i zapisivanje
 
-### Faza 3: Hookovi nakon pripreme
+### Faza 3: Hookovi nakon provisioninga
 ```yaml
 hooks:
   postprovision:
@@ -121,7 +128,7 @@ hooks:
 ### Faza 4: Pakiranje aplikacije
 - Izrađuje aplikacijski kod
 - Kreira artefakte implementacije
-- Pakira za ciljne platforme (kontejneri, ZIP datoteke itd.)
+- Pakira za ciljanu platformu (kontejneri, ZIP datoteke itd.)
 
 ### Faza 5: Hookovi prije implementacije
 ```yaml
@@ -261,7 +268,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Canary implementacije
+### Kanarijske implementacije
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -369,7 +376,7 @@ azd config set deploy.parallelism 5
 azd deploy --parallel
 ```
 
-### Predmemoriranje izrade
+### Keširanje izrade
 ```yaml
 # azure.yaml - Enable build caching
 services:
@@ -501,7 +508,7 @@ services:
           - external-api-key
 ```
 
-## 🚨 Strategije povratka na prethodno stanje
+## 🚨 Strategije povratka
 
 ### Brzi povratak
 ```bash
@@ -631,23 +638,23 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Sljedeći koraci
 
-- [Priprema resursa](provisioning.md) - Detaljan pregled upravljanja infrastrukturom
-- [Planiranje prije implementacije](../pre-deployment/capacity-planning.md) - Planirajte svoju strategiju implementacije
-- [Uobičajeni problemi](../troubleshooting/common-issues.md) - Rješavanje problema s implementacijom
-- [Najbolje prakse](../troubleshooting/debugging.md) - Strategije implementacije spremne za produkciju
+- [Provisioning Resources](provisioning.md) - Detaljno o upravljanju infrastrukturom
+- [Pre-Deployment Planning](../pre-deployment/capacity-planning.md) - Planirajte svoju strategiju implementacije
+- [Common Issues](../troubleshooting/common-issues.md) - Rješavanje problema s implementacijom
+- [Best Practices](../troubleshooting/debugging.md) - Strategije implementacije spremne za produkciju
 
 ## Dodatni resursi
 
-- [Referenca za implementaciju Azure Developer CLI-a](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Implementacija Azure App Service-a](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Implementacija Azure Container Apps-a](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Implementacija Azure Functions-a](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigacija**
 - **Prethodna lekcija**: [Vaš prvi projekt](../getting-started/first-project.md)
-- **Sljedeća lekcija**: [Priprema resursa](provisioning.md)
+- **Sljedeća lekcija**: [Provisioning Resources](provisioning.md)
 
 ---
 

@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:21:39+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T10:59:57+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "ro"
 }
 -->
 # Implementarea modelelor AI cu Azure Developer CLI
 
-**Anterior:** [Integrarea Azure AI Foundry](azure-ai-foundry-integration.md) | **Următor:** [Laboratorul AI Workshop](ai-workshop-lab.md)
+**Navigare capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 2 - Dezvoltare AI-First
+- **⬅️ Precedent**: [Integrarea Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Următor**: [Laborator Workshop AI](ai-workshop-lab.md)
+- **🚀 Capitol Următor**: [Capitolul 3: Configurare](../getting-started/configuration.md)
 
-Acest ghid oferă instrucțiuni detaliate pentru implementarea modelelor AI utilizând șabloane AZD, acoperind totul, de la selecția modelului până la tiparele de implementare în producție.
+Acest ghid oferă instrucțiuni detaliate pentru implementarea modelelor AI utilizând șabloane AZD, acoperind totul de la selecția modelelor până la tiparele de implementare în producție.
 
 ## Cuprins
 
-- [Strategia de selecție a modelului](../../../../docs/ai-foundry)
+- [Strategia de selecție a modelelor](../../../../docs/ai-foundry)
 - [Configurarea AZD pentru modele AI](../../../../docs/ai-foundry)
 - [Tipare de implementare](../../../../docs/ai-foundry)
 - [Managementul modelelor](../../../../docs/ai-foundry)
 - [Considerații pentru producție](../../../../docs/ai-foundry)
 - [Monitorizare și observabilitate](../../../../docs/ai-foundry)
 
-## Strategia de selecție a modelului
+## Strategia de selecție a modelelor
 
 ### Modele Azure OpenAI
 
@@ -56,7 +61,7 @@ services:
 
 ### Planificarea capacității modelului
 
-| Tip Model | Caz de utilizare | Capacitate recomandată | Considerații de cost |
+| Tip Model | Caz de Utilizare | Capacitate Recomandată | Considerații de Cost |
 |-----------|------------------|------------------------|-----------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Rentabil pentru majoritatea sarcinilor |
 | GPT-4 | Raționament complex | 20-100 TPM | Cost mai ridicat, utilizare pentru funcții premium |
@@ -65,7 +70,7 @@ services:
 
 ## Configurarea AZD pentru modele AI
 
-### Configurarea șabloanelor Bicep
+### Configurarea șablonului Bicep
 
 Creează implementări de modele prin șabloane Bicep:
 
@@ -229,9 +234,9 @@ Urmărește versiunile modelelor în configurația AZD:
 }
 ```
 
-### Actualizări ale modelului
+### Actualizări ale modelelor
 
-Utilizează hook-uri AZD pentru actualizări ale modelului:
+Utilizează hook-uri AZD pentru actualizări ale modelelor:
 
 ```bash
 #!/bin/bash
@@ -246,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### Testare A/B
 
-Implementă mai multe versiuni ale modelului:
+Implementarea mai multor versiuni de modele:
 
 ```bicep
 param enableABTesting bool = false
@@ -446,7 +451,7 @@ class AITelemetry:
 
 ### Verificări de sănătate
 
-Implementează monitorizarea stării serviciilor AI:
+Implementează monitorizarea sănătății serviciilor AI:
 
 ```python
 # Health check endpoints
@@ -477,10 +482,10 @@ async def check_ai_models():
 
 ## Pași următori
 
-1. **Revizuiește [Ghidul de integrare Azure AI Foundry](azure-ai-foundry-integration.md)** pentru tipare de integrare a serviciilor
-2. **Completează [Laboratorul AI Workshop](ai-workshop-lab.md)** pentru experiență practică
-3. **Implementează [Practici AI pentru producție](production-ai-practices.md)** pentru implementări la nivel de întreprindere
-4. **Explorează [Ghidul de depanare AI](../troubleshooting/ai-troubleshooting.md)** pentru probleme comune
+1. **Revizuiește [Ghidul de Integrare Azure AI Foundry](azure-ai-foundry-integration.md)** pentru tipare de integrare a serviciilor
+2. **Completează [Laboratorul Workshop AI](ai-workshop-lab.md)** pentru experiență practică
+3. **Implementează [Practici AI pentru Producție](production-ai-practices.md)** pentru implementări la nivel de întreprindere
+4. **Explorează [Ghidul de Depanare AI](../troubleshooting/ai-troubleshooting.md)** pentru probleme comune
 
 ## Resurse
 
@@ -491,7 +496,12 @@ async def check_ai_models():
 
 ---
 
-**Anterior:** [Integrarea Azure AI Foundry](azure-ai-foundry-integration.md) | **Următor:** [Laboratorul AI Workshop](ai-workshop-lab.md)
+**Navigare capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 2 - Dezvoltare AI-First
+- **⬅️ Precedent**: [Integrarea Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Următor**: [Laborator Workshop AI](ai-workshop-lab.md)
+- **🚀 Capitol Următor**: [Capitolul 3: Configurare](../getting-started/configuration.md)
 
 ---
 
