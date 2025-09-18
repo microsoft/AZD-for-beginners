@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-10T06:50:58+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T11:04:12+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "ro"
 }
 -->
 # Ghid de selecție SKU - Alegerea nivelurilor potrivite de servicii Azure
 
+**Navigare capitole:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol curent**: Capitolul 6 - Validare și planificare înainte de implementare
+- **⬅️ Precedent**: [Planificarea capacității](capacity-planning.md)
+- **➡️ Următor**: [Verificări preliminare](preflight-checks.md)
+- **🚀 Capitol următor**: [Capitolul 7: Depanare](../troubleshooting/common-issues.md)
+
 ## Introducere
 
-Acest ghid cuprinzător te ajută să selectezi SKU-uri (Stock Keeping Units) optime pentru serviciile Azure, adaptate la diferite medii, sarcini de lucru și cerințe. Învață să analizezi nevoile de performanță, considerațiile de cost și cerințele de scalabilitate pentru a alege cele mai potrivite niveluri de servicii pentru implementările tale Azure Developer CLI.
+Acest ghid cuprinzător te ajută să selectezi SKU-uri (Stock Keeping Units) optime pentru serviciile Azure, adaptate diferitelor medii, sarcini de lucru și cerințe. Învață să analizezi nevoile de performanță, considerentele de cost și cerințele de scalabilitate pentru a alege cele mai potrivite niveluri de servicii pentru implementările tale Azure Developer CLI.
 
 ## Obiective de învățare
 
@@ -25,18 +32,18 @@ După parcurgerea acestui ghid, vei:
 
 ## Rezultate de învățare
 
-După finalizare, vei putea:
-- Selecta SKU-uri Azure adecvate pe baza cerințelor și constrângerilor sarcinilor de lucru
-- Proiecta arhitecturi multi-mediu rentabile cu selecția corectă a nivelurilor
+La final, vei fi capabil să:
+- Selectezi SKU-uri Azure adecvate pe baza cerințelor și constrângerilor sarcinilor de lucru
+- Proiectezi arhitecturi multi-mediu eficiente din punct de vedere al costurilor, cu selecția corectă a nivelurilor
 - Implementa teste de performanță și validare pentru alegerile SKU
-- Crea instrumente automate pentru recomandarea SKU-urilor și optimizarea costurilor
+- Creezi instrumente automate pentru recomandări SKU și optimizarea costurilor
 - Planifica migrarea SKU-urilor și strategiile de scalare pentru cerințe în schimbare
-- Aplica principiile Azure Well-Architected Framework pentru selecția nivelurilor de servicii
+- Aplica principiile Framework-ului Azure Well-Architected la selecția nivelurilor de servicii
 
 ## Cuprins
 
 - [Înțelegerea SKU-urilor](../../../../docs/pre-deployment)
-- [Selecția bazată pe mediu](../../../../docs/pre-deployment)
+- [Selecție bazată pe mediu](../../../../docs/pre-deployment)
 - [Ghiduri specifice serviciilor](../../../../docs/pre-deployment)
 - [Strategii de optimizare a costurilor](../../../../docs/pre-deployment)
 - [Considerații de performanță](../../../../docs/pre-deployment)
@@ -51,19 +58,19 @@ După finalizare, vei putea:
 
 SKU-urile (Stock Keeping Units) reprezintă diferite niveluri de servicii și performanță pentru resursele Azure. Fiecare SKU oferă diferite:
 
-- **Caracteristici de performanță** (CPU, memorie, debit)
+- **Caracteristici de performanță** (CPU, memorie, throughput)
 - **Disponibilitate de funcționalități** (opțiuni de scalare, niveluri SLA)
 - **Modele de preț** (bazate pe consum, capacitate rezervată)
 - **Disponibilitate regională** (nu toate SKU-urile sunt disponibile în toate regiunile)
 
 ### Factori cheie în selecția SKU-urilor
 
-1. **Cerințele sarcinilor de lucru**
+1. **Cerințe ale sarcinilor de lucru**
    - Modele de trafic/sarcină așteptate
    - Cerințe de performanță (CPU, memorie, I/O)
    - Nevoi de stocare și modele de acces
 
-2. **Tipul de mediu**
+2. **Tipul mediului**
    - Dezvoltare/testare vs. producție
    - Cerințe de disponibilitate
    - Nevoi de securitate și conformitate
@@ -76,11 +83,11 @@ SKU-urile (Stock Keeping Units) reprezintă diferite niveluri de servicii și pe
 4. **Proiecții de creștere**
    - Cerințe de scalabilitate
    - Nevoi viitoare de funcționalități
-   - Complexitatea migrării
+   - Complexitatea migrației
 
 ---
 
-## Selecția bazată pe mediu
+## Selecție bazată pe mediu
 
 ### Mediu de dezvoltare
 
@@ -148,7 +155,7 @@ skus:
 
 #### Caracteristici
 - **Disponibilitate ridicată**: Cerințe SLA de 99.9%+
-- **Performanță**: Resurse dedicate, debit ridicat
+- **Performanță**: Resurse dedicate, throughput ridicat
 - **Securitate**: Funcționalități premium de securitate
 - **Scalare**: Capacități complete de auto-scalare
 - **Monitorizare**: Observabilitate cuprinzătoare
@@ -163,7 +170,7 @@ skus:
 
 | Caz de utilizare | SKU recomandat | Motivare |
 |------------------|----------------|----------|
-| Dezvoltare/Testare | F1 (Gratuit) sau B1 (Basic) | Rentabil, suficient pentru testare |
+| Dezvoltare/Testare | F1 (Gratuit) sau B1 (Basic) | Cost-eficient, suficient pentru testare |
 | Aplicații mici de producție | S1 (Standard) | Domenii personalizate, SSL, auto-scalare |
 | Aplicații medii de producție | P1V3 (Premium V3) | Performanță mai bună, mai multe funcționalități |
 | Aplicații cu trafic ridicat | P2V3 sau P3V3 | Resurse dedicate, performanță ridicată |
@@ -254,7 +261,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 ### Azure Container Apps
 
-#### Tipuri de mediu
+#### Tipuri de medii
 
 1. **Bazat pe consum**
    - Preț pe utilizare
@@ -262,7 +269,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
    - Infrastructură partajată
 
 2. **Dedicat (Profiluri de sarcină)**
-   - Resurse de compute dedicate
+   - Resurse compute dedicate
    - Performanță previzibilă
    - Mai potrivit pentru sarcini de producție
 
@@ -326,24 +333,24 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 ### Azure Cosmos DB
 
-#### Modele de debit
+#### Modele de throughput
 
-1. **Debit provisionat manual**
+1. **Throughput manual provisionat**
    - Performanță previzibilă
    - Reduceri pentru capacitate rezervată
    - Cel mai bun pentru sarcini constante
 
-2. **Debit provisionat autoscalabil**
+2. **Throughput autoscalabil provisionat**
    - Scalare automată în funcție de utilizare
    - Plătești pentru ceea ce folosești (cu un minim)
    - Bun pentru sarcini variabile
 
 3. **Serverless**
-   - Plată pe cerere
-   - Fără debit provisionat
+   - Plată per cerere
+   - Fără throughput provisionat
    - Ideal pentru dezvoltare și sarcini intermitente
 
-#### Exemple de SKU-uri
+#### Exemple SKU
 
 ```bicep
 // Development - Serverless
@@ -404,13 +411,13 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 1. **Standard_LRS** - Dezvoltare, date non-critice
 2. **Standard_GRS** - Producție, necesitate de geo-redundanță
-3. **Premium_LRS** - Aplicații de înaltă performanță
+3. **Premium_LRS** - Aplicații cu performanță ridicată
 4. **Premium_ZRS** - Disponibilitate ridicată cu redundanță zonală
 
 #### Niveluri de performanță
 
-- **Standard**: Scop general, rentabil
-- **Premium**: Scenarii de înaltă performanță, latență scăzută
+- **Standard**: Scop general, cost-eficient
+- **Premium**: Performanță ridicată, latență scăzută
 
 ```bicep
 // Development
@@ -481,7 +488,7 @@ production:
 
 ### 3. Configurare auto-scalare
 
-Implementați scalarea inteligentă pentru optimizarea costurilor:
+Implementați scalare inteligentă pentru optimizarea costurilor:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -650,8 +657,8 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ### Referință rapidă SKU App Service
 
-| SKU | Nivel | vCPU | RAM | Stocare | Gama de prețuri | Caz de utilizare |
-|-----|-------|------|-----|---------|-----------------|-----------------|
+| SKU | Nivel | vCPU | RAM | Stocare | Interval de preț | Caz de utilizare |
+|-----|-------|------|-----|---------|------------------|-----------------|
 | F1 | Gratuit | Partajat | 1GB | 1GB | Gratuit | Dezvoltare |
 | B1 | Basic | 1 | 1.75GB | 10GB | $ | Aplicații mici |
 | S1 | Standard | 1 | 1.75GB | 50GB | $$ | Producție |
@@ -660,8 +667,8 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ### Referință rapidă SKU SQL Database
 
-| SKU | Nivel | DTU/vCore | Stocare | Gama de prețuri | Caz de utilizare |
-|-----|-------|-----------|---------|-----------------|-----------------|
+| SKU | Nivel | DTU/vCore | Stocare | Interval de preț | Caz de utilizare |
+|-----|-------|-----------|---------|------------------|-----------------|
 | Basic | Basic | 5 DTU | 2GB | $ | Dezvoltare |
 | S2 | Standard | 50 DTU | 250GB | $$ | Producție mică |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Performanță ridicată |
@@ -785,9 +792,9 @@ test_configuration:
 
 ---
 
-## Rezumat al celor mai bune practici
+## Rezumat bune practici
 
-### Ce trebuie să faci
+### Ce să faci
 
 1. **Începe mic și scalează** în funcție de utilizarea reală
 2. **Folosește SKU-uri diferite pentru medii diferite**
@@ -798,7 +805,7 @@ test_configuration:
 7. **Planifică creșterea, dar evită supra-provisionarea**
 8. **Folosește niveluri gratuite pentru dezvoltare, dacă este posibil**
 
-### Ce să eviți
+### Ce să nu faci
 
 1. **Nu folosi SKU-uri de producție pentru dezvoltare**
 2. **Nu ignora disponibilitatea regională a SKU-urilor**
@@ -816,10 +823,10 @@ test_configuration:
 ---
 
 **Navigare**
-- **Lecția anterioară**: [Planificarea capacității](capacity-planning.md)
+- **Lecția precedentă**: [Planificarea capacității](capacity-planning.md)
 - **Lecția următoare**: [Verificări preliminare](preflight-checks.md)
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

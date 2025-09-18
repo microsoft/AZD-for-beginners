@@ -1,25 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T22:29:12+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-18T11:01:03+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ro"
 }
 -->
 # Ghid de Configurare
 
-**Anterior:** [AZD Bazele](azd-basics.md) | **Următor:** [Primul Proiect](first-project.md)
+**Navigare în capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 3 - Configurare & Autentificare
+- **⬅️ Precedent**: [Primul Tău Proiect](first-project.md)
+- **➡️ Următor**: [Ghid de Implementare](../deployment/deployment-guide.md)
+- **🚀 Capitolul Următor**: [Capitolul 4: Infrastructură ca Cod](../deployment/deployment-guide.md)
 
 ## Introducere
 
-Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer CLI pentru fluxuri de lucru optime de dezvoltare și implementare. Vei învăța despre ierarhia de configurare, gestionarea mediului, metodele de autentificare și modele avansate de configurare care permit implementări eficiente și sigure în Azure.
+Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer CLI pentru fluxuri de lucru optime de dezvoltare și implementare. Vei învăța despre ierarhia de configurare, gestionarea mediilor, metodele de autentificare și modelele avansate de configurare care permit implementări eficiente și sigure în Azure.
 
 ## Obiective de Învățare
 
 Până la sfârșitul acestei lecții, vei:
 - Stăpâni ierarhia de configurare azd și vei înțelege cum sunt prioritizate setările
-- Configura setările globale și specifice proiectului în mod eficient
+- Configura setări globale și specifice proiectului în mod eficient
 - Gestiona mai multe medii cu configurații diferite
 - Implementa modele sigure de autentificare și autorizare
 - Înțelege modele avansate de configurare pentru scenarii complexe
@@ -31,18 +36,18 @@ După finalizarea acestei lecții, vei fi capabil să:
 - Configurezi și gestionezi mai multe medii de implementare
 - Implementa practici sigure de gestionare a configurației
 - Depanezi probleme legate de configurare
-- Personalizezi comportamentul azd pentru cerințele specifice ale organizației
+- Personalizezi comportamentul azd pentru cerințe specifice organizației
 
 Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer CLI pentru fluxuri de lucru optime de dezvoltare și implementare.
 
-## Ierarhia Configurării
+## Ierarhia de Configurare
 
 azd folosește un sistem ierarhic de configurare:
-1. **Flag-uri din linia de comandă** (cea mai mare prioritate)
+1. **Flag-uri din linia de comandă** (prioritate cea mai mare)
 2. **Variabile de mediu**
 3. **Configurația locală a proiectului** (`.azd/config.json`)
 4. **Configurația globală a utilizatorului** (`~/.azd/config.json`)
-5. **Valori implicite** (cea mai mică prioritate)
+5. **Valori implicite** (prioritate cea mai mică)
 
 ## Configurare Globală
 
@@ -218,7 +223,7 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Configurarea Mediului
+### Configurarea Mediilor
 Fiecare mediu are propria configurație în `.azure/<env-name>/config.json`:
 
 ```json
@@ -256,7 +261,7 @@ azd env unset DEBUG
 ```
 
 ### Șabloane de Mediu
-Creează `.azure/env.template` pentru configurarea consistentă a mediului:
+Creează `.azure/env.template` pentru configurarea consistentă a mediilor:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -539,7 +544,7 @@ Documentează configurația în `CONFIG.md`:
 
 - [Primul Tău Proiect](first-project.md) - Aplică configurația în practică
 - [Ghid de Implementare](../deployment/deployment-guide.md) - Folosește configurația pentru implementare
-- [Provizionarea Resurselor](../deployment/provisioning.md) - Configurații pregătite pentru producție
+- [Provisionarea Resurselor](../deployment/provisioning.md) - Configurări pregătite pentru producție
 
 ## Referințe
 
@@ -549,8 +554,12 @@ Documentează configurația în `CONFIG.md`:
 
 ---
 
-**Anterior:** [AZD Bazele](azd-basics.md) | **Următor:** [Primul Proiect](first-project.md)
-- **Următoarea Lecție**: [Primul Tău Proiect](first-project.md)
+**Navigare în capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 3 - Configurare & Autentificare
+- **⬅️ Precedent**: [Primul Tău Proiect](first-project.md)
+- **➡️ Capitolul Următor**: [Capitolul 4: Infrastructură ca Cod](../deployment/deployment-guide.md)
+- **Lecția Următoare**: [Primul Tău Proiect](first-project.md)
 
 ---
 

@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:24:48+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-18T11:05:15+00:00",
   "source_file": "examples/README.md",
   "language_code": "ro"
 }
 -->
 # Exemple - Șabloane și Configurații Practice AZD
+
+**Învățare prin Exemple - Organizate pe Capitole**
+- **📚 Pagina Principală a Cursului**: [AZD Pentru Începători](../README.md)
+- **📖 Maparea Capitolului**: Exemple organizate după complexitatea învățării
+- **🚀 Începe Simplu**: [Exemple Capitolul 1](../../../examples)
+- **🤖 Exemple AI**: [Capitolele 2 & 5 Soluții AI](../../../examples)
 
 ## Introducere
 
@@ -17,13 +23,13 @@ Acest director conține exemple practice, șabloane și scenarii reale pentru a 
 
 Lucrând prin aceste exemple, vei:
 - Exersa fluxurile de lucru Azure Developer CLI cu scenarii realiste de aplicații
-- Înțelege diferite arhitecturi de aplicații și implementările lor cu azd
+- Înțelege diferite arhitecturi de aplicații și implementările lor azd
 - Stăpâni modelele Infrastructure as Code pentru diverse servicii Azure
-- Aplica strategii de gestionare a configurației și implementări specifice mediului
+- Aplica strategii de gestionare a configurațiilor și implementări specifice mediului
 - Implementa modele de monitorizare, securitate și scalare în contexte practice
 - Dobândi experiență în depanarea și rezolvarea problemelor reale de implementare
 
-## Rezultate de Învățare
+## Rezultate ale Învățării
 
 După finalizarea acestor exemple, vei putea:
 - Implementa cu încredere diverse tipuri de aplicații folosind Azure Developer CLI
@@ -65,7 +71,28 @@ Azure Samples AZD Templates (linked externally):
 
 1. **[Aplicație Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Aplicație inteligentă de chat cu Azure OpenAI
 2. **[Procesare Documente AI](https://github.com/Azure-Samples/azure-ai-document-processing)** - Analiza documentelor folosind serviciile Azure AI
-3. **[Pipeline de Machine Learning](https://github.com/Azure-Samples/mlops-v2)** - Flux de lucru MLOps cu Azure Machine Learning
+3. **[Pipeline Machine Learning](https://github.com/Azure-Samples/mlops-v2)** - Flux de lucru MLOps cu Azure Machine Learning
+
+### Scenarii Reale
+
+#### **Soluție Multi-Agent pentru Retail** 🆕
+**[Ghid Complet de Implementare](./retail-scenario.md)**
+
+O soluție completă, gata de producție, pentru suportul clienților cu mai mulți agenți, care demonstrează implementarea aplicațiilor AI la nivel enterprise cu AZD. Acest scenariu oferă:
+
+- **Arhitectură Completă**: Sistem multi-agent cu agenți specializați pentru suport clienți și gestionarea inventarului
+- **Infrastructură de Producție**: Implementări multi-regiune Azure OpenAI, AI Search, Container Apps și monitorizare cuprinzătoare
+- **Șablon ARM Gata de Implementare**: Implementare cu un singur clic cu moduri multiple de configurare (Minimal/Standard/Premium)
+- **Funcționalități Avansate**: Validare de securitate prin red teaming, cadru de evaluare a agenților, optimizare costuri și ghiduri de depanare
+- **Context Real de Afaceri**: Caz de utilizare pentru suportul clienților retailerului cu încărcare de fișiere, integrare de căutare și scalare dinamică
+
+**Tehnologii**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Complexitate**: ⭐⭐⭐⭐ (Avansat - Gata de Producție Enterprise)
+
+**Ideal pentru**: Dezvoltatori AI, arhitecți de soluții și echipe care construiesc sisteme multi-agent de producție
+
+**Start Rapid**: Implementă soluția completă în mai puțin de 30 de minute folosind șablonul ARM inclus cu `./deploy.sh -g myResourceGroup`
 
 ## 📋 Instrucțiuni de Utilizare
 
@@ -115,7 +142,7 @@ Fiecare exemplu include:
 #### **Implementări de Bază**
 - Aplicații cu un singur serviciu
 - Modele simple de infrastructură
-- Gestionarea de bază a configurației
+- Gestionarea de bază a configurațiilor
 - Configurații economice pentru dezvoltare
 
 #### **Scenarii Avansate**
@@ -124,7 +151,7 @@ Fiecare exemplu include:
 - Modele de integrare a bazelor de date
 - Implementări de securitate și conformitate
 
-#### **Modele Pregătite pentru Producție**
+#### **Modele Gata de Producție**
 - Configurații de înaltă disponibilitate
 - Monitorizare și observabilitate
 - Integrare CI/CD
@@ -174,10 +201,10 @@ Fiecare exemplu include:
 **Complexitate**: Intermediar  
 **Concepte**: Analiza documentelor, OCR, extragerea datelor
 
-#### Pipeline de Machine Learning
+#### Pipeline Machine Learning
 **Tehnologii**: Azure ML, MLOps, Container Registry  
 **Complexitate**: Avansat  
-**Concepte**: Antrenarea modelelor, fluxuri de implementare, monitorizare
+**Concepte**: Antrenare modele, fluxuri de implementare, monitorizare
 
 ## 🛠 Exemple de Configurații
 
@@ -186,7 +213,7 @@ Directorul `configurations/` conține componente reutilizabile:
 ### Configurații de Mediu
 - Setări pentru mediu de dezvoltare
 - Configurații pentru mediu de testare
-- Configurații pregătite pentru producție
+- Configurații gata de producție
 - Configurații pentru implementări multi-regiune
 
 ### Module Bicep
@@ -197,7 +224,7 @@ Directorul `configurations/` conține componente reutilizabile:
 
 ### Scripturi Ajutătoare
 - Automatizarea configurării mediului
-- Scripturi de migrare a bazelor de date
+- Scripturi pentru migrarea bazelor de date
 - Instrumente de validare a implementării
 - Utilitare pentru monitorizarea costurilor
 
@@ -205,7 +232,7 @@ Directorul `configurations/` conține componente reutilizabile:
 
 ### Adaptarea Exemplelor la Cazul Tău
 
-1. **Revizuiește Prerechizitele**
+1. **Revizuiește Cerințele**
    - Verifică cerințele serviciilor Azure
    - Confirmă limitele abonamentului
    - Înțelege implicațiile costurilor
@@ -222,7 +249,7 @@ Directorul `configurations/` conține componente reutilizabile:
 
 4. **Revizuiește Securitatea**
    - Verifică controalele de acces
-   - Implementează gestionarea secretelor
+   - Implementați gestionarea secretelor
    - Activează monitorizarea și alertele
 
 ## 📊 Matrice de Comparare
@@ -238,6 +265,7 @@ Directorul `configurations/` conține componente reutilizabile:
 | Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
 ## 🎓 Parcurs de Învățare
 
@@ -275,31 +303,36 @@ Directorul `configurations/` conține componente reutilizabile:
 
 ## 🔍 Găsirea Exemplului Potrivit
 
-### După Stack-ul Tehnologic
+### După Tehnologia Utilizată
 - **Node.js**: Aplicația Node.js Express Todo
 - **Python**: Aplicația Python Flask Container, Python Functions + SPA
-- **C#**: Aplicația C# Web API + SQL Database, Aplicația Chat Azure OpenAI, Pipeline ML
+- **C#**: C# Web API + SQL Database, Aplicația Chat Azure OpenAI, Pipeline ML
 - **Java**: Microservicii Java Spring Boot
 - **React**: React SPA + Functions
 - **Containere**: Aplicația Python Flask Container, Microservicii Java
 - **Baze de Date**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Aplicația Chat Azure OpenAI, Procesare Documente AI, Pipeline ML
+- **AI/ML**: Aplicația Chat Azure OpenAI, Procesare Documente AI, Pipeline ML, **Soluția Multi-Agent pentru Retail**
+- **Sisteme Multi-Agent**: **Soluția Multi-Agent pentru Retail**
+- **Producție Enterprise**: **Soluția Multi-Agent pentru Retail**
 
 ### După Modelul Arhitectural
 - **Monolitic**: Node.js Express Todo, C# Web API + SQL
 - **Static + Serverless**: React SPA + Functions, Python Functions + SPA
 - **Microservicii**: Microservicii Java Spring Boot
 - **Containerizat**: Aplicația Python Flask Container
-- **AI-Powered**: Aplicația Chat Azure OpenAI, Procesare Documente AI, Pipeline ML
+- **AI-Powered**: Aplicația Chat Azure OpenAI, Procesare Documente AI, Pipeline ML, **Soluția Multi-Agent pentru Retail**
+- **Arhitectură Multi-Agent**: **Soluția Multi-Agent pentru Retail**
+- **Multi-Servicii Enterprise**: **Soluția Multi-Agent pentru Retail**
 
 ### După Nivelul de Complexitate
 - **Începător**: Node.js Express Todo, React SPA + Functions, Aplicația Python Flask Container
 - **Intermediar**: C# Web API + SQL, Python Functions + SPA, Microservicii Java, Aplicația Chat Azure OpenAI, Procesare Documente AI
 - **Avansat**: Pipeline ML
+- **Gata de Producție Enterprise**: **Soluția Multi-Agent pentru Retail** (Sistem complet multi-agent cu implementare ARM template)
 
 ## 📚 Resurse Suplimentare
 
-### Link-uri Documentație
+### Linkuri Documentație
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Șabloane Azure AI Foundry AZD](https://github.com/Azure/ai-foundry-templates)
 - [Documentație Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
@@ -313,25 +346,25 @@ Directorul `configurations/` conține componente reutilizabile:
 - [Aplicație Todo cu Python și MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
 - [Aplicație Todo cu Node.js și PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
 - [Aplicație Web React cu API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Job Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+- [Joburi Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
 - [Funcții Azure cu Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### Cele Mai Bune Practici
+### Cele mai bune practici
 - [Framework-ul Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Framework-ul de Adoptare Cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Framework-ul de Adoptare a Cloud-ului](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Contribuirea Exemplelor
+## 🤝 Contribuirea cu exemple
 
-Ai un exemplu util de împărtășit? Acceptăm contribuții!
+Ai un exemplu util de împărtășit? Suntem deschiși la contribuții!
 
-### Ghid de Trimitere
-1. Urmează structura de director stabilită
-2. Include README.md cuprinzător
-3. Adaugă comentarii la fișierele de configurație
+### Ghid pentru trimitere
+1. Urmează structura de directoare stabilită
+2. Include un README.md detaliat
+3. Adaugă comentarii în fișierele de configurare
 4. Testează temeinic înainte de trimitere
-5. Include estimări de costuri și prerechizite
+5. Include estimări de costuri și cerințe preliminare
 
-### Structura Șablonului de Exemplu
+### Structura șablonului de exemplu
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -347,19 +380,19 @@ example-name/
 
 ---
 
-**Sfat Util**: Începe cu cel mai simplu exemplu care se potrivește stack-ului tău tehnologic, apoi avansează treptat către scenarii mai complexe. Fiecare exemplu construiește pe conceptele din cele anterioare!
+**Sfat util**: Începe cu cel mai simplu exemplu care se potrivește cu tehnologia ta, apoi avansează treptat către scenarii mai complexe. Fiecare exemplu se bazează pe conceptele din cele anterioare!
 
-**Pași Următori**: 
+**Pași următori**: 
 - Alege un exemplu care se potrivește nivelului tău de competență
 - Urmează instrucțiunile de configurare din README-ul exemplului
 - Experimentează cu personalizări
-- Împărtășește învățăturile tale cu comunitatea
+- Împărtășește ce ai învățat cu comunitatea
 
 ---
 
 **Navigare**
-- **Lecția Anterioară**: [Ghid de Studiu](../resources/study-guide.md)
-- **Întoarcere la**: [README Principal](../README.md)
+- **Lecția anterioară**: [Ghid de studiu](../resources/study-guide.md)
+- **Întoarcere la**: [README principal](../README.md)
 
 ---
 

@@ -1,70 +1,74 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ac8b29b2e187a7204533f7136d9fa364",
-  "translation_date": "2025-09-12T23:31:00+00:00",
+  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
+  "translation_date": "2025-09-18T11:04:47+00:00",
   "source_file": "workshop/README.md",
   "language_code": "ro"
 }
 -->
 # Atelier AZD pentru Dezvoltatori AI
 
-**Anterior:** [Ghid de depanare AI](../docs/troubleshooting/ai-troubleshooting.md) | **Următor:** [Modulele laboratorului atelierului](../../../workshop)
+**Navigare în Atelier**
+- **📚 Pagina Principală a Cursului**: [AZD Pentru Începători](../README.md)
+- **📖 Capitole Corelate**: Include [Capitolul 1](../README.md#-chapter-1-foundation--quick-start), [Capitolul 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) și [Capitolul 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ Laborator Practic**: [Laborator AI Workshop](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Pași Următori**: [Modulele Laboratorului](../../../workshop)
 
-Bine ați venit la atelierul practic pentru învățarea Azure Developer CLI (AZD) cu accent pe implementarea aplicațiilor AI. Acest atelier este conceput pentru a vă ghida de la elementele de bază ale AZD până la implementarea soluțiilor AI pregătite pentru producție.
+Bine ați venit la atelierul practic pentru învățarea Azure Developer CLI (AZD) cu accent pe implementarea aplicațiilor AI. Acest atelier este conceput pentru a vă ghida de la bazele AZD până la implementarea soluțiilor AI pregătite pentru producție.
 
-## Prezentare generală a atelierului
+## Prezentare Generală a Atelierului
 
 **Durată:** 2-3 ore  
 **Nivel:** Începător până la Intermediar  
-**Cerințe preliminare:** Cunoștințe de bază despre Azure, instrumente de linie de comandă și concepte AI
+**Cerințe Prealabile:** Cunoștințe de bază despre Azure, unelte de linie de comandă și concepte AI
 
-### Ce veți învăța
+### Ce Veți Învăța
 
-- **Fundamente AZD**: Înțelegerea infrastructurii ca cod cu AZD  
-- 🤖 **Integrarea serviciilor AI**: Implementarea Azure OpenAI, AI Search și alte servicii AI  
-- **Implementarea containerelor**: Utilizarea Azure Container Apps pentru aplicații AI  
-- **Cele mai bune practici de securitate**: Implementarea Managed Identity și configurări sigure  
-- **Monitorizare și observabilitate**: Configurarea Application Insights pentru sarcini AI  
-- **Modele de producție**: Strategii de implementare pregătite pentru întreprinderi  
+- **Bazele AZD**: Înțelegerea conceptului de Infrastructure as Code cu AZD
+- 🤖 **Integrarea Serviciilor AI**: Implementarea Azure OpenAI, AI Search și alte servicii AI
+- **Implementarea în Containere**: Utilizarea Azure Container Apps pentru aplicații AI
+- **Cele Mai Bune Practici de Securitate**: Implementarea Managed Identity și configurări sigure
+- **Monitorizare și Observabilitate**: Configurarea Application Insights pentru sarcini AI
+- **Modele de Producție**: Strategii de implementare pregătite pentru întreprinderi
 
-## Structura atelierului
+## Structura Atelierului
 
-### Modul 1: Fundamente AZD (30 minute)
-- Instalarea și configurarea AZD  
-- Înțelegerea structurii proiectului AZD  
-- Prima implementare AZD  
-- **Laborator**: Implementarea unei aplicații web simple  
+### Modulul 1: Bazele AZD (30 minute)
+- Instalarea și configurarea AZD
+- Înțelegerea structurii proiectului AZD
+- Prima implementare AZD
+- **Laborator**: Implementarea unei aplicații web simple
 
-### Modul 2: Integrarea Azure OpenAI (45 minute)
-- Configurarea resurselor Azure OpenAI  
-- Strategii de implementare a modelelor  
-- Configurarea accesului API și autentificării  
-- **Laborator**: Implementarea unei aplicații de chat cu GPT-4  
+### Modulul 2: Integrarea Azure OpenAI (45 minute)
+- Configurarea resurselor Azure OpenAI
+- Strategii de implementare a modelelor
+- Configurarea accesului API și autentificării
+- **Laborator**: Implementarea unei aplicații de chat cu GPT-4
 
-### Modul 3: Aplicații RAG (45 minute)
-- Integrarea Azure AI Search  
-- Procesarea documentelor cu Azure Document Intelligence  
-- Încorporări vectoriale și căutare semantică  
-- **Laborator**: Construirea unui sistem de întrebări și răspunsuri pentru documente  
+### Modulul 3: Aplicații RAG (45 minute)
+- Integrarea Azure AI Search
+- Procesarea documentelor cu Azure Document Intelligence
+- Vector embeddings și căutare semantică
+- **Laborator**: Construirea unui sistem de întrebări și răspunsuri pe baza documentelor
 
-### Modul 4: Implementare în producție (30 minute)
-- Configurarea Container Apps  
-- Optimizarea performanței și scalarea  
-- Monitorizare și jurnalizare  
-- **Laborator**: Implementarea în producție cu observabilitate  
+### Modulul 4: Implementare în Producție (30 minute)
+- Configurarea Container Apps
+- Optimizarea performanței și scalarea
+- Monitorizare și jurnalizare
+- **Laborator**: Implementare în producție cu observabilitate
 
-### Modul 5: Modele avansate (15 minute)
-- Implementări multi-mediu  
-- Integrarea CI/CD  
-- Strategii de optimizare a costurilor  
-- **Încheiere**: Lista de verificare pentru pregătirea producției  
+### Modulul 5: Modele Avansate (15 minute)
+- Implementări multi-mediu
+- Integrarea CI/CD
+- Strategii de optimizare a costurilor
+- **Încheiere**: Lista de verificare pentru pregătirea producției
 
-## Cerințe preliminare
+## Cerințe Prealabile
 
-### Instrumente necesare
+### Unelte Necesare
 
-Vă rugăm să instalați aceste instrumente înainte de atelier:
+Vă rugăm să instalați aceste unelte înainte de atelier:
 
 ```bash
 # Azure Developer CLI
@@ -84,15 +88,15 @@ sudo sh get-docker.sh
 sudo apt-get install python3.10 python3.10-venv python3-pip
 ```
 
-### Configurarea contului Azure
+### Configurarea Contului Azure
 
-1. **Abonament Azure**: [Înscrieți-vă gratuit](https://azure.microsoft.com/free/)  
-2. **Acces Azure OpenAI**: [Solicitați acces](https://aka.ms/oai/access)  
-3. **Permisiuni necesare**:  
-   - Rol de Contributor pe abonament sau grup de resurse  
-   - Administrator Acces Utilizator (pentru atribuiri RBAC)  
+1. **Abonament Azure**: [Înscrieți-vă gratuit](https://azure.microsoft.com/free/)
+2. **Acces Azure OpenAI**: [Solicitați acces](https://aka.ms/oai/access)
+3. **Permisiuni Necesare**:
+   - Rol de Contributor pe abonament sau grup de resurse
+   - Administrator Acces Utilizator (pentru atribuiri RBAC)
 
-### Verificarea cerințelor preliminare
+### Verificarea Cerințelor Prealabile
 
 Rulați acest script pentru a verifica configurația:
 
@@ -138,28 +142,28 @@ fi
 echo "Setup verification complete!"
 ```
 
-## Materiale atelier
+## Materiale pentru Atelier
 
-### Exerciții de laborator
+### Exerciții de Laborator
 
 Fiecare modul include laboratoare practice cu cod de început și instrucțiuni pas cu pas:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Prima implementare AZD  
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplicație de chat cu Azure OpenAI  
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Aplicație RAG cu AI Search  
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Modele de implementare în producție  
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Scenarii avansate de implementare  
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Prima implementare AZD
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplicație de chat cu Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Aplicație RAG cu AI Search
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Modele de implementare în producție
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Scenarii avansate de implementare
 
-### Materiale de referință
+### Materiale de Referință
 
-- **[Ghid de integrare AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Modele de integrare cuprinzătoare  
-- **[Ghid de implementare a modelelor AI](../docs/ai-foundry/ai-model-deployment.md)** - Cele mai bune practici de implementare a modelelor  
-- **[Practici AI pentru producție](../docs/ai-foundry/production-ai-practices.md)** - Modele de implementare pentru întreprinderi  
-- **[Ghid de depanare AI](../docs/troubleshooting/ai-troubleshooting.md)** - Probleme comune și soluții  
+- **[Ghid de Integrare AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Modele cuprinzătoare de integrare
+- **[Ghid de Implementare a Modelelor AI](../docs/ai-foundry/ai-model-deployment.md)** - Cele mai bune practici pentru implementarea modelelor
+- **[Practici AI pentru Producție](../docs/ai-foundry/production-ai-practices.md)** - Modele de implementare pentru întreprinderi
+- **[Ghid de Depanare AI](../docs/troubleshooting/ai-troubleshooting.md)** - Probleme comune și soluții
 
-### Șabloane de exemplu
+### Șabloane Exemplu
 
-Șabloane de pornire rapidă pentru scenarii AI comune:
+Șabloane rapide pentru scenarii comune AI:
 
 ```
 workshop/templates/
@@ -169,7 +173,7 @@ workshop/templates/
 └── production-ready/     # Enterprise template
 ```
 
-## Începerea activității
+## Începeți
 
 ### Opțiunea 1: GitHub Codespaces (Recomandat)
 
@@ -177,37 +181,37 @@ Cea mai rapidă modalitate de a începe atelierul:
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
-### Opțiunea 2: Dezvoltare locală
+### Opțiunea 2: Dezvoltare Locală
 
-1. **Clonați depozitul atelierului:**  
+1. **Clonați depozitul atelierului:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Autentificați-vă în Azure:**  
+2. **Autentificați-vă în Azure:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **Începeți cu Laboratorul 1:**  
+3. **Începeți cu Laboratorul 1:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### Opțiunea 3: Atelier condus de instructor
+### Opțiunea 3: Atelier Condus de Instructor
 
 Dacă participați la o sesiune condusă de instructor:
 
-- 🎥 **Înregistrare atelier**: [Disponibilă la cerere](https://aka.ms/azd-ai-workshop)  
-- 💬 **Comunitatea Discord**: [Alăturați-vă pentru suport live](https://aka.ms/foundry/discord)  
-- **Feedback atelier**: [Împărtășiți experiența dvs.](https://aka.ms/azd-workshop-feedback)  
+- 🎥 **Înregistrare Atelier**: [Disponibilă la cerere](https://aka.ms/azd-ai-workshop)
+- 💬 **Comunitatea Discord**: [Alăturați-vă pentru suport live](https://aka.ms/foundry/discord)
+- **Feedback Atelier**: [Împărtășiți experiența dvs.](https://aka.ms/azd-workshop-feedback)
 
-## Cronologia atelierului
+## Cronologia Atelierului
 
-### Învățare în ritm propriu (3 ore)
+### Învățare în Ritm Propriu (3 ore)
 
 ```
 ⏰ 00:00 - 00:30  Module 1: AZD Foundations
@@ -218,7 +222,7 @@ Dacă participați la o sesiune condusă de instructor:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Sesiune condusă de instructor (2.5 ore)
+### Sesiune Condusă de Instructor (2.5 ore)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -231,7 +235,7 @@ Dacă participați la o sesiune condusă de instructor:
 ⏰ 02:45 - 03:00  Q&A and Resources
 ```
 
-## Criterii de succes
+## Criterii de Succes
 
 Până la finalul acestui atelier, veți putea:
 
@@ -242,63 +246,63 @@ Până la finalul acestui atelier, veți putea:
 ✅ **Monitoriza și depana** implementările aplicațiilor AI  
 ✅ **Aplica strategii de optimizare a costurilor** pentru sarcini AI  
 
-## Comunitate și suport
+## Comunitate și Suport
 
-### În timpul atelierului
+### În Timpul Atelierului
 
-- 🙋 **Întrebări**: Utilizați chat-ul atelierului sau ridicați mâna  
-- 🐛 **Probleme**: Consultați [ghidul de depanare](../docs/troubleshooting/ai-troubleshooting.md)  
-- **Sfaturi**: Împărtășiți descoperirile cu ceilalți participanți  
+- 🙋 **Întrebări**: Utilizați chat-ul atelierului sau ridicați mâna
+- 🐛 **Probleme**: Consultați [ghidul de depanare](../docs/troubleshooting/ai-troubleshooting.md)
+- **Sfaturi**: Împărtășiți descoperirile cu ceilalți participanți
 
-### După atelier
+### După Atelier
 
-- 💬 **Discord**: [Comunitatea Azure AI Foundry](https://aka.ms/foundry/discord)  
-- **Probleme GitHub**: [Raportați problemele șablonului](https://github.com/YOUR_ORG/AZD-for-beginners/issues)  
-- 📧 **Feedback**: [Formular de evaluare atelier](https://aka.ms/azd-workshop-feedback)  
+- 💬 **Discord**: [Comunitatea Azure AI Foundry](https://aka.ms/foundry/discord)
+- **Probleme GitHub**: [Raportați problemele șabloanelor](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **Feedback**: [Formular de evaluare a atelierului](https://aka.ms/azd-workshop-feedback)
 
-## Pași următori
+## Pași Următori
 
-### Continuați învățarea
+### Continuați Învățarea
 
-1. **Scenarii avansate**: Explorați [implementările multi-regiune](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)  
-2. **Integrarea CI/CD**: Configurați [fluxuri de lucru GitHub Actions](../docs/deployment/github-actions.md)  
-3. **Șabloane personalizate**: Creați propriile [șabloane AZD](../docs/getting-started/custom-templates.md)  
+1. **Scenarii Avansate**: Explorați [implementările multi-regiune](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **Integrarea CI/CD**: Configurați [fluxuri de lucru GitHub Actions](../docs/deployment/github-actions.md)
+3. **Șabloane Personalizate**: Creați propriile [șabloane AZD](../docs/getting-started/custom-templates.md)
 
-### Aplicați în proiectele dvs.
+### Aplicați în Proiectele Dvs.
 
-1. **Evaluare**: Utilizați [lista de verificare pentru pregătirea producției](./production-readiness-checklist.md)  
-2. **Șabloane**: Începeți cu [șabloanele specifice AI](../../../workshop/templates)  
-3. **Suport**: Alăturați-vă [Discord-ul Azure AI Foundry](https://aka.ms/foundry/discord)  
+1. **Evaluare**: Utilizați [lista noastră de verificare pentru pregătire](./production-readiness-checklist.md)
+2. **Șabloane**: Începeți cu [șabloanele noastre specifice AI](../../../workshop/templates)
+3. **Suport**: Alăturați-vă [Discordului Azure AI Foundry](https://aka.ms/foundry/discord)
 
-### Împărtășiți succesul dvs.
+### Împărtășiți Succesul Dvs.
 
-- ⭐ **Dați o stea depozitului** dacă acest atelier v-a fost de ajutor  
-- 🐦 **Distribuiți pe rețelele sociale** cu #AzureDeveloperCLI #AzureAI  
-- 📝 **Scrieți un articol pe blog** despre călătoria dvs. de implementare AI  
+- ⭐ **Acordați o stea depozitului** dacă acest atelier v-a fost de ajutor
+- 🐦 **Distribuiți pe rețelele sociale** cu #AzureDeveloperCLI #AzureAI
+- 📝 **Scrieți un articol pe blog** despre călătoria dvs. de implementare AI
 
 ---
 
-## Feedback atelier
+## Feedback pentru Atelier
 
 Feedback-ul dvs. ne ajută să îmbunătățim experiența atelierului:
 
 | Aspect | Evaluare (1-5) | Comentarii |
 |--------|----------------|------------|
-| Calitatea conținutului | ⭐⭐⭐⭐⭐ | |
-| Laboratoare practice | ⭐⭐⭐⭐⭐ | |
+| Calitatea Conținutului | ⭐⭐⭐⭐⭐ | |
+| Laboratoare Practice | ⭐⭐⭐⭐⭐ | |
 | Documentație | ⭐⭐⭐⭐⭐ | |
-| Nivel de dificultate | ⭐⭐⭐⭐⭐ | |
-| Experiență generală | ⭐⭐⭐⭐⭐ | |
+| Nivel de Dificultate | ⭐⭐⭐⭐⭐ | |
+| Experiență Generală | ⭐⭐⭐⭐⭐ | |
 
-**Trimiteți feedback**: [Formular de evaluare atelier](https://aka.ms/azd-workshop-feedback)
+**Trimiteți feedback**: [Formular de Evaluare a Atelierului](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**Anterior:** [Ghid de depanare AI](../docs/troubleshooting/ai-troubleshooting.md) | **Următor:** Începeți cu [Laboratorul 1: Fundamente AZD](../../../workshop/lab-1-azd-basics)
+**Anterior:** [Ghid de Depanare AI](../docs/troubleshooting/ai-troubleshooting.md) | **Următor:** Începeți cu [Laboratorul 1: Bazele AZD](../../../workshop/lab-1-azd-basics)
 
-**Pregătit să începeți construirea aplicațiilor AI cu AZD?**
+**Sunteți gata să începeți să construiți aplicații AI cu AZD?**
 
-[Începeți Laboratorul 1: Fundamente AZD →](./lab-1-azd-basics/README.md)
+[Începeți Laboratorul 1: Bazele AZD →](./lab-1-azd-basics/README.md)
 
 ---
 

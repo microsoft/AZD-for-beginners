@@ -1,36 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c000a3a8f4a04aa85c6d35714e3dee0",
-  "translation_date": "2025-09-10T06:53:38+00:00",
+  "original_hash": "952ed5af7f5db069c53a6840717e1801",
+  "translation_date": "2025-09-18T12:05:02+00:00",
   "source_file": "docs/pre-deployment/sku-selection.md",
   "language_code": "hr"
 }
 -->
 # Vodič za odabir SKU-a - Odabir pravih razina usluga Azurea
 
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 6 - Validacija i planiranje prije implementacije
+- **⬅️ Prethodno**: [Planiranje kapaciteta](capacity-planning.md)
+- **➡️ Sljedeće**: [Provjere prije implementacije](preflight-checks.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 7: Rješavanje problema](../troubleshooting/common-issues.md)
+
 ## Uvod
 
-Ovaj sveobuhvatni vodič pomaže vam u odabiru optimalnih SKU-ova (Stock Keeping Units) za različite okruženja, radna opterećenja i zahtjeve. Naučite analizirati potrebe za performansama, troškovne čimbenike i zahtjeve za skalabilnošću kako biste odabrali najprikladnije razine usluga za svoje Azure Developer CLI implementacije.
+Ovaj sveobuhvatni vodič pomaže vam u odabiru optimalnih SKU-ova (jedinica za praćenje zaliha) usluga Azurea za različita okruženja, radna opterećenja i zahtjeve. Naučite analizirati potrebe za performansama, troškovne čimbenike i zahtjeve za skalabilnošću kako biste odabrali najprikladnije razine usluga za implementacije pomoću Azure Developer CLI-a.
 
 ## Ciljevi učenja
 
 Nakon završetka ovog vodiča, naučit ćete:
-- Razumjeti koncepte SKU-a, modele cijena i razlike u značajkama Azurea
-- Ovladati strategijama odabira SKU-a specifičnim za okruženje, uključujući razvoj, testiranje i produkciju
+- Razumjeti koncepte SKU-ova Azurea, modele cijena i razlike u značajkama
+- Ovladati strategijama odabira SKU-ova specifičnih za okruženje za razvoj, testiranje i produkciju
 - Analizirati zahtjeve radnog opterećenja i povezati ih s odgovarajućim razinama usluga
-- Provoditi strategije optimizacije troškova kroz inteligentan odabir SKU-a
+- Implementirati strategije optimizacije troškova kroz inteligentan odabir SKU-ova
 - Primijeniti tehnike testiranja performansi i validacije za odabrane SKU-ove
-- Konfigurirati automatizirane preporuke SKU-a i praćenje
+- Konfigurirati automatizirane preporuke SKU-ova i praćenje
 
 ## Ishodi učenja
 
 Po završetku, moći ćete:
-- Odabrati odgovarajuće SKU-ove Azure usluga na temelju zahtjeva i ograničenja radnog opterećenja
-- Dizajnirati troškovno učinkovite arhitekture za više okruženja s pravilnim odabirom razina usluga
-- Provoditi benchmarking performansi i validaciju za odabrane SKU-ove
-- Kreirati automatizirane alate za preporuke SKU-a i optimizaciju troškova
-- Planirati migracije SKU-a i strategije skaliranja za promjenjive zahtjeve
+- Odabrati odgovarajuće SKU-ove usluga Azurea na temelju zahtjeva i ograničenja radnog opterećenja
+- Dizajnirati isplative arhitekture za više okruženja s pravilnim odabirom razina usluga
+- Implementirati testiranje performansi i validaciju za odabrane SKU-ove
+- Kreirati automatizirane alate za preporuke SKU-ova i optimizaciju troškova
+- Planirati migracije SKU-ova i strategije skaliranja za promjenjive zahtjeve
 - Primijeniti principe Azure Well-Architected Frameworka na odabir razina usluga
 
 ## Sadržaj
@@ -49,14 +56,14 @@ Po završetku, moći ćete:
 
 ### Što su SKU-ovi?
 
-SKU-ovi (Stock Keeping Units) predstavljaju različite razine usluga i performansi za Azure resurse. Svaki SKU nudi različite:
+SKU-ovi (jedinice za praćenje zaliha) predstavljaju različite razine usluga i razine performansi za resurse Azurea. Svaki SKU nudi različite:
 
 - **Karakteristike performansi** (CPU, memorija, propusnost)
 - **Dostupnost značajki** (opcije skaliranja, razine SLA-a)
 - **Modele cijena** (temeljene na potrošnji, rezervirani kapacitet)
 - **Regionalnu dostupnost** (neki SKU-ovi nisu dostupni u svim regijama)
 
-### Ključni čimbenici u odabiru SKU-a
+### Ključni čimbenici u odabiru SKU-ova
 
 1. **Zahtjevi radnog opterećenja**
    - Očekivani obrasci prometa/opterećenja
@@ -68,9 +75,9 @@ SKU-ovi (Stock Keeping Units) predstavljaju različite razine usluga i performan
    - Zahtjevi za dostupnošću
    - Sigurnosni i usklađenostni zahtjevi
 
-3. **Ograničenja proračuna**
+3. **Ograničenja budžeta**
    - Početni troškovi naspram operativnih troškova
-   - Popusti na rezervirani kapacitet
+   - Popusti za rezervirani kapacitet
    - Implicirani troškovi automatskog skaliranja
 
 4. **Projekcije rasta**
@@ -82,7 +89,7 @@ SKU-ovi (Stock Keeping Units) predstavljaju različite razine usluga i performan
 
 ## Odabir temeljen na okruženju
 
-### Okruženje za razvoj
+### Razvojno okruženje
 
 **Prioriteti**: Optimizacija troškova, osnovna funkcionalnost, jednostavno postavljanje/uklanjanje
 
@@ -100,13 +107,13 @@ skus:
 ```
 
 #### Karakteristike
-- **App Service**: F1 (Besplatno) ili B1 (Osnovno) za jednostavno testiranje
+- **App Service**: F1 (besplatno) ili B1 (osnovno) za jednostavno testiranje
 - **Baze podataka**: Osnovni nivo s minimalnim resursima
 - **Pohrana**: Standardna s lokalnom redundancijom
 - **Računalni resursi**: Prihvatljivi zajednički resursi
 - **Mreža**: Osnovne konfiguracije
 
-### Okruženje za testiranje
+### Testno okruženje
 
 **Prioriteti**: Konfiguracija slična produkciji, balans troškova, mogućnost testiranja performansi
 
@@ -147,7 +154,7 @@ skus:
 ```
 
 #### Karakteristike
-- **Visoka dostupnost**: Zahtjevi SLA-a od 99.9%+
+- **Visoka dostupnost**: Zahtjevi SLA-a od 99,9%+
 - **Performanse**: Namjenski resursi, visoka propusnost
 - **Sigurnost**: Premium sigurnosne značajke
 - **Skaliranje**: Potpune mogućnosti automatskog skaliranja
@@ -159,15 +166,15 @@ skus:
 
 ### Azure App Service
 
-#### Matrica odluke o SKU-u
+#### Matrica odluka o SKU-ovima
 
-| Upotreba | Preporučeni SKU | Razlog |
-|----------|----------------|--------|
-| Razvoj/testiranje | F1 (Besplatno) ili B1 (Osnovno) | Troškovno učinkovito, dovoljno za testiranje |
-| Male produkcijske aplikacije | S1 (Standardno) | Prilagođene domene, SSL, automatsko skaliranje |
+| Upotreba | Preporučeni SKU | Obrazloženje |
+|----------|----------------|--------------|
+| Razvoj/testiranje | F1 (besplatno) ili B1 (osnovno) | Isplativo, dovoljno za testiranje |
+| Male produkcijske aplikacije | S1 (standardno) | Prilagođene domene, SSL, automatsko skaliranje |
 | Srednje produkcijske aplikacije | P1V3 (Premium V3) | Bolje performanse, više značajki |
 | Aplikacije s velikim prometom | P2V3 ili P3V3 | Namjenski resursi, visoke performanse |
-| Kritične aplikacije | I1V2 (Izolirano V2) | Izolacija mreže, namjenski hardver |
+| Kritične aplikacije | I1V2 (Isolated V2) | Izolacija mreže, namjenski hardver |
 
 #### Primjeri konfiguracije
 
@@ -205,15 +212,15 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Okvir za odabir SKU-a
+#### Okvir za odabir SKU-ova
 
-1. **DTU-based (Database Transaction Units)**
+1. **Temeljeno na DTU (jedinice transakcija baze podataka)**
    - **Osnovno**: 5 DTU - Razvoj/testiranje
    - **Standardno**: S0-S12 (10-3000 DTU) - Opća namjena
    - **Premium**: P1-P15 (125-4000 DTU) - Kritične performanse
 
-2. **vCore-based** (Preporučeno za produkciju)
-   - **Opća namjena**: Uravnoteženi računalni i pohrambeni resursi
+2. **Temeljeno na vCore-u** (preporučeno za produkciju)
+   - **Opća namjena**: Uravnoteženi računalni resursi i pohrana
    - **Poslovno kritično**: Niska latencija, visoki IOPS
    - **Hyperscale**: Visoko skalabilna pohrana (do 100TB)
 
@@ -263,12 +270,12 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 2. **Namjenski (profili opterećenja)**
    - Namjenski računalni resursi
-   - Predvidljive performanse
+   - Predvidive performanse
    - Bolje za produkcijska opterećenja
 
 #### Primjeri konfiguracije
 
-**Razvoj (Potrošnja)**
+**Razvoj (potrošnja)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -307,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Produkcija (Namjenski)**
+**Produkcija (namjenski)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-prod'
@@ -329,8 +336,8 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 #### Modeli propusnosti
 
 1. **Ručno dodijeljena propusnost**
-   - Predvidljive performanse
-   - Popusti na rezervirani kapacitet
+   - Predvidive performanse
+   - Popusti za rezervirani kapacitet
    - Najbolje za stabilna opterećenja
 
 2. **Automatsko skaliranje dodijeljene propusnosti**
@@ -343,7 +350,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
    - Bez dodijeljene propusnosti
    - Idealno za razvoj i povremena opterećenja
 
-#### Primjeri SKU-a
+#### Primjeri SKU-ova
 
 ```bicep
 // Development - Serverless
@@ -409,7 +416,7 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### Razine performansi
 
-- **Standardno**: Opća namjena, troškovno učinkovito
+- **Standardno**: Opća namjena, isplativo
 - **Premium**: Visoke performanse, scenariji niske latencije
 
 ```bicep
@@ -589,7 +596,7 @@ Smanjite kapacitet tijekom neaktivnih sati:
 
 ### Osnovni zahtjevi za performanse
 
-Definirajte jasne zahtjeve za performansama prije odabira SKU-a:
+Definirajte jasne zahtjeve za performanse prije odabira SKU-ova:
 
 ```yaml
 performance_requirements:
@@ -607,7 +614,7 @@ performance_requirements:
 
 ### Testiranje opterećenja
 
-Testirajte različite SKU-ove za validaciju performansi:
+Testirajte različite SKU-ove kako biste validirali performanse:
 
 ```bash
 # Azure Load Testing service
@@ -680,7 +687,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Alati za validaciju
 
-### Provjera dostupnosti SKU-a
+### Provjera dostupnosti SKU-ova
 
 ```bash
 #!/bin/bash
@@ -787,9 +794,9 @@ test_configuration:
 
 ## Sažetak najboljih praksi
 
-### Što treba raditi
+### Što učiniti
 
-1. **Započnite s manjim SKU-ovima i skalirajte** prema stvarnoj upotrebi
+1. **Započnite s manjim SKU-ovima i skalirajte prema stvarnoj upotrebi**
 2. **Koristite različite SKU-ove za različita okruženja**
 3. **Kontinuirano pratite performanse i troškove**
 4. **Iskoristite rezervirani kapacitet za produkcijska opterećenja**
@@ -798,7 +805,7 @@ test_configuration:
 7. **Planirajte rast, ali izbjegavajte prekomjerno dodjeljivanje resursa**
 8. **Koristite besplatne razine za razvoj kad god je moguće**
 
-### Što ne treba raditi
+### Što ne učiniti
 
 1. **Nemojte koristiti produkcijske SKU-ove za razvoj**
 2. **Nemojte ignorirati regionalnu dostupnost SKU-ova**
@@ -822,4 +829,4 @@ test_configuration:
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden koristeći AI uslugu za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije proizašle iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.

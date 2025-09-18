@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8943fe4b13e5c61c3cdc16c2d78a6724",
-  "translation_date": "2025-09-12T23:26:47+00:00",
+  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
+  "translation_date": "2025-09-18T12:03:51+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "hr"
 }
 -->
-# Vodič za otklanjanje poteškoća s AI-jem za Azure Developer CLI
+# Vodič za rješavanje problema specifičnih za AI
 
-**Prethodno:** [Prakse za proizvodni AI](../ai-foundry/production-ai-practices.md) | **Sljedeće:** [Početak rada s AZD](../getting-started/README.md)
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 7 - Rješavanje problema i otklanjanje grešaka
+- **⬅️ Prethodno**: [Vodič za otklanjanje grešaka](debugging.md)
+- **➡️ Sljedeće poglavlje**: [Poglavlje 8: Proizvodni i poslovni obrasci](../ai-foundry/production-ai-practices.md)
+- **🤖 Povezano**: [Poglavlje 2: Razvoj usmjeren na AI](../ai-foundry/azure-ai-foundry-integration.md)
 
-Ovaj sveobuhvatni vodič za otklanjanje poteškoća pokriva uobičajene probleme pri implementaciji AI rješenja s AZD-om, pružajući rješenja i tehnike za otklanjanje grešaka specifične za Azure AI usluge.
+**Prethodno:** [Proizvodne AI prakse](../ai-foundry/production-ai-practices.md) | **Sljedeće:** [Početak rada s AZD](../getting-started/README.md)
+
+Ovaj sveobuhvatni vodič za rješavanje problema obrađuje uobičajene poteškoće pri implementaciji AI rješenja s AZD-om, pružajući rješenja i tehnike otklanjanja grešaka specifične za Azure AI usluge.
 
 ## Sadržaj
 
@@ -361,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Pogreške autentifikacije i dozvola
 
-### Problem: Odbijena dozvola za upravljani identitet
+### Problem: Odbijena dozvola upravljanog identiteta
 
 **Simptomi:**
 ```
@@ -603,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problem: Pogreške zbog nedostatka memorije
+### Problem: Nedostatak memorije
 
 **Simptomi:**
 ```
@@ -838,30 +845,34 @@ def monitor_performance(func):
 | Kod pogreške | Opis | Rješenje |
 |--------------|------|----------|
 | 401 | Neautorizirano | Provjerite API ključeve i konfiguraciju upravljanog identiteta |
-| 403 | Zabranjeno | Provjerite dodjele uloga u RBAC-u |
-| 429 | Ograničenje brzine | Implementirajte logiku ponovnog pokušaja s eksponencijalnim povratom |
-| 500 | Interna pogreška servera | Provjerite status implementacije modela i logove |
+| 403 | Zabranjeno | Provjerite dodjele uloga RBAC-a |
+| 429 | Ograničenje brzine | Implementirajte logiku ponovnog pokušaja s eksponencijalnim povećanjem |
+| 500 | Interna pogreška poslužitelja | Provjerite status implementacije modela i logove |
 | 503 | Usluga nedostupna | Provjerite zdravlje usluge i dostupnost regije |
 
 ## Sljedeći koraci
 
 1. **Pregledajte [Vodič za implementaciju AI modela](ai-model-deployment.md)** za najbolje prakse implementacije
-2. **Dovršite [Prakse za proizvodni AI](production-ai-practices.md)** za rješenja spremna za poduzeća
+2. **Dovršite [Proizvodne AI prakse](production-ai-practices.md)** za rješenja spremna za poslovanje
 3. **Pridružite se [Azure AI Foundry Discordu](https://aka.ms/foundry/discord)** za podršku zajednice
-4. **Prijavite probleme** u [AZD GitHub repozitorij](https://github.com/Azure/azure-dev) za probleme specifične za AZD
+4. **Prijavite probleme** na [AZD GitHub repozitorij](https://github.com/Azure/azure-dev) za probleme specifične za AZD
 
 ## Resursi
 
-- [Otklanjanje poteškoća s Azure OpenAI uslugom](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Otklanjanje poteškoća s aplikacijama u kontejnerima](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Otklanjanje poteškoća s Azure AI pretraživanjem](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Rješavanje problema s Azure OpenAI uslugom](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Rješavanje problema s aplikacijama u kontejnerima](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Rješavanje problema s Azure AI pretraživanjem](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**Prethodno:** [Prakse za proizvodni AI](../ai-foundry/production-ai-practices.md) | **Sljedeće:** [Radionica](../../workshop/README.md)
-- [Otklanjanje poteškoća s Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Navigacija poglavljem:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 7 - Rješavanje problema i otklanjanje grešaka
+- **⬅️ Prethodno**: [Vodič za otklanjanje grešaka](debugging.md)
+- **➡️ Sljedeće poglavlje**: [Poglavlje 8: Proizvodni i poslovni obrasci](../ai-foundry/production-ai-practices.md)
+- [Rješavanje problema s Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za nesporazume ili pogrešne interpretacije koje mogu proizaći iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.

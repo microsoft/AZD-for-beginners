@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-10T06:17:45+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-18T11:01:49+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "ro"
 }
 -->
 # Ghid de Implementare - Stăpânirea Implementărilor AZD
+
+**Navigare Capitole:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 4 - Infrastructură ca Cod & Implementare
+- **⬅️ Capitol Anterior**: [Capitolul 3: Configurare](../getting-started/configuration.md)
+- **➡️ Următor**: [Provisionarea Resurselor](provisioning.md)
+- **🚀 Capitol Următor**: [Capitolul 5: Soluții AI Multi-Agent](../../examples/retail-scenario.md)
 
 ## Introducere
 
@@ -15,31 +22,31 @@ Acest ghid cuprinzător acoperă tot ce trebuie să știi despre implementarea a
 
 ## Obiective de Învățare
 
-După finalizarea acestui ghid, vei:
+Prin completarea acestui ghid, vei:
 - Stăpâni toate comenzile și fluxurile de lucru de implementare ale Azure Developer CLI
-- Înțelege întregul ciclu de viață al implementării, de la aprovizionare la monitorizare
+- Înțelege întregul ciclu de viață al implementării, de la provisionare la monitorizare
 - Implementa hook-uri personalizate pentru automatizarea pre și post-implementare
-- Configura medii multiple cu parametri specifici fiecărui mediu
+- Configura medii multiple cu parametri specifici mediului
 - Configura strategii avansate de implementare, inclusiv implementări blue-green și canary
 - Integra implementările azd cu pipeline-uri CI/CD și fluxuri de lucru DevOps
 
 ## Rezultate de Învățare
 
-După finalizare, vei fi capabil să:
-- Execuți și să depanezi independent toate fluxurile de lucru de implementare azd
-- Proiectezi și implementezi automatizări personalizate de implementare folosind hook-uri
-- Configurezi implementări pregătite pentru producție cu securitate și monitorizare adecvate
-- Gestionezi scenarii complexe de implementare în medii multiple
-- Optimizezi performanța implementării și să implementezi strategii de rollback
-- Integrezi implementările azd în practicile DevOps ale întreprinderii
+La finalizare, vei putea:
+- Executa și depana independent toate fluxurile de lucru de implementare azd
+- Proiecta și implementa automatizări personalizate de implementare folosind hook-uri
+- Configura implementări pregătite pentru producție cu securitate și monitorizare adecvate
+- Gestiona scenarii complexe de implementare multi-mediu
+- Optimiza performanța implementării și implementa strategii de rollback
+- Integra implementările azd în practicile DevOps ale întreprinderii
 
 ## Prezentare Generală a Implementării
 
 Azure Developer CLI oferă mai multe comenzi de implementare:
-- `azd up` - Flux complet (aprovizionare + implementare)
-- `azd provision` - Creează/actualizează doar resursele Azure
-- `azd deploy` - Implementare doar a codului aplicației
-- `azd package` - Construiește și împachetează aplicațiile
+- `azd up` - Flux complet (provisionare + implementare)
+- `azd provision` - Creare/actualizare doar resurse Azure
+- `azd deploy` - Implementare doar cod aplicație
+- `azd package` - Construire și împachetare aplicații
 
 ## Fluxuri de Lucru de Implementare de Bază
 
@@ -56,7 +63,7 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Implementare Doar a Infrastructurii
+### Implementare Doar Infrastructură
 Când trebuie să actualizezi doar resursele Azure:
 ```bash
 # Provision/update infrastructure
@@ -69,7 +76,7 @@ azd provision --preview
 azd provision --service database
 ```
 
-### Implementare Doar a Codului
+### Implementare Doar Cod
 Pentru actualizări rapide ale aplicației:
 ```bash
 # Deploy all services
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Înțelegerea Procesului de Implementare
 
-### Faza 1: Hook-uri Pre-Provision
+### Faza 1: Hook-uri Pre-Provisionare
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Faza 2: Aprovizionarea Infrastructurii
-- Citește șabloanele de infrastructură (Bicep/Terraform)
-- Creează sau actualizează resursele Azure
-- Configurează rețelele și securitatea
+### Faza 2: Provisionarea Infrastructurii
+- Citește șabloane de infrastructură (Bicep/Terraform)
+- Creează sau actualizează resurse Azure
+- Configurează rețele și securitate
 - Configurează monitorizarea și jurnalizarea
 
-### Faza 3: Hook-uri Post-Provision
+### Faza 3: Hook-uri Post-Provisionare
 ```yaml
 hooks:
   postprovision:
@@ -123,7 +130,7 @@ hooks:
 - Creează artefacte de implementare
 - Împachetează pentru platforma țintă (containere, fișiere ZIP etc.)
 
-### Faza 5: Hook-uri Pre-Deploy
+### Faza 5: Hook-uri Pre-Implementare
 ```yaml
 hooks:
   predeploy:
@@ -137,11 +144,11 @@ hooks:
 ```
 
 ### Faza 6: Implementarea Aplicației
-- Implementarea aplicațiilor împachetate în serviciile Azure
+- Implementă aplicațiile împachetate în serviciile Azure
 - Actualizează setările de configurare
 - Pornește/repornește serviciile
 
-### Faza 7: Hook-uri Post-Deploy
+### Faza 7: Hook-uri Post-Implementare
 ```yaml
 hooks:
   postdeploy:
@@ -186,7 +193,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### Configurații Specifice Mediului
+### Configurări Specifice Mediului
 ```bash
 # Development environment
 azd env set NODE_ENV development
@@ -308,7 +315,7 @@ fi
 
 ## 🐳 Implementări în Containere
 
-### Implementări de Aplicații în Containere
+### Implementări Aplicații în Containere
 ```yaml
 services:
   api:
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimizarea Dockerfile în Etape Multiple
+### Optimizarea Dockerfile Multi-Stagiu
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -369,7 +376,7 @@ azd config set deploy.parallelism 5
 azd deploy --parallel
 ```
 
-### Cache-ul de Build
+### Cache-ul de Construire
 ```yaml
 # azure.yaml - Enable build caching
 services:
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### Rollback al Infrastructurii
+### Rollback Infrastructură
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -524,7 +531,7 @@ azd provision --rollback
 azd provision --rollback --preview
 ```
 
-### Rollback al Migrației Bazei de Date
+### Rollback Migrare Bază de Date
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -552,7 +559,7 @@ azd history
 azd metrics --type deployment
 ```
 
-### Colectarea de Metrice Personalizate
+### Colectarea Metricilor Personalizate
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -631,25 +638,25 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Pași Următori
 
-- [Aprovizionarea Resurselor](provisioning.md) - Analiză detaliată a gestionării infrastructurii
+- [Provisionarea Resurselor](provisioning.md) - Analiză detaliată a gestionării infrastructurii
 - [Planificarea Pre-Implementare](../pre-deployment/capacity-planning.md) - Planifică strategia de implementare
 - [Probleme Comune](../troubleshooting/common-issues.md) - Rezolvă problemele de implementare
 - [Cele Mai Bune Practici](../troubleshooting/debugging.md) - Strategii de implementare pregătite pentru producție
 
 ## Resurse Suplimentare
 
-- [Referință pentru Implementarea Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Implementarea Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Implementarea Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Implementarea Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Referință Implementare Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Implementare Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Implementare Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Implementare Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigare**
 - **Lecția Anterioară**: [Primul Tău Proiect](../getting-started/first-project.md)
-- **Lecția Următoare**: [Aprovizionarea Resurselor](provisioning.md)
+- **Lecția Următoare**: [Provisionarea Resurselor](provisioning.md)
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

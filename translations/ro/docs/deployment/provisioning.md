@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-10T06:22:24+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-18T11:02:11+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "ro"
 }
 -->
-# Provisionarea Resurselor - Infrastructură ca și Cod cu AZD
+# Provisionarea Resurselor Azure cu AZD
+
+**Navigare în capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitol Curent**: Capitolul 4 - Infrastructură ca Cod & Implementare
+- **⬅️ Precedent**: [Ghid de Implementare](deployment-guide.md)
+- **➡️ Următorul Capitol**: [Capitolul 5: Soluții AI Multi-Agent](../../examples/retail-scenario.md)
+- **🔧 Legat**: [Capitolul 6: Validarea Pre-Implementării](../pre-deployment/capacity-planning.md)
 
 ## Introducere
 
-Acest ghid cuprinzător acoperă tot ce trebuie să știți despre provisionarea și gestionarea resurselor Azure folosind Azure Developer CLI. Învață să implementezi modele de Infrastructură ca și Cod (IaC), de la crearea de resurse de bază până la arhitecturi avansate de infrastructură la nivel de întreprindere, utilizând Bicep, șabloane ARM, Terraform și Pulumi.
+Acest ghid cuprinzător acoperă tot ce trebuie să știți despre provisionarea și gestionarea resurselor Azure folosind Azure Developer CLI. Învață să implementezi modele de Infrastructură ca Cod (IaC), de la crearea de resurse de bază până la arhitecturi avansate de infrastructură la nivel de întreprindere, utilizând Bicep, șabloane ARM, Terraform și Pulumi.
 
 ## Obiective de Învățare
 
 Prin completarea acestui ghid, vei:
-- Stăpâni principiile Infrastructurii ca și Cod și provisionarea resurselor Azure
-- Înțelege diferiți furnizori IaC susținuți de Azure Developer CLI
+- Stăpâni principiile Infrastructurii ca Cod și provisionarea resurselor Azure
+- Înțelege mai mulți furnizori IaC acceptați de Azure Developer CLI
 - Proiecta și implementa șabloane Bicep pentru arhitecturi comune de aplicații
 - Configura parametrii resurselor, variabilele și setările specifice mediului
 - Implementa modele avansate de infrastructură, inclusiv rețele și securitate
@@ -28,18 +35,18 @@ Prin completarea acestui ghid, vei:
 La finalizare, vei putea:
 - Proiecta și provisiona infrastructura Azure folosind Bicep și șabloane ARM
 - Configura arhitecturi complexe multi-servicii cu dependențe corecte între resurse
-- Implementa șabloane parametrizate pentru multiple medii și configurații
+- Implementa șabloane parametrizate pentru medii și configurații multiple
 - Depana problemele de provisionare a infrastructurii și rezolva eșecurile de implementare
 - Aplica principiile Framework-ului Azure Well-Architected la proiectarea infrastructurii
-- Gestiona actualizările infrastructurii și implementa strategii de versiune pentru infrastructură
+- Gestiona actualizările infrastructurii și implementa strategii de versionare a infrastructurii
 
 ## Prezentare Generală a Provisionării Infrastructurii
 
-Azure Developer CLI susține mai mulți furnizori de Infrastructură ca și Cod (IaC):
+Azure Developer CLI acceptă mai mulți furnizori de Infrastructură ca Cod (IaC):
 - **Bicep** (recomandat) - Limbaj specific domeniului Azure
 - **Șabloane ARM** - Șabloane JSON pentru Azure Resource Manager
 - **Terraform** - Instrument multi-cloud pentru infrastructură
-- **Pulumi** - Infrastructură modernă ca și cod folosind limbaje de programare
+- **Pulumi** - Infrastructură modernă ca cod cu limbaje de programare
 
 ## Înțelegerea Resurselor Azure
 
@@ -563,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Configurații Specifice Mediului
+## 🔧 Configurări Specifice Mediului
 
-### Fișiere de Parametri pentru Diferite Medii
+### Fișiere de Parametri pentru Medii Diferite
 ```json
 // infra/main.parameters.dev.json
 {
@@ -859,7 +866,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Pași Următori
 
-- [Planificare Pre-Implementare](../pre-deployment/capacity-planning.md) - Validează disponibilitatea resurselor
+- [Planificarea Pre-Implementării](../pre-deployment/capacity-planning.md) - Validează disponibilitatea resurselor
 - [Probleme Comune](../troubleshooting/common-issues.md) - Depanarea problemelor de infrastructură
 - [Ghid de Debugging](../troubleshooting/debugging.md) - Debugging-ul problemelor de provisionare
 - [Selecția SKU](../pre-deployment/sku-selection.md) - Alegerea nivelurilor de servicii potrivite
@@ -879,5 +886,5 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

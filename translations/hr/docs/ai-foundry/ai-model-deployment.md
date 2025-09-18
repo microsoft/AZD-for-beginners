@@ -1,15 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T23:22:21+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-18T12:00:16+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "hr"
 }
 -->
 # Implementacija AI modela s Azure Developer CLI
 
-**Prethodno:** [Integracija Azure AI Foundry](azure-ai-foundry-integration.md) | **Sljedeće:** [AI Workshop Lab](ai-workshop-lab.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 2 - Razvoj s fokusom na AI
+- **⬅️ Prethodno**: [Integracija Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Sljedeće**: [AI radionica](ai-workshop-lab.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../getting-started/configuration.md)
 
 Ovaj vodič pruža detaljne upute za implementaciju AI modela koristeći AZD predloške, pokrivajući sve od odabira modela do obrazaca implementacije u produkciji.
 
@@ -56,10 +61,10 @@ services:
 
 ### Planiranje kapaciteta modela
 
-| Tip modela | Primjena | Preporučeni kapacitet | Razmatranja troškova |
-|------------|----------|-----------------------|-----------------------|
+| Tip modela | Primjena | Preporučeni kapacitet | Troškovni aspekti |
+|------------|----------|-----------------------|-------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Isplativo za većinu radnih opterećenja |
-| GPT-4 | Kompleksno zaključivanje | 20-100 TPM | Viši troškovi, koristiti za premium značajke |
+| GPT-4 | Kompleksno zaključivanje | 20-100 TPM | Veći trošak, koristiti za premium značajke |
 | Text-embedding-ada-002 | Pretraživanje, RAG | 30-120 TPM | Ključno za semantičko pretraživanje |
 | Whisper | Govor u tekst | 10-50 TPM | Obrada audio sadržaja |
 
@@ -173,7 +178,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Najbolje za:
 - Globalne aplikacije
-- Zahtjeve za visokom dostupnošću
+- Zahtjevi za visoku dostupnost
 - Distribuciju opterećenja
 
 ### Obrazac 3: Hibridna implementacija
@@ -299,7 +304,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Konfiguracija automatskog skaliranja
 
-Konfigurirajte automatsko skaliranje za Container Apps:
+Postavite automatsko skaliranje za Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -371,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integracija s Application Insights
 
-Konfigurirajte praćenje za AI radna opterećenja:
+Postavite praćenje za AI radna opterećenja:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -478,9 +483,9 @@ async def check_ai_models():
 ## Sljedeći koraci
 
 1. **Pregledajte [Vodič za integraciju Azure AI Foundry](azure-ai-foundry-integration.md)** za obrasce integracije usluga
-2. **Dovršite [AI Workshop Lab](ai-workshop-lab.md)** za praktično iskustvo
-3. **Implementirajte [Prakse za produkcijski AI](production-ai-practices.md)** za implementacije u poduzećima
-4. **Istražite [Vodič za otklanjanje poteškoća s AI](../troubleshooting/ai-troubleshooting.md)** za uobičajene probleme
+2. **Dovršite [AI radionicu](ai-workshop-lab.md)** za praktično iskustvo
+3. **Implementirajte [Prakse za produkcijski AI](production-ai-practices.md)** za implementacije na razini poduzeća
+4. **Istražite [Vodič za rješavanje problema s AI](../troubleshooting/ai-troubleshooting.md)** za uobičajene probleme
 
 ## Resursi
 
@@ -491,9 +496,14 @@ async def check_ai_models():
 
 ---
 
-**Prethodno:** [Integracija Azure AI Foundry](azure-ai-foundry-integration.md) | **Sljedeće:** [AI Workshop Lab](ai-workshop-lab.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 2 - Razvoj s fokusom na AI
+- **⬅️ Prethodno**: [Integracija Azure AI Foundry](azure-ai-foundry-integration.md)
+- **➡️ Sljedeće**: [AI radionica](ai-workshop-lab.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../getting-started/configuration.md)
 
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
