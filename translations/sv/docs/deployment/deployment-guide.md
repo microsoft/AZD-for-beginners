@@ -1,24 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eca806abfc53ae49028f8d34471ab8c7",
-  "translation_date": "2025-09-09T21:38:33+00:00",
+  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
+  "translation_date": "2025-09-17T23:15:17+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "sv"
 }
 -->
 # Implementeringsguide - Bemästra AZD-implementeringar
 
+**Kapitelnavigation:**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 4 - Infrastruktur som kod & implementering
+- **⬅️ Föregående kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
+- **➡️ Nästa**: [Resursförsörjning](provisioning.md)
+- **🚀 Nästa kapitel**: [Kapitel 5: Multi-Agent AI-lösningar](../../examples/retail-scenario.md)
+
 ## Introduktion
 
-Denna omfattande guide täcker allt du behöver veta om att implementera applikationer med Azure Developer CLI, från grundläggande implementeringar med ett enda kommando till avancerade produktionsscenarier med anpassade hooks, flera miljöer och CI/CD-integration. Bemästra hela implementeringslivscykeln med praktiska exempel och bästa praxis.
+Denna omfattande guide täcker allt du behöver veta om att implementera applikationer med Azure Developer CLI, från grundläggande implementeringar med enstaka kommandon till avancerade produktionsscenarier med anpassade hooks, flera miljöer och CI/CD-integration. Bemästra hela implementeringslivscykeln med praktiska exempel och bästa praxis.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Bemästra alla Azure Developer CLI-implementeringskommandon och arbetsflöden
-- Förstå hela implementeringslivscykeln från provisionering till övervakning
-- Implementera anpassade implementeringshooks för automatisering före och efter implementering
+- Bemästra alla implementeringskommandon och arbetsflöden i Azure Developer CLI
+- Förstå hela implementeringslivscykeln från resursförsörjning till övervakning
+- Implementera anpassade hooks för automatisering före och efter implementering
 - Konfigurera flera miljöer med miljöspecifika parametrar
 - Ställa in avancerade implementeringsstrategier, inklusive blå-gröna och kanarieimplementeringar
 - Integrera azd-implementeringar med CI/CD-pipelines och DevOps-arbetsflöden
@@ -26,17 +33,17 @@ Genom att slutföra denna guide kommer du att:
 ## Läranderesultat
 
 Efter att ha slutfört guiden kommer du att kunna:
-- Utföra och felsöka alla azd-implementeringsarbetsflöden självständigt
-- Designa och implementera anpassad implementeringsautomatisering med hjälp av hooks
+- Självständigt utföra och felsöka alla azd-implementeringsarbetsflöden
+- Designa och implementera anpassad implementeringsautomatisering med hooks
 - Konfigurera produktionsklara implementeringar med korrekt säkerhet och övervakning
 - Hantera komplexa implementeringsscenarier med flera miljöer
 - Optimera implementeringsprestanda och implementera återställningsstrategier
 - Integrera azd-implementeringar i företags DevOps-praktiker
 
-## Översikt över implementering
+## Implementeringsöversikt
 
 Azure Developer CLI erbjuder flera implementeringskommandon:
-- `azd up` - Komplett arbetsflöde (provisionering + implementering)
+- `azd up` - Komplett arbetsflöde (försörjning + implementering)
 - `azd provision` - Skapa/uppdatera endast Azure-resurser
 - `azd deploy` - Implementera endast applikationskod
 - `azd package` - Bygga och paketera applikationer
@@ -85,7 +92,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 
 ## 🏗️ Förstå implementeringsprocessen
 
-### Fas 1: Hooks före provisionering
+### Fas 1: Hooks före försörjning
 ```yaml
 # azure.yaml
 hooks:
@@ -99,13 +106,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Fas 2: Infrastrukturprovisionering
-- Läser infrastrukturmallar (Bicep/Terraform)
+### Fas 2: Infrastrukturförsörjning
+- Läser infrastruktursmallar (Bicep/Terraform)
 - Skapar eller uppdaterar Azure-resurser
 - Konfigurerar nätverk och säkerhet
 - Ställer in övervakning och loggning
 
-### Fas 3: Hooks efter provisionering
+### Fas 3: Hooks efter försörjning
 ```yaml
 hooks:
   postprovision:
@@ -332,7 +339,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimering av Dockerfile i flera steg
+### Optimering av Dockerfiler i flera steg
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -369,7 +376,7 @@ azd config set deploy.parallelism 5
 azd deploy --parallel
 ```
 
-### Cache för byggprocessen
+### Byggcache
 ```yaml
 # azure.yaml - Enable build caching
 services:
@@ -515,7 +522,7 @@ azd deploy --service api --rollback
 azd deploy --service api --version v1.2.3
 ```
 
-### Återställning av infrastruktur
+### Infrastrukturåterställning
 ```bash
 # Rollback infrastructure changes
 azd provision --rollback
@@ -631,7 +638,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Nästa steg
 
-- [Provisionering av resurser](provisioning.md) - Fördjupning i infrastrukturhantering
+- [Resursförsörjning](provisioning.md) - Djupdykning i infrastrukturhantering
 - [Planering före implementering](../pre-deployment/capacity-planning.md) - Planera din implementeringsstrategi
 - [Vanliga problem](../troubleshooting/common-issues.md) - Lös implementeringsproblem
 - [Bästa praxis](../troubleshooting/debugging.md) - Produktionsklara implementeringsstrategier
@@ -639,17 +646,17 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ## Ytterligare resurser
 
 - [Azure Developer CLI Implementeringsreferens](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Implementering av Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Implementering av Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Implementering av Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure App Service Implementering](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Implementering](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Implementering](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**Navigering**
+**Navigation**
 - **Föregående lektion**: [Ditt första projekt](../getting-started/first-project.md)
-- **Nästa lektion**: [Provisionering av resurser](provisioning.md)
+- **Nästa lektion**: [Resursförsörjning](provisioning.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.

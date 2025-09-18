@@ -1,37 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a03c268130e67f5c2a707f97f517c55b",
-  "translation_date": "2025-09-10T05:19:07+00:00",
+  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
+  "translation_date": "2025-09-17T23:30:43+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "da"
 }
 -->
-# Fejlfindingsguide - Avancerede teknikker til loganalyse
+# Fejlfindingsguide for AZD-implementeringer
+
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 7 - Fejlfindingsstrategier
+- **⬅️ Forrige**: [Almindelige Problemer](common-issues.md)
+- **➡️ Næste**: [AI-Specifik Fejlfindning](ai-troubleshooting.md)
+- **🚀 Næste Kapitel**: [Kapitel 8: Produktions- og Enterprise-mønstre](../ai-foundry/production-ai-practices.md)
 
 ## Introduktion
 
-Denne omfattende guide giver avancerede strategier, værktøjer og teknikker til fejlfinding af komplekse problemer med Azure Developer CLI-implementeringer. Lær systematiske metoder til fejlfinding, loganalyse, performanceprofilering og avancerede diagnostiske værktøjer til effektivt at løse implementerings- og runtimeproblemer.
+Denne omfattende guide giver avancerede strategier, værktøjer og teknikker til fejlfinding og løsning af komplekse problemer med Azure Developer CLI-implementeringer. Lær systematiske fejlfindingsmetoder, loganalyse-teknikker, performanceprofilering og avancerede diagnostiske værktøjer til effektivt at løse implementerings- og runtime-problemer.
 
 ## Læringsmål
 
 Ved at gennemføre denne guide vil du:
-- Mestre systematiske metoder til fejlfinding af Azure Developer CLI-problemer
-- Forstå avanceret logkonfiguration og loganalysestrategier
+- Mestre systematiske fejlfindingsmetoder for Azure Developer CLI-problemer
+- Forstå avanceret logkonfiguration og loganalyse-teknikker
 - Implementere performanceprofilering og overvågningsstrategier
-- Bruge Azure-diagnostiske værktøjer og tjenester til at løse komplekse problemer
-- Anvende netværksfejlfinding og sikkerhedsrelaterede teknikker
+- Bruge Azure-diagnostiske værktøjer og tjenester til komplekse problemløsninger
+- Anvende netværksfejlfindings- og sikkerhedsfejlfindingsmetoder
 - Konfigurere omfattende overvågning og alarmering for proaktiv problemregistrering
 
 ## Læringsresultater
 
 Efter afslutning vil du kunne:
-- Anvende TRIAGE-metoden til systematisk fejlfinding af komplekse implementeringsproblemer
+- Anvende TRIAGE-metoden til systematisk at fejlfinde komplekse implementeringsproblemer
 - Konfigurere og analysere omfattende log- og sporingsinformation
 - Effektivt bruge Azure Monitor, Application Insights og diagnostiske værktøjer
-- Fejlsøge netværksforbindelse, autentificering og tilladelsesproblemer selvstændigt
+- Fejlfinde netværksforbindelse, autentificering og tilladelsesproblemer uafhængigt
 - Implementere performanceovervågning og optimeringsstrategier
-- Oprette brugerdefinerede scripts og automatisering til tilbagevendende problemer
+- Oprette brugerdefinerede fejlfindingsscripts og automatisering til tilbagevendende problemer
 
 ## Fejlfindingsmetode
 
@@ -39,11 +46,11 @@ Efter afslutning vil du kunne:
 - **T**id: Hvornår startede problemet?
 - **R**eproducer: Kan du konsekvent genskabe det?
 - **I**soler: Hvilken komponent fejler?
-- **A**nalyser: Hvad fortæller logfilerne os?
+- **A**nalyser: Hvad fortæller loggene os?
 - **S**aml: Indsaml alle relevante oplysninger
-- **E**skalér: Hvornår skal du søge yderligere hjælp?
+- **E**skalér: Hvornår skal der søges yderligere hjælp?
 
-## Aktivering af fejlsøgningstilstand
+## Aktivering af fejlfindingstilstand
 
 ### Miljøvariabler
 ```bash
@@ -59,7 +66,7 @@ export AZURE_CLI_DIAGNOSTICS=true
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Fejlsøgningskonfiguration
+### Fejlfindingskonfiguration
 ```bash
 # Set debug configuration globally
 azd config set debug.enabled true
@@ -71,9 +78,9 @@ azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Loganalysestrategier
+## 📊 Loganalyse-teknikker
 
-### Forstå logniveauer
+### Forståelse af logniveauer
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -121,7 +128,7 @@ done
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Avancerede fejlsøgningsværktøjer
+## 🛠️ Avancerede fejlfindingsværktøjer
 
 ### Azure Resource Graph-forespørgsler
 ```bash
@@ -135,7 +142,7 @@ az graph query -q "ResourceContainers | where type == 'microsoft.resources/resou
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Netværksfejlsøgning
+### Netværksfejlfindning
 ```bash
 # Test connectivity between services
 test_connectivity() {
@@ -156,7 +163,7 @@ test_connectivity() {
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Container-fejlsøgning
+### Container-fejlfindning
 ```bash
 # Debug container app issues
 debug_container() {
@@ -176,7 +183,7 @@ debug_container() {
 }
 ```
 
-### Fejlsøgning af databaseforbindelser
+### Fejlfindning af databaseforbindelser
 ```bash
 # Debug database connectivity
 debug_database() {
@@ -195,7 +202,7 @@ debug_database() {
 }
 ```
 
-## 🔬 Performance-fejlsøgning
+## 🔬 Performance-fejlfindning
 
 ### Overvågning af applikationsperformance
 ```bash
@@ -257,7 +264,7 @@ monitor_resources() {
 
 ## 🧪 Test og validering
 
-### Fejlsøgning af integrationstest
+### Fejlfindning af integrationstest
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -306,7 +313,7 @@ test_health "API" "$API_URL"
 npm run test:integration
 ```
 
-### Belastningstest til fejlsøgning
+### Belastningstest til fejlfinding
 ```bash
 # Simple load test to identify performance bottlenecks
 load_test() {
@@ -328,9 +335,9 @@ load_test() {
 }
 ```
 
-## 🔧 Infrastruktur-fejlsøgning
+## 🔧 Infrastruktur-fejlfindning
 
-### Fejlsøgning af Bicep-skabeloner
+### Fejlfindning af Bicep-skabeloner
 ```bash
 # Validate Bicep templates with detailed output
 validate_bicep() {
@@ -397,9 +404,9 @@ analyze_resources() {
 }
 ```
 
-## 🔒 Sikkerhedsfejlsøgning
+## 🔒 Sikkerhedsfejlfindning
 
-### Fejlsøgning af autentificeringsflow
+### Fejlfindning af autentificeringsflow
 ```bash
 # Debug Azure authentication
 debug_auth() {
@@ -433,7 +440,7 @@ debug_keyvault() {
 }
 ```
 
-### Fejlsøgning af netværkssikkerhed
+### Fejlfindning af netværkssikkerhed
 ```bash
 # Debug network security groups
 debug_network_security() {
@@ -451,9 +458,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 Applikationsspecifik fejlsøgning
+## 📱 Applikationsspecifik fejlfinding
 
-### Fejlsøgning af Node.js-applikationer
+### Fejlfindning af Node.js-applikationer
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -482,7 +489,7 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Fejlsøgning af databaseforespørgsler
+### Fejlfindning af databaseforespørgsler
 ```javascript
 // database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
@@ -512,7 +519,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Nødprocedurer for fejlsøgning
+## 🚨 Nødprocedurer for fejlfinding
 
 ### Respons på produktionsproblemer
 ```bash
@@ -575,7 +582,7 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Tilbageførselsprocedurer
+### Tilbagerulningsprocedurer
 ```bash
 # Quick rollback script
 quick_rollback() {
@@ -602,7 +609,7 @@ quick_rollback() {
 }
 ```
 
-## 📊 Fejlsøgningsdashboard
+## 📊 Fejlfindingsdashboard
 
 ### Brugerdefineret overvågningsdashboard
 ```bash
@@ -651,10 +658,10 @@ aggregate_logs() {
 
 ## 🔗 Avancerede ressourcer
 
-### Brugerdefinerede fejlsøgningsscripts
+### Brugerdefinerede fejlfindingsscripts
 Opret en `scripts/debug/`-mappe med:
 - `health-check.sh` - Omfattende sundhedstjek
-- `performance-test.sh` - Automatiseret performancetest
+- `performance-test.sh` - Automatiseret performance-test
 - `log-analyzer.py` - Avanceret logparsing og analyse
 - `resource-validator.sh` - Infrastrukturvalidering
 
@@ -675,34 +682,34 @@ hooks:
       fi
 ```
 
-## Best Practices
+## Bedste praksis
 
 1. **Aktivér altid fejllogning** i ikke-produktionsmiljøer
 2. **Opret reproducerbare testcases** for problemer
-3. **Dokumentér fejlsøgningsprocedurer** for dit team
+3. **Dokumentér fejlfindingsprocedurer** for dit team
 4. **Automatisér sundhedstjek** og overvågning
-5. **Hold fejlsøgningsværktøjer opdateret** med dine applikationsændringer
-6. **Øv fejlsøgningsprocedurer** i ikke-incident tider
+5. **Hold fejlfindingsværktøjer opdateret** med dine applikationsændringer
+6. **Øv fejlfindingsprocedurer** i ikke-incidentperioder
 
-## Næste trin
+## Næste skridt
 
 - [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md) - Planlæg ressourcekrav
 - [SKU-valg](../pre-deployment/sku-selection.md) - Vælg passende serviceniveauer
 - [Preflight-tjek](../pre-deployment/preflight-checks.md) - Validering før implementering
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Hurtig reference til kommandoer
+- [Snydeark](../../resources/cheat-sheet.md) - Hurtig reference til kommandoer
 
 ---
 
-**Husk**: God fejlsøgning handler om at være systematisk, grundig og tålmodig. Disse værktøjer og teknikker vil hjælpe dig med at diagnosticere problemer hurtigere og mere effektivt.
+**Husk**: God fejlfindning handler om at være systematisk, grundig og tålmodig. Disse værktøjer og teknikker vil hjælpe dig med at diagnosticere problemer hurtigere og mere effektivt.
 
 ---
 
 **Navigation**
-- **Forrige lektion**: [Almindelige problemer](common-issues.md)
+- **Forrige Lektion**: [Almindelige Problemer](common-issues.md)
 
-- **Næste lektion**: [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md)
+- **Næste Lektion**: [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

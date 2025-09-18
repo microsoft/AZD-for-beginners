@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e45896a8acbafead1f195788780a4ab7",
-  "translation_date": "2025-09-10T16:14:39+00:00",
+  "original_hash": "0fd083f39ef5508994526bb18e9fcd78",
+  "translation_date": "2025-09-17T23:18:29+00:00",
   "source_file": "examples/README.md",
   "language_code": "sv"
 }
 -->
 # Exempel - Praktiska AZD-mallar och konfigurationer
 
+**Lär dig genom exempel - Organiserat per kapitel**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../README.md)
+- **📖 Kapitelöversikt**: Exempel organiserade efter lärandekomplexitet
+- **🚀 Börja enkelt**: [Kapitel 1 Exempel](../../../examples)
+- **🤖 AI Exempel**: [Kapitel 2 & 5 AI-lösningar](../../../examples)
+
 ## Introduktion
 
-Den här katalogen innehåller praktiska exempel, mallar och verkliga scenarier för att hjälpa dig att lära dig Azure Developer CLI genom praktisk övning. Varje exempel erbjuder komplett fungerande kod, infrastruktursmallar och detaljerade instruktioner för olika applikationsarkitekturer och distributionsmönster.
+Denna katalog innehåller praktiska exempel, mallar och verkliga scenarier för att hjälpa dig att lära dig Azure Developer CLI genom praktisk övning. Varje exempel innehåller komplett fungerande kod, infrastruktursmallar och detaljerade instruktioner för olika applikationsarkitekturer och distributionsmönster.
 
 ## Lärandemål
 
@@ -25,7 +31,7 @@ Genom att arbeta med dessa exempel kommer du att:
 
 ## Läranderesultat
 
-Efter att ha slutfört dessa exempel kommer du att kunna:
+När du har slutfört dessa exempel kommer du att kunna:
 - Självsäkert distribuera olika applikationstyper med Azure Developer CLI
 - Anpassa de tillhandahållna mallarna till dina egna applikationskrav
 - Designa och implementera anpassade infrastruktursmönster med Bicep
@@ -51,33 +57,54 @@ Azure Samples AZD Templates (linked externally):
 
 ## Snabbstartsexempel
 
-### För nybörjare
-1. **[Enkel webbapp - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Distribuera en Node.js Express-webbapplikation med MongoDB
-2. **[Statisk webbplats - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Värd för en statisk React-webbplats med Azure Static Web Apps
-3. **[Containerapp - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Distribuera en containeriserad Python Flask-applikation
+### För Nybörjare
+1. **[Enkel Webbapp - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Distribuera en Node.js Express-webbapplikation med MongoDB
+2. **[Statisk Webbplats - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Värd för en React statisk webbplats med Azure Static Web Apps
+3. **[Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Distribuera en containeriserad Python Flask-applikation
 
-### För användare på mellannivå
+### För Mellanliggande Användare
 4. **[Databasapp - C# med Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Webbapplikation med C# API och Azure SQL-databas
-5. **[Serverlös funktion - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions med HTTP-triggers och Cosmos DB
-6. **[Mikrotjänster - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Applikation med flera tjänster i Java med Container Apps och API-gateway
+5. **[Serverlös Funktion - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions med HTTP-triggers och Cosmos DB
+6. **[Mikrotjänster - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Fler-tjänst Java-applikation med Container Apps och API-gateway
 
-### Azure AI Foundry-mallar
+### Azure AI Foundry Mallar
 
 1. **[Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)** - Intelligent chattapplikation med Azure OpenAI
-2. **[AI-dokumentbearbetning](https://github.com/Azure-Samples/azure-ai-document-processing)** - Dokumentanalys med Azure AI-tjänster
+2. **[AI Dokumentbearbetning](https://github.com/Azure-Samples/azure-ai-document-processing)** - Dokumentanalys med Azure AI-tjänster
 3. **[Maskininlärningspipeline](https://github.com/Azure-Samples/mlops-v2)** - MLOps-arbetsflöde med Azure Machine Learning
+
+### Verkliga Scenarier
+
+#### **Detaljhandel Multi-Agent Lösning** 🆕
+**[Komplett Implementeringsguide](./retail-scenario.md)**
+
+En omfattande, produktionsklar multi-agent kundsupportlösning som demonstrerar AI-applikationsdistribution i företagsklass med AZD. Detta scenario erbjuder:
+
+- **Komplett Arkitektur**: Multi-agent system med specialiserade kundservice- och lagerhanteringsagenter
+- **Produktionsinfrastruktur**: Multi-region Azure OpenAI-distributioner, AI-sökning, Container Apps och omfattande övervakning
+- **Redo-att-distribuera ARM-mall**: Enklicksdistribution med flera konfigurationslägen (Minimal/Standard/Premium)
+- **Avancerade Funktioner**: Säkerhetsvalidering, agentutvärderingsramverk, kostnadsoptimering och felsökningsguider
+- **Verklig Affärskontext**: Detaljhandels kundsupportanvändningsfall med filuppladdningar, sökintegration och dynamisk skalning
+
+**Teknologier**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+
+**Komplexitet**: ⭐⭐⭐⭐ (Avancerad - Produktionsklar för företag)
+
+**Perfekt för**: AI-utvecklare, lösningsarkitekter och team som bygger produktionsklara multi-agent system
+
+**Snabbstart**: Distribuera den kompletta lösningen på under 30 minuter med den inkluderade ARM-mallen med `./deploy.sh -g myResourceGroup`
 
 ## 📋 Användarinstruktioner
 
-### Köra exempel lokalt
+### Köra Exempel Lokalt
 
-1. **Klona eller kopiera exempel**
+1. **Klona eller Kopiera Exempel**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
    ```
 
-2. **Initiera AZD-miljö**
+2. **Initiera AZD Miljö**
    ```bash
    # Initialize with existing template
    azd init
@@ -86,7 +113,7 @@ Azure Samples AZD Templates (linked externally):
    azd env new my-environment
    ```
 
-3. **Konfigurera miljö**
+3. **Konfigurera Miljö**
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
@@ -99,79 +126,79 @@ Azure Samples AZD Templates (linked externally):
    azd up
    ```
 
-### Anpassa exempel
+### Anpassa Exempel
 
-Varje exempel innehåller:
+Varje exempel inkluderar:
 - **README.md** - Detaljerade installations- och anpassningsinstruktioner
 - **azure.yaml** - AZD-konfiguration med kommentarer
 - **infra/** - Bicep-mallar med parameterförklaringar
-- **src/** - Exempel på applikationskod
+- **src/** - Exempelapplikationskod
 - **scripts/** - Hjälpskript för vanliga uppgifter
 
 ## 🎯 Lärandemål
 
 ### Exempelkategorier
 
-#### **Grundläggande distributioner**
+#### **Grundläggande Distributioner**
 - Applikationer med en tjänst
 - Enkla infrastruktursmönster
 - Grundläggande konfigurationshantering
 - Kostnadseffektiva utvecklingsmiljöer
 
-#### **Avancerade scenarier**
+#### **Avancerade Scenarier**
 - Arkitekturer med flera tjänster
 - Komplexa nätverkskonfigurationer
 - Databasintegrationsmönster
 - Säkerhets- och efterlevnadsimplementeringar
 
-#### **Produktionsklara mönster**
-- Konfigurationer med hög tillgänglighet
+#### **Produktionsklara Mönster**
+- Konfigurationer för hög tillgänglighet
 - Övervakning och observabilitet
 - CI/CD-integration
 - Återställningsstrategier vid katastrofer
 
 ## 📖 Exempelbeskrivningar
 
-### Enkel webbapp - Node.js Express
+### Enkel Webbapp - Node.js Express
 **Teknologier**: Node.js, Express, MongoDB, Container Apps  
 **Komplexitet**: Nybörjare  
 **Koncept**: Grundläggande distribution, REST API, NoSQL-databasintegration
 
-### Statisk webbplats - React SPA
+### Statisk Webbplats - React SPA
 **Teknologier**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Komplexitet**: Nybörjare  
 **Koncept**: Statisk hosting, serverlös backend, modern webbutveckling
 
-### Containerapp - Python Flask
+### Container App - Python Flask
 **Teknologier**: Python Flask, Docker, Container Apps, Container Registry  
 **Komplexitet**: Nybörjare  
 **Koncept**: Containerisering, mikrotjänstarkitektur, API-utveckling
 
 ### Databasapp - C# med Azure SQL
 **Teknologier**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Komplexitet**: Mellannivå  
-**Koncept**: Entity Framework, databasanslutningar, webb-API-utveckling
+**Komplexitet**: Mellanliggande  
+**Koncept**: Entity Framework, databasanslutningar, web API-utveckling
 
-### Serverlös funktion - Python Azure Functions
+### Serverlös Funktion - Python Azure Functions
 **Teknologier**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Komplexitet**: Mellannivå  
-**Koncept**: Händelsedriven arkitektur, serverlös databehandling, fullstack-utveckling
+**Komplexitet**: Mellanliggande  
+**Koncept**: Händelsestyrd arkitektur, serverlös databehandling, fullstack-utveckling
 
 ### Mikrotjänster - Java Spring Boot
 **Teknologier**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Komplexitet**: Mellannivå  
+**Komplexitet**: Mellanliggande  
 **Koncept**: Kommunikation mellan tjänster, distribuerade system, företagsmönster
 
-### Azure AI Foundry-exempel
+### Azure AI Foundry Exempel
 
 #### Azure OpenAI Chat App
 **Teknologier**: Azure OpenAI, Cognitive Search, App Service  
-**Komplexitet**: Mellannivå  
+**Komplexitet**: Mellanliggande  
 **Koncept**: RAG-arkitektur, vektorsökning, LLM-integration
 
-#### AI-dokumentbearbetning
+#### AI Dokumentbearbetning
 **Teknologier**: Azure AI Document Intelligence, Storage, Functions  
-**Komplexitet**: Mellannivå  
+**Komplexitet**: Mellanliggande  
 **Koncept**: Dokumentanalys, OCR, dataextraktion
 
 #### Maskininlärningspipeline
@@ -187,7 +214,7 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 - Inställningar för utvecklingsmiljö
 - Konfigurationer för stagingmiljö
 - Produktionsklara konfigurationer
-- Distributionsinställningar för flera regioner
+- Multi-region distributionsinställningar
 
 ### Bicep-moduler
 - Återanvändbara infrastrukturkomponenter
@@ -198,25 +225,25 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 ### Hjälpskript
 - Automatisering av miljöinställningar
 - Databas-migrationsskript
-- Verktyg för validering av distributioner
+- Verktyg för distributionsvalidering
 - Kostnadsövervakningsverktyg
 
 ## 🔧 Anpassningsguide
 
-### Anpassa exempel för dina behov
+### Anpassa Exempel för Dina Behov
 
-1. **Granska förutsättningar**
+1. **Granska Förutsättningar**
    - Kontrollera Azure-tjänstkrav
    - Verifiera prenumerationsgränser
    - Förstå kostnadsimplikationer
 
-2. **Modifiera konfiguration**
-   - Uppdatera tjänstedefinitioner i `azure.yaml`
+2. **Modifiera Konfiguration**
+   - Uppdatera `azure.yaml` tjänstedefinitioner
    - Anpassa Bicep-mallar
    - Justera miljövariabler
 
-3. **Testa noggrant**
-   - Distribuera först till utvecklingsmiljön
+3. **Testa Noggrant**
+   - Distribuera först till utvecklingsmiljö
    - Validera funktionalitet
    - Testa skalning och prestanda
 
@@ -227,55 +254,56 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 
 ## 📊 Jämförelsematris
 
-| Exempel | Tjänster | Databas | Autentisering | Övervakning | Komplexitet |
-|---------|----------|----------|---------------|-------------|-------------|
+| Exempel | Tjänster | Databas | Auth | Övervakning | Komplexitet |
+|---------|----------|----------|------|------------|------------|
 | Node.js Express Todo | 2 | ✅ | Grundläggande | Grundläggande | ⭐ |
-| React SPA + Functions | 3 | ✅ | Grundläggande | Fullständig | ⭐ |
-| Python Flask Container | 2 | ❌ | Grundläggande | Fullständig | ⭐ |
-| C# Web API + SQL | 2 | ✅ | Fullständig | Fullständig | ⭐⭐ |
-| Python Functions + SPA | 3 | ✅ | Fullständig | Fullständig | ⭐⭐ |
-| Java Mikrotjänster | 5+ | ✅ | Fullständig | Fullständig | ⭐⭐ |
-| Azure OpenAI Chat | 3 | ✅ | Fullständig | Fullständig | ⭐⭐⭐ |
-| AI-dokumentbearbetning | 2 | ❌ | Grundläggande | Fullständig | ⭐⭐ |
-| ML-pipeline | 4+ | ✅ | Fullständig | Fullständig | ⭐⭐⭐⭐ |
+| React SPA + Functions | 3 | ✅ | Grundläggande | Full | ⭐ |
+| Python Flask Container | 2 | ❌ | Grundläggande | Full | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
+| Java Mikrotjänster | 5+ | ✅ | Full | Full | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
+| AI Dokumentbearbetning | 2 | ❌ | Grundläggande | Full | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| **Detaljhandel Multi-Agent** | **8+** | **✅** | **Företagsklass** | **Avancerad** | **⭐⭐⭐⭐** |
 
 ## 🎓 Lärandebana
 
-### Rekommenderad progression
+### Rekommenderad Progression
 
-1. **Börja med enkel webbapp**
+1. **Börja med Enkel Webbapp**
    - Lär dig grundläggande AZD-koncept
    - Förstå distributionsarbetsflöde
    - Öva på miljöhantering
 
-2. **Prova statisk webbplats**
+2. **Prova Statisk Webbplats**
    - Utforska olika hostingalternativ
    - Lär dig om CDN-integration
    - Förstå DNS-konfiguration
 
-3. **Gå vidare till containerapp**
+3. **Gå vidare till Container App**
    - Lär dig grunderna i containerisering
    - Förstå skalningskoncept
    - Öva med Docker
 
-4. **Lägg till databasintegration**
+4. **Lägg till Databasintegration**
    - Lär dig databasprovisionering
    - Förstå anslutningssträngar
    - Öva på hantering av hemligheter
 
-5. **Utforska serverlös**
-   - Förstå händelsedriven arkitektur
+5. **Utforska Serverlös**
+   - Förstå händelsestyrd arkitektur
    - Lär dig om triggers och bindningar
    - Öva med API:er
 
-6. **Bygg mikrotjänster**
+6. **Bygg Mikrotjänster**
    - Lär dig tjänstekommunikation
    - Förstå distribuerade system
    - Öva på komplexa distributioner
 
-## 🔍 Hitta rätt exempel
+## 🔍 Hitta Rätt Exempel
 
-### Efter teknologisk stack
+### Efter Teknologistack
 - **Node.js**: Node.js Express Todo App
 - **Python**: Python Flask Container App, Python Functions + SPA
 - **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
@@ -283,37 +311,42 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 - **React**: React SPA + Functions
 - **Containers**: Python Flask Container App, Java Mikrotjänster
 - **Databaser**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: Azure OpenAI Chat App, AI-dokumentbearbetning, ML-pipeline
+- **AI/ML**: Azure OpenAI Chat App, AI Dokumentbearbetning, ML Pipeline, **Detaljhandel Multi-Agent Lösning**
+- **Multi-Agent System**: **Detaljhandel Multi-Agent Lösning**
+- **Företagsproduktion**: **Detaljhandel Multi-Agent Lösning**
 
-### Efter arkitekturmönster
+### Efter Arkitekturmönster
 - **Monolitisk**: Node.js Express Todo, C# Web API + SQL
 - **Statisk + Serverlös**: React SPA + Functions, Python Functions + SPA
 - **Mikrotjänster**: Java Spring Boot Mikrotjänster
 - **Containeriserad**: Python Flask Container App
-- **AI-drivna**: Azure OpenAI Chat App, AI-dokumentbearbetning, ML-pipeline
+- **AI-Driven**: Azure OpenAI Chat App, AI Dokumentbearbetning, ML Pipeline, **Detaljhandel Multi-Agent Lösning**
+- **Multi-Agent Arkitektur**: **Detaljhandel Multi-Agent Lösning**
+- **Företags Multi-Tjänst**: **Detaljhandel Multi-Agent Lösning**
 
-### Efter komplexitetsnivå
+### Efter Komplexitetsnivå
 - **Nybörjare**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
-- **Mellannivå**: C# Web API + SQL, Python Functions + SPA, Java Mikrotjänster, Azure OpenAI Chat App, AI-dokumentbearbetning
-- **Avancerad**: ML-pipeline
+- **Mellanliggande**: C# Web API + SQL, Python Functions + SPA, Java Mikrotjänster, Azure OpenAI Chat App, AI Dokumentbearbetning
+- **Avancerad**: ML Pipeline
+- **Företagsproduktion**: **Detaljhandel Multi-Agent Lösning** (Komplett multi-agent system med ARM-mall distribution)
 
-## 📚 Ytterligare resurser
+## 📚 Ytterligare Resurser
 
 ### Dokumentationslänkar
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
-- [Bicep-dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure AI Foundry AZD Mallar](https://github.com/Azure/ai-foundry-templates)
+- [Bicep Dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Arkitekturcenter](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Community-exempel
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+### Community Exempel
+- [Azure Samples AZD Mallar](https://github.com/Azure-Samples/azd-templates)
+- [Azure AI Foundry Mallar](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Galleri](https://azure.github.io/awesome-azd/)
 - [Todo App med C# och Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
 - [Todo App med Python och MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
 - [Todo App med Node.js och PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
 - [React Web App med C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Container Apps Jobb](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions med Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Bästa praxis
@@ -324,14 +357,14 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 
 Har du ett användbart exempel att dela? Vi välkomnar bidrag!
 
-### Riktlinjer för inskick
+### Riktlinjer för inskickning
 1. Följ den etablerade katalogstrukturen
 2. Inkludera en omfattande README.md
 3. Lägg till kommentarer i konfigurationsfiler
 4. Testa noggrant innan du skickar in
-5. Inkludera kostnadsuppskattningar och förutsättningar
+5. Inkludera kostnadsberäkningar och förutsättningar
 
-### Exempelmallstruktur
+### Exempel på mallstruktur
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -347,7 +380,7 @@ example-name/
 
 ---
 
-**Tips**: Börja med det enklaste exemplet som matchar din teknologiska stack och arbeta dig gradvis upp till mer komplexa scenarier. Varje exempel bygger på koncept från föregående!
+**Tips**: Börja med det enklaste exemplet som passar din teknologiska plattform, och arbeta dig sedan gradvis upp till mer komplexa scenarier. Varje exempel bygger på koncept från de tidigare!
 
 **Nästa steg**: 
 - Välj ett exempel som matchar din kunskapsnivå
@@ -359,9 +392,9 @@ example-name/
 
 **Navigering**
 - **Föregående lektion**: [Studieguide](../resources/study-guide.md)
-- **Återgå till**: [Huvud-README](../README.md)
+- **Återgå till**: [Huvud README](../README.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, vänligen notera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

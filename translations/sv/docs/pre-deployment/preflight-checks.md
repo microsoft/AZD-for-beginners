@@ -1,46 +1,53 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T21:54:24+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T23:17:06+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "sv"
 }
 -->
-# Kontroll före start - Validering av driftsberedskap
+# Kontroll före distribution för AZD-distributioner
+
+**Kapitelnavigation:**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 6 - Validering och planering före distribution
+- **⬅️ Föregående**: [Val av SKU](sku-selection.md)
+- **➡️ Nästa kapitel**: [Kapitel 7: Felsökning](../troubleshooting/common-issues.md)
+- **🔧 Relaterat**: [Kapitel 4: Distributionsguide](../deployment/deployment-guide.md)
 
 ## Introduktion
 
-Denna omfattande guide tillhandahåller valideringsskript och procedurer för att säkerställa framgångsrika Azure Developer CLI-distributioner innan de påbörjas. Lär dig att implementera automatiska kontroller för autentisering, resurs tillgänglighet, kvoter, säkerhetsöverensstämmelse och prestandakrav för att förhindra distributionsfel och optimera framgångsgraden.
+Denna omfattande guide tillhandahåller valideringsskript och procedurer före distribution för att säkerställa framgångsrika distributioner med Azure Developer CLI innan de påbörjas. Lär dig att implementera automatiska kontroller för autentisering, resurs tillgänglighet, kvoter, säkerhetskrav och prestandakrav för att förhindra distributionsfel och optimera framgångsgraden.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Bemästra automatiserade tekniker och skript för validering före distribution
+- Bemästra automatiserade valideringstekniker och skript före distribution
 - Förstå omfattande kontrollstrategier för autentisering, behörigheter och kvoter
 - Implementera procedurer för validering av resurs tillgänglighet och kapacitet
-- Konfigurera säkerhets- och överensstämmelsekontroller för organisationspolicyer
+- Konfigurera säkerhets- och efterlevnadskontroller för organisationspolicyer
 - Designa arbetsflöden för kostnadsberäkning och budgetvalidering
-- Skapa anpassad automatisering för kontroller före start i CI/CD-pipelines
+- Skapa anpassad automatisering för kontroll före distribution i CI/CD-pipelines
 
 ## Läranderesultat
 
 Efter avslutad guide kommer du att kunna:
-- Skapa och köra omfattande valideringsskript före start
+- Skapa och köra omfattande valideringsskript före distribution
 - Designa automatiserade kontrollarbetsflöden för olika distributionsscenarier
 - Implementera miljöspecifika valideringsprocedurer och policyer
-- Konfigurera proaktiv övervakning och varningar för driftsberedskap
+- Konfigurera proaktiv övervakning och larm för distributionsberedskap
 - Felsöka problem före distribution och implementera korrigerande åtgärder
-- Integrera kontroller före start i DevOps-pipelines och automatiseringsarbetsflöden
+- Integrera kontroller före distribution i DevOps-pipelines och automatiseringsarbetsflöden
 
 ## Innehållsförteckning
 
 - [Översikt](../../../../docs/pre-deployment)
-- [Automatiserat skript för kontroll före start](../../../../docs/pre-deployment)
-- [Manuell valideringschecklista](../../../../docs/pre-deployment)
+- [Automatiserat skript före distribution](../../../../docs/pre-deployment)
+- [Checklista för manuell validering](../../../../docs/pre-deployment)
 - [Miljövalidering](../../../../docs/pre-deployment)
 - [Resursvalidering](../../../../docs/pre-deployment)
-- [Säkerhets- och överensstämmelsekontroller](../../../../docs/pre-deployment)
+- [Säkerhets- och efterlevnadskontroller](../../../../docs/pre-deployment)
 - [Prestanda- och kapacitetsplanering](../../../../docs/pre-deployment)
 - [Felsökning av vanliga problem](../../../../docs/pre-deployment)
 
@@ -48,16 +55,16 @@ Efter avslutad guide kommer du att kunna:
 
 ## Översikt
 
-Kontroller före start är viktiga valideringar som utförs innan distribution för att säkerställa:
+Kontroller före distribution är viktiga valideringar som utförs innan distribution för att säkerställa:
 
 - **Resurs tillgänglighet** och kvoter i målregioner
 - **Autentisering och behörigheter** är korrekt konfigurerade
 - **Mallens giltighet** och korrekthet av parametrar
 - **Nätverksanslutning** och beroenden
-- **Säkerhetsöverensstämmelse** med organisationspolicyer
+- **Säkerhetskrav** enligt organisationspolicyer
 - **Kostnadsberäkning** inom budgetbegränsningar
 
-### När ska kontroller före start köras
+### När ska kontroller före distribution köras?
 
 - **Innan första distributionen** till en ny miljö
 - **Efter betydande ändringar i mallar**
@@ -67,9 +74,9 @@ Kontroller före start är viktiga valideringar som utförs innan distribution f
 
 ---
 
-## Automatiserat skript för kontroll före start
+## Automatiserat skript före distribution
 
-### PowerShell-skript för kontroll före start
+### PowerShell-skript för kontroll före distribution
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash-skript för kontroll före start
+### Bash-skript för kontroll före distribution
 
 ```bash
 #!/bin/bash
@@ -783,16 +790,16 @@ main "$@"
 
 ---
 
-## Manuell valideringschecklista
+## Checklista för manuell validering
 
 ### Checklista före distribution
 
 Skriv ut denna checklista och verifiera varje punkt innan distribution:
 
-#### ✅ Miljöinställning
+#### ✅ Miljöinställningar
 - [ ] AZD CLI installerad och uppdaterad till senaste version
 - [ ] Azure CLI installerad och autentiserad
-- [ ] Korrekt Azure-prenumeration vald
+- [ ] Rätt Azure-prenumeration vald
 - [ ] Miljönamn är unikt och följer namngivningskonventioner
 - [ ] Målresursgrupp identifierad eller kan skapas
 
@@ -807,14 +814,14 @@ Skriv ut denna checklista och verifiera varje punkt innan distribution:
 - [ ] Alla tjänster definierade i azure.yaml har motsvarande källkod
 - [ ] Bicep-mallar i `infra/`-katalogen är närvarande
 - [ ] `main.bicep` kompilerar utan fel (`az bicep build --file infra/main.bicep`)
-- [ ] Alla nödvändiga parametrar har standardvärden eller kommer att tillhandahållas
+- [ ] Alla obligatoriska parametrar har standardvärden eller kommer att tillhandahållas
 - [ ] Inga hårdkodade hemligheter i mallar
 
 #### ✅ Resursplanering
 - [ ] Målregion i Azure vald och validerad
 - [ ] Nödvändiga Azure-tjänster tillgängliga i målregionen
 - [ ] Tillräckliga kvoter tillgängliga för planerade resurser
-- [ ] Konflikter i resursnamngivning kontrollerade
+- [ ] Konflikter i resursnamn kontrollerade
 - [ ] Beroenden mellan resurser förstådda
 
 #### ✅ Nätverk & Säkerhet
@@ -827,13 +834,13 @@ Skriv ut denna checklista och verifiera varje punkt innan distribution:
 #### ✅ Kostnadshantering
 - [ ] Kostnadsberäkningar gjorda med Azure Pricing Calculator
 - [ ] Budgetvarningar konfigurerade om nödvändigt
-- [ ] Lämpliga SKUs valda för miljötyp
+- [ ] Lämpliga SKU:er valda för miljötyp
 - [ ] Reserverad kapacitet övervägd för produktionsarbetsbelastningar
 
 #### ✅ Övervakning & Observabilitet
 - [ ] Application Insights konfigurerad i mallar
 - [ ] Log Analytics-arbetsyta planerad
-- [ ] Varningsregler definierade för kritiska mätvärden
+- [ ] Larmregler definierade för kritiska mätvärden
 - [ ] Hälsokontrollendpoints implementerade i applikationer
 
 #### ✅ Backup & Återställning
@@ -1044,7 +1051,7 @@ if __name__ == "__main__":
 
 ---
 
-## Säkerhets- och överensstämmelsekontroller
+## Säkerhets- och efterlevnadskontroller
 
 ### Skript för säkerhetsvalidering
 
@@ -1278,7 +1285,7 @@ steps:
 
 ## Sammanfattning av bästa praxis
 
-### ✅ Bästa praxis för kontroller före start
+### ✅ Bästa praxis för kontroller före distribution
 
 1. **Automatisera där det är möjligt**
    - Integrera kontroller i CI/CD-pipelines
@@ -1294,38 +1301,38 @@ steps:
    - Autentisering och behörigheter
    - Resurskvoter och tillgänglighet
    - Mallvalidering och syntax
-   - Säkerhets- och överensstämmelsekrav
+   - Säkerhets- och efterlevnadskrav
 
 4. **Tydlig rapportering**
    - Färgkodade statusindikatorer
    - Detaljerade felmeddelanden med åtgärdsförslag
-   - Sammanfattande rapporter för snabb bedömning
+   - Sammanfattningsrapporter för snabb bedömning
 
 5. **Snabbt stopp**
    - Stoppa distributionen om kritiska kontroller misslyckas
    - Ge tydlig vägledning för lösning
    - Möjliggör enkel omkörning av kontroller
 
-### Vanliga fallgropar vid kontroller före start
+### Vanliga fallgropar vid kontroller före distribution
 
 1. **Hoppa över validering** för "snabba" distributioner
 2. **Otillräcklig behörighetskontroll** innan distribution
 3. **Ignorera kvotgränser** tills distributionen misslyckas
 4. **Inte validera mallar** i CI/CD-pipelines
-5. **Saknad säkerhetsvalidering** för produktionsmiljöer
+5. **Saknade säkerhetskontroller** för produktionsmiljöer
 6. **Otillräcklig kostnadsberäkning** som leder till budgetöverraskningar
 
 ---
 
-**Tips**: Kör kontroller före start som ett separat jobb i din CI/CD-pipeline innan det faktiska distributionsjobbet. Detta gör att du kan upptäcka problem tidigt och ger snabbare feedback till utvecklare.
+**Proffstips**: Kör kontroller före distribution som ett separat jobb i din CI/CD-pipeline innan det faktiska distributionsjobbet. Detta gör att du kan upptäcka problem tidigt och ger snabbare feedback till utvecklare.
 
 ---
 
-**Navigering**
+**Navigation**
 - **Föregående lektion**: [Val av SKU](sku-selection.md)
 - **Nästa lektion**: [Fuskblad](../../resources/cheat-sheet.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

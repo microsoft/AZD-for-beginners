@@ -1,13 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a18b53f05c5e2fb42ebd98fcc82fcd18",
-  "translation_date": "2025-09-09T22:36:11+00:00",
+  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
+  "translation_date": "2025-09-17T23:21:37+00:00",
   "source_file": "resources/faq.md",
   "language_code": "sv"
 }
 -->
 # Vanliga frågor (FAQ)
+
+**Få hjälp per kapitel**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../README.md)
+- **🚆 Installationsproblem**: [Kapitel 1: Installation & Setup](../docs/getting-started/installation.md)
+- **🤖 AI-frågor**: [Kapitel 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🔧 Felsökning**: [Kapitel 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
 
 ## Introduktion
 
@@ -21,12 +27,12 @@ Genom att granska denna FAQ kommer du att:
 - Få tillgång till felsökningslösningar för vanliga problem och fel
 - Lära dig bästa praxis genom vanliga frågor om optimering
 - Upptäcka avancerade funktioner och kapaciteter genom expertfrågor
-- Effektivt referera till vägledning om kostnader, säkerhet och distributionsstrategier
+- Effektivt referera till kostnads-, säkerhets- och distributionsstrategier
 
 ## Läranderesultat
 
 Med regelbunden hänvisning till denna FAQ kommer du att kunna:
-- Självständigt lösa vanliga problem med Azure Developer CLI med hjälp av de tillhandahållna lösningarna
+- Självständigt lösa vanliga problem med Azure Developer CLI med hjälp av tillhandahållna lösningar
 - Göra informerade beslut om distributionsstrategier och konfigurationer
 - Förstå relationen mellan azd och andra Azure-verktyg och tjänster
 - Tillämpa bästa praxis baserat på erfarenheter från communityn och expertrekommendationer
@@ -42,8 +48,8 @@ Med regelbunden hänvisning till denna FAQ kommer du att kunna:
 - [Konfiguration & Miljöer](../../../resources)
 - [Felsökning](../../../resources)
 - [Kostnad & Fakturering](../../../resources)
-- [Bästa praxis](../../../resources)
-- [Avancerade ämnen](../../../resources)
+- [Bästa Praxis](../../../resources)
+- [Avancerade Ämnen](../../../resources)
 
 ---
 
@@ -63,7 +69,7 @@ Med regelbunden hänvisning till denna FAQ kommer du att kunna:
 **S**: Ja, azd kräver Azure CLI för autentisering och vissa operationer. Installera Azure CLI först, och sedan azd.
 
 ### F: Vilka programmeringsspråk stöder azd?
-**S**: azd är språkagnostiskt. Det fungerar med:
+**S**: azd är språkoberoende. Det fungerar med:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
@@ -129,7 +135,7 @@ Med regelbunden hänvisning till denna FAQ kommer du att kunna:
 
 ### F: Vad är skillnaden mellan officiella och community-mallar?
 **S**: 
-- **Officiella mallar**: Underhålls av Microsoft, uppdateras regelbundet, omfattande dokumentation
+- **Officiella mallar**: Underhålls av Microsoft, regelbundet uppdaterade, omfattande dokumentation
 - **Community-mallar**: Skapade av utvecklare, kan ha specialiserade användningsfall, varierande kvalitet och underhåll
 
 ### F: Hur uppdaterar jag en mall i mitt projekt?
@@ -143,7 +149,7 @@ Med regelbunden hänvisning till denna FAQ kommer du att kunna:
 ## Distribution & Infrastruktur
 
 ### F: Vilka Azure-tjänster kan azd distribuera?
-**S**: azd kan distribuera alla Azure-tjänster via Bicep/ARM-mallar, inklusive:
+**S**: azd kan distribuera alla Azure-tjänster genom Bicep/ARM-mallar, inklusive:
 - App Services, Container Apps, Functions
 - Databaser (SQL, PostgreSQL, Cosmos DB)
 - Lagring, Key Vault, Application Insights
@@ -152,7 +158,7 @@ Med regelbunden hänvisning till denna FAQ kommer du att kunna:
 ### F: Kan jag distribuera till flera regioner?
 **S**: Ja, konfigurera flera regioner i dina Bicep-mallar och ställ in platsparametern korrekt för varje miljö.
 
-### F: Hur hanterar jag databas-schemamigreringar?
+### F: Hur hanterar jag databas-schema-migreringar?
 **S**: Använd distributionshooks i `azure.yaml`:
 ```yaml
 hooks:
@@ -164,12 +170,12 @@ hooks:
 ```
 
 ### F: Kan jag bara distribuera infrastruktur utan applikationer?
-**S**: Ja, använd `azd provision` för att endast distribuera de infrastrukturella komponenterna som definieras i dina mallar.
+**S**: Ja, använd `azd provision` för att endast distribuera infrastrukturkomponenterna som definieras i dina mallar.
 
 ### F: Hur distribuerar jag till befintliga Azure-resurser?
 **S**: Detta är komplext och inte direkt stöds. Du kan:
 1. Importera befintliga resurser till dina Bicep-mallar
-2. Använda referenser till befintliga resurser i mallar
+2. Använda befintliga resursreferenser i mallar
 3. Modifiera mallar för att villkorligt skapa eller referera resurser
 
 ### F: Kan jag använda Terraform istället för Bicep?
@@ -203,7 +209,7 @@ azd env set DATABASE_TIER Basic
 2. Använd distributionsskript för att ställa in miljöer
 3. Använd Azure Key Vault för känslig konfiguration
 
-### F: Hur åsidosätter jag standardvärden i mallar?
+### F: Hur åsidosätter jag mallstandarder?
 **S**: Ställ in miljövariabler som motsvarar mallparametrar:
 ```bash
 azd env set LOCATION "West US 2"
@@ -254,7 +260,7 @@ Detta tar bort alla resurser och miljökonfigurationer.
 
 ## Kostnad & Fakturering
 
-### F: Hur mycket kostar azd-distributioner?
+### F: Hur mycket kommer azd-distributioner att kosta?
 **S**: Kostnader beror på:
 - Azure-tjänster som distribueras
 - Tjänstenivåer/SKU:er som valts
@@ -289,9 +295,9 @@ Konfigurera mallar för att använda gratisnivåer där det är möjligt.
 
 ---
 
-## Bästa praxis
+## Bästa Praxis
 
-### F: Vilka är bästa praxis för azd-projektstruktur?
+### F: Vad är bästa praxis för azd-projektstruktur?
 **S**: 
 1. Håll applikationskod separat från infrastruktur
 2. Använd meningsfulla tjänstenamn i `azure.yaml`
@@ -322,7 +328,7 @@ Konfigurera mallar för att använda gratisnivåer där det är möjligt.
 1. Använd Azure Key Vault för hemligheter
 2. Referera Key Vault-hemligheter i applikationskonfiguration
 3. Checka aldrig in hemligheter i versionskontroll
-4. Använd hanterade identiteter för autentisering mellan tjänster
+4. Använd hanterade identiteter för tjänst-till-tjänst-autentisering
 
 ### F: Vad är det rekommenderade tillvägagångssättet för CI/CD med azd?
 **S**: 
@@ -330,11 +336,11 @@ Konfigurera mallar för att använda gratisnivåer där det är möjligt.
 2. Implementera automatiserade tester före distribution
 3. Använd tjänsteprinciper för autentisering
 4. Lagra känslig konfiguration i pipeline-hemligheter/variabler
-5. Implementera godkännandesteg för produktionsdistributioner
+5. Implementera godkännandegater för produktionsdistributioner
 
 ---
 
-## Avancerade ämnen
+## Avancerade Ämnen
 
 ### F: Kan jag utöka azd med egen funktionalitet?
 **S**: Ja, genom distributionshooks i `azure.yaml`:
@@ -359,15 +365,15 @@ hooks:
 ### F: Hur bidrar jag till azd eller skapar community-mallar?
 **S**: 
 1. **azd-verktyg**: Bidra till [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Mallar**: Skapa mallar enligt [mallriktlinjerna](https://github.com/Azure-Samples/awesome-azd)
-3. **Dokumentation**: Bidra till dokumentation på [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+2. **Mall**: Skapa mallar enligt [mallriktlinjerna](https://github.com/Azure-Samples/awesome-azd)  
+3. **Dokumentation**: Bidra till dokumentationen på [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
 
-### F: Vad är azd:s roadmap?
-**S**: Kontrollera [den officiella roadmapen](https://github.com/Azure/azure-dev/projects) för planerade funktioner och förbättringar.
+### F: Vad är planen för azd?  
+**S**: Kolla in [den officiella planen](https://github.com/Azure/azure-dev/projects) för planerade funktioner och förbättringar.  
 
-### F: Hur migrerar jag från andra distributionsverktyg till azd?
-**S**:
-1. Analysera nuvarande distributionsarkitektur  
+### F: Hur migrerar jag från andra distributionsverktyg till azd?  
+**S**:  
+1. Analysera den nuvarande distributionsarkitekturen  
 2. Skapa motsvarande Bicep-mallar  
 3. Konfigurera `azure.yaml` för att matcha nuvarande tjänster  
 4. Testa noggrant i utvecklingsmiljön  
@@ -375,16 +381,16 @@ hooks:
 
 ---
 
-## Har du fortfarande frågor?
+## Har du fortfarande frågor?  
 
 ### **Sök först**  
-- Kolla [officiell dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Sök efter liknande problem på [GitHub-ärenden](https://github.com/Azure/azure-dev/issues)  
+- Kolla in [den officiella dokumentationen](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- Sök efter liknande problem i [GitHub-ärenden](https://github.com/Azure/azure-dev/issues)  
 
 ### **Få hjälp**  
-- [GitHub-diskussioner](https://github.com/Azure/azure-dev/discussions) - Stöd från communityn  
+- [GitHub-diskussioner](https://github.com/Azure/azure-dev/discussions) - Gemenskapsstöd  
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Tekniska frågor  
-- [Azure Discord](https://discord.gg/azure) - Realtidschatt med communityn  
+- [Azure Discord](https://discord.gg/azure) - Realtidschatt med gemenskapen  
 
 ### **Rapportera problem**  
 - [GitHub-ärenden](https://github.com/Azure/azure-dev/issues/new) - Felrapporter och funktionsförfrågningar  
@@ -408,4 +414,4 @@ hooks:
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

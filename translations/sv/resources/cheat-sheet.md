@@ -1,17 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "04291031a6a1cc0dc4064dcb9c543584",
-  "translation_date": "2025-09-09T22:44:49+00:00",
+  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
+  "translation_date": "2025-09-17T23:22:20+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "sv"
 }
 -->
 # Kommandoguide - Viktiga AZD-kommandon
 
+**Snabbreferens för alla kapitel**
+- **📚 Kurshem**: [AZD För Nybörjare](../README.md)
+- **📖 Snabbstart**: [Kapitel 1: Grundläggande & Snabbstart](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-kommandon**: [Kapitel 2: AI-Driven Utveckling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Avancerat**: [Kapitel 4: Infrastruktur som Kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+
 ## Introduktion
 
-Denna omfattande guide ger en snabb referens för de mest använda Azure Developer CLI-kommandona, organiserade efter kategori med praktiska exempel. Perfekt för snabba uppslag under utveckling, felsökning och dagliga operationer med azd-projekt.
+Denna omfattande kommandoguide ger en snabbreferens för de mest använda Azure Developer CLI-kommandona, organiserade efter kategori med praktiska exempel. Perfekt för snabba uppslag under utveckling, felsökning och dagliga operationer med azd-projekt.
 
 ## Lärandemål
 
@@ -26,14 +32,14 @@ Genom att använda denna guide kommer du att:
 ## Läranderesultat
 
 Med regelbunden användning av denna guide kommer du att kunna:
-- Utföra azd-kommandon med självförtroende utan att behöva referera till fullständig dokumentation
-- Snabbt lösa vanliga problem med lämpliga diagnostiska kommandon
+- Utföra azd-kommandon med självförtroende utan att behöva konsultera fullständig dokumentation
+- Snabbt lösa vanliga problem med hjälp av lämpliga diagnostiska kommandon
 - Effektivt hantera flera miljöer och distributionsscenarier
 - Använda avancerade azd-funktioner och konfigurationsalternativ vid behov
 - Felsöka distributionsproblem med systematiska kommandosekvenser
 - Optimera arbetsflöden genom effektiv användning av azd-genvägar och alternativ
 
-## Kom igång-kommandon
+## Kommandon för att komma igång
 
 ### Autentisering
 ```bash
@@ -64,7 +70,7 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Kärnkommandon för distribution
+## Grundläggande distributionskommandon
 
 ### Komplett distributionsarbetsflöde
 ```bash
@@ -463,7 +469,7 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Nödkommandon
+## 🚨 Nödfallskommandon
 
 ### Snabba lösningar
 ```bash
@@ -557,10 +563,10 @@ azd template show <template-name> --docs
 ---
 
 **Navigering**
-- **Föregående lektion**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
-- **Nästa lektion**: [Glossary](glossary.md)
+- **Föregående lektion**: [Förkontroller](../docs/pre-deployment/preflight-checks.md)
+- **Nästa lektion**: [Ordlista](glossary.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

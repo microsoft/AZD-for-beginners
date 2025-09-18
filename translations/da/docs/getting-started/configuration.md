@@ -1,39 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "8747981a94aac0f40d833cc37e9c0001",
-  "translation_date": "2025-09-12T21:05:12+00:00",
+  "original_hash": "2268ee429553504f96f4571074bcbf84",
+  "translation_date": "2025-09-17T23:29:08+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "da"
 }
 -->
 # Konfigurationsguide
 
-**Forrige:** [AZD Grundlæggende](azd-basics.md) | **Næste:** [Første Projekt](first-project.md)
+**Kapitelnavigation:**
+- **📚 Kurs Hjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 3 - Konfiguration & Autentifikation
+- **⬅️ Forrige**: [Dit Første Projekt](first-project.md)
+- **➡️ Næste**: [Deployeringsguide](../deployment/deployment-guide.md)
+- **🚀 Næste Kapitel**: [Kapitel 4: Infrastruktur som kode](../deployment/deployment-guide.md)
 
 ## Introduktion
 
-Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og implementeringsarbejdsgange. Du vil lære om konfigurationshierarkiet, miljøstyring, autentificeringsmetoder og avancerede konfigurationsmønstre, der muliggør effektive og sikre Azure-implementeringer.
+Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og deployeringsarbejdsgange. Du vil lære om konfigurationshierarkiet, miljøstyring, autentifikationsmetoder og avancerede konfigurationsmønstre, der muliggør effektive og sikre Azure-deployeringer.
 
 ## Læringsmål
 
 Ved afslutningen af denne lektion vil du:
-- Mestre azd konfigurationshierarkiet og forstå, hvordan indstillinger prioriteres
-- Effektivt konfigurere globale og projekt-specifikke indstillinger
+- Mestre azd-konfigurationshierarkiet og forstå, hvordan indstillinger prioriteres
+- Konfigurere globale og projekt-specifikke indstillinger effektivt
 - Administrere flere miljøer med forskellige konfigurationer
-- Implementere sikre autentificerings- og autorisationsmønstre
+- Implementere sikre autentifikations- og autorisationsmønstre
 - Forstå avancerede konfigurationsmønstre for komplekse scenarier
 
 ## Læringsresultater
 
 Efter at have gennemført denne lektion vil du være i stand til at:
 - Konfigurere azd for optimale udviklingsarbejdsgange
-- Opsætte og administrere flere implementeringsmiljøer
+- Opsætte og administrere flere deployeringsmiljøer
 - Implementere sikre konfigurationsstyringspraksisser
 - Fejlsøge konfigurationsrelaterede problemer
-- Tilpasse azd's adfærd til specifikke organisatoriske krav
+- Tilpasse azd-adfærd til specifikke organisatoriske krav
 
-Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og implementeringsarbejdsgange.
+Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og deployeringsarbejdsgange.
 
 ## Konfigurationshierarki
 
@@ -272,7 +277,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Autentificeringskonfiguration
+## 🔐 Autentifikationskonfiguration
 
 ### Azure CLI Integration
 ```bash
@@ -286,8 +291,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal Autentificering
-For CI/CD-pipelines:
+### Service Principal Autentifikation
+Til CI/CD-pipelines:
 ```bash
 # Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
@@ -300,7 +305,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-For Azure-hostede miljøer:
+Til Azure-hostede miljøer:
 ```bash
 # Enable managed identity authentication
 azd config set auth.useMsi true
@@ -341,7 +346,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Implementeringskonfiguration
+## 🚀 Deployeringskonfiguration
 
 ### Build Konfiguration
 ```yaml
@@ -520,7 +525,7 @@ database:
 ```
 
 ### 4. Dokumentation af Konfiguration
-Dokumenter din konfiguration i `CONFIG.md`:
+Dokumentér din konfiguration i `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -538,8 +543,8 @@ Dokumenter din konfiguration i `CONFIG.md`:
 ## Næste Skridt
 
 - [Dit Første Projekt](first-project.md) - Anvend konfiguration i praksis
-- [Implementeringsguide](../deployment/deployment-guide.md) - Brug konfiguration til implementering
-- [Ressourceprovisionering](../deployment/provisioning.md) - Produktionsklare konfigurationer
+- [Deployeringsguide](../deployment/deployment-guide.md) - Brug konfiguration til deployering
+- [Provisionering af Ressourcer](../deployment/provisioning.md) - Produktionsklare konfigurationer
 
 ## Referencer
 
@@ -549,10 +554,14 @@ Dokumenter din konfiguration i `CONFIG.md`:
 
 ---
 
-**Forrige:** [AZD Grundlæggende](azd-basics.md) | **Næste:** [Første Projekt](first-project.md)
+**Kapitelnavigation:**
+- **📚 Kurs Hjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 3 - Konfiguration & Autentifikation
+- **⬅️ Forrige**: [Dit Første Projekt](first-project.md)
+- **➡️ Næste Kapitel**: [Kapitel 4: Infrastruktur som kode](../deployment/deployment-guide.md)
 - **Næste Lektion**: [Dit Første Projekt](first-project.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

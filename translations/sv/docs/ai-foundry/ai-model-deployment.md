@@ -1,28 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "d1b97c6d936e9b4f71fc2972306dfb7f",
-  "translation_date": "2025-09-12T21:51:10+00:00",
+  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
+  "translation_date": "2025-09-17T23:13:35+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "sv"
 }
 -->
 # AI-modellimplementering med Azure Developer CLI
 
-**Föregående:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Nästa:** [AI Workshop Lab](ai-workshop-lab.md)
+**Kapitelnavigation:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 2 - AI-Driven Utveckling
+- **⬅️ Föregående**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Nästa**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Nästa Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
-Den här guiden ger omfattande instruktioner för att implementera AI-modeller med AZD-mallar, från modellval till produktionsimplementeringsmönster.
+Den här guiden ger omfattande instruktioner för att implementera AI-modeller med AZD-mallar, och täcker allt från modellval till produktionsimplementeringsmönster.
 
 ## Innehållsförteckning
 
-- [Strategi för modellval](../../../../docs/ai-foundry)
+- [Strategi för Modellval](../../../../docs/ai-foundry)
 - [AZD-konfiguration för AI-modeller](../../../../docs/ai-foundry)
 - [Implementeringsmönster](../../../../docs/ai-foundry)
 - [Modellhantering](../../../../docs/ai-foundry)
 - [Produktionsöverväganden](../../../../docs/ai-foundry)
-- [Övervakning och insyn](../../../../docs/ai-foundry)
+- [Övervakning och Observabilitet](../../../../docs/ai-foundry)
 
-## Strategi för modellval
+## Strategi för Modellval
 
 ### Azure OpenAI-modeller
 
@@ -54,18 +59,18 @@ services:
         ]
 ```
 
-### Kapacitetsplanering för modeller
+### Kapacitetsplanering för Modeller
 
-| Modelltyp | Användningsområde | Rekommenderad kapacitet | Kostnadsöverväganden |
+| Modelltyp | Användningsområde | Rekommenderad Kapacitet | Kostnadsöverväganden |
 |-----------|-------------------|-------------------------|-----------------------|
 | GPT-4o-mini | Chatt, Q&A | 10-50 TPM | Kostnadseffektivt för de flesta arbetsbelastningar |
-| GPT-4 | Komplexa resonemang | 20-100 TPM | Högre kostnad, använd för premiumfunktioner |
+| GPT-4 | Komplex resonemang | 20-100 TPM | Högre kostnad, använd för premiumfunktioner |
 | Text-embedding-ada-002 | Sök, RAG | 30-120 TPM | Nödvändig för semantisk sökning |
 | Whisper | Tal-till-text | 10-50 TPM | Arbetsbelastningar för ljudbearbetning |
 
 ## AZD-konfiguration för AI-modeller
 
-### Konfiguration av Bicep-mallar
+### Bicep-mallkonfiguration
 
 Skapa modellimplementeringar med Bicep-mallar:
 
@@ -173,7 +178,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Passar bäst för:
 - Globala applikationer
-- Höga tillgänglighetskrav
+- Höga krav på tillgänglighet
 - Belastningsfördelning
 
 ### Mönster 3: Hybridimplementering
@@ -297,9 +302,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Konfiguration för automatisk skalning
+### Konfiguration för Autoskalning
 
-Konfigurera automatisk skalning för Container Apps:
+Konfigurera autoskalning för Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Övervakning och insyn
+## Övervakning och Observabilitet
 
 ### Integration med Application Insights
 
@@ -407,7 +412,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Anpassade mätvärden
+### Anpassade Mätvärden
 
 Spåra AI-specifika mätvärden:
 
@@ -475,25 +480,30 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Nästa steg
+## Nästa Steg
 
-1. **Granska [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** för integrationsmönster för tjänster
+1. **Granska [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** för mönster för tjänsteintegration
 2. **Slutför [AI Workshop Lab](ai-workshop-lab.md)** för praktisk erfarenhet
-3. **Implementera [Production AI Practices](production-ai-practices.md)** för företagsimplementeringar
+3. **Implementera [Produktions-AI-praktiker](production-ai-practices.md)** för företagsimplementeringar
 4. **Utforska [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** för vanliga problem
 
 ## Resurser
 
-- [Azure OpenAI Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Tillgänglighet för Azure OpenAI-modeller](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Dokumentation för Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Skalning av Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Kostnadsoptimering för AI-modeller](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Föregående:** [Azure AI Foundry Integration](azure-ai-foundry-integration.md) | **Nästa:** [AI Workshop Lab](ai-workshop-lab.md)
+**Kapitelnavigation:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 2 - AI-Driven Utveckling
+- **⬅️ Föregående**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **➡️ Nästa**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Nästa Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiska översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

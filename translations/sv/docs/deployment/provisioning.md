@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "09ca4c998c2d086e83d2039bbadacc7a",
-  "translation_date": "2025-09-09T21:42:28+00:00",
+  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
+  "translation_date": "2025-09-17T23:15:36+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "sv"
 }
 -->
-# Provisionering av resurser - Infrastruktur som kod med AZD
+# Provisionering av Azure-resurser med AZD
+
+**Kapitelnavigation:**
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 4 - Infrastruktur som kod & distribution
+- **⬅️ Föregående**: [Distributionsguide](deployment-guide.md)
+- **➡️ Nästa Kapitel**: [Kapitel 5: Multi-Agent AI-lösningar](../../examples/retail-scenario.md)
+- **🔧 Relaterat**: [Kapitel 6: Förvalidering inför distribution](../pre-deployment/capacity-planning.md)
 
 ## Introduktion
 
@@ -25,7 +32,7 @@ Genom att slutföra denna guide kommer du att:
 
 ## Läranderesultat
 
-Efter att ha slutfört guiden kommer du att kunna:
+Efter avslutad guide kommer du att kunna:
 - Designa och provisionera Azure-infrastruktur med Bicep och ARM-mallar
 - Konfigurera komplexa arkitekturer med flera tjänster och korrekta resursberoenden
 - Implementera parameteriserade mallar för flera miljöer och konfigurationer
@@ -33,7 +40,7 @@ Efter att ha slutfört guiden kommer du att kunna:
 - Tillämpa principer från Azure Well-Architected Framework på infrastruktursdesign
 - Hantera infrastrukturuppdateringar och implementera strategier för versionshantering
 
-## Översikt över infrastrukturprovisionering
+## Översikt över Infrastrukturprovisionering
 
 Azure Developer CLI stöder flera leverantörer för Infrastruktur som kod (IaC):
 - **Bicep** (rekommenderas) - Azures domänspecifika språk
@@ -498,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Övervakning och observabilitet
+## 📊 Övervakning och insyn
 
 ### Application Insights
 ```bicep
@@ -529,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Anpassade metrik och varningar
+### Anpassade mätvärden och varningar
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -653,7 +660,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Avancerade provisioneringsmönster
 
-### Distribution i flera regioner
+### Multi-region distribution
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -859,9 +866,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Nästa steg
 
-- [Planering före distribution](../pre-deployment/capacity-planning.md) - Validera resursers tillgänglighet
+- [Planering inför distribution](../pre-deployment/capacity-planning.md) - Validera resursers tillgänglighet
 - [Vanliga problem](../troubleshooting/common-issues.md) - Felsök infrastrukturproblem
-- [Felsökningsguide](../troubleshooting/debugging.md) - Felsök problem med provisionering
+- [Felsökningsguide](../troubleshooting/debugging.md) - Felsök provisioneringsproblem
 - [Val av SKU](../pre-deployment/sku-selection.md) - Välj lämpliga tjänstenivåer
 
 ## Ytterligare resurser
@@ -873,11 +880,11 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ---
 
-**Navigering**
-- **Föregående lektion**: [Distributionsguide](deployment-guide.md)
-- **Nästa lektion**: [Kapacitetsplanering](../pre-deployment/capacity-planning.md)
+**Navigation**
+- **Föregående Lektion**: [Distributionsguide](deployment-guide.md)
+- **Nästa Lektion**: [Kapacitetsplanering](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

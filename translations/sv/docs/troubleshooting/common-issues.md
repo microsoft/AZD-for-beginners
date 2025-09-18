@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9788ca3a01099b5a07db01554f915e27",
-  "translation_date": "2025-09-09T21:46:02+00:00",
+  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
+  "translation_date": "2025-09-17T23:15:52+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "sv"
 }
 -->
 # Vanliga problem och lösningar
+
+**Kapitelnavigation:**
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning & Debugging
+- **⬅️ Föregående kapitel**: [Kapitel 6: Förberedande kontroller](../pre-deployment/preflight-checks.md)
+- **➡️ Nästa**: [Debugging Guide](debugging.md)
+- **🚀 Nästa kapitel**: [Kapitel 8: Produktions- & Företagsmönster](../ai-foundry/production-ai-practices.md)
 
 ## Introduktion
 
@@ -16,11 +23,11 @@ Denna omfattande felsökningsguide täcker de vanligaste problemen som uppstår 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Bemästra diagnostiska tekniker för problem med Azure Developer CLI
+- Behärska diagnostiska tekniker för problem med Azure Developer CLI
 - Förstå vanliga autentiserings- och behörighetsproblem samt deras lösningar
 - Lösa distributionsfel, infrastrukturprovisioneringsproblem och konfigurationsproblem
-- Implementera proaktiv övervakning och felsökningsstrategier
-- Använda systematiska felsökningsmetoder för komplexa problem
+- Implementera proaktiv övervakning och debuggingstrategier
+- Tillämpa systematiska felsökningsmetoder för komplexa problem
 - Konfigurera korrekt loggning och övervakning för att förhindra framtida problem
 
 ## Läranderesultat
@@ -28,14 +35,14 @@ Genom att slutföra denna guide kommer du att:
 Efter att ha slutfört guiden kommer du att kunna:
 - Diagnostisera problem med Azure Developer CLI med hjälp av inbyggda diagnostikverktyg
 - Självständigt lösa autentiserings-, abonnemangs- och behörighetsrelaterade problem
-- Felsöka distributionsfel och infrastrukturprovisioneringsproblem effektivt
+- Effektivt felsöka distributionsfel och infrastrukturprovisioneringsproblem
 - Debugga applikationskonfigurationsproblem och miljöspecifika problem
 - Implementera övervakning och varningar för att proaktivt identifiera potentiella problem
-- Använda bästa praxis för loggning, felsökning och problemlösningsarbetsflöden
+- Tillämpa bästa praxis för loggning, debugging och arbetsflöden för problemlösning
 
-## Snabb diagnostik
+## Snabbdiagnostik
 
-Innan du dyker in i specifika problem, kör dessa kommandon för att samla diagnostisk information:
+Innan du går in på specifika problem, kör dessa kommandon för att samla diagnostisk information:
 
 ```bash
 # Check azd version and health
@@ -60,7 +67,7 @@ azd <command> --debug
 ### Problem: "Misslyckades med att hämta åtkomsttoken"
 **Symtom:**
 - `azd up` misslyckas med autentiseringsfel
-- Kommandon returnerar "obehörig" eller "åtkomst nekad"
+- Kommandon returnerar "unauthorized" eller "access denied"
 
 **Lösningar:**
 ```bash
@@ -97,7 +104,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 3. Contact your Azure administrator for proper permissions
 ```
 
-### Problem: Autentiseringsproblem i flera klientorganisationer
+### Problem: Problem med multi-tenant autentisering
 **Lösningar:**
 ```bash
 # 1. Login with specific tenant
@@ -114,7 +121,7 @@ az account clear
 
 ### Problem: Konflikter med resursnamn
 **Symtom:**
-- Felmeddelanden om att "resursnamnet redan finns"
+- Felmeddelanden om att "Resursnamnet finns redan"
 - Distribution misslyckas under resurskapande
 
 **Lösningar:**
@@ -131,9 +138,9 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### Problem: Plats/region inte tillgänglig
+### Problem: Plats/region ej tillgänglig
 **Symtom:**
-- Felmeddelanden om att "Platsen 'xyz' är inte tillgänglig för resurstypen"
+- "Platsen 'xyz' är inte tillgänglig för resurstypen"
 - Vissa SKUs är inte tillgängliga i vald region
 
 **Lösningar:**
@@ -250,7 +257,7 @@ az containerapp show --name my-app --resource-group my-rg
 ### Problem: Fel vid databasanslutning
 **Symtom:**
 - Applikationen kan inte ansluta till databasen
-- Felmeddelanden om anslutningstidsgräns
+- Timeout-fel vid anslutning
 
 **Lösningar:**
 ```bash
@@ -272,7 +279,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ### Problem: Miljövariabler fungerar inte
 **Symtom:**
-- Applikationen kan inte läsa konfigurationsvärden
+- Appen kan inte läsa konfigurationsvärden
 - Miljövariabler verkar tomma
 
 **Lösningar:**
@@ -376,7 +383,7 @@ azd env set DATABASE_URL "your-value"
 ### Problem: Långsamma distributionstider
 **Symtom:**
 - Distributioner tar för lång tid
-- Tidsgränser under distribution
+- Timeout-fel under distribution
 
 **Lösningar:**
 ```bash
@@ -465,7 +472,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 ## 🆘 Få ytterligare hjälp
 
 ### När ska man eskalera
-- Autentiseringsproblem kvarstår efter att ha provat alla lösningar
+- Autentiseringsproblem kvarstår efter att ha testat alla lösningar
 - Infrastrukturproblem med Azure-tjänster
 - Problem relaterade till fakturering eller abonnemang
 - Säkerhetsproblem eller incidenter
@@ -486,14 +493,14 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 
 ### Information att samla in
 Innan du kontaktar support, samla in:
-- Utdata från `azd version`
-- Utdata från `azd info`
+- `azd version`-utdata
+- `azd info`-utdata
 - Felmeddelanden (fullständig text)
 - Steg för att reproducera problemet
 - Miljödetaljer (`azd env show`)
 - Tidslinje för när problemet började
 
-### Skript för logginsamling
+### Logginsamlingsskript
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -568,22 +575,22 @@ az security assessment list --resource-group myrg
 
 ## Relaterade resurser
 
-- [Felsökningsguide](debugging.md) - Avancerade felsökningstekniker
-- [Provisionering av resurser](../deployment/provisioning.md) - Felsökning av infrastruktur
-- [Kapacitetsplanering](../pre-deployment/capacity-planning.md) - Vägledning för resursplanering
-- [Val av SKU](../pre-deployment/sku-selection.md) - Rekommendationer för tjänstenivåer
+- [Debugging Guide](debugging.md) - Avancerade debuggingtekniker
+- [Provisioning Resources](../deployment/provisioning.md) - Felsökning av infrastruktur
+- [Capacity Planning](../pre-deployment/capacity-planning.md) - Vägledning för resursplanering
+- [SKU Selection](../pre-deployment/sku-selection.md) - Rekommendationer för tjänstenivåer
 
 ---
 
-**Tips**: Spara denna guide som bokmärke och hänvisa till den när du stöter på problem. De flesta problem har redan identifierats och har etablerade lösningar!
+**Tips**: Bokmärk denna guide och hänvisa till den när du stöter på problem. De flesta problem har redan identifierats och har etablerade lösningar!
 
 ---
 
-**Navigering**
-- **Föregående lektion**: [Provisionering av resurser](../deployment/provisioning.md)
-- **Nästa lektion**: [Felsökningsguide](debugging.md)
+**Navigation**
+- **Föregående lektion**: [Provisioning Resources](../deployment/provisioning.md)
+- **Nästa lektion**: [Debugging Guide](debugging.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

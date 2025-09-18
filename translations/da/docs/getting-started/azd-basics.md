@@ -1,28 +1,35 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "32a717e79e5363b775f9bdac58002a80",
-  "translation_date": "2025-09-12T21:05:28+00:00",
+  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
+  "translation_date": "2025-09-17T23:29:26+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "da"
 }
 -->
 # AZD Grundlæggende - Forstå Azure Developer CLI
 
-**Forrige:** [Installation & Opsætning](installation.md) | **Næste:** [Konfiguration](configuration.md)
+# AZD Grundlæggende - Kernekoncepter og Fundament
+
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 1 - Fundament & Hurtig Start
+- **⬅️ Forrige**: [Kursusoversigt](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Næste**: [Installation & Opsætning](installation.md)
+- **🚀 Næste Kapitel**: [Kapitel 2: AI-First Udvikling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduktion
 
-Denne lektion introducerer dig til Azure Developer CLI (azd), et kraftfuldt kommandolinjeværktøj, der accelererer din rejse fra lokal udvikling til Azure-implementering. Du vil lære de grundlæggende begreber, kernefunktioner og forstå, hvordan azd forenkler implementeringen af cloud-native applikationer.
+Denne lektion introducerer dig til Azure Developer CLI (azd), et kraftfuldt kommandolinjeværktøj, der accelererer din rejse fra lokal udvikling til Azure-implementering. Du vil lære de grundlæggende koncepter, kernefunktioner og forstå, hvordan azd forenkler implementeringen af cloud-native applikationer.
 
 ## Læringsmål
 
 Ved afslutningen af denne lektion vil du:
 - Forstå, hvad Azure Developer CLI er, og dets primære formål
-- Lære de grundlæggende begreber om skabeloner, miljøer og tjenester
-- Udforske nøglefunktioner, herunder skabelonbaseret udvikling og Infrastructure as Code
+- Lære kernekoncepterne om skabeloner, miljøer og tjenester
+- Udforske nøglefunktioner som skabelonbaseret udvikling og Infrastructure as Code
 - Forstå azd-projektstrukturen og arbejdsgangen
-- Være klar til at installere og konfigurere azd til dit udviklingsmiljø
+- Være klar til at installere og konfigurere azd til din udviklingsmiljø
 
 ## Læringsresultater
 
@@ -37,7 +44,7 @@ Efter at have gennemført denne lektion vil du kunne:
 
 Azure Developer CLI (azd) er et kommandolinjeværktøj designet til at accelerere din rejse fra lokal udvikling til Azure-implementering. Det forenkler processen med at bygge, implementere og administrere cloud-native applikationer på Azure.
 
-## Grundlæggende Begreber
+## Kernekoncepter
 
 ### Skabeloner
 Skabeloner er fundamentet for azd. De indeholder:
@@ -78,7 +85,7 @@ azd init --template <template-name>
 ### 2. Infrastructure as Code
 - **Bicep** - Azure's domænespecifikke sprog
 - **Terraform** - Multi-cloud infrastrukturværktøj
-- **ARM Templates** - Azure Resource Manager-skabeloner
+- **ARM Templates** - Azure Resource Manager skabeloner
 
 ### 3. Integrerede Arbejdsgange
 ```bash
@@ -89,7 +96,7 @@ azd deploy        # Deploy application code or redeploy application code once up
 azd down          # Clean up resources
 ```
 
-### 4. Miljøstyring
+### 4. Miljøhåndtering
 ```bash
 # Create and manage environments
 azd env new <environment-name>
@@ -161,7 +168,7 @@ Miljøspecifik konfiguration:
 
 ## 🎪 Almindelige Arbejdsgange
 
-### Start af et Nyt Projekt
+### Starte et Nyt Projekt
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -197,23 +204,23 @@ Kommandoen `azd down --force --purge` er en kraftfuld måde at fuldstændigt ned
 ```
 - Springer bekræftelsesprompter over.
 - Nyttig til automatisering eller scripting, hvor manuel input ikke er muligt.
-- Sikrer, at nedlæggelsen fortsætter uden afbrydelse, selv hvis CLI'en registrerer uoverensstemmelser.
+- Sikrer, at nedlæggelsen fortsætter uden afbrydelse, selv hvis CLI registrerer uoverensstemmelser.
 
 ```
 --purge
 ```
-Sletter **al tilknyttet metadata**, herunder:
+Sletter **alle tilknyttede metadata**, inklusive:
 Miljøtilstand
-Lokal `.azure`-mappe
+Lokal `.azure` mappe
 Cachelagret implementeringsinfo
 Forhindrer azd i at "huske" tidligere implementeringer, hvilket kan forårsage problemer som uoverensstemmende resource groups eller forældede registreringsreferencer.
 
 ### Hvorfor bruge begge?
-Når du støder på problemer med `azd up` på grund af resterende tilstand eller delvise implementeringer, sikrer denne kombination en **ren start**.
+Når du er stødt på problemer med `azd up` på grund af resterende tilstand eller delvise implementeringer, sikrer denne kombination en **ren start**.
 
-Det er især nyttigt efter manuelle ressourcedeletioner i Azure-portalen eller ved skift af skabeloner, miljøer eller resource group-navnekonventioner.
+Det er især nyttigt efter manuelle ressource-sletninger i Azure-portalen eller ved skift af skabeloner, miljøer eller navnekonventioner for resource groups.
 
-### Styring af Flere Miljøer
+### Håndtering af Flere Miljøer
 ```bash
 # Create staging environment
 azd env new staging
@@ -288,7 +295,7 @@ azd init --template template1
 
 ### Mellemstadie (Uge 3-4)
 1. Tilpas skabeloner
-2. Styr flere miljøer
+2. Håndter flere miljøer
 3. Forstå infrastrukturkode
 4. Opsæt CI/CD-pipelines
 
@@ -296,13 +303,17 @@ azd init --template template1
 1. Opret brugerdefinerede skabeloner
 2. Avancerede infrastrukturmønstre
 3. Multi-region implementeringer
-4. Konfigurationer i enterprise-klassen
+4. Konfigurationer i virksomhedsklasse
 
 ## Næste Skridt
 
+**📖 Fortsæt Kapitel 1 Læring:**
 - [Installation & Opsætning](installation.md) - Få azd installeret og konfigureret
-- [Dit Første Projekt](first-project.md) - Praktisk tutorial
+- [Dit Første Projekt](first-project.md) - Fuldfør praktisk tutorial
 - [Konfigurationsguide](configuration.md) - Avancerede konfigurationsmuligheder
+
+**🎯 Klar til Næste Kapitel?**
+- [Kapitel 2: AI-First Udvikling](../ai-foundry/azure-ai-foundry-integration.md) - Begynd at bygge AI-applikationer
 
 ## Yderligere Ressourcer
 
@@ -312,10 +323,14 @@ azd init --template template1
 
 ---
 
-**Forrige:** [Installation & Opsætning](installation.md) | **Næste:** [Konfiguration](configuration.md)
-- **Næste Lektion**: [Installation & Opsætning](installation.md)
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 1 - Fundament & Hurtig Start  
+- **⬅️ Forrige**: [Kursusoversigt](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Næste**: [Installation & Opsætning](installation.md)
+- **🚀 Næste Kapitel**: [Kapitel 2: AI-First Udvikling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

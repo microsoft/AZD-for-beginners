@@ -1,54 +1,61 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "16e76af4080a0103e2409f8d44098cc4",
-  "translation_date": "2025-09-09T21:54:46+00:00",
+  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
+  "translation_date": "2025-09-17T23:31:28+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "da"
 }
 -->
-# Forudsætningstjek - Validering af implementeringsparathed
+# Forberedelsestjek før AZD-implementeringer
+
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 6 - Validering og Planlægning før Implementering
+- **⬅️ Forrige**: [SKU-valg](sku-selection.md)
+- **➡️ Næste Kapitel**: [Kapitel 7: Fejlfinding](../troubleshooting/common-issues.md)
+- **🔧 Relateret**: [Kapitel 4: Implementeringsguide](../deployment/deployment-guide.md)
 
 ## Introduktion
 
-Denne omfattende guide giver scripts og procedurer til validering før implementering for at sikre succesfulde Azure Developer CLI-implementeringer, inden de begynder. Lær at implementere automatiske tjek for autentifikation, ressource tilgængelighed, kvoter, sikkerhedsoverholdelse og præstationskrav for at forhindre implementeringsfejl og optimere succesrater.
+Denne omfattende guide giver scripts og procedurer til validering før implementering for at sikre succesfulde Azure Developer CLI-implementeringer, inden de påbegyndes. Lær at implementere automatiske tjek for autentifikation, ressource tilgængelighed, kvoter, sikkerhedsoverholdelse og præstationskrav for at forhindre implementeringsfejl og optimere succesrater.
 
 ## Læringsmål
 
 Ved at gennemføre denne guide vil du:
-- Mestre automatiske valideringsteknikker og scripts før implementering
+- Mestre automatiserede valideringsteknikker og scripts før implementering
 - Forstå omfattende tjekstrategier for autentifikation, tilladelser og kvoter
 - Implementere procedurer til validering af ressource tilgængelighed og kapacitet
 - Konfigurere sikkerheds- og overholdelsestjek for organisatoriske politikker
 - Designe workflows til omkostningsestimering og budgetvalidering
-- Oprette skræddersyede automatiseringer til forudsætningstjek for CI/CD-pipelines
+- Oprette skræddersyet automatisering af forberedelsestjek til CI/CD-pipelines
 
 ## Læringsresultater
 
 Efter afslutning vil du være i stand til at:
 - Oprette og udføre omfattende valideringsscripts før implementering
-- Designe automatiske tjek-workflows for forskellige implementeringsscenarier
+- Designe automatiserede tjek-workflows til forskellige implementeringsscenarier
 - Implementere miljøspecifikke valideringsprocedurer og politikker
 - Konfigurere proaktiv overvågning og alarmering for implementeringsparathed
 - Fejlsøge problemer før implementering og implementere korrigerende handlinger
-- Integrere forudsætningstjek i DevOps-pipelines og automatiseringsworkflows
+- Integrere forberedelsestjek i DevOps-pipelines og automatiseringsworkflows
 
 ## Indholdsfortegnelse
 
 - [Oversigt](../../../../docs/pre-deployment)
-- [Automatiseret forudsætningstjek-script](../../../../docs/pre-deployment)
-- [Manuel valideringscheckliste](../../../../docs/pre-deployment)
+- [Automatiseret Forberedelsesscript](../../../../docs/pre-deployment)
+- [Manuel Valideringscheckliste](../../../../docs/pre-deployment)
 - [Miljøvalidering](../../../../docs/pre-deployment)
 - [Ressourcevalidering](../../../../docs/pre-deployment)
-- [Sikkerheds- og overholdelsestjek](../../../../docs/pre-deployment)
-- [Præstations- og kapacitetsplanlægning](../../../../docs/pre-deployment)
-- [Fejlfinding af almindelige problemer](../../../../docs/pre-deployment)
+- [Sikkerheds- og Overholdelsestjek](../../../../docs/pre-deployment)
+- [Præstations- og Kapacitetsplanlægning](../../../../docs/pre-deployment)
+- [Fejlfinding af Almindelige Problemer](../../../../docs/pre-deployment)
 
 ---
 
 ## Oversigt
 
-Forudsætningstjek er essentielle valideringer, der udføres før implementering for at sikre:
+Forberedelsestjek er essentielle valideringer, der udføres før implementering for at sikre:
 
 - **Ressource tilgængelighed** og kvoter i målregioner
 - **Autentifikation og tilladelser** er korrekt konfigureret
@@ -57,7 +64,7 @@ Forudsætningstjek er essentielle valideringer, der udføres før implementering
 - **Sikkerhedsoverholdelse** med organisatoriske politikker
 - **Omkostningsestimering** inden for budgetbegrænsninger
 
-### Hvornår skal forudsætningstjek udføres
+### Hvornår skal forberedelsestjek udføres
 
 - **Før første implementering** til et nyt miljø
 - **Efter væsentlige ændringer i skabeloner**
@@ -67,9 +74,9 @@ Forudsætningstjek er essentielle valideringer, der udføres før implementering
 
 ---
 
-## Automatiseret forudsætningstjek-script
+## Automatiseret Forberedelsesscript
 
-### PowerShell Forudsætningstjekker
+### PowerShell Forberedelsestjekker
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -548,7 +555,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Forudsætningstjekker
+### Bash Forberedelsestjekker
 
 ```bash
 #!/bin/bash
@@ -783,7 +790,7 @@ main "$@"
 
 ---
 
-## Manuel valideringscheckliste
+## Manuel Valideringscheckliste
 
 ### Checkliste før implementering
 
@@ -807,14 +814,14 @@ Print denne checkliste og verificer hvert punkt før implementering:
 - [ ] Alle tjenester defineret i azure.yaml har tilsvarende kildekode
 - [ ] Bicep-skabeloner i `infra/`-mappen er til stede
 - [ ] `main.bicep` kompilerer uden fejl (`az bicep build --file infra/main.bicep`)
-- [ ] Alle nødvendige parametre har standardværdier eller vil blive leveret
+- [ ] Alle nødvendige parametre har standardværdier eller vil blive angivet
 - [ ] Ingen hardkodede hemmeligheder i skabeloner
 
 #### ✅ Ressourceplanlægning
 - [ ] Mål Azure-region valgt og valideret
 - [ ] Nødvendige Azure-tjenester tilgængelige i målregionen
 - [ ] Tilstrækkelige kvoter tilgængelige for planlagte ressourcer
-- [ ] Ressource navnekonflikter kontrolleret
+- [ ] Konflikter i ressourcenavne kontrolleret
 - [ ] Afhængigheder mellem ressourcer forstået
 
 #### ✅ Netværk & Sikkerhed
@@ -822,21 +829,21 @@ Print denne checkliste og verificer hvert punkt før implementering:
 - [ ] Firewall/proxy-indstillinger konfigureret, hvis nødvendigt
 - [ ] Key Vault konfigureret til hemmelighedshåndtering
 - [ ] Administrerede identiteter brugt, hvor muligt
-- [ ] HTTPS håndhævelse aktiveret for webapplikationer
+- [ ] HTTPS håndhævet for webapplikationer
 
 #### ✅ Omkostningsstyring
-- [ ] Omkostningsestimater beregnet ved hjælp af Azure Pricing Calculator
+- [ ] Omkostningsestimater beregnet med Azure Pricing Calculator
 - [ ] Budgetalarmer konfigureret, hvis nødvendigt
 - [ ] Passende SKUs valgt til miljøtypen
 - [ ] Reserveret kapacitet overvejet for produktionsarbejdsbelastninger
 
 #### ✅ Overvågning & Observabilitet
 - [ ] Application Insights konfigureret i skabeloner
-- [ ] Log Analytics workspace planlagt
+- [ ] Log Analytics-arbejdsområde planlagt
 - [ ] Alarmregler defineret for kritiske metrikker
-- [ ] Health check endpoints implementeret i applikationer
+- [ ] Sundhedstjek-endpoints implementeret i applikationer
 
-#### ✅ Backup & Recovery
+#### ✅ Backup & Gendannelse
 - [ ] Backup-strategi defineret for dataressourcer
 - [ ] Recovery time objectives (RTO) dokumenteret
 - [ ] Recovery point objectives (RPO) dokumenteret
@@ -846,7 +853,7 @@ Print denne checkliste og verificer hvert punkt før implementering:
 
 ## Miljøvalidering
 
-### Validering af udviklingsmiljø
+### Validering af Udviklingsmiljø
 
 ```bash
 #!/bin/bash
@@ -878,7 +885,7 @@ validate_dev_environment() {
 }
 ```
 
-### Validering af produktionsmiljø
+### Validering af Produktionsmiljø
 
 ```bash
 #!/bin/bash
@@ -921,7 +928,7 @@ validate_prod_environment() {
 
 ## Ressourcevalidering
 
-### Kvotavalideringsscript
+### Kvotevalideringsscript
 
 ```python
 #!/usr/bin/env python3
@@ -1044,7 +1051,7 @@ if __name__ == "__main__":
 
 ---
 
-## Sikkerheds- og overholdelsestjek
+## Sikkerheds- og Overholdelsestjek
 
 ### Sikkerhedsvalideringsscript
 
@@ -1276,37 +1283,37 @@ steps:
 
 ---
 
-## Opsummering af bedste praksis
+## Resumé af Best Practices
 
-### ✅ Bedste praksis for forudsætningstjek
+### ✅ Best Practices for Forberedelsestjek
 
-1. **Automatiser hvor muligt**
+1. **Automatiser Hvor Muligt**
    - Integrer tjek i CI/CD-pipelines
    - Brug scripts til gentagelige valideringer
    - Gem resultater til revisionsspor
 
-2. **Miljøspecifik validering**
+2. **Miljøspecifik Validering**
    - Forskellige tjek for udvikling/staging/produktion
    - Passende sikkerhedskrav pr. miljø
    - Omkostningsoptimering for ikke-produktionsmiljøer
 
-3. **Omfattende dækning**
+3. **Omfattende Dækning**
    - Autentifikation og tilladelser
    - Ressourcekvoter og tilgængelighed
    - Skabelonvalidering og syntaks
    - Sikkerheds- og overholdelseskrav
 
-4. **Klar rapportering**
+4. **Klar Rapportering**
    - Farvekodede statusindikatorer
    - Detaljerede fejlmeddelelser med løsningsforslag
    - Oversigtsrapporter for hurtig vurdering
 
-5. **Fejl hurtigt**
+5. **Stop Tidligt**
    - Stop implementering, hvis kritiske tjek fejler
    - Giv klar vejledning til løsning
    - Muliggør nem genkørsel af tjek
 
-### Almindelige faldgruber ved forudsætningstjek
+### Almindelige Fejl i Forberedelsestjek
 
 1. **Springe validering over** for "hurtige" implementeringer
 2. **Utilstrækkelig tilladelsestjek** før implementering
@@ -1317,15 +1324,15 @@ steps:
 
 ---
 
-**Tip**: Kør forudsætningstjek som en separat job i din CI/CD-pipeline før det faktiske implementeringsjob. Dette giver mulighed for at fange problemer tidligt og giver hurtigere feedback til udviklere.
+**Pro Tip**: Kør forberedelsestjek som et separat job i din CI/CD-pipeline før det egentlige implementeringsjob. Dette giver mulighed for at fange problemer tidligt og giver hurtigere feedback til udviklere.
 
 ---
 
 **Navigation**
-- **Forrige lektion**: [SKU-valg](sku-selection.md)
-- **Næste lektion**: [Hjælpeark](../../resources/cheat-sheet.md)
+- **Forrige Lektion**: [SKU-valg](sku-selection.md)
+- **Næste Lektion**: [Hjælpeark](../../resources/cheat-sheet.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at sikre nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
