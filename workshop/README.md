@@ -1,5 +1,36 @@
 # AZD for AI Developers Workshop
 
+## AZD Templates
+
+Building an enterprise-grade AI Application solution for your specific scenario is very much like constructing your own home. You can design it yourself, build it brick-by-brick, and take the responsibility for ensuring it meets all the governance and development guidelines.
+
+**OR ....** 
+
+You can work with an architect who can give you a _blueprint_ for a starter home, and then work with you to _customize_ it to fit your needs. This allows you to focus on what makes **your home** special, and allow the underlying wiring, plumbing and other dependencies to be taken care of for you by the experts.
+
+**This is the approach behind [AI App Templates](https://ai.azure.com/templates)** - a series of blueprints for building different kinds of AI application "homes" depending on what your core needs and dependencies are.
+
+## Template Customization
+
+The templates are designed to work with [Azure AI Foundry](https://ai.azure.com). Think of this platform as your "building contractor" with access to all the resources, tools and expertise you need to get the job done!
+
+All you need to do pick [your starter templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). For instance, we'll focus on the _Get Started with AI Agents_ template to build you an "Agentic AI Home" that comes wired for features like AI Search, Red Teaming, Evaluations, Tracing, Monitoring and more!
+
+![Blueprint](./docs/assets/blueprint-1.png)
+
+All you need is to book time with the architect, to guide you through the customization process. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) can be that guide. Just "chat with it" to 
+
+- Learn about the Azure features in your template
+- Deploy Azure resources
+- Get information about your deployment
+- Diagnose and troubleshoot problems!
+
+In this workshop, we learn how to _deconstruct_ the existing template (to learn what it provides), then _customize_ it (to deliver our requirments) - one step at a time.
+
+AI Templates **make it work** - by completing the workshop you'll learn to **make it yours**
+
+----
+
 **Workshop Navigation**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Related Chapters**: Covers [Chapter 1](../README.md#-chapter-1-foundation--quick-start), [Chapter 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), and [Chapter 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
