@@ -137,3 +137,11 @@ nav:
     - "5. Customize AI Template": instructions/5-Customize-AI-Template.md
     - "6. Teardown Infrastructure": instructions/6-Teardown-Infrastructure.md
     - "7. Wrap-up & Next Steps": instructions/7-Wrap-up.md
+  - Core-Labs:
+    - Overview: 01-Core-Labs/index.md
+    - "Lab 1: Quickstart": 01-Core-Labs/1-Quickstart.md
+    - "Lab 2: Template Overview": 01-Core-Labs/2-Template-Overview.md
+    - "Lab 3: AZD Configuration": 01-Core-Labs/3-AZD Configuration.md
+    - "Lab 4: Environment Variables": 01-Core-Labs/4-Environment-Variables.md
+    - "Lab 5: Architecture Features": 01-Core-Labs/5-Archtiecture-Features.md
+    - "Lab 6: Enterprise Retail Scenario": 01-Core-Labs/6-Enterprise-Retail-Scenario.md
