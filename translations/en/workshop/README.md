@@ -1,13 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-18T12:49:10+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:39:21+00:00",
   "source_file": "workshop/README.md",
   "language_code": "en"
 }
 -->
 # AZD for AI Developers Workshop
+
+## AZD Templates
+
+Creating an enterprise-grade AI application tailored to your specific needs is similar to building your own house. You can design it yourself, construct it brick by brick, and take full responsibility for ensuring it adheres to all governance and development standards.
+
+**OR ....** 
+
+You can collaborate with an architect who provides you with a _blueprint_ for a starter home and then works with you to _customize_ it to suit your requirements. This approach lets you focus on what makes **your home** unique, while the experts handle the underlying wiring, plumbing, and other dependencies.
+
+**This is the concept behind [AI App Templates](https://ai.azure.com/templates)** - a collection of blueprints for building various types of AI application "homes" based on your core needs and dependencies.
+
+## Template Customization
+
+The templates are designed to integrate with [Azure AI Foundry](https://ai.azure.com). Think of this platform as your "contractor" equipped with all the resources, tools, and expertise needed to complete the project!
+
+All you need to do is select [your starter templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). For example, we'll focus on the _Get Started with AI Agents_ template to create an "Agentic AI Home" pre-configured with features like AI Search, Red Teaming, Evaluations, Tracing, Monitoring, and more!
+
+![Blueprint](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.en.png)
+
+You just need to schedule time with the architect to guide you through the customization process. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) can serve as that guide. Simply "chat with it" to:
+
+- Learn about the Azure features in your template
+- Deploy Azure resources
+- Get insights into your deployment
+- Diagnose and resolve issues!
+
+In this workshop, we will learn how to _deconstruct_ the existing template (to understand its offerings) and then _customize_ it (to meet our requirements) step by step.
+
+AI Templates **make it work** - by completing the workshop, you'll learn to **make it yours**.
+
+----
 
 **Workshop Navigation**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
@@ -306,5 +337,3 @@ Your feedback helps us improve the workshop experience:
 
 ---
 
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

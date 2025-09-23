@@ -1,21 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-18T06:55:55+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:58:51+00:00",
   "source_file": "workshop/README.md",
   "language_code": "nl"
 }
 -->
 # AZD voor AI-ontwikkelaars Workshop
 
+## AZD Templates
+
+Het bouwen van een AI-oplossing van ondernemingsniveau voor jouw specifieke scenario is vergelijkbaar met het bouwen van je eigen huis. Je kunt het zelf ontwerpen, steen voor steen bouwen en de verantwoordelijkheid nemen om ervoor te zorgen dat het voldoet aan alle richtlijnen voor governance en ontwikkeling.
+
+**OF ....**
+
+Je kunt samenwerken met een architect die je een _blauwdruk_ kan geven voor een starterswoning, en vervolgens met je kan samenwerken om deze te _personaliseren_ zodat het aan jouw behoeften voldoet. Dit stelt je in staat om je te concentreren op wat **jouw huis** speciaal maakt, terwijl de onderliggende bedrading, leidingen en andere afhankelijkheden door experts voor je worden verzorgd.
+
+**Dit is de aanpak achter [AI App Templates](https://ai.azure.com/templates)** - een reeks blauwdrukken voor het bouwen van verschillende soorten AI-applicatie "huizen", afhankelijk van wat jouw kernbehoeften en afhankelijkheden zijn.
+
+## Template Aanpassing
+
+De templates zijn ontworpen om te werken met [Azure AI Foundry](https://ai.azure.com). Zie dit platform als jouw "bouwcontractor" met toegang tot alle middelen, tools en expertise die je nodig hebt om de klus te klaren!
+
+Alles wat je hoeft te doen is [jouw startertemplates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) kiezen. Bijvoorbeeld, we richten ons op de _Get Started with AI Agents_ template om een "Agentic AI Home" te bouwen die is uitgerust met functies zoals AI Search, Red Teaming, Evaluaties, Tracing, Monitoring en meer!
+
+![Blauwdruk](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.nl.png)
+
+Het enige wat je nodig hebt is tijd boeken met de architect, die je door het aanpassingsproces begeleidt. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) kan die gids zijn. Chat gewoon met het om:
+
+- Meer te leren over de Azure-functies in jouw template
+- Azure-resources te implementeren
+- Informatie te krijgen over jouw implementatie
+- Problemen te diagnosticeren en op te lossen!
+
+In deze workshop leren we hoe we de bestaande template kunnen _deconstrueren_ (om te begrijpen wat het biedt), en vervolgens _aanpassen_ (om aan onze vereisten te voldoen) - stap voor stap.
+
+AI Templates **maken het werkend** - door de workshop te voltooien leer je hoe je het **eigen maakt**.
+
+----
+
 **Workshop Navigatie**
 - **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
 - **📖 Gerelateerde Hoofdstukken**: Behandelt [Hoofdstuk 1](../README.md#-chapter-1-foundation--quick-start), [Hoofdstuk 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), en [Hoofdstuk 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **🛠️ Praktische Lab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🛠️ Praktijklab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
 - **🚀 Volgende Stappen**: [Workshop Lab Modules](../../../workshop)
 
-Welkom bij de praktische workshop voor het leren van Azure Developer CLI (AZD) met een focus op het implementeren van AI-toepassingen. Deze workshop is ontworpen om je van de basis van AZD naar het implementeren van productieklare AI-oplossingen te brengen.
+Welkom bij de hands-on workshop voor het leren van Azure Developer CLI (AZD) met een focus op AI-applicatie implementatie. Deze workshop is ontworpen om je van AZD-basisprincipes naar het implementeren van productieklare AI-oplossingen te brengen.
 
 ## Workshop Overzicht
 
@@ -23,11 +54,11 @@ Welkom bij de praktische workshop voor het leren van Azure Developer CLI (AZD) m
 **Niveau:** Beginner tot Gemiddeld  
 **Vereisten:** Basiskennis van Azure, commandoregeltools en AI-concepten
 
-### Wat Je Gaat Leren
+### Wat Je Leert
 
 - **AZD Basisprincipes**: Begrip van Infrastructure as Code met AZD
-- 🤖 **AI Service Integratie**: Implementeren van Azure OpenAI, AI Search en andere AI-diensten
-- **Container Implementatie**: Gebruik van Azure Container Apps voor AI-toepassingen
+- 🤖 **AI Service Integratie**: Implementeren van Azure OpenAI, AI Search en andere AI-services
+- **Container Implementatie**: Gebruik van Azure Container Apps voor AI-applicaties
 - **Beveiligingspraktijken**: Implementeren van Managed Identity en veilige configuraties
 - **Monitoring & Observatie**: Instellen van Application Insights voor AI-werkbelastingen
 - **Productiepatronen**: Strategieën voor implementatie op ondernemingsniveau
@@ -36,17 +67,17 @@ Welkom bij de praktische workshop voor het leren van Azure Developer CLI (AZD) m
 
 ### Module 1: AZD Basisprincipes (30 minuten)
 - AZD installeren en configureren
-- Begrip van AZD projectstructuur
-- Je eerste AZD-implementatie
-- **Lab**: Implementeer een eenvoudige webtoepassing
+- Begrip van AZD-projectstructuur
+- Jouw eerste AZD-implementatie
+- **Lab**: Implementeer een eenvoudige webapplicatie
 
 ### Module 2: Azure OpenAI Integratie (45 minuten)
-- Azure OpenAI resources instellen
-- Model implementatiestrategieën
+- Azure OpenAI-resources instellen
+- Modelimplementatiestrategieën
 - API-toegang en authenticatie configureren
-- **Lab**: Implementeer een chattoepassing met GPT-4
+- **Lab**: Implementeer een chatapplicatie met GPT-4
 
-### Module 3: RAG Toepassingen (45 minuten)
+### Module 3: RAG Applicaties (45 minuten)
 - Integratie van Azure AI Search
 - Documentverwerking met Azure Document Intelligence
 - Vector embeddings en semantische zoekopdrachten
@@ -60,15 +91,15 @@ Welkom bij de praktische workshop voor het leren van Azure Developer CLI (AZD) m
 
 ### Module 5: Geavanceerde Patronen (15 minuten)
 - Implementaties in meerdere omgevingen
-- CI/CD integratie
+- CI/CD-integratie
 - Kostenoptimalisatiestrategieën
-- **Afsluiting**: Checklist voor productie gereedheid
+- **Afsluiting**: Checklist voor productiegereedheid
 
 ## Vereisten
 
-### Benodigde Tools
+### Vereiste Tools
 
-Installeer deze tools voordat je aan de workshop begint:
+Installeer deze tools vóór de workshop:
 
 ```bash
 # Azure Developer CLI
@@ -90,9 +121,9 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Azure Account Instellen
 
-1. **Azure Abonnement**: [Registreer gratis](https://azure.microsoft.com/free/)
+1. **Azure Abonnement**: [Meld je gratis aan](https://azure.microsoft.com/free/)
 2. **Azure OpenAI Toegang**: [Vraag toegang aan](https://aka.ms/oai/access)
-3. **Benodigde Machtigingen**:
+3. **Vereiste Machtigingen**:
    - Contributor rol op abonnement of resourcegroep
    - User Access Administrator (voor RBAC-toewijzingen)
 
@@ -146,11 +177,11 @@ echo "Setup verification complete!"
 
 ### Lab Oefeningen
 
-Elke module bevat praktische labs met startcode en stapsgewijze instructies:
+Elke module bevat hands-on labs met startcode en stapsgewijze instructies:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Je eerste AZD-implementatie
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chattoepassing met Azure OpenAI
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-toepassing met AI Search
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Jouw eerste AZD-implementatie
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chatapplicatie met Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-applicatie met AI Search
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Productie implementatiepatronen
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Geavanceerde implementatiescenario's
 
@@ -161,9 +192,9 @@ Elke module bevat praktische labs met startcode en stapsgewijze instructies:
 - **[Productie AI Praktijken](../docs/ai-foundry/production-ai-practices.md)** - Implementatiepatronen voor ondernemingen
 - **[AI Probleemoplossingsgids](../docs/troubleshooting/ai-troubleshooting.md)** - Veelvoorkomende problemen en oplossingen
 
-### Voorbeeldsjablonen
+### Voorbeeld Templates
 
-Snelle startsjablonen voor veelvoorkomende AI-scenario's:
+Quick-start templates voor veelvoorkomende AI-scenario's:
 
 ```
 workshop/templates/
@@ -201,9 +232,9 @@ cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### Optie 3: Workshop Onder leiding van Instructeur
+### Optie 3: Workshop met Instructeur
 
-Als je deelneemt aan een sessie onder leiding van een instructeur:
+Als je deelneemt aan een sessie met een instructeur:
 
 - 🎥 **Workshop Opname**: [Beschikbaar op aanvraag](https://aka.ms/azd-ai-workshop)
 - 💬 **Discord Community**: [Word lid voor live ondersteuning](https://aka.ms/foundry/discord)
@@ -211,7 +242,7 @@ Als je deelneemt aan een sessie onder leiding van een instructeur:
 
 ## Workshop Tijdlijn
 
-### Zelfstandig Leren (3 uur)
+### Zelfstudie (3 uur)
 
 ```
 ⏰ 00:00 - 00:30  Module 1: AZD Foundations
@@ -222,7 +253,7 @@ Als je deelneemt aan een sessie onder leiding van een instructeur:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Sessie Onder leiding van Instructeur (2,5 uur)
+### Sessie met Instructeur (2,5 uur)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -239,25 +270,25 @@ Als je deelneemt aan een sessie onder leiding van een instructeur:
 
 Aan het einde van deze workshop kun je:
 
-✅ **AI-toepassingen implementeren** met AZD-sjablonen  
+✅ **AI-applicaties implementeren** met AZD templates  
 ✅ **Azure OpenAI configureren** met de juiste beveiliging  
-✅ **RAG-toepassingen bouwen** met Azure AI Search integratie  
+✅ **RAG-applicaties bouwen** met Azure AI Search integratie  
 ✅ **Productiepatronen implementeren** voor AI-werkbelastingen op ondernemingsniveau  
-✅ **AI-toepassingen monitoren en problemen oplossen**  
+✅ **AI-applicatie implementaties monitoren en oplossen**  
 ✅ **Kostenoptimalisatiestrategieën toepassen** voor AI-werkbelastingen  
 
 ## Community & Ondersteuning
 
 ### Tijdens de Workshop
 
-- 🙋 **Vragen**: Gebruik de workshop chat of steek je hand op
+- 🙋 **Vragen**: Gebruik de workshopchat of steek je hand op
 - 🐛 **Problemen**: Bekijk de [probleemoplossingsgids](../docs/troubleshooting/ai-troubleshooting.md)
 - **Tips**: Deel ontdekkingen met andere deelnemers
 
 ### Na de Workshop
 
 - 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
-- **GitHub Issues**: [Meld sjabloonproblemen](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- **GitHub Issues**: [Meld templateproblemen](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
 - 📧 **Feedback**: [Workshop evaluatieformulier](https://aka.ms/azd-workshop-feedback)
 
 ## Volgende Stappen
@@ -266,19 +297,19 @@ Aan het einde van deze workshop kun je:
 
 1. **Geavanceerde Scenario's**: Verken [multi-regio implementaties](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
 2. **CI/CD Integratie**: Stel [GitHub Actions workflows](../docs/deployment/github-actions.md) in
-3. **Aangepaste Sjablonen**: Maak je eigen [AZD-sjablonen](../docs/getting-started/custom-templates.md)
+3. **Aangepaste Templates**: Maak je eigen [AZD templates](../docs/getting-started/custom-templates.md)
 
-### Toepassen in Je Projecten
+### Toepassen in Jouw Projecten
 
 1. **Beoordeling**: Gebruik onze [gereedheidschecklist](./production-readiness-checklist.md)
-2. **Sjablonen**: Begin met onze [AI-specifieke sjablonen](../../../workshop/templates)
+2. **Templates**: Begin met onze [AI-specifieke templates](../../../workshop/templates)
 3. **Ondersteuning**: Word lid van de [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
-### Deel Je Succes
+### Deel Jouw Succes
 
 - ⭐ **Geef een ster aan de repository** als deze workshop je heeft geholpen
 - 🐦 **Deel op sociale media** met #AzureDeveloperCLI #AzureAI
-- 📝 **Schrijf een blogpost** over je AI-implementatiereis
+- 📝 **Schrijf een blogpost** over jouw AI-implementatie reis
 
 ---
 
@@ -289,7 +320,7 @@ Jouw feedback helpt ons de workshopervaring te verbeteren:
 | Aspect | Beoordeling (1-5) | Opmerkingen |
 |--------|-------------------|-------------|
 | Kwaliteit van de inhoud | ⭐⭐⭐⭐⭐ | |
-| Praktische Labs | ⭐⭐⭐⭐⭐ | |
+| Hands-on Labs | ⭐⭐⭐⭐⭐ | |
 | Documentatie | ⭐⭐⭐⭐⭐ | |
 | Moeilijkheidsgraad | ⭐⭐⭐⭐⭐ | |
 | Algemene Ervaring | ⭐⭐⭐⭐⭐ | |
@@ -300,11 +331,9 @@ Jouw feedback helpt ons de workshopervaring te verbeteren:
 
 **Vorige:** [AI Probleemoplossingsgids](../docs/troubleshooting/ai-troubleshooting.md) | **Volgende:** Begin met [Lab 1: AZD Basisprincipes](../../../workshop/lab-1-azd-basics)
 
-**Klaar om AI-toepassingen te bouwen met AZD?**
+**Klaar om AI-applicaties te bouwen met AZD?**
 
 [Begin Lab 1: AZD Basisprincipes →](./lab-1-azd-basics/README.md)
 
 ---
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

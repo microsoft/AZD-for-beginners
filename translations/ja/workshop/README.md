@@ -1,36 +1,67 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-17T14:18:59+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:46:37+00:00",
   "source_file": "workshop/README.md",
   "language_code": "ja"
 }
 -->
 # AZD for AI Developers Workshop
 
+## AZDテンプレート
+
+特定のシナリオに合わせたエンタープライズグレードのAIアプリケーションソリューションを構築することは、自分の家を建てることに似ています。自分で設計し、一つ一つレンガを積み上げ、すべてのガバナンスや開発ガイドラインを満たす責任を負うことができます。
+
+**または....**
+
+建築家と協力して、スターターホームの「設計図」を提供してもらい、それをあなたのニーズに合わせて「カスタマイズ」することもできます。この方法では、**あなたの家**を特別なものにすることに集中でき、配線や配管、その他の依存関係は専門家に任せることができます。
+
+**これが[AI App Templates](https://ai.azure.com/templates)**のアプローチです。これは、コアニーズや依存関係に応じて、さまざまな種類のAIアプリケーション「ホーム」を構築するための設計図のシリーズです。
+
+## テンプレートのカスタマイズ
+
+テンプレートは[Azure AI Foundry](https://ai.azure.com)と連携するように設計されています。このプラットフォームを「建築業者」と考えてください。必要なリソース、ツール、専門知識にアクセスして作業を進めることができます！
+
+まずは[スターターテンプレート](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)を選ぶだけです。例えば、_Get Started with AI Agents_ テンプレートを使用して、AI検索、レッドチーミング、評価、トレーシング、モニタリングなどの機能が備わった「エージェント型AIホーム」を構築します。
+
+![Blueprint](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.ja.png)
+
+あとは、建築家と時間を予約して、カスタマイズプロセスを案内してもらうだけです。[GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started)がその案内役になります。「チャットするだけ」で以下のことができます：
+
+- テンプレート内のAzure機能について学ぶ
+- Azureリソースをデプロイする
+- デプロイメントに関する情報を取得する
+- 問題を診断し、トラブルシュートする！
+
+このワークショップでは、既存のテンプレートを「分解」してその提供内容を学び、その後「カスタマイズ」して要件を満たす方法を一歩ずつ学びます。
+
+AIテンプレートは**動作を可能にする**ものです。このワークショップを完了することで、**自分のものにする方法**を学びます。
+
+----
+
 **ワークショップナビゲーション**
 - **📚 コースホーム**: [AZD For Beginners](../README.md)
-- **📖 関連章**: [第1章](../README.md#-chapter-1-foundation--quick-start)、[第2章](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)、[第5章](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)をカバー
-- **🛠️ 実践ラボ**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 次のステップ**: [ワークショップラボモジュール](../../../workshop)
+- **📖 関連章**: [Chapter 1](../README.md#-chapter-1-foundation--quick-start), [Chapter 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), [Chapter 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)をカバー
+- **🛠️ ハンズオンラボ**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 次のステップ**: [Workshop Lab Modules](../../../workshop)
 
-Azure Developer CLI (AZD) を使用したAIアプリケーションのデプロイに焦点を当てた実践ワークショップへようこそ。このワークショップでは、AZDの基本から、実運用可能なAIソリューションのデプロイまでを学びます。
+Azure Developer CLI (AZD)を学び、AIアプリケーションのデプロイに焦点を当てたハンズオンワークショップへようこそ。このワークショップは、AZDの基本から、実運用可能なAIソリューションのデプロイまでを学ぶために設計されています。
 
 ## ワークショップ概要
 
 **所要時間:** 2～3時間  
 **レベル:** 初級～中級  
-**前提条件:** Azure、コマンドラインツール、AIの基本知識
+**前提条件:** Azure、コマンドラインツール、AI概念の基本知識
 
-### 学べる内容
+### 学べること
 
-- **AZDの基本**: AZDを使用したInfrastructure as Codeの理解
-- 🤖 **AIサービスの統合**: Azure OpenAI、AI Search、その他のAIサービスのデプロイ
-- **コンテナデプロイ**: Azure Container Appsを使用したAIアプリケーションのデプロイ
-- **セキュリティのベストプラクティス**: Managed Identityと安全な設定の実装
-- **監視と可観測性**: AIワークロード向けのApplication Insightsの設定
-- **運用パターン**: エンタープライズ向けのデプロイ戦略
+- **AZDの基本**: AZDを使ったインフラストラクチャコードの理解
+- 🤖 **AIサービスの統合**: Azure OpenAI、AI検索、その他のAIサービスのデプロイ
+- **コンテナデプロイ**: Azure Container Appsを使ったAIアプリケーションのデプロイ
+- **セキュリティのベストプラクティス**: マネージドIDと安全な構成の実装
+- **モニタリングと可観測性**: AIワークロード向けのApplication Insightsの設定
+- **実運用パターン**: エンタープライズ対応のデプロイ戦略
 
 ## ワークショップ構成
 
@@ -44,31 +75,31 @@ Azure Developer CLI (AZD) を使用したAIアプリケーションのデプロ�
 - Azure OpenAIリソースの設定
 - モデルデプロイ戦略
 - APIアクセスと認証の設定
-- **ラボ**: GPT-4を使用したチャットアプリケーションをデプロイ
+- **ラボ**: GPT-4を使ったチャットアプリケーションをデプロイ
 
 ### モジュール3: RAGアプリケーション (45分)
-- Azure AI Searchの統合
-- Azure Document Intelligenceを使用したドキュメント処理
+- Azure AI検索の統合
+- Azure Document Intelligenceを使ったドキュメント処理
 - ベクトル埋め込みとセマンティック検索
 - **ラボ**: ドキュメントQ&Aシステムを構築
 
-### モジュール4: 運用デプロイ (30分)
-- Container Appsの設定
+### モジュール4: 実運用デプロイ (30分)
+- コンテナアプリの設定
 - スケーリングとパフォーマンス最適化
-- 監視とログ記録
-- **ラボ**: 可観測性を備えた運用環境にデプロイ
+- モニタリングとログ記録
+- **ラボ**: 可観測性を備えた実運用環境にデプロイ
 
 ### モジュール5: 高度なパターン (15分)
 - 複数環境へのデプロイ
 - CI/CDの統合
 - コスト最適化戦略
-- **まとめ**: 運用準備チェックリスト
+- **まとめ**: 実運用準備チェックリスト
 
 ## 前提条件
 
 ### 必要なツール
 
-ワークショップ前に以下のツールをインストールしてください:
+ワークショップ前に以下のツールをインストールしてください：
 
 ```bash
 # Azure Developer CLI
@@ -90,15 +121,15 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Azureアカウントの設定
 
-1. **Azureサブスクリプション**: [無料で登録](https://azure.microsoft.com/free/)
+1. **Azureサブスクリプション**: [無料でサインアップ](https://azure.microsoft.com/free/)
 2. **Azure OpenAIアクセス**: [アクセスをリクエスト](https://aka.ms/oai/access)
 3. **必要な権限**:
    - サブスクリプションまたはリソースグループのContributorロール
-   - User Access Administrator (RBAC割り当て用)
+   - RBAC割り当てのためのUser Access Administrator
 
 ### 前提条件の確認
 
-以下のスクリプトを実行してセットアップを確認してください:
+以下のスクリプトを実行してセットアップを確認してください：
 
 ```bash
 #!/bin/bash
@@ -146,12 +177,12 @@ echo "Setup verification complete!"
 
 ### ラボ演習
 
-各モジュールには、スターターコードとステップバイステップの指示が含まれた実践ラボがあります:
+各モジュールには、スターターコードとステップバイステップの指示が含まれたハンズオンラボがあります：
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - 初めてのAZDデプロイ
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Azure OpenAIを使用したチャットアプリケーション
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - AI Searchを使用したRAGアプリケーション
-- **[lab-4-production/](../../../workshop/lab-4-production)** - 運用デプロイパターン
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Azure OpenAIを使ったチャットアプリケーション
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - AI検索を使ったRAGアプリケーション
+- **[lab-4-production/](../../../workshop/lab-4-production)** - 実運用デプロイパターン
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - 高度なデプロイシナリオ
 
 ### 参考資料
@@ -163,7 +194,7 @@ echo "Setup verification complete!"
 
 ### サンプルテンプレート
 
-一般的なAIシナリオ向けのクイックスタートテンプレート:
+一般的なAIシナリオ向けのクイックスタートテンプレート：
 
 ```
 workshop/templates/
@@ -177,25 +208,25 @@ workshop/templates/
 
 ### オプション1: GitHub Codespaces (推奨)
 
-ワークショップを始める最速の方法:
+ワークショップを始める最速の方法：
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
 ### オプション2: ローカル開発
 
-1. **ワークショップリポジトリをクローン:**
+1. **ワークショップリポジトリをクローンする:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Azureにログイン:**
+2. **Azureにログインする:**
 ```bash
 az login
 azd auth login
 ```
 
-3. **ラボ1から開始:**
+3. **ラボ1から始める:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
@@ -203,7 +234,7 @@ cat README.md  # Follow the instructions
 
 ### オプション3: インストラクター主導のワークショップ
 
-インストラクター主導のセッションに参加する場合:
+インストラクター主導のセッションに参加する場合：
 
 - 🎥 **ワークショップ録画**: [オンデマンドで利用可能](https://aka.ms/azd-ai-workshop)
 - 💬 **Discordコミュニティ**: [ライブサポートに参加](https://aka.ms/foundry/discord)
@@ -237,13 +268,13 @@ cat README.md  # Follow the instructions
 
 ## 成功基準
 
-ワークショップ終了時には以下ができるようになります:
+ワークショップ終了時には以下ができるようになります：
 
 ✅ **AZDテンプレートを使用してAIアプリケーションをデプロイ**  
-✅ **適切なセキュリティ設定でAzure OpenAIサービスを構成**  
-✅ **Azure AI Search統合を使用してRAGアプリケーションを構築**  
-✅ **エンタープライズAIワークロード向けの運用パターンを実装**  
-✅ **AIアプリケーションデプロイを監視およびトラブルシュート**  
+✅ **Azure OpenAIサービスを適切なセキュリティで構成**  
+✅ **Azure AI検索統合を使ったRAGアプリケーションを構築**  
+✅ **エンタープライズAIワークロード向けの実運用パターンを実装**  
+✅ **AIアプリケーションデプロイをモニタリングし、トラブルシュート**  
 ✅ **AIワークロードのコスト最適化戦略を適用**  
 
 ## コミュニティとサポート
@@ -256,7 +287,7 @@ cat README.md  # Follow the instructions
 
 ### ワークショップ後
 
-- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
+- 💬 **Discord**: [Azure AI Foundryコミュニティ](https://aka.ms/foundry/discord)
 - **GitHub Issues**: [テンプレートの問題を報告](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
 - 📧 **フィードバック**: [ワークショップ評価フォーム](https://aka.ms/azd-workshop-feedback)
 
@@ -268,13 +299,13 @@ cat README.md  # Follow the instructions
 2. **CI/CD統合**: [GitHub Actionsワークフロー](../docs/deployment/github-actions.md)を設定
 3. **カスタムテンプレート**: [AZDテンプレート](../docs/getting-started/custom-templates.md)を作成
 
-### プロジェクトに適用
+### プロジェクトに適用する
 
 1. **評価**: [準備チェックリスト](./production-readiness-checklist.md)を使用
-2. **テンプレート**: [AI専用テンプレート](../../../workshop/templates)から開始
+2. **テンプレート**: [AI専用テンプレート](../../../workshop/templates)から始める
 3. **サポート**: [Azure AI Foundry Discord](https://aka.ms/foundry/discord)に参加
 
-### 成果を共有
+### 成果を共有する
 
 - ⭐ **リポジトリにスターを付ける**: このワークショップが役立った場合
 - 🐦 **ソーシャルメディアで共有**: #AzureDeveloperCLI #AzureAI
@@ -284,12 +315,12 @@ cat README.md  # Follow the instructions
 
 ## ワークショップフィードバック
 
-フィードバックはワークショップの改善に役立ちます:
+フィードバックはワークショップ体験の改善に役立ちます：
 
 | 項目 | 評価 (1-5) | コメント |
 |------|------------|----------|
 | コンテンツの質 | ⭐⭐⭐⭐⭐ | |
-| 実践ラボ | ⭐⭐⭐⭐⭐ | |
+| ハンズオンラボ | ⭐⭐⭐⭐⭐ | |
 | ドキュメント | ⭐⭐⭐⭐⭐ | |
 | 難易度 | ⭐⭐⭐⭐⭐ | |
 | 全体的な体験 | ⭐⭐⭐⭐⭐ | |
@@ -298,13 +329,11 @@ cat README.md  # Follow the instructions
 
 ---
 
-**前:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **次:** [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)から開始
+**前へ:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **次へ:** [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)を開始
 
-**AZDを使ったAIアプリケーション構築を始める準備はできましたか？**
+**AZDを使ってAIアプリケーションを構築する準備はできましたか？**
 
 [Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
 
 ---
 
-**免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤認について、当方は責任を負いません。

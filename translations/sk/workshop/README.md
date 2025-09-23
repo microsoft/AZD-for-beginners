@@ -1,13 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-18T10:06:55+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T12:04:10+00:00",
   "source_file": "workshop/README.md",
   "language_code": "sk"
 }
 -->
-# AZD pre vývojárov AI Workshop
+# AZD pre workshop AI vývojárov
+
+## AZD Šablóny
+
+Vytvorenie riešenia AI aplikácie na podnikovej úrovni pre váš konkrétny scenár je veľmi podobné stavbe vlastného domu. Môžete si ho navrhnúť sami, postaviť tehlu po tehle a prevziať zodpovednosť za to, že bude spĺňať všetky pravidlá správy a vývoja.
+
+**ALEBO ....**
+
+Môžete spolupracovať s architektom, ktorý vám poskytne _plán_ pre štartovací dom, a potom s vami pracovať na jeho _prispôsobení_ tak, aby vyhovoval vašim potrebám. To vám umožní sústrediť sa na to, čo robí **váš domov** výnimočným, pričom odborníci sa postarajú o základné elektroinštalácie, vodovodné rozvody a ďalšie závislosti.
+
+**Toto je prístup za [AI App Templates](https://ai.azure.com/templates)** - séria plánov na vytvorenie rôznych typov "domov" AI aplikácií v závislosti od vašich hlavných potrieb a závislostí.
+
+## Prispôsobenie šablón
+
+Šablóny sú navrhnuté tak, aby fungovali s [Azure AI Foundry](https://ai.azure.com). Predstavte si túto platformu ako vášho "staviteľa" s prístupom ku všetkým zdrojom, nástrojom a odborným znalostiam, ktoré potrebujete na dokončenie práce!
+
+Stačí si vybrať [vaše štartovacie šablóny](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). Napríklad sa zameriame na šablónu _Get Started with AI Agents_, aby sme vám vytvorili "Agentický AI domov", ktorý je pripravený na funkcie ako AI Search, Red Teaming, Evaluations, Tracing, Monitoring a ďalšie!
+
+![Blueprint](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.sk.png)
+
+Stačí si rezervovať čas s architektom, ktorý vás prevedie procesom prispôsobenia. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) môže byť týmto sprievodcom. Stačí s ním "chatovať", aby ste:
+
+- Zistili viac o funkciách Azure vo vašej šablóne
+- Nasadili Azure zdroje
+- Získali informácie o vašom nasadení
+- Diagnostikovali a riešili problémy!
+
+V tomto workshope sa naučíme, ako _dekonštruovať_ existujúcu šablónu (aby sme zistili, čo poskytuje), a potom ju _prispôsobiť_ (aby splnila naše požiadavky) - krok za krokom.
+
+AI šablóny **zabezpečia funkčnosť** - dokončením workshopu sa naučíte, ako si ich **prispôsobiť pre seba**
+
+----
 
 **Navigácia workshopu**
 - **📚 Domov kurzu**: [AZD Pre začiatočníkov](../README.md)
@@ -15,35 +46,35 @@ CO_OP_TRANSLATOR_METADATA:
 - **🛠️ Praktické cvičenie**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
 - **🚀 Ďalšie kroky**: [Moduly workshopu](../../../workshop)
 
-Vitajte na praktickom workshope zameranom na učenie Azure Developer CLI (AZD) s dôrazom na nasadenie AI aplikácií. Tento workshop vás prevedie od základov AZD až po nasadenie AI riešení pripravených na produkciu.
+Vitajte na praktickom workshope zameranom na učenie Azure Developer CLI (AZD) s dôrazom na nasadenie AI aplikácií. Tento workshop je navrhnutý tak, aby vás previedol od základov AZD až po nasadenie AI riešení pripravených na produkciu.
 
 ## Prehľad workshopu
 
 **Trvanie:** 2-3 hodiny  
 **Úroveň:** Začiatočník až stredne pokročilý  
-**Predpoklady:** Základné znalosti Azure, nástrojov príkazového riadku a konceptov AI
+**Predpoklady:** Základné znalosti Azure, nástrojov príkazového riadku a AI konceptov
 
 ### Čo sa naučíte
 
-- **Základy AZD**: Pochopenie infraštruktúry ako kódu s AZD
+- **Základy AZD**: Porozumenie infraštruktúre ako kódu s AZD
 - 🤖 **Integrácia AI služieb**: Nasadenie Azure OpenAI, AI Search a ďalších AI služieb
 - **Nasadenie kontajnerov**: Použitie Azure Container Apps pre AI aplikácie
 - **Najlepšie bezpečnostné postupy**: Implementácia Managed Identity a bezpečných konfigurácií
 - **Monitoring a pozorovateľnosť**: Nastavenie Application Insights pre AI pracovné zaťaženia
-- **Produkčné vzory**: Stratégie nasadenia pripravené pre podniky
+- **Produkčné vzory**: Stratégie nasadenia na podnikovej úrovni
 
 ## Štruktúra workshopu
 
 ### Modul 1: Základy AZD (30 minút)
 - Inštalácia a konfigurácia AZD
-- Pochopenie štruktúry projektu AZD
-- Vaše prvé nasadenie s AZD
+- Porozumenie štruktúre projektu AZD
+- Vaše prvé nasadenie AZD
 - **Lab**: Nasadenie jednoduchej webovej aplikácie
 
 ### Modul 2: Integrácia Azure OpenAI (45 minút)
-- Nastavenie zdrojov Azure OpenAI
+- Nastavenie Azure OpenAI zdrojov
 - Stratégie nasadenia modelov
-- Konfigurácia prístupu k API a autentifikácie
+- Konfigurácia API prístupu a autentifikácie
 - **Lab**: Nasadenie chatovacej aplikácie s GPT-4
 
 ### Modul 3: RAG aplikácie (45 minút)
@@ -94,7 +125,7 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 2. **Prístup k Azure OpenAI**: [Požiadajte o prístup](https://aka.ms/oai/access)
 3. **Požadované oprávnenia**:
    - Rola Contributor na predplatnom alebo skupine zdrojov
-   - User Access Administrator (pre priradenie RBAC)
+   - User Access Administrator (pre RBAC priradenia)
 
 ### Overenie predpokladov
 
@@ -148,7 +179,7 @@ echo "Setup verification complete!"
 
 Každý modul obsahuje praktické cvičenia so štartovacím kódom a podrobnými pokynmi:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Vaše prvé nasadenie s AZD
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Vaše prvé nasadenie AZD
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chatovacia aplikácia s Azure OpenAI
 - **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG aplikácia s AI Search
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Produkčné vzory nasadenia
@@ -158,12 +189,12 @@ Každý modul obsahuje praktické cvičenia so štartovacím kódom a podrobným
 
 - **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Komplexné integračné vzory
 - **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Najlepšie postupy nasadenia modelov
-- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Vzory nasadenia pre podniky
+- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Vzory nasadenia na podnikovej úrovni
 - **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Bežné problémy a riešenia
 
-### Ukážkové šablóny
+### Vzorové šablóny
 
-Šablóny na rýchly štart pre bežné AI scenáre:
+Štartovacie šablóny pre bežné AI scenáre:
 
 ```
 workshop/templates/
@@ -183,7 +214,7 @@ Najrýchlejší spôsob, ako začať workshop:
 
 ### Možnosť 2: Lokálny vývoj
 
-1. **Naklonujte repozitár workshopu:**
+1. **Klonujte workshopový repozitár:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
@@ -203,7 +234,7 @@ cat README.md  # Follow the instructions
 
 ### Možnosť 3: Workshop vedený inštruktorom
 
-Ak sa zúčastňujete workshopu vedeného inštruktorom:
+Ak sa zúčastňujete na workshope vedenom inštruktorom:
 
 - 🎥 **Nahrávka workshopu**: [Dostupná na vyžiadanie](https://aka.ms/azd-ai-workshop)
 - 💬 **Discord komunita**: [Pripojte sa pre živú podporu](https://aka.ms/foundry/discord)
@@ -239,7 +270,7 @@ Ak sa zúčastňujete workshopu vedeného inštruktorom:
 
 Na konci tohto workshopu budete schopní:
 
-✅ **Nasadiť AI aplikácie** pomocou šablón AZD  
+✅ **Nasadiť AI aplikácie** pomocou AZD šablón  
 ✅ **Konfigurovať Azure OpenAI** služby s náležitou bezpečnosťou  
 ✅ **Vytvoriť RAG aplikácie** s integráciou Azure AI Search  
 ✅ **Implementovať produkčné vzory** pre podnikové AI pracovné zaťaženia  
@@ -256,7 +287,7 @@ Na konci tohto workshopu budete schopní:
 
 ### Po workshope
 
-- 💬 **Discord**: [Komunita Azure AI Foundry](https://aka.ms/foundry/discord)
+- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
 - **GitHub Issues**: [Nahláste problémy so šablónami](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
 - 📧 **Spätná väzba**: [Formulár hodnotenia workshopu](https://aka.ms/azd-workshop-feedback)
 
@@ -278,7 +309,7 @@ Na konci tohto workshopu budete schopní:
 
 - ⭐ **Ohodnoťte repozitár**, ak vám workshop pomohol
 - 🐦 **Podeľte sa na sociálnych sieťach** s #AzureDeveloperCLI #AzureAI
-- 📝 **Napíšte blogový príspevok** o svojej ceste nasadenia AI
+- 📝 **Napíšte blogový príspevok** o vašej ceste nasadenia AI
 
 ---
 
@@ -298,7 +329,7 @@ Vaša spätná väzba nám pomáha zlepšiť zážitok z workshopu:
 
 ---
 
-**Predchádzajúce:** [Príručka na riešenie problémov AI](../docs/troubleshooting/ai-troubleshooting.md) | **Ďalšie:** Začnite s [Labom 1: Základy AZD](../../../workshop/lab-1-azd-basics)
+**Predchádzajúce:** [Príručka na riešenie problémov AI](../docs/troubleshooting/ai-troubleshooting.md) | **Ďalšie:** Začnite s [Lab 1: Základy AZD](../../../workshop/lab-1-azd-basics)
 
 **Ste pripravení začať budovať AI aplikácie s AZD?**
 
@@ -306,5 +337,3 @@ Vaša spätná väzba nám pomáha zlepšiť zážitok z workshopu:
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

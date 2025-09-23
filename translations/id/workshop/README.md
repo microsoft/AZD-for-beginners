@@ -1,21 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-18T08:01:21+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T12:00:41+00:00",
   "source_file": "workshop/README.md",
   "language_code": "id"
 }
 -->
-# AZD untuk Workshop Pengembang AI
+# Workshop AZD untuk Pengembang AI
+
+## Template AZD
+
+Membangun solusi aplikasi AI kelas enterprise untuk skenario spesifik Anda sangat mirip dengan membangun rumah sendiri. Anda bisa merancangnya sendiri, membangunnya bata demi bata, dan bertanggung jawab memastikan semuanya sesuai dengan pedoman tata kelola dan pengembangan.
+
+**ATAU ....**
+
+Anda bisa bekerja dengan seorang arsitek yang dapat memberikan Anda _blueprint_ untuk rumah awal, lalu bekerja sama untuk _menyesuaikannya_ agar sesuai dengan kebutuhan Anda. Ini memungkinkan Anda fokus pada apa yang membuat **rumah Anda** istimewa, sementara kabel, pipa, dan ketergantungan lainnya diurus oleh para ahli.
+
+**Inilah pendekatan di balik [AI App Templates](https://ai.azure.com/templates)** - serangkaian blueprint untuk membangun berbagai jenis "rumah" aplikasi AI tergantung pada kebutuhan inti dan ketergantungan Anda.
+
+## Kustomisasi Template
+
+Template dirancang untuk bekerja dengan [Azure AI Foundry](https://ai.azure.com). Anggap platform ini sebagai "kontraktor bangunan" Anda dengan akses ke semua sumber daya, alat, dan keahlian yang Anda butuhkan untuk menyelesaikan pekerjaan!
+
+Yang perlu Anda lakukan adalah memilih [template awal Anda](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). Misalnya, kita akan fokus pada template _Get Started with AI Agents_ untuk membangun "Rumah AI Agen" yang dilengkapi dengan fitur seperti AI Search, Red Teaming, Evaluations, Tracing, Monitoring, dan lainnya!
+
+![Blueprint](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.id.png)
+
+Yang Anda perlukan hanyalah memesan waktu dengan arsitek untuk membimbing Anda melalui proses kustomisasi. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) bisa menjadi panduan Anda. Cukup "berbicara dengannya" untuk:
+
+- Mempelajari fitur Azure dalam template Anda
+- Mendeploy sumber daya Azure
+- Mendapatkan informasi tentang deployment Anda
+- Mendiagnosis dan memecahkan masalah!
+
+Dalam workshop ini, kita akan belajar cara _membongkar_ template yang ada (untuk memahami apa yang disediakan), lalu _menyesuaikannya_ (untuk memenuhi kebutuhan kita) - langkah demi langkah.
+
+Template AI **membuatnya berfungsi** - dengan menyelesaikan workshop ini Anda akan belajar untuk **membuatnya menjadi milik Anda**
+
+----
 
 **Navigasi Workshop**
 - **📚 Halaman Kursus**: [AZD Untuk Pemula](../README.md)
 - **📖 Bab Terkait**: Mencakup [Bab 1](../README.md#-chapter-1-foundation--quick-start), [Bab 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), dan [Bab 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **🛠️ Lab Praktik**: [Lab Workshop AI](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 Langkah Selanjutnya**: [Modul Lab Workshop](../../../workshop)
+- **🚀 Langkah Berikutnya**: [Modul Lab Workshop](../../../workshop)
 
-Selamat datang di workshop praktik untuk mempelajari Azure Developer CLI (AZD) dengan fokus pada penerapan aplikasi AI. Workshop ini dirancang untuk membawa Anda dari dasar-dasar AZD hingga penerapan solusi AI yang siap produksi.
+Selamat datang di workshop praktik untuk mempelajari Azure Developer CLI (AZD) dengan fokus pada deployment aplikasi AI. Workshop ini dirancang untuk membawa Anda dari dasar-dasar AZD hingga mendeploy solusi AI siap produksi.
 
 ## Gambaran Workshop
 
@@ -25,48 +56,48 @@ Selamat datang di workshop praktik untuk mempelajari Azure Developer CLI (AZD) d
 
 ### Apa yang Akan Anda Pelajari
 
-- **Dasar-Dasar AZD**: Memahami Infrastruktur sebagai Kode dengan AZD
-- 🤖 **Integrasi Layanan AI**: Menerapkan Azure OpenAI, AI Search, dan layanan AI lainnya
-- **Penerapan Kontainer**: Menggunakan Azure Container Apps untuk aplikasi AI
-- **Praktik Keamanan Terbaik**: Mengimplementasikan Managed Identity dan konfigurasi yang aman
+- **Dasar-dasar AZD**: Memahami Infrastruktur sebagai Kode dengan AZD
+- 🤖 **Integrasi Layanan AI**: Mendeploy Azure OpenAI, AI Search, dan layanan AI lainnya
+- **Deployment Kontainer**: Menggunakan Azure Container Apps untuk aplikasi AI
+- **Praktik Keamanan**: Menerapkan Managed Identity dan konfigurasi yang aman
 - **Pemantauan & Observabilitas**: Menyiapkan Application Insights untuk beban kerja AI
-- **Pola Produksi**: Strategi penerapan yang siap untuk perusahaan
+- **Pola Produksi**: Strategi deployment siap enterprise
 
 ## Struktur Workshop
 
-### Modul 1: Dasar-Dasar AZD (30 menit)
-- Menginstal dan mengonfigurasi AZD
+### Modul 1: Dasar-dasar AZD (30 menit)
+- Instalasi dan konfigurasi AZD
 - Memahami struktur proyek AZD
-- Penerapan AZD pertama Anda
-- **Lab**: Menerapkan aplikasi web sederhana
+- Deployment AZD pertama Anda
+- **Lab**: Mendeploy aplikasi web sederhana
 
 ### Modul 2: Integrasi Azure OpenAI (45 menit)
 - Menyiapkan sumber daya Azure OpenAI
-- Strategi penerapan model
-- Mengonfigurasi akses API dan autentikasi
-- **Lab**: Menerapkan aplikasi chat dengan GPT-4
+- Strategi deployment model
+- Konfigurasi akses API dan autentikasi
+- **Lab**: Mendeploy aplikasi chat dengan GPT-4
 
 ### Modul 3: Aplikasi RAG (45 menit)
 - Integrasi Azure AI Search
 - Pemrosesan dokumen dengan Azure Document Intelligence
 - Embedding vektor dan pencarian semantik
-- **Lab**: Membangun sistem tanya jawab dokumen
+- **Lab**: Membangun sistem Q&A dokumen
 
-### Modul 4: Penerapan Produksi (30 menit)
+### Modul 4: Deployment Produksi (30 menit)
 - Konfigurasi Container Apps
-- Optimasi skala dan kinerja
-- Pemantauan dan pencatatan
-- **Lab**: Menerapkan ke produksi dengan observabilitas
+- Optimasi skala dan performa
+- Pemantauan dan logging
+- **Lab**: Mendeploy ke produksi dengan observabilitas
 
 ### Modul 5: Pola Lanjutan (15 menit)
-- Penerapan multi-lingkungan
+- Deployment multi-lingkungan
 - Integrasi CI/CD
 - Strategi optimasi biaya
-- **Penutup**: Daftar periksa kesiapan produksi
+- **Penutup**: Checklist kesiapan produksi
 
 ## Prasyarat
 
-### Alat yang Diperlukan
+### Alat yang Dibutuhkan
 
 Harap instal alat-alat berikut sebelum workshop:
 
@@ -92,7 +123,7 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 1. **Langganan Azure**: [Daftar gratis](https://azure.microsoft.com/free/)
 2. **Akses Azure OpenAI**: [Ajukan akses](https://aka.ms/oai/access)
-3. **Izin yang Diperlukan**:
+3. **Izin yang Dibutuhkan**:
    - Peran Contributor pada langganan atau grup sumber daya
    - User Access Administrator (untuk penugasan RBAC)
 
@@ -148,17 +179,17 @@ echo "Setup verification complete!"
 
 Setiap modul mencakup lab praktik dengan kode awal dan instruksi langkah demi langkah:
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Penerapan AZD pertama Anda
+- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Deployment AZD pertama Anda
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplikasi chat dengan Azure OpenAI
 - **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Aplikasi RAG dengan AI Search
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Pola penerapan produksi
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Skenario penerapan lanjutan
+- **[lab-4-production/](../../../workshop/lab-4-production)** - Pola deployment produksi
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Skenario deployment lanjutan
 
 ### Materi Referensi
 
 - **[Panduan Integrasi AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Pola integrasi yang komprehensif
-- **[Panduan Penerapan Model AI](../docs/ai-foundry/ai-model-deployment.md)** - Praktik terbaik penerapan model
-- **[Praktik AI Produksi](../docs/ai-foundry/production-ai-practices.md)** - Pola penerapan perusahaan
+- **[Panduan Deployment Model AI](../docs/ai-foundry/ai-model-deployment.md)** - Praktik terbaik deployment model
+- **[Praktik AI Produksi](../docs/ai-foundry/production-ai-practices.md)** - Pola deployment enterprise
 - **[Panduan Pemecahan Masalah AI](../docs/troubleshooting/ai-troubleshooting.md)** - Masalah umum dan solusinya
 
 ### Template Contoh
@@ -201,7 +232,7 @@ cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### Opsi 3: Workshop yang Dipandu Instruktur
+### Opsi 3: Workshop dengan Instruktur
 
 Jika Anda mengikuti sesi yang dipandu instruktur:
 
@@ -222,7 +253,7 @@ Jika Anda mengikuti sesi yang dipandu instruktur:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Sesi yang Dipandu Instruktur (2.5 jam)
+### Sesi dengan Instruktur (2.5 jam)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -239,11 +270,11 @@ Jika Anda mengikuti sesi yang dipandu instruktur:
 
 Pada akhir workshop ini, Anda akan dapat:
 
-✅ **Menerapkan aplikasi AI** menggunakan template AZD  
-✅ **Mengonfigurasi layanan Azure OpenAI** dengan keamanan yang tepat  
+✅ **Mendeploy aplikasi AI** menggunakan template AZD  
+✅ **Mengonfigurasi Azure OpenAI** dengan keamanan yang tepat  
 ✅ **Membangun aplikasi RAG** dengan integrasi Azure AI Search  
-✅ **Mengimplementasikan pola produksi** untuk beban kerja AI perusahaan  
-✅ **Memantau dan memecahkan masalah** penerapan aplikasi AI  
+✅ **Menerapkan pola produksi** untuk beban kerja AI enterprise  
+✅ **Memantau dan memecahkan masalah** deployment aplikasi AI  
 ✅ **Menerapkan strategi optimasi biaya** untuk beban kerja AI  
 
 ## Komunitas & Dukungan
@@ -252,25 +283,25 @@ Pada akhir workshop ini, Anda akan dapat:
 
 - 🙋 **Pertanyaan**: Gunakan chat workshop atau angkat tangan
 - 🐛 **Masalah**: Periksa [panduan pemecahan masalah](../docs/troubleshooting/ai-troubleshooting.md)
-- **Tips**: Bagikan penemuan dengan peserta lain
+- **Tips**: Bagikan temuan dengan peserta lain
 
 ### Setelah Workshop
 
 - 💬 **Discord**: [Komunitas Azure AI Foundry](https://aka.ms/foundry/discord)
 - **GitHub Issues**: [Laporkan masalah template](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
-- 📧 **Umpan Balik**: [Formulir evaluasi workshop](https://aka.ms/azd-workshop-feedback)
+- 📧 **Umpan Balik**: [Form evaluasi workshop](https://aka.ms/azd-workshop-feedback)
 
-## Langkah Selanjutnya
+## Langkah Berikutnya
 
 ### Lanjutkan Pembelajaran
 
-1. **Skenario Lanjutan**: Jelajahi [penerapan multi-region](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+1. **Skenario Lanjutan**: Jelajahi [deployment multi-region](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
 2. **Integrasi CI/CD**: Siapkan [workflow GitHub Actions](../docs/deployment/github-actions.md)
 3. **Template Kustom**: Buat [template AZD Anda sendiri](../docs/getting-started/custom-templates.md)
 
-### Terapkan di Proyek Anda
+### Terapkan dalam Proyek Anda
 
-1. **Penilaian**: Gunakan [daftar periksa kesiapan](./production-readiness-checklist.md)
+1. **Penilaian**: Gunakan [checklist kesiapan](./production-readiness-checklist.md)
 2. **Template**: Mulai dengan [template khusus AI](../../../workshop/templates)
 3. **Dukungan**: Bergabung dengan [Discord Azure AI Foundry](https://aka.ms/foundry/discord)
 
@@ -278,7 +309,7 @@ Pada akhir workshop ini, Anda akan dapat:
 
 - ⭐ **Beri bintang repositori** jika workshop ini membantu Anda
 - 🐦 **Bagikan di media sosial** dengan #AzureDeveloperCLI #AzureAI
-- 📝 **Tulis postingan blog** tentang perjalanan penerapan AI Anda
+- 📝 **Tulis posting blog** tentang perjalanan deployment AI Anda
 
 ---
 
@@ -294,17 +325,15 @@ Umpan balik Anda membantu kami meningkatkan pengalaman workshop:
 | Tingkat Kesulitan | ⭐⭐⭐⭐⭐ | |
 | Pengalaman Keseluruhan | ⭐⭐⭐⭐⭐ | |
 
-**Kirim umpan balik**: [Formulir Evaluasi Workshop](https://aka.ms/azd-workshop-feedback)
+**Kirim umpan balik**: [Form Evaluasi Workshop](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**Sebelumnya:** [Panduan Pemecahan Masalah AI](../docs/troubleshooting/ai-troubleshooting.md) | **Selanjutnya:** Mulai dengan [Lab 1: Dasar-Dasar AZD](../../../workshop/lab-1-azd-basics)
+**Sebelumnya:** [Panduan Pemecahan Masalah AI](../docs/troubleshooting/ai-troubleshooting.md) | **Berikutnya:** Mulai dengan [Lab 1: Dasar-dasar AZD](../../../workshop/lab-1-azd-basics)
 
 **Siap untuk mulai membangun aplikasi AI dengan AZD?**
 
-[Mulai Lab 1: Dasar-Dasar AZD →](./lab-1-azd-basics/README.md)
+[Mulai Lab 1: Dasar-dasar AZD →](./lab-1-azd-basics/README.md)
 
 ---
 
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

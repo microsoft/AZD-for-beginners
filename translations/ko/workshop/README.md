@@ -1,34 +1,65 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-17T14:37:22+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:47:20+00:00",
   "source_file": "workshop/README.md",
   "language_code": "ko"
 }
 -->
-# AZD for AI Developers Workshop
+# AZD for AI 개발자 워크숍
+
+## AZD 템플릿
+
+특정 시나리오에 맞는 엔터프라이즈급 AI 애플리케이션 솔루션을 구축하는 것은 마치 자신의 집을 짓는 것과 같습니다. 직접 설계하고, 벽돌 하나하나를 쌓으며, 모든 거버넌스와 개발 지침을 충족시키는 책임을 질 수 있습니다.
+
+**혹은 ....**
+
+건축가와 협력하여 _스타터 홈_에 대한 _청사진_을 받고, 이를 자신의 필요에 맞게 _맞춤화_할 수 있습니다. 이렇게 하면 **자신의 집**을 특별하게 만드는 데 집중할 수 있으며, 전문가들이 배선, 배관 및 기타 종속성을 처리하도록 맡길 수 있습니다.
+
+**이것이 [AI App Templates](https://ai.azure.com/templates)**의 접근 방식입니다 - 핵심 요구 사항과 종속성에 따라 다양한 종류의 AI 애플리케이션 "집"을 구축하기 위한 일련의 청사진입니다.
+
+## 템플릿 맞춤화
+
+이 템플릿은 [Azure AI Foundry](https://ai.azure.com)를 기반으로 설계되었습니다. 이 플랫폼을 "건축 계약자"로 생각해보세요. 필요한 모든 리소스, 도구 및 전문 지식을 제공받아 작업을 완료할 수 있습니다!
+
+[스타터 템플릿](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)을 선택하기만 하면 됩니다. 예를 들어, 우리는 _Get Started with AI Agents_ 템플릿에 집중하여 AI 검색, 레드 팀 테스트, 평가, 추적, 모니터링 등의 기능이 포함된 "Agentic AI Home"을 구축할 것입니다.
+
+![Blueprint](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.ko.png)
+
+건축가와 시간을 예약하여 맞춤화 과정을 안내받기만 하면 됩니다. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started)가 그 가이드 역할을 할 수 있습니다. "대화"를 통해 다음을 수행할 수 있습니다:
+
+- 템플릿에 포함된 Azure 기능에 대해 배우기
+- Azure 리소스 배포
+- 배포 정보 얻기
+- 문제 진단 및 해결!
+
+이 워크숍에서는 기존 템플릿을 _분석_하여 제공하는 내용을 배우고, 이를 _맞춤화_하여 요구 사항을 충족시키는 방법을 단계별로 배웁니다.
+
+AI 템플릿은 **작동하게 만듭니다** - 워크숍을 완료하면 이를 **자신만의 것으로 만드는 방법**을 배우게 됩니다.
+
+----
 
 **워크숍 내비게이션**
 - **📚 코스 홈**: [AZD For Beginners](../README.md)
 - **📖 관련 챕터**: [Chapter 1](../README.md#-chapter-1-foundation--quick-start), [Chapter 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), [Chapter 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced) 포함
 - **🛠️ 실습 랩**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 다음 단계**: [Workshop Lab Modules](../../../workshop)
+- **🚀 다음 단계**: [워크숍 랩 모듈](../../../workshop)
 
-Azure Developer CLI (AZD)를 활용한 AI 애플리케이션 배포를 배우는 실습 워크숍에 오신 것을 환영합니다. 이 워크숍은 AZD 기본부터 프로덕션 준비가 완료된 AI 솔루션 배포까지 안내합니다.
+Azure Developer CLI (AZD)를 배우고 AI 애플리케이션 배포에 중점을 둔 실습 워크숍에 오신 것을 환영합니다. 이 워크숍은 AZD 기본 사항부터 프로덕션 준비가 된 AI 솔루션 배포까지 안내합니다.
 
 ## 워크숍 개요
 
 **소요 시간:** 2-3시간  
-**레벨:** 초급에서 중급  
-**사전 요구 사항:** Azure, 명령줄 도구, AI 개념에 대한 기본 지식
+**수준:** 초급에서 중급  
+**사전 요구 사항:** Azure, 명령줄 도구 및 AI 개념에 대한 기본 지식
 
 ### 학습 내용
 
-- **AZD 기본**: AZD를 활용한 코드형 인프라 이해
-- 🤖 **AI 서비스 통합**: Azure OpenAI, AI Search 및 기타 AI 서비스 배포
-- **컨테이너 배포**: Azure Container Apps를 활용한 AI 애플리케이션 배포
-- **보안 모범 사례**: Managed Identity 및 보안 설정 구현
+- **AZD 기본 사항**: AZD를 활용한 코드 기반 인프라 이해
+- 🤖 **AI 서비스 통합**: Azure OpenAI, AI 검색 및 기타 AI 서비스 배포
+- **컨테이너 배포**: Azure Container Apps를 사용한 AI 애플리케이션 배포
+- **보안 모범 사례**: Managed Identity 및 안전한 구성 구현
 - **모니터링 및 관찰성**: AI 워크로드를 위한 Application Insights 설정
 - **프로덕션 패턴**: 엔터프라이즈 준비 배포 전략
 
@@ -47,13 +78,13 @@ Azure Developer CLI (AZD)를 활용한 AI 애플리케이션 배포를 배우는
 - **랩**: GPT-4를 활용한 채팅 애플리케이션 배포
 
 ### 모듈 3: RAG 애플리케이션 (45분)
-- Azure AI Search 통합
+- Azure AI 검색 통합
 - Azure Document Intelligence를 활용한 문서 처리
-- 벡터 임베딩 및 시맨틱 검색
+- 벡터 임베딩 및 의미 검색
 - **랩**: 문서 Q&A 시스템 구축
 
 ### 모듈 4: 프로덕션 배포 (30분)
-- Container Apps 구성
+- 컨테이너 앱 구성
 - 확장 및 성능 최적화
 - 모니터링 및 로깅
 - **랩**: 관찰성을 갖춘 프로덕션 배포
@@ -91,10 +122,10 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 ### Azure 계정 설정
 
 1. **Azure 구독**: [무료로 가입하기](https://azure.microsoft.com/free/)
-2. **Azure OpenAI 액세스**: [액세스 요청하기](https://aka.ms/oai/access)
+2. **Azure OpenAI 액세스**: [액세스 요청](https://aka.ms/oai/access)
 3. **필요한 권한**:
    - 구독 또는 리소스 그룹에 대한 Contributor 역할
-   - User Access Administrator (RBAC 할당을 위해)
+   - RBAC 할당을 위한 User Access Administrator
 
 ### 사전 요구 사항 확인
 
@@ -146,20 +177,20 @@ echo "Setup verification complete!"
 
 ### 랩 실습
 
-각 모듈에는 시작 코드와 단계별 지침이 포함된 실습 랩이 있습니다:
+각 모듈에는 스타터 코드와 단계별 지침이 포함된 실습 랩이 있습니다:
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - 첫 번째 AZD 배포
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Azure OpenAI를 활용한 채팅 애플리케이션
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - AI Search를 활용한 RAG 애플리케이션
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - AI 검색을 활용한 RAG 애플리케이션
 - **[lab-4-production/](../../../workshop/lab-4-production)** - 프로덕션 배포 패턴
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - 고급 배포 시나리오
 
 ### 참고 자료
 
-- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - 종합적인 통합 패턴
-- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - 모델 배포 모범 사례
-- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - 엔터프라이즈 배포 패턴
-- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - 일반적인 문제와 해결책
+- **[AI Foundry 통합 가이드](../docs/ai-foundry/azure-ai-foundry-integration.md)** - 종합적인 통합 패턴
+- **[AI 모델 배포 가이드](../docs/ai-foundry/ai-model-deployment.md)** - 모델 배포 모범 사례
+- **[프로덕션 AI 실습](../docs/ai-foundry/production-ai-practices.md)** - 엔터프라이즈 배포 패턴
+- **[AI 문제 해결 가이드](../docs/troubleshooting/ai-troubleshooting.md)** - 일반적인 문제와 해결책
 
 ### 샘플 템플릿
 
@@ -189,7 +220,7 @@ git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Azure에 로그인:**
+2. **Azure 로그인:**
 ```bash
 az login
 azd auth login
@@ -241,7 +272,7 @@ cat README.md  # Follow the instructions
 
 ✅ **AZD 템플릿을 사용하여 AI 애플리케이션 배포**  
 ✅ **적절한 보안으로 Azure OpenAI 서비스 구성**  
-✅ **Azure AI Search 통합을 활용한 RAG 애플리케이션 구축**  
+✅ **Azure AI 검색 통합을 활용한 RAG 애플리케이션 구축**  
 ✅ **엔터프라이즈 AI 워크로드를 위한 프로덕션 패턴 구현**  
 ✅ **AI 애플리케이션 배포 모니터링 및 문제 해결**  
 ✅ **AI 워크로드 비용 최적화 전략 적용**  
@@ -266,28 +297,28 @@ cat README.md  # Follow the instructions
 
 1. **고급 시나리오**: [다중 지역 배포](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment) 탐색
 2. **CI/CD 통합**: [GitHub Actions 워크플로우 설정](../docs/deployment/github-actions.md)
-3. **커스텀 템플릿**: [AZD 템플릿 생성](../docs/getting-started/custom-templates.md)
+3. **맞춤 템플릿**: [AZD 템플릿 생성](../docs/getting-started/custom-templates.md)
 
 ### 프로젝트에 적용하기
 
 1. **평가**: [준비 체크리스트](./production-readiness-checklist.md) 사용
 2. **템플릿**: [AI 전용 템플릿](../../../workshop/templates)로 시작
-3. **지원**: [Azure AI Foundry Discord](https://aka.ms/foundry/discord)에 참여
+3. **지원**: [Azure AI Foundry Discord](https://aka.ms/foundry/discord) 참여
 
 ### 성공 공유하기
 
-- ⭐ **리포지토리에 스타 추가**: 워크숍이 도움이 되었다면
-- 🐦 **소셜 미디어 공유**: #AzureDeveloperCLI #AzureAI 해시태그 사용
-- 📝 **블로그 작성**: AI 배포 여정에 대해 작성
+- ⭐ **리포지토리에 별표**를 달아 워크숍이 도움이 되었음을 알리세요
+- 🐦 **소셜 미디어에 공유**: #AzureDeveloperCLI #AzureAI
+- 📝 **블로그 게시물 작성**: AI 배포 여정에 대해 작성하세요
 
 ---
 
 ## 워크숍 피드백
 
-귀하의 피드백은 워크숍 경험을 개선하는 데 도움이 됩니다:
+여러분의 피드백은 워크숍 경험을 개선하는 데 도움이 됩니다:
 
 | 항목 | 평가 (1-5) | 의견 |
-|--------|--------------|----------|
+|------|------------|------|
 | 콘텐츠 품질 | ⭐⭐⭐⭐⭐ | |
 | 실습 랩 | ⭐⭐⭐⭐⭐ | |
 | 문서화 | ⭐⭐⭐⭐⭐ | |
@@ -298,13 +329,11 @@ cat README.md  # Follow the instructions
 
 ---
 
-**이전:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **다음:** [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics) 시작하기
+**이전:** [AI 문제 해결 가이드](../docs/troubleshooting/ai-troubleshooting.md) | **다음:** [랩 1: AZD 기초 시작](../../../workshop/lab-1-azd-basics)
 
-**AZD를 활용하여 AI 애플리케이션을 구축할 준비가 되셨나요?**
+**AZD를 사용하여 AI 애플리케이션을 구축할 준비가 되셨나요?**
 
-[Lab 1: AZD Foundations 시작 →](./lab-1-azd-basics/README.md)
+[랩 1: AZD 기초 시작 →](./lab-1-azd-basics/README.md)
 
 ---
 
-**면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
