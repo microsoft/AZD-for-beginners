@@ -1,6 +1,5 @@
 # AZD for AI Developers Workshop
 
-
 > [!IMPORTANT]  
 > **This workshop is instrumented with a workshop guide that you can preview in your local browser. To get started, you must launch GitHub Codespaces on the repo—then wait until you see an active VS Code terminal and type:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
@@ -22,7 +21,6 @@ Over the course of this workshop, you will also be introduced to core developer 
 |**🚀 Next Steps** | [Take The Challenge](#workshop-challenge) |
 | | |
 
-
 ## Workshop Overview
 
 **Duration:** 3-4 hours  
@@ -43,7 +41,6 @@ This is a hands-on workshop where you learn by doing. Once you have completed th
 | 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
 | | |
 
-
 ## What You'll Learn
 
 Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Azure AI Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
@@ -58,71 +55,24 @@ Think of the AZD Template as a learning sandbox to explore various capabilities 
 | **Red Teaming**| Explore adversarial testing and mitigations |
 | | |
 
+## Workshop Modules
 
-## Workshop Structure
+Ready to get started? Navigate through the workshop modules:
 
-The workshop is structured to take you on a journey from template discovery, to deployment, deconstruction, and customization - using the official [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template as the basis.
-
-### Module 1: Select AI Template (30 mins)
-
-- What are AI Templates?
-- Where can I find AI Templates?
-- How can I get started building AI Agents?
-- **Lab**: Quickstart with GitHub Codespaces
-
-### Module 2: Validate AI Template (30 mins)
-
-- What is the AI Template Architecture?
-- What is the AZD Development Workflow?
-- How can I get help with AZD Development?
-- **Lab**: Deploy & Validate AI Agents template
-
-### Module 3: Deconstruct AI Template (30 mins)
-
-- Explore your environment in `.azure/` 
-- Explore your resource setup in `infra/` 
-- Explore your AZD configuration in `azure.yaml`s
-- **Lab**: Modify Environment Variables & Redeploy
-
-### Module 4: Configure AI Template (30 mins)
-- Explore: Retrieval Augmented Generation
-- Explore: Agent Evaluation & Red Teaming
-- Explore: Tracing & Monitoring
-- **Lab**: Explore AI Agent + Observability 
-
-### Module 5: Customize AI Template (30 mins)
-- Define: PRD with Scenario Requirements
-- Configure: Environment Variables for AZD
-- Implement: Lifecycle Hooks for added tasks
-- **Lab**: Customize template for my scenario
-
-### Module 6: Teardown Infrastructure (30 mins)
-- Recap: What are AZD Templates?
-- Recap: Why use Azure Developer CLI?
-- Next Steps: Try a different template!
-- **Lab**: Deprovision infrastructure & cleanup
-
-
-## Workshop Challenge
-
-Want to challenge yourself to do more? Here are some project suggestions - or share your ideas with us!!
-
-| Project | Description |
-|:---|:---|
-|1. **Deconstruct A Complex AI Template** | Use the workflow and tools we outlined and see if you can deploy, validate, and customize a different AI solution template. _What did you learn?_|
-|2. **Customize With Your Scenario**  | Try writing a PRD (Product Requirements Document) for a different scenario. Then use GitHub Copilot in your template repo in Agent Model - and ask it to generate a customization workflow for you. _What did you learn? How could you improve on these suggestions?_|
-| | |
+- [Module 1: Select AI Template](instructions/1-Select-AI-Template.md)
+- [Module 2: Validate AI Template](instructions/2-Validate-AI-Template.md) 
+- [Module 3: Deconstruct AI Template](instructions/3-Deconstruct-AI-Template.md)
+- [Module 4: Configure AI Template](instructions/4-Configure-AI-Template.md)
+- [Module 5: Customize AI Template](instructions/5-Customize-AI-Template.md)
+- [Module 6: Teardown Infrastructure](instructions/6-Teardown-Infrastructure.md)
+- [Module 7: Wrap-up & Next Steps](instructions/7-Wrap-up.md)
 
 ## Have feedback?
 
 Post an issue on this repo (tag it `Workshop`) or join us on Discord and post to our `#get-help` channel
 
-<br/>
-
 ---
-
-**Previous:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Next:** Begin with [Lab 1: AZD Basics](./lab-1-azd-basics/)
 
 **Ready to start building AI applications with AZD?**
 
-[Begin Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
+[Begin with Module 1: Select AI Template →](instructions/1-Select-AI-Template.md)
