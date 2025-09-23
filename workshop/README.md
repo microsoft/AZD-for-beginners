@@ -1,11 +1,5 @@
 # AZD for AI Developers Workshop
 
-
-> [!IMPORTANT]  
-> **This workshop is instrumented with a workshop guide that you can preview in your local browser. To get started, you must launch GitHub Codespaces on the repo—then wait until you see an active VS Code terminal and type:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **You should see a pop-up dialog to open the preview page in a browser.**
-
 Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop helps you gain an applied understanding of AZD templates in 3 steps:
 
 1. **Discovery** - find the template that is right for you.
@@ -22,6 +16,26 @@ Over the course of this workshop, you will also be introduced to core developer 
 |**🚀 Next Steps** | [Take The Challenge](#workshop-challenge) |
 | | |
 
+
+## Browser Preview
+
+The workshop is easier to navigate with this browser-based preview. To get started:
+
+- Fork this repository and launch GitHub Codespaces on your fork
+- Wait till Codespaces is loaded and the VS Code terminal is active
+- Type  `mkdocs serve > /dev/null 2>&1 &` and wait a few seconds.
+- A pop-up dialog will appear - select the option to open in browser.
+
+You should now see this instruction guide open up in a new browser tab.
+
+- Use the _search_ bar to quickly look up keywords or find the desired lesson.
+- Hover over _codefenced blocks_ - you'll see a convenient "copy" icon to grab text.
+- Prefer a light or dark theme? - simply toggle the theme preference in the navbar.
+- Want to share insights? - click the Discord icon in the footer to join the community.
+
+![Workshop](./docs/assets/workshop.png)
+
+---
 
 ## Workshop Overview
 

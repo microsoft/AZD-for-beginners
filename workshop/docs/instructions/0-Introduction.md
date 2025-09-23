@@ -8,7 +8,7 @@
     s**Level:** Beginner to Intermediate  
 
 
-## 1. Motivation
+## Motivation
 
 Let's start with an analogy. Building a modern agentic AI application _from scratch_ is like building your new home yourself, brick-by-brick. Yes, it can be done. But it is not the most effective way to get your desired end result. Instead, we typically start with a design blueprint that we like, then work with an architect to customize it to our specific requirements.
 
