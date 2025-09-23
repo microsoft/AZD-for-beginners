@@ -1,37 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-17T13:20:45+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T13:55:16+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "fr"
 }
 -->
-# Atelier AI : Rendre vos solutions IA déployables avec AZD
+# Atelier AI : Rendre vos solutions AI déployables avec AZD
 
-**Navigation des chapitres :**
+**Navigation du chapitre :**
 - **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
-- **📖 Chapitre actuel** : Chapitre 2 - Développement orienté IA
-- **⬅️ Précédent** : [Déploiement de modèles IA](ai-model-deployment.md)
-- **➡️ Suivant** : [Bonnes pratiques IA en production](production-ai-practices.md)
+- **📖 Chapitre actuel** : Chapitre 2 - Développement orienté AI
+- **⬅️ Précédent** : [Déploiement de modèles AI](ai-model-deployment.md)
+- **➡️ Suivant** : [Bonnes pratiques pour l'AI en production](production-ai-practices.md)
 - **🚀 Chapitre suivant** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
 
 ## Aperçu de l'atelier
 
-Cet atelier pratique guide les développeurs dans le processus de transformation d'une application IA existante pour la rendre déployable avec Azure Developer CLI (AZD). Vous apprendrez les modèles essentiels pour les déploiements IA en production en utilisant les services Azure AI Foundry.
+Cet atelier pratique guide les développeurs dans le processus de prise en main d'un modèle AI existant et de son déploiement à l'aide de l'Azure Developer CLI (AZD). Vous apprendrez les modèles essentiels pour les déploiements AI en production en utilisant les services Azure AI Foundry.
 
 **Durée :** 2-3 heures  
 **Niveau :** Intermédiaire  
-**Prérequis :** Connaissances de base sur Azure, familiarité avec les concepts IA/ML
+**Prérequis :** Connaissances de base sur Azure, familiarité avec les concepts AI/ML
 
 ## 🎓 Objectifs d'apprentissage
 
 À la fin de cet atelier, vous serez capable de :
-- ✅ Convertir une application IA existante pour utiliser les modèles AZD
+- ✅ Convertir une application AI existante pour utiliser des modèles AZD
 - ✅ Configurer les services Azure AI Foundry avec AZD
-- ✅ Implémenter une gestion sécurisée des identifiants pour les services IA
-- ✅ Déployer des applications IA prêtes pour la production avec surveillance
-- ✅ Résoudre les problèmes courants liés au déploiement IA
+- ✅ Mettre en œuvre une gestion sécurisée des identifiants pour les services AI
+- ✅ Déployer des applications AI prêtes pour la production avec surveillance
+- ✅ Résoudre les problèmes courants liés au déploiement AI
 
 ## Prérequis
 
@@ -49,13 +49,13 @@ Cet atelier pratique guide les développeurs dans le processus de transformation
 ### Connaissances requises
 - Compréhension de base des services Azure
 - Familiarité avec les interfaces en ligne de commande
-- Concepts IA/ML de base (API, modèles, prompts)
+- Concepts de base AI/ML (API, modèles, prompts)
 
 ## Configuration de l'atelier
 
 ### Étape 1 : Préparation de l'environnement
 
-1. **Vérifiez l'installation des outils :**  
+1. **Vérifiez l'installation des outils :**
 ```bash
 # Check AZD installation
 azd version
@@ -68,17 +68,19 @@ az login
 azd auth login
 ```
 
-2. **Clonez le dépôt de l'atelier :**  
+2. **Clonez le dépôt de l'atelier :**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## Module 1 : Comprendre la structure AZD pour les applications IA
 
-### Anatomie d'un modèle AZD prêt pour l'IA
+## Module 1 : Comprendre la structure AZD pour les applications AI
 
-Explorez les fichiers clés dans un modèle AZD adapté à l'IA :  
+### Anatomie d'un modèle AZD prêt pour l'AI
+
+Explorez les fichiers clés dans un modèle AZD prêt pour l'AI :
+
 ```
 azure-search-openai-demo/
 ├── azure.yaml              # AZD configuration
@@ -94,46 +96,47 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
+
 ### **Exercice pratique 1.1 : Explorer la configuration**
 
-1. **Examinez le fichier azure.yaml :**  
+1. **Examinez le fichier azure.yaml :**
 ```bash
 cat azure.yaml
 ```
 
 **Ce qu'il faut rechercher :**
-- Définitions des services pour les composants IA
+- Définitions des services pour les composants AI
 - Mappages des variables d'environnement
-- Configurations d'hébergement
+- Configurations de l'hôte
 
-2. **Passez en revue l'infrastructure main.bicep :**  
+2. **Passez en revue l'infrastructure main.bicep :**
 ```bash
 cat infra/main.bicep
 ```
 
-**Modèles IA clés à identifier :**
+**Modèles AI clés à identifier :**
 - Provisionnement du service Azure OpenAI
 - Intégration Cognitive Search
 - Gestion sécurisée des clés
 - Configurations de sécurité réseau
 
-### **Point de discussion : Pourquoi ces modèles sont importants pour l'IA**
+### **Point de discussion : Pourquoi ces modèles sont importants pour l'AI**
 
-- **Dépendances des services** : Les applications IA nécessitent souvent plusieurs services coordonnés
+- **Dépendances des services** : Les applications AI nécessitent souvent plusieurs services coordonnés
 - **Sécurité** : Les clés API et les points de terminaison doivent être gérés de manière sécurisée
-- **Évolutivité** : Les charges de travail IA ont des besoins spécifiques en matière de mise à l'échelle
-- **Gestion des coûts** : Les services IA peuvent être coûteux s'ils ne sont pas correctement configurés
+- **Évolutivité** : Les charges de travail AI ont des exigences uniques en matière de mise à l'échelle
+- **Gestion des coûts** : Les services AI peuvent être coûteux s'ils ne sont pas correctement configurés
 
-## Module 2 : Déployez votre première application IA
+## Module 2 : Déployez votre première application AI
 
 ### Étape 2.1 : Initialiser l'environnement
 
-1. **Créez un nouvel environnement AZD :**  
+1. **Créez un nouvel environnement AZD :**
 ```bash
 azd env new myai-workshop
 ```
 
-2. **Définissez les paramètres requis :**  
+2. **Définissez les paramètres requis :**
 ```bash
 # Set your preferred Azure region
 azd env set AZURE_LOCATION eastus
@@ -142,9 +145,10 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
+
 ### Étape 2.2 : Déployer l'infrastructure et l'application
 
-1. **Déployez avec AZD :**  
+1. **Déployez avec AZD :**
 ```bash
 azd up
 ```
@@ -161,24 +165,24 @@ azd up
 
 ### Étape 2.3 : Vérifiez votre déploiement
 
-1. **Vérifiez les ressources déployées :**  
+1. **Vérifiez les ressources déployées :**
 ```bash
 azd show
 ```
 
-2. **Ouvrez l'application déployée :**  
+2. **Ouvrez l'application déployée :**
 ```bash
 azd show --output json | grep "webAppUrl"
 ```
 
-3. **Testez les fonctionnalités IA :**
+3. **Testez les fonctionnalités AI :**
    - Accédez à l'application web
    - Essayez des requêtes d'exemple
-   - Vérifiez que les réponses IA fonctionnent
+   - Vérifiez que les réponses AI fonctionnent
 
 ### **Exercice pratique 2.1 : Pratique de dépannage**
 
-**Scénario** : Votre déploiement a réussi, mais l'IA ne répond pas.
+**Scénario** : Votre déploiement a réussi, mais l'AI ne répond pas.
 
 **Problèmes courants à vérifier :**
 1. **Clés API OpenAI** : Vérifiez qu'elles sont correctement configurées
@@ -186,7 +190,7 @@ azd show --output json | grep "webAppUrl"
 3. **Connectivité réseau** : Assurez-vous que les services peuvent communiquer
 4. **Permissions RBAC** : Vérifiez que l'application peut accéder à OpenAI
 
-**Commandes de débogage :**  
+**Commandes de débogage :**
 ```bash
 # Check environment variables
 azd env get-values
@@ -198,11 +202,12 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Module 3 : Personnaliser les applications IA selon vos besoins
 
-### Étape 3.1 : Modifier la configuration IA
+## Module 3 : Personnaliser les applications AI selon vos besoins
 
-1. **Mettez à jour le modèle OpenAI :**  
+### Étape 3.1 : Modifier la configuration AI
+
+1. **Mettez à jour le modèle OpenAI :**
 ```bash
 # Change to a different model (if available in your region)
 azd env set AZURE_OPENAI_MODEL gpt-4
@@ -211,9 +216,10 @@ azd env set AZURE_OPENAI_MODEL gpt-4
 azd deploy
 ```
 
-2. **Ajoutez des services IA supplémentaires :**
+2. **Ajoutez des services AI supplémentaires :**
 
-Modifiez `infra/main.bicep` pour ajouter Document Intelligence :  
+Modifiez `infra/main.bicep` pour ajouter Document Intelligence :
+
 ```bicep
 // Add to main.bicep
 resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -229,16 +235,17 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
+
 ### Étape 3.2 : Configurations spécifiques à l'environnement
 
 **Bonne pratique** : Configurations différentes pour le développement et la production.
 
-1. **Créez un environnement de production :**  
+1. **Créez un environnement de production :**
 ```bash
 azd env new myai-production
 ```
 
-2. **Définissez des paramètres spécifiques à la production :**  
+2. **Définissez des paramètres spécifiques à la production :**
 ```bash
 # Production typically uses higher SKUs
 azd env set AZURE_OPENAI_SKU S0
@@ -248,45 +255,47 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
+
 ### **Exercice pratique 3.1 : Optimisation des coûts**
 
 **Défi** : Configurez le modèle pour un développement économique.
 
 **Tâches :**
-1. Identifiez les SKUs pouvant être configurés en niveaux gratuits/de base
+1. Identifiez les SKUs pouvant être configurés en niveaux gratuits/basiques
 2. Configurez les variables d'environnement pour minimiser les coûts
 3. Déployez et comparez les coûts avec la configuration de production
 
-**Indices de solution :**
+**Astuces pour la solution :**
 - Utilisez le niveau F0 (gratuit) pour les services cognitifs lorsque possible
 - Utilisez le niveau Basic pour le service de recherche en développement
 - Envisagez d'utiliser le plan Consumption pour les fonctions
 
-## Module 4 : Sécurité et bonnes pratiques en production
+## Module 4 : Sécurité et bonnes pratiques pour la production
 
 ### Étape 4.1 : Gestion sécurisée des identifiants
 
-**Problème actuel** : De nombreuses applications IA codent en dur les clés API ou utilisent un stockage non sécurisé.
+**Défi actuel** : De nombreuses applications AI codent en dur les clés API ou utilisent un stockage non sécurisé.
 
 **Solution AZD** : Intégration Managed Identity + Key Vault.
 
-1. **Passez en revue la configuration de sécurité dans votre modèle :**  
+1. **Passez en revue la configuration de sécurité dans votre modèle :**
 ```bash
 # Look for Key Vault and Managed Identity configuration
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Vérifiez que Managed Identity fonctionne :**  
+2. **Vérifiez que Managed Identity fonctionne :**
 ```bash
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
+
 ### Étape 4.2 : Sécurité réseau
 
-1. **Activez les points de terminaison privés** (si ce n'est pas déjà configuré) :
+1. **Activez les points de terminaison privés** (si non déjà configurés) :
 
-Ajoutez à votre modèle bicep :  
+Ajoutez à votre modèle bicep :
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -309,18 +318,19 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
+
 ### Étape 4.3 : Surveillance et observabilité
 
-1. **Configurez Application Insights :**  
+1. **Configurez Application Insights :**
 ```bash
 # Application Insights should be automatically configured
 # Check the configuration:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Configurez une surveillance spécifique à l'IA :**
+2. **Configurez une surveillance spécifique à l'AI :**
 
-Ajoutez des métriques personnalisées pour les opérations IA :  
+Ajoutez des métriques personnalisées pour les opérations AI :
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -341,6 +351,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
+
 ### **Exercice pratique 4.1 : Audit de sécurité**
 
 **Tâche** : Passez en revue votre déploiement pour les meilleures pratiques de sécurité.
@@ -352,14 +363,14 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 - [ ] L'accès réseau est correctement restreint
 - [ ] La surveillance et la journalisation sont activées
 
-## Module 5 : Convertir votre propre application IA
+## Module 5 : Convertir votre propre application AI
 
 ### Étape 5.1 : Fiche d'évaluation
 
 **Avant de convertir votre application**, répondez à ces questions :
 
 1. **Architecture de l'application :**
-   - Quels services IA votre application utilise-t-elle ?
+   - Quels services AI votre application utilise-t-elle ?
    - Quels ressources de calcul sont nécessaires ?
    - A-t-elle besoin d'une base de données ?
    - Quelles sont les dépendances entre les services ?
@@ -369,7 +380,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Quelles exigences de conformité avez-vous ?
    - Avez-vous besoin d'un réseau privé ?
 
-3. **Exigences d'évolutivité :**
+3. **Exigences de mise à l'échelle :**
    - Quelle est votre charge attendue ?
    - Avez-vous besoin d'une mise à l'échelle automatique ?
    - Y a-t-il des exigences régionales ?
@@ -378,7 +389,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 **Suivez ce modèle pour convertir votre application :**
 
-1. **Créez la structure de base :**  
+1. **Créez la structure de base :**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
@@ -387,7 +398,7 @@ cd my-ai-app-azd
 azd init --template minimal
 ```
 
-2. **Créez azure.yaml :**  
+2. **Créez azure.yaml :**
 ```yaml
 # Metadata
 name: my-ai-app
@@ -412,7 +423,7 @@ hooks:
 
 3. **Créez les modèles d'infrastructure :**
 
-**infra/main.bicep** - Modèle principal :  
+**infra/main.bicep** - Modèle principal :
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -430,7 +441,7 @@ module openAI 'modules/openai.bicep' = {
 }
 ```
 
-**infra/modules/openai.bicep** - Module OpenAI :  
+**infra/modules/openai.bicep** - Module OpenAI :
 ```bicep
 @description('Name of the OpenAI service')
 param name string
@@ -454,9 +465,10 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
+
 ### **Exercice pratique 5.1 : Défi de création de modèle**
 
-**Défi** : Créez un modèle AZD pour une application IA de traitement de documents.
+**Défi** : Créez un modèle AZD pour une application AI de traitement de documents.
 
 **Exigences :**
 - Azure OpenAI pour l'analyse de contenu
@@ -466,7 +478,7 @@ output name string = openAIAccount.name
 - Application web pour l'interface utilisateur
 
 **Points bonus :**
-- Ajoutez une gestion correcte des erreurs
+- Ajoutez une gestion des erreurs appropriée
 - Incluez une estimation des coûts
 - Configurez des tableaux de bord de surveillance
 
@@ -476,7 +488,7 @@ output name string = openAIAccount.name
 
 #### Problème 1 : Quota du service OpenAI dépassé
 **Symptômes :** Échec du déploiement avec une erreur de quota  
-**Solutions :**  
+**Solutions :**
 ```bash
 # Check current quotas
 az cognitiveservices usage list --location eastus
@@ -486,9 +498,10 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
+
 #### Problème 2 : Modèle non disponible dans la région
-**Symptômes :** Échec des réponses IA ou erreurs de déploiement du modèle  
-**Solutions :**  
+**Symptômes :** Échec des réponses AI ou erreurs de déploiement du modèle  
+**Solutions :**
 ```bash
 # Check model availability by region
 az cognitiveservices model list --location eastus
@@ -498,9 +511,10 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
+
 #### Problème 3 : Problèmes de permissions
-**Symptômes :** Erreurs 403 Forbidden lors de l'appel des services IA  
-**Solutions :**  
+**Symptômes :** Erreurs 403 Forbidden lors de l'appel des services AI  
+**Solutions :**
 ```bash
 # Check role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
@@ -512,9 +526,10 @@ az role assignment create \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
+
 ### Problèmes de performance
 
-#### Problème 4 : Réponses IA lentes
+#### Problème 4 : Réponses AI lentes
 **Étapes d'investigation :**
 1. Vérifiez les métriques de performance dans Application Insights
 2. Passez en revue les métriques du service OpenAI dans le portail Azure
@@ -523,7 +538,7 @@ az role assignment create \
 **Solutions :**
 - Implémentez un cache pour les requêtes courantes
 - Utilisez le modèle OpenAI approprié pour votre cas d'utilisation
-- Envisagez des réplicas en lecture pour les scénarios de forte charge
+- Envisagez des réplicas de lecture pour les scénarios de forte charge
 
 ### **Exercice pratique 6.1 : Défi de débogage**
 
@@ -552,7 +567,7 @@ Accédez au portail Azure et créez un tableau de bord avec :
 - Utilisation des ressources
 - Suivi des coûts
 
-2. **Configurez des alertes :**  
+2. **Configurez des alertes :**
 ```bash
 # Alert for high error rate
 az monitor metrics alert create \
@@ -563,9 +578,10 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
+
 ### Étape 7.2 : Optimisation des coûts
 
-1. **Analysez les coûts actuels :**  
+1. **Analysez les coûts actuels :**
 ```bash
 # Use Azure CLI to get cost data
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
@@ -574,12 +590,12 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 2. **Implémentez des contrôles de coûts :**
 - Configurez des alertes budgétaires
 - Utilisez des politiques d'autoscaling
-- Implémentez un cache pour les requêtes
+- Implémentez un cache de requêtes
 - Surveillez l'utilisation des tokens pour OpenAI
 
 ### **Exercice pratique 7.1 : Optimisation des performances**
 
-**Tâche** : Optimisez votre application IA pour la performance et les coûts.
+**Tâche** : Optimisez votre application AI pour la performance et les coûts.
 
 **Métriques à améliorer :**
 - Réduisez le temps de réponse moyen de 20 %
@@ -587,7 +603,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - Maintenez une disponibilité de 99,9 %
 
 **Stratégies à essayer :**
-- Implémentez un cache pour les réponses
+- Implémentez un cache de réponses
 - Optimisez les prompts pour l'efficacité des tokens
 - Utilisez les SKUs de calcul appropriés
 - Configurez un autoscaling adapté
@@ -596,10 +612,10 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ### Scénario de défi
 
-Vous devez créer un chatbot de service client alimenté par l'IA, prêt pour la production, avec les exigences suivantes :
+Vous êtes chargé de créer un chatbot de service client alimenté par AI, prêt pour la production, avec les exigences suivantes :
 
 **Exigences fonctionnelles :**
-- Interface web pour les interactions clients
+- Interface web pour les interactions avec les clients
 - Intégration avec Azure OpenAI pour les réponses
 - Capacité de recherche documentaire via Cognitive Search
 - Intégration avec une base de données client existante
@@ -624,7 +640,7 @@ Vous devez créer un chatbot de service client alimenté par l'IA, prêt pour la
 ### Critères d'évaluation
 
 - ✅ **Fonctionnalité** : Répond-elle à toutes les exigences ?
-- ✅ **Sécurité** : Les meilleures pratiques sont-elles implémentées ?
+- ✅ **Sécurité** : Les meilleures pratiques sont-elles mises en œuvre ?
 - ✅ **Évolutivité** : Peut-elle gérer la charge ?
 - ✅ **Maintenabilité** : Le code et l'infrastructure sont-ils bien organisés ?
 - ✅ **Coût** : Respecte-t-elle le budget ?
@@ -638,16 +654,15 @@ Vous devez créer un chatbot de service client alimenté par l'IA, prêt pour la
 
 ### Modèles d'exemple
 - [Application de chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [Démarrage rapide de l'application de chat OpenAI](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+- [Quickstart Application de chat OpenAI](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Ressources communautaires
 - [Discord Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
+- [Modèles AZD impressionnants](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Certificat de réussite
-
 Félicitations ! Vous avez terminé le laboratoire de l'atelier sur l'IA. Vous devriez maintenant être capable de :
 
 - ✅ Convertir des applications d'IA existantes en modèles AZD
@@ -658,26 +673,24 @@ Félicitations ! Vous avez terminé le laboratoire de l'atelier sur l'IA. Vous d
 
 ### Prochaines étapes
 1. Appliquez ces modèles à vos propres projets d'IA
-2. Contribuez des modèles à la communauté
+2. Contribuez en partageant des modèles avec la communauté
 3. Rejoignez le Discord Azure AI Foundry pour un support continu
 4. Explorez des sujets avancés comme les déploiements multi-régions
 
 ---
 
-**Retour sur l'atelier** : Aidez-nous à améliorer cet atelier en partageant votre expérience sur le [canal #Azure du Discord Azure AI Foundry](https://discord.gg/microsoft-azure).
+**Retour sur l'atelier** : Aidez-nous à améliorer cet atelier en partageant votre expérience dans le [canal #Azure du Discord Azure AI Foundry](https://discord.gg/microsoft-azure).
 
 ---
 
 **Navigation des chapitres :**
-- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
-- **📖 Chapitre actuel** : Chapitre 2 - Développement axé sur l'IA
-- **⬅️ Précédent** : [Déploiement de modèles d'IA](ai-model-deployment.md)
+- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 2 - Développement orienté IA
+- **⬅️ Précédent** : [Déploiement de modèles IA](ai-model-deployment.md)
 - **➡️ Suivant** : [Meilleures pratiques pour l'IA en production](production-ai-practices.md)
 - **🚀 Chapitre suivant** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
 
-**Besoin d'aide ?** Rejoignez notre communauté pour obtenir du support et discuter des déploiements AZD et IA.
+**Besoin d'aide ?** Rejoignez notre communauté pour des discussions et du support sur AZD et les déploiements IA.
 
 ---
 
-**Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
