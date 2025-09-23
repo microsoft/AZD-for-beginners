@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-18T08:10:27+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T14:35:52+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "ms"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Navigasi Bab:**
 - **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Semasa**: Bab 2 - Pembangunan Berorientasikan AI
+- **📖 Bab Semasa**: Bab 2 - Pembangunan Berasaskan AI
 - **⬅️ Sebelumnya**: [Penyebaran Model AI](ai-model-deployment.md)
 - **➡️ Seterusnya**: [Amalan Terbaik AI Pengeluaran](production-ai-practices.md)
 - **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 ## Gambaran Keseluruhan Bengkel
 
-Bengkel ini memberikan panduan praktikal kepada pembangun untuk mengambil aplikasi AI sedia ada dan menjadikannya boleh dideploy menggunakan Azure Developer CLI (AZD). Anda akan mempelajari corak penting untuk penyebaran AI pengeluaran menggunakan perkhidmatan Azure AI Foundry.
+Makmal praktikal ini membimbing pembangun melalui proses mengambil templat AI sedia ada dan menyebarkannya menggunakan Azure Developer CLI (AZD). Anda akan mempelajari corak penting untuk penyebaran AI pengeluaran menggunakan perkhidmatan Azure AI Foundry.
 
 **Tempoh:** 2-3 jam  
 **Tahap:** Pertengahan  
@@ -48,10 +48,10 @@ Menjelang akhir bengkel ini, anda akan dapat:
 
 ### Pengetahuan Prasyarat
 - Pemahaman asas tentang perkhidmatan Azure
-- Familiariti dengan antara muka baris perintah
+- Kebiasaan dengan antara muka baris perintah
 - Konsep asas AI/ML (API, model, arahan)
 
-## Persediaan Bengkel
+## Persediaan Makmal
 
 ### Langkah 1: Persediaan Persekitaran
 
@@ -78,7 +78,7 @@ cd azure-search-openai-demo
 
 ### Anatomi Templat AZD Sedia AI
 
-Terokai fail utama dalam templat AZD yang sedia AI:
+Terokai fail utama dalam templat AZD sedia AI:
 
 ```
 azure-search-openai-demo/
@@ -102,7 +102,7 @@ azure-search-openai-demo/
 cat azure.yaml
 ```
 
-**Apa yang perlu diperhatikan:**
+**Apa yang perlu dicari:**
 - Definisi perkhidmatan untuk komponen AI
 - Pemetaan pembolehubah persekitaran
 - Konfigurasi hos
@@ -143,9 +143,9 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### Langkah 2.2: Menyebarkan Infrastruktur dan Aplikasi
+### Langkah 2.2: Sebarkan Infrastruktur dan Aplikasi
 
-1. **Sediakan dengan AZD:**
+1. **Sebarkan dengan AZD:**
 ```bash
 azd up
 ```
@@ -181,13 +181,13 @@ azd show --output json | grep "webAppUrl"
 
 **Senario**: Penyebaran anda berjaya tetapi AI tidak memberikan respons.
 
-**Isu biasa untuk diperiksa:**
+**Masalah biasa untuk diperiksa:**
 1. **Kunci API OpenAI**: Sahkan ia ditetapkan dengan betul
 2. **Ketersediaan model**: Periksa jika wilayah anda menyokong model tersebut
 3. **Kesambungan rangkaian**: Pastikan perkhidmatan boleh berkomunikasi
 4. **Kebenaran RBAC**: Sahkan aplikasi boleh mengakses OpenAI
 
-**Perintah penyelesaian masalah:**
+**Perintah penyahpepijat:**
 ```bash
 # Check environment variables
 azd env get-values
@@ -268,9 +268,9 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 ### Langkah 4.1: Pengurusan Kelayakan yang Selamat
 
-**Cabaran semasa**: Banyak aplikasi AI menyimpan kunci API secara hardcode atau menggunakan storan yang tidak selamat.
+**Cabaran semasa**: Banyak aplikasi AI menyimpan kunci API secara keras atau menggunakan storan yang tidak selamat.
 
-**Penyelesaian AZD**: Integrasi Managed Identity + Key Vault.
+**Penyelesaian AZD**: Managed Identity + integrasi Key Vault.
 
 1. **Semak konfigurasi keselamatan dalam templat anda:**
 ```bash
@@ -348,7 +348,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 **Tugas**: Semak penyebaran anda untuk amalan terbaik keselamatan.
 
 **Senarai Semak:**
-- [ ] Tiada rahsia yang disimpan secara hardcode dalam kod atau konfigurasi
+- [ ] Tiada rahsia yang disimpan secara keras dalam kod atau konfigurasi
 - [ ] Managed Identity digunakan untuk pengesahan perkhidmatan-ke-perkhidmatan
 - [ ] Key Vault menyimpan konfigurasi sensitif
 - [ ] Akses rangkaian dihadkan dengan betul
@@ -362,17 +362,17 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 1. **Senibina Aplikasi:**
    - Perkhidmatan AI apa yang digunakan oleh aplikasi anda?
-   - Sumber pengiraan apa yang diperlukan?
+   - Sumber pengkomputeran apa yang diperlukan?
    - Adakah ia memerlukan pangkalan data?
    - Apakah kebergantungan antara perkhidmatan?
 
 2. **Keperluan Keselamatan:**
    - Data sensitif apa yang dikendalikan oleh aplikasi anda?
-   - Keperluan pematuhan apa yang anda ada?
+   - Apakah keperluan pematuhan yang anda ada?
    - Adakah anda memerlukan rangkaian peribadi?
 
 3. **Keperluan Penskalaan:**
-   - Beban yang dijangkakan?
+   - Apakah beban yang dijangkakan?
    - Adakah anda memerlukan penskalaan automatik?
    - Adakah terdapat keperluan wilayah?
 
@@ -467,16 +467,16 @@ output name string = openAIAccount.name
 - Function App untuk logik pemprosesan
 - Aplikasi web untuk antara muka pengguna
 
-**Bonus:** 
+**Mata bonus:**
 - Tambah pengendalian ralat yang betul
 - Sertakan anggaran kos
 - Sediakan papan pemuka pemantauan
 
 ## Modul 6: Menyelesaikan Masalah Biasa
 
-### Isu Penyebaran Biasa
+### Masalah Penyebaran Biasa
 
-#### Isu 1: Kuota Perkhidmatan OpenAI Melebihi
+#### Masalah 1: Kuota Perkhidmatan OpenAI Melebihi
 **Gejala:** Penyebaran gagal dengan ralat kuota
 **Penyelesaian:**
 ```bash
@@ -488,7 +488,7 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Isu 2: Model Tidak Tersedia di Wilayah
+#### Masalah 2: Model Tidak Tersedia di Wilayah
 **Gejala:** Respons AI gagal atau ralat penyebaran model
 **Penyelesaian:**
 ```bash
@@ -500,7 +500,7 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
-#### Isu 3: Masalah Kebenaran
+#### Masalah 3: Masalah Kebenaran
 **Gejala:** Ralat 403 Forbidden semasa memanggil perkhidmatan AI
 **Penyelesaian:**
 ```bash
@@ -514,12 +514,12 @@ az role assignment create \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### Isu Prestasi
+### Masalah Prestasi
 
-#### Isu 4: Respons AI Perlahan
+#### Masalah 4: Respons AI Perlahan
 **Langkah penyiasatan:**
 1. Periksa Application Insights untuk metrik prestasi
-2. Semak metrik perkhidmatan OpenAI di portal Azure
+2. Semak metrik perkhidmatan OpenAI dalam portal Azure
 3. Sahkan kesambungan rangkaian dan latensi
 
 **Penyelesaian:**
@@ -527,11 +527,11 @@ az role assignment create \
 - Gunakan model OpenAI yang sesuai untuk kes penggunaan anda
 - Pertimbangkan replika baca untuk senario beban tinggi
 
-### **Latihan Makmal 6.1: Cabaran Penyelesaian Masalah**
+### **Latihan Makmal 6.1: Cabaran Penyahpepijat**
 
 **Senario**: Penyebaran anda berjaya, tetapi aplikasi mengembalikan ralat 500.
 
-**Tugas penyelesaian masalah:**
+**Tugas penyahpepijat:**
 1. Periksa log aplikasi
 2. Sahkan kesambungan perkhidmatan
 3. Uji pengesahan
@@ -586,12 +586,12 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 **Metrik untuk diperbaiki:**
 - Kurangkan masa respons purata sebanyak 20%
 - Kurangkan kos bulanan sebanyak 15%
-- Kekalkan uptime 99.9%
+- Kekalkan waktu operasi 99.9%
 
 **Strategi untuk dicuba:**
 - Laksanakan caching respons
 - Optimumkan arahan untuk kecekapan token
-- Gunakan SKU pengiraan yang sesuai
+- Gunakan SKU pengkomputeran yang sesuai
 - Sediakan penskalaan automatik yang betul
 
 ## Cabaran Akhir: Pelaksanaan Hujung-ke-Hujung
@@ -607,12 +607,12 @@ Anda ditugaskan untuk mencipta chatbot perkhidmatan pelanggan berkuasa AI yang s
 - Integrasi dengan pangkalan data pelanggan sedia ada
 - Sokongan pelbagai bahasa
 
-**Keperluan Bukan Fungsional:**
+**Keperluan Tidak Fungsional:**
 - Menangani 1000 pengguna serentak
-- SLA uptime 99.9%
+- SLA waktu operasi 99.9%
 - Pematuhan SOC 2
 - Kos di bawah $500/bulan
-- Penyebaran ke pelbagai persekitaran (pembangunan, staging, pengeluaran)
+- Penyebaran ke pelbagai persekitaran (pembangunan, pementasan, pengeluaran)
 
 ### Langkah Pelaksanaan
 
@@ -640,16 +640,15 @@ Anda ditugaskan untuk mencipta chatbot perkhidmatan pelanggan berkuasa AI yang s
 
 ### Templat Contoh
 - [Aplikasi Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [Quickstart Aplikasi Chat OpenAI](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+- [Permulaan Cepat Aplikasi Chat OpenAI](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Sumber Komuniti
 - [Discord Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
+- [Templat AZD Hebat](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Sijil Penyelesaian
-
 Tahniah! Anda telah menyelesaikan Bengkel AI Lab. Anda kini sepatutnya mampu:
 
 - ✅ Menukar aplikasi AI sedia ada kepada templat AZD
@@ -666,12 +665,12 @@ Tahniah! Anda telah menyelesaikan Bengkel AI Lab. Anda kini sepatutnya mampu:
 
 ---
 
-**Maklum Balas Bengkel**: Bantu kami meningkatkan bengkel ini dengan berkongsi pengalaman anda di [saluran Azure Discord Azure AI Foundry](https://discord.gg/microsoft-azure).
+**Maklum Balas Bengkel**: Bantu kami meningkatkan bengkel ini dengan berkongsi pengalaman anda di [Saluran Azure Discord Azure AI Foundry](https://discord.gg/microsoft-azure).
 
 ---
 
 **Navigasi Bab:**
-- **📚 Halaman Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Semasa**: Bab 2 - Pembangunan AI-First
 - **⬅️ Sebelumnya**: [Pelancaran Model AI](ai-model-deployment.md)
 - **➡️ Seterusnya**: [Amalan Terbaik AI Pengeluaran](production-ai-practices.md)
@@ -681,5 +680,3 @@ Tahniah! Anda telah menyelesaikan Bengkel AI Lab. Anda kini sepatutnya mampu:
 
 ---
 
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

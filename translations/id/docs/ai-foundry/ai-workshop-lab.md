@@ -1,37 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-18T07:54:51+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T14:35:12+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "id"
 }
 -->
-# AI Workshop Lab: Membuat Solusi AI Anda Dapat Dideploy dengan AZD
+# AI Workshop Lab: Membuat Solusi AI Anda Siap AZD-Deploy
 
 **Navigasi Bab:**
-- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berbasis AI
-- **⬅️ Sebelumnya**: [Deploy Model AI](ai-model-deployment.md)
+- **⬅️ Sebelumnya**: [Penerapan Model AI](ai-model-deployment.md)
 - **➡️ Selanjutnya**: [Praktik Terbaik AI Produksi](production-ai-practices.md)
 - **🚀 Bab Selanjutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 ## Ikhtisar Workshop
 
-Lab ini memberikan panduan praktis kepada pengembang untuk mengambil aplikasi AI yang sudah ada dan membuatnya dapat dideploy menggunakan Azure Developer CLI (AZD). Anda akan mempelajari pola penting untuk deployment AI produksi menggunakan layanan Azure AI Foundry.
+Lab ini memberikan panduan praktis kepada pengembang untuk mengambil template AI yang sudah ada dan menerapkannya menggunakan Azure Developer CLI (AZD). Anda akan mempelajari pola-pola penting untuk penerapan AI produksi menggunakan layanan Azure AI Foundry.
 
 **Durasi:** 2-3 jam  
 **Tingkat:** Menengah  
-**Prasyarat:** Pengetahuan dasar Azure, pemahaman konsep AI/ML
+**Prasyarat:** Pengetahuan dasar tentang Azure, pemahaman konsep AI/ML
 
 ## 🎓 Tujuan Pembelajaran
 
 Pada akhir workshop ini, Anda akan dapat:
-- ✅ Mengonversi aplikasi AI yang sudah ada untuk menggunakan template AZD
+- ✅ Mengonversi aplikasi AI yang ada untuk menggunakan template AZD
 - ✅ Mengonfigurasi layanan Azure AI Foundry dengan AZD
 - ✅ Menerapkan manajemen kredensial yang aman untuk layanan AI
-- ✅ Mendeply aplikasi AI siap produksi dengan pemantauan
-- ✅ Memecahkan masalah umum dalam deployment AI
+- ✅ Menerapkan aplikasi AI siap produksi dengan pemantauan
+- ✅ Memecahkan masalah umum dalam penerapan AI
 
 ## Prasyarat
 
@@ -78,7 +78,7 @@ cd azure-search-openai-demo
 
 ### Anatomi Template AZD Siap AI
 
-Eksplorasi file utama dalam template AZD yang siap AI:
+Jelajahi file utama dalam template AZD yang siap AI:
 
 ```
 azure-search-openai-demo/
@@ -125,7 +125,7 @@ cat infra/main.bicep
 - **Skalabilitas**: Beban kerja AI memiliki kebutuhan skalabilitas yang unik
 - **Manajemen Biaya**: Layanan AI bisa mahal jika tidak dikonfigurasi dengan benar
 
-## Modul 2: Deploy Aplikasi AI Pertama Anda
+## Modul 2: Menerapkan Aplikasi AI Pertama Anda
 
 ### Langkah 2.1: Inisialisasi Lingkungan
 
@@ -134,7 +134,7 @@ cat infra/main.bicep
 azd env new myai-workshop
 ```
 
-2. **Set parameter yang diperlukan:**
+2. **Tetapkan parameter yang diperlukan:**
 ```bash
 # Set your preferred Azure region
 azd env set AZURE_LOCATION eastus
@@ -143,9 +143,9 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### Langkah 2.2: Deploy Infrastruktur dan Aplikasi
+### Langkah 2.2: Terapkan Infrastruktur dan Aplikasi
 
-1. **Deploy dengan AZD:**
+1. **Terapkan dengan AZD:**
 ```bash
 azd up
 ```
@@ -155,34 +155,34 @@ azd up
 - ✅ Membuat layanan Cognitive Search
 - ✅ Menyiapkan App Service untuk aplikasi web
 - ✅ Mengonfigurasi jaringan dan keamanan
-- ✅ Mendeply kode aplikasi
+- ✅ Menerapkan kode aplikasi
 - ✅ Menyiapkan pemantauan dan logging
 
-2. **Pantau kemajuan deployment** dan catat sumber daya yang dibuat.
+2. **Pantau kemajuan penerapan** dan catat sumber daya yang dibuat.
 
-### Langkah 2.3: Verifikasi Deployment Anda
+### Langkah 2.3: Verifikasi Penerapan Anda
 
-1. **Periksa sumber daya yang dideploy:**
+1. **Periksa sumber daya yang diterapkan:**
 ```bash
 azd show
 ```
 
-2. **Buka aplikasi yang dideploy:**
+2. **Buka aplikasi yang diterapkan:**
 ```bash
 azd show --output json | grep "webAppUrl"
 ```
 
-3. **Uji fungsionalitas AI:**
+3. **Uji fungsi AI:**
    - Navigasikan ke aplikasi web
    - Coba kueri sampel
    - Verifikasi respons AI berfungsi
 
 ### **Latihan Lab 2.1: Latihan Pemecahan Masalah**
 
-**Skenario**: Deployment Anda berhasil tetapi AI tidak merespons.
+**Skenario**: Penerapan Anda berhasil tetapi AI tidak merespons.
 
 **Masalah umum yang perlu diperiksa:**
-1. **Kunci API OpenAI**: Verifikasi bahwa kunci sudah diatur dengan benar
+1. **Kunci API OpenAI**: Verifikasi bahwa kunci telah diatur dengan benar
 2. **Ketersediaan model**: Periksa apakah wilayah Anda mendukung model tersebut
 3. **Konektivitas jaringan**: Pastikan layanan dapat berkomunikasi
 4. **Izin RBAC**: Verifikasi bahwa aplikasi dapat mengakses OpenAI
@@ -240,7 +240,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 azd env new myai-production
 ```
 
-2. **Set parameter spesifik produksi:**
+2. **Tetapkan parameter spesifik produksi:**
 ```bash
 # Production typically uses higher SKUs
 azd env set AZURE_OPENAI_SKU S0
@@ -257,7 +257,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **Tugas:**
 1. Identifikasi SKU yang dapat diatur ke tingkat gratis/dasar
 2. Konfigurasikan variabel lingkungan untuk biaya minimal
-3. Deploy dan bandingkan biaya dengan konfigurasi produksi
+3. Terapkan dan bandingkan biaya dengan konfigurasi produksi
 
 **Petunjuk solusi:**
 - Gunakan tingkat F0 (gratis) untuk Cognitive Services jika memungkinkan
@@ -270,7 +270,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 **Tantangan saat ini**: Banyak aplikasi AI yang menyimpan kunci API secara hardcode atau menggunakan penyimpanan yang tidak aman.
 
-**Solusi AZD**: Managed Identity + integrasi Key Vault.
+**Solusi AZD**: Integrasi Managed Identity + Key Vault.
 
 1. **Tinjau konfigurasi keamanan dalam template Anda:**
 ```bash
@@ -345,7 +345,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### **Latihan Lab 4.1: Audit Keamanan**
 
-**Tugas**: Tinjau deployment Anda untuk praktik terbaik keamanan.
+**Tugas**: Tinjau penerapan Anda untuk praktik terbaik keamanan.
 
 **Daftar Periksa:**
 - [ ] Tidak ada rahasia yang disimpan secara hardcode dalam kode atau konfigurasi
@@ -363,17 +363,17 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 1. **Arsitektur Aplikasi:**
    - Layanan AI apa yang digunakan aplikasi Anda?
    - Sumber daya komputasi apa yang dibutuhkan?
-   - Apakah membutuhkan database?
+   - Apakah memerlukan database?
    - Apa ketergantungan antar layanan?
 
 2. **Persyaratan Keamanan:**
    - Data sensitif apa yang ditangani aplikasi Anda?
    - Persyaratan kepatuhan apa yang Anda miliki?
-   - Apakah Anda membutuhkan jaringan privat?
+   - Apakah Anda memerlukan jaringan privat?
 
 3. **Persyaratan Skalabilitas:**
    - Beban yang diharapkan?
-   - Apakah Anda membutuhkan auto-scaling?
+   - Apakah Anda memerlukan auto-scaling?
    - Apakah ada persyaratan regional?
 
 ### Langkah 5.2: Buat Template AZD Anda
@@ -468,16 +468,16 @@ output name string = openAIAccount.name
 - Aplikasi web untuk antarmuka pengguna
 
 **Poin bonus:**
-- Tambahkan penanganan error yang tepat
+- Tambahkan penanganan kesalahan yang tepat
 - Sertakan estimasi biaya
-- Siapkan dashboard pemantauan
+- Siapkan dasbor pemantauan
 
 ## Modul 6: Memecahkan Masalah Umum
 
-### Masalah Umum dalam Deployment
+### Masalah Penerapan Umum
 
 #### Masalah 1: Kuota Layanan OpenAI Terlampaui
-**Gejala:** Deployment gagal dengan error kuota
+**Gejala:** Penerapan gagal dengan kesalahan kuota
 **Solusi:**
 ```bash
 # Check current quotas
@@ -489,7 +489,7 @@ azd up
 ```
 
 #### Masalah 2: Model Tidak Tersedia di Wilayah
-**Gejala:** Respons AI gagal atau error deployment model
+**Gejala:** Respons AI gagal atau kesalahan penerapan model
 **Solusi:**
 ```bash
 # Check model availability by region
@@ -501,7 +501,7 @@ azd deploy
 ```
 
 #### Masalah 3: Masalah Izin
-**Gejala:** Error 403 Forbidden saat memanggil layanan AI
+**Gejala:** Kesalahan 403 Forbidden saat memanggil layanan AI
 **Solusi:**
 ```bash
 # Check role assignments
@@ -525,11 +525,11 @@ az role assignment create \
 **Solusi:**
 - Terapkan caching untuk kueri umum
 - Gunakan model OpenAI yang sesuai untuk kasus penggunaan Anda
-- Pertimbangkan read replicas untuk skenario beban tinggi
+- Pertimbangkan replika baca untuk skenario beban tinggi
 
 ### **Latihan Lab 6.1: Tantangan Debugging**
 
-**Skenario**: Deployment Anda berhasil, tetapi aplikasi mengembalikan error 500.
+**Skenario**: Penerapan Anda berhasil, tetapi aplikasi mengembalikan kesalahan 500.
 
 **Tugas debugging:**
 1. Periksa log aplikasi
@@ -538,23 +538,23 @@ az role assignment create \
 4. Tinjau konfigurasi
 
 **Alat yang digunakan:**
-- `azd show` untuk gambaran deployment
-- Portal Azure untuk log layanan yang lebih rinci
+- `azd show` untuk gambaran penerapan
+- Portal Azure untuk log layanan terperinci
 - Application Insights untuk telemetri aplikasi
 
 ## Modul 7: Pemantauan dan Optimasi
 
 ### Langkah 7.1: Siapkan Pemantauan Komprehensif
 
-1. **Buat dashboard khusus:**
+1. **Buat dasbor khusus:**
 
-Navigasikan ke portal Azure dan buat dashboard dengan:
-- Jumlah permintaan OpenAI dan latensi
-- Tingkat error aplikasi
+Navigasikan ke portal Azure dan buat dasbor dengan:
+- Jumlah permintaan dan latensi OpenAI
+- Tingkat kesalahan aplikasi
 - Pemanfaatan sumber daya
 - Pelacakan biaya
 
-2. **Siapkan alert:**
+2. **Siapkan peringatan:**
 ```bash
 # Alert for high error rate
 az monitor metrics alert create \
@@ -574,7 +574,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
 2. **Terapkan kontrol biaya:**
-- Siapkan alert anggaran
+- Siapkan peringatan anggaran
 - Gunakan kebijakan autoscaling
 - Terapkan caching permintaan
 - Pantau penggunaan token untuk OpenAI
@@ -586,7 +586,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 **Metrik yang perlu ditingkatkan:**
 - Kurangi waktu respons rata-rata sebesar 20%
 - Kurangi biaya bulanan sebesar 15%
-- Pertahankan uptime 99.9%
+- Pertahankan uptime 99,9%
 
 **Strategi yang dapat dicoba:**
 - Terapkan caching respons
@@ -604,23 +604,23 @@ Anda ditugaskan untuk membuat chatbot layanan pelanggan berbasis AI yang siap pr
 - Antarmuka web untuk interaksi pelanggan
 - Integrasi dengan Azure OpenAI untuk respons
 - Kemampuan pencarian dokumen menggunakan Cognitive Search
-- Integrasi dengan database pelanggan yang sudah ada
+- Integrasi dengan database pelanggan yang ada
 - Dukungan multi-bahasa
 
 **Persyaratan Non-Fungsional:**
-- Menangani 1000 pengguna secara bersamaan
-- SLA uptime 99.9%
+- Menangani 1000 pengguna bersamaan
+- SLA uptime 99,9%
 - Kepatuhan SOC 2
 - Biaya di bawah $500/bulan
-- Deploy ke beberapa lingkungan (dev, staging, prod)
+- Penerapan ke beberapa lingkungan (dev, staging, prod)
 
 ### Langkah Implementasi
 
 1. **Desain arsitektur**
 2. **Buat template AZD**
 3. **Terapkan langkah-langkah keamanan**
-4. **Siapkan pemantauan dan alerting**
-5. **Buat pipeline deployment**
+4. **Siapkan pemantauan dan peringatan**
+5. **Buat pipeline penerapan**
 6. **Dokumentasikan solusi**
 
 ### Kriteria Evaluasi
@@ -628,7 +628,7 @@ Anda ditugaskan untuk membuat chatbot layanan pelanggan berbasis AI yang siap pr
 - ✅ **Fungsionalitas**: Apakah memenuhi semua persyaratan?
 - ✅ **Keamanan**: Apakah praktik terbaik diterapkan?
 - ✅ **Skalabilitas**: Apakah dapat menangani beban?
-- ✅ **Kemudahan Pemeliharaan**: Apakah kode dan infrastruktur terorganisir dengan baik?
+- ✅ **Pemeliharaan**: Apakah kode dan infrastruktur terorganisir dengan baik?
 - ✅ **Biaya**: Apakah tetap dalam anggaran?
 
 ## Sumber Daya Tambahan
@@ -639,20 +639,19 @@ Anda ditugaskan untuk membuat chatbot layanan pelanggan berbasis AI yang siap pr
 - [Dokumentasi Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Template Contoh
-- [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+- [Aplikasi Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Quickstart Aplikasi Chat OpenAI](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Sumber Daya Komunitas
 - [Discord Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
+- [Template AZD yang Luar Biasa](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Sertifikat Penyelesaian
-
 Selamat! Anda telah menyelesaikan Lab Workshop AI. Sekarang Anda seharusnya dapat:
 
-- ✅ Mengonversi aplikasi AI yang ada ke template AZD
+- ✅ Mengonversi aplikasi AI yang sudah ada ke template AZD
 - ✅ Mendeploy aplikasi AI yang siap produksi
 - ✅ Menerapkan praktik terbaik keamanan untuk beban kerja AI
 - ✅ Memantau dan mengoptimalkan kinerja aplikasi AI
@@ -666,7 +665,7 @@ Selamat! Anda telah menyelesaikan Lab Workshop AI. Sekarang Anda seharusnya dapa
 
 ---
 
-**Umpan Balik Workshop**: Bantu kami meningkatkan workshop ini dengan membagikan pengalaman Anda di [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).
+**Feedback Workshop**: Bantu kami meningkatkan workshop ini dengan membagikan pengalaman Anda di [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).
 
 ---
 
@@ -675,11 +674,9 @@ Selamat! Anda telah menyelesaikan Lab Workshop AI. Sekarang Anda seharusnya dapa
 - **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berbasis AI
 - **⬅️ Sebelumnya**: [Deployment Model AI](ai-model-deployment.md)
 - **➡️ Selanjutnya**: [Praktik Terbaik AI Produksi](production-ai-practices.md)
-- **🚀 Bab Selanjutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
+- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 **Butuh Bantuan?** Bergabunglah dengan komunitas kami untuk dukungan dan diskusi tentang AZD dan deployment AI.
 
 ---
 
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

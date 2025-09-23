@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-18T12:43:45+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T13:53:55+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "en"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Workshop Overview
 
-This hands-on lab walks developers through the process of adapting an existing AI application to make it deployable using Azure Developer CLI (AZD). You’ll learn key patterns for deploying AI solutions in production using Azure AI Foundry services.
+This hands-on lab walks developers through the process of taking an existing AI template and deploying it using Azure Developer CLI (AZD). You'll learn key patterns for deploying AI solutions in production using Azure AI Foundry services.
 
 **Duration:** 2-3 hours  
 **Level:** Intermediate  
@@ -44,7 +44,7 @@ By the end of this workshop, you will be able to:
 ### Azure Resources
 - Azure subscription with contributor access
 - Access to Azure OpenAI services (or ability to request access)
-- Permissions to create resource groups
+- Resource group creation permissions
 
 ### Knowledge Prerequisites
 - Basic understanding of Azure services
@@ -74,6 +74,7 @@ git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
+
 ## Module 1: Understanding AZD Structure for AI Applications
 
 ### Anatomy of an AI AZD Template
@@ -95,6 +96,7 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
+
 ### **Lab Exercise 1.1: Explore the Configuration**
 
 1. **Examine the azure.yaml file:**
@@ -103,8 +105,8 @@ cat azure.yaml
 ```
 
 **What to look for:**
-- Definitions of services for AI components
-- Mappings for environment variables
+- Service definitions for AI components
+- Environment variable mappings
 - Host configurations
 
 2. **Review the main.bicep infrastructure:**
@@ -113,17 +115,17 @@ cat infra/main.bicep
 ```
 
 **Key AI patterns to identify:**
-- Provisioning of Azure OpenAI service
-- Integration with Cognitive Search
+- Azure OpenAI service provisioning
+- Cognitive Search integration
 - Secure key management
 - Network security configurations
 
 ### **Discussion Point:** Why These Patterns Matter for AI
 
-- **Service Dependencies**: AI applications often rely on multiple interconnected services.
-- **Security**: API keys and endpoints must be managed securely.
-- **Scalability**: AI workloads have specific scaling needs.
-- **Cost Management**: Proper configuration is essential to control costs.
+- **Service Dependencies**: AI applications often require multiple coordinated services
+- **Security**: API keys and endpoints need secure management
+- **Scalability**: AI workloads have unique scaling requirements
+- **Cost Management**: AI services can become expensive if not properly configured
 
 ## Module 2: Deploy Your First AI Application
 
@@ -143,6 +145,7 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
+
 ### Step 2.2: Deploy the Infrastructure and Application
 
 1. **Deploy with AZD:**
@@ -151,12 +154,12 @@ azd up
 ```
 
 **What happens during `azd up`:**
-- ✅ Azure OpenAI service is provisioned
-- ✅ Cognitive Search service is created
-- ✅ App Service is set up for the web application
-- ✅ Networking and security are configured
-- ✅ Application code is deployed
-- ✅ Monitoring and logging are set up
+- ✅ Provisions Azure OpenAI service
+- ✅ Creates Cognitive Search service
+- ✅ Sets up App Service for the web application
+- ✅ Configures networking and security
+- ✅ Deploys application code
+- ✅ Sets up monitoring and logging
 
 2. **Monitor the deployment progress** and note the resources being created.
 
@@ -175,17 +178,17 @@ azd show --output json | grep "webAppUrl"
 3. **Test the AI functionality:**
    - Navigate to the web application
    - Try sample queries
-   - Verify that AI responses are working
+   - Verify AI responses are working
 
 ### **Lab Exercise 2.1: Troubleshooting Practice**
 
-**Scenario**: Your deployment succeeded, but the AI isn’t responding.
+**Scenario**: Your deployment succeeded but the AI isn't responding.
 
 **Common issues to check:**
-1. **OpenAI API keys**: Ensure they are correctly configured.
-2. **Model availability**: Verify that the model is supported in your region.
-3. **Network connectivity**: Check if services can communicate.
-4. **RBAC permissions**: Confirm the app has access to OpenAI.
+1. **OpenAI API keys**: Verify they're correctly set
+2. **Model availability**: Check if your region supports the model
+3. **Network connectivity**: Ensure services can communicate
+4. **RBAC permissions**: Verify the app can access OpenAI
 
 **Debugging commands:**
 ```bash
@@ -198,6 +201,7 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 # Check OpenAI deployment status
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
+
 
 ## Module 3: Customizing AI Applications for Your Needs
 
@@ -214,7 +218,7 @@ azd deploy
 
 2. **Add additional AI services:**
 
-Edit `infra/main.bicep` to include Document Intelligence:
+Edit `infra/main.bicep` to add Document Intelligence:
 
 ```bicep
 // Add to main.bicep
@@ -231,9 +235,10 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
+
 ### Step 3.2: Environment-Specific Configurations
 
-**Best Practice**: Use different configurations for development and production.
+**Best Practice**: Different configurations for development vs production.
 
 1. **Create a production environment:**
 ```bash
@@ -250,19 +255,20 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
+
 ### **Lab Exercise 3.1: Cost Optimization**
 
 **Challenge**: Configure the template for cost-effective development.
 
 **Tasks:**
-1. Identify which SKUs can be set to free/basic tiers.
-2. Configure environment variables for minimal cost.
-3. Deploy and compare costs with the production configuration.
+1. Identify which SKUs can be set to free/basic tiers
+2. Configure environment variables for minimal cost
+3. Deploy and compare costs with the production configuration
 
 **Solution hints:**
-- Use the F0 (free) tier for Cognitive Services when possible.
-- Use the Basic tier for Search Service in development.
-- Consider using the Consumption plan for Functions.
+- Use F0 (free) tier for Cognitive Services when possible
+- Use Basic tier for Search Service in development
+- Consider using Consumption plan for Functions
 
 ## Module 4: Security and Production Best Practices
 
@@ -283,6 +289,7 @@ grep -r "keyVault\|managedIdentity" infra/
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
+
 
 ### Step 4.2: Network Security
 
@@ -310,6 +317,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
   }
 }
 ```
+
 
 ### Step 4.3: Monitoring and Observability
 
@@ -343,6 +351,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
+
 ### **Lab Exercise 4.1: Security Audit**
 
 **Task**: Review your deployment for security best practices.
@@ -372,7 +381,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Do you need private networking?
 
 3. **Scaling Requirements:**
-   - What’s your expected load?
+   - What's your expected load?
    - Do you need auto-scaling?
    - Are there regional requirements?
 
@@ -456,6 +465,7 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
+
 ### **Lab Exercise 5.1: Template Creation Challenge**
 
 **Challenge**: Create an AZD template for a document processing AI app.
@@ -477,8 +487,8 @@ output name string = openAIAccount.name
 ### Common Deployment Issues
 
 #### Issue 1: OpenAI Service Quota Exceeded
-**Symptoms:** Deployment fails with a quota error  
-**Solutions:**
+**Symptoms:** Deployment fails with quota error  
+**Solutions:**  
 ```bash
 # Check current quotas
 az cognitiveservices usage list --location eastus
@@ -488,9 +498,10 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
+
 #### Issue 2: Model Not Available in Region
 **Symptoms:** AI responses fail or model deployment errors  
-**Solutions:**
+**Solutions:**  
 ```bash
 # Check model availability by region
 az cognitiveservices model list --location eastus
@@ -500,9 +511,10 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
+
 #### Issue 3: Permission Issues
 **Symptoms:** 403 Forbidden errors when calling AI services  
-**Solutions:**
+**Solutions:**  
 ```bash
 # Check role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
@@ -514,33 +526,34 @@ az role assignment create \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
+
 ### Performance Issues
 
 #### Issue 4: Slow AI Responses
 **Investigation steps:**
-1. Check Application Insights for performance metrics.
-2. Review OpenAI service metrics in the Azure portal.
-3. Verify network connectivity and latency.
+1. Check Application Insights for performance metrics
+2. Review OpenAI service metrics in Azure portal
+3. Verify network connectivity and latency
 
 **Solutions:**
-- Implement caching for common queries.
-- Use the appropriate OpenAI model for your use case.
-- Consider read replicas for high-load scenarios.
+- Implement caching for common queries
+- Use appropriate OpenAI model for your use case
+- Consider read replicas for high-load scenarios
 
 ### **Lab Exercise 6.1: Debugging Challenge**
 
 **Scenario**: Your deployment succeeded, but the application returns 500 errors.
 
 **Debugging tasks:**
-1. Check application logs.
-2. Verify service connectivity.
-3. Test authentication.
-4. Review configuration.
+1. Check application logs
+2. Verify service connectivity
+3. Test authentication
+4. Review configuration
 
 **Tools to use:**
-- `azd show` for deployment overview.
-- Azure portal for detailed service logs.
-- Application Insights for application telemetry.
+- `azd show` for deployment overview
+- Azure portal for detailed service logs
+- Application Insights for application telemetry
 
 ## Module 7: Monitoring and Optimization
 
@@ -548,7 +561,7 @@ az role assignment create \
 
 1. **Create custom dashboards:**
 
-Navigate to the Azure portal and create a dashboard with:
+Navigate to Azure portal and create a dashboard with:
 - OpenAI request count and latency
 - Application error rates
 - Resource utilization
@@ -565,6 +578,7 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
+
 ### Step 7.2: Cost Optimization
 
 1. **Analyze current costs:**
@@ -574,31 +588,31 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
 2. **Implement cost controls:**
-- Set up budget alerts.
-- Use autoscaling policies.
-- Implement request caching.
-- Monitor token usage for OpenAI.
+- Set up budget alerts
+- Use autoscaling policies
+- Implement request caching
+- Monitor token usage for OpenAI
 
 ### **Lab Exercise 7.1: Performance Optimization**
 
 **Task**: Optimize your AI application for both performance and cost.
 
 **Metrics to improve:**
-- Reduce average response time by 20%.
-- Reduce monthly costs by 15%.
-- Maintain 99.9% uptime.
+- Reduce average response time by 20%
+- Reduce monthly costs by 15%
+- Maintain 99.9% uptime
 
 **Strategies to try:**
-- Implement response caching.
-- Optimize prompts for token efficiency.
-- Use appropriate compute SKUs.
-- Set up proper autoscaling.
+- Implement response caching
+- Optimize prompts for token efficiency
+- Use appropriate compute SKUs
+- Set up proper autoscaling
 
 ## Final Challenge: End-to-End Implementation
 
 ### Challenge Scenario
 
-You’re tasked with creating a production-ready AI-powered customer service chatbot with these requirements:
+You're tasked with creating a production-ready AI-powered customer service chatbot with these requirements:
 
 **Functional Requirements:**
 - Web interface for customer interactions
@@ -645,41 +659,38 @@ You’re tasked with creating a production-ready AI-powered customer service cha
 
 ### Community Resources
 - [Azure AI Foundry Discord](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)  
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)  
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 Completion Certificate  
+## 🎓 Completion Certificate
+Congratulations! You've completed the AI Workshop Lab. You should now be able to:
 
-Congratulations! You've finished the AI Workshop Lab. You should now be able to:  
+- ✅ Convert existing AI applications into AZD templates
+- ✅ Deploy AI applications ready for production
+- ✅ Apply security best practices to AI workloads
+- ✅ Monitor and enhance the performance of AI applications
+- ✅ Resolve common deployment issues
 
-- ✅ Convert existing AI applications into AZD templates  
-- ✅ Deploy AI applications ready for production  
-- ✅ Apply security best practices to AI workloads  
-- ✅ Monitor and enhance the performance of AI applications  
-- ✅ Resolve common deployment issues  
-
-### Next Steps  
-1. Use these patterns in your own AI projects  
-2. Share templates with the community  
-3. Join the Azure AI Foundry Discord for ongoing support  
-4. Dive into advanced topics like multi-region deployments  
-
----  
-
-**Workshop Feedback**: Help us make this workshop better by sharing your thoughts in the [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).  
-
----  
-
-**Chapter Navigation:**  
-- **📚 Course Home**: [AZD For Beginners](../../README.md)  
-- **📖 Current Chapter**: Chapter 2 - AI-First Development  
-- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)  
-- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)  
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)  
-
-**Need Help?** Join our community to get support and discuss AZD and AI deployments.  
+### Next Steps
+1. Use these patterns in your own AI projects
+2. Share templates with the community
+3. Join the Azure AI Foundry Discord for ongoing support
+4. Dive into advanced topics like multi-region deployments
 
 ---
 
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+**Workshop Feedback**: Help us improve this workshop by sharing your thoughts in the [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).
+
+---
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
+
+**Need Help?** Join our community for support and discussions about AZD and AI deployments.
+
+---
+
