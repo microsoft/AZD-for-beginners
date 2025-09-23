@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-17T14:30:18+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T14:12:18+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "ko"
 }
 -->
-# AI 워크숍 실습: AI 솔루션을 AZD로 배포 가능하게 만들기
+# AI 워크숍 실습: AZD 배포 가능한 AI 솔루션 만들기
 
 **챕터 탐색:**
 - **📚 코스 홈**: [AZD 초보자용](../../README.md)
@@ -18,11 +18,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 워크숍 개요
 
-이 실습은 기존 AI 애플리케이션을 Azure Developer CLI (AZD)를 사용하여 배포 가능하게 만드는 과정을 개발자들에게 안내합니다. Azure AI Foundry 서비스를 활용한 프로덕션 AI 배포를 위한 필수 패턴을 배우게 됩니다.
+이 실습은 기존 AI 템플릿을 사용하여 Azure Developer CLI (AZD)를 통해 배포하는 과정을 개발자들에게 안내합니다. Azure AI Foundry 서비스를 활용하여 프로덕션 AI 배포를 위한 필수 패턴을 배우게 됩니다.
 
 **소요 시간:** 2-3시간  
 **난이도:** 중급  
-**사전 요구사항:** Azure 기본 지식, AI/ML 개념에 대한 이해
+**사전 요구사항:** 기본적인 Azure 지식, AI/ML 개념에 대한 이해
 
 ## 🎓 학습 목표
 
@@ -43,13 +43,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### Azure 리소스
 - 기여자 액세스 권한이 있는 Azure 구독
-- Azure OpenAI 서비스에 대한 액세스 (또는 액세스 요청 가능)
+- Azure OpenAI 서비스 액세스 (또는 액세스 요청 가능)
 - 리소스 그룹 생성 권한
 
 ### 지식 요구사항
 - Azure 서비스에 대한 기본 이해
 - 명령줄 인터페이스에 대한 친숙함
-- AI/ML 기본 개념 (API, 모델, 프롬프트)
+- 기본 AI/ML 개념 (API, 모델, 프롬프트)
 
 ## 실습 설정
 
@@ -74,6 +74,7 @@ git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
+
 ## 모듈 1: AI 애플리케이션을 위한 AZD 구조 이해
 
 ### AI AZD 템플릿의 구성 요소
@@ -95,7 +96,8 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **실습 1.1: 구성 탐색**
+
+### **실습 1.1: 구성 살펴보기**
 
 1. **azure.yaml 파일 검토:**
 ```bash
@@ -120,10 +122,10 @@ cat infra/main.bicep
 
 ### **토론 주제:** 이러한 패턴이 AI에 중요한 이유
 
-- **서비스 종속성**: AI 앱은 여러 서비스의 조율이 필요합니다.
-- **보안**: API 키와 엔드포인트는 안전하게 관리되어야 합니다.
-- **확장성**: AI 워크로드는 고유한 확장 요구사항을 가집니다.
-- **비용 관리**: AI 서비스는 적절히 구성되지 않으면 비용이 많이 들 수 있습니다.
+- **서비스 종속성**: AI 앱은 여러 서비스의 조율이 필요
+- **보안**: API 키와 엔드포인트는 안전하게 관리되어야 함
+- **확장성**: AI 워크로드는 고유한 확장 요구사항을 가짐
+- **비용 관리**: AI 서비스는 적절히 구성되지 않으면 비용이 높아질 수 있음
 
 ## 모듈 2: 첫 번째 AI 애플리케이션 배포
 
@@ -143,9 +145,10 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
+
 ### 2.2단계: 인프라 및 애플리케이션 배포
 
-1. **AZD를 사용하여 배포:**
+1. **AZD로 배포:**
 ```bash
 azd up
 ```
@@ -199,7 +202,8 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## 모듈 3: AI 애플리케이션 맞춤화
+
+## 모듈 3: AI 애플리케이션 사용자 정의
 
 ### 3.1단계: AI 구성 수정
 
@@ -231,9 +235,10 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
+
 ### 3.2단계: 환경별 구성
 
-**모범 사례**: 개발과 프로덕션에 대해 다른 구성을 사용.
+**모범 사례**: 개발과 프로덕션에 대해 다른 구성 사용.
 
 1. **프로덕션 환경 생성:**
 ```bash
@@ -250,6 +255,7 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
+
 ### **실습 3.1: 비용 최적화**
 
 **도전 과제**: 비용 효율적인 개발을 위한 템플릿 구성.
@@ -262,7 +268,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **해결 힌트:**
 - 가능한 경우 Cognitive Services에 F0(무료) 계층 사용
 - 개발에서 Search Service에 기본 계층 사용
-- Functions에 대해 소비 계획 사용 고려
+- Functions에 소비 계획 사용 고려
 
 ## 모듈 4: 보안 및 프로덕션 모범 사례
 
@@ -283,6 +289,7 @@ grep -r "keyVault\|managedIdentity" infra/
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
+
 
 ### 4.2단계: 네트워크 보안
 
@@ -310,6 +317,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
   }
 }
 ```
+
 
 ### 4.3단계: 모니터링 및 관찰 가능성
 
@@ -343,6 +351,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
+
 ### **실습 4.1: 보안 감사**
 
 **작업**: 배포를 보안 모범 사례에 대해 검토.
@@ -354,7 +363,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 - [ ] 네트워크 액세스가 적절히 제한됨
 - [ ] 모니터링 및 로깅 활성화됨
 
-## 모듈 5: 자신의 AI 애플리케이션 변환
+## 모듈 5: 자체 AI 애플리케이션 변환
 
 ### 5.1단계: 평가 워크시트
 
@@ -456,6 +465,7 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
+
 ### **실습 5.1: 템플릿 생성 도전 과제**
 
 **도전 과제**: 문서 처리 AI 앱을 위한 AZD 템플릿 생성.
@@ -488,6 +498,7 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
+
 #### 문제 2: 지역에서 모델 사용 불가
 **증상:** AI 응답 실패 또는 모델 배포 오류
 **해결책:**
@@ -499,6 +510,7 @@ az cognitiveservices model list --location eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
+
 
 #### 문제 3: 권한 문제
 **증상:** AI 서비스 호출 시 403 Forbidden 오류
@@ -513,6 +525,7 @@ az role assignment create \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
+
 
 ### 성능 문제
 
@@ -565,6 +578,7 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
+
 ### 7.2단계: 비용 최적화
 
 1. **현재 비용 분석:**
@@ -598,7 +612,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ### 도전 시나리오
 
-다음 요구사항을 충족하는 프로덕션 준비 AI 기반 고객 서비스 챗봇을 생성하세요:
+다음 요구사항을 가진 프로덕션 준비 AI 기반 고객 서비스 챗봇을 생성하세요:
 
 **기능 요구사항:**
 - 고객 상호작용을 위한 웹 인터페이스
@@ -628,7 +642,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - ✅ **기능성**: 모든 요구사항을 충족하는가?
 - ✅ **보안**: 모범 사례가 구현되었는가?
 - ✅ **확장성**: 부하를 처리할 수 있는가?
-- ✅ **유지관리성**: 코드와 인프라가 잘 조직화되었는가?
+- ✅ **유지관리성**: 코드와 인프라가 잘 조직되어 있는가?
 - ✅ **비용**: 예산 내에서 유지되는가?
 
 ## 추가 자료
@@ -648,8 +662,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 수료증
-
+## 🎓 완료 인증서
 축하합니다! AI 워크숍 실습을 완료하셨습니다. 이제 다음을 수행할 수 있습니다:
 
 - ✅ 기존 AI 애플리케이션을 AZD 템플릿으로 변환
@@ -660,7 +673,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ### 다음 단계
 1. 이러한 패턴을 자신의 AI 프로젝트에 적용하세요
-2. 커뮤니티에 템플릿을 기여하세요
+2. 템플릿을 커뮤니티에 기여하세요
 3. 지속적인 지원을 위해 Azure AI Foundry Discord에 참여하세요
 4. 다중 지역 배포와 같은 고급 주제를 탐구하세요
 
@@ -671,15 +684,13 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ---
 
 **챕터 탐색:**
-- **📚 코스 홈**: [AZD For Beginners](../../README.md)
-- **📖 현재 챕터**: Chapter 2 - AI-First Development
-- **⬅️ 이전**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ 다음**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 다음 챕터**: [Chapter 3: Configuration](../getting-started/configuration.md)
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 2 - AI 우선 개발
+- **⬅️ 이전**: [AI 모델 배포](ai-model-deployment.md)
+- **➡️ 다음**: [프로덕션 AI 모범 사례](production-ai-practices.md)
+- **🚀 다음 챕터**: [챕터 3: 구성](../getting-started/configuration.md)
 
 **도움이 필요하신가요?** AZD 및 AI 배포에 대한 지원과 논의를 위해 커뮤니티에 참여하세요.
 
 ---
 
-**면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

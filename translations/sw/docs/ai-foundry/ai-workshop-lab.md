@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-18T08:54:00+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T14:38:24+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "sw"
 }
 -->
 # AI Workshop Lab: Kufanya Suluhisho Zako za AI Ziweze Kupelekwa kwa AZD
 
-**Ukurasa wa Sura:**
+**Ukurasa wa Sehemu:**
 - **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
 - **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza
 - **⬅️ Iliyopita**: [Upelekaji wa Modeli ya AI](ai-model-deployment.md)
-- **➡️ Inayofuata**: [Mbinu Bora za AI kwa Uzalishaji](production-ai-practices.md)
+- **➡️ Inayofuata**: [Mazoea Bora ya AI ya Uzalishaji](production-ai-practices.md)
 - **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)
 
 ## Muhtasari wa Warsha
 
-Warsha hii ya vitendo inawaongoza watengenezaji kupitia mchakato wa kuchukua programu ya AI iliyopo na kuifanya iweze kupelekwa kwa kutumia Azure Developer CLI (AZD). Utajifunza mifumo muhimu kwa upelekaji wa AI kwa uzalishaji kwa kutumia huduma za Azure AI Foundry.
+Warsha hii ya vitendo inawaongoza watengenezaji kupitia mchakato wa kuchukua kiolezo cha AI kilichopo na kukipeleka kwa kutumia Azure Developer CLI (AZD). Utajifunza mifumo muhimu ya upelekaji wa AI kwa uzalishaji kwa kutumia huduma za Azure AI Foundry.
 
 **Muda:** Saa 2-3  
 **Kiwango:** Kati  
@@ -27,7 +27,7 @@ Warsha hii ya vitendo inawaongoza watengenezaji kupitia mchakato wa kuchukua pro
 ## 🎓 Malengo ya Kujifunza
 
 Mwisho wa warsha hii, utaweza:
-- ✅ Kubadilisha programu ya AI iliyopo ili kutumia templeti za AZD
+- ✅ Kubadilisha programu ya AI iliyopo ili kutumia violezo vya AZD
 - ✅ Kusanikisha huduma za Azure AI Foundry kwa AZD
 - ✅ Kutekeleza usimamizi salama wa hati za huduma za AI
 - ✅ Kuweka programu za AI tayari kwa uzalishaji na ufuatiliaji
@@ -42,13 +42,13 @@ Mwisho wa warsha hii, utaweza:
 - Hariri ya msimbo (VS Code inapendekezwa)
 
 ### Rasilimali za Azure
-- Usajili wa Azure na ufikiaji wa mchango
+- Usajili wa Azure na ufikiaji wa mchangiaji
 - Ufikiaji wa huduma za Azure OpenAI (au uwezo wa kuomba ufikiaji)
 - Ruhusa za kuunda kikundi cha rasilimali
 
 ### Maarifa ya Awali
 - Ufahamu wa msingi wa huduma za Azure
-- Uzoefu wa kutumia interface ya mstari wa amri
+- Uzoefu na kiolesura cha mstari wa amri
 - Dhana za msingi za AI/ML (API, modeli, maelekezo)
 
 ## Usanidi wa Warsha
@@ -76,9 +76,9 @@ cd azure-search-openai-demo
 
 ## Moduli ya 1: Kuelewa Muundo wa AZD kwa Programu za AI
 
-### Muundo wa Templeti ya AZD Tayari kwa AI
+### Muundo wa Kiolezo cha AZD Tayari kwa AI
 
-Chunguza faili muhimu katika templeti ya AZD tayari kwa AI:
+Chunguza faili muhimu katika kiolezo cha AZD kilichotayarishwa kwa AI:
 
 ```
 azure-search-openai-demo/
@@ -97,7 +97,7 @@ azure-search-openai-demo/
 
 ### **Zoezi la Maabara 1.1: Chunguza Usanidi**
 
-1. **Kagua faili ya azure.yaml:**
+1. **Chunguza faili ya azure.yaml:**
 ```bash
 cat azure.yaml
 ```
@@ -113,7 +113,7 @@ cat infra/main.bicep
 ```
 
 **Mifumo muhimu ya AI ya kutambua:**
-- Utoaji wa huduma za Azure OpenAI
+- Utoaji wa huduma ya Azure OpenAI
 - Ushirikiano wa Utafutaji wa Kifahamu
 - Usimamizi salama wa funguo
 - Usanidi wa usalama wa mtandao
@@ -233,7 +233,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Hatua ya 3.2: Usanidi Maalum wa Mazingira
 
-**Mbinu Bora**: Usanidi tofauti kwa maendeleo dhidi ya uzalishaji.
+**Mazoea Bora**: Usanidi tofauti kwa maendeleo dhidi ya uzalishaji.
 
 1. **Unda mazingira ya uzalishaji:**
 ```bash
@@ -252,7 +252,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 ### **Zoezi la Maabara 3.1: Uboreshaji wa Gharama**
 
-**Changamoto**: Sanidi templeti kwa maendeleo ya gharama nafuu.
+**Changamoto**: Sanidi kiolezo kwa maendeleo ya gharama nafuu.
 
 **Majukumu:**
 1. Tambua ni SKUs zipi zinaweza kuwekwa kwa viwango vya bure/msingi
@@ -264,21 +264,21 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 - Tumia kiwango cha Msingi kwa Huduma ya Utafutaji katika maendeleo
 - Fikiria kutumia mpango wa Matumizi kwa Kazi
 
-## Moduli ya 4: Usalama na Mbinu Bora za Uzalishaji
+## Moduli ya 4: Usalama na Mazoea Bora ya Uzalishaji
 
 ### Hatua ya 4.1: Usimamizi Salama wa Hati
 
 **Changamoto ya sasa**: Programu nyingi za AI huweka funguo za API au hutumia hifadhi isiyo salama.
 
-**Suluhisho la AZD**: Utambulisho Ulio Simamiwa + Ushirikiano wa Key Vault.
+**Suluhisho la AZD**: Utambulisho Ulioendeshwa + Ushirikiano wa Key Vault.
 
-1. **Kagua usanidi wa usalama katika templeti yako:**
+1. **Kagua usanidi wa usalama katika kiolezo chako:**
 ```bash
 # Look for Key Vault and Managed Identity configuration
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Thibitisha Utambulisho Ulio Simamiwa unafanya kazi:**
+2. **Thibitisha Utambulisho Ulioendeshwa unafanya kazi:**
 ```bash
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
@@ -286,9 +286,9 @@ az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 
 ### Hatua ya 4.2: Usalama wa Mtandao
 
-1. **Wezesha viunganishi vya kibinafsi** (ikiwa havijasanikishwa tayari):
+1. **Wezesha viunganishi vya kibinafsi** (ikiwa havijasanidiwa tayari):
 
-Ongeza kwenye templeti yako ya bicep:
+Ongeza kwenye kiolezo chako cha bicep:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -345,14 +345,14 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### **Zoezi la Maabara 4.1: Ukaguzi wa Usalama**
 
-**Kazi**: Kagua upelekaji wako kwa mbinu bora za usalama.
+**Kazi**: Kagua upelekaji wako kwa mazoea bora ya usalama.
 
 **Orodha ya ukaguzi:**
 - [ ] Hakuna siri zilizowekwa moja kwa moja kwenye msimbo au usanidi
-- [ ] Utambulisho Ulio Simamiwa umetumika kwa uthibitishaji wa huduma kwa huduma
+- [ ] Utambulisho Ulioendeshwa unatumika kwa uthibitishaji wa huduma kwa huduma
 - [ ] Key Vault huhifadhi usanidi nyeti
 - [ ] Ufikiaji wa mtandao umepunguzwa ipasavyo
-- [ ] Ufuatiliaji na kumbukumbu zimewezeshwa
+- [ ] Ufuatiliaji na kumbukumbu vimewezeshwa
 
 ## Moduli ya 5: Kubadilisha Programu Yako ya AI
 
@@ -367,8 +367,8 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Ni utegemezi gani kati ya huduma?
 
 2. **Mahitaji ya Usalama:**
-   - Je, programu yako inashughulikia data gani nyeti?
-   - Una mahitaji gani ya kufuata?
+   - Ni data gani nyeti programu yako inashughulikia?
+   - Ni mahitaji gani ya kufuata unayo?
    - Je, unahitaji mtandao wa kibinafsi?
 
 3. **Mahitaji ya Kupanuka:**
@@ -376,7 +376,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Je, unahitaji upanuzi wa kiotomatiki?
    - Kuna mahitaji ya kieneo?
 
-### Hatua ya 5.2: Unda Templeti Yako ya AZD
+### Hatua ya 5.2: Unda Kiolezo Chako cha AZD
 
 **Fuata muundo huu kubadilisha programu yako:**
 
@@ -412,9 +412,9 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Unda templeti za miundombinu:**
+3. **Unda violezo vya miundombinu:**
 
-**infra/main.bicep** - Templeti kuu:
+**infra/main.bicep** - Kiolezo kikuu:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -456,9 +456,9 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Zoezi la Maabara 5.1: Changamoto ya Uundaji wa Templeti**
+### **Zoezi la Maabara 5.1: Changamoto ya Uundaji wa Kiolezo**
 
-**Changamoto**: Unda templeti ya AZD kwa programu ya AI ya usindikaji wa nyaraka.
+**Changamoto**: Unda kiolezo cha AZD kwa programu ya AI ya usindikaji wa nyaraka.
 
 **Mahitaji:**
 - Azure OpenAI kwa uchambuzi wa maudhui
@@ -468,7 +468,7 @@ output name string = openAIAccount.name
 - Programu ya wavuti kwa kiolesura cha mtumiaji
 
 **Pointi za ziada:**
-- Ongeza usimamizi sahihi wa makosa
+- Ongeza utunzaji sahihi wa makosa
 - Jumuisha makadirio ya gharama
 - Sanidi dashibodi za ufuatiliaji
 
@@ -488,7 +488,7 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Tatizo 2: Modeli Haipatikani katika Eneo
+#### Tatizo 2: Modeli Haipatikani Katika Eneo
 **Dalili:** Majibu ya AI yanashindwa au makosa ya upelekaji wa modeli
 **Suluhisho:**
 ```bash
@@ -501,7 +501,7 @@ azd deploy
 ```
 
 #### Tatizo 3: Masuala ya Ruhusa
-**Dalili:** Makosa ya 403 Forbidden wakati wa kupiga huduma za AI
+**Dalili:** Makosa ya 403 Forbidden wakati wa kuita huduma za AI
 **Suluhisho:**
 ```bash
 # Check role assignments
@@ -523,7 +523,7 @@ az role assignment create \
 3. Thibitisha muunganisho wa mtandao na ucheleweshaji
 
 **Suluhisho:**
-- Tekeleza akiba kwa maswali ya kawaida
+- Tekeleza uhifadhi wa maswali ya kawaida
 - Tumia modeli sahihi ya OpenAI kwa matumizi yako
 - Fikiria nakala za kusoma kwa hali ya mzigo mkubwa
 
@@ -544,7 +544,7 @@ az role assignment create \
 
 ## Moduli ya 7: Ufuatiliaji na Uboreshaji
 
-### Hatua ya 7.1: Sanidi Ufuatiliaji wa Kina
+### Hatua ya 7.1: Sanidi Ufuatiliaji Kamili
 
 1. **Unda dashibodi maalum:**
 
@@ -576,7 +576,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 2. **Tekeleza udhibiti wa gharama:**
 - Sanidi arifa za bajeti
 - Tumia sera za upanuzi wa kiotomatiki
-- Tekeleza akiba ya maombi
+- Tekeleza uhifadhi wa maombi
 - Fuatilia matumizi ya tokeni kwa OpenAI
 
 ### **Zoezi la Maabara 7.1: Uboreshaji wa Utendaji**
@@ -589,12 +589,12 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - Dumisha uptime ya 99.9%
 
 **Mikakati ya kujaribu:**
-- Tekeleza akiba ya majibu
+- Tekeleza uhifadhi wa majibu
 - Boresha maelekezo kwa ufanisi wa tokeni
 - Tumia SKUs sahihi za kompyuta
 - Sanidi upanuzi wa kiotomatiki ipasavyo
 
-## Changamoto ya Mwisho: Utekelezaji wa Mwisho hadi Mwisho
+## Changamoto ya Mwisho: Utekelezaji wa Mwisho kwa Mwisho
 
 ### Hali ya Changamoto
 
@@ -617,16 +617,16 @@ Umepewa jukumu la kuunda chatbot ya huduma kwa wateja inayotumia AI tayari kwa u
 ### Hatua za Utekelezaji
 
 1. **Buni muundo**
-2. **Unda templeti ya AZD**
+2. **Unda kiolezo cha AZD**
 3. **Tekeleza hatua za usalama**
 4. **Sanidi ufuatiliaji na arifa**
-5. **Unda njia za upelekaji**
+5. **Unda mifumo ya upelekaji**
 6. **Andika nyaraka za suluhisho**
 
 ### Vigezo vya Tathmini
 
 - ✅ **Utendaji**: Je, inakidhi mahitaji yote?
-- ✅ **Usalama**: Je, mbinu bora zimetekelezwa?
+- ✅ **Usalama**: Je, mazoea bora yametekelezwa?
 - ✅ **Uwezo wa Kupanuka**: Je, inaweza kushughulikia mzigo?
 - ✅ **Uwezo wa Kudumisha**: Je, msimbo na miundombinu imepangwa vizuri?
 - ✅ **Gharama**: Je, inabaki ndani ya bajeti?
@@ -638,45 +638,37 @@ Umepewa jukumu la kuunda chatbot ya huduma kwa wateja inayotumia AI tayari kwa u
 - [Nyaraka za Huduma ya Azure OpenAI](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Nyaraka za Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/)
 
-### Templeti za Mfano
+### Violezo vya Mfano
 - [Programu ya Mazungumzo ya Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [Mwongozo wa Haraka wa Programu ya Mazungumzo ya OpenAI](https://github.com/Azure-Samples/openai-chat-app-quickstart)
-- [Mazungum
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)  
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)  
+- [Mwongozo wa Haraka wa Programu ya
+Hongera! Umefanikiwa kukamilisha Maabara ya Warsha ya AI. Sasa unapaswa kuwa na uwezo wa:
 
-## 🎓 Cheti cha Kukamilisha  
+- ✅ Kubadilisha programu za AI zilizopo kuwa templeti za AZD
+- ✅ Kuweka programu za AI tayari kwa uzalishaji
+- ✅ Kutekeleza mbinu bora za usalama kwa mizigo ya kazi ya AI
+- ✅ Kufuatilia na kuboresha utendaji wa programu za AI
+- ✅ Kutatua masuala ya kawaida ya usambazaji
 
-Hongera! Umefanikiwa kukamilisha mafunzo ya AI Workshop Lab. Sasa unapaswa kuwa na uwezo wa:  
-
-- ✅ Kubadilisha programu zilizopo za AI kuwa AZD templates  
-- ✅ Kusambaza programu za AI zilizo tayari kwa uzalishaji  
-- ✅ Kutekeleza mbinu bora za usalama kwa kazi za AI  
-- ✅ Kufuatilia na kuboresha utendaji wa programu za AI  
-- ✅ Kutatua changamoto za kawaida za usambazaji  
-
-### Hatua Zifuatazo  
-1. Tumia mifumo hii kwenye miradi yako ya AI  
-2. Changia templates kwa jamii  
-3. Jiunge na Azure AI Foundry Discord kwa msaada wa mara kwa mara  
-4. Chunguza mada za hali ya juu kama usambazaji wa maeneo mengi  
-
----  
-
-**Maoni ya Mafunzo**: Tusaidie kuboresha mafunzo haya kwa kushiriki uzoefu wako katika [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).  
-
----  
-
-**Urambazaji wa Sura:**  
-- **📚 Mwanzo wa Kozi**: [AZD Kwa Anayeanza](../../README.md)  
-- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza  
-- **⬅️ Iliyopita**: [Usambazaji wa Mfano wa AI](ai-model-deployment.md)  
-- **➡️ Inayofuata**: [Mbinu Bora za AI za Uzalishaji](production-ai-practices.md)  
-- **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)  
-
-**Unahitaji Msaada?** Jiunge na jamii yetu kwa msaada na mijadala kuhusu AZD na usambazaji wa AI.  
+### Hatua Zifuatazo
+1. Tumia mifumo hii kwenye miradi yako ya AI
+2. Changia templeti kwa jamii
+3. Jiunge na Discord ya Azure AI Foundry kwa msaada endelevu
+4. Chunguza mada za hali ya juu kama usambazaji wa maeneo mengi
 
 ---
 
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+**Maoni ya Warsha**: Tusaidie kuboresha warsha hii kwa kushiriki uzoefu wako katika [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).
+
+---
+
+**Ukurasa wa Sehemu:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Kompyuta](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza
+- **⬅️ Iliyopita**: [Usambazaji wa Modeli ya AI](ai-model-deployment.md)
+- **➡️ Inayofuata**: [Mbinu Bora za AI za Uzalishaji](production-ai-practices.md)
+- **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)
+
+**Unahitaji Msaada?** Jiunge na jamii yetu kwa msaada na mijadala kuhusu AZD na usambazaji wa AI.
+
+---
+

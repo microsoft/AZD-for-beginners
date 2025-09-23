@@ -1,28 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-18T06:13:39+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T14:30:41+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "no"
 }
 -->
-# AI Workshop Lab: Gjør AI-løsningene dine AZD-klare
+# AI Workshop Lab: Gjør dine AI-løsninger klare for AZD-distribusjon
 
 **Kapittelnavigasjon:**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
 - **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
-- **⬅️ Forrige**: [AI Modellutplassering](ai-model-deployment.md)
+- **⬅️ Forrige**: [Distribusjon av AI-modeller](ai-model-deployment.md)
 - **➡️ Neste**: [Beste Praksis for Produksjons-AI](production-ai-practices.md)
 - **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
 ## Workshopoversikt
 
-Denne praktiske laben veileder utviklere gjennom prosessen med å ta en eksisterende AI-applikasjon og gjøre den klar for utplassering ved hjelp av Azure Developer CLI (AZD). Du vil lære essensielle mønstre for produksjonsutplassering av AI ved bruk av Azure AI Foundry-tjenester.
+Denne praktiske laben veileder utviklere gjennom prosessen med å ta en eksisterende AI-mal og distribuere den ved hjelp av Azure Developer CLI (AZD). Du vil lære essensielle mønstre for produksjonsklare AI-distribusjoner ved bruk av Azure AI Foundry-tjenester.
 
 **Varighet:** 2-3 timer  
 **Nivå:** Middels  
-**Forutsetninger:** Grunnleggende Azure-kunnskap, kjennskap til AI/ML-konsepter
+**Forutsetninger:** Grunnleggende kunnskap om Azure, kjennskap til AI/ML-konsepter
 
 ## 🎓 Læringsmål
 
@@ -30,8 +30,8 @@ Ved slutten av denne workshoppen vil du kunne:
 - ✅ Konvertere en eksisterende AI-applikasjon til å bruke AZD-maler
 - ✅ Konfigurere Azure AI Foundry-tjenester med AZD
 - ✅ Implementere sikker håndtering av legitimasjon for AI-tjenester
-- ✅ Utplassere produksjonsklare AI-applikasjoner med overvåking
-- ✅ Feilsøke vanlige problemer med AI-utplassering
+- ✅ Distribuere produksjonsklare AI-applikasjoner med overvåking
+- ✅ Feilsøke vanlige problemer med AI-distribusjon
 
 ## Forutsetninger
 
@@ -41,7 +41,7 @@ Ved slutten av denne workshoppen vil du kunne:
 - [Git](https://git-scm.com/) installert
 - Kodeeditor (VS Code anbefales)
 
-### Azure Ressurser
+### Azure-ressurser
 - Azure-abonnement med bidragsytertilgang
 - Tilgang til Azure OpenAI-tjenester (eller mulighet til å be om tilgang)
 - Tillatelse til å opprette ressursgrupper
@@ -49,11 +49,11 @@ Ved slutten av denne workshoppen vil du kunne:
 ### Kunnskapsforutsetninger
 - Grunnleggende forståelse av Azure-tjenester
 - Kjennskap til kommandolinjegrensesnitt
-- Grunnleggende AI/ML-konsepter (API-er, modeller, prompts)
+- Grunnleggende AI/ML-konsepter (API-er, modeller, prompt)
 
 ## Laboppsett
 
-### Steg 1: Forberedelse av Miljø
+### Steg 1: Forberedelse av Miljøet
 
 1. **Bekreft installasjon av verktøy:**
 ```bash
@@ -76,7 +76,7 @@ cd azure-search-openai-demo
 
 ## Modul 1: Forstå AZD-strukturen for AI-applikasjoner
 
-### Anatomien til en AI-klar AZD-mal
+### Oppbygning av en AI-klar AZD-mal
 
 Utforsk nøkkelfilene i en AI-klar AZD-mal:
 
@@ -115,17 +115,17 @@ cat infra/main.bicep
 **Viktige AI-mønstre å identifisere:**
 - Klargjøring av Azure OpenAI-tjeneste
 - Integrasjon med Cognitive Search
-- Sikker håndtering av nøkler
+- Sikker nøkkelhåndtering
 - Nettverkssikkerhetskonfigurasjoner
 
 ### **Diskusjonspunkt:** Hvorfor Disse Mønstrene Er Viktige for AI
 
 - **Tjenesteavhengigheter**: AI-applikasjoner krever ofte flere koordinerte tjenester
 - **Sikkerhet**: API-nøkler og endepunkter må håndteres sikkert
-- **Skalerbarhet**: AI-arbeidsmengder har unike krav til skalering
-- **Kostnadsstyring**: AI-tjenester kan være dyre hvis de ikke er riktig konfigurert
+- **Skalerbarhet**: AI-arbeidsbelastninger har unike skaleringskrav
+- **Kostnadsstyring**: AI-tjenester kan bli dyre hvis de ikke er riktig konfigurert
 
-## Modul 2: Utplassering av Din Første AI-applikasjon
+## Modul 2: Distribuer Din Første AI-applikasjon
 
 ### Steg 2.1: Initialiser Miljøet
 
@@ -143,9 +143,9 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### Steg 2.2: Utplassering av Infrastruktur og Applikasjon
+### Steg 2.2: Distribuer Infrastruktur og Applikasjon
 
-1. **Utplasser med AZD:**
+1. **Distribuer med AZD:**
 ```bash
 azd up
 ```
@@ -155,31 +155,31 @@ azd up
 - ✅ Oppretter Cognitive Search-tjeneste
 - ✅ Setter opp App Service for webapplikasjonen
 - ✅ Konfigurerer nettverk og sikkerhet
-- ✅ Utplasserer applikasjonskode
+- ✅ Distribuerer applikasjonskode
 - ✅ Setter opp overvåking og logging
 
-2. **Overvåk utplasseringsfremdriften** og noter ressursene som opprettes.
+2. **Overvåk distribusjonsfremdriften** og noter ressursene som opprettes.
 
-### Steg 2.3: Verifiser Din Utplassering
+### Steg 2.3: Verifiser Distribusjonen
 
-1. **Sjekk de utplasserte ressursene:**
+1. **Sjekk de distribuerte ressursene:**
 ```bash
 azd show
 ```
 
-2. **Åpne den utplasserte applikasjonen:**
+2. **Åpne den distribuerte applikasjonen:**
 ```bash
 azd show --output json | grep "webAppUrl"
 ```
 
 3. **Test AI-funksjonaliteten:**
    - Naviger til webapplikasjonen
-   - Prøv eksempelforespørsler
+   - Prøv eksempelspørringer
    - Verifiser at AI-responsene fungerer
 
-### **Labøvelse 2.1: Feilsøkingspraksis**
+### **Labøvelse 2.1: Feilsøking**
 
-**Scenario**: Utplasseringen din lyktes, men AI svarer ikke.
+**Scenario**: Distribusjonen lyktes, men AI-en svarer ikke.
 
 **Vanlige problemer å sjekke:**
 1. **OpenAI API-nøkler**: Bekreft at de er riktig satt
@@ -199,7 +199,7 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Modul 3: Tilpasning av AI-applikasjoner til Dine Behov
+## Modul 3: Tilpass AI-applikasjoner til Dine Behov
 
 ### Steg 3.1: Endre AI-konfigurasjonen
 
@@ -233,7 +233,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Steg 3.2: Miljøspesifikke Konfigurasjoner
 
-**Beste Praksis**: Ulike konfigurasjoner for utvikling vs produksjon.
+**Beste Praksis**: Ulike konfigurasjoner for utvikling og produksjon.
 
 1. **Opprett et produksjonsmiljø:**
 ```bash
@@ -257,11 +257,11 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **Oppgaver:**
 1. Identifiser hvilke SKUs som kan settes til gratis/grunnleggende nivåer
 2. Konfigurer miljøvariabler for minimal kostnad
-3. Utplasser og sammenlign kostnader med produksjonskonfigurasjonen
+3. Distribuer og sammenlign kostnader med produksjonskonfigurasjonen
 
 **Løsningshint:**
 - Bruk F0 (gratis) nivå for Cognitive Services når mulig
-- Bruk Basic nivå for Search Service i utvikling
+- Bruk Basic-nivå for Search Service i utvikling
 - Vurder å bruke Consumption-plan for Functions
 
 ## Modul 4: Sikkerhet og Beste Praksis for Produksjon
@@ -311,7 +311,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Steg 4.3: Overvåking og Observabilitet
+### Steg 4.3: Overvåking og Observasjon
 
 1. **Konfigurer Application Insights:**
 ```bash
@@ -345,16 +345,16 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### **Labøvelse 4.1: Sikkerhetsrevisjon**
 
-**Oppgave**: Gå gjennom utplasseringen din for beste praksis innen sikkerhet.
+**Oppgave**: Gjennomgå distribusjonen din for sikkerhetsbestepraksis.
 
 **Sjekkliste:**
 - [ ] Ingen hardkodede hemmeligheter i kode eller konfigurasjon
-- [ ] Managed Identity brukt for tjeneste-til-tjeneste autentisering
+- [ ] Managed Identity brukt for tjeneste-til-tjeneste-autentisering
 - [ ] Key Vault lagrer sensitiv konfigurasjon
 - [ ] Nettverkstilgang er riktig begrenset
 - [ ] Overvåking og logging er aktivert
 
-## Modul 5: Konvertering av Din Egen AI-applikasjon
+## Modul 5: Konverter Din Egen AI-applikasjon
 
 ### Steg 5.1: Vurderingsskjema
 
@@ -362,7 +362,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 1. **Applikasjonsarkitektur:**
    - Hvilke AI-tjenester bruker appen din?
-   - Hvilke databehandlingsressurser trenger den?
+   - Hvilke beregningsressurser trenger den?
    - Trenger den en database?
    - Hva er avhengighetene mellom tjenestene?
 
@@ -372,8 +372,8 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Trenger du privat nettverk?
 
 3. **Skaleringskrav:**
-   - Hva er din forventede belastning?
-   - Trenger du auto-skalering?
+   - Hva er forventet belastning?
+   - Trenger du autoskalering?
    - Er det regionale krav?
 
 ### Steg 5.2: Opprett Din AZD-mal
@@ -412,7 +412,7 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Opprett infrastruktursmaler:**
+3. **Opprett infrastrukturmaler:**
 
 **infra/main.bicep** - Hovedmal:
 ```bicep
@@ -467,17 +467,17 @@ output name string = openAIAccount.name
 - Function App for behandlingslogikk
 - Webapp for brukergrensesnitt
 
-**Bonuspoeng:**
+**Ekstrapoeng:**
 - Legg til riktig feilhåndtering
 - Inkluder kostnadsestimering
 - Sett opp overvåkingsdashbord
 
 ## Modul 6: Feilsøking av Vanlige Problemer
 
-### Vanlige Utplasseringsproblemer
+### Vanlige Distribusjonsproblemer
 
 #### Problem 1: OpenAI-tjenestekvote Overskredet
-**Symptomer:** Utplassering mislykkes med kvotefeil
+**Symptomer:** Distribusjonen feiler med kvotefeil
 **Løsninger:**
 ```bash
 # Check current quotas
@@ -489,7 +489,7 @@ azd up
 ```
 
 #### Problem 2: Modell Ikke Tilgjengelig i Region
-**Symptomer:** AI-responser mislykkes eller modellutplasseringsfeil
+**Symptomer:** AI-responser feiler eller modellens distribusjon feiler
 **Løsninger:**
 ```bash
 # Check model availability by region
@@ -520,25 +520,25 @@ az role assignment create \
 **Undersøkelsestrinn:**
 1. Sjekk Application Insights for ytelsesmetrikker
 2. Gå gjennom OpenAI-tjenestemetrikker i Azure-portalen
-3. Bekreft nettverkstilkobling og forsinkelse
+3. Bekreft nettverkstilkobling og latens
 
 **Løsninger:**
-- Implementer caching for vanlige forespørsler
+- Implementer caching for vanlige spørringer
 - Bruk passende OpenAI-modell for ditt brukstilfelle
-- Vurder lese-replikater for høy belastning
+- Vurder lesereplikater for høy belastning
 
 ### **Labøvelse 6.1: Feilsøkingsutfordring**
 
-**Scenario**: Utplasseringen din lyktes, men applikasjonen returnerer 500-feil.
+**Scenario**: Distribusjonen lyktes, men applikasjonen returnerer 500-feil.
 
 **Feilsøkingsoppgaver:**
 1. Sjekk applikasjonslogger
-2. Bekreft tjenestetilkobling
+2. Verifiser tjenestetilkobling
 3. Test autentisering
 4. Gå gjennom konfigurasjonen
 
 **Verktøy å bruke:**
-- `azd show` for utplasseringsoversikt
+- `azd show` for distribusjonsoversikt
 - Azure-portalen for detaljerte tjenestelogger
 - Application Insights for applikasjonstelemetri
 
@@ -549,7 +549,7 @@ az role assignment create \
 1. **Opprett egendefinerte dashbord:**
 
 Naviger til Azure-portalen og opprett et dashbord med:
-- OpenAI forespørselsantall og forsinkelse
+- OpenAI-forespørselsteller og latens
 - Applikasjonsfeilrater
 - Ressursutnyttelse
 - Kostnadssporing
@@ -575,7 +575,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 2. **Implementer kostnadskontroller:**
 - Sett opp budsjettvarsler
-- Bruk autoskalering
+- Bruk autoskaleringspolicyer
 - Implementer forespørselscaching
 - Overvåk tokenbruk for OpenAI
 
@@ -584,35 +584,35 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 **Oppgave**: Optimaliser AI-applikasjonen din for både ytelse og kostnad.
 
 **Metrikker å forbedre:**
-- Reduser gjennomsnittlig responstid med 20%
-- Reduser månedlige kostnader med 15%
-- Oppretthold 99.9% oppetid
+- Reduser gjennomsnittlig responstid med 20 %
+- Reduser månedlige kostnader med 15 %
+- Oppretthold 99,9 % oppetid
 
 **Strategier å prøve:**
-- Implementer responscaching
-- Optimaliser prompts for tokeneffektivitet
-- Bruk passende databehandlings-SKUs
+- Implementer respons-caching
+- Optimaliser prompts for token-effektivitet
+- Bruk passende beregnings-SKUs
 - Sett opp riktig autoskalering
 
-## Endelig Utfordring: Implementering fra Start til Slutt
+## Endelig Utfordring: Implementering fra Ende til Ende
 
 ### Utfordringsscenario
 
 Du har fått i oppdrag å lage en produksjonsklar AI-drevet kundeservice-chatbot med følgende krav:
 
 **Funksjonelle Krav:**
-- Webgrensesnitt for kundesamtaler
+- Webgrensesnitt for kundesamhandlinger
 - Integrasjon med Azure OpenAI for svar
-- Dokumentssøkfunksjonalitet ved bruk av Cognitive Search
+- Dokumentsøkfunksjon ved bruk av Cognitive Search
 - Integrasjon med eksisterende kundedatabase
 - Støtte for flere språk
 
 **Ikke-funksjonelle Krav:**
 - Håndtere 1000 samtidige brukere
-- 99.9% oppetid SLA
+- 99,9 % oppetid SLA
 - SOC 2-samsvar
 - Kostnad under $500/måned
-- Utplassering til flere miljøer (utvikling, staging, produksjon)
+- Distribuer til flere miljøer (utvikling, staging, produksjon)
 
 ### Implementeringstrinn
 
@@ -620,7 +620,7 @@ Du har fått i oppdrag å lage en produksjonsklar AI-drevet kundeservice-chatbot
 2. **Opprett AZD-malen**
 3. **Implementer sikkerhetstiltak**
 4. **Sett opp overvåking og varsling**
-5. **Opprett utplasseringspipelines**
+5. **Opprett distribusjonspipelines**
 6. **Dokumenter løsningen**
 
 ### Evalueringskriterier
@@ -649,7 +649,6 @@ Du har fått i oppdrag å lage en produksjonsklar AI-drevet kundeservice-chatbot
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Fullføringssertifikat
-
 Gratulerer! Du har fullført AI Workshop Lab. Du bør nå kunne:
 
 - ✅ Konvertere eksisterende AI-applikasjoner til AZD-maler
@@ -662,7 +661,7 @@ Gratulerer! Du har fullført AI Workshop Lab. Du bør nå kunne:
 1. Bruk disse mønstrene i dine egne AI-prosjekter
 2. Bidra med maler tilbake til fellesskapet
 3. Bli med på Azure AI Foundry Discord for kontinuerlig støtte
-4. Utforsk avanserte emner som distribusjon på tvers av regioner
+4. Utforsk avanserte emner som distribusjoner på tvers av regioner
 
 ---
 
@@ -681,5 +680,3 @@ Gratulerer! Du har fullført AI Workshop Lab. Du bør nå kunne:
 
 ---
 
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

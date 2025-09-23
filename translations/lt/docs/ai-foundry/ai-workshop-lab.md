@@ -1,36 +1,36 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-18T14:03:30+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T14:53:21+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "lt"
 }
 -->
-# AI Workshop Lab: Kaip padaryti savo AI sprendimus AZD diegiamus
+# AI Workshop Lab: AI sprendimų paruošimas AZD diegimui
 
 **Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 2 skyrius - AI-pirmasis vystymas
+- **📖 Dabartinis skyrius**: 2 skyrius - AI pirmasis vystymas
 - **⬅️ Ankstesnis**: [AI modelio diegimas](ai-model-deployment.md)
 - **➡️ Kitas**: [Geriausios AI praktikos gamyboje](production-ai-practices.md)
 - **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../getting-started/configuration.md)
 
 ## Dirbtuvių apžvalga
 
-Šios praktinės dirbtuvės padės programuotojams perimti esamą AI programą ir padaryti ją diegiamą naudojant Azure Developer CLI (AZD). Sužinosite pagrindinius modelius, skirtus AI diegimui gamyboje, naudojant Azure AI Foundry paslaugas.
+Šios praktinės dirbtuvės padės programuotojams perimti esamą AI šabloną ir jį diegti naudojant Azure Developer CLI (AZD). Sužinosite pagrindinius modelius, kaip diegti AI sprendimus gamybos aplinkoje naudojant Azure AI Foundry paslaugas.
 
 **Trukmė:** 2-3 valandos  
 **Lygis:** Vidutinis  
-**Reikalavimai:** Pagrindinės Azure žinios, susipažinimas su AI/ML koncepcijomis
+**Reikalavimai:** Pagrindinės Azure žinios, AI/ML koncepcijų supratimas
 
 ## 🎓 Mokymosi tikslai
 
 Baigę šias dirbtuves, galėsite:
-- ✅ Konvertuoti esamą AI programą, kad ji naudotų AZD šablonus
-- ✅ Konfigūruoti Azure AI Foundry paslaugas su AZD
+- ✅ Konvertuoti esamą AI programą į AZD šabloną
+- ✅ Konfigūruoti Azure AI Foundry paslaugas naudojant AZD
 - ✅ Įgyvendinti saugų kredencialų valdymą AI paslaugoms
-- ✅ Diegti gamybai paruoštas AI programas su stebėjimu
+- ✅ Diegti gamybai paruoštas AI programas su stebėsena
 - ✅ Spręsti dažniausiai pasitaikančias AI diegimo problemas
 
 ## Reikalavimai
@@ -39,12 +39,12 @@ Baigę šias dirbtuves, galėsite:
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) įdiegtas
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) įdiegtas
 - [Git](https://git-scm.com/) įdiegtas
-- Kodo redaktorius (rekomenduojama VS Code)
+- Kodo redaktorius (rekomenduojamas VS Code)
 
 ### Azure resursai
-- Azure prenumerata su prisidėjimo teisėmis
+- Azure prenumerata su prisijungimo teisėmis
 - Prieiga prie Azure OpenAI paslaugų (arba galimybė prašyti prieigos)
-- Leidimai kurti resursų grupes
+- Leidimas kurti resursų grupes
 
 ### Žinių reikalavimai
 - Pagrindinis Azure paslaugų supratimas
@@ -74,11 +74,12 @@ git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
+
 ## Modulis 1: AZD struktūros supratimas AI programoms
 
-### AI AZD šablono anatomija
+### AI paruošto AZD šablono anatomija
 
-Išnagrinėkite pagrindinius failus AI paruoštame AZD šablone:
+Susipažinkite su pagrindiniais failais AI paruoštame AZD šablone:
 
 ```
 azure-search-openai-demo/
@@ -94,6 +95,7 @@ azure-search-openai-demo/
 ├── scripts/               # Deployment scripts
 └── .azure/               # AZD environment files
 ```
+
 
 ### **Praktinė užduotis 1.1: Konfigūracijos tyrimas**
 
@@ -120,10 +122,10 @@ cat infra/main.bicep
 
 ### **Diskusijos tema:** Kodėl šie modeliai svarbūs AI
 
-- **Paslaugų priklausomybės**: AI programoms dažnai reikia koordinuotų paslaugų
+- **Paslaugų priklausomybės**: AI programos dažnai reikalauja koordinuotų paslaugų
 - **Saugumas**: API raktai ir galiniai taškai turi būti saugiai valdomi
 - **Mastelio keitimas**: AI darbo krūviai turi unikalius mastelio keitimo reikalavimus
-- **Kaštų valdymas**: AI paslaugos gali būti brangios, jei netinkamai sukonfigūruotos
+- **Kaštų valdymas**: AI paslaugos gali būti brangios, jei nėra tinkamai konfigūruotos
 
 ## Modulis 2: Pirmojo AI programos diegimas
 
@@ -134,7 +136,7 @@ cat infra/main.bicep
 azd env new myai-workshop
 ```
 
-2. **Nustatykite reikiamus parametrus:**
+2. **Nustatykite reikalingus parametrus:**
 ```bash
 # Set your preferred Azure region
 azd env set AZURE_LOCATION eastus
@@ -143,6 +145,7 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
+
 ### 2.2 žingsnis: Infrastruktūros ir programos diegimas
 
 1. **Diegimas su AZD:**
@@ -150,13 +153,13 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 azd up
 ```
 
-**Kas vyksta per `azd up`:**
+**Kas vyksta vykdant `azd up`:**
 - ✅ Sukuriama Azure OpenAI paslauga
 - ✅ Sukuriama Cognitive Search paslauga
 - ✅ Sukuriama App Service žiniatinklio programai
 - ✅ Konfigūruojamas tinklas ir saugumas
 - ✅ Diegiamas programos kodas
-- ✅ Sukuriamas stebėjimas ir žurnalai
+- ✅ Sukuriama stebėsena ir žurnalai
 
 2. **Stebėkite diegimo eigą** ir atkreipkite dėmesį į kuriamus resursus.
 
@@ -173,7 +176,7 @@ azd show --output json | grep "webAppUrl"
 ```
 
 3. **Išbandykite AI funkcionalumą:**
-   - Naršykite į žiniatinklio programą
+   - Naršykite žiniatinklio programą
    - Išbandykite pavyzdines užklausas
    - Patikrinkite, ar AI atsakymai veikia
 
@@ -199,7 +202,8 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Modulis 3: AI programų pritaikymas jūsų poreikiams
+
+## Modulis 3: AI programų pritaikymas pagal poreikius
 
 ### 3.1 žingsnis: AI konfigūracijos keitimas
 
@@ -231,6 +235,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
+
 ### 3.2 žingsnis: Konfigūracijos pagal aplinką
 
 **Geriausia praktika**: Skirtingos konfigūracijos vystymui ir gamybai.
@@ -250,9 +255,10 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
+
 ### **Praktinė užduotis 3.1: Kaštų optimizavimas**
 
-**Iššūkis**: Suplanuokite šabloną ekonomiškam vystymui.
+**Iššūkis**: Konfigūruokite šabloną ekonomiškam vystymui.
 
 **Užduotys:**
 1. Nustatykite, kurie SKUs gali būti nustatyti į nemokamą/pagrindinį lygį
@@ -261,14 +267,14 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 **Sprendimo užuominos:**
 - Naudokite F0 (nemokamą) lygį Cognitive Services, kai įmanoma
-- Naudokite Basic lygį Search Service vystymui
+- Naudokite Basic lygį Search Service vystymo metu
 - Apsvarstykite Consumption planą Functions
 
 ## Modulis 4: Saugumas ir geriausios praktikos gamybai
 
 ### 4.1 žingsnis: Saugus kredencialų valdymas
 
-**Dabartinis iššūkis**: Daugelis AI programų naudoja kietai koduotus API raktus arba nesaugų saugojimą.
+**Dabartinis iššūkis**: Daugelis AI programų naudoja kietai užkoduotus API raktus arba nesaugų saugojimą.
 
 **AZD sprendimas**: Managed Identity + Key Vault integracija.
 
@@ -283,6 +289,7 @@ grep -r "keyVault\|managedIdentity" infra/
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
+
 
 ### 4.2 žingsnis: Tinklo saugumas
 
@@ -311,7 +318,8 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### 4.3 žingsnis: Stebėjimas ir stebimumas
+
+### 4.3 žingsnis: Stebėsena ir stebimumas
 
 1. **Konfigūruokite Application Insights:**
 ```bash
@@ -320,7 +328,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Nustatykite AI-specifinį stebėjimą:**
+2. **Nustatykite AI specifinę stebėseną:**
 
 Pridėkite pasirinktinius metrikos AI operacijoms:
 ```bicep
@@ -343,18 +351,19 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
+
 ### **Praktinė užduotis 4.1: Saugumo auditas**
 
-**Užduotis**: Peržiūrėkite savo diegimą dėl saugumo geriausių praktikų.
+**Užduotis**: Peržiūrėkite savo diegimą pagal saugumo geriausias praktikas.
 
 **Kontrolinis sąrašas:**
-- [ ] Nėra kietai koduotų paslapčių kode ar konfigūracijoje
-- [ ] Naudojama Managed Identity paslaugų autentifikacijai
+- [ ] Nėra kietai užkoduotų paslapčių kode ar konfigūracijoje
+- [ ] Managed Identity naudojamas paslaugų autentifikacijai
 - [ ] Key Vault saugo jautrią konfigūraciją
 - [ ] Tinklo prieiga tinkamai apribota
-- [ ] Stebėjimas ir žurnalai įgalinti
+- [ ] Stebėsena ir žurnalai įgalinti
 
-## Modulis 5: Savo AI programos konvertavimas
+## Modulis 5: Jūsų AI programos konvertavimas
 
 ### 5.1 žingsnis: Vertinimo lapas
 
@@ -456,6 +465,7 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
+
 ### **Praktinė užduotis 5.1: Šablono kūrimo iššūkis**
 
 **Iššūkis**: Sukurkite AZD šabloną dokumentų apdorojimo AI programai.
@@ -472,9 +482,9 @@ output name string = openAIAccount.name
 - Įtraukite kaštų įvertinimą
 - Nustatykite stebėjimo skydelius
 
-## Modulis 6: Dažniausiai pasitaikančių problemų sprendimas
+## Modulis 6: Dažniausios problemos ir jų sprendimas
 
-### Dažnos diegimo problemos
+### Dažniausios diegimo problemos
 
 #### Problema 1: OpenAI paslaugos kvotos viršijimas
 **Simptomai:** Diegimas nepavyksta su kvotos klaida
@@ -488,6 +498,7 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
+
 #### Problema 2: Modelis neprieinamas regione
 **Simptomai:** AI atsakymai nepavyksta arba modelio diegimo klaidos
 **Sprendimai:**
@@ -500,8 +511,9 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
+
 #### Problema 3: Leidimų problemos
-**Simptomai:** 403 Forbidden klaidos, kai skambinama AI paslaugoms
+**Simptomai:** 403 Forbidden klaidos, kai kviečiamos AI paslaugos
 **Sprendimai:**
 ```bash
 # Check role assignments
@@ -514,17 +526,18 @@ az role assignment create \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
+
 ### Našumo problemos
 
 #### Problema 4: Lėti AI atsakymai
 **Tyrimo žingsniai:**
 1. Patikrinkite Application Insights našumo metrikas
-2. Peržiūrėkite OpenAI paslaugos metrikas Azure portale
+2. Peržiūrėkite OpenAI paslaugų metrikas Azure portale
 3. Patikrinkite tinklo ryšį ir vėlavimą
 
 **Sprendimai:**
 - Įgyvendinkite talpyklą dažnoms užklausoms
-- Naudokite tinkamą OpenAI modelį jūsų naudojimo atvejui
+- Naudokite tinkamą OpenAI modelį pagal jūsų poreikius
 - Apsvarstykite skaitymo replikas didelės apkrovos scenarijams
 
 ### **Praktinė užduotis 6.1: Trikčių šalinimo iššūkis**
@@ -537,18 +550,18 @@ az role assignment create \
 3. Išbandykite autentifikaciją
 4. Peržiūrėkite konfigūraciją
 
-**Naudotini įrankiai:**
+**Įrankiai, kuriuos naudoti:**
 - `azd show` diegimo apžvalgai
 - Azure portalas detaliems paslaugų žurnalams
 - Application Insights programos telemetrijai
 
-## Modulis 7: Stebėjimas ir optimizavimas
+## Modulis 7: Stebėsena ir optimizavimas
 
-### 7.1 žingsnis: Išsamus stebėjimo nustatymas
+### 7.1 žingsnis: Išsamios stebėsenos nustatymas
 
 1. **Sukurkite pasirinktinius skydelius:**
 
-Naršykite į Azure portalą ir sukurkite skydelį su:
+Naršykite Azure portalą ir sukurkite skydelį su:
 - OpenAI užklausų skaičiumi ir vėlavimu
 - Programos klaidų rodikliais
 - Resursų naudojimu
@@ -564,6 +577,7 @@ az monitor metrics alert create \
   --condition "avg Http5xx greater than 10" \
   --description "Alert when error rate is high"
 ```
+
 
 ### 7.2 žingsnis: Kaštų optimizavimas
 
@@ -588,11 +602,11 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - Sumažinkite mėnesinius kaštus 15%
 - Išlaikykite 99.9% veikimo laiką
 
-**Strategijos, kurias verta išbandyti:**
+**Strategijos, kurias išbandyti:**
 - Įgyvendinkite atsakymų talpyklą
 - Optimizuokite užklausas žetonų efektyvumui
 - Naudokite tinkamus skaičiavimo SKUs
-- Nustatykite tinkamą automatinio mastelio keitimą
+- Nustatykite tinkamą automatinį mastelio keitimą
 
 ## Galutinis iššūkis: Pilnas įgyvendinimas
 
@@ -605,53 +619,46 @@ Jums pavesta sukurti gamybai paruoštą AI pagrįstą klientų aptarnavimo pokal
 - Integracija su Azure OpenAI atsakymams
 - Dokumentų paieškos galimybė naudojant Cognitive Search
 - Integracija su esama klientų duomenų baze
-- Daugiakalbė parama
+- Daugiakalbė palaikymas
 
 **Nefunkciniai reikalavimai:**
-- Aptarnauti 1000 vienu metu prisijungusių vartotojų
+- Aptarnauti 1000 vartotojų vienu metu
 - 99.9% veikimo SLA
 - SOC 2 atitiktis
-- Kaštai mažesni nei $500/mėn
+- Kaštai iki $500/mėn
 - Diegimas į kelias aplinkas (vystymas, testavimas, gamyba)
 
 ### Įgyvendinimo žingsniai
 
-1. **Sukurkite architektūr
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
-
-## 🎓 Baigimo Sertifikatas
-
+1. **Sukurkite architektūrą
 Sveikiname! Jūs baigėte AI dirbtuvių laboratoriją. Dabar turėtumėte gebėti:
 
-- ✅ Konvertuoti esamas AI aplikacijas į AZD šablonus
-- ✅ Diegti gamybai paruoštas AI aplikacijas
+- ✅ Konvertuoti esamas AI programas į AZD šablonus
+- ✅ Diegti AI programas, paruoštas gamybai
 - ✅ Įgyvendinti saugumo geriausias praktikas AI darbo krūviams
-- ✅ Stebėti ir optimizuoti AI aplikacijų našumą
+- ✅ Stebėti ir optimizuoti AI programų našumą
 - ✅ Spręsti dažniausiai pasitaikančias diegimo problemas
 
-### Kiti Žingsniai
+### Kiti žingsniai
 1. Taikykite šiuos modelius savo AI projektuose
 2. Prisidėkite prie šablonų kūrimo bendruomenei
 3. Prisijunkite prie Azure AI Foundry Discord, kad gautumėte nuolatinę pagalbą
-4. Tyrinėkite pažangias temas, tokias kaip daugelio regionų diegimai
+4. Tyrinėkite pažangias temas, tokias kaip diegimas keliuose regionuose
 
 ---
 
-**Dirbtuvių Atsiliepimai**: Padėkite mums tobulinti šias dirbtuves, pasidalindami savo patirtimi [Azure AI Foundry Discord #Azure kanale](https://discord.gg/microsoft-azure).
+**Dirbtuvių atsiliepimai**: Padėkite mums tobulinti šias dirbtuves, pasidalindami savo patirtimi [Azure AI Foundry Discord #Azure kanale](https://discord.gg/microsoft-azure).
 
 ---
 
-**Skyriaus Navigacija:**
-- **📚 Kurso Pradžia**: [AZD Pradedantiesiems](../../README.md)
-- **📖 Dabartinis Skyrius**: 2 skyrius - AI-Pirmasis Vystymas
-- **⬅️ Ankstesnis**: [AI Modelio Diegimas](ai-model-deployment.md)
-- **➡️ Kitas**: [Geriausios Praktikos Gamybos AI](production-ai-practices.md)
-- **🚀 Kitas Skyrius**: [3 skyrius: Konfigūracija](../getting-started/configuration.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 2 skyrius - AI-pirmasis vystymas
+- **⬅️ Ankstesnis**: [AI modelio diegimas](ai-model-deployment.md)
+- **➡️ Kitas**: [Geriausios praktikos AI gamybai](production-ai-practices.md)
+- **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../getting-started/configuration.md)
 
-**Reikia Pagalbos?** Prisijunkite prie mūsų bendruomenės, kad gautumėte pagalbą ir diskusijas apie AZD ir AI diegimus.
+**Reikia pagalbos?** Prisijunkite prie mūsų bendruomenės, kad gautumėte pagalbą ir diskusijas apie AZD ir AI diegimus.
 
 ---
 
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

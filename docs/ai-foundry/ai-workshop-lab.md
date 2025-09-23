@@ -9,7 +9,7 @@
 
 ## Workshop Overview
 
-This hands-on lab guides developers through the process of taking an existing AI application and making it deployable using Azure Developer CLI (AZD). You'll learn essential patterns for production AI deployments using Azure AI Foundry services.
+This hands-on lab guides developers through the process of taking an existing AI template and deploying it using Azure Developer CLI (AZD). You'll learn essential patterns for production AI deployments using Azure AI Foundry services.
 
 **Duration:** 2-3 hours  
 **Level:** Intermediate  

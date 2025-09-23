@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ed84aca3294b926341ef9e0a5a78059e",
-  "translation_date": "2025-09-17T21:53:04+00:00",
+  "original_hash": "22e9deee2d82e70fc841c60f97627916",
+  "translation_date": "2025-09-23T14:24:18+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "tr"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Atölye Genel Bakış
 
-Bu uygulamalı laboratuvar, geliştiricilere mevcut bir AI uygulamasını alıp Azure Developer CLI (AZD) kullanarak dağıtılabilir hale getirme sürecini öğretir. Azure AI Foundry hizmetlerini kullanarak üretim AI dağıtımları için temel kalıpları öğreneceksiniz.
+Bu uygulamalı laboratuvar, geliştiricilere mevcut bir AI şablonunu alıp Azure Developer CLI (AZD) kullanarak nasıl dağıtacaklarını öğretir. Azure AI Foundry hizmetlerini kullanarak üretim AI dağıtımları için temel kalıpları öğreneceksiniz.
 
 **Süre:** 2-3 saat  
 **Seviye:** Orta  
@@ -26,12 +26,12 @@ Bu uygulamalı laboratuvar, geliştiricilere mevcut bir AI uygulamasını alıp 
 
 ## 🎓 Öğrenme Hedefleri
 
-Bu atölyenin sonunda şunları yapabileceksiniz:
-- ✅ Mevcut bir AI uygulamasını AZD şablonlarını kullanacak şekilde dönüştürmek
+Bu atölyeyi tamamladığınızda şunları yapabileceksiniz:
+- ✅ Mevcut bir AI uygulamasını AZD şablonlarına dönüştürmek
 - ✅ Azure AI Foundry hizmetlerini AZD ile yapılandırmak
-- ✅ AI hizmetleri için güvenli kimlik bilgisi yönetimini uygulamak
+- ✅ AI hizmetleri için güvenli kimlik bilgisi yönetimi uygulamak
 - ✅ İzleme ile üretime hazır AI uygulamaları dağıtmak
-- ✅ Yaygın AI dağıtım sorunlarını gidermek
+- ✅ Yaygın AI dağıtım sorunlarını çözmek
 
 ## Ön Koşullar
 
@@ -78,7 +78,7 @@ cd azure-search-openai-demo
 
 ### AI Hazır AZD Şablonunun Anatomisi
 
-AI hazır bir AZD şablonundaki temel dosyaları keşfedin:
+AI için hazır bir AZD şablonundaki temel dosyaları keşfedin:
 
 ```
 azure-search-openai-demo/
@@ -105,7 +105,7 @@ cat azure.yaml
 **Dikkat edilmesi gerekenler:**
 - AI bileşenleri için hizmet tanımları
 - Ortam değişkeni eşlemeleri
-- Ana bilgisayar konfigürasyonları
+- Ana bilgisayar yapılandırmaları
 
 2. **main.bicep altyapısını gözden geçirin:**
 ```bash
@@ -116,16 +116,16 @@ cat infra/main.bicep
 - Azure OpenAI hizmeti sağlama
 - Cognitive Search entegrasyonu
 - Güvenli anahtar yönetimi
-- Ağ güvenliği konfigürasyonları
+- Ağ güvenliği yapılandırmaları
 
-### **Tartışma Noktası:** Bu Kalıplar AI için Neden Önemli
+### **Tartışma Noktası:** Bu Kalıplar AI için Neden Önemlidir?
 
 - **Hizmet Bağımlılıkları**: AI uygulamaları genellikle birden fazla koordineli hizmet gerektirir
 - **Güvenlik**: API anahtarları ve uç noktalar güvenli bir şekilde yönetilmelidir
 - **Ölçeklenebilirlik**: AI iş yüklerinin benzersiz ölçeklenme gereksinimleri vardır
-- **Maliyet Yönetimi**: AI hizmetleri doğru yapılandırılmazsa pahalı olabilir
+- **Maliyet Yönetimi**: AI hizmetleri uygun şekilde yapılandırılmazsa pahalı olabilir
 
-## Modül 2: İlk AI Uygulamanızı Dağıtma
+## Modül 2: İlk AI Uygulamanızı Dağıtın
 
 ### Adım 2.1: Ortamı Başlatma
 
@@ -150,7 +150,7 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 azd up
 ```
 
-**`azd up` sırasında ne olur:**
+**`azd up` sırasında olanlar:**
 - ✅ Azure OpenAI hizmetini sağlar
 - ✅ Cognitive Search hizmetini oluşturur
 - ✅ Web uygulaması için App Service ayarlar
@@ -158,9 +158,9 @@ azd up
 - ✅ Uygulama kodunu dağıtır
 - ✅ İzleme ve günlük kaydını ayarlar
 
-2. **Dağıtım ilerlemesini izleyin** ve oluşturulan kaynakları not alın.
+2. **Dağıtım ilerlemesini izleyin** ve oluşturulan kaynakları not edin.
 
-### Adım 2.3: Dağıtımınızı Doğrulama
+### Adım 2.3: Dağıtımınızı Doğrulayın
 
 1. **Dağıtılan kaynakları kontrol edin:**
 ```bash
@@ -182,7 +182,7 @@ azd show --output json | grep "webAppUrl"
 **Senaryo**: Dağıtım başarılı oldu ancak AI yanıt vermiyor.
 
 **Kontrol edilmesi gereken yaygın sorunlar:**
-1. **OpenAI API anahtarları**: Doğru ayarlandıklarını doğrulayın
+1. **OpenAI API anahtarları**: Doğru ayarlandıklarından emin olun
 2. **Model kullanılabilirliği**: Bölgenizin modeli destekleyip desteklemediğini kontrol edin
 3. **Ağ bağlantısı**: Hizmetlerin iletişim kurabildiğinden emin olun
 4. **RBAC izinleri**: Uygulamanın OpenAI'ye erişebildiğini doğrulayın
@@ -214,7 +214,7 @@ azd deploy
 
 2. **Ek AI hizmetleri ekleyin:**
 
-`infra/main.bicep` dosyasını düzenleyerek Document Intelligence ekleyin:
+Document Intelligence eklemek için `infra/main.bicep` dosyasını düzenleyin:
 
 ```bicep
 // Add to main.bicep
@@ -231,11 +231,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Adım 3.2: Ortama Özgü Konfigürasyonlar
+### Adım 3.2: Ortama Özgü Yapılandırmalar
 
-**En İyi Uygulama**: Geliştirme ve üretim için farklı konfigürasyonlar.
+**En İyi Uygulama**: Geliştirme ve üretim için farklı yapılandırmalar kullanın.
 
-1. **Bir üretim ortamı oluşturun:**
+1. **Üretim ortamı oluşturun:**
 ```bash
 azd env new myai-production
 ```
@@ -257,22 +257,22 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **Görevler:**
 1. Hangi SKU'ların ücretsiz/temel seviyelere ayarlanabileceğini belirleyin
 2. Minimum maliyet için ortam değişkenlerini yapılandırın
-3. Dağıtın ve üretim konfigürasyonu ile maliyetleri karşılaştırın
+3. Dağıtımı gerçekleştirin ve üretim yapılandırmasıyla maliyetleri karşılaştırın
 
 **Çözüm ipuçları:**
-- Mümkün olduğunda Cognitive Services için F0 (ücretsiz) seviyesini kullanın
+- Mümkünse Cognitive Services için F0 (ücretsiz) seviyesini kullanın
 - Geliştirmede Search Service için Temel seviyeyi kullanın
 - Functions için Tüketim planını düşünün
 
 ## Modül 4: Güvenlik ve Üretim En İyi Uygulamaları
 
-### Adım 4.1: Kimlik Bilgisi Yönetimini Güvenceye Alma
+### Adım 4.1: Güvenli Kimlik Bilgisi Yönetimi
 
 **Mevcut zorluk**: Birçok AI uygulaması API anahtarlarını kodda sabitler veya güvensiz depolama kullanır.
 
 **AZD Çözümü**: Yönetilen Kimlik + Key Vault entegrasyonu.
 
-1. **Şablonunuzdaki güvenlik konfigürasyonunu gözden geçirin:**
+1. **Şablonunuzdaki güvenlik yapılandırmasını gözden geçirin:**
 ```bash
 # Look for Key Vault and Managed Identity configuration
 grep -r "keyVault\|managedIdentity" infra/
@@ -320,7 +320,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **AI'ye özgü izleme ayarları yapın:**
+2. **AI'ye özgü izleme ayarlarını yapın:**
 
 AI işlemleri için özel metrikler ekleyin:
 ```bicep
@@ -348,11 +348,11 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 **Görev**: Dağıtımınızı güvenlik en iyi uygulamaları açısından gözden geçirin.
 
 **Kontrol Listesi:**
-- [ ] Kodda veya konfigürasyonda sabitlenmiş sırlar yok
+- [ ] Kodda veya yapılandırmada sabitlenmiş sırlar yok
 - [ ] Hizmetler arası kimlik doğrulama için Yönetilen Kimlik kullanılıyor
-- [ ] Hassas konfigürasyon Key Vault'ta saklanıyor
-- [ ] Ağ erişimi düzgün bir şekilde kısıtlanmış
-- [ ] İzleme ve günlük kaydı etkin
+- [ ] Hassas yapılandırma Key Vault'ta saklanıyor
+- [ ] Ağ erişimi düzgün şekilde kısıtlanmış
+- [ ] İzleme ve günlük kaydı etkinleştirilmiş
 
 ## Modül 5: Kendi AI Uygulamanızı Dönüştürme
 
@@ -369,9 +369,9 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 2. **Güvenlik Gereksinimleri:**
    - Uygulamanız hangi hassas verileri işliyor?
    - Hangi uyumluluk gereksinimleriniz var?
-   - Özel ağ bağlantısına ihtiyaç duyuyor musunuz?
+   - Özel ağ bağlantısına ihtiyacınız var mı?
 
-3. **Ölçeklenebilirlik Gereksinimleri:**
+3. **Ölçeklenme Gereksinimleri:**
    - Beklenen yük nedir?
    - Otomatik ölçeklendirme gerekiyor mu?
    - Bölgesel gereksinimler var mı?
@@ -524,7 +524,7 @@ az role assignment create \
 
 **Çözümler:**
 - Yaygın sorgular için önbellekleme uygulayın
-- Kullanım durumunuz için uygun OpenAI modelini kullanın
+- Kullanım durumunuza uygun OpenAI modelini kullanın
 - Yüksek yük senaryoları için okuma replikalarını düşünün
 
 ### **Laboratuvar Egzersizi 6.1: Hata Ayıklama Zorluğu**
@@ -535,7 +535,7 @@ az role assignment create \
 1. Uygulama günlüklerini kontrol edin
 2. Hizmet bağlantısını doğrulayın
 3. Kimlik doğrulamayı test edin
-4. Konfigürasyonu gözden geçirin
+4. Yapılandırmayı gözden geçirin
 
 **Kullanılacak araçlar:**
 - `azd show` dağıtım genel görünümü için
@@ -544,7 +544,7 @@ az role assignment create \
 
 ## Modül 7: İzleme ve Optimizasyon
 
-### Adım 7.1: Kapsamlı İzleme Ayarlama
+### Adım 7.1: Kapsamlı İzleme Ayarlayın
 
 1. **Özel panolar oluşturun:**
 
@@ -583,7 +583,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 **Görev**: AI uygulamanızı hem performans hem de maliyet açısından optimize edin.
 
-**İyileştirilmesi gereken metrikler:**
+**İyileştirilecek metrikler:**
 - Ortalama yanıt süresini %20 azaltın
 - Aylık maliyetleri %15 azaltın
 - %99.9 çalışma süresini koruyun
@@ -598,21 +598,21 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ### Zorluk Senaryosu
 
-Sizden şu gereksinimlere sahip üretime hazır AI destekli bir müşteri hizmetleri sohbet botu oluşturmanız isteniyor:
+Sizden üretime hazır bir AI destekli müşteri hizmetleri sohbet robotu oluşturmanız isteniyor. Gereksinimler:
 
 **Fonksiyonel Gereksinimler:**
 - Müşteri etkileşimleri için web arayüzü
 - Yanıtlar için Azure OpenAI entegrasyonu
-- Cognitive Search kullanarak belge arama yeteneği
+- Belge arama yeteneği için Cognitive Search
 - Mevcut müşteri veritabanı ile entegrasyon
-- Çok dilli destek
+- Çoklu dil desteği
 
 **Fonksiyonel Olmayan Gereksinimler:**
 - 1000 eşzamanlı kullanıcıyı destekleme
 - %99.9 çalışma süresi SLA
 - SOC 2 uyumluluğu
 - Aylık $500 altında maliyet
-- Birden fazla ortamda (geliştirme, test, üretim) dağıtım
+- Birden fazla ortamda dağıtım (geliştirme, test, üretim)
 
 ### Uygulama Adımları
 
@@ -627,8 +627,8 @@ Sizden şu gereksinimlere sahip üretime hazır AI destekli bir müşteri hizmet
 
 - ✅ **Fonksiyonellik**: Tüm gereksinimleri karşılıyor mu?
 - ✅ **Güvenlik**: En iyi uygulamalar uygulanmış mı?
-- ✅ **Ölçeklenebilirlik**: Yükü kaldırabilir mi?
-- ✅ **Sürdürülebilirlik**: Kod ve altyapı iyi organize edilmiş mi?
+- ✅ **Ölçeklenebilirlik**: Yükü kaldırabiliyor mu?
+- ✅ **Bakım Kolaylığı**: Kod ve altyapı iyi organize edilmiş mi?
 - ✅ **Maliyet**: Bütçe dahilinde mi?
 
 ## Ek Kaynaklar
@@ -639,18 +639,17 @@ Sizden şu gereksinimlere sahip üretime hazır AI destekli bir müşteri hizmet
 - [Azure AI Foundry Belgeleri](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Örnek Şablonlar
-- [Azure OpenAI Sohbet Uygulaması](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Sohbet Uygulaması Hızlı Başlangıç](https://github.com/Azure-Samples/openai-chat-app-quickstart)
-- [Contoso Sohbet](https://github.com/Azure-Samples/contoso-chat)
+- [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+- [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Topluluk Kaynakları
 - [Azure AI Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 Tamamlama Sertifikası
-
-Tebrikler! AI Workshop Lab'ını başarıyla tamamladınız. Artık şunları yapabiliyor olmalısınız:
+## 🎓 Tamamlama Sert
+Tebrikler! AI Workshop Lab'ını tamamladınız. Artık şunları yapabiliyor olmalısınız:
 
 - ✅ Mevcut AI uygulamalarını AZD şablonlarına dönüştürmek
 - ✅ Üretime hazır AI uygulamalarını dağıtmak
@@ -666,20 +665,18 @@ Tebrikler! AI Workshop Lab'ını başarıyla tamamladınız. Artık şunları ya
 
 ---
 
-**Workshop Geri Bildirimi**: Deneyimlerinizi paylaşarak bu workshop'u geliştirmemize yardımcı olun. [Azure AI Foundry Discord #Azure kanalı](https://discord.gg/microsoft-azure).
+**Workshop Geri Bildirimi**: Bu workshop'u geliştirmemize yardımcı olmak için deneyimlerinizi [Azure AI Foundry Discord #Azure kanalında](https://discord.gg/microsoft-azure) paylaşın.
 
 ---
 
-**Bölüm Gezinimi:**
+**Bölüm Navigasyonu:**
 - **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 2 - AI-Öncelikli Geliştirme
+- **📖 Mevcut Bölüm**: Bölüm 2 - AI-First Development
 - **⬅️ Önceki**: [AI Model Deployment](ai-model-deployment.md)
 - **➡️ Sonraki**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 3: Konfigürasyon](../getting-started/configuration.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Configuration](../getting-started/configuration.md)
 
-**Yardım mı lazım?** AZD ve AI dağıtımları hakkında destek ve tartışmalar için topluluğumuza katılın.
+**Yardıma mı ihtiyacınız var?** AZD ve AI dağıtımları hakkında destek ve tartışmalar için topluluğumuza katılın.
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
