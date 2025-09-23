@@ -1,13 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-18T12:05:44+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T12:07:08+00:00",
   "source_file": "workshop/README.md",
   "language_code": "hr"
 }
 -->
-# AZD za AI programere radionica
+# AZD za radionicu AI programera
+
+## AZD Predlošci
+
+Izgradnja rješenja za AI aplikaciju na razini poduzeća za vaš specifični scenarij vrlo je slična gradnji vlastitog doma. Možete ga sami osmisliti, graditi ciglu po ciglu i preuzeti odgovornost za osiguranje da zadovoljava sve smjernice za upravljanje i razvoj.
+
+**ILI ....**
+
+Možete surađivati s arhitektom koji vam može dati _nacrt_ za početni dom, a zatim raditi s vama na _prilagodbi_ kako bi odgovarao vašim potrebama. To vam omogućuje da se usredotočite na ono što čini **vaš dom** posebnim, dok stručnjaci brinu o osnovnim instalacijama, vodovodu i drugim ovisnostima.
+
+**Ovo je pristup iza [AI App Templates](https://ai.azure.com/templates)** - serija nacrta za izgradnju različitih vrsta "domova" AI aplikacija ovisno o vašim osnovnim potrebama i ovisnostima.
+
+## Prilagodba predloška
+
+Predlošci su dizajnirani za rad s [Azure AI Foundry](https://ai.azure.com). Zamislite ovu platformu kao vašeg "građevinskog izvođača" s pristupom svim resursima, alatima i stručnosti potrebnim za obavljanje posla!
+
+Sve što trebate je odabrati [svoje početne predloške](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). Na primjer, usredotočit ćemo se na _Get Started with AI Agents_ predložak kako bismo izgradili "Agentic AI Home" koji dolazi opremljen značajkama poput AI pretraživanja, Red Teaminga, evaluacija, praćenja, nadzora i još mnogo toga!
+
+![Nacrt](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.hr.png)
+
+Sve što trebate je rezervirati vrijeme s arhitektom koji će vas voditi kroz proces prilagodbe. [GitHub Copilot za Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) može biti taj vodič. Jednostavno "razgovarajte s njim" kako biste:
+
+- Naučili o značajkama Azurea u vašem predlošku
+- Implementirali Azure resurse
+- Dobivali informacije o vašoj implementaciji
+- Dijagnosticirali i rješavali probleme!
+
+Na ovoj radionici učimo kako _rastaviti_ postojeći predložak (kako bismo saznali što pruža), zatim ga _prilagoditi_ (kako bismo ispunili naše zahtjeve) - korak po korak.
+
+AI predlošci **čine da radi** - završetkom radionice naučit ćete **kako da bude vaše**
+
+----
 
 **Navigacija radionice**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../README.md)
@@ -26,17 +57,17 @@ Dobrodošli na praktičnu radionicu za učenje Azure Developer CLI (AZD) s fokus
 ### Što ćete naučiti
 
 - **Osnove AZD-a**: Razumijevanje infrastrukture kao koda s AZD-om
-- 🤖 **Integracija AI usluga**: Implementacija Azure OpenAI, AI Search i drugih AI usluga
+- 🤖 **Integracija AI usluga**: Implementacija Azure OpenAI, AI pretraživanja i drugih AI usluga
 - **Implementacija kontejnera**: Korištenje Azure Container Apps za AI aplikacije
 - **Najbolje prakse sigurnosti**: Primjena Managed Identity i sigurnih konfiguracija
 - **Praćenje i preglednost**: Postavljanje Application Insights za AI radna opterećenja
-- **Produkcijski obrasci**: Strategije implementacije spremne za poduzeća
+- **Produkcijski obrasci**: Strategije implementacije spremne za poduzeće
 
 ## Struktura radionice
 
 ### Modul 1: Osnove AZD-a (30 minuta)
 - Instalacija i konfiguracija AZD-a
-- Razumijevanje strukture AZD projekata
+- Razumijevanje strukture AZD projekta
 - Vaša prva AZD implementacija
 - **Laboratorij**: Implementacija jednostavne web aplikacije
 
@@ -44,17 +75,17 @@ Dobrodošli na praktičnu radionicu za učenje Azure Developer CLI (AZD) s fokus
 - Postavljanje Azure OpenAI resursa
 - Strategije implementacije modela
 - Konfiguracija API pristupa i autentifikacije
-- **Laboratorij**: Implementacija chat aplikacije s GPT-4
+- **Laboratorij**: Implementacija aplikacije za chat s GPT-4
 
 ### Modul 3: RAG aplikacije (45 minuta)
-- Integracija Azure AI Search
+- Integracija Azure AI pretraživanja
 - Obrada dokumenata s Azure Document Intelligence
 - Vektorski embedding i semantičko pretraživanje
-- **Laboratorij**: Izrada sustava za pitanja i odgovore na temelju dokumenata
+- **Laboratorij**: Izgradnja sustava za pitanja i odgovore na temelju dokumenata
 
 ### Modul 4: Produkcijska implementacija (30 minuta)
 - Konfiguracija Container Apps
-- Skaliranje i optimizacija performansi
+- Optimizacija skaliranja i performansi
 - Praćenje i zapisivanje
 - **Laboratorij**: Implementacija u produkciju s preglednošću
 
@@ -98,7 +129,7 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Provjera preduvjeta
 
-Pokrenite ovaj skript za provjeru postavki:
+Pokrenite ovaj skript za provjeru vašeg postavljanja:
 
 ```bash
 #!/bin/bash
@@ -144,13 +175,13 @@ echo "Setup verification complete!"
 
 ## Materijali radionice
 
-### Laboratorijske vježbe
+### Vježbe u laboratoriju
 
 Svaki modul uključuje praktične laboratorije s početnim kodom i korak-po-korak uputama:
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Vaša prva AZD implementacija
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat aplikacija s Azure OpenAI
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG aplikacija s AI Search
+- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplikacija za chat s Azure OpenAI
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG aplikacija s AI pretraživanjem
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Obrasci implementacije u produkciju
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Napredni scenariji implementacije
 
@@ -158,10 +189,10 @@ Svaki modul uključuje praktične laboratorije s početnim kodom i korak-po-kora
 
 - **[Vodič za integraciju AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Sveobuhvatni obrasci integracije
 - **[Vodič za implementaciju AI modela](../docs/ai-foundry/ai-model-deployment.md)** - Najbolje prakse za implementaciju modela
-- **[Produkcijske AI prakse](../docs/ai-foundry/production-ai-practices.md)** - Obrasci implementacije za poduzeća
-- **[Vodič za otklanjanje poteškoća s AI](../docs/troubleshooting/ai-troubleshooting.md)** - Uobičajeni problemi i rješenja
+- **[Prakse za produkcijski AI](../docs/ai-foundry/production-ai-practices.md)** - Obrasci implementacije na razini poduzeća
+- **[Vodič za rješavanje problema s AI](../docs/troubleshooting/ai-troubleshooting.md)** - Uobičajeni problemi i rješenja
 
-### Predlošci
+### Uzorci predložaka
 
 Predlošci za brzi početak za uobičajene AI scenarije:
 
@@ -195,7 +226,7 @@ az login
 azd auth login
 ```
 
-3. **Započnite s Laboratorijem 1:**
+3. **Započnite s laboratorijem 1:**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
@@ -241,9 +272,9 @@ Do kraja ove radionice, moći ćete:
 
 ✅ **Implementirati AI aplikacije** koristeći AZD predloške  
 ✅ **Konfigurirati Azure OpenAI** usluge s odgovarajućom sigurnošću  
-✅ **Izraditi RAG aplikacije** s integracijom Azure AI Search  
-✅ **Primijeniti produkcijske obrasce** za AI radna opterećenja u poduzećima  
-✅ **Pratiti i otklanjati poteškoće** u implementaciji AI aplikacija  
+✅ **Izgraditi RAG aplikacije** s integracijom Azure AI pretraživanja  
+✅ **Primijeniti produkcijske obrasce** za AI radna opterećenja na razini poduzeća  
+✅ **Pratiti i rješavati probleme** s implementacijom AI aplikacija  
 ✅ **Primijeniti strategije optimizacije troškova** za AI radna opterećenja  
 
 ## Zajednica i podrška
@@ -251,8 +282,8 @@ Do kraja ove radionice, moći ćete:
 ### Tijekom radionice
 
 - 🙋 **Pitanja**: Koristite chat radionice ili podignite ruku
-- 🐛 **Problemi**: Provjerite [vodič za otklanjanje poteškoća](../docs/troubleshooting/ai-troubleshooting.md)
-- **Savjeti**: Podijelite otkrića s ostalim sudionicima
+- 🐛 **Problemi**: Provjerite [vodič za rješavanje problema](../docs/troubleshooting/ai-troubleshooting.md)
+- **Savjeti**: Podijelite otkrića s drugim sudionicima
 
 ### Nakon radionice
 
@@ -265,14 +296,14 @@ Do kraja ove radionice, moći ćete:
 ### Nastavite učiti
 
 1. **Napredni scenariji**: Istražite [implementacije u više regija](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
-2. **Integracija CI/CD-a**: Postavite [GitHub Actions tijekove rada](../docs/deployment/github-actions.md)
-3. **Prilagođeni predlošci**: Izradite vlastite [AZD predloške](../docs/getting-started/custom-templates.md)
+2. **Integracija CI/CD-a**: Postavite [GitHub Actions workflows](../docs/deployment/github-actions.md)
+3. **Prilagođeni predlošci**: Kreirajte vlastite [AZD predloške](../docs/getting-started/custom-templates.md)
 
 ### Primijenite u svojim projektima
 
-1. **Procjena**: Koristite naš [kontrolni popis za spremnost](./production-readiness-checklist.md)
+1. **Procjena**: Koristite naš [kontrolni popis spremnosti](./production-readiness-checklist.md)
 2. **Predlošci**: Započnite s našim [AI-specifičnim predlošcima](../../../workshop/templates)
-3. **Podrška**: Pridružite se [Azure AI Foundry Discordu](https://aka.ms/foundry/discord)
+3. **Podrška**: Pridružite se [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
 ### Podijelite svoj uspjeh
 
@@ -298,13 +329,11 @@ Vaše povratne informacije pomažu nam poboljšati iskustvo radionice:
 
 ---
 
-**Prethodno:** [Vodič za otklanjanje poteškoća s AI](../docs/troubleshooting/ai-troubleshooting.md) | **Sljedeće:** Započnite s [Laboratorijem 1: Osnove AZD-a](../../../workshop/lab-1-azd-basics)
+**Prethodno:** [Vodič za rješavanje problema s AI](../docs/troubleshooting/ai-troubleshooting.md) | **Sljedeće:** Započnite s [Laboratorijem 1: Osnove AZD-a](../../../workshop/lab-1-azd-basics)
 
-**Spremni za početak izrade AI aplikacija s AZD-om?**
+**Spremni za početak izgradnje AI aplikacija s AZD-om?**
 
 [Započnite Laboratorij 1: Osnove AZD-a →](./lab-1-azd-basics/README.md)
 
 ---
 
-**Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za nesporazume ili pogrešne interpretacije koje mogu proizaći iz korištenja ovog prijevoda.

@@ -1,70 +1,101 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-17T12:40:36+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:44:04+00:00",
   "source_file": "workshop/README.md",
   "language_code": "zh"
 }
 -->
 # AZD 面向 AI 开发者的工作坊
 
+## AZD 模板
+
+为您的特定场景构建企业级 AI 应用解决方案，就像建造自己的房子一样。您可以自己设计，逐块构建，并负责确保它符合所有治理和开发指南。
+
+**或者....**
+
+您可以与建筑师合作，他们可以为您提供一个 _蓝图_ 作为起点，然后与您一起 _定制_ 以满足您的需求。这使您能够专注于让**您的房子**变得特别，而底层的电线、管道和其他依赖项则由专家为您处理。
+
+**这就是 [AI 应用模板](https://ai.azure.com/templates) 的理念**——一系列蓝图，用于根据您的核心需求和依赖项构建不同类型的 AI 应用“房子”。
+
+## 模板定制
+
+这些模板设计用于与 [Azure AI Foundry](https://ai.azure.com) 一起使用。将这个平台视为您的“建筑承包商”，它拥有完成工作所需的所有资源、工具和专业知识！
+
+您只需选择 [您的起始模板](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)。例如，我们将专注于 _Get Started with AI Agents_ 模板，为您构建一个“智能 AI 家园”，它配备了 AI 搜索、红队测试、评估、追踪、监控等功能！
+
+![蓝图](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.zh.png)
+
+您只需预约时间与建筑师一起，指导您完成定制过程。[GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) 可以成为您的向导。只需与它“聊天”即可：
+
+- 了解模板中的 Azure 功能
+- 部署 Azure 资源
+- 获取有关部署的信息
+- 诊断和解决问题！
+
+在本次工作坊中，我们将学习如何逐步 _拆解_ 现有模板（了解它提供的内容），然后 _定制_ 它（满足我们的需求）。
+
+AI 模板**让它运行**——通过完成工作坊，您将学会**让它属于您**
+
+----
+
 **工作坊导航**
-- **📚 课程主页**: [AZD 初学者指南](../README.md)
-- **📖 相关章节**: 涵盖 [第1章](../README.md#-chapter-1-foundation--quick-start)、[第2章](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) 和 [第5章](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **🛠️ 实践实验**: [AI 工作坊实验](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 下一步**: [工作坊实验模块](../../../workshop)
+- **📚 课程主页**：[AZD 初学者指南](../README.md)
+- **📖 相关章节**：涵盖 [第 1 章](../README.md#-chapter-1-foundation--quick-start)、[第 2 章](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) 和 [第 5 章](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **🛠️ 实践实验**：[AI 工作坊实验](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 下一步**：[工作坊实验模块](../../../workshop)
 
-欢迎参加专注于 AI 应用部署的 Azure Developer CLI (AZD) 实践工作坊。本工作坊旨在帮助您从 AZD 基础知识入门，到部署生产级 AI 解决方案。
+欢迎参加专注于 AI 应用部署的 Azure Developer CLI (AZD) 学习工作坊。本次工作坊旨在从 AZD 基础知识开始，帮助您部署生产级 AI 解决方案。
 
-## 工作坊概述
+## 工作坊概览
 
-**时长:** 2-3 小时  
-**难度:** 初级到中级  
-**前置条件:** 基本的 Azure、命令行工具和 AI 概念知识
+**时长：** 2-3 小时  
+**级别：** 初学者到中级  
+**前提条件：** 基本的 Azure、命令行工具和 AI 概念知识
 
-### 您将学到的内容
+### 您将学到什么
 
-- **AZD 基础知识**: 理解基础设施即代码 (IaC) 与 AZD 的关系
-- 🤖 **AI 服务集成**: 部署 Azure OpenAI、AI 搜索及其他 AI 服务
-- **容器部署**: 使用 Azure 容器应用部署 AI 应用
-- **安全最佳实践**: 实现托管身份和安全配置
-- **监控与可观测性**: 为 AI 工作负载设置 Application Insights
-- **生产模式**: 企业级部署策略
+- **AZD 基础知识**：理解基础设施即代码 (IaC) 与 AZD 的关系
+- 🤖 **AI 服务集成**：部署 Azure OpenAI、AI 搜索和其他 AI 服务
+- **容器部署**：使用 Azure 容器应用部署 AI 应用
+- **安全最佳实践**：实施托管身份和安全配置
+- **监控与可观测性**：为 AI 工作负载设置 Application Insights
+- **生产模式**：企业级部署策略
 
 ## 工作坊结构
 
-### 模块 1: AZD 基础知识 (30 分钟)
+### 模块 1：AZD 基础知识（30 分钟）
 - 安装和配置 AZD
 - 理解 AZD 项目结构
 - 第一次 AZD 部署
-- **实验**: 部署一个简单的 Web 应用
+- **实验**：部署一个简单的 Web 应用
 
-### 模块 2: Azure OpenAI 集成 (45 分钟)
+### 模块 2：Azure OpenAI 集成（45 分钟）
 - 设置 Azure OpenAI 资源
 - 模型部署策略
 - 配置 API 访问和身份验证
-- **实验**: 使用 GPT-4 部署聊天应用
+- **实验**：使用 GPT-4 部署聊天应用
 
-### 模块 3: RAG 应用 (45 分钟)
+### 模块 3：RAG 应用（45 分钟）
 - Azure AI 搜索集成
 - 使用 Azure 文档智能进行文档处理
 - 向量嵌入和语义搜索
-- **实验**: 构建文档问答系统
+- **实验**：构建文档问答系统
 
-### 模块 4: 生产部署 (30 分钟)
+### 模块 4：生产部署（30 分钟）
 - 容器应用配置
 - 扩展和性能优化
 - 监控和日志记录
-- **实验**: 部署到生产环境并实现可观测性
+- **实验**：部署到生产环境并实现可观测性
 
-### 模块 5: 高级模式 (15 分钟)
+### 模块 5：高级模式（15 分钟）
 - 多环境部署
 - CI/CD 集成
 - 成本优化策略
-- **总结**: 生产准备检查清单
+- **总结**：生产就绪检查表
 
-## 前置条件
+## 前提条件
 
 ### 必需工具
 
@@ -90,15 +121,15 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Azure 账户设置
 
-1. **Azure 订阅**: [免费注册](https://azure.microsoft.com/free/)  
-2. **Azure OpenAI 访问权限**: [申请访问](https://aka.ms/oai/access)  
-3. **所需权限**:
+1. **Azure 订阅**：[免费注册](https://azure.microsoft.com/free/)
+2. **Azure OpenAI 访问权限**：[申请访问](https://aka.ms/oai/access)
+3. **所需权限**：
    - 订阅或资源组的贡献者角色
-   - 用户访问管理员 (用于 RBAC 分配)
+   - 用户访问管理员（用于 RBAC 分配）
 
-### 验证前置条件
+### 验证前提条件
 
-运行以下脚本验证您的设置：
+运行以下脚本以验证您的设置：
 
 ```bash
 #!/bin/bash
@@ -146,7 +177,7 @@ echo "Setup verification complete!"
 
 ### 实验练习
 
-每个模块都包含实践实验，提供起始代码和分步说明：
+每个模块都包含动手实验，提供起始代码和分步说明：
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - 第一次 AZD 部署
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - 使用 Azure OpenAI 的聊天应用
@@ -173,45 +204,45 @@ workshop/templates/
 └── production-ready/     # Enterprise template
 ```
 
-## 开始使用
+## 开始
 
-### 选项 1: GitHub Codespaces (推荐)
+### 选项 1：GitHub Codespaces（推荐）
 
-最快速开始工作坊的方法：
+最快的工作坊启动方式：
 
-[![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
+[![在 GitHub Codespaces 中打开](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
-### 选项 2: 本地开发
+### 选项 2：本地开发
 
-1. **克隆工作坊仓库:**
+1. **克隆工作坊仓库：**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **登录 Azure:**
+2. **登录 Azure：**
 ```bash
 az login
 azd auth login
 ```
 
-3. **从实验 1 开始:**
+3. **从实验 1 开始：**
 ```bash
 cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### 选项 3: 讲师指导的工作坊
+### 选项 3：讲师指导的工作坊
 
-如果您参加的是讲师指导的课程：
+如果您参加讲师指导的课程：
 
-- 🎥 **工作坊录制**: [按需观看](https://aka.ms/azd-ai-workshop)
-- 💬 **Discord 社区**: [加入以获得实时支持](https://aka.ms/foundry/discord)
-- **工作坊反馈**: [分享您的体验](https://aka.ms/azd-workshop-feedback)
+- 🎥 **工作坊录制**：[按需提供](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord 社区**：[加入以获得实时支持](https://aka.ms/foundry/discord)
+- **工作坊反馈**：[分享您的体验](https://aka.ms/azd-workshop-feedback)
 
 ## 工作坊时间表
 
-### 自主学习 (3 小时)
+### 自学（3 小时）
 
 ```
 ⏰ 00:00 - 00:30  Module 1: AZD Foundations
@@ -222,7 +253,7 @@ cat README.md  # Follow the instructions
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### 讲师指导课程 (2.5 小时)
+### 讲师指导课程（2.5 小时）
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -237,74 +268,72 @@ cat README.md  # Follow the instructions
 
 ## 成功标准
 
-完成本工作坊后，您将能够：
+在工作坊结束时，您将能够：
 
-✅ **使用 AZD 模板部署 AI 应用**  
-✅ **配置 Azure OpenAI 服务**并确保安全性  
-✅ **构建 RAG 应用**并集成 Azure AI 搜索  
-✅ **实施生产模式**以支持企业级 AI 工作负载  
-✅ **监控和排查问题**以优化 AI 应用部署  
-✅ **应用成本优化策略**以降低 AI 工作负载成本  
+✅ 使用 AZD 模板**部署 AI 应用**  
+✅ 配置 Azure OpenAI 服务并确保安全性  
+✅ 构建与 Azure AI 搜索集成的**RAG 应用**  
+✅ 为企业 AI 工作负载实施**生产模式**  
+✅ **监控和排查** AI 应用部署问题  
+✅ 为 AI 工作负载应用**成本优化策略**  
 
 ## 社区与支持
 
 ### 工作坊期间
 
-- 🙋 **提问**: 使用工作坊聊天或举手
-- 🐛 **问题**: 查看 [故障排除指南](../docs/troubleshooting/ai-troubleshooting.md)
-- **提示**: 与其他参与者分享发现
+- 🙋 **提问**：使用工作坊聊天或举手
+- 🐛 **问题**：查看 [故障排除指南](../docs/troubleshooting/ai-troubleshooting.md)
+- **提示**：与其他参与者分享发现
 
 ### 工作坊之后
 
-- 💬 **Discord**: [Azure AI Foundry 社区](https://aka.ms/foundry/discord)
-- **GitHub 问题**: [报告模板问题](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
-- 📧 **反馈**: [工作坊评价表](https://aka.ms/azd-workshop-feedback)
+- 💬 **Discord**：[Azure AI Foundry 社区](https://aka.ms/foundry/discord)
+- **GitHub 问题**：[报告模板问题](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- 📧 **反馈**：[工作坊评估表](https://aka.ms/azd-workshop-feedback)
 
 ## 下一步
 
 ### 继续学习
 
-1. **高级场景**: 探索 [多区域部署](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
-2. **CI/CD 集成**: 设置 [GitHub Actions 工作流](../docs/deployment/github-actions.md)
-3. **自定义模板**: 创建您自己的 [AZD 模板](../docs/getting-started/custom-templates.md)
+1. **高级场景**：探索 [多区域部署](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **CI/CD 集成**：设置 [GitHub Actions 工作流](../docs/deployment/github-actions.md)
+3. **自定义模板**：创建您自己的 [AZD 模板](../docs/getting-started/custom-templates.md)
 
 ### 应用到您的项目
 
-1. **评估**: 使用我们的 [准备检查清单](./production-readiness-checklist.md)
-2. **模板**: 从我们的 [AI 专用模板](../../../workshop/templates) 开始
-3. **支持**: 加入 [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
+1. **评估**：使用我们的 [就绪检查表](./production-readiness-checklist.md)
+2. **模板**：从我们的 [AI 专用模板](../../../workshop/templates) 开始
+3. **支持**：加入 [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
 ### 分享您的成功
 
-- ⭐ **为仓库点赞** 如果本工作坊对您有帮助
-- 🐦 **在社交媒体上分享** 使用 #AzureDeveloperCLI #AzureAI 标签
-- 📝 **撰写博客文章** 分享您的 AI 部署旅程
+- ⭐ **为仓库加星**，如果本次工作坊对您有所帮助
+- 🐦 **在社交媒体上分享**，使用 #AzureDeveloperCLI #AzureAI
+- 📝 **写博客文章**，分享您的 AI 部署旅程
 
 ---
 
 ## 工作坊反馈
 
-您的反馈将帮助我们改进工作坊体验：
+您的反馈有助于我们改进工作坊体验：
 
 | 方面 | 评分 (1-5) | 评论 |
 |------|------------|------|
 | 内容质量 | ⭐⭐⭐⭐⭐ | |
 | 实践实验 | ⭐⭐⭐⭐⭐ | |
 | 文档 | ⭐⭐⭐⭐⭐ | |
-| 难度水平 | ⭐⭐⭐⭐⭐ | |
+| 难度级别 | ⭐⭐⭐⭐⭐ | |
 | 整体体验 | ⭐⭐⭐⭐⭐ | |
 
-**提交反馈**: [工作坊评价表](https://aka.ms/azd-workshop-feedback)
+**提交反馈**：[工作坊评估表](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**上一页:** [AI 故障排除指南](../docs/troubleshooting/ai-troubleshooting.md) | **下一页:** 开始 [实验 1: AZD 基础知识](../../../workshop/lab-1-azd-basics)
+**上一页：** [AI 故障排除指南](../docs/troubleshooting/ai-troubleshooting.md) | **下一页：** 开始 [实验 1：AZD 基础知识](../../../workshop/lab-1-azd-basics)
 
 **准备好开始使用 AZD 构建 AI 应用了吗？**
 
-[开始实验 1: AZD 基础知识 →](./lab-1-azd-basics/README.md)
+[开始实验 1：AZD 基础知识 →](./lab-1-azd-basics/README.md)
 
 ---
 
-**免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

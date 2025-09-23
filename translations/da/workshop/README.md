@@ -1,40 +1,71 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-17T23:32:27+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:56:53+00:00",
   "source_file": "workshop/README.md",
   "language_code": "da"
 }
 -->
 # AZD for AI-udviklere Workshop
 
+## AZD Skabeloner
+
+At bygge en AI-applikation i virksomhedsklasse til dit specifikke scenarie er meget som at bygge dit eget hjem. Du kan designe det selv, bygge det sten for sten og tage ansvaret for, at det opfylder alle styrings- og udviklingsretningslinjer.
+
+**ELLER ....** 
+
+Du kan arbejde med en arkitekt, der kan give dig en _blåkopi_ til et start-hjem og derefter arbejde med dig for at _tilpasse_ det, så det passer til dine behov. Dette giver dig mulighed for at fokusere på, hvad der gør **dit hjem** specielt, mens eksperterne tager sig af den underliggende el, VVS og andre afhængigheder.
+
+**Dette er tilgangen bag [AI App Templates](https://ai.azure.com/templates)** - en række blåkopier til at bygge forskellige typer AI-applikations-"hjem" afhængigt af dine kernebehov og afhængigheder.
+
+## Tilpasning af Skabeloner
+
+Skabelonerne er designet til at fungere med [Azure AI Foundry](https://ai.azure.com). Tænk på denne platform som din "byggeentreprenør" med adgang til alle de ressourcer, værktøjer og ekspertise, du har brug for til at få arbejdet gjort!
+
+Alt, hvad du skal gøre, er at vælge [dine startskabeloner](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). For eksempel vil vi fokusere på _Get Started with AI Agents_-skabelonen for at bygge dig et "Agentisk AI-hjem", der er klar til funktioner som AI-søgning, Red Teaming, evalueringer, sporing, overvågning og mere!
+
+![Blueprint](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.da.png)
+
+Alt, hvad du behøver, er at booke tid med arkitekten, som kan guide dig gennem tilpasningsprocessen. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) kan være den guide. Bare "chat med det" for at:
+
+- Lære om Azure-funktionerne i din skabelon
+- Udrulle Azure-ressourcer
+- Få information om din udrulning
+- Diagnosticere og fejlfinde problemer!
+
+I denne workshop lærer vi at _dekonstruere_ den eksisterende skabelon (for at forstå, hvad den tilbyder) og derefter _tilpasse_ den (for at opfylde vores krav) - trin for trin.
+
+AI-skabeloner **får det til at fungere** - ved at gennemføre workshoppen lærer du at **gøre det til dit eget**
+
+----
+
 **Workshop Navigation**
 - **📚 Kursushjem**: [AZD For Begyndere](../README.md)
 - **📖 Relaterede kapitler**: Dækker [Kapitel 1](../README.md#-chapter-1-foundation--quick-start), [Kapitel 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) og [Kapitel 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **🛠️ Praktisk Lab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 Næste skridt**: [Workshop Lab Moduler](../../../workshop)
+- **🚀 Næste Skridt**: [Workshop Lab Moduler](../../../workshop)
 
-Velkommen til den praktiske workshop, hvor du lærer Azure Developer CLI (AZD) med fokus på udrulning af AI-applikationer. Denne workshop er designet til at tage dig fra AZD-grundlæggende til udrulning af produktionsklare AI-løsninger.
+Velkommen til den praktiske workshop for at lære Azure Developer CLI (AZD) med fokus på udrulning af AI-applikationer. Denne workshop er designet til at tage dig fra AZD-grundlæggende til udrulning af produktionsklare AI-løsninger.
 
 ## Workshop Oversigt
 
 **Varighed:** 2-3 timer  
-**Niveau:** Begynder til mellemniveau  
+**Niveau:** Begynder til Mellem  
 **Forudsætninger:** Grundlæggende kendskab til Azure, kommandolinjeværktøjer og AI-koncepter
 
-### Hvad du vil lære
+### Hvad Du Vil Lære
 
 - **AZD Grundlæggende**: Forståelse af Infrastructure as Code med AZD
-- 🤖 **AI Service Integration**: Udrulning af Azure OpenAI, AI Search og andre AI-tjenester
+- 🤖 **AI Service Integration**: Udrulning af Azure OpenAI, AI-søgning og andre AI-tjenester
 - **Container Udrulning**: Brug af Azure Container Apps til AI-applikationer
-- **Sikkerhedsprincipper**: Implementering af Managed Identity og sikre konfigurationer
+- **Sikkerhedspraksis**: Implementering af Managed Identity og sikre konfigurationer
 - **Overvågning & Observabilitet**: Opsætning af Application Insights til AI-arbejdsbelastninger
-- **Produktionsmønstre**: Strategier til virksomhedsklar udrulning
+- **Produktionsmønstre**: Udrulningsstrategier klar til virksomheder
 
 ## Workshop Struktur
 
-### Modul 1: AZD Grundlag (30 minutter)
+### Modul 1: AZD Grundlæggende (30 minutter)
 - Installation og konfiguration af AZD
 - Forståelse af AZD-projektstruktur
 - Din første AZD-udrulning
@@ -42,14 +73,14 @@ Velkommen til den praktiske workshop, hvor du lærer Azure Developer CLI (AZD) m
 
 ### Modul 2: Azure OpenAI Integration (45 minutter)
 - Opsætning af Azure OpenAI-ressourcer
-- Strategier for modeludrulning
-- Konfiguration af API-adgang og autentifikation
+- Modeludrulningsstrategier
+- Konfiguration af API-adgang og autentificering
 - **Lab**: Udrul en chatapplikation med GPT-4
 
 ### Modul 3: RAG Applikationer (45 minutter)
-- Integration af Azure AI Search
+- Integration af Azure AI-søgning
 - Dokumentbehandling med Azure Document Intelligence
-- Vektorindlejring og semantisk søgning
+- Vektorindlejringer og semantisk søgning
 - **Lab**: Byg et dokument Q&A-system
 
 ### Modul 4: Produktionsudrulning (30 minutter)
@@ -60,13 +91,13 @@ Velkommen til den praktiske workshop, hvor du lærer Azure Developer CLI (AZD) m
 
 ### Modul 5: Avancerede Mønstre (15 minutter)
 - Udrulning i flere miljøer
-- CI/CD integration
-- Strategier for omkostningsoptimering
+- CI/CD-integration
+- Omkostningsoptimeringsstrategier
 - **Afslutning**: Produktionsklarhedstjekliste
 
 ## Forudsætninger
 
-### Nødvendige Værktøjer
+### Påkrævede Værktøjer
 
 Installér venligst disse værktøjer før workshoppen:
 
@@ -92,7 +123,7 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 1. **Azure Abonnement**: [Tilmeld dig gratis](https://azure.microsoft.com/free/)
 2. **Azure OpenAI Adgang**: [Anmod om adgang](https://aka.ms/oai/access)
-3. **Nødvendige Tilladelser**:
+3. **Påkrævede Tilladelser**:
    - Contributor-rolle på abonnement eller ressourcegruppe
    - User Access Administrator (til RBAC-tildelinger)
 
@@ -150,7 +181,7 @@ Hvert modul inkluderer praktiske labs med startkode og trin-for-trin instruktion
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Din første AZD-udrulning
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chatapplikation med Azure OpenAI
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-applikation med AI Search
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-applikation med AI-søgning
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Produktionsudrulningsmønstre
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Avancerede udrulningsscenarier
 
@@ -158,12 +189,12 @@ Hvert modul inkluderer praktiske labs med startkode og trin-for-trin instruktion
 
 - **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Omfattende integrationsmønstre
 - **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Bedste praksis for modeludrulning
-- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Mønstre for virksomhedsklar udrulning
+- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Udrulningsmønstre til virksomheder
 - **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Almindelige problemer og løsninger
 
-### Eksempel Templates
+### Eksempel Skabeloner
 
-Hurtigstart templates til almindelige AI-scenarier:
+Hurtigstart-skabeloner til almindelige AI-scenarier:
 
 ```
 workshop/templates/
@@ -173,15 +204,15 @@ workshop/templates/
 └── production-ready/     # Enterprise template
 ```
 
-## Kom i gang
+## Kom i Gang
 
-### Option 1: GitHub Codespaces (Anbefalet)
+### Mulighed 1: GitHub Codespaces (Anbefalet)
 
 Den hurtigste måde at starte workshoppen på:
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
-### Option 2: Lokal Udvikling
+### Mulighed 2: Lokal Udvikling
 
 1. **Klon workshop-repositoriet:**
 ```bash
@@ -201,7 +232,7 @@ cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### Option 3: Instruktørledet Workshop
+### Mulighed 3: Instruktørledet Workshop
 
 Hvis du deltager i en instruktørledet session:
 
@@ -211,7 +242,7 @@ Hvis du deltager i en instruktørledet session:
 
 ## Workshop Tidslinje
 
-### Selvstudie (3 timer)
+### Selvstyret Læring (3 timer)
 
 ```
 ⏰ 00:00 - 00:30  Module 1: AZD Foundations
@@ -237,16 +268,16 @@ Hvis du deltager i en instruktørledet session:
 
 ## Succeskriterier
 
-Ved afslutningen af denne workshop vil du kunne:
+Ved slutningen af denne workshop vil du være i stand til at:
 
-✅ **Udrulle AI-applikationer** ved hjælp af AZD-templates  
-✅ **Konfigurere Azure OpenAI** tjenester med korrekt sikkerhed  
-✅ **Bygge RAG-applikationer** med Azure AI Search integration  
-✅ **Implementere produktionsmønstre** for virksomhedsklare AI-arbejdsbelastninger  
+✅ **Udrulle AI-applikationer** ved hjælp af AZD-skabeloner  
+✅ **Konfigurere Azure OpenAI**-tjenester med korrekt sikkerhed  
+✅ **Bygge RAG-applikationer** med Azure AI-søgningsintegration  
+✅ **Implementere produktionsmønstre** til AI-arbejdsbelastninger i virksomheder  
 ✅ **Overvåge og fejlfinde** AI-applikationsudrulninger  
-✅ **Anvende omkostningsoptimeringsstrategier** for AI-arbejdsbelastninger  
+✅ **Anvende omkostningsoptimering** strategier til AI-arbejdsbelastninger  
 
-## Community & Support
+## Fællesskab & Support
 
 ### Under Workshoppen
 
@@ -257,26 +288,26 @@ Ved afslutningen af denne workshop vil du kunne:
 ### Efter Workshoppen
 
 - 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
-- **GitHub Issues**: [Rapportér templateproblemer](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
+- **GitHub Issues**: [Rapportér skabelonproblemer](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
 - 📧 **Feedback**: [Workshop evalueringsformular](https://aka.ms/azd-workshop-feedback)
 
 ## Næste Skridt
 
-### Fortsæt Læring
+### Fortsæt Læringen
 
 1. **Avancerede Scenarier**: Udforsk [multi-region udrulninger](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
 2. **CI/CD Integration**: Opsæt [GitHub Actions workflows](../docs/deployment/github-actions.md)
-3. **Custom Templates**: Opret dine egne [AZD templates](../docs/getting-started/custom-templates.md)
+3. **Tilpassede Skabeloner**: Opret dine egne [AZD-skabeloner](../docs/getting-started/custom-templates.md)
 
 ### Anvend i Dine Projekter
 
 1. **Vurdering**: Brug vores [klarhedstjekliste](./production-readiness-checklist.md)
-2. **Templates**: Start med vores [AI-specifikke templates](../../../workshop/templates)
+2. **Skabeloner**: Start med vores [AI-specifikke skabeloner](../../../workshop/templates)
 3. **Support**: Deltag i [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
 ### Del Din Succes
 
-- ⭐ **Stjernemarkér repositoriet**, hvis denne workshop hjalp dig
+- ⭐ **Stjernemærk repositoriet**, hvis denne workshop hjalp dig
 - 🐦 **Del på sociale medier** med #AzureDeveloperCLI #AzureAI
 - 📝 **Skriv et blogindlæg** om din AI-udrulningsrejse
 
@@ -288,11 +319,11 @@ Din feedback hjælper os med at forbedre workshopoplevelsen:
 
 | Aspekt | Bedømmelse (1-5) | Kommentarer |
 |--------|------------------|-------------|
-| Kvalitet af indhold | ⭐⭐⭐⭐⭐ | |
+| Indholdskvalitet | ⭐⭐⭐⭐⭐ | |
 | Praktiske Labs | ⭐⭐⭐⭐⭐ | |
 | Dokumentation | ⭐⭐⭐⭐⭐ | |
 | Sværhedsgrad | ⭐⭐⭐⭐⭐ | |
-| Overordnet oplevelse | ⭐⭐⭐⭐⭐ | |
+| Samlet Oplevelse | ⭐⭐⭐⭐⭐ | |
 
 **Indsend feedback**: [Workshop Evalueringsformular](https://aka.ms/azd-workshop-feedback)
 
@@ -306,5 +337,3 @@ Din feedback hjælper os med at forbedre workshopoplevelsen:
 
 ---
 
-**Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at sikre nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

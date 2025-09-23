@@ -1,21 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-17T21:59:44+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:53:59+00:00",
   "source_file": "workshop/README.md",
   "language_code": "tr"
 }
 -->
 # AZD for AI Geliştiricileri Atölyesi
 
+## AZD Şablonları
+
+Kendi senaryonuza uygun, kurumsal düzeyde bir AI Uygulama çözümü oluşturmak, kendi evinizi inşa etmek gibidir. Kendiniz tasarlayabilir, tuğla tuğla inşa edebilir ve tüm yönetim ve geliştirme yönergelerine uygun olmasını sağlama sorumluluğunu üstlenebilirsiniz.
+
+**YA DA ....**
+
+Bir mimarla çalışabilir ve size bir başlangıç evi için bir _plan_ verebilir, ardından ihtiyaçlarınıza uygun şekilde _özelleştirebilirsiniz_. Bu, **evinizi** özel kılan şeylere odaklanmanızı sağlar ve temel elektrik, tesisat ve diğer bağımlılıkların uzmanlar tarafından sizin için halledilmesine olanak tanır.
+
+**[AI Uygulama Şablonları](https://ai.azure.com/templates)** yaklaşımı tam olarak budur - temel ihtiyaçlarınıza ve bağımlılıklarınıza bağlı olarak farklı türde AI uygulama "evleri" inşa etmek için bir dizi plan.
+
+## Şablon Özelleştirme
+
+Şablonlar [Azure AI Foundry](https://ai.azure.com) ile çalışacak şekilde tasarlanmıştır. Bu platformu, işinizi halletmek için ihtiyaç duyduğunuz tüm kaynaklara, araçlara ve uzmanlığa erişimi olan "inşaat müteahhitiniz" olarak düşünebilirsiniz!
+
+Tek yapmanız gereken [başlangıç şablonlarınızı](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) seçmek. Örneğin, AI Arama, Red Teaming, Değerlendirmeler, İzleme, Takip ve daha fazlası gibi özelliklerle donatılmış bir "Agentic AI Evi" oluşturmak için _AI Ajanlarıyla Başlangıç_ şablonuna odaklanacağız.
+
+![Plan](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.tr.png)
+
+Tek yapmanız gereken, özelleştirme sürecinde size rehberlik edecek bir mimarla zaman ayarlamak. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) bu rehber olabilir. Sadece onunla "sohbet ederek":
+
+- Şablonunuzdaki Azure özelliklerini öğrenin
+- Azure kaynaklarını dağıtın
+- Dağıtımınız hakkında bilgi alın
+- Sorunları teşhis edin ve çözün!
+
+Bu atölyede, mevcut şablonu _parçalayıp_ (ne sunduğunu öğrenmek için), ardından _özelleştirerek_ (gereksinimlerimizi karşılamak için) adım adım ilerleyeceğiz.
+
+AI Şablonları **işi halleder** - atölyeyi tamamlayarak **onu kendinize ait hale getirmeyi** öğreneceksiniz.
+
+----
+
 **Atölye Navigasyonu**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../README.md)
-- **📖 İlgili Bölümler**: [Bölüm 1](../README.md#-chapter-1-foundation--quick-start), [Bölüm 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) ve [Bölüm 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced) içerir
-- **🛠️ Uygulamalı Laboratuvar**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../README.md)
+- **📖 İlgili Bölümler**: [Bölüm 1](../README.md#-chapter-1-foundation--quick-start), [Bölüm 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) ve [Bölüm 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced) konularını kapsar
+- **🛠️ Uygulamalı Laboratuvar**: [AI Atölye Laboratuvarı](../docs/ai-foundry/ai-workshop-lab.md)
 - **🚀 Sonraki Adımlar**: [Atölye Laboratuvar Modülleri](../../../workshop)
 
-Azure Developer CLI (AZD) ile AI uygulamalarını dağıtmayı öğrenmek için düzenlenen uygulamalı atölyeye hoş geldiniz. Bu atölye, AZD'nin temellerinden başlayarak üretime hazır AI çözümleri dağıtmaya kadar sizi yönlendirmek için tasarlanmıştır.
+Azure Developer CLI (AZD) ile AI uygulama dağıtımına odaklanan uygulamalı atölyeye hoş geldiniz. Bu atölye, AZD temellerinden üretime hazır AI çözümleri dağıtmaya kadar sizi yönlendirmek için tasarlanmıştır.
 
 ## Atölye Genel Bakış
 
@@ -26,10 +57,10 @@ Azure Developer CLI (AZD) ile AI uygulamalarını dağıtmayı öğrenmek için 
 ### Öğrenecekleriniz
 
 - **AZD Temelleri**: AZD ile Kod Olarak Altyapıyı Anlama
-- 🤖 **AI Servis Entegrasyonu**: Azure OpenAI, AI Search ve diğer AI servislerini dağıtma
+- 🤖 **AI Hizmet Entegrasyonu**: Azure OpenAI, AI Arama ve diğer AI hizmetlerini dağıtma
 - **Konteyner Dağıtımı**: AI uygulamaları için Azure Container Apps kullanımı
 - **Güvenlik En İyi Uygulamaları**: Yönetilen Kimlik ve güvenli yapılandırmalar uygulama
-- **İzleme ve Görünürlük**: AI iş yükleri için Application Insights kurma
+- **İzleme ve Gözlemlenebilirlik**: AI iş yükleri için Application Insights kurma
 - **Üretim Kalıpları**: Kurumsal düzeyde dağıtım stratejileri
 
 ## Atölye Yapısı
@@ -47,7 +78,7 @@ Azure Developer CLI (AZD) ile AI uygulamalarını dağıtmayı öğrenmek için 
 - **Laboratuvar**: GPT-4 ile bir sohbet uygulaması dağıtın
 
 ### Modül 3: RAG Uygulamaları (45 dakika)
-- Azure AI Search entegrasyonu
+- Azure AI Arama entegrasyonu
 - Azure Document Intelligence ile belge işleme
 - Vektör gömme ve anlamsal arama
 - **Laboratuvar**: Bir belge Soru-Cevap sistemi oluşturun
@@ -56,13 +87,13 @@ Azure Developer CLI (AZD) ile AI uygulamalarını dağıtmayı öğrenmek için 
 - Container Apps yapılandırması
 - Ölçeklendirme ve performans optimizasyonu
 - İzleme ve günlük kaydı
-- **Laboratuvar**: Görünürlük ile üretime dağıtım yapın
+- **Laboratuvar**: Gözlemlenebilirlik ile üretime dağıtım yapın
 
 ### Modül 5: İleri Düzey Kalıplar (15 dakika)
 - Çoklu ortam dağıtımları
 - CI/CD entegrasyonu
 - Maliyet optimizasyon stratejileri
-- **Kapanış**: Üretim hazırlık kontrol listesi
+- **Kapanış**: Üretim hazır olma kontrol listesi
 
 ## Ön Koşullar
 
@@ -98,7 +129,7 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Ön Koşulları Doğrulama
 
-Kurulumunuzu doğrulamak için bu komutu çalıştırın:
+Kurulumunuzu doğrulamak için bu komut dosyasını çalıştırın:
 
 ```bash
 #!/bin/bash
@@ -150,7 +181,7 @@ Her modül, başlangıç kodu ve adım adım talimatlarla uygulamalı laboratuva
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - İlk AZD dağıtımınız
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Azure OpenAI ile sohbet uygulaması
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - AI Search ile RAG uygulaması
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - AI Arama ile RAG uygulaması
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Üretim dağıtım kalıpları
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - İleri düzey dağıtım senaryoları
 
@@ -179,7 +210,7 @@ workshop/templates/
 
 Atölyeye başlamak için en hızlı yol:
 
-[![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
+[![GitHub Codespaces'te Aç](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
 ### Seçenek 2: Yerel Geliştirme
 
@@ -240,11 +271,11 @@ Eğitmenli bir oturuma katılıyorsanız:
 Atölye sonunda şunları yapabileceksiniz:
 
 ✅ **AI uygulamaları dağıtın** AZD şablonlarını kullanarak  
-✅ **Azure OpenAI'yi yapılandırın** uygun güvenlik ile  
-✅ **RAG uygulamaları oluşturun** Azure AI Search entegrasyonu ile  
+✅ **Azure OpenAI hizmetlerini yapılandırın** uygun güvenlikle  
+✅ **RAG uygulamaları oluşturun** Azure AI Arama entegrasyonu ile  
 ✅ **Üretim kalıplarını uygulayın** kurumsal AI iş yükleri için  
 ✅ **AI uygulama dağıtımlarını izleyin ve sorun giderin**  
-✅ **AI iş yükleri için maliyet optimizasyonu stratejileri uygulayın**  
+✅ **Maliyet optimizasyonu stratejilerini uygulayın** AI iş yükleri için  
 
 ## Topluluk ve Destek
 
@@ -264,13 +295,13 @@ Atölye sonunda şunları yapabileceksiniz:
 
 ### Öğrenmeye Devam Edin
 
-1. **İleri Düzey Senaryolar**: [Çok bölgeli dağıtımları](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment) keşfedin
+1. **İleri Düzey Senaryolar**: [çok bölgeli dağıtımları](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment) keşfedin
 2. **CI/CD Entegrasyonu**: [GitHub Actions iş akışlarını](../docs/deployment/github-actions.md) kurun
 3. **Özel Şablonlar**: Kendi [AZD şablonlarınızı](../docs/getting-started/custom-templates.md) oluşturun
 
 ### Projelerinizde Uygulayın
 
-1. **Değerlendirme**: [Hazırlık kontrol listemizi](./production-readiness-checklist.md) kullanın
+1. **Değerlendirme**: [hazırlık kontrol listemizi](./production-readiness-checklist.md) kullanın
 2. **Şablonlar**: [AI'ye özel şablonlarımızla](../../../workshop/templates) başlayın
 3. **Destek**: [Azure AI Foundry Discord'a](https://aka.ms/foundry/discord) katılın
 
@@ -306,5 +337,3 @@ Geri bildiriminiz, atölye deneyimini geliştirmemize yardımcı olur:
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

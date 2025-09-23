@@ -1,53 +1,84 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-17T23:18:05+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:56:24+00:00",
   "source_file": "workshop/README.md",
   "language_code": "sv"
 }
 -->
 # AZD för AI-utvecklare Workshop
 
-**Workshop Navigering**
+## AZD Mallar
+
+Att bygga en AI-applikation av företagsklass för ditt specifika scenario är mycket som att bygga ditt eget hem. Du kan designa det själv, bygga det sten för sten och ta ansvar för att säkerställa att det uppfyller alla styrnings- och utvecklingsriktlinjer.
+
+**ELLER ....** 
+
+Du kan arbeta med en arkitekt som kan ge dig en _ritning_ för ett starthem och sedan arbeta med dig för att _anpassa_ det efter dina behov. Detta gör att du kan fokusera på vad som gör **ditt hem** speciellt, medan den underliggande elen, VVS och andra beroenden tas om hand av experterna.
+
+**Detta är tillvägagångssättet bakom [AI App Templates](https://ai.azure.com/templates)** - en serie ritningar för att bygga olika typer av AI-applikations-"hem" beroende på dina kärnbehov och beroenden.
+
+## Anpassning av mallar
+
+Mallar är designade för att fungera med [Azure AI Foundry](https://ai.azure.com). Tänk på denna plattform som din "byggentreprenör" med tillgång till alla resurser, verktyg och expertis du behöver för att få jobbet gjort!
+
+Allt du behöver göra är att välja [dina startmallar](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). Till exempel kommer vi att fokusera på _Get Started with AI Agents_-mallen för att bygga ett "Agentiskt AI-hem" som är utrustat med funktioner som AI-sökning, Red Teaming, utvärderingar, spårning, övervakning och mer!
+
+![Ritning](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.sv.png)
+
+Allt du behöver är att boka tid med arkitekten för att guida dig genom anpassningsprocessen. [GitHub Copilot för Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) kan vara den guiden. Bara "chatta med det" för att:
+
+- Lära dig om Azure-funktionerna i din mall
+- Distribuera Azure-resurser
+- Få information om din distribution
+- Diagnostisera och felsöka problem!
+
+I denna workshop lär vi oss att _dekonstruera_ den befintliga mallen (för att förstå vad den erbjuder) och sedan _anpassa_ den (för att uppfylla våra krav) - steg för steg.
+
+AI-mallar **får det att fungera** - genom att slutföra workshopen kommer du att lära dig att **göra det till ditt eget**
+
+----
+
+**Workshopnavigering**
 - **📚 Kursens startsida**: [AZD För Nybörjare](../README.md)
 - **📖 Relaterade kapitel**: Täcker [Kapitel 1](../README.md#-chapter-1-foundation--quick-start), [Kapitel 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), och [Kapitel 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **🛠️ Praktisk Lab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 Nästa steg**: [Workshop Lab Moduler](../../../workshop)
+- **🛠️ Praktisk labb**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
+- **🚀 Nästa steg**: [Workshop Lab-moduler](../../../workshop)
 
-Välkommen till den praktiska workshopen för att lära dig Azure Developer CLI (AZD) med fokus på att distribuera AI-applikationer. Denna workshop är utformad för att ta dig från grunderna i AZD till att distribuera produktionsklara AI-lösningar.
+Välkommen till den praktiska workshopen för att lära dig Azure Developer CLI (AZD) med fokus på AI-applikationsdistribution. Denna workshop är utformad för att ta dig från AZD-grunderna till att distribuera produktionsklara AI-lösningar.
 
-## Workshop Översikt
+## Workshopöversikt
 
 **Varaktighet:** 2-3 timmar  
-**Nivå:** Nybörjare till Mellanliggande  
+**Nivå:** Nybörjare till Medel  
 **Förkunskaper:** Grundläggande kunskaper om Azure, kommandoradsverktyg och AI-koncept
 
 ### Vad du kommer att lära dig
 
-- **AZD Grunder**: Förstå Infrastruktur som Kod med AZD
-- 🤖 **AI-tjänstintegration**: Distribuera Azure OpenAI, AI Search och andra AI-tjänster
+- **AZD-grunder**: Förstå Infrastruktur som Kod med AZD
+- 🤖 **AI-tjänsteintegration**: Distribuera Azure OpenAI, AI-sökning och andra AI-tjänster
 - **Containerdistribution**: Använda Azure Container Apps för AI-applikationer
 - **Säkerhetsbästa praxis**: Implementera Managed Identity och säkra konfigurationer
-- **Övervakning & Observabilitet**: Ställa in Application Insights för AI-arbetsbelastningar
+- **Övervakning och insyn**: Ställa in Application Insights för AI-arbetsbelastningar
 - **Produktionsmönster**: Strategier för företagsklara distributioner
 
-## Workshop Struktur
+## Workshopstruktur
 
-### Modul 1: AZD Grunder (30 minuter)
+### Modul 1: AZD-grunder (30 minuter)
 - Installera och konfigurera AZD
 - Förstå AZD-projektstruktur
 - Din första AZD-distribution
 - **Lab**: Distribuera en enkel webbapplikation
 
-### Modul 2: Azure OpenAI Integration (45 minuter)
+### Modul 2: Azure OpenAI-integration (45 minuter)
 - Ställa in Azure OpenAI-resurser
 - Strategier för modelldistribution
 - Konfigurera API-åtkomst och autentisering
 - **Lab**: Distribuera en chattapplikation med GPT-4
 
 ### Modul 3: RAG-applikationer (45 minuter)
-- Integration med Azure AI Search
+- Azure AI-sökningsintegration
 - Dokumentbearbetning med Azure Document Intelligence
 - Vektorrepresentationer och semantisk sökning
 - **Lab**: Bygg ett dokument Q&A-system
@@ -56,7 +87,7 @@ Välkommen till den praktiska workshopen för att lära dig Azure Developer CLI 
 - Konfiguration av Container Apps
 - Skalning och prestandaoptimering
 - Övervakning och loggning
-- **Lab**: Distribuera till produktion med observabilitet
+- **Lab**: Distribuera till produktion med insyn
 
 ### Modul 5: Avancerade mönster (15 minuter)
 - Distributioner för flera miljöer
@@ -66,7 +97,7 @@ Välkommen till den praktiska workshopen för att lära dig Azure Developer CLI 
 
 ## Förkunskaper
 
-### Nödvändiga Verktyg
+### Nödvändiga verktyg
 
 Installera dessa verktyg innan workshopen:
 
@@ -88,17 +119,17 @@ sudo sh get-docker.sh
 sudo apt-get install python3.10 python3.10-venv python3-pip
 ```
 
-### Azure Konto Setup
+### Azure-kontoinställning
 
-1. **Azure-abonnemang**: [Registrera dig gratis](https://azure.microsoft.com/free/)
+1. **Azure-prenumeration**: [Registrera dig gratis](https://azure.microsoft.com/free/)
 2. **Azure OpenAI-åtkomst**: [Begär åtkomst](https://aka.ms/oai/access)
 3. **Nödvändiga behörigheter**:
-   - Contributor-roll på abonnemang eller resursgrupp
+   - Contributor-roll på prenumeration eller resursgrupp
    - User Access Administrator (för RBAC-uppdrag)
 
-### Verifiera Förkunskaper
+### Verifiera förkunskaper
 
-Kör detta skript för att verifiera din setup:
+Kör detta skript för att verifiera din inställning:
 
 ```bash
 #!/bin/bash
@@ -142,15 +173,15 @@ fi
 echo "Setup verification complete!"
 ```
 
-## Workshop Material
+## Workshopmaterial
 
-### Lab Övningar
+### Labövningar
 
-Varje modul innehåller praktiska labb med startkod och steg-för-steg-instruktioner:
+Varje modul innehåller praktiska labbar med startkod och steg-för-steg-instruktioner:
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Din första AZD-distribution
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chattapplikation med Azure OpenAI
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-applikation med AI Search
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-applikation med AI-sökning
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Produktionsdistributionsmönster
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Avancerade distributionsscenarier
 
@@ -163,7 +194,7 @@ Varje modul innehåller praktiska labb med startkod och steg-för-steg-instrukti
 
 ### Exempelmallar
 
-Snabbstartsmallar för vanliga AI-scenarier:
+Snabbstartmallar för vanliga AI-scenarier:
 
 ```
 workshop/templates/
@@ -179,11 +210,11 @@ workshop/templates/
 
 Det snabbaste sättet att starta workshopen:
 
-[![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
+[![Öppna i GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
-### Alternativ 2: Lokal Utveckling
+### Alternativ 2: Lokal utveckling
 
-1. **Klona workshop-repositoryt:**
+1. **Klona workshopens repository:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
@@ -201,15 +232,15 @@ cd lab-1-azd-basics
 cat README.md  # Follow the instructions
 ```
 
-### Alternativ 3: Instruktörsledd Workshop
+### Alternativ 3: Instruktörsledd workshop
 
 Om du deltar i en instruktörsledd session:
 
-- 🎥 **Workshop Inspelning**: [Tillgänglig på begäran](https://aka.ms/azd-ai-workshop)
-- 💬 **Discord Community**: [Gå med för live support](https://aka.ms/foundry/discord)
-- **Workshop Feedback**: [Dela din upplevelse](https://aka.ms/azd-workshop-feedback)
+- 🎥 **Workshopinspelning**: [Tillgänglig på begäran](https://aka.ms/azd-ai-workshop)
+- 💬 **Discord-community**: [Gå med för live-support](https://aka.ms/foundry/discord)
+- **Workshopfeedback**: [Dela din upplevelse](https://aka.ms/azd-workshop-feedback)
 
-## Workshop Tidslinje
+## Workshopens tidslinje
 
 ### Självstudier (3 timmar)
 
@@ -222,7 +253,7 @@ Om du deltar i en instruktörsledd session:
 ⏰ 02:45 - 03:00  Q&A and Next Steps
 ```
 
-### Instruktörsledd Session (2,5 timmar)
+### Instruktörsledd session (2,5 timmar)
 
 ```
 ⏰ 00:00 - 00:15  Welcome & Prerequisites Check
@@ -241,40 +272,40 @@ I slutet av denna workshop kommer du att kunna:
 
 ✅ **Distribuera AI-applikationer** med AZD-mallar  
 ✅ **Konfigurera Azure OpenAI**-tjänster med korrekt säkerhet  
-✅ **Bygga RAG-applikationer** med integration av Azure AI Search  
-✅ **Implementera produktionsmönster** för företags AI-arbetsbelastningar  
+✅ **Bygga RAG-applikationer** med Azure AI-sökningsintegration  
+✅ **Implementera produktionsmönster** för företagsklara AI-arbetsbelastningar  
 ✅ **Övervaka och felsöka** AI-applikationsdistributioner  
-✅ **Tillämpa kostnadsoptimeringsstrategier** för AI-arbetsbelastningar  
+✅ **Tillämpa kostnadsoptimering** för AI-arbetsbelastningar  
 
 ## Community & Support
 
-### Under Workshopen
+### Under workshopen
 
-- 🙋 **Frågor**: Använd workshop-chatten eller räck upp handen
+- 🙋 **Frågor**: Använd workshopchatten eller räck upp handen
 - 🐛 **Problem**: Kolla [felsökningsguiden](../docs/troubleshooting/ai-troubleshooting.md)
 - **Tips**: Dela upptäckter med andra deltagare
 
-### Efter Workshopen
+### Efter workshopen
 
 - 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
 - **GitHub Issues**: [Rapportera mallproblem](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
-- 📧 **Feedback**: [Workshop utvärderingsformulär](https://aka.ms/azd-workshop-feedback)
+- 📧 **Feedback**: [Workshopens utvärderingsformulär](https://aka.ms/azd-workshop-feedback)
 
-## Nästa Steg
+## Nästa steg
 
-### Fortsätt Lärandet
+### Fortsätt lära dig
 
-1. **Avancerade Scenarier**: Utforska [distributioner för flera regioner](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
-2. **CI/CD Integration**: Ställ in [GitHub Actions arbetsflöden](../docs/deployment/github-actions.md)
-3. **Egna Mallar**: Skapa dina egna [AZD-mallar](../docs/getting-started/custom-templates.md)
+1. **Avancerade scenarier**: Utforska [distributioner för flera regioner](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
+2. **CI/CD-integration**: Ställ in [GitHub Actions-arbetsflöden](../docs/deployment/github-actions.md)
+3. **Anpassade mallar**: Skapa dina egna [AZD-mallar](../docs/getting-started/custom-templates.md)
 
-### Tillämpa i Dina Projekt
+### Tillämpa i dina projekt
 
 1. **Bedömning**: Använd vår [beredskapschecklista](./production-readiness-checklist.md)
 2. **Mallar**: Börja med våra [AI-specifika mallar](../../../workshop/templates)
 3. **Support**: Gå med i [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
 
-### Dela Din Framgång
+### Dela din framgång
 
 - ⭐ **Stjärnmärk repositoryt** om denna workshop hjälpte dig
 - 🐦 **Dela på sociala medier** med #AzureDeveloperCLI #AzureAI
@@ -282,29 +313,27 @@ I slutet av denna workshop kommer du att kunna:
 
 ---
 
-## Workshop Feedback
+## Workshopfeedback
 
 Din feedback hjälper oss att förbättra workshopupplevelsen:
 
 | Aspekt | Betyg (1-5) | Kommentarer |
 |--------|--------------|----------|
-| Kvalitet på innehåll | ⭐⭐⭐⭐⭐ | |
-| Praktiska labb | ⭐⭐⭐⭐⭐ | |
+| Innehållskvalitet | ⭐⭐⭐⭐⭐ | |
+| Praktiska labbar | ⭐⭐⭐⭐⭐ | |
 | Dokumentation | ⭐⭐⭐⭐⭐ | |
 | Svårighetsnivå | ⭐⭐⭐⭐⭐ | |
 | Övergripande upplevelse | ⭐⭐⭐⭐⭐ | |
 
-**Skicka feedback**: [Workshop Utvärderingsformulär](https://aka.ms/azd-workshop-feedback)
+**Skicka feedback**: [Workshopens utvärderingsformulär](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**Föregående:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Nästa:** Börja med [Lab 1: AZD Grunder](../../../workshop/lab-1-azd-basics)
+**Föregående:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Nästa:** Börja med [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)
 
 **Redo att börja bygga AI-applikationer med AZD?**
 
-[Börja Lab 1: AZD Grunder →](./lab-1-azd-basics/README.md)
+[Börja Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
 
 ---
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiska översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

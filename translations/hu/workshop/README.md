@@ -1,35 +1,66 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-18T09:24:53+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T12:02:50+00:00",
   "source_file": "workshop/README.md",
   "language_code": "hu"
 }
 -->
-# AZD az AI fejlesztők workshopja
+# AZD az AI fejlesztők workshopjához
+
+## AZD sablonok
+
+Egy vállalati szintű AI alkalmazás megoldás felépítése az adott forgatókönyvhöz nagyon hasonlít ahhoz, mintha saját otthont építenél. Megtervezheted magad, tégláról téglára felépítheted, és vállalhatod a felelősséget azért, hogy megfeleljen minden irányelvnek és fejlesztési követelménynek.
+
+**VAGY ....**
+
+Dolgozhatsz egy építésszel, aki ad neked egy _tervrajzot_ egy kezdő otthonhoz, majd együtt dolgozhattok azon, hogy _testre szabjátok_ azt az igényeid szerint. Ez lehetővé teszi, hogy arra koncentrálj, ami **az otthonodat** különlegessé teszi, miközben a vezetékek, vízvezetékek és egyéb függőségek kezelését az szakértőkre bízhatod.
+
+**Ez a megközelítés áll az [AI App Templates](https://ai.azure.com/templates)** mögött - egy sor tervrajz különböző típusú AI alkalmazás "otthonok" építéséhez, az alapvető igényeid és függőségeid alapján.
+
+## Sablon testreszabása
+
+A sablonokat úgy tervezték, hogy működjenek az [Azure AI Foundry](https://ai.azure.com) platformmal. Gondolj erre a platformra úgy, mint a "kiviteleződre", amely hozzáférést biztosít minden erőforráshoz, eszközhöz és szakértelemhez, amire szükséged van a munka elvégzéséhez!
+
+Csak ki kell választanod [a kezdő sablonodat](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). Például, mi az _Get Started with AI Agents_ sablonra fogunk összpontosítani, hogy felépítsünk egy "Agentic AI Home"-ot, amely olyan funkciókkal van ellátva, mint az AI keresés, Red Teaming, értékelések, nyomkövetés, monitorozás és még sok más!
+
+![Tervrajz](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.hu.png)
+
+Csak időpontot kell foglalnod az építésszel, hogy végigvezessen a testreszabási folyamaton. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) lehet az útmutatód. Csak "beszélgess vele", hogy:
+
+- Megismerd a sablonodban található Azure funkciókat
+- Azure erőforrásokat telepíts
+- Információt kapj a telepítésedről
+- Diagnosztizáld és elhárítsd a problémákat!
+
+Ebben a workshopban megtanuljuk, hogyan _bontjuk le_ a meglévő sablont (hogy megértsük, mit nyújt), majd _testre szabjuk_ (hogy megfeleljen az igényeinknek) - lépésről lépésre.
+
+Az AI sablonok **működnek** - a workshop elvégzésével megtanulod, hogyan **teheted sajátoddá**.
+
+----
 
 **Workshop navigáció**
-- **📚 Kurzus kezdőlap**: [AZD kezdőknek](../README.md)
-- **📖 Kapcsolódó fejezetek**: Tartalmazza [1. fejezetet](../README.md#-chapter-1-foundation--quick-start), [2. fejezetet](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) és [5. fejezetet](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📚 Kurzus kezdőlapja**: [AZD kezdőknek](../README.md)
+- **📖 Kapcsolódó fejezetek**: Lefedi [1. fejezetet](../README.md#-chapter-1-foundation--quick-start), [2. fejezetet](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), és [5. fejezetet](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **🛠️ Gyakorlati labor**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 Következő lépések**: [Workshop modulok](../../../workshop)
+- **🚀 Következő lépések**: [Workshop Lab modulok](../../../workshop)
 
-Üdvözlünk az Azure Developer CLI (AZD) gyakorlati workshopján, amely az AI alkalmazások telepítésére összpontosít. Ez a workshop segít az AZD alapjaitól kezdve a termelésre kész AI megoldások telepítéséig.
+Üdvözlünk az Azure Developer CLI (AZD) tanulására fókuszáló gyakorlati workshopon, amely az AI alkalmazások telepítésére összpontosít. Ez a workshop célja, hogy az AZD alapjaitól eljuttasson a termelésre kész AI megoldások telepítéséig.
 
 ## Workshop áttekintés
 
 **Időtartam:** 2-3 óra  
-**Szint:** Kezdő és középhaladó  
-**Előfeltételek:** Alapvető ismeretek az Azure-ról, parancssori eszközökről és AI koncepciókról
+**Szint:** Kezdő-től középhaladóig  
+**Előfeltételek:** Alapvető ismeretek az Azure-ról, parancssori eszközökről és AI fogalmakról
 
 ### Amit megtanulsz
 
-- **AZD alapok**: Az infrastruktúra kódba foglalásának megértése AZD-vel
-- 🤖 **AI szolgáltatások integrációja**: Azure OpenAI, AI Search és más AI szolgáltatások telepítése
+- **AZD alapok**: Infrastruktúra mint kód megértése AZD-vel
+- 🤖 **AI szolgáltatások integrációja**: Azure OpenAI, AI keresés és más AI szolgáltatások telepítése
 - **Konténer telepítés**: Azure Container Apps használata AI alkalmazásokhoz
-- **Biztonsági legjobb gyakorlatok**: Managed Identity és biztonságos konfigurációk alkalmazása
-- **Monitoring és megfigyelés**: Application Insights beállítása AI munkaterhelésekhez
+- **Biztonsági legjobb gyakorlatok**: Kezelt identitás és biztonságos konfigurációk megvalósítása
+- **Monitorozás és megfigyelhetőség**: Application Insights beállítása AI munkaterhelésekhez
 - **Termelési minták**: Vállalati szintű telepítési stratégiák
 
 ## Workshop felépítése
@@ -47,16 +78,16 @@ CO_OP_TRANSLATOR_METADATA:
 - **Labor**: Chat alkalmazás telepítése GPT-4-gyel
 
 ### 3. modul: RAG alkalmazások (45 perc)
-- Azure AI Search integráció
+- Azure AI keresés integrációja
 - Dokumentumfeldolgozás Azure Document Intelligence segítségével
 - Vektor beágyazások és szemantikus keresés
-- **Labor**: Dokumentum kérdés-válasz rendszer építése
+- **Labor**: Dokumentum Q&A rendszer építése
 
 ### 4. modul: Termelési telepítés (30 perc)
-- Konténeralkalmazások konfigurálása
+- Konténer alkalmazások konfigurálása
 - Skálázás és teljesítmény optimalizálás
-- Monitoring és naplózás
-- **Labor**: Telepítés termelésbe megfigyeléssel
+- Monitorozás és naplózás
+- **Labor**: Telepítés termelésbe megfigyelhetőséggel
 
 ### 5. modul: Haladó minták (15 perc)
 - Több környezet telepítése
@@ -68,7 +99,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### Szükséges eszközök
 
-Kérjük, telepítsd az alábbi eszközöket a workshop előtt:
+Kérjük, telepítsd ezeket az eszközöket a workshop előtt:
 
 ```bash
 # Azure Developer CLI
@@ -90,7 +121,7 @@ sudo apt-get install python3.10 python3.10-venv python3-pip
 
 ### Azure fiók beállítása
 
-1. **Azure előfizetés**: [Regisztrálj ingyenesen](https://azure.microsoft.com/free/)
+1. **Azure előfizetés**: [Regisztrálj ingyen](https://azure.microsoft.com/free/)
 2. **Azure OpenAI hozzáférés**: [Kérj hozzáférést](https://aka.ms/oai/access)
 3. **Szükséges jogosultságok**:
    - Contributor szerepkör az előfizetésen vagy erőforráscsoporton
@@ -150,7 +181,7 @@ Minden modul gyakorlati laborokat tartalmaz kezdő kóddal és lépésről lép�
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Az első AZD telepítésed
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chat alkalmazás Azure OpenAI-val
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG alkalmazás AI Search segítségével
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG alkalmazás AI kereséssel
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Termelési telepítési minták
 - **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Haladó telepítési forgatókönyvek
 
@@ -159,9 +190,9 @@ Minden modul gyakorlati laborokat tartalmaz kezdő kóddal és lépésről lép�
 - **[AI Foundry integrációs útmutató](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Átfogó integrációs minták
 - **[AI modell telepítési útmutató](../docs/ai-foundry/ai-model-deployment.md)** - Modell telepítési legjobb gyakorlatok
 - **[Termelési AI gyakorlatok](../docs/ai-foundry/production-ai-practices.md)** - Vállalati telepítési minták
-- **[AI hibakeresési útmutató](../docs/troubleshooting/ai-troubleshooting.md)** - Gyakori problémák és megoldások
+- **[AI hibaelhárítási útmutató](../docs/troubleshooting/ai-troubleshooting.md)** - Gyakori problémák és megoldások
 
-### Mintasablonok
+### Példa sablonok
 
 Gyorsindító sablonok gyakori AI forgatókönyvekhez:
 
@@ -177,19 +208,19 @@ workshop/templates/
 
 ### Opció 1: GitHub Codespaces (Ajánlott)
 
-A workshop leggyorsabb kezdési módja:
+A leggyorsabb módja a workshop elkezdésének:
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
 
 ### Opció 2: Helyi fejlesztés
 
-1. **Workshop repó klónozása:**
+1. **Workshop repozitórium klónozása:**
 ```bash
 git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
 cd AZD-for-beginners/workshop
 ```
 
-2. **Bejelentkezés az Azure-ba:**
+2. **Azure-ba való bejelentkezés:**
 ```bash
 az login
 azd auth login
@@ -239,19 +270,19 @@ Ha oktató által vezetett foglalkozáson veszel részt:
 
 A workshop végére képes leszel:
 
-✅ **AI alkalmazások telepítése** AZD sablonokkal  
-✅ **Azure OpenAI konfigurálása** megfelelő biztonsággal  
-✅ **RAG alkalmazások építése** Azure AI Search integrációval  
-✅ **Termelési minták alkalmazása** vállalati AI munkaterhelésekhez  
-✅ **AI alkalmazások telepítésének monitorozása és hibakeresése**  
-✅ **Költségoptimalizálási stratégiák alkalmazása** AI munkaterhelésekhez  
+✅ **AI alkalmazásokat telepíteni** AZD sablonokkal  
+✅ **Azure OpenAI szolgáltatásokat konfigurálni** megfelelő biztonsággal  
+✅ **RAG alkalmazásokat építeni** Azure AI keresés integrációval  
+✅ **Termelési mintákat megvalósítani** vállalati AI munkaterhelésekhez  
+✅ **AI alkalmazás telepítéseket monitorozni és hibaelhárítani**  
+✅ **Költségoptimalizálási stratégiákat alkalmazni** AI munkaterhelésekhez  
 
 ## Közösség és támogatás
 
 ### A workshop alatt
 
-- 🙋 **Kérdések**: Használd a workshop chatet vagy jelezd kézfeltartással
-- 🐛 **Problémák**: Nézd meg a [hibakeresési útmutatót](../docs/troubleshooting/ai-troubleshooting.md)
+- 🙋 **Kérdések**: Használd a workshop chatet vagy emeld fel a kezed
+- 🐛 **Problémák**: Nézd meg a [hibaelhárítási útmutatót](../docs/troubleshooting/ai-troubleshooting.md)
 - **Tippek**: Oszd meg felfedezéseidet más résztvevőkkel
 
 ### A workshop után
@@ -262,13 +293,13 @@ A workshop végére képes leszel:
 
 ## Következő lépések
 
-### További tanulás
+### Folytasd a tanulást
 
 1. **Haladó forgatókönyvek**: Fedezd fel a [több régiós telepítéseket](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
 2. **CI/CD integráció**: Állítsd be a [GitHub Actions munkafolyamatokat](../docs/deployment/github-actions.md)
 3. **Egyedi sablonok**: Készítsd el saját [AZD sablonjaidat](../docs/getting-started/custom-templates.md)
 
-### Alkalmazás a projektjeidben
+### Alkalmazd a projektjeidben
 
 1. **Értékelés**: Használd a [készség ellenőrzőlistát](./production-readiness-checklist.md)
 2. **Sablonok**: Kezdd az [AI-specifikus sablonokkal](../../../workshop/templates)
@@ -276,8 +307,8 @@ A workshop végére képes leszel:
 
 ### Oszd meg a sikereidet
 
-- ⭐ **Csillagozd a repót**, ha segített a workshop
-- 🐦 **Oszd meg a közösségi médiában** a #AzureDeveloperCLI #AzureAI hashtagekkel
+- ⭐ **Csillagozd a repozitóriumot**, ha segített a workshop
+- 🐦 **Oszd meg a közösségi médiában** a #AzureDeveloperCLI #AzureAI hashtaggel
 - 📝 **Írj blogbejegyzést** az AI telepítési utazásodról
 
 ---
@@ -292,13 +323,13 @@ A visszajelzésed segít javítani a workshop élményét:
 | Gyakorlati laborok | ⭐⭐⭐⭐⭐ | |
 | Dokumentáció | ⭐⭐⭐⭐⭐ | |
 | Nehézségi szint | ⭐⭐⭐⭐⭐ | |
-| Összélmény | ⭐⭐⭐⭐⭐ | |
+| Általános élmény | ⭐⭐⭐⭐⭐ | |
 
 **Visszajelzés beküldése**: [Workshop értékelési űrlap](https://aka.ms/azd-workshop-feedback)
 
 ---
 
-**Előző:** [AI hibakeresési útmutató](../docs/troubleshooting/ai-troubleshooting.md) | **Következő:** Kezdj az [1. laborral: AZD alapok](../../../workshop/lab-1-azd-basics)
+**Előző:** [AI hibaelhárítási útmutató](../docs/troubleshooting/ai-troubleshooting.md) | **Következő:** Kezdj az [1. laborral: AZD alapok](../../../workshop/lab-1-azd-basics)
 
 **Készen állsz AI alkalmazások építésére AZD-vel?**
 
@@ -306,5 +337,3 @@ A visszajelzésed segít javítani a workshop élményét:
 
 ---
 
-**Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

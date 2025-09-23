@@ -1,17 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "be2a85ad63abe28f2eb71ba3f3800272",
-  "translation_date": "2025-09-17T15:07:38+00:00",
+  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
+  "translation_date": "2025-09-23T11:40:28+00:00",
   "source_file": "workshop/README.md",
   "language_code": "es"
 }
 -->
 # Taller AZD para Desarrolladores de IA
 
+## Plantillas AZD
+
+Construir una solución de aplicación de IA de nivel empresarial para tu escenario específico es muy parecido a construir tu propia casa. Puedes diseñarla tú mismo, construirla ladrillo a ladrillo y asumir la responsabilidad de garantizar que cumpla con todas las pautas de gobernanza y desarrollo.
+
+**O ....** 
+
+Puedes trabajar con un arquitecto que te proporcione un _plano_ para una casa inicial y luego colaborar contigo para _personalizarla_ según tus necesidades. Esto te permite concentrarte en lo que hace que **tu casa** sea especial, mientras que los expertos se encargan del cableado, la plomería y otras dependencias subyacentes.
+
+**Esta es la idea detrás de [Plantillas de Aplicaciones de IA](https://ai.azure.com/templates)**: una serie de planos para construir diferentes tipos de "casas de aplicaciones de IA" según tus necesidades y dependencias principales.
+
+## Personalización de Plantillas
+
+Las plantillas están diseñadas para funcionar con [Azure AI Foundry](https://ai.azure.com). Piensa en esta plataforma como tu "contratista de construcción" con acceso a todos los recursos, herramientas y experiencia que necesitas para completar el trabajo.
+
+Solo necesitas elegir [tus plantillas iniciales](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). Por ejemplo, nos centraremos en la plantilla _Get Started with AI Agents_ para construirte una "Casa de IA Agente" que incluye características como Búsqueda de IA, Red Teaming, Evaluaciones, Trazabilidad, Monitoreo y más.
+
+![Plano](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.es.png)
+
+Solo necesitas reservar tiempo con el arquitecto para que te guíe en el proceso de personalización. [GitHub Copilot para Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) puede ser ese guía. Simplemente "chatea con él" para:
+
+- Aprender sobre las características de Azure en tu plantilla
+- Desplegar recursos de Azure
+- Obtener información sobre tu implementación
+- Diagnosticar y solucionar problemas
+
+En este taller, aprenderemos a _descomponer_ la plantilla existente (para entender lo que ofrece) y luego _personalizarla_ (para cumplir con nuestros requisitos), paso a paso.
+
+Las Plantillas de IA **hacen que funcione**: al completar el taller, aprenderás a **hacerlo tuyo**.
+
+----
+
 **Navegación del Taller**
 - **📚 Inicio del Curso**: [AZD Para Principiantes](../README.md)
-- **📖 Capítulos Relacionados**: Incluye [Capítulo 1](../README.md#-chapter-1-foundation--quick-start), [Capítulo 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), y [Capítulo 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📖 Capítulos Relacionados**: Incluye [Capítulo 1](../README.md#-chapter-1-foundation--quick-start), [Capítulo 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) y [Capítulo 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **🛠️ Laboratorio Práctico**: [Laboratorio del Taller de IA](../docs/ai-foundry/ai-workshop-lab.md)
 - **🚀 Próximos Pasos**: [Módulos del Taller](../../../workshop)
 
@@ -26,7 +57,7 @@ Bienvenido al taller práctico para aprender Azure Developer CLI (AZD) con un en
 ### Lo que Aprenderás
 
 - **Fundamentos de AZD**: Comprender Infraestructura como Código con AZD
-- 🤖 **Integración de Servicios de IA**: Desplegar Azure OpenAI, AI Search y otros servicios de IA
+- 🤖 **Integración de Servicios de IA**: Desplegar Azure OpenAI, Búsqueda de IA y otros servicios de IA
 - **Despliegue de Contenedores**: Usar Azure Container Apps para aplicaciones de IA
 - **Mejores Prácticas de Seguridad**: Implementar Identidad Administrada y configuraciones seguras
 - **Monitoreo y Observabilidad**: Configurar Application Insights para cargas de trabajo de IA
@@ -47,22 +78,22 @@ Bienvenido al taller práctico para aprender Azure Developer CLI (AZD) con un en
 - **Laboratorio**: Desplegar una aplicación de chat con GPT-4
 
 ### Módulo 3: Aplicaciones RAG (45 minutos)
-- Integración con Azure AI Search
+- Integración con Búsqueda de IA de Azure
 - Procesamiento de documentos con Azure Document Intelligence
 - Embeddings vectoriales y búsqueda semántica
 - **Laboratorio**: Construir un sistema de preguntas y respuestas basado en documentos
 
 ### Módulo 4: Despliegue en Producción (30 minutos)
 - Configuración de Container Apps
-- Escalabilidad y optimización de rendimiento
+- Optimización de escalabilidad y rendimiento
 - Monitoreo y registro
 - **Laboratorio**: Desplegar en producción con observabilidad
 
 ### Módulo 5: Patrones Avanzados (15 minutos)
 - Despliegues en múltiples entornos
-- Integración con CI/CD
+- Integración CI/CD
 - Estrategias de optimización de costos
-- **Cierre**: Lista de verificación para preparación de producción
+- **Conclusión**: Lista de verificación para preparación de producción
 
 ## Requisitos Previos
 
@@ -88,7 +119,7 @@ sudo sh get-docker.sh
 sudo apt-get install python3.10 python3.10-venv python3-pip
 ```
 
-### Configuración de Cuenta de Azure
+### Configuración de Cuenta Azure
 
 1. **Suscripción de Azure**: [Regístrate gratis](https://azure.microsoft.com/free/)
 2. **Acceso a Azure OpenAI**: [Solicitar acceso](https://aka.ms/oai/access)
@@ -146,19 +177,19 @@ echo "Setup verification complete!"
 
 ### Ejercicios de Laboratorio
 
-Cada módulo incluye laboratorios prácticos con código inicial e instrucciones paso a paso:
+Cada módulo incluye laboratorios prácticos con código inicial y pasos detallados:
 
 - **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Tu primer despliegue con AZD
 - **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Aplicación de chat con Azure OpenAI
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Aplicación RAG con AI Search
+- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - Aplicación RAG con Búsqueda de IA
 - **[lab-4-production/](../../../workshop/lab-4-production)** - Patrones de despliegue en producción
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Escenarios de despliegue avanzados
+- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Escenarios avanzados de despliegue
 
 ### Materiales de Referencia
 
-- **[Guía de Integración de AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Patrones de integración completos
-- **[Guía de Despliegue de Modelos de IA](../docs/ai-foundry/ai-model-deployment.md)** - Mejores prácticas para despliegue de modelos
-- **[Prácticas de IA en Producción](../docs/ai-foundry/production-ai-practices.md)** - Patrones de despliegue empresariales
+- **[Guía de Integración con AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Patrones de integración completos
+- **[Guía de Despliegue de Modelos de IA](../docs/ai-foundry/ai-model-deployment.md)** - Mejores prácticas de despliegue de modelos
+- **[Prácticas de IA en Producción](../docs/ai-foundry/production-ai-practices.md)** - Patrones de despliegue empresarial
 - **[Guía de Solución de Problemas de IA](../docs/troubleshooting/ai-troubleshooting.md)** - Problemas comunes y soluciones
 
 ### Plantillas de Ejemplo
@@ -239,10 +270,10 @@ Si estás asistiendo a una sesión guiada por instructor:
 
 Al final de este taller, serás capaz de:
 
-✅ **Desplegar aplicaciones de IA** usando plantillas de AZD  
+✅ **Desplegar aplicaciones de IA** usando plantillas AZD  
 ✅ **Configurar servicios de Azure OpenAI** con seguridad adecuada  
-✅ **Construir aplicaciones RAG** con integración de Azure AI Search  
-✅ **Implementar patrones de producción** para cargas de trabajo empresariales de IA  
+✅ **Construir aplicaciones RAG** con integración de Búsqueda de IA de Azure  
+✅ **Implementar patrones de producción** para cargas de trabajo de IA empresariales  
 ✅ **Monitorear y solucionar problemas** en despliegues de aplicaciones de IA  
 ✅ **Aplicar estrategias de optimización de costos** para cargas de trabajo de IA  
 
@@ -266,19 +297,19 @@ Al final de este taller, serás capaz de:
 
 1. **Escenarios Avanzados**: Explora [despliegues en múltiples regiones](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
 2. **Integración CI/CD**: Configura [flujos de trabajo con GitHub Actions](../docs/deployment/github-actions.md)
-3. **Plantillas Personalizadas**: Crea tus propias [plantillas de AZD](../docs/getting-started/custom-templates.md)
+3. **Plantillas Personalizadas**: Crea tus propias [plantillas AZD](../docs/getting-started/custom-templates.md)
 
 ### Aplicar en tus Proyectos
 
 1. **Evaluación**: Usa nuestra [lista de verificación de preparación](./production-readiness-checklist.md)
-2. **Plantillas**: Comienza con nuestras [plantillas específicas para IA](../../../workshop/templates)
+2. **Plantillas**: Comienza con nuestras [plantillas específicas de IA](../../../workshop/templates)
 3. **Soporte**: Únete al [Discord de Azure AI Foundry](https://aka.ms/foundry/discord)
 
 ### Comparte tu Éxito
 
-- ⭐ **Marca el repositorio como favorito** si este taller te ayudó
+- ⭐ **Dale estrella al repositorio** si este taller te ayudó
 - 🐦 **Comparte en redes sociales** con #AzureDeveloperCLI #AzureAI
-- 📝 **Escribe un blog** sobre tu experiencia de despliegue de IA
+- 📝 **Escribe un post en tu blog** sobre tu experiencia de despliegue de IA
 
 ---
 
@@ -287,7 +318,7 @@ Al final de este taller, serás capaz de:
 Tu opinión nos ayuda a mejorar la experiencia del taller:
 
 | Aspecto | Calificación (1-5) | Comentarios |
-|--------|---------------------|-------------|
+|--------|--------------|----------|
 | Calidad del Contenido | ⭐⭐⭐⭐⭐ | |
 | Laboratorios Prácticos | ⭐⭐⭐⭐⭐ | |
 | Documentación | ⭐⭐⭐⭐⭐ | |
@@ -306,5 +337,3 @@ Tu opinión nos ayuda a mejorar la experiencia del taller:
 
 ---
 
-**Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
