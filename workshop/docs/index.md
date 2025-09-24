@@ -69,10 +69,4 @@ Ready to get started? Navigate through the workshop modules:
 
 ## Have feedback?
 
-Post an issue on this repo (tag it `Workshop`) or join us on Discord and post to our `#get-help` channel
-
----
-
-**Ready to start building AI applications with AZD?**
-
-[Begin with Module 1: Select AI Template →](instructions/1-Select-AI-Template.md)
+Post an issue on this repo (tag it `Workshop`) or join us on [Discord](https://aka.ms/foundry/discord) and post to our `#get-help` channel

@@ -96,6 +96,7 @@ azd up
 - **🎯 Start Here**: [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
 - **📖 Patterns**: [AI Model Deployment](docs/ai-foundry/ai-model-deployment.md) - Deploy and manage AI models
 - **🛠️ Workshop**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-ready
+- **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning with MkDocs * DevContainer Environment
 - **📋 Templates**: [Azure AI Foundry Templates](#featured-azure-ai-foundry-templates)
 
 #### Practical Exercises
@@ -262,6 +263,67 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ---
 
+## 🎓 Workshop Overview: Hands-On Learning Experience
+
+### Interactive Workshop Materials
+**Comprehensive hands-on learning with browser-based tools and guided exercises**
+
+Our workshop materials provide a structured, interactive learning experience that complements the chapter-based curriculum above. The workshop is designed for both self-paced learning and instructor-led sessions.
+
+#### 🛠️ Workshop Features
+- **Browser-Based Interface**: Complete MkDocs-powered workshop with search, copy, and theme features
+- **GitHub Codespaces Integration**: One-click development environment setup
+- **Structured Learning Path**: 7-step guided exercises (3.5 hours total)
+- **Discovery → Deployment → Customization**: Progressive methodology
+- **Interactive DevContainer Environment**: Pre-configured tools and dependencies
+
+#### 📚 Workshop Structure
+The workshop follows a **Discovery → Deployment → Customization** methodology:
+
+1. **Discovery Phase** (45 mins)
+   - Explore Azure AI Foundry templates and services
+   - Understand multi-agent architecture patterns
+   - Review deployment requirements and prerequisites
+
+2. **Deployment Phase** (2 hours)
+   - Hands-on deployment of AI applications with AZD
+   - Configure Azure AI services and endpoints
+   - Implement security and authentication patterns
+
+3. **Customization Phase** (45 mins)
+   - Modify applications for specific use cases
+   - Optimize for production deployment
+   - Implement monitoring and cost management
+
+#### 🚀 Getting Started with the Workshop
+```bash
+# Option 1: GitHub Codespaces (Recommended)
+# Click "Code" → "Create codespace on main" in the repository
+
+# Option 2: Local Development
+git clone https://github.com/microsoft/azd-for-beginners.git
+cd azd-for-beginners/workshop
+# Follow the setup instructions in workshop/README.md
+```
+
+#### 🎯 Workshop Learning Outcomes
+By completing the workshop, participants will:
+- **Deploy Production AI Applications**: Use AZD with Azure AI Foundry services
+- **Master Multi-Agent Architectures**: Implement coordinated AI agent solutions
+- **Implement Security Best Practices**: Configure authentication and access control
+- **Optimize for Scale**: Design cost-effective, performant deployments
+- **Troubleshoot Deployments**: Resolve common issues independently
+
+#### 📖 Workshop Resources
+- **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning environment
+- **📋 Step-by-Step Instructions**: [Guided Exercises](workshop/docs/instructions/) - Detailed walkthroughs
+- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-focused exercises
+- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Environment configuration
+
+**Perfect for**: Corporate training, university courses, self-paced learning, and developer bootcamps.
+
+---
+
 ## 📖 What is Azure Developer CLI?
 
 Azure Developer CLI (azd) is a developer-centric command-line interface that accelerates the process of building and deploying applications to Azure. It provides:
@@ -345,8 +407,10 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 - [**Study Guide**](resources/study-guide.md) - Comprehensive practice exercises
 
 ### Hands-On Workshops
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-deployable
-- [**AZD For Beginners Workshop**](workshop/README.md) - Complete hands-on workshop materials
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-deployable (2-3 hours)
+- [**Interactive Workshop Guide**](workshop/README.md) - Browser-based workshop with MkDocs and DevContainer Environment
+- [**Structured Learning Path**](workshop/docs/instructions/) -7-step guided exercises (Discovery → Deployment → Customization)
+- [**AZD For Beginners Workshop**](workshop/README.md) - Complete hands-on workshop materials with GitHub Codespaces integration
 
 ### External Learning Resources
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)

@@ -22,6 +22,45 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.3.0] - 2025-09-24
+
+#### Enhanced Workshop Materials and Interactive Learning Experience
+**This version introduces comprehensive workshop materials with browser-based interactive guides and structured learning paths.**
+
+#### Added
+- **🎥 Interactive Workshop Guide**: Browser-based workshop experience with MkDocs preview capability
+- **📝 Structured Workshop Instructions**: 7-step guided learning path from discovery to customization
+  - 0-Introduction: Workshop overview and setup
+  - 1-Select-AI-Template: Template discovery and selection process
+  - 2-Validate-AI-Template: Deployment and validation procedures
+  - 3-Deconstruct-AI-Template: Understanding template architecture
+  - 4-Configure-AI-Template: Configuration and customization
+  - 5-Customize-AI-Template: Advanced modifications and iterations
+  - 6-Teardown-Infrastructure: Cleanup and resource management
+  - 7-Wrap-up: Summary and next steps
+- **🛠️ Workshop Tooling**: MkDocs configuration with Material theme for enhanced learning experience
+- **🎯 Hands-On Learning Path**: 3-step methodology (Discovery → Deployment → Customization)
+- **📱 GitHub Codespaces Integration**: Seamless development environment setup
+
+#### Enhanced
+- **AI Workshop Lab**: Extended with comprehensive 2-3 hour structured learning experience
+- **Workshop Documentation**: Professional presentation with navigation and visual aids
+- **Learning Progression**: Clear step-by-step guidance from template selection to production deployment
+- **Developer Experience**: Integrated tooling for streamlined development workflows
+
+#### Improved
+- **Accessibility**: Browser-based interface with search, copy functionality, and theme toggle
+- **Self-Paced Learning**: Flexible workshop structure accommodating different learning speeds
+- **Practical Application**: Real-world AI template deployment scenarios
+- **Community Integration**: Discord integration for workshop support and collaboration
+
+#### Workshop Features
+- **Built-in Search**: Quick keyword and lesson discovery
+- **Copy Code Blocks**: Hover-to-copy functionality for all code examples
+- **Theme Toggle**: Dark/light mode support for different preferences
+- **Visual Assets**: Screenshots and diagrams for enhanced understanding
+- **Help Integration**: Direct Discord access for community support
+
 ### [v3.2.0] - 2025-09-17
 
 #### Major Navigation Restructuring and Chapter-Based Learning System
