@@ -1,35 +1,74 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "73f4ab6147d5fac5f8c5ad72742e8e1d",
-  "translation_date": "2025-09-18T08:08:27+00:00",
+  "original_hash": "7651a7fb2b5e367812bf01aa209a3612",
+  "translation_date": "2025-09-24T23:23:49+00:00",
   "source_file": "changelog.md",
   "language_code": "ms"
 }
 -->
-# Log Perubahan - AZD Untuk Pemula
+# Changelog - AZD Untuk Pemula
 
 ## Pengenalan
 
-Log perubahan ini mendokumentasikan semua perubahan, kemas kini, dan penambahbaikan penting pada repositori AZD Untuk Pemula. Kami mengikuti prinsip versi semantik dan mengekalkan log ini untuk membantu pengguna memahami apa yang telah berubah antara versi.
+Changelog ini mendokumentasikan semua perubahan, kemas kini, dan penambahbaikan penting kepada repositori AZD Untuk Pemula. Kami mengikuti prinsip versi semantik dan mengekalkan log ini untuk membantu pengguna memahami perubahan antara versi.
 
 ## Matlamat Pembelajaran
 
-Dengan menyemak log perubahan ini, anda akan:
-- Sentiasa mendapat maklumat tentang ciri baharu dan penambahan kandungan
+Dengan menyemak changelog ini, anda akan:
+- Sentiasa dimaklumkan tentang ciri baharu dan penambahan kandungan
 - Memahami penambahbaikan yang dibuat pada dokumentasi sedia ada
 - Menjejaki pembetulan dan penyelesaian pepijat untuk memastikan ketepatan
 - Mengikuti evolusi bahan pembelajaran dari masa ke masa
 
 ## Hasil Pembelajaran
 
-Selepas menyemak entri log perubahan, anda akan dapat:
-- Mengenal pasti kandungan dan sumber baharu yang tersedia untuk pembelajaran
-- Memahami bahagian mana yang telah dikemas kini atau ditambah baik
+Selepas menyemak entri changelog, anda akan dapat:
+- Mengenal pasti kandungan dan sumber baharu untuk pembelajaran
+- Memahami bahagian yang telah dikemas kini atau ditambah baik
 - Merancang laluan pembelajaran anda berdasarkan bahan terkini
 - Memberikan maklum balas dan cadangan untuk penambahbaikan masa depan
 
 ## Sejarah Versi
+
+### [v3.3.0] - 2025-09-24
+
+#### Bahan Bengkel Dipertingkatkan dan Pengalaman Pembelajaran Interaktif
+**Versi ini memperkenalkan bahan bengkel yang komprehensif dengan panduan interaktif berasaskan pelayar dan laluan pembelajaran yang terstruktur.**
+
+#### Ditambah
+- **🎥 Panduan Bengkel Interaktif**: Pengalaman bengkel berasaskan pelayar dengan keupayaan pratonton MkDocs
+- **📝 Arahan Bengkel Terstruktur**: Laluan pembelajaran 7 langkah dari penemuan hingga penyesuaian
+  - 0-Pengenalan: Gambaran keseluruhan bengkel dan persediaan
+  - 1-Pilih-Templat-AI: Proses penemuan dan pemilihan templat
+  - 2-Sahkan-Templat-AI: Prosedur penyebaran dan pengesahan
+  - 3-Bongkar-Templat-AI: Memahami seni bina templat
+  - 4-Konfigurasi-Templat-AI: Konfigurasi dan penyesuaian
+  - 5-Sesuaikan-Templat-AI: Pengubahsuaian dan iterasi lanjutan
+  - 6-Hapuskan-Infrastruktur: Pembersihan dan pengurusan sumber
+  - 7-Penutup: Ringkasan dan langkah seterusnya
+- **🛠️ Alat Bengkel**: Konfigurasi MkDocs dengan tema Material untuk pengalaman pembelajaran yang dipertingkatkan
+- **🎯 Laluan Pembelajaran Praktikal**: Metodologi 3 langkah (Penemuan → Penyebaran → Penyesuaian)
+- **📱 Integrasi GitHub Codespaces**: Persediaan persekitaran pembangunan yang lancar
+
+#### Dipertingkatkan
+- **Makmal Bengkel AI**: Diperluaskan dengan pengalaman pembelajaran terstruktur selama 2-3 jam
+- **Dokumentasi Bengkel**: Persembahan profesional dengan navigasi dan bantuan visual
+- **Perkembangan Pembelajaran**: Panduan langkah demi langkah yang jelas dari pemilihan templat hingga penyebaran pengeluaran
+- **Pengalaman Pembangun**: Alat yang diintegrasikan untuk aliran kerja pembangunan yang lebih lancar
+
+#### Diperbaiki
+- **Kebolehaksesan**: Antara muka berasaskan pelayar dengan fungsi carian, salin, dan togol tema
+- **Pembelajaran Kendiri**: Struktur bengkel fleksibel yang sesuai dengan kelajuan pembelajaran yang berbeza
+- **Aplikasi Praktikal**: Senario penyebaran templat AI dunia sebenar
+- **Integrasi Komuniti**: Integrasi Discord untuk sokongan bengkel dan kerjasama
+
+#### Ciri Bengkel
+- **Carian Terbina Dalam**: Penemuan kata kunci dan pelajaran dengan cepat
+- **Salin Blok Kod**: Fungsi salin dengan hover untuk semua contoh kod
+- **Togol Tema**: Sokongan mod gelap/terang untuk pilihan yang berbeza
+- **Aset Visual**: Tangkapan skrin dan diagram untuk pemahaman yang lebih baik
+- **Integrasi Bantuan**: Akses langsung ke Discord untuk sokongan komuniti
 
 ### [v3.2.0] - 2025-09-17
 
@@ -38,41 +77,41 @@ Selepas menyemak entri log perubahan, anda akan dapat:
 
 #### Ditambah
 - **📚 Sistem Pembelajaran Berasaskan Bab**: Menyusun semula keseluruhan kursus kepada 8 bab pembelajaran progresif
-  - Bab 1: Asas & Permulaan Pantas (⭐ - 30-45 minit)
+  - Bab 1: Asas & Permulaan Cepat (⭐ - 30-45 minit)
   - Bab 2: Pembangunan Berasaskan AI (⭐⭐ - 1-2 jam)
   - Bab 3: Konfigurasi & Pengesahan (⭐⭐ - 45-60 minit)
-  - Bab 4: Infrastruktur sebagai Kod & Penerapan (⭐⭐⭐ - 1-1.5 jam)
+  - Bab 4: Infrastruktur sebagai Kod & Penyebaran (⭐⭐⭐ - 1-1.5 jam)
   - Bab 5: Penyelesaian AI Multi-Ejen (⭐⭐⭐⭐ - 2-3 jam)
-  - Bab 6: Pengesahan & Perancangan Pra-Penerapan (⭐⭐ - 1 jam)
-  - Bab 7: Penyelesaian Masalah & Penyahpepijatan (⭐⭐ - 1-1.5 jam)
-  - Bab 8: Corak Pengeluaran & Perusahaan (⭐⭐⭐⭐ - 2-3 jam)
-- **📚 Sistem Navigasi Komprehensif**: Tajuk dan kaki navigasi yang konsisten di semua dokumentasi
+  - Bab 6: Pengesahan & Perancangan Pra-Penyebaran (⭐⭐ - 1 jam)
+  - Bab 7: Penyelesaian Masalah & Debugging (⭐⭐ - 1-1.5 jam)
+  - Bab 8: Corak Pengeluaran & Enterprise (⭐⭐⭐⭐ - 2-3 jam)
+- **📚 Sistem Navigasi Komprehensif**: Header dan footer navigasi yang konsisten di seluruh dokumentasi
 - **🎯 Penjejakan Kemajuan**: Senarai semak penyelesaian kursus dan sistem pengesahan pembelajaran
 - **🗺️ Panduan Laluan Pembelajaran**: Titik masuk yang jelas untuk tahap pengalaman dan matlamat yang berbeza
 - **🔗 Navigasi Rujukan Silang**: Bab berkaitan dan prasyarat yang jelas dihubungkan
 
 #### Dipertingkatkan
-- **Struktur README**: Diubah menjadi platform pembelajaran berstruktur dengan organisasi berasaskan bab
+- **Struktur README**: Diubah menjadi platform pembelajaran terstruktur dengan organisasi berasaskan bab
 - **Navigasi Dokumentasi**: Setiap halaman kini termasuk konteks bab dan panduan perkembangan
 - **Organisasi Templat**: Contoh dan templat dipetakan kepada bab pembelajaran yang sesuai
-- **Integrasi Sumber**: Lembaran rujukan, Soalan Lazim, dan panduan belajar dihubungkan kepada bab yang relevan
+- **Integrasi Sumber**: Lembaran cheat, FAQ, dan panduan belajar dihubungkan kepada bab yang relevan
 - **Integrasi Bengkel**: Makmal praktikal dipetakan kepada objektif pembelajaran pelbagai bab
 
 #### Diubah
 - **Perkembangan Pembelajaran**: Beralih daripada dokumentasi linear kepada pembelajaran berasaskan bab yang fleksibel
 - **Penempatan Konfigurasi**: Panduan konfigurasi diposisikan semula sebagai Bab 3 untuk aliran pembelajaran yang lebih baik
 - **Integrasi Kandungan AI**: Integrasi kandungan AI yang lebih baik di seluruh perjalanan pembelajaran
-- **Kandungan Pengeluaran**: Corak lanjutan disatukan dalam Bab 8 untuk pelajar perusahaan
+- **Kandungan Pengeluaran**: Corak lanjutan disatukan dalam Bab 8 untuk pelajar enterprise
 
 #### Diperbaiki
-- **Pengalaman Pengguna**: Petunjuk navigasi yang jelas dan indikator perkembangan bab
-- **Kebolehcapaian**: Corak navigasi yang konsisten untuk perjalanan kursus yang lebih mudah
-- **Pembentangan Profesional**: Struktur kursus gaya universiti yang sesuai untuk latihan akademik dan korporat
-- **Kecekapan Pembelajaran**: Masa yang dikurangkan untuk mencari kandungan yang relevan melalui organisasi yang lebih baik
+- **Pengalaman Pengguna**: Breadcrumb navigasi yang jelas dan indikator perkembangan bab
+- **Kebolehaksesan**: Corak navigasi yang konsisten untuk perjalanan kursus yang lebih mudah
+- **Persembahan Profesional**: Struktur kursus gaya universiti yang sesuai untuk latihan akademik dan korporat
+- **Kecekapan Pembelajaran**: Masa yang dikurangkan untuk mencari kandungan yang relevan melalui organisasi yang dipertingkatkan
 
 #### Pelaksanaan Teknikal
-- **Tajuk Navigasi**: Navigasi bab yang diseragamkan di lebih 40+ fail dokumentasi
-- **Navigasi Kaki**: Panduan perkembangan yang konsisten dan indikator penyelesaian bab
+- **Header Navigasi**: Navigasi bab yang diseragamkan di lebih 40 fail dokumentasi
+- **Footer Navigasi**: Panduan perkembangan yang konsisten dan indikator penyelesaian bab
 - **Pautan Silang**: Sistem pautan dalaman yang komprehensif menghubungkan konsep berkaitan
 - **Pemetaan Bab**: Templat dan contoh yang jelas dikaitkan dengan objektif pembelajaran
 
@@ -81,40 +120,40 @@ Selepas menyemak entri log perubahan, anda akan dapat:
 - **🎯 Penilaian Berasaskan Bab**: Setiap bab termasuk objektif pembelajaran khusus dan latihan praktikal
 - **📋 Penjejakan Kemajuan**: Jadual pembelajaran mingguan dengan hasil yang boleh diukur dan senarai semak penyelesaian
 - **❓ Soalan Penilaian**: Soalan pengesahan pengetahuan untuk setiap bab dengan hasil profesional
-- **🛠️ Latihan Praktikal**: Aktiviti praktikal dengan senario penerapan sebenar dan penyelesaian masalah
-- **📊 Perkembangan Kemahiran**: Kemajuan yang jelas daripada konsep asas kepada corak perusahaan dengan fokus pembangunan kerjaya
+- **🛠️ Latihan Praktikal**: Aktiviti praktikal dengan senario penyebaran sebenar dan penyelesaian masalah
+- **📊 Perkembangan Kemahiran**: Kemajuan yang jelas dari konsep asas ke corak enterprise dengan fokus pembangunan kerjaya
 - **🎓 Kerangka Pensijilan**: Hasil pembangunan profesional dan sistem pengiktirafan komuniti
-- **⏱️ Pengurusan Garis Masa**: Pelan pembelajaran 10 minggu yang berstruktur dengan pengesahan pencapaian
+- **⏱️ Pengurusan Garis Masa**: Pelan pembelajaran 10 minggu yang terstruktur dengan pengesahan pencapaian
 
 ### [v3.1.0] - 2025-09-17
 
-#### Penyelesaian AI Multi-Ejen yang Dipertingkatkan
+#### Penyelesaian AI Multi-Ejen Dipertingkatkan
 **Versi ini meningkatkan penyelesaian runcit multi-ejen dengan penamaan ejen yang lebih baik dan dokumentasi yang dipertingkatkan.**
 
 #### Diubah
-- **Terminologi Multi-Ejen**: Menggantikan "ejen Cora" dengan "ejen Pelanggan" di seluruh penyelesaian multi-ejen runcit untuk pemahaman yang lebih jelas
-- **Seni Bina Ejen**: Mengemas kini semua dokumentasi, templat ARM, dan contoh kod untuk menggunakan penamaan "ejen Pelanggan" yang konsisten
+- **Terminologi Multi-Ejen**: Menggantikan "Cora agent" dengan "Customer agent" di seluruh penyelesaian multi-ejen runcit untuk pemahaman yang lebih jelas
+- **Seni Bina Ejen**: Mengemas kini semua dokumentasi, templat ARM, dan contoh kod untuk menggunakan penamaan "Customer agent" yang konsisten
 - **Contoh Konfigurasi**: Memodenkan corak konfigurasi ejen dengan konvensyen penamaan yang dikemas kini
 - **Konsistensi Dokumentasi**: Memastikan semua rujukan menggunakan nama ejen yang profesional dan deskriptif
 
 #### Dipertingkatkan
-- **Pakej Templat ARM**: Mengemas kini templat ARM multi-ejen runcit dengan rujukan ejen Pelanggan
+- **Pakej Templat ARM**: Mengemas kini templat ARM multi-ejen runcit dengan rujukan Customer agent
 - **Diagram Seni Bina**: Menyegarkan diagram Mermaid dengan penamaan ejen yang dikemas kini
 - **Contoh Kod**: Kelas Python dan contoh pelaksanaan kini menggunakan penamaan CustomerAgent
-- **Pembolehubah Persekitaran**: Mengemas kini semua skrip penerapan untuk menggunakan konvensyen CUSTOMER_AGENT_NAME
+- **Pembolehubah Persekitaran**: Mengemas kini semua skrip penyebaran untuk menggunakan konvensyen CUSTOMER_AGENT_NAME
 
 #### Diperbaiki
 - **Pengalaman Pembangun**: Peranan dan tanggungjawab ejen yang lebih jelas dalam dokumentasi
-- **Kesediaan Pengeluaran**: Penjajaran yang lebih baik dengan konvensyen penamaan perusahaan
+- **Kesediaan Pengeluaran**: Penjajaran yang lebih baik dengan konvensyen penamaan enterprise
 - **Bahan Pembelajaran**: Penamaan ejen yang lebih intuitif untuk tujuan pendidikan
-- **Kebolehgunaan Templat**: Pemahaman yang dipermudahkan tentang fungsi ejen dan corak penerapan
+- **Kebolehgunaan Templat**: Pemahaman yang dipermudahkan tentang fungsi ejen dan corak penyebaran
 
 #### Butiran Teknikal
 - Mengemas kini diagram seni bina Mermaid dengan rujukan CustomerAgent
 - Menggantikan nama kelas CoraAgent dengan CustomerAgent dalam contoh Python
-- Mengubah konfigurasi JSON templat ARM untuk menggunakan jenis ejen "pelanggan"
+- Mengubah konfigurasi templat ARM JSON untuk menggunakan jenis ejen "customer"
 - Mengemas kini pembolehubah persekitaran daripada CORA_AGENT_* kepada CUSTOMER_AGENT_* 
-- Menyegarkan semua arahan penerapan dan konfigurasi kontena
+- Menyegarkan semua arahan penyebaran dan konfigurasi kontena
 
 ### [v3.0.0] - 2025-09-12
 
@@ -122,17 +161,17 @@ Selepas menyemak entri log perubahan, anda akan dapat:
 **Versi ini mengubah repositori menjadi sumber pembelajaran AI yang komprehensif dengan integrasi Azure AI Foundry.**
 
 #### Ditambah
-- **🤖 Laluan Pembelajaran Berasaskan AI**: Penyusunan semula lengkap yang memfokuskan kepada pembangun dan jurutera AI
+- **🤖 Laluan Pembelajaran Berasaskan AI**: Penyusunan semula lengkap yang memprioritikan pembangun dan jurutera AI
 - **Panduan Integrasi Azure AI Foundry**: Dokumentasi komprehensif untuk menghubungkan AZD dengan perkhidmatan Azure AI Foundry
-- **Corak Penerapan Model AI**: Panduan terperinci yang merangkumi pemilihan model, konfigurasi, dan strategi penerapan pengeluaran
-- **Makmal Bengkel AI**: Bengkel praktikal selama 2-3 jam untuk menukar aplikasi AI kepada penyelesaian yang boleh diterapkan AZD
-- **Amalan Terbaik AI Pengeluaran**: Corak siap perusahaan untuk penskalaan, pemantauan, dan keselamatan beban kerja AI
-- **Panduan Penyelesaian Masalah AI**: Penyelesaian masalah komprehensif untuk Azure OpenAI, Cognitive Services, dan isu penerapan AI
+- **Corak Penyebaran Model AI**: Panduan terperinci yang merangkumi pemilihan model, konfigurasi, dan strategi penyebaran pengeluaran
+- **Makmal Bengkel AI**: Bengkel praktikal selama 2-3 jam untuk menukar aplikasi AI kepada penyelesaian AZD yang boleh disebarkan
+- **Amalan Terbaik AI Pengeluaran**: Corak siap enterprise untuk penskalaan, pemantauan, dan keselamatan beban kerja AI
+- **Panduan Penyelesaian Masalah AI**: Penyelesaian masalah komprehensif untuk Azure OpenAI, Cognitive Services, dan isu penyebaran AI
 - **Galeri Templat AI**: Koleksi templat Azure AI Foundry yang ditampilkan dengan penilaian kerumitan
 - **Bahan Bengkel**: Struktur bengkel lengkap dengan makmal praktikal dan bahan rujukan
 
 #### Dipertingkatkan
-- **Struktur README**: Fokus kepada pembangun AI dengan data minat komuniti 45% daripada Discord Azure AI Foundry
+- **Struktur README**: Fokus kepada pembangun AI dengan data minat komuniti 45% dari Discord Azure AI Foundry
 - **Laluan Pembelajaran**: Perjalanan pembangun AI khusus bersama laluan tradisional untuk pelajar dan jurutera DevOps
 - **Rekomendasi Templat**: Templat AI yang ditampilkan termasuk azure-search-openai-demo, contoso-chat, dan openai-chat-app-quickstart
 - **Integrasi Komuniti**: Sokongan komuniti Discord yang dipertingkatkan dengan saluran dan perbincangan khusus AI
@@ -140,271 +179,267 @@ Selepas menyemak entri log perubahan, anda akan dapat:
 #### Fokus Keselamatan & Pengeluaran
 - **Corak Identiti Terurus**: Konfigurasi pengesahan dan keselamatan khusus AI
 - **Pengoptimuman Kos**: Penjejakan penggunaan token dan kawalan bajet untuk beban kerja AI
-- **Penerapan Multi-Region**: Strategi untuk penerapan aplikasi AI global
+- **Penyebaran Multi-Region**: Strategi untuk penyebaran aplikasi AI global
 - **Pemantauan Prestasi**: Metrik khusus AI dan integrasi Application Insights
 
 #### Kualiti Dokumentasi
-- **Struktur Kursus Linear**: Perkembangan logik daripada corak penerapan AI asas kepada lanjutan
+- **Struktur Kursus Linear**: Perkembangan logik dari asas hingga corak penyebaran AI lanjutan
 - **URL yang Disahkan**: Semua pautan repositori luaran disahkan dan boleh diakses
 - **Rujukan Lengkap**: Semua pautan dokumentasi dalaman disahkan dan berfungsi
-- **Siap Pengeluaran**: Corak penerapan perusahaan dengan contoh dunia sebenar
+- **Siap Pengeluaran**: Corak penyebaran enterprise dengan contoh dunia sebenar
 
 ### [v2.0.0] - 2025-09-09
 
 #### Perubahan Utama - Penyusunan Semula Repositori dan Penambahbaikan Profesional
-**Versi ini mewakili perubahan besar pada struktur repositori dan pembentangan kandungan.**
+**Versi ini mewakili perubahan besar pada struktur repositori dan persembahan kandungan.**
 
 #### Ditambah
-- **Kerangka Pembelajaran Berstruktur**: Semua halaman dokumentasi kini termasuk bahagian Pengenalan, Matlamat Pembelajaran, dan Hasil Pembelajaran
+- **Kerangka Pembelajaran Terstruktur**: Semua halaman dokumentasi kini termasuk bahagian Pengenalan, Matlamat Pembelajaran, dan Hasil Pembelajaran
 - **Sistem Navigasi**: Menambah pautan pelajaran Sebelumnya/Seterusnya di seluruh dokumentasi untuk perkembangan pembelajaran yang dipandu
 - **Panduan Belajar**: study-guide.md yang komprehensif dengan objektif pembelajaran, latihan praktikal, dan bahan penilaian
-- **Pembentangan Profesional**: Menghapuskan semua ikon emoji untuk kebolehcapaian dan penampilan profesional yang lebih baik
+- **Persembahan Profesional**: Menghapuskan semua ikon emoji untuk kebolehaksesan dan penampilan profesional yang lebih baik
 - **Struktur Kandungan Dipertingkatkan**: Organisasi dan aliran bahan pembelajaran yang lebih baik
 
 #### Diubah
 - **Format Dokumentasi**: Menyeragamkan semua dokumentasi dengan struktur pembelajaran yang konsisten
 - **Aliran Navigasi**: Melaksanakan perkembangan logik melalui semua bahan pembelajaran
-- **Pembentangan Kandungan**: Menghapuskan elemen hiasan demi format yang jelas dan profesional
+- **Persembahan Kandungan**: Menghapuskan elemen hiasan demi format yang jelas dan profesional
 - **Struktur Pautan**: Mengemas kini semua pautan dalaman untuk menyokong sistem navigasi baharu
 
 #### Diperbaiki
-- **Kebolehcapaian**: Menghapuskan pergantungan emoji untuk keserasian pembaca skrin yang lebih baik
-- **Penampilan Profesional**: Pembentangan gaya akademik yang bersih sesuai untuk pembelajaran perusahaan
-- **Pengalaman Pembelajaran**: Pendekatan berstruktur dengan objektif dan hasil yang jelas untuk setiap pelajaran
-- **Organisasi Kandungan**: Aliran logik dan hubungan yang lebih baik antara topik berkaitan
+- **Kebolehaksesan**: Menghapuskan kebergantungan emoji untuk keserasian pembaca skrin yang lebih baik
+- **Penampilan Profesional**: Persembahan gaya akademik yang bersih, sesuai untuk pembelajaran enterprise
+- **Pengalaman Pembelajaran**: Pendekatan terstruktur dengan objektif dan hasil yang jelas untuk setiap pelajaran
+- **Organisasi Kandungan**: Aliran logik yang lebih baik dan hubungan antara topik berkaitan
 
 ### [v1.0.0] - 2025-09-09
 
-#### Pelepasan Awal - Repositori Pembelajaran AZD yang Komprehensif
+#### Pelepasan Awal - Repositori Pembelajaran AZD Komprehensif
 
 #### Ditambah
 - **Struktur Dokumentasi Teras**
-  - Siri panduan permulaan lengkap
-  - Dokumentasi penerapan dan penyediaan yang komprehensif
-  - Sumber penyelesaian masalah dan panduan penyahpepijatan yang terperinci
-  - Alat dan prosedur pengesahan pra-penerapan
+  - Siri panduan memulakan lengkap
+  - Dokumentasi penyebaran dan penyediaan yang komprehensif
+  - Sumber penyelesaian masalah dan panduan debugging yang terperinci
+  - Alat dan prosedur pengesahan pra-penyebaran
 
-- **Modul Permulaan**
+- **Modul Memulakan**
   - Asas AZD: Konsep dan istilah teras
   - Panduan Pemasangan: Arahan persediaan khusus platform
   - Panduan Konfigurasi: Persediaan persekitaran dan pengesahan
   - Tutorial Projek Pertama: Pembelajaran praktikal langkah demi langkah
 
-- **Modul Penerapan dan Penyediaan**
-  - Panduan Penerapan: Dokumentasi aliran kerja lengkap
+- **Modul Penyebaran dan Penyediaan**
+  - Panduan Penyebaran: Dokumentasi aliran kerja lengkap
   - Panduan Penyediaan: Infrastruktur sebagai Kod dengan Bicep
-  - Amalan terbaik untuk penerapan pengeluaran
-  - Corak seni bina pelbagai perkhidmatan
+  - Amalan terbaik untuk penyebaran pengeluaran
+  - Corak seni bina multi-perkhidmatan
 
-- **Modul Pengesahan Pra-Penerapan**
+- **Modul Pengesahan Pra-Penyebaran**
   - Perancangan Kapasiti: Pengesahan ketersediaan sumber Azure
-  - Pemilihan SKU: Panduan perkhidmatan tingkat yang komprehensif
+  - Pemilihan SKU: Panduan tingkat perkhidmatan yang komprehensif
   - Pemeriksaan Pra-Penerbangan: Skrip pengesahan automatik (PowerShell dan Bash)
   - Alat perancangan kos dan anggaran bajet
 
 - **Modul Penyelesaian Masalah**
   - Isu Biasa: Masalah yang sering ditemui dan penyelesaian
-  - Panduan Penyahpepijatan: Metodologi penyelesaian masalah yang sistematik
-  - Teknik dan alat diagnostik lanjutan
+  - Panduan Debugging: Metodologi penyelesaian masalah yang sistematik
+  - Teknik diagnostik lanjutan dan alat
   - Pemantauan prestasi dan pengoptimuman
 
 - **Sumber dan Rujukan**
-  - Lembaran Rujukan Perintah: Rujukan pantas untuk perintah penting
+  - Lembaran Cheat Perintah: Rujukan cepat untuk perintah penting
   - Glosari: Definisi istilah dan akronim yang komprehensif
-  - Soalan Lazim: Jawapan terperinci kepada soalan biasa
+  - FAQ: Jawapan terperinci kepada soalan biasa
   - Pautan sumber luaran dan sambungan komuniti
 
-- **Contoh dan Templat**
-  - Contoh Aplikasi Web Mudah
-  - Templat penerapan Laman Web Statik
-  - Konfigurasi Aplikasi Kontena
-  - Corak integrasi pangkalan data
+- **Contoh
   - Contoh seni bina mikroservis
   - Pelaksanaan fungsi tanpa pelayan
 
-#### Ciri
-- **Sokongan Multi-Platform**: Panduan pemasangan dan konfigurasi untuk Windows, macOS, dan Linux
+#### Ciri-ciri
+- **Sokongan Pelbagai Platform**: Panduan pemasangan dan konfigurasi untuk Windows, macOS, dan Linux
 - **Pelbagai Tahap Kemahiran**: Kandungan direka untuk pelajar hingga pembangun profesional
-- **Fokus Praktikal**: Contoh praktikal dan senario dunia sebenar
-- **Liputan Komprehensif**: Daripada konsep asas kepada corak perusahaan lanjutan
-- **Pendekatan Keselamatan Pertama**: Amalan terbaik keselamatan yang diintegrasikan di seluruh
-- **Pengoptimuman Kos**: Panduan untuk penerapan kos efektif dan pengurusan sumber
+- **Fokus Praktikal**: Contoh langsung dan senario dunia sebenar
+- **Liputan Komprehensif**: Dari konsep asas hingga corak perusahaan yang maju
+- **Pendekatan Keutamaan Keselamatan**: Amalan terbaik keselamatan disepadukan sepanjang kandungan
+- **Pengoptimuman Kos**: Panduan untuk pelaksanaan yang menjimatkan kos dan pengurusan sumber
 
 #### Kualiti Dokumentasi
-- **Contoh Kod Terperinci**: Sampel kod praktikal yang telah diuji
-- **Arahan Langkah Demi Langkah**: Panduan yang jelas dan boleh dilaksanakan
+- **Contoh Kod Terperinci**: Sampel kod yang praktikal dan telah diuji
+- **Arahan Langkah Demi Langkah**: Panduan yang jelas dan boleh diikuti
 - **Pengendalian Ralat Komprehensif**: Penyelesaian masalah untuk isu biasa
-- **Integrasi Amalan Terbaik**: Piawaian dan cadangan industri
-- **Keserasian Versi**: Terkini dengan perkhidmatan Azure dan ciri azd terkini
+- **Integrasi Amalan Terbaik**: Standard industri dan cadangan
+- **Keserasian Versi**: Dikemas kini dengan perkhidmatan Azure terkini dan ciri azd
 
 ## Penambahbaikan Masa Depan yang Dirancang
 
 ### Versi 3.1.0 (Dirancang)
 #### Pengembangan Platform AI
-- **Sokongan Multi-Model**: Corak integrasi untuk Hugging Face, Azure Machine Learning, dan model tersuai
-- **Kerangka Ejen AI**: Templat untuk penerapan LangChain, Semantic Kernel, dan AutoGen
+- **Sokongan Pelbagai Model**: Corak integrasi untuk Hugging Face, Azure Machine Learning, dan model tersuai
+- **Kerangka Ejen AI**: Templat untuk pelaksanaan LangChain, Semantic Kernel, dan AutoGen
 - **Corak RAG Lanjutan**: Pilihan pangkalan data vektor selain Azure AI Search (Pinecone, Weaviate, dll.)
-- **Kebolehlihatan AI**: Pemantauan yang dipertingkatkan untuk prestasi model, penggunaan token, dan kualiti respons
+- **Pemerhatian AI**: Pemantauan yang dipertingkatkan untuk prestasi model, penggunaan token, dan kualiti respons
 
 #### Pengalaman Pembangun
-- **Sambungan VS Code**: Pengalaman pembangunan AZD + AI Foundry yang terintegrasi
+- **Sambungan VS Code**: Pengalaman pembangunan AZD + AI Foundry yang disepadukan
 - **Integrasi GitHub Copilot**: Penjanaan templat AZD yang dibantu AI
-- **Tutorial Interaktif**: Latihan pengekodan praktikal dengan pengesahan automatik untuk senario AI
-- **Kandungan Video**: Tutorial video tambahan untuk pembelajar visual yang memfokuskan pada penerapan AI
+- **Tutorial Interaktif**: Latihan pengekodan langsung dengan pengesahan automatik untuk senario AI
+- **Kandungan Video**: Tutorial video tambahan untuk pembelajaran visual yang memfokuskan pada pelaksanaan AI
 
 ### Versi 4.0.0 (Dirancang)
 #### Corak AI Perusahaan
 - **Kerangka Tadbir Urus**: Tadbir urus model AI, pematuhan, dan jejak audit
-- **AI Multi-Penyewa**: Corak untuk melayani pelbagai pelanggan dengan perkhidmatan AI yang terasing
-- **Penerapan AI Tepi**: Integrasi dengan Azure IoT Edge dan instans kontena
-- **AI Awan Hibrid**: Corak penerapan multi
-- **Automasi Saluran AI**: Integrasi MLOps dengan saluran Azure Machine Learning  
-- **Keselamatan Lanjutan**: Corak zero-trust, titik akhir peribadi, dan perlindungan ancaman lanjutan  
-- **Pengoptimuman Prestasi**: Strategi penalaan dan penskalaan lanjutan untuk aplikasi AI berkapasiti tinggi  
-- **Pengedaran Global**: Corak penghantaran kandungan dan caching tepi untuk aplikasi AI  
+- **AI Pelbagai Penyewa**: Corak untuk melayani pelanggan berganda dengan perkhidmatan AI yang terasing
+- **Pelaksanaan AI Tepi**: Integrasi dengan Azure IoT Edge dan instans kontena
+- **AI Awan Hibrid**: Corak pelaksanaan pelbagai awan dan hibrid untuk beban kerja AI
 
-### Versi 3.0.0 (Dirancang) - Digantikan oleh Pelepasan Semasa  
-#### Penambahan yang Dicadangkan - Kini Dilaksanakan dalam v3.0.0  
-- ✅ **Kandungan Berfokus AI**: Integrasi menyeluruh Azure AI Foundry (Selesai)  
-- ✅ **Tutorial Interaktif**: Makmal bengkel AI secara langsung (Selesai)  
-- ✅ **Modul Keselamatan Lanjutan**: Corak keselamatan khusus AI (Selesai)  
-- ✅ **Pengoptimuman Prestasi**: Strategi penalaan beban kerja AI (Selesai)  
+#### Ciri Lanjutan
+- **Automasi Saluran AI**: Integrasi MLOps dengan saluran Azure Machine Learning
+- **Keselamatan Lanjutan**: Corak kepercayaan sifar, titik akhir peribadi, dan perlindungan ancaman lanjutan
+- **Pengoptimuman Prestasi**: Strategi penalaan dan penskalaan lanjutan untuk aplikasi AI throughput tinggi
+- **Pengedaran Global**: Corak penghantaran kandungan dan caching tepi untuk aplikasi AI
 
-### Versi 2.1.0 (Dirancang) - Sebahagiannya Dilaksanakan dalam v3.0.0  
-#### Penambahbaikan Kecil - Sebahagian Selesai dalam Pelepasan Semasa  
-- ✅ **Contoh Tambahan**: Senario penyebaran berfokus AI (Selesai)  
-- ✅ **FAQ Diperluas**: Soalan dan penyelesaian masalah khusus AI (Selesai)  
-- **Integrasi Alat**: Panduan integrasi IDE dan editor yang dipertingkatkan  
-- ✅ **Pengembangan Pemantauan**: Corak pemantauan dan amaran khusus AI (Selesai)  
+### Versi 3.0.0 (Dirancang) - Digantikan oleh Pelepasan Semasa
+#### Penambahan yang Dicadangkan - Kini Dilaksanakan dalam v3.0.0
+- ✅ **Kandungan Berfokus AI**: Integrasi Azure AI Foundry yang komprehensif (Selesai)
+- ✅ **Tutorial Interaktif**: Makmal bengkel AI langsung (Selesai)
+- ✅ **Modul Keselamatan Lanjutan**: Corak keselamatan khusus AI (Selesai)
+- ✅ **Pengoptimuman Prestasi**: Strategi penalaan beban kerja AI (Selesai)
 
-#### Masih Dirancang untuk Pelepasan Akan Datang  
-- **Dokumentasi Mesra Mudah Alih**: Reka bentuk responsif untuk pembelajaran mudah alih  
-- **Akses Luar Talian**: Pakej dokumentasi yang boleh dimuat turun  
-- **Integrasi IDE Dipertingkatkan**: Sambungan VS Code untuk aliran kerja AZD + AI  
-- **Papan Pemuka Komuniti**: Metrik komuniti masa nyata dan penjejakan sumbangan  
+### Versi 2.1.0 (Dirancang) - Sebahagiannya Dilaksanakan dalam v3.0.0
+#### Penambahbaikan Kecil - Sebahagian Selesai dalam Pelepasan Semasa
+- ✅ **Contoh Tambahan**: Senario pelaksanaan berfokus AI (Selesai)
+- ✅ **FAQ Diperluas**: Soalan dan penyelesaian masalah khusus AI (Selesai)
+- **Integrasi Alat**: Panduan integrasi IDE dan editor yang dipertingkatkan
+- ✅ **Pengembangan Pemantauan**: Corak pemantauan dan amaran khusus AI (Selesai)
 
-## Menyumbang kepada Changelog  
+#### Masih Dirancang untuk Pelepasan Masa Depan
+- **Dokumentasi Mesra Mudah Alih**: Reka bentuk responsif untuk pembelajaran mudah alih
+- **Akses Luar Talian**: Pakej dokumentasi yang boleh dimuat turun
+- **Integrasi IDE yang Dipertingkatkan**: Sambungan VS Code untuk aliran kerja AZD + AI
+- **Papan Pemuka Komuniti**: Metrik komuniti masa nyata dan penjejakan sumbangan
 
-### Melaporkan Perubahan  
-Apabila menyumbang kepada repositori ini, pastikan entri changelog termasuk:  
+## Menyumbang kepada Changelog
 
-1. **Nombor Versi**: Mengikut versi semantik (major.minor.patch)  
-2. **Tarikh**: Tarikh pelepasan atau kemas kini dalam format YYYY-MM-DD  
-3. **Kategori**: Ditambah, Diubah, Dihentikan, Dikeluarkan, Diperbaiki, Keselamatan  
-4. **Penerangan Jelas**: Penerangan ringkas tentang apa yang berubah  
-5. **Penilaian Impak**: Bagaimana perubahan mempengaruhi pengguna sedia ada  
+### Melaporkan Perubahan
+Apabila menyumbang kepada repositori ini, pastikan entri changelog termasuk:
 
-### Kategori Perubahan  
+1. **Nombor Versi**: Mengikut versi semantik (major.minor.patch)
+2. **Tarikh**: Tarikh pelepasan atau kemas kini dalam format YYYY-MM-DD
+3. **Kategori**: Ditambah, Diubah, Dihentikan, Dikeluarkan, Diperbaiki, Keselamatan
+4. **Penerangan Jelas**: Penerangan ringkas tentang apa yang berubah
+5. **Penilaian Impak**: Bagaimana perubahan mempengaruhi pengguna sedia ada
 
-#### Ditambah  
-- Ciri baharu, bahagian dokumentasi, atau keupayaan  
-- Contoh baharu, templat, atau sumber pembelajaran  
-- Alat, skrip, atau utiliti tambahan  
+### Kategori Perubahan
 
-#### Diubah  
-- Pengubahsuaian kepada fungsi atau dokumentasi sedia ada  
-- Kemas kini untuk meningkatkan kejelasan atau ketepatan  
-- Penyusunan semula kandungan atau organisasi  
+#### Ditambah
+- Ciri, bahagian dokumentasi, atau keupayaan baru
+- Contoh, templat, atau sumber pembelajaran baru
+- Alat, skrip, atau utiliti tambahan
 
-#### Dihentikan  
-- Ciri atau pendekatan yang sedang dihentikan  
-- Bahagian dokumentasi yang dijadualkan untuk dikeluarkan  
-- Kaedah yang mempunyai alternatif yang lebih baik  
+#### Diubah
+- Pengubahsuaian pada fungsi atau dokumentasi sedia ada
+- Kemas kini untuk meningkatkan kejelasan atau ketepatan
+- Penyusunan semula kandungan atau organisasi
 
-#### Dikeluarkan  
-- Ciri, dokumentasi, atau contoh yang tidak lagi relevan  
-- Maklumat usang atau pendekatan yang dihentikan  
-- Kandungan yang berlebihan atau disatukan  
+#### Dihentikan
+- Ciri atau pendekatan yang sedang dihentikan
+- Bahagian dokumentasi yang dijadualkan untuk dikeluarkan
+- Kaedah yang mempunyai alternatif yang lebih baik
 
-#### Diperbaiki  
-- Pembetulan kepada kesilapan dalam dokumentasi atau kod  
-- Penyelesaian kepada isu atau masalah yang dilaporkan  
-- Penambahbaikan kepada ketepatan atau fungsi  
+#### Dikeluarkan
+- Ciri, dokumentasi, atau contoh yang tidak lagi relevan
+- Maklumat usang atau pendekatan yang dihentikan
+- Kandungan yang berlebihan atau disatukan
 
-#### Keselamatan  
-- Penambahbaikan atau pembetulan berkaitan keselamatan  
-- Kemas kini kepada amalan terbaik keselamatan  
-- Penyelesaian kepada kelemahan keselamatan  
+#### Diperbaiki
+- Pembetulan kepada kesilapan dalam dokumentasi atau kod
+- Penyelesaian kepada isu atau masalah yang dilaporkan
+- Penambahbaikan kepada ketepatan atau fungsi
 
-### Garis Panduan Versi Semantik  
+#### Keselamatan
+- Penambahbaikan atau pembetulan berkaitan keselamatan
+- Kemas kini kepada amalan terbaik keselamatan
+- Penyelesaian kepada kelemahan keselamatan
 
-#### Versi Utama (X.0.0)  
-- Perubahan besar yang memerlukan tindakan pengguna  
-- Penyusunan semula kandungan atau organisasi yang signifikan  
-- Perubahan yang mengubah pendekatan atau metodologi asas  
+### Garis Panduan Versi Semantik
 
-#### Versi Kecil (X.Y.0)  
-- Ciri baharu atau penambahan kandungan  
-- Penambahbaikan yang mengekalkan keserasian ke belakang  
-- Contoh, alat, atau sumber tambahan  
+#### Versi Utama (X.0.0)
+- Perubahan besar yang memerlukan tindakan pengguna
+- Penyusunan semula kandungan atau organisasi yang signifikan
+- Perubahan yang mengubah pendekatan atau metodologi asas
 
-#### Versi Patch (X.Y.Z)  
-- Pembetulan bug dan kesilapan  
-- Penambahbaikan kecil kepada kandungan sedia ada  
-- Penjelasan dan penambahbaikan kecil  
+#### Versi Kecil (X.Y.0)
+- Ciri atau penambahan kandungan baru
+- Penambahbaikan yang mengekalkan keserasian ke belakang
+- Contoh, alat, atau sumber tambahan
 
-## Maklum Balas dan Cadangan Komuniti  
+#### Versi Patch (X.Y.Z)
+- Pembetulan bug dan kesilapan
+- Penambahbaikan kecil kepada kandungan sedia ada
+- Penjelasan dan penambahbaikan kecil
 
-Kami menggalakkan maklum balas komuniti untuk meningkatkan sumber pembelajaran ini:  
+## Maklum Balas dan Cadangan Komuniti
 
-### Cara Memberi Maklum Balas  
-- **Isu GitHub**: Laporkan masalah atau cadangkan penambahbaikan (isu khusus AI dialu-alukan)  
-- **Perbincangan Discord**: Kongsi idea dan berinteraksi dengan komuniti Azure AI Foundry  
-- **Permintaan Tarik**: Sumbang penambahbaikan langsung kepada kandungan, terutamanya templat dan panduan AI  
-- **Discord Azure AI Foundry**: Sertai saluran #Azure untuk perbincangan AZD + AI  
-- **Forum Komuniti**: Sertai perbincangan pembangun Azure yang lebih luas  
+Kami menggalakkan maklum balas komuniti untuk meningkatkan sumber pembelajaran ini:
 
-### Kategori Maklum Balas  
-- **Ketepatan Kandungan AI**: Pembetulan kepada maklumat integrasi dan penyebaran perkhidmatan AI  
-- **Pengalaman Pembelajaran**: Cadangan untuk aliran pembelajaran pembangun AI yang lebih baik  
-- **Kandungan AI yang Hilang**: Permintaan untuk templat, corak, atau contoh AI tambahan  
-- **Kebolehcapaian**: Penambahbaikan untuk keperluan pembelajaran yang pelbagai  
-- **Integrasi Alat AI**: Cadangan untuk integrasi aliran kerja pembangunan AI yang lebih baik  
-- **Corak AI Pengeluaran**: Permintaan corak penyebaran AI perusahaan  
+### Cara Memberi Maklum Balas
+- **Isu GitHub**: Laporkan masalah atau cadangkan penambahbaikan (isu khusus AI dialu-alukan)
+- **Perbincangan Discord**: Kongsi idea dan berinteraksi dengan komuniti Azure AI Foundry
+- **Permintaan Tarik**: Sumbang penambahbaikan langsung kepada kandungan, terutamanya templat dan panduan AI
+- **Discord Azure AI Foundry**: Sertai saluran #Azure untuk perbincangan AZD + AI
+- **Forum Komuniti**: Sertai perbincangan pembangun Azure yang lebih luas
 
-### Komitmen Respons  
-- **Respons Isu**: Dalam masa 48 jam untuk masalah yang dilaporkan  
-- **Permintaan Ciri**: Penilaian dalam masa seminggu  
-- **Sumbangan Komuniti**: Semakan dalam masa seminggu  
-- **Isu Keselamatan**: Keutamaan segera dengan respons dipercepatkan  
+### Kategori Maklum Balas
+- **Ketepatan Kandungan AI**: Pembetulan kepada maklumat integrasi dan pelaksanaan perkhidmatan AI
+- **Pengalaman Pembelajaran**: Cadangan untuk aliran pembelajaran pembangun AI yang lebih baik
+- **Kandungan AI yang Hilang**: Permintaan untuk templat, corak, atau contoh AI tambahan
+- **Kebolehcapaian**: Penambahbaikan untuk keperluan pembelajaran yang pelbagai
+- **Integrasi Alat AI**: Cadangan untuk integrasi aliran kerja pembangunan AI yang lebih baik
+- **Corak AI Pengeluaran**: Permintaan corak pelaksanaan AI perusahaan
 
-## Jadual Penyelenggaraan  
+### Komitmen Respons
+- **Respons Isu**: Dalam masa 48 jam untuk masalah yang dilaporkan
+- **Permintaan Ciri**: Penilaian dalam masa seminggu
+- **Sumbangan Komuniti**: Semakan dalam masa seminggu
+- **Isu Keselamatan**: Keutamaan segera dengan respons yang dipercepatkan
 
-### Kemas Kini Berkala  
-- **Semakan Bulanan**: Ketepatan kandungan dan pengesahan pautan  
-- **Kemas Kini Suku Tahunan**: Penambahan dan penambahbaikan kandungan utama  
-- **Semakan Separuh Tahunan**: Penyusunan semula dan peningkatan menyeluruh  
-- **Pelepasan Tahunan**: Kemas kini versi utama dengan penambahbaikan yang signifikan  
+## Jadual Penyelenggaraan
 
-### Pemantauan dan Jaminan Kualiti  
-- **Ujian Automatik**: Pengesahan berkala contoh kod dan pautan  
-- **Integrasi Maklum Balas Komuniti**: Penggabungan tetap cadangan pengguna  
-- **Kemas Kini Teknologi**: Penyesuaian dengan perkhidmatan Azure terkini dan pelepasan azd  
-- **Audit Kebolehcapaian**: Semakan tetap untuk prinsip reka bentuk inklusif  
+### Kemas Kini Berkala
+- **Semakan Bulanan**: Ketepatan kandungan dan pengesahan pautan
+- **Kemas Kini Suku Tahunan**: Penambahan dan penambahbaikan kandungan utama
+- **Semakan Separuh Tahunan**: Penyusunan semula dan peningkatan komprehensif
+- **Pelepasan Tahunan**: Kemas kini versi utama dengan penambahbaikan yang signifikan
 
-## Polisi Sokongan Versi  
+### Pemantauan dan Jaminan Kualiti
+- **Ujian Automatik**: Pengesahan berkala contoh kod dan pautan
+- **Integrasi Maklum Balas Komuniti**: Penggabungan cadangan pengguna secara berkala
+- **Kemas Kini Teknologi**: Penyesuaian dengan perkhidmatan Azure terkini dan pelepasan azd
+- **Audit Kebolehcapaian**: Semakan berkala untuk prinsip reka bentuk inklusif
 
-### Sokongan Versi Semasa  
-- **Versi Utama Terkini**: Sokongan penuh dengan kemas kini tetap  
-- **Versi Utama Sebelumnya**: Kemas kini keselamatan dan pembetulan kritikal selama 12 bulan  
-- **Versi Legasi**: Sokongan komuniti sahaja, tiada kemas kini rasmi  
+## Polisi Sokongan Versi
 
-### Panduan Migrasi  
-Apabila versi utama dilepaskan, kami menyediakan:  
-- **Panduan Migrasi**: Arahan peralihan langkah demi langkah  
-- **Nota Keserasian**: Perincian tentang perubahan besar  
-- **Sokongan Alat**: Skrip atau utiliti untuk membantu migrasi  
-- **Sokongan Komuniti**: Forum khusus untuk soalan migrasi  
+### Sokongan Versi Semasa
+- **Versi Utama Terkini**: Sokongan penuh dengan kemas kini berkala
+- **Versi Utama Sebelumnya**: Kemas kini keselamatan dan pembetulan kritikal selama 12 bulan
+- **Versi Legasi**: Sokongan komuniti sahaja, tiada kemas kini rasmi
 
----
-
-**Navigasi**  
-- **Pelajaran Sebelumnya**: [Panduan Kajian](resources/study-guide.md)  
-- **Pelajaran Seterusnya**: Kembali ke [README Utama](README.md)  
-
-**Tetap Dikemas Kini**: Ikuti repositori ini untuk pemberitahuan tentang pelepasan baharu dan kemas kini penting kepada bahan pembelajaran.  
+### Panduan Migrasi
+Apabila versi utama dikeluarkan, kami menyediakan:
+- **Panduan Migrasi**: Arahan peralihan langkah demi langkah
+- **Nota Keserasian**: Perincian tentang perubahan besar
+- **Sokongan Alat**: Skrip atau utiliti untuk membantu migrasi
+- **Sokongan Komuniti**: Forum khusus untuk soalan migrasi
 
 ---
 
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Navigasi**
+- **Pelajaran Sebelumnya**: [Panduan Kajian](resources/study-guide.md)
+- **Pelajaran Seterusnya**: Kembali ke [README Utama](README.md)
+
+**Tetap Dikemas Kini**: Ikuti repositori ini untuk pemberitahuan tentang pelepasan baru dan kemas kini penting kepada bahan pembelajaran.
+
+---
+

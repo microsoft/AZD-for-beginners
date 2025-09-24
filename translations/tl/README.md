@@ -1,34 +1,41 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "21dcf6a2d8a223a853d965138d4fb045",
-  "translation_date": "2025-09-18T08:24:11+00:00",
+  "original_hash": "3df05e83c2307e92452bd7c3307ae849",
+  "translation_date": "2025-09-24T23:26:31+00:00",
   "source_file": "README.md",
   "language_code": "tl"
 }
 -->
-# AZD Para sa Mga Baguhan: Isang Estrukturadong Paglalakbay sa Pag-aaral
+# AZD Para sa Mga Baguhan: Isang Nakabalangkas na Paglalakbay sa Pag-aaral
 
-![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.tl.png) 
+![AZD-para-sa-mga-baguhan](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.tl.png) 
+
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
 ## Pagsisimula sa Kursong Ito
 
-Sundin ang mga hakbang na ito upang simulan ang iyong pag-aaral sa AZD:
+Sundin ang mga hakbang na ito upang simulan ang iyong paglalakbay sa pag-aaral ng AZD:
 
-1. **I-fork ang Repository**: I-click ang [Fork](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **I-clone ang Repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
+1. **Fork ang Repository**: I-click [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Clone ang Repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. **Sumali sa Komunidad**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) para sa suporta mula sa mga eksperto
 4. **Piliin ang Iyong Landas sa Pag-aaral**: Pumili ng kabanata sa ibaba na naaayon sa iyong antas ng karanasan
 
-### Suporta sa Iba't Ibang Wika
+### Suporta sa Maraming Wika
 
 #### Awtomatikong Pagsasalin (Laging Napapanahon)
 
-[Tagalog (Filipino)](./README.md)
+[French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](./README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
 
 ## Pangkalahatang-ideya ng Kurso
 
-Masterin ang Azure Developer CLI (azd) sa pamamagitan ng mga estrukturadong kabanata na idinisenyo para sa progresibong pag-aaral. **Espesyal na pokus sa pag-deploy ng mga AI application gamit ang Azure AI Foundry integration.**
+Matutunan ang Azure Developer CLI (azd) sa pamamagitan ng mga nakabalangkas na kabanata na idinisenyo para sa progresibong pag-aaral. **Espesyal na pokus sa pag-deploy ng AI application gamit ang Azure AI Foundry integration.**
 
 ### Bakit Mahalaga ang Kursong Ito para sa Modernong Mga Developer
 
@@ -42,7 +49,7 @@ Batay sa mga insight mula sa Azure AI Foundry Discord community, **45% ng mga de
 ### Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng kursong ito, ikaw ay:
-- **Masterin ang AZD Fundamentals**: Mga pangunahing konsepto, pag-install, at konfigurasyon
+- **Magiging bihasa sa AZD Fundamentals**: Mga pangunahing konsepto, pag-install, at konfigurasyon
 - **Mag-deploy ng AI Applications**: Gumamit ng AZD kasama ang Azure AI Foundry services
 - **Magpatupad ng Infrastructure as Code**: Pamahalaan ang mga Azure resources gamit ang Bicep templates
 - **Mag-troubleshoot ng Deployments**: Lutasin ang mga karaniwang isyu at mag-debug ng mga problema
@@ -59,12 +66,12 @@ Sa pagtatapos ng kursong ito, ikaw ay:
 **Kahirapan**: ⭐
 
 #### Ano ang Iyong Matututunan
-- Pag-unawa sa mga pundasyon ng Azure Developer CLI
+- Pag-unawa sa mga pangunahing kaalaman ng Azure Developer CLI
 - Pag-install ng AZD sa iyong platform
 - Ang iyong unang matagumpay na deployment
 
 #### Mga Mapagkukunan sa Pag-aaral
-- **🎯 Simulan Dito**: [Ano ang Azure Developer CLI?](../..)
+- **🎯 Magsimula Dito**: [Ano ang Azure Developer CLI?](../..)
 - **📖 Teorya**: [AZD Basics](docs/getting-started/azd-basics.md) - Mga pangunahing konsepto at terminolohiya
 - **⚙️ Setup**: [Installation & Setup](docs/getting-started/installation.md) - Mga gabay batay sa platform
 - **🛠️ Hands-On**: [Ang Iyong Unang Proyekto](docs/getting-started/first-project.md) - Step-by-step na tutorial
@@ -95,9 +102,10 @@ azd up
 - Pag-unawa sa mga konfigurasyon ng AI services
 
 #### Mga Mapagkukunan sa Pag-aaral
-- **🎯 Simulan Dito**: [Integrasyon ng Azure AI Foundry](docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🎯 Magsimula Dito**: [Integrasyon ng Azure AI Foundry](docs/ai-foundry/azure-ai-foundry-integration.md)
 - **📖 Mga Pattern**: [AI Model Deployment](docs/ai-foundry/ai-model-deployment.md) - Pag-deploy at pamamahala ng AI models
 - **🛠️ Workshop**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - Gawing AZD-ready ang iyong AI solutions
+- **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Pag-aaral sa browser gamit ang MkDocs * DevContainer Environment
 - **📋 Templates**: [Azure AI Foundry Templates](../..)
 
 #### Mga Praktikal na Ehersisyo
@@ -127,12 +135,12 @@ azd init --template agent-openai-python-prompty
 
 #### Mga Mapagkukunan sa Pag-aaral
 - **📖 Konfigurasyon**: [Configuration Guide](docs/getting-started/configuration.md) - Setup ng environment
-- **🔐 Seguridad**: Mga pattern ng authentication at managed identity
-- **📝 Mga Halimbawa**: [Database App Example](../../examples/database-app) - Mga pattern ng konfigurasyon
+- **🔐 Seguridad**: Mga pattern sa authentication at managed identity
+- **📝 Mga Halimbawa**: [Database App Example](../../examples/database-app) - Mga pattern sa konfigurasyon
 
 #### Mga Praktikal na Ehersisyo
 - Mag-configure ng maraming environment (dev, staging, prod)
-- Mag-set up ng managed identity authentication
+- Mag-setup ng managed identity authentication
 - Magpatupad ng environment-specific configurations
 
 **💡 Resulta ng Kabanata**: Pamahalaan ang maraming environment na may tamang authentication at seguridad
@@ -145,7 +153,7 @@ azd init --template agent-openai-python-prompty
 **Kahirapan**: ⭐⭐⭐
 
 #### Ano ang Iyong Matututunan
-- Mga advanced na pattern ng deployment
+- Mga advanced na pattern sa deployment
 - Infrastructure as Code gamit ang Bicep
 - Mga estratehiya sa resource provisioning
 
@@ -155,7 +163,7 @@ azd init --template agent-openai-python-prompty
 - **📝 Mga Halimbawa**: [Container App Example](../../examples/container-app) - Mga containerized deployments
 
 #### Mga Praktikal na Ehersisyo
-- Gumawa ng custom Bicep templates
+- Gumawa ng custom na Bicep templates
 - Mag-deploy ng multi-service applications
 - Magpatupad ng blue-green deployment strategies
 
@@ -169,14 +177,14 @@ azd init --template agent-openai-python-prompty
 **Kahirapan**: ⭐⭐⭐⭐
 
 #### Ano ang Iyong Matututunan
-- Mga pattern ng multi-agent architecture
+- Mga pattern sa multi-agent architecture
 - Orkestrasyon at koordinasyon ng mga agent
 - Mga production-ready AI deployments
 
 #### Mga Mapagkukunan sa Pag-aaral
 - **🤖 Itinatampok na Proyekto**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Kumpletong implementasyon
 - **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click deployment
-- **📖 Arkitektura**: Mga pattern ng koordinasyon ng multi-agent
+- **📖 Arkitektura**: Mga pattern sa koordinasyon ng multi-agent
 
 #### Mga Praktikal na Ehersisyo
 ```bash
@@ -199,7 +207,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### Ano ang Iyong Matututunan
 - Pagpaplano ng kapasidad at pag-validate ng resources
-- Mga estratehiya sa pagpili ng SKU
+- Mga estratehiya sa SKU selection
 - Mga pre-flight checks at automation
 
 #### Mga Mapagkukunan sa Pag-aaral
@@ -217,26 +225,26 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ---
 
 ### 🚨 Kabanata 7: Troubleshooting at Debugging
-**Mga Kinakailangan**: Natapos ang anumang deployment chapter  
+**Mga Kinakailangan**: Anumang deployment chapter na natapos  
 **Tagal**: 1-1.5 oras  
 **Kahirapan**: ⭐⭐
 
 #### Ano ang Iyong Matututunan
-- Sistematikong mga approach sa debugging
+- Sistematikong mga pamamaraan sa debugging
 - Mga karaniwang isyu at solusyon
-- AI-specific troubleshooting
+- Troubleshooting na partikular sa AI
 
 #### Mga Mapagkukunan sa Pag-aaral
 - **🔧 Mga Karaniwang Isyu**: [Common Issues](docs/troubleshooting/common-issues.md) - FAQ at mga solusyon
 - **🕵️ Debugging**: [Debugging Guide](docs/troubleshooting/debugging.md) - Step-by-step na mga estratehiya
-- **🤖 AI Issues**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - Mga problema sa AI services
+- **🤖 Mga Isyu sa AI**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - Mga problema sa AI services
 
 #### Mga Praktikal na Ehersisyo
 - Mag-diagnose ng deployment failures
 - Lutasin ang mga isyu sa authentication
 - Mag-debug ng connectivity ng AI services
 
-**💡 Resulta ng Kabanata**: Independiyenteng ma-diagnose at ma-resolve ang mga karaniwang isyu sa deployment
+**💡 Resulta ng Kabanata**: Maging independent sa pag-diagnose at paglutas ng mga karaniwang isyu sa deployment
 
 ---
 
@@ -247,52 +255,113 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### Ano ang Iyong Matututunan
 - Mga estratehiya sa production deployment
-- Mga pattern ng seguridad para sa enterprise
+- Mga pattern sa enterprise security
 - Monitoring at pag-optimize ng gastos
 
 #### Mga Mapagkukunan sa Pag-aaral
-- **🏭 Production**: [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) - Mga pattern para sa enterprise
-- **📝 Mga Halimbawa**: [Microservices Example](../../examples/microservices) - Kumplikadong arkitektura
-- **📊 Pagsubaybay**: Application Insights integration
+- **🏭 Production**: [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) - Mga pattern sa enterprise
+- **📝 Mga Halimbawa**: [Microservices Example](../../examples/microservices) - Mga kumplikadong arkitektura
+- **📊 Pagmomonitor**: Application Insights integration
 
-#### Mga Praktikal na Gawain
-- Ipatupad ang mga pattern ng seguridad para sa enterprise
-- Mag-set up ng komprehensibong pagsubaybay
+#### Praktikal na Mga Ehersisyo
+- Magpatupad ng mga pattern sa seguridad ng enterprise
+- Mag-set up ng komprehensibong pagmomonitor
 - Mag-deploy sa production na may tamang pamamahala
 
 **💡 Layunin ng Kabanata**: Mag-deploy ng mga application na handa para sa enterprise na may buong kakayahan sa production
 
 ---
 
+## 🎓 Pangkalahatang-ideya ng Workshop: Hands-On Learning Experience
+
+### Mga Interactive na Materyales ng Workshop
+**Komprehensibong hands-on learning gamit ang mga tool sa browser at mga gabay na ehersisyo**
+
+Ang aming mga materyales sa workshop ay nagbibigay ng istrukturadong, interactive na karanasan sa pag-aaral na umaayon sa kurikulum na nakabatay sa kabanata sa itaas. Ang workshop ay idinisenyo para sa parehong self-paced learning at instructor-led sessions.
+
+#### 🛠️ Mga Tampok ng Workshop
+- **Interface na Batay sa Browser**: Kumpletong workshop na pinapagana ng MkDocs na may search, copy, at mga tampok sa tema
+- **GitHub Codespaces Integration**: Isang-click na setup ng development environment
+- **Istrukturadong Landas sa Pag-aaral**: 7-step na mga gabay na ehersisyo (kabuuang 3.5 oras)
+- **Discovery → Deployment → Customization**: Progresibong metodolohiya
+- **Interactive DevContainer Environment**: Pre-configured na mga tool at dependencies
+
+#### 📚 Estruktura ng Workshop
+Ang workshop ay sumusunod sa metodolohiyang **Discovery → Deployment → Customization**:
+
+1. **Discovery Phase** (45 minuto)
+   - Tuklasin ang mga template at serbisyo ng Azure AI Foundry
+   - Unawain ang mga pattern ng multi-agent architecture
+   - Suriin ang mga kinakailangan at prerequisites sa deployment
+
+2. **Deployment Phase** (2 oras)
+   - Hands-on na deployment ng mga AI application gamit ang AZD
+   - I-configure ang mga serbisyo at endpoint ng Azure AI
+   - Magpatupad ng mga pattern sa seguridad at authentication
+
+3. **Customization Phase** (45 minuto)
+   - Baguhin ang mga application para sa partikular na mga use case
+   - I-optimize para sa production deployment
+   - Magpatupad ng pagmomonitor at pamamahala sa gastos
+
+#### 🚀 Pagsisimula sa Workshop
+```bash
+# Option 1: GitHub Codespaces (Recommended)
+# Click "Code" → "Create codespace on main" in the repository
+
+# Option 2: Local Development
+git clone https://github.com/microsoft/azd-for-beginners.git
+cd azd-for-beginners/workshop
+# Follow the setup instructions in workshop/README.md
+```
+
+#### 🎯 Mga Layunin sa Pag-aaral ng Workshop
+Sa pagtatapos ng workshop, ang mga kalahok ay:
+- **Mag-deploy ng Production AI Applications**: Gamitin ang AZD kasama ang mga serbisyo ng Azure AI Foundry
+- **Master Multi-Agent Architectures**: Magpatupad ng mga coordinated na solusyon ng AI agent
+- **Magpatupad ng Mga Pinakamahusay na Praktika sa Seguridad**: I-configure ang authentication at access control
+- **I-optimize para sa Scale**: Magdisenyo ng cost-effective at performant na mga deployment
+- **Mag-troubleshoot ng Mga Deployment**: Malutas ang mga karaniwang isyu nang mag-isa
+
+#### 📖 Mga Mapagkukunan ng Workshop
+- **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Kapaligiran sa pag-aaral na batay sa browser
+- **📋 Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - Detalyadong walkthroughs
+- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - Mga ehersisyo na nakatuon sa AI
+- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Configuration ng environment
+
+**Perpekto para sa**: Pagsasanay sa korporasyon, mga kurso sa unibersidad, self-paced learning, at mga developer bootcamp.
+
+---
+
 ## 📖 Ano ang Azure Developer CLI?
 
-Ang Azure Developer CLI (azd) ay isang command-line interface na nakatuon sa mga developer na nagpapabilis sa proseso ng pagbuo at pag-deploy ng mga application sa Azure. Nagbibigay ito ng:
+Ang Azure Developer CLI (azd) ay isang developer-centric na command-line interface na nagpapabilis sa proseso ng pagbuo at pag-deploy ng mga application sa Azure. Ito ay nagbibigay ng:
 
-- **Template-based deployments** - Gumamit ng mga pre-built na template para sa karaniwang mga pattern ng application
+- **Template-based deployments** - Gumamit ng mga pre-built na template para sa mga karaniwang pattern ng application
 - **Infrastructure as Code** - Pamahalaan ang mga resource ng Azure gamit ang Bicep o Terraform  
-- **Integrated workflows** - Walang kahirap-hirap na mag-provision, mag-deploy, at mag-monitor ng mga application
-- **Developer-friendly** - Na-optimize para sa produktibidad at karanasan ng mga developer
+- **Integrated workflows** - Seamless na pag-provision, pag-deploy, at pagmomonitor ng mga application
+- **Developer-friendly** - Na-optimize para sa produktibidad at karanasan ng developer
 
 ### **AZD + Azure AI Foundry: Perpekto para sa AI Deployments**
 
-**Bakit AZD para sa AI Solutions?** Tinutugunan ng AZD ang mga pangunahing hamon na kinakaharap ng mga AI developer:
+**Bakit AZD para sa AI Solutions?** Ang AZD ay tumutugon sa mga pangunahing hamon na kinakaharap ng mga AI developer:
 
-- **AI-Ready Templates** - Pre-configured na mga template para sa Azure OpenAI, Cognitive Services, at ML workloads
-- **Secure AI Deployments** - Built-in na mga pattern ng seguridad para sa AI services, API keys, at model endpoints  
-- **Production AI Patterns** - Mga pinakamahusay na kasanayan para sa scalable at cost-effective na AI application deployments
-- **End-to-End AI Workflows** - Mula sa pagbuo ng modelo hanggang sa production deployment na may tamang pagsubaybay
-- **Cost Optimization** - Matalinong alokasyon ng resource at mga estratehiya sa scaling para sa AI workloads
-- **Azure AI Foundry Integration** - Walang kahirap-hirap na koneksyon sa AI Foundry model catalog at endpoints
+- **AI-Ready Templates** - Mga pre-configured na template para sa Azure OpenAI, Cognitive Services, at ML workloads
+- **Secure AI Deployments** - Built-in na mga pattern sa seguridad para sa mga serbisyo ng AI, API keys, at model endpoints  
+- **Production AI Patterns** - Mga pinakamahusay na praktika para sa scalable at cost-effective na AI application deployments
+- **End-to-End AI Workflows** - Mula sa pag-develop ng modelo hanggang sa production deployment na may tamang pagmomonitor
+- **Cost Optimization** - Smart na paglalaan ng resource at mga estratehiya sa scaling para sa AI workloads
+- **Azure AI Foundry Integration** - Seamless na koneksyon sa AI Foundry model catalog at endpoints
 
 ---
 
 ## 🎯 Templates & Examples Library
 
 ### Itinatampok: Azure AI Foundry Templates
-**Simulan dito kung magde-deploy ka ng AI applications!**
+**Simulan dito kung magde-deploy ka ng mga AI application!**
 
-| Template | Kabanata | Complexity | Mga Serbisyo |
-|----------|---------|------------|--------------|
+| Template | Kabanata | Kumplikado | Mga Serbisyo |
+|----------|---------|------------|----------|
 | [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kabanata 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
 | [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Kabanata 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
 | [**Multi-agent workflow automation**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kabanata 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
@@ -303,17 +372,17 @@ Ang Azure Developer CLI (azd) ay isang command-line interface na nakatuon sa mga
 | [**Unlock insights from conversational data**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kabanata 8 | ⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
 | [**Multi-modal content processing**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kabanata 8 | ⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
 
-### Itinatampok: Kumpletong Mga Learning Scenario
+### Itinatampok: Kumpletong Mga Scenario sa Pag-aaral
 **Mga template ng application na handa para sa production na naka-map sa mga kabanata ng pag-aaral**
 
-| Template | Kabanata ng Pag-aaral | Complexity | Pangunahing Natutunan |
-|----------|-----------------------|------------|-----------------------|
+| Template | Kabanata ng Pag-aaral | Kumplikado | Pangunahing Pag-aaral |
+|----------|------------------|------------|--------------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kabanata 2 | ⭐ | Mga pangunahing pattern ng AI deployment |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kabanata 2 | ⭐⭐ | RAG implementation gamit ang Azure AI Search |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kabanata 2 | ⭐⭐ | Implementasyon ng RAG gamit ang Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Kabanata 4 | ⭐⭐ | Integrasyon ng Document Intelligence |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kabanata 5 | ⭐⭐⭐ | Framework ng agent at function calling |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kabanata 8 | ⭐⭐⭐ | Orkestrasyon ng enterprise AI |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Kabanata 5 | ⭐⭐⭐⭐ | Arkitektura ng multi-agent na may Customer at Inventory agents |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kabanata 8 | ⭐⭐⭐ | Orkestrasyon ng Enterprise AI |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Kabanata 5 | ⭐⭐⭐⭐ | Multi-agent architecture na may Customer at Inventory agents |
 
 ### Pag-aaral Batay sa Uri ng Halimbawa
 
@@ -326,39 +395,41 @@ Ang Azure Developer CLI (azd) ay isang command-line interface na nakatuon sa mga
 - [Database App](../../examples/database-app) - Mga pattern ng koneksyon sa database
 - [Data Processing](../../examples/data-processing) - Deployment ng ETL workflow
 
-#### Advanced na Mga Pattern (Kabanata 4-8)
+#### Mga Advanced na Pattern (Kabanata 4-8)
 - [Container Apps](../../examples/container-app) - Mga containerized na deployment
-- [Microservices](../../examples/microservices) - Multi-service na arkitektura  
+- [Microservices](../../examples/microservices) - Mga multi-service na arkitektura  
 - [Enterprise Solutions](../../examples/enterprise) - Mga pattern na handa para sa production
 
-### Panlabas na Koleksyon ng Template
-- [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Mga opisyal na sample mula sa Microsoft
+### Mga Koleksyon ng Template sa Labas
+- [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Mga opisyal na sample ng Microsoft
 - [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Mga template na kontribusyon ng komunidad
-- [**Examples Directory**](examples/README.md) - Lokal na mga halimbawa ng pag-aaral na may detalyadong paliwanag
+- [**Examples Directory**](examples/README.md) - Mga lokal na halimbawa ng pag-aaral na may detalyadong paliwanag
 
 ---
 
-## 📚 Mga Learning Resources & Sanggunian
+## 📚 Mga Mapagkukunan sa Pag-aaral at Sanggunian
 
 ### Mabilisang Sanggunian
-- [**Command Cheat Sheet**](resources/cheat-sheet.md) - Mahahalagang azd commands na nakaayos ayon sa kabanata
+- [**Command Cheat Sheet**](resources/cheat-sheet.md) - Mahahalagang azd commands na inayos ayon sa kabanata
 - [**Glossary**](resources/glossary.md) - Terminolohiya ng Azure at azd  
-- [**FAQ**](resources/faq.md) - Karaniwang mga tanong na nakaayos ayon sa kabanata ng pag-aaral
-- [**Study Guide**](resources/study-guide.md) - Komprehensibong mga praktikal na gawain
+- [**FAQ**](resources/faq.md) - Mga karaniwang tanong na inayos ayon sa kabanata ng pag-aaral
+- [**Study Guide**](resources/study-guide.md) - Komprehensibong mga ehersisyo sa pagsasanay
 
 ### Mga Hands-On Workshop
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Gawing AZD-deployable ang iyong mga AI solution
-- [**AZD For Beginners Workshop**](workshop/README.md) - Kumpletong materyales para sa hands-on workshop
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Gawing AZD-deployable ang iyong mga solusyon sa AI (2-3 oras)
+- [**Interactive Workshop Guide**](workshop/README.md) - Workshop na batay sa browser gamit ang MkDocs at DevContainer Environment
+- [**Structured Learning Path**](../../workshop/docs/instructions) - 7-step na mga gabay na ehersisyo (Discovery → Deployment → Customization)
+- [**AZD For Beginners Workshop**](workshop/README.md) - Kumpletong materyales sa hands-on workshop na may GitHub Codespaces integration
 
-### Panlabas na Mga Learning Resource
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+### Mga Panlabas na Mapagkukunan sa Pag-aaral
+- [Dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Status](https://status.azure.com/)
 
 ---
 
-## 🎓 Pagtatapos ng Kurso & Sertipikasyon
+## 🎓 Pagtatapos ng Kurso at Sertipikasyon
 
 ### Pagsubaybay sa Pag-unlad
 Subaybayan ang iyong pag-unlad sa pag-aaral sa bawat kabanata:
@@ -373,49 +444,49 @@ Subaybayan ang iyong pag-unlad sa pag-aaral sa bawat kabanata:
 - [ ] **Kabanata 8**: Production & Enterprise Patterns ✅
 
 ### Pagpapatunay ng Pag-aaral
-Pagkatapos ng bawat kabanata, patunayan ang iyong kaalaman sa pamamagitan ng:
-1. **Praktikal na Gawain**: Kumpletuhin ang hands-on deployment ng kabanata
-2. **Pagsusuri ng Kaalaman**: Suriin ang FAQ section para sa iyong kabanata
+Pagkatapos makumpleto ang bawat kabanata, patunayan ang iyong kaalaman sa pamamagitan ng:
+1. **Praktikal na Ehersisyo**: Kumpletuhin ang hands-on deployment ng kabanata
+2. **Knowledge Check**: Suriin ang seksyon ng FAQ para sa iyong kabanata
 3. **Diskusyon sa Komunidad**: Ibahagi ang iyong karanasan sa Azure Discord
-4. **Susunod na Kabanata**: Lumipat sa susunod na antas ng kahirapan
+4. **Susunod na Kabanata**: Lumipat sa susunod na antas ng kumplikado
 
 ### Mga Benepisyo ng Pagtatapos ng Kurso
-Kapag natapos ang lahat ng kabanata, magkakaroon ka ng:
+Sa pagtatapos ng lahat ng kabanata, magkakaroon ka ng:
 - **Karanasan sa Production**: Na-deploy ang mga tunay na AI application sa Azure
-- **Propesyonal na Kasanayan**: Kakayahan sa deployment na handa para sa enterprise  
-- **Pagkilala sa Komunidad**: Aktibong miyembro ng Azure developer community
-- **Pag-unlad sa Karera**: Ekspertong AZD at AI deployment na in-demand
+- **Propesyonal na Kasanayan**: Mga kakayahan sa deployment na handa para sa enterprise  
+- **Pagkilala sa Komunidad**: Aktibong miyembro ng komunidad ng Azure developer
+- **Pag-unlad sa Karera**: Ekspertis sa AZD at AI deployment na in-demand
 
 ---
 
-## 🤝 Komunidad & Suporta
+## 🤝 Komunidad at Suporta
 
-### Humingi ng Tulong & Suporta
-- **Mga Teknikal na Isyu**: [Mag-report ng bugs at mag-request ng features](https://github.com/microsoft/azd-for-beginners/issues)
+### Kumuha ng Tulong at Suporta
+- **Mga Isyung Teknikal**: [Mag-report ng mga bug at mag-request ng mga feature](https://github.com/microsoft/azd-for-beginners/issues)
 - **Mga Tanong sa Pag-aaral**: [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure)
-- **Tulong sa AI**: Sumali sa [#Azure channel](https://discord.gg/microsoft-azure) para sa AZD + AI Foundry discussions
+- **Tulong na Nakatuon sa AI**: Sumali sa [#Azure channel](https://discord.gg/microsoft-azure) para sa AZD + AI Foundry discussions
 - **Dokumentasyon**: [Opisyal na dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Mga Insight ng Komunidad mula sa Azure AI Foundry Discord
 
 **Mga Resulta ng Kamakailang Poll mula sa #Azure Channel:**
 - **45%** ng mga developer ay nais gumamit ng AZD para sa AI workloads
-- **Mga pangunahing hamon**: Multi-service deployments, credential management, production readiness  
-- **Pinakamarami ang hiniling**: AI-specific templates, troubleshooting guides, best practices
+- **Mga nangungunang hamon**: Multi-service deployments, credential management, production readiness  
+- **Pinakamaraming hiniling**: Mga AI-specific na template, troubleshooting guides, pinakamahusay na praktika
 
 **Sumali sa aming komunidad upang:**
-- Ibahagi ang iyong AZD + AI na karanasan at humingi ng tulong
+- Ibahagi ang iyong mga karanasan sa AZD + AI at kumuha ng tulong
 - Mag-access ng maagang preview ng mga bagong AI template
-- Mag-ambag sa mga pinakamahusay na kasanayan sa AI deployment
-- Makaimpluwensya sa hinaharap na pag-unlad ng AI + AZD features
+- Mag-ambag sa pinakamahusay na praktika sa AI deployment
+- Makaimpluwensya sa hinaharap na pag-develop ng mga tampok sa AI + AZD
 
 ### Pag-aambag sa Kurso
-Malugod naming tinatanggap ang mga kontribusyon! Pakibasa ang aming [Contributing Guide](CONTRIBUTING.md) para sa mga detalye sa:
-- **Pagpapabuti ng Nilalaman**: Pagandahin ang mga umiiral na kabanata at halimbawa
+Malugod naming tinatanggap ang mga kontribusyon! Mangyaring basahin ang aming [Contributing Guide](CONTRIBUTING.md) para sa mga detalye sa:
+- **Mga Pagpapabuti sa Nilalaman**: Pagandahin ang mga umiiral na kabanata at halimbawa
 - **Mga Bagong Halimbawa**: Magdagdag ng mga real-world na scenario at template  
 - **Pagsasalin**: Tumulong sa pagpapanatili ng suporta sa multi-language
-- **Pag-uulat ng Bug**: Pagbutihin ang katumpakan at kalinawan
-- **Pamantayan ng Komunidad**: Sundin ang aming inklusibong mga alituntunin ng komunidad
+- **Mga Bug Reports**: Pagandahin ang katumpakan at kalinawan
+- **Mga Pamantayan ng Komunidad**: Sundin ang aming mga inklusibong alituntunin ng komunidad
 
 ---
 
@@ -423,40 +494,37 @@ Malugod naming tinatanggap ang mga kontribusyon! Pakibasa ang aming [Contributin
 
 ### Lisensya
 Ang proyektong ito ay lisensyado sa ilalim ng MIT License - tingnan ang [LICENSE](../../LICENSE) file para sa mga detalye.
-
 ### Kaugnay na Microsoft Learning Resources
 
-Ang aming koponan ay gumagawa ng iba pang komprehensibong mga kurso sa pag-aaral:
+Ang aming koponan ay gumagawa ng iba pang mga komprehensibong kurso sa pag-aaral:
 
-- [**BAGO** Model Context Protocol (MCP) For Beginners](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [AI Agents for Beginners](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI for Beginners using .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-- [Generative AI for Beginners](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Generative AI for Beginners using Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-- [ML for Beginners](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-- [Data Science for Beginners](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-- [AI for Beginners](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-- [Cybersecurity for Beginners](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
-- [Web Dev for Beginners](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-- [IoT for Beginners](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [XR Development for Beginners](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Mastering GitHub Copilot for AI Paired Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [Mastering GitHub Copilot for C#/.NET Developers](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+- [Model Context Protocol (MCP) Para sa Mga Baguhan](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI Agents Para sa Mga Baguhan](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Generative AI Para sa Mga Baguhan gamit ang .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+- [Generative AI Para sa Mga Baguhan](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Generative AI Para sa Mga Baguhan gamit ang Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+- [ML Para sa Mga Baguhan](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+- [Data Science Para sa Mga Baguhan](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+- [AI Para sa Mga Baguhan](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+- [Cybersecurity Para sa Mga Baguhan](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
+- [Web Dev Para sa Mga Baguhan](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+- [IoT Para sa Mga Baguhan](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+- [XR Development Para sa Mga Baguhan](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Mastering GitHub Copilot para sa AI Paired Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [Mastering GitHub Copilot para sa C#/.NET Developers](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 - [Choose Your Own Copilot Adventure](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
 
 ## 🗺️ Pag-navigate sa Kurso
 
-**🚀 Handa nang Magsimula sa Pag-aaral?**
+**🚀 Handa nang Mag-aral?**
 
-**Mga Baguhan**: Simulan sa [Kabanata 1: Foundation & Quick Start](../..)  
-**AI Developers**: Tumalon sa [Kabanata 2: AI-First Development](../..)
-**Mga Karanasang Developer**: Magsimula sa [Kabanata 3: Konpigurasyon at Awtentikasyon](../..)
+**Mga Baguhan**: Magsimula sa [Kabanata 1: Pundasyon at Mabilisang Simula](../..)  
+**AI Developers**: Tumalon sa [Kabanata 2: AI-First Development](../..)  
+**Mga May Karanasang Developer**: Magsimula sa [Kabanata 3: Configuration at Authentication](../..)
 
-**Susunod na Hakbang**: [Simulan ang Kabanata 1 - AZD Pangunahing Kaalaman](docs/getting-started/azd-basics.md) →
+**Susunod na Hakbang**: [Simulan ang Kabanata 1 - AZD Basics](docs/getting-started/azd-basics.md) →
 
 ---
 
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
