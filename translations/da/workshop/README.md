@@ -1,335 +1,155 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
-  "translation_date": "2025-09-23T11:56:53+00:00",
+  "original_hash": "9cc966416ab431c38b2ab863884b196c",
+  "translation_date": "2025-09-24T21:26:44+00:00",
   "source_file": "workshop/README.md",
   "language_code": "da"
 }
 -->
 # AZD for AI-udviklere Workshop
 
-## AZD Skabeloner
+Velkommen til den praktiske workshop, hvor du lærer Azure Developer CLI (AZD) med fokus på udrulning af AI-applikationer. Denne workshop hjælper dig med at få en praktisk forståelse af AZD-skabeloner i 3 trin:
 
-At bygge en AI-applikation i virksomhedsklasse til dit specifikke scenarie er meget som at bygge dit eget hjem. Du kan designe det selv, bygge det sten for sten og tage ansvaret for, at det opfylder alle styrings- og udviklingsretningslinjer.
+1. **Opdagelse** - find den skabelon, der passer til dig.
+1. **Udrulning** - udrul og valider, at det fungerer.
+1. **Tilpasning** - modificer og iterer for at gøre det til dit eget!
 
-**ELLER ....** 
+I løbet af workshoppen vil du også blive introduceret til centrale udviklerværktøjer og arbejdsgange, der kan hjælpe dig med at optimere din end-to-end udviklingsrejse.
 
-Du kan arbejde med en arkitekt, der kan give dig en _blåkopi_ til et start-hjem og derefter arbejde med dig for at _tilpasse_ det, så det passer til dine behov. Dette giver dig mulighed for at fokusere på, hvad der gør **dit hjem** specielt, mens eksperterne tager sig af den underliggende el, VVS og andre afhængigheder.
+<br/>
 
-**Dette er tilgangen bag [AI App Templates](https://ai.azure.com/templates)** - en række blåkopier til at bygge forskellige typer AI-applikations-"hjem" afhængigt af dine kernebehov og afhængigheder.
+## Browser-baseret guide
 
-## Tilpasning af Skabeloner
+Workshop-lektionerne er i Markdown. Du kan navigere direkte i GitHub - eller starte en browser-baseret forhåndsvisning som vist på skærmbilledet nedenfor.
 
-Skabelonerne er designet til at fungere med [Azure AI Foundry](https://ai.azure.com). Tænk på denne platform som din "byggeentreprenør" med adgang til alle de ressourcer, værktøjer og ekspertise, du har brug for til at få arbejdet gjort!
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.da.png)
 
-Alt, hvad du skal gøre, er at vælge [dine startskabeloner](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). For eksempel vil vi fokusere på _Get Started with AI Agents_-skabelonen for at bygge dig et "Agentisk AI-hjem", der er klar til funktioner som AI-søgning, Red Teaming, evalueringer, sporing, overvågning og mere!
+For at bruge denne mulighed - fork repository til din profil og start GitHub Codespaces. Når VS Code-terminalen er aktiv, skal du skrive denne kommando:
 
-![Blueprint](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.da.png)
-
-Alt, hvad du behøver, er at booke tid med arkitekten, som kan guide dig gennem tilpasningsprocessen. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) kan være den guide. Bare "chat med det" for at:
-
-- Lære om Azure-funktionerne i din skabelon
-- Udrulle Azure-ressourcer
-- Få information om din udrulning
-- Diagnosticere og fejlfinde problemer!
-
-I denne workshop lærer vi at _dekonstruere_ den eksisterende skabelon (for at forstå, hvad den tilbyder) og derefter _tilpasse_ den (for at opfylde vores krav) - trin for trin.
-
-AI-skabeloner **får det til at fungere** - ved at gennemføre workshoppen lærer du at **gøre det til dit eget**
-
-----
-
-**Workshop Navigation**
-- **📚 Kursushjem**: [AZD For Begyndere](../README.md)
-- **📖 Relaterede kapitler**: Dækker [Kapitel 1](../README.md#-chapter-1-foundation--quick-start), [Kapitel 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) og [Kapitel 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **🛠️ Praktisk Lab**: [AI Workshop Lab](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 Næste Skridt**: [Workshop Lab Moduler](../../../workshop)
-
-Velkommen til den praktiske workshop for at lære Azure Developer CLI (AZD) med fokus på udrulning af AI-applikationer. Denne workshop er designet til at tage dig fra AZD-grundlæggende til udrulning af produktionsklare AI-løsninger.
-
-## Workshop Oversigt
-
-**Varighed:** 2-3 timer  
-**Niveau:** Begynder til Mellem  
-**Forudsætninger:** Grundlæggende kendskab til Azure, kommandolinjeværktøjer og AI-koncepter
-
-### Hvad Du Vil Lære
-
-- **AZD Grundlæggende**: Forståelse af Infrastructure as Code med AZD
-- 🤖 **AI Service Integration**: Udrulning af Azure OpenAI, AI-søgning og andre AI-tjenester
-- **Container Udrulning**: Brug af Azure Container Apps til AI-applikationer
-- **Sikkerhedspraksis**: Implementering af Managed Identity og sikre konfigurationer
-- **Overvågning & Observabilitet**: Opsætning af Application Insights til AI-arbejdsbelastninger
-- **Produktionsmønstre**: Udrulningsstrategier klar til virksomheder
-
-## Workshop Struktur
-
-### Modul 1: AZD Grundlæggende (30 minutter)
-- Installation og konfiguration af AZD
-- Forståelse af AZD-projektstruktur
-- Din første AZD-udrulning
-- **Lab**: Udrul en simpel webapplikation
-
-### Modul 2: Azure OpenAI Integration (45 minutter)
-- Opsætning af Azure OpenAI-ressourcer
-- Modeludrulningsstrategier
-- Konfiguration af API-adgang og autentificering
-- **Lab**: Udrul en chatapplikation med GPT-4
-
-### Modul 3: RAG Applikationer (45 minutter)
-- Integration af Azure AI-søgning
-- Dokumentbehandling med Azure Document Intelligence
-- Vektorindlejringer og semantisk søgning
-- **Lab**: Byg et dokument Q&A-system
-
-### Modul 4: Produktionsudrulning (30 minutter)
-- Konfiguration af Container Apps
-- Skalering og optimering af ydeevne
-- Overvågning og logning
-- **Lab**: Udrul til produktion med observabilitet
-
-### Modul 5: Avancerede Mønstre (15 minutter)
-- Udrulning i flere miljøer
-- CI/CD-integration
-- Omkostningsoptimeringsstrategier
-- **Afslutning**: Produktionsklarhedstjekliste
-
-## Forudsætninger
-
-### Påkrævede Værktøjer
-
-Installér venligst disse værktøjer før workshoppen:
-
-```bash
-# Azure Developer CLI
-curl -fsSL https://aka.ms/install-azd.sh | bash
-
-# Azure CLI
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# Git
-sudo apt-get install git
-
-# Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-
-# Python 3.10+
-sudo apt-get install python3.10 python3.10-venv python3-pip
+```bash title="" linenums="0"
+mkdocs serve > /dev/null 2>&1 &
 ```
 
-### Azure Kontoopsætning
+Efter få sekunder vil du se en pop-up dialog. Vælg muligheden `Open in browser`. Den webbaserede guide åbnes nu i en ny browserfane. Nogle fordele ved denne forhåndsvisning:
 
-1. **Azure Abonnement**: [Tilmeld dig gratis](https://azure.microsoft.com/free/)
-2. **Azure OpenAI Adgang**: [Anmod om adgang](https://aka.ms/oai/access)
-3. **Påkrævede Tilladelser**:
-   - Contributor-rolle på abonnement eller ressourcegruppe
-   - User Access Administrator (til RBAC-tildelinger)
+1. **Indbygget søgning** - find nøgleord eller lektioner hurtigt.
+1. **Kopier-ikon** - hold musen over kodeblokke for at se denne mulighed.
+1. **Tema-skift** - skift mellem mørke og lyse temaer.
+1. **Få hjælp** - klik på Discord-ikonet i footeren for at deltage!
 
-### Verificér Forudsætninger
+<br/>
 
-Kør dette script for at verificere din opsætning:
+## Workshopoversigt
 
-```bash
-#!/bin/bash
-echo "Verifying workshop prerequisites..."
+**Varighed:** 3-4 timer  
+**Niveau:** Begynder til mellemniveau  
+**Forudsætninger:** Kendskab til Azure, AI-koncepter, VS Code og kommandolinjeværktøjer.
 
-# Check AZD installation
-if command -v azd &> /dev/null; then
-    echo "✅ Azure Developer CLI: $(azd --version)"
-else
-    echo "❌ Azure Developer CLI not found"
-fi
+Dette er en praktisk workshop, hvor du lærer ved at gøre. Når du har gennemført øvelserne, anbefaler vi at gennemgå AZD For Beginners-kurset for at fortsætte din læringsrejse inden for sikkerhed og produktivitetsbedste praksis.
 
-# Check Azure CLI
-if command -v az &> /dev/null; then
-    echo "✅ Azure CLI: $(az --version | head -n1)"
-else
-    echo "❌ Azure CLI not found"
-fi
+| Tid | Modul  | Mål |
+|:---|:---|:---|
+| 15 min | [Introduktion](docs/instructions/0-Introduction.md) | Sæt scenen, forstå målene |
+| 30 min | [Vælg AI-skabelon](docs/instructions/1-Select-AI-Template.md) | Udforsk muligheder og vælg en startskabelon | 
+| 30 min | [Valider AI-skabelon](docs/instructions/2-Validate-AI-Template.md) | Udrul standardløsning til Azure |
+| 30 min | [Dekonstruer AI-skabelon](docs/instructions/3-Deconstruct-AI-Template.md) | Udforsk struktur og konfiguration |
+| 30 min | [Konfigurer AI-skabelon](docs/instructions/4-Configure-AI-Template.md) | Aktivér og prøv tilgængelige funktioner |
+| 30 min | [Tilpas AI-skabelon](docs/instructions/5-Customize-AI-Template.md) | Tilpas skabelonen til dine behov |
+| 30 min | [Nedtag infrastruktur](docs/instructions/6-Teardown-Infrastructure.md) | Ryd op og frigiv ressourcer |
+| 15 min | [Afslutning & næste skridt](docs/instructions/7-Wrap-up.md) | Læringsressourcer, workshopudfordring |
 
-# Check Docker
-if command -v docker &> /dev/null; then
-    echo "✅ Docker: $(docker --version)"
-else
-    echo "❌ Docker not found"
-fi
+<br/>
 
-# Check Python
-if command -v python3 &> /dev/null; then
-    echo "✅ Python: $(python3 --version)"
-else
-    echo "❌ Python 3 not found"
-fi
+## Hvad du vil lære
 
-# Check Azure login
-if az account show &> /dev/null; then
-    echo "✅ Azure: Logged in as $(az account show --query user.name -o tsv)"
-else
-    echo "❌ Azure: Not logged in (run 'az login')"
-fi
+Tænk på AZD-skabelonen som en læringssandkasse til at udforske forskellige funktioner og værktøjer til end-to-end udvikling på Azure AI Foundry. Ved slutningen af workshoppen bør du have en intuitiv forståelse af forskellige værktøjer og koncepter i denne kontekst.
 
-echo "Setup verification complete!"
-```
+| Koncept  | Mål |
+|:---|:---|
+| **Azure Developer CLI** | Forstå værktøjets kommandoer og arbejdsgange |
+| **AZD-skabeloner**| Forstå projektstruktur og konfiguration |
+| **Azure AI Agent**| Klargør og udrul Azure AI Foundry-projekt |
+| **Azure AI Search**| Aktiver kontekstengineering med agenter |
+| **Observabilitet**| Udforsk tracing, overvågning og evalueringer |
+| **Red Teaming**| Udforsk modstandstest og afhjælpninger |
 
-## Workshop Materialer
+<br/>
 
-### Lab Øvelser
+## Workshopstruktur
 
-Hvert modul inkluderer praktiske labs med startkode og trin-for-trin instruktioner:
+Workshoppen er struktureret til at tage dig på en rejse fra skabelonopdagelse til udrulning, dekonstruering og tilpasning - med den officielle [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) startskabelon som grundlag.
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - Din første AZD-udrulning
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - Chatapplikation med Azure OpenAI
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - RAG-applikation med AI-søgning
-- **[lab-4-production/](../../../workshop/lab-4-production)** - Produktionsudrulningsmønstre
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - Avancerede udrulningsscenarier
+### [Modul 1: Vælg AI-skabelon](docs/instructions/1-Select-AI-Template.md) (30 min)
 
-### Reference Materialer
+- Hvad er AI-skabeloner?
+- Hvor kan jeg finde AI-skabeloner?
+- Hvordan kan jeg komme i gang med at bygge AI-agenter?
+- **Lab**: Hurtigstart med GitHub Codespaces
 
-- **[AI Foundry Integration Guide](../docs/ai-foundry/azure-ai-foundry-integration.md)** - Omfattende integrationsmønstre
-- **[AI Model Deployment Guide](../docs/ai-foundry/ai-model-deployment.md)** - Bedste praksis for modeludrulning
-- **[Production AI Practices](../docs/ai-foundry/production-ai-practices.md)** - Udrulningsmønstre til virksomheder
-- **[AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md)** - Almindelige problemer og løsninger
+### [Modul 2: Valider AI-skabelon](docs/instructions/2-Validate-AI-Template.md) (30 min)
 
-### Eksempel Skabeloner
+- Hvad er AI-skabelonens arkitektur?
+- Hvad er AZD-udviklingsarbejdsgangen?
+- Hvordan kan jeg få hjælp til AZD-udvikling?
+- **Lab**: Udrul & valider AI-agentskabelon
 
-Hurtigstart-skabeloner til almindelige AI-scenarier:
+### [Modul 3: Dekonstruer AI-skabelon](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
 
-```
-workshop/templates/
-├── minimal-chat/          # Basic OpenAI chat app
-├── rag-application/       # RAG with AI Search
-├── multi-model/          # Multiple AI services
-└── production-ready/     # Enterprise template
-```
+- Udforsk dit miljø i `.azure/` 
+- Udforsk din ressourceopsætning i `infra/` 
+- Udforsk din AZD-konfiguration i `azure.yaml`s
+- **Lab**: Modificer miljøvariabler & udrul igen
 
-## Kom i Gang
+### [Modul 4: Konfigurer AI-skabelon](docs/instructions/4-Configure-AI-Template.md) (30 min)
+- Udforsk: Retrieval Augmented Generation
+- Udforsk: Agent-evaluering & Red Teaming
+- Udforsk: Tracing & overvågning
+- **Lab**: Udforsk AI-agent + observabilitet 
 
-### Mulighed 1: GitHub Codespaces (Anbefalet)
+### [Modul 5: Tilpas AI-skabelon](docs/instructions/5-Customize-AI-Template.md) (30 min)
+- Definer: PRD med scenariekrav
+- Konfigurer: Miljøvariabler for AZD
+- Implementer: Lifecycle Hooks for ekstra opgaver
+- **Lab**: Tilpas skabelon til mit scenarie
 
-Den hurtigste måde at starte workshoppen på:
+### [Modul 6: Nedtag infrastruktur](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
+- Opsummering: Hvad er AZD-skabeloner?
+- Opsummering: Hvorfor bruge Azure Developer CLI?
+- Næste skridt: Prøv en anden skabelon!
+- **Lab**: Afvikl infrastruktur & ryd op
 
-[![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
+<br/>
 
-### Mulighed 2: Lokal Udvikling
+## Workshopudfordring
 
-1. **Klon workshop-repositoriet:**
-```bash
-git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
-cd AZD-for-beginners/workshop
-```
+Vil du udfordre dig selv til at gøre mere? Her er nogle projektforslag - eller del dine idéer med os!!
 
-2. **Log ind på Azure:**
-```bash
-az login
-azd auth login
-```
+| Projekt | Beskrivelse |
+|:---|:---|
+|1. **Dekonstruer en kompleks AI-skabelon** | Brug den arbejdsgang og de værktøjer, vi har skitseret, og se, om du kan udrulle, validere og tilpasse en anden AI-løsningsskabelon. _Hvad lærte du?_|
+|2. **Tilpas med dit scenarie**  | Prøv at skrive en PRD (Product Requirements Document) for et andet scenarie. Brug derefter GitHub Copilot i din skabelonrepo i Agent Model - og bed det om at generere en tilpasningsarbejdsgang for dig. _Hvad lærte du? Hvordan kunne du forbedre disse forslag?_|
+| | |
 
-3. **Start med Lab 1:**
-```bash
-cd lab-1-azd-basics
-cat README.md  # Follow the instructions
-```
+## Har du feedback?
 
-### Mulighed 3: Instruktørledet Workshop
+1. Opret en issue på dette repo - tag den med `Workshop` for nemheds skyld.
+1. Deltag i Azure AI Foundry Discord - forbind med dine kolleger!
 
-Hvis du deltager i en instruktørledet session:
 
-- 🎥 **Workshop Optagelse**: [Tilgængelig on-demand](https://aka.ms/azd-ai-workshop)
-- 💬 **Discord Community**: [Deltag for live support](https://aka.ms/foundry/discord)
-- **Workshop Feedback**: [Del din oplevelse](https://aka.ms/azd-workshop-feedback)
+| | | 
+|:---|:---|
+| **📚 Kursushjem**| [AZD For Beginners](../README.md)|
+| **📖 Dokumentation** | [Kom i gang med AI-skabeloner](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI-skabeloner** | [Azure AI Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 Næste skridt** | [Tag udfordringen](../../../workshop) |
+| | |
 
-## Workshop Tidslinje
-
-### Selvstyret Læring (3 timer)
-
-```
-⏰ 00:00 - 00:30  Module 1: AZD Foundations
-⏰ 00:30 - 01:15  Module 2: Azure OpenAI Integration
-⏰ 01:15 - 02:00  Module 3: RAG Applications
-⏰ 02:00 - 02:30  Module 4: Production Deployment
-⏰ 02:30 - 02:45  Module 5: Advanced Patterns
-⏰ 02:45 - 03:00  Q&A and Next Steps
-```
-
-### Instruktørledet Session (2,5 timer)
-
-```
-⏰ 00:00 - 00:15  Welcome & Prerequisites Check
-⏰ 00:15 - 00:40  Module 1: Live Demo + Lab
-⏰ 00:40 - 01:20  Module 2: OpenAI Integration
-⏰ 01:20 - 01:30  Break
-⏰ 01:30 - 02:10  Module 3: RAG Applications
-⏰ 02:10 - 02:30  Module 4: Production Patterns
-⏰ 02:30 - 02:45  Module 5: Advanced Topics
-⏰ 02:45 - 03:00  Q&A and Resources
-```
-
-## Succeskriterier
-
-Ved slutningen af denne workshop vil du være i stand til at:
-
-✅ **Udrulle AI-applikationer** ved hjælp af AZD-skabeloner  
-✅ **Konfigurere Azure OpenAI**-tjenester med korrekt sikkerhed  
-✅ **Bygge RAG-applikationer** med Azure AI-søgningsintegration  
-✅ **Implementere produktionsmønstre** til AI-arbejdsbelastninger i virksomheder  
-✅ **Overvåge og fejlfinde** AI-applikationsudrulninger  
-✅ **Anvende omkostningsoptimering** strategier til AI-arbejdsbelastninger  
-
-## Fællesskab & Support
-
-### Under Workshoppen
-
-- 🙋 **Spørgsmål**: Brug workshop-chatten eller ræk hånden op
-- 🐛 **Problemer**: Tjek [fejlfindingsguiden](../docs/troubleshooting/ai-troubleshooting.md)
-- **Tips**: Del opdagelser med andre deltagere
-
-### Efter Workshoppen
-
-- 💬 **Discord**: [Azure AI Foundry Community](https://aka.ms/foundry/discord)
-- **GitHub Issues**: [Rapportér skabelonproblemer](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
-- 📧 **Feedback**: [Workshop evalueringsformular](https://aka.ms/azd-workshop-feedback)
-
-## Næste Skridt
-
-### Fortsæt Læringen
-
-1. **Avancerede Scenarier**: Udforsk [multi-region udrulninger](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
-2. **CI/CD Integration**: Opsæt [GitHub Actions workflows](../docs/deployment/github-actions.md)
-3. **Tilpassede Skabeloner**: Opret dine egne [AZD-skabeloner](../docs/getting-started/custom-templates.md)
-
-### Anvend i Dine Projekter
-
-1. **Vurdering**: Brug vores [klarhedstjekliste](./production-readiness-checklist.md)
-2. **Skabeloner**: Start med vores [AI-specifikke skabeloner](../../../workshop/templates)
-3. **Support**: Deltag i [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
-
-### Del Din Succes
-
-- ⭐ **Stjernemærk repositoriet**, hvis denne workshop hjalp dig
-- 🐦 **Del på sociale medier** med #AzureDeveloperCLI #AzureAI
-- 📝 **Skriv et blogindlæg** om din AI-udrulningsrejse
+<br/>
 
 ---
 
-## Workshop Feedback
-
-Din feedback hjælper os med at forbedre workshopoplevelsen:
-
-| Aspekt | Bedømmelse (1-5) | Kommentarer |
-|--------|------------------|-------------|
-| Indholdskvalitet | ⭐⭐⭐⭐⭐ | |
-| Praktiske Labs | ⭐⭐⭐⭐⭐ | |
-| Dokumentation | ⭐⭐⭐⭐⭐ | |
-| Sværhedsgrad | ⭐⭐⭐⭐⭐ | |
-| Samlet Oplevelse | ⭐⭐⭐⭐⭐ | |
-
-**Indsend feedback**: [Workshop Evalueringsformular](https://aka.ms/azd-workshop-feedback)
-
----
-
-**Forrige:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Næste:** Start med [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)
+**Forrige:** [AI Fejlfindingsguide](../docs/troubleshooting/ai-troubleshooting.md) | **Næste:** Begynd med [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)
 
 **Klar til at begynde at bygge AI-applikationer med AZD?**
 

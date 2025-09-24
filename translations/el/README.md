@@ -1,25 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "21dcf6a2d8a223a853d965138d4fb045",
-  "translation_date": "2025-09-17T22:31:24+00:00",
+  "original_hash": "3df05e83c2307e92452bd7c3307ae849",
+  "translation_date": "2025-09-24T21:02:47+00:00",
   "source_file": "README.md",
   "language_code": "el"
 }
 -->
-# AZD Για Αρχάριους: Μια Δομημένη Εκπαιδευτική Διαδρομή
+# AZD Για Αρχάριους: Μια Δομημένη Εκπαιδευτική Πορεία
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.el.png) 
 
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
+[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
+
 ## Ξεκινώντας με Αυτό το Μάθημα
 
-Ακολουθήστε αυτά τα βήματα για να ξεκινήσετε το ταξίδι σας με το AZD:
+Ακολουθήστε αυτά τα βήματα για να ξεκινήσετε την εκπαιδευτική σας πορεία με το AZD:
 
-1. **Κλωνοποίηση του Αποθετηρίου**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-2. **Συμμετοχή στην Κοινότητα**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) για υποστήριξη από ειδικούς
-3. **Επιλογή Εκπαιδευτικής Διαδρομής**: Επιλέξτε ένα κεφάλαιο παρακάτω που ταιριάζει στο επίπεδο εμπειρίας σας
+1. **Κάντε Fork το Αποθετήριο**: Πατήστε [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Κλωνοποιήστε το Αποθετήριο**: `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. **Γίνετε Μέλος της Κοινότητας**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) για υποστήριξη από ειδικούς
+4. **Επιλέξτε τη Διαδρομή Μάθησης σας**: Διαλέξτε ένα κεφάλαιο παρακάτω που ταιριάζει στο επίπεδο εμπειρίας σας
 
-### Υποστήριξη Πολλών Γλωσσών
+### Υποστήριξη Πολλαπλών Γλωσσών
 
 #### Αυτοματοποιημένες Μεταφράσεις (Πάντα Ενημερωμένες)
 
@@ -27,21 +35,21 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Επισκόπηση Μαθήματος
 
-Κατακτήστε το Azure Developer CLI (azd) μέσω δομημένων κεφαλαίων που έχουν σχεδιαστεί για προοδευτική μάθηση. **Ειδική έμφαση στην ανάπτυξη εφαρμογών AI με ενσωμάτωση του Azure AI Foundry.**
+Κατακτήστε το Azure Developer CLI (azd) μέσα από δομημένα κεφάλαια σχεδιασμένα για προοδευτική μάθηση. **Ειδική έμφαση στην ανάπτυξη εφαρμογών AI με ενσωμάτωση του Azure AI Foundry.**
 
 ### Γιατί Αυτό το Μάθημα Είναι Απαραίτητο για Σύγχρονους Προγραμματιστές
 
-Βάσει των πληροφοριών της κοινότητας Discord του Azure AI Foundry, **το 45% των προγραμματιστών θέλουν να χρησιμοποιήσουν το AZD για AI εργασίες**, αλλά αντιμετωπίζουν προκλήσεις με:
+Βάσει των πληροφοριών της κοινότητας Discord του Azure AI Foundry, **το 45% των προγραμματιστών θέλουν να χρησιμοποιήσουν το AZD για AI εργασίες** αλλά αντιμετωπίζουν δυσκολίες με:
 - Πολύπλοκες αρχιτεκτονικές AI πολλαπλών υπηρεσιών
 - Βέλτιστες πρακτικές ανάπτυξης AI σε παραγωγή  
 - Ενσωμάτωση και ρύθμιση υπηρεσιών Azure AI
 - Βελτιστοποίηση κόστους για AI εργασίες
-- Επίλυση προβλημάτων ανάπτυξης AI
+- Επίλυση προβλημάτων ανάπτυξης που σχετίζονται με AI
 
 ### Στόχοι Μάθησης
 
 Με την ολοκλήρωση αυτού του δομημένου μαθήματος, θα:
-- **Κατακτήσετε τα Βασικά του AZD**: Βασικές έννοιες, εγκατάσταση και ρύθμιση
+- **Κατανοήσετε τα Βασικά του AZD**: Κύριες έννοιες, εγκατάσταση και ρύθμιση
 - **Αναπτύξετε Εφαρμογές AI**: Χρησιμοποιήστε το AZD με τις υπηρεσίες του Azure AI Foundry
 - **Εφαρμόσετε Infrastructure as Code**: Διαχειριστείτε πόρους Azure με πρότυπα Bicep
 - **Επιλύσετε Προβλήματα Ανάπτυξης**: Αντιμετωπίστε κοινά ζητήματα και εντοπίστε προβλήματα
@@ -62,9 +70,9 @@ CO_OP_TRANSLATOR_METADATA:
 - Εγκατάσταση του AZD στην πλατφόρμα σας
 - Η πρώτη σας επιτυχημένη ανάπτυξη
 
-#### Πόροι Μάθησης
+#### Πηγές Μάθησης
 - **🎯 Ξεκινήστε Εδώ**: [Τι είναι το Azure Developer CLI;](../..)
-- **📖 Θεωρία**: [Βασικά του AZD](docs/getting-started/azd-basics.md) - Βασικές έννοιες και ορολογία
+- **📖 Θεωρία**: [Βασικά του AZD](docs/getting-started/azd-basics.md) - Κύριες έννοιες και ορολογία
 - **⚙️ Ρύθμιση**: [Εγκατάσταση & Ρύθμιση](docs/getting-started/installation.md) - Οδηγοί για συγκεκριμένες πλατφόρμες
 - **🛠️ Πρακτική**: [Το Πρώτο σας Έργο](docs/getting-started/first-project.md) - Βήμα προς βήμα οδηγός
 - **📋 Γρήγορη Αναφορά**: [Φύλλο Εντολών](resources/cheat-sheet.md)
@@ -79,7 +87,7 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Αποτέλεσμα Κεφαλαίου**: Επιτυχής ανάπτυξη μιας απλής εφαρμογής ιστού στο Azure χρησιμοποιώντας το AZD
+**💡 Αποτέλεσμα Κεφαλαίου**: Επιτυχής ανάπτυξη μιας απλής εφαρμογής web στο Azure χρησιμοποιώντας το AZD
 
 ---
 
@@ -90,13 +98,14 @@ azd up
 
 #### Τι Θα Μάθετε
 - Ενσωμάτωση του Azure AI Foundry με το AZD
-- Ανάπτυξη εφαρμογών με δυνατότητες AI
-- Κατανόηση των ρυθμίσεων υπηρεσιών AI
+- Ανάπτυξη εφαρμογών με AI
+- Κατανόηση ρυθμίσεων υπηρεσιών AI
 
-#### Πόροι Μάθησης
+#### Πηγές Μάθησης
 - **🎯 Ξεκινήστε Εδώ**: [Ενσωμάτωση του Azure AI Foundry](docs/ai-foundry/azure-ai-foundry-integration.md)
 - **📖 Μοτίβα**: [Ανάπτυξη Μοντέλων AI](docs/ai-foundry/ai-model-deployment.md) - Ανάπτυξη και διαχείριση μοντέλων AI
 - **🛠️ Εργαστήριο**: [Εργαστήριο AI](docs/ai-foundry/ai-workshop-lab.md) - Κάντε τις λύσεις AI σας έτοιμες για AZD
+- **🎥 Διαδραστικός Οδηγός**: [Υλικά Εργαστηρίου](workshop/README.md) - Μάθηση μέσω browser με περιβάλλον DevContainer
 - **📋 Πρότυπα**: [Πρότυπα του Azure AI Foundry](../..)
 
 #### Πρακτικές Ασκήσεις
@@ -110,7 +119,7 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Αποτέλεσμα Κεφαλαίου**: Ανάπτυξη και ρύθμιση μιας εφαρμογής συνομιλίας με δυνατότητες RAG
+**💡 Αποτέλεσμα Κεφαλαίου**: Ανάπτυξη και ρύθμιση μιας εφαρμογής συνομιλίας με AI και δυνατότητες RAG
 
 ---
 
@@ -121,17 +130,17 @@ azd init --template agent-openai-python-prompty
 
 #### Τι Θα Μάθετε
 - Ρύθμιση και διαχείριση περιβάλλοντος
-- Βέλτιστες πρακτικές αυθεντικοποίησης και ασφάλειας
-- Ονοματοδοσία και οργάνωση πόρων
+- Βέλτιστες πρακτικές ασφάλειας και αυθεντικοποίησης
+- Οργάνωση και ονοματοδοσία πόρων
 
-#### Πόροι Μάθησης
+#### Πηγές Μάθησης
 - **📖 Ρύθμιση**: [Οδηγός Ρύθμισης](docs/getting-started/configuration.md) - Ρύθμιση περιβάλλοντος
 - **🔐 Ασφάλεια**: Μοτίβα αυθεντικοποίησης και διαχειριζόμενη ταυτότητα
 - **📝 Παραδείγματα**: [Παράδειγμα Εφαρμογής Βάσης Δεδομένων](../../examples/database-app) - Μοτίβα ρύθμισης
 
 #### Πρακτικές Ασκήσεις
 - Ρύθμιση πολλαπλών περιβαλλόντων (dev, staging, prod)
-- Ρύθμιση αυθεντικοποίησης με διαχειριζόμενη ταυτότητα
+- Εγκατάσταση αυθεντικοποίησης με διαχειριζόμενη ταυτότητα
 - Εφαρμογή ρυθμίσεων ανά περιβάλλον
 
 **💡 Αποτέλεσμα Κεφαλαίου**: Διαχείριση πολλαπλών περιβαλλόντων με σωστή αυθεντικοποίηση και ασφάλεια
@@ -148,7 +157,7 @@ azd init --template agent-openai-python-prompty
 - Infrastructure as Code με Bicep
 - Στρατηγικές παροχής πόρων
 
-#### Πόροι Μάθησης
+#### Πηγές Μάθησης
 - **📖 Ανάπτυξη**: [Οδηγός Ανάπτυξης](docs/deployment/deployment-guide.md) - Πλήρεις ροές εργασίας
 - **🏗️ Παροχή**: [Παροχή Πόρων](docs/deployment/provisioning.md) - Διαχείριση πόρων Azure
 - **📝 Παραδείγματα**: [Παράδειγμα Εφαρμογής Container](../../examples/container-app) - Ανάπτυξη με containers
@@ -162,7 +171,7 @@ azd init --template agent-openai-python-prompty
 
 ---
 
-### 🎯 Κεφάλαιο 5: Λύσεις Πολλαπλών Πρακτόρων AI (Προχωρημένο)
+### 🎯 Κεφάλαιο 5: Λύσεις AI Πολλαπλών Πρακτόρων (Προχωρημένο)
 **Προαπαιτούμενα**: Ολοκλήρωση Κεφαλαίων 1-2  
 **Διάρκεια**: 2-3 ώρες  
 **Πολυπλοκότητα**: ⭐⭐⭐⭐
@@ -172,7 +181,7 @@ azd init --template agent-openai-python-prompty
 - Ορχήστρωση και συντονισμός πρακτόρων
 - Ανάπτυξη AI έτοιμη για παραγωγή
 
-#### Πόροι Μάθησης
+#### Πηγές Μάθησης
 - **🤖 Προτεινόμενο Έργο**: [Λύση Λιανικής Πολλαπλών Πρακτόρων](examples/retail-scenario.md) - Πλήρης υλοποίηση
 - **🛠️ ARM Templates**: [Πακέτο ARM Template](../../examples/retail-multiagent-arm-template) - Ανάπτυξη με ένα κλικ
 - **📖 Αρχιτεκτονική**: Μοτίβα συντονισμού πολλαπλών πρακτόρων
@@ -199,9 +208,9 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### Τι Θα Μάθετε
 - Σχεδιασμός χωρητικότητας και επικύρωση πόρων
 - Στρατηγικές επιλογής SKU
-- Έλεγχοι πριν την ανάπτυξη και αυτοματοποίηση
+- Αυτοματοποιημένοι έλεγχοι πριν την ανάπτυξη
 
-#### Πόροι Μάθησης
+#### Πηγές Μάθησης
 - **📊 Σχεδιασμός**: [Σχεδιασμός Χωρητικότητας](docs/pre-deployment/capacity-planning.md) - Επικύρωση πόρων
 - **💰 Επιλογή**: [Επιλογή SKU](docs/pre-deployment/sku-selection.md) - Οικονομικές επιλογές
 - **✅ Επικύρωση**: [Έλεγχοι Πριν την Ανάπτυξη](docs/pre-deployment/preflight-checks.md) - Αυτοματοποιημένα scripts
@@ -222,36 +231,15 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### Τι Θα Μάθετε
 - Συστηματικές προσεγγίσεις εντοπισμού σφαλμάτων
-- Κοινά ζητήματα και λύσεις
-- Ειδική επίλυση προβλημάτων AI
+- Κοινά προβλήματα και λύσεις
+- Ειδική επίλυση προβλημάτων για AI
 
-#### Πόροι Μάθησης
-- **🔧 Κοινά Ζητήματα**: [Κοινά Ζητήματα](docs/troubleshooting/common-issues.md) - FAQ και λύσεις
-- **🕵️ Εντοπισμός Σφαλμάτων**: [Οδηγός Εντοπισμού Σφαλμάτων](docs/troubleshooting/debugging.md) - Βήμα προς βήμα στρατηγικές
-- **🤖 Ζητήματα AI**: [Ειδική Επίλυση Προβλημάτων AI](docs/troubleshooting/ai-troubleshooting.md) - Προβλήματα υπηρεσιών AI
-
-#### Πρακτικές Ασκήσεις
-- Διάγνωση αποτυχιών ανάπτυξης
-- Επίλυση ζητημάτων αυθεντικοποίησης
-- Εντοπισμός προβλημάτων συνδεσιμότητας υπηρεσιών AI
-
-**💡 Αποτέλεσμα Κεφαλαίου**: Αυτόνομη διάγνωση και επίλυση κοινών ζητημάτων ανάπτυξης
-
----
-
-### 🏢 Κεφάλαιο 8: Παραγωγή & Εταιρικά Μοτίβα
-**Προαπαιτούμενα**: Ολοκλήρωση Κεφαλαίων 1-4  
-**Διάρκεια**: 2-3 ώρες  
-**Πολυπλοκότητα**: ⭐⭐⭐⭐
-
-#### Τι Θα Μάθετε
-- Στρατηγικές ανάπτυξης για παραγωγή
-- Εταιρικά μοτίβα ασφάλειας
-- Παρακολούθηση και βελτιστοποίηση κόστους
-
-#### Πόροι Μάθησης
-- **🏭 Παραγωγή**: [Βέλτιστες Πρακτικές AI για Παραγωγή](docs/ai-foundry/production-ai-practices.md) - Εταιρικά μοτίπα
-- **📊 Παρακολούθηση**: Ενσωμάτωση Application Insights
+#### Πηγές Μάθησης
+- **🔧 Κοινά Προβλήματα**: [Κοινά Προβλήματα](docs/troubleshooting/common-issues.md) - FAQ και λύσεις
+- **🕵️ Εντοπισμός Σφαλμάτων**: [Οδηγός Εντοπισμού Σφαλμάτων](docs/troubleshooting/debugging.md) - Στρατηγικές βήμα προς βήμα
+- **🤖 Προβ
+- **📝 Παραδείγματα**: [Παράδειγμα Microservices](../../examples/microservices) - Σύνθετες αρχιτεκτονικές
+- **📊 Παρακολούθηση**: Ενσωμάτωση με Application Insights
 
 #### Πρακτικές Ασκήσεις
 - Εφαρμογή προτύπων ασφάλειας για επιχειρήσεις
@@ -262,25 +250,86 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ---
 
+## 🎓 Επισκόπηση Εργαστηρίου: Εμπειρία Μάθησης με Πρακτική Εφαρμογή
+
+### Διαδραστικά Υλικά Εργαστηρίου
+**Ολοκληρωμένη πρακτική μάθηση με εργαλεία βασισμένα σε περιηγητή και καθοδηγούμενες ασκήσεις**
+
+Τα υλικά του εργαστηρίου μας προσφέρουν μια δομημένη, διαδραστική εμπειρία μάθησης που συμπληρώνει το πρόγραμμα σπουδών που βασίζεται στα κεφάλαια παραπάνω. Το εργαστήριο είναι σχεδιασμένο τόσο για αυτοκαθοδηγούμενη μάθηση όσο και για συνεδρίες με εκπαιδευτή.
+
+#### 🛠️ Χαρακτηριστικά Εργαστηρίου
+- **Διεπαφή βασισμένη σε περιηγητή**: Ολοκληρωμένο εργαστήριο με MkDocs με δυνατότητες αναζήτησης, αντιγραφής και θεμάτων
+- **Ενσωμάτωση με GitHub Codespaces**: Ρύθμιση περιβάλλοντος ανάπτυξης με ένα κλικ
+- **Δομημένο μονοπάτι μάθησης**: 7 καθοδηγούμενες ασκήσεις (συνολικά 3,5 ώρες)
+- **Ανακάλυψη → Ανάπτυξη → Προσαρμογή**: Προοδευτική μεθοδολογία
+- **Διαδραστικό περιβάλλον DevContainer**: Προ-ρυθμισμένα εργαλεία και εξαρτήσεις
+
+#### 📚 Δομή Εργαστηρίου
+Το εργαστήριο ακολουθεί τη μεθοδολογία **Ανακάλυψη → Ανάπτυξη → Προσαρμογή**:
+
+1. **Φάση Ανακάλυψης** (45 λεπτά)
+   - Εξερεύνηση προτύπων και υπηρεσιών του Azure AI Foundry
+   - Κατανόηση προτύπων αρχιτεκτονικής πολλαπλών πρακτόρων
+   - Ανασκόπηση απαιτήσεων και προϋποθέσεων ανάπτυξης
+
+2. **Φάση Ανάπτυξης** (2 ώρες)
+   - Πρακτική ανάπτυξη εφαρμογών AI με AZD
+   - Ρύθμιση υπηρεσιών και τελικών σημείων του Azure AI
+   - Εφαρμογή προτύπων ασφάλειας και αυθεντικοποίησης
+
+3. **Φάση Προσαρμογής** (45 λεπτά)
+   - Τροποποίηση εφαρμογών για συγκεκριμένες περιπτώσεις χρήσης
+   - Βελτιστοποίηση για ανάπτυξη σε παραγωγή
+   - Εφαρμογή παρακολούθησης και διαχείρισης κόστους
+
+#### 🚀 Ξεκινώντας με το Εργαστήριο
+```bash
+# Option 1: GitHub Codespaces (Recommended)
+# Click "Code" → "Create codespace on main" in the repository
+
+# Option 2: Local Development
+git clone https://github.com/microsoft/azd-for-beginners.git
+cd azd-for-beginners/workshop
+# Follow the setup instructions in workshop/README.md
+```
+
+#### 🎯 Αποτελέσματα Μάθησης Εργαστηρίου
+Με την ολοκλήρωση του εργαστηρίου, οι συμμετέχοντες θα:
+- **Αναπτύξουν Εφαρμογές AI σε Παραγωγή**: Χρησιμοποιήσουν AZD με υπηρεσίες του Azure AI Foundry
+- **Κατακτήσουν Αρχιτεκτονικές Πολλαπλών Πρακτόρων**: Εφαρμόσουν συντονισμένες λύσεις AI πρακτόρων
+- **Εφαρμόσουν Βέλτιστες Πρακτικές Ασφάλειας**: Ρυθμίσουν αυθεντικοποίηση και έλεγχο πρόσβασης
+- **Βελτιστοποιήσουν για Κλίμακα**: Σχεδιάσουν οικονομικές και αποδοτικές αναπτύξεις
+- **Αντιμετωπίσουν Προβλήματα Αναπτύξεων**: Επιλύσουν κοινά ζητήματα ανεξάρτητα
+
+#### 📖 Πόροι Εργαστηρίου
+- **🎥 Διαδραστικός Οδηγός**: [Υλικά Εργαστηρίου](workshop/README.md) - Περιβάλλον μάθησης βασισμένο σε περιηγητή
+- **📋 Οδηγίες Βήμα-Βήμα**: [Καθοδηγούμενες Ασκήσεις](../../workshop/docs/instructions) - Λεπτομερείς οδηγίες
+- **🛠️ Εργαστήριο AI**: [Εργαστήριο AI](docs/ai-foundry/ai-workshop-lab.md) - Ασκήσεις με επίκεντρο το AI
+- **💡 Γρήγορη Έναρξη**: [Οδηγός Ρύθμισης Εργαστηρίου](workshop/README.md#quick-start) - Ρύθμιση περιβάλλοντος
+
+**Ιδανικό για**: Εταιρική εκπαίδευση, πανεπιστημιακά μαθήματα, αυτοκαθοδηγούμενη μάθηση και bootcamps προγραμματιστών.
+
+---
+
 ## 📖 Τι είναι το Azure Developer CLI;
 
 Το Azure Developer CLI (azd) είναι μια γραμμή εντολών προσανατολισμένη στους προγραμματιστές που επιταχύνει τη διαδικασία δημιουργίας και ανάπτυξης εφαρμογών στο Azure. Παρέχει:
 
-- **Αναπτύξεις βάσει προτύπων** - Χρησιμοποιήστε προκατασκευασμένα πρότυπα για κοινά μοτίβα εφαρμογών
+- **Αναπτύξεις βασισμένες σε πρότυπα** - Χρησιμοποιήστε προκατασκευασμένα πρότυπα για κοινά μοτίβα εφαρμογών
 - **Υποδομή ως Κώδικας** - Διαχειριστείτε πόρους Azure χρησιμοποιώντας Bicep ή Terraform  
-- **Ενσωματωμένες ροές εργασίας** - Απρόσκοπτη παροχή, ανάπτυξη και παρακολούθηση εφαρμογών
+- **Ενσωματωμένες ροές εργασίας** - Προμηθεύστε, αναπτύξτε και παρακολουθήστε εφαρμογές απρόσκοπτα
 - **Φιλικό προς τους προγραμματιστές** - Βελτιστοποιημένο για παραγωγικότητα και εμπειρία προγραμματιστών
 
 ### **AZD + Azure AI Foundry: Ιδανικό για Αναπτύξεις AI**
 
 **Γιατί AZD για λύσεις AI;** Το AZD αντιμετωπίζει τις κορυφαίες προκλήσεις που αντιμετωπίζουν οι προγραμματιστές AI:
 
-- **Πρότυπα έτοιμα για AI** - Προκαθορισμένα πρότυπα για Azure OpenAI, Cognitive Services και ML workloads
-- **Ασφαλείς Αναπτύξεις AI** - Ενσωματωμένα πρότυπα ασφάλειας για υπηρεσίες AI, κλειδιά API και endpoints μοντέλων  
-- **Μοτίβα παραγωγής AI** - Βέλτιστες πρακτικές για κλιμακούμενες, οικονομικά αποδοτικές αναπτύξεις εφαρμογών AI
-- **Ροές εργασίας από άκρο σε άκρο για AI** - Από την ανάπτυξη μοντέλων έως την ανάπτυξη παραγωγής με σωστή παρακολούθηση
-- **Βελτιστοποίηση κόστους** - Έξυπνες στρατηγικές κατανομής και κλιμάκωσης πόρων για workloads AI
-- **Ενσωμάτωση Azure AI Foundry** - Απρόσκοπτη σύνδεση με τον κατάλογο μοντέλων και τα endpoints του AI Foundry
+- **Πρότυπα Έτοιμα για AI** - Προ-ρυθμισμένα πρότυπα για Azure OpenAI, Cognitive Services και ML φόρτους εργασίας
+- **Ασφαλείς Αναπτύξεις AI** - Ενσωματωμένα πρότυπα ασφάλειας για υπηρεσίες AI, κλειδιά API και τελικά σημεία μοντέλων  
+- **Μοτίβα Παραγωγής AI** - Βέλτιστες πρακτικές για κλιμακούμενες, οικονομικές αναπτύξεις εφαρμογών AI
+- **Ροές Εργασίας AI από Άκρο σε Άκρο** - Από την ανάπτυξη μοντέλων έως την ανάπτυξη σε παραγωγή με σωστή παρακολούθηση
+- **Βελτιστοποίηση Κόστους** - Έξυπνη κατανομή πόρων και στρατηγικές κλιμάκωσης για φόρτους εργασίας AI
+- **Ενσωμάτωση με Azure AI Foundry** - Απρόσκοπτη σύνδεση με τον κατάλογο μοντέλων και τα τελικά σημεία του AI Foundry
 
 ---
 
@@ -293,15 +342,15 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 |----------|---------|------------|----------|
 | [**Ξεκινήστε με AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
 | [**Ξεκινήστε με AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Κεφάλαιο 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
-| [**Αυτοματισμός ροής εργασίας πολλαπλών agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Αυτοματοποίηση ροής εργασίας πολλαπλών πρακτόρων**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
 | [**Δημιουργία εγγράφων από τα δεδομένα σας**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 4 | ⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
-| [**Βελτίωση συναντήσεων πελατών με agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 5 | ⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**Εκσυγχρονισμός του κώδικα σας με agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 5 | ⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Δημιουργία του δικού σας conversational agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 4 | ⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
-| [**Ανακάλυψη πληροφοριών από δεδομένα συνομιλιών**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 8 | ⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
+| [**Βελτίωση συναντήσεων πελατών με πράκτορες**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 5 | ⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
+| [**Εκσυγχρονισμός του κώδικα σας με πράκτορες**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 5 | ⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Δημιουργία του συνομιλητικού σας πράκτορα**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 4 | ⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
+| [**Ανακάλυψη πληροφοριών από συνομιλητικά δεδομένα**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 8 | ⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
 | [**Επεξεργασία περιεχομένου πολλαπλών μορφών**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Κεφάλαιο 8 | ⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
 
-### Προτεινόμενα: Πλήρη Σενάρια Μάθησης
+### Προτεινόμενα: Ολοκληρωμένα Σενάρια Μάθησης
 **Πρότυπα εφαρμογών έτοιμων για παραγωγή, αντιστοιχισμένα με κεφάλαια μάθησης**
 
 | Πρότυπο | Κεφάλαιο Μάθησης | Πολυπλοκότητα | Κύρια Μάθηση |
@@ -309,14 +358,14 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Κεφάλαιο 2 | ⭐ | Βασικά μοτίβα ανάπτυξης AI |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Κεφάλαιο 2 | ⭐⭐ | Εφαρμογή RAG με Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Κεφάλαιο 4 | ⭐⭐ | Ενσωμάτωση Document Intelligence |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Κεφάλαιο 5 | ⭐⭐⭐ | Πλαίσιο agent και κλήση λειτουργιών |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Κεφάλαιο 5 | ⭐⭐⭐ | Πλαίσιο πρακτόρων και κλήση λειτουργιών |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Κεφάλαιο 8 | ⭐⭐⭐ | Ορχήστρωση AI για επιχειρήσεις |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Κεφάλαιο 5 | ⭐⭐⭐⭐ | Αρχιτεκτονική πολλαπλών agents με agents Πελάτη και Αποθέματος |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Κεφάλαιο 5 | ⭐⭐⭐⭐ | Αρχιτεκτονική πολλαπλών πρακτόρων με πράκτορες Πελάτη και Αποθέματος |
 
-### Μάθηση ανά Τύπο Παραδείγματος
+### Μάθηση μέσω Παραδειγμάτων
 
 #### Απλές Εφαρμογές (Κεφάλαια 1-2)
-- [Απλή Web Εφαρμογή](../../examples/simple-web-app) - Βασικά μοτίβα ανάπτυξης
+- [Απλή Εφαρμογή Web](../../examples/simple-web-app) - Βασικά μοτίβα ανάπτυξης
 - [Στατική Ιστοσελίδα](../../examples/static-site) - Ανάπτυξη στατικού περιεχομένου
 - [Βασικό API](../../examples/basic-api) - Ανάπτυξη REST API
 
@@ -324,14 +373,14 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - [Εφαρμογή Βάσης Δεδομένων](../../examples/database-app) - Μοτίβα συνδεσιμότητας βάσης δεδομένων
 - [Επεξεργασία Δεδομένων](../../examples/data-processing) - Ανάπτυξη ροής εργασίας ETL
 
-#### Προχωρημένα Μοτίβα (Κεφάλαια 4-8)
-- [Εφαρμογές Container](../../examples/container-app) - Ανάπτυξη containerized εφαρμογών
+#### Προηγμένα Μοτίβα (Κεφάλαια 4-8)
+- [Εφαρμογές Container](../../examples/container-app) - Ανάπτυξη με containers
 - [Microservices](../../examples/microservices) - Αρχιτεκτονικές πολλαπλών υπηρεσιών  
 - [Λύσεις για Επιχειρήσεις](../../examples/enterprise) - Μοτίβα έτοιμα για παραγωγή
 
 ### Εξωτερικές Συλλογές Προτύπων
 - [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Επίσημα δείγματα της Microsoft
-- [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Πρότυπα που συνεισφέρει η κοινότητα
+- [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Πρότυπα από την κοινότητα
 - [**Κατάλογος Παραδειγμάτων**](examples/README.md) - Τοπικά παραδείγματα μάθησης με λεπτομερείς εξηγήσεις
 
 ---
@@ -341,12 +390,14 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### Γρήγορες Αναφορές
 - [**Φύλλο Εντολών**](resources/cheat-sheet.md) - Βασικές εντολές azd οργανωμένες ανά κεφάλαιο
 - [**Γλωσσάρι**](resources/glossary.md) - Ορολογία Azure και azd  
-- [**FAQ**](resources/faq.md) - Συχνές ερωτήσεις οργανωμένες ανά κεφάλαιο μάθησης
+- [**Συχνές Ερωτήσεις**](resources/faq.md) - Κοινές ερωτήσεις οργανωμένες ανά κεφάλαιο μάθησης
 - [**Οδηγός Μελέτης**](resources/study-guide.md) - Ολοκληρωμένες ασκήσεις πρακτικής
 
-### Εργαστήρια Πρακτικής
-- [**Εργαστήριο AI**](docs/ai-foundry/ai-workshop-lab.md) - Κάντε τις λύσεις AI σας αναπτύξιμες με AZD
-- [**Εργαστήριο AZD για Αρχάριους**](workshop/README.md) - Πλήρες υλικό εργαστηρίου πρακτικής
+### Πρακτικά Εργαστήρια
+- [**Εργαστήριο AI**](docs/ai-foundry/ai-workshop-lab.md) - Κάντε τις λύσεις AI σας αναπτύξιμες με AZD (2-3 ώρες)
+- [**Διαδραστικός Οδηγός Εργαστηρίου**](workshop/README.md) - Εργαστήριο βασισμένο σε περιηγητή με MkDocs και DevContainer Environment
+- [**Δομημένο Μονοπάτι Μάθησης**](../../workshop/docs/instructions) - 7 καθοδηγούμενες ασκήσεις (Ανακάλυψη → Ανάπτυξη → Προσαρμογή)
+- [**Εργαστήριο AZD για Αρχάριους**](workshop/README.md) - Ολοκληρωμένα υλικά εργαστηρίου με ενσωμάτωση GitHub Codespaces
 
 ### Εξωτερικοί Πόροι Μάθησης
 - [Τεκμηρίωση Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -361,88 +412,54 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### Παρακολούθηση Προόδου
 Παρακολουθήστε την πρόοδό σας σε κάθε κεφάλαιο:
 
-- [ ] **Κεφάλαιο 1**: Βάσεις & Γρήγορη Εκκίνηση ✅
+- [ ] **Κεφάλαιο 1**: Βάσεις & Γρήγορη Έναρξη ✅
 - [ ] **Κεφάλαιο 2**: Ανάπτυξη με επίκεντρο το AI ✅  
 - [ ] **Κεφάλαιο 3**: Ρύθμιση & Αυθεντικοποίηση ✅
 - [ ] **Κεφάλαιο 4**: Υποδομή ως Κώδικας & Ανάπτυξη ✅
-- [ ] **Κεφάλαιο 5**: Λύσεις AI πολλαπλών agents ✅
+- [ ] **Κεφάλαιο 5**: Λύσεις AI Πολλαπλών Πρακτόρων ✅
 - [ ] **Κεφάλαιο 6**: Επικύρωση & Σχεδιασμός πριν την Ανάπτυξη ✅
-- [ ] **Κεφάλαιο 7**: Εντοπισμός Σφαλμάτων & Αποσφαλμάτωση ✅
+- [ ] **Κεφάλαιο 7**: Αντιμετώπιση Προβλημάτων & Εντοπισμός Σφαλμάτων ✅
 - [ ] **Κεφάλαιο 8**: Μοτίβα Παραγωγής & Επιχειρήσεων ✅
 
 ### Επαλήθευση Μάθησης
 Μετά την ολοκλήρωση κάθε κεφαλαίου, επαληθεύστε τις γνώσεις σας:
 1. **Πρακτική Άσκηση**: Ολοκληρώστε την πρακτική ανάπτυξη του κεφαλαίου
-2. **Έλεγχος Γνώσεων**: Ανασκόπηση της ενότητας FAQ του κεφαλαίου σας
+2. **Έλεγχος Γνώσεων**: Ανασκόπηση της ενότητας Συχνών Ερωτήσεων του κεφαλαίου
 3. **Συζήτηση στην Κοινότητα**: Μοιραστείτε την εμπειρία σας στο Discord του Azure
 4. **Επόμενο Κεφάλαιο**: Μετάβαση στο επόμενο επίπεδο πολυπλοκότητας
 
-### Οφέλη Ολοκλήρωσης Μαθήματος
-Με την ολοκλήρωση όλων των κεφαλαίων, θα έχετε:
-- **Εμπειρία Παραγωγής**: Αναπτύξει πραγματικές εφαρμογές AI στο Azure
-- **Επαγγελματικές Δεξιότητες**: Δυνατότητες ανάπτυξης έτοιμες για επιχειρήσεις  
-- **Αναγνώριση στην Κοινότητα**: Ενεργό μέλος της κοινότητας προγραμματιστών Azure
-- **Επαγγελματική Εξέλιξη**: Εξειδίκευση σε AZD και ανάπτυξη AI
+### Οφέλη
+### Σχετικοί Πόροι Εκμάθησης της Microsoft
 
----
+Η ομάδα μας δημιουργεί άλλες ολοκληρωμένες εκπαιδευτικές σειρές:
 
-## 🤝 Κοινότητα & Υποστήριξη
-
-### Λάβετε Βοήθεια & Υποστήριξη
-- **Τεχνικά Θέματα**: [Αναφορά σφαλμάτων και αιτήματα χαρακτηριστικών](https://github.com/microsoft/azd-for-beginners/issues)
-- **Ερωτήσεις Μάθησης**: [Κοινότητα Discord του Microsoft Azure](https://discord.gg/microsoft-azure)
-- **Βοήθεια για AI**: Εγγραφείτε στο [#Azure κανάλι](https://discord.gg/microsoft-azure) για συζητήσεις AZD + AI Foundry
-- **Τεκμηρίωση**: [Επίσημη τεκμηρίωση Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-
-### Ενημερώσεις Κοινότητας από το Discord του Azure AI Foundry
-
-**Πρόσφατα Αποτελέσματα Δημοσκόπησης από το #Azure Κανάλι:**
-- **45%** των προγραμματιστών θέλουν να χρησιμοποιήσουν το AZD για workloads AI
-- **Κορυφαίες προκλήσεις**: Αναπτύξεις πολλαπλών υπηρεσιών, διαχείριση διαπιστευτηρίων, ετοιμότητα παραγωγής  
-- **Πιο ζητούμενα**: Πρότυπα ειδικά για AI, οδηγοί αντιμετώπισης προβλημάτων, βέλτιστες πρακτικές
-
-**Εγγραφείτε στην κοινότητά μας για:**
-- Μοιραστείτε τις εμπειρίες σας με AZD + AI και λάβετε βοήθεια
-- Πρόσβαση σε πρώιμες προεπισκοπήσεις νέων προτύπων AI
-- Συμβολή στις βέλτιστες πρακτικές ανάπτυξης AI
-- Επηρεάστε την ανάπτυξη μελλοντικών χαρακτηριστικών AI + AZD
-
-### Συμβολή στο Μάθημα
-Καλωσορίζουμε τις συνεισφορές! Διαβάστε τον [Οδηγό Συνεισφοράς](CONTRIBUTING.md) για λεπτομέρειες σχετικά με:
-- **Βελτιώσεις Περιεχομένου**: Ενίσχυση υπαρχόντων κεφαλαίων και παραδειγμάτων
-- **Νέα Παραδείγματα**: Προσθήκη πραγματικών σεναρίων και προτύπων  
-- **Μετάφραση**: Βοήθεια στη διατήρηση πολυγλωσσικής υποστήριξης
-- **Αναφορές Σφαλμάτων**: Βελτίωση ακρίβειας και σαφήνειας
-- **Πρότυπα Κοινότητας**: Ακολουθήστε τις κατευθυντήριες γραμμές της κοινότητας μας
-
----
-
-## 📄 Πληροφορίες Μαθήματος
-
-### Άδεια Χρήσης
-Αυτό το έργο έχει άδεια χρήσης υπό την άδεια MIT - δείτε το αρχείο [LICENSE](../../LICENSE) για λεπτομέρειες.
-
-### Σχετικοί Πόροι Μάθησης της Microsoft
-
-Η ομάδα μας παράγει άλλα ολοκληρωμένα μαθήματα μάθησης:
-
-- [**ΝΕΟ** Πρωτόκολλο Context Μοντέλου (MCP) για Αρχάριους](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Model Context Protocol (MCP) Για Αρχάριους](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [AI Agents για Αρχάριους](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI για Αρχάριους χρησιμοποιώντας .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+- [Generative AI για Αρχάριους με χρήση .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
 - [Generative AI για Αρχάριους](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Generative AI για Αρχάριους χρησιμοποιώντας Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+- [Generative AI για Αρχάριους με χρήση Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
 - [ML για Αρχάριους](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 - [Data Science για Αρχάριους](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 - [AI για Αρχάριους](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 - [Cybersecurity για Αρχάριους](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
 - [Web Dev για Αρχάριους](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 - [IoT για Αρχάριους](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [XR Development για Αρχάριους](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst
-**Έμπειροι Προγραμματιστές**: Ξεκινήστε με [Κεφάλαιο 3: Ρύθμιση & Αυθεντικοποίηση](../..)
-
-**Επόμενα Βήματα**: [Ξεκινήστε το Κεφάλαιο 1 - Βασικά AZD](docs/getting-started/azd-basics.md) →
+- [XR Development για Αρχάριους](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+- [Mastering GitHub Copilot για AI Paired Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+- [Mastering GitHub Copilot για C#/.NET Developers](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+- [Choose Your Own Copilot Adventure](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
 
-**Αποποίηση ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+## 🗺️ Πλοήγηση Μαθήματος
+
+**🚀 Έτοιμοι να Ξεκινήσετε την Εκμάθηση;**
+
+**Αρχάριοι**: Ξεκινήστε με [Κεφάλαιο 1: Βάσεις & Γρήγορη Εκκίνηση](../..)  
+**AI Developers**: Μεταβείτε στο [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στο AI](../..)  
+**Έμπειροι Προγραμματιστές**: Ξεκινήστε με [Κεφάλαιο 3: Ρύθμιση & Αυθεντικοποίηση](../..)
+
+**Επόμενα Βήματα**: [Ξεκινήστε το Κεφάλαιο 1 - Βασικά του AZD](docs/getting-started/azd-basics.md) →
+
+---
+
