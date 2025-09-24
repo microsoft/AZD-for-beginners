@@ -1,337 +1,157 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
-  "translation_date": "2025-09-23T11:59:24+00:00",
+  "original_hash": "9cc966416ab431c38b2ab863884b196c",
+  "translation_date": "2025-09-24T22:42:01+00:00",
   "source_file": "workshop/README.md",
   "language_code": "he"
 }
 -->
 # סדנת AZD למפתחי AI
 
-## תבניות AZD
+ברוכים הבאים לסדנה המעשית ללימוד Azure Developer CLI (AZD) עם דגש על פריסת יישומי AI. סדנה זו תעזור לכם להבין את תבניות AZD בצורה יישומית בשלושה שלבים:
 
-בניית פתרון אפליקציה AI ברמה ארגונית עבור התרחיש הספציפי שלך דומה מאוד לבניית בית משלך. אתה יכול לעצב אותו בעצמך, לבנות אותו לבנה אחר לבנה, ולקחת אחריות על כך שהוא עומד בכל ההנחיות של ממשל ופיתוח.
+1. **גילוי** - מצאו את התבנית המתאימה לכם.
+1. **פריסה** - פרסו ואמתו שהיא פועלת.
+1. **התאמה אישית** - שנו והתאימו אותה לצרכים שלכם!
 
-**או ....**
+במהלך הסדנה תכירו גם כלים ותהליכי עבודה מרכזיים למפתחים, שיעזרו לכם לייעל את מסע הפיתוח מקצה לקצה.
 
-אתה יכול לעבוד עם אדריכל שייתן לך _תוכנית_ לבית התחלתי, ואז לעבוד איתו כדי _להתאים_ אותו לצרכים שלך. זה מאפשר לך להתמקד במה שהופך את **הבית שלך** למיוחד, ולתת למומחים לטפל בחיווט, אינסטלציה ותלות אחרות.
+<br/>
 
-**זו הגישה מאחורי [AI App Templates](https://ai.azure.com/templates)** - סדרת תוכניות לבניית סוגים שונים של "בתים" לאפליקציות AI בהתאם לצרכים ולתלות המרכזיים שלך.
+## מדריך מבוסס דפדפן
 
-## התאמת תבניות
+שיעורי הסדנה כתובים בפורמט Markdown. ניתן לנווט בהם ישירות ב-GitHub - או להפעיל תצוגה מקדימה מבוססת דפדפן כפי שמוצג בתמונה למטה.
 
-התבניות נועדו לעבוד עם [Azure AI Foundry](https://ai.azure.com). חשבו על הפלטפורמה הזו כעל "קבלן הבנייה" שלכם עם גישה לכל המשאבים, הכלים והמומחיות שאתם צריכים כדי לבצע את העבודה!
+![סדנה](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.he.png)
 
-כל מה שצריך לעשות הוא לבחור [תבניות התחלה](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started). לדוגמה, נתמקד בתבנית _Get Started with AI Agents_ כדי לבנות לכם "בית AI סוכני" שמגיע עם תכונות כמו חיפוש AI, Red Teaming, הערכות, מעקב, ניטור ועוד!
+כדי להשתמש באפשרות זו - בצעו Fork למאגר לפרופיל שלכם, והפעילו את GitHub Codespaces. לאחר שהטרמינל של VS Code פעיל, הקלידו את הפקודה הבאה:
 
-![תוכנית](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.he.png)
+```bash title="" linenums="0"
+mkdocs serve > /dev/null 2>&1 &
+```
 
-כל מה שצריך הוא לקבוע זמן עם האדריכל, שידריך אתכם בתהליך ההתאמה האישית. [GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) יכול להיות המדריך הזה. פשוט "שוחחו איתו" כדי:
+תוך מספר שניות תופיע תיבת דו-שיח. בחרו באפשרות `Open in browser`. המדריך מבוסס הדפדפן ייפתח כעת בלשונית חדשה בדפדפן. כמה יתרונות של תצוגה זו:
 
-- ללמוד על התכונות של Azure בתבנית שלכם
-- לפרוס משאבי Azure
-- לקבל מידע על הפריסה שלכם
-- לאבחן ולפתור בעיות!
+1. **חיפוש מובנה** - מצאו מילות מפתח או שיעורים במהירות.
+1. **אייקון העתקה** - רחפו מעל קטעי קוד כדי לראות אפשרות זו.
+1. **מעבר בין נושאים** - החליפו בין ערכות נושא כהות ובהירות.
+1. **קבלת עזרה** - לחצו על אייקון Discord בתחתית כדי להצטרף!
 
-בסדנה זו, נלמד כיצד _לפרק_ את התבנית הקיימת (כדי ללמוד מה היא מספקת), ואז _להתאים_ אותה (כדי לענות על הדרישות שלנו) - צעד אחר צעד.
-
-תבניות AI **עושות את העבודה** - על ידי השלמת הסדנה תלמדו **לעשות אותה שלכם**
-
-----
-
-**ניווט בסדנה**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../README.md)
-- **📖 פרקים קשורים**: מכסה את [פרק 1](../README.md#-chapter-1-foundation--quick-start), [פרק 2](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers), ו-[פרק 5](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **🛠️ מעבדה מעשית**: [מעבדת סדנת AI](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 צעדים הבאים**: [מודולי מעבדת הסדנה](../../../workshop)
-
-ברוכים הבאים לסדנה המעשית ללימוד Azure Developer CLI (AZD) עם דגש על פריסת אפליקציות AI. הסדנה הזו נועדה לקחת אתכם מהבסיס של AZD ועד לפריסת פתרונות AI מוכנים לייצור.
+<br/>
 
 ## סקירת הסדנה
 
-**משך:** 2-3 שעות  
+**משך:** 3-4 שעות  
 **רמה:** מתחילים עד בינוניים  
-**דרישות מקדימות:** ידע בסיסי ב-Azure, כלי שורת פקודה, ומושגים ב-AI
+**דרישות מקדימות:** היכרות עם Azure, מושגי AI, VS Code וכלי שורת פקודה.
 
-### מה תלמדו
+זו סדנה מעשית שבה לומדים תוך כדי עשייה. לאחר שתסיימו את התרגילים, אנו ממליצים לעיין בתוכנית הלימודים של AZD למתחילים כדי להמשיך את מסע הלמידה שלכם לתוך שיטות עבודה מומלצות בתחום האבטחה והפרודוקטיביות.
 
-- **יסודות AZD**: הבנת תשתית כקוד עם AZD
-- 🤖 **שילוב שירותי AI**: פריסת Azure OpenAI, חיפוש AI ושירותי AI נוספים
-- **פריסת קונטיינרים**: שימוש ב-Azure Container Apps לאפליקציות AI
-- **שיטות אבטחה**: יישום Managed Identity וקונפיגורציות מאובטחות
-- **ניטור ותצפיות**: הגדרת Application Insights לעומסי עבודה של AI
-- **דפוסי ייצור**: אסטרטגיות פריסה מוכנות לארגונים
+| זמן | מודול  | מטרה |
+|:---|:---|:---|
+| 15 דקות | [מבוא](docs/instructions/0-Introduction.md) | הבנת המטרות והכנה |
+| 30 דקות | [בחירת תבנית AI](docs/instructions/1-Select-AI-Template.md) | חקר אפשרויות ובחירת תבנית התחלה | 
+| 30 דקות | [אימות תבנית AI](docs/instructions/2-Validate-AI-Template.md) | פריסת פתרון ברירת מחדל ל-Azure |
+| 30 דקות | [פירוק תבנית AI](docs/instructions/3-Deconstruct-AI-Template.md) | חקר מבנה ותצורה |
+| 30 דקות | [הגדרת תבנית AI](docs/instructions/4-Configure-AI-Template.md) | הפעלה וניסיון של תכונות זמינות |
+| 30 דקות | [התאמת תבנית AI](docs/instructions/5-Customize-AI-Template.md) | התאמת התבנית לצרכים שלכם |
+| 30 דקות | [פירוק תשתית](docs/instructions/6-Teardown-Infrastructure.md) | ניקוי ושחרור משאבים |
+| 15 דקות | [סיכום והשלבים הבאים](docs/instructions/7-Wrap-up.md) | משאבי למידה ואתגר הסדנה |
+
+<br/>
+
+## מה תלמדו
+
+חשבו על תבנית AZD כמעין ארגז חול ללמידה, שבו תוכלו לחקור יכולות וכלים שונים לפיתוח מקצה לקצה ב-Azure AI Foundry. בסיום הסדנה, תהיה לכם הבנה אינטואיטיבית של כלים ומושגים שונים בהקשר זה.
+
+| מושג  | מטרה |
+|:---|:---|
+| **Azure Developer CLI** | הבנת פקודות ותהליכי עבודה של הכלי |
+| **תבניות AZD**| הבנת מבנה הפרויקט והתצורה |
+| **סוכן AI של Azure**| הקצאה ופריסת פרויקט Azure AI Foundry |
+| **חיפוש AI של Azure**| הפעלת הנדסת הקשר עם סוכנים |
+| **תצפיות**| חקר מעקב, ניטור והערכות |
+| **Red Teaming**| חקר בדיקות אדברסריות ופתרונות |
+
+<br/>
 
 ## מבנה הסדנה
 
-### מודול 1: יסודות AZD (30 דקות)
-- התקנה והגדרת AZD
-- הבנת מבנה פרויקט AZD
-- הפריסה הראשונה שלכם עם AZD
-- **מעבדה**: פריסת אפליקציית ווב פשוטה
-
-### מודול 2: שילוב Azure OpenAI (45 דקות)
-- הגדרת משאבי Azure OpenAI
-- אסטרטגיות פריסת מודלים
-- הגדרת גישה ל-API ואימות
-- **מעבדה**: פריסת אפליקציית צ'אט עם GPT-4
-
-### מודול 3: אפליקציות RAG (45 דקות)
-- שילוב חיפוש AI של Azure
-- עיבוד מסמכים עם Azure Document Intelligence
-- הטמעות וקטוריות וחיפוש סמנטי
-- **מעבדה**: בניית מערכת שאלות ותשובות למסמכים
-
-### מודול 4: פריסת ייצור (30 דקות)
-- הגדרת אפליקציות קונטיינרים
-- אופטימיזציה של ביצועים וקנה מידה
-- ניטור ורישום
-- **מעבדה**: פריסה לייצור עם תצפיות
-
-### מודול 5: דפוסים מתקדמים (15 דקות)
-- פריסות רב-סביבתיות
-- שילוב CI/CD
-- אסטרטגיות אופטימיזציה של עלויות
-- **סיכום**: רשימת בדיקות מוכנות לייצור
-
-## דרישות מקדימות
-
-### כלים נדרשים
-
-אנא התקינו את הכלים הבאים לפני הסדנה:
-
-```bash
-# Azure Developer CLI
-curl -fsSL https://aka.ms/install-azd.sh | bash
-
-# Azure CLI
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# Git
-sudo apt-get install git
-
-# Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
+הסדנה בנויה כך שתיקח אתכם למסע מגילוי תבניות, דרך פריסה, פירוק והתאמה אישית - תוך שימוש בתבנית ההתחלה הרשמית [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) כבסיס.
 
-# Python 3.10+
-sudo apt-get install python3.10 python3.10-venv python3-pip
-```
-
-### הגדרת חשבון Azure
+### [מודול 1: בחירת תבנית AI](docs/instructions/1-Select-AI-Template.md) (30 דקות)
 
-1. **מנוי Azure**: [הירשמו בחינם](https://azure.microsoft.com/free/)
-2. **גישה ל-Azure OpenAI**: [בקשו גישה](https://aka.ms/oai/access)
-3. **הרשאות נדרשות**:
-   - תפקיד Contributor במנוי או קבוצת משאבים
-   - User Access Administrator (למשימות RBAC)
-
-### אימות דרישות מקדימות
-
-הריצו את הסקריפט הזה כדי לאמת את ההגדרות שלכם:
-
-```bash
-#!/bin/bash
-echo "Verifying workshop prerequisites..."
-
-# Check AZD installation
-if command -v azd &> /dev/null; then
-    echo "✅ Azure Developer CLI: $(azd --version)"
-else
-    echo "❌ Azure Developer CLI not found"
-fi
+- מהן תבניות AI?
+- היכן ניתן למצוא תבניות AI?
+- איך להתחיל לבנות סוכני AI?
+- **מעבדה**: התחלה מהירה עם GitHub Codespaces
 
-# Check Azure CLI
-if command -v az &> /dev/null; then
-    echo "✅ Azure CLI: $(az --version | head -n1)"
-else
-    echo "❌ Azure CLI not found"
-fi
+### [מודול 2: אימות תבנית AI](docs/instructions/2-Validate-AI-Template.md) (30 דקות)
 
-# Check Docker
-if command -v docker &> /dev/null; then
-    echo "✅ Docker: $(docker --version)"
-else
-    echo "❌ Docker not found"
-fi
+- מהי ארכיטקטורת תבנית AI?
+- מהו תהליך העבודה של AZD?
+- איך לקבל עזרה בפיתוח עם AZD?
+- **מעבדה**: פריסה ואימות תבנית סוכני AI
 
-# Check Python
-if command -v python3 &> /dev/null; then
-    echo "✅ Python: $(python3 --version)"
-else
-    echo "❌ Python 3 not found"
-fi
-
-# Check Azure login
-if az account show &> /dev/null; then
-    echo "✅ Azure: Logged in as $(az account show --query user.name -o tsv)"
-else
-    echo "❌ Azure: Not logged in (run 'az login')"
-fi
+### [מודול 3: פירוק תבנית AI](docs/instructions/3-Deconstruct-AI-Template.md) (30 דקות)
 
-echo "Setup verification complete!"
-```
+- חקר הסביבה שלכם ב-`.azure/` 
+- חקר הגדרת המשאבים שלכם ב-`infra/` 
+- חקר תצורת AZD שלכם ב-`azure.yaml`s
+- **מעבדה**: שינוי משתני סביבה ופריסה מחדש
 
-## חומרי הסדנה
+### [מודול 4: הגדרת תבנית AI](docs/instructions/4-Configure-AI-Template.md) (30 דקות)
+- חקר: יצירת מידע מוגבר (Retrieval Augmented Generation)
+- חקר: הערכת סוכנים ו-Red Teaming
+- חקר: מעקב וניטור
+- **מעבדה**: חקר סוכן AI + תצפיות 
 
-### תרגילי מעבדה
+### [מודול 5: התאמת תבנית AI](docs/instructions/5-Customize-AI-Template.md) (30 דקות)
+- הגדרה: PRD עם דרישות תרחיש
+- הגדרה: משתני סביבה עבור AZD
+- יישום: Lifecycle Hooks למשימות נוספות
+- **מעבדה**: התאמת התבנית לתרחיש שלי
 
-כל מודול כולל מעבדות מעשיות עם קוד התחלה והוראות שלב-אחר-שלב:
+### [מודול 6: פירוק תשתית](docs/instructions/6-Teardown-Infrastructure.md) (30 דקות)
+- סיכום: מהן תבניות AZD?
+- סיכום: למה להשתמש ב-Azure Developer CLI?
+- השלבים הבאים: נסו תבנית אחרת!
+- **מעבדה**: ביטול הקצאת תשתית וניקוי
 
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - הפריסה הראשונה שלכם עם AZD
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - אפליקציית צ'אט עם Azure OpenAI
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - אפליקציית RAG עם חיפוש AI
-- **[lab-4-production/](../../../workshop/lab-4-production)** - דפוסי פריסת ייצור
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - תרחישי פריסה מתקדמים
+<br/>
 
-### חומרי עזר
+## אתגר הסדנה
 
-- **[מדריך שילוב AI Foundry](../docs/ai-foundry/azure-ai-foundry-integration.md)** - דפוסי שילוב מקיפים
-- **[מדריך פריסת מודלים AI](../docs/ai-foundry/ai-model-deployment.md)** - שיטות עבודה מומלצות לפריסת מודלים
-- **[שיטות עבודה לייצור AI](../docs/ai-foundry/production-ai-practices.md)** - דפוסי פריסה ארגוניים
-- **[מדריך פתרון בעיות AI](../docs/troubleshooting/ai-troubleshooting.md)** - בעיות נפוצות ופתרונות
+רוצים לאתגר את עצמכם לעשות יותר? הנה כמה הצעות לפרויקטים - או שתפו אותנו ברעיונות שלכם!!
 
-### תבניות לדוגמה
+| פרויקט | תיאור |
+|:---|:---|
+|1. **פירוק תבנית AI מורכבת** | השתמשו בתהליך העבודה ובכלים שהצגנו ונסו לפרוס, לאמת ולהתאים אישית תבנית פתרון AI אחרת. _מה למדתם?_|
+|2. **התאמה אישית לתרחיש שלכם**  | נסו לכתוב PRD (מסמך דרישות מוצר) עבור תרחיש אחר. לאחר מכן השתמשו ב-GitHub Copilot במאגר התבנית שלכם במודל סוכן - ובקשו ממנו ליצור עבורכם תהליך התאמה אישית. _מה למדתם? איך אפשר לשפר את ההצעות הללו?_|
+| | |
 
-תבניות התחלה מהירות לתרחישי AI נפוצים:
+## יש לכם משוב?
 
-```
-workshop/templates/
-├── minimal-chat/          # Basic OpenAI chat app
-├── rag-application/       # RAG with AI Search
-├── multi-model/          # Multiple AI services
-└── production-ready/     # Enterprise template
-```
+1. פרסמו בעיה במאגר זה - תייגו אותה `Workshop` לנוחות.
+1. הצטרפו ל-Discord של Azure AI Foundry - התחברו עם עמיתים שלכם!
 
-## תחילת העבודה
 
-### אפשרות 1: GitHub Codespaces (מומלץ)
+| | | 
+|:---|:---|
+| **📚 דף הבית של הקורס**| [AZD למתחילים](../README.md)|
+| **📖 תיעוד** | [התחילו עם תבניות AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️ תבניות AI** | [תבניות Azure AI Foundry](https://ai.azure.com/templates) |
+|**🚀 השלבים הבאים** | [קחו את האתגר](../../../workshop) |
+| | |
 
-הדרך המהירה ביותר להתחיל את הסדנה:
-
-[![Open in GitHub Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
-
-### אפשרות 2: פיתוח מקומי
-
-1. **שכפלו את מאגר הסדנה:**
-```bash
-git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
-cd AZD-for-beginners/workshop
-```
-
-2. **התחברו ל-Azure:**
-```bash
-az login
-azd auth login
-```
-
-3. **התחילו עם מעבדה 1:**
-```bash
-cd lab-1-azd-basics
-cat README.md  # Follow the instructions
-```
-
-### אפשרות 3: סדנה בהנחיית מדריך
-
-אם אתם משתתפים במפגש בהנחיית מדריך:
-
-- 🎥 **הקלטת הסדנה**: [זמינה לפי דרישה](https://aka.ms/azd-ai-workshop)
-- 💬 **קהילת Discord**: [הצטרפו לתמיכה בזמן אמת](https://aka.ms/foundry/discord)
-- **משוב על הסדנה**: [שתפו את החוויה שלכם](https://aka.ms/azd-workshop-feedback)
-
-## ציר זמן של הסדנה
-
-### למידה עצמאית (3 שעות)
-
-```
-⏰ 00:00 - 00:30  Module 1: AZD Foundations
-⏰ 00:30 - 01:15  Module 2: Azure OpenAI Integration
-⏰ 01:15 - 02:00  Module 3: RAG Applications
-⏰ 02:00 - 02:30  Module 4: Production Deployment
-⏰ 02:30 - 02:45  Module 5: Advanced Patterns
-⏰ 02:45 - 03:00  Q&A and Next Steps
-```
-
-### מפגש בהנחיית מדריך (2.5 שעות)
-
-```
-⏰ 00:00 - 00:15  Welcome & Prerequisites Check
-⏰ 00:15 - 00:40  Module 1: Live Demo + Lab
-⏰ 00:40 - 01:20  Module 2: OpenAI Integration
-⏰ 01:20 - 01:30  Break
-⏰ 01:30 - 02:10  Module 3: RAG Applications
-⏰ 02:10 - 02:30  Module 4: Production Patterns
-⏰ 02:30 - 02:45  Module 5: Advanced Topics
-⏰ 02:45 - 03:00  Q&A and Resources
-```
-
-## קריטריוני הצלחה
-
-בסיום הסדנה, תוכלו:
-
-✅ **לפרוס אפליקציות AI** באמצעות תבניות AZD  
-✅ **להגדיר שירותי Azure OpenAI** עם אבטחה מתאימה  
-✅ **לבנות אפליקציות RAG** עם שילוב חיפוש AI של Azure  
-✅ **ליישם דפוסי ייצור** לעומסי עבודה ארגוניים של AI  
-✅ **לנטר ולפתור בעיות** בפריסות אפליקציות AI  
-✅ **ליישם אסטרטגיות אופטימיזציה של עלויות** לעומסי עבודה של AI  
-
-## קהילה ותמיכה
-
-### במהלך הסדנה
-
-- 🙋 **שאלות**: השתמשו בצ'אט הסדנה או הרימו יד
-- 🐛 **בעיות**: בדקו את [מדריך פתרון הבעיות](../docs/troubleshooting/ai-troubleshooting.md)
-- **טיפים**: שתפו תגליות עם משתתפים אחרים
-
-### לאחר הסדנה
-
-- 💬 **Discord**: [קהילת Azure AI Foundry](https://aka.ms/foundry/discord)
-- **בעיות GitHub**: [דווחו על בעיות בתבניות](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
-- 📧 **משוב**: [טופס הערכת הסדנה](https://aka.ms/azd-workshop-feedback)
-
-## צעדים הבאים
-
-### המשיכו ללמוד
-
-1. **תרחישים מתקדמים**: חקרו [פריסות רב-אזוריות](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
-2. **שילוב CI/CD**: הגדירו [תהליכי עבודה של GitHub Actions](../docs/deployment/github-actions.md)
-3. **תבניות מותאמות אישית**: צרו [תבניות AZD משלכם](../docs/getting-started/custom-templates.md)
-
-### יישום בפרויקטים שלכם
-
-1. **הערכה**: השתמשו ב-[רשימת הבדיקות שלנו](./production-readiness-checklist.md)
-2. **תבניות**: התחילו עם [תבניות AI ספציפיות](../../../workshop/templates)
-3. **תמיכה**: הצטרפו ל-[Discord של Azure AI Foundry](https://aka.ms/foundry/discord)
-
-### שתפו את ההצלחה שלכם
-
-- ⭐ **דרגו את המאגר** אם הסדנה עזרה לכם
-- 🐦 **שתפו ברשתות חברתיות** עם #AzureDeveloperCLI #AzureAI
-- 📝 **כתבו פוסט בבלוג** על מסע הפריסה שלכם עם AI
-
----
-
-## משוב על הסדנה
-
-המשוב שלכם עוזר לנו לשפר את חוויית הסדנה:
-
-| היבט | דירוג (1-5) | הערות |
-|------|-------------|-------|
-| איכות התוכן | ⭐⭐⭐⭐⭐ | |
-| מעבדות מעשיות | ⭐⭐⭐⭐⭐ | |
-| תיעוד | ⭐⭐⭐⭐⭐ | |
-| רמת קושי | ⭐⭐⭐⭐⭐ | |
-| חוויה כללית | ⭐⭐⭐⭐⭐ | |
-
-**שלחו משוב**: [טופס הערכת הסדנה](https://aka.ms/azd-workshop-feedback)
+<br/>
 
 ---
 
 **קודם:** [מדריך פתרון בעיות AI](../docs/troubleshooting/ai-troubleshooting.md) | **הבא:** התחילו עם [מעבדה 1: יסודות AZD](../../../workshop/lab-1-azd-basics)
 
-**מוכנים להתחיל לבנות אפליקציות AI עם AZD?**
+**מוכנים להתחיל לבנות יישומי AI עם AZD?**
 
 [התחילו מעבדה 1: יסודות AZD →](./lab-1-azd-basics/README.md)
 
