@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "73f4ab6147d5fac5f8c5ad72742e8e1d",
-  "translation_date": "2025-09-17T21:51:24+00:00",
+  "original_hash": "7651a7fb2b5e367812bf01aa209a3612",
+  "translation_date": "2025-09-24T14:47:21+00:00",
   "source_file": "changelog.md",
   "language_code": "tr"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giriş
 
-Bu değişiklik günlüğü, AZD Yeni Başlayanlar İçin deposundaki tüm önemli değişiklikleri, güncellemeleri ve iyileştirmeleri belgelemektedir. Semantik sürümleme ilkelerini takip ediyoruz ve kullanıcıların sürümler arasındaki değişiklikleri anlamalarına yardımcı olmak için bu günlüğü tutuyoruz.
+Bu değişiklik günlüğü, AZD Yeni Başlayanlar İçin deposundaki tüm önemli değişiklikleri, güncellemeleri ve iyileştirmeleri belgelemektedir. Semantik sürümleme prensiplerini takip ediyoruz ve kullanıcıların sürümler arasındaki değişiklikleri anlamalarına yardımcı olmak için bu günlüğü tutuyoruz.
 
 ## Öğrenme Hedefleri
 
@@ -31,13 +31,52 @@ Değişiklik günlüğü girişlerini inceledikten sonra:
 
 ## Sürüm Geçmişi
 
-### [v3.2.0] - 2025-09-17
+### [v3.3.0] - 2025-09-24
 
-#### Ana Navigasyon Yeniden Yapılandırması ve Bölüm Bazlı Öğrenme Sistemi
-**Bu sürüm, tüm depo boyunca geliştirilmiş navigasyon ile kapsamlı bir bölüm bazlı öğrenme yapısını tanıtmaktadır.**
+#### Geliştirilmiş Atölye Materyalleri ve Etkileşimli Öğrenme Deneyimi
+**Bu sürüm, tarayıcı tabanlı etkileşimli rehberler ve yapılandırılmış öğrenme yolları ile kapsamlı atölye materyalleri sunmaktadır.**
 
 #### Eklenenler
-- **📚 Bölüm Bazlı Öğrenme Sistemi**: Tüm kurs 8 aşamalı öğrenme bölümlerine yeniden yapılandırıldı
+- **🎥 Etkileşimli Atölye Rehberi**: MkDocs önizleme özelliği ile tarayıcı tabanlı atölye deneyimi
+- **📝 Yapılandırılmış Atölye Talimatları**: Keşiften özelleştirmeye kadar 7 adımlı rehberli öğrenme yolu
+  - 0-Giriş: Atölye genel bakışı ve kurulum
+  - 1-AI-Şablon-Seçimi: Şablon keşfi ve seçim süreci
+  - 2-AI-Şablon-Doğrulama: Dağıtım ve doğrulama prosedürleri
+  - 3-AI-Şablon-Parçalama: Şablon mimarisini anlama
+  - 4-AI-Şablon-Yapılandırma: Yapılandırma ve özelleştirme
+  - 5-AI-Şablon-Özelleştirme: İleri düzey değişiklikler ve iterasyonlar
+  - 6-Altyapı-Temizleme: Temizlik ve kaynak yönetimi
+  - 7-Kapanış: Özet ve sonraki adımlar
+- **🛠️ Atölye Araçları**: Gelişmiş öğrenme deneyimi için Material teması ile MkDocs yapılandırması
+- **🎯 Uygulamalı Öğrenme Yolu**: 3 adımlı metodoloji (Keşif → Dağıtım → Özelleştirme)
+- **📱 GitHub Codespaces Entegrasyonu**: Sorunsuz geliştirme ortamı kurulumu
+
+#### Geliştirilenler
+- **AI Atölye Laboratuvarı**: 2-3 saatlik yapılandırılmış öğrenme deneyimi ile genişletildi
+- **Atölye Belgeleri**: Navigasyon ve görsel yardımlarla profesyonel sunum
+- **Öğrenme İlerlemesi**: Şablon seçiminden üretim dağıtımına kadar adım adım rehberlik
+- **Geliştirici Deneyimi**: Geliştirilmiş geliştirme iş akışları için entegre araçlar
+
+#### İyileştirilenler
+- **Erişilebilirlik**: Arama, kopyalama işlevi ve tema geçişi ile tarayıcı tabanlı arayüz
+- **Kendi Hızında Öğrenme**: Farklı öğrenme hızlarına uygun esnek atölye yapısı
+- **Pratik Uygulama**: Gerçek dünya AI şablon dağıtım senaryoları
+- **Topluluk Entegrasyonu**: Atölye desteği ve iş birliği için Discord entegrasyonu
+
+#### Atölye Özellikleri
+- **Yerleşik Arama**: Hızlı anahtar kelime ve ders keşfi
+- **Kod Bloklarını Kopyalama**: Tüm kod örnekleri için üzerine gelerek kopyalama işlevi
+- **Tema Geçişi**: Farklı tercihler için karanlık/açık mod desteği
+- **Görsel Varlıklar**: Daha iyi anlamak için ekran görüntüleri ve diyagramlar
+- **Yardım Entegrasyonu**: Topluluk desteği için doğrudan Discord erişimi
+
+### [v3.2.0] - 2025-09-17
+
+#### Büyük Navigasyon Yeniden Yapılandırması ve Bölüm Tabanlı Öğrenme Sistemi
+**Bu sürüm, tüm depo boyunca geliştirilmiş navigasyon ile kapsamlı bir bölüm tabanlı öğrenme yapısı sunmaktadır.**
+
+#### Eklenenler
+- **📚 Bölüm Tabanlı Öğrenme Sistemi**: Tüm kursu 8 ilerleyici öğrenme bölümüne yeniden yapılandırıldı
   - Bölüm 1: Temel Bilgiler ve Hızlı Başlangıç (⭐ - 30-45 dk)
   - Bölüm 2: AI-Öncelikli Geliştirme (⭐⭐ - 1-2 saat)
   - Bölüm 3: Yapılandırma ve Kimlik Doğrulama (⭐⭐ - 45-60 dk)
@@ -52,39 +91,39 @@ Değişiklik günlüğü girişlerini inceledikten sonra:
 - **🔗 Çapraz Referans Navigasyonu**: İlgili bölümler ve ön koşullar açıkça bağlantılı
 
 #### Geliştirilenler
-- **README Yapısı**: Bölüm bazlı organizasyon ile yapılandırılmış bir öğrenme platformuna dönüştürüldü
+- **README Yapısı**: Bölüm tabanlı organizasyon ile yapılandırılmış bir öğrenme platformuna dönüştürüldü
 - **Belge Navigasyonu**: Her sayfa artık bölüm bağlamı ve ilerleme rehberliği içeriyor
 - **Şablon Organizasyonu**: Örnekler ve şablonlar uygun öğrenme bölümlerine eşleştirildi
-- **Kaynak Entegrasyonu**: İlgili bölümlere bağlı hile sayfaları, SSS'ler ve çalışma kılavuzları
+- **Kaynak Entegrasyonu**: İlgili bölümlere bağlı hile sayfaları, SSS ve çalışma kılavuzları
 - **Atölye Entegrasyonu**: Birden fazla bölüm öğrenme hedeflerine eşleştirilmiş uygulamalı laboratuvarlar
 
 #### Değiştirilenler
-- **Öğrenme İlerlemesi**: Doğrusal belgelerden esnek bölüm bazlı öğrenmeye geçiş yapıldı
-- **Yapılandırma Konumu**: Daha iyi bir öğrenme akışı için yapılandırma kılavuzu Bölüm 3'e taşındı
+- **Öğrenme İlerlemesi**: Doğrusal belgelerden esnek bölüm tabanlı öğrenmeye taşındı
+- **Yapılandırma Konumu**: Daha iyi öğrenme akışı için yapılandırma rehberi Bölüm 3 olarak yeniden konumlandırıldı
 - **AI İçerik Entegrasyonu**: Öğrenme yolculuğu boyunca AI'ye özgü içeriğin daha iyi entegrasyonu
-- **Üretim İçeriği**: Gelişmiş kalıplar kurumsal öğreniciler için Bölüm 8'de birleştirildi
+- **Üretim İçeriği**: İleri düzey kalıplar kurumsal öğreniciler için Bölüm 8'de birleştirildi
 
 #### İyileştirilenler
 - **Kullanıcı Deneyimi**: Net navigasyon izleri ve bölüm ilerleme göstergeleri
-- **Erişilebilirlik**: Daha kolay kurs gezintisi için tutarlı navigasyon kalıpları
+- **Erişilebilirlik**: Daha kolay kurs gezintisi için tutarlı navigasyon desenleri
 - **Profesyonel Sunum**: Akademik ve kurumsal eğitim için uygun üniversite tarzı kurs yapısı
 - **Öğrenme Verimliliği**: Geliştirilmiş organizasyon sayesinde ilgili içeriği bulma süresi azaltıldı
 
 #### Teknik Uygulama
 - **Navigasyon Başlıkları**: 40+ belge dosyasında standartlaştırılmış bölüm navigasyonu
 - **Altbilgi Navigasyonu**: Tutarlı ilerleme rehberliği ve bölüm tamamlama göstergeleri
-- **Çapraz Bağlantı**: İlgili kavramları birbirine bağlayan kapsamlı iç bağlantı sistemi
+- **Çapraz Bağlantı**: İlgili kavramları bağlayan kapsamlı iç bağlantı sistemi
 - **Bölüm Eşlemesi**: Şablonlar ve örnekler açıkça öğrenme hedefleriyle ilişkilendirildi
 
 #### Çalışma Kılavuzu Geliştirmesi
-- **📚 Kapsamlı Öğrenme Hedefleri**: Çalışma kılavuzu 8 bölüm sistemine uyacak şekilde yeniden yapılandırıldı
-- **🎯 Bölüm Bazlı Değerlendirme**: Her bölüm belirli öğrenme hedefleri ve pratik egzersizler içeriyor
+- **📚 Kapsamlı Öğrenme Hedefleri**: Çalışma kılavuzu 8 bölüm sistemine uygun şekilde yeniden yapılandırıldı
+- **🎯 Bölüm Tabanlı Değerlendirme**: Her bölüm belirli öğrenme hedefleri ve pratik egzersizler içeriyor
 - **📋 İlerleme Takibi**: Ölçülebilir sonuçlar ve tamamlama kontrol listeleri ile haftalık öğrenme programı
-- **❓ Değerlendirme Soruları**: Profesyonel sonuçlarla her bölüm için bilgi doğrulama soruları
+- **❓ Değerlendirme Soruları**: Her bölüm için bilgi doğrulama soruları ve profesyonel sonuçlar
 - **🛠️ Pratik Egzersizler**: Gerçek dağıtım senaryoları ve sorun giderme ile uygulamalı aktiviteler
 - **📊 Beceri İlerlemesi**: Temel kavramlardan kurumsal kalıplara net ilerleme ile kariyer gelişimi odaklı
 - **🎓 Sertifikasyon Çerçevesi**: Profesyonel gelişim sonuçları ve topluluk tanıma sistemi
-- **⏱️ Zaman Yönetimi**: Milestone doğrulaması ile yapılandırılmış 10 haftalık öğrenme planı
+- **⏱️ Zaman Yönetimi**: Yapılandırılmış 10 haftalık öğrenme planı ve kilometre taşı doğrulaması
 
 ### [v3.1.0] - 2025-09-17
 
@@ -94,41 +133,41 @@ Değişiklik günlüğü girişlerini inceledikten sonra:
 #### Değiştirilenler
 - **Çoklu-Ajan Terminolojisi**: Perakende çoklu-ajan çözümünde "Cora ajanı" yerine "Müşteri ajanı" kullanıldı
 - **Ajan Mimarisi**: Tüm belgeler, ARM şablonları ve kod örnekleri "Müşteri ajanı" adlandırmasını kullanacak şekilde güncellendi
-- **Yapılandırma Örnekleri**: Güncellenmiş adlandırma düzenleriyle ajan yapılandırma kalıpları modernize edildi
+- **Yapılandırma Örnekleri**: Güncellenmiş adlandırma düzenleriyle modernize edilmiş ajan yapılandırma kalıpları
 - **Belge Tutarlılığı**: Tüm referanslar profesyonel, açıklayıcı ajan adlarını kullanacak şekilde düzenlendi
 
 #### Geliştirilenler
-- **ARM Şablon Paketi**: Müşteri ajanı referanslarıyla güncellenmiş perakende-çoklu-ajan-arm-template
-- **Mimari Diyagramlar**: Güncellenmiş ajan adlandırmasıyla yenilenmiş Mermaid diyagramları
+- **ARM Şablon Paketi**: Müşteri ajanı referansları ile güncellenmiş perakende-çokluajan-arm-şablonu
+- **Mimari Diyagramlar**: Güncellenmiş ajan adlandırması ile yenilenmiş Mermaid diyagramları
 - **Kod Örnekleri**: Python sınıfları ve uygulama örnekleri artık CustomerAgent adlandırmasını kullanıyor
 - **Ortam Değişkenleri**: Tüm dağıtım komut dosyaları CUSTOMER_AGENT_NAME düzenlerini kullanacak şekilde güncellendi
 
 #### İyileştirilenler
-- **Geliştirici Deneyimi**: Belgelerde daha net ajan rolleri ve sorumlulukları
+- **Geliştirici Deneyimi**: Belgelerde daha net ajan rolleri ve sorumluluklar
 - **Üretim Hazırlığı**: Kurumsal adlandırma düzenleriyle daha iyi uyum
-- **Öğrenme Materyalleri**: Eğitim amaçlı daha sezgisel ajan adlandırması
-- **Şablon Kullanılabilirliği**: Ajan işlevlerini ve dağıtım kalıplarını anlamayı basitleştirdi
+- **Öğrenme Materyalleri**: Eğitim amaçları için daha sezgisel ajan adlandırması
+- **Şablon Kullanılabilirliği**: Ajan işlevlerini ve dağıtım kalıplarını daha basit anlama
 
 #### Teknik Detaylar
-- CustomerAgent referanslarıyla güncellenmiş Mermaid mimari diyagramları
+- Güncellenmiş Mermaid mimari diyagramları CustomerAgent referansları ile
 - Python örneklerinde CoraAgent sınıf adları CustomerAgent ile değiştirildi
 - ARM şablon JSON yapılandırmaları "müşteri" ajan türünü kullanacak şekilde değiştirildi
-- CORA_AGENT_* ortam değişkenleri CUSTOMER_AGENT_* düzenlerine dönüştürüldü
+- Ortam değişkenleri CORA_AGENT_*'dan CUSTOMER_AGENT_* düzenlerine dönüştürüldü
 - Tüm dağıtım komutları ve konteyner yapılandırmaları yenilendi
 
 ### [v3.0.0] - 2025-09-12
 
-#### Büyük Değişiklikler - AI Geliştirici Odaklı ve Azure AI Foundry Entegrasyonu
+#### Büyük Değişiklikler - AI Geliştirici Odaklılık ve Azure AI Foundry Entegrasyonu
 **Bu sürüm, depoyu Azure AI Foundry entegrasyonu ile kapsamlı bir AI odaklı öğrenme kaynağına dönüştürür.**
 
 #### Eklenenler
 - **🤖 AI-Öncelikli Öğrenme Yolu**: AI geliştiricileri ve mühendislerini önceliklendiren tam yeniden yapılandırma
-- **Azure AI Foundry Entegrasyon Kılavuzu**: AZD'nin Azure AI Foundry hizmetleriyle bağlantısı için kapsamlı belgeler
-- **AI Model Dağıtım Kalıpları**: Model seçimi, yapılandırma ve üretim dağıtım stratejilerini kapsayan detaylı kılavuz
-- **AI Atölye Laboratuvarı**: AI uygulamalarını AZD'ye dağıtılabilir çözümlere dönüştürmek için 2-3 saatlik uygulamalı atölye
-- **Üretim AI En İyi Uygulamaları**: AI iş yüklerini ölçeklendirme, izleme ve güvence altına alma için kurumsal kalıplar
-- **AI'ye Özgü Sorun Giderme Kılavuzu**: Azure OpenAI, Cognitive Services ve AI dağıtım sorunları için kapsamlı sorun giderme
-- **AI Şablon Galerisi**: Karmaşıklık dereceleriyle öne çıkan Azure AI Foundry şablon koleksiyonu
+- **Azure AI Foundry Entegrasyon Rehberi**: AZD'nin Azure AI Foundry hizmetleriyle bağlantısı için kapsamlı belgeler
+- **AI Model Dağıtım Kalıpları**: Model seçimi, yapılandırma ve üretim dağıtım stratejilerini kapsayan detaylı rehber
+- **AI Atölye Laboratuvarı**: AZD'ye dönüştürülebilir AI uygulamaları için 2-3 saatlik uygulamalı atölye
+- **Üretim AI En İyi Uygulamaları**: AI iş yüklerini ölçeklendirme, izleme ve güvence altına alma için kurumsal hazır kalıplar
+- **AI'ye Özgü Sorun Giderme Rehberi**: Azure OpenAI, Cognitive Services ve AI dağıtım sorunları için kapsamlı sorun giderme
+- **AI Şablon Galerisi**: Karmaşıklık derecelendirmeleri ile öne çıkan Azure AI Foundry şablon koleksiyonu
 - **Atölye Materyalleri**: Uygulamalı laboratuvarlar ve referans materyallerle tam atölye yapısı
 
 #### Geliştirilenler
@@ -137,10 +176,10 @@ Değişiklik günlüğü girişlerini inceledikten sonra:
 - **Şablon Önerileri**: azure-search-openai-demo, contoso-chat ve openai-chat-app-quickstart gibi öne çıkan AI şablonları
 - **Topluluk Entegrasyonu**: AI'ye özgü kanallar ve tartışmalarla geliştirilmiş Discord topluluk desteği
 
-#### Güvenlik ve Üretim Odaklı
+#### Güvenlik ve Üretim Odaklılık
 - **Yönetilen Kimlik Kalıpları**: AI'ye özgü kimlik doğrulama ve güvenlik yapılandırmaları
-- **Maliyet Optimizasyonu**: AI iş yükleri için token kullanım takibi ve bütçe kontrolleri
-- **Çok Bölgeli Dağıtım**: Küresel AI uygulama dağıtımı stratejileri
+- **Maliyet Optimizasyonu**: Token kullanım takibi ve AI iş yükleri için bütçe kontrolleri
+- **Çoklu-Bölge Dağıtımı**: Küresel AI uygulama dağıtım stratejileri
 - **Performans İzleme**: AI'ye özgü metrikler ve Application Insights entegrasyonu
 
 #### Belge Kalitesi
@@ -155,226 +194,207 @@ Değişiklik günlüğü girişlerini inceledikten sonra:
 **Bu sürüm, depo yapısı ve içerik sunumunda önemli bir revizyonu temsil eder.**
 
 #### Eklenenler
-- **Yapılandırılmış Öğrenme Çerçevesi**: Tüm belge sayfaları artık Giriş, Öğrenme Hedefleri ve Öğrenme Çıktıları bölümlerini içeriyor
+- **Yapılandırılmış Öğrenme Çerçevesi**: Tüm belge sayfaları artık Giriş, Öğrenme Hedefleri ve Öğrenme Çıktıları bölümleri içeriyor
 - **Navigasyon Sistemi**: Tüm belgelerde önceki/sonraki ders bağlantıları eklendi
 - **Çalışma Kılavuzu**: Öğrenme hedefleri, pratik egzersizler ve değerlendirme materyalleri içeren kapsamlı çalışma-kılavuzu.md
 - **Profesyonel Sunum**: Daha iyi erişilebilirlik ve profesyonel görünüm için tüm emoji simgeleri kaldırıldı
 - **Geliştirilmiş İçerik Yapısı**: Öğrenme materyallerinin organizasyonu ve akışı iyileştirildi
 
 #### Değiştirilenler
-- **Belge Formatı**: Tüm belgeler öğrenme odaklı yapı ile standartlaştırıldı
+- **Belge Formatı**: Tüm belgeler tutarlı öğrenme odaklı yapı ile standartlaştırıldı
 - **Navigasyon Akışı**: Tüm öğrenme materyalleri boyunca mantıksal ilerleme uygulandı
-- **İçerik Sunumu**: Dekoratif öğeler yerine net, profesyonel formatlama tercih edildi
+- **İçerik Sunumu**: Dekoratif unsurlar yerine net, profesyonel formatlama tercih edildi
 - **Bağlantı Yapısı**: Yeni navigasyon sistemini desteklemek için tüm dahili bağlantılar güncellendi
 
 #### İyileştirilenler
 - **Erişilebilirlik**: Daha iyi ekran okuyucu uyumluluğu için emoji bağımlılıkları kaldırıldı
-- **Profesyonel Görünüm**: Kurumsal öğrenim için uygun temiz, akademik tarzda sunum
-- **Öğrenme Deneyimi**: Her ders için net hedefler ve çıktılar içeren yapılandırılmış yaklaşım
-- **İçerik Organizasyonu**: İlgili konular arasında daha iyi mantıksal akış ve bağlantı
-
-### [v1.0.0] - 2025-09-09
-
-#### İlk Yayın - Kapsamlı AZD Öğrenme Deposu
-
-#### Eklenenler
-- **Temel Belge Yapısı**
-  - Tam başlangıç rehberi serisi
-  - Kapsamlı dağıtım ve sağlama belgeleri
-  - Ayrıntılı sorun giderme kaynakları ve hata ayıklama kılavuzları
-  - Dağıtım öncesi doğrulama araçları ve prosedürleri
-
-- **Başlangıç Modülü**
-  - AZD Temelleri: Temel kavramlar ve terminoloji
-  - Kurulum Kılavuzu: Platforma özel kurulum talimatları
-  - Yapılandırma Kılavuzu: Ortam ayarları ve kimlik doğrulama
-  - İlk Proje Eğitimi: Adım adım uygulamalı öğrenme
-
-- **Dağıtım ve Sağlama Modülü**
-  - Dağıtım Kılavuzu: Tam iş akışı belgeleri
-  - Sağlama Kılavuzu: Bicep ile Kod Olarak Altyapı
-  - Üretim dağıtımları için en iyi uygulamalar
-  - Çoklu hizmet mimarisi kalıpları
-
-- **Dağıtım Öncesi Doğrulama Modülü**
-  - Kapasite Planlama: Azure kaynak kullanılabilirliği doğrulaması
-  - SKU Seçimi: Kapsamlı hizmet seviyesi rehberi
-  - Ön Kontroller: Otomatik doğrulama komut dosyaları (PowerShell ve Bash)
-  - Maliyet tahmini ve bütçe planlama araçları
-
-- **Sorun Giderme Modülü**
-  - Yaygın Sorunlar: Sık karşılaşılan problemler ve çözümleri
-  - Hata Ayıklama Kılavuzu: Sistematik sorun giderme metodolojileri
-  - Gelişmiş tanı teknikleri ve araçları
-  - Performans izleme ve optimizasyon
-
-- **Kaynaklar ve Referanslar**
-  - Komut Hile Sayfası: Temel komutlar için hızlı referans
-  - Sözlük: Kapsamlı terminoloji ve kısaltma tanımları
-  - SSS: Yaygın soruların ayrıntılı yanıtları
-  - Harici kaynak bağlantıları ve topluluk bağlantıları
-
-- **Örnekler ve Şablonlar**
-  - Basit Web Uygulaması örneği
-  - Statik Web Sitesi dağıtım şablonu
-  - Konteyner Uygulaması yapılandırması
-  - Veritabanı entegrasyon kalıpları
-  - Mikro hizmet mimarisi örnekleri
-  - Sunucusuz işlev uygulamaları
+- **Profesyonel Görünüm**: Kurumsal öğrenim için uygun temiz, akadem
+- Mikroservis mimarisi örnekleri
+- Sunucusuz fonksiyon uygulamaları
 
 #### Özellikler
-- **Çoklu Platform Desteği**: Windows, macOS ve Linux için kurulum ve yapılandırma kılavuzları
-- **Çoklu Beceri Seviyeleri**: Öğrencilerden profesyonel geliştiricilere kadar tasarlanmış içerik
+- **Çoklu Platform Desteği**: Windows, macOS ve Linux için kurulum ve yapılandırma rehberleri
+- **Farklı Beceri Seviyeleri**: Öğrencilerden profesyonel geliştiricilere kadar tasarlanmış içerik
 - **Pratik Odaklı**: Uygulamalı örnekler ve gerçek dünya senaryoları
-- **Kapsamlı Kapsama**: Temel kavramlardan ileri düzey kurumsal kalıplara kadar
-- **Güvenlik-Öncelikli Yaklaşım**: Güvenlik en iyi uygulamaları enteg
-- **AI Pipeline Otomasyonu**: Azure Machine Learning boru hatları ile MLOps entegrasyonu  
-- **Gelişmiş Güvenlik**: Sıfır güven modelleri, özel uç noktalar ve gelişmiş tehdit koruması  
-- **Performans Optimizasyonu**: Yüksek verimli AI uygulamaları için gelişmiş ayar ve ölçeklendirme stratejileri  
-- **Global Dağıtım**: AI uygulamaları için içerik teslimi ve uç önbellekleme modelleri  
+- **Kapsamlı Kapsama**: Temel kavramlardan ileri düzey kurumsal desenlere kadar
+- **Güvenlik Öncelikli Yaklaşım**: Güvenlik en iyi uygulamaları entegre edilmiş
+- **Maliyet Optimizasyonu**: Uygun maliyetli dağıtımlar ve kaynak yönetimi için rehberlik
 
-### Sürüm 3.0.0 (Planlanmış) - Mevcut Sürümle Yer Değiştirdi  
-#### Önerilen Eklemeler - Şimdi v3.0.0'da Uygulandı  
-- ✅ **AI Odaklı İçerik**: Kapsamlı Azure AI Foundry entegrasyonu (Tamamlandı)  
-- ✅ **Etkileşimli Eğitimler**: Uygulamalı AI atölye laboratuvarı (Tamamlandı)  
-- ✅ **Gelişmiş Güvenlik Modülü**: AI'ye özel güvenlik modelleri (Tamamlandı)  
-- ✅ **Performans Optimizasyonu**: AI iş yükü ayar stratejileri (Tamamlandı)  
+#### Dokümantasyon Kalitesi
+- **Detaylı Kod Örnekleri**: Pratik, test edilmiş kod örnekleri
+- **Adım Adım Talimatlar**: Açık ve uygulanabilir rehberlik
+- **Kapsamlı Hata Yönetimi**: Yaygın sorunlar için çözüm önerileri
+- **En İyi Uygulama Entegrasyonu**: Endüstri standartları ve öneriler
+- **Sürüm Uyumluluğu**: En son Azure hizmetleri ve azd özellikleriyle güncel
 
-### Sürüm 2.1.0 (Planlanmış) - Kısmen v3.0.0'da Uygulandı  
-#### Küçük İyileştirmeler - Bazıları Mevcut Sürümde Tamamlandı  
-- ✅ **Ek Örnekler**: AI odaklı dağıtım senaryoları (Tamamlandı)  
-- ✅ **Genişletilmiş SSS**: AI'ye özel sorular ve sorun giderme (Tamamlandı)  
-- **Araç Entegrasyonu**: Geliştirilmiş IDE ve editör entegrasyon rehberleri  
-- ✅ **İzleme Genişletmesi**: AI'ye özel izleme ve uyarı modelleri (Tamamlandı)  
+## Planlanan Gelecek Geliştirmeler
 
-#### Gelecek Sürüm İçin Hâlâ Planlanıyor  
-- **Mobil Uyumlu Belgeler**: Mobil öğrenim için duyarlı tasarım  
-- **Çevrimdışı Erişim**: İndirilebilir belge paketleri  
-- **Gelişmiş IDE Entegrasyonu**: AZD + AI iş akışları için VS Code uzantısı  
-- **Topluluk Panosu**: Gerçek zamanlı topluluk metrikleri ve katkı takibi  
+### Sürüm 3.1.0 (Planlanıyor)
+#### AI Platformu Genişletme
+- **Çoklu Model Desteği**: Hugging Face, Azure Machine Learning ve özel modeller için entegrasyon desenleri
+- **AI Agent Çerçeveleri**: LangChain, Semantic Kernel ve AutoGen dağıtımları için şablonlar
+- **Gelişmiş RAG Desenleri**: Azure AI Search dışında vektör veritabanı seçenekleri (Pinecone, Weaviate, vb.)
+- **AI İzlenebilirlik**: Model performansı, token kullanımı ve yanıt kalitesi için gelişmiş izleme
 
-## Değişiklik Günlüğüne Katkıda Bulunma  
+#### Geliştirici Deneyimi
+- **VS Code Eklentisi**: AZD + AI Foundry geliştirme deneyimi entegrasyonu
+- **GitHub Copilot Entegrasyonu**: AI destekli AZD şablon oluşturma
+- **Etkileşimli Eğitimler**: AI senaryoları için otomatik doğrulama ile uygulamalı kodlama egzersizleri
+- **Video İçeriği**: AI dağıtımlarına odaklanan görsel öğreniciler için ek video eğitimleri
 
-### Değişiklikleri Bildirme  
-Bu depoya katkıda bulunurken, değişiklik günlüğü girişlerinin şunları içerdiğinden emin olun:  
+### Sürüm 4.0.0 (Planlanıyor)
+#### Kurumsal AI Desenleri
+- **Yönetim Çerçevesi**: AI model yönetimi, uyumluluk ve denetim izleri
+- **Çoklu Kiracı AI**: İzole edilmiş AI hizmetleriyle birden fazla müşteri için desenler
+- **Edge AI Dağıtımı**: Azure IoT Edge ve konteyner örnekleri ile entegrasyon
+- **Hibrit Bulut AI**: AI iş yükleri için çoklu bulut ve hibrit dağıtım desenleri
 
-1. **Sürüm Numarası**: Semantik sürümleme (ana.minor.patch) kurallarına uygun  
-2. **Tarih**: Yayın veya güncelleme tarihi, YYYY-AA-GG formatında  
-3. **Kategori**: Eklendi, Değiştirildi, Kullanımdan Kaldırıldı, Kaldırıldı, Düzeltildi, Güvenlik  
-4. **Açık Açıklama**: Yapılan değişikliğin kısa ve net açıklaması  
-5. **Etkisi**: Değişikliklerin mevcut kullanıcıları nasıl etkilediği  
+#### Gelişmiş Özellikler
+- **AI Pipeline Otomasyonu**: Azure Machine Learning pipeline'ları ile MLOps entegrasyonu
+- **Gelişmiş Güvenlik**: Sıfır güven desenleri, özel uç noktalar ve gelişmiş tehdit koruması
+- **Performans Optimizasyonu**: Yüksek verimli AI uygulamaları için gelişmiş ayar ve ölçekleme stratejileri
+- **Global Dağıtım**: AI uygulamaları için içerik teslimi ve edge önbellekleme desenleri
 
-### Değişiklik Kategorileri  
+### Sürüm 3.0.0 (Planlanıyor) - Mevcut Sürüm Tarafından Geçildi
+#### Önerilen Eklemeler - Şimdi v3.0.0'da Uygulandı
+- ✅ **AI Odaklı İçerik**: Kapsamlı Azure AI Foundry entegrasyonu (Tamamlandı)
+- ✅ **Etkileşimli Eğitimler**: Uygulamalı AI atölye laboratuvarı (Tamamlandı)
+- ✅ **Gelişmiş Güvenlik Modülü**: AI'ya özel güvenlik desenleri (Tamamlandı)
+- ✅ **Performans Optimizasyonu**: AI iş yükü ayar stratejileri (Tamamlandı)
 
-#### Eklendi  
-- Yeni özellikler, belge bölümleri veya yetenekler  
-- Yeni örnekler, şablonlar veya öğrenim kaynakları  
-- Ek araçlar, betikler veya yardımcı programlar  
+### Sürüm 2.1.0 (Planlanıyor) - Kısmen v3.0.0'da Uygulandı
+#### Küçük Geliştirmeler - Bazıları Mevcut Sürümde Tamamlandı
+- ✅ **Ek Örnekler**: AI odaklı dağıtım senaryoları (Tamamlandı)
+- ✅ **Genişletilmiş SSS**: AI'ya özel sorular ve sorun giderme (Tamamlandı)
+- **Araç Entegrasyonu**: Geliştirilmiş IDE ve editör entegrasyon rehberleri
+- ✅ **İzleme Genişletmesi**: AI'ya özel izleme ve uyarı desenleri (Tamamlandı)
 
-#### Değiştirildi  
-- Mevcut işlevsellik veya belgelerde yapılan değişiklikler  
-- Daha fazla netlik veya doğruluk için yapılan güncellemeler  
-- İçerik veya organizasyonun yeniden yapılandırılması  
+#### Gelecek Sürüm İçin Hâlâ Planlanıyor
+- **Mobil Dostu Dokümantasyon**: Mobil öğrenim için duyarlı tasarım
+- **Çevrimdışı Erişim**: İndirilebilir dokümantasyon paketleri
+- **Gelişmiş IDE Entegrasyonu**: AZD + AI iş akışları için VS Code eklentisi
+- **Topluluk Panosu**: Gerçek zamanlı topluluk metrikleri ve katkı takibi
 
-#### Kullanımdan Kaldırıldı  
-- Kullanımdan kaldırılmakta olan özellikler veya yaklaşımlar  
-- Kaldırılması planlanan belge bölümleri  
-- Daha iyi alternatifleri olan yöntemler  
+## Değişiklik Günlüğüne Katkıda Bulunma
 
-#### Kaldırıldı  
-- Artık geçerli olmayan özellikler, belgeler veya örnekler  
-- Güncelliğini yitirmiş bilgiler veya kullanımdan kaldırılmış yaklaşımlar  
-- Gereksiz veya birleştirilmiş içerik  
+### Değişiklikleri Bildirme
+Bu depoya katkıda bulunurken, değişiklik günlüğü girişlerinin şunları içerdiğinden emin olun:
 
-#### Düzeltildi  
-- Belgelerdeki veya koddaki hataların düzeltilmesi  
-- Bildirilen sorunların veya problemlerin çözülmesi  
-- Doğruluk veya işlevsellikteki iyileştirmeler  
+1. **Sürüm Numarası**: Semantik sürümleme (major.minor.patch) kurallarına uygun
+2. **Tarih**: Yayın veya güncelleme tarihi (YYYY-AA-GG formatında)
+3. **Kategori**: Eklendi, Değiştirildi, Kullanımdan Kaldırıldı, Kaldırıldı, Düzeltildi, Güvenlik
+4. **Açık Açıklama**: Yapılan değişikliklerin kısa açıklaması
+5. **Etkisi**: Değişikliklerin mevcut kullanıcıları nasıl etkilediği
 
-#### Güvenlik  
-- Güvenlikle ilgili iyileştirmeler veya düzeltmeler  
-- Güvenlik en iyi uygulamalarına yönelik güncellemeler  
-- Güvenlik açıklarının çözülmesi  
+### Değişiklik Kategorileri
 
-### Semantik Sürümleme Rehberi  
+#### Eklendi
+- Yeni özellikler, dokümantasyon bölümleri veya yetenekler
+- Yeni örnekler, şablonlar veya öğrenim kaynakları
+- Ek araçlar, scriptler veya yardımcı programlar
 
-#### Ana Sürüm (X.0.0)  
-- Kullanıcı eylemi gerektiren büyük değişiklikler  
-- İçerik veya organizasyonda önemli yeniden yapılandırmalar  
-- Temel yaklaşımı veya metodolojiyi değiştiren değişiklikler  
+#### Değiştirildi
+- Mevcut işlevsellik veya dokümantasyonda yapılan değişiklikler
+- Açıklık veya doğruluğu artırmak için yapılan güncellemeler
+- İçerik veya organizasyonun yeniden yapılandırılması
 
-#### Küçük Sürüm (X.Y.0)  
-- Yeni özellikler veya içerik eklemeleri  
-- Geriye dönük uyumluluğu koruyan iyileştirmeler  
-- Ek örnekler, araçlar veya kaynaklar  
+#### Kullanımdan Kaldırıldı
+- Kullanımdan kaldırılmakta olan özellikler veya yaklaşımlar
+- Kaldırılması planlanan dokümantasyon bölümleri
+- Daha iyi alternatifleri olan yöntemler
 
-#### Yama Sürümü (X.Y.Z)  
-- Hata düzeltmeleri ve iyileştirmeler  
-- Mevcut içerikte küçük iyileştirmeler  
-- Açıklamalar ve küçük geliştirmeler  
+#### Kaldırıldı
+- Artık geçerli olmayan özellikler, dokümantasyon veya örnekler
+- Güncelliğini yitirmiş bilgiler veya kullanımdan kaldırılmış yaklaşımlar
+- Gereksiz veya birleştirilmiş içerik
 
-## Topluluk Geri Bildirimi ve Öneriler  
+#### Düzeltildi
+- Dokümantasyon veya koddaki hataların düzeltilmesi
+- Bildirilen sorunların veya problemlerin çözümü
+- Doğruluk veya işlevsellikteki iyileştirmeler
 
-Bu öğrenim kaynağını geliştirmek için topluluk geri bildirimlerini aktif olarak teşvik ediyoruz:  
+#### Güvenlik
+- Güvenlikle ilgili iyileştirmeler veya düzeltmeler
+- Güvenlik en iyi uygulamalarına yönelik güncellemeler
+- Güvenlik açıklarının çözümü
 
-### Geri Bildirim Nasıl Sağlanır  
-- **GitHub Sorunları**: Problemleri bildirin veya iyileştirme önerilerinde bulunun (AI'ye özel sorunlar memnuniyetle karşılanır)  
-- **Discord Tartışmaları**: Fikirlerinizi paylaşın ve Azure AI Foundry topluluğu ile etkileşimde bulunun  
-- **Pull Request'ler**: İçeriğe doğrudan iyileştirmeler yapın, özellikle AI şablonları ve rehberler  
-- **Azure AI Foundry Discord**: AZD + AI tartışmaları için #Azure kanalına katılın  
-- **Topluluk Forumları**: Daha geniş Azure geliştirici tartışmalarına katılın  
+### Semantik Sürümleme Rehberi
 
-### Geri Bildirim Kategorileri  
-- **AI İçerik Doğruluğu**: AI hizmet entegrasyonu ve dağıtım bilgileri için düzeltmeler  
-- **Öğrenim Deneyimi**: AI geliştirici öğrenim akışını iyileştirme önerileri  
-- **Eksik AI İçeriği**: Ek AI şablonları, modelleri veya örnekleri talepleri  
-- **Erişilebilirlik**: Çeşitli öğrenim ihtiyaçları için iyileştirmeler  
-- **AI Araç Entegrasyonu**: AI geliştirme iş akışı entegrasyonu için öneriler  
-- **Üretim AI Modelleri**: Kurumsal AI dağıtım modeli talepleri  
+#### Ana Sürüm (X.0.0)
+- Kullanıcıların işlem yapmasını gerektiren büyük değişiklikler
+- İçerik veya organizasyonda önemli yeniden yapılandırmalar
+- Temel yaklaşımı veya metodolojiyi değiştiren değişiklikler
 
-### Yanıt Taahhüdü  
-- **Sorun Yanıtı**: Bildirilen sorunlar için 48 saat içinde yanıt  
-- **Özellik Talepleri**: Bir hafta içinde değerlendirme  
-- **Topluluk Katkıları**: Bir hafta içinde inceleme  
-- **Güvenlik Sorunları**: Hızlandırılmış yanıt ile öncelikli  
+#### Küçük Sürüm (X.Y.0)
+- Yeni özellikler veya içerik eklemeleri
+- Geriye dönük uyumluluğu koruyan iyileştirmeler
+- Ek örnekler, araçlar veya kaynaklar
 
-## Bakım Takvimi  
+#### Yama Sürümü (X.Y.Z)
+- Hata düzeltmeleri ve düzenlemeler
+- Mevcut içerikte küçük iyileştirmeler
+- Açıklamalar ve küçük geliştirmeler
 
-### Düzenli Güncellemeler  
-- **Aylık İncelemeler**: İçerik doğruluğu ve bağlantı doğrulama  
-- **Üç Aylık Güncellemeler**: Büyük içerik eklemeleri ve iyileştirmeler  
-- **Altı Aylık İncelemeler**: Kapsamlı yeniden yapılandırma ve geliştirme  
-- **Yıllık Yayınlar**: Önemli iyileştirmelerle büyük sürüm güncellemeleri  
+## Topluluk Geri Bildirimi ve Öneriler
 
-### İzleme ve Kalite Güvencesi  
-- **Otomatik Testler**: Kod örnekleri ve bağlantıların düzenli doğrulaması  
-- **Topluluk Geri Bildirimi Entegrasyonu**: Kullanıcı önerilerinin düzenli olarak dahil edilmesi  
-- **Teknoloji Güncellemeleri**: En son Azure hizmetleri ve azd sürümleriyle uyum  
-- **Erişilebilirlik Denetimleri**: Kapsayıcı tasarım ilkeleri için düzenli inceleme  
+Bu öğrenim kaynağını geliştirmek için topluluk geri bildirimlerini aktif olarak teşvik ediyoruz:
 
-## Sürüm Destek Politikası  
+### Geri Bildirim Nasıl Sağlanır
+- **GitHub Sorunları**: Sorunları bildirin veya iyileştirme önerilerinde bulunun (AI'ya özel sorunlar memnuniyetle karşılanır)
+- **Discord Tartışmaları**: Fikirlerinizi paylaşın ve Azure AI Foundry topluluğuyla etkileşimde bulunun
+- **Pull Request'ler**: İçeriğe doğrudan iyileştirmeler yapın, özellikle AI şablonları ve rehberleri
+- **Azure AI Foundry Discord**: AZD + AI tartışmaları için #Azure kanalına katılın
+- **Topluluk Forumları**: Daha geniş Azure geliştirici tartışmalarına katılın
 
-### Mevcut Sürüm Desteği  
-- **En Son Ana Sürüm**: Düzenli güncellemelerle tam destek  
-- **Önceki Ana Sürüm**: 12 ay boyunca güvenlik güncellemeleri ve kritik düzeltmeler  
-- **Eski Sürümler**: Sadece topluluk desteği, resmi güncelleme yok  
+### Geri Bildirim Kategorileri
+- **AI İçerik Doğruluğu**: AI hizmet entegrasyonu ve dağıtım bilgileri için düzeltmeler
+- **Öğrenim Deneyimi**: AI geliştirici öğrenim akışını iyileştirme önerileri
+- **Eksik AI İçeriği**: Ek AI şablonları, desenleri veya örnekleri talepleri
+- **Erişilebilirlik**: Çeşitli öğrenim ihtiyaçları için iyileştirmeler
+- **AI Araç Entegrasyonu**: Daha iyi AI geliştirme iş akışı entegrasyonu önerileri
+- **Üretim AI Desenleri**: Kurumsal AI dağıtım deseni talepleri
 
-### Geçiş Rehberliği  
-Ana sürümler yayınlandığında, şunları sağlıyoruz:  
-- **Geçiş Rehberleri**: Adım adım geçiş talimatları  
-- **Uyumluluk Notları**: Önemli değişiklikler hakkında detaylar  
-- **Araç Desteği**: Geçişe yardımcı olacak betikler veya yardımcı programlar  
-- **Topluluk Desteği**: Geçiş soruları için özel forumlar  
+### Yanıt Taahhüdü
+- **Sorun Yanıtı**: Bildirilen sorunlar için 48 saat içinde yanıt
+- **Özellik Talepleri**: Bir hafta içinde değerlendirme
+- **Topluluk Katkıları**: Bir hafta içinde inceleme
+- **Güvenlik Sorunları**: Hızlandırılmış yanıt ile öncelikli değerlendirme
+
+## Bakım Takvimi
+
+### Düzenli Güncellemeler
+- **Aylık İncelemeler**: İçerik doğruluğu ve bağlantı doğrulama
+- **Üç Aylık Güncellemeler**: Büyük içerik eklemeleri ve iyileştirmeler
+- **Altı Aylık İncelemeler**: Kapsamlı yeniden yapılandırma ve geliştirme
+- **Yıllık Yayınlar**: Önemli iyileştirmelerle büyük sürüm güncellemeleri
+
+### İzleme ve Kalite Güvencesi
+- **Otomatik Testler**: Kod örnekleri ve bağlantıların düzenli doğrulaması
+- **Topluluk Geri Bildirimi Entegrasyonu**: Kullanıcı önerilerinin düzenli olarak dahil edilmesi
+- **Teknoloji Güncellemeleri**: En son Azure hizmetleri ve azd sürümleriyle uyum
+- **Erişilebilirlik Denetimleri**: Kapsayıcı tasarım ilkeleri için düzenli inceleme
+
+## Sürüm Destek Politikası
+
+### Mevcut Sürüm Desteği
+- **En Son Ana Sürüm**: Düzenli güncellemelerle tam destek
+- **Önceki Ana Sürüm**: 12 ay boyunca güvenlik güncellemeleri ve kritik düzeltmeler
+- **Eski Sürümler**: Sadece topluluk desteği, resmi güncelleme yok
+
+### Geçiş Rehberliği
+Ana sürümler yayınlandığında, şunları sağlıyoruz:
+- **Geçiş Rehberleri**: Adım adım geçiş talimatları
+- **Uyumluluk Notları**: Önemli değişiklikler hakkında detaylar
+- **Araç Desteği**: Geçişe yardımcı olacak scriptler veya yardımcı programlar
+- **Topluluk Desteği**: Geçiş soruları için özel forumlar
 
 ---
 
-**Navigasyon**  
-- **Önceki Ders**: [Çalışma Rehberi](resources/study-guide.md)  
-- **Sonraki Ders**: [Ana README'ye Dön](README.md)  
+**Navigasyon**
+- **Önceki Ders**: [Çalışma Rehberi](resources/study-guide.md)
+- **Sonraki Ders**: [Ana README'ye Dön](README.md)
 
-**Güncel Kalın**: Bu depoyu izleyerek yeni sürümler ve öğrenim materyallerindeki önemli güncellemeler hakkında bildirim alın.  
+**Güncel Kalın**: Bu depoyu izleyerek yeni sürümler ve öğrenim materyallerindeki önemli güncellemeler hakkında bildirim alın.
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
