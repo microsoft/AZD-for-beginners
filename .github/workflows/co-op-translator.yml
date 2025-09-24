@@ -58,8 +58,8 @@ jobs:
           # Recommendation for large batches over 29 files run them in batches maximum github runner time is 6 hours
           # translate -l "zh tw hk fr" -y
           # translate -l "ja ko pt es" -y 
-          translate -l "de fa pl hi" -y
-          # translate -l "ru ar ur mo" -y 
+          # translate -l "de fa pl hi" -y
+          translate -l "ru ar ur mo" -y 
           # translate -l "ja bn mr ne" -y 
           # translate -l "pa br it tr" -y
           # translate -l "el th sv da" -y 
@@ -100,6 +100,7 @@ jobs:
           add-paths: |
             translations/
             translated_images/
+
 
 
 
