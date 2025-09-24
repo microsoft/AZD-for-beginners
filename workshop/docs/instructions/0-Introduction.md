@@ -5,22 +5,7 @@
     This workshop is for anyone looking to build AI Agentic applications on Azure AI Foundry by levreraging best-in-class tools and workflows. The workshop is suited to both beginners and experienced developers who have some familiarity with Azure, AI concepts and Python code. Please check the pre-requisites before you begin.
 
     **Duration:** 3-4 hours  
-    s**Level:** Beginner to Intermediate  
-
-
-## Motivation
-
-Let's start with an analogy. Building a modern agentic AI application _from scratch_ is like building your new home yourself, brick-by-brick. Yes, it can be done. But it is not the most effective way to get your desired end result. Instead, we typically start with a design blueprint that we like, then work with an architect to customize it to our specific requirements.
-
-Building an enterprise-ready AI solution can be viewed with that same lens. Start with a good _design architecture_ then work with a _solution architect_ to customize the design for your app scenario! But, how can you jumpstart this learning journey as an AI developer?
-
-In this workshop, you'll learn to use three technologies to help you get there:
-
-1. [Azure AI Foundry Templates](https://ai.azure.com/templates) - curated open-source repositories for popular application scenarios, defining _Infrastructure-as-code_ assets for consistency and reuse.
-1. [Azure Developer CLI](https://aka.ms/azd) - an open-source tool that uses these templates to streamline your end-to-end workflows from resource provisioning to deployment.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - a "co-architect" that is grounded in Azure knowledge, and can help you navigate the codebase and infrastructure using natural language (chat).
-
-By the end of the workshop, you'll have a _sandbox_ repository that you can continue to explore, to build your own intuition for AZD templates and AI agent development for Azure AI Foundry.
+    **Level:** Beginner to Intermediate  
 
 ---
 
@@ -62,4 +47,7 @@ The workshop is structured as modules, each anchored by a hands-on lab exercise:
 
 ## Feedback & Issues
 
-We are actively updating these curricula to improve the learning experience for everyone! Found a bug or typo? File an issue (tag it `Workshop`). Have questions or comments? Join the Azure AI Foundry Discord and share them with us!
+We actively update the curricula to make sure it provides the best learning experience for beginners. Your feedback is appreciated.
+
+1. Post an issue on this repo - tag it `Workshop` for convenience.
+1. Join the Azure AI Foundry Discord - connect with peer learners!
