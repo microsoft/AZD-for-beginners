@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "73f4ab6147d5fac5f8c5ad72742e8e1d",
-  "translation_date": "2025-09-18T12:42:17+00:00",
+  "original_hash": "7651a7fb2b5e367812bf01aa209a3612",
+  "translation_date": "2025-09-25T00:34:49+00:00",
   "source_file": "changelog.md",
   "language_code": "en"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This changelog records all significant changes, updates, and improvements to the AZD For Beginners repository. It adheres to semantic versioning principles and is maintained to help users understand the differences between versions.
+This changelog records all significant changes, updates, and improvements to the AZD For Beginners repository. It adheres to semantic versioning principles and serves as a resource for users to understand the differences between versions.
 
 ## Learning Goals
 
 By reviewing this changelog, you will:
 - Stay updated on new features and content additions
 - Understand enhancements made to existing documentation
-- Track bug fixes and corrections for accuracy
+- Track bug fixes and corrections for improved accuracy
 - Follow the development of learning materials over time
 
 ## Learning Outcomes
@@ -26,18 +26,57 @@ By reviewing this changelog, you will:
 After reviewing the changelog entries, you will be able to:
 - Identify new content and resources for learning
 - Understand which sections have been updated or improved
-- Plan your learning journey using the latest materials
-- Provide feedback and suggestions for future improvements
+- Plan your learning journey based on the latest materials
+- Provide feedback and suggestions for future updates
 
 ## Version History
+
+### [v3.3.0] - 2025-09-24
+
+#### Enhanced Workshop Materials and Interactive Learning Experience
+**This version introduces detailed workshop materials with browser-based interactive guides and structured learning paths.**
+
+#### Added
+- **🎥 Interactive Workshop Guide**: Browser-based workshop experience with MkDocs preview functionality
+- **📝 Structured Workshop Instructions**: A 7-step guided learning path from discovery to customization
+  - 0-Introduction: Overview and setup for the workshop
+  - 1-Select-AI-Template: Discovering and selecting templates
+  - 2-Validate-AI-Template: Deployment and validation steps
+  - 3-Deconstruct-AI-Template: Understanding the template architecture
+  - 4-Configure-AI-Template: Configuration and customization
+  - 5-Customize-AI-Template: Advanced modifications and iterations
+  - 6-Teardown-Infrastructure: Cleanup and resource management
+  - 7-Wrap-up: Summary and next steps
+- **🛠️ Workshop Tooling**: MkDocs configuration with Material theme for an improved learning experience
+- **🎯 Hands-On Learning Path**: A 3-step methodology (Discovery → Deployment → Customization)
+- **📱 GitHub Codespaces Integration**: Streamlined development environment setup
+
+#### Enhanced
+- **AI Workshop Lab**: Expanded to include a structured 2-3 hour learning experience
+- **Workshop Documentation**: Professional presentation with navigation and visual aids
+- **Learning Progression**: Clear step-by-step guidance from template selection to production deployment
+- **Developer Experience**: Integrated tools for smoother development workflows
+
+#### Improved
+- **Accessibility**: Browser-based interface with search, copy functionality, and theme toggle
+- **Self-Paced Learning**: Flexible workshop structure accommodating different learning speeds
+- **Practical Application**: Real-world AI template deployment scenarios
+- **Community Integration**: Discord integration for workshop support and collaboration
+
+#### Workshop Features
+- **Built-in Search**: Quick keyword and lesson discovery
+- **Copy Code Blocks**: Hover-to-copy functionality for all code examples
+- **Theme Toggle**: Dark/light mode support for user preferences
+- **Visual Assets**: Screenshots and diagrams for better understanding
+- **Help Integration**: Direct Discord access for community support
 
 ### [v3.2.0] - 2025-09-17
 
 #### Major Navigation Restructuring and Chapter-Based Learning System
-**This version introduces a fully chapter-based learning structure with improved navigation across the repository.**
+**This version introduces a chapter-based learning structure with improved navigation across the repository.**
 
 #### Added
-- **📚 Chapter-Based Learning System**: The course has been restructured into 8 progressive learning chapters:
+- **📚 Chapter-Based Learning System**: Restructured the course into 8 progressive learning chapters
   - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
   - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
   - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
@@ -47,20 +86,20 @@ After reviewing the changelog entries, you will be able to:
   - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
   - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
 - **📚 Comprehensive Navigation System**: Consistent navigation headers and footers across all documentation
-- **🎯 Progress Tracking**: A course completion checklist and learning verification system
-- **🗺️ Learning Path Guidance**: Clear entry points for users with different experience levels and goals
-- **🔗 Cross-Reference Navigation**: Links to related chapters and prerequisites
+- **🎯 Progress Tracking**: Course completion checklist and learning verification system
+- **🗺️ Learning Path Guidance**: Clear entry points for different experience levels and goals
+- **🔗 Cross-Reference Navigation**: Related chapters and prerequisites clearly linked
 
 #### Enhanced
-- **README Structure**: Redesigned as a structured learning platform with chapter-based organization
-- **Documentation Navigation**: Each page now includes chapter context and progression guidance
-- **Template Organization**: Examples and templates are mapped to relevant learning chapters
-- **Resource Integration**: Cheat sheets, FAQs, and study guides are linked to appropriate chapters
-- **Workshop Integration**: Hands-on labs are aligned with multiple chapter learning objectives
+- **README Structure**: Transformed into a structured learning platform with chapter-based organization
+- **Documentation Navigation**: Every page now includes chapter context and progression guidance
+- **Template Organization**: Examples and templates mapped to relevant learning chapters
+- **Resource Integration**: Cheat sheets, FAQs, and study guides connected to appropriate chapters
+- **Workshop Integration**: Hands-on labs aligned with multiple chapter learning objectives
 
 #### Changed
-- **Learning Progression**: Transitioned from linear documentation to a flexible chapter-based learning approach
-- **Configuration Placement**: Moved the configuration guide to Chapter 3 for better learning flow
+- **Learning Progression**: Transitioned from linear documentation to flexible chapter-based learning
+- **Configuration Placement**: Repositioned the configuration guide as Chapter 3 for better learning flow
 - **AI Content Integration**: Improved integration of AI-specific content throughout the learning journey
 - **Production Content**: Advanced patterns consolidated in Chapter 8 for enterprise learners
 
@@ -68,28 +107,28 @@ After reviewing the changelog entries, you will be able to:
 - **User Experience**: Clear navigation breadcrumbs and chapter progression indicators
 - **Accessibility**: Consistent navigation patterns for easier course traversal
 - **Professional Presentation**: University-style course structure suitable for academic and corporate training
-- **Learning Efficiency**: Reduced time to locate relevant content through better organization
+- **Learning Efficiency**: Reduced time to locate relevant content through improved organization
 
 #### Technical Implementation
 - **Navigation Headers**: Standardized chapter navigation across 40+ documentation files
 - **Footer Navigation**: Consistent progression guidance and chapter completion indicators
 - **Cross-Linking**: Comprehensive internal linking system connecting related concepts
-- **Chapter Mapping**: Templates and examples are clearly associated with learning objectives
+- **Chapter Mapping**: Templates and examples clearly associated with learning objectives
 
 #### Study Guide Enhancement
-- **📚 Comprehensive Learning Objectives**: Study guide restructured to align with the 8-chapter system
+- **📚 Comprehensive Learning Objectives**: Restructured study guide to align with the 8-chapter system
 - **🎯 Chapter-Based Assessment**: Each chapter includes specific learning objectives and practical exercises
 - **📋 Progress Tracking**: Weekly learning schedule with measurable outcomes and completion checklists
 - **❓ Assessment Questions**: Knowledge validation questions for each chapter with professional outcomes
 - **🛠️ Practical Exercises**: Hands-on activities with real deployment scenarios and troubleshooting
 - **📊 Skill Progression**: Clear advancement from basic concepts to enterprise patterns with career development focus
 - **🎓 Certification Framework**: Professional development outcomes and community recognition system
-- **⏱️ Timeline Management**: A structured 10-week learning plan with milestone validation
+- **⏱️ Timeline Management**: Structured 10-week learning plan with milestone validation
 
 ### [v3.1.0] - 2025-09-17
 
 #### Enhanced Multi-Agent AI Solutions
-**This version improves the multi-agent retail solution with better agent naming and enhanced documentation.**
+**This version improves the multi-agent retail solution with clearer agent naming and updated documentation.**
 
 #### Changed
 - **Multi-Agent Terminology**: Replaced "Cora agent" with "Customer agent" throughout the retail multi-agent solution for better clarity
@@ -123,11 +162,11 @@ After reviewing the changelog entries, you will be able to:
 
 #### Added
 - **🤖 AI-First Learning Path**: Complete restructure prioritizing AI developers and engineers
-- **Azure AI Foundry Integration Guide**: Comprehensive documentation for connecting AZD with Azure AI Foundry services
-- **AI Model Deployment Patterns**: Detailed guide covering model selection, configuration, and production deployment strategies
+- **Azure AI Foundry Integration Guide**: Detailed documentation for connecting AZD with Azure AI Foundry services
+- **AI Model Deployment Patterns**: Guides for model selection, configuration, and production deployment strategies
 - **AI Workshop Lab**: 2-3 hour hands-on workshop for converting AI applications to AZD-deployable solutions
 - **Production AI Best Practices**: Enterprise-ready patterns for scaling, monitoring, and securing AI workloads
-- **AI-Specific Troubleshooting Guide**: Comprehensive troubleshooting for Azure OpenAI, Cognitive Services, and AI deployment issues
+- **AI-Specific Troubleshooting Guide**: Troubleshooting for Azure OpenAI, Cognitive Services, and AI deployment issues
 - **AI Template Gallery**: Featured collection of Azure AI Foundry templates with complexity ratings
 - **Workshop Materials**: Complete workshop structure with hands-on labs and reference materials
 
@@ -219,36 +258,36 @@ After reviewing the changelog entries, you will be able to:
   - Static Website deployment template
   - Container Application configuration
   - Database integration patterns
-  - Microservices architecture examples
-  - Serverless function implementations
+  - Examples of microservices architecture
+  - Implementations of serverless functions
 
 #### Features
 - **Multi-Platform Support**: Installation and configuration guides for Windows, macOS, and Linux
-- **Multiple Skill Levels**: Content designed for students through professional developers
-- **Practical Focus**: Hands-on examples and real-world scenarios
-- **Comprehensive Coverage**: From basic concepts to advanced enterprise patterns
-- **Security-First Approach**: Security best practices integrated throughout
-- **Cost Optimization**: Guidance for cost-effective deployments and resource management
+- **For All Skill Levels**: Content tailored for students to professional developers
+- **Hands-On Approach**: Practical examples and real-world scenarios
+- **Comprehensive Coverage**: From foundational concepts to advanced enterprise patterns
+- **Security-Focused**: Security best practices integrated throughout
+- **Cost Efficiency**: Tips for cost-effective deployments and resource management
 
 #### Documentation Quality
 - **Detailed Code Examples**: Practical, tested code samples
 - **Step-by-Step Instructions**: Clear, actionable guidance
 - **Comprehensive Error Handling**: Troubleshooting for common issues
-- **Best Practices Integration**: Industry standards and recommendations
-- **Version Compatibility**: Up-to-date with latest Azure services and azd features
+- **Best Practices Included**: Industry standards and recommendations
+- **Version Compatibility**: Updated to align with the latest Azure services and azd features
 
 ## Planned Future Enhancements
 
 ### Version 3.1.0 (Planned)
 #### AI Platform Expansion
 - **Multi-Model Support**: Integration patterns for Hugging Face, Azure Machine Learning, and custom models
-- **AI Agent Frameworks**: Templates for LangChain, Semantic Kernel, and AutoGen deployments
-- **Advanced RAG Patterns**: Vector database options beyond Azure AI Search (Pinecone, Weaviate, etc.)
-- **AI Observability**: Enhanced monitoring for model performance, token usage, and response quality
+- **AI Agent Frameworks**: Templates for deploying LangChain, Semantic Kernel, and AutoGen
+- **Advanced RAG Patterns**: Vector database options beyond Azure AI Search (e.g., Pinecone, Weaviate)
+- **AI Observability**: Improved monitoring for model performance, token usage, and response quality
 
 #### Developer Experience
-- **VS Code Extension**: Integrated AZD + AI Foundry development experience
-- **GitHub Copilot Integration**: AI-assisted AZD template generation
+- **VS Code Extension**: Integrated development experience for AZD + AI Foundry
+- **GitHub Copilot Integration**: AI-assisted generation of AZD templates
 - **Interactive Tutorials**: Hands-on coding exercises with automated validation for AI scenarios
 - **Video Content**: Supplementary video tutorials for visual learners focusing on AI deployments
 
@@ -260,153 +299,151 @@ After reviewing the changelog entries, you will be able to:
 - **Hybrid Cloud AI**: Multi-cloud and hybrid deployment patterns for AI workloads
 
 #### Advanced Features
-- **AI Pipeline Automation**: Integration of MLOps with Azure Machine Learning pipelines  
-- **Advanced Security**: Zero-trust models, private endpoints, and advanced threat protection  
-- **Performance Optimization**: Advanced strategies for tuning and scaling high-throughput AI applications  
-- **Global Distribution**: Patterns for content delivery and edge caching in AI applications  
+- **AI Pipeline Automation**: MLOps integration with Azure Machine Learning pipelines
+- **Advanced Security**: Zero-trust patterns, private endpoints, and advanced threat protection
+- **Performance Optimization**: Advanced tuning and scaling strategies for high-throughput AI applications
+- **Global Distribution**: Content delivery and edge caching patterns for AI applications
 
-### Version 3.0.0 (Planned) - Superseded by Current Release  
-#### Proposed Additions - Now Implemented in v3.0.0  
-- ✅ **AI-Focused Content**: Full integration with Azure AI Foundry (Completed)  
-- ✅ **Interactive Tutorials**: Hands-on AI workshop lab (Completed)  
-- ✅ **Advanced Security Module**: Security patterns specific to AI (Completed)  
-- ✅ **Performance Optimization**: Strategies for tuning AI workloads (Completed)  
+### Version 3.0.0 (Planned) - Superseded by Current Release
+#### Proposed Additions - Now Implemented in v3.0.0
+- ✅ **AI-Focused Content**: Comprehensive Azure AI Foundry integration (Completed)
+- ✅ **Interactive Tutorials**: Hands-on AI workshop lab (Completed)
+- ✅ **Advanced Security Module**: AI-specific security patterns (Completed)
+- ✅ **Performance Optimization**: AI workload tuning strategies (Completed)
 
-### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0  
-#### Minor Enhancements - Some Completed in Current Release  
-- ✅ **Additional Examples**: Deployment scenarios focused on AI (Completed)  
-- ✅ **Extended FAQ**: AI-specific questions and troubleshooting (Completed)  
-- **Tool Integration**: Improved guides for IDE and editor integration  
-- ✅ **Monitoring Expansion**: Patterns for monitoring and alerting specific to AI (Completed)  
+### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
+#### Minor Enhancements - Some Completed in Current Release
+- ✅ **Additional Examples**: AI-focused deployment scenarios (Completed)
+- ✅ **Extended FAQ**: AI-specific questions and troubleshooting (Completed)
+- **Tool Integration**: Enhanced IDE and editor integration guides
+- ✅ **Monitoring Expansion**: AI-specific monitoring and alerting patterns (Completed)
 
-#### Still Planned for Future Release  
-- **Mobile-Friendly Documentation**: Responsive design for learning on mobile devices  
-- **Offline Access**: Downloadable documentation packages  
-- **Enhanced IDE Integration**: VS Code extension for AZD + AI workflows  
-- **Community Dashboard**: Real-time metrics and tracking of community contributions  
+#### Still Planned for Future Release
+- **Mobile-Friendly Documentation**: Responsive design for mobile learning
+- **Offline Access**: Downloadable documentation packages
+- **Enhanced IDE Integration**: VS Code extension for AZD + AI workflows
+- **Community Dashboard**: Real-time community metrics and contribution tracking
 
-## Contributing to the Changelog  
+## Contributing to the Changelog
 
-### Reporting Changes  
-When contributing to this repository, ensure changelog entries include:  
+### Reporting Changes
+When contributing to this repository, please ensure changelog entries include:
 
-1. **Version Number**: Use semantic versioning (major.minor.patch)  
-2. **Date**: Specify the release or update date in YYYY-MM-DD format  
-3. **Category**: Indicate whether the change is Added, Changed, Deprecated, Removed, Fixed, or Security  
-4. **Clear Description**: Provide a concise explanation of the change  
-5. **Impact Assessment**: Describe how the change affects existing users  
+1. **Version Number**: Following semantic versioning (major.minor.patch)
+2. **Date**: Release or update date in YYYY-MM-DD format
+3. **Category**: Added, Changed, Deprecated, Removed, Fixed, Security
+4. **Clear Description**: Concise description of what changed
+5. **Impact Assessment**: How changes affect existing users
 
-### Change Categories  
+### Change Categories
 
-#### Added  
-- New features, sections, or capabilities in the documentation  
-- Additional examples, templates, or learning resources  
-- New tools, scripts, or utilities  
+#### Added
+- New features, documentation sections, or capabilities
+- New examples, templates, or learning resources
+- Additional tools, scripts, or utilities
 
-#### Changed  
-- Updates to existing functionality or documentation  
-- Improvements for clarity or accuracy  
-- Restructuring of content or organization  
+#### Changed
+- Modifications to existing functionality or documentation
+- Updates to improve clarity or accuracy
+- Restructuring of content or organization
 
-#### Deprecated  
-- Features or methods being phased out  
-- Documentation sections scheduled for removal  
-- Approaches with better alternatives  
+#### Deprecated
+- Features or approaches that are being phased out
+- Documentation sections scheduled for removal
+- Methods that have better alternatives
 
-#### Removed  
-- Features, documentation, or examples no longer relevant  
-- Outdated information or deprecated methods  
-- Redundant or consolidated content  
+#### Removed
+- Features, documentation, or examples that are no longer relevant
+- Outdated information or deprecated approaches
+- Redundant or consolidated content
 
-#### Fixed  
-- Corrections to errors in documentation or code  
-- Resolution of reported issues or problems  
-- Improvements to accuracy or functionality  
+#### Fixed
+- Corrections to errors in documentation or code
+- Resolution of reported issues or problems
+- Improvements to accuracy or functionality
 
-#### Security  
-- Security-related fixes or improvements  
-- Updates to security best practices  
-- Resolution of vulnerabilities  
+#### Security
+- Security-related improvements or fixes
+- Updates to security best practices
+- Resolution of security vulnerabilities
 
-### Semantic Versioning Guidelines  
+### Semantic Versioning Guidelines
 
-#### Major Version (X.0.0)  
-- Breaking changes requiring user action  
-- Significant restructuring of content or organization  
-- Changes that alter fundamental approaches or methodologies  
+#### Major Version (X.0.0)
+- Breaking changes that require user action
+- Significant restructuring of content or organization
+- Changes that alter the fundamental approach or methodology
 
-#### Minor Version (X.Y.0)  
-- New features or content additions  
-- Enhancements that maintain backward compatibility  
-- Additional examples, tools, or resources  
+#### Minor Version (X.Y.0)
+- New features or content additions
+- Enhancements that maintain backward compatibility
+- Additional examples, tools, or resources
 
-#### Patch Version (X.Y.Z)  
-- Bug fixes and corrections  
-- Minor improvements to existing content  
-- Clarifications and small enhancements  
+#### Patch Version (X.Y.Z)
+- Bug fixes and corrections
+- Minor improvements to existing content
+- Clarifications and small enhancements
 
-## Community Feedback and Suggestions  
+## Community Feedback and Suggestions
 
-We welcome community feedback to improve this learning resource:  
+We actively encourage community feedback to improve this learning resource:
 
-### How to Provide Feedback  
-- **GitHub Issues**: Report problems or suggest improvements (AI-specific issues encouraged)  
-- **Discord Discussions**: Share ideas and engage with the Azure AI Foundry community  
-- **Pull Requests**: Contribute direct improvements, especially for AI templates and guides  
-- **Azure AI Foundry Discord**: Join the #Azure channel for AZD + AI discussions  
-- **Community Forums**: Participate in broader Azure developer discussions  
+### How to Provide Feedback
+- **GitHub Issues**: Report problems or suggest improvements (AI-specific issues welcome)
+- **Discord Discussions**: Share ideas and engage with the Azure AI Foundry community
+- **Pull Requests**: Contribute direct improvements to content, especially AI templates and guides
+- **Azure AI Foundry Discord**: Participate in #Azure channel for AZD + AI discussions
+- **Community Forums**: Participate in broader Azure developer discussions
 
-### Feedback Categories  
-- **AI Content Accuracy**: Corrections to AI service integration and deployment details  
-- **Learning Experience**: Suggestions for improving the AI developer learning flow  
-- **Missing AI Content**: Requests for additional AI templates, patterns, or examples  
-- **Accessibility**: Enhancements for diverse learning needs  
-- **AI Tool Integration**: Ideas for better AI development workflow integration  
-- **Production AI Patterns**: Requests for enterprise AI deployment patterns  
+### Feedback Categories
+- **AI Content Accuracy**: Corrections to AI service integration and deployment information
+- **Learning Experience**: Suggestions for improved AI developer learning flow
+- **Missing AI Content**: Requests for additional AI templates, patterns, or examples
+- **Accessibility**: Improvements for diverse learning needs
+- **AI Tool Integration**: Suggestions for better AI development workflow integration
+- **Production AI Patterns**: Enterprise AI deployment pattern requests
 
-### Response Commitment  
-- **Issue Response**: Within 48 hours for reported problems  
-- **Feature Requests**: Evaluation within one week  
-- **Community Contributions**: Review within one week  
-- **Security Issues**: Immediate priority with expedited response  
+### Response Commitment
+- **Issue Response**: Within 48 hours for reported problems
+- **Feature Requests**: Evaluation within one week
+- **Community Contributions**: Review within one week
+- **Security Issues**: Immediate priority with expedited response
 
-## Maintenance Schedule  
+## Maintenance Schedule
 
-### Regular Updates  
-- **Monthly Reviews**: Validate content accuracy and links  
-- **Quarterly Updates**: Add major content and improvements  
-- **Semi-Annual Reviews**: Comprehensive restructuring and enhancements  
-- **Annual Releases**: Major version updates with significant improvements  
+### Regular Updates
+- **Monthly Reviews**: Content accuracy and link validation
+- **Quarterly Updates**: Major content additions and improvements
+- **Semi-Annual Reviews**: Comprehensive restructuring and enhancement
+- **Annual Releases**: Major version updates with significant improvements
 
-### Monitoring and Quality Assurance  
-- **Automated Testing**: Regular validation of code examples and links  
-- **Community Feedback Integration**: Incorporate user suggestions regularly  
-- **Technology Updates**: Align with the latest Azure services and azd releases  
-- **Accessibility Audits**: Review for inclusive design principles  
+### Monitoring and Quality Assurance
+- **Automated Testing**: Regular validation of code examples and links
+- **Community Feedback Integration**: Regular incorporation of user suggestions
+- **Technology Updates**: Alignment with latest Azure services and azd releases
+- **Accessibility Audits**: Regular review for inclusive design principles
 
-## Version Support Policy  
+## Version Support Policy
 
-### Current Version Support  
-- **Latest Major Version**: Fully supported with regular updates  
-- **Previous Major Version**: Security updates and critical fixes for 12 months  
-- **Legacy Versions**: Community support only, no official updates  
+### Current Version Support
+- **Latest Major Version**: Full support with regular updates
+- **Previous Major Version**: Security updates and critical fixes for 12 months
+- **Legacy Versions**: Community support only, no official updates
 
-### Migration Guidance  
-When major versions are released, we provide:  
-- **Migration Guides**: Step-by-step instructions for transitioning  
-- **Compatibility Notes**: Details about breaking changes  
-- **Tool Support**: Scripts or utilities to assist with migration  
-- **Community Support**: Dedicated forums for migration questions  
-
----
-
-**Navigation**  
-- **Previous Lesson**: [Study Guide](resources/study-guide.md)  
-- **Next Lesson**: Return to [Main README](README.md)  
-
-**Stay Updated**: Follow this repository for notifications about new releases and updates to the learning materials.  
+### Migration Guidance
+When major versions are released, we provide:
+- **Migration Guides**: Step-by-step transition instructions
+- **Compatibility Notes**: Details about breaking changes
+- **Tool Support**: Scripts or utilities to assist with migration
+- **Community Support**: Dedicated forums for migration questions
 
 ---
 
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+**Navigation**
+- **Previous Lesson**: [Study Guide](resources/study-guide.md)
+- **Next Lesson**: Return to [Main README](README.md)
+
+**Stay Updated**: Watch this repository for notifications about new releases and important updates to the learning materials.
+
+---
+
