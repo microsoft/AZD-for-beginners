@@ -1,339 +1,158 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "245d24997bbcf2bae93bb2a503845d37",
-  "translation_date": "2025-09-23T11:45:26+00:00",
+  "original_hash": "9cc966416ab431c38b2ab863884b196c",
+  "translation_date": "2025-09-24T09:01:12+00:00",
   "source_file": "workshop/README.md",
   "language_code": "hk"
 }
 -->
-# AZD 為 AI 開發者工作坊
+# AZD 工作坊：AI 開發者專屬
 
-## AZD 模板
+歡迎參加這個專注於 AI 應用部署的 Azure Developer CLI (AZD) 實作工作坊。本工作坊將幫助你透過以下三個步驟，深入了解 AZD 模板的應用：
 
-為您的特定場景構建企業級 AI 應用解決方案，就像建造自己的家一樣。您可以自己設計，逐步建造，並確保它符合所有治理和開發指南。
+1. **探索** - 找到適合你的模板。
+1. **部署** - 部署並驗證其功能。
+1. **自訂** - 修改並迭代，使其符合你的需求！
 
-**或者 ....**
+在工作坊過程中，你還將接觸到核心開發工具和工作流程，幫助你簡化端到端的開發旅程。
 
-您可以與建築師合作，他可以為您提供一個 _藍圖_ 作為起點，然後與您一起 _定制_ 它以滿足您的需求。這樣，您可以專注於讓**您的家**變得特別，而基礎的佈線、管道和其他依賴項則由專家為您處理。
+<br/>
 
-**這就是 [AI App Templates](https://ai.azure.com/templates) 背後的理念**——根據您的核心需求和依賴項，為構建不同類型的 AI 應用“家”提供一系列藍圖。
+## 瀏覽器指南
 
-## 模板定制
+工作坊的課程內容以 Markdown 格式編寫。你可以直接在 GitHub 上瀏覽，或者如以下截圖所示，啟動瀏覽器預覽。
 
-這些模板設計用於與 [Azure AI Foundry](https://ai.azure.com) 一起工作。可以將這個平台視為您的“建築承包商”，它擁有完成工作所需的所有資源、工具和專業知識！
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.hk.png)
 
-您只需選擇 [您的起始模板](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)。例如，我們將專注於 _Get Started with AI Agents_ 模板，為您構建一個“代理型 AI 家”，該模板內置了 AI 搜索、紅隊測試、評估、追蹤、監控等功能！
+使用此選項時，請將倉庫 fork 到你的個人檔案，並啟動 GitHub Codespaces。一旦 VS Code 終端啟動，輸入以下指令：
 
-![藍圖](../../../translated_images/blueprint-1.fccfb7cb6f71dca946bbf512ef794e5d3b3f01dd98f8cdeb86c13a19c685f128.hk.png)
+```bash title="" linenums="0"
+mkdocs serve > /dev/null 2>&1 &
+```
 
-您只需預約時間與建築師一起，指導您完成定制過程。[GitHub Copilot for Azure](https://learn.microsoft.com/en-us/azure/developer/github-copilot-azure/get-started) 可以成為您的指導，只需“與它聊天”即可：
+幾秒鐘後，你會看到一個彈出對話框。選擇 `Open in browser` 選項，網頁版指南將在新瀏覽器標籤中打開。此預覽的好處包括：
 
-- 瞭解模板中的 Azure 功能
-- 部署 Azure 資源
-- 獲取有關部署的信息
-- 診斷和排除問題！
+1. **內建搜尋** - 快速找到關鍵字或課程。
+1. **複製圖示** - 滑鼠懸停在代碼塊上即可看到此選項。
+1. **主題切換** - 在深色和淺色主題間切換。
+1. **獲取幫助** - 點擊頁腳的 Discord 圖示加入社群！
 
-在這個工作坊中，我們將學習如何 _解構_ 現有模板（以瞭解它提供的功能），然後逐步 _定制_ 它（以滿足我們的需求）。
-
-AI 模板**讓它運行**——通過完成工作坊，您將學會**讓它屬於您自己**。
-
-----
-
-**工作坊導航**
-- **📚 課程首頁**: [AZD 初學者指南](../README.md)
-- **📖 相關章節**: 涵蓋 [第一章](../README.md#-chapter-1-foundation--quick-start)、[第二章](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers) 和 [第五章](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **🛠️ 實作實驗**: [AI 工作坊實驗](../docs/ai-foundry/ai-workshop-lab.md)
-- **🚀 下一步**: [工作坊模組](../../../workshop)
-
-歡迎參加專注於 AI 應用部署的 Azure Developer CLI (AZD) 學習工作坊。本工作坊旨在帶您從 AZD 基礎知識到部署生產就緒的 AI 解決方案。
+<br/>
 
 ## 工作坊概覽
 
-**時長**: 2-3 小時  
-**難度**: 初學者到中級  
-**先決條件**: 基本的 Azure、命令行工具和 AI 概念知識
+**時長：** 3-4 小時  
+**難度：** 初學者至中級  
+**先決條件：** 熟悉 Azure、AI 概念、VS Code 和命令行工具。
 
-### 您將學到什麼
+這是一個實作型工作坊，讓你透過實際操作來學習。一旦完成練習，我們建議你回顧 AZD 初學者課程，繼續學習安全性和生產力的最佳實踐。
 
-- **AZD 基礎**: 瞭解基於代碼的基礎設施 (IaC) 與 AZD
-- 🤖 **AI 服務集成**: 部署 Azure OpenAI、AI 搜索和其他 AI 服務
-- **容器部署**: 使用 Azure Container Apps 部署 AI 應用
-- **安全最佳實踐**: 實現托管身份和安全配置
-- **監控與可觀測性**: 為 AI 工作負載設置 Application Insights
-- **生產模式**: 企業級部署策略
+| 時間 | 模組  | 目標 |
+|:---|:---|:---|
+| 15 分鐘 | [簡介](docs/instructions/0-Introduction.md) | 設定背景，了解目標 |
+| 30 分鐘 | [選擇 AI 模板](docs/instructions/1-Select-AI-Template.md) | 探索選項並選擇入門模板 | 
+| 30 分鐘 | [驗證 AI 模板](docs/instructions/2-Validate-AI-Template.md) | 部署預設解決方案到 Azure |
+| 30 分鐘 | [拆解 AI 模板](docs/instructions/3-Deconstruct-AI-Template.md) | 探索結構和配置 |
+| 30 分鐘 | [配置 AI 模板](docs/instructions/4-Configure-AI-Template.md) | 啟用並嘗試可用功能 |
+| 30 分鐘 | [自訂 AI 模板](docs/instructions/5-Customize-AI-Template.md) | 根據需求調整模板 |
+| 30 分鐘 | [拆除基礎設施](docs/instructions/6-Teardown-Infrastructure.md) | 清理並釋放資源 |
+| 15 分鐘 | [總結與下一步](docs/instructions/7-Wrap-up.md) | 學習資源，工作坊挑戰 |
+
+<br/>
+
+## 你將學到什麼
+
+將 AZD 模板視為一個學習沙盒，探索 Azure AI Foundry 上端到端開發的各種功能和工具。完成工作坊後，你應該能直觀地理解相關工具和概念。
+
+| 概念  | 目標 |
+|:---|:---|
+| **Azure Developer CLI** | 了解工具命令和工作流程 |
+| **AZD 模板**| 了解專案結構和配置 |
+| **Azure AI Agent**| 配置並部署 Azure AI Foundry 專案 |
+| **Azure AI Search**| 使用代理啟用上下文工程 |
+| **可觀測性**| 探索追蹤、監控和評估 |
+| **紅隊測試**| 探索對抗性測試和緩解措施 |
+
+<br/>
 
 ## 工作坊結構
 
-### 模組 1: AZD 基礎 (30 分鐘)
-- 安裝和配置 AZD
-- 瞭解 AZD 項目結構
-- 您的第一次 AZD 部署
-- **實驗**: 部署一個簡單的 Web 應用
+工作坊的結構是引導你從模板探索到部署、拆解和自訂，並以官方 [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) 入門模板為基礎。
 
-### 模組 2: Azure OpenAI 集成 (45 分鐘)
-- 設置 Azure OpenAI 資源
-- 模型部署策略
-- 配置 API 訪問和身份驗證
-- **實驗**: 使用 GPT-4 部署聊天應用
+### [模組 1：選擇 AI 模板](docs/instructions/1-Select-AI-Template.md) (30 分鐘)
 
-### 模組 3: RAG 應用 (45 分鐘)
-- Azure AI 搜索集成
-- 使用 Azure 文檔智能進行文檔處理
-- 向量嵌入和語義搜索
-- **實驗**: 構建文檔問答系統
+- 什麼是 AI 模板？
+- 我可以在哪裡找到 AI 模板？
+- 如何開始建立 AI Agents？
+- **實驗室**：使用 GitHub Codespaces 快速入門
 
-### 模組 4: 生產部署 (30 分鐘)
-- 容器應用配置
-- 擴展和性能優化
-- 監控和日誌記錄
-- **實驗**: 部署到生產環境並實現可觀測性
+### [模組 2：驗證 AI 模板](docs/instructions/2-Validate-AI-Template.md) (30 分鐘)
 
-### 模組 5: 高級模式 (15 分鐘)
-- 多環境部署
-- CI/CD 集成
-- 成本優化策略
-- **總結**: 生產就緒檢查清單
+- AI 模板架構是什麼？
+- AZD 開發工作流程是什麼？
+- 如何獲得 AZD 開發的幫助？
+- **實驗室**：部署並驗證 AI Agents 模板
 
-## 先決條件
+### [模組 3：拆解 AI 模板](docs/instructions/3-Deconstruct-AI-Template.md) (30 分鐘)
 
-### 必需工具
+- 探索 `.azure/` 中的環境
+- 探索 `infra/` 中的資源設置
+- 探索 `azure.yaml` 中的 AZD 配置
+- **實驗室**：修改環境變數並重新部署
 
-請在工作坊開始前安裝以下工具：
+### [模組 4：配置 AI 模板](docs/instructions/4-Configure-AI-Template.md) (30 分鐘)
+- 探索：檢索增強生成 (Retrieval Augmented Generation)
+- 探索：代理評估與紅隊測試
+- 探索：追蹤與監控
+- **實驗室**：探索 AI Agent + 可觀測性
 
-```bash
-# Azure Developer CLI
-curl -fsSL https://aka.ms/install-azd.sh | bash
+### [模組 5：自訂 AI 模板](docs/instructions/5-Customize-AI-Template.md) (30 分鐘)
+- 定義：場景需求的 PRD
+- 配置：AZD 的環境變數
+- 實作：新增任務的生命周期掛鉤
+- **實驗室**：根據我的場景自訂模板
 
-# Azure CLI
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+### [模組 6：拆除基礎設施](docs/instructions/6-Teardown-Infrastructure.md) (30 分鐘)
+- 回顧：什麼是 AZD 模板？
+- 回顧：為什麼使用 Azure Developer CLI？
+- 下一步：嘗試不同的模板！
+- **實驗室**：解除基礎設施配置並清理
 
-# Git
-sudo apt-get install git
+<br/>
 
-# Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
+## 工作坊挑戰
 
-# Python 3.10+
-sudo apt-get install python3.10 python3.10-venv python3-pip
-```
+想挑戰自己做更多嗎？以下是一些專案建議，或者分享你的想法給我們！
 
-### Azure 帳戶設置
+| 專案 | 描述 |
+|:---|:---|
+|1. **拆解一個複雜的 AI 模板** | 使用我們概述的工作流程和工具，看看你是否能部署、驗證並自訂另一個 AI 解決方案模板。_你學到了什麼？_|
+|2. **根據你的場景自訂**  | 嘗試為不同場景撰寫 PRD (產品需求文件)。然後在你的模板倉庫中使用 GitHub Copilot 的代理模式，並請它生成自訂工作流程。_你學到了什麼？如何改進這些建議？_|
+| | |
 
-1. **Azure 訂閱**: [免費註冊](https://azure.microsoft.com/free/)
-2. **Azure OpenAI 訪問**: [申請訪問](https://aka.ms/oai/access)
-3. **所需權限**:
-   - 訂閱或資源組的貢獻者角色
-   - 用戶訪問管理員（用於 RBAC 分配）
+## 有意見嗎？
 
-### 驗證先決條件
+1. 在此倉庫發表 issue，標記為 `Workshop` 以方便分類。
+1. 加入 Azure AI Foundry Discord，與同行交流！
 
-運行以下腳本以驗證您的設置：
+| | | 
+|:---|:---|
+| **📚 課程首頁**| [AZD 初學者指南](../README.md)|
+| **📖 文件** | [AI 模板入門指南](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI 模板** | [Azure AI Foundry 模板](https://ai.azure.com/templates) |
+|**🚀 下一步** | [接受挑戰](../../../workshop) |
+| | |
 
-```bash
-#!/bin/bash
-echo "Verifying workshop prerequisites..."
-
-# Check AZD installation
-if command -v azd &> /dev/null; then
-    echo "✅ Azure Developer CLI: $(azd --version)"
-else
-    echo "❌ Azure Developer CLI not found"
-fi
-
-# Check Azure CLI
-if command -v az &> /dev/null; then
-    echo "✅ Azure CLI: $(az --version | head -n1)"
-else
-    echo "❌ Azure CLI not found"
-fi
-
-# Check Docker
-if command -v docker &> /dev/null; then
-    echo "✅ Docker: $(docker --version)"
-else
-    echo "❌ Docker not found"
-fi
-
-# Check Python
-if command -v python3 &> /dev/null; then
-    echo "✅ Python: $(python3 --version)"
-else
-    echo "❌ Python 3 not found"
-fi
-
-# Check Azure login
-if az account show &> /dev/null; then
-    echo "✅ Azure: Logged in as $(az account show --query user.name -o tsv)"
-else
-    echo "❌ Azure: Not logged in (run 'az login')"
-fi
-
-echo "Setup verification complete!"
-```
-
-## 工作坊材料
-
-### 實驗練習
-
-每個模組都包含帶有起始代碼和分步指導的實作實驗：
-
-- **[lab-1-azd-basics/](../../../workshop/lab-1-azd-basics)** - 您的第一次 AZD 部署
-- **[lab-2-openai-chat/](../../../workshop/lab-2-openai-chat)** - 使用 Azure OpenAI 的聊天應用
-- **[lab-3-rag-search/](../../../workshop/lab-3-rag-search)** - 使用 AI 搜索的 RAG 應用
-- **[lab-4-production/](../../../workshop/lab-4-production)** - 生產部署模式
-- **[lab-5-advanced/](../../../workshop/lab-5-advanced)** - 高級部署場景
-
-### 參考材料
-
-- **[AI Foundry 集成指南](../docs/ai-foundry/azure-ai-foundry-integration.md)** - 全面的集成模式
-- **[AI 模型部署指南](../docs/ai-foundry/ai-model-deployment.md)** - 模型部署最佳實踐
-- **[生產 AI 實踐](../docs/ai-foundry/production-ai-practices.md)** - 企業部署模式
-- **[AI 故障排除指南](../docs/troubleshooting/ai-troubleshooting.md)** - 常見問題和解決方案
-
-### 示例模板
-
-常見 AI 場景的快速啟動模板：
-
-```
-workshop/templates/
-├── minimal-chat/          # Basic OpenAI chat app
-├── rag-application/       # RAG with AI Search
-├── multi-model/          # Multiple AI services
-└── production-ready/     # Enterprise template
-```
-
-## 開始使用
-
-### 選項 1: GitHub Codespaces (推薦)
-
-最快的工作坊啟動方式：
-
-[![在 GitHub Codespaces 中打開](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?style=for-the-badge&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID)
-
-### 選項 2: 本地開發
-
-1. **克隆工作坊倉庫:**
-```bash
-git clone https://github.com/YOUR_ORG/AZD-for-beginners.git
-cd AZD-for-beginners/workshop
-```
-
-2. **登錄 Azure:**
-```bash
-az login
-azd auth login
-```
-
-3. **從實驗 1 開始:**
-```bash
-cd lab-1-azd-basics
-cat README.md  # Follow the instructions
-```
-
-### 選項 3: 講師指導的工作坊
-
-如果您參加的是講師指導的課程：
-
-- 🎥 **工作坊錄像**: [隨時觀看](https://aka.ms/azd-ai-workshop)
-- 💬 **Discord 社區**: [加入以獲得即時支持](https://aka.ms/foundry/discord)
-- **工作坊反饋**: [分享您的體驗](https://aka.ms/azd-workshop-feedback)
-
-## 工作坊時間表
-
-### 自學 (3 小時)
-
-```
-⏰ 00:00 - 00:30  Module 1: AZD Foundations
-⏰ 00:30 - 01:15  Module 2: Azure OpenAI Integration
-⏰ 01:15 - 02:00  Module 3: RAG Applications
-⏰ 02:00 - 02:30  Module 4: Production Deployment
-⏰ 02:30 - 02:45  Module 5: Advanced Patterns
-⏰ 02:45 - 03:00  Q&A and Next Steps
-```
-
-### 講師指導課程 (2.5 小時)
-
-```
-⏰ 00:00 - 00:15  Welcome & Prerequisites Check
-⏰ 00:15 - 00:40  Module 1: Live Demo + Lab
-⏰ 00:40 - 01:20  Module 2: OpenAI Integration
-⏰ 01:20 - 01:30  Break
-⏰ 01:30 - 02:10  Module 3: RAG Applications
-⏰ 02:10 - 02:30  Module 4: Production Patterns
-⏰ 02:30 - 02:45  Module 5: Advanced Topics
-⏰ 02:45 - 03:00  Q&A and Resources
-```
-
-## 成功標準
-
-在本工作坊結束時，您將能夠：
-
-✅ 使用 AZD 模板**部署 AI 應用**  
-✅ 配置 Azure OpenAI 服務並確保安全性  
-✅ 使用 Azure AI 搜索集成**構建 RAG 應用**  
-✅ 為企業 AI 工作負載實現**生產模式**  
-✅ **監控和排除故障** AI 應用部署  
-✅ 為 AI 工作負載應用**成本優化**策略  
-
-## 社區與支持
-
-### 工作坊期間
-
-- 🙋 **問題**: 使用工作坊聊天或舉手提問
-- 🐛 **問題**: 查看 [故障排除指南](../docs/troubleshooting/ai-troubleshooting.md)
-- **提示**: 與其他參與者分享發現
-
-### 工作坊之後
-
-- 💬 **Discord**: [Azure AI Foundry 社區](https://aka.ms/foundry/discord)
-- **GitHub 問題**: [報告模板問題](https://github.com/YOUR_ORG/AZD-for-beginners/issues)
-- 📧 **反饋**: [工作坊評估表](https://aka.ms/azd-workshop-feedback)
-
-## 下一步
-
-### 繼續學習
-
-1. **高級場景**: 探索 [多區域部署](../docs/ai-foundry/production-ai-practices.md#multi-region-deployment)
-2. **CI/CD 集成**: 設置 [GitHub Actions 工作流](../docs/deployment/github-actions.md)
-3. **自定義模板**: 創建您自己的 [AZD 模板](../docs/getting-started/custom-templates.md)
-
-### 應用於您的項目
-
-1. **評估**: 使用我們的 [就緒檢查清單](./production-readiness-checklist.md)
-2. **模板**: 從我們的 [AI 專用模板](../../../workshop/templates) 開始
-3. **支持**: 加入 [Azure AI Foundry Discord](https://aka.ms/foundry/discord)
-
-### 分享您的成功
-
-- ⭐ **為倉庫加星** 如果本工作坊對您有幫助
-- 🐦 **在社交媒體上分享** 使用 #AzureDeveloperCLI #AzureAI
-- 📝 **撰寫博客文章** 分享您的 AI 部署旅程
+<br/>
 
 ---
 
-## 工作坊反饋
+**上一頁：** [AI 疑難排解指南](../docs/troubleshooting/ai-troubleshooting.md) | **下一頁：** 開始 [實驗室 1：AZD 基礎](../../../workshop/lab-1-azd-basics)
 
-您的反饋有助於我們改進工作坊體驗：
+**準備好開始使用 AZD 建立 AI 應用程式了嗎？**
 
-| 方面 | 評分 (1-5) | 評論 |
-|------|------------|------|
-| 內容質量 | ⭐⭐⭐⭐⭐ | |
-| 實作實驗 | ⭐⭐⭐⭐⭐ | |
-| 文檔 | ⭐⭐⭐⭐⭐ | |
-| 難度水平 | ⭐⭐⭐⭐⭐ | |
-| 整體體驗 | ⭐⭐⭐⭐⭐ | |
-
-**提交反饋**: [工作坊評估表](https://aka.ms/azd-workshop-feedback)
-
----
-
-**上一頁:** [AI 故障排除指南](../docs/troubleshooting/ai-troubleshooting.md) | **下一頁:** 開始 [實驗 1: AZD 基礎](../../../workshop/lab-1-azd-basics)
-
-**準備好開始使用 AZD 構建 AI 應用嗎？**
-
-[開始實驗 1: AZD 基礎 →](./lab-1-azd-basics/README.md)
+[開始實驗室 1：AZD 基礎 →](./lab-1-azd-basics/README.md)
 
 ---
 

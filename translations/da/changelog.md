@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "73f4ab6147d5fac5f8c5ad72742e8e1d",
-  "translation_date": "2025-09-17T23:24:55+00:00",
+  "original_hash": "7651a7fb2b5e367812bf01aa209a3612",
+  "translation_date": "2025-09-24T21:24:17+00:00",
   "source_file": "changelog.md",
   "language_code": "da"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduktion
 
-Denne ændringslog dokumenterer alle væsentlige ændringer, opdateringer og forbedringer i AZD For Begyndere-repositoriet. Vi følger principperne for semantisk versionering og opretholder denne log for at hjælpe brugere med at forstå, hvad der er ændret mellem versioner.
+Denne ændringslog dokumenterer alle bemærkelsesværdige ændringer, opdateringer og forbedringer i AZD For Begyndere-repositoriet. Vi følger principperne for semantisk versionering og opretholder denne log for at hjælpe brugere med at forstå, hvad der er ændret mellem versioner.
 
 ## Læringsmål
 
@@ -26,15 +26,54 @@ Ved at gennemgå denne ændringslog vil du:
 Efter at have gennemgået ændringslogens indhold vil du kunne:
 - Identificere nyt indhold og ressourcer til læring
 - Forstå hvilke sektioner der er blevet opdateret eller forbedret
-- Planlægge din læringssti baseret på de nyeste materialer
+- Planlægge din læringsrejse baseret på de nyeste materialer
 - Bidrage med feedback og forslag til fremtidige forbedringer
 
 ## Versionshistorik
 
+### [v3.3.0] - 2025-09-24
+
+#### Forbedrede Workshopmaterialer og Interaktiv Læringsoplevelse
+**Denne version introducerer omfattende workshopmaterialer med browserbaserede interaktive vejledninger og strukturerede læringsforløb.**
+
+#### Tilføjet
+- **🎥 Interaktiv Workshopguide**: Browserbaseret workshopoplevelse med MkDocs preview-funktion
+- **📝 Strukturerede Workshopinstruktioner**: 7-trins vejledning fra opdagelse til tilpasning
+  - 0-Introduktion: Workshopoversigt og opsætning
+  - 1-Vælg-AI-Skabelon: Skabelonopdagelse og valgproces
+  - 2-Valider-AI-Skabelon: Udrulnings- og valideringsprocedurer
+  - 3-Dekonstruer-AI-Skabelon: Forståelse af skabelonarkitektur
+  - 4-Konfigurer-AI-Skabelon: Konfiguration og tilpasning
+  - 5-Tilpas-AI-Skabelon: Avancerede ændringer og iterationer
+  - 6-Nedtag-Infrastruktur: Oprydning og ressourcehåndtering
+  - 7-Afslutning: Opsummering og næste skridt
+- **🛠️ Workshopværktøjer**: MkDocs-konfiguration med Material-tema for forbedret læringsoplevelse
+- **🎯 Praktisk Læringsforløb**: 3-trins metode (Opdagelse → Udrulning → Tilpasning)
+- **📱 GitHub Codespaces Integration**: Problemfri opsætning af udviklingsmiljø
+
+#### Forbedret
+- **AI Workshop Lab**: Udvidet med en omfattende 2-3 timers struktureret læringsoplevelse
+- **Workshopdokumentation**: Professionel præsentation med navigation og visuelle hjælpemidler
+- **Læringsprogression**: Klar trin-for-trin vejledning fra skabelonvalg til produktionsudrulning
+- **Udvikleroplevelse**: Integrerede værktøjer til strømlinede udviklingsarbejdsgange
+
+#### Forbedret
+- **Tilgængelighed**: Browserbaseret interface med søgefunktion, kopieringsfunktionalitet og tema-skift
+- **Selvstyret Læring**: Fleksibel workshopstruktur, der tilpasser sig forskellige læringshastigheder
+- **Praktisk Anvendelse**: Scenarier for udrulning af AI-skabeloner i virkeligheden
+- **Community Integration**: Discord-integration for workshopstøtte og samarbejde
+
+#### Workshopfunktioner
+- **Indbygget Søgning**: Hurtig søgning efter nøgleord og lektioner
+- **Kopier Kodeblokke**: Hover-til-kopier funktionalitet for alle kodeeksempler
+- **Tema-skift**: Understøttelse af mørk/lys tilstand for forskellige præferencer
+- **Visuelle Elementer**: Skærmbilleder og diagrammer for bedre forståelse
+- **Hjælpeintegration**: Direkte adgang til Discord for community-støtte
+
 ### [v3.2.0] - 2025-09-17
 
-#### Større Omstrukturering af Navigation og Kapitelbaseret Læringssystem
-**Denne version introducerer en omfattende kapitelbaseret læringsstruktur med forbedret navigation i hele repositoriet.**
+#### Større Navigation og Kapitelbaseret Læringssystem
+**Denne version introducerer et omfattende kapitelbaseret læringssystem med forbedret navigation i hele repositoriet.**
 
 #### Tilføjet
 - **📚 Kapitelbaseret Læringssystem**: Omstruktureret hele kurset i 8 progressive læringskapitler
@@ -43,7 +82,7 @@ Efter at have gennemgået ændringslogens indhold vil du kunne:
   - Kapitel 3: Konfiguration & Autentifikation (⭐⭐ - 45-60 min)
   - Kapitel 4: Infrastruktur som kode & Udrulning (⭐⭐⭐ - 1-1,5 timer)
   - Kapitel 5: Multi-Agent AI-løsninger (⭐⭐⭐⭐ - 2-3 timer)
-  - Kapitel 6: Validering & Planlægning før udrulning (⭐⭐ - 1 time)
+  - Kapitel 6: Validering før udrulning & Planlægning (⭐⭐ - 1 time)
   - Kapitel 7: Fejlfinding & Debugging (⭐⭐ - 1-1,5 timer)
   - Kapitel 8: Produktion & Enterprise-mønstre (⭐⭐⭐⭐ - 2-3 timer)
 - **📚 Omfattende Navigationssystem**: Konsistente navigationsoverskrifter og -fødder på tværs af al dokumentation
@@ -54,7 +93,7 @@ Efter at have gennemgået ændringslogens indhold vil du kunne:
 #### Forbedret
 - **README-struktur**: Omformet til en struktureret læringsplatform med kapitelbaseret organisering
 - **Dokumentationsnavigation**: Hver side inkluderer nu kapitelkontekst og vejledning i progression
-- **Template-organisering**: Eksempler og skabeloner kortlagt til relevante læringskapitler
+- **Skabelonorganisation**: Eksempler og skabeloner kortlagt til relevante læringskapitler
 - **Ressourceintegration**: Cheat sheets, FAQs og studievejledninger forbundet med relevante kapitler
 - **Workshopintegration**: Praktiske laboratorier kortlagt til flere kapitelbaserede læringsmål
 
@@ -67,29 +106,29 @@ Efter at have gennemgået ændringslogens indhold vil du kunne:
 #### Forbedret
 - **Brugeroplevelse**: Klare navigationsbrødkrummer og kapitelprogressionsindikatorer
 - **Tilgængelighed**: Konsistente navigationsmønstre for lettere kursusgennemgang
-- **Professionel Præsentation**: Universitetslignende kursusstruktur egnet til akademisk og virksomhedsuddannelse
+- **Professionel Præsentation**: Universitetsstil kursusstruktur egnet til akademisk og virksomhedstræning
 - **Læringseffektivitet**: Reduceret tid til at finde relevant indhold gennem forbedret organisering
 
 #### Teknisk Implementering
 - **Navigationsoverskrifter**: Standardiseret kapitelnavigation på tværs af 40+ dokumentationsfiler
 - **Fodernavigation**: Konsistent vejledning i progression og kapitelafslutningsindikatorer
-- **Krydslinkning**: Omfattende intern linkstruktur, der forbinder relaterede koncepter
-- **Kapitelkortlægning**: Skabeloner og eksempler tydeligt associeret med læringsmål
+- **Krydslinkning**: Omfattende internt linkningssystem, der forbinder relaterede begreber
+- **Kapitelkortlægning**: Skabeloner og eksempler tydeligt forbundet med læringsmål
 
 #### Forbedring af Studievejledning
 - **📚 Omfattende Læringsmål**: Omstruktureret studievejledning til at matche 8-kapitel systemet
 - **🎯 Kapitelbaseret Vurdering**: Hvert kapitel inkluderer specifikke læringsmål og praktiske øvelser
 - **📋 Fremskridtssporing**: Ugentlig læringsplan med målbare resultater og afslutningschecklister
-- **❓ Vurderingsspørgsmål**: Vidensvalideringsspørgsmål for hvert kapitel med professionelle resultater
-- **🛠️ Praktiske Øvelser**: Hands-on aktiviteter med reelle udrulningsscenarier og fejlfinding
-- **📊 Færdighedsprogression**: Klar fremgang fra grundlæggende koncepter til enterprise-mønstre med fokus på karriereudvikling
-- **🎓 Certificeringsramme**: Professionelle udviklingsresultater og anerkendelse i fællesskabet
+- **❓ Vurderingsspørgsmål**: Videnvalideringsspørgsmål for hvert kapitel med professionelle resultater
+- **🛠️ Praktiske Øvelser**: Hands-on aktiviteter med virkelige udrulningsscenarier og fejlfinding
+- **📊 Færdighedsprogression**: Klar fremgang fra grundlæggende begreber til enterprise-mønstre med fokus på karriereudvikling
+- **🎓 Certificeringsramme**: Professionelle udviklingsresultater og community-anerkendelsessystem
 - **⏱️ Tidsstyring**: Struktureret 10-ugers læringsplan med milepælsvalidering
 
 ### [v3.1.0] - 2025-09-17
 
 #### Forbedrede Multi-Agent AI-løsninger
-**Denne version forbedrer den multi-agent detail-løsning med bedre agentnavngivning og forbedret dokumentation.**
+**Denne version forbedrer multi-agent detailhandelsløsningen med bedre agentnavngivning og forbedret dokumentation.**
 
 #### Ændret
 - **Multi-Agent Terminologi**: Erstattet "Cora agent" med "Kundeagent" i hele detail-multi-agent løsningen for klarere forståelse
@@ -98,14 +137,14 @@ Efter at have gennemgået ændringslogens indhold vil du kunne:
 - **Dokumentationskonsistens**: Sikret, at alle referencer bruger professionelle, beskrivende agentnavne
 
 #### Forbedret
-- **ARM Template Package**: Opdateret detail-multiagent-arm-template med Kundeagent-referencer
-- **Arkitekturdiagrammer**: Opfriskede Mermaid-diagrammer med opdateret agentnavngivning
+- **ARM-skabelonpakke**: Opdateret detail-multiagent-arm-skabelon med Kundeagent-referencer
+- **Arkitekturdiagrammer**: Opdaterede Mermaid-diagrammer med opdateret agentnavngivning
 - **Kodeeksempler**: Python-klasser og implementeringseksempler bruger nu KundeAgent-navngivning
 - **Miljøvariabler**: Opdateret alle udrulningsscripts til at bruge CUSTOMER_AGENT_NAME-konventioner
 
 #### Forbedret
 - **Udvikleroplevelse**: Klarere agentroller og ansvar i dokumentationen
-- **Produktionsparathed**: Bedre tilpasning til enterprise-navngivningskonventioner
+- **Produktionsklarhed**: Bedre tilpasning til enterprise-navngivningskonventioner
 - **Læringsmaterialer**: Mere intuitiv agentnavngivning til uddannelsesformål
 - **Skabelonbrugervenlighed**: Forenklet forståelse af agentfunktioner og udrulningsmønstre
 
@@ -113,50 +152,50 @@ Efter at have gennemgået ændringslogens indhold vil du kunne:
 - Opdaterede Mermaid-arkitekturdiagrammer med KundeAgent-referencer
 - Erstattet CoraAgent-klassenavne med KundeAgent i Python-eksempler
 - Ændret ARM-skabelon JSON-konfigurationer til at bruge "kunde"-agenttype
-- Opdaterede miljøvariabler fra CORA_AGENT_* til CUSTOMER_AGENT_* mønstre
-- Opfriskede alle udrulningskommandoer og containerkonfigurationer
+- Opdateret miljøvariabler fra CORA_AGENT_* til CUSTOMER_AGENT_* mønstre
+- Opdateret alle udrulningskommandoer og containerkonfigurationer
 
 ### [v3.0.0] - 2025-09-12
 
-#### Større Ændringer - Fokus på AI-udviklere og Integration med Azure AI Foundry
-**Denne version omdanner repositoriet til en omfattende AI-fokuseret læringsressource med integration af Azure AI Foundry.**
+#### Større Ændringer - Fokus på AI-udviklere og Azure AI Foundry Integration
+**Denne version omdanner repositoriet til en omfattende AI-fokuseret læringsressource med Azure AI Foundry integration.**
 
 #### Tilføjet
-- **🤖 AI-First Læringssti**: Komplet omstrukturering med prioritering af AI-udviklere og ingeniører
+- **🤖 AI-First Læringsforløb**: Komplet omstrukturering med prioritering af AI-udviklere og ingeniører
 - **Azure AI Foundry Integrationsvejledning**: Omfattende dokumentation for at forbinde AZD med Azure AI Foundry-tjenester
 - **AI Model Udrulningsmønstre**: Detaljeret vejledning om modelvalg, konfiguration og produktionsudrulningsstrategier
-- **AI Workshop Lab**: 2-3 timers praktisk workshop til konvertering af AI-applikationer til AZD-udrulningsklare løsninger
+- **AI Workshop Lab**: 2-3 timers hands-on workshop til konvertering af AI-applikationer til AZD-udrulningsklare løsninger
 - **Produktions-AI Best Practices**: Enterprise-klare mønstre til skalering, overvågning og sikring af AI-arbejdsbelastninger
-- **AI-specifik Fejlfindingsvejledning**: Omfattende fejlfinding for Azure OpenAI, Cognitive Services og AI-udrulningsproblemer
-- **AI Template Gallery**: Udvalgt samling af Azure AI Foundry-skabeloner med kompleksitetsvurderinger
-- **Workshopmaterialer**: Komplet workshopstruktur med praktiske laboratorier og referencematerialer
+- **AI-specifik Fejlfinding**: Omfattende vejledning til Azure OpenAI, Cognitive Services og AI-udrulningsproblemer
+- **AI Skabelongalleri**: Udvalgt samling af Azure AI Foundry-skabeloner med kompleksitetsvurderinger
+- **Workshopmaterialer**: Komplet workshopstruktur med hands-on laboratorier og referencematerialer
 
 #### Forbedret
-- **README-struktur**: AI-udviklerfokuseret med 45% fællesskabsinteressedata fra Azure AI Foundry Discord
-- **Læringsstier**: Dedikeret AI-udviklerrejse sammen med traditionelle stier for studerende og DevOps-ingeniører
+- **README-struktur**: AI-udviklerfokuseret med 45% community-interesse data fra Azure AI Foundry Discord
+- **Læringsforløb**: Dedikeret AI-udviklerrejse sammen med traditionelle forløb for studerende og DevOps-ingeniører
 - **Skabelonanbefalinger**: Udvalgte AI-skabeloner, herunder azure-search-openai-demo, contoso-chat og openai-chat-app-quickstart
-- **Fællesskabsintegration**: Forbedret Discord-fællesskabsstøtte med AI-specifikke kanaler og diskussioner
+- **Community Integration**: Forbedret Discord-community-støtte med AI-specifikke kanaler og diskussioner
 
 #### Sikkerhed & Produktionsfokus
-- **Mønstre for Managed Identity**: AI-specifikke autentifikations- og sikkerhedskonfigurationer
-- **Omkostningsoptimering**: Sporing af tokenforbrug og budgetkontroller for AI-arbejdsbelastninger
+- **Managed Identity Mønstre**: AI-specifikke autentifikations- og sikkerhedskonfigurationer
+- **Omkostningsoptimering**: Tokenforbrugssporing og budgetkontroller for AI-arbejdsbelastninger
 - **Multi-region Udrulning**: Strategier for global udrulning af AI-applikationer
-- **Performance Overvågning**: AI-specifikke metrikker og integration med Application Insights
+- **Performance Overvågning**: AI-specifikke metrikker og Application Insights integration
 
 #### Dokumentationskvalitet
 - **Lineær Kursusstruktur**: Logisk progression fra begynder til avancerede AI-udrulningsmønstre
-- **Validerede URLs**: Alle eksterne repositorielinks verificeret og tilgængelige
+- **Validerede URL'er**: Alle eksterne repositorielinks verificeret og tilgængelige
 - **Komplet Reference**: Alle interne dokumentationslinks valideret og funktionelle
-- **Produktionsklar**: Enterprise-udrulningsmønstre med eksempler fra den virkelige verden
+- **Produktionsklar**: Enterprise-udrulningsmønstre med virkelige eksempler
 
 ### [v2.0.0] - 2025-09-09
 
-#### Større Ændringer - Omstrukturering af Repositoriet og Professionel Forbedring
+#### Større Ændringer - Repositorieomstrukturering og Professionel Forbedring
 **Denne version repræsenterer en betydelig revision af repositoriets struktur og indholdspræsentation.**
 
 #### Tilføjet
 - **Struktureret Læringsramme**: Alle dokumentationssider inkluderer nu Introduktion, Læringsmål og Læringsresultater sektioner
-- **Navigationssystem**: Tilføjet Forrige/Næste lektion-links i hele dokumentationen for guidet læringsprogression
+- **Navigationssystem**: Tilføjet Forrige/Næste lektion links i hele dokumentationen for guidet læringsprogression
 - **Studievejledning**: Omfattende study-guide.md med læringsmål, praktiske øvelser og vurderingsmaterialer
 - **Professionel Præsentation**: Fjernet alle emoji-ikoner for forbedret tilgængelighed og professionelt udseende
 - **Forbedret Indholdsstruktur**: Forbedret organisering og flow af læringsmaterialer
@@ -169,9 +208,9 @@ Efter at have gennemgået ændringslogens indhold vil du kunne:
 
 #### Forbedret
 - **Tilgængelighed**: Fjernet afhængighed af emojis for bedre skærmlæserkompatibilitet
-- **Professionelt Udseende**: Rent, akademisk stil egnet til enterprise-læring
+- **Professionelt Udseende**: Ren, akademisk stil præsentation egnet til enterprise-læring
 - **Læringsoplevelse**: Struktureret tilgang med klare mål og resultater for hver lektion
-- **Indholdsorganisering**: Bedre logisk flow og forbindelse mellem relaterede emner
+- **Indholdsorganisation**: Bedre logisk flow og forbindelse mellem relaterede emner
 
 ### [v1.0.0] - 2025-09-09
 
@@ -179,22 +218,22 @@ Efter at have gennemgået ændringslogens indhold vil du kunne:
 
 #### Tilføjet
 - **Kerne Dokumentationsstruktur**
-  - Komplet serie af kom-i-gang vejledninger
+  - Komplet kom-i-gang guide-serie
   - Omfattende udrulnings- og provisioneringsdokumentation
-  - Detaljerede ressourcer til fejlfinding og debugging
+  - Detaljerede fejlfindingressourcer og debugging-vejledninger
   - Valideringsværktøjer og procedurer før udrulning
 
 - **Kom-i-gang Modul**
-  - AZD Basics: Kernekoncepter og terminologi
+  - AZD Grundlæggende: Kernekoncepter og terminologi
   - Installationsvejledning: Platform-specifikke opsætningsinstruktioner
   - Konfigurationsvejledning: Miljøopsætning og autentifikation
-  - Første Projekt Tutorial: Trin-for-trin praktisk læring
+  - Første Projekt Tutorial: Trin-for-trin hands-on læring
 
 - **Udrulnings- og Provisioneringsmodul**
-  - Udrulningsvejledning: Komplet workflow-dokumentation
+  - Udrulningsvejledning: Komplet arbejdsgangsdokumentation
   - Provisioneringsvejledning: Infrastruktur som kode med Bicep
   - Best practices for produktionsudrulninger
-  - Multi-service arkitektur mønstre
+  - Multi-service arkitekturmønstre
 
 - **Valideringsmodul før Udrulning**
   - Kapacitetsplanlægning: Validering af Azure-ressource tilgængelighed
@@ -203,91 +242,83 @@ Efter at have gennemgået ændringslogens indhold vil du kunne:
   - Omkostningsestimering og budgetplanlægningsværktøjer
 
 - **Fejlfindingsmodul**
-  - Almindelige Problemer: Hyppigt forekommende problemer og løsninger
-  - Debugging Guide: Systematiske fejlfindingmetoder
-  - Avancerede diagnostiske teknikker og værktøjer
-  - Performance overvågning og optimering
+  - Almindelige Problemer: Hyppigt
+- Eksempler på mikroservice-arkitektur  
+- Implementeringer af serverløse funktioner  
 
-- **Ressourcer og Referencer**
-  - Kommando Cheat Sheet: Hurtig reference til essentielle kommandoer
-  - Glossar: Omfattende terminologi og akronymdefinitioner
-  - FAQ: Detaljerede svar på almindelige spørgsmål
-  - Eksterne ressourcelinks og fællesskabsforbindelser
+#### Funktioner  
+- **Multi-platform support**: Installations- og konfigurationsvejledninger til Windows, macOS og Linux  
+- **Flere færdighedsniveauer**: Indhold designet til både studerende og professionelle udviklere  
+- **Praktisk fokus**: Hands-on eksempler og scenarier fra den virkelige verden  
+- **Omfattende dækning**: Fra grundlæggende koncepter til avancerede virksomhedsmønstre  
+- **Sikkerhed først**: Bedste praksis for sikkerhed integreret overalt  
+- **Omkostningsoptimering**: Vejledning til omkostningseffektive udrulninger og ressourcehåndtering  
 
-- **Eksempler og Skabeloner**
-  - Simpel Webapplikation eksempel
-  - Skabelon til statisk websted udrulning
-  - Konfiguration af containerapplikation
-  - Database integrationsmønstre
-  - Mikroservices arkitektur eksempler
-  - Implementering af serverløse funktioner
+#### Dokumentationskvalitet  
+- **Detaljerede kodeeksempler**: Praktiske, testede kodeprøver  
+- **Trin-for-trin vejledninger**: Klar og handlingsorienteret vejledning  
+- **Omfattende fejlhåndtering**: Fejlfinding for almindelige problemer  
+- **Integration af bedste praksis**: Industriens standarder og anbefalinger  
+- **Versionskompatibilitet**: Opdateret med de nyeste Azure-tjenester og azd-funktioner  
 
-#### Funktioner
-- **Multi-platform Support**: Installations- og konfigurationsvejledninger til Windows, macOS og Linux
-- **Flere Færdighedsniveauer**: Indhold designet til studerende og professionelle udviklere
-- **Praktisk Fokus**: Hands-on eksempler og scenarier fra den virkelige verden
-- **Omfattende Dækning**: Fra grundlæggende koncepter til avancerede enterprise-mønstre
-- **Sikkerhedsførste Tilgang**: Sikkerhedsbest practices integreret gennem hele
-- **Omkostningsoptimering**: Vejledning til omkostningseffektive udrulninger og ressourcehåndtering
+## Planlagte fremtidige forbedringer  
 
-#### Dokumentationskvalitet
-- **Detaljerede Kodeeksempler**: Praktiske, testede kodeeksempler
-- **Trin-for-trin Instruktioner**: Klar, handlingsorienteret vejledning
-- **Omfattende Fejlhåndtering**: Fejlfindingsressourcer til almindelige problemer
-- **Best Practices Integration**: Industriens standarder og anbefalinger
-- **Versionskompatibilitet**: Opdateret med de nyeste Azure-tjenester og azd-funktioner
+### Version 3.1.0 (Planlagt)  
+#### Udvidelse af AI-platform  
+- **Multi-model support**: Integrationsmønstre for Hugging Face, Azure Machine Learning og brugerdefinerede modeller  
+- **AI-agentrammer**: Skabeloner til LangChain, Semantic Kernel og AutoGen-udrulninger  
+- **Avancerede RAG-mønstre**: Vektordatabase-muligheder ud over Azure AI Search (Pinecone, Weaviate osv.)  
+- **AI-observabilitet**: Forbedret overvågning af modelpræstation, tokenforbrug og svarkvalitet  
 
-## Planlagte Fremtidige Forbedringer
+#### Udvikleroplevelse  
+- **VS Code-udvidelse**: Integreret AZD + AI Foundry udviklingsoplevelse  
+- **GitHub Copilot-integration**: AI-assisteret AZD-skabelongenerering  
+- **Interaktive tutorials**: Hands-on kodningsøvelser med automatisk validering for AI-scenarier  
+- **Videomateriale**: Supplerende videotutorials for visuelle lærere med fokus på AI-udrulninger  
 
-### Version 3.1.0 (Planlagt)
-#### Udvidelse af AI-platform
-- **Multi-model Support**: Integrationsmønstre for Hugging Face, Azure Machine Learning og brugerdefinerede modeller
-- **AI Agent Frameworks**: Skabeloner til LangChain, Semantic Kernel og AutoGen udrulninger
-- **Avancerede RAG-mønstre**: Vektordatabase muligheder ud over Azure AI Search (Pinecone, Weaviate, etc.)
-- **AI Observability**: Forbedret overvågning af modelperformance, tokenforbrug og svarkvalitet
+### Version 4.0.0 (Planlagt)  
+#### Virksomhedsmønstre for AI  
+- **Governance-ramme**: AI-modelstyring, overholdelse og revisionsspor  
+- **Multi-tenant AI**: Mønstre til at betjene flere kunder med isolerede AI-tjenester  
+- **Edge AI-udrulning**: Integration med Azure IoT Edge og containerinstanser  
+- **Hybrid cloud AI**: Multi-cloud og hybride udrulningsmønstre for AI-arbejdsbelastninger  
 
-#### Udvikleroplevelse
-- **VS Code Extension**: Integreret AZD + AI Foundry udviklingsoplevelse
-- **GitHub Copilot Integration**: AI-assisteret AZD skabelongenerering
-- **Interaktive Tutorials**: Praktiske kodningsøvelser med automatiseret validering for AI-scenarier
-- **Videomateriale**: Supplerende videotutorials til visuelle lærere med fokus på AI-udrulninger
+#### Avancerede funktioner  
+- **Automatisering af AI-pipelines**: MLOps-integration med Azure Machine Learning-pipelines  
+- **Avanceret sikkerhed**: Zero-trust mønstre, private endepunkter og avanceret trusselsbeskyttelse  
+- **Præstationsoptimering**: Avancerede tuning- og skaleringsstrategier for højkapacitets AI-applikationer  
+- **Global distribution**: Indholdslevering og edge-caching mønstre for AI-applikationer  
 
-### Version
-- **AI Pipeline Automation**: MLOps-integration med Azure Machine Learning-pipelines  
-- **Avanceret Sikkerhed**: Zero-trust mønstre, private endpoints og avanceret trusselsbeskyttelse  
-- **Performanceoptimering**: Avancerede tuning- og skaleringsstrategier for AI-applikationer med høj gennemstrømning  
-- **Global Distribution**: Indholdslevering og edge-caching mønstre for AI-applikationer  
+### Version 3.0.0 (Planlagt) - Erstattet af nuværende udgivelse  
+#### Foreslåede tilføjelser - Nu implementeret i v3.0.0  
+- ✅ **AI-fokuseret indhold**: Omfattende Azure AI Foundry-integration (Færdiggjort)  
+- ✅ **Interaktive tutorials**: Hands-on AI-workshop-lab (Færdiggjort)  
+- ✅ **Avanceret sikkerhedsmodul**: AI-specifikke sikkerhedsmønstre (Færdiggjort)  
+- ✅ **Præstationsoptimering**: Tuning-strategier for AI-arbejdsbelastninger (Færdiggjort)  
 
-### Version 3.0.0 (Planlagt) - Erstattet af Nuværende Udgivelse  
-#### Foreslåede Tilføjelser - Nu Implementeret i v3.0.0  
-- ✅ **AI-Fokuseret Indhold**: Omfattende integration med Azure AI Foundry (Fuldført)  
-- ✅ **Interaktive Tutorials**: Praktisk AI-workshop-laboratorium (Fuldført)  
-- ✅ **Avanceret Sikkerhedsmodul**: AI-specifikke sikkerhedsmønstre (Fuldført)  
-- ✅ **Performanceoptimering**: Tuning-strategier for AI-arbejdsbelastninger (Fuldført)  
-
-### Version 2.1.0 (Planlagt) - Delvist Implementeret i v3.0.0  
-#### Mindre Forbedringer - Nogle Fuldført i Nuværende Udgivelse  
-- ✅ **Yderligere Eksempler**: AI-fokuserede implementeringsscenarier (Fuldført)  
-- ✅ **Udvidet FAQ**: AI-specifikke spørgsmål og fejlfinding (Fuldført)  
+### Version 2.1.0 (Planlagt) - Delvist implementeret i v3.0.0  
+#### Mindre forbedringer - Nogle færdiggjort i nuværende udgivelse  
+- ✅ **Yderligere eksempler**: AI-fokuserede udrulningsscenarier (Færdiggjort)  
+- ✅ **Udvidet FAQ**: AI-specifikke spørgsmål og fejlfinding (Færdiggjort)  
 - **Værktøjsintegration**: Forbedrede IDE- og editorintegrationsvejledninger  
-- ✅ **Udvidet Overvågning**: AI-specifikke overvågnings- og alarmeringsmønstre (Fuldført)  
+- ✅ **Udvidet overvågning**: AI-specifikke overvågnings- og alarmeringsmønstre (Færdiggjort)  
 
-#### Stadig Planlagt til Fremtidige Udgivelser  
-- **Mobilvenlig Dokumentation**: Responsivt design til mobil læring  
-- **Offline Adgang**: Downloadbare dokumentationspakker  
-- **Forbedret IDE Integration**: VS Code-udvidelse til AZD + AI-arbejdsgange  
-- **Community Dashboard**: Realtidsmetrics og sporing af bidrag fra fællesskabet  
+#### Stadig planlagt til fremtidig udgivelse  
+- **Mobilvenlig dokumentation**: Responsivt design til mobil læring  
+- **Offline adgang**: Downloadbare dokumentationspakker  
+- **Forbedret IDE-integration**: VS Code-udvidelse til AZD + AI-arbejdsgange  
+- **Community-dashboard**: Realtids community-metrics og bidragssporing  
 
-## Bidrag til Changelog  
+## Bidrag til ændringsloggen  
 
-### Rapportering af Ændringer  
-Når du bidrager til dette repository, skal changelog-poster indeholde:  
+### Rapportering af ændringer  
+Når du bidrager til dette repository, skal ændringslogindlæg inkludere:  
 
-1. **Versionsnummer**: Følger semantisk versionering (major.minor.patch)  
-2. **Dato**: Udgivelses- eller opdateringsdato i formatet YYYY-MM-DD  
-3. **Kategori**: Tilføjet, Ændret, Udfaset, Fjernet, Rettet, Sikkerhed  
-4. **Klar Beskrivelse**: Kort beskrivelse af, hvad der er ændret  
-5. **Vurdering af Indvirkning**: Hvordan ændringer påvirker eksisterende brugere  
+1. **Versionsnummer**: I henhold til semantisk versionering (major.minor.patch)  
+2. **Dato**: Udgivelses- eller opdateringsdato i formatet ÅÅÅÅ-MM-DD  
+3. **Kategori**: Tilføjet, Ændret, Forældet, Fjernet, Rettet, Sikkerhed  
+4. **Klar beskrivelse**: Kort beskrivelse af, hvad der er ændret  
+5. **Vurdering af påvirkning**: Hvordan ændringer påvirker eksisterende brugere  
 
 ### Ændringskategorier  
 
@@ -297,14 +328,14 @@ Når du bidrager til dette repository, skal changelog-poster indeholde:
 - Yderligere værktøjer, scripts eller hjælpeprogrammer  
 
 #### Ændret  
-- Modifikationer af eksisterende funktionalitet eller dokumentation  
+- Ændringer i eksisterende funktionalitet eller dokumentation  
 - Opdateringer for at forbedre klarhed eller nøjagtighed  
 - Omstrukturering af indhold eller organisation  
 
-#### Udfaset  
-- Funktioner eller tilgange, der er ved at blive udfaset  
-- Dokumentationssektioner planlagt til fjernelse  
-- Metoder med bedre alternativer  
+#### Forældet  
+- Funktioner eller tilgange, der udfases  
+- Dokumentationssektioner, der er planlagt til fjernelse  
+- Metoder, der har bedre alternativer  
 
 #### Fjernet  
 - Funktioner, dokumentation eller eksempler, der ikke længere er relevante  
@@ -318,88 +349,86 @@ Når du bidrager til dette repository, skal changelog-poster indeholde:
 
 #### Sikkerhed  
 - Sikkerhedsrelaterede forbedringer eller rettelser  
-- Opdateringer til bedste praksis inden for sikkerhed  
+- Opdateringer til bedste praksis for sikkerhed  
 - Løsning af sikkerhedssårbarheder  
 
-### Retningslinjer for Semantisk Versionering  
+### Retningslinjer for semantisk versionering  
 
-#### Major Version (X.0.0)  
-- Brud på kompatibilitet, der kræver brugerhandling  
+#### Hovedversion (X.0.0)  
+- Brudte ændringer, der kræver brugerhandling  
 - Betydelig omstrukturering af indhold eller organisation  
 - Ændringer, der ændrer den grundlæggende tilgang eller metode  
 
-#### Minor Version (X.Y.0)  
+#### Mindre version (X.Y.0)  
 - Nye funktioner eller indholdsudvidelser  
 - Forbedringer, der opretholder bagudkompatibilitet  
 - Yderligere eksempler, værktøjer eller ressourcer  
 
-#### Patch Version (X.Y.Z)  
+#### Patch-version (X.Y.Z)  
 - Fejlrettelser og korrektioner  
 - Mindre forbedringer af eksisterende indhold  
-- Klargørelser og små forbedringer  
+- Præciseringer og små forbedringer  
 
-## Feedback og Forslag fra Fællesskabet  
+## Community-feedback og forslag  
 
-Vi opfordrer aktivt fællesskabet til at give feedback for at forbedre denne læringsressource:  
+Vi opfordrer aktivt til community-feedback for at forbedre denne læringsressource:  
 
-### Sådan Giver Du Feedback  
-- **GitHub Issues**: Rapportér problemer eller foreslå forbedringer (AI-specifikke emner er velkomne)  
-- **Discord Diskussioner**: Del idéer og engager dig med Azure AI Foundry-fællesskabet  
-- **Pull Requests**: Bidrag direkte med forbedringer til indhold, især AI-skabeloner og vejledninger  
+### Sådan giver du feedback  
+- **GitHub Issues**: Rapportér problemer eller foreslå forbedringer (AI-specifikke problemer er velkomne)  
+- **Discord-diskussioner**: Del idéer og deltag i Azure AI Foundry-communityet  
+- **Pull Requests**: Bidrag med direkte forbedringer til indhold, især AI-skabeloner og vejledninger  
 - **Azure AI Foundry Discord**: Deltag i #Azure-kanalen for AZD + AI-diskussioner  
-- **Community Forums**: Deltag i bredere Azure-udviklerdiskussioner  
+- **Community-fora**: Deltag i bredere Azure-udviklerdiskussioner  
 
 ### Feedbackkategorier  
-- **AI Indholds Nøjagtighed**: Rettelser til AI-serviceintegration og implementeringsinformation  
+- **AI-indholds nøjagtighed**: Rettelser til AI-tjenesteintegration og udrulningsinformation  
 - **Læringsoplevelse**: Forslag til forbedret AI-udviklerlæringsflow  
-- **Manglende AI Indhold**: Anmodninger om yderligere AI-skabeloner, mønstre eller eksempler  
+- **Manglende AI-indhold**: Anmodninger om yderligere AI-skabeloner, mønstre eller eksempler  
 - **Tilgængelighed**: Forbedringer for forskellige læringsbehov  
-- **AI Værktøjsintegration**: Forslag til bedre AI-udviklingsarbejdsgangsintegration  
-- **Produktions-AI Mønstre**: Anmodninger om virksomhedsmønstre for AI-implementering  
+- **AI-værktøjsintegration**: Forslag til bedre AI-udviklingsarbejdsgange  
+- **Produktions-AI-mønstre**: Anmodninger om virksomhedsmønstre for AI-udrulning  
 
-### Forpligtelse til Respons  
-- **Svar på Issues**: Inden for 48 timer for rapporterede problemer  
-- **Feature Requests**: Evaluering inden for en uge  
-- **Community Bidrag**: Gennemgang inden for en uge  
-- **Sikkerhedsproblemer**: Høj prioritet med hurtig respons  
+### Forpligtelse til respons  
+- **Respons på problemer**: Inden for 48 timer for rapporterede problemer  
+- **Funktionsanmodninger**: Evaluering inden for en uge  
+- **Community-bidrag**: Gennemgang inden for en uge  
+- **Sikkerhedsproblemer**: Højeste prioritet med hurtig respons  
 
 ## Vedligeholdelsesplan  
 
-### Regelmæssige Opdateringer  
-- **Månedlige Gennemgange**: Nøjagtighed af indhold og validering af links  
-- **Kvartalsvise Opdateringer**: Større indholdsudvidelser og forbedringer  
-- **Halvårlige Gennemgange**: Omfattende omstrukturering og forbedring  
-- **Årlige Udgivelser**: Større versionsopdateringer med betydelige forbedringer  
+### Regelmæssige opdateringer  
+- **Månedlige gennemgange**: Kontrol af indholdets nøjagtighed og linkvalidering  
+- **Kvartalsvise opdateringer**: Større indholdsudvidelser og forbedringer  
+- **Halvårlige gennemgange**: Omfattende omstrukturering og forbedring  
+- **Årlige udgivelser**: Større versionsopdateringer med betydelige forbedringer  
 
-### Overvågning og Kvalitetssikring  
-- **Automatiseret Test**: Regelmæssig validering af kodeeksempler og links  
-- **Integration af Fællesskabsfeedback**: Regelmæssig inkorporering af brugerforslag  
-- **Teknologiske Opdateringer**: Tilpasning til de nyeste Azure-tjenester og AZD-udgivelser  
+### Overvågning og kvalitetskontrol  
+- **Automatiseret test**: Regelmæssig validering af kodeeksempler og links  
+- **Integration af community-feedback**: Regelmæssig inddragelse af brugerforslag  
+- **Teknologiske opdateringer**: Tilpasning til de nyeste Azure-tjenester og azd-udgivelser  
 - **Tilgængelighedsaudits**: Regelmæssig gennemgang for inkluderende designprincipper  
 
 ## Versionsstøttepolitik  
 
-### Nuværende Versionsstøtte  
-- **Seneste Major Version**: Fuld støtte med regelmæssige opdateringer  
-- **Forrige Major Version**: Sikkerhedsopdateringer og kritiske rettelser i 12 måneder  
-- **Ældre Versioner**: Kun fællesskabsstøtte, ingen officielle opdateringer  
+### Aktuel versionsstøtte  
+- **Seneste hovedversion**: Fuld støtte med regelmæssige opdateringer  
+- **Forrige hovedversion**: Sikkerhedsopdateringer og kritiske rettelser i 12 måneder  
+- **Ældre versioner**: Kun community-støtte, ingen officielle opdateringer  
 
-### Migreringsvejledning  
-Når større versioner udgives, tilbyder vi:  
-- **Migreringsvejledninger**: Trinvise instruktioner til overgang  
-- **Kompatibilitetsnoter**: Detaljer om brud på kompatibilitet  
-- **Værktøjsstøtte**: Scripts eller hjælpeprogrammer til at hjælpe med migrering  
-- **Fællesskabsstøtte**: Dedikerede fora til migreringsspørgsmål  
+### Migrationsvejledning  
+Når hovedversioner udgives, tilbyder vi:  
+- **Migrationsvejledninger**: Trin-for-trin overgangsinstruktioner  
+- **Kompatibilitetsnoter**: Detaljer om brudte ændringer  
+- **Værktøjsstøtte**: Scripts eller hjælpeværktøjer til at hjælpe med migration  
+- **Community-støtte**: Dedikerede fora til migrationsspørgsmål  
 
 ---
 
 **Navigation**  
-- **Forrige Lektion**: [Studieguide](resources/study-guide.md)  
-- **Næste Lektion**: Vend tilbage til [Hoved README](README.md)  
+- **Forrige lektion**: [Studievejledning](resources/study-guide.md)  
+- **Næste lektion**: Gå tilbage til [Hoved README](README.md)  
 
-**Hold Dig Opdateret**: Følg dette repository for notifikationer om nye udgivelser og vigtige opdateringer til læringsmaterialerne.  
+**Hold dig opdateret**: Følg dette repository for notifikationer om nye udgivelser og vigtige opdateringer til læringsmaterialerne.  
 
 ---
 
-**Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
