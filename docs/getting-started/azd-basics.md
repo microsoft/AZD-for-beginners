@@ -227,7 +227,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Navigation Commands
+## 🔐 Authentication and Credentials
+
+Understanding authentication is crucial for successful azd deployments. Azure uses multiple authentication methods, and azd leverages the same credential chain used by other Azure tools.
+
+### Azure CLI Authentication (`az login`)
+
+Before using azd, you need to authenticate with Azure. The most common method is using Azure CLI:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Authentication Flow
+1. **Interactive Login**: Opens your default browser for authentication
+2. **Device Code Flow**: For environments without browser access
+3. **Service Principal**: For automation and CI/CD scenarios
+4. **Managed Identity**: For Azure-hosted applications
+
+### DefaultAzureCredential Chain
+
+`DefaultAzureCredential` is a credential type that provides a simplified authentication experience by automatically trying multiple credential sources in a specific order:
+
+#### Credential Chain Order
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Environment Variables
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+Used automatically in:
+- Azure Kubernetes Service (AKS) with Workload Identity
+- GitHub Actions with OIDC federation
+- Other federated identity scenarios
+
+#### 3. Managed Identity
+For Azure resources like:
+- Virtual Machines
+- App Service
+- Azure Functions
+- Container Instances
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Developer Tools Integration
+- **Visual Studio**: Automatically uses signed-in account
+- **VS Code**: Uses Azure Account extension credentials
+- **Azure CLI**: Uses `az login` credentials (most common for local development)
+
+### AZD Authentication Setup
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Authentication Best Practices
+
+#### For Local Development
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### For CI/CD Pipelines
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### For Production Environments
+- Use **Managed Identity** when running on Azure resources
+- Use **Service Principal** for automation scenarios
+- Avoid storing credentials in code or configuration files
+- Use **Azure Key Vault** for sensitive configuration
+
+### Common Authentication Issues and Solutions
+
+#### Issue: "No subscription found"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Issue: "Insufficient permissions"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Issue: "Token expired"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Authentication in Different Scenarios
+
+#### Local Development
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Team Development
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Multi-tenant Scenarios
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Security Considerations
+
+1. **Credential Storage**: Never store credentials in source code
+2. **Scope Limitation**: Use least-privilege principle for service principals
+3. **Token Rotation**: Regularly rotate service principal secrets
+4. **Audit Trail**: Monitor authentication and deployment activities
+5. **Network Security**: Use private endpoints when possible
+
+### Troubleshooting Authentication
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## Understanding `azd down --force --purge`
 
 ### Discovery
 ```bash
