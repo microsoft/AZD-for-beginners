@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-18T06:34:58+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:38:56+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "fi"
 }
@@ -20,14 +20,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Johdanto
 
-Tässä osiossa tutustut Azure Developer CLI:hin (azd), tehokkaaseen komentorivityökaluun, joka nopeuttaa siirtymistä paikallisesta kehityksestä Azure-järjestelmään. Opit keskeiset käsitteet, tärkeimmät ominaisuudet ja ymmärrät, kuinka azd yksinkertaistaa pilvinatiivien sovellusten käyttöönottoa.
+Tässä osiossa tutustut Azure Developer CLI:hin (azd), tehokkaaseen komentorivityökaluun, joka nopeuttaa siirtymistä paikallisesta kehityksestä Azure-järjestelmään. Opit keskeiset käsitteet, tärkeimmät ominaisuudet ja ymmärrät, kuinka azd yksinkertaistaa pilvipohjaisten sovellusten käyttöönottoa.
 
 ## Oppimistavoitteet
 
 Tämän osion lopussa:
 - Ymmärrät, mitä Azure Developer CLI on ja sen pääasiallisen tarkoituksen
 - Opit keskeiset käsitteet, kuten templatet, ympäristöt ja palvelut
-- Tutustut tärkeimpiin ominaisuuksiin, kuten template-pohjaiseen kehitykseen ja Infrastructure as Codeen
+- Tutustut tärkeimpiin ominaisuuksiin, kuten template-pohjaiseen kehitykseen ja Infrastructure as Code -lähestymistapaan
 - Ymmärrät azd-projektin rakenteen ja työnkulun
 - Olet valmis asentamaan ja konfiguroimaan azd:n kehitysympäristöäsi varten
 
@@ -36,13 +36,13 @@ Tämän osion lopussa:
 Osion suorittamisen jälkeen pystyt:
 - Selittämään azd:n roolin modernissa pilvikehityksen työnkulussa
 - Tunnistamaan azd-projektin rakenteen osat
-- Kuvailemaan, kuinka templatet, ympäristöt ja palvelut toimivat yhdessä
+- Kuvaamaan, kuinka templatet, ympäristöt ja palvelut toimivat yhdessä
 - Ymmärtämään Infrastructure as Code -lähestymistavan hyödyt azd:n avulla
 - Tunnistamaan eri azd-komennot ja niiden tarkoitukset
 
 ## Mikä on Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) on komentorivityökalu, joka on suunniteltu nopeuttamaan siirtymistä paikallisesta kehityksestä Azure-järjestelmään. Se yksinkertaistaa pilvinatiivien sovellusten rakentamista, käyttöönottoa ja hallintaa Azure-alustalla.
+Azure Developer CLI (azd) on komentorivityökalu, joka on suunniteltu nopeuttamaan siirtymistä paikallisesta kehityksestä Azure-järjestelmään. Se yksinkertaistaa pilvipohjaisten sovellusten rakentamista, käyttöönottoa ja hallintaa Azure-alustalla.
 
 ## Keskeiset Käsitteet
 
@@ -51,7 +51,7 @@ Templatet ovat azd:n perusta. Ne sisältävät:
 - **Sovelluskoodi** - Lähdekoodisi ja riippuvuudet
 - **Infrastruktuurin määritelmät** - Azure-resurssit määriteltynä Bicepillä tai Terraformilla
 - **Konfiguraatiotiedostot** - Asetukset ja ympäristömuuttujat
-- **Käyttöönottoskriptit** - Automatisoidut käyttöönoton työnkulut
+- **Käyttöönotto-skriptit** - Automatisoidut käyttöönoton työnkulut
 
 ### Ympäristöt
 Ympäristöt edustavat eri käyttöönoton kohteita:
@@ -59,10 +59,10 @@ Ympäristöt edustavat eri käyttöönoton kohteita:
 - **Staging** - Esituotantoympäristö
 - **Tuotanto** - Käytössä oleva tuotantoympäristö
 
-Jokainen ympäristö ylläpitää omia:
-- Azure-resurssiryhmiä
-- Konfiguraatioasetuksia
-- Käyttöönottotilaa
+Jokainen ympäristö ylläpitää omat:
+- Azure-resurssiryhmänsä
+- Konfiguraatioasetuksensa
+- Käyttöönoton tilansa
 
 ### Palvelut
 Palvelut ovat sovelluksesi rakennuspalikoita:
@@ -73,7 +73,7 @@ Palvelut ovat sovelluksesi rakennuspalikoita:
 
 ## Tärkeimmät Ominaisuudet
 
-### 1. Template-Pohjainen Kehitys
+### 1. Template-pohjainen Kehitys
 ```bash
 # Browse available templates
 azd template list
@@ -197,7 +197,8 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## `azd down --force --purge` -komennon Ymmärtäminen
+## Ymmärtäminen `azd down --force --purge`
+
 `azd down --force --purge` -komento on tehokas tapa purkaa kokonaan azd-ympäristösi ja kaikki siihen liittyvät resurssit. Tässä on erittely, mitä kukin lippu tekee:
 ```
 --force
@@ -209,14 +210,14 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 --purge
 ```
-Poistaa **kaiken siihen liittyvän metadatan**, mukaan lukien:
+Poistaa **kaikki liittyvät metatiedot**, mukaan lukien:
 Ympäristön tila
 Paikallinen `.azure`-kansio
-Välimuistissa olevat käyttöönoton tiedot
-Estää azd:tä "muistamasta" aiempia käyttöönottoja, mikä voi aiheuttaa ongelmia, kuten epäyhteensopivia resurssiryhmiä tai vanhentuneita rekisteriviittauksia.
+Välimuistissa oleva käyttöönoton tieto
+Estää azd:tä "muistamasta" aiempia käyttöönottoja, mikä voi aiheuttaa ongelmia, kuten ristiriitaisia resurssiryhmiä tai vanhentuneita rekisteriviittauksia.
 
 ### Miksi käyttää molempia?
-Kun `azd up` -komento ei toimi odotetusti johtuen jäljellä olevasta tilasta tai osittaisista käyttöönotosta, tämä yhdistelmä varmistaa **puhtaan aloituksen**.
+Kun `azd up` -komento ei toimi johtuen jäljellä olevasta tilasta tai osittaisista käyttöönotosta, tämä yhdistelmä varmistaa **puhtaan aloituksen**.
 
 Se on erityisen hyödyllinen manuaalisten resurssien poistamisen jälkeen Azure-portaalissa tai vaihdettaessa templatet, ympäristöt tai resurssiryhmien nimeämiskäytännöt.
 
@@ -234,7 +235,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Navigointikomennot
+## 🔐 Autentikointi ja Tunnistetiedot
+
+Autentikoinnin ymmärtäminen on ratkaisevan tärkeää onnistuneille azd-käyttöönotolle. Azure käyttää useita autentikointimenetelmiä, ja azd hyödyntää samaa tunnisteketjua kuin muut Azure-työkalut.
+
+### Azure CLI Autentikointi (`az login`)
+
+Ennen azd:n käyttöä sinun täytyy autentikoitua Azureen. Yleisin menetelmä on Azure CLI:n käyttö:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Autentikointivirta
+1. **Interaktiivinen Kirjautuminen**: Avaa oletusselaimesi autentikointia varten
+2. **Laitteen Koodivirta**: Ympäristöille, joissa ei ole selaimen käyttömahdollisuutta
+3. **Palveluperiaate**: Automaatio- ja CI/CD-skenaarioita varten
+4. **Hallittu Identiteetti**: Azure-isännöidyille sovelluksille
+
+### DefaultAzureCredential Ketju
+
+`DefaultAzureCredential` on tunnistetyyppi, joka tarjoaa yksinkertaistetun autentikointikokemuksen kokeilemalla automaattisesti useita tunnistelähteitä tietyssä järjestyksessä:
+
+#### Tunnisteketjun Järjestys
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Ympäristömuuttujat
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Työkuorman Identiteetti (Kubernetes/GitHub Actions)
+Käytetään automaattisesti:
+- Azure Kubernetes Service (AKS) Workload Identityn kanssa
+- GitHub Actions OIDC-federoinnin kanssa
+- Muut federatiivisen identiteetin skenaariot
+
+#### 3. Hallittu Identiteetti
+Azure-resursseille, kuten:
+- Virtuaalikoneet
+- App Service
+- Azure Functions
+- Container Instances
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Kehitystyökalujen Integraatio
+- **Visual Studio**: Käyttää automaattisesti kirjautunutta tiliä
+- **VS Code**: Käyttää Azure Account -laajennuksen tunnistetietoja
+- **Azure CLI**: Käyttää `az login` -tunnistetietoja (yleisin paikallisessa kehityksessä)
+
+### AZD Autentikoinnin Asetukset
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Autentikoinnin Parhaat Käytännöt
+
+#### Paikallista Kehitystä Varten
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### CI/CD Putkia Varten
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### Tuotantoympäristöjä Varten
+- Käytä **Hallittua Identiteettiä** Azure-resursseilla
+- Käytä **Palveluperiaatetta** automaatioskenaarioissa
+- Vältä tunnistetietojen tallentamista koodiin tai konfiguraatiotiedostoihin
+- Käytä **Azure Key Vaultia** arkaluontoisten konfiguraatioiden hallintaan
+
+### Yleiset Autentikointiongelmat ja Ratkaisut
+
+#### Ongelma: "Ei löytynyt tilausta"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Ongelma: "Riittämättömät oikeudet"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Ongelma: "Token vanhentunut"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Autentikointi Eri Skenaarioissa
+
+#### Paikallinen Kehitys
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Tiimikehitys
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Monivuokraaja Skenaariot
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Turvallisuushuomiot
+
+1. **Tunnistetietojen Tallennus**: Älä koskaan tallenna tunnistetietoja lähdekoodiin
+2. **Käyttöoikeuksien Rajoittaminen**: Käytä vähimmäisoikeusperiaatetta palveluperiaatteille
+3. **Tokenien Kierrätys**: Kierrätä palveluperiaatteiden salaisuudet säännöllisesti
+4. **Auditointijälki**: Seuraa autentikointi- ja käyttöönottoaktiviteetteja
+5. **Verkkoturvallisuus**: Käytä yksityisiä päätepisteitä aina kun mahdollista
+
+### Autentikoinnin Vianetsintä
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## Ymmärtäminen `azd down --force --purge`
 
 ### Löytäminen
 ```bash
@@ -273,10 +491,10 @@ azd init --template template1
 ### 2. Hyödynnä Templatet
 - Aloita olemassa olevilla templateilla
 - Mukauta tarpeidesi mukaan
-- Luo organisaatiollesi uudelleenkäytettäviä templateja
+- Luo organisaatiollesi uudelleenkäytettäviä templatet
 
 ### 3. Ympäristöjen Eristäminen
-- Käytä erillisiä ympäristöjä kehitykseen/stagingiin/tuotantoon
+- Käytä erillisiä ympäristöjä kehitys/staging/tuotantoa varten
 - Älä koskaan ota käyttöön suoraan tuotantoon paikalliselta koneelta
 - Käytä CI/CD-putkia tuotantokäyttöönottoihin
 
@@ -288,29 +506,29 @@ azd init --template template1
 ## Oppimisen Eteneminen
 
 ### Aloittelija (Viikot 1-2)
-1. Asenna azd ja autentikoi
+1. Asenna azd ja autentikoidu
 2. Ota käyttöön yksinkertainen template
 3. Ymmärrä projektin rakenne
 4. Opettele peruskomennot (up, down, deploy)
 
 ### Keskitaso (Viikot 3-4)
-1. Mukauta templateja
+1. Mukauta templatet
 2. Hallitse useita ympäristöjä
 3. Ymmärrä infrastruktuurikoodi
-4. Määritä CI/CD-putket
+4. Aseta CI/CD-putket
 
 ### Edistynyt (Viikko 5+)
-1. Luo omia templateja
+1. Luo omia templatet
 2. Kehittyneet infrastruktuurimallit
 3. Monialueiset käyttöönotot
 4. Yritystason konfiguraatiot
 
 ## Seuraavat Askeleet
 
-**📖 Jatka Luvun 1 Oppimista:**
+**📖 Jatka Luku 1 Oppimista:**
 - [Asennus & Käyttöönotto](installation.md) - Asenna ja konfiguroi azd
-- [Ensimmäinen Projektisi](first-project.md) - Käytännön opetusohjelma
-- [Konfiguraatio-Opas](configuration.md) - Edistyneet konfiguraatiovaihtoehdot
+- [Ensimmäinen Projektisi](first-project.md) - Suorita käytännön opetus
+- [Konfiguraatio-opas](configuration.md) - Edistyneet konfiguraatiovaihtoehdot
 
 **🎯 Valmis Seuraavaan Lukuun?**
 - [Luku 2: AI-Ensisijainen Kehitys](../ai-foundry/azure-ai-foundry-integration.md) - Aloita AI-sovellusten rakentaminen
@@ -318,7 +536,7 @@ azd init --template template1
 ## Lisäresurssit
 
 - [Azure Developer CLI Yleiskatsaus](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Template-Galleria](https://azure.github.io/awesome-azd/)
+- [Template Galleria](https://azure.github.io/awesome-azd/)
 - [Yhteisön Näytteet](https://github.com/Azure-Samples)
 
 ---
@@ -332,5 +550,3 @@ azd init --template template1
 
 ---
 
-**Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

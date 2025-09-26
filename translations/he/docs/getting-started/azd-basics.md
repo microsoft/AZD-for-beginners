@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-18T07:10:33+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:40:02+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "he"
 }
 -->
 # יסודות AZD - הבנת Azure Developer CLI
 
-# יסודות AZD - מושגים ועקרונות בסיסיים
+# יסודות AZD - מושגים ועקרונות מרכזיים
 
 **ניווט בפרק:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
@@ -34,7 +34,7 @@ CO_OP_TRANSLATOR_METADATA:
 ## תוצאות למידה
 
 לאחר השלמת השיעור, תוכל:
-- להסביר את תפקיד azd בתהליכי פיתוח מודרניים בענן
+- להסביר את תפקיד azd בתהליכי פיתוח מודרניים מבוססי ענן
 - לזהות את הרכיבים של מבנה פרויקט azd
 - לתאר כיצד תבניות, סביבות ושירותים עובדים יחד
 - להבין את היתרונות של תשתית כקוד עם azd
@@ -48,16 +48,16 @@ Azure Developer CLI (azd) הוא כלי שורת פקודה שנועד להאי�
 
 ### תבניות
 תבניות הן הבסיס של azd. הן כוללות:
-- **קוד יישום** - קוד המקור שלך ותלויות
+- **קוד יישום** - קוד המקור שלך ותלויותיו
 - **הגדרות תשתית** - משאבי Azure המוגדרים ב-Bicep או Terraform
-- **קבצי הגדרה** - הגדרות ומשתני סביבה
-- **סקריפטים לפריסה** - תהליכי פריסה אוטומטיים
+- **קבצי תצורה** - הגדרות ומשתני סביבה
+- **סקריפטים לפריסה** - זרימות עבודה אוטומטיות לפריסה
 
 ### סביבות
 סביבות מייצגות יעדי פריסה שונים:
 - **פיתוח** - לבדיקות ופיתוח
-- **בדיקות** - סביבה לפני ייצור
-- **ייצור** - סביבה פעילה
+- **שלב ביניים** - סביבה לפני הפקה
+- **הפקה** - סביבה חיה
 
 כל סביבה שומרת על:
 - קבוצת משאבים ב-Azure
@@ -126,10 +126,10 @@ my-app/
 └── README.md
 ```
 
-## 🔧 קבצי הגדרה
+## 🔧 קבצי תצורה
 
 ### azure.yaml
-קובץ הגדרת הפרויקט הראשי:
+קובץ התצורה הראשי של הפרויקט:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -152,7 +152,7 @@ hooks:
 ```
 
 ### .azure/config.json
-הגדרות ספציפיות לסביבה:
+תצורה ספציפית לסביבה:
 ```json
 {
   "version": 1,
@@ -204,7 +204,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 - מדלג על בקשות אישור.
 - שימושי לאוטומציה או סקריפטים שבהם קלט ידני אינו אפשרי.
-- מבטיח שהתהליך ימשיך ללא הפרעה, גם אם CLI מזהה אי-התאמות.
+- מבטיח שהפירוק יתקדם ללא הפרעה, גם אם CLI מזהה אי-התאמות.
 
 ```
 --purge
@@ -216,9 +216,9 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 מונע מ-azd "לזכור" פריסות קודמות, מה שיכול לגרום לבעיות כמו קבוצות משאבים לא תואמות או הפניות רישום ישנות.
 
 ### למה להשתמש בשניהם?
-כאשר נתקלת בקשיים עם `azd up` עקב מצב מתמשך או פריסות חלקיות, השילוב הזה מבטיח **התחלה נקייה**.
+כשנתקלת בקשיים עם `azd up` עקב מצב מתמשך או פריסות חלקיות, השילוב הזה מבטיח **דף נקי**.
 
-זה מועיל במיוחד לאחר מחיקות ידניות של משאבים בפורטל Azure או בעת מעבר בין תבניות, סביבות או מוסכמות שמות של קבוצות משאבים.
+זה מועיל במיוחד לאחר מחיקות משאבים ידניות בפורטל Azure או בעת מעבר בין תבניות, סביבות או מוסכמות שמות של קבוצות משאבים.
 
 ### ניהול סביבות מרובות
 ```bash
@@ -234,7 +234,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 פקודות ניווט
+## 🔐 אימות ואישורים
+
+הבנת אימות היא קריטית לפריסות azd מוצלחות. Azure משתמש בשיטות אימות מרובות, ו-azd מנצל את שרשרת האישורים שבה משתמשים כלים אחרים של Azure.
+
+### אימות Azure CLI (`az login`)
+
+לפני השימוש ב-azd, עליך לאמת מול Azure. השיטה הנפוצה ביותר היא באמצעות Azure CLI:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### זרימת אימות
+1. **כניסה אינטראקטיבית**: פותחת את הדפדפן המוגדר כברירת מחדל לאימות
+2. **זרימת קוד מכשיר**: לסביבות ללא גישה לדפדפן
+3. **Service Principal**: לתרחישי אוטומציה ו-CI/CD
+4. **Managed Identity**: ליישומים המתארחים ב-Azure
+
+### שרשרת האישורים DefaultAzureCredential
+
+`DefaultAzureCredential` הוא סוג אישור שמספק חוויית אימות פשוטה על ידי ניסיון אוטומטי של מקורות אישור מרובים בסדר מסוים:
+
+#### סדר שרשרת האישורים
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. משתני סביבה
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+משמש אוטומטית ב:
+- Azure Kubernetes Service (AKS) עם Workload Identity
+- GitHub Actions עם OIDC federation
+- תרחישי זהות פדרטיבית אחרים
+
+#### 3. Managed Identity
+למשאבי Azure כמו:
+- מכונות וירטואליות
+- שירותי אפליקציות
+- פונקציות Azure
+- מופעי קונטיינר
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. אינטגרציה עם כלי פיתוח
+- **Visual Studio**: משתמש אוטומטית בחשבון מחובר
+- **VS Code**: משתמש באישורי הרחבת חשבון Azure
+- **Azure CLI**: משתמש באישורי `az login` (הנפוץ ביותר לפיתוח מקומי)
+
+### הגדרת אימות AZD
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### שיטות עבודה מומלצות לאימות
+
+#### לפיתוח מקומי
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### לצינורות CI/CD
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### לסביבות הפקה
+- השתמש ב-**Managed Identity** בעת הפעלה על משאבי Azure
+- השתמש ב-**Service Principal** לתרחישי אוטומציה
+- הימנע מאחסון אישורים בקוד או בקבצי תצורה
+- השתמש ב-**Azure Key Vault** להגדרות רגישות
+
+### בעיות אימות נפוצות ופתרונות
+
+#### בעיה: "לא נמצאה מנוי"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### בעיה: "הרשאות לא מספיקות"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### בעיה: "תוקף האסימון פג"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### אימות בתרחישים שונים
+
+#### פיתוח מקומי
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### פיתוח צוותי
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### תרחישים מרובי דיירים
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### שיקולי אבטחה
+
+1. **אחסון אישורים**: לעולם אל תאחסן אישורים בקוד מקור
+2. **הגבלת טווח**: השתמש בעקרון המינימום הרשאות עבור Service Principals
+3. **סיבוב אסימונים**: סובב סודות Service Principal באופן קבוע
+4. **מעקב אחר פעולות**: עקוב אחר פעילויות אימות ופריסה
+5. **אבטחת רשת**: השתמש בנקודות קצה פרטיות כשאפשר
+
+### פתרון בעיות אימות
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## הבנת `azd down --force --purge`
 
 ### גילוי
 ```bash
@@ -276,13 +493,13 @@ azd init --template template1
 - צור תבניות לשימוש חוזר עבור הארגון שלך
 
 ### 3. בידוד סביבות
-- השתמש בסביבות נפרדות לפיתוח/בדיקות/ייצור
-- לעולם אל תפרוס ישירות לייצור מהמחשב המקומי
-- השתמש בצינורות CI/CD לפריסות ייצור
+- השתמש בסביבות נפרדות לפיתוח/שלב ביניים/הפקה
+- לעולם אל תפרוס ישירות להפקה מהמחשב המקומי
+- השתמש בצינורות CI/CD לפריסות הפקה
 
 ### 4. ניהול תצורה
 - השתמש במשתני סביבה לנתונים רגישים
-- שמור את ההגדרות תחת בקרת גרסאות
+- שמור תצורה תחת בקרת גרסאות
 - תעד הגדרות ספציפיות לסביבה
 
 ## התקדמות בלמידה
@@ -302,14 +519,14 @@ azd init --template template1
 ### מתקדמים (שבוע 5+)
 1. יצירת תבניות מותאמות אישית
 2. דפוסי תשתית מתקדמים
-3. פריסות רב-אזוריות
-4. הגדרות ברמה ארגונית
+3. פריסות מרובות אזורים
+4. תצורות ברמה ארגונית
 
 ## צעדים הבאים
 
 **📖 המשך לימוד פרק 1:**
 - [התקנה והגדרה](installation.md) - התקן והגדר את azd
-- [הפרויקט הראשון שלך](first-project.md) - הדרכה מעשית מלאה
+- [הפרויקט הראשון שלך](first-project.md) - סדנה מעשית
 - [מדריך תצורה](configuration.md) - אפשרויות תצורה מתקדמות
 
 **🎯 מוכן לפרק הבא?**
@@ -317,7 +534,7 @@ azd init --template template1
 
 ## משאבים נוספים
 
-- [סקירה כללית של Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [סקירת Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [גלריית תבניות](https://azure.github.io/awesome-azd/)
 - [דוגמאות קהילתיות](https://github.com/Azure-Samples)
 
@@ -332,5 +549,3 @@ azd init --template template1
 
 ---
 
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

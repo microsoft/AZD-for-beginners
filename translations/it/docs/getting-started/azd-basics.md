@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-17T21:40:02+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:34:40+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "it"
 }
 -->
-# AZD Fondamenti - Comprendere Azure Developer CLI
+# AZD Basics - Comprendere Azure Developer CLI
 
-# AZD Fondamenti - Concetti e Principi di Base
+# AZD Basics - Concetti e Fondamenti Principali
 
 **Navigazione Capitolo:**
 - **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
@@ -20,13 +20,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduzione
 
-Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento potente da riga di comando che accelera il passaggio dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e come azd semplifica il deployment di applicazioni cloud-native.
+Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento da riga di comando potente che accelera il passaggio dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e come azd semplifica il deployment di applicazioni cloud-native.
 
 ## Obiettivi di Apprendimento
 
 Alla fine di questa lezione, sarai in grado di:
 - Comprendere cos'è Azure Developer CLI e il suo scopo principale
-- Apprendere i concetti fondamentali di template, ambienti e servizi
+- Conoscere i concetti fondamentali di template, ambienti e servizi
 - Esplorare le funzionalità principali, tra cui sviluppo basato su template e Infrastructure as Code
 - Comprendere la struttura e il flusso di lavoro di un progetto azd
 - Essere pronto per installare e configurare azd nel tuo ambiente di sviluppo
@@ -50,7 +50,7 @@ Azure Developer CLI (azd) è uno strumento da riga di comando progettato per acc
 I template sono la base di azd. Contengono:
 - **Codice applicativo** - Il tuo codice sorgente e le dipendenze
 - **Definizioni dell'infrastruttura** - Risorse Azure definite in Bicep o Terraform
-- **File di configurazione** - Impostazioni e variabili d'ambiente
+- **File di configurazione** - Impostazioni e variabili di ambiente
 - **Script di deployment** - Flussi di lavoro di deployment automatizzati
 
 ### Ambienti
@@ -65,7 +65,7 @@ Ogni ambiente mantiene il proprio:
 - Stato di deployment
 
 ### Servizi
-I servizi sono i componenti fondamentali della tua applicazione:
+I servizi sono i componenti principali della tua applicazione:
 - **Frontend** - Applicazioni web, SPAs
 - **Backend** - API, microservizi
 - **Database** - Soluzioni di archiviazione dati
@@ -198,13 +198,13 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Comprendere `azd down --force --purge`
-Il comando `azd down --force --purge` è un modo potente per eliminare completamente il tuo ambiente azd e tutte le risorse associate. Ecco una panoramica di cosa fanno i flag:
+Il comando `azd down --force --purge` è un modo potente per smantellare completamente il tuo ambiente azd e tutte le risorse associate. Ecco una panoramica di cosa fa ogni flag:
 ```
 --force
 ```
 - Salta i prompt di conferma.
 - Utile per automazione o scripting dove l'input manuale non è praticabile.
-- Garantisce che l'eliminazione proceda senza interruzioni, anche se la CLI rileva incongruenze.
+- Garantisce che lo smantellamento proceda senza interruzioni, anche se la CLI rileva incongruenze.
 
 ```
 --purge
@@ -217,7 +217,7 @@ Previene che azd "ricordi" deployment precedenti, evitando problemi come gruppi 
 
 
 ### Perché usare entrambi?
-Quando incontri problemi con `azd up` a causa di stato residuo o deployment parziali, questa combinazione garantisce un **nuovo inizio**.
+Quando incontri problemi con `azd up` a causa di stato residuo o deployment parziali, questa combinazione garantisce una **pulizia completa**.
 
 È particolarmente utile dopo eliminazioni manuali di risorse nel portale Azure o quando si cambiano template, ambienti o convenzioni di denominazione dei gruppi di risorse.
 
@@ -236,7 +236,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Comandi di Navigazione
+## 🔐 Autenticazione e Credenziali
+
+Comprendere l'autenticazione è cruciale per deployment azd di successo. Azure utilizza diversi metodi di autenticazione, e azd sfrutta la stessa catena di credenziali utilizzata da altri strumenti Azure.
+
+### Autenticazione Azure CLI (`az login`)
+
+Prima di utilizzare azd, devi autenticarti con Azure. Il metodo più comune è utilizzare Azure CLI:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Flusso di Autenticazione
+1. **Login Interattivo**: Apre il browser predefinito per l'autenticazione
+2. **Device Code Flow**: Per ambienti senza accesso al browser
+3. **Service Principal**: Per scenari di automazione e CI/CD
+4. **Managed Identity**: Per applicazioni ospitate su Azure
+
+### Catena DefaultAzureCredential
+
+`DefaultAzureCredential` è un tipo di credenziale che offre un'esperienza di autenticazione semplificata provando automaticamente diverse fonti di credenziali in un ordine specifico:
+
+#### Ordine della Catena di Credenziali
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Variabili di Ambiente
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+Utilizzato automaticamente in:
+- Azure Kubernetes Service (AKS) con Workload Identity
+- GitHub Actions con federazione OIDC
+- Altri scenari di identità federata
+
+#### 3. Managed Identity
+Per risorse Azure come:
+- Macchine Virtuali
+- App Service
+- Funzioni Azure
+- Container Instances
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Integrazione con Strumenti per Sviluppatori
+- **Visual Studio**: Utilizza automaticamente l'account connesso
+- **VS Code**: Utilizza le credenziali dell'estensione Azure Account
+- **Azure CLI**: Utilizza le credenziali di `az login` (il più comune per lo sviluppo locale)
+
+### Configurazione Autenticazione AZD
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Migliori Pratiche per l'Autenticazione
+
+#### Per Sviluppo Locale
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### Per Pipeline CI/CD
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### Per Ambienti di Produzione
+- Utilizza **Managed Identity** per risorse eseguite su Azure
+- Utilizza **Service Principal** per scenari di automazione
+- Evita di memorizzare credenziali nel codice o nei file di configurazione
+- Utilizza **Azure Key Vault** per configurazioni sensibili
+
+### Problemi Comuni di Autenticazione e Soluzioni
+
+#### Problema: "Nessuna sottoscrizione trovata"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Problema: "Permessi insufficienti"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Problema: "Token scaduto"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Autenticazione in Scenari Diversi
+
+#### Sviluppo Locale
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Sviluppo di Team
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Scenari Multi-tenant
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Considerazioni sulla Sicurezza
+
+1. **Memorizzazione delle Credenziali**: Non memorizzare mai le credenziali nel codice sorgente
+2. **Limitazione dello Scope**: Utilizza il principio del privilegio minimo per i service principal
+3. **Rotazione dei Token**: Ruota regolarmente i segreti dei service principal
+4. **Audit Trail**: Monitora le attività di autenticazione e deployment
+5. **Sicurezza di Rete**: Utilizza endpoint privati quando possibile
+
+### Risoluzione dei Problemi di Autenticazione
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## Comprendere `azd down --force --purge`
 
 ### Scoperta
 ```bash
@@ -278,14 +495,14 @@ azd init --template template1
 - Crea template riutilizzabili per la tua organizzazione
 
 ### 3. Isolamento degli Ambienti
-- Usa ambienti separati per sviluppo/staging/produzione
-- Non effettuare mai il deployment direttamente in produzione dalla macchina locale
-- Usa pipeline CI/CD per i deployment in produzione
+- Utilizza ambienti separati per sviluppo/staging/produzione
+- Non effettuare mai deployment direttamente in produzione dalla macchina locale
+- Utilizza pipeline CI/CD per deployment in produzione
 
 ### 4. Gestione della Configurazione
-- Usa variabili d'ambiente per dati sensibili
+- Utilizza variabili di ambiente per dati sensibili
 - Mantieni la configurazione sotto controllo di versione
-- Documenta le impostazioni specifiche per l'ambiente
+- Documenta le impostazioni specifiche per ambiente
 
 ## Progressione di Apprendimento
 
@@ -303,7 +520,7 @@ azd init --template template1
 
 ### Avanzato (Settimana 5+)
 1. Crea template personalizzati
-2. Pattern avanzati per l'infrastruttura
+2. Pattern avanzati di infrastruttura
 3. Deployment multi-regione
 4. Configurazioni di livello enterprise
 
@@ -334,5 +551,3 @@ azd init --template template1
 
 ---
 
-**Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

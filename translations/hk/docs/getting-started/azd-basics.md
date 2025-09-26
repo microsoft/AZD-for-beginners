@@ -1,34 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-17T13:07:52+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:28:54+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "hk"
 }
 -->
-# AZD 基礎知識 - 認識 Azure Developer CLI
+# AZD 基礎 - 認識 Azure Developer CLI
 
-# AZD 基礎知識 - 核心概念與基本原理
+# AZD 基礎 - 核心概念與基本原理
 
 **章節導航：**
 - **📚 課程首頁**: [AZD 初學者指南](../../README.md)
 - **📖 本章內容**: 第 1 章 - 基礎與快速入門
-- **⬅️ 上一節**: [課程概覽](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ 下一節**: [安裝與設定](installation.md)
-- **🚀 下一章**: [第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
+- **⬅️ 上一章**: [課程概覽](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ 下一章**: [安裝與設定](installation.md)
+- **🚀 下一章節**: [第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 簡介
 
-本課程將介紹 Azure Developer CLI (azd)，這是一個強大的命令列工具，能加速從本地開發到 Azure 部署的過程。你將學習到基本概念、核心功能，以及 azd 如何簡化雲原生應用程式的部署。
+本課程將介紹 Azure Developer CLI (azd)，這是一個強大的命令列工具，能加速從本地開發到 Azure 部署的過程。你將學習其基本概念、核心功能，以及如何使用 azd 簡化雲原生應用程式的部署。
 
 ## 學習目標
 
 完成本課程後，你將能夠：
-- 理解 Azure Developer CLI 是什麼及其主要用途
+- 理解 Azure Developer CLI 的用途及主要目的
 - 學習模板、環境和服務的核心概念
-- 探索模板驅動開發和基礎架構即程式碼的關鍵功能
-- 理解 azd 專案結構與工作流程
+- 探索基於模板的開發和基礎架構即程式碼的主要功能
+- 理解 azd 專案結構及工作流程
 - 為你的開發環境安裝和配置 azd 做好準備
 
 ## 學習成果
@@ -40,15 +40,15 @@ CO_OP_TRANSLATOR_METADATA:
 - 理解使用 azd 的基礎架構即程式碼的優勢
 - 認識不同的 azd 命令及其用途
 
-## 什麼是 Azure Developer CLI (azd)？
+## 什麼是 Azure Developer CLI (azd)?
 
 Azure Developer CLI (azd) 是一個命令列工具，旨在加速從本地開發到 Azure 部署的過程。它簡化了在 Azure 上構建、部署和管理雲原生應用程式的流程。
 
 ## 核心概念
 
 ### 模板
-模板是 azd 的基礎，它包含：
-- **應用程式程式碼** - 你的原始碼和依賴項
+模板是 azd 的基礎，包含：
+- **應用程式程式碼** - 你的原始程式碼及其依賴項
 - **基礎架構定義** - 使用 Bicep 或 Terraform 定義的 Azure 資源
 - **配置檔案** - 設定和環境變數
 - **部署腳本** - 自動化部署工作流程
@@ -57,7 +57,7 @@ Azure Developer CLI (azd) 是一個命令列工具，旨在加速從本地開發
 環境代表不同的部署目標：
 - **開發環境** - 用於測試和開發
 - **測試環境** - 預生產環境
-- **生產環境** - 線上生產環境
+- **生產環境** - 正式上線的生產環境
 
 每個環境都維護自己的：
 - Azure 資源群組
@@ -68,12 +68,12 @@ Azure Developer CLI (azd) 是一個命令列工具，旨在加速從本地開發
 服務是應用程式的構建模塊：
 - **前端** - 網頁應用程式、單頁應用程式 (SPA)
 - **後端** - API、微服務
-- **資料庫** - 資料儲存解決方案
-- **儲存** - 檔案和 Blob 儲存
+- **資料庫** - 資料存儲解決方案
+- **存儲** - 文件和 Blob 存儲
 
-## 關鍵功能
+## 主要功能
 
-### 1. 模板驅動開發
+### 1. 基於模板的開發
 ```bash
 # Browse available templates
 azd template list
@@ -85,7 +85,7 @@ azd init --template <template-name>
 ### 2. 基礎架構即程式碼
 - **Bicep** - Azure 的領域專用語言
 - **Terraform** - 多雲基礎架構工具
-- **ARM 模板** - Azure 資源管理器模板
+- **ARM Templates** - Azure 資源管理器模板
 
 ### 3. 整合工作流程
 ```bash
@@ -106,7 +106,7 @@ azd env list
 
 ## 📁 專案結構
 
-一個典型的 azd 專案結構：
+典型的 azd 專案結構：
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -168,7 +168,7 @@ hooks:
 
 ## 🎪 常見工作流程
 
-### 開始一個新專案
+### 開始新專案
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -198,25 +198,25 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## 理解 `azd down --force --purge`
-`azd down --force --purge` 命令是一種強大的方式，可以完全移除你的 azd 環境及所有相關資源。以下是每個標誌的功能解析：
+`azd down --force --purge` 命令是一種完全拆除 azd 環境及所有相關資源的強大方式。以下是每個標誌的功能：
 ```
 --force
 ```
 - 跳過確認提示。
-- 適用於無需手動輸入的自動化或腳本場景。
-- 即使 CLI 偵測到不一致，也能確保拆除過程不中斷。
+- 適用於無法進行手動輸入的自動化或腳本。
+- 即使 CLI 檢測到不一致，也能確保拆除過程不被中斷。
 
 ```
 --purge
 ```
 刪除 **所有相關的元數據**，包括：
-- 環境狀態
-- 本地 `.azure` 資料夾
-- 快取的部署資訊
-- 防止 azd "記住" 先前的部署，避免出現資源群組不匹配或過時的註冊表引用等問題。
+環境狀態
+本地 `.azure` 資料夾
+緩存的部署資訊
+防止 azd "記住" 之前的部署，避免出現資源群組不匹配或過期的註冊表引用等問題。
 
 ### 為什麼要同時使用？
-當你因殘留狀態或部分部署而無法成功執行 `azd up` 時，這個組合能確保一個 **乾淨的起點**。
+當你因殘留狀態或部分部署而在使用 `azd up` 時遇到問題時，這個組合能確保獲得 **乾淨的起點**。
 
 這在手動刪除 Azure 入口網站中的資源後，或切換模板、環境或資源群組命名約定時特別有用。
 
@@ -234,9 +234,226 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 導航命令
+## 🔐 身份驗證與憑證
 
-### 發現
+理解身份驗證對成功的 azd 部署至關重要。Azure 使用多種身份驗證方法，而 azd 利用與其他 Azure 工具相同的憑證鏈。
+
+### Azure CLI 身份驗證 (`az login`)
+
+在使用 azd 之前，你需要通過 Azure CLI 進行身份驗證：
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### 身份驗證流程
+1. **互動式登入**: 開啟預設瀏覽器進行身份驗證
+2. **設備代碼流程**: 用於無瀏覽器訪問的環境
+3. **服務主體**: 用於自動化和 CI/CD 場景
+4. **托管身份**: 用於 Azure 託管的應用程式
+
+### DefaultAzureCredential 鏈
+
+`DefaultAzureCredential` 是一種憑證類型，提供簡化的身份驗證體驗，通過按特定順序自動嘗試多個憑證來源：
+
+#### 憑證鏈順序
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. 環境變數
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. 工作負載身份 (Kubernetes/GitHub Actions)
+自動用於：
+- Azure Kubernetes Service (AKS) 的工作負載身份
+- GitHub Actions 的 OIDC 聯邦身份
+- 其他聯邦身份場景
+
+#### 3. 托管身份
+適用於 Azure 資源，例如：
+- 虛擬機器
+- 應用服務
+- Azure Functions
+- 容器實例
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. 開發工具整合
+- **Visual Studio**: 自動使用已登入的帳戶
+- **VS Code**: 使用 Azure 帳戶擴展憑證
+- **Azure CLI**: 使用 `az login` 憑證（本地開發最常用）
+
+### AZD 身份驗證設置
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### 身份驗證最佳實踐
+
+#### 本地開發
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### CI/CD 管道
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### 生產環境
+- 在 Azure 資源上運行時使用 **托管身份**
+- 自動化場景使用 **服務主體**
+- 避免在程式碼或配置檔案中存儲憑證
+- 使用 **Azure Key Vault** 存儲敏感配置
+
+### 常見身份驗證問題及解決方案
+
+#### 問題: "未找到訂閱"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### 問題: "權限不足"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### 問題: "令牌過期"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### 不同場景下的身份驗證
+
+#### 本地開發
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### 團隊開發
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### 多租戶場景
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### 安全考量
+
+1. **憑證存儲**: 絕不要在原始程式碼中存儲憑證
+2. **範圍限制**: 對服務主體使用最小權限原則
+3. **令牌輪替**: 定期輪替服務主體密碼
+4. **審計追蹤**: 監控身份驗證和部署活動
+5. **網絡安全**: 儘可能使用私有端點
+
+### 身份驗證故障排除
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## 理解 `azd down --force --purge`
+
+### 探索
 ```bash
 azd template list              # Browse templates
 azd template show <template>   # Template details
@@ -259,7 +476,7 @@ azd logs                     # View application logs
 
 ## 最佳實踐
 
-### 1. 使用有意義的名稱
+### 1. 使用有意義的命名
 ```bash
 # Good
 azd env new production-east
@@ -282,14 +499,14 @@ azd init --template template1
 
 ### 4. 配置管理
 - 使用環境變數存儲敏感資料
-- 將配置檔案納入版本控制
-- 記錄特定環境的設定
+- 將配置保存在版本控制中
+- 記錄環境特定的設置
 
 ## 學習進度
 
 ### 初學者 (第 1-2 週)
 1. 安裝 azd 並進行身份驗證
-2. 部署一個簡單的模板
+2. 部署簡單模板
 3. 理解專案結構
 4. 學習基本命令 (up, down, deploy)
 
@@ -307,12 +524,12 @@ azd init --template template1
 
 ## 下一步
 
-**📖 繼續學習第 1 章：**
+**📖 繼續第 1 章學習：**
 - [安裝與設定](installation.md) - 安裝並配置 azd
-- [你的第一個專案](first-project.md) - 完成實作教程
+- [你的第一個專案](first-project.md) - 完成動手教程
 - [配置指南](configuration.md) - 高級配置選項
 
-**🎯 準備進入下一章？**
+**🎯 準備好進入下一章節？**
 - [第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md) - 開始構建 AI 應用程式
 
 ## 其他資源
@@ -326,11 +543,9 @@ azd init --template template1
 **章節導航：**
 - **📚 課程首頁**: [AZD 初學者指南](../../README.md)
 - **📖 本章內容**: 第 1 章 - 基礎與快速入門  
-- **⬅️ 上一節**: [課程概覽](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ 下一節**: [安裝與設定](installation.md)
-- **🚀 下一章**: [第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
+- **⬅️ 上一章**: [課程概覽](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ 下一章**: [安裝與設定](installation.md)
+- **🚀 下一章節**: [第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
-**免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
