@@ -1,18 +1,18 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-17T21:56:19+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:35:45+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "tr"
 }
 -->
-# AZD Temelleri - Azure Developer CLI'yi Anlama
+# AZD Temelleri - Azure Developer CLI'yi Anlamak
 
-# AZD Temelleri - Temel Kavramlar ve Temeller
+# AZD Temelleri - Temel Kavramlar ve İlkeler
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç
 - **⬅️ Önceki**: [Kurs Genel Bakış](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Sonraki**: [Kurulum ve Ayarlar](installation.md)
@@ -20,12 +20,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giriş
 
-Bu ders, Azure Developer CLI (azd) ile tanışmanızı sağlar. Azd, yerel geliştirmeden Azure'a dağıtıma kadar olan yolculuğunuzu hızlandıran güçlü bir komut satırı aracıdır. Temel kavramları, ana özellikleri öğrenecek ve azd'nin bulut tabanlı uygulama dağıtımını nasıl basitleştirdiğini anlayacaksınız.
+Bu ders, Azure Developer CLI (azd) ile tanışmanızı sağlar. Azd, yerel geliştirmeden Azure'a dağıtıma kadar olan süreci hızlandıran güçlü bir komut satırı aracıdır. Temel kavramları, ana özellikleri öğrenecek ve azd'nin bulut tabanlı uygulama dağıtımını nasıl kolaylaştırdığını anlayacaksınız.
 
 ## Öğrenme Hedefleri
 
 Bu dersin sonunda:
-- Azure Developer CLI'nin ne olduğunu ve ana amacını anlayacaksınız
+- Azure Developer CLI'nin ne olduğunu ve temel amacını anlayacaksınız
 - Şablonlar, ortamlar ve hizmetler gibi temel kavramları öğreneceksiniz
 - Şablon tabanlı geliştirme ve Kod Olarak Altyapı gibi ana özellikleri keşfedeceksiniz
 - Azd proje yapısını ve iş akışını anlayacaksınız
@@ -42,7 +42,7 @@ Bu dersi tamamladıktan sonra:
 
 ## Azure Developer CLI (azd) Nedir?
 
-Azure Developer CLI (azd), yerel geliştirmeden Azure'a dağıtıma kadar olan yolculuğunuzu hızlandırmak için tasarlanmış bir komut satırı aracıdır. Bulut tabanlı uygulamaları Azure üzerinde oluşturma, dağıtma ve yönetme sürecini basitleştirir.
+Azure Developer CLI (azd), yerel geliştirmeden Azure'a dağıtıma kadar olan süreci hızlandırmak için tasarlanmış bir komut satırı aracıdır. Bulut tabanlı uygulamaları Azure üzerinde oluşturma, dağıtma ve yönetme sürecini basitleştirir.
 
 ## Temel Kavramlar
 
@@ -56,7 +56,7 @@ Azure Developer CLI (azd), yerel geliştirmeden Azure'a dağıtıma kadar olan y
 ### Ortamlar
 Ortamlar farklı dağıtım hedeflerini temsil eder:
 - **Geliştirme** - Test ve geliştirme için
-- **Staging** - Üretim öncesi ortam
+- **Staging** - Ön üretim ortamı
 - **Üretim** - Canlı üretim ortamı
 
 Her ortam kendi:
@@ -66,7 +66,7 @@ Her ortam kendi:
 
 ### Hizmetler
 Hizmetler uygulamanızın yapı taşlarıdır:
-- **Frontend** - Web uygulamaları, SPAlar
+- **Frontend** - Web uygulamaları, SPAs
 - **Backend** - API'ler, mikro hizmetler
 - **Veritabanı** - Veri depolama çözümleri
 - **Depolama** - Dosya ve blob depolama
@@ -83,7 +83,7 @@ azd init --template <template-name>
 ```
 
 ### 2. Kod Olarak Altyapı
-- **Bicep** - Azure'un alanına özgü dili
+- **Bicep** - Azure'ın alanına özgü dili
 - **Terraform** - Çoklu bulut altyapı aracı
 - **ARM Şablonları** - Azure Resource Manager şablonları
 
@@ -197,30 +197,30 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## `azd down --force --purge` Komutunu Anlama
+## `azd down --force --purge` Komutunu Anlamak
 `azd down --force --purge` komutu, azd ortamınızı ve ilişkili tüm kaynakları tamamen kaldırmanın güçlü bir yoludur. İşte her bir bayrağın ne yaptığına dair bir açıklama:
 ```
 --force
 ```
 - Onay istemlerini atlar.
-- Manuel girişin mümkün olmadığı otomasyon veya betiklerde kullanışlıdır.
-- CLI tutarsızlıklar algılasa bile kaldırma işleminin kesintisiz devam etmesini sağlar.
+- Manuel girişin mümkün olmadığı otomasyon veya betik senaryoları için kullanışlıdır.
+- CLI tutarsızlıklar algılasa bile kesintisiz bir şekilde kaldırma işleminin devam etmesini sağlar.
 
 ```
 --purge
 ```
-**Tüm ilişkili meta verileri** siler, bunlar dahil:
+**Tüm ilişkili meta verileri** siler, şunları içerir:
 Ortam durumu
 Yerel `.azure` klasörü
 Önbelleğe alınmış dağıtım bilgileri
-Azd'nin önceki dağıtımları "hatırlamasını" engeller, bu da kaynak grupları veya eski kayıt defteri referansları gibi sorunlara yol açabilir.
+Azd'nin önceki dağıtımları "hatırlamasını" engeller, bu da eşleşmeyen kaynak grupları veya eski kayıt defteri referansları gibi sorunlara neden olabilir.
 
-### Neden İkisini Birlikte Kullanmalı?
+### Neden her ikisini kullanmalı?
 `azd up` ile kalan durum veya kısmi dağıtımlar nedeniyle bir duvara çarptığınızda, bu kombinasyon **temiz bir başlangıç** sağlar.
 
 Özellikle Azure portalında manuel kaynak silme işlemlerinden sonra veya şablonları, ortamları veya kaynak grubu adlandırma kurallarını değiştirirken faydalıdır.
 
-### Birden Fazla Ortamı Yönetme
+### Birden Fazla Ortamı Yönetmek
 ```bash
 # Create staging environment
 azd env new staging
@@ -234,7 +234,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Navigasyon Komutları
+## 🔐 Kimlik Doğrulama ve Kimlik Bilgileri
+
+Başarılı azd dağıtımları için kimlik doğrulamayı anlamak çok önemlidir. Azure, birden fazla kimlik doğrulama yöntemi kullanır ve azd, diğer Azure araçları tarafından kullanılan aynı kimlik bilgisi zincirinden yararlanır.
+
+### Azure CLI Kimlik Doğrulama (`az login`)
+
+Azd kullanmadan önce Azure ile kimlik doğrulaması yapmanız gerekir. En yaygın yöntem Azure CLI kullanmaktır:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Kimlik Doğrulama Akışı
+1. **Etkileşimli Giriş**: Kimlik doğrulama için varsayılan tarayıcınızı açar
+2. **Cihaz Kodu Akışı**: Tarayıcı erişimi olmayan ortamlar için
+3. **Hizmet Prensibi**: Otomasyon ve CI/CD senaryoları için
+4. **Yönetilen Kimlik**: Azure barındırılan uygulamalar için
+
+### DefaultAzureCredential Zinciri
+
+`DefaultAzureCredential`, belirli bir sırayla birden fazla kimlik bilgisi kaynağını otomatik olarak deneyerek basitleştirilmiş bir kimlik doğrulama deneyimi sağlayan bir kimlik bilgisi türüdür:
+
+#### Kimlik Bilgisi Zinciri Sırası
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Ortam Değişkenleri
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. İş Yükü Kimliği (Kubernetes/GitHub Actions)
+Otomatik olarak kullanılır:
+- Azure Kubernetes Service (AKS) ile İş Yükü Kimliği
+- GitHub Actions ile OIDC federasyonu
+- Diğer federasyon kimlik senaryoları
+
+#### 3. Yönetilen Kimlik
+Azure kaynakları için:
+- Sanal Makineler
+- Uygulama Hizmeti
+- Azure İşlevleri
+- Konteyner Örnekleri
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Geliştirici Araçları Entegrasyonu
+- **Visual Studio**: Oturum açmış hesabı otomatik olarak kullanır
+- **VS Code**: Azure Hesap uzantısı kimlik bilgilerini kullanır
+- **Azure CLI**: `az login` kimlik bilgilerini kullanır (yerel geliştirme için en yaygın)
+
+### AZD Kimlik Doğrulama Ayarları
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Kimlik Doğrulama En İyi Uygulamaları
+
+#### Yerel Geliştirme İçin
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### CI/CD Hatları İçin
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### Üretim Ortamları İçin
+- Azure kaynaklarında çalışırken **Yönetilen Kimlik** kullanın
+- Otomasyon senaryoları için **Hizmet Prensibi** kullanın
+- Kimlik bilgilerini kodda veya yapılandırma dosyalarında saklamaktan kaçının
+- Hassas yapılandırma için **Azure Key Vault** kullanın
+
+### Yaygın Kimlik Doğrulama Sorunları ve Çözümleri
+
+#### Sorun: "Abonelik bulunamadı"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Sorun: "Yetersiz izinler"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Sorun: "Token süresi doldu"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Farklı Senaryolarda Kimlik Doğrulama
+
+#### Yerel Geliştirme
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Takım Geliştirme
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Çoklu Kiracı Senaryoları
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Güvenlik Hususları
+
+1. **Kimlik Bilgisi Depolama**: Kimlik bilgilerini asla kaynak kodda saklamayın
+2. **Kapsam Sınırlaması**: Hizmet prensipleri için en az ayrıcalık ilkesini kullanın
+3. **Token Döndürme**: Hizmet prensibi sırlarını düzenli olarak döndürün
+4. **Denetim İzleme**: Kimlik doğrulama ve dağıtım etkinliklerini izleyin
+5. **Ağ Güvenliği**: Mümkün olduğunda özel uç noktalar kullanın
+
+### Kimlik Doğrulama Sorunlarını Giderme
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## `azd down --force --purge` Komutunu Anlamak
 
 ### Keşif
 ```bash
@@ -273,7 +490,7 @@ azd init --template template1
 ### 2. Şablonlardan Yararlanın
 - Mevcut şablonlarla başlayın
 - İhtiyaçlarınıza göre özelleştirin
-- Organizasyonunuz için yeniden kullanılabilir şablonlar oluşturun
+- Kuruluşunuz için yeniden kullanılabilir şablonlar oluşturun
 
 ### 3. Ortam İzolasyonu
 - Geliştirme/staging/üretim için ayrı ortamlar kullanın
@@ -287,19 +504,19 @@ azd init --template template1
 
 ## Öğrenme İlerlemesi
 
-### Başlangıç (Hafta 1-2)
-1. Azd'yi kurun ve kimlik doğrulaması yapın
+### Başlangıç Seviyesi (1-2 Hafta)
+1. Azd'yi kurun ve kimlik doğrulama yapın
 2. Basit bir şablon dağıtın
 3. Proje yapısını anlayın
 4. Temel komutları öğrenin (up, down, deploy)
 
-### Orta Seviye (Hafta 3-4)
+### Orta Seviye (3-4 Hafta)
 1. Şablonları özelleştirin
 2. Birden fazla ortam yönetin
 3. Altyapı kodunu anlayın
 4. CI/CD hatlarını ayarlayın
 
-### İleri Seviye (Hafta 5+)
+### İleri Seviye (5+ Hafta)
 1. Özel şablonlar oluşturun
 2. Gelişmiş altyapı desenleri
 3. Çok bölgeli dağıtımlar
@@ -324,7 +541,7 @@ azd init --template template1
 ---
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç  
 - **⬅️ Önceki**: [Kurs Genel Bakış](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Sonraki**: [Kurulum ve Ayarlar](installation.md)
@@ -332,5 +549,3 @@ azd init --template template1
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

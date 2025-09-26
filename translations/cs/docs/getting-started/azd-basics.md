@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-18T09:42:07+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:43:33+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "cs"
 }
@@ -12,11 +12,11 @@ CO_OP_TRANSLATOR_METADATA:
 # AZD Základy - Klíčové koncepty a principy
 
 **Navigace kapitolou:**
-- **📚 Domov kurzu**: [AZD Pro Začátečníky](../../README.md)
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 1 - Základy & Rychlý start
 - **⬅️ Předchozí**: [Přehled kurzu](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Další**: [Instalace & Nastavení](installation.md)
-- **🚀 Další kapitola**: [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Další kapitola**: [Kapitola 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Úvod
 
@@ -25,10 +25,10 @@ Tato lekce vás seznámí s Azure Developer CLI (azd), výkonným nástrojem př
 ## Cíle učení
 
 Na konci této lekce budete:
-- Rozumět, co je Azure Developer CLI a jeho hlavní účel
-- Naučíte se základní koncepty šablon, prostředí a služeb
-- Prozkoumáte klíčové funkce, včetně vývoje založeného na šablonách a Infrastructure as Code
-- Pochopíte strukturu projektu azd a pracovní postupy
+- Rozumět tomu, co je Azure Developer CLI a jeho hlavní účel
+- Seznámeni se základními koncepty šablon, prostředí a služeb
+- Prozkoumat klíčové funkce, včetně vývoje založeného na šablonách a Infrastructure as Code
+- Pochopit strukturu projektu azd a pracovní postupy
 - Připraveni na instalaci a konfiguraci azd pro vaše vývojové prostředí
 
 ## Výsledky učení
@@ -38,13 +38,13 @@ Po dokončení této lekce budete schopni:
 - Identifikovat komponenty struktury projektu azd
 - Popsat, jak šablony, prostředí a služby spolupracují
 - Pochopit výhody Infrastructure as Code s azd
-- Rozpoznat různé příkazy azd a jejich účel
+- Rozpoznat různé příkazy azd a jejich účely
 
 ## Co je Azure Developer CLI (azd)?
 
 Azure Developer CLI (azd) je nástroj příkazového řádku navržený k urychlení vaší cesty od lokálního vývoje k nasazení na Azure. Zjednodušuje proces vytváření, nasazení a správy cloud-native aplikací na Azure.
 
-## Klíčové koncepty
+## Základní koncepty
 
 ### Šablony
 Šablony jsou základem azd. Obsahují:
@@ -55,9 +55,9 @@ Azure Developer CLI (azd) je nástroj příkazového řádku navržený k urychl
 
 ### Prostředí
 Prostředí představují různé cíle nasazení:
-- **Vývoj** - Pro testování a vývoj
+- **Vývojové** - Pro testování a vývoj
 - **Staging** - Předprodukční prostředí
-- **Produkce** - Živé produkční prostředí
+- **Produkční** - Živé produkční prostředí
 
 Každé prostředí udržuje své vlastní:
 - Azure resource group
@@ -69,7 +69,7 @@ Služby jsou stavebními bloky vaší aplikace:
 - **Frontend** - Webové aplikace, SPAs
 - **Backend** - API, mikroslužby
 - **Databáze** - Řešení pro ukládání dat
-- **Úložiště** - Soubory a blob storage
+- **Úložiště** - Úložiště souborů a blobů
 
 ## Klíčové funkce
 
@@ -203,19 +203,19 @@ Příkaz `azd down --force --purge` je výkonný způsob, jak kompletně odstran
 --force
 ```
 - Přeskakuje potvrzovací výzvy.
-- Užitečné pro automatizaci nebo skriptování, kde manuální vstup není možný.
+- Užitečné pro automatizaci nebo skriptování, kde není možné manuální zadávání.
 - Zajišťuje, že odstranění proběhne bez přerušení, i když CLI detekuje nesrovnalosti.
 
 ```
 --purge
 ```
-Maže **veškerá související metadata**, včetně:
+Odstraní **veškerá související metadata**, včetně:
 Stavu prostředí
 Lokální složky `.azure`
-Cache informací o nasazení
+Informací o uloženém nasazení
 Zabraňuje azd "pamatovat si" předchozí nasazení, což může způsobit problémy, jako jsou nesprávné resource groups nebo zastaralé registry.
 
-### Proč použít obojí?
+### Proč používat obojí?
 Když narazíte na problémy s `azd up` kvůli přetrvávajícímu stavu nebo částečným nasazením, tato kombinace zajistí **čistý start**.
 
 Je obzvláště užitečné po manuálním odstranění zdrojů v Azure portálu nebo při přepínání šablon, prostředí nebo konvencí pojmenování resource groups.
@@ -234,7 +234,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Navigační příkazy
+## 🔐 Autentizace a přihlašovací údaje
+
+Porozumění autentizaci je klíčové pro úspěšná nasazení azd. Azure používá několik metod autentizace a azd využívá stejný řetězec přihlašovacích údajů jako ostatní nástroje Azure.
+
+### Autentizace Azure CLI (`az login`)
+
+Před použitím azd se musíte autentizovat s Azure. Nejčastější metodou je použití Azure CLI:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Průběh autentizace
+1. **Interaktivní přihlášení**: Otevře váš výchozí prohlížeč pro autentizaci
+2. **Device Code Flow**: Pro prostředí bez přístupu k prohlížeči
+3. **Service Principal**: Pro automatizaci a scénáře CI/CD
+4. **Managed Identity**: Pro aplikace hostované na Azure
+
+### DefaultAzureCredential Chain
+
+`DefaultAzureCredential` je typ přihlašovacích údajů, který poskytuje zjednodušený zážitek z autentizace tím, že automaticky zkouší více zdrojů přihlašovacích údajů v konkrétním pořadí:
+
+#### Pořadí řetězce přihlašovacích údajů
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Proměnné prostředí
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+Používá se automaticky v:
+- Azure Kubernetes Service (AKS) s Workload Identity
+- GitHub Actions s OIDC federací
+- Jiných scénářích federované identity
+
+#### 3. Managed Identity
+Pro Azure zdroje jako:
+- Virtuální stroje
+- App Service
+- Azure Functions
+- Container Instances
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Integrace vývojářských nástrojů
+- **Visual Studio**: Automaticky používá přihlášený účet
+- **VS Code**: Používá přihlašovací údaje rozšíření Azure Account
+- **Azure CLI**: Používá přihlašovací údaje `az login` (nejběžnější pro lokální vývoj)
+
+### Nastavení autentizace AZD
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Nejlepší praktiky autentizace
+
+#### Pro lokální vývoj
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### Pro CI/CD pipelines
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### Pro produkční prostředí
+- Používejte **Managed Identity** při běhu na Azure zdrojích
+- Používejte **Service Principal** pro automatizační scénáře
+- Vyhněte se ukládání přihlašovacích údajů do kódu nebo konfiguračních souborů
+- Používejte **Azure Key Vault** pro citlivou konfiguraci
+
+### Běžné problémy s autentizací a jejich řešení
+
+#### Problém: "Nebyla nalezena žádná předplatná"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Problém: "Nedostatečná oprávnění"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Problém: "Token vypršel"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Autentizace v různých scénářích
+
+#### Lokální vývoj
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Týmový vývoj
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Scénáře s více tenanty
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Bezpečnostní úvahy
+
+1. **Ukládání přihlašovacích údajů**: Nikdy neukládejte přihlašovací údaje do zdrojového kódu
+2. **Omezení rozsahu**: Používejte princip nejmenších oprávnění pro service principals
+3. **Rotace tokenů**: Pravidelně rotujte tajemství service principal
+4. **Auditní stopa**: Monitorujte autentizační a nasazovací aktivity
+5. **Síťová bezpečnost**: Používejte privátní koncové body, pokud je to možné
+
+### Řešení problémů s autentizací
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## Porozumění `azd down --force --purge`
 
 ### Objevování
 ```bash
@@ -250,14 +467,14 @@ azd env show                 # Current environment
 azd config list             # Configuration settings
 ```
 
-### Monitoring
+### Monitorování
 ```bash
 azd monitor                  # Open Azure portal
 azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Nejlepší postupy
+## Nejlepší praktiky
 
 ### 1. Používejte smysluplné názvy
 ```bash
@@ -307,13 +524,13 @@ azd init --template template1
 
 ## Další kroky
 
-**📖 Pokračujte v učení Kapitoly 1:**
+**📖 Pokračujte v učení kapitoly 1:**
 - [Instalace & Nastavení](installation.md) - Nainstalujte a nakonfigurujte azd
 - [Váš první projekt](first-project.md) - Dokončete praktický tutoriál
 - [Průvodce konfigurací](configuration.md) - Pokročilé možnosti konfigurace
 
 **🎯 Připraveni na další kapitolu?**
-- [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md) - Začněte vytvářet AI aplikace
+- [Kapitola 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md) - Začněte vytvářet AI aplikace
 
 ## Další zdroje
 
@@ -324,13 +541,11 @@ azd init --template template1
 ---
 
 **Navigace kapitolou:**
-- **📚 Domov kurzu**: [AZD Pro Začátečníky](../../README.md)
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 1 - Základy & Rychlý start  
 - **⬅️ Předchozí**: [Přehled kurzu](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Další**: [Instalace & Nastavení](installation.md)
-- **🚀 Další kapitola**: [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Další kapitola**: [Kapitola 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

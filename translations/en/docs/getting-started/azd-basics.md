@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-18T12:46:22+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:24:19+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "en"
 }
@@ -20,15 +20,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that streamlines the process of moving from local development to Azure deployment. You'll explore its fundamental concepts, key features, and learn how azd simplifies the deployment of cloud-native applications.
+This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that streamlines the process of moving from local development to Azure deployment. You'll learn the essential concepts, key features, and understand how azd simplifies deploying cloud-native applications.
 
 ## Learning Goals
 
 By the end of this lesson, you will:
 - Understand what Azure Developer CLI is and its main purpose
 - Learn the core concepts of templates, environments, and services
-- Discover key features like template-driven development and Infrastructure as Code
-- Understand the structure and workflow of an azd project
+- Explore key features like template-driven development and Infrastructure as Code
+- Understand the azd project structure and workflow
 - Be ready to install and configure azd for your development environment
 
 ## Learning Outcomes
@@ -42,7 +42,7 @@ After completing this lesson, you will be able to:
 
 ## What is Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) is a command-line tool designed to simplify and speed up the process of building, deploying, and managing cloud-native applications on Azure.
+Azure Developer CLI (azd) is a command-line tool designed to speed up the process of moving from local development to Azure deployment. It simplifies building, deploying, and managing cloud-native applications on Azure.
 
 ## Core Concepts
 
@@ -210,16 +210,17 @@ The `azd down --force --purge` command is a powerful way to completely tear down
 --purge
 ```
 Deletes **all associated metadata**, including:
-Environment state  
-Local `.azure` folder  
-Cached deployment info  
-
+Environment state
+Local `.azure` folder
+Cached deployment info
 Prevents azd from "remembering" previous deployments, which can cause issues like mismatched resource groups or stale registry references.
 
-### Why use both?
-When you encounter issues with `azd up` due to lingering state or partial deployments, this combination ensures a **clean slate**.
 
-It’s especially useful after manually deleting resources in the Azure portal or when switching templates, environments, or resource group naming conventions.
+### Why use both?
+When you've hit a wall with `azd up` due to lingering state or partial deployments, this combo ensures a **clean slate**.
+
+It’s especially helpful after manual resource deletions in the Azure portal or when switching templates, environments, or resource group naming conventions.
+
 
 ### Managing Multiple Environments
 ```bash
@@ -235,7 +236,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Navigation Commands
+## 🔐 Authentication and Credentials
+
+Understanding authentication is crucial for successful azd deployments. Azure uses multiple authentication methods, and azd leverages the same credential chain used by other Azure tools.
+
+### Azure CLI Authentication (`az login`)
+
+Before using azd, you need to authenticate with Azure. The most common method is using Azure CLI:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Authentication Flow
+1. **Interactive Login**: Opens your default browser for authentication
+2. **Device Code Flow**: For environments without browser access
+3. **Service Principal**: For automation and CI/CD scenarios
+4. **Managed Identity**: For Azure-hosted applications
+
+### DefaultAzureCredential Chain
+
+`DefaultAzureCredential` is a credential type that provides a simplified authentication experience by automatically trying multiple credential sources in a specific order:
+
+#### Credential Chain Order
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Environment Variables
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+Used automatically in:
+- Azure Kubernetes Service (AKS) with Workload Identity
+- GitHub Actions with OIDC federation
+- Other federated identity scenarios
+
+#### 3. Managed Identity
+For Azure resources like:
+- Virtual Machines
+- App Service
+- Azure Functions
+- Container Instances
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Developer Tools Integration
+- **Visual Studio**: Automatically uses signed-in account
+- **VS Code**: Uses Azure Account extension credentials
+- **Azure CLI**: Uses `az login` credentials (most common for local development)
+
+### AZD Authentication Setup
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Authentication Best Practices
+
+#### For Local Development
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### For CI/CD Pipelines
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### For Production Environments
+- Use **Managed Identity** when running on Azure resources
+- Use **Service Principal** for automation scenarios
+- Avoid storing credentials in code or configuration files
+- Use **Azure Key Vault** for sensitive configuration
+
+### Common Authentication Issues and Solutions
+
+#### Issue: "No subscription found"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Issue: "Insufficient permissions"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Issue: "Token expired"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Authentication in Different Scenarios
+
+#### Local Development
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Team Development
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Multi-tenant Scenarios
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Security Considerations
+
+1. **Credential Storage**: Never store credentials in source code
+2. **Scope Limitation**: Use least-privilege principle for service principals
+3. **Token Rotation**: Regularly rotate service principal secrets
+4. **Audit Trail**: Monitor authentication and deployment activities
+5. **Network Security**: Use private endpoints when possible
+
+### Troubleshooting Authentication
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## Understanding `azd down --force --purge`
 
 ### Discovery
 ```bash
@@ -273,17 +491,17 @@ azd init --template template1
 
 ### 2. Leverage Templates
 - Start with existing templates
-- Customize them to fit your needs
+- Customize for your needs
 - Create reusable templates for your organization
 
 ### 3. Environment Isolation
-- Use separate environments for development, staging, and production
-- Avoid deploying directly to production from your local machine
+- Use separate environments for dev/staging/prod
+- Never deploy directly to production from local machine
 - Use CI/CD pipelines for production deployments
 
 ### 4. Configuration Management
 - Use environment variables for sensitive data
-- Keep configuration files in version control
+- Keep configuration in version control
 - Document environment-specific settings
 
 ## Learning Progression
@@ -333,5 +551,3 @@ azd init --template template1
 
 ---
 
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

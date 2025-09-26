@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-18T14:07:18+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:48:39+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "lt"
 }
 -->
 # AZD Pagrindai - Azure Developer CLI supratimas
 
-# AZD Pagrindai - Pagrindinės sąvokos ir principai
+# AZD Pagrindai - Pagrindinės sąvokos ir pagrindai
 
 **Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
@@ -20,7 +20,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Įvadas
 
-Ši pamoka supažindins jus su Azure Developer CLI (azd) – galingu komandų eilutės įrankiu, kuris pagreitina perėjimą nuo vietinio vystymo iki diegimo Azure platformoje. Jūs sužinosite pagrindines sąvokas, pagrindines funkcijas ir suprasite, kaip azd supaprastina debesų aplikacijų diegimą.
+Ši pamoka supažindins jus su Azure Developer CLI (azd), galingu komandų eilutės įrankiu, kuris pagreitina jūsų kelią nuo vietinio vystymo iki Azure diegimo. Sužinosite pagrindines sąvokas, pagrindines funkcijas ir suprasite, kaip azd supaprastina debesų aplikacijų diegimą.
 
 ## Mokymosi tikslai
 
@@ -29,11 +29,11 @@ Pamokos pabaigoje jūs:
 - Išmoksite pagrindines sąvokas, tokias kaip šablonai, aplinkos ir paslaugos
 - Susipažinsite su pagrindinėmis funkcijomis, įskaitant šablonais pagrįstą vystymą ir infrastruktūrą kaip kodą
 - Suprasite azd projekto struktūrą ir darbo eigą
-- Būsite pasiruošę įdiegti ir konfigūruoti azd savo vystymo aplinkoje
+- Būsite pasiruošę įdiegti ir sukonfigūruoti azd savo vystymo aplinkoje
 
 ## Mokymosi rezultatai
 
-Baigę pamoką, jūs galėsite:
+Baigę šią pamoką, galėsite:
 - Paaiškinti azd vaidmenį šiuolaikiniuose debesų vystymo procesuose
 - Identifikuoti azd projekto struktūros komponentus
 - Apibūdinti, kaip šablonai, aplinkos ir paslaugos veikia kartu
@@ -42,7 +42,7 @@ Baigę pamoką, jūs galėsite:
 
 ## Kas yra Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) yra komandų eilutės įrankis, sukurtas pagreitinti perėjimą nuo vietinio vystymo iki diegimo Azure platformoje. Jis supaprastina debesų aplikacijų kūrimo, diegimo ir valdymo procesą.
+Azure Developer CLI (azd) yra komandų eilutės įrankis, sukurtas pagreitinti jūsų kelią nuo vietinio vystymo iki Azure diegimo. Jis supaprastina debesų aplikacijų kūrimo, diegimo ir valdymo procesą Azure platformoje.
 
 ## Pagrindinės sąvokos
 
@@ -166,7 +166,7 @@ Aplinkai specifinė konfigūracija:
 }
 ```
 
-## 🎪 Dažniausios darbo eigos
+## 🎪 Dažnos darbo eigos
 
 ### Naujo projekto pradžia
 ```bash
@@ -203,7 +203,7 @@ Komanda `azd down --force --purge` yra galingas būdas visiškai pašalinti jūs
 --force
 ```
 - Praleidžia patvirtinimo užklausas.
-- Naudinga automatizavimui ar scenarijams, kur rankinis įvedimas nėra įmanomas.
+- Naudinga automatizavimui ar scenarijams, kur rankinis įsikišimas nėra įmanomas.
 - Užtikrina, kad pašalinimas vyktų be pertraukų, net jei CLI aptinka neatitikimus.
 
 ```
@@ -213,12 +213,12 @@ Ištrina **visą susijusią metainformaciją**, įskaitant:
 Aplinkos būseną
 Vietinį `.azure` aplanką
 Kešuotą diegimo informaciją
-Neleidžia azd „prisiminti“ ankstesnių diegimų, kurie gali sukelti problemų, tokių kaip netinkamos resursų grupės ar pasenę registrų nuorodos.
+Neleidžia azd "prisiminti" ankstesnių diegimų, kurie gali sukelti problemų, tokių kaip netinkamos resursų grupės ar pasenę registrų nuorodos.
 
 ### Kodėl naudoti abu?
 Kai susiduriate su problemomis naudojant `azd up` dėl likusios būsenos ar dalinių diegimų, šis derinys užtikrina **švarią pradžią**.
 
-Tai ypač naudinga po rankinio resursų pašalinimo Azure portale arba keičiant šablonus, aplinkas ar resursų grupių pavadinimų konvencijas.
+Tai ypač naudinga po rankinio resursų pašalinimo Azure portale arba keičiant šablonus, aplinkas ar resursų grupių pavadinimus.
 
 ### Kelių aplinkų valdymas
 ```bash
@@ -234,9 +234,226 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Navigacijos komandos
+## 🔐 Autentifikacija ir kredencialai
 
-### Paieška
+Autentifikacijos supratimas yra būtinas sėkmingiems azd diegimams. Azure naudoja kelis autentifikacijos metodus, o azd pasitelkia tą pačią kredencialų grandinę, kurią naudoja kiti Azure įrankiai.
+
+### Azure CLI autentifikacija (`az login`)
+
+Prieš naudojant azd, reikia autentifikuotis su Azure. Dažniausias metodas yra naudojant Azure CLI:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Autentifikacijos eiga
+1. **Interaktyvus prisijungimas**: Atidaro jūsų numatytą naršyklę autentifikacijai
+2. **Įrenginio kodo eiga**: Aplinkoms be naršyklės prieigos
+3. **Paslaugos principas**: Automatizavimui ir CI/CD scenarijams
+4. **Valdoma tapatybė**: Azure talpinamoms aplikacijoms
+
+### DefaultAzureCredential grandinė
+
+`DefaultAzureCredential` yra kredencialų tipas, kuris suteikia supaprastintą autentifikacijos patirtį automatiškai bandant kelis kredencialų šaltinius tam tikra tvarka:
+
+#### Kredencialų grandinės tvarka
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Aplinkos kintamieji
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Darbo krūvio tapatybė (Kubernetes/GitHub Actions)
+Naudojama automatiškai:
+- Azure Kubernetes Service (AKS) su darbo krūvio tapatybe
+- GitHub Actions su OIDC federacija
+- Kiti federuotos tapatybės scenarijai
+
+#### 3. Valdoma tapatybė
+Azure resursams, tokiems kaip:
+- Virtualios mašinos
+- App Service
+- Azure Functions
+- Konteinerių instancijos
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Vystymo įrankių integracija
+- **Visual Studio**: Automatiškai naudoja prisijungusią paskyrą
+- **VS Code**: Naudoja Azure Account plėtinio kredencialus
+- **Azure CLI**: Naudoja `az login` kredencialus (dažniausia vietinio vystymo atveju)
+
+### AZD autentifikacijos nustatymas
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Autentifikacijos geriausios praktikos
+
+#### Vietiniam vystymui
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### CI/CD vamzdynams
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### Gamybos aplinkoms
+- Naudokite **valdoma tapatybė**, kai veikiate Azure resursuose
+- Naudokite **paslaugos principą** automatizavimo scenarijams
+- Venkite saugoti kredencialus kode ar konfigūracijos failuose
+- Naudokite **Azure Key Vault** jautriai konfigūracijai
+
+### Dažnos autentifikacijos problemos ir sprendimai
+
+#### Problema: "Nerasta prenumerata"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Problema: "Nepakankamos teisės"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Problema: "Tokenas pasibaigęs"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Autentifikacija skirtinguose scenarijuose
+
+#### Vietinis vystymas
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Komandinis vystymas
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Daugiašalės aplinkos
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Saugumo aspektai
+
+1. **Kredencialų saugojimas**: Niekada nesaugokite kredencialų šaltinio kode
+2. **Teisių apribojimas**: Naudokite mažiausio privilegijų principą paslaugos principams
+3. **Tokenų rotacija**: Reguliariai keiskite paslaugos principų slaptažodžius
+4. **Audito pėdsakas**: Stebėkite autentifikacijos ir diegimo veiklas
+5. **Tinklo saugumas**: Naudokite privačius galinius taškus, kai įmanoma
+
+### Autentifikacijos trikčių šalinimas
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## Supratimas apie `azd down --force --purge`
+
+### Atradimas
 ```bash
 azd template list              # Browse templates
 azd template show <template>   # Template details
@@ -275,10 +492,10 @@ azd init --template template1
 - Pritaikykite pagal savo poreikius
 - Kurkite pakartotinai naudojamus šablonus savo organizacijai
 
-### 3. Aplinkų izoliacija
+### 3. Aplinkos izoliacija
 - Naudokite atskiras aplinkas vystymui/staging/gamybai
 - Niekada nediegkite tiesiai į gamybą iš vietinio kompiuterio
-- Naudokite CI/CD procesus gamybos diegimams
+- Naudokite CI/CD vamzdynus gamybos diegimams
 
 ### 4. Konfigūracijos valdymas
 - Naudokite aplinkos kintamuosius jautriems duomenims
@@ -288,8 +505,8 @@ azd init --template template1
 ## Mokymosi progresija
 
 ### Pradedantysis (1-2 savaitės)
-1. Įdiekite azd ir autentifikuokite
-2. Diekite paprastą šabloną
+1. Įdiekite azd ir autentifikuokitės
+2. Diegkite paprastą šabloną
 3. Supraskite projekto struktūrą
 4. Išmokite pagrindines komandas (up, down, deploy)
 
@@ -297,18 +514,18 @@ azd init --template template1
 1. Pritaikykite šablonus
 2. Valdykite kelias aplinkas
 3. Supraskite infrastruktūros kodą
-4. Nustatykite CI/CD procesus
+4. Nustatykite CI/CD vamzdynus
 
 ### Pažengęs (5+ savaitės)
-1. Kurkite individualius šablonus
-2. Sudėtingi infrastruktūros modeliai
+1. Kurkite savo šablonus
+2. Išplėstiniai infrastruktūros modeliai
 3. Diegimai keliuose regionuose
 4. Konfigūracijos sprendimai įmonės lygmeniu
 
 ## Kiti žingsniai
 
 **📖 Tęskite 1 skyriaus mokymąsi:**
-- [Diegimas ir nustatymas](installation.md) - Įdiekite ir konfigūruokite azd
+- [Diegimas ir nustatymas](installation.md) - Įdiekite ir sukonfigūruokite azd
 - [Jūsų pirmasis projektas](first-project.md) - Praktinis vadovas
 - [Konfigūracijos vadovas](configuration.md) - Išplėstinės konfigūracijos parinktys
 
@@ -332,5 +549,3 @@ azd init --template template1
 
 ---
 
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.

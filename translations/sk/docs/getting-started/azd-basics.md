@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-18T10:02:42+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:44:05+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sk"
 }
@@ -180,7 +180,7 @@ azd init
 azd init .
 ```
 
-### Vývojový cyklus
+### Cyklus vývoja
 ```bash
 # Set up development environment
 azd auth login
@@ -197,7 +197,7 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## Pochopenie `azd down --force --purge`
+## Porozumenie `azd down --force --purge`
 Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť vaše prostredie azd a všetky súvisiace zdroje. Tu je rozpis, čo jednotlivé flagy robia:
 ```
 --force
@@ -211,11 +211,11 @@ Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť 
 ```
 Odstráni **všetky súvisiace metadáta**, vrátane:
 Stav prostredia
-Lokálny `.azure` priečinok
+Lokálny priečinok `.azure`
 Cache informácií o nasadení
-Zabraňuje azd "pamätať si" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nesprávne resource groups alebo zastarané registry.
+Zabraňuje azd "pamätať si" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nesúlad resource groups alebo zastarané registry.
 
-### Prečo použiť oboje?
+### Prečo používať oboje?
 Keď narazíte na problémy s `azd up` kvôli pretrvávajúcemu stavu alebo čiastočným nasadeniam, táto kombinácia zabezpečí **čistý štart**.
 
 Je obzvlášť užitočná po manuálnom odstránení zdrojov v Azure portáli alebo pri zmene šablón, prostredí alebo konvencií pomenovania resource groups.
@@ -234,7 +234,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Navigačné príkazy
+## 🔐 Autentifikácia a poverenia
+
+Porozumenie autentifikácii je kľúčové pre úspešné nasadenia azd. Azure používa viacero metód autentifikácie a azd využíva rovnaký reťazec poverení ako ostatné nástroje Azure.
+
+### Autentifikácia Azure CLI (`az login`)
+
+Pred použitím azd sa musíte autentifikovať s Azure. Najbežnejšou metódou je použitie Azure CLI:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Priebeh autentifikácie
+1. **Interaktívne prihlásenie**: Otvorí váš predvolený prehliadač na autentifikáciu
+2. **Device Code Flow**: Pre prostredia bez prístupu k prehliadaču
+3. **Service Principal**: Pre automatizáciu a scenáre CI/CD
+4. **Managed Identity**: Pre aplikácie hostované na Azure
+
+### DefaultAzureCredential Chain
+
+`DefaultAzureCredential` je typ poverenia, ktorý poskytuje zjednodušený zážitok z autentifikácie automatickým skúšaním viacerých zdrojov poverení v špecifickom poradí:
+
+#### Poradie reťazca poverení
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Environmentálne premenné
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+Používa sa automaticky v:
+- Azure Kubernetes Service (AKS) s Workload Identity
+- GitHub Actions s OIDC federáciou
+- Iné scenáre federovanej identity
+
+#### 3. Managed Identity
+Pre Azure zdroje ako:
+- Virtuálne stroje
+- App Service
+- Azure Functions
+- Container Instances
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Integrácia vývojárskych nástrojov
+- **Visual Studio**: Automaticky používa prihlásený účet
+- **VS Code**: Používa poverenia rozšírenia Azure Account
+- **Azure CLI**: Používa poverenia `az login` (najbežnejšie pre lokálny vývoj)
+
+### Nastavenie autentifikácie AZD
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Najlepšie praktiky autentifikácie
+
+#### Pre lokálny vývoj
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### Pre CI/CD pipelines
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### Pre produkčné prostredia
+- Používajte **Managed Identity** pri spustení na Azure zdrojoch
+- Používajte **Service Principal** pre automatizačné scenáre
+- Vyhnite sa ukladaniu poverení do kódu alebo konfiguračných súborov
+- Používajte **Azure Key Vault** pre citlivé konfigurácie
+
+### Bežné problémy s autentifikáciou a riešenia
+
+#### Problém: "Nenašla sa žiadna subscription"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Problém: "Nedostatočné oprávnenia"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Problém: "Token vypršal"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Autentifikácia v rôznych scenároch
+
+#### Lokálny vývoj
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Tímový vývoj
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Scenáre s viacerými tenantmi
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Bezpečnostné úvahy
+
+1. **Ukladanie poverení**: Nikdy neukladajte poverenia do zdrojového kódu
+2. **Obmedzenie rozsahu**: Používajte princíp najmenších oprávnení pre service principals
+3. **Rotácia tokenov**: Pravidelne rotujte tajomstvá service principal
+4. **Auditná stopa**: Monitorujte autentifikačné a nasadzovacie aktivity
+5. **Sieťová bezpečnosť**: Používajte privátne endpointy, keď je to možné
+
+### Riešenie problémov s autentifikáciou
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## Porozumenie `azd down --force --purge`
 
 ### Objavovanie
 ```bash
@@ -257,7 +474,7 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Najlepšie postupy
+## Najlepšie praktiky
 
 ### 1. Používajte zmysluplné názvy
 ```bash
@@ -272,17 +489,17 @@ azd init --template template1
 
 ### 2. Využívajte šablóny
 - Začnite s existujúcimi šablónami
-- Prispôsobte ich svojim potrebám
+- Prispôsobte ich podľa svojich potrieb
 - Vytvorte opakovane použiteľné šablóny pre vašu organizáciu
 
 ### 3. Izolácia prostredí
 - Používajte samostatné prostredia pre vývoj/staging/produkciu
-- Nikdy nenasadzujte priamo do produkcie z lokálneho počítača
+- Nikdy nenasadzujte priamo do produkcie z lokálneho stroja
 - Používajte CI/CD pipelines pre produkčné nasadenia
 
 ### 4. Správa konfigurácie
 - Používajte environmentálne premenné pre citlivé údaje
-- Udržujte konfiguráciu vo verziovacej kontrole
+- Udržujte konfiguráciu vo verziovacom systéme
 - Dokumentujte nastavenia špecifické pre prostredie
 
 ## Postup učenia
@@ -301,7 +518,7 @@ azd init --template template1
 
 ### Pokročilý (5+ týždňov)
 1. Vytvorte vlastné šablóny
-2. Pokročilé infraštruktúrne vzory
+2. Pokročilé vzory infraštruktúry
 3. Nasadenia vo viacerých regiónoch
 4. Konfigurácie na úrovni podniku
 
@@ -310,12 +527,12 @@ azd init --template template1
 **📖 Pokračujte v učení kapitoly 1:**
 - [Inštalácia & Nastavenie](installation.md) - Nainštalujte a nakonfigurujte azd
 - [Váš prvý projekt](first-project.md) - Dokončite praktický tutoriál
-- [Konfiguračný sprievodca](configuration.md) - Pokročilé možnosti konfigurácie
+- [Sprievodca konfiguráciou](configuration.md) - Pokročilé možnosti konfigurácie
 
 **🎯 Pripravení na ďalšiu kapitolu?**
 - [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md) - Začnite budovať AI aplikácie
 
-## Ďalšie zdroje
+## Dodatočné zdroje
 
 - [Prehľad Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galéria šablón](https://azure.github.io/awesome-azd/)
@@ -332,5 +549,3 @@ azd init --template template1
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

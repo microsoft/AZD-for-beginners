@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "88986b920b82d096f82d6583f5e0a6e6",
-  "translation_date": "2025-09-18T06:52:29+00:00",
+  "original_hash": "4dc26ed8004b58a51875efd07203340f",
+  "translation_date": "2025-09-26T18:39:37+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "nl"
 }
@@ -28,7 +28,7 @@ Aan het einde van deze les zul je:
 - Begrijpen wat Azure Developer CLI is en het primaire doel ervan
 - De kernconcepten van templates, omgevingen en services leren
 - Belangrijke functies verkennen, waaronder template-gedreven ontwikkeling en Infrastructure as Code
-- De azd projectstructuur en workflow begrijpen
+- Het azd-projectstructuur en workflow begrijpen
 - Klaar zijn om azd te installeren en configureren voor je ontwikkelomgeving
 
 ## Leerresultaten
@@ -213,12 +213,12 @@ Verwijdert **alle bijbehorende metadata**, inclusief:
 Omgevingsstatus
 Lokale `.azure` map
 Gecachte implementatie-informatie
-Voorkomt dat azd "onthoudt" eerdere implementaties, wat problemen kan veroorzaken zoals niet-overeenkomende resourcegroepen of verouderde registerverwijzingen.
+Voorkomt dat azd "vorige implementaties onthoudt", wat problemen kan veroorzaken zoals niet-overeenkomende resourcegroepen of verouderde registerverwijzingen.
 
 ### Waarom beide gebruiken?
 Wanneer je vastloopt met `azd up` door achterblijvende status of gedeeltelijke implementaties, zorgt deze combinatie voor een **schone lei**.
 
-Het is vooral nuttig na handmatige resourceverwijderingen in de Azure portal of bij het wisselen van templates, omgevingen of naamgevingsconventies voor resourcegroepen.
+Het is vooral nuttig na handmatige resourceverwijderingen in de Azure portal of bij het wisselen van templates, omgevingen of resourcegroepnaamconventies.
 
 ### Meerdere Omgevingen Beheren
 ```bash
@@ -234,7 +234,224 @@ azd env select dev
 azd env list
 ```
 
-## 🧭 Navigatiecommando's
+## 🔐 Authenticatie en Referenties
+
+Het begrijpen van authenticatie is cruciaal voor succesvolle azd-implementaties. Azure gebruikt meerdere authenticatiemethoden, en azd maakt gebruik van dezelfde referentieketen die door andere Azure-tools wordt gebruikt.
+
+### Azure CLI Authenticatie (`az login`)
+
+Voordat je azd gebruikt, moet je je authenticeren bij Azure. De meest gebruikelijke methode is via Azure CLI:
+
+```bash
+# Interactive login (opens browser)
+az login
+
+# Login with specific tenant
+az login --tenant <tenant-id>
+
+# Login with service principal
+az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+
+# Check current login status
+az account show
+
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription <subscription-id>
+```
+
+### Authenticatiestroom
+1. **Interactieve Login**: Opent je standaardbrowser voor authenticatie
+2. **Apparaatcode Stroom**: Voor omgevingen zonder browsertoegang
+3. **Service Principal**: Voor automatisering en CI/CD-scenario's
+4. **Managed Identity**: Voor Azure-gehoste applicaties
+
+### DefaultAzureCredential Ketting
+
+`DefaultAzureCredential` is een referentietype dat een vereenvoudigde authenticatie-ervaring biedt door automatisch meerdere referentiebronnen in een specifieke volgorde te proberen:
+
+#### Volgorde van Referentieketen
+```mermaid
+graph TD
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
+    F --> G[Azure CLI]
+    G --> H[Azure PowerShell]
+    H --> I[Interactive Browser]
+```
+
+#### 1. Omgevingsvariabelen
+```bash
+# Set environment variables for service principal
+export AZURE_CLIENT_ID="<app-id>"
+export AZURE_CLIENT_SECRET="<password>"
+export AZURE_TENANT_ID="<tenant-id>"
+```
+
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+Automatisch gebruikt in:
+- Azure Kubernetes Service (AKS) met Workload Identity
+- GitHub Actions met OIDC-federatie
+- Andere federatieve identiteitsscenario's
+
+#### 3. Managed Identity
+Voor Azure-resources zoals:
+- Virtuele Machines
+- App Service
+- Azure Functions
+- Container Instances
+
+```bash
+# Check if running on Azure resource with managed identity
+az account show --query "user.type" --output tsv
+# Returns: "servicePrincipal" if using managed identity
+```
+
+#### 4. Integratie met Ontwikkeltools
+- **Visual Studio**: Gebruikt automatisch het ingelogde account
+- **VS Code**: Gebruikt Azure Account extensie referenties
+- **Azure CLI**: Gebruikt `az login` referenties (meest gebruikelijk voor lokale ontwikkeling)
+
+### AZD Authenticatie Instellen
+
+```bash
+# Method 1: Use Azure CLI (Recommended for development)
+az login
+azd auth login  # Uses existing Azure CLI credentials
+
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
+
+# Method 3: Check authentication status
+azd auth login --check-status
+
+# Method 4: Logout and re-authenticate
+azd auth logout
+azd auth login
+```
+
+### Beste Praktijken voor Authenticatie
+
+#### Voor Lokale Ontwikkeling
+```bash
+# 1. Login with Azure CLI
+az login
+
+# 2. Verify correct subscription
+az account show
+az account set --subscription "Your Subscription Name"
+
+# 3. Use azd with existing credentials
+azd auth login
+```
+
+#### Voor CI/CD Pipelines
+```yaml
+# GitHub Actions example
+- name: Azure Login
+  uses: azure/login@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+- name: Deploy with azd
+  run: |
+    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+    azd up --no-prompt
+```
+
+#### Voor Productieomgevingen
+- Gebruik **Managed Identity** bij het draaien op Azure-resources
+- Gebruik **Service Principal** voor automatiseringsscenario's
+- Vermijd het opslaan van referenties in code of configuratiebestanden
+- Gebruik **Azure Key Vault** voor gevoelige configuratie
+
+### Veelvoorkomende Authenticatieproblemen en Oplossingen
+
+#### Probleem: "Geen abonnement gevonden"
+```bash
+# Solution: Set default subscription
+az account list --output table
+az account set --subscription "<subscription-id>"
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+```
+
+#### Probleem: "Onvoldoende rechten"
+```bash
+# Solution: Check and assign required roles
+az role assignment list --assignee $(az account show --query user.name --output tsv)
+
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
+```
+
+#### Probleem: "Token verlopen"
+```bash
+# Solution: Re-authenticate
+az logout
+az login
+azd auth logout
+azd auth login
+```
+
+### Authenticatie in Verschillende Scenario's
+
+#### Lokale Ontwikkeling
+```bash
+# Personal development account
+az login
+azd auth login
+```
+
+#### Teamontwikkeling
+```bash
+# Use specific tenant for organization
+az login --tenant contoso.onmicrosoft.com
+azd auth login
+```
+
+#### Multi-tenant Scenario's
+```bash
+# Switch between tenants
+az login --tenant tenant1.onmicrosoft.com
+# Deploy to tenant 1
+azd up
+
+az login --tenant tenant2.onmicrosoft.com  
+# Deploy to tenant 2
+azd up
+```
+
+### Veiligheidsoverwegingen
+
+1. **Referentieopslag**: Sla nooit referenties op in broncode
+2. **Scope Beperking**: Gebruik het principe van minimale rechten voor service principals
+3. **Tokenrotatie**: Draai regelmatig service principal geheimen
+4. **Audit Trail**: Monitor authenticatie- en implementatieactiviteiten
+5. **Netwerkbeveiliging**: Gebruik waar mogelijk private endpoints
+
+### Problemen met Authenticatie Oplossen
+
+```bash
+# Debug authentication issues
+azd auth login --check-status
+az account show
+az account get-access-token
+
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Azure AD user details
+az group list                  # Test resource access
+```
+
+## Begrijpen van `azd down --force --purge`
 
 ### Ontdekking
 ```bash
@@ -257,7 +474,7 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Best Practices
+## Beste Praktijken
 
 ### 1. Gebruik Betekenisvolle Namen
 ```bash
@@ -278,7 +495,7 @@ azd init --template template1
 ### 3. Isolatie van Omgevingen
 - Gebruik aparte omgevingen voor ontwikkeling/staging/productie
 - Implementeer nooit direct naar productie vanaf je lokale machine
-- Gebruik CI/CD-pijplijnen voor productie-implementaties
+- Gebruik CI/CD-pipelines voor productie-implementaties
 
 ### 4. Configuratiebeheer
 - Gebruik omgevingsvariabelen voor gevoelige gegevens
@@ -293,11 +510,11 @@ azd init --template template1
 3. Begrijp projectstructuur
 4. Leer basiscommando's (up, down, deploy)
 
-### Intermediate (Week 3-4)
+### Gemiddeld (Week 3-4)
 1. Pas templates aan
 2. Beheer meerdere omgevingen
 3. Begrijp infrastructuurcode
-4. Stel CI/CD-pijplijnen in
+4. Stel CI/CD-pipelines in
 
 ### Gevorderd (Week 5+)
 1. Maak aangepaste templates
@@ -307,9 +524,9 @@ azd init --template template1
 
 ## Volgende Stappen
 
-**📖 Ga verder met Hoofdstuk 1:**
+**📖 Ga verder met Hoofdstuk 1 Leren:**
 - [Installatie & Configuratie](installation.md) - Installeer en configureer azd
-- [Je Eerste Project](first-project.md) - Voltooi een praktische tutorial
+- [Je Eerste Project](first-project.md) - Voltooi hands-on tutorial
 - [Configuratiegids](configuration.md) - Geavanceerde configuratieopties
 
 **🎯 Klaar voor het Volgende Hoofdstuk?**
@@ -332,5 +549,3 @@ azd init --template template1
 
 ---
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
