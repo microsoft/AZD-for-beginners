@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3df05e83c2307e92452bd7c3307ae849",
-  "translation_date": "2025-09-25T01:02:59+00:00",
+  "original_hash": "56313679644ccd28e9d15bb7089ae5ca",
+  "translation_date": "2025-10-11T15:15:26+00:00",
   "source_file": "README.md",
   "language_code": "ro"
 }
 -->
-# AZD Pentru Începători: O Călătorie Structurată de Învățare
+# AZD pentru Începători: O Călătorie Structurată de Învățare
 
 ![AZD-pentru-începători](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.ro.png) 
 
@@ -31,30 +31,30 @@ Urmați acești pași pentru a începe călătoria de învățare AZD:
 
 #### Traduceri Automate (Întotdeauna Actualizate)
 
-[French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](./README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](./README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
 ## Prezentare Generală a Cursului
 
-Stăpâniți Azure Developer CLI (azd) prin capitole structurate concepute pentru învățare progresivă. **Accent special pe implementarea aplicațiilor AI cu integrarea Azure AI Foundry.**
+Stăpâniți Azure Developer CLI (azd) prin capitole structurate concepute pentru o învățare progresivă. **Accent special pe implementarea aplicațiilor AI cu integrarea Azure AI Foundry.**
 
 ### De ce acest curs este esențial pentru dezvoltatorii moderni
 
-Bazat pe informațiile din comunitatea Discord Azure AI Foundry, **45% dintre dezvoltatori doresc să utilizeze AZD pentru sarcini AI**, dar întâmpină dificultăți cu:
-- Arhitecturi complexe multi-servicii pentru AI
+Pe baza perspectivelor comunității Discord Azure AI Foundry, **45% dintre dezvoltatori doresc să utilizeze AZD pentru sarcini AI**, dar întâmpină dificultăți cu:
+- Arhitecturi complexe AI multi-servicii
 - Cele mai bune practici pentru implementarea AI în producție  
 - Integrarea și configurarea serviciilor Azure AI
 - Optimizarea costurilor pentru sarcini AI
 - Rezolvarea problemelor specifice implementării AI
 
-### Obiectivele Învățării
+### Obiective de Învățare
 
 Prin completarea acestui curs structurat, veți:
 - **Stăpâni Fundamentele AZD**: Concepte de bază, instalare și configurare
 - **Implementa Aplicații AI**: Utilizați AZD cu serviciile Azure AI Foundry
 - **Aplica Infrastructura ca Cod**: Gestionați resursele Azure cu șabloane Bicep
 - **Depana Implementările**: Rezolvați problemele comune și depanați erorile
-- **Optimiza pentru Producție**: Securitate, scalare, monitorizare și gestionarea costurilor
-- **Construi Soluții Multi-Agent**: Implementați arhitecturi complexe AI
+- **Optimizați pentru Producție**: Securitate, scalare, monitorizare și gestionarea costurilor
+- **Construiți Soluții Multi-Agent**: Implementați arhitecturi AI complexe
 
 ## 📚 Capitole de Învățare
 
@@ -91,7 +91,7 @@ azd up
 
 ---
 
-### 🤖 Capitolul 2: Dezvoltare Centrată pe AI (Recomandat pentru Dezvoltatori AI)
+### 🤖 Capitolul 2: Dezvoltare AI-First (Recomandat pentru Dezvoltatori AI)
 **Prerechizite**: Capitolul 1 completat  
 **Durată**: 1-2 ore  
 **Complexitate**: ⭐⭐
@@ -130,7 +130,7 @@ azd init --template agent-openai-python-prompty
 
 #### Ce Veți Învăța
 - Configurarea și gestionarea mediului
-- Cele mai bune practici pentru autentificare și securitate
+- Cele mai bune practici de autentificare și securitate
 - Organizarea și denumirea resurselor
 
 #### Resurse de Învățare
@@ -158,7 +158,7 @@ azd init --template agent-openai-python-prompty
 - Strategii de aprovizionare a resurselor
 
 #### Resurse de Învățare
-- **📖 Implementare**: [Ghid de Implementare](docs/deployment/deployment-guide.md) - Fluxuri complete
+- **📖 Implementare**: [Ghid de Implementare](docs/deployment/deployment-guide.md) - Fluxuri de lucru complete
 - **🏗️ Aprovizionare**: [Aprovizionarea Resurselor](docs/deployment/provisioning.md) - Gestionarea resurselor Azure
 - **📝 Exemple**: [Exemplu Aplicație Container](../../examples/container-app) - Implementări containerizate
 
@@ -182,7 +182,7 @@ azd init --template agent-openai-python-prompty
 - Implementări AI pregătite pentru producție
 
 #### Resurse de Învățare
-- **🤖 Proiect Recomandat**: [Soluție Multi-Agent pentru Retail](examples/retail-scenario.md) - Implementare completă
+- **🤖 Proiect Recomandat**: [Soluție Multi-Agent Retail](examples/retail-scenario.md) - Implementare completă
 - **🛠️ Șabloane ARM**: [Pachet Șablon ARM](../../examples/retail-multiagent-arm-template) - Implementare cu un singur click
 - **📖 Arhitectură**: Modele de coordonare multi-agent
 
@@ -248,27 +248,27 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ---
 
-### 🏢 Capitolul 8: Modele pentru Producție & Enterprise
+### 🏢 Capitolul 8: Modele de Producție & Enterprise
 **Prerechizite**: Capitolele 1-4 completate  
 **Durată**: 2-3 ore  
 **Complexitate**: ⭐⭐⭐⭐
 
-#### Ce Veți Învăța
+#### Ce Vei Învăța
 - Strategii de implementare în producție
-- Modele de securitate pentru enterprise
+- Modele de securitate pentru întreprinderi
 - Monitorizare și optimizare a costurilor
 
 #### Resurse de Învățare
-- **🏭 Producție**: [Cele Mai Bune Practici AI pentru Producție](docs/ai-foundry/production-ai-practices.md) - Modele pentru enterprise
+- **🏭 Producție**: [Practici AI pentru Producție](docs/ai-foundry/production-ai-practices.md) - Modele pentru întreprinderi
 - **📝 Exemple**: [Exemplu Microservicii](../../examples/microservices) - Arhitecturi complexe
 - **📊 Monitorizare**: Integrare cu Application Insights
 
 #### Exerciții Practice
-- Implementați modele de securitate pentru întreprinderi
-- Configurați monitorizarea completă
-- Lansați în producție cu guvernanță adecvată
+- Implementarea modelelor de securitate pentru întreprinderi
+- Configurarea monitorizării complete
+- Implementarea în producție cu guvernanță adecvată
 
-**💡 Rezultatul Capitolului**: Lansați aplicații pregătite pentru întreprinderi, cu capacități complete de producție
+**💡 Rezultatul Capitolului**: Implementarea aplicațiilor pregătite pentru întreprinderi cu capacități complete de producție
 
 ---
 
@@ -277,34 +277,34 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### Materiale Interactive pentru Workshop
 **Învățare practică cu instrumente bazate pe browser și exerciții ghidate**
 
-Materialele noastre de workshop oferă o experiență de învățare structurată și interactivă, care completează curriculum-ul bazat pe capitole de mai sus. Workshop-ul este conceput atât pentru învățare individuală, cât și pentru sesiuni conduse de instructori.
+Materialele noastre de workshop oferă o experiență de învățare structurată și interactivă, complementară curriculumului bazat pe capitole de mai sus. Workshop-ul este conceput atât pentru învățare individuală, cât și pentru sesiuni conduse de instructor.
 
 #### 🛠️ Caracteristici Workshop
-- **Interfață bazată pe browser**: Workshop complet alimentat de MkDocs, cu funcții de căutare, copiere și teme
-- **Integrare GitHub Codespaces**: Configurare a mediului de dezvoltare cu un singur clic
-- **Cale de învățare structurată**: Exerciții ghidate în 7 pași (3,5 ore în total)
-- **Descoperire → Lansare → Personalizare**: Metodologie progresivă
-- **Mediu interactiv DevContainer**: Instrumente și dependențe preconfigurate
+- **Interfață bazată pe browser**: Workshop complet alimentat de MkDocs cu funcții de căutare, copiere și teme
+- **Integrare GitHub Codespaces**: Configurare rapidă a mediului de dezvoltare
+- **Cale de Învățare Structurată**: Exerciții ghidate în 7 pași (3,5 ore în total)
+- **Descoperire → Implementare → Personalizare**: Metodologie progresivă
+- **Mediu Interactiv DevContainer**: Instrumente și dependențe preconfigurate
 
 #### 📚 Structura Workshop-ului
-Workshop-ul urmează o metodologie **Descoperire → Lansare → Personalizare**:
+Workshop-ul urmează o metodologie **Descoperire → Implementare → Personalizare**:
 
 1. **Faza de Descoperire** (45 min)
-   - Explorați șabloanele și serviciile Azure AI Foundry
-   - Înțelegeți modelele de arhitectură multi-agent
-   - Revizuiți cerințele și condițiile prealabile pentru lansare
+   - Explorarea șabloanelor și serviciilor Azure AI Foundry
+   - Înțelegerea modelelor de arhitectură multi-agent
+   - Revizuirea cerințelor și condițiilor prealabile pentru implementare
 
-2. **Faza de Lansare** (2 ore)
-   - Lansare practică a aplicațiilor AI cu AZD
-   - Configurați serviciile și punctele finale Azure AI
-   - Implementați modele de securitate și autentificare
+2. **Faza de Implementare** (2 ore)
+   - Implementare practică a aplicațiilor AI cu AZD
+   - Configurarea serviciilor și punctelor finale Azure AI
+   - Implementarea modelelor de securitate și autentificare
 
 3. **Faza de Personalizare** (45 min)
-   - Modificați aplicațiile pentru cazuri de utilizare specifice
-   - Optimizați pentru lansare în producție
-   - Implementați monitorizarea și gestionarea costurilor
+   - Modificarea aplicațiilor pentru cazuri de utilizare specifice
+   - Optimizarea pentru implementarea în producție
+   - Implementarea monitorizării și gestionării costurilor
 
-#### 🚀 Începeți Workshop-ul
+#### 🚀 Începe Workshop-ul
 ```bash
 # Option 1: GitHub Codespaces (Recommended)
 # Click "Code" → "Create codespace on main" in the repository
@@ -315,111 +315,111 @@ cd azd-for-beginners/workshop
 # Follow the setup instructions in workshop/README.md
 ```
 
-#### 🎯 Rezultatele Învățării Workshop-ului
+#### 🎯 Rezultatele Învățării din Workshop
 Prin completarea workshop-ului, participanții vor:
-- **Lansa aplicații AI în producție**: Utilizați AZD cu serviciile Azure AI Foundry
-- **Stăpâni arhitecturi multi-agent**: Implementați soluții AI coordonate
-- **Implementați cele mai bune practici de securitate**: Configurați autentificarea și controlul accesului
-- **Optimizați pentru scalare**: Proiectați lansări performante și rentabile
-- **Depanați lansările**: Rezolvați independent problemele comune
+- **Implementa Aplicații AI în Producție**: Utiliza AZD cu serviciile Azure AI Foundry
+- **Stăpâni Arhitecturi Multi-Agent**: Implementa soluții coordonate de agenți AI
+- **Aplica Practici de Securitate**: Configura autentificarea și controlul accesului
+- **Optimiza pentru Scalare**: Proiecta implementări performante și rentabile
+- **Depana Implementări**: Rezolva independent problemele comune
 
 #### 📖 Resurse Workshop
 - **🎥 Ghid Interactiv**: [Materiale Workshop](workshop/README.md) - Mediu de învățare bazat pe browser
 - **📋 Instrucțiuni Pas cu Pas**: [Exerciții Ghidate](../../workshop/docs/instructions) - Instrucțiuni detaliate
-- **🛠️ Laborator Workshop AI**: [Laborator Workshop AI](docs/ai-foundry/ai-workshop-lab.md) - Exerciții axate pe AI
-- **💡 Ghid de Start Rapid**: [Ghid Configurare Workshop](workshop/README.md#quick-start) - Configurarea mediului
+- **🛠️ Laborator AI Workshop**: [Laborator AI Workshop](docs/ai-foundry/ai-workshop-lab.md) - Exerciții axate pe AI
+- **💡 Ghid de Configurare Rapidă**: [Ghid Configurare Workshop](workshop/README.md#quick-start) - Configurarea mediului
 
 **Perfect pentru**: Training corporativ, cursuri universitare, învățare individuală și bootcamp-uri pentru dezvoltatori.
 
 ---
 
-## 📖 Ce este Azure Developer CLI?
+## 📖 Ce Este Azure Developer CLI?
 
-Azure Developer CLI (azd) este o interfață de linie de comandă centrată pe dezvoltatori, care accelerează procesul de construire și lansare a aplicațiilor pe Azure. Oferă:
+Azure Developer CLI (azd) este o interfață de linie de comandă centrată pe dezvoltatori care accelerează procesul de construire și implementare a aplicațiilor pe Azure. Oferă:
 
-- **Lansări bazate pe șabloane** - Utilizați șabloane predefinite pentru modele comune de aplicații
-- **Infrastructură ca cod** - Gestionați resursele Azure folosind Bicep sau Terraform  
-- **Fluxuri de lucru integrate** - Proviționați, lansați și monitorizați aplicațiile fără probleme
+- **Implementări bazate pe șabloane** - Utilizați șabloane predefinite pentru modele comune de aplicații
+- **Infrastructură ca Cod** - Gestionați resursele Azure folosind Bicep sau Terraform  
+- **Fluxuri de lucru integrate** - Proviționați, implementați și monitorizați aplicațiile fără probleme
 - **Prietenos pentru dezvoltatori** - Optimizat pentru productivitatea și experiența dezvoltatorilor
 
-### **AZD + Azure AI Foundry: Perfect pentru Lansări AI**
+### **AZD + Azure AI Foundry: Perfect pentru Implementări AI**
 
-**De ce AZD pentru soluții AI?** AZD abordează principalele provocări ale dezvoltatorilor AI:
+**De ce AZD pentru Soluții AI?** AZD abordează principalele provocări ale dezvoltatorilor AI:
 
-- **Șabloane pregătite pentru AI** - Șabloane preconfigurate pentru Azure OpenAI, Cognitive Services și sarcini ML
-- **Lansări AI sigure** - Modele de securitate integrate pentru servicii AI, chei API și puncte finale de model  
-- **Modele AI pentru producție** - Cele mai bune practici pentru lansări de aplicații AI scalabile și rentabile
-- **Fluxuri de lucru AI de la cap la coadă** - De la dezvoltarea modelului la lansarea în producție cu monitorizare adecvată
-- **Optimizare costuri** - Strategii inteligente de alocare și scalare a resurselor pentru sarcini AI
-- **Integrare Azure AI Foundry** - Conexiune fără probleme la catalogul de modele AI Foundry și punctele finale
+- **Șabloane Pregătite pentru AI** - Șabloane preconfigurate pentru Azure OpenAI, Cognitive Services și sarcini ML
+- **Implementări AI Sigure** - Modele de securitate integrate pentru servicii AI, chei API și puncte finale de model  
+- **Modele AI pentru Producție** - Practici optime pentru implementări scalabile și rentabile ale aplicațiilor AI
+- **Fluxuri de Lucru End-to-End AI** - De la dezvoltarea modelului la implementarea în producție cu monitorizare adecvată
+- **Optimizare a Costurilor** - Strategii inteligente de alocare și scalare a resurselor pentru sarcini AI
+- **Integrare Azure AI Foundry** - Conexiune fără probleme la catalogul de modele și punctele finale AI Foundry
 
 ---
 
-## 🎯 Bibliotecă de Șabloane & Exemple
+## 🎯 Bibliotecă de Șabloane și Exemple
 
 ### Recomandat: Șabloane Azure AI Foundry
-**Începeți aici dacă lansați aplicații AI!**
+**Începeți aici dacă implementați aplicații AI!**
 
 | Șablon | Capitol | Complexitate | Servicii |
-|--------|---------|--------------|----------|
-| [**Începeți cu AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
-| [**Începeți cu agenți AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Capitolul 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
-| [**Automatizare flux de lucru multi-agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Generați documente din datele dvs.**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 4 | ⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
-| [**Îmbunătățiți întâlnirile cu clienții folosind agenți**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 5 | ⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**Modernizați codul cu agenți**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 5 | ⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Construiți agentul dvs. conversațional**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 4 | ⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
-| [**Descoperiți informații din date conversaționale**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 8 | ⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
-| [**Procesare de conținut multi-modal**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 8 | ⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
+|--------|---------|-------------|----------|
+| [**Începeți cu AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 2 | ⭐⭐ | AzureOpenAI + API de Inferență Model Azure AI + Căutare Azure AI + Aplicații Container Azure + Application Insights |
+| [**Începeți cu agenți AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Capitolul 2 | ⭐⭐ | Serviciu Agent Azure AI + AzureOpenAI + Căutare Azure AI + Aplicații Container Azure + Application Insights|
+| [**Automatizare flux de lucru multi-agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 5 | ⭐⭐⭐ | AzureOpenAI + Serviciu Agent Azure AI + Kernel Semantic + Azure CosmosDB + Aplicații Container Azure|
+| [**Generați documente din datele dvs.**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 4 | ⭐⭐⭐  | AzureOpenAI + Căutare Azure AI + Servicii Azure AI + Azure CosmosDB|
+| [**Îmbunătățiți întâlnirile cu clienții folosind agenți**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 5 | ⭐⭐⭐| AzureOpenAI + Căutare Azure AI + Azure CosmosDB + Baza de Date SQL Azure |
+| [**Modernizați codul dvs. cu agenți**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 5 | ⭐⭐⭐ | AzureOpenAI + Serviciu Agent Azure + Kernel Semantic + Azure CosmosDB + Aplicații Container Azure|
+| [**Construiți agentul dvs. conversațional**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 4 | ⭐⭐⭐ | Limbaj AI + AzureOpenAI + Căutare AI + Stocare Azure + Registru Container Azure|
+| [**Descoperiți informații din date conversaționale**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 8 | ⭐⭐⭐ | AzureOpenAI + Căutare AI + Kernel Semantic + Serviciu Agent Azure + Înțelegerea Conținutului AI|
+| [**Procesare de conținut multi-modal**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capitolul 8 | ⭐⭐⭐⭐ | AzureOpenAI + Înțelegerea Conținutului Azure + Azure CosmosDB + Aplicații Container Azure|
 
 ### Recomandat: Scenarii Complete de Învățare
 **Șabloane de aplicații pregătite pentru producție, mapate pe capitole de învățare**
 
 | Șablon | Capitol de Învățare | Complexitate | Învățare Cheie |
-|--------|---------------------|--------------|----------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Capitolul 2 | ⭐ | Modele de lansare AI de bază |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Capitolul 2 | ⭐⭐ | Implementare RAG cu Azure AI Search |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Capitolul 4 | ⭐⭐ | Integrare Document Intelligence |
+|--------|---------------------|-------------|---------------|
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Capitolul 2 | ⭐ | Modele de implementare AI de bază |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Capitolul 2 | ⭐⭐ | Implementare RAG cu Căutare AI Azure |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Capitolul 4 | ⭐⭐ | Integrare Inteligență Documente |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capitolul 5 | ⭐⭐⭐ | Cadru de agenți și apelare funcții |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Capitolul 8 | ⭐⭐⭐ | Orchestrare AI pentru întreprinderi |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Capitolul 5 | ⭐⭐⭐⭐ | Arhitectură multi-agent cu agenți pentru clienți și inventar |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Capitolul 5 | ⭐⭐⭐⭐ | Arhitectură multi-agent cu agenți pentru Clienți și Inventar |
 
 ### Învățare prin Tip de Exemplu
 
 #### Aplicații Simple (Capitolele 1-2)
-- [Aplicație Web Simplă](../../examples/simple-web-app) - Modele de lansare de bază
-- [Site Static](../../examples/static-site) - Lansare de conținut static
-- [API de Bază](../../examples/basic-api) - Lansare REST API
+- [Aplicație Web Simplă](../../examples/simple-web-app) - Modele de implementare de bază
+- [Website Static](../../examples/static-site) - Implementare conținut static
+- [API de Bază](../../examples/basic-api) - Implementare REST API
 
 #### Integrare Bază de Date (Capitolele 3-4)  
-- [Aplicație Bază de Date](../../examples/database-app) - Modele de conectivitate la baze de date
-- [Procesare Date](../../examples/data-processing) - Lansare flux ETL
+- [Aplicație Bază de Date](../../examples/database-app) - Modele de conectivitate baze de date
+- [Procesare Date](../../examples/data-processing) - Implementare flux ETL
 
 #### Modele Avansate (Capitolele 4-8)
-- [Aplicații Container](../../examples/container-app) - Lansări containerizate
-- [Microservicii](../../examples/microservices) - Arhitecturi multi-servicii  
+- [Aplicații Container](../../examples/container-app) - Implementări containerizate
+- [Microservicii](../../examples/microservices) - Arhitecturi multi-serviciu  
 - [Soluții pentru Întreprinderi](../../examples/enterprise) - Modele pregătite pentru producție
 
 ### Colecții Externe de Șabloane
 - [**Șabloane AZD Azure-Samples**](https://github.com/Azure-Samples/azd-templates) - Exemple oficiale Microsoft
-- [**Galeria Awesome AZD**](https://azure.github.io/awesome-azd/) - Șabloane contribuție comunitară
+- [**Galerie Awesome AZD**](https://azure.github.io/awesome-azd/) - Șabloane contribuite de comunitate
 - [**Director Exemple**](examples/README.md) - Exemple locale de învățare cu explicații detaliate
 
 ---
 
-## 📚 Resurse de Învățare & Referințe
+## 📚 Resurse de Învățare și Referințe
 
 ### Referințe Rapide
 - [**Fișă de Comenzi**](resources/cheat-sheet.md) - Comenzi esențiale azd organizate pe capitole
 - [**Glosar**](resources/glossary.md) - Termeni Azure și azd  
-- [**FAQ**](resources/faq.md) - Întrebări comune organizate pe capitole de învățare
+- [**FAQ**](resources/faq.md) - Întrebări frecvente organizate pe capitole de învățare
 - [**Ghid de Studiu**](resources/study-guide.md) - Exerciții practice cuprinzătoare
 
 ### Workshop-uri Practice
-- [**Laborator Workshop AI**](docs/ai-foundry/ai-workshop-lab.md) - Faceți soluțiile AI compatibile cu AZD (2-3 ore)
+- [**Laborator AI Workshop**](docs/ai-foundry/ai-workshop-lab.md) - Faceți soluțiile AI implementabile cu AZD (2-3 ore)
 - [**Ghid Interactiv Workshop**](workshop/README.md) - Workshop bazat pe browser cu MkDocs și Mediu DevContainer
-- [**Cale Structurată de Învățare**](../../workshop/docs/instructions) - Exerciții ghidate în 7 pași (Descoperire → Lansare → Personalizare)
-- [**Workshop AZD pentru Începători**](workshop/README.md) - Materiale complete de workshop cu integrare GitHub Codespaces
+- [**Cale de Învățare Structurată**](../../workshop/docs/instructions) - Exerciții ghidate în 7 pași (Descoperire → Implementare → Personalizare)
+- [**Workshop AZD pentru Începători**](workshop/README.md) - Materiale complete pentru workshop cu integrare GitHub Codespaces
 
 ### Resurse Externe de Învățare
 - [Documentație Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -429,7 +429,7 @@ Azure Developer CLI (azd) este o interfață de linie de comandă centrată pe d
 
 ---
 
-## 🎓 Finalizarea Cursului & Certificare
+## 🎓 Finalizarea Cursului și Certificare
 
 ### Urmărirea Progresului
 Urmăriți progresul învățării prin fiecare capitol:
@@ -437,25 +437,25 @@ Urmăriți progresul învățării prin fiecare capitol:
 - [ ] **Capitolul 1**: Fundamente & Start Rapid ✅
 - [ ] **Capitolul 2**: Dezvoltare AI-First ✅  
 - [ ] **Capitolul 3**: Configurare & Autentificare ✅
-- [ ] **Capitolul 4**: Infrastructură ca Cod & Lansare ✅
+- [ ] **Capitolul 4**: Infrastructură ca Cod & Implementare ✅
 - [ ] **Capitolul 5**: Soluții AI Multi-Agent ✅
-- [ ] **Capitolul 6**: Validare & Planificare Pre-Lansare ✅
+- [ ] **Capitolul 6**: Validare & Planificare Pre-Implementare ✅
 - [ ] **Capitolul 7**: Depanare & Debugging ✅
 - [ ] **Capitolul 8**: Modele pentru Producție & Întreprinderi ✅
 
 ### Verificarea Învățării
 După finalizarea fiecărui capitol, verificați cunoștințele prin:
-1. **Exercițiu Practic**: Finalizați lansarea practică a capitolului
+1. **Exercițiu Practic**: Finalizați implementarea practică a capitolului
 2. **Verificare Cunoștințe**: Revizuiți secțiunea FAQ pentru capitolul dvs.
 3. **Discuție Comunitară**: Împărtășiți experiența dvs. pe Discord Azure
 4. **Capitolul Următor**: Trecerea la nivelul următor de complexitate
 
 ### Beneficii Finalizare Curs
 După finalizarea tuturor capitolelor, veți avea:
-- **Experiență de Producție**: Aplicații AI reale lansate pe Azure
-- **Abilități Profesionale**: Capacități de lansare pregătite pentru întreprinderi  
+- **Experiență în Producție**: Aplicații AI reale implementate pe Azure
+- **Abilități Profesionale**: Capacități de implementare pregătite pentru întreprinderi  
 - **Recunoaștere Comunitară**: Membru activ al comunității dezvoltatorilor Azure
-- **Avansare în Carieră**: Expertiză AZD și lansare AI cerută pe piață
+- **Avansare în Carieră**: Expertiză AZD și implementare AI cerută pe piață
 
 ---
 
@@ -469,36 +469,37 @@ După finalizarea tuturor capitolelor, veți avea:
 
 ### Perspective Comunitare din Discord Azure AI Foundry
 
-**Rezultate recente ale sondajului din canalul #Azure:**
+**Rezultate Recente ale Sondajului din Canalul #Azure:**
 - **45%** dintre dezvoltatori doresc să utilizeze AZD pentru sarcini AI
-- **Provocări principale**: Lansări multi-servicii, gestionarea acreditivelor, pregătirea pentru producție  
-- **Cele mai solicitate**: Șabloane specifice AI, ghiduri de depanare, cele mai bune practici
+- **Provocări principale**: Implementări multi-serviciu, gestionarea acreditivelor, pregătirea pentru producție  
+- **Cele mai solicitate**: Șabloane specifice AI, ghiduri de depanare, practici optime
 
-**Alăturați-vă comunității noastre pentru:**
-- Împărtășiți experiențele dvs. AZD + AI și obțineți ajutor
-- Accesați previzualizări timpurii ale noilor șabloane AI
-- Contribuiți la cele mai bune practici de lansare AI
-- Influențați dezvoltarea viitoare a funcțiilor AI + AZD
+**Alăturați-vă comunității pentru:**
+- Împărtășirea experiențelor AZD + AI și obținerea de ajutor
+- Acces la previzualizări timpurii ale noilor șabloane AI
+- Contribuirea la cele mai bune practici de implementare AI
+- Influențarea dezvoltării viitoare a funcțiilor AI + AZD
 
 ### Contribuția la Curs
-Primim cu bucurie contribuții! Vă rugăm să citiți [Ghidul de Contribuție](CONTRIBUTING.md) pentru detalii despre:
-- **Îmbunătățiri de Conținut**: Îmbunătățiți capitolele și exemplele existente
-- **Exemple Noi**: Adăugați scenarii și șabloane din lumea reală  
-- **Traducere**: Ajutați la menținerea suportului multi-limbă
-- **Raportare Erori**: Îmbunătățiți acuratețea și claritatea
-- **Standarde Comunitare**: Respectați liniile directoare ale comunității noastre incluzive
+Acceptăm contribuții! Vă rugăm să citiți [Ghidul de Contribuție](CONTRIBUTING.md) pentru detalii despre:
+- **Îmbunătățiri de Conținut**: Îmbunătățirea capitolelor și exemplelor existente
+- **Exemple Noi**: Adăugarea scenariilor și șabloanelor din lumea reală  
+- **Traducere**: Ajută la menținerea suportului pentru mai multe limbi
+- **Raportare erori**: Îmbunătățește acuratețea și claritatea
+- **Standardele comunității**: Respectă liniile directoare incluzive ale comunității noastre
 
 ---
 
-## 📄 Informații despre Curs
+## 📄 Informații despre curs
 
 ### Licență
-Acest proiect este licențiat sub Licența MIT - consultați fișierul [LICENSE](../../LICENSE) pentru detalii.
-### Resurse Microsoft Learning Asemănătoare
+Acest proiect este licențiat sub Licența MIT - vezi fișierul [LICENSE](../../LICENSE) pentru detalii.
 
-Echipa noastră produce și alte cursuri de învățare cuprinzătoare:
+### Resurse Microsoft Learning asociate
 
-- [Model Context Protocol (MCP) Pentru Începători](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+Echipa noastră produce alte cursuri de învățare cuprinzătoare:
+
+- [Protocolul de Context al Modelului (MCP) pentru Începători](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [Agenți AI pentru Începători](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
 - [AI Generativ pentru Începători folosind .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
 - [AI Generativ pentru Începători](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -512,19 +513,21 @@ Echipa noastră produce și alte cursuri de învățare cuprinzătoare:
 - [Dezvoltare XR pentru Începători](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 - [Stăpânirea GitHub Copilot pentru Programare AI în Echipe](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 - [Stăpânirea GitHub Copilot pentru Dezvoltatori C#/.NET](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [Alege-ți Propria Aventură cu Copilot](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+- [Alege-ți propria aventură Copilot](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 
 ---
 
-## 🗺️ Navigarea Cursului
+## 🗺️ Navigarea cursului
 
-**🚀 Gata să începi să înveți?**
+**🚀 Gata de învățare?**
 
 **Începători**: Începe cu [Capitolul 1: Fundamente & Start Rapid](../..)  
-**Dezvoltatori AI**: Sari la [Capitolul 2: Dezvoltare AI-First](../..)  
-**Dezvoltatori Experimentați**: Începe cu [Capitolul 3: Configurare & Autentificare](../..)
+**Dezvoltatori AI**: Treci direct la [Capitolul 2: Dezvoltare AI-First](../..)  
+**Dezvoltatori experimentați**: Începe cu [Capitolul 3: Configurare & Autentificare](../..)
 
-**Pași Următori**: [Începe Capitolul 1 - Bazele AZD](docs/getting-started/azd-basics.md) →
+**Pași următori**: [Începe Capitolul 1 - Bazele AZD](docs/getting-started/azd-basics.md) →
 
 ---
 
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

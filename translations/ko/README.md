@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "3df05e83c2307e92452bd7c3307ae849",
-  "translation_date": "2025-09-24T09:42:37+00:00",
+  "original_hash": "56313679644ccd28e9d15bb7089ae5ca",
+  "translation_date": "2025-10-11T14:35:57+00:00",
   "source_file": "README.md",
   "language_code": "ko"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
 
-## 이 코스 시작하기
+## 이 과정 시작하기
 
 AZD 학습 여정을 시작하려면 다음 단계를 따르세요:
 
@@ -31,13 +31,15 @@ AZD 학습 여정을 시작하려면 다음 단계를 따르세요:
 
 #### 자동 번역 (항상 최신 상태)
 
-[French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](./README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](../my/README.md)
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Korean](./README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-## 코스 개요
+## 과정 개요
 
 Azure Developer CLI (azd)를 체계적인 챕터를 통해 마스터하세요. **Azure AI Foundry 통합을 활용한 AI 애플리케이션 배포에 특별 초점.**
 
-### 이 코스가 현대 개발자에게 필수적인 이유
+### 이 과정이 현대 개발자에게 필수적인 이유
 
 Azure AI Foundry Discord 커뮤니티의 통찰에 따르면, **개발자의 45%가 AI 워크로드를 위해 AZD를 사용하고 싶어하지만** 다음과 같은 문제를 겪고 있습니다:
 - 복잡한 다중 서비스 AI 아키텍처
@@ -48,7 +50,7 @@ Azure AI Foundry Discord 커뮤니티의 통찰에 따르면, **개발자의 45%
 
 ### 학습 목표
 
-이 체계적인 코스를 완료하면 다음을 달성할 수 있습니다:
+이 체계적인 과정을 완료하면 다음을 달성할 수 있습니다:
 - **AZD 기본 사항 마스터**: 핵심 개념, 설치 및 구성
 - **AI 애플리케이션 배포**: AZD와 Azure AI Foundry 서비스 활용
 - **코드로 인프라 구현**: Bicep 템플릿으로 Azure 리소스 관리
@@ -66,7 +68,7 @@ Azure AI Foundry Discord 커뮤니티의 통찰에 따르면, **개발자의 45%
 **난이도**: ⭐
 
 #### 학습 내용
-- Azure Developer CLI 기본 사항 이해
+- Azure Developer CLI 기본 이해
 - 플랫폼에 AZD 설치
 - 첫 번째 성공적인 배포
 
@@ -104,7 +106,7 @@ azd up
 #### 학습 자료
 - **🎯 시작하기**: [Azure AI Foundry 통합](docs/ai-foundry/azure-ai-foundry-integration.md)
 - **📖 패턴**: [AI 모델 배포](docs/ai-foundry/ai-model-deployment.md) - AI 모델 배포 및 관리
-- **🛠️ 워크숍**: [AI 워크숍 랩](docs/ai-foundry/ai-workshop-lab.md) - AI 솔루션을 AZD에 적합하게 만들기
+- **🛠️ 워크숍**: [AI 워크숍 랩](docs/ai-foundry/ai-workshop-lab.md) - AZD에 적합한 AI 솔루션 만들기
 - **🎥 인터랙티브 가이드**: [워크숍 자료](workshop/README.md) - MkDocs * DevContainer 환경을 활용한 브라우저 기반 학습
 - **📋 템플릿**: [Azure AI Foundry 템플릿](../..)
 
@@ -200,7 +202,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ---
 
-### 🔍 챕터 6: 사전 배포 검증 및 계획
+### 🔍 챕터 6: 배포 전 검증 및 계획
 **필수 조건**: 챕터 4 완료  
 **소요 시간**: 1시간  
 **난이도**: ⭐⭐
@@ -218,9 +220,9 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 실습 과제
 - 용량 검증 스크립트 실행
 - 비용 최적화를 위한 SKU 선택
-- 자동화된 사전 배포 점검 구현
+- 자동화된 배포 전 점검 구현
 
-**💡 챕터 결과**: 배포 전에 검증 및 최적화 완료
+**💡 챕터 결과**: 배포 실행 전에 검증 및 최적화 완료
 
 ---
 
@@ -251,16 +253,17 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### 🏢 챕터 8: 프로덕션 및 엔터프라이즈 패턴
 **필수 조건**: 챕터 1-4 완료  
 **소요 시간**: 2-3시간  
-**난이도**: ⭐⭐⭐⭐
 
-#### 학습 내용
+**복잡도**: ⭐⭐⭐⭐
+
+#### 학습 목표
 - 프로덕션 배포 전략
 - 엔터프라이즈 보안 패턴
 - 모니터링 및 비용 최적화
 
 #### 학습 자료
-- **🏭 프로덕션**: [프로덕션 AI 모범 사례](docs/ai-foundry/production-ai-practices.md) - 엔터프라이즈 패턴
-- **📝 예제**: [마이크로서비스 예제](../../examples/microservices) - 복잡한 아키텍처
+- **🏭 프로덕션**: [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) - 엔터프라이즈 패턴
+- **📝 예제**: [Microservices Example](../../examples/microservices) - 복잡한 아키텍처
 - **📊 모니터링**: Application Insights 통합
 
 #### 실습 과제
@@ -268,7 +271,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - 종합적인 모니터링 설정
 - 적절한 거버넌스를 통해 프로덕션 배포
 
-**💡 챕터 결과**: 프로덕션 준비가 완료된 엔터프라이즈 애플리케이션 배포
+**💡 챕터 결과**: 완전한 프로덕션 기능을 갖춘 엔터프라이즈 애플리케이션 배포
 
 ---
 
@@ -277,22 +280,22 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### 인터랙티브 워크숍 자료
 **브라우저 기반 도구와 가이드 실습을 통한 종합적인 실습 학습**
 
-워크숍 자료는 위의 챕터 기반 커리큘럼을 보완하는 구조화된 인터랙티브 학습 경험을 제공합니다. 이 워크숍은 자율 학습과 강사 주도 세션 모두에 적합하게 설계되었습니다.
+워크숍 자료는 위 챕터 기반 커리큘럼을 보완하는 구조화된 인터랙티브 학습 경험을 제공합니다. 워크숍은 자율 학습과 강사 주도 세션 모두에 적합하게 설계되었습니다.
 
 #### 🛠️ 워크숍 특징
-- **브라우저 기반 인터페이스**: 검색, 복사, 테마 기능을 갖춘 MkDocs 기반 워크숍
+- **브라우저 기반 인터페이스**: MkDocs 기반 워크숍으로 검색, 복사, 테마 기능 제공
 - **GitHub Codespaces 통합**: 원클릭 개발 환경 설정
 - **구조화된 학습 경로**: 7단계 가이드 실습 (총 3.5시간)
-- **탐색 → 배포 → 맞춤화**: 점진적 방법론
-- **인터랙티브 DevContainer 환경**: 사전 구성된 도구와 종속성
+- **탐색 → 배포 → 맞춤화**: 점진적 학습 방법론
+- **인터랙티브 DevContainer 환경**: 사전 구성된 도구 및 종속성
 
 #### 📚 워크숍 구조
 워크숍은 **탐색 → 배포 → 맞춤화** 방법론을 따릅니다:
 
 1. **탐색 단계** (45분)
-   - Azure AI Foundry 템플릿과 서비스 탐색
+   - Azure AI Foundry 템플릿 및 서비스 탐색
    - 멀티 에이전트 아키텍처 패턴 이해
-   - 배포 요구사항 및 사전 준비 검토
+   - 배포 요구사항 및 사전 조건 검토
 
 2. **배포 단계** (2시간)
    - AZD를 사용한 AI 애플리케이션의 실습 배포
@@ -326,7 +329,7 @@ cd azd-for-beginners/workshop
 #### 📖 워크숍 자료
 - **🎥 인터랙티브 가이드**: [워크숍 자료](workshop/README.md) - 브라우저 기반 학습 환경
 - **📋 단계별 지침**: [가이드 실습](../../workshop/docs/instructions) - 상세한 워크스루
-- **🛠️ AI 워크숍 랩**: [AI 워크숍 랩](docs/ai-foundry/ai-workshop-lab.md) - AI 중심 실습
+- **🛠️ AI 워크숍 랩**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI 중심 실습
 - **💡 빠른 시작**: [워크숍 설정 가이드](workshop/README.md#quick-start) - 환경 구성
 
 **적합 대상**: 기업 교육, 대학 과정, 자율 학습, 개발자 부트캠프
@@ -335,7 +338,7 @@ cd azd-for-beginners/workshop
 
 ## 📖 Azure Developer CLI란 무엇인가?
 
-Azure Developer CLI (azd)는 Azure에 애플리케이션을 빌드하고 배포하는 과정을 가속화하는 개발자 중심의 명령줄 인터페이스입니다. 주요 기능은 다음과 같습니다:
+Azure Developer CLI (azd)는 애플리케이션을 Azure에 빌드하고 배포하는 과정을 가속화하는 개발자 중심 명령줄 인터페이스입니다. 주요 기능은 다음과 같습니다:
 
 - **템플릿 기반 배포** - 일반적인 애플리케이션 패턴을 위한 사전 구축된 템플릿 사용
 - **코드로서의 인프라** - Bicep 또는 Terraform을 사용하여 Azure 리소스 관리  
@@ -346,10 +349,10 @@ Azure Developer CLI (azd)는 Azure에 애플리케이션을 빌드하고 배포�
 
 **AI 솔루션에 AZD를 사용하는 이유?** AZD는 AI 개발자가 직면하는 주요 과제를 해결합니다:
 
-- **AI 준비 템플릿** - Azure OpenAI, Cognitive Services, ML 워크로드를 위한 사전 구성된 템플릿
+- **AI 준비 템플릿** - Azure OpenAI, Cognitive Services, ML 워크로드를 위한 사전 구성 템플릿
 - **보안 AI 배포** - AI 서비스, API 키, 모델 엔드포인트를 위한 내장 보안 패턴  
 - **프로덕션 AI 패턴** - 확장 가능하고 비용 효율적인 AI 애플리케이션 배포를 위한 모범 사례
-- **엔드 투 엔드 AI 워크플로우** - 모델 개발부터 적절한 모니터링을 갖춘 프로덕션 배포까지
+- **엔드 투 엔드 AI 워크플로우** - 모델 개발부터 모니터링을 포함한 프로덕션 배포까지
 - **비용 최적화** - AI 워크로드를 위한 스마트 리소스 할당 및 확장 전략
 - **Azure AI Foundry 통합** - AI Foundry 모델 카탈로그 및 엔드포인트와의 원활한 연결
 
@@ -362,15 +365,15 @@ Azure Developer CLI (azd)는 Azure에 애플리케이션을 빌드하고 배포�
 
 | 템플릿 | 챕터 | 복잡도 | 서비스 |
 |----------|---------|------------|----------|
-| [**AI 채팅 시작하기**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 2 | ⭐⭐ | AzureOpenAI + Azure AI 모델 추론 API + Azure AI 검색 + Azure Container Apps + Application Insights |
-| [**AI 에이전트 시작하기**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 챕터 2 | ⭐⭐ | Azure AI 에이전트 서비스 + AzureOpenAI + Azure AI 검색 + Azure Container Apps + Application Insights|
-| [**멀티 에이전트 워크플로우 자동화**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI 에이전트 서비스 + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**데이터에서 문서 생성**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 4 | ⭐⭐⭐  | AzureOpenAI + Azure AI 검색 + Azure AI 서비스 + Azure CosmosDB|
-| [**클라이언트 미팅 개선**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 5 | ⭐⭐⭐| AzureOpenAI + Azure AI 검색 + Azure CosmosDB + Azure SQL Database |
-| [**코드 현대화**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 5 | ⭐⭐⭐ | AzureOpenAI + Azure 에이전트 서비스 + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**대화형 에이전트 구축**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 4 | ⭐⭐⭐ | AI Language + AzureOpenAI + AI 검색 + Azure Storage + Azure Container Registry|
-| [**대화 데이터에서 인사이트 도출**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 8 | ⭐⭐⭐ | AzureOpenAI + AI 검색 + Semantic Kernel + Azure 에이전트 서비스 + AI AI 콘텐츠 이해|
-| [**멀티모달 콘텐츠 처리**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 8 | ⭐⭐⭐⭐ | AzureOpenAI + Azure 콘텐츠 이해 + Azure CosmosDB + Azure Container Apps|
+| [**AI 채팅 시작하기**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
+| [**AI 에이전트 시작하기**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 챕터 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
+| [**멀티 에이전트 워크플로우 자동화**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**데이터에서 문서 생성**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 4 | ⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
+| [**클라이언트 미팅 개선**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 5 | ⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
+| [**코드 현대화**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 5 | ⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**대화형 에이전트 구축**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 4 | ⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
+| [**대화 데이터에서 인사이트 도출**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 8 | ⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
+| [**멀티모달 콘텐츠 처리**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 챕터 8 | ⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
 
 ### 추천: 완전한 학습 시나리오
 **학습 챕터에 매핑된 프로덕션 준비 애플리케이션 템플릿**
@@ -378,11 +381,11 @@ Azure Developer CLI (azd)는 Azure에 애플리케이션을 빌드하고 배포�
 | 템플릿 | 학습 챕터 | 복잡도 | 주요 학습 |
 |----------|------------------|------------|--------------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 챕터 2 | ⭐ | 기본 AI 배포 패턴 |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | 챕터 2 | ⭐⭐ | RAG 구현과 Azure AI 검색 |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | 챕터 2 | ⭐⭐ | Azure AI Search를 활용한 RAG 구현 |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | 챕터 4 | ⭐⭐ | 문서 인텔리전스 통합 |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 챕터 5 | ⭐⭐⭐ | 에이전트 프레임워크 및 함수 호출 |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | 챕터 8 | ⭐⭐⭐ | 엔터프라이즈 AI 오케스트레이션 |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | 챕터 5 | ⭐⭐⭐⭐ | 고객 및 재고 에이전트를 포함한 멀티 에이전트 아키텍처 |
+| [**소매 멀티 에이전트 솔루션**](examples/retail-scenario.md) | 챕터 5 | ⭐⭐⭐⭐ | 고객 및 재고 에이전트를 포함한 멀티 에이전트 아키텍처 |
 
 ### 예제 유형별 학습
 
@@ -402,7 +405,7 @@ Azure Developer CLI (azd)는 Azure에 애플리케이션을 빌드하고 배포�
 
 ### 외부 템플릿 컬렉션
 - [**Azure-Samples AZD 템플릿**](https://github.com/Azure-Samples/azd-templates) - Microsoft 공식 샘플
-- [**Awesome AZD 갤러리**](https://azure.github.io/awesome-azd/) - 커뮤니티 기여 템플릿
+- [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - 커뮤니티 기여 템플릿
 - [**예제 디렉토리**](examples/README.md) - 상세 설명이 포함된 로컬 학습 예제
 
 ---
@@ -454,18 +457,18 @@ Azure Developer CLI (azd)는 Azure에 애플리케이션을 빌드하고 배포�
 모든 챕터를 완료하면 다음을 얻을 수 있습니다:
 - **프로덕션 경험**: 실제 AI 애플리케이션을 Azure에 배포
 - **전문 기술**: 엔터프라이즈 준비 배포 능력  
-- **커뮤니티 인정**: Azure 개발자 커뮤니티의 활발한 멤버
-- **경력 발전**: AZD 및 AI 배포 전문 지식
+- **커뮤니티 인정**: Azure 개발자 커뮤니티의 활동적인 멤버
+- **경력 발전**: AZD 및 AI 배포 전문 지식으로 높은 수요
 
 ---
 
 ## 🤝 커뮤니티 및 지원
 
 ### 도움 및 지원 받기
-- **기술 문제**: [버그 보고 및 기능 요청](https://github.com/microsoft/azd-for-beginners/issues)
+- **기술 문제**: [버그 신고 및 기능 요청](https://github.com/microsoft/azd-for-beginners/issues)
 - **학습 질문**: [Microsoft Azure Discord 커뮤니티](https://discord.gg/microsoft-azure)
 - **AI 관련 도움**: AZD + AI Foundry 논의를 위한 [#Azure 채널](https://discord.gg/microsoft-azure) 참여
-- **문서**: [공식 Azure Developer CLI 문서](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- **문서**: [Azure Developer CLI 공식 문서](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Azure AI Foundry Discord 커뮤니티 인사이트
 
@@ -480,51 +483,54 @@ Azure Developer CLI (azd)는 Azure에 애플리케이션을 빌드하고 배포�
 - AI 배포 모범 사례 기여
 - 향후 AI + AZD 기능 개발에 영향 미치기
 
-### 과정에 기여하기
+### 과정 기여
 기여를 환영합니다! [기여 가이드](CONTRIBUTING.md)를 읽고 다음에 대해 자세히 알아보세요:
 - **콘텐츠 개선**: 기존 챕터 및 예제 향상
 - **새로운 예제 추가**: 실제 시나리오 및 템플릿 추가  
-- **번역**: 다국어 지원 유지에 도움
-- **버그 보고**: 정확성과 명확성 개선
-- **커뮤니티 표준**: 포괄적인 커뮤니티 가이드라인 준수
+- **번역**: 다국어 지원 유지에 도움을 주세요  
+- **버그 보고**: 정확성과 명확성을 개선하세요  
+- **커뮤니티 기준**: 포괄적인 커뮤니티 가이드를 따르세요  
 
 ---
 
-## 📄 과정 정보
+## 📄 강의 정보
 
-### 라이선스
-이 프로젝트는 MIT 라이선스에 따라 라이선스가 부여됩니다 - 자세한 내용은 [LICENSE](../../LICENSE) 파일을 참조하세요.
-### 관련 Microsoft 학습 자료
+### 라이선스  
+이 프로젝트는 MIT 라이선스에 따라 제공됩니다. 자세한 내용은 [LICENSE](../../LICENSE) 파일을 참조하세요.
 
-우리 팀은 다음과 같은 포괄적인 학습 과정을 제공합니다:
+### 관련 Microsoft 학습 자료  
 
-- [Model Context Protocol (MCP) 초보자용](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [AI 에이전트 초보자용](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [.NET을 활용한 생성형 AI 초보자용](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-- [생성형 AI 초보자용](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [Java를 활용한 생성형 AI 초보자용](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-- [ML 초보자용](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-- [데이터 과학 초보자용](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-- [AI 초보자용](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-- [사이버 보안 초보자용](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
-- [웹 개발 초보자용](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-- [IoT 초보자용](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-- [XR 개발 초보자용](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
-- [AI 페어드 프로그래밍을 위한 GitHub Copilot 마스터하기](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-- [C#/.NET 개발자를 위한 GitHub Copilot 마스터하기](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-- [나만의 Copilot 모험 선택하기](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+우리 팀은 다른 포괄적인 학습 강의를 제공합니다:  
 
----
-
-## 🗺️ 과정 탐색
-
-**🚀 학습을 시작할 준비가 되셨나요?**
-
-**초보자**: [1장: 기초 및 빠른 시작](../..)부터 시작하세요  
-**AI 개발자**: [2장: AI-우선 개발](../..)로 바로 이동하세요  
-**경험 많은 개발자**: [3장: 구성 및 인증](../..)부터 시작하세요
-
-**다음 단계**: [1장 - AZD 기본 사항 시작하기](docs/getting-started/azd-basics.md) →
+- [초보자를 위한 Model Context Protocol (MCP)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 AI 에이전트](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [.NET을 활용한 초보자를 위한 생성형 AI](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 생성형 AI](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [Java를 활용한 초보자를 위한 생성형 AI](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 머신러닝](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 데이터 과학](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 AI](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 사이버 보안](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
+- [초보자를 위한 웹 개발](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 IoT](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+- [초보자를 위한 XR 개발](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
+- [AI 페어 프로그래밍을 위한 GitHub Copilot 마스터하기](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+- [C#/.NET 개발자를 위한 GitHub Copilot 마스터하기](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+- [나만의 Copilot 모험 선택하기](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 
 ---
 
+## 🗺️ 강의 탐색  
+
+**🚀 학습을 시작할 준비가 되셨나요?**  
+
+**초보자**: [1장: 기초 및 빠른 시작](../..)에서 시작하세요  
+**AI 개발자**: [2장: AI-우선 개발](../..)로 이동하세요  
+**경험 많은 개발자**: [3장: 구성 및 인증](../..)에서 시작하세요  
+
+**다음 단계**: [1장 시작하기 - AZD 기본](docs/getting-started/azd-basics.md) →  
+
+---
+
+**면책 조항**:  
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 신뢰할 수 있는 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
