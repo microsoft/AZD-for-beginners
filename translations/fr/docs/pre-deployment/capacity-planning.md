@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T17:19:31+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:22:20+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "fr"
 }
 -->
-# Planification de la capacité - Disponibilité et limites des ressources Azure
+# Planification de la capacité : Comprendre les quotas et limites d'Azure
 
 ## Introduction
 
@@ -15,11 +15,11 @@ Ce guide complet vous aide à planifier et valider la capacité des ressources A
 
 ## Objectifs d'apprentissage
 
-En suivant ce guide, vous allez :
+En suivant ce guide, vous serez capable de :
 - Comprendre les quotas, limites et contraintes de disponibilité régionale d'Azure
 - Maîtriser les techniques pour vérifier la disponibilité et la capacité des ressources avant le déploiement
 - Mettre en œuvre des stratégies automatisées de validation et de surveillance de la capacité
-- Concevoir des applications avec des considérations appropriées de dimensionnement et de mise à l'échelle des ressources
+- Concevoir des applications avec une taille et une mise à l'échelle des ressources appropriées
 - Appliquer des stratégies d'optimisation des coûts grâce à une planification intelligente de la capacité
 - Configurer des alertes et une surveillance pour l'utilisation des quotas et la disponibilité des ressources
 
@@ -59,6 +59,7 @@ az vm list-usage --location eastus2 --output table
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
+
 
 ## Vérifications de capacité avant le déploiement
 
@@ -120,6 +121,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
+
 ### Vérifications spécifiques aux services
 
 #### Capacité des services d'application
@@ -153,6 +155,7 @@ check_app_service_capacity() {
 # Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
+
 
 #### Capacité des bases de données
 ```bash
@@ -211,6 +214,7 @@ check_cosmos_capacity() {
 }
 ```
 
+
 #### Capacité des applications conteneurisées
 ```bash
 # Check Container Apps capacity
@@ -252,6 +256,7 @@ check_container_apps_capacity() {
 }
 ```
 
+
 ## 📍 Validation de la disponibilité régionale
 
 ### Disponibilité des services par région
@@ -288,6 +293,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
+
 ### Recommandations pour la sélection des régions
 ```bash
 # Recommend optimal regions based on requirements
@@ -318,6 +324,7 @@ recommend_region() {
     esac
 }
 ```
+
 
 ## 💰 Planification et estimation des coûts
 
@@ -353,6 +360,7 @@ estimate_costs() {
     echo "   https://portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview"
 }
 ```
+
 
 ### Recommandations pour l'optimisation des SKU
 ```bash
@@ -418,6 +426,7 @@ recommend_sku() {
     esac
 }
 ```
+
 
 ## 🚀 Vérifications automatisées avant déploiement
 
@@ -620,6 +629,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
+
 ### Modèle de fichier de configuration
 ```json
 {
@@ -653,6 +663,7 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
+
 
 ## 📈 Surveillance de la capacité pendant le déploiement
 
@@ -689,6 +700,7 @@ monitor_deployment_capacity() {
 }
 ```
 
+
 ## 🔗 Intégration avec AZD
 
 ### Ajouter des hooks de pré-vérification à azure.yaml
@@ -709,11 +721,12 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
+
 ## Bonnes pratiques
 
 1. **Effectuez toujours des vérifications de capacité** avant de déployer dans de nouvelles régions
 2. **Surveillez régulièrement l'utilisation des quotas** pour éviter les surprises
-3. **Planifiez la croissance** en évaluant les besoins futurs en capacité
+3. **Planifiez la croissance** en vérifiant les besoins futurs en capacité
 4. **Utilisez des outils d'estimation des coûts** pour éviter les factures imprévues
 5. **Documentez les besoins en capacité** pour votre équipe
 6. **Automatisez la validation de la capacité** dans les pipelines CI/CD
@@ -723,7 +736,7 @@ hooks:
 
 - [Guide de sélection des SKU](sku-selection.md) - Choisissez les niveaux de service optimaux
 - [Vérifications avant déploiement](preflight-checks.md) - Scripts de validation automatisés
-- [Fiche de référence](../../resources/cheat-sheet.md) - Commandes rapides
+- [Fiche de référence](../../resources/cheat-sheet.md) - Commandes de référence rapide
 - [Glossaire](../../resources/glossary.md) - Termes et définitions
 
 ## Ressources supplémentaires
@@ -731,12 +744,13 @@ hooks:
 - [Limites des abonnements Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Calculateur de prix Azure](https://azure.microsoft.com/pricing/calculator/)
 - [Gestion des coûts Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Disponibilité régionale Azure](https://azure.microsoft.com/global-infrastructure/services/)
+- [Disponibilité régionale d'Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigation**
 - **Leçon précédente** : [Guide de débogage](../troubleshooting/debugging.md)
+
 - **Leçon suivante** : [Sélection des SKU](sku-selection.md)
 
 ---

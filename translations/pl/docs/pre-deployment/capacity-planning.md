@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T17:21:27+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:30:39+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "pl"
 }
 -->
-# Planowanie pojemności - Dostępność zasobów Azure i limity
+# Planowanie pojemności: Zrozumienie kwot i limitów Azure
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik pomoże Ci zaplanować i zweryfikować pojemność zasobów Azure przed wdrożeniem za pomocą Azure Developer CLI. Dowiedz się, jak ocenić limity, dostępność i ograniczenia regionalne, aby zapewnić pomyślne wdrożenia, jednocześnie optymalizując koszty i wydajność. Opanuj techniki planowania pojemności dla różnych architektur aplikacji i scenariuszy skalowania.
+Ten kompleksowy przewodnik pomoże Ci zaplanować i zweryfikować pojemność zasobów Azure przed wdrożeniem za pomocą Azure Developer CLI. Dowiedz się, jak oceniać kwoty, dostępność i ograniczenia regionalne, aby zapewnić pomyślne wdrożenia, jednocześnie optymalizując koszty i wydajność. Opanuj techniki planowania pojemności dla różnych architektur aplikacji i scenariuszy skalowania.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika będziesz:
-- Rozumieć limity, ograniczenia i regionalne ograniczenia dostępności w Azure
+- Rozumieć kwoty, limity i ograniczenia regionalne Azure
 - Opanować techniki sprawdzania dostępności i pojemności zasobów przed wdrożeniem
 - Wdrażać zautomatyzowane strategie walidacji i monitorowania pojemności
 - Projektować aplikacje z odpowiednim rozmiarem zasobów i uwzględnieniem skalowania
 - Stosować strategie optymalizacji kosztów poprzez inteligentne planowanie pojemności
-- Konfigurować alerty i monitorowanie wykorzystania limitów oraz dostępności zasobów
+- Konfigurować alerty i monitorowanie wykorzystania kwot oraz dostępności zasobów
 
-## Rezultaty nauki
+## Efekty nauki
 
 Po ukończeniu będziesz w stanie:
 - Ocenić i zweryfikować wymagania dotyczące pojemności zasobów Azure przed wdrożeniem
-- Tworzyć zautomatyzowane skrypty do sprawdzania pojemności i monitorowania limitów
-- Projektować skalowalne architektury uwzględniające regionalne i subskrypcyjne ograniczenia
-- Wdrażać strategie efektywnego rozmiaru zasobów dla różnych typów obciążeń
-- Konfigurować proaktywne monitorowanie i alerty dotyczące problemów związanych z pojemnością
-- Planować wdrożenia w wielu regionach z odpowiednim rozłożeniem pojemności
+- Tworzyć zautomatyzowane skrypty do sprawdzania pojemności i monitorowania kwot
+- Projektować skalowalne architektury uwzględniające limity regionalne i subskrypcyjne
+- Wdrażać strategie efektywnego kosztowo rozmiaru zasobów dla różnych typów obciążeń
+- Konfigurować proaktywne monitorowanie i alerty dla problemów związanych z pojemnością
+- Planować wdrożenia wieloregionalne z odpowiednim rozłożeniem pojemności
 
 ## Dlaczego planowanie pojemności jest ważne
 
 Przed wdrożeniem aplikacji musisz upewnić się, że:
-- **Masz wystarczające limity** dla wymaganych zasobów
-- **Zasoby są dostępne** w docelowym regionie
-- **Dostępność poziomu usług** odpowiada typowi Twojej subskrypcji
-- **Pojemność sieci** jest odpowiednia dla spodziewanego ruchu
-- **Optymalizacja kosztów** jest możliwa dzięki odpowiedniemu rozmiarowi zasobów
+- **Kwoty zasobów** są wystarczające dla wymaganych zasobów
+- **Dostępność zasobów** w docelowym regionie
+- **Dostępność poziomu usług** dla Twojego typu subskrypcji
+- **Pojemność sieci** dla oczekiwanego ruchu
+- **Optymalizacja kosztów** poprzez odpowiednie rozmiary zasobów
 
-## 📊 Zrozumienie limitów i kwot Azure
+## 📊 Zrozumienie kwot i limitów Azure
 
 ### Rodzaje limitów
-1. **Limity na poziomie subskrypcji** - Maksymalna liczba zasobów na subskrypcję
-2. **Limity regionalne** - Maksymalna liczba zasobów na region
-3. **Limity specyficzne dla zasobów** - Ograniczenia dla poszczególnych typów zasobów
-4. **Limity poziomu usług** - Ograniczenia zależne od planu usług
+1. **Kwoty na poziomie subskrypcji** - Maksymalna liczba zasobów na subskrypcję
+2. **Kwoty regionalne** - Maksymalna liczba zasobów na region
+3. **Limity specyficzne dla zasobów** - Limity dla poszczególnych typów zasobów
+4. **Limity poziomu usług** - Limity zależne od planu usług
 
-### Typowe limity zasobów
+### Typowe kwoty zasobów
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -59,6 +59,7 @@ az vm list-usage --location eastus2 --output table
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
+
 
 ## Kontrole pojemności przed wdrożeniem
 
@@ -120,6 +121,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
+
 ### Kontrole pojemności specyficzne dla usług
 
 #### Pojemność App Service
@@ -153,6 +155,7 @@ check_app_service_capacity() {
 # Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
+
 
 #### Pojemność bazy danych
 ```bash
@@ -211,6 +214,7 @@ check_cosmos_capacity() {
 }
 ```
 
+
 #### Pojemność aplikacji kontenerowych
 ```bash
 # Check Container Apps capacity
@@ -252,9 +256,10 @@ check_container_apps_capacity() {
 }
 ```
 
+
 ## 📍 Walidacja dostępności regionalnej
 
-### Dostępność usług w regionach
+### Dostępność usług według regionu
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -288,6 +293,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
+
 ### Rekomendacje dotyczące wyboru regionu
 ```bash
 # Recommend optimal regions based on requirements
@@ -318,6 +324,7 @@ recommend_region() {
     esac
 }
 ```
+
 
 ## 💰 Planowanie kosztów i szacowanie
 
@@ -354,7 +361,8 @@ estimate_costs() {
 }
 ```
 
-### Rekomendacje dotyczące optymalizacji SKU
+
+### Rekomendacje optymalizacji SKU
 ```bash
 # Recommend optimal SKUs based on requirements
 recommend_sku() {
@@ -418,6 +426,7 @@ recommend_sku() {
     esac
 }
 ```
+
 
 ## 🚀 Zautomatyzowane kontrole przed wdrożeniem
 
@@ -620,6 +629,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
+
 ### Szablon pliku konfiguracyjnego
 ```json
 {
@@ -653,6 +663,7 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
+
 
 ## 📈 Monitorowanie pojemności podczas wdrożenia
 
@@ -689,6 +700,7 @@ monitor_deployment_capacity() {
 }
 ```
 
+
 ## 🔗 Integracja z AZD
 
 ### Dodanie hooków przed wdrożeniem do azure.yaml
@@ -709,15 +721,16 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
+
 ## Najlepsze praktyki
 
-1. **Zawsze przeprowadzaj kontrole pojemności** przed wdrożeniem w nowych regionach
-2. **Regularnie monitoruj wykorzystanie limitów**, aby uniknąć niespodzianek
+1. **Zawsze wykonuj kontrole pojemności** przed wdrożeniem w nowych regionach
+2. **Regularnie monitoruj wykorzystanie kwot**, aby uniknąć niespodzianek
 3. **Planuj rozwój**, sprawdzając przyszłe potrzeby pojemności
-4. **Korzystaj z narzędzi do szacowania kosztów**, aby uniknąć szoku rachunkowego
+4. **Używaj narzędzi do szacowania kosztów**, aby uniknąć szoku rachunkowego
 5. **Dokumentuj wymagania dotyczące pojemności** dla swojego zespołu
 6. **Automatyzuj walidację pojemności** w pipeline'ach CI/CD
-7. **Uwzględniaj wymagania dotyczące pojemności w przypadku awarii regionalnej**
+7. **Uwzględnij wymagania dotyczące pojemności dla awarii regionalnych**
 
 ## Kolejne kroki
 
@@ -737,9 +750,10 @@ hooks:
 
 **Nawigacja**
 - **Poprzednia lekcja**: [Przewodnik debugowania](../troubleshooting/debugging.md)
+
 - **Następna lekcja**: [Wybór SKU](sku-selection.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za autorytatywne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

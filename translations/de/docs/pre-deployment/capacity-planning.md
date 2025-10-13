@@ -1,33 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T17:20:53+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:22:51+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "de"
 }
 -->
-# Kapazitätsplanung - Azure-Ressourcenverfügbarkeit und -grenzen
+# Kapazitätsplanung: Verständnis von Azure-Kontingenten und -Grenzen
 
 ## Einführung
 
-Dieser umfassende Leitfaden hilft Ihnen, die Kapazität von Azure-Ressourcen zu planen und zu validieren, bevor Sie mit Azure Developer CLI bereitstellen. Lernen Sie, Quoten, Verfügbarkeit und regionale Einschränkungen zu bewerten, um erfolgreiche Bereitstellungen zu gewährleisten und gleichzeitig Kosten und Leistung zu optimieren. Beherrschen Sie Techniken der Kapazitätsplanung für verschiedene Anwendungsarchitekturen und Skalierungsszenarien.
+Dieser umfassende Leitfaden hilft Ihnen, die Kapazität von Azure-Ressourcen vor der Bereitstellung mit Azure Developer CLI zu planen und zu validieren. Lernen Sie, Kontingente, Verfügbarkeit und regionale Einschränkungen zu bewerten, um erfolgreiche Bereitstellungen zu gewährleisten und gleichzeitig Kosten und Leistung zu optimieren. Beherrschen Sie Techniken der Kapazitätsplanung für verschiedene Anwendungsarchitekturen und Skalierungsszenarien.
 
 ## Lernziele
 
 Nach Abschluss dieses Leitfadens werden Sie:
-- Azure-Quoten, -Grenzen und regionale Verfügbarkeitsbeschränkungen verstehen
+- Azure-Kontingente, -Grenzen und regionale Verfügbarkeitsbeschränkungen verstehen
 - Techniken zur Überprüfung der Ressourcenverfügbarkeit und -kapazität vor der Bereitstellung beherrschen
 - Automatisierte Strategien zur Kapazitätsvalidierung und -überwachung implementieren
 - Anwendungen mit angemessener Ressourcengröße und Skalierungsüberlegungen entwerfen
 - Kostenoptimierungsstrategien durch intelligente Kapazitätsplanung anwenden
-- Warnungen und Überwachung für die Nutzung von Quoten und Ressourcenverfügbarkeit konfigurieren
+- Warnungen und Überwachungen für die Nutzung von Kontingenten und die Verfügbarkeit von Ressourcen konfigurieren
 
 ## Lernergebnisse
 
 Nach Abschluss werden Sie in der Lage sein:
-- Anforderungen an die Kapazität von Azure-Ressourcen vor der Bereitstellung zu bewerten und zu validieren
-- Automatisierte Skripte zur Kapazitätsprüfung und Quotenüberwachung zu erstellen
+- Die Kapazitätsanforderungen von Azure-Ressourcen vor der Bereitstellung zu bewerten und zu validieren
+- Automatisierte Skripte zur Kapazitätsprüfung und Kontingentüberwachung zu erstellen
 - Skalierbare Architekturen zu entwerfen, die regionale und abonnementspezifische Grenzen berücksichtigen
 - Kostenwirksame Strategien zur Ressourcengröße für verschiedene Arbeitslasttypen umzusetzen
 - Proaktive Überwachung und Warnungen für kapazitätsbezogene Probleme zu konfigurieren
@@ -36,21 +36,21 @@ Nach Abschluss werden Sie in der Lage sein:
 ## Warum Kapazitätsplanung wichtig ist
 
 Vor der Bereitstellung von Anwendungen müssen Sie sicherstellen:
-- **Ausreichende Quoten** für die benötigten Ressourcen
+- **Ausreichende Kontingente** für die benötigten Ressourcen
 - **Ressourcenverfügbarkeit** in Ihrer Zielregion
 - **Verfügbarkeit der Servicestufe** für Ihren Abonnementtyp
 - **Netzwerkkapazität** für den erwarteten Datenverkehr
-- **Kostenoptimierung** durch angemessene Größenplanung
+- **Kostenoptimierung** durch angemessene Dimensionierung
 
-## 📊 Verständnis von Azure-Quoten und -Grenzen
+## 📊 Verständnis von Azure-Kontingenten und -Grenzen
 
 ### Arten von Grenzen
-1. **Abonnementbezogene Quoten** - Maximale Ressourcen pro Abonnement
-2. **Regionale Quoten** - Maximale Ressourcen pro Region
+1. **Abonnementbezogene Kontingente** - Maximale Ressourcen pro Abonnement
+2. **Regionale Kontingente** - Maximale Ressourcen pro Region
 3. **Ressourcenspezifische Grenzen** - Grenzen für einzelne Ressourcentypen
 4. **Servicestufen-Grenzen** - Grenzen basierend auf Ihrem Serviceplan
 
-### Häufige Ressourcenquoten
+### Häufige Ressourcenkontingente
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -354,7 +354,7 @@ estimate_costs() {
 }
 ```
 
-### Empfehlungen zur SKU-Optimierung
+### Empfehlungen zur Optimierung von SKUs
 ```bash
 # Recommend optimal SKUs based on requirements
 recommend_sku() {
@@ -620,7 +620,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Konfigurationsdatei-Vorlage
+### Vorlage für Konfigurationsdateien
 ```json
 {
   "requirements": {
@@ -712,18 +712,18 @@ hooks:
 ## Best Practices
 
 1. **Führen Sie immer Kapazitätsprüfungen durch**, bevor Sie in neuen Regionen bereitstellen
-2. **Überwachen Sie regelmäßig die Nutzung von Quoten**, um Überraschungen zu vermeiden
-3. **Planen Sie Wachstum**, indem Sie zukünftige Kapazitätsanforderungen prüfen
-4. **Verwenden Sie Tools zur Kostenschätzung**, um unerwartet hohe Rechnungen zu vermeiden
+2. **Überwachen Sie regelmäßig die Kontingentnutzung**, um Überraschungen zu vermeiden
+3. **Planen Sie für Wachstum**, indem Sie zukünftige Kapazitätsanforderungen prüfen
+4. **Nutzen Sie Kostenberechnungstools**, um unerwartete Rechnungen zu vermeiden
 5. **Dokumentieren Sie Kapazitätsanforderungen** für Ihr Team
 6. **Automatisieren Sie die Kapazitätsvalidierung** in CI/CD-Pipelines
 7. **Berücksichtigen Sie regionale Failover-Kapazitätsanforderungen**
 
 ## Nächste Schritte
 
-- [SKU-Auswahl-Leitfaden](sku-selection.md) - Optimale Servicestufen auswählen
+- [SKU-Auswahlleitfaden](sku-selection.md) - Optimale Servicestufen auswählen
 - [Pre-Flight-Checks](preflight-checks.md) - Automatisierte Validierungsskripte
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Schnellreferenzbefehle
+- [Spickzettel](../../resources/cheat-sheet.md) - Schnellreferenzbefehle
 - [Glossar](../../resources/glossary.md) - Begriffe und Definitionen
 
 ## Zusätzliche Ressourcen
@@ -731,12 +731,13 @@ hooks:
 - [Azure-Abonnementgrenzen](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure-Preisrechner](https://azure.microsoft.com/pricing/calculator/)
 - [Azure-Kostenmanagement](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure-Regionale Verfügbarkeit](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure Regionale Verfügbarkeit](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigation**
-- **Vorherige Lektion**: [Debugging-Leitfaden](../troubleshooting/debugging.md)
+- **Vorherige Lektion**: [Fehlerbehebungsleitfaden](../troubleshooting/debugging.md)
+
 - **Nächste Lektion**: [SKU-Auswahl](sku-selection.md)
 
 ---

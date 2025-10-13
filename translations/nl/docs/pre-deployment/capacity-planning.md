@@ -1,39 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T22:00:06+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:33:19+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "nl"
 }
 -->
-# Capaciteitsplanning - Beschikbaarheid en limieten van Azure-resources
+# Capaciteitsplanning: Begrijpen van Azure Quota's en Limieten - Beschikbaarheid en Limieten van Azure Resources
 
 ## Introductie
 
-Deze uitgebreide gids helpt je bij het plannen en valideren van de capaciteit van Azure-resources voordat je gaat implementeren met Azure Developer CLI. Leer hoe je quota's, beschikbaarheid en regionale beperkingen kunt beoordelen om succesvolle implementaties te garanderen, terwijl je kosten en prestaties optimaliseert. Beheers technieken voor capaciteitsplanning voor verschillende applicatiearchitecturen en schaalscenario's.
+Deze uitgebreide gids helpt je bij het plannen en valideren van Azure resourcecapaciteit voordat je gaat implementeren met Azure Developer CLI. Leer hoe je quota's, beschikbaarheid en regionale beperkingen kunt beoordelen om succesvolle implementaties te garanderen, terwijl je kosten en prestaties optimaliseert. Beheers capaciteitsplanningstechnieken voor verschillende applicatiearchitecturen en schaalscenario's.
 
 ## Leerdoelen
 
-Door deze gids te voltooien, leer je:
-- Begrijpen van Azure-quota's, limieten en regionale beschikbaarheidsbeperkingen
-- Beheersen van technieken om resourcebeschikbaarheid en capaciteit te controleren vóór implementatie
-- Implementeren van geautomatiseerde capaciteitsvalidatie- en monitoringsstrategieën
+Na het voltooien van deze gids kun je:
+- Begrijpen wat Azure quota's, limieten en regionale beschikbaarheidsbeperkingen zijn
+- Technieken beheersen om resourcebeschikbaarheid en capaciteit te controleren vóór implementatie
+- Geautomatiseerde capaciteitsvalidatie- en monitoringsstrategieën implementeren
 - Applicaties ontwerpen met de juiste resourcegrootte en schaaloverwegingen
-- Kostenoptimalisatiestrategieën toepassen door middel van intelligente capaciteitsplanning
+- Kostenoptimalisatiestrategieën toepassen door intelligente capaciteitsplanning
 - Waarschuwingen en monitoring configureren voor quotagebruik en resourcebeschikbaarheid
 
 ## Leerresultaten
 
-Na voltooiing kun je:
-- Azure-resourcecapaciteitsvereisten beoordelen en valideren vóór implementatie
-- Geautomatiseerde scripts maken voor capaciteitscontrole en quotamonitoring
-- Schaalbare architecturen ontwerpen die rekening houden met regionale en abonnementslimieten
-- Kosteneffectieve strategieën voor resourcegrootte implementeren voor verschillende werkbelastingtypes
-- Proactieve monitoring en waarschuwingen configureren voor capaciteitsgerelateerde problemen
-- Multi-region implementaties plannen met een juiste capaciteitsverdeling
+Na voltooiing ben je in staat om:
+- Azure resourcecapaciteitsvereisten te beoordelen en te valideren vóór implementatie
+- Geautomatiseerde scripts te maken voor capaciteitscontrole en quotamonitoring
+- Schaalbare architecturen te ontwerpen die rekening houden met regionale en abonnementslimieten
+- Kosteneffectieve strategieën voor resourcegrootte te implementeren voor verschillende werkbelastingtypes
+- Proactieve monitoring en waarschuwingen te configureren voor capaciteitsgerelateerde problemen
+- Multi-region implementaties te plannen met een juiste capaciteitsverdeling
 
-## Waarom capaciteitsplanning belangrijk is
+## Waarom Capaciteitsplanning Belangrijk Is
 
 Voordat je applicaties implementeert, moet je ervoor zorgen:
 - **Voldoende quota** voor benodigde resources
@@ -42,15 +42,15 @@ Voordat je applicaties implementeert, moet je ervoor zorgen:
 - **Netwerkcapaciteit** voor verwacht verkeer
 - **Kostenoptimalisatie** door juiste sizing
 
-## 📊 Begrijpen van Azure-quota's en limieten
+## 📊 Begrijpen van Azure Quota's en Limieten
 
-### Soorten limieten
+### Soorten Limieten
 1. **Abonnementsniveau quota's** - Maximale resources per abonnement
 2. **Regionale quota's** - Maximale resources per regio
 3. **Resource-specifieke limieten** - Limieten voor individuele resourcetypen
-4. **Servicetier limieten** - Limieten gebaseerd op jouw serviceplan
+4. **Servicetier limieten** - Limieten gebaseerd op je serviceplan
 
-### Veelvoorkomende resourcequota's
+### Veelvoorkomende Resource Quota's
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -60,9 +60,9 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Capaciteitscontroles vóór implementatie
+## Capaciteitscontroles vóór Implementatie
 
-### Geautomatiseerd capaciteitsvalidatiescript
+### Geautomatiseerd Capaciteitsvalidatiescript
 ```bash
 #!/bin/bash
 # capacity-check.sh - Validate Azure capacity before deployment
@@ -120,7 +120,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Capaciteitscontroles per service
+### Capaciteitscontroles per Service
 
 #### App Service Capaciteit
 ```bash
@@ -252,9 +252,9 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Validatie van regionale beschikbaarheid
+## 📍 Validatie van Regionale Beschikbaarheid
 
-### Beschikbaarheid van services per regio
+### Servicebeschikbaarheid per Regio
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -288,7 +288,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-### Aanbevelingen voor regioselectie
+### Aanbevelingen voor Regioselectie
 ```bash
 # Recommend optimal regions based on requirements
 recommend_region() {
@@ -319,9 +319,9 @@ recommend_region() {
 }
 ```
 
-## 💰 Kostenplanning en -schatting
+## 💰 Kostenplanning en Schatting
 
-### Schatting van resourcekosten
+### Schatting van Resourcekosten
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Geautomatiseerde pre-flight controles
+## 🚀 Geautomatiseerde Pre-Flight Controles
 
-### Uitgebreid pre-flight script
+### Uitgebreid Pre-Flight Script
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -620,7 +620,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Configuratiebestand template
+### Configuratiebestand Template
 ```json
 {
   "requirements": {
@@ -654,9 +654,9 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Monitoring van capaciteit tijdens implementatie
+## 📈 Monitoring van Capaciteit tijdens Implementatie
 
-### Real-time capaciteitsmonitoring
+### Real-time Capaciteitsmonitoring
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integratie met AZD
 
-### Voeg pre-flight hooks toe aan azure.yaml
+### Voeg Pre-Flight Hooks toe aan azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -712,21 +712,21 @@ hooks:
 ## Best Practices
 
 1. **Voer altijd capaciteitscontroles uit** voordat je naar nieuwe regio's implementeert
-2. **Monitor quotagebruik regelmatig** om verrassingen te voorkomen
+2. **Monitor regelmatig quotagebruik** om verrassingen te voorkomen
 3. **Plan voor groei** door toekomstige capaciteitsbehoeften te controleren
-4. **Gebruik kostenramingtools** om onverwachte rekeningen te vermijden
+4. **Gebruik kostenramingtools** om onverwachte kosten te vermijden
 5. **Documenteer capaciteitsvereisten** voor je team
 6. **Automatiseer capaciteitsvalidatie** in CI/CD-pijplijnen
 7. **Houd rekening met regionale failover** capaciteitsvereisten
 
-## Volgende stappen
+## Volgende Stappen
 
 - [SKU Selectiegids](sku-selection.md) - Kies optimale servicetiers
 - [Pre-flight Controles](preflight-checks.md) - Geautomatiseerde validatiescripts
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Snelle referentiecommando's
-- [Glossarium](../../resources/glossary.md) - Termen en definities
+- [Glossary](../../resources/glossary.md) - Termen en definities
 
-## Aanvullende bronnen
+## Aanvullende Bronnen
 
 - [Azure Abonnementslimieten](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure Prijscalculator](https://azure.microsoft.com/pricing/calculator/)
@@ -737,9 +737,10 @@ hooks:
 
 **Navigatie**
 - **Vorige Les**: [Debugging Gids](../troubleshooting/debugging.md)
+
 - **Volgende Les**: [SKU Selectie](sku-selection.md)
 
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

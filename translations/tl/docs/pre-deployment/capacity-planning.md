@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T22:01:28+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:35:11+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "tl"
 }
 -->
-# Pagpaplano ng Kapasidad - Availability ng Azure Resource at Mga Limitasyon
+# Pagpaplano ng Kapasidad: Pag-unawa sa mga Quota at Limitasyon ng Azure
 
 ## Panimula
 
-Ang gabay na ito ay tumutulong sa iyo na magplano at mag-validate ng kapasidad ng Azure resources bago mag-deploy gamit ang Azure Developer CLI. Matutunan kung paano suriin ang mga quota, availability, at mga limitasyon sa rehiyon upang matiyak ang matagumpay na deployment habang pinapahusay ang gastos at performance. Masterin ang mga teknik sa pagpaplano ng kapasidad para sa iba't ibang arkitektura ng aplikasyon at mga senaryo ng pag-scale.
+Ang gabay na ito ay tumutulong sa iyo na magplano at mag-validate ng kapasidad ng mga resource ng Azure bago mag-deploy gamit ang Azure Developer CLI. Matutunan kung paano suriin ang mga quota, availability, at limitasyon sa rehiyon upang matiyak ang matagumpay na deployment habang pinapahusay ang gastos at performance. Maging bihasa sa mga teknik ng pagpaplano ng kapasidad para sa iba't ibang arkitektura ng aplikasyon at mga senaryo ng pag-scale.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng gabay na ito, ikaw ay:
-- Maiintindihan ang mga quota, limitasyon, at mga constraint sa regional availability ng Azure
-- Magiging bihasa sa mga teknik para sa pagsusuri ng availability at kapasidad ng resources bago mag-deploy
-- Makakapagpatupad ng mga automated na estratehiya sa pag-validate at pag-monitor ng kapasidad
-- Makakapagdisenyo ng mga aplikasyon na may tamang sizing at scaling ng resources
+- Maiintindihan ang mga quota, limitasyon, at mga limitasyon sa availability ng rehiyon ng Azure
+- Magiging bihasa sa mga teknik para sa pagsusuri ng availability at kapasidad ng resource bago mag-deploy
+- Makakapagpatupad ng mga automated na estratehiya para sa pag-validate ng kapasidad at monitoring
+- Makakapagdisenyo ng mga aplikasyon na may tamang sizing at scaling ng resource
 - Makakapag-apply ng mga estratehiya sa pag-optimize ng gastos sa pamamagitan ng matalinong pagpaplano ng kapasidad
-- Makakapag-configure ng mga alerto at monitoring para sa paggamit ng quota at availability ng resources
+- Makakapag-configure ng mga alerto at monitoring para sa paggamit ng quota at availability ng resource
 
-## Mga Resulta sa Pag-aaral
+## Mga Resulta ng Pag-aaral
 
-Sa pagtatapos, ikaw ay:
-- Makakapagsuri at makakapag-validate ng mga kinakailangan sa kapasidad ng Azure resources bago mag-deploy
-- Makakagawa ng mga automated na script para sa pagsusuri ng kapasidad at pag-monitor ng quota
-- Makakapagdisenyo ng scalable na arkitektura na isinasaalang-alang ang mga limitasyon sa rehiyon at subscription
-- Makakapagpatupad ng mga cost-effective na estratehiya sa sizing ng resources para sa iba't ibang uri ng workload
-- Makakapag-configure ng proactive na monitoring at alerting para sa mga isyu sa kapasidad
-- Makakapagplano ng multi-region deployments na may tamang distribusyon ng kapasidad
+Sa pagtatapos, magagawa mo:
+- Suriin at i-validate ang mga kinakailangan sa kapasidad ng resource ng Azure bago mag-deploy
+- Gumawa ng mga automated na script para sa pagsusuri ng kapasidad at monitoring ng quota
+- Magdisenyo ng mga scalable na arkitektura na isinasaalang-alang ang mga limitasyon sa rehiyon at subscription
+- Magpatupad ng mga estratehiya sa tamang sizing ng resource para sa iba't ibang uri ng workload
+- Mag-configure ng proactive na monitoring at alerting para sa mga isyu sa kapasidad
+- Magplano ng mga deployment sa maraming rehiyon na may tamang distribusyon ng kapasidad
 
 ## Bakit Mahalaga ang Pagpaplano ng Kapasidad
 
 Bago mag-deploy ng mga aplikasyon, kailangan mong tiyakin:
-- **Sapat na quota** para sa mga kinakailangang resources
-- **Availability ng resources** sa target na rehiyon
+- **Sapat na quota** para sa mga kinakailangang resource
+- **Availability ng resource** sa target na rehiyon
 - **Availability ng service tier** para sa uri ng subscription mo
 - **Kapasidad ng network** para sa inaasahang traffic
 - **Pag-optimize ng gastos** sa pamamagitan ng tamang sizing
 
-## 📊 Pag-unawa sa Azure Quotas at Limitasyon
+## 📊 Pag-unawa sa mga Quota at Limitasyon ng Azure
 
 ### Mga Uri ng Limitasyon
-1. **Quota sa subscription-level** - Maximum na resources kada subscription
-2. **Quota sa rehiyon** - Maximum na resources kada rehiyon
-3. **Limitasyon sa resource-specific** - Mga limitasyon para sa bawat uri ng resource
-4. **Limitasyon sa service tier** - Mga limitasyon batay sa iyong service plan
+1. **Quota sa antas ng subscription** - Maximum na resource kada subscription
+2. **Quota sa rehiyon** - Maximum na resource kada rehiyon
+3. **Limitasyon sa partikular na resource** - Limitasyon para sa bawat uri ng resource
+4. **Limitasyon sa service tier** - Limitasyon batay sa iyong service plan
 
-### Karaniwang Resource Quotas
+### Karaniwang Quota ng Resource
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -120,7 +120,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Mga Pagsusuri sa Kapasidad ng Serbisyo
+### Mga Pagsusuri sa Kapasidad ng Partikular na Serbisyo
 
 #### Kapasidad ng App Service
 ```bash
@@ -319,9 +319,9 @@ recommend_region() {
 }
 ```
 
-## 💰 Pagpaplano ng Gastos at Pagtatantiya
+## 💰 Pagpaplano ng Gastos at Pagtatantya
 
-### Pagtatantiya ng Gastos ng Resource
+### Pagtatantya ng Gastos ng Resource
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -421,7 +421,7 @@ recommend_sku() {
 
 ## 🚀 Automated na Pre-Flight Checks
 
-### Comprehensive na Pre-Flight Script
+### Komprehensibong Pre-Flight Script
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -654,9 +654,9 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Pag-monitor ng Kapasidad Habang Nagde-deploy
+## 📈 Monitoring ng Kapasidad Habang Nagde-deploy
 
-### Real-Time na Pag-monitor ng Kapasidad
+### Real-Time na Monitoring ng Kapasidad
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -711,35 +711,36 @@ hooks:
 
 ## Mga Best Practices
 
-1. **Laging magsagawa ng capacity checks** bago mag-deploy sa mga bagong rehiyon
+1. **Laging magsagawa ng pagsusuri sa kapasidad** bago mag-deploy sa mga bagong rehiyon
 2. **Regular na i-monitor ang paggamit ng quota** upang maiwasan ang mga sorpresa
 3. **Magplano para sa paglago** sa pamamagitan ng pagsusuri ng mga pangangailangan sa kapasidad sa hinaharap
-4. **Gamitin ang mga tool sa pagtatantiya ng gastos** upang maiwasan ang biglaang mataas na bayarin
-5. **I-dokumenta ang mga kinakailangan sa kapasidad** para sa iyong team
-6. **I-automate ang pag-validate ng kapasidad** sa CI/CD pipelines
+4. **Gumamit ng mga tool sa pagtatantya ng gastos** upang maiwasan ang biglaang mataas na bayarin
+5. **Idokumento ang mga kinakailangan sa kapasidad** para sa iyong team
+6. **I-automate ang pag-validate ng kapasidad** sa mga CI/CD pipeline
 7. **Isaalang-alang ang mga pangangailangan sa kapasidad para sa regional failover**
 
 ## Mga Susunod na Hakbang
 
 - [Gabay sa Pagpili ng SKU](sku-selection.md) - Pumili ng optimal na service tiers
 - [Pre-flight Checks](preflight-checks.md) - Mga automated na validation script
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Mga quick reference na command
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Mga mabilisang reference na command
 - [Glossary](../../resources/glossary.md) - Mga termino at kahulugan
 
-## Karagdagang Mga Resources
+## Karagdagang Mga Resource
 
-- [Azure Subscription Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Mga Limitasyon ng Subscription ng Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Regional Availability](https://azure.microsoft.com/global-infrastructure/services/)
+- [Availability ng Azure sa Rehiyon](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigation**
-- **Nakaraang Aralin**: [Debugging Guide](../troubleshooting/debugging.md)
-- **Susunod na Aralin**: [SKU Selection](sku-selection.md)
+- **Nakaraang Aralin**: [Gabay sa Pag-debug](../troubleshooting/debugging.md)
+
+- **Susunod na Aralin**: [Pagpili ng SKU](sku-selection.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Bagamat sinisikap naming maging tumpak, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

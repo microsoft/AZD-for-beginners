@@ -1,22 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T21:59:12+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:32:26+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "da"
 }
 -->
-# Kapacitetsplanlægning - Azure Ressource Tilgængelighed og Begrænsninger
+# Kapacitetsplanlægning: Forstå Azure-kvoter og -grænser
 
 ## Introduktion
 
-Denne omfattende guide hjælper dig med at planlægge og validere Azure ressourcekapacitet, før du implementerer med Azure Developer CLI. Lær at vurdere kvoter, tilgængelighed og regionale begrænsninger for at sikre succesfulde implementeringer, samtidig med at du optimerer omkostninger og ydeevne. Bliv ekspert i kapacitetsplanlægningsteknikker for forskellige applikationsarkitekturer og skaleringsscenarier.
+Denne omfattende guide hjælper dig med at planlægge og validere Azure-ressourcekapacitet, før du implementerer med Azure Developer CLI. Lær at vurdere kvoter, tilgængelighed og regionale begrænsninger for at sikre succesfulde implementeringer, samtidig med at du optimerer omkostninger og ydeevne. Bliv ekspert i kapacitetsplanlægningsteknikker for forskellige applikationsarkitekturer og skaleringsscenarier.
 
 ## Læringsmål
 
 Ved at gennemføre denne guide vil du:
-- Forstå Azure kvoter, begrænsninger og regionale tilgængelighedsbegrænsninger
+- Forstå Azure-kvoter, grænser og regionale tilgængelighedsbegrænsninger
 - Mestre teknikker til at kontrollere ressourcekapacitet og tilgængelighed før implementering
 - Implementere automatiserede strategier for kapacitetsvalidering og overvågning
 - Designe applikationer med korrekt ressourceallokering og skaleringshensyn
@@ -25,30 +25,30 @@ Ved at gennemføre denne guide vil du:
 
 ## Læringsresultater
 
-Efter afslutning vil du kunne:
-- Vurdere og validere Azure ressourcekapacitetskrav før implementering
+Når du er færdig, vil du kunne:
+- Vurdere og validere Azure-ressourcekapacitetskrav før implementering
 - Oprette automatiserede scripts til kapacitetskontrol og kvoteovervågning
-- Designe skalerbare arkitekturer, der tager højde for regionale og abonnementsbegrænsninger
-- Implementere omkostningseffektive strategier for ressourceallokering til forskellige arbejdsbelastningstyper
+- Designe skalerbare arkitekturer, der tager højde for regionale og abonnementsgrænser
+- Implementere omkostningseffektive strategier for ressourceallokering til forskellige arbejdsbelastninger
 - Konfigurere proaktiv overvågning og alarmering for kapacitetsrelaterede problemer
 - Planlægge multi-region implementeringer med korrekt kapacitetsfordeling
 
-## Hvorfor kapacitetsplanlægning er vigtigt
+## Hvorfor kapacitetsplanlægning er vigtig
 
 Før du implementerer applikationer, skal du sikre:
 - **Tilstrækkelige kvoter** til de nødvendige ressourcer
 - **Ressourcetilgængelighed** i din målregion
 - **Tilgængelighed af serviceniveau** for din abonnementstype
 - **Netværkskapacitet** til forventet trafik
-- **Omkostningsoptimering** gennem korrekt dimensionering
+- **Omkostningsoptimering** gennem korrekt ressourceallokering
 
-## 📊 Forstå Azure kvoter og begrænsninger
+## 📊 Forstå Azure-kvoter og -grænser
 
-### Typer af begrænsninger
-1. **Abonnementsniveau kvoter** - Maksimale ressourcer pr. abonnement
+### Typer af grænser
+1. **Abonnementsniveau-kvoter** - Maksimale ressourcer pr. abonnement
 2. **Regionale kvoter** - Maksimale ressourcer pr. region
-3. **Ressourcespecifikke begrænsninger** - Begrænsninger for individuelle ressource typer
-4. **Serviceniveau begrænsninger** - Begrænsninger baseret på din serviceplan
+3. **Ressourcespecifikke grænser** - Grænser for individuelle ressourcekategorier
+4. **Serviceniveau-grænser** - Grænser baseret på din serviceplan
 
 ### Almindelige ressourcekvoter
 ```bash
@@ -59,6 +59,7 @@ az vm list-usage --location eastus2 --output table
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
+
 
 ## Kapacitetskontrol før implementering
 
@@ -120,6 +121,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
+
 ### Kapacitetskontrol for specifikke tjenester
 
 #### App Service kapacitet
@@ -154,7 +156,8 @@ check_app_service_capacity() {
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Database kapacitet
+
+#### Databasekapacitet
 ```bash
 # Check PostgreSQL capacity
 check_postgres_capacity() {
@@ -211,6 +214,7 @@ check_cosmos_capacity() {
 }
 ```
 
+
 #### Container Apps kapacitet
 ```bash
 # Check Container Apps capacity
@@ -252,7 +256,8 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Regional tilgængelighedsvalidering
+
+## 📍 Validering af regional tilgængelighed
 
 ### Tjenestetilgængelighed efter region
 ```bash
@@ -288,6 +293,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
+
 ### Anbefalinger til regionsvalg
 ```bash
 # Recommend optimal regions based on requirements
@@ -318,6 +324,7 @@ recommend_region() {
     esac
 }
 ```
+
 
 ## 💰 Omkostningsplanlægning og estimering
 
@@ -353,6 +360,7 @@ estimate_costs() {
     echo "   https://portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview"
 }
 ```
+
 
 ### Anbefalinger til SKU-optimering
 ```bash
@@ -418,6 +426,7 @@ recommend_sku() {
     esac
 }
 ```
+
 
 ## 🚀 Automatiserede pre-flight kontroller
 
@@ -620,7 +629,8 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Konfigurationsfil skabelon
+
+### Konfigurationsfilskabelon
 ```json
 {
   "requirements": {
@@ -653,6 +663,7 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
+
 
 ## 📈 Overvågning af kapacitet under implementering
 
@@ -689,6 +700,7 @@ monitor_deployment_capacity() {
 }
 ```
 
+
 ## 🔗 Integration med AZD
 
 ### Tilføj pre-flight hooks til azure.yaml
@@ -709,37 +721,39 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## Bedste praksis
+
+## Best Practices
 
 1. **Kør altid kapacitetskontroller** før implementering i nye regioner
 2. **Overvåg kvoteforbrug regelmæssigt** for at undgå overraskelser
 3. **Planlæg for vækst** ved at vurdere fremtidige kapacitetsbehov
 4. **Brug værktøjer til omkostningsestimering** for at undgå uventede regninger
 5. **Dokumentér kapacitetskrav** for dit team
-6. **Automatiser kapacitetsvalidering** i CI/CD pipelines
+6. **Automatiser kapacitetsvalidering** i CI/CD-pipelines
 7. **Overvej regionale failover** kapacitetskrav
 
-## Næste skridt
+## Næste trin
 
-- [SKU Udvælgelsesguide](sku-selection.md) - Vælg optimale serviceniveauer
-- [Pre-flight Kontroller](preflight-checks.md) - Automatiserede valideringsscripts
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Hurtige referencekommandoer
+- [SKU-udvælgelsesguide](sku-selection.md) - Vælg optimale serviceniveauer
+- [Pre-flight kontroller](preflight-checks.md) - Automatiserede valideringsscripts
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Hurtig reference til kommandoer
 - [Ordliste](../../resources/glossary.md) - Termer og definitioner
 
 ## Yderligere ressourcer
 
-- [Azure Abonnementsbegrænsninger](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure Prisberegner](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Omkostningsstyring](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Regional Tilgængelighed](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure-abonnementsgrænser](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure-prisberegner](https://azure.microsoft.com/pricing/calculator/)
+- [Azure omkostningsstyring](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure regional tilgængelighed](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigation**
-- **Forrige Lektion**: [Fejlfindingsguide](../troubleshooting/debugging.md)
-- **Næste Lektion**: [SKU Udvælgelse](sku-selection.md)
+- **Forrige lektion**: [Fejlfindingsguide](../troubleshooting/debugging.md)
+
+- **Næste lektion**: [SKU-udvælgelse](sku-selection.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.

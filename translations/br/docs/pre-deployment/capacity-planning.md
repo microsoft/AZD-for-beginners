@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T19:42:46+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:29:51+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "br"
 }
 -->
-# Planejamento de Capacidade - Disponibilidade e Limites de Recursos do Azure
+# Planejamento de Capacidade: Entendendo Cotas e Limites do Azure
 
 ## Introdução
 
@@ -16,16 +16,16 @@ Este guia abrangente ajuda você a planejar e validar a capacidade de recursos d
 ## Objetivos de Aprendizagem
 
 Ao concluir este guia, você será capaz de:
-- Compreender cotas, limites e restrições de disponibilidade regional do Azure
+- Entender cotas, limites e restrições de disponibilidade regional do Azure
 - Dominar técnicas para verificar disponibilidade e capacidade de recursos antes da implantação
 - Implementar estratégias automatizadas de validação e monitoramento de capacidade
-- Projetar aplicativos com considerações adequadas de dimensionamento e escalabilidade de recursos
+- Projetar aplicativos com dimensionamento e escalabilidade adequados de recursos
 - Aplicar estratégias de otimização de custos por meio de planejamento inteligente de capacidade
 - Configurar alertas e monitoramento para uso de cotas e disponibilidade de recursos
 
 ## Resultados de Aprendizagem
 
-Ao finalizar, você será capaz de:
+Ao final, você será capaz de:
 - Avaliar e validar os requisitos de capacidade de recursos do Azure antes da implantação
 - Criar scripts automatizados para verificação de capacidade e monitoramento de cotas
 - Projetar arquiteturas escaláveis que considerem limites regionais e de assinatura
@@ -35,18 +35,18 @@ Ao finalizar, você será capaz de:
 
 ## Por que o Planejamento de Capacidade é Importante
 
-Antes de implantar aplicativos, você precisa garantir:
+Antes de implantar aplicativos, é necessário garantir:
 - **Cotas suficientes** para os recursos necessários
-- **Disponibilidade de recursos** na região de destino
+- **Disponibilidade de recursos** na região alvo
 - **Disponibilidade de nível de serviço** para o tipo de assinatura
 - **Capacidade de rede** para o tráfego esperado
 - **Otimização de custos** por meio de dimensionamento adequado
 
-## 📊 Compreendendo Cotas e Limites do Azure
+## 📊 Entendendo Cotas e Limites do Azure
 
 ### Tipos de Limites
-1. **Cotas no nível da assinatura** - Máximo de recursos por assinatura
-2. **Cotas regionais** - Máximo de recursos por região
+1. **Cotas no nível da assinatura** - Recursos máximos por assinatura
+2. **Cotas regionais** - Recursos máximos por região
 3. **Limites específicos de recursos** - Limites para tipos individuais de recursos
 4. **Limites de nível de serviço** - Limites baseados no plano de serviço
 
@@ -59,6 +59,7 @@ az vm list-usage --location eastus2 --output table
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
+
 
 ## Verificações de Capacidade Pré-Implantação
 
@@ -120,9 +121,10 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Verificações de Capacidade Específicas de Serviço
 
-#### Capacidade de Serviço de Aplicativos
+### Verificações Específicas de Capacidade de Serviço
+
+#### Capacidade do App Service
 ```bash
 # Check App Service Plan availability
 check_app_service_capacity() {
@@ -153,6 +155,7 @@ check_app_service_capacity() {
 # Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
+
 
 #### Capacidade de Banco de Dados
 ```bash
@@ -211,7 +214,8 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Capacidade de Aplicativos em Contêiner
+
+#### Capacidade de Container Apps
 ```bash
 # Check Container Apps capacity
 check_container_apps_capacity() {
@@ -252,6 +256,7 @@ check_container_apps_capacity() {
 }
 ```
 
+
 ## 📍 Validação de Disponibilidade Regional
 
 ### Disponibilidade de Serviço por Região
@@ -288,6 +293,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
+
 ### Recomendações para Seleção de Região
 ```bash
 # Recommend optimal regions based on requirements
@@ -318,6 +324,7 @@ recommend_region() {
     esac
 }
 ```
+
 
 ## 💰 Planejamento e Estimativa de Custos
 
@@ -353,6 +360,7 @@ estimate_costs() {
     echo "   https://portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview"
 }
 ```
+
 
 ### Recomendações de Otimização de SKU
 ```bash
@@ -418,6 +426,7 @@ recommend_sku() {
     esac
 }
 ```
+
 
 ## 🚀 Verificações Automatizadas Pré-Implantação
 
@@ -620,6 +629,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
+
 ### Modelo de Arquivo de Configuração
 ```json
 {
@@ -653,6 +663,7 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
+
 
 ## 📈 Monitoramento de Capacidade Durante a Implantação
 
@@ -689,6 +700,7 @@ monitor_deployment_capacity() {
 }
 ```
 
+
 ## 🔗 Integração com AZD
 
 ### Adicionar Hooks de Verificação Pré-Implantação ao azure.yaml
@@ -708,6 +720,7 @@ hooks:
       
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
+
 
 ## Melhores Práticas
 
@@ -737,9 +750,10 @@ hooks:
 
 **Navegação**
 - **Lição Anterior**: [Guia de Depuração](../troubleshooting/debugging.md)
+
 - **Próxima Lição**: [Seleção de SKU](sku-selection.md)
 
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.

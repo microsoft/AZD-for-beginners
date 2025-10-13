@@ -1,54 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T17:19:15+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:25:55+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "hk"
 }
 -->
-# 容量規劃 - Azure 資源可用性及限制
+# 容量規劃：了解 Azure 配額和限制 - Azure 資源可用性與限制
 
 ## 介紹
 
-這份全面指南幫助你在使用 Azure Developer CLI 部署之前，規劃及驗證 Azure 資源容量。學習如何評估配額、可用性及地區限制，以確保成功部署，同時優化成本及性能。掌握針對不同應用架構及擴展場景的容量規劃技巧。
+本指南旨在幫助您在使用 Azure Developer CLI 部署之前，規劃和驗證 Azure 資源容量。學習如何評估配額、可用性和區域限制，以確保成功部署，同時優化成本和性能。掌握針對不同應用架構和擴展場景的容量規劃技術。
 
 ## 學習目標
 
-完成本指南後，你將能夠：
-- 了解 Azure 配額、限制及地區可用性約束
-- 掌握在部署前檢查資源可用性及容量的技巧
-- 實施自動化的容量驗證及監控策略
-- 設計具有適當資源大小及擴展考量的應用程式
+完成本指南後，您將能夠：
+- 了解 Azure 配額、限制和區域可用性約束
+- 掌握在部署前檢查資源可用性和容量的技術
+- 實施自動化的容量驗證和監控策略
+- 設計具有適當資源大小和擴展考量的應用程序
 - 通過智能容量規劃應用成本優化策略
-- 配置配額使用及資源可用性的警報及監控
+- 配置配額使用和資源可用性的警報和監控
 
 ## 學習成果
 
-完成後，你將能夠：
-- 在部署前評估及驗證 Azure 資源容量需求
-- 創建自動化腳本以檢查容量及監控配額
-- 設計考慮地區及訂閱限制的可擴展架構
-- 為不同工作負載類型實施具成本效益的資源大小策略
-- 配置主動監控及警報以應對容量相關問題
-- 規劃具有適當容量分配的多地區部署
+完成後，您將能夠：
+- 在部署前評估和驗證 Azure 資源容量需求
+- 創建自動化腳本進行容量檢查和配額監控
+- 設計考慮區域和訂閱限制的可擴展架構
+- 為不同工作負載類型實施成本效益的資源大小策略
+- 配置主動監控和警報以解決容量相關問題
+- 規劃多區域部署並適當分配容量
 
 ## 為什麼容量規劃很重要
 
-在部署應用程式之前，你需要確保：
+在部署應用程序之前，您需要確保：
 - **足夠的配額**以滿足所需資源
-- **資源可用性**在目標地區
-- **服務層級可用性**符合你的訂閱類型
-- **網絡容量**能應對預期流量
+- **資源可用性**在目標區域內
+- **服務層級可用性**符合您的訂閱類型
+- **網絡容量**能夠應對預期流量
 - **通過適當大小進行成本優化**
 
-## 📊 了解 Azure 配額及限制
+## 📊 了解 Azure 配額和限制
 
 ### 限制類型
 1. **訂閱層級配額** - 每個訂閱的最大資源數量
-2. **地區配額** - 每個地區的最大資源數量
+2. **區域配額** - 每個區域的最大資源數量
 3. **資源特定限制** - 個別資源類型的限制
-4. **服務層級限制** - 根據你的服務計劃的限制
+4. **服務層級限制** - 根據您的服務計劃的限制
 
 ### 常見資源配額
 ```bash
@@ -60,7 +60,8 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## 部署前容量檢查
+
+## 部署前的容量檢查
 
 ### 自動化容量驗證腳本
 ```bash
@@ -120,6 +121,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
+
 ### 特定服務的容量檢查
 
 #### 應用服務容量
@@ -153,6 +155,7 @@ check_app_service_capacity() {
 # Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
+
 
 #### 數據庫容量
 ```bash
@@ -211,6 +214,7 @@ check_cosmos_capacity() {
 }
 ```
 
+
 #### 容器應用容量
 ```bash
 # Check Container Apps capacity
@@ -252,9 +256,10 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 地區可用性驗證
 
-### 按地區的服務可用性
+## 📍 區域可用性驗證
+
+### 按區域的服務可用性
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -288,7 +293,8 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-### 地區選擇建議
+
+### 區域選擇建議
 ```bash
 # Recommend optimal regions based on requirements
 recommend_region() {
@@ -319,7 +325,8 @@ recommend_region() {
 }
 ```
 
-## 💰 成本規劃及估算
+
+## 💰 成本規劃與估算
 
 ### 資源成本估算
 ```bash
@@ -353,6 +360,7 @@ estimate_costs() {
     echo "   https://portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview"
 }
 ```
+
 
 ### SKU 優化建議
 ```bash
@@ -418,6 +426,7 @@ recommend_sku() {
     esac
 }
 ```
+
 
 ## 🚀 自動化部署前檢查
 
@@ -620,6 +629,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
+
 ### 配置文件模板
 ```json
 {
@@ -653,6 +663,7 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
+
 
 ## 📈 部署期間的容量監控
 
@@ -689,9 +700,10 @@ monitor_deployment_capacity() {
 }
 ```
 
-## 🔗 與 AZD 的整合
 
-### 在 azure.yaml 中添加部署前檢查
+## 🔗 與 AZD 的集成
+
+### 在 azure.yaml 中添加部署前檢查掛鉤
 ```yaml
 # azure.yaml
 hooks:
@@ -709,37 +721,39 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
+
 ## 最佳實踐
 
-1. **在部署到新地區前**始終進行容量檢查
-2. **定期監控配額使用**以避免意外
-3. **規劃未來增長**通過檢查未來容量需求
-4. **使用成本估算工具**以避免帳單衝擊
-5. **為團隊記錄容量需求**
+1. **在新區域部署前始終進行容量檢查**
+2. **定期監控配額使用情況**以避免意外
+3. **規劃未來增長**並檢查未來容量需求
+4. **使用成本估算工具**避免帳單衝擊
+5. **為您的團隊記錄容量需求**
 6. **在 CI/CD 管道中自動化容量驗證**
-7. **考慮地區故障切換**的容量需求
+7. **考慮區域故障切換的容量需求**
 
 ## 下一步
 
 - [SKU 選擇指南](sku-selection.md) - 選擇最佳服務層級
 - [部署前檢查](preflight-checks.md) - 自動化驗證腳本
 - [速查表](../../resources/cheat-sheet.md) - 快速參考命令
-- [詞彙表](../../resources/glossary.md) - 術語及定義
+- [詞彙表](../../resources/glossary.md) - 術語和定義
 
 ## 其他資源
 
 - [Azure 訂閱限制](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure 價格計算器](https://azure.microsoft.com/pricing/calculator/)
 - [Azure 成本管理](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure 地區可用性](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure 區域可用性](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **導航**
 - **上一課**: [調試指南](../troubleshooting/debugging.md)
+
 - **下一課**: [SKU 選擇](sku-selection.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用AI翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。應以原文文件作為權威來源。如涉及關鍵資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋概不負責。
