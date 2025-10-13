@@ -1,37 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:44:06+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:36:32+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "cs"
 }
 -->
-# Plánování kapacity - Dostupnost a limity zdrojů Azure
+# Plánování kapacity: Pochopení kvót a limitů Azure - Dostupnost a limity zdrojů Azure
 
 ## Úvod
 
-Tento komplexní průvodce vám pomůže naplánovat a ověřit kapacitu zdrojů Azure před nasazením pomocí Azure Developer CLI. Naučte se hodnotit kvóty, dostupnost a regionální omezení, abyste zajistili úspěšná nasazení při optimalizaci nákladů a výkonu. Ovládněte techniky plánování kapacity pro různé architektury aplikací a scénáře škálování.
+Tento komplexní průvodce vám pomůže naplánovat a ověřit kapacitu zdrojů Azure před nasazením pomocí Azure Developer CLI. Naučte se hodnotit kvóty, dostupnost a regionální omezení, abyste zajistili úspěšná nasazení a zároveň optimalizovali náklady a výkon. Ovládněte techniky plánování kapacity pro různé architektury aplikací a scénáře škálování.
 
 ## Cíle učení
 
 Po dokončení tohoto průvodce budete:
-- Rozumět kvótám, limitům a regionálním omezením Azure
-- Ovládat techniky pro kontrolu dostupnosti a kapacity zdrojů před nasazením
+- Rozumět kvótám Azure, limitům a regionálním omezením dostupnosti
+- Ovládat techniky kontroly dostupnosti a kapacity zdrojů před nasazením
 - Implementovat automatizované strategie ověřování a monitorování kapacity
 - Navrhovat aplikace s ohledem na správnou velikost a škálování zdrojů
 - Aplikovat strategie optimalizace nákladů prostřednictvím inteligentního plánování kapacity
 - Konfigurovat upozornění a monitorování využití kvót a dostupnosti zdrojů
 
-## Výsledky učení
+## Výstupy učení
 
 Po dokončení budete schopni:
 - Posoudit a ověřit požadavky na kapacitu zdrojů Azure před nasazením
 - Vytvářet automatizované skripty pro kontrolu kapacity a monitorování kvót
-- Navrhovat škálovatelné architektury s ohledem na regionální a předplatitelské limity
-- Implementovat nákladově efektivní strategie dimenzování zdrojů pro různé typy zátěže
+- Navrhovat škálovatelné architektury, které zohledňují regionální a předplatitelské limity
+- Implementovat nákladově efektivní strategie dimenzování zdrojů pro různé typy pracovních zátěží
 - Konfigurovat proaktivní monitorování a upozornění na problémy související s kapacitou
-- Plánovat nasazení ve více regionech s odpovídajícím rozložením kapacity
+- Plánovat nasazení do více regionů s odpovídajícím rozdělením kapacity
 
 ## Proč je plánování kapacity důležité
 
@@ -45,10 +45,10 @@ Před nasazením aplikací je třeba zajistit:
 ## 📊 Pochopení kvót a limitů Azure
 
 ### Typy limitů
-1. **Kvóty na úrovni předplatného** – Maximální počet zdrojů na předplatné
-2. **Regionální kvóty** – Maximální počet zdrojů na region
-3. **Limity specifické pro zdroje** – Limity pro jednotlivé typy zdrojů
-4. **Limity úrovně služby** – Limity na základě vašeho plánu služby
+1. **Kvóty na úrovni předplatného** - Maximální počet zdrojů na předplatné
+2. **Regionální kvóty** - Maximální počet zdrojů na region
+3. **Limity specifické pro zdroje** - Limity pro jednotlivé typy zdrojů
+4. **Limity úrovně služby** - Limity na základě vašeho plánu služby
 
 ### Běžné kvóty zdrojů
 ```bash
@@ -709,22 +709,22 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## Osvědčené postupy
+## Nejlepší postupy
 
 1. **Vždy provádějte kontroly kapacity** před nasazením do nových regionů
 2. **Pravidelně monitorujte využití kvót**, abyste předešli překvapením
 3. **Plánujte růst** kontrolou budoucích potřeb kapacity
-4. **Používejte nástroje pro odhad nákladů**, abyste předešli neočekávaným výdajům
+4. **Používejte nástroje pro odhad nákladů**, abyste se vyhnuli neočekávaným výdajům
 5. **Dokumentujte požadavky na kapacitu** pro váš tým
 6. **Automatizujte ověřování kapacity** v CI/CD pipelinech
-7. **Zvažte požadavky na kapacitu pro regionální přepnutí** v případě selhání
+7. **Zvažte požadavky na kapacitu pro regionální zálohování**
 
 ## Další kroky
 
-- [Průvodce výběrem SKU](sku-selection.md) – Vyberte optimální úrovně služeb
-- [Kontroly před nasazením](preflight-checks.md) – Automatizované validační skripty
-- [Tahák](../../resources/cheat-sheet.md) – Rychlé referenční příkazy
-- [Slovník pojmů](../../resources/glossary.md) – Termíny a definice
+- [Průvodce výběrem SKU](sku-selection.md) - Vyberte optimální úrovně služeb
+- [Kontroly před nasazením](preflight-checks.md) - Automatizované validační skripty
+- [Tahák](../../resources/cheat-sheet.md) - Rychlé referenční příkazy
+- [Slovník pojmů](../../resources/glossary.md) - Termíny a definice
 
 ## Další zdroje
 
@@ -737,9 +737,10 @@ hooks:
 
 **Navigace**
 - **Předchozí lekce**: [Průvodce laděním](../troubleshooting/debugging.md)
+
 - **Další lekce**: [Výběr SKU](sku-selection.md)
 
 ---
 
 **Upozornění**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Za autoritativní zdroj by měl být považován původní dokument v jeho původním jazyce. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.

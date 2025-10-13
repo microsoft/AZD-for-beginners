@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:44:44+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:37:07+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "ro"
 }
 -->
-# Planificarea Capacității - Disponibilitatea și Limitele Resurselor Azure
+# Planificarea Capacității: Înțelegerea Cotelor și Limitelor Azure
 
 ## Introducere
 
@@ -19,13 +19,13 @@ După parcurgerea acestui ghid, vei:
 - Înțelege cotele, limitele și constrângerile de disponibilitate regională ale Azure
 - Stăpâni tehnici pentru verificarea disponibilității și capacității resurselor înainte de implementare
 - Implementa strategii automate de validare și monitorizare a capacității
-- Proiecta aplicații cu dimensiuni și considerente de scalare adecvate pentru resurse
+- Proiecta aplicații cu dimensiuni și considerații de scalare adecvate pentru resurse
 - Aplica strategii de optimizare a costurilor prin planificarea inteligentă a capacității
 - Configura alerte și monitorizare pentru utilizarea cotelor și disponibilitatea resurselor
 
 ## Rezultate de Învățare
 
-După finalizare, vei putea:
+La final, vei putea:
 - Evalua și valida cerințele de capacitate ale resurselor Azure înainte de implementare
 - Crea scripturi automate pentru verificarea capacității și monitorizarea cotelor
 - Proiecta arhitecturi scalabile care țin cont de limitele regionale și ale abonamentului
@@ -42,15 +42,15 @@ După finalizare, vei putea:
 - **Capacitatea rețelei** pentru traficul estimat
 - **Optimizarea costurilor** prin dimensionare adecvată
 
-## 📊 Înțelegerea cotelor și limitelor Azure
+## 📊 Înțelegerea Cotelor și Limitelor Azure
 
-### Tipuri de limite
+### Tipuri de Limite
 1. **Cote la nivel de abonament** - Resurse maxime per abonament
 2. **Cote regionale** - Resurse maxime per regiune
 3. **Limite specifice resurselor** - Limite pentru tipuri individuale de resurse
 4. **Limite ale nivelului de serviciu** - Limite bazate pe planul de serviciu
 
-### Cote comune ale resurselor
+### Cote Comune ale Resurselor
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -60,9 +60,9 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Verificări de capacitate înainte de implementare
+## Verificări de Capacitate înainte de Implementare
 
-### Script automat de validare a capacității
+### Script Automat de Validare a Capacității
 ```bash
 #!/bin/bash
 # capacity-check.sh - Validate Azure capacity before deployment
@@ -120,9 +120,9 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Verificări specifice serviciilor
+### Verificări de Capacitate Specifice Serviciilor
 
-#### Capacitatea serviciului App Service
+#### Capacitatea Serviciului de Aplicații
 ```bash
 # Check App Service Plan availability
 check_app_service_capacity() {
@@ -154,7 +154,7 @@ check_app_service_capacity() {
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Capacitatea bazei de date
+#### Capacitatea Bazei de Date
 ```bash
 # Check PostgreSQL capacity
 check_postgres_capacity() {
@@ -211,7 +211,7 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Capacitatea aplicațiilor containerizate
+#### Capacitatea Aplicațiilor Containerizate
 ```bash
 # Check Container Apps capacity
 check_container_apps_capacity() {
@@ -252,9 +252,9 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Validarea disponibilității regionale
+## 📍 Validarea Disponibilității Regionale
 
-### Disponibilitatea serviciilor pe regiuni
+### Disponibilitatea Serviciilor pe Regiuni
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -288,7 +288,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-### Recomandări pentru selecția regiunilor
+### Recomandări pentru Selectarea Regiunii
 ```bash
 # Recommend optimal regions based on requirements
 recommend_region() {
@@ -319,9 +319,9 @@ recommend_region() {
 }
 ```
 
-## 💰 Planificarea și estimarea costurilor
+## 💰 Planificarea și Estimarea Costurilor
 
-### Estimarea costurilor resurselor
+### Estimarea Costurilor Resurselor
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -354,7 +354,7 @@ estimate_costs() {
 }
 ```
 
-### Recomandări pentru optimizarea SKU-urilor
+### Recomandări pentru Optimizarea SKU-urilor
 ```bash
 # Recommend optimal SKUs based on requirements
 recommend_sku() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Verificări automate înainte de implementare
+## 🚀 Verificări Automate înainte de Implementare
 
-### Script cuprinzător de verificare înainte de implementare
+### Script Complet pentru Verificări înainte de Implementare
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -620,7 +620,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Șablon de fișier de configurare
+### Șablon pentru Fișierul de Configurare
 ```json
 {
   "requirements": {
@@ -654,9 +654,9 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Monitorizarea capacității în timpul implementării
+## 📈 Monitorizarea Capacității în Timpul Implementării
 
-### Monitorizare în timp real a capacității
+### Monitorizare în Timp Real a Capacității
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integrare cu AZD
 
-### Adăugarea verificărilor înainte de implementare în azure.yaml
+### Adăugarea Hook-urilor de Verificare în azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -709,37 +709,38 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## Cele mai bune practici
+## Cele Mai Bune Practici
 
 1. **Rulează întotdeauna verificări de capacitate** înainte de a implementa în regiuni noi
 2. **Monitorizează utilizarea cotelor în mod regulat** pentru a evita surprizele
-3. **Planifică pentru creștere** verificând nevoile viitoare de capacitate
-4. **Folosește instrumente de estimare a costurilor** pentru a evita șocurile financiare
+3. **Planifică pentru creștere** verificând nevoile de capacitate viitoare
+4. **Folosește instrumente de estimare a costurilor** pentru a evita facturi neașteptate
 5. **Documentează cerințele de capacitate** pentru echipa ta
 6. **Automatizează validarea capacității** în pipeline-urile CI/CD
 7. **Ia în considerare cerințele de capacitate pentru failover regional**
 
-## Pași următori
+## Pași Următori
 
-- [Ghid de selecție SKU](sku-selection.md) - Alege niveluri de serviciu optime
-- [Verificări înainte de implementare](preflight-checks.md) - Scripturi automate de validare
-- [Fișă de referință](../../resources/cheat-sheet.md) - Comenzi de referință rapidă
+- [Ghid de Selectare SKU](sku-selection.md) - Alege niveluri optime de servicii
+- [Verificări înainte de Implementare](preflight-checks.md) - Scripturi automate de validare
+- [Fișă de Referință](../../resources/cheat-sheet.md) - Comenzi rapide de referință
 - [Glosar](../../resources/glossary.md) - Termeni și definiții
 
-## Resurse suplimentare
+## Resurse Suplimentare
 
-- [Limite ale abonamentului Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Calculator de prețuri Azure](https://azure.microsoft.com/pricing/calculator/)
-- [Managementul costurilor Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Disponibilitatea regională Azure](https://azure.microsoft.com/global-infrastructure/services/)
+- [Limite ale Abonamentului Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Calculator de Prețuri Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Managementul Costurilor Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Disponibilitatea Regională Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigare**
-- **Lecția anterioară**: [Ghid de depanare](../troubleshooting/debugging.md)
-- **Lecția următoare**: [Selecția SKU](sku-selection.md)
+- **Lecția Anterioară**: [Ghid de Debugging](../troubleshooting/debugging.md)
+
+- **Lecția Următoare**: [Selectarea SKU](sku-selection.md)
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

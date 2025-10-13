@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T17:20:35+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:22:36+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "es"
 }
 -->
-# Planificación de Capacidad - Disponibilidad y Límites de Recursos en Azure
+# Planificación de Capacidad: Comprendiendo las Cuotas y Límites de Azure
 
 ## Introducción
 
@@ -19,7 +19,7 @@ Al completar esta guía, podrás:
 - Comprender las cuotas, límites y restricciones de disponibilidad regional de Azure
 - Dominar técnicas para verificar la disponibilidad y capacidad de recursos antes de la implementación
 - Implementar estrategias automatizadas de validación y monitoreo de capacidad
-- Diseñar aplicaciones con consideraciones adecuadas de tamaño y escalado de recursos
+- Diseñar aplicaciones con un dimensionamiento y escalado adecuado de recursos
 - Aplicar estrategias de optimización de costos mediante una planificación inteligente de capacidad
 - Configurar alertas y monitoreo para el uso de cuotas y disponibilidad de recursos
 
@@ -29,7 +29,7 @@ Al finalizar, serás capaz de:
 - Evaluar y validar los requisitos de capacidad de recursos de Azure antes de la implementación
 - Crear scripts automatizados para verificar capacidad y monitorear cuotas
 - Diseñar arquitecturas escalables que consideren límites regionales y de suscripción
-- Implementar estrategias rentables de dimensionamiento de recursos para diferentes tipos de cargas de trabajo
+- Implementar estrategias de dimensionamiento de recursos rentables para diferentes tipos de cargas de trabajo
 - Configurar monitoreo proactivo y alertas para problemas relacionados con la capacidad
 - Planificar implementaciones en múltiples regiones con una distribución adecuada de capacidad
 
@@ -48,7 +48,7 @@ Antes de implementar aplicaciones, necesitas asegurarte de:
 1. **Cuotas a nivel de suscripción** - Recursos máximos por suscripción
 2. **Cuotas regionales** - Recursos máximos por región
 3. **Límites específicos de recursos** - Límites para tipos individuales de recursos
-4. **Límites de nivel de servicio** - Límites según tu plan de servicio
+4. **Límites de nivel de servicio** - Límites basados en tu plan de servicio
 
 ### Cuotas Comunes de Recursos
 ```bash
@@ -120,7 +120,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Verificaciones Específicas de Servicios
+### Verificaciones de Capacidad Específicas de Servicios
 
 #### Capacidad de App Service
 ```bash
@@ -211,7 +211,7 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Capacidad de Aplicaciones en Contenedores
+#### Capacidad de Container Apps
 ```bash
 # Check Container Apps capacity
 check_container_apps_capacity() {
@@ -656,7 +656,7 @@ echo "  3. Verify application health post-deployment"
 
 ## 📈 Monitoreo de Capacidad Durante la Implementación
 
-### Monitoreo en Tiempo Real de Capacidad
+### Monitoreo de Capacidad en Tiempo Real
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -714,9 +714,9 @@ hooks:
 1. **Siempre realiza verificaciones de capacidad** antes de implementar en nuevas regiones
 2. **Monitorea el uso de cuotas regularmente** para evitar sorpresas
 3. **Planifica para el crecimiento** verificando necesidades futuras de capacidad
-4. **Utiliza herramientas de estimación de costos** para evitar facturas inesperadas
+4. **Utiliza herramientas de estimación de costos** para evitar sorpresas en la factura
 5. **Documenta los requisitos de capacidad** para tu equipo
-6. **Automatiza la validación de capacidad** en las canalizaciones CI/CD
+6. **Automatiza la validación de capacidad** en las pipelines de CI/CD
 7. **Considera los requisitos de capacidad para failover regional**
 
 ## Próximos Pasos
@@ -737,9 +737,10 @@ hooks:
 
 **Navegación**
 - **Lección Anterior**: [Guía de Depuración](../troubleshooting/debugging.md)
+
 - **Próxima Lección**: [Selección de SKU](sku-selection.md)
 
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

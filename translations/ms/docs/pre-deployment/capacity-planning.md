@@ -1,52 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T22:01:12+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:34:36+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "ms"
 }
 -->
-# Perancangan Kapasiti - Ketersediaan dan Had Sumber Azure
+# Perancangan Kapasiti: Memahami Kuota dan Had Azure
 
 ## Pengenalan
 
-Panduan komprehensif ini membantu anda merancang dan mengesahkan kapasiti sumber Azure sebelum membuat penyebaran dengan Azure Developer CLI. Pelajari cara menilai kuota, ketersediaan, dan batasan wilayah untuk memastikan penyebaran berjaya sambil mengoptimumkan kos dan prestasi. Kuasai teknik perancangan kapasiti untuk pelbagai seni bina aplikasi dan senario penskalaan.
+Panduan komprehensif ini membantu anda merancang dan mengesahkan kapasiti sumber Azure sebelum melaksanakan dengan Azure Developer CLI. Pelajari cara menilai kuota, ketersediaan, dan batasan wilayah untuk memastikan pelaksanaan berjaya sambil mengoptimumkan kos dan prestasi. Kuasai teknik perancangan kapasiti untuk pelbagai seni bina aplikasi dan senario penskalaan.
 
 ## Matlamat Pembelajaran
 
 Dengan melengkapkan panduan ini, anda akan:
-- Memahami kuota, had, dan batasan ketersediaan wilayah Azure
-- Kuasai teknik untuk memeriksa ketersediaan dan kapasiti sumber sebelum penyebaran
+- Memahami kuota, had, dan kekangan ketersediaan wilayah Azure
+- Menguasai teknik untuk memeriksa ketersediaan dan kapasiti sumber sebelum pelaksanaan
 - Melaksanakan strategi pengesahan dan pemantauan kapasiti automatik
-- Merancang aplikasi dengan saiz sumber dan pertimbangan penskalaan yang sesuai
+- Merancang aplikasi dengan saiz sumber dan pertimbangan penskalaan yang betul
 - Mengaplikasikan strategi pengoptimuman kos melalui perancangan kapasiti yang bijak
 - Mengkonfigurasi amaran dan pemantauan untuk penggunaan kuota dan ketersediaan sumber
 
 ## Hasil Pembelajaran
 
 Setelah selesai, anda akan dapat:
-- Menilai dan mengesahkan keperluan kapasiti sumber Azure sebelum penyebaran
+- Menilai dan mengesahkan keperluan kapasiti sumber Azure sebelum pelaksanaan
 - Membuat skrip automatik untuk pemeriksaan kapasiti dan pemantauan kuota
 - Merancang seni bina yang boleh diskalakan dengan mengambil kira had wilayah dan langganan
-- Melaksanakan strategi saiz sumber yang menjimatkan kos untuk pelbagai jenis beban kerja
-- Mengkonfigurasi pemantauan dan amaran proaktif untuk isu berkaitan kapasiti
-- Merancang penyebaran pelbagai wilayah dengan pengagihan kapasiti yang sesuai
+- Melaksanakan strategi saiz sumber yang kos efektif untuk pelbagai jenis beban kerja
+- Mengkonfigurasi pemantauan proaktif dan amaran untuk isu berkaitan kapasiti
+- Merancang pelaksanaan pelbagai wilayah dengan pengagihan kapasiti yang betul
 
 ## Mengapa Perancangan Kapasiti Penting
 
-Sebelum menyebarkan aplikasi, anda perlu memastikan:
+Sebelum melaksanakan aplikasi, anda perlu memastikan:
 - **Kuota mencukupi** untuk sumber yang diperlukan
 - **Ketersediaan sumber** di wilayah sasaran anda
 - **Ketersediaan tahap perkhidmatan** untuk jenis langganan anda
 - **Kapasiti rangkaian** untuk trafik yang dijangkakan
-- **Pengoptimuman kos** melalui saiz yang sesuai
+- **Pengoptimuman kos** melalui saiz yang betul
 
 ## 📊 Memahami Kuota dan Had Azure
 
 ### Jenis Had
-1. **Kuota peringkat langganan** - Maksimum sumber per langganan
-2. **Kuota wilayah** - Maksimum sumber per wilayah
+1. **Kuota peringkat langganan** - Sumber maksimum setiap langganan
+2. **Kuota wilayah** - Sumber maksimum setiap wilayah
 3. **Had khusus sumber** - Had untuk jenis sumber individu
 4. **Had tahap perkhidmatan** - Had berdasarkan pelan perkhidmatan anda
 
@@ -60,7 +60,7 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Pemeriksaan Kapasiti Sebelum Penyebaran
+## Pemeriksaan Kapasiti Sebelum Pelaksanaan
 
 ### Skrip Pengesahan Kapasiti Automatik
 ```bash
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Pemeriksaan Pra-Penerbangan Automatik
+## 🚀 Pemeriksaan Pra-Pelaksanaan Automatik
 
-### Skrip Pra-Penerbangan Komprehensif
+### Skrip Pra-Pelaksanaan Komprehensif
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -654,7 +654,7 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Pemantauan Kapasiti Semasa Penyebaran
+## 📈 Pemantauan Kapasiti Semasa Pelaksanaan
 
 ### Pemantauan Kapasiti Masa Nyata
 ```bash
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integrasi dengan AZD
 
-### Tambahkan Hooks Pra-Penerbangan ke azure.yaml
+### Tambahkan Hooks Pra-Pelaksanaan ke azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -711,18 +711,18 @@ hooks:
 
 ## Amalan Terbaik
 
-1. **Sentiasa jalankan pemeriksaan kapasiti** sebelum menyebarkan ke wilayah baru
+1. **Sentiasa jalankan pemeriksaan kapasiti** sebelum melaksanakan ke wilayah baru
 2. **Pantau penggunaan kuota secara berkala** untuk mengelakkan kejutan
 3. **Rancang untuk pertumbuhan** dengan memeriksa keperluan kapasiti masa depan
 4. **Gunakan alat anggaran kos** untuk mengelakkan kejutan bil
 5. **Dokumentasikan keperluan kapasiti** untuk pasukan anda
-6. **Automasi pengesahan kapasiti** dalam pipeline CI/CD
+6. **Automasi pengesahan kapasiti** dalam saluran CI/CD
 7. **Pertimbangkan keperluan kapasiti failover wilayah**
 
 ## Langkah Seterusnya
 
 - [Panduan Pemilihan SKU](sku-selection.md) - Pilih tahap perkhidmatan yang optimum
-- [Pemeriksaan Pra-Penerbangan](preflight-checks.md) - Skrip pengesahan automatik
+- [Pemeriksaan Pra-Pelaksanaan](preflight-checks.md) - Skrip pengesahan automatik
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Perintah rujukan pantas
 - [Glosari](../../resources/glossary.md) - Istilah dan definisi
 
@@ -737,9 +737,10 @@ hooks:
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Panduan Debugging](../troubleshooting/debugging.md)
+
 - **Pelajaran Seterusnya**: [Pemilihan SKU](sku-selection.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

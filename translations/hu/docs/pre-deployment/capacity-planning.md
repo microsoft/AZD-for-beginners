@@ -1,54 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:43:43+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:36:09+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "hu"
 }
 -->
-# Kapacitástervezés - Azure Erőforrások Elérhetősége és Korlátai
+# Kapacitástervezés: Az Azure kvóták és korlátok megértése - Azure erőforrások elérhetősége és korlátai
 
 ## Bevezetés
 
-Ez az átfogó útmutató segít megtervezni és ellenőrizni az Azure erőforrások kapacitását, mielőtt az Azure Developer CLI segítségével telepítenél. Ismerd meg, hogyan értékelheted a kvótákat, az elérhetőséget és a regionális korlátokat, hogy sikeres telepítéseket hajthass végre, miközben optimalizálod a költségeket és a teljesítményt. Sajátítsd el a kapacitástervezési technikákat különböző alkalmazásarchitektúrákhoz és skálázási forgatókönyvekhez.
+Ez az átfogó útmutató segít megtervezni és ellenőrizni az Azure erőforrások kapacitását az Azure Developer CLI használata előtt. Ismerje meg, hogyan értékelheti a kvótákat, elérhetőséget és regionális korlátozásokat, hogy sikeres telepítéseket hajthasson végre, miközben optimalizálja a költségeket és a teljesítményt. Sajátítsa el a kapacitástervezési technikákat különböző alkalmazásarchitektúrákhoz és skálázási forgatókönyvekhez.
 
 ## Tanulási célok
 
-Az útmutató elvégzése után képes leszel:
-- Megérteni az Azure kvótákat, korlátokat és regionális elérhetőségi korlátokat
-- Elsajátítani az erőforrások elérhetőségének és kapacitásának ellenőrzési technikáit telepítés előtt
-- Automatizált kapacitásellenőrzési és monitorozási stratégiákat megvalósítani
-- Alkalmazásokat tervezni megfelelő erőforrás-méretezési és skálázási szempontokkal
-- Költségoptimalizálási stratégiákat alkalmazni intelligens kapacitástervezéssel
-- Riasztásokat és monitorozást konfigurálni a kvótahasználat és az erőforrások elérhetősége érdekében
+Az útmutató elvégzésével:
+- Megérti az Azure kvótákat, korlátokat és regionális elérhetőségi korlátozásokat
+- Elsajátítja az erőforrások elérhetőségének és kapacitásának ellenőrzési technikáit telepítés előtt
+- Automatizált kapacitásellenőrzési és monitorozási stratégiákat valósít meg
+- Olyan alkalmazásokat tervez, amelyek megfelelő erőforrás-méretet és skálázási szempontokat tartalmaznak
+- Költségoptimalizálási stratégiákat alkalmaz intelligens kapacitástervezéssel
+- Riasztásokat és monitorozást konfigurál a kvótahasználat és erőforrás-elérhetőség érdekében
 
 ## Tanulási eredmények
 
-Az útmutató elvégzése után képes leszel:
+Az útmutató elvégzése után képes lesz:
 - Felmérni és ellenőrizni az Azure erőforrások kapacitásigényeit telepítés előtt
-- Automatizált szkripteket létrehozni kapacitásellenőrzéshez és kvótamonitorozáshoz
+- Automatizált szkripteket készíteni kapacitásellenőrzéshez és kvótamonitorozáshoz
 - Skálázható architektúrákat tervezni, amelyek figyelembe veszik a regionális és előfizetési korlátokat
-- Költséghatékony erőforrás-méretezési stratégiákat megvalósítani különböző munkaterhelésekhez
+- Költséghatékony erőforrás-méretet alkalmazni különböző munkaterhelésekhez
 - Proaktív monitorozást és riasztásokat konfigurálni kapacitással kapcsolatos problémákra
 - Több régióra kiterjedő telepítéseket tervezni megfelelő kapacitáselosztással
 
 ## Miért fontos a kapacitástervezés?
 
-Mielőtt alkalmazásokat telepítenél, biztosítanod kell:
+Az alkalmazások telepítése előtt biztosítania kell:
 - **Megfelelő kvótákat** a szükséges erőforrásokhoz
-- **Erőforrások elérhetőségét** a célrégiódban
-- **Szolgáltatási szint elérhetőségét** az előfizetési típusodhoz
+- **Erőforrás-elérhetőséget** a célrégióban
+- **Szolgáltatási szint elérhetőséget** az előfizetési típusához
 - **Hálózati kapacitást** a várható forgalomhoz
-- **Költségoptimalizálást** a megfelelő méretezéssel
+- **Költségoptimalizálást** megfelelő méretezéssel
 
-## 📊 Azure kvóták és korlátok megértése
+## 📊 Az Azure kvóták és korlátok megértése
 
-### Korláttípusok
+### Korlátok típusai
 1. **Előfizetési szintű kvóták** - Maximális erőforrások előfizetésenként
 2. **Regionális kvóták** - Maximális erőforrások régiónként
-3. **Erőforrás-specifikus korlátok** - Egyes erőforrástípusokra vonatkozó korlátok
-4. **Szolgáltatási szint korlátai** - A szolgáltatási csomagod alapján meghatározott korlátok
+3. **Erőforrás-specifikus korlátok** - Egyes erőforrástípusok korlátai
+4. **Szolgáltatási szint korlátok** - Az Ön szolgáltatási tervén alapuló korlátok
 
 ### Gyakori erőforrás-kvóták
 ```bash
@@ -120,7 +120,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Szolgáltatásspecifikus kapacitásellenőrzések
+### Szolgáltatás-specifikus kapacitásellenőrzések
 
 #### App Service kapacitás
 ```bash
@@ -254,7 +254,7 @@ check_container_apps_capacity() {
 
 ## 📍 Regionális elérhetőség ellenőrzése
 
-### Szolgáltatások elérhetősége régiónként
+### Szolgáltatás elérhetősége régiónként
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -321,7 +321,7 @@ recommend_region() {
 
 ## 💰 Költségtervezés és becslés
 
-### Erőforrásköltség becslése
+### Erőforrás költségbecslés
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -656,7 +656,7 @@ echo "  3. Verify application health post-deployment"
 
 ## 📈 Kapacitás monitorozása telepítés közben
 
-### Valós idejű kapacitásmonitorozás
+### Valós idejű kapacitás monitorozás
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -711,19 +711,19 @@ hooks:
 
 ## Legjobb gyakorlatok
 
-1. **Mindig végezz kapacitásellenőrzéseket**, mielőtt új régiókba telepítesz
-2. **Rendszeresen monitorozd a kvótahasználatot**, hogy elkerüld a meglepetéseket
-3. **Tervezd meg a növekedést**, ellenőrizve a jövőbeli kapacitásigényeket
-4. **Használj költségbecslő eszközöket**, hogy elkerüld a váratlan számlákat
-5. **Dokumentáld a kapacitásigényeket** a csapatod számára
-6. **Automatizáld a kapacitásellenőrzést** a CI/CD folyamatokban
-7. **Vedd figyelembe a regionális átváltási kapacitásigényeket**
+1. **Mindig végezzen kapacitásellenőrzést** új régiókba történő telepítés előtt
+2. **Rendszeresen monitorozza a kvótahasználatot**, hogy elkerülje a meglepetéseket
+3. **Tervezze meg a növekedést** a jövőbeli kapacitásigények ellenőrzésével
+4. **Használjon költségbecslő eszközöket**, hogy elkerülje a váratlan számlákat
+5. **Dokumentálja a kapacitásigényeket** a csapata számára
+6. **Automatizálja a kapacitásellenőrzést** a CI/CD folyamatokban
+7. **Vegye figyelembe a regionális átfedési kapacitásigényeket**
 
 ## Következő lépések
 
 - [SKU kiválasztási útmutató](sku-selection.md) - Optimális szolgáltatási szintek kiválasztása
 - [Előzetes ellenőrzések](preflight-checks.md) - Automatizált ellenőrzési szkriptek
-- [Gyorsreferencia](../../resources/cheat-sheet.md) - Gyors parancsreferencia
+- [Gyorsreferencia](../../resources/cheat-sheet.md) - Gyors parancsok
 - [Szójegyzék](../../resources/glossary.md) - Fogalmak és definíciók
 
 ## További források
@@ -737,9 +737,10 @@ hooks:
 
 **Navigáció**
 - **Előző lecke**: [Hibakeresési útmutató](../troubleshooting/debugging.md)
+
 - **Következő lecke**: [SKU kiválasztás](sku-selection.md)
 
 ---
 
-**Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősség kizárása**:  
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:44:24+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:36:46+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "sk"
 }
 -->
-# Plánovanie kapacity - Dostupnosť a limity zdrojov Azure
+# Plánovanie kapacity: Pochopenie kvót a limitov Azure - Dostupnosť a limity zdrojov Azure
 
 ## Úvod
 
-Tento komplexný sprievodca vám pomôže plánovať a overovať kapacitu zdrojov Azure pred nasadením pomocou Azure Developer CLI. Naučte sa hodnotiť kvóty, dostupnosť a regionálne obmedzenia, aby ste zabezpečili úspešné nasadenia pri optimalizácii nákladov a výkonu. Ovládnite techniky plánovania kapacity pre rôzne architektúry aplikácií a scenáre škálovania.
+Tento komplexný sprievodca vám pomôže naplánovať a overiť kapacitu zdrojov Azure pred nasadením pomocou Azure Developer CLI. Naučte sa hodnotiť kvóty, dostupnosť a regionálne obmedzenia, aby ste zabezpečili úspešné nasadenia pri optimalizácii nákladov a výkonu. Ovládnite techniky plánovania kapacity pre rôzne architektúry aplikácií a scenáre škálovania.
 
 ## Ciele učenia
 
@@ -19,7 +19,7 @@ Po dokončení tohto sprievodcu budete:
 - Rozumieť kvótam, limitom a regionálnym obmedzeniam Azure
 - Ovládať techniky na kontrolu dostupnosti a kapacity zdrojov pred nasadením
 - Implementovať automatizované stratégie na overovanie kapacity a monitorovanie
-- Navrhovať aplikácie s ohľadom na správne dimenzovanie a škálovanie zdrojov
+- Navrhovať aplikácie s ohľadom na správne dimenzovanie zdrojov a škálovanie
 - Aplikovať stratégie optimalizácie nákladov prostredníctvom inteligentného plánovania kapacity
 - Konfigurovať upozornenia a monitorovanie využitia kvót a dostupnosti zdrojov
 
@@ -38,8 +38,8 @@ Po dokončení budete schopní:
 Pred nasadením aplikácií je potrebné zabezpečiť:
 - **Dostatočné kvóty** pre požadované zdroje
 - **Dostupnosť zdrojov** vo vašom cieľovom regióne
-- **Dostupnosť úrovne služby** pre váš typ predplatného
-- **Sieťovú kapacitu** pre očakávanú prevádzku
+- **Dostupnosť úrovne služieb** pre váš typ predplatného
+- **Kapacitu siete** pre očakávanú prevádzku
 - **Optimalizáciu nákladov** prostredníctvom správneho dimenzovania
 
 ## 📊 Pochopenie kvót a limitov Azure
@@ -48,7 +48,7 @@ Pred nasadením aplikácií je potrebné zabezpečiť:
 1. **Kvóty na úrovni predplatného** - Maximálny počet zdrojov na predplatné
 2. **Regionálne kvóty** - Maximálny počet zdrojov na región
 3. **Limity špecifické pre zdroje** - Limity pre jednotlivé typy zdrojov
-4. **Limity úrovne služby** - Limity na základe vášho plánu služby
+4. **Limity úrovne služieb** - Limity na základe vášho plánu služieb
 
 ### Bežné kvóty zdrojov
 ```bash
@@ -62,7 +62,7 @@ az storage account show-usage --output table
 
 ## Kontroly kapacity pred nasadením
 
-### Automatizovaný skript na overovanie kapacity
+### Automatizovaný skript na overenie kapacity
 ```bash
 #!/bin/bash
 # capacity-check.sh - Validate Azure capacity before deployment
@@ -252,7 +252,7 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Overovanie regionálnej dostupnosti
+## 📍 Overenie regionálnej dostupnosti
 
 ### Dostupnosť služieb podľa regiónu
 ```bash
@@ -319,7 +319,7 @@ recommend_region() {
 }
 ```
 
-## 💰 Plánovanie nákladov a odhady
+## 💰 Plánovanie a odhad nákladov
 
 ### Odhad nákladov na zdroje
 ```bash
@@ -723,7 +723,7 @@ hooks:
 
 - [Sprievodca výberom SKU](sku-selection.md) - Vyberte optimálne úrovne služieb
 - [Kontroly pred nasadením](preflight-checks.md) - Automatizované validačné skripty
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Rýchle referenčné príkazy
+- [Pomôcka](../../resources/cheat-sheet.md) - Rýchle referenčné príkazy
 - [Slovník pojmov](../../resources/glossary.md) - Termíny a definície
 
 ## Dodatočné zdroje
@@ -737,9 +737,10 @@ hooks:
 
 **Navigácia**
 - **Predchádzajúca lekcia**: [Sprievodca ladením](../troubleshooting/debugging.md)
+
 - **Nasledujúca lekcia**: [Výber SKU](sku-selection.md)
 
 ---
 
 **Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

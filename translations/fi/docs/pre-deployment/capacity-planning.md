@@ -1,25 +1,25 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T21:59:46+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:33:00+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "fi"
 }
 -->
-# Kapasiteettisuunnittelu - Azure-resurssien saatavuus ja rajoitukset
+# Kapasiteettisuunnittelu: Azure-kvottien ja -rajoitusten ymmärtäminen - Azure-resurssien saatavuus ja rajoitukset
 
 ## Johdanto
 
-Tämä kattava opas auttaa sinua suunnittelemaan ja varmistamaan Azure-resurssien kapasiteetin ennen käyttöönottoa Azure Developer CLI:n avulla. Opit arvioimaan kiintiöitä, saatavuutta ja alueellisia rajoituksia varmistaaksesi onnistuneet käyttöönotot samalla kun optimoit kustannuksia ja suorituskykyä. Hallitse kapasiteettisuunnittelutekniikat eri sovellusarkkitehtuureille ja skaalaustilanteille.
+Tämä kattava opas auttaa sinua suunnittelemaan ja varmistamaan Azure-resurssien kapasiteetin ennen käyttöönottoa Azure Developer CLI:n avulla. Opit arvioimaan kiintiöitä, saatavuutta ja alueellisia rajoituksia varmistaaksesi onnistuneet käyttöönotot samalla kun optimoit kustannuksia ja suorituskykyä. Hallitse kapasiteettisuunnittelutekniikoita eri sovellusarkkitehtuureille ja skaalaustilanteille.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
-- Ymmärtämään Azuren kiintiöt, rajoitukset ja alueelliset saatavuusrajoitukset
+- Ymmärtämään Azure-kvotat, rajoitukset ja alueelliset saatavuusrajoitukset
 - Hallitsemaan tekniikoita resurssien saatavuuden ja kapasiteetin tarkistamiseksi ennen käyttöönottoa
 - Toteuttamaan automatisoituja kapasiteetin validointi- ja seurantastrategioita
-- Suunnittelemaan sovelluksia oikean resurssikoon ja skaalausnäkökulmien mukaisesti
+- Suunnittelemaan sovelluksia oikealla resurssikoolla ja skaalausnäkökohdilla
 - Soveltamaan kustannusoptimointistrategioita älykkään kapasiteettisuunnittelun avulla
 - Konfiguroimaan hälytyksiä ja seurantaa kiintiön käytölle ja resurssien saatavuudelle
 
@@ -31,24 +31,24 @@ Oppaan suorittamisen jälkeen pystyt:
 - Suunnittelemaan skaalautuvia arkkitehtuureja, jotka huomioivat alueelliset ja tilauskohtaiset rajoitukset
 - Toteuttamaan kustannustehokkaita resurssikokostrategioita eri työkuormatyypeille
 - Konfiguroimaan ennakoivaa seurantaa ja hälytyksiä kapasiteettiin liittyvien ongelmien varalta
-- Suunnittelemaan monialueellisia käyttöönottoja oikealla kapasiteettijakaumalla
+- Suunnittelemaan monialueellisia käyttöönottoja oikealla kapasiteetin jakautumisella
 
 ## Miksi kapasiteettisuunnittelu on tärkeää
 
 Ennen sovellusten käyttöönottoa sinun tulee varmistaa:
 - **Riittävät kiintiöt** tarvittaville resursseille
 - **Resurssien saatavuus** kohdealueellasi
-- **Palvelutason saatavuus** tilausmallisi mukaisesti
+- **Palvelutason saatavuus** tilausmallillesi
 - **Verkkokapasiteetti** odotetulle liikenteelle
 - **Kustannusoptimointi** oikean koon avulla
 
-## 📊 Azuren kiintiöiden ja rajoitusten ymmärtäminen
+## 📊 Azure-kvottien ja -rajoitusten ymmärtäminen
 
 ### Rajoitusten tyypit
 1. **Tilaustason kiintiöt** - Maksimiresurssit per tilaus
 2. **Alueelliset kiintiöt** - Maksimiresurssit per alue
 3. **Resurssikohtaiset rajoitukset** - Rajoitukset yksittäisille resurssityypeille
-4. **Palvelutason rajoitukset** - Rajoitukset palvelusuunnitelman mukaan
+4. **Palvelutason rajoitukset** - Rajoitukset palvelusuunnitelmasi perusteella
 
 ### Yleiset resurssikiintiöt
 ```bash
@@ -288,7 +288,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-### Suositukset alueen valintaan
+### Aluevalintasuositukset
 ```bash
 # Recommend optimal regions based on requirements
 recommend_region() {
@@ -321,7 +321,7 @@ recommend_region() {
 
 ## 💰 Kustannussuunnittelu ja arviointi
 
-### Resurssien kustannusarviointi
+### Resurssikustannusten arviointi
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Automatisoidut tarkistukset ennen käyttöönottoa
+## 🚀 Automatisoidut ennakkotarkistukset
 
-### Kattava tarkistusskripti
+### Kattava ennakkotarkistusskripti
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integrointi AZD:n kanssa
 
-### Lisää tarkistuskoukut azure.yaml-tiedostoon
+### Lisää ennakkotarkistuskoukut azure.yaml-tiedostoon
 ```yaml
 # azure.yaml
 hooks:
@@ -722,24 +722,25 @@ hooks:
 ## Seuraavat askeleet
 
 - [SKU-valintaopas](sku-selection.md) - Valitse optimaaliset palvelutasot
-- [Tarkistukset ennen käyttöönottoa](preflight-checks.md) - Automatisoidut validointiskriptit
+- [Ennakkotarkistukset](preflight-checks.md) - Automatisoidut validointiskriptit
 - [Pikaopas](../../resources/cheat-sheet.md) - Nopeat viitekomennot
 - [Sanasto](../../resources/glossary.md) - Termit ja määritelmät
 
 ## Lisäresurssit
 
-- [Azuren tilausrajoitukset](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azuren hinnoittelulaskuri](https://azure.microsoft.com/pricing/calculator/)
-- [Azuren kustannusten hallinta](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azuren alueellinen saatavuus](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure-tilausrajoitukset](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure-hinnoittelulaskuri](https://azure.microsoft.com/pricing/calculator/)
+- [Azure-kustannusten hallinta](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure-alueellinen saatavuus](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigointi**
-- **Edellinen osio**: [Vianetsintäopas](../troubleshooting/debugging.md)
-- **Seuraava osio**: [SKU-valinta](sku-selection.md)
+- **Edellinen oppitunti**: [Vianetsintäopas](../troubleshooting/debugging.md)
+
+- **Seuraava oppitunti**: [SKU-valinta](sku-selection.md)
 
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

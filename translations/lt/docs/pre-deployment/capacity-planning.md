@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:47:14+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:40:11+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "lt"
 }
 -->
-# Talpa Planavimas - „Azure“ išteklių prieinamumas ir apribojimai
+# Talpos planavimas: Azure kvotų ir limitų supratimas
 
 ## Įvadas
 
-Šis išsamus vadovas padės jums planuoti ir patikrinti „Azure“ išteklių talpą prieš diegimą naudojant „Azure Developer CLI“. Sužinokite, kaip įvertinti kvotas, prieinamumą ir regioninius apribojimus, kad užtikrintumėte sėkmingą diegimą, optimizuotumėte išlaidas ir našumą. Įvaldykite talpos planavimo technikas skirtingoms programų architektūroms ir mastelio scenarijams.
+Šis išsamus vadovas padės jums planuoti ir patikrinti Azure resursų talpą prieš diegimą naudojant Azure Developer CLI. Sužinokite, kaip įvertinti kvotas, prieinamumą ir regioninius apribojimus, kad užtikrintumėte sėkmingą diegimą, optimizuotumėte išlaidas ir našumą. Įvaldykite talpos planavimo technikas skirtingoms programų architektūroms ir mastelio scenarijams.
 
 ## Mokymosi tikslai
 
 Baigę šį vadovą, jūs:
-- Suprasite „Azure“ kvotas, apribojimus ir regioninius prieinamumo apribojimus
-- Įvaldysite technikas, kaip patikrinti išteklių prieinamumą ir talpą prieš diegimą
+- Suprasite Azure kvotas, limitus ir regioninius prieinamumo apribojimus
+- Įvaldysite resursų prieinamumo ir talpos patikrinimo technikas prieš diegimą
 - Įgyvendinsite automatizuotas talpos patikros ir stebėjimo strategijas
-- Projektuosite programas, atsižvelgdami į tinkamą išteklių dydį ir mastelio galimybes
+- Projektuosite programas, atsižvelgdami į tinkamą resursų dydį ir mastelio galimybes
 - Taikysite išlaidų optimizavimo strategijas per protingą talpos planavimą
-- Konfigūruosite įspėjimus ir stebėjimą kvotų naudojimui ir išteklių prieinamumui
+- Konfigūruosite įspėjimus ir stebėjimą kvotų naudojimui ir resursų prieinamumui
 
 ## Mokymosi rezultatai
 
 Baigę, jūs galėsite:
-- Įvertinti ir patikrinti „Azure“ išteklių talpos reikalavimus prieš diegimą
-- Kurti automatizuotus scenarijus talpos patikrai ir kvotų stebėjimui
-- Projektuoti mastelio galimybes turinčias architektūras, atsižvelgiant į regioninius ir prenumeratos apribojimus
-- Įgyvendinti ekonomiškai efektyvias išteklių dydžio nustatymo strategijas skirtingiems darbo krūviams
+- Įvertinti ir patikrinti Azure resursų talpos reikalavimus prieš diegimą
+- Kurti automatizuotus scenarijus talpos patikrinimui ir kvotų stebėjimui
+- Projektuoti mastelio galimybes turinčias architektūras, atsižvelgiant į regioninius ir prenumeratos limitus
+- Įgyvendinti ekonomiškai efektyvias resursų dydžio strategijas skirtingiems darbo krūviams
 - Konfigūruoti proaktyvų stebėjimą ir įspėjimus dėl talpos susijusių problemų
-- Planuoti diegimus keliuose regionuose, tinkamai paskirstant talpą
+- Planuoti diegimus keliuose regionuose su tinkamu talpos paskirstymu
 
-## Kodėl talpos planavimas yra svarbus
+## Kodėl talpos planavimas svarbus
 
 Prieš diegiant programas, būtina užtikrinti:
-- **Pakankamas kvotas** reikalingiems ištekliams
-- **Išteklių prieinamumą** jūsų tiksliniame regione
+- **Pakankamas kvotas** reikalingiems resursams
+- **Resursų prieinamumą** jūsų tiksliniame regione
 - **Paslaugų lygio prieinamumą** jūsų prenumeratos tipui
 - **Tinklo talpą** numatomam srautui
 - **Išlaidų optimizavimą** per tinkamą dydžio nustatymą
 
-## 📊 „Azure“ kvotų ir apribojimų supratimas
+## 📊 Azure kvotų ir limitų supratimas
 
-### Apribojimų tipai
-1. **Prenumeratos lygio kvotos** - Maksimalūs ištekliai vienai prenumeratai
-2. **Regioninės kvotos** - Maksimalūs ištekliai viename regione
-3. **Specifiniai išteklių apribojimai** - Apribojimai atskiriems išteklių tipams
-4. **Paslaugų lygio apribojimai** - Apribojimai pagal jūsų paslaugų planą
+### Limitų tipai
+1. **Prenumeratos lygio kvotos** – Maksimalūs resursai vienai prenumeratai
+2. **Regioninės kvotos** – Maksimalūs resursai viename regione
+3. **Resursų specifiniai limitai** – Limitai atskiriems resursų tipams
+4. **Paslaugų lygio limitai** – Limitai pagal jūsų paslaugų planą
 
-### Dažniausios išteklių kvotos
+### Dažniausios resursų kvotos
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -60,7 +60,8 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Talpos patikros prieš diegimą
+
+## Talpos patikrinimai prieš diegimą
 
 ### Automatizuotas talpos patikros scenarijus
 ```bash
@@ -120,9 +121,10 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Specifinės paslaugų talpos patikros
 
-#### „App Service“ talpa
+### Paslaugų specifiniai talpos patikrinimai
+
+#### App Service talpa
 ```bash
 # Check App Service Plan availability
 check_app_service_capacity() {
@@ -153,6 +155,7 @@ check_app_service_capacity() {
 # Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
+
 
 #### Duomenų bazės talpa
 ```bash
@@ -211,7 +214,8 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Konteinerių programų talpa
+
+#### Container Apps talpa
 ```bash
 # Check Container Apps capacity
 check_container_apps_capacity() {
@@ -252,6 +256,7 @@ check_container_apps_capacity() {
 }
 ```
 
+
 ## 📍 Regioninės prieinamumo patikros
 
 ### Paslaugų prieinamumas pagal regioną
@@ -288,6 +293,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
+
 ### Regiono pasirinkimo rekomendacijos
 ```bash
 # Recommend optimal regions based on requirements
@@ -319,9 +325,10 @@ recommend_region() {
 }
 ```
 
-## 💰 Išlaidų planavimas ir vertinimas
 
-### Išteklių išlaidų vertinimas
+## 💰 Išlaidų planavimas ir įvertinimas
+
+### Resursų išlaidų įvertinimas
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -353,6 +360,7 @@ estimate_costs() {
     echo "   https://portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview"
 }
 ```
+
 
 ### SKU optimizavimo rekomendacijos
 ```bash
@@ -419,9 +427,10 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Automatizuotos patikros prieš diegimą
 
-### Išsamus patikros scenarijus
+## 🚀 Automatizuoti patikrinimai prieš diegimą
+
+### Išsamus patikrinimo scenarijus
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -620,6 +629,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
+
 ### Konfigūracijos failo šablonas
 ```json
 {
@@ -653,6 +663,7 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
+
 
 ## 📈 Talpos stebėjimas diegimo metu
 
@@ -689,9 +700,10 @@ monitor_deployment_capacity() {
 }
 ```
 
+
 ## 🔗 Integracija su AZD
 
-### Pridėkite patikros prieš diegimą į azure.yaml
+### Pridėkite patikrinimo prieš diegimą kabliukus į azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -709,37 +721,39 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
+
 ## Geriausios praktikos
 
-1. **Visada atlikite talpos patikras** prieš diegiant į naujus regionus
+1. **Visada atlikite talpos patikrinimus** prieš diegdami į naujus regionus
 2. **Reguliariai stebėkite kvotų naudojimą**, kad išvengtumėte netikėtumų
 3. **Planuokite augimą**, patikrindami būsimus talpos poreikius
-4. **Naudokite išlaidų vertinimo įrankius**, kad išvengtumėte didelių sąskaitų
+4. **Naudokite išlaidų įvertinimo įrankius**, kad išvengtumėte netikėtų sąskaitų
 5. **Dokumentuokite talpos reikalavimus** savo komandai
-6. **Automatizuokite talpos patikras** CI/CD procesuose
-7. **Apsvarstykite regioninio atsarginio talpos poreikius**
+6. **Automatizuokite talpos patikrinimus** CI/CD procesuose
+7. **Apsvarstykite regioninio failover talpos reikalavimus**
 
 ## Kiti žingsniai
 
-- [SKU pasirinkimo vadovas](sku-selection.md) - Pasirinkite optimalų paslaugų lygį
-- [Patikros prieš diegimą](preflight-checks.md) - Automatizuoti patikros scenarijai
-- [Trumpa atmintinė](../../resources/cheat-sheet.md) - Greitos nuorodos komandos
-- [Žodynas](../../resources/glossary.md) - Terminai ir apibrėžimai
+- [SKU pasirinkimo vadovas](sku-selection.md) – Pasirinkite optimalų paslaugų lygį
+- [Patikrinimai prieš diegimą](preflight-checks.md) – Automatizuoti patikrinimo scenarijai
+- [Trumpas vadovas](../../resources/cheat-sheet.md) – Greitos nuorodos komandos
+- [Žodynas](../../resources/glossary.md) – Terminai ir apibrėžimai
 
 ## Papildomi ištekliai
 
-- [„Azure“ prenumeratos apribojimai](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [„Azure“ kainų skaičiuoklė](https://azure.microsoft.com/pricing/calculator/)
-- [„Azure“ išlaidų valdymas](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [„Azure“ regioninė prieinamumas](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure prenumeratos limitai](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure kainų skaičiuoklė](https://azure.microsoft.com/pricing/calculator/)
+- [Azure išlaidų valdymas](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure regioninė prieinamumas](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigacija**
 - **Ankstesnė pamoka**: [Derinimo vadovas](../troubleshooting/debugging.md)
+
 - **Kita pamoka**: [SKU pasirinkimas](sku-selection.md)
 
 ---
 
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipiame dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudotis profesionalių vertėjų paslaugomis. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+**Atsakomybės atsisakymas**:  
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.

@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:45:49+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:38:22+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "hr"
 }
 -->
-# Planiranje Kapaciteta - Dostupnost i Ograničenja Azure Resursa
+# Planiranje kapaciteta: Razumijevanje Azure kvota i ograničenja - Dostupnost i ograničenja Azure resursa
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pomaže vam u planiranju i provjeri kapaciteta Azure resursa prije implementacije pomoću Azure Developer CLI. Naučite kako procijeniti kvote, dostupnost i regionalna ograničenja kako biste osigurali uspješne implementacije uz optimizaciju troškova i performansi. Savladajte tehnike planiranja kapaciteta za različite arhitekture aplikacija i scenarije skaliranja.
+Ovaj sveobuhvatni vodič pomaže vam u planiranju i provjeri kapaciteta Azure resursa prije implementacije pomoću Azure Developer CLI alata. Naučite procijeniti kvote, dostupnost i regionalna ograničenja kako biste osigurali uspješne implementacije uz optimizaciju troškova i performansi. Ovladat ćete tehnikama planiranja kapaciteta za različite arhitekture aplikacija i scenarije skaliranja.
 
-## Ciljevi Učenja
+## Ciljevi učenja
 
 Završetkom ovog vodiča, naučit ćete:
-- Razumjeti kvote, ograničenja i regionalna ograničenja u Azureu
-- Savladati tehnike provjere dostupnosti i kapaciteta resursa prije implementacije
-- Implementirati strategije automatizirane validacije i praćenja kapaciteta
+- Razumjeti Azure kvote, ograničenja i regionalna ograničenja dostupnosti
+- Ovladati tehnikama provjere dostupnosti resursa i kapaciteta prije implementacije
+- Implementirati strategije automatizirane provjere i praćenja kapaciteta
 - Dizajnirati aplikacije s odgovarajućim dimenzioniranjem resursa i skaliranjem
 - Primijeniti strategije optimizacije troškova kroz inteligentno planiranje kapaciteta
-- Konfigurirati upozorenja i praćenje za korištenje kvota i dostupnost resursa
+- Konfigurirati alarme i praćenje za korištenje kvota i dostupnost resursa
 
-## Ishodi Učenja
+## Ishodi učenja
 
 Po završetku, moći ćete:
-- Procijeniti i validirati zahtjeve za kapacitetom Azure resursa prije implementacije
+- Procijeniti i potvrditi zahtjeve za kapacitetom Azure resursa prije implementacije
 - Kreirati automatizirane skripte za provjeru kapaciteta i praćenje kvota
 - Dizajnirati skalabilne arhitekture koje uzimaju u obzir regionalna i pretplatnička ograničenja
 - Implementirati isplative strategije dimenzioniranja resursa za različite vrste radnih opterećenja
 - Konfigurirati proaktivno praćenje i upozorenja za probleme vezane uz kapacitet
 - Planirati implementacije u više regija s pravilnom raspodjelom kapaciteta
 
-## Zašto je Planiranje Kapaciteta Važno
+## Zašto je planiranje kapaciteta važno
 
-Prije implementacije aplikacija, potrebno je osigurati:
+Prije implementacije aplikacija, trebate osigurati:
 - **Dovoljne kvote** za potrebne resurse
 - **Dostupnost resursa** u ciljanoj regiji
 - **Dostupnost razine usluge** za vašu vrstu pretplate
-- **Mrežni kapacitet** za očekivani promet
+- **Kapacitet mreže** za očekivani promet
 - **Optimizaciju troškova** kroz pravilno dimenzioniranje
 
-## 📊 Razumijevanje Azure Kvota i Ograničenja
+## 📊 Razumijevanje Azure kvota i ograničenja
 
-### Vrste Ograničenja
+### Vrste ograničenja
 1. **Kvote na razini pretplate** - Maksimalni resursi po pretplati
 2. **Regionalne kvote** - Maksimalni resursi po regiji
 3. **Ograničenja specifična za resurse** - Ograničenja za pojedine vrste resursa
 4. **Ograničenja razine usluge** - Ograničenja temeljena na vašem planu usluge
 
-### Uobičajene Kvote Resursa
+### Uobičajene kvote resursa
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -60,9 +60,9 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Provjere Kapaciteta Prije Implementacije
+## Provjere kapaciteta prije implementacije
 
-### Skripta za Automatiziranu Validaciju Kapaciteta
+### Automatizirana skripta za provjeru kapaciteta
 ```bash
 #!/bin/bash
 # capacity-check.sh - Validate Azure capacity before deployment
@@ -120,7 +120,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Provjere Kapaciteta Specifične za Usluge
+### Provjere kapaciteta specifične za usluge
 
 #### Kapacitet App Service-a
 ```bash
@@ -154,7 +154,7 @@ check_app_service_capacity() {
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Kapacitet Baza Podataka
+#### Kapacitet baze podataka
 ```bash
 # Check PostgreSQL capacity
 check_postgres_capacity() {
@@ -252,9 +252,9 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Validacija Regionalne Dostupnosti
+## 📍 Provjera regionalne dostupnosti
 
-### Dostupnost Usluga po Regijama
+### Dostupnost usluga po regijama
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -288,7 +288,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-### Preporuke za Odabir Regije
+### Preporuke za odabir regije
 ```bash
 # Recommend optimal regions based on requirements
 recommend_region() {
@@ -319,9 +319,9 @@ recommend_region() {
 }
 ```
 
-## 💰 Planiranje i Procjena Troškova
+## 💰 Planiranje i procjena troškova
 
-### Procjena Troškova Resursa
+### Procjena troškova resursa
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -354,7 +354,7 @@ estimate_costs() {
 }
 ```
 
-### Preporuke za Optimizaciju SKU-ova
+### Preporuke za optimizaciju SKU-a
 ```bash
 # Recommend optimal SKUs based on requirements
 recommend_sku() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Automatizirane Provjere Prije Implementacije
+## 🚀 Automatizirane provjere prije implementacije
 
-### Sveobuhvatna Skripta za Provjere Prije Implementacije
+### Sveobuhvatna skripta za provjere prije implementacije
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -620,7 +620,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Predložak Konfiguracijske Datoteke
+### Predložak konfiguracijske datoteke
 ```json
 {
   "requirements": {
@@ -654,9 +654,9 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Praćenje Kapaciteta Tijekom Implementacije
+## 📈 Praćenje kapaciteta tijekom implementacije
 
-### Praćenje Kapaciteta u Stvarnom Vremenu
+### Praćenje kapaciteta u stvarnom vremenu
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integracija s AZD-om
 
-### Dodavanje Provjera Prije Implementacije u azure.yaml
+### Dodavanje pre-flight hookova u azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -709,37 +709,38 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## Najbolje Prakse
+## Najbolje prakse
 
 1. **Uvijek provodite provjere kapaciteta** prije implementacije u nove regije
 2. **Redovito pratite korištenje kvota** kako biste izbjegli iznenađenja
 3. **Planirajte rast** provjerom budućih potreba za kapacitetom
-4. **Koristite alate za procjenu troškova** kako biste izbjegli neočekivane račune
+4. **Koristite alate za procjenu troškova** kako biste izbjegli neočekivane troškove
 5. **Dokumentirajte zahtjeve za kapacitetom** za svoj tim
-6. **Automatizirajte validaciju kapaciteta** u CI/CD cjevovodima
-7. **Razmotrite zahtjeve za kapacitetom** za regionalni failover
+6. **Automatizirajte provjere kapaciteta** u CI/CD procesima
+7. **Razmotrite zahtjeve za kapacitetom za regionalni failover**
 
-## Sljedeći Koraci
+## Sljedeći koraci
 
-- [Vodič za Odabir SKU-ova](sku-selection.md) - Odaberite optimalne razine usluga
-- [Provjere Prije Implementacije](preflight-checks.md) - Automatizirane validacijske skripte
-- [Kratki Pregled](../../resources/cheat-sheet.md) - Brze referentne naredbe
+- [Vodič za odabir SKU-a](sku-selection.md) - Odaberite optimalne razine usluga
+- [Provjere prije implementacije](preflight-checks.md) - Automatizirane skripte za provjeru
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Brzi referentni vodič za naredbe
 - [Pojmovnik](../../resources/glossary.md) - Pojmovi i definicije
 
-## Dodatni Resursi
+## Dodatni resursi
 
-- [Ograničenja Pretplate na Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure Kalkulator Cijena](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Upravljanje Troškovima](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Regionalna Dostupnost](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure ograničenja pretplate](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure kalkulator cijena](https://azure.microsoft.com/pricing/calculator/)
+- [Azure upravljanje troškovima](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure regionalna dostupnost](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigacija**
-- **Prethodna Lekcija**: [Vodič za Otklanjanje Pogrešaka](../troubleshooting/debugging.md)
-- **Sljedeća Lekcija**: [Odabir SKU-ova](sku-selection.md)
+- **Prethodna lekcija**: [Vodič za otklanjanje pogrešaka](../troubleshooting/debugging.md)
+
+- **Sljedeća lekcija**: [Odabir SKU-a](sku-selection.md)
 
 ---
 
-**Odricanje od odgovornosti**:  
-Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
+**Izjava o odricanju odgovornosti**:  
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.

@@ -1,22 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:43:10+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:21:52+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "en"
 }
 -->
-# Capacity Planning - Azure Resource Availability and Limits
+# Capacity Planning: Understanding Azure Quotas and Limits
 
 ## Introduction
 
-This detailed guide helps you plan and verify Azure resource capacity before deploying with Azure Developer CLI. Learn how to evaluate quotas, availability, and regional constraints to ensure successful deployments while optimizing costs and performance. Gain expertise in capacity planning for various application architectures and scaling scenarios.
+This guide provides a detailed approach to planning and validating Azure resource capacity before deploying with Azure Developer CLI. Learn how to evaluate quotas, availability, and regional constraints to ensure smooth deployments while optimizing costs and performance. Gain expertise in capacity planning for various application architectures and scaling scenarios.
 
 ## Learning Goals
 
 By the end of this guide, you will:
-- Understand Azure quotas, limits, and regional availability restrictions
+- Understand Azure quotas, limits, and regional availability constraints
 - Learn techniques to check resource availability and capacity before deployment
 - Implement automated strategies for capacity validation and monitoring
 - Design applications with appropriate resource sizing and scaling considerations
@@ -26,28 +26,28 @@ By the end of this guide, you will:
 ## Learning Outcomes
 
 After completing this guide, you will be able to:
-- Evaluate and confirm Azure resource capacity requirements before deployment
-- Develop automated scripts for capacity validation and quota monitoring
+- Evaluate and validate Azure resource capacity requirements before deployment
+- Develop automated scripts for capacity checks and quota monitoring
 - Design scalable architectures that account for regional and subscription limits
 - Implement cost-efficient resource sizing strategies for various workloads
-- Set up proactive monitoring and alerts for capacity-related issues
+- Configure proactive monitoring and alerts for capacity-related issues
 - Plan multi-region deployments with proper capacity distribution
 
 ## Why Capacity Planning Matters
 
 Before deploying applications, it’s essential to ensure:
 - **Adequate quotas** for required resources
-- **Resource availability** in your chosen region
-- **Service tier availability** for your subscription type
+- **Resource availability** in the target region
+- **Service tier compatibility** with your subscription type
 - **Network capacity** to handle expected traffic
-- **Cost optimization** through appropriate resource sizing
+- **Cost efficiency** through proper resource sizing
 
 ## 📊 Understanding Azure Quotas and Limits
 
 ### Types of Limits
 1. **Subscription-level quotas** - Maximum resources allowed per subscription
-2. **Regional quotas** - Maximum resources allowed per region
-3. **Resource-specific limits** - Limits for individual resource types
+2. **Regional quotas** - Maximum resources available in a specific region
+3. **Resource-specific limits** - Restrictions for individual resource types
 4. **Service tier limits** - Limits based on your chosen service plan
 
 ### Common Resource Quotas
@@ -59,6 +59,7 @@ az vm list-usage --location eastus2 --output table
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
+
 
 ## Pre-Deployment Capacity Checks
 
@@ -120,6 +121,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
+
 ### Service-Specific Capacity Checks
 
 #### App Service Capacity
@@ -153,6 +155,7 @@ check_app_service_capacity() {
 # Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
+
 
 #### Database Capacity
 ```bash
@@ -211,6 +214,7 @@ check_cosmos_capacity() {
 }
 ```
 
+
 #### Container Apps Capacity
 ```bash
 # Check Container Apps capacity
@@ -252,6 +256,7 @@ check_container_apps_capacity() {
 }
 ```
 
+
 ## 📍 Regional Availability Validation
 
 ### Service Availability by Region
@@ -288,6 +293,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
+
 ### Region Selection Recommendations
 ```bash
 # Recommend optimal regions based on requirements
@@ -318,6 +324,7 @@ recommend_region() {
     esac
 }
 ```
+
 
 ## 💰 Cost Planning and Estimation
 
@@ -353,6 +360,7 @@ estimate_costs() {
     echo "   https://portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview"
 }
 ```
+
 
 ### SKU Optimization Recommendations
 ```bash
@@ -418,6 +426,7 @@ recommend_sku() {
     esac
 }
 ```
+
 
 ## 🚀 Automated Pre-Flight Checks
 
@@ -620,6 +629,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
+
 ### Configuration File Template
 ```json
 {
@@ -653,6 +663,7 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
+
 
 ## 📈 Monitoring Capacity During Deployment
 
@@ -689,6 +700,7 @@ monitor_deployment_capacity() {
 }
 ```
 
+
 ## 🔗 Integration with AZD
 
 ### Add Pre-Flight Hooks to azure.yaml
@@ -709,10 +721,11 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
+
 ## Best Practices
 
 1. **Always perform capacity checks** before deploying to new regions
-2. **Monitor quota usage regularly** to avoid unexpected issues
+2. **Regularly monitor quota usage** to avoid unexpected issues
 3. **Plan for future growth** by assessing capacity needs in advance
 4. **Use cost estimation tools** to prevent unexpected expenses
 5. **Document capacity requirements** for team collaboration
@@ -721,10 +734,10 @@ hooks:
 
 ## Next Steps
 
-- [SKU Selection Guide](sku-selection.md) - Select the best service tiers
-- [Pre-flight Checks](preflight-checks.md) - Automated validation scripts
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Quick reference commands
-- [Glossary](../../resources/glossary.md) - Key terms and definitions
+- [SKU Selection Guide](sku-selection.md) - Learn how to choose optimal service tiers
+- [Pre-flight Checks](preflight-checks.md) - Explore automated validation scripts
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Quick reference for commands
+- [Glossary](../../resources/glossary.md) - Definitions of key terms
 
 ## Additional Resources
 
@@ -742,4 +755,4 @@ hooks:
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

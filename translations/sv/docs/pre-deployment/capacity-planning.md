@@ -1,23 +1,23 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T21:58:56+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:31:52+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "sv"
 }
 -->
-# Kapacitetsplanering - Azure Resurstillgänglighet och Begränsningar
+# Kapacitetsplanering: Förstå Azure-kvoter och gränser - Tillgänglighet och begränsningar för Azure-resurser
 
 ## Introduktion
 
-Denna omfattande guide hjälper dig att planera och validera Azure-resurskapacitet innan du distribuerar med Azure Developer CLI. Lär dig att bedöma kvoter, tillgänglighet och regionala begränsningar för att säkerställa framgångsrika distributioner samtidigt som du optimerar kostnader och prestanda. Bemästra tekniker för kapacitetsplanering för olika applikationsarkitekturer och skalningsscenarier.
+Denna omfattande guide hjälper dig att planera och validera kapaciteten för Azure-resurser innan du distribuerar med Azure Developer CLI. Lär dig att bedöma kvoter, tillgänglighet och regionala begränsningar för att säkerställa framgångsrika distributioner samtidigt som du optimerar kostnader och prestanda. Bemästra tekniker för kapacitetsplanering för olika applikationsarkitekturer och skalningsscenarier.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Förstå Azure-kvoter, begränsningar och regionala tillgänglighetsbegränsningar
-- Bemästra tekniker för att kontrollera resurstillgänglighet och kapacitet innan distribution
+- Förstå Azure-kvoter, gränser och regionala tillgänglighetsbegränsningar
+- Bemästra tekniker för att kontrollera resurstillgänglighet och kapacitet före distribution
 - Implementera automatiserade strategier för kapacitetsvalidering och övervakning
 - Designa applikationer med korrekt resursdimensionering och skalningsöverväganden
 - Tillämpa kostnadsoptimeringsstrategier genom intelligent kapacitetsplanering
@@ -25,10 +25,10 @@ Genom att slutföra denna guide kommer du att:
 
 ## Läranderesultat
 
-Efter avslutad guide kommer du att kunna:
-- Bedöma och validera Azure-resurskapacitetskrav innan distribution
+Efter att ha slutfört guiden kommer du att kunna:
+- Bedöma och validera kapacitetskrav för Azure-resurser före distribution
 - Skapa automatiserade skript för kapacitetskontroll och kvotövervakning
-- Designa skalbara arkitekturer som tar hänsyn till regionala och abonnemangsbegränsningar
+- Designa skalbara arkitekturer som tar hänsyn till regionala och abonnemangsgränser
 - Implementera kostnadseffektiva strategier för resursdimensionering för olika arbetsbelastningar
 - Konfigurera proaktiv övervakning och varningar för kapacitetsrelaterade problem
 - Planera distributioner över flera regioner med korrekt kapacitetsfördelning
@@ -38,17 +38,17 @@ Efter avslutad guide kommer du att kunna:
 Innan du distribuerar applikationer behöver du säkerställa:
 - **Tillräckliga kvoter** för nödvändiga resurser
 - **Resurstillgänglighet** i din målregion
-- **Tillgänglighet för tjänstenivåer** för din abonnemangstyp
+- **Tillgänglighet för tjänstenivå** för din abonnemangstyp
 - **Nätverkskapacitet** för förväntad trafik
 - **Kostnadsoptimering** genom korrekt dimensionering
 
-## 📊 Förstå Azure-kvoter och begränsningar
+## 📊 Förstå Azure-kvoter och gränser
 
-### Typer av begränsningar
+### Typer av gränser
 1. **Kvoter på abonnemangsnivå** - Maximala resurser per abonnemang
 2. **Regionala kvoter** - Maximala resurser per region
-3. **Resursspecifika begränsningar** - Begränsningar för individuella resurstyper
-4. **Begränsningar för tjänstenivåer** - Begränsningar baserade på din tjänsteplan
+3. **Resursspecifika gränser** - Gränser för individuella resurstyper
+4. **Gränser för tjänstenivå** - Gränser baserade på din tjänsteplan
 
 ### Vanliga resurskvoter
 ```bash
@@ -321,7 +321,7 @@ recommend_region() {
 
 ## 💰 Kostnadsplanering och uppskattning
 
-### Uppskattning av resurskostnader
+### Kostnadsuppskattning för resurser
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -421,7 +421,7 @@ recommend_sku() {
 
 ## 🚀 Automatiserade kontroller före distribution
 
-### Omfattande skript för förkontroll
+### Omfattande skript för kontroller före distribution
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integration med AZD
 
-### Lägg till förkontrollshooks i azure.yaml
+### Lägg till kontroller före distribution i azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -711,35 +711,36 @@ hooks:
 
 ## Bästa praxis
 
-1. **Kör alltid kapacitetskontroller** innan distribution till nya regioner
+1. **Utför alltid kapacitetskontroller** innan du distribuerar till nya regioner
 2. **Övervaka kvotanvändning regelbundet** för att undvika överraskningar
 3. **Planera för tillväxt** genom att kontrollera framtida kapacitetsbehov
 4. **Använd verktyg för kostnadsuppskattning** för att undvika oväntade kostnader
 5. **Dokumentera kapacitetskrav** för ditt team
 6. **Automatisera kapacitetsvalidering** i CI/CD-pipelines
-7. **Ta hänsyn till regional kapacitet för failover** vid behov
+7. **Överväg regional failover** för kapacitetskrav
 
 ## Nästa steg
 
 - [Guide för SKU-val](sku-selection.md) - Välj optimala tjänstenivåer
-- [Förkontroller](preflight-checks.md) - Automatiserade valideringsskript
+- [Kontroller före distribution](preflight-checks.md) - Automatiserade valideringsskript
 - [Fuskblad](../../resources/cheat-sheet.md) - Snabbreferenskommandon
 - [Ordlista](../../resources/glossary.md) - Termer och definitioner
 
 ## Ytterligare resurser
 
-- [Azure-abonnemangsbegränsningar](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Gränser för Azure-abonnemang](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure-priskalkylator](https://azure.microsoft.com/pricing/calculator/)
 - [Azure kostnadshantering](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure regional tillgänglighet](https://azure.microsoft.com/global-infrastructure/services/)
+- [Regional tillgänglighet för Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigering**
 - **Föregående lektion**: [Felsökningsguide](../troubleshooting/debugging.md)
+
 - **Nästa lektion**: [SKU-val](sku-selection.md)
 
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

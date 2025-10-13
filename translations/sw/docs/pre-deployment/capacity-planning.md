@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:43:24+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:35:25+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "sw"
 }
 -->
-# Mipango ya Uwezo - Upatikanaji wa Rasilimali za Azure na Vikomo
+# Mipango ya Uwezo: Kuelewa Quotas na Vikomo vya Azure
 
 ## Utangulizi
 
-Mwongozo huu wa kina unakusaidia kupanga na kuthibitisha uwezo wa rasilimali za Azure kabla ya kupeleka kwa kutumia Azure Developer CLI. Jifunze kutathmini vikomo, upatikanaji, na vikwazo vya kanda ili kuhakikisha mafanikio ya utekelezaji huku ukiboresha gharama na utendaji. Kuwa mtaalamu wa mbinu za mipango ya uwezo kwa miundombinu tofauti ya programu na hali za kupanua.
+Mwongozo huu wa kina unakusaidia kupanga na kuthibitisha uwezo wa rasilimali za Azure kabla ya kuzitumia na Azure Developer CLI. Jifunze kutathmini quotas, upatikanaji, na vikwazo vya kanda ili kuhakikisha mafanikio ya matumizi huku ukiboresha gharama na utendaji. Kuwa mtaalamu wa mbinu za mipango ya uwezo kwa miundombinu tofauti ya programu na hali za upanuzi.
 
 ## Malengo ya Kujifunza
 
 Kwa kukamilisha mwongozo huu, utaweza:
-- Kuelewa vikomo vya Azure, mipaka, na vikwazo vya upatikanaji wa kanda
-- Kuwa mtaalamu wa mbinu za kuangalia upatikanaji wa rasilimali na uwezo kabla ya utekelezaji
+- Kuelewa quotas za Azure, vikomo, na vikwazo vya upatikanaji wa kanda
+- Kuwa mtaalamu wa mbinu za kuangalia upatikanaji wa rasilimali na uwezo kabla ya matumizi
 - Kutekeleza mikakati ya uthibitishaji wa uwezo na ufuatiliaji wa kiotomatiki
-- Kubuni programu kwa kuzingatia ukubwa sahihi wa rasilimali na mbinu za kupanua
-- Kutumia mikakati ya kuboresha gharama kupitia mipango ya uwezo yenye akili
-- Kuseti arifa na ufuatiliaji wa matumizi ya vikomo na upatikanaji wa rasilimali
+- Kubuni programu kwa kuzingatia ukubwa sahihi wa rasilimali na upanuzi
+- Kutumia mikakati ya kuboresha gharama kupitia mipango ya uwezo ya akili
+- Kuseti arifa na ufuatiliaji wa matumizi ya quotas na upatikanaji wa rasilimali
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha, utaweza:
-- Kutathmini na kuthibitisha mahitaji ya uwezo wa rasilimali za Azure kabla ya utekelezaji
-- Kuunda maandiko ya kiotomatiki kwa kuangalia uwezo na ufuatiliaji wa vikomo
-- Kubuni miundombinu inayoweza kupanuka kwa kuzingatia mipaka ya kanda na usajili
+- Kutathmini na kuthibitisha mahitaji ya uwezo wa rasilimali za Azure kabla ya matumizi
+- Kuunda scripts za kiotomatiki kwa kuangalia uwezo na ufuatiliaji wa quotas
+- Kubuni miundombinu inayoweza kupanuka kwa kuzingatia vikomo vya kanda na usajili
 - Kutekeleza mikakati ya ukubwa wa rasilimali yenye gharama nafuu kwa aina tofauti za mzigo wa kazi
 - Kuseti ufuatiliaji wa proaktif na arifa kwa masuala yanayohusiana na uwezo
-- Kupanga utekelezaji wa kanda nyingi kwa usambazaji sahihi wa uwezo
+- Kupanga matumizi ya kanda nyingi kwa usambazaji sahihi wa uwezo
 
 ## Kwa Nini Mipango ya Uwezo Ni Muhimu
 
-Kabla ya kupeleka programu, unahitaji kuhakikisha:
-- **Vikomo vya kutosha** kwa rasilimali zinazohitajika
+Kabla ya kutumia programu, unahitaji kuhakikisha:
+- **Quotas za kutosha** kwa rasilimali zinazohitajika
 - **Upatikanaji wa rasilimali** katika kanda unayolenga
 - **Upatikanaji wa kiwango cha huduma** kwa aina ya usajili wako
 - **Uwezo wa mtandao** kwa trafiki inayotarajiwa
 - **Ubunifu wa gharama** kupitia ukubwa sahihi
 
-## 📊 Kuelewa Vikomo na Mipaka ya Azure
+## 📊 Kuelewa Quotas na Vikomo vya Azure
 
 ### Aina za Vikomo
-1. **Vikomo vya usajili** - Rasilimali za juu kwa kila usajili
-2. **Vikomo vya kanda** - Rasilimali za juu kwa kila kanda
-3. **Mipaka maalum ya rasilimali** - Vikomo kwa aina za rasilimali binafsi
-4. **Mipaka ya kiwango cha huduma** - Vikomo kulingana na mpango wa huduma yako
+1. **Quotas za kiwango cha usajili** - Rasilimali za juu kwa kila usajili
+2. **Quotas za kanda** - Rasilimali za juu kwa kila kanda
+3. **Vikomo maalum vya rasilimali** - Vikomo kwa aina ya rasilimali binafsi
+4. **Vikomo vya kiwango cha huduma** - Vikomo kulingana na mpango wa huduma yako
 
-### Vikomo vya Kawaida vya Rasilimali
+### Quotas za Rasilimali za Kawaida
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -60,9 +60,9 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Ukaguzi wa Uwezo Kabla ya Utekelezaji
+## Ukaguzi wa Uwezo Kabla ya Matumizi
 
-### Maandiko ya Uthibitishaji wa Uwezo wa Kiotomatiki
+### Script ya Uthibitishaji wa Uwezo wa Kiotomatiki
 ```bash
 #!/bin/bash
 # capacity-check.sh - Validate Azure capacity before deployment
@@ -122,7 +122,7 @@ echo "✅ Capacity check completed successfully!"
 
 ### Ukaguzi Maalum wa Uwezo wa Huduma
 
-#### Uwezo wa Huduma ya Programu
+#### Uwezo wa App Service
 ```bash
 # Check App Service Plan availability
 check_app_service_capacity() {
@@ -154,7 +154,7 @@ check_app_service_capacity() {
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Uwezo wa Hifadhidata
+#### Uwezo wa Database
 ```bash
 # Check PostgreSQL capacity
 check_postgres_capacity() {
@@ -211,7 +211,7 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Uwezo wa Programu za Kontena
+#### Uwezo wa Container Apps
 ```bash
 # Check Container Apps capacity
 check_container_apps_capacity() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Ukaguzi wa Kiotomatiki Kabla ya Utekelezaji
+## 🚀 Ukaguzi wa Kiotomatiki Kabla ya Matumizi
 
-### Maandiko ya Kina Kabla ya Utekelezaji
+### Script Kamili ya Ukaguzi Kabla ya Matumizi
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -620,7 +620,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Kiolezo cha Faili ya Usanidi
+### Template ya Faili ya Usanidi
 ```json
 {
   "requirements": {
@@ -654,7 +654,7 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Ufuatiliaji wa Uwezo Wakati wa Utekelezaji
+## 📈 Ufuatiliaji wa Uwezo Wakati wa Matumizi
 
 ### Ufuatiliaji wa Uwezo wa Wakati Halisi
 ```bash
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Muunganisho na AZD
 
-### Ongeza Vifungo vya Kabla ya Utekelezaji kwa azure.yaml
+### Ongeza Hooks za Ukaguzi Kabla ya Matumizi kwenye azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -711,24 +711,24 @@ hooks:
 
 ## Mazoea Bora
 
-1. **Kagua uwezo kila wakati** kabla ya kupeleka kwenye kanda mpya
-2. **Fuata matumizi ya vikomo mara kwa mara** ili kuepuka mshangao
+1. **Daima fanya ukaguzi wa uwezo** kabla ya kutumia katika kanda mpya
+2. **Fuata matumizi ya quotas mara kwa mara** ili kuepuka mshangao
 3. **Panga ukuaji** kwa kuangalia mahitaji ya uwezo wa baadaye
 4. **Tumia zana za makadirio ya gharama** ili kuepuka mshtuko wa bili
-5. **Hifadhi mahitaji ya uwezo** kwa timu yako
+5. **Andika mahitaji ya uwezo** kwa timu yako
 6. **Otomatisha uthibitishaji wa uwezo** katika mabomba ya CI/CD
 7. **Fikiria mahitaji ya uwezo wa kanda ya kushindwa** 
 
 ## Hatua Zifuatazo
 
 - [Mwongozo wa Uchaguzi wa SKU](sku-selection.md) - Chagua viwango bora vya huduma
-- [Ukaguzi Kabla ya Utekelezaji](preflight-checks.md) - Maandiko ya uthibitishaji wa kiotomatiki
-- [Karatasi ya Msaada](../../resources/cheat-sheet.md) - Amri za rejea za haraka
+- [Ukaguzi Kabla ya Matumizi](preflight-checks.md) - Scripts za uthibitishaji wa kiotomatiki
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Amri za rejea za haraka
 - [Kamusi](../../resources/glossary.md) - Maneno na ufafanuzi
 
 ## Rasilimali za Ziada
 
-- [Mipaka ya Usajili wa Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Vikomo vya Usajili wa Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Kikokotoo cha Bei za Azure](https://azure.microsoft.com/pricing/calculator/)
 - [Usimamizi wa Gharama za Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
 - [Upatikanaji wa Kanda za Azure](https://azure.microsoft.com/global-infrastructure/services/)
@@ -736,10 +736,11 @@ hooks:
 ---
 
 **Urambazaji**
-- **Somo la Awali**: [Mwongozo wa Urekebishaji](../troubleshooting/debugging.md)
+- **Somo la Awali**: [Mwongozo wa Debugging](../troubleshooting/debugging.md)
+
 - **Somo Linalofuata**: [Uchaguzi wa SKU](sku-selection.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

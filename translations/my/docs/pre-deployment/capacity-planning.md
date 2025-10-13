@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:46:27+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:38:53+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "my"
 }
 -->
-# Azure Quotas နှင့် အကန့်အသတ်များကို နားလည်ခြင်း - Azure အရင်းအမြစ်ရရှိနိုင်မှုနှင့် အကန့်အသတ်များ
+# Capacity Planning: Azure Quotas နှင့် ကန့်သတ်ချက်များကို နားလည်ခြင်း - Azure ရင်းမြစ်ရရှိနိုင်မှုနှင့် ကန့်သတ်ချက်များ
 
-## အကျဉ်းချုပ်
+## နိဒါန်း
 
-ဒီလမ်းညွှန်ချက်က Azure Developer CLI ကို အသုံးပြုပြီး deployment မလုပ်ခင်မှာ Azure အရင်းအမြစ်စွမ်းဆောင်ရည်ကို စီမံခန့်ခွဲပြီး အတည်ပြုဖို့ ကူညီပေးပါမယ်။ Quotas, availability, နဲ့ ဒေသဆိုင်ရာ အကန့်အသတ်များကို သုံးသပ်နိုင်ဖို့ လေ့လာပြီး cost နဲ့ performance ကို အကောင်းဆုံးဖြစ်အောင် စီမံနိုင်ပါမယ်။ အမျိုးမျိုးသော application architectures နဲ့ scaling scenarios များအတွက် စွမ်းဆောင်ရည်စီမံခန့်ခွဲမှုနည်းလမ်းများကို ကျွမ်းကျင်စွာ လေ့လာပါ။
+ဒီလမ်းညွှန်ချက်က Azure Developer CLI ကို အသုံးပြုပြီး deployment မလုပ်မီ Azure ရင်းမြစ်စွမ်းရည်ကို စီစဉ်ပြီး အတည်ပြုဖို့ ကူညီပေးမှာဖြစ်ပါတယ်။ Quotas, ရရှိနိုင်မှုနှင့် ဒေသဆိုင်ရာ ကန့်သတ်ချက်များကို သုံးသပ်ပြီး deployment အောင်မြင်မှုရရှိစေဖို့၊ ကုန်ကျစရိတ်နှင့် စွမ်းဆောင်ရည်ကို အကောင်းဆုံးဖြစ်အောင်လုပ်ဆောင်ပါ။ အမျိုးမျိုးသော application architecture များနှင့် အရွယ်အစားချဲ့ထွင်မှုအခြေအနေများအတွက် စွမ်းရည်စီမံခန့်ခွဲမှုနည်းလမ်းများကို ကျွမ်းကျင်ပါ။
 
-## လေ့လာရမည့်အရာများ
+## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-ဒီလမ်းညွှန်ချက်ကို ပြီးမြောက်ပါက သင်သည်:
-- Azure quotas, limits, နဲ့ ဒေသဆိုင်ရာ အကန့်အသတ်များကို နားလည်နိုင်မည်
-- Deployment မလုပ်ခင်မှာ အရင်းအမြစ်ရရှိနိုင်မှုနဲ့ စွမ်းဆောင်ရည်ကို စစ်ဆေးနည်းလမ်းများကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
-- Automated capacity validation နဲ့ monitoring strategies များကို အကောင်အထည်ဖော်နိုင်မည်
-- အရင်းအမြစ်အရွယ်အစားနဲ့ scaling ကို သင့်တော်စွာ စီမံထားသော application များကို ဒီဇိုင်းဆွဲနိုင်မည်
-- စွမ်းဆောင်ရည်စီမံခန့်ခွဲမှုမှတဆင့် cost optimization strategies များကို အသုံးပြုနိုင်မည်
-- Quota usage နဲ့ အရင်းအမြစ်ရရှိနိုင်မှုအတွက် alerts နဲ့ monitoring ကို configure လုပ်နိုင်မည်
+ဒီလမ်းညွှန်ချက်ကို ပြီးမြောက်စွာ လေ့လာပြီးနောက်၊ သင်သည်:
+- Azure quotas, ကန့်သတ်ချက်များနှင့် ဒေသဆိုင်ရာ ရရှိနိုင်မှု ကန့်သတ်ချက်များကို နားလည်ပါမည်
+- Deployment မလုပ်မီ ရင်းမြစ်ရရှိနိုင်မှုနှင့် စွမ်းရည်ကို စစ်ဆေးနည်းများကို ကျွမ်းကျင်ပါမည်
+- စွမ်းရည်အတည်ပြုခြင်းနှင့် စောင့်ကြည့်မှု မျှတစွာလုပ်ဆောင်နိုင်သော နည်းလမ်းများကို အကောင်အထည်ဖော်ပါမည်
+- ရင်းမြစ်အရွယ်အစားနှင့် အရွယ်အစားချဲ့ထွင်မှုကို သင့်တော်စွာ စီမံခန့်ခွဲနိုင်သော application များကို ဒီဇိုင်းဆွဲပါမည်
+- စွမ်းရည်စီမံခန့်ခွဲမှုမှတဆင့် ကုန်ကျစရိတ်ကို အကောင်းဆုံးဖြစ်အောင်လုပ်ဆောင်ပါမည်
+- Quota အသုံးပြုမှုနှင့် ရင်းမြစ်ရရှိနိုင်မှုအတွက် အချက်ပေးနှင့် စောင့်ကြည့်မှုကို ပြင်ဆင်ပါမည်
 
-## လေ့လာပြီးရရှိမည့်ရလဒ်များ
+## သင်ယူမှုရလဒ်များ
 
-ဒီလမ်းညွှန်ချက်ကို ပြီးမြောက်ပါက သင်သည်:
-- Deployment မလုပ်ခင် Azure အရင်းအမြစ်စွမ်းဆောင်ရည်လိုအပ်ချက်များကို သုံးသပ်ပြီး အတည်ပြုနိုင်မည်
-- Capacity checking နဲ့ quota monitoring အတွက် automated scripts များကို ဖန်တီးနိုင်မည်
-- ဒေသဆိုင်ရာနဲ့ subscription limits များကို ထည့်သွင်းစဉ်းစားထားသော scalable architectures များကို ဒီဇိုင်းဆွဲနိုင်မည်
-- အမျိုးမျိုးသော workload အမျိုးအစားများအတွက် cost-effective resource sizing strategies များကို အကောင်အထည်ဖော်နိုင်မည်
-- စွမ်းဆောင်ရည်ဆိုင်ရာ ပြဿနာများအတွက် proactive monitoring နဲ့ alerting ကို configure လုပ်နိုင်မည်
-- Multi-region deployments များအတွက် စွမ်းဆောင်ရည်ဖြန့်ဝေမှုကို သေချာစီမံနိုင်မည်
+ဒီလမ်းညွှန်ချက်ကို ပြီးမြောက်ပြီးနောက်၊ သင်သည်:
+- Deployment မလုပ်မီ Azure ရင်းမြစ်စွမ်းရည်လိုအပ်ချက်များကို သုံးသပ်ပြီး အတည်ပြုနိုင်ပါမည်
+- စွမ်းရည်စစ်ဆေးမှုနှင့် quota စောင့်ကြည့်မှုအတွက် အလိုအလျောက် script များကို ဖန်တီးနိုင်ပါမည်
+- ဒေသဆိုင်ရာနှင့် subscription ကန့်သတ်ချက်များကို ထည့်သွင်းစဉ်းစားထားသော အရွယ်အစားချဲ့ထွင်နိုင်သော architecture များကို ဒီဇိုင်းဆွဲနိုင်ပါမည်
+- အမျိုးမျိုးသော workload အမျိုးအစားများအတွက် ကုန်ကျစရိတ်သက်သာစေသော ရင်းမြစ်အရွယ်အစားစီမံခန့်ခွဲမှုနည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်ပါမည်
+- စွမ်းရည်နှင့်ပတ်သက်သော ပြဿနာများအတွက် အချက်ပေးမှုနှင့် စောင့်ကြည့်မှုကို ကြိုတင်ပြင်ဆင်နိုင်ပါမည်
+- စွမ်းရည်ဖြန့်ဝေမှုကို သင့်တော်စွာ စီမံထားသော multi-region deployment များကို စီစဉ်နိုင်ပါမည်
 
-## စွမ်းဆောင်ရည်စီမံခန့်ခွဲမှုအရေးပါမှု
+## စွမ်းရည်စီမံခန့်ခွဲမှု အရေးကြီးမှု
 
-Applications များကို deploy မလုပ်ခင်မှာ သင်သည် အောက်ပါအချက်များကို သေချာစစ်ဆေးရမည်:
-- **Quotas လုံလောက်မှု** - လိုအပ်သော အရင်းအမြစ်များအတွက်
-- **အရင်းအမြစ်ရရှိနိုင်မှု** - သင့်ရည်မှန်းထားသော ဒေသတွင်
-- **Service tier ရရှိနိုင်မှု** - သင့် subscription အမျိုးအစားအတွက်
-- **Network စွမ်းဆောင်ရည်** - မျှော်မှန်းထားသော traffic အတွက်
-- **Cost optimization** - အရွယ်အစားသင့်တော်မှုမှတဆင့်
+Application များကို deploy လုပ်မီ၊ သင်သည် အောက်ပါအချက်များကို သေချာစွာ စစ်ဆေးရမည်:
+- လိုအပ်သော ရင်းမြစ်များအတွက် **လုံလောက်သော quotas**
+- သင့်ရည်မှန်းထားသော ဒေသတွင် **ရင်းမြစ်ရရှိနိုင်မှု**
+- သင့် subscription အမျိုးအစားအတွက် **ဝန်ဆောင်မှုအဆင့်ရရှိနိုင်မှု**
+- မျှော်မှန်းထားသော traffic အတွက် **ကွန်ရက်စွမ်းရည်**
+- **အရွယ်အစားချိန်ညှိမှုမှတဆင့် ကုန်ကျစရိတ်သက်သာမှု**
 
-## 📊 Azure Quotas နဲ့ Limits ကို နားလည်ခြင်း
+## 📊 Azure Quotas နှင့် ကန့်သတ်ချက်များကို နားလည်ခြင်း
 
-### အကန့်အသတ်အမျိုးအစားများ
-1. **Subscription-level quotas** - Subscription တစ်ခုလျှင် အရင်းအမြစ်အများဆုံး
-2. **Regional quotas** - ဒေသတစ်ခုလျှင် အရင်းအမြစ်အများဆုံး
-3. **Resource-specific limits** - အရင်းအမြစ်အမျိုးအစားတစ်ခုစီအတွက် အကန့်အသတ်များ
-4. **Service tier limits** - သင့် service plan အပေါ်မူတည်သော အကန့်အသတ်များ
+### ကန့်သတ်ချက်အမျိုးအစားများ
+1. **Subscription-level quotas** - Subscription တစ်ခုစီအတွက် အများဆုံးရင်းမြစ်များ
+2. **Regional quotas** - ဒေသတစ်ခုစီအတွက် အများဆုံးရင်းမြစ်များ
+3. **Resource-specific limits** - ရင်းမြစ်အမျိုးအစားတစ်ခုစီအတွက် ကန့်သတ်ချက်များ
+4. **Service tier limits** - သင့်ဝန်ဆောင်မှုအစီအစဉ်အပေါ်မူတည်သော ကန့်သတ်ချက်များ
 
-### အများဆုံးတွေ့ရသော Resource Quotas
+### ရင်းမြစ် Quotas အများဆုံးတွေ့ရသောအမျိုးအစားများ
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -60,9 +60,9 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Deployment မလုပ်ခင် စွမ်းဆောင်ရည်စစ်ဆေးမှုများ
+## Deployment မလုပ်မီ စွမ်းရည်စစ်ဆေးမှုများ
 
-### Automated Capacity Validation Script
+### အလိုအလျောက် စွမ်းရည်အတည်ပြု Script
 ```bash
 #!/bin/bash
 # capacity-check.sh - Validate Azure capacity before deployment
@@ -120,9 +120,9 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Service-Specific Capacity Checks
+### ဝန်ဆောင်မှုအထူးစွမ်းရည်စစ်ဆေးမှုများ
 
-#### App Service စွမ်းဆောင်ရည်
+#### App Service စွမ်းရည်
 ```bash
 # Check App Service Plan availability
 check_app_service_capacity() {
@@ -154,7 +154,7 @@ check_app_service_capacity() {
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Database စွမ်းဆောင်ရည်
+#### Database စွမ်းရည်
 ```bash
 # Check PostgreSQL capacity
 check_postgres_capacity() {
@@ -211,7 +211,7 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Apps စွမ်းဆောင်ရည်
+#### Container Apps စွမ်းရည်
 ```bash
 # Check Container Apps capacity
 check_container_apps_capacity() {
@@ -252,9 +252,9 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 ဒေသဆိုင်ရာရရှိနိုင်မှုအတည်ပြုခြင်း
+## 📍 ဒေသဆိုင်ရာ ရရှိနိုင်မှုအတည်ပြုခြင်း
 
-### Service ရရှိနိုင်မှု - ဒေသအလိုက်
+### ဒေသအလိုက် ဝန်ဆောင်မှုရရှိနိုင်မှု
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -288,7 +288,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-### ဒေသရွေးချယ်မှုအကြံပြုချက်များ
+### ဒေသရွေးချယ်မှု အကြံပြုချက်များ
 ```bash
 # Recommend optimal regions based on requirements
 recommend_region() {
@@ -319,9 +319,9 @@ recommend_region() {
 }
 ```
 
-## 💰 ကုန်ကျစရိတ်စီမံခြင်းနှင့် ခန့်မှန်းခြင်း
+## 💰 ကုန်ကျစရိတ် စီမံခြင်းနှင့် ခန့်မှန်းခြင်း
 
-### Resource ကုန်ကျစရိတ်ခန့်မှန်းခြင်း
+### ရင်းမြစ်ကုန်ကျစရိတ် ခန့်မှန်းခြင်း
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -354,7 +354,7 @@ estimate_costs() {
 }
 ```
 
-### SKU Optimization အကြံပြုချက်များ
+### SKU ချိန်ညှိမှု အကြံပြုချက်များ
 ```bash
 # Recommend optimal SKUs based on requirements
 recommend_sku() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Automated Pre-Flight Checks
+## 🚀 Deployment မလုပ်မီ အလိုအလျောက် စစ်ဆေးမှုများ
 
-### Comprehensive Pre-Flight Script
+### အပြည့်အစုံ စစ်ဆေးမှု Script
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -654,9 +654,9 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Deployment အတွင်း စွမ်းဆောင်ရည်ကို စောင့်ကြည့်ခြင်း
+## 📈 Deployment အတွင်း စွမ်းရည်စောင့်ကြည့်ခြင်း
 
-### Real-Time Capacity Monitoring
+### အချိန်နှင့်တပြေးညီ စွမ်းရည်စောင့်ကြည့်ခြင်း
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -709,24 +709,24 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## အကောင်းဆုံးအလေ့အကျင့်များ
+## အကောင်းဆုံး လုပ်ဆောင်မှုများ
 
-1. **Always run capacity checks** - ဒေသအသစ်များတွင် deploy မလုပ်ခင်
-2. **Monitor quota usage regularly** - အံ့အားသင့်မှုများကို ရှောင်ရှားရန်
-3. **Plan for growth** - အနာဂတ်စွမ်းဆောင်ရည်လိုအပ်ချက်များကို စစ်ဆေးရန်
-4. **Use cost estimation tools** - ကုန်ကျစရိတ်အလွန်အကျွံကို ရှောင်ရှားရန်
-5. **Document capacity requirements** - သင့်အဖွဲ့အတွက်
-6. **Automate capacity validation** - CI/CD pipelines တွင်
-7. **Consider regional failover** - စွမ်းဆောင်ရည်လိုအပ်ချက်များ
+1. **ဒေသအသစ်များတွင် deploy လုပ်မီ စွမ်းရည်စစ်ဆေးမှုများကို အမြဲပြုလုပ်ပါ**
+2. **Quota အသုံးပြုမှုကို ပုံမှန်စောင့်ကြည့်ပါ** ပြဿနာများမဖြစ်စေရန်
+3. **အနာဂတ်အတွက် စွမ်းရည်လိုအပ်ချက်များကို စီစဉ်ပါ**
+4. **ကုန်ကျစရိတ်ခန့်မှန်းမှုကိရိယာများကို အသုံးပြုပါ** ကုန်ကျစရိတ်များကို ထိန်းချုပ်ရန်
+5. **သင့်အဖွဲ့အတွက် စွမ်းရည်လိုအပ်ချက်များကို မှတ်တမ်းတင်ထားပါ**
+6. **CI/CD pipelines တွင် စွမ်းရည်အတည်ပြုမှုကို အလိုအလျောက်လုပ်ဆောင်ပါ**
+7. **ဒေသဆိုင်ရာ failover စွမ်းရည်လိုအပ်ချက်များကို ထည့်သွင်းစဉ်းစားပါ**
 
-## နောက်တစ်ဆင့်
+## နောက်တစ်ဆင့်များ
 
-- [SKU Selection Guide](sku-selection.md) - အကောင်းဆုံး service tiers ရွေးချယ်ရန်
-- [Pre-flight Checks](preflight-checks.md) - Automated validation scripts
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Quick reference commands
-- [Glossary](../../resources/glossary.md) - Terms and definitions
+- [SKU Selection Guide](sku-selection.md) - ဝန်ဆောင်မှုအဆင့်များကို အကောင်းဆုံးရွေးချယ်ခြင်း
+- [Pre-flight Checks](preflight-checks.md) - အလိုအလျောက်အတည်ပြုမှု script များ
+- [Cheat Sheet](../../resources/cheat-sheet.md) - အမြန်ကိုးကားရန် command များ
+- [Glossary](../../resources/glossary.md) - အဓိပ္ပါယ်နှင့် အဓိပ္ပါယ်ဖွင့်ဆိုချက်များ
 
-## အပိုဆောင်းအရင်းအမြစ်များ
+## ထပ်မံသော အရင်းအမြစ်များ
 
 - [Azure Subscription Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
@@ -736,10 +736,11 @@ hooks:
 ---
 
 **Navigation**
-- **Previous Lesson**: [Debugging Guide](../troubleshooting/debugging.md)
-- **Next Lesson**: [SKU Selection](sku-selection.md)
+- **ယခင်သင်ခန်းစာ**: [Debugging Guide](../troubleshooting/debugging.md)
+
+- **နောက်ထပ်သင်ခန်းစာ**: [SKU Selection](sku-selection.md)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူလဘာသာစကားဖြင့် အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် ရှုလေ့လာသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှု ဝန်ဆောင်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

@@ -1,48 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T19:43:30+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:30:56+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "tr"
 }
 -->
-# Kapasite Planlama - Azure Kaynak Kullanılabilirliği ve Limitler
+# Kapasite Planlama: Azure Kotaları ve Limitlerini Anlama - Azure Kaynak Erişilebilirliği ve Limitler
 
 ## Giriş
 
-Bu kapsamlı rehber, Azure Developer CLI ile dağıtımdan önce Azure kaynak kapasitesini planlamanıza ve doğrulamanıza yardımcı olur. Kota, kullanılabilirlik ve bölgesel sınırlamaları değerlendirerek başarılı dağıtımlar yapmayı, maliyetleri optimize etmeyi ve performansı artırmayı öğrenin. Farklı uygulama mimarileri ve ölçeklendirme senaryoları için kapasite planlama tekniklerini ustalıkla kullanın.
+Bu kapsamlı rehber, Azure Developer CLI ile dağıtımdan önce Azure kaynak kapasitesini planlamanıza ve doğrulamanıza yardımcı olur. Başarılı dağıtımlar için kotaları, erişilebilirliği ve bölgesel sınırlamaları değerlendirmeyi öğrenirken maliyetleri ve performansı optimize edin. Farklı uygulama mimarileri ve ölçeklendirme senaryoları için kapasite planlama tekniklerinde ustalaşın.
 
 ## Öğrenme Hedefleri
 
 Bu rehberi tamamladığınızda:
-- Azure kotalarını, limitlerini ve bölgesel kullanılabilirlik kısıtlamalarını anlayacaksınız
-- Dağıtımdan önce kaynak kullanılabilirliği ve kapasitesini kontrol etme tekniklerini öğreneceksiniz
-- Otomatik kapasite doğrulama ve izleme stratejilerini uygulayabileceksiniz
-- Uygun kaynak boyutlandırma ve ölçeklendirme ile uygulamalar tasarlayabileceksiniz
-- Akıllı kapasite planlama ile maliyet optimizasyon stratejilerini uygulayabileceksiniz
-- Kota kullanımı ve kaynak kullanılabilirliği için uyarılar ve izleme yapılandırabileceksiniz
+- Azure kotalarını, limitlerini ve bölgesel erişim kısıtlamalarını anlayacaksınız
+- Dağıtımdan önce kaynak erişilebilirliği ve kapasitesini kontrol etme tekniklerinde ustalaşacaksınız
+- Otomatik kapasite doğrulama ve izleme stratejilerini uygulayacaksınız
+- Uygun kaynak boyutlandırma ve ölçeklendirme dikkate alınarak uygulamalar tasarlayacaksınız
+- Akıllı kapasite planlama ile maliyet optimizasyon stratejilerini uygulayacaksınız
+- Kota kullanımı ve kaynak erişilebilirliği için uyarılar ve izleme yapılandıracaksınız
 
 ## Öğrenme Çıktıları
 
 Tamamlandığında, şunları yapabileceksiniz:
-- Dağıtımdan önce Azure kaynak kapasite gereksinimlerini değerlendirme ve doğrulama
-- Kapasite kontrolü ve kota izleme için otomatik scriptler oluşturma
-- Bölgesel ve abonelik limitlerini dikkate alan ölçeklenebilir mimariler tasarlama
-- Farklı iş yükü türleri için maliyet etkin kaynak boyutlandırma stratejileri uygulama
-- Kapasiteyle ilgili sorunlar için proaktif izleme ve uyarı yapılandırma
-- Doğru kapasite dağılımıyla çok bölgeli dağıtımlar planlama
+- Dağıtımdan önce Azure kaynak kapasite gereksinimlerini değerlendirin ve doğrulayın
+- Kapasite kontrolü ve kota izleme için otomatik scriptler oluşturun
+- Bölgesel ve abonelik limitlerini dikkate alan ölçeklenebilir mimariler tasarlayın
+- Farklı iş yükü türleri için maliyet etkin kaynak boyutlandırma stratejileri uygulayın
+- Kapasiteyle ilgili sorunlar için proaktif izleme ve uyarı yapılandırın
+- Doğru kapasite dağıtımı ile çok bölgeli dağıtımlar planlayın
 
 ## Kapasite Planlamasının Önemi
 
 Uygulamaları dağıtmadan önce şunları sağlamanız gerekir:
 - Gerekli kaynaklar için **yeterli kotalar**
-- Hedef bölgenizde **kaynak kullanılabilirliği**
-- Abonelik türünüz için **hizmet katmanı kullanılabilirliği**
+- Hedef bölgenizde **kaynak erişilebilirliği**
+- Abonelik türünüz için **hizmet katmanı erişilebilirliği**
 - Beklenen trafik için **ağ kapasitesi**
 - **Doğru boyutlandırma** ile maliyet optimizasyonu
 
-## 📊 Azure Kotalarını ve Limitlerini Anlama
+## 📊 Azure Kotaları ve Limitlerini Anlama
 
 ### Limit Türleri
 1. **Abonelik seviyesinde kotalar** - Abonelik başına maksimum kaynaklar
@@ -120,7 +120,7 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Hizmet Özelinde Kapasite Kontrolleri
+### Hizmet Özel Kapasite Kontrolleri
 
 #### Uygulama Hizmeti Kapasitesi
 ```bash
@@ -252,9 +252,9 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Bölgesel Kullanılabilirlik Doğrulaması
+## 📍 Bölgesel Erişilebilirlik Doğrulama
 
-### Hizmetlerin Bölgeye Göre Kullanılabilirliği
+### Bölgeye Göre Hizmet Erişilebilirliği
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -717,7 +717,7 @@ hooks:
 4. **Maliyet tahmin araçlarını kullanın** fatura şokunu önlemek için
 5. **Kapasite gereksinimlerini belgeleyin** ekibiniz için
 6. **CI/CD süreçlerinde kapasite doğrulamasını otomatikleştirin**
-7. **Bölgesel yedekleme** kapasite gereksinimlerini göz önünde bulundurun
+7. **Bölgesel yedekleme** kapasite gereksinimlerini dikkate alın
 
 ## Sonraki Adımlar
 
@@ -731,15 +731,16 @@ hooks:
 - [Azure Abonelik Limitleri](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure Fiyatlandırma Hesaplayıcı](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Maliyet Yönetimi](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Bölgesel Kullanılabilirlik](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure Bölgesel Erişilebilirlik](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigasyon**
 - **Önceki Ders**: [Hata Ayıklama Rehberi](../troubleshooting/debugging.md)
+
 - **Sonraki Ders**: [SKU Seçimi](sku-selection.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
