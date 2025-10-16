@@ -1,31 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9cc966416ab431c38b2ab863884b196c",
-  "translation_date": "2025-10-11T15:41:53+00:00",
+  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
+  "translation_date": "2025-10-16T16:24:24+00:00",
   "source_file": "workshop/README.md",
   "language_code": "et"
 }
 -->
-# AZD AI Arendajate Töötuba
+<div align="center">
+  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+    <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+      🚧 Töötuba on ehitamisel 🚧
+    </h2>
+    <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+      <strong>See töötuba on hetkel aktiivses arenduses.</strong><br>
+      Sisu võib olla puudulik või muutuda. Tule varsti tagasi, et näha uuendusi!
+    </p>
+    <div style="margin-top: 15px;">
+      <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
+        📅 Viimati uuendatud: oktoober 2025
+      </span>
+    </div>
+  </div>
+</div>
 
-Tere tulemast praktilisse töötuppa, kus õpitakse Azure Developer CLI (AZD) kasutamist, keskendudes AI rakenduste juurutamisele. See töötuba aitab teil omandada praktilisi teadmisi AZD mallide kohta 3 sammuga:
+# AZD töötuba AI arendajatele
+
+Tere tulemast praktilisse töötuppa, kus õpitakse Azure Developer CLI (AZD) kasutamist, keskendudes AI rakenduste juurutamisele. See töötuba aitab teil omandada praktilise arusaama AZD mallidest 3 sammuga:
 
 1. **Avastamine** - leia endale sobiv mall.
-1. **Juurutamine** - juuruta ja kinnita, et see töötab.
-1. **Kohandamine** - muuda ja täiusta, et see vastaks sinu vajadustele!
+1. **Juurutamine** - juuruta ja veendu, et see töötab.
+1. **Kohandamine** - muuda ja arenda, et see vastaks sinu vajadustele!
 
-Töötoa käigus tutvustatakse ka põhilisi arendustööriistu ja töövooge, mis aitavad teil sujuvamaks muuta kogu arendusteekonda.
+Töötoa käigus tutvustatakse ka peamisi arendustööriistu ja töövooge, mis aitavad teil sujuvamaks muuta kogu arendusprotsessi.
 
 <br/>
 
 ## Brauseripõhine juhend
 
-Töötoa õppetunnid on Markdownis. Saate neid otse GitHubis sirvida või avada brauseripõhise eelvaate, nagu alloleval ekraanipildil näidatud.
+Töötoa materjalid on Markdown formaadis. Saate neid otse GitHubis sirvida või avada brauseripõhise eelvaate, nagu alloleval ekraanipildil näidatud.
 
 ![Töötuba](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.et.png)
 
-Selle valiku kasutamiseks - tehke repositooriumist oma profiilile fork ja käivitage GitHub Codespaces. Kui VS Code terminal on aktiivne, sisestage järgmine käsk:
+Selle valiku kasutamiseks - tehke repositooriumist oma profiilile fork ja avage GitHub Codespaces. Kui VS Code terminal on aktiivne, sisestage järgmine käsk:
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
@@ -34,7 +51,7 @@ mkdocs serve > /dev/null 2>&1 &
 Mõne sekundi pärast ilmub hüpikaken. Valige valik `Open in browser`. Veebipõhine juhend avaneb nüüd uues brauseri vahekaardis. Selle eelvaate eelised:
 
 1. **Sisseehitatud otsing** - leidke märksõnu või õppetunde kiiresti.
-1. **Kopeerimisikoon** - hõljutage koodiplokkide kohal, et näha seda valikut.
+1. **Kopeerimise ikoon** - liikuge koodiplokkide kohale, et näha seda valikut.
 1. **Teema vahetus** - lülitage tumeda ja heleda teema vahel.
 1. **Abi saamine** - klõpsake jaluses Discordi ikooni, et liituda!
 
@@ -44,80 +61,80 @@ Mõne sekundi pärast ilmub hüpikaken. Valige valik `Open in browser`. Veebipõ
 
 **Kestus:** 3-4 tundi  
 **Tase:** Algaja kuni kesktase  
-**Eeltingimused:** Azure'i, AI kontseptsioonide, VS Code'i ja käsureatööriistade tundmine.
+**Eeldused:** Azure'i, AI kontseptsioonide, VS Code'i ja käsurea tööriistade tundmine.
 
-See on praktiline töötuba, kus õpitakse läbi tegevuse. Kui olete harjutused lõpetanud, soovitame üle vaadata AZD Algajatele õppekava, et jätkata oma õpiteekonda turvalisuse ja tootlikkuse parimate tavadega.
+See on praktiline töötuba, kus õpitakse läbi tegevuse. Kui olete harjutused lõpetanud, soovitame tutvuda AZD algajatele mõeldud õppekavaga, et jätkata oma õppe teekonda turvalisuse ja produktiivsuse parimate praktikate suunas.
 
 | Aeg | Moodul  | Eesmärk |
 |:---|:---|:---|
 | 15 min | [Sissejuhatus](docs/instructions/0-Introduction.md) | Seadke eesmärgid, mõistke sihte |
-| 30 min | [Vali AI Mall](docs/instructions/1-Select-AI-Template.md) | Uurige valikuid ja valige alustamiseks mall | 
-| 30 min | [Kinnita AI Mall](docs/instructions/2-Validate-AI-Template.md) | Juurutage vaikimisi lahendus Azure'is |
-| 30 min | [Dekonstrueeri AI Mall](docs/instructions/3-Deconstruct-AI-Template.md) | Uurige struktuuri ja konfiguratsiooni |
-| 30 min | [Konfigureeri AI Mall](docs/instructions/4-Configure-AI-Template.md) | Aktiveerige ja proovige saadaolevaid funktsioone |
-| 30 min | [Kohanda AI Mall](docs/instructions/5-Customize-AI-Template.md) | Kohandage mall vastavalt oma vajadustele |
-| 30 min | [Infrastruktuuri lammutamine](docs/instructions/6-Teardown-Infrastructure.md) | Puhastage ja vabastage ressursid |
+| 30 min | [AI malli valimine](docs/instructions/1-Select-AI-Template.md) | Uurige võimalusi ja valige alustamiseks mall | 
+| 30 min | [AI malli valideerimine](docs/instructions/2-Validate-AI-Template.md) | Juurutage vaikimisi lahendus Azure'i |
+| 30 min | [AI malli lahtivõtmine](docs/instructions/3-Deconstruct-AI-Template.md) | Uurige struktuuri ja konfiguratsiooni |
+| 30 min | [AI malli seadistamine](docs/instructions/4-Configure-AI-Template.md) | Aktiveerige ja proovige saadaolevaid funktsioone |
+| 30 min | [AI malli kohandamine](docs/instructions/5-Customize-AI-Template.md) | Kohandage mall vastavalt oma vajadustele |
+| 30 min | [Infrastruktuuri eemaldamine](docs/instructions/6-Teardown-Infrastructure.md) | Puhastage ja vabastage ressursid |
 | 15 min | [Kokkuvõte ja järgmised sammud](docs/instructions/7-Wrap-up.md) | Õppematerjalid, töötoa väljakutse |
 
 <br/>
 
 ## Mida õpid
 
-AZD malli võib pidada õppimise liivakastiks, kus uurida erinevaid võimalusi ja tööriistu Azure AI Foundry lõpp-to-end arenduseks. Töötoa lõpuks peaks teil olema intuitiivne arusaam erinevatest tööriistadest ja kontseptsioonidest selles kontekstis.
+Mõtle AZD mallist kui õppimise liivakastist, kus uurida erinevaid võimalusi ja tööriistu Azure AI Foundry arenduse jaoks. Töötoa lõpuks peaks sul olema intuitiivne arusaam erinevatest tööriistadest ja kontseptsioonidest selles kontekstis.
 
 | Kontseptsioon  | Eesmärk |
 |:---|:---|
 | **Azure Developer CLI** | Mõista tööriista käske ja töövooge |
-| **AZD Mallid**| Mõista projekti struktuuri ja konfiguratsiooni |
+| **AZD mallid**| Mõista projekti struktuuri ja konfiguratsiooni |
 | **Azure AI Agent**| Azure AI Foundry projekti ettevalmistamine ja juurutamine |
-| **Azure AI Otsing**| Konteksti inseneri võimaldamine agentidega |
+| **Azure AI Search**| Konteksti inseneri võimaldamine agentidega |
 | **Jälgitavus**| Uurige jälgimist, monitooringut ja hindamisi |
-| **Punane meeskond**| Uurige vastandlikku testimist ja leevendusi |
+| **Punane meeskond**| Uurige vastase testimist ja leevendusi |
 
 <br/>
 
 ## Töötoa struktuur
 
-Töötuba on üles ehitatud viisil, mis viib teid teekonnale alates malli avastamisest kuni juurutamise, dekonstrueerimise ja kohandamiseni - kasutades ametlikku [AI Agentidega alustamine](https://github.com/Azure-Samples/get-started-with-ai-agents) algusmalli.
+Töötuba on üles ehitatud viisil, mis viib teid teekonnale alates malli avastamisest kuni juurutamise, lahtivõtmise ja kohandamiseni - kasutades ametlikku [AI agentidega alustamise](https://github.com/Azure-Samples/get-started-with-ai-agents) algusmalli.
 
-### [Moodul 1: Vali AI Mall](docs/instructions/1-Select-AI-Template.md) (30 min)
+### [Moodul 1: AI malli valimine](docs/instructions/1-Select-AI-Template.md) (30 min)
 
-- Mis on AI Mallid?
-- Kust leida AI Malle?
-- Kuidas alustada AI Agentide loomist?
-- **Labor**: Kiirstart GitHub Codespaces'iga
+- Mis on AI mallid?
+- Kust leida AI malle?
+- Kuidas alustada AI agentide loomist?
+- **Labor:** Kiirstart GitHub Codespaces'iga
 
-### [Moodul 2: Kinnita AI Mall](docs/instructions/2-Validate-AI-Template.md) (30 min)
+### [Moodul 2: AI malli valideerimine](docs/instructions/2-Validate-AI-Template.md) (30 min)
 
-- Mis on AI Malli arhitektuur?
-- Mis on AZD arendustöövoog?
+- Mis on AI malli arhitektuur?
+- Mis on AZD arenduse töövoog?
 - Kuidas saada abi AZD arendusega?
-- **Labor**: Juurutage ja kinnitage AI Agentide mall
+- **Labor:** Juurutage ja valideerige AI agentide mall
 
-### [Moodul 3: Dekonstrueeri AI Mall](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
+### [Moodul 3: AI malli lahtivõtmine](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
 
 - Uurige oma keskkonda `.azure/` kaustas
 - Uurige oma ressursside seadistust `infra/` kaustas
 - Uurige oma AZD konfiguratsiooni `azure.yaml` failides
-- **Labor**: Muutke keskkonnamuutujaid ja juurutage uuesti
+- **Labor:** Muutke keskkonnamuutujaid ja juurutage uuesti
 
-### [Moodul 4: Konfigureeri AI Mall](docs/instructions/4-Configure-AI-Template.md) (30 min)
+### [Moodul 4: AI malli seadistamine](docs/instructions/4-Configure-AI-Template.md) (30 min)
 - Uurige: Retrieval Augmented Generation
 - Uurige: Agentide hindamine ja punane meeskond
 - Uurige: Jälgimine ja monitooring
-- **Labor**: Uurige AI Agent + jälgitavust 
+- **Labor:** Uurige AI agenti + jälgitavust 
 
-### [Moodul 5: Kohanda AI Mall](docs/instructions/5-Customize-AI-Template.md) (30 min)
+### [Moodul 5: AI malli kohandamine](docs/instructions/5-Customize-AI-Template.md) (30 min)
 - Määratlege: PRD koos stsenaariumi nõuetega
-- Konfigureerige: Keskkonnamuutujad AZD jaoks
+- Seadistage: Keskkonnamuutujad AZD jaoks
 - Rakendage: Elutsükli konksud lisatööde jaoks
-- **Labor**: Kohandage mall minu stsenaariumi jaoks
+- **Labor:** Kohandage mall oma stsenaariumi jaoks
 
-### [Moodul 6: Infrastruktuuri lammutamine](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
-- Kokkuvõte: Mis on AZD Mallid?
+### [Moodul 6: Infrastruktuuri eemaldamine](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
+- Kokkuvõte: Mis on AZD mallid?
 - Kokkuvõte: Miks kasutada Azure Developer CLI-d?
 - Järgmised sammud: Proovige teist malli!
-- **Labor**: Ressursside eemaldamine ja puhastamine
+- **Labor:** Eemaldage infrastruktuur ja puhastage
 
 <br/>
 
@@ -127,20 +144,21 @@ Kas soovite end rohkem proovile panna? Siin on mõned projektiideed - või jagag
 
 | Projekt | Kirjeldus |
 |:---|:---|
-|1. **Dekonstrueeri keeruline AI Mall** | Kasutage töövoogu ja tööriistu, mida me kirjeldasime, ning proovige juurutada, kinnitada ja kohandada teist AI lahenduse malli. _Mida õppisite?_|
-|2. **Kohandage oma stsenaariumiga**  | Proovige kirjutada PRD (tootenõuete dokument) teise stsenaariumi jaoks. Seejärel kasutage GitHub Copilotit oma malli repositooriumis Agent Mode'is - ja paluge sellel genereerida kohandamise töövoog teie jaoks. _Mida õppisite? Kuidas saaksite neid ettepanekuid täiustada?_|
+|1. **Kompleksse AI malli lahtivõtmine** | Kasutage töövoogu ja tööriistu, mida me kirjeldasime, ning proovige juurutada, valideerida ja kohandada teist AI lahenduse malli. _Mida õppisite?_|
+|2. **Kohandamine oma stsenaariumiga**  | Proovige kirjutada PRD (tootenõuete dokument) teise stsenaariumi jaoks. Seejärel kasutage GitHub Copilotit oma malli repositooriumis Agent Modelis - ja paluge sellel genereerida kohandamise töövoog teie jaoks. _Mida õppisite? Kuidas saaksite neid ettepanekuid täiustada?_|
 | | |
 
 ## Tagasiside?
 
-1. Postitage selle repositooriumi probleem - märgistage see `Workshop` mugavuse huvides.
+1. Postitage probleem selle repositooriumi kohta - lisage sildiks `Workshop`, et oleks mugavam.
 1. Liituge Azure AI Foundry Discordiga - ühenduge oma eakaaslastega!
+
 
 | | | 
 |:---|:---|
-| **📚 Kursuse avaleht**| [AZD Algajatele](../README.md)|
+| **📚 Kursuse avaleht**| [AZD algajatele](../README.md)|
 | **📖 Dokumentatsioon** | [AI mallidega alustamine](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Mallid** | [Azure AI Foundry Mallid](https://ai.azure.com/templates) |
+| **🛠️AI mallid** | [Azure AI Foundry mallid](https://ai.azure.com/templates) |
 |**🚀 Järgmised sammud** | [Võtke väljakutse vastu](../../../workshop) |
 | | |
 
@@ -148,11 +166,11 @@ Kas soovite end rohkem proovile panna? Siin on mõned projektiideed - või jagag
 
 ---
 
-**Eelmine:** [AI Tõrkeotsingu Juhend](../docs/troubleshooting/ai-troubleshooting.md) | **Järgmine:** Alustage [Labor 1: AZD Põhitõed](../../../workshop/lab-1-azd-basics)
+**Eelmine:** [AI tõrkeotsingu juhend](../docs/troubleshooting/ai-troubleshooting.md) | **Järgmine:** Alustage [Labor 1: AZD põhialused](../../../workshop/lab-1-azd-basics)
 
-**Valmis alustama AI rakenduste loomist AZD-ga?**
+**Kas olete valmis alustama AI rakenduste loomist AZD-ga?**
 
-[Alustage Labor 1: AZD Alused →](./lab-1-azd-basics/README.md)
+[Alustage Labor 1: AZD põhialused →](./lab-1-azd-basics/README.md)
 
 ---
 

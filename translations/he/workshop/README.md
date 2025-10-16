@@ -1,41 +1,58 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9cc966416ab431c38b2ab863884b196c",
-  "translation_date": "2025-09-24T22:42:01+00:00",
+  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
+  "translation_date": "2025-10-16T15:57:45+00:00",
   "source_file": "workshop/README.md",
   "language_code": "he"
 }
 -->
+<div align="center">
+  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+    <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+      🚧 סדנה בבנייה 🚧
+    </h2>
+    <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+      <strong>הסדנה הזו נמצאת כרגע בפיתוח פעיל.</strong><br>
+      התוכן עשוי להיות לא שלם או נתון לשינויים. חזרו בקרוב לעדכונים!
+    </p>
+    <div style="margin-top: 15px;">
+      <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
+        📅 עודכן לאחרונה: אוקטובר 2025
+      </span>
+    </div>
+  </div>
+</div>
+
 # סדנת AZD למפתחי AI
 
-ברוכים הבאים לסדנה המעשית ללימוד Azure Developer CLI (AZD) עם דגש על פריסת יישומי AI. סדנה זו תעזור לכם להבין את תבניות AZD בצורה יישומית בשלושה שלבים:
+ברוכים הבאים לסדנה מעשית ללימוד Azure Developer CLI (AZD) עם דגש על פריסת יישומי AI. הסדנה הזו תעזור לכם להבין את תבניות AZD בשלושה שלבים:
 
 1. **גילוי** - מצאו את התבנית המתאימה לכם.
 1. **פריסה** - פרסו ואמתו שהיא פועלת.
 1. **התאמה אישית** - שנו והתאימו אותה לצרכים שלכם!
 
-במהלך הסדנה תכירו גם כלים ותהליכי עבודה מרכזיים למפתחים, שיעזרו לכם לייעל את מסע הפיתוח מקצה לקצה.
+במהלך הסדנה, תיחשפו גם לכלי פיתוח ותהליכי עבודה מרכזיים, שיעזרו לכם לייעל את מסע הפיתוח מקצה לקצה.
 
 <br/>
 
 ## מדריך מבוסס דפדפן
 
-שיעורי הסדנה כתובים בפורמט Markdown. ניתן לנווט בהם ישירות ב-GitHub - או להפעיל תצוגה מקדימה מבוססת דפדפן כפי שמוצג בתמונה למטה.
+שיעורי הסדנה כתובים ב-Markdown. ניתן לנווט בהם ישירות ב-GitHub - או להפעיל תצוגה מקדימה מבוססת דפדפן כפי שמוצג בתמונה למטה.
 
 ![סדנה](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.he.png)
 
-כדי להשתמש באפשרות זו - בצעו Fork למאגר לפרופיל שלכם, והפעילו את GitHub Codespaces. לאחר שהטרמינל של VS Code פעיל, הקלידו את הפקודה הבאה:
+כדי להשתמש באפשרות זו - בצעו Fork למאגר לפרופיל שלכם, והפעילו את GitHub Codespaces. לאחר שהטרמינל של VS Code פעיל, הקלידו את הפקודה הזו:
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-תוך מספר שניות תופיע תיבת דו-שיח. בחרו באפשרות `Open in browser`. המדריך מבוסס הדפדפן ייפתח כעת בלשונית חדשה בדפדפן. כמה יתרונות של תצוגה זו:
+תוך מספר שניות תופיע תיבת דו-שיח. בחרו באפשרות `Open in browser`. המדריך מבוסס האינטרנט ייפתח כעת בלשונית חדשה בדפדפן. כמה יתרונות של תצוגה מקדימה זו:
 
 1. **חיפוש מובנה** - מצאו מילות מפתח או שיעורים במהירות.
 1. **אייקון העתקה** - רחפו מעל קטעי קוד כדי לראות אפשרות זו.
-1. **מעבר בין נושאים** - החליפו בין ערכות נושא כהות ובהירות.
+1. **מעבר בין נושאים** - החליפו בין נושאים כהים ובהירים.
 1. **קבלת עזרה** - לחצו על אייקון Discord בתחתית כדי להצטרף!
 
 <br/>
@@ -63,35 +80,35 @@ mkdocs serve > /dev/null 2>&1 &
 
 ## מה תלמדו
 
-חשבו על תבנית AZD כמעין ארגז חול ללמידה, שבו תוכלו לחקור יכולות וכלים שונים לפיתוח מקצה לקצה ב-Azure AI Foundry. בסיום הסדנה, תהיה לכם הבנה אינטואיטיבית של כלים ומושגים שונים בהקשר זה.
+חשבו על תבנית AZD כמעין ארגז חול ללמידה שבו תוכלו לחקור יכולות וכלים שונים לפיתוח מקצה לקצה ב-Azure AI Foundry. בסיום הסדנה, תהיה לכם הבנה אינטואיטיבית של כלים ומושגים שונים בהקשר זה.
 
 | מושג  | מטרה |
 |:---|:---|
 | **Azure Developer CLI** | הבנת פקודות ותהליכי עבודה של הכלי |
-| **תבניות AZD**| הבנת מבנה הפרויקט והתצורה |
-| **סוכן AI של Azure**| הקצאה ופריסת פרויקט Azure AI Foundry |
-| **חיפוש AI של Azure**| הפעלת הנדסת הקשר עם סוכנים |
+| **תבניות AZD**| הבנת מבנה ותצורת פרויקט |
+| **סוכן Azure AI**| הקצאה ופריסת פרויקט Azure AI Foundry  |
+| **חיפוש Azure AI**| הפעלת הנדסת הקשר עם סוכנים |
 | **תצפיות**| חקר מעקב, ניטור והערכות |
-| **Red Teaming**| חקר בדיקות אדברסריות ופתרונות |
+| **Red Teaming**| חקר בדיקות עוינות ופתרונות |
 
 <br/>
 
 ## מבנה הסדנה
 
-הסדנה בנויה כך שתיקח אתכם למסע מגילוי תבניות, דרך פריסה, פירוק והתאמה אישית - תוך שימוש בתבנית ההתחלה הרשמית [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) כבסיס.
+הסדנה בנויה כך שתיקח אתכם במסע מגילוי תבניות, דרך פריסה, פירוק והתאמה אישית - תוך שימוש בתבנית ההתחלה הרשמית [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) כבסיס.
 
 ### [מודול 1: בחירת תבנית AI](docs/instructions/1-Select-AI-Template.md) (30 דקות)
 
 - מהן תבניות AI?
 - היכן ניתן למצוא תבניות AI?
-- איך להתחיל לבנות סוכני AI?
+- איך אפשר להתחיל לבנות סוכני AI?
 - **מעבדה**: התחלה מהירה עם GitHub Codespaces
 
 ### [מודול 2: אימות תבנית AI](docs/instructions/2-Validate-AI-Template.md) (30 דקות)
 
 - מהי ארכיטקטורת תבנית AI?
-- מהו תהליך העבודה של AZD?
-- איך לקבל עזרה בפיתוח עם AZD?
+- מהו תהליך העבודה של פיתוח AZD?
+- איך אפשר לקבל עזרה בפיתוח AZD?
 - **מעבדה**: פריסה ואימות תבנית סוכני AI
 
 ### [מודול 3: פירוק תבנית AI](docs/instructions/3-Deconstruct-AI-Template.md) (30 דקות)
@@ -102,7 +119,7 @@ mkdocs serve > /dev/null 2>&1 &
 - **מעבדה**: שינוי משתני סביבה ופריסה מחדש
 
 ### [מודול 4: הגדרת תבנית AI](docs/instructions/4-Configure-AI-Template.md) (30 דקות)
-- חקר: יצירת מידע מוגבר (Retrieval Augmented Generation)
+- חקר: יצירת מידע מוגבר
 - חקר: הערכת סוכנים ו-Red Teaming
 - חקר: מעקב וניטור
 - **מעבדה**: חקר סוכן AI + תצפיות 
@@ -123,17 +140,17 @@ mkdocs serve > /dev/null 2>&1 &
 
 ## אתגר הסדנה
 
-רוצים לאתגר את עצמכם לעשות יותר? הנה כמה הצעות לפרויקטים - או שתפו אותנו ברעיונות שלכם!!
+רוצים לאתגר את עצמכם לעשות יותר? הנה כמה הצעות לפרויקטים - או שתפו את הרעיונות שלכם איתנו!!
 
 | פרויקט | תיאור |
 |:---|:---|
-|1. **פירוק תבנית AI מורכבת** | השתמשו בתהליך העבודה ובכלים שהצגנו ונסו לפרוס, לאמת ולהתאים אישית תבנית פתרון AI אחרת. _מה למדתם?_|
-|2. **התאמה אישית לתרחיש שלכם**  | נסו לכתוב PRD (מסמך דרישות מוצר) עבור תרחיש אחר. לאחר מכן השתמשו ב-GitHub Copilot במאגר התבנית שלכם במודל סוכן - ובקשו ממנו ליצור עבורכם תהליך התאמה אישית. _מה למדתם? איך אפשר לשפר את ההצעות הללו?_|
+|1. **פירוק תבנית AI מורכבת** | השתמשו בתהליך העבודה ובכלים שהצגנו וראו אם תוכלו לפרוס, לאמת ולהתאים אישית תבנית פתרון AI אחרת. _מה למדתם?_|
+|2. **התאמה אישית עם התרחיש שלכם**  | נסו לכתוב PRD (מסמך דרישות מוצר) עבור תרחיש אחר. לאחר מכן השתמשו ב-GitHub Copilot במאגר התבנית שלכם במודל סוכן - ובקשו ממנו ליצור עבורכם תהליך עבודה להתאמה אישית. _מה למדתם? איך אפשר לשפר את ההצעות האלה?_|
 | | |
 
 ## יש לכם משוב?
 
-1. פרסמו בעיה במאגר זה - תייגו אותה `Workshop` לנוחות.
+1. פרסמו בעיה במאגר הזה - תייגו אותה כ-`Workshop` לנוחות.
 1. הצטרפו ל-Discord של Azure AI Foundry - התחברו עם עמיתים שלכם!
 
 
@@ -157,3 +174,5 @@ mkdocs serve > /dev/null 2>&1 &
 
 ---
 
+**הצהרת אחריות**:  
+מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
