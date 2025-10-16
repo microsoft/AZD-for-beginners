@@ -1,3 +1,20 @@
+<div align="center">
+  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+    <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+      🚧 Workshop Under Construction 🚧
+    </h2>
+    <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+      <strong>This workshop is currently in active development.</strong><br>
+      Content may be incomplete or subject to change. Check back soon for updates!
+    </p>
+    <div style="margin-top: 15px;">
+      <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
+        📅 Last Updated: October 2025
+      </span>
+    </div>
+  </div>
+</div>
+
 # AZD for AI Developers Workshop
 
 Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop helps you gain an applied understanding of AZD templates in 3 steps:

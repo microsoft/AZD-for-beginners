@@ -394,8 +394,8 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 - [Enterprise Solutions](examples/enterprise/) - Production-ready patterns
 
 ### External Template Collections
-- [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Official Microsoft samples
-- [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Community-contributed templates
+- [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Curated collection of official and community templates
+- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn template documentation
 - [**Examples Directory**](examples/README.md) - Local learning examples with detailed explanations
 
 ---
