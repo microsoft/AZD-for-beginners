@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T22:00:58+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:34:25+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "id"
 }
 -->
-# Perencanaan Kapasitas - Ketersediaan dan Batasan Sumber Daya Azure
+# Perencanaan Kapasitas: Memahami Kuota dan Batasan Azure - Ketersediaan dan Batasan Sumber Daya Azure
 
 ## Pendahuluan
 
@@ -16,18 +16,18 @@ Panduan lengkap ini membantu Anda merencanakan dan memvalidasi kapasitas sumber 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
-- Memahami kuota, batasan, dan kendala ketersediaan regional Azure
+- Memahami kuota Azure, batasan, dan kendala ketersediaan regional
 - Menguasai teknik untuk memeriksa ketersediaan dan kapasitas sumber daya sebelum deployment
-- Menerapkan strategi validasi dan pemantauan kapasitas otomatis
+- Menerapkan strategi validasi kapasitas dan pemantauan otomatis
 - Merancang aplikasi dengan pertimbangan ukuran dan penskalaan sumber daya yang tepat
 - Menerapkan strategi optimasi biaya melalui perencanaan kapasitas yang cerdas
 - Mengonfigurasi peringatan dan pemantauan untuk penggunaan kuota dan ketersediaan sumber daya
 
 ## Hasil Pembelajaran
 
-Setelah selesai, Anda akan dapat:
+Setelah menyelesaikan panduan ini, Anda akan dapat:
 - Menilai dan memvalidasi kebutuhan kapasitas sumber daya Azure sebelum deployment
-- Membuat skrip otomatis untuk pemeriksaan kapasitas dan pemantauan kuota
+- Membuat skrip otomatis untuk memeriksa kapasitas dan memantau kuota
 - Merancang arsitektur yang dapat diskalakan dengan mempertimbangkan batasan regional dan langganan
 - Menerapkan strategi ukuran sumber daya yang hemat biaya untuk berbagai jenis beban kerja
 - Mengonfigurasi pemantauan dan peringatan proaktif untuk masalah terkait kapasitas
@@ -36,7 +36,7 @@ Setelah selesai, Anda akan dapat:
 ## Mengapa Perencanaan Kapasitas Penting
 
 Sebelum melakukan deployment aplikasi, Anda perlu memastikan:
-- **Kuota yang cukup** untuk sumber daya yang diperlukan
+- **Kuota yang cukup** untuk sumber daya yang dibutuhkan
 - **Ketersediaan sumber daya** di wilayah target Anda
 - **Ketersediaan tingkat layanan** untuk jenis langganan Anda
 - **Kapasitas jaringan** untuk lalu lintas yang diharapkan
@@ -47,7 +47,7 @@ Sebelum melakukan deployment aplikasi, Anda perlu memastikan:
 ### Jenis Batasan
 1. **Kuota tingkat langganan** - Maksimum sumber daya per langganan
 2. **Kuota regional** - Maksimum sumber daya per wilayah
-3. **Batasan spesifik sumber daya** - Batasan untuk jenis sumber daya tertentu
+3. **Batasan spesifik sumber daya** - Batasan untuk setiap jenis sumber daya
 4. **Batasan tingkat layanan** - Batasan berdasarkan rencana layanan Anda
 
 ### Kuota Sumber Daya Umum
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Pemeriksaan Otomatis Sebelum Deployment
+## 🚀 Pemeriksaan Pra-Deployment Otomatis
 
-### Skrip Pemeriksaan Lengkap
+### Skrip Pra-Deployment Komprehensif
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integrasi dengan AZD
 
-### Tambahkan Hooks Pemeriksaan ke azure.yaml
+### Menambahkan Pre-Flight Hooks ke azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -711,7 +711,7 @@ hooks:
 
 ## Praktik Terbaik
 
-1. **Selalu lakukan pemeriksaan kapasitas** sebelum deployment ke wilayah baru
+1. **Selalu lakukan pemeriksaan kapasitas** sebelum melakukan deployment ke wilayah baru
 2. **Pantau penggunaan kuota secara teratur** untuk menghindari kejutan
 3. **Rencanakan pertumbuhan** dengan memeriksa kebutuhan kapasitas di masa depan
 4. **Gunakan alat estimasi biaya** untuk menghindari tagihan yang tidak terduga
@@ -722,7 +722,7 @@ hooks:
 ## Langkah Selanjutnya
 
 - [Panduan Pemilihan SKU](sku-selection.md) - Pilih tingkat layanan yang optimal
-- [Pemeriksaan Sebelum Deployment](preflight-checks.md) - Skrip validasi otomatis
+- [Pemeriksaan Pra-Deployment](preflight-checks.md) - Skrip validasi otomatis
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Referensi cepat perintah
 - [Glosarium](../../resources/glossary.md) - Istilah dan definisi
 
@@ -737,9 +737,10 @@ hooks:
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Panduan Debugging](../troubleshooting/debugging.md)
+
 - **Pelajaran Selanjutnya**: [Pemilihan SKU](sku-selection.md)
 
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.

@@ -1,46 +1,46 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T19:40:44+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:25:20+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "mo"
 }
 -->
-# 容量規劃 - Azure 資源可用性與限制
+# 容量規劃：了解 Azure 配額與限制 - Azure 資源可用性與限制
 
-## 介紹
+## 簡介
 
-本指南幫助您在使用 Azure Developer CLI 部署之前，規劃並驗證 Azure 資源容量。學習如何評估配額、可用性以及區域限制，以確保成功部署並優化成本與性能。掌握針對不同應用架構和擴展場景的容量規劃技術。
+本指南旨在幫助您在使用 Azure Developer CLI 部署之前，規劃並驗證 Azure 資源容量。學習如何評估配額、可用性和區域限制，以確保成功部署，同時優化成本和性能。掌握針對不同應用程式架構和擴展場景的容量規劃技術。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
-- 了解 Azure 配額、限制及區域可用性約束
+- 了解 Azure 配額、限制和區域可用性限制
 - 掌握部署前檢查資源可用性和容量的技術
 - 實施自動化的容量驗證和監控策略
-- 設計具有適當資源大小和擴展考量的應用
+- 設計具有適當資源規模和擴展考量的應用程式
 - 通過智能容量規劃應用成本優化策略
 - 配置配額使用和資源可用性的警報與監控
 
 ## 學習成果
 
 完成後，您將能夠：
-- 在部署前評估並驗證 Azure 資源容量需求
+- 在部署前評估和驗證 Azure 資源容量需求
 - 創建自動化腳本進行容量檢查和配額監控
 - 設計考慮區域和訂閱限制的可擴展架構
-- 為不同工作負載類型實施具成本效益的資源大小策略
-- 配置主動監控和警報以應對容量相關問題
+- 為不同的工作負載類型實施具成本效益的資源規模策略
+- 配置針對容量相關問題的主動監控和警報
 - 規劃具有適當容量分配的多區域部署
 
 ## 為什麼容量規劃很重要
 
-在部署應用之前，您需要確保：
+在部署應用程式之前，您需要確保：
 - **足夠的配額**以滿足所需資源
-- **目標區域的資源可用性**
-- **訂閱類型的服務層級可用性**
-- **預期流量的網絡容量**
-- **通過適當大小進行成本優化**
+- **資源可用性**在目標區域內
+- **服務層級可用性**符合您的訂閱類型
+- **網路容量**能夠應對預期的流量
+- **通過適當規模實現成本優化**
 
 ## 📊 了解 Azure 配額與限制
 
@@ -50,7 +50,7 @@ CO_OP_TRANSLATOR_METADATA:
 3. **資源特定限制** - 個別資源類型的限制
 4. **服務層級限制** - 根據您的服務計劃的限制
 
-### 常見資源配額
+### 常見的資源配額
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -154,7 +154,7 @@ check_app_service_capacity() {
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### 數據庫容量
+#### 資料庫容量
 ```bash
 # Check PostgreSQL capacity
 check_postgres_capacity() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 自動化部署前檢查
+## 🚀 自動化的預檢查
 
-### 全面部署前檢查腳本
+### 全面性的預檢查腳本
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -620,7 +620,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### 配置文件模板
+### 配置文件範本
 ```json
 {
   "requirements": {
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 與 AZD 的整合
 
-### 在 azure.yaml 中添加部署前檢查掛鉤
+### 在 azure.yaml 中添加預檢查掛鉤
 ```yaml
 # azure.yaml
 hooks:
@@ -711,18 +711,18 @@ hooks:
 
 ## 最佳實踐
 
-1. **在部署到新區域之前，始終執行容量檢查**
+1. **在新區域部署前，始終執行容量檢查**
 2. **定期監控配額使用情況**以避免意外
-3. **規劃未來需求**以確保容量充足
-4. **使用成本估算工具**避免帳單衝擊
+3. **規劃未來增長**，檢查未來的容量需求
+4. **使用成本估算工具**避免超出預算
 5. **為團隊記錄容量需求**
 6. **在 CI/CD 管道中自動化容量驗證**
-7. **考慮區域故障切換的容量需求**
+7. **考慮區域故障轉移的容量需求**
 
 ## 下一步
 
 - [SKU 選擇指南](sku-selection.md) - 選擇最佳服務層級
-- [部署前檢查](preflight-checks.md) - 自動化驗證腳本
+- [預檢查](preflight-checks.md) - 自動化驗證腳本
 - [速查表](../../resources/cheat-sheet.md) - 快速參考命令
 - [術語表](../../resources/glossary.md) - 術語與定義
 
@@ -736,10 +736,11 @@ hooks:
 ---
 
 **導航**
-- **上一課**: [調試指南](../troubleshooting/debugging.md)
+- **上一課**: [除錯指南](../troubleshooting/debugging.md)
+
 - **下一課**: [SKU 選擇](sku-selection.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

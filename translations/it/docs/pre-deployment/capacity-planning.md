@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T19:43:01+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:30:06+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "it"
 }
 -->
-# Pianificazione della Capacità - Disponibilità e Limiti delle Risorse Azure
+# Pianificazione della Capacità: Comprendere Quote e Limiti di Azure - Disponibilità e Limiti delle Risorse Azure
 
 ## Introduzione
 
@@ -19,7 +19,7 @@ Completando questa guida, sarai in grado di:
 - Comprendere le quote, i limiti e i vincoli di disponibilità regionale di Azure
 - Padroneggiare le tecniche per verificare la disponibilità e la capacità delle risorse prima della distribuzione
 - Implementare strategie automatizzate di convalida e monitoraggio della capacità
-- Progettare applicazioni con considerazioni adeguate sulla dimensione e la scalabilità delle risorse
+- Progettare applicazioni con dimensionamento e considerazioni di scalabilità adeguate
 - Applicare strategie di ottimizzazione dei costi attraverso una pianificazione intelligente della capacità
 - Configurare avvisi e monitoraggio per l'utilizzo delle quote e la disponibilità delle risorse
 
@@ -29,8 +29,8 @@ Al termine, sarai in grado di:
 - Valutare e convalidare i requisiti di capacità delle risorse Azure prima della distribuzione
 - Creare script automatizzati per il controllo della capacità e il monitoraggio delle quote
 - Progettare architetture scalabili che tengano conto dei limiti regionali e di sottoscrizione
-- Implementare strategie di dimensionamento delle risorse convenienti per diversi tipi di carico di lavoro
-- Configurare monitoraggio proattivo e avvisi per problemi legati alla capacità
+- Implementare strategie di dimensionamento delle risorse economiche per diversi tipi di carico di lavoro
+- Configurare il monitoraggio proattivo e gli avvisi per problemi legati alla capacità
 - Pianificare distribuzioni multi-regione con una corretta distribuzione della capacità
 
 ## Perché la Pianificazione della Capacità è Importante
@@ -42,12 +42,12 @@ Prima di distribuire applicazioni, è necessario garantire:
 - **Capacità di rete** per il traffico previsto
 - **Ottimizzazione dei costi** attraverso un dimensionamento adeguato
 
-## 📊 Comprendere le Quote e i Limiti di Azure
+## 📊 Comprendere Quote e Limiti di Azure
 
 ### Tipi di Limiti
 1. **Quote a livello di sottoscrizione** - Risorse massime per sottoscrizione
 2. **Quote regionali** - Risorse massime per regione
-3. **Limiti specifici delle risorse** - Limiti per tipi di risorse individuali
+3. **Limiti specifici delle risorse** - Limiti per singoli tipi di risorse
 4. **Limiti del livello di servizio** - Limiti basati sul piano di servizio
 
 ### Quote Comuni delle Risorse
@@ -252,7 +252,7 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Validazione della Disponibilità Regionale
+## 📍 Convalida della Disponibilità Regionale
 
 ### Disponibilità dei Servizi per Regione
 ```bash
@@ -714,7 +714,7 @@ hooks:
 1. **Esegui sempre controlli di capacità** prima di distribuire in nuove regioni
 2. **Monitora regolarmente l'utilizzo delle quote** per evitare sorprese
 3. **Pianifica la crescita** verificando le esigenze di capacità future
-4. **Utilizza strumenti di stima dei costi** per evitare spese impreviste
+4. **Utilizza strumenti di stima dei costi** per evitare sorprese in bolletta
 5. **Documenta i requisiti di capacità** per il tuo team
 6. **Automatizza la convalida della capacità** nelle pipeline CI/CD
 7. **Considera i requisiti di capacità per il failover regionale**
@@ -731,15 +731,16 @@ hooks:
 - [Limiti di Sottoscrizione Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Calcolatore dei Prezzi Azure](https://azure.microsoft.com/pricing/calculator/)
 - [Gestione dei Costi Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Disponibilità Regionale Azure](https://azure.microsoft.com/global-infrastructure/services/)
+- [Disponibilità Regionale di Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigazione**
 - **Lezione Precedente**: [Guida al Debugging](../troubleshooting/debugging.md)
+
 - **Prossima Lezione**: [Selezione degli SKU](sku-selection.md)
 
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un esperto umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

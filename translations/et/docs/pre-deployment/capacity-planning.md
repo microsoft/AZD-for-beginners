@@ -1,17 +1,17 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-10-11T15:56:53+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:41:11+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "et"
 }
 -->
-# Mahutavuse planeerimine - Azure'i ressursside saadavus ja piirangud
+# Mahutavuse planeerimine: Azure'i kvootide ja piirangute mõistmine - Azure'i ressursside saadavus ja piirangud
 
 ## Sissejuhatus
 
-See põhjalik juhend aitab teil planeerida ja valideerida Azure'i ressursside mahutavust enne juurutamist Azure Developer CLI-ga. Õppige hindama kvoote, saadavust ja piirkondlikke piiranguid, et tagada edukad juurutused, optimeerides samal ajal kulusid ja jõudlust. Valdage mahutavuse planeerimise tehnikaid erinevate rakendusarhitektuuride ja skaleerimise stsenaariumide jaoks.
+See põhjalik juhend aitab teil planeerida ja valideerida Azure'i ressursside mahutavust enne Azure Developer CLI-ga juurutamist. Õppige hindama kvoote, saadavust ja piirkondlikke piiranguid, et tagada edukad juurutused, optimeerides samal ajal kulusid ja jõudlust. Valdage mahutavuse planeerimise tehnikaid erinevate rakendusarhitektuuride ja skaleerimise stsenaariumide jaoks.
 
 ## Õpieesmärgid
 
@@ -19,9 +19,9 @@ Selle juhendi läbimisega saate:
 - Mõista Azure'i kvoote, piiranguid ja piirkondlikke saadavuse piiranguid
 - Valdada tehnikaid ressursside saadavuse ja mahutavuse kontrollimiseks enne juurutamist
 - Rakendada automatiseeritud mahutavuse valideerimise ja jälgimise strateegiaid
-- Kavandada rakendusi, arvestades ressursside õiget suurust ja skaleerimist
+- Kavandada rakendusi, arvestades ressursside õiget suurustamist ja skaleerimist
 - Rakendada kulude optimeerimise strateegiaid läbi nutika mahutavuse planeerimise
-- Konfigureerida hoiatusi ja jälgimist kvootide kasutamise ja ressursside saadavuse jaoks
+- Konfigureerida teavitusi ja jälgimist kvootide kasutamise ja ressursside saadavuse jaoks
 
 ## Õpitulemused
 
@@ -30,7 +30,7 @@ Pärast juhendi läbimist suudate:
 - Luua automatiseeritud skripte mahutavuse kontrollimiseks ja kvootide jälgimiseks
 - Kavandada skaleeritavaid arhitektuure, arvestades piirkondlikke ja tellimuse piiranguid
 - Rakendada kulutõhusaid ressursside suuruse määramise strateegiaid erinevate töökoormuste jaoks
-- Konfigureerida proaktiivset jälgimist ja hoiatusi mahutavusega seotud probleemide jaoks
+- Konfigureerida proaktiivset jälgimist ja teavitamist mahutavusega seotud probleemide jaoks
 - Planeerida mitme piirkonna juurutusi, arvestades õiget mahutavuse jaotust
 
 ## Miks mahutavuse planeerimine on oluline
@@ -711,13 +711,13 @@ hooks:
 
 ## Parimad praktikad
 
-1. **Tehke alati mahutavuse kontrollid** enne uutesse piirkondadesse juurutamist
-2. **Jälgige kvootide kasutamist regulaarselt**, et vältida üllatusi
+1. **Tehke alati mahutavuse kontrolle** enne uutesse piirkondadesse juurutamist
+2. **Jälgige regulaarselt kvootide kasutamist**, et vältida üllatusi
 3. **Planeerige kasvu**, kontrollides tulevasi mahutavuse vajadusi
 4. **Kasutage kulude hindamise tööriistu**, et vältida ootamatuid arveid
 5. **Dokumenteerige mahutavuse nõuded** oma meeskonna jaoks
 6. **Automatiseerige mahutavuse valideerimine** CI/CD torujuhtmetes
-7. **Arvestage piirkondliku failoveri** mahutavuse nõuetega
+7. **Arvestage piirkondliku varusüsteemi** mahutavuse nõuetega
 
 ## Järgmised sammud
 
@@ -735,8 +735,9 @@ hooks:
 
 ---
 
-**Navigatsioon**
+**Navigeerimine**
 - **Eelmine õppetund**: [Silumise juhend](../troubleshooting/debugging.md)
+
 - **Järgmine õppetund**: [SKU valik](sku-selection.md)
 
 ---

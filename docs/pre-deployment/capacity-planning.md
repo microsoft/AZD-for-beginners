@@ -1,4 +1,4 @@
-# Capacity Pl## Understanding Azure Quotas and Limitsnning - Azure Resource Availability and Limits
+# Capacity Planning: Understanding Azure Quotas and Limitsnning - Azure Resource Availability and Limits
 
 ## Introduction
 
@@ -728,4 +728,5 @@ hooks:
 
 **Navigation**
 - **Previous Lesson**: [Debugging Guide](../troubleshooting/debugging.md)
+
 - **Next Lesson**: [SKU Selection](sku-selection.md)

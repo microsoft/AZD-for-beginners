@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T21:59:28+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:32:43+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "no"
 }
 -->
-# Kapasitetsplanlegging - Azure Ressurs Tilgjengelighet og Begrensninger
+# Kapasitetsplanlegging: Forstå Azure-kvoter og -grenser
 
 ## Introduksjon
 
-Denne omfattende veiledningen hjelper deg med å planlegge og validere Azure ressurskapasitet før du distribuerer med Azure Developer CLI. Lær å vurdere kvoter, tilgjengelighet og regionale begrensninger for å sikre vellykkede distribusjoner samtidig som du optimaliserer kostnader og ytelse. Mestre kapasitetsplanleggingsteknikker for ulike applikasjonsarkitekturer og skaleringsscenarier.
+Denne omfattende veiledningen hjelper deg med å planlegge og validere Azure-ressurskapasitet før du distribuerer med Azure Developer CLI. Lær å vurdere kvoter, tilgjengelighet og regionale begrensninger for å sikre vellykkede distribusjoner samtidig som du optimaliserer kostnader og ytelse. Bli ekspert på kapasitetsplanlegging for ulike applikasjonsarkitekturer og skaleringsscenarier.
 
 ## Læringsmål
 
 Ved å fullføre denne veiledningen vil du:
-- Forstå Azure kvoter, begrensninger og regionale tilgjengelighetsbegrensninger
-- Mestre teknikker for å sjekke ressurs tilgjengelighet og kapasitet før distribusjon
+- Forstå Azure-kvoter, grenser og regionale tilgjengelighetsbegrensninger
+- Mestre teknikker for å sjekke ressurskapasitet og tilgjengelighet før distribusjon
 - Implementere automatiserte strategier for kapasitetsvalidering og overvåking
 - Designe applikasjoner med riktig ressursstørrelse og skaleringshensyn
 - Bruke kostnadsoptimaliseringsstrategier gjennom intelligent kapasitetsplanlegging
-- Konfigurere varsler og overvåking for kvotebruk og ressurs tilgjengelighet
+- Konfigurere varsler og overvåking for kvotebruk og ressurskapasitet
 
 ## Læringsutbytte
 
 Etter fullføring vil du kunne:
-- Vurdere og validere Azure ressurskapasitetskrav før distribusjon
+- Vurdere og validere Azure-ressurskapasitetskrav før distribusjon
 - Lage automatiserte skript for kapasitetskontroll og kvoteovervåking
-- Designe skalerbare arkitekturer som tar hensyn til regionale og abonnementsbegrensninger
-- Implementere kostnadseffektive ressursstørrelsesstrategier for ulike arbeidsbelastningstyper
+- Designe skalerbare arkitekturer som tar hensyn til regionale og abonnementsgrenser
+- Implementere kostnadseffektive strategier for ressursstørrelse for ulike arbeidsbelastninger
 - Konfigurere proaktiv overvåking og varsling for kapasitetsrelaterte problemer
 - Planlegge distribusjoner på tvers av regioner med riktig kapasitetsfordeling
 
-## Hvorfor Kapasitetsplanlegging er Viktig
+## Hvorfor kapasitetsplanlegging er viktig
 
 Før du distribuerer applikasjoner, må du sikre:
 - **Tilstrekkelige kvoter** for nødvendige ressurser
 - **Ressurstilgjengelighet** i din målregion
-- **Tjenestenivå tilgjengelighet** for din abonnementstype
+- **Tilgjengelighet av tjenestenivå** for din abonnementstype
 - **Nettverkskapasitet** for forventet trafikk
 - **Kostnadsoptimalisering** gjennom riktig dimensjonering
 
-## 📊 Forstå Azure Kvoter og Begrensninger
+## 📊 Forstå Azure-kvoter og -grenser
 
-### Typer Begrensninger
-1. **Abonnementsnivå kvoter** - Maksimale ressurser per abonnement
+### Typer av grenser
+1. **Kvoter på abonnementsnivå** - Maksimale ressurser per abonnement
 2. **Regionale kvoter** - Maksimale ressurser per region
-3. **Ressursspesifikke begrensninger** - Begrensninger for individuelle ressurstyper
-4. **Tjenestenivå begrensninger** - Begrensninger basert på din tjenesteplan
+3. **Ressursspesifikke grenser** - Grenser for individuelle ressurstyper
+4. **Grenser for tjenestenivå** - Grenser basert på din tjenesteplan
 
-### Vanlige Ressurskvoter
+### Vanlige ressurskvoter
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -60,9 +60,9 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Kapasitetskontroller før Distribusjon
+## Kapasitetskontroller før distribusjon
 
-### Automatisert Kapasitetsvalideringsskript
+### Automatisert kapasitetsvalideringsskript
 ```bash
 #!/bin/bash
 # capacity-check.sh - Validate Azure capacity before deployment
@@ -120,9 +120,9 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Tjenestespesifikke Kapasitetskontroller
+### Tjenestespesifikke kapasitetskontroller
 
-#### App Service Kapasitet
+#### Kapasitet for App Service
 ```bash
 # Check App Service Plan availability
 check_app_service_capacity() {
@@ -154,7 +154,7 @@ check_app_service_capacity() {
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Database Kapasitet
+#### Kapasitet for databaser
 ```bash
 # Check PostgreSQL capacity
 check_postgres_capacity() {
@@ -211,7 +211,7 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Apps Kapasitet
+#### Kapasitet for Container Apps
 ```bash
 # Check Container Apps capacity
 check_container_apps_capacity() {
@@ -252,9 +252,9 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Regional Tilgjengelighetsvalidering
+## 📍 Validering av regional tilgjengelighet
 
-### Tjenestetilgjengelighet per Region
+### Tjenestetilgjengelighet per region
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -288,7 +288,7 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-### Anbefalinger for Regionvalg
+### Anbefalinger for valg av region
 ```bash
 # Recommend optimal regions based on requirements
 recommend_region() {
@@ -319,9 +319,9 @@ recommend_region() {
 }
 ```
 
-## 💰 Kostnadsplanlegging og Estimering
+## 💰 Kostnadsplanlegging og estimering
 
-### Ressurskostnadsestimering
+### Estimering av ressurskostnader
 ```bash
 # Estimate deployment costs
 estimate_costs() {
@@ -354,7 +354,7 @@ estimate_costs() {
 }
 ```
 
-### Anbefalinger for SKU Optimalisering
+### Anbefalinger for SKU-optimalisering
 ```bash
 # Recommend optimal SKUs based on requirements
 recommend_sku() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Automatiserte Pre-Flight Kontroller
+## 🚀 Automatiserte kontroller før distribusjon
 
-### Omfattende Pre-Flight Skript
+### Omfattende skript for kontroller før distribusjon
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -620,7 +620,7 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Konfigurasjonsfilmal
+### Mal for konfigurasjonsfil
 ```json
 {
   "requirements": {
@@ -654,9 +654,9 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Overvåking av Kapasitet under Distribusjon
+## 📈 Overvåking av kapasitet under distribusjon
 
-### Sanntids Kapasitetsovervåking
+### Sanntidskapasitetsovervåking
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integrasjon med AZD
 
-### Legg til Pre-Flight Hooks i azure.yaml
+### Legg til kontroller før distribusjon i azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -709,37 +709,38 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## Beste Praksis
+## Beste praksis
 
-1. **Kjør alltid kapasitetskontroller** før distribusjon til nye regioner
+1. **Utfør alltid kapasitetskontroller** før distribusjon til nye regioner
 2. **Overvåk kvotebruk regelmessig** for å unngå overraskelser
-3. **Planlegg for vekst** ved å sjekke fremtidige kapasitetsbehov
+3. **Planlegg for vekst** ved å vurdere fremtidige kapasitetsbehov
 4. **Bruk kostnadsestimeringsverktøy** for å unngå uventede kostnader
 5. **Dokumenter kapasitetskrav** for teamet ditt
 6. **Automatiser kapasitetsvalidering** i CI/CD-pipelines
-7. **Vurder regionale failover** kapasitetskrav
+7. **Vurder krav til regional failover** kapasitet
 
-## Neste Steg
+## Neste steg
 
-- [SKU Valgveiledning](sku-selection.md) - Velg optimale tjenestenivåer
-- [Pre-flight Kontroller](preflight-checks.md) - Automatiserte valideringsskript
+- [Veiledning for valg av SKU](sku-selection.md) - Velg optimale tjenestenivåer
+- [Kontroller før distribusjon](preflight-checks.md) - Automatiserte valideringsskript
 - [Hurtigreferanse](../../resources/cheat-sheet.md) - Kommandoer for rask tilgang
 - [Ordliste](../../resources/glossary.md) - Begreper og definisjoner
 
-## Ekstra Ressurser
+## Tilleggsressurser
 
-- [Azure Abonnementsbegrensninger](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure Priskalkulator](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Kostnadsstyring](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Regional Tilgjengelighet](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure-abonnementsgrenser](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure-priskalkulator](https://azure.microsoft.com/pricing/calculator/)
+- [Azure kostnadsstyring](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure regional tilgjengelighet](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigasjon**
-- **Forrige Leksjon**: [Feilsøkingsveiledning](../troubleshooting/debugging.md)
-- **Neste Leksjon**: [SKU Valg](sku-selection.md)
+- **Forrige leksjon**: [Feilsøkingsveiledning](../troubleshooting/debugging.md)
+
+- **Neste leksjon**: [Valg av SKU](sku-selection.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

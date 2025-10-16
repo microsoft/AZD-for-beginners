@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-10T06:46:07+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:38:35+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "sl"
 }
 -->
-# Načrtovanje zmogljivosti - Razpoložljivost in omejitve virov Azure
+# Načrtovanje zmogljivosti: Razumevanje kvot in omejitev Azure - Razpoložljivost virov in omejitve Azure
 
 ## Uvod
 
@@ -16,20 +16,20 @@ Ta obsežen vodič vam pomaga načrtovati in preveriti zmogljivost virov Azure p
 ## Cilji učenja
 
 Z dokončanjem tega vodiča boste:
-- Razumeli kvote, omejitve in regionalne omejitve razpoložljivosti v Azure
-- Obvladali tehnike preverjanja razpoložljivosti in zmogljivosti virov pred uvedbo
-- Implementirali strategije za avtomatizirano preverjanje zmogljivosti in spremljanje
-- Oblikovali aplikacije z ustrezno velikostjo virov in skalirnimi premisleki
+- Razumeli kvote, omejitve in regionalne omejitve razpoložljivosti Azure
+- Obvladali tehnike preverjanja razpoložljivosti virov in zmogljivosti pred uvedbo
+- Uvedli avtomatizirane strategije za preverjanje zmogljivosti in spremljanje
+- Načrtovali aplikacije z ustrezno velikostjo virov in upoštevanjem skaliranja
 - Uporabili strategije optimizacije stroškov z inteligentnim načrtovanjem zmogljivosti
-- Konfigurirali opozorila in spremljanje za uporabo kvot in razpoložljivost virov
+- Konfigurirali opozorila in spremljanje uporabe kvot ter razpoložljivosti virov
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
 - Oceniti in preveriti zahteve za zmogljivost virov Azure pred uvedbo
 - Ustvariti avtomatizirane skripte za preverjanje zmogljivosti in spremljanje kvot
-- Oblikovati skalabilne arhitekture, ki upoštevajo regionalne in naročniške omejitve
-- Implementirati stroškovno učinkovite strategije velikosti virov za različne vrste delovnih obremenitev
+- Načrtovati skalabilne arhitekture, ki upoštevajo regionalne in naročniške omejitve
+- Uvesti stroškovno učinkovite strategije velikosti virov za različne vrste delovnih obremenitev
 - Konfigurirati proaktivno spremljanje in opozarjanje za težave, povezane z zmogljivostjo
 - Načrtovati uvedbe v več regijah z ustrezno porazdelitvijo zmogljivosti
 
@@ -711,9 +711,9 @@ hooks:
 
 ## Najboljše prakse
 
-1. **Vedno izvajajte preverjanje zmogljivosti** pred uvedbo v nove regije
+1. **Vedno izvedite preverjanje zmogljivosti** pred uvedbo v nove regije
 2. **Redno spremljajte uporabo kvot**, da se izognete presenečenjem
-3. **Načrtujte rast** z oceno prihodnjih potreb po zmogljivosti
+3. **Načrtujte rast** z ocenjevanjem prihodnjih potreb po zmogljivosti
 4. **Uporabljajte orodja za oceno stroškov**, da se izognete nepričakovanim stroškom
 5. **Dokumentirajte zahteve za zmogljivost** za svojo ekipo
 6. **Avtomatizirajte preverjanje zmogljivosti** v CI/CD procesih
@@ -737,9 +737,10 @@ hooks:
 
 **Navigacija**
 - **Prejšnja lekcija**: [Vodič za odpravljanje napak](../troubleshooting/debugging.md)
+
 - **Naslednja lekcija**: [Izbira SKU](sku-selection.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve AI za prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.

@@ -1,54 +1,54 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T17:20:21+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:29:21+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "pt"
 }
 -->
-# Planeamento de Capacidade - Disponibilidade e Limites de Recursos Azure
+# Planeamento de Capacidade: Compreender Quotas e Limites do Azure
 
 ## Introdução
 
-Este guia abrangente ajuda a planear e validar a capacidade de recursos Azure antes de implementar com o Azure Developer CLI. Aprenda a avaliar quotas, disponibilidade e limitações regionais para garantir implementações bem-sucedidas enquanto otimiza custos e desempenho. Domine técnicas de planeamento de capacidade para diferentes arquiteturas de aplicações e cenários de escalabilidade.
+Este guia abrangente ajuda-o a planear e validar a capacidade de recursos do Azure antes de implementar com o Azure Developer CLI. Aprenda a avaliar quotas, disponibilidade e limitações regionais para garantir implementações bem-sucedidas enquanto otimiza custos e desempenho. Domine técnicas de planeamento de capacidade para diferentes arquiteturas de aplicações e cenários de escalabilidade.
 
 ## Objetivos de Aprendizagem
 
 Ao completar este guia, irá:
 - Compreender quotas, limites e restrições de disponibilidade regional do Azure
-- Dominar técnicas para verificar disponibilidade e capacidade de recursos antes da implementação
+- Dominar técnicas para verificar a disponibilidade e capacidade de recursos antes da implementação
 - Implementar estratégias automatizadas de validação e monitorização de capacidade
-- Projetar aplicações com dimensionamento e escalabilidade adequados
+- Projetar aplicações com dimensionamento e escalabilidade adequados de recursos
 - Aplicar estratégias de otimização de custos através de planeamento inteligente de capacidade
 - Configurar alertas e monitorização para uso de quotas e disponibilidade de recursos
 
 ## Resultados de Aprendizagem
 
 Após a conclusão, será capaz de:
-- Avaliar e validar os requisitos de capacidade de recursos Azure antes da implementação
+- Avaliar e validar os requisitos de capacidade de recursos do Azure antes da implementação
 - Criar scripts automatizados para verificação de capacidade e monitorização de quotas
 - Projetar arquiteturas escaláveis que considerem limites regionais e de subscrição
 - Implementar estratégias de dimensionamento de recursos rentáveis para diferentes tipos de carga de trabalho
 - Configurar monitorização proativa e alertas para problemas relacionados com capacidade
-- Planear implementações multi-região com distribuição de capacidade adequada
+- Planear implementações multi-região com distribuição adequada de capacidade
 
 ## Por que o Planeamento de Capacidade é Importante
 
 Antes de implementar aplicações, é necessário garantir:
 - **Quotas suficientes** para os recursos necessários
 - **Disponibilidade de recursos** na região alvo
-- **Disponibilidade do nível de serviço** para o tipo de subscrição
+- **Disponibilidade de nível de serviço** para o tipo de subscrição
 - **Capacidade de rede** para o tráfego esperado
 - **Otimização de custos** através de dimensionamento adequado
 
 ## 📊 Compreender Quotas e Limites do Azure
 
 ### Tipos de Limites
-1. **Quotas ao nível da subscrição** - Recursos máximos por subscrição
+1. **Quotas a nível de subscrição** - Recursos máximos por subscrição
 2. **Quotas regionais** - Recursos máximos por região
 3. **Limites específicos de recursos** - Limites para tipos individuais de recursos
-4. **Limites do nível de serviço** - Limites baseados no plano de serviço
+4. **Limites de nível de serviço** - Limites baseados no plano de serviço
 
 ### Quotas Comuns de Recursos
 ```bash
@@ -122,7 +122,7 @@ echo "✅ Capacity check completed successfully!"
 
 ### Verificações de Capacidade Específicas de Serviço
 
-#### Capacidade do App Service
+#### Capacidade de App Service
 ```bash
 # Check App Service Plan availability
 check_app_service_capacity() {
@@ -354,7 +354,7 @@ estimate_costs() {
 }
 ```
 
-### Recomendações para Otimização de SKU
+### Recomendações de Otimização de SKU
 ```bash
 # Recommend optimal SKUs based on requirements
 recommend_sku() {
@@ -421,7 +421,7 @@ recommend_sku() {
 
 ## 🚀 Verificações Automatizadas Pré-Implementação
 
-### Script Abrangente de Pré-Implementação
+### Script Abrangente Pré-Implementação
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -691,7 +691,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integração com AZD
 
-### Adicionar Hooks de Pré-Implementação ao azure.yaml
+### Adicionar Hooks Pré-Implementação ao azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -723,23 +723,24 @@ hooks:
 
 - [Guia de Seleção de SKU](sku-selection.md) - Escolha níveis de serviço ótimos
 - [Verificações Pré-Implementação](preflight-checks.md) - Scripts de validação automatizados
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Comandos de referência rápida
+- [Folha de Consulta](../../resources/cheat-sheet.md) - Comandos de referência rápida
 - [Glossário](../../resources/glossary.md) - Termos e definições
 
 ## Recursos Adicionais
 
-- [Limites de Subscrição Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Calculadora de Preços Azure](https://azure.microsoft.com/pricing/calculator/)
-- [Gestão de Custos Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Disponibilidade Regional Azure](https://azure.microsoft.com/global-infrastructure/services/)
+- [Limites de Subscrição do Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Calculadora de Preços do Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Gestão de Custos do Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Disponibilidade Regional do Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navegação**
 - **Lição Anterior**: [Guia de Depuração](../troubleshooting/debugging.md)
+
 - **Próxima Lição**: [Seleção de SKU](sku-selection.md)
 
 ---
 
-**Aviso de Responsabilidade**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+**Aviso Legal**:  
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.

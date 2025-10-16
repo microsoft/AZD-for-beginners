@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ce6b3aaf78f839cfdda9853c6cebffa5",
-  "translation_date": "2025-09-09T22:00:39+00:00",
+  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
+  "translation_date": "2025-10-13T15:34:12+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "vi"
 }
 -->
-# Lập Kế Hoạch Dung Lượng - Khả Dụng và Giới Hạn Tài Nguyên Azure
+# Lập Kế Hoạch Năng Lực: Hiểu Về Hạn Mức và Giới Hạn của Azure
 
 ## Giới Thiệu
 
-Hướng dẫn toàn diện này giúp bạn lập kế hoạch và xác thực dung lượng tài nguyên Azure trước khi triển khai với Azure Developer CLI. Tìm hiểu cách đánh giá hạn mức, khả dụng và giới hạn theo khu vực để đảm bảo triển khai thành công đồng thời tối ưu hóa chi phí và hiệu suất. Nắm vững các kỹ thuật lập kế hoạch dung lượng cho các kiến trúc ứng dụng khác nhau và các kịch bản mở rộng.
+Hướng dẫn toàn diện này giúp bạn lập kế hoạch và kiểm tra năng lực tài nguyên Azure trước khi triển khai với Azure Developer CLI. Tìm hiểu cách đánh giá hạn mức, tính khả dụng và các giới hạn theo khu vực để đảm bảo triển khai thành công đồng thời tối ưu hóa chi phí và hiệu suất. Làm chủ các kỹ thuật lập kế hoạch năng lực cho các kiến trúc ứng dụng khác nhau và các kịch bản mở rộng.
 
 ## Mục Tiêu Học Tập
 
-Khi hoàn thành hướng dẫn này, bạn sẽ:
-- Hiểu các hạn mức, giới hạn và ràng buộc khả dụng theo khu vực của Azure
-- Nắm vững các kỹ thuật kiểm tra khả dụng và dung lượng tài nguyên trước khi triển khai
-- Triển khai các chiến lược xác thực và giám sát dung lượng tự động
+Sau khi hoàn thành hướng dẫn này, bạn sẽ:
+- Hiểu về hạn mức, giới hạn và các ràng buộc khả dụng theo khu vực của Azure
+- Thành thạo các kỹ thuật kiểm tra tính khả dụng và năng lực tài nguyên trước khi triển khai
+- Triển khai các chiến lược tự động kiểm tra và giám sát năng lực
 - Thiết kế ứng dụng với kích thước tài nguyên và cân nhắc mở rộng phù hợp
-- Áp dụng các chiến lược tối ưu hóa chi phí thông qua lập kế hoạch dung lượng thông minh
-- Cấu hình cảnh báo và giám sát việc sử dụng hạn mức và khả dụng tài nguyên
+- Áp dụng các chiến lược tối ưu hóa chi phí thông qua lập kế hoạch năng lực thông minh
+- Cấu hình cảnh báo và giám sát việc sử dụng hạn mức và tính khả dụng tài nguyên
 
 ## Kết Quả Học Tập
 
-Sau khi hoàn thành, bạn sẽ có khả năng:
-- Đánh giá và xác thực yêu cầu dung lượng tài nguyên Azure trước khi triển khai
-- Tạo các script tự động để kiểm tra dung lượng và giám sát hạn mức
-- Thiết kế các kiến trúc có khả năng mở rộng, tính đến giới hạn theo khu vực và đăng ký
+Sau khi hoàn thành, bạn sẽ có thể:
+- Đánh giá và kiểm tra yêu cầu năng lực tài nguyên Azure trước khi triển khai
+- Tạo các script tự động để kiểm tra năng lực và giám sát hạn mức
+- Thiết kế các kiến trúc có khả năng mở rộng, tính đến giới hạn khu vực và đăng ký
 - Triển khai các chiến lược kích thước tài nguyên hiệu quả về chi phí cho các loại khối lượng công việc khác nhau
-- Cấu hình giám sát và cảnh báo chủ động cho các vấn đề liên quan đến dung lượng
-- Lập kế hoạch triển khai đa khu vực với phân phối dung lượng phù hợp
+- Cấu hình giám sát và cảnh báo chủ động cho các vấn đề liên quan đến năng lực
+- Lập kế hoạch triển khai đa khu vực với phân phối năng lực phù hợp
 
-## Tại Sao Lập Kế Hoạch Dung Lượng Quan Trọng
+## Tại Sao Lập Kế Hoạch Năng Lực Quan Trọng
 
 Trước khi triển khai ứng dụng, bạn cần đảm bảo:
 - **Hạn mức đủ** cho các tài nguyên cần thiết
-- **Khả dụng tài nguyên** trong khu vực mục tiêu của bạn
-- **Khả dụng cấp dịch vụ** cho loại đăng ký của bạn
-- **Dung lượng mạng** cho lưu lượng dự kiến
+- **Tính khả dụng tài nguyên** trong khu vực mục tiêu của bạn
+- **Tính khả dụng của cấp dịch vụ** cho loại đăng ký của bạn
+- **Năng lực mạng** cho lưu lượng dự kiến
 - **Tối ưu hóa chi phí** thông qua kích thước phù hợp
 
-## 📊 Hiểu Các Hạn Mức và Giới Hạn của Azure
+## 📊 Hiểu Về Hạn Mức và Giới Hạn của Azure
 
 ### Các Loại Giới Hạn
 1. **Hạn mức cấp đăng ký** - Số lượng tài nguyên tối đa cho mỗi đăng ký
-2. **Hạn mức theo khu vực** - Số lượng tài nguyên tối đa cho mỗi khu vực
-3. **Giới hạn cụ thể tài nguyên** - Giới hạn cho từng loại tài nguyên riêng lẻ
+2. **Hạn mức khu vực** - Số lượng tài nguyên tối đa cho mỗi khu vực
+3. **Giới hạn cụ thể cho từng tài nguyên** - Giới hạn cho từng loại tài nguyên cụ thể
 4. **Giới hạn cấp dịch vụ** - Giới hạn dựa trên gói dịch vụ của bạn
 
-### Các Hạn Mức Tài Nguyên Thường Gặp
+### Các Hạn Mức Tài Nguyên Thông Thường
 ```bash
 # Check current quota usage
 az vm list-usage --location eastus2 --output table
@@ -60,9 +60,9 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Kiểm Tra Dung Lượng Trước Triển Khai
+## Kiểm Tra Năng Lực Trước Khi Triển Khai
 
-### Script Xác Thực Dung Lượng Tự Động
+### Script Tự Động Kiểm Tra Năng Lực
 ```bash
 #!/bin/bash
 # capacity-check.sh - Validate Azure capacity before deployment
@@ -120,9 +120,9 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Kiểm Tra Dung Lượng Cụ Thể Theo Dịch Vụ
+### Kiểm Tra Năng Lực Cụ Thể Theo Dịch Vụ
 
-#### Dung Lượng Dịch Vụ Ứng Dụng
+#### Năng Lực Dịch Vụ Ứng Dụng
 ```bash
 # Check App Service Plan availability
 check_app_service_capacity() {
@@ -154,7 +154,7 @@ check_app_service_capacity() {
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Dung Lượng Cơ Sở Dữ Liệu
+#### Năng Lực Cơ Sở Dữ Liệu
 ```bash
 # Check PostgreSQL capacity
 check_postgres_capacity() {
@@ -211,7 +211,7 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Dung Lượng Ứng Dụng Container
+#### Năng Lực Ứng Dụng Container
 ```bash
 # Check Container Apps capacity
 check_container_apps_capacity() {
@@ -252,9 +252,9 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Xác Thực Khả Dụng Theo Khu Vực
+## 📍 Kiểm Tra Tính Khả Dụng Theo Khu Vực
 
-### Khả Dụng Dịch Vụ Theo Khu Vực
+### Tính Khả Dụng Dịch Vụ Theo Khu Vực
 ```bash
 # Check service availability across regions
 check_service_availability() {
@@ -419,9 +419,9 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Kiểm Tra Tự Động Trước Triển Khai
+## 🚀 Kiểm Tra Tự Động Trước Khi Triển Khai
 
-### Script Kiểm Tra Toàn Diện Trước Triển Khai
+### Script Kiểm Tra Toàn Diện Trước Khi Triển Khai
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -654,9 +654,9 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Giám Sát Dung Lượng Trong Quá Trình Triển Khai
+## 📈 Giám Sát Năng Lực Trong Quá Trình Triển Khai
 
-### Giám Sát Dung Lượng Theo Thời Gian Thực
+### Giám Sát Năng Lực Theo Thời Gian Thực
 ```bash
 # Monitor capacity during deployment
 monitor_deployment_capacity() {
@@ -689,9 +689,9 @@ monitor_deployment_capacity() {
 }
 ```
 
-## 🔗 Tích Hợp với AZD
+## 🔗 Tích Hợp Với AZD
 
-### Thêm Hooks Kiểm Tra Trước Triển Khai vào azure.yaml
+### Thêm Hooks Trước Khi Triển Khai Vào azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -711,35 +711,36 @@ hooks:
 
 ## Các Thực Hành Tốt Nhất
 
-1. **Luôn chạy kiểm tra dung lượng** trước khi triển khai đến các khu vực mới
+1. **Luôn kiểm tra năng lực** trước khi triển khai đến các khu vực mới
 2. **Giám sát việc sử dụng hạn mức thường xuyên** để tránh bất ngờ
-3. **Lập kế hoạch cho sự tăng trưởng** bằng cách kiểm tra nhu cầu dung lượng trong tương lai
-4. **Sử dụng công cụ ước tính chi phí** để tránh sốc hóa đơn
-5. **Tài liệu hóa yêu cầu dung lượng** cho nhóm của bạn
-6. **Tự động hóa xác thực dung lượng** trong các pipeline CI/CD
-7. **Cân nhắc yêu cầu dung lượng dự phòng** cho khu vực
+3. **Lập kế hoạch cho sự phát triển** bằng cách kiểm tra nhu cầu năng lực trong tương lai
+4. **Sử dụng công cụ ước tính chi phí** để tránh chi phí bất ngờ
+5. **Ghi chép yêu cầu năng lực** cho nhóm của bạn
+6. **Tự động hóa kiểm tra năng lực** trong các pipeline CI/CD
+7. **Xem xét yêu cầu năng lực dự phòng khu vực**
 
-## Các Bước Tiếp Theo
+## Bước Tiếp Theo
 
-- [Hướng Dẫn Lựa Chọn SKU](sku-selection.md) - Chọn các cấp dịch vụ tối ưu
-- [Kiểm Tra Trước Triển Khai](preflight-checks.md) - Script xác thực tự động
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Các lệnh tham khảo nhanh
+- [Hướng Dẫn Chọn SKU](sku-selection.md) - Chọn các cấp dịch vụ tối ưu
+- [Kiểm Tra Trước Khi Triển Khai](preflight-checks.md) - Script kiểm tra tự động
+- [Bảng Ghi Chú](../../resources/cheat-sheet.md) - Các lệnh tham khảo nhanh
 - [Thuật Ngữ](../../resources/glossary.md) - Các thuật ngữ và định nghĩa
 
 ## Tài Nguyên Bổ Sung
 
 - [Giới Hạn Đăng Ký Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Máy Tính Chi Phí Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Công Cụ Tính Toán Chi Phí Azure](https://azure.microsoft.com/pricing/calculator/)
 - [Quản Lý Chi Phí Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Khả Dụng Theo Khu Vực Azure](https://azure.microsoft.com/global-infrastructure/services/)
+- [Tính Khả Dụng Khu Vực Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Điều Hướng**
 - **Bài Học Trước**: [Hướng Dẫn Gỡ Lỗi](../troubleshooting/debugging.md)
-- **Bài Học Tiếp Theo**: [Lựa Chọn SKU](sku-selection.md)
+
+- **Bài Học Tiếp Theo**: [Chọn SKU](sku-selection.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
