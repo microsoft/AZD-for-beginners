@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T21:32:58+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:11:13+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "br"
 }
@@ -17,7 +17,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Este guia abrangente oferece uma referência rápida para os comandos mais utilizados do Azure Developer CLI, organizados por categoria com exemplos práticos. Perfeito para consultas rápidas durante o desenvolvimento, solução de problemas e operações diárias com projetos azd.
+Este guia abrangente fornece uma referência rápida para os comandos mais usados do Azure Developer CLI, organizados por categoria com exemplos práticos. Perfeito para consultas rápidas durante o desenvolvimento, solução de problemas e operações diárias com projetos azd.
 
 ## Objetivos de Aprendizado
 
@@ -27,19 +27,19 @@ Ao usar este guia, você irá:
 - Consultar exemplos práticos para cenários comuns de desenvolvimento e implantação
 - Acessar comandos de solução de problemas para resolução rápida de questões
 - Encontrar opções avançadas de configuração e personalização de forma eficiente
-- Localizar comandos de gerenciamento de ambientes e fluxos de trabalho multiambiente
+- Localizar comandos de gerenciamento de ambiente e fluxos de trabalho multiambiente
 
 ## Resultados de Aprendizado
 
 Com referência regular a este guia, você será capaz de:
 - Executar comandos azd com confiança sem precisar consultar a documentação completa
-- Resolver rapidamente problemas comuns usando comandos de diagnóstico apropriados
+- Resolver rapidamente problemas comuns usando os comandos de diagnóstico apropriados
 - Gerenciar múltiplos ambientes e cenários de implantação de forma eficiente
 - Aplicar recursos avançados e opções de configuração do azd conforme necessário
 - Solucionar problemas de implantação usando sequências sistemáticas de comandos
 - Otimizar fluxos de trabalho por meio do uso eficaz de atalhos e opções do azd
 
-## Comandos de Introdução
+## Comandos para Começar
 
 ### Autenticação
 ```bash
@@ -72,7 +72,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Comandos Principais de Implantação
 
-### Fluxo Completo de Implantação
+### Fluxo de Trabalho Completo de Implantação
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -112,7 +114,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Construção e Empacotamento
+### Build e Empacotamento
 ```bash
 # Build applications
 azd package
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Gerenciamento de Serviços
@@ -389,7 +400,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 
 ## 🎨 Formatação de Saída
 
-### Saída JSON
+### Saída em JSON
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

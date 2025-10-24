@@ -1,82 +1,82 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T14:10:01+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T18:23:12+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "lt"
 }
 -->
-# Patikrinimai prieš AZD diegimą
+# Priešskrydžio patikrinimai AZD diegimams
 
 **Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 6 skyrius - Diegimo patikrinimas ir planavimas
+- **📖 Dabartinis skyrius**: 6 skyrius - Prieš diegimą: patikrinimas ir planavimas
 - **⬅️ Ankstesnis**: [SKU pasirinkimas](sku-selection.md)
 - **➡️ Kitas skyrius**: [7 skyrius: Trikčių šalinimas](../troubleshooting/common-issues.md)
 - **🔧 Susiję**: [4 skyrius: Diegimo vadovas](../deployment/deployment-guide.md)
 
 ## Įvadas
 
-Šis išsamus vadovas pateikia patikrinimo scenarijus ir procedūras, kurios padeda užtikrinti sėkmingą Azure Developer CLI diegimą dar prieš pradedant procesą. Sužinokite, kaip įgyvendinti automatinius patikrinimus autentifikacijai, resursų prieinamumui, kvotoms, saugumo atitikčiai ir našumo reikalavimams, kad išvengtumėte diegimo klaidų ir optimizuotumėte sėkmės rodiklius.
+Šis išsamus vadovas pateikia prieš diegimą atliekamų patikrinimų scenarijus ir procedūras, siekiant užtikrinti sėkmingus Azure Developer CLI diegimus dar prieš jiems prasidedant. Sužinokite, kaip įgyvendinti automatinius patikrinimus autentifikacijai, resursų prieinamumui, kvotoms, saugumo atitikčiai ir našumo reikalavimams, kad išvengtumėte diegimo klaidų ir optimizuotumėte diegimo sėkmės rodiklius.
 
 ## Mokymosi tikslai
 
 Baigę šį vadovą, jūs:
-- Įvaldysite automatizuotus patikrinimo prieš diegimą metodus ir scenarijus
-- Suprasite išsamius autentifikacijos, leidimų ir kvotų tikrinimo metodus
+- Įvaldysite automatizuotus prieš diegimą atliekamų patikrinimų metodus ir scenarijus
+- Suprasite išsamius autentifikacijos, leidimų ir kvotų tikrinimo strategijas
 - Įgyvendinsite resursų prieinamumo ir pajėgumų patikrinimo procedūras
 - Konfigūruosite saugumo ir atitikties patikrinimus pagal organizacijos politiką
-- Sukursite išlaidų įvertinimo ir biudžeto patikrinimo darbo eigas
-- Kursite individualizuotus automatinius patikrinimus CI/CD procesams
+- Sukursite išlaidų vertinimo ir biudžeto patikrinimo darbo eigas
+- Kursite individualizuotą priešskrydžio patikrinimų automatizavimą CI/CD vamzdynams
 
 ## Mokymosi rezultatai
 
 Baigę, galėsite:
-- Kurti ir vykdyti išsamius patikrinimo prieš diegimą scenarijus
-- Projektuoti automatizuotus tikrinimo procesus skirtingiems diegimo scenarijams
+- Kurti ir vykdyti išsamius priešskrydžio patikrinimų scenarijus
+- Kurti automatizuotus tikrinimo darbo eigas skirtingiems diegimo scenarijams
 - Įgyvendinti aplinkai specifines patikrinimo procedūras ir politiką
-- Konfigūruoti proaktyvų stebėjimą ir įspėjimus dėl pasirengimo diegimui
-- Spręsti problemas prieš diegimą ir įgyvendinti korekcinius veiksmus
-- Integruoti patikrinimus prieš diegimą į DevOps procesus ir automatizavimo darbo eigas
+- Konfigūruoti proaktyvų stebėjimą ir įspėjimus dėl diegimo pasirengimo
+- Spręsti prieš diegimą kylančias problemas ir įgyvendinti korekcinius veiksmus
+- Integruoti priešskrydžio patikrinimus į DevOps vamzdynus ir automatizavimo darbo eigas
 
 ## Turinys
 
 - [Apžvalga](../../../../docs/pre-deployment)
-- [Automatizuotas patikrinimo scenarijus](../../../../docs/pre-deployment)
+- [Automatizuotas priešskrydžio scenarijus](../../../../docs/pre-deployment)
 - [Rankinis patikrinimo sąrašas](../../../../docs/pre-deployment)
 - [Aplinkos patikrinimas](../../../../docs/pre-deployment)
 - [Resursų patikrinimas](../../../../docs/pre-deployment)
 - [Saugumo ir atitikties patikrinimai](../../../../docs/pre-deployment)
 - [Našumo ir pajėgumų planavimas](../../../../docs/pre-deployment)
-- [Dažnų problemų sprendimas](../../../../docs/pre-deployment)
+- [Trikčių šalinimas](../../../../docs/pre-deployment)
 
 ---
 
 ## Apžvalga
 
-Patikrinimai prieš diegimą yra būtini, kad būtų užtikrinta:
+Priešskrydžio patikrinimai yra būtini patikrinimai, atliekami prieš diegimą, siekiant užtikrinti:
 
-- **Resursų prieinamumas** ir kvotos tikslinėse regionuose
-- **Autentifikacija ir leidimai** tinkamai sukonfigūruoti
-- **Šablonų galiojimas** ir parametrų teisingumas
-- **Tinklo ryšys** ir priklausomybės
-- **Saugumo atitiktis** organizacijos politikai
-- **Išlaidų įvertinimas** pagal biudžeto apribojimus
+- **Resursų prieinamumą** ir kvotas tiksliniuose regionuose
+- **Autentifikaciją ir leidimus**, kurie tinkamai sukonfigūruoti
+- **Šablonų galiojimą** ir parametrų teisingumą
+- **Tinklo ryšį** ir priklausomybes
+- **Saugumo atitiktį** organizacijos politikai
+- **Išlaidų vertinimą** pagal biudžeto apribojimus
 
-### Kada vykdyti patikrinimus prieš diegimą
+### Kada vykdyti priešskrydžio patikrinimus
 
 - **Prieš pirmąjį diegimą** naujoje aplinkoje
 - **Po reikšmingų šablonų pakeitimų**
-- **Prieš diegimą į gamybą**
+- **Prieš diegimus į gamybą**
 - **Keičiant Azure regionus**
-- **Kaip CI/CD procesų dalį**
+- **Kaip CI/CD vamzdynų dalį**
 
 ---
 
-## Automatizuotas patikrinimo scenarijus
+## Automatizuotas priešskrydžio scenarijus
 
-### PowerShell patikrinimo scenarijus
+### PowerShell priešskrydžio tikrintuvas
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash patikrinimo scenarijus
+### Bash priešskrydžio tikrintuvas
 
 ```bash
 #!/bin/bash
@@ -792,16 +807,16 @@ main "$@"
 
 ## Rankinis patikrinimo sąrašas
 
-### Patikrinimo prieš diegimą sąrašas
+### Prieš diegimą atliekamų patikrinimų sąrašas
 
-Atspausdinkite šį sąrašą ir patikrinkite kiekvieną punktą prieš diegimą:
+Atsispausdinkite šį sąrašą ir patikrinkite kiekvieną punktą prieš diegimą:
 
-#### ✅ Aplinkos nustatymas
+#### ✅ Aplinkos paruošimas
 - [ ] Įdiegta ir atnaujinta naujausia AZD CLI versija
 - [ ] Įdiegta ir autentifikuota Azure CLI
-- [ ] Pasirinkta tinkama Azure prenumerata
+- [ ] Pasirinkta teisinga Azure prenumerata
 - [ ] Aplinkos pavadinimas unikalus ir atitinka pavadinimų konvencijas
-- [ ] Nustatyta tikslinė resursų grupė arba ji gali būti sukurta
+- [ ] Identifikuota tikslinė resursų grupė arba ji gali būti sukurta
 
 #### ✅ Autentifikacija ir leidimai
 - [ ] Sėkmingai autentifikuota naudojant `azd auth login`
@@ -814,40 +829,41 @@ Atspausdinkite šį sąrašą ir patikrinkite kiekvieną punktą prieš diegimą
 - [ ] Visos paslaugos, apibrėžtos azure.yaml, turi atitinkamą šaltinio kodą
 - [ ] Bicep šablonai `infra/` kataloge yra
 - [ ] `main.bicep` kompiliuojasi be klaidų (`az bicep build --file infra/main.bicep`)
-- [ ] Visi reikalingi parametrai turi numatytas reikšmes arba bus pateikti
+- [ ] 🧪 Infrastruktūros peržiūra sėkmingai vykdoma (`azd provision --preview`)
+- [ ] Visi reikalingi parametrai turi numatytas vertes arba bus pateikti
 - [ ] Šablonuose nėra kietai užkoduotų slaptažodžių
 
 #### ✅ Resursų planavimas
 - [ ] Pasirinktas ir patvirtintas tikslinis Azure regionas
-- [ ] Tiksliniame regione prieinamos reikalingos Azure paslaugos
-- [ ] Pakankamos kvotos suplanuotiems resursams
+- [ ] Tiksliniame regione yra reikiamos Azure paslaugos
+- [ ] Pakankamos kvotos planuotiems resursams
 - [ ] Patikrinti resursų pavadinimų konfliktai
 - [ ] Suprastos priklausomybės tarp resursų
 
 #### ✅ Tinklas ir saugumas
 - [ ] Patikrintas tinklo ryšys su Azure galiniais taškais
 - [ ] Konfigūruoti ugniasienės/proxy nustatymai, jei reikia
-- [ ] Key Vault sukonfigūruotas slaptažodžių valdymui
+- [ ] Konfigūruotas Key Vault slaptažodžių valdymui
 - [ ] Naudojamos valdomos tapatybės, kur įmanoma
-- [ ] HTTPS prievartinis naudojimas įjungtas žiniatinklio programoms
+- [ ] HTTPS priverstinis naudojimas įjungtas internetinėms programoms
 
 #### ✅ Išlaidų valdymas
-- [ ] Išlaidų įvertinimai apskaičiuoti naudojant Azure Pricing Calculator
+- [ ] Išlaidų vertinimai apskaičiuoti naudojant Azure kainų skaičiuoklę
 - [ ] Konfigūruoti biudžeto įspėjimai, jei reikia
 - [ ] Pasirinkti tinkami SKU aplinkos tipui
-- [ ] Apsvarstyta rezervuota pajėgumų talpa gamybos apkrovoms
+- [ ] Apsvarstyta rezervuota pajėgumų talpa gamybos darbo krūviams
 
 #### ✅ Stebėjimas ir stebimumas
-- [ ] Application Insights sukonfigūruotas šablonuose
+- [ ] Šablonuose konfigūruotas Application Insights
 - [ ] Planuojama Log Analytics darbo sritis
-- [ ] Apibrėžtos įspėjimo taisyklės kritiniams metrikams
-- [ ] Sveikatos patikrinimo galiniai taškai įgyvendinti programose
+- [ ] Apibrėžtos įspėjimų taisyklės kritiniams rodikliams
+- [ ] Programose įgyvendinti sveikatos patikrinimo galiniai taškai
 
 #### ✅ Atsarginės kopijos ir atkūrimas
-- [ ] Apibrėžta atsarginių kopijų strategija duomenų resursams
+- [ ] Apibrėžta duomenų resursų atsarginių kopijų strategija
 - [ ] Dokumentuoti atkūrimo laiko tikslai (RTO)
 - [ ] Dokumentuoti atkūrimo taško tikslai (RPO)
-- [ ] Sukurtas nelaimių atkūrimo planas gamybai
+- [ ] Parengtas nelaimių atkūrimo planas gamybai
 
 ---
 
@@ -1285,10 +1301,10 @@ steps:
 
 ## Geriausios praktikos santrauka
 
-### ✅ Geriausios patikrinimo prieš diegimą praktikos
+### ✅ Geriausios priešskrydžio patikrinimų praktikos
 
 1. **Automatizuokite, kur įmanoma**
-   - Integruokite patikrinimus į CI/CD procesus
+   - Integruokite patikrinimus į CI/CD vamzdynus
    - Naudokite scenarijus pakartotiniams patikrinimams
    - Saugojimo rezultatus audito pėdsakams
 
@@ -1310,21 +1326,21 @@ steps:
 
 5. **Greitas sustabdymas**
    - Sustabdykite diegimą, jei nepavyksta kritiniai patikrinimai
-   - Pateikite aiškias gaires problemų sprendimui
+   - Pateikite aiškias instrukcijas problemų sprendimui
    - Sudarykite galimybę lengvai pakartoti patikrinimus
 
-### Dažnos patikrinimo prieš diegimą klaidos
+### Dažnos priešskrydžio klaidos
 
 1. **Patikrinimų praleidimas** dėl "greito" diegimo
 2. **Nepakankamas leidimų** patikrinimas prieš diegimą
 3. **Kvotų limitų ignoravimas** iki diegimo nesėkmės
-4. **Šablonų nepatikrinimas** CI/CD procesuose
+4. **Šablonų nepatikrinimas** CI/CD vamzdynuose
 5. **Saugumo patikrinimų praleidimas** gamybos aplinkoms
-6. **Nepakankamas išlaidų įvertinimas**, sukeliantis biudžeto netikėtumus
+6. **Nepakankamas išlaidų vertinimas**, sukeliantis biudžeto netikėtumus
 
 ---
 
-**Patarimas**: Vykdykite patikrinimus prieš diegimą kaip atskirą užduotį savo CI/CD procese prieš faktinį diegimo užduotį. Tai leidžia anksti aptikti problemas ir suteikia greitesnį grįžtamąjį ryšį kūrėjams.
+**Patarimas**: Vykdykite priešskrydžio patikrinimus kaip atskirą užduotį savo CI/CD vamzdyne prieš faktinę diegimo užduotį. Tai leidžia anksti aptikti problemas ir greičiau pateikti atsiliepimus kūrėjams.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus aiškinimus, atsiradusius naudojant šį vertimą.

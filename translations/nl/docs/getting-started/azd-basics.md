@@ -1,21 +1,21 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:39:37+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:37:26+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "nl"
 }
 -->
 # AZD Basisprincipes - Begrijpen van Azure Developer CLI
 
-# AZD Basisprincipes - Kernconcepten en Fundamenten
+# AZD Basisprincipes - Kernconcepten en Grondbeginselen
 
 **Hoofdstuk Navigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelle Start
 - **⬅️ Vorige**: [Cursusoverzicht](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Volgende**: [Installatie & Configuratie](installation.md)
+- **➡️ Volgende**: [Installatie & Instellen](installation.md)
 - **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introductie
@@ -68,7 +68,7 @@ Elke omgeving onderhoudt zijn eigen:
 Services zijn de bouwstenen van je applicatie:
 - **Frontend** - Webapplicaties, SPAs
 - **Backend** - API's, microservices
-- **Database** - Datastoreoplossingen
+- **Database** - Datastore-oplossingen
 - **Opslag** - Bestand- en blobopslag
 
 ## Belangrijke Functies
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Veilige Infrastructuurplanning met Preview
+Het `azd provision --preview` commando is een gamechanger voor veilige implementaties:
+- **Dry-run analyse** - Laat zien wat wordt aangemaakt, gewijzigd of verwijderd
+- **Geen risico** - Er worden geen daadwerkelijke wijzigingen aangebracht in je Azure-omgeving
+- **Team samenwerking** - Deel previewresultaten vóór implementatie
+- **Kostenraming** - Begrijp resourcekosten vóór commitment
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Omgevingsbeheer
@@ -203,7 +221,7 @@ Het `azd down --force --purge` commando is een krachtige manier om je azd-omgevi
 --force
 ```
 - Slaat bevestigingsprompts over.
-- Handig voor automatisering of scripting waar handmatige invoer niet mogelijk is.
+- Handig voor automatisering of scripting waar handmatige invoer niet haalbaar is.
 - Zorgt ervoor dat de afbraak zonder onderbreking doorgaat, zelfs als de CLI inconsistenties detecteert.
 
 ```
@@ -218,7 +236,7 @@ Voorkomt dat azd "vorige implementaties onthoudt", wat problemen kan veroorzaken
 ### Waarom beide gebruiken?
 Wanneer je vastloopt met `azd up` door achterblijvende status of gedeeltelijke implementaties, zorgt deze combinatie voor een **schone lei**.
 
-Het is vooral nuttig na handmatige resourceverwijderingen in de Azure portal of bij het wisselen van templates, omgevingen of resourcegroepnaamconventies.
+Het is vooral handig na handmatige resourceverwijderingen in de Azure portal of bij het wisselen van templates, omgevingen of resourcegroepnaamconventies.
 
 ### Meerdere Omgevingen Beheren
 ```bash
@@ -294,7 +312,7 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
-Automatisch gebruikt in:
+Wordt automatisch gebruikt in:
 - Azure Kubernetes Service (AKS) met Workload Identity
 - GitHub Actions met OIDC-federatie
 - Andere federatieve identiteitsscenario's
@@ -314,7 +332,7 @@ az account show --query "user.type" --output tsv
 
 #### 4. Integratie met Ontwikkeltools
 - **Visual Studio**: Gebruikt automatisch het ingelogde account
-- **VS Code**: Gebruikt Azure Account extensie referenties
+- **VS Code**: Gebruikt Azure Account extensie-referenties
 - **Azure CLI**: Gebruikt `az login` referenties (meest gebruikelijk voor lokale ontwikkeling)
 
 ### AZD Authenticatie Instellen
@@ -431,8 +449,8 @@ azd up
 
 ### Veiligheidsoverwegingen
 
-1. **Referentieopslag**: Sla nooit referenties op in broncode
-2. **Scope Beperking**: Gebruik het principe van minimale rechten voor service principals
+1. **Opslag van Referenties**: Sla nooit referenties op in broncode
+2. **Beperking van Scope**: Gebruik het principe van minimale rechten voor service principals
 3. **Tokenrotatie**: Draai regelmatig service principal geheimen
 4. **Audit Trail**: Monitor authenticatie- en implementatieactiviteiten
 5. **Netwerkbeveiliging**: Gebruik waar mogelijk private endpoints
@@ -489,12 +507,12 @@ azd init --template template1
 
 ### 2. Maak Gebruik van Templates
 - Begin met bestaande templates
-- Pas aan voor je behoeften
+- Pas aan voor jouw behoeften
 - Maak herbruikbare templates voor je organisatie
 
-### 3. Isolatie van Omgevingen
+### 3. Omgevingsisolatie
 - Gebruik aparte omgevingen voor ontwikkeling/staging/productie
-- Implementeer nooit direct naar productie vanaf je lokale machine
+- Implementeer nooit direct naar productie vanaf een lokale machine
 - Gebruik CI/CD-pipelines voor productie-implementaties
 
 ### 4. Configuratiebeheer
@@ -524,8 +542,8 @@ azd init --template template1
 
 ## Volgende Stappen
 
-**📖 Ga verder met Hoofdstuk 1 Leren:**
-- [Installatie & Configuratie](installation.md) - Installeer en configureer azd
+**📖 Ga verder met Hoofdstuk 1:**
+- [Installatie & Instellen](installation.md) - Installeer en configureer azd
 - [Je Eerste Project](first-project.md) - Voltooi hands-on tutorial
 - [Configuratiegids](configuration.md) - Geavanceerde configuratieopties
 
@@ -544,8 +562,10 @@ azd init --template template1
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelle Start  
 - **⬅️ Vorige**: [Cursusoverzicht](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Volgende**: [Installatie & Configuratie](installation.md)
+- **➡️ Volgende**: [Installatie & Instellen](installation.md)
 - **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Disclaimer**:  
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

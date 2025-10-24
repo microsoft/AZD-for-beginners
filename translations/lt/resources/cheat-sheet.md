@@ -1,33 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T14:17:52+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T18:22:59+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "lt"
 }
 -->
 # Komandų atmintinė - Pagrindiniai AZD komandos
 
-**Greita nuoroda į visus skyrius**
+**Greita nuoroda visiems skyriams**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../README.md)
 - **📖 Greitas startas**: [1 skyrius: Pagrindai ir greitas startas](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI komandos**: [2 skyrius: AI-pirmasis vystymas](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Pažangūs**: [4 skyrius: Infrastruktūra kaip kodas](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🤖 AI komandos**: [2 skyrius: AI-pirmoji plėtra](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Pažengusiems**: [4 skyrius: Infrastruktūra kaip kodas](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Įvadas
 
-Ši išsami atmintinė suteikia greitą prieigą prie dažniausiai naudojamų Azure Developer CLI komandų, suskirstytų pagal kategorijas su praktiniais pavyzdžiais. Puikiai tinka greitam peržiūrėjimui vystymo, trikčių šalinimo ir kasdienės veiklos metu su azd projektais.
+Ši išsami atmintinė suteikia greitą prieigą prie dažniausiai naudojamų Azure Developer CLI komandų, suskirstytų pagal kategorijas su praktiniais pavyzdžiais. Puikiai tinka greitam peržiūrėjimui plėtros, trikčių šalinimo ir kasdienės veiklos su azd projektais metu.
 
 ## Mokymosi tikslai
 
-Naudodami šią atmintinę, jūs:
+Naudodamiesi šia atmintine, jūs:
 - Turėsite greitą prieigą prie pagrindinių Azure Developer CLI komandų ir sintaksės
 - Suprasite komandų organizavimą pagal funkcines kategorijas ir naudojimo atvejus
-- Naudosite praktinius pavyzdžius dažniausiai pasitaikančioms vystymo ir diegimo situacijoms
+- Galėsite remtis praktiniais pavyzdžiais dažniausiai pasitaikančiose plėtros ir diegimo situacijose
 - Rasite trikčių šalinimo komandas greitam problemų sprendimui
 - Efektyviai surasite pažangias konfigūracijos ir pritaikymo galimybes
-- Valdysite aplinkos ir kelių aplinkų darbo eigas
+- Naudosite aplinkos valdymo ir daugiaplinkės darbo eigos komandas
 
 ## Mokymosi rezultatai
 
@@ -35,7 +35,7 @@ Reguliariai naudodami šią atmintinę, jūs galėsite:
 - Pasitikėdami vykdyti azd komandas be pilnos dokumentacijos peržiūros
 - Greitai spręsti dažniausiai pasitaikančias problemas naudodami tinkamas diagnostikos komandas
 - Efektyviai valdyti kelias aplinkas ir diegimo scenarijus
-- Naudoti pažangias azd funkcijas ir konfigūracijos galimybes pagal poreikį
+- Taikyti pažangias azd funkcijas ir konfigūracijos galimybes, kai to reikia
 - Sistemingai spręsti diegimo problemas naudodami komandų sekas
 - Optimizuoti darbo eigas efektyviai naudojant azd trumpinius ir parinktis
 
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Paslaugų valdymas
@@ -287,7 +298,7 @@ azd service restart --service api
 
 ## 🎯 Greitos darbo eigos
 
-### Vystymo darbo eiga
+### Plėtros darbo eiga
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Kelių aplinkų darbo eiga
+### Daugiaplinkės darbo eiga
 ```bash
 # Set up environments
 azd env new dev
@@ -408,7 +419,7 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Dažniausiai naudojamų komandų kombinacijos
+## 🔧 Dažniausiai naudojamų komandų deriniai
 
 ### Sveikatos patikrinimo scenarijus
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -439,7 +450,7 @@ for env in dev staging production; do
 done
 ```
 
-### Resursų valymo scenarijus
+### Išteklių valymo scenarijus
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -452,7 +463,7 @@ done
 
 ## 📝 Aplinkos kintamieji
 
-### Dažni aplinkos kintamieji
+### Dažniausiai naudojami aplinkos kintamieji
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus aiškinimus, atsiradusius dėl šio vertimo naudojimo.

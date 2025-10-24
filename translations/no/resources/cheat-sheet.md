@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T06:25:14+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:31:28+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "no"
 }
 -->
-# Kommando-jukselapp - Essensielle AZD-kommandoer
+# Kommandooversikt - Essensielle AZD-kommandoer
 
 **Hurtigreferanse for alle kapitler**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../README.md)
@@ -17,11 +17,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduksjon
 
-Denne omfattende jukselappen gir en rask referanse til de mest brukte Azure Developer CLI-kommandoene, organisert etter kategori med praktiske eksempler. Perfekt for raske oppslag under utvikling, feilsøking og daglige operasjoner med azd-prosjekter.
+Dette omfattende oppslagsarket gir en rask referanse til de mest brukte Azure Developer CLI-kommandoene, organisert etter kategori med praktiske eksempler. Perfekt for raske oppslag under utvikling, feilsøking og daglige operasjoner med azd-prosjekter.
 
 ## Læringsmål
 
-Ved å bruke denne jukselappen vil du:
+Ved å bruke dette oppslagsarket vil du:
 - Ha umiddelbar tilgang til essensielle Azure Developer CLI-kommandoer og syntaks
 - Forstå kommandoorganisering etter funksjonelle kategorier og bruksområder
 - Referere til praktiske eksempler for vanlige utviklings- og distribusjonsscenarier
@@ -31,12 +31,12 @@ Ved å bruke denne jukselappen vil du:
 
 ## Læringsutbytte
 
-Med regelmessig bruk av denne jukselappen vil du kunne:
+Med regelmessig bruk av dette oppslagsarket vil du kunne:
 - Utføre azd-kommandoer med selvtillit uten å måtte referere til full dokumentasjon
-- Raskt løse vanlige problemer ved å bruke passende diagnostiske kommandoer
+- Raskt løse vanlige problemer ved hjelp av passende diagnostiske kommandoer
 - Effektivt administrere flere miljøer og distribusjonsscenarier
 - Bruke avanserte azd-funksjoner og konfigurasjonsalternativer etter behov
-- Feilsøke distribusjonsproblemer ved hjelp av systematiske kommando-sekvenser
+- Feilsøke distribusjonsproblemer ved hjelp av systematiske kommandoer
 - Optimalisere arbeidsflyter gjennom effektiv bruk av azd-snarveier og alternativer
 
 ## Kom i gang-kommandoer
@@ -70,7 +70,7 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Kjerne-distribusjonskommandoer
+## Kjernekommandoer for distribusjon
 
 ### Komplett distribusjonsarbeidsflyt
 ```bash
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Tjenestestyring
@@ -285,7 +296,7 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 Rask arbeidsflyt
+## 🎯 Hurtige arbeidsflyter
 
 ### Utviklingsarbeidsflyt
 ```bash
@@ -387,7 +398,7 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Utdataformat
+## 🎨 Utdataformatering
 
 ### JSON-utdata
 ```bash
@@ -410,7 +421,7 @@ azd service list --output table
 
 ## 🔧 Vanlige kommando-kombinasjoner
 
-### Helsesjekk-skript
+### Helsekontrollskript
 ```bash
 #!/bin/bash
 # Quick health check
@@ -419,12 +430,12 @@ azd env show
 azd logs --level error --since 10m
 ```
 
-### Distribusjonsvalidering
+### Validering av distribusjon
 ```bash
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tips**: Bokmerk denne jukselappen og bruk `Ctrl+F` for raskt å finne kommandoene du trenger!
+**Tips**: Bokmerk dette oppslagsarket og bruk `Ctrl+F` for raskt å finne kommandoene du trenger!
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

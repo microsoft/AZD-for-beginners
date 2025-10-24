@@ -1,19 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:41:06+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:43:27+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "id"
 }
 -->
-# AZD Dasar - Memahami Azure Developer CLI
+# Dasar-Dasar AZD - Memahami Azure Developer CLI
 
-# AZD Dasar - Konsep Inti dan Fundamental
+# Dasar-Dasar AZD - Konsep Inti dan Fundamental
 
 **Navigasi Bab:**
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Memulai Cepat
 - **⬅️ Sebelumnya**: [Ikhtisar Kursus](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Selanjutnya**: [Instalasi & Pengaturan](installation.md)
 - **🚀 Bab Berikutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
@@ -36,7 +36,7 @@ Pada akhir pelajaran ini, Anda akan:
 Setelah menyelesaikan pelajaran ini, Anda akan dapat:
 - Menjelaskan peran azd dalam alur kerja pengembangan cloud modern
 - Mengidentifikasi komponen struktur proyek azd
-- Mendeskripsikan bagaimana template, lingkungan, dan layanan bekerja bersama
+- Menjelaskan bagaimana template, lingkungan, dan layanan bekerja bersama
 - Memahami manfaat Infrastructure as Code dengan azd
 - Mengenali berbagai perintah azd dan tujuannya
 
@@ -69,7 +69,7 @@ Layanan adalah blok bangunan aplikasi Anda:
 - **Frontend** - Aplikasi web, SPA
 - **Backend** - API, mikroservis
 - **Database** - Solusi penyimpanan data
-- **Storage** - Penyimpanan file dan blob
+- **Penyimpanan** - Penyimpanan file dan blob
 
 ## Fitur Utama
 
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Perencanaan Infrastruktur Aman dengan Pratinjau
+Perintah `azd provision --preview` adalah terobosan untuk penerapan yang aman:
+- **Analisis dry-run** - Menunjukkan apa yang akan dibuat, diubah, atau dihapus
+- **Risiko nol** - Tidak ada perubahan nyata yang dilakukan pada lingkungan Azure Anda
+- **Kolaborasi tim** - Bagikan hasil pratinjau sebelum penerapan
+- **Estimasi biaya** - Pahami biaya sumber daya sebelum komitmen
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Manajemen Lingkungan
@@ -198,25 +216,25 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Memahami `azd down --force --purge`
-Perintah `azd down --force --purge` adalah cara yang ampuh untuk sepenuhnya menghentikan lingkungan azd Anda dan semua sumber daya terkait. Berikut adalah penjelasan tentang apa yang dilakukan setiap flag:
+Perintah `azd down --force --purge` adalah cara yang ampuh untuk sepenuhnya menghentikan lingkungan azd Anda dan semua sumber daya terkait. Berikut adalah rincian dari setiap flag:
 ```
 --force
 ```
 - Melewati prompt konfirmasi.
 - Berguna untuk otomatisasi atau skrip di mana input manual tidak memungkinkan.
-- Memastikan penghentian berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidaksesuaian.
+- Memastikan penghentian berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidakkonsistenan.
 
 ```
 --purge
 ```
 Menghapus **semua metadata terkait**, termasuk:
-Status lingkungan  
-Folder lokal `.azure`  
-Info penerapan yang di-cache  
+Status lingkungan
+Folder lokal `.azure`
+Info penerapan yang di-cache
 Mencegah azd "mengingat" penerapan sebelumnya, yang dapat menyebabkan masalah seperti grup sumber daya yang tidak cocok atau referensi registri yang usang.
 
 ### Mengapa menggunakan keduanya?
-Ketika Anda mengalami masalah dengan `azd up` karena status yang tertinggal atau penerapan parsial, kombinasi ini memastikan **awal yang bersih**.
+Ketika Anda mengalami masalah dengan `azd up` karena status yang tertinggal atau penerapan parsial, kombinasi ini memastikan **lembaran baru**.
 
 Ini sangat berguna setelah penghapusan sumber daya manual di portal Azure atau saat beralih template, lingkungan, atau konvensi penamaan grup sumber daya.
 
@@ -240,7 +258,7 @@ Memahami autentikasi sangat penting untuk penerapan azd yang sukses. Azure mengg
 
 ### Autentikasi Azure CLI (`az login`)
 
-Sebelum menggunakan azd, Anda perlu autentikasi dengan Azure. Metode yang paling umum adalah menggunakan Azure CLI:
+Sebelum menggunakan azd, Anda perlu mengautentikasi dengan Azure. Metode yang paling umum adalah menggunakan Azure CLI:
 
 ```bash
 # Interactive login (opens browser)
@@ -264,7 +282,7 @@ az account set --subscription <subscription-id>
 
 ### Alur Autentikasi
 1. **Login Interaktif**: Membuka browser default Anda untuk autentikasi
-2. **Device Code Flow**: Untuk lingkungan tanpa akses browser
+2. **Alur Kode Perangkat**: Untuk lingkungan tanpa akses browser
 3. **Service Principal**: Untuk otomatisasi dan skenario CI/CD
 4. **Managed Identity**: Untuk aplikasi yang di-host di Azure
 
@@ -296,7 +314,7 @@ export AZURE_TENANT_ID="<tenant-id>"
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
 Digunakan secara otomatis dalam:
 - Azure Kubernetes Service (AKS) dengan Workload Identity
-- GitHub Actions dengan OIDC federation
+- GitHub Actions dengan federasi OIDC
 - Skenario identitas federasi lainnya
 
 #### 3. Managed Identity
@@ -314,7 +332,7 @@ az account show --query "user.type" --output tsv
 
 #### 4. Integrasi Alat Pengembang
 - **Visual Studio**: Secara otomatis menggunakan akun yang masuk
-- **VS Code**: Menggunakan kredensial ekstensi Azure Account
+- **VS Code**: Menggunakan kredensial ekstensi Akun Azure
 - **Azure CLI**: Menggunakan kredensial `az login` (paling umum untuk pengembangan lokal)
 
 ### Pengaturan Autentikasi AZD
@@ -432,7 +450,7 @@ azd up
 ### Pertimbangan Keamanan
 
 1. **Penyimpanan Kredensial**: Jangan pernah menyimpan kredensial dalam kode sumber
-2. **Pembatasan Lingkup**: Gunakan prinsip hak istimewa minimum untuk service principal
+2. **Pembatasan Lingkup**: Gunakan prinsip hak istimewa paling sedikit untuk service principal
 3. **Rotasi Token**: Secara teratur rotasi rahasia service principal
 4. **Jejak Audit**: Pantau aktivitas autentikasi dan penerapan
 5. **Keamanan Jaringan**: Gunakan endpoint privat jika memungkinkan
@@ -489,7 +507,7 @@ azd init --template template1
 
 ### 2. Manfaatkan Template
 - Mulai dengan template yang ada
-- Sesuaikan untuk kebutuhan Anda
+- Sesuaikan dengan kebutuhan Anda
 - Buat template yang dapat digunakan kembali untuk organisasi Anda
 
 ### 3. Isolasi Lingkungan
@@ -502,7 +520,7 @@ azd init --template template1
 - Simpan konfigurasi dalam kontrol versi
 - Dokumentasikan pengaturan khusus lingkungan
 
-## Kemajuan Pembelajaran
+## Perkembangan Pembelajaran
 
 ### Pemula (Minggu 1-2)
 1. Instal azd dan autentikasi
@@ -542,10 +560,12 @@ azd init --template template1
 
 **Navigasi Bab:**
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat  
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Memulai Cepat  
 - **⬅️ Sebelumnya**: [Ikhtisar Kursus](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Selanjutnya**: [Instalasi & Pengaturan](installation.md)
 - **🚀 Bab Berikutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang timbul dari penggunaan terjemahan ini.

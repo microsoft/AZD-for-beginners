@@ -1,45 +1,45 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T13:34:40+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T18:16:24+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "my"
 }
 -->
-# အမိန့်များအတွက် Cheat Sheet - AZD Commands အရေးကြီးများ
+# Command Cheat Sheet - AZD အရေးကြီးသော Commands
 
-**အခန်းအားလုံးအတွက် အမြန်ရယူရန်**
-- **📚 သင်ခန်းစာ မူလစာမျက်နှာ**: [AZD For Beginners](../README.md)
-- **📖 အမြန်စတင်ရန်**: [အခန်း ၁: အခြေခံနှင့် အမြန်စတင်ရန်](../README.md#-chapter-1-foundation--quick-start)
+**အခန်းအားလုံးအတွက် အမြန်ကိုးကား**
+- **📚 သင်ခန်းစာအိမ်**: [AZD အခြေခံသင်ခန်းစာ](../README.md)
+- **📖 အမြန်စတင်ရန်**: [အခန်း ၁: အခြေခံနှင့် အမြန်စတင်ခြင်း](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI Commands**: [အခန်း ၂: AI-First Development](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 အဆင့်မြင့်**: [အခန်း ၄: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-## နိဒါန်း
+## မိတ်ဆက်
 
-ဒီ cheat sheet သည် Azure Developer CLI အမိန့်များအတွက် အရေးကြီးသော အမြန်ရယူနိုင်စရာကို အမျိုးအစားအလိုက် စီစဉ်ထားပြီး လက်တွေ့နမူနာများနှင့်အတူ ပေးထားသည်။ AZD project များတွင် ဖွံ့ဖြိုးတိုးတက်မှု၊ ပြဿနာဖြေရှင်းမှုနှင့် နေ့စဉ်လုပ်ငန်းစဉ်များအတွက် အမြန်ကြည့်ရှုရန် အထူးသင့်တော်သည်။
+ဒီ cheat sheet က Azure Developer CLI commands တွေကို အမျိုးအစားအလိုက် စီစဉ်ထားပြီး လက်တွေ့အသုံးပြုနိုင်တဲ့ ဥပမာတွေနဲ့ အတူ အမြန်ကိုးကားနိုင်အောင် ပြုလုပ်ပေးထားပါတယ်။ AZD project တွေကို ဖွံ့ဖြိုးတိုးတက်ရေး၊ ပြဿနာဖြေရှင်းခြင်းနဲ့ နေ့စဉ်လုပ်ငန်းစဉ်တွေမှာ အမြန်ကိုးကားဖို့ အကောင်းဆုံးဖြစ်ပါတယ်။
 
-## သင်ယူရည်မှန်းချက်များ
+## သင်ယူရမည့်ရည်ရွယ်ချက်များ
 
-ဒီ cheat sheet ကို အသုံးပြုခြင်းဖြင့် သင်သည်:
-- Azure Developer CLI အမိန့်များနှင့် syntax ကို အမြန်ရယူနိုင်မည်
-- အမိန့်များကို လုပ်ဆောင်မှုအမျိုးအစားနှင့် အသုံးပြုမှုအခြေအနေအလိုက် စီစဉ်ထားမှုကို နားလည်မည်
-- ဖွံ့ဖြိုးတိုးတက်မှုနှင့် deployment အခြေအနေများအတွက် လက်တွေ့နမူနာများကို ရည်ညွှန်းနိုင်မည်
-- ပြဿနာများကို အမြန်ဖြေရှင်းရန် troubleshooting အမိန့်များကို ရှာဖွေနိုင်မည်
-- အဆင့်မြင့် configuration နှင့် customization ရွေးချယ်မှုများကို ထိရောက်စွာ ရှာဖွေနိုင်မည်
-- ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှုနှင့် multi-environment workflow အမိန့်များကို ရှာဖွေနိုင်မည်
+ဒီ cheat sheet ကို အသုံးပြုခြင်းအားဖြင့် သင်သည်:
+- Azure Developer CLI commands နဲ့ syntax တွေကို အမြန်ကိုးကားနိုင်မည်
+- Command တွေကို လုပ်ဆောင်မှုအမျိုးအစားနဲ့ အသုံးပြုမှုအခြေအနေအလိုက် နားလည်နိုင်မည်
+- ဖွံ့ဖြိုးတိုးတက်ရေးနဲ့ deployment အခြေအနေများအတွက် လက်တွေ့ဥပမာများကို ကိုးကားနိုင်မည်
+- ပြဿနာများကို အမြန်ဖြေရှင်းနိုင်ဖို့ troubleshooting commands တွေကို ရှာဖွေနိုင်မည်
+- အဆင့်မြင့် configuration နဲ့ customization ရွေးချယ်မှုများကို အလွယ်တကူ ရှာဖွေနိုင်မည်
+- Environment management နဲ့ multi-environment workflow commands တွေကို ရှာဖွေနိုင်မည်
 
-## သင်ယူရလဒ်များ
+## သင်ယူပြီးရရှိမည့်ရလဒ်များ
 
-ဒီ cheat sheet ကို အမြဲရည်ညွှန်းခြင်းဖြင့် သင်သည်:
-- အပြည့်အစုံသော documentation ကို မကြည့်ဘဲ azd အမိန့်များကို ယုံကြည်စွာ အသုံးပြုနိုင်မည်
-- သင့်လျော်သော diagnostic အမိန့်များကို အသုံးပြု၍ ပုံမှန်ပြဿနာများကို အမြန်ဖြေရှင်းနိုင်မည်
-- ပတ်ဝန်းကျင်များစွာနှင့် deployment အခြေအနေများကို ထိရောက်စွာ စီမံနိုင်မည်
-- azd ၏ အဆင့်မြင့် features နှင့် configuration ရွေးချယ်မှုများကို လိုအပ်သလို အသုံးပြုနိုင်မည်
-- deployment ပြဿနာများကို စနစ်တကျ အမိန့်များဖြင့် troubleshooting ပြုလုပ်နိုင်မည်
-- azd ၏ shortcut များနှင့် ရွေးချယ်မှုများကို ထိရောက်စွာ အသုံးပြု၍ workflow များကို အကောင်းဆုံးလုပ်ဆောင်နိုင်မည်
+ဒီ cheat sheet ကို အကြိမ်ကြိမ်ကိုးကားသုံးခြင်းအားဖြင့် သင်သည်:
+- AZD commands တွေကို documentation အပြည့်အစုံကို မကိုးကားဘဲ ယုံကြည်စိတ်ချစွာ လုပ်ဆောင်နိုင်မည်
+- Diagnostic commands တွေကို အသုံးပြုပြီး အမြန်ပြဿနာများကို ဖြေရှင်းနိုင်မည်
+- အမျိုးမျိုးသော environment တွေကို ထိန်းချုပ်ခြင်းနဲ့ deployment အခြေအနေများကို ထိရောက်စွာ စီမံနိုင်မည်
+- AZD ရဲ့ အဆင့်မြင့် features နဲ့ configuration ရွေးချယ်မှုများကို လိုအပ်သလို အသုံးပြုနိုင်မည်
+- Deployment ပြဿနာများကို command အဆင့်ဆင့်ဖြင့် စနစ်တကျ troubleshooting လုပ်နိုင်မည်
+- AZD ရဲ့ shortcut နဲ့ options တွေကို ထိရောက်စွာ အသုံးပြုပြီး workflow တွေကို အကောင်းဆုံးဖြစ်အောင် ပြုလုပ်နိုင်မည်
 
-## စတင်ရန် အမိန့်များ
+## စတင်ရန် Commands
 
 ### Authentication
 ```bash
@@ -70,9 +70,9 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## အဓိက Deployment အမိန့်များ
+## Core Deployment Commands
 
-### အပြည့်အစုံ Deployment Workflow
+### Complete Deployment Workflow
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -87,19 +87,21 @@ azd up --environment production
 azd up --parameter location=westus2
 ```
 
-### Infrastructure သီးသန့်
+### Infrastructure Only
 ```bash
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
 ```
 
-### Application သီးသန့်
+### Application Only
 ```bash
 # Deploy application code
 azd deploy
@@ -112,7 +114,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Build နှင့် Package
+### Build and Package
 ```bash
 # Build applications
 azd package
@@ -121,9 +123,9 @@ azd package
 azd package --service api
 ```
 
-## 🌍 ပတ်ဝန်းကျင် စီမံခန့်ခွဲမှု
+## 🌍 Environment Management
 
-### ပတ်ဝန်းကျင် လုပ်ဆောင်မှုများ
+### Environment Operations
 ```bash
 # List all environments
 azd env list
@@ -142,7 +144,7 @@ azd env show
 azd env refresh
 ```
 
-### ပတ်ဝန်းကျင် Variables
+### Environment Variables
 ```bash
 # Set environment variable
 azd env set API_KEY "your-secret-key"
@@ -158,7 +160,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Configuration အမိန့်များ
+## ⚙️ Configuration Commands
 
 ### Global Configuration
 ```bash
@@ -188,7 +190,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 Monitoring နှင့် Logs
+## 📊 Monitoring and Logs
 
 ### Application Logs
 ```bash
@@ -218,7 +220,7 @@ azd monitor
 azd monitor --insights
 ```
 
-## 🛠️ ပြုပြင်ထိန်းသိမ်းမှု အမိန့်များ
+## 🛠️ Maintenance Commands
 
 ### Cleanup
 ```bash
@@ -247,9 +249,9 @@ azd version
 azd info
 ```
 
-## 🔧 အဆင့်မြင့် အမိန့်များ
+## 🔧 Advanced Commands
 
-### Pipeline နှင့် CI/CD
+### Pipeline and CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -261,7 +263,7 @@ azd pipeline config --provider azdo
 azd pipeline show
 ```
 
-### Infrastructure စီမံခန့်ခွဲမှု
+### Infrastructure Management
 ```bash
 # Import existing resources
 azd infra import
@@ -271,9 +273,18 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
-### Service စီမံခန့်ခွဲမှု
+### Service Management
 ```bash
 # List all services
 azd service list
@@ -285,9 +296,9 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 အမြန် Workflow များ
+## 🎯 Quick Workflows
 
-### ဖွံ့ဖြိုးတိုးတက်မှု Workflow
+### Development Workflow
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -342,9 +353,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Debugging အမိန့်များ
+## 🔍 Debugging Commands
 
-### Debug အချက်အလက်
+### Debug Information
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -372,9 +383,9 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 ဖိုင်နှင့် ဒိုင်ရက်ထရီ အမိန့်များ
+## 📁 File and Directory Commands
 
-### Project ဖွဲ့စည်းမှု
+### Project Structure
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -408,7 +419,7 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 ပုံမှန် Command တွဲများ
+## 🔧 Common Command Combinations
 
 ### Health Check Script
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -450,9 +461,9 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 ပတ်ဝန်းကျင် Variables
+## 📝 Environment Variables
 
-### ပုံမှန် ပတ်ဝန်းကျင် Variables
+### Common Environment Variables
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -469,9 +480,9 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 အရေးပေါ် အမိန့်များ
+## 🚨 Emergency Commands
 
-### အမြန် ပြုပြင်မှုများ
+### Quick Fixes
 ```bash
 # Reset authentication
 az account clear
@@ -487,7 +498,7 @@ azd service restart --all
 azd deploy --rollback
 ```
 
-### Recovery အမိန့်များ
+### Recovery Commands
 ```bash
 # Recover from failed deployment
 azd provision --continue-on-error
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Pro Tips
 
-### Workflow အမြန်လုပ်ဆောင်ရန် Aliases
+### Aliases for Faster Workflow
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -529,9 +540,9 @@ azd-status() {
 }
 ```
 
-## 📖 အကူအညီနှင့် Documentation
+## 📖 Help and Documentation
 
-### အကူအညီရယူခြင်း
+### Getting Help
 ```bash
 # General help
 azd --help
@@ -558,15 +569,15 @@ azd template show <template-name> --docs
 
 ---
 
-**အကြံပြုချက်**: ဒီ cheat sheet ကို Bookmark လုပ်ပြီး `Ctrl+F` ကို အသုံးပြု၍ သင့်လိုအမိန့်များကို အမြန်ရှာဖွေပါ။
+**အကြံပြုချက်**: ဒီ cheat sheet ကို bookmark လုပ်ပြီး `Ctrl+F` ကို အသုံးပြုပြီး သင်လိုအပ်တဲ့ commands တွေကို အမြန်ရှာဖွေပါ!
 
 ---
 
 **Navigation**
-- **ယခင် သင်ခန်းစာ**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
+- **ယခင်သင်ခန်းစာ**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
 - **နောက်သင်ခန်းစာ**: [Glossary](glossary.md)
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

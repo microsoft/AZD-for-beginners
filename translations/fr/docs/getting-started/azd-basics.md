@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:24:39+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T16:26:21+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "fr"
 }
 -->
-# AZD Basics - Comprendre Azure Developer CLI
+# Notions de base sur AZD - Comprendre Azure Developer CLI
 
-# AZD Basics - Concepts clés et fondamentaux
+# Notions de base sur AZD - Concepts clés et fondamentaux
 
 **Navigation du chapitre :**
 - **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
@@ -20,23 +20,23 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de commande puissant qui accélère votre transition du développement local au déploiement sur Azure. Vous découvrirez les concepts fondamentaux, les fonctionnalités principales et comment azd simplifie le déploiement d'applications cloud natives.
+Cette leçon vous présente Azure Developer CLI (azd), un outil en ligne de commande puissant qui accélère votre transition du développement local au déploiement sur Azure. Vous apprendrez les concepts fondamentaux, les fonctionnalités principales et comprendrez comment azd simplifie le déploiement d'applications cloud natives.
 
 ## Objectifs d'apprentissage
 
 À la fin de cette leçon, vous serez capable de :
 - Comprendre ce qu'est Azure Developer CLI et son objectif principal
-- Apprendre les concepts clés des modèles, environnements et services
+- Découvrir les concepts clés des modèles, des environnements et des services
 - Explorer les fonctionnalités principales, notamment le développement basé sur des modèles et l'infrastructure en tant que code
 - Comprendre la structure et le flux de travail d'un projet azd
 - Être prêt à installer et configurer azd pour votre environnement de développement
 
 ## Résultats d'apprentissage
 
-Après avoir terminé cette leçon, vous pourrez :
+Après avoir terminé cette leçon, vous serez capable de :
 - Expliquer le rôle d'azd dans les flux de travail modernes de développement cloud
 - Identifier les composants de la structure d'un projet azd
-- Décrire comment les modèles, environnements et services fonctionnent ensemble
+- Décrire comment les modèles, les environnements et les services fonctionnent ensemble
 - Comprendre les avantages de l'infrastructure en tant que code avec azd
 - Reconnaître les différentes commandes azd et leurs objectifs
 
@@ -56,8 +56,8 @@ Les modèles sont la base d'azd. Ils contiennent :
 ### Environnements
 Les environnements représentent différents cibles de déploiement :
 - **Développement** - Pour les tests et le développement
-- **Préproduction** - Environnement avant la production
-- **Production** - Environnement en direct
+- **Préproduction** - Environnement avant la mise en production
+- **Production** - Environnement de production en direct
 
 Chaque environnement conserve ses propres :
 - Groupe de ressources Azure
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Planification sécurisée de l'infrastructure avec Preview
+La commande `azd provision --preview` est révolutionnaire pour des déploiements sécurisés :
+- **Analyse en mode simulation** - Montre ce qui sera créé, modifié ou supprimé
+- **Aucun risque** - Aucun changement réel n'est effectué dans votre environnement Azure
+- **Collaboration en équipe** - Partagez les résultats de la simulation avant le déploiement
+- **Estimation des coûts** - Comprenez les coûts des ressources avant de vous engager
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Gestion des environnements
@@ -216,7 +234,7 @@ Informations de déploiement mises en cache
 Empêche azd de "se souvenir" des déploiements précédents, ce qui peut causer des problèmes comme des groupes de ressources non correspondants ou des références de registre obsolètes.
 
 ### Pourquoi utiliser les deux ?
-Lorsque vous rencontrez des problèmes avec `azd up` en raison d'un état persistant ou de déploiements partiels, cette combinaison garantit un **nouveau départ**.
+Lorsque vous êtes bloqué avec `azd up` en raison d'un état persistant ou de déploiements partiels, cette combinaison garantit un **nouveau départ**.
 
 C'est particulièrement utile après des suppressions manuelles de ressources dans le portail Azure ou lors du changement de modèles, d'environnements ou de conventions de nommage des groupes de ressources.
 
@@ -236,7 +254,7 @@ azd env list
 
 ## 🔐 Authentification et identifiants
 
-Comprendre l'authentification est essentiel pour des déploiements azd réussis. Azure utilise plusieurs méthodes d'authentification, et azd s'appuie sur la même chaîne d'identifiants utilisée par d'autres outils Azure.
+Comprendre l'authentification est crucial pour des déploiements azd réussis. Azure utilise plusieurs méthodes d'authentification, et azd s'appuie sur la même chaîne d'identifiants utilisée par d'autres outils Azure.
 
 ### Authentification Azure CLI (`az login`)
 
@@ -265,7 +283,7 @@ az account set --subscription <subscription-id>
 ### Flux d'authentification
 1. **Connexion interactive** : Ouvre votre navigateur par défaut pour l'authentification
 2. **Code de périphérique** : Pour les environnements sans accès au navigateur
-3. **Principal de service** : Pour l'automatisation et les scénarios CI/CD
+3. **Principal de service** : Pour les scénarios d'automatisation et CI/CD
 4. **Identité gérée** : Pour les applications hébergées sur Azure
 
 ### Chaîne DefaultAzureCredential
@@ -294,8 +312,8 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. Identité de charge de travail (Kubernetes/GitHub Actions)
-Utilisée automatiquement dans :
-- Azure Kubernetes Service (AKS) avec identité de charge de travail
+Utilisé automatiquement dans :
+- Azure Kubernetes Service (AKS) avec Workload Identity
 - GitHub Actions avec fédération OIDC
 - Autres scénarios d'identité fédérée
 
@@ -367,7 +385,7 @@ azd auth login
 ```
 
 #### Pour les environnements de production
-- Utilisez **Identité gérée** lorsque vous exécutez des ressources sur Azure
+- Utilisez **Identité gérée** lorsque vous exécutez des ressources Azure
 - Utilisez **Principal de service** pour les scénarios d'automatisation
 - Évitez de stocker les identifiants dans le code ou les fichiers de configuration
 - Utilisez **Azure Key Vault** pour les configurations sensibles
@@ -432,9 +450,9 @@ azd up
 ### Considérations de sécurité
 
 1. **Stockage des identifiants** : Ne stockez jamais les identifiants dans le code source
-2. **Limitation de la portée** : Appliquez le principe du moindre privilège pour les principaux de service
-3. **Rotation des jetons** : Faites tourner régulièrement les secrets des principaux de service
-4. **Piste d'audit** : Surveillez les activités d'authentification et de déploiement
+2. **Limitation de la portée** : Utilisez le principe du moindre privilège pour les principaux de service
+3. **Rotation des jetons** : Faites régulièrement tourner les secrets des principaux de service
+4. **Traçabilité** : Surveillez les activités d'authentification et de déploiement
 5. **Sécurité réseau** : Utilisez des points de terminaison privés lorsque cela est possible
 
 ### Dépannage de l'authentification
@@ -502,7 +520,7 @@ azd init --template template1
 - Conservez la configuration dans le contrôle de version
 - Documentez les paramètres spécifiques à l'environnement
 
-## Progression d'apprentissage
+## Progression de l'apprentissage
 
 ### Débutant (Semaines 1-2)
 1. Installez azd et authentifiez-vous
@@ -516,7 +534,7 @@ azd init --template template1
 3. Comprenez le code d'infrastructure
 4. Configurez des pipelines CI/CD
 
-### Avancé (Semaine 5+)
+### Avancé (5 semaines et plus)
 1. Créez des modèles personnalisés
 2. Modèles d'infrastructure avancés
 3. Déploiements multi-régions
@@ -526,7 +544,7 @@ azd init --template template1
 
 **📖 Continuez l'apprentissage du chapitre 1 :**
 - [Installation & Configuration](installation.md) - Installez et configurez azd
-- [Votre premier projet](first-project.md) - Tutoriel pratique
+- [Votre premier projet](first-project.md) - Tutoriel pratique complet
 - [Guide de configuration](configuration.md) - Options de configuration avancées
 
 **🎯 Prêt pour le chapitre suivant ?**
@@ -549,3 +567,5 @@ azd init --template template1
 
 ---
 
+**Avertissement** :  
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.

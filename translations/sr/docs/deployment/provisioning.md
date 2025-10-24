@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T11:43:14+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T18:09:14+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "sr"
 }
 -->
-# Провизионисање Azure ресурса са AZD
+# Provisioniranje Azure resursa pomoću AZD
 
-**Навигација кроз поглавља:**
-- **📚 Почетна страна курса**: [AZD за почетнике](../../README.md)
-- **📖 Тренутно поглавље**: Поглавље 4 - Инфраструктура као код и деплојмент
-- **⬅️ Претходно**: [Водич за деплојмент](deployment-guide.md)
-- **➡️ Следеће поглавље**: [Поглавље 5: Вишеструка AI решења](../../examples/retail-scenario.md)
-- **🔧 Повезано**: [Поглавље 6: Валидација пре деплојмента](../pre-deployment/capacity-planning.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica kursa**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod i implementacija
+- **⬅️ Prethodno**: [Vodič za implementaciju](deployment-guide.md)
+- **➡️ Sledeće poglavlje**: [Poglavlje 5: Rešenja za veštačku inteligenciju sa više agenata](../../examples/retail-scenario.md)
+- **🔧 Povezano**: [Poglavlje 6: Validacija pre implementacije](../pre-deployment/capacity-planning.md)
 
-## Увод
+## Uvod
 
-Овај свеобухватни водич покрива све што треба да знате о провизионисању и управљању Azure ресурсима користећи Azure Developer CLI. Научите како да примените шаблоне Инфраструктуре као кода (IaC), од основног креирања ресурса до напредних архитектура инфраструктуре за предузећа, користећи Bicep, ARM шаблоне, Terraform и Pulumi.
+Ovaj sveobuhvatni vodič pokriva sve što treba da znate o provisioniranju i upravljanju Azure resursima koristeći Azure Developer CLI. Naučite kako da primenite obrasce Infrastrukture kao koda (IaC), od osnovnog kreiranja resursa do naprednih arhitektura infrastrukture na nivou preduzeća koristeći Bicep, ARM šablone, Terraform i Pulumi.
 
-## Циљеви учења
+## Ciljevi učenja
 
-Завршетком овог водича, научићете:
-- Основне принципе Инфраструктуре као кода и провизионисање Azure ресурса
-- Разумевање различитих IaC провајдера које подржава Azure Developer CLI
-- Дизајн и имплементацију Bicep шаблона за уобичајене архитектуре апликација
-- Конфигурисање параметара ресурса, варијабли и подешавања специфичних за окружење
-- Примена напредних инфраструктурних шаблона, укључујући мрежу и безбедност
-- Управљање животним циклусом ресурса, ажурирањима и решавање зависности
+Završetkom ovog vodiča, naučićete:
+- Osnove principa Infrastrukture kao koda i provisioniranja Azure resursa
+- Razumevanje različitih IaC provajdera koje podržava Azure Developer CLI
+- Dizajniranje i implementacija Bicep šablona za uobičajene aplikacione arhitekture
+- Konfigurisanje parametara resursa, promenljivih i podešavanja specifičnih za okruženje
+- Implementacija naprednih infrastrukturnih obrazaca uključujući mreže i bezbednost
+- Upravljanje životnim ciklusom resursa, ažuriranjima i rešavanjem zavisnosti
 
-## Исходи учења
+## Ishodi učenja
 
-По завршетку, бићете у могућности да:
-- Дизајнирате и провизионишете Azure инфраструктуру користећи Bicep и ARM шаблоне
-- Конфигуришете сложене архитектуре са више услуга уз правилно управљање зависностима ресурса
-- Примените параметризоване шаблоне за различита окружења и конфигурације
-- Решавате проблеме са провизионисањем инфраструктуре и отклањате грешке у деплојменту
-- Примените принципе Azure Well-Architected Framework-а у дизајну инфраструктуре
-- Управљате ажурирањима инфраструктуре и имплементирате стратегије верзионисања инфраструктуре
+Po završetku, bićete sposobni da:
+- Dizajnirate i provisionirate Azure infrastrukturu koristeći Bicep i ARM šablone
+- Konfigurišete složene arhitekture sa više servisa sa odgovarajućim zavisnostima resursa
+- Implementirate parametarske šablone za različita okruženja i konfiguracije
+- Rešavate probleme sa provisioniranjem infrastrukture i neuspehe u implementaciji
+- Primenite principe Azure Well-Architected Framework-a na dizajn infrastrukture
+- Upravljate ažuriranjima infrastrukture i implementirate strategije verzionisanja infrastrukture
 
-## Преглед провизионисања инфраструктуре
+## Pregled provisioniranja infrastrukture
 
-Azure Developer CLI подржава више провајдера Инфраструктуре као кода (IaC):
-- **Bicep** (препоручено) - Доменски специфичан језик Azure-а
-- **ARM шаблони** - JSON-базирани Azure Resource Manager шаблони
-- **Terraform** - Алат за инфраструктуру у више облака
-- **Pulumi** - Модерна инфраструктура као код са програмским језицима
+Azure Developer CLI podržava više provajdera Infrastrukture kao koda (IaC):
+- **Bicep** (preporučeno) - Specifičan jezik za Azure
+- **ARM šabloni** - JSON-bazirani šabloni za Azure Resource Manager
+- **Terraform** - Alat za infrastrukturu na više oblaka
+- **Pulumi** - Moderni pristup infrastrukturi kao kodu koristeći programske jezike
 
-## Разумевање Azure ресурса
+## Razumevanje Azure resursa
 
-### Хијерархија ресурса
+### Hijerarhija resursa
 ```
 Azure Account
 └── Subscriptions
@@ -58,16 +58,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Уобичајене Azure услуге за апликације
-- **Рачунарство**: App Service, Container Apps, Functions, Virtual Machines
-- **Складиштење**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Мрежа**: Virtual Network, Application Gateway, CDN
-- **Безбедност**: Key Vault, Application Insights, Log Analytics
+### Uobičajeni Azure servisi za aplikacije
+- **Računanje**: App Service, Container Apps, Functions, Virtual Machines
+- **Skladištenje**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Mreže**: Virtual Network, Application Gateway, CDN
+- **Bezbednost**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep инфраструктурни шаблони
+## Bicep infrastrukturni šabloni
 
-### Основна структура Bicep шаблона
+### Osnovna struktura Bicep šablona
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -137,9 +137,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Напредни Bicep шаблони
+### Napredni obrasci za Bicep
 
-#### Модуларна инфраструктура
+#### Modularna infrastruktura
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -188,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Условно креирање ресурса
+#### Uslovno kreiranje resursa
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -209,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Провизионисање база података
+## 🗃️ Provisioniranje baza podataka
 
 ### Cosmos DB
 ```bicep
@@ -307,9 +307,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Управљање безбедношћу и тајнама
+## 🔒 Upravljanje bezbednošću i tajnama
 
-### Интеграција са Key Vault-ом
+### Integracija sa Key Vault-om
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -351,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Конфигурација управљаног идентитета
+### Konfiguracija upravljanog identiteta
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -377,9 +377,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Мрежа и повезивање
+## 🌍 Mreže i povezivanje
 
-### Конфигурација виртуелне мреже
+### Konfiguracija virtuelne mreže
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -442,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway са SSL-ом
+### Application Gateway sa SSL-om
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -505,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Праћење и посматрање
+## 📊 Praćenje i posmatranje
 
 ### Application Insights
 ```bicep
@@ -536,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Прилагођене метрике и упозорења
+### Prilagođene metrike i upozorenja
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -570,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Конфигурације специфичне за окружење
+## 🔧 Konfiguracije specifične za okruženje
 
-### Фајлови параметара за различита окружења
+### Datoteke sa parametrima za različita okruženja
 ```json
 // infra/main.parameters.dev.json
 {
@@ -626,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Условно провизионисање ресурса
+### Uslovno provisioniranje resursa
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -658,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Напредни шаблони провизионисања
+## 🚀 Napredni obrasci provisioniranja
 
-### Деплојмент у више региона
+### Implementacija u više regiona
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -728,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Тестирање инфраструктуре
+### Testiranje infrastrukture
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -764,21 +764,81 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Ажурирања и миграције ресурса
+## 🧪 Pregled infrastrukture i validacija (NOVO)
 
-### Безбедна ажурирања ресурса
+### Pregled promena infrastrukture pre implementacije
+
+Funkcija `azd provision --preview` omogućava vam da **simulirate provisioniranje infrastrukture** pre stvarnog implementiranja resursa. Slično je funkcijama `terraform plan` ili `bicep what-if`, pružajući vam **pregled promena** koje bi bile napravljene u vašem Azure okruženju.
+
+#### 🛠️ Šta radi
+- **Analizira vaše IaC šablone** (Bicep ili Terraform)
+- **Prikazuje pregled promena resursa**: dodavanja, brisanja, ažuriranja
+- **Ne primenjuje promene** — samo za čitanje i bezbedno za pokretanje
+
+#### � Upotreba
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Apply changes incrementally
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Ova komanda pomaže vam da:
+- **Validirate promene infrastrukture** pre nego što ih primenite
+- **Uočite greške u konfiguraciji** u ranoj fazi razvoja
+- **Sigurno sarađujete** u timskom okruženju
+- **Osigurate implementacije sa minimalnim privilegijama** bez iznenađenja
+
+Posebno je korisna kada:
+- Radite sa složenim okruženjima sa više servisa
+- Pravite promene u produkcijskoj infrastrukturi
+- Validirate modifikacije šablona pre odobrenja PR-a
+- Obučavate nove članove tima o infrastrukturnim obrascima
+
+### Primer izlaza pregleda
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Ažuriranja resursa i migracije
+
+### Bezbedna ažuriranja resursa
+```bash
+# Preview infrastructure changes first (RECOMMENDED)
+azd provision --preview
+
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
 azd provision --rollback
 ```
 
-### Миграције база података
+### Migracije baza podataka
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -807,9 +867,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Најбоље праксе
+## 🎯 Najbolje prakse
 
-### 1. Конвенције именовања ресурса
+### 1. Konvencije za imenovanje resursa
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -820,7 +880,7 @@ var naming = {
 }
 ```
 
-### 2. Стратегија означавања
+### 2. Strategija označavanja
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -833,7 +893,7 @@ var commonTags = {
 }
 ```
 
-### 3. Валидација параметара
+### 3. Validacija parametara
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -849,7 +909,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Организација излазних података
+### 4. Organizacija izlaza
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -864,27 +924,27 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Следећи кораци
+## Sledeći koraci
 
-- [Планирање пре деплојмента](../pre-deployment/capacity-planning.md) - Валидација доступности ресурса
-- [Уобичајени проблеми](../troubleshooting/common-issues.md) - Решавање проблема са инфраструктуром
-- [Водич за дебаговање](../troubleshooting/debugging.md) - Дебаговање проблема са провизионисањем
-- [Избор SKU-а](../pre-deployment/sku-selection.md) - Избор одговарајућих нивоа услуга
+- [Planiranje pre implementacije](../pre-deployment/capacity-planning.md) - Validacija dostupnosti resursa
+- [Uobičajeni problemi](../troubleshooting/common-issues.md) - Rešavanje problema sa infrastrukturom
+- [Vodič za otklanjanje grešaka](../troubleshooting/debugging.md) - Otklanjanje problema sa provisioniranjem
+- [Izbor SKU-a](../pre-deployment/sku-selection.md) - Izbor odgovarajućih nivoa usluga
 
-## Додатни ресурси
+## Dodatni resursi
 
-- [Документација за Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [ARM шаблони за Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure архитектонски центар](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Dokumentacija za Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Šabloni za Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Навигација**
-- **Претходна лекција**: [Водич за деплојмент](deployment-guide.md)
-- **Следећа лекција**: [Планирање капацитета](../pre-deployment/capacity-planning.md)
+**Navigacija**
+- **Prethodna lekcija**: [Vodič za implementaciju](deployment-guide.md)
+- **Sledeća lekcija**: [Planiranje kapaciteta](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Одрицање од одговорности**:  
-Овај документ је преведен коришћењем услуге за превођење помоћу вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, молимо вас да имате у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални превод од стране људи. Не преузимамо одговорност за било каква погрешна тумачења или неспоразуме који могу настати услед коришћења овог превода.
+Овај документ је преведен коришћењем услуге за превођење помоћу вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако настојимо да обезбедимо тачност, молимо вас да имате у виду да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на изворном језику треба сматрати меродавним извором. За критичне информације препоручује се професионални превод од стране људи. Не преузимамо одговорност за било каква погрешна тумачења или неспоразуме који могу настати услед коришћења овог превода.

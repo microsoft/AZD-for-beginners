@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T21:25:10+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:11:39+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "br"
 }
@@ -11,21 +11,21 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 4 - Infraestrutura como Código e Implantação
+- **📖 Capítulo Atual**: Capítulo 4 - Infraestrutura como Código & Implantação
 - **⬅️ Anterior**: [Guia de Implantação](deployment-guide.md)
 - **➡️ Próximo Capítulo**: [Capítulo 5: Soluções de IA Multi-Agente](../../examples/retail-scenario.md)
 - **🔧 Relacionado**: [Capítulo 6: Validação Pré-Implantação](../pre-deployment/capacity-planning.md)
 
 ## Introdução
 
-Este guia abrangente cobre tudo o que você precisa saber sobre provisionamento e gerenciamento de recursos do Azure usando o Azure Developer CLI. Aprenda a implementar padrões de Infraestrutura como Código (IaC), desde a criação básica de recursos até arquiteturas avançadas de infraestrutura empresarial usando Bicep, templates ARM, Terraform e Pulumi.
+Este guia abrangente cobre tudo o que você precisa saber sobre como provisionar e gerenciar recursos do Azure usando o Azure Developer CLI. Aprenda a implementar padrões de Infraestrutura como Código (IaC), desde a criação básica de recursos até arquiteturas avançadas de infraestrutura de nível empresarial, utilizando Bicep, templates ARM, Terraform e Pulumi.
 
 ## Objetivos de Aprendizado
 
 Ao concluir este guia, você será capaz de:
 - Dominar os princípios de Infraestrutura como Código e o provisionamento de recursos do Azure
 - Compreender os diversos provedores de IaC suportados pelo Azure Developer CLI
-- Projetar e implementar templates Bicep para arquiteturas comuns de aplicativos
+- Projetar e implementar templates Bicep para arquiteturas de aplicativos comuns
 - Configurar parâmetros de recursos, variáveis e configurações específicas de ambiente
 - Implementar padrões avançados de infraestrutura, incluindo redes e segurança
 - Gerenciar o ciclo de vida dos recursos, atualizações e resolução de dependências
@@ -34,11 +34,11 @@ Ao concluir este guia, você será capaz de:
 
 Ao final, você será capaz de:
 - Projetar e provisionar infraestrutura do Azure usando Bicep e templates ARM
-- Configurar arquiteturas complexas de múltiplos serviços com dependências adequadas de recursos
+- Configurar arquiteturas complexas de múltiplos serviços com dependências de recursos adequadas
 - Implementar templates parametrizados para múltiplos ambientes e configurações
 - Solucionar problemas de provisionamento de infraestrutura e resolver falhas de implantação
-- Aplicar os princípios do Framework Bem-Arquitetado do Azure ao design de infraestrutura
-- Gerenciar atualizações de infraestrutura e implementar estratégias de versionamento
+- Aplicar os princípios do Azure Well-Architected Framework ao design de infraestrutura
+- Gerenciar atualizações de infraestrutura e implementar estratégias de versionamento de infraestrutura
 
 ## Visão Geral do Provisionamento de Infraestrutura
 
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Atualizações e Migrações de Recursos
+## 🧪 Pré-visualização e Validação de Infraestrutura (NOVO)
+
+### Pré-visualizar Alterações na Infraestrutura Antes da Implantação
+
+O recurso `azd provision --preview` permite que você **simule o provisionamento de infraestrutura** antes de realmente implantar os recursos. É semelhante ao `terraform plan` ou `bicep what-if`, oferecendo uma **visualização de teste** das alterações que seriam feitas no seu ambiente Azure.
+
+#### 🛠️ O Que Ele Faz
+- **Analisa seus templates IaC** (Bicep ou Terraform)
+- **Mostra uma pré-visualização das alterações nos recursos**: adições, exclusões, atualizações
+- **Não aplica alterações** — é somente leitura e seguro de executar
+
+#### � Casos de Uso
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Este comando ajuda você a:
+- **Validar alterações na infraestrutura** antes de comprometer os recursos
+- **Detectar configurações incorretas cedo** no ciclo de desenvolvimento
+- **Colaborar com segurança** em ambientes de equipe
+- **Garantir implantações com privilégios mínimos** sem surpresas
+
+É especialmente útil quando:
+- Trabalhando com ambientes complexos de múltiplos serviços
+- Fazendo alterações na infraestrutura de produção
+- Validando modificações de templates antes da aprovação de PR
+- Treinando novos membros da equipe em padrões de infraestrutura
+
+### Exemplo de Saída de Pré-visualização
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Atualizações e Migrações de Recursos
 
 ### Atualizações Seguras de Recursos
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -849,7 +909,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organização de Outputs
+### 4. Organização de Saídas
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -876,7 +936,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Documentação do Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Templates do Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Centro de Arquitetura do Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Framework Bem-Arquitetado do Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

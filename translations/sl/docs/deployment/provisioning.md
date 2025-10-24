@@ -1,52 +1,52 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T13:03:07+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T18:13:39+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "sl"
 }
 -->
-# Ustvarjanje Azure virov z AZD
+# Uvajanje Azure virov z AZD
 
 **Navigacija po poglavjih:**
 - **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
 - **📖 Trenutno poglavje**: Poglavje 4 - Infrastruktura kot koda in uvajanje
 - **⬅️ Prejšnje**: [Vodnik za uvajanje](deployment-guide.md)
-- **➡️ Naslednje poglavje**: [Poglavje 5: Večagentne AI rešitve](../../examples/retail-scenario.md)
-- **🔧 Povezano**: [Poglavje 6: Preverjanje pred uvajanjem](../pre-deployment/capacity-planning.md)
+- **➡️ Naslednje poglavje**: [Poglavje 5: Rešitve z več agenti AI](../../examples/retail-scenario.md)
+- **🔧 Povezano**: [Poglavje 6: Validacija pred uvajanjem](../pre-deployment/capacity-planning.md)
 
 ## Uvod
 
-Ta obsežen vodnik zajema vse, kar morate vedeti o ustvarjanju in upravljanju Azure virov z uporabo Azure Developer CLI. Naučili se boste uporabljati vzorce infrastrukture kot kode (IaC), od osnovnega ustvarjanja virov do naprednih arhitektur infrastrukture na ravni podjetja z uporabo Bicep, ARM predlog, Terraform in Pulumi.
+Ta obsežen vodnik zajema vse, kar morate vedeti o uvajanju in upravljanju Azure virov z uporabo Azure Developer CLI. Naučite se implementirati vzorce infrastrukture kot kode (IaC), od osnovne ustvaritve virov do naprednih infrastrukturnih arhitektur na ravni podjetja z uporabo Bicep, ARM predlog, Terraform in Pulumi.
 
 ## Cilji učenja
 
 Z dokončanjem tega vodnika boste:
-- Obvladali načela infrastrukture kot kode in ustvarjanje Azure virov
+- Obvladali principe infrastrukture kot kode in uvajanje Azure virov
 - Razumeli različne ponudnike IaC, ki jih podpira Azure Developer CLI
-- Oblikovali in implementirali Bicep predloge za običajne arhitekture aplikacij
-- Konfigurirali parametre virov, spremenljivke in nastavitve za specifična okolja
-- Uvedli napredne vzorce infrastrukture, vključno z omrežjem in varnostjo
+- Oblikovali in implementirali Bicep predloge za običajne aplikacijske arhitekture
+- Konfigurirali parametre virov, spremenljivke in nastavitve, specifične za okolje
+- Implementirali napredne infrastrukturne vzorce, vključno z omrežjem in varnostjo
 - Upravljali življenjski cikel virov, posodobitve in reševanje odvisnosti
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
-- Oblikovati in ustvariti Azure infrastrukturo z uporabo Bicep in ARM predlog
-- Konfigurirati kompleksne arhitekture z več storitvami in ustreznimi odvisnostmi virov
-- Implementirati parametizirane predloge za več okolij in konfiguracij
-- Odpravljati težave pri ustvarjanju infrastrukture in reševati napake pri uvajanju
-- Uporabiti načela Azure Well-Architected Framework pri oblikovanju infrastrukture
+- Oblikovati in uvajati Azure infrastrukturo z uporabo Bicep in ARM predlog
+- Konfigurirati kompleksne arhitekture z več storitvami z ustreznimi odvisnostmi virov
+- Implementirati predloge s parametri za več okolij in konfiguracij
+- Odpravljati težave pri uvajanju infrastrukture in reševati napake pri uvajanju
+- Uporabiti principe Azure Well-Architected Framework pri oblikovanju infrastrukture
 - Upravljati posodobitve infrastrukture in implementirati strategije različic infrastrukture
 
-## Pregled ustvarjanja infrastrukture
+## Pregled uvajanja infrastrukture
 
 Azure Developer CLI podpira več ponudnikov infrastrukture kot kode (IaC):
-- **Bicep** (priporočeno) - Domensko specifičen jezik Azure
-- **ARM predloge** - JSON predloge za Azure Resource Manager
-- **Terraform** - Orodje za večoblačno infrastrukturo
-- **Pulumi** - Sodobna infrastruktura kot koda z uporabo programskih jezikov
+- **Bicep** (priporočeno) - domensko specifičen jezik Azure
+- **ARM predloge** - predloge Azure Resource Manager, ki temeljijo na JSON
+- **Terraform** - orodje za infrastrukturo v več oblakih
+- **Pulumi** - sodobna infrastruktura kot koda z uporabo programskih jezikov
 
 ## Razumevanje Azure virov
 
@@ -65,7 +65,7 @@ Azure Account
 - **Varnost**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep predloge za infrastrukturo
+## Bicep infrastrukturne predloge
 
 ### Osnovna struktura Bicep predloge
 ```bicep
@@ -209,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Ustvarjanje podatkovnih baz
+## 🗃️ Uvajanje podatkovnih baz
 
 ### Cosmos DB
 ```bicep
@@ -309,7 +309,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 Upravljanje varnosti in skrivnosti
 
-### Integracija z Key Vault
+### Integracija Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -570,7 +570,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Konfiguracije specifične za okolje
+## 🔧 Konfiguracije, specifične za okolje
 
 ### Datoteke s parametri za različna okolja
 ```json
@@ -626,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Pogojno ustvarjanje virov
+### Pogojno uvajanje virov
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -658,7 +658,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Napredni vzorci ustvarjanja
+## 🚀 Napredni vzorci uvajanja
 
 ### Uvajanje v več regijah
 ```bicep
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Posodobitve in migracije virov
+## 🧪 Predogled infrastrukture in validacija (NOVO)
+
+### Predogled sprememb infrastrukture pred uvajanjem
+
+Funkcija `azd provision --preview` vam omogoča **simulacijo uvajanja infrastrukture** pred dejanskim uvajanjem virov. Podobno kot `terraform plan` ali `bicep what-if` vam ponuja **suhi pregled** sprememb, ki bi bile izvedene v vašem Azure okolju.
+
+#### 🛠️ Kaj počne
+- **Analizira vaše IaC predloge** (Bicep ali Terraform)
+- **Prikaže predogled sprememb virov**: dodajanja, brisanja, posodobitve
+- **Ne izvaja sprememb** — je samo za branje in varno za uporabo
+
+#### � Primeri uporabe
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Ta ukaz vam pomaga:
+- **Validirati spremembe infrastrukture** pred uvajanjem virov
+- **Zgodaj odkriti napačne konfiguracije** v razvojnem ciklu
+- **Varno sodelovati** v timskih okoljih
+- **Zagotoviti uvajanje z najmanj privilegiji** brez presenečenj
+
+Še posebej je uporaben, ko:
+- Delate z zapletenimi okolji z več storitvami
+- Izvajate spremembe v produkcijski infrastrukturi
+- Validirate spremembe predlog pred odobritvijo PR
+- Usposabljate nove člane ekipe o infrastrukturnih vzorcih
+
+### Primer izhoda predogleda
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Posodobitve virov in migracije
 
 ### Varne posodobitve virov
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -849,7 +909,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organizacija izhodnih podatkov
+### 4. Organizacija izhodov
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -866,17 +926,17 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Naslednji koraki
 
-- [Načrtovanje pred uvajanjem](../pre-deployment/capacity-planning.md) - Preverite razpoložljivost virov
-- [Pogoste težave](../troubleshooting/common-issues.md) - Odpravite težave z infrastrukturo
-- [Vodnik za odpravljanje napak](../troubleshooting/debugging.md) - Odpravite težave pri ustvarjanju
-- [Izbira SKU](../pre-deployment/sku-selection.md) - Izberite ustrezne nivoje storitev
+- [Načrtovanje pred uvajanjem](../pre-deployment/capacity-planning.md) - Validacija razpoložljivosti virov
+- [Pogoste težave](../troubleshooting/common-issues.md) - Odpravljanje težav z infrastrukturo
+- [Vodnik za odpravljanje napak](../troubleshooting/debugging.md) - Odpravljanje težav pri uvajanju
+- [Izbira SKU](../pre-deployment/sku-selection.md) - Izbira ustreznih nivojev storitev
 
 ## Dodatni viri
 
 - [Dokumentacija Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Predloge Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Center za arhitekturo Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Okvir Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje AI [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.

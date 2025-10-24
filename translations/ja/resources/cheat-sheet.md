@@ -1,43 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T14:25:48+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:48:36+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "ja"
 }
 -->
-# コマンドチートシート - AZDの基本コマンド
+# コマンドチートシート - 必須AZDコマンド
 
 **全章のクイックリファレンス**
 - **📚 コースホーム**: [AZD初心者向け](../README.md)
 - **📖 クイックスタート**: [第1章: 基礎とクイックスタート](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AIコマンド**: [第2章: AIファースト開発](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 AIコマンド**: [第2章: AI優先の開発](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 上級編**: [第4章: インフラストラクチャコードとして](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## はじめに
 
-この包括的なチートシートは、最もよく使われるAzure Developer CLIコマンドをカテゴリ別に整理し、実用的な例とともに提供します。開発中、トラブルシューティング、日常のAZDプロジェクト操作時に素早く参照できる便利なリソースです。
+この包括的なチートシートは、最もよく使用されるAzure Developer CLIコマンドをカテゴリ別に整理し、実用的な例とともに提供します。開発、トラブルシューティング、日常のAZDプロジェクト運用中のクイックリファレンスとして最適です。
 
 ## 学習目標
 
 このチートシートを使用することで以下を達成できます:
-- 必要なAzure Developer CLIコマンドと構文に即座にアクセス
+- 必須のAzure Developer CLIコマンドとその構文に即座にアクセス
 - 機能カテゴリと使用例に基づいたコマンドの整理を理解
 - 一般的な開発およびデプロイシナリオの実用例を参照
-- 問題解決のためのトラブルシューティングコマンドを見つける
-- 高度な設定とカスタマイズオプションを効率的に探す
-- 環境管理およびマルチ環境ワークフローコマンドを特定
+- 問題解決のためのトラブルシューティングコマンドにアクセス
+- 高度な設定やカスタマイズオプションを効率的に見つける
+- 環境管理やマルチ環境ワークフローのコマンドを特定
 
 ## 学習成果
 
 このチートシートを定期的に参照することで以下が可能になります:
-- 完全なドキュメントを参照せずにAZDコマンドを自信を持って実行
+- 完全なドキュメントを参照せずに自信を持ってazdコマンドを実行
 - 適切な診断コマンドを使用して一般的な問題を迅速に解決
-- 複数の環境とデプロイシナリオを効率的に管理
-- 必要に応じて高度なAZD機能と設定オプションを適用
+- 複数の環境やデプロイシナリオを効率的に管理
+- 必要に応じて高度なazd機能や設定オプションを適用
 - システマティックなコマンドシーケンスを使用してデプロイ問題をトラブルシュート
-- AZDのショートカットやオプションを効果的に活用してワークフローを最適化
+- azdのショートカットやオプションを効果的に活用してワークフローを最適化
 
 ## 初期設定コマンド
 
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -235,7 +237,7 @@ azd down --purge
 azd down --force --purge
 ```
 
-### アップデート
+### 更新
 ```bash
 # Check for azd updates
 azd version --check-for-updates
@@ -261,7 +263,7 @@ azd pipeline config --provider azdo
 azd pipeline show
 ```
 
-### インフラストラクチャ管理
+### インフラ管理
 ```bash
 # Import existing resources
 azd infra import
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### サービス管理
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -487,7 +498,7 @@ azd service restart --all
 azd deploy --rollback
 ```
 
-### リカバリーコマンド
+### 復旧コマンド
 ```bash
 # Recover from failed deployment
 azd provision --continue-on-error
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**ヒント**: このチートシートをブックマークし、`Ctrl+F`を使って必要なコマンドを素早く見つけましょう！
+**ヒント**: このチートシートをブックマークし、`Ctrl+F`を使用して必要なコマンドをすばやく見つけましょう！
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は一切の責任を負いません。
+この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤認について、当社は一切の責任を負いません。

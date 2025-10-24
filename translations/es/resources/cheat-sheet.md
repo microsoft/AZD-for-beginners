@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T15:12:14+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:27:27+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "es"
 }
@@ -12,7 +12,7 @@ CO_OP_TRANSLATOR_METADATA:
 **Referencia Rápida para Todos los Capítulos**
 - **📚 Inicio del Curso**: [AZD Para Principiantes](../README.md)
 - **📖 Inicio Rápido**: [Capítulo 1: Fundamentos e Inicio Rápido](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Comandos de IA**: [Capítulo 2: Desarrollo con IA](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 Comandos de IA**: [Capítulo 2: Desarrollo con IA como Prioridad](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avanzado**: [Capítulo 4: Infraestructura como Código](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introducción
@@ -25,18 +25,18 @@ Al usar esta hoja de referencia, podrás:
 - Tener acceso instantáneo a los comandos esenciales de Azure Developer CLI y su sintaxis
 - Comprender la organización de los comandos por categorías funcionales y casos de uso
 - Consultar ejemplos prácticos para escenarios comunes de desarrollo y despliegue
-- Acceder a comandos de resolución de problemas para solucionar inconvenientes rápidamente
+- Acceder a comandos de resolución de problemas para una solución rápida de inconvenientes
 - Encontrar opciones avanzadas de configuración y personalización de manera eficiente
-- Ubicar comandos para la gestión de entornos y flujos de trabajo multi-entorno
+- Localizar comandos de gestión de entornos y flujos de trabajo multi-entorno
 
 ## Resultados de Aprendizaje
 
 Con el uso regular de esta hoja de referencia, serás capaz de:
 - Ejecutar comandos azd con confianza sin necesidad de consultar la documentación completa
-- Resolver problemas comunes rápidamente utilizando comandos de diagnóstico apropiados
+- Resolver problemas comunes rápidamente utilizando los comandos de diagnóstico adecuados
 - Gestionar múltiples entornos y escenarios de despliegue de manera eficiente
 - Aplicar características avanzadas de azd y opciones de configuración según sea necesario
-- Solucionar problemas de despliegue utilizando secuencias sistemáticas de comandos
+- Solucionar problemas de despliegue utilizando secuencias de comandos sistemáticas
 - Optimizar flujos de trabajo mediante el uso efectivo de atajos y opciones de azd
 
 ## Comandos para Comenzar
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Gestión de Servicios
@@ -387,7 +398,7 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Formateo de Salida
+## 🎨 Formato de Salida
 
 ### Salida en JSON
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.

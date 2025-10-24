@@ -1,49 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T21:42:03+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:13:08+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "it"
 }
 -->
-# Controlli Preliminari per le Distribuzioni AZD
+# Controlli Pre-Deployment per le Implementazioni AZD
 
 **Navigazione Capitolo:**
-- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
-- **📖 Capitolo Attuale**: Capitolo 6 - Validazione e Pianificazione Pre-Distribuzione
+- **📚 Corso Principale**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo Attuale**: Capitolo 6 - Validazione e Pianificazione Pre-Deployment
 - **⬅️ Precedente**: [Selezione SKU](sku-selection.md)
 - **➡️ Capitolo Successivo**: [Capitolo 7: Risoluzione dei Problemi](../troubleshooting/common-issues.md)
-- **🔧 Correlato**: [Capitolo 4: Guida alla Distribuzione](../deployment/deployment-guide.md)
+- **🔧 Correlato**: [Capitolo 4: Guida all'Implementazione](../deployment/deployment-guide.md)
 
 ## Introduzione
 
-Questa guida completa fornisce script e procedure di validazione pre-distribuzione per garantire il successo delle distribuzioni con Azure Developer CLI prima che inizino. Impara a implementare controlli automatizzati per autenticazione, disponibilità delle risorse, quote, conformità alla sicurezza e requisiti di prestazioni per prevenire fallimenti e ottimizzare i tassi di successo delle distribuzioni.
+Questa guida completa fornisce script e procedure di validazione pre-deployment per garantire implementazioni di successo con Azure Developer CLI prima che inizino. Impara a implementare controlli automatizzati per autenticazione, disponibilità delle risorse, quote, conformità alla sicurezza e requisiti di prestazioni per prevenire fallimenti e ottimizzare i tassi di successo delle implementazioni.
 
 ## Obiettivi di Apprendimento
 
 Completando questa guida, sarai in grado di:
-- Padroneggiare tecniche e script di validazione automatizzata pre-distribuzione
+- Padroneggiare tecniche e script di validazione automatizzata pre-deployment
 - Comprendere strategie di controllo complete per autenticazione, permessi e quote
 - Implementare procedure di validazione per disponibilità e capacità delle risorse
 - Configurare controlli di sicurezza e conformità per le politiche organizzative
-- Progettare flussi di lavoro per stime dei costi e validazione del budget
-- Creare automazioni personalizzate per controlli preliminari nei pipeline CI/CD
+- Progettare flussi di lavoro per la stima dei costi e la validazione del budget
+- Creare automazioni personalizzate per i controlli pre-deployment nei pipeline CI/CD
 
 ## Risultati di Apprendimento
 
 Al termine, sarai in grado di:
-- Creare ed eseguire script di validazione preliminare completi
-- Progettare flussi di lavoro automatizzati per diversi scenari di distribuzione
+- Creare ed eseguire script di validazione pre-deployment completi
+- Progettare flussi di lavoro di controllo automatizzati per diversi scenari di implementazione
 - Implementare procedure e politiche di validazione specifiche per l'ambiente
-- Configurare monitoraggio proattivo e avvisi per la prontezza alla distribuzione
-- Risolvere problemi pre-distribuzione e implementare azioni correttive
-- Integrare controlli preliminari nei pipeline DevOps e nei flussi di lavoro automatizzati
+- Configurare monitoraggio proattivo e avvisi per la prontezza all'implementazione
+- Risolvere problemi pre-deployment e implementare azioni correttive
+- Integrare controlli pre-deployment nei pipeline DevOps e nei flussi di lavoro automatizzati
 
 ## Indice
 
 - [Panoramica](../../../../docs/pre-deployment)
-- [Script Preliminare Automatizzato](../../../../docs/pre-deployment)
+- [Script Pre-deployment Automatizzati](../../../../docs/pre-deployment)
 - [Checklist di Validazione Manuale](../../../../docs/pre-deployment)
 - [Validazione dell'Ambiente](../../../../docs/pre-deployment)
 - [Validazione delle Risorse](../../../../docs/pre-deployment)
@@ -55,28 +55,28 @@ Al termine, sarai in grado di:
 
 ## Panoramica
 
-I controlli preliminari sono validazioni essenziali eseguite prima della distribuzione per garantire:
+I controlli pre-deployment sono validazioni essenziali eseguite prima dell'implementazione per garantire:
 
-- **Disponibilità delle risorse** e quote nelle regioni di destinazione
+- **Disponibilità delle risorse** e quote nelle regioni target
 - **Autenticazione e permessi** configurati correttamente
 - **Validità dei template** e correttezza dei parametri
 - **Connettività di rete** e dipendenze
 - **Conformità alla sicurezza** con le politiche organizzative
 - **Stima dei costi** entro i limiti di budget
 
-### Quando Eseguire i Controlli Preliminari
+### Quando Eseguire i Controlli Pre-deployment
 
-- **Prima della prima distribuzione** in un nuovo ambiente
+- **Prima della prima implementazione** in un nuovo ambiente
 - **Dopo modifiche significative ai template**
-- **Prima delle distribuzioni in produzione**
+- **Prima delle implementazioni in produzione**
 - **Quando si cambiano regioni Azure**
 - **Come parte dei pipeline CI/CD**
 
 ---
 
-## Script Preliminare Automatizzato
+## Script Pre-deployment Automatizzati
 
-### Controllo Preliminare con PowerShell
+### Controllo Pre-deployment con PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Controllo Preliminare con Bash
+### Controllo Pre-deployment con Bash
 
 ```bash
 #!/bin/bash
@@ -792,21 +807,21 @@ main "$@"
 
 ## Checklist di Validazione Manuale
 
-### Checklist Pre-Distribuzione
+### Checklist Pre-Deployment
 
-Stampa questa checklist e verifica ogni voce prima della distribuzione:
+Stampa questa checklist e verifica ogni voce prima dell'implementazione:
 
 #### ✅ Configurazione dell'Ambiente
 - [ ] AZD CLI installato e aggiornato all'ultima versione
 - [ ] Azure CLI installato e autenticato
 - [ ] Sottoscrizione Azure corretta selezionata
 - [ ] Nome dell'ambiente unico e conforme alle convenzioni di denominazione
-- [ ] Gruppo di risorse di destinazione identificato o pronto per essere creato
+- [ ] Gruppo di risorse target identificato o pronto per essere creato
 
 #### ✅ Autenticazione e Permessi
 - [ ] Autenticazione riuscita con `azd auth login`
-- [ ] L'utente ha il ruolo di Collaboratore sulla sottoscrizione/gruppo di risorse di destinazione
-- [ ] Principale di servizio configurato per CI/CD (se applicabile)
+- [ ] L'utente ha il ruolo di Contributor sulla sottoscrizione/gruppo di risorse target
+- [ ] Service principal configurato per CI/CD (se applicabile)
 - [ ] Nessun certificato o credenziale scaduto
 
 #### ✅ Validazione dei Template
@@ -814,26 +829,27 @@ Stampa questa checklist e verifica ogni voce prima della distribuzione:
 - [ ] Tutti i servizi definiti in azure.yaml hanno il corrispondente codice sorgente
 - [ ] I template Bicep nella directory `infra/` sono presenti
 - [ ] `main.bicep` si compila senza errori (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Anteprima dell'infrastruttura eseguita con successo (`azd provision --preview`)
 - [ ] Tutti i parametri richiesti hanno valori predefiniti o saranno forniti
 - [ ] Nessun segreto hardcoded nei template
 
 #### ✅ Pianificazione delle Risorse
-- [ ] Regione Azure di destinazione selezionata e validata
-- [ ] Servizi Azure richiesti disponibili nella regione di destinazione
+- [ ] Regione Azure target selezionata e validata
+- [ ] Servizi Azure richiesti disponibili nella regione target
 - [ ] Quote sufficienti disponibili per le risorse pianificate
 - [ ] Conflitti di denominazione delle risorse verificati
 - [ ] Dipendenze tra risorse comprese
 
 #### ✅ Rete e Sicurezza
-- [ ] Connettività di rete con gli endpoint Azure verificata
-- [ ] Impostazioni firewall/proxy configurate se necessario
+- [ ] Connettività di rete agli endpoint Azure verificata
+- [ ] Configurazioni firewall/proxy impostate se necessario
 - [ ] Key Vault configurato per la gestione dei segreti
 - [ ] Identità gestite utilizzate ove possibile
 - [ ] Enforcement HTTPS abilitato per le applicazioni web
 
 #### ✅ Gestione dei Costi
 - [ ] Stime dei costi calcolate utilizzando il Calcolatore Prezzi Azure
-- [ ] Avvisi di budget configurati se richiesto
+- [ ] Avvisi di budget configurati se necessario
 - [ ] SKU appropriati selezionati per il tipo di ambiente
 - [ ] Capacità riservata considerata per carichi di lavoro in produzione
 
@@ -844,10 +860,10 @@ Stampa questa checklist e verifica ogni voce prima della distribuzione:
 - [ ] Endpoint di controllo della salute implementati nelle applicazioni
 
 #### ✅ Backup e Recupero
-- [ ] Strategia di backup definita per le risorse di dati
+- [ ] Strategia di backup definita per le risorse dati
 - [ ] Obiettivi di tempo di recupero (RTO) documentati
 - [ ] Obiettivi di punto di recupero (RPO) documentati
-- [ ] Piano di recupero da disastri in produzione definito
+- [ ] Piano di recupero da disastri in atto per la produzione
 
 ---
 
@@ -1285,7 +1301,7 @@ steps:
 
 ## Riepilogo delle Best Practices
 
-### ✅ Best Practices per i Controlli Preliminari
+### ✅ Best Practices per i Controlli Pre-deployment
 
 1. **Automatizza Dove Possibile**
    - Integra i controlli nei pipeline CI/CD
@@ -1303,28 +1319,28 @@ steps:
    - Validazione dei template e sintassi
    - Requisiti di sicurezza e conformità
 
-4. **Reportistica Chiara**
-   - Indicatori di stato con codifica a colori
+4. **Report Chiaramente Comprensibili**
+   - Indicatori di stato colorati
    - Messaggi di errore dettagliati con passaggi di risoluzione
-   - Report di sintesi per una valutazione rapida
+   - Report riassuntivi per una valutazione rapida
 
 5. **Interrompi Subito**
-   - Blocca la distribuzione se i controlli critici falliscono
+   - Blocca l'implementazione se i controlli critici falliscono
    - Fornisci indicazioni chiare per la risoluzione
    - Abilita la facile riesecuzione dei controlli
 
-### Errori Comuni nei Controlli Preliminari
+### Errori Comuni nei Controlli Pre-deployment
 
-1. **Saltare la validazione** per distribuzioni "veloci"
-2. **Permessi insufficienti** verificati prima della distribuzione
-3. **Ignorare i limiti di quota** fino al fallimento della distribuzione
+1. **Saltare la validazione** per implementazioni "veloci"
+2. **Controlli insufficienti sui permessi** prima dell'implementazione
+3. **Ignorare i limiti di quota** fino al fallimento dell'implementazione
 4. **Non validare i template** nei pipeline CI/CD
 5. **Mancanza di validazione della sicurezza** per ambienti di produzione
-6. **Stime dei costi inadeguate** che portano a sorprese di budget
+6. **Stima dei costi inadeguata** che porta a sorprese di budget
 
 ---
 
-**Suggerimento**: Esegui i controlli preliminari come un job separato nel tuo pipeline CI/CD prima del job di distribuzione effettivo. Questo ti permette di individuare i problemi in anticipo e fornisce un feedback più rapido agli sviluppatori.
+**Suggerimento Pro**: Esegui i controlli pre-deployment come un job separato nel tuo pipeline CI/CD prima del job di implementazione effettivo. Questo ti permette di individuare i problemi in anticipo e fornisce un feedback più rapido agli sviluppatori.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale umana. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

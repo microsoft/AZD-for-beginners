@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:38:02+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:30:14+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "da"
 }
 -->
 # AZD Grundlæggende - Forstå Azure Developer CLI
 
-# AZD Grundlæggende - Kernekoncepter og Fundament
+# AZD Grundlæggende - Kernekoncepter og fundament
 
 **Kapitelnavigation:**
 - **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
@@ -20,16 +20,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduktion
 
-Denne lektion introducerer dig til Azure Developer CLI (azd), et kraftfuldt kommandolinjeværktøj, der accelererer din rejse fra lokal udvikling til Azure-implementering. Du vil lære de grundlæggende koncepter, kernefunktioner og forstå, hvordan azd forenkler implementeringen af cloud-native applikationer.
+Denne lektion introducerer dig til Azure Developer CLI (azd), et kraftfuldt kommandolinjeværktøj, der fremskynder din rejse fra lokal udvikling til Azure-implementering. Du vil lære de grundlæggende koncepter, kernefunktioner og forstå, hvordan azd forenkler implementeringen af cloud-native applikationer.
 
 ## Læringsmål
 
-Ved slutningen af denne lektion vil du:
+Ved afslutningen af denne lektion vil du:
 - Forstå, hvad Azure Developer CLI er, og dets primære formål
-- Lære kernekoncepterne om skabeloner, miljøer og tjenester
+- Lære de grundlæggende koncepter om skabeloner, miljøer og tjenester
 - Udforske nøglefunktioner, herunder skabelonbaseret udvikling og Infrastructure as Code
 - Forstå azd-projektstrukturen og arbejdsgangen
-- Være klar til at installere og konfigurere azd til din udviklingsmiljø
+- Være klar til at installere og konfigurere azd til dit udviklingsmiljø
 
 ## Læringsresultater
 
@@ -42,14 +42,14 @@ Efter at have gennemført denne lektion vil du kunne:
 
 ## Hvad er Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) er et kommandolinjeværktøj designet til at accelerere din rejse fra lokal udvikling til Azure-implementering. Det forenkler processen med at bygge, implementere og administrere cloud-native applikationer på Azure.
+Azure Developer CLI (azd) er et kommandolinjeværktøj designet til at fremskynde din rejse fra lokal udvikling til Azure-implementering. Det forenkler processen med at bygge, implementere og administrere cloud-native applikationer på Azure.
 
 ## Kernekoncepter
 
 ### Skabeloner
 Skabeloner er fundamentet for azd. De indeholder:
 - **Applikationskode** - Din kildekode og afhængigheder
-- **Infrastrukturdefinitioner** - Azure-ressourcer defineret i Bicep eller Terraform
+- **Infrastrukturbeskrivelser** - Azure-ressourcer defineret i Bicep eller Terraform
 - **Konfigurationsfiler** - Indstillinger og miljøvariabler
 - **Implementeringsscripts** - Automatiserede implementeringsarbejdsgange
 
@@ -60,7 +60,7 @@ Miljøer repræsenterer forskellige implementeringsmål:
 - **Produktion** - Live produktionsmiljø
 
 Hvert miljø opretholder sin egen:
-- Azure resource group
+- Azure ressourcegruppe
 - Konfigurationsindstillinger
 - Implementeringstilstand
 
@@ -83,7 +83,7 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Azure's domænespecifikke sprog
+- **Bicep** - Azures domænespecifikke sprog
 - **Terraform** - Multi-cloud infrastrukturværktøj
 - **ARM Templates** - Azure Resource Manager skabeloner
 
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Sikker Infrastrukturplanlægning med Preview
+Kommandoen `azd provision --preview` er en gamechanger for sikre implementeringer:
+- **Tørkørselsanalyse** - Viser, hvad der vil blive oprettet, ændret eller slettet
+- **Ingen risiko** - Ingen faktiske ændringer foretages i dit Azure-miljø
+- **Teamsamarbejde** - Del preview-resultater før implementering
+- **Omkostningsestimering** - Forstå ressourceomkostninger før forpligtelse
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Miljøstyring
@@ -129,7 +147,7 @@ my-app/
 ## 🔧 Konfigurationsfiler
 
 ### azure.yaml
-Hovedprojektets konfigurationsfil:
+Den primære projektkonfigurationsfil:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -202,8 +220,8 @@ Kommandoen `azd down --force --purge` er en kraftfuld måde at fuldstændigt ned
 ```
 --force
 ```
-- Spring over bekræftelsesprompter.
-- Nyttigt til automatisering eller scripting, hvor manuel input ikke er muligt.
+- Springer bekræftelsesprompter over.
+- Nyttig til automatisering eller scripting, hvor manuel input ikke er mulig.
 - Sikrer, at nedlæggelsen fortsætter uden afbrydelse, selv hvis CLI registrerer uoverensstemmelser.
 
 ```
@@ -213,14 +231,14 @@ Sletter **alle tilknyttede metadata**, inklusive:
 Miljøtilstand
 Lokal `.azure` mappe
 Cachelagret implementeringsinfo
-Forhindrer azd i at "huske" tidligere implementeringer, hvilket kan forårsage problemer som uoverensstemmende resource groups eller forældede registry-referencer.
+Forhindrer azd i at "huske" tidligere implementeringer, hvilket kan forårsage problemer som uoverensstemmende ressourcegrupper eller forældede registreringsreferencer.
 
-### Hvorfor bruge begge?
-Når du har problemer med `azd up` på grund af resterende tilstand eller delvise implementeringer, sikrer denne kombination en **ren start**.
+### Hvorfor bruge begge dele?
+Når du er stødt på problemer med `azd up` på grund af resterende tilstand eller delvise implementeringer, sikrer denne kombination en **ren start**.
 
-Det er især nyttigt efter manuelle ressource-sletninger i Azure-portalen eller ved skift af skabeloner, miljøer eller resource group-navnekonventioner.
+Det er især nyttigt efter manuelle ressource-sletninger i Azure-portalen eller ved skift af skabeloner, miljøer eller ressourcegruppe-navnekonventioner.
 
-### Styring af Flere Miljøer
+### Håndtering af Flere Miljøer
 ```bash
 # Create staging environment
 azd env new staging
@@ -234,9 +252,9 @@ azd env select dev
 azd env list
 ```
 
-## 🔐 Autentifikation og Legitimation
+## 🔐 Autentifikation og Legitimationer
 
-Forståelse af autentifikation er afgørende for succesfulde azd-implementeringer. Azure bruger flere autentifikationsmetoder, og azd udnytter den samme credential chain, som andre Azure-værktøjer bruger.
+Forståelse af autentifikation er afgørende for succesfulde azd-implementeringer. Azure bruger flere autentifikationsmetoder, og azd udnytter den samme legitimationskæde, som bruges af andre Azure-værktøjer.
 
 ### Azure CLI Autentifikation (`az login`)
 
@@ -264,15 +282,15 @@ az account set --subscription <subscription-id>
 
 ### Autentifikationsflow
 1. **Interaktiv Login**: Åbner din standardbrowser til autentifikation
-2. **Device Code Flow**: Til miljøer uden browseradgang
+2. **Enhedskodeflow**: Til miljøer uden browseradgang
 3. **Service Principal**: Til automatisering og CI/CD-scenarier
 4. **Managed Identity**: Til Azure-hostede applikationer
 
-### DefaultAzureCredential Chain
+### DefaultAzureCredential Kæde
 
-`DefaultAzureCredential` er en credential type, der giver en forenklet autentifikationsoplevelse ved automatisk at prøve flere credential-kilder i en specifik rækkefølge:
+`DefaultAzureCredential` er en legitimations-type, der giver en forenklet autentifikationsoplevelse ved automatisk at prøve flere legitimationskilder i en specifik rækkefølge:
 
-#### Credential Chain Rækkefølge
+#### Legitimationskæde Rækkefølge
 ```mermaid
 graph TD
     A[DefaultAzureCredential] --> B[Environment Variables]
@@ -314,8 +332,8 @@ az account show --query "user.type" --output tsv
 
 #### 4. Integration med Udviklingsværktøjer
 - **Visual Studio**: Bruger automatisk den indloggede konto
-- **VS Code**: Bruger Azure Account-udvidelsens credentials
-- **Azure CLI**: Bruger `az login` credentials (mest almindeligt til lokal udvikling)
+- **VS Code**: Bruger Azure Account-udvidelsens legitimationsoplysninger
+- **Azure CLI**: Bruger `az login` legitimationsoplysninger (mest almindeligt til lokal udvikling)
 
 ### AZD Autentifikationsopsætning
 
@@ -335,7 +353,7 @@ azd auth logout
 azd auth login
 ```
 
-### Autentifikationsbedste Praksis
+### Bedste Praksis for Autentifikation
 
 #### Til Lokal Udvikling
 ```bash
@@ -369,7 +387,7 @@ azd auth login
 #### Til Produktionsmiljøer
 - Brug **Managed Identity**, når du kører på Azure-ressourcer
 - Brug **Service Principal** til automatiseringsscenarier
-- Undgå at gemme credentials i kode eller konfigurationsfiler
+- Undgå at gemme legitimationsoplysninger i kode eller konfigurationsfiler
 - Brug **Azure Key Vault** til følsom konfiguration
 
 ### Almindelige Autentifikationsproblemer og Løsninger
@@ -431,9 +449,9 @@ azd up
 
 ### Sikkerhedsovervejelser
 
-1. **Credential Opbevaring**: Gem aldrig credentials i kildekode
+1. **Opbevaring af Legitimationer**: Gem aldrig legitimationsoplysninger i kildekode
 2. **Begrænsning af Omfang**: Brug mindst privilegium-princippet for service principals
-3. **Token Rotation**: Roter regelmæssigt service principal hemmeligheder
+3. **Tokenrotation**: Roter regelmæssigt service principal hemmeligheder
 4. **Audit Trail**: Overvåg autentifikations- og implementeringsaktiviteter
 5. **Netværkssikkerhed**: Brug private endpoints, når det er muligt
 
@@ -520,7 +538,7 @@ azd init --template template1
 1. Opret brugerdefinerede skabeloner
 2. Avancerede infrastrukturmønstre
 3. Multi-region implementeringer
-4. Konfigurationer i virksomhedsklasse
+4. Konfigurationer på virksomhedsniveau
 
 ## Næste Skridt
 
@@ -549,3 +567,5 @@ azd init --template template1
 
 ---
 
+**Ansvarsfraskrivelse**:  
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

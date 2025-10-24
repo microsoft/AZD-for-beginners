@@ -1,40 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T09:07:57+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:50:11+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "sw"
 }
 -->
-# Karatasi ya Mwongozo wa Amri - Amri Muhimu za AZD
+# Karatasi ya Msaada wa Amri - Amri Muhimu za AZD
 
 **Marejeleo ya Haraka kwa Sura Zote**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Anayeanza](../README.md)
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../README.md)
 - **📖 Mwanzo wa Haraka**: [Sura ya 1: Msingi & Mwanzo wa Haraka](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 Amri za AI**: [Sura ya 2: Maendeleo ya Kwanza ya AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Ya Juu**: [Sura ya 4: Miundombinu kama Nambari](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Utangulizi
 
-Karatasi hii ya mwongozo inatoa marejeleo ya haraka kwa amri za kawaida za Azure Developer CLI, zilizopangwa kwa makundi na mifano ya vitendo. Inafaa kwa marejeleo ya haraka wakati wa maendeleo, utatuzi wa matatizo, na shughuli za kila siku na miradi ya azd.
+Karatasi hii ya msaada inatoa marejeleo ya haraka kwa amri za kawaida za Azure Developer CLI, zilizopangwa kwa makundi na mifano ya vitendo. Inafaa kwa marejeleo ya haraka wakati wa maendeleo, utatuzi wa matatizo, na shughuli za kila siku na miradi ya azd.
 
 ## Malengo ya Kujifunza
 
-Kwa kutumia karatasi hii ya mwongozo, utaweza:
-- Kupata mara moja amri muhimu za Azure Developer CLI na sintaksia
-- Kuelewa mpangilio wa amri kwa makundi ya kazi na matumizi
+Kwa kutumia karatasi hii ya msaada, utaweza:
+- Kupata amri muhimu za Azure Developer CLI na sintaksia kwa haraka
+- Kuelewa mpangilio wa amri kulingana na makundi ya kazi na matumizi
 - Kurejelea mifano ya vitendo kwa hali za kawaida za maendeleo na utekelezaji
-- Kupata amri za utatuzi wa matatizo kwa suluhisho la haraka
-- Kupata chaguzi za usanidi wa hali ya juu na ubinafsishaji kwa ufanisi
+- Kupata amri za utatuzi wa matatizo kwa haraka
+- Kupata chaguzi za usanidi wa hali ya juu na ubinafsishaji kwa urahisi
 - Kupata amri za usimamizi wa mazingira na mtiririko wa kazi wa mazingira mengi
 
 ## Matokeo ya Kujifunza
 
 Kwa kutumia karatasi hii mara kwa mara, utaweza:
 - Kutekeleza amri za azd kwa ujasiri bila kurejelea nyaraka kamili
-- Kutatua matatizo ya kawaida haraka kwa kutumia amri sahihi za uchunguzi
-- Kusimamia mazingira mengi na hali za utekelezaji kwa ufanisi
+- Kutatua matatizo ya kawaida kwa haraka kwa kutumia amri sahihi za uchunguzi
+- Kusimamia kwa ufanisi mazingira mengi na hali za utekelezaji
 - Kutumia vipengele vya hali ya juu vya azd na chaguzi za usanidi inapohitajika
 - Kutatua matatizo ya utekelezaji kwa kutumia mfululizo wa amri za kimfumo
 - Kuboresha mtiririko wa kazi kupitia matumizi bora ya njia za mkato na chaguzi za azd
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -249,7 +251,7 @@ azd info
 
 ## 🔧 Amri za Juu
 
-### Njia za Mkondo na CI/CD
+### Njia za Mkusanyiko na CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Usimamizi wa Huduma
@@ -285,9 +296,9 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 Mtiririko wa Kazi wa Haraka
+## 🎯 Mitiririko ya Haraka ya Kazi
 
-### Mtiririko wa Kazi wa Maendeleo
+### Mtiririko wa Maendeleo
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Mtiririko wa Kazi wa Mazingira Mengi
+### Mtiririko wa Mazingira Mengi
 ```bash
 # Set up environments
 azd env new dev
@@ -324,7 +335,7 @@ azd env select production
 azd up
 ```
 
-### Mtiririko wa Kazi wa Utatuzi wa Matatizo
+### Mtiririko wa Utatuzi wa Matatizo
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -342,7 +353,7 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Amri za Utatuzi
+## 🔍 Amri za Utatuzi wa Matatizo
 
 ### Taarifa za Utatuzi
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -452,7 +463,7 @@ done
 
 ## 📝 Vigezo vya Mazingira
 
-### Vigezo vya Mazingira vya Kawaida
+### Vigezo vya Kawaida vya Mazingira
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Vidokezo vya Wataalamu
 
-### Majina ya Mkato kwa Mtiririko wa Kazi wa Haraka
+### Majina ya Mkato kwa Mtiririko wa Haraka
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -558,15 +569,15 @@ azd template show <template-name> --docs
 
 ---
 
-**Kidokezo**: Weka alama ya kurasa hii ya mwongozo na tumia `Ctrl+F` kupata haraka amri unazohitaji!
+**Kidokezo**: Weka alama karatasi hii ya msaada na tumia `Ctrl+F` kupata haraka amri unazohitaji!
 
 ---
 
 **Urambazaji**
-- **Somo la Awali**: [Ukaguzi Kabla ya Utekelezaji](../docs/pre-deployment/preflight-checks.md)
+- **Somo la Awali**: [Ukaguzi wa Kabla ya Utekelezaji](../docs/pre-deployment/preflight-checks.md)
 - **Somo Linalofuata**: [Kamusi](glossary.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

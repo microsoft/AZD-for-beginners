@@ -1,16 +1,16 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T13:26:57+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T16:25:50+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "fr"
 }
 -->
-# Vérifications préalables aux déploiements AZD
+# Vérifications préalables au déploiement avec AZD
 
 **Navigation du chapitre :**
-- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
 - **📖 Chapitre actuel** : Chapitre 6 - Validation et planification avant déploiement
 - **⬅️ Précédent** : [Sélection des SKU](sku-selection.md)
 - **➡️ Chapitre suivant** : [Chapitre 7 : Résolution des problèmes](../troubleshooting/common-issues.md)
@@ -22,17 +22,17 @@ Ce guide complet fournit des scripts et des procédures de validation avant dép
 
 ## Objectifs d'apprentissage
 
-En suivant ce guide, vous allez :
+En suivant ce guide, vous apprendrez à :
 - Maîtriser les techniques et scripts de validation automatisée avant déploiement
-- Comprendre les stratégies de vérification complètes pour l'authentification, les permissions et les quotas
-- Mettre en œuvre des procédures de validation de disponibilité et de capacité des ressources
-- Configurer des vérifications de sécurité et de conformité pour les politiques organisationnelles
+- Comprendre les stratégies de vérification complètes pour l'authentification, les autorisations et les quotas
+- Mettre en œuvre des procédures de validation de la disponibilité et de la capacité des ressources
+- Configurer des vérifications de sécurité et de conformité selon les politiques organisationnelles
 - Concevoir des workflows d'estimation des coûts et de validation budgétaire
-- Créer des automatisations personnalisées de vérifications préalables pour les pipelines CI/CD
+- Créer une automatisation personnalisée des vérifications préalables pour les pipelines CI/CD
 
 ## Résultats d'apprentissage
 
-À la fin, vous serez capable de :
+À la fin de ce guide, vous serez capable de :
 - Créer et exécuter des scripts de validation préalable complets
 - Concevoir des workflows de vérification automatisés pour différents scénarios de déploiement
 - Mettre en œuvre des procédures et politiques de validation spécifiques à l'environnement
@@ -48,7 +48,7 @@ En suivant ce guide, vous allez :
 - [Validation de l'environnement](../../../../docs/pre-deployment)
 - [Validation des ressources](../../../../docs/pre-deployment)
 - [Vérifications de sécurité et de conformité](../../../../docs/pre-deployment)
-- [Planification de performance et de capacité](../../../../docs/pre-deployment)
+- [Planification des performances et de la capacité](../../../../docs/pre-deployment)
 - [Résolution des problèmes courants](../../../../docs/pre-deployment)
 
 ---
@@ -58,13 +58,13 @@ En suivant ce guide, vous allez :
 Les vérifications préalables sont des validations essentielles effectuées avant le déploiement pour garantir :
 
 - **Disponibilité des ressources** et quotas dans les régions cibles
-- **Configuration correcte de l'authentification et des permissions**
+- **Authentification et autorisations** correctement configurées
 - **Validité des modèles** et exactitude des paramètres
 - **Connectivité réseau** et dépendances
 - **Conformité en matière de sécurité** avec les politiques organisationnelles
 - **Estimation des coûts** dans les limites budgétaires
 
-### Quand exécuter les vérifications préalables
+### Quand effectuer les vérifications préalables
 
 - **Avant le premier déploiement** dans un nouvel environnement
 - **Après des modifications importantes des modèles**
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -803,9 +818,9 @@ Imprimez cette liste et vérifiez chaque élément avant le déploiement :
 - [ ] Nom de l'environnement unique et conforme aux conventions de nommage
 - [ ] Groupe de ressources cible identifié ou prêt à être créé
 
-#### ✅ Authentification et permissions
+#### ✅ Authentification et autorisations
 - [ ] Authentification réussie avec `azd auth login`
-- [ ] L'utilisateur dispose du rôle de Contributeur sur l'abonnement/groupe de ressources cible
+- [ ] L'utilisateur dispose du rôle de contributeur sur l'abonnement/groupe de ressources cible
 - [ ] Principal de service configuré pour CI/CD (si applicable)
 - [ ] Aucun certificat ou identifiant expiré
 
@@ -814,6 +829,7 @@ Imprimez cette liste et vérifiez chaque élément avant le déploiement :
 - [ ] Tous les services définis dans azure.yaml ont un code source correspondant
 - [ ] Les modèles Bicep dans le répertoire `infra/` sont présents
 - [ ] `main.bicep` se compile sans erreurs (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Aperçu de l'infrastructure exécuté avec succès (`azd provision --preview`)
 - [ ] Tous les paramètres requis ont des valeurs par défaut ou seront fournis
 - [ ] Aucun secret codé en dur dans les modèles
 
@@ -828,14 +844,14 @@ Imprimez cette liste et vérifiez chaque élément avant le déploiement :
 - [ ] Connectivité réseau aux points de terminaison Azure vérifiée
 - [ ] Paramètres de pare-feu/proxy configurés si nécessaire
 - [ ] Key Vault configuré pour la gestion des secrets
-- [ ] Identités gérées utilisées autant que possible
-- [ ] Enforcement HTTPS activé pour les applications web
+- [ ] Identités managées utilisées autant que possible
+- [ ] Application du HTTPS activée pour les applications web
 
 #### ✅ Gestion des coûts
 - [ ] Estimations des coûts calculées avec le Calculateur de prix Azure
 - [ ] Alertes budgétaires configurées si nécessaire
 - [ ] SKUs appropriés sélectionnés pour le type d'environnement
-- [ ] Capacité réservée envisagée pour les charges de production
+- [ ] Capacité réservée envisagée pour les charges de travail en production
 
 #### ✅ Surveillance et observabilité
 - [ ] Application Insights configuré dans les modèles
@@ -1053,7 +1069,7 @@ if __name__ == "__main__":
 
 ## Vérifications de sécurité et de conformité
 
-### Script de validation de sécurité
+### Script de validation de la sécurité
 
 ```bash
 #!/bin/bash
@@ -1298,7 +1314,7 @@ steps:
    - Optimisation des coûts pour les environnements non production
 
 3. **Couverture complète**
-   - Authentification et permissions
+   - Authentification et autorisations
    - Quotas et disponibilité des ressources
    - Validation des modèles et syntaxe
    - Exigences de sécurité et de conformité
@@ -1306,17 +1322,17 @@ steps:
 4. **Rapports clairs**
    - Indicateurs de statut codés par couleur
    - Messages d'erreur détaillés avec étapes de résolution
-   - Rapports synthétiques pour une évaluation rapide
+   - Rapports récapitulatifs pour une évaluation rapide
 
 5. **Échec rapide**
    - Arrêter le déploiement si des vérifications critiques échouent
    - Fournir des instructions claires pour la résolution
    - Permettre une réexécution facile des vérifications
 
-### Erreurs courantes lors des vérifications préalables
+### Pièges courants des vérifications préalables
 
 1. **Ignorer la validation** pour des déploiements "rapides"
-2. **Vérifications insuffisantes des permissions** avant le déploiement
+2. **Vérification insuffisante des autorisations** avant le déploiement
 3. **Ignorer les limites de quotas** jusqu'à l'échec du déploiement
 4. **Ne pas valider les modèles** dans les pipelines CI/CD
 5. **Oublier la validation de sécurité** pour les environnements de production
@@ -1330,9 +1346,9 @@ steps:
 
 **Navigation**
 - **Leçon précédente** : [Sélection des SKU](sku-selection.md)
-- **Leçon suivante** : [Fiche de référence](../../resources/cheat-sheet.md)
+- **Leçon suivante** : [Aide-mémoire](../../resources/cheat-sheet.md)
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.

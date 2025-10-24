@@ -1,60 +1,60 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:34:12+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:11:51+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "br"
 }
 -->
-# AZD Básico - Entendendo o Azure Developer CLI
+# Noções Básicas do AZD - Entendendo o Azure Developer CLI
 
-# AZD Básico - Conceitos e Fundamentos Principais
+# Noções Básicas do AZD - Conceitos e Fundamentos Principais
 
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos & Início Rápido
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos e Início Rápido
 - **⬅️ Anterior**: [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Próximo**: [Instalação & Configuração](installation.md)
+- **➡️ Próximo**: [Instalação e Configuração](installation.md)
 - **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introdução
 
-Esta lição apresenta o Azure Developer CLI (azd), uma ferramenta poderosa de linha de comando que acelera sua jornada do desenvolvimento local para a implantação no Azure. Você aprenderá os conceitos fundamentais, os recursos principais e entenderá como o azd simplifica a implantação de aplicações nativas na nuvem.
+Esta lição apresenta o Azure Developer CLI (azd), uma poderosa ferramenta de linha de comando que acelera sua jornada do desenvolvimento local para a implantação no Azure. Você aprenderá os conceitos fundamentais, os recursos principais e entenderá como o azd simplifica a implantação de aplicações nativas da nuvem.
 
 ## Objetivos de Aprendizado
 
 Ao final desta lição, você será capaz de:
 - Entender o que é o Azure Developer CLI e seu propósito principal
 - Aprender os conceitos principais de templates, ambientes e serviços
-- Explorar recursos-chave, incluindo desenvolvimento baseado em templates e Infraestrutura como Código
-- Compreender a estrutura e o fluxo de trabalho de projetos azd
-- Estar preparado para instalar e configurar o azd no seu ambiente de desenvolvimento
+- Explorar recursos importantes, incluindo desenvolvimento baseado em templates e Infraestrutura como Código
+- Compreender a estrutura de projetos do azd e seu fluxo de trabalho
+- Estar preparado para instalar e configurar o azd para seu ambiente de desenvolvimento
 
 ## Resultados de Aprendizado
 
 Após concluir esta lição, você será capaz de:
-- Explicar o papel do azd nos fluxos de trabalho modernos de desenvolvimento na nuvem
+- Explicar o papel do azd nos fluxos de trabalho modernos de desenvolvimento em nuvem
 - Identificar os componentes da estrutura de um projeto azd
-- Descrever como templates, ambientes e serviços funcionam juntos
-- Entender os benefícios da Infraestrutura como Código com azd
+- Descrever como templates, ambientes e serviços trabalham juntos
+- Entender os benefícios da Infraestrutura como Código com o azd
 - Reconhecer diferentes comandos do azd e seus propósitos
 
 ## O que é o Azure Developer CLI (azd)?
 
-O Azure Developer CLI (azd) é uma ferramenta de linha de comando projetada para acelerar sua jornada do desenvolvimento local para a implantação no Azure. Ele simplifica o processo de construção, implantação e gerenciamento de aplicações nativas na nuvem no Azure.
+Azure Developer CLI (azd) é uma ferramenta de linha de comando projetada para acelerar sua jornada do desenvolvimento local para a implantação no Azure. Ela simplifica o processo de construção, implantação e gerenciamento de aplicações nativas da nuvem no Azure.
 
 ## Conceitos Principais
 
 ### Templates
-Templates são a base do azd. Eles contêm:
+Os templates são a base do azd. Eles contêm:
 - **Código da aplicação** - Seu código-fonte e dependências
 - **Definições de infraestrutura** - Recursos do Azure definidos em Bicep ou Terraform
 - **Arquivos de configuração** - Configurações e variáveis de ambiente
 - **Scripts de implantação** - Fluxos de trabalho automatizados de implantação
 
 ### Ambientes
-Ambientes representam diferentes alvos de implantação:
+Os ambientes representam diferentes alvos de implantação:
 - **Desenvolvimento** - Para testes e desenvolvimento
 - **Staging** - Ambiente de pré-produção
 - **Produção** - Ambiente de produção ao vivo
@@ -65,7 +65,7 @@ Cada ambiente mantém seu próprio:
 - Estado de implantação
 
 ### Serviços
-Serviços são os blocos de construção da sua aplicação:
+Os serviços são os blocos de construção da sua aplicação:
 - **Frontend** - Aplicações web, SPAs
 - **Backend** - APIs, microsserviços
 - **Banco de Dados** - Soluções de armazenamento de dados
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Planejamento Seguro de Infraestrutura com Preview
+O comando `azd provision --preview` é revolucionário para implantações seguras:
+- **Análise de simulação** - Mostra o que será criado, modificado ou excluído
+- **Risco zero** - Nenhuma alteração real é feita no seu ambiente Azure
+- **Colaboração em equipe** - Compartilhe os resultados do preview antes da implantação
+- **Estimativa de custos** - Entenda os custos dos recursos antes de se comprometer
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Gerenciamento de Ambientes
@@ -198,13 +216,13 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Entendendo `azd down --force --purge`
-O comando `azd down --force --purge` é uma maneira poderosa de desmontar completamente seu ambiente azd e todos os recursos associados. Aqui está um detalhamento do que cada flag faz:
+O comando `azd down --force --purge` é uma maneira poderosa de desmontar completamente seu ambiente azd e todos os recursos associados. Aqui está um resumo do que cada parâmetro faz:
 ```
 --force
 ```
-- Ignora prompts de confirmação.
+- Ignora os prompts de confirmação.
 - Útil para automação ou scripts onde a entrada manual não é viável.
-- Garante que a desmontagem prossiga sem interrupção, mesmo que o CLI detecte inconsistências.
+- Garante que o processo de desmontagem ocorra sem interrupções, mesmo que o CLI detecte inconsistências.
 
 ```
 --purge
@@ -216,9 +234,9 @@ Informações de implantação em cache
 Impede que o azd "lembre" implantações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências de registro obsoletas.
 
 ### Por que usar ambos?
-Quando você encontra problemas com `azd up` devido a estado persistente ou implantações parciais, essa combinação garante um **recomeço limpo**.
+Quando você encontra problemas com `azd up` devido a estado persistente ou implantações parciais, essa combinação garante um **novo começo**.
 
-É especialmente útil após exclusões manuais de recursos no portal do Azure ou ao alternar templates, ambientes ou convenções de nomenclatura de grupos de recursos.
+É especialmente útil após exclusões manuais de recursos no portal do Azure ou ao trocar templates, ambientes ou convenções de nomenclatura de grupos de recursos.
 
 ### Gerenciando Múltiplos Ambientes
 ```bash
@@ -270,7 +288,7 @@ az account set --subscription <subscription-id>
 
 ### Cadeia de Credenciais DefaultAzureCredential
 
-`DefaultAzureCredential` é um tipo de credencial que fornece uma experiência de autenticação simplificada ao tentar automaticamente várias fontes de credenciais em uma ordem específica:
+`DefaultAzureCredential` é um tipo de credencial que oferece uma experiência de autenticação simplificada ao tentar automaticamente várias fontes de credenciais em uma ordem específica:
 
 #### Ordem da Cadeia de Credenciais
 ```mermaid
@@ -293,17 +311,17 @@ export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Identidade de Trabalho (Kubernetes/GitHub Actions)
+#### 2. Identidade de Trabalho (Kubernetes/Ações do GitHub)
 Usado automaticamente em:
 - Azure Kubernetes Service (AKS) com Identidade de Trabalho
-- GitHub Actions com federação OIDC
+- Ações do GitHub com federação OIDC
 - Outros cenários de identidade federada
 
 #### 3. Identidade Gerenciada
 Para recursos do Azure como:
 - Máquinas Virtuais
 - App Service
-- Azure Functions
+- Funções do Azure
 - Instâncias de Contêiner
 
 ```bash
@@ -433,8 +451,8 @@ azd up
 
 1. **Armazenamento de Credenciais**: Nunca armazene credenciais no código-fonte
 2. **Limitação de Escopo**: Use o princípio de menor privilégio para principais de serviço
-3. **Rotação de Tokens**: Rotacione regularmente os segredos de principais de serviço
-4. **Trilha de Auditoria**: Monitore atividades de autenticação e implantação
+3. **Rotação de Tokens**: Gire regularmente os segredos dos principais de serviço
+4. **Rastro de Auditoria**: Monitore atividades de autenticação e implantação
 5. **Segurança de Rede**: Use endpoints privados sempre que possível
 
 ### Solução de Problemas de Autenticação
@@ -487,9 +505,9 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Aproveite Templates
+### 2. Aproveite os Templates
 - Comece com templates existentes
-- Personalize para suas necessidades
+- Personalize conforme suas necessidades
 - Crie templates reutilizáveis para sua organização
 
 ### 3. Isolamento de Ambientes
@@ -499,7 +517,7 @@ azd init --template template1
 
 ### 4. Gerenciamento de Configuração
 - Use variáveis de ambiente para dados sensíveis
-- Mantenha configurações no controle de versão
+- Mantenha a configuração no controle de versão
 - Documente configurações específicas de ambiente
 
 ## Progressão de Aprendizado
@@ -507,7 +525,7 @@ azd init --template template1
 ### Iniciante (Semana 1-2)
 1. Instale o azd e autentique-se
 2. Implante um template simples
-3. Entenda a estrutura do projeto
+3. Compreenda a estrutura do projeto
 4. Aprenda comandos básicos (up, down, deploy)
 
 ### Intermediário (Semana 3-4)
@@ -519,13 +537,13 @@ azd init --template template1
 ### Avançado (Semana 5+)
 1. Crie templates personalizados
 2. Padrões avançados de infraestrutura
-3. Implantações multi-região
+3. Implantações em múltiplas regiões
 4. Configurações de nível empresarial
 
 ## Próximos Passos
 
 **📖 Continue o Aprendizado do Capítulo 1:**
-- [Instalação & Configuração](installation.md) - Instale e configure o azd
+- [Instalação e Configuração](installation.md) - Instale e configure o azd
 - [Seu Primeiro Projeto](first-project.md) - Complete o tutorial prático
 - [Guia de Configuração](configuration.md) - Opções avançadas de configuração
 
@@ -542,10 +560,12 @@ azd init --template template1
 
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos & Início Rápido  
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos e Início Rápido  
 - **⬅️ Anterior**: [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Próximo**: [Instalação & Configuração](installation.md)
+- **➡️ Próximo**: [Instalação e Configuração](installation.md)
 - **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento com Foco em IA](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Aviso Legal**:  
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

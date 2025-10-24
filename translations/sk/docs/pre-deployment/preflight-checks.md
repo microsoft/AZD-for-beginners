@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T10:05:35+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:59:47+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "sk"
 }
@@ -18,11 +18,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tento komplexný sprievodca poskytuje skripty a postupy na validáciu pred nasadením, aby sa zabezpečilo úspešné nasadenie pomocou Azure Developer CLI ešte pred jeho začiatkom. Naučte sa implementovať automatizované kontroly autentifikácie, dostupnosti zdrojov, kvót, súladu so zabezpečením a požiadaviek na výkon, aby ste predišli zlyhaniam nasadenia a optimalizovali úspešnosť nasadenia.
+Táto komplexná príručka poskytuje skripty a postupy na validáciu pred nasadením, aby sa zabezpečilo úspešné nasadenie pomocou Azure Developer CLI ešte pred jeho začiatkom. Naučte sa implementovať automatizované kontroly autentifikácie, dostupnosti zdrojov, kvót, súladu so zabezpečením a požiadaviek na výkon, aby ste predišli zlyhaniu nasadenia a optimalizovali úspešnosť nasadenia.
 
 ## Ciele učenia
 
-Po dokončení tohto sprievodcu budete:
+Po dokončení tejto príručky budete:
 - Ovládať techniky a skripty na automatizovanú validáciu pred nasadením
 - Rozumieť komplexným stratégiám kontroly autentifikácie, oprávnení a kvót
 - Implementovať postupy validácie dostupnosti a kapacity zdrojov
@@ -61,7 +61,7 @@ Kontroly pred nasadením sú nevyhnutné validácie vykonávané pred nasadením
 - **Autentifikácie a oprávnení**, ktoré sú správne nakonfigurované
 - **Platnosti šablón** a správnosti parametrov
 - **Sieťovej konektivity** a závislostí
-- **Súladu so zabezpečením** s organizačnými politikami
+- **Súladu so zabezpečením** podľa organizačných politík
 - **Odhadu nákladov** v rámci rozpočtových obmedzení
 
 ### Kedy vykonávať kontroly pred nasadením
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -794,7 +809,7 @@ main "$@"
 
 ### Kontrolný zoznam pred nasadením
 
-Vytlačte tento zoznam a overte každý bod pred nasadením:
+Vytlačte si tento zoznam a overte každý bod pred nasadením:
 
 #### ✅ Nastavenie prostredia
 - [ ] AZD CLI nainštalovaný a aktualizovaný na najnovšiu verziu
@@ -804,7 +819,7 @@ Vytlačte tento zoznam a overte každý bod pred nasadením:
 - [ ] Identifikovaná cieľová skupina zdrojov alebo je možné ju vytvoriť
 
 #### ✅ Autentifikácia a oprávnenia
-- [ ] Úspešne autentifikované pomocou `azd auth login`
+- [ ] Úspešne autentifikovaný pomocou `azd auth login`
 - [ ] Používateľ má rolu Contributor na cieľovom predplatnom/skupine zdrojov
 - [ ] Konfigurovaný service principal pre CI/CD (ak je to relevantné)
 - [ ] Žiadne expirované certifikáty alebo poverenia
@@ -814,20 +829,21 @@ Vytlačte tento zoznam a overte každý bod pred nasadením:
 - [ ] Všetky služby definované v azure.yaml majú zodpovedajúci zdrojový kód
 - [ ] Bicep šablóny v adresári `infra/` sú prítomné
 - [ ] `main.bicep` sa kompiluje bez chýb (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Náhľad infraštruktúry prebieha úspešne (`azd provision --preview`)
 - [ ] Všetky požadované parametre majú predvolené hodnoty alebo budú poskytnuté
 - [ ] Žiadne pevne zakódované tajomstvá v šablónach
 
 #### ✅ Plánovanie zdrojov
 - [ ] Vybraný a validovaný cieľový región Azure
-- [ ] Požadované služby Azure dostupné v cieľovom regióne
+- [ ] Požadované služby Azure sú dostupné v cieľovom regióne
 - [ ] Dostupné dostatočné kvóty pre plánované zdroje
-- [ ] Skontrolované konflikty pomenovania zdrojov
+- [ ] Skontrolované konflikty v pomenovaní zdrojov
 - [ ] Pochopené závislosti medzi zdrojmi
 
 #### ✅ Sieť a zabezpečenie
 - [ ] Overená sieťová konektivita k Azure endpointom
 - [ ] Konfigurované nastavenia firewallu/proxy, ak je to potrebné
-- [ ] Key Vault nakonfigurovaný na správu tajomstiev
+- [ ] Konfigurovaný Key Vault na správu tajomstiev
 - [ ] Použité spravované identity, kde je to možné
 - [ ] Povolené HTTPS pre webové aplikácie
 
@@ -835,10 +851,10 @@ Vytlačte tento zoznam a overte každý bod pred nasadením:
 - [ ] Odhady nákladov vypočítané pomocou Azure Pricing Calculator
 - [ ] Konfigurované upozornenia na rozpočet, ak je to potrebné
 - [ ] Vybrané vhodné SKU pre typ prostredia
-- [ ] Zvážená rezervovaná kapacita pre produkčné pracovné zaťaženia
+- [ ] Zvážená rezervovaná kapacita pre produkčné pracovné zaťaženie
 
 #### ✅ Monitorovanie a pozorovateľnosť
-- [ ] Application Insights nakonfigurovaný v šablónach
+- [ ] Konfigurované Application Insights v šablónach
 - [ ] Plánovaný Log Analytics workspace
 - [ ] Definované pravidlá upozornení pre kritické metriky
 - [ ] Implementované endpointy na kontrolu zdravia v aplikáciách
@@ -846,7 +862,7 @@ Vytlačte tento zoznam a overte každý bod pred nasadením:
 #### ✅ Zálohovanie a obnova
 - [ ] Definovaná stratégia zálohovania pre dátové zdroje
 - [ ] Dokumentované ciele obnovy (RTO)
-- [ ] Dokumentované body obnovy (RPO)
+- [ ] Dokumentované ciele bodov obnovy (RPO)
 - [ ] Plán obnovy po havárii pre produkciu
 
 ---
@@ -1285,7 +1301,7 @@ steps:
 
 ## Zhrnutie najlepších postupov
 
-### ✅ Najlepšie postupy kontrol pred nasadením
+### ✅ Najlepšie postupy pre kontroly pred nasadením
 
 1. **Automatizujte, kde je to možné**
    - Integrujte kontroly do CI/CD pipeline
@@ -1299,16 +1315,16 @@ steps:
 
 3. **Komplexné pokrytie**
    - Autentifikácia a oprávnenia
-   - Kvóty a dostupnosť zdrojov
+   - Kvóty zdrojov a dostupnosť
    - Validácia šablón a syntaxe
    - Požiadavky na zabezpečenie a súlad
 
 4. **Jasné reportovanie**
-   - Indikátory stavu s farebným kódovaním
+   - Farebne odlíšené indikátory stavu
    - Podrobné chybové správy s krokmi na nápravu
    - Súhrnné správy na rýchle posúdenie
 
-5. **Rýchle zlyhanie**
+5. **Rýchle zastavenie**
    - Zastavte nasadenie, ak zlyhajú kritické kontroly
    - Poskytnite jasné pokyny na riešenie
    - Umožnite jednoduché opätovné spustenie kontrol
@@ -1324,7 +1340,7 @@ steps:
 
 ---
 
-**Tip**: Spustite kontroly pred nasadením ako samostatnú úlohu vo vašej CI/CD pipeline pred samotnou úlohou nasadenia. Týmto spôsobom môžete zachytiť problémy včas a poskytnúť rýchlejšiu spätnú väzbu vývojárom.
+**Tip**: Vykonávajte kontroly pred nasadením ako samostatnú úlohu vo vašej CI/CD pipeline pred samotnou úlohou nasadenia. Týmto spôsobom môžete zachytiť problémy včas a poskytnúť rýchlejšiu spätnú väzbu vývojárom.
 
 ---
 
@@ -1334,5 +1350,5 @@ steps:
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

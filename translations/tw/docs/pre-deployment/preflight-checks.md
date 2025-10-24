@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T12:53:17+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T16:46:03+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "tw"
 }
 -->
-# AZD 部署前檢查
+# AZD 部署的預檢查
 
 **章節導航：**
 - **📚 課程首頁**：[AZD 初學者指南](../../README.md)
@@ -16,9 +16,9 @@ CO_OP_TRANSLATOR_METADATA:
 - **➡️ 下一章**：[第七章：故障排除](../troubleshooting/common-issues.md)
 - **🔧 相關章節**：[第四章：部署指南](../deployment/deployment-guide.md)
 
-## 簡介
+## 介紹
 
-本指南提供完整的部署前驗證腳本和程序，確保 Azure Developer CLI 部署在開始前能順利進行。學習如何實施自動化檢查，包括身份驗證、資源可用性、配額、安全合規性以及性能需求，以防止部署失敗並提升部署成功率。
+本指南提供全面的部署前驗證腳本和程序，確保在開始 Azure Developer CLI 部署之前能成功進行。學習如何實施自動化檢查，包括身份驗證、資源可用性、配額、安全合規性以及性能需求，以防止部署失敗並優化部署成功率。
 
 ## 學習目標
 
@@ -28,22 +28,22 @@ CO_OP_TRANSLATOR_METADATA:
 - 實施資源可用性和容量驗證程序
 - 配置符合組織政策的安全和合規性檢查
 - 設計成本估算和預算驗證工作流程
-- 為 CI/CD 管道創建自定義部署前檢查自動化
+- 為 CI/CD 管道創建自定義的預檢查自動化
 
 ## 學習成果
 
 完成後，您將能夠：
-- 創建並執行完整的部署前驗證腳本
+- 創建並執行全面的預檢查驗證腳本
 - 設計適用於不同部署場景的自動化檢查工作流程
-- 實施針對特定環境的驗證程序和政策
-- 配置部署準備的主動監控和警報
-- 排除部署前問題並實施修正措施
-- 將部署前檢查整合到 DevOps 管道和自動化工作流程中
+- 實施特定環境的驗證程序和政策
+- 配置主動監控和警報以確保部署準備就緒
+- 排除部署前的問題並實施糾正措施
+- 將預檢查集成到 DevOps 管道和自動化工作流程中
 
 ## 目錄
 
 - [概述](../../../../docs/pre-deployment)
-- [自動化部署前腳本](../../../../docs/pre-deployment)
+- [自動化預檢查腳本](../../../../docs/pre-deployment)
 - [手動驗證清單](../../../../docs/pre-deployment)
 - [環境驗證](../../../../docs/pre-deployment)
 - [資源驗證](../../../../docs/pre-deployment)
@@ -55,7 +55,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 概述
 
-部署前檢查是部署前進行的必要驗證，確保：
+預檢查是部署前進行的必要驗證，確保：
 
 - **資源可用性**及目標區域的配額
 - **身份驗證和權限**已正確配置
@@ -64,19 +64,19 @@ CO_OP_TRANSLATOR_METADATA:
 - **符合組織政策的安全合規性**
 - **成本估算**在預算範圍內
 
-### 何時執行部署前檢查
+### 何時執行預檢查
 
 - **首次部署**到新環境之前
 - **重大模板更改**後
-- **生產環境部署**之前
+- **生產部署**之前
 - **更改 Azure 區域**時
 - **作為 CI/CD 管道的一部分**
 
 ---
 
-## 自動化部署前腳本
+## 自動化預檢查腳本
 
-### PowerShell 部署前檢查器
+### PowerShell 預檢查工具
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash 部署前檢查器
+### Bash 預檢查工具
 
 ```bash
 #!/bin/bash
@@ -792,62 +807,63 @@ main "$@"
 
 ## 手動驗證清單
 
-### 部署前檢查清單
+### 部署前清單
 
 打印此清單並在部署前逐項驗證：
 
 #### ✅ 環境設置
-- [ ] AZD CLI 已安裝並更新至最新版本
-- [ ] Azure CLI 已安裝並完成身份驗證
-- [ ] 已選擇正確的 Azure 訂閱
+- [ ] 安裝並更新至最新版本的 AZD CLI
+- [ ] 安裝並完成身份驗證的 Azure CLI
+- [ ] 選擇正確的 Azure 訂閱
 - [ ] 環境名稱唯一且符合命名規範
-- [ ] 已識別目標資源群組或可創建
+- [ ] 確定目標資源群組或可以創建
 
 #### ✅ 身份驗證與權限
 - [ ] 使用 `azd auth login` 成功完成身份驗證
 - [ ] 使用者在目標訂閱/資源群組中擁有 Contributor 角色
-- [ ] 已為 CI/CD 配置服務主體（如適用）
-- [ ] 無過期的憑證或憑據
+- [ ] 為 CI/CD 配置服務主體（如適用）
+- [ ] 無過期的證書或憑證
 
 #### ✅ 模板驗證
 - [ ] `azure.yaml` 存在且為有效的 YAML
-- [ ] azure.yaml 中定義的所有服務均有相應的源代碼
+- [ ] azure.yaml 中定義的所有服務都有相應的源代碼
 - [ ] `infra/` 目錄中的 Bicep 模板存在
 - [ ] `main.bicep` 無錯誤編譯 (`az bicep build --file infra/main.bicep`)
-- [ ] 所有必需參數均有默認值或將提供
-- [ ] 模板中無硬編碼的密碼
+- [ ] 🧪 基礎設施預覽成功運行 (`azd provision --preview`)
+- [ ] 所有必需的參數都有默認值或將提供
+- [ ] 模板中無硬編碼的秘密
 
 #### ✅ 資源規劃
-- [ ] 已選擇並驗證目標 Azure 區域
-- [ ] 目標區域內所需的 Azure 服務可用
+- [ ] 選擇並驗證目標 Azure 區域
+- [ ] 目標區域內的所需 Azure 服務可用
 - [ ] 計劃資源的配額充足
-- [ ] 資源命名衝突已檢查
-- [ ] 已理解資源之間的依賴性
+- [ ] 檢查資源命名衝突
+- [ ] 理解資源之間的依賴性
 
 #### ✅ 網絡與安全
-- [ ] 已驗證到 Azure 端點的網絡連接
-- [ ] 如有需要，已配置防火牆/代理設置
-- [ ] 已配置 Key Vault 用於密碼管理
+- [ ] 驗證到 Azure 端點的網絡連接
+- [ ] 如果需要，配置防火牆/代理設置
+- [ ] 配置 Key Vault 進行秘密管理
 - [ ] 儘可能使用托管身份
-- [ ] 為 Web 應用啟用了 HTTPS 強制
+- [ ] 為 Web 應用啟用 HTTPS 強制
 
 #### ✅ 成本管理
-- [ ] 使用 Azure 價格計算器計算了成本估算
-- [ ] 如有需要，已配置預算警報
-- [ ] 為環境類型選擇了適當的 SKU
-- [ ] 考慮了生產工作負載的預留容量
+- [ ] 使用 Azure 價格計算器計算成本估算
+- [ ] 如果需要，配置預算警報
+- [ ] 為環境類型選擇適當的 SKU
+- [ ] 考慮生產工作負載的預留容量
 
 #### ✅ 監控與可觀測性
-- [ ] 在模板中配置了 Application Insights
-- [ ] 計劃了 Log Analytics 工作區
-- [ ] 為關鍵指標定義了警報規則
-- [ ] 在應用中實現了健康檢查端點
+- [ ] 在模板中配置 Application Insights
+- [ ] 計劃 Log Analytics 工作區
+- [ ] 為關鍵指標定義警報規則
+- [ ] 在應用中實現健康檢查端點
 
 #### ✅ 備份與恢復
-- [ ] 為數據資源定義了備份策略
-- [ ] 記錄了恢復時間目標（RTO）
-- [ ] 記錄了恢復點目標（RPO）
-- [ ] 為生產環境制定了災難恢復計劃
+- [ ] 為數據資源定義備份策略
+- [ ] 記錄恢復時間目標（RTO）
+- [ ] 記錄恢復點目標（RPO）
+- [ ] 為生產制定災難恢復計劃
 
 ---
 
@@ -1170,9 +1186,9 @@ main "$@"
 
 ---
 
-## 與 CI/CD 的整合
+## 與 CI/CD 的集成
 
-### GitHub Actions 整合
+### GitHub Actions 集成
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1231,7 +1247,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps 整合
+### Azure DevOps 集成
 
 ```yaml
 trigger: none
@@ -1285,27 +1301,27 @@ steps:
 
 ## 最佳實踐摘要
 
-### ✅ 部署前檢查最佳實踐
+### ✅ 預檢查最佳實踐
 
 1. **儘可能自動化**
-   - 將檢查整合到 CI/CD 管道中
+   - 將檢查集成到 CI/CD 管道中
    - 使用腳本進行可重複的驗證
    - 保存結果以供審計
 
-2. **針對環境的驗證**
+2. **特定環境驗證**
    - 為開發/測試/生產環境設置不同的檢查
-   - 根據環境需求設置適當的安全要求
-   - 為非生產環境進行成本優化
+   - 每個環境適用的安全要求
+   - 非生產環境的成本優化
 
 3. **全面覆蓋**
-   - 身份驗證與權限
-   - 資源配額與可用性
-   - 模板驗證與語法
-   - 安全與合規性要求
+   - 身份驗證和權限
+   - 資源配額和可用性
+   - 模板驗證和語法
+   - 安全和合規性要求
 
 4. **清晰報告**
    - 使用顏色標記的狀態指示器
-   - 提供詳細的錯誤信息及解決步驟
+   - 詳細的錯誤信息及解決步驟
    - 快速評估的摘要報告
 
 5. **快速失敗**
@@ -1313,18 +1329,18 @@ steps:
    - 提供清晰的解決指導
    - 支持輕鬆重新運行檢查
 
-### 常見部署前檢查陷阱
+### 常見預檢查陷阱
 
-1. **為了“快速”部署跳過驗證**
-2. **未充分檢查權限**導致部署失敗
+1. **跳過驗證**以進行“快速”部署
+2. **不足的權限**檢查導致部署失敗
 3. **忽略配額限制**直到部署失敗
 4. **未在 CI/CD 管道中驗證模板**
-5. **未進行生產環境的安全驗證**
-6. **成本估算不足**導致預算超支
+5. **缺乏生產環境的安全驗證**
+6. **成本估算不足**導致預算驚喜
 
 ---
 
-**專家提示**：在您的 CI/CD 管道中，將部署前檢查作為獨立的作業，放在實際部署作業之前。這樣可以及早發現問題，並為開發者提供更快的反饋。
+**專業提示**：在 CI/CD 管道中將預檢查作為獨立的作業，放在實際部署作業之前。這樣可以提前捕捉問題並為開發者提供更快的反饋。
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **免責聲明**：  
-本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

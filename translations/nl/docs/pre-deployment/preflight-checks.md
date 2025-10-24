@@ -1,44 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T06:54:51+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:36:54+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "nl"
 }
 -->
-# Pre-Flight Controles voor AZD-Deployments
+# Pre-flight controles voor AZD-implementaties
 
-**Hoofdstuk Navigatie:**
+**Hoofdstuknavigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 6 - Validatie & Planning vóór Deployment
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 6 - Validatie & Planning vóór implementatie
 - **⬅️ Vorige**: [SKU Selectie](sku-selection.md)
 - **➡️ Volgend Hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../troubleshooting/common-issues.md)
-- **🔧 Gerelateerd**: [Hoofdstuk 4: Deployment Gids](../deployment/deployment-guide.md)
+- **🔧 Gerelateerd**: [Hoofdstuk 4: Implementatiegids](../deployment/deployment-guide.md)
 
 ## Introductie
 
-Deze uitgebreide gids biedt validatiescripts en procedures vóór deployment om succesvolle Azure Developer CLI-deployments te garanderen voordat ze beginnen. Leer geautomatiseerde controles te implementeren voor authenticatie, resourcebeschikbaarheid, quota's, naleving van beveiligingsregels en prestatievereisten om deploymentfouten te voorkomen en de kans op succes te optimaliseren.
+Deze uitgebreide gids biedt scripts en procedures voor validatie vóór implementatie om succesvolle implementaties met Azure Developer CLI te garanderen voordat ze beginnen. Leer geautomatiseerde controles te implementeren voor authenticatie, beschikbaarheid van resources, quota's, naleving van beveiliging en prestatievereisten om implementatiefouten te voorkomen en de kans op succes te optimaliseren.
 
 ## Leerdoelen
 
 Door deze gids te voltooien, leer je:
-- Geautomatiseerde validatietechnieken en scripts vóór deployment beheersen
-- Uitgebreide controlestrategieën voor authenticatie, machtigingen en quota begrijpen
+- Geautomatiseerde validatietechnieken en scripts vóór implementatie beheersen
+- Uitgebreide controlestrategieën begrijpen voor authenticatie, machtigingen en quota's
 - Procedures voor validatie van resourcebeschikbaarheid en capaciteit implementeren
 - Beveiligings- en nalevingscontroles configureren volgens organisatieregels
-- Workflows voor kostenraming en budgetvalidatie ontwerpen
-- Aangepaste automatisering voor pre-flight controles maken voor CI/CD-pipelines
+- Werkstromen voor kostenraming en budgetvalidatie ontwerpen
+- Aangepaste automatisering voor pre-flight controles maken voor CI/CD-pijplijnen
 
 ## Leerresultaten
 
 Na voltooiing kun je:
-- Uitgebreide validatiescripts vóór deployment maken en uitvoeren
-- Geautomatiseerde controleworkflows ontwerpen voor verschillende deploymentscenario's
-- Validatieprocedures en -regels specifiek voor de omgeving implementeren
-- Proactieve monitoring en waarschuwingen configureren voor deploymentgereedheid
-- Problemen vóór deployment oplossen en corrigerende acties uitvoeren
-- Pre-flight controles integreren in DevOps-pipelines en automatiseringsworkflows
+- Uitgebreide validatiescripts vóór implementatie maken en uitvoeren
+- Geautomatiseerde controlewerkstromen ontwerpen voor verschillende implementatiescenario's
+- Procedures en beleidsregels voor validatie per omgeving implementeren
+- Proactieve monitoring en waarschuwingen configureren voor implementatiegereedheid
+- Problemen vóór implementatie oplossen en corrigerende maatregelen nemen
+- Pre-flight controles integreren in DevOps-pijplijnen en automatiseringswerkstromen
 
 ## Inhoudsopgave
 
@@ -55,22 +55,22 @@ Na voltooiing kun je:
 
 ## Overzicht
 
-Pre-flight controles zijn essentiële validaties die worden uitgevoerd vóór deployment om te garanderen:
+Pre-flight controles zijn essentiële validaties die worden uitgevoerd vóór implementatie om te garanderen:
 
 - **Beschikbaarheid van resources** en quota's in doelregio's
 - **Authenticatie en machtigingen** zijn correct geconfigureerd
 - **Templategeldigheid** en parametercorrectheid
 - **Netwerkconnectiviteit** en afhankelijkheden
-- **Naleving van beveiligingsregels** volgens organisatieregels
+- **Naleving van beveiliging** volgens organisatieregels
 - **Kostenraming** binnen budgetlimieten
 
-### Wanneer Pre-flight Controles Uitvoeren
+### Wanneer Pre-flight controles uitvoeren
 
-- **Voor de eerste deployment** naar een nieuwe omgeving
-- **Na significante wijzigingen aan templates**
-- **Voor productie-deployments**
+- **Voor de eerste implementatie** in een nieuwe omgeving
+- **Na significante wijzigingen in templates**
+- **Voor productie-implementaties**
 - **Bij het wijzigen van Azure-regio's**
-- **Als onderdeel van CI/CD-pipelines**
+- **Als onderdeel van CI/CD-pijplijnen**
 
 ---
 
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -792,11 +807,11 @@ main "$@"
 
 ## Handmatige Validatie Checklist
 
-### Checklist vóór Deployment
+### Checklist vóór implementatie
 
-Print deze checklist en controleer elk item vóór deployment:
+Print deze checklist en controleer elk item vóór implementatie:
 
-#### ✅ Omgevingsinstellingen
+#### ✅ Omgevingsinstelling
 - [ ] AZD CLI geïnstalleerd en bijgewerkt naar de nieuwste versie
 - [ ] Azure CLI geïnstalleerd en geauthenticeerd
 - [ ] Correct Azure-abonnement geselecteerd
@@ -812,8 +827,9 @@ Print deze checklist en controleer elk item vóór deployment:
 #### ✅ Templatevalidatie
 - [ ] `azure.yaml` bestaat en is geldige YAML
 - [ ] Alle services gedefinieerd in azure.yaml hebben bijbehorende broncode
-- [ ] Bicep-templates in de `infra/`-map zijn aanwezig
+- [ ] Bicep-templates in de map `infra/` zijn aanwezig
 - [ ] `main.bicep` compileert zonder fouten (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Infrastructuurpreview wordt succesvol uitgevoerd (`azd provision --preview`)
 - [ ] Alle vereiste parameters hebben standaardwaarden of worden verstrekt
 - [ ] Geen hardcoded geheimen in templates
 
@@ -821,7 +837,7 @@ Print deze checklist en controleer elk item vóór deployment:
 - [ ] Doelregio in Azure geselecteerd en gevalideerd
 - [ ] Vereiste Azure-services beschikbaar in doelregio
 - [ ] Voldoende quota beschikbaar voor geplande resources
-- [ ] Conflicten in resourcebenamingen gecontroleerd
+- [ ] Conflicten in resourcenamen gecontroleerd
 - [ ] Afhankelijkheden tussen resources begrepen
 
 #### ✅ Netwerk & Beveiliging
@@ -834,14 +850,14 @@ Print deze checklist en controleer elk item vóór deployment:
 #### ✅ Kostenbeheer
 - [ ] Kostenramingen berekend met Azure Pricing Calculator
 - [ ] Budgetwaarschuwingen geconfigureerd indien nodig
-- [ ] Geschikte SKU's geselecteerd voor omgevingstype
+- [ ] Geschikte SKU's geselecteerd voor het type omgeving
 - [ ] Gereserveerde capaciteit overwogen voor productiebelastingen
 
 #### ✅ Monitoring & Observatie
 - [ ] Application Insights geconfigureerd in templates
 - [ ] Log Analytics workspace gepland
-- [ ] Waarschuwingsregels gedefinieerd voor kritieke metrics
-- [ ] Health check-eindpunten geïmplementeerd in applicaties
+- [ ] Waarschuwingsregels gedefinieerd voor kritieke statistieken
+- [ ] Gezondheidscontrole-eindpunten geïmplementeerd in applicaties
 
 #### ✅ Back-up & Herstel
 - [ ] Back-upstrategie gedefinieerd voor dataresources
@@ -853,7 +869,7 @@ Print deze checklist en controleer elk item vóór deployment:
 
 ## Omgevingsvalidatie
 
-### Validatie van Ontwikkelomgeving
+### Validatie van ontwikkelomgeving
 
 ```bash
 #!/bin/bash
@@ -885,7 +901,7 @@ validate_dev_environment() {
 }
 ```
 
-### Validatie van Productieomgeving
+### Validatie van productieomgeving
 
 ```bash
 #!/bin/bash
@@ -928,7 +944,7 @@ validate_prod_environment() {
 
 ## Resourcevalidatie
 
-### Quota Validatie Script
+### Quota-validatiescript
 
 ```python
 #!/usr/bin/env python3
@@ -1053,7 +1069,7 @@ if __name__ == "__main__":
 
 ## Beveiligings- & Nalevingscontroles
 
-### Beveiligingsvalidatie Script
+### Validatiescript voor beveiliging
 
 ```bash
 #!/bin/bash
@@ -1285,46 +1301,46 @@ steps:
 
 ## Samenvatting van Best Practices
 
-### ✅ Best Practices voor Pre-flight Controles
+### ✅ Best Practices voor Pre-flight controles
 
-1. **Automatiseer Waar Mogelijk**
-   - Integreer controles in CI/CD-pipelines
+1. **Automatiseer waar mogelijk**
+   - Integreer controles in CI/CD-pijplijnen
    - Gebruik scripts voor herhaalbare validaties
-   - Bewaar resultaten voor auditdoeleinden
+   - Sla resultaten op voor auditdoeleinden
 
-2. **Omgevingsspecifieke Validatie**
-   - Verschillende controles voor dev/staging/prod
+2. **Validatie per omgeving**
+   - Verschillende controles voor ontwikkel-, test- en productieomgevingen
    - Geschikte beveiligingseisen per omgeving
    - Kostenoptimalisatie voor niet-productieomgevingen
 
-3. **Uitgebreide Dekking**
+3. **Uitgebreide dekking**
    - Authenticatie en machtigingen
    - Resourcequota's en beschikbaarheid
    - Templatevalidatie en syntaxis
    - Beveiligings- en nalevingsvereisten
 
-4. **Duidelijke Rapportage**
+4. **Duidelijke rapportage**
    - Statusindicatoren met kleurcodering
    - Gedetailleerde foutmeldingen met oplossingsstappen
    - Samenvattingsrapporten voor snelle beoordeling
 
-5. **Snel Falen**
-   - Stop deployment als kritieke controles falen
+5. **Snel falen**
+   - Stop implementatie als kritieke controles falen
    - Geef duidelijke richtlijnen voor oplossing
    - Maak het eenvoudig om controles opnieuw uit te voeren
 
-### Veelvoorkomende Valkuilen bij Pre-flight Controles
+### Veelvoorkomende valkuilen bij Pre-flight controles
 
-1. **Overslaan van validatie** voor "snelle" deployments
-2. **Onvoldoende machtigingen** controleren vóór deployment
-3. **Quota-limieten negeren** totdat deployment faalt
-4. **Templates niet valideren** in CI/CD-pipelines
+1. **Validatie overslaan** voor "snelle" implementaties
+2. **Onvoldoende machtigingen** controleren vóór implementatie
+3. **Quota-limieten negeren** totdat implementatie faalt
+4. **Templates niet valideren** in CI/CD-pijplijnen
 5. **Beveiligingsvalidatie missen** voor productieomgevingen
 6. **Onvoldoende kostenraming** wat leidt tot budgetverrassingen
 
 ---
 
-**Pro Tip**: Voer pre-flight controles uit als een aparte taak in je CI/CD-pipeline vóór de daadwerkelijke deploymenttaak. Dit stelt je in staat om problemen vroegtijdig te detecteren en biedt sneller feedback aan ontwikkelaars.
+**Pro Tip**: Voer pre-flight controles uit als een aparte taak in je CI/CD-pijplijn vóór de daadwerkelijke implementatietaak. Dit stelt je in staat om problemen vroegtijdig te detecteren en biedt sneller feedback aan ontwikkelaars.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

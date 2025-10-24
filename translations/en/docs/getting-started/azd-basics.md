@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:24:19+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T16:24:35+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "en"
 }
@@ -20,7 +20,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that streamlines the process of moving from local development to Azure deployment. You'll learn the essential concepts, key features, and understand how azd simplifies deploying cloud-native applications.
+This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that speeds up the process of moving from local development to Azure deployment. You'll learn the key concepts, main features, and understand how azd simplifies deploying cloud-native applications.
 
 ## Learning Goals
 
@@ -37,12 +37,12 @@ After completing this lesson, you will be able to:
 - Explain the role of azd in modern cloud development workflows
 - Identify the components of an azd project structure
 - Describe how templates, environments, and services work together
-- Understand the advantages of Infrastructure as Code with azd
-- Recognize different azd commands and their uses
+- Understand the benefits of Infrastructure as Code with azd
+- Recognize different azd commands and their purposes
 
 ## What is Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) is a command-line tool designed to speed up the process of moving from local development to Azure deployment. It simplifies building, deploying, and managing cloud-native applications on Azure.
+Azure Developer CLI (azd) is a command-line tool designed to streamline the process of moving from local development to Azure deployment. It simplifies building, deploying, and managing cloud-native applications on Azure.
 
 ## Core Concepts
 
@@ -51,7 +51,7 @@ Templates are the backbone of azd. They include:
 - **Application code** - Your source code and dependencies
 - **Infrastructure definitions** - Azure resources defined using Bicep or Terraform
 - **Configuration files** - Settings and environment variables
-- **Deployment scripts** - Automated workflows for deployment
+- **Deployment scripts** - Automated deployment workflows
 
 ### Environments
 Environments represent different deployment targets:
@@ -66,7 +66,7 @@ Each environment has its own:
 
 ### Services
 Services are the components of your application:
-- **Frontend** - Web applications, single-page apps
+- **Frontend** - Web applications, SPAs
 - **Backend** - APIs, microservices
 - **Database** - Data storage solutions
 - **Storage** - File and blob storage
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Safe Infrastructure Planning with Preview
+The `azd provision --preview` command is a game-changer for safe deployments:
+- **Dry-run analysis** - Displays what will be created, modified, or deleted
+- **Zero risk** - No actual changes are made to your Azure environment
+- **Team collaboration** - Share preview results before deployment
+- **Cost estimation** - Understand resource costs before committing
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Environment Management
@@ -551,3 +569,5 @@ azd init --template template1
 
 ---
 
+**Disclaimer**:  
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

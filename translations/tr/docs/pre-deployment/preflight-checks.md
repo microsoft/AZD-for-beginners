@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T21:58:38+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:19:10+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "tr"
 }
@@ -18,32 +18,32 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI dağıtımlarının başlamadan önce başarılı olmasını sağlamak için ön dağıtım doğrulama betikleri ve prosedürleri sunar. Kimlik doğrulama, kaynak kullanılabilirliği, kotalar, güvenlik uyumluluğu ve performans gereksinimleri için otomatik kontroller uygulamayı öğrenerek dağıtım hatalarını önleyebilir ve başarı oranlarını optimize edebilirsiniz.
+Bu kapsamlı kılavuz, Azure Developer CLI dağıtımlarının başlamadan önce başarılı olmasını sağlamak için ön dağıtım doğrulama komut dosyaları ve prosedürleri sunar. Kimlik doğrulama, kaynak kullanılabilirliği, kotalar, güvenlik uyumluluğu ve performans gereksinimleri için otomatik kontroller uygulamayı öğrenerek dağıtım hatalarını önleyebilir ve başarı oranlarını optimize edebilirsiniz.
 
 ## Öğrenme Hedefleri
 
-Bu kılavuzu tamamlayarak:
-- Otomatik ön dağıtım doğrulama tekniklerini ve betiklerini öğrenin
-- Kimlik doğrulama, izinler ve kotalar için kapsamlı kontrol stratejilerini anlayın
-- Kaynak kullanılabilirliği ve kapasite doğrulama prosedürlerini uygulayın
-- Kurumsal politikalar için güvenlik ve uyumluluk kontrollerini yapılandırın
-- Maliyet tahmini ve bütçe doğrulama iş akışlarını tasarlayın
-- CI/CD hatları için özel ön kontrol otomasyonu oluşturun
+Bu kılavuzu tamamladığınızda:
+- Otomatik ön dağıtım doğrulama tekniklerini ve komut dosyalarını öğrenmiş olacaksınız
+- Kimlik doğrulama, izinler ve kotalar için kapsamlı kontrol stratejilerini anlayacaksınız
+- Kaynak kullanılabilirliği ve kapasite doğrulama prosedürlerini uygulayabileceksiniz
+- Kurumsal politikalar için güvenlik ve uyumluluk kontrollerini yapılandırabileceksiniz
+- Maliyet tahmini ve bütçe doğrulama iş akışlarını tasarlayabileceksiniz
+- CI/CD boru hatları için özel ön kontrol otomasyonu oluşturabileceksiniz
 
 ## Öğrenme Çıktıları
 
-Tamamlandığında, şunları yapabileceksiniz:
-- Kapsamlı ön kontrol doğrulama betikleri oluşturup çalıştırın
-- Farklı dağıtım senaryoları için otomatik kontrol iş akışları tasarlayın
-- Ortama özgü doğrulama prosedürleri ve politikaları uygulayın
-- Dağıtım hazırlığı için proaktif izleme ve uyarılar yapılandırın
-- Ön dağıtım sorunlarını giderin ve düzeltici eylemler uygulayın
-- Ön kontrol kontrollerini DevOps hatlarına ve otomasyon iş akışlarına entegre edin
+Tamamladıktan sonra:
+- Kapsamlı ön kontrol doğrulama komut dosyaları oluşturup çalıştırabileceksiniz
+- Farklı dağıtım senaryoları için otomatik kontrol iş akışları tasarlayabileceksiniz
+- Ortama özgü doğrulama prosedürleri ve politikaları uygulayabileceksiniz
+- Dağıtım hazırlığı için proaktif izleme ve uyarı yapılandırabileceksiniz
+- Ön dağıtım sorunlarını giderip düzeltici eylemler uygulayabileceksiniz
+- Ön kontrol kontrollerini DevOps boru hatlarına ve otomasyon iş akışlarına entegre edebileceksiniz
 
 ## İçindekiler
 
 - [Genel Bakış](../../../../docs/pre-deployment)
-- [Otomatik Ön Kontrol Betiği](../../../../docs/pre-deployment)
+- [Otomatik Ön Kontrol Komut Dosyası](../../../../docs/pre-deployment)
 - [Manuel Doğrulama Kontrol Listesi](../../../../docs/pre-deployment)
 - [Ortam Doğrulama](../../../../docs/pre-deployment)
 - [Kaynak Doğrulama](../../../../docs/pre-deployment)
@@ -55,14 +55,14 @@ Tamamlandığında, şunları yapabileceksiniz:
 
 ## Genel Bakış
 
-Ön kontrol kontrolleri, dağıtımdan önce aşağıdakileri doğrulamak için yapılan temel doğrulamalardır:
+Ön kontrol kontrolleri, dağıtımdan önce aşağıdakileri sağlamak için yapılan temel doğrulamalardır:
 
-- Hedef bölgelerdeki **kaynak kullanılabilirliği** ve kotalar
+- Hedef bölgelerde **kaynak kullanılabilirliği** ve kotalar
 - **Kimlik doğrulama ve izinlerin** doğru yapılandırılması
 - **Şablon geçerliliği** ve parametre doğruluğu
 - **Ağ bağlantısı** ve bağımlılıklar
 - Kurumsal politikalarla **güvenlik uyumluluğu**
-- Bütçe sınırları içinde **maliyet tahmini**
+- Bütçe sınırları dahilinde **maliyet tahmini**
 
 ### Ön Kontroller Ne Zaman Çalıştırılmalı?
 
@@ -70,13 +70,13 @@ Tamamlandığında, şunları yapabileceksiniz:
 - **Önemli şablon değişikliklerinden** sonra
 - **Üretim dağıtımlarından** önce
 - **Azure bölgelerini değiştirirken**
-- **CI/CD hatlarının bir parçası olarak**
+- **CI/CD boru hatlarının** bir parçası olarak
 
 ---
 
-## Otomatik Ön Kontrol Betiği
+## Otomatik Ön Kontrol Komut Dosyası
 
-### PowerShell Ön Kontrol Aracı
+### PowerShell Ön Kontrol Denetleyicisi
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Ön Kontrol Aracı
+### Bash Ön Kontrol Denetleyicisi
 
 ```bash
 #!/bin/bash
@@ -792,7 +807,7 @@ main "$@"
 
 ## Manuel Doğrulama Kontrol Listesi
 
-### Ön Dağıtım Kontrol Listesi
+### Dağıtım Öncesi Kontrol Listesi
 
 Bu kontrol listesini yazdırın ve dağıtımdan önce her öğeyi doğrulayın:
 
@@ -801,12 +816,12 @@ Bu kontrol listesini yazdırın ve dağıtımdan önce her öğeyi doğrulayın:
 - [ ] Azure CLI yüklendi ve kimlik doğrulandı
 - [ ] Doğru Azure aboneliği seçildi
 - [ ] Ortam adı benzersiz ve adlandırma kurallarına uygun
-- [ ] Hedef kaynak grubu belirlendi veya oluşturulabilir
+- [ ] Hedef kaynak grubu tanımlandı veya oluşturulabilir
 
 #### ✅ Kimlik Doğrulama ve İzinler
 - [ ] `azd auth login` ile başarıyla kimlik doğrulandı
 - [ ] Kullanıcı, hedef abonelik/kaynak grubunda Katkıda Bulunan rolüne sahip
-- [ ] CI/CD için hizmet sorumlusu yapılandırıldı (uygulanabilirse)
+- [ ] CI/CD için hizmet ilkesi yapılandırıldı (uygulanabilirse)
 - [ ] Süresi dolmuş sertifika veya kimlik bilgisi yok
 
 #### ✅ Şablon Doğrulama
@@ -814,6 +829,7 @@ Bu kontrol listesini yazdırın ve dağıtımdan önce her öğeyi doğrulayın:
 - [ ] azure.yaml'da tanımlanan tüm hizmetlerin karşılık gelen kaynak kodu var
 - [ ] `infra/` dizinindeki Bicep şablonları mevcut
 - [ ] `main.bicep` hatasız derleniyor (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Altyapı önizlemesi başarıyla çalışıyor (`azd provision --preview`)
 - [ ] Tüm gerekli parametrelerin varsayılan değerleri var veya sağlanacak
 - [ ] Şablonlarda sabit kodlanmış gizli bilgiler yok
 
@@ -827,7 +843,7 @@ Bu kontrol listesini yazdırın ve dağıtımdan önce her öğeyi doğrulayın:
 #### ✅ Ağ ve Güvenlik
 - [ ] Azure uç noktalarına ağ bağlantısı doğrulandı
 - [ ] Gerekirse güvenlik duvarı/proxy ayarları yapılandırıldı
-- [ ] Gizli bilgiler için Key Vault yapılandırıldı
+- [ ] Gizli bilgiler yönetimi için Key Vault yapılandırıldı
 - [ ] Mümkün olduğunda yönetilen kimlikler kullanıldı
 - [ ] Web uygulamaları için HTTPS zorlaması etkinleştirildi
 
@@ -835,7 +851,7 @@ Bu kontrol listesini yazdırın ve dağıtımdan önce her öğeyi doğrulayın:
 - [ ] Azure Fiyatlandırma Hesaplayıcısı kullanılarak maliyet tahminleri hesaplandı
 - [ ] Gerekirse bütçe uyarıları yapılandırıldı
 - [ ] Ortam türü için uygun SKU'lar seçildi
-- [ ] Üretim iş yükleri için ayrılmış kapasite dikkate alındı
+- [ ] Üretim iş yükleri için ayrılmış kapasite göz önünde bulunduruldu
 
 #### ✅ İzleme ve Görünürlük
 - [ ] Şablonlarda Application Insights yapılandırıldı
@@ -847,7 +863,7 @@ Bu kontrol listesini yazdırın ve dağıtımdan önce her öğeyi doğrulayın:
 - [ ] Veri kaynakları için yedekleme stratejisi tanımlandı
 - [ ] Kurtarma süresi hedefleri (RTO) belgelenmiş
 - [ ] Kurtarma noktası hedefleri (RPO) belgelenmiş
-- [ ] Üretim için felaket kurtarma planı mevcut
+- [ ] Üretim için felaket kurtarma planı hazır
 
 ---
 
@@ -928,7 +944,7 @@ validate_prod_environment() {
 
 ## Kaynak Doğrulama
 
-### Kota Doğrulama Betiği
+### Kota Doğrulama Komut Dosyası
 
 ```python
 #!/usr/bin/env python3
@@ -1053,7 +1069,7 @@ if __name__ == "__main__":
 
 ## Güvenlik ve Uyumluluk Kontrolleri
 
-### Güvenlik Doğrulama Betiği
+### Güvenlik Doğrulama Komut Dosyası
 
 ```bash
 #!/bin/bash
@@ -1288,8 +1304,8 @@ steps:
 ### ✅ Ön Kontrol En İyi Uygulamaları
 
 1. **Mümkün Olduğunca Otomatikleştirin**
-   - Kontrolleri CI/CD hatlarına entegre edin
-   - Tekrarlanabilir doğrulamalar için betikler kullanın
+   - Kontrolleri CI/CD boru hatlarına entegre edin
+   - Tekrarlanabilir doğrulamalar için komut dosyaları kullanın
    - Sonuçları denetim izleri için saklayın
 
 2. **Ortama Özgü Doğrulama**
@@ -1305,26 +1321,26 @@ steps:
 
 4. **Net Raporlama**
    - Renk kodlu durum göstergeleri
-   - Çözüm adımlarıyla ayrıntılı hata mesajları
+   - Ayrıntılı hata mesajları ve çözüm adımları
    - Hızlı değerlendirme için özet raporlar
 
 5. **Hızlı Hata Tespiti**
-   - Kritik kontroller başarısız olduğunda dağıtımı durdurun
+   - Kritik kontroller başarısız olursa dağıtımı durdurun
    - Çözüm için net rehberlik sağlayın
    - Kontrollerin kolayca yeniden çalıştırılmasını sağlayın
 
 ### Yaygın Ön Kontrol Hataları
 
-1. **"Hızlı" dağıtımlar için doğrulamayı atlamak**
-2. **Dağıtımdan önce yetersiz izin kontrolü**
-3. **Kota sınırlarını göz ardı etmek** ve dağıtımın başarısız olması
-4. **Şablonları CI/CD hatlarında doğrulamamak**
-5. **Üretim ortamları için güvenlik doğrulamasını eksik bırakmak**
+1. "Hızlı" dağıtımlar için doğrulamayı **atlamak**
+2. Dağıtımdan önce **yetersiz izinler** kontrolü
+3. Dağıtım başarısız olana kadar **kota sınırlarını** görmezden gelmek
+4. CI/CD boru hatlarında **şablon doğrulama** yapmamak
+5. Üretim ortamları için **güvenlik doğrulamasını** eksik bırakmak
 6. **Yetersiz maliyet tahmini** nedeniyle bütçe sürprizleri yaşamak
 
 ---
 
-**İpucu**: Ön kontrol kontrollerini, CI/CD hattınızda dağıtım işinden önce ayrı bir iş olarak çalıştırın. Bu, sorunları erken yakalamanıza olanak tanır ve geliştiricilere daha hızlı geri bildirim sağlar.
+**İpucu**: Ön kontrol kontrollerini, gerçek dağıtım işinden önce CI/CD boru hattınızda ayrı bir iş olarak çalıştırın. Bu, sorunları erken yakalamanıza ve geliştiricilere daha hızlı geri bildirim sağlamanıza olanak tanır.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.

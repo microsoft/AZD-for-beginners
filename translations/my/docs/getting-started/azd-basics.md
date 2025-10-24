@@ -1,77 +1,77 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:47:25+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T18:17:25+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "my"
 }
 -->
 # AZD အခြေခံ - Azure Developer CLI ကိုနားလည်ခြင်း
 
-# AZD အခြေခံ - အဓိကအကြောင်းအရာများနှင့် အခြေခံအချက်များ
+# AZD အခြေခံ - အဓိကအယူအဆများနှင့် အခြေခံအချက်များ
 
-**အခန်းအကြောင်းအရာများ:**
+**အခန်းအညွှန်း:**
 - **📚 သင်ခန်းစာအိမ်**: [AZD အခြေခံသင်ခန်းစာ](../../README.md)
-- **📖 လက်ရှိအခန်း**: အခန်း 1 - အခြေခံနှင့် အမြန်စတင်ခြင်း
-- **⬅️ ယခင်**: [သင်ခန်းစာအကျဉ်းချုပ်](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ နောက်တစ်ခု**: [Installation & Setup](installation.md)
-- **🚀 နောက်အခန်း**: [အခန်း 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၁ - အခြေခံနှင့် အမြန်စတင်ခြင်း
+- **⬅️ အရင်**: [သင်ခန်းစာအကျဉ်း](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ နောက်တစ်ခု**: [တပ်ဆင်ခြင်းနှင့် စတင်ခြင်း](installation.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၂: AI-First ဖွံ့ဖြိုးတိုးတက်မှု](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## မိတ်ဆက်
 
-ဒီသင်ခန်းစာမှာ Azure Developer CLI (azd) ကိုမိတ်ဆက်ပေးမှာဖြစ်ပြီး၊ ဒါဟာ သင့်ရဲ့ ဒေသတွင်းဖွံ့ဖြိုးတိုးတက်မှုကနေ Azure သို့ deployment ကို အရှိန်မြှင့်ပေးနိုင်တဲ့ command-line tool တစ်ခုဖြစ်ပါတယ်။ azd က cloud-native application deployment ကိုရိုးရှင်းစေတဲ့နည်းလမ်းတွေ၊ အဓိကအင်္ဂါရပ်တွေကို သင်လေ့လာနိုင်မှာဖြစ်ပြီး၊ အခြေခံအချက်တွေကိုနားလည်စေမှာဖြစ်ပါတယ်။
+ဒီသင်ခန်းစာမှာ Azure Developer CLI (azd) ကိုမိတ်ဆက်ပေးမှာဖြစ်ပြီး၊ ဒါဟာ ဒေသတွင်းဖွံ့ဖြိုးတိုးတက်မှုမှ Azure သို့ တင်သွင်းခြင်းအထိ အလျင်အမြန်လုပ်ဆောင်နိုင်စေတဲ့ command-line tool တစ်ခုဖြစ်ပါတယ်။ azd က cloud-native application တင်သွင်းခြင်းကို ဘယ်လိုရိုးရှင်းစေတယ်ဆိုတာကို သင်လေ့လာနိုင်ပါမယ်။
 
-## သင်ယူရမည့်အချက်များ
+## သင်ယူရမည့်ရည်မှန်းချက်များ
 
-ဒီသင်ခန်းစာအဆုံးမှာ သင်:
-- Azure Developer CLI (azd) ဆိုတာဘာလဲ၊ အဓိကရည်ရွယ်ချက်ကဘာလဲဆိုတာနားလည်နိုင်ပါမယ်
-- Template, Environment, Service တွေကို အခြေခံအကြောင်းအရာများကိုလေ့လာနိုင်ပါမယ်
-- Template-driven development နဲ့ Infrastructure as Code အင်္ဂါရပ်တွေကို ရှာဖွေတွေ့ရှိနိုင်ပါမယ်
-- azd project structure နဲ့ workflow ကိုနားလည်နိုင်ပါမယ်
-- သင့် development environment အတွက် azd ကို install နဲ့ configure လုပ်ဖို့ ပြင်ဆင်နိုင်ပါမယ်
+ဒီသင်ခန်းစာအဆုံးသတ်ချိန်မှာ သင်:
+- Azure Developer CLI ဆိုတာဘာလဲ၊ အဓိကရည်ရွယ်ချက်ကဘာလဲဆိုတာနားလည်ပါမယ်
+- Template, Environment, Service အဓိကအယူအဆများကိုလေ့လာပါမယ်
+- Template-Driven Development နှင့် Infrastructure as Code အပါအဝင် အဓိက features များကိုလေ့လာပါမယ်
+- azd project structure နှင့် workflow ကိုနားလည်ပါမယ်
+- သင့်ဖွံ့ဖြိုးတိုးတက်မှုပတ်ဝန်းကျင်အတွက် azd ကိုတပ်ဆင်ပြီး အဆင်သင့်ဖြစ်စေပါမယ်
 
-## သင်ယူရမည့်ရလဒ်များ
+## သင်ယူမှုရလဒ်များ
 
-ဒီသင်ခန်းစာပြီးဆုံးတဲ့အခါမှာ သင်:
-- azd ရဲ့ modern cloud development workflow မှာ အရေးပါမှုကိုရှင်းပြနိုင်ပါမယ်
+ဒီသင်ခန်းစာကိုပြီးမြောက်ပြီးနောက်မှာ သင်:
+- အခေတ်မီ cloud ဖွံ့ဖြိုးတိုးတက်မှု workflow တွေမှာ azd ရဲ့บทบาทကိုရှင်းပြနိုင်ပါမယ်
 - azd project structure ရဲ့ components တွေကိုသိရှိနိုင်ပါမယ်
 - Template, Environment, Service တွေဘယ်လိုပေါင်းစပ်လုပ်ဆောင်တယ်ဆိုတာဖော်ပြနိုင်ပါမယ်
-- azd နဲ့ Infrastructure as Code ရဲ့ အကျိုးကျေးဇူးတွေကိုနားလည်နိုင်ပါမယ်
-- azd command တွေကို အသုံးပြုနည်းနဲ့ ရည်ရွယ်ချက်တွေကိုသိရှိနိုင်ပါမယ်
+- azd ရဲ့ Infrastructure as Code ရဲ့အကျိုးကျေးဇူးကိုနားလည်နိုင်ပါမယ်
+- azd commands များနှင့်၎င်းတို့ရဲ့ရည်ရွယ်ချက်များကိုသိရှိနိုင်ပါမယ်
 
 ## Azure Developer CLI (azd) ဆိုတာဘာလဲ?
 
-Azure Developer CLI (azd) က ဒေသတွင်းဖွံ့ဖြိုးတိုးတက်မှုကနေ Azure deployment ကို အရှိန်မြှင့်ပေးနိုင်တဲ့ command-line tool တစ်ခုဖြစ်ပါတယ်။ Cloud-native application တွေကို Azure မှာ တည်ဆောက်ခြင်း၊ deploy လုပ်ခြင်း၊ စီမံခန့်ခွဲခြင်းလုပ်ငန်းစဉ်တွေကို ရိုးရှင်းစေပါတယ်။
+Azure Developer CLI (azd) က ဒေသတွင်းဖွံ့ဖြိုးတိုးတက်မှုမှ Azure သို့ တင်သွင်းခြင်းကို အလျင်အမြန်လုပ်ဆောင်နိုင်စေဖို့အတွက် ဒီဇိုင်းထုတ်ထားတဲ့ command-line tool တစ်ခုဖြစ်ပါတယ်။ ဒါဟာ Azure ပေါ်မှာ cloud-native application တွေကို တည်ဆောက်ခြင်း၊ တင်သွင်းခြင်း၊ စီမံခန့်ခွဲခြင်းလုပ်ငန်းစဉ်ကို ရိုးရှင်းစေပါတယ်။
 
-## အဓိကအကြောင်းအရာများ
+## အဓိကအယူအဆများ
 
 ### Templates
-Templates တွေက azd ရဲ့ အခြေခံအချက်ဖြစ်ပါတယ်။ Template တွေမှာပါဝင်တာတွေက:
+Templates တွေဟာ azd ရဲ့အခြေခံဖြစ်ပါတယ်။ Template တွေမှာပါဝင်တာတွေက:
 - **Application code** - သင့်ရဲ့ source code နဲ့ dependencies
-- **Infrastructure definitions** - Azure resources တွေကို Bicep သို့မဟုတ် Terraform နဲ့ သတ်မှတ်ထားခြင်း
+- **Infrastructure definitions** - Azure resources တွေကို Bicep သို့မဟုတ် Terraform နဲ့ဖော်ပြထားတာ
 - **Configuration files** - Settings နဲ့ environment variables
 - **Deployment scripts** - Automated deployment workflows
 
 ### Environments
-Environments တွေက deployment targets ကို ကိုယ်စားပြုပါတယ်:
+Environments တွေဟာ တင်သွင်းမှုရည်ရွယ်ချက်အမျိုးမျိုးကို ကိုယ်စားပြုပါတယ်:
 - **Development** - စမ်းသပ်ခြင်းနဲ့ ဖွံ့ဖြိုးတိုးတက်မှုအတွက်
-- **Staging** - Pre-production environment
-- **Production** - Live production environment
+- **Staging** - ထုတ်လုပ်မှုမတိုင်မီအခြေအနေ
+- **Production** - အသုံးပြုမှုအခြေအနေ
 
 Environment တစ်ခုစီမှာ:
 - Azure resource group
 - Configuration settings
-- Deployment state ကို ကိုယ်ပိုင်ထားပါတယ်
+- Deployment state ကို ကိုယ်ပိုင်ပိုင်ဆိုင်မှုရှိပါတယ်
 
 ### Services
-Services တွေက သင့် application ရဲ့ အဆောက်အအုံတွေဖြစ်ပါတယ်:
+Services တွေဟာ သင့် application ရဲ့အခြေခံအဆောက်အအုံတွေဖြစ်ပါတယ်:
 - **Frontend** - Web applications, SPAs
 - **Backend** - APIs, microservices
 - **Database** - Data storage solutions
 - **Storage** - File နဲ့ blob storage
 
-## အဓိကအင်္ဂါရပ်များ
+## အဓိက Features
 
 ### 1. Template-Driven Development
 ```bash
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Safe Infrastructure Planning with Preview
+`azd provision --preview` command က safe deployments အတွက် အရေးကြီးတဲ့ feature တစ်ခုဖြစ်ပါတယ်:
+- **Dry-run analysis** - ဘာတွေကို ဖန်တီးမလဲ၊ ပြင်ဆင်မလဲ၊ ဖျက်မလဲဆိုတာပြသပေးတယ်
+- **Zero risk** - Azure environment မှာ အပြောင်းအလဲမရှိဘဲ
+- **Team collaboration** - Deployment မလုပ်ခင် preview ရလဒ်တွေကိုမျှဝေနိုင်တယ်
+- **Cost estimation** - Resource cost တွေကိုနားလည်နိုင်တယ်
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Environment Management
@@ -106,7 +124,7 @@ azd env list
 
 ## 📁 Project Structure
 
-azd project structure ရဲ့ ပုံမှန်အဆောက်အအုံ:
+azd project structure ရဲ့ပုံမှန်:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -198,29 +216,29 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## `azd down --force --purge` ကိုနားလည်ခြင်း
-`azd down --force --purge` command က azd environment နဲ့ ဆက်စပ် resource တွေကို အပြည့်အဝဖျက်သိမ်းဖို့ အင်အားကြီးတဲ့နည်းလမ်းတစ်ခုဖြစ်ပါတယ်။ Flag တစ်ခုစီရဲ့လုပ်ဆောင်ချက်ကို အောက်မှာဖော်ပြထားပါတယ်:
+`azd down --force --purge` command က azd environment နဲ့ ဆက်စပ် resource တွေကို အပြည့်အဝဖျက်သိမ်းဖို့ အရေးကြီးတဲ့နည်းလမ်းတစ်ခုဖြစ်ပါတယ်။ Flag တစ်ခုစီရဲ့လုပ်ဆောင်ချက်ကိုအောက်မှာဖော်ပြထားပါတယ်:
 ```
 --force
 ```
-- Confirmation prompts တွေကို ကျော်လွှားပါတယ်။
-- Manual input မလိုအပ်တဲ့ automation သို့မဟုတ် scripting အတွက် အသုံးဝင်ပါတယ်။
-- CLI က အဆင်မပြေမှုတွေကို detect လုပ်ရင်တောင် အတားအဆီးမရှိဘဲ teardown ကို ဆက်လက်လုပ်ဆောင်နိုင်ပါတယ်။
+- အတည်ပြုမှု prompt တွေကိုကျော်သွားတယ်။
+- Manual input မလိုအပ်တဲ့ automation သို့မဟုတ် scripting အတွက်အသုံးဝင်တယ်။
+- CLI က အဆင်မပြေမှုတွေကိုတွေ့ရှိရင်တောင် အတားအဆီးမရှိဘဲ teardown ကိုဆက်လုပ်နိုင်စေတယ်။
 
 ```
 --purge
 ```
-Metadata အားလုံးကို ဖျက်သိမ်းပါတယ်၊ အပါအဝင်:
+Metadata အားလုံးကိုဖျက်သိမ်းတယ်၊ အပါအဝင်:
 Environment state
 ဒေသတွင်း `.azure` folder
 Cached deployment info
-azd ရဲ့ "remembering" အခြေအနေကို ဖယ်ရှားပေးပြီး၊ resource group မကိုက်ညီမှု သို့မဟုတ် stale registry references စတဲ့ပြဿနာတွေကို ကာကွယ်ပေးပါတယ်။
+azd ရဲ့ "အတိတ် deployment" တွေကိုမမှတ်မိအောင်လုပ်ပေးတယ်၊ resource group မကိုက်ညီမှု သို့မဟုတ် stale registry references လိုပြဿနာတွေကိုရှောင်ရှားနိုင်တယ်။
 
-### အဘယ်ကြောင့် နှစ်ခုလုံးကို အသုံးပြုသင့်သလဲ?
-`azd up` မှာ lingering state သို့မဟုတ် partial deployments ကြောင့် အခက်အခဲရှိတဲ့အခါမှာ ဒီ combo က **သန့်ရှင်းတဲ့အခြေအနေ** ကိုအာမခံပေးပါတယ်။
+### ဘာကြောင့်နှစ်ခုလုံးကိုအသုံးပြုသင့်လဲ?
+`azd up` မှာ lingering state သို့မဟုတ် partial deployments ကြောင့်အခက်အခဲရှိတဲ့အခါ၊ ဒီ combo က **သန့်ရှင်းတဲ့အခြေအနေ** ကိုအာမခံပေးနိုင်ပါတယ်။
 
-Azure portal မှာ manual resource deletions လုပ်ပြီးနောက် သို့မဟုတ် template, environment, resource group naming conventions တွေကို ပြောင်းလဲတဲ့အခါမှာ အထူးအသုံးဝင်ပါတယ်။
+အထူးသဖြင့် Azure portal မှာ resource တွေကို manual ဖျက်သိမ်းပြီးနောက် သို့မဟုတ် template, environment, resource group naming conventions တွေကိုပြောင်းလဲတဲ့အခါမှာအသုံးဝင်ပါတယ်။
 
-### Multiple Environments ကို စီမံခန့်ခွဲခြင်း
+### Managing Multiple Environments
 ```bash
 # Create staging environment
 azd env new staging
@@ -234,13 +252,13 @@ azd env select dev
 azd env list
 ```
 
-## 🔐 Authentication နဲ့ Credentials
+## 🔐 Authentication and Credentials
 
-Authentication ကိုနားလည်ခြင်းက azd deployments အောင်မြင်ဖို့အတွက် အရေးကြီးပါတယ်။ Azure က authentication methods အမျိုးမျိုးကို အသုံးပြုပြီး၊ azd က Azure tools အခြားတွေမှာ အသုံးပြုတဲ့ credential chain ကိုပဲ leverage လုပ်ပါတယ်။
+Authentication ကိုနားလည်ခြင်းက azd deployments အောင်မြင်ဖို့အတွက် အရေးကြီးပါတယ်။ Azure က authentication နည်းလမ်းအမျိုးမျိုးကိုအသုံးပြုပြီး၊ azd က အခြား Azure tools တွေမှာအသုံးပြုတဲ့ credential chain ကိုအသုံးပြုပါတယ်။
 
 ### Azure CLI Authentication (`az login`)
 
-azd ကို အသုံးပြုမည့်အခါမှာ Azure နဲ့ authenticate လုပ်ဖို့လိုအပ်ပါတယ်။ အများဆုံးအသုံးပြုတဲ့နည်းလမ်းက Azure CLI ကို အသုံးပြုခြင်းဖြစ်ပါတယ်:
+azd ကိုအသုံးပြုခင် Azure နဲ့ authenticate လုပ်ဖို့လိုအပ်ပါတယ်။ အများဆုံးအသုံးပြုတဲ့နည်းလမ်းက Azure CLI ကိုအသုံးပြုခြင်းဖြစ်ပါတယ်:
 
 ```bash
 # Interactive login (opens browser)
@@ -263,14 +281,14 @@ az account set --subscription <subscription-id>
 ```
 
 ### Authentication Flow
-1. **Interactive Login**: သင့် default browser ကိုဖွင့်ပြီး authenticate လုပ်ခြင်း
+1. **Interactive Login**: Authentication အတွက် default browser ကိုဖွင့်ပေးတယ်
 2. **Device Code Flow**: Browser access မရှိတဲ့ environment တွေအတွက်
 3. **Service Principal**: Automation နဲ့ CI/CD scenarios အတွက်
 4. **Managed Identity**: Azure-hosted applications အတွက်
 
 ### DefaultAzureCredential Chain
 
-`DefaultAzureCredential` က credential type တစ်ခုဖြစ်ပြီး၊ credential sources အမျိုးမျိုးကို အတိအကျအဆင့်လိုက်စမ်းသပ်ပေးတဲ့ simplified authentication အတွေ့အကြုံကိုပေးပါတယ်:
+`DefaultAzureCredential` က credential sources အမျိုးမျိုးကို အလိုအလျောက်စမ်းသပ်ပေးတဲ့ simplified authentication experience ကိုပေးပါတယ်:
 
 #### Credential Chain Order
 ```mermaid
@@ -294,9 +312,9 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
-အလိုအလျောက်အသုံးပြုသော:
-- Azure Kubernetes Service (AKS) နဲ့ Workload Identity
-- GitHub Actions နဲ့ OIDC federation
+အလိုအလျောက်အသုံးပြုတဲ့နေရာတွေ:
+- Azure Kubernetes Service (AKS) with Workload Identity
+- GitHub Actions with OIDC federation
 - အခြား federated identity scenarios
 
 #### 3. Managed Identity
@@ -313,9 +331,9 @@ az account show --query "user.type" --output tsv
 ```
 
 #### 4. Developer Tools Integration
-- **Visual Studio**: Signed-in account ကို အလိုအလျောက်အသုံးပြုခြင်း
-- **VS Code**: Azure Account extension credentials ကို အသုံးပြုခြင်း
-- **Azure CLI**: `az login` credentials ကို အသုံးပြုခြင်း (ဒေသတွင်းဖွံ့ဖြိုးတိုးတက်မှုအတွက် အများဆုံးအသုံးပြု)
+- **Visual Studio**: Signed-in account ကိုအလိုအလျောက်အသုံးပြုတယ်
+- **VS Code**: Azure Account extension credentials ကိုအသုံးပြုတယ်
+- **Azure CLI**: `az login` credentials ကိုအသုံးပြုတယ် (ဒေသတွင်းဖွံ့ဖြိုးတိုးတက်မှုအတွက်အများဆုံး)
 
 ### AZD Authentication Setup
 
@@ -366,13 +384,13 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### Production Environments အတွက်
-- Azure resources မှာ run လုပ်တဲ့အခါ **Managed Identity** ကိုအသုံးပြုပါ
+#### ထုတ်လုပ်မှုအခြေအနေများအတွက်
+- Azure resources ပေါ်မှာ run လုပ်တဲ့အခါ **Managed Identity** ကိုအသုံးပြုပါ
 - Automation scenarios အတွက် **Service Principal** ကိုအသုံးပြုပါ
-- Credentials တွေကို code သို့မဟုတ် configuration files မှာ သိမ်းဆည်းခြင်းကိုရှောင်ပါ
+- Credentials တွေကို code သို့မဟုတ် configuration files မှာမသိမ်းပါနဲ့
 - Sensitive configuration အတွက် **Azure Key Vault** ကိုအသုံးပြုပါ
 
-### Common Authentication Issues နဲ့ Solutions
+### Authentication ပြဿနာများနှင့် ဖြေရှင်းနည်းများ
 
 #### ပြဿနာ: "No subscription found"
 ```bash
@@ -410,7 +428,7 @@ az login
 azd auth login
 ```
 
-#### အဖွဲ့ဖွံ့ဖြိုးတိုးတက်မှု
+#### Team Development
 ```bash
 # Use specific tenant for organization
 az login --tenant contoso.onmicrosoft.com
@@ -429,15 +447,15 @@ az login --tenant tenant2.onmicrosoft.com
 azd up
 ```
 
-### Security Considerations
+### လုံခြုံရေးစဉ်းစားချက်များ
 
-1. **Credential Storage**: Credentials တွေကို source code မှာ သိမ်းဆည်းမထားပါနှင့်
+1. **Credential Storage**: Credentials တွေကို source code မှာမသိမ်းပါနဲ့
 2. **Scope Limitation**: Service principals အတွက် least-privilege principle ကိုအသုံးပြုပါ
-3. **Token Rotation**: Service principal secrets တွေကို regular လုပ်ပြီး rotate လုပ်ပါ
-4. **Audit Trail**: Authentication နဲ့ deployment activities တွေကို စောင့်ကြည့်ပါ
-5. **Network Security**: Private endpoints ကို အသုံးပြုပါ
+3. **Token Rotation**: Service principal secrets တွေကို regular rotation လုပ်ပါ
+4. **Audit Trail**: Authentication နဲ့ deployment လုပ်ငန်းစဉ်တွေကိုစောင့်ကြည့်ပါ
+5. **Network Security**: Private endpoints ကိုအသုံးပြုပါ
 
-### Troubleshooting Authentication
+### Authentication Troubleshooting
 
 ```bash
 # Debug authentication issues
@@ -474,9 +492,9 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Best Practices
+## အကောင်းဆုံးအလေ့အကျင့်များ
 
-### 1. အဓိပ္ပါယ်ရှိတဲ့နာမည်တွေကို အသုံးပြုပါ
+### 1. အဓိပ္ပါယ်ရှိတဲ့နာမည်တွေကိုအသုံးပြုပါ
 ```bash
 # Good
 azd env new production-east
@@ -487,65 +505,67 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Templates ကို အသုံးပြုပါ
-- ရှိပြီးသား templates တွေနဲ့ စတင်ပါ
+### 2. Templates တွေကိုအသုံးပြုပါ
+- ရှိပြီးသား templates တွေနဲ့စတင်ပါ
 - သင့်လိုအပ်ချက်အတွက် customize လုပ်ပါ
-- သင့်အဖွဲ့အစည်းအတွက် reusable templates တွေကို ဖန်တီးပါ
+- သင့်အဖွဲ့အစည်းအတွက် reusable templates တွေကိုဖန်တီးပါ
 
 ### 3. Environment Isolation
-- Dev/Staging/Prod အတွက် environment တွေကို သီးသန့်အသုံးပြုပါ
-- ဒေသတွင်းစက်ကနေ production ကို တိုက်ရိုက် deploy မလုပ်ပါနှင့်
-- Production deployments အတွက် CI/CD pipelines ကို အသုံးပြုပါ
+- dev/staging/prod အတွက် environment တွေကိုခွဲထားပါ
+- ဒေသတွင်းစက်ကနေ production ကိုတိုက်ရိုက် deploy မလုပ်ပါနဲ့
+- Production deployments အတွက် CI/CD pipelines ကိုအသုံးပြုပါ
 
 ### 4. Configuration Management
-- Sensitive data အတွက် environment variables ကို အသုံးပြုပါ
-- Configuration ကို version control မှာ သိမ်းဆည်းပါ
+- Sensitive data အတွက် environment variables ကိုအသုံးပြုပါ
+- Configuration ကို version control မှာထားပါ
 - Environment-specific settings တွေကို documentation လုပ်ပါ
 
 ## သင်ယူမှုတိုးတက်မှု
 
 ### Beginner (Week 1-2)
-1. azd ကို install လုပ်ပြီး authenticate လုပ်ပါ
+1. azd ကိုတပ်ဆင်ပြီး authenticate လုပ်ပါ
 2. ရိုးရှင်းတဲ့ template တစ်ခုကို deploy လုပ်ပါ
 3. Project structure ကိုနားလည်ပါ
-4. Basic commands (up, down, deploy) တွေကို လေ့လာပါ
+4. Basic commands (up, down, deploy) တွေကိုလေ့လာပါ
 
 ### Intermediate (Week 3-4)
 1. Templates တွေကို customize လုပ်ပါ
-2. Multiple environments ကို စီမံခန့်ခွဲပါ
+2. Multiple environments တွေကိုစီမံပါ
 3. Infrastructure code ကိုနားလည်ပါ
-4. CI/CD pipelines တွေကို setup လုပ်ပါ
+4. CI/CD pipelines တွေကိုတပ်ဆင်ပါ
 
 ### Advanced (Week 5+)
-1. Custom templates တွေကို ဖန်တီးပါ
-2. Infrastructure patterns advanced တွေကို လေ့လာပါ
-3. Multi-region deployments ကို လုပ်ဆောင်ပါ
-4. Enterprise-grade configurations ကို အသုံးပြုပါ
+1. Custom templates တွေကိုဖန်တီးပါ
+2. Infrastructure patterns advanced တွေကိုလေ့လာပါ
+3. Multi-region deployments တွေကိုလုပ်ပါ
+4. Enterprise-grade configurations တွေကိုတပ်ဆင်ပါ
 
 ## နောက်တစ်ဆင့်
 
-**📖 အခန်း 1 သင်ယူမှုဆက်လက်လုပ်ဆောင်ရန်:**
-- [Installation & Setup](installation.md) - azd ကို install နဲ့ configure လုပ်ပါ
-- [Your First Project](first-project.md) - လက်တွေ့ tutorial ကို ပြီးမြောက်ပါ
-- [Configuration Guide](configuration.md) - Configuration options advanced တွေကို လေ့လာပါ
+**📖 အခန်း ၁ သင်ယူမှုဆက်လက်:**
+- [တပ်ဆင်ခြင်းနှင့် စတင်ခြင်း](installation.md) - azd ကိုတပ်ဆင်ပြီး configure လုပ်ပါ
+- [သင့်ရဲ့ပထမဆုံး Project](first-project.md) - လက်တွေ့ tutorial ကိုပြီးမြောက်ပါ
+- [Configuration လမ်းညွှန်](configuration.md) - အဆင့်မြင့် configuration ရွေးချယ်မှုများ
 
-**🎯 နောက်အခန်းအဆင့်သို့ ပြင်ဆင်ပါ:**
-- [အခန်း 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md) - AI applications တွေကို စတင်တည်ဆောက်ပါ
+**🎯 နောက်အခန်းအဆင်သင့်ဖြစ်ပါပြီလား?**
+- [အခန်း ၂: AI-First ဖွံ့ဖြိုးတိုးတက်မှု](../ai-foundry/azure-ai-foundry-integration.md) - AI applications တွေကိုစတင်တည်ဆောက်ပါ
 
-## အပိုဆောင်းအရင်းအမြစ်များ
+## ထပ်ဆောင်းအရင်းအမြစ်များ
 
-- [Azure Developer CLI Overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Developer CLI အကျဉ်း](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Template Gallery](https://azure.github.io/awesome-azd/)
 - [Community Samples](https://github.com/Azure-Samples)
 
 ---
 
-**အခန်းအကြောင်းအရာများ:**
+**အခန်းအညွှန်း:**
 - **📚 သင်ခန်းစာအိမ်**: [AZD အခြေခံသင်ခန်းစာ](../../README.md)
-- **📖 လက်ရှိအခန်း**: အခန်း 1 - အခြေခံနှင့် အမြန်စတင်ခြင်း  
-- **⬅️ ယခင်**: [သင်ခန်းစာအကျဉ်းချုပ်](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ နောက်တစ်ခု**: [Installation & Setup](installation.md)
-- **🚀 နောက်အခန်း**: [အခန်း 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၁ - အခြေခံနှင့် အမြန်စတင်ခြင်း  
+- **⬅️ အရင်**: [သင်ခန်းစာအကျဉ်း](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ နောက်တစ်ခု**: [တပ်ဆင်ခြင်းနှင့် စတင်ခြင်း](installation.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၂: AI-First ဖွံ့ဖြိုးတိုးတက်မှု](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**အကြောင်းကြားချက်**:  
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

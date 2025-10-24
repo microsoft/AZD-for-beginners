@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T07:11:22+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:39:18+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "he"
 }
 -->
-# הקצאת משאבי Azure עם AZD
+# הקצאת משאבים ב-Azure עם AZD
 
 **ניווט פרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
@@ -18,13 +18,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## מבוא
 
-מדריך מקיף זה מכסה את כל מה שצריך לדעת על הקצאה וניהול משאבי Azure באמצעות Azure Developer CLI. תלמדו ליישם דפוסי תשתית כקוד (IaC) החל מיצירת משאבים בסיסית ועד ארכיטקטורות תשתית מתקדמות ברמת ארגון באמצעות Bicep, תבניות ARM, Terraform ו-Pulumi.
+מדריך מקיף זה מכסה את כל מה שצריך לדעת על הקצאה וניהול משאבים ב-Azure באמצעות Azure Developer CLI. תלמדו ליישם דפוסי תשתית כקוד (IaC) החל מיצירת משאבים בסיסית ועד ארכיטקטורות תשתית מתקדמות ברמת הארגון באמצעות Bicep, תבניות ARM, Terraform ו-Pulumi.
 
 ## מטרות למידה
 
 עם סיום המדריך, תוכלו:
-- לשלוט בעקרונות תשתית כקוד והקצאת משאבי Azure
-- להבין את ספקי IaC השונים הנתמכים על ידי Azure Developer CLI
+- לשלוט בעקרונות תשתית כקוד והקצאת משאבים ב-Azure
+- להבין את ספקי ה-IaC השונים הנתמכים על ידי Azure Developer CLI
 - לעצב וליישם תבניות Bicep עבור ארכיטקטורות יישומים נפוצות
 - להגדיר פרמטרים של משאבים, משתנים והגדרות ספציפיות לסביבה
 - ליישם דפוסי תשתית מתקדמים כולל רשתות ואבטחה
@@ -36,17 +36,17 @@ CO_OP_TRANSLATOR_METADATA:
 - לעצב ולהקצות תשתית Azure באמצעות Bicep ותבניות ARM
 - להגדיר ארכיטקטורות מורכבות מרובות שירותים עם תלות משאבים נכונה
 - ליישם תבניות פרמטריות עבור סביבות וקונפיגורציות שונות
-- לפתור בעיות הקצאת תשתית ולתקן כשלים בפריסה
-- ליישם עקרונות של מסגרת Azure Well-Architected בעיצוב תשתית
+- לפתור בעיות הקצאת תשתית ולתקן כשלי פריסה
+- ליישם עקרונות של מסגרת Azure Well-Architected לתכנון תשתית
 - לנהל עדכוני תשתית וליישם אסטרטגיות גרסאות תשתית
 
-## סקירה כללית של הקצאת תשתית
+## סקירה כללית על הקצאת תשתית
 
 Azure Developer CLI תומך במספר ספקי תשתית כקוד (IaC):
-- **Bicep** (מומלץ) - שפת תחום ספציפית של Azure
-- **תבניות ARM** - תבניות JSON של מנהל משאבי Azure
+- **Bicep** (מומלץ) - שפת תחום ספציפי של Azure
+- **תבניות ARM** - תבניות JSON של מנהל המשאבים של Azure
 - **Terraform** - כלי תשתית רב-ענני
-- **Pulumi** - תשתית מודרנית כקוד עם שפות תכנות
+- **Pulumi** - תשתית כקוד מודרנית עם שפות תכנות
 
 ## הבנת משאבי Azure
 
@@ -59,9 +59,9 @@ Azure Account
 ```
 
 ### שירותי Azure נפוצים ליישומים
-- **מחשוב**: App Service, Container Apps, Functions, Virtual Machines
+- **חישוב**: App Service, Container Apps, Functions, Virtual Machines
 - **אחסון**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **רשתות**: Virtual Network, Application Gateway, CDN
+- **רשת**: Virtual Network, Application Gateway, CDN
 - **אבטחה**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
@@ -307,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 אבטחה וניהול סודות
+## 🔒 ניהול אבטחה וסודות
 
 ### אינטגרציה עם Key Vault
 ```bicep
@@ -377,7 +377,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 רשתות וקישוריות
+## 🌍 רשת וקישוריות
 
 ### הגדרת רשת וירטואלית
 ```bicep
@@ -505,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 ניטור ותצפיות
+## 📊 ניטור ותצפית
 
 ### Application Insights
 ```bicep
@@ -536,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### מדדים מותאמים אישית והתראות
+### מדדים והתראות מותאמים אישית
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -572,7 +572,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ## 🔧 הגדרות ספציפיות לסביבה
 
-### קבצי פרמטרים עבור סביבות שונות
+### קבצי פרמטרים לסביבות שונות
 ```json
 // infra/main.parameters.dev.json
 {
@@ -764,21 +764,81 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 עדכוני משאבים והעברות
+## 🧪 תצוגה מקדימה ואימות תשתית (חדש)
+
+### תצוגה מקדימה של שינויים בתשתית לפני פריסה
+
+הפונקציה `azd provision --preview` מאפשרת לכם **לדמות הקצאת תשתית** לפני פריסת משאבים בפועל. זה דומה ברוחו ל-`terraform plan` או `bicep what-if`, ומספק לכם **תצוגת ניסיון** של השינויים שיבוצעו בסביבת Azure שלכם.
+
+#### 🛠️ מה זה עושה
+- **מנתח את תבניות ה-IaC שלכם** (Bicep או Terraform)
+- **מציג תצוגה מקדימה של שינויים במשאבים**: תוספות, מחיקות, עדכונים
+- **לא מיישם שינויים** — זה רק לקריאה ובטוח להרצה
+
+#### � שימושים
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+הפקודה הזו עוזרת לכם:
+- **לאמת שינויים בתשתית** לפני הקצאת משאבים
+- **לתפוס שגיאות קונפיגורציה מוקדם** במחזור הפיתוח
+- **לשתף פעולה בבטחה** בסביבות צוותיות
+- **להבטיח פריסות עם מינימום הרשאות** ללא הפתעות
+
+זה שימושי במיוחד כאשר:
+- עובדים עם סביבות מרובות שירותים מורכבות
+- מבצעים שינויים בתשתית ייצור
+- מאמתים שינויים בתבניות לפני אישור PR
+- מכשירים חברי צוות חדשים על דפוסי תשתית
+
+### דוגמת תצוגה מקדימה של פלט
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 עדכוני משאבים ומיגרציות
 
 ### עדכוני משאבים בטוחים
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
 azd provision --rollback
 ```
 
-### העברות בסיסי נתונים
+### מיגרציות בסיסי נתונים
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -868,14 +928,14 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 - [תכנון לפני פריסה](../pre-deployment/capacity-planning.md) - אימות זמינות משאבים
 - [בעיות נפוצות](../troubleshooting/common-issues.md) - פתרון בעיות תשתית
-- [מדריך ניפוי שגיאות](../troubleshooting/debugging.md) - ניפוי שגיאות הקצאה
+- [מדריך דיבוג](../troubleshooting/debugging.md) - דיבוג בעיות הקצאה
 - [בחירת SKU](../pre-deployment/sku-selection.md) - בחירת רמות שירות מתאימות
 
 ## משאבים נוספים
 
 - [תיעוד Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [תבניות מנהל משאבי Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [מרכז ארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [תבניות מנהל משאבים של Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [מרכז הארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [מסגרת Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
@@ -886,5 +946,5 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ---
 
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+**הצהרת אחריות**:  
+מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. אנו לא נושאים באחריות לאי הבנות או פירושים שגויים הנובעים משימוש בתרגום זה.

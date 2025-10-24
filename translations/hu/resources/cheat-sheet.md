@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T09:31:57+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:53:27+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "hu"
 }
@@ -13,30 +13,30 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Kurzus kezdőlapja**: [AZD Kezdőknek](../README.md)
 - **📖 Gyors kezdés**: [1. fejezet: Alapok és gyors kezdés](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI Parancsok**: [2. fejezet: AI-első fejlesztés](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Haladó**: [4. fejezet: Infrastruktúra kódként](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🔧 Haladó**: [4. fejezet: Infrastruktúra mint kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Bevezetés
 
-Ez az átfogó gyorssegédlet kategóriák szerint rendszerezve nyújt gyors hozzáférést a leggyakrabban használt Azure Developer CLI parancsokhoz, gyakorlati példákkal. Tökéletes fejlesztés, hibakeresés és az azd projektek napi működése során történő gyors keresésekhez.
+Ez az átfogó gyorssegédlet gyors hozzáférést biztosít a leggyakrabban használt Azure Developer CLI parancsokhoz, kategóriák szerint rendszerezve, gyakorlati példákkal. Tökéletes gyors keresésekhez fejlesztés, hibakeresés és az azd projektek napi működése során.
 
 ## Tanulási célok
 
 Ezzel a gyorssegédlettel:
 - Azonnali hozzáférést kap az alapvető Azure Developer CLI parancsokhoz és szintaxisokhoz
-- Megérti a parancsok kategóriák és felhasználási esetek szerinti szervezését
+- Megérti a parancsok kategóriák szerinti szervezését és felhasználási eseteit
 - Gyakorlati példákat talál a gyakori fejlesztési és telepítési forgatókönyvekhez
-- Hibakeresési parancsokat érhet el gyors problémamegoldáshoz
-- Hatékonyan találja meg a haladó konfigurációs és testreszabási lehetőségeket
-- Környezetkezelési és több környezetes munkafolyamat parancsokat talál
+- Hibakeresési parancsokat talál gyors problémamegoldáshoz
+- Hatékonyan megtalálja a fejlett konfigurációs és testreszabási lehetőségeket
+- Környezetkezelési és többkörnyezetes munkafolyamat-parancsokat talál
 
 ## Tanulási eredmények
 
 A gyorssegédlet rendszeres használatával képes lesz:
 - Magabiztosan végrehajtani az azd parancsokat teljes dokumentáció nélkül
-- Gyorsan megoldani gyakori problémákat megfelelő diagnosztikai parancsokkal
+- Gyorsan megoldani a gyakori problémákat megfelelő diagnosztikai parancsokkal
 - Hatékonyan kezelni több környezetet és telepítési forgatókönyveket
-- Alkalmazni az azd haladó funkcióit és konfigurációs lehetőségeit szükség szerint
-- Rendszeresen hibát elhárítani telepítési problémák esetén parancssorozatokkal
+- Szükség esetén alkalmazni az azd fejlett funkcióit és konfigurációs lehetőségeit
+- Telepítési problémákat szisztematikus parancssorozatokkal elhárítani
 - Optimalizálni a munkafolyamatokat az azd gyorsbillentyűk és opciók hatékony használatával
 
 ## Kezdő parancsok
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -112,7 +114,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Építés és csomagolás
+### Build és csomagolás
 ```bash
 # Build applications
 azd package
@@ -190,7 +192,7 @@ azd show --output json
 
 ## 📊 Monitoring és naplók
 
-### Alkalmazás naplók
+### Alkalmazásnaplók
 ```bash
 # View logs from all services
 azd logs
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Szolgáltatás kezelése
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Több környezetes munkafolyamat
+### Többkörnyezetes munkafolyamat
 ```bash
 # Set up environments
 azd env new dev
@@ -374,7 +385,7 @@ azd template validate <template-name>
 
 ## 📁 Fájl- és könyvtárparancsok
 
-### Projekt struktúra
+### Projektstruktúra
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -410,7 +421,7 @@ azd service list --output table
 
 ## 🔧 Gyakori parancskombinációk
 
-### Egészségügyi ellenőrző script
+### Egészségügyi ellenőrző szkript
 ```bash
 #!/bin/bash
 # Quick health check
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -439,7 +450,7 @@ for env in dev staging production; do
 done
 ```
 
-### Erőforrás tisztító script
+### Erőforrás-tisztító szkript
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Profi tippek
 
-### Aliasok a gyorsabb munkafolyamatért
+### Gyorsbillentyűk a gyorsabb munkafolyamathoz
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -509,7 +520,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funkció gyorsbillentyűk
+### Funkció rövidítések
 ```bash
 # Quick environment switching
 azd-env() {
@@ -529,9 +540,9 @@ azd-status() {
 }
 ```
 
-## 📖 Segítség és dokumentáció
+## 📖 Súgó és dokumentáció
 
-### Segítség kérése
+### Súgó kérése
 ```bash
 # General help
 azd --help
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

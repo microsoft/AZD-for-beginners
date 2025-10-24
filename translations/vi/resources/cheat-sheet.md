@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T07:50:47+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:40:51+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "vi"
 }
 -->
-# Bảng Lệnh Tóm Tắt - Các Lệnh AZD Cần Thiết
+# Bảng Tóm Tắt Lệnh - Các Lệnh AZD Cơ Bản
 
 **Tham khảo nhanh cho tất cả các chương**
 - **📚 Trang chủ khóa học**: [AZD Dành Cho Người Mới Bắt Đầu](../README.md)
@@ -17,12 +17,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giới thiệu
 
-Bảng lệnh tóm tắt toàn diện này cung cấp tham khảo nhanh cho các lệnh CLI của Azure Developer được sử dụng phổ biến nhất, được tổ chức theo danh mục với các ví dụ thực tế. Hoàn hảo để tra cứu nhanh trong quá trình phát triển, khắc phục sự cố và vận hành hàng ngày với các dự án azd.
+Bảng tóm tắt toàn diện này cung cấp tham khảo nhanh cho các lệnh Azure Developer CLI được sử dụng phổ biến nhất, được tổ chức theo danh mục với các ví dụ thực tế. Hoàn hảo để tra cứu nhanh trong quá trình phát triển, khắc phục sự cố và các hoạt động hàng ngày với các dự án azd.
 
 ## Mục tiêu học tập
 
-Khi sử dụng bảng lệnh này, bạn sẽ:
-- Có quyền truy cập tức thì vào các lệnh và cú pháp CLI của Azure Developer cần thiết
+Khi sử dụng bảng tóm tắt này, bạn sẽ:
+- Có quyền truy cập tức thì vào các lệnh và cú pháp Azure Developer CLI cơ bản
 - Hiểu cách tổ chức lệnh theo danh mục chức năng và trường hợp sử dụng
 - Tham khảo các ví dụ thực tế cho các tình huống phát triển và triển khai phổ biến
 - Truy cập các lệnh khắc phục sự cố để giải quyết vấn đề nhanh chóng
@@ -31,15 +31,15 @@ Khi sử dụng bảng lệnh này, bạn sẽ:
 
 ## Kết quả học tập
 
-Với việc thường xuyên tham khảo bảng lệnh này, bạn sẽ có thể:
-- Thực thi các lệnh azd một cách tự tin mà không cần tham khảo tài liệu đầy đủ
+Với việc thường xuyên tham khảo bảng tóm tắt này, bạn sẽ có thể:
+- Thực hiện các lệnh azd một cách tự tin mà không cần tham khảo tài liệu đầy đủ
 - Nhanh chóng giải quyết các vấn đề phổ biến bằng cách sử dụng các lệnh chẩn đoán phù hợp
 - Quản lý hiệu quả nhiều môi trường và các tình huống triển khai
-- Áp dụng các tính năng và tùy chọn cấu hình nâng cao của azd khi cần
+- Áp dụng các tính năng và tùy chọn cấu hình nâng cao của azd khi cần thiết
 - Khắc phục sự cố triển khai bằng cách sử dụng các chuỗi lệnh có hệ thống
 - Tối ưu hóa quy trình làm việc thông qua việc sử dụng hiệu quả các phím tắt và tùy chọn của azd
 
-## Các lệnh bắt đầu
+## Các Lệnh Bắt Đầu
 
 ### Xác thực
 ```bash
@@ -70,7 +70,7 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Các lệnh triển khai cốt lõi
+## Các Lệnh Triển Khai Cốt Lõi
 
 ### Quy trình triển khai hoàn chỉnh
 ```bash
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -121,9 +123,9 @@ azd package
 azd package --service api
 ```
 
-## 🌍 Quản lý môi trường
+## 🌍 Quản lý Môi trường
 
-### Hoạt động môi trường
+### Các thao tác môi trường
 ```bash
 # List all environments
 azd env list
@@ -158,7 +160,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Các lệnh cấu hình
+## ⚙️ Các Lệnh Cấu Hình
 
 ### Cấu hình toàn cầu
 ```bash
@@ -188,7 +190,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 Giám sát và nhật ký
+## 📊 Giám sát và Nhật ký
 
 ### Nhật ký ứng dụng
 ```bash
@@ -218,7 +220,7 @@ azd monitor
 azd monitor --insights
 ```
 
-## 🛠️ Các lệnh bảo trì
+## 🛠️ Các Lệnh Bảo Trì
 
 ### Dọn dẹp
 ```bash
@@ -247,7 +249,7 @@ azd version
 azd info
 ```
 
-## 🔧 Các lệnh nâng cao
+## 🔧 Các Lệnh Nâng Cao
 
 ### Pipeline và CI/CD
 ```bash
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Quản lý dịch vụ
@@ -342,7 +353,7 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Các lệnh gỡ lỗi
+## 🔍 Các Lệnh Gỡ Lỗi
 
 ### Thông tin gỡ lỗi
 ```bash
@@ -372,7 +383,7 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 Các lệnh tệp và thư mục
+## 📁 Các Lệnh Tệp và Thư mục
 
 ### Cấu trúc dự án
 ```bash
@@ -408,9 +419,9 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Các tổ hợp lệnh phổ biến
+## 🔧 Các Kết Hợp Lệnh Thông Dụng
 
-### Script kiểm tra sức khỏe
+### Kịch bản kiểm tra sức khỏe
 ```bash
 #!/bin/bash
 # Quick health check
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -439,7 +450,7 @@ for env in dev staging production; do
 done
 ```
 
-### Script dọn dẹp tài nguyên
+### Kịch bản dọn dẹp tài nguyên
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -450,9 +461,9 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 Biến môi trường
+## 📝 Biến Môi Trường
 
-### Các biến môi trường phổ biến
+### Các biến môi trường thông dụng
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -469,7 +480,7 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Các lệnh khẩn cấp
+## 🚨 Các Lệnh Khẩn Cấp
 
 ### Sửa lỗi nhanh
 ```bash
@@ -498,7 +509,7 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Mẹo chuyên nghiệp
+## 💡 Mẹo Chuyên Nghiệp
 
 ### Bí danh để tăng tốc quy trình làm việc
 ```bash
@@ -529,7 +540,7 @@ azd-status() {
 }
 ```
 
-## 📖 Trợ giúp và tài liệu
+## 📖 Trợ giúp và Tài liệu
 
 ### Nhận trợ giúp
 ```bash
@@ -558,15 +569,15 @@ azd template show <template-name> --docs
 
 ---
 
-**Mẹo**: Đánh dấu bảng lệnh này và sử dụng `Ctrl+F` để nhanh chóng tìm các lệnh bạn cần!
+**Mẹo**: Đánh dấu bảng tóm tắt này và sử dụng `Ctrl+F` để nhanh chóng tìm các lệnh bạn cần!
 
 ---
 
 **Điều hướng**
-- **Bài học trước**: [Kiểm tra trước triển khai](../docs/pre-deployment/preflight-checks.md)
+- **Bài học trước**: [Kiểm tra trước khi triển khai](../docs/pre-deployment/preflight-checks.md)
 - **Bài học tiếp theo**: [Thuật ngữ](glossary.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, chúng tôi khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

@@ -1,43 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:37:32+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:28:16+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sv"
 }
 -->
 # AZD Grunder - Förstå Azure Developer CLI
 
-# AZD Grunder - Kärnkoncept och Grundläggande Principer
+# AZD Grunder - Kärnkoncept och Grundläggande
 
 **Kapitelnavigation:**
-- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
-- **📖 Nuvarande Kapitel**: Kapitel 1 - Grundläggande & Snabbstart
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 1 - Grundläggande & Snabbstart
 - **⬅️ Föregående**: [Kursöversikt](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Nästa**: [Installation & Konfiguration](installation.md)
-- **🚀 Nästa Kapitel**: [Kapitel 2: AI-Driven Utveckling](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Nästa kapitel**: [Kapitel 2: AI-Driven Utveckling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduktion
 
-Denna lektion introducerar dig till Azure Developer CLI (azd), ett kraftfullt kommandoradsverktyg som påskyndar din resa från lokal utveckling till Azure-distribution. Du kommer att lära dig de grundläggande koncepten, kärnfunktionerna och förstå hur azd förenklar distributionen av molnbaserade applikationer.
+Den här lektionen introducerar dig till Azure Developer CLI (azd), ett kraftfullt kommandoradsverktyg som påskyndar din resa från lokal utveckling till Azure-distribution. Du kommer att lära dig de grundläggande koncepten, kärnfunktionerna och förstå hur azd förenklar distributionen av molnbaserade applikationer.
 
 ## Lärandemål
 
 I slutet av denna lektion kommer du att:
 - Förstå vad Azure Developer CLI är och dess huvudsakliga syfte
 - Lära dig kärnkoncepten kring mallar, miljöer och tjänster
-- Utforska nyckelfunktioner som mallbaserad utveckling och Infrastructure as Code
-- Förstå azd-projektets struktur och arbetsflöde
+- Utforska nyckelfunktioner inklusive mallbaserad utveckling och Infrastruktur som Kod
+- Förstå azd-projektstrukturen och arbetsflödet
 - Vara redo att installera och konfigurera azd för din utvecklingsmiljö
 
 ## Läranderesultat
 
 Efter att ha avslutat denna lektion kommer du att kunna:
-- Förklara azd:s roll i moderna molnutvecklingsarbetsflöden
+- Förklara azds roll i moderna arbetsflöden för molnutveckling
 - Identifiera komponenterna i en azd-projektstruktur
 - Beskriva hur mallar, miljöer och tjänster samverkar
-- Förstå fördelarna med Infrastructure as Code med azd
+- Förstå fördelarna med Infrastruktur som Kod med azd
 - Känna igen olika azd-kommandon och deras syften
 
 ## Vad är Azure Developer CLI (azd)?
@@ -48,7 +48,7 @@ Azure Developer CLI (azd) är ett kommandoradsverktyg som är utformat för att 
 
 ### Mallar
 Mallar är grunden för azd. De innehåller:
-- **Applikationskod** - Din källkod och beroenden
+- **Applikationskod** - Din källkod och dess beroenden
 - **Infrastrukturbeskrivningar** - Azure-resurser definierade i Bicep eller Terraform
 - **Konfigurationsfiler** - Inställningar och miljövariabler
 - **Distributionsskript** - Automatiserade distributionsarbetsflöden
@@ -82,18 +82,36 @@ azd template list
 azd init --template <template-name>
 ```
 
-### 2. Infrastructure as Code
+### 2. Infrastruktur som Kod
 - **Bicep** - Azures domänspecifika språk
-- **Terraform** - Multimolninfrastrukturverktyg
+- **Terraform** - Multimoln-infrastrukturverktyg
 - **ARM-mallar** - Azure Resource Manager-mallar
 
 ### 3. Integrerade Arbetsflöden
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Säker Infrastrukturplanering med Förhandsgranskning
+Kommandot `azd provision --preview` är en revolutionerande funktion för säkra distributioner:
+- **Analys av torrkörning** - Visar vad som kommer att skapas, ändras eller tas bort
+- **Ingen risk** - Inga faktiska ändringar görs i din Azure-miljö
+- **Samarbete i team** - Dela förhandsgranskningsresultat innan distribution
+- **Kostnadsberäkning** - Förstå resurskostnader innan åtagande
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Miljöhantering
@@ -198,7 +216,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Förstå `azd down --force --purge`
-Kommandot `azd down --force --purge` är ett kraftfullt sätt att helt ta bort din azd-miljö och alla associerade resurser. Här är en uppdelning av vad varje flagga gör:
+Kommandot `azd down --force --purge` är ett kraftfullt sätt att helt ta bort din azd-miljö och alla associerade resurser. Här är en sammanfattning av vad varje flagga gör:
 ```
 --force
 ```
@@ -215,10 +233,12 @@ Lokal `.azure`-mapp
 Cachelagrad distributionsinformation
 Förhindrar att azd "kommer ihåg" tidigare distributioner, vilket kan orsaka problem som felaktiga resursgrupper eller föråldrade registerreferenser.
 
+
 ### Varför använda båda?
 När du har stött på problem med `azd up` på grund av kvarvarande status eller delvisa distributioner, säkerställer denna kombination en **ren start**.
 
 Det är särskilt användbart efter manuella resursborttagningar i Azure-portalen eller vid byte av mallar, miljöer eller namngivningskonventioner för resursgrupper.
+
 
 ### Hantera Flera Miljöer
 ```bash
@@ -236,7 +256,7 @@ azd env list
 
 ## 🔐 Autentisering och Behörigheter
 
-Att förstå autentisering är avgörande för framgångsrika azd-distributioner. Azure använder flera autentiseringsmetoder, och azd utnyttjar samma behörighetskedja som andra Azure-verktyg.
+Att förstå autentisering är avgörande för framgångsrika azd-distributioner. Azure använder flera autentiseringsmetoder, och azd utnyttjar samma autentiseringskedja som andra Azure-verktyg.
 
 ### Azure CLI Autentisering (`az login`)
 
@@ -266,13 +286,13 @@ az account set --subscription <subscription-id>
 1. **Interaktiv Inloggning**: Öppnar din standardwebbläsare för autentisering
 2. **Enhetskodflöde**: För miljöer utan webbläsartillgång
 3. **Service Principal**: För automatisering och CI/CD-scenarier
-4. **Managed Identity**: För Azure-hostade applikationer
+4. **Hantera Identitet**: För applikationer som hostas på Azure
 
 ### DefaultAzureCredential-kedja
 
-`DefaultAzureCredential` är en behörighetstyp som erbjuder en förenklad autentiseringsupplevelse genom att automatiskt försöka flera behörighetskällor i en specifik ordning:
+`DefaultAzureCredential` är en autentiseringstyp som erbjuder en förenklad autentiseringsupplevelse genom att automatiskt försöka flera autentiseringskällor i en specifik ordning:
 
-#### Behörighetskedjans Ordning
+#### Autentiseringskedjans ordning
 ```mermaid
 graph TD
     A[DefaultAzureCredential] --> B[Environment Variables]
@@ -293,13 +313,13 @@ export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
+#### 2. Arbetslastidentitet (Kubernetes/GitHub Actions)
 Används automatiskt i:
-- Azure Kubernetes Service (AKS) med Workload Identity
+- Azure Kubernetes Service (AKS) med Arbetslastidentitet
 - GitHub Actions med OIDC-federation
 - Andra federerade identitetsscenarier
 
-#### 3. Managed Identity
+#### 3. Hantera Identitet
 För Azure-resurser som:
 - Virtuella Maskiner
 - App Service
@@ -314,10 +334,10 @@ az account show --query "user.type" --output tsv
 
 #### 4. Integration med Utvecklingsverktyg
 - **Visual Studio**: Använder automatiskt inloggat konto
-- **VS Code**: Använder Azure Account-tilläggsbehörigheter
-- **Azure CLI**: Använder `az login`-behörigheter (vanligast för lokal utveckling)
+- **VS Code**: Använder autentiseringsuppgifter från Azure Account-tillägget
+- **Azure CLI**: Använder `az login`-autentisering (vanligast för lokal utveckling)
 
-### AZD Autentiseringsinställning
+### AZD Autentiseringsinställningar
 
 ```bash
 # Method 1: Use Azure CLI (Recommended for development)
@@ -367,9 +387,9 @@ azd auth login
 ```
 
 #### För Produktionsmiljöer
-- Använd **Managed Identity** när du kör på Azure-resurser
+- Använd **Hantera Identitet** när du kör på Azure-resurser
 - Använd **Service Principal** för automatiseringsscenarier
-- Undvik att lagra behörigheter i kod eller konfigurationsfiler
+- Undvik att lagra autentiseringsuppgifter i kod eller konfigurationsfiler
 - Använd **Azure Key Vault** för känslig konfiguration
 
 ### Vanliga Autentiseringsproblem och Lösningar
@@ -431,9 +451,9 @@ azd up
 
 ### Säkerhetsöverväganden
 
-1. **Behörighetslagring**: Lagra aldrig behörigheter i källkod
-2. **Begränsning av Omfattning**: Använd principen om minst privilegium för service principals
-3. **Tokenrotation**: Rotera regelbundet hemligheter för service principals
+1. **Lagring av autentiseringsuppgifter**: Lagra aldrig autentiseringsuppgifter i källkod
+2. **Begränsning av åtkomst**: Använd principen om minsta privilegier för serviceprincipaler
+3. **Tokenrotation**: Rotera regelbundet hemligheter för serviceprincipaler
 4. **Revisionsspår**: Övervaka autentiserings- och distributionsaktiviteter
 5. **Nätverkssäkerhet**: Använd privata slutpunkter när det är möjligt
 
@@ -499,32 +519,32 @@ azd init --template template1
 
 ### 4. Konfigurationshantering
 - Använd miljövariabler för känslig data
-- Håll konfiguration i versionskontroll
+- Håll konfigurationen i versionskontroll
 - Dokumentera miljöspecifika inställningar
 
-## Lärandeprogression
+## Lärande Progression
 
 ### Nybörjare (Vecka 1-2)
 1. Installera azd och autentisera
 2. Distribuera en enkel mall
-3. Förstå projektstruktur
+3. Förstå projektstrukturen
 4. Lär dig grundläggande kommandon (up, down, deploy)
 
 ### Mellannivå (Vecka 3-4)
 1. Anpassa mallar
 2. Hantera flera miljöer
 3. Förstå infrastrukturkod
-4. Ställ in CI/CD-pipelines
+4. Sätt upp CI/CD-pipelines
 
 ### Avancerad (Vecka 5+)
 1. Skapa egna mallar
 2. Avancerade infrastrukturmönster
-3. Multiregionsdistributioner
-4. Konfigurationer för företagsklass
+3. Multiregion-distributioner
+4. Konfigurationer för företag
 
 ## Nästa Steg
 
-**📖 Fortsätt Kapitel 1 Lärande:**
+**📖 Fortsätt med Kapitel 1:**
 - [Installation & Konfiguration](installation.md) - Installera och konfigurera azd
 - [Ditt Första Projekt](first-project.md) - Slutför praktisk handledning
 - [Konfigurationsguide](configuration.md) - Avancerade konfigurationsalternativ
@@ -534,18 +554,20 @@ azd init --template template1
 
 ## Ytterligare Resurser
 
-- [Azure Developer CLI Översikt](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Översikt över Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Mallgalleri](https://azure.github.io/awesome-azd/)
-- [Communityexempel](https://github.com/Azure-Samples)
+- [Community-exempel](https://github.com/Azure-Samples)
 
 ---
 
 **Kapitelnavigation:**
-- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
-- **📖 Nuvarande Kapitel**: Kapitel 1 - Grundläggande & Snabbstart  
+- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 1 - Grundläggande & Snabbstart  
 - **⬅️ Föregående**: [Kursöversikt](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Nästa**: [Installation & Konfiguration](installation.md)
 - **🚀 Nästa Kapitel**: [Kapitel 2: AI-Driven Utveckling](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Ansvarsfriskrivning**:  
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

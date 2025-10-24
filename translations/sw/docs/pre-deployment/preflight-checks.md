@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T09:00:36+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:50:24+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "sw"
 }
 -->
-# Ukaguzi wa Awali Kabla ya Utekelezaji wa AZD
+# Ukaguzi Kabla ya Utekelezaji wa AZD
 
-**Ukurasa wa Sehemu:**
+**Urambazaji wa Sura:**
 - **📚 Nyumbani kwa Kozi**: [AZD Kwa Anayeanza](../../README.md)
-- **📖 Sura ya Sasa**: Sura ya 6 - Uthibitishaji na Mipango Kabla ya Utekelezaji
+- **📖 Sura ya Sasa**: Sura ya 6 - Uthibitishaji Kabla ya Utekelezaji & Mipango
 - **⬅️ Iliyopita**: [Uchaguzi wa SKU](sku-selection.md)
 - **➡️ Sura Inayofuata**: [Sura ya 7: Utatuzi wa Matatizo](../troubleshooting/common-issues.md)
 - **🔧 Inayohusiana**: [Sura ya 4: Mwongozo wa Utekelezaji](../deployment/deployment-guide.md)
 
 ## Utangulizi
 
-Mwongozo huu wa kina unatoa hati za uthibitishaji na taratibu za kabla ya utekelezaji ili kuhakikisha mafanikio ya utekelezaji wa Azure Developer CLI kabla ya kuanza. Jifunze kutekeleza ukaguzi wa kiotomatiki kwa uthibitishaji, upatikanaji wa rasilimali, viwango, ufuasi wa usalama, na mahitaji ya utendaji ili kuzuia kushindwa kwa utekelezaji na kuboresha viwango vya mafanikio ya utekelezaji.
+Mwongozo huu wa kina unatoa hati za uthibitishaji kabla ya utekelezaji na taratibu za kuhakikisha utekelezaji wa Azure Developer CLI unafanikiwa kabla ya kuanza. Jifunze kutekeleza ukaguzi wa kiotomatiki kwa uthibitishaji, upatikanaji wa rasilimali, viwango, ufuataji wa usalama, na mahitaji ya utendaji ili kuzuia kushindwa kwa utekelezaji na kuboresha viwango vya mafanikio ya utekelezaji.
 
 ## Malengo ya Kujifunza
 
@@ -26,57 +26,57 @@ Kwa kukamilisha mwongozo huu, utaweza:
 - Kumiliki mbinu za uthibitishaji wa kiotomatiki kabla ya utekelezaji na hati zake
 - Kuelewa mikakati ya ukaguzi wa kina kwa uthibitishaji, ruhusa, na viwango
 - Kutekeleza taratibu za uthibitishaji wa upatikanaji wa rasilimali na uwezo
-- Kuseti ukaguzi wa usalama na ufuasi wa sera za shirika
+- Kuseti ukaguzi wa usalama na ufuataji wa sera za shirika
 - Kubuni taratibu za makadirio ya gharama na uthibitishaji wa bajeti
-- Kuunda ukaguzi wa kiotomatiki wa awali kwa mifumo ya CI/CD
+- Kuunda ukaguzi wa kiotomatiki kabla ya utekelezaji kwa njia za CI/CD
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha, utaweza:
-- Kuunda na kutekeleza hati za uthibitishaji wa awali za kina
+- Kuunda na kutekeleza hati za uthibitishaji wa kina kabla ya utekelezaji
 - Kubuni taratibu za ukaguzi wa kiotomatiki kwa hali tofauti za utekelezaji
 - Kutekeleza taratibu na sera za uthibitishaji maalum kwa mazingira
-- Kuseti ufuatiliaji wa proaktif na arifa kwa utayari wa utekelezaji
-- Kutatua masuala ya kabla ya utekelezaji na kutekeleza hatua za kurekebisha
-- Kujumuisha ukaguzi wa awali katika mifumo ya DevOps na taratibu za kiotomatiki
+- Kuseti ufuatiliaji wa proaktif na tahadhari kwa utayari wa utekelezaji
+- Kutatua masuala kabla ya utekelezaji na kutekeleza hatua za kurekebisha
+- Kujumuisha ukaguzi kabla ya utekelezaji katika njia za DevOps na kazi za kiotomatiki
 
 ## Jedwali la Maudhui
 
 - [Muhtasari](../../../../docs/pre-deployment)
-- [Hati ya Kiotomatiki ya Awali](../../../../docs/pre-deployment)
-- [Orodha ya Ukaguzi wa Mwongozo](../../../../docs/pre-deployment)
+- [Hati ya Kiotomatiki Kabla ya Utekelezaji](../../../../docs/pre-deployment)
+- [Orodha ya Uthibitishaji wa Mwongozo](../../../../docs/pre-deployment)
 - [Uthibitishaji wa Mazingira](../../../../docs/pre-deployment)
 - [Uthibitishaji wa Rasilimali](../../../../docs/pre-deployment)
-- [Ukaguzi wa Usalama na Ufuasi](../../../../docs/pre-deployment)
-- [Mipango ya Utendaji na Uwezo](../../../../docs/pre-deployment)
+- [Ukaguzi wa Usalama & Ufuataji](../../../../docs/pre-deployment)
+- [Mipango ya Utendaji & Uwezo](../../../../docs/pre-deployment)
 - [Utatuzi wa Masuala ya Kawaida](../../../../docs/pre-deployment)
 
 ---
 
 ## Muhtasari
 
-Ukaguzi wa awali ni uthibitishaji muhimu unaofanywa kabla ya utekelezaji ili kuhakikisha:
+Ukaguzi kabla ya utekelezaji ni uthibitishaji muhimu unaofanywa kabla ya kutekeleza ili kuhakikisha:
 
 - **Upatikanaji wa rasilimali** na viwango katika maeneo lengwa
-- **Uthibitishaji na ruhusa** zimesetiwa vizuri
+- **Uthibitishaji na ruhusa** zimewekwa vizuri
 - **Uhalali wa templeti** na usahihi wa vigezo
 - **Muunganisho wa mtandao** na utegemezi
-- **Ufuasi wa usalama** na sera za shirika
+- **Ufuataji wa usalama** na sera za shirika
 - **Makadirio ya gharama** ndani ya mipaka ya bajeti
 
-### Wakati wa Kufanya Ukaguzi wa Awali
+### Wakati wa Kufanya Ukaguzi Kabla ya Utekelezaji
 
 - **Kabla ya utekelezaji wa kwanza** katika mazingira mapya
 - **Baada ya mabadiliko makubwa ya templeti**
 - **Kabla ya utekelezaji wa uzalishaji**
 - **Wakati wa kubadilisha maeneo ya Azure**
-- **Kama sehemu ya mifumo ya CI/CD**
+- **Kama sehemu ya njia za CI/CD**
 
 ---
 
-## Hati ya Kiotomatiki ya Awali
+## Hati ya Kiotomatiki Kabla ya Utekelezaji
 
-### Ukaguzi wa Awali wa PowerShell
+### Kagua Kabla ya Utekelezaji kwa PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Ukaguzi wa Awali wa Bash
+### Kagua Kabla ya Utekelezaji kwa Bash
 
 ```bash
 #!/bin/bash
@@ -790,30 +805,31 @@ main "$@"
 
 ---
 
-## Orodha ya Ukaguzi wa Mwongozo
+## Orodha ya Uthibitishaji wa Mwongozo
 
-### Orodha ya Kabla ya Utekelezaji
+### Orodha Kabla ya Utekelezaji
 
-Chapisha orodha hii na hakiki kila kipengele kabla ya utekelezaji:
+Chapisha orodha hii na hakiki kila kipengee kabla ya utekelezaji:
 
 #### ✅ Usanidi wa Mazingira
-- [ ] AZD CLI imewekwa na kusasishwa hadi toleo la hivi karibuni
+- [ ] AZD CLI imewekwa na imesasishwa hadi toleo la hivi karibuni
 - [ ] Azure CLI imewekwa na kuthibitishwa
 - [ ] Usajili sahihi wa Azure umechaguliwa
 - [ ] Jina la mazingira ni la kipekee na linafuata kanuni za majina
-- [ ] Kikundi cha rasilimali lengwa kimebainishwa au kinaweza kuundwa
+- [ ] Kikundi cha rasilimali lengwa kimetambuliwa au kinaweza kuundwa
 
-#### ✅ Uthibitishaji na Ruhusa
-- [ ] Umefanikiwa kuthibitisha kwa `azd auth login`
+#### ✅ Uthibitishaji & Ruhusa
+- [ ] Umefanikiwa kuthibitishwa na `azd auth login`
 - [ ] Mtumiaji ana jukumu la Mchangiaji kwenye usajili/kikundi cha rasilimali lengwa
-- [ ] Kanuni ya huduma imesetiwa kwa CI/CD (ikiwa inahitajika)
-- [ ] Hakuna vyeti au hati zilizokwisha muda wake
+- [ ] Kanuni ya huduma imewekwa kwa CI/CD (ikiwa inahitajika)
+- [ ] Hakuna vyeti au hati za uthibitisho zilizokwisha muda wake
 
 #### ✅ Uthibitishaji wa Templeti
-- [ ] `azure.yaml` ipo na ni YAML halali
+- [ ] `azure.yaml` ipo na ni sahihi kwa YAML
 - [ ] Huduma zote zilizoainishwa katika azure.yaml zina msimbo wa chanzo unaolingana
 - [ ] Templeti za Bicep katika saraka ya `infra/` zipo
 - [ ] `main.bicep` inajengwa bila makosa (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Muhtasari wa miundombinu unafanikiwa (`azd provision --preview`)
 - [ ] Vigezo vyote vinavyohitajika vina thamani za msingi au vitatolewa
 - [ ] Hakuna siri zilizowekwa moja kwa moja kwenye templeti
 
@@ -824,26 +840,26 @@ Chapisha orodha hii na hakiki kila kipengele kabla ya utekelezaji:
 - [ ] Migongano ya majina ya rasilimali imehakikiwa
 - [ ] Utegemezi kati ya rasilimali umeeleweka
 
-#### ✅ Mtandao na Usalama
+#### ✅ Mtandao & Usalama
 - [ ] Muunganisho wa mtandao kwa sehemu za mwisho za Azure umethibitishwa
-- [ ] Mipangilio ya firewall/proxy imesetiwa ikiwa inahitajika
-- [ ] Key Vault imesetiwa kwa usimamizi wa siri
-- [ ] Utambulisho uliosimamiwa umetumika pale inapowezekana
+- [ ] Mipangilio ya firewall/proxy imewekwa ikiwa inahitajika
+- [ ] Key Vault imewekwa kwa usimamizi wa siri
+- [ ] Utambulisho uliosimamiwa umetumika inapowezekana
 - [ ] Utekelezaji wa HTTPS umewezeshwa kwa programu za wavuti
 
 #### ✅ Usimamizi wa Gharama
 - [ ] Makadirio ya gharama yamehesabiwa kwa kutumia Kikokotoo cha Bei cha Azure
-- [ ] Arifa za bajeti zimesetiwa ikiwa inahitajika
-- [ ] SKU sahihi zimechaguliwa kwa aina ya mazingira
-- [ ] Uwezo uliowekwa umezingatiwa kwa mzigo wa uzalishaji
+- [ ] Tahadhari za bajeti zimewekwa ikiwa inahitajika
+- [ ] SKUs sahihi zimechaguliwa kwa aina ya mazingira
+- [ ] Uwezo uliowekwa umezingatiwa kwa mzigo wa kazi wa uzalishaji
 
-#### ✅ Ufuatiliaji na Uangalizi
-- [ ] Application Insights imesetiwa katika templeti
+#### ✅ Ufuatiliaji & Uangalizi
+- [ ] Application Insights imewekwa katika templeti
 - [ ] Workspace ya Log Analytics imepangwa
-- [ ] Sheria za arifa zimeainishwa kwa vipimo muhimu
-- [ ] Sehemu za ukaguzi wa afya zimetekelezwa katika programu
+- [ ] Sheria za tahadhari zimeainishwa kwa vipimo muhimu
+- [ ] Sehemu za mwisho za ukaguzi wa afya zimetekelezwa katika programu
 
-#### ✅ Hifadhi Nakala na Urejeshaji
+#### ✅ Hifadhi Nakala & Urejeshaji
 - [ ] Mkakati wa hifadhi nakala umeainishwa kwa rasilimali za data
 - [ ] Malengo ya muda wa urejeshaji (RTO) yameandikwa
 - [ ] Malengo ya uhakika wa urejeshaji (RPO) yameandikwa
@@ -1051,7 +1067,7 @@ if __name__ == "__main__":
 
 ---
 
-## Ukaguzi wa Usalama na Ufuasi
+## Ukaguzi wa Usalama & Ufuataji
 
 ### Hati ya Uthibitishaji wa Usalama
 
@@ -1285,12 +1301,12 @@ steps:
 
 ## Muhtasari wa Mazoezi Bora
 
-### ✅ Mazoezi Bora ya Ukaguzi wa Awali
+### ✅ Mazoezi Bora ya Ukaguzi Kabla ya Utekelezaji
 
-1. **Tekeleza Kiotomatiki Pale Inapowezekana**
-   - Jumuisha ukaguzi katika mifumo ya CI/CD
+1. **Tekeleza Kiotomatiki Inapowezekana**
+   - Jumuisha ukaguzi katika njia za CI/CD
    - Tumia hati kwa uthibitishaji unaorudiwa
-   - Hifadhi matokeo kwa rekodi za ukaguzi
+   - Hifadhi matokeo kwa nyaraka za ukaguzi
 
 2. **Uthibitishaji Maalum wa Mazingira**
    - Ukaguzi tofauti kwa maendeleo/staging/uzalishaji
@@ -1301,38 +1317,38 @@ steps:
    - Uthibitishaji na ruhusa
    - Viwango vya rasilimali na upatikanaji
    - Uthibitishaji wa templeti na sintaksia
-   - Mahitaji ya usalama na ufuasi
+   - Mahitaji ya usalama na ufuataji
 
 4. **Ripoti Wazi**
-   - Viashiria vya hali vilivyowekwa kwa rangi
+   - Viashiria vya hali vilivyopangwa kwa rangi
    - Ujumbe wa makosa wa kina na hatua za kurekebisha
    - Ripoti za muhtasari kwa tathmini ya haraka
 
 5. **Kushindwa Haraka**
-   - Acha utekelezaji ikiwa ukaguzi muhimu unashindwa
+   - Acha utekelezaji ikiwa ukaguzi muhimu utashindwa
    - Toa mwongozo wazi wa utatuzi
-   - Ruhusu urahisi wa kuendesha tena ukaguzi
+   - Ruhusu urudishaji rahisi wa ukaguzi
 
-### Makosa ya Kawaida ya Ukaguzi wa Awali
+### Makosa ya Kawaida Kabla ya Utekelezaji
 
 1. **Kuruka uthibitishaji** kwa utekelezaji wa "haraka"
 2. **Ukaguzi wa ruhusa usio wa kutosha** kabla ya utekelezaji
-3. **Kupuuza viwango vya rasilimali** hadi utekelezaji unashindwa
-4. **Kutothibitisha templeti** katika mifumo ya CI/CD
-5. **Ukosefu wa uthibitishaji wa usalama** kwa mazingira ya uzalishaji
-6. **Makadirio ya gharama yasiyo ya kutosha** yanayosababisha mshangao wa bajeti
+3. **Kupuuza mipaka ya viwango** hadi utekelezaji ushindwe
+4. **Kutothibitisha templeti** katika njia za CI/CD
+5. **Ukosefu wa ukaguzi wa usalama** kwa mazingira ya uzalishaji
+6. **Makadirio ya gharama yasiyotosha** yanayosababisha mshangao wa bajeti
 
 ---
 
-**Kidokezo cha Mtaalamu**: Fanya ukaguzi wa awali kama kazi tofauti katika mfumo wako wa CI/CD kabla ya kazi halisi ya utekelezaji. Hii inakuruhusu kugundua masuala mapema na kutoa maoni ya haraka kwa watengenezaji.
+**Kidokezo cha Wataalamu**: Fanya ukaguzi kabla ya utekelezaji kama kazi tofauti katika njia yako ya CI/CD kabla ya kazi halisi ya utekelezaji. Hii inakuruhusu kugundua masuala mapema na kutoa maoni ya haraka kwa watengenezaji.
 
 ---
 
-**Ukurasa wa Sehemu**
+**Urambazaji**
 - **Somo Lililopita**: [Uchaguzi wa SKU](sku-selection.md)
-- **Somo Linalofuata**: [Mwongozo wa Haraka](../../resources/cheat-sheet.md)
+- **Somo Linalofuata**: [Muhtasari wa Haraka](../../resources/cheat-sheet.md)
 
 ---
 
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

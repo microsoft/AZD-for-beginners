@@ -1,16 +1,16 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T09:45:03+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:56:48+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "cs"
 }
 -->
-# Kontroly před nasazením pro AZD
+# Kontrola před nasazením pro AZD
 
 **Navigace kapitol:**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 6 - Validace a plánování před nasazením
 - **⬅️ Předchozí**: [Výběr SKU](sku-selection.md)
 - **➡️ Další kapitola**: [Kapitola 7: Řešení problémů](../troubleshooting/common-issues.md)
@@ -18,13 +18,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tento komplexní průvodce poskytuje skripty a postupy pro validaci před nasazením, které zajistí úspěšné nasazení pomocí Azure Developer CLI ještě před jeho zahájením. Naučíte se implementovat automatizované kontroly autentizace, dostupnosti zdrojů, kvót, souladu s bezpečnostními požadavky a výkonových požadavků, abyste předešli selhání nasazení a optimalizovali úspěšnost nasazení.
+Tento podrobný průvodce poskytuje skripty a postupy pro validaci před nasazením, které zajistí úspěšné nasazení pomocí Azure Developer CLI ještě před jeho zahájením. Naučíte se implementovat automatizované kontroly autentizace, dostupnosti zdrojů, kvót, souladu s bezpečnostními požadavky a výkonových požadavků, abyste předešli selhání nasazení a optimalizovali úspěšnost nasazení.
 
 ## Cíle učení
 
 Po dokončení tohoto průvodce budete:
 - Ovládat techniky a skripty pro automatizovanou validaci před nasazením
-- Rozumět komplexním strategiím kontrol autentizace, oprávnění a kvót
+- Rozumět komplexním strategiím kontroly autentizace, oprávnění a kvót
 - Implementovat postupy validace dostupnosti a kapacity zdrojů
 - Konfigurovat kontroly bezpečnosti a souladu s organizačními politikami
 - Navrhovat pracovní postupy pro odhad nákladů a validaci rozpočtu
@@ -34,7 +34,7 @@ Po dokončení tohoto průvodce budete:
 
 Po dokončení budete schopni:
 - Vytvářet a spouštět komplexní skripty pro validaci před nasazením
-- Navrhovat automatizované pracovní postupy kontrol pro různé scénáře nasazení
+- Navrhovat automatizované pracovní postupy kontroly pro různé scénáře nasazení
 - Implementovat postupy a politiky validace specifické pro prostředí
 - Konfigurovat proaktivní monitorování a upozornění na připravenost k nasazení
 - Řešit problémy před nasazením a implementovat nápravná opatření
@@ -43,8 +43,8 @@ Po dokončení budete schopni:
 ## Obsah
 
 - [Přehled](../../../../docs/pre-deployment)
-- [Automatizovaný skript před nasazením](../../../../docs/pre-deployment)
-- [Ruční kontrolní seznam](../../../../docs/pre-deployment)
+- [Automatizovaný skript pro kontrolu před nasazením](../../../../docs/pre-deployment)
+- [Ruční kontrolní seznam validace](../../../../docs/pre-deployment)
 - [Validace prostředí](../../../../docs/pre-deployment)
 - [Validace zdrojů](../../../../docs/pre-deployment)
 - [Kontroly bezpečnosti a souladu](../../../../docs/pre-deployment)
@@ -74,7 +74,7 @@ Kontroly před nasazením jsou klíčové validace prováděné před nasazením
 
 ---
 
-## Automatizovaný skript před nasazením
+## Automatizovaný skript pro kontrolu před nasazením
 
 ### PowerShell kontrola před nasazením
 
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -790,30 +805,31 @@ main "$@"
 
 ---
 
-## Ruční kontrolní seznam
+## Ruční kontrolní seznam validace
 
 ### Kontrolní seznam před nasazením
 
-Vytiskněte si tento seznam a ověřte každý bod před nasazením:
+Vytiskněte si tento kontrolní seznam a ověřte každý bod před nasazením:
 
 #### ✅ Nastavení prostředí
 - [ ] AZD CLI nainstalováno a aktualizováno na nejnovější verzi
 - [ ] Azure CLI nainstalováno a autentizováno
 - [ ] Vybráno správné předplatné Azure
-- [ ] Název prostředí je jedinečný a odpovídá konvencím pojmenování
+- [ ] Název prostředí je unikátní a odpovídá konvencím pojmenování
 - [ ] Identifikována cílová skupina zdrojů nebo je možné ji vytvořit
 
 #### ✅ Autentizace a oprávnění
 - [ ] Úspěšně autentizováno pomocí `azd auth login`
 - [ ] Uživatel má roli Contributor na cílovém předplatném/skupině zdrojů
-- [ ] Konfigurován servisní účet pro CI/CD (pokud je relevantní)
-- [ ] Žádné vypršelé certifikáty nebo přihlašovací údaje
+- [ ] Konfigurován service principal pro CI/CD (pokud je relevantní)
+- [ ] Žádné vypršené certifikáty nebo přihlašovací údaje
 
 #### ✅ Validace šablon
 - [ ] `azure.yaml` existuje a je validní YAML
 - [ ] Všechny služby definované v azure.yaml mají odpovídající zdrojový kód
 - [ ] Bicep šablony v adresáři `infra/` jsou přítomny
 - [ ] `main.bicep` se kompiluje bez chyb (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Náhled infrastruktury proběhl úspěšně (`azd provision --preview`)
 - [ ] Všechny požadované parametry mají výchozí hodnoty nebo budou poskytnuty
 - [ ] Žádné pevně zakódované tajné údaje v šablonách
 
@@ -829,15 +845,15 @@ Vytiskněte si tento seznam a ověřte každý bod před nasazením:
 - [ ] Konfigurována nastavení firewallu/proxy, pokud je potřeba
 - [ ] Key Vault nakonfigurován pro správu tajných údajů
 - [ ] Použity spravované identity, kde je to možné
-- [ ] Vynuceno HTTPS pro webové aplikace
+- [ ] Povinné HTTPS pro webové aplikace
 
 #### ✅ Správa nákladů
-- [ ] Odhad nákladů vypočítán pomocí Azure Pricing Calculator
+- [ ] Odhady nákladů vypočítány pomocí Azure Pricing Calculator
 - [ ] Konfigurována upozornění na rozpočet, pokud je potřeba
 - [ ] Vybrány vhodné SKU pro typ prostředí
 - [ ] Zvážena rezervovaná kapacita pro produkční zátěže
 
-#### ✅ Monitoring a pozorovatelnost
+#### ✅ Monitoring a pozorování
 - [ ] Application Insights nakonfigurováno v šablonách
 - [ ] Plánováno Log Analytics workspace
 - [ ] Definována pravidla upozornění pro kritické metriky
@@ -1283,48 +1299,48 @@ steps:
 
 ---
 
-## Shrnutí osvědčených postupů
+## Shrnutí nejlepších postupů
 
-### ✅ Osvědčené postupy pro kontroly před nasazením
+### ✅ Nejlepší postupy pro kontroly před nasazením
 
 1. **Automatizace, kde je to možné**
-   - Integrace kontrol do CI/CD pipeline
-   - Použití skriptů pro opakovatelné validace
-   - Ukládání výsledků pro auditní záznamy
+   - Integrujte kontroly do CI/CD pipeline
+   - Používejte skripty pro opakovatelné validace
+   - Uchovávejte výsledky pro auditní záznamy
 
 2. **Validace specifická pro prostředí**
-   - Různé kontroly pro vývoj/staging/produkci
+   - Různé kontroly pro vývoj/testování/produkci
    - Odpovídající bezpečnostní požadavky pro každé prostředí
    - Optimalizace nákladů pro neprodukční prostředí
 
 3. **Komplexní pokrytí**
    - Autentizace a oprávnění
-   - Kvóty zdrojů a dostupnost
+   - Kvóty a dostupnost zdrojů
    - Validace šablon a syntaxe
    - Požadavky na bezpečnost a soulad
 
 4. **Jasné reportování**
    - Barevně odlišené indikátory stavu
-   - Podrobné chybové zprávy s kroky nápravy
+   - Podrobné chybové zprávy s kroky k nápravě
    - Souhrnné zprávy pro rychlé posouzení
 
 5. **Rychlé zastavení**
-   - Zastavení nasazení, pokud selžou kritické kontroly
-   - Poskytnutí jasného návodu na řešení
-   - Možnost snadného opětovného spuštění kontrol
+   - Zastavte nasazení, pokud selžou kritické kontroly
+   - Poskytněte jasné pokyny pro řešení
+   - Umožněte snadné opakování kontrol
 
 ### Běžné chyby při kontrolách před nasazením
 
-1. **Přeskakování validace** pro "rychlá" nasazení
-2. **Nedostatečné kontroly oprávnění** před nasazením
+1. **Přeskakování validace** kvůli "rychlému" nasazení
+2. **Nedostatečné ověření oprávnění** před nasazením
 3. **Ignorování limitů kvót** až do selhání nasazení
-4. **Nevalidování šablon** v CI/CD pipeline
-5. **Vynechání bezpečnostní validace** pro produkční prostředí
+4. **Nevyřešené chyby šablon** v CI/CD pipeline
+5. **Chybějící validace bezpečnosti** pro produkční prostředí
 6. **Nedostatečný odhad nákladů**, což vede k překvapení v rozpočtu
 
 ---
 
-**Tip**: Spouštějte kontroly před nasazením jako samostatnou úlohu ve vaší CI/CD pipeline před samotnou úlohou nasazení. To vám umožní zachytit problémy včas a poskytne rychlejší zpětnou vazbu vývojářům.
+**Tip**: Spouštějte kontroly před nasazením jako samostatnou úlohu ve vaší CI/CD pipeline před samotnou úlohou nasazení. Tímto způsobem zachytíte problémy včas a poskytnete rychlejší zpětnou vazbu vývojářům.
 
 ---
 

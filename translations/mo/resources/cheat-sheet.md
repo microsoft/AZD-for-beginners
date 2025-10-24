@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T19:05:45+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:42:19+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "mo"
 }
 -->
-# 指令速查表 - AZD 必備指令
+# 指令速查表 - AZD 基本指令
 
 **所有章節快速參考**
 - **📚 課程首頁**: [AZD 初學者指南](../README.md)
@@ -17,27 +17,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 簡介
 
-這份全面的速查表提供了最常用的 Azure Developer CLI 指令的快速參考，依照類別整理並附有實用範例。非常適合在開發、故障排除以及日常操作 AZD 專案時快速查閱。
+這份全面的速查表提供了最常用的 Azure Developer CLI 指令的快速參考，按類別組織並附有實用範例。非常適合在開發、故障排除以及日常操作 AZD 專案時快速查閱。
 
 ## 學習目標
 
 使用這份速查表，您將能夠：
-- 即時存取重要的 Azure Developer CLI 指令及語法
-- 了解指令依功能類別及使用情境的組織方式
-- 參考常見開發與部署情境的實用範例
-- 學習故障排除指令以快速解決問題
-- 高效找到進階設定及自訂選項
-- 掌握環境管理及多環境工作流程指令
+- 即時獲取重要的 Azure Developer CLI 指令及語法
+- 了解指令按功能類別和使用案例的組織方式
+- 參考常見開發和部署場景的實用範例
+- 獲取快速解決問題的故障排除指令
+- 高效找到進階配置和自訂選項
+- 掌握環境管理及多環境工作流程的指令
 
 ## 學習成果
 
 經常參考這份速查表，您將能夠：
-- 自信地執行 AZD 指令而無需查閱完整文件
+- 自信地執行 azd 指令而無需查閱完整文件
 - 使用適當的診斷指令快速解決常見問題
-- 高效管理多個環境及部署情境
-- 根據需要應用 AZD 的進階功能及設定選項
+- 高效管理多個環境和部署場景
+- 根據需要應用進階的 azd 功能和配置選項
 - 使用系統化的指令序列排除部署問題
-- 透過有效使用 AZD 快捷方式及選項優化工作流程
+- 通過有效使用 azd 快捷方式和選項來優化工作流程
 
 ## 入門指令
 
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -158,9 +160,9 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ 設定指令
+## ⚙️ 配置指令
 
-### 全域設定
+### 全域配置
 ```bash
 # List all configuration
 azd config list
@@ -176,7 +178,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### 專案設定
+### 專案配置
 ```bash
 # Validate azure.yaml
 azd config validate
@@ -249,7 +251,7 @@ azd info
 
 ## 🔧 進階指令
 
-### 管線與 CI/CD
+### 管道與 CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### 服務管理
@@ -360,7 +371,7 @@ azd info
 az account show
 ```
 
-### 範本除錯
+### 模板除錯
 ```bash
 # List available templates with details
 azd template list --output json
@@ -408,7 +419,7 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 常見指令組合
+## 🔧 常用指令組合
 
 ### 健康檢查腳本
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -498,9 +509,9 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 專家提示
+## 💡 專業提示
 
-### 快速工作流程的別名
+### 加速工作流程的別名
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -509,7 +520,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### 函數快捷方式
+### 功能快捷方式
 ```bash
 # Quick environment switching
 azd-env() {
@@ -563,10 +574,10 @@ azd template show <template-name> --docs
 ---
 
 **導航**
-- **上一課**: [部署前檢查](../docs/pre-deployment/preflight-checks.md)
+- **上一課**: [預檢查](../docs/pre-deployment/preflight-checks.md)
 - **下一課**: [術語表](glossary.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。應以原始語言的文件作為權威來源。對於關鍵資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

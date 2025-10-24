@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T13:08:35+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T16:44:32+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "hk"
 }
@@ -10,43 +10,43 @@ CO_OP_TRANSLATOR_METADATA:
 # 使用 AZD 配置 Azure 資源
 
 **章節導航：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章內容**: 第四章 - 基礎設施即代碼與部署
-- **⬅️ 上一章**: [部署指南](deployment-guide.md)
-- **➡️ 下一章**: [第五章：多代理 AI 解決方案](../../examples/retail-scenario.md)
-- **🔧 相關章節**: [第六章：部署前驗證](../pre-deployment/capacity-planning.md)
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章內容**：第 4 章 - 基礎架構即代碼與部署
+- **⬅️ 上一章**：[部署指南](deployment-guide.md)
+- **➡️ 下一章**：[第 5 章：多代理 AI 解決方案](../../examples/retail-scenario.md)
+- **🔧 相關章節**：[第 6 章：部署前驗證](../pre-deployment/capacity-planning.md)
 
 ## 簡介
 
-這份全面指南涵蓋了使用 Azure Developer CLI 配置和管理 Azure 資源所需的所有知識。學習如何從基礎資源創建到使用 Bicep、ARM 模板、Terraform 和 Pulumi 實現企業級基礎設施架構，並掌握基礎設施即代碼（IaC）模式。
+本指南涵蓋了使用 Azure Developer CLI 配置和管理 Azure 資源的所有內容。從基礎資源創建到使用 Bicep、ARM 模板、Terraform 和 Pulumi 實現企業級基礎架構架構的高級模式，學習如何實施基礎架構即代碼（IaC）模式。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
-- 掌握基礎設施即代碼的原則以及 Azure 資源配置
+- 掌握基礎架構即代碼的原則及 Azure 資源配置
 - 了解 Azure Developer CLI 支援的多種 IaC 提供者
-- 設計並實現適用於常見應用架構的 Bicep 模板
+- 設計並實現常見應用架構的 Bicep 模板
 - 配置資源參數、變數及特定環境設置
-- 實現包括網絡和安全在內的高級基礎設施模式
+- 實現包括網絡和安全在內的高級基礎架構模式
 - 管理資源生命周期、更新及依賴解決
 
 ## 學習成果
 
 完成後，您將能夠：
-- 使用 Bicep 和 ARM 模板設計並配置 Azure 基礎設施
+- 使用 Bicep 和 ARM 模板設計並配置 Azure 基礎架構
 - 配置具有正確資源依賴的複雜多服務架構
 - 為多個環境和配置實現參數化模板
-- 排查基礎設施配置問題並解決部署失敗
-- 在基礎設施設計中應用 Azure 良好架構框架原則
-- 管理基礎設施更新並實現基礎設施版本控制策略
+- 排除基礎架構配置問題並解決部署失敗
+- 將 Azure 良好架構框架原則應用於基礎架構設計
+- 管理基礎架構更新並實施基礎架構版本控制策略
 
-## 基礎設施配置概述
+## 基礎架構配置概述
 
-Azure Developer CLI 支援多種基礎設施即代碼（IaC）提供者：
+Azure Developer CLI 支援多種基礎架構即代碼（IaC）提供者：
 - **Bicep**（推薦）- Azure 的領域專用語言
 - **ARM 模板** - 基於 JSON 的 Azure 資源管理器模板
-- **Terraform** - 多雲基礎設施工具
-- **Pulumi** - 使用編程語言的現代基礎設施即代碼工具
+- **Terraform** - 多雲基礎架構工具
+- **Pulumi** - 使用編程語言的現代基礎架構即代碼
 
 ## 了解 Azure 資源
 
@@ -59,13 +59,13 @@ Azure Account
 ```
 
 ### 常見應用的 Azure 服務
-- **計算**: App Service、Container Apps、Functions、虛擬機
-- **存儲**: Storage Account、Cosmos DB、SQL Database、PostgreSQL
-- **網絡**: Virtual Network、Application Gateway、CDN
-- **安全**: Key Vault、Application Insights、Log Analytics
-- **AI/ML**: Cognitive Services、OpenAI、Machine Learning
+- **計算**：App Service、Container Apps、Functions、Virtual Machines
+- **存儲**：Storage Account、Cosmos DB、SQL Database、PostgreSQL
+- **網絡**：Virtual Network、Application Gateway、CDN
+- **安全**：Key Vault、Application Insights、Log Analytics
+- **AI/ML**：Cognitive Services、OpenAI、Machine Learning
 
-## Bicep 基礎設施模板
+## Bicep 基礎架構模板
 
 ### 基本 Bicep 模板結構
 ```bicep
@@ -139,7 +139,7 @@ output WEB_NAME string = webApp.name
 
 ### 高級 Bicep 模式
 
-#### 模塊化基礎設施
+#### 模塊化基礎架構
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -351,7 +351,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### 設置受管理身份
+### 設置托管身份
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -442,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### 使用 SSL 的 Application Gateway
+### 配備 SSL 的應用網關
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -728,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### 基礎設施測試
+### 基礎架構測試
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 資源更新與遷移
+## 🧪 基礎架構預覽與驗證（新功能）
 
-### 安全資源更新
+### 部署前預覽基礎架構變更
+
+`azd provision --preview` 功能可讓您在實際部署資源之前，**模擬基礎架構配置**。這類似於 `terraform plan` 或 `bicep what-if`，提供 Azure 環境中即將進行的變更的**預覽**。
+
+#### 🛠️ 功能概述
+- **分析您的 IaC 模板**（Bicep 或 Terraform）
+- **顯示資源變更的預覽**：新增、刪除、更新
+- **不會應用變更** — 這是只讀操作，安全可執行
+
+#### � 使用場景
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Apply changes incrementally
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+此命令可幫助您：
+- **在提交資源前驗證基礎架構變更**
+- **在開發周期早期發現配置錯誤**
+- **在團隊環境中安全協作**
+- **確保最低權限部署**，避免意外情況
+
+特別適用於以下情況：
+- 處理複雜的多服務環境
+- 對生產基礎架構進行變更
+- 在 PR 審核前驗證模板修改
+- 培訓新團隊成員學習基礎架構模式
+
+### 預覽輸出示例
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 資源更新與遷移
+
+### 安全的資源更新
+```bash
+# Preview infrastructure changes first (RECOMMENDED)
+azd provision --preview
+
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -867,7 +927,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## 下一步
 
 - [部署前規劃](../pre-deployment/capacity-planning.md) - 驗證資源可用性
-- [常見問題](../troubleshooting/common-issues.md) - 排查基礎設施問題
+- [常見問題](../troubleshooting/common-issues.md) - 排除基礎架構問題
 - [調試指南](../troubleshooting/debugging.md) - 調試配置問題
 - [SKU 選擇](../pre-deployment/sku-selection.md) - 選擇合適的服務層級
 
@@ -881,10 +941,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **導航**
-- **上一課**: [部署指南](deployment-guide.md)
-- **下一課**: [容量規劃](../pre-deployment/capacity-planning.md)
+- **上一課**：[部署指南](deployment-guide.md)
+- **下一課**：[容量規劃](../pre-deployment/capacity-planning.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為具權威性的來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

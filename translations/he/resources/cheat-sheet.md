@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T07:21:12+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:38:47+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "he"
 }
@@ -26,18 +26,18 @@ CO_OP_TRANSLATOR_METADATA:
 - להבין את ארגון הפקודות לפי קטגוריות פונקציונליות ושימושים
 - לעיין בדוגמאות מעשיות לתרחישי פיתוח ופריסה נפוצים
 - לגשת לפקודות פתרון בעיות לפתרון מהיר של תקלות
-- למצוא אפשרויות מתקדמות להגדרות והתאמות אישיות ביעילות
-- לאתר פקודות לניהול סביבות וזרימות עבודה מרובות סביבות
+- למצוא ביעילות אפשרויות תצורה והתאמה מתקדמות
+- לאתר פקודות לניהול סביבות ועבודה עם מספר סביבות
 
 ## תוצאות למידה
 
-עם שימוש קבוע בדף עזר זה, תוכלו:
+עם עיון קבוע בדף עזר זה, תוכלו:
 - לבצע פקודות azd בביטחון ללא צורך בעיון בתיעוד מלא
 - לפתור בעיות נפוצות במהירות באמצעות פקודות אבחון מתאימות
-- לנהל ביעילות סביבות מרובות ותרחישי פריסה
-- ליישם תכונות מתקדמות של azd ואפשרויות הגדרה לפי הצורך
+- לנהל ביעילות מספר סביבות ותרחישי פריסה
+- ליישם תכונות מתקדמות ואפשרויות תצורה של azd לפי הצורך
 - לפתור בעיות פריסה באמצעות רצפי פקודות שיטתיים
-- לייעל זרימות עבודה באמצעות שימוש אפקטיבי בקיצורי דרך ואפשרויות של azd
+- לייעל תהליכי עבודה באמצעות שימוש יעיל בקיצורי דרך ואפשרויות של azd
 
 ## פקודות התחלה
 
@@ -70,9 +70,9 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## פקודות פריסה מרכזיות
+## פקודות פריסה עיקריות
 
-### זרימת עבודה מלאה לפריסה
+### תהליך פריסה מלא
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -158,9 +160,9 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ פקודות הגדרה
+## ⚙️ פקודות תצורה
 
-### הגדרה גלובלית
+### תצורה גלובלית
 ```bash
 # List all configuration
 azd config list
@@ -176,7 +178,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### הגדרת פרויקט
+### תצורת פרויקט
 ```bash
 # Validate azure.yaml
 azd config validate
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### ניהול שירותים
@@ -285,9 +296,9 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 זרימות עבודה מהירות
+## 🎯 תהליכי עבודה מהירים
 
-### זרימת עבודה לפיתוח
+### תהליך עבודה לפיתוח
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### זרימת עבודה מרובת סביבות
+### תהליך עבודה עם מספר סביבות
 ```bash
 # Set up environments
 azd env new dev
@@ -324,7 +335,7 @@ azd env select production
 azd up
 ```
 
-### זרימת עבודה לפתרון בעיות
+### תהליך עבודה לפתרון בעיות
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 טיפים מקצועיים
 
-### קיצורי דרך לזרימת עבודה מהירה
+### קיצורי דרך לתהליכי עבודה מהירים
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.

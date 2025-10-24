@@ -1,82 +1,82 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T06:37:47+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:34:49+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "fi"
 }
 -->
-# AZD-järjestelmien käyttöönoton esivalmistelut
+# AZD-järjestelmien esilennon tarkistukset
 
 **Luvun navigointi:**
 - **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 6 - Käyttöönoton validointi ja suunnittelu
+- **📖 Nykyinen luku**: Luku 6 - Esivalidointi ja suunnittelu ennen käyttöönottoa
 - **⬅️ Edellinen**: [SKU-valinta](sku-selection.md)
-- **➡️ Seuraava luku**: [Luku 7: Vianetsintä](../troubleshooting/common-issues.md)
+- **➡️ Seuraava luku**: [Luku 7: Vianmääritys](../troubleshooting/common-issues.md)
 - **🔧 Liittyvä**: [Luku 4: Käyttöönotto-opas](../deployment/deployment-guide.md)
 
 ## Johdanto
 
-Tämä kattava opas tarjoaa validointiskriptit ja -menettelyt, jotka varmistavat onnistuneet Azure Developer CLI -käyttöönotot ennen niiden alkamista. Opit toteuttamaan automatisoituja tarkistuksia, jotka liittyvät autentikointiin, resurssien saatavuuteen, kiintiöihin, turvallisuusvaatimusten noudattamiseen ja suorituskykyyn, jotta käyttöönoton epäonnistumiset voidaan estää ja onnistumisprosentti optimoida.
+Tämä kattava opas tarjoaa esivalidointiskriptit ja -menettelyt, jotka varmistavat onnistuneet Azure Developer CLI -käyttöönotot ennen niiden alkamista. Opit toteuttamaan automatisoituja tarkistuksia autentikoinnille, resurssien saatavuudelle, kiintiöille, turvallisuusvaatimusten noudattamiselle ja suorituskykyvaatimuksille, jotta käyttöönotto epäonnistumiset voidaan estää ja onnistumisprosentti optimoida.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
-- Hallitsemaan automatisoituja validointitekniikoita ja -skriptejä ennen käyttöönottoa
+- Hallitsemaan automatisoituja esivalidointitekniikoita ja -skriptejä
 - Ymmärtämään kattavat tarkistusstrategiat autentikoinnille, käyttöoikeuksille ja kiintiöille
 - Toteuttamaan resurssien saatavuuden ja kapasiteetin validointimenettelyt
-- Konfiguroimaan turvallisuus- ja vaatimustenmukaisuustarkistukset organisaation politiikkojen mukaisesti
-- Suunnittelemaan kustannusarvio- ja budjettivalidointityönkulut
-- Luomaan räätälöityjä esivalmistelujen automaatioita CI/CD-putkistoille
+- Konfiguroimaan turvallisuus- ja vaatimustenmukaisuustarkistukset organisaation politiikoille
+- Suunnittelemaan kustannusarviointi- ja budjettivalidointityönkulut
+- Luomaan räätälöityjä esilennon tarkistusautomaatioita CI/CD-putkille
 
 ## Oppimistulokset
 
 Oppaan suorittamisen jälkeen pystyt:
-- Luomaan ja suorittamaan kattavia validointiskriptejä ennen käyttöönottoa
-- Suunnittelemaan automatisoituja tarkistustyönkulkuja eri käyttöönoton skenaarioille
-- Toteuttamaan ympäristökohtaisia validointimenettelyjä ja -politiikkoja
-- Konfiguroimaan ennakoivaa seurantaa ja hälytyksiä käyttöönoton valmiuden varmistamiseksi
-- Ratkaisemaan validointivaiheen ongelmia ja toteuttamaan korjaavia toimenpiteitä
-- Integroimaan esivalmistelut DevOps-putkistoihin ja automaatiotyönkulkuihin
+- Luomaan ja suorittamaan kattavia esilennon validointiskriptejä
+- Suunnittelemaan automatisoituja tarkistustyönkulkuja eri käyttöönotto-skenaarioille
+- Toteuttamaan ympäristökohtaisia validointimenettelyjä ja -politiikoita
+- Konfiguroimaan ennakoivaa seurantaa ja hälytyksiä käyttöönoton valmiudelle
+- Ratkaisemaan esivalidointiongelmia ja toteuttamaan korjaavia toimenpiteitä
+- Integroimaan esilennon tarkistukset DevOps-putkiin ja automaatiotyönkulkuihin
 
 ## Sisällysluettelo
 
 - [Yleiskatsaus](../../../../docs/pre-deployment)
-- [Automatisoitu esivalmisteluskripti](../../../../docs/pre-deployment)
+- [Automatisoitu esilennon skripti](../../../../docs/pre-deployment)
 - [Manuaalinen validointilista](../../../../docs/pre-deployment)
 - [Ympäristön validointi](../../../../docs/pre-deployment)
 - [Resurssien validointi](../../../../docs/pre-deployment)
 - [Turvallisuus- ja vaatimustenmukaisuustarkistukset](../../../../docs/pre-deployment)
 - [Suorituskyky- ja kapasiteettisuunnittelu](../../../../docs/pre-deployment)
-- [Yleisten ongelmien vianetsintä](../../../../docs/pre-deployment)
+- [Yleisten ongelmien vianmääritys](../../../../docs/pre-deployment)
 
 ---
 
 ## Yleiskatsaus
 
-Esivalmistelut ovat olennaisia validointeja, jotka suoritetaan ennen käyttöönottoa varmistaen:
+Esilennon tarkistukset ovat olennaisia validointeja, jotka suoritetaan ennen käyttöönottoa varmistaakseen:
 
-- **Resurssien saatavuus** ja kiintiöt kohdealueilla
-- **Autentikointi ja käyttöoikeudet** ovat oikein konfiguroitu
-- **Mallien validiteetti** ja parametrien oikeellisuus
-- **Verkkoyhteydet** ja riippuvuudet
-- **Turvallisuusvaatimusten noudattaminen** organisaation politiikkojen mukaisesti
-- **Kustannusarvio** budjettirajoitusten puitteissa
+- **Resurssien saatavuuden** ja kiintiöt kohdealueilla
+- **Autentikoinnin ja käyttöoikeuksien** oikean konfiguroinnin
+- **Mallien validiteetin** ja parametrien oikeellisuuden
+- **Verkkoyhteyden** ja riippuvuuksien toimivuuden
+- **Turvallisuusvaatimusten noudattamisen** organisaation politiikoiden mukaisesti
+- **Kustannusarvion** budjettirajoissa
 
-### Milloin suorittaa esivalmistelut
+### Milloin suorittaa esilennon tarkistukset
 
 - **Ennen ensimmäistä käyttöönottoa** uuteen ympäristöön
 - **Merkittävien mallimuutosten jälkeen**
 - **Ennen tuotantokäyttöönottoa**
 - **Azure-alueiden vaihdon yhteydessä**
-- **Osana CI/CD-putkistoja**
+- **Osana CI/CD-putkia**
 
 ---
 
-## Automatisoitu esivalmisteluskripti
+## Automatisoitu esilennon skripti
 
-### PowerShell-esivalmistelutarkistin
+### PowerShell-esilennon tarkistaja
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash-esivalmistelutarkistin
+### Bash-esilennon tarkistaja
 
 ```bash
 #!/bin/bash
@@ -792,15 +807,15 @@ main "$@"
 
 ## Manuaalinen validointilista
 
-### Käyttöönoton tarkistuslista
+### Esikäyttöönoton tarkistuslista
 
-Tulosta tämä lista ja varmista jokainen kohta ennen käyttöönottoa:
+Tulosta tämä tarkistuslista ja varmista jokainen kohta ennen käyttöönottoa:
 
 #### ✅ Ympäristön asennus
 - [ ] AZD CLI asennettu ja päivitetty uusimpaan versioon
 - [ ] Azure CLI asennettu ja autentikoitu
 - [ ] Oikea Azure-tilaus valittu
-- [ ] Ympäristön nimi on uniikki ja noudattaa nimeämiskäytäntöjä
+- [ ] Ympäristön nimi on ainutlaatuinen ja noudattaa nimeämiskäytäntöjä
 - [ ] Kohderesurssiryhmä tunnistettu tai voidaan luoda
 
 #### ✅ Autentikointi ja käyttöoikeudet
@@ -809,27 +824,28 @@ Tulosta tämä lista ja varmista jokainen kohta ennen käyttöönottoa:
 - [ ] Palveluperiaate konfiguroitu CI/CD:lle (jos sovellettavissa)
 - [ ] Ei vanhentuneita sertifikaatteja tai tunnuksia
 
-#### ✅ Mallien validointi
+#### ✅ Mallin validointi
 - [ ] `azure.yaml` olemassa ja validi YAML
 - [ ] Kaikilla azure.yaml:ssa määritellyillä palveluilla on vastaava lähdekoodi
 - [ ] Bicep-mallit `infra/`-hakemistossa ovat olemassa
 - [ ] `main.bicep` kääntyy ilman virheitä (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Infrastruktuurin esikatselu onnistuu (`azd provision --preview`)
 - [ ] Kaikilla vaadituilla parametreilla on oletusarvot tai ne annetaan
 - [ ] Ei kovakoodattuja salaisuuksia malleissa
 
-#### ✅ Resurssien suunnittelu
-- [ ] Kohdealue Azure:ssa valittu ja validoitu
+#### ✅ Resurssisuunnittelu
+- [ ] Kohde Azure-alue valittu ja validoitu
 - [ ] Vaaditut Azure-palvelut saatavilla kohdealueella
 - [ ] Riittävät kiintiöt suunnitelluille resursseille
 - [ ] Resurssien nimeämiskonfliktit tarkistettu
-- [ ] Riippuvuudet resurssien välillä ymmärretty
+- [ ] Resurssien väliset riippuvuudet ymmärretty
 
 #### ✅ Verkko ja turvallisuus
-- [ ] Verkkoyhteydet Azure-päätepisteisiin tarkistettu
-- [ ] Palomuuri/proxy-asetukset konfiguroitu tarvittaessa
+- [ ] Verkkoyhteys Azure-päätepisteisiin vahvistettu
+- [ ] Palomuurin/proxyn asetukset konfiguroitu tarvittaessa
 - [ ] Key Vault konfiguroitu salaisuuksien hallintaan
-- [ ] Hallitut identiteetit käytössä, jos mahdollista
-- [ ] HTTPS-pakotus aktivoitu verkkosovelluksille
+- [ ] Hallitut identiteetit käytössä mahdollisuuksien mukaan
+- [ ] HTTPS-pakotus käytössä verkkosovelluksille
 
 #### ✅ Kustannusten hallinta
 - [ ] Kustannusarviot laskettu Azure Pricing Calculatorilla
@@ -838,15 +854,15 @@ Tulosta tämä lista ja varmista jokainen kohta ennen käyttöönottoa:
 - [ ] Varattu kapasiteetti huomioitu tuotantokuormille
 
 #### ✅ Seuranta ja havainnointi
-- [ ] Application Insights konfiguroitu malleissa
+- [ ] Application Insights konfiguroitu malleihin
 - [ ] Log Analytics -työtila suunniteltu
 - [ ] Hälytyssäännöt määritelty kriittisille mittareille
-- [ ] Terveystarkistuspäätepisteet toteutettu sovelluksissa
+- [ ] Sovelluksissa toteutettu terveystarkistuspisteet
 
 #### ✅ Varmuuskopiointi ja palautus
-- [ ] Varmuuskopiosuunnitelma määritelty datalähteille
-- [ ] Palautusaikatavoitteet (RTO) dokumentoitu
-- [ ] Palautuspisteen tavoitteet (RPO) dokumentoitu
+- [ ] Varmuuskopiosuunnitelma määritelty datan resursseille
+- [ ] Palautumisaikatavoitteet (RTO) dokumentoitu
+- [ ] Palautumispisteen tavoitteet (RPO) dokumentoitu
 - [ ] Katastrofipalautussuunnitelma olemassa tuotantoa varten
 
 ---
@@ -1285,10 +1301,10 @@ steps:
 
 ## Parhaiden käytäntöjen yhteenveto
 
-### ✅ Esivalmistelujen parhaat käytännöt
+### ✅ Esilennon tarkistusten parhaat käytännöt
 
 1. **Automatisoi mahdollisuuksien mukaan**
-   - Integroi tarkistukset CI/CD-putkistoihin
+   - Integroi tarkistukset CI/CD-putkiin
    - Käytä skriptejä toistettaviin validointeihin
    - Tallenna tulokset auditointia varten
 
@@ -1305,7 +1321,7 @@ steps:
 
 4. **Selkeä raportointi**
    - Väriin perustuvat tilan indikaattorit
-   - Yksityiskohtaiset virheilmoitukset ja korjausohjeet
+   - Yksityiskohtaiset virheilmoitukset korjausohjeilla
    - Yhteenvetoraportit nopeaan arviointiin
 
 5. **Pysäytä nopeasti**
@@ -1313,18 +1329,18 @@ steps:
    - Tarjoa selkeät ohjeet ongelman ratkaisemiseksi
    - Mahdollista tarkistusten helppo uudelleensuoritus
 
-### Yleiset esivalmistelujen sudenkuopat
+### Yleiset esilennon sudenkuopat
 
 1. **Validoinnin ohittaminen** "nopeiden" käyttöönottojen vuoksi
 2. **Riittämätön käyttöoikeuksien tarkistus** ennen käyttöönottoa
-3. **Kiintiöiden rajoitusten huomiotta jättäminen** ennen epäonnistumista
-4. **Mallien validoinnin laiminlyönti** CI/CD-putkistoissa
-5. **Turvallisuustarkistusten puuttuminen** tuotantoympäristöissä
-6. **Riittämätön kustannusarvio** johtaa budjettiyllätyksiin
+3. **Kiintiöiden rajojen huomiotta jättäminen** ennen epäonnistumista
+4. **Mallien validoinnin laiminlyönti** CI/CD-putkissa
+5. **Turvallisuuden validoinnin puuttuminen** tuotantoympäristöissä
+6. **Riittämätön kustannusarviointi** johtaa budjettiyllätyksiin
 
 ---
 
-**Vinkki**: Suorita esivalmistelut erillisenä työnä CI/CD-putkistossa ennen varsinaista käyttöönottoa. Tämä auttaa havaitsemaan ongelmat ajoissa ja tarjoaa nopeampaa palautetta kehittäjille.
+**Vinkki**: Suorita esilennon tarkistukset erillisenä työnä CI/CD-putkessasi ennen varsinaista käyttöönottoa. Tämä auttaa havaitsemaan ongelmat ajoissa ja tarjoaa nopeampaa palautetta kehittäjille.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Tärkeissä tiedoissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

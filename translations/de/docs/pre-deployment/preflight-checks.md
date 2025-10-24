@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T16:11:21+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T16:29:18+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "de"
 }
@@ -14,11 +14,11 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Aktuelles Kapitel**: Kapitel 6 - Validierung & Planung vor der Bereitstellung
 - **⬅️ Vorheriges Kapitel**: [SKU-Auswahl](sku-selection.md)
 - **➡️ Nächstes Kapitel**: [Kapitel 7: Fehlerbehebung](../troubleshooting/common-issues.md)
-- **🔧 Verwandtes Kapitel**: [Kapitel 4: Bereitstellungsanleitung](../deployment/deployment-guide.md)
+- **🔧 Verwandtes Kapitel**: [Kapitel 4: Bereitstellungsleitfaden](../deployment/deployment-guide.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden bietet Validierungsskripte und Verfahren vor der Bereitstellung, um erfolgreiche Azure Developer CLI-Bereitstellungen sicherzustellen, bevor sie beginnen. Lernen Sie, automatisierte Prüfungen für Authentifizierung, Ressourcenverfügbarkeit, Quoten, Sicherheitsrichtlinien und Leistungsanforderungen umzusetzen, um Bereitstellungsfehler zu vermeiden und die Erfolgsquote zu optimieren.
+Dieser umfassende Leitfaden bietet Validierungsskripte und Verfahren vor der Bereitstellung, um erfolgreiche Azure Developer CLI-Bereitstellungen sicherzustellen, bevor sie beginnen. Lernen Sie, automatisierte Prüfungen für Authentifizierung, Ressourcenverfügbarkeit, Quoten, Sicherheitskonformität und Leistungsanforderungen umzusetzen, um Bereitstellungsfehler zu vermeiden und die Erfolgsquote zu optimieren.
 
 ## Lernziele
 
@@ -26,19 +26,19 @@ Nach Abschluss dieses Leitfadens werden Sie:
 - Automatisierte Validierungstechniken und Skripte vor der Bereitstellung beherrschen
 - Umfassende Prüfstrategien für Authentifizierung, Berechtigungen und Quoten verstehen
 - Verfahren zur Validierung von Ressourcenverfügbarkeit und Kapazität implementieren
-- Sicherheits- und Compliance-Prüfungen für organisatorische Richtlinien konfigurieren
+- Sicherheits- und Konformitätsprüfungen für organisatorische Richtlinien konfigurieren
 - Workflows zur Kostenschätzung und Budgetvalidierung entwerfen
 - Eigene Automatisierungen für Vorabprüfungen in CI/CD-Pipelines erstellen
 
 ## Lernergebnisse
 
-Nach Abschluss werden Sie in der Lage sein:
-- Umfassende Validierungsskripte vor der Bereitstellung zu erstellen und auszuführen
-- Automatisierte Prüfungs-Workflows für verschiedene Bereitstellungsszenarien zu entwerfen
-- Umgebungsabhängige Validierungsverfahren und Richtlinien umzusetzen
-- Proaktives Monitoring und Benachrichtigungen für die Bereitstellungsbereitschaft zu konfigurieren
-- Probleme vor der Bereitstellung zu beheben und Korrekturmaßnahmen umzusetzen
-- Vorabprüfungen in DevOps-Pipelines und Automatisierungs-Workflows zu integrieren
+Nach Abschluss können Sie:
+- Umfassende Validierungsskripte vor der Bereitstellung erstellen und ausführen
+- Automatisierte Prüfungs-Workflows für verschiedene Bereitstellungsszenarien entwerfen
+- Umgebungspezifische Validierungsverfahren und -richtlinien implementieren
+- Proaktives Monitoring und Benachrichtigungen für die Bereitstellungsbereitschaft konfigurieren
+- Probleme vor der Bereitstellung beheben und Korrekturmaßnahmen umsetzen
+- Vorabprüfungen in DevOps-Pipelines und Automatisierungs-Workflows integrieren
 
 ## Inhaltsverzeichnis
 
@@ -47,7 +47,7 @@ Nach Abschluss werden Sie in der Lage sein:
 - [Manuelle Validierungs-Checkliste](../../../../docs/pre-deployment)
 - [Umgebungsvalidierung](../../../../docs/pre-deployment)
 - [Ressourcenvalidierung](../../../../docs/pre-deployment)
-- [Sicherheits- & Compliance-Prüfungen](../../../../docs/pre-deployment)
+- [Sicherheits- & Konformitätsprüfungen](../../../../docs/pre-deployment)
 - [Leistungs- & Kapazitätsplanung](../../../../docs/pre-deployment)
 - [Fehlerbehebung bei häufigen Problemen](../../../../docs/pre-deployment)
 
@@ -60,7 +60,7 @@ Vorabprüfungen sind essenzielle Validierungen, die vor der Bereitstellung durch
 - **Ressourcenverfügbarkeit** und Quoten in Zielregionen
 - **Authentifizierung und Berechtigungen** sind korrekt konfiguriert
 - **Vorlagenvalidität** und Parameterkorrektheit
-- **Netzwerkverbindungen** und Abhängigkeiten
+- **Netzwerkverbindung** und Abhängigkeiten
 - **Sicherheitskonformität** mit organisatorischen Richtlinien
 - **Kostenschätzung** innerhalb der Budgetgrenzen
 
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -800,13 +815,13 @@ Drucken Sie diese Checkliste aus und überprüfen Sie jeden Punkt vor der Bereit
 - [ ] AZD CLI installiert und auf die neueste Version aktualisiert
 - [ ] Azure CLI installiert und authentifiziert
 - [ ] Korrektes Azure-Abonnement ausgewählt
-- [ ] Eindeutiger Umgebungsname, der den Namenskonventionen entspricht
+- [ ] Eindeutiger Name für die Umgebung, der den Namenskonventionen entspricht
 - [ ] Zielressourcengruppe identifiziert oder kann erstellt werden
 
 #### ✅ Authentifizierung & Berechtigungen
 - [ ] Erfolgreich authentifiziert mit `azd auth login`
-- [ ] Benutzer hat die Rolle "Mitwirkender" im Zielabonnement/Ressourcengruppe
-- [ ] Dienstprinzipal für CI/CD konfiguriert (falls zutreffend)
+- [ ] Benutzer hat die Rolle "Mitwirkender" im Zielabonnement/der Ressourcengruppe
+- [ ] Service Principal für CI/CD konfiguriert (falls zutreffend)
 - [ ] Keine abgelaufenen Zertifikate oder Anmeldeinformationen
 
 #### ✅ Vorlagenvalidierung
@@ -814,11 +829,12 @@ Drucken Sie diese Checkliste aus und überprüfen Sie jeden Punkt vor der Bereit
 - [ ] Alle in azure.yaml definierten Dienste haben entsprechenden Quellcode
 - [ ] Bicep-Vorlagen im Verzeichnis `infra/` sind vorhanden
 - [ ] `main.bicep` kompiliert fehlerfrei (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Infrastrukturvorschau läuft erfolgreich (`azd provision --preview`)
 - [ ] Alle erforderlichen Parameter haben Standardwerte oder werden bereitgestellt
 - [ ] Keine fest codierten Geheimnisse in Vorlagen
 
 #### ✅ Ressourcenplanung
-- [ ] Zielregion in Azure ausgewählt und validiert
+- [ ] Ziel-Azure-Region ausgewählt und validiert
 - [ ] Erforderliche Azure-Dienste in der Zielregion verfügbar
 - [ ] Ausreichende Quoten für geplante Ressourcen verfügbar
 - [ ] Konflikte bei Ressourcennamen überprüft
@@ -826,18 +842,18 @@ Drucken Sie diese Checkliste aus und überprüfen Sie jeden Punkt vor der Bereit
 
 #### ✅ Netzwerk & Sicherheit
 - [ ] Netzwerkverbindung zu Azure-Endpunkten überprüft
-- [ ] Firewall-/Proxy-Einstellungen konfiguriert, falls erforderlich
+- [ ] Firewall-/Proxy-Einstellungen bei Bedarf konfiguriert
 - [ ] Key Vault für Geheimnisverwaltung konfiguriert
-- [ ] Verwaltete Identitäten verwendet, wo möglich
+- [ ] Verwaltete Identitäten, wo möglich, verwendet
 - [ ] HTTPS-Erzwingung für Webanwendungen aktiviert
 
 #### ✅ Kostenmanagement
 - [ ] Kostenschätzungen mit dem Azure Pricing Calculator berechnet
-- [ ] Budgetwarnungen konfiguriert, falls erforderlich
-- [ ] Geeignete SKUs für den Umwelttyp ausgewählt
+- [ ] Budgetwarnungen bei Bedarf konfiguriert
+- [ ] Geeignete SKUs für den Umgebungstyp ausgewählt
 - [ ] Reservierte Kapazität für Produktionslasten berücksichtigt
 
-#### ✅ Monitoring & Beobachtbarkeit
+#### ✅ Überwachung & Beobachtbarkeit
 - [ ] Application Insights in Vorlagen konfiguriert
 - [ ] Log Analytics-Arbeitsbereich geplant
 - [ ] Warnregeln für kritische Metriken definiert
@@ -847,7 +863,7 @@ Drucken Sie diese Checkliste aus und überprüfen Sie jeden Punkt vor der Bereit
 - [ ] Backup-Strategie für Datenressourcen definiert
 - [ ] Wiederherstellungszeitziele (RTO) dokumentiert
 - [ ] Wiederherstellungspunktziele (RPO) dokumentiert
-- [ ] Notfallwiederherstellungsplan für Produktion vorhanden
+- [ ] Notfallwiederherstellungsplan für die Produktion vorhanden
 
 ---
 
@@ -928,7 +944,7 @@ validate_prod_environment() {
 
 ## Ressourcenvalidierung
 
-### Skript zur Quotenvalidierung
+### Quotenvalidierungs-Skript
 
 ```python
 #!/usr/bin/env python3
@@ -1051,9 +1067,9 @@ if __name__ == "__main__":
 
 ---
 
-## Sicherheits- & Compliance-Prüfungen
+## Sicherheits- & Konformitätsprüfungen
 
-### Skript zur Sicherheitsvalidierung
+### Sicherheitsvalidierungs-Skript
 
 ```bash
 #!/bin/bash
@@ -1287,13 +1303,13 @@ steps:
 
 ### ✅ Best Practices für Vorabprüfungen
 
-1. **Automatisierung, wo möglich**
+1. **Automatisieren, wo möglich**
    - Prüfungen in CI/CD-Pipelines integrieren
    - Skripte für wiederholbare Validierungen verwenden
    - Ergebnisse für Audit-Zwecke speichern
 
 2. **Umgebungsspezifische Validierung**
-   - Unterschiedliche Prüfungen für Entwicklung/Staging/Produktion
+   - Unterschiedliche Prüfungen für Entwicklung/Tests/Produktion
    - Angemessene Sicherheitsanforderungen je nach Umgebung
    - Kostenoptimierung für Nicht-Produktionsumgebungen
 
@@ -1301,22 +1317,22 @@ steps:
    - Authentifizierung und Berechtigungen
    - Ressourcenquoten und Verfügbarkeit
    - Vorlagenvalidierung und Syntax
-   - Sicherheits- und Compliance-Anforderungen
+   - Sicherheits- und Konformitätsanforderungen
 
 4. **Klare Berichterstattung**
-   - Farblich gekennzeichnete Statusindikatoren
+   - Farblich gekennzeichnete Statusanzeigen
    - Detaillierte Fehlermeldungen mit Lösungsschritten
    - Zusammenfassende Berichte für schnelle Bewertung
 
 5. **Schnelles Scheitern**
    - Bereitstellung stoppen, wenn kritische Prüfungen fehlschlagen
-   - Klare Anweisungen zur Behebung bereitstellen
+   - Klare Anweisungen zur Problemlösung bereitstellen
    - Einfaches erneutes Ausführen der Prüfungen ermöglichen
 
 ### Häufige Fehler bei Vorabprüfungen
 
 1. **Überspringen der Validierung** für "schnelle" Bereitstellungen
-2. **Unzureichende Berechtigungsprüfung** vor der Bereitstellung
+2. **Unzureichende Berechtigungsprüfungen** vor der Bereitstellung
 3. **Ignorieren von Quotenlimits** bis die Bereitstellung fehlschlägt
 4. **Nichtvalidierung von Vorlagen** in CI/CD-Pipelines
 5. **Fehlende Sicherheitsvalidierung** für Produktionsumgebungen

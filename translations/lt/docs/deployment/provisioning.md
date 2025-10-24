@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T14:08:16+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T18:23:33+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "lt"
 }
@@ -14,11 +14,11 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Dabartinis skyrius**: 4 skyrius - Infrastruktūra kaip kodas ir diegimas
 - **⬅️ Ankstesnis**: [Diegimo vadovas](deployment-guide.md)
 - **➡️ Kitas skyrius**: [5 skyrius: Daugiaagentiniai AI sprendimai](../../examples/retail-scenario.md)
-- **🔧 Susiję**: [6 skyrius: Priešdieginimo patikra](../pre-deployment/capacity-planning.md)
+- **🔧 Susiję**: [6 skyrius: Prieš diegimą vykdomas patikrinimas](../pre-deployment/capacity-planning.md)
 
 ## Įvadas
 
-Šis išsamus vadovas apima viską, ką reikia žinoti apie Azure išteklių paruošimą ir valdymą naudojant Azure Developer CLI. Sužinokite, kaip įgyvendinti infrastruktūros kaip kodo (IaC) modelius nuo paprasto išteklių kūrimo iki pažangių įmonės lygio infrastruktūros architektūrų naudojant Bicep, ARM šablonus, Terraform ir Pulumi.
+Šis išsamus vadovas apima viską, ką reikia žinoti apie Azure išteklių paruošimą ir valdymą naudojant Azure Developer CLI. Sužinokite, kaip įgyvendinti infrastruktūros kaip kodo (IaC) modelius – nuo paprasto išteklių kūrimo iki pažangių įmonės lygio infrastruktūros architektūrų naudojant Bicep, ARM šablonus, Terraform ir Pulumi.
 
 ## Mokymosi tikslai
 
@@ -27,7 +27,7 @@ Baigę šį vadovą, jūs:
 - Suprasite įvairius IaC tiekėjus, kuriuos palaiko Azure Developer CLI
 - Sukursite ir įgyvendinsite Bicep šablonus dažniausiai naudojamoms programų architektūroms
 - Konfigūruosite išteklių parametrus, kintamuosius ir aplinkai specifinius nustatymus
-- Įgyvendinsite pažangius infrastruktūros modelius, įskaitant tinklų ir saugumo sprendimus
+- Įgyvendinsite pažangius infrastruktūros modelius, įskaitant tinklų kūrimą ir saugumą
 - Valdysite išteklių gyvavimo ciklą, atnaujinimus ir priklausomybių sprendimą
 
 ## Mokymosi rezultatai
@@ -37,8 +37,8 @@ Baigę, galėsite:
 - Konfigūruoti sudėtingas daugiapaslaugines architektūras su tinkamomis išteklių priklausomybėmis
 - Įgyvendinti parametrizuotus šablonus įvairioms aplinkoms ir konfigūracijoms
 - Spręsti infrastruktūros paruošimo problemas ir šalinti diegimo klaidas
-- Taikyti Azure gerai suprojektuotos architektūros principus infrastruktūros dizainui
-- Valdyti infrastruktūros atnaujinimus ir įgyvendinti infrastruktūros versijavimo strategijas
+- Taikyti Azure gerai suprojektuotos architektūros principus infrastruktūros projektavimui
+- Valdyti infrastruktūros atnaujinimus ir įgyvendinti infrastruktūros versijų strategijas
 
 ## Infrastruktūros paruošimo apžvalga
 
@@ -209,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Duomenų bazių paruošimas
+## 🗃️ Duomenų bazės paruošimas
 
 ### Cosmos DB
 ```bicep
@@ -307,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Saugumas ir paslapčių valdymas
+## 🔒 Saugumas ir slaptažodžių valdymas
 
 ### Key Vault integracija
 ```bicep
@@ -764,21 +764,81 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Išteklių atnaujinimai ir migracijos
+## 🧪 Infrastruktūros peržiūra ir patikrinimas (NAUJA)
+
+### Infrastruktūros pakeitimų peržiūra prieš diegimą
+
+Komanda `azd provision --preview` leidžia **simuliuoti infrastruktūros paruošimą** prieš išteklių diegimą. Tai panašu į `terraform plan` arba `bicep what-if`, suteikiant **sausą peržiūrą** apie tai, kokie pakeitimai bus atlikti jūsų Azure aplinkoje.
+
+#### 🛠️ Ką ji daro
+- **Analizuoja jūsų IaC šablonus** (Bicep arba Terraform)
+- **Rodo išteklių pakeitimų peržiūrą**: pridėjimus, ištrynimus, atnaujinimus
+- **Nepritaiko pakeitimų** — tai tik skaitymo režimas, saugus naudoti
+
+#### � Naudojimo atvejai
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Ši komanda padeda:
+- **Patikrinti infrastruktūros pakeitimus** prieš išteklių diegimą
+- **Anksti aptikti konfigūracijos klaidas** kūrimo cikle
+- **Saugiai bendradarbiauti** komandinėje aplinkoje
+- **Užtikrinti minimalų privilegijų diegimą** be netikėtumų
+
+Ypač naudinga, kai:
+- Dirbama su sudėtingomis daugiapaslauginėmis aplinkomis
+- Atliekami pakeitimai gamybinėje infrastruktūroje
+- Tikrinami šablonų pakeitimai prieš PR patvirtinimą
+- Mokomi nauji komandos nariai infrastruktūros modelių
+
+### Peržiūros rezultato pavyzdys
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Išteklių atnaujinimai ir migracijos
 
 ### Saugių išteklių atnaujinimai
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
 azd provision --rollback
 ```
 
-### Duomenų bazių migracijos
+### Duomenų bazės migracijos
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -833,7 +893,7 @@ var commonTags = {
 }
 ```
 
-### 3. Parametrų validacija
+### 3. Parametrų patikrinimas
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -866,9 +926,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Kiti žingsniai
 
-- [Priešdieginimo planavimas](../pre-deployment/capacity-planning.md) - Patikrinkite išteklių prieinamumą
+- [Planuojama prieš diegimą](../pre-deployment/capacity-planning.md) - Patikrinkite išteklių prieinamumą
 - [Dažnos problemos](../troubleshooting/common-issues.md) - Spręskite infrastruktūros problemas
-- [Derinimo vadovas](../troubleshooting/debugging.md) - Derinkite paruošimo problemas
+- [Derinimo vadovas](../troubleshooting/debugging.md) - Šalinkite paruošimo problemas
 - [SKU pasirinkimas](../pre-deployment/sku-selection.md) - Pasirinkite tinkamus paslaugų lygius
 
 ## Papildomi ištekliai
@@ -882,9 +942,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 **Navigacija**
 - **Ankstesnė pamoka**: [Diegimo vadovas](deployment-guide.md)
-- **Kita pamoka**: [Talpos planavimas](../pre-deployment/capacity-planning.md)
+- **Kita pamoka**: [Planuojama prieš diegimą](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus interpretavimus, atsiradusius naudojant šį vertimą.

@@ -1,63 +1,63 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:34:40+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:13:41+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "it"
 }
 -->
-# AZD Basics - Comprendere Azure Developer CLI
+# Nozioni di base su AZD - Comprendere Azure Developer CLI
 
-# AZD Basics - Concetti e Fondamenti Principali
+# Nozioni di base su AZD - Concetti fondamentali
 
-**Navigazione Capitolo:**
-- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
-- **📖 Capitolo Attuale**: Capitolo 1 - Fondamenti & Avvio Rapido
-- **⬅️ Precedente**: [Panoramica del Corso](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Successivo**: [Installazione & Configurazione](installation.md)
-- **🚀 Capitolo Successivo**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigazione del capitolo:**
+- **📚 Home del corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo attuale**: Capitolo 1 - Fondamenti e Avvio Rapido
+- **⬅️ Precedente**: [Panoramica del corso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Successivo**: [Installazione e Configurazione](installation.md)
+- **🚀 Capitolo successivo**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Introduzione
 
 Questa lezione ti introduce a Azure Developer CLI (azd), uno strumento da riga di comando potente che accelera il passaggio dallo sviluppo locale al deployment su Azure. Imparerai i concetti fondamentali, le funzionalità principali e come azd semplifica il deployment di applicazioni cloud-native.
 
-## Obiettivi di Apprendimento
+## Obiettivi di apprendimento
 
 Alla fine di questa lezione, sarai in grado di:
 - Comprendere cos'è Azure Developer CLI e il suo scopo principale
 - Conoscere i concetti fondamentali di template, ambienti e servizi
-- Esplorare le funzionalità principali, tra cui sviluppo basato su template e Infrastructure as Code
+- Esplorare le funzionalità principali, tra cui lo sviluppo basato su template e l'Infrastructure as Code
 - Comprendere la struttura e il flusso di lavoro di un progetto azd
 - Essere pronto per installare e configurare azd nel tuo ambiente di sviluppo
 
-## Risultati di Apprendimento
+## Risultati di apprendimento
 
 Dopo aver completato questa lezione, sarai in grado di:
 - Spiegare il ruolo di azd nei flussi di lavoro di sviluppo cloud moderni
 - Identificare i componenti della struttura di un progetto azd
-- Descrivere come template, ambienti e servizi lavorano insieme
-- Comprendere i vantaggi di Infrastructure as Code con azd
+- Descrivere come i template, gli ambienti e i servizi lavorano insieme
+- Comprendere i vantaggi dell'Infrastructure as Code con azd
 - Riconoscere i diversi comandi azd e i loro scopi
 
 ## Cos'è Azure Developer CLI (azd)?
 
 Azure Developer CLI (azd) è uno strumento da riga di comando progettato per accelerare il passaggio dallo sviluppo locale al deployment su Azure. Semplifica il processo di creazione, deployment e gestione di applicazioni cloud-native su Azure.
 
-## Concetti Fondamentali
+## Concetti fondamentali
 
 ### Template
 I template sono la base di azd. Contengono:
 - **Codice applicativo** - Il tuo codice sorgente e le dipendenze
 - **Definizioni dell'infrastruttura** - Risorse Azure definite in Bicep o Terraform
 - **File di configurazione** - Impostazioni e variabili di ambiente
-- **Script di deployment** - Flussi di lavoro di deployment automatizzati
+- **Script di deployment** - Flussi di lavoro automatizzati per il deployment
 
 ### Ambienti
 Gli ambienti rappresentano diversi target di deployment:
 - **Sviluppo** - Per test e sviluppo
 - **Staging** - Ambiente pre-produzione
-- **Produzione** - Ambiente di produzione live
+- **Produzione** - Ambiente di produzione attivo
 
 Ogni ambiente mantiene il proprio:
 - Gruppo di risorse Azure
@@ -65,15 +65,15 @@ Ogni ambiente mantiene il proprio:
 - Stato di deployment
 
 ### Servizi
-I servizi sono i componenti principali della tua applicazione:
-- **Frontend** - Applicazioni web, SPAs
+I servizi sono i componenti fondamentali della tua applicazione:
+- **Frontend** - Applicazioni web, SPA
 - **Backend** - API, microservizi
 - **Database** - Soluzioni di archiviazione dati
 - **Storage** - Archiviazione di file e blob
 
-## Funzionalità Principali
+## Funzionalità principali
 
-### 1. Sviluppo Basato su Template
+### 1. Sviluppo basato su template
 ```bash
 # Browse available templates
 azd template list
@@ -84,19 +84,37 @@ azd init --template <template-name>
 
 ### 2. Infrastructure as Code
 - **Bicep** - Linguaggio specifico di dominio di Azure
-- **Terraform** - Strumento multi-cloud per l'infrastruttura
-- **ARM Templates** - Template di Azure Resource Manager
+- **Terraform** - Strumento per infrastrutture multi-cloud
+- **ARM Template** - Template di Azure Resource Manager
 
-### 3. Flussi di Lavoro Integrati
+### 3. Flussi di lavoro integrati
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
-### 4. Gestione degli Ambienti
+#### 🛡️ Pianificazione sicura dell'infrastruttura con Preview
+Il comando `azd provision --preview` è rivoluzionario per deployment sicuri:
+- **Analisi di prova** - Mostra cosa verrà creato, modificato o eliminato
+- **Rischio zero** - Nessuna modifica effettiva viene apportata al tuo ambiente Azure
+- **Collaborazione del team** - Condividi i risultati del preview prima del deployment
+- **Stima dei costi** - Comprendi i costi delle risorse prima di impegnarti
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
+```
+
+### 4. Gestione degli ambienti
 ```bash
 # Create and manage environments
 azd env new <environment-name>
@@ -104,7 +122,7 @@ azd env select <environment-name>
 azd env list
 ```
 
-## 📁 Struttura del Progetto
+## 📁 Struttura del progetto
 
 Una tipica struttura di progetto azd:
 ```
@@ -126,7 +144,7 @@ my-app/
 └── README.md
 ```
 
-## 🔧 File di Configurazione
+## 🔧 File di configurazione
 
 ### azure.yaml
 Il file principale di configurazione del progetto:
@@ -152,7 +170,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Configurazione specifica per l'ambiente:
+Configurazione specifica dell'ambiente:
 ```json
 {
   "version": 1,
@@ -166,9 +184,9 @@ Configurazione specifica per l'ambiente:
 }
 ```
 
-## 🎪 Flussi di Lavoro Comuni
+## 🎪 Flussi di lavoro comuni
 
-### Avviare un Nuovo Progetto
+### Avvio di un nuovo progetto
 ```bash
 # Method 1: Use existing template
 azd init --template todo-nodejs-mongo
@@ -180,7 +198,7 @@ azd init
 azd init .
 ```
 
-### Ciclo di Sviluppo
+### Ciclo di sviluppo
 ```bash
 # Set up development environment
 azd auth login
@@ -213,16 +231,16 @@ Elimina **tutti i metadati associati**, inclusi:
 Stato dell'ambiente
 Cartella locale `.azure`
 Informazioni di deployment memorizzate nella cache
-Previene che azd "ricordi" deployment precedenti, evitando problemi come gruppi di risorse non corrispondenti o riferimenti obsoleti al registro.
+Impedisce ad azd di "ricordare" deployment precedenti, che possono causare problemi come gruppi di risorse non corrispondenti o riferimenti obsoleti al registro.
 
 
 ### Perché usare entrambi?
-Quando incontri problemi con `azd up` a causa di stato residuo o deployment parziali, questa combinazione garantisce una **pulizia completa**.
+Quando incontri problemi con `azd up` a causa di stato residuo o deployment parziali, questa combinazione garantisce una **situazione pulita**.
 
 È particolarmente utile dopo eliminazioni manuali di risorse nel portale Azure o quando si cambiano template, ambienti o convenzioni di denominazione dei gruppi di risorse.
 
 
-### Gestione di Ambienti Multipli
+### Gestione di ambienti multipli
 ```bash
 # Create staging environment
 azd env new staging
@@ -236,13 +254,13 @@ azd env select dev
 azd env list
 ```
 
-## 🔐 Autenticazione e Credenziali
+## 🔐 Autenticazione e credenziali
 
-Comprendere l'autenticazione è cruciale per deployment azd di successo. Azure utilizza diversi metodi di autenticazione, e azd sfrutta la stessa catena di credenziali utilizzata da altri strumenti Azure.
+Comprendere l'autenticazione è cruciale per deployment azd di successo. Azure utilizza diversi metodi di autenticazione e azd sfrutta la stessa catena di credenziali utilizzata da altri strumenti Azure.
 
 ### Autenticazione Azure CLI (`az login`)
 
-Prima di utilizzare azd, devi autenticarti con Azure. Il metodo più comune è utilizzare Azure CLI:
+Prima di utilizzare azd, è necessario autenticarsi con Azure. Il metodo più comune è utilizzare Azure CLI:
 
 ```bash
 # Interactive login (opens browser)
@@ -264,17 +282,17 @@ az account list --output table
 az account set --subscription <subscription-id>
 ```
 
-### Flusso di Autenticazione
-1. **Login Interattivo**: Apre il browser predefinito per l'autenticazione
-2. **Device Code Flow**: Per ambienti senza accesso al browser
+### Flusso di autenticazione
+1. **Login interattivo**: Apre il browser predefinito per l'autenticazione
+2. **Flusso con codice dispositivo**: Per ambienti senza accesso al browser
 3. **Service Principal**: Per scenari di automazione e CI/CD
-4. **Managed Identity**: Per applicazioni ospitate su Azure
+4. **Identità gestita**: Per applicazioni ospitate su Azure
 
-### Catena DefaultAzureCredential
+### Catena di credenziali DefaultAzureCredential
 
 `DefaultAzureCredential` è un tipo di credenziale che offre un'esperienza di autenticazione semplificata provando automaticamente diverse fonti di credenziali in un ordine specifico:
 
-#### Ordine della Catena di Credenziali
+#### Ordine della catena di credenziali
 ```mermaid
 graph TD
     A[DefaultAzureCredential] --> B[Environment Variables]
@@ -287,7 +305,7 @@ graph TD
     H --> I[Interactive Browser]
 ```
 
-#### 1. Variabili di Ambiente
+#### 1. Variabili di ambiente
 ```bash
 # Set environment variables for service principal
 export AZURE_CLIENT_ID="<app-id>"
@@ -295,18 +313,18 @@ export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
-Utilizzato automaticamente in:
-- Azure Kubernetes Service (AKS) con Workload Identity
+#### 2. Identità di lavoro (Kubernetes/GitHub Actions)
+Utilizzata automaticamente in:
+- Azure Kubernetes Service (AKS) con Identità di lavoro
 - GitHub Actions con federazione OIDC
 - Altri scenari di identità federata
 
-#### 3. Managed Identity
+#### 3. Identità gestita
 Per risorse Azure come:
-- Macchine Virtuali
+- Macchine virtuali
 - App Service
 - Funzioni Azure
-- Container Instances
+- Istanza di container
 
 ```bash
 # Check if running on Azure resource with managed identity
@@ -314,12 +332,12 @@ az account show --query "user.type" --output tsv
 # Returns: "servicePrincipal" if using managed identity
 ```
 
-#### 4. Integrazione con Strumenti per Sviluppatori
+#### 4. Integrazione con strumenti di sviluppo
 - **Visual Studio**: Utilizza automaticamente l'account connesso
 - **VS Code**: Utilizza le credenziali dell'estensione Azure Account
-- **Azure CLI**: Utilizza le credenziali di `az login` (il più comune per lo sviluppo locale)
+- **Azure CLI**: Utilizza le credenziali di `az login` (più comune per lo sviluppo locale)
 
-### Configurazione Autenticazione AZD
+### Configurazione dell'autenticazione AZD
 
 ```bash
 # Method 1: Use Azure CLI (Recommended for development)
@@ -337,9 +355,9 @@ azd auth logout
 azd auth login
 ```
 
-### Migliori Pratiche per l'Autenticazione
+### Migliori pratiche di autenticazione
 
-#### Per Sviluppo Locale
+#### Per lo sviluppo locale
 ```bash
 # 1. Login with Azure CLI
 az login
@@ -352,7 +370,7 @@ az account set --subscription "Your Subscription Name"
 azd auth login
 ```
 
-#### Per Pipeline CI/CD
+#### Per pipeline CI/CD
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -368,13 +386,13 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### Per Ambienti di Produzione
-- Utilizza **Managed Identity** per risorse eseguite su Azure
+#### Per ambienti di produzione
+- Utilizza **Identità gestita** quando esegui su risorse Azure
 - Utilizza **Service Principal** per scenari di automazione
 - Evita di memorizzare credenziali nel codice o nei file di configurazione
 - Utilizza **Azure Key Vault** per configurazioni sensibili
 
-### Problemi Comuni di Autenticazione e Soluzioni
+### Problemi comuni di autenticazione e soluzioni
 
 #### Problema: "Nessuna sottoscrizione trovata"
 ```bash
@@ -403,23 +421,23 @@ azd auth logout
 azd auth login
 ```
 
-### Autenticazione in Scenari Diversi
+### Autenticazione in diversi scenari
 
-#### Sviluppo Locale
+#### Sviluppo locale
 ```bash
 # Personal development account
 az login
 azd auth login
 ```
 
-#### Sviluppo di Team
+#### Sviluppo di team
 ```bash
 # Use specific tenant for organization
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Scenari Multi-tenant
+#### Scenari multi-tenant
 ```bash
 # Switch between tenants
 az login --tenant tenant1.onmicrosoft.com
@@ -431,15 +449,15 @@ az login --tenant tenant2.onmicrosoft.com
 azd up
 ```
 
-### Considerazioni sulla Sicurezza
+### Considerazioni sulla sicurezza
 
-1. **Memorizzazione delle Credenziali**: Non memorizzare mai le credenziali nel codice sorgente
-2. **Limitazione dello Scope**: Utilizza il principio del privilegio minimo per i service principal
-3. **Rotazione dei Token**: Ruota regolarmente i segreti dei service principal
-4. **Audit Trail**: Monitora le attività di autenticazione e deployment
-5. **Sicurezza di Rete**: Utilizza endpoint privati quando possibile
+1. **Archiviazione delle credenziali**: Non memorizzare mai le credenziali nel codice sorgente
+2. **Limitazione dello scope**: Utilizza il principio del privilegio minimo per i service principal
+3. **Rotazione dei token**: Ruota regolarmente i segreti dei service principal
+4. **Traccia di audit**: Monitora le attività di autenticazione e deployment
+5. **Sicurezza di rete**: Utilizza endpoint privati quando possibile
 
-### Risoluzione dei Problemi di Autenticazione
+### Risoluzione dei problemi di autenticazione
 
 ```bash
 # Debug authentication issues
@@ -462,7 +480,7 @@ azd template show <template>   # Template details
 azd init --help               # Initialization options
 ```
 
-### Gestione del Progetto
+### Gestione del progetto
 ```bash
 azd show                     # Project overview
 azd env show                 # Current environment
@@ -476,9 +494,9 @@ azd pipeline config          # Set up CI/CD
 azd logs                     # View application logs
 ```
 
-## Migliori Pratiche
+## Migliori pratiche
 
-### 1. Usa Nomi Significativi
+### 1. Usa nomi significativi
 ```bash
 # Good
 azd env new production-east
@@ -489,22 +507,22 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Sfrutta i Template
+### 2. Sfrutta i template
 - Inizia con template esistenti
 - Personalizza secondo le tue esigenze
 - Crea template riutilizzabili per la tua organizzazione
 
-### 3. Isolamento degli Ambienti
+### 3. Isolamento degli ambienti
 - Utilizza ambienti separati per sviluppo/staging/produzione
-- Non effettuare mai deployment direttamente in produzione dalla macchina locale
-- Utilizza pipeline CI/CD per deployment in produzione
+- Non effettuare mai il deployment direttamente in produzione dal computer locale
+- Utilizza pipeline CI/CD per i deployment in produzione
 
-### 4. Gestione della Configurazione
+### 4. Gestione della configurazione
 - Utilizza variabili di ambiente per dati sensibili
 - Mantieni la configurazione sotto controllo di versione
-- Documenta le impostazioni specifiche per ambiente
+- Documenta le impostazioni specifiche dell'ambiente
 
-## Progressione di Apprendimento
+## Progressione dell'apprendimento
 
 ### Principiante (Settimana 1-2)
 1. Installa azd e autentica
@@ -520,34 +538,36 @@ azd init --template template1
 
 ### Avanzato (Settimana 5+)
 1. Crea template personalizzati
-2. Pattern avanzati di infrastruttura
+2. Modelli avanzati di infrastruttura
 3. Deployment multi-regione
-4. Configurazioni di livello enterprise
+4. Configurazioni di livello aziendale
 
-## Prossimi Passi
+## Prossimi passi
 
 **📖 Continua l'apprendimento del Capitolo 1:**
-- [Installazione & Configurazione](installation.md) - Installa e configura azd
-- [Il Tuo Primo Progetto](first-project.md) - Completa il tutorial pratico
-- [Guida alla Configurazione](configuration.md) - Opzioni di configurazione avanzate
+- [Installazione e Configurazione](installation.md) - Installa e configura azd
+- [Il tuo primo progetto](first-project.md) - Completa il tutorial pratico
+- [Guida alla configurazione](configuration.md) - Opzioni avanzate di configurazione
 
-**🎯 Pronto per il Capitolo Successivo?**
+**🎯 Pronto per il prossimo capitolo?**
 - [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md) - Inizia a costruire applicazioni AI
 
-## Risorse Aggiuntive
+## Risorse aggiuntive
 
 - [Panoramica di Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galleria di Template](https://azure.github.io/awesome-azd/)
-- [Esempi della Comunità](https://github.com/Azure-Samples)
+- [Esempi della comunità](https://github.com/Azure-Samples)
 
 ---
 
-**Navigazione Capitolo:**
-- **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
-- **📖 Capitolo Attuale**: Capitolo 1 - Fondamenti & Avvio Rapido  
-- **⬅️ Precedente**: [Panoramica del Corso](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Successivo**: [Installazione & Configurazione](installation.md)
-- **🚀 Capitolo Successivo**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+**Navigazione del capitolo:**
+- **📚 Home del corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo attuale**: Capitolo 1 - Fondamenti e Avvio Rapido  
+- **⬅️ Precedente**: [Panoramica del corso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Successivo**: [Installazione e Configurazione](installation.md)
+- **🚀 Capitolo successivo**: [Capitolo 2: Sviluppo AI-First](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Disclaimer**:  
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale umana. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

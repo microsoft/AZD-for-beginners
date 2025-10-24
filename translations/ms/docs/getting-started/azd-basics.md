@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:41:31+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:45:24+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "ms"
 }
@@ -33,21 +33,21 @@ Pada akhir pelajaran ini, anda akan:
 
 ## Hasil Pembelajaran
 
-Selepas melengkapkan pelajaran ini, anda akan dapat:
-- Menjelaskan peranan azd dalam aliran kerja pembangunan cloud moden
+Selepas menyelesaikan pelajaran ini, anda akan dapat:
+- Menerangkan peranan azd dalam aliran kerja pembangunan cloud moden
 - Mengenal pasti komponen struktur projek azd
-- Menerangkan bagaimana templat, persekitaran, dan perkhidmatan berfungsi bersama
+- Menggambarkan bagaimana templat, persekitaran, dan perkhidmatan berfungsi bersama
 - Memahami manfaat Infrastruktur sebagai Kod dengan azd
 - Mengenali pelbagai perintah azd dan tujuannya
 
 ## Apa itu Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) ialah alat baris perintah yang direka untuk mempercepatkan perjalanan anda dari pembangunan tempatan ke penyebaran Azure. Ia mempermudah proses membina, menyebarkan, dan mengurus aplikasi cloud-native di Azure.
+Azure Developer CLI (azd) adalah alat baris perintah yang direka untuk mempercepatkan perjalanan anda dari pembangunan tempatan ke penyebaran Azure. Ia mempermudah proses membina, menyebarkan, dan mengurus aplikasi cloud-native di Azure.
 
 ## Konsep Asas
 
 ### Templat
-Templat adalah asas azd. Ia mengandungi:
+Templat adalah asas kepada azd. Ia mengandungi:
 - **Kod aplikasi** - Kod sumber dan kebergantungan anda
 - **Definisi infrastruktur** - Sumber Azure yang ditakrifkan dalam Bicep atau Terraform
 - **Fail konfigurasi** - Tetapan dan pembolehubah persekitaran
@@ -56,7 +56,7 @@ Templat adalah asas azd. Ia mengandungi:
 ### Persekitaran
 Persekitaran mewakili sasaran penyebaran yang berbeza:
 - **Pembangunan** - Untuk ujian dan pembangunan
-- **Staging** - Persekitaran pra-pengeluaran
+- **Pementasan** - Persekitaran pra-pengeluaran
 - **Pengeluaran** - Persekitaran pengeluaran langsung
 
 Setiap persekitaran mengekalkan:
@@ -85,15 +85,33 @@ azd init --template <template-name>
 ### 2. Infrastruktur sebagai Kod
 - **Bicep** - Bahasa khusus domain Azure
 - **Terraform** - Alat infrastruktur multi-cloud
-- **ARM Templates** - Templat Pengurus Sumber Azure
+- **Templat ARM** - Templat Pengurus Sumber Azure
 
 ### 3. Aliran Kerja Bersepadu
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Perancangan Infrastruktur Selamat dengan Pratonton
+Perintah `azd provision --preview` adalah inovasi untuk penyebaran yang selamat:
+- **Analisis simulasi** - Menunjukkan apa yang akan dibuat, diubah, atau dipadamkan
+- **Risiko sifar** - Tiada perubahan sebenar dibuat pada persekitaran Azure anda
+- **Kerjasama pasukan** - Kongsi hasil pratonton sebelum penyebaran
+- **Anggaran kos** - Fahami kos sumber sebelum komitmen
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Pengurusan Persekitaran
@@ -129,7 +147,7 @@ my-app/
 ## 🔧 Fail Konfigurasi
 
 ### azure.yaml
-Fail konfigurasi utama projek:
+Fail konfigurasi projek utama:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -204,23 +222,21 @@ Perintah `azd down --force --purge` adalah cara yang berkuasa untuk sepenuhnya m
 ```
 - Melangkau arahan pengesahan.
 - Berguna untuk automasi atau skrip di mana input manual tidak praktikal.
-- Memastikan proses runtuhan berjalan tanpa gangguan, walaupun CLI mengesan ketidakkonsistenan.
+- Memastikan proses penurunan berjalan tanpa gangguan, walaupun CLI mengesan ketidakkonsistenan.
 
 ```
 --purge
 ```
-Menghapuskan **semua metadata yang berkaitan**, termasuk:
+Memadamkan **semua metadata berkaitan**, termasuk:
 Keadaan persekitaran
-Folder tempatan `.azure`
+Folder `.azure` tempatan
 Maklumat penyebaran yang disimpan
-Menghalang azd daripada "mengingati" penyebaran sebelumnya, yang boleh menyebabkan masalah seperti kumpulan sumber yang tidak sepadan atau rujukan daftar yang lama.
-
+Menghalang azd daripada "mengingati" penyebaran sebelumnya, yang boleh menyebabkan masalah seperti kumpulan sumber yang tidak sepadan atau rujukan daftar yang usang.
 
 ### Mengapa menggunakan kedua-duanya?
-Apabila anda menghadapi masalah dengan `azd up` disebabkan oleh keadaan yang tertinggal atau penyebaran separa, gabungan ini memastikan permulaan yang **bersih**.
+Apabila anda menghadapi masalah dengan `azd up` disebabkan keadaan yang tertinggal atau penyebaran separa, gabungan ini memastikan permulaan yang **bersih**.
 
 Ia sangat berguna selepas penghapusan sumber manual di portal Azure atau apabila menukar templat, persekitaran, atau konvensyen penamaan kumpulan sumber.
-
 
 ### Menguruskan Pelbagai Persekitaran
 ```bash
@@ -238,7 +254,7 @@ azd env list
 
 ## 🔐 Pengesahan dan Kredensial
 
-Memahami pengesahan adalah penting untuk penyebaran azd yang berjaya. Azure menggunakan pelbagai kaedah pengesahan, dan azd memanfaatkan rantaian kredensial yang sama yang digunakan oleh alat Azure lain.
+Memahami pengesahan adalah penting untuk penyebaran azd yang berjaya. Azure menggunakan pelbagai kaedah pengesahan, dan azd memanfaatkan rantai kredensial yang sama digunakan oleh alat Azure lain.
 
 ### Pengesahan Azure CLI (`az login`)
 
@@ -270,11 +286,11 @@ az account set --subscription <subscription-id>
 3. **Service Principal**: Untuk automasi dan senario CI/CD
 4. **Identiti Terurus**: Untuk aplikasi yang dihoskan Azure
 
-### Rantaian DefaultAzureCredential
+### Rantai DefaultAzureCredential
 
-`DefaultAzureCredential` ialah jenis kredensial yang menyediakan pengalaman pengesahan yang dipermudahkan dengan secara automatik mencuba pelbagai sumber kredensial dalam susunan tertentu:
+`DefaultAzureCredential` adalah jenis kredensial yang menyediakan pengalaman pengesahan yang dipermudahkan dengan secara automatik mencuba pelbagai sumber kredensial dalam urutan tertentu:
 
-#### Susunan Rantaian Kredensial
+#### Urutan Rantai Kredensial
 ```mermaid
 graph TD
     A[DefaultAzureCredential] --> B[Environment Variables]
@@ -434,10 +450,10 @@ azd up
 ### Pertimbangan Keselamatan
 
 1. **Penyimpanan Kredensial**: Jangan sekali-kali menyimpan kredensial dalam kod sumber
-2. **Had Skop**: Gunakan prinsip hak minimum untuk service principal
+2. **Had Skop**: Gunakan prinsip keistimewaan minimum untuk service principal
 3. **Putaran Token**: Putar rahsia service principal secara berkala
 4. **Jejak Audit**: Pantau aktiviti pengesahan dan penyebaran
-5. **Keselamatan Rangkaian**: Gunakan titik akhir peribadi apabila boleh
+5. **Keselamatan Rangkaian**: Gunakan titik akhir peribadi jika boleh
 
 ### Penyelesaian Masalah Pengesahan
 
@@ -495,7 +511,7 @@ azd init --template template1
 - Cipta templat yang boleh digunakan semula untuk organisasi anda
 
 ### 3. Pengasingan Persekitaran
-- Gunakan persekitaran berasingan untuk pembangunan/staging/pengeluaran
+- Gunakan persekitaran berasingan untuk pembangunan/pementasan/pengeluaran
 - Jangan sekali-kali menyebarkan terus ke pengeluaran dari mesin tempatan
 - Gunakan saluran CI/CD untuk penyebaran pengeluaran
 
@@ -522,7 +538,7 @@ azd init --template template1
 1. Cipta templat tersuai
 2. Corak infrastruktur lanjutan
 3. Penyebaran multi-region
-4. Konfigurasi tahap perusahaan
+4. Konfigurasi gred perusahaan
 
 ## Langkah Seterusnya
 
@@ -551,3 +567,5 @@ azd init --template template1
 
 ---
 
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

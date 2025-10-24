@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T07:02:11+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:36:44+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "nl"
 }
 -->
 # Command Cheat Sheet - Essentiële AZD-commando's
 
-**Snelle Referentie voor Alle Hoofdstukken**
+**Snelle referentie voor alle hoofdstukken**
 - **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
 - **📖 Snelle Start**: [Hoofdstuk 1: Basis & Snelle Start](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI-commando's**: [Hoofdstuk 2: AI-First Ontwikkeling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
@@ -32,12 +32,12 @@ Door gebruik te maken van dit overzicht, kun je:
 ## Leerresultaten
 
 Door regelmatig naar dit overzicht te verwijzen, kun je:
-- AZD-commando's zelfverzekerd uitvoeren zonder volledige documentatie te raadplegen
+- AZD-commando's zelfverzekerd uitvoeren zonder de volledige documentatie te raadplegen
 - Veelvoorkomende problemen snel oplossen met de juiste diagnostische commando's
 - Meerdere omgevingen en implementatiescenario's efficiënt beheren
 - Geavanceerde AZD-functies en configuratieopties toepassen wanneer nodig
 - Implementatieproblemen oplossen met systematische commando-reeksen
-- Workflows optimaliseren door effectief gebruik van AZD-sneltoetsen en opties
+- Workflows optimaliseren door effectief gebruik te maken van AZD-sneltoetsen en opties
 
 ## Aan de slag met commando's
 
@@ -54,7 +54,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Project Initialisatie
+### Projectinitialisatie
 ```bash
 # Browse available templates
 azd template list
@@ -72,7 +72,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Kernimplementatiecommando's
 
-### Complete Implementatieworkflow
+### Volledige implementatieworkflow
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -87,19 +87,21 @@ azd up --environment production
 azd up --parameter location=westus2
 ```
 
-### Alleen Infrastructuur
+### Alleen infrastructuur
 ```bash
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
 ```
 
-### Alleen Applicatie
+### Alleen applicatie
 ```bash
 # Deploy application code
 azd deploy
@@ -112,7 +114,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Build en Package
+### Bouwen en verpakken
 ```bash
 # Build applications
 azd package
@@ -160,7 +162,7 @@ azd env unset DEBUG
 
 ## ⚙️ Configuratiecommando's
 
-### Globale Configuratie
+### Globale configuratie
 ```bash
 # List all configuration
 azd config list
@@ -188,7 +190,7 @@ azd show
 azd show --output json
 ```
 
-## 📊 Monitoring en Logs
+## 📊 Monitoring en logs
 
 ### Applicatielogs
 ```bash
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Servicebeheer
@@ -285,7 +296,7 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 Snelle Workflows
+## 🎯 Snelle workflows
 
 ### Ontwikkelingsworkflow
 ```bash
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Workflow met Meerdere Omgevingen
+### Workflow met meerdere omgevingen
 ```bash
 # Set up environments
 azd env new dev
@@ -360,7 +371,7 @@ azd info
 az account show
 ```
 
-### Template Debugging
+### Sjabloondebugging
 ```bash
 # List available templates with details
 azd template list --output json
@@ -372,7 +383,7 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 Bestands- en Directorycommando's
+## 📁 Bestands- en mapcommando's
 
 ### Projectstructuur
 ```bash
@@ -387,9 +398,9 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Output Formatting
+## 🎨 Outputformattering
 
-### JSON Output
+### JSON-output
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -401,16 +412,16 @@ azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tabel Output
+### Tabeloutput
 ```bash
 # Format as table
 azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Veelvoorkomende Commandocombinaties
+## 🔧 Veelvoorkomende commando-combinaties
 
-### Health Check Script
+### Script voor gezondheidscontrole
 ```bash
 #!/bin/bash
 # Quick health check
@@ -419,16 +430,16 @@ azd env show
 azd logs --level error --since 10m
 ```
 
-### Implementatievalidatie
+### Validatie van implementatie
 ```bash
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
-### Omgevingsvergelijking
+### Vergelijking van omgevingen
 ```bash
 #!/bin/bash
 # Compare environments
@@ -439,7 +450,7 @@ for env in dev staging production; do
 done
 ```
 
-### Resource Opschoonscript
+### Script voor opschonen van resources
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -452,7 +463,7 @@ done
 
 ## 📝 Omgevingsvariabelen
 
-### Veelvoorkomende Omgevingsvariabelen
+### Veelvoorkomende omgevingsvariabelen
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -471,7 +482,7 @@ export LOG_LEVEL="info"
 
 ## 🚨 Noodcommando's
 
-### Snelle Oplossingen
+### Snelle oplossingen
 ```bash
 # Reset authentication
 az account clear
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Pro Tips
 
-### Aliassen voor Snellere Workflows
+### Aliassen voor snellere workflows
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -509,7 +520,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Functie Sneltoetsen
+### Functiesneltoetsen
 ```bash
 # Quick environment switching
 azd-env() {
@@ -529,9 +540,9 @@ azd-status() {
 }
 ```
 
-## 📖 Hulp en Documentatie
+## 📖 Hulp en documentatie
 
-### Hulp Krijgen
+### Hulp krijgen
 ```bash
 # General help
 azd --help
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:48:39+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T18:23:49+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "lt"
 }
@@ -15,25 +15,25 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
 - **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas startas
 - **⬅️ Ankstesnis**: [Kurso apžvalga](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Kitas**: [Diegimas ir nustatymas](installation.md)
+- **➡️ Kitas**: [Diegimas ir nustatymai](installation.md)
 - **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Įvadas
 
-Ši pamoka supažindins jus su Azure Developer CLI (azd), galingu komandų eilutės įrankiu, kuris pagreitina jūsų kelią nuo vietinio vystymo iki Azure diegimo. Sužinosite pagrindines sąvokas, pagrindines funkcijas ir suprasite, kaip azd supaprastina debesų aplikacijų diegimą.
+Ši pamoka supažindins jus su Azure Developer CLI (azd), galingu komandų eilutės įrankiu, kuris pagreitina jūsų kelią nuo vietinio vystymo iki Azure diegimo. Sužinosite pagrindines sąvokas, pagrindines funkcijas ir kaip azd supaprastina debesų aplikacijų diegimą.
 
 ## Mokymosi tikslai
 
 Pamokos pabaigoje jūs:
 - Suprasite, kas yra Azure Developer CLI ir jo pagrindinę paskirtį
-- Išmoksite pagrindines sąvokas, tokias kaip šablonai, aplinkos ir paslaugos
+- Išmoksite pagrindines sąvokas apie šablonus, aplinkas ir paslaugas
 - Susipažinsite su pagrindinėmis funkcijomis, įskaitant šablonais pagrįstą vystymą ir infrastruktūrą kaip kodą
 - Suprasite azd projekto struktūrą ir darbo eigą
-- Būsite pasiruošę įdiegti ir sukonfigūruoti azd savo vystymo aplinkoje
+- Būsite pasiruošę įdiegti ir konfigūruoti azd savo vystymo aplinkoje
 
 ## Mokymosi rezultatai
 
-Baigę šią pamoką, galėsite:
+Baigę pamoką, galėsite:
 - Paaiškinti azd vaidmenį šiuolaikiniuose debesų vystymo procesuose
 - Identifikuoti azd projekto struktūros komponentus
 - Apibūdinti, kaip šablonai, aplinkos ir paslaugos veikia kartu
@@ -84,16 +84,34 @@ azd init --template <template-name>
 
 ### 2. Infrastruktūra kaip kodas
 - **Bicep** - Azure specifinė kalba
-- **Terraform** - Daugiadebesinė infrastruktūros priemonė
+- **Terraform** - Įrankis daugiadebesinei infrastruktūrai
 - **ARM šablonai** - Azure Resource Manager šablonai
 
 ### 3. Integruotos darbo eigos
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Saugus infrastruktūros planavimas su Preview
+Komanda `azd provision --preview` yra revoliucinė saugiems diegimams:
+- **Sauso paleidimo analizė** - Parodo, kas bus sukurta, pakeista ar ištrinta
+- **Nulinė rizika** - Nėra jokių realių pakeitimų jūsų Azure aplinkoje
+- **Komandos bendradarbiavimas** - Dalinkitės peržiūros rezultatais prieš diegimą
+- **Kainų įvertinimas** - Supraskite resursų kainas prieš įsipareigojimą
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Aplinkos valdymas
@@ -203,7 +221,7 @@ Komanda `azd down --force --purge` yra galingas būdas visiškai pašalinti jūs
 --force
 ```
 - Praleidžia patvirtinimo užklausas.
-- Naudinga automatizavimui ar scenarijams, kur rankinis įsikišimas nėra įmanomas.
+- Naudinga automatizavimui ar scenarijams, kur rankinis įvestis nėra įmanoma.
 - Užtikrina, kad pašalinimas vyktų be pertraukų, net jei CLI aptinka neatitikimus.
 
 ```
@@ -213,12 +231,12 @@ Ištrina **visą susijusią metainformaciją**, įskaitant:
 Aplinkos būseną
 Vietinį `.azure` aplanką
 Kešuotą diegimo informaciją
-Neleidžia azd "prisiminti" ankstesnių diegimų, kurie gali sukelti problemų, tokių kaip netinkamos resursų grupės ar pasenę registrų nuorodos.
+Neleidžia azd "prisiminti" ankstesnių diegimų, kurie gali sukelti problemų, pvz., nesutampančias resursų grupes ar pasenusius registrų nuorodas.
 
 ### Kodėl naudoti abu?
-Kai susiduriate su problemomis naudojant `azd up` dėl likusios būsenos ar dalinių diegimų, šis derinys užtikrina **švarią pradžią**.
+Kai susiduriate su problemomis dėl `azd up` dėl likusios būsenos ar dalinių diegimų, šis derinys užtikrina **švarią pradžią**.
 
-Tai ypač naudinga po rankinio resursų pašalinimo Azure portale arba keičiant šablonus, aplinkas ar resursų grupių pavadinimus.
+Tai ypač naudinga po rankinio resursų pašalinimo Azure portale arba keičiant šablonus, aplinkas ar resursų grupių pavadinimų konvencijas.
 
 ### Kelių aplinkų valdymas
 ```bash
@@ -300,7 +318,7 @@ Naudojama automatiškai:
 - Kiti federuotos tapatybės scenarijai
 
 #### 3. Valdoma tapatybė
-Azure resursams, tokiems kaip:
+Azure resursams, pvz.:
 - Virtualios mašinos
 - App Service
 - Azure Functions
@@ -374,7 +392,7 @@ azd auth login
 
 ### Dažnos autentifikacijos problemos ir sprendimai
 
-#### Problema: "Nerasta prenumerata"
+#### Problema: "Prenumerata nerasta"
 ```bash
 # Solution: Set default subscription
 az account list --output table
@@ -432,7 +450,7 @@ azd up
 ### Saugumo aspektai
 
 1. **Kredencialų saugojimas**: Niekada nesaugokite kredencialų šaltinio kode
-2. **Teisių apribojimas**: Naudokite mažiausio privilegijų principą paslaugos principams
+2. **Apribojimų taikymas**: Naudokite mažiausio privilegijų principą paslaugos principams
 3. **Tokenų rotacija**: Reguliariai keiskite paslaugos principų slaptažodžius
 4. **Audito pėdsakas**: Stebėkite autentifikacijos ir diegimo veiklas
 5. **Tinklo saugumas**: Naudokite privačius galinius taškus, kai įmanoma
@@ -489,7 +507,7 @@ azd init --template template1
 
 ### 2. Pasinaudokite šablonais
 - Pradėkite nuo esamų šablonų
-- Pritaikykite pagal savo poreikius
+- Pritaikykite savo poreikiams
 - Kurkite pakartotinai naudojamus šablonus savo organizacijai
 
 ### 3. Aplinkos izoliacija
@@ -518,14 +536,14 @@ azd init --template template1
 
 ### Pažengęs (5+ savaitės)
 1. Kurkite savo šablonus
-2. Išplėstiniai infrastruktūros modeliai
+2. Pažangūs infrastruktūros modeliai
 3. Diegimai keliuose regionuose
-4. Konfigūracijos sprendimai įmonės lygmeniu
+4. Įmonės lygio konfigūracijos
 
 ## Kiti žingsniai
 
 **📖 Tęskite 1 skyriaus mokymąsi:**
-- [Diegimas ir nustatymas](installation.md) - Įdiekite ir sukonfigūruokite azd
+- [Diegimas ir nustatymai](installation.md) - Įdiekite ir konfigūruokite azd
 - [Jūsų pirmasis projektas](first-project.md) - Praktinis vadovas
 - [Konfigūracijos vadovas](configuration.md) - Išplėstinės konfigūracijos parinktys
 
@@ -544,8 +562,10 @@ azd init --template template1
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
 - **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas startas  
 - **⬅️ Ankstesnis**: [Kurso apžvalga](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Kitas**: [Diegimas ir nustatymas](installation.md)
+- **➡️ Kitas**: [Diegimas ir nustatymai](installation.md)
 - **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Atsakomybės apribojimas**:  
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus aiškinimus, atsiradusius naudojant šį vertimą.

@@ -1,43 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T12:43:53+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:40:39+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "zh"
 }
 -->
-# 命令速查表 - AZD核心命令
+# 命令速查表 - AZD 必备命令
 
 **所有章节快速参考**
-- **📚 课程主页**: [AZD入门教程](../README.md)
-- **📖 快速开始**: [第1章: 基础与快速开始](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI命令**: [第2章: AI优先开发](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📚 课程主页**: [AZD 初学者指南](../README.md)
+- **📖 快速入门**: [第1章: 基础与快速入门](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI 命令**: [第2章: AI优先开发](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 高级内容**: [第4章: 基础设施即代码](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## 简介
 
-这份全面的速查表按类别整理了最常用的Azure Developer CLI命令，并提供实用示例。非常适合在开发、故障排查以及日常操作azd项目时快速查阅。
+这份全面的速查表按类别整理了最常用的 Azure Developer CLI 命令，并提供实用示例。非常适合在开发、故障排除以及日常操作中快速查阅 azd 项目相关内容。
 
 ## 学习目标
 
-通过使用这份速查表，你将能够：
-- 快速访问关键的Azure Developer CLI命令及其语法
-- 理解按功能类别和使用场景组织的命令
+通过使用这份速查表，您将能够：
+- 快速访问关键的 Azure Developer CLI 命令及其语法
+- 按功能类别和使用场景理解命令组织方式
 - 参考常见开发和部署场景的实用示例
-- 查找故障排查命令以快速解决问题
-- 高效定位高级配置和自定义选项
-- 掌握环境管理和多环境工作流相关命令
+- 访问故障排除命令以快速解决问题
+- 高效找到高级配置和自定义选项
+- 轻松定位环境管理和多环境工作流命令
 
 ## 学习成果
 
-通过经常参考这份速查表，你将能够：
-- 自信地执行azd命令，无需查阅完整文档
+通过定期参考这份速查表，您将能够：
+- 自信地执行 azd 命令，无需查阅完整文档
 - 使用适当的诊断命令快速解决常见问题
 - 高效管理多环境和部署场景
-- 根据需要应用高级azd功能和配置选项
+- 根据需要应用高级 azd 功能和配置选项
 - 使用系统化的命令序列排查部署问题
-- 通过有效使用azd快捷方式和选项优化工作流
+- 通过有效使用 azd 快捷方式和选项优化工作流
 
 ## 入门命令
 
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -249,7 +251,7 @@ azd info
 
 ## 🔧 高级命令
 
-### 流水线与CI/CD
+### 流水线与 CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### 服务管理
@@ -324,7 +335,7 @@ azd env select production
 azd up
 ```
 
-### 故障排查工作流
+### 故障排除工作流
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -387,9 +398,9 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 输出格式化
+## 🎨 输出格式
 
-### JSON输出
+### JSON 输出
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 专业提示
 
-### 快捷别名加速工作流
+### 快捷别名
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -558,15 +569,15 @@ azd template show <template-name> --docs
 
 ---
 
-**提示**: 收藏这份速查表，并使用`Ctrl+F`快速找到所需命令！
+**提示**: 收藏这份速查表，并使用 `Ctrl+F` 快速找到您需要的命令！
 
 ---
 
 **导航**
-- **上一课**: [预部署检查](../docs/pre-deployment/preflight-checks.md)
+- **上一课**: [预检查](../docs/pre-deployment/preflight-checks.md)
 - **下一课**: [术语表](glossary.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T23:37:07+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:29:29+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "da"
 }
@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Hurtig reference for alle kapitler**
 - **📚 Kursushjem**: [AZD For Begyndere](../README.md)
-- **📖 Hurtig Start**: [Kapitel 1: Fundament & Hurtig Start](../README.md#-chapter-1-foundation--quick-start)
+- **📖 Hurtig Start**: [Kapitel 1: Grundlag & Hurtig Start](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI-kommandoer**: [Kapitel 2: AI-First Udvikling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avanceret**: [Kapitel 4: Infrastruktur som kode](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
@@ -23,11 +23,11 @@ Denne omfattende oversigt giver en hurtig reference til de mest anvendte Azure D
 
 Ved at bruge denne oversigt vil du:
 - Få øjeblikkelig adgang til essentielle Azure Developer CLI-kommandoer og syntaks
-- Forstå kommandoernes organisering efter funktionelle kategorier og anvendelsesscenarier
-- Referere til praktiske eksempler for almindelige udviklings- og implementeringsscenarier
-- Finde fejlfinding-kommandoer til hurtig løsning af problemer
+- Forstå kommandoernes organisering efter funktionelle kategorier og anvendelsesområder
+- Finde praktiske eksempler på almindelige udviklings- og implementeringsscenarier
+- Få adgang til fejlfinding-kommandoer for hurtig problemløsning
 - Effektivt finde avancerede konfigurations- og tilpasningsmuligheder
-- Lokalisere kommandoer til miljøstyring og workflows med flere miljøer
+- Lokalisere miljøstyrings- og multi-miljøarbejdsgangs-kommandoer
 
 ## Læringsresultater
 
@@ -37,9 +37,9 @@ Ved regelmæssig brug af denne oversigt vil du kunne:
 - Effektivt administrere flere miljøer og implementeringsscenarier
 - Anvende avancerede azd-funktioner og konfigurationsmuligheder efter behov
 - Fejlsøge implementeringsproblemer ved hjælp af systematiske kommando-sekvenser
-- Optimere workflows gennem effektiv brug af azd-genveje og muligheder
+- Optimere arbejdsgange gennem effektiv brug af azd-genveje og muligheder
 
-## Kom i gang med kommandoer
+## Kom godt i gang med kommandoer
 
 ### Autentificering
 ```bash
@@ -72,7 +72,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Kerneimplementeringskommandoer
 
-### Komplet implementeringsworkflow
+### Komplet implementeringsarbejdsgang
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Tjenestestyring
@@ -285,9 +296,9 @@ azd service show --service web
 azd service restart --service api
 ```
 
-## 🎯 Hurtige workflows
+## 🎯 Hurtige arbejdsgange
 
-### Udviklingsworkflow
+### Udviklingsarbejdsgang
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Workflow med flere miljøer
+### Multi-miljøarbejdsgang
 ```bash
 # Set up environments
 azd env new dev
@@ -324,7 +335,7 @@ azd env select production
 azd up
 ```
 
-### Fejlsøgningsworkflow
+### Fejlfinding-arbejdsgang
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -360,7 +371,7 @@ azd info
 az account show
 ```
 
-### Skabelonfejlsøgning
+### Skabelon-fejlsøgning
 ```bash
 # List available templates with details
 azd template list --output json
@@ -372,7 +383,7 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 Fil- og katalogkommandoer
+## 📁 Fil- og mappestyringskommandoer
 
 ### Projektstruktur
 ```bash
@@ -401,14 +412,14 @@ azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tabeloutput
+### Tabel-output
 ```bash
 # Format as table
 azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Almindelige kommandokombinationer
+## 🔧 Almindelige kombinationer af kommandoer
 
 ### Sundhedstjek-script
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -498,9 +509,9 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Pro Tips
+## 💡 Gode tips
 
-### Aliasser for hurtigere workflows
+### Aliaser for hurtigere arbejdsgang
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -563,10 +574,10 @@ azd template show <template-name> --docs
 ---
 
 **Navigation**
-- **Forrige lektion**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
-- **Næste lektion**: [Glossary](glossary.md)
+- **Forrige lektion**: [Forberedelsestjek](../docs/pre-deployment/preflight-checks.md)
+- **Næste lektion**: [Ordliste](glossary.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

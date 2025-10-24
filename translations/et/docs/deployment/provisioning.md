@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-10-11T16:00:02+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T18:30:24+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "et"
 }
@@ -11,20 +11,20 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Käesolev peatükk**: Peatükk 4 - Infrastruktuur kui kood & juurutamine
+- **📖 Käesolev peatükk**: Peatükk 4 - Koodina kirjeldatud infrastruktuur ja juurutamine
 - **⬅️ Eelmine**: [Juurutamise juhend](deployment-guide.md)
 - **➡️ Järgmine peatükk**: [Peatükk 5: Mitmeagendilised AI lahendused](../../examples/retail-scenario.md)
 - **🔧 Seotud**: [Peatükk 6: Eeljuurutamise valideerimine](../pre-deployment/capacity-planning.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend hõlmab kõike, mida peate teadma Azure'i ressursside ettevalmistamise ja haldamise kohta, kasutades Azure Developer CLI-d. Õppige rakendama infrastruktuuri kui koodi (IaC) mustreid alates lihtsast ressursside loomisest kuni keerukate ettevõtte tasemel infrastruktuuri arhitektuurideni, kasutades Bicep, ARM-malle, Terraformi ja Pulumit.
+See põhjalik juhend hõlmab kõike, mida peate teadma Azure'i ressursside ettevalmistamise ja haldamise kohta, kasutades Azure Developer CLI-d. Õppige rakendama koodina kirjeldatud infrastruktuuri (IaC) mustreid alates lihtsast ressursside loomisest kuni keerukate ettevõtte tasemel infrastruktuuri arhitektuurideni, kasutades Bicep'i, ARM-malle, Terraformi ja Pulumit.
 
 ## Õpieesmärgid
 
 Selle juhendi läbimisega:
-- Valdate infrastruktuuri kui koodi põhimõtted ja Azure'i ressursside ettevalmistamise
-- Mõistate mitmeid IaC pakkujaid, mida toetab Azure Developer CLI
+- Valdate koodina kirjeldatud infrastruktuuri põhimõtteid ja Azure'i ressursside ettevalmistamist
+- Mõistate mitmeid IaC pakkujaid, mida Azure Developer CLI toetab
 - Kujundate ja rakendate Bicep-malle tavapäraste rakenduste arhitektuuride jaoks
 - Konfigureerite ressursside parameetreid, muutujaid ja keskkonnaspetsiifilisi seadeid
 - Rakendate keerukaid infrastruktuuri mustreid, sealhulgas võrgustikku ja turvalisust
@@ -33,8 +33,8 @@ Selle juhendi läbimisega:
 ## Õpitulemused
 
 Pärast juhendi läbimist suudate:
-- Kujundada ja ette valmistada Azure'i infrastruktuuri, kasutades Bicep- ja ARM-malle
-- Konfigureerida keerukaid mitmeteenuse arhitektuure koos õigete ressursside sõltuvustega
+- Kujundada ja ette valmistada Azure'i infrastruktuuri, kasutades Bicep'i ja ARM-malle
+- Konfigureerida keerukaid mitme teenuse arhitektuure koos õigete ressursside sõltuvustega
 - Rakendada parameetritega malle mitme keskkonna ja konfiguratsiooni jaoks
 - Lahendada infrastruktuuri ettevalmistamise probleeme ja juurutamise tõrkeid
 - Rakendada Azure'i hästi arhitektuuriga raamistiku põhimõtteid infrastruktuuri kujundamisel
@@ -42,11 +42,11 @@ Pärast juhendi läbimist suudate:
 
 ## Infrastruktuuri ettevalmistamise ülevaade
 
-Azure Developer CLI toetab mitmeid infrastruktuuri kui koodi (IaC) pakkujaid:
+Azure Developer CLI toetab mitmeid koodina kirjeldatud infrastruktuuri (IaC) pakkujaid:
 - **Bicep** (soovitatav) - Azure'i domeenispetsiifiline keel
 - **ARM-mallid** - JSON-põhised Azure Resource Manageri mallid
 - **Terraform** - Mitme pilve infrastruktuuri tööriist
-- **Pulumi** - Kaasaegne infrastruktuur kui kood programmeerimiskeeltega
+- **Pulumi** - Kaasaegne koodina kirjeldatud infrastruktuur programmeerimiskeeltega
 
 ## Azure'i ressursside mõistmine
 
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Ressursside uuendused ja migratsioonid
+## 🧪 Infrastruktuuri eelvaade ja valideerimine (UUS)
+
+### Infrastruktuuri muudatuste eelvaade enne juurutamist
+
+`azd provision --preview` funktsioon võimaldab **simuleerida infrastruktuuri ettevalmistamist** enne ressursside tegelikku juurutamist. See on sarnane `terraform plan` või `bicep what-if` funktsiooniga, pakkudes **kuivkäivituse vaadet**, milliseid muudatusi tehakse teie Azure'i keskkonnas.
+
+#### 🛠️ Mida see teeb
+- **Analüüsib teie IaC malle** (Bicep või Terraform)
+- **Näitab ressursside muudatuste eelvaadet**: lisamised, kustutamised, uuendused
+- **Ei rakenda muudatusi** — see on ainult lugemiseks ja ohutu käivitada
+
+#### � Kasutamisjuhtumid
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+See käsk aitab teil:
+- **Valideerida infrastruktuuri muudatusi** enne ressursside kinnitamist
+- **Avastada valekonfiguratsioone varakult** arendustsüklis
+- **Turvaliselt koostööd teha** meeskonnakeskkondades
+- **Tagada minimaalsete õigustega juurutused** ilma üllatusteta
+
+See on eriti kasulik, kui:
+- Töötate keerukate mitme teenuse keskkondadega
+- Teete muudatusi tootmisinfrastruktuuris
+- Valideerite mallide muudatusi enne PR-i kinnitamist
+- Koolitate uusi meeskonnaliikmeid infrastruktuuri mustrite osas
+
+### Eelvaate väljundi näide
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Ressursside uuendused ja migratsioonid
 
 ### Turvalised ressursside uuendused
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -807,7 +867,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Parimad tavad
+## 🎯 Parimad praktikad
 
 ### 1. Ressursside nimetamise konventsioonid
 ```bicep
@@ -867,15 +927,15 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## Järgmised sammud
 
 - [Eeljuurutamise planeerimine](../pre-deployment/capacity-planning.md) - Valideerige ressursside saadavus
-- [Tavalised probleemid](../troubleshooting/common-issues.md) - Lahendage infrastruktuuri probleeme
+- [Tavalised probleemid](../troubleshooting/common-issues.md) - Lahendage infrastruktuuri probleemid
 - [Silumise juhend](../troubleshooting/debugging.md) - Siluge ettevalmistamise probleeme
 - [SKU valik](../pre-deployment/sku-selection.md) - Valige sobivad teenuse tasemed
 
-## Lisamaterjalid
+## Täiendavad ressursid
 
 - [Azure Bicep dokumentatsioon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manageri mallid](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure'i arhitektuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure'i arhitektuuri keskus](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure'i hästi arhitektuuriga raamistik](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta arusaamatuste või valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamise tõttu.
