@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "56313679644ccd28e9d15bb7089ae5ca",
-  "translation_date": "2025-10-11T14:20:18+00:00",
+  "original_hash": "a47510110edbcc33ad1ab7e8d234f7c3",
+  "translation_date": "2025-10-24T09:00:44+00:00",
   "source_file": "README.md",
   "language_code": "en"
 }
@@ -11,70 +11,48 @@ CO_OP_TRANSLATOR_METADATA:
 
 #### What You'll Learn
 - Enterprise-grade deployment strategies
-- Scaling and monitoring production workloads
-- Cost management and optimization
+- Scaling and monitoring best practices
+- Cost optimization techniques
 
 #### Learning Resources
-- **🏢 Enterprise Patterns**: [Enterprise Deployment Guide](docs/production/enterprise-patterns.md) - Best practices for large-scale deployments
-- **📈 Scaling**: [Scaling Strategies](docs/production/scaling.md) - Horizontal and vertical scaling
-- **💰 Cost Optimization**: [Cost Management](docs/production/cost-management.md) - Reduce expenses without compromising performance
-- **📊 Monitoring**: [Monitoring Guide](docs/production/monitoring.md) - Tools and techniques for production monitoring
+- **📖 Enterprise Patterns**: [Enterprise Deployment Guide](docs/production/enterprise-deployment.md) - Advanced strategies
+- **📊 Monitoring**: [Monitoring & Alerts](docs/production/monitoring.md) - Tools and techniques
+- **💰 Cost Management**: [Cost Optimization](docs/production/cost-optimization.md) - Reduce expenses
 
 #### Practical Exercises
-- Implement scaling strategies for high-traffic applications
-- Set up monitoring dashboards using Azure Monitor
+- Implement enterprise-scale deployment patterns
+- Set up monitoring and alerting systems
 - Optimize resource usage for cost efficiency
 
-**💡 Chapter Outcome**: Deploy and manage enterprise-grade applications with robust scaling, monitoring, and cost optimization
+**💡 Chapter Outcome**: Deploy and manage scalable, cost-effective solutions for enterprise environments
 
 ---
 
-### 📈 Chapter 9: Advanced AI Workloads
-**Prerequisites**: Chapters 1-5 completed  
-**Duration**: 3-4 hours  
-**Complexity**: ⭐⭐⭐⭐⭐
+## Featured Azure AI Foundry Templates
 
-#### What You'll Learn
-- Advanced AI architecture design
-- Distributed AI workloads
-- Custom AI model integration
+Explore ready-to-use templates for deploying AI solutions with AZD:
 
-#### Learning Resources
-- **🤖 Advanced AI**: [Advanced AI Architectures](docs/ai-foundry/advanced-ai-architectures.md) - Design and deploy complex AI systems
-- **📡 Distributed AI**: [Distributed AI Workloads](docs/ai-foundry/distributed-ai.md) - Scale AI across multiple nodes
-- **🧠 Custom Models**: [Custom Model Integration](docs/ai-foundry/custom-models.md) - Deploy your own AI models
+- **Retail Chatbot**: AI-powered customer service bot for retail scenarios  
+- **Document Summarizer**: Summarize large documents using Azure AI  
+- **Image Recognition App**: Identify objects in images with Azure Cognitive Services  
+- **Sentiment Analysis Tool**: Analyze customer feedback with AI  
 
-#### Practical Exercises
-- Design and deploy distributed AI workloads
-- Integrate custom AI models into Azure AI Foundry
-- Optimize AI systems for performance and scalability
-
-**💡 Chapter Outcome**: Build and deploy advanced AI solutions tailored to specific use cases
-
----
-
-## 🛠️ Featured Azure AI Foundry Templates
-
-Explore pre-built templates to accelerate your learning and deployment:
-
-- **Chatbot Template**: Deploy a conversational AI chatbot with integrated Azure AI services
-- **Retail Multi-Agent Solution**: Implement a retail scenario with customer and inventory agents
-- **Document Processing Template**: Automate document analysis using Azure AI
+Find these templates in the [Azure AI Foundry Templates](templates/README.md) section.
 
 ---
 
 ## Community & Support
 
-Join the Azure Developer community for real-time support and collaboration:
+Join the conversation and get help from experts:
 
-- **Azure Discord**: [Join Here](https://discord.com/invite/ByRwuEEgH4)
-- **Azure AI Discord**: [Join Here](https://discord.gg/kzRShWzttr)
+- [Azure Discord Community](https://discord.com/invite/ByRwuEEgH4)  
+- [Azure AI Foundry Discord](https://discord.gg/kzRShWzttr)  
 
 ---
 
 ## Contributing
 
-We welcome contributions to improve this course! Check out our [Contribution Guide](CONTRIBUTING.md) for details.
+We welcome contributions to improve this course! Check out our [Contribution Guide](CONTRIBUTING.md) for details on how to get involved.
 
 ---
 
@@ -94,11 +72,11 @@ This project is licensed under the [MIT License](../../LICENSE).
 - **📊 Monitoring**: Integration with Application Insights
 
 #### Practical Exercises
-- Implement security patterns for enterprise applications
+- Apply enterprise security patterns
 - Set up detailed monitoring systems
 - Deploy applications to production with proper governance
 
-**💡 Chapter Outcome**: Learn to deploy enterprise-grade applications with full production capabilities.
+**💡 Chapter Outcome**: Learn to deploy enterprise-grade applications with full production capabilities
 
 ---
 
@@ -130,7 +108,7 @@ The workshop follows a **Discovery → Deployment → Customization** methodolog
    - Implement security and authentication patterns
 
 3. **Customization Phase** (45 minutes)
-   - Tailor applications to specific use cases
+   - Tailor applications for specific use cases
    - Optimize for production deployment
    - Implement monitoring and cost management strategies
 
@@ -147,17 +125,17 @@ cd azd-for-beginners/workshop
 
 #### 🎯 Workshop Learning Outcomes
 By completing the workshop, participants will:
-- **Deploy Production AI Applications**: Use AZD with Azure AI Foundry services
+- **Deploy Production AI Applications**: Utilize AZD with Azure AI Foundry services
 - **Master Multi-Agent Architectures**: Build coordinated AI agent solutions
-- **Implement Security Best Practices**: Configure authentication and access control
-- **Optimize for Scale**: Design cost-effective, high-performance deployments
-- **Troubleshoot Deployments**: Resolve common issues independently
+- **Implement Security Best Practices**: Configure authentication and access control mechanisms
+- **Optimize for Scale**: Design cost-effective and high-performance deployments
+- **Troubleshoot Deployments**: Independently resolve common issues
 
 #### 📖 Workshop Resources
 - **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning environment
 - **📋 Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - Detailed walkthroughs
 - **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-focused exercises
-- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Environment configuration
+- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Environment configuration instructions
 
 **Ideal for**: Corporate training, university courses, self-paced learning, and developer bootcamps.
 
@@ -169,8 +147,8 @@ Azure Developer CLI (azd) is a developer-friendly command-line interface designe
 
 - **Template-based deployments** - Pre-built templates for common application patterns
 - **Infrastructure as Code** - Manage Azure resources using Bicep or Terraform  
-- **Integrated workflows** - Provision, deploy, and monitor applications seamlessly
-- **Developer-centric design** - Optimized for productivity and ease of use
+- **Integrated workflows** - Simplify provisioning, deployment, and monitoring
+- **Developer-focused** - Optimized for productivity and ease of use
 
 ### **AZD + Azure AI Foundry: Ideal for AI Deployments**
 
@@ -178,9 +156,9 @@ Azure Developer CLI (azd) is a developer-friendly command-line interface designe
 
 - **AI-Ready Templates** - Pre-configured templates for Azure OpenAI, Cognitive Services, and ML workloads
 - **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints  
-- **Production AI Patterns** - Best practices for scalable, cost-effective AI application deployments
+- **Production AI Patterns** - Best practices for scalable and cost-efficient AI application deployments
 - **End-to-End AI Workflows** - From model development to production deployment with monitoring
-- **Cost Optimization** - Efficient resource allocation and scaling strategies for AI workloads
+- **Cost Optimization** - Smart resource allocation and scaling strategies for AI workloads
 - **Azure AI Foundry Integration** - Seamless connection to AI Foundry model catalog and endpoints
 
 ---
@@ -231,8 +209,8 @@ Azure Developer CLI (azd) is a developer-friendly command-line interface designe
 - [Enterprise Solutions](../../examples/enterprise) - Production-ready patterns
 
 ### External Template Collections
-- [**Azure-Samples AZD Templates**](https://github.com/Azure-Samples/azd-templates) - Official Microsoft samples
-- [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) - Community-contributed templates
+- [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Curated collection of official and community templates
+- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn template documentation
 - [**Examples Directory**](examples/README.md) - Local learning examples with detailed explanations
 
 ---
@@ -313,51 +291,69 @@ Upon completing all chapters, you will have:
 ### Contributing to the Course
 We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on:
 - **Content Improvements**: Enhance existing chapters and examples
-- **New Examples**: Add real-world scenarios and templates  
-- **Translation**: Help maintain multi-language support  
-- **Bug Reports**: Improve accuracy and clarity  
-- **Community Standards**: Follow our inclusive community guidelines  
+- **New Examples**: Add practical scenarios and templates  
+- **Translation**: Support multi-language maintenance  
+- **Bug Reports**: Enhance precision and clarity  
+- **Community Standards**: Adhere to our inclusive community guidelines
 
 ---
 
 ## 📄 Course Information
 
-### License  
-This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details.  
+### License
+This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details.
 
-### Related Microsoft Learning Resources  
+### Related Microsoft Learning Resources
 
-Our team produces other comprehensive learning courses:  
+Our team develops other comprehensive learning courses:
 
-- [Model Context Protocol (MCP) For Beginners](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI Agents for Beginners](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI for Beginners using .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI for Beginners](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Generative AI for Beginners using Java](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-- [ML for Beginners](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Data Science for Beginners](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-- [AI for Beginners](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Cybersecurity for Beginners](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)  
-- [Web Dev for Beginners](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-- [IoT for Beginners](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-- [XR Development for Beginners](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)  
-- [Mastering GitHub Copilot for AI Paired Programming](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
-- [Mastering GitHub Copilot for C#/.NET Developers](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
-- [Choose Your Own Copilot Adventure](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### Azure / Edge / MCP / Agents
+[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Generative AI Series
+[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Core Learning
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Copilot Series
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+<!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
 
-## 🗺️ Course Navigation  
+## 🗺️ Course Navigation
 
-**🚀 Ready to Start Learning?**  
+**🚀 Ready to Start Learning?**
 
 **Beginners**: Start with [Chapter 1: Foundation & Quick Start](../..)  
 **AI Developers**: Jump to [Chapter 2: AI-First Development](../..)  
-**Experienced Developers**: Begin with [Chapter 3: Configuration & Authentication](../..)  
+**Experienced Developers**: Begin with [Chapter 3: Configuration & Authentication](../..)
 
-**Next Steps**: [Begin Chapter 1 - AZD Basics](docs/getting-started/azd-basics.md) →  
+**Next Steps**: [Begin Chapter 1 - AZD Basics](docs/getting-started/azd-basics.md) →
 
 ---
 
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.

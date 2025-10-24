@@ -1,27 +1,44 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9cc966416ab431c38b2ab863884b196c",
-  "translation_date": "2025-09-25T01:02:37+00:00",
+  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
+  "translation_date": "2025-10-16T16:08:19+00:00",
   "source_file": "workshop/README.md",
   "language_code": "sk"
 }
 -->
-# AZD pre workshop AI vývojárov
+<div align="center">
+  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+    <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+      🚧 Workshop vo výstavbe 🚧
+    </h2>
+    <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+      <strong>Tento workshop je momentálne vo fáze aktívneho vývoja.</strong><br>
+      Obsah môže byť neúplný alebo podliehať zmenám. Skontrolujte neskôr aktualizácie!
+    </p>
+    <div style="margin-top: 15px;">
+      <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
+        📅 Posledná aktualizácia: Október 2025
+      </span>
+    </div>
+  </div>
+</div>
 
-Vitajte na praktickom workshope zameranom na učenie Azure Developer CLI (AZD) s dôrazom na nasadenie AI aplikácií. Tento workshop vám pomôže získať praktické znalosti o AZD šablónach v 3 krokoch:
+# Workshop AZD pre vývojárov AI
 
-1. **Objavovanie** - nájdite šablónu, ktorá vám vyhovuje.
-1. **Nasadenie** - nasadte ju a overte, že funguje.
-1. **Prispôsobenie** - upravte ju a prispôsobte podľa svojich potrieb!
+Vitajte na praktickom workshope zameranom na učenie sa Azure Developer CLI (AZD) s dôrazom na nasadenie AI aplikácií. Tento workshop vám pomôže získať praktické znalosti o šablónach AZD v 3 krokoch:
 
-Počas tohto workshopu budete tiež oboznámení s kľúčovými nástrojmi a pracovnými postupmi pre vývojárov, ktoré vám pomôžu zefektívniť váš vývojový proces od začiatku až do konca.
+1. **Objavovanie** - nájdite šablónu, ktorá je pre vás najvhodnejšia.
+1. **Nasadenie** - nasadenie a overenie funkčnosti
+1. **Prispôsobenie** - upravte a prispôsobte si šablónu podľa svojich potrieb!
+
+Počas tohto workshopu budete tiež oboznámení so základnými nástrojmi a pracovnými postupmi pre vývojárov, ktoré vám pomôžu zefektívniť váš vývojový proces od začiatku až do konca.
 
 <br/>
 
 ## Návod v prehliadači
 
-Lekcie workshopu sú napísané v Markdown. Môžete ich prechádzať priamo na GitHube - alebo spustiť náhľad v prehliadači, ako je znázornené na obrázku nižšie.
+Lekcie workshopu sú v Markdown formáte. Môžete ich prehliadať priamo na GitHube - alebo spustiť náhľad v prehliadači, ako je znázornené na obrázku nižšie.
 
 ![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.sk.png)
 
@@ -31,11 +48,11 @@ Ak chcete použiť túto možnosť - vytvorte si fork repozitára vo svojom prof
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-Po niekoľkých sekundách sa zobrazí dialógové okno. Vyberte možnosť `Open in browser`. Návod v prehliadači sa teraz otvorí v novej karte. Niektoré výhody tohto náhľadu:
+Po niekoľkých sekundách sa zobrazí dialógové okno. Vyberte možnosť `Otvoriť v prehliadači`. Návod založený na webe sa teraz otvorí v novej karte prehliadača. Niektoré výhody tohto náhľadu:
 
 1. **Vstavané vyhľadávanie** - rýchlo nájdite kľúčové slová alebo lekcie.
-1. **Ikona kopírovania** - prejdite myšou nad bloky kódu a zobrazí sa táto možnosť.
-1. **Prepínač témy** - prepínajte medzi tmavým a svetlým režimom.
+1. **Ikona kopírovania** - pri kódoch sa zobrazí možnosť kopírovania.
+1. **Prepínanie témy** - prepínajte medzi tmavým a svetlým režimom.
 1. **Získajte pomoc** - kliknite na ikonu Discord v päte a pripojte sa!
 
 <br/>
@@ -43,19 +60,19 @@ Po niekoľkých sekundách sa zobrazí dialógové okno. Vyberte možnosť `Open
 ## Prehľad workshopu
 
 **Trvanie:** 3-4 hodiny  
-**Úroveň:** Začiatočník až stredne pokročilý  
+**Úroveň:** Začiatočník až mierne pokročilý  
 **Predpoklady:** Znalosť Azure, AI konceptov, VS Code a nástrojov príkazového riadku.
 
-Toto je praktický workshop, kde sa učíte priamo pri práci. Po dokončení cvičení odporúčame prejsť si učebný plán AZD pre začiatočníkov, aby ste pokračovali vo svojom vzdelávaní v oblasti bezpečnosti a produktivity.
+Toto je praktický workshop, kde sa učíte priamo pri práci. Po dokončení cvičení odporúčame preštudovať si učebné osnovy AZD pre začiatočníkov, aby ste pokračovali vo svojej vzdelávacej ceste v oblasti bezpečnosti a produktivity.
 
-| Čas | Modul  | Cieľ |
+| Čas| Modul  | Cieľ |
 |:---|:---|:---|
 | 15 min | [Úvod](docs/instructions/0-Introduction.md) | Nastavenie cieľov a pochopenie zámerov |
-| 30 min | [Výber AI šablóny](docs/instructions/1-Select-AI-Template.md) | Preskúmajte možnosti a vyberte štartovaciu šablónu | 
+| 30 min | [Výber AI šablóny](docs/instructions/1-Select-AI-Template.md) | Preskúmanie možností a výber štartovacej šablóny | 
 | 30 min | [Overenie AI šablóny](docs/instructions/2-Validate-AI-Template.md) | Nasadenie predvolenej šablóny na Azure |
-| 30 min | [Rozbor AI šablóny](docs/instructions/3-Deconstruct-AI-Template.md) | Preskúmajte štruktúru a konfiguráciu |
-| 30 min | [Konfigurácia AI šablóny](docs/instructions/4-Configure-AI-Template.md) | Aktivujte a vyskúšajte dostupné funkcie |
-| 30 min | [Prispôsobenie AI šablóny](docs/instructions/5-Customize-AI-Template.md) | Prispôsobte šablónu podľa svojich potrieb |
+| 30 min | [Rozbor AI šablóny](docs/instructions/3-Deconstruct-AI-Template.md) | Preskúmanie štruktúry a konfigurácie |
+| 30 min | [Konfigurácia AI šablóny](docs/instructions/4-Configure-AI-Template.md) | Aktivácia a skúšanie dostupných funkcií |
+| 30 min | [Prispôsobenie AI šablóny](docs/instructions/5-Customize-AI-Template.md) | Úprava šablóny podľa vašich potrieb |
 | 30 min | [Odstránenie infraštruktúry](docs/instructions/6-Teardown-Infrastructure.md) | Vyčistenie a uvoľnenie zdrojov |
 | 15 min | [Zhrnutie a ďalšie kroky](docs/instructions/7-Wrap-up.md) | Zdroje na učenie, výzva workshopu |
 
@@ -63,7 +80,7 @@ Toto je praktický workshop, kde sa učíte priamo pri práci. Po dokončení cv
 
 ## Čo sa naučíte
 
-AZD šablónu si predstavte ako učebný sandbox na preskúmanie rôznych schopností a nástrojov pre komplexný vývoj na Azure AI Foundry. Na konci tohto workshopu by ste mali mať intuitívne pochopenie rôznych nástrojov a konceptov v tomto kontexte.
+AZD šablónu si predstavte ako učebný sandbox na preskúmanie rôznych schopností a nástrojov pre kompletný vývoj na Azure AI Foundry. Na konci tohto workshopu by ste mali mať intuitívne pochopenie rôznych nástrojov a konceptov v tomto kontexte.
 
 | Koncept  | Cieľ |
 |:---|:---|
@@ -78,7 +95,7 @@ AZD šablónu si predstavte ako učebný sandbox na preskúmanie rôznych schopn
 
 ## Štruktúra workshopu
 
-Workshop je štruktúrovaný tak, aby vás previedol cestou od objavenia šablóny, cez nasadenie, rozbor a prispôsobenie - pričom ako základ sa používa oficiálna štartovacia šablóna [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents).
+Workshop je štruktúrovaný tak, aby vás previedol cestou od objavenia šablóny, cez nasadenie, rozbor a prispôsobenie - s použitím oficiálnej šablóny [Začíname s AI agentmi](https://github.com/Azure-Samples/get-started-with-ai-agents) ako základu.
 
 ### [Modul 1: Výber AI šablóny](docs/instructions/1-Select-AI-Template.md) (30 min)
 
@@ -99,48 +116,48 @@ Workshop je štruktúrovaný tak, aby vás previedol cestou od objavenia šabló
 - Preskúmajte svoje prostredie v `.azure/` 
 - Preskúmajte nastavenie zdrojov v `infra/` 
 - Preskúmajte konfiguráciu AZD v `azure.yaml`
-- **Lab**: Úprava premenných prostredia a opätovné nasadenie
+- **Lab**: Úprava environmentálnych premenných a opätovné nasadenie
 
 ### [Modul 4: Konfigurácia AI šablóny](docs/instructions/4-Configure-AI-Template.md) (30 min)
-- Preskúmajte: Retrieval Augmented Generation
-- Preskúmajte: Hodnotenie agentov a Red Teaming
-- Preskúmajte: Sledovanie a monitorovanie
-- **Lab**: Preskúmajte AI agenta + pozorovateľnosť 
+- Preskúmanie: Retrieval Augmented Generation
+- Preskúmanie: Hodnotenie agentov a Red Teaming
+- Preskúmanie: Sledovanie a monitorovanie
+- **Lab**: Preskúmanie AI agenta + pozorovateľnosť 
 
 ### [Modul 5: Prispôsobenie AI šablóny](docs/instructions/5-Customize-AI-Template.md) (30 min)
-- Definujte: PRD so scenárovými požiadavkami
-- Konfigurujte: Premenné prostredia pre AZD
-- Implementujte: Lifecycle Hooks pre ďalšie úlohy
+- Definovanie: PRD so scenárovými požiadavkami
+- Konfigurácia: Environmentálne premenné pre AZD
+- Implementácia: Lifecycle Hooks pre dodatočné úlohy
 - **Lab**: Prispôsobenie šablóny pre môj scenár
 
 ### [Modul 6: Odstránenie infraštruktúry](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
 - Rekapitulácia: Čo sú AZD šablóny?
 - Rekapitulácia: Prečo používať Azure Developer CLI?
-- Ďalšie kroky: Vyskúšajte inú šablónu!
+- Ďalšie kroky: Skúste inú šablónu!
 - **Lab**: Odstránenie infraštruktúry a vyčistenie
 
 <br/>
 
 ## Výzva workshopu
 
-Chcete sa sami otestovať a urobiť viac? Tu sú niektoré návrhy projektov - alebo sa podeľte o svoje nápady s nami!!
+Chcete sa sami vyzvať na viac? Tu je niekoľko návrhov na projekty - alebo sa podeľte o svoje nápady s nami!!
 
 | Projekt | Popis |
 |:---|:---|
 |1. **Rozbor komplexnej AI šablóny** | Použite pracovný postup a nástroje, ktoré sme načrtli, a zistite, či dokážete nasadiť, overiť a prispôsobiť inú šablónu AI riešenia. _Čo ste sa naučili?_|
-|2. **Prispôsobenie podľa vášho scenára**  | Skúste napísať PRD (Product Requirements Document) pre iný scenár. Potom použite GitHub Copilot vo svojom repozitári šablóny v Agent Model - a požiadajte ho, aby vám vygeneroval pracovný postup prispôsobenia. _Čo ste sa naučili? Ako by ste mohli tieto návrhy zlepšiť?_|
+|2. **Prispôsobenie podľa vášho scenára**  | Skúste napísať PRD (Product Requirements Document) pre iný scenár. Potom použite GitHub Copilot vo vašom repozitári šablóny v Agent Model - a požiadajte ho, aby vám vygeneroval pracovný postup prispôsobenia. _Čo ste sa naučili? Ako by ste mohli tieto návrhy zlepšiť?_|
 | | |
 
 ## Máte spätnú väzbu?
 
-1. Zverejnite problém v tomto repozitári - označte ho `Workshop` pre jednoduchšie vyhľadanie.
-1. Pripojte sa na Discord Azure AI Foundry - spojte sa so svojimi kolegami!
+1. Zverejnite problém v tomto repozitári - označte ho `Workshop` pre pohodlie.
+1. Pripojte sa k Azure AI Foundry Discord - spojte sa so svojimi kolegami!
 
 
 | | | 
 |:---|:---|
 | **📚 Domov kurzu**| [AZD pre začiatočníkov](../README.md)|
-| **📖 Dokumentácia** | [Začnite s AI šablónami](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **📖 Dokumentácia** | [Začíname s AI šablónami](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
 | **🛠️AI šablóny** | [Šablóny Azure AI Foundry](https://ai.azure.com/templates) |
 |**🚀 Ďalšie kroky** | [Prijmite výzvu](../../../workshop) |
 | | |
@@ -149,7 +166,7 @@ Chcete sa sami otestovať a urobiť viac? Tu sú niektoré návrhy projektov - a
 
 ---
 
-**Predchádzajúce:** [AI Príručka na riešenie problémov](../docs/troubleshooting/ai-troubleshooting.md) | **Ďalšie:** Začnite s [Lab 1: Základy AZD](../../../workshop/lab-1-azd-basics)
+**Predchádzajúce:** [Príručka na riešenie problémov AI](../docs/troubleshooting/ai-troubleshooting.md) | **Ďalšie:** Začnite s [Lab 1: Základy AZD](../../../workshop/lab-1-azd-basics)
 
 **Pripravení začať budovať AI aplikácie s AZD?**
 
@@ -157,3 +174,5 @@ Chcete sa sami otestovať a urobiť viac? Tu sú niektoré návrhy projektov - a
 
 ---
 
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
