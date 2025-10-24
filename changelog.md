@@ -22,6 +22,51 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.4.0] - 2025-10-24
+
+#### Infrastructure Preview and Validation Enhancements
+**This version introduces comprehensive support for the new Azure Developer CLI preview feature and enhances workshop user experience.**
+
+#### Added
+- **🧪 azd provision --preview Feature Documentation**: Comprehensive coverage of the new infrastructure preview capability
+  - Command reference and usage examples in cheat sheet
+  - Detailed integration in provisioning guide with use cases and benefits
+  - Pre-flight check integration for safer deployment validation
+  - Getting started guide updates with safety-first deployment practices
+- **🚧 Workshop Status Banner**: Professional HTML banner indicating workshop development status
+  - Gradient design with construction indicators for clear user communication
+  - Last updated timestamp for transparency
+  - Mobile-responsive design for all device types
+
+#### Enhanced
+- **Infrastructure Safety**: Preview functionality integrated throughout deployment documentation
+- **Pre-deployment Validation**: Automated scripts now include infrastructure preview testing
+- **Developer Workflow**: Updated command sequences to include preview as best practice
+- **Workshop Experience**: Clear expectations set for users about content development status
+
+#### Changed
+- **Deployment Best Practices**: Preview-first workflow now recommended approach
+- **Documentation Flow**: Infrastructure validation moved earlier in learning process
+- **Workshop Presentation**: Professional status communication with clear development timeline
+
+#### Improved
+- **Safety-First Approach**: Infrastructure changes can now be validated before deployment
+- **Team Collaboration**: Preview results can be shared for review and approval
+- **Cost Awareness**: Better understanding of resource costs before provisioning
+- **Risk Mitigation**: Reduced deployment failures through advance validation
+
+#### Technical Implementation
+- **Multi-document Integration**: Preview feature documented across 4 key files
+- **Command Patterns**: Consistent syntax and examples throughout documentation
+- **Best Practice Integration**: Preview included in validation workflows and scripts
+- **Visual Indicators**: Clear NEW feature markings for discoverability
+
+#### Workshop Infrastructure
+- **Status Communication**: Professional HTML banner with gradient styling
+- **User Experience**: Clear development status prevents confusion
+- **Professional Presentation**: Maintains repository credibility while setting expectations
+- **Timeline Transparency**: October 2025 last updated timestamp for accountability
+
 ### [v3.3.0] - 2025-09-24
 
 #### Enhanced Workshop Materials and Interactive Learning Experience

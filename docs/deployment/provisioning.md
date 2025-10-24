@@ -755,14 +755,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Resource Updates and Migrations
+## 🧪 Infrastructure Preview & Validation (NEW)
+
+### Preview Infrastructure Changes Before Deployment
+
+The `azd provision --preview` feature lets you **simulate infrastructure provisioning** before actually deploying resources. It's similar in spirit to `terraform plan` or `bicep what-if`, giving you a **dry-run view** of what changes would be made to your Azure environment.
+
+#### 🛠️ What It Does
+- **Analyzes your IaC templates** (Bicep or Terraform)
+- **Shows a preview of resource changes**: additions, deletions, updates
+- **Does not apply changes** — it's read-only and safe to run
+
+#### � Use Cases
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+This command helps you:
+- **Validate infrastructure changes** before committing resources
+- **Catch misconfigurations early** in development cycle
+- **Collaborate safely** in team environments
+- **Ensure least-privilege deployments** without surprises
+
+It's especially useful when:
+- Working with complex multi-service environments
+- Making changes to production infrastructure
+- Validating template modifications before PR approval
+- Training new team members on infrastructure patterns
+
+### Example Preview Output
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Resource Updates and Migrations
 
 ### Safe Resource Updates
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed

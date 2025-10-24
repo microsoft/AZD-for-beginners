@@ -381,6 +381,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -805,6 +820,7 @@ Print this checklist and verify each item before deployment:
 - [ ] All services defined in azure.yaml have corresponding source code
 - [ ] Bicep templates in `infra/` directory are present
 - [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Infrastructure preview runs successfully (`azd provision --preview`)
 - [ ] All required parameters have default values or will be provided
 - [ ] No hardcoded secrets in templates
 

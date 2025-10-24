@@ -82,9 +82,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Safe Infrastructure Planning with Preview
+The `azd provision --preview` command is a game-changer for safe deployments:
+- **Dry-run analysis** - Shows what will be created, modified, or deleted
+- **Zero risk** - No actual changes are made to your Azure environment
+- **Team collaboration** - Share preview results before deployment
+- **Cost estimation** - Understand resource costs before commitment
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Environment Management
