@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T13:15:41+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:44:05+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "hk"
 }
@@ -22,26 +22,26 @@ CO_OP_TRANSLATOR_METADATA:
 ## 學習目標
 
 使用這份速查表，您將能夠：
-- 即時獲取重要的 Azure Developer CLI 指令及語法
-- 理解指令按功能類別及使用案例的組織方式
-- 參考常見開發與部署場景的實用範例
-- 獲取故障排除指令以快速解決問題
-- 高效找到進階配置及自訂選項
+- 即時存取重要的 Azure Developer CLI 指令及語法
+- 了解指令按功能類別和使用案例的組織方式
+- 參考常見開發和部署場景的實用範例
+- 學習故障排除指令以快速解決問題
+- 高效找到進階配置和自訂選項
 - 掌握環境管理及多環境工作流程指令
 
 ## 學習成果
 
 經常參考這份速查表，您將能夠：
-- 自信地執行 AZD 指令而無需查閱完整文件
+- 自信地執行 azd 指令而無需查閱完整文件
 - 使用適當的診斷指令快速解決常見問題
-- 高效管理多個環境及部署場景
-- 根據需要應用 AZD 的進階功能及配置選項
+- 高效管理多個環境和部署場景
+- 根據需要應用進階的 azd 功能和配置選項
 - 使用系統化指令序列排除部署問題
-- 通過有效使用 AZD 快捷方式及選項優化工作流程
+- 通過有效使用 azd 快捷方式和選項來優化工作流程
 
 ## 入門指令
 
-### 身份驗證
+### 認證
 ```bash
 # Login to Azure (uses Azure CLI)
 az login
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### 服務管理
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -558,15 +569,15 @@ azd template show <template-name> --docs
 
 ---
 
-**提示**: 收藏這份速查表，並使用 `Ctrl+F` 快速找到您需要的指令！
+**提示**: 收藏這份速查表並使用 `Ctrl+F` 快速找到您需要的指令！
 
 ---
 
 **導航**
-- **上一課**: [部署前檢查](../docs/pre-deployment/preflight-checks.md)
+- **上一課**: [預檢查](../docs/pre-deployment/preflight-checks.md)
 - **下一課**: [術語表](glossary.md)
 
 ---
 
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業的人類翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

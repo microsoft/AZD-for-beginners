@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:38:30+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:32:12+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "no"
 }
 -->
 # AZD Grunnleggende - Forstå Azure Developer CLI
 
-# AZD Grunnleggende - Kjernebegreper og Fundament
+# AZD Grunnleggende - Kjernebegreper og fundament
 
 **Kapittelnavigasjon:**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
@@ -20,41 +20,41 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduksjon
 
-Denne leksjonen introduserer deg til Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen fra lokal utvikling til Azure-deployering. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler deployering av skybaserte applikasjoner.
+Denne leksjonen introduserer deg for Azure Developer CLI (azd), et kraftig kommandolinjeverktøy som akselererer reisen din fra lokal utvikling til Azure-utplassering. Du vil lære de grunnleggende konseptene, kjernefunksjonene, og forstå hvordan azd forenkler utplassering av skybaserte applikasjoner.
 
 ## Læringsmål
 
 Ved slutten av denne leksjonen vil du:
-- Forstå hva Azure Developer CLI er og dens hovedformål
-- Lære kjernebegreper som maler, miljøer og tjenester
-- Utforske nøkkelfunksjoner som malbasert utvikling og Infrastructure as Code
-- Forstå azd-projektstrukturen og arbeidsflyten
+- Forstå hva Azure Developer CLI er og dets primære formål
+- Lære kjernebegrepene som maler, miljøer og tjenester
+- Utforske nøkkelfunksjoner inkludert malbasert utvikling og Infrastructure as Code
+- Forstå azd prosjektstruktur og arbeidsflyt
 - Være klar til å installere og konfigurere azd for ditt utviklingsmiljø
 
 ## Læringsutbytte
 
 Etter å ha fullført denne leksjonen vil du kunne:
 - Forklare rollen til azd i moderne skyutviklingsarbeidsflyter
-- Identifisere komponentene i en azd-projektstruktur
+- Identifisere komponentene i en azd prosjektstruktur
 - Beskrive hvordan maler, miljøer og tjenester fungerer sammen
 - Forstå fordelene med Infrastructure as Code med azd
 - Gjenkjenne ulike azd-kommandoer og deres formål
 
 ## Hva er Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen fra lokal utvikling til Azure-deployering. Det forenkler prosessen med å bygge, deployere og administrere skybaserte applikasjoner på Azure.
+Azure Developer CLI (azd) er et kommandolinjeverktøy designet for å akselerere reisen din fra lokal utvikling til Azure-utplassering. Det forenkler prosessen med å bygge, utplassere og administrere skybaserte applikasjoner på Azure.
 
 ## Kjernebegreper
 
 ### Maler
 Maler er grunnlaget for azd. De inneholder:
-- **Applikasjonskode** - Kildekode og avhengigheter
+- **Applikasjonskode** - Kildekoden din og avhengigheter
 - **Infrastrukturbeskrivelser** - Azure-ressurser definert i Bicep eller Terraform
 - **Konfigurasjonsfiler** - Innstillinger og miljøvariabler
-- **Deployeringsskript** - Automatiserte deployeringsarbeidsflyter
+- **Utplasseringsskript** - Automatiserte utplasseringsarbeidsflyter
 
 ### Miljøer
-Miljøer representerer ulike deployeringsmål:
+Miljøer representerer ulike utplasseringsmål:
 - **Utvikling** - For testing og utvikling
 - **Staging** - Pre-produksjonsmiljø
 - **Produksjon** - Live produksjonsmiljø
@@ -62,12 +62,12 @@ Miljøer representerer ulike deployeringsmål:
 Hvert miljø opprettholder sin egen:
 - Azure ressursgruppe
 - Konfigurasjonsinnstillinger
-- Deployeringstilstand
+- Utplasseringsstatus
 
 ### Tjenester
 Tjenester er byggesteinene i applikasjonen din:
 - **Frontend** - Webapplikasjoner, SPAs
-- **Backend** - API-er, mikrotjenester
+- **Backend** - APIer, mikrotjenester
 - **Database** - Databaseløsninger
 - **Lagring** - Fil- og bloblagring
 
@@ -85,15 +85,33 @@ azd init --template <template-name>
 ### 2. Infrastructure as Code
 - **Bicep** - Azure sitt domene-spesifikke språk
 - **Terraform** - Multi-sky infrastrukturverktøy
-- **ARM-maler** - Azure Resource Manager-maler
+- **ARM Templates** - Azure Resource Manager-maler
 
 ### 3. Integrerte Arbeidsflyter
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Sikker Infrastrukturplanlegging med Forhåndsvisning
+Kommandoen `azd provision --preview` er en game-changer for sikre utplasseringer:
+- **Tørrkjøringsanalyse** - Viser hva som vil bli opprettet, endret eller slettet
+- **Null risiko** - Ingen faktiske endringer gjøres i Azure-miljøet ditt
+- **Teamarbeid** - Del forhåndsvisningsresultater før utplassering
+- **Kostnadsestimering** - Forstå ressurskostnader før forpliktelse
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Miljøadministrasjon
@@ -106,7 +124,7 @@ azd env list
 
 ## 📁 Prosjektstruktur
 
-En typisk azd-prosjektstruktur:
+En typisk azd prosjektstruktur:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -198,27 +216,27 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Forstå `azd down --force --purge`
-Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned azd-miljøet og alle tilknyttede ressurser. Her er en oversikt over hva hver flagg gjør:
+Kommandoen `azd down --force --purge` er en kraftig måte å fullstendig rive ned azd-miljøet ditt og alle tilknyttede ressurser. Her er en oversikt over hva hver flagg gjør:
 ```
 --force
 ```
 - Hopper over bekreftelsesprompter.
 - Nyttig for automatisering eller skripting der manuell input ikke er mulig.
-- Sikrer at nedrivningen fortsetter uten avbrudd, selv om CLI oppdager inkonsistenser.
+- Sikrer at nedrivningen fortsetter uten avbrudd, selv om CLI oppdager inkonsekvenser.
 
 ```
 --purge
 ```
 Sletter **all tilknyttet metadata**, inkludert:
-Miljøtilstand
+Miljøstatus
 Lokal `.azure`-mappe
-Bufret deployeringsinformasjon
-Forhindrer azd fra å "huske" tidligere deployeringer, som kan forårsake problemer som feil ressursgrupper eller utdaterte registerreferanser.
+Bufret utplasseringsinformasjon
+Forhindrer azd fra å "huske" tidligere utplasseringer, som kan forårsake problemer som feil ressursgrupper eller utdaterte registerreferanser.
 
 ### Hvorfor bruke begge?
-Når du har støtt på problemer med `azd up` på grunn av gjenværende tilstand eller delvise deployeringer, sikrer denne kombinasjonen en **ren start**.
+Når du har støtt på problemer med `azd up` på grunn av gjenværende status eller delvise utplasseringer, sikrer denne kombinasjonen en **ren start**.
 
-Det er spesielt nyttig etter manuelle ressurs-slettinger i Azure-portalen eller når du bytter maler, miljøer eller ressursgruppenavn.
+Det er spesielt nyttig etter manuelle ressurs-slettinger i Azure-portalen eller når du bytter maler, miljøer eller ressursgruppe-navnekonvensjoner.
 
 ### Administrere Flere Miljøer
 ```bash
@@ -236,7 +254,7 @@ azd env list
 
 ## 🔐 Autentisering og Legitimasjon
 
-Å forstå autentisering er avgjørende for vellykkede azd-deployeringer. Azure bruker flere autentiseringsmetoder, og azd benytter den samme legitimasjonskjeden som andre Azure-verktøy.
+Å forstå autentisering er avgjørende for vellykkede azd-utplasseringer. Azure bruker flere autentiseringsmetoder, og azd utnytter den samme legitimasjonskjeden som brukes av andre Azure-verktøy.
 
 ### Azure CLI Autentisering (`az login`)
 
@@ -314,8 +332,8 @@ az account show --query "user.type" --output tsv
 
 #### 4. Integrasjon med Utviklingsverktøy
 - **Visual Studio**: Bruker automatisk innlogget konto
-- **VS Code**: Bruker Azure Account-utvidelsen
-- **Azure CLI**: Bruker `az login`-legitimasjon (mest vanlig for lokal utvikling)
+- **VS Code**: Bruker legitimasjon fra Azure Account-utvidelsen
+- **Azure CLI**: Bruker `az login` legitimasjon (mest vanlig for lokal utvikling)
 
 ### AZD Autentiseringsoppsett
 
@@ -431,10 +449,10 @@ azd up
 
 ### Sikkerhetsbetraktninger
 
-1. **Legitimasjonslagring**: Aldri lagre legitimasjon i kildekode
-2. **Begrenset Omfang**: Bruk minst mulig privilegier for service principals
-3. **Tokenrotasjon**: Roter service principal-hemmeligheter regelmessig
-4. **Revisjonsspor**: Overvåk autentiserings- og deployeringsaktiviteter
+1. **Lagring av Legitimasjon**: Aldri lagre legitimasjon i kildekode
+2. **Begrensning av Omfang**: Bruk minst privilegium-prinsippet for service principals
+3. **Tokenrotasjon**: Roter service principal hemmeligheter regelmessig
+4. **Revisjonsspor**: Overvåk autentiserings- og utplasseringsaktiviteter
 5. **Nettverkssikkerhet**: Bruk private endepunkter når det er mulig
 
 ### Feilsøking av Autentisering
@@ -489,13 +507,13 @@ azd init --template template1
 
 ### 2. Utnytt Maler
 - Start med eksisterende maler
-- Tilpass etter behov
+- Tilpass etter dine behov
 - Lag gjenbrukbare maler for organisasjonen din
 
 ### 3. Miljøisolasjon
 - Bruk separate miljøer for utvikling/staging/produksjon
-- Aldri deploy direkte til produksjon fra lokal maskin
-- Bruk CI/CD-pipelines for produksjonsdeployeringer
+- Aldri utplasser direkte til produksjon fra lokal maskin
+- Bruk CI/CD-pipelines for produksjonsutplasseringer
 
 ### 4. Konfigurasjonsadministrasjon
 - Bruk miljøvariabler for sensitiv data
@@ -506,7 +524,7 @@ azd init --template template1
 
 ### Nybegynner (Uke 1-2)
 1. Installer azd og autentiser
-2. Deploy en enkel mal
+2. Utplasser en enkel mal
 3. Forstå prosjektstruktur
 4. Lær grunnleggende kommandoer (up, down, deploy)
 
@@ -519,7 +537,7 @@ azd init --template template1
 ### Avansert (Uke 5+)
 1. Lag egne maler
 2. Avanserte infrastrukturmønstre
-3. Multi-region deployeringer
+3. Multi-region utplasseringer
 4. Konfigurasjoner på bedriftsnivå
 
 ## Neste Steg
@@ -527,7 +545,7 @@ azd init --template template1
 **📖 Fortsett Kapittel 1 Læring:**
 - [Installasjon & Oppsett](installation.md) - Få azd installert og konfigurert
 - [Ditt Første Prosjekt](first-project.md) - Fullfør praktisk opplæring
-- [Konfigurasjonsguide](configuration.md) - Avanserte konfigurasjonsalternativer
+- [Konfigurasjonsveiledning](configuration.md) - Avanserte konfigurasjonsalternativer
 
 **🎯 Klar for Neste Kapittel?**
 - [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md) - Begynn å bygge AI-applikasjoner
@@ -549,3 +567,5 @@ azd init --template template1
 
 ---
 
+**Ansvarsfraskrivelse**:  
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

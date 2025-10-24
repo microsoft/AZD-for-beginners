@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:43:33+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:57:23+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "cs"
 }
 -->
-# AZD Základy - Porozumění Azure Developer CLI
+# Základy AZD - Porozumění Azure Developer CLI
 
-# AZD Základy - Klíčové koncepty a principy
+# Základy AZD - Klíčové koncepty a základy
 
 **Navigace kapitolou:**
 - **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
@@ -20,15 +20,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tato lekce vás seznámí s Azure Developer CLI (azd), výkonným nástrojem příkazového řádku, který urychluje cestu od lokálního vývoje k nasazení na Azure. Naučíte se základní koncepty, klíčové funkce a pochopíte, jak azd zjednodušuje nasazení cloud-native aplikací.
+Tato lekce vás seznámí s Azure Developer CLI (azd), výkonným nástrojem příkazového řádku, který urychluje cestu od lokálního vývoje k nasazení na Azure. Naučíte se základní koncepty, klíčové funkce a pochopíte, jak azd zjednodušuje nasazení cloudových aplikací.
 
 ## Cíle učení
 
 Na konci této lekce budete:
 - Rozumět tomu, co je Azure Developer CLI a jeho hlavní účel
-- Seznámeni se základními koncepty šablon, prostředí a služeb
-- Prozkoumat klíčové funkce, včetně vývoje založeného na šablonách a Infrastructure as Code
-- Pochopit strukturu projektu azd a pracovní postupy
+- Naučíte se základní koncepty šablon, prostředí a služeb
+- Prozkoumáte klíčové funkce, včetně vývoje na základě šablon a infrastruktury jako kódu
+- Pochopíte strukturu projektu azd a pracovní postupy
 - Připraveni na instalaci a konfiguraci azd pro vaše vývojové prostředí
 
 ## Výsledky učení
@@ -37,43 +37,43 @@ Po dokončení této lekce budete schopni:
 - Vysvětlit roli azd v moderních pracovních postupech cloudového vývoje
 - Identifikovat komponenty struktury projektu azd
 - Popsat, jak šablony, prostředí a služby spolupracují
-- Pochopit výhody Infrastructure as Code s azd
+- Pochopit výhody infrastruktury jako kódu s azd
 - Rozpoznat různé příkazy azd a jejich účely
 
 ## Co je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je nástroj příkazového řádku navržený k urychlení vaší cesty od lokálního vývoje k nasazení na Azure. Zjednodušuje proces vytváření, nasazení a správy cloud-native aplikací na Azure.
+Azure Developer CLI (azd) je nástroj příkazového řádku navržený k urychlení vaší cesty od lokálního vývoje k nasazení na Azure. Zjednodušuje proces vytváření, nasazení a správy cloudových aplikací na Azure.
 
 ## Základní koncepty
 
 ### Šablony
 Šablony jsou základem azd. Obsahují:
-- **Kód aplikace** - Váš zdrojový kód a závislosti
+- **Kód aplikace** - váš zdrojový kód a závislosti
 - **Definice infrastruktury** - Azure zdroje definované v Bicep nebo Terraform
-- **Konfigurační soubory** - Nastavení a proměnné prostředí
-- **Skripty nasazení** - Automatizované pracovní postupy nasazení
+- **Konfigurační soubory** - nastavení a proměnné prostředí
+- **Skripty nasazení** - automatizované pracovní postupy nasazení
 
 ### Prostředí
 Prostředí představují různé cíle nasazení:
-- **Vývojové** - Pro testování a vývoj
-- **Staging** - Předprodukční prostředí
-- **Produkční** - Živé produkční prostředí
+- **Vývoj** - pro testování a vývoj
+- **Staging** - předprodukční prostředí
+- **Produkce** - živé produkční prostředí
 
-Každé prostředí udržuje své vlastní:
-- Azure resource group
+Každé prostředí si udržuje vlastní:
+- Skupinu zdrojů Azure
 - Konfigurační nastavení
 - Stav nasazení
 
 ### Služby
 Služby jsou stavebními bloky vaší aplikace:
-- **Frontend** - Webové aplikace, SPAs
+- **Frontend** - webové aplikace, SPAs
 - **Backend** - API, mikroslužby
-- **Databáze** - Řešení pro ukládání dat
-- **Úložiště** - Úložiště souborů a blobů
+- **Databáze** - řešení pro ukládání dat
+- **Úložiště** - souborové a blobové úložiště
 
 ## Klíčové funkce
 
-### 1. Vývoj založený na šablonách
+### 1. Vývoj na základě šablon
 ```bash
 # Browse available templates
 azd template list
@@ -82,18 +82,36 @@ azd template list
 azd init --template <template-name>
 ```
 
-### 2. Infrastructure as Code
-- **Bicep** - Doménově specifický jazyk Azure
-- **Terraform** - Nástroj pro infrastrukturu napříč cloudy
-- **ARM Templates** - Šablony Azure Resource Manager
+### 2. Infrastruktura jako kód
+- **Bicep** - doménově specifický jazyk Azure
+- **Terraform** - nástroj pro infrastrukturu napříč cloudy
+- **ARM Templates** - šablony Azure Resource Manager
 
 ### 3. Integrované pracovní postupy
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Bezpečné plánování infrastruktury s náhledem
+Příkaz `azd provision --preview` je revoluční pro bezpečné nasazení:
+- **Analýza na sucho** - ukazuje, co bude vytvořeno, upraveno nebo smazáno
+- **Žádné riziko** - žádné skutečné změny nejsou provedeny ve vašem prostředí Azure
+- **Spolupráce týmu** - sdílejte výsledky náhledu před nasazením
+- **Odhad nákladů** - pochopte náklady na zdroje před závazkem
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Správa prostředí
@@ -197,28 +215,28 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## Porozumění `azd down --force --purge`
-Příkaz `azd down --force --purge` je výkonný způsob, jak kompletně odstranit vaše prostředí azd a všechny související zdroje. Zde je rozpis, co jednotlivé příznaky dělají:
+## Pochopení `azd down --force --purge`
+Příkaz `azd down --force --purge` je mocný způsob, jak kompletně odstranit vaše prostředí azd a všechny související zdroje. Zde je rozpis, co jednotlivé příznaky znamenají:
 ```
 --force
 ```
 - Přeskakuje potvrzovací výzvy.
-- Užitečné pro automatizaci nebo skriptování, kde není možné manuální zadávání.
+- Užitečné pro automatizaci nebo skriptování, kde manuální vstup není možný.
 - Zajišťuje, že odstranění proběhne bez přerušení, i když CLI detekuje nesrovnalosti.
 
 ```
 --purge
 ```
-Odstraní **veškerá související metadata**, včetně:
+Maže **veškerá související metadata**, včetně:
 Stavu prostředí
 Lokální složky `.azure`
 Informací o uloženém nasazení
-Zabraňuje azd "pamatovat si" předchozí nasazení, což může způsobit problémy, jako jsou nesprávné resource groups nebo zastaralé registry.
+Zabraňuje azd "pamatovat si" předchozí nasazení, což může způsobit problémy, jako jsou nesprávné skupiny zdrojů nebo zastaralé registry.
 
 ### Proč používat obojí?
 Když narazíte na problémy s `azd up` kvůli přetrvávajícímu stavu nebo částečným nasazením, tato kombinace zajistí **čistý start**.
 
-Je obzvláště užitečné po manuálním odstranění zdrojů v Azure portálu nebo při přepínání šablon, prostředí nebo konvencí pojmenování resource groups.
+Je obzvláště užitečné po manuálním odstranění zdrojů v portálu Azure nebo při přepínání šablon, prostředí nebo konvencí pojmenování skupin zdrojů.
 
 ### Správa více prostředí
 ```bash
@@ -236,7 +254,7 @@ azd env list
 
 ## 🔐 Autentizace a přihlašovací údaje
 
-Porozumění autentizaci je klíčové pro úspěšná nasazení azd. Azure používá několik metod autentizace a azd využívá stejný řetězec přihlašovacích údajů jako ostatní nástroje Azure.
+Porozumění autentizaci je klíčové pro úspěšná nasazení azd. Azure používá různé metody autentizace a azd využívá stejný řetězec přihlašovacích údajů jako ostatní nástroje Azure.
 
 ### Autentizace Azure CLI (`az login`)
 
@@ -262,15 +280,15 @@ az account list --output table
 az account set --subscription <subscription-id>
 ```
 
-### Průběh autentizace
+### Tok autentizace
 1. **Interaktivní přihlášení**: Otevře váš výchozí prohlížeč pro autentizaci
-2. **Device Code Flow**: Pro prostředí bez přístupu k prohlížeči
+2. **Tok kódu zařízení**: Pro prostředí bez přístupu k prohlížeči
 3. **Service Principal**: Pro automatizaci a scénáře CI/CD
-4. **Managed Identity**: Pro aplikace hostované na Azure
+4. **Spravovaná identita**: Pro aplikace hostované na Azure
 
 ### DefaultAzureCredential Chain
 
-`DefaultAzureCredential` je typ přihlašovacích údajů, který poskytuje zjednodušený zážitek z autentizace tím, že automaticky zkouší více zdrojů přihlašovacích údajů v konkrétním pořadí:
+`DefaultAzureCredential` je typ přihlašovacích údajů, který poskytuje zjednodušený zážitek z autentizace automatickým zkoušením více zdrojů přihlašovacích údajů v konkrétním pořadí:
 
 #### Pořadí řetězce přihlašovacích údajů
 ```mermaid
@@ -297,9 +315,9 @@ export AZURE_TENANT_ID="<tenant-id>"
 Používá se automaticky v:
 - Azure Kubernetes Service (AKS) s Workload Identity
 - GitHub Actions s OIDC federací
-- Jiných scénářích federované identity
+- Další scénáře federované identity
 
-#### 3. Managed Identity
+#### 3. Spravovaná identita
 Pro Azure zdroje jako:
 - Virtuální stroje
 - App Service
@@ -367,14 +385,14 @@ azd auth login
 ```
 
 #### Pro produkční prostředí
-- Používejte **Managed Identity** při běhu na Azure zdrojích
+- Používejte **Spravovanou identitu** při běhu na Azure zdrojích
 - Používejte **Service Principal** pro automatizační scénáře
 - Vyhněte se ukládání přihlašovacích údajů do kódu nebo konfiguračních souborů
 - Používejte **Azure Key Vault** pro citlivou konfiguraci
 
 ### Běžné problémy s autentizací a jejich řešení
 
-#### Problém: "Nebyla nalezena žádná předplatná"
+#### Problém: "Není nalezen žádný předplatný"
 ```bash
 # Solution: Set default subscription
 az account list --output table
@@ -417,7 +435,7 @@ az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Scénáře s více tenanty
+#### Scénáře s více nájemci
 ```bash
 # Switch between tenants
 az login --tenant tenant1.onmicrosoft.com
@@ -432,10 +450,10 @@ azd up
 ### Bezpečnostní úvahy
 
 1. **Ukládání přihlašovacích údajů**: Nikdy neukládejte přihlašovací údaje do zdrojového kódu
-2. **Omezení rozsahu**: Používejte princip nejmenších oprávnění pro service principals
-3. **Rotace tokenů**: Pravidelně rotujte tajemství service principal
-4. **Auditní stopa**: Monitorujte autentizační a nasazovací aktivity
-5. **Síťová bezpečnost**: Používejte privátní koncové body, pokud je to možné
+2. **Omezení rozsahu**: Používejte princip nejmenšího oprávnění pro service principals
+3. **Rotace tokenů**: Pravidelně měňte tajné klíče service principal
+4. **Auditní stopa**: Sledujte aktivity autentizace a nasazení
+5. **Síťová bezpečnost**: Používejte soukromé koncové body, kdykoli je to možné
 
 ### Řešení problémů s autentizací
 
@@ -451,7 +469,7 @@ az ad signed-in-user show      # Azure AD user details
 az group list                  # Test resource access
 ```
 
-## Porozumění `azd down --force --purge`
+## Pochopení `azd down --force --purge`
 
 ### Objevování
 ```bash
@@ -493,9 +511,9 @@ azd init --template template1
 - Vytvářejte opakovaně použitelné šablony pro vaši organizaci
 
 ### 3. Izolace prostředí
-- Používejte oddělená prostředí pro vývoj/staging/produkci
+- Používejte samostatná prostředí pro vývoj/staging/produkci
 - Nikdy nenasazujte přímo do produkce z lokálního stroje
-- Používejte CI/CD pipelines pro produkční nasazení
+- Používejte CI/CD pipelines pro nasazení do produkce
 
 ### 4. Správa konfigurace
 - Používejte proměnné prostředí pro citlivá data
@@ -507,18 +525,18 @@ azd init --template template1
 ### Začátečník (1.-2. týden)
 1. Nainstalujte azd a autentizujte se
 2. Nasazení jednoduché šablony
-3. Porozumění struktuře projektu
+3. Pochopte strukturu projektu
 4. Naučte se základní příkazy (up, down, deploy)
 
 ### Středně pokročilý (3.-4. týden)
-1. Přizpůsobení šablon
-2. Správa více prostředí
-3. Porozumění infrastrukturnímu kódu
-4. Nastavení CI/CD pipelines
+1. Přizpůsobte šablony
+2. Spravujte více prostředí
+3. Pochopte infrastrukturu jako kód
+4. Nastavte CI/CD pipelines
 
 ### Pokročilý (5. týden a dále)
-1. Vytváření vlastních šablon
-2. Pokročilé infrastrukturní vzory
+1. Vytvářejte vlastní šablony
+2. Pokročilé vzory infrastruktury
 3. Nasazení do více regionů
 4. Konfigurace na úrovni podniku
 
@@ -536,7 +554,7 @@ azd init --template template1
 
 - [Přehled Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galerie šablon](https://azure.github.io/awesome-azd/)
-- [Ukázky komunity](https://github.com/Azure-Samples)
+- [Ukázky od komunity](https://github.com/Azure-Samples)
 
 ---
 
@@ -549,3 +567,5 @@ azd init --template template1
 
 ---
 
+**Prohlášení**:  
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

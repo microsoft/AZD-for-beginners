@@ -1,49 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T14:51:37+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:09:37+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "pt"
 }
 -->
-# Verificações Pré-Desdobramento para Implementações AZD
+# Verificações Pré-voo para Implementações AZD
 
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 6 - Validação e Planeamento Pré-Desdobramento
+- **📖 Capítulo Atual**: Capítulo 6 - Validação e Planeamento Pré-Implementação
 - **⬅️ Anterior**: [Seleção de SKU](sku-selection.md)
 - **➡️ Próximo Capítulo**: [Capítulo 7: Resolução de Problemas](../troubleshooting/common-issues.md)
-- **🔧 Relacionado**: [Capítulo 4: Guia de Desdobramento](../deployment/deployment-guide.md)
+- **🔧 Relacionado**: [Capítulo 4: Guia de Implementação](../deployment/deployment-guide.md)
 
 ## Introdução
 
-Este guia abrangente fornece scripts e procedimentos de validação pré-desdobramento para garantir implementações bem-sucedidas com Azure Developer CLI antes de começarem. Aprenda a implementar verificações automatizadas para autenticação, disponibilidade de recursos, quotas, conformidade de segurança e requisitos de desempenho para evitar falhas de desdobramento e otimizar as taxas de sucesso.
+Este guia abrangente fornece scripts e procedimentos de validação pré-implementação para garantir implementações bem-sucedidas com Azure Developer CLI antes de começarem. Aprenda a implementar verificações automáticas para autenticação, disponibilidade de recursos, quotas, conformidade de segurança e requisitos de desempenho para evitar falhas de implementação e otimizar as taxas de sucesso.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este guia, irá:
-- Dominar técnicas e scripts de validação automatizada pré-desdobramento
-- Compreender estratégias abrangentes de verificação para autenticação, permissões e quotas
+- Dominar técnicas e scripts de validação pré-implementação automatizados
+- Compreender estratégias de verificação abrangentes para autenticação, permissões e quotas
 - Implementar procedimentos de validação de disponibilidade e capacidade de recursos
 - Configurar verificações de segurança e conformidade para políticas organizacionais
-- Projetar fluxos de trabalho de estimativa de custos e validação de orçamento
-- Criar automação personalizada de verificações pré-desdobramento para pipelines CI/CD
+- Projetar fluxos de trabalho de validação de estimativa de custos e orçamento
+- Criar automação personalizada de verificações pré-voo para pipelines CI/CD
 
 ## Resultados de Aprendizagem
 
 Após a conclusão, será capaz de:
-- Criar e executar scripts abrangentes de validação pré-desdobramento
-- Projetar fluxos de trabalho de verificação automatizada para diferentes cenários de desdobramento
-- Implementar procedimentos e políticas de validação específicas para o ambiente
-- Configurar monitorização proativa e alertas para prontidão de desdobramento
-- Resolver problemas pré-desdobramento e implementar ações corretivas
-- Integrar verificações pré-desdobramento em pipelines DevOps e fluxos de trabalho de automação
+- Criar e executar scripts de validação pré-voo abrangentes
+- Projetar fluxos de trabalho de verificação automatizados para diferentes cenários de implementação
+- Implementar procedimentos e políticas de validação específicos para o ambiente
+- Configurar monitorização proativa e alertas para prontidão de implementação
+- Resolver problemas pré-implementação e implementar ações corretivas
+- Integrar verificações pré-voo em pipelines DevOps e fluxos de trabalho automatizados
 
 ## Índice
 
 - [Visão Geral](../../../../docs/pre-deployment)
-- [Script Automatizado Pré-desdobramento](../../../../docs/pre-deployment)
+- [Script Automatizado de Verificação Pré-voo](../../../../docs/pre-deployment)
 - [Lista de Verificação Manual](../../../../docs/pre-deployment)
 - [Validação de Ambiente](../../../../docs/pre-deployment)
 - [Validação de Recursos](../../../../docs/pre-deployment)
@@ -55,28 +55,28 @@ Após a conclusão, será capaz de:
 
 ## Visão Geral
 
-As verificações pré-desdobramento são validações essenciais realizadas antes do desdobramento para garantir:
+As verificações pré-voo são validações essenciais realizadas antes da implementação para garantir:
 
 - **Disponibilidade de recursos** e quotas nas regiões alvo
 - **Autenticação e permissões** configuradas corretamente
-- **Validade de templates** e correção de parâmetros
+- **Validade dos templates** e correção dos parâmetros
 - **Conectividade de rede** e dependências
 - **Conformidade de segurança** com políticas organizacionais
 - **Estimativa de custos** dentro das restrições orçamentais
 
-### Quando Executar Verificações Pré-desdobramento
+### Quando Executar Verificações Pré-voo
 
-- **Antes do primeiro desdobramento** num novo ambiente
+- **Antes da primeira implementação** num novo ambiente
 - **Após alterações significativas nos templates**
-- **Antes de desdobramentos em produção**
+- **Antes de implementações em produção**
 - **Ao mudar de regiões Azure**
 - **Como parte de pipelines CI/CD**
 
 ---
 
-## Script Automatizado Pré-desdobramento
+## Script Automatizado de Verificação Pré-voo
 
-### Verificador Pré-desdobramento em PowerShell
+### Verificador Pré-voo em PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Verificador Pré-desdobramento em Bash
+### Verificador Pré-voo em Bash
 
 ```bash
 #!/bin/bash
@@ -792,9 +807,9 @@ main "$@"
 
 ## Lista de Verificação Manual
 
-### Lista de Verificação Pré-desdobramento
+### Lista de Verificação Pré-Implementação
 
-Imprima esta lista e verifique cada item antes do desdobramento:
+Imprima esta lista e verifique cada item antes da implementação:
 
 #### ✅ Configuração do Ambiente
 - [ ] AZD CLI instalado e atualizado para a versão mais recente
@@ -814,8 +829,9 @@ Imprima esta lista e verifique cada item antes do desdobramento:
 - [ ] Todos os serviços definidos em azure.yaml têm código-fonte correspondente
 - [ ] Templates Bicep no diretório `infra/` estão presentes
 - [ ] `main.bicep` compila sem erros (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Pré-visualização da infraestrutura executada com sucesso (`azd provision --preview`)
 - [ ] Todos os parâmetros necessários têm valores padrão ou serão fornecidos
-- [ ] Sem segredos hardcoded nos templates
+- [ ] Sem segredos codificados nos templates
 
 #### ✅ Planeamento de Recursos
 - [ ] Região Azure alvo selecionada e validada
@@ -826,16 +842,16 @@ Imprima esta lista e verifique cada item antes do desdobramento:
 
 #### ✅ Rede e Segurança
 - [ ] Conectividade de rede com endpoints Azure verificada
-- [ ] Configurações de firewall/proxy ajustadas, se necessário
+- [ ] Configurações de firewall/proxy configuradas, se necessário
 - [ ] Key Vault configurado para gestão de segredos
 - [ ] Identidades geridas usadas sempre que possível
 - [ ] Aplicações web com HTTPS ativado
 
 #### ✅ Gestão de Custos
-- [ ] Estimativas de custos calculadas usando o Azure Pricing Calculator
+- [ ] Estimativas de custos calculadas usando o Calculador de Preços Azure
 - [ ] Alertas de orçamento configurados, se necessário
 - [ ] SKUs apropriados selecionados para o tipo de ambiente
-- [ ] Capacidade reservada considerada para cargas de trabalho em produção
+- [ ] Capacidade reservada considerada para cargas de trabalho de produção
 
 #### ✅ Monitorização e Observabilidade
 - [ ] Application Insights configurado nos templates
@@ -847,7 +863,7 @@ Imprima esta lista e verifique cada item antes do desdobramento:
 - [ ] Estratégia de backup definida para recursos de dados
 - [ ] Objetivos de tempo de recuperação (RTO) documentados
 - [ ] Objetivos de ponto de recuperação (RPO) documentados
-- [ ] Plano de recuperação de desastres em produção implementado
+- [ ] Plano de recuperação de desastres em vigor para produção
 
 ---
 
@@ -1285,7 +1301,7 @@ steps:
 
 ## Resumo de Melhores Práticas
 
-### ✅ Melhores Práticas para Verificações Pré-desdobramento
+### ✅ Melhores Práticas para Verificações Pré-voo
 
 1. **Automatize Sempre que Possível**
    - Integre verificações em pipelines CI/CD
@@ -1309,22 +1325,22 @@ steps:
    - Relatórios resumidos para avaliação rápida
 
 5. **Falha Rápida**
-   - Pare o desdobramento se verificações críticas falharem
+   - Pare a implementação se verificações críticas falharem
    - Forneça orientações claras para resolução
    - Permita reexecução fácil das verificações
 
-### Armadilhas Comuns nas Verificações Pré-desdobramento
+### Erros Comuns nas Verificações Pré-voo
 
-1. **Ignorar validação** para desdobramentos "rápidos"
-2. **Verificação insuficiente de permissões** antes do desdobramento
-3. **Ignorar limites de quotas** até que o desdobramento falhe
+1. **Ignorar validação** para implementações "rápidas"
+2. **Verificação insuficiente de permissões** antes da implementação
+3. **Ignorar limites de quotas** até que a implementação falhe
 4. **Não validar templates** em pipelines CI/CD
 5. **Falta de validação de segurança** para ambientes de produção
 6. **Estimativa de custos inadequada** levando a surpresas orçamentais
 
 ---
 
-**Dica Pro**: Execute verificações pré-desdobramento como um trabalho separado no seu pipeline CI/CD antes do trabalho de desdobramento real. Isso permite identificar problemas cedo e fornece feedback mais rápido aos desenvolvedores.
+**Dica Pro**: Execute verificações pré-voo como um trabalho separado no seu pipeline CI/CD antes do trabalho de implementação real. Isso permite identificar problemas cedo e fornece feedback mais rápido aos desenvolvedores.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

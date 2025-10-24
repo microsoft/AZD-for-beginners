@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T12:48:17+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T16:24:12+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "en"
 }
@@ -18,25 +18,25 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This guide provides detailed scripts and procedures for pre-deployment validation to ensure smooth Azure Developer CLI deployments. Learn how to implement automated checks for authentication, resource availability, quotas, security compliance, and performance requirements to avoid deployment failures and maximize success rates.
+This detailed guide provides pre-deployment validation scripts and procedures to ensure successful Azure Developer CLI deployments before they start. Learn how to implement automated checks for authentication, resource availability, quotas, security compliance, and performance requirements to avoid deployment failures and improve success rates.
 
 ## Learning Goals
 
-By following this guide, you will:
-- Gain expertise in automated pre-deployment validation techniques and scripts
-- Understand strategies for checking authentication, permissions, and quotas
-- Learn how to validate resource availability and capacity
+By completing this guide, you will:
+- Master automated pre-deployment validation techniques and scripts
+- Understand comprehensive strategies for checking authentication, permissions, and quotas
+- Implement procedures for validating resource availability and capacity
 - Configure security and compliance checks aligned with organizational policies
-- Develop workflows for cost estimation and budget validation
-- Create custom automation for pre-flight checks in CI/CD pipelines
+- Design workflows for cost estimation and budget validation
+- Develop custom pre-flight check automation for CI/CD pipelines
 
 ## Learning Outcomes
 
 After completing this guide, you will be able to:
-- Develop and execute comprehensive pre-flight validation scripts
-- Design automated workflows for various deployment scenarios
-- Implement validation procedures tailored to specific environments
-- Set up proactive monitoring and alerts for deployment readiness
+- Create and run comprehensive pre-flight validation scripts
+- Design automated checking workflows for various deployment scenarios
+- Implement validation procedures and policies tailored to specific environments
+- Set up proactive monitoring and alerting for deployment readiness
 - Troubleshoot pre-deployment issues and apply corrective measures
 - Integrate pre-flight checks into DevOps pipelines and automation workflows
 
@@ -67,7 +67,7 @@ Pre-flight checks are critical validations performed before deployment to ensure
 ### When to Run Pre-flight Checks
 
 - **Before the first deployment** to a new environment
-- **After major template updates**
+- **After major template changes**
 - **Before production deployments**
 - **When switching Azure regions**
 - **As part of CI/CD pipelines**
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -794,17 +809,17 @@ main "$@"
 
 ### Pre-Deployment Checklist
 
-Print this checklist and confirm each item before deployment:
+Print this checklist and verify each item before deployment:
 
 #### ✅ Environment Setup
 - [ ] AZD CLI installed and updated to the latest version
 - [ ] Azure CLI installed and authenticated
 - [ ] Correct Azure subscription selected
-- [ ] Environment name is unique and adheres to naming conventions
-- [ ] Target resource group identified or ready for creation
+- [ ] Environment name is unique and follows naming conventions
+- [ ] Target resource group identified or can be created
 
 #### ✅ Authentication & Permissions
-- [ ] Successfully authenticated using `azd auth login`
+- [ ] Successfully authenticated with `azd auth login`
 - [ ] User has Contributor role on the target subscription/resource group
 - [ ] Service principal configured for CI/CD (if applicable)
 - [ ] No expired certificates or credentials
@@ -814,6 +829,7 @@ Print this checklist and confirm each item before deployment:
 - [ ] All services defined in azure.yaml have corresponding source code
 - [ ] Bicep templates in the `infra/` directory are present
 - [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Infrastructure preview runs successfully (`azd provision --preview`)
 - [ ] All required parameters have default values or will be provided
 - [ ] No hardcoded secrets in templates
 
@@ -826,14 +842,14 @@ Print this checklist and confirm each item before deployment:
 
 #### ✅ Network & Security
 - [ ] Network connectivity to Azure endpoints verified
-- [ ] Firewall/proxy settings configured if necessary
+- [ ] Firewall/proxy settings configured if needed
 - [ ] Key Vault configured for secrets management
-- [ ] Managed identities used wherever possible
+- [ ] Managed identities used where possible
 - [ ] HTTPS enforcement enabled for web applications
 
 #### ✅ Cost Management
 - [ ] Cost estimates calculated using Azure Pricing Calculator
-- [ ] Budget alerts configured if needed
+- [ ] Budget alerts configured if required
 - [ ] Appropriate SKUs selected for the environment type
 - [ ] Reserved capacity considered for production workloads
 
@@ -1290,12 +1306,12 @@ steps:
 1. **Automate Where Possible**
    - Integrate checks into CI/CD pipelines
    - Use scripts for repeatable validations
-   - Store results for audit purposes
+   - Store results for audit trails
 
 2. **Environment-Specific Validation**
-   - Tailor checks for dev/staging/prod environments
-   - Apply appropriate security requirements for each environment
-   - Optimize costs for non-production environments
+   - Different checks for dev/staging/prod
+   - Appropriate security requirements per environment
+   - Cost optimization for non-production environments
 
 3. **Comprehensive Coverage**
    - Authentication and permissions
@@ -1304,19 +1320,19 @@ steps:
    - Security and compliance requirements
 
 4. **Clear Reporting**
-   - Use color-coded status indicators
-   - Provide detailed error messages with resolution steps
-   - Generate summary reports for quick assessments
+   - Color-coded status indicators
+   - Detailed error messages with remediation steps
+   - Summary reports for quick assessment
 
 5. **Fail Fast**
-   - Halt deployment if critical checks fail
-   - Offer clear guidance for resolving issues
-   - Enable easy re-execution of checks
+   - Stop deployment if critical checks fail
+   - Provide clear guidance for resolution
+   - Enable easy re-running of checks
 
 ### Common Pre-flight Pitfalls
 
 1. **Skipping validation** for "quick" deployments
-2. **Insufficient permissions** checks before deployment
+2. **Insufficient permissions** checking before deployment
 3. **Ignoring quota limits** until deployment fails
 4. **Not validating templates** in CI/CD pipelines
 5. **Missing security validation** for production environments
@@ -1324,7 +1340,7 @@ steps:
 
 ---
 
-**Pro Tip**: Run pre-flight checks as a separate job in your CI/CD pipeline before the actual deployment job. This helps catch issues early and provides faster feedback to developers.
+**Pro Tip**: Run pre-flight checks as a separate job in your CI/CD pipeline before the actual deployment job. This allows you to catch issues early and provides faster feedback to developers.
 
 ---
 

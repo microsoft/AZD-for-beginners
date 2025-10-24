@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T16:09:57+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T16:29:35+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "de"
 }
@@ -13,38 +13,38 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 4 - Infrastruktur als Code & Bereitstellung
 - **⬅️ Vorheriges Kapitel**: [Bereitstellungsanleitung](deployment-guide.md)
-- **➡️ Nächstes Kapitel**: [Kapitel 5: Multi-Agent-AI-Lösungen](../../examples/retail-scenario.md)
+- **➡️ Nächstes Kapitel**: [Kapitel 5: Multi-Agent KI-Lösungen](../../examples/retail-scenario.md)
 - **🔧 Verwandtes Kapitel**: [Kapitel 6: Validierung vor der Bereitstellung](../pre-deployment/capacity-planning.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden behandelt alles, was Sie über die Bereitstellung und Verwaltung von Azure-Ressourcen mit Azure Developer CLI wissen müssen. Lernen Sie, Muster für Infrastruktur als Code (IaC) umzusetzen – von der grundlegenden Ressourcenerstellung bis hin zu fortschrittlichen, unternehmensgerechten Infrastrukturarchitekturen mit Bicep, ARM-Vorlagen, Terraform und Pulumi.
+Dieser umfassende Leitfaden behandelt alles, was Sie über die Bereitstellung und Verwaltung von Azure-Ressourcen mit Azure Developer CLI wissen müssen. Lernen Sie, Muster für Infrastruktur als Code (IaC) von der grundlegenden Ressourcenerstellung bis hin zu fortgeschrittenen, unternehmensgerechten Infrastrukturarchitekturen mit Bicep, ARM-Templates, Terraform und Pulumi umzusetzen.
 
 ## Lernziele
 
 Nach Abschluss dieses Leitfadens werden Sie:
-- Die Prinzipien von Infrastruktur als Code und die Bereitstellung von Azure-Ressourcen beherrschen
+- Prinzipien von Infrastruktur als Code und Azure-Ressourcenbereitstellung beherrschen
 - Verschiedene IaC-Anbieter verstehen, die von Azure Developer CLI unterstützt werden
-- Bicep-Vorlagen für gängige Anwendungsarchitekturen entwerfen und implementieren
+- Bicep-Templates für gängige Anwendungsarchitekturen entwerfen und implementieren
 - Ressourcenparameter, Variablen und umgebungsspezifische Einstellungen konfigurieren
 - Fortgeschrittene Infrastrukturmuster einschließlich Netzwerk und Sicherheit umsetzen
-- Den Lebenszyklus von Ressourcen, Updates und Abhängigkeitsauflösungen verwalten
+- Lebenszyklus von Ressourcen, Updates und Abhängigkeitsauflösung verwalten
 
 ## Lernergebnisse
 
-Nach Abschluss werden Sie in der Lage sein:
-- Azure-Infrastruktur mit Bicep und ARM-Vorlagen zu entwerfen und bereitzustellen
-- Komplexe Multi-Service-Architekturen mit korrekten Ressourcenabhängigkeiten zu konfigurieren
-- Parametrisierte Vorlagen für mehrere Umgebungen und Konfigurationen umzusetzen
-- Probleme bei der Infrastrukturbereitstellung zu beheben und Bereitstellungsfehler zu lösen
-- Prinzipien des Azure Well-Architected Frameworks auf das Infrastrukturdesign anzuwenden
-- Infrastruktur-Updates zu verwalten und Strategien für die Versionierung von Infrastruktur umzusetzen
+Nach Abschluss können Sie:
+- Azure-Infrastruktur mit Bicep und ARM-Templates entwerfen und bereitstellen
+- Komplexe Multi-Service-Architekturen mit korrekten Ressourcenabhängigkeiten konfigurieren
+- Parametrisierte Templates für verschiedene Umgebungen und Konfigurationen implementieren
+- Probleme bei der Infrastrukturbereitstellung beheben und Bereitstellungsfehler lösen
+- Prinzipien des Azure Well-Architected Frameworks auf das Infrastrukturdesign anwenden
+- Infrastruktur-Updates verwalten und Strategien zur Infrastrukturversionierung umsetzen
 
 ## Überblick über die Infrastrukturbereitstellung
 
 Azure Developer CLI unterstützt mehrere Anbieter für Infrastruktur als Code (IaC):
 - **Bicep** (empfohlen) - Azure-spezifische Domänensprache
-- **ARM-Vorlagen** - JSON-basierte Azure Resource Manager-Vorlagen
+- **ARM-Templates** - JSON-basierte Azure Resource Manager Templates
 - **Terraform** - Multi-Cloud-Infrastruktur-Tool
 - **Pulumi** - Moderne Infrastruktur als Code mit Programmiersprachen
 
@@ -65,9 +65,9 @@ Azure Account
 - **Security**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep-Infrastrukturvorlagen
+## Bicep-Infrastruktur-Templates
 
-### Grundstruktur einer Bicep-Vorlage
+### Grundstruktur eines Bicep-Templates
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -660,7 +660,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Fortgeschrittene Bereitstellungsmuster
 
-### Multi-Region-Bereitstellung
+### Bereitstellung in mehreren Regionen
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Ressourcen-Updates und Migrationen
+## 🧪 Vorschau und Validierung der Infrastruktur (NEU)
+
+### Vorschau von Infrastrukturänderungen vor der Bereitstellung
+
+Die Funktion `azd provision --preview` ermöglicht es Ihnen, **die Infrastrukturbereitstellung zu simulieren**, bevor tatsächlich Ressourcen bereitgestellt werden. Sie ähnelt `terraform plan` oder `bicep what-if` und bietet Ihnen eine **Trockenlauf-Ansicht** der Änderungen, die an Ihrer Azure-Umgebung vorgenommen würden.
+
+#### 🛠️ Was sie macht
+- **Analysiert Ihre IaC-Templates** (Bicep oder Terraform)
+- **Zeigt eine Vorschau der Ressourcenänderungen**: Hinzufügungen, Löschungen, Updates
+- **Wendet keine Änderungen an** — sie ist schreibgeschützt und sicher auszuführen
+
+#### � Anwendungsfälle
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Diese Funktion hilft Ihnen:
+- **Infrastrukturänderungen validieren**, bevor Ressourcen bereitgestellt werden
+- **Fehlkonfigurationen frühzeitig erkennen** im Entwicklungszyklus
+- **Sicher in Teams zusammenarbeiten**
+- **Bereitstellungen mit minimalen Berechtigungen sicherstellen**, ohne Überraschungen
+
+Besonders nützlich ist sie bei:
+- Arbeit mit komplexen Multi-Service-Umgebungen
+- Änderungen an Produktionsinfrastruktur
+- Validierung von Template-Modifikationen vor der Genehmigung von Pull-Requests
+- Schulung neuer Teammitglieder in Infrastrukturmustern
+
+### Beispielausgabe der Vorschau
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Ressourcen-Updates und Migrationen
 
 ### Sichere Ressourcen-Updates
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -849,7 +909,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organisation von Ausgaben
+### 4. Organisation der Ausgaben
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -866,15 +926,15 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Nächste Schritte
 
-- [Planung vor der Bereitstellung](../pre-deployment/capacity-planning.md) - Ressourcenverfügbarkeit validieren
+- [Planung vor der Bereitstellung](../pre-deployment/capacity-planning.md) - Verfügbarkeit von Ressourcen validieren
 - [Häufige Probleme](../troubleshooting/common-issues.md) - Infrastrukturprobleme beheben
-- [Debugging-Leitfaden](../troubleshooting/debugging.md) - Bereitstellungsprobleme debuggen
-- [SKU-Auswahl](../pre-deployment/sku-selection.md) - Geeignete Servicestufen auswählen
+- [Debugging-Leitfaden](../troubleshooting/debugging.md) - Probleme bei der Bereitstellung debuggen
+- [SKU-Auswahl](../pre-deployment/sku-selection.md) - Geeignete Service-Tiers auswählen
 
 ## Zusätzliche Ressourcen
 
-- [Azure Bicep-Dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager-Vorlagen](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Bicep Dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 

@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T16:44:18+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:16:00+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "pl"
 }
 -->
 # Kontrole przed wdrożeniem dla AZD
 
-**Nawigacja po rozdziałach:**
+**Nawigacja po rozdziale:**
 - **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
 - **📖 Obecny rozdział**: Rozdział 6 - Walidacja i planowanie przed wdrożeniem
 - **⬅️ Poprzedni**: [Wybór SKU](sku-selection.md)
@@ -18,13 +18,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik dostarcza skryptów i procedur walidacji przed wdrożeniem, aby zapewnić pomyślne wdrożenia za pomocą Azure Developer CLI. Dowiedz się, jak wdrożyć automatyczne kontrole uwierzytelniania, dostępności zasobów, limitów, zgodności z zasadami bezpieczeństwa oraz wymagań wydajnościowych, aby zapobiec niepowodzeniom wdrożenia i zoptymalizować wskaźniki sukcesu.
+Ten kompleksowy przewodnik zawiera skrypty i procedury walidacji przed wdrożeniem, które zapewniają pomyślne wdrożenia za pomocą Azure Developer CLI. Dowiedz się, jak wdrożyć automatyczne kontrole uwierzytelnienia, dostępności zasobów, limitów, zgodności z bezpieczeństwem oraz wymagań wydajnościowych, aby zapobiec niepowodzeniom wdrożenia i zoptymalizować wskaźniki sukcesu.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika będziesz:
-- Mistrzowsko stosować techniki i skrypty automatycznej walidacji przed wdrożeniem
-- Rozumieć kompleksowe strategie kontroli uwierzytelniania, uprawnień i limitów
+- Mistrzem technik i skryptów automatycznej walidacji przed wdrożeniem
+- Rozumieć kompleksowe strategie kontroli uwierzytelnienia, uprawnień i limitów
 - Wdrażać procedury walidacji dostępności i pojemności zasobów
 - Konfigurować kontrole bezpieczeństwa i zgodności z politykami organizacyjnymi
 - Projektować przepływy pracy szacowania kosztów i walidacji budżetu
@@ -38,12 +38,12 @@ Po ukończeniu będziesz w stanie:
 - Wdrażać procedury i polityki walidacji specyficzne dla środowiska
 - Konfigurować proaktywne monitorowanie i alerty dotyczące gotowości do wdrożenia
 - Rozwiązywać problemy przed wdrożeniem i wdrażać działania naprawcze
-- Integracja kontroli przed wdrożeniem z potokami DevOps i przepływami automatyzacji
+- Integrować kontrole przed wdrożeniem z potokami DevOps i przepływami automatyzacji
 
 ## Spis treści
 
 - [Przegląd](../../../../docs/pre-deployment)
-- [Automatyczny skrypt kontroli przed wdrożeniem](../../../../docs/pre-deployment)
+- [Automatyczny skrypt przed wdrożeniem](../../../../docs/pre-deployment)
 - [Lista kontrolna walidacji ręcznej](../../../../docs/pre-deployment)
 - [Walidacja środowiska](../../../../docs/pre-deployment)
 - [Walidacja zasobów](../../../../docs/pre-deployment)
@@ -58,23 +58,23 @@ Po ukończeniu będziesz w stanie:
 Kontrole przed wdrożeniem to kluczowe walidacje wykonywane przed wdrożeniem, aby upewnić się, że:
 
 - **Dostępność zasobów** i limity w docelowych regionach są odpowiednie
-- **Uwierzytelnianie i uprawnienia** są poprawnie skonfigurowane
+- **Uwierzytelnienie i uprawnienia** są poprawnie skonfigurowane
 - **Poprawność szablonów** i parametrów jest zapewniona
 - **Łączność sieciowa** i zależności są spełnione
-- **Zgodność z zasadami bezpieczeństwa** organizacji jest zapewniona
-- **Szacowanie kosztów** mieści się w ramach budżetu
+- **Zgodność z bezpieczeństwem** z politykami organizacyjnymi
+- **Szacowanie kosztów** mieści się w granicach budżetu
 
 ### Kiedy uruchamiać kontrole przed wdrożeniem
 
 - **Przed pierwszym wdrożeniem** w nowym środowisku
 - **Po znaczących zmianach w szablonach**
 - **Przed wdrożeniami produkcyjnymi**
-- **Podczas zmiany regionów Azure**
-- **Jako część potoków CI/CD**
+- **Przy zmianie regionów Azure**
+- **W ramach potoków CI/CD**
 
 ---
 
-## Automatyczny skrypt kontroli przed wdrożeniem
+## Automatyczny skrypt przed wdrożeniem
 
 ### PowerShell Pre-flight Checker
 
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -794,7 +809,7 @@ main "$@"
 
 ### Lista kontrolna przed wdrożeniem
 
-Wydrukuj tę listę i zweryfikuj każdy punkt przed wdrożeniem:
+Wydrukuj tę listę kontrolną i zweryfikuj każdy punkt przed wdrożeniem:
 
 #### ✅ Konfiguracja środowiska
 - [ ] Zainstalowany i zaktualizowany do najnowszej wersji AZD CLI
@@ -803,17 +818,18 @@ Wydrukuj tę listę i zweryfikuj każdy punkt przed wdrożeniem:
 - [ ] Nazwa środowiska jest unikalna i zgodna z konwencjami nazewnictwa
 - [ ] Zidentyfikowana docelowa grupa zasobów lub możliwość jej utworzenia
 
-#### ✅ Uwierzytelnianie i uprawnienia
+#### ✅ Uwierzytelnienie i uprawnienia
 - [ ] Pomyślnie uwierzytelniono za pomocą `azd auth login`
 - [ ] Użytkownik posiada rolę Contributor w docelowej subskrypcji/grupie zasobów
 - [ ] Skonfigurowano główną usługę dla CI/CD (jeśli dotyczy)
 - [ ] Brak wygasłych certyfikatów lub poświadczeń
 
-#### ✅ Walidacja szablonów
-- [ ] `azure.yaml` istnieje i jest poprawnym YAML
+#### ✅ Walidacja szablonu
+- [ ] `azure.yaml` istnieje i jest poprawnym plikiem YAML
 - [ ] Wszystkie usługi zdefiniowane w azure.yaml mają odpowiadający kod źródłowy
 - [ ] Szablony Bicep w katalogu `infra/` są obecne
 - [ ] `main.bicep` kompiluje się bez błędów (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Podgląd infrastruktury działa poprawnie (`azd provision --preview`)
 - [ ] Wszystkie wymagane parametry mają wartości domyślne lub zostaną dostarczone
 - [ ] Brak twardo zakodowanych sekretów w szablonach
 
@@ -826,13 +842,13 @@ Wydrukuj tę listę i zweryfikuj każdy punkt przed wdrożeniem:
 
 #### ✅ Sieć i bezpieczeństwo
 - [ ] Zweryfikowano łączność sieciową z punktami końcowymi Azure
-- [ ] Skonfigurowano ustawienia zapory/proxy, jeśli wymagane
+- [ ] Skonfigurowano ustawienia zapory/proxy, jeśli to konieczne
 - [ ] Skonfigurowano Key Vault do zarządzania sekretami
-- [ ] Wykorzystano zarządzane tożsamości, gdzie to możliwe
-- [ ] Włączono wymuszanie HTTPS dla aplikacji webowych
+- [ ] W miarę możliwości używane są zarządzane tożsamości
+- [ ] Wymuszone HTTPS dla aplikacji internetowych
 
 #### ✅ Zarządzanie kosztami
-- [ ] Obliczono szacunkowe koszty za pomocą Azure Pricing Calculator
+- [ ] Szacowanie kosztów obliczone za pomocą Kalkulatora Cen Azure
 - [ ] Skonfigurowano alerty budżetowe, jeśli wymagane
 - [ ] Wybrano odpowiednie SKU dla typu środowiska
 - [ ] Rozważono zarezerwowaną pojemność dla obciążeń produkcyjnych
@@ -847,7 +863,7 @@ Wydrukuj tę listę i zweryfikuj każdy punkt przed wdrożeniem:
 - [ ] Zdefiniowano strategię tworzenia kopii zapasowych dla zasobów danych
 - [ ] Udokumentowano cele czasu odzyskiwania (RTO)
 - [ ] Udokumentowano cele punktu odzyskiwania (RPO)
-- [ ] Opracowano plan odzyskiwania awaryjnego dla produkcji
+- [ ] Plan odzyskiwania po awarii dla produkcji jest gotowy
 
 ---
 
@@ -1289,7 +1305,7 @@ steps:
 
 1. **Automatyzacja, gdzie to możliwe**
    - Integracja kontroli z potokami CI/CD
-   - Wykorzystanie skryptów do powtarzalnych walidacji
+   - Używanie skryptów do powtarzalnych walidacji
    - Przechowywanie wyników dla celów audytowych
 
 2. **Walidacja specyficzna dla środowiska**
@@ -1298,12 +1314,12 @@ steps:
    - Optymalizacja kosztów dla środowisk nieprodukcyjnych
 
 3. **Kompleksowe pokrycie**
-   - Uwierzytelnianie i uprawnienia
+   - Uwierzytelnienie i uprawnienia
    - Limity zasobów i dostępność
    - Walidacja szablonów i składni
    - Wymagania dotyczące bezpieczeństwa i zgodności
 
-4. **Przejrzyste raportowanie**
+4. **Jasne raportowanie**
    - Wskaźniki statusu w kolorach
    - Szczegółowe komunikaty o błędach z krokami naprawczymi
    - Raporty podsumowujące dla szybkiej oceny
@@ -1313,26 +1329,26 @@ steps:
    - Jasne wskazówki dotyczące rozwiązania problemu
    - Możliwość łatwego ponownego uruchomienia kontroli
 
-### Typowe pułapki kontroli przed wdrożeniem
+### Typowe błędy w kontrolach przed wdrożeniem
 
 1. **Pomijanie walidacji** dla "szybkich" wdrożeń
 2. **Niewystarczające sprawdzanie uprawnień** przed wdrożeniem
-3. **Ignorowanie limitów** aż do momentu niepowodzenia wdrożenia
+3. **Ignorowanie limitów** do momentu niepowodzenia wdrożenia
 4. **Brak walidacji szablonów** w potokach CI/CD
 5. **Pomijanie walidacji bezpieczeństwa** dla środowisk produkcyjnych
-6. **Niewystarczające szacowanie kosztów**, prowadzące do niespodzianek budżetowych
+6. **Niedostateczne szacowanie kosztów**, prowadzące do niespodzianek budżetowych
 
 ---
 
-**Porada**: Uruchamiaj kontrole przed wdrożeniem jako osobne zadanie w potoku CI/CD przed właściwym zadaniem wdrożeniowym. Pozwoli to na wczesne wykrycie problemów i szybsze przekazywanie informacji zwrotnych do deweloperów.
+**Porada**: Uruchamiaj kontrole przed wdrożeniem jako osobne zadanie w potoku CI/CD przed właściwym zadaniem wdrożeniowym. Pozwoli to na wczesne wykrycie problemów i szybsze przekazanie informacji zwrotnej programistom.
 
 ---
 
 **Nawigacja**
 - **Poprzednia lekcja**: [Wybór SKU](sku-selection.md)
-- **Następna lekcja**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Następna lekcja**: [Podręczna ściąga](../../resources/cheat-sheet.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

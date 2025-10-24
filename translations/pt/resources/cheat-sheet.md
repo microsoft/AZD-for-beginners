@@ -1,39 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T14:57:11+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:09:27+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "pt"
 }
 -->
-# Guia de Comandos - Comandos Essenciais do AZD
+# Folha de Referência de Comandos - Comandos Essenciais do AZD
 
 **Referência Rápida para Todos os Capítulos**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../README.md)
 - **📖 Início Rápido**: [Capítulo 1: Fundamentos e Início Rápido](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Comandos de IA**: [Capítulo 2: Desenvolvimento com Foco em IA](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 Comandos de IA**: [Capítulo 2: Desenvolvimento Focado em IA](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avançado**: [Capítulo 4: Infraestrutura como Código](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introdução
 
-Este guia abrangente oferece uma referência rápida para os comandos mais utilizados do Azure Developer CLI, organizados por categoria com exemplos práticos. Ideal para consultas rápidas durante o desenvolvimento, resolução de problemas e operações diárias com projetos azd.
+Esta folha de referência abrangente fornece uma consulta rápida para os comandos mais utilizados do Azure Developer CLI, organizados por categoria com exemplos práticos. Perfeita para consultas rápidas durante o desenvolvimento, resolução de problemas e operações diárias com projetos azd.
 
 ## Objetivos de Aprendizagem
 
-Ao utilizar este guia, você irá:
-- Ter acesso instantâneo aos comandos e sintaxes essenciais do Azure Developer CLI
+Ao utilizar esta folha de referência, você irá:
+- Ter acesso instantâneo aos comandos essenciais do Azure Developer CLI e sua sintaxe
 - Compreender a organização dos comandos por categorias funcionais e casos de uso
 - Consultar exemplos práticos para cenários comuns de desenvolvimento e implantação
 - Acessar comandos de resolução de problemas para uma solução rápida de questões
 - Encontrar opções avançadas de configuração e personalização de forma eficiente
-- Localizar comandos para gestão de ambientes e fluxos de trabalho com múltiplos ambientes
+- Localizar comandos de gestão de ambientes e fluxos de trabalho multiambiente
 
 ## Resultados de Aprendizagem
 
-Com consultas regulares a este guia, você será capaz de:
-- Executar comandos azd com confiança, sem precisar consultar a documentação completa
-- Resolver problemas comuns rapidamente utilizando os comandos de diagnóstico apropriados
+Com o uso regular desta folha de referência, você será capaz de:
+- Executar comandos azd com confiança sem precisar consultar a documentação completa
+- Resolver rapidamente problemas comuns utilizando comandos de diagnóstico apropriados
 - Gerir múltiplos ambientes e cenários de implantação de forma eficiente
 - Aplicar recursos avançados e opções de configuração do azd conforme necessário
 - Solucionar problemas de implantação utilizando sequências sistemáticas de comandos
@@ -72,7 +72,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Comandos Principais de Implantação
 
-### Fluxo de Trabalho Completo de Implantação
+### Fluxo Completo de Implantação
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -190,7 +192,7 @@ azd show --output json
 
 ## 📊 Monitorização e Registos
 
-### Registos da Aplicação
+### Registos de Aplicação
 ```bash
 # View logs from all services
 azd logs
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Gestão de Serviços
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Fluxo de Trabalho com Múltiplos Ambientes
+### Fluxo de Trabalho Multiambiente
 ```bash
 # Set up environments
 azd env new dev
@@ -360,7 +371,7 @@ azd info
 az account show
 ```
 
-### Depuração de Modelos
+### Depuração de Templates
 ```bash
 # List available templates with details
 azd template list --output json
@@ -374,7 +385,7 @@ azd template validate <template-name>
 
 ## 📁 Comandos de Ficheiros e Diretórios
 
-### Estrutura do Projeto
+### Estrutura de Projeto
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -389,7 +400,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 
 ## 🎨 Formatação de Saída
 
-### Saída em JSON
+### Saída JSON
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -547,7 +558,7 @@ azd version
 azd version --output json
 ```
 
-### Links para Documentação
+### Links de Documentação
 ```bash
 # Open documentation in browser
 azd docs
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Dica**: Adicione este guia aos favoritos e use `Ctrl+F` para encontrar rapidamente os comandos de que precisa!
+**Dica**: Adicione esta folha de referência aos seus favoritos e use `Ctrl+F` para encontrar rapidamente os comandos que precisa!
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original no seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se uma tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

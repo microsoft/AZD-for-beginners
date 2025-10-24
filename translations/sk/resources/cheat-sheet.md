@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T10:12:24+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:59:35+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "sk"
 }
@@ -10,10 +10,10 @@ CO_OP_TRANSLATOR_METADATA:
 # Príručka príkazov - Základné príkazy AZD
 
 **Rýchly prehľad všetkých kapitol**
-- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../README.md)
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../README.md)
 - **📖 Rýchly štart**: [Kapitola 1: Základy a rýchly štart](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI príkazy**: [Kapitola 2: Vývoj orientovaný na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Pokročilé**: [Kapitola 4: Infrastruktúra ako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🔧 Pokročilé**: [Kapitola 4: Infraštruktúra ako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Úvod
 
@@ -21,25 +21,25 @@ Táto komplexná príručka poskytuje rýchly prehľad najčastejšie používan
 
 ## Ciele učenia
 
-Používaním tejto príručky:
-- Získate okamžitý prístup k základným príkazom a syntaxe Azure Developer CLI
-- Pochopíte organizáciu príkazov podľa funkčných kategórií a prípadov použitia
-- Nájdete praktické príklady pre bežné scenáre vývoja a nasadenia
-- Získate prístup k príkazom na riešenie problémov pre rýchle odstránenie chýb
-- Efektívne vyhľadáte možnosti pokročilej konfigurácie a prispôsobenia
-- Nájdete príkazy na správu prostredí a pracovné postupy pre viacero prostredí
+Používaním tejto príručky budete:
+- Mať okamžitý prístup k základným príkazom a syntaxe Azure Developer CLI
+- Rozumieť organizácii príkazov podľa funkčných kategórií a prípadov použitia
+- Odkazovať na praktické príklady pre bežné scenáre vývoja a nasadenia
+- Nájsť príkazy na riešenie problémov pre rýchle odstránenie chýb
+- Efektívne vyhľadávať pokročilé možnosti konfigurácie a prispôsobenia
+- Lokalizovať príkazy na správu prostredí a pracovné postupy pre viacero prostredí
 
 ## Výsledky učenia
 
 Pravidelným používaním tejto príručky budete schopní:
-- Sebavedome vykonávať príkazy azd bez potreby úplnej dokumentácie
+- Sebavedome vykonávať príkazy azd bez nutnosti odkazovať na kompletnú dokumentáciu
 - Rýchlo riešiť bežné problémy pomocou vhodných diagnostických príkazov
 - Efektívne spravovať viacero prostredí a scenáre nasadenia
 - Používať pokročilé funkcie azd a možnosti konfigurácie podľa potreby
-- Systematicky riešiť problémy s nasadením pomocou sekvencií príkazov
+- Riešiť problémy s nasadením pomocou systematických sekvencií príkazov
 - Optimalizovať pracovné postupy efektívnym využívaním skratiek a možností azd
 
-## Príkazy na začiatok
+## Základné príkazy na začiatok
 
 ### Autentifikácia
 ```bash
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -220,7 +222,7 @@ azd monitor --insights
 
 ## 🛠️ Príkazy údržby
 
-### Vyčistenie
+### Čistenie
 ```bash
 # Remove all Azure resources
 azd down
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Správa služieb
@@ -389,7 +400,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 
 ## 🎨 Formátovanie výstupu
 
-### Výstup vo formáte JSON
+### JSON výstup
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -401,7 +412,7 @@ azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Výstup vo formáte tabuľky
+### Tabuľkový výstup
 ```bash
 # Format as table
 azd env list --output table
@@ -410,7 +421,7 @@ azd service list --output table
 
 ## 🔧 Bežné kombinácie príkazov
 
-### Skript kontroly stavu
+### Skript na kontrolu stavu
 ```bash
 #!/bin/bash
 # Quick health check
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -439,7 +450,7 @@ for env in dev staging production; do
 done
 ```
 
-### Skript na vyčistenie zdrojov
+### Skript na čistenie zdrojov
 ```bash
 #!/bin/bash
 # Clean up old environments
@@ -498,9 +509,9 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Tipy pre profesionálov
+## 💡 Tipy od profesionálov
 
-### Alias pre rýchlejší pracovný postup
+### Alias pre rýchlejšie pracovné postupy
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -568,5 +579,5 @@ azd template show <template-name> --docs
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

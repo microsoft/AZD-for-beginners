@@ -1,56 +1,56 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T08:31:33+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:47:11+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "tl"
 }
 -->
-# Pagpo-provision ng Azure Resources gamit ang AZD
+# Pagproprovision ng Azure Resources gamit ang AZD
 
 **Pag-navigate sa Kabanata:**
 - **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 4 - Infrastructure as Code at Deployment
-- **⬅️ Nakaraang Kabanata**: [Deployment Guide](deployment-guide.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 4 - Infrastructure as Code & Deployment
+- **⬅️ Nakaraan**: [Deployment Guide](deployment-guide.md)
 - **➡️ Susunod na Kabanata**: [Kabanata 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
 - **🔧 Kaugnay**: [Kabanata 6: Pre-Deployment Validation](../pre-deployment/capacity-planning.md)
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng kailangan mong malaman tungkol sa pagpo-provision at pamamahala ng Azure resources gamit ang Azure Developer CLI. Matutunan ang pag-implement ng Infrastructure as Code (IaC) patterns mula sa simpleng paglikha ng resources hanggang sa advanced na enterprise-grade infrastructure architectures gamit ang Bicep, ARM templates, Terraform, at Pulumi.
+Ang gabay na ito ay sumasaklaw sa lahat ng kailangan mong malaman tungkol sa pagproprovision at pamamahala ng mga Azure resources gamit ang Azure Developer CLI. Matutunan kung paano ipatupad ang mga pattern ng Infrastructure as Code (IaC) mula sa simpleng paglikha ng resources hanggang sa mga advanced na enterprise-grade na arkitektura ng imprastruktura gamit ang Bicep, ARM templates, Terraform, at Pulumi.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng gabay na ito, ikaw ay:
-- Magiging bihasa sa mga prinsipyo ng Infrastructure as Code at pagpo-provision ng Azure resources
+- Magiging bihasa sa mga prinsipyo ng Infrastructure as Code at pagproprovision ng Azure resources
 - Maiintindihan ang iba't ibang IaC providers na sinusuportahan ng Azure Developer CLI
-- Makakagawa at makakapag-implement ng Bicep templates para sa karaniwang application architectures
-- Makakapag-configure ng resource parameters, variables, at environment-specific settings
-- Makakapag-implement ng advanced infrastructure patterns kabilang ang networking at security
-- Makakapamahala ng resource lifecycle, updates, at dependency resolution
+- Makakagawa at makakapagpatupad ng mga Bicep templates para sa karaniwang arkitektura ng aplikasyon
+- Makakapag-configure ng mga parameter ng resources, variables, at mga setting na pangkapaligiran
+- Makakapagpatupad ng mga advanced na pattern ng imprastruktura kabilang ang networking at seguridad
+- Makakapamahala sa lifecycle ng resources, mga update, at pagresolba ng dependencies
 
 ## Mga Resulta ng Pag-aaral
 
 Sa pagtatapos, ikaw ay:
-- Makakapagdisenyo at makakapag-provision ng Azure infrastructure gamit ang Bicep at ARM templates
-- Makakapag-configure ng kumplikadong multi-service architectures na may tamang resource dependencies
-- Makakapag-implement ng parameterized templates para sa iba't ibang environments at configurations
-- Makakapag-troubleshoot ng mga isyu sa infrastructure provisioning at makakapag-resolve ng deployment failures
-- Makakapag-apply ng Azure Well-Architected Framework principles sa infrastructure design
-- Makakapamahala ng infrastructure updates at makakapag-implement ng infrastructure versioning strategies
+- Makakapagdisenyo at makakapagprovision ng Azure infrastructure gamit ang Bicep at ARM templates
+- Makakapag-configure ng mga kumplikadong multi-service architectures na may tamang dependencies ng resources
+- Makakapagpatupad ng mga parameterized templates para sa iba't ibang kapaligiran at mga configuration
+- Makakapag-troubleshoot ng mga isyu sa pagproprovision ng imprastruktura at makakapagresolba ng mga pagkabigo sa deployment
+- Makakapagpatupad ng mga prinsipyo ng Azure Well-Architected Framework sa disenyo ng imprastruktura
+- Makakapamahala ng mga update sa imprastruktura at makakapagpatupad ng mga estratehiya sa versioning ng imprastruktura
 
-## Pangkalahatang-ideya ng Infrastructure Provisioning
+## Pangkalahatang-ideya ng Pagproprovision ng Imprastruktura
 
 Sinusuportahan ng Azure Developer CLI ang iba't ibang Infrastructure as Code (IaC) providers:
 - **Bicep** (inirerekomenda) - Domain-specific language ng Azure
-- **ARM Templates** - JSON-based Azure Resource Manager templates
-- **Terraform** - Multi-cloud infrastructure tool
-- **Pulumi** - Modernong infrastructure as code gamit ang programming languages
+- **ARM Templates** - JSON-based na Azure Resource Manager templates
+- **Terraform** - Multi-cloud na tool para sa imprastruktura
+- **Pulumi** - Modernong Infrastructure as Code gamit ang mga programming language
 
 ## Pag-unawa sa Azure Resources
 
-### Hierarchy ng Resource
+### Hierarchy ng Resources
 ```
 Azure Account
 └── Subscriptions
@@ -58,14 +58,14 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Karaniwang Azure Services para sa Mga Aplikasyon
+### Karaniwang Serbisyo ng Azure para sa Mga Aplikasyon
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
+- **Seguridad**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep Infrastructure Templates
+## Mga Template ng Bicep Infrastructure
 
 ### Pangunahing Estruktura ng Bicep Template
 ```bicep
@@ -137,9 +137,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Advanced na Patterns ng Bicep
+### Mga Advanced na Pattern ng Bicep
 
-#### Modular na Infrastructure
+#### Modular na Imprastruktura
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -188,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Conditional Resource Creation
+#### Kondisyonal na Paglikha ng Resources
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -209,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Pagpo-provision ng Database
+## 🗃️ Pagproprovision ng Database
 
 ### Cosmos DB
 ```bicep
@@ -307,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Pamamahala ng Seguridad at Secrets
+## 🔒 Pamamahala ng Seguridad at Mga Lihim
 
 ### Integrasyon ng Key Vault
 ```bicep
@@ -570,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Mga Configurations na Pang-environment
+## 🔧 Mga Configurations na Pangkapaligiran
 
-### Parameter Files para sa Iba't ibang Environments
+### Mga Parameter Files para sa Iba't ibang Kapaligiran
 ```json
 // infra/main.parameters.dev.json
 {
@@ -626,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Conditional Resource Provisioning
+### Kondisyonal na Pagproprovision ng Resources
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -658,9 +658,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Advanced na Patterns ng Provisioning
+## 🚀 Mga Advanced na Pattern ng Pagproprovision
 
-### Deployment sa Multi-Region
+### Deployment sa Maraming Rehiyon
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -728,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Pagsusuri ng Infrastructure
+### Pagsusuri ng Imprastruktura
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -764,21 +764,81 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Updates ng Resource at Migrations
+## 🧪 Preview at Validation ng Imprastruktura (BAGO)
 
-### Ligtas na Updates ng Resource
+### I-preview ang Mga Pagbabago sa Imprastruktura Bago ang Deployment
+
+Ang tampok na `azd provision --preview` ay nagbibigay-daan sa iyo na **i-simulate ang pagproprovision ng imprastruktura** bago aktwal na mag-deploy ng mga resources. Katulad ito ng `terraform plan` o `bicep what-if`, na nagbibigay ng **dry-run view** ng mga pagbabagong gagawin sa iyong Azure environment.
+
+#### 🛠️ Ano ang Ginagawa Nito
+- **Sinusuri ang iyong mga IaC templates** (Bicep o Terraform)
+- **Ipinapakita ang preview ng mga pagbabago sa resources**: mga karagdagan, pagtanggal, mga update
+- **Hindi ina-apply ang mga pagbabago** — ito ay read-only at ligtas gamitin
+
+#### � Mga Gamit
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Apply changes incrementally
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Ang command na ito ay tumutulong sa iyo na:
+- **I-validate ang mga pagbabago sa imprastruktura** bago mag-commit ng resources
+- **Matukoy ang mga maling configuration nang maaga** sa development cycle
+- **Makipagtulungan nang ligtas** sa mga team environment
+- **Siguraduhin ang least-privilege deployments** nang walang sorpresa
+
+Ito ay partikular na kapaki-pakinabang kapag:
+- Gumagawa sa mga kumplikadong multi-service environments
+- Gumagawa ng mga pagbabago sa production infrastructure
+- Nagva-validate ng mga pagbabago sa template bago ang pag-apruba ng PR
+- Nagsasanay ng mga bagong miyembro ng team sa mga pattern ng imprastruktura
+
+### Halimbawa ng Preview Output
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Mga Update at Migration ng Resources
+
+### Ligtas na Mga Update sa Resources
+```bash
+# Preview infrastructure changes first (RECOMMENDED)
+azd provision --preview
+
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
 azd provision --rollback
 ```
 
-### Database Migrations
+### Migration ng Database
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -807,9 +867,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Mga Best Practices
+## 🎯 Mga Pinakamahusay na Praktika
 
-### 1. Mga Convention sa Pagpapangalan ng Resource
+### 1. Mga Convention sa Pangalan ng Resources
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -820,7 +880,7 @@ var naming = {
 }
 ```
 
-### 2. Tagging Strategy
+### 2. Estratehiya sa Tagging
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -867,14 +927,14 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## Mga Susunod na Hakbang
 
 - [Pre-deployment Planning](../pre-deployment/capacity-planning.md) - I-validate ang availability ng resources
-- [Common Issues](../troubleshooting/common-issues.md) - I-troubleshoot ang mga problema sa infrastructure
-- [Debugging Guide](../troubleshooting/debugging.md) - I-debug ang mga isyu sa provisioning
-- [SKU Selection](../pre-deployment/sku-selection.md) - Pumili ng naaangkop na service tiers
+- [Mga Karaniwang Isyu](../troubleshooting/common-issues.md) - I-troubleshoot ang mga problema sa imprastruktura
+- [Gabay sa Debugging](../troubleshooting/debugging.md) - I-debug ang mga isyu sa pagproprovision
+- [Pagpili ng SKU](../pre-deployment/sku-selection.md) - Pumili ng angkop na service tiers
 
-## Karagdagang Resources
+## Karagdagang Mga Resources
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Dokumentasyon ng Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Mga Template ng Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang orihinal na wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Bagamat sinisikap naming maging tumpak, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

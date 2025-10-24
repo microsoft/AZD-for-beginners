@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T14:36:06+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T16:50:50+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "ko"
 }
@@ -14,7 +14,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 현재 챕터**: 챕터 6 - 배포 전 검증 및 계획
 - **⬅️ 이전**: [SKU 선택](sku-selection.md)
 - **➡️ 다음 챕터**: [챕터 7: 문제 해결](../troubleshooting/common-issues.md)
-- **🔧 관련**: [챕터 4: 배포 가이드](../deployment/deployment-guide.md)
+- **🔧 관련 자료**: [챕터 4: 배포 가이드](../deployment/deployment-guide.md)
 
 ## 소개
 
@@ -23,7 +23,7 @@ CO_OP_TRANSLATOR_METADATA:
 ## 학습 목표
 
 이 가이드를 완료하면 다음을 할 수 있습니다:
-- 자동화된 사전 검증 기술과 스크립트를 숙달
+- 자동화된 배포 전 검증 기술 및 스크립트를 숙달
 - 인증, 권한 및 할당량에 대한 포괄적인 점검 전략 이해
 - 리소스 가용성과 용량 검증 절차 구현
 - 조직 정책에 따른 보안 및 준수 점검 구성
@@ -33,10 +33,10 @@ CO_OP_TRANSLATOR_METADATA:
 ## 학습 결과
 
 완료 후, 다음을 수행할 수 있습니다:
-- 포괄적인 사전 검증 스크립트 작성 및 실행
-- 다양한 배포 시나리오에 대한 자동화된 점검 워크플로 설계
+- 포괄적인 사전 점검 검증 스크립트 생성 및 실행
+- 다양한 배포 시나리오를 위한 자동화된 점검 워크플로 설계
 - 환경별 검증 절차 및 정책 구현
-- 배포 준비 상태에 대한 사전 모니터링 및 경고 구성
+- 배포 준비 상태를 위한 사전 모니터링 및 알림 구성
 - 배포 전 문제를 해결하고 수정 조치를 구현
 - DevOps 파이프라인 및 자동화 워크플로에 사전 점검 통합
 
@@ -58,7 +58,7 @@ CO_OP_TRANSLATOR_METADATA:
 사전 점검은 배포 전에 수행되는 필수 검증으로 다음을 보장합니다:
 
 - 대상 지역에서의 **리소스 가용성** 및 할당량
-- **인증 및 권한**이 올바르게 구성됨
+- **인증 및 권한**이 적절히 구성됨
 - **템플릿 유효성** 및 매개변수 정확성
 - **네트워크 연결성** 및 종속성
 - 조직 정책에 따른 **보안 준수**
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -804,30 +819,31 @@ main "$@"
 - [ ] 대상 리소스 그룹 식별 또는 생성 가능
 
 #### ✅ 인증 및 권한
-- [ ] `azd auth login`으로 성공적으로 인증
+- [ ] `azd auth login`으로 성공적으로 인증됨
 - [ ] 대상 구독/리소스 그룹에 대한 Contributor 역할 보유
 - [ ] CI/CD를 위한 서비스 주체 구성 (해당 시)
 - [ ] 만료된 인증서나 자격 증명 없음
 
 #### ✅ 템플릿 검증
-- [ ] `azure.yaml`이 존재하며 유효한 YAML 형식
-- [ ] azure.yaml에 정의된 모든 서비스에 해당 소스 코드 존재
+- [ ] `azure.yaml`이 존재하며 유효한 YAML임
+- [ ] azure.yaml에 정의된 모든 서비스에 해당 소스 코드가 있음
 - [ ] `infra/` 디렉토리에 Bicep 템플릿 존재
 - [ ] `main.bicep`이 오류 없이 컴파일됨 (`az bicep build --file infra/main.bicep`)
-- [ ] 모든 필수 매개변수에 기본값이 있거나 제공 예정
+- [ ] 🧪 인프라 미리보기 성공적으로 실행됨 (`azd provision --preview`)
+- [ ] 모든 필수 매개변수에 기본값이 있거나 제공될 예정
 - [ ] 템플릿에 하드코딩된 비밀 없음
 
 #### ✅ 리소스 계획
 - [ ] 대상 Azure 지역 선택 및 검증
 - [ ] 대상 지역에서 필요한 Azure 서비스 사용 가능
-- [ ] 계획된 리소스에 충분한 할당량 존재
+- [ ] 계획된 리소스에 충분한 할당량 사용 가능
 - [ ] 리소스 명명 충돌 확인
 - [ ] 리소스 간 종속성 이해
 
 #### ✅ 네트워크 및 보안
 - [ ] Azure 엔드포인트에 대한 네트워크 연결성 확인
 - [ ] 필요한 경우 방화벽/프록시 설정 구성
-- [ ] 비밀 관리용 Key Vault 구성
+- [ ] Key Vault를 비밀 관리에 사용
 - [ ] 가능한 경우 관리 ID 사용
 - [ ] 웹 애플리케이션에 HTTPS 강제 적용
 
@@ -839,7 +855,7 @@ main "$@"
 
 #### ✅ 모니터링 및 관찰성
 - [ ] 템플릿에 Application Insights 구성
-- [ ] 로그 분석 워크스페이스 계획
+- [ ] Log Analytics 작업 공간 계획
 - [ ] 주요 메트릭에 대한 알림 규칙 정의
 - [ ] 애플리케이션에 상태 확인 엔드포인트 구현
 
@@ -847,7 +863,7 @@ main "$@"
 - [ ] 데이터 리소스에 대한 백업 전략 정의
 - [ ] 복구 시간 목표(RTO) 문서화
 - [ ] 복구 지점 목표(RPO) 문서화
-- [ ] 프로덕션을 위한 재해 복구 계획 수립
+- [ ] 프로덕션을 위한 재해 복구 계획 마련
 
 ---
 
@@ -1287,17 +1303,17 @@ steps:
 
 ### ✅ 사전 점검 모범 사례
 
-1. **가능한 경우 자동화**
+1. **가능한 자동화**
    - 점검을 CI/CD 파이프라인에 통합
    - 반복 가능한 검증을 위한 스크립트 사용
    - 감사 기록을 위한 결과 저장
 
 2. **환경별 검증**
-   - 개발/스테이징/프로덕션에 따른 점검 차별화
+   - 개발/스테이징/프로덕션에 따른 다른 점검
    - 환경별 적합한 보안 요구 사항
    - 비프로덕션 환경에 대한 비용 최적화
 
-3. **포괄적인 범위**
+3. **포괄적 검증**
    - 인증 및 권한
    - 리소스 할당량 및 가용성
    - 템플릿 검증 및 구문
@@ -1311,7 +1327,7 @@ steps:
 5. **빠른 실패**
    - 중요한 점검 실패 시 배포 중단
    - 해결을 위한 명확한 지침 제공
-   - 점검 재실행이 용이하도록 설정
+   - 점검을 쉽게 재실행 가능하게 설정
 
 ### 일반적인 사전 점검 실수
 
@@ -1319,12 +1335,12 @@ steps:
 2. **배포 전에 권한 점검 부족**
 3. **할당량 제한 무시**로 인해 배포 실패
 4. **CI/CD 파이프라인에서 템플릿 검증 생략**
-5. **프로덕션 환경에서 보안 검증 누락**
-6. **불충분한 비용 추정**으로 인한 예산 초과
+5. **프로덕션 환경에 대한 보안 점검 누락**
+6. **불충분한 비용 추정**으로 인한 예산 문제
 
 ---
 
-**팁**: 사전 점검을 CI/CD 파이프라인에서 실제 배포 작업 전에 별도의 작업으로 실행하세요. 이를 통해 문제를 조기에 발견하고 개발자에게 빠른 피드백을 제공합니다.
+**팁**: 사전 점검을 실제 배포 작업 전에 CI/CD 파이프라인의 별도 작업으로 실행하세요. 이를 통해 문제를 조기에 발견하고 개발자에게 빠른 피드백을 제공합니다.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.

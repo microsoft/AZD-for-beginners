@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T07:40:20+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:41:19+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "vi"
 }
@@ -18,24 +18,24 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giới thiệu
 
-Hướng dẫn toàn diện này bao gồm mọi thứ bạn cần biết về việc cung cấp và quản lý tài nguyên Azure bằng Azure Developer CLI. Học cách triển khai các mẫu Hạ tầng dưới dạng mã (IaC) từ việc tạo tài nguyên cơ bản đến các kiến trúc hạ tầng cấp doanh nghiệp tiên tiến sử dụng Bicep, ARM templates, Terraform, và Pulumi.
+Hướng dẫn toàn diện này bao gồm mọi thứ bạn cần biết về việc cung cấp và quản lý tài nguyên Azure bằng Azure Developer CLI. Học cách triển khai các mẫu Hạ tầng dưới dạng mã (IaC) từ việc tạo tài nguyên cơ bản đến các kiến trúc hạ tầng cấp doanh nghiệp tiên tiến bằng Bicep, ARM templates, Terraform và Pulumi.
 
 ## Mục tiêu học tập
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
-- Thành thạo các nguyên tắc Hạ tầng dưới dạng mã và cung cấp tài nguyên Azure
+- Làm chủ các nguyên tắc Hạ tầng dưới dạng mã và cung cấp tài nguyên Azure
 - Hiểu các nhà cung cấp IaC khác nhau được hỗ trợ bởi Azure Developer CLI
 - Thiết kế và triển khai các mẫu Bicep cho các kiến trúc ứng dụng phổ biến
-- Cấu hình các tham số tài nguyên, biến, và cài đặt dành riêng cho môi trường
+- Cấu hình các tham số tài nguyên, biến và cài đặt theo môi trường cụ thể
 - Triển khai các mẫu hạ tầng tiên tiến bao gồm mạng và bảo mật
-- Quản lý vòng đời tài nguyên, cập nhật, và giải quyết phụ thuộc
+- Quản lý vòng đời tài nguyên, cập nhật và giải quyết phụ thuộc
 
 ## Kết quả học tập
 
-Sau khi hoàn thành, bạn sẽ có khả năng:
+Sau khi hoàn thành, bạn sẽ có thể:
 - Thiết kế và cung cấp hạ tầng Azure bằng Bicep và ARM templates
 - Cấu hình các kiến trúc đa dịch vụ phức tạp với các phụ thuộc tài nguyên phù hợp
-- Triển khai các mẫu có tham số hóa cho nhiều môi trường và cấu hình
+- Triển khai các mẫu được tham số hóa cho nhiều môi trường và cấu hình
 - Khắc phục sự cố cung cấp hạ tầng và giải quyết các lỗi triển khai
 - Áp dụng các nguyên tắc của Khung Kiến trúc Tốt của Azure vào thiết kế hạ tầng
 - Quản lý cập nhật hạ tầng và triển khai các chiến lược phiên bản hạ tầng
@@ -50,7 +50,7 @@ Azure Developer CLI hỗ trợ nhiều nhà cung cấp Hạ tầng dưới dạn
 
 ## Hiểu về tài nguyên Azure
 
-### Cấu trúc phân cấp tài nguyên
+### Cấu trúc tài nguyên
 ```
 Azure Account
 └── Subscriptions
@@ -570,7 +570,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Cấu hình dành riêng cho môi trường
+## 🔧 Cấu hình theo môi trường
 
 ### Tệp tham số cho các môi trường khác nhau
 ```json
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Cập nhật và di chuyển tài nguyên
+## 🧪 Xem trước & Xác thực hạ tầng (MỚI)
+
+### Xem trước thay đổi hạ tầng trước khi triển khai
+
+Tính năng `azd provision --preview` cho phép bạn **mô phỏng việc cung cấp hạ tầng** trước khi thực sự triển khai tài nguyên. Nó tương tự như `terraform plan` hoặc `bicep what-if`, cung cấp cho bạn một **cái nhìn thử nghiệm** về những thay đổi sẽ được thực hiện đối với môi trường Azure của bạn.
+
+#### 🛠️ Những gì nó làm
+- **Phân tích các mẫu IaC của bạn** (Bicep hoặc Terraform)
+- **Hiển thị bản xem trước các thay đổi tài nguyên**: thêm, xóa, cập nhật
+- **Không áp dụng thay đổi** — chỉ đọc và an toàn để chạy
+
+#### � Các trường hợp sử dụng
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Lệnh này giúp bạn:
+- **Xác thực các thay đổi hạ tầng** trước khi cam kết tài nguyên
+- **Phát hiện lỗi cấu hình sớm** trong chu kỳ phát triển
+- **Hợp tác an toàn** trong môi trường nhóm
+- **Đảm bảo triển khai với quyền tối thiểu** mà không có bất ngờ
+
+Đặc biệt hữu ích khi:
+- Làm việc với môi trường đa dịch vụ phức tạp
+- Thực hiện thay đổi đối với hạ tầng sản xuất
+- Xác thực các sửa đổi mẫu trước khi phê duyệt PR
+- Đào tạo thành viên mới trong nhóm về các mẫu hạ tầng
+
+### Ví dụ về đầu ra xem trước
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Cập nhật và di chuyển tài nguyên
 
 ### Cập nhật tài nguyên an toàn
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -866,7 +926,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Bước tiếp theo
 
-- [Lập kế hoạch trước triển khai](../pre-deployment/capacity-planning.md) - Xác thực tính khả dụng của tài nguyên
+- [Lập kế hoạch trước triển khai](../pre-deployment/capacity-planning.md) - Xác thực khả năng tài nguyên
 - [Các vấn đề phổ biến](../troubleshooting/common-issues.md) - Khắc phục sự cố hạ tầng
 - [Hướng dẫn gỡ lỗi](../troubleshooting/debugging.md) - Gỡ lỗi các vấn đề cung cấp
 - [Lựa chọn SKU](../pre-deployment/sku-selection.md) - Chọn các cấp dịch vụ phù hợp
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

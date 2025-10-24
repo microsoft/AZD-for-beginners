@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T23:22:20+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:27:33+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "sv"
 }
@@ -10,10 +10,10 @@ CO_OP_TRANSLATOR_METADATA:
 # Kommandoguide - Viktiga AZD-kommandon
 
 **Snabbreferens för alla kapitel**
-- **📚 Kurshem**: [AZD För Nybörjare](../README.md)
+- **📚 Kursens startsida**: [AZD För Nybörjare](../README.md)
 - **📖 Snabbstart**: [Kapitel 1: Grundläggande & Snabbstart](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI-kommandon**: [Kapitel 2: AI-Driven Utveckling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Avancerat**: [Kapitel 4: Infrastruktur som Kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🔧 Avancerat**: [Kapitel 4: Infrastruktur som kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduktion
 
@@ -21,19 +21,19 @@ Denna omfattande kommandoguide ger en snabbreferens för de mest använda Azure 
 
 ## Lärandemål
 
-Genom att använda denna guide kommer du att:
+Genom att använda denna kommandoguide kommer du att:
 - Ha direkt tillgång till viktiga Azure Developer CLI-kommandon och syntax
 - Förstå hur kommandon är organiserade efter funktionella kategorier och användningsområden
 - Referera till praktiska exempel för vanliga utvecklings- och distributionsscenarier
 - Få tillgång till felsökningskommandon för snabb problemlösning
 - Hitta avancerade konfigurations- och anpassningsalternativ effektivt
-- Lokalisera kommandon för miljöhantering och arbetsflöden med flera miljöer
+- Hantera miljöer och arbetsflöden med flera miljöer
 
 ## Läranderesultat
 
-Med regelbunden användning av denna guide kommer du att kunna:
-- Utföra azd-kommandon med självförtroende utan att behöva konsultera fullständig dokumentation
-- Snabbt lösa vanliga problem med hjälp av lämpliga diagnostiska kommandon
+Med regelbunden användning av denna kommandoguide kommer du att kunna:
+- Utföra azd-kommandon med självförtroende utan att behöva fullständig dokumentation
+- Snabbt lösa vanliga problem med lämpliga diagnostiska kommandon
 - Effektivt hantera flera miljöer och distributionsscenarier
 - Använda avancerade azd-funktioner och konfigurationsalternativ vid behov
 - Felsöka distributionsproblem med systematiska kommandosekvenser
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Tjänstehantering
@@ -344,7 +355,7 @@ azd show --output json
 
 ## 🔍 Felsökningskommandon
 
-### Debug-information
+### Felsökningsinformation
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tips**: Bokmärk denna guide och använd `Ctrl+F` för att snabbt hitta de kommandon du behöver!
+**Tips**: Bokmärk denna kommandoguide och använd `Ctrl+F` för att snabbt hitta de kommandon du behöver!
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

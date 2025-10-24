@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T22:49:22+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:22:05+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "el"
 }
@@ -12,7 +12,7 @@ CO_OP_TRANSLATOR_METADATA:
 **Γρήγορη Αναφορά για Όλα τα Κεφάλαια**
 - **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../README.md)
 - **📖 Γρήγορη Εκκίνηση**: [Κεφάλαιο 1: Βάση & Γρήγορη Εκκίνηση](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Εντολές AI**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 Εντολές AI**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Προχωρημένο**: [Κεφάλαιο 4: Υποδομή ως Κώδικας](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Εισαγωγή
@@ -23,11 +23,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 Χρησιμοποιώντας αυτό το φυλλάδιο, θα:
 - Έχετε άμεση πρόσβαση στις βασικές εντολές και τη σύνταξη του Azure Developer CLI
-- Κατανοήσετε την οργάνωση των εντολών ανά λειτουργική κατηγορία και χρήση
+- Κατανοήσετε την οργάνωση των εντολών ανά λειτουργικές κατηγορίες και περιπτώσεις χρήσης
 - Ανατρέξετε σε πρακτικά παραδείγματα για κοινά σενάρια ανάπτυξης και υλοποίησης
 - Βρείτε εντολές αντιμετώπισης προβλημάτων για γρήγορη επίλυση ζητημάτων
-- Εντοπίσετε επιλογές προηγμένης διαμόρφωσης και προσαρμογής
-- Εντοπίσετε εντολές διαχείρισης περιβάλλοντος και ροής εργασίας πολλαπλών περιβαλλόντων
+- Εντοπίσετε επιλογές προηγμένης διαμόρφωσης και προσαρμογής αποτελεσματικά
+- Εντοπίσετε εντολές διαχείρισης περιβάλλοντος και ροές εργασίας πολλαπλών περιβαλλόντων
 
 ## Αποτελέσματα Μάθησης
 
@@ -39,7 +39,7 @@ CO_OP_TRANSLATOR_METADATA:
 - Αντιμετωπίζετε προβλήματα υλοποίησης χρησιμοποιώντας συστηματικές ακολουθίες εντολών
 - Βελτιστοποιείτε τις ροές εργασίας μέσω αποτελεσματικής χρήσης συντομεύσεων και επιλογών του azd
 
-## Εντολές Εκκίνησης
+## Εντολές Ξεκινήματος
 
 ### Αυθεντικοποίηση
 ```bash
@@ -72,7 +72,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Βασικές Εντολές Υλοποίησης
 
-### Πλήρης Ροή Εργασίας Υλοποίησης
+### Πλήρης Ροή Υλοποίησης
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -249,7 +251,7 @@ azd info
 
 ## 🔧 Προχωρημένες Εντολές
 
-### Ροές Εργασίας και CI/CD
+### Ροές CI/CD και Pipeline
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Διαχείριση Υπηρεσιών
@@ -424,11 +435,11 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
-### Σύγκριση Περιβαλλόντων
+### Σύγκριση Περιβάλλοντος
 ```bash
 #!/bin/bash
 # Compare environments
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Συμβουλές Επαγγελματιών
 
-### Ψευδώνυμα για Ταχύτερη Ροή Εργασίας
+### Ψευδώνυμα για Γρηγορότερη Ροή Εργασίας
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -563,10 +574,10 @@ azd template show <template-name> --docs
 ---
 
 **Πλοήγηση**
-- **Προηγούμενο Μάθημα**: [Έλεγχοι Πριν την Υλοποίηση](../docs/pre-deployment/preflight-checks.md)
+- **Προηγούμενο Μάθημα**: [Έλεγχοι Προετοιμασίας](../docs/pre-deployment/preflight-checks.md)
 - **Επόμενο Μάθημα**: [Γλωσσάριο](glossary.md)
 
 ---
 
 **Αποποίηση ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτόματες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.

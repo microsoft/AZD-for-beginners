@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T06:17:27+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:31:58+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "no"
 }
@@ -12,23 +12,23 @@ CO_OP_TRANSLATOR_METADATA:
 **Kapittelnavigasjon:**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
 - **📖 Nåværende Kapittel**: Kapittel 4 - Infrastruktur som kode & Utrulling
-- **⬅️ Forrige**: [Utrullingsguide](deployment-guide.md)
+- **⬅️ Forrige**: [Utrullingsveiledning](deployment-guide.md)
 - **➡️ Neste Kapittel**: [Kapittel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
 - **🔧 Relatert**: [Kapittel 6: Validering før utrulling](../pre-deployment/capacity-planning.md)
 
 ## Introduksjon
 
-Denne omfattende guiden dekker alt du trenger å vite om klargjøring og administrasjon av Azure-ressurser ved bruk av Azure Developer CLI. Lær å implementere mønstre for Infrastruktur som kode (IaC), fra enkel ressursoppretting til avanserte bedriftsarkitekturer ved bruk av Bicep, ARM-maler, Terraform og Pulumi.
+Denne omfattende veiledningen dekker alt du trenger å vite om klargjøring og administrasjon av Azure-ressurser ved bruk av Azure Developer CLI. Lær å implementere mønstre for Infrastruktur som kode (IaC), fra grunnleggende ressursopprettelse til avanserte bedriftsarkitekturer ved bruk av Bicep, ARM-maler, Terraform og Pulumi.
 
 ## Læringsmål
 
-Ved å fullføre denne guiden vil du:
+Ved å fullføre denne veiledningen vil du:
 - Mestre prinsippene for Infrastruktur som kode og klargjøring av Azure-ressurser
 - Forstå flere IaC-leverandører som støttes av Azure Developer CLI
 - Designe og implementere Bicep-maler for vanlige applikasjonsarkitekturer
 - Konfigurere ressursparametere, variabler og miljøspesifikke innstillinger
 - Implementere avanserte infrastrukturmønstre inkludert nettverk og sikkerhet
-- Administrere ressurslivssyklus, oppdateringer og avhengighetsløsning
+- Administrere ressurslivssyklus, oppdateringer og avhengighetsløsninger
 
 ## Læringsutbytte
 
@@ -37,15 +37,15 @@ Etter fullføring vil du kunne:
 - Konfigurere komplekse arkitekturer med flere tjenester og riktige ressursavhengigheter
 - Implementere parameteriserte maler for flere miljøer og konfigurasjoner
 - Feilsøke problemer med infrastrukturklargjøring og løse utrullingsfeil
-- Anvende prinsippene fra Azure Well-Architected Framework i infrastrukturdesign
-- Administrere infrastrukturendringer og implementere strategier for versjonering av infrastruktur
+- Anvende prinsippene fra Azure Well-Architected Framework til infrastrukturdesign
+- Administrere infrastrukturoppdateringer og implementere strategier for versjonering av infrastruktur
 
 ## Oversikt over klargjøring av infrastruktur
 
 Azure Developer CLI støtter flere leverandører for Infrastruktur som kode (IaC):
 - **Bicep** (anbefalt) - Azures domene-spesifikke språk
 - **ARM-maler** - JSON-baserte Azure Resource Manager-maler
-- **Terraform** - Verktøy for multi-sky infrastruktur
+- **Terraform** - Multi-cloud infrastrukturverktøy
 - **Pulumi** - Moderne infrastruktur som kode med programmeringsspråk
 
 ## Forstå Azure-ressurser
@@ -67,7 +67,7 @@ Azure Account
 
 ## Bicep-infrastrukturmaler
 
-### Grunnleggende struktur for Bicep-maler
+### Grunnleggende Bicep-malstruktur
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -188,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Betinget ressursoppretting
+#### Betinget ressursopprettelse
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -536,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Tilpassede metrikker og varsler
+### Egendefinerte metrikker og varsler
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -626,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Betinget klargjøring av ressurser
+### Betinget ressursklargjøring
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -728,7 +728,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Testing av infrastruktur
+### Infrastrukturtesting
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Ressursoppdateringer og migreringer
+## 🧪 Forhåndsvisning og validering av infrastruktur (NYHET)
 
-### Sikker oppdatering av ressurser
+### Forhåndsvis infrastrukturendringer før utrulling
+
+Funksjonen `azd provision --preview` lar deg **simulere klargjøring av infrastruktur** før du faktisk utruller ressurser. Den ligner på `terraform plan` eller `bicep what-if`, og gir deg en **tørrkjøring** av hvilke endringer som vil bli gjort i Azure-miljøet ditt.
+
+#### 🛠️ Hva den gjør
+- **Analyserer dine IaC-maler** (Bicep eller Terraform)
+- **Viser en forhåndsvisning av ressursendringer**: tillegg, slettinger, oppdateringer
+- **Utfører ikke endringer** — den er kun lesbar og trygg å kjøre
+
+#### � Bruksområder
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Apply changes incrementally
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Denne kommandoen hjelper deg med:
+- **Validering av infrastrukturendringer** før du forplikter ressurser
+- **Oppdage feilkonfigurasjoner tidlig** i utviklingssyklusen
+- **Samarbeide trygt** i teammiljøer
+- **Sikre minst mulig privilegier** uten overraskelser
+
+Den er spesielt nyttig når:
+- Du arbeider med komplekse miljøer med flere tjenester
+- Du gjør endringer i produksjonsinfrastruktur
+- Du validerer malmodifikasjoner før godkjenning av PR
+- Du trener nye teammedlemmer i infrastrukturmønstre
+
+### Eksempel på forhåndsvisningsutdata
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Ressursoppdateringer og migreringer
+
+### Trygge ressursoppdateringer
+```bash
+# Preview infrastructure changes first (RECOMMENDED)
+azd provision --preview
+
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -868,23 +928,23 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 - [Planlegging før utrulling](../pre-deployment/capacity-planning.md) - Valider tilgjengeligheten av ressurser
 - [Vanlige problemer](../troubleshooting/common-issues.md) - Feilsøk infrastrukturproblemer
-- [Feilsøkingsguide](../troubleshooting/debugging.md) - Feilsøk klargjøringsproblemer
+- [Feilsøkingsveiledning](../troubleshooting/debugging.md) - Feilsøk klargjøringsproblemer
 - [Valg av SKU](../pre-deployment/sku-selection.md) - Velg passende tjenestenivåer
 
 ## Tilleggsressurser
 
-- [Azure Bicep-dokumentasjon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager-maler](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Bicep Dokumentasjon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Maler](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Arkitektursenter](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [Utrullingsguide](deployment-guide.md)
+- **Forrige leksjon**: [Utrullingsveiledning](deployment-guide.md)
 - **Neste leksjon**: [Kapasitetsplanlegging](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

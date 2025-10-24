@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-10-11T16:07:26+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T18:30:40+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "et"
 }
 -->
 # AZD Põhitõed - Azure Developer CLI mõistmine
 
-# AZD Põhitõed - Põhimõtted ja alustalad
+# AZD Põhitõed - Põhimõtted ja alused
 
 **Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD Algajatele](../../README.md)
@@ -20,24 +20,24 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Sissejuhatus
 
-Selles õppetükis tutvustatakse Azure Developer CLI-d (azd), võimsat käsurea tööriista, mis kiirendab teie teekonda kohalikust arendusest Azure'i juurutamiseni. Õpite põhimõisteid, põhifunktsioone ja mõistate, kuidas azd lihtsustab pilvepõhiste rakenduste juurutamist.
+Selles õppetükis tutvustatakse Azure Developer CLI-d (azd), võimsat käsurea tööriista, mis kiirendab teie teekonda kohalikust arendusest Azure'i juurutamiseni. Õpite tundma põhimõisteid, põhifunktsioone ja mõistate, kuidas azd lihtsustab pilvepõhiste rakenduste juurutamist.
 
-## Õpieesmärgid
+## Õppeeesmärgid
 
 Selle õppetüki lõpuks:
 - Mõistate, mis on Azure Developer CLI ja selle peamine eesmärk
 - Õpite tundma põhimõisteid nagu mallid, keskkonnad ja teenused
 - Avastate peamised funktsioonid, sealhulgas mallipõhine arendus ja infrastruktuur kui kood
 - Mõistate azd projekti struktuuri ja töövoogu
-- Olete valmis azd paigaldamiseks ja seadistamiseks oma arenduskeskkonnas
+- Olete valmis azd-i oma arenduskeskkonnas paigaldama ja seadistama
 
 ## Õpitulemused
 
 Pärast õppetüki läbimist suudate:
 - Selgitada azd rolli kaasaegsetes pilvearenduse töövoogudes
 - Tuvastada azd projekti struktuuri komponente
-- Kirjeldada, kuidas mallid, keskkonnad ja teenused koos töötavad
-- Mõista infrastruktuuri kui koodi eeliseid azd-ga
+- Kirjeldada, kuidas mallid, keskkonnad ja teenused koos toimivad
+- Mõista infrastruktuuri kui koodi eeliseid azd abil
 - Tunda erinevaid azd käske ja nende eesmärke
 
 ## Mis on Azure Developer CLI (azd)?
@@ -47,9 +47,9 @@ Azure Developer CLI (azd) on käsurea tööriist, mis on loodud kiirendama teie 
 ## Põhimõisted
 
 ### Mallid
-Mallid on azd alus. Need sisaldavad:
-- **Rakenduse kood** - Teie lähtekood ja sõltuvused
-- **Infrastruktuuri määratlused** - Azure'i ressursid, mis on määratletud Bicep või Terraformi abil
+Mallid on azd aluseks. Need sisaldavad:
+- **Rakenduse koodi** - Teie lähtekood ja sõltuvused
+- **Infrastruktuuri määratlusi** - Azure'i ressursid, mis on määratletud Bicep või Terraformi abil
 - **Konfiguratsioonifailid** - Seaded ja keskkonnamuutujad
 - **Juurutusskriptid** - Automatiseeritud juurutustöövood
 
@@ -57,7 +57,7 @@ Mallid on azd alus. Need sisaldavad:
 Keskkonnad esindavad erinevaid juurutamise sihtmärke:
 - **Arendus** - Testimiseks ja arenduseks
 - **Staging** - Eeltootmise keskkond
-- **Tootmine** - Töötootmise keskkond
+- **Tootmine** - Live tootmiskeskkond
 
 Igal keskkonnal on oma:
 - Azure'i ressursigrupp
@@ -66,7 +66,7 @@ Igal keskkonnal on oma:
 
 ### Teenused
 Teenused on teie rakenduse ehituskivid:
-- **Frontend** - Veebirakendused, SPAd
+- **Frontend** - Veebirakendused, SPA-d
 - **Backend** - API-d, mikroteenused
 - **Andmebaas** - Andmesalvestuslahendused
 - **Salvestus** - Faili- ja blobisalvestus
@@ -85,15 +85,33 @@ azd init --template <template-name>
 ### 2. Infrastruktuur kui kood
 - **Bicep** - Azure'i domeenispetsiifiline keel
 - **Terraform** - Mitme pilve infrastruktuuri tööriist
-- **ARM Mallid** - Azure Resource Manageri mallid
+- **ARM Mallid** - Azure Resource Manager mallid
 
 ### 3. Integreeritud töövood
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Turvaline infrastruktuuri planeerimine eelvaatega
+`azd provision --preview` käsk on murranguline turvaliste juurutuste jaoks:
+- **Kuivkäivitusanalüüs** - Näitab, mida luuakse, muudetakse või kustutatakse
+- **Nullrisk** - Azure'i keskkonnas ei tehta tegelikke muudatusi
+- **Meeskonnatöö** - Jagage eelvaate tulemusi enne juurutamist
+- **Kulude hindamine** - Mõistke ressursikulud enne kohustuste võtmist
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Keskkonna haldamine
@@ -198,13 +216,13 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## `azd down --force --purge` mõistmine
-Käsk `azd down --force --purge` on võimas viis azd keskkonna ja kõigi seotud ressursside täielikuks eemaldamiseks. Siin on iga lipu tähendus:
+`azd down --force --purge` käsk on võimas viis azd keskkonna ja kõigi seotud ressursside täielikuks eemaldamiseks. Siin on ülevaade, mida iga lipp teeb:
 ```
 --force
 ```
 - Jätab vahele kinnitusküsimused.
-- Kasulik automatiseerimisel või skriptimisel, kus käsitsi sisend pole võimalik.
-- Tagab eemaldamise ilma katkestusteta, isegi kui CLI tuvastab ebakõlasid.
+- Kasulik automatiseerimisel või skriptimisel, kus käsitsi sisestamine pole võimalik.
+- Tagab, et eemaldamine toimub katkestusteta, isegi kui CLI tuvastab ebakõlasid.
 
 ```
 --purge
@@ -213,12 +231,12 @@ Kustutab **kogu seotud metaandmed**, sealhulgas:
 Keskkonna olek
 Kohalik `.azure` kaust
 Vahemällu salvestatud juurutusinfo
-Takistab azd-l "mäletamast" varasemaid juurutusi, mis võivad põhjustada probleeme, nagu sobimatud ressursigrupid või vananenud registriviited.
+Vältib azd-i "mäletamist" varasematest juurutustest, mis võivad põhjustada probleeme, nagu ressursigruppide sobimatus või vananenud registriviited.
 
 ### Miks kasutada mõlemat?
-Kui olete `azd up` käsuga ummikusse sattunud jääkseisu või osaliste juurutuste tõttu, tagab see kombinatsioon **puhta alguse**.
+Kui `azd up` ei tööta jääkseisu või osaliste juurutuste tõttu, tagab see kombinatsioon **puhta alguse**.
 
-See on eriti kasulik pärast käsitsi ressursside kustutamist Azure'i portaalis või mallide, keskkondade või ressursigrupi nimekonventsioonide vahetamisel.
+See on eriti kasulik pärast käsitsi ressurside kustutamist Azure'i portaalis või mallide, keskkondade või ressursigruppide nimemustrite vahetamisel.
 
 ### Mitme keskkonna haldamine
 ```bash
@@ -236,7 +254,7 @@ azd env list
 
 ## 🔐 Autentimine ja volitused
 
-Autentimise mõistmine on azd juurutuste edukuse jaoks ülioluline. Azure kasutab mitmeid autentimismeetodeid ja azd kasutab sama volituste ahelat, mida teised Azure'i tööriistad.
+Autentimise mõistmine on azd edukaks juurutamiseks ülioluline. Azure kasutab mitmeid autentimismeetodeid ja azd kasutab sama volituste ahelat, mida teised Azure'i tööriistad.
 
 ### Azure CLI autentimine (`az login`)
 
@@ -264,7 +282,7 @@ az account set --subscription <subscription-id>
 
 ### Autentimise voog
 1. **Interaktiivne sisselogimine**: Avab teie vaikimisi brauseri autentimiseks
-2. **Seadme koodi voog**: Keskkondade jaoks, kus brauseri juurdepääs puudub
+2. **Seadme koodi voog**: Keskkondade jaoks, kus brauseri kasutamine pole võimalik
 3. **Teenusepõhimõte**: Automatiseerimise ja CI/CD stsenaariumide jaoks
 4. **Hallatud identiteet**: Azure'is hostitud rakenduste jaoks
 
@@ -300,7 +318,7 @@ Kasutatakse automaatselt:
 - Muud federatiivse identiteedi stsenaariumid
 
 #### 3. Hallatud identiteet
-Azure'i ressursside jaoks nagu:
+Azure'i ressursside jaoks, nagu:
 - Virtuaalmasinad
 - Rakendusteenus
 - Azure Functions
@@ -369,7 +387,7 @@ azd auth login
 #### Tootmiskeskkondade jaoks
 - Kasutage **hallatud identiteeti**, kui töötate Azure'i ressurssidel
 - Kasutage **teenusepõhimõtet** automatiseerimise stsenaariumide jaoks
-- Vältige volituste salvestamist koodis või konfiguratsioonifailides
+- Vältige volituste salvestamist koodi või konfiguratsioonifailidesse
 - Kasutage **Azure Key Vaulti** tundliku konfiguratsiooni jaoks
 
 ### Tavalised autentimise probleemid ja lahendused
@@ -432,8 +450,8 @@ azd up
 ### Turvalisuse kaalutlused
 
 1. **Volituste salvestamine**: Ärge kunagi salvestage volitusi lähtekoodi
-2. **Ulatuspiirang**: Kasutage teenusepõhimõtete puhul minimaalse privileegi põhimõtet
-3. **Tokeni rotatsioon**: Pöörake regulaarselt teenusepõhimõtte saladusi
+2. **Ulatuspiirang**: Kasutage teenusepõhimõtete puhul minimaalseid õigusi
+3. **Tokenite uuendamine**: Uuendage regulaarselt teenusepõhimõtete paroole
 4. **Auditijälg**: Jälgige autentimise ja juurutamise tegevusi
 5. **Võrguturvalisus**: Kasutage võimalusel privaatseid lõpp-punkte
 
@@ -492,8 +510,8 @@ azd init --template template1
 - Kohandage vastavalt oma vajadustele
 - Looge oma organisatsioonile korduvkasutatavad mallid
 
-### 3. Keskkonna isolatsioon
-- Kasutage eraldi keskkondi arenduseks/staging/tootmiseks
+### 3. Keskkonna eraldamine
+- Kasutage eraldi keskkondi arenduseks/staginguks/tootmiseks
 - Ärge kunagi juurutage otse tootmisesse kohalikust masinast
 - Kasutage tootmise juurutamiseks CI/CD torujuhtmeid
 
@@ -508,13 +526,13 @@ azd init --template template1
 1. Paigaldage azd ja autentige
 2. Juurutage lihtne mall
 3. Mõistke projekti struktuuri
-4. Õppige põhilisi käske (up, down, deploy)
+4. Õppige põhikäske (up, down, deploy)
 
 ### Kesktase (3-4 nädalat)
 1. Kohandage malle
 2. Hallake mitut keskkonda
 3. Mõistke infrastruktuuri koodi
-4. Seadistage CI/CD torujuhtmed
+4. Seadistage CI/CD torujuhtmeid
 
 ### Edasijõudnud (5+ nädalat)
 1. Looge kohandatud mallid
@@ -550,4 +568,4 @@ azd init --template template1
 ---
 
 **Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta arusaamatuste või valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamise tõttu.

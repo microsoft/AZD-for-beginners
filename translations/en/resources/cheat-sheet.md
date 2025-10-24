@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T12:54:23+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:24:04+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "en"
 }
@@ -17,27 +17,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This cheat sheet is a handy reference for the most frequently used Azure Developer CLI commands, categorized and paired with practical examples. Ideal for quick lookups during development, troubleshooting, and daily operations with azd projects.
+This comprehensive cheat sheet provides quick reference for the most commonly used Azure Developer CLI commands, organized by category with practical examples. Perfect for quick lookups during development, troubleshooting, and daily operations with azd projects.
 
 ## Learning Goals
 
 By using this cheat sheet, you will:
-- Quickly access essential Azure Developer CLI commands and syntax
-- Understand how commands are organized by functionality and use case
-- Refer to practical examples for common development and deployment tasks
-- Use troubleshooting commands to resolve issues efficiently
-- Find advanced configuration and customization options with ease
-- Manage environments and workflows across multiple setups
+- Have instant access to essential Azure Developer CLI commands and syntax
+- Understand command organization by functional categories and use cases
+- Reference practical examples for common development and deployment scenarios
+- Access troubleshooting commands for quick issue resolution
+- Find advanced configuration and customization options efficiently
+- Locate environment management and multi-environment workflow commands
 
 ## Learning Outcomes
 
-By regularly consulting this cheat sheet, you will:
-- Confidently execute azd commands without needing full documentation
-- Resolve common issues quickly using diagnostic commands
-- Manage multiple environments and deployment scenarios effectively
-- Utilize advanced azd features and configuration options as required
-- Troubleshoot deployment problems systematically
-- Streamline workflows with azd shortcuts and options
+With regular reference to this cheat sheet, you will be able to:
+- Execute azd commands confidently without referencing full documentation
+- Quickly resolve common issues using appropriate diagnostic commands
+- Efficiently manage multiple environments and deployment scenarios
+- Apply advanced azd features and configuration options as needed
+- Troubleshoot deployment issues using systematic command sequences
+- Optimize workflows through effective use of azd shortcuts and options
 
 ## Getting Started Commands
 
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Service Management
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 

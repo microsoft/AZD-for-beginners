@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T06:44:35+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:34:36+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "fi"
 }
@@ -17,13 +17,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Johdanto
 
-Tämä kattava pikaopas tarjoaa nopean viitteen yleisimmin käytetyille Azure Developer CLI -komennoille, jotka on järjestetty kategorioittain käytännön esimerkkien kera. Täydellinen kehityksen, vianmäärityksen ja päivittäisten azd-projektien toimintojen aikana.
+Tämä kattava pikaopas tarjoaa nopean viitteen yleisimmin käytetyille Azure Developer CLI -komennoille, jotka on järjestetty kategorioittain käytännön esimerkkien kera. Täydellinen apuväline kehityksen, vianmäärityksen ja päivittäisten azd-projektien toimintojen aikana.
 
 ## Oppimistavoitteet
 
 Tämän pikaoppaan avulla:
-- Saat välittömän pääsyn tärkeimpiin Azure Developer CLI -komentoihin ja syntaksiin
-- Ymmärrät komentojen järjestelyn toiminnallisten kategorioiden ja käyttötapausten mukaan
+- Saat välittömän pääsyn tärkeimpiin Azure Developer CLI -komentoihin ja syntakseihin
+- Ymmärrät komentojen järjestelyn toiminnallisten kategorioiden ja käyttötapojen mukaan
 - Löydät käytännön esimerkkejä yleisistä kehitys- ja käyttöönotto-skenaarioista
 - Pääset käsiksi vianmäärityskomentoihin nopeaa ongelmanratkaisua varten
 - Löydät helposti edistyneitä konfigurointi- ja mukautusvaihtoehtoja
@@ -31,12 +31,12 @@ Tämän pikaoppaan avulla:
 
 ## Oppimistulokset
 
-Säännöllisesti tätä pikaopasta käyttäen pystyt:
-- Suorittamaan azd-komentoja luottavaisesti ilman täydellistä dokumentaatiota
+Säännöllisesti tätä pikaopasta käyttämällä pystyt:
+- Suorittamaan azd-komentoja itsevarmasti ilman täydellistä dokumentaatiota
 - Ratkaisemaan yleisiä ongelmia nopeasti sopivilla diagnostiikkakomennoilla
 - Hallitsemaan tehokkaasti useita ympäristöjä ja käyttöönotto-skenaarioita
 - Soveltamaan edistyneitä azd-ominaisuuksia ja konfigurointivaihtoehtoja tarpeen mukaan
-- Vianmäärityksen järjestelmällisten komentosekvenssien avulla ratkaisemaan käyttöönotto-ongelmia
+- Vianmäärityksen avulla ratkaisemaan käyttöönotto-ongelmia järjestelmällisillä komentosekvensseillä
 - Optimoimaan työnkulut tehokkaalla azd-pikakomennolla ja -vaihtoehdoilla
 
 ## Aloituskomennot
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -112,7 +114,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Rakentaminen ja paketointi
+### Rakennus ja pakkaus
 ```bash
 # Build applications
 azd package
@@ -160,7 +162,7 @@ azd env unset DEBUG
 
 ## ⚙️ Konfigurointikomennot
 
-### Globaali konfigurointi
+### Globaalit asetukset
 ```bash
 # List all configuration
 azd config list
@@ -176,7 +178,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Projektin konfigurointi
+### Projektin asetukset
 ```bash
 # Validate azure.yaml
 azd config validate
@@ -249,7 +251,7 @@ azd info
 
 ## 🔧 Edistyneet komennot
 
-### Putkisto ja CI/CD
+### Putkistot ja CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Palvelun hallinta
@@ -374,7 +385,7 @@ azd template validate <template-name>
 
 ## 📁 Tiedosto- ja hakemistokomennot
 
-### Projektirakenne
+### Projektin rakenne
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -531,7 +542,7 @@ azd-status() {
 
 ## 📖 Apua ja dokumentaatio
 
-### Avun saaminen
+### Apua saaminen
 ```bash
 # General help
 azd --help
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Vinkki**: Lisää tämä pikaopas kirjanmerkkeihin ja käytä `Ctrl+F` löytääksesi nopeasti tarvitsemasi komennot!
+**Vinkki**: Tallenna tämä pikaopas kirjanmerkkeihin ja käytä `Ctrl+F` löytääksesi nopeasti tarvitsemasi komennot!
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.

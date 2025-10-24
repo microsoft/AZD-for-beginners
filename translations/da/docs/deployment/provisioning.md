@@ -1,30 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T23:30:06+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:29:56+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "da"
 }
 -->
 # Klargøring af Azure-ressourcer med AZD
 
-**Kapitelnavigation:**
+**Kapiteloversigt:**
 - **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
-- **📖 Nuværende Kapitel**: Kapitel 4 - Infrastruktur som kode & Udrulning
+- **📖 Nuværende kapitel**: Kapitel 4 - Infrastruktur som kode & Udrulning
 - **⬅️ Forrige**: [Udrulningsguide](deployment-guide.md)
-- **➡️ Næste Kapitel**: [Kapitel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
+- **➡️ Næste kapitel**: [Kapitel 5: Multi-agent AI-løsninger](../../examples/retail-scenario.md)
 - **🔧 Relateret**: [Kapitel 6: Validering før udrulning](../pre-deployment/capacity-planning.md)
 
 ## Introduktion
 
-Denne omfattende guide dækker alt, hvad du behøver at vide om klargøring og styring af Azure-ressourcer ved hjælp af Azure Developer CLI. Lær at implementere mønstre for Infrastruktur som kode (IaC) fra grundlæggende ressourceoprettelse til avancerede virksomhedsinfrastrukturer ved hjælp af Bicep, ARM-skabeloner, Terraform og Pulumi.
+Denne omfattende guide dækker alt, hvad du behøver at vide om klargøring og styring af Azure-ressourcer ved hjælp af Azure Developer CLI. Lær at implementere Infrastructure as Code (IaC)-mønstre fra grundlæggende ressourceoprettelse til avancerede virksomhedsinfrastrukturer ved hjælp af Bicep, ARM-skabeloner, Terraform og Pulumi.
 
 ## Læringsmål
 
 Ved at gennemføre denne guide vil du:
-- Mestre principperne for Infrastruktur som kode og klargøring af Azure-ressourcer
-- Forstå de forskellige IaC-leverandører, der understøttes af Azure Developer CLI
+- Mestre principperne for Infrastructure as Code og klargøring af Azure-ressourcer
+- Forstå flere IaC-leverandører, der understøttes af Azure Developer CLI
 - Designe og implementere Bicep-skabeloner til almindelige applikationsarkitekturer
 - Konfigurere ressourceparametre, variabler og miljøspecifikke indstillinger
 - Implementere avancerede infrastrukturmønstre, herunder netværk og sikkerhed
@@ -32,21 +32,21 @@ Ved at gennemføre denne guide vil du:
 
 ## Læringsresultater
 
-Når du er færdig, vil du kunne:
+Når du har gennemført guiden, vil du kunne:
 - Designe og klargøre Azure-infrastruktur ved hjælp af Bicep og ARM-skabeloner
 - Konfigurere komplekse multi-service arkitekturer med korrekte ressourceafhængigheder
 - Implementere parameteriserede skabeloner til flere miljøer og konfigurationer
 - Fejlsøge problemer med infrastrukturklargøring og løse udrulningsfejl
-- Anvende principperne fra Azure Well-Architected Framework til infrastrukturdannelse
-- Administrere infrastrukturændringer og implementere strategier for versionsstyring
+- Anvende principperne fra Azure Well-Architected Framework til infrastrukturdesign
+- Administrere infrastruktur-opdateringer og implementere strategier for versionsstyring
 
 ## Oversigt over infrastrukturklargøring
 
-Azure Developer CLI understøtter flere leverandører af Infrastruktur som kode (IaC):
+Azure Developer CLI understøtter flere Infrastructure as Code (IaC)-leverandører:
 - **Bicep** (anbefalet) - Azures domænespecifikke sprog
 - **ARM-skabeloner** - JSON-baserede Azure Resource Manager-skabeloner
 - **Terraform** - Multi-cloud infrastrukturværktøj
-- **Pulumi** - Moderne Infrastruktur som kode med programmeringssprog
+- **Pulumi** - Moderne Infrastructure as Code med programmeringssprog
 
 ## Forstå Azure-ressourcer
 
@@ -61,8 +61,8 @@ Azure Account
 ### Almindelige Azure-tjenester til applikationer
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Netværk**: Virtual Network, Application Gateway, CDN
-- **Sikkerhed**: Key Vault, Application Insights, Log Analytics
+- **Networking**: Virtual Network, Application Gateway, CDN
+- **Security**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
 ## Bicep-infrastrukturskabeloner
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Ressourceopdateringer og migrationer
+## 🧪 Infrastrukturforhåndsvisning og validering (NYT)
+
+### Forhåndsvisning af infrastrukturændringer før udrulning
+
+Funktionen `azd provision --preview` giver dig mulighed for at **simulere infrastrukturklargøring** før faktisk udrulning af ressourcer. Det minder om `terraform plan` eller `bicep what-if`, og giver dig en **tørkørsel** af, hvilke ændringer der vil blive foretaget i dit Azure-miljø.
+
+#### 🛠️ Hvad det gør
+- **Analyserer dine IaC-skabeloner** (Bicep eller Terraform)
+- **Viser en forhåndsvisning af ressourceændringer**: tilføjelser, sletninger, opdateringer
+- **Anvender ikke ændringer** — det er kun læsning og sikkert at køre
+
+#### � Anvendelsesområder
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Denne kommando hjælper dig med at:
+- **Validere infrastrukturændringer** før ressourcer bliver oprettet
+- **Fange fejlkonfigurationer tidligt** i udviklingscyklussen
+- **Samarbejde sikkert** i teammiljøer
+- **Sikre mindst mulige rettigheder** uden overraskelser
+
+Det er især nyttigt, når:
+- Du arbejder med komplekse multi-service miljøer
+- Du foretager ændringer i produktionsinfrastruktur
+- Du validerer skabelonændringer før PR-godkendelse
+- Du træner nye teammedlemmer i infrastrukturmønstre
+
+### Eksempel på forhåndsvisningsoutput
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Ressourceopdateringer og migrationer
 
 ### Sikker ressourceopdatering
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -849,7 +909,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Outputorganisering
+### 4. Organisering af output
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -869,7 +929,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Planlægning før udrulning](../pre-deployment/capacity-planning.md) - Valider ressourcekapacitet
 - [Almindelige problemer](../troubleshooting/common-issues.md) - Fejlsøg infrastrukturproblemer
 - [Fejlfindingsguide](../troubleshooting/debugging.md) - Fejlfind klargøringsproblemer
-- [SKU-valg](../pre-deployment/sku-selection.md) - Vælg passende serviceniveauer
+- [Valg af SKU](../pre-deployment/sku-selection.md) - Vælg passende serviceniveauer
 
 ## Yderligere ressourcer
 
@@ -881,10 +941,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigation**
-- **Forrige Lektion**: [Udrulningsguide](deployment-guide.md)
-- **Næste Lektion**: [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md)
+- **Forrige lektion**: [Udrulningsguide](deployment-guide.md)
+- **Næste lektion**: [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at sikre nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.

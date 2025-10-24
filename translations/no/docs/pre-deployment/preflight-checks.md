@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T06:18:56+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:31:41+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "no"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Kapittelnavigasjon:**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 6 - Validering og Planlegging før Utrulling
+- **📖 Nåværende Kapittel**: Kapittel 6 - Validering og planlegging før utrulling
 - **⬅️ Forrige**: [Valg av SKU](sku-selection.md)
 - **➡️ Neste Kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/common-issues.md)
 - **🔧 Relatert**: [Kapittel 4: Utrullingsveiledning](../deployment/deployment-guide.md)
 
 ## Introduksjon
 
-Denne omfattende veiledningen gir valideringsskript og prosedyrer før utrulling for å sikre vellykkede utrullinger med Azure Developer CLI. Lær å implementere automatiserte kontroller for autentisering, ressurs tilgjengelighet, kvoter, sikkerhetskrav og ytelsesbehov for å forhindre feil og optimalisere suksessraten for utrullinger.
+Denne omfattende veiledningen gir valideringsskript og prosedyrer før utrulling for å sikre vellykkede utrullinger med Azure Developer CLI før de starter. Lær å implementere automatiske kontroller for autentisering, ressurs tilgjengelighet, kvoter, sikkerhetskrav og ytelsesbehov for å forhindre utrullingsfeil og optimalisere suksessraten for utrullinger.
 
 ## Læringsmål
 
@@ -27,8 +27,8 @@ Ved å fullføre denne veiledningen vil du:
 - Forstå omfattende kontrollstrategier for autentisering, tillatelser og kvoter
 - Implementere valideringsprosedyrer for ressurs tilgjengelighet og kapasitet
 - Konfigurere sikkerhets- og samsvarskontroller for organisasjonens retningslinjer
-- Utforme kostnadsestimering og budsjettvalideringsarbeidsflyter
-- Lage tilpasset automatisering for sjekklister før utrulling i CI/CD-pipelines
+- Utforme arbeidsflyter for kostnadsestimering og budsjettvalidering
+- Lage tilpasset automatisering av sjekklister før utrulling for CI/CD-pipelines
 
 ## Læringsutbytte
 
@@ -43,13 +43,13 @@ Etter fullføring vil du kunne:
 ## Innholdsfortegnelse
 
 - [Oversikt](../../../../docs/pre-deployment)
-- [Automatisert Sjekkliste før Utrulling](../../../../docs/pre-deployment)
-- [Manuell Valideringssjekkliste](../../../../docs/pre-deployment)
+- [Automatisert sjekkliste før utrulling](../../../../docs/pre-deployment)
+- [Manuell valideringssjekkliste](../../../../docs/pre-deployment)
 - [Miljøvalidering](../../../../docs/pre-deployment)
 - [Ressursvalidering](../../../../docs/pre-deployment)
-- [Sikkerhets- og Samsvarskontroller](../../../../docs/pre-deployment)
-- [Ytelse og Kapasitetsplanlegging](../../../../docs/pre-deployment)
-- [Feilsøking av Vanlige Problemer](../../../../docs/pre-deployment)
+- [Sikkerhets- og samsvarskontroller](../../../../docs/pre-deployment)
+- [Ytelses- og kapasitetsplanlegging](../../../../docs/pre-deployment)
+- [Feilsøking av vanlige problemer](../../../../docs/pre-deployment)
 
 ---
 
@@ -57,7 +57,7 @@ Etter fullføring vil du kunne:
 
 Sjekklister før utrulling er essensielle valideringer som utføres før utrulling for å sikre:
 
-- **Ressurs tilgjengelighet** og kvoter i målområder
+- **Ressurs tilgjengelighet** og kvoter i målregioner
 - **Autentisering og tillatelser** er riktig konfigurert
 - **Malens gyldighet** og korrekthet av parametere
 - **Nettverksforbindelse** og avhengigheter
@@ -74,9 +74,9 @@ Sjekklister før utrulling er essensielle valideringer som utføres før utrulli
 
 ---
 
-## Automatisert Sjekkliste før Utrulling
+## Automatisert sjekkliste før utrulling
 
-### PowerShell-sjekker før utrulling
+### PowerShell-sjekkliste før utrulling
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash-sjekker før utrulling
+### Bash-sjekkliste før utrulling
 
 ```bash
 #!/bin/bash
@@ -790,7 +805,7 @@ main "$@"
 
 ---
 
-## Manuell Valideringssjekkliste
+## Manuell valideringssjekkliste
 
 ### Sjekkliste før utrulling
 
@@ -803,8 +818,8 @@ Skriv ut denne sjekklisten og verifiser hvert punkt før utrulling:
 - [ ] Miljønavn er unikt og følger navnekonvensjoner
 - [ ] Målressursgruppe identifisert eller kan opprettes
 
-#### ✅ Autentisering og Tillatelser
-- [ ] Vellykket autentisering med `azd auth login`
+#### ✅ Autentisering og tillatelser
+- [ ] Vellykket autentisert med `azd auth login`
 - [ ] Bruker har Contributor-rolle på målabonnement/ressursgruppe
 - [ ] Tjenesteprinsipp konfigurert for CI/CD (hvis aktuelt)
 - [ ] Ingen utløpte sertifikater eller legitimasjon
@@ -814,22 +829,23 @@ Skriv ut denne sjekklisten og verifiser hvert punkt før utrulling:
 - [ ] Alle tjenester definert i azure.yaml har tilsvarende kildekode
 - [ ] Bicep-maler i `infra/`-katalogen er til stede
 - [ ] `main.bicep` kompilerer uten feil (`az bicep build --file infra/main.bicep`)
-- [ ] Alle nødvendige parametere har standardverdier eller vil bli oppgitt
+- [ ] 🧪 Infrastrukturforhåndsvisning kjører vellykket (`azd provision --preview`)
+- [ ] Alle nødvendige parametere har standardverdier eller vil bli gitt
 - [ ] Ingen hardkodede hemmeligheter i maler
 
 #### ✅ Ressursplanlegging
 - [ ] Mål Azure-region valgt og validert
-- [ ] Nødvendige Azure-tjenester tilgjengelige i målregionen
+- [ ] Nødvendige Azure-tjenester tilgjengelige i målregion
 - [ ] Tilstrekkelige kvoter tilgjengelige for planlagte ressurser
 - [ ] Konflikter i ressursnavn sjekket
 - [ ] Avhengigheter mellom ressurser forstått
 
-#### ✅ Nettverk og Sikkerhet
+#### ✅ Nettverk og sikkerhet
 - [ ] Nettverksforbindelse til Azure-endepunkter verifisert
 - [ ] Brannmur/proxy-innstillinger konfigurert hvis nødvendig
 - [ ] Key Vault konfigurert for hemmelighetsstyring
 - [ ] Administrerte identiteter brukt der det er mulig
-- [ ] HTTPS-krav aktivert for webapplikasjoner
+- [ ] HTTPS håndhevet for webapplikasjoner
 
 #### ✅ Kostnadsstyring
 - [ ] Kostnadsestimater beregnet med Azure Pricing Calculator
@@ -837,23 +853,23 @@ Skriv ut denne sjekklisten og verifiser hvert punkt før utrulling:
 - [ ] Passende SKUs valgt for miljøtype
 - [ ] Reservert kapasitet vurdert for produksjonsarbeidsbelastninger
 
-#### ✅ Overvåking og Observasjon
+#### ✅ Overvåking og observasjon
 - [ ] Application Insights konfigurert i maler
 - [ ] Log Analytics-arbeidsområde planlagt
 - [ ] Varslingsregler definert for kritiske metrikker
 - [ ] Helsekontroll-endepunkter implementert i applikasjoner
 
-#### ✅ Backup og Gjenoppretting
+#### ✅ Backup og gjenoppretting
 - [ ] Backup-strategi definert for dataressurser
-- [ ] Gjenopprettingstidsmål (RTO) dokumentert
-- [ ] Gjenopprettingspunktsmål (RPO) dokumentert
+- [ ] Mål for gjenopprettingstid (RTO) dokumentert
+- [ ] Mål for gjenopprettingspunkt (RPO) dokumentert
 - [ ] Katastrofegjenopprettingsplan på plass for produksjon
 
 ---
 
 ## Miljøvalidering
 
-### Validering av Utviklingsmiljø
+### Validering av utviklingsmiljø
 
 ```bash
 #!/bin/bash
@@ -885,7 +901,7 @@ validate_dev_environment() {
 }
 ```
 
-### Validering av Produksjonsmiljø
+### Validering av produksjonsmiljø
 
 ```bash
 #!/bin/bash
@@ -1051,7 +1067,7 @@ if __name__ == "__main__":
 
 ---
 
-## Sikkerhets- og Samsvarskontroller
+## Sikkerhets- og samsvarskontroller
 
 ### Sikkerhetsvalideringsskript
 
@@ -1283,56 +1299,56 @@ steps:
 
 ---
 
-## Sammendrag av Beste Praksis
+## Sammendrag av beste praksis
 
-### ✅ Beste Praksis for Sjekklister før Utrulling
+### ✅ Beste praksis for sjekklister før utrulling
 
 1. **Automatiser der det er mulig**
    - Integrer kontroller i CI/CD-pipelines
    - Bruk skript for repeterbare valideringer
    - Lagre resultater for revisjonsspor
 
-2. **Miljøspesifikk Validering**
+2. **Miljøspesifikk validering**
    - Ulike kontroller for utvikling/staging/produksjon
    - Passende sikkerhetskrav per miljø
    - Kostnadsoptimalisering for ikke-produksjonsmiljøer
 
-3. **Omfattende Dekning**
+3. **Omfattende dekning**
    - Autentisering og tillatelser
    - Ressurskvoter og tilgjengelighet
    - Malvalidering og syntaks
    - Sikkerhets- og samsvarskrav
 
-4. **Klar Rapportering**
+4. **Klar rapportering**
    - Fargekodede statusindikatorer
    - Detaljerte feilmeldinger med løsningsforslag
    - Sammendragsrapporter for rask vurdering
 
-5. **Stopp Tidlig**
+5. **Stopp tidlig**
    - Stopp utrulling hvis kritiske kontroller feiler
    - Gi klar veiledning for løsning
    - Muliggjør enkel gjenkjøring av kontroller
 
-### Vanlige Fallgruver før Utrulling
+### Vanlige fallgruver før utrulling
 
 1. **Hopper over validering** for "raske" utrullinger
 2. **Utilstrekkelig tillatelsessjekk** før utrulling
 3. **Ignorerer kvotegrenser** til utrulling feiler
-4. **Unnlater å validere maler** i CI/CD-pipelines
+4. **Unnlatelse av å validere maler** i CI/CD-pipelines
 5. **Manglende sikkerhetsvalidering** for produksjonsmiljøer
 6. **Utilstrekkelig kostnadsestimering** som fører til budsjettoverskridelser
 
 ---
 
-**Tips**: Kjør sjekklister før utrulling som en separat jobb i CI/CD-pipelinen før den faktiske utrullingsjobben. Dette lar deg fange opp problemer tidlig og gir raskere tilbakemelding til utviklere.
+**Tips**: Kjør sjekklister før utrulling som en separat jobb i CI/CD-pipelinen din før den faktiske utrullingsjobben. Dette lar deg oppdage problemer tidlig og gir raskere tilbakemelding til utviklere.
 
 ---
 
 **Navigasjon**
-- **Forrige Leksjon**: [Valg av SKU](sku-selection.md)
-- **Neste Leksjon**: [Hurtigreferanse](../../resources/cheat-sheet.md)
+- **Forrige leksjon**: [Valg av SKU](sku-selection.md)
+- **Neste leksjon**: [Hurtigreferanse](../../resources/cheat-sheet.md)
 
 ---
 
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.

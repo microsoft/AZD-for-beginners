@@ -1,22 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:27:56+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T16:41:14+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "zh"
 }
 -->
-# AZD 基础 - 了解 Azure Developer CLI
+# AZD 基础知识 - 了解 Azure Developer CLI
 
-# AZD 基础 - 核心概念与基础知识
+# AZD 基础知识 - 核心概念和基本原理
 
 **章节导航：**
 - **📚 课程主页**: [AZD 初学者指南](../../README.md)
 - **📖 当前章节**: 第1章 - 基础与快速入门
 - **⬅️ 上一章**: [课程概览](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ 下一章**: [安装与设置](installation.md)
-- **🚀 下一章节**: [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 下一章节**: [第2章：以AI为核心的开发](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 简介
 
@@ -27,18 +27,18 @@ CO_OP_TRANSLATOR_METADATA:
 完成本课程后，您将能够：
 - 了解 Azure Developer CLI 的定义及其主要用途
 - 学习模板、环境和服务的核心概念
-- 探索模板驱动开发和基础设施即代码的关键功能
+- 探索关键功能，包括基于模板的开发和基础设施即代码
 - 理解 azd 项目结构和工作流程
 - 为您的开发环境安装和配置 azd 做好准备
 
 ## 学习成果
 
 完成本课程后，您将能够：
-- 解释 azd 在现代云开发工作流中的角色
+- 解释 azd 在现代云开发工作流程中的角色
 - 识别 azd 项目结构的组成部分
 - 描述模板、环境和服务如何协同工作
-- 理解使用 azd 的基础设施即代码的优势
-- 识别不同的 azd 命令及其用途
+- 理解使用 azd 实现基础设施即代码的优势
+- 了解不同的 azd 命令及其用途
 
 ## 什么是 Azure Developer CLI (azd)?
 
@@ -65,15 +65,15 @@ Azure Developer CLI (azd) 是一个命令行工具，旨在加速从本地开发
 - 部署状态
 
 ### 服务
-服务是构建应用的模块：
-- **前端** - Web 应用、单页应用
+服务是构建应用的基本模块：
+- **前端** - Web 应用程序、单页应用
 - **后端** - API、微服务
 - **数据库** - 数据存储解决方案
 - **存储** - 文件和 Blob 存储
 
 ## 关键功能
 
-### 1. 模板驱动开发
+### 1. 基于模板的开发
 ```bash
 # Browse available templates
 azd template list
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ 使用预览进行安全的基础设施规划
+`azd provision --preview` 命令是安全部署的关键：
+- **干运行分析** - 显示将创建、修改或删除的内容
+- **零风险** - 不会对 Azure 环境进行实际更改
+- **团队协作** - 在部署前共享预览结果
+- **成本估算** - 在承诺之前了解资源成本
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. 环境管理
@@ -129,7 +147,7 @@ my-app/
 ## 🔧 配置文件
 
 ### azure.yaml
-主要的项目配置文件：
+主要项目配置文件：
 ```yaml
 name: my-awesome-app
 metadata:
@@ -198,13 +216,13 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## 了解 `azd down --force --purge`
-`azd down --force --purge` 命令是一种完全拆除 azd 环境及其所有相关资源的强大方式。以下是每个标志的功能说明：
+`azd down --force --purge` 命令是一种完全拆除 azd 环境及所有相关资源的强大方式。以下是每个标志的功能：
 ```
 --force
 ```
 - 跳过确认提示。
-- 适用于无法进行手动输入的自动化或脚本场景。
-- 即使 CLI 检测到不一致，也能确保拆除过程不被中断。
+- 适用于无法进行手动输入的自动化或脚本。
+- 即使 CLI 检测到不一致，也能确保拆除过程不受干扰。
 
 ```
 --purge
@@ -213,12 +231,12 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 环境状态  
 本地 `.azure` 文件夹  
 缓存的部署信息  
-防止 azd "记住" 之前的部署，这可能导致资源组不匹配或过时的注册表引用等问题。
+防止 azd "记住" 之前的部署，这可能导致资源组不匹配或过时的注册表引用问题。
 
 ### 为什么同时使用这两个选项？
 当您因遗留状态或部分部署问题而无法使用 `azd up` 时，这种组合可以确保一个 **干净的起点**。
 
-特别是在 Azure 门户中手动删除资源后，或切换模板、环境或资源组命名约定时，这种方法非常有用。
+特别是在 Azure 门户中手动删除资源后，或切换模板、环境或资源组命名约定时非常有用。
 
 ### 管理多个环境
 ```bash
@@ -240,7 +258,7 @@ azd env list
 
 ### Azure CLI 身份验证 (`az login`)
 
-在使用 azd 之前，您需要通过 Azure 进行身份验证。最常见的方法是使用 Azure CLI：
+在使用 azd 之前，您需要通过 Azure CLI 进行身份验证：
 
 ```bash
 # Interactive login (opens browser)
@@ -268,9 +286,9 @@ az account set --subscription <subscription-id>
 3. **服务主体**: 用于自动化和 CI/CD 场景
 4. **托管身份**: 用于 Azure 托管的应用程序
 
-### DefaultAzureCredential 链
+### DefaultAzureCredential 凭据链
 
-`DefaultAzureCredential` 是一种凭据类型，通过自动尝试多个凭据来源以特定顺序提供简化的身份验证体验：
+`DefaultAzureCredential` 是一种凭据类型，通过自动尝试特定顺序的多个凭据来源提供简化的身份验证体验：
 
 #### 凭据链顺序
 ```mermaid
@@ -296,11 +314,11 @@ export AZURE_TENANT_ID="<tenant-id>"
 #### 2. 工作负载身份 (Kubernetes/GitHub Actions)
 自动用于：
 - Azure Kubernetes Service (AKS) 的工作负载身份
-- GitHub Actions 的 OIDC 联邦
-- 其他联邦身份场景
+- GitHub Actions 的 OIDC 联合身份验证
+- 其他联合身份验证场景
 
 #### 3. 托管身份
-适用于 Azure 资源，例如：
+适用于以下 Azure 资源：
 - 虚拟机
 - 应用服务
 - Azure Functions
@@ -314,8 +332,8 @@ az account show --query "user.type" --output tsv
 
 #### 4. 开发工具集成
 - **Visual Studio**: 自动使用登录账户
-- **VS Code**: 使用 Azure Account 扩展凭据
-- **Azure CLI**: 使用 `az login` 凭据（本地开发最常用）
+- **VS Code**: 使用 Azure Account 扩展的凭据
+- **Azure CLI**: 使用 `az login` 的凭据（本地开发最常用）
 
 ### AZD 身份验证设置
 
@@ -337,7 +355,7 @@ azd auth login
 
 ### 身份验证最佳实践
 
-#### 本地开发
+#### 对于本地开发
 ```bash
 # 1. Login with Azure CLI
 az login
@@ -350,7 +368,7 @@ az account set --subscription "Your Subscription Name"
 azd auth login
 ```
 
-#### CI/CD 管道
+#### 对于 CI/CD 管道
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -366,7 +384,7 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### 生产环境
+#### 对于生产环境
 - 在 Azure 资源上运行时使用 **托管身份**
 - 自动化场景使用 **服务主体**
 - 避免在代码或配置文件中存储凭据
@@ -431,7 +449,7 @@ azd up
 
 ### 安全注意事项
 
-1. **凭据存储**: 切勿在源代码中存储凭据
+1. **凭据存储**: 切勿将凭据存储在源代码中
 2. **范围限制**: 对服务主体使用最小权限原则
 3. **令牌轮换**: 定期轮换服务主体密钥
 4. **审计跟踪**: 监控身份验证和部署活动
@@ -476,7 +494,7 @@ azd logs                     # View application logs
 
 ## 最佳实践
 
-### 1. 使用有意义的名称
+### 1. 使用有意义的命名
 ```bash
 # Good
 azd env new production-east
@@ -490,7 +508,7 @@ azd init --template template1
 ### 2. 利用模板
 - 从现有模板开始
 - 根据需求进行定制
-- 为您的组织创建可重用模板
+- 为您的组织创建可重用的模板
 
 ### 3. 环境隔离
 - 为开发/预生产/生产使用单独的环境
@@ -498,13 +516,13 @@ azd init --template template1
 - 使用 CI/CD 管道进行生产部署
 
 ### 4. 配置管理
-- 对敏感数据使用环境变量
+- 使用环境变量存储敏感数据
 - 将配置保存在版本控制中
 - 记录环境特定的设置
 
 ## 学习进度
 
-### 初级 (第1-2周)
+### 初学者 (第1-2周)
 1. 安装 azd 并进行身份验证
 2. 部署一个简单的模板
 3. 理解项目结构
@@ -529,8 +547,8 @@ azd init --template template1
 - [您的第一个项目](first-project.md) - 完成动手教程
 - [配置指南](configuration.md) - 高级配置选项
 
-**🎯 准备好进入下一章了吗？**
-- [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md) - 开始构建 AI 应用
+**🎯 准备好进入下一章？**
+- [第2章：以AI为核心的开发](../ai-foundry/azure-ai-foundry-integration.md) - 开始构建 AI 应用
 
 ## 其他资源
 
@@ -545,7 +563,9 @@ azd init --template template1
 - **📖 当前章节**: 第1章 - 基础与快速入门  
 - **⬅️ 上一章**: [课程概览](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ 下一章**: [安装与设置](installation.md)
-- **🚀 下一章节**: [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 下一章节**: [第2章：以AI为核心的开发](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

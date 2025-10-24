@@ -1,70 +1,70 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T11:03:46+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T18:02:38+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "ro"
 }
 -->
-# Verificări Preliminare pentru Implementările AZD
+# Verificări înainte de implementare pentru AZD
 
-**Navigare în capitol:**
+**Navigare capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol Curent**: Capitolul 6 - Validare și Planificare Pre-Implementare
+- **📖 Capitol curent**: Capitolul 6 - Validare și Planificare înainte de implementare
 - **⬅️ Precedent**: [Selecția SKU](sku-selection.md)
-- **➡️ Capitol Următor**: [Capitolul 7: Depanare](../troubleshooting/common-issues.md)
-- **🔧 Legat**: [Capitolul 4: Ghid de Implementare](../deployment/deployment-guide.md)
+- **➡️ Capitol următor**: [Capitolul 7: Depanare](../troubleshooting/common-issues.md)
+- **🔧 Legat**: [Capitolul 4: Ghid de implementare](../deployment/deployment-guide.md)
 
 ## Introducere
 
-Acest ghid cuprinzător oferă scripturi și proceduri de validare pre-implementare pentru a asigura succesul implementărilor Azure Developer CLI înainte de a începe. Învață să implementezi verificări automate pentru autentificare, disponibilitatea resurselor, cote, conformitatea cu securitatea și cerințele de performanță pentru a preveni eșecurile de implementare și a optimiza ratele de succes ale implementării.
+Acest ghid cuprinzător oferă scripturi și proceduri de validare înainte de implementare pentru a asigura succesul implementărilor Azure Developer CLI înainte de a începe. Învață să implementezi verificări automate pentru autentificare, disponibilitatea resurselor, cote, conformitate de securitate și cerințe de performanță pentru a preveni eșecurile de implementare și a optimiza ratele de succes ale implementării.
 
-## Obiective de Învățare
+## Obiective de învățare
 
-După parcurgerea acestui ghid, vei:
-- Stăpâni tehnici și scripturi automate de validare pre-implementare
+După finalizarea acestui ghid, vei:
+- Stăpâni tehnici și scripturi automate de validare înainte de implementare
 - Înțelege strategii cuprinzătoare de verificare pentru autentificare, permisiuni și cote
 - Implementa proceduri de validare a disponibilității și capacității resurselor
 - Configura verificări de securitate și conformitate pentru politicile organizaționale
 - Proiecta fluxuri de lucru pentru estimarea costurilor și validarea bugetului
-- Crea automatizări personalizate pentru verificări preliminare în pipeline-urile CI/CD
+- Crea automatizări personalizate pentru verificări înainte de implementare în pipeline-urile CI/CD
 
-## Rezultate de Învățare
+## Rezultate de învățare
 
 După finalizare, vei putea:
-- Crea și executa scripturi cuprinzătoare de validare preliminară
+- Crea și executa scripturi cuprinzătoare de validare înainte de implementare
 - Proiecta fluxuri de lucru automate de verificare pentru diferite scenarii de implementare
 - Implementa proceduri și politici de validare specifice mediului
 - Configura monitorizare proactivă și alerte pentru pregătirea implementării
-- Depana problemele pre-implementare și implementa acțiuni corective
-- Integra verificările preliminare în pipeline-urile DevOps și fluxurile de lucru automatizate
+- Depana problemele înainte de implementare și implementa acțiuni corective
+- Integra verificările înainte de implementare în pipeline-urile DevOps și fluxurile de lucru automatizate
 
 ## Cuprins
 
-- [Prezentare Generală](../../../../docs/pre-deployment)
-- [Script Automatizat de Verificare Preliminară](../../../../docs/pre-deployment)
-- [Lista de Verificare Manuală](../../../../docs/pre-deployment)
-- [Validarea Mediului](../../../../docs/pre-deployment)
-- [Validarea Resurselor](../../../../docs/pre-deployment)
-- [Verificări de Securitate și Conformitate](../../../../docs/pre-deployment)
-- [Planificarea Performanței și Capacității](../../../../docs/pre-deployment)
-- [Depanarea Problemelor Comune](../../../../docs/pre-deployment)
+- [Prezentare generală](../../../../docs/pre-deployment)
+- [Script automat de verificare înainte de implementare](../../../../docs/pre-deployment)
+- [Lista de verificare manuală](../../../../docs/pre-deployment)
+- [Validarea mediului](../../../../docs/pre-deployment)
+- [Validarea resurselor](../../../../docs/pre-deployment)
+- [Verificări de securitate și conformitate](../../../../docs/pre-deployment)
+- [Planificarea performanței și capacității](../../../../docs/pre-deployment)
+- [Depanarea problemelor comune](../../../../docs/pre-deployment)
 
 ---
 
-## Prezentare Generală
+## Prezentare generală
 
-Verificările preliminare sunt validări esențiale efectuate înainte de implementare pentru a asigura:
+Verificările înainte de implementare sunt validări esențiale efectuate înainte de implementare pentru a asigura:
 
 - **Disponibilitatea resurselor** și cotele în regiunile țintă
 - **Autentificarea și permisiunile** configurate corect
 - **Validitatea șabloanelor** și corectitudinea parametrilor
 - **Conectivitatea rețelei** și dependențele
-- **Conformitatea cu securitatea** politicilor organizaționale
+- **Conformitatea de securitate** cu politicile organizaționale
 - **Estimarea costurilor** în limitele bugetului
 
-### Când să rulezi verificările preliminare
+### Când să rulezi verificările înainte de implementare
 
 - **Înainte de prima implementare** într-un mediu nou
 - **După modificări semnificative ale șabloanelor**
@@ -74,9 +74,9 @@ Verificările preliminare sunt validări esențiale efectuate înainte de implem
 
 ---
 
-## Script Automatizat de Verificare Preliminară
+## Script automat de verificare înainte de implementare
 
-### Verificator Preliminar PowerShell
+### Verificator PowerShell înainte de implementare
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Verificator Preliminar Bash
+### Verificator Bash înainte de implementare
 
 ```bash
 #!/bin/bash
@@ -790,70 +805,71 @@ main "$@"
 
 ---
 
-## Lista de Verificare Manuală
+## Lista de verificare manuală
 
-### Lista de Verificare Pre-Implementare
+### Lista de verificare înainte de implementare
 
-Printează această listă și verifică fiecare element înainte de implementare:
+Tipărește această listă și verifică fiecare element înainte de implementare:
 
-#### ✅ Configurarea Mediului
+#### ✅ Configurarea mediului
 - [ ] AZD CLI instalat și actualizat la ultima versiune
 - [ ] Azure CLI instalat și autentificat
 - [ ] Abonamentul Azure corect selectat
 - [ ] Numele mediului este unic și respectă convențiile de denumire
 - [ ] Grupul de resurse țintă identificat sau poate fi creat
 
-#### ✅ Autentificare și Permisiuni
-- [ ] Autentificat cu succes folosind `azd auth login`
+#### ✅ Autentificare și permisiuni
+- [ ] Autentificare reușită cu `azd auth login`
 - [ ] Utilizatorul are rolul de Contributor pe abonamentul/grupul de resurse țintă
 - [ ] Principalul de serviciu configurat pentru CI/CD (dacă este aplicabil)
 - [ ] Niciun certificat sau acreditiv expirat
 
-#### ✅ Validarea Șabloanelor
+#### ✅ Validarea șabloanelor
 - [ ] `azure.yaml` există și este YAML valid
 - [ ] Toate serviciile definite în azure.yaml au cod sursă corespunzător
 - [ ] Șabloanele Bicep din directorul `infra/` sunt prezente
 - [ ] `main.bicep` se compilează fără erori (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Previzualizarea infrastructurii rulează cu succes (`azd provision --preview`)
 - [ ] Toți parametrii necesari au valori implicite sau vor fi furnizați
 - [ ] Niciun secret hardcodificat în șabloane
 
-#### ✅ Planificarea Resurselor
+#### ✅ Planificarea resurselor
 - [ ] Regiunea Azure țintă selectată și validată
 - [ ] Serviciile Azure necesare disponibile în regiunea țintă
 - [ ] Cote suficiente disponibile pentru resursele planificate
 - [ ] Conflictele de denumire a resurselor verificate
 - [ ] Dependențele între resurse înțelese
 
-#### ✅ Rețea și Securitate
+#### ✅ Rețea și securitate
 - [ ] Conectivitatea rețelei la punctele finale Azure verificată
 - [ ] Setările firewall/proxy configurate dacă este necesar
 - [ ] Key Vault configurat pentru gestionarea secretelor
 - [ ] Identități gestionate utilizate acolo unde este posibil
 - [ ] Aplicarea HTTPS activată pentru aplicațiile web
 
-#### ✅ Managementul Costurilor
-- [ ] Estimările costurilor calculate folosind Azure Pricing Calculator
+#### ✅ Managementul costurilor
+- [ ] Estimările costurilor calculate folosind Calculatorul de Prețuri Azure
 - [ ] Alertele de buget configurate dacă este necesar
 - [ ] SKU-uri adecvate selectate pentru tipul de mediu
-- [ ] Capacitatea rezervată luată în considerare pentru sarcinile de producție
+- [ ] Capacitatea rezervată luată în considerare pentru sarcinile de lucru în producție
 
-#### ✅ Monitorizare și Observabilitate
+#### ✅ Monitorizare și observabilitate
 - [ ] Application Insights configurat în șabloane
 - [ ] Workspace Log Analytics planificat
-- [ ] Regulile de alertă definite pentru metrici critice
-- [ ] Puncte de verificare a sănătății implementate în aplicații
+- [ ] Reguli de alertă definite pentru metrici critice
+- [ ] Puncte finale de verificare a sănătății implementate în aplicații
 
-#### ✅ Backup și Recuperare
+#### ✅ Backup și recuperare
 - [ ] Strategia de backup definită pentru resursele de date
 - [ ] Obiectivele de timp de recuperare (RTO) documentate
 - [ ] Obiectivele de punct de recuperare (RPO) documentate
-- [ ] Planul de recuperare în caz de dezastru în loc pentru producție
+- [ ] Plan de recuperare în caz de dezastru în loc pentru producție
 
 ---
 
-## Validarea Mediului
+## Validarea mediului
 
-### Validarea Mediului de Dezvoltare
+### Validarea mediului de dezvoltare
 
 ```bash
 #!/bin/bash
@@ -885,7 +901,7 @@ validate_dev_environment() {
 }
 ```
 
-### Validarea Mediului de Producție
+### Validarea mediului de producție
 
 ```bash
 #!/bin/bash
@@ -926,9 +942,9 @@ validate_prod_environment() {
 
 ---
 
-## Validarea Resurselor
+## Validarea resurselor
 
-### Script de Validare a Cotelor
+### Script de validare a cotelor
 
 ```python
 #!/usr/bin/env python3
@@ -1051,9 +1067,9 @@ if __name__ == "__main__":
 
 ---
 
-## Verificări de Securitate și Conformitate
+## Verificări de securitate și conformitate
 
-### Script de Validare a Securității
+### Script de validare a securității
 
 ```bash
 #!/bin/bash
@@ -1283,37 +1299,37 @@ steps:
 
 ---
 
-## Rezumat al Bunelor Practici
+## Rezumatul celor mai bune practici
 
-### ✅ Cele Mai Bune Practici pentru Verificări Preliminare
+### ✅ Cele mai bune practici pentru verificările înainte de implementare
 
-1. **Automatizează Unde Este Posibil**
+1. **Automatizează unde este posibil**
    - Integrează verificările în pipeline-urile CI/CD
    - Utilizează scripturi pentru validări repetabile
    - Stochează rezultatele pentru audit
 
-2. **Validare Specifică Mediului**
+2. **Validare specifică mediului**
    - Verificări diferite pentru dev/staging/prod
    - Cerințe de securitate adecvate pentru fiecare mediu
    - Optimizarea costurilor pentru medii non-producție
 
-3. **Acoperire Cuprinzătoare**
+3. **Acoperire cuprinzătoare**
    - Autentificare și permisiuni
    - Cote și disponibilitatea resurselor
    - Validarea șabloanelor și sintaxei
    - Cerințe de securitate și conformitate
 
-4. **Raportare Clară**
+4. **Raportare clară**
    - Indicatori de stare colorați
    - Mesaje de eroare detaliate cu pași de remediere
    - Rapoarte sumare pentru evaluare rapidă
 
-5. **Oprește Rapid**
+5. **Oprește-te rapid**
    - Oprește implementarea dacă verificările critice eșuează
-   - Oferă ghid clar pentru rezolvare
-   - Permite rularea ușoară a verificărilor din nou
+   - Oferă ghidare clară pentru rezolvare
+   - Permite reluarea ușoară a verificărilor
 
-### Greșeli Comune în Verificările Preliminare
+### Capcane comune înainte de implementare
 
 1. **Omiterea validării** pentru implementări "rapide"
 2. **Verificarea insuficientă a permisiunilor** înainte de implementare
@@ -1324,15 +1340,15 @@ steps:
 
 ---
 
-**Sfat Util**: Rulează verificările preliminare ca un job separat în pipeline-ul CI/CD înainte de jobul de implementare propriu-zis. Acest lucru îți permite să identifici problemele devreme și oferă feedback mai rapid dezvoltatorilor.
+**Sfat util**: Rulează verificările înainte de implementare ca un job separat în pipeline-ul CI/CD înainte de jobul de implementare propriu-zis. Acest lucru îți permite să identifici problemele devreme și oferă feedback rapid dezvoltatorilor.
 
 ---
 
 **Navigare**
-- **Lecția Anterioară**: [Selecția SKU](sku-selection.md)
-- **Lecția Următoare**: [Fișă de Referință](../../resources/cheat-sheet.md)
+- **Lecția anterioară**: [Selecția SKU](sku-selection.md)
+- **Lecția următoare**: [Fișă de referință](../../resources/cheat-sheet.md)
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

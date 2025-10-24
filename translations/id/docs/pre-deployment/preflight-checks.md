@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T08:00:12+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:42:59+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "id"
 }
 -->
-# Pemeriksaan Pra-Penerapan untuk AZD
+# Pemeriksaan Pra-Penerbangan untuk Deployment AZD
 
 **Navigasi Bab:**
 - **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pendahuluan
 
-Panduan lengkap ini menyediakan skrip dan prosedur validasi pra-penerapan untuk memastikan keberhasilan penerapan Azure Developer CLI sebelum dimulai. Pelajari cara menerapkan pemeriksaan otomatis untuk autentikasi, ketersediaan sumber daya, kuota, kepatuhan keamanan, dan persyaratan kinerja guna mencegah kegagalan penerapan dan mengoptimalkan tingkat keberhasilan penerapan.
+Panduan lengkap ini menyediakan skrip validasi pra-penerapan dan prosedur untuk memastikan keberhasilan penerapan Azure Developer CLI sebelum dimulai. Pelajari cara menerapkan pemeriksaan otomatis untuk autentikasi, ketersediaan sumber daya, kuota, kepatuhan keamanan, dan persyaratan kinerja untuk mencegah kegagalan penerapan dan mengoptimalkan tingkat keberhasilan penerapan.
 
 ## Tujuan Pembelajaran
 
@@ -27,13 +27,13 @@ Dengan menyelesaikan panduan ini, Anda akan:
 - Memahami strategi pemeriksaan menyeluruh untuk autentikasi, izin, dan kuota
 - Menerapkan prosedur validasi ketersediaan dan kapasitas sumber daya
 - Mengonfigurasi pemeriksaan keamanan dan kepatuhan untuk kebijakan organisasi
-- Merancang alur kerja validasi anggaran dan estimasi biaya
+- Merancang alur kerja estimasi biaya dan validasi anggaran
 - Membuat otomatisasi pemeriksaan pra-penerbangan khusus untuk pipeline CI/CD
 
 ## Hasil Pembelajaran
 
 Setelah selesai, Anda akan dapat:
-- Membuat dan menjalankan skrip validasi pra-penerbangan yang menyeluruh
+- Membuat dan menjalankan skrip validasi pra-penerbangan yang komprehensif
 - Merancang alur kerja pemeriksaan otomatis untuk berbagai skenario penerapan
 - Menerapkan prosedur dan kebijakan validasi spesifik lingkungan
 - Mengonfigurasi pemantauan proaktif dan pemberitahuan untuk kesiapan penerapan
@@ -61,15 +61,15 @@ Pemeriksaan pra-penerbangan adalah validasi penting yang dilakukan sebelum pener
 - **Autentikasi dan izin** dikonfigurasi dengan benar
 - **Validitas template** dan keakuratan parameter
 - **Konektivitas jaringan** dan dependensi
-- **Kepatuhan keamanan** terhadap kebijakan organisasi
-- **Estimasi biaya** sesuai dengan batas anggaran
+- **Kepatuhan keamanan** dengan kebijakan organisasi
+- **Estimasi biaya** sesuai batas anggaran
 
 ### Kapan Melakukan Pemeriksaan Pra-Penerbangan
 
 - **Sebelum penerapan pertama** ke lingkungan baru
 - **Setelah perubahan signifikan pada template**
 - **Sebelum penerapan ke produksi**
-- **Saat mengubah wilayah Azure**
+- **Saat mengganti wilayah Azure**
 - **Sebagai bagian dari pipeline CI/CD**
 
 ---
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -812,8 +827,9 @@ Cetak daftar periksa ini dan verifikasi setiap item sebelum penerapan:
 #### ✅ Validasi Template
 - [ ] `azure.yaml` ada dan valid sebagai YAML
 - [ ] Semua layanan yang didefinisikan dalam azure.yaml memiliki kode sumber yang sesuai
-- [ ] Template Bicep dalam direktori `infra/` tersedia
+- [ ] Template Bicep di direktori `infra/` tersedia
 - [ ] `main.bicep` dikompilasi tanpa kesalahan (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Pratinjau infrastruktur berhasil dijalankan (`azd provision --preview`)
 - [ ] Semua parameter yang diperlukan memiliki nilai default atau akan disediakan
 - [ ] Tidak ada rahasia yang dikodekan langsung dalam template
 
@@ -827,17 +843,17 @@ Cetak daftar periksa ini dan verifikasi setiap item sebelum penerapan:
 #### ✅ Jaringan & Keamanan
 - [ ] Konektivitas jaringan ke endpoint Azure diverifikasi
 - [ ] Pengaturan firewall/proxy dikonfigurasi jika diperlukan
-- [ ] Key Vault dikonfigurasi untuk manajemen rahasia
+- [ ] Key Vault dikonfigurasi untuk pengelolaan rahasia
 - [ ] Identitas terkelola digunakan jika memungkinkan
 - [ ] Penegakan HTTPS diaktifkan untuk aplikasi web
 
-#### ✅ Manajemen Biaya
+#### ✅ Pengelolaan Biaya
 - [ ] Estimasi biaya dihitung menggunakan Azure Pricing Calculator
 - [ ] Peringatan anggaran dikonfigurasi jika diperlukan
 - [ ] SKU yang sesuai dipilih untuk jenis lingkungan
-- [ ] Kapasitas cadangan dipertimbangkan untuk beban kerja produksi
+- [ ] Kapasitas yang dipesan dipertimbangkan untuk beban kerja produksi
 
-#### ✅ Pemantauan & Observabilitas
+#### ✅ Pemantauan & Observasi
 - [ ] Application Insights dikonfigurasi dalam template
 - [ ] Workspace Log Analytics direncanakan
 - [ ] Aturan peringatan didefinisikan untuk metrik penting
@@ -1293,11 +1309,11 @@ steps:
    - Simpan hasil untuk jejak audit
 
 2. **Validasi Spesifik Lingkungan**
-   - Pemeriksaan berbeda untuk dev/staging/prod
+   - Pemeriksaan berbeda untuk dev/staging/produksi
    - Persyaratan keamanan yang sesuai per lingkungan
    - Optimasi biaya untuk lingkungan non-produksi
 
-3. **Cakupan Menyeluruh**
+3. **Cakupan Komprehensif**
    - Autentikasi dan izin
    - Kuota sumber daya dan ketersediaan
    - Validasi template dan sintaks
@@ -1324,7 +1340,7 @@ steps:
 
 ---
 
-**Tip Profesional**: Jalankan pemeriksaan pra-penerbangan sebagai pekerjaan terpisah dalam pipeline CI/CD Anda sebelum pekerjaan penerapan sebenarnya. Ini memungkinkan Anda menangkap masalah lebih awal dan memberikan umpan balik lebih cepat kepada pengembang.
+**Tips Profesional**: Jalankan pemeriksaan pra-penerbangan sebagai pekerjaan terpisah dalam pipeline CI/CD Anda sebelum pekerjaan penerapan sebenarnya. Ini memungkinkan Anda menangkap masalah lebih awal dan memberikan umpan balik lebih cepat kepada pengembang.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang keliru yang timbul dari penggunaan terjemahan ini.

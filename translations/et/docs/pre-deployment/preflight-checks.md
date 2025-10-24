@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-10-11T15:57:39+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T18:30:04+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "et"
 }
@@ -11,20 +11,20 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 6 - Eeljuurutuse valideerimine ja planeerimine
+- **📖 Käesolev peatükk**: Peatükk 6 - Eeljuurutuse valideerimine ja planeerimine
 - **⬅️ Eelmine**: [SKU valik](sku-selection.md)
 - **➡️ Järgmine peatükk**: [Peatükk 7: Tõrkeotsing](../troubleshooting/common-issues.md)
 - **🔧 Seotud**: [Peatükk 4: Juurutamise juhend](../deployment/deployment-guide.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend pakub eeljuurutuse valideerimise skripte ja protseduure, et tagada Azure Developer CLI juurutuste edukus enne nende alustamist. Õppige rakendama automatiseeritud kontrolle autentimise, ressursside kättesaadavuse, kvootide, turvalisuse vastavuse ja jõudlusnõuete osas, et vältida juurutusvigu ja optimeerida juurutuste edukuse määra.
+See põhjalik juhend pakub eeljurutuse valideerimise skripte ja protseduure, et tagada edukad Azure Developer CLI juurutused enne nende algust. Õppige rakendama automatiseeritud kontrolle autentimise, ressursside kättesaadavuse, limiitide, turvalisuse ja jõudluse nõuete osas, et vältida juurutuse ebaõnnestumisi ja optimeerida juurutuse edukuse määrasid.
 
-## Õppimise eesmärgid
+## Õpieesmärgid
 
-Selle juhendi läbimise järel:
-- Omandate automatiseeritud eeljuurutuse valideerimise tehnikad ja skriptid
-- Mõistate põhjalikke kontrollistrateegiaid autentimise, õiguste ja kvootide osas
+Selle juhendi läbimisega:
+- Õpite automatiseeritud eeljurutuse valideerimise tehnikaid ja skripte
+- Mõistate autentimise, õiguste ja limiitide kontrollimise strateegiaid
 - Rakendate ressursside kättesaadavuse ja mahutavuse valideerimise protseduure
 - Konfigureerite turvalisuse ja vastavuse kontrolle organisatsiooni poliitikate jaoks
 - Kujundate kulude hindamise ja eelarve valideerimise töövooge
@@ -35,9 +35,9 @@ Selle juhendi läbimise järel:
 Pärast juhendi läbimist suudate:
 - Luua ja käivitada põhjalikke eelkontrolli valideerimise skripte
 - Kujundada automatiseeritud kontrolli töövooge erinevate juurutusstsenaariumide jaoks
-- Rakendada keskkonnaspetsiifilisi valideerimisprotseduure ja -poliitikaid
-- Konfigureerida proaktiivset monitooringut ja hoiatuste süsteemi juurutusvalmiduse jaoks
-- Tõrkeotsingut teha ja rakendada parandusmeetmeid enne juurutust
+- Rakendada keskkonnaspetsiifilisi valideerimise protseduure ja poliitikaid
+- Konfigureerida proaktiivset jälgimist ja hoiatusi juurutuse valmisoleku jaoks
+- Lahendada eeljurutuse probleeme ja rakendada parandusmeetmeid
 - Integreerida eelkontrollid DevOps torujuhtmetesse ja automatiseerimise töövoogudesse
 
 ## Sisukord
@@ -49,34 +49,34 @@ Pärast juhendi läbimist suudate:
 - [Ressursside valideerimine](../../../../docs/pre-deployment)
 - [Turvalisuse ja vastavuse kontrollid](../../../../docs/pre-deployment)
 - [Jõudluse ja mahutavuse planeerimine](../../../../docs/pre-deployment)
-- [Tõrkeotsingu levinud probleemid](../../../../docs/pre-deployment)
+- [Tõrkeotsing](../../../../docs/pre-deployment)
 
 ---
 
 ## Ülevaade
 
-Eelkontrollid on olulised valideerimised, mis viiakse läbi enne juurutamist, et tagada:
+Eelkontrollid on olulised valideerimised, mis tehakse enne juurutamist, et tagada:
 
-- **Ressursside kättesaadavus** ja kvoodid sihtpiirkondades
+- **Ressursside kättesaadavus** ja limiidid sihtpiirkondades
 - **Autentimine ja õigused** on õigesti konfigureeritud
 - **Mallide kehtivus** ja parameetrite korrektsus
-- **Võrguga ühenduvus** ja sõltuvused
-- **Turvalisuse vastavus** organisatsiooni poliitikatega
-- **Kulude hindamine** eelarve piirides
+- **Võrgukonnektiivsus** ja sõltuvused
+- **Turvalisuse vastavus** organisatsiooni poliitikatele
+- **Kulude hindamine** eelarve piirangute raames
 
 ### Millal eelkontrolle käivitada
 
-- **Enne esimest juurutust** uude keskkonda
-- **Pärast olulisi mallide muudatusi**
-- **Enne tootmisesse juurutamist**
-- **Azure'i piirkonna muutmisel**
-- **CI/CD torujuhtmete osana**
+- **Enne esimest juurutust** uues keskkonnas
+- **Pärast olulisi mallimuudatusi**
+- **Enne tootmise juurutusi**
+- **Azure'i piirkondade muutmisel**
+- **Osana CI/CD torujuhtmetest**
 
 ---
 
 ## Automatiseeritud eelkontrolli skript
 
-### PowerShelli eelkontrolli tööriist
+### PowerShelli eelkontrolli skript
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bashi eelkontrolli tööriist
+### Bashi eelkontrolli skript
 
 ```bash
 #!/bin/bash
@@ -792,62 +807,63 @@ main "$@"
 
 ## Manuaalne valideerimise kontrollnimekiri
 
-### Eeljuurutuse kontrollnimekiri
+### Eeljurutuse kontrollnimekiri
 
-Prindi see kontrollnimekiri välja ja kontrolli iga punkti enne juurutamist:
+Prindi see kontrollnimekiri ja kinnita iga punkt enne juurutust:
 
 #### ✅ Keskkonna seadistamine
-- [ ] AZD CLI on paigaldatud ja uuendatud uusimale versioonile
+- [ ] AZD CLI on paigaldatud ja uuendatud viimasele versioonile
 - [ ] Azure CLI on paigaldatud ja autentitud
 - [ ] Valitud on õige Azure'i tellimus
-- [ ] Keskkonna nimi on unikaalne ja vastab nimetamisreeglitele
-- [ ] Sihtressursside grupp on tuvastatud või saab selle luua
+- [ ] Keskkonna nimi on unikaalne ja järgib nimekonventsioone
+- [ ] Sihtressursside grupp on tuvastatud või saab luua
 
 #### ✅ Autentimine ja õigused
-- [ ] Edukalt autentitud käsuga `azd auth login`
-- [ ] Kasutajal on sihttellimuse/ressursside grupi jaoks Kontribuudi roll
-- [ ] Teenuse peamine konto on konfigureeritud CI/CD jaoks (kui kohaldatav)
+- [ ] Edukalt autentitud `azd auth login` abil
+- [ ] Kasutajal on sihttellimuse/ressursside grupi jaoks "Contributor" roll
+- [ ] Teenusepõhimõte on konfigureeritud CI/CD jaoks (kui kohaldatav)
 - [ ] Sertifikaadid või mandaadid ei ole aegunud
 
 #### ✅ Malli valideerimine
-- [ ] `azure.yaml` on olemas ja kehtiv YAML
-- [ ] Kõigil teenustel, mis on määratletud failis azure.yaml, on vastav lähtekood
-- [ ] Bicep mallid kaustas `infra/` on olemas
+- [ ] `azure.yaml` eksisteerib ja on kehtiv YAML
+- [ ] Kõigil teenustel, mis on määratletud azure.yaml-is, on vastav lähtekood
+- [ ] Bicep mallid `infra/` kataloogis on olemas
 - [ ] `main.bicep` kompileerub vigadeta (`az bicep build --file infra/main.bicep`)
-- [ ] Kõigil nõutavatel parameetritel on vaikimisi väärtused või need määratakse
-- [ ] Mallides pole kõvakodeeritud paroole
+- [ ] 🧪 Infrastruktuuri eelvaade töötab edukalt (`azd provision --preview`)
+- [ ] Kõigil nõutavatel parameetritel on vaikimisi väärtused või need antakse
+- [ ] Mallides ei ole kõvakodeeritud paroole
 
 #### ✅ Ressursside planeerimine
-- [ ] Valitud ja valideeritud on siht Azure'i piirkond
+- [ ] Valitud ja valideeritud siht Azure'i piirkond
 - [ ] Nõutavad Azure'i teenused on sihtpiirkonnas saadaval
-- [ ] Planeeritud ressursside jaoks on piisavad kvoodid
-- [ ] Ressursside nimetamise konfliktid on kontrollitud
-- [ ] Ressursside vahelised sõltuvused on mõistetud
+- [ ] Piisavad limiidid planeeritud ressursside jaoks
+- [ ] Ressursside nimede konfliktid kontrollitud
+- [ ] Ressurssidevahelised sõltuvused mõistetud
 
 #### ✅ Võrk ja turvalisus
-- [ ] Võrguga ühenduvus Azure'i lõpp-punktidega on kontrollitud
-- [ ] Vajadusel on tulemüür/proksi seaded konfigureeritud
-- [ ] Key Vault on konfigureeritud paroolide haldamiseks
-- [ ] Kasutatakse hallatavaid identiteete, kui võimalik
-- [ ] Veebirakenduste jaoks on lubatud HTTPS
+- [ ] Võrgukonnektiivsus Azure'i lõpp-punktidega kontrollitud
+- [ ] Vajadusel konfigureeritud tulemüüri/proksi seaded
+- [ ] Key Vault konfigureeritud paroolide haldamiseks
+- [ ] Kasutatakse hallatud identiteete, kui võimalik
+- [ ] HTTPS-i jõustamine lubatud veebirakenduste jaoks
 
 #### ✅ Kulude haldamine
-- [ ] Kulude hinnangud on arvutatud Azure'i hinnakalkulaatoriga
-- [ ] Vajadusel on konfigureeritud eelarvehoiatused
-- [ ] Keskkonna tüübile sobivad SKU-d on valitud
-- [ ] Tootmiskoormuste jaoks on arvestatud reserveeritud mahutavusega
+- [ ] Kulude hinnangud arvutatud Azure'i hinnakalkulaatoriga
+- [ ] Vajadusel konfigureeritud eelarve hoiatused
+- [ ] Valitud sobivad SKU-d keskkonna tüübi jaoks
+- [ ] Tootmiskoormuste jaoks arvestatud reserveeritud mahutavus
 
-#### ✅ Monitooring ja jälgitavus
-- [ ] Rakenduse Insights on mallides konfigureeritud
-- [ ] Logianalüütika tööruum on planeeritud
-- [ ] Häirete reeglid on määratletud kriitiliste mõõdikute jaoks
-- [ ] Rakendustes on rakendatud tervisekontrolli lõpp-punktid
+#### ✅ Jälgimine ja nähtavus
+- [ ] Rakenduse Insights konfigureeritud mallides
+- [ ] Planeeritud Log Analytics tööruum
+- [ ] Määratletud hoiatusreeglid kriitiliste mõõdikute jaoks
+- [ ] Rakendustes rakendatud tervisekontrolli lõpp-punktid
 
 #### ✅ Varundamine ja taastamine
-- [ ] Andmeressursside jaoks on määratletud varundusstrateegia
-- [ ] Taastamise ajakava (RTO) on dokumenteeritud
-- [ ] Taastamise punktide eesmärgid (RPO) on dokumenteeritud
-- [ ] Tootmise jaoks on olemas katastroofitaaste plaan
+- [ ] Andmeressursside varundusstrateegia määratletud
+- [ ] Taastamise aja eesmärgid (RTO) dokumenteeritud
+- [ ] Taastamise punkti eesmärgid (RPO) dokumenteeritud
+- [ ] Tootmise jaoks olemas katastroofitaastamise plaan
 
 ---
 
@@ -928,7 +944,7 @@ validate_prod_environment() {
 
 ## Ressursside valideerimine
 
-### Kvootide valideerimise skript
+### Limiitide valideerimise skript
 
 ```python
 #!/usr/bin/env python3
@@ -1170,7 +1186,7 @@ main "$@"
 
 ---
 
-## Integreerimine CI/CD-ga
+## Integratsioon CI/CD-ga
 
 ### GitHub Actions integratsioon
 
@@ -1293,38 +1309,38 @@ steps:
    - Salvesta tulemused auditi jälgede jaoks
 
 2. **Keskkonnaspetsiifiline valideerimine**
-   - Erinevad kontrollid arendus-/testimis-/tootmiskeskkondadele
+   - Erinevad kontrollid arendus-, testimis- ja tootmiskeskkondade jaoks
    - Sobivad turvanõuded vastavalt keskkonnale
    - Kulude optimeerimine mitte-tootmiskeskkondade jaoks
 
 3. **Põhjalik katvus**
    - Autentimine ja õigused
-   - Ressursside kvoodid ja kättesaadavus
-   - Mallide valideerimine ja süntaks
+   - Ressursside limiidid ja kättesaadavus
+   - Malli valideerimine ja süntaks
    - Turvalisuse ja vastavuse nõuded
 
 4. **Selge aruandlus**
    - Värvikoodiga olekuindikaatorid
-   - Üksikasjalikud veateated koos lahenduste juhistega
+   - Üksikasjalikud veateated koos lahendamise sammudega
    - Kokkuvõtlikud aruanded kiireks hindamiseks
 
-5. **Peata kiiresti**
+5. **Kiire ebaõnnestumine**
    - Peata juurutus, kui kriitilised kontrollid ebaõnnestuvad
-   - Paku selgeid juhiseid probleemide lahendamiseks
-   - Võimalda kontrollide lihtsat uuesti käivitamist
+   - Paku selgeid juhiseid lahendamiseks
+   - Võimalda kontrollide lihtne uuesti käivitamine
 
-### Levinud eelkontrolli vead
+### Tavalised eelkontrolli vead
 
-1. **Valideerimise vahelejätmine** "kiirete" juurutuste puhul
+1. **Valideerimise vahelejätmine** "kiirete" juurutuste jaoks
 2. **Ebapiisav õiguste kontroll** enne juurutust
-3. **Kvoodipiirangute ignoreerimine** kuni juurutus ebaõnnestub
+3. **Limiitide ignoreerimine** kuni juurutus ebaõnnestub
 4. **Mallide valideerimata jätmine** CI/CD torujuhtmetes
 5. **Turvalisuse valideerimise puudumine** tootmiskeskkondades
-6. **Ebapiisav kulude hindamine**, mis viib eelarve ületamiseni
+6. **Ebapiisav kulude hindamine**, mis viib eelarve üllatusteni
 
 ---
 
-**Nõuanne**: Käivitage eelkontrollid eraldi tööna oma CI/CD torujuhtmes enne tegelikku juurutust. See võimaldab probleeme varakult avastada ja annab arendajatele kiiret tagasisidet.
+**Pro nõuanne**: Käivitage eelkontrollid eraldi tööna oma CI/CD torujuhtmes enne tegelikku juurutust. See võimaldab probleeme varakult tuvastada ja annab arendajatele kiiret tagasisidet.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta arusaamatuste või valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamise tõttu.

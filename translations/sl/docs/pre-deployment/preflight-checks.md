@@ -1,70 +1,70 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T13:04:55+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T18:13:20+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "sl"
 }
 -->
-# Preverjanje pred namestitvijo za AZD
+# Predhodni pregledi za namestitve AZD
 
 **Navigacija po poglavjih:**
-- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 6 - Validacija in načrtovanje pred namestitvijo
+- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 6 - Validacija pred namestitvijo in načrtovanje
 - **⬅️ Prejšnje**: [Izbira SKU](sku-selection.md)
 - **➡️ Naslednje poglavje**: [Poglavje 7: Odpravljanje težav](../troubleshooting/common-issues.md)
 - **🔧 Povezano**: [Poglavje 4: Vodnik za namestitev](../deployment/deployment-guide.md)
 
 ## Uvod
 
-Ta obsežen vodnik ponuja skripte in postopke za validacijo pred namestitvijo, da zagotovite uspešne namestitve z Azure Developer CLI, še preden se začnejo. Naučite se izvajati avtomatizirane preveritve za avtentikacijo, razpoložljivost virov, kvote, skladnost s pravili varnosti in zahteve glede zmogljivosti, da preprečite neuspehe pri namestitvi in optimizirate stopnjo uspešnosti.
+Ta obsežen vodnik ponuja skripte in postopke za validacijo pred namestitvijo, da se zagotovi uspešna namestitev z Azure Developer CLI, preden se začne. Naučite se izvajati avtomatizirane preglede za preverjanje avtentikacije, razpoložljivosti virov, kvot, skladnosti s pravili varnosti in zahtev glede zmogljivosti, da preprečite neuspehe pri namestitvi in optimizirate stopnje uspešnosti namestitve.
 
 ## Cilji učenja
 
 Z dokončanjem tega vodnika boste:
 - Obvladali tehnike in skripte za avtomatizirano validacijo pred namestitvijo
-- Razumeli strategije za preverjanje avtentikacije, dovoljenj in kvot
-- Izvedli postopke za validacijo razpoložljivosti in zmogljivosti virov
-- Konfigurirali preveritve skladnosti s pravili varnosti za organizacijske politike
+- Razumeli celovite strategije preverjanja avtentikacije, dovoljenj in kvot
+- Izvajali postopke validacije razpoložljivosti in zmogljivosti virov
+- Konfigurirali varnostne in skladnostne preglede za organizacijske politike
 - Oblikovali delovne tokove za oceno stroškov in validacijo proračuna
-- Ustvarili avtomatizacijo preverjanja pred namestitvijo za CI/CD pipeline
+- Ustvarili avtomatizacijo predhodnih pregledov za CI/CD pipeline
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
-- Ustvariti in izvajati obsežne skripte za validacijo pred namestitvijo
-- Oblikovati avtomatizirane delovne tokove za različne scenarije namestitve
-- Izvesti postopke in politike za validacijo specifične za okolje
+- Ustvariti in izvajati celovite skripte za validacijo pred namestitvijo
+- Oblikovati avtomatizirane delovne tokove preverjanja za različne scenarije namestitve
+- Izvajati postopke in politike validacije, specifične za okolje
 - Konfigurirati proaktivno spremljanje in opozarjanje za pripravljenost na namestitev
-- Odpraviti težave pred namestitvijo in izvajati korektivne ukrepe
-- Integrirati preveritve pred namestitvijo v DevOps pipeline in avtomatizacijske delovne tokove
+- Odpravljati težave pred namestitvijo in izvajati korektivne ukrepe
+- Integrirati predhodne preglede v DevOps pipeline in avtomatizacijske delovne tokove
 
 ## Kazalo vsebine
 
 - [Pregled](../../../../docs/pre-deployment)
-- [Avtomatiziran skript za preverjanje pred namestitvijo](../../../../docs/pre-deployment)
+- [Avtomatiziran skript za predhodne preglede](../../../../docs/pre-deployment)
 - [Ročni kontrolni seznam za validacijo](../../../../docs/pre-deployment)
 - [Validacija okolja](../../../../docs/pre-deployment)
 - [Validacija virov](../../../../docs/pre-deployment)
-- [Preveritve varnosti in skladnosti](../../../../docs/pre-deployment)
-- [Načrtovanje zmogljivosti in zmogljivost](../../../../docs/pre-deployment)
+- [Varnostni in skladnostni pregledi](../../../../docs/pre-deployment)
+- [Načrtovanje zmogljivosti in kapacitet](../../../../docs/pre-deployment)
 - [Odpravljanje pogostih težav](../../../../docs/pre-deployment)
 
 ---
 
 ## Pregled
 
-Preveritve pred namestitvijo so ključne validacije, ki se izvajajo pred namestitvijo, da zagotovijo:
+Predhodni pregledi so ključne validacije, ki se izvajajo pred namestitvijo, da se zagotovi:
 
 - **Razpoložljivost virov** in kvote v ciljni regiji
-- **Avtentikacijo in dovoljenja**, ki so pravilno konfigurirana
-- **Veljavnost predlog** in pravilnost parametrov
-- **Omrežno povezljivost** in odvisnosti
-- **Skladnost s pravili varnosti** organizacijskih politik
-- **Oceno stroškov** znotraj proračunskih omejitev
+- **Avtentikacija in dovoljenja** so pravilno konfigurirani
+- **Veljavnost predloge** in pravilnost parametrov
+- **Omrežna povezljivost** in odvisnosti
+- **Skladnost z varnostnimi pravili** organizacije
+- **Ocena stroškov** znotraj proračunskih omejitev
 
-### Kdaj izvajati preveritve pred namestitvijo
+### Kdaj izvajati predhodne preglede
 
 - **Pred prvo namestitvijo** v novo okolje
 - **Po pomembnih spremembah predloge**
@@ -74,9 +74,9 @@ Preveritve pred namestitvijo so ključne validacije, ki se izvajajo pred namesti
 
 ---
 
-## Avtomatiziran skript za preverjanje pred namestitvijo
+## Avtomatiziran skript za predhodne preglede
 
-### PowerShell preverjanje pred namestitvijo
+### PowerShell preverjevalnik predhodnih pregledov
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash preverjanje pred namestitvijo
+### Bash preverjevalnik predhodnih pregledov
 
 ```bash
 #!/bin/bash
@@ -814,8 +829,9 @@ Natisnite ta kontrolni seznam in preverite vsako točko pred namestitvijo:
 - [ ] Vse storitve, definirane v azure.yaml, imajo ustrezno izvorno kodo
 - [ ] Bicep predloge v imeniku `infra/` so prisotne
 - [ ] `main.bicep` se prevede brez napak (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Predogled infrastrukture se uspešno zažene (`azd provision --preview`)
 - [ ] Vsi zahtevani parametri imajo privzete vrednosti ali bodo zagotovljeni
-- [ ] Ni trdo kodiranih skrivnosti v predlogah
+- [ ] V predlogah ni trdo kodiranih gesel
 
 #### ✅ Načrtovanje virov
 - [ ] Izbrana in validirana ciljna regija Azure
@@ -827,15 +843,15 @@ Natisnite ta kontrolni seznam in preverite vsako točko pred namestitvijo:
 #### ✅ Omrežje in varnost
 - [ ] Preverjena omrežna povezljivost do končnih točk Azure
 - [ ] Konfigurirane nastavitve požarnega zidu/proxyja, če je potrebno
-- [ ] Key Vault konfiguriran za upravljanje skrivnosti
+- [ ] Key Vault konfiguriran za upravljanje gesel
 - [ ] Uporabljene upravljane identitete, kjer je mogoče
-- [ ] Uveljavljena uporaba HTTPS za spletne aplikacije
+- [ ] Omogočena uporaba HTTPS za spletne aplikacije
 
 #### ✅ Upravljanje stroškov
 - [ ] Izračunane ocene stroškov z Azure Pricing Calculator
 - [ ] Konfigurirana opozorila o proračunu, če je potrebno
 - [ ] Izbrani ustrezni SKU-ji za tip okolja
-- [ ] Upoštevana rezervirana zmogljivost za produkcijske obremenitve
+- [ ] Upoštevana rezervirana kapaciteta za produkcijske obremenitve
 
 #### ✅ Spremljanje in opazovanje
 - [ ] Application Insights konfiguriran v predlogah
@@ -847,7 +863,7 @@ Natisnite ta kontrolni seznam in preverite vsako točko pred namestitvijo:
 - [ ] Določena strategija varnostnega kopiranja za podatkovne vire
 - [ ] Dokumentirani cilji časa obnovitve (RTO)
 - [ ] Dokumentirani cilji točke obnovitve (RPO)
-- [ ] Načrt za obnovo po katastrofi za produkcijo
+- [ ] Načrt za obnovitev po katastrofi za produkcijo
 
 ---
 
@@ -1051,7 +1067,7 @@ if __name__ == "__main__":
 
 ---
 
-## Preveritve varnosti in skladnosti
+## Varnostni in skladnostni pregledi
 
 ### Skript za validacijo varnosti
 
@@ -1285,16 +1301,16 @@ steps:
 
 ## Povzetek najboljših praks
 
-### ✅ Najboljše prakse za preverjanje pred namestitvijo
+### ✅ Najboljše prakse za predhodne preglede
 
 1. **Avtomatizirajte, kjer je mogoče**
-   - Integrirajte preveritve v CI/CD pipeline
+   - Integrirajte preglede v CI/CD pipeline
    - Uporabljajte skripte za ponovljive validacije
    - Shranjujte rezultate za revizijske sledi
 
-2. **Validacija specifična za okolje**
-   - Različne preveritve za razvoj/testiranje/produkcijo
-   - Ustrezne zahteve glede varnosti za posamezno okolje
+2. **Validacija, specifična za okolje**
+   - Različni pregledi za razvojno/testno/produkcijsko okolje
+   - Ustrezne varnostne zahteve za posamezno okolje
    - Optimizacija stroškov za neprodukcijska okolja
 
 3. **Celovita pokritost**
@@ -1304,35 +1320,35 @@ steps:
    - Zahteve glede varnosti in skladnosti
 
 4. **Jasno poročanje**
-   - Barvno kodirani indikatorji stanja
+   - Barvno označeni indikatorji stanja
    - Podrobna sporočila o napakah z koraki za odpravo
    - Povzetki poročil za hitro oceno
 
 5. **Hitro ustavljanje**
-   - Ustavite namestitev, če ključne preveritve ne uspejo
+   - Ustavite namestitev, če ključni pregledi ne uspejo
    - Zagotovite jasna navodila za rešitev
-   - Omogočite enostavno ponovno izvajanje preveritev
+   - Omogočite enostavno ponovno izvajanje pregledov
 
-### Pogoste napake pri preverjanju pred namestitvijo
+### Pogoste napake pri predhodnih pregledih
 
 1. **Preskakovanje validacije** za "hitre" namestitve
 2. **Nezadostno preverjanje dovoljenj** pred namestitvijo
 3. **Ignoriranje omejitev kvot** do neuspeha namestitve
-4. **Nevalidiranje predlog** v CI/CD pipeline
-5. **Izpuščanje varnostne validacije** za produkcijska okolja
+4. **Nevalidacija predlog** v CI/CD pipeline
+5. **Manjkajoča varnostna validacija** za produkcijska okolja
 6. **Nezadostna ocena stroškov**, kar vodi do proračunskih presenečenj
 
 ---
 
-**Nasvet**: Izvajajte preveritve pred namestitvijo kot ločeno opravilo v vašem CI/CD pipeline pred dejanskim opravkom namestitve. To vam omogoča zgodnje zaznavanje težav in hitrejše povratne informacije za razvijalce.
+**Nasvet**: Izvajajte predhodne preglede kot ločeno opravilo v vašem CI/CD pipeline pred dejanskim opravilom namestitve. To vam omogoča zgodnje odkrivanje težav in hitrejše povratne informacije za razvijalce.
 
 ---
 
 **Navigacija**
 - **Prejšnja lekcija**: [Izbira SKU](sku-selection.md)
-- **Naslednja lekcija**: [Pomoč pri hitrem začetku](../../resources/cheat-sheet.md)
+- **Naslednja lekcija**: [Pomočnik](../../resources/cheat-sheet.md)
 
 ---
 
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje AI [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku naj se šteje za avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.

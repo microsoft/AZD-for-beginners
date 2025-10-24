@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:46:52+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T18:13:55+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sl"
 }
@@ -16,11 +16,11 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Trenutno poglavje**: Poglavje 1 - Temelji in hitri začetek
 - **⬅️ Prejšnje**: [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Naslednje**: [Namestitev in nastavitev](installation.md)
-- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj z AI v ospredju](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj z AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Uvod
 
-Ta lekcija vas bo seznanila z Azure Developer CLI (azd), zmogljivim orodjem ukazne vrstice, ki pospeši prehod od lokalnega razvoja do uvajanja v Azure. Spoznali boste temeljne koncepte, ključne funkcije in razumeli, kako azd poenostavi uvajanje aplikacij, zasnovanih za oblak.
+Ta lekcija vas bo seznanila z Azure Developer CLI (azd), zmogljivim orodjem ukazne vrstice, ki pospeši prehod od lokalnega razvoja do uvajanja v Azure. Spoznali boste osnovne koncepte, ključne funkcije in razumeli, kako azd poenostavi uvajanje aplikacij, zasnovanih za oblak.
 
 ## Cilji učenja
 
@@ -28,21 +28,21 @@ Do konca te lekcije boste:
 - Razumeli, kaj je Azure Developer CLI in njegov glavni namen
 - Spoznali ključne koncepte, kot so predloge, okolja in storitve
 - Raziskali ključne funkcije, vključno z razvojem na podlagi predlog in infrastrukturo kot kodo
-- Razumeli strukturo projekta azd in delovni tok
+- Razumeli strukturo projekta azd in delovni proces
 - Pripravljeni na namestitev in konfiguracijo azd za vaš razvojni okolje
 
 ## Rezultati učenja
 
-Po zaključku te lekcije boste sposobni:
-- Pojasniti vlogo azd v sodobnih delovnih tokovih razvoja za oblak
-- Prepoznati komponente strukture projekta azd
-- Opisati, kako predloge, okolja in storitve delujejo skupaj
-- Razumeti prednosti infrastrukture kot kode z azd
-- Prepoznati različne ukaze azd in njihove namene
+Po zaključku te lekcije boste lahko:
+- Razložili vlogo azd v sodobnih delovnih procesih razvoja v oblaku
+- Identificirali komponente strukture projekta azd
+- Opisali, kako predloge, okolja in storitve delujejo skupaj
+- Razumeli prednosti infrastrukture kot kode z azd
+- Prepoznali različne ukaze azd in njihove namene
 
 ## Kaj je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je orodje ukazne vrstice, zasnovano za pospešitev prehoda od lokalnega razvoja do uvajanja v Azure. Poenostavi proces gradnje, uvajanja in upravljanja aplikacij, zasnovanih za oblak, na Azure.
+Azure Developer CLI (azd) je orodje ukazne vrstice, zasnovano za pospešitev prehoda od lokalnega razvoja do uvajanja v Azure. Poenostavi proces gradnje, uvajanja in upravljanja aplikacij, zasnovanih za oblak, na platformi Azure.
 
 ## Ključni koncepti
 
@@ -51,7 +51,7 @@ Predloge so temelj azd. Vsebujejo:
 - **Kodo aplikacije** - Vašo izvorno kodo in odvisnosti
 - **Definicije infrastrukture** - Azure viri, definirani v Bicep ali Terraform
 - **Konfiguracijske datoteke** - Nastavitve in okoljske spremenljivke
-- **Skripte za uvajanje** - Avtomatizirani delovni tokovi uvajanja
+- **Skripte za uvajanje** - Avtomatizirani procesi uvajanja
 
 ### Okolja
 Okolja predstavljajo različne cilje uvajanja:
@@ -83,17 +83,35 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastruktura kot koda
-- **Bicep** - Domensko specifičen jezik Azure
+- **Bicep** - Jezik, specifičen za Azure
 - **Terraform** - Orodje za infrastrukturo v več oblakih
-- **ARM predloge** - Predloge Azure Resource Manager
+- **ARM Predloge** - Predloge Azure Resource Manager
 
-### 3. Integrirani delovni tokovi
+### 3. Integrirani delovni procesi
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Varno načrtovanje infrastrukture s predogledom
+Ukaz `azd provision --preview` je izjemno koristen za varno uvajanje:
+- **Analiza suhega zagona** - Prikaže, kaj bo ustvarjeno, spremenjeno ali izbrisano
+- **Brez tveganja** - Brez dejanskih sprememb v vašem Azure okolju
+- **Sodelovanje ekipe** - Delite rezultate predogleda pred uvajanjem
+- **Ocena stroškov** - Razumite stroške virov pred zavezo
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Upravljanje okolij
@@ -166,7 +184,7 @@ Konfiguracija, specifična za okolje:
 }
 ```
 
-## 🎪 Pogosti delovni tokovi
+## 🎪 Pogosti delovni procesi
 
 ### Začetek novega projekta
 ```bash
@@ -198,13 +216,13 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Razumevanje `azd down --force --purge`
-Ukaz `azd down --force --purge` je zmogljiv način za popolno odstranitev vašega azd okolja in vseh povezanih virov. Tukaj je razčlenitev, kaj vsak parameter naredi:
+Ukaz `azd down --force --purge` je močan način za popolno odstranitev vašega azd okolja in vseh povezanih virov. Tukaj je razčlenitev, kaj pomeni vsaka zastavica:
 ```
 --force
 ```
 - Preskoči potrditvene pozive.
 - Koristno za avtomatizacijo ali skriptiranje, kjer ročni vnos ni izvedljiv.
-- Zagotavlja, da se odstranitev nadaljuje brez prekinitev, tudi če CLI zazna neskladnosti.
+- Zagotavlja, da se odstranitev nadaljuje brez prekinitve, tudi če CLI zazna neskladnosti.
 
 ```
 --purge
@@ -213,12 +231,12 @@ Izbriše **vse povezane metapodatke**, vključno z:
 Stanje okolja
 Lokalna mapa `.azure`
 Predpomnjene informacije o uvajanju
-Preprečuje, da bi azd "zapomnil" prejšnja uvajanja, kar lahko povzroči težave, kot so neskladne skupine virov ali zastarele reference v registru.
+Preprečuje, da bi azd "zapomnil" prejšnja uvajanja, kar lahko povzroči težave, kot so neskladne skupine virov ali zastarele reference registracije.
 
-### Zakaj uporabiti oba?
+### Zakaj uporabiti oboje?
 Ko naletite na težave z `azd up` zaradi preostalega stanja ali delnih uvajanj, ta kombinacija zagotavlja **čisto stanje**.
 
-To je še posebej koristno po ročnih brisanjih virov v Azure portalu ali pri preklapljanju predlog, okolij ali konvencij poimenovanja skupin virov.
+To je še posebej koristno po ročnih brisanjih virov v Azure portalu ali pri menjavi predlog, okolij ali konvencij poimenovanja skupin virov.
 
 ### Upravljanje več okolij
 ```bash
@@ -236,9 +254,9 @@ azd env list
 
 ## 🔐 Avtentikacija in poverilnice
 
-Razumevanje avtentikacije je ključno za uspešna uvajanja z azd. Azure uporablja več metod avtentikacije, azd pa izkorišča isto verigo poverilnic, ki jo uporabljajo druga orodja Azure.
+Razumevanje avtentikacije je ključnega pomena za uspešno uvajanje z azd. Azure uporablja več metod avtentikacije, azd pa izkorišča isto verigo poverilnic, kot jo uporabljajo druga orodja Azure.
 
-### Avtentikacija z Azure CLI (`az login`)
+### Avtentikacija Azure CLI (`az login`)
 
 Pred uporabo azd se morate avtenticirati z Azure. Najpogostejša metoda je uporaba Azure CLI:
 
@@ -262,11 +280,11 @@ az account list --output table
 az account set --subscription <subscription-id>
 ```
 
-### Tok avtentikacije
+### Potek avtentikacije
 1. **Interaktivna prijava**: Odpre vaš privzeti brskalnik za avtentikacijo
-2. **Tok kode naprave**: Za okolja brez dostopa do brskalnika
+2. **Device Code Flow**: Za okolja brez dostopa do brskalnika
 3. **Service Principal**: Za avtomatizacijo in scenarije CI/CD
-4. **Upravljana identiteta**: Za aplikacije, gostovane na Azure
+4. **Managed Identity**: Za aplikacije, gostovane na Azure
 
 ### Veriga poverilnic DefaultAzureCredential
 
@@ -293,13 +311,13 @@ export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Identiteta delovne obremenitve (Kubernetes/GitHub Actions)
-Samodejno uporabljeno v:
-- Azure Kubernetes Service (AKS) z identiteto delovne obremenitve
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+Samodejno se uporablja v:
+- Azure Kubernetes Service (AKS) z Workload Identity
 - GitHub Actions z OIDC federacijo
 - Drugih scenarijih federirane identitete
 
-#### 3. Upravljana identiteta
+#### 3. Managed Identity
 Za Azure vire, kot so:
 - Virtualni stroji
 - App Service
@@ -350,7 +368,7 @@ az account set --subscription "Your Subscription Name"
 azd auth login
 ```
 
-#### Za CI/CD cevovode
+#### Za CI/CD pipelines
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -367,14 +385,14 @@ azd auth login
 ```
 
 #### Za produkcijska okolja
-- Uporabite **upravljano identiteto**, ko delate na Azure virih
+- Uporabite **Managed Identity** pri izvajanju na Azure virih
 - Uporabite **Service Principal** za scenarije avtomatizacije
 - Izogibajte se shranjevanju poverilnic v kodi ali konfiguracijskih datotekah
 - Uporabite **Azure Key Vault** za občutljive konfiguracije
 
 ### Pogoste težave z avtentikacijo in rešitve
 
-#### Težava: "Ni najdenih naročnin"
+#### Težava: "Ni najdena nobena naročnina"
 ```bash
 # Solution: Set default subscription
 az account list --output table
@@ -410,7 +428,7 @@ az login
 azd auth login
 ```
 
-#### Razvoj v ekipi
+#### Razvoj ekipe
 ```bash
 # Use specific tenant for organization
 az login --tenant contoso.onmicrosoft.com
@@ -432,10 +450,10 @@ azd up
 ### Varnostni vidiki
 
 1. **Shranjevanje poverilnic**: Nikoli ne shranjujte poverilnic v izvorni kodi
-2. **Omejitev obsega**: Uporabite načelo najmanjših privilegijev za Service Principals
-3. **Rotacija žetonov**: Redno rotirajte skrivnosti Service Principals
-4. **Revizijska sled**: Spremljajte aktivnosti avtentikacije in uvajanja
-5. **Omrežna varnost**: Uporabite zasebne končne točke, kadar je to mogoče
+2. **Omejitev obsega**: Uporabite načelo najmanjših privilegijev za service principals
+3. **Rotacija žetonov**: Redno rotirajte skrivnosti service principal
+4. **Sledljivost**: Spremljajte aktivnosti avtentikacije in uvajanja
+5. **Omrežna varnost**: Uporabljajte zasebne končne točke, kadar je to mogoče
 
 ### Odpravljanje težav z avtentikacijo
 
@@ -490,16 +508,16 @@ azd init --template template1
 ### 2. Izkoristite predloge
 - Začnite z obstoječimi predlogami
 - Prilagodite jih svojim potrebam
-- Ustvarite ponovno uporabne predloge za svojo organizacijo
+- Ustvarite predloge za ponovno uporabo v vaši organizaciji
 
 ### 3. Izolacija okolij
-- Uporabite ločena okolja za razvoj/staging/produkcijo
+- Uporabljajte ločena okolja za razvoj/staging/produkcijo
 - Nikoli ne uvajajte neposredno v produkcijo z lokalnega računalnika
-- Uporabite CI/CD cevovode za produkcijska uvajanja
+- Uporabljajte CI/CD pipelines za produkcijska uvajanja
 
 ### 4. Upravljanje konfiguracije
-- Uporabite okoljske spremenljivke za občutljive podatke
-- Konfiguracijo hranite v nadzoru različic
+- Uporabljajte okoljske spremenljivke za občutljive podatke
+- Hranite konfiguracijo v sistemu za nadzor različic
 - Dokumentirajte nastavitve, specifične za okolje
 
 ## Napredovanje učenja
@@ -510,13 +528,13 @@ azd init --template template1
 3. Razumite strukturo projekta
 4. Naučite se osnovnih ukazov (up, down, deploy)
 
-### Srednji nivo (3-4 teden)
+### Srednje napreden (3-4 teden)
 1. Prilagodite predloge
 2. Upravljajte več okolij
 3. Razumite infrastrukturo kot kodo
-4. Nastavite CI/CD cevovode
+4. Nastavite CI/CD pipelines
 
-### Napredni nivo (5+ teden)
+### Napreden (5+ tednov)
 1. Ustvarite lastne predloge
 2. Napredni vzorci infrastrukture
 3. Uvajanja v več regijah
@@ -530,7 +548,7 @@ azd init --template template1
 - [Vodnik za konfiguracijo](configuration.md) - Napredne možnosti konfiguracije
 
 **🎯 Pripravljeni na naslednje poglavje?**
-- [Poglavje 2: Razvoj z AI v ospredju](../ai-foundry/azure-ai-foundry-integration.md) - Začnite graditi AI aplikacije
+- [Poglavje 2: Razvoj z AI](../ai-foundry/azure-ai-foundry-integration.md) - Začnite graditi AI aplikacije
 
 ## Dodatni viri
 
@@ -545,7 +563,9 @@ azd init --template template1
 - **📖 Trenutno poglavje**: Poglavje 1 - Temelji in hitri začetek  
 - **⬅️ Prejšnje**: [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Naslednje**: [Namestitev in nastavitev](installation.md)
-- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj z AI v ospredju](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj z AI](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Omejitev odgovornosti**:  
+Ta dokument je bil preveden z uporabo storitve AI za prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku naj se šteje za avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.

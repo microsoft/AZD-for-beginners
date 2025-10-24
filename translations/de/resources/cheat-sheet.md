@@ -1,45 +1,45 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T16:17:10+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:29:08+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "de"
 }
 -->
-# Befehlsübersicht - Wichtige AZD-Befehle
+# Befehlsübersicht - Wesentliche AZD-Befehle
 
 **Schnellreferenz für alle Kapitel**
 - **📚 Kursübersicht**: [AZD für Anfänger](../README.md)
 - **📖 Schnellstart**: [Kapitel 1: Grundlagen & Schnellstart](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 KI-Befehle**: [Kapitel 2: KI-First-Entwicklung](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Fortgeschrittene Themen**: [Kapitel 4: Infrastruktur als Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🤖 KI-Befehle**: [Kapitel 2: KI-gestützte Entwicklung](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Fortgeschritten**: [Kapitel 4: Infrastruktur als Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Einführung
 
-Dieses umfassende Spickzettel bietet eine schnelle Referenz für die am häufigsten verwendeten Azure Developer CLI-Befehle, kategorisiert mit praktischen Beispielen. Perfekt für schnelle Nachschlagearbeiten während der Entwicklung, Fehlerbehebung und täglichen Arbeiten mit azd-Projekten.
+Dieses umfassende Cheat Sheet bietet eine schnelle Referenz für die am häufigsten verwendeten Azure Developer CLI-Befehle, kategorisiert und mit praktischen Beispielen versehen. Perfekt für schnelle Nachschlagewerke während der Entwicklung, Fehlerbehebung und täglichen Arbeiten mit azd-Projekten.
 
 ## Lernziele
 
-Durch die Nutzung dieses Spickzettels wirst du:
-- Sofortigen Zugriff auf wichtige Azure Developer CLI-Befehle und deren Syntax haben
+Durch die Nutzung dieses Cheat Sheets werden Sie:
+- Sofortigen Zugriff auf wesentliche Azure Developer CLI-Befehle und deren Syntax haben
 - Die Organisation der Befehle nach funktionalen Kategorien und Anwendungsfällen verstehen
 - Praktische Beispiele für häufige Entwicklungs- und Bereitstellungsszenarien nachschlagen können
-- Fehlerbehebungsbefehle für schnelle Problemlösungen finden
-- Erweiterte Konfigurations- und Anpassungsoptionen effizient nutzen
-- Befehle für die Verwaltung von Umgebungen und Workflows mit mehreren Umgebungen finden
+- Fehlerbehebungsbefehle für eine schnelle Problemlösung finden
+- Erweiterte Konfigurations- und Anpassungsoptionen effizient auffinden
+- Befehle für die Verwaltung von Umgebungen und Workflows mit mehreren Umgebungen lokalisieren
 
 ## Lernergebnisse
 
-Mit regelmäßiger Nutzung dieses Spickzettels wirst du in der Lage sein:
+Mit regelmäßiger Nutzung dieses Cheat Sheets werden Sie in der Lage sein:
 - azd-Befehle sicher auszuführen, ohne die vollständige Dokumentation zu konsultieren
 - Häufige Probleme schnell mit geeigneten Diagnosebefehlen zu lösen
 - Mehrere Umgebungen und Bereitstellungsszenarien effizient zu verwalten
 - Erweiterte azd-Funktionen und Konfigurationsoptionen bei Bedarf anzuwenden
-- Bereitstellungsprobleme systematisch mit Befehlssequenzen zu beheben
-- Workflows durch effektive Nutzung von azd-Abkürzungen und Optionen zu optimieren
+- Bereitstellungsprobleme mit systematischen Befehlsfolgen zu beheben
+- Workflows durch effektive Nutzung von azd-Kurzbefehlen und Optionen zu optimieren
 
-## Erste Schritte Befehle
+## Erste Schritte mit Befehlen
 
 ### Authentifizierung
 ```bash
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -188,9 +190,9 @@ azd show
 azd show --output json
 ```
 
-## 📊 Überwachung und Logs
+## 📊 Überwachung und Protokolle
 
-### Anwendungslogs
+### Anwendungsprotokolle
 ```bash
 # View logs from all services
 azd logs
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Servicemanagement
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -509,7 +520,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funktionsabkürzungen
+### Funktions-Kurzbefehle
 ```bash
 # Quick environment switching
 azd-env() {
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tipp**: Lesezeichen für diesen Spickzettel setzen und `Strg+F` verwenden, um schnell die benötigten Befehle zu finden!
+**Tipp**: Lesezeichen für dieses Cheat Sheet setzen und `Strg+F` verwenden, um schnell die benötigten Befehle zu finden!
 
 ---
 

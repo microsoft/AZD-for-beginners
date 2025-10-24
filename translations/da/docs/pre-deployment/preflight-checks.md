@@ -1,82 +1,82 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T23:31:28+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:29:40+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "da"
 }
 -->
-# Forberedelsestjek før AZD-implementeringer
+# Forudgående Kontroller for AZD Implementeringer
 
 **Kapitelnavigation:**
 - **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
-- **📖 Nuværende Kapitel**: Kapitel 6 - Validering og Planlægning før Implementering
-- **⬅️ Forrige**: [SKU-valg](sku-selection.md)
+- **📖 Nuværende Kapitel**: Kapitel 6 - Validering & Planlægning før Implementering
+- **⬅️ Forrige**: [Valg af SKU](sku-selection.md)
 - **➡️ Næste Kapitel**: [Kapitel 7: Fejlfinding](../troubleshooting/common-issues.md)
 - **🔧 Relateret**: [Kapitel 4: Implementeringsguide](../deployment/deployment-guide.md)
 
 ## Introduktion
 
-Denne omfattende guide giver scripts og procedurer til validering før implementering for at sikre succesfulde Azure Developer CLI-implementeringer, inden de påbegyndes. Lær at implementere automatiske tjek for autentifikation, ressource tilgængelighed, kvoter, sikkerhedsoverholdelse og præstationskrav for at forhindre implementeringsfejl og optimere succesrater.
+Denne omfattende guide giver scripts og procedurer til validering før implementering for at sikre succesfulde Azure Developer CLI implementeringer. Lær at implementere automatiske kontroller for autentifikation, ressource tilgængelighed, kvoter, sikkerhedsoverholdelse og præstationskrav for at forhindre implementeringsfejl og optimere succesrater.
 
 ## Læringsmål
 
 Ved at gennemføre denne guide vil du:
-- Mestre automatiserede valideringsteknikker og scripts før implementering
-- Forstå omfattende tjekstrategier for autentifikation, tilladelser og kvoter
+- Mestre automatiske valideringsteknikker og scripts før implementering
+- Forstå omfattende kontrolstrategier for autentifikation, tilladelser og kvoter
 - Implementere procedurer til validering af ressource tilgængelighed og kapacitet
-- Konfigurere sikkerheds- og overholdelsestjek for organisatoriske politikker
+- Konfigurere sikkerheds- og overholdelseskontroller for organisatoriske politikker
 - Designe workflows til omkostningsestimering og budgetvalidering
-- Oprette skræddersyet automatisering af forberedelsestjek til CI/CD-pipelines
+- Oprette skræddersyede automatiseringer til forudgående kontroller for CI/CD pipelines
 
 ## Læringsresultater
 
-Efter afslutning vil du være i stand til at:
+Efter afslutning vil du kunne:
 - Oprette og udføre omfattende valideringsscripts før implementering
-- Designe automatiserede tjek-workflows til forskellige implementeringsscenarier
+- Designe automatiske kontrolworkflows for forskellige implementeringsscenarier
 - Implementere miljøspecifikke valideringsprocedurer og politikker
 - Konfigurere proaktiv overvågning og alarmering for implementeringsparathed
 - Fejlsøge problemer før implementering og implementere korrigerende handlinger
-- Integrere forberedelsestjek i DevOps-pipelines og automatiseringsworkflows
+- Integrere forudgående kontroller i DevOps pipelines og automatiseringsworkflows
 
 ## Indholdsfortegnelse
 
 - [Oversigt](../../../../docs/pre-deployment)
-- [Automatiseret Forberedelsesscript](../../../../docs/pre-deployment)
+- [Automatiseret Script til Forudgående Kontrol](../../../../docs/pre-deployment)
 - [Manuel Valideringscheckliste](../../../../docs/pre-deployment)
 - [Miljøvalidering](../../../../docs/pre-deployment)
 - [Ressourcevalidering](../../../../docs/pre-deployment)
-- [Sikkerheds- og Overholdelsestjek](../../../../docs/pre-deployment)
-- [Præstations- og Kapacitetsplanlægning](../../../../docs/pre-deployment)
+- [Sikkerheds- & Overholdelseskontroller](../../../../docs/pre-deployment)
+- [Præstations- & Kapacitetsplanlægning](../../../../docs/pre-deployment)
 - [Fejlfinding af Almindelige Problemer](../../../../docs/pre-deployment)
 
 ---
 
 ## Oversigt
 
-Forberedelsestjek er essentielle valideringer, der udføres før implementering for at sikre:
+Forudgående kontroller er essentielle valideringer, der udføres før implementering for at sikre:
 
 - **Ressource tilgængelighed** og kvoter i målregioner
 - **Autentifikation og tilladelser** er korrekt konfigureret
-- **Skabelonens gyldighed** og korrekthed af parametre
+- **Skabelonvaliditet** og korrekthed af parametre
 - **Netværksforbindelse** og afhængigheder
 - **Sikkerhedsoverholdelse** med organisatoriske politikker
 - **Omkostningsestimering** inden for budgetbegrænsninger
 
-### Hvornår skal forberedelsestjek udføres
+### Hvornår skal man udføre forudgående kontroller
 
 - **Før første implementering** til et nyt miljø
 - **Efter væsentlige ændringer i skabeloner**
 - **Før produktionsimplementeringer**
 - **Ved skift af Azure-regioner**
-- **Som en del af CI/CD-pipelines**
+- **Som en del af CI/CD pipelines**
 
 ---
 
-## Automatiseret Forberedelsesscript
+## Automatiseret Script til Forudgående Kontrol
 
-### PowerShell Forberedelsestjekker
+### PowerShell Forudgående Kontrol
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Forberedelsestjekker
+### Bash Forudgående Kontrol
 
 ```bash
 #!/bin/bash
@@ -792,7 +807,7 @@ main "$@"
 
 ## Manuel Valideringscheckliste
 
-### Checkliste før implementering
+### Checkliste før Implementering
 
 Print denne checkliste og verificer hvert punkt før implementering:
 
@@ -814,14 +829,15 @@ Print denne checkliste og verificer hvert punkt før implementering:
 - [ ] Alle tjenester defineret i azure.yaml har tilsvarende kildekode
 - [ ] Bicep-skabeloner i `infra/`-mappen er til stede
 - [ ] `main.bicep` kompilerer uden fejl (`az bicep build --file infra/main.bicep`)
-- [ ] Alle nødvendige parametre har standardværdier eller vil blive angivet
+- [ ] 🧪 Infrastrukturpreview kører succesfuldt (`azd provision --preview`)
+- [ ] Alle nødvendige parametre har standardværdier eller vil blive leveret
 - [ ] Ingen hardkodede hemmeligheder i skabeloner
 
 #### ✅ Ressourceplanlægning
 - [ ] Mål Azure-region valgt og valideret
 - [ ] Nødvendige Azure-tjenester tilgængelige i målregionen
 - [ ] Tilstrækkelige kvoter tilgængelige for planlagte ressourcer
-- [ ] Konflikter i ressourcenavne kontrolleret
+- [ ] Konflikter i ressource-navngivning kontrolleret
 - [ ] Afhængigheder mellem ressourcer forstået
 
 #### ✅ Netværk & Sikkerhed
@@ -829,19 +845,19 @@ Print denne checkliste og verificer hvert punkt før implementering:
 - [ ] Firewall/proxy-indstillinger konfigureret, hvis nødvendigt
 - [ ] Key Vault konfigureret til hemmelighedshåndtering
 - [ ] Administrerede identiteter brugt, hvor muligt
-- [ ] HTTPS håndhævet for webapplikationer
+- [ ] HTTPS håndhævelse aktiveret for webapplikationer
 
 #### ✅ Omkostningsstyring
-- [ ] Omkostningsestimater beregnet med Azure Pricing Calculator
+- [ ] Omkostningsestimater beregnet ved hjælp af Azure Pricing Calculator
 - [ ] Budgetalarmer konfigureret, hvis nødvendigt
 - [ ] Passende SKUs valgt til miljøtypen
 - [ ] Reserveret kapacitet overvejet for produktionsarbejdsbelastninger
 
 #### ✅ Overvågning & Observabilitet
 - [ ] Application Insights konfigureret i skabeloner
-- [ ] Log Analytics-arbejdsområde planlagt
+- [ ] Log Analytics workspace planlagt
 - [ ] Alarmregler defineret for kritiske metrikker
-- [ ] Sundhedstjek-endpoints implementeret i applikationer
+- [ ] Health check endpoints implementeret i applikationer
 
 #### ✅ Backup & Gendannelse
 - [ ] Backup-strategi defineret for dataressourcer
@@ -1051,7 +1067,7 @@ if __name__ == "__main__":
 
 ---
 
-## Sikkerheds- og Overholdelsestjek
+## Sikkerheds- & Overholdelseskontroller
 
 ### Sikkerhedsvalideringsscript
 
@@ -1285,16 +1301,16 @@ steps:
 
 ## Resumé af Best Practices
 
-### ✅ Best Practices for Forberedelsestjek
+### ✅ Best Practices for Forudgående Kontroller
 
 1. **Automatiser Hvor Muligt**
-   - Integrer tjek i CI/CD-pipelines
+   - Integrer kontroller i CI/CD pipelines
    - Brug scripts til gentagelige valideringer
    - Gem resultater til revisionsspor
 
 2. **Miljøspecifik Validering**
-   - Forskellige tjek for udvikling/staging/produktion
-   - Passende sikkerhedskrav pr. miljø
+   - Forskellige kontroller for udvikling/test/produktion
+   - Passende sikkerhedskrav for hvert miljø
    - Omkostningsoptimering for ikke-produktionsmiljøer
 
 3. **Omfattende Dækning**
@@ -1308,28 +1324,28 @@ steps:
    - Detaljerede fejlmeddelelser med løsningsforslag
    - Oversigtsrapporter for hurtig vurdering
 
-5. **Stop Tidligt**
-   - Stop implementering, hvis kritiske tjek fejler
+5. **Stop Hurtigt**
+   - Stop implementering, hvis kritiske kontroller fejler
    - Giv klar vejledning til løsning
-   - Muliggør nem genkørsel af tjek
+   - Muliggør nem genkørsel af kontroller
 
-### Almindelige Fejl i Forberedelsestjek
+### Almindelige Fejl i Forudgående Kontroller
 
 1. **Springe validering over** for "hurtige" implementeringer
-2. **Utilstrækkelig tilladelsestjek** før implementering
+2. **Utilstrækkelig tilladelseskontrol** før implementering
 3. **Ignorere kvotegrænser** indtil implementeringen fejler
-4. **Undlade at validere skabeloner** i CI/CD-pipelines
+4. **Undlade at validere skabeloner** i CI/CD pipelines
 5. **Manglende sikkerhedsvalidering** for produktionsmiljøer
 6. **Utilstrækkelig omkostningsestimering** fører til budgetoverraskelser
 
 ---
 
-**Pro Tip**: Kør forberedelsestjek som et separat job i din CI/CD-pipeline før det egentlige implementeringsjob. Dette giver mulighed for at fange problemer tidligt og giver hurtigere feedback til udviklere.
+**Gode Råd**: Kør forudgående kontroller som et separat job i din CI/CD pipeline før selve implementeringsjobbet. Dette giver mulighed for at fange problemer tidligt og giver hurtigere feedback til udviklere.
 
 ---
 
 **Navigation**
-- **Forrige Lektion**: [SKU-valg](sku-selection.md)
+- **Forrige Lektion**: [Valg af SKU](sku-selection.md)
 - **Næste Lektion**: [Hjælpeark](../../resources/cheat-sheet.md)
 
 ---

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T08:14:35+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:45:10+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "ms"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pengenalan
 
-Panduan komprehensif ini merangkumi segala yang anda perlu tahu tentang penyediaan dan pengurusan sumber Azure menggunakan Azure Developer CLI. Pelajari cara melaksanakan corak Infrastruktur sebagai Kod (IaC) daripada penciptaan sumber asas kepada seni bina infrastruktur peringkat perusahaan menggunakan Bicep, templat ARM, Terraform, dan Pulumi.
+Panduan lengkap ini merangkumi segala yang anda perlu tahu tentang penyediaan dan pengurusan sumber Azure menggunakan Azure Developer CLI. Pelajari cara melaksanakan corak Infrastruktur sebagai Kod (IaC) daripada penciptaan sumber asas hingga seni bina infrastruktur peringkat perusahaan menggunakan Bicep, templat ARM, Terraform, dan Pulumi.
 
 ## Matlamat Pembelajaran
 
@@ -32,11 +32,11 @@ Dengan melengkapkan panduan ini, anda akan:
 
 ## Hasil Pembelajaran
 
-Setelah selesai, anda akan dapat:
+Selepas melengkapkan panduan ini, anda akan dapat:
 - Merancang dan menyediakan infrastruktur Azure menggunakan Bicep dan templat ARM
 - Mengkonfigurasi seni bina pelbagai perkhidmatan yang kompleks dengan kebergantungan sumber yang betul
 - Melaksanakan templat berparameter untuk pelbagai persekitaran dan konfigurasi
-- Menyelesaikan masalah penyediaan infrastruktur dan kegagalan penghantaran
+- Menyelesaikan masalah penyediaan infrastruktur dan mengatasi kegagalan penghantaran
 - Mengaplikasikan prinsip Rangka Kerja Azure Well-Architected kepada reka bentuk infrastruktur
 - Mengurus kemas kini infrastruktur dan melaksanakan strategi versi infrastruktur
 
@@ -379,7 +379,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Rangkaian dan Kesalinghubungan
 
-### Konfigurasi Virtual Network
+### Konfigurasi Rangkaian Maya
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Kemas Kini dan Migrasi Sumber
+## 🧪 Pratonton & Pengesahan Infrastruktur (BARU)
+
+### Pratonton Perubahan Infrastruktur Sebelum Penghantaran
+
+Ciri `azd provision --preview` membolehkan anda **mensimulasikan penyediaan infrastruktur** sebelum benar-benar menghantar sumber. Ia serupa dengan `terraform plan` atau `bicep what-if`, memberikan anda **pandangan dry-run** tentang perubahan yang akan dibuat pada persekitaran Azure anda.
+
+#### 🛠️ Apa yang Dilakukan
+- **Menganalisis templat IaC anda** (Bicep atau Terraform)
+- **Menunjukkan pratonton perubahan sumber**: penambahan, penghapusan, kemas kini
+- **Tidak melaksanakan perubahan** — ia hanya baca dan selamat untuk dijalankan
+
+#### � Kegunaan
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Perintah ini membantu anda:
+- **Mengesahkan perubahan infrastruktur** sebelum menghantar sumber
+- **Menangkap salah konfigurasi awal** dalam kitaran pembangunan
+- **Bekerjasama dengan selamat** dalam persekitaran pasukan
+- **Memastikan penghantaran dengan keistimewaan minimum** tanpa kejutan
+
+Ia sangat berguna apabila:
+- Bekerja dengan persekitaran pelbagai perkhidmatan yang kompleks
+- Membuat perubahan pada infrastruktur pengeluaran
+- Mengesahkan pengubahsuaian templat sebelum kelulusan PR
+- Melatih ahli pasukan baru tentang corak infrastruktur
+
+### Contoh Output Pratonton
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Kemas Kini dan Migrasi Sumber
 
 ### Kemas Kini Sumber yang Selamat
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -849,7 +909,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Pengorganisasian Output
+### 4. Organisasi Output
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -868,8 +928,8 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 - [Perancangan Pra-Penghantaran](../pre-deployment/capacity-planning.md) - Sahkan ketersediaan sumber
 - [Masalah Biasa](../troubleshooting/common-issues.md) - Selesaikan masalah infrastruktur
-- [Panduan Penyahpepijatan](../troubleshooting/debugging.md) - Penyahpepijatan isu penyediaan
-- [Pemilihan SKU](../pre-deployment/sku-selection.md) - Pilih peringkat perkhidmatan yang sesuai
+- [Panduan Debugging](../troubleshooting/debugging.md) - Debug isu penyediaan
+- [Pemilihan SKU](../pre-deployment/sku-selection.md) - Pilih tingkat perkhidmatan yang sesuai
 
 ## Sumber Tambahan
 
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T23:15:36+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:28:01+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "sv"
 }
@@ -14,7 +14,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Nuvarande Kapitel**: Kapitel 4 - Infrastruktur som kod & distribution
 - **⬅️ Föregående**: [Distributionsguide](deployment-guide.md)
 - **➡️ Nästa Kapitel**: [Kapitel 5: Multi-Agent AI-lösningar](../../examples/retail-scenario.md)
-- **🔧 Relaterat**: [Kapitel 6: Förvalidering inför distribution](../pre-deployment/capacity-planning.md)
+- **🔧 Relaterat**: [Kapitel 6: Förvalidering före distribution](../pre-deployment/capacity-planning.md)
 
 ## Introduktion
 
@@ -38,14 +38,14 @@ Efter avslutad guide kommer du att kunna:
 - Implementera parameteriserade mallar för flera miljöer och konfigurationer
 - Felsöka problem med infrastrukturprovisionering och lösa distributionsfel
 - Tillämpa principer från Azure Well-Architected Framework på infrastruktursdesign
-- Hantera infrastrukturuppdateringar och implementera strategier för versionshantering
+- Hantera infrastrukturuppdateringar och implementera strategier för versionshantering av infrastruktur
 
-## Översikt över Infrastrukturprovisionering
+## Översikt över infrastrukturprovisionering
 
-Azure Developer CLI stöder flera leverantörer för Infrastruktur som kod (IaC):
+Azure Developer CLI stöder flera leverantörer av Infrastruktur som kod (IaC):
 - **Bicep** (rekommenderas) - Azures domänspecifika språk
 - **ARM-mallar** - JSON-baserade Azure Resource Manager-mallar
-- **Terraform** - Verktyg för multi-cloud-infrastruktur
+- **Terraform** - Verktyg för multi-molninfrastruktur
 - **Pulumi** - Modern infrastruktur som kod med programmeringsspråk
 
 ## Förstå Azure-resurser
@@ -379,7 +379,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Nätverk och anslutning
 
-### Konfiguration av Virtual Network
+### Konfiguration av virtuellt nätverk
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -660,7 +660,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Avancerade provisioneringsmönster
 
-### Multi-region distribution
+### Distribution över flera regioner
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Resursuppdateringar och migreringar
+## 🧪 Förhandsgranskning och validering av infrastruktur (NYHET)
+
+### Förhandsgranska infrastrukturändringar innan distribution
+
+Funktionen `azd provision --preview` låter dig **simulera provisionering av infrastruktur** innan resurser faktiskt distribueras. Det liknar `terraform plan` eller `bicep what-if`, och ger dig en **torrkörningsvy** av vilka ändringar som skulle göras i din Azure-miljö.
+
+#### 🛠️ Vad den gör
+- **Analyserar dina IaC-mallar** (Bicep eller Terraform)
+- **Visar en förhandsgranskning av resursändringar**: tillägg, borttagningar, uppdateringar
+- **Applicerar inte ändringar** — det är endast läsning och säkert att köra
+
+#### � Användningsområden
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Denna kommando hjälper dig att:
+- **Validera infrastrukturändringar** innan resurser skapas
+- **Upptäcka felkonfigurationer tidigt** i utvecklingscykeln
+- **Samarbeta säkert** i teammiljöer
+- **Säkerställa minimala rättigheter** utan överraskningar
+
+Det är särskilt användbart när:
+- Du arbetar med komplexa miljöer med flera tjänster
+- Du gör ändringar i produktionsinfrastruktur
+- Du validerar malländringar innan PR-godkännande
+- Du utbildar nya teammedlemmar i infrastruktursmönster
+
+### Exempel på förhandsgranskningsutdata
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Resursuppdateringar och migreringar
 
 ### Säkra resursuppdateringar
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -866,7 +926,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Nästa steg
 
-- [Planering inför distribution](../pre-deployment/capacity-planning.md) - Validera resursers tillgänglighet
+- [Planering före distribution](../pre-deployment/capacity-planning.md) - Validera resurskapacitet
 - [Vanliga problem](../troubleshooting/common-issues.md) - Felsök infrastrukturproblem
 - [Felsökningsguide](../troubleshooting/debugging.md) - Felsök provisioneringsproblem
 - [Val av SKU](../pre-deployment/sku-selection.md) - Välj lämpliga tjänstenivåer
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.

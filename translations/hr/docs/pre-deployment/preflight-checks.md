@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T12:04:27+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T18:11:04+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "hr"
 }
 -->
 # Provjere prije implementacije za AZD implementacije
 
-**Navigacija poglavljem:**
+**Navigacija kroz poglavlja:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
 - **📖 Trenutno poglavlje**: Poglavlje 6 - Validacija i planiranje prije implementacije
 - **⬅️ Prethodno**: [Odabir SKU-a](sku-selection.md)
@@ -25,20 +25,20 @@ Ovaj sveobuhvatni vodič pruža skripte i postupke za validaciju prije implement
 Završetkom ovog vodiča, naučit ćete:
 - Ovladati tehnikama i skriptama za automatiziranu validaciju prije implementacije
 - Razumjeti strategije sveobuhvatne provjere autentifikacije, dozvola i kvota
-- Implementirati postupke validacije dostupnosti i kapaciteta resursa
+- Provoditi postupke validacije dostupnosti i kapaciteta resursa
 - Konfigurirati provjere sigurnosti i usklađenosti prema organizacijskim politikama
-- Dizajnirati procese za procjenu troškova i validaciju budžeta
+- Dizajnirati procese procjene troškova i validacije proračuna
 - Kreirati prilagođenu automatizaciju provjera prije implementacije za CI/CD pipeline
 
 ## Ishodi učenja
 
-Po završetku, moći ćete:
+Nakon završetka, moći ćete:
 - Kreirati i izvršavati sveobuhvatne skripte za validaciju prije implementacije
-- Dizajnirati automatizirane procese provjere za različite scenarije implementacije
-- Implementirati postupke i politike validacije specifične za okruženje
+- Dizajnirati automatizirane radne procese provjere za različite scenarije implementacije
+- Provoditi postupke i politike validacije specifične za okruženje
 - Konfigurirati proaktivno praćenje i upozorenja za spremnost implementacije
 - Rješavati probleme prije implementacije i provoditi korektivne mjere
-- Integrirati provjere prije implementacije u DevOps pipeline i automatizacijske procese
+- Integrirati provjere prije implementacije u DevOps pipeline i automatizirane radne procese
 
 ## Sadržaj
 
@@ -55,14 +55,14 @@ Po završetku, moći ćete:
 
 ## Pregled
 
-Provjere prije implementacije ključne su validacije koje se provode prije implementacije kako bi se osiguralo:
+Provjere prije implementacije su ključne validacije koje se provode prije implementacije kako bi se osiguralo:
 
 - **Dostupnost resursa** i kvote u ciljnim regijama
 - **Autentifikacija i dozvole** su pravilno konfigurirane
 - **Valjanost predloška** i ispravnost parametara
 - **Povezanost mreže** i ovisnosti
 - **Usklađenost sa sigurnosnim zahtjevima** organizacijskih politika
-- **Procjena troškova** unutar budžetskih ograničenja
+- **Procjena troškova** unutar proračunskih ograničenja
 
 ### Kada provoditi provjere prije implementacije
 
@@ -70,13 +70,13 @@ Provjere prije implementacije ključne su validacije koje se provode prije imple
 - **Nakon značajnih promjena predloška**
 - **Prije implementacija u produkciju**
 - **Prilikom promjene Azure regija**
-- **Kao dio CI/CD pipeline-a**
+- **Kao dio CI/CD pipeline**
 
 ---
 
 ## Automatizirana skripta za provjeru prije implementacije
 
-### PowerShell provjera prije implementacije
+### PowerShell skripta za provjeru prije implementacije
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash provjera prije implementacije
+### Bash skripta za provjeru prije implementacije
 
 ```bash
 #!/bin/bash
@@ -806,7 +821,7 @@ Ispišite ovaj popis i provjerite svaki stavku prije implementacije:
 #### ✅ Autentifikacija i dozvole
 - [ ] Uspješno autentificirano pomoću `azd auth login`
 - [ ] Korisnik ima ulogu Contributor na ciljnoj pretplati/grupi resursa
-- [ ] Servisni principal konfiguriran za CI/CD (ako je primjenjivo)
+- [ ] Konfiguriran servisni principal za CI/CD (ako je primjenjivo)
 - [ ] Nema isteka certifikata ili vjerodajnica
 
 #### ✅ Validacija predloška
@@ -814,6 +829,7 @@ Ispišite ovaj popis i provjerite svaki stavku prije implementacije:
 - [ ] Sve usluge definirane u azure.yaml imaju odgovarajući izvorni kod
 - [ ] Bicep predlošci u direktoriju `infra/` su prisutni
 - [ ] `main.bicep` se kompajlira bez grešaka (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Pregled infrastrukture uspješno se izvršava (`azd provision --preview`)
 - [ ] Svi potrebni parametri imaju zadane vrijednosti ili će biti osigurani
 - [ ] Nema tvrdokodiranih tajni u predlošcima
 
@@ -828,14 +844,14 @@ Ispišite ovaj popis i provjerite svaki stavku prije implementacije:
 - [ ] Provjerena povezanost mreže s Azure endpointima
 - [ ] Konfigurirane postavke vatrozida/proxyja ako je potrebno
 - [ ] Key Vault konfiguriran za upravljanje tajnama
-- [ ] Korištene upravljane identitete gdje je moguće
+- [ ] Koriste se upravljani identiteti gdje je moguće
 - [ ] Omogućeno prisilno korištenje HTTPS-a za web aplikacije
 
 #### ✅ Upravljanje troškovima
 - [ ] Procjene troškova izračunate pomoću Azure Pricing Calculator
-- [ ] Konfigurirana upozorenja za budžet ako je potrebno
+- [ ] Konfigurirana upozorenja za proračun ako je potrebno
 - [ ] Odabrani odgovarajući SKU-ovi za tip okruženja
-- [ ] Razmotrena rezervirana kapaciteta za produkcijske radne opterećenja
+- [ ] Razmotren rezervirani kapacitet za produkcijske radne opterećenja
 
 #### ✅ Praćenje i vidljivost
 - [ ] Application Insights konfiguriran u predlošcima
@@ -1290,11 +1306,11 @@ steps:
 1. **Automatizirajte gdje je moguće**
    - Integrirajte provjere u CI/CD pipeline
    - Koristite skripte za ponovljive validacije
-   - Pohranite rezultate za revizijske tragove
+   - Pohranite rezultate za evidenciju
 
 2. **Validacija specifična za okruženje**
    - Različite provjere za razvoj/testiranje/produkciju
-   - Odgovarajući sigurnosni zahtjevi po okruženju
+   - Odgovarajući sigurnosni zahtjevi za svako okruženje
    - Optimizacija troškova za neprodukcijska okruženja
 
 3. **Sveobuhvatna pokrivenost**
@@ -1313,18 +1329,18 @@ steps:
    - Pružite jasne smjernice za rješavanje
    - Omogućite jednostavno ponovno pokretanje provjera
 
-### Uobičajene greške u provjerama prije implementacije
+### Uobičajene pogreške u provjerama prije implementacije
 
 1. **Preskakanje validacije** za "brze" implementacije
 2. **Nedovoljna provjera dozvola** prije implementacije
 3. **Ignoriranje ograničenja kvota** dok implementacija ne uspije
-4. **Nevalidiranje predložaka** u CI/CD pipeline-u
+4. **Nevalidiranje predložaka** u CI/CD pipeline
 5. **Izostavljanje sigurnosne validacije** za produkcijska okruženja
-6. **Nedovoljna procjena troškova** što dovodi do iznenađenja u budžetu
+6. **Nedovoljna procjena troškova** što dovodi do iznenađenja u proračunu
 
 ---
 
-**Savjet**: Provodite provjere prije implementacije kao zaseban posao u vašem CI/CD pipeline-u prije stvarnog posla implementacije. To omogućuje rano otkrivanje problema i pruža brže povratne informacije za razvojne timove.
+**Savjet**: Provodite provjere prije implementacije kao zaseban posao u vašem CI/CD pipelineu prije stvarnog posla implementacije. To omogućuje rano otkrivanje problema i pruža brže povratne informacije za razvojne programere.
 
 ---
 
@@ -1334,5 +1350,5 @@ steps:
 
 ---
 
-**Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+**Izjava o odricanju odgovornosti**:  
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.

@@ -1,35 +1,35 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:44:05+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T18:00:23+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "sk"
 }
 -->
-# AZD Základy - Porozumenie Azure Developer CLI
+# Základy AZD - Pochopenie Azure Developer CLI
 
-# AZD Základy - Hlavné koncepty a základy
+# Základy AZD - Hlavné koncepty a základy
 
 **Navigácia kapitolou:**
-- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
 - **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly štart
 - **⬅️ Predchádzajúca**: [Prehľad kurzu](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Ďalšia**: [Inštalácia & Nastavenie](installation.md)
-- **🚀 Ďalšia kapitola**: [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Úvod
 
-Táto lekcia vás zoznámi s Azure Developer CLI (azd), výkonným nástrojom príkazového riadku, ktorý urýchľuje váš prechod od lokálneho vývoja k nasadeniu na Azure. Naučíte sa základné koncepty, hlavné funkcie a pochopíte, ako azd zjednodušuje nasadenie cloud-native aplikácií.
+Táto lekcia vás zoznámi s Azure Developer CLI (azd), výkonným nástrojom príkazového riadku, ktorý urýchľuje váš prechod od lokálneho vývoja k nasadeniu na Azure. Naučíte sa základné koncepty, hlavné funkcie a pochopíte, ako azd zjednodušuje nasadenie cloudových aplikácií.
 
 ## Ciele učenia
 
 Na konci tejto lekcie budete:
-- Rozumieť, čo je Azure Developer CLI a jeho hlavný účel
+- Rozumieť, čo je Azure Developer CLI a aký je jeho hlavný účel
 - Naučíte sa základné koncepty šablón, prostredí a služieb
 - Preskúmate kľúčové funkcie vrátane vývoja na základe šablón a Infrastructure as Code
 - Pochopíte štruktúru projektu azd a pracovný postup
-- Pripravení na inštaláciu a konfiguráciu azd pre vaše vývojové prostredie
+- Budete pripravení na inštaláciu a konfiguráciu azd pre vaše vývojové prostredie
 
 ## Výsledky učenia
 
@@ -42,7 +42,7 @@ Po dokončení tejto lekcie budete schopní:
 
 ## Čo je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchlenie vášho prechodu od lokálneho vývoja k nasadeniu na Azure. Zjednodušuje proces budovania, nasadzovania a správy cloud-native aplikácií na Azure.
+Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchlenie vášho prechodu od lokálneho vývoja k nasadeniu na Azure. Zjednodušuje proces budovania, nasadzovania a správy cloudových aplikácií na Azure.
 
 ## Základné koncepty
 
@@ -51,13 +51,13 @@ Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchl
 - **Kód aplikácie** - Váš zdrojový kód a závislosti
 - **Definície infraštruktúry** - Azure zdroje definované v Bicep alebo Terraform
 - **Konfiguračné súbory** - Nastavenia a environmentálne premenné
-- **Skripty nasadenia** - Automatizované pracovné postupy nasadenia
+- **Nasadzovacie skripty** - Automatizované pracovné postupy nasadenia
 
 ### Prostredia
 Prostredia predstavujú rôzne ciele nasadenia:
-- **Vývoj** - Na testovanie a vývoj
+- **Vývojové** - Na testovanie a vývoj
 - **Staging** - Predprodukčné prostredie
-- **Produkcia** - Živé produkčné prostredie
+- **Produkčné** - Živé produkčné prostredie
 
 Každé prostredie si udržiava vlastné:
 - Azure resource group
@@ -65,7 +65,7 @@ Každé prostredie si udržiava vlastné:
 - Stav nasadenia
 
 ### Služby
-Služby sú stavebné bloky vašej aplikácie:
+Služby sú stavebnými blokmi vašej aplikácie:
 - **Frontend** - Webové aplikácie, SPAs
 - **Backend** - API, mikroslužby
 - **Databáza** - Riešenia na ukladanie dát
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ Bezpečné plánovanie infraštruktúry s náhľadom
+Príkaz `azd provision --preview` je pre bezpečné nasadenia prelomový:
+- **Analýza na sucho** - Ukazuje, čo bude vytvorené, upravené alebo zmazané
+- **Žiadne riziko** - Žiadne skutočné zmeny sa nevykonajú vo vašom Azure prostredí
+- **Tímová spolupráca** - Zdieľajte výsledky náhľadu pred nasadením
+- **Odhad nákladov** - Pochopte náklady na zdroje pred záväzkom
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. Správa prostredí
@@ -180,7 +198,7 @@ azd init
 azd init .
 ```
 
-### Cyklus vývoja
+### Vývojový cyklus
 ```bash
 # Set up development environment
 azd auth login
@@ -197,8 +215,8 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## Porozumenie `azd down --force --purge`
-Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť vaše prostredie azd a všetky súvisiace zdroje. Tu je rozpis, čo jednotlivé flagy robia:
+## Pochopenie `azd down --force --purge`
+Príkaz `azd down --force --purge` je silný spôsob, ako úplne odstrániť vaše azd prostredie a všetky súvisiace zdroje. Tu je rozpis, čo jednotlivé príznaky robia:
 ```
 --force
 ```
@@ -210,9 +228,9 @@ Príkaz `azd down --force --purge` je výkonný spôsob, ako úplne odstrániť 
 --purge
 ```
 Odstráni **všetky súvisiace metadáta**, vrátane:
-Stav prostredia
-Lokálny priečinok `.azure`
-Cache informácií o nasadení
+Stavu prostredia
+Lokálneho priečinka `.azure`
+Informácií o uloženom nasadení
 Zabraňuje azd "pamätať si" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nesúlad resource groups alebo zastarané registry.
 
 ### Prečo používať oboje?
@@ -236,7 +254,7 @@ azd env list
 
 ## 🔐 Autentifikácia a poverenia
 
-Porozumenie autentifikácii je kľúčové pre úspešné nasadenia azd. Azure používa viacero metód autentifikácie a azd využíva rovnaký reťazec poverení ako ostatné nástroje Azure.
+Pochopenie autentifikácie je kľúčové pre úspešné nasadenia azd. Azure používa viacero metód autentifikácie a azd využíva rovnaký reťazec poverení ako ostatné nástroje Azure.
 
 ### Autentifikácia Azure CLI (`az login`)
 
@@ -262,15 +280,15 @@ az account list --output table
 az account set --subscription <subscription-id>
 ```
 
-### Priebeh autentifikácie
+### Tok autentifikácie
 1. **Interaktívne prihlásenie**: Otvorí váš predvolený prehliadač na autentifikáciu
-2. **Device Code Flow**: Pre prostredia bez prístupu k prehliadaču
+2. **Tok kódu zariadenia**: Pre prostredia bez prístupu k prehliadaču
 3. **Service Principal**: Pre automatizáciu a scenáre CI/CD
 4. **Managed Identity**: Pre aplikácie hostované na Azure
 
 ### DefaultAzureCredential Chain
 
-`DefaultAzureCredential` je typ poverenia, ktorý poskytuje zjednodušený zážitok z autentifikácie automatickým skúšaním viacerých zdrojov poverení v špecifickom poradí:
+`DefaultAzureCredential` je typ poverenia, ktorý poskytuje zjednodušený autentifikačný zážitok automatickým skúšaním viacerých zdrojov poverení v špecifickom poradí:
 
 #### Poradie reťazca poverení
 ```mermaid
@@ -367,14 +385,14 @@ azd auth login
 ```
 
 #### Pre produkčné prostredia
-- Používajte **Managed Identity** pri spustení na Azure zdrojoch
+- Používajte **Managed Identity** pri spúšťaní na Azure zdrojoch
 - Používajte **Service Principal** pre automatizačné scenáre
 - Vyhnite sa ukladaniu poverení do kódu alebo konfiguračných súborov
 - Používajte **Azure Key Vault** pre citlivé konfigurácie
 
 ### Bežné problémy s autentifikáciou a riešenia
 
-#### Problém: "Nenašla sa žiadna subscription"
+#### Problém: "Nenašla sa žiadna predplatná"
 ```bash
 # Solution: Set default subscription
 az account list --output table
@@ -382,7 +400,7 @@ az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Problém: "Nedostatočné oprávnenia"
+#### Problém: "Nedostatočné povolenia"
 ```bash
 # Solution: Check and assign required roles
 az role assignment list --assignee $(az account show --query user.name --output tsv)
@@ -392,7 +410,7 @@ az role assignment list --assignee $(az account show --query user.name --output 
 # - User Access Administrator (for role assignments)
 ```
 
-#### Problém: "Token vypršal"
+#### Problém: "Platnosť tokenu vypršala"
 ```bash
 # Solution: Re-authenticate
 az logout
@@ -417,7 +435,7 @@ az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Scenáre s viacerými tenantmi
+#### Scenáre s viacerými nájomníkmi
 ```bash
 # Switch between tenants
 az login --tenant tenant1.onmicrosoft.com
@@ -432,7 +450,7 @@ azd up
 ### Bezpečnostné úvahy
 
 1. **Ukladanie poverení**: Nikdy neukladajte poverenia do zdrojového kódu
-2. **Obmedzenie rozsahu**: Používajte princíp najmenších oprávnení pre service principals
+2. **Obmedzenie rozsahu**: Používajte princíp najmenej potrebných právomocí pre service principals
 3. **Rotácia tokenov**: Pravidelne rotujte tajomstvá service principal
 4. **Auditná stopa**: Monitorujte autentifikačné a nasadzovacie aktivity
 5. **Sieťová bezpečnosť**: Používajte privátne endpointy, keď je to možné
@@ -451,7 +469,7 @@ az ad signed-in-user show      # Azure AD user details
 az group list                  # Test resource access
 ```
 
-## Porozumenie `azd down --force --purge`
+## Pochopenie `azd down --force --purge`
 
 ### Objavovanie
 ```bash
@@ -489,7 +507,7 @@ azd init --template template1
 
 ### 2. Využívajte šablóny
 - Začnite s existujúcimi šablónami
-- Prispôsobte ich podľa svojich potrieb
+- Prispôsobte si ich podľa svojich potrieb
 - Vytvorte opakovane použiteľné šablóny pre vašu organizáciu
 
 ### 3. Izolácia prostredí
@@ -499,7 +517,7 @@ azd init --template template1
 
 ### 4. Správa konfigurácie
 - Používajte environmentálne premenné pre citlivé údaje
-- Udržujte konfiguráciu vo verziovacom systéme
+- Udržujte konfiguráciu vo verziovacej kontrole
 - Dokumentujte nastavenia špecifické pre prostredie
 
 ## Postup učenia
@@ -530,9 +548,9 @@ azd init --template template1
 - [Sprievodca konfiguráciou](configuration.md) - Pokročilé možnosti konfigurácie
 
 **🎯 Pripravení na ďalšiu kapitolu?**
-- [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md) - Začnite budovať AI aplikácie
+- [Kapitola 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md) - Začnite budovať AI aplikácie
 
-## Dodatočné zdroje
+## Ďalšie zdroje
 
 - [Prehľad Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Galéria šablón](https://azure.github.io/awesome-azd/)
@@ -541,11 +559,13 @@ azd init --template template1
 ---
 
 **Navigácia kapitolou:**
-- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
 - **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly štart  
 - **⬅️ Predchádzajúca**: [Prehľad kurzu](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Ďalšia**: [Inštalácia & Nastavenie](installation.md)
-- **🚀 Ďalšia kapitola**: [Kapitola 2: AI-First Vývoj](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

@@ -1,42 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T21:48:07+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:12:57+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "it"
 }
 -->
-# Command Cheat Sheet - Comandi Essenziali AZD
+# Foglio di Riferimento Comandi - Comandi Essenziali AZD
 
 **Riferimento Rapido per Tutti i Capitoli**
 - **📚 Home del Corso**: [AZD Per Principianti](../README.md)
-- **📖 Avvio Rapido**: [Capitolo 1: Fondamenti e Avvio Rapido](../README.md#-chapter-1-foundation--quick-start)
+- **📖 Avvio Rapido**: [Capitolo 1: Fondamenti & Avvio Rapido](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 Comandi AI**: [Capitolo 2: Sviluppo AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avanzato**: [Capitolo 4: Infrastruttura come Codice](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduzione
 
-Questo cheat sheet completo offre un riferimento rapido ai comandi più utilizzati della CLI per sviluppatori Azure, organizzati per categoria con esempi pratici. Perfetto per consultazioni rapide durante lo sviluppo, la risoluzione dei problemi e le operazioni quotidiane con progetti azd.
+Questo foglio di riferimento completo offre un accesso rapido ai comandi più utilizzati della CLI per sviluppatori Azure, organizzati per categoria con esempi pratici. Perfetto per consultazioni rapide durante lo sviluppo, la risoluzione dei problemi e le operazioni quotidiane con progetti azd.
 
 ## Obiettivi di Apprendimento
 
-Utilizzando questo cheat sheet, potrai:
+Utilizzando questo foglio di riferimento, potrai:
 - Accedere immediatamente ai comandi essenziali della CLI per sviluppatori Azure e alla loro sintassi
 - Comprendere l'organizzazione dei comandi per categorie funzionali e casi d'uso
 - Consultare esempi pratici per scenari comuni di sviluppo e distribuzione
 - Accedere ai comandi di risoluzione dei problemi per una rapida soluzione
 - Trovare opzioni avanzate di configurazione e personalizzazione in modo efficiente
-- Localizzare comandi per la gestione degli ambienti e flussi di lavoro multi-ambiente
+- Gestire comandi per la gestione degli ambienti e flussi di lavoro multi-ambiente
 
 ## Risultati di Apprendimento
 
-Con un riferimento regolare a questo cheat sheet, sarai in grado di:
+Con un riferimento regolare a questo foglio, sarai in grado di:
 - Eseguire i comandi azd con sicurezza senza dover consultare la documentazione completa
 - Risolvere rapidamente problemi comuni utilizzando i comandi diagnostici appropriati
 - Gestire ambienti multipli e scenari di distribuzione in modo efficiente
 - Applicare funzionalità avanzate di azd e opzioni di configurazione quando necessario
-- Risolvere problemi di distribuzione utilizzando sequenze sistematiche di comandi
+- Risolvere problemi di distribuzione utilizzando sequenze di comandi sistematiche
 - Ottimizzare i flussi di lavoro attraverso un uso efficace di scorciatoie e opzioni azd
 
 ## Comandi per Iniziare
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Gestione dei Servizi
@@ -287,7 +298,7 @@ azd service restart --service api
 
 ## 🎯 Flussi di Lavoro Rapidi
 
-### Flusso di Lavoro per lo Sviluppo
+### Flusso di Lavoro di Sviluppo
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -324,7 +335,7 @@ azd env select production
 azd up
 ```
 
-### Flusso di Lavoro per la Risoluzione dei Problemi
+### Flusso di Lavoro per Risoluzione dei Problemi
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -424,11 +435,11 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
-### Confronto tra Ambienti
+### Confronto degli Ambienti
 ```bash
 #!/bin/bash
 # Compare environments
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 Consigli Utili
 
-### Alias per Flussi di Lavoro più Veloci
+### Alias per Flussi di Lavoro più Rapidi
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Consiglio**: Aggiungi questo cheat sheet ai segnalibri e usa `Ctrl+F` per trovare rapidamente i comandi di cui hai bisogno!
+**Consiglio**: Aggiungi questo foglio di riferimento ai preferiti e usa `Ctrl+F` per trovare rapidamente i comandi di cui hai bisogno!
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche potrebbero contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale umana. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

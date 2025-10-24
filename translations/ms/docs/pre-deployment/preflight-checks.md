@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T08:16:18+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:44:52+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "ms"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pengenalan
 
-Panduan menyeluruh ini menyediakan skrip dan prosedur pengesahan pra-penerapan untuk memastikan kejayaan penerapan Azure Developer CLI sebelum ia bermula. Pelajari cara melaksanakan pemeriksaan automatik untuk pengesahan, ketersediaan sumber, kuota, pematuhan keselamatan, dan keperluan prestasi untuk mencegah kegagalan penerapan dan mengoptimumkan kadar kejayaan penerapan.
+Panduan lengkap ini menyediakan skrip dan prosedur pengesahan pra-penerapan untuk memastikan penerapan Azure Developer CLI berjaya sebelum ia bermula. Pelajari cara melaksanakan pemeriksaan automatik untuk pengesahan, ketersediaan sumber, kuota, pematuhan keselamatan, dan keperluan prestasi untuk mengelakkan kegagalan penerapan dan mengoptimumkan kadar kejayaan penerapan.
 
 ## Matlamat Pembelajaran
 
@@ -27,14 +27,14 @@ Dengan melengkapkan panduan ini, anda akan:
 - Memahami strategi pemeriksaan menyeluruh untuk pengesahan, kebenaran, dan kuota
 - Melaksanakan prosedur pengesahan ketersediaan dan kapasiti sumber
 - Mengkonfigurasi pemeriksaan keselamatan dan pematuhan untuk polisi organisasi
-- Merancang aliran kerja pengesahan anggaran kos
+- Merancang aliran kerja pengesahan anggaran kos dan bajet
 - Mencipta automasi pemeriksaan pra-penerbangan tersuai untuk saluran CI/CD
 
 ## Hasil Pembelajaran
 
 Setelah selesai, anda akan dapat:
 - Mencipta dan melaksanakan skrip pengesahan pra-penerbangan yang menyeluruh
-- Merancang aliran kerja pemeriksaan automatik untuk senario penerapan yang berbeza
+- Merancang aliran kerja pemeriksaan automatik untuk pelbagai senario penerapan
 - Melaksanakan prosedur dan polisi pengesahan khusus persekitaran
 - Mengkonfigurasi pemantauan proaktif dan amaran untuk kesediaan penerapan
 - Menyelesaikan masalah pra-penerapan dan melaksanakan tindakan pembetulan
@@ -49,7 +49,7 @@ Setelah selesai, anda akan dapat:
 - [Pengesahan Sumber](../../../../docs/pre-deployment)
 - [Pemeriksaan Keselamatan & Pematuhan](../../../../docs/pre-deployment)
 - [Perancangan Prestasi & Kapasiti](../../../../docs/pre-deployment)
-- [Penyelesaian Masalah Biasa](../../../../docs/pre-deployment)
+- [Penyelesaian Masalah Umum](../../../../docs/pre-deployment)
 
 ---
 
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -806,7 +821,7 @@ Cetak senarai semak ini dan sahkan setiap item sebelum penerapan:
 #### ✅ Pengesahan & Kebenaran
 - [ ] Berjaya disahkan dengan `azd auth login`
 - [ ] Pengguna mempunyai peranan Contributor pada langganan/kumpulan sumber sasaran
-- [ ] Prinsipal perkhidmatan dikonfigurasi untuk CI/CD (jika berkenaan)
+- [ ] Service principal dikonfigurasi untuk CI/CD (jika berkenaan)
 - [ ] Tiada sijil atau kelayakan yang telah tamat tempoh
 
 #### ✅ Pengesahan Templat
@@ -814,8 +829,9 @@ Cetak senarai semak ini dan sahkan setiap item sebelum penerapan:
 - [ ] Semua perkhidmatan yang ditakrifkan dalam azure.yaml mempunyai kod sumber yang sepadan
 - [ ] Templat Bicep dalam direktori `infra/` hadir
 - [ ] `main.bicep` disusun tanpa ralat (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Pratonton infrastruktur berjaya dijalankan (`azd provision --preview`)
 - [ ] Semua parameter yang diperlukan mempunyai nilai lalai atau akan disediakan
-- [ ] Tiada rahsia yang dikodkan secara keras dalam templat
+- [ ] Tiada rahsia yang disandikan dalam templat
 
 #### ✅ Perancangan Sumber
 - [ ] Kawasan Azure sasaran dipilih dan disahkan
@@ -1293,7 +1309,7 @@ steps:
    - Simpan hasil untuk jejak audit
 
 2. **Pengesahan Khusus Persekitaran**
-   - Pemeriksaan berbeza untuk dev/staging/prod
+   - Pemeriksaan berbeza untuk pembangunan/pentas/produksi
    - Keperluan keselamatan yang sesuai untuk setiap persekitaran
    - Pengoptimuman kos untuk persekitaran bukan produksi
 
@@ -1306,9 +1322,9 @@ steps:
 4. **Pelaporan Jelas**
    - Penunjuk status berwarna
    - Mesej ralat terperinci dengan langkah pembaikan
-   - Laporan ringkasan untuk penilaian pantas
+   - Laporan ringkasan untuk penilaian cepat
 
-5. **Gagal Cepat**
+5. **Hentikan Cepat**
    - Hentikan penerapan jika pemeriksaan kritikal gagal
    - Berikan panduan jelas untuk resolusi
    - Benarkan pemeriksaan dijalankan semula dengan mudah
@@ -1319,12 +1335,12 @@ steps:
 2. **Pemeriksaan kebenaran** yang tidak mencukupi sebelum penerapan
 3. **Mengabaikan had kuota** sehingga penerapan gagal
 4. **Tidak mengesahkan templat** dalam saluran CI/CD
-5. **Kekurangan pemeriksaan keselamatan** untuk persekitaran produksi
+5. **Tidak melakukan pengesahan keselamatan** untuk persekitaran produksi
 6. **Anggaran kos yang tidak mencukupi** menyebabkan kejutan bajet
 
 ---
 
-**Tip Pro**: Jalankan pemeriksaan pra-penerbangan sebagai tugas berasingan dalam saluran CI/CD anda sebelum tugas penerapan sebenar. Ini membolehkan anda menangkap isu lebih awal dan memberikan maklum balas yang lebih cepat kepada pembangun.
+**Tip Profesional**: Jalankan pemeriksaan pra-penerbangan sebagai tugas berasingan dalam saluran CI/CD anda sebelum tugas penerapan sebenar. Ini membolehkan anda menangkap isu lebih awal dan memberikan maklum balas lebih cepat kepada pembangun.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

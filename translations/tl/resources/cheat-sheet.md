@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T08:39:59+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:46:37+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "tl"
 }
@@ -10,14 +10,14 @@ CO_OP_TRANSLATOR_METADATA:
 # Command Cheat Sheet - Mahahalagang AZD Commands
 
 **Mabilisang Gabay para sa Lahat ng Kabanata**
-- **📚 Course Home**: [AZD Para sa Mga Baguhan](../README.md)
+- **📚 Kurso Home**: [AZD Para sa Mga Baguhan](../README.md)
 - **📖 Mabilisang Simula**: [Kabanata 1: Pundasyon at Mabilisang Simula](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI Commands**: [Kabanata 2: AI-First Development](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Advanced**: [Kabanata 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Panimula
 
-Ang komprehensibong cheat sheet na ito ay nagbibigay ng mabilisang gabay sa mga karaniwang ginagamit na Azure Developer CLI commands, inayos ayon sa kategorya na may mga praktikal na halimbawa. Perpekto para sa mabilisang paghanap habang nagde-develop, nag-aayos ng problema, at sa pang-araw-araw na operasyon gamit ang mga azd projects.
+Ang komprehensibong cheat sheet na ito ay nagbibigay ng mabilisang gabay para sa mga karaniwang ginagamit na Azure Developer CLI commands, inayos ayon sa kategorya na may mga praktikal na halimbawa. Perpekto para sa mabilisang paghanap habang nagde-develop, nagtroubleshoot, at sa pang-araw-araw na operasyon gamit ang mga azd projects.
 
 ## Mga Layunin sa Pag-aaral
 
@@ -25,19 +25,19 @@ Sa paggamit ng cheat sheet na ito, ikaw ay:
 - Magkakaroon ng instant na access sa mahahalagang Azure Developer CLI commands at syntax
 - Maiintindihan ang organisasyon ng mga command ayon sa functional na kategorya at mga use case
 - Makakahanap ng mga praktikal na halimbawa para sa karaniwang development at deployment scenarios
-- Makakagamit ng troubleshooting commands para sa mabilisang pag-aayos ng problema
+- Makakagamit ng troubleshooting commands para sa mabilisang pagresolba ng mga isyu
 - Makakahanap ng advanced na configuration at customization options nang madali
 - Makakagamit ng mga command para sa pamamahala ng environment at multi-environment workflow
 
-## Mga Resulta sa Pag-aaral
+## Mga Resulta ng Pag-aaral
 
-Sa regular na paggamit ng cheat sheet na ito, ikaw ay:
-- Makakapagpatakbo ng azd commands nang may kumpiyansa nang hindi kailangang tingnan ang buong dokumentasyon
-- Mabilis na makakapag-ayos ng karaniwang problema gamit ang tamang diagnostic commands
-- Epektibong makakapamahala ng maraming environment at deployment scenarios
-- Makakagamit ng advanced na azd features at configuration options kung kinakailangan
-- Makakapag-troubleshoot ng deployment issues gamit ang sistematikong command sequences
-- Mai-optimize ang workflows sa pamamagitan ng epektibong paggamit ng azd shortcuts at options
+Sa regular na paggamit ng cheat sheet na ito, magagawa mong:
+- Magpatakbo ng mga azd commands nang may kumpiyansa nang hindi kinakailangang tingnan ang buong dokumentasyon
+- Mabilisang maresolba ang mga karaniwang isyu gamit ang tamang diagnostic commands
+- Epektibong pamahalaan ang maraming environment at deployment scenarios
+- Magamit ang mga advanced na tampok at configuration options ng azd kung kinakailangan
+- Magtroubleshoot ng mga isyu sa deployment gamit ang sistematikong sequence ng mga command
+- Ma-optimize ang workflows sa pamamagitan ng epektibong paggamit ng azd shortcuts at options
 
 ## Mga Pangunahing Command sa Pagsisimula
 
@@ -54,7 +54,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Pag-initialize ng Project
+### Pag-initialize ng Proyekto
 ```bash
 # Browse available templates
 azd template list
@@ -70,7 +70,7 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Mga Core Deployment Commands
+## Mga Pangunahing Deployment Commands
 
 ### Kumpletong Deployment Workflow
 ```bash
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -142,7 +144,7 @@ azd env show
 azd env refresh
 ```
 
-### Mga Variable ng Environment
+### Mga Environment Variables
 ```bash
 # Set environment variable
 azd env set API_KEY "your-secret-key"
@@ -176,7 +178,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Configuration ng Project
+### Configuration ng Proyekto
 ```bash
 # Validate azure.yaml
 azd config validate
@@ -247,7 +249,7 @@ azd version
 azd info
 ```
 
-## 🔧 Mga Advanced na Command
+## 🔧 Mga Advanced na Commands
 
 ### Pipeline at CI/CD
 ```bash
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Pamamahala ng Serbisyo
@@ -287,7 +298,7 @@ azd service restart --service api
 
 ## 🎯 Mabilisang Workflows
 
-### Development Workflow
+### Workflow ng Development
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Multi-Environment Workflow
+### Workflow ng Multi-Environment
 ```bash
 # Set up environments
 azd env new dev
@@ -324,7 +335,7 @@ azd env select production
 azd up
 ```
 
-### Troubleshooting Workflow
+### Workflow ng Troubleshooting
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -374,7 +385,7 @@ azd template validate <template-name>
 
 ## 📁 Mga Command sa File at Directory
 
-### Estruktura ng Project
+### Estruktura ng Proyekto
 ```bash
 # Show current directory structure
 tree /f  # Windows
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -450,9 +461,9 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 Mga Variable ng Environment
+## 📝 Environment Variables
 
-### Karaniwang Variable ng Environment
+### Karaniwang Environment Variables
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -562,11 +573,11 @@ azd template show <template-name> --docs
 
 ---
 
-**Navigation**
+**Pag-navigate**
 - **Nakaraang Aralin**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
 - **Susunod na Aralin**: [Glossary](glossary.md)
 
 ---
 
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T16:42:31+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:16:20+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "pl"
 }
 -->
-# Provisioning Azure Resources with AZD
+# Udostępnianie zasobów Azure za pomocą AZD
 
 **Nawigacja po rozdziale:**
 - **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
@@ -18,13 +18,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o tworzeniu i zarządzaniu zasobami Azure za pomocą Azure Developer CLI. Nauczysz się wdrażać wzorce Infrastruktury jako Kod (IaC) - od podstawowego tworzenia zasobów po zaawansowane architektury infrastruktury na poziomie przedsiębiorstwa, korzystając z Bicep, szablonów ARM, Terraform i Pulumi.
+Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o udostępnianiu i zarządzaniu zasobami Azure za pomocą Azure Developer CLI. Nauczysz się wdrażać wzorce Infrastruktury jako Kod (IaC) od podstawowego tworzenia zasobów po zaawansowane architektury infrastruktury na poziomie przedsiębiorstwa, korzystając z Bicep, szablonów ARM, Terraform i Pulumi.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika:
-- Opanujesz zasady Infrastruktury jako Kod oraz tworzenie zasobów Azure
-- Zrozumiesz różne dostawców IaC obsługiwanych przez Azure Developer CLI
+- Opanujesz zasady Infrastruktury jako Kod i udostępniania zasobów Azure
+- Zrozumiesz różnych dostawców IaC obsługiwanych przez Azure Developer CLI
 - Zaprojektujesz i wdrożysz szablony Bicep dla typowych architektur aplikacji
 - Skonfigurujesz parametry zasobów, zmienne i ustawienia specyficzne dla środowiska
 - Wdrożysz zaawansowane wzorce infrastruktury, w tym sieci i bezpieczeństwo
@@ -33,20 +33,20 @@ Po ukończeniu tego przewodnika:
 ## Efekty nauki
 
 Po ukończeniu będziesz w stanie:
-- Projektować i wdrażać infrastrukturę Azure za pomocą Bicep i szablonów ARM
+- Projektować i udostępniać infrastrukturę Azure za pomocą Bicep i szablonów ARM
 - Konfigurować złożone architektury wielousługowe z odpowiednimi zależnościami zasobów
 - Wdrażać szablony z parametrami dla wielu środowisk i konfiguracji
-- Rozwiązywać problemy z tworzeniem infrastruktury i błędy wdrożeniowe
-- Stosować zasady Azure Well-Architected Framework w projektowaniu infrastruktury
+- Rozwiązywać problemy z udostępnianiem infrastruktury i naprawiać błędy wdrożeniowe
+- Stosować zasady Azure Well-Architected Framework do projektowania infrastruktury
 - Zarządzać aktualizacjami infrastruktury i wdrażać strategie wersjonowania infrastruktury
 
-## Przegląd tworzenia infrastruktury
+## Przegląd udostępniania infrastruktury
 
 Azure Developer CLI obsługuje wielu dostawców Infrastruktury jako Kod (IaC):
 - **Bicep** (zalecane) - Specyficzny dla Azure język domenowy
-- **Szablony ARM** - Szablony JSON dla Azure Resource Manager
+- **Szablony ARM** - Szablony JSON Azure Resource Manager
 - **Terraform** - Narzędzie do infrastruktury wielochmurowej
-- **Pulumi** - Nowoczesna infrastruktura jako kod z użyciem języków programowania
+- **Pulumi** - Nowoczesna infrastruktura jako kod z językami programowania
 
 ## Zrozumienie zasobów Azure
 
@@ -209,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Tworzenie baz danych
+## 🗃️ Udostępnianie baz danych
 
 ### Cosmos DB
 ```bicep
@@ -307,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Bezpieczeństwo i zarządzanie sekretami
+## 🔒 Zarządzanie bezpieczeństwem i tajemnicami
 
 ### Integracja z Key Vault
 ```bicep
@@ -626,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Warunkowe tworzenie zasobów
+### Warunkowe udostępnianie zasobów
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -658,7 +658,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Zaawansowane wzorce tworzenia infrastruktury
+## 🚀 Zaawansowane wzorce udostępniania
 
 ### Wdrożenie w wielu regionach
 ```bicep
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Aktualizacje zasobów i migracje
+## 🧪 Podgląd infrastruktury i walidacja (NOWOŚĆ)
+
+### Podgląd zmian infrastruktury przed wdrożeniem
+
+Funkcja `azd provision --preview` pozwala na **symulację udostępniania infrastruktury** przed faktycznym wdrożeniem zasobów. Jest podobna do `terraform plan` lub `bicep what-if`, oferując **widok na sucho** zmian, które zostaną wprowadzone w Twoim środowisku Azure.
+
+#### 🛠️ Co robi
+- **Analizuje Twoje szablony IaC** (Bicep lub Terraform)
+- **Pokazuje podgląd zmian zasobów**: dodania, usunięcia, aktualizacji
+- **Nie wprowadza zmian** — jest tylko do odczytu i bezpieczna w użyciu
+
+#### � Zastosowania
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Ta komenda pomaga:
+- **Walidować zmiany infrastruktury** przed zatwierdzeniem zasobów
+- **Wykrywać błędy konfiguracji wcześnie** w cyklu rozwoju
+- **Bezpiecznie współpracować** w zespołach
+- **Zapewniać wdrożenia z minimalnymi uprawnieniami** bez niespodzianek
+
+Jest szczególnie przydatna, gdy:
+- Pracujesz z złożonymi środowiskami wielousługowymi
+- Wprowadzasz zmiany w infrastrukturze produkcyjnej
+- Walidujesz modyfikacje szablonów przed zatwierdzeniem PR
+- Szkolisz nowych członków zespołu w zakresie wzorców infrastruktury
+
+### Przykładowy wynik podglądu
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Aktualizacje zasobów i migracje
 
 ### Bezpieczne aktualizacje zasobów
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -868,7 +928,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 - [Planowanie przed wdrożeniem](../pre-deployment/capacity-planning.md) - Walidacja dostępności zasobów
 - [Typowe problemy](../troubleshooting/common-issues.md) - Rozwiązywanie problemów z infrastrukturą
-- [Przewodnik debugowania](../troubleshooting/debugging.md) - Debugowanie problemów z tworzeniem infrastruktury
+- [Przewodnik debugowania](../troubleshooting/debugging.md) - Debugowanie problemów z udostępnianiem
 - [Wybór SKU](../pre-deployment/sku-selection.md) - Wybór odpowiednich poziomów usług
 
 ## Dodatkowe zasoby
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

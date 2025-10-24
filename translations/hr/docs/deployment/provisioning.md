@@ -1,33 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T12:02:39+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T18:11:26+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "hr"
 }
 -->
-# Provisioniranje Azure resursa s AZD-om
+# Provisioniranje Azure resursa pomoću AZD-a
 
-**Navigacija poglavljem:**
+**Navigacija kroz poglavlja:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
 - **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod i implementacija
 - **⬅️ Prethodno**: [Vodič za implementaciju](deployment-guide.md)
-- **➡️ Sljedeće poglavlje**: [Poglavlje 5: Višeagencijska AI rješenja](../../examples/retail-scenario.md)
+- **➡️ Sljedeće poglavlje**: [Poglavlje 5: Višeagentska AI rješenja](../../examples/retail-scenario.md)
 - **🔧 Povezano**: [Poglavlje 6: Validacija prije implementacije](../pre-deployment/capacity-planning.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pokriva sve što trebate znati o provisioniranju i upravljanju Azure resursima koristeći Azure Developer CLI. Naučite primijeniti obrasce Infrastrukture kao koda (IaC), od osnovnog kreiranja resursa do naprednih infrastruktura na razini poduzeća koristeći Bicep, ARM predloške, Terraform i Pulumi.
+Ovaj sveobuhvatni vodič pokriva sve što trebate znati o provisioniranju i upravljanju Azure resursima pomoću Azure Developer CLI-a. Naučite implementirati obrasce Infrastrukture kao koda (IaC) od osnovnog stvaranja resursa do naprednih arhitektura infrastrukture na razini poduzeća koristeći Bicep, ARM predloške, Terraform i Pulumi.
 
 ## Ciljevi učenja
 
 Završetkom ovog vodiča, naučit ćete:
-- Savladati principe Infrastrukture kao koda i provisioniranje Azure resursa
-- Razumjeti različite IaC alate koje podržava Azure Developer CLI
+- Ovladati principima Infrastrukture kao koda i provisioniranjem Azure resursa
+- Razumjeti različite IaC pružatelje podržane od strane Azure Developer CLI-a
 - Dizajnirati i implementirati Bicep predloške za uobičajene arhitekture aplikacija
 - Konfigurirati parametre resursa, varijable i postavke specifične za okruženje
-- Implementirati napredne infrastrukturne obrasce uključujući mreže i sigurnost
+- Implementirati napredne obrasce infrastrukture uključujući mreže i sigurnost
 - Upravljati životnim ciklusom resursa, ažuriranjima i rješavanjem ovisnosti
 
 ## Ishodi učenja
@@ -42,11 +42,11 @@ Po završetku, moći ćete:
 
 ## Pregled provisioniranja infrastrukture
 
-Azure Developer CLI podržava više alata za Infrastrukturu kao kod (IaC):
+Azure Developer CLI podržava više pružatelja Infrastrukture kao koda (IaC):
 - **Bicep** (preporučeno) - Azureov jezik specifičan za domenu
-- **ARM predlošci** - JSON-based predlošci za Azure Resource Manager
-- **Terraform** - Alat za infrastrukturu na više oblaka
-- **Pulumi** - Moderni alat za infrastrukturu kao kod s programskim jezicima
+- **ARM predlošci** - JSON predlošci za Azure Resource Manager
+- **Terraform** - Alat za infrastrukturu u više oblaka
+- **Pulumi** - Moderna infrastruktura kao kod s programskim jezicima
 
 ## Razumijevanje Azure resursa
 
@@ -65,7 +65,7 @@ Azure Account
 - **Sigurnost**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep predlošci za infrastrukturu
+## Bicep predlošci infrastrukture
 
 ### Osnovna struktura Bicep predloška
 ```bicep
@@ -137,7 +137,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Napredni obrasci za Bicep
+### Napredni obrasci Bicepa
 
 #### Modularna infrastruktura
 ```bicep
@@ -188,7 +188,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Uvjetno kreiranje resursa
+#### Uvjetno stvaranje resursa
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -442,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway sa SSL-om
+### Application Gateway s SSL-om
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -505,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Praćenje i promatranje
+## 📊 Praćenje i preglednost
 
 ### Application Insights
 ```bicep
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Ažuriranja i migracije resursa
+## 🧪 Pregled i validacija infrastrukture (NOVO)
+
+### Pregled promjena infrastrukture prije implementacije
+
+Značajka `azd provision --preview` omogućuje vam **simulaciju provisioniranja infrastrukture** prije stvarne implementacije resursa. Slično je funkcijama `terraform plan` ili `bicep what-if`, pružajući vam **pregled promjena** koje bi se dogodile u vašem Azure okruženju.
+
+#### 🛠️ Što radi
+- **Analizira vaše IaC predloške** (Bicep ili Terraform)
+- **Prikazuje pregled promjena resursa**: dodavanja, brisanja, ažuriranja
+- **Ne primjenjuje promjene** — samo za čitanje i sigurno za pokretanje
+
+#### � Primjene
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Ova naredba pomaže vam:
+- **Validirati promjene infrastrukture** prije nego što se resursi implementiraju
+- **Uočiti pogreške u konfiguraciji** u ranoj fazi razvoja
+- **Sigurno surađivati** u timskim okruženjima
+- **Osigurati implementacije s najmanjim privilegijama** bez iznenađenja
+
+Posebno je korisna kada:
+- Radite s kompleksnim okruženjima s više usluga
+- Provodite promjene u produkcijskoj infrastrukturi
+- Validirate izmjene predloška prije odobrenja PR-a
+- Obučavate nove članove tima o obrascima infrastrukture
+
+### Primjer izlaza pregleda
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Ažuriranja resursa i migracije
 
 ### Sigurna ažuriranja resursa
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -849,7 +909,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organizacija izlaznih podataka
+### 4. Organizacija izlaza
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -868,14 +928,14 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 - [Planiranje prije implementacije](../pre-deployment/capacity-planning.md) - Validacija dostupnosti resursa
 - [Uobičajeni problemi](../troubleshooting/common-issues.md) - Rješavanje problema s infrastrukturom
-- [Vodič za otklanjanje grešaka](../troubleshooting/debugging.md) - Otklanjanje grešaka u provisioniranju
+- [Vodič za otklanjanje grešaka](../troubleshooting/debugging.md) - Otklanjanje problema s provisioniranjem
 - [Odabir SKU-a](../pre-deployment/sku-selection.md) - Odabir odgovarajućih razina usluga
 
 ## Dodatni resursi
 
 - [Dokumentacija za Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager predlošci](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure arhitekturni centar](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Predlošci za Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Centar za Azure arhitekturu](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.

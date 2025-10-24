@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T12:47:02+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T16:24:24+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "en"
 }
@@ -18,17 +18,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This guide provides a detailed walkthrough of provisioning and managing Azure resources using the Azure Developer CLI. You'll learn how to apply Infrastructure as Code (IaC) principles, from creating basic resources to building advanced, enterprise-grade infrastructure using tools like Bicep, ARM templates, Terraform, and Pulumi.
+This guide provides a detailed overview of provisioning and managing Azure resources using Azure Developer CLI. Learn how to apply Infrastructure as Code (IaC) principles, ranging from basic resource creation to complex enterprise-grade infrastructure designs, using tools like Bicep, ARM templates, Terraform, and Pulumi.
 
 ## Learning Goals
 
-By the end of this guide, you will:
-- Gain expertise in Infrastructure as Code and Azure resource provisioning
-- Understand the various IaC tools supported by Azure Developer CLI
-- Learn to design and implement Bicep templates for common application architectures
+By completing this guide, you will:
+- Gain expertise in Infrastructure as Code principles and Azure resource provisioning
+- Learn about various IaC providers supported by Azure Developer CLI
+- Create and implement Bicep templates for common application architectures
 - Configure resource parameters, variables, and environment-specific settings
 - Apply advanced infrastructure patterns, including networking and security
-- Manage the lifecycle of resources, handle updates, and resolve dependencies
+- Manage resource lifecycle, updates, and dependency resolution
 
 ## Learning Outcomes
 
@@ -36,17 +36,17 @@ After completing this guide, you will be able to:
 - Design and provision Azure infrastructure using Bicep and ARM templates
 - Configure complex multi-service architectures with proper resource dependencies
 - Create parameterized templates for multiple environments and configurations
-- Troubleshoot provisioning issues and resolve deployment failures
-- Incorporate Azure Well-Architected Framework principles into your infrastructure design
+- Troubleshoot infrastructure provisioning issues and resolve deployment failures
+- Incorporate Azure Well-Architected Framework principles into infrastructure design
 - Manage infrastructure updates and implement versioning strategies
 
 ## Infrastructure Provisioning Overview
 
-Azure Developer CLI supports several Infrastructure as Code (IaC) tools:
-- **Bicep** (recommended) - Azure's domain-specific language for IaC
-- **ARM Templates** - JSON-based templates for Azure Resource Manager
-- **Terraform** - A multi-cloud infrastructure tool
-- **Pulumi** - A modern IaC tool that uses programming languages
+Azure Developer CLI supports several Infrastructure as Code (IaC) providers:
+- **Bicep** (recommended) - Azure's domain-specific language
+- **ARM Templates** - JSON-based Azure Resource Manager templates
+- **Terraform** - Multi-cloud infrastructure tool
+- **Pulumi** - Modern infrastructure as code using programming languages
 
 ## Understanding Azure Resources
 
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Resource Updates and Migrations
+## 🧪 Infrastructure Preview & Validation (NEW)
+
+### Preview Infrastructure Changes Before Deployment
+
+The `azd provision --preview` feature allows you to **simulate infrastructure provisioning** before deploying resources. Similar to `terraform plan` or `bicep what-if`, it provides a **dry-run view** of the changes that would be made to your Azure environment.
+
+#### 🛠️ What It Does
+- **Analyzes your IaC templates** (Bicep or Terraform)
+- **Displays a preview of resource changes**: additions, deletions, updates
+- **Does not apply changes** — it's read-only and safe to run
+
+#### � Use Cases
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+This command helps you:
+- **Validate infrastructure changes** before committing resources
+- **Identify misconfigurations early** in the development cycle
+- **Collaborate safely** in team environments
+- **Ensure least-privilege deployments** without surprises
+
+It is particularly useful for:
+- Managing complex multi-service environments
+- Making changes to production infrastructure
+- Validating template modifications before PR approval
+- Training new team members on infrastructure patterns
+
+### Example Preview Output
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Resource Updates and Migrations
 
 ### Safe Resource Updates
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed

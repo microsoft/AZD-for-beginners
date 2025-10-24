@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T09:20:28+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:54:01+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "hu"
 }
@@ -11,42 +11,42 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Fejezet navigáció:**
 - **📚 Kurzus kezdőlap**: [AZD kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 4. fejezet - Infrastrukturális kód és telepítés
+- **📖 Aktuális fejezet**: 4. fejezet - Infrastruktúra kódként és telepítés
 - **⬅️ Előző**: [Telepítési útmutató](deployment-guide.md)
-- **➡️ Következő fejezet**: [5. fejezet: Többügynökös AI megoldások](../../examples/retail-scenario.md)
-- **🔧 Kapcsolódó**: [6. fejezet: Telepítés előtti validáció](../pre-deployment/capacity-planning.md)
+- **➡️ Következő fejezet**: [5. fejezet: Több ügynökös AI megoldások](../../examples/retail-scenario.md)
+- **🔧 Kapcsolódó**: [6. fejezet: Előtelepítési validáció](../pre-deployment/capacity-planning.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató mindent lefed, amit az Azure erőforrások előkészítéséről és kezeléséről tudni kell az Azure Developer CLI használatával. Ismerje meg, hogyan valósíthatja meg az Infrastrukturális kód (IaC) mintákat az alapvető erőforrás létrehozástól a fejlett, vállalati szintű infrastruktúra architektúrákig Bicep, ARM sablonok, Terraform és Pulumi segítségével.
+Ez az átfogó útmutató mindent lefed, amit az Azure erőforrások előkészítéséről és kezeléséről tudni kell az Azure Developer CLI használatával. Ismerje meg, hogyan valósíthatja meg az Infrastruktúra kódként (IaC) mintákat az alapvető erőforrás létrehozástól a fejlett, vállalati szintű infrastruktúra architektúrákig Bicep, ARM sablonok, Terraform és Pulumi segítségével.
 
 ## Tanulási célok
 
 Az útmutató elvégzésével:
-- Elsajátítja az Infrastrukturális kód alapelveit és az Azure erőforrások előkészítését
-- Megérti az Azure Developer CLI által támogatott különböző IaC szolgáltatókat
-- Megtervezi és megvalósítja a Bicep sablonokat gyakori alkalmazásarchitektúrákhoz
+- Elsajátítja az Infrastruktúra kódként elveit és az Azure erőforrások előkészítését
+- Megérti az Azure Developer CLI által támogatott több IaC szolgáltatót
+- Megtervezi és megvalósítja a Bicep sablonokat a gyakori alkalmazásarchitektúrákhoz
 - Konfigurálja az erőforrás paramétereket, változókat és környezet-specifikus beállításokat
-- Fejlett infrastruktúra mintákat valósít meg, beleértve a hálózatot és biztonságot
-- Kezeli az erőforrás életciklusát, frissítéseket és függőségek megoldását
+- Megvalósítja a fejlett infrastruktúra mintákat, beleértve a hálózatot és a biztonságot
+- Kezeli az erőforrások életciklusát, frissítéseit és függőségeinek megoldását
 
 ## Tanulási eredmények
 
 Az útmutató elvégzése után képes lesz:
 - Azure infrastruktúrát tervezni és előkészíteni Bicep és ARM sablonok segítségével
-- Összetett, több szolgáltatásból álló architektúrákat konfigurálni megfelelő erőforrás-függőségekkel
+- Összetett, több szolgáltatást tartalmazó architektúrákat konfigurálni megfelelő erőforrás-függőségekkel
 - Paraméterezett sablonokat megvalósítani több környezethez és konfigurációhoz
 - Infrastrukturális előkészítési problémákat elhárítani és telepítési hibákat megoldani
-- Az Azure jól megtervezett keretrendszerének alapelveit alkalmazni az infrastruktúra tervezésében
-- Infrastrukturális frissítéseket kezelni és verziózási stratégiákat megvalósítani
+- Az Azure jól megtervezett keretrendszer elveit alkalmazni az infrastruktúra tervezésében
+- Infrastrukturális frissítéseket kezelni és infrastruktúra verziózási stratégiákat megvalósítani
 
 ## Infrastrukturális előkészítés áttekintése
 
-Az Azure Developer CLI több Infrastrukturális kód (IaC) szolgáltatót támogat:
+Az Azure Developer CLI több Infrastruktúra kódként (IaC) szolgáltatót támogat:
 - **Bicep** (ajánlott) - Azure specifikus nyelv
 - **ARM sablonok** - JSON alapú Azure Resource Manager sablonok
 - **Terraform** - Többfelhős infrastruktúra eszköz
-- **Pulumi** - Modern infrastruktúra kód programozási nyelvekkel
+- **Pulumi** - Modern infrastruktúra kódként programozási nyelvekkel
 
 ## Azure erőforrások megértése
 
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Erőforrás frissítések és migrációk
+## 🧪 Infrastrukturális előnézet és validáció (ÚJ)
+
+### Infrastrukturális változások előnézete telepítés előtt
+
+Az `azd provision --preview` funkció lehetővé teszi, hogy **szimulálja az infrastruktúra előkészítést**, mielőtt ténylegesen telepítené az erőforrásokat. Ez hasonló a `terraform plan` vagy `bicep what-if` funkcióhoz, és egy **száraz futású nézetet** ad arról, hogy milyen változtatások történnének az Azure környezetében.
+
+#### 🛠️ Mit csinál
+- **Elemzi az IaC sablonokat** (Bicep vagy Terraform)
+- **Előnézetet mutat az erőforrás változásokról**: hozzáadások, törlések, frissítések
+- **Nem alkalmaz változtatásokat** — csak olvasási módú és biztonságos futtatni
+
+#### � Használati esetek
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Ez a parancs segít:
+- **Validálni az infrastruktúra változásokat** mielőtt erőforrásokat kötelezne
+- **Korai hibák elkapása** a fejlesztési ciklusban
+- **Biztonságos együttműködés** csapatkörnyezetben
+- **Legkisebb jogosultságú telepítések biztosítása** meglepetések nélkül
+
+Különösen hasznos, amikor:
+- Összetett, több szolgáltatást tartalmazó környezetekkel dolgozik
+- Változtatásokat végez a termelési infrastruktúrán
+- Sablon módosításokat validál telepítés előtt
+- Új csapattagokat oktat az infrastruktúra mintákról
+
+### Példa előnézeti kimenet
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Erőforrás frissítések és migrációk
 
 ### Biztonságos erőforrás frissítések
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -866,7 +926,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Következő lépések
 
-- [Telepítés előtti tervezés](../pre-deployment/capacity-planning.md) - Erőforrás elérhetőség validálása
+- [Előtelepítési tervezés](../pre-deployment/capacity-planning.md) - Erőforrás elérhetőség validálása
 - [Gyakori problémák](../troubleshooting/common-issues.md) - Infrastrukturális problémák elhárítása
 - [Hibakeresési útmutató](../troubleshooting/debugging.md) - Előkészítési problémák hibakeresése
 - [SKU kiválasztás](../pre-deployment/sku-selection.md) - Megfelelő szolgáltatási szintek kiválasztása
@@ -887,4 +947,4 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Felelősség kizárása**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

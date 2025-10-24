@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T13:25:14+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T16:26:05+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "fr"
 }
@@ -18,12 +18,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-Ce guide complet couvre tout ce que vous devez savoir sur le provisionnement et la gestion des ressources Azure à l'aide de l'Azure Developer CLI. Apprenez à mettre en œuvre des modèles d'infrastructure en tant que code (IaC), allant de la création de ressources de base à des architectures d'infrastructure avancées de niveau entreprise, en utilisant Bicep, les modèles ARM, Terraform et Pulumi.
+Ce guide complet couvre tout ce que vous devez savoir sur le provisionnement et la gestion des ressources Azure à l'aide de l'Azure Developer CLI. Apprenez à implémenter des modèles d'Infrastructure en tant que Code (IaC), allant de la création de ressources de base à des architectures d'infrastructure avancées de niveau entreprise, en utilisant Bicep, des modèles ARM, Terraform et Pulumi.
 
 ## Objectifs d'apprentissage
 
 En suivant ce guide, vous allez :
-- Maîtriser les principes de l'infrastructure en tant que code et le provisionnement des ressources Azure
+- Maîtriser les principes de l'Infrastructure en tant que Code et le provisionnement des ressources Azure
 - Comprendre les différents fournisseurs IaC pris en charge par Azure Developer CLI
 - Concevoir et implémenter des modèles Bicep pour des architectures d'applications courantes
 - Configurer des paramètres de ressources, des variables et des paramètres spécifiques à l'environnement
@@ -33,7 +33,7 @@ En suivant ce guide, vous allez :
 ## Résultats d'apprentissage
 
 À la fin de ce guide, vous serez capable de :
-- Concevoir et provisionner une infrastructure Azure en utilisant Bicep et les modèles ARM
+- Concevoir et provisionner une infrastructure Azure en utilisant Bicep et des modèles ARM
 - Configurer des architectures complexes multi-services avec des dépendances de ressources appropriées
 - Implémenter des modèles paramétrés pour plusieurs environnements et configurations
 - Résoudre les problèmes de provisionnement d'infrastructure et corriger les échecs de déploiement
@@ -42,7 +42,7 @@ En suivant ce guide, vous allez :
 
 ## Aperçu du provisionnement d'infrastructure
 
-Azure Developer CLI prend en charge plusieurs fournisseurs d'infrastructure en tant que code (IaC) :
+Azure Developer CLI prend en charge plusieurs fournisseurs d'Infrastructure en tant que Code (IaC) :
 - **Bicep** (recommandé) - Langage spécifique au domaine d'Azure
 - **Modèles ARM** - Modèles JSON basés sur Azure Resource Manager
 - **Terraform** - Outil d'infrastructure multi-cloud
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Mises à jour et migrations de ressources
+## 🧪 Aperçu et validation de l'infrastructure (NOUVEAU)
+
+### Aperçu des modifications d'infrastructure avant le déploiement
+
+La fonctionnalité `azd provision --preview` vous permet de **simuler le provisionnement d'infrastructure** avant de déployer réellement les ressources. Elle est similaire à `terraform plan` ou `bicep what-if`, offrant une **vue en mode test** des modifications qui seraient apportées à votre environnement Azure.
+
+#### 🛠️ Ce que cela fait
+- **Analyse vos modèles IaC** (Bicep ou Terraform)
+- **Affiche un aperçu des modifications de ressources** : ajouts, suppressions, mises à jour
+- **N'applique pas les modifications** — c'est en lecture seule et sûr à exécuter
+
+#### � Cas d'utilisation
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Cette commande vous aide à :
+- **Valider les modifications d'infrastructure** avant de valider les ressources
+- **Détecter les mauvaises configurations tôt** dans le cycle de développement
+- **Collaborer en toute sécurité** dans des environnements d'équipe
+- **Garantir des déploiements avec le moindre privilège** sans surprises
+
+Elle est particulièrement utile lorsque :
+- Vous travaillez avec des environnements multi-services complexes
+- Vous apportez des modifications à l'infrastructure de production
+- Vous validez les modifications de modèles avant l'approbation des PR
+- Vous formez de nouveaux membres de l'équipe aux modèles d'infrastructure
+
+### Exemple de sortie d'aperçu
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Mises à jour et migrations de ressources
 
 ### Mises à jour sécurisées des ressources
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -882,9 +942,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 **Navigation**
 - **Leçon précédente** : [Guide de déploiement](deployment-guide.md)
-- **Leçon suivante** : [Planification de capacité](../pre-deployment/capacity-planning.md)
+- **Leçon suivante** : [Planification de la capacité](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.

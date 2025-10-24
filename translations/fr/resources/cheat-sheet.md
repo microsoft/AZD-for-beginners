@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T13:34:17+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:25:40+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "fr"
 }
@@ -17,25 +17,25 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-Cette fiche de référence complète fournit un accès rapide aux commandes les plus couramment utilisées de l'Azure Developer CLI, organisées par catégorie avec des exemples pratiques. Parfaite pour des recherches rapides pendant le développement, le dépannage et les opérations quotidiennes avec les projets azd.
+Cette fiche de référence complète fournit un accès rapide aux commandes les plus couramment utilisées de l'interface CLI Azure Developer, organisées par catégorie avec des exemples pratiques. Parfaite pour des recherches rapides pendant le développement, le dépannage et les opérations quotidiennes avec les projets azd.
 
 ## Objectifs d'Apprentissage
 
 En utilisant cette fiche de référence, vous pourrez :
-- Accéder instantanément aux commandes essentielles de l'Azure Developer CLI et à leur syntaxe
+- Accéder instantanément aux commandes essentielles de l'interface CLI Azure Developer et à leur syntaxe
 - Comprendre l'organisation des commandes par catégories fonctionnelles et cas d'utilisation
-- Référencer des exemples pratiques pour des scénarios courants de développement et de déploiement
+- Consulter des exemples pratiques pour des scénarios courants de développement et de déploiement
 - Accéder aux commandes de dépannage pour une résolution rapide des problèmes
-- Trouver efficacement des options de configuration et de personnalisation avancées
-- Localiser les commandes de gestion d'environnement et de workflows multi-environnements
+- Trouver efficacement des options avancées de configuration et de personnalisation
+- Localiser les commandes de gestion des environnements et des workflows multi-environnements
 
 ## Résultats d'Apprentissage
 
-En consultant régulièrement cette fiche, vous serez capable de :
-- Exécuter les commandes azd avec assurance sans consulter la documentation complète
+Avec une utilisation régulière de cette fiche de référence, vous serez capable de :
+- Exécuter les commandes azd en toute confiance sans consulter la documentation complète
 - Résoudre rapidement les problèmes courants en utilisant les commandes de diagnostic appropriées
 - Gérer efficacement plusieurs environnements et scénarios de déploiement
-- Appliquer les fonctionnalités avancées et les options de configuration d'azd selon les besoins
+- Appliquer les fonctionnalités avancées et les options de configuration azd selon les besoins
 - Résoudre les problèmes de déploiement en suivant des séquences de commandes systématiques
 - Optimiser les workflows grâce à une utilisation efficace des raccourcis et options azd
 
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Gestion des Services
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Workflow Multi-Environnements
+### Workflow Multi-Environnement
 ```bash
 # Set up environments
 azd env new dev
@@ -360,7 +371,7 @@ azd info
 az account show
 ```
 
-### Débogage de Templates
+### Débogage de Modèles
 ```bash
 # List available templates with details
 azd template list --output json
@@ -389,7 +400,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 
 ## 🎨 Formatage des Résultats
 
-### Résultats JSON
+### Résultats en JSON
 ```bash
 # Get JSON output for scripting
 azd show --output json
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction humaine professionnelle. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.

@@ -1,82 +1,82 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-18T07:42:40+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:41:02+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "vi"
 }
 -->
-# Kiểm Tra Trước Khi Triển Khai AZD
+# Kiểm tra trước khi triển khai AZD
 
-**Điều Hướng Chương:**
-- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
-- **📖 Chương Hiện Tại**: Chương 6 - Xác Thực & Lập Kế Hoạch Trước Khi Triển Khai
-- **⬅️ Chương Trước**: [Lựa Chọn SKU](sku-selection.md)
-- **➡️ Chương Tiếp Theo**: [Chương 7: Xử Lý Sự Cố](../troubleshooting/common-issues.md)
-- **🔧 Liên Quan**: [Chương 4: Hướng Dẫn Triển Khai](../deployment/deployment-guide.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 6 - Xác thực & Lập kế hoạch trước khi triển khai
+- **⬅️ Trước đó**: [Lựa chọn SKU](sku-selection.md)
+- **➡️ Chương tiếp theo**: [Chương 7: Khắc phục sự cố](../troubleshooting/common-issues.md)
+- **🔧 Liên quan**: [Chương 4: Hướng dẫn triển khai](../deployment/deployment-guide.md)
 
-## Giới Thiệu
+## Giới thiệu
 
-Hướng dẫn toàn diện này cung cấp các script và quy trình xác thực trước khi triển khai để đảm bảo các triển khai Azure Developer CLI thành công trước khi bắt đầu. Học cách thực hiện các kiểm tra tự động về xác thực, khả dụng tài nguyên, hạn mức, tuân thủ bảo mật và yêu cầu hiệu suất để ngăn ngừa lỗi triển khai và tối ưu hóa tỷ lệ thành công.
+Hướng dẫn toàn diện này cung cấp các kịch bản và quy trình xác thực trước khi triển khai để đảm bảo các triển khai Azure Developer CLI thành công trước khi bắt đầu. Tìm hiểu cách thực hiện các kiểm tra tự động về xác thực, khả năng tài nguyên, hạn mức, tuân thủ bảo mật và yêu cầu hiệu suất để ngăn chặn lỗi triển khai và tối ưu hóa tỷ lệ thành công của triển khai.
 
-## Mục Tiêu Học Tập
+## Mục tiêu học tập
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
-- Thành thạo các kỹ thuật và script xác thực tự động trước khi triển khai
+- Thành thạo các kỹ thuật và kịch bản xác thực tự động trước khi triển khai
 - Hiểu các chiến lược kiểm tra toàn diện về xác thực, quyền và hạn mức
-- Thực hiện các quy trình xác thực khả dụng và dung lượng tài nguyên
+- Thực hiện các quy trình xác thực khả năng tài nguyên và dung lượng
 - Cấu hình kiểm tra bảo mật và tuân thủ theo chính sách tổ chức
 - Thiết kế quy trình ước tính chi phí và xác thực ngân sách
 - Tạo tự động hóa kiểm tra trước khi triển khai tùy chỉnh cho các pipeline CI/CD
 
-## Kết Quả Học Tập
+## Kết quả học tập
 
 Sau khi hoàn thành, bạn sẽ có thể:
-- Tạo và thực thi các script xác thực trước khi triển khai toàn diện
+- Tạo và thực thi các kịch bản xác thực trước khi triển khai toàn diện
 - Thiết kế quy trình kiểm tra tự động cho các kịch bản triển khai khác nhau
-- Thực hiện các quy trình và chính sách xác thực theo môi trường cụ thể
+- Thực hiện các quy trình và chính sách xác thực cụ thể cho môi trường
 - Cấu hình giám sát chủ động và cảnh báo về sự sẵn sàng triển khai
-- Xử lý sự cố trước khi triển khai và thực hiện các hành động khắc phục
+- Khắc phục sự cố trước khi triển khai và thực hiện các hành động sửa chữa
 - Tích hợp kiểm tra trước khi triển khai vào các pipeline DevOps và quy trình tự động hóa
 
-## Mục Lục
+## Mục lục
 
-- [Tổng Quan](../../../../docs/pre-deployment)
-- [Script Kiểm Tra Tự Động](../../../../docs/pre-deployment)
-- [Danh Sách Kiểm Tra Thủ Công](../../../../docs/pre-deployment)
-- [Xác Thực Môi Trường](../../../../docs/pre-deployment)
-- [Xác Thực Tài Nguyên](../../../../docs/pre-deployment)
-- [Kiểm Tra Bảo Mật & Tuân Thủ](../../../../docs/pre-deployment)
-- [Lập Kế Hoạch Hiệu Suất & Dung Lượng](../../../../docs/pre-deployment)
-- [Xử Lý Sự Cố Thường Gặp](../../../../docs/pre-deployment)
+- [Tổng quan](../../../../docs/pre-deployment)
+- [Kịch bản tự động trước khi triển khai](../../../../docs/pre-deployment)
+- [Danh sách kiểm tra xác thực thủ công](../../../../docs/pre-deployment)
+- [Xác thực môi trường](../../../../docs/pre-deployment)
+- [Xác thực tài nguyên](../../../../docs/pre-deployment)
+- [Kiểm tra bảo mật & tuân thủ](../../../../docs/pre-deployment)
+- [Lập kế hoạch hiệu suất & dung lượng](../../../../docs/pre-deployment)
+- [Khắc phục sự cố thường gặp](../../../../docs/pre-deployment)
 
 ---
 
-## Tổng Quan
+## Tổng quan
 
 Kiểm tra trước khi triển khai là các xác thực cần thiết được thực hiện trước khi triển khai để đảm bảo:
 
-- **Khả dụng tài nguyên** và hạn mức trong các vùng mục tiêu
-- **Xác thực và quyền** được cấu hình đúng cách
+- **Khả năng tài nguyên** và hạn mức trong các khu vực mục tiêu
+- **Xác thực và quyền** được cấu hình đúng
 - **Tính hợp lệ của mẫu** và độ chính xác của tham số
 - **Kết nối mạng** và các phụ thuộc
 - **Tuân thủ bảo mật** theo chính sách tổ chức
 - **Ước tính chi phí** trong giới hạn ngân sách
 
-### Khi Nào Nên Thực Hiện Kiểm Tra Trước Khi Triển Khai
+### Khi nào nên thực hiện kiểm tra trước khi triển khai
 
 - **Trước lần triển khai đầu tiên** đến một môi trường mới
 - **Sau khi thay đổi mẫu đáng kể**
 - **Trước khi triển khai sản xuất**
-- **Khi thay đổi vùng Azure**
+- **Khi thay đổi khu vực Azure**
 - **Là một phần của các pipeline CI/CD**
 
 ---
 
-## Script Kiểm Tra Tự Động
+## Kịch bản tự động trước khi triển khai
 
-### Kiểm Tra Trước Bằng PowerShell
+### Kiểm tra trước khi triển khai bằng PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Kiểm Tra Trước Bằng Bash
+### Kiểm tra trước khi triển khai bằng Bash
 
 ```bash
 #!/bin/bash
@@ -790,70 +805,71 @@ main "$@"
 
 ---
 
-## Danh Sách Kiểm Tra Thủ Công
+## Danh sách kiểm tra xác thực thủ công
 
-### Danh Sách Kiểm Tra Trước Khi Triển Khai
+### Danh sách kiểm tra trước khi triển khai
 
 In danh sách kiểm tra này và xác minh từng mục trước khi triển khai:
 
-#### ✅ Cài Đặt Môi Trường
-- [ ] AZD CLI đã được cài đặt và cập nhật phiên bản mới nhất
-- [ ] Azure CLI đã được cài đặt và xác thực
+#### ✅ Cài đặt môi trường
+- [ ] Đã cài đặt AZD CLI và cập nhật phiên bản mới nhất
+- [ ] Đã cài đặt và xác thực Azure CLI
 - [ ] Đã chọn đúng đăng ký Azure
 - [ ] Tên môi trường là duy nhất và tuân theo quy ước đặt tên
 - [ ] Nhóm tài nguyên mục tiêu đã được xác định hoặc có thể được tạo
 
-#### ✅ Xác Thực & Quyền
+#### ✅ Xác thực & Quyền
 - [ ] Đã xác thực thành công với `azd auth login`
 - [ ] Người dùng có vai trò Contributor trên đăng ký/nhóm tài nguyên mục tiêu
 - [ ] Đã cấu hình service principal cho CI/CD (nếu áp dụng)
 - [ ] Không có chứng chỉ hoặc thông tin xác thực hết hạn
 
-#### ✅ Xác Thực Mẫu
+#### ✅ Xác thực mẫu
 - [ ] `azure.yaml` tồn tại và là YAML hợp lệ
 - [ ] Tất cả các dịch vụ được định nghĩa trong azure.yaml có mã nguồn tương ứng
-- [ ] Các mẫu Bicep trong thư mục `infra/` đều có mặt
+- [ ] Các mẫu Bicep trong thư mục `infra/` đã có
 - [ ] `main.bicep` biên dịch không có lỗi (`az bicep build --file infra/main.bicep`)
-- [ ] Tất cả các tham số yêu cầu có giá trị mặc định hoặc sẽ được cung cấp
+- [ ] 🧪 Xem trước cơ sở hạ tầng chạy thành công (`azd provision --preview`)
+- [ ] Tất cả các tham số yêu cầu đều có giá trị mặc định hoặc sẽ được cung cấp
 - [ ] Không có bí mật được mã hóa cứng trong các mẫu
 
-#### ✅ Lập Kế Hoạch Tài Nguyên
-- [ ] Đã chọn và xác thực vùng Azure mục tiêu
-- [ ] Các dịch vụ Azure yêu cầu có sẵn trong vùng mục tiêu
+#### ✅ Lập kế hoạch tài nguyên
+- [ ] Khu vực Azure mục tiêu đã được chọn và xác thực
+- [ ] Các dịch vụ Azure cần thiết có sẵn trong khu vực mục tiêu
 - [ ] Có đủ hạn mức cho các tài nguyên đã lên kế hoạch
-- [ ] Đã kiểm tra xung đột tên tài nguyên
+- [ ] Kiểm tra xung đột tên tài nguyên
 - [ ] Hiểu rõ các phụ thuộc giữa các tài nguyên
 
-#### ✅ Mạng & Bảo Mật
+#### ✅ Mạng & Bảo mật
 - [ ] Đã xác minh kết nối mạng đến các điểm cuối Azure
-- [ ] Đã cấu hình cài đặt firewall/proxy nếu cần
+- [ ] Cấu hình cài đặt tường lửa/proxy nếu cần
 - [ ] Đã cấu hình Key Vault để quản lý bí mật
-- [ ] Sử dụng managed identities khi có thể
-- [ ] Đã bật HTTPS cho các ứng dụng web
+- [ ] Sử dụng danh tính được quản lý khi có thể
+- [ ] Bật bảo mật HTTPS cho các ứng dụng web
 
-#### ✅ Quản Lý Chi Phí
-- [ ] Đã tính toán ước tính chi phí bằng Azure Pricing Calculator
-- [ ] Đã cấu hình cảnh báo ngân sách nếu cần
-- [ ] Đã chọn các SKU phù hợp với loại môi trường
-- [ ] Đã xem xét dung lượng dự trữ cho khối lượng công việc sản xuất
+#### ✅ Quản lý chi phí
+- [ ] Ước tính chi phí được tính toán bằng Azure Pricing Calculator
+- [ ] Cấu hình cảnh báo ngân sách nếu cần
+- [ ] Chọn SKU phù hợp với loại môi trường
+- [ ] Xem xét dung lượng dự trữ cho khối lượng công việc sản xuất
 
-#### ✅ Giám Sát & Khả Quan Sát
+#### ✅ Giám sát & Quan sát
 - [ ] Đã cấu hình Application Insights trong các mẫu
-- [ ] Đã lên kế hoạch workspace Log Analytics
-- [ ] Đã định nghĩa các quy tắc cảnh báo cho các chỉ số quan trọng
-- [ ] Đã triển khai các điểm cuối kiểm tra sức khỏe trong ứng dụng
+- [ ] Lập kế hoạch không gian làm việc Log Analytics
+- [ ] Định nghĩa quy tắc cảnh báo cho các chỉ số quan trọng
+- [ ] Thực hiện các điểm cuối kiểm tra sức khỏe trong các ứng dụng
 
-#### ✅ Sao Lưu & Khôi Phục
-- [ ] Đã định nghĩa chiến lược sao lưu cho các tài nguyên dữ liệu
-- [ ] Đã tài liệu hóa các mục tiêu thời gian khôi phục (RTO)
-- [ ] Đã tài liệu hóa các mục tiêu điểm khôi phục (RPO)
-- [ ] Đã có kế hoạch khôi phục thảm họa cho sản xuất
+#### ✅ Sao lưu & Khôi phục
+- [ ] Định nghĩa chiến lược sao lưu cho các tài nguyên dữ liệu
+- [ ] Tài liệu các mục tiêu thời gian khôi phục (RTO)
+- [ ] Tài liệu các mục tiêu điểm khôi phục (RPO)
+- [ ] Có kế hoạch khôi phục thảm họa cho sản xuất
 
 ---
 
-## Xác Thực Môi Trường
+## Xác thực môi trường
 
-### Xác Thực Môi Trường Phát Triển
+### Xác thực môi trường phát triển
 
 ```bash
 #!/bin/bash
@@ -885,7 +901,7 @@ validate_dev_environment() {
 }
 ```
 
-### Xác Thực Môi Trường Sản Xuất
+### Xác thực môi trường sản xuất
 
 ```bash
 #!/bin/bash
@@ -926,9 +942,9 @@ validate_prod_environment() {
 
 ---
 
-## Xác Thực Tài Nguyên
+## Xác thực tài nguyên
 
-### Script Xác Thực Hạn Mức
+### Kịch bản xác thực hạn mức
 
 ```python
 #!/usr/bin/env python3
@@ -1051,9 +1067,9 @@ if __name__ == "__main__":
 
 ---
 
-## Kiểm Tra Bảo Mật & Tuân Thủ
+## Kiểm tra bảo mật & tuân thủ
 
-### Script Xác Thực Bảo Mật
+### Kịch bản xác thực bảo mật
 
 ```bash
 #!/bin/bash
@@ -1170,9 +1186,9 @@ main "$@"
 
 ---
 
-## Tích Hợp Với CI/CD
+## Tích hợp với CI/CD
 
-### Tích Hợp GitHub Actions
+### Tích hợp GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1231,7 +1247,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Tích Hợp Azure DevOps
+### Tích hợp Azure DevOps
 
 ```yaml
 trigger: none
@@ -1283,56 +1299,56 @@ steps:
 
 ---
 
-## Tóm Tắt Các Thực Hành Tốt Nhất
+## Tóm tắt các thực hành tốt nhất
 
-### ✅ Thực Hành Tốt Nhất Cho Kiểm Tra Trước Khi Triển Khai
+### ✅ Các thực hành tốt nhất cho kiểm tra trước khi triển khai
 
-1. **Tự Động Hóa Khi Có Thể**
+1. **Tự động hóa khi có thể**
    - Tích hợp kiểm tra vào các pipeline CI/CD
-   - Sử dụng script để xác thực lặp lại
-   - Lưu trữ kết quả để kiểm tra
+   - Sử dụng kịch bản cho các xác thực lặp lại
+   - Lưu trữ kết quả để theo dõi kiểm toán
 
-2. **Xác Thực Theo Môi Trường**
+2. **Xác thực theo môi trường**
    - Kiểm tra khác nhau cho dev/staging/prod
-   - Yêu cầu bảo mật phù hợp theo từng môi trường
-   - Tối ưu hóa chi phí cho môi trường không phải sản xuất
+   - Yêu cầu bảo mật phù hợp với từng môi trường
+   - Tối ưu hóa chi phí cho các môi trường không phải sản xuất
 
-3. **Phạm Vi Toàn Diện**
+3. **Phạm vi toàn diện**
    - Xác thực và quyền
-   - Hạn mức và khả dụng tài nguyên
+   - Hạn mức và khả năng tài nguyên
    - Xác thực mẫu và cú pháp
    - Yêu cầu bảo mật và tuân thủ
 
-4. **Báo Cáo Rõ Ràng**
-   - Chỉ báo trạng thái được mã hóa màu
+4. **Báo cáo rõ ràng**
+   - Chỉ báo trạng thái mã hóa màu
    - Thông báo lỗi chi tiết với các bước khắc phục
    - Báo cáo tóm tắt để đánh giá nhanh
 
-5. **Dừng Nhanh**
-   - Dừng triển khai nếu kiểm tra quan trọng thất bại
+5. **Dừng ngay lập tức**
+   - Dừng triển khai nếu các kiểm tra quan trọng thất bại
    - Cung cấp hướng dẫn rõ ràng để giải quyết
-   - Cho phép chạy lại kiểm tra dễ dàng
+   - Cho phép dễ dàng chạy lại các kiểm tra
 
-### Các Lỗi Thường Gặp Khi Kiểm Tra Trước
+### Những lỗi thường gặp khi kiểm tra trước khi triển khai
 
 1. **Bỏ qua xác thực** để triển khai "nhanh"
-2. **Kiểm tra quyền không đủ** trước khi triển khai
-3. **Bỏ qua hạn mức** cho đến khi triển khai thất bại
+2. **Kiểm tra quyền không đầy đủ** trước khi triển khai
+3. **Bỏ qua giới hạn hạn mức** cho đến khi triển khai thất bại
 4. **Không xác thực mẫu** trong các pipeline CI/CD
-5. **Bỏ qua kiểm tra bảo mật** cho môi trường sản xuất
+5. **Bỏ qua kiểm tra bảo mật** cho các môi trường sản xuất
 6. **Ước tính chi phí không đầy đủ** dẫn đến bất ngờ về ngân sách
 
 ---
 
-**Mẹo Chuyên Nghiệp**: Thực hiện kiểm tra trước khi triển khai như một công việc riêng biệt trong pipeline CI/CD của bạn trước công việc triển khai thực tế. Điều này giúp bạn phát hiện vấn đề sớm và cung cấp phản hồi nhanh hơn cho các nhà phát triển.
+**Mẹo chuyên nghiệp**: Thực hiện kiểm tra trước khi triển khai như một công việc riêng biệt trong pipeline CI/CD của bạn trước công việc triển khai thực tế. Điều này cho phép bạn phát hiện vấn đề sớm và cung cấp phản hồi nhanh hơn cho các nhà phát triển.
 
 ---
 
-**Điều Hướng**
-- **Bài Học Trước**: [Lựa Chọn SKU](sku-selection.md)
-- **Bài Học Tiếp Theo**: [Cheat Sheet](../../resources/cheat-sheet.md)
+**Điều hướng**
+- **Bài học trước**: [Lựa chọn SKU](sku-selection.md)
+- **Bài học tiếp theo**: [Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn tham khảo chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.

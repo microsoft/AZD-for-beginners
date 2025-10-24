@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T21:26:42+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T17:11:24+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "br"
 }
@@ -22,23 +22,23 @@ Este guia abrangente fornece scripts e procedimentos de validação pré-implant
 
 ## Objetivos de Aprendizado
 
-Ao concluir este guia, você irá:
+Ao concluir este guia, você será capaz de:
 - Dominar técnicas e scripts de validação pré-implantação automatizados
-- Compreender estratégias abrangentes de verificação de autenticação, permissões e cotas
+- Compreender estratégias de verificação abrangentes para autenticação, permissões e cotas
 - Implementar procedimentos de validação de disponibilidade e capacidade de recursos
 - Configurar verificações de segurança e conformidade para políticas organizacionais
-- Projetar fluxos de trabalho de estimativa de custos e validação de orçamento
+- Projetar fluxos de trabalho de validação de orçamento e estimativa de custos
 - Criar automações personalizadas de verificações pré-implantação para pipelines CI/CD
 
 ## Resultados de Aprendizado
 
-Ao finalizar, você será capaz de:
-- Criar e executar scripts abrangentes de validação pré-implantação
-- Projetar fluxos de trabalho automatizados de verificação para diferentes cenários de implantação
-- Implementar procedimentos e políticas de validação específicas para ambientes
+Ao final, você será capaz de:
+- Criar e executar scripts de validação pré-implantação abrangentes
+- Projetar fluxos de trabalho de verificação automatizados para diferentes cenários de implantação
+- Implementar procedimentos e políticas de validação específicas para o ambiente
 - Configurar monitoramento proativo e alertas para prontidão de implantação
-- Solucionar problemas pré-implantação e implementar ações corretivas
-- Integrar verificações pré-implantação em pipelines DevOps e fluxos de trabalho de automação
+- Solucionar problemas de pré-implantação e implementar ações corretivas
+- Integrar verificações pré-implantação em pipelines DevOps e fluxos de trabalho automatizados
 
 ## Índice
 
@@ -57,7 +57,7 @@ Ao finalizar, você será capaz de:
 
 As verificações pré-implantação são validações essenciais realizadas antes de implantar para garantir:
 
-- **Disponibilidade de recursos** e cotas nas regiões alvo
+- **Disponibilidade de recursos** e cotas nas regiões-alvo
 - **Autenticação e permissões** configuradas corretamente
 - **Validade de templates** e correção de parâmetros
 - **Conectividade de rede** e dependências
@@ -388,6 +388,21 @@ function Test-TemplateValidation {
     else {
         Write-Status "Infrastructure directory" "Error" "infra/ directory not found"
         return $false
+    }
+    
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
     }
     
     return $true
@@ -797,29 +812,30 @@ main "$@"
 Imprima este checklist e verifique cada item antes da implantação:
 
 #### ✅ Configuração do Ambiente
-- [ ] AZD CLI instalado e atualizado para a versão mais recente
-- [ ] Azure CLI instalado e autenticado
-- [ ] Assinatura correta do Azure selecionada
+- [ ] CLI AZD instalado e atualizado para a versão mais recente
+- [ ] CLI do Azure instalado e autenticado
+- [ ] Assinatura do Azure correta selecionada
 - [ ] Nome do ambiente é único e segue as convenções de nomenclatura
-- [ ] Grupo de recursos alvo identificado ou pode ser criado
+- [ ] Grupo de recursos-alvo identificado ou pode ser criado
 
 #### ✅ Autenticação e Permissões
 - [ ] Autenticado com sucesso usando `azd auth login`
-- [ ] Usuário possui papel de Contribuidor na assinatura/grupo de recursos alvo
+- [ ] Usuário possui papel de Contribuidor na assinatura/grupo de recursos-alvo
 - [ ] Principal de serviço configurado para CI/CD (se aplicável)
-- [ ] Nenhum certificado ou credencial expirado
+- [ ] Sem certificados ou credenciais expirados
 
 #### ✅ Validação de Templates
 - [ ] `azure.yaml` existe e é um YAML válido
 - [ ] Todos os serviços definidos em azure.yaml possuem código-fonte correspondente
 - [ ] Templates Bicep no diretório `infra/` estão presentes
 - [ ] `main.bicep` compila sem erros (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Pré-visualização da infraestrutura executada com sucesso (`azd provision --preview`)
 - [ ] Todos os parâmetros necessários possuem valores padrão ou serão fornecidos
-- [ ] Nenhum segredo hardcoded nos templates
+- [ ] Sem segredos hardcoded nos templates
 
 #### ✅ Planejamento de Recursos
-- [ ] Região alvo do Azure selecionada e validada
-- [ ] Serviços necessários do Azure disponíveis na região alvo
+- [ ] Região do Azure-alvo selecionada e validada
+- [ ] Serviços do Azure necessários disponíveis na região-alvo
 - [ ] Cotas suficientes disponíveis para os recursos planejados
 - [ ] Conflitos de nomenclatura de recursos verificados
 - [ ] Dependências entre recursos compreendidas
@@ -832,10 +848,10 @@ Imprima este checklist e verifique cada item antes da implantação:
 - [ ] Aplicativos web com HTTPS habilitado
 
 #### ✅ Gestão de Custos
-- [ ] Estimativas de custos calculadas usando o Azure Pricing Calculator
+- [ ] Estimativas de custos calculadas usando o Calculador de Preços do Azure
 - [ ] Alertas de orçamento configurados, se necessário
 - [ ] SKUs apropriados selecionados para o tipo de ambiente
-- [ ] Capacidade reservada considerada para cargas de trabalho em produção
+- [ ] Capacidade reservada considerada para cargas de trabalho de produção
 
 #### ✅ Monitoramento e Observabilidade
 - [ ] Application Insights configurado nos templates
@@ -1289,10 +1305,10 @@ steps:
 
 1. **Automatize Sempre que Possível**
    - Integre verificações em pipelines CI/CD
-   - Use scripts para validações repetíveis
-   - Armazene resultados para trilhas de auditoria
+   - Use scripts para validações repetitivas
+   - Armazene os resultados para auditorias
 
-2. **Validação Específica por Ambiente**
+2. **Validação Específica para o Ambiente**
    - Verificações diferentes para dev/staging/prod
    - Requisitos de segurança apropriados por ambiente
    - Otimização de custos para ambientes não produtivos
@@ -1300,12 +1316,12 @@ steps:
 3. **Cobertura Abrangente**
    - Autenticação e permissões
    - Cotas e disponibilidade de recursos
-   - Validação de templates e sintaxe
+   - Validação e sintaxe de templates
    - Requisitos de segurança e conformidade
 
 4. **Relatórios Claros**
    - Indicadores de status com cores
-   - Mensagens de erro detalhadas com etapas de resolução
+   - Mensagens de erro detalhadas com etapas de correção
    - Relatórios resumidos para avaliação rápida
 
 5. **Falha Rápida**
@@ -1315,7 +1331,7 @@ steps:
 
 ### Armadilhas Comuns nas Verificações Pré-Implantação
 
-1. **Pular validação** para implantações "rápidas"
+1. **Ignorar validações** para implantações "rápidas"
 2. **Verificação insuficiente de permissões** antes da implantação
 3. **Ignorar limites de cotas** até que a implantação falhe
 4. **Não validar templates** em pipelines CI/CD
@@ -1324,7 +1340,7 @@ steps:
 
 ---
 
-**Dica Pro**: Execute verificações pré-implantação como um trabalho separado no seu pipeline CI/CD antes do trabalho de implantação real. Isso permite identificar problemas cedo e fornece feedback mais rápido para os desenvolvedores.
+**Dica Pro**: Execute verificações pré-implantação como um trabalho separado no seu pipeline CI/CD antes do trabalho de implantação real. Isso permite identificar problemas cedo e fornece feedback mais rápido aos desenvolvedores.
 
 ---
 
@@ -1335,4 +1351,4 @@ steps:
 ---
 
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

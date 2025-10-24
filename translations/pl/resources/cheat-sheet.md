@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T16:50:43+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:15:48+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "pl"
 }
@@ -10,38 +10,38 @@ CO_OP_TRANSLATOR_METADATA:
 # Skrócona lista poleceń - Kluczowe komendy AZD
 
 **Szybki dostęp do wszystkich rozdziałów**
-- **📚 Strona kursu**: [AZD dla początkujących](../README.md)
+- **📚 Strona główna kursu**: [AZD dla początkujących](../README.md)
 - **📖 Szybki start**: [Rozdział 1: Podstawy i szybki start](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Komendy AI**: [Rozdział 2: Rozwój z AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 Polecenia AI**: [Rozdział 2: Rozwój zorientowany na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Zaawansowane**: [Rozdział 4: Infrastruktura jako kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Wprowadzenie
 
-Ta kompleksowa lista poleceń zawiera szybki dostęp do najczęściej używanych komend Azure Developer CLI, uporządkowanych według kategorii z praktycznymi przykładami. Idealna do szybkiego sprawdzania podczas rozwoju, rozwiązywania problemów i codziennej pracy z projektami azd.
+Ten kompleksowy przewodnik zawiera szybki dostęp do najczęściej używanych poleceń Azure Developer CLI, zorganizowanych według kategorii i praktycznych przykładów. Idealny do szybkiego sprawdzania podczas programowania, rozwiązywania problemów i codziennej pracy z projektami azd.
 
 ## Cele nauki
 
-Korzystając z tej listy poleceń, będziesz:
-- Mieć natychmiastowy dostęp do kluczowych komend Azure Developer CLI i ich składni
-- Rozumieć organizację komend według funkcjonalnych kategorii i przypadków użycia
-- Odnosić się do praktycznych przykładów dla typowych scenariuszy rozwoju i wdrożenia
-- Korzystać z komend diagnostycznych do szybkiego rozwiązywania problemów
-- Znajdować zaawansowane opcje konfiguracji i personalizacji
+Korzystając z tego przewodnika, będziesz:
+- Mieć natychmiastowy dostęp do kluczowych poleceń i składni Azure Developer CLI
+- Rozumieć organizację poleceń według kategorii funkcjonalnych i przypadków użycia
+- Korzystać z praktycznych przykładów dla typowych scenariuszy programowania i wdrażania
+- Mieć dostęp do poleceń diagnostycznych do szybkiego rozwiązywania problemów
+- Łatwo znajdować zaawansowane opcje konfiguracji i dostosowywania
 - Zarządzać środowiskami i przepływami pracy w wielu środowiskach
 
 ## Rezultaty nauki
 
-Regularne korzystanie z tej listy poleceń pozwoli Ci:
-- Pewnie wykonywać komendy azd bez konieczności przeglądania pełnej dokumentacji
-- Szybko rozwiązywać typowe problemy za pomocą odpowiednich komend diagnostycznych
-- Efektywnie zarządzać wieloma środowiskami i scenariuszami wdrożenia
-- Stosować zaawansowane funkcje azd i opcje konfiguracji w razie potrzeby
-- Rozwiązywać problemy z wdrożeniem za pomocą systematycznych sekwencji komend
+Dzięki regularnemu korzystaniu z tego przewodnika będziesz w stanie:
+- Pewnie wykonywać polecenia azd bez konieczności przeglądania pełnej dokumentacji
+- Szybko rozwiązywać typowe problemy za pomocą odpowiednich poleceń diagnostycznych
+- Efektywnie zarządzać wieloma środowiskami i scenariuszami wdrażania
+- Wykorzystywać zaawansowane funkcje i opcje konfiguracji azd w razie potrzeby
+- Rozwiązywać problemy z wdrażaniem za pomocą systematycznych sekwencji poleceń
 - Optymalizować przepływy pracy dzięki skutecznemu wykorzystaniu skrótów i opcji azd
 
-## Komendy na start
+## Polecenia na start
 
-### Autoryzacja
+### Uwierzytelnianie
 ```bash
 # Login to Azure (uses Azure CLI)
 az login
@@ -70,9 +70,9 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Kluczowe komendy wdrożeniowe
+## Kluczowe polecenia wdrażania
 
-### Kompletny przepływ wdrożeniowy
+### Kompletny proces wdrażania
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -121,9 +123,9 @@ azd package
 azd package --service api
 ```
 
-## 🌍 Zarządzanie środowiskami
+## 🌍 Zarządzanie środowiskiem
 
-### Operacje na środowiskach
+### Operacje na środowisku
 ```bash
 # List all environments
 azd env list
@@ -158,7 +160,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Komendy konfiguracji
+## ⚙️ Polecenia konfiguracji
 
 ### Konfiguracja globalna
 ```bash
@@ -218,7 +220,7 @@ azd monitor
 azd monitor --insights
 ```
 
-## 🛠️ Komendy konserwacyjne
+## 🛠️ Polecenia konserwacyjne
 
 ### Czyszczenie
 ```bash
@@ -247,7 +249,7 @@ azd version
 azd info
 ```
 
-## 🔧 Zaawansowane komendy
+## 🔧 Zaawansowane polecenia
 
 ### Pipeline i CI/CD
 ```bash
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Zarządzanie usługami
@@ -287,7 +298,7 @@ azd service restart --service api
 
 ## 🎯 Szybkie przepływy pracy
 
-### Przepływ pracy dla rozwoju
+### Przepływ pracy programisty
 ```bash
 # Start new project
 azd init --template todo-nodejs-mongo
@@ -304,7 +315,7 @@ azd deploy
 azd logs --follow
 ```
 
-### Przepływ pracy dla wielu środowisk
+### Przepływ pracy w wielu środowiskach
 ```bash
 # Set up environments
 azd env new dev
@@ -342,7 +353,7 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Komendy debugowania
+## 🔍 Polecenia debugowania
 
 ### Informacje debugowania
 ```bash
@@ -372,7 +383,7 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 Komendy plików i katalogów
+## 📁 Polecenia plików i katalogów
 
 ### Struktura projektu
 ```bash
@@ -408,7 +419,7 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Typowe kombinacje komend
+## 🔧 Typowe kombinacje poleceń
 
 ### Skrypt sprawdzania stanu
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -469,7 +480,7 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Komendy awaryjne
+## 🚨 Polecenia awaryjne
 
 ### Szybkie naprawy
 ```bash
@@ -487,7 +498,7 @@ azd service restart --all
 azd deploy --rollback
 ```
 
-### Komendy odzyskiwania
+### Polecenia odzyskiwania
 ```bash
 # Recover from failed deployment
 azd provision --continue-on-error
@@ -558,15 +569,15 @@ azd template show <template-name> --docs
 
 ---
 
-**Porada**: Dodaj tę listę poleceń do zakładek i używaj `Ctrl+F`, aby szybko znaleźć potrzebne komendy!
+**Porada**: Dodaj ten przewodnik do zakładek i używaj `Ctrl+F`, aby szybko znaleźć potrzebne polecenia!
 
 ---
 
 **Nawigacja**
-- **Poprzednia lekcja**: [Kontrole przed wdrożeniem](../docs/pre-deployment/preflight-checks.md)
+- **Poprzednia lekcja**: [Kontrole wstępne](../docs/pre-deployment/preflight-checks.md)
 - **Następna lekcja**: [Słowniczek](glossary.md)
 
 ---
 
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.

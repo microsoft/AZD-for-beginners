@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T12:38:16+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T16:41:02+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "zh"
 }
@@ -10,47 +10,47 @@ CO_OP_TRANSLATOR_METADATA:
 # 使用 AZD 配置 Azure 资源
 
 **章节导航：**
-- **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第四章 - 基础设施即代码与部署
-- **⬅️ 上一章**: [部署指南](deployment-guide.md)
-- **➡️ 下一章**: [第五章：多代理 AI 解决方案](../../examples/retail-scenario.md)
-- **🔧 相关内容**: [第六章：部署前验证](../pre-deployment/capacity-planning.md)
+- **📚 课程主页**：[AZD 初学者指南](../../README.md)
+- **📖 当前章节**：第 4 章 - 基础设施即代码与部署
+- **⬅️ 上一章**：[部署指南](deployment-guide.md)
+- **➡️ 下一章**：[第 5 章：多代理 AI 解决方案](../../examples/retail-scenario.md)
+- **🔧 相关内容**：[第 6 章：部署前验证](../pre-deployment/capacity-planning.md)
 
-## 介绍
+## 简介
 
-本指南全面讲解如何使用 Azure Developer CLI 配置和管理 Azure 资源。从基础资源创建到企业级基础设施架构，学习如何通过 Bicep、ARM 模板、Terraform 和 Pulumi 实现基础设施即代码（IaC）模式。
+本指南全面介绍如何使用 Azure Developer CLI 配置和管理 Azure 资源。从基础资源创建到使用 Bicep、ARM 模板、Terraform 和 Pulumi 实现企业级基础设施架构的高级模式，学习如何实施基础设施即代码（IaC）模式。
 
 ## 学习目标
 
 完成本指南后，您将能够：
-- 掌握基础设施即代码的原则以及 Azure 资源配置方法
-- 理解 Azure Developer CLI 支持的多种 IaC 工具
-- 设计并实现常见应用架构的 Bicep 模板
-- 配置资源参数、变量以及环境特定设置
+- 掌握基础设施即代码原则和 Azure 资源配置
+- 了解 Azure Developer CLI 支持的多种 IaC 提供商
+- 设计并实现适用于常见应用架构的 Bicep 模板
+- 配置资源参数、变量和环境特定设置
 - 实现包括网络和安全在内的高级基础设施模式
-- 管理资源生命周期、更新以及依赖关系解析
+- 管理资源生命周期、更新和依赖关系解析
 
 ## 学习成果
 
-完成学习后，您将能够：
-- 使用 Bicep 和 ARM 模板设计并配置 Azure 基础设施
-- 配置复杂的多服务架构并正确处理资源依赖
-- 为多环境和多配置实现参数化模板
+完成后，您将能够：
+- 使用 Bicep 和 ARM 模板设计和配置 Azure 基础设施
+- 配置具有正确资源依赖关系的复杂多服务架构
+- 为多个环境和配置实现参数化模板
 - 排查基础设施配置问题并解决部署失败
 - 将 Azure 良好架构框架原则应用于基础设施设计
-- 管理基础设施更新并实施版本控制策略
+- 管理基础设施更新并实施基础设施版本控制策略
 
 ## 基础设施配置概述
 
-Azure Developer CLI 支持多种基础设施即代码（IaC）工具：
+Azure Developer CLI 支持多种基础设施即代码（IaC）提供商：
 - **Bicep**（推荐） - Azure 的领域特定语言
 - **ARM 模板** - 基于 JSON 的 Azure 资源管理器模板
 - **Terraform** - 多云基础设施工具
-- **Pulumi** - 使用编程语言实现现代基础设施即代码
+- **Pulumi** - 使用编程语言的现代基础设施即代码工具
 
-## 理解 Azure 资源
+## 了解 Azure 资源
 
-### 资源层级
+### 资源层次结构
 ```
 Azure Account
 └── Subscriptions
@@ -58,12 +58,12 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### 常见的 Azure 应用服务
-- **计算**: 应用服务、容器应用、函数、虚拟机
-- **存储**: 存储账户、Cosmos DB、SQL 数据库、PostgreSQL
-- **网络**: 虚拟网络、应用网关、CDN
-- **安全**: 密钥保管库、应用洞察、日志分析
-- **AI/ML**: 认知服务、OpenAI、机器学习
+### 常见的应用程序 Azure 服务
+- **计算**：App Service、Container Apps、Functions、虚拟机
+- **存储**：存储账户、Cosmos DB、SQL 数据库、PostgreSQL
+- **网络**：虚拟网络、应用网关、CDN
+- **安全**：密钥保管库、应用洞察、日志分析
+- **AI/ML**：认知服务、OpenAI、机器学习
 
 ## Bicep 基础设施模板
 
@@ -307,7 +307,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 安全与机密管理
+## 🔒 安全和机密管理
 
 ### 密钥保管库集成
 ```bicep
@@ -377,7 +377,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 网络与连接
+## 🌍 网络和连接
 
 ### 虚拟网络配置
 ```bicep
@@ -442,7 +442,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### 配备 SSL 的应用网关
+### 带 SSL 的应用网关
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -505,7 +505,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 监控与可观测性
+## 📊 监控和可观察性
 
 ### 应用洞察
 ```bicep
@@ -536,7 +536,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### 自定义指标与警报
+### 自定义指标和警报
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 资源更新与迁移
+## 🧪 基础设施预览与验证（新功能）
 
-### 安全的资源更新
+### 部署前预览基础设施变更
+
+`azd provision --preview` 功能允许您在实际部署资源之前**模拟基础设施配置**。它类似于 `terraform plan` 或 `bicep what-if`，为您提供 Azure 环境中将进行的更改的**预览视图**。
+
+#### 🛠️ 功能介绍
+- **分析您的 IaC 模板**（Bicep 或 Terraform）
+- **显示资源变更预览**：新增、删除、更新
+- **不会应用更改** — 仅供查看，运行安全
+
+#### � 使用场景
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Apply changes incrementally
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+此命令帮助您：
+- **在提交资源之前验证基础设施变更**
+- **在开发周期早期捕获配置错误**
+- **在团队环境中安全协作**
+- **确保最小权限部署**，避免意外情况
+
+特别适用于以下场景：
+- 处理复杂的多服务环境
+- 对生产基础设施进行更改
+- 在 PR 审批前验证模板修改
+- 培训团队新成员学习基础设施模式
+
+### 示例预览输出
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 资源更新与迁移
+
+### 安全资源更新
+```bash
+# Preview infrastructure changes first (RECOMMENDED)
+azd provision --preview
+
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -809,7 +869,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 最佳实践
 
-### 1. 资源命名规范
+### 1. 资源命名约定
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -820,7 +880,7 @@ var naming = {
 }
 ```
 
-### 2. 标记策略
+### 2. 标签策略
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -881,8 +941,8 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **导航**
-- **上一课**: [部署指南](deployment-guide.md)
-- **下一课**: [容量规划](../pre-deployment/capacity-planning.md)
+- **上一课**：[部署指南](deployment-guide.md)
+- **下一课**：[容量规划](../pre-deployment/capacity-planning.md)
 
 ---
 

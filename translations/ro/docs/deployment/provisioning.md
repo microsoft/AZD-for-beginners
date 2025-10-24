@@ -1,30 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-18T11:02:11+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T18:02:55+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "ro"
 }
 -->
-# Provisionarea Resurselor Azure cu AZD
+# Provizionarea Resurselor Azure cu AZD
 
-**Navigare în capitol:**
+**Navigare capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
 - **📖 Capitol Curent**: Capitolul 4 - Infrastructură ca Cod & Implementare
 - **⬅️ Precedent**: [Ghid de Implementare](deployment-guide.md)
-- **➡️ Următorul Capitol**: [Capitolul 5: Soluții AI Multi-Agent](../../examples/retail-scenario.md)
+- **➡️ Capitolul Următor**: [Capitolul 5: Soluții AI Multi-Agent](../../examples/retail-scenario.md)
 - **🔧 Legat**: [Capitolul 6: Validarea Pre-Implementării](../pre-deployment/capacity-planning.md)
 
 ## Introducere
 
-Acest ghid cuprinzător acoperă tot ce trebuie să știți despre provisionarea și gestionarea resurselor Azure folosind Azure Developer CLI. Învață să implementezi modele de Infrastructură ca Cod (IaC), de la crearea de resurse de bază până la arhitecturi avansate de infrastructură la nivel de întreprindere, utilizând Bicep, șabloane ARM, Terraform și Pulumi.
+Acest ghid cuprinzător acoperă tot ce trebuie să știți despre provizionarea și gestionarea resurselor Azure folosind Azure Developer CLI. Învață să implementezi modele de Infrastructură ca Cod (IaC) de la crearea de resurse de bază până la arhitecturi avansate de infrastructură la nivel de întreprindere utilizând Bicep, șabloane ARM, Terraform și Pulumi.
 
 ## Obiective de Învățare
 
-Prin completarea acestui ghid, vei:
-- Stăpâni principiile Infrastructurii ca Cod și provisionarea resurselor Azure
-- Înțelege mai mulți furnizori IaC acceptați de Azure Developer CLI
+Prin completarea acestui ghid, veți:
+- Stăpâni principiile Infrastructurii ca Cod și provizionarea resurselor Azure
+- Înțelege multiplele furnizori IaC suportate de Azure Developer CLI
 - Proiecta și implementa șabloane Bicep pentru arhitecturi comune de aplicații
 - Configura parametrii resurselor, variabilele și setările specifice mediului
 - Implementa modele avansate de infrastructură, inclusiv rețele și securitate
@@ -32,17 +32,17 @@ Prin completarea acestui ghid, vei:
 
 ## Rezultate de Învățare
 
-La finalizare, vei putea:
-- Proiecta și provisiona infrastructura Azure folosind Bicep și șabloane ARM
-- Configura arhitecturi complexe multi-servicii cu dependențe corecte între resurse
-- Implementa șabloane parametrizate pentru medii și configurații multiple
-- Depana problemele de provisionare a infrastructurii și rezolva eșecurile de implementare
+La finalizare, veți putea:
+- Proiecta și proviziona infrastructura Azure folosind șabloane Bicep și ARM
+- Configura arhitecturi complexe multi-servicii cu dependențe corecte de resurse
+- Implementa șabloane parametrizate pentru multiple medii și configurații
+- Depana problemele de provizionare a infrastructurii și rezolva eșecurile de implementare
 - Aplica principiile Framework-ului Azure Well-Architected la proiectarea infrastructurii
-- Gestiona actualizările infrastructurii și implementa strategii de versionare a infrastructurii
+- Gestiona actualizările infrastructurii și implementa strategii de versiuni ale infrastructurii
 
-## Prezentare Generală a Provisionării Infrastructurii
+## Prezentare Generală a Provizionării Infrastructurii
 
-Azure Developer CLI acceptă mai mulți furnizori de Infrastructură ca Cod (IaC):
+Azure Developer CLI suportă mai mulți furnizori de Infrastructură ca Cod (IaC):
 - **Bicep** (recomandat) - Limbaj specific domeniului Azure
 - **Șabloane ARM** - Șabloane JSON pentru Azure Resource Manager
 - **Terraform** - Instrument multi-cloud pentru infrastructură
@@ -62,7 +62,7 @@ Azure Account
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
+- **Securitate**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
 ## Șabloane de Infrastructură Bicep
@@ -209,7 +209,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Provisionarea Bazelor de Date
+## 🗃️ Provizionarea Bazelor de Date
 
 ### Cosmos DB
 ```bicep
@@ -570,9 +570,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Configurări Specifice Mediului
+## 🔧 Configurații Specifice Mediului
 
-### Fișiere de Parametri pentru Medii Diferite
+### Fișiere de Parametri pentru Diferite Medii
 ```json
 // infra/main.parameters.dev.json
 {
@@ -626,7 +626,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Provisionarea Condiționată a Resurselor
+### Provizionarea Condiționată a Resurselor
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -658,7 +658,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Modele Avansate de Provisionare
+## 🚀 Modele Avansate de Provizionare
 
 ### Implementare Multi-Regiune
 ```bicep
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Actualizări și Migrații ale Resurselor
+## 🧪 Previzualizare și Validare Infrastructură (NOU)
+
+### Previzualizarea Modificărilor Infrastructurii Înainte de Implementare
+
+Funcția `azd provision --preview` vă permite să **simulați provizionarea infrastructurii** înainte de a implementa efectiv resursele. Este similară cu `terraform plan` sau `bicep what-if`, oferindu-vă o **vizualizare preliminară** a modificărilor care ar fi făcute în mediul Azure.
+
+#### 🛠️ Ce Face
+- **Analizează șabloanele IaC** (Bicep sau Terraform)
+- **Arată o previzualizare a modificărilor resurselor**: adăugiri, ștergeri, actualizări
+- **Nu aplică modificările** — este doar în mod citire și sigur de rulat
+
+#### � Cazuri de Utilizare
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Această comandă vă ajută să:
+- **Validați modificările infrastructurii** înainte de a angaja resursele
+- **Detectați configurări greșite devreme** în ciclul de dezvoltare
+- **Colaborați în siguranță** în medii de echipă
+- **Asigurați implementări cu privilegii minime** fără surprize
+
+Este deosebit de utilă atunci când:
+- Lucrați cu medii complexe multi-servicii
+- Faceți modificări la infrastructura de producție
+- Validați modificările șabloanelor înainte de aprobarea PR
+- Instruiți noi membri ai echipei în modele de infrastructură
+
+### Exemplu de Output Previzualizare
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Actualizări și Migrații ale Resurselor
 
 ### Actualizări Sigure ale Resurselor
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -866,10 +926,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Pași Următori
 
-- [Planificarea Pre-Implementării](../pre-deployment/capacity-planning.md) - Validează disponibilitatea resurselor
-- [Probleme Comune](../troubleshooting/common-issues.md) - Depanarea problemelor de infrastructură
-- [Ghid de Debugging](../troubleshooting/debugging.md) - Debugging-ul problemelor de provisionare
-- [Selecția SKU](../pre-deployment/sku-selection.md) - Alegerea nivelurilor de servicii potrivite
+- [Planificare Pre-Implementare](../pre-deployment/capacity-planning.md) - Validați disponibilitatea resurselor
+- [Probleme Comune](../troubleshooting/common-issues.md) - Depanați problemele de infrastructură
+- [Ghid de Debugging](../troubleshooting/debugging.md) - Depanați problemele de provizionare
+- [Selecția SKU](../pre-deployment/sku-selection.md) - Alegeți nivelurile de servicii potrivite
 
 ## Resurse Suplimentare
 
@@ -882,9 +942,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 **Navigare**
 - **Lecția Anterioară**: [Ghid de Implementare](deployment-guide.md)
-- **Lecția Următoare**: [Planificarea Capacității](../pre-deployment/capacity-planning.md)
+- **Lecția Următoare**: [Planificare Capacitate](../pre-deployment/capacity-planning.md)
 
 ---
 
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

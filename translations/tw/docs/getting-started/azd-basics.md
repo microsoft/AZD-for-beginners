@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:29:22+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T16:46:33+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "tw"
 }
@@ -13,14 +13,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 **章節導航：**
 - **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章內容**: 第 1 章 - 基礎與快速入門
+- **📖 本章節**: 第1章 - 基礎與快速入門
 - **⬅️ 上一章**: [課程概述](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ 下一章**: [安裝與設定](installation.md)
-- **🚀 下一章節**: [第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 下一章節**: [第2章：AI優先開發](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 簡介
 
-本課程將介紹 Azure Developer CLI (azd)，這是一個強大的命令列工具，能加速從本地開發到 Azure 部署的過程。您將學習基本概念、核心功能，並了解 azd 如何簡化雲原生應用程式的部署。
+本課程將介紹 Azure Developer CLI (azd)，這是一個強大的命令列工具，能加速您從本地開發到 Azure 部署的過程。您將學習基本概念、核心功能，並了解 azd 如何簡化雲原生應用程式的部署。
 
 ## 學習目標
 
@@ -28,7 +28,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 了解 Azure Developer CLI 的用途及主要目的
 - 學習模板、環境和服務的核心概念
 - 探索包括模板驅動開發和基礎架構即代碼的主要功能
-- 理解 azd 專案結構與工作流程
+- 理解 azd 專案結構和工作流程
 - 為您的開發環境安裝和配置 azd 做好準備
 
 ## 學習成果
@@ -37,17 +37,17 @@ CO_OP_TRANSLATOR_METADATA:
 - 解釋 azd 在現代雲端開發工作流程中的角色
 - 識別 azd 專案結構的組成部分
 - 描述模板、環境和服務如何協同工作
-- 理解使用 azd 的基礎架構即代碼的優勢
+- 理解使用 azd 的基礎架構即代碼的好處
 - 認識不同的 azd 命令及其用途
 
 ## 什麼是 Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) 是一個命令列工具，旨在加速從本地開發到 Azure 部署的過程。它簡化了在 Azure 上構建、部署和管理雲原生應用程式的流程。
+Azure Developer CLI (azd) 是一個命令列工具，旨在加速您從本地開發到 Azure 部署的過程。它簡化了在 Azure 上構建、部署和管理雲原生應用程式的流程。
 
 ## 核心概念
 
 ### 模板
-模板是 azd 的基礎，包含：
+模板是 azd 的基礎。它包含：
 - **應用程式代碼** - 您的原始碼和依賴項
 - **基礎架構定義** - 使用 Bicep 或 Terraform 定義的 Azure 資源
 - **配置文件** - 設定和環境變數
@@ -57,9 +57,9 @@ Azure Developer CLI (azd) 是一個命令列工具，旨在加速從本地開發
 環境代表不同的部署目標：
 - **開發** - 用於測試和開發
 - **測試** - 預生產環境
-- **生產** - 正式生產環境
+- **生產** - 實際生產環境
 
-每個環境都維護自己的：
+每個環境都有自己的：
 - Azure 資源群組
 - 配置設定
 - 部署狀態
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ 使用預覽進行安全基礎架構規劃
+`azd provision --preview` 命令是安全部署的突破性工具：
+- **模擬分析** - 顯示將被創建、修改或刪除的內容
+- **零風險** - 不會對您的 Azure 環境進行實際更改
+- **團隊協作** - 部署前共享預覽結果
+- **成本估算** - 在承諾之前了解資源成本
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. 環境管理
@@ -204,7 +222,7 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 - 跳過確認提示。
 - 適用於無法進行手動輸入的自動化或腳本。
-- 即使 CLI 檢測到不一致，也能確保拆除過程不被中斷。
+- 即使 CLI 檢測到不一致，也能確保拆除過程不受干擾。
 
 ```
 --purge
@@ -213,12 +231,12 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 環境狀態
 本地 `.azure` 文件夾
 緩存的部署信息
-防止 azd "記住" 之前的部署，避免出現資源群組不匹配或過期的註冊表引用等問題。
+防止 azd "記住" 之前的部署，避免出現資源群組不匹配或過時的註冊表引用等問題。
 
 ### 為什麼要同時使用？
-當您因殘留狀態或部分部署而在使用 `azd up` 時遇到問題時，這個組合能確保獲得 **乾淨的起點**。
+當您因為殘留狀態或部分部署而在使用 `azd up` 時遇到障礙時，這個組合可以確保獲得 **乾淨的起點**。
 
-特別是在 Azure 入口網站中手動刪除資源後，或切換模板、環境或資源群組命名約定時非常有用。
+在 Azure 入口網站手動刪除資源後，或切換模板、環境或資源群組命名約定時，這尤其有用。
 
 ### 管理多個環境
 ```bash
@@ -236,7 +254,7 @@ azd env list
 
 ## 🔐 身份驗證與憑證
 
-理解身份驗證對成功的 azd 部署至關重要。Azure 使用多種身份驗證方法，而 azd 利用與其他 Azure 工具相同的憑證鏈。
+理解身份驗證對於成功的 azd 部署至關重要。Azure 使用多種身份驗證方法，而 azd 利用其他 Azure 工具使用的相同憑證鏈。
 
 ### Azure CLI 身份驗證 (`az login`)
 
@@ -263,14 +281,14 @@ az account set --subscription <subscription-id>
 ```
 
 ### 身份驗證流程
-1. **互動式登入**: 開啟您的默認瀏覽器進行身份驗證
+1. **互動式登錄**: 開啟默認瀏覽器進行身份驗證
 2. **設備代碼流程**: 用於無法訪問瀏覽器的環境
 3. **服務主體**: 用於自動化和 CI/CD 場景
-4. **托管身份**: 用於 Azure 託管的應用程式
+4. **托管身份**: 用於 Azure 托管的應用程式
 
 ### DefaultAzureCredential 鏈
 
-`DefaultAzureCredential` 是一種憑證類型，通過自動嘗試多個憑證來源以特定順序提供簡化的身份驗證體驗：
+`DefaultAzureCredential` 是一種憑證類型，通過自動嘗試特定順序的多個憑證來源提供簡化的身份驗證體驗：
 
 #### 憑證鏈順序
 ```mermaid
@@ -300,7 +318,7 @@ export AZURE_TENANT_ID="<tenant-id>"
 - 其他聯邦身份場景
 
 #### 3. 托管身份
-用於 Azure 資源，例如：
+適用於 Azure 資源，例如：
 - 虛擬機
 - 應用服務
 - Azure Functions
@@ -313,9 +331,9 @@ az account show --query "user.type" --output tsv
 ```
 
 #### 4. 開發工具整合
-- **Visual Studio**: 自動使用已登入的帳戶
+- **Visual Studio**: 自動使用已登錄的帳戶
 - **VS Code**: 使用 Azure 帳戶擴展憑證
-- **Azure CLI**: 使用 `az login` 憑證（本地開發最常見）
+- **Azure CLI**: 使用 `az login` 憑證（本地開發最常用）
 
 ### AZD 身份驗證設置
 
@@ -337,7 +355,7 @@ azd auth login
 
 ### 身份驗證最佳實踐
 
-#### 本地開發
+#### 用於本地開發
 ```bash
 # 1. Login with Azure CLI
 az login
@@ -350,7 +368,7 @@ az account set --subscription "Your Subscription Name"
 azd auth login
 ```
 
-#### CI/CD 管道
+#### 用於 CI/CD 管道
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -366,10 +384,10 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### 生產環境
+#### 用於生產環境
 - 在 Azure 資源上運行時使用 **托管身份**
 - 自動化場景使用 **服務主體**
-- 避免將憑證存儲在代碼或配置文件中
+- 避免在代碼或配置文件中存儲憑證
 - 使用 **Azure Key Vault** 存儲敏感配置
 
 ### 常見身份驗證問題及解決方案
@@ -401,7 +419,7 @@ azd auth logout
 azd auth login
 ```
 
-### 不同場景下的身份驗證
+### 不同場景中的身份驗證
 
 #### 本地開發
 ```bash
@@ -476,7 +494,7 @@ azd logs                     # View application logs
 
 ## 最佳實踐
 
-### 1. 使用有意義的命名
+### 1. 使用有意義的名稱
 ```bash
 # Good
 azd env new production-east
@@ -500,23 +518,23 @@ azd init --template template1
 ### 4. 配置管理
 - 使用環境變數存儲敏感數據
 - 將配置保存在版本控制中
-- 記錄環境特定的設置
+- 記錄特定環境的設置
 
 ## 學習進度
 
-### 初學者 (第 1-2 週)
+### 初學者 (第1-2週)
 1. 安裝 azd 並進行身份驗證
 2. 部署簡單模板
 3. 理解專案結構
 4. 學習基本命令 (up, down, deploy)
 
-### 中級 (第 3-4 週)
+### 中級 (第3-4週)
 1. 自定義模板
 2. 管理多個環境
 3. 理解基礎架構代碼
 4. 設置 CI/CD 管道
 
-### 高級 (第 5 週及以上)
+### 高級 (第5週及以後)
 1. 創建自定義模板
 2. 高級基礎架構模式
 3. 多區域部署
@@ -524,13 +542,13 @@ azd init --template template1
 
 ## 下一步
 
-**📖 繼續第 1 章學習：**
+**📖 繼續學習第1章：**
 - [安裝與設定](installation.md) - 安裝並配置 azd
 - [您的第一個專案](first-project.md) - 完成動手教程
 - [配置指南](configuration.md) - 高級配置選項
 
-**🎯 準備好進入下一章節？**
-- [第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md) - 開始構建 AI 應用程式
+**🎯 準備進入下一章節？**
+- [第2章：AI優先開發](../ai-foundry/azure-ai-foundry-integration.md) - 開始構建 AI 應用程式
 
 ## 其他資源
 
@@ -542,10 +560,12 @@ azd init --template template1
 
 **章節導航：**
 - **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章內容**: 第 1 章 - 基礎與快速入門  
+- **📖 本章節**: 第1章 - 基礎與快速入門  
 - **⬅️ 上一章**: [課程概述](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ 下一章**: [安裝與設定](installation.md)
-- **🚀 下一章節**: [第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 下一章節**: [第2章：AI優先開發](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**免責聲明**：  
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而產生的任何誤解或誤釋不承擔責任。

@@ -1,43 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T12:10:41+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T18:10:52+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "hr"
 }
 -->
-# Brzi vodič za naredbe - Osnovne AZD naredbe
+# Priručnik naredbi - Osnovne AZD naredbe
 
 **Brzi pregled svih poglavlja**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../README.md)
 - **📖 Brzi početak**: [Poglavlje 1: Osnove i brzi početak](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI naredbe**: [Poglavlje 2: Razvoj usmjeren na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 AI naredbe**: [Poglavlje 2: Razvoj s fokusom na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Napredno**: [Poglavlje 4: Infrastruktura kao kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pruža brzi pregled najčešće korištenih naredbi Azure Developer CLI-a, organiziranih po kategorijama s praktičnim primjerima. Idealan za brze pretrage tijekom razvoja, otklanjanja poteškoća i svakodnevnog rada s azd projektima.
+Ovaj sveobuhvatni priručnik pruža brz pregled najčešće korištenih naredbi Azure Developer CLI, organiziranih po kategorijama s praktičnim primjerima. Idealan za brzu provjeru tijekom razvoja, rješavanja problema i svakodnevnog rada s azd projektima.
 
 ## Ciljevi učenja
 
-Korištenjem ovog vodiča, moći ćete:
-- Imati trenutni pristup osnovnim naredbama i sintaksi Azure Developer CLI-a
+Korištenjem ovog priručnika, moći ćete:
+- Imati trenutni pristup osnovnim naredbama i sintaksi Azure Developer CLI
 - Razumjeti organizaciju naredbi prema funkcionalnim kategorijama i slučajevima upotrebe
 - Referencirati praktične primjere za uobičajene scenarije razvoja i implementacije
-- Pronaći naredbe za otklanjanje poteškoća za brzo rješavanje problema
+- Pronaći naredbe za rješavanje problema za brzo otklanjanje poteškoća
 - Učinkovito pronaći napredne opcije konfiguracije i prilagodbe
 - Locirati naredbe za upravljanje okruženjem i rad s više okruženja
 
 ## Ishodi učenja
 
-Redovitim korištenjem ovog vodiča, moći ćete:
-- Pouzdano izvršavati azd naredbe bez potrebe za detaljnom dokumentacijom
+Redovitim korištenjem ovog priručnika, moći ćete:
+- Pouzdano izvršavati azd naredbe bez potrebe za potpunom dokumentacijom
 - Brzo rješavati uobičajene probleme koristeći odgovarajuće dijagnostičke naredbe
 - Učinkovito upravljati više okruženja i scenarija implementacije
 - Primijeniti napredne značajke i opcije konfiguracije azd-a prema potrebi
-- Sustavno otklanjati poteškoće s implementacijom koristeći sekvence naredbi
-- Optimizirati radne procese kroz učinkovito korištenje prečaca i opcija azd-a
+- Sustavno rješavati probleme implementacije koristeći sekvence naredbi
+- Optimizirati radne procese kroz učinkovito korištenje azd prečaca i opcija
 
 ## Naredbe za početak
 
@@ -72,7 +72,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Osnovne naredbe za implementaciju
 
-### Kompletan tijek implementacije
+### Potpuni tijek implementacije
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -123,7 +125,7 @@ azd package --service api
 
 ## 🌍 Upravljanje okruženjem
 
-### Operacije s okruženjem
+### Operacije okruženja
 ```bash
 # List all environments
 azd env list
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Upravljanje uslugama
@@ -324,7 +335,7 @@ azd env select production
 azd up
 ```
 
-### Radni proces za otklanjanje poteškoća
+### Radni proces za rješavanje problema
 ```bash
 # Enable debug mode
 export AZD_DEBUG=true
@@ -342,9 +353,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Naredbe za otklanjanje poteškoća
+## 🔍 Naredbe za otklanjanje grešaka
 
-### Informacije za otklanjanje poteškoća
+### Informacije o greškama
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -360,7 +371,7 @@ azd info
 az account show
 ```
 
-### Otklanjanje poteškoća s predlošcima
+### Otklanjanje grešaka u predlošcima
 ```bash
 # List available templates with details
 azd template list --output json
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -498,7 +509,7 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Korisni savjeti
+## 💡 Savjeti za profesionalce
 
 ### Alias za brži radni proces
 ```bash
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Savjet**: Označite ovaj vodič i koristite `Ctrl+F` za brzo pronalaženje potrebnih naredbi!
+**Savjet**: Označite ovaj priručnik i koristite `Ctrl+F` za brzo pronalaženje potrebnih naredbi!
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.

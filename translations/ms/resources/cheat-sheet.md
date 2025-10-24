@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T08:23:09+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:44:41+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "ms"
 }
@@ -17,7 +17,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pengenalan
 
-Lembaran rujukan komprehensif ini menyediakan rujukan pantas untuk perintah Azure Developer CLI yang paling kerap digunakan, disusun mengikut kategori dengan contoh praktikal. Sesuai untuk rujukan pantas semasa pembangunan, penyelesaian masalah, dan operasi harian dengan projek azd.
+Lembaran rujukan ini menyediakan rujukan pantas untuk perintah Azure Developer CLI yang paling kerap digunakan, disusun mengikut kategori dengan contoh praktikal. Sesuai untuk rujukan pantas semasa pembangunan, penyelesaian masalah, dan operasi harian dengan projek azd.
 
 ## Matlamat Pembelajaran
 
@@ -27,7 +27,7 @@ Dengan menggunakan lembaran rujukan ini, anda akan:
 - Merujuk contoh praktikal untuk senario pembangunan dan penyebaran biasa
 - Mengakses perintah penyelesaian masalah untuk penyelesaian isu dengan cepat
 - Menemukan pilihan konfigurasi dan penyesuaian lanjutan dengan cekap
-- Menyusun perintah pengurusan persekitaran dan aliran kerja pelbagai persekitaran
+- Menemukan perintah pengurusan persekitaran dan aliran kerja pelbagai persekitaran
 
 ## Hasil Pembelajaran
 
@@ -36,8 +36,8 @@ Dengan rujukan kerap kepada lembaran rujukan ini, anda akan dapat:
 - Menyelesaikan isu biasa dengan cepat menggunakan perintah diagnostik yang sesuai
 - Menguruskan pelbagai persekitaran dan senario penyebaran dengan cekap
 - Menggunakan ciri dan pilihan konfigurasi azd lanjutan apabila diperlukan
-- Menyelesaikan masalah penyebaran menggunakan urutan perintah yang sistematik
-- Mengoptimumkan aliran kerja melalui penggunaan pintasan dan pilihan azd yang berkesan
+- Menyelesaikan isu penyebaran menggunakan urutan perintah yang sistematik
+- Mengoptimumkan aliran kerja melalui penggunaan pintasan dan pilihan azd yang efektif
 
 ## Perintah Permulaan
 
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -249,7 +251,7 @@ azd info
 
 ## 🔧 Perintah Lanjutan
 
-### Saluran Paip dan CI/CD
+### Pipeline dan CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Pengurusan Perkhidmatan
@@ -342,9 +353,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Perintah Penyahpepijatan
+## 🔍 Perintah Debugging
 
-### Maklumat Penyahpepijatan
+### Maklumat Debug
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -360,7 +371,7 @@ azd info
 az account show
 ```
 
-### Penyahpepijatan Templat
+### Debugging Templat
 ```bash
 # List available templates with details
 azd template list --output json
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.

@@ -1,43 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T12:59:57+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T16:45:52+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "tw"
 }
 -->
-# 指令速查表 - AZD 必備指令
+# 指令速查表 - AZD 基本指令
 
 **所有章節快速參考**
 - **📚 課程首頁**: [AZD 初學者指南](../README.md)
-- **📖 快速入門**: [第 1 章：基礎與快速入門](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI 指令**: [第 2 章：AI 優先開發](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 進階**: [第 4 章：基礎架構即程式碼](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📖 快速入門**: [第1章：基礎與快速入門](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI 指令**: [第2章：AI優先開發](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 進階**: [第4章：基礎架構即程式碼](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-## 簡介
+## 介紹
 
-這份全面的速查表提供了最常用的 Azure Developer CLI 指令的快速參考，按類別組織並附有實用範例。非常適合在開發、故障排除以及日常操作 AZD 專案時快速查閱。
+這份全面的速查表提供了最常用的 Azure Developer CLI 指令的快速參考，按照類別組織並附有實用範例。非常適合在開發、故障排除以及日常操作 AZD 專案時快速查閱。
 
 ## 學習目標
 
 使用這份速查表，您將能夠：
 - 即時存取重要的 Azure Developer CLI 指令及語法
-- 了解指令按功能類別及使用案例的組織方式
-- 參考常見開發與部署場景的實用範例
+- 了解指令按功能類別和使用案例的組織方式
+- 參考常見開發和部署場景的實用範例
 - 學習故障排除指令以快速解決問題
-- 高效找到進階配置及自訂選項
+- 高效找到進階配置和自訂選項
 - 掌握環境管理及多環境工作流程指令
 
 ## 學習成果
 
 經常參考這份速查表，您將能夠：
-- 自信地執行 AZD 指令而無需查閱完整文件
+- 自信地執行 azd 指令而無需查閱完整文件
 - 使用適當的診斷指令快速解決常見問題
-- 高效管理多個環境及部署場景
-- 根據需要應用 AZD 的進階功能及配置選項
-- 使用系統化指令序列排除部署問題
-- 通過有效使用 AZD 快捷方式及選項優化工作流程
+- 高效管理多個環境和部署場景
+- 根據需要應用進階的 azd 功能和配置選項
+- 使用系統化的指令序列排除部署問題
+- 通過有效使用 azd 快捷方式和選項來優化工作流程
 
 ## 入門指令
 
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### 服務管理
@@ -387,7 +398,7 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 輸出格式化
+## 🎨 輸出格式
 
 ### JSON 輸出
 ```bash
@@ -408,7 +419,7 @@ azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 常見指令組合
+## 🔧 常用指令組合
 
 ### 健康檢查腳本
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 專業提示
 
-### 快速工作流程的別名
+### 加速工作流程的別名
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -509,7 +520,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### 函數快捷方式
+### 功能快捷方式
 ```bash
 # Quick environment switching
 azd-env() {
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **免責聲明**：  
-本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。

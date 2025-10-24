@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-10-11T15:48:27+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T18:29:51+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "et"
 }
 -->
 # Käskude spikker - Olulised AZD käsud
 
-**Kiirviide kõigile peatükkidele**
+**Kiirviide kõikidele peatükkidele**
 - **📚 Kursuse avaleht**: [AZD algajatele](../README.md)
 - **📖 Kiire alustamine**: [Peatükk 1: Alused ja kiire alustamine](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI käsud**: [Peatükk 2: AI-põhine arendus](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
@@ -17,26 +17,26 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Sissejuhatus
 
-See põhjalik spikker pakub kiiret viidet kõige sagedamini kasutatavatele Azure Developer CLI käskudele, mis on organiseeritud kategooriate kaupa koos praktiliste näidetega. Ideaalne kiireks otsimiseks arenduse, tõrkeotsingu ja igapäevaste AZD projektide toimingute ajal.
+See põhjalik spikker pakub kiiret viidet kõige sagedamini kasutatavatele Azure Developer CLI käskudele, mis on organiseeritud kategooriate kaupa koos praktiliste näidetega. Ideaalne arenduse, tõrkeotsingu ja igapäevaste AZD projektidega seotud toimingute jaoks.
 
-## Õpieesmärgid
+## Õppimise eesmärgid
 
 Selle spikri kasutamisega:
 - Saate kohese juurdepääsu olulistele Azure Developer CLI käskudele ja süntaksile
 - Mõistate käskude organiseerimist funktsionaalsete kategooriate ja kasutusjuhtude järgi
-- Leiate praktilisi näiteid tavapäraste arendus- ja juurutamissituatsioonide kohta
+- Leiate praktilisi näiteid levinud arendus- ja juurutamissituatsioonide jaoks
 - Juurdepääs tõrkeotsingu käskudele kiireks probleemide lahendamiseks
 - Leiate tõhusalt täiustatud konfiguratsiooni ja kohandamise võimalusi
-- Otsite keskkonna haldamise ja mitme keskkonna töövoo käske
+- Hallate keskkondi ja mitme keskkonna töövooge
 
 ## Õpitulemused
 
 Selle spikri regulaarse viitamisega saate:
 - Täita AZD käske enesekindlalt ilma täielikku dokumentatsiooni viitamata
-- Lahendada kiiresti tavapäraseid probleeme sobivate diagnostikakäskudega
+- Lahendada kiiresti levinud probleeme sobivate diagnostikakäskudega
 - Tõhusalt hallata mitut keskkonda ja juurutamissituatsioone
-- Rakendada vajadusel täiustatud AZD funktsioone ja konfiguratsioonivõimalusi
-- Lahendada juurutamisprobleeme süsteemsete käsujadade abil
+- Rakendada vajadusel täiustatud AZD funktsioone ja konfiguratsioonivalikuid
+- Lahendada juurutamisprobleeme süstemaatiliste käsuseeriate abil
 - Optimeerida töövooge AZD otseteede ja valikute tõhusa kasutamise kaudu
 
 ## Alustamise käsud
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -160,7 +162,7 @@ azd env unset DEBUG
 
 ## ⚙️ Konfiguratsioonikäsud
 
-### Globaalne konfiguratsioon
+### Üldine konfiguratsioon
 ```bash
 # List all configuration
 azd config list
@@ -249,7 +251,7 @@ azd info
 
 ## 🔧 Täiustatud käsud
 
-### Töövood ja CI/CD
+### Torujuhtmed ja CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -271,9 +273,18 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
-### Teenuse haldamine
+### Teenuste haldamine
 ```bash
 # List all services
 azd service list
@@ -344,7 +355,7 @@ azd show --output json
 
 ## 🔍 Silumiskäsud
 
-### Silumisinfo
+### Silumise teave
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -401,14 +412,14 @@ azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tabeliväljund
+### Tabeli väljund
 ```bash
 # Format as table
 azd env list --output table
 azd service list --output table
 ```
 
-## 🔧 Tavalised käsukombinatsioonid
+## 🔧 Levinud käsukombinatsioonid
 
 ### Tervisekontrolli skript
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -452,7 +463,7 @@ done
 
 ## 📝 Keskkonnamuutujad
 
-### Tavalised keskkonnamuutujad
+### Levinud keskkonnamuutujad
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -498,7 +509,7 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Kasulikud näpunäited
+## 💡 Pro nõuanded
 
 ### Aliased kiireks töövooguks
 ```bash
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Näpunäide**: Salvestage see spikker järjehoidjatesse ja kasutage `Ctrl+F`, et kiiresti leida vajalikke käske!
+**Nõuanne**: Salvestage see spikker järjehoidjatesse ja kasutage `Ctrl+F`, et kiiresti leida vajalikke käske!
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta arusaamatuste või valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamise tõttu.

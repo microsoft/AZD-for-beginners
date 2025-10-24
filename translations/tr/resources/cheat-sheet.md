@@ -1,38 +1,38 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-17T22:05:28+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:18:58+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "tr"
 }
 -->
-# Komut Hızlı Başvuru Kılavuzu - Temel AZD Komutları
+# Komut Kılavuzu - Temel AZD Komutları
 
-**Tüm Bölümler İçin Hızlı Başvuru**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../README.md)
+**Tüm Bölümler için Hızlı Referans**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../README.md)
 - **📖 Hızlı Başlangıç**: [Bölüm 1: Temel Bilgiler ve Hızlı Başlangıç](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI Komutları**: [Bölüm 2: AI-Öncelikli Geliştirme](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 İleri Düzey**: [Bölüm 4: Kod Olarak Altyapı](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Giriş
 
-Bu kapsamlı hızlı başvuru kılavuzu, en sık kullanılan Azure Developer CLI komutlarını kategoriye göre düzenlenmiş ve pratik örneklerle sunar. Geliştirme, sorun giderme ve günlük AZD projeleri operasyonları sırasında hızlı başvurular için mükemmeldir.
+Bu kapsamlı kılavuz, en sık kullanılan Azure Developer CLI komutları için hızlı bir referans sağlar. Komutlar kategorilere ayrılmıştır ve pratik örneklerle desteklenmiştir. AZD projeleriyle geliştirme, sorun giderme ve günlük operasyonlar sırasında hızlı başvurular için idealdir.
 
 ## Öğrenme Hedefleri
 
-Bu hızlı başvuru kılavuzunu kullanarak:
+Bu kılavuzu kullanarak:
 - Temel Azure Developer CLI komutlarına ve sözdizimine anında erişim sağlayabilirsiniz
 - Komutların işlevsel kategorilere ve kullanım durumlarına göre düzenlenmesini anlayabilirsiniz
 - Yaygın geliştirme ve dağıtım senaryoları için pratik örneklere başvurabilirsiniz
-- Sorunları hızlıca çözmek için sorun giderme komutlarına erişebilirsiniz
+- Sorun giderme komutlarına hızlı bir şekilde erişebilirsiniz
 - Gelişmiş yapılandırma ve özelleştirme seçeneklerini verimli bir şekilde bulabilirsiniz
 - Çevre yönetimi ve çoklu çevre iş akışı komutlarını kolayca bulabilirsiniz
 
 ## Öğrenme Çıktıları
 
-Bu hızlı başvuru kılavuzuna düzenli olarak başvurarak:
-- Tam dokümantasyona bakmadan azd komutlarını güvenle çalıştırabilirsiniz
+Bu kılavuzu düzenli olarak kullanarak:
+- Tam belgeleri incelemeden azd komutlarını güvenle çalıştırabilirsiniz
 - Uygun tanı komutlarını kullanarak yaygın sorunları hızla çözebilirsiniz
 - Birden fazla çevreyi ve dağıtım senaryolarını verimli bir şekilde yönetebilirsiniz
 - Gerekli olduğunda gelişmiş azd özelliklerini ve yapılandırma seçeneklerini uygulayabilirsiniz
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Hizmet Yönetimi
@@ -387,7 +398,7 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Çıktı Biçimlendirme
+## 🎨 Çıktı Formatlama
 
 ### JSON Çıktısı
 ```bash
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -500,7 +511,7 @@ azd up --confirm-with-no-prompt
 
 ## 💡 İpuçları
 
-### Daha Hızlı İş Akışı İçin Kısayollar
+### Daha Hızlı İş Akışı için Kısayollar
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up --confirm-with-no-prompt'
@@ -547,7 +558,7 @@ azd version
 azd version --output json
 ```
 
-### Dokümantasyon Bağlantıları
+### Dokümantasyon Linkleri
 ```bash
 # Open documentation in browser
 azd docs
@@ -558,15 +569,15 @@ azd template show <template-name> --docs
 
 ---
 
-**İpucu**: Bu hızlı başvuru kılavuzunu yer imlerine ekleyin ve ihtiyacınız olan komutları hızlıca bulmak için `Ctrl+F` kullanın!
+**İpucu**: Bu kılavuzu yer imlerine ekleyin ve ihtiyacınız olan komutları hızlıca bulmak için `Ctrl+F` kullanın!
 
 ---
 
-**Gezinme**
+**Navigasyon**
 - **Önceki Ders**: [Ön Kontroller](../docs/pre-deployment/preflight-checks.md)
 - **Sonraki Ders**: [Sözlük](glossary.md)
 
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.

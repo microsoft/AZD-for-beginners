@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "0b97d7e7c56825f0da031b9706d7f1ca",
-  "translation_date": "2025-09-18T09:52:44+00:00",
+  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
+  "translation_date": "2025-10-24T17:56:37+00:00",
   "source_file": "resources/cheat-sheet.md",
   "language_code": "cs"
 }
@@ -10,8 +10,8 @@ CO_OP_TRANSLATOR_METADATA:
 # Přehled příkazů - Základní příkazy AZD
 
 **Rychlý přehled všech kapitol**
-- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../README.md)
-- **📖 Rychlý start**: [Kapitola 1: Základy a rychlý start](../README.md#-chapter-1-foundation--quick-start)
+- **📚 Domov kurzu**: [AZD pro začátečníky](../README.md)
+- **📖 Rychlý start**: [Kapitola 1: Základy & Rychlý start](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 Příkazy pro AI**: [Kapitola 2: Vývoj zaměřený na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Pokročilé**: [Kapitola 4: Infrastruktura jako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
@@ -22,7 +22,7 @@ Tento komplexní přehled příkazů poskytuje rychlý přístup k nejčastěji 
 ## Cíle učení
 
 Používáním tohoto přehledu příkazů:
-- Získáte okamžitý přístup k základním příkazům a syntaxi Azure Developer CLI
+- Získáte okamžitý přístup k základním příkazům Azure Developer CLI a jejich syntaxi
 - Porozumíte organizaci příkazů podle funkčních kategorií a případů použití
 - Budete mít k dispozici praktické příklady pro běžné scénáře vývoje a nasazení
 - Najdete příkazy pro řešení problémů pro rychlé odstranění chyb
@@ -33,13 +33,13 @@ Používáním tohoto přehledu příkazů:
 
 Pravidelným používáním tohoto přehledu příkazů budete schopni:
 - Sebevědomě používat příkazy azd bez nutnosti procházet kompletní dokumentaci
-- Rychle řešit běžné problémy pomocí diagnostických příkazů
+- Rychle řešit běžné problémy pomocí vhodných diagnostických příkazů
 - Efektivně spravovat více prostředí a scénáře nasazení
 - Používat pokročilé funkce azd a možnosti konfigurace podle potřeby
 - Systémově řešit problémy s nasazením pomocí sekvencí příkazů
-- Optimalizovat pracovní postupy díky efektivnímu využití zkratek a možností azd
+- Optimalizovat pracovní postupy efektivním využitím zkratek a možností azd
 
-## Příkazy pro začátek
+## Základní příkazy pro začátek
 
 ### Autentizace
 ```bash
@@ -92,8 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# Preview infrastructure changes
+# 🧪 Preview infrastructure changes (NEW)
 azd provision --preview
+# Shows a dry-run view of what resources would be created/modified/deleted
+# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
 
 # Provision with what-if analysis
 azd provision --what-if
@@ -271,6 +273,15 @@ azd infra export
 
 # Validate infrastructure
 azd infra validate
+
+# 🧪 Infrastructure Preview & Planning (NEW)
+azd provision --preview
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Safe to run - no actual changes made to Azure environment
 ```
 
 ### Správa služeb
@@ -342,9 +353,9 @@ azd logs --level debug --since 1h
 azd show --output json
 ```
 
-## 🔍 Příkazy pro ladění
+## 🔍 Ladicí příkazy
 
-### Informace o ladění
+### Informace pro ladění
 ```bash
 # Enable debug output
 export AZD_DEBUG=true
@@ -424,7 +435,7 @@ azd logs --level error --since 10m
 #!/bin/bash
 # Pre-deployment validation
 azd config validate
-azd provision --preview
+azd provision --preview  # 🧪 NEW: Preview changes before deploying
 az account show
 ```
 
@@ -498,7 +509,7 @@ azd down --force
 azd up --confirm-with-no-prompt
 ```
 
-## 💡 Tipy pro profesionály
+## 💡 Tipy od profesionálů
 
 ### Alias pro rychlejší pracovní postupy
 ```bash
@@ -558,7 +569,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Uložte si tento přehled příkazů do záložek a použijte `Ctrl+F` pro rychlé vyhledání potřebných příkazů!
+**Tip**: Uložte si tento přehled příkazů do záložek a použijte `Ctrl+F` pro rychlé nalezení potřebných příkazů!
 
 ---
 
@@ -569,4 +580,4 @@ azd template show <template-name> --docs
 ---
 
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nenese odpovědnost za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.

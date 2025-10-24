@@ -1,49 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "faaf041a7f92fb1ced7f3322a4cf0b2a",
-  "translation_date": "2025-09-17T12:39:37+00:00",
+  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
+  "translation_date": "2025-10-24T16:40:49+00:00",
   "source_file": "docs/pre-deployment/preflight-checks.md",
   "language_code": "zh"
 }
 -->
-# AZD 部署的预检步骤
+# AZD 部署的预飞检查
 
 **章节导航：**
-- **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第六章 - 部署前验证与规划
-- **⬅️ 上一章**: [SKU 选择](sku-selection.md)
-- **➡️ 下一章**: [第七章：故障排除](../troubleshooting/common-issues.md)
-- **🔧 相关内容**: [第四章：部署指南](../deployment/deployment-guide.md)
+- **📚 课程主页**：[AZD 初学者指南](../../README.md)
+- **📖 当前章节**：第六章 - 部署前验证与规划
+- **⬅️ 上一章**：[SKU 选择](sku-selection.md)
+- **➡️ 下一章**：[第七章：故障排除](../troubleshooting/common-issues.md)
+- **🔧 相关内容**：[第四章：部署指南](../deployment/deployment-guide.md)
 
 ## 简介
 
-本指南提供了全面的部署前验证脚本和流程，确保 Azure Developer CLI 部署在开始之前能够顺利进行。学习如何实施自动化检查，包括身份验证、资源可用性、配额、安全合规性和性能需求，以防止部署失败并优化成功率。
+本指南提供了全面的部署前验证脚本和流程，确保在开始 Azure Developer CLI 部署之前能够成功完成。学习如何实施自动化检查，包括身份验证、资源可用性、配额、安全合规性和性能需求，以防止部署失败并优化部署成功率。
 
 ## 学习目标
 
 完成本指南后，您将能够：
 - 掌握自动化的部署前验证技术和脚本
-- 理解身份验证、权限和配额的全面检查策略
+- 了解身份验证、权限和配额的全面检查策略
 - 实施资源可用性和容量验证流程
 - 配置符合组织政策的安全和合规性检查
 - 设计成本估算和预算验证工作流
-- 为 CI/CD 流水线创建自定义的预检自动化
+- 为 CI/CD 流水线创建自定义的预飞检查自动化
 
 ## 学习成果
 
 完成后，您将能够：
-- 创建并执行全面的预检验证脚本
-- 设计适用于不同部署场景的自动化检查工作流
-- 实施针对特定环境的验证流程和政策
+- 创建并执行全面的预飞验证脚本
+- 为不同的部署场景设计自动化检查工作流
+- 实施特定环境的验证流程和政策
 - 配置主动监控和警报以确保部署准备就绪
 - 解决部署前问题并实施纠正措施
-- 将预检步骤集成到 DevOps 流水线和自动化工作流中
+- 将预飞检查集成到 DevOps 流水线和自动化工作流中
 
 ## 目录
 
 - [概述](../../../../docs/pre-deployment)
-- [自动化预检脚本](../../../../docs/pre-deployment)
+- [自动化预飞脚本](../../../../docs/pre-deployment)
 - [手动验证清单](../../../../docs/pre-deployment)
 - [环境验证](../../../../docs/pre-deployment)
 - [资源验证](../../../../docs/pre-deployment)
@@ -55,7 +55,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 概述
 
-预检步骤是部署前执行的重要验证，用于确保：
+预飞检查是部署前执行的重要验证，确保以下内容：
 
 - **资源可用性**和目标区域的配额
 - **身份验证和权限**配置正确
@@ -64,19 +64,19 @@ CO_OP_TRANSLATOR_METADATA:
 - **符合组织政策的安全合规性**
 - **成本估算**在预算范围内
 
-### 何时运行预检步骤
+### 何时运行预飞检查
 
 - **首次部署**到新环境之前
-- **模板发生重大更改**后
-- **生产环境部署**之前
+- **重大模板更改**之后
+- **生产部署**之前
 - **更改 Azure 区域**时
 - **作为 CI/CD 流水线的一部分**
 
 ---
 
-## 自动化预检脚本
+## 自动化预飞脚本
 
-### PowerShell 预检脚本
+### PowerShell 预飞检查器
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -390,6 +390,21 @@ function Test-TemplateValidation {
         return $false
     }
     
+    # 🧪 NEW: Test infrastructure preview (safe dry-run)
+    try {
+        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        $previewResult = azd provision --preview --output json 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+        }
+        else {
+            Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
+        }
+    }
+    catch {
+        Write-Status "Infrastructure preview" "Warning" "Could not run preview - ensure azd is latest version"
+    }
+    
     return $true
 }
 
@@ -555,7 +570,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash 预检脚本
+### Bash 预飞检查器
 
 ```bash
 #!/bin/bash
@@ -794,50 +809,51 @@ main "$@"
 
 ### 部署前清单
 
-打印此清单并在部署前逐项验证：
+打印此清单并在部署前验证每项内容：
 
 #### ✅ 环境设置
-- [ ] AZD CLI 已安装并更新至最新版本
-- [ ] Azure CLI 已安装并完成身份验证
-- [ ] 已选择正确的 Azure 订阅
+- [ ] 安装并更新到最新版本的 AZD CLI
+- [ ] 安装并认证的 Azure CLI
+- [ ] 选择正确的 Azure 订阅
 - [ ] 环境名称唯一且符合命名规范
-- [ ] 已识别目标资源组或可以创建
+- [ ] 确定目标资源组或可以创建
 
 #### ✅ 身份验证与权限
-- [ ] 使用 `azd auth login` 成功完成身份验证
+- [ ] 使用 `azd auth login` 成功认证
 - [ ] 用户在目标订阅/资源组中具有 Contributor 角色
 - [ ] 配置了 CI/CD 的服务主体（如适用）
 - [ ] 没有过期的证书或凭据
 
 #### ✅ 模板验证
-- [ ] `azure.yaml` 文件存在且是有效的 YAML
+- [ ] `azure.yaml` 存在且是有效的 YAML
 - [ ] azure.yaml 中定义的所有服务都有对应的源代码
 - [ ] `infra/` 目录中的 Bicep 模板存在
-- [ ] `main.bicep` 编译无错误 (`az bicep build --file infra/main.bicep`)
-- [ ] 所有必需参数都有默认值或将提供
-- [ ] 模板中没有硬编码的秘密信息
+- [ ] `main.bicep` 无错误编译 (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 基础设施预览运行成功 (`azd provision --preview`)
+- [ ] 所有必需参数都有默认值或将被提供
+- [ ] 模板中没有硬编码的秘密
 
 #### ✅ 资源规划
-- [ ] 已选择并验证目标 Azure 区域
-- [ ] 目标区域内所需的 Azure 服务可用
+- [ ] 选择并验证目标 Azure 区域
+- [ ] 目标区域中所需的 Azure 服务可用
 - [ ] 计划资源的配额充足
 - [ ] 检查资源命名冲突
 - [ ] 理解资源之间的依赖关系
 
 #### ✅ 网络与安全
-- [ ] 验证与 Azure 端点的网络连接
+- [ ] 验证到 Azure 端点的网络连接
 - [ ] 如果需要，配置防火墙/代理设置
-- [ ] 配置 Key Vault 用于秘密管理
+- [ ] 配置 Key Vault 进行秘密管理
 - [ ] 尽可能使用托管身份
 - [ ] 为 Web 应用启用 HTTPS 强制
 
 #### ✅ 成本管理
 - [ ] 使用 Azure 定价计算器计算成本估算
 - [ ] 如果需要，配置预算警报
-- [ ] 为环境类型选择适当的 SKU
+- [ ] 为环境类型选择合适的 SKU
 - [ ] 考虑生产工作负载的预留容量
 
-#### ✅ 监控与可观测性
+#### ✅ 监控与可观察性
 - [ ] 在模板中配置 Application Insights
 - [ ] 规划日志分析工作区
 - [ ] 为关键指标定义警报规则
@@ -1170,7 +1186,7 @@ main "$@"
 
 ---
 
-## 与 CI/CD 集成
+## 与 CI/CD 的集成
 
 ### GitHub Actions 集成
 
@@ -1285,37 +1301,37 @@ steps:
 
 ## 最佳实践总结
 
-### ✅ 预检步骤最佳实践
+### ✅ 预飞检查最佳实践
 
 1. **尽可能自动化**
    - 将检查集成到 CI/CD 流水线中
    - 使用脚本进行可重复的验证
-   - 存储结果以供审计追踪
+   - 保存结果以供审计记录
 
-2. **针对环境的验证**
-   - 针对开发/测试/生产环境的不同检查
+2. **环境特定验证**
+   - 针对开发/预生产/生产环境的不同检查
    - 根据环境设置适当的安全要求
    - 为非生产环境优化成本
 
 3. **全面覆盖**
-   - 身份验证与权限
-   - 资源配额与可用性
-   - 模板验证与语法检查
-   - 安全与合规性要求
+   - 身份验证和权限
+   - 资源配额和可用性
+   - 模板验证和语法检查
+   - 安全和合规性要求
 
 4. **清晰报告**
-   - 使用颜色标记状态指示器
+   - 使用颜色编码的状态指示器
    - 提供详细的错误信息和解决步骤
-   - 快速评估的总结报告
+   - 提供快速评估的总结报告
 
 5. **快速失败**
    - 如果关键检查失败，停止部署
    - 提供清晰的解决指导
    - 允许轻松重新运行检查
 
-### 常见预检错误
+### 常见预飞检查陷阱
 
-1. **跳过验证**以节省时间
+1. **跳过验证**以进行“快速”部署
 2. **权限检查不足**导致部署失败
 3. **忽略配额限制**直到部署失败
 4. **未在 CI/CD 流水线中验证模板**
@@ -1324,15 +1340,15 @@ steps:
 
 ---
 
-**专业提示**: 在 CI/CD 流水线中将预检步骤作为单独的任务运行，优先于实际部署任务。这可以提前发现问题，并为开发人员提供更快的反馈。
+**专业提示**：在实际部署任务之前，将预飞检查作为 CI/CD 流水线中的单独任务运行。这可以让您及早发现问题，并为开发人员提供更快的反馈。
 
 ---
 
 **导航**
-- **上一课**: [SKU 选择](sku-selection.md)
-- **下一课**: [速查表](../../resources/cheat-sheet.md)
+- **上一课**：[SKU 选择](sku-selection.md)
+- **下一课**：[速查表](../../resources/cheat-sheet.md)
 
 ---
 
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

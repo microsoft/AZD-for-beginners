@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:29:51+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T16:49:25+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "ja"
 }
@@ -20,29 +20,29 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## はじめに
 
-このレッスンでは、Azure Developer CLI (azd)について紹介します。azdは、ローカル開発からAzureへのデプロイを加速する強力なコマンドラインツールです。基本的な概念、主要な機能を学び、azdがクラウドネイティブアプリケーションのデプロイをどのように簡素化するかを理解します。
+このレッスンでは、Azure Developer CLI (azd) を紹介します。これは、ローカル開発からAzureへのデプロイを加速する強力なコマンドラインツールです。基本的な概念、主要な機能を学び、azdがクラウドネイティブアプリケーションのデプロイをどのように簡素化するかを理解します。
 
 ## 学習目標
 
-このレッスンの終了時には以下を理解できます:
+このレッスンの終わりまでに、以下を理解することができます:
 - Azure Developer CLIとは何か、その主な目的
-- テンプレート、環境、サービスの基本概念
-- テンプレート駆動型開発やInfrastructure as Codeの主要機能
-- azdプロジェクトの構造とワークフロー
-- 開発環境でazdをインストールして設定する準備
+- テンプレート、環境、サービスの基本概念を学ぶ
+- テンプレート駆動型開発やInfrastructure as Codeを含む主要な機能を探る
+- azdプロジェクトの構造とワークフローを理解する
+- 開発環境にazdをインストールして設定する準備を整える
 
 ## 学習成果
 
 このレッスンを完了すると、以下ができるようになります:
-- azdが現代のクラウド開発ワークフローで果たす役割を説明する
+- 現代のクラウド開発ワークフローにおけるazdの役割を説明する
 - azdプロジェクト構造の構成要素を特定する
 - テンプレート、環境、サービスがどのように連携するかを説明する
 - azdを使用したInfrastructure as Codeの利点を理解する
-- azdのさまざまなコマンドとその目的を認識する
+- azdコマンドの種類とその目的を認識する
 
-## Azure Developer CLI (azd)とは？
+## Azure Developer CLI (azd) とは？
 
-Azure Developer CLI (azd)は、ローカル開発からAzureへのデプロイを加速するために設計されたコマンドラインツールです。クラウドネイティブアプリケーションの構築、デプロイ、管理プロセスを簡素化します。
+Azure Developer CLI (azd) は、ローカル開発からAzureへのデプロイを加速するために設計されたコマンドラインツールです。Azure上でクラウドネイティブアプリケーションを構築、デプロイ、管理するプロセスを簡素化します。
 
 ## 核心概念
 
@@ -57,9 +57,9 @@ Azure Developer CLI (azd)は、ローカル開発からAzureへのデプロイ�
 環境は異なるデプロイメントターゲットを表します:
 - **開発** - テストと開発用
 - **ステージング** - 本番前環境
-- **本番** - 実際の運用環境
+- **本番** - 実際の本番環境
 
-各環境には以下が含まれます:
+各環境は独自の以下を保持します:
 - Azureリソースグループ
 - 設定情報
 - デプロイメント状態
@@ -71,7 +71,7 @@ Azure Developer CLI (azd)は、ローカル開発からAzureへのデプロイ�
 - **データベース** - データストレージソリューション
 - **ストレージ** - ファイルやBlobストレージ
 
-## 主な機能
+## 主要な機能
 
 ### 1. テンプレート駆動型開発
 ```bash
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ プレビューによる安全なインフラ計画
+`azd provision --preview` コマンドは安全なデプロイメントのための画期的な機能です:
+- **ドライラン分析** - 作成、変更、削除される内容を表示
+- **リスクゼロ** - Azure環境に実際の変更は加えられない
+- **チームコラボレーション** - デプロイメント前にプレビュー結果を共有
+- **コスト見積もり** - コミット前にリソースコストを理解
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. 環境管理
@@ -129,7 +147,7 @@ my-app/
 ## 🔧 設定ファイル
 
 ### azure.yaml
-主なプロジェクト設定ファイル:
+メインプロジェクト設定ファイル:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -197,8 +215,8 @@ azd deploy
 azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
 ```
 
-## `azd down --force --purge`の理解
-`azd down --force --purge`コマンドは、azd環境と関連するすべてのリソースを完全に削除する強力な方法です。各フラグの機能は以下の通りです:
+## `azd down --force --purge` の理解
+`azd down --force --purge` コマンドは、azd環境と関連するすべてのリソースを完全に削除する強力な方法です。各フラグの機能を以下に示します:
 ```
 --force
 ```
@@ -209,16 +227,16 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 --purge
 ```
-**すべての関連メタデータ**を削除します。これには以下が含まれます:
+すべての関連メタデータを削除します:
 環境状態
-ローカル`.azure`フォルダ
-キャッシュされたデプロイ情報
-以前のデプロイを「記憶」することを防ぎます。これにより、リソースグループの不一致や古いレジストリ参照などの問題を回避できます。
+ローカル `.azure` フォルダー
+キャッシュされたデプロイメント情報
+以前のデプロイメントを「記憶」することを防ぎます。これにより、リソースグループの不一致や古いレジストリ参照などの問題を回避できます。
 
 ### 両方を使用する理由
-`azd up`で残存状態や部分的なデプロイメントが原因で問題が発生した場合、この組み合わせは**完全なリセット**を保証します。
+`azd up` が残存状態や部分的なデプロイメントのために壁にぶつかった場合、この組み合わせは**クリーンな状態**を保証します。
 
-特にAzureポータルで手動でリソースを削除した後や、テンプレート、環境、リソースグループ命名規則を切り替える際に役立ちます。
+特にAzureポータルで手動でリソースを削除した後や、テンプレート、環境、リソースグループの命名規則を切り替える際に役立ちます。
 
 ### 複数環境の管理
 ```bash
@@ -236,7 +254,7 @@ azd env list
 
 ## 🔐 認証と資格情報
 
-認証を理解することは、azdデプロイメントの成功に不可欠です。Azureは複数の認証方法を使用しており、azdは他のAzureツールで使用される同じ資格情報チェーンを活用します。
+認証を理解することは、azdデプロイメントを成功させるために重要です。Azureは複数の認証方法を使用し、azdは他のAzureツールで使用される同じ資格情報チェーンを活用します。
 
 ### Azure CLI認証 (`az login`)
 
@@ -270,7 +288,7 @@ az account set --subscription <subscription-id>
 
 ### DefaultAzureCredentialチェーン
 
-`DefaultAzureCredential`は、複数の資格情報ソースを特定の順序で自動的に試すことで、簡素化された認証体験を提供する資格情報タイプです。
+`DefaultAzureCredential` は、特定の順序で複数の資格情報ソースを自動的に試すことで、簡素化された認証体験を提供する資格情報タイプです:
 
 #### 資格情報チェーンの順序
 ```mermaid
@@ -294,9 +312,9 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. ワークロードID (Kubernetes/GitHub Actions)
-以下で自動的に使用されます:
-- Azure Kubernetes Service (AKS)のワークロードID
-- GitHub ActionsのOIDCフェデレーション
+自動的に使用される場面:
+- Azure Kubernetes Service (AKS) のワークロードID
+- GitHub Actions のOIDCフェデレーション
 - その他のフェデレーションIDシナリオ
 
 #### 3. マネージドID
@@ -315,7 +333,7 @@ az account show --query "user.type" --output tsv
 #### 4. 開発ツールの統合
 - **Visual Studio**: サインイン済みアカウントを自動的に使用
 - **VS Code**: Azure Account拡張機能の資格情報を使用
-- **Azure CLI**: `az login`資格情報を使用 (ローカル開発で最も一般的)
+- **Azure CLI**: `az login` 資格情報を使用 (ローカル開発で最も一般的)
 
 ### AZD認証設定
 
@@ -433,7 +451,7 @@ azd up
 
 1. **資格情報の保存**: 資格情報をソースコードに保存しない
 2. **スコープの制限**: サービスプリンシパルには最小権限の原則を適用
-3. **トークンのローテーション**: サービスプリンシパルの秘密を定期的にローテーション
+3. **トークンのローテーション**: サービスプリンシパルの秘密を定期的に更新
 4. **監査トレイル**: 認証とデプロイメント活動を監視
 5. **ネットワークセキュリティ**: 可能な場合はプライベートエンドポイントを使用
 
@@ -451,7 +469,7 @@ az ad signed-in-user show      # Azure AD user details
 az group list                  # Test resource access
 ```
 
-## `azd down --force --purge`の理解
+## `azd down --force --purge` の理解
 
 ### 発見
 ```bash
@@ -476,7 +494,7 @@ azd logs                     # View application logs
 
 ## ベストプラクティス
 
-### 1. 意味のある名前を使用
+### 1. 意味のある名前を使用する
 ```bash
 # Good
 azd env new production-east
@@ -487,50 +505,50 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. テンプレートを活用
+### 2. テンプレートを活用する
 - 既存のテンプレートから始める
-- ニーズに合わせてカスタマイズ
-- 組織向けに再利用可能なテンプレートを作成
+- ニーズに合わせてカスタマイズする
+- 組織向けに再利用可能なテンプレートを作成する
 
 ### 3. 環境の分離
-- 開発/ステージング/本番用に別々の環境を使用
+- 開発/ステージング/本番用に別々の環境を使用する
 - ローカルマシンから直接本番にデプロイしない
-- 本番デプロイにはCI/CDパイプラインを使用
+- 本番デプロイにはCI/CDパイプラインを使用する
 
 ### 4. 設定管理
-- 機密データには環境変数を使用
-- 設定をバージョン管理に保存
-- 環境固有の設定を文書化
+- 機密データには環境変数を使用する
+- 設定をバージョン管理に保存する
+- 環境固有の設定を文書化する
 
 ## 学習の進行
 
 ### 初級 (1〜2週目)
-1. azdをインストールして認証
-2. シンプルなテンプレートをデプロイ
-3. プロジェクト構造を理解
+1. azdをインストールして認証する
+2. シンプルなテンプレートをデプロイする
+3. プロジェクト構造を理解する
 4. 基本コマンド (up, down, deploy) を学ぶ
 
 ### 中級 (3〜4週目)
-1. テンプレートをカスタマイズ
-2. 複数環境を管理
-3. インフラコードを理解
-4. CI/CDパイプラインを設定
+1. テンプレートをカスタマイズする
+2. 複数環境を管理する
+3. インフラコードを理解する
+4. CI/CDパイプラインを設定する
 
 ### 上級 (5週目以降)
-1. カスタムテンプレートを作成
+1. カスタムテンプレートを作成する
 2. 高度なインフラパターン
-3. マルチリージョンデプロイ
-4. エンタープライズ向け設定
+3. マルチリージョンデプロイメント
+4. エンタープライズグレードの設定
 
 ## 次のステップ
 
 **📖 第1章の学習を続ける:**
-- [インストールとセットアップ](installation.md) - azdをインストールして設定
-- [最初のプロジェクト](first-project.md) - 実践的なチュートリアルを完了
+- [インストールとセットアップ](installation.md) - azdをインストールして設定する
+- [初めてのプロジェクト](first-project.md) - 実践的なチュートリアルを完了する
 - [設定ガイド](configuration.md) - 高度な設定オプション
 
-**🎯 次の章に進む準備はできましたか？**
-- [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md) - AIアプリケーションの構築を開始
+**🎯 次の章の準備はできましたか?**
+- [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md) - AIアプリケーションの構築を開始する
 
 ## 追加リソース
 
@@ -549,3 +567,5 @@ azd init --template template1
 
 ---
 
+**免責事項**:  
+この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当社は責任を負いません。

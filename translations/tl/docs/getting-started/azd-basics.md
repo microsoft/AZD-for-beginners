@@ -1,34 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:41:59+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T17:47:27+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "tl"
 }
 -->
-# AZD Basics - Pag-unawa sa Azure Developer CLI
+# AZD Pangunahing Kaalaman - Pag-unawa sa Azure Developer CLI
 
-# AZD Basics - Mga Pangunahing Konsepto at Batayan
+# AZD Pangunahing Kaalaman - Mga Konsepto at Batayan
 
 **Pag-navigate sa Kabanata:**
 - **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Simula
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Pagsisimula
 - **⬅️ Nakaraan**: [Pangkalahatang-ideya ng Kurso](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Susunod**: [Pag-install at Setup](installation.md)
 - **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## Panimula
 
-Ang araling ito ay magpapakilala sa iyo sa Azure Developer CLI (azd), isang makapangyarihang tool sa command-line na nagpapabilis sa iyong paglalakbay mula lokal na pag-develop hanggang sa pag-deploy sa Azure. Malalaman mo ang mga pangunahing konsepto, pangunahing tampok, at kung paano pinapasimple ng azd ang pag-deploy ng cloud-native na aplikasyon.
+Ang araling ito ay magpapakilala sa iyo sa Azure Developer CLI (azd), isang makapangyarihang tool na command-line na nagpapabilis sa iyong paglalakbay mula sa lokal na pag-develop patungo sa pag-deploy sa Azure. Malalaman mo ang mga pangunahing konsepto, pangunahing tampok, at kung paano pinapasimple ng azd ang pag-deploy ng cloud-native na mga aplikasyon.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng araling ito, ikaw ay:
-- Maiintindihan kung ano ang Azure Developer CLI at ang pangunahing layunin nito
-- Malalaman ang mga pangunahing konsepto ng templates, environments, at services
-- Matutuklasan ang mga pangunahing tampok kabilang ang template-driven development at Infrastructure as Code
-- Maiintindihan ang istruktura ng proyekto ng azd at workflow
+- Mauunawaan kung ano ang Azure Developer CLI at ang pangunahing layunin nito
+- Matututo ng mga pangunahing konsepto ng templates, environments, at services
+- Tuklasin ang mga pangunahing tampok kabilang ang template-driven development at Infrastructure as Code
+- Mauunawaan ang istruktura ng proyekto ng azd at workflow
 - Handa nang mag-install at mag-configure ng azd para sa iyong development environment
 
 ## Mga Resulta ng Pag-aaral
@@ -37,17 +37,17 @@ Pagkatapos makumpleto ang araling ito, magagawa mong:
 - Ipaliwanag ang papel ng azd sa modernong cloud development workflows
 - Tukuyin ang mga bahagi ng istruktura ng proyekto ng azd
 - Ilarawan kung paano nagtutulungan ang templates, environments, at services
-- Maunawaan ang mga benepisyo ng Infrastructure as Code gamit ang azd
-- Makilala ang iba't ibang utos ng azd at ang kanilang mga layunin
+- Mauunawaan ang mga benepisyo ng Infrastructure as Code gamit ang azd
+- Makilala ang iba't ibang azd commands at ang kanilang mga layunin
 
 ## Ano ang Azure Developer CLI (azd)?
 
-Ang Azure Developer CLI (azd) ay isang tool sa command-line na idinisenyo upang pabilisin ang iyong paglalakbay mula lokal na pag-develop hanggang sa pag-deploy sa Azure. Pinapasimple nito ang proseso ng pagbuo, pag-deploy, at pamamahala ng cloud-native na aplikasyon sa Azure.
+Ang Azure Developer CLI (azd) ay isang command-line tool na idinisenyo upang pabilisin ang iyong paglalakbay mula sa lokal na pag-develop patungo sa pag-deploy sa Azure. Pinapasimple nito ang proseso ng paggawa, pag-deploy, at pamamahala ng cloud-native na mga aplikasyon sa Azure.
 
 ## Mga Pangunahing Konsepto
 
 ### Templates
-Ang templates ang pundasyon ng azd. Kasama sa mga ito:
+Ang templates ang pundasyon ng azd. Naglalaman ito ng:
 - **Application code** - Ang iyong source code at mga dependencies
 - **Infrastructure definitions** - Mga Azure resources na tinukoy sa Bicep o Terraform
 - **Configuration files** - Mga settings at environment variables
@@ -85,18 +85,36 @@ azd init --template <template-name>
 ### 2. Infrastructure as Code
 - **Bicep** - Domain-specific language ng Azure
 - **Terraform** - Multi-cloud infrastructure tool
-- **ARM Templates** - Azure Resource Manager templates
+- **ARM Templates** - Mga template ng Azure Resource Manager
 
 ### 3. Integrated Workflows
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
 ```
 
-### 4. Environment Management
+#### 🛡️ Ligtas na Pagpaplano ng Infrastructure gamit ang Preview
+Ang `azd provision --preview` command ay isang malaking tulong para sa ligtas na pag-deploy:
+- **Dry-run analysis** - Ipinapakita kung ano ang gagawin, babaguhin, o buburahin
+- **Walang panganib** - Walang aktwal na pagbabago sa iyong Azure environment
+- **Team collaboration** - Ibahagi ang mga resulta ng preview bago mag-deploy
+- **Cost estimation** - Mauunawaan ang gastos ng resources bago mag-commit
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
+```
+
+### 4. Pamamahala ng Environment
 ```bash
 # Create and manage environments
 azd env new <environment-name>
@@ -126,7 +144,7 @@ my-app/
 └── README.md
 ```
 
-## 🔧 Mga Configuration File
+## 🔧 Mga Configuration Files
 
 ### azure.yaml
 Ang pangunahing configuration file ng proyekto:
@@ -198,25 +216,25 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 
 ## Pag-unawa sa `azd down --force --purge`
-Ang `azd down --force --purge` na utos ay isang makapangyarihang paraan upang ganap na tanggalin ang iyong azd environment at lahat ng kaugnay na resources. Narito ang breakdown ng bawat flag:
+Ang `azd down --force --purge` command ay isang makapangyarihang paraan upang ganap na tanggalin ang iyong azd environment at lahat ng kaugnay na resources. Narito ang breakdown ng bawat flag:
 ```
 --force
 ```
 - Nilalaktawan ang mga confirmation prompts.
-- Kapaki-pakinabang para sa automation o scripting kung saan hindi posible ang manual input.
-- Tinitiyak na magpapatuloy ang teardown nang walang interruption, kahit na may mga inconsistency na nakita ng CLI.
+- Kapaki-pakinabang para sa automation o scripting kung saan hindi posible ang manual na input.
+- Tinitiyak na magpapatuloy ang teardown nang walang abala, kahit na may mga inconsistency na natukoy ng CLI.
 
 ```
 --purge
 ```
 Binubura ang **lahat ng kaugnay na metadata**, kabilang ang:
-State ng environment  
-Lokal na `.azure` folder  
-Cached deployment info  
-Pinipigilan ang azd na "maalala" ang mga nakaraang deployment, na maaaring magdulot ng mga isyu tulad ng hindi tugmang resource groups o stale registry references.
+State ng environment
+Lokal na `.azure` folder
+Impormasyon ng cached deployment
+Pinipigilan ang azd mula sa "pag-alala" ng mga nakaraang deployment, na maaaring magdulot ng mga isyu tulad ng hindi tugmang resource groups o stale registry references.
 
 ### Bakit gamitin ang dalawa?
-Kapag nahirapan ka sa `azd up` dahil sa natitirang state o partial deployments, ang kombinasyong ito ay nagbibigay ng **malinis na simula**.
+Kapag nahirapan ka sa `azd up` dahil sa natitirang state o partial deployments, ang kombinasyong ito ay tinitiyak ang **malinis na simula**.
 
 Ito ay partikular na kapaki-pakinabang pagkatapos ng manual na pagtanggal ng resources sa Azure portal o kapag nagpapalit ng templates, environments, o naming conventions ng resource group.
 
@@ -270,9 +288,9 @@ az account set --subscription <subscription-id>
 
 ### DefaultAzureCredential Chain
 
-Ang `DefaultAzureCredential` ay isang uri ng kredensyal na nagbibigay ng pinasimpleng karanasan sa authentication sa pamamagitan ng awtomatikong pagsubok sa maraming pinagmulan ng kredensyal sa partikular na pagkakasunod-sunod:
+Ang `DefaultAzureCredential` ay isang uri ng kredensyal na nagbibigay ng pinasimpleng karanasan sa authentication sa pamamagitan ng awtomatikong pagsubok sa maraming pinagmulan ng kredensyal sa partikular na order:
 
-#### Pagkakasunod-sunod ng Credential Chain
+#### Order ng Credential Chain
 ```mermaid
 graph TD
     A[DefaultAzureCredential] --> B[Environment Variables]
@@ -294,7 +312,7 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
-Ginagamit nang awtomatiko sa:
+Awtomatikong ginagamit sa:
 - Azure Kubernetes Service (AKS) gamit ang Workload Identity
 - GitHub Actions gamit ang OIDC federation
 - Iba pang federated identity scenarios
@@ -314,7 +332,7 @@ az account show --query "user.type" --output tsv
 
 #### 4. Integration ng Developer Tools
 - **Visual Studio**: Awtomatikong ginagamit ang naka-sign-in na account
-- **VS Code**: Ginagamit ang Azure Account extension credentials
+- **VS Code**: Ginagamit ang kredensyal ng Azure Account extension
 - **Azure CLI**: Ginagamit ang `az login` credentials (pinaka-karaniwan para sa lokal na pag-develop)
 
 ### Setup ng AZD Authentication
@@ -492,7 +510,7 @@ azd init --template template1
 - I-customize ayon sa iyong pangangailangan
 - Gumawa ng reusable templates para sa iyong organisasyon
 
-### 3. Paghiwalay ng Environments
+### 3. Paghiwalay ng Environment
 - Gumamit ng hiwalay na environments para sa dev/staging/prod
 - Huwag mag-deploy nang direkta sa production mula sa lokal na makina
 - Gumamit ng CI/CD pipelines para sa production deployments
@@ -507,13 +525,13 @@ azd init --template template1
 ### Baguhan (Linggo 1-2)
 1. I-install ang azd at mag-authenticate
 2. Mag-deploy ng simpleng template
-3. Maunawaan ang istruktura ng proyekto
-4. Matutunan ang mga pangunahing utos (up, down, deploy)
+3. Mauunawaan ang istruktura ng proyekto
+4. Matutunan ang mga pangunahing commands (up, down, deploy)
 
 ### Intermediate (Linggo 3-4)
 1. I-customize ang templates
 2. Pamahalaan ang maramihang environments
-3. Maunawaan ang infrastructure code
+3. Mauunawaan ang infrastructure code
 4. Mag-set up ng CI/CD pipelines
 
 ### Advanced (Linggo 5+)
@@ -529,7 +547,7 @@ azd init --template template1
 - [Ang Iyong Unang Proyekto](first-project.md) - Kumpletuhin ang hands-on tutorial
 - [Configuration Guide](configuration.md) - Mga advanced na opsyon sa configuration
 
-**🎯 Handa na ba para sa Susunod na Kabanata?**
+**🎯 Handa na para sa Susunod na Kabanata?**
 - [Kabanata 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md) - Simulan ang paggawa ng AI applications
 
 ## Karagdagang Resources
@@ -542,10 +560,12 @@ azd init --template template1
 
 **Pag-navigate sa Kabanata:**
 - **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Simula  
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Pagsisimula  
 - **⬅️ Nakaraan**: [Pangkalahatang-ideya ng Kurso](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Susunod**: [Pag-install at Setup](installation.md)
 - **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**Paunawa**:  
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na mapagkakatiwalaang pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.

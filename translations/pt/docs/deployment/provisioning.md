@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "609e5c58c25f23f4cd5b89519196bc90",
-  "translation_date": "2025-09-17T14:50:04+00:00",
+  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
+  "translation_date": "2025-10-24T17:09:52+00:00",
   "source_file": "docs/deployment/provisioning.md",
   "language_code": "pt"
 }
@@ -24,7 +24,7 @@ Este guia abrangente cobre tudo o que precisa saber sobre o provisionamento e ge
 
 Ao concluir este guia, irá:
 - Dominar os princípios de Infraestrutura como Código e o provisionamento de recursos Azure
-- Compreender os vários fornecedores de IaC suportados pelo Azure Developer CLI
+- Compreender os diversos fornecedores de IaC suportados pelo Azure Developer CLI
 - Projetar e implementar templates Bicep para arquiteturas de aplicações comuns
 - Configurar parâmetros de recursos, variáveis e definições específicas de ambiente
 - Implementar padrões avançados de infraestrutura, incluindo redes e segurança
@@ -42,7 +42,7 @@ Após a conclusão, será capaz de:
 
 ## Visão Geral do Provisionamento de Infraestrutura
 
-O Azure Developer CLI suporta vários fornecedores de Infraestrutura como Código (IaC):
+O Azure Developer CLI suporta múltiplos fornecedores de Infraestrutura como Código (IaC):
 - **Bicep** (recomendado) - Linguagem específica de domínio da Azure
 - **ARM Templates** - Templates JSON do Azure Resource Manager
 - **Terraform** - Ferramenta de infraestrutura multi-cloud
@@ -58,7 +58,7 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Serviços Azure Comuns para Aplicações
+### Serviços Comuns Azure para Aplicações
 - **Computação**: App Service, Container Apps, Functions, Virtual Machines
 - **Armazenamento**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Rede**: Virtual Network, Application Gateway, CDN
@@ -764,14 +764,74 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🔄 Atualizações e Migrações de Recursos
+## 🧪 Pré-visualização e Validação de Infraestrutura (NOVO)
+
+### Pré-visualizar Alterações na Infraestrutura Antes da Implementação
+
+A funcionalidade `azd provision --preview` permite-lhe **simular o provisionamento de infraestrutura** antes de realmente implementar os recursos. É semelhante ao `terraform plan` ou `bicep what-if`, oferecendo uma **visualização preliminar** das alterações que seriam feitas no seu ambiente Azure.
+
+#### 🛠️ O Que Faz
+- **Analisa os seus templates IaC** (Bicep ou Terraform)
+- **Mostra uma pré-visualização das alterações nos recursos**: adições, eliminações, atualizações
+- **Não aplica alterações** — é apenas leitura e seguro de executar
+
+#### � Casos de Uso
+```bash
+# Preview infrastructure changes before deployment
+azd provision --preview
+
+# Preview with detailed output
+azd provision --preview --output json
+
+# Preview for specific environment
+azd provision --preview --environment production
+```
+
+Este comando ajuda-o a:
+- **Validar alterações na infraestrutura** antes de comprometer recursos
+- **Detectar configurações incorretas cedo** no ciclo de desenvolvimento
+- **Colaborar com segurança** em ambientes de equipa
+- **Garantir implementações com privilégios mínimos** sem surpresas
+
+É especialmente útil quando:
+- Trabalha com ambientes complexos de múltiplos serviços
+- Faz alterações na infraestrutura de produção
+- Valida modificações de templates antes da aprovação de PR
+- Treina novos membros da equipa em padrões de infraestrutura
+
+### Exemplo de Saída de Pré-visualização
+```bash
+$ azd provision --preview
+
+🔍 Previewing infrastructure changes...
+
+The following resources will be created:
+  + azurerm_resource_group.rg
+  + azurerm_app_service_plan.plan
+  + azurerm_linux_web_app.web
+  + azurerm_cosmosdb_account.cosmos
+
+The following resources will be modified:
+  ~ azurerm_key_vault.kv
+    ~ access_policy (forces replacement)
+
+The following resources will be destroyed:
+  - azurerm_storage_account.old_storage
+
+📊 Estimated monthly cost: $45.67
+⚠️  Warning: 1 resource will be replaced
+
+✅ Preview completed successfully!
+```
+
+## �🔄 Atualizações e Migrações de Recursos
 
 ### Atualizações Seguras de Recursos
 ```bash
-# Preview infrastructure changes
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally
+# Apply changes incrementally after preview
 azd provision --confirm-with-no-prompt
 
 # Rollback if needed
@@ -886,5 +946,5 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ---
 
-**Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+**Aviso**:  
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.

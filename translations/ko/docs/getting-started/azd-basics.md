@@ -1,39 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "4dc26ed8004b58a51875efd07203340f",
-  "translation_date": "2025-09-26T18:30:22+00:00",
+  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
+  "translation_date": "2025-10-24T16:51:22+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "ko"
 }
 -->
-# AZD 기초 - Azure Developer CLI 이해하기
+# AZD 기본 사항 - Azure Developer CLI 이해하기
 
-# AZD 기초 - 핵심 개념과 기본 사항
+# AZD 기본 사항 - 핵심 개념과 기초
 
 **챕터 탐색:**
 - **📚 코스 홈**: [AZD 초보자용](../../README.md)
 - **📖 현재 챕터**: 챕터 1 - 기초 및 빠른 시작
 - **⬅️ 이전**: [코스 개요](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ 다음**: [설치 및 설정](installation.md)
-- **🚀 다음 챕터**: [챕터 2: AI 중심 개발](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 다음 챕터**: [챕터 2: AI 우선 개발](../ai-foundry/azure-ai-foundry-integration.md)
 
 ## 소개
 
-이 강의에서는 Azure Developer CLI(azd)를 소개합니다. azd는 로컬 개발에서 Azure 배포까지의 과정을 가속화하는 강력한 명령줄 도구입니다. 기본 개념, 핵심 기능을 배우고 azd가 클라우드 네이티브 애플리케이션 배포를 어떻게 간소화하는지 이해하게 됩니다.
+이 강의에서는 Azure Developer CLI(azd)를 소개합니다. azd는 로컬 개발에서 Azure 배포까지의 여정을 가속화하는 강력한 명령줄 도구입니다. 기본 개념, 핵심 기능을 배우고 azd가 클라우드 네이티브 애플리케이션 배포를 어떻게 간소화하는지 이해하게 됩니다.
 
 ## 학습 목표
 
 이 강의를 마치면 다음을 이해할 수 있습니다:
-- Azure Developer CLI가 무엇이며 주요 목적
-- 템플릿, 환경, 서비스의 핵심 개념
-- 템플릿 기반 개발 및 코드로서의 인프라(Infrastructure as Code)의 주요 기능
-- azd 프로젝트 구조와 워크플로
-- 개발 환경에 azd를 설치하고 구성할 준비
+- Azure Developer CLI가 무엇이며 주요 목적은 무엇인지
+- 템플릿, 환경, 서비스의 핵심 개념을 배우기
+- 템플릿 기반 개발 및 코드로서의 인프라를 포함한 주요 기능 탐색
+- azd 프로젝트 구조와 워크플로 이해
+- 개발 환경을 위해 azd를 설치하고 구성할 준비 완료
 
 ## 학습 결과
 
-이 강의를 완료하면 다음을 수행할 수 있습니다:
+이 강의를 완료한 후, 다음을 수행할 수 있습니다:
 - 현대 클라우드 개발 워크플로에서 azd의 역할 설명
 - azd 프로젝트 구조의 구성 요소 식별
 - 템플릿, 환경, 서비스가 어떻게 함께 작동하는지 설명
@@ -42,13 +42,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Azure Developer CLI(azd)란 무엇인가?
 
-Azure Developer CLI(azd)는 로컬 개발에서 Azure 배포까지의 과정을 가속화하도록 설계된 명령줄 도구입니다. 클라우드 네이티브 애플리케이션을 Azure에서 빌드, 배포 및 관리하는 과정을 간소화합니다.
+Azure Developer CLI(azd)는 로컬 개발에서 Azure 배포까지의 여정을 가속화하도록 설계된 명령줄 도구입니다. Azure에서 클라우드 네이티브 애플리케이션을 구축, 배포 및 관리하는 과정을 간소화합니다.
 
 ## 핵심 개념
 
 ### 템플릿
-템플릿은 azd의 기반입니다. 템플릿에는 다음이 포함됩니다:
-- **애플리케이션 코드** - 소스 코드와 종속성
+템플릿은 azd의 기초입니다. 템플릿에는 다음이 포함됩니다:
+- **애플리케이션 코드** - 소스 코드 및 종속성
 - **인프라 정의** - Bicep 또는 Terraform으로 정의된 Azure 리소스
 - **구성 파일** - 설정 및 환경 변수
 - **배포 스크립트** - 자동화된 배포 워크플로
@@ -91,9 +91,27 @@ azd init --template <template-name>
 ```bash
 # Complete deployment workflow
 azd up            # Provision + Deploy this is hands off for first time setup
+
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
+
 azd provision     # Create Azure resources if you update the infrastructure use this
 azd deploy        # Deploy application code or redeploy application code once update
 azd down          # Clean up resources
+```
+
+#### 🛡️ 안전한 인프라 계획을 위한 미리보기
+`azd provision --preview` 명령은 안전한 배포를 위한 혁신적인 기능입니다:
+- **드라이런 분석** - 생성, 수정 또는 삭제될 항목 표시
+- **제로 리스크** - Azure 환경에 실제 변경 없음
+- **팀 협업** - 배포 전에 미리보기 결과 공유
+- **비용 추정** - 자원 비용을 사전에 이해
+
+```bash
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
 ### 4. 환경 관리
@@ -209,16 +227,16 @@ azd down --force --purge # command in the Azure Developer CLI is a **hard reset*
 ```
 --purge
 ```
-**모든 관련 메타데이터**를 삭제합니다. 여기에는 다음이 포함됩니다:
+모든 관련 메타데이터를 삭제합니다:
 환경 상태
 로컬 `.azure` 폴더
 캐시된 배포 정보
-azd가 이전 배포를 "기억"하지 못하게 하여 리소스 그룹 불일치나 오래된 레지스트리 참조와 같은 문제를 방지합니다.
+이전 배포를 "기억"하지 못하게 하여 리소스 그룹 불일치 또는 오래된 레지스트리 참조와 같은 문제를 방지합니다.
 
 ### 왜 둘 다 사용해야 할까요?
 `azd up`에서 남아 있는 상태나 부분 배포로 인해 문제가 발생했을 때, 이 조합은 **깨끗한 상태**를 보장합니다.
 
-특히 Azure 포털에서 리소스를 수동으로 삭제한 후 또는 템플릿, 환경, 리소스 그룹 명명 규칙을 변경할 때 유용합니다.
+특히 Azure 포털에서 수동으로 리소스를 삭제하거나 템플릿, 환경 또는 리소스 그룹 명명 규칙을 변경할 때 유용합니다.
 
 ### 여러 환경 관리
 ```bash
@@ -264,13 +282,13 @@ az account set --subscription <subscription-id>
 
 ### 인증 흐름
 1. **인터랙티브 로그인**: 기본 브라우저를 열어 인증
-2. **디바이스 코드 흐름**: 브라우저 접근이 없는 환경용
+2. **디바이스 코드 흐름**: 브라우저 접근이 불가능한 환경에서 사용
 3. **서비스 주체**: 자동화 및 CI/CD 시나리오용
 4. **관리 ID**: Azure에 호스팅된 애플리케이션용
 
 ### DefaultAzureCredential 체인
 
-`DefaultAzureCredential`은 여러 자격 증명 소스를 특정 순서로 자동으로 시도하여 간소화된 인증 경험을 제공하는 자격 증명 유형입니다:
+`DefaultAzureCredential`은 특정 순서로 여러 자격 증명 소스를 자동으로 시도하여 간소화된 인증 경험을 제공하는 자격 증명 유형입니다:
 
 #### 자격 증명 체인 순서
 ```mermaid
@@ -294,10 +312,10 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. 워크로드 ID (Kubernetes/GitHub Actions)
-자동으로 사용되는 경우:
-- Azure Kubernetes Service(AKS)와 워크로드 ID
-- GitHub Actions와 OIDC 연동
-- 기타 연동된 ID 시나리오
+자동으로 사용됩니다:
+- Workload Identity를 사용하는 Azure Kubernetes Service(AKS)
+- OIDC 연합을 사용하는 GitHub Actions
+- 기타 연합 ID 시나리오
 
 #### 3. 관리 ID
 Azure 리소스용:
@@ -315,7 +333,7 @@ az account show --query "user.type" --output tsv
 #### 4. 개발 도구 통합
 - **Visual Studio**: 로그인된 계정을 자동으로 사용
 - **VS Code**: Azure Account 확장 프로그램 자격 증명 사용
-- **Azure CLI**: `az login` 자격 증명 사용 (로컬 개발에 가장 일반적)
+- **Azure CLI**: `az login` 자격 증명 사용(로컬 개발에 가장 일반적)
 
 ### AZD 인증 설정
 
@@ -366,15 +384,15 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### 프로덕션 환경용
-- Azure 리소스를 실행할 때 **관리 ID** 사용
-- 자동화 시나리오에 **서비스 주체** 사용
+#### 운영 환경용
+- Azure 리소스에서 실행 시 **관리 ID** 사용
+- 자동화 시나리오에서는 **서비스 주체** 사용
 - 코드나 구성 파일에 자격 증명을 저장하지 않기
-- 민감한 구성에는 **Azure Key Vault** 사용
+- 민감한 구성은 **Azure Key Vault** 사용
 
-### 일반적인 인증 문제와 해결책
+### 일반적인 인증 문제 및 해결책
 
-#### 문제: "구독을 찾을 수 없음"
+#### 문제: "구독을 찾을 수 없습니다"
 ```bash
 # Solution: Set default subscription
 az account list --output table
@@ -489,16 +507,16 @@ azd init --template template1
 
 ### 2. 템플릿 활용
 - 기존 템플릿으로 시작
-- 필요에 맞게 커스터마이징
+- 필요에 맞게 사용자 정의
 - 조직을 위한 재사용 가능한 템플릿 생성
 
 ### 3. 환경 분리
-- 개발/스테이징/프로덕션 환경을 분리하여 사용
+- 개발/스테이징/프로덕션을 위한 별도 환경 사용
 - 로컬 머신에서 직접 프로덕션에 배포하지 않기
-- 프로덕션 배포에는 CI/CD 파이프라인 사용
+- 프로덕션 배포는 CI/CD 파이프라인 사용
 
 ### 4. 구성 관리
-- 민감한 데이터에는 환경 변수를 사용
+- 민감한 데이터는 환경 변수 사용
 - 구성은 버전 관리에 포함
 - 환경별 설정 문서화
 
@@ -511,26 +529,26 @@ azd init --template template1
 4. 기본 명령 학습 (up, down, deploy)
 
 ### 중급 (3-4주차)
-1. 템플릿 커스터마이징
+1. 템플릿 사용자 정의
 2. 여러 환경 관리
 3. 인프라 코드 이해
 4. CI/CD 파이프라인 설정
 
 ### 고급 (5주차 이상)
-1. 커스텀 템플릿 생성
+1. 사용자 정의 템플릿 생성
 2. 고급 인프라 패턴
-3. 멀티 지역 배포
+3. 다지역 배포
 4. 엔터프라이즈급 구성
 
 ## 다음 단계
 
 **📖 챕터 1 학습 계속하기:**
-- [설치 및 설정](installation.md) - azd 설치 및 구성
-- [첫 번째 프로젝트](first-project.md) - 실습 튜토리얼 완료
+- [설치 및 설정](installation.md) - azd 설치 및 구성하기
+- [첫 번째 프로젝트](first-project.md) - 실습 튜토리얼 완료하기
 - [구성 가이드](configuration.md) - 고급 구성 옵션
 
-**🎯 다음 챕터 준비:**
-- [챕터 2: AI 중심 개발](../ai-foundry/azure-ai-foundry-integration.md) - AI 애플리케이션 빌드 시작
+**🎯 다음 챕터 준비 완료?**
+- [챕터 2: AI 우선 개발](../ai-foundry/azure-ai-foundry-integration.md) - AI 애플리케이션 개발 시작하기
 
 ## 추가 자료
 
@@ -545,7 +563,9 @@ azd init --template template1
 - **📖 현재 챕터**: 챕터 1 - 기초 및 빠른 시작  
 - **⬅️ 이전**: [코스 개요](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ 다음**: [설치 및 설정](installation.md)
-- **🚀 다음 챕터**: [챕터 2: AI 중심 개발](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 다음 챕터**: [챕터 2: AI 우선 개발](../ai-foundry/azure-ai-foundry-integration.md)
 
 ---
 
+**면책 조항**:  
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어를 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
