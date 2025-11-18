@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "a47510110edbcc33ad1ab7e8d234f7c3",
-  "translation_date": "2025-10-24T09:31:06+00:00",
+  "original_hash": "6dbd1fe0dee10a4def58fdc663c59e1d",
+  "translation_date": "2025-11-18T17:54:01+00:00",
   "source_file": "README.md",
   "language_code": "no"
 }
 -->
-# AZD for nybegynnere: En strukturert læringsreise
+# AZD for Nybegynnere: En Strukturert Læringsreise
 
 ![AZD-for-nybegynnere](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.no.png) 
 
@@ -16,30 +16,28 @@ CO_OP_TRANSLATOR_METADATA:
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
-[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-## Kom i gang med dette kurset
+## Kom i Gang med Dette Kurset
 
 Følg disse stegene for å starte din AZD-læringsreise:
 
-1. **Fork repository**: Klikk [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Klon repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **Bli med i fellesskapet**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) for eksperthjelp
-4. **Velg din læringsvei**: Velg et kapittel nedenfor som passer ditt erfaringsnivå
+1. **Fork Repository**: Klikk [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Klon Repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. **Bli Med i Fellesskapet**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) for eksperthjelp
+4. **Velg Din Læringssti**: Velg et kapittel nedenfor som passer ditt erfaringsnivå
 
-### Støtte for flere språk
+### Støtte for Flere Språk
 
-#### Automatiserte oversettelser (Alltid oppdatert)
+#### Automatiserte Oversettelser (Alltid Oppdatert)
 
-<!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Norwegian](./README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
-<!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](./README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
 ## Kursoversikt
 
-Bli ekspert på Azure Developer CLI (azd) gjennom strukturerte kapitler som er designet for progressiv læring. **Spesiell fokus på AI-applikasjonsutplassering med integrasjon av Azure AI Foundry.**
+Bli ekspert på Azure Developer CLI (azd) gjennom strukturerte kapitler som er designet for progressiv læring. **Spesiell fokus på AI-applikasjonsutplassering med Azure AI Foundry-integrasjon.**
 
-### Hvorfor dette kurset er viktig for moderne utviklere
+### Hvorfor Dette Kurset er Viktig for Moderne Utviklere
 
 Basert på innsikt fra Azure AI Foundry Discord-fellesskapet, **ønsker 45% av utviklere å bruke AZD for AI-arbeidsoppgaver**, men møter utfordringer med:
 - Komplekse AI-arkitekturer med flere tjenester
@@ -51,35 +49,35 @@ Basert på innsikt fra Azure AI Foundry Discord-fellesskapet, **ønsker 45% av u
 ### Læringsmål
 
 Ved å fullføre dette strukturerte kurset vil du:
-- **Beherske AZD-grunnleggende**: Kjernekonsepter, installasjon og konfigurasjon
+- **Beherske AZD Grunnleggende**: Kjernekonsepter, installasjon og konfigurasjon
 - **Utplassere AI-applikasjoner**: Bruke AZD med Azure AI Foundry-tjenester
-- **Implementere Infrastructure as Code**: Administrere Azure-ressurser med Bicep-maler
-- **Feilsøke utplasseringer**: Løse vanlige problemer og feilsøke utfordringer
-- **Optimalisere for produksjon**: Sikkerhet, skalering, overvåking og kostnadsstyring
-- **Bygge løsninger med flere agenter**: Utplassere komplekse AI-arkitekturer
+- **Implementere Infrastruktur som Kode**: Administrere Azure-ressurser med Bicep-maler
+- **Feilsøke Utplasseringer**: Løse vanlige problemer og debugge feil
+- **Optimalisere for Produksjon**: Sikkerhet, skalering, overvåking og kostnadsstyring
+- **Bygge Multi-Agent Løsninger**: Utplassere komplekse AI-arkitekturer
 
 ## 📚 Læringskapitler
 
-*Velg din læringsvei basert på erfaringsnivå og mål*
+*Velg din læringssti basert på erfaringsnivå og mål*
 
-### 🚀 Kapittel 1: Grunnleggende & Hurtigstart
-**Forutsetninger**: Azure-abonnement, grunnleggende kunnskap om kommandolinje  
+### 🚀 Kapittel 1: Grunnlag & Hurtigstart
+**Forutsetninger**: Azure-abonnement, grunnleggende kommandolinjekunnskap  
 **Varighet**: 30-45 minutter  
 **Kompleksitet**: ⭐
 
-#### Hva du vil lære
+#### Hva Du Vil Lære
 - Forstå grunnleggende om Azure Developer CLI
 - Installere AZD på din plattform
 - Din første vellykkede utplassering
 
 #### Læringsressurser
-- **🎯 Start her**: [Hva er Azure Developer CLI?](../..)
-- **📖 Teori**: [AZD-grunnleggende](docs/getting-started/azd-basics.md) - Kjernekonsepter og terminologi
+- **🎯 Start Her**: [Hva er Azure Developer CLI?](../..)
+- **📖 Teori**: [AZD Grunnleggende](docs/getting-started/azd-basics.md) - Kjernekonsepter og terminologi
 - **⚙️ Oppsett**: [Installasjon & Oppsett](docs/getting-started/installation.md) - Plattformspesifikke guider
-- **🛠️ Praktisk**: [Ditt første prosjekt](docs/getting-started/first-project.md) - Steg-for-steg veiledning
+- **🛠️ Praktisk**: [Ditt Første Prosjekt](docs/getting-started/first-project.md) - Steg-for-steg veiledning
 - **📋 Hurtigreferanse**: [Kommandosnarveier](resources/cheat-sheet.md)
 
-#### Praktiske øvelser
+#### Praktiske Øvelser
 ```bash
 # Quick installation check
 azd version
@@ -93,24 +91,24 @@ azd up
 
 ---
 
-### 🤖 Kapittel 2: AI-fokusert utvikling (Anbefalt for AI-utviklere)
+### 🤖 Kapittel 2: AI-Fokusert Utvikling (Anbefalt for AI-utviklere)
 **Forutsetninger**: Kapittel 1 fullført  
 **Varighet**: 1-2 timer  
 **Kompleksitet**: ⭐⭐
 
-#### Hva du vil lære
+#### Hva Du Vil Lære
 - Integrasjon av Azure AI Foundry med AZD
 - Utplassering av AI-drevne applikasjoner
 - Forståelse av AI-tjenestekonfigurasjoner
 
 #### Læringsressurser
-- **🎯 Start her**: [Integrasjon med Azure AI Foundry](docs/ai-foundry/azure-ai-foundry-integration.md)
-- **📖 Mønstre**: [Utplassering av AI-modeller](docs/ai-foundry/ai-model-deployment.md) - Utplassere og administrere AI-modeller
-- **🛠️ Workshop**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - Gjør dine AI-løsninger klare for AZD
-- **🎥 Interaktiv veiledning**: [Workshop-materialer](workshop/README.md) - Nettleserbasert læring med MkDocs * DevContainer-miljø
-- **📋 Maler**: [Azure AI Foundry-maler](../..)
+- **🎯 Start Her**: [Azure AI Foundry Integrasjon](docs/ai-foundry/azure-ai-foundry-integration.md)
+- **📖 Mønstre**: [AI Modellutplassering](docs/ai-foundry/ai-model-deployment.md) - Utplassere og administrere AI-modeller
+- **🛠️ Workshop**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - Gjør dine AI-løsninger AZD-klare
+- **🎥 Interaktiv Veiledning**: [Workshop Materialer](workshop/README.md) - Nettleserbasert læring med MkDocs * DevContainer Miljø
+- **📋 Maler**: [Azure AI Foundry Maler](../..)
 
-#### Praktiske øvelser
+#### Praktiske Øvelser
 ```bash
 # Deploy your first AI application
 azd init --template azure-search-openai-demo
@@ -130,7 +128,7 @@ azd init --template agent-openai-python-prompty
 **Varighet**: 45-60 minutter  
 **Kompleksitet**: ⭐⭐
 
-#### Hva du vil lære
+#### Hva Du Vil Lære
 - Miljøkonfigurasjon og administrasjon
 - Beste praksis for autentisering og sikkerhet
 - Ressursnavngivning og organisering
@@ -138,57 +136,57 @@ azd init --template agent-openai-python-prompty
 #### Læringsressurser
 - **📖 Konfigurasjon**: [Konfigurasjonsveiledning](docs/getting-started/configuration.md) - Miljøoppsett
 - **🔐 Sikkerhet**: Autentiseringsmønstre og administrert identitet
-- **📝 Eksempler**: [Databaseapplikasjonseksempel](../../examples/database-app) - Konfigurasjonsmønstre
+- **📝 Eksempler**: [Database App Eksempel](../../examples/database-app) - Konfigurasjonsmønstre
 
-#### Praktiske øvelser
-- Konfigurer flere miljøer (utvikling, staging, produksjon)
-- Sett opp autentisering med administrert identitet
+#### Praktiske Øvelser
+- Konfigurer flere miljøer (dev, staging, prod)
+- Sett opp administrert identitetsautentisering
 - Implementer miljøspesifikke konfigurasjoner
 
 **💡 Kapittelresultat**: Administrere flere miljøer med riktig autentisering og sikkerhet
 
 ---
 
-### 🏗️ Kapittel 4: Infrastructure as Code & Utplassering
+### 🏗️ Kapittel 4: Infrastruktur som Kode & Utplassering
 **Forutsetninger**: Kapitler 1-3 fullført  
 **Varighet**: 1-1.5 timer  
 **Kompleksitet**: ⭐⭐⭐
 
-#### Hva du vil lære
+#### Hva Du Vil Lære
 - Avanserte utplasseringsmønstre
-- Infrastructure as Code med Bicep
+- Infrastruktur som kode med Bicep
 - Strategier for ressursprovisjonering
 
 #### Læringsressurser
 - **📖 Utplassering**: [Utplasseringsveiledning](docs/deployment/deployment-guide.md) - Fullstendige arbeidsflyter
-- **🏗️ Provisjonering**: [Provisjonering av ressurser](docs/deployment/provisioning.md) - Administrasjon av Azure-ressurser
-- **📝 Eksempler**: [Containerapplikasjonseksempel](../../examples/container-app) - Containerbaserte utplasseringer
+- **🏗️ Provisjonering**: [Provisjonering av Ressurser](docs/deployment/provisioning.md) - Administrasjon av Azure-ressurser
+- **📝 Eksempler**: [Container App Eksempel](../../examples/container-app) - Containerbaserte utplasseringer
 
-#### Praktiske øvelser
+#### Praktiske Øvelser
 - Lag tilpassede Bicep-maler
-- Utplasser applikasjoner med flere tjenester
-- Implementer blå-grønn utplasseringsstrategi
+- Utplassere applikasjoner med flere tjenester
+- Implementere blå-grønn utplasseringsstrategier
 
-**💡 Kapittelresultat**: Utplassere komplekse applikasjoner med flere tjenester ved bruk av tilpassede infrastruktursmaler
+**💡 Kapittelresultat**: Utplassere komplekse applikasjoner med flere tjenester ved bruk av tilpassede infrastrukturmaler
 
 ---
 
-### 🎯 Kapittel 5: Løsninger med flere agenter (Avansert)
+### 🎯 Kapittel 5: Multi-Agent AI Løsninger (Avansert)
 **Forutsetninger**: Kapitler 1-2 fullført  
 **Varighet**: 2-3 timer  
 **Kompleksitet**: ⭐⭐⭐⭐
 
-#### Hva du vil lære
-- Mønstre for arkitektur med flere agenter
+#### Hva Du Vil Lære
+- Mønstre for multi-agent arkitektur
 - Orkestrering og koordinering av agenter
 - Produksjonsklare AI-utplasseringer
 
 #### Læringsressurser
-- **🤖 Utvalgt prosjekt**: [Retail-løsning med flere agenter](examples/retail-scenario.md) - Fullstendig implementering
-- **🛠️ ARM-maler**: [ARM-malpakke](../../examples/retail-multiagent-arm-template) - Ett-klikk utplassering
-- **📖 Arkitektur**: Koordineringsmønstre for flere agenter
+- **🤖 Utvalgt Prosjekt**: [Retail Multi-Agent Løsning](examples/retail-scenario.md) - Komplett implementering
+- **🛠️ ARM Maler**: [ARM Malpakke](../../examples/retail-multiagent-arm-template) - Ett-klikk utplassering
+- **📖 Arkitektur**: Mønstre for koordinering av multi-agenter
 
-#### Praktiske øvelser
+#### Praktiske Øvelser
 ```bash
 # Deploy the complete retail multi-agent solution
 cd examples/retail-multiagent-arm-template
@@ -198,28 +196,28 @@ cd examples/retail-multiagent-arm-template
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Kapittelresultat**: Utplassere og administrere en produksjonsklar løsning med flere agenter, inkludert kunde- og lageragenter
+**💡 Kapittelresultat**: Utplassere og administrere en produksjonsklar multi-agent AI-løsning med Kunde- og Lageragenter
 
 ---
 
-### 🔍 Kapittel 6: Validering & Planlegging før utplassering
+### 🔍 Kapittel 6: Validering & Planlegging før Utplassering
 **Forutsetninger**: Kapittel 4 fullført  
 **Varighet**: 1 time  
 **Kompleksitet**: ⭐⭐
 
-#### Hva du vil lære
+#### Hva Du Vil Lære
 - Kapasitetsplanlegging og ressursvalidering
 - Strategier for valg av SKU
 - Forhåndssjekker og automatisering
 
 #### Læringsressurser
 - **📊 Planlegging**: [Kapasitetsplanlegging](docs/pre-deployment/capacity-planning.md) - Ressursvalidering
-- **💰 Valg**: [Valg av SKU](docs/pre-deployment/sku-selection.md) - Kostnadseffektive valg
+- **💰 Valg**: [SKU Valg](docs/pre-deployment/sku-selection.md) - Kostnadseffektive valg
 - **✅ Validering**: [Forhåndssjekker](docs/pre-deployment/preflight-checks.md) - Automatiserte skript
 
-#### Praktiske øvelser
+#### Praktiske Øvelser
 - Kjør valideringsskript for kapasitet
-- Optimaliser valg av SKU for kostnader
+- Optimaliser SKU-valg for kostnader
 - Implementer automatiserte forhåndssjekker
 
 **💡 Kapittelresultat**: Validere og optimalisere utplasseringer før utførelse
@@ -231,81 +229,80 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **Varighet**: 1-1.5 timer  
 **Kompleksitet**: ⭐⭐
 
-#### Hva du vil lære
-- Systematiske tilnærminger til feilsøking
+#### Hva Du Vil Lære
+- Systematiske feilsøkingsmetoder
 - Vanlige problemer og løsninger
-- Spesifikke utfordringer med AI
+- AI-spesifikk feilsøking
 
 #### Læringsressurser
-- **🔧 Vanlige problemer**: [Vanlige problemer](docs/troubleshooting/common-issues.md) - FAQ og løsninger
-- **🕵️ Debugging**: [Feilsøkingsveiledning](docs/troubleshooting/debugging.md) - Steg-for-steg strategier
-- **🤖 AI-problemer**: [Feilsøking av AI](docs/troubleshooting/ai-troubleshooting.md) - Problemer med AI-tjenester
+- **🔧 Vanlige Problemer**: [Vanlige Problemer](docs/troubleshooting/common-issues.md) - FAQ og løsninger
+- **🕵️ Debugging**: [Debugging Veiledning](docs/troubleshooting/debugging.md) - Steg-for-steg strategier
+- **🤖 AI Problemer**: [AI-Spesifikk Feilsøking](docs/troubleshooting/ai-troubleshooting.md) - Problemer med AI-tjenester
 
-#### Praktiske øvelser
+#### Praktiske Øvelser
 - Diagnostisere utplasseringsfeil
 - Løse autentiseringsproblemer
-- Feilsøke tilkobling til AI-tjenester
+- Debugge AI-tjenestetilkobling
 
 **💡 Kapittelresultat**: Selvstendig diagnostisere og løse vanlige utplasseringsproblemer
 
 ---
 
-### 🏢 Kapittel 8: Produksjon & Enterprise-mønstre
+### 🏢 Kapittel 8: Produksjon & Enterprise Mønstre
 **Forutsetninger**: Kapitler 1-4 fullført  
 **Varighet**: 2-3 timer  
-
 **Kompleksitet**: ⭐⭐⭐⭐
 
 #### Hva du vil lære
-- Strategier for produksjonsutplassering
+- Strategier for produksjonsdistribusjon
 - Sikkerhetsmønstre for bedrifter
 - Overvåking og kostnadsoptimalisering
 
 #### Læringsressurser
-- **🏭 Produksjon**: [Beste praksis for produksjons-AI](docs/ai-foundry/production-ai-practices.md) - Mønstre for bedrifter
+- **🏭 Produksjon**: [Produksjons-AI beste praksis](docs/ai-foundry/production-ai-practices.md) - Mønstre for bedrifter
 - **📝 Eksempler**: [Eksempel på mikrotjenester](../../examples/microservices) - Komplekse arkitekturer
 - **📊 Overvåking**: Integrasjon med Application Insights
 
 #### Praktiske øvelser
-- Implementere sikkerhetsmønstre for bedrifter
-- Sette opp omfattende overvåking
-- Utplassere til produksjon med riktig styring
+- Implementer sikkerhetsmønstre for bedrifter
+- Sett opp omfattende overvåking
+- Distribuer til produksjon med riktig styring
 
-**💡 Kapittelresultat**: Utplassere bedriftsklare applikasjoner med full produksjonskapasitet
+**💡 Kapittelresultat**: Distribuer bedriftsklare applikasjoner med full produksjonskapasitet
 
 ---
 
-## 🎓 Workshopoversikt: Praktisk læringsopplevelse
+## 🎓 Workshopoversikt: Praktisk læringserfaring
 
 ### Interaktive workshopmaterialer
 **Omfattende praktisk læring med nettleserbaserte verktøy og veiledede øvelser**
 
-Våre workshopmaterialer gir en strukturert, interaktiv læringsopplevelse som utfyller kapittelbasert pensum ovenfor. Workshopen er designet for både selvstudium og instruktørledede økter.
+Våre workshopmaterialer gir en strukturert, interaktiv læringserfaring som utfyller det kapittelbaserte pensumet ovenfor. Workshopen er designet for både selvstyrt læring og instruktørledede økter.
 
 #### 🛠️ Workshopfunksjoner
 - **Nettleserbasert grensesnitt**: Komplett workshop drevet av MkDocs med søk, kopiering og temafunksjoner
 - **GitHub Codespaces-integrasjon**: Ett-klikk oppsett av utviklingsmiljø
 - **Strukturert læringssti**: 7-trinns veiledede øvelser (totalt 3,5 timer)
-- **Oppdagelse → Utplassering → Tilpasning**: Progressiv metodikk
-- **Interaktiv DevContainer-miljø**: Forhåndskonfigurerte verktøy og avhengigheter
+- **Oppdagelse → Distribusjon → Tilpasning**: Progressiv metodikk
+- **Interaktivt DevContainer-miljø**: Forhåndskonfigurerte verktøy og avhengigheter
 
 #### 📚 Workshopstruktur
-Workshopen følger en **Oppdagelse → Utplassering → Tilpasning** metodikk:
+Workshopen følger en **Oppdagelse → Distribusjon → Tilpasning**-metodikk:
 
 1. **Oppdagelsesfase** (45 min)
-   - Utforske Azure AI Foundry-maler og tjenester
-   - Forstå mønstre for multi-agent arkitektur
-   - Gjennomgå krav og forutsetninger for utplassering
+   - Utforsk Azure AI Foundry-maler og tjenester
+   - Forstå mønstre for multi-agent-arkitektur
+   - Gjennomgå distribusjonskrav og forutsetninger
 
-2. **Utplasseringsfase** (2 timer)
-   - Praktisk utplassering av AI-applikasjoner med AZD
-   - Konfigurere Azure AI-tjenester og endepunkter
-   - Implementere sikkerhets- og autentiseringsmønstre
+2. **Distribusjonsfase** (2 timer)
+   - Praktisk distribusjon av AI-applikasjoner med AZD
+   - Konfigurer Azure AI-tjenester og endepunkter
+   - Implementer sikkerhets- og autentiseringsmønstre
 
 3. **Tilpasningsfase** (45 min)
-   - Modifisere applikasjoner for spesifikke bruksområder
-   - Optimalisere for produksjonsutplassering
-   - Implementere overvåking og kostnadsstyring
+   - Tilpass applikasjoner for spesifikke bruksområder
+   - Optimaliser for produksjonsdistribusjon
+   - Implementer overvåking og kostnadsstyring
 
 #### 🚀 Kom i gang med workshopen
 ```bash
@@ -320,39 +317,39 @@ cd azd-for-beginners/workshop
 
 #### 🎯 Workshop læringsutbytte
 Ved å fullføre workshopen vil deltakerne:
-- **Utplassere produksjonsklare AI-applikasjoner**: Bruke AZD med Azure AI Foundry-tjenester
-- **Beherske multi-agent arkitekturer**: Implementere koordinerte AI-agentløsninger
-- **Implementere beste praksis for sikkerhet**: Konfigurere autentisering og tilgangskontroll
-- **Optimalisere for skala**: Designe kostnadseffektive, ytelsessterke utplasseringer
-- **Feilsøke utplasseringer**: Løse vanlige problemer selvstendig
+- **Distribuere produksjonsklare AI-applikasjoner**: Bruke AZD med Azure AI Foundry-tjenester
+- **Beherske multi-agent-arkitekturer**: Implementere koordinerte AI-agentløsninger
+- **Implementere sikkerhetsbeste praksis**: Konfigurere autentisering og tilgangskontroll
+- **Optimalisere for skala**: Designe kostnadseffektive, ytelsessterke distribusjoner
+- **Feilsøke distribusjoner**: Løse vanlige problemer selvstendig
 
 #### 📖 Workshopressurser
 - **🎥 Interaktiv guide**: [Workshopmaterialer](workshop/README.md) - Nettleserbasert læringsmiljø
-- **📋 Trinn-for-trinn instruksjoner**: [Veiledede øvelser](../../workshop/docs/instructions) - Detaljerte gjennomganger
+- **📋 Trinn-for-trinn-instruksjoner**: [Veiledede øvelser](../../workshop/docs/instructions) - Detaljerte gjennomganger
 - **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-fokuserte øvelser
 - **💡 Hurtigstart**: [Workshopoppsettguide](workshop/README.md#quick-start) - Miljøkonfigurasjon
 
-**Perfekt for**: Bedriftstrening, universitetskurs, selvstudium og utviklerbootcamps.
+**Perfekt for**: Bedriftstrening, universitetskurs, selvstyrt læring og utvikler-bootcamps.
 
 ---
 
 ## 📖 Hva er Azure Developer CLI?
 
-Azure Developer CLI (azd) er et utviklerorientert kommandolinjeverktøy som akselererer prosessen med å bygge og utplassere applikasjoner til Azure. Det tilbyr:
+Azure Developer CLI (azd) er et utviklerfokusert kommandolinjeverktøy som akselererer prosessen med å bygge og distribuere applikasjoner til Azure. Det tilbyr:
 
-- **Malerbaserte utplasseringer** - Bruk forhåndsbygde maler for vanlige applikasjonsmønstre
+- **Maler for distribusjon** - Bruk forhåndsbygde maler for vanlige applikasjonsmønstre
 - **Infrastruktur som kode** - Administrer Azure-ressurser med Bicep eller Terraform  
-- **Integrerte arbeidsflyter** - Sømløst klargjøre, utplassere og overvåke applikasjoner
+- **Integrerte arbeidsflyter** - Sømløs klargjøring, distribusjon og overvåking av applikasjoner
 - **Utviklervennlig** - Optimalisert for utviklerproduktivitet og opplevelse
 
-### **AZD + Azure AI Foundry: Perfekt for AI-utplasseringer**
+### **AZD + Azure AI Foundry: Perfekt for AI-distribusjoner**
 
 **Hvorfor AZD for AI-løsninger?** AZD adresserer de største utfordringene AI-utviklere står overfor:
 
 - **AI-klare maler** - Forhåndskonfigurerte maler for Azure OpenAI, Cognitive Services og ML-arbeidsbelastninger
-- **Sikre AI-utplasseringer** - Innebygde sikkerhetsmønstre for AI-tjenester, API-nøkler og modellendepunkter  
-- **Produksjons-AI-mønstre** - Beste praksis for skalerbare, kostnadseffektive AI-applikasjonsutplasseringer
-- **End-to-End AI-arbeidsflyter** - Fra modellutvikling til produksjonsutplassering med riktig overvåking
+- **Sikre AI-distribusjoner** - Innebygde sikkerhetsmønstre for AI-tjenester, API-nøkler og modellendepunkter  
+- **Produksjons-AI-mønstre** - Beste praksis for skalerbare, kostnadseffektive AI-applikasjonsdistribusjoner
+- **Ende-til-ende AI-arbeidsflyter** - Fra modellutvikling til produksjonsdistribusjon med riktig overvåking
 - **Kostnadsoptimalisering** - Smarte ressursallokerings- og skaleringsstrategier for AI-arbeidsbelastninger
 - **Azure AI Foundry-integrasjon** - Sømløs tilkobling til AI Foundry-modellkatalog og endepunkter
 
@@ -360,52 +357,52 @@ Azure Developer CLI (azd) er et utviklerorientert kommandolinjeverktøy som akse
 
 ## 🎯 Maler og eksempelbibliotek
 
-### Utvalgte: Azure AI Foundry-maler
-**Start her hvis du skal utplassere AI-applikasjoner!**
+### Utvalgt: Azure AI Foundry-maler
+**Start her hvis du distribuerer AI-applikasjoner!**
 
 | Mal | Kapittel | Kompleksitet | Tjenester |
-|-----|----------|--------------|-----------|
+|----------|---------|------------|----------|
 | [**Kom i gang med AI-chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
 | [**Kom i gang med AI-agenter**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Kapittel 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
-| [**Multi-agent arbeidsflytautomatisering**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Generere dokumenter fra dine data**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 4 | ⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
+| [**Arbeidsflyt for multi-agent-automatisering**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Generer dokumenter fra dataene dine**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 4 | ⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
 | [**Forbedre kundemøter med agenter**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 5 | ⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**Modernisere koden din med agenter**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 5 | ⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
+| [**Moderniser koden din med agenter**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 5 | ⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
 | [**Bygg din samtaleagent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 4 | ⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
 | [**Lås opp innsikt fra samtaledata**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 8 | ⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
 | [**Multi-modal innholdsbehandling**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapittel 8 | ⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
 
-### Utvalgte: Komplette læringsscenarier
+### Utvalgt: Komplette læringsscenarier
 **Produksjonsklare applikasjonsmaler knyttet til læringskapitler**
 
 | Mal | Læringskapittel | Kompleksitet | Nøkkellæring |
-|-----|-----------------|--------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapittel 2 | ⭐ | Grunnleggende AI-utplassering |
+|----------|------------------|------------|--------------|
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapittel 2 | ⭐ | Grunnleggende AI-distribusjonsmønstre |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapittel 2 | ⭐⭐ | RAG-implementering med Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Kapittel 4 | ⭐⭐ | Dokumentintelligensintegrasjon |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapittel 5 | ⭐⭐⭐ | Agentrammeverk og funksjonskall |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kapittel 8 | ⭐⭐⭐ | Bedrifts-AI-orkestrering |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Kapittel 5 | ⭐⭐⭐⭐ | Multi-agent arkitektur med kunde- og lageragenter |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Kapittel 5 | ⭐⭐⭐⭐ | Multi-agent-arkitektur med kunde- og lageragenter |
 
 ### Læring etter eksempeltype
 
 #### Enkle applikasjoner (Kapittel 1-2)
-- [Enkel webapplikasjon](../../examples/simple-web-app) - Grunnleggende utplassering
-- [Statisk nettsted](../../examples/static-site) - Utplassering av statisk innhold
-- [Grunnleggende API](../../examples/basic-api) - REST API-utplassering
+- [Enkel webapp](../../examples/simple-web-app) - Grunnleggende distribusjonsmønstre
+- [Statisk nettsted](../../examples/static-site) - Distribusjon av statisk innhold
+- [Grunnleggende API](../../examples/basic-api) - REST API-distribusjon
 
 #### Databaseintegrasjon (Kapittel 3-4)  
-- [Databaseapplikasjon](../../examples/database-app) - Mønstre for databasekobling
-- [Databehandling](../../examples/data-processing) - ETL-arbeidsflytutplassering
+- [Databaseapp](../../examples/database-app) - Mønstre for databaseforbindelse
+- [Databehandling](../../examples/data-processing) - ETL-arbeidsflytdistribusjon
 
 #### Avanserte mønstre (Kapittel 4-8)
-- [Containerapplikasjoner](../../examples/container-app) - Containerbaserte utplasseringer
-- [Mikrotjenester](../../examples/microservices) - Multi-tjeneste arkitekturer  
+- [Container-apper](../../examples/container-app) - Containeriserte distribusjoner
+- [Mikrotjenester](../../examples/microservices) - Multi-tjenestearkitekturer  
 - [Bedriftsløsninger](../../examples/enterprise) - Produksjonsklare mønstre
 
 ### Eksterne malekolleksjoner
-- [**Offisiell AZD-malgaleri**](https://azure.github.io/awesome-azd/) - Kuratert samling av offisielle og fellesskapsmaler
-- [**Azure Developer CLI-maler**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn maldokumentasjon
+- [**Offisiell AZD-mal-galleri**](https://azure.github.io/awesome-azd/) - Kuratert samling av offisielle og fellesskapsmaler
+- [**Azure Developer CLI-maler**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn-maledokumentasjon
 - [**Eksempelkatalog**](examples/README.md) - Lokale læringseksempler med detaljerte forklaringer
 
 ---
@@ -413,22 +410,22 @@ Azure Developer CLI (azd) er et utviklerorientert kommandolinjeverktøy som akse
 ## 📚 Læringsressurser og referanser
 
 ### Hurtigreferanser
-- [**Kommandosammendrag**](resources/cheat-sheet.md) - Essensielle azd-kommandoer organisert etter kapittel
-- [**Ordliste**](resources/glossary.md) - Terminologi for Azure og azd  
+- [**Kommandosnarveiark**](resources/cheat-sheet.md) - Essensielle azd-kommandoer organisert etter kapittel
+- [**Ordliste**](resources/glossary.md) - Azure- og azd-terminologi  
 - [**FAQ**](resources/faq.md) - Vanlige spørsmål organisert etter læringskapittel
 - [**Studieguide**](resources/study-guide.md) - Omfattende praksisøvelser
 
 ### Praktiske workshops
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Gjør AI-løsningene dine klare for AZD-utplassering (2-3 timer)
+- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Gjør AI-løsningene dine AZD-distribuerbare (2-3 timer)
 - [**Interaktiv workshopguide**](workshop/README.md) - Nettleserbasert workshop med MkDocs og DevContainer-miljø
-- [**Strukturert læringssti**](../../workshop/docs/instructions) - 7-trinns veiledede øvelser (Oppdagelse → Utplassering → Tilpasning)
-- [**AZD for nybegynnere workshop**](workshop/README.md) - Komplett praktisk workshopmateriale med GitHub Codespaces-integrasjon
+- [**Strukturert læringssti**](../../workshop/docs/instructions) - 7-trinns veiledede øvelser (Oppdagelse → Distribusjon → Tilpasning)
+- [**AZD for nybegynnere workshop**](workshop/README.md) - Komplette praktiske workshopmaterialer med GitHub Codespaces-integrasjon
 
 ### Eksterne læringsressurser
 - [Azure Developer CLI-dokumentasjon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure prisberegner](https://azure.microsoft.com/pricing/calculator/)
-- [Azure status](https://status.azure.com/)
+- [Azure-priskalkulator](https://azure.microsoft.com/pricing/calculator/)
+- [Azure-status](https://status.azure.com/)
 
 ---
 
@@ -437,58 +434,58 @@ Azure Developer CLI (azd) er et utviklerorientert kommandolinjeverktøy som akse
 ### Fremdriftssporing
 Spor læringsfremgangen din gjennom hvert kapittel:
 
-- [ ] **Kapittel 1**: Grunnlag & Hurtigstart ✅
+- [ ] **Kapittel 1**: Grunnlag og hurtigstart ✅
 - [ ] **Kapittel 2**: AI-først utvikling ✅  
-- [ ] **Kapittel 3**: Konfigurasjon & autentisering ✅
-- [ ] **Kapittel 4**: Infrastruktur som kode & utplassering ✅
+- [ ] **Kapittel 3**: Konfigurasjon og autentisering ✅
+- [ ] **Kapittel 4**: Infrastruktur som kode og distribusjon ✅
 - [ ] **Kapittel 5**: Multi-agent AI-løsninger ✅
-- [ ] **Kapittel 6**: Validering & planlegging før utplassering ✅
-- [ ] **Kapittel 7**: Feilsøking & debugging ✅
-- [ ] **Kapittel 8**: Produksjon & bedriftsmønstre ✅
+- [ ] **Kapittel 6**: Validering og planlegging før distribusjon ✅
+- [ ] **Kapittel 7**: Feilsøking og debugging ✅
+- [ ] **Kapittel 8**: Produksjon og bedriftsmønstre ✅
 
 ### Læringsverifisering
 Etter å ha fullført hvert kapittel, verifiser kunnskapen din ved å:
-1. **Praktisk øvelse**: Fullfør kapittelets praktiske utplassering
-2. **Kunnskapssjekk**: Gjennomgå FAQ-seksjonen for kapittelet ditt
-3. **Diskusjon i fellesskapet**: Del erfaringene dine i Azure Discord
+1. **Praktisk øvelse**: Fullfør kapittelets praktiske distribusjon
+2. **Kunnskapssjekk**: Gå gjennom FAQ-seksjonen for kapittelet ditt
+3. **Fellesskapsdiskusjon**: Del erfaringene dine i Azure Discord
 4. **Neste kapittel**: Gå videre til neste kompleksitetsnivå
 
 ### Fordeler ved kursfullføring
 Ved å fullføre alle kapitler vil du ha:
-- **Produksjonserfaring**: Utplassert ekte AI-applikasjoner til Azure
-- **Profesjonelle ferdigheter**: Bedriftsklare utplasseringsferdigheter  
-- **Anerkjennelse i fellesskapet**: Aktivt medlem av Azure utviklerfellesskap
-- **Karriereutvikling**: Ettertraktet AZD- og AI-utplasseringskompetanse
+- **Produksjonserfaring**: Distribuert ekte AI-applikasjoner til Azure
+- **Profesjonelle ferdigheter**: Bedriftsklare distribusjonskapabiliteter  
+- **Fellesskapsanerkjennelse**: Aktivt medlem av Azure-utviklerfellesskapet
+- **Karrierefremgang**: Ettertraktet AZD- og AI-distribusjonsekspertise
 
 ---
 
-## 🤝 Fellesskap & støtte
+## 🤝 Fellesskap og støtte
 
-### Få hjelp & støtte
+### Få hjelp og støtte
 - **Tekniske problemer**: [Rapporter feil og foreslå funksjoner](https://github.com/microsoft/azd-for-beginners/issues)
-- **Læringsspørsmål**: [Microsoft Azure Discord-fellesskap](https://discord.gg/microsoft-azure)
-- **AI-spesifikk hjelp**: Bli med i [#Azure-kanalen](https://discord.gg/microsoft-azure) for diskusjoner om AZD + AI Foundry
+- **Læringsspørsmål**: [Microsoft Azure Discord-fellesskap](https://discord.gg/microsoft-azure) og [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **AI-spesifikk hjelp**: Bli med i [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Dokumentasjon**: [Offisiell Azure Developer CLI-dokumentasjon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Innsikt fra fellesskapet på Azure AI Foundry Discord
+### Fellesskapsinnsikt fra Azure AI Foundry Discord
 
 **Nylige avstemningsresultater fra #Azure-kanalen:**
 - **45%** av utviklere ønsker å bruke AZD for AI-arbeidsbelastninger
-- **Største utfordringer**: Multi-tjeneste utplasseringer, håndtering av legitimasjon, produksjonsklarhet  
+- **Største utfordringer**: Multi-tjenestedistribusjoner, håndtering av legitimasjon, produksjonsklarhet  
 - **Mest etterspurt**: AI-spesifikke maler, feilsøkingsguider, beste praksis
 
 **Bli med i fellesskapet vårt for å:**
 - Dele dine AZD + AI-erfaringer og få hjelp
 - Få tidlig tilgang til nye AI-maler
-- Bidra til beste praksis for AI-utplassering
-- Påvirke fremtidig utvikling av AI + AZD-funksjoner
+- Bidra til beste praksis for AI-implementering
+- Påvirk fremtidig utvikling av AI + AZD-funksjoner
 
 ### Bidra til kurset
-Vi ønsker bidrag velkommen! Vennligst les vår [Veiledning for bidrag](CONTRIBUTING.md) for detaljer om:
+Vi ønsker bidrag velkommen! Les vår [Bidragsveiledning](CONTRIBUTING.md) for detaljer om:
 - **Forbedring av innhold**: Forbedre eksisterende kapitler og eksempler
-- **Nye Eksempler**: Legg til virkelige scenarier og maler  
-- **Oversettelse**: Bidra til å opprettholde flerspråklig støtte  
-- **Feilrapporter**: Forbedre nøyaktighet og klarhet  
+- **Nye eksempler**: Legg til virkelige scenarier og maler  
+- **Oversettelse**: Hjelp med å opprettholde flerspråklig støtte
+- **Feilrapporter**: Forbedre nøyaktighet og klarhet
 - **Fellesskapsstandarder**: Følg våre inkluderende retningslinjer for fellesskapet
 
 ---
@@ -519,7 +516,7 @@ Vårt team produserer andre omfattende læringskurs:
 
 ---
  
-### Kjerneopplæring
+### Grunnleggende læring
 [![ML for nybegynnere](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 [![Data Science for nybegynnere](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI for nybegynnere](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
@@ -543,12 +540,14 @@ Vårt team produserer andre omfattende læringskurs:
 **🚀 Klar til å begynne å lære?**
 
 **Nybegynnere**: Start med [Kapittel 1: Grunnlag & Hurtigstart](../..)  
-**AI-utviklere**: Hopp til [Kapittel 2: AI-First Development](../..)  
+**AI-utviklere**: Gå til [Kapittel 2: AI-First-utvikling](../..)  
 **Erfarne utviklere**: Begynn med [Kapittel 3: Konfigurasjon & Autentisering](../..)
 
 **Neste steg**: [Begynn Kapittel 1 - AZD Grunnleggende](docs/getting-started/azd-basics.md) →
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
