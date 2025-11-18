@@ -7,7 +7,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
-[![Azure AI Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/kzRShWzttr)](https://discord.gg/kzRShWzttr)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ## Getting Started with This Course
 
@@ -456,8 +456,8 @@ Upon completing all chapters, you will have:
 
 ### Get Help & Support
 - **Technical Issues**: [Report bugs and request features](https://github.com/microsoft/azd-for-beginners/issues)
-- **Learning Questions**: [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure)
-- **AI-Specific Help**: Join the [#Azure channel](https://discord.gg/microsoft-azure) for AZD + AI Foundry discussions
+- **Learning Questions**: [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure) and [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **AI-Specific Help**: Join the [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Documentation**: [Official Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Community Insights from Azure AI Foundry Discord
@@ -537,6 +537,7 @@ Our team produces other comprehensive learning courses:
 **Experienced Developers**: Begin with [Chapter 3: Configuration & Authentication](#️-chapter-3-configuration--authentication)
 
 **Next Steps**: [Begin Chapter 1 - AZD Basics](docs/getting-started/azd-basics.md) →
+
 
 
 
