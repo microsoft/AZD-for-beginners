@@ -467,6 +467,14 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
   - Comprehensive monitoring and evaluation
   - One-click deployment via ARM template
 
+#### Local Examples - Container Applications (Chapters 2-5)
+**Comprehensive container deployment examples in this repository:**
+- [**Container App Examples**](examples/container-app/README.md) - Complete guide to containerized deployments
+  - [Simple Flask API](examples/container-app/simple-flask-api/) - Basic REST API with scale-to-zero
+  - [Microservices Architecture](examples/container-app/microservices/) - Production-ready multi-service deployment
+  - Quick Start, Production, and Advanced deployment patterns
+  - Monitoring, security, and cost optimization guidance
+
 #### External Examples - Simple Applications (Chapters 1-2)
 **Clone these Azure Samples repositories to get started:**
 - [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Basic deployment patterns

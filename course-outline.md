@@ -237,10 +237,13 @@ Manage multiple environments with proper authentication and security
 - Resource provisioning strategies
 - Custom template creation
 
+- Containerized application deployment with Azure Container Apps and AZD
+
 #### Learning Resources
 - [Deployment Guide](docs/deployment/deployment-guide.md) - Complete workflows
 - [Provisioning Resources](docs/deployment/provisioning.md) - Resource management
 - Container and microservices examples
+- [Container App Examples](examples/container-app/README.md) - Quick start, production, and advanced deployment patterns
 
 #### Practical Outcome
 Deploy complex multi-service applications using custom infrastructure templates
@@ -257,10 +260,13 @@ Deploy complex multi-service applications using custom infrastructure templates
 - Production-ready AI deployments
 - Customer and Inventory agent implementations
 
+- Integrating containerized microservices as part of agent-based solutions
+
 #### Learning Resources
 - [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
 - [ARM Template Package](examples/retail-multiagent-arm-template/) - One-click deployment
 - Multi-agent coordination patterns
+- [Microservices Architecture Example](examples/container-app/microservices/) - Service-to-service communication, async messaging, and production deployment
 
 #### Practical Outcome
 Deploy and manage a production-ready multi-agent AI solution
@@ -317,10 +323,13 @@ Independently diagnose and resolve common deployment issues
 - Monitoring and cost optimization
 - Scalability and governance
 
+- Best practices for production container app deployments (security, monitoring, cost, CI/CD)
+
 #### Learning Resources
 - [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patterns
 - Microservices and enterprise examples
 - Monitoring and governance frameworks
+- [Microservices Architecture Example](examples/container-app/microservices/) - Blue-green/canary deployment, distributed tracing, and cost optimization
 
 #### Practical Outcome
 Deploy enterprise-ready applications with full production capabilities
@@ -335,6 +344,8 @@ Deploy enterprise-ready applications with full production capabilities
 - **🔧 Intermediate**: Chapters 3-4 (Configuration & Infrastructure) → Chapter 6 (Validation)
 - **🚀 Advanced**: Chapter 5 (Multi-Agent Solutions) → Chapter 7 (Troubleshooting)
 - **🏢 Enterprise**: Complete all chapters, focus on Chapter 8 (Production Patterns)
+
+- **Container App Path**: Chapters 4 (Containerized deployment), 5 (Microservices integration), 8 (Production best practices)
 
 ### Complexity Indicators
 

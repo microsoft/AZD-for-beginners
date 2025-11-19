@@ -22,6 +22,34 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.6.0] - 2025-11-19
+
+#### Major Update: Container App Deployment Examples
+**This version introduces comprehensive, production-ready container application deployment examples using Azure Developer CLI (AZD), with full documentation and integration into the learning path.**
+
+#### Added
+- **🚀 Container App Examples**: New local examples in `examples/container-app/`:
+  - [Master Guide](examples/container-app/README.md): Complete overview of containerized deployments, quick start, production, and advanced patterns
+  - [Simple Flask API](examples/container-app/simple-flask-api/): Beginner-friendly REST API with scale-to-zero, health probes, monitoring, and troubleshooting
+  - [Microservices Architecture](examples/container-app/microservices/): Production-ready multi-service deployment (API Gateway, Product, Order, User, Notification), async messaging, Service Bus, Cosmos DB, Azure SQL, distributed tracing, blue-green/canary deployment
+- **Best Practices**: Security, monitoring, cost optimization, and CI/CD guidance for containerized workloads
+- **Code Samples**: Complete `azure.yaml`, Bicep templates, and multi-language service implementations (Python, Node.js, C#, Go)
+- **Testing & Troubleshooting**: End-to-end test scenarios, monitoring commands, troubleshooting guidance
+
+#### Changed
+- **README.md**: Updated to feature and link new container app examples under "Local Examples - Container Applications"
+- **examples/README.md**: Updated to highlight container app examples, add comparison matrix entries, and update technology/architecture references
+- **Course Outline & Study Guide**: Updated to reference new container app examples and deployment patterns in relevant chapters
+
+#### Validated
+- ✅ All new examples deployable with `azd up` and follow best practices
+- ✅ Documentation cross-links and navigation updated
+- ✅ Examples cover beginner to advanced scenarios, including production microservices
+
+#### Notes
+- **Scope**: English documentation and examples only
+- **Next Steps**: Expand with additional advanced container patterns and CI/CD automation in future releases
+
 ### [v3.5.0] - 2025-11-19
 
 #### Product Rebranding: Microsoft Foundry

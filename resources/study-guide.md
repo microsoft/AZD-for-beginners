@@ -123,17 +123,22 @@ After completing all sections of this study guide, you will be able to:
 - Understand resource provisioning strategies
 - Design scalable multi-service architectures
 
+- Deploy containerized applications using Azure Container Apps and AZD
+
+
 #### Key Concepts to Master
 - Bicep template structure and best practices
 - Resource dependencies and deployment ordering
 - Parameter files and template modularity
 - Custom hooks and deployment automation
+- Container app deployment patterns (quick start, production, microservices)
 
 #### Practical Exercises
 1. **Custom Template Creation**: Build a multi-service application template
 2. **Bicep Mastery**: Create modular, reusable infrastructure components
 3. **Deployment Automation**: Implement pre/post deployment hooks
 4. **Architecture Design**: Deploy complex microservices architecture
+5. **Container App Deployment**: Deploy the [Simple Flask API](../examples/container-app/simple-flask-api/) and [Microservices Architecture](../examples/container-app/microservices/) examples using AZD
 
 #### Assessment Questions
 - How do you create custom Bicep templates for AZD?
@@ -151,18 +156,21 @@ After completing all sections of this study guide, you will be able to:
 - Orchestrate agent coordination and communication
 - Deploy production-ready AI solutions with monitoring
 - Understand agent specialization and workflow patterns
+- Integrate containerized microservices as part of multi-agent solutions
 
 #### Key Concepts to Master
 - Multi-agent architecture patterns and design principles
 - Agent communication protocols and data flow
 - Load balancing and scaling strategies for AI agents
 - Production monitoring for multi-agent systems
+- Service-to-service communication in containerized environments
 
 #### Practical Exercises
 1. **Retail Solution Deployment**: Deploy the complete multi-agent retail scenario
 2. **Agent Customization**: Modify Customer and Inventory agent behaviors
 3. **Architecture Scaling**: Implement load balancing and auto-scaling
 4. **Production Monitoring**: Set up comprehensive monitoring and alerting
+5. **Microservices Integration**: Extend the [Microservices Architecture](../examples/container-app/microservices/) example to support agent-based workflows
 
 #### Assessment Questions
 - How do you design effective multi-agent communication patterns?
@@ -238,18 +246,21 @@ After completing all sections of this study guide, you will be able to:
 - Design security patterns and compliance frameworks
 - Establish monitoring, governance, and cost management
 - Create scalable CI/CD pipelines with AZD integration
+- Apply best practices for production container app deployments (security, monitoring, cost, CI/CD)
 
 #### Key Concepts to Master
 - Enterprise security and compliance requirements
 - Governance frameworks and policy implementation
 - Advanced monitoring and cost management
 - CI/CD integration and automated deployment pipelines
+- Blue-green and canary deployment strategies for containerized workloads
 
 #### Practical Exercises
 1. **Enterprise Security**: Implement comprehensive security patterns
 2. **Governance Framework**: Set up Azure Policy and resource management
 3. **Advanced Monitoring**: Create dashboards and automated alerting
 4. **CI/CD Integration**: Build automated deployment pipelines
+5. **Production Container Apps**: Apply security, monitoring, and cost optimization to the [Microservices Architecture](../examples/container-app/microservices/) example
 
 #### Assessment Questions
 - How do you implement enterprise security in AZD deployments?
@@ -604,6 +615,8 @@ Design and implement a microservices-based e-commerce platform:
 - Message queue integration with Service Bus
 - Redis cache for performance optimization
 - Comprehensive logging and monitoring
+
+**Reference Example**: See [Microservices Architecture](../examples/container-app/microservices/) for a production-ready template and deployment guide
 
 **Deliverables**:
 - Complete microservices architecture

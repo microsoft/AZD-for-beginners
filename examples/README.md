@@ -18,6 +18,34 @@ This directory provides practical examples and references to help you learn Azur
 
 ### ✅ Local Implementation (Ready to Use)
 
+#### [Container App Examples](container-app/README.md) 🆕
+**Comprehensive container deployment examples included in this repo**
+
+- **Location:** `examples/container-app/`
+- **Complexity:** ⭐-⭐⭐⭐⭐ (Beginner to Advanced)
+- **What's Included:**
+  - [Master Guide](container-app/README.md) - Complete overview of container deployments
+  - [Simple Flask API](container-app/simple-flask-api/) - Basic REST API example
+  - [Microservices Architecture](container-app/microservices/) - Production-ready multi-service deployment
+  - Quick Start, Production, and Advanced patterns
+  - Monitoring, security, and cost optimization
+
+**Quick Start:**
+```bash
+# View master guide
+cd examples/container-app
+
+# Deploy simple Flask API
+cd simple-flask-api
+azd up
+
+# Deploy microservices example
+cd ../microservices
+azd up
+```
+
+**Technologies:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
+
 #### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
 **Complete production-ready implementation included in this repo**
 
@@ -49,6 +77,8 @@ The following examples are maintained in official Azure-Samples repositories. Cl
 
 | Template | Repository | Complexity | Services |
 |:---------|:-----------|:-----------|:---------|
+| **Python Flask API** | [Local: simple-flask-api](container-app/simple-flask-api/) | ⭐ | Python, Container Apps, Application Insights |
+| **Microservices** | [Local: microservices](container-app/microservices/) | ⭐⭐⭐⭐ | Multi-service, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
 | **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
@@ -120,14 +150,15 @@ Azure Samples AZD Templates (linked externally):
 ## Quick Start Examples
 
 ### For Beginners
-1. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Deploy a Node.js Express web application with MongoDB
-2. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Host a React static website with Azure Static Web Apps
-3. **[Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice)** - Deploy a containerized Python Flask application
+1. **[Container App - Python Flask API](container-app/simple-flask-api/)** (Local) - Deploy a simple REST API with scale-to-zero
+2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** - Deploy a Node.js Express web application with MongoDB
+3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** - Host a React static website with Azure Static Web Apps
 
 ### For Intermediate Users
-4. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Web application with C# API and Azure SQL Database
-5. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions with HTTP triggers and Cosmos DB
-6. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Multi-service Java application with Container Apps and API gateway
+4. **[Container App - Microservices](container-app/microservices/)** (Local) - Production-ready multi-service architecture
+5. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** - Web application with C# API and Azure SQL Database
+6. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** - Python Azure Functions with HTTP triggers and Cosmos DB
+7. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** - Multi-service Java application with Container Apps and API gateway
 
 ### Azure AI Foundry Templates
 
@@ -232,9 +263,16 @@ Each example includes:
 **Concepts**: Static hosting, serverless backend, modern web development
 
 ### Container App - Python Flask
-**Technologies**: Python Flask, Docker, Container Apps, Container Registry  
+**Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
 **Complexity**: Beginner  
-**Concepts**: Containerization, microservices architecture, API development
+**Concepts**: Containerization, REST API, scale-to-zero, health probes, monitoring  
+**Location**: [Local Example](container-app/simple-flask-api/)
+
+### Container App - Microservices Architecture
+**Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
+**Complexity**: Advanced  
+**Concepts**: Multi-service architecture, service communication, message queuing, distributed tracing  
+**Location**: [Local Example](container-app/microservices/)
 
 ### Database App - C# with Azure SQL
 **Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
@@ -318,6 +356,8 @@ The `configurations/` directory contains reusable components:
 
 | Example | Services | Database | Auth | Monitoring | Complexity |
 |---------|----------|----------|------|------------|------------|
+| **Python Flask API** (Local) | 1 | ❌ | Basic | Full | ⭐ |
+| **Microservices** (Local) | 5+ | ✅ | Enterprise | Advanced | ⭐⭐⭐⭐ |
 | Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
 | React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |
 | Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |
@@ -327,7 +367,7 @@ The `configurations/` directory contains reusable components:
 | Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
+| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
 ## 🎓 Learning Path
 
@@ -366,31 +406,34 @@ The `configurations/` directory contains reusable components:
 ## 🔍 Finding the Right Example
 
 ### By Technology Stack
-- **Node.js**: Node.js Express Todo App
-- **Python**: Python Flask Container App, Python Functions + SPA
-- **C#**: C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Container Apps**: [Python Flask API (Local)](container-app/simple-flask-api/), [Microservices (Local)](container-app/microservices/), Java Microservices
+- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](container-app/microservices/)
+- **Python**: [Python Flask API (Local)](container-app/simple-flask-api/), [Microservices Product Service (Local)](container-app/microservices/), Python Functions + SPA
+- **C#**: [Microservices Order Service (Local)](container-app/microservices/), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Go**: [Microservices User Service (Local)](container-app/microservices/)
 - **Java**: Java Spring Boot Microservices
 - **React**: React SPA + Functions
-- **Containers**: Python Flask Container App, Java Microservices
-- **Databases**: Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **Containers**: [Python Flask (Local)](container-app/simple-flask-api/), [Microservices (Local)](container-app/microservices/), Java Microservices
+- **Databases**: [Microservices (Local)](container-app/microservices/), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
 - **AI/ML**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
 - **Multi-Agent Systems**: **Retail Multi-Agent Solution**
-- **Enterprise Production**: **Retail Multi-Agent Solution**
+- **Enterprise Production**: [Microservices (Local)](container-app/microservices/), **Retail Multi-Agent Solution**
 
 ### By Architecture Pattern
+- **Simple REST API**: [Python Flask API (Local)](container-app/simple-flask-api/)
 - **Monolithic**: Node.js Express Todo, C# Web API + SQL
 - **Static + Serverless**: React SPA + Functions, Python Functions + SPA
-- **Microservices**: Java Spring Boot Microservices
-- **Containerized**: Python Flask Container App
+- **Microservices**: [Production Microservices (Local)](container-app/microservices/), Java Spring Boot Microservices
+- **Containerized**: [Python Flask (Local)](container-app/simple-flask-api/), [Microservices (Local)](container-app/microservices/)
 - **AI-Powered**: Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
 - **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
-- **Enterprise Multi-Service**: **Retail Multi-Agent Solution**
+- **Enterprise Multi-Service**: [Microservices (Local)](container-app/microservices/), **Retail Multi-Agent Solution**
 
 ### By Complexity Level
-- **Beginner**: Node.js Express Todo, React SPA + Functions, Python Flask Container App
+- **Beginner**: [Python Flask API (Local)](container-app/simple-flask-api/), Node.js Express Todo, React SPA + Functions
 - **Intermediate**: C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
 - **Advanced**: ML Pipeline
-- **Enterprise Production-Ready**: **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
+- **Enterprise Production-Ready**: [Microservices (Local)](container-app/microservices/) (Multi-service with message queuing), **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
 
 ## 📚 Additional Resources
 
