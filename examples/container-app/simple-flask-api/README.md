@@ -265,4 +265,4 @@ azd down --force --purge
 
 - [Flask Documentation](https://flask.palletsprojects.com/)
 - [Azure Container Apps Docs](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Container Apps Guide](../../docs/microsoft-foundry/ai-model-deployment.md)
+- [AZD Container Apps Guide](../../../docs/microsoft-foundry/ai-model-deployment.md)
