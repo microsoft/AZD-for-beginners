@@ -128,6 +128,7 @@ azd down --force --purge  # Cleans up resources
 - **🛠️ Workshop**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-ready
 - **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning with MkDocs * DevContainer Environment
 - **📋 Templates**: [Microsoft Foundry Templates](#featured-microsoft-foundry-templates)
+- **📝 Examples**: [AZD Deployment Examples](examples/README.md)
 
 #### Practical Exercises
 ```bash
@@ -203,8 +204,8 @@ az consumption budget list --resource-group <your-rg>
 
 #### Learning Resources
 - **📖 Configuration**: [Configuration Guide](docs/getting-started/configuration.md) - Environment setup
-- **🔐 Security**: Authentication patterns and managed identity
-- **📝 Examples**: [Database App Example](examples/database-app/) - Configuration patterns
+- **🔐 Security**: [Authentication patterns and managed identity](docs/getting-started/authsecurity.md) - Authentication patterns
+- **📝 Examples**: [Database App Example](examples/database-app/README.md) - AZD Database Examples
 
 #### Practical Exercises
 - Configure multiple environments (dev, staging, prod)
@@ -252,7 +253,7 @@ az consumption budget list --resource-group <your-rg>
 #### Learning Resources
 - **🤖 Featured Project**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
 - **🛠️ ARM Templates**: [ARM Template Package](examples/retail-multiagent-arm-template/) - One-click deployment
-- **📖 Architecture**: Multi-agent coordination patterns
+- **📖 Architecture**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - Patterns
 
 #### Practical Exercises
 ```bash
@@ -329,7 +330,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### Learning Resources
 - **🏭 Production**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patterns
 - **📝 Examples**: [Microservices Example](examples/microservices/) - Complex architectures
-- **📊 Monitoring**: Application Insights integration
+- **📊 Monitoring**: [Application Insights integration](docs/pre-deployment/application-insights.md) - Monitoring
 
 #### Practical Exercises
 - Implement enterprise security patterns
