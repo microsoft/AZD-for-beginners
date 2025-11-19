@@ -219,7 +219,7 @@ Deploy and configure an AI-powered chat application with RAG capabilities
 
 #### Learning Resources
 - [Configuration Guide](docs/getting-started/configuration.md) - Environment setup
-- Security patterns and managed identity
+- [Authentication & Security Patterns](docs/getting-started/authsecurity.md) - Managed identity and Key Vault integration
 - Multi-environment examples
 
 #### Practical Outcome
@@ -287,6 +287,8 @@ Deploy and manage a production-ready multi-agent AI solution
 - [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Resource validation
 - [SKU Selection](docs/pre-deployment/sku-selection.md) - Cost-effective choices
 - [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automated scripts
+- [Application Insights Integration](docs/pre-deployment/application-insights.md) - Monitoring and observability
+- [Multi-Agent Coordination Patterns](docs/pre-deployment/coordination-patterns.md) - Agent orchestration strategies
 
 #### Practical Outcome
 Validate and optimize deployments before execution
