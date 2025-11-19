@@ -3,12 +3,83 @@
 **Learning by Example - Organized by Chapter**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Chapter Mapping**: Examples organized by learning complexity
-- **🚀 Start Simple**: [Chapter 1 Examples](#chapter-1-foundation--quick-start)
-- **🤖 AI Examples**: [Chapter 2 & 5 AI Solutions](#chapter-2-5-ai-first-development)
+- **🚀 Local Example**: [Retail Multi-Agent Solution](retail-scenario.md)
+- **🤖 External AI Examples**: Links to Azure Samples repositories
+
+> **📍 IMPORTANT: Local vs External Examples**  
+> This repository contains **1 complete local example** (Retail Multi-Agent) with full implementation.  
+> Additional examples are **external references** to Azure-Samples repositories that you can clone.
 
 ## Introduction
 
-This directory contains practical examples, templates, and real-world scenarios to help you learn Azure Developer CLI through hands-on practice. Each example provides complete working code, infrastructure templates, and detailed instructions for different application architectures and deployment patterns.
+This directory provides practical examples and references to help you learn Azure Developer CLI through hands-on practice. The Retail Multi-Agent scenario is a complete, production-ready implementation included in this repository. Additional examples reference official Azure Samples that demonstrate various AZD patterns.
+
+## 🎯 What's Actually in This Repository
+
+### ✅ Local Implementation (Ready to Use)
+
+#### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
+**Complete production-ready implementation included in this repo**
+
+- **Location:** `examples/retail-multiagent-arm-template/`
+- **Complexity:** ⭐⭐⭐⭐ (Advanced)
+- **What's Included:**
+  - Complete ARM deployment template
+  - Multi-agent architecture (Customer + Inventory)
+  - Azure OpenAI integration
+  - AI Search with RAG
+  - Comprehensive monitoring
+  - One-click deployment script
+
+**Quick Start:**
+```bash
+cd examples/retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup
+```
+
+**Technologies:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
+
+---
+
+## 🔗 External Azure Samples (Clone to Use)
+
+The following examples are maintained in official Azure-Samples repositories. Clone them to explore different AZD patterns:
+
+### Simple Applications (Chapters 1-2)
+
+| Template | Repository | Complexity | Services |
+|:---------|:-----------|:-----------|:---------|
+| **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
+| **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
+| **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
+
+**How to use:**
+```bash
+# Clone any example
+git clone https://github.com/Azure-Samples/todo-nodejs-mongo
+cd todo-nodejs-mongo
+
+# Deploy
+azd up
+```
+
+### AI Application Examples (Chapters 2, 5, 8)
+
+| Template | Repository | Complexity | Focus |
+|:---------|:-----------|:-----------|:------|
+| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Basic AI chat |
+| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agent framework |
+| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG pattern |
+| **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Enterprise AI |
+
+### Database & Advanced Patterns (Chapters 3-8)
+
+| Template | Repository | Complexity | Focus |
+|:---------|:-----------|:-----------|:------|
+| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Database integration |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
+| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Multi-service |
+| **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Learning Goals
 

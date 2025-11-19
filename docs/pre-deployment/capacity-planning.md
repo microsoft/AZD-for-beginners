@@ -1,4 +1,11 @@
-# Capacity Planning: Understanding Azure Quotas and Limitsnning - Azure Resource Availability and Limits
+# Capacity Planning - Azure Resource Availability and Limits
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 6 - Pre-Deployment Validation & Planning
+- **⬅️ Previous Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **➡️ Next**: [SKU Selection](sku-selection.md)
+- **🚀 Next Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/common-issues.md)
 
 ## Introduction
 

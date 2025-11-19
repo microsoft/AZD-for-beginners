@@ -524,6 +524,254 @@ azd up
 5. **Secure Your Deployment**: Implement enterprise security patterns
 6. **Scale to Production**: Add multi-region and high-availability features
 
+## 🎯 Hands-On Exercises
+
+### Exercise 1: Deploy Azure OpenAI Chat App (30 minutes)
+**Goal**: Deploy and test a production-ready AI chat application
+
+```bash
+# Initialize template
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Set environment variables
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Deploy
+azd up
+
+# Test the application
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# Monitor AI operations
+azd monitor
+
+# Clean up
+azd down --force --purge
+```
+
+**Success Criteria:**
+- [ ] Deployment completes without quota errors
+- [ ] Can access chat interface in browser
+- [ ] Can ask questions and get AI-powered responses
+- [ ] Application Insights shows telemetry data
+- [ ] Successfully cleaned up resources
+
+**Estimated Cost**: $5-10 for 30 minutes of testing
+
+### Exercise 2: Configure Multi-Model Deployment (45 minutes)
+**Goal**: Deploy multiple AI models with different configurations
+
+```bash
+# Create custom Bicep configuration
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Deploy and verify
+azd provision
+azd show
+```
+
+**Success Criteria:**
+- [ ] Multiple models deployed successfully
+- [ ] Different capacity settings applied
+- [ ] Models accessible via API
+- [ ] Can call both models from application
+
+### Exercise 3: Implement Cost Monitoring (20 minutes)
+**Goal**: Set up budget alerts and cost tracking
+
+```bash
+# Add budget alert to Bicep
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Deploy budget alert
+azd provision
+
+# Check current costs
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**Success Criteria:**
+- [ ] Budget alert created in Azure
+- [ ] Email notifications configured
+- [ ] Can view cost data in Azure Portal
+- [ ] Budget thresholds set appropriately
+
+## 💡 Frequently Asked Questions
+
+<details>
+<summary><strong>How do I reduce Azure OpenAI costs during development?</strong></summary>
+
+1. **Use Free Tier**: Azure OpenAI offers 50,000 tokens/month free
+2. **Reduce Capacity**: Set capacity to 10 TPM instead of 30+ for dev
+3. **Use azd down**: Deallocate resources when not actively developing
+4. **Cache Responses**: Implement Redis cache for repeated queries
+5. **Use Prompt Engineering**: Reduce token usage with efficient prompts
+
+```bash
+# Development configuration
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>What's the difference between Azure OpenAI and OpenAI API?</strong></summary>
+
+**Azure OpenAI**:
+- Enterprise security and compliance
+- Private network integration
+- SLA guarantees
+- Managed identity authentication
+- Higher quotas available
+
+**OpenAI API**:
+- Faster access to new models
+- Simpler setup
+- Lower barrier to entry
+- Public internet only
+
+For production apps, **Azure OpenAI is recommended**.
+</details>
+
+<details>
+<summary><strong>How do I handle Azure OpenAI quota exceeded errors?</strong></summary>
+
+```bash
+# Check current quota
+az cognitiveservices usage list --location eastus2
+
+# Try different region
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Reduce capacity temporarily
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Request quota increase
+# Go to Azure Portal > Quotas > Request increase
+```
+</details>
+
+<details>
+<summary><strong>Can I use my own data with Azure OpenAI?</strong></summary>
+
+Yes! Use **Azure AI Search** for RAG (Retrieval Augmented Generation):
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+See the [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) template.
+</details>
+
+<details>
+<summary><strong>How do I secure AI model endpoints?</strong></summary>
+
+**Best Practices**:
+1. Use Managed Identity (no API keys)
+2. Enable Private Endpoints
+3. Configure network security groups
+4. Implement rate limiting
+5. Use Azure Key Vault for secrets
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
+
 ## Community and Support
 
 - **Azure AI Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)

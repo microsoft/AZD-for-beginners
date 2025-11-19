@@ -291,12 +291,120 @@ azd down --force --purge
 ## What You've Learned
 
 Congratulations! You've successfully:
-- Initialized an azd project from a template
-- Explored the project structure and key files
-- Deployed a full-stack application to Azure
-- Made code changes and redeployed
-- Managed multiple environments
-- Cleaned up resources
+- ✅ Initialized an azd project from a template
+- ✅ Explored the project structure and key files
+- ✅ Deployed a full-stack application to Azure
+- ✅ Made code changes and redeployed
+- ✅ Managed multiple environments
+- ✅ Cleaned up resources
+
+## 🎯 Skill Validation Exercises
+
+### Exercise 1: Deploy a Different Template (15 minutes)
+**Goal**: Demonstrate mastery of azd init and deployment workflow
+
+```bash
+# Try Python + MongoDB stack
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Verify deployment
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Clean up
+azd down --force --purge
+```
+
+**Success Criteria:**
+- [ ] Application deploys without errors
+- [ ] Can access application URL in browser
+- [ ] Application functions correctly (add/remove todos)
+- [ ] Successfully cleaned up all resources
+
+### Exercise 2: Customize Configuration (20 minutes)
+**Goal**: Practice environment variable configuration
+
+```bash
+cd my-first-azd-app
+
+# Create custom environment
+azd env new custom-config
+
+# Set custom variables
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Verify variables
+azd env get-values | grep APP_TITLE
+
+# Deploy with custom config
+azd up
+```
+
+**Success Criteria:**
+- [ ] Custom environment created successfully
+- [ ] Environment variables set and retrievable
+- [ ] Application deploys with custom configuration
+- [ ] Can verify custom settings in deployed app
+
+### Exercise 3: Multi-Environment Workflow (25 minutes)
+**Goal**: Master environment management and deployment strategies
+
+```bash
+# Create dev environment
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Create staging environment
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# Compare environments
+azd env list
+
+# Test both environments
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Clean up both
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**Success Criteria:**
+- [ ] Two environments created with different configurations
+- [ ] Both environments deployed successfully
+- [ ] Can switch between environments using `azd env select`
+- [ ] Environment variables differ between environments
+- [ ] Successfully cleaned up both environments
+
+## 📊 Your Progress
+
+**Time Invested**: ~60-90 minutes  
+**Skills Acquired**:
+- ✅ Template-based project initialization
+- ✅ Azure resource provisioning
+- ✅ Application deployment workflows
+- ✅ Environment management
+- ✅ Configuration management
+- ✅ Resource cleanup and cost management
+
+**Next Level**: You're ready for [Configuration Guide](configuration.md) to learn advanced configuration patterns!
 
 ## Troubleshooting Common Issues
 

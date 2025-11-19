@@ -82,6 +82,34 @@ azd up
 
 **💡 Chapter Outcome**: Successfully deploy a simple web application to Azure using AZD
 
+**✅ Success Validation:**
+```bash
+# After completing Chapter 1, you should be able to:
+azd version              # Shows installed version
+azd init --template todo-nodejs-mongo  # Initializes project
+azd up                  # Deploys to Azure
+azd show                # Displays running app URL
+# Application opens in browser and works
+azd down --force --purge  # Cleans up resources
+```
+
+**📊 Time Investment:** 30-45 minutes  
+**📈 Skill Level After:** Can deploy basic applications independently
+
+**✅ Success Validation:**
+```bash
+# After completing Chapter 1, you should be able to:
+azd version              # Shows installed version
+azd init --template todo-nodejs-mongo  # Initializes project
+azd up                  # Deploys to Azure
+azd show                # Displays running app URL
+# Application opens in browser and works
+azd down --force --purge  # Cleans up resources
+```
+
+**📊 Time Investment:** 30-45 minutes  
+**📈 Skill Level After:** Can deploy basic applications independently
+
 ---
 
 ### 🤖 Chapter 2: AI-First Development (Recommended for AI Developers)
@@ -113,6 +141,53 @@ azd init --template agent-openai-python-prompty
 ```
 
 **💡 Chapter Outcome**: Deploy and configure an AI-powered chat application with RAG capabilities
+
+**✅ Success Validation:**
+```bash
+# After Chapter 2, you should be able to:
+azd init --template azure-search-openai-demo
+azd up
+# Test the AI chat interface
+# Ask questions and get AI-powered responses with sources
+# Verify search integration works
+azd monitor  # Check Application Insights shows telemetry
+azd down --force --purge
+```
+
+**📊 Time Investment:** 1-2 hours  
+**📈 Skill Level After:** Can deploy and configure production-ready AI applications  
+**💰 Cost Awareness:** Understand $80-150/month dev costs, $300-3500/month production costs
+
+#### 💰 Cost Considerations for AI Deployments
+
+**Development Environment (Estimated $80-150/month):**
+- Azure OpenAI (Pay-as-you-go): $0-50/month (based on token usage)
+- AI Search (Basic tier): $75/month
+- Container Apps (Consumption): $0-20/month
+- Storage (Standard): $1-5/month
+
+**Production Environment (Estimated $300-3,500+/month):**
+- Azure OpenAI (PTU for consistent performance): $3,000+/month OR Pay-as-go with high volume
+- AI Search (Standard tier): $250/month
+- Container Apps (Dedicated): $50-100/month
+- Application Insights: $5-50/month
+- Storage (Premium): $10-50/month
+
+**💡 Cost Optimization Tips:**
+- Use **Free Tier** Azure OpenAI for learning (50,000 tokens/month included)
+- Run `azd down` to deallocate resources when not actively developing
+- Start with consumption-based billing, upgrade to PTU only for production
+- Use `azd provision --preview` to estimate costs before deployment
+- Enable auto-scaling: pay only for actual usage
+
+**Cost Monitoring:**
+```bash
+# Check estimated monthly costs
+azd provision --preview
+
+# Monitor actual costs in Azure Portal
+az consumption budget list --resource-group <your-rg>
+```
 
 ---
 
@@ -267,6 +342,9 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ## 🎓 Workshop Overview: Hands-On Learning Experience
 
+> **⚠️ WORKSHOP STATUS: Active Development**  
+> The workshop materials are currently being developed and refined. Core modules are functional, but some advanced sections are incomplete. We're actively working to complete all content. [Track progress →](workshop/README.md)
+
 ### Interactive Workshop Materials
 **Comprehensive hands-on learning with browser-based tools and guided exercises**
 
@@ -353,17 +431,17 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 ### Featured: Azure AI Foundry Templates
 **Start here if you're deploying AI applications!**
 
-| Template | Chapter | Complexity | Services |
-|----------|---------|------------|----------|
-| [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights |
-| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Chapter 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights|
-| [**Multi-agent workflow automation**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 5 | ⭐⭐⭐ | AzureOpenAI + Azure AI Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Generate documents from your data**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 4 | ⭐⭐⭐  | AzureOpenAI + Azure AI Search + Azure AI Services + Azure CosmosDB|
-| [**Improve client meetings with agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 5 | ⭐⭐⭐| AzureOpenAI + Azure AI Search + Azure CosmosDB + Azure SQL Database |
-| [**Modernize your code with agents**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 5 | ⭐⭐⭐ | AzureOpenAI + Azure Agent Service + Semantic Kernel + Azure CosmosDB + Azure Container Apps|
-| [**Build your conversational agent**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 4 | ⭐⭐⭐ | AI Language + AzureOpenAI + AI Search + Azure Storage + Azure Container Registry|
-| [**Unlock insights from conversational data**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 8 | ⭐⭐⭐ | AzureOpenAI + AI Search + Semantic Kernel + Azure Agent Service + AI AI Content Understanding|
-| [**Multi-modal content processing**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 8 | ⭐⭐⭐⭐ | AzureOpenAI + Azure Content Understanding + Azure CosmosDB + Azure Container Apps|
+> **Note:** These templates demonstrate various AI patterns. Some are external Azure Samples, others are local implementations.
+
+| Template | Chapter | Complexity | Services | Type |
+|----------|---------|------------|----------|------|
+| [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | External |
+| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Chapter 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| External |
+| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | External |
+| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | External |
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | External |
+| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | External |
+| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Local** |
 
 ### Featured: Complete Learning Scenarios
 **Production-ready application templates mapped to learning chapters**
@@ -379,19 +457,30 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 
 ### Learning by Example Type
 
-#### Simple Applications (Chapters 1-2)
-- [Simple Web App](examples/simple-web-app/) - Basic deployment patterns
-- [Static Website](examples/static-site/) - Static content deployment
-- [Basic API](examples/basic-api/) - REST API deployment
+> **📌 Local vs. External Examples:**  
+> **Local Examples** (in this repo) = Ready to use immediately  
+> **External Examples** (Azure Samples) = Clone from linked repositories
 
-#### Database Integration (Chapter 3-4)  
-- [Database App](examples/database-app/) - Database connectivity patterns
-- [Data Processing](examples/data-processing/) - ETL workflow deployment
+#### Local Examples (Ready to Use)
+- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Complete production-ready implementation with ARM templates
+  - Multi-agent architecture (Customer + Inventory agents)
+  - Comprehensive monitoring and evaluation
+  - One-click deployment via ARM template
 
-#### Advanced Patterns (Chapters 4-8)
-- [Container Apps](examples/container-app/) - Containerized deployments
-- [Microservices](examples/microservices/) - Multi-service architectures  
-- [Enterprise Solutions](examples/enterprise/) - Production-ready patterns
+#### External Examples - Simple Applications (Chapters 1-2)
+**Clone these Azure Samples repositories to get started:**
+- [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Basic deployment patterns
+- [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Static content deployment
+- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API deployment
+
+#### External Examples - Database Integration (Chapter 3-4)  
+- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Database connectivity patterns
+- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless data workflow
+
+#### External Examples - Advanced Patterns (Chapters 4-8)
+- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service architectures
+- [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Background processing  
+- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - Production-ready ML patterns
 
 ### External Template Collections
 - [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Curated collection of official and community templates
@@ -419,6 +508,308 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Status](https://status.azure.com/)
+
+---
+
+## 🔧 Quick Troubleshooting Guide
+
+**Common issues beginners face and immediate solutions:**
+
+### ❌ "azd: command not found"
+
+```bash
+# Install AZD first
+# Windows (PowerShell):
+winget install microsoft.azd
+
+# macOS:
+brew tap azure/azd && brew install azd
+
+# Linux:
+curl -fsSL https://aka.ms/install-azd.sh | bash
+
+# Verify installation
+azd version
+```
+
+### ❌ "No subscription found" or "Subscription not set"
+
+```bash
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription "<subscription-id-or-name>"
+
+# Set for AZD environment
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+
+# Verify
+az account show
+```
+
+### ❌ "InsufficientQuota" or "Quota exceeded"
+
+```bash
+# Try different Azure region
+azd env set AZURE_LOCATION "westus2"
+azd up
+
+# Or use smaller SKUs in development
+# Edit infra/main.parameters.json:
+{
+  "sku": "B1"  // Instead of "P1V2"
+}
+```
+
+### ❌ "azd up" fails halfway through
+
+```bash
+# Option 1: Clean and retry
+azd down --force --purge
+azd up
+
+# Option 2: Just fix infrastructure
+azd provision
+
+# Option 3: Check detailed logs
+azd show
+azd logs
+```
+
+### ❌ "Authentication failed" or "Token expired"
+
+```bash
+# Re-authenticate
+az logout
+az login
+
+azd auth logout
+azd auth login
+
+# Verify authentication
+az account show
+```
+
+### ❌ "Resource already exists" or naming conflicts
+
+```bash
+# AZD generates unique names, but if conflict:
+azd down --force --purge
+
+# Then retry with fresh environment
+azd env new dev-v2
+azd up
+```
+
+### ❌ Template deployment taking too long
+
+**Normal wait times:**
+- Simple web app: 5-10 minutes
+- App with database: 10-15 minutes
+- AI applications: 15-25 minutes (OpenAI provisioning is slow)
+
+```bash
+# Check progress
+azd show
+
+# If stuck >30 minutes, check Azure Portal:
+azd monitor
+# Look for failed deployments
+```
+
+### ❌ "Permission denied" or "Forbidden"
+
+```bash
+# Check your Azure role
+az role assignment list --assignee $(az account show --query user.name -o tsv)
+
+# You need at least "Contributor" role
+# Ask your Azure admin to grant:
+# - Contributor (for resources)
+# - User Access Administrator (for role assignments)
+```
+
+### ❌ Can't find deployed application URL
+
+```bash
+# Show all service endpoints
+azd show
+
+# Or open Azure Portal
+azd monitor
+
+# Check specific service
+azd env get-values
+# Look for *_URL variables
+```
+
+### 📚 Full Troubleshooting Resources
+
+- **Common Issues Guide:** [Detailed Solutions](docs/troubleshooting/common-issues.md)
+- **AI-Specific Issues:** [AI Troubleshooting](docs/troubleshooting/ai-troubleshooting.md)
+- **Debugging Guide:** [Step-by-step Debugging](docs/troubleshooting/debugging.md)
+- **Get Help:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+
+---
+
+## 🔧 Quick Troubleshooting Guide
+
+**Common issues beginners face and immediate solutions:**
+
+<details>
+<summary><strong>❌ "azd: command not found"</strong></summary>
+
+```bash
+# Install AZD first
+# Windows (PowerShell):
+winget install microsoft.azd
+
+# macOS:
+brew tap azure/azd && brew install azd
+
+# Linux:
+curl -fsSL https://aka.ms/install-azd.sh | bash
+
+# Verify installation
+azd version
+```
+</details>
+
+<details>
+<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
+
+```bash
+# List available subscriptions
+az account list --output table
+
+# Set default subscription
+az account set --subscription "<subscription-id-or-name>"
+
+# Set for AZD environment
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+
+# Verify
+az account show
+```
+</details>
+
+<details>
+<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
+
+```bash
+# Try different Azure region
+azd env set AZURE_LOCATION "westus2"
+azd up
+
+# Or use smaller SKUs in development
+# Edit infra/main.parameters.json:
+{
+  "sku": "B1"  // Instead of "P1V2"
+}
+```
+</details>
+
+<details>
+<summary><strong>❌ "azd up" fails halfway through</strong></summary>
+
+```bash
+# Option 1: Clean and retry
+azd down --force --purge
+azd up
+
+# Option 2: Just fix infrastructure
+azd provision
+
+# Option 3: Check detailed logs
+azd show
+azd logs
+```
+</details>
+
+<details>
+<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
+
+```bash
+# Re-authenticate
+az logout
+az login
+
+azd auth logout
+azd auth login
+
+# Verify authentication
+az account show
+```
+</details>
+
+<details>
+<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
+
+```bash
+# AZD generates unique names, but if conflict:
+azd down --force --purge
+
+# Then retry with fresh environment
+azd env new dev-v2
+azd up
+```
+</details>
+
+<details>
+<summary><strong>❌ Template deployment taking too long</strong></summary>
+
+**Normal wait times:**
+- Simple web app: 5-10 minutes
+- App with database: 10-15 minutes
+- AI applications: 15-25 minutes (OpenAI provisioning is slow)
+
+```bash
+# Check progress
+azd show
+
+# If stuck >30 minutes, check Azure Portal:
+azd monitor
+# Look for failed deployments
+```
+</details>
+
+<details>
+<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
+
+```bash
+# Check your Azure role
+az role assignment list --assignee $(az account show --query user.name -o tsv)
+
+# You need at least "Contributor" role
+# Ask your Azure admin to grant:
+# - Contributor (for resources)
+# - User Access Administrator (for role assignments)
+```
+</details>
+
+<details>
+<summary><strong>❌ Can't find deployed application URL</strong></summary>
+
+```bash
+# Show all service endpoints
+azd show
+
+# Or open Azure Portal
+azd monitor
+
+# Check specific service
+azd env get-values
+# Look for *_URL variables
+```
+</details>
+
+### 📚 Full Troubleshooting Resources
+
+- **Common Issues Guide:** [Detailed Solutions](docs/troubleshooting/common-issues.md)
+- **AI-Specific Issues:** [AI Troubleshooting](docs/troubleshooting/ai-troubleshooting.md)
+- **Debugging Guide:** [Step-by-step Debugging](docs/troubleshooting/debugging.md)
+- **Get Help:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 

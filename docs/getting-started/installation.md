@@ -144,6 +144,15 @@ Expected output:
 azd version 1.5.0 (commit abc123)
 ```
 
+**✅ Installation Success Checklist:**
+- [ ] `azd version` shows version number without errors
+- [ ] `azd --help` displays command documentation
+- [ ] `azd template list` shows available templates
+- [ ] `az account show` displays your Azure subscription
+- [ ] You can create a test directory and run `azd init` successfully
+
+**If all checks pass, you're ready to proceed to [Your First Project](first-project.md)!**
+
 ## Authentication Setup
 
 ### Azure CLI Authentication (Recommended)
@@ -316,6 +325,72 @@ brew upgrade azd
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
+
+## 💡 Frequently Asked Questions
+
+<details>
+<summary><strong>What's the difference between azd and az CLI?</strong></summary>
+
+**Azure CLI (az)**: Low-level tool for managing individual Azure resources
+- `az webapp create`, `az storage account create`
+- One resource at a time
+- Infrastructure management focus
+
+**Azure Developer CLI (azd)**: High-level tool for complete application deployments
+- `azd up` deploys entire app with all resources
+- Template-based workflows
+- Developer productivity focus
+
+**You need both**: azd uses az CLI for authentication
+</details>
+
+<details>
+<summary><strong>Can I use azd with existing Azure resources?</strong></summary>
+
+Yes! You can:
+1. Import existing resources into azd environments
+2. Reference existing resources in your Bicep templates
+3. Use azd for new deployments alongside existing infrastructure
+
+See [Configuration Guide](configuration.md) for details.
+</details>
+
+<details>
+<summary><strong>Does azd work with Azure Government or Azure China?</strong></summary>
+
+Yes, configure the cloud:
+```bash
+# Azure Government
+az cloud set --name AzureUSGovernment
+az login
+
+# Azure China
+az cloud set --name AzureChinaCloud
+az login
+```
+</details>
+
+<details>
+<summary><strong>Can I use azd in CI/CD pipelines?</strong></summary>
+
+Absolutely! azd is designed for automation:
+- GitHub Actions integration
+- Azure DevOps support
+- Service principal authentication
+- Non-interactive mode
+
+See [Deployment Guide](../deployment/deployment-guide.md) for CI/CD patterns.
+</details>
+
+<details>
+<summary><strong>What's the cost of using azd?</strong></summary>
+
+azd itself is **completely free** and open-source. You only pay for:
+- Azure resources you deploy
+- Azure consumption costs (compute, storage, etc.)
+
+Use `azd provision --preview` to estimate costs before deployment.
+</details>
 
 ## Next Steps
 
