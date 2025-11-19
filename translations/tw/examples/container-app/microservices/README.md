@@ -1,632 +1,828 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "933ed5b10b761a61ac633494eb275d8c",
-  "translation_date": "2025-11-19T12:50:10+00:00",
+  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
+  "translation_date": "2025-11-19T13:43:02+00:00",
   "source_file": "examples/container-app/microservices/README.md",
   "language_code": "tw"
 }
 -->
 # 微服務架構 - 容器應用範例
 
-使用 AZD CLI 部署到 Azure Container Apps 的生產就緒微服務架構。本範例展示了服務間的通訊、訊息佇列以及分散式追蹤。
+⏱️ **預估時間**：25-35 分鐘 | 💰 **預估成本**：~$50-100/月 | ⭐ **複雜度**：進階
+
+一個**簡化但功能完整**的微服務架構，使用 AZD CLI 部署到 Azure 容器應用。本範例展示了服務間的通訊、容器編排以及監控，並採用實用的兩個服務設置。
+
+> **📚 學習方式**：此範例從最小的兩個服務架構（API Gateway + 後端服務）開始，您可以實際部署並學習。在掌握基礎後，我們提供擴展到完整微服務生態系統的指導。
+
+## 您將學到什麼
+
+完成此範例後，您將能夠：
+- 部署多個容器到 Azure 容器應用
+- 使用內部網路實現服務間通訊
+- 配置基於環境的自動縮放和健康檢查
+- 使用 Application Insights 監控分散式應用
+- 理解微服務部署模式和最佳實踐
+- 從簡單架構逐步擴展到複雜架構
 
 ## 架構
 
+### 階段 1：我們將構建什麼（本範例包含）
+
 ```
                     ┌─────────────────────────────┐
-                    │  Azure Front Door (CDN)     │
+                    │         Internet            │
                     └──────────────┬──────────────┘
                                    │
-              ┌────────────────────┴────────────────────┐
-              │                                         │
-    ┌─────────▼─────────┐                   ┌─────────▼─────────┐
-    │  API Gateway      │                   │   Web Frontend    │
-    │  (Container App)  │                   │  (Container App)  │
-    └─────────┬─────────┘                   └───────────────────┘
-              │
-       ┌──────┴──────┬──────────┬──────────┐
-       │             │          │          │
-┌──────▼──────┐ ┌───▼────┐ ┌───▼────┐ ┌───▼────┐
-│ Product Svc │ │Order Svc│ │User Svc│ │Notify  │
-│ (Container) │ │(Ctnr)   │ │(Ctnr)  │ │Svc     │
-└──────┬──────┘ └───┬────┘ └───┬────┘ └───┬────┘
-       │            │          │          │
-┌──────▼──────────────▼──────────▼──────────▼─────┐
-│         Azure Service Bus Queue                  │
-│         (Async Communication)                    │
-└──────────────────────────────────────────────────┘
-       │            │          │
-┌──────▼──────┐ ┌───▼────┐ ┌──▼──────┐
-│ Cosmos DB   │ │SQL DB  │ │ Storage │
-└─────────────┘ └────────┘ └─────────┘
+                                   │ HTTPS
+                                   │
+                    ┌──────────────▼──────────────┐
+                    │      API Gateway            │
+                    │   (Node.js Container)       │
+                    │   - Routes requests         │
+                    │   - Health checks           │
+                    │   - Request logging         │
+                    └──────────────┬──────────────┘
+                                   │
+                                   │ HTTP (internal)
+                                   │
+                    ┌──────────────▼──────────────┐
+                    │    Product Service          │
+                    │   (Python Container)        │
+                    │   - Product CRUD            │
+                    │   - In-memory data store    │
+                    │   - REST API                │
+                    └──────────────┬──────────────┘
+                                   │
+                    ┌──────────────▼──────────────┐
+                    │   Application Insights      │
+                    │   (Monitoring & Logs)       │
+                    └─────────────────────────────┘
 ```
 
-## 功能
+**為什麼從簡單開始？**
+- ✅ 快速部署並理解（25-35 分鐘）
+- ✅ 學習核心微服務模式而不增加複雜性
+- ✅ 可修改和實驗的工作代碼
+- ✅ 學習成本較低（~$50-100/月 vs $300-1400/月）
+- ✅ 在添加資料庫和消息隊列之前建立信心
 
-✅ **服務發現**：基於 DNS 的自動服務發現  
+**比喻**：這就像學開車。您從空曠的停車場（2 個服務）開始，掌握基礎後，再進入城市交通（5 個以上服務，包含資料庫）。
+
+### 階段 2：未來擴展（參考架構）
+
+在掌握兩個服務架構後，您可以擴展到：
+
+```
+Full Architecture (Not Included - For Reference)
+├── API Gateway (✅ Included)
+├── Product Service (✅ Included)
+├── Order Service (🔜 Add next)
+├── User Service (🔜 Add next)
+├── Notification Service (🔜 Add last)
+├── Azure Service Bus (🔜 For async communication)
+├── Cosmos DB (🔜 For product persistence)
+├── Azure SQL (🔜 For order management)
+└── Azure Storage (🔜 For file storage)
+```
+
+請參閱文末的「擴展指南」部分，了解逐步指導。
+
+## 包含的功能
+
+✅ **服務發現**：基於 DNS 的容器間自動發現  
 ✅ **負載平衡**：內建的副本間負載平衡  
-✅ **自動調整**：每個服務可獨立調整規模  
-✅ **健康監控**：存活性與就緒性探測  
-✅ **分散式追蹤**：整合 Application Insights  
-✅ **訊息佇列**：使用 Service Bus 進行非同步處理  
-✅ **受控身分識別**：安全存取 Azure 資源  
-✅ **藍綠部署**：零停機部署  
+✅ **自動縮放**：基於 HTTP 請求的獨立服務縮放  
+✅ **健康監控**：兩個服務的存活和就緒探測  
+✅ **分散式日誌**：使用 Application Insights 集中日誌記錄  
+✅ **內部網路**：安全的服務間通訊  
+✅ **容器編排**：自動部署和縮放  
+✅ **零停機更新**：滾動更新與版本管理  
 
 ## 先決條件
 
+### 必需工具
+
+開始之前，請確認您已安裝以下工具：
+
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)**（版本 1.0.0 或更高）
+   ```bash
+   azd version
+   # 預期輸出：azd版本1.0.0或更高
+   ```
+
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)**（版本 2.50.0 或更高）
+   ```bash
+   az --version
+   # 預期輸出：azure-cli 2.50.0 或更高版本
+   ```
+
+3. **[Docker](https://www.docker.com/get-started)**（用於本地開發/測試 - 可選）
+   ```bash
+   docker --version
+   # 預期輸出：Docker 版本 20.10 或更高
+   ```
+
+### Azure 要求
+
+- 一個有效的 **Azure 訂閱**（[建立免費帳戶](https://azure.microsoft.com/free/)）
+- 在您的訂閱中創建資源的權限
+- **Contributor** 角色在訂閱或資源群組中
+
+### 知識要求
+
+這是一個**進階級**範例。您應該具備：
+- 完成 [Simple Flask API 範例](../../../../../examples/container-app/simple-flask-api) 
+- 微服務架構的基本理解
+- 熟悉 REST API 和 HTTP
+- 理解容器概念
+
+**剛接觸容器應用？** 請先從 [Simple Flask API 範例](../../../../../examples/container-app/simple-flask-api) 開始學習基礎。
+
+## 快速開始（逐步指導）
+
+### 步驟 1：克隆並導航
+
 ```bash
-# Verify AZD installation
-azd version
+git clone https://github.com/microsoft/AZD-for-beginners.git
+cd AZD-for-beginners/examples/container-app/microservices
+```
 
-# Verify Azure CLI
-az version
+**✓ 成功檢查**：確認您看到 `azure.yaml`：
+```bash
+ls
+# 預期：README.md, azure.yaml, infra/, src/
+```
 
-# Login to Azure
+### 步驟 2：使用 Azure 驗證
+
+```bash
 azd auth login
 ```
 
-## 快速開始
+這將打開您的瀏覽器進行 Azure 驗證。使用您的 Azure 資格證書登錄。
+
+**✓ 成功檢查**：您應該看到：
+```
+Logged in to Azure.
+```
+
+### 步驟 3：初始化環境
 
 ```bash
-# Navigate to example
-cd examples/container-app/microservices
-
-# Initialize environment
-azd env new production
-
-# Configure settings
-azd env set AZURE_LOCATION eastus
-azd env set ENVIRONMENT_NAME production
-
-# Deploy all services
-azd up
-
-# Verify deployment
-azd show
+azd init
 ```
+
+**您將看到的提示**：
+- **環境名稱**：輸入一個簡短名稱（例如 `microservices-dev`）
+- **Azure 訂閱**：選擇您的訂閱
+- **Azure 位置**：選擇一個區域（例如 `eastus`，`westeurope`）
+
+**✓ 成功檢查**：您應該看到：
+```
+SUCCESS: New project initialized!
+```
+
+### 步驟 4：部署基礎設施和服務
+
+```bash
+azd up
+```
+
+**發生了什麼**（需要 8-12 分鐘）：
+1. 創建容器應用環境
+2. 創建 Application Insights 用於監控
+3. 構建 API Gateway 容器（Node.js）
+4. 構建產品服務容器（Python）
+5. 將兩個容器部署到 Azure
+6. 配置網路和健康檢查
+7. 設置監控和日誌記錄
+
+**✓ 成功檢查**：您應該看到：
+```
+SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
+Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
+```
+
+**⏱️ 時間**：8-12 分鐘
+
+### 步驟 5：測試部署
+
+```bash
+# 獲取閘道端點
+GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
+
+# 測試 API 閘道健康狀態
+curl $GATEWAY_URL/health
+
+# 預期輸出：
+# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
+```
+
+**通過網關測試產品服務**：
+```bash
+# 列出產品
+curl $GATEWAY_URL/api/products
+
+# 預期輸出：
+# [
+#   {"id":1,"name":"筆記型電腦","price":999.99,"stock":50},
+#   {"id":2,"name":"滑鼠","price":29.99,"stock":200},
+#   {"id":3,"name":"鍵盤","price":79.99,"stock":150}
+# ]
+```
+
+**✓ 成功檢查**：兩個端點返回 JSON 數據且無錯誤。
+
+---
+
+**🎉 恭喜！** 您已成功將微服務架構部署到 Azure！
 
 ## 專案結構
 
+所有實現文件均已包含——這是一個完整的、可運行的範例：
+
 ```
 microservices/
-├── azure.yaml                    # AZD configuration
-├── infra/
-│   ├── main.bicep               # Main infrastructure
-│   ├── main.parameters.json
-│   ├── core/
-│   │   ├── monitor.bicep        # Application Insights
-│   │   ├── servicebus.bicep     # Service Bus
-│   │   ├── cosmos.bicep         # Cosmos DB
-│   │   └── sql.bicep            # SQL Database
-│   └── app/
-│       ├── container-env.bicep  # Container environment
-│       ├── api-gateway.bicep
-│       ├── product-service.bicep
-│       ├── order-service.bicep
-│       ├── user-service.bicep
-│       └── notification-service.bicep
-├── src/
-│   ├── api-gateway/
-│   │   ├── Dockerfile
-│   │   ├── app.js
-│   │   └── package.json
-│   ├── product-service/
-│   │   ├── Dockerfile
-│   │   ├── main.py
-│   │   └── requirements.txt
-│   ├── order-service/
-│   │   ├── Dockerfile
-│   │   ├── Program.cs
-│   │   └── OrderService.csproj
-│   ├── user-service/
-│   │   ├── Dockerfile
-│   │   ├── main.go
-│   │   └── go.mod
-│   └── notification-service/
-│       ├── Dockerfile
-│       ├── handler.js
-│       └── package.json
-└── tests/
-    ├── integration/
-    └── load/
+│
+├── README.md                         # This file
+├── azure.yaml                        # AZD configuration
+├── .gitignore                        # Git ignore patterns
+│
+├── infra/                           # Infrastructure as Code (Bicep)
+│   ├── main.bicep                   # Main orchestration
+│   ├── abbreviations.json           # Naming conventions
+│   ├── core/                        # Shared infrastructure
+│   │   ├── container-apps-environment.bicep  # Container environment + registry
+│   │   └── monitor.bicep            # Application Insights + Log Analytics
+│   └── app/                         # Service definitions
+│       ├── api-gateway.bicep        # API Gateway container app
+│       └── product-service.bicep    # Product Service container app
+│
+└── src/                             # Application source code
+    ├── api-gateway/                 # Node.js API Gateway
+    │   ├── app.js                   # Express server with routing
+    │   ├── package.json             # Node dependencies
+    │   └── Dockerfile               # Container definition
+    └── product-service/             # Python Product Service
+        ├── main.py                  # Flask API with product data
+        ├── requirements.txt         # Python dependencies
+        └── Dockerfile               # Container definition
 ```
+
+**每個組件的功能：**
+
+**基礎設施 (infra/)**：
+- `main.bicep`：協調所有 Azure 資源及其依賴項
+- `core/container-apps-environment.bicep`：創建容器應用環境和 Azure 容器註冊表
+- `core/monitor.bicep`：設置 Application Insights 用於分散式日誌記錄
+- `app/*.bicep`：個別容器應用定義，包含縮放和健康檢查
+
+**API Gateway (src/api-gateway/)**：
+- 面向公眾的服務，將請求路由到後端服務
+- 實現日誌記錄、錯誤處理和請求轉發
+- 展示服務間的 HTTP 通訊
+
+**產品服務 (src/product-service/)**：
+- 內部服務，包含產品目錄（為簡化使用內存）
+- 提供健康檢查的 REST API
+- 展示後端微服務模式
 
 ## 服務概覽
 
-### API Gateway (Node.js)
+### API Gateway (Node.js/Express)
 
-**埠號**: 8080  
-**目的**: 將請求路由到適當的微服務  
-**端點**:
-- `GET /health` - 健康檢查
-- `GET /api/products/*` - 產品服務路由
-- `GET /api/orders/*` - 訂單服務路由
-- `GET /api/users/*` - 使用者服務路由
+**端口**：8080  
+**訪問**：公開（外部入口）  
+**目的**：將傳入請求路由到適當的後端服務  
 
-**功能**:
-- 請求路由
-- 流量限制
-- JWT 驗證
-- 請求/回應日誌記錄
+**端點**：
+- `GET /` - 服務信息
+- `GET /health` - 健康檢查端點
+- `GET /api/products` - 轉發到產品服務（列出所有）
+- `GET /api/products/:id` - 轉發到產品服務（按 ID 獲取）
 
-### 產品服務 (Python)
+**主要功能**：
+- 使用 axios 進行請求路由
+- 集中日誌記錄
+- 錯誤處理和超時管理
+- 通過環境變數進行服務發現
+- 集成 Application Insights
 
-**埠號**: 8000  
-**資料庫**: Cosmos DB  
-**目的**: 管理產品目錄  
-**端點**:
-- `GET /products` - 列出產品
-- `GET /products/{id}` - 獲取產品詳情
-- `POST /products` - 新增產品
-- `PUT /products/{id}` - 更新產品
-- `DELETE /products/{id}` - 刪除產品
-
-### 訂單服務 (C#)
-
-**埠號**: 5000  
-**資料庫**: Azure SQL  
-**目的**: 處理並管理訂單  
-**端點**:
-- `GET /orders` - 列出訂單
-- `GET /orders/{id}` - 獲取訂單詳情
-- `POST /orders` - 新增訂單
-- `PUT /orders/{id}/status` - 更新訂單狀態
-
-**功能**:
-- 交易管理
-- 使用 Saga 模式處理分散式交易
-- 發佈事件到 Service Bus
-
-### 使用者服務 (Go)
-
-**埠號**: 9000  
-**資料庫**: Cosmos DB  
-**目的**: 使用者驗證與個人資料管理  
-**端點**:
-- `POST /auth/login` - 使用者登入
-- `POST /auth/register` - 使用者註冊
-- `GET /users/{id}` - 獲取使用者資料
-- `PUT /users/{id}` - 更新個人資料
-
-### 通知服務 (Node.js)
-
-**目的**: 處理來自佇列的通知事件  
-**觸發條件**: Service Bus 訊息  
-**通知類型**:
-- 電子郵件通知
-- 簡訊提醒
-- 推播通知
-
-## 部署
-
-### 全部服務部署
-
-```bash
-# Deploy infrastructure and all services
-azd up
-```
-
-### 部署單一服務
-
-```bash
-# Deploy only product service
-azd deploy product-service
-
-# Deploy only order service
-azd deploy order-service
-```
-
-### 藍綠部署
-
-```bash
-# Deploy new version without traffic
-azd deploy product-service --revision-suffix v2 --no-traffic
-
-# Test new version
-curl https://product-service--v2.example.azurecontainerapps.io/health
-
-# Gradually shift traffic (10% to v2)
-az containerapp ingress traffic set \
-  --name product-service \
-  --resource-group rg-microservices \
-  --revision-weight latest=90 v2=10
-
-# Complete cutover
-az containerapp ingress traffic set \
-  --name product-service \
-  --resource-group rg-microservices \
-  --revision-weight v2=100
-```
-
-## 設定
-
-### 環境變數
-
-```bash
-# API Gateway
-azd env set GATEWAY_PORT 8080
-azd env set JWT_SECRET "your-secret-key"
-azd env set RATE_LIMIT_REQUESTS 1000
-
-# Product Service
-azd env set COSMOS_DATABASE products
-azd env set COSMOS_CONTAINER items
-
-# Order Service
-azd env set SQL_DATABASE orders
-azd env set SQL_CONNECTION_TIMEOUT 30
-
-# User Service
-azd env set JWT_EXPIRATION 3600
-azd env set BCRYPT_ROUNDS 10
-```
-
-### 調整規模設定
-
-```bash
-# Set scaling rules per service
-azd env set PRODUCT_MIN_REPLICAS 2
-azd env set PRODUCT_MAX_REPLICAS 20
-
-azd env set ORDER_MIN_REPLICAS 3
-azd env set ORDER_MAX_REPLICAS 30
-```
-
-## 服務通訊
-
-### 同步通訊 (HTTP)
-
-服務間使用內部 DNS 名稱進行通訊：
-
+**代碼亮點** (`src/api-gateway/app.js`)：
 ```javascript
-// From API Gateway to Product Service
-const response = await fetch('http://product-service/products');
-
-// From Order Service to User Service
-const user = await httpClient.get('http://user-service/users/123');
+// 內部服務通信
+app.get('/api/products', async (req, res) => {
+  const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
+  res.json(response.data);
+});
 ```
 
-### 非同步通訊 (Service Bus)
+### 產品服務 (Python/Flask)
 
+**端口**：8000  
+**訪問**：僅內部（無外部入口）  
+**目的**：管理產品目錄，使用內存數據  
+
+**端點**：
+- `GET /` - 服務信息
+- `GET /health` - 健康檢查端點
+- `GET /products` - 列出所有產品
+- `GET /products/<id>` - 按 ID 獲取產品
+
+**主要功能**：
+- 使用 Flask 實現 RESTful API
+- 內存產品存儲（簡單，無需資料庫）
+- 使用探測進行健康監控
+- 結構化日誌記錄
+- 集成 Application Insights
+
+**數據模型**：
 ```python
-# Product Service publishes event
-from azure.servicebus import ServiceBusClient, ServiceBusMessage
-
-async def publish_product_created(product_id):
-    async with ServiceBusClient.from_connection_string(
-        conn_str, transport_type=TransportType.AmqpOverWebsocket
-    ) as client:
-        sender = client.get_queue_sender('product-events')
-        message = ServiceBusMessage(json.dumps({
-            'event': 'ProductCreated',
-            'productId': product_id,
-            'timestamp': datetime.utcnow().isoformat()
-        }))
-        await sender.send_messages(message)
-```
-
-```javascript
-// Notification Service subscribes
-const { ServiceBusClient } = require('@azure/service-bus');
-
-async function processMessages() {
-    const receiver = client.createReceiver('product-events');
-    
-    receiver.subscribe({
-        processMessage: async (message) => {
-            const event = JSON.parse(message.body);
-            await sendNotification(event);
-        }
-    });
+{
+  "id": 1,
+  "name": "Laptop",
+  "description": "High-performance laptop",
+  "price": 999.99,
+  "stock": 50
 }
 ```
 
-## 監控
+**為什麼僅內部訪問？**
+產品服務不對外公開。所有請求必須通過 API Gateway，這提供了：
+- 安全性：受控的訪問點
+- 靈活性：可以更改後端而不影響客戶端
+- 監控：集中請求日誌記錄
 
-### 查看所有服務日誌
+## 理解服務通訊
+
+### 服務如何相互通訊
+
+在此範例中，API Gateway 使用**內部 HTTP 調用**與產品服務通訊：
+
+```javascript
+// API Gateway (src/api-gateway/app.js)
+const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
+
+// 發送內部 HTTP 請求
+const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
+```
+
+**關鍵點**：
+
+1. **基於 DNS 的發現**：容器應用自動為內部服務提供 DNS
+   - 產品服務 FQDN：`product-service.internal.<environment>.azurecontainerapps.io`
+   - 簡化為：`http://product-service`（容器應用自動解析）
+
+2. **無公開暴露**：產品服務在 Bicep 中設置為 `external: false`
+   - 僅能在容器應用環境內訪問
+   - 無法從互聯網訪問
+
+3. **環境變數**：服務 URL 在部署時注入
+   - Bicep 將內部 FQDN 傳遞給網關
+   - 應用代碼中無需硬編碼 URL
+
+**比喻**：這就像辦公室房間。API Gateway 是接待處（面向公眾），而產品服務是辦公室房間（僅內部）。訪客必須通過接待處才能進入任何辦公室。
+
+## 部署選項
+
+### 完整部署（推薦）
 
 ```bash
-# Stream logs from all services
-azd logs --follow
+# 部署基礎設施和兩個服務
+azd up
+```
 
-# View logs for specific service
+這將部署：
+1. 容器應用環境
+2. Application Insights
+3. 容器註冊表
+4. API Gateway 容器
+5. 產品服務容器
+
+**時間**：8-12 分鐘
+
+### 部署單個服務
+
+```bash
+# 僅部署一個服務（在初始 azd up 之後）
+azd deploy api-gateway
+
+# 或部署產品服務
+azd deploy product-service
+```
+
+**使用場景**：當您更新了一個服務的代碼並希望僅重新部署該服務。
+
+### 更新配置
+
+```bash
+# 更改縮放參數
+azd env set GATEWAY_MAX_REPLICAS 30
+
+# 使用新配置重新部署
+azd up
+```
+
+## 配置
+
+### 縮放配置
+
+兩個服務的 Bicep 文件中均配置了基於 HTTP 的自動縮放：
+
+**API Gateway**：
+- 最小副本數：2（始終至少 2 個以保證可用性）
+- 最大副本數：20
+- 縮放觸發器：每副本 50 個並發請求
+
+**產品服務**：
+- 最小副本數：1（如有需要可縮放至 0）
+- 最大副本數：10
+- 縮放觸發器：每副本 100 個並發請求
+
+**自定義縮放**（在 `infra/app/*.bicep` 中）：
+```bicep
+scale: {
+  minReplicas: 1
+  maxReplicas: 10
+  rules: [
+    {
+      name: 'http-scale-rule'
+      http: {
+        metadata: {
+          concurrentRequests: '100'  // Adjust this
+        }
+      }
+    }
+  ]
+}
+```
+
+### 資源分配
+
+**API Gateway**：
+- CPU：1.0 vCPU
+- 記憶體：2 GiB
+- 原因：處理所有外部流量
+
+**產品服務**：
+- CPU：0.5 vCPU
+- 記憶體：1 GiB
+- 原因：輕量級內存操作
+
+### 健康檢查
+
+兩個服務均包含存活和就緒探測：
+
+```bicep
+probes: [
+  {
+    type: 'Liveness'
+    httpGet: {
+      path: '/health'
+      port: 8080
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+  }
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 8080
+    }
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  }
+]
+```
+
+**這意味著**：
+- **存活性**：如果健康檢查失敗，容器應用將重新啟動容器
+- **就緒性**：如果未就緒，容器應用將停止將流量路由到該副本
+
+## 監控與可觀察性
+
+### 查看服務日誌
+
+```bash
+# 從 API Gateway 串流日誌
+azd logs api-gateway --follow
+
+# 查看最近的產品服務日誌
 azd logs product-service --tail 100
+
+# 查看兩個服務的所有日誌
+azd logs --follow
+```
+
+**預期輸出**：
+```
+[api-gateway] API Gateway listening on port 8080
+[api-gateway] Product Service URL: http://product-service
+[api-gateway] GET /api/products 200 - 45ms
+[product-service] Retrieved 5 products
 ```
 
 ### Application Insights 查詢
 
+在 Azure Portal 中訪問 Application Insights，然後運行以下查詢：
+
+**查找慢速請求**：
 ```kusto
-// Find slow requests across all services
 requests
-| where duration > 1000
+| where timestamp > ago(1h)
+| where duration > 1000  // Requests taking >1 second
 | summarize count() by name, cloud_RoleName
 | order by count_ desc
+```
 
-// Track service dependencies
+**跟蹤服務間調用**：
+```kusto
 dependencies
 | where timestamp > ago(1h)
-| summarize count() by target, name
-| order by count_ desc
+| where type == "Http"
+| project timestamp, name, target, duration, success
+| order by timestamp desc
+```
 
-// Error rate by service
+**按服務的錯誤率**：
+```kusto
 exceptions
 | where timestamp > ago(24h)
-| summarize errorCount = count() by cloud_RoleName
+| summarize errorCount = count() by cloud_RoleName, type
+| order by errorCount desc
 ```
 
-### 自訂指標儀表板
+**請求量隨時間變化**：
+```kusto
+requests
+| where timestamp > ago(1h)
+| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
+| render timechart
+```
+
+### 訪問監控儀表板
 
 ```bash
-# Open monitoring dashboard
-azd monitor --overview
+# 取得應用程式洞察詳細資訊
+azd env get-values | grep APPLICATIONINSIGHTS
 
-# View specific metrics
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.product-service.resourceId') \
-  --metric "Requests,CPUPercentage,MemoryPercentage"
+# 開啟 Azure Portal 監控
+az monitor app-insights component show \
+  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
+  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
+  --query "appId" -o tsv
 ```
 
-## 測試
+### 實時指標
 
-### 整合測試
+1. 在 Azure Portal 中導航到 Application Insights
+2. 點擊「實時指標」
+3. 查看實時請求、失敗和性能
+4. 測試運行：`curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-```bash
-# Run integration test suite
-cd tests/integration
-npm install
-npm test
+## 實踐練習
 
-# Test specific service
-npm test -- --service=product-service
-```
-
-### 負載測試
-
-```bash
-# Install Azure Load Testing CLI extension
-az extension add --name load
-
-# Run load test
-cd tests/load
-az load test create \
-  --name microservices-load-test \
-  --test-plan-file loadtest.jmx \
-  --engine-instances 10
-
-# View results
-az load test show --name microservices-load-test
-```
-
-### 端到端測試場景
-
-```bash
-# Create user
-USER_ID=$(curl -X POST \
-  $(azd show --output json | jq -r '.services.api-gateway.endpoint')/api/users \
-  -H "Content-Type: application/json" \
-  -d '{"email": "test@example.com", "name": "Test User"}' \
-  | jq -r '.id')
-
-# Create product
-PRODUCT_ID=$(curl -X POST \
-  $(azd show --output json | jq -r '.services.api-gateway.endpoint')/api/products \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Product", "price": 29.99}' \
-  | jq -r '.id')
-
-# Create order
-ORDER_ID=$(curl -X POST \
-  $(azd show --output json | jq -r '.services.api-gateway.endpoint')/api/orders \
-  -H "Content-Type: application/json" \
-  -d "{\"userId\": \"$USER_ID\", \"productId\": \"$PRODUCT_ID\", \"quantity\": 2}" \
-  | jq -r '.id')
-
-# Verify order
-curl $(azd show --output json | jq -r '.services.api-gateway.endpoint')/api/orders/$ORDER_ID
-```
-
-## 效能優化
-
-### 啟用 HTTP/2
-
-```bicep
-resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
-  properties: {
-    configuration: {
-      ingress: {
-        transport: 'http2'
-      }
-    }
-  }
-}
-```
-
-### 連線池化
-
-```python
-# Product Service - Reuse Cosmos DB client
-from azure.cosmos import CosmosClient
-
-class Database:
-    _client = None
-    
-    @classmethod
-    def get_client(cls):
-        if not cls._client:
-            cls._client = CosmosClient(url, credential)
-        return cls._client
-```
-
-### 快取策略
-
-```javascript
-// API Gateway - Redis cache integration
-const redis = require('redis');
-const client = redis.createClient({
-  socket: {
-    host: process.env.REDIS_HOST,
-    port: 6379
-  }
-});
-
-async function getCachedProduct(id) {
-  const cached = await client.get(`product:${id}`);
-  if (cached) return JSON.parse(cached);
-  
-  const product = await fetchFromService(id);
-  await client.setEx(`product:${id}`, 3600, JSON.stringify(product));
-  return product;
-}
-```
-
-## 安全性
-
-### 受控身分識別設定
-
-```bicep
-// Enable managed identity for all services
-resource productService 'Microsoft.App/containerApps@2023-05-01' = {
-  identity: {
-    type: 'SystemAssigned'
-  }
-}
-
-// Grant access to Cosmos DB
-resource cosmosRoleAssignment 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2023-04-15' = {
-  parent: cosmosAccount
-  name: guid(productService.id, cosmosAccount.id)
-  properties: {
-    principalId: productService.identity.principalId
-    roleDefinitionId: cosmosBuiltInDataContributor.id
-  }
-}
-```
-
-### 網路安全
-
-```bicep
-// Internal ingress for backend services
-resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
-  properties: {
-    configuration: {
-      ingress: {
-        external: false  // Only accessible within Container Apps environment
-        targetPort: 5000
-      }
-    }
-  }
-}
-```
-
-### API 金鑰輪替
-
-```bash
-# Rotate API keys using Key Vault
-az keyvault secret set \
-  --vault-name kv-microservices \
-  --name api-gateway-key \
-  --value $(openssl rand -base64 32)
-
-# Trigger rolling restart
-azd deploy api-gateway
-```
-
-## 疑難排解
-
-### 服務無法通訊
-
-```bash
-# Verify service discovery
-az containerapp show --name product-service --resource-group rg-microservices \
-  --query properties.configuration.ingress.fqdn
-
-# Test internal connectivity
-az containerapp exec --name api-gateway --resource-group rg-microservices \
-  --command "curl http://product-service/health"
-```
-
-### 服務間延遲過高
-
-```bash
-# Check service location
-az containerapp show --name product-service --resource-group rg-microservices \
-  --query location
-
-# Ensure all services are in same region and environment
-```
-
-### 訊息佇列積壓
-
-```bash
-# Check Service Bus metrics
-az monitor metrics list \
-  --resource-id $(az servicebus namespace show --name sb-microservices --resource-group rg-microservices --query id -o tsv) \
-  --metric "ActiveMessages" \
-  --start-time $(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ)
-
-# Scale up notification service
-az containerapp update \
-  --name notification-service \
-  --resource-group rg-microservices \
-  --min-replicas 5 \
-  --max-replicas 30
-```
+[注意：請參閱上方「實踐練習」部分，了解包括部署驗證、數據修改、自動縮放測試、錯誤處理以及添加第三個服務的詳細步驟練習。]
 
 ## 成本分析
 
-### 預估每月成本 (生產環境)
+### 每月預估成本（針對此 2 服務範例）
 
 | 資源 | 配置 | 預估成本 |
-|------|------|----------|
-| API Gateway | 2-10 副本, 1 vCPU, 2GB RAM | $50-200 |
-| 產品服務 | 2-20 副本, 0.5 vCPU, 1GB RAM | $40-300 |
-| 訂單服務 | 3-30 副本, 1 vCPU, 2GB RAM | $100-500 |
-| 使用者服務 | 2-15 副本, 0.5 vCPU, 1GB RAM | $40-250 |
-| 通知服務 | 1-10 副本, 0.25 vCPU, 0.5GB RAM | $20-100 |
-| Cosmos DB | 400 RU/s, 10GB 儲存空間 | $24 |
-| Azure SQL | 基本層 | $5 |
-| Service Bus | 標準層 | $10 |
-| Application Insights | 5GB/月 | $10 |
-| **總計** | | **$299-1,399/月** |
+|----------|--------------|----------------|
+| API Gateway | 2-20 副本，1 vCPU，2GB RAM | $30-150 |
+| 產品服務 | 1-10 副本，0.5 vCPU，1GB RAM | $15-75 |
+| 容器註冊表 | 基本層 | $5 |
+| Application Insights | 1-2 GB/月 | $5-10 |
+| 日誌分析 | 1 GB/月 | $3 |
+| **總計** | | **$58-243/月** |
 
-### 成本優化建議
+**按使用情況的成本分解**：
+- **輕量流量**（測試/學習）：~$60/月
+- **中等流量**（小型生產環境）：~$120/月
+- **高流量**（繁忙時段）：~$240/月
 
-```bash
-# Use scale-to-zero for non-critical services
-azd env set NOTIFICATION_MIN_REPLICAS 0
+### 成本優化提示
 
-# Use consumption-based Cosmos DB
-azd env set COSMOS_THROUGHPUT_MODE serverless
+1. **開發環境縮放至零**：
+   ```bicep
+   scale: {
+     minReplicas: 0  // Save $30-40/month when not in use
+     maxReplicas: 10
+   }
+   ```
 
-# Enable request-based autoscaling
-azd env set SCALE_RULE_TYPE http
-azd env set CONCURRENT_REQUESTS 100
-```
+2. **為 Cosmos DB 使用消耗計劃**（當您添加它時）：
+   - 僅支付您使用的部分
+   - 無最低收費
+
+3. **設置 Application Insights 抽樣**：
+   ```javascript
+   appInsights.defaultClient.config.samplingPercentage = 50; // 抽樣 50% 的請求
+   ```
+
+4. **不需要時清理**：
+   ```bash
+   azd down
+   ```
+
+### 免費層選項
+為了學習/測試，請考慮：
+- 使用 Azure 免費額度（前 30 天）
+- 保持最低副本數量
+- 測試完成後刪除（避免持續費用）
+
+---
 
 ## 清理
 
+為避免持續費用，請刪除所有資源：
+
 ```bash
-# Remove all resources
 azd down --force --purge
 ```
 
-## 下一步
+**確認提示**：
+```
+? Total resources to delete: 6, are you sure you want to continue? (y/N)
+```
 
-- 新增 [API Management](https://learn.microsoft.com/azure/api-management/) 以獲得進階的閘道功能
-- 實作 [Dapr](https://dapr.io/) 提供服務網格功能
-- 新增 [Azure Front Door](https://learn.microsoft.com/azure/frontdoor/) 進行全球負載平衡
-- 設定 [Azure Monitor Workbooks](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-overview) 建立自訂儀表板
+輸入 `y` 以確認。
 
-## 其他資源
+**刪除內容**：
+- Container Apps 環境
+- 兩個 Container Apps（gateway 和 product service）
+- Container Registry
+- Application Insights
+- Log Analytics Workspace
+- Resource Group
 
+**✓ 驗證清理**：
+```bash
+az group list --query "[?starts_with(name,'rg-microservices')]" --output table
+```
+
+應返回空值。
+
+---
+
+## 擴展指南：從 2 個服務到 5+ 個服務
+
+掌握這個 2 服務架構後，以下是擴展方法：
+
+### 第一階段：新增資料庫持久性（下一步）
+
+**為 Product Service 新增 Cosmos DB**：
+
+1. 建立 `infra/core/cosmos.bicep`：
+   ```bicep
+   resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
+     name: name
+     location: location
+     kind: 'GlobalDocumentDB'
+     properties: {
+       databaseAccountOfferType: 'Standard'
+       locations: [{ locationName: location, failoverPriority: 0 }]
+     }
+   }
+   ```
+
+2. 更新 Product Service，使用 Cosmos DB 替代記憶體內部資料
+
+3. 預估額外費用：約 $25/月（無伺服器）
+
+### 第二階段：新增第三個服務（訂單管理）
+
+**建立 Order Service**：
+
+1. 新資料夾：`src/order-service/`（Python/Node.js/C#）
+2. 新 Bicep 檔案：`infra/app/order-service.bicep`
+3. 更新 API Gateway，路由至 `/api/orders`
+4. 新增 Azure SQL Database 以保存訂單資料
+
+**架構變為**：
+```
+API Gateway → Product Service (Cosmos DB)
+           → Order Service (Azure SQL)
+```
+
+### 第三階段：新增非同步通訊（Service Bus）
+
+**實現事件驅動架構**：
+
+1. 新增 Azure Service Bus：`infra/core/servicebus.bicep`
+2. Product Service 發布 "ProductCreated" 事件
+3. Order Service 訂閱產品事件
+4. 新增 Notification Service 處理事件
+
+**模式**：請求/回應（HTTP）+ 事件驅動（Service Bus）
+
+### 第四階段：新增使用者身份驗證
+
+**實現 User Service**：
+
+1. 建立 `src/user-service/`（Go/Node.js）
+2. 新增 Azure AD B2C 或自訂 JWT 身份驗證
+3. API Gateway 驗證 Token
+4. 各服務檢查使用者權限
+
+### 第五階段：生產環境準備
+
+**新增以下元件**：
+- Azure Front Door（全球負載平衡）
+- Azure Key Vault（密鑰管理）
+- Azure Monitor Workbooks（自訂儀表板）
+- CI/CD Pipeline（GitHub Actions）
+- 藍綠部署
+- 所有服務的 Managed Identity
+
+**完整生產架構成本**：約 $300-1,400/月
+
+---
+
+## 了解更多
+
+### 相關文件
+- [Azure Container Apps 文件](https://learn.microsoft.com/azure/container-apps/)
 - [微服務架構指南](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [容器應用最佳實踐](https://learn.microsoft.com/azure/container-apps)
-- [使用 Application Insights 的分散式追蹤](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [分散式追蹤的 Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI 文件](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+
+### 本課程的下一步
+- ← 上一章：[簡單 Flask API](../../../../../examples/container-app/simple-flask-api) - 初學者單容器範例
+- → 下一章：[AI 整合指南](../../../../../examples/docs/ai-foundry) - 新增 AI 功能
+- 🏠 [課程首頁](../../README.md)
+
+### 比較：何時使用何種架構
+
+**單一 Container App**（簡單 Flask API 範例）：
+- ✅ 簡單應用程式
+- ✅ 單體架構
+- ✅ 部署快速
+- ❌ 可擴展性有限
+- **成本**：約 $15-50/月
+
+**微服務**（本範例）：
+- ✅ 複雜應用程式
+- ✅ 每個服務獨立擴展
+- ✅ 團隊自主性（不同服務由不同團隊管理）
+- ❌ 管理更複雜
+- **成本**：約 $60-250/月
+
+**Kubernetes (AKS)**：
+- ✅ 最大的控制和靈活性
+- ✅ 多雲可移植性
+- ✅ 高級網路功能
+- ❌ 需要 Kubernetes 專業知識
+- **成本**：最低約 $150-500/月
+
+**建議**：從 Container Apps（本範例）開始，只有在需要 Kubernetes 特定功能時才轉向 AKS。
+
+---
+
+## 常見問題
+
+**問：為什麼只有 2 個服務而不是 5+ 個？**  
+答：教育進程。先用簡單範例掌握基礎（服務通訊、監控、擴展），再增加複雜性。您在此學到的模式適用於 100 服務架構。
+
+**問：我可以自己新增更多服務嗎？**  
+答：當然可以！請參考上方擴展指南。每新增一個服務都遵循相同模式：建立 src 資料夾、建立 Bicep 檔案、更新 azure.yaml、部署。
+
+**問：這是生產環境準備好嗎？**  
+答：這是一個穩固的基礎。若要進入生產環境，請新增：Managed Identity、Key Vault、持久性資料庫、CI/CD Pipeline、監控警報和備份策略。
+
+**問：為什麼不使用 Dapr 或其他服務網格？**  
+答：為了學習保持簡單。一旦您了解原生 Container Apps 網路，便可在高級場景中添加 Dapr。
+
+**問：如何在本地進行除錯？**  
+答：使用 Docker 在本地運行服務：
+```bash
+cd src/api-gateway
+docker build -t local-gateway .
+docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
+```
+
+**問：我可以使用不同的程式語言嗎？**  
+答：可以！本範例展示了 Node.js（gateway）+ Python（product service）。您可以混合任何能在容器中運行的程式語言。
+
+**問：如果我沒有 Azure 額度怎麼辦？**  
+答：使用 Azure 免費層（新帳戶前 30 天）或僅部署短期測試並立即刪除。
+
+---
+
+> **🎓 學習路徑摘要**：您已學會部署具有自動擴展、內部網路、集中監控和生產準備模式的多服務架構。此基礎為您準備了複雜的分散式系統和企業微服務架構。
+
+**📚 課程導航：**
+- ← 上一章：[簡單 Flask API](../../../../../examples/container-app/simple-flask-api)
+- → 下一章：[資料庫整合範例](../../../../../examples/database-app)
+- 🏠 [課程首頁](../../README.md)
+- 📖 [Container Apps 最佳實踐](../../docs/deployment/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而產生的任何誤解或誤釋不承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
