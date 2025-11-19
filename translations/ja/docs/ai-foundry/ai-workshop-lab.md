@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "22e9deee2d82e70fc841c60f97627916",
-  "translation_date": "2025-09-23T14:10:33+00:00",
+  "original_hash": "8b26783231714a00efafee3aca8b233c",
+  "translation_date": "2025-11-19T18:29:38+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "ja"
 }
 -->
 # AIワークショップラボ: AIソリューションをAZDでデプロイ可能にする
 
-**章のナビゲーション:**
+**章ナビゲーション:**
 - **📚 コースホーム**: [AZD初心者向け](../../README.md)
 - **📖 現在の章**: 第2章 - AIファースト開発
-- **⬅️ 前章**: [AIモデルのデプロイ](ai-model-deployment.md)
-- **➡️ 次章**: [AIの運用ベストプラクティス](production-ai-practices.md)
+- **⬅️ 前へ**: [AIモデルのデプロイ](ai-model-deployment.md)
+- **➡️ 次へ**: [本番AIのベストプラクティス](production-ai-practices.md)
 - **🚀 次の章**: [第3章: 設定](../getting-started/configuration.md)
 
 ## ワークショップ概要
 
-このハンズオンラボでは、既存のAIテンプレートを使用してAzure Developer CLI (AZD)でデプロイする方法を開発者に指導します。Azure AI Foundryサービスを使用した本番環境向けAIデプロイメントの基本的なパターンを学びます。
+このハンズオンラボでは、既存のAIテンプレートを使用してAzure Developer CLI (AZD) を使ったデプロイ方法を開発者に案内します。Microsoft Foundryサービスを活用した本番AIデプロイメントの基本パターンを学びます。
 
 **所要時間:** 2～3時間  
 **レベル:** 中級  
@@ -26,12 +26,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 🎓 学習目標
 
-このワークショップ終了時には以下ができるようになります:
+このワークショップを終えると、以下ができるようになります:
 - ✅ 既存のAIアプリケーションをAZDテンプレートに変換する
-- ✅ AZDを使用してAzure AI Foundryサービスを設定する
+- ✅ Microsoft FoundryサービスをAZDで設定する
 - ✅ AIサービスの安全な資格情報管理を実装する
-- ✅ 監視付きの本番環境向けAIアプリケーションをデプロイする
-- ✅ AIデプロイメントの一般的な問題をトラブルシュートする
+- ✅ 監視付きの本番対応AIアプリケーションをデプロイする
+- ✅ 一般的なAIデプロイメントの問題をトラブルシュートする
 
 ## 前提条件
 
@@ -42,7 +42,7 @@ CO_OP_TRANSLATOR_METADATA:
 - コードエディタ (VS Code推奨)
 
 ### Azureリソース
-- コントリビューターアクセス権を持つAzureサブスクリプション
+- コントリビュータ権限を持つAzureサブスクリプション
 - Azure OpenAIサービスへのアクセス (またはアクセスリクエストの能力)
 - リソースグループ作成権限
 
@@ -55,15 +55,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### ステップ1: 環境準備
 
-1. **ツールのインストールを確認:**
+1. **ツールのインストール確認:**
 ```bash
-# Check AZD installation
+# AZDのインストールを確認する
 azd version
 
-# Check Azure CLI
+# Azure CLIを確認する
 az --version
 
-# Login to Azure
+# Azureにログインする
 az login
 azd auth login
 ```
@@ -78,7 +78,7 @@ cd azure-search-openai-demo
 
 ### AI対応AZDテンプレートの構造
 
-AI対応AZDテンプレートの主要ファイルを探索します:
+AI対応AZDテンプレートの主要ファイルを探る:
 
 ```
 azure-search-openai-demo/
@@ -95,7 +95,7 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **ラボ演習 1.1: 設定を探索する**
+### **ラボ演習1.1: 設定を探る**
 
 1. **azure.yamlファイルを確認:**
 ```bash
@@ -107,12 +107,12 @@ cat azure.yaml
 - 環境変数のマッピング
 - ホスト設定
 
-2. **main.bicepインフラストラクチャをレビュー:**
+2. **main.bicepインフラストラクチャを確認:**
 ```bash
 cat infra/main.bicep
 ```
 
-**確認すべきAIパターン:**
+**特定すべきAIパターン:**
 - Azure OpenAIサービスのプロビジョニング
 - Cognitive Searchの統合
 - 安全なキー管理
@@ -127,7 +127,7 @@ cat infra/main.bicep
 
 ## モジュール2: 初めてのAIアプリケーションをデプロイする
 
-### ステップ2.1: 環境を初期化する
+### ステップ2.1: 環境の初期化
 
 1. **新しいAZD環境を作成:**
 ```bash
@@ -136,31 +136,31 @@ azd env new myai-workshop
 
 2. **必要なパラメータを設定:**
 ```bash
-# Set your preferred Azure region
+# お好みのAzureリージョンを設定してください
 azd env set AZURE_LOCATION eastus
 
-# Optional: Set specific OpenAI model
+# 任意: 特定のOpenAIモデルを設定してください
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### ステップ2.2: インフラストラクチャとアプリケーションをデプロイする
+### ステップ2.2: インフラとアプリケーションのデプロイ
 
 1. **AZDでデプロイ:**
 ```bash
 azd up
 ```
 
-**`azd up`で実行されること:**
+**`azd up`中に行われること:**
 - ✅ Azure OpenAIサービスのプロビジョニング
 - ✅ Cognitive Searchサービスの作成
-- ✅ Webアプリケーション用のApp Serviceの設定
+- ✅ Webアプリケーション用App Serviceのセットアップ
 - ✅ ネットワークとセキュリティの設定
 - ✅ アプリケーションコードのデプロイ
-- ✅ 監視とログの設定
+- ✅ 監視とログのセットアップ
 
-2. **デプロイ進行状況を監視**し、作成されるリソースを確認します。
+2. **デプロイ進行状況を監視**し、作成されるリソースを確認。
 
-### ステップ2.3: デプロイメントを確認する
+### ステップ2.3: デプロイの確認
 
 1. **デプロイされたリソースを確認:**
 ```bash
@@ -172,12 +172,12 @@ azd show
 azd show --output json | grep "webAppUrl"
 ```
 
-3. **AI機能をテストする:**
-   - Webアプリケーションに移動
+3. **AI機能をテスト:**
+   - Webアプリケーションにアクセス
    - サンプルクエリを試す
-   - AI応答が機能していることを確認
+   - AIの応答が機能していることを確認
 
-### **ラボ演習 2.1: トラブルシューティング練習**
+### **ラボ演習2.1: トラブルシューティング練習**
 
 **シナリオ**: デプロイは成功したが、AIが応答しない。
 
@@ -189,26 +189,26 @@ azd show --output json | grep "webAppUrl"
 
 **デバッグコマンド:**
 ```bash
-# Check environment variables
+# 環境変数を確認する
 azd env get-values
 
-# View deployment logs
+# デプロイメントログを表示する
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Check OpenAI deployment status
+# OpenAIのデプロイメント状況を確認する
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## モジュール3: AIアプリケーションをニーズに合わせてカスタマイズする
+## モジュール3: AIアプリケーションをニーズに合わせてカスタマイズ
 
-### ステップ3.1: AI設定を変更する
+### ステップ3.1: AI設定の変更
 
 1. **OpenAIモデルを更新:**
 ```bash
-# Change to a different model (if available in your region)
+# 別のモデルに変更する（お住まいの地域で利用可能な場合）
 azd env set AZURE_OPENAI_MODEL gpt-4
 
-# Redeploy with the new configuration
+# 新しい構成で再展開する
 azd deploy
 ```
 
@@ -233,54 +233,54 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### ステップ3.2: 環境固有の設定
 
-**ベストプラクティス**: 開発環境と本番環境で異なる設定を使用する。
+**ベストプラクティス**: 開発と本番で異なる設定を使用。
 
 1. **本番環境を作成:**
 ```bash
 azd env new myai-production
 ```
 
-2. **本番環境固有のパラメータを設定:**
+2. **本番固有のパラメータを設定:**
 ```bash
-# Production typically uses higher SKUs
+# 本番環境では通常、より高いSKUを使用します
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# Enable additional security features
+# 追加のセキュリティ機能を有効にします
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **ラボ演習 3.1: コスト最適化**
+### **ラボ演習3.1: コスト最適化**
 
-**課題**: 開発においてコスト効率の良いテンプレートを設定する。
+**課題**: 開発においてコスト効率の良いテンプレートを設定。
 
 **タスク:**
 1. 無料/基本ティアに設定可能なSKUを特定
-2. 環境変数を最小コストに設定
-3. デプロイして本番環境設定とコストを比較
+2. 最小コストのための環境変数を設定
+3. デプロイして本番設定とコストを比較
 
 **ヒント:**
-- Cognitive Servicesでは可能な場合F0 (無料)ティアを使用
-- 開発ではSearch Serviceの基本ティアを使用
-- Functionsでは消費プランを検討
+- Cognitive Servicesで可能な場合はF0 (無料) ティアを使用
+- 開発ではSearch ServiceをBasicティアに設定
+- FunctionsではConsumptionプランを検討
 
-## モジュール4: セキュリティと本番環境のベストプラクティス
+## モジュール4: セキュリティと本番のベストプラクティス
 
-### ステップ4.1: 資格情報管理のセキュリティ
+### ステップ4.1: 資格情報管理のセキュリティ強化
 
-**現在の課題**: 多くのAIアプリがAPIキーをハードコードしたり、不安全なストレージを使用している。
+**現在の課題**: 多くのAIアプリがAPIキーをハードコーディングまたは安全でないストレージを使用。
 
-**AZDの解決策**: マネージドID + Key Vaultの統合。
+**AZDソリューション**: マネージドID + Key Vault統合。
 
 1. **テンプレート内のセキュリティ設定を確認:**
 ```bash
-# Look for Key Vault and Managed Identity configuration
+# Key VaultとManaged Identityの設定を探す
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
 2. **マネージドIDが機能していることを確認:**
 ```bash
-# Check if the web app has the correct identity configuration
+# Webアプリが正しいアイデンティティ構成を持っているか確認する
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
@@ -315,14 +315,14 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 1. **Application Insightsを設定:**
 ```bash
-# Application Insights should be automatically configured
-# Check the configuration:
+# アプリケーションインサイトは自動的に構成される必要があります
+# 構成を確認してください:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
 2. **AI特有の監視を設定:**
 
-AI操作のカスタムメトリクスを追加:
+AI操作用のカスタムメトリクスを追加:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -343,49 +343,49 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **ラボ演習 4.1: セキュリティ監査**
+### **ラボ演習4.1: セキュリティ監査**
 
-**タスク**: デプロイメントをセキュリティベストプラクティスに基づいてレビューする。
+**タスク**: デプロイメントをセキュリティベストプラクティスに基づいてレビュー。
 
 **チェックリスト:**
-- [ ] コードや設定にハードコードされた秘密情報がない
+- [ ] コードや設定にハードコーディングされた秘密情報がない
 - [ ] サービス間認証にマネージドIDを使用
 - [ ] Key Vaultに機密設定を保存
 - [ ] ネットワークアクセスが適切に制限されている
 - [ ] 監視とログが有効化されている
 
-## モジュール5: 自分のAIアプリケーションを変換する
+## モジュール5: 独自のAIアプリケーションを変換する
 
-### ステップ5.1: 評価ワークシート
+### ステップ5.1: アセスメントワークシート
 
 **アプリを変換する前に**, 以下の質問に答えてください:
 
 1. **アプリケーションアーキテクチャ:**
-   - アプリが使用するAIサービスは何ですか？
-   - 必要なコンピュートリソースは何ですか？
-   - データベースが必要ですか？
-   - サービス間の依存関係は何ですか？
+   - アプリが使用するAIサービスは何か?
+   - 必要なコンピュートリソースは何か?
+   - データベースが必要か?
+   - サービス間の依存関係は何か?
 
 2. **セキュリティ要件:**
-   - アプリが扱う機密データは何ですか？
-   - 準拠すべきコンプライアンス要件は何ですか？
-   - プライベートネットワーキングが必要ですか？
+   - アプリが扱う機密データは何か?
+   - 準拠すべきコンプライアンス要件は何か?
+   - プライベートネットワーキングが必要か?
 
 3. **スケーリング要件:**
-   - 予想される負荷はどのくらいですか？
-   - 自動スケーリングが必要ですか？
-   - 地域的な要件はありますか？
+   - 想定される負荷はどのくらいか?
+   - 自動スケーリングが必要か?
+   - 地域的な要件はあるか?
 
-### ステップ5.2: AZDテンプレートを作成する
+### ステップ5.2: AZDテンプレートを作成
 
-**アプリを変換するためのパターンに従ってください:**
+**このパターンに従ってアプリを変換:**
 
 1. **基本構造を作成:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Initialize AZD template
+# AZDテンプレートを初期化
 azd init --template minimal
 ```
 
@@ -412,7 +412,7 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **インフラストラクチャテンプレートを作成:**
+3. **インフラテンプレートを作成:**
 
 **infra/main.bicep** - メインテンプレート:
 ```bicep
@@ -456,20 +456,20 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **ラボ演習 5.1: テンプレート作成チャレンジ**
+### **ラボ演習5.1: テンプレート作成チャレンジ**
 
-**課題**: ドキュメント処理AIアプリのAZDテンプレートを作成する。
+**課題**: ドキュメント処理AIアプリ用のAZDテンプレートを作成。
 
 **要件:**
-- コンテンツ分析のためのAzure OpenAI
-- OCRのためのDocument Intelligence
+- コンテンツ分析用のAzure OpenAI
+- OCR用のDocument Intelligence
 - ドキュメントアップロード用のStorage Account
-- 処理ロジックのためのFunction App
-- ユーザーインターフェースのためのWebアプリ
+- 処理ロジック用のFunction App
+- ユーザーインターフェース用のWebアプリ
 
 **ボーナスポイント:**
 - 適切なエラーハンドリングを追加
-- コスト推定を含める
+- コスト見積もりを含める
 - 監視ダッシュボードを設定
 
 ## モジュール6: 一般的な問題のトラブルシューティング
@@ -480,22 +480,22 @@ output name string = openAIAccount.name
 **症状:** デプロイがクォータエラーで失敗
 **解決策:**
 ```bash
-# Check current quotas
+# 現在のクォータを確認する
 az cognitiveservices usage list --location eastus
 
-# Request quota increase or try different region
+# クォータの増加をリクエストするか、別のリージョンを試してください
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
 #### 問題2: モデルが地域で利用不可
-**症状:** AI応答が失敗またはモデルデプロイメントエラー
+**症状:** AI応答が失敗またはモデルデプロイエラー
 **解決策:**
 ```bash
-# Check model availability by region
+# 地域ごとのモデルの利用可能性を確認する
 az cognitiveservices model list --location eastus
 
-# Update to available model
+# 利用可能なモデルに更新する
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
@@ -504,10 +504,10 @@ azd deploy
 **症状:** AIサービス呼び出し時に403 Forbiddenエラー
 **解決策:**
 ```bash
-# Check role assignments
+# ロールの割り当てを確認する
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Add missing roles
+# 欠けているロールを追加する
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -523,28 +523,28 @@ az role assignment create \
 3. ネットワーク接続と遅延を確認
 
 **解決策:**
-- よく使われるクエリのキャッシュを実装
+- 一般的なクエリにキャッシュを実装
 - ユースケースに適したOpenAIモデルを使用
-- 高負荷シナリオに対するリードレプリカを検討
+- 高負荷シナリオ用にリードレプリカを検討
 
-### **ラボ演習 6.1: デバッグチャレンジ**
+### **ラボ演習6.1: デバッグチャレンジ**
 
 **シナリオ**: デプロイは成功したが、アプリケーションが500エラーを返す。
 
 **デバッグタスク:**
 1. アプリケーションログを確認
-2. サービス接続性を確認
+2. サービス接続を確認
 3. 認証をテスト
 4. 設定をレビュー
 
-**使用するツール:**
+**使用ツール:**
 - `azd show`でデプロイ概要を確認
 - Azureポータルで詳細なサービスログを確認
-- Application Insightsでアプリケーションのテレメトリを確認
+- Application Insightsでアプリケーションテレメトリを確認
 
 ## モジュール7: 監視と最適化
 
-### ステップ7.1: 包括的な監視を設定する
+### ステップ7.1: 包括的な監視を設定
 
 1. **カスタムダッシュボードを作成:**
 
@@ -556,7 +556,7 @@ Azureポータルに移動し、以下を含むダッシュボードを作成:
 
 2. **アラートを設定:**
 ```bash
-# Alert for high error rate
+# 高いエラー率の警告
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -569,28 +569,28 @@ az monitor metrics alert create \
 
 1. **現在のコストを分析:**
 ```bash
-# Use Azure CLI to get cost data
+# Azure CLI を使用してコストデータを取得する
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **コスト管理を実施:**
+2. **コスト管理を実装:**
 - 予算アラートを設定
 - 自動スケーリングポリシーを使用
 - リクエストキャッシュを実装
 - OpenAIのトークン使用量を監視
 
-### **ラボ演習 7.1: パフォーマンス最適化**
+### **ラボ演習7.1: パフォーマンス最適化**
 
-**タスク**: パフォーマンスとコストの両方でAIアプリケーションを最適化する。
+**タスク**: AIアプリケーションをパフォーマンスとコストの両面で最適化。
 
 **改善すべきメトリクス:**
 - 平均応答時間を20%削減
-- 月額コストを15%削減
+- 月間コストを15%削減
 - 99.9%の稼働率を維持
 
 **試すべき戦略:**
 - 応答キャッシュを実装
-- トークン効率のためにプロンプトを最適化
+- トークン効率のためプロンプトを最適化
 - 適切なコンピュートSKUを使用
 - 適切な自動スケーリングを設定
 
@@ -598,78 +598,87 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ### チャレンジシナリオ
 
-以下の要件を満たす本番環境向けAI搭載カスタマーサービスチャットボットを作成する課題:
+以下の要件を満たす本番対応のAI搭載カスタマーサービスチャットボットを作成してください:
 
 **機能要件:**
 - 顧客との対話用Webインターフェース
-- 応答のためのAzure OpenAIとの統合
+- 応答用のAzure OpenAIとの統合
 - Cognitive Searchを使用したドキュメント検索機能
 - 既存の顧客データベースとの統合
 - 多言語対応
 
 **非機能要件:**
-- 1000人の同時ユーザーを処理可能
+- 1000人の同時ユーザーを処理
 - 99.9%の稼働率SLA
 - SOC 2準拠
-- 月額コスト500ドル以下
-- 複数の環境 (開発、ステージング、本番) にデプロイ可能
+- 月額500ドル以下のコスト
+- 複数の環境 (開発、ステージング、本番) へのデプロイ
 
 ### 実装手順
 
 1. **アーキテクチャを設計**
 2. **AZDテンプレートを作成**
-3. **セキュリティ対策を実施**
+3. **セキュリティ対策を実装**
 4. **監視とアラートを設定**
 5. **デプロイメントパイプラインを作成**
 6. **ソリューションを文書化**
 
 ### 評価基準
 
-- ✅ **機能性**: すべての要件を満たしているか
-- ✅ **セキュリティ**: ベストプラクティスが実施されているか
-- ✅ **スケーラビリティ**: 負荷に対応できるか
-- ✅ **保守性**: コードとインフラが整理されているか
-- ✅ **コスト**: 予算内に収まっているか
+- ✅ **機能性**: すべての要件を満たしているか?
+- ✅ **セキュリティ**: ベストプラクティスが実装されているか?
+- ✅ **スケーラビリティ**: 負荷に対応できるか?
+- ✅ **保守性**: コードとインフラが整理されているか?
+- ✅ **コスト**: 予算内に収まっているか?
 
 ## 追加リソース
 
 ### Microsoftドキュメント
 - [Azure Developer CLIドキュメント](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Azure OpenAIサービスドキュメント](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Azure AI Foundryドキュメント](https://learn.microsoft.com/azure/ai-studio/)
+- [Microsoft Foundryドキュメント](https://learn.microsoft.com/azure/ai-studio/)
 
 ### サンプルテンプレート
 - [Azure OpenAIチャットアプリ](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAIチャットアプリクイックスタート](https://github.com/Azure-Samples/openai-chat-app-quickstart)
-- [Contoso
+- [Contosoチャット](https://github.com/Azure-Samples/contoso-chat)
+
+### コミュニティリソース
+- [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [
 おめでとうございます！AIワークショップラボを完了しました。これで以下のことができるようになったはずです：
 
 - ✅ 既存のAIアプリケーションをAZDテンプレートに変換する
 - ✅ 本番環境対応のAIアプリケーションをデプロイする
-- ✅ AIワークロードにおけるセキュリティのベストプラクティスを実装する
-- ✅ AIアプリケーションのパフォーマンスを監視し、最適化する
+- ✅ AIワークロードのセキュリティベストプラクティスを実装する
+- ✅ AIアプリケーションのパフォーマンスを監視・最適化する
 - ✅ 一般的なデプロイメントの問題をトラブルシュートする
 
 ### 次のステップ
 1. これらのパターンを自身のAIプロジェクトに適用する
 2. テンプレートをコミュニティに還元する
-3. Azure AI Foundry Discordに参加して継続的なサポートを受ける
+3. Microsoft Foundry Discordに参加して継続的なサポートを受ける
 4. マルチリージョンデプロイメントなどの高度なトピックを探求する
 
 ---
 
-**ワークショップのフィードバック**: [Azure AI Foundry Discord #Azureチャンネル](https://discord.gg/microsoft-azure)で体験を共有して、このワークショップの改善にご協力ください。
+**ワークショップのフィードバック**: [Microsoft Foundry Discord #Azureチャンネル](https://discord.gg/microsoft-azure)で体験を共有して、このワークショップの改善にご協力ください。
 
 ---
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
 - **📖 現在の章**: 第2章 - AIファースト開発
-- **⬅️ 前章**: [AIモデルのデプロイ](ai-model-deployment.md)
-- **➡️ 次章**: [本番AIのベストプラクティス](production-ai-practices.md)
+- **⬅️ 前章**: [AIモデルのデプロイメント](ai-model-deployment.md)
+- **➡️ 次章**: [本番環境AIのベストプラクティス](production-ai-practices.md)
 - **🚀 次の章**: [第3章: 設定](../getting-started/configuration.md)
 
-**ヘルプが必要ですか？** AZDやAIデプロイメントに関するサポートやディスカッションのためにコミュニティに参加してください。
+**ヘルプが必要ですか？** AZDやAIデプロイメントに関するサポートやディスカッションのために、コミュニティに参加してください。
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責事項**:  
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文（元の言語で記載された文書）が公式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳をお勧めします。この翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いません。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

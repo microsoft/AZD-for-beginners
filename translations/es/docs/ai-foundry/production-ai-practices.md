@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T15:02:32+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-19T20:34:40+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "es"
 }
@@ -11,24 +11,24 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Navegación del Capítulo:**
 - **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 8 - Patrones de Producción y Empresariales
-- **⬅️ Capítulo Anterior**: [Capítulo 7: Resolución de Problemas](../troubleshooting/debugging.md)
+- **📖 Capítulo Actual**: Capítulo 8 - Patrones de Producción y Empresa
+- **⬅️ Capítulo Anterior**: [Capítulo 7: Solución de Problemas](../troubleshooting/debugging.md)
 - **⬅️ También Relacionado**: [Laboratorio de Taller de IA](ai-workshop-lab.md)
 - **🎯 Curso Completo**: [AZD Para Principiantes](../../README.md)
 
-## Descripción General
+## Resumen
 
-Esta guía proporciona las mejores prácticas para implementar cargas de trabajo de IA listas para producción utilizando Azure Developer CLI (AZD). Basadas en comentarios de la comunidad de Discord de Azure AI Foundry y en implementaciones reales de clientes, estas prácticas abordan los desafíos más comunes en sistemas de IA en producción.
+Esta guía proporciona las mejores prácticas para implementar cargas de trabajo de IA listas para producción utilizando Azure Developer CLI (AZD). Basadas en comentarios de la comunidad de Microsoft Foundry en Discord y despliegues reales de clientes, estas prácticas abordan los desafíos más comunes en sistemas de IA en producción.
 
 ## Principales Desafíos Abordados
 
 Según los resultados de nuestra encuesta comunitaria, estos son los principales desafíos que enfrentan los desarrolladores:
 
-- **45%** tienen dificultades con implementaciones de IA de múltiples servicios
+- **45%** tienen dificultades con despliegues de IA de múltiples servicios
 - **38%** enfrentan problemas con la gestión de credenciales y secretos  
-- **35%** encuentran complicado preparar y escalar para producción
+- **35%** encuentran difícil la preparación para producción y el escalado
 - **32%** necesitan mejores estrategias de optimización de costos
-- **29%** requieren mejoras en monitoreo y resolución de problemas
+- **29%** requieren mejoras en monitoreo y solución de problemas
 
 ## Patrones de Arquitectura para IA en Producción
 
@@ -131,7 +131,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 **Estrategia de Implementación**:
 - Sin comunicación entre servicios sin autenticación
-- Todas las llamadas a API usan identidades administradas
+- Todas las llamadas API usan identidades administradas
 - Aislamiento de red con puntos finales privados
 - Controles de acceso con privilegios mínimos
 
@@ -249,7 +249,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Rendimiento y Escalabilidad
+## Rendimiento y Escalado
 
 ### 1. Estrategias de Autoescalado
 
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Configuraciones Específicas por Entorno**:
 
 ```bash
-# Development environment
+# Entorno de desarrollo
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Entorno de producción
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Gestión de Costos de OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Optimización de tokens a nivel de aplicación
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Truncar el contexto, no la entrada del usuario
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Estimación aproximada: 1 token ≈ 4 caracteres
     return Math.ceil(text.length / 4);
   }
 }
@@ -506,9 +506,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitoreo Específico para IA
+### 2. Monitoreo Específico de IA
 
-**Paneles Personalizados para Métricas de IA**:
+**Tableros Personalizados para Métricas de IA**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Verificaciones de Salud y Monitoreo de Disponibilidad
+### 3. Verificaciones de Salud y Monitoreo de Tiempo de Actividad
 
 ```bicep
 // Application Insights availability tests
@@ -608,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Recuperación ante Desastres y Alta Disponibilidad
 
-### 1. Implementación Multi-Región
+### 1. Despliegue Multi-Región
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Verificar si todos los servicios requeridos están en funcionamiento
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Validar los despliegues de modelos de OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Probar la conectividad del servicio de IA
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -852,21 +852,21 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Caché implementado
 - [ ] Balanceo de carga configurado
 - [ ] CDN para contenido estático
-- [ ] Agrupación de conexiones de base de datos
+- [ ] Pooling de conexiones a la base de datos
 - [ ] Optimización del uso de tokens
 
 ### Monitoreo ✅
 - [ ] Application Insights configurado
 - [ ] Métricas personalizadas definidas
 - [ ] Reglas de alertas configuradas
-- [ ] Panel creado
+- [ ] Tablero creado
 - [ ] Verificaciones de salud implementadas
-- [ ] Políticas de retención de registros
+- [ ] Políticas de retención de logs
 
 ### Confiabilidad ✅
-- [ ] Implementación multi-región
+- [ ] Despliegue multi-región
 - [ ] Plan de respaldo y recuperación
-- [ ] Interruptores automáticos implementados
+- [ ] Circuit breakers implementados
 - [ ] Políticas de reintento configuradas
 - [ ] Degradación controlada
 - [ ] Puntos finales de verificación de salud
@@ -876,7 +876,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Dimensionamiento correcto de recursos
 - [ ] Descuentos para desarrollo/pruebas aplicados
 - [ ] Instancias reservadas adquiridas
-- [ ] Panel de monitoreo de costos
+- [ ] Tablero de monitoreo de costos
 - [ ] Revisiones regulares de costos
 
 ### Cumplimiento ✅
@@ -887,23 +887,23 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Evaluaciones regulares de seguridad
 - [ ] Plan de respuesta a incidentes
 
-## Indicadores de Rendimiento
+## Referencias de Rendimiento
 
 ### Métricas Típicas de Producción
 
 | Métrica | Objetivo | Monitoreo |
 |--------|----------|-----------|
 | **Tiempo de Respuesta** | < 2 segundos | Application Insights |
-| **Disponibilidad** | 99.9% | Monitoreo de Disponibilidad |
-| **Tasa de Errores** | < 0.1% | Registros de Aplicación |
-| **Uso de Tokens** | < $500/mes | Gestión de Costos |
-| **Usuarios Concurrentes** | 1000+ | Pruebas de Carga |
-| **Tiempo de Recuperación** | < 1 hora | Pruebas de Recuperación ante Desastres |
+| **Disponibilidad** | 99.9% | Monitoreo de tiempo de actividad |
+| **Tasa de Errores** | < 0.1% | Logs de la aplicación |
+| **Uso de Tokens** | < $500/mes | Gestión de costos |
+| **Usuarios Concurrentes** | 1000+ | Pruebas de carga |
+| **Tiempo de Recuperación** | < 1 hora | Pruebas de recuperación ante desastres |
 
 ### Pruebas de Carga
 
 ```bash
-# Load testing script for AI applications
+# Script de prueba de carga para aplicaciones de IA
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,11 +913,11 @@ python scripts/load_test.py \
 
 ## 🤝 Mejores Prácticas de la Comunidad
 
-Basado en comentarios de la comunidad de Discord de Azure AI Foundry:
+Basado en comentarios de la comunidad de Microsoft Foundry en Discord:
 
 ### Principales Recomendaciones de la Comunidad:
 
-1. **Comienza Pequeño, Escala Gradualmente**: Inicia con SKUs básicos y escala según el uso real
+1. **Comienza Pequeño, Escala Gradualmente**: Empieza con SKUs básicos y escala según el uso real
 2. **Monitorea Todo**: Configura un monitoreo completo desde el primer día
 3. **Automatiza la Seguridad**: Usa infraestructura como código para una seguridad consistente
 4. **Prueba a Fondo**: Incluye pruebas específicas de IA en tu pipeline
@@ -925,16 +925,16 @@ Basado en comentarios de la comunidad de Discord de Azure AI Foundry:
 
 ### Errores Comunes a Evitar:
 
-- ❌ Codificar claves de API directamente en el código
+- ❌ Codificar claves API directamente en el código
 - ❌ No configurar un monitoreo adecuado
 - ❌ Ignorar la optimización de costos
-- ❌ No probar escenarios de falla
-- ❌ Implementar sin verificaciones de salud
+- ❌ No probar escenarios de fallos
+- ❌ Desplegar sin verificaciones de salud
 
 ## Recursos Adicionales
 
 - **Marco de Arquitectura Bien Diseñada de Azure**: [Guía para cargas de trabajo de IA](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Documentación de Azure AI Foundry**: [Documentación oficial](https://learn.microsoft.com/azure/ai-studio/)
+- **Documentación de Microsoft Foundry**: [Documentos oficiales](https://learn.microsoft.com/azure/ai-studio/)
 - **Plantillas de la Comunidad**: [Ejemplos de Azure](https://github.com/Azure-Samples)
 - **Comunidad en Discord**: [Canal #Azure](https://discord.gg/microsoft-azure)
 
@@ -942,14 +942,16 @@ Basado en comentarios de la comunidad de Discord de Azure AI Foundry:
 
 **Navegación del Capítulo:**
 - **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 8 - Patrones de Producción y Empresariales
-- **⬅️ Capítulo Anterior**: [Capítulo 7: Resolución de Problemas](../troubleshooting/debugging.md)
+- **📖 Capítulo Actual**: Capítulo 8 - Patrones de Producción y Empresa
+- **⬅️ Capítulo Anterior**: [Capítulo 7: Solución de Problemas](../troubleshooting/debugging.md)
 - **⬅️ También Relacionado**: [Laboratorio de Taller de IA](ai-workshop-lab.md)
 - **🎆 Curso Completo**: [AZD Para Principiantes](../../README.md)
 
-**Recuerda**: Las cargas de trabajo de IA en producción requieren una planificación cuidadosa, monitoreo y optimización continua. Comienza con estos patrones y adáptalos a tus necesidades específicas.
+**Recuerda**: Las cargas de trabajo de IA en producción requieren una planificación cuidadosa, monitoreo y optimización continua. Comienza con estos patrones y adáptalos a tus requisitos específicos.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
-  "translation_date": "2025-09-17T14:13:48+00:00",
+  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
+  "translation_date": "2025-11-19T18:37:22+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "ja"
 }
@@ -14,7 +14,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 現在の章**: 第1章 - 基礎とクイックスタート
 - **⬅️ 前章**: [AZDの基本](azd-basics.md)
 - **➡️ 次章**: [初めてのプロジェクト](first-project.md)
-- **🚀 次の章**: [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 次の章**: [第2章: AIファースト開発](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## はじめに
 
@@ -23,7 +23,7 @@ CO_OP_TRANSLATOR_METADATA:
 ## 学習目標
 
 このレッスンの終了時には以下を達成できます:
-- Azure Developer CLI をオペレーティングシステムにインストールする
+- 使用しているオペレーティングシステムにAzure Developer CLIを正常にインストールする
 - 複数の方法でAzureの認証を設定する
 - 必要な前提条件を備えた開発環境をセットアップする
 - 異なるインストールオプションとその使用タイミングを理解する
@@ -31,14 +31,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 学習成果
 
-このレッスンを完了すると、以下ができるようになります:
+このレッスンを完了すると以下ができるようになります:
 - プラットフォームに適した方法でazdをインストールする
 - `azd auth login` を使用してAzureに認証する
 - インストールを確認し、基本的なazdコマンドをテストする
 - azdを最適に使用するための開発環境を設定する
-- 一般的なインストールの問題を自力で解決する
+- 一般的なインストール問題を自力で解決する
 
-このガイドは、オペレーティングシステムや開発環境に関係なく、Azure Developer CLI をシステムにインストールして設定する方法をサポートします。
+このガイドは、オペレーティングシステムや開発環境に関係なく、Azure Developer CLIをシステムにインストールして設定する方法を提供します。
 
 ## 前提条件
 
@@ -54,7 +54,7 @@ azdをインストールする前に以下を確認してください:
 
 #### オプション1: PowerShell (推奨)
 ```powershell
-# Run as Administrator or with elevated privileges
+# 管理者として、または昇格した権限で実行してください
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
@@ -88,7 +88,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 #### オプション3: 手動インストール
 ```bash
-# Download and install
+# ダウンロードしてインストール
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
 ```
 
@@ -103,17 +103,17 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 **Ubuntu/Debian:**
 ```bash
-# Add Microsoft package repository
+# Microsoft パッケージリポジトリを追加する
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Install azd
+# azd をインストールする
 sudo apt-get update
 sudo apt-get install azd
 ```
 
 **RHEL/CentOS/Fedora:**
 ```bash
-# Add Microsoft package repository
+# Microsoft パッケージリポジトリを追加
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
 sudo dnf install azd
@@ -121,30 +121,30 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azdはGitHub Codespacesにプリインストールされています。Codespaceを作成するだけで、すぐにazdを使用できます。
+azdはGitHub Codespacesにプリインストールされています。Codespaceを作成してすぐにazdを使用できます。
 
 ### Docker
 
 ```bash
-# Run azd in a container
+# コンテナ内でazdを実行する
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Create an alias for easier use
+# 簡単に使用できるようにエイリアスを作成する
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
 ## ✅ インストール確認
 
-インストール後、azdが正しく動作しているか確認します:
+インストール後、azdが正しく動作しているか確認してください:
 
 ```bash
-# Check version
+# バージョンを確認
 azd version
 
-# View help
+# ヘルプを表示
 azd --help
 
-# List available templates
+# 利用可能なテンプレートを一覧表示
 azd template list
 ```
 
@@ -153,19 +153,28 @@ azd template list
 azd version 1.5.0 (commit abc123)
 ```
 
+**✅ インストール成功チェックリスト:**
+- [ ] `azd version` がエラーなしでバージョン番号を表示する
+- [ ] `azd --help` がコマンドのドキュメントを表示する
+- [ ] `azd template list` が利用可能なテンプレートを表示する
+- [ ] `az account show` がAzureサブスクリプションを表示する
+- [ ] テストディレクトリを作成し、`azd init` を正常に実行できる
+
+**すべてのチェックが通れば、[初めてのプロジェクト](first-project.md) に進む準備が整いました！**
+
 ## 認証設定
 
 ### Azure CLI認証 (推奨)
 ```bash
-# Install Azure CLI if not already installed
+# Azure CLI をインストール (未インストールの場合)
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
 # Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Login to Azure
+# Azure にログイン
 az login
 
-# Verify authentication
+# 認証を確認
 az account show
 ```
 
@@ -176,7 +185,7 @@ az login --use-device-code
 ```
 
 ### サービスプリンシパル (CI/CD)
-自動化された環境向け:
+自動化環境向け:
 ```bash
 az login --service-principal \
   --username <client-id> \
@@ -188,26 +197,26 @@ az login --service-principal \
 
 ### グローバル設定
 ```bash
-# Set default subscription
+# デフォルトのサブスクリプションを設定する
 azd config set defaults.subscription <subscription-id>
 
-# Set default location
+# デフォルトの場所を設定する
 azd config set defaults.location eastus2
 
-# View all configuration
+# すべての設定を表示する
 azd config list
 ```
 
 ### 環境変数
 シェルプロファイル (`.bashrc`, `.zshrc`, `.profile`) に追加:
 ```bash
-# Azure configuration
+# Azure構成
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd configuration
+# azd構成
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Enable debug logging
+export AZD_DEBUG=true  # デバッグログを有効にする
 ```
 
 ## IDE統合
@@ -220,7 +229,7 @@ Azure Developer CLI拡張機能をインストール:
 4. 拡張機能をインストール
 
 機能:
-- `azure.yaml` のためのIntelliSense
+- azure.yamlのIntelliSense
 - 統合ターミナルコマンド
 - テンプレートの閲覧
 - デプロイメントのモニタリング
@@ -240,7 +249,7 @@ Azure Developer CLI拡張機能をインストール:
 
 ### IntelliJ/JetBrains
 1. Azureプラグインをインストール
-2. Azureの認証情報を設定
+2. Azure認証情報を設定
 3. 統合ターミナルでazdコマンドを使用
 
 ## 🐛 インストールのトラブルシューティング
@@ -249,7 +258,7 @@ Azure Developer CLI拡張機能をインストール:
 
 #### 権限拒否 (Windows)
 ```powershell
-# Run PowerShell as Administrator
+# 管理者としてPowerShellを実行する
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -269,35 +278,35 @@ source ~/.bashrc
 
 #### ネットワーク/プロキシの問題
 ```bash
-# Configure proxy
+# プロキシを設定する
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# Skip SSL verification (not recommended for production)
+# SSL検証をスキップする（本番環境では推奨されません）
 azd config set http.insecure true
 ```
 
 #### バージョンの競合
 ```bash
-# Remove old installations
+# 古いインストールを削除する
 # Windows: winget uninstall Microsoft.Azd
 # macOS: brew uninstall azd
 # Linux: sudo apt remove azd
 
-# Clean configuration
+# 設定をクリーンアップする
 rm -rf ~/.azd
 ```
 
 ### さらなるヘルプを得る
 ```bash
-# Enable debug logging
+# デバッグログを有効にする
 export AZD_DEBUG=true
 azd <command> --debug
 
-# View detailed logs
+# 詳細なログを表示する
 azd logs
 
-# Check system info
+# システム情報を確認する
 azd info
 ```
 
@@ -326,12 +335,78 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
+## 💡 よくある質問
+
+<details>
+<summary><strong>azdとaz CLIの違いは何ですか？</strong></summary>
+
+**Azure CLI (az)**: 個々のAzureリソースを管理するための低レベルツール
+- `az webapp create`, `az storage account create`
+- 一度に1つのリソース
+- インフラ管理に焦点
+
+**Azure Developer CLI (azd)**: 完全なアプリケーションデプロイメントのための高レベルツール
+- `azd up` はすべてのリソースを含むアプリ全体をデプロイ
+- テンプレートベースのワークフロー
+- 開発者の生産性に焦点
+
+**両方必要**: azdは認証にaz CLIを使用します
+</details>
+
+<details>
+<summary><strong>既存のAzureリソースでazdを使用できますか？</strong></summary>
+
+はい！以下が可能です:
+1. 既存のリソースをazd環境にインポート
+2. Bicepテンプレートで既存のリソースを参照
+3. 既存のインフラと並行して新しいデプロイメントにazdを使用
+
+詳細は[設定ガイド](configuration.md)をご覧ください。
+</details>
+
+<details>
+<summary><strong>azdはAzure GovernmentやAzure Chinaで動作しますか？</strong></summary>
+
+はい、クラウドを設定してください:
+```bash
+# Azure 政府
+az cloud set --name AzureUSGovernment
+az login
+
+# Azure 中国
+az cloud set --name AzureChinaCloud
+az login
+```
+</details>
+
+<details>
+<summary><strong>azdをCI/CDパイプラインで使用できますか？</strong></summary>
+
+もちろんです！azdは自動化向けに設計されています:
+- GitHub Actionsとの統合
+- Azure DevOpsのサポート
+- サービスプリンシパル認証
+- 非対話モード
+
+CI/CDパターンについては[デプロイメントガイド](../deployment/deployment-guide.md)をご覧ください。
+</details>
+
+<details>
+<summary><strong>azdの使用にかかる費用は？</strong></summary>
+
+azd自体は**完全無料**でオープンソースです。以下にのみ費用がかかります:
+- デプロイするAzureリソース
+- Azureの消費コスト (コンピュート、ストレージなど)
+
+デプロイ前にコストを見積もるには `azd provision --preview` を使用してください。
+</details>
+
 ## 次のステップ
 
-1. **認証を完了する**: Azureサブスクリプションにアクセスできることを確認
+1. **認証を完了**: Azureサブスクリプションにアクセスできることを確認
 2. **初めてのデプロイを試す**: [初めてのプロジェクトガイド](first-project.md) に従う
-3. **テンプレートを探索する**: `azd template list` を使用して利用可能なテンプレートを閲覧
-4. **IDEを設定する**: 開発環境をセットアップ
+3. **テンプレートを探索**: `azd template list` を使用して利用可能なテンプレートを閲覧
+4. **IDEを設定**: 開発環境をセットアップ
 
 ## サポート
 
@@ -348,11 +423,13 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 - **📖 現在の章**: 第1章 - 基礎とクイックスタート
 - **⬅️ 前章**: [AZDの基本](azd-basics.md) 
 - **➡️ 次章**: [初めてのプロジェクト](first-project.md)
-- **🚀 次の章**: [第2章: AI優先の開発](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 次の章**: [第2章: AIファースト開発](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**✅ インストール完了！** [初めてのプロジェクト](first-project.md) に進んで、azdを使った構築を始めましょう。
+**✅ インストール完了！** [初めてのプロジェクト](first-project.md) に進んでazdを使った構築を始めましょう。
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤った解釈について、当方は一切の責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確さが含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

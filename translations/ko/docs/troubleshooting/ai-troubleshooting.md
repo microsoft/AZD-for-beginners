@@ -1,22 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-17T14:35:37+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-19T19:10:45+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "ko"
 }
 -->
-# AI-특화 문제 해결 가이드
+# AI 전용 문제 해결 가이드
 
 **챕터 탐색:**
 - **📚 코스 홈**: [AZD 초보자용](../../README.md)
 - **📖 현재 챕터**: 챕터 7 - 문제 해결 및 디버깅
 - **⬅️ 이전**: [디버깅 가이드](debugging.md)
-- **➡️ 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../ai-foundry/production-ai-practices.md)
-- **🤖 관련**: [챕터 2: AI-우선 개발](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../microsoft-foundry/production-ai-practices.md)
+- **🤖 관련**: [챕터 2: AI 우선 개발](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**이전:** [프로덕션 AI 실습](../ai-foundry/production-ai-practices.md) | **다음:** [AZD 시작하기](../getting-started/README.md)
+**이전:** [프로덕션 AI 실습](../microsoft-foundry/production-ai-practices.md) | **다음:** [AZD 시작하기](../getting-started/README.md)
 
 이 포괄적인 문제 해결 가이드는 AZD를 사용하여 AI 솔루션을 배포할 때 발생할 수 있는 일반적인 문제를 다루며, Azure AI 서비스에 특화된 해결책과 디버깅 기술을 제공합니다.
 
@@ -49,7 +49,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 1. **지역 가용성 확인:**
 ```bash
-# List available regions for OpenAI
+# OpenAI에 사용할 수 있는 지역 목록
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -90,7 +90,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **현재 할당량 확인:**
 ```bash
-# Check quota usage
+# 할당량 사용량 확인
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -98,7 +98,7 @@ az cognitiveservices usage list \
 
 2. **할당량 증가 요청:**
 ```bash
-# Submit quota increase request
+# 할당량 증가 요청 제출
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -124,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### 문제: 잘못된 API 버전
+### 문제: API 버전이 유효하지 않음
 
 **증상:**
 ```
@@ -135,13 +135,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **지원되는 API 버전 사용:**
 ```python
-# Use latest supported version
+# 최신 지원 버전 사용
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **API 버전 호환성 확인:**
 ```bash
-# List supported API versions
+# 지원되는 API 버전 나열
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -201,7 +201,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **검색 서비스 키 확인:**
 ```bash
-# Get search service admin key
+# 검색 서비스 관리자 키 가져오기
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -209,7 +209,7 @@ az search admin-key show \
 
 2. **인덱스 스키마 확인:**
 ```python
-# Validate index schema
+# 인덱스 스키마 유효성 검사
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -284,7 +284,7 @@ azure-cosmos==4.5.1
 
 3. **헬스 체크 추가:**
 ```python
-# main.py - Add health check endpoint
+# main.py - 상태 확인 엔드포인트 추가
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **모델 로딩 최적화:**
 ```python
-# Lazy load models to reduce startup time
+# 모델을 지연 로드하여 시작 시간을 줄입니다
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,15 +352,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # 여기에서 AI 클라이언트를 초기화합니다
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # 시작
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # 종료
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -368,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## 인증 및 권한 오류
 
-### 문제: 관리 ID 권한 거부
+### 문제: 관리 ID 권한 거부됨
 
 **증상:**
 ```
@@ -379,7 +379,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 1. **역할 할당 확인:**
 ```bash
-# Check current role assignments
+# 현재 역할 할당 확인
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -404,7 +404,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **인증 테스트:**
 ```python
-# Test managed identity authentication
+# 관리되는 ID 인증 테스트
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -417,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### 문제: 키 볼트 액세스 거부
+### 문제: Key Vault 액세스 거부됨
 
 **증상:**
 ```
@@ -426,7 +426,7 @@ Error: The user, group or application does not have secrets get permission
 
 **해결책:**
 
-1. **키 볼트 권한 부여:**
+1. **Key Vault 권한 부여:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -471,7 +471,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **사용 가능한 모델 확인:**
 ```bash
-# List available models
+# 사용 가능한 모델 나열
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -510,7 +510,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **배포 전 모델 유효성 검사:**
 ```python
-# Pre-deployment model validation
+# 배포 전 모델 검증
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -536,14 +536,14 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **증상:**
 - 응답 시간 > 30초
-- 타임아웃 오류
+- 시간 초과 오류
 - 사용자 경험 저하
 
 **해결책:**
 
-1. **요청 타임아웃 구현:**
+1. **요청 시간 초과 구현:**
 ```python
-# Configure proper timeouts
+# 적절한 시간 초과 설정
 import httpx
 
 client = httpx.AsyncClient(
@@ -558,7 +558,7 @@ client = httpx.AsyncClient(
 
 2. **응답 캐싱 추가:**
 ```python
-# Redis cache for responses
+# 응답을 위한 Redis 캐시
 import redis.asyncio as redis
 import json
 
@@ -640,7 +640,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **메모리 사용 최적화:**
 ```python
-# Memory-efficient model handling
+# 메모리 효율적인 모델 처리
 import gc
 import psutil
 
@@ -650,14 +650,14 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # 처리 전에 메모리 사용량 확인
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # 강제 가비지 컬렉션
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # 처리 후 정리
         gc.collect()
         return result
 ```
@@ -667,15 +667,15 @@ class MemoryOptimizedAI:
 ### 문제: 예상치 못한 높은 비용
 
 **증상:**
-- Azure 청구서 예상보다 높음
+- 예상보다 높은 Azure 청구서
 - 토큰 사용량이 추정치를 초과
 - 예산 알림 발생
 
 **해결책:**
 
-1. **비용 제어 구현:**
+1. **비용 통제 구현:**
 ```python
-# Token usage tracking
+# 토큰 사용 추적
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -719,11 +719,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **모델 선택 최적화:**
 ```python
-# Cost-aware model selection
+# 비용 인식 모델 선택
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # 1K 토큰당
+    'gpt-4': 0.03,          # 1K 토큰당
+    'gpt-35-turbo': 0.0015  # 1K 토큰당
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -741,16 +741,16 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 ### AZD 디버깅 명령어
 
 ```bash
-# Enable verbose logging
+# 자세한 로깅 활성화
 azd up --debug
 
-# Check deployment status
+# 배포 상태 확인
 azd show
 
-# View deployment logs
+# 배포 로그 보기
 azd logs --follow
 
-# Check environment variables
+# 환경 변수 확인
 azd env get-values
 ```
 
@@ -761,7 +761,7 @@ azd env get-values
 import logging
 import json
 
-# Configure structured logging for AI applications
+# AI 애플리케이션을 위한 구조화된 로깅 구성
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -787,7 +787,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # OpenAI 연결 상태 확인
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -795,7 +795,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Check Search service
+    # 검색 서비스 확인
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -844,18 +844,18 @@ def monitor_performance(func):
 
 | 오류 코드 | 설명 | 해결책 |
 |------------|-------------|----------|
-| 401 | 인증 실패 | API 키 및 관리 ID 구성 확인 |
-| 403 | 접근 금지 | RBAC 역할 할당 확인 |
+| 401 | 인증되지 않음 | API 키 및 관리 ID 구성 확인 |
+| 403 | 금지됨 | RBAC 역할 할당 확인 |
 | 429 | 속도 제한 | 지수 백오프를 사용한 재시도 로직 구현 |
 | 500 | 내부 서버 오류 | 모델 배포 상태 및 로그 확인 |
 | 503 | 서비스 사용 불가 | 서비스 상태 및 지역 가용성 확인 |
 
 ## 다음 단계
 
-1. **[AI 모델 배포 가이드](ai-model-deployment.md)**를 검토하여 배포 모범 사례 확인
-2. **[프로덕션 AI 실습](production-ai-practices.md)**을 완료하여 엔터프라이즈 준비 솔루션 확보
-3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)**에 참여하여 커뮤니티 지원 받기
-4. **문제 제출**: [AZD GitHub 리포지토리](https://github.com/Azure/azure-dev)에 AZD 관련 문제 보고
+1. **[AI 모델 배포 가이드](ai-model-deployment.md)** 검토하여 배포 모범 사례 확인
+2. **[프로덕션 AI 실습](production-ai-practices.md)** 완료하여 엔터프라이즈 준비 솔루션 확보
+3. **[Microsoft Foundry Discord](https://aka.ms/foundry/discord)**에 참여하여 커뮤니티 지원 받기
+4. **문제 제출**: [AZD GitHub 저장소](https://github.com/Azure/azure-dev)에 AZD 관련 문제 보고
 
 ## 리소스
 
@@ -869,11 +869,13 @@ def monitor_performance(func):
 - **📚 코스 홈**: [AZD 초보자용](../../README.md)
 - **📖 현재 챕터**: 챕터 7 - 문제 해결 및 디버깅
 - **⬅️ 이전**: [디버깅 가이드](debugging.md)
-- **➡️ 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../ai-foundry/production-ai-practices.md)
-- **🤖 관련**: [챕터 2: AI-우선 개발](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../microsoft-foundry/production-ai-practices.md)
+- **🤖 관련**: [챕터 2: AI 우선 개발](../microsoft-foundry/microsoft-foundry-integration.md)
 - [Azure Developer CLI 문제 해결](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서를 해당 언어로 작성된 상태에서 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 오역에 대해 당사는 책임을 지지 않습니다.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

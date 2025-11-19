@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
-  "translation_date": "2025-09-17T15:02:10+00:00",
-  "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
+  "original_hash": "2e61bc7db9c28647211ab64e03045882",
+  "translation_date": "2025-11-19T22:05:10+00:00",
+  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
   "language_code": "es"
 }
 -->
-# Integración de Azure AI Foundry con AZD
+# Integración de Microsoft Foundry con AZD
 
 **Navegación del capítulo:**
 - **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
@@ -18,11 +18,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Descripción general
 
-Esta guía muestra cómo integrar los servicios de Azure AI Foundry con Azure Developer CLI (AZD) para facilitar el despliegue de aplicaciones de IA. Azure AI Foundry ofrece una plataforma integral para crear, desplegar y gestionar aplicaciones de IA, mientras que AZD simplifica el proceso de infraestructura y despliegue.
+Esta guía muestra cómo integrar los servicios de Microsoft Foundry con Azure Developer CLI (AZD) para facilitar el despliegue de aplicaciones de IA. Microsoft Foundry ofrece una plataforma integral para construir, desplegar y gestionar aplicaciones de IA, mientras que AZD simplifica los procesos de infraestructura y despliegue.
 
-## ¿Qué es Azure AI Foundry?
+## ¿Qué es Microsoft Foundry?
 
-Azure AI Foundry es la plataforma unificada de Microsoft para el desarrollo de IA que incluye:
+Microsoft Foundry es la plataforma unificada de Microsoft para el desarrollo de IA que incluye:
 
 - **Catálogo de modelos**: Acceso a modelos de IA de última generación
 - **Prompt Flow**: Diseñador visual para flujos de trabajo de IA
@@ -30,22 +30,22 @@ Azure AI Foundry es la plataforma unificada de Microsoft para el desarrollo de I
 - **Opciones de despliegue**: Múltiples opciones de alojamiento y escalado
 - **Seguridad y protección**: Funciones integradas de IA responsable
 
-## AZD + Azure AI Foundry: Mejor juntos
+## AZD + Microsoft Foundry: Mejor juntos
 
-| Característica | Azure AI Foundry | Beneficio de la integración con AZD |
-|----------------|------------------|-------------------------------------|
+| Característica | Microsoft Foundry | Beneficio de la integración con AZD |
+|----------------|-------------------|-------------------------------------|
 | **Despliegue de modelos** | Despliegue manual en el portal | Despliegues automatizados y repetibles |
-| **Infraestructura** | Aprovisionamiento mediante clics | Infraestructura como código (Bicep) |
+| **Infraestructura** | Aprovisionamiento manual | Infraestructura como código (Bicep) |
 | **Gestión de entornos** | Enfoque en un solo entorno | Multi-entorno (desarrollo/staging/producción) |
 | **Integración CI/CD** | Limitada | Soporte nativo para GitHub Actions |
-| **Gestión de costos** | Monitoreo básico | Optimización de costos específica por entorno |
+| **Gestión de costos** | Monitoreo básico | Optimización de costos por entorno |
 
 ## Requisitos previos
 
 - Suscripción a Azure con permisos adecuados
 - Azure Developer CLI instalado
 - Acceso a los servicios de Azure OpenAI
-- Familiaridad básica con Azure AI Foundry
+- Familiaridad básica con Microsoft Foundry
 
 ## Patrones principales de integración
 
@@ -168,26 +168,26 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **Configuración de producción:**
 ```bash
-# Core AI services
+# Servicios principales de IA
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Model configurations
+# Configuraciones del modelo
 azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
 
-# Performance settings
+# Configuraciones de rendimiento
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Configuración de desarrollo:**
 ```bash
-# Cost-optimized settings for development
+# Configuraciones optimizadas para el costo en desarrollo
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Nivel gratuito
 ```
 
 ### Configuración segura con Key Vault
@@ -230,24 +230,24 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 ### Despliegue con un solo comando
 
 ```bash
-# Deploy everything with one command
+# Despliega todo con un solo comando
 azd up
 
-# Or deploy incrementally
-azd provision  # Infrastructure only
-azd deploy     # Application only
+# O despliega de forma incremental
+azd provision  # Solo infraestructura
+azd deploy     # Solo aplicación
 ```
 
 ### Despliegues específicos por entorno
 
 ```bash
-# Development environment
+# Entorno de desarrollo
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Production environment
+# Entorno de producción
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -367,7 +367,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Optimización del rendimiento
 
-### Estrategias de caché
+### Estrategias de almacenamiento en caché
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -431,7 +431,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Resolución de problemas comunes
+## Solución de problemas comunes
 
 ### Problema 1: Cuota de OpenAI excedida
 
@@ -441,14 +441,14 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 **Soluciones:**
 ```bash
-# Check current quota usage
+# Verificar el uso actual de la cuota
 az cognitiveservices usage list --location eastus
 
-# Try different region
+# Probar una región diferente
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduce capacity temporarily
+# Reducir la capacidad temporalmente
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -461,29 +461,29 @@ azd deploy
 
 **Soluciones:**
 ```bash
-# Verify role assignments
+# Verificar asignaciones de roles
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Check managed identity configuration
+# Comprobar configuración de identidad administrada
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Validate Key Vault access
+# Validar acceso a Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
 ### Problema 3: Problemas de despliegue de modelos
 
 **Síntomas:**
-- Los modelos no están disponibles en el despliegue
+- Modelos no disponibles en el despliegue
 - Fallos en versiones específicas de modelos
 
 **Soluciones:**
 ```bash
-# List available models by region
+# Listar modelos disponibles por región
 az cognitiveservices model list --location eastus
 
-# Update model version in bicep template
-# Check model capacity requirements
+# Actualizar la versión del modelo en la plantilla bicep
+# Verificar los requisitos de capacidad del modelo
 ```
 
 ## Plantillas de ejemplo
@@ -529,13 +529,261 @@ azd up
 1. **Prueba los ejemplos**: Comienza con una plantilla preconstruida que se ajuste a tu caso de uso
 2. **Personaliza según tus necesidades**: Modifica la infraestructura y el código de la aplicación
 3. **Añade monitoreo**: Implementa observabilidad completa
-4. **Optimiza costos**: Ajusta configuraciones para tu presupuesto
+4. **Optimiza costos**: Ajusta configuraciones según tu presupuesto
 5. **Asegura tu despliegue**: Implementa patrones de seguridad empresarial
 6. **Escala a producción**: Añade características de alta disponibilidad y multi-región
 
+## 🎯 Ejercicios prácticos
+
+### Ejercicio 1: Desplegar aplicación de chat con Azure OpenAI (30 minutos)
+**Objetivo**: Desplegar y probar una aplicación de chat de IA lista para producción
+
+```bash
+# Inicializar plantilla
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Establecer variables de entorno
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Desplegar
+azd up
+
+# Probar la aplicación
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# Monitorear operaciones de IA
+azd monitor
+
+# Limpiar
+azd down --force --purge
+```
+
+**Criterios de éxito:**
+- [ ] El despliegue se completa sin errores de cuota
+- [ ] Se puede acceder a la interfaz de chat en el navegador
+- [ ] Se pueden hacer preguntas y obtener respuestas impulsadas por IA
+- [ ] Application Insights muestra datos de telemetría
+- [ ] Recursos limpiados exitosamente
+
+**Costo estimado**: $5-10 por 30 minutos de prueba
+
+### Ejercicio 2: Configurar despliegue multi-modelo (45 minutos)
+**Objetivo**: Desplegar múltiples modelos de IA con diferentes configuraciones
+
+```bash
+# Crear configuración personalizada de Bicep
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Implementar y verificar
+azd provision
+azd show
+```
+
+**Criterios de éxito:**
+- [ ] Múltiples modelos desplegados exitosamente
+- [ ] Configuraciones de capacidad diferentes aplicadas
+- [ ] Modelos accesibles vía API
+- [ ] Se pueden llamar ambos modelos desde la aplicación
+
+### Ejercicio 3: Implementar monitoreo de costos (20 minutos)
+**Objetivo**: Configurar alertas de presupuesto y seguimiento de costos
+
+```bash
+# Agregar alerta de presupuesto a Bicep
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Implementar alerta de presupuesto
+azd provision
+
+# Verificar costos actuales
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**Criterios de éxito:**
+- [ ] Alerta de presupuesto creada en Azure
+- [ ] Notificaciones por correo configuradas
+- [ ] Se pueden ver datos de costos en el portal de Azure
+- [ ] Umbrales de presupuesto configurados adecuadamente
+
+## 💡 Preguntas frecuentes
+
+<details>
+<summary><strong>¿Cómo reduzco los costos de Azure OpenAI durante el desarrollo?</strong></summary>
+
+1. **Usa el nivel gratuito**: Azure OpenAI ofrece 50,000 tokens/mes gratis
+2. **Reduce la capacidad**: Configura la capacidad a 10 TPM en lugar de 30+ para desarrollo
+3. **Usa azd down**: Desasigna recursos cuando no estés desarrollando activamente
+4. **Caché de respuestas**: Implementa un caché Redis para consultas repetidas
+5. **Usa ingeniería de prompts**: Reduce el uso de tokens con prompts eficientes
+
+```bash
+# Configuración de desarrollo
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>¿Cuál es la diferencia entre Azure OpenAI y OpenAI API?</strong></summary>
+
+**Azure OpenAI**:
+- Seguridad y cumplimiento empresarial
+- Integración con redes privadas
+- Garantías de SLA
+- Autenticación con identidad administrada
+- Cuotas más altas disponibles
+
+**OpenAI API**:
+- Acceso más rápido a nuevos modelos
+- Configuración más sencilla
+- Menor barrera de entrada
+- Solo internet público
+
+Para aplicaciones de producción, se recomienda **Azure OpenAI**.
+</details>
+
+<details>
+<summary><strong>¿Cómo manejo errores de cuota excedida en Azure OpenAI?</strong></summary>
+
+```bash
+# Verificar la cuota actual
+az cognitiveservices usage list --location eastus2
+
+# Probar una región diferente
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Reducir la capacidad temporalmente
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Solicitar aumento de cuota
+# Ir al Portal de Azure > Cuotas > Solicitar aumento
+```
+</details>
+
+<details>
+<summary><strong>¿Puedo usar mis propios datos con Azure OpenAI?</strong></summary>
+
+¡Sí! Usa **Azure AI Search** para RAG (Generación Aumentada por Recuperación):
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+Consulta la plantilla [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo).
+</details>
+
+<details>
+<summary><strong>¿Cómo aseguro los endpoints de modelos de IA?</strong></summary>
+
+**Mejores prácticas**:
+1. Usa identidad administrada (sin claves API)
+2. Habilita endpoints privados
+3. Configura grupos de seguridad de red
+4. Implementa limitación de tasas
+5. Usa Azure Key Vault para secretos
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
+
 ## Comunidad y soporte
 
-- **Discord de Azure AI Foundry**: [Canal #Azure](https://discord.gg/microsoft-azure)
+- **Discord de Microsoft Foundry**: [Canal #Azure](https://discord.gg/microsoft-azure)
 - **GitHub de AZD**: [Problemas y discusiones](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Documentación oficial](https://learn.microsoft.com/azure/ai-studio/)
 
@@ -552,5 +800,7 @@ azd up
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,22 +1,22 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T14:32:01+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-19T19:15:55+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "ko"
 }
 -->
 # Azure Developer CLI를 활용한 AI 모델 배포
 
-**챕터 탐색:**
+**챕터 네비게이션:**
 - **📚 코스 홈**: [AZD 초보자용](../../README.md)
 - **📖 현재 챕터**: 챕터 2 - AI 우선 개발
-- **⬅️ 이전**: [Azure AI Foundry 통합](azure-ai-foundry-integration.md)
+- **⬅️ 이전**: [Microsoft Foundry 통합](microsoft-foundry-integration.md)
 - **➡️ 다음**: [AI 워크숍 실습](ai-workshop-lab.md)
 - **🚀 다음 챕터**: [챕터 3: 구성](../getting-started/configuration.md)
 
-이 가이드는 AZD 템플릿을 사용하여 AI 모델을 배포하는 포괄적인 지침을 제공하며, 모델 선택부터 프로덕션 배포 패턴까지 다룹니다.
+이 가이드는 AZD 템플릿을 사용하여 AI 모델을 배포하는 방법에 대한 포괄적인 지침을 제공하며, 모델 선택부터 프로덕션 배포 패턴까지 다룹니다.
 
 ## 목차
 
@@ -25,7 +25,7 @@ CO_OP_TRANSLATOR_METADATA:
 - [배포 패턴](../../../../docs/ai-foundry)
 - [모델 관리](../../../../docs/ai-foundry)
 - [프로덕션 고려사항](../../../../docs/ai-foundry)
-- [모니터링 및 관찰성](../../../../docs/ai-foundry)
+- [모니터링 및 관찰 가능성](../../../../docs/ai-foundry)
 
 ## 모델 선택 전략
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 애플리케이션 환경을 구성하세요:
 
 ```bash
-# .env configuration
+# .env 구성
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -183,7 +183,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 ### 패턴 3: 하이브리드 배포
 
-Azure OpenAI와 다른 AI 서비스를 결합하세요:
+Azure OpenAI와 다른 AI 서비스를 결합:
 
 ```bicep
 // Hybrid AI services
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 사용 패턴에 따라 필요한 용량을 계산하세요:
 
 ```python
-# Capacity calculation example
+# 용량 계산 예제
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# 사용 예제
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## 모니터링 및 관찰성
+## 모니터링 및 관찰 가능성
 
 ### Application Insights 통합
 
@@ -414,10 +414,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### 사용자 정의 메트릭
 
-AI 특화 메트릭을 추적하세요:
+AI 전용 메트릭을 추적하세요:
 
 ```python
-# Custom telemetry for AI models
+# AI 모델을 위한 사용자 지정 텔레메트리
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 AI 서비스 상태 모니터링을 구현하세요:
 
 ```python
-# Health check endpoints
+# 상태 확인 엔드포인트
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # OpenAI 연결 테스트
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,10 +482,10 @@ async def check_ai_models():
 
 ## 다음 단계
 
-1. **[Azure AI Foundry 통합 가이드](azure-ai-foundry-integration.md)**를 검토하여 서비스 통합 패턴을 확인하세요
-2. **[AI 워크숍 실습](ai-workshop-lab.md)**을 완료하여 실습 경험을 쌓으세요
-3. **[프로덕션 AI 실무](production-ai-practices.md)**를 구현하여 엔터프라이즈 배포를 준비하세요
-4. **[AI 문제 해결 가이드](../troubleshooting/ai-troubleshooting.md)**를 탐색하여 일반적인 문제를 해결하세요
+1. **[Microsoft Foundry 통합 가이드](microsoft-foundry-integration.md)**를 검토하여 서비스 통합 패턴을 확인하세요.
+2. **[AI 워크숍 실습](ai-workshop-lab.md)**을 완료하여 실습 경험을 쌓으세요.
+3. **[프로덕션 AI 실무](production-ai-practices.md)**를 구현하여 엔터프라이즈 배포를 준비하세요.
+4. **[AI 문제 해결 가이드](../troubleshooting/ai-troubleshooting.md)**를 탐색하여 일반적인 문제를 해결하세요.
 
 ## 리소스
 
@@ -496,14 +496,16 @@ async def check_ai_models():
 
 ---
 
-**챕터 탐색:**
+**챕터 네비게이션:**
 - **📚 코스 홈**: [AZD 초보자용](../../README.md)
 - **📖 현재 챕터**: 챕터 2 - AI 우선 개발
-- **⬅️ 이전**: [Azure AI Foundry 통합](azure-ai-foundry-integration.md)
+- **⬅️ 이전**: [Microsoft Foundry 통합](microsoft-foundry-integration.md)
 - **➡️ 다음**: [AI 워크숍 실습](ai-workshop-lab.md)
 - **🚀 다음 챕터**: [챕터 3: 구성](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서를 해당 언어로 작성된 상태에서 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

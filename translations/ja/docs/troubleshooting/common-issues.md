@@ -1,63 +1,63 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-17T14:16:09+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-19T18:22:39+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "ja"
 }
 -->
-# よくある問題と解決方法
+# よくある問題と解決策
 
 **章のナビゲーション:**
 - **📚 コースホーム**: [AZD 初心者向け](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
 - **⬅️ 前の章**: [第6章: 事前チェック](../pre-deployment/preflight-checks.md)
 - **➡️ 次へ**: [デバッグガイド](debugging.md)
-- **🚀 次の章**: [第8章: 本番環境とエンタープライズパターン](../ai-foundry/production-ai-practices.md)
+- **🚀 次の章**: [第8章: 本番環境とエンタープライズパターン](../microsoft-foundry/production-ai-practices.md)
 
 ## はじめに
 
-この包括的なトラブルシューティングガイドでは、Azure Developer CLI を使用する際によく遭遇する問題について説明します。認証、デプロイメント、インフラストラクチャのプロビジョニング、アプリケーション設定に関する問題を診断し、トラブルシューティングし、解決する方法を学びます。各問題には、詳細な症状、根本原因、そして段階的な解決手順が含まれています。
+この包括的なトラブルシューティングガイドでは、Azure Developer CLI を使用する際によく遭遇する問題について説明します。認証、デプロイ、インフラストラクチャのプロビジョニング、アプリケーション設定に関する一般的な問題を診断し、トラブルシューティングし、解決する方法を学びます。各問題には、詳細な症状、根本原因、および段階的な解決手順が含まれています。
 
 ## 学習目標
 
 このガイドを完了することで、以下を習得できます:
-- Azure Developer CLI の問題に対する診断技術を習得する
-- 認証や権限に関する一般的な問題とその解決方法を理解する
-- デプロイメントの失敗、インフラストラクチャのプロビジョニングエラー、設定の問題を解決する
-- 予防的な監視とデバッグ戦略を実装する
+- Azure Developer CLI の問題に対する診断技術をマスターする
+- 一般的な認証および権限の問題とその解決策を理解する
+- デプロイの失敗、インフラストラクチャのプロビジョニングエラー、設定の問題を解決する
+- プロアクティブな監視およびデバッグ戦略を実装する
 - 複雑な問題に対する体系的なトラブルシューティング手法を適用する
-- 適切なログと監視を設定し、将来の問題を防ぐ
+- 将来の問題を防ぐために適切なログ記録と監視を設定する
 
 ## 学習成果
 
 完了後、以下ができるようになります:
-- Azure Developer CLI の組み込み診断ツールを使用して問題を診断する
-- 認証、サブスクリプション、権限に関連する問題を独自に解決する
-- デプロイメントの失敗やインフラストラクチャのプロビジョニングエラーを効果的にトラブルシューティングする
+- 組み込みの診断ツールを使用して Azure Developer CLI の問題を診断する
+- 認証、サブスクリプション、および権限に関連する問題を独自に解決する
+- デプロイの失敗やインフラストラクチャのプロビジョニングエラーを効果的にトラブルシューティングする
 - アプリケーション設定の問題や環境固有の問題をデバッグする
-- 監視とアラートを実装し、潜在的な問題を予防的に特定する
-- ログ、デバッグ、問題解決ワークフローのベストプラクティスを適用する
+- 潜在的な問題をプロアクティブに特定するための監視とアラートを実装する
+- ログ記録、デバッグ、および問題解決のワークフローにおけるベストプラクティスを適用する
 
 ## クイック診断
 
 特定の問題に取り組む前に、以下のコマンドを実行して診断情報を収集してください:
 
 ```bash
-# Check azd version and health
+# azdのバージョンと正常性を確認する
 azd version
 azd config list
 
-# Verify Azure authentication
+# Azure認証を確認する
 az account show
 az account list
 
-# Check current environment
+# 現在の環境を確認する
 azd env show
 azd env get-values
 
-# Enable debug logging
+# デバッグログを有効にする
 export AZD_DEBUG=true
 azd <command> --debug
 ```
@@ -67,53 +67,53 @@ azd <command> --debug
 ### 問題: "アクセストークンの取得に失敗しました"
 **症状:**
 - `azd up` が認証エラーで失敗する
-- コマンドが "unauthorized" や "access denied" を返す
+- コマンドが "unauthorized" または "access denied" を返す
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. Azure CLIで再認証する
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. キャッシュされた資格情報をクリアする
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. デバイスコードフローを使用する（ヘッドレスシステム向け）
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. 明示的なサブスクリプションを設定する
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### 問題: デプロイメント中の "権限不足"
+### 問題: デプロイ中の "権限不足"
 **症状:**
-- デプロイメントが権限エラーで失敗する
+- デプロイが権限エラーで失敗する
 - 特定の Azure リソースを作成できない
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Check your Azure role assignments
+# 1. Azure のロール割り当てを確認する
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. 必要なロールを持っていることを確認する
+# - Contributor (リソース作成用)
+# - User Access Administrator (ロール割り当て用)
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. 適切な権限について Azure 管理者に連絡する
 ```
 
 ### 問題: マルチテナント認証の問題
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Login with specific tenant
+# 1. 特定のテナントでログインする
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. 設定でテナントを設定する
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. テナントを切り替える場合はテナントキャッシュをクリアする
 az account clear
 ```
 
@@ -122,19 +122,19 @@ az account clear
 ### 問題: リソース名の競合
 **症状:**
 - "The resource name already exists" エラー
-- リソース作成中にデプロイメントが失敗する
+- リソース作成中にデプロイが失敗する
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# 1. トークンを使用して一意のリソース名を使用する
+# Bicep テンプレートで:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# 2. 環境名を変更する
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# 3. 既存のリソースをクリーンアップする
 azd down --force --purge
 ```
 
@@ -143,18 +143,18 @@ azd down --force --purge
 - "The location 'xyz' is not available for resource type"
 - 選択したリージョンで特定の SKU が利用できない
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Check available locations for resource types
+# 1. リソースタイプの利用可能な場所を確認する
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. 一般的に利用可能なリージョンを使用する
 azd config set defaults.location eastus2
-# or
+# または
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. リージョンごとのサービスの利用状況を確認する
+# 訪問: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
 ### 問題: クォータ超過エラー
@@ -162,95 +162,95 @@ azd env set AZURE_LOCATION eastus2
 - "Quota exceeded for resource type"
 - "Maximum number of resources reached"
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Check current quota usage
+# 1. 現在のクォータ使用量を確認する
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. Azureポータルを通じてクォータの増加をリクエストする
+# 移動先: サブスクリプション > 使用量 + クォータ
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. 開発には小さいSKUを使用する
+# main.parameters.json内:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. 未使用のリソースをクリーンアップする
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### 問題: Bicep テンプレートエラー
 **症状:**
-- テンプレートの検証失敗
+- テンプレート検証の失敗
 - Bicep ファイルの構文エラー
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. Bicepの構文を検証する
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. Bicepリンターを使用する
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. パラメータファイルの構文を確認する
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. デプロイ変更をプレビューする
 azd provision --preview
 ```
 
-## 🚀 デプロイメントの失敗
+## 🚀 デプロイの失敗
 
 ### 問題: ビルドの失敗
 **症状:**
-- デプロイメント中にアプリケーションがビルドに失敗する
+- デプロイ中にアプリケーションがビルドに失敗する
 - パッケージインストールエラー
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Check build logs
+# 1. ビルドログを確認する
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. ローカルでビルドをテストする
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# 3. Node.js/Pythonのバージョン互換性を確認する
+node --version  # azure.yamlの設定と一致する必要がある
 python --version
 
-# 4. Clear build cache
+# 4. ビルドキャッシュをクリアする
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# 5. コンテナを使用している場合はDockerfileを確認する
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### 問題: コンテナデプロイメントの失敗
+### 問題: コンテナデプロイの失敗
 **症状:**
 - コンテナアプリが起動しない
 - イメージプルエラー
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Test Docker build locally
+# 1. ローカルでDockerビルドをテストする
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. コンテナログを確認する
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. コンテナレジストリへのアクセスを確認する
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. コンテナアプリの設定を確認する
 az containerapp show --name my-app --resource-group my-rg
 ```
 
@@ -259,19 +259,19 @@ az containerapp show --name my-app --resource-group my-rg
 - アプリケーションがデータベースに接続できない
 - 接続タイムアウトエラー
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Check database firewall rules
+# 1. データベースのファイアウォールルールを確認する
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# 2. アプリケーションからの接続をテストする
+# アプリに一時的に追加する:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# 3. 接続文字列の形式を確認する
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# 4. データベースサーバーの状態を確認する
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -282,19 +282,19 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 - アプリが設定値を読み取れない
 - 環境変数が空のように見える
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Verify environment variables are set
+# 1. 環境変数が設定されていることを確認する
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. azure.yaml内の変数名を確認する
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. アプリケーションを再起動する
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. アプリサービスの構成を確認する
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -303,15 +303,15 @@ az webapp config appsettings list --name myapp --resource-group myrg
 - HTTPS が機能しない
 - 証明書検証エラー
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Check SSL certificate status
+# 1. SSL証明書のステータスを確認する
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. HTTPSのみを有効にする
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. カスタムドメインを追加する（必要に応じて）
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
@@ -320,19 +320,19 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 - フロントエンドが API を呼び出せない
 - クロスオリジンリクエストがブロックされる
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Configure CORS for App Service
+# 1. App ServiceのCORSを設定する
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. APIを更新してCORSを処理する
+# Express.jsで:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. 正しいURLで実行されているか確認する
 azd show
 ```
 
@@ -343,18 +343,18 @@ azd show
 - 間違った環境が使用される
 - 設定が正しく切り替わらない
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. List all environments
+# 1. すべての環境を一覧表示する
 azd env list
 
-# 2. Explicitly select environment
+# 2. 環境を明示的に選択する
 azd env select production
 
-# 3. Verify current environment
+# 3. 現在の環境を確認する
 azd env show
 
-# 4. Create new environment if corrupted
+# 4. 環境が破損している場合は新しい環境を作成する
 azd env new production-new
 azd env select production-new
 ```
@@ -364,140 +364,140 @@ azd env select production-new
 - 環境が無効な状態を示す
 - リソースが設定と一致しない
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Refresh environment state
+# 1. 環境状態を更新する
 azd env refresh
 
-# 2. Reset environment configuration
+# 2. 環境設定をリセットする
 azd env new production-reset
-# Copy over required environment variables
+# 必要な環境変数をコピーする
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. 既存のリソースをインポートする（可能であれば）
+# 手動で .azure/production/config.json をリソースIDで更新する
 ```
 
 ## 🔍 パフォーマンスの問題
 
-### 問題: デプロイメント時間が遅い
+### 問題: デプロイ時間が遅い
 **症状:**
-- デプロイメントが非常に時間がかかる
-- デプロイメント中にタイムアウトが発生する
+- デプロイに時間がかかりすぎる
+- デプロイ中にタイムアウトが発生する
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Enable parallel deployment
+# 1. 並列デプロイを有効にする
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# 2. 増分デプロイを使用する
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# 3. ビルドプロセスを最適化する
+# package.json内:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# 4. リソースの場所を確認する（同じリージョンを使用する）
 azd config set defaults.location eastus2
 ```
 
 ### 問題: アプリケーションのパフォーマンス問題
 **症状:**
 - 応答時間が遅い
-- 高いリソース使用率
+- リソース使用量が高い
 
-**解決方法:**
+**解決策:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# 1. リソースをスケールアップする
+# main.parameters.jsonでSKUを更新する:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# 2. Application Insightsモニタリングを有効にする
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# 3. アプリケーションログでボトルネックを確認する
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# 4. キャッシングを実装する
+# インフラストラクチャにRedisキャッシュを追加する
 ```
 
 ## 🛠️ トラブルシューティングツールとコマンド
 
 ### デバッグコマンド
 ```bash
-# Comprehensive debugging
+# 包括的なデバッグ
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# システム情報を確認
 azd info
 
-# Validate configuration
+# 設定を検証
 azd config validate
 
-# Test connectivity
+# 接続性をテスト
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### ログ分析
 ```bash
-# Application logs
+# アプリケーションログ
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# Azureリソースログ
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# コンテナログ（コンテナアプリ用）
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### リソース調査
 ```bash
-# List all resources
+# すべてのリソースを一覧表示
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# リソースのステータスを確認
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# ネットワーク診断
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 追加の支援を得る方法
+## 🆘 追加のサポートを得る
 
-### エスカレーションが必要な場合
-- すべての解決方法を試しても認証の問題が解決しない場合
+### エスカレーションのタイミング
+- すべての解決策を試しても認証の問題が解決しない場合
 - Azure サービスに関連するインフラストラクチャの問題
-- 請求やサブスクリプションに関連する問題
+- 請求またはサブスクリプションに関連する問題
 - セキュリティ上の懸念やインシデント
 
 ### サポートチャネル
 ```bash
-# 1. Check Azure Service Health
+# 1. Azure Service Health を確認する
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# 2. Azure サポートチケットを作成する
+# 次に移動: https://portal.azure.com -> ヘルプ + サポート
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
+# 3. コミュニティリソース
+# - Stack Overflow: azure-developer-cli タグ
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### 収集すべき情報
-サポートに連絡する前に以下を収集してください:
+サポートに連絡する前に、以下を収集してください:
 - `azd version` の出力
 - `azd info` の出力
 - エラーメッセージ（全文）
 - 問題を再現する手順
-- 環境の詳細 (`azd env show`)
+- 環境の詳細（`azd env show`）
 - 問題が発生し始めた時期のタイムライン
 
 ### ログ収集スクリプト
@@ -524,36 +524,36 @@ azd logs --since 1h >> debug-logs/recent-logs.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 問題予防
+## 📊 問題の予防
 
-### デプロイメント前チェックリスト
+### デプロイ前のチェックリスト
 ```bash
-# 1. Validate authentication
+# 1. 認証を検証する
 az account show
 
-# 2. Check quotas and limits
+# 2. クォータと制限を確認する
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# 3. テンプレートを検証する
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# 4. まずローカルでテストする
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# 5. ドライランデプロイメントを使用する
 azd provision --preview
 ```
 
 ### 監視のセットアップ
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# アプリケーションインサイトを有効にする
+# main.bicepに追加:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# アラートを設定する
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -563,13 +563,13 @@ az monitor metrics alert create \
 
 ### 定期的なメンテナンス
 ```bash
-# Weekly health checks
+# 毎週の健康チェック
 ./scripts/health-check.sh
 
-# Monthly cost review
+# 毎月のコストレビュー
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# 四半期ごとのセキュリティレビュー
 az security assessment list --resource-group myrg
 ```
 
@@ -578,11 +578,11 @@ az security assessment list --resource-group myrg
 - [デバッグガイド](debugging.md) - 高度なデバッグ技術
 - [リソースのプロビジョニング](../deployment/provisioning.md) - インフラストラクチャのトラブルシューティング
 - [キャパシティプランニング](../pre-deployment/capacity-planning.md) - リソース計画のガイダンス
-- [SKU の選択](../pre-deployment/sku-selection.md) - サービス層の推奨事項
+- [SKU 選択](../pre-deployment/sku-selection.md) - サービス層の推奨事項
 
 ---
 
-**ヒント**: このガイドをブックマークして、問題が発生した際に参照してください。ほとんどの問題は過去に経験されており、確立された解決方法があります！
+**ヒント**: このガイドをブックマークして、問題が発生したときに参照してください。ほとんどの問題は過去に発生しており、確立された解決策があります！
 
 ---
 
@@ -592,5 +592,7 @@ az security assessment list --resource-group myrg
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤った解釈について、当方は責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

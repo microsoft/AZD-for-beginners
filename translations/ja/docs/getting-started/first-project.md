@@ -1,57 +1,57 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-17T14:13:21+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-19T18:39:33+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "ja"
 }
 -->
 # 初めてのプロジェクト - ハンズオンチュートリアル
 
-**章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+**章ナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
 - **📖 現在の章**: 第1章 - 基礎とクイックスタート
 - **⬅️ 前へ**: [インストールとセットアップ](installation.md)
 - **➡️ 次へ**: [設定](configuration.md)
-- **🚀 次の章**: [第2章: AIファースト開発](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 次の章**: [第2章: AIファースト開発](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## はじめに
 
-Azure Developer CLI プロジェクトへようこそ！この包括的なハンズオンチュートリアルでは、azd を使用して Azure 上でフルスタックアプリケーションを作成、デプロイ、管理する方法を完全に解説します。React フロントエンド、Node.js API バックエンド、MongoDB データベースを含む実際の Todo アプリケーションを扱います。
+Azure Developer CLI プロジェクトへようこそ！この包括的なハンズオンチュートリアルでは、azd を使用して Azure 上でフルスタックアプリケーションを作成、デプロイ、管理する方法を完全に解説します。React フロントエンド、Node.js API バックエンド、MongoDB データベースを含む実際の Todo アプリケーションを使用します。
 
 ## 学習目標
 
 このチュートリアルを完了することで、以下を習得できます:
-- テンプレートを使用した azd プロジェクトの初期化ワークフロー
-- Azure Developer CLI プロジェクトの構造と設定ファイルの理解
-- インフラストラクチャのプロビジョニングを含むアプリケーションの完全なデプロイ
+- テンプレートを使用した azd プロジェクト初期化ワークフローのマスター
+- Azure Developer CLI プロジェクト構造と設定ファイルの理解
+- インフラストラクチャのプロビジョニングを含むアプリケーションの完全な Azure へのデプロイ
 - アプリケーションの更新と再デプロイ戦略の実装
 - 開発およびステージング用の複数環境の管理
 - リソースのクリーンアップとコスト管理の実践
 
 ## 学習成果
 
-このチュートリアルを完了すると、以下ができるようになります:
+完了後、以下ができるようになります:
 - テンプレートから azd プロジェクトを独立して初期化および設定
 - azd プロジェクト構造を効果的にナビゲートおよび変更
 - 単一コマンドでフルスタックアプリケーションを Azure にデプロイ
-- 一般的なデプロイの問題や認証の問題をトラブルシュート
+- 一般的なデプロイ問題や認証問題のトラブルシューティング
 - 異なるデプロイ段階のための複数の Azure 環境を管理
 - アプリケーション更新のための継続的デプロイワークフローを実装
 
-## 始める前に
+## 始めましょう
 
 ### 必要条件チェックリスト
 - ✅ Azure Developer CLI がインストール済み ([インストールガイド](installation.md))
 - ✅ Azure CLI がインストールされ、認証済み
 - ✅ Git がシステムにインストール済み
-- ✅ Node.js 16+（このチュートリアル用）
-- ✅ Visual Studio Code（推奨）
+- ✅ Node.js 16+ (このチュートリアル用)
+- ✅ Visual Studio Code (推奨)
 
 ### セットアップの確認
 ```bash
-# Check azd installation
+# azdのインストールを確認
 azd version
 ```
 ### Azure 認証の確認
@@ -70,18 +70,18 @@ node --version
 React フロントエンドと Node.js API バックエンドを含む人気の Todo アプリケーションテンプレートから始めましょう。
 
 ```bash
-# Browse available templates
+# 利用可能なテンプレートを閲覧する
 azd template list
 
-# Initialize the todo app template
+# ToDoアプリのテンプレートを初期化する
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Follow the prompts:
-# - Enter an environment name: "dev"
-# - Choose a subscription (if you have multiple)
-# - Choose a region: "East US 2" (or your preferred region)
+# プロンプトに従う:
+# - 環境名を入力する: "dev"
+# - サブスクリプションを選択する（複数ある場合）
+# - リージョンを選択する: "East US 2"（または希望のリージョン）
 ```
 
 ### 何が起こったのか？
@@ -92,12 +92,12 @@ azd init --template todo-nodejs-mongo
 
 ## ステップ 2: プロジェクト構造を探索
 
-azd が作成した内容を確認しましょう:
+azd が作成したものを確認しましょう:
 
 ```bash
-# View the project structure
+# プロジェクト構造を表示する
 tree /f   # Windows
-# or
+# または
 find . -type f | head -20   # macOS/Linux
 ```
 
@@ -132,54 +132,54 @@ my-first-azd-app/
 
 **azure.yaml** - azd プロジェクトの中心:
 ```bash
-# View the project configuration
+# プロジェクト構成を表示
 cat azure.yaml
 ```
 
 **infra/main.bicep** - インフラストラクチャ定義:
 ```bash
-# View the infrastructure code
+# インフラストラクチャコードを表示
 head -30 infra/main.bicep
 ```
 
-## ステップ 3: プロジェクトのカスタマイズ（オプション）
+## ステップ 3: プロジェクトのカスタマイズ (オプション)
 
 デプロイ前にアプリケーションをカスタマイズできます:
 
 ### フロントエンドの変更
 ```bash
-# Open the React app component
+# Reactアプリコンポーネントを開く
 code src/web/src/App.tsx
 ```
 
 簡単な変更を加えます:
 ```typescript
-// Find the title and change it
+// タイトルを見つけて変更する
 <h1>My Awesome Todo App</h1>
 ```
 
 ### 環境変数の設定
 ```bash
-# Set custom environment variables
+# カスタム環境変数を設定する
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# View all environment variables
+# すべての環境変数を表示する
 azd env get-values
 ```
 
 ## ステップ 4: Azure へのデプロイ
 
-いよいよ本番です - すべてを Azure にデプロイしましょう！
+いよいよエキサイティングな部分です - すべてを Azure にデプロイしましょう！
 
 ```bash
-# Deploy infrastructure and application
+# インフラストラクチャとアプリケーションをデプロイする
 azd up
 
-# This command will:
-# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
-# 2. Build your application
-# 3. Deploy to the provisioned resources
-# 4. Display the application URL
+# このコマンドは以下を行います:
+# 1. Azureリソース（App Service、Cosmos DBなど）をプロビジョニングする
+# 2. アプリケーションをビルドする
+# 3. プロビジョニングされたリソースにデプロイする
+# 4. アプリケーションのURLを表示する
 ```
 
 ### デプロイ中に何が起こるのか？
@@ -202,97 +202,97 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## ステップ 5: アプリケーションのテスト
+## ステップ 5: アプリケーションをテスト
 
 ### アプリケーションにアクセス
-デプロイ出力に表示された URL をクリックするか、いつでも以下を使用して取得できます:
+デプロイ出力に表示された URL をクリックするか、いつでも取得できます:
 ```bash
-# Get application endpoints
+# アプリケーションのエンドポイントを取得する
 azd show
 
-# Open the application in your browser
+# ブラウザでアプリケーションを開く
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Todo アプリのテスト
+### Todo アプリをテスト
 1. **Todo アイテムを追加** - 「Add Todo」をクリックしてタスクを入力
 2. **完了としてマーク** - 完了したアイテムにチェックを入れる
 3. **アイテムを削除** - 不要な Todo を削除
 
-### アプリケーションの監視
+### アプリケーションを監視
 ```bash
-# Open Azure portal for your resources
+# リソース用のAzureポータルを開く
 azd monitor
 
-# View application logs
+# アプリケーションログを表示する
 azd logs
 ```
 
 ## ステップ 6: 変更を加えて再デプロイ
 
-変更を加え、更新がどれほど簡単か確認しましょう:
+変更を加えて、更新がどれほど簡単かを確認しましょう:
 
 ### API の変更
 ```bash
-# Edit the API code
+# APIコードを編集する
 code src/api/src/routes/lists.js
 ```
 
 カスタムレスポンスヘッダーを追加:
 ```javascript
-// Find a route handler and add:
+// ルートハンドラーを見つけて追加します:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### コード変更のみをデプロイ
 ```bash
-# Deploy only the application code (skip infrastructure)
+# アプリケーションコードのみをデプロイする（インフラストラクチャをスキップ）
 azd deploy
 
-# This is much faster than 'azd up' since infrastructure already exists
+# インフラストラクチャが既に存在するため、'azd up' よりもはるかに高速です
 ```
 
 ## ステップ 7: 複数環境の管理
 
-本番前に変更をテストするためのステージング環境を作成:
+本番前に変更をテストするためのステージング環境を作成します:
 
 ```bash
-# Create a new staging environment
+# 新しいステージング環境を作成する
 azd env new staging
 
-# Deploy to staging
+# ステージングにデプロイする
 azd up
 
-# Switch back to dev environment
+# 開発環境に戻す
 azd env select dev
 
-# List all environments
+# すべての環境を一覧表示する
 azd env list
 ```
 
 ### 環境の比較
 ```bash
-# View dev environment
+# 開発環境を表示
 azd env select dev
 azd show
 
-# View staging environment  
+# ステージング環境を表示
 azd env select staging
 azd show
 ```
 
 ## ステップ 8: リソースのクリーンアップ
 
-実験が終わったら、継続的な料金を避けるためにクリーンアップを実行:
+実験が終わったら、継続的な料金を避けるためにクリーンアップを行いましょう:
 
 ```bash
-# Delete all Azure resources for current environment
+# 現在の環境のすべてのAzureリソースを削除する
 azd down
 
-# Force delete without confirmation and purge soft-deleted resources
+# 確認なしで強制削除し、ソフト削除されたリソースを完全に削除する
 azd down --force --purge
 
-# Delete specific environment
+# 特定の環境を削除する
 azd env select staging
 azd down --force --purge
 ```
@@ -300,51 +300,159 @@ azd down --force --purge
 ## 学んだこと
 
 おめでとうございます！以下を成功させました:
-- テンプレートから azd プロジェクトを初期化
-- プロジェクト構造と主要ファイルを探索
-- フルスタックアプリケーションを Azure にデプロイ
-- コード変更を加えて再デプロイ
-- 複数環境を管理
-- リソースをクリーンアップ
+- ✅ テンプレートから azd プロジェクトを初期化
+- ✅ プロジェクト構造と主要ファイルを探索
+- ✅ フルスタックアプリケーションを Azure にデプロイ
+- ✅ コード変更を加えて再デプロイ
+- ✅ 複数環境を管理
+- ✅ リソースをクリーンアップ
+
+## 🎯 スキル検証演習
+
+### 演習 1: 別のテンプレートをデプロイ (15分)
+**目標**: azd init とデプロイワークフローの習熟を示す
+
+```bash
+# Python + MongoDBスタックを試す
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# デプロイを確認する
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# クリーンアップする
+azd down --force --purge
+```
+
+**成功基準:**
+- [ ] アプリケーションがエラーなくデプロイされる
+- [ ] ブラウザでアプリケーション URL にアクセス可能
+- [ ] アプリケーションが正しく機能する (Todo の追加/削除)
+- [ ] すべてのリソースを正常にクリーンアップ
+
+### 演習 2: 設定のカスタマイズ (20分)
+**目標**: 環境変数設定の練習
+
+```bash
+cd my-first-azd-app
+
+# カスタム環境を作成する
+azd env new custom-config
+
+# カスタム変数を設定する
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# 変数を確認する
+azd env get-values | grep APP_TITLE
+
+# カスタム構成でデプロイする
+azd up
+```
+
+**成功基準:**
+- [ ] カスタム環境が正常に作成される
+- [ ] 環境変数が設定され、取得可能
+- [ ] カスタム設定でアプリケーションがデプロイされる
+- [ ] デプロイされたアプリでカスタム設定を確認可能
+
+### 演習 3: マルチ環境ワークフロー (25分)
+**目標**: 環境管理とデプロイ戦略の習熟
+
+```bash
+# 開発環境を作成する
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# 開発用URLを記録する
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# ステージング環境を作成する
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# ステージング用URLを記録する
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# 環境を比較する
+azd env list
+
+# 両方の環境をテストする
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# 両方をクリーンアップする
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**成功基準:**
+- [ ] 異なる設定で2つの環境が作成される
+- [ ] 両方の環境が正常にデプロイされる
+- [ ] `azd env select` を使用して環境を切り替え可能
+- [ ] 環境変数が環境ごとに異なる
+- [ ] 両方の環境を正常にクリーンアップ
+
+## 📊 あなたの進捗
+
+**投資時間**: 約60～90分  
+**習得スキル**:
+- ✅ テンプレートベースのプロジェクト初期化
+- ✅ Azure リソースのプロビジョニング
+- ✅ アプリケーションデプロイワークフロー
+- ✅ 環境管理
+- ✅ 設定管理
+- ✅ リソースクリーンアップとコスト管理
+
+**次のステップ**: [設定ガイド](configuration.md) で高度な設定パターンを学びましょう！
 
 ## 一般的な問題のトラブルシューティング
 
 ### 認証エラー
 ```bash
-# Re-authenticate with Azure
+# Azureで再認証する
 az login
 
-# Verify subscription access
+# サブスクリプションアクセスを確認する
 az account show
 ```
 
 ### デプロイ失敗
 ```bash
-# Enable debug logging
+# デバッグログを有効にする
 export AZD_DEBUG=true
 azd up --debug
 
-# View detailed logs
+# 詳細なログを表示する
 azd logs --service api
 azd logs --service web
 ```
 
 ### リソース名の競合
 ```bash
-# Use a unique environment name
+# 一意の環境名を使用してください
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### ポート/ネットワークの問題
 ```bash
-# Check if ports are available
+# ポートが利用可能か確認する
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## 次のステップ
 
-最初のプロジェクトを完了したら、以下の高度なトピックを探求してください:
+最初のプロジェクトを完了したので、以下の高度なトピックを探求しましょう:
 
 ### 1. インフラストラクチャのカスタマイズ
 - [コードとしてのインフラストラクチャ](../deployment/provisioning.md)
@@ -359,14 +467,14 @@ netstat -an | grep :3100
 - [パフォーマンス最適化](../deployment/best-practices.md#performance)
 - [監視とログ](../deployment/best-practices.md#monitoring)
 
-### 4. その他のテンプレートを探索
+### 4. 他のテンプレートを探る
 ```bash
-# Browse templates by category
+# カテゴリ別にテンプレートを閲覧する
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Try different technology stacks
+# 異なる技術スタックを試す
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
@@ -391,19 +499,21 @@ azd init --template todo-java-mongo
 
 ---
 
-**初めての azd プロジェクトを完了したことをおめでとうございます！** これで、Azure 上で素晴らしいアプリケーションを自信を持って構築・デプロイする準備が整いました。
+**最初の azd プロジェクトを完了おめでとうございます！** これで Azure 上で素晴らしいアプリケーションを自信を持って構築・デプロイする準備が整いました。
 
 ---
 
-**章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+**章ナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
 - **📖 現在の章**: 第1章 - 基礎とクイックスタート
 - **⬅️ 前へ**: [インストールとセットアップ](installation.md)
 - **➡️ 次へ**: [設定](configuration.md)
-- **🚀 次の章**: [第2章: AIファースト開発](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 次の章**: [第2章: AIファースト開発](../microsoft-foundry/microsoft-foundry-integration.md)
 - **次のレッスン**: [デプロイメントガイド](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確さが含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T15:04:01+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-19T20:39:53+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "es"
 }
@@ -23,8 +23,8 @@ Esta guía completa cubre todos los aspectos de la configuración de Azure Devel
 ## Objetivos de Aprendizaje
 
 Al final de esta lección, podrás:
-- Dominar la jerarquía de configuración de azd y entender cómo se priorizan los ajustes
-- Configurar ajustes globales y específicos del proyecto de manera efectiva
+- Dominar la jerarquía de configuración de azd y entender cómo se priorizan las configuraciones
+- Configurar ajustes globales y específicos de proyectos de manera efectiva
 - Gestionar múltiples entornos con diferentes configuraciones
 - Implementar patrones seguros de autenticación y autorización
 - Comprender patrones avanzados de configuración para escenarios complejos
@@ -36,7 +36,7 @@ Después de completar esta lección, serás capaz de:
 - Configurar y gestionar múltiples entornos de despliegue
 - Implementar prácticas seguras de gestión de configuración
 - Solucionar problemas relacionados con la configuración
-- Personalizar el comportamiento de azd para requisitos específicos de tu organización
+- Personalizar el comportamiento de azd para requisitos específicos de la organización
 
 Esta guía completa cubre todos los aspectos de la configuración de Azure Developer CLI para flujos de trabajo óptimos de desarrollo y despliegue.
 
@@ -51,38 +51,38 @@ azd utiliza un sistema de configuración jerárquico:
 
 ## Configuración Global
 
-### Configuración de Valores Predeterminados Globales
+### Establecer Valores Predeterminados Globales
 ```bash
-# Set default subscription
+# Establecer suscripción predeterminada
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Establecer ubicación predeterminada
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Establecer convención de nomenclatura del grupo de recursos predeterminado
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Ver toda la configuración global
 azd config list
 
-# Remove a configuration
+# Eliminar una configuración
 azd config unset defaults.location
 ```
 
 ### Configuraciones Globales Comunes
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Preferencias de desarrollo
+azd config set alpha.enable true                    # Habilitar funciones alfa
+azd config set telemetry.enabled false             # Deshabilitar telemetría
+azd config set output.format json                  # Establecer formato de salida
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Configuraciones de seguridad
+azd config set auth.useAzureCliCredential true     # Usar Azure CLI para autenticación
+azd config set tls.insecure false                  # Forzar verificación TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Ajuste de rendimiento
+azd config set provision.parallelism 5             # Creación paralela de recursos
+azd config set deploy.timeout 30m                  # Tiempo de espera de implementación
 ```
 
 ## 🏗️ Configuración del Proyecto
@@ -213,13 +213,13 @@ services:
 
 ### Creación de Entornos
 ```bash
-# Create a new environment
+# Crear un nuevo entorno
 azd env new development
 
-# Create with specific location
+# Crear con ubicación específica
 azd env new staging --location "westus2"
 
-# Create from template
+# Crear desde plantilla
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Cada entorno tiene su propia configuración en `.azure/<env-name>/config.json`:
 
 ### Variables de Entorno
 ```bash
-# Set environment-specific variables
+# Establecer variables específicas del entorno
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Ver variables de entorno
 azd env get-values
 
-# Remove environment variable
+# Salida esperada:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=clave-api-secreta
+# DEBUG=true
+
+# Eliminar variable de entorno
 azd env unset DEBUG
+
+# Verificar eliminación
+azd env get-values | grep DEBUG
+# (no debería devolver nada)
 ```
 
 ### Plantillas de Entorno
-Crea `.azure/env.template` para una configuración consistente de entornos:
+Crea `.azure/env.template` para una configuración consistente del entorno:
 ```bash
-# Required variables
+# Variables requeridas
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Configuración de la aplicación
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Configuración opcional de desarrollo
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Integración con Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# Usar credenciales de Azure CLI (predeterminado)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Iniciar sesión con un inquilino específico
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Establecer suscripción predeterminada
 az account set --subscription <subscription-id>
 ```
 
 ### Autenticación con Principal de Servicio
 Para pipelines de CI/CD:
 ```bash
-# Set environment variables
+# Establecer variables de entorno
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# O configurar directamente
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Identidad Administrada
 Para entornos alojados en Azure:
 ```bash
-# Enable managed identity authentication
+# Habilitar la autenticación de identidad administrada
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -391,7 +400,7 @@ Ejemplo `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azu
 
 ### Nombres Personalizados de Recursos
 ```bash
-# Set naming conventions
+# Establecer convenciones de nomenclatura
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### Entorno de Desarrollo
 ```bash
-# .azure/development/.env
+# .azure/desarrollo/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -442,7 +451,7 @@ USE_PRODUCTION_APIS=true
 
 ### Entorno de Producción
 ```bash
-# .azure/production/.env
+# .azure/producción/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Validar Configuración
 ```bash
-# Check configuration syntax
+# Verificar la sintaxis de configuración
 azd config validate
 
-# Test environment variables
+# Probar las variables de entorno
 azd env get-values
 
-# Validate infrastructure
+# Validar la infraestructura
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ Crea scripts de validación en `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Verificar las variables de entorno requeridas
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Validar la sintaxis de azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -516,12 +525,12 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Consideraciones de Control de Versiones
+### 3. Consideraciones para el Control de Versiones
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Configuraciones del entorno (contienen IDs de recursos)
+.azure/*/.env               # Variables de entorno (pueden contener secretos)
+.env                        # Archivo de entorno local
 ```
 
 ### 4. Documentación de Configuración
@@ -540,11 +549,73 @@ Documenta tu configuración en `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Ejercicios Prácticos
+
+### Ejercicio 1: Configuración Multi-Entorno (15 minutos)
+
+**Objetivo**: Crear y configurar tres entornos con diferentes configuraciones
+
+```bash
+# Crear entorno de desarrollo
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Crear entorno de pruebas
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Crear entorno de producción
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Verificar cada entorno
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Criterios de Éxito:**
+- [ ] Tres entornos creados exitosamente
+- [ ] Cada entorno tiene una configuración única
+- [ ] Se puede cambiar entre entornos sin errores
+- [ ] `azd env list` muestra los tres entornos
+
+### Ejercicio 2: Gestión de Secretos (10 minutos)
+
+**Objetivo**: Practicar la configuración segura con datos sensibles
+
+```bash
+# Establecer secretos (no se muestran en la salida)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Establecer configuración no secreta
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Ver entorno (los secretos deben estar redactados)
+azd env get-values
+
+# Verificar que los secretos están almacenados
+azd env get DB_PASSWORD  # Debería mostrar el valor real
+```
+
+**Criterios de Éxito:**
+- [ ] Secretos almacenados sin mostrarse en la terminal
+- [ ] `azd env get-values` muestra secretos redactados
+- [ ] `azd env get <SECRET_NAME>` individual recupera el valor real
+
 ## Próximos Pasos
 
 - [Tu Primer Proyecto](first-project.md) - Aplica la configuración en la práctica
 - [Guía de Despliegue](../deployment/deployment-guide.md) - Usa la configuración para el despliegue
-- [Provisionamiento de Recursos](../deployment/provisioning.md) - Configuraciones listas para producción
+- [Aprovisionamiento de Recursos](../deployment/provisioning.md) - Configuraciones listas para producción
 
 ## Referencias
 
@@ -563,5 +634,7 @@ Documenta tu configuración en `CONFIG.md`:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

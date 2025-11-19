@@ -1,46 +1,53 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:27:00+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-19T19:01:20+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "ko"
 }
 -->
-# 용량 계획: Azure 할당량 및 제한 이해 - Azure 리소스 가용성과 제한
+# 용량 계획 - Azure 리소스 가용성과 제한
+
+**챕터 네비게이션:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📖 현재 챕터**: 챕터 6 - 배포 전 검증 및 계획
+- **⬅️ 이전 챕터**: [챕터 5: 다중 에이전트 AI 솔루션](../../examples/retail-scenario.md)
+- **➡️ 다음**: [SKU 선택](sku-selection.md)
+- **🚀 다음 챕터**: [챕터 7: 문제 해결](../troubleshooting/common-issues.md)
 
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI를 사용하여 배포하기 전에 Azure 리소스 용량을 계획하고 검증하는 방법을 제공합니다. 할당량, 가용성, 지역 제한을 평가하여 성공적인 배포를 보장하고 비용과 성능을 최적화하는 방법을 배웁니다. 다양한 애플리케이션 아키텍처와 확장 시나리오에 대한 용량 계획 기술을 마스터하세요.
+이 종합 가이드는 Azure Developer CLI를 사용하여 배포하기 전에 Azure 리소스 용량을 계획하고 검증하는 방법을 제공합니다. 할당량, 가용성 및 지역적 제한을 평가하여 성공적인 배포를 보장하고 비용과 성능을 최적화하는 방법을 배웁니다. 다양한 애플리케이션 아키텍처와 확장 시나리오에 대한 용량 계획 기술을 마스터하세요.
 
 ## 학습 목표
 
 이 가이드를 완료하면 다음을 할 수 있습니다:
-- Azure 할당량, 제한 및 지역 가용성 제약을 이해하기
-- 배포 전에 리소스 가용성과 용량을 확인하는 기술 마스터하기
-- 자동화된 용량 검증 및 모니터링 전략 구현하기
-- 적절한 리소스 크기 조정 및 확장 고려 사항으로 애플리케이션 설계하기
-- 지능적인 용량 계획을 통해 비용 최적화 전략 적용하기
-- 할당량 사용 및 리소스 가용성에 대한 알림 및 모니터링 구성하기
+- Azure 할당량, 제한 및 지역 가용성 제약 조건 이해
+- 배포 전에 리소스 가용성과 용량을 확인하는 기술 습득
+- 자동화된 용량 검증 및 모니터링 전략 구현
+- 적절한 리소스 크기 조정 및 확장 고려 사항으로 애플리케이션 설계
+- 지능형 용량 계획을 통한 비용 최적화 전략 적용
+- 할당량 사용 및 리소스 가용성에 대한 경고 및 모니터링 구성
 
 ## 학습 결과
 
 완료 후, 다음을 수행할 수 있습니다:
-- 배포 전에 Azure 리소스 용량 요구 사항을 평가하고 검증하기
-- 용량 확인 및 할당량 모니터링을 위한 자동화된 스크립트 생성하기
-- 지역 및 구독 제한을 고려한 확장 가능한 아키텍처 설계하기
-- 다양한 워크로드 유형에 대한 비용 효율적인 리소스 크기 조정 전략 구현하기
-- 용량 관련 문제에 대한 사전 모니터링 및 알림 구성하기
-- 적절한 용량 분배로 다중 지역 배포 계획하기
+- 배포 전에 Azure 리소스 용량 요구 사항 평가 및 검증
+- 용량 확인 및 할당량 모니터링을 위한 자동화된 스크립트 생성
+- 지역 및 구독 제한을 고려한 확장 가능한 아키텍처 설계
+- 다양한 워크로드 유형에 대한 비용 효율적인 리소스 크기 조정 전략 구현
+- 용량 관련 문제에 대한 사전 모니터링 및 경고 구성
+- 적절한 용량 분배로 다중 지역 배포 계획
 
 ## 용량 계획이 중요한 이유
 
 애플리케이션을 배포하기 전에 다음을 확인해야 합니다:
-- **충분한 할당량**이 필요한 리소스에 제공되는지
-- **리소스 가용성**이 목표 지역에서 확보되는지
-- **서비스 계층 가용성**이 구독 유형에 적합한지
-- **네트워크 용량**이 예상 트래픽을 처리할 수 있는지
-- **적절한 크기 조정을 통한 비용 최적화**가 이루어지는지
+- 필요한 리소스를 위한 **충분한 할당량**
+- 대상 지역에서의 **리소스 가용성**
+- 구독 유형에 따른 **서비스 계층 가용성**
+- 예상 트래픽을 위한 **네트워크 용량**
+- 적절한 크기 조정을 통한 **비용 최적화**
 
 ## 📊 Azure 할당량 및 제한 이해
 
@@ -52,10 +59,10 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### 일반적인 리소스 할당량
 ```bash
-# Check current quota usage
+# 현재 할당량 사용량 확인
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# 특정 리소스 할당량 확인
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
@@ -65,7 +72,7 @@ az storage account show-usage --output table
 ### 자동화된 용량 검증 스크립트
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - 배포 전에 Azure 용량 확인
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# 할당량 사용량을 확인하는 함수
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,10 +118,10 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# 다양한 리소스 할당량 확인
+check_quota "compute" 4      # 4개의 vCPU 필요
+check_quota "storage" 2      # 2개의 스토리지 계정 필요
+check_quota "network" 1      # 1개의 가상 네트워크 필요
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
@@ -124,14 +131,14 @@ echo "✅ Capacity check completed successfully!"
 
 #### App Service 용량
 ```bash
-# Check App Service Plan availability
+# 앱 서비스 플랜 가용성 확인
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # 지역 내 사용 가능한 SKU 확인
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # 대체 지역 제안
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # 현재 사용량 확인
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# 사용량
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### 데이터베이스 용량
 ```bash
-# Check PostgreSQL capacity
+# PostgreSQL 용량 확인
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # SKU 사용 가능 여부 확인
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # 사용 가능한 SKU 표시
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Cosmos DB 용량 확인
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # 지역 가용성 확인
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # 서버리스 지원 여부 확인 (필요한 경우)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### 컨테이너 앱 용량
 ```bash
-# Check Container Apps capacity
+# 컨테이너 앱 용량 확인
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # 컨테이너 앱이 해당 지역에서 사용 가능한지 확인
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # 현재 환경 수 확인
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # 컨테이너 앱은 지역당 15개의 환경 제한이 있음
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # 사용 가능한 지역 표시
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,7 +263,7 @@ check_container_apps_capacity() {
 
 ### 지역별 서비스 가용성
 ```bash
-# Check service availability across regions
+# 지역별 서비스 가용성 확인
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# 모든 서비스 확인
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### 지역 선택 권장 사항
 ```bash
-# Recommend optimal regions based on requirements
+# 요구 사항에 따라 최적의 지역을 추천합니다
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "저비용" | "성능" | "준수"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### 리소스 비용 추정
 ```bash
-# Estimate deployment costs
+# 배포 비용 추정
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # 추정을 위한 임시 리소스 그룹 생성
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # 검증 모드에서 인프라 배포
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # 임시 리소스 그룹 정리
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,7 +363,7 @@ estimate_costs() {
 
 ### SKU 최적화 권장 사항
 ```bash
-# Recommend optimal SKUs based on requirements
+# 요구 사항에 따라 최적의 SKU를 추천합니다
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -421,30 +428,30 @@ recommend_sku() {
 
 ## 🚀 자동화된 사전 점검
 
-### 종합적인 사전 점검 스크립트
+### 종합 사전 점검 스크립트
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - 배포 전 검증 완료
 
 set -e
 
-# Configuration
+# 구성
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# 출력 색상
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # 색상 없음
 
-# Logging functions
+# 로깅 함수
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# 구성 로드
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# 검사 1: 인증
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# 검사 2: 지역 가용성
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# 검사 3: 할당량 검증
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPU 할당량
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# 스토리지 계정 할당량
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# 검사 4: 서비스 가용성
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# 검사 5: 네트워크 용량
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# 검사 6: 리소스 이름 검증
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# 검사 7: 비용 추정
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# 검사 8: 템플릿 검증
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# 최종 요약
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -658,14 +665,14 @@ echo "  3. Verify application health post-deployment"
 
 ### 실시간 용량 모니터링
 ```bash
-# Monitor capacity during deployment
+# 배포 중 용량 모니터링
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # 배포 상태 확인
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # 현재 리소스 사용량 확인
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -711,13 +718,13 @@ hooks:
 
 ## 모범 사례
 
-1. **새로운 지역에 배포하기 전에 항상 용량 확인**하기
-2. **할당량 사용량을 정기적으로 모니터링**하여 예기치 않은 상황 방지하기
-3. **미래 용량 요구 사항을 확인하여 성장 계획** 세우기
-4. **비용 추정 도구를 사용하여 과도한 청구 방지**하기
-5. **팀을 위해 용량 요구 사항 문서화**하기
-6. **CI/CD 파이프라인에서 용량 검증 자동화**하기
-7. **지역 장애 조치** 용량 요구 사항 고려하기
+1. **새로운 지역에 배포하기 전에 항상 용량 확인**을 실행하세요
+2. **할당량 사용량을 정기적으로 모니터링**하여 예기치 않은 상황을 방지하세요
+3. **미래 용량 요구 사항을 확인**하여 성장에 대비하세요
+4. **비용 추정 도구를 사용**하여 예산 초과를 방지하세요
+5. **팀을 위해 용량 요구 사항을 문서화**하세요
+6. **CI/CD 파이프라인에서 용량 검증을 자동화**하세요
+7. **지역 장애 조치(failover) 용량 요구 사항을 고려**하세요
 
 ## 다음 단계
 
@@ -735,12 +742,14 @@ hooks:
 
 ---
 
-**탐색**
+**네비게이션**
 - **이전 레슨**: [디버깅 가이드](../troubleshooting/debugging.md)
 
 - **다음 레슨**: [SKU 선택](sku-selection.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서를 해당 언어로 작성된 상태에서 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

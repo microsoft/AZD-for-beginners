@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T14:49:02+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-19T20:04:18+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "pt"
 }
@@ -18,71 +18,71 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Este guia abrangente cobre todos os aspetos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação otimizados. Vai aprender sobre a hierarquia de configuração, gestão de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implementações eficientes e seguras no Azure.
+Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação ideais. Aprenderá sobre a hierarquia de configuração, gestão de ambientes, métodos de autenticação e padrões avançados de configuração que permitem implementações eficientes e seguras no Azure.
 
 ## Objetivos de Aprendizagem
 
-No final desta lição, irá:
-- Dominar a hierarquia de configuração do azd e compreender como as definições são priorizadas
-- Configurar definições globais e específicas do projeto de forma eficaz
+Ao final desta lição, você será capaz de:
+- Dominar a hierarquia de configuração do azd e entender como as definições são priorizadas
+- Configurar definições globais e específicas de projeto de forma eficaz
 - Gerir múltiplos ambientes com diferentes configurações
 - Implementar padrões seguros de autenticação e autorização
 - Compreender padrões avançados de configuração para cenários complexos
 
 ## Resultados de Aprendizagem
 
-Após concluir esta lição, será capaz de:
-- Configurar o azd para fluxos de trabalho de desenvolvimento otimizados
+Após concluir esta lição, você será capaz de:
+- Configurar o azd para fluxos de trabalho de desenvolvimento ideais
 - Configurar e gerir múltiplos ambientes de implementação
 - Implementar práticas seguras de gestão de configuração
-- Resolver problemas relacionados com configuração
-- Personalizar o comportamento do azd para requisitos específicos da sua organização
+- Resolver problemas relacionados à configuração
+- Personalizar o comportamento do azd para requisitos específicos da organização
 
-Este guia abrangente cobre todos os aspetos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação otimizados.
+Este guia abrangente cobre todos os aspectos da configuração do Azure Developer CLI para fluxos de trabalho de desenvolvimento e implementação ideais.
 
 ## Hierarquia de Configuração
 
 O azd utiliza um sistema hierárquico de configuração:
-1. **Flags da linha de comando** (prioridade mais alta)
+1. **Flags da linha de comando** (maior prioridade)
 2. **Variáveis de ambiente**
 3. **Configuração local do projeto** (`.azd/config.json`)
 4. **Configuração global do utilizador** (`~/.azd/config.json`)
-5. **Valores padrão** (prioridade mais baixa)
+5. **Valores padrão** (menor prioridade)
 
 ## Configuração Global
 
-### Definir Valores Padrão Globais
+### Definindo Padrões Globais
 ```bash
-# Set default subscription
+# Definir subscrição padrão
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Definir localização padrão
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Definir convenção de nomenclatura padrão para o grupo de recursos
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Ver toda a configuração global
 azd config list
 
-# Remove a configuration
+# Remover uma configuração
 azd config unset defaults.location
 ```
 
-### Definições Globais Comuns
+### Configurações Globais Comuns
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Preferências de desenvolvimento
+azd config set alpha.enable true                    # Ativar funcionalidades alfa
+azd config set telemetry.enabled false             # Desativar telemetria
+azd config set output.format json                  # Definir formato de saída
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Configurações de segurança
+azd config set auth.useAzureCliCredential true     # Usar Azure CLI para autenticação
+azd config set tls.insecure false                  # Impor verificação TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Otimização de desempenho
+azd config set provision.parallelism 5             # Criação paralela de recursos
+azd config set deploy.timeout 30m                  # Tempo limite de implementação
 ```
 
 ## 🏗️ Configuração do Projeto
@@ -164,7 +164,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Opções de Configuração de Serviços
+### Opções de Configuração de Serviço
 
 #### Tipos de Host
 ```yaml
@@ -185,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Definições Específicas de Linguagem
+#### Configurações Específicas de Linguagem
 ```yaml
 services:
   node-app:
@@ -211,20 +211,20 @@ services:
 
 ## 🌟 Gestão de Ambientes
 
-### Criar Ambientes
+### Criando Ambientes
 ```bash
-# Create a new environment
+# Criar um novo ambiente
 azd env new development
 
-# Create with specific location
+# Criar com localização específica
 azd env new staging --location "westus2"
 
-# Create from template
+# Criar a partir de um modelo
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Configuração de Ambientes
-Cada ambiente tem a sua própria configuração em `.azure/<env-name>/config.json`:
+### Configuração de Ambiente
+Cada ambiente tem sua própria configuração em `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -248,31 +248,40 @@ Cada ambiente tem a sua própria configuração em `.azure/<env-name>/config.jso
 
 ### Variáveis de Ambiente
 ```bash
-# Set environment-specific variables
+# Definir variáveis específicas do ambiente
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Ver variáveis de ambiente
 azd env get-values
 
-# Remove environment variable
+# Saída esperada:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=chave-api-secreta
+# DEBUG=true
+
+# Remover variável de ambiente
 azd env unset DEBUG
+
+# Verificar remoção
+azd env get-values | grep DEBUG
+# (não deve retornar nada)
 ```
 
 ### Modelos de Ambiente
-Crie `.azure/env.template` para uma configuração consistente de ambientes:
+Crie `.azure/env.template` para uma configuração consistente de ambiente:
 ```bash
-# Required variables
+# Variáveis necessárias
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Configurações da aplicação
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Configurações opcionais de desenvolvimento
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Integração com Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# Usar credenciais do Azure CLI (padrão)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Iniciar sessão com inquilino específico
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Definir subscrição padrão
 az account set --subscription <subscription-id>
 ```
 
-### Autenticação com Principal de Serviço
-Para pipelines de CI/CD:
+### Autenticação com Service Principal
+Para pipelines CI/CD:
 ```bash
-# Set environment variables
+# Definir variáveis de ambiente
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Ou configurar diretamente
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Identidade Gerida
 Para ambientes hospedados no Azure:
 ```bash
-# Enable managed identity authentication
+# Ativar autenticação de identidade gerida
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -337,7 +346,7 @@ Configure os parâmetros de infraestrutura em `infra/main.parameters.json`:
 }
 ```
 
-### Configuração do Terraform
+### Configuração Terraform
 Para projetos Terraform, configure em `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
@@ -371,7 +380,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Configuração do Docker
+### Configuração Docker
 ```yaml
 services:
   api:
@@ -391,7 +400,7 @@ Exemplo de `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/
 
 ### Nomeação Personalizada de Recursos
 ```bash
-# Set naming conventions
+# Definir convenções de nomenclatura
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### Ambiente de Desenvolvimento
 ```bash
-# .azure/development/.env
+# .azure/desenvolvimento/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -442,7 +451,7 @@ USE_PRODUCTION_APIS=true
 
 ### Ambiente de Produção
 ```bash
-# .azure/production/.env
+# .azure/produção/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Validar Configuração
 ```bash
-# Check configuration syntax
+# Verificar a sintaxe da configuração
 azd config validate
 
-# Test environment variables
+# Testar variáveis de ambiente
 azd env get-values
 
-# Validate infrastructure
+# Validar infraestrutura
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ Crie scripts de validação em `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Verificar variáveis de ambiente necessárias
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Validar a sintaxe do azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -487,7 +496,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Boas Práticas
+## 🎓 Melhores Práticas
 
 ### 1. Utilize Variáveis de Ambiente
 ```yaml
@@ -516,16 +525,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Considerações sobre Controlo de Versões
+### 3. Considerações sobre Controlo de Versão
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Configurações do ambiente (contêm IDs de recursos)
+.azure/*/.env               # Variáveis de ambiente (podem conter segredos)
+.env                        # Ficheiro de ambiente local
 ```
 
-### 4. Documentação da Configuração
-Documente a sua configuração em `CONFIG.md`:
+### 4. Documentação de Configuração
+Documente sua configuração em `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -540,10 +549,72 @@ Documente a sua configuração em `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Exercícios Práticos
+
+### Exercício 1: Configuração Multi-Ambiente (15 minutos)
+
+**Objetivo**: Criar e configurar três ambientes com definições diferentes
+
+```bash
+# Criar ambiente de desenvolvimento
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Criar ambiente de teste
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Criar ambiente de produção
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Verificar cada ambiente
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Critérios de Sucesso:**
+- [ ] Três ambientes criados com sucesso
+- [ ] Cada ambiente tem configuração única
+- [ ] É possível alternar entre os ambientes sem erros
+- [ ] `azd env list` mostra todos os três ambientes
+
+### Exercício 2: Gestão de Segredos (10 minutos)
+
+**Objetivo**: Praticar configuração segura com dados sensíveis
+
+```bash
+# Definir segredos (não exibidos na saída)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Definir configuração não secreta
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Ver ambiente (os segredos devem ser ocultados)
+azd env get-values
+
+# Verificar se os segredos estão armazenados
+azd env get DB_PASSWORD  # Deve mostrar o valor real
+```
+
+**Critérios de Sucesso:**
+- [ ] Segredos armazenados sem serem exibidos no terminal
+- [ ] `azd env get-values` mostra segredos ocultos
+- [ ] `azd env get <SECRET_NAME>` individual recupera o valor real
+
 ## Próximos Passos
 
-- [O Seu Primeiro Projeto](first-project.md) - Aplicar a configuração na prática
-- [Guia de Implementação](../deployment/deployment-guide.md) - Utilizar a configuração para implementação
+- [O Seu Primeiro Projeto](first-project.md) - Aplicar configuração na prática
+- [Guia de Implementação](../deployment/deployment-guide.md) - Usar configuração para implementação
 - [Provisionamento de Recursos](../deployment/provisioning.md) - Configurações prontas para produção
 
 ## Referências
@@ -563,5 +634,7 @@ Documente a sua configuração em `CONFIG.md`:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original no seu idioma nativo deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes do uso desta tradução.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

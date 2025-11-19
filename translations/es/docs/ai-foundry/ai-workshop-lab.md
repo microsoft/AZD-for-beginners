@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "22e9deee2d82e70fc841c60f97627916",
-  "translation_date": "2025-09-23T13:56:09+00:00",
+  "original_hash": "8b26783231714a00efafee3aca8b233c",
+  "translation_date": "2025-11-19T20:35:05+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "es"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Resumen del taller
 
-Este laboratorio práctico guía a los desarrolladores en el proceso de tomar una plantilla de IA existente y desplegarla utilizando Azure Developer CLI (AZD). Aprenderás patrones esenciales para despliegues de IA en producción utilizando los servicios de Azure AI Foundry.
+Este laboratorio práctico guía a los desarrolladores a través del proceso de tomar una plantilla de IA existente y desplegarla utilizando Azure Developer CLI (AZD). Aprenderás patrones esenciales para despliegues de IA en producción utilizando los servicios de Microsoft Foundry.
 
 **Duración:** 2-3 horas  
 **Nivel:** Intermedio  
@@ -26,9 +26,9 @@ Este laboratorio práctico guía a los desarrolladores en el proceso de tomar un
 
 ## 🎓 Objetivos de aprendizaje
 
-Al finalizar este taller, serás capaz de:
+Al final de este taller, podrás:
 - ✅ Convertir una aplicación de IA existente para usar plantillas de AZD
-- ✅ Configurar servicios de Azure AI Foundry con AZD
+- ✅ Configurar servicios de Microsoft Foundry con AZD
 - ✅ Implementar gestión segura de credenciales para servicios de IA
 - ✅ Desplegar aplicaciones de IA listas para producción con monitoreo
 - ✅ Solucionar problemas comunes de despliegue de IA
@@ -46,7 +46,7 @@ Al finalizar este taller, serás capaz de:
 - Acceso a servicios de Azure OpenAI (o capacidad para solicitar acceso)
 - Permisos para crear grupos de recursos
 
-### Conocimientos necesarios
+### Conocimientos previos
 - Comprensión básica de los servicios de Azure
 - Familiaridad con interfaces de línea de comandos
 - Conceptos básicos de IA/ML (APIs, modelos, prompts)
@@ -57,13 +57,13 @@ Al finalizar este taller, serás capaz de:
 
 1. **Verificar instalaciones de herramientas:**
 ```bash
-# Check AZD installation
+# Verificar la instalación de AZD
 azd version
 
-# Check Azure CLI
+# Verificar Azure CLI
 az --version
 
-# Login to Azure
+# Iniciar sesión en Azure
 az login
 azd auth login
 ```
@@ -74,7 +74,7 @@ git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## Módulo 1: Comprendiendo la estructura de AZD para aplicaciones de IA
+## Módulo 1: Comprender la estructura de AZD para aplicaciones de IA
 
 ### Anatomía de una plantilla AZD lista para IA
 
@@ -120,10 +120,10 @@ cat infra/main.bicep
 
 ### **Punto de discusión:** Por qué estos patrones son importantes para IA
 
-- **Dependencias de servicios**: Las aplicaciones de IA suelen requerir múltiples servicios coordinados.
-- **Seguridad**: Las claves API y los endpoints necesitan gestión segura.
-- **Escalabilidad**: Las cargas de trabajo de IA tienen requisitos únicos de escalabilidad.
-- **Gestión de costos**: Los servicios de IA pueden ser costosos si no se configuran adecuadamente.
+- **Dependencias de servicios**: Las aplicaciones de IA suelen requerir múltiples servicios coordinados
+- **Seguridad**: Las claves API y los endpoints necesitan gestión segura
+- **Escalabilidad**: Las cargas de trabajo de IA tienen requisitos únicos de escalabilidad
+- **Gestión de costos**: Los servicios de IA pueden ser costosos si no se configuran adecuadamente
 
 ## Módulo 2: Despliega tu primera aplicación de IA
 
@@ -136,10 +136,10 @@ azd env new myai-workshop
 
 2. **Establecer parámetros requeridos:**
 ```bash
-# Set your preferred Azure region
+# Establece tu región preferida de Azure
 azd env set AZURE_LOCATION eastus
 
-# Optional: Set specific OpenAI model
+# Opcional: Establece un modelo específico de OpenAI
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
@@ -175,27 +175,27 @@ azd show --output json | grep "webAppUrl"
 3. **Probar la funcionalidad de IA:**
    - Navega a la aplicación web
    - Prueba consultas de ejemplo
-   - Verifica que las respuestas de IA funcionen correctamente
+   - Verifica que las respuestas de IA funcionen
 
 ### **Ejercicio de laboratorio 2.1: Práctica de solución de problemas**
 
-**Escenario**: Tu despliegue fue exitoso, pero la IA no responde.
+**Escenario**: Tu despliegue fue exitoso pero la IA no responde.
 
 **Problemas comunes a verificar:**
-1. **Claves API de OpenAI**: Verifica que estén configuradas correctamente.
-2. **Disponibilidad del modelo**: Comprueba si tu región admite el modelo.
-3. **Conectividad de red**: Asegúrate de que los servicios puedan comunicarse.
-4. **Permisos RBAC**: Verifica que la aplicación pueda acceder a OpenAI.
+1. **Claves API de OpenAI**: Verifica que estén configuradas correctamente
+2. **Disponibilidad del modelo**: Comprueba si tu región admite el modelo
+3. **Conectividad de red**: Asegúrate de que los servicios puedan comunicarse
+4. **Permisos RBAC**: Verifica que la aplicación pueda acceder a OpenAI
 
 **Comandos de depuración:**
 ```bash
-# Check environment variables
+# Verificar las variables de entorno
 azd env get-values
 
-# View deployment logs
+# Ver ver los registros de implementación
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Check OpenAI deployment status
+# Verificar el estado de implementación de OpenAI
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
@@ -205,10 +205,10 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 
 1. **Actualizar el modelo de OpenAI:**
 ```bash
-# Change to a different model (if available in your region)
+# Cambiar a un modelo diferente (si está disponible en tu región)
 azd env set AZURE_OPENAI_MODEL gpt-4
 
-# Redeploy with the new configuration
+# Reimplementar con la nueva configuración
 azd deploy
 ```
 
@@ -242,11 +242,11 @@ azd env new myai-production
 
 2. **Establecer parámetros específicos de producción:**
 ```bash
-# Production typically uses higher SKUs
+# La producción típicamente utiliza SKUs más altos
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# Enable additional security features
+# Habilitar características de seguridad adicionales
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
@@ -255,14 +255,14 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **Desafío**: Configura la plantilla para un desarrollo rentable.
 
 **Tareas:**
-1. Identifica qué SKUs pueden configurarse en niveles gratuitos/básicos.
-2. Configura variables de entorno para minimizar costos.
-3. Despliega y compara costos con la configuración de producción.
+1. Identifica qué SKUs pueden configurarse en niveles gratuitos/básicos
+2. Configura variables de entorno para minimizar costos
+3. Despliega y compara costos con la configuración de producción
 
 **Pistas para la solución:**
-- Usa el nivel F0 (gratuito) para Cognitive Services cuando sea posible.
-- Usa el nivel Básico para Search Service en desarrollo.
-- Considera usar el plan de consumo para Functions.
+- Usa el nivel F0 (gratuito) para Cognitive Services cuando sea posible
+- Usa el nivel Básico para Search Service en desarrollo
+- Considera usar el plan de Consumo para Functions
 
 ## Módulo 4: Seguridad y mejores prácticas para producción
 
@@ -274,13 +274,13 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 1. **Revisar la configuración de seguridad en tu plantilla:**
 ```bash
-# Look for Key Vault and Managed Identity configuration
+# Buscar la configuración de Key Vault e Identidad Administrada
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Verificar que Managed Identity esté funcionando:**
+2. **Verificar que Managed Identity funcione:**
 ```bash
-# Check if the web app has the correct identity configuration
+# Verificar si la aplicación web tiene la configuración de identidad correcta
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
@@ -315,12 +315,12 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 1. **Configurar Application Insights:**
 ```bash
-# Application Insights should be automatically configured
-# Check the configuration:
+# Los Insights de la Aplicación deben configurarse automáticamente
+# Verifique la configuración:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Establecer monitoreo específico para IA:**
+2. **Configurar monitoreo específico de IA:**
 
 Agrega métricas personalizadas para operaciones de IA:
 ```bicep
@@ -348,11 +348,11 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 **Tarea**: Revisa tu despliegue para mejores prácticas de seguridad.
 
 **Lista de verificación:**
-- [ ] No hay secretos codificados en el código o configuración.
-- [ ] Managed Identity se usa para autenticación entre servicios.
-- [ ] Key Vault almacena configuraciones sensibles.
-- [ ] El acceso a la red está restringido adecuadamente.
-- [ ] Monitoreo y registro están habilitados.
+- [ ] No hay secretos codificados en el código o configuración
+- [ ] Managed Identity usado para autenticación entre servicios
+- [ ] Key Vault almacena configuraciones sensibles
+- [ ] El acceso a la red está restringido adecuadamente
+- [ ] Monitoreo y registro están habilitados
 
 ## Módulo 5: Convertir tu propia aplicación de IA
 
@@ -385,7 +385,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Initialize AZD template
+# Inicializar la plantilla AZD
 azd init --template minimal
 ```
 
@@ -461,53 +461,53 @@ output name string = openAIAccount.name
 **Desafío**: Crea una plantilla AZD para una aplicación de procesamiento de documentos con IA.
 
 **Requisitos:**
-- Azure OpenAI para análisis de contenido.
-- Document Intelligence para OCR.
-- Storage Account para cargas de documentos.
-- Function App para lógica de procesamiento.
-- Aplicación web para interfaz de usuario.
+- Azure OpenAI para análisis de contenido
+- Document Intelligence para OCR
+- Storage Account para cargas de documentos
+- Function App para lógica de procesamiento
+- Aplicación web para interfaz de usuario
 
 **Puntos extra:**
-- Agrega manejo adecuado de errores.
-- Incluye estimación de costos.
-- Configura paneles de monitoreo.
+- Agrega manejo adecuado de errores
+- Incluye estimación de costos
+- Configura paneles de monitoreo
 
 ## Módulo 6: Solución de problemas comunes
 
 ### Problemas comunes de despliegue
 
 #### Problema 1: Cuota del servicio OpenAI excedida
-**Síntomas:** El despliegue falla con error de cuota.
+**Síntomas:** El despliegue falla con error de cuota
 **Soluciones:**
 ```bash
-# Check current quotas
+# Verificar las cuotas actuales
 az cognitiveservices usage list --location eastus
 
-# Request quota increase or try different region
+# Solicitar aumento de cuota o intentar en una región diferente
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
 #### Problema 2: Modelo no disponible en la región
-**Síntomas:** Las respuestas de IA fallan o errores de despliegue del modelo.
+**Síntomas:** Las respuestas de IA fallan o errores de despliegue del modelo
 **Soluciones:**
 ```bash
-# Check model availability by region
+# Verificar la disponibilidad del modelo por región
 az cognitiveservices model list --location eastus
 
-# Update to available model
+# Actualizar al modelo disponible
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
 #### Problema 3: Problemas de permisos
-**Síntomas:** Errores 403 Forbidden al llamar a servicios de IA.
+**Síntomas:** Errores 403 Forbidden al llamar a servicios de IA
 **Soluciones:**
 ```bash
-# Check role assignments
+# Verificar asignaciones de roles
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Add missing roles
+# Agregar roles faltantes
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -518,29 +518,29 @@ az role assignment create \
 
 #### Problema 4: Respuestas lentas de IA
 **Pasos de investigación:**
-1. Revisa métricas de rendimiento en Application Insights.
-2. Revisa métricas del servicio OpenAI en el portal de Azure.
-3. Verifica conectividad de red y latencia.
+1. Revisa métricas de rendimiento en Application Insights
+2. Revisa métricas del servicio OpenAI en el portal de Azure
+3. Verifica conectividad de red y latencia
 
 **Soluciones:**
-- Implementa caché para consultas comunes.
-- Usa el modelo OpenAI adecuado para tu caso de uso.
-- Considera réplicas de lectura para escenarios de alta carga.
+- Implementa caché para consultas comunes
+- Usa el modelo OpenAI adecuado para tu caso de uso
+- Considera réplicas de lectura para escenarios de alta carga
 
 ### **Ejercicio de laboratorio 6.1: Desafío de depuración**
 
 **Escenario**: Tu despliegue fue exitoso, pero la aplicación devuelve errores 500.
 
 **Tareas de depuración:**
-1. Revisa los registros de la aplicación.
-2. Verifica la conectividad de servicios.
-3. Prueba la autenticación.
-4. Revisa la configuración.
+1. Revisa los registros de la aplicación
+2. Verifica la conectividad de servicios
+3. Prueba la autenticación
+4. Revisa la configuración
 
 **Herramientas a usar:**
-- `azd show` para una vista general del despliegue.
-- Portal de Azure para registros detallados de servicios.
-- Application Insights para telemetría de la aplicación.
+- `azd show` para vista general del despliegue
+- Portal de Azure para registros detallados de servicios
+- Application Insights para telemetría de la aplicación
 
 ## Módulo 7: Monitoreo y optimización
 
@@ -549,14 +549,14 @@ az role assignment create \
 1. **Crear paneles personalizados:**
 
 Navega al portal de Azure y crea un panel con:
-- Conteo de solicitudes y latencia de OpenAI.
-- Tasas de error de la aplicación.
-- Utilización de recursos.
-- Seguimiento de costos.
+- Conteo de solicitudes y latencia de OpenAI
+- Tasas de error de la aplicación
+- Utilización de recursos
+- Seguimiento de costos
 
 2. **Configurar alertas:**
 ```bash
-# Alert for high error rate
+# Alerta por alta tasa de errores
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -569,50 +569,50 @@ az monitor metrics alert create \
 
 1. **Analizar costos actuales:**
 ```bash
-# Use Azure CLI to get cost data
+# Usa Azure CLI para obtener datos de costos
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
 2. **Implementar controles de costos:**
-- Configurar alertas de presupuesto.
-- Usar políticas de autoescalado.
-- Implementar caché de solicitudes.
-- Monitorear uso de tokens para OpenAI.
+- Configurar alertas de presupuesto
+- Usar políticas de autoescalado
+- Implementar caché de solicitudes
+- Monitorear uso de tokens para OpenAI
 
 ### **Ejercicio de laboratorio 7.1: Optimización de rendimiento**
 
 **Tarea**: Optimiza tu aplicación de IA para rendimiento y costos.
 
 **Métricas a mejorar:**
-- Reducir el tiempo promedio de respuesta en un 20%.
-- Reducir los costos mensuales en un 15%.
-- Mantener un tiempo de actividad del 99.9%.
+- Reducir el tiempo promedio de respuesta en un 20%
+- Reducir costos mensuales en un 15%
+- Mantener un tiempo de actividad del 99.9%
 
 **Estrategias a probar:**
-- Implementar caché de respuestas.
-- Optimizar prompts para eficiencia de tokens.
-- Usar SKUs de cómputo adecuados.
-- Configurar autoescalado correctamente.
+- Implementar caché de respuestas
+- Optimizar prompts para eficiencia de tokens
+- Usar SKUs de cómputo adecuados
+- Configurar autoescalado adecuado
 
 ## Desafío final: Implementación de extremo a extremo
 
 ### Escenario del desafío
 
-Se te asigna la tarea de crear un chatbot de servicio al cliente impulsado por IA listo para producción con los siguientes requisitos:
+Se te asigna la tarea de crear un chatbot de servicio al cliente impulsado por IA listo para producción con estos requisitos:
 
 **Requisitos funcionales:**
-- Interfaz web para interacciones con clientes.
-- Integración con Azure OpenAI para respuestas.
-- Capacidad de búsqueda de documentos usando Cognitive Search.
-- Integración con la base de datos de clientes existente.
-- Soporte multilingüe.
+- Interfaz web para interacciones con clientes
+- Integración con Azure OpenAI para respuestas
+- Capacidad de búsqueda de documentos usando Cognitive Search
+- Integración con la base de datos de clientes existente
+- Soporte multilingüe
 
 **Requisitos no funcionales:**
-- Manejar 1000 usuarios concurrentes.
-- SLA de tiempo de actividad del 99.9%.
-- Cumplimiento SOC 2.
-- Costos inferiores a $500/mes.
-- Despliegue en múltiples entornos (desarrollo, pruebas, producción).
+- Manejar 1000 usuarios concurrentes
+- SLA de tiempo de actividad del 99.9%
+- Cumplimiento SOC 2
+- Costo inferior a $500/mes
+- Despliegue en múltiples entornos (desarrollo, pruebas, producción)
 
 ### Pasos de implementación
 
@@ -636,7 +636,7 @@ Se te asigna la tarea de crear un chatbot de servicio al cliente impulsado por I
 ### Documentación de Microsoft
 - [Documentación de Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Documentación del servicio Azure OpenAI](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Documentación de Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/)
+- [Documentación de Microsoft Foundry](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Plantillas de ejemplo
 - [Aplicación de chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
@@ -644,35 +644,35 @@ Se te asigna la tarea de crear un chatbot de servicio al cliente impulsado por I
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Recursos comunitarios
-- [Discord de Azure AI Foundry](https://discord.gg/microsoft-azure)
+- [Discord de Microsoft Foundry](https://discord.gg/microsoft-azure)
 - [GitHub de Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [Plantillas Awesome AZD](https://azure.github.io/awesome-azd/)
+- [Plantillas AZD increíbles](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Certificado de finalización
-¡Felicidades! Has completado el laboratorio del Taller de IA. Ahora deberías ser capaz de:
+¡Felicidades! Has completado el Taller de IA. Ahora deberías ser capaz de:
 
 - ✅ Convertir aplicaciones de IA existentes en plantillas AZD
-- ✅ Desplegar aplicaciones de IA listas para producción
-- ✅ Implementar mejores prácticas de seguridad para cargas de trabajo de IA
+- ✅ Implementar aplicaciones de IA listas para producción
+- ✅ Aplicar las mejores prácticas de seguridad para cargas de trabajo de IA
 - ✅ Monitorear y optimizar el rendimiento de aplicaciones de IA
-- ✅ Solucionar problemas comunes de despliegue
+- ✅ Solucionar problemas comunes de implementación
 
 ### Próximos Pasos
 1. Aplica estos patrones a tus propios proyectos de IA
 2. Contribuye con plantillas a la comunidad
-3. Únete al Discord de Azure AI Foundry para soporte continuo
-4. Explora temas avanzados como despliegues en múltiples regiones
+3. Únete al Discord de Microsoft Foundry para soporte continuo
+4. Explora temas avanzados como implementaciones en múltiples regiones
 
 ---
 
-**Comentarios sobre el Taller**: Ayúdanos a mejorar este taller compartiendo tu experiencia en el [canal #Azure de Discord de Azure AI Foundry](https://discord.gg/microsoft-azure).
+**Comentarios sobre el Taller**: Ayúdanos a mejorar este taller compartiendo tu experiencia en el [canal #Azure de Microsoft Foundry Discord](https://discord.gg/microsoft-azure).
 
 ---
 
 **Navegación por Capítulos:**
 - **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 2 - Desarrollo con IA como prioridad
-- **⬅️ Anterior**: [Despliegue de Modelos de IA](ai-model-deployment.md)
+- **📖 Capítulo Actual**: Capítulo 2 - Desarrollo con Enfoque en IA
+- **⬅️ Anterior**: [Implementación de Modelos de IA](ai-model-deployment.md)
 - **➡️ Siguiente**: [Mejores Prácticas para IA en Producción](production-ai-practices.md)
 - **🚀 Próximo Capítulo**: [Capítulo 3: Configuración](../getting-started/configuration.md)
 
@@ -680,3 +680,7 @@ Se te asigna la tarea de crear un chatbot de servicio al cliente impulsado por I
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Descargo de responsabilidad**:  
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
