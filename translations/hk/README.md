@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "bca88e3bcd54e5f582c396ffe688ab2d",
-  "translation_date": "2025-11-19T10:28:48+00:00",
+  "original_hash": "b79ef24ce895f99bbed93b5de39ede9f",
+  "translation_date": "2025-11-19T12:23:03+00:00",
   "source_file": "README.md",
   "language_code": "hk"
 }
@@ -44,7 +44,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 生產環境 AI 部署的最佳實踐  
 - Azure AI 服務的整合與配置
 - AI 工作負載的成本優化
-- AI 部署特定問題的排查
+- 解決 AI 部署特定問題的疑難排解
 
 ### 學習目標
 
@@ -52,7 +52,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **掌握 AZD 基礎**：核心概念、安裝與配置
 - **部署 AI 應用程式**：使用 AZD 與 Microsoft Foundry 服務
 - **實現基礎設施即代碼**：使用 Bicep 模板管理 Azure 資源
-- **排查部署問題**：解決常見問題並進行除錯
+- **解決部署問題**：解決常見問題並進行除錯
 - **優化生產環境**：安全性、擴展性、監控與成本管理
 - **構建多代理解決方案**：部署複雜的 AI 架構
 
@@ -74,10 +74,10 @@ CO_OP_TRANSLATOR_METADATA:
 - **🎯 從這裡開始**：[什麼是 Azure Developer CLI？](../..)
 - **📖 理論**：[AZD 基礎](docs/getting-started/azd-basics.md) - 核心概念與術語
 - **⚙️ 設置**：[安裝與設置](docs/getting-started/installation.md) - 平台特定指南
-- **🛠️ 實踐**：[你的第一個專案](docs/getting-started/first-project.md) - 步驟教學
+- **🛠️ 實作**：[你的第一個專案](docs/getting-started/first-project.md) - 步驟教學
 - **📋 快速參考**：[命令速查表](resources/cheat-sheet.md)
 
-#### 實踐練習
+#### 實作練習
 ```bash
 # Quick installation check
 azd version
@@ -136,7 +136,7 @@ azd down --force --purge  # Cleans up resources
 - **🎥 互動指南**：[工作坊材料](workshop/README.md) - 使用 MkDocs 的瀏覽器學習 * DevContainer 環境
 - **📋 模板**：[Microsoft Foundry 模板](../..)
 
-#### 實踐練習
+#### 實作練習
 ```bash
 # Deploy your first AI application
 azd init --template azure-search-openai-demo
@@ -167,23 +167,23 @@ azd down --force --purge
 
 #### 💰 AI 部署的成本考量
 
-**開發環境（估算 $80-150/月）：**
-- Azure OpenAI（按需付費）：$0-50/月（基於 token 使用量）
+**開發環境（估計 $80-150/月）：**
+- Azure OpenAI（按使用量付費）：$0-50/月（基於 token 使用量）
 - AI 搜索（基本層）：$75/月
-- 容器應用（消耗模式）：$0-20/月
+- 容器應用（按消耗計費）：$0-20/月
 - 儲存（標準）：$1-5/月
 
-**生產環境（估算 $300-3,500+/月）：**
-- Azure OpenAI（PTU 保持穩定性能）：$3,000+/月 或按需付費高流量
+**生產環境（估計 $300-3,500+/月）：**
+- Azure OpenAI（PTU 保持穩定性能）：$3,000+/月 或按高流量使用量付費
 - AI 搜索（標準層）：$250/月
 - 容器應用（專用）：$50-100/月
-- 應用程式洞察：$5-50/月
+- 應用洞察：$5-50/月
 - 儲存（高級）：$10-50/月
 
 **💡 成本優化提示：**
 - 使用 **免費層** Azure OpenAI 進行學習（每月包含 50,000 tokens）
-- 運行 `azd down` 在不活躍開發時釋放資源
-- 從基於消耗的計費開始，僅在生產環境升級到 PTU
+- 運行 `azd down` 以釋放資源，當不活躍開發時
+- 從按消耗計費開始，僅在生產環境升級到 PTU
 - 使用 `azd provision --preview` 在部署前估算成本
 - 啟用自動擴展：僅支付實際使用量
 
@@ -213,12 +213,12 @@ az consumption budget list --resource-group <your-rg>
 - **🔐 安全性**：身份驗證模式與受管理身份
 - **📝 範例**：[資料庫應用範例](../../examples/database-app) - 配置模式
 
-#### 實踐練習
+#### 實作練習
 - 配置多個環境（開發、測試、正式）
 - 設置受管理身份驗證
 - 實現環境特定配置
 
-**💡 章節成果**：管理多個環境並實現正確的身份驗證與安全性
+**💡 章節成果**：管理多個環境，並具備適當的身份驗證與安全性
 
 ---
 
@@ -237,7 +237,7 @@ az consumption budget list --resource-group <your-rg>
 - **🏗️ 配置**：[資源配置](docs/deployment/provisioning.md) - Azure 資源管理
 - **📝 範例**：[容器應用範例](../../examples/container-app) - 容器化部署
 
-#### 實踐練習
+#### 實作練習
 - 創建自定義 Bicep 模板
 - 部署多服務應用程式
 - 實現藍綠部署策略
@@ -261,7 +261,7 @@ az consumption budget list --resource-group <your-rg>
 - **🛠️ ARM 模板**：[ARM 模板包](../../examples/retail-multiagent-arm-template) - 一鍵部署
 - **📖 架構**：多代理協作模式
 
-#### 實踐練習
+#### 實作練習
 ```bash
 # Deploy the complete retail multi-agent solution
 cd examples/retail-multiagent-arm-template
@@ -315,7 +315,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - **🤖 AI 問題**: [AI 特定故障排除](docs/troubleshooting/ai-troubleshooting.md) - AI 服務問題
 
 #### 實踐練習
-- 診斷部署失敗
+- 診斷部署失敗原因
 - 解決身份驗證問題
 - 除錯 AI 服務連接問題
 
@@ -341,7 +341,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 實踐練習
 - 實施企業安全模式
 - 設置全面的監控
-- 在生產環境中部署並遵循治理規範
+- 在治理完善的情況下部署到生產環境
 
 **💡 章節成果**: 部署具備完整生產能力的企業級應用程式
 
@@ -355,7 +355,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### 互動式工作坊材料
 **透過瀏覽器工具及指導練習進行全面的實踐學習**
 
-我們的工作坊材料提供結構化的互動學習體驗，補充上述章節式課程。工作坊適合自學及講師指導的課程。
+我們的工作坊材料提供結構化的互動學習體驗，補充上述章節式課程。工作坊設計適合自學及講師指導課程。
 
 #### 🛠️ 工作坊特色
 - **瀏覽器介面**: 完整的 MkDocs 驅動工作坊，具備搜尋、複製及主題功能
@@ -370,7 +370,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 1. **探索階段**（45 分鐘）
    - 探索 Microsoft Foundry 模板及服務
    - 理解多代理架構模式
-   - 檢視部署需求及先決條件
+   - 審查部署需求及先決條件
 
 2. **部署階段**（2 小時）
    - 實踐部署 AI 應用程式，使用 AZD
@@ -425,7 +425,7 @@ Azure Developer CLI (azd) 是一個以開發者為中心的命令行介面，加
 **為什麼選擇 AZD 用於 AI 解決方案？** AZD 解決了 AI 開發者面臨的主要挑戰：
 
 - **AI 預配置模板** - 為 Azure OpenAI、Cognitive Services 及 ML 工作負載提供預配置模板
-- **安全 AI 部署** - 內建 AI 服務的安全模式、API 密鑰及模型端點  
+- **安全的 AI 部署** - 內建 AI 服務的安全模式、API 密鑰及模型端點  
 - **生產 AI 模式** - 可擴展及具成本效益的 AI 應用程式部署最佳實踐
 - **端到端 AI 工作流程** - 從模型開發到生產部署，配備完善的監控
 - **成本優化** - 智能資源分配及擴展策略，適用於 AI 工作負載
@@ -442,16 +442,16 @@ Azure Developer CLI (azd) 是一個以開發者為中心的命令行介面，加
 
 | 模板 | 章節 | 複雜度 | 服務 | 類型 |
 |------|------|--------|------|------|
-| [**AI 聊天入門**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 第二章 | ⭐⭐ | AzureOpenAI + Azure AI 模型推理 API + Azure AI 搜索 + Azure 容器應用程式 + Application Insights | 外部 |
-| [**AI 代理入門**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 第二章 | ⭐⭐ | Azure AI 代理服務 + AzureOpenAI + Azure AI 搜索 + Azure 容器應用程式 + Application Insights| 外部 |
+| [**開始 AI 聊天**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 第二章 | ⭐⭐ | AzureOpenAI + Azure AI 模型推理 API + Azure AI 搜索 + Azure 容器應用程式 + Application Insights | 外部 |
+| [**開始 AI 代理**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 第二章 | ⭐⭐ | Azure AI 代理服務 + AzureOpenAI + Azure AI 搜索 + Azure 容器應用程式 + Application Insights| 外部 |
 | [**Azure 搜索 + OpenAI 演示**](https://github.com/Azure-Samples/azure-search-openai-demo) | 第二章 | ⭐⭐ | AzureOpenAI + Azure AI 搜索 + 應用服務 + 儲存 | 外部 |
 | [**OpenAI 聊天應用快速入門**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 第二章 | ⭐ | AzureOpenAI + 容器應用程式 + Application Insights | 外部 |
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第五章 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | 外部 |
+| [**代理 OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第五章 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | 外部 |
 | [**Contoso 聊天 RAG**](https://github.com/Azure-Samples/contoso-chat) | 第八章 | ⭐⭐⭐⭐ | AzureOpenAI + AI 搜索 + Cosmos DB + 容器應用程式 | 外部 |
 | [**零售多代理解決方案**](examples/retail-scenario.md) | 第五章 | ⭐⭐⭐⭐ | AzureOpenAI + AI 搜索 + 儲存 + 容器應用程式 + Cosmos DB | **本地** |
 
 ### 精選: 完整學習場景
-**生產就緒的應用模板，與學習章節對應**
+**生產就緒的應用模板，對應學習章節**
 
 | 模板 | 學習章節 | 複雜度 | 關鍵學習 |
 |------|----------|--------|----------|
@@ -464,7 +464,7 @@ Azure Developer CLI (azd) 是一個以開發者為中心的命令行介面，加
 
 ### 按範例類型學習
 
-> **📌 本地 vs 外部範例:**  
+> **📌 本地 vs. 外部範例:**  
 > **本地範例**（在此 repo）= 可立即使用  
 > **外部範例**（Azure 範例）= 從鏈接的 repo 克隆
 
@@ -473,6 +473,14 @@ Azure Developer CLI (azd) 是一個以開發者為中心的命令行介面，加
   - 多代理架構（客戶 + 庫存代理）
   - 全面監控及評估
   - 一鍵部署，通過 ARM 模板
+
+#### 本地範例 - 容器應用程式（第二至第五章）
+**此 repo 中的全面容器部署範例：**
+- [**容器應用範例**](examples/container-app/README.md) - 容器化部署的完整指南
+  - [簡單 Flask API](../../examples/container-app/simple-flask-api) - 基本 REST API，具備零擴展功能
+  - [微服務架構](../../examples/container-app/microservices) - 生產就緒的多服務部署
+  - 快速入門、生產及進階部署模式
+  - 監控、安全及成本優化指引
 
 #### 外部範例 - 簡單應用程式（第一至第二章）
 **克隆這些 Azure 範例 repo 開始使用：**
@@ -492,7 +500,7 @@ Azure Developer CLI (azd) 是一個以開發者為中心的命令行介面，加
 ### 外部模板集合
 - [**官方 AZD 模板庫**](https://azure.github.io/awesome-azd/) - 精選官方及社區模板
 - [**Azure Developer CLI 模板**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn 模板文檔
-- [**範例目錄**](examples/README.md) - 本地學習範例，附詳細說明
+- [**範例目錄**](examples/README.md) - 本地學習範例，附詳細解釋
 
 ---
 
@@ -502,16 +510,16 @@ Azure Developer CLI (azd) 是一個以開發者為中心的命令行介面，加
 - [**命令速查表**](resources/cheat-sheet.md) - 按章節整理的 azd 必備命令
 - [**詞彙表**](resources/glossary.md) - Azure 及 azd 術語  
 - [**FAQ**](resources/faq.md) - 按學習章節整理的常見問題
-- [**學習指南**](resources/study-guide.md) - 全面的練習題目
+- [**學習指南**](resources/study-guide.md) - 全面的練習題
 
 ### 實踐工作坊
 - [**AI 工作坊實驗室**](docs/microsoft-foundry/ai-workshop-lab.md) - 讓你的 AI 解決方案可用 AZD 部署（2-3 小時）
-- [**互動工作坊指南**](workshop/README.md) - 使用 MkDocs 和 DevContainer 環境的瀏覽器工作坊
-- [**結構化學習路徑**](../../workshop/docs/instructions) - 七步指導練習（探索 → 部署 → 自訂）
-- [**AZD 初學者工作坊**](workshop/README.md) - 完整的實踐工作坊材料，配合 GitHub Codespaces 整合
+- [**互動式工作坊指南**](workshop/README.md) - 使用 MkDocs 和 DevContainer 環境的瀏覽器工作坊
+- [**結構化學習路徑**](../../workshop/docs/instructions) - 7步指導練習（探索 → 部署 → 自訂化）
+- [**AZD 初學者工作坊**](workshop/README.md) - 完整的實作工作坊教材，配合 GitHub Codespaces 整合
 
 ### 外部學習資源
-- [Azure Developer CLI 文檔](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Developer CLI 文件](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure 架構中心](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure 價格計算器](https://azure.microsoft.com/pricing/calculator/)
 - [Azure 狀態](https://status.azure.com/)
@@ -569,7 +577,7 @@ azd up
 }
 ```
 
-### ❌ "azd up" 執行到一半失敗
+### ❌ "azd up" 中途失敗
 
 ```bash
 # Option 1: Clean and retry
@@ -609,12 +617,12 @@ azd env new dev-v2
 azd up
 ```
 
-### ❌ 模板部署時間過長
+### ❌ 範本部署時間過長
 
 **正常等待時間：**
-- 簡單的網頁應用程式：5-10 分鐘
-- 帶有數據庫的應用程式：10-15 分鐘
-- AI 應用程式：15-25 分鐘（OpenAI 配置較慢）
+- 簡單的網頁應用程式：5-10分鐘
+- 帶有資料庫的應用程式：10-15分鐘
+- AI 應用程式：15-25分鐘（OpenAI 配置速度較慢）
 
 ```bash
 # Check progress
@@ -655,7 +663,7 @@ azd env get-values
 
 - **常見問題指南：** [詳細解決方案](docs/troubleshooting/common-issues.md)
 - **AI 特定問題：** [AI 故障排除](docs/troubleshooting/ai-troubleshooting.md)
-- **調試指南：** [逐步調試](docs/troubleshooting/debugging.md)
+- **除錯指南：** [逐步除錯](docs/troubleshooting/debugging.md)
 - **尋求幫助：** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
@@ -718,7 +726,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" 執行到一半失敗</strong></summary>
+<summary><strong>❌ "azd up" 中途失敗</strong></summary>
 
 ```bash
 # Option 1: Clean and retry
@@ -764,12 +772,12 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ 模板部署時間過長</strong></summary>
+<summary><strong>❌ 範本部署時間過長</strong></summary>
 
 **正常等待時間：**
-- 簡單的網頁應用程式：5-10 分鐘
-- 帶有數據庫的應用程式：10-15 分鐘
-- AI 應用程式：15-25 分鐘（OpenAI 配置較慢）
+- 簡單的網頁應用程式：5-10分鐘
+- 帶有資料庫的應用程式：10-15分鐘
+- AI 應用程式：15-25分鐘（OpenAI 配置速度較慢）
 
 ```bash
 # Check progress
@@ -815,80 +823,80 @@ azd env get-values
 
 - **常見問題指南：** [詳細解決方案](docs/troubleshooting/common-issues.md)
 - **AI 特定問題：** [AI 故障排除](docs/troubleshooting/ai-troubleshooting.md)
-- **調試指南：** [逐步調試](docs/troubleshooting/debugging.md)
+- **除錯指南：** [逐步除錯](docs/troubleshooting/debugging.md)
 - **尋求幫助：** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🎓 課程完成與認證
+## 🎓 課程完成及認證
 
 ### 進度追蹤
-通過每章節追蹤你的學習進度：
+透過每章節追蹤您的學習進度：
 
-- [ ] **第 1 章**：基礎與快速入門 ✅
-- [ ] **第 2 章**：AI 優先開發 ✅  
-- [ ] **第 3 章**：配置與身份驗證 ✅
-- [ ] **第 4 章**：基礎設施即代碼與部署 ✅
-- [ ] **第 5 章**：多代理 AI 解決方案 ✅
-- [ ] **第 6 章**：部署前驗證與規劃 ✅
-- [ ] **第 7 章**：故障排除與調試 ✅
-- [ ] **第 8 章**：生產與企業模式 ✅
+- [ ] **第一章**：基礎及快速入門 ✅
+- [ ] **第二章**：AI 優先開發 ✅  
+- [ ] **第三章**：配置及身份驗證 ✅
+- [ ] **第四章**：基礎架構即代碼及部署 ✅
+- [ ] **第五章**：多代理 AI 解決方案 ✅
+- [ ] **第六章**：部署前驗證及規劃 ✅
+- [ ] **第七章**：故障排除及除錯 ✅
+- [ ] **第八章**：生產及企業模式 ✅
 
 ### 學習驗證
-完成每章後，驗證你的知識：
-1. **實踐練習**：完成該章的實際部署
-2. **知識檢查**：查看該章的常見問題部分
-3. **社群討論**：在 Azure Discord 分享你的經驗
-4. **下一章**：進入下一個複雜度級別
+完成每章後，驗證您的知識：
+1. **實作練習**：完成章節的實作部署
+2. **知識檢查**：檢視章節的常見問題部分
+3. **社群討論**：在 Azure Discord 分享您的經驗
+4. **下一章**：進入下一個複雜程度的章節
 
-### 完成課程的好處
-完成所有章節後，你將擁有：
-- **生產經驗**：將真實的 AI 應用程式部署到 Azure
-- **專業技能**：企業級部署能力  
+### 課程完成的好處
+完成所有章節後，您將擁有：
+- **生產經驗**：已部署真實的 AI 應用程式至 Azure
+- **專業技能**：具備企業級部署能力  
 - **社群認可**：成為 Azure 開發者社群的活躍成員
 - **職業提升**：掌握 AZD 和 AI 部署的熱門技能
 
 ---
 
-## 🤝 社群與支援
+## 🤝 社群及支援
 
-### 獲取幫助與支援
-- **技術問題**：[回報錯誤與請求功能](https://github.com/microsoft/azd-for-beginners/issues)
-- **學習問題**：加入 [Microsoft Azure Discord 社群](https://discord.gg/microsoft-azure) 和 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+### 尋求幫助及支援
+- **技術問題**：[回報錯誤及提出功能需求](https://github.com/microsoft/azd-for-beginners/issues)
+- **學習問題**：[Microsoft Azure Discord 社群](https://discord.gg/microsoft-azure) 和 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **AI 特定幫助**：加入 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **文件**：[官方 Azure Developer CLI 文件](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Microsoft Foundry Discord 的社群見解
+### Microsoft Foundry Discord 的社群洞察
 
 **#Azure 頻道的最新投票結果：**
-- **45%** 的開發者希望使用 AZD 處理 AI 工作負載
+- **45%** 的開發者希望使用 AZD 進行 AI 工作負載
 - **主要挑戰**：多服務部署、憑證管理、生產準備  
-- **最受歡迎的需求**：AI 特定模板、故障排除指南、最佳實踐
+- **最受歡迎**：AI 特定範本、故障排除指南、最佳實踐
 
 **加入我們的社群以：**
-- 分享你的 AZD + AI 經驗並獲得幫助
-- 獲取新 AI 模板的早期預覽
-- 貢獻 AI 部署的最佳實踐
-- 影響未來 AI + AZD 功能的開發
+- 分享您的 AZD + AI 經驗並獲得幫助
+- 獲取新 AI 範本的早期預覽
+- 貢獻 AI 部署最佳實踐
+- 影響未來 AI + AZD 功能開發
 
 ### 為課程作出貢獻
-我們歡迎貢獻！請閱讀我們的 [貢獻指南](CONTRIBUTING.md) 了解詳情：
-- **內容改進**：提升現有章節和範例
-- **新增範例**：添加真實場景和模板  
-- **翻譯**：幫助維護多語言支持
-- **錯誤回報**：提高準確性和清晰度
-- **社群標準**：遵守我們包容性的社群指導方針
+我們歡迎您的貢獻！請閱讀 [貢獻指南](CONTRIBUTING.md) 了解詳情：
+- **內容改進**：提升現有章節及範例
+- **新增範例**：添加真實場景及範本  
+- **翻譯**：協助維護多語言支持
+- **錯誤回報**：提升準確性及清晰度
+- **社群標準**：遵守我們的包容性社群指南
 
 ---
 
 ## 📄 課程資訊
 
 ### 授權
-本項目基於 MIT 授權 - 詳情請參閱 [LICENSE](../../LICENSE) 文件。
+此專案根據 MIT 授權條款授權 - 詳情請參閱 [LICENSE](../../LICENSE) 文件。
 
 ### 相關 Microsoft 學習資源
 
-我們的團隊還製作了其他全面的學習課程：
+我們的團隊還提供其他全面的學習課程：
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### Azure / Edge / MCP / Agents
@@ -914,25 +922,25 @@ azd env get-values
 [![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR 開發入門](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
- 
+
 ### Copilot 系列
-[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
-[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
-[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
+[![AI 配對編程的 Copilot](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![C#/.NET 的 Copilot](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot 冒險](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
 
 ## 🗺️ 課程導航
 
-**🚀 準備好開始學習了嗎？**
+**🚀 準備開始學習？**
 
-**初學者**：由 [第 1 章：基礎與快速入門](../..) 開始  
+**初學者**：從 [第 1 章：基礎與快速入門](../..) 開始  
 **AI 開發者**：直接跳到 [第 2 章：AI 優先開發](../..)  
-**有經驗的開發者**：從 [第 3 章：配置與認證](../..) 開始
+**有經驗的開發者**：從 [第 3 章：配置與身份驗證](../..) 開始
 
 **下一步**：[開始第 1 章 - AZD 基礎](docs/getting-started/azd-basics.md) →
 
@@ -940,5 +948,5 @@ azd env get-values
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-此文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯。我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們不對因使用此翻譯而引起的任何誤解或誤釋承擔責任。
+此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
