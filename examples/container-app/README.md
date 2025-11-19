@@ -814,8 +814,9 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Additional Resources
-
+## Additional Resources and Examples
+- [Microservices Example](./microservices/README.md)
+- [Simple Flash API Example](./simple-flask-api/README.md)
 - [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
 - [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
 - [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)

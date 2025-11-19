@@ -612,5 +612,5 @@ azd down --force --purge
 ## Additional Resources
 
 - [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Container Apps Best Practices](https://learn.microsoft.com/azure/container-apps/best-practices)
+- [Container Apps Best Practices](https://learn.microsoft.com/azure/container-apps)
 - [Distributed Tracing with Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
