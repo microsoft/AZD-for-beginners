@@ -73,13 +73,47 @@ For quick application updates:
 # Deploy all services
 azd deploy
 
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
+
 # Deploy specific service
 azd deploy --service web
 azd deploy --service api
 
 # Deploy with custom build arguments
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Verify deployment
+azd show --output json | jq '.services'
 ```
+
+### ✅ Deployment Verification
+
+After any deployment, verify success:
+
+```bash
+# Check all services are running
+azd show
+
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Check logs for errors
+azd logs --service api --since 5m | grep -i error
+```
+
+**Success Criteria:**
+- ✅ All services show "Running" status
+- ✅ Health endpoints return HTTP 200
+- ✅ No error logs in the last 5 minutes
+- ✅ Application responds to test requests
 
 ## 🏗️ Understanding the Deployment Process
 

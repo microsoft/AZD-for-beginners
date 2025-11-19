@@ -1,0 +1,9 @@
+name: azure-openai-chat
+metadata:
+  template: azure-openai-chat@0.0.1-beta
+
+services:
+  chat:
+    project: ./src
+    language: python
+    host: containerapp

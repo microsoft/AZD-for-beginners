@@ -1,6 +1,25 @@
 # Simple Flask API - Container App Example
 
-A basic Python Flask REST API deployed to Azure Container Apps using AZD CLI.
+**Learning Path:** Beginner ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
+
+A complete, working Python Flask REST API deployed to Azure Container Apps using Azure Developer CLI (azd). This example demonstrates container deployment, auto-scaling, and monitoring basics.
+
+## 🎯 What You'll Learn
+
+- Deploy a containerized Python application to Azure
+- Configure auto-scaling with scale-to-zero
+- Implement health probes and readiness checks
+- Monitor application logs and metrics
+- Use Azure Developer CLI for rapid deployment
+
+## 📦 What's Included
+
+✅ **Flask Application** - Complete REST API with CRUD operations (`src/app.py`)  
+✅ **Dockerfile** - Production-ready container configuration  
+✅ **Bicep Infrastructure** - Container Apps environment and API deployment  
+✅ **AZD Configuration** - One-command deployment setup  
+✅ **Health Probes** - Liveness and readiness checks configured  
+✅ **Auto-scaling** - 0-10 replicas based on HTTP load  
 
 ## Architecture
 
@@ -21,24 +40,118 @@ A basic Python Flask REST API deployed to Azure Container Apps using AZD CLI.
 
 ## Prerequisites
 
-- Azure Developer CLI (azd) installed
-- Docker installed locally
-- Azure subscription
+### Required
+- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
+- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (for local testing)
+
+### Verify Prerequisites
+
+```bash
+# Check azd version (need 1.5.0 or higher)
+azd version
+
+# Verify Azure login
+azd auth login
+
+# Check Docker (optional, for local testing)
+docker --version
+```
+
+## ⏱️ Deployment Timeline
+
+| Phase | Duration | What Happens |
+|-------|----------|--------------||
+| Environment setup | 30 seconds | Create azd environment |
+| Build container | 2-3 minutes | Docker build Flask app |
+| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
+| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
+| **Total** | **8-12 minutes** | Complete deployment ready |
 
 ## Quick Start
 
 ```bash
-# Clone and navigate
+# Navigate to the example
 cd examples/container-app/simple-flask-api
 
-# Initialize environment
-azd env new dev
+# Initialize environment (choose unique name)
+azd env new myflaskapi
 
-# Deploy everything
+# Deploy everything (infrastructure + application)
 azd up
+# You'll be prompted to:
+# 1. Select Azure subscription
+# 2. Choose location (e.g., eastus2)
+# 3. Wait 8-12 minutes for deployment
+
+# Get your API endpoint
+azd env get-values
 
 # Test the API
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
+curl $(azd env get-value API_ENDPOINT)/health
+```
+
+**Expected Output:**
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-11-19T10:30:00Z",
+  "service": "simple-flask-api",
+  "version": "1.0.0"
+}
+```
+
+## ✅ Verify Deployment
+
+### Step 1: Check Deployment Status
+
+```bash
+# View deployed services
+azd show
+
+# Expected output shows:
+# - Service: api
+# - Endpoint: https://ca-api-[env].xxx.azurecontainerapps.io
+# - Status: Running
+```
+
+### Step 2: Test API Endpoints
+
+```bash
+# Get API endpoint
+API_URL=$(azd env get-value API_ENDPOINT)
+
+# Test health
+curl $API_URL/health
+
+# Test root endpoint
+curl $API_URL/
+
+# Create an item
+curl -X POST $API_URL/api/items \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Test Item", "description": "My first item"}'
+
+# Get all items
+curl $API_URL/api/items
+```
+
+**Success Criteria:**
+- ✅ Health endpoint returns HTTP 200
+- ✅ Root endpoint shows API information
+- ✅ POST creates item and returns HTTP 201
+- ✅ GET returns created items
+
+### Step 3: View Logs
+
+```bash
+# Stream live logs
+azd logs api --follow
+
+# You should see:
+# - Gunicorn startup messages
+# - HTTP request logs
+# - Application info logs
 ```
 
 ## Project Structure
@@ -256,13 +369,63 @@ azd down --force --purge
 
 ## Next Steps
 
-- Add database integration (see [database-integration example](../database-integration/))
-- Implement authentication (see [auth-example](../auth-example/))
-- Set up CI/CD pipeline (see [cicd-example](../cicd-example/))
-- Add Dapr for microservices (see [dapr-example](../dapr-example/))
+### Expand This Example
+
+1. **Add Database** - Integrate Azure Cosmos DB or SQL Database
+   ```bash
+   # Add Cosmos DB module to infra/main.bicep
+   # Update app.py with database connection
+   ```
+
+2. **Add Authentication** - Implement Azure AD or API keys
+   ```python
+   # Add authentication middleware to app.py
+   from functools import wraps
+   ```
+
+3. **Set Up CI/CD** - GitHub Actions workflow
+   ```yaml
+   # Create .github/workflows/deploy.yml
+   name: Deploy to Azure
+   on: [push]
+   ```
+
+4. **Add Managed Identity** - Secure access to Azure services
+   ```bicep
+   # Update infra/app/api.bicep
+   identity: { type: 'SystemAssigned' }
+   ```
+
+### Related Examples
+
+- **[Database App](../../database-app/)** - Complete example with SQL Database
+- **[Microservices](../microservices/)** - Multi-service architecture
+- **[Container Apps Master Guide](../README.md)** - All container patterns
+
+### Learning Resources
+
+- 📚 [AZD For Beginners Course](../../../README.md) - Main course home
+- 📚 [Container Apps Patterns](../README.md) - More deployment patterns
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Community templates
 
 ## Additional Resources
 
-- [Flask Documentation](https://flask.palletsprojects.com/)
-- [Azure Container Apps Docs](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Container Apps Guide](../../../docs/microsoft-foundry/ai-model-deployment.md)
+### Documentation
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask framework guide
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Official Azure docs
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd command reference
+
+### Tutorials
+- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Deploy your first app
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python development guide
+- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructure as code
+
+### Tools
+- **[Azure Portal](https://portal.azure.com)** - Manage resources visually
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE integration
+
+---
+
+**🎉 Congratulations!** You've deployed a production-ready Flask API to Azure Container Apps with auto-scaling and monitoring.
+
+**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) or check the [FAQ](../../../resources/faq.md)

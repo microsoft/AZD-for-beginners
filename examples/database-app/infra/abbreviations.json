@@ -1,0 +1,8 @@
+{
+  "resourcesResourceGroups": "rg-",
+  "sqlServers": "sql-",
+  "sqlServersDatabases": "sqldb-",
+  "webServerFarms": "plan-",
+  "webSitesAppService": "app-",
+  "insightsComponents": "appi-"
+}

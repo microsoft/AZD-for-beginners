@@ -247,8 +247,17 @@ azd env set DEBUG "true"
 # View environment variables
 azd env get-values
 
+# Expected output:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
 # Remove environment variable
 azd env unset DEBUG
+
+# Verify removal
+azd env get-values | grep DEBUG
+# (should return nothing)
 ```
 
 ### Environment Templates
@@ -530,6 +539,68 @@ Document your configuration in `CONFIG.md`:
 - Staging: Uses staging database, info logging
 - Production: Uses production database, error logging only
 ```
+
+## 🎯 Hands-On Practice Exercises
+
+### Exercise 1: Multi-Environment Configuration (15 minutes)
+
+**Goal**: Create and configure three environments with different settings
+
+```bash
+# Create development environment
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Create staging environment
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Create production environment
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Verify each environment
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Success Criteria:**
+- [ ] Three environments created successfully
+- [ ] Each environment has unique configuration
+- [ ] Can switch between environments without errors
+- [ ] `azd env list` shows all three environments
+
+### Exercise 2: Secret Management (10 minutes)
+
+**Goal**: Practice secure configuration with sensitive data
+
+```bash
+# Set secrets (not displayed in output)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Set non-secret config
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# View environment (secrets should be redacted)
+azd env get-values
+
+# Verify secrets are stored
+azd env get DB_PASSWORD  # Should show actual value
+```
+
+**Success Criteria:**
+- [ ] Secrets stored without displaying in terminal
+- [ ] `azd env get-values` shows redacted secrets
+- [ ] Individual `azd env get <SECRET_NAME>` retrieves actual value
 
 ## Next Steps
 

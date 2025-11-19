@@ -1,0 +1,14 @@
+name: microservices
+metadata:
+  template: microservices@0.0.1-beta
+
+services:
+  api-gateway:
+    project: ./src/api-gateway
+    language: js
+    host: containerapp
+  
+  product-service:
+    project: ./src/product-service
+    language: python
+    host: containerapp

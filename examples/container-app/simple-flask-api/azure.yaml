@@ -1,0 +1,9 @@
+name: simple-flask-api
+metadata:
+  template: simple-flask-api@0.0.1-beta
+
+services:
+  api:
+    project: ./src
+    language: python
+    host: containerapp
