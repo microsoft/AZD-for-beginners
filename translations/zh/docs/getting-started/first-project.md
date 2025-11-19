@@ -1,33 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-17T12:36:36+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-19T09:52:52+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "zh"
 }
 -->
-# 您的第一个项目 - 实践教程
+# 您的第一个项目 - 实操教程
 
 **章节导航：**
 - **📚 课程主页**: [AZD 初学者指南](../../README.md)
 - **📖 当前章节**: 第1章 - 基础与快速入门
-- **⬅️ 上一章**: [安装与设置](installation.md)
-- **➡️ 下一章**: [配置](configuration.md)
-- **🚀 下一章节**: [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md)
+- **⬅️ 上一节**: [安装与设置](installation.md)
+- **➡️ 下一节**: [配置](configuration.md)
+- **🚀 下一章**: [第2章：AI优先开发](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## 简介
 
-欢迎来到您的第一个 Azure Developer CLI 项目！这个全面的实践教程将带您完整体验如何使用 azd 在 Azure 上创建、部署和管理一个全栈应用程序。您将使用一个真实的待办事项应用程序，该应用包括 React 前端、Node.js API 后端和 MongoDB 数据库。
+欢迎来到您的第一个 Azure Developer CLI 项目！本全面的实操教程将带您完整体验如何使用 azd 在 Azure 上创建、部署和管理一个全栈应用程序。您将使用一个真实的待办事项应用程序，该应用包括 React 前端、Node.js API 后端和 MongoDB 数据库。
 
 ## 学习目标
 
 完成本教程后，您将能够：
 - 掌握使用模板初始化 azd 项目的工作流程
-- 理解 Azure Developer CLI 项目结构和配置文件
-- 完成应用程序的部署到 Azure，包括基础设施的配置
+- 理解 Azure Developer CLI 项目的结构和配置文件
+- 执行完整的应用程序部署到 Azure，包括基础设施的配置
 - 实现应用程序更新和重新部署策略
-- 管理开发和测试的多环境设置
+- 管理开发和测试的多环境
 - 应用资源清理和成本管理实践
 
 ## 学习成果
@@ -35,10 +35,10 @@ CO_OP_TRANSLATOR_METADATA:
 完成后，您将能够：
 - 独立从模板初始化和配置 azd 项目
 - 有效地导航和修改 azd 项目结构
-- 使用单一命令将全栈应用程序部署到 Azure
-- 解决常见的部署问题和认证问题
+- 使用单条命令将全栈应用程序部署到 Azure
+- 排查常见的部署问题和身份验证问题
 - 管理不同部署阶段的多个 Azure 环境
-- 实现应用更新的持续部署工作流
+- 为应用程序更新实施持续部署工作流
 
 ## 开始
 
@@ -54,7 +54,7 @@ CO_OP_TRANSLATOR_METADATA:
 # Check azd installation
 azd version
 ```
-### 验证 Azure 认证
+### 验证 Azure 身份认证
 
 ```bash
 az account show
@@ -65,9 +65,9 @@ az account show
 node --version
 ```
 
-## 第一步：选择并初始化模板
+## 第1步：选择并初始化模板
 
-我们从一个流行的待办事项应用模板开始，该模板包括 React 前端和 Node.js API 后端。
+让我们从一个流行的待办事项应用模板开始，该模板包括 React 前端和 Node.js API 后端。
 
 ```bash
 # Browse available templates
@@ -86,13 +86,13 @@ azd init --template todo-nodejs-mongo
 
 ### 刚刚发生了什么？
 - 将模板代码下载到您的本地目录
-- 创建了一个 `azure.yaml` 文件，其中包含服务定义
+- 创建了一个包含服务定义的 `azure.yaml` 文件
 - 在 `infra/` 目录中设置了基础设施代码
 - 创建了环境配置
 
-## 第二步：探索项目结构
+## 第2步：探索项目结构
 
-让我们检查 azd 为我们创建的内容：
+让我们检查 azd 为我们创建了什么：
 
 ```bash
 # View the project structure
@@ -142,7 +142,7 @@ cat azure.yaml
 head -30 infra/main.bicep
 ```
 
-## 第三步：自定义您的项目（可选）
+## 第3步：自定义您的项目（可选）
 
 在部署之前，您可以自定义应用程序：
 
@@ -167,9 +167,9 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## 第四步：部署到 Azure
+## 第4步：部署到 Azure
 
-现在进入激动人心的部分 - 将所有内容部署到 Azure！
+现在到了激动人心的部分——将所有内容部署到 Azure！
 
 ```bash
 # Deploy infrastructure and application
@@ -202,7 +202,7 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## 第五步：测试您的应用程序
+## 第5步：测试您的应用程序
 
 ### 访问您的应用程序
 点击部署输出中提供的 URL，或者随时获取：
@@ -215,7 +215,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### 测试待办事项应用
-1. **添加待办事项** - 点击“添加待办事项”，输入任务
+1. **添加待办事项** - 点击“添加待办事项”并输入任务
 2. **标记为完成** - 勾选已完成的项目
 3. **删除项目** - 移除不再需要的待办事项
 
@@ -228,9 +228,9 @@ azd monitor
 azd logs
 ```
 
-## 第六步：进行更改并重新部署
+## 第6步：进行更改并重新部署
 
-让我们进行更改并看看更新有多简单：
+让我们做一个更改，看看更新有多简单：
 
 ### 修改 API
 ```bash
@@ -252,9 +252,9 @@ azd deploy
 # This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## 第七步：管理多个环境
+## 第7步：管理多个环境
 
-创建一个测试环境以在生产之前测试更改：
+创建一个测试环境，在生产之前测试更改：
 
 ```bash
 # Create a new staging environment
@@ -281,7 +281,7 @@ azd env select staging
 azd show
 ```
 
-## 第八步：清理资源
+## 第8步：清理资源
 
 完成实验后，清理资源以避免持续费用：
 
@@ -299,17 +299,125 @@ azd down --force --purge
 
 ## 您学到了什么
 
-恭喜！您已经成功：
-- 从模板初始化了一个 azd 项目
-- 探索了项目结构和关键文件
-- 将一个全栈应用程序部署到 Azure
-- 进行了代码更改并重新部署
-- 管理了多个环境
-- 清理了资源
+恭喜！您已成功：
+- ✅ 从模板初始化了一个 azd 项目
+- ✅ 探索了项目结构和关键文件
+- ✅ 将全栈应用程序部署到 Azure
+- ✅ 进行了代码更改并重新部署
+- ✅ 管理了多个环境
+- ✅ 清理了资源
+
+## 🎯 技能验证练习
+
+### 练习1：部署不同的模板（15分钟）
+**目标**：展示对 azd 初始化和部署工作流程的掌握
+
+```bash
+# Try Python + MongoDB stack
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Verify deployment
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Clean up
+azd down --force --purge
+```
+
+**成功标准：**
+- [ ] 应用程序部署无错误
+- [ ] 能在浏览器中访问应用程序 URL
+- [ ] 应用程序功能正常（添加/删除待办事项）
+- [ ] 成功清理了所有资源
+
+### 练习2：自定义配置（20分钟）
+**目标**：练习环境变量配置
+
+```bash
+cd my-first-azd-app
+
+# Create custom environment
+azd env new custom-config
+
+# Set custom variables
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Verify variables
+azd env get-values | grep APP_TITLE
+
+# Deploy with custom config
+azd up
+```
+
+**成功标准：**
+- [ ] 成功创建了自定义环境
+- [ ] 环境变量已设置并可检索
+- [ ] 应用程序使用自定义配置成功部署
+- [ ] 能在已部署的应用中验证自定义设置
+
+### 练习3：多环境工作流（25分钟）
+**目标**：掌握环境管理和部署策略
+
+```bash
+# Create dev environment
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Create staging environment
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# Compare environments
+azd env list
+
+# Test both environments
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Clean up both
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**成功标准：**
+- [ ] 创建了两个具有不同配置的环境
+- [ ] 两个环境均成功部署
+- [ ] 能使用 `azd env select` 在环境之间切换
+- [ ] 环境变量在不同环境中有所不同
+- [ ] 成功清理了两个环境
+
+## 📊 您的进度
+
+**投入时间**: ~60-90分钟  
+**掌握技能**:
+- ✅ 基于模板的项目初始化
+- ✅ Azure 资源配置
+- ✅ 应用程序部署工作流
+- ✅ 环境管理
+- ✅ 配置管理
+- ✅ 资源清理和成本管理
+
+**下一步**: 您已准备好学习 [配置指南](configuration.md)，了解高级配置模式！
 
 ## 常见问题排查
 
-### 认证错误
+### 身份认证错误
 ```bash
 # Re-authenticate with Azure
 az login
@@ -344,7 +452,7 @@ netstat -an | grep :3100
 
 ## 下一步
 
-完成您的第一个项目后，探索以下高级主题：
+完成第一个项目后，探索以下高级主题：
 
 ### 1. 自定义基础设施
 - [基础设施即代码](../deployment/provisioning.md)
@@ -357,7 +465,7 @@ netstat -an | grep :3100
 ### 3. 生产环境最佳实践
 - [安全配置](../deployment/best-practices.md#security)
 - [性能优化](../deployment/best-practices.md#performance)
-- [监控和日志](../deployment/best-practices.md#monitoring)
+- [监控和日志记录](../deployment/best-practices.md#monitoring)
 
 ### 4. 探索更多模板
 ```bash
@@ -374,7 +482,7 @@ azd init --template todo-java-mongo
 
 ## 其他资源
 
-### 学习材料
+### 学习资料
 - [Azure Developer CLI 文档](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure 架构中心](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure 良好架构框架](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -398,12 +506,14 @@ azd init --template todo-java-mongo
 **章节导航：**
 - **📚 课程主页**: [AZD 初学者指南](../../README.md)
 - **📖 当前章节**: 第1章 - 基础与快速入门
-- **⬅️ 上一章**: [安装与设置](installation.md)
-- **➡️ 下一章**: [配置](configuration.md)
-- **🚀 下一章节**: [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md)
+- **⬅️ 上一节**: [安装与设置](installation.md)
+- **➡️ 下一节**: [配置](configuration.md)
+- **🚀 下一章**: [第2章：AI优先开发](../microsoft-foundry/microsoft-foundry-integration.md)
 - **下一课**: [部署指南](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-17T12:37:58+00:00",
+  "original_hash": "285a40e7f01952ff299842ac40eafd40",
+  "translation_date": "2025-11-19T09:42:31+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "zh"
 }
@@ -14,28 +14,28 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 当前章节**: 第四章 - 基础设施即代码与部署
 - **⬅️ 上一章**: [第三章：配置](../getting-started/configuration.md)
 - **➡️ 下一步**: [资源预配](provisioning.md)
-- **🚀 下一章节**: [第五章：多代理 AI 解决方案](../../examples/retail-scenario.md)
+- **🚀 下一章**: [第五章：多代理 AI 解决方案](../../examples/retail-scenario.md)
 
 ## 简介
 
-这份全面的指南涵盖了使用 Azure Developer CLI 部署应用程序的所有内容，从基本的单命令部署到具有自定义钩子、多环境和 CI/CD 集成的高级生产场景。通过实践示例和最佳实践，掌握完整的部署生命周期。
+本指南全面覆盖了使用 Azure Developer CLI 部署应用程序的所有内容，从基本的单命令部署到包含自定义钩子、多环境和 CI/CD 集成的高级生产场景。通过实际示例和最佳实践，掌握完整的部署生命周期。
 
 ## 学习目标
 
 完成本指南后，您将能够：
-- 掌握所有 Azure Developer CLI 部署命令和工作流程
+- 精通所有 Azure Developer CLI 部署命令和工作流
 - 理解从资源预配到监控的完整部署生命周期
-- 实现用于部署前后自动化的自定义钩子
-- 配置具有环境特定参数的多环境部署
+- 实现自定义部署钩子，用于部署前后自动化
+- 配置多环境部署，并使用环境特定参数
 - 设置高级部署策略，包括蓝绿部署和金丝雀部署
-- 将 azd 部署与 CI/CD 管道和 DevOps 工作流集成
+- 将 azd 部署集成到 CI/CD 管道和 DevOps 工作流中
 
 ## 学习成果
 
 完成后，您将能够：
-- 独立执行和排查所有 azd 部署工作流程
-- 设计并实现基于钩子的自定义部署自动化
-- 配置具有适当安全性和监控的生产级部署
+- 独立执行和排查所有 azd 部署工作流
+- 设计并实现使用钩子的自定义部署自动化
+- 配置具有安全性和监控的生产级部署
 - 管理复杂的多环境部署场景
 - 优化部署性能并实施回滚策略
 - 将 azd 部署集成到企业级 DevOps 实践中
@@ -43,15 +43,15 @@ CO_OP_TRANSLATOR_METADATA:
 ## 部署概述
 
 Azure Developer CLI 提供了多种部署命令：
-- `azd up` - 完整工作流程（预配 + 部署）
+- `azd up` - 完整工作流（预配 + 部署）
 - `azd provision` - 仅创建/更新 Azure 资源
 - `azd deploy` - 仅部署应用程序代码
 - `azd package` - 构建和打包应用程序
 
-## 基本部署工作流程
+## 基本部署工作流
 
 ### 完整部署（azd up）
-适用于新项目的最常见工作流程：
+新项目最常用的工作流：
 ```bash
 # Deploy everything from scratch
 azd up
@@ -109,7 +109,7 @@ hooks:
 ### 阶段 2：基础设施预配
 - 读取基础设施模板（Bicep/Terraform）
 - 创建或更新 Azure 资源
-- 配置网络和安全性
+- 配置网络和安全
 - 设置监控和日志记录
 
 ### 阶段 3：后预配钩子
@@ -460,7 +460,7 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 安全注意事项
+## 🔐 安全性考量
 
 ### 密钥管理
 ```bash
@@ -643,6 +643,259 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 - [常见问题](../troubleshooting/common-issues.md) - 解决部署问题
 - [最佳实践](../troubleshooting/debugging.md) - 生产级部署策略
 
+## 🎯 实践部署练习
+
+### 练习 1：增量部署工作流（20 分钟）
+**目标**：掌握完整部署与增量部署的区别
+
+```bash
+# Initial deployment
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Record initial deployment time
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Deploy only code (fast)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Compare times
+cat deployment-log.txt
+
+# Clean up
+azd down --force --purge
+```
+
+**成功标准：**
+- [ ] 完整部署耗时 5-15 分钟
+- [ ] 仅代码部署耗时 2-5 分钟
+- [ ] 代码更改反映在已部署的应用中
+- [ ] 使用 `azd deploy` 后基础设施未更改
+
+**学习成果**：对于代码更改，`azd deploy` 比 `azd up` 快 50-70%
+
+### 练习 2：自定义部署钩子（30 分钟）
+**目标**：实现部署前后自动化
+
+```bash
+# Create pre-deploy validation script
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Check if tests pass
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Check for uncommitted changes
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Create post-deploy smoke test
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Add hooks to azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Test deployment with hooks
+azd deploy
+```
+
+**成功标准：**
+- [ ] 部署前脚本在部署前运行
+- [ ] 如果测试失败，部署中止
+- [ ] 部署后烟雾测试验证健康状态
+- [ ] 钩子按正确顺序执行
+
+### 练习 3：多环境部署策略（45 分钟）
+**目标**：实现分阶段部署工作流（开发 → 测试 → 生产）
+
+```bash
+# Create deployment script
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Step 1: Deploy to dev
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Step 2: Deploy to staging
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Step 3: Manual approval for production
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Create environments
+azd env new dev
+azd env new staging
+azd env new production
+
+# Run staged deployment
+./deploy-staged.sh
+```
+
+**成功标准：**
+- [ ] 开发环境部署成功
+- [ ] 测试环境部署成功
+- [ ] 生产环境需要手动批准
+- [ ] 所有环境均通过健康检查
+- [ ] 可在需要时回滚
+
+### 练习 4：回滚策略（25 分钟）
+**目标**：实现并测试部署回滚
+
+```bash
+# Deploy v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Save v1 configuration
+cp -r .azure/production .azure/production-v1-backup
+
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Detect failure
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Rollback code
+    git checkout src/api/src/server.js
+    
+    # Rollback environment
+    azd env set APP_VERSION "1.0.0"
+    
+    # Redeploy v1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**成功标准：**
+- [ ] 能检测到部署失败
+- [ ] 回滚脚本自动执行
+- [ ] 应用恢复到工作状态
+- [ ] 回滚后健康检查通过
+
+## 📊 部署指标跟踪
+
+### 跟踪您的部署性能
+
+```bash
+# Create deployment metrics script
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Log to file
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Use it
+./track-deployment.sh
+```
+
+**分析您的指标：**
+```bash
+# View deployment history
+cat deployment-metrics.csv
+
+# Calculate average deployment time
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
+
 ## 其他资源
 
 - [Azure Developer CLI 部署参考](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
@@ -658,5 +911,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

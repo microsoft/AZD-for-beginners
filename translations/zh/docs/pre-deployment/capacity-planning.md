@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:25:05+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-19T09:41:38+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "zh"
 }
 -->
-# 容量规划：了解 Azure 配额和限制 - Azure 资源可用性和限制
+# 容量规划 - Azure资源可用性和限制
 
-## 介绍
+**章节导航：**
+- **📚 课程主页**: [AZD入门课程](../../README.md)
+- **📖 当前章节**: 第6章 - 部署前验证与规划
+- **⬅️ 上一章节**: [第5章：多代理AI解决方案](../../examples/retail-scenario.md)
+- **➡️ 下一步**: [SKU选择](sku-selection.md)
+- **🚀 下一章节**: [第7章：故障排除](../troubleshooting/common-issues.md)
 
-本指南旨在帮助您在使用 Azure Developer CLI 部署之前规划和验证 Azure 资源容量。学习如何评估配额、可用性和区域限制，以确保成功部署，同时优化成本和性能。掌握针对不同应用架构和扩展场景的容量规划技术。
+## 简介
+
+本指南帮助您在使用Azure Developer CLI部署之前规划和验证Azure资源容量。学习评估配额、可用性和区域限制，以确保成功部署，同时优化成本和性能。掌握针对不同应用架构和扩展场景的容量规划技术。
 
 ## 学习目标
 
 完成本指南后，您将能够：
-- 了解 Azure 配额、限制和区域可用性约束
-- 掌握在部署前检查资源可用性和容量的技术
+- 了解Azure配额、限制和区域可用性约束
+- 掌握部署前检查资源可用性和容量的技术
 - 实现自动化的容量验证和监控策略
 - 设计具有适当资源大小和扩展考虑的应用程序
 - 通过智能容量规划应用成本优化策略
@@ -26,10 +33,10 @@ CO_OP_TRANSLATOR_METADATA:
 ## 学习成果
 
 完成后，您将能够：
-- 在部署前评估和验证 Azure 资源容量需求
-- 创建自动化脚本以检查容量和监控配额
+- 在部署前评估和验证Azure资源容量需求
+- 创建自动化脚本进行容量检查和配额监控
 - 设计考虑区域和订阅限制的可扩展架构
-- 针对不同工作负载类型实施成本效益高的资源大小策略
+- 针对不同工作负载类型实施成本效益的资源大小策略
 - 配置主动监控和警报以解决容量相关问题
 - 规划多区域部署并正确分配容量
 
@@ -40,14 +47,14 @@ CO_OP_TRANSLATOR_METADATA:
 - **目标区域的资源可用性**
 - **订阅类型的服务层可用性**
 - **预期流量的网络容量**
-- **通过适当的资源大小实现成本优化**
+- **通过适当的资源大小进行成本优化**
 
-## 📊 了解 Azure 配额和限制
+## 📊 了解Azure配额和限制
 
 ### 限制类型
-1. **订阅级配额** - 每个订阅的最大资源数量
-2. **区域配额** - 每个区域的最大资源数量
-3. **资源特定限制** - 针对单个资源类型的限制
+1. **订阅级配额** - 每个订阅的最大资源
+2. **区域配额** - 每个区域的最大资源
+3. **资源特定限制** - 单个资源类型的限制
 4. **服务层限制** - 基于服务计划的限制
 
 ### 常见资源配额
@@ -60,8 +67,7 @@ az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-
-## 部署前的容量检查
+## 部署前容量检查
 
 ### 自动化容量验证脚本
 ```bash
@@ -121,7 +127,6 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-
 ### 特定服务的容量检查
 
 #### 应用服务容量
@@ -155,7 +160,6 @@ check_app_service_capacity() {
 # Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
-
 
 #### 数据库容量
 ```bash
@@ -214,7 +218,6 @@ check_cosmos_capacity() {
 }
 ```
 
-
 #### 容器应用容量
 ```bash
 # Check Container Apps capacity
@@ -256,7 +259,6 @@ check_container_apps_capacity() {
 }
 ```
 
-
 ## 📍 区域可用性验证
 
 ### 按区域的服务可用性
@@ -293,7 +295,6 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-
 ### 区域选择建议
 ```bash
 # Recommend optimal regions based on requirements
@@ -325,8 +326,7 @@ recommend_region() {
 }
 ```
 
-
-## 💰 成本规划和估算
+## 💰 成本规划与估算
 
 ### 资源成本估算
 ```bash
@@ -361,8 +361,7 @@ estimate_costs() {
 }
 ```
 
-
-### SKU 优化建议
+### SKU优化建议
 ```bash
 # Recommend optimal SKUs based on requirements
 recommend_sku() {
@@ -427,10 +426,9 @@ recommend_sku() {
 }
 ```
 
+## 🚀 自动化部署前检查
 
-## 🚀 自动化预部署检查
-
-### 综合预部署脚本
+### 综合部署前检查脚本
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -629,7 +627,6 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-
 ### 配置文件模板
 ```json
 {
@@ -663,7 +660,6 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
-
 
 ## 📈 部署期间的容量监控
 
@@ -700,10 +696,9 @@ monitor_deployment_capacity() {
 }
 ```
 
+## 🔗 与AZD集成
 
-## 🔗 与 AZD 的集成
-
-### 将预部署检查挂钩添加到 azure.yaml
+### 在azure.yaml中添加部署前检查钩子
 ```yaml
 # azure.yaml
 hooks:
@@ -721,39 +716,40 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-
 ## 最佳实践
 
-1. **在新区域部署前始终运行容量检查**
-2. **定期监控配额使用情况**以避免意外
+1. **在部署到新区域之前始终运行容量检查**
+2. **定期监控配额使用情况**以避免意外问题
 3. **规划增长**，检查未来的容量需求
 4. **使用成本估算工具**避免账单冲击
 5. **为团队记录容量需求**
-6. **在 CI/CD 管道中自动化容量验证**
+6. **在CI/CD管道中自动化容量验证**
 7. **考虑区域故障转移的容量需求**
 
 ## 下一步
 
-- [SKU 选择指南](sku-selection.md) - 选择最佳服务层
-- [预部署检查](preflight-checks.md) - 自动化验证脚本
+- [SKU选择指南](sku-selection.md) - 选择最佳服务层
+- [部署前检查](preflight-checks.md) - 自动化验证脚本
 - [速查表](../../resources/cheat-sheet.md) - 快速参考命令
 - [术语表](../../resources/glossary.md) - 术语和定义
 
 ## 其他资源
 
-- [Azure 订阅限制](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure 定价计算器](https://azure.microsoft.com/pricing/calculator/)
-- [Azure 成本管理](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure 区域可用性](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure订阅限制](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure定价计算器](https://azure.microsoft.com/pricing/calculator/)
+- [Azure成本管理](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure区域可用性](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **导航**
 - **上一课**: [调试指南](../troubleshooting/debugging.md)
 
-- **下一课**: [SKU 选择](sku-selection.md)
+- **下一课**: [SKU选择](sku-selection.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

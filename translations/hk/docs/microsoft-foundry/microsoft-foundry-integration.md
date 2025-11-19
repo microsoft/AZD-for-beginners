@@ -1,42 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
-  "translation_date": "2025-09-17T12:48:38+00:00",
-  "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
-  "language_code": "tw"
+  "original_hash": "2e61bc7db9c28647211ab64e03045882",
+  "translation_date": "2025-11-19T11:27:41+00:00",
+  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
+  "language_code": "hk"
 }
 -->
-# Azure AI Foundry 與 AZD 的整合
+# Microsoft Foundry 與 AZD 的整合
 
-**章節導覽：**
-- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
-- **📖 本章節**：第 2 章 - AI 優先開發
-- **⬅️ 上一章節**：[第 1 章：你的第一個專案](../getting-started/first-project.md)
+**章節導航：**
+- **📚 課程主頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章內容**：第 2 章 - AI 優先開發
+- **⬅️ 上一章**：[第 1 章：你的第一個項目](../getting-started/first-project.md)
 - **➡️ 下一步**：[AI 模型部署](ai-model-deployment.md)
-- **🚀 下一章節**：[第 3 章：配置](../getting-started/configuration.md)
+- **🚀 下一章**：[第 3 章：配置](../getting-started/configuration.md)
 
-## 概述
+## 概覽
 
-本指南展示如何將 Azure AI Foundry 服務與 Azure Developer CLI (AZD) 整合，以簡化 AI 應用程式的部署流程。Azure AI Foundry 提供一個全面的平台，用於建置、部署和管理 AI 應用程式，而 AZD 則簡化了基礎架構和部署過程。
+本指南展示如何將 Microsoft Foundry 服務與 Azure Developer CLI (AZD) 整合，以簡化 AI 應用程式的部署流程。Microsoft Foundry 提供一個全面的平台，用於構建、部署及管理 AI 應用程式，而 AZD 則簡化了基礎設施及部署過程。
 
-## 什麼是 Azure AI Foundry？
+## 什麼是 Microsoft Foundry？
 
-Azure AI Foundry 是 Microsoft 的統一 AI 開發平台，包含以下功能：
+Microsoft Foundry 是 Microsoft 的統一 AI 開發平台，包含以下功能：
 
-- **模型目錄**：存取最先進的 AI 模型
-- **Prompt Flow**：AI 工作流程的視覺化設計工具
-- **AI Foundry Portal**：整合的 AI 應用程式開發環境
-- **部署選項**：多種主機和擴展選項
-- **安全性**：內建負責任 AI 的功能
+- **模型目錄**：可存取最先進的 AI 模型
+- **Prompt Flow**：AI 工作流程的可視化設計工具
+- **AI Foundry Portal**：AI 應用程式的整合開發環境
+- **部署選項**：多種主機及擴展選項
+- **安全性與保障**：內建負責任 AI 的功能
 
-## AZD + Azure AI Foundry：更強大的組合
+## AZD + Microsoft Foundry：更強大的組合
 
-| 功能 | Azure AI Foundry | AZD 整合優勢 |
-|------|------------------|--------------|
+| 功能 | Microsoft Foundry | AZD 整合優勢 |
+|------|-------------------|--------------|
 | **模型部署** | 手動透過 Portal 部署 | 自動化、可重複的部署 |
-| **基礎架構** | 點擊式配置 | 基礎架構即程式碼 (Bicep) |
-| **環境管理** | 單一環境專注 | 多環境（開發/測試/生產） |
+| **基礎設施** | 點擊式配置 | 基於代碼的基礎設施 (Bicep) |
+| **環境管理** | 單一環境專注 | 多環境 (開發/測試/生產) |
 | **CI/CD 整合** | 限制性 | 原生支援 GitHub Actions |
 | **成本管理** | 基本監控 | 環境特定的成本優化 |
 
@@ -45,13 +45,13 @@ Azure AI Foundry 是 Microsoft 的統一 AI 開發平台，包含以下功能：
 - 擁有適當權限的 Azure 訂閱
 - 已安裝 Azure Developer CLI
 - 可存取 Azure OpenAI 服務
-- 基本了解 Azure AI Foundry
+- 基本了解 Microsoft Foundry
 
 ## 核心整合模式
 
 ### 模式 1：Azure OpenAI 整合
 
-**使用案例**：使用 Azure OpenAI 模型部署聊天應用程式
+**使用場景**：使用 Azure OpenAI 模型部署聊天應用程式
 
 ```yaml
 # azure.yaml
@@ -65,7 +65,7 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**基礎架構 (main.bicep)：**
+**基礎設施 (main.bicep)：**
 ```bicep
 // Azure OpenAI Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -101,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### 模式 2：AI 搜索 + RAG 整合
 
-**使用案例**：部署檢索增強生成 (RAG) 應用程式
+**使用場景**：部署檢索增強生成 (RAG) 應用程式
 
 ```bicep
 // Azure AI Search
@@ -131,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### 模式 3：文件智能整合
 
-**使用案例**：文件處理和分析工作流程
+**使用場景**：文件處理及分析工作流程
 
 ```bicep
 // Document Intelligence service
@@ -318,9 +318,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 安全性最佳實踐
+## 🔐 安全最佳實踐
 
-### 設置受管理的身份
+### 設置 Managed Identity
 
 ```bicep
 // Managed identity for the web application
@@ -341,7 +341,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-### 網路安全
+### 網絡安全
 
 ```bicep
 // Private endpoints for AI services
@@ -456,8 +456,8 @@ azd deploy
 ### 問題 2：身份驗證失敗
 
 **症狀：**
-- 呼叫 AI 服務時出現 401/403 錯誤
-- 顯示「存取被拒」訊息
+- 調用 AI 服務時出現 401/403 錯誤
+- 顯示「訪問被拒絕」訊息
 
 **解決方案：**
 ```bash
@@ -486,15 +486,15 @@ az cognitiveservices model list --location eastus
 # Check model capacity requirements
 ```
 
-## 範例模板
+## 示例模板
 
 ### 基本聊天應用程式
 
-**儲存庫**：[azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**存儲庫**：[azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**服務**：Azure OpenAI + Cognitive Search + App Service
+**服務**：Azure OpenAI + 認知搜索 + 應用服務
 
-**快速開始：**
+**快速開始**：
 ```bash
 azd init --template azure-search-openai-demo
 azd up
@@ -502,23 +502,23 @@ azd up
 
 ### 文件處理管道
 
-**儲存庫**：[ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**存儲庫**：[ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
-**服務**：Document Intelligence + Storage + Functions
+**服務**：文件智能 + 存儲 + 函數
 
-**快速開始：**
+**快速開始**：
 ```bash
 azd init --template ai-document-processing
 azd up
 ```
 
-### RAG 的企業聊天
+### 使用 RAG 的企業聊天
 
-**儲存庫**：[contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**存儲庫**：[contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**服務**：Azure OpenAI + Search + Container Apps + Cosmos DB
+**服務**：Azure OpenAI + 搜索 + 容器應用 + Cosmos DB
 
-**快速開始：**
+**快速開始**：
 ```bash
 azd init --template contoso-chat
 azd up
@@ -526,31 +526,281 @@ azd up
 
 ## 下一步
 
-1. **嘗試範例**：從符合您使用案例的預建模板開始
-2. **根據需求自訂**：修改基礎架構和應用程式程式碼
+1. **嘗試示例**：從符合您使用場景的預建模板開始
+2. **根據需求自定義**：修改基礎設施及應用程式代碼
 3. **添加監控**：實施全面的可觀察性
 4. **優化成本**：根據預算微調配置
-5. **保護部署**：實施企業級安全模式
-6. **擴展至生產環境**：添加多區域和高可用性功能
+5. **保護您的部署**：實施企業級安全模式
+6. **擴展至生產環境**：添加多區域及高可用性功能
+
+## 🎯 實踐練習
+
+### 練習 1：部署 Azure OpenAI 聊天應用程式 (30 分鐘)
+**目標**：部署並測試一個生產級的 AI 聊天應用程式
+
+```bash
+# Initialize template
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Set environment variables
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Deploy
+azd up
+
+# Test the application
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# Monitor AI operations
+azd monitor
+
+# Clean up
+azd down --force --purge
+```
+
+**成功標準：**
+- [ ] 部署無配額錯誤完成
+- [ ] 可在瀏覽器中訪問聊天界面
+- [ ] 可提問並獲得 AI 驅動的回答
+- [ ] Application Insights 顯示遙測數據
+- [ ] 成功清理資源
+
+**預估成本**：測試 30 分鐘約 $5-10
+
+### 練習 2：配置多模型部署 (45 分鐘)
+**目標**：部署多個具有不同配置的 AI 模型
+
+```bash
+# Create custom Bicep configuration
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Deploy and verify
+azd provision
+azd show
+```
+
+**成功標準：**
+- [ ] 多個模型成功部署
+- [ ] 應用不同的容量設置
+- [ ] 模型可通過 API 訪問
+- [ ] 可從應用程式調用所有模型
+
+### 練習 3：實施成本監控 (20 分鐘)
+**目標**：設置預算警報及成本追蹤
+
+```bash
+# Add budget alert to Bicep
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Deploy budget alert
+azd provision
+
+# Check current costs
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**成功標準：**
+- [ ] 在 Azure 中創建預算警報
+- [ ] 配置電子郵件通知
+- [ ] 可在 Azure Portal 中查看成本數據
+- [ ] 適當設置預算閾值
+
+## 💡 常見問題解答
+
+<details>
+<summary><strong>如何在開發期間降低 Azure OpenAI 成本？</strong></summary>
+
+1. **使用免費層**：Azure OpenAI 每月提供 50,000 個免費 token
+2. **降低容量**：將容量設置為 10 TPM 而非 30+ 用於開發
+3. **使用 azd down**：在非開發時釋放資源
+4. **快取響應**：對重複查詢實施 Redis 快取
+5. **使用 Prompt Engineering**：通過高效提示減少 token 使用量
+
+```bash
+# Development configuration
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>Azure OpenAI 與 OpenAI API 有什麼區別？</strong></summary>
+
+**Azure OpenAI**：
+- 企業級安全及合規
+- 私有網絡整合
+- SLA 保證
+- Managed Identity 身份驗證
+- 提供更高的配額
+
+**OpenAI API**：
+- 更快接觸新模型
+- 設置更簡單
+- 更低的進入門檻
+- 僅支持公共互聯網
+
+對於生產應用程式，**建議使用 Azure OpenAI**。
+</details>
+
+<details>
+<summary><strong>如何處理 Azure OpenAI 配額超出錯誤？</strong></summary>
+
+```bash
+# Check current quota
+az cognitiveservices usage list --location eastus2
+
+# Try different region
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Reduce capacity temporarily
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Request quota increase
+# Go to Azure Portal > Quotas > Request increase
+```
+</details>
+
+<details>
+<summary><strong>我可以使用自己的數據與 Azure OpenAI 嗎？</strong></summary>
+
+可以！使用 **Azure AI Search** 進行 RAG (檢索增強生成)：
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+請參考 [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) 模板。
+</details>
+
+<details>
+<summary><strong>如何保護 AI 模型端點？</strong></summary>
+
+**最佳實踐**：
+1. 使用 Managed Identity (無需 API 密鑰)
+2. 啟用私有端點
+3. 配置網絡安全組
+4. 實施速率限制
+5. 使用 Azure Key Vault 存儲密鑰
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
 
 ## 社群與支援
 
-- **Azure AI Foundry Discord**：[#Azure 頻道](https://discord.gg/microsoft-azure)
-- **AZD GitHub**：[問題與討論](https://github.com/Azure/azure-dev)
+- **Microsoft Foundry Discord**：[#Azure 頻道](https://discord.gg/microsoft-azure)
+- **AZD GitHub**：[問題及討論](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**：[官方文件](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
 
-**章節導覽：**
-- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
-- **📖 本章節**：第 2 章 - AI 優先開發
-- **⬅️ 上一章節**：[第 1 章：你的第一個專案](../getting-started/first-project.md)
+**章節導航：**
+- **📚 課程主頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章內容**：第 2 章 - AI 優先開發
+- **⬅️ 上一章**：[第 1 章：你的第一個項目](../getting-started/first-project.md)
 - **➡️ 下一步**：[AI 模型部署](ai-model-deployment.md)
-- **🚀 下一章節**：[第 3 章：配置](../getting-started/configuration.md)
+- **🚀 下一章**：[第 3 章：配置](../getting-started/configuration.md)
 
-**需要幫助嗎？** 加入我們的社群討論或在儲存庫中提出問題。Azure AI + AZD 社群隨時準備幫助您成功！
+**需要幫助？** 加入我們的社群討論或在存儲庫中開啟問題。Azure AI + AZD 社群致力於幫助您成功！
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為權威來源。對於重要資訊，建議使用專業的人類翻譯。我們不對因使用此翻譯而引起的任何誤解或誤釋承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

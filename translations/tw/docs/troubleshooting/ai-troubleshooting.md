@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-17T12:52:45+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-19T10:18:59+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "tw"
 }
 -->
-# AI 特定問題排解指南
+# AI 專屬疑難排解指南
 
 **章節導覽：**
 - **📚 課程首頁**：[AZD 初學者指南](../../README.md)
-- **📖 本章節**：第 7 章 - 問題排解與除錯
+- **📖 當前章節**：第 7 章 - 疑難排解與除錯
 - **⬅️ 上一章**：[除錯指南](debugging.md)
-- **➡️ 下一章**：[第 8 章：生產與企業模式](../ai-foundry/production-ai-practices.md)
-- **🤖 相關章節**：[第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ 下一章**：[第 8 章：生產與企業模式](../microsoft-foundry/production-ai-practices.md)
+- **🤖 相關內容**：[第 2 章：AI 優先開發](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**上一章**：[生產 AI 實踐](../ai-foundry/production-ai-practices.md) | **下一章**：[AZD 入門指南](../getting-started/README.md)
+**上一章：**[生產 AI 實踐](../microsoft-foundry/production-ai-practices.md) | **下一章：**[AZD 入門](../getting-started/README.md)
 
-本全面性問題排解指南針對使用 AZD 部署 AI 解決方案時常見的問題，提供解決方案及專屬於 Azure AI 服務的除錯技巧。
+這份全面的疑難排解指南針對使用 AZD 部署 AI 解決方案時常見的問題，提供解決方案與 Azure AI 服務專屬的除錯技術。
 
 ## 目錄
 
@@ -29,11 +29,11 @@ CO_OP_TRANSLATOR_METADATA:
 - [模型部署失敗](../../../../docs/troubleshooting)
 - [效能與擴展問題](../../../../docs/troubleshooting)
 - [成本與配額管理](../../../../docs/troubleshooting)
-- [除錯工具與技巧](../../../../docs/troubleshooting)
+- [除錯工具與技術](../../../../docs/troubleshooting)
 
 ## Azure OpenAI 服務問題
 
-### 問題：OpenAI 服務在區域不可用
+### 問題：OpenAI 服務在區域內不可用
 
 **症狀：**
 ```
@@ -41,7 +41,7 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **原因：**
-- Azure OpenAI 在選定區域不可用
+- Azure OpenAI 在選定區域內不可用
 - 偏好區域的配額已用盡
 - 區域容量限制
 
@@ -67,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **使用替代區域：**
+3. **使用其他區域：**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -124,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### 問題：API 版本無效
+### 問題：無效的 API 版本
 
 **症狀：**
 ```
@@ -207,7 +207,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **檢查索引架構：**
+2. **檢查索引結構：**
 ```python
 # Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
@@ -239,7 +239,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## 容器應用部署問題
 
-### 問題：容器建置失敗
+### 問題：容器構建失敗
 
 **症狀：**
 ```
@@ -368,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## 身份驗證與權限錯誤
 
-### 問題：受管理身份權限被拒
+### 問題：受管理的身份權限被拒絕
 
 **症狀：**
 ```
@@ -417,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### 問題：Key Vault 存取被拒
+### 問題：Key Vault 存取被拒絕
 
 **症狀：**
 ```
@@ -508,7 +508,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **部署前驗證模型：**
+3. **在部署前驗證模型：**
 ```python
 # Pre-deployment model validation
 import httpx
@@ -535,7 +535,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 ### 問題：高延遲回應
 
 **症狀：**
-- 回應時間超過 30 秒
+- 回應時間 > 30 秒
 - 超時錯誤
 - 使用者體驗不佳
 
@@ -736,7 +736,7 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## 除錯工具與技巧
+## 除錯工具與技術
 
 ### AZD 除錯指令
 
@@ -844,36 +844,38 @@ def monitor_performance(func):
 
 | 錯誤代碼 | 描述 | 解決方案 |
 |----------|------|----------|
-| 401 | 未授權 | 檢查 API 金鑰與受管理身份配置 |
+| 401 | 未授權 | 檢查 API 金鑰與受管理的身份配置 |
 | 403 | 禁止存取 | 驗證 RBAC 角色分配 |
-| 429 | 速率限制 | 實施指數回退的重試邏輯 |
+| 429 | 超出速率限制 | 實施指數回退的重試邏輯 |
 | 500 | 內部伺服器錯誤 | 檢查模型部署狀態與日誌 |
 | 503 | 服務不可用 | 驗證服務健康狀態與區域可用性 |
 
 ## 下一步
 
 1. **檢閱 [AI 模型部署指南](ai-model-deployment.md)**，了解部署最佳實踐
-2. **完成 [生產 AI 實踐](production-ai-practices.md)**，打造企業級解決方案
-3. **加入 [Azure AI Foundry Discord](https://aka.ms/foundry/discord)**，獲取社群支援
+2. **完成 [生產 AI 實踐](production-ai-practices.md)**，以實現企業級解決方案
+3. **加入 [Microsoft Foundry Discord](https://aka.ms/foundry/discord)**，獲取社群支援
 4. **提交問題**至 [AZD GitHub 儲存庫](https://github.com/Azure/azure-dev)，解決 AZD 特定問題
 
 ## 資源
 
-- [Azure OpenAI 服務問題排解](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [容器應用問題排解](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI 搜索問題排解](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure OpenAI 服務疑難排解](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [容器應用疑難排解](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI 搜索疑難排解](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
 **章節導覽：**
 - **📚 課程首頁**：[AZD 初學者指南](../../README.md)
-- **📖 本章節**：第 7 章 - 問題排解與除錯
+- **📖 當前章節**：第 7 章 - 疑難排解與除錯
 - **⬅️ 上一章**：[除錯指南](debugging.md)
-- **➡️ 下一章**：[第 8 章：生產與企業模式](../ai-foundry/production-ai-practices.md)
-- **🤖 相關章節**：[第 2 章：AI 優先開發](../ai-foundry/azure-ai-foundry-integration.md)
-- [Azure Developer CLI 問題排解](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **➡️ 下一章**：[第 8 章：生產與企業模式](../microsoft-foundry/production-ai-practices.md)
+- **🤖 相關內容**：[第 2 章：AI 優先開發](../microsoft-foundry/microsoft-foundry-integration.md)
+- [Azure Developer CLI 疑難排解](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議尋求專業人工翻譯。我們對因使用此翻譯而產生的任何誤解或錯誤解釋不承擔責任。
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

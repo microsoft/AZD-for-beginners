@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "22e9deee2d82e70fc841c60f97627916",
-  "translation_date": "2025-09-23T14:04:28+00:00",
+  "original_hash": "8b26783231714a00efafee3aca8b233c",
+  "translation_date": "2025-11-19T09:47:35+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "zh"
 }
@@ -18,32 +18,32 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 工作坊概述
 
-本动手实验将指导开发者如何使用Azure Developer CLI (AZD)部署现有的AI模板。您将学习使用Azure AI Foundry服务进行生产级AI部署的关键模式。
+本动手实验指导开发者如何使用Azure Developer CLI (AZD)部署现有的AI模板。您将学习使用Microsoft Foundry服务进行生产环境AI部署的关键模式。
 
 **时长：** 2-3小时  
 **难度：** 中级  
-**前置条件：** 基本的Azure知识，熟悉AI/ML概念
+**前提条件：** 基本的Azure知识，熟悉AI/ML概念
 
 ## 🎓 学习目标
 
 完成本实验后，您将能够：
-- ✅ 将现有的AI应用转换为AZD模板
-- ✅ 使用AZD配置Azure AI Foundry服务
+- ✅ 将现有AI应用转换为AZD模板
+- ✅ 使用AZD配置Microsoft Foundry服务
 - ✅ 实现AI服务的安全凭证管理
 - ✅ 部署具备监控功能的生产级AI应用
-- ✅ 排查常见的AI部署问题
+- ✅ 解决常见AI部署问题
 
-## 前置条件
+## 前提条件
 
 ### 必需工具
-- 已安装 [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- 已安装 [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
-- 已安装 [Git](https://git-scm.com/)
+- 已安装[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- 已安装[Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
+- 已安装[Git](https://git-scm.com/)
 - 代码编辑器（推荐使用VS Code）
 
 ### Azure资源
-- 拥有贡献者权限的Azure订阅
-- Azure OpenAI服务的访问权限（或能够申请访问权限）
+- 拥有具有贡献者权限的Azure订阅
+- 可访问Azure OpenAI服务（或能够申请访问权限）
 - 资源组创建权限
 
 ### 知识要求
@@ -53,7 +53,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 实验设置
 
-### 第1步：环境准备
+### 第一步：环境准备
 
 1. **验证工具安装：**
 ```bash
@@ -74,12 +74,11 @@ git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-
 ## 模块1：了解AI应用的AZD结构
 
 ### AI AZD模板的结构
 
-探索AI就绪的AZD模板中的关键文件：
+探索AI就绪AZD模板中的关键文件：
 
 ```
 azure-search-openai-demo/
@@ -95,7 +94,6 @@ azure-search-openai-demo/
 ├── scripts/               # Deployment scripts
 └── .azure/               # AZD environment files
 ```
-
 
 ### **实验练习1.1：探索配置**
 
@@ -120,9 +118,9 @@ cat infra/main.bicep
 - 安全密钥管理
 - 网络安全配置
 
-### **讨论点：为什么这些模式对AI很重要**
+### **讨论点：为什么这些模式对AI重要**
 
-- **服务依赖性**：AI应用通常需要多个协调的服务
+- **服务依赖性**：AI应用通常需要多个服务协同工作
 - **安全性**：API密钥和端点需要安全管理
 - **可扩展性**：AI工作负载有独特的扩展需求
 - **成本管理**：如果配置不当，AI服务可能会非常昂贵
@@ -144,7 +142,6 @@ azd env set AZURE_LOCATION eastus
 # Optional: Set specific OpenAI model
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
-
 
 ### 第2.2步：部署基础设施和应用
 
@@ -182,7 +179,7 @@ azd show --output json | grep "webAppUrl"
 
 ### **实验练习2.1：故障排除练习**
 
-**场景**：部署成功，但AI没有响应。
+**场景**：您的部署成功，但AI没有响应。
 
 **需要检查的常见问题：**
 1. **OpenAI API密钥**：验证是否正确设置
@@ -202,8 +199,7 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-
-## 模块3：定制您的AI应用
+## 模块3：根据需求定制AI应用
 
 ### 第3.1步：修改AI配置
 
@@ -235,10 +231,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-
 ### 第3.2步：环境特定配置
 
-**最佳实践**：开发环境与生产环境使用不同的配置。
+**最佳实践**：开发与生产环境使用不同的配置。
 
 1. **创建生产环境：**
 ```bash
@@ -255,22 +250,21 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-
 ### **实验练习3.1：成本优化**
 
 **挑战**：配置模板以实现成本效益的开发。
 
 **任务：**
 1. 确定哪些SKU可以设置为免费/基本层
-2. 配置环境变量以实现最低成本
-3. 部署并比较与生产配置的成本
+2. 配置环境变量以降低成本
+3. 部署并与生产配置的成本进行比较
 
 **解决提示：**
 - 尽可能使用Cognitive Services的F0（免费）层
 - 在开发中使用Search Service的Basic层
 - 考虑使用Functions的消费计划
 
-## 模块4：安全性和生产最佳实践
+## 模块4：安全性和生产环境最佳实践
 
 ### 第4.1步：安全凭证管理
 
@@ -278,7 +272,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 **AZD解决方案**：托管身份+Key Vault集成。
 
-1. **查看模板中的安全配置：**
+1. **检查模板中的安全配置：**
 ```bash
 # Look for Key Vault and Managed Identity configuration
 grep -r "keyVault\|managedIdentity" infra/
@@ -289,7 +283,6 @@ grep -r "keyVault\|managedIdentity" infra/
 # Check if the web app has the correct identity configuration
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
-
 
 ### 第4.2步：网络安全
 
@@ -317,7 +310,6 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
   }
 }
 ```
-
 
 ### 第4.3步：监控和可观察性
 
@@ -351,13 +343,12 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-
 ### **实验练习4.1：安全审计**
 
 **任务**：审查您的部署是否符合安全最佳实践。
 
 **检查清单：**
-- [ ] 代码或配置中没有硬编码的秘密
+- [ ] 代码或配置中没有硬编码的密钥
 - [ ] 使用托管身份进行服务间认证
 - [ ] Key Vault存储敏感配置
 - [ ] 网络访问已正确限制
@@ -371,19 +362,19 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 1. **应用架构：**
    - 您的应用使用哪些AI服务？
-   - 需要哪些计算资源？
+   - 它需要哪些计算资源？
    - 是否需要数据库？
    - 服务之间有哪些依赖关系？
 
 2. **安全需求：**
    - 您的应用处理哪些敏感数据？
-   - 有哪些合规要求？
+   - 您有哪些合规要求？
    - 是否需要私有网络？
 
 3. **扩展需求：**
    - 您的预期负载是多少？
    - 是否需要自动扩展？
-   - 是否有区域性要求？
+   - 是否有区域要求？
 
 ### 第5.2步：创建您的AZD模板
 
@@ -465,24 +456,23 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-
 ### **实验练习5.1：模板创建挑战**
 
-**挑战**：为文档处理AI应用创建一个AZD模板。
+**挑战**：为文档处理AI应用创建AZD模板。
 
 **需求：**
 - 使用Azure OpenAI进行内容分析
 - 使用Document Intelligence进行OCR
 - 使用存储账户上传文档
 - 使用Function App处理逻辑
-- 使用Web应用提供用户界面
+- 使用Web应用作为用户界面
 
 **加分项：**
 - 添加适当的错误处理
 - 包括成本估算
 - 设置监控仪表板
 
-## 模块6：排查常见问题
+## 模块6：常见问题排查
 
 ### 常见部署问题
 
@@ -498,7 +488,6 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-
 #### 问题2：模型在区域内不可用
 **症状：** AI响应失败或模型部署错误  
 **解决方案：**
@@ -511,9 +500,8 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
-
 #### 问题3：权限问题
-**症状：** 调用AI服务时出现403禁止访问错误  
+**症状：** 调用AI服务时出现403 Forbidden错误  
 **解决方案：**
 ```bash
 # Check role assignments
@@ -526,7 +514,6 @@ az role assignment create \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-
 ### 性能问题
 
 #### 问题4：AI响应缓慢
@@ -537,12 +524,12 @@ az role assignment create \
 
 **解决方案：**
 - 对常见查询实施缓存
-- 根据您的用例选择适当的OpenAI模型
+- 根据您的用例使用适当的OpenAI模型
 - 考虑为高负载场景使用只读副本
 
 ### **实验练习6.1：调试挑战**
 
-**场景**：部署成功，但应用返回500错误。
+**场景**：您的部署成功，但应用返回500错误。
 
 **调试任务：**
 1. 检查应用日志
@@ -551,9 +538,9 @@ az role assignment create \
 4. 审查配置
 
 **使用工具：**
-- 使用`azd show`查看部署概览
-- 在Azure门户中查看详细服务日志
-- 使用Application Insights查看应用遥测数据
+- `azd show`查看部署概览
+- Azure门户查看详细服务日志
+- Application Insights查看应用遥测数据
 
 ## 模块7：监控和优化
 
@@ -561,7 +548,7 @@ az role assignment create \
 
 1. **创建自定义仪表板：**
 
-在Azure门户中创建一个仪表板，包含：
+导航到Azure门户并创建一个仪表板，包含：
 - OpenAI请求数量和延迟
 - 应用错误率
 - 资源使用情况
@@ -577,7 +564,6 @@ az monitor metrics alert create \
   --condition "avg Http5xx greater than 10" \
   --description "Alert when error rate is high"
 ```
-
 
 ### 第7.2步：成本优化
 
@@ -608,14 +594,14 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - 使用适当的计算SKU
 - 设置正确的自动扩展
 
-## 最终挑战：端到端实现
+## 最终挑战：端到端实施
 
 ### 挑战场景
 
-您需要创建一个生产级的AI驱动客户服务聊天机器人，满足以下需求：
+您需要创建一个生产级AI驱动的客户服务聊天机器人，要求如下：
 
 **功能需求：**
-- 提供客户交互的Web界面
+- 客户交互的Web界面
 - 集成Azure OpenAI以生成响应
 - 使用Cognitive Search实现文档搜索功能
 - 集成现有客户数据库
@@ -624,18 +610,18 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 **非功能需求：**
 - 支持1000个并发用户
 - 99.9%的正常运行时间SLA
-- 符合SOC 2合规性
+- 符合SOC 2标准
 - 每月成本低于500美元
 - 部署到多个环境（开发、预发布、生产）
 
-### 实现步骤
+### 实施步骤
 
 1. **设计架构**
 2. **创建AZD模板**
 3. **实施安全措施**
 4. **设置监控和警报**
 5. **创建部署管道**
-6. **编写解决方案文档**
+6. **记录解决方案**
 
 ### 评估标准
 
@@ -645,12 +631,12 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - ✅ **可维护性**：代码和基础设施是否组织良好？
 - ✅ **成本**：是否符合预算？
 
-## 附加资源
+## 额外资源
 
-### 微软文档
+### Microsoft文档
 - [Azure Developer CLI文档](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Azure OpenAI服务文档](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Azure AI Foundry文档](https://learn.microsoft.com/azure/ai-studio/)
+- [Microsoft Foundry文档](https://learn.microsoft.com/azure/ai-studio/)
 
 ### 示例模板
 - [Azure OpenAI聊天应用](https://github.com/Azure-Samples/azure-search-openai-demo)
@@ -658,28 +644,28 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - [Contoso聊天](https://github.com/Azure-Samples/contoso-chat)
 
 ### 社区资源
-- [Azure AI Foundry Discord](https://discord.gg/microsoft-azure)
+- [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [Awesome AZD模板](https://azure.github.io/awesome-azd/)
 
 ## 🎓 完成证书
 恭喜！您已完成 AI 工作坊实验室。现在您应该能够：
 
-- ✅ 将现有的 AI 应用转换为 AZD 模板
-- ✅ 部署生产级 AI 应用
+- ✅ 将现有的 AI 应用程序转换为 AZD 模板
+- ✅ 部署生产级 AI 应用程序
 - ✅ 实施 AI 工作负载的安全最佳实践
-- ✅ 监控并优化 AI 应用性能
+- ✅ 监控并优化 AI 应用程序性能
 - ✅ 排查常见的部署问题
 
 ### 下一步
 1. 将这些模式应用到您自己的 AI 项目中
 2. 向社区贡献模板
-3. 加入 Azure AI Foundry Discord，获取持续支持
+3. 加入 Microsoft Foundry Discord，获取持续支持
 4. 探索高级主题，例如多区域部署
 
 ---
 
-**工作坊反馈**：通过在 [Azure AI Foundry Discord #Azure 频道](https://discord.gg/microsoft-azure)分享您的体验，帮助我们改进此工作坊。
+**工作坊反馈**：通过在 [Microsoft Foundry Discord #Azure 频道](https://discord.gg/microsoft-azure) 分享您的体验，帮助我们改进此工作坊。
 
 ---
 
@@ -694,3 +680,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

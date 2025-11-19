@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T12:38:55+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-19T09:44:37+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "zh"
 }
@@ -12,9 +12,9 @@ CO_OP_TRANSLATOR_METADATA:
 **章节导航：**
 - **📚 课程主页**: [AZD 初学者指南](../../README.md)
 - **📖 当前章节**: 第七章 - 故障排查与调试
-- **⬅️ 上一章**: [常见问题](common-issues.md)
-- **➡️ 下一章**: [AI 专属故障排查](ai-troubleshooting.md)
-- **🚀 下一章节**: [第八章：生产与企业模式](../ai-foundry/production-ai-practices.md)
+- **⬅️ 上一节**: [常见问题](common-issues.md)
+- **➡️ 下一节**: [AI 专属故障排查](ai-troubleshooting.md)
+- **🚀 下一章**: [第八章：生产与企业模式](../microsoft-foundry/production-ai-practices.md)
 
 ## 简介
 
@@ -35,7 +35,7 @@ CO_OP_TRANSLATOR_METADATA:
 完成后，您将能够：
 - 应用 TRIAGE 方法系统化调试复杂的部署问题
 - 配置并分析全面的日志和跟踪信息
-- 有效使用 Azure Monitor、Application Insights 和诊断工具
+- 高效使用 Azure Monitor、Application Insights 和诊断工具
 - 独立调试网络连接、身份验证和权限问题
 - 实施性能监控和优化策略
 - 创建自定义调试脚本和自动化工具以解决重复性问题
@@ -44,9 +44,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### TRIAGE 方法
 - **T**ime: 问题何时开始？
-- **R**eproduce: 是否可以稳定复现问题？
-- **I**solate: 哪个组件出现故障？
-- **A**nalyze: 日志中有什么信息？
+- **R**eproduce: 是否可以稳定复现？
+- **I**solate: 哪个组件出现了故障？
+- **A**nalyze: 日志中显示了什么？
 - **G**ather: 收集所有相关信息
 - **E**scalate: 何时需要寻求额外帮助
 
@@ -458,7 +458,7 @@ debug_network_security() {
 }
 ```
 
-## 📱 应用专属调试
+## 📱 应用程序专属调试
 
 ### Node.js 应用调试
 ```javascript
@@ -684,32 +684,34 @@ hooks:
 
 ## 最佳实践
 
-1. **始终启用调试日志** 在非生产环境中
-2. **创建可复现的测试用例** 以定位问题
-3. **记录调试流程** 供团队参考
-4. **自动化健康检查** 和监控
-5. **保持调试工具更新** 与应用程序同步
+1. **始终在非生产环境中启用调试日志**
+2. **为问题创建可复现的测试用例**
+3. **为团队记录调试流程**
+4. **自动化健康检查和监控**
+5. **随着应用更新保持调试工具的更新**
 6. **在非紧急情况下练习调试流程**
 
 ## 下一步
 
 - [容量规划](../pre-deployment/capacity-planning.md) - 规划资源需求
 - [SKU 选择](../pre-deployment/sku-selection.md) - 选择合适的服务层级
-- [预检检查](../pre-deployment/preflight-checks.md) - 部署前验证
+- [预检查](../pre-deployment/preflight-checks.md) - 部署前验证
 - [速查表](../../resources/cheat-sheet.md) - 快速参考命令
 
 ---
 
-**记住**: 优秀的调试需要系统化、细致和耐心。这些工具和技术将帮助您更快、更有效地诊断问题。
+**记住**: 优秀的调试需要系统化、细致和耐心。这些工具和技术将帮助您更快、更高效地诊断问题。
 
 ---
 
 **导航**
-- **上一课**: [常见问题](common-issues.md)
+- **上一节**: [常见问题](common-issues.md)
 
-- **下一课**: [容量规划](../pre-deployment/capacity-planning.md)
+- **下一节**: [容量规划](../pre-deployment/capacity-planning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
