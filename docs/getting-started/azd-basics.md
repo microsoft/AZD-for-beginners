@@ -7,7 +7,7 @@
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Next**: [Installation & Setup](installation.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduction
 
@@ -813,7 +813,7 @@ azd init --template template1
 - [Configuration Guide](configuration.md) - Advanced configuration options
 
 **🎯 Ready for Next Chapter?**
-- [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md) - Start building AI applications
+- [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md) - Start building AI applications
 
 ## Additional Resources
 
@@ -1140,7 +1140,7 @@ You now understand AZD fundamentals. Choose your path:
 3. **Practice:** Complete all 3 exercises in this lesson
 
 ### 🚀 For AI Developers:
-1. **Skip to:** [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+1. **Skip to:** [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 2. **Deploy:** Start with `azd init --template get-started-with-ai-chat`
 3. **Learn:** Build while you deploy
 
@@ -1156,4 +1156,4 @@ You now understand AZD fundamentals. Choose your path:
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start  
 - **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Next**: [Installation & Setup](installation.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)

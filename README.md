@@ -28,11 +28,11 @@ Follow these steps to begin your AZD learning journey:
 
 ## Course Overview
 
-Master Azure Developer CLI (azd) through structured chapters designed for progressive learning. **Special focus on AI application deployment with Azure AI Foundry integration.**
+Master Azure Developer CLI (azd) through structured chapters designed for progressive learning. **Special focus on AI application deployment with Microsoft Foundry integration.**
 
 ### Why This Course is Essential for Modern Developers
 
-Based on Azure AI Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
+Based on Microsoft Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
 - Complex multi-service AI architectures
 - Production AI deployment best practices  
 - Azure AI service integration and configuration
@@ -43,7 +43,7 @@ Based on Azure AI Foundry Discord community insights, **45% of developers want t
 
 By completing this structured course, you will:
 - **Master AZD Fundamentals**: Core concepts, installation, and configuration
-- **Deploy AI Applications**: Use AZD with Azure AI Foundry services
+- **Deploy AI Applications**: Use AZD with Microsoft Foundry services
 - **Implement Infrastructure as Code**: Manage Azure resources with Bicep templates
 - **Troubleshoot Deployments**: Resolve common issues and debug problems
 - **Optimize for Production**: Security, scaling, monitoring, and cost management
@@ -118,16 +118,16 @@ azd down --force --purge  # Cleans up resources
 **Complexity**: ⭐⭐
 
 #### What You'll Learn
-- Azure AI Foundry integration with AZD
+- Microsoft Foundry integration with AZD
 - Deploying AI-powered applications
 - Understanding AI service configurations
 
 #### Learning Resources
-- **🎯 Start Here**: [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
-- **📖 Patterns**: [AI Model Deployment](docs/ai-foundry/ai-model-deployment.md) - Deploy and manage AI models
-- **🛠️ Workshop**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-ready
+- **🎯 Start Here**: [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **📖 Patterns**: [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md) - Deploy and manage AI models
+- **🛠️ Workshop**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-ready
 - **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning with MkDocs * DevContainer Environment
-- **📋 Templates**: [Azure AI Foundry Templates](#featured-azure-ai-foundry-templates)
+- **📋 Templates**: [Microsoft Foundry Templates](#featured-microsoft-foundry-templates)
 
 #### Practical Exercises
 ```bash
@@ -327,7 +327,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Monitoring and cost optimization
 
 #### Learning Resources
-- **🏭 Production**: [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) - Enterprise patterns
+- **🏭 Production**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patterns
 - **📝 Examples**: [Microservices Example](examples/microservices/) - Complex architectures
 - **📊 Monitoring**: Application Insights integration
 
@@ -361,7 +361,7 @@ Our workshop materials provide a structured, interactive learning experience tha
 The workshop follows a **Discovery → Deployment → Customization** methodology:
 
 1. **Discovery Phase** (45 mins)
-   - Explore Azure AI Foundry templates and services
+   - Explore Microsoft Foundry templates and services
    - Understand multi-agent architecture patterns
    - Review deployment requirements and prerequisites
 
@@ -388,7 +388,7 @@ cd azd-for-beginners/workshop
 
 #### 🎯 Workshop Learning Outcomes
 By completing the workshop, participants will:
-- **Deploy Production AI Applications**: Use AZD with Azure AI Foundry services
+- **Deploy Production AI Applications**: Use AZD with Microsoft Foundry services
 - **Master Multi-Agent Architectures**: Implement coordinated AI agent solutions
 - **Implement Security Best Practices**: Configure authentication and access control
 - **Optimize for Scale**: Design cost-effective, performant deployments
@@ -397,7 +397,7 @@ By completing the workshop, participants will:
 #### 📖 Workshop Resources
 - **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning environment
 - **📋 Step-by-Step Instructions**: [Guided Exercises](workshop/docs/instructions/) - Detailed walkthroughs
-- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-focused exercises
+- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-focused exercises
 - **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Environment configuration
 
 **Perfect for**: Corporate training, university courses, self-paced learning, and developer bootcamps.
@@ -413,7 +413,7 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 - **Integrated workflows** - Seamlessly provision, deploy, and monitor applications
 - **Developer-friendly** - Optimized for developer productivity and experience
 
-### **AZD + Azure AI Foundry: Perfect for AI Deployments**
+### **AZD + Microsoft Foundry: Perfect for AI Deployments**
 
 **Why AZD for AI Solutions?** AZD addresses the top challenges AI developers face:
 
@@ -422,13 +422,13 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 - **Production AI Patterns** - Best practices for scalable, cost-effective AI application deployments
 - **End-to-End AI Workflows** - From model development to production deployment with proper monitoring
 - **Cost Optimization** - Smart resource allocation and scaling strategies for AI workloads
-- **Azure AI Foundry Integration** - Seamless connection to AI Foundry model catalog and endpoints
+- **Microsoft Foundry Integration** - Seamless connection to Microsoft Foundry model catalog and endpoints
 
 ---
 
 ## 🎯 Templates & Examples Library
 
-### Featured: Azure AI Foundry Templates
+### Featured: Microsoft Foundry Templates
 **Start here if you're deploying AI applications!**
 
 > **Note:** These templates demonstrate various AI patterns. Some are external Azure Samples, others are local implementations.
@@ -498,7 +498,7 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 - [**Study Guide**](resources/study-guide.md) - Comprehensive practice exercises
 
 ### Hands-On Workshops
-- [**AI Workshop Lab**](docs/ai-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-deployable (2-3 hours)
+- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-deployable (2-3 hours)
 - [**Interactive Workshop Guide**](workshop/README.md) - Browser-based workshop with MkDocs and DevContainer Environment
 - [**Structured Learning Path**](workshop/docs/instructions/) -7-step guided exercises (Discovery → Deployment → Customization)
 - [**AZD For Beginners Workshop**](workshop/README.md) - Complete hands-on workshop materials with GitHub Codespaces integration
@@ -851,7 +851,7 @@ Upon completing all chapters, you will have:
 - **AI-Specific Help**: Join the [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Documentation**: [Official Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Community Insights from Azure AI Foundry Discord
+### Community Insights from Microsoft Foundry Discord
 
 **Recent Poll Results from #Azure Channel:**
 - **45%** of developers want to use AZD for AI workloads

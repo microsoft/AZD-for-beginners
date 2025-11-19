@@ -60,7 +60,7 @@ After completing all sections of this study guide, you will be able to:
 **Duration**: 1-2 hours | **Complexity**: ⭐⭐
 
 #### Learning Objectives
-- Integrate Azure AI Foundry services with AZD workflows
+- Integrate Microsoft Foundry services with AZD workflows
 - Deploy and configure AI-powered applications
 - Understand RAG (Retrieval-Augmented Generation) implementation patterns
 - Manage AI model deployments and scaling

@@ -5,7 +5,7 @@
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [Installation & Setup](installation.md)
 - **➡️ Next**: [Configuration](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduction
 
@@ -499,5 +499,5 @@ azd init --template todo-java-mongo
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [Installation & Setup](installation.md)
 - **➡️ Next**: [Configuration](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 - **Next Lesson**: [Deployment Guide](../deployment/deployment-guide.md)

@@ -2,11 +2,11 @@
 
 ## Course Overview
 
-Master Azure Developer CLI (azd) through structured chapters designed for progressive learning. **Special focus on AI application deployment with Azure AI Foundry integration.**
+Master Azure Developer CLI (azd) through structured chapters designed for progressive learning. **Special focus on AI application deployment with Microsoft Foundry integration.**
 
 ### Why This Course is Essential for Modern Developers
 
-Based on Azure AI Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
+Based on Microsoft Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
 - Complex multi-service AI architectures
 - Production AI deployment best practices  
 - Azure AI service integration and configuration
@@ -17,7 +17,7 @@ Based on Azure AI Foundry Discord community insights, **45% of developers want t
 
 By completing this structured course, you will:
 - **Master AZD Fundamentals**: Core concepts, installation, and configuration
-- **Deploy AI Applications**: Use AZD with Azure AI Foundry services
+- **Deploy AI Applications**: Use AZD with Microsoft Foundry services
 - **Implement Infrastructure as Code**: Manage Azure resources with Bicep templates
 - **Troubleshoot Deployments**: Resolve common issues and debug problems
 - **Optimize for Production**: Security, scaling, monitoring, and cost management
@@ -179,17 +179,17 @@ Successfully deploy a simple web application to Azure using AZD
 **Complexity**: ⭐⭐
 
 #### What You'll Learn
-- Azure AI Foundry integration with AZD
+- Microsoft Foundry integration with AZD
 - Deploying AI-powered applications
 - Understanding AI service configurations
 - RAG (Retrieval-Augmented Generation) patterns
 
 #### Learning Resources
-- [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
-- [AI Model Deployment](docs/ai-foundry/ai-model-deployment.md)
-- [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - **NEW**: Comprehensive 2-3 hour hands-on lab
+- [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md)
+- [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **NEW**: Comprehensive 2-3 hour hands-on lab
 - [Interactive Workshop Guide](workshop/README.md) - **NEW**: Browser-based workshop with MkDocs preview
-- [Azure AI Foundry Templates](README.md#featured-azure-ai-foundry-templates)
+- [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
 - [Workshop Instructions](workshop/docs/instructions/) - **NEW**: Step-by-step guided exercises
 
 #### Practical Outcome
@@ -318,7 +318,7 @@ Independently diagnose and resolve common deployment issues
 - Scalability and governance
 
 #### Learning Resources
-- [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) - Enterprise patterns
+- [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patterns
 - Microservices and enterprise examples
 - Monitoring and governance frameworks
 
@@ -394,7 +394,7 @@ Sequential completion of all 8 chapters with hands-on practice and validation
 
 ### Certification and Recognition
 - **Course Completion Badge**: Complete all 8 chapters with practical validation
-- **Community Recognition**: Active participation in Azure AI Foundry Discord
+- **Community Recognition**: Active participation in Microsoft Foundry Discord
 - **Professional Development**: Industry-relevant AZD and AI deployment skills
 - **Career Advancement**: Enterprise-ready cloud deployment capabilities
 
@@ -407,7 +407,7 @@ Upon completion of foundation chapters, learners will demonstrate:
 - Deploy simple web applications to Azure using AZD commands
 - Configure and deploy AI-powered chat applications with RAG capabilities
 - Understand core AZD concepts: templates, environments, provisioning workflows
-- Integrate Azure AI Foundry services with AZD deployments
+- Integrate Microsoft Foundry services with AZD deployments
 - Navigate Azure AI service configurations and API endpoints
 
 **Professional Skills:**
@@ -524,7 +524,7 @@ Upon completing all chapters with verification, graduates will have:
 - **Industry Recognition**: Verifiable skills in high-demand AZD and AI deployment areas
 - **Career Advancement**: Qualifications for cloud architect and AI deployment specialist roles
 - **Community Leadership**: Active membership in Azure developer and AI communities
-- **Continuous Learning**: Foundation for advanced Azure AI Foundry specialization
+- **Continuous Learning**: Foundation for advanced Microsoft Foundry specialization
 
 **Portfolio Assets:**
 - **Deployed Solutions**: Working examples of AI applications and infrastructure patterns
@@ -534,7 +534,7 @@ Upon completing all chapters with verification, graduates will have:
 
 ### Post-Course Learning Path
 Graduates are prepared for advanced specialization in:
-- **Azure AI Foundry Expert**: Deep specialization in AI model deployment and orchestration
+- **Microsoft Foundry Expert**: Deep specialization in AI model deployment and orchestration
 - **Cloud Architecture Leadership**: Enterprise-scale deployment design and governance
 - **Developer Community Leadership**: Contributing to Azure samples and community resources
 - **Corporate Training**: Teaching AZD and AI deployment skills within organizations

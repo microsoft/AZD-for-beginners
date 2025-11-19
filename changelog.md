@@ -22,6 +22,67 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.5.0] - 2025-11-19
+
+#### Product Rebranding: Microsoft Foundry
+**This version implements a comprehensive product name change from "Azure AI Foundry" to "Microsoft Foundry" across all English documentation, reflecting Microsoft's official rebranding.**
+
+#### Changed
+- **🔄 Product Name Update**: Complete rebranding from "Azure AI Foundry" to "Microsoft Foundry"
+  - Updated all references across English documentation in `docs/` folder
+  - Renamed folder: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Renamed file: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Total: 23 content references updated across 7 documentation files
+
+- **📁 Folder Structure Changes**:
+  - `docs/ai-foundry/` renamed to `docs/microsoft-foundry/`
+  - All cross-references updated to reflect new folder structure
+  - Navigation links validated across all documentation
+
+- **📄 File Renames**:
+  - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - All internal links updated to reference new filename
+
+#### Updated Files
+- **Chapter Documentation** (7 files):
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 navigation link updates
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 product name references updated
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Already using Microsoft Foundry (from previous updates)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 references updated (overview, community feedback, documentation)
+  - `docs/getting-started/azd-basics.md` - 4 cross-reference links updated
+  - `docs/getting-started/first-project.md` - 2 chapter navigation links updated
+  - `docs/getting-started/installation.md` - 2 next chapter links updated
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 references updated (navigation, Discord community)
+  - `docs/troubleshooting/common-issues.md` - 1 navigation link updated
+  - `docs/troubleshooting/debugging.md` - 1 navigation link updated
+
+- **Course Structure Files** (2 files):
+  - `README.md` - 17 references updated (course overview, chapter titles, templates section, community insights)
+  - `course-outline.md` - 14 references updated (overview, learning objectives, chapter resources)
+
+#### Validated
+- ✅ Zero remaining "ai-foundry" folder path references in English docs
+- ✅ Zero remaining "Azure AI Foundry" product name references in English docs
+- ✅ All navigation links functional with new folder structure
+- ✅ File and folder renames completed successfully
+- ✅ Cross-references between chapters validated
+
+#### Notes
+- **Scope**: Changes applied to English documentation in `docs/` folder only
+- **Translations**: Translation folders (`translations/`) not updated in this version
+- **Workshop**: Workshop materials (`workshop/`) not updated in this version
+- **Examples**: Example files may still reference legacy naming (to be addressed in future update)
+- **External Links**: External URLs and GitHub repository references remain unchanged
+
+#### Migration Guide for Contributors
+If you have local branches or documentation referencing the old structure:
+1. Update folder references: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. Update file references: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. Replace product name: "Azure AI Foundry" → "Microsoft Foundry"
+4. Validate all internal documentation links still work
+
+---
+
 ### [v3.4.0] - 2025-10-24
 
 #### Infrastructure Preview and Validation Enhancements

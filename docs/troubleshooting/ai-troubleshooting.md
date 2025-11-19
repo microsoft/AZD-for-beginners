@@ -4,10 +4,10 @@
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
-- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
-- **🤖 Related**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Related**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**Previous:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **Next:** [Getting Started with AZD](../getting-started/README.md)
+**Previous:** [Production AI Practices](../microsoft-foundry/production-ai-practices.md) | **Next:** [Getting Started with AZD](../getting-started/README.md)
 
 This comprehensive troubleshooting guide addresses common issues when deploying AI solutions with AZD, providing solutions and debugging techniques specific to Azure AI services.
 
@@ -845,7 +845,7 @@ def monitor_performance(func):
 
 1. **Review [AI Model Deployment Guide](ai-model-deployment.md)** for deployment best practices
 2. **Complete [Production AI Practices](production-ai-practices.md)** for enterprise-ready solutions
-3. **Join the [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** for community support
+3. **Join the [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** for community support
 4. **Submit issues** to the [AZD GitHub repository](https://github.com/Azure/azure-dev) for AZD-specific problems
 
 ## Resources
@@ -860,6 +860,6 @@ def monitor_performance(func):
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
-- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
-- **🤖 Related**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Related**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 - [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)

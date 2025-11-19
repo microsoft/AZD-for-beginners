@@ -5,7 +5,7 @@
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous Chapter**: [Chapter 6: Pre-flight Checks](../pre-deployment/preflight-checks.md)
 - **➡️ Next**: [Debugging Guide](debugging.md)
-- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduction
 

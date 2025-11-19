@@ -5,7 +5,7 @@
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [AZD Basics](azd-basics.md)
 - **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduction
 
@@ -414,6 +414,6 @@ If you encounter issues:
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [AZD Basics](azd-basics.md) 
 - **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
 **✅ Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.

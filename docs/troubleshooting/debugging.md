@@ -5,7 +5,7 @@
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Common Issues](common-issues.md)
 - **➡️ Next**: [AI-Specific Troubleshooting](ai-troubleshooting.md)
-- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduction
 

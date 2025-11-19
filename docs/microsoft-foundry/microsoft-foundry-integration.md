@@ -1,4 +1,4 @@
-# Azure AI Foundry Integration with AZD
+# Microsoft Foundry Integration with AZD
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
@@ -9,11 +9,11 @@
 
 ## Overview
 
-This guide demonstrates how to integrate Azure AI Foundry services with Azure Developer CLI (AZD) for streamlined AI application deployments. Azure AI Foundry provides a comprehensive platform for building, deploying, and managing AI applications, while AZD simplifies the infrastructure and deployment process.
+This guide demonstrates how to integrate Microsoft Foundry services with Azure Developer CLI (AZD) for streamlined AI application deployments. Microsoft Foundry provides a comprehensive platform for building, deploying, and managing AI applications, while AZD simplifies the infrastructure and deployment process.
 
-## What is Azure AI Foundry?
+## What is Microsoft Foundry?
 
-Azure AI Foundry is Microsoft's unified platform for AI development that includes:
+Microsoft Foundry is Microsoft's unified platform for AI development that includes:
 
 - **Model Catalog**: Access to state-of-the-art AI models
 - **Prompt Flow**: Visual designer for AI workflows
@@ -21,9 +21,9 @@ Azure AI Foundry is Microsoft's unified platform for AI development that include
 - **Deployment Options**: Multiple hosting and scaling options
 - **Safety and Security**: Built-in responsible AI features
 
-## AZD + Azure AI Foundry: Better Together
+## AZD + Microsoft Foundry: Better Together
 
-| Feature | Azure AI Foundry | AZD Integration Benefit |
+| Feature | Microsoft Foundry | AZD Integration Benefit |
 |---------|-----------------|------------------------|
 | **Model Deployment** | Manual portal deployment | Automated, repeatable deployments |
 | **Infrastructure** | Click-through provisioning | Infrastructure as Code (Bicep) |
@@ -36,7 +36,7 @@ Azure AI Foundry is Microsoft's unified platform for AI development that include
 - Azure subscription with appropriate permissions
 - Azure Developer CLI installed
 - Access to Azure OpenAI services
-- Basic familiarity with Azure AI Foundry
+- Basic familiarity with Microsoft Foundry
 
 ## Core Integration Patterns
 
@@ -774,7 +774,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## Community and Support
 
-- **Azure AI Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Official documentation](https://learn.microsoft.com/azure/ai-studio/)
 
