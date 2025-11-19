@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T12:37:19+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-19T13:30:11+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "zh"
 }
@@ -10,20 +10,20 @@ CO_OP_TRANSLATOR_METADATA:
 # 配置指南
 
 **章节导航：**
-- **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第三章 - 配置与认证
-- **⬅️ 上一章**: [你的第一个项目](first-project.md)
-- **➡️ 下一章**: [部署指南](../deployment/deployment-guide.md)
-- **🚀 下一章节**: [第四章：基础设施即代码](../deployment/deployment-guide.md)
+- **📚 课程主页**：[AZD 初学者指南](../../README.md)
+- **📖 当前章节**：第 3 章 - 配置与认证
+- **⬅️ 上一章**：[你的第一个项目](first-project.md)
+- **➡️ 下一章**：[部署指南](../deployment/deployment-guide.md)
+- **🚀 下一章节**：[第 4 章：基础设施即代码](../deployment/deployment-guide.md)
 
 ## 简介
 
-本指南全面介绍了如何配置 Azure Developer CLI，以优化开发和部署工作流程。你将学习配置层级、环境管理、认证方法以及高级配置模式，从而实现高效且安全的 Azure 部署。
+本指南全面介绍了如何配置 Azure Developer CLI，以实现最佳的开发和部署工作流。你将学习配置层级、环境管理、认证方法以及高级配置模式，从而实现高效且安全的 Azure 部署。
 
 ## 学习目标
 
-完成本课程后，你将能够：
-- 掌握 azd 的配置层级，理解设置的优先级
+通过本节学习，你将能够：
+- 掌握 azd 的配置层级并了解设置的优先级
 - 有效配置全局和项目特定的设置
 - 管理具有不同配置的多个环境
 - 实现安全的认证和授权模式
@@ -31,58 +31,58 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 学习成果
 
-完成本课程后，你将能够：
-- 配置 azd 以优化开发工作流程
+完成本节后，你将能够：
+- 配置 azd 以优化开发工作流
 - 设置和管理多个部署环境
 - 实现安全的配置管理实践
-- 解决与配置相关的问题
-- 根据组织需求定制 azd 的行为
+- 排查与配置相关的问题
+- 根据特定组织需求自定义 azd 行为
 
-本指南全面介绍了如何配置 Azure Developer CLI，以优化开发和部署工作流程。
+本指南全面介绍了如何配置 Azure Developer CLI，以实现最佳的开发和部署工作流。
 
 ## 配置层级
 
 azd 使用分层的配置系统：
 1. **命令行标志**（最高优先级）
 2. **环境变量**
-3. **本地项目配置** (`.azd/config.json`)
-4. **全局用户配置** (`~/.azd/config.json`)
+3. **本地项目配置**（`.azd/config.json`）
+4. **全局用户配置**（`~/.azd/config.json`）
 5. **默认值**（最低优先级）
 
 ## 全局配置
 
 ### 设置全局默认值
 ```bash
-# Set default subscription
+# 设置默认订阅
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# 设置默认位置
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# 设置默认资源组命名约定
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# 查看所有全局配置
 azd config list
 
-# Remove a configuration
+# 删除配置
 azd config unset defaults.location
 ```
 
 ### 常见的全局设置
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# 开发偏好
+azd config set alpha.enable true                    # 启用 alpha 功能
+azd config set telemetry.enabled false             # 禁用遥测
+azd config set output.format json                  # 设置输出格式
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# 安全设置
+azd config set auth.useAzureCliCredential true     # 使用 Azure CLI 进行认证
+azd config set tls.insecure false                  # 强制 TLS 验证
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# 性能调优
+azd config set provision.parallelism 5             # 并行资源创建
+azd config set deploy.timeout 30m                  # 部署超时
 ```
 
 ## 🏗️ 项目配置
@@ -213,13 +213,13 @@ services:
 
 ### 创建环境
 ```bash
-# Create a new environment
+# 创建一个新环境
 azd env new development
 
-# Create with specific location
+# 使用特定位置创建
 azd env new staging --location "westus2"
 
-# Create from template
+# 从模板创建
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 
 ### 环境变量
 ```bash
-# Set environment-specific variables
+# 设置特定环境的变量
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# 查看环境变量
 azd env get-values
 
-# Remove environment variable
+# 预期输出:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# 删除环境变量
 azd env unset DEBUG
+
+# 验证删除
+azd env get-values | grep DEBUG
+# （应该返回空）
 ```
 
 ### 环境模板
 创建 `.azure/env.template` 以实现一致的环境设置：
 ```bash
-# Required variables
+# 必需变量
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# 应用设置
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# 可选开发设置
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Azure CLI 集成
 ```bash
-# Use Azure CLI credentials (default)
+# 使用 Azure CLI 凭据（默认）
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# 使用特定租户登录
 az login --tenant <tenant-id>
 
-# Set default subscription
+# 设置默认订阅
 az account set --subscription <subscription-id>
 ```
 
 ### 服务主体认证
 适用于 CI/CD 流水线：
 ```bash
-# Set environment variables
+# 设置环境变量
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# 或直接配置
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### 托管身份
 适用于 Azure 托管环境：
 ```bash
-# Enable managed identity authentication
+# 启用托管身份认证
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -338,7 +347,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### Terraform 配置
-对于 Terraform 项目，在 `infra/terraform.tfvars` 中进行配置：
+对于 Terraform 项目，在 `infra/terraform.tfvars` 中配置：
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -385,13 +394,13 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-示例 `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+ 示例 `Dockerfile`：https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 高级配置
 
 ### 自定义资源命名
 ```bash
-# Set naming conventions
+# 设置命名约定
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -431,7 +440,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### 测试环境
+### 预生产环境
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### 验证配置
 ```bash
-# Check configuration syntax
+# 检查配置语法
 azd config validate
 
-# Test environment variables
+# 测试环境变量
 azd env get-values
 
-# Validate infrastructure
+# 验证基础设施
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# 检查所需的环境变量
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# 验证 azure.yaml 语法
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,9 +528,9 @@ database:
 ### 3. 版本控制注意事项
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # 环境配置（包含资源ID）
+.azure/*/.env               # 环境变量（可能包含秘密）
+.env                        # 本地环境文件
 ```
 
 ### 4. 配置文档
@@ -540,6 +549,68 @@ database:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 实践练习
+
+### 练习 1：多环境配置（15 分钟）
+
+**目标**：创建并配置三个具有不同设置的环境
+
+```bash
+# 创建开发环境
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# 创建暂存环境
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# 创建生产环境
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# 验证每个环境
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**成功标准：**
+- [ ] 成功创建三个环境
+- [ ] 每个环境具有独特的配置
+- [ ] 能够在环境之间无错误切换
+- [ ] `azd env list` 显示所有三个环境
+
+### 练习 2：密钥管理（10 分钟）
+
+**目标**：练习使用敏感数据进行安全配置
+
+```bash
+# 设置秘密（不会显示在输出中）
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# 设置非秘密配置
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# 查看环境（秘密应该被编辑）
+azd env get-values
+
+# 验证秘密已存储
+azd env get DB_PASSWORD  # 应显示实际值
+```
+
+**成功标准：**
+- [ ] 密钥存储时不在终端显示
+- [ ] `azd env get-values` 显示已隐藏的密钥
+- [ ] 单独的 `azd env get <SECRET_NAME>` 能检索实际值
+
 ## 下一步
 
 - [你的第一个项目](first-project.md) - 实践应用配置
@@ -555,13 +626,15 @@ database:
 ---
 
 **章节导航：**
-- **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第三章 - 配置与认证
-- **⬅️ 上一章**: [你的第一个项目](first-project.md)
-- **➡️ 下一章节**: [第四章：基础设施即代码](../deployment/deployment-guide.md)
-- **下一课**: [你的第一个项目](first-project.md)
+- **📚 课程主页**：[AZD 初学者指南](../../README.md)
+- **📖 当前章节**：第 3 章 - 配置与认证
+- **⬅️ 上一章**：[你的第一个项目](first-project.md)
+- **➡️ 下一章节**：[第 4 章：基础设施即代码](../deployment/deployment-guide.md)
+- **下一课**：[你的第一个项目](first-project.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
