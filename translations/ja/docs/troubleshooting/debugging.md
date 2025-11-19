@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T14:16:39+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-19T18:25:09+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ja"
 }
@@ -10,15 +10,15 @@ CO_OP_TRANSLATOR_METADATA:
 # AZDデプロイメントのデバッグガイド
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
-- **⬅️ 前の章**: [よくある問題](common-issues.md)
-- **➡️ 次の章**: [AI特有のトラブルシューティング](ai-troubleshooting.md)
-- **🚀 次の章**: [第8章: 本番環境とエンタープライズパターン](../ai-foundry/production-ai-practices.md)
+- **⬅️ 前へ**: [よくある問題](common-issues.md)
+- **➡️ 次へ**: [AI特有のトラブルシューティング](ai-troubleshooting.md)
+- **🚀 次の章**: [第8章: 本番環境とエンタープライズパターン](../microsoft-foundry/production-ai-practices.md)
 
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLIデプロイメントにおける複雑な問題を診断し解決するための高度なデバッグ戦略、ツール、および技術を提供します。体系的なトラブルシューティング手法、ログ分析技術、パフォーマンスプロファイリング、そして高度な診断ツールを学び、デプロイメントやランタイムの問題を効率的に解決する方法を習得しましょう。
+この包括的なガイドでは、Azure Developer CLIデプロイメントにおける複雑な問題を診断し解決するための高度なデバッグ戦略、ツール、技術を提供します。体系的なトラブルシューティング手法、ログ分析技術、パフォーマンスプロファイリング、そして高度な診断ツールを学び、デプロイメントや実行時の問題を効率的に解決する方法を習得してください。
 
 ## 学習目標
 
@@ -26,54 +26,54 @@ CO_OP_TRANSLATOR_METADATA:
 - Azure Developer CLIの問題に対する体系的なデバッグ手法を習得する
 - 高度なログ設定とログ分析技術を理解する
 - パフォーマンスプロファイリングとモニタリング戦略を実装する
-- Azureの診断ツールやサービスを使用して複雑な問題を解決する
+- 複雑な問題解決のためのAzure診断ツールとサービスを使用する
 - ネットワークデバッグやセキュリティトラブルシューティング技術を適用する
-- プロアクティブな問題検出のための包括的なモニタリングとアラートを設定する
+- プロアクティブな問題検出のための包括的なモニタリングとアラート設定を構成する
 
 ## 学習成果
 
-このガイドを完了すると、以下ができるようになります:
+完了後、以下ができるようになります:
 - TRIAGE手法を適用して複雑なデプロイメント問題を体系的にデバッグする
 - 包括的なログとトレース情報を設定し分析する
-- Azure Monitor、Application Insights、および診断ツールを効果的に使用する
-- ネットワーク接続、認証、権限の問題を独自にデバッグする
+- Azure Monitor、Application Insights、診断ツールを効果的に使用する
+- ネットワーク接続、認証、権限問題を独自にデバッグする
 - パフォーマンスモニタリングと最適化戦略を実装する
 - 再発する問題に対するカスタムデバッグスクリプトと自動化を作成する
 
 ## デバッグ手法
 
 ### TRIAGEアプローチ
-- **T**ime: 問題が発生したのはいつか？
-- **R**eproduce: 一貫して再現できるか？
-- **I**solate: どのコンポーネントが失敗しているのか？
-- **A**nalyze: ログは何を示しているか？
-- **G**ather: 関連するすべての情報を収集する
-- **E**scalate: 追加の支援を求めるタイミング
+- **T**ime: 問題が発生した時期は？
+- **R**eproduce: 一貫して再現できますか？
+- **I**solate: どのコンポーネントが失敗していますか？
+- **A**nalyze: ログは何を示していますか？
+- **G**ather: 関連情報をすべて収集する
+- **E**scalate: 追加の支援が必要な場合
 
 ## デバッグモードの有効化
 
 ### 環境変数
 ```bash
-# Enable comprehensive debugging
+# 包括的なデバッグを有効にする
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Azure CLIのデバッグ
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# 出力をクリーンにするためにテレメトリを無効化する
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### デバッグ設定
 ```bash
-# Set debug configuration globally
+# デバッグ構成をグローバルに設定する
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# トレースログを有効にする
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### 構造化ログ分析
 ```bash
-# Filter logs by level
+# レベルでログをフィルタリングする
 azd logs --level error --since 1h
 
-# Filter by service
+# サービスでフィルタリングする
 azd logs --service api --level debug
 
-# Export logs for analysis
+# 分析のためにログをエクスポートする
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# jqを使用してJSONログを解析する
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### ログの相関分析
+### ログの相関
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - サービス間のログを相関させる
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# すべてのサービスを検索
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Azureログを検索
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graphクエリ
 ```bash
-# Query resources by tags
+# タグでリソースを照会する
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# 失敗したデプロイを見つける
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# リソースの健全性を確認する
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### ネットワークデバッグ
 ```bash
-# Test connectivity between services
+# サービス間の接続性をテストする
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# 使用法
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### コンテナデバッグ
 ```bash
-# Debug container app issues
+# コンテナアプリの問題をデバッグする
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### データベース接続デバッグ
 ```bash
-# Debug database connectivity
+# データベース接続をデバッグする
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### アプリケーションパフォーマンスモニタリング
 ```bash
-# Enable Application Insights debugging
+# アプリケーションインサイトのデバッグを有効にする
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# カスタムパフォーマンスモニタリング
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -238,9 +238,9 @@ monitor_performance() {
 }
 ```
 
-### リソース利用状況の分析
+### リソース利用状況分析
 ```bash
-# Monitor resource usage
+# リソース使用状況を監視する
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# デバッグ環境を設定する
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# サービスエンドポイントを取得する
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# ヘルスエンドポイントをテストする
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# テストを実行する
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# カスタム統合テストを実行する
 npm run test:integration
 ```
 
 ### 負荷テストによるデバッグ
 ```bash
-# Simple load test to identify performance bottlenecks
+# パフォーマンスのボトルネックを特定するための簡単な負荷テスト
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,42 +323,42 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Apache Benchを使用 (インストール: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # 主要な指標を抽出
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # 失敗を確認
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 インフラデバッグ
+## 🔧 インフラストラクチャデバッグ
 
 ### Bicepテンプレートデバッグ
 ```bash
-# Validate Bicep templates with detailed output
+# 詳細な出力でBicepテンプレートを検証する
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # 構文の検証
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # リントの検証
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # What-ifデプロイメント
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# テンプレートデプロイメントのデバッグ
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,20 +377,20 @@ debug_deployment() {
 }
 ```
 
-### リソース状態の分析
+### リソース状態分析
 ```bash
-# Analyze resource states for inconsistencies
+# リソース状態の不整合を分析する
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # すべてのリソースとその状態を一覧表示する
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # 失敗したリソースを確認する
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### 認証フローデバッグ
 ```bash
-# Debug Azure authentication
+# Azure認証をデバッグする
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # JWTトークンをデコードする（jqとbase64が必要）
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Key Vaultアクセスをデバッグする
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### ネットワークセキュリティデバッグ
 ```bash
-# Debug network security groups
+# ネットワークセキュリティグループをデバッグする
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # セキュリティルールを確認する
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Node.jsアプリケーションデバッグ
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Expressデバッグミドルウェア
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // リクエストの詳細をログに記録
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // レスポンスをログに記録するためにres.jsonをオーバーライド
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### データベースクエリデバッグ
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - データベースデバッグユーティリティ
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -524,7 +524,7 @@ module.exports = DebuggingPool;
 ### 本番環境の問題対応
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - 緊急の本番デバッグ
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# 正しい環境に切り替える
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# 重要な情報を収集する
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### ロールバック手順
 ```bash
-# Quick rollback script
+# クイックロールバックスクリプト
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # 環境を切り替える
     azd env select "$environment"
     
-    # Rollback application
+    # アプリケーションをロールバックする
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # ロールバックを確認する
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # 重要なエンドポイントをテストする
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### カスタムモニタリングダッシュボード
 ```bash
-# Create Application Insights queries for debugging
+# デバッグ用のApplication Insightsクエリを作成する
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # エラーのクエリ
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # パフォーマンス問題のクエリ
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # 依存関係の失敗のクエリ
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### ログ集約
 ```bash
-# Aggregate logs from multiple sources
+# 複数のソースからログを集約する
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -663,7 +663,7 @@ aggregate_logs() {
 - `health-check.sh` - 包括的なヘルスチェック
 - `performance-test.sh` - 自動化されたパフォーマンステスト
 - `log-analyzer.py` - 高度なログ解析
-- `resource-validator.sh` - インフラ検証
+- `resource-validator.sh` - インフラストラクチャ検証
 
 ### モニタリング統合
 ```yaml
@@ -684,12 +684,12 @@ hooks:
 
 ## ベストプラクティス
 
-1. **デバッグログを常に有効化**（非本番環境で）
-2. **再現可能なテストケースを作成**する
-3. **デバッグ手順を文書化**してチームで共有する
-4. **ヘルスチェックとモニタリングを自動化**する
-5. **デバッグツールをアプリケーションの変更に合わせて更新**する
-6. **非インシデント時にデバッグ手順を練習**する
+1. **デバッグログを常に有効化** 非本番環境で
+2. **再現可能なテストケースを作成** 問題のために
+3. **デバッグ手順を文書化** チームのために
+4. **ヘルスチェックとモニタリングを自動化**
+5. **デバッグツールを更新** アプリケーションの変更に合わせて
+6. **非インシデント時にデバッグ手順を練習**
 
 ## 次のステップ
 
@@ -700,7 +700,7 @@ hooks:
 
 ---
 
-**覚えておいてください**: 良いデバッグとは、体系的で徹底的、そして忍耐強く行うことです。このツールと技術を活用して、問題をより迅速かつ効果的に診断しましょう。
+**覚えておいてください**: 良いデバッグは体系的で、徹底的で、忍耐強くあることが重要です。これらのツールと技術は、問題をより迅速かつ効果的に診断するのに役立ちます。
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は一切の責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

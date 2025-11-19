@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T14:12:32+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-19T18:29:06+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "ja"
 }
 -->
 # AZDを使った本番AIワークロードのベストプラクティス
 
-**章のナビゲーション:**
+**章ナビゲーション:**
 - **📚 コースホーム**: [AZD初心者向け](../../README.md)
 - **📖 現在の章**: 第8章 - 本番およびエンタープライズパターン
 - **⬅️ 前の章**: [第7章: トラブルシューティング](../troubleshooting/debugging.md)
@@ -18,17 +18,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 概要
 
-このガイドでは、Azure Developer CLI (AZD) を使用して本番対応のAIワークロードを展開するための包括的なベストプラクティスを提供します。Azure AI Foundry Discordコミュニティや実際の顧客展開からのフィードバックに基づき、これらのプラクティスは本番AIシステムで最も一般的な課題に対応しています。
+このガイドでは、Azure Developer CLI (AZD) を使用して本番対応のAIワークロードをデプロイするための包括的なベストプラクティスを提供します。Microsoft Foundry Discordコミュニティや実際の顧客導入からのフィードバックに基づき、本番AIシステムで最も一般的な課題に対応しています。
 
 ## 対応する主な課題
 
-コミュニティのアンケート結果に基づき、開発者が直面する主な課題は以下の通りです:
+コミュニティの投票結果に基づくと、開発者が直面する主な課題は以下の通りです：
 
-- **45%** 複数サービスのAI展開に苦労している
-- **38%** 資格情報や秘密管理に問題がある  
-- **35%** 本番対応やスケーリングが難しい
-- **32%** コスト最適化戦略が必要
-- **29%** 監視やトラブルシューティングの改善が必要
+- **45%** がマルチサービスAIデプロイメントに苦労
+- **38%** が認証情報とシークレット管理に問題
+- **35%** が本番対応とスケーリングを難しいと感じる
+- **32%** がコスト最適化戦略を必要としている
+- **29%** が監視とトラブルシューティングの改善を求めている
 
 ## 本番AIのアーキテクチャパターン
 
@@ -53,7 +53,7 @@ CO_OP_TRANSLATOR_METADATA:
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZDの実装**:
+**AZDでの実装**:
 
 ```yaml
 # azure.yaml
@@ -78,7 +78,7 @@ services:
 
 ### パターン2: イベント駆動型AI処理
 
-**使用するタイミング**: バッチ処理、文書分析、非同期ワークフロー
+**使用するタイミング**: バッチ処理、ドキュメント分析、非同期ワークフロー
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -130,10 +130,10 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 ### 1. ゼロトラストセキュリティモデル
 
 **実装戦略**:
-- 認証なしでのサービス間通信を禁止
-- すべてのAPI呼び出しに管理されたIDを使用
+- 認証なしのサービス間通信を禁止
+- すべてのAPI呼び出しにマネージドIDを使用
 - プライベートエンドポイントによるネットワーク分離
-- 最小権限アクセス制御
+- 最小特権アクセス制御
 
 ```bicep
 // Managed Identity for each service
@@ -154,7 +154,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. 安全な秘密管理
+### 2. シークレット管理のセキュリティ
 
 **Key Vault統合パターン**:
 
@@ -191,7 +191,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. ネットワークセキュリティ
 
-**プライベートエンドポイントの設定**:
+**プライベートエンドポイント構成**:
 
 ```bicep
 // Virtual Network for AI services
@@ -251,9 +251,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## パフォーマンスとスケーリング
 
-### 1. 自動スケーリング戦略
+### 1. オートスケーリング戦略
 
-**コンテナアプリの自動スケーリング**:
+**コンテナアプリのオートスケーリング**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -297,9 +297,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. キャッシュ戦略
+### 2. キャッシング戦略
 
-**AI応答のRedisキャッシュ**:
+**Redis Cacheを使用したAIレスポンスのキャッシュ**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -367,12 +367,12 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 コスト最適化
 
-### 1. リソースの適正化
+### 1. リソースの適正サイズ化
 
 **環境別の設定**:
 
 ```bash
-# Development environment
+# 開発環境
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# 本番環境
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -389,7 +389,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. コスト監視と予算管理
+### 2. コスト監視と予算設定
 
 ```bicep
 // Cost management and budgets
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAIコスト管理**:
 
 ```typescript
-// Application-level token optimization
+// アプリケーションレベルのトークン最適化
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // ユーザー入力ではなくコンテキストを切り詰める
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // 大まかな推定: 1トークン ≈ 4文字
     return Math.ceil(text.length / 4);
   }
 }
@@ -461,7 +461,7 @@ class TokenOptimizer {
 
 ## 監視と可観測性
 
-### 1. 包括的なアプリケーションインサイト
+### 1. 包括的なApplication Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -508,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI特有の監視
 
-**AIメトリクス用のカスタムダッシュボード**:
+**AIメトリクス用カスタムダッシュボード**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. ヘルスチェックと稼働監視
+### 3. ヘルスチェックと稼働時間の監視
 
 ```bicep
 // Application Insights availability tests
@@ -608,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## 災害復旧と高可用性
 
-### 1. マルチリージョン展開
+### 1. マルチリージョンデプロイメント
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -670,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. データのバックアップと復旧
+### 2. データバックアップと復旧
 
 ```bicep
 // Backup configuration for critical data
@@ -721,7 +721,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOpsとCI/CD統合
+## DevOpsとCI/CDの統合
 
 ### 1. GitHub Actionsワークフロー
 
@@ -804,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. インフラの検証
+### 2. インフラストラクチャの検証
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# 必要なすべてのサービスが稼働しているか確認する
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# OpenAIモデルのデプロイを検証する
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# AIサービスの接続性をテストする
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -840,61 +840,61 @@ echo "Infrastructure validation completed successfully!"
 ## 本番対応チェックリスト
 
 ### セキュリティ ✅
-- [ ] すべてのサービスが管理されたIDを使用
-- [ ] 秘密はKey Vaultに保存
-- [ ] プライベートエンドポイントが設定済み
-- [ ] ネットワークセキュリティグループが実装済み
-- [ ] 最小権限のRBAC
-- [ ] 公開エンドポイントにWAFを有効化
+- [ ] すべてのサービスがマネージドIDを使用
+- [ ] シークレットがKey Vaultに保存されている
+- [ ] プライベートエンドポイントが構成されている
+- [ ] ネットワークセキュリティグループが実装されている
+- [ ] 最小特権のRBACが設定されている
+- [ ] 公開エンドポイントにWAFが有効化されている
 
 ### パフォーマンス ✅
-- [ ] 自動スケーリングが設定済み
-- [ ] キャッシュが実装済み
-- [ ] 負荷分散が設定済み
-- [ ] 静的コンテンツ用CDN
-- [ ] データベース接続プール
-- [ ] トークン使用の最適化
+- [ ] オートスケーリングが設定されている
+- [ ] キャッシングが実装されている
+- [ ] 負荷分散が設定されている
+- [ ] 静的コンテンツ用のCDNが設定されている
+- [ ] データベース接続プーリングが設定されている
+- [ ] トークン使用の最適化が行われている
 
 ### 監視 ✅
-- [ ] アプリケーションインサイトが設定済み
-- [ ] カスタムメトリクスが定義済み
-- [ ] アラートルールが設定済み
-- [ ] ダッシュボードが作成済み
-- [ ] ヘルスチェックが実装済み
-- [ ] ログ保持ポリシー
+- [ ] Application Insightsが設定されている
+- [ ] カスタムメトリクスが定義されている
+- [ ] アラートルールが設定されている
+- [ ] ダッシュボードが作成されている
+- [ ] ヘルスチェックが実装されている
+- [ ] ログ保持ポリシーが設定されている
 
 ### 信頼性 ✅
-- [ ] マルチリージョン展開
-- [ ] バックアップと復旧計画
-- [ ] サーキットブレーカーが実装済み
-- [ ] リトライポリシーが設定済み
-- [ ] 優雅な劣化
-- [ ] ヘルスチェックエンドポイント
+- [ ] マルチリージョンデプロイメントが行われている
+- [ ] バックアップと復旧計画がある
+- [ ] サーキットブレーカーが実装されている
+- [ ] リトライポリシーが設定されている
+- [ ] 優雅な劣化が実装されている
+- [ ] ヘルスチェックエンドポイントがある
 
 ### コスト管理 ✅
-- [ ] 予算アラートが設定済み
-- [ ] リソースの適正化
-- [ ] 開発/テスト割引が適用済み
-- [ ] 予約インスタンスを購入済み
-- [ ] コスト監視ダッシュボード
-- [ ] 定期的なコストレビュー
+- [ ] 予算アラートが設定されている
+- [ ] リソースの適正サイズ化が行われている
+- [ ] 開発/テスト割引が適用されている
+- [ ] 予約インスタンスが購入されている
+- [ ] コスト監視ダッシュボードがある
+- [ ] 定期的なコストレビューが行われている
 
 ### コンプライアンス ✅
-- [ ] データ居住要件を満たす
-- [ ] 監査ログが有効化
-- [ ] コンプライアンスポリシーが適用済み
-- [ ] セキュリティベースラインが実装済み
-- [ ] 定期的なセキュリティ評価
-- [ ] インシデント対応計画
+- [ ] データ居住要件が満たされている
+- [ ] 監査ログが有効化されている
+- [ ] コンプライアンスポリシーが適用されている
+- [ ] セキュリティベースラインが実装されている
+- [ ] 定期的なセキュリティ評価が行われている
+- [ ] インシデント対応計画がある
 
 ## パフォーマンスベンチマーク
 
-### 典型的な本番メトリクス
+### 一般的な本番メトリクス
 
-| メトリクス | 目標 | 監視 |
-|--------|--------|------------|
-| **応答時間** | < 2秒 | アプリケーションインサイト |
-| **可用性** | 99.9% | 稼働監視 |
+| メトリック | 目標 | 監視 |
+|------------|------|------|
+| **応答時間** | < 2秒 | Application Insights |
+| **可用性** | 99.9% | 稼働時間監視 |
 | **エラー率** | < 0.1% | アプリケーションログ |
 | **トークン使用量** | < $500/月 | コスト管理 |
 | **同時ユーザー数** | 1000+ | 負荷テスト |
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### 負荷テスト
 
 ```bash
-# Load testing script for AI applications
+# AIアプリケーションの負荷テストスクリプト
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,43 +913,45 @@ python scripts/load_test.py \
 
 ## 🤝 コミュニティのベストプラクティス
 
-Azure AI Foundry Discordコミュニティのフィードバックに基づく:
+Microsoft Foundry Discordコミュニティのフィードバックに基づく：
 
 ### コミュニティからの主な推奨事項:
 
-1. **小規模から始めて徐々に拡大**: 基本的なSKUから始め、実際の使用状況に基づいてスケールアップ
+1. **小規模から始めて徐々にスケール**: 基本的なSKUから始め、実際の使用状況に基づいてスケールアップ
 2. **すべてを監視**: 初日から包括的な監視を設定
-3. **セキュリティを自動化**: 一貫したセキュリティのためにコードとしてのインフラを使用
+3. **セキュリティを自動化**: 一貫したセキュリティのためにインフラストラクチャをコード化
 4. **徹底的にテスト**: パイプラインにAI特有のテストを含める
 5. **コストを計画**: トークン使用量を監視し、早期に予算アラートを設定
 
 ### 避けるべき一般的な落とし穴:
 
-- ❌ APIキーをコードにハードコーディング
+- ❌ コード内にAPIキーをハードコーディング
 - ❌ 適切な監視を設定しない
 - ❌ コスト最適化を無視
 - ❌ 障害シナリオをテストしない
-- ❌ ヘルスチェックなしで展開
+- ❌ ヘルスチェックなしでデプロイ
 
 ## 追加リソース
 
 - **Azure Well-Architected Framework**: [AIワークロードガイダンス](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundryドキュメント**: [公式ドキュメント](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Foundryドキュメント**: [公式ドキュメント](https://learn.microsoft.com/azure/ai-studio/)
 - **コミュニティテンプレート**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discordコミュニティ**: [#Azureチャンネル](https://discord.gg/microsoft-azure)
 
 ---
 
-**章のナビゲーション:**
+**章ナビゲーション:**
 - **📚 コースホーム**: [AZD初心者向け](../../README.md)
 - **📖 現在の章**: 第8章 - 本番およびエンタープライズパターン
 - **⬅️ 前の章**: [第7章: トラブルシューティング](../troubleshooting/debugging.md)
 - **⬅️ 関連項目**: [AIワークショップラボ](ai-workshop-lab.md)
 - **🎆 コース完了**: [AZD初心者向け](../../README.md)
 
-**覚えておいてください**: 本番AIワークロードには慎重な計画、監視、継続的な最適化が必要です。これらのパターンを出発点として、特定の要件に合わせて調整してください。
+**覚えておいてください**: 本番AIワークロードには、慎重な計画、監視、継続的な最適化が必要です。これらのパターンを出発点として、特定の要件に合わせて調整してください。
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文（元の言語で記載された文書）が信頼できる情報源とみなされるべきです。重要な情報については、専門の人間による翻訳をお勧めします。この翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いません。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

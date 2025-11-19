@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-17T14:16:59+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-19T18:27:19+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "ja"
 }
@@ -10,30 +10,30 @@ CO_OP_TRANSLATOR_METADATA:
 # AI特化型トラブルシューティングガイド
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
 - **⬅️ 前章**: [デバッグガイド](debugging.md)
-- **➡️ 次章**: [第8章: 本番環境とエンタープライズパターン](../ai-foundry/production-ai-practices.md)
-- **🤖 関連**: [第2章: AIファースト開発](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ 次章**: [第8章: 本番環境とエンタープライズパターン](../microsoft-foundry/production-ai-practices.md)
+- **🤖 関連**: [第2章: AIファースト開発](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**前章:** [本番AIの実践](../ai-foundry/production-ai-practices.md) | **次章:** [AZDの始め方](../getting-started/README.md)
+**前章:** [本番AIの実践](../microsoft-foundry/production-ai-practices.md) | **次章:** [AZDの始め方](../getting-started/README.md)
 
-この包括的なトラブルシューティングガイドでは、AZDを使用してAIソリューションをデプロイする際に発生する一般的な問題に対処し、Azure AIサービスに特化した解決策とデバッグ手法を提供します。
+この包括的なトラブルシューティングガイドは、AZDを使用してAIソリューションを展開する際に発生する一般的な問題に対処し、Azure AIサービスに特化した解決策とデバッグ技術を提供します。
 
 ## 目次
 
-- [Azure OpenAI サービスの問題](../../../../docs/troubleshooting)
-- [Azure AI 検索の問題](../../../../docs/troubleshooting)
-- [コンテナアプリのデプロイ問題](../../../../docs/troubleshooting)
+- [Azure OpenAIサービスの問題](../../../../docs/troubleshooting)
+- [Azure AI検索の問題](../../../../docs/troubleshooting)
+- [コンテナアプリの展開問題](../../../../docs/troubleshooting)
 - [認証と権限エラー](../../../../docs/troubleshooting)
-- [モデルデプロイの失敗](../../../../docs/troubleshooting)
+- [モデル展開の失敗](../../../../docs/troubleshooting)
 - [パフォーマンスとスケーリングの問題](../../../../docs/troubleshooting)
 - [コストとクォータ管理](../../../../docs/troubleshooting)
-- [デバッグツールと手法](../../../../docs/troubleshooting)
+- [デバッグツールと技術](../../../../docs/troubleshooting)
 
-## Azure OpenAI サービスの問題
+## Azure OpenAIサービスの問題
 
-### 問題: OpenAI サービスがリージョンで利用不可
+### 問題: OpenAIサービスが地域で利用不可
 
 **症状:**
 ```
@@ -41,15 +41,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **原因:**
-- 選択したリージョンでAzure OpenAIが利用不可
-- 優先リージョンでクォータが枯渇
-- リージョンの容量制約
+- 選択した地域でAzure OpenAIが利用不可
+- 優先地域でクォータが枯渇
+- 地域の容量制約
 
 **解決策:**
 
-1. **リージョンの利用可能性を確認:**
+1. **地域の利用可能性を確認:**
 ```bash
-# List available regions for OpenAI
+# OpenAIの利用可能なリージョンを一覧表示
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -67,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **代替リージョンを使用:**
+3. **代替地域を使用:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -79,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### 問題: モデルデプロイクォータの超過
+### 問題: モデル展開クォータ超過
 
 **症状:**
 ```
@@ -90,7 +90,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **現在のクォータを確認:**
 ```bash
-# Check quota usage
+# クォータ使用量を確認
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -98,7 +98,7 @@ az cognitiveservices usage list \
 
 2. **クォータ増加をリクエスト:**
 ```bash
-# Submit quota increase request
+# クォータ増加リクエストを提出する
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -135,21 +135,21 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **サポートされているAPIバージョンを使用:**
 ```python
-# Use latest supported version
+# 最新のサポートされているバージョンを使用してください
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **APIバージョンの互換性を確認:**
 ```bash
-# List supported API versions
+# サポートされているAPIバージョンを一覧表示
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI 検索の問題
+## Azure AI検索の問題
 
-### 問題: 検索サービスの料金プランが不十分
+### 問題: 検索サービスの価格帯が不十分
 
 **症状:**
 ```
@@ -158,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **解決策:**
 
-1. **料金プランをアップグレード:**
+1. **価格帯をアップグレード:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -201,7 +201,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **検索サービスキーを確認:**
 ```bash
-# Get search service admin key
+# 検索サービスの管理キーを取得する
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -209,7 +209,7 @@ az search admin-key show \
 
 2. **インデックススキーマを確認:**
 ```python
-# Validate index schema
+# インデックススキーマを検証する
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -237,7 +237,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## コンテナアプリのデプロイ問題
+## コンテナアプリの展開問題
 
 ### 問題: コンテナビルドの失敗
 
@@ -284,7 +284,7 @@ azure-cosmos==4.5.1
 
 3. **ヘルスチェックを追加:**
 ```python
-# main.py - Add health check endpoint
+# main.py - ヘルスチェックエンドポイントを追加
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **モデルの読み込みを最適化:**
 ```python
-# Lazy load models to reduce startup time
+# モデルを遅延ロードして起動時間を短縮する
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,15 +352,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # ここでAIクライアントを初期化する
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # 起動
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # シャットダウン
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -379,7 +379,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 1. **ロール割り当てを確認:**
 ```bash
-# Check current role assignments
+# 現在の役割の割り当てを確認する
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -404,7 +404,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **認証をテスト:**
 ```python
-# Test managed identity authentication
+# 管理対象ID認証をテストする
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -445,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **RBACを使用してアクセスポリシーを置き換え:**
+2. **アクセスポリシーではなくRBACを使用:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -458,7 +458,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## モデルデプロイの失敗
+## モデル展開の失敗
 
 ### 問題: モデルバージョンが利用不可
 
@@ -471,7 +471,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **利用可能なモデルを確認:**
 ```bash
-# List available models
+# 利用可能なモデルを一覧表示
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -479,7 +479,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **モデルフォールバックを使用:**
+2. **モデルのフォールバックを使用:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -508,9 +508,9 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **デプロイ前にモデルを検証:**
+3. **展開前にモデルを検証:**
 ```python
-# Pre-deployment model validation
+# 展開前のモデル検証
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -532,10 +532,10 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ## パフォーマンスとスケーリングの問題
 
-### 問題: 応答遅延が高い
+### 問題: 高い応答遅延
 
 **症状:**
-- 応答時間が30秒を超える
+- 応答時間 > 30秒
 - タイムアウトエラー
 - ユーザー体験の低下
 
@@ -543,7 +543,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 1. **リクエストタイムアウトを実装:**
 ```python
-# Configure proper timeouts
+# 適切なタイムアウトを設定する
 import httpx
 
 client = httpx.AsyncClient(
@@ -558,7 +558,7 @@ client = httpx.AsyncClient(
 
 2. **応答キャッシュを追加:**
 ```python
-# Redis cache for responses
+# レスポンス用のRedisキャッシュ
 import redis.asyncio as redis
 import json
 
@@ -640,7 +640,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **メモリ使用を最適化:**
 ```python
-# Memory-efficient model handling
+# メモリ効率の良いモデル処理
 import gc
 import psutil
 
@@ -650,32 +650,32 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # 処理前にメモリ使用量を確認
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # ガベージコレクションを強制実行
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # 処理後のクリーンアップ
         gc.collect()
         return result
 ```
 
 ## コストとクォータ管理
 
-### 問題: 想定外の高コスト
+### 問題: 予期しない高コスト
 
 **症状:**
-- Azure請求額が予想以上
+- Azure請求が予想以上に高額
 - トークン使用量が推定を超過
-- 予算アラートが発生
+- 予算アラートが発動
 
 **解決策:**
 
 1. **コスト管理を実装:**
 ```python
-# Token usage tracking
+# トークン使用状況の追跡
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -719,11 +719,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **モデル選択を最適化:**
 ```python
-# Cost-aware model selection
+# コストを意識したモデル選択
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # 1Kトークンごと
+    'gpt-4': 0.03,          # 1Kトークンごと
+    'gpt-35-turbo': 0.0015  # 1Kトークンごと
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -736,21 +736,21 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## デバッグツールと手法
+## デバッグツールと技術
 
 ### AZDデバッグコマンド
 
 ```bash
-# Enable verbose logging
+# 詳細なログを有効にする
 azd up --debug
 
-# Check deployment status
+# デプロイメントのステータスを確認する
 azd show
 
-# View deployment logs
+# デプロイメントログを表示する
 azd logs --follow
 
-# Check environment variables
+# 環境変数を確認する
 azd env get-values
 ```
 
@@ -761,7 +761,7 @@ azd env get-values
 import logging
 import json
 
-# Configure structured logging for AI applications
+# AIアプリケーションのための構造化ログを設定する
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -787,7 +787,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # OpenAIの接続を確認する
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -795,7 +795,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Check Search service
+    # 検索サービスを確認する
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -845,34 +845,37 @@ def monitor_performance(func):
 | エラーコード | 説明 | 解決策 |
 |--------------|------|--------|
 | 401 | 認証失敗 | APIキーとマネージドID設定を確認 |
-| 403 | アクセス拒否 | RBACロール割り当てを確認 |
-| 429 | レート制限 | 指数バックオフを使用したリトライロジックを実装 |
-| 500 | 内部サーバーエラー | モデルデプロイの状態とログを確認 |
-| 503 | サービス利用不可 | サービスの正常性とリージョンの利用可能性を確認 |
+| 403 | 禁止 | RBACロール割り当てを確認 |
+| 429 | レート制限 | 指数バックオフ付きのリトライロジックを実装 |
+| 500 | 内部サーバーエラー | モデル展開状況とログを確認 |
+| 503 | サービス利用不可 | サービスの正常性と地域の利用可能性を確認 |
 
 ## 次のステップ
 
-1. **[AIモデルデプロイガイド](ai-model-deployment.md)** を確認してデプロイのベストプラクティスを学ぶ
+1. **[AIモデル展開ガイド](ai-model-deployment.md)** を確認して展開のベストプラクティスを学ぶ
 2. **[本番AIの実践](production-ai-practices.md)** を完了してエンタープライズ対応ソリューションを構築
-3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)** に参加してコミュニティサポートを受ける
-4. **問題を報告**: [AZD GitHubリポジトリ](https://github.com/Azure/azure-dev) でAZD特有の問題を報告
+3. **[Microsoft Foundry Discord](https://aka.ms/foundry/discord)** に参加してコミュニティサポートを受ける
+4. **問題を報告** [AZD GitHubリポジトリ](https://github.com/Azure/azure-dev) にAZD特有の問題を提出
 
 ## リソース
 
-- [Azure OpenAI サービスのトラブルシューティング](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Azure OpenAIサービスのトラブルシューティング](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [コンテナアプリのトラブルシューティング](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI 検索のトラブルシューティング](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure AI検索のトラブルシューティング](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
 - **⬅️ 前章**: [デバッグガイド](debugging.md)
-- **➡️ 次章**: [第8章: 本番環境とエンタープライズパターン](../ai-foundry/production-ai-practices.md)
-- [Azure Developer CLI トラブルシューティング](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **➡️ 次章**: [第8章: 本番環境とエンタープライズパターン](../microsoft-foundry/production-ai-practices.md)
+- **🤖 関連**: [第2章: AIファースト開発](../microsoft-foundry/microsoft-foundry-integration.md)
+- [Azure Developer CLIのトラブルシューティング](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確さが含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

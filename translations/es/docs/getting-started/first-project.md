@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-17T15:03:18+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-19T20:43:26+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "es"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Navegación del Capítulo:**
 - **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Comienzo Rápido
 - **⬅️ Anterior**: [Instalación y Configuración](installation.md)
 - **➡️ Siguiente**: [Configuración](configuration.md)
-- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con Enfoque en IA](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introducción
 
-¡Bienvenido a tu primer proyecto con Azure Developer CLI! Este tutorial práctico te guiará paso a paso en la creación, implementación y gestión de una aplicación full-stack en Azure utilizando azd. Trabajarás con una aplicación real de tareas que incluye un frontend en React, un backend API en Node.js y una base de datos MongoDB.
+¡Bienvenido a tu primer proyecto con Azure Developer CLI! Este tutorial práctico y completo te guiará paso a paso en la creación, implementación y gestión de una aplicación full-stack en Azure utilizando azd. Trabajarás con una aplicación real de tareas pendientes que incluye un frontend en React, un backend API en Node.js y una base de datos MongoDB.
 
 ## Objetivos de Aprendizaje
 
@@ -26,9 +26,9 @@ Al completar este tutorial, podrás:
 - Dominar el flujo de inicialización de proyectos azd utilizando plantillas
 - Comprender la estructura de proyectos y archivos de configuración de Azure Developer CLI
 - Ejecutar la implementación completa de aplicaciones en Azure con aprovisionamiento de infraestructura
-- Aplicar estrategias de actualización y reimplementación de aplicaciones
+- Implementar actualizaciones de aplicaciones y estrategias de reimplementación
 - Gestionar múltiples entornos para desarrollo y pruebas
-- Implementar prácticas de limpieza de recursos y gestión de costos
+- Aplicar prácticas de limpieza de recursos y gestión de costos
 
 ## Resultados de Aprendizaje
 
@@ -38,7 +38,7 @@ Al finalizar, serás capaz de:
 - Implementar aplicaciones full-stack en Azure con comandos simples
 - Solucionar problemas comunes de implementación y autenticación
 - Gestionar múltiples entornos de Azure para diferentes etapas de implementación
-- Implementar flujos de despliegue continuo para actualizaciones de aplicaciones
+- Implementar flujos de trabajo de implementación continua para actualizaciones de aplicaciones
 
 ## Comenzando
 
@@ -51,40 +51,40 @@ Al finalizar, serás capaz de:
 
 ### Verifica tu Configuración
 ```bash
-# Check azd installation
+# Verificar la instalación de azd
 azd version
 ```
-### Verifica la autenticación de Azure
+### Verificar autenticación en Azure
 
 ```bash
 az account show
 ```
 
-### Verifica la versión de Node.js
+### Verificar versión de Node.js
 ```bash
 node --version
 ```
 
 ## Paso 1: Elegir e Inicializar una Plantilla
 
-Comencemos con una plantilla popular de aplicación de tareas que incluye un frontend en React y un backend API en Node.js.
+Comencemos con una plantilla popular de aplicación de tareas pendientes que incluye un frontend en React y un backend API en Node.js.
 
 ```bash
-# Browse available templates
+# Explorar las plantillas disponibles
 azd template list
 
-# Initialize the todo app template
+# Inicializar la plantilla de la aplicación de tareas
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Follow the prompts:
-# - Enter an environment name: "dev"
-# - Choose a subscription (if you have multiple)
-# - Choose a region: "East US 2" (or your preferred region)
+# Siga las indicaciones:
+# - Ingrese un nombre de entorno: "dev"
+# - Elija una suscripción (si tiene varias)
+# - Elija una región: "Este de EE. UU. 2" (o su región preferida)
 ```
 
-### ¿Qué acaba de suceder?
+### ¿Qué Acaba de Suceder?
 - Se descargó el código de la plantilla en tu directorio local
 - Se creó un archivo `azure.yaml` con definiciones de servicios
 - Se configuró el código de infraestructura en el directorio `infra/`
@@ -95,9 +95,9 @@ azd init --template todo-nodejs-mongo
 Examinemos lo que azd creó para nosotros:
 
 ```bash
-# View the project structure
+# Ver la estructura del proyecto
 tree /f   # Windows
-# or
+# o
 find . -type f | head -20   # macOS/Linux
 ```
 
@@ -132,13 +132,13 @@ my-first-azd-app/
 
 **azure.yaml** - El núcleo de tu proyecto azd:
 ```bash
-# View the project configuration
+# Ver la configuración del proyecto
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Definición de infraestructura:
 ```bash
-# View the infrastructure code
+# Ver el código de infraestructura
 head -30 infra/main.bicep
 ```
 
@@ -148,22 +148,22 @@ Antes de implementar, puedes personalizar la aplicación:
 
 ### Modificar el Frontend
 ```bash
-# Open the React app component
+# Abre el componente de la aplicación React
 code src/web/src/App.tsx
 ```
 
 Haz un cambio simple:
 ```typescript
-// Find the title and change it
+// Encuentra el título y cámbialo
 <h1>My Awesome Todo App</h1>
 ```
 
 ### Configurar Variables de Entorno
 ```bash
-# Set custom environment variables
+# Establecer variables de entorno personalizadas
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# View all environment variables
+# Ver todas las variables de entorno
 azd env get-values
 ```
 
@@ -172,17 +172,17 @@ azd env get-values
 ¡Ahora viene la parte emocionante: implementar todo en Azure!
 
 ```bash
-# Deploy infrastructure and application
+# Implementar infraestructura y aplicación
 azd up
 
-# This command will:
-# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
-# 2. Build your application
-# 3. Deploy to the provisioned resources
-# 4. Display the application URL
+# Este comando hará:
+# 1. Proveer recursos de Azure (App Service, Cosmos DB, etc.)
+# 2. Construir tu aplicación
+# 3. Implementar en los recursos provisionados
+# 4. Mostrar la URL de la aplicación
 ```
 
-### ¿Qué está sucediendo durante la implementación?
+### ¿Qué Sucede Durante la Implementación?
 
 El comando `azd up` realiza estos pasos:
 1. **Aprovisionar** (`azd provision`) - Crea recursos de Azure
@@ -204,52 +204,52 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Paso 5: Probar tu Aplicación
 
-### Accede a tu Aplicación
+### Acceder a tu Aplicación
 Haz clic en la URL proporcionada en la salida de la implementación, o consíguela en cualquier momento:
 ```bash
-# Get application endpoints
+# Obtener los puntos finales de la aplicación
 azd show
 
-# Open the application in your browser
+# Abrir la aplicación en tu navegador
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Prueba la Aplicación de Tareas
-1. **Agregar un elemento de tarea** - Haz clic en "Add Todo" e ingresa una tarea
-2. **Marcar como completado** - Marca los elementos completados
-3. **Eliminar elementos** - Elimina las tareas que ya no necesites
+### Probar la Aplicación de Tareas
+1. **Agregar una tarea** - Haz clic en "Add Todo" e ingresa una tarea
+2. **Marcar como completada** - Marca las tareas completadas
+3. **Eliminar tareas** - Borra las tareas que ya no necesites
 
-### Monitorea tu Aplicación
+### Monitorear tu Aplicación
 ```bash
-# Open Azure portal for your resources
+# Abrir el portal de Azure para tus recursos
 azd monitor
 
-# View application logs
+# Ver registros de la aplicación
 azd logs
 ```
 
 ## Paso 6: Realizar Cambios y Reimplementar
 
-Hagamos un cambio y veamos lo fácil que es actualizar:
+Hagamos un cambio y veamos qué tan fácil es actualizar:
 
 ### Modificar la API
 ```bash
-# Edit the API code
+# Editar el código de la API
 code src/api/src/routes/lists.js
 ```
 
 Agrega un encabezado de respuesta personalizado:
 ```javascript
-// Find a route handler and add:
+// Encuentra un manejador de rutas y añade:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### Implementar Solo los Cambios de Código
 ```bash
-# Deploy only the application code (skip infrastructure)
+# Implementar solo el código de la aplicación (omitir infraestructura)
 azd deploy
 
-# This is much faster than 'azd up' since infrastructure already exists
+# Esto es mucho más rápido que 'azd up' ya que la infraestructura ya existe
 ```
 
 ## Paso 7: Gestionar Múltiples Entornos
@@ -257,42 +257,42 @@ azd deploy
 Crea un entorno de pruebas para verificar cambios antes de producción:
 
 ```bash
-# Create a new staging environment
+# Crear un nuevo entorno de preparación
 azd env new staging
 
-# Deploy to staging
+# Implementar en preparación
 azd up
 
-# Switch back to dev environment
+# Cambiar de nuevo al entorno de desarrollo
 azd env select dev
 
-# List all environments
+# Listar todos los entornos
 azd env list
 ```
 
 ### Comparación de Entornos
 ```bash
-# View dev environment
+# Ver entorno de desarrollo
 azd env select dev
 azd show
 
-# View staging environment  
+# Ver entorno de pruebas
 azd env select staging
 azd show
 ```
 
 ## Paso 8: Limpiar Recursos
 
-Cuando termines de experimentar, limpia los recursos para evitar cargos continuos:
+Cuando termines de experimentar, limpia para evitar cargos continuos:
 
 ```bash
-# Delete all Azure resources for current environment
+# Eliminar todos los recursos de Azure para el entorno actual
 azd down
 
-# Force delete without confirmation and purge soft-deleted resources
+# Forzar la eliminación sin confirmación y purgar los recursos eliminados suavemente
 azd down --force --purge
 
-# Delete specific environment
+# Eliminar un entorno específico
 azd env select staging
 azd down --force --purge
 ```
@@ -300,44 +300,152 @@ azd down --force --purge
 ## Lo que Has Aprendido
 
 ¡Felicidades! Has logrado:
-- Inicializar un proyecto azd desde una plantilla
-- Explorar la estructura del proyecto y los archivos clave
-- Implementar una aplicación full-stack en Azure
-- Realizar cambios en el código y reimplementar
-- Gestionar múltiples entornos
-- Limpiar recursos
+- ✅ Inicializar un proyecto azd desde una plantilla
+- ✅ Explorar la estructura del proyecto y los archivos clave
+- ✅ Implementar una aplicación full-stack en Azure
+- ✅ Realizar cambios en el código y reimplementar
+- ✅ Gestionar múltiples entornos
+- ✅ Limpiar recursos
+
+## 🎯 Ejercicios de Validación de Habilidades
+
+### Ejercicio 1: Implementar una Plantilla Diferente (15 minutos)
+**Objetivo**: Demostrar dominio del flujo de trabajo de azd init e implementación
+
+```bash
+# Prueba la pila Python + MongoDB
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Verifica el despliegue
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Limpia
+azd down --force --purge
+```
+
+**Criterios de Éxito:**
+- [ ] La aplicación se implementa sin errores
+- [ ] Se puede acceder a la URL de la aplicación en el navegador
+- [ ] La aplicación funciona correctamente (agregar/eliminar tareas)
+- [ ] Todos los recursos se limpiaron exitosamente
+
+### Ejercicio 2: Personalizar Configuración (20 minutos)
+**Objetivo**: Practicar la configuración de variables de entorno
+
+```bash
+cd my-first-azd-app
+
+# Crear entorno personalizado
+azd env new custom-config
+
+# Establecer variables personalizadas
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Verificar variables
+azd env get-values | grep APP_TITLE
+
+# Implementar con configuración personalizada
+azd up
+```
+
+**Criterios de Éxito:**
+- [ ] Se creó un entorno personalizado con éxito
+- [ ] Las variables de entorno se configuraron y son recuperables
+- [ ] La aplicación se implementa con la configuración personalizada
+- [ ] Se pueden verificar los ajustes personalizados en la aplicación implementada
+
+### Ejercicio 3: Flujo de Trabajo Multi-Entorno (25 minutos)
+**Objetivo**: Dominar la gestión de entornos y estrategias de implementación
+
+```bash
+# Crear entorno de desarrollo
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Anotar URL de desarrollo
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Crear entorno de pruebas
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Anotar URL de pruebas
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# Comparar entornos
+azd env list
+
+# Probar ambos entornos
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Limpiar ambos
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**Criterios de Éxito:**
+- [ ] Se crearon dos entornos con configuraciones diferentes
+- [ ] Ambos entornos se implementaron con éxito
+- [ ] Se puede cambiar entre entornos usando `azd env select`
+- [ ] Las variables de entorno difieren entre los entornos
+- [ ] Ambos entornos se limpiaron exitosamente
+
+## 📊 Tu Progreso
+
+**Tiempo Invertido**: ~60-90 minutos  
+**Habilidades Adquiridas**:
+- ✅ Inicialización de proyectos basada en plantillas
+- ✅ Aprovisionamiento de recursos de Azure
+- ✅ Flujos de trabajo de implementación de aplicaciones
+- ✅ Gestión de entornos
+- ✅ Gestión de configuración
+- ✅ Limpieza de recursos y gestión de costos
+
+**Próximo Nivel**: Estás listo para la [Guía de Configuración](configuration.md) y aprender patrones avanzados de configuración.
 
 ## Solución de Problemas Comunes
 
 ### Errores de Autenticación
 ```bash
-# Re-authenticate with Azure
+# Reautenticar con Azure
 az login
 
-# Verify subscription access
+# Verificar acceso a la suscripción
 az account show
 ```
 
 ### Fallos de Implementación
 ```bash
-# Enable debug logging
+# Habilitar el registro de depuración
 export AZD_DEBUG=true
 azd up --debug
 
-# View detailed logs
+# Ver registros detallados
 azd logs --service api
 azd logs --service web
 ```
 
 ### Conflictos de Nombres de Recursos
 ```bash
-# Use a unique environment name
+# Usa un nombre de entorno único
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Problemas de Puertos/Red
 ```bash
-# Check if ports are available
+# Verificar si los puertos están disponibles
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
@@ -361,12 +469,12 @@ Ahora que has completado tu primer proyecto, explora estos temas avanzados:
 
 ### 4. Explorar Más Plantillas
 ```bash
-# Browse templates by category
+# Explorar plantillas por categoría
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Try different technology stacks
+# Probar diferentes pilas de tecnología
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
@@ -397,13 +505,15 @@ azd init --template todo-java-mongo
 
 **Navegación del Capítulo:**
 - **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Comienzo Rápido
 - **⬅️ Anterior**: [Instalación y Configuración](installation.md)
 - **➡️ Siguiente**: [Configuración](configuration.md)
-- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con Enfoque en IA](../microsoft-foundry/microsoft-foundry-integration.md)
 - **Próxima Lección**: [Guía de Implementación](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T14:35:17+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-19T19:08:31+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ko"
 }
@@ -14,7 +14,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 현재 챕터**: 챕터 7 - 문제 해결 및 디버깅
 - **⬅️ 이전**: [일반적인 문제](common-issues.md)
 - **➡️ 다음**: [AI 관련 문제 해결](ai-troubleshooting.md)
-- **🚀 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../ai-foundry/production-ai-practices.md)
+- **🚀 다음 챕터**: [챕터 8: 프로덕션 및 엔터프라이즈 패턴](../microsoft-foundry/production-ai-practices.md)
 
 ## 소개
 
@@ -22,13 +22,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 학습 목표
 
-이 가이드를 완료하면 다음을 할 수 있습니다:
+이 가이드를 완료하면 다음을 배울 수 있습니다:
 - Azure Developer CLI 문제에 대한 체계적인 디버깅 방법론 숙달
 - 고급 로그 구성 및 로그 분석 기술 이해
 - 성능 프로파일링 및 모니터링 전략 구현
 - 복잡한 문제 해결을 위한 Azure 진단 도구 및 서비스 사용
 - 네트워크 디버깅 및 보안 문제 해결 기술 적용
-- 사전 문제 감지를 위한 포괄적인 모니터링 및 경고 구성
+- 사전 문제 감지를 위한 포괄적인 모니터링 및 알림 구성
 
 ## 학습 결과
 
@@ -48,32 +48,32 @@ CO_OP_TRANSLATOR_METADATA:
 - **I**solate: 어떤 구성 요소가 실패하고 있나요?
 - **A**nalyze: 로그에서 무엇을 알 수 있나요?
 - **G**ather: 관련 정보를 모두 수집하세요
-- **E**scalate: 추가 도움이 필요할 때는 언제인가요?
+- **E**scalate: 추가 도움을 요청해야 할 때는 언제인가요?
 
 ## 디버그 모드 활성화
 
 ### 환경 변수
 ```bash
-# Enable comprehensive debugging
+# 포괄적인 디버깅 활성화
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Azure CLI 디버깅
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# 더 깔끔한 출력을 위해 텔레메트리 비활성화
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### 디버그 구성
 ```bash
-# Set debug configuration globally
+# 디버그 구성을 전역적으로 설정
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# 추적 로깅 활성화
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### 구조화된 로그 분석
 ```bash
-# Filter logs by level
+# 로그를 레벨별로 필터링
 azd logs --level error --since 1h
 
-# Filter by service
+# 서비스를 기준으로 필터링
 azd logs --service api --level debug
 
-# Export logs for analysis
+# 분석을 위해 로그 내보내기
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# jq로 JSON 로그 파싱
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### 로그 상관 관계
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - 서비스 간 로그 상관 관계
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# 모든 서비스에서 검색
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Azure 로그 검색
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graph 쿼리
 ```bash
-# Query resources by tags
+# 태그로 리소스 조회
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# 실패한 배포 찾기
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# 리소스 상태 확인
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### 네트워크 디버깅
 ```bash
-# Test connectivity between services
+# 서비스 간 연결 테스트
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# 사용법
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### 컨테이너 디버깅
 ```bash
-# Debug container app issues
+# 디버그 컨테이너 앱 문제
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### 데이터베이스 연결 디버깅
 ```bash
-# Debug database connectivity
+# 데이터베이스 연결 디버그
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### 애플리케이션 성능 모니터링
 ```bash
-# Enable Application Insights debugging
+# 애플리케이션 인사이트 디버깅 활성화
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# 사용자 지정 성능 모니터링
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### 리소스 활용 분석
 ```bash
-# Monitor resource usage
+# 리소스 사용량 모니터링
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# 디버그 환경 설정
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# 서비스 엔드포인트 가져오기
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# 상태 확인 엔드포인트 테스트
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# 테스트 실행
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# 사용자 정의 통합 테스트 실행
 npm run test:integration
 ```
 
 ### 디버깅을 위한 부하 테스트
 ```bash
-# Simple load test to identify performance bottlenecks
+# 성능 병목 현상을 식별하기 위한 간단한 부하 테스트
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Apache Bench 사용 (설치: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # 주요 메트릭 추출
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # 실패 여부 확인
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Bicep 템플릿 디버깅
 ```bash
-# Validate Bicep templates with detailed output
+# Bicep 템플릿을 자세한 출력으로 검증
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # 구문 검증
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # 린트 검증
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # 가상 배포
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# 템플릿 배포 디버그
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### 리소스 상태 분석
 ```bash
-# Analyze resource states for inconsistencies
+# 불일치에 대한 리소스 상태 분석
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # 모든 리소스와 그 상태 나열
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # 실패한 리소스 확인
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### 인증 흐름 디버깅
 ```bash
-# Debug Azure authentication
+# Azure 인증 디버그
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # JWT 토큰 디코드 (jq 및 base64 필요)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Key Vault 액세스 디버그
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### 네트워크 보안 디버깅
 ```bash
-# Debug network security groups
+# 네트워크 보안 그룹 디버그
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # 보안 규칙 확인
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Node.js 애플리케이션 디버깅
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Express 디버깅 미들웨어
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // 요청 세부 정보를 기록합니다
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // 응답을 기록하기 위해 res.json을 재정의합니다
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### 데이터베이스 쿼리 디버깅
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - 데이터베이스 디버깅 유틸리티
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -524,7 +524,7 @@ module.exports = DebuggingPool;
 ### 프로덕션 문제 대응
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - 긴급 프로덕션 디버깅
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# 올바른 환경으로 전환
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# 중요한 정보 수집
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### 롤백 절차
 ```bash
-# Quick rollback script
+# 빠른 롤백 스크립트
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # 환경 전환
     azd env select "$environment"
     
-    # Rollback application
+    # 애플리케이션 롤백
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # 롤백 확인
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # 중요한 엔드포인트 테스트
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### 맞춤형 모니터링 대시보드
 ```bash
-# Create Application Insights queries for debugging
+# 디버깅을 위한 Application Insights 쿼리 생성
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # 오류에 대한 쿼리
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # 성능 문제에 대한 쿼리
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # 종속성 실패에 대한 쿼리
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### 로그 집계
 ```bash
-# Aggregate logs from multiple sources
+# 여러 소스에서 로그를 집계합니다
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -659,9 +659,9 @@ aggregate_logs() {
 ## 🔗 고급 리소스
 
 ### 맞춤형 디버깅 스크립트
-`scripts/debug/` 디렉터리를 생성하여 다음을 포함하세요:
+`scripts/debug/` 디렉토리를 생성하여 다음을 포함하세요:
 - `health-check.sh` - 포괄적인 상태 확인
-- `performance-test.sh` - 자동 성능 테스트
+- `performance-test.sh` - 자동화된 성능 테스트
 - `log-analyzer.py` - 고급 로그 파싱 및 분석
 - `resource-validator.sh` - 인프라 검증
 
@@ -694,7 +694,7 @@ hooks:
 ## 다음 단계
 
 - [용량 계획](../pre-deployment/capacity-planning.md) - 리소스 요구 사항 계획
-- [SKU 선택](../pre-deployment/sku-selection.md) - 적절한 서비스 계층 선택
+- [SKU 선택](../pre-deployment/sku-selection.md) - 적합한 서비스 계층 선택
 - [사전 점검](../pre-deployment/preflight-checks.md) - 배포 전 검증
 - [치트 시트](../../resources/cheat-sheet.md) - 빠른 참조 명령
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전을 신뢰할 수 있는 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 자료로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

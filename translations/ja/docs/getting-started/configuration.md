@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T14:14:18+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-19T18:35:31+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ja"
 }
@@ -12,9 +12,9 @@ CO_OP_TRANSLATOR_METADATA:
 **章のナビゲーション:**
 - **📚 コースホーム**: [AZD 初心者向け](../../README.md)
 - **📖 現在の章**: 第3章 - 設定と認証
-- **⬅️ 前の章**: [最初のプロジェクト](first-project.md)
-- **➡️ 次の章**: [デプロイメントガイド](../deployment/deployment-guide.md)
-- **🚀 次の章**: [第4章: コードとしてのインフラ](../deployment/deployment-guide.md)
+- **⬅️ 前章**: [初めてのプロジェクト](first-project.md)
+- **➡️ 次章**: [デプロイメントガイド](../deployment/deployment-guide.md)
+- **🚀 次の章**: [第4章: インフラストラクチャをコード化](../deployment/deployment-guide.md)
 
 ## はじめに
 
@@ -31,12 +31,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 学習成果
 
-このレッスンを完了すると、以下が可能になります:
-- 開発ワークフローを最適化するための azd の設定
-- 複数のデプロイメント環境のセットアップと管理
-- 安全な設定管理の実践
-- 設定関連の問題のトラブルシューティング
-- 特定の組織要件に合わせた azd のカスタマイズ
+このレッスンを完了すると、以下ができるようになります:
+- azd を最適な開発ワークフローに設定する
+- 複数のデプロイメント環境をセットアップおよび管理する
+- 安全な設定管理の実践を実装する
+- 設定関連の問題をトラブルシュートする
+- 特定の組織要件に合わせて azd の動作をカスタマイズする
 
 この包括的なガイドでは、Azure Developer CLI を最適な開発およびデプロイメントワークフローに設定する方法を解説します。
 
@@ -53,36 +53,36 @@ azd は階層的な設定システムを使用します:
 
 ### グローバルデフォルトの設定
 ```bash
-# Set default subscription
+# デフォルトのサブスクリプションを設定する
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# デフォルトの場所を設定する
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# デフォルトのリソースグループ命名規則を設定する
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# すべてのグローバル設定を表示する
 azd config list
 
-# Remove a configuration
+# 設定を削除する
 azd config unset defaults.location
 ```
 
 ### 一般的なグローバル設定
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# 開発の好み
+azd config set alpha.enable true                    # アルファ機能を有効にする
+azd config set telemetry.enabled false             # テレメトリを無効にする
+azd config set output.format json                  # 出力形式を設定する
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# セキュリティ設定
+azd config set auth.useAzureCliCredential true     # 認証にAzure CLIを使用する
+azd config set tls.insecure false                  # TLS検証を強制する
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# パフォーマンス調整
+azd config set provision.parallelism 5             # リソースの並列作成
+azd config set deploy.timeout 30m                  # デプロイメントのタイムアウト
 ```
 
 ## 🏗️ プロジェクト設定
@@ -213,13 +213,13 @@ services:
 
 ### 環境の作成
 ```bash
-# Create a new environment
+# 新しい環境を作成する
 azd env new development
 
-# Create with specific location
+# 特定の場所で作成する
 azd env new staging --location "westus2"
 
-# Create from template
+# テンプレートから作成する
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,58 +248,67 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 
 ### 環境変数
 ```bash
-# Set environment-specific variables
+# 環境固有の変数を設定する
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# 環境変数を表示する
 azd env get-values
 
-# Remove environment variable
+# 予想される出力:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# 環境変数を削除する
 azd env unset DEBUG
+
+# 削除を確認する
+azd env get-values | grep DEBUG
+# (何も返さないはず)
 ```
 
 ### 環境テンプレート
 一貫した環境セットアップのために `.azure/env.template` を作成します:
 ```bash
-# Required variables
+# 必須の変数
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# アプリケーション設定
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# オプションの開発設定
 DEBUG=false
 LOG_LEVEL=info
 ```
 
 ## 🔐 認証設定
 
-### Azure CLI の統合
+### Azure CLI 統合
 ```bash
-# Use Azure CLI credentials (default)
+# Azure CLIの資格情報を使用する（デフォルト）
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# 特定のテナントでログインする
 az login --tenant <tenant-id>
 
-# Set default subscription
+# デフォルトのサブスクリプションを設定する
 az account set --subscription <subscription-id>
 ```
 
 ### サービスプリンシパル認証
 CI/CD パイプライン向け:
 ```bash
-# Set environment variables
+# 環境変数を設定する
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# または直接設定する
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,15 +316,15 @@ azd config set auth.tenantId "your-tenant-id"
 ### マネージドアイデンティティ
 Azure ホスト環境向け:
 ```bash
-# Enable managed identity authentication
+# 管理対象ID認証を有効にする
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ インフラ設定
+## 🏗️ インフラストラクチャ設定
 
 ### Bicep パラメータ
-`infra/main.parameters.json` でインフラパラメータを設定します:
+`infra/main.parameters.json` でインフラストラクチャパラメータを設定します:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -385,13 +394,14 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+
 例 `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 高度な設定
 
 ### カスタムリソース命名
 ```bash
-# Set naming conventions
+# 名前付け規則を設定する
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -453,13 +463,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### 設定の検証
 ```bash
-# Check configuration syntax
+# 設定構文を確認する
 azd config validate
 
-# Test environment variables
+# 環境変数をテストする
 azd env get-values
 
-# Validate infrastructure
+# インフラを検証する
 azd provision --dry-run
 ```
 
@@ -472,13 +482,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# 必須の環境変数を確認
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# azure.yaml の構文を検証
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,13 +529,13 @@ database:
 ### 3. バージョン管理の考慮事項
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # 環境設定（リソースIDを含む）
+.azure/*/.env               # 環境変数（秘密情報を含む可能性あり）
+.env                        # ローカル環境ファイル
 ```
 
 ### 4. 設定のドキュメント化
-`CONFIG.md` に設定を記録します:
+`CONFIG.md` に設定をドキュメント化します:
 ```markdown
 # Configuration Guide
 
@@ -540,10 +550,72 @@ database:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 実践練習問題
+
+### 演習 1: マルチ環境設定 (15分)
+
+**目標**: 異なる設定を持つ3つの環境を作成および設定する
+
+```bash
+# 開発環境を作成する
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# ステージング環境を作成する
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# 本番環境を作成する
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# 各環境を確認する
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**成功基準:**
+- [ ] 3つの環境が正常に作成される
+- [ ] 各環境に固有の設定がある
+- [ ] 環境間をエラーなく切り替えられる
+- [ ] `azd env list` に3つの環境が表示される
+
+### 演習 2: 秘密管理 (10分)
+
+**目標**: 機密データを安全に設定する練習
+
+```bash
+# シークレットを設定する（出力には表示されません）
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# 非シークレットの設定を行う
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# 環境を表示する（シークレットはマスクされるべき）
+azd env get-values
+
+# シークレットが保存されていることを確認する
+azd env get DB_PASSWORD  # 実際の値を表示するべき
+```
+
+**成功基準:**
+- [ ] 秘密がターミナルに表示されずに保存される
+- [ ] `azd env get-values` に秘密がマスクされて表示される
+- [ ] 個別の `azd env get <SECRET_NAME>` で実際の値を取得できる
+
 ## 次のステップ
 
-- [最初のプロジェクト](first-project.md) - 設定を実際に適用する
-- [デプロイメントガイド](../deployment/deployment-guide.md) - 設定を使用してデプロイメントを行う
+- [初めてのプロジェクト](first-project.md) - 設定を実践で適用する
+- [デプロイメントガイド](../deployment/deployment-guide.md) - 設定をデプロイメントに活用する
 - [リソースのプロビジョニング](../deployment/provisioning.md) - 本番対応の設定
 
 ## 参考資料
@@ -557,11 +629,13 @@ database:
 **章のナビゲーション:**
 - **📚 コースホーム**: [AZD 初心者向け](../../README.md)
 - **📖 現在の章**: 第3章 - 設定と認証
-- **⬅️ 前の章**: [最初のプロジェクト](first-project.md)
-- **➡️ 次の章**: [第4章: コードとしてのインフラ](../deployment/deployment-guide.md)
-- **次のレッスン**: [最初のプロジェクト](first-project.md)
+- **⬅️ 前章**: [初めてのプロジェクト](first-project.md)
+- **➡️ 次の章**: [第4章: インフラストラクチャをコード化](../deployment/deployment-guide.md)
+- **次のレッスン**: [初めてのプロジェクト](first-project.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤認について、当方は責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の利用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

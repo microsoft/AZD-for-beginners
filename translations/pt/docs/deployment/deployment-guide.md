@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-17T14:49:45+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-19T19:50:22+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "pt"
 }
 -->
-# Guia de Implementação - Domine as Implementações com AZD
+# Guia de Implementação - Dominando Implementações com AZD
 
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
@@ -18,33 +18,33 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introdução
 
-Este guia abrangente cobre tudo o que precisa saber sobre como implementar aplicações utilizando o Azure Developer CLI, desde implementações básicas com um único comando até cenários avançados de produção com hooks personalizados, múltiplos ambientes e integração com CI/CD. Domine o ciclo de vida completo da implementação com exemplos práticos e melhores práticas.
+Este guia abrangente cobre tudo o que precisa saber sobre como implementar aplicações usando o Azure Developer CLI, desde implementações básicas com um único comando até cenários avançados de produção com hooks personalizados, múltiplos ambientes e integração com CI/CD. Domine o ciclo completo de implementação com exemplos práticos e melhores práticas.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este guia, irá:
+Ao concluir este guia, você será capaz de:
 - Dominar todos os comandos e fluxos de trabalho de implementação do Azure Developer CLI
-- Compreender o ciclo de vida completo da implementação, desde o provisionamento até o monitoramento
-- Implementar hooks personalizados para automação pré e pós-implementação
+- Compreender o ciclo completo de implementação, desde o provisionamento até o monitoramento
+- Implementar hooks personalizados para automação antes e após a implementação
 - Configurar múltiplos ambientes com parâmetros específicos para cada ambiente
 - Configurar estratégias avançadas de implementação, incluindo blue-green e canary deployments
 - Integrar implementações azd com pipelines de CI/CD e fluxos de trabalho DevOps
 
 ## Resultados de Aprendizagem
 
-Após a conclusão, será capaz de:
+Ao finalizar, você será capaz de:
 - Executar e solucionar problemas de todos os fluxos de trabalho de implementação azd de forma independente
-- Projetar e implementar automação personalizada de implementação utilizando hooks
+- Projetar e implementar automação personalizada de implementação usando hooks
 - Configurar implementações prontas para produção com segurança e monitoramento adequados
-- Gerir cenários complexos de implementação em múltiplos ambientes
+- Gerenciar cenários complexos de implementação em múltiplos ambientes
 - Otimizar o desempenho da implementação e implementar estratégias de rollback
 - Integrar implementações azd em práticas empresariais de DevOps
 
 ## Visão Geral da Implementação
 
-O Azure Developer CLI fornece vários comandos de implementação:
-- `azd up` - Fluxo de trabalho completo (provisionamento + implementação)
-- `azd provision` - Criar/atualizar apenas os recursos do Azure
+O Azure Developer CLI oferece vários comandos de implementação:
+- `azd up` - Fluxo de trabalho completo (provisionar + implementar)
+- `azd provision` - Criar/atualizar apenas recursos do Azure
 - `azd deploy` - Implementar apenas o código da aplicação
 - `azd package` - Construir e empacotar aplicações
 
@@ -53,42 +53,76 @@ O Azure Developer CLI fornece vários comandos de implementação:
 ### Implementação Completa (azd up)
 O fluxo de trabalho mais comum para novos projetos:
 ```bash
-# Deploy everything from scratch
+# Implementar tudo do zero
 azd up
 
-# Deploy with specific environment
+# Implementar com ambiente específico
 azd up --environment production
 
-# Deploy with custom parameters
+# Implementar com parâmetros personalizados
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Implementação Apenas de Infraestrutura
-Quando precisa apenas atualizar os recursos do Azure:
+Quando você precisa apenas atualizar os recursos do Azure:
 ```bash
-# Provision/update infrastructure
+# Provisionar/atualizar infraestrutura
 azd provision
 
-# Provision with dry-run to preview changes
+# Provisionar com dry-run para pré-visualizar alterações
 azd provision --preview
 
-# Provision specific services
+# Provisionar serviços específicos
 azd provision --service database
 ```
 
 ### Implementação Apenas de Código
 Para atualizações rápidas de aplicações:
 ```bash
-# Deploy all services
+# Implementar todos os serviços
 azd deploy
 
-# Deploy specific service
+# Saída esperada:
+# A implementar serviços (azd deploy)
+# - web: A implementar... Concluído
+# - api: A implementar... Concluído
+# SUCESSO: A sua implementação foi concluída em 2 minutos e 15 segundos
+
+# Implementar serviço específico
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# Implementar com argumentos de compilação personalizados
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Verificar implementação
+azd show --output json | jq '.services'
 ```
+
+### ✅ Verificação da Implementação
+
+Após qualquer implementação, verifique o sucesso:
+
+```bash
+# Verificar se todos os serviços estão a funcionar
+azd show
+
+# Testar os endpoints de saúde
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Verificar os registos para erros
+azd logs --service api --since 5m | grep -i error
+```
+
+**Critérios de Sucesso:**
+- ✅ Todos os serviços mostram status "Running"
+- ✅ Endpoints de saúde retornam HTTP 200
+- ✅ Nenhum erro nos logs nos últimos 5 minutos
+- ✅ A aplicação responde a solicitações de teste
 
 ## 🏗️ Compreendendo o Processo de Implementação
 
@@ -127,8 +161,8 @@ hooks:
 
 ### Fase 4: Empacotamento da Aplicação
 - Constrói o código da aplicação
-- Cria artefactos de implementação
-- Empacota para a plataforma de destino (contentores, ficheiros ZIP, etc.)
+- Cria artefatos de implementação
+- Empacota para a plataforma alvo (containers, arquivos ZIP, etc.)
 
 ### Fase 5: Hooks Pré-Implementação
 ```yaml
@@ -144,7 +178,7 @@ hooks:
 ```
 
 ### Fase 6: Implementação da Aplicação
-- Implementa aplicações empacotadas nos serviços Azure
+- Implementa aplicações empacotadas nos serviços do Azure
 - Atualiza configurações
 - Inicia/reinicia serviços
 
@@ -195,18 +229,18 @@ services:
 
 ### Configurações Específicas de Ambiente
 ```bash
-# Development environment
+# Ambiente de desenvolvimento
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# Ambiente de teste
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# Ambiente de produção
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -253,17 +287,17 @@ services:
 
 ### Implementações Blue-Green
 ```bash
-# Create blue environment
+# Criar ambiente azul
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blue environment
+# Testar ambiente azul
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# Alterar tráfego para azul (atualização manual de DNS/balanceador de carga)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# Limpar ambiente verde
 azd env select production-green
 azd down --force
 ```
@@ -282,7 +316,7 @@ services:
         percentage: 10
 ```
 
-### Implementações em Etapas
+### Implementações em Estágios
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -313,9 +347,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Implementações de Contentores
+## 🐳 Implementações em Containers
 
-### Implementações de Aplicações em Contentores
+### Implementações de Aplicações em Containers
 ```yaml
 services:
   api:
@@ -369,10 +403,10 @@ CMD ["npm", "start"]
 
 ### Implementações Paralelas
 ```bash
-# Configure parallel deployment
+# Configurar implementação paralela
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# Implementar serviços em paralelo
 azd deploy --parallel
 ```
 
@@ -392,10 +426,10 @@ services:
 
 ### Implementações Incrementais
 ```bash
-# Deploy only changed services
+# Implementar apenas serviços alterados
 azd deploy --incremental
 
-# Deploy with change detection
+# Implementar com deteção de alterações
 azd deploy --detect-changes
 ```
 
@@ -403,13 +437,13 @@ azd deploy --detect-changes
 
 ### Monitoramento em Tempo Real
 ```bash
-# Monitor deployment progress
+# Monitorizar o progresso da implementação
 azd deploy --follow
 
-# View deployment logs
+# Ver registos de implementação
 azd logs --follow --service api
 
-# Check deployment status
+# Verificar o estado da implementação
 azd show --service api
 ```
 
@@ -434,7 +468,7 @@ services:
 
 echo "Validating deployment..."
 
-# Check application health
+# Verificar a saúde da aplicação
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -464,12 +498,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### Gestão de Segredos
 ```bash
-# Store secrets securely
+# Armazenar segredos de forma segura
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# Referenciar segredos no azure.yaml
 ```
 
 ```yaml
@@ -493,7 +527,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Gestão de Identidade e Acessos
+### Gestão de Identidade e Acesso
 ```yaml
 services:
   api:
@@ -512,29 +546,29 @@ services:
 
 ### Rollback Rápido
 ```bash
-# Rollback to previous deployment
+# Reverter para a implementação anterior
 azd deploy --rollback
 
-# Rollback specific service
+# Reverter serviço específico
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# Reverter para uma versão específica
 azd deploy --service api --version v1.2.3
 ```
 
 ### Rollback de Infraestrutura
 ```bash
-# Rollback infrastructure changes
+# Reverter alterações na infraestrutura
 azd provision --rollback
 
-# Preview rollback changes
+# Pré-visualizar alterações de reversão
 azd provision --rollback --preview
 ```
 
 ### Rollback de Migração de Base de Dados
 ```bash
 #!/bin/bash
-# scripts/rollback-database.sh
+# scripts/reverter-base-de-dados.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -549,13 +583,13 @@ echo "Database rollback completed"
 
 ### Acompanhar o Desempenho da Implementação
 ```bash
-# Enable deployment metrics
+# Ativar métricas de implementação
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# Ver histórico de implementações
 azd history
 
-# Get deployment statistics
+# Obter estatísticas de implementação
 azd metrics --type deployment
 ```
 
@@ -578,24 +612,24 @@ hooks:
 
 ## 🎯 Melhores Práticas
 
-### 1. Consistência de Ambientes
+### 1. Consistência de Ambiente
 ```bash
-# Use consistent naming
+# Use nomes consistentes
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# Mantenha a paridade do ambiente
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Validação de Infraestrutura
 ```bash
-# Validate before deployment
+# Validar antes da implementação
 azd provision --preview
 azd provision --what-if
 
-# Use ARM/Bicep linting
+# Usar linting ARM/Bicep
 az bicep lint --file infra/main.bicep
 ```
 
@@ -630,7 +664,7 @@ hooks:
 
 ### 4. Documentação e Logging
 ```bash
-# Document deployment procedures
+# Documentar os procedimentos de implementação
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -639,9 +673,262 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ## Próximos Passos
 
 - [Provisionamento de Recursos](provisioning.md) - Exploração detalhada da gestão de infraestrutura
-- [Planeamento Pré-Implementação](../pre-deployment/capacity-planning.md) - Planeie a sua estratégia de implementação
+- [Planeamento Pré-Implementação](../pre-deployment/capacity-planning.md) - Planeie sua estratégia de implementação
 - [Problemas Comuns](../troubleshooting/common-issues.md) - Resolva problemas de implementação
 - [Melhores Práticas](../troubleshooting/debugging.md) - Estratégias de implementação prontas para produção
+
+## 🎯 Exercícios Práticos de Implementação
+
+### Exercício 1: Fluxo de Trabalho de Implementação Incremental (20 minutos)
+**Objetivo**: Dominar a diferença entre implementações completas e incrementais
+
+```bash
+# Implementação inicial
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Registar o tempo da implementação inicial
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Fazer uma alteração no código
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Implementar apenas o código (rápido)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Comparar tempos
+cat deployment-log.txt
+
+# Limpar
+azd down --force --purge
+```
+
+**Critérios de Sucesso:**
+- [ ] Implementação completa leva de 5 a 15 minutos
+- [ ] Implementação apenas de código leva de 2 a 5 minutos
+- [ ] Alterações no código refletidas na aplicação implementada
+- [ ] Infraestrutura inalterada após `azd deploy`
+
+**Resultado de Aprendizagem**: `azd deploy` é 50-70% mais rápido que `azd up` para alterações de código
+
+### Exercício 2: Hooks Personalizados de Implementação (30 minutos)
+**Objetivo**: Implementar automação antes e após a implementação
+
+```bash
+# Criar script de validação pré-implementação
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Verificar se os testes passam
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Verificar alterações não comprometidas
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Criar teste de fumo pós-implementação
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Adicionar hooks ao azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Testar implementação com hooks
+azd deploy
+```
+
+**Critérios de Sucesso:**
+- [ ] Script pré-implementação executa antes da implementação
+- [ ] Implementação é abortada se os testes falharem
+- [ ] Teste de validação pós-implementação verifica a saúde
+- [ ] Hooks executam na ordem correta
+
+### Exercício 3: Estratégia de Implementação Multi-Ambiente (45 minutos)
+**Objetivo**: Implementar fluxo de trabalho de implementação em estágios (dev → staging → produção)
+
+```bash
+# Criar script de implementação
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Passo 1: Implementar em dev
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Passo 2: Implementar em staging
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Passo 3: Aprovação manual para produção
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Criar ambientes
+azd env new dev
+azd env new staging
+azd env new production
+
+# Executar implementação em etapas
+./deploy-staged.sh
+```
+
+**Critérios de Sucesso:**
+- [ ] Ambiente de desenvolvimento implementa com sucesso
+- [ ] Ambiente de staging implementa com sucesso
+- [ ] Aprovação manual necessária para produção
+- [ ] Todos os ambientes têm verificações de saúde funcionando
+- [ ] Capacidade de rollback, se necessário
+
+### Exercício 4: Estratégia de Rollback (25 minutos)
+**Objetivo**: Implementar e testar rollback de implementação
+
+```bash
+# Implementar v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Guardar configuração v1
+cp -r .azure/production .azure/production-v1-backup
+
+# Implementar v2 com alteração disruptiva
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Detetar falha
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Reverter código
+    git checkout src/api/src/server.js
+    
+    # Reverter ambiente
+    azd env set APP_VERSION "1.0.0"
+    
+    # Reimplementar v1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Critérios de Sucesso:**
+- [ ] Capacidade de detectar falhas na implementação
+- [ ] Script de rollback executa automaticamente
+- [ ] Aplicação retorna ao estado funcional
+- [ ] Verificações de saúde passam após o rollback
+
+## 📊 Acompanhamento de Métricas de Implementação
+
+### Acompanhe o Desempenho da Sua Implementação
+
+```bash
+# Criar script de métricas de implementação
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Registar no ficheiro
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Usá-lo
+./track-deployment.sh
+```
+
+**Analise suas métricas:**
+```bash
+# Ver histórico de implementações
+cat deployment-metrics.csv
+
+# Calcular tempo médio de implementação
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
 
 ## Recursos Adicionais
 
@@ -653,10 +940,12 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ---
 
 **Navegação**
-- **Lição Anterior**: [O Seu Primeiro Projeto](../getting-started/first-project.md)
+- **Lição Anterior**: [Seu Primeiro Projeto](../getting-started/first-project.md)
 - **Próxima Lição**: [Provisionamento de Recursos](provisioning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante ter em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original no seu idioma nativo deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes do uso desta tradução.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

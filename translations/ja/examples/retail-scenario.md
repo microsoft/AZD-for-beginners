@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "616504abc1770bcde7a50c7f4ba008ac",
-  "translation_date": "2025-09-17T15:13:06+00:00",
+  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
+  "translation_date": "2025-11-19T18:05:12+00:00",
   "source_file": "examples/retail-scenario.md",
   "language_code": "ja"
 }
@@ -14,20 +14,132 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 現在の章**: [第5章: マルチエージェントAIソリューション](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **⬅️ 前提条件**: [第2章: AIファースト開発](../docs/ai-foundry/azure-ai-foundry-integration.md)
 - **➡️ 次の章**: [第6章: 展開前の検証](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARMテンプレート**: [展開パッケージ](retail-multiagent-arm-template/README.md)
+- **🚀 ARMテンプレート**: [デプロイメントパッケージ](retail-multiagent-arm-template/README.md)
+
+> **⚠️ アーキテクチャガイド - 実装済みではありません**  
+> このドキュメントは、**マルチエージェントシステムを構築するための包括的なアーキテクチャ設計図**を提供します。  
+> **提供されているもの:** インフラストラクチャデプロイメント用のARMテンプレート (Azure OpenAI、AI Search、Container Appsなど)  
+> **構築が必要なもの:** エージェントコード、ルーティングロジック、フロントエンドUI、データパイプライン (推定80～120時間)  
+>  
+> **このガイドの用途:**
+> - ✅ 独自のマルチエージェントプロジェクトのアーキテクチャ参照
+> - ✅ マルチエージェント設計パターンの学習ガイド
+> - ✅ Azureリソースをデプロイするためのインフラテンプレート
+> - ❌ 完全に動作するアプリケーションではありません (大幅な開発が必要)
 
 ## 概要
 
-このシナリオでは、在庫管理、文書処理、インテリジェントな顧客対応など、高度なAI機能を必要とする小売業者向けの、実運用可能なマルチエージェント顧客サポートチャットボットの構築手順を説明します。
+**学習目標:** 在庫管理、文書処理、インテリジェントな顧客対応を含む高度なAI機能を備えた、小売業向けの本番対応マルチエージェント顧客サポートチャットボットのアーキテクチャ、設計決定、実装アプローチを理解する。
 
-## アーキテクチャ目標
+**所要時間:** 読解 + 理解 (2～3時間) | 完全実装の構築 (80～120時間)
 
-顧客サポートソリューションには以下が必要です:
-- **複数の専門エージェント**: 顧客の異なるニーズに対応
-- **マルチモデル展開**: 適切な容量計画を伴う
-- **動的データ統合**: AI検索とファイルアップロードを活用
-- **包括的な監視**: 評価機能を含む
-- **実運用レベルのセキュリティ**: レッドチームによる検証
+**学べること:**
+- マルチエージェントアーキテクチャのパターンと設計原則
+- マルチリージョンAzure OpenAIデプロイメント戦略
+- RAG (Retrieval-Augmented Generation) を用いたAI Searchの統合
+- エージェント評価とセキュリティテストフレームワーク
+- 本番展開の考慮事項とコスト最適化
+
+## アーキテクチャの目標
+
+**教育的焦点:** このアーキテクチャは、マルチエージェントシステムのエンタープライズパターンを示します。
+
+### システム要件 (実装用)
+
+本番の顧客サポートソリューションには以下が必要です:
+- **複数の専門エージェント** (顧客サービス + 在庫管理)  
+- **適切なキャパシティプランニングを伴うマルチモデルデプロイメント** (GPT-4o、GPT-4o-mini、埋め込みモデルを各リージョンで展開)  
+- **AI Searchとファイルアップロードを用いた動的データ統合** (ベクトル検索 + 文書処理)  
+- **包括的なモニタリング**と評価機能 (Application Insights + カスタムメトリクス)  
+- **本番レベルのセキュリティ** (脆弱性スキャン + エージェント評価)
+
+### このガイドが提供するもの
+
+✅ **アーキテクチャパターン** - スケーラブルなマルチエージェントシステムの実績ある設計  
+✅ **インフラテンプレート** - AzureサービスをデプロイするARMテンプレート  
+✅ **コード例** - 主要コンポーネントの参照実装  
+✅ **設定ガイダンス** - ステップバイステップのセットアップ手順  
+✅ **ベストプラクティス** - セキュリティ、モニタリング、コスト最適化戦略  
+
+❌ **含まれないもの** - 完全な動作アプリケーション (開発作業が必要)
+
+## 🗺️ 実装ロードマップ
+
+### フェーズ1: アーキテクチャの学習 (2～3時間) - ここから始める
+
+**目標:** システム設計とコンポーネントの相互作用を理解する
+
+- [ ] このドキュメントを完全に読む
+- [ ] アーキテクチャ図とコンポーネントの関係を確認する
+- [ ] マルチエージェントパターンと設計決定を理解する
+- [ ] エージェントツールとルーティングのコード例を学ぶ
+- [ ] コスト見積もりとキャパシティプランニングガイダンスを確認する
+
+**成果:** 構築すべき内容を明確に理解する
+
+### フェーズ2: インフラのデプロイ (30～45分)
+
+**目標:** ARMテンプレートを使用してAzureリソースをプロビジョニングする
+
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup -m standard
+```
+
+**デプロイされるもの:**
+- ✅ Azure OpenAI (3リージョン: GPT-4o、GPT-4o-mini、埋め込みモデル)
+- ✅ AI Searchサービス (空の状態、インデックス設定が必要)
+- ✅ Container Apps環境 (プレースホルダーイメージ)
+- ✅ ストレージアカウント、Cosmos DB、Key Vault
+- ✅ Application Insightsモニタリング
+
+**不足しているもの:**
+- ❌ エージェント実装コード
+- ❌ ルーティングロジック
+- ❌ フロントエンドUI
+- ❌ 検索インデックススキーマ
+- ❌ データパイプライン
+
+### フェーズ3: アプリケーションの構築 (80～120時間)
+
+**目標:** このアーキテクチャに基づいてマルチエージェントシステムを実装する
+
+1. **エージェント実装** (30～40時間)
+   - ベースエージェントクラスとインターフェース
+   - GPT-4oを使用した顧客サービスエージェント
+   - GPT-4o-miniを使用した在庫エージェント
+   - ツール統合 (AI Search、Bing、ファイル処理)
+
+2. **ルーティングサービス** (12～16時間)
+   - リクエスト分類ロジック
+   - エージェント選択とオーケストレーション
+   - FastAPI/Expressバックエンド
+
+3. **フロントエンド開発** (20～30時間)
+   - チャットインターフェースUI
+   - ファイルアップロード機能
+   - レスポンスレンダリング
+
+4. **データパイプライン** (8～12時間)
+   - AI Searchインデックス作成
+   - Document Intelligenceを用いた文書処理
+   - 埋め込み生成とインデックス作成
+
+5. **モニタリングと評価** (10～15時間)
+   - カスタムテレメトリ実装
+   - エージェント評価フレームワーク
+   - レッドチームセキュリティスキャナー
+
+### フェーズ4: デプロイとテスト (8～12時間)
+
+- すべてのサービスのDockerイメージをビルド
+- Azure Container Registryにプッシュ
+- Container Appsを実際のイメージで更新
+- 環境変数とシークレットを設定
+- 評価テストスイートを実行
+- セキュリティスキャンを実施
+
+**総推定作業時間:** 経験豊富な開発者で80～120時間
 
 ## ソリューションアーキテクチャ
 
@@ -35,40 +147,40 @@ CO_OP_TRANSLATOR_METADATA:
 
 ```mermaid
 graph TB
-    User[👤 Customer] --> LB[Azure Front Door]
-    LB --> WebApp[Web Frontend<br/>Container App]
+    User[👤 顧客] --> LB[Azure Front Door]
+    LB --> WebApp[Web フロントエンド<br/>コンテナ アプリ]
     
-    WebApp --> Router[Agent Router<br/>Container App]
-    Router --> CustomerAgent[Customer Agent<br/>Customer Service]
-    Router --> InvAgent[Inventory Agent<br/>Stock Management]
+    WebApp --> Router[エージェント ルーター<br/>コンテナ アプリ]
+    Router --> CustomerAgent[顧客エージェント<br/>顧客サービス]
+    Router --> InvAgent[在庫エージェント<br/>在庫管理]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>東 US 2]
+    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>西 US 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>Product Catalog]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Real-time Info]
+    CustomerAgent --> AISearch[Azure AI 検索<br/>製品カタログ]
+    CustomerAgent --> BingSearch[Bing 検索 API<br/>リアルタイム情報]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>Documents & Files]
-    Storage --> DocIntel[Document Intelligence<br/>Content Processing]
+    AISearch --> Storage[Azure ストレージ<br/>ドキュメント & ファイル]
+    Storage --> DocIntel[ドキュメント インテリジェンス<br/>コンテンツ処理]
     
-    OpenAI1 --> Embeddings[Text Embeddings<br/>ada-002<br/>France Central]
+    OpenAI1 --> Embeddings[テキスト埋め込み<br/>ada-002<br/>フランス セントラル]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>Monitoring]
+    Router --> AppInsights[アプリケーション インサイト<br/>モニタリング]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Grader<br/>Switzerland North] --> Evaluation[Evaluation Framework]
-    RedTeam[Red Team Scanner] --> SecurityReports[Security Reports]
+    GraderModel[GPT-4o 採点者<br/>スイス北部] --> Evaluation[評価フレームワーク]
+    RedTeam[レッドチーム スキャナー] --> SecurityReports[セキュリティ レポート]
     
-    subgraph "Data Layer"
+    subgraph "データ層"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Chat History]
+        CosmosDB[Cosmos DB<br/>チャット履歴]
     end
     
-    subgraph "AI Services"
+    subgraph "AI サービス"
         OpenAI1
         OpenAI2
         Embeddings
@@ -77,10 +189,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Monitoring & Security"
+    subgraph "モニタリング & セキュリティ"
         AppInsights
-        LogAnalytics[Log Analytics Workspace]
-        KeyVault[Azure Key Vault<br/>Secrets & Config]
+        LogAnalytics[ログ分析ワークスペース]
+        KeyVault[Azure Key Vault<br/>シークレット & 設定]
         RedTeam
         Evaluation
     end
@@ -94,113 +206,117 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-
 ### コンポーネント概要
 
 | コンポーネント | 目的 | 技術 | リージョン |
-|---------------|------|------|------------|
+|-----------|---------|------------|---------|
 | **Webフロントエンド** | 顧客とのインターフェース | Container Apps | プライマリリージョン |
-| **エージェントルーター** | リクエストを適切なエージェントにルーティング | Container Apps | プライマリリージョン |
+| **エージェントルーター** | 適切なエージェントへのリクエストルーティング | Container Apps | プライマリリージョン |
 | **顧客エージェント** | 顧客サービスの問い合わせ対応 | Container Apps + GPT-4o | プライマリリージョン |
-| **在庫エージェント** | 在庫管理と注文処理 | Container Apps + GPT-4o-mini | プライマリリージョン |
+| **在庫エージェント** | 在庫とフルフィルメントの管理 | Container Apps + GPT-4o-mini | プライマリリージョン |
 | **Azure OpenAI** | エージェントのLLM推論 | Cognitive Services | マルチリージョン |
-| **AI検索** | ベクター検索とRAG | AI Search Service | プライマリリージョン |
-| **ストレージアカウント** | ファイルアップロードと文書管理 | Blob Storage | プライマリリージョン |
-| **Application Insights** | 監視とテレメトリ | Monitor | プライマリリージョン |
-| **評価モデル** | エージェント評価システム | Azure OpenAI | セカンダリリージョン |
+| **AI Search** | ベクトル検索とRAG | AI Searchサービス | プライマリリージョン |
+| **ストレージアカウント** | ファイルアップロードと文書 | Blob Storage | プライマリリージョン |
+| **Application Insights** | モニタリングとテレメトリ | Monitor | プライマリリージョン |
+| **グレーダーモデル** | エージェント評価システム | Azure OpenAI | セカンダリリージョン |
 
 ## 📁 プロジェクト構造
 
+> **📍 ステータスの凡例:**  
+> ✅ = リポジトリに存在  
+> 📝 = 参照実装 (このドキュメント内のコード例)  
+> 🔨 = 作成が必要
+
 ```
-retail-multiagent-solution/
-├── .azure/                              # Azure environment configs
-│   ├── config.json                      # Global config
+retail-multiagent-solution/              🔨 Your project directory
+├── .azure/                              🔨 Azure environment configs
+│   ├── config.json                      🔨 Global config
 │   └── env/
-│       ├── .env.development             # Dev environment
-│       ├── .env.staging                 # Staging environment
-│       └── .env.production              # Production environment
+│       ├── .env.development             🔨 Dev environment
+│       ├── .env.staging                 🔨 Staging environment
+│       └── .env.production              🔨 Production environment
 │
-├── azure.yaml                          # AZD main configuration
-├── azure.parameters.json               # Deployment parameters
-├── README.md                           # Solution documentation
+├── azure.yaml                          🔨 AZD main configuration
+├── azure.parameters.json               🔨 Deployment parameters
+├── README.md                           🔨 Solution documentation
 │
-├── infra/                              # Infrastructure as Code
-│   ├── main.bicep                      # Main Bicep template
-│   ├── main.parameters.json            # Parameters file
-│   ├── modules/                        # Bicep modules
-│   │   ├── ai-services.bicep           # Azure OpenAI deployments
-│   │   ├── search.bicep                # AI Search configuration
-│   │   ├── storage.bicep               # Storage accounts
-│   │   ├── container-apps.bicep        # Container Apps environment
-│   │   ├── monitoring.bicep            # Application Insights
-│   │   ├── security.bicep              # Key Vault and RBAC
-│   │   └── networking.bicep            # Virtual networks and DNS
-│   ├── arm-template/                   # ARM template version
-│   │   ├── azuredeploy.json            # ARM main template
-│   │   └── azuredeploy.parameters.json # ARM parameters
-│   └── scripts/                        # Deployment scripts
-│       ├── deploy.sh                   # Main deployment script
-│       ├── setup-data.sh               # Data setup script
-│       └── configure-rbac.sh           # RBAC configuration
+├── infra/                              🔨 Infrastructure as Code (you create)
+│   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
+│   ├── main.parameters.json            🔨 Parameters file
+│   ├── modules/                        📝 Bicep modules (reference examples below)
+│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── search.bicep                📝 AI Search configuration
+│   │   ├── storage.bicep               📝 Storage accounts
+│   │   ├── container-apps.bicep        📝 Container Apps environment
+│   │   ├── monitoring.bicep            📝 Application Insights
+│   │   ├── security.bicep              📝 Key Vault and RBAC
+│   │   └── networking.bicep            📝 Virtual networks and DNS
+│   ├── arm-template/                   ✅ ARM template version (EXISTS)
+│   │   ├── azuredeploy.json            ✅ ARM main template (retail-multiagent-arm-template/)
+│   │   └── azuredeploy.parameters.json ✅ ARM parameters
+│   └── scripts/                        ✅/🔨 Deployment scripts
+│       ├── deploy.sh                   ✅ Main deployment script (EXISTS)
+│       ├── setup-data.sh               🔨 Data setup script (you create)
+│       └── configure-rbac.sh           🔨 RBAC configuration (you create)
 │
-├── src/                                # Application source code
-│   ├── agents/                         # Agent implementations
-│   │   ├── base/                       # Base agent classes
-│   │   │   ├── agent.py                # Abstract agent class
-│   │   │   └── tools.py                # Tool interfaces
-│   │   ├── customer/                   # Customer service agent
-│   │   │   ├── agent.py                # Customer agent implementation
-│   │   │   ├── prompts.py              # System prompts
-│   │   │   └── tools/                  # Agent-specific tools
-│   │   │       ├── search_tool.py      # AI Search integration
-│   │   │       ├── bing_tool.py        # Bing Search integration
-│   │   │       └── file_tool.py        # File processing tool
-│   │   └── inventory/                  # Inventory management agent
-│   │       ├── agent.py                # Inventory agent implementation
-│   │       ├── prompts.py              # System prompts
-│   │       └── tools/                  # Agent-specific tools
-│   │           ├── inventory_search.py # Inventory search tool
-│   │           └── database_tool.py    # Database query tool
+├── src/                                🔨 Application source code (YOU BUILD THIS)
+│   ├── agents/                         📝 Agent implementations (examples below)
+│   │   ├── base/                       🔨 Base agent classes
+│   │   │   ├── agent.py                🔨 Abstract agent class
+│   │   │   └── tools.py                🔨 Tool interfaces
+│   │   ├── customer/                   🔨 Customer service agent
+│   │   │   ├── agent.py                📝 Customer agent implementation (see below)
+│   │   │   ├── prompts.py              🔨 System prompts
+│   │   │   └── tools/                  🔨 Agent-specific tools
+│   │   │       ├── search_tool.py      📝 AI Search integration (example below)
+│   │   │       ├── bing_tool.py        📝 Bing Search integration (example below)
+│   │   │       └── file_tool.py        🔨 File processing tool
+│   │   └── inventory/                  🔨 Inventory management agent
+│   │       ├── agent.py                🔨 Inventory agent implementation
+│   │       ├── prompts.py              🔨 System prompts
+│   │       └── tools/                  🔨 Agent-specific tools
+│   │           ├── inventory_search.py 🔨 Inventory search tool
+│   │           └── database_tool.py    🔨 Database query tool
 │   │
-│   ├── router/                         # Agent routing service
-│   │   ├── main.py                     # FastAPI router application
-│   │   ├── routing_logic.py            # Request routing logic
-│   │   └── middleware.py               # Authentication & logging
+│   ├── router/                         🔨 Agent routing service (you build)
+│   │   ├── main.py                     🔨 FastAPI router application
+│   │   ├── routing_logic.py            🔨 Request routing logic
+│   │   └── middleware.py               🔨 Authentication & logging
 │   │
-│   ├── frontend/                       # Web user interface
-│   │   ├── Dockerfile                  # Container configuration
-│   │   ├── package.json                # Node.js dependencies
-│   │   ├── src/                        # React/Vue source code
-│   │   │   ├── components/             # UI components
-│   │   │   ├── pages/                  # Application pages
-│   │   │   ├── services/               # API services
-│   │   │   └── styles/                 # CSS and themes
-│   │   └── public/                     # Static assets
+│   ├── frontend/                       🔨 Web user interface (you build)
+│   │   ├── Dockerfile                  🔨 Container configuration
+│   │   ├── package.json                🔨 Node.js dependencies
+│   │   ├── src/                        🔨 React/Vue source code
+│   │   │   ├── components/             🔨 UI components
+│   │   │   ├── pages/                  🔨 Application pages
+│   │   │   ├── services/               🔨 API services
+│   │   │   └── styles/                 🔨 CSS and themes
+│   │   └── public/                     🔨 Static assets
 │   │
-│   ├── shared/                         # Shared utilities
-│   │   ├── config.py                   # Configuration management
-│   │   ├── telemetry.py                # Telemetry utilities
-│   │   ├── security.py                 # Security utilities
-│   │   └── models.py                   # Data models
+│   ├── shared/                         🔨 Shared utilities (you build)
+│   │   ├── config.py                   🔨 Configuration management
+│   │   ├── telemetry.py                📝 Telemetry utilities (example below)
+│   │   ├── security.py                 🔨 Security utilities
+│   │   └── models.py                   🔨 Data models
 │   │
-│   └── evaluation/                     # Evaluation and testing
-│       ├── evaluator.py                # Agent evaluator
-│       ├── red_team_scanner.py         # Security scanner
-│       ├── test_cases.json             # Evaluation test cases
-│       └── reports/                    # Generated reports
+│   └── evaluation/                     🔨 Evaluation and testing (you build)
+│       ├── evaluator.py                📝 Agent evaluator (example below)
+│       ├── red_team_scanner.py         📝 Security scanner (example below)
+│       ├── test_cases.json             📝 Evaluation test cases (example below)
+│       └── reports/                    🔨 Generated reports
 │
-├── data/                               # Data and configuration
-│   ├── search-schema.json              # AI Search index schema
-│   ├── initial-docs/                   # Initial document corpus
-│   │   ├── product-manuals/            # Product documentation
-│   │   ├── policies/                   # Company policies
-│   │   └── faqs/                       # Frequently asked questions
-│   ├── fine-tuning/                    # Fine-tuning datasets
-│   │   ├── training.jsonl              # Training data
-│   │   └── validation.jsonl            # Validation data
-│   └── evaluation/                     # Evaluation datasets
-│       ├── test-conversations.json     # Test conversation data
-│       └── ground-truth.json           # Expected responses
+├── data/                               🔨 Data and configuration (you create)
+│   ├── search-schema.json              📝 AI Search index schema (example below)
+│   ├── initial-docs/                   🔨 Initial document corpus
+│   │   ├── product-manuals/            🔨 Product documentation (your data)
+│   │   ├── policies/                   🔨 Company policies (your data)
+│   │   └── faqs/                       🔨 Frequently asked questions (your data)
+│   ├── fine-tuning/                    🔨 Fine-tuning datasets (optional)
+│   │   ├── training.jsonl              🔨 Training data
+│   │   └── validation.jsonl            🔨 Validation data
+│   └── evaluation/                     🔨 Evaluation datasets
+│       ├── test-conversations.json     📝 Test conversation data (example below)
+│       └── ground-truth.json           🔨 Expected responses
 │
 ├── scripts/                            # Utility scripts
 │   ├── setup/                          # Setup scripts
@@ -256,11 +372,77 @@ retail-multiagent-solution/
 
 ---
 
+## 🚀 クイックスタート: 今すぐできること
+
+### オプション1: インフラのみをデプロイ (30分)
+
+**得られるもの:** 開発準備が整ったAzureサービス
+
+```bash
+# リポジトリをクローンする
+git clone https://github.com/microsoft/AZD-for-beginners.git
+cd AZD-for-beginners/examples/retail-multiagent-arm-template
+
+# インフラをデプロイする
+./deploy.sh -g myResourceGroup -m standard
+
+# デプロイを確認する
+az resource list --resource-group myResourceGroup --output table
+```
+
+**期待される成果:**
+- ✅ Azure OpenAIサービスがデプロイされる (3リージョン)
+- ✅ AI Searchサービスが作成される (空の状態)
+- ✅ Container Apps環境が準備される
+- ✅ ストレージ、Cosmos DB、Key Vaultが設定される
+- ❌ 動作するエージェントはまだなし (インフラのみ)
+
+### オプション2: アーキテクチャを学ぶ (2～3時間)
+
+**得られるもの:** マルチエージェントパターンの深い理解
+
+1. このドキュメントを完全に読む
+2. 各コンポーネントのコード例を確認する
+3. 設計決定とトレードオフを理解する
+4. コスト最適化戦略を学ぶ
+5. 実装アプローチを計画する
+
+**期待される成果:**
+- ✅ システムアーキテクチャの明確なメンタルモデル
+- ✅ 必要なコンポーネントの理解
+- ✅ 現実的な作業見積もり
+- ✅ 実装計画
+
+### オプション3: 完全なシステムを構築 (80～120時間)
+
+**得られるもの:** 本番対応のマルチエージェントソリューション
+
+1. **フェーズ1:** インフラをデプロイ (上記で完了)
+2. **フェーズ2:** 以下のコード例を使用してエージェントを実装 (30～40時間)
+3. **フェーズ3:** ルーティングサービスを構築 (12～16時間)
+4. **フェーズ4:** フロントエンドUIを作成 (20～30時間)
+5. **フェーズ5:** データパイプラインを設定 (8～12時間)
+6. **フェーズ6:** モニタリングと評価を追加 (10～15時間)
+
+**期待される成果:**
+- ✅ 完全に機能するマルチエージェントシステム
+- ✅ 本番レベルのモニタリング
+- ✅ セキュリティ検証
+- ✅ コスト最適化されたデプロイメント
+
+---
+
+## 📚 アーキテクチャ参照 & 実装ガイド
+
+以下のセクションでは、実装をガイドするための詳細なアーキテクチャパターン、設定例、参照コードを提供します。
+
 ## 初期設定要件
 
 ### 1. 複数エージェントと設定
 
-**目標**: 2つの専門エージェントを展開 - 「顧客エージェント」（顧客サービス）と「在庫エージェント」（在庫管理）
+**目標**: 2つの専門エージェント - "顧客エージェント" (顧客サービス) と "在庫" (在庫管理) をデプロイ
+
+> **📝 注:** 以下のazure.yamlおよびBicep設定は、マルチエージェントデプロイメントを構築する方法を示す**参照例**です。これらのファイルと対応するエージェント実装を作成する必要があります。
 
 #### 設定手順:
 
@@ -334,9 +516,9 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. 複数モデルと容量計画
+### 2. キャパシティプランニングを伴う複数モデル
 
-**目標**: チャットモデル（顧客用）、埋め込みモデル（検索用）、推論モデル（評価用）を適切なクォータ管理で展開
+**目標**: チャットモデル (顧客用)、埋め込みモデル (検索用)、推論モデル (評価用) を適切なクォータ管理でデプロイ
 
 #### マルチリージョン戦略:
 
@@ -391,9 +573,9 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI検索とデータインデックス設定
+### 3. AI Searchとデータインデックス設定
 
-**目標**: AI検索をデータ更新と自動インデックス化に対応させる
+**目標**: データ更新と自動インデックス作成のためにAI Searchを設定
 
 #### プリプロビジョニングフック:
 
@@ -403,7 +585,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Create search service with specific SKU
+# 特定のSKUで検索サービスを作成
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -420,16 +602,16 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Get search service key
+# 検索サービスキーを取得
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Create index schema
+# インデックススキーマを作成
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Upload initial documents
+# 初期ドキュメントをアップロード
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
@@ -461,9 +643,9 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. AI検索用エージェントツール設定
+### 4. AI Search用エージェントツール設定
 
-**目標**: エージェントがAI検索を基盤ツールとして使用できるように設定
+**目標**: AI Searchをグラウンディングツールとして使用するようエージェントを設定
 
 #### エージェント検索ツール実装:
 
@@ -522,13 +704,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # First, search for relevant context
+        # まず、関連するコンテキストを検索する
         search_results = await self.search_tool.search_products(user_query)
         
-        # Prepare context for the LLM
+        # LLMのためのコンテキストを準備する
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Generate response with grounding
+        # 根拠を持って応答を生成する
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -542,7 +724,7 @@ class CustomerAgent:
 
 ### 5. ファイルアップロードストレージ統合
 
-**目標**: エージェントがアップロードされたファイル（マニュアル、文書）をRAGコンテキストで処理できるようにする
+**目標**: エージェントがアップロードされたファイル (マニュアル、文書) をRAGコンテキストで処理できるようにする
 
 #### ストレージ設定:
 
@@ -603,13 +785,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Download file from blob storage
+        # BLOBストレージからファイルをダウンロード
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Extract text using Document Intelligence
+        # Document Intelligenceを使用してテキストを抽出
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -617,19 +799,19 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # Extract text content
+        # テキストコンテンツを抽出
         text_content = ""
         for page in result.pages:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Generate embeddings
+        # 埋め込みを生成
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Index in AI Search
+        # AI検索でインデックス作成
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -641,9 +823,9 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing検索統合
+### 6. Bing Search統合
 
-**目標**: Bing検索機能を追加し、リアルタイム情報を取得
+**目標**: リアルタイム情報のためにBing Search機能を追加
 
 #### Bicepリソース追加:
 
@@ -663,7 +845,7 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Bing検索ツール:
+#### Bing Searchツール:
 
 ```python
 # src/agents/tools/bing_search_tool.py
@@ -707,11 +889,11 @@ class BingSearchTool:
 
 ---
 
-## 監視と可観測性
+## モニタリングと可観測性
 
 ### 7. トレースとApplication Insights
 
-**目標**: トレースログとApplication Insightsを活用した包括的な監視
+**目標**: トレースログとApplication Insightsを用いた包括的なモニタリング
 
 #### Application Insights設定:
 
@@ -780,7 +962,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Configure logging
+        # ログの設定
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -811,7 +993,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Truncate for privacy
+            'query': query[:100],  # プライバシーのために切り詰める
             'results_found': str(results_count > 0)
         }
         
@@ -872,7 +1054,7 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. レッドチームによるセキュリティ検証
+### 8. レッドチームセキュリティ検証
 
 **目標**: エージェントとモデルの自動セキュリティテスト
 
@@ -924,7 +1106,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Calculate overall security score
+        # 全体的なセキュリティスコアを計算する
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -992,8 +1174,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Implementation would send HTTP request to agent endpoint
-        # For demo purposes, returning placeholder
+        # 実装ではエージェントエンドポイントにHTTPリクエストを送信する
+        # デモ目的のため、プレースホルダーを返す
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1015,7 +1197,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Simplified vulnerability detection
+        # 簡易的な脆弱性検出
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1050,14 +1232,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Basic scoring: 100 - (vulnerabilities / total * 100)
+        # 基本スコアリング: 100 - (脆弱性 / 合計 * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Reduce score based on severity
+        # 深刻度に基づいてスコアを減少させる
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1075,13 +1257,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Get agent endpoint from deployment
+# デプロイからエージェントエンドポイントを取得
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Run security scan
+# セキュリティスキャンを実行
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1091,11 +1273,11 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. 評価モデルを使用したエージェント評価
+### 9. グレーダーモデルを用いたエージェント評価
 
-**目標**: 専用の評価モデルを使用した評価システムを展開
+**目標**: 専用のグレーダーモデルを用いた評価システムをデプロイ
 
-#### 評価モデル設定:
+#### グレーダーモデル設定:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1168,7 +1350,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Calculate summary metrics
+        # 要約指標を計算する
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1178,10 +1360,10 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # Get agent response
+        # エージェントの応答を取得する
         agent_response = await self._get_agent_response(user_query)
         
-        # Grade the response
+        # 応答を評価する
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1252,7 +1434,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Parse JSON response
+            # JSON応答を解析する
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1298,7 +1480,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Performance rating
+        # パフォーマンス評価
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1355,9 +1537,9 @@ class AgentEvaluator:
 
 ## カスタマイズと更新
 
-### 10. コンテナアプリのカスタマイズ
+### 10. Container Appのカスタマイズ
 
-**目標**: コンテナアプリの設定を更新し、カスタムUIに置き換える
+**目標**: Container Appの設定を更新し、カスタムUIに置き換える
 
 #### 動的設定:
 
@@ -1402,7 +1584,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### ビルドと展開スクリプト:
+#### ビルドとデプロイスクリプト:
 
 ```bash
 #!/bin/bash
@@ -1410,7 +1592,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Build custom image with environment variables
+# 環境変数を使用してカスタムイメージをビルド
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1418,13 +1600,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Push to Azure Container Registry
+# Azure Container Registry にプッシュ
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Update container app
+# コンテナアプリを更新
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1439,19 +1621,19 @@ echo "Frontend deployed successfully!"
 
 ### よくある問題と解決策
 
-#### 1. コンテナアプリのクォータ制限
+#### 1. Container Appsのクォータ制限
 
-**問題**: リージョンのクォータ制限により展開が失敗する
+**問題**: リージョンクォータ制限によりデプロイが失敗する
 
 **解決策**:
 ```bash
-# Check current quota usage
+# 現在のクォータ使用量を確認する
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Request quota increase
+# クォータ増加をリクエストする
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1462,19 +1644,19 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. モデル展開の有効期限切れ
+#### 2. モデルデプロイメントの有効期限切れ
 
-**問題**: APIバージョンの有効期限切れによりモデル展開が失敗する
+**問題**: APIバージョンの有効期限切れによりモデルデプロイが失敗する
 
 **解決策**:
 ```python
-# scripts/update_model_versions.py
+# スクリプト/update_model_versions.py
 import requests
 import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # This would call Azure OpenAI API to get current versions
+    # 現在のバージョンを取得するためにAzure OpenAI APIを呼び出します
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1491,12 +1673,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Read and update template
+    # テンプレートを読み取り更新します
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Update version in template
+        # テンプレート内のバージョンを更新します
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1513,7 +1695,7 @@ if __name__ == "__main__":
 
 #### 3. ファインチューニング統合
 
-**問題**: AZD展開にファインチューニングモデルを統合する方法
+**問題**: AZDテンプレートからファインチューニングジョブを開始する方法
 
 **解決策**:
 ```python
@@ -1553,8 +1735,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Update deployment to use fine-tuned model
-            # This would call Azure CLI to update the deployment
+            # 微調整されたモデルを使用するようにデプロイを更新
+            # これにより、Azure CLI を呼び出してデプロイを更新します
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1563,234 +1745,76 @@ class FineTuningPipeline:
 
 ---
 
-## FAQと自由な探求
+## FAQとオープンエンドの探求
 
 ### よくある質問
 
-#### Q: 複数エージェントを簡単に展開する方法（デザインパターン）は？
+#### Q: 複数エージェントを簡単にデ
+## ✅ デプロイ可能なARMテンプレート
 
-**A: はい！マルチエージェントパターンを使用してください:**
+> **✨ 実際に存在し、動作します！**  
+> 上記の概念的なコード例とは異なり、このARMテンプレートは**実際に動作するインフラストラクチャのデプロイメント**で、このリポジトリに含まれています。
 
-```yaml
-# azure.yaml - Multi-Agent Configuration
-services:
-  agent-orchestrator:
-    project: ./infra
-    host: containerapp
-    config:
-      AGENTS: |
-        {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
-        }
-```
+### このテンプレートが実際に行うこと
 
-#### Q: 「モデルルーター」をモデルとして展開できますか（コスト影響）？
+[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template)にあるARMテンプレートは、マルチエージェントシステムに必要な**すべてのAzureインフラストラクチャ**をプロビジョニングします。これは**唯一の即時実行可能なコンポーネント**であり、それ以外は開発が必要です。
 
-**A: はい、慎重に検討する必要があります:**
+### ARMテンプレートに含まれるもの
 
-```python
-# Model Router Implementation
-class ModelRouter:
-    def __init__(self):
-        self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
-            "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
-        }
-    
-    async def route_request(self, query: str, context: dict):
-        """Route request to most cost-effective model"""
-        complexity_score = self._analyze_complexity(query)
-        
-        if complexity_score < 0.3:
-            return self.routing_rules["simple_queries"]
-        else:
-            return self.routing_rules["complex_reasoning"]
-    
-    def estimate_cost_savings(self, usage_patterns: dict):
-        """Estimate cost savings from intelligent routing"""
-        # Implementation would calculate potential savings
-        pass
-```
-
-**コスト影響:**
-- **節約**: 単純なクエリで60-80%のコスト削減
-- **トレードオフ**: ルーティングロジックによるわずかな遅延増加
-- **監視**: 精度とコスト指標を追跡
-
-#### Q: azdテンプレートからファインチューニングジョブを開始できますか？
-
-**A: はい、ポストプロビジョニングフックを使用して可能です:**
-
-```bash
-#!/bin/bash
-# hooks/postprovision.sh - Fine-tuning Integration
-
-echo "Starting fine-tuning pipeline..."
-
-# Upload training data
-TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
-  --data-path "./data/fine_tuning/training.jsonl" \
-  --openai-key "$AZURE_OPENAI_API_KEY")
-
-# Start fine-tuning job
-FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
-  --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
-
-# Store job ID for monitoring
-echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
-
-echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
-echo "Monitor progress with: azd hooks run monitor-fine-tuning"
-```
-
-### 高度なシナリオ
-
-#### マルチリージョン展開戦略
-
-```bicep
-// infra/multi-region.bicep
-param regions array = ['eastus2', 'westeurope', 'australiaeast']
-
-resource primaryRegionGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
-  name: '${resourceGroupName}-primary'
-  location: regions[0]
-}
-
-resource secondaryRegionGroups 'Microsoft.Resources/resourceGroups@2023-07-01' = [for i in range(1, length(regions) - 1): {
-  name: '${resourceGroupName}-${regions[i]}'
-  location: regions[i]
-}]
-
-// Traffic Manager for global load balancing
-resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = {
-  name: '${projectName}-tm'
-  location: 'global'
-  properties: {
-    profileStatus: 'Enabled'
-    trafficRoutingMethod: 'Performance'
-    dnsConfig: {
-      relativeName: '${projectName}-global'
-      ttl: 30
-    }
-    monitorConfig: {
-      protocol: 'HTTPS'
-      port: 443
-      path: '/health'
-    }
-  }
-}
-```
-
-#### コスト最適化フレームワーク
-
-```python
-# src/optimization/cost_optimizer.py
-class CostOptimizer:
-    def __init__(self, usage_analytics):
-        self.analytics = usage_analytics
-    
-    def analyze_usage_patterns(self):
-        """Analyze usage to recommend optimizations"""
-        recommendations = []
-        
-        # Model usage analysis
-        model_usage = self.analytics.get_model_usage()
-        for model, usage in model_usage.items():
-            if usage['utilization'] < 0.3:
-                recommendations.append({
-                    'type': 'capacity_reduction',
-                    'resource': model,
-                    'current_capacity': usage['capacity'],
-                    'recommended_capacity': usage['capacity'] * 0.7,
-                    'estimated_savings': usage['monthly_cost'] * 0.3
-                })
-        
-        # Peak time analysis
-        peak_patterns = self.analytics.get_peak_patterns()
-        if peak_patterns['variance'] > 0.6:
-            recommendations.append({
-                'type': 'auto_scaling',
-                'description': 'High variance detected, enable auto-scaling',
-                'estimated_savings': peak_patterns['potential_savings']
-            })
-        
-        return recommendations
-    
-    def implement_recommendations(self, recommendations):
-        """Automatically implement cost optimizations"""
-        for rec in recommendations:
-            if rec['type'] == 'capacity_reduction':
-                self._update_model_capacity(rec)
-            elif rec['type'] == 'auto_scaling':
-                self._enable_auto_scaling(rec)
-```
-
----
-
-## 展開可能なARMテンプレート
-
-小売業向けマルチエージェントソリューションを即座に展開するために、必要なAzureリソースを一括でプロビジョニングする包括的なARMテンプレートを提供しています。
-
-### ARMテンプレートに含まれる内容
-
-[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template)にあるARMテンプレートには以下が含まれます:
+[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template)にあるARMテンプレートには以下が含まれます：
 
 #### **完全なインフラストラクチャ**
-- ✅ **マルチリージョンAzure OpenAI**展開（GPT-4o、GPT-4o-mini、埋め込み、評価モデル）
-- ✅ **Azure AI検索**ベクター検索機能付き
-- ✅ **Azureストレージ**文書とアップロードコンテナ付き
-- ✅ **コンテナアプリ環境**自動スケーリング対応
-- ✅ **エージェントルーターとフロントエンド**コンテナアプリ
-- ✅ **Cosmos DB**チャット履歴の永続化
-- ✅ **Application Insights**包括的な監視
-- ✅ **Key Vault**安全な秘密管理
-- ✅ **文書インテリジェンス**ファイル処理
-- ✅ **Bing検索API**リアルタイム情報取得
+- ✅ **マルチリージョンAzure OpenAI** デプロイメント (GPT-4o, GPT-4o-mini, embeddings, grader)
+- ✅ **Azure AI Search**（ベクター検索機能付き）
+- ✅ **Azure Storage**（ドキュメントおよびアップロード用コンテナ）
+- ✅ **Container Apps Environment**（自動スケーリング対応）
+- ✅ **エージェントルーター＆フロントエンド**コンテナアプリ
+- ✅ **Cosmos DB**（チャット履歴の永続化用）
+- ✅ **Application Insights**（包括的なモニタリング）
+- ✅ **Key Vault**（安全なシークレット管理）
+- ✅ **Document Intelligence**（ファイル処理用）
+- ✅ **Bing Search API**（リアルタイム情報取得用）
 
-#### **展開モード**
-| モード | 使用ケース | リソース | 推定月額コスト |
-|-------|-----------|----------|----------------|
-| **最小** | 開発、テスト | 基本SKU、単一リージョン | $100-370 |
-| **標準** | 実運用、中規模 | 標準SKU、マルチリージョン | $420-1,450 |
-| **プレミアム** | エンタープライズ、大規模 | プレミアムSKU、高可用性設定 | $1,150-3,500 |
+#### **デプロイメントモード**
+| モード | 用途 | リソース | 推定コスト/月 |
+|------|----------|-----------|---------------------|
+| **Minimal** | 開発、テスト | 基本的なSKU、単一リージョン | $100-370 |
+| **Standard** | 本番、適度なスケール | 標準SKU、マルチリージョン | $420-1,450 |
+| **Premium** | エンタープライズ、高スケール | プレミアムSKU、HA構成 | $1,150-3,500 |
 
-### 🎯 クイック展開オプション
+### 🎯 クイックデプロイメントオプション
 
-#### オプション1: ワンクリックAzure展開
+#### オプション1: ワンクリックAzureデプロイメント
 
-[![Azureに展開](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### オプション2: Azure CLI展開
+#### オプション2: Azure CLIデプロイメント
 
 ```bash
-# Clone the repository
+# リポジトリをクローンする
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Make deployment script executable
+# デプロイメントスクリプトを実行可能にする
 chmod +x deploy.sh
 
-# Deploy with default settings (Standard mode)
+# デフォルト設定（標準モード）でデプロイする
 ./deploy.sh -g myResourceGroup
 
-# Deploy for production with premium features
+# プレミアム機能を使用して本番環境にデプロイする
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Deploy minimal version for development
+# 開発用の最小バージョンをデプロイする
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### オプション3: ARMテンプレート直接展開
+#### オプション3: ARMテンプレートの直接デプロイメント
 
 ```bash
-# Create resource group
+# リソースグループを作成する
 az group create --name myResourceGroup --location eastus2
 
-# Deploy template directly
+# テンプレートを直接デプロイする
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1800,7 +1824,7 @@ az deployment group create \
 
 ### テンプレート出力
 
-展開が成功すると以下が提供されます:
+デプロイメントが成功すると、以下が提供されます：
 
 ```json
 {
@@ -1814,31 +1838,31 @@ az deployment group create \
 }
 ```
 
-### 🔧 展開後の設定
+### 🔧 デプロイ後の設定
 
-ARMテンプレートはインフラストラクチャのプロビジョニングを処理します。展開後:
+ARMテンプレートはインフラストラクチャのプロビジョニングを行います。デプロイ後に以下を実行してください：
 
-1. **検索インデックスを設定**:
+1. **検索インデックスの設定**：
    ```bash
-   # Use the provided search schema
+   # 提供された検索スキーマを使用する
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **初期文書をアップロード**:
+2. **初期ドキュメントのアップロード**：
    ```bash
-   # Upload product manuals and knowledge base
+   # 製品マニュアルとナレッジベースをアップロード
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **エージェントコードを展開**:
+3. **エージェントコードのデプロイ**：
    ```bash
-   # Build and deploy actual agent applications
+   # 実際のエージェントアプリケーションを構築してデプロイする
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -1848,7 +1872,7 @@ ARMテンプレートはインフラストラクチャのプロビジョニン�
 
 ### 🎛️ カスタマイズオプション
 
-`azuredeploy.parameters.json`を編集して展開をカスタマイズ:
+`azuredeploy.parameters.json`を編集してデプロイメントをカスタマイズできます：
 
 ```json
 {
@@ -1862,45 +1886,147 @@ ARMテンプレートはインフラストラクチャのプロビジョニン�
 }
 ```
 
-### 📊 展開機能
+### 📊 デプロイメント機能
 
-- ✅ **前提条件の検証**（Azure CLI、クォータ、権限）
-- ✅ **マルチリージョン高可用性**自動フェイルオーバー付き
-- ✅ **包括的な監視**Application InsightsとLog Analytics
-- ✅ **セキュリティベストプラクティス**Key VaultとRBAC
-- ✅ **コスト最適化**設定可能な展開モード
+- ✅ **事前条件の検証**（Azure CLI、クォータ、権限）
+- ✅ **マルチリージョン高可用性**（自動フェイルオーバー付き）
+- ✅ **包括的なモニタリング**（Application InsightsとLog Analytics）
+- ✅ **セキュリティベストプラクティス**（Key VaultとRBAC）
+- ✅ **コスト最適化**（構成可能なデプロイメントモード）
 - ✅ **需要パターンに基づく自動スケーリング**
-- ✅ **ゼロダウンタイム更新**コンテナアプリのリビジョン対応
+- ✅ **ゼロダウンタイム更新**（Container Appsリビジョン）
 
-### 🔍 監視と管理
+### 🔍 モニタリングと管理
 
-展開後、以下を通じてソリューションを監視:
+デプロイ後、以下を通じてソリューションをモニタリングできます：
 
-- **Application Insights**: パフォーマンス指標、依存関係追跡、カスタムテレメトリ
-- **Log Analytics**: すべてのコンポーネントからの集中ログ
-- **Azure Monitor**: リソースの正常性と可用性の監視
-- **コスト管理**: リアルタイムのコスト追跡と予算アラート
+- **Application Insights**：パフォーマンスメトリクス、依存関係トラッキング、カスタムテレメトリ
+- **Log Analytics**：すべてのコンポーネントからの集中ログ
+- **Azure Monitor**：リソースの健全性と可用性のモニタリング
+- **コスト管理**：リアルタイムのコスト追跡と予算アラート
 
 ---
 
 ## 📚 完全な実装ガイド
 
-このシナリオ文書とARMテンプレートを組み合わせることで、実運用可能なマルチエージェント顧客サポートソリューションを展開するために必要なすべてを提供します。実装内容は以下をカバーします:
+このシナリオドキュメントとARMテンプレートを組み合わせることで、本番対応のマルチエージェント顧客サポートソリューションをデプロイするために必要なすべてを提供します。実装には以下が含まれます：
 
 ✅ **アーキテクチャ設計** - コンポーネント間の関係を含む包括的なシステム設計  
-✅ **インフラストラクチャプロビジョニング** - ワンクリック展開用の完全なARMテンプレート  
-✅ **エージェント設定** - 顧客エージェントと在庫エージェントの詳細なセットアップ  
-✅ **マルチモデル展開** - リージョン間の戦略的モデル配置  
-✅ **検索統合** - ベクター機能とデータインデックス化を備えたAI検索  
-✅ **セキュリティ実装** - レッドチーム、脆弱性スキャン、安全なプラクティス  
-✅ **監視と評価** - 包括的なテレメトリとエージェント評価フレームワーク  
-✅ **実運用準備** - 高可用性と災害復旧を備えたエンタープライズ展開  
+✅ **インフラストラクチャのプロビジョニング** - ワンクリックデプロイメント用の完全なARMテンプレート  
+✅ **エージェント設定** - 顧客および在庫エージェントの詳細なセットアップ  
+✅ **マルチモデルデプロイメント** - リージョン間の戦略的なモデル配置  
+✅ **検索統合** - ベクター機能とデータインデックスを備えたAI検索  
+✅ **セキュリティ実装** - レッドチーミング、脆弱性スキャン、安全なプラクティス  
+✅ **モニタリングと評価** - 包括的なテレメトリとエージェント評価フレームワーク  
+✅ **本番対応** - 高可用性と災害復旧を備えたエンタープライズグレードのデプロイメント  
 ✅ **コスト最適化** - インテリジェントルーティングと使用量ベースのスケーリング  
-✅ **トラブルシューティングガイド** - よくある問題と解決策
-
-この包括的なシナリオは、小売業者向けのマルチエージェントソリューションのすべての要件をカバーし、AZDを使用した実運用可能なAIアプリケーションを構築するための実践的な実装ガイド、トラブルシューティングサポート、および高度な探求トピックを提供します。
+✅ **トラブルシューティングガイド** - 一般的な問題と解決策
 
 ---
 
+## 📊 まとめ: 学んだこと
+
+### カバーされたアーキテクチャパターン
+
+✅ **マルチエージェントシステム設計** - 専用モデルを持つ特化型エージェント（顧客＋在庫）  
+✅ **マルチリージョンデプロイメント** - コスト最適化と冗長性のための戦略的モデル配置  
+✅ **RAGアーキテクチャ** - ベクター埋め込みを使用したAI検索統合で根拠のある応答を提供  
+✅ **エージェント評価** - 品質評価のための専用グレーダーモデル  
+✅ **セキュリティフレームワーク** - レッドチーミングと脆弱性スキャンパターン  
+✅ **コスト最適化** - モデルルーティングとキャパシティプランニング戦略  
+✅ **本番モニタリング** - カスタムテレメトリを備えたApplication Insights  
+
+### このドキュメントが提供するもの
+
+| コンポーネント | ステータス | 参照先 |
+|-----------|--------|------------------|
+| **インフラストラクチャテンプレート** | ✅ デプロイ可能 | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **アーキテクチャ図** | ✅ 完成 | 上記のMermaid図 |
+| **コード例** | ✅ 参考実装 | 本ドキュメント全体 |
+| **構成パターン** | ✅ 詳細ガイダンス | 上記セクション1-10 |
+| **エージェント実装** | 🔨 自分で構築 | ~40時間の開発 |
+| **フロントエンドUI** | 🔨 自分で構築 | ~25時間の開発 |
+| **データパイプライン** | 🔨 自分で構築 | ~10時間の開発 |
+
+### 現実チェック: 実際に存在するもの
+
+**リポジトリ内（すぐに利用可能）：**
+- ✅ 15以上のAzureサービスをデプロイするARMテンプレート（azuredeploy.json）
+- ✅ 検証付きデプロイスクリプト（deploy.sh）
+- ✅ パラメータ構成（azuredeploy.parameters.json）
+
+**ドキュメントで参照されるもの（自分で作成）：**
+- 🔨 エージェント実装コード（約30-40時間）
+- 🔨 ルーティングサービス（約12-16時間）
+- 🔨 フロントエンドアプリケーション（約20-30時間）
+- 🔨 データセットアップスクリプト（約8-12時間）
+- 🔨 モニタリングフレームワーク（約10-15時間）
+
+### 次のステップ
+
+#### インフラストラクチャをデプロイしたい場合（30分）
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup
+```
+
+#### 完全なシステムを構築したい場合（80-120時間）
+1. ✅ このアーキテクチャドキュメントを読む（2-3時間）
+2. ✅ ARMテンプレートを使用してインフラをデプロイ（30分）
+3. 🔨 参考コードパターンを使用してエージェントを実装（約40時間）
+4. 🔨 FastAPI/Expressを使用してルーティングサービスを構築（約15時間）
+5. 🔨 React/Vueを使用してフロントエンドUIを作成（約25時間）
+6. 🔨 データパイプラインと検索インデックスを構成（約10時間）
+7. 🔨 モニタリングと評価を追加（約15時間）
+8. ✅ テスト、セキュリティ、最適化（約10時間）
+
+#### マルチエージェントパターンを学びたい場合（学習）
+- 📖 アーキテクチャ図とコンポーネントの関係を確認
+- 📖 SearchTool、BingTool、AgentEvaluatorのコード例を学習
+- 📖 マルチリージョンデプロイメント戦略を理解
+- 📖 評価とセキュリティフレームワークを学ぶ
+- 📖 自分のプロジェクトにパターンを適用
+
+### 重要なポイント
+
+1. **インフラとアプリケーションの違い** - ARMテンプレートはインフラを提供し、エージェントは開発が必要
+2. **マルチリージョン戦略** - 戦略的なモデル配置でコスト削減と信頼性向上
+3. **評価フレームワーク** - 専用のグレーダーモデルで継続的な品質評価を実現
+4. **セキュリティ第一** - レッドチーミングと脆弱性スキャンは本番環境で必須
+5. **コスト最適化** - GPT-4oとGPT-4o-mini間のインテリジェントルーティングで60-80%節約
+
+### 推定コスト
+
+| デプロイメントモード | インフラ/月 | 開発（一回限り） | 初月合計 |
+|-----------------|---------------------|------------------------|-------------------|
+| **Minimal** | $100-370 | $15K-25K (80-120時間) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (同じ労力) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (同じ労力) | $16.2K-28.5K |
+
+**注:** 新規実装ではインフラコストは総コストの5%未満です。開発作業が主要な投資となります。
+
+### 関連リソース
+
+- 📚 [ARMテンプレートデプロイメントガイド](retail-multiagent-arm-template/README.md) - インフラセットアップ
+- 📚 [Azure OpenAIベストプラクティス](https://learn.microsoft.com/azure/ai-services/openai/) - モデルデプロイメント
+- 📚 [AI検索ドキュメント](https://learn.microsoft.com/azure/search/) - ベクター検索構成
+- 📚 [コンテナアプリパターン](https://learn.microsoft.com/azure/container-apps/) - マイクロサービスデプロイメント
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - モニタリングセットアップ
+
+### 質問や問題がありますか？
+
+- 🐛 [問題を報告](https://github.com/microsoft/AZD-for-beginners/issues) - テンプレートのバグやドキュメントの誤り
+- 💬 [GitHubディスカッション](https://github.com/microsoft/AZD-for-beginners/discussions) - アーキテクチャに関する質問
+- 📖 [FAQ](../../resources/faq.md) - よくある質問への回答
+- 🔧 [トラブルシューティングガイド](../../docs/troubleshooting/common-issues.md) - デプロイメントの問題
+
+---
+
+**この包括的なシナリオは、Azure Developer CLIを使用して高度な顧客サポートソリューションを構築するための、インフラテンプレート、実装ガイダンス、そして本番環境向けベストプラクティスを備えたエンタープライズグレードのアーキテクチャ設計図を提供します。**
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確な表現が含まれる可能性があります。元の言語で記載された原文を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用に起因する誤解や誤認について、当社は一切の責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文（元の言語で記載された文書）が信頼できる情報源とみなされるべきです。重要な情報については、専門の人間による翻訳をお勧めします。この翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いません。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,32 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T14:31:35+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-19T19:12:40+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "ko"
 }
 -->
 # AZD를 활용한 프로덕션 AI 워크로드 모범 사례
 
-**챕터 탐색:**
-- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+**챕터 네비게이션:**
+- **📚 코스 홈**: [AZD 초보자 가이드](../../README.md)
 - **📖 현재 챕터**: 챕터 8 - 프로덕션 및 엔터프라이즈 패턴
 - **⬅️ 이전 챕터**: [챕터 7: 문제 해결](../troubleshooting/debugging.md)
 - **⬅️ 관련 항목**: [AI 워크숍 실습](ai-workshop-lab.md)
-- **🎯 코스 완료**: [AZD 초보자용](../../README.md)
+- **🎯 코스 완료**: [AZD 초보자 가이드](../../README.md)
 
 ## 개요
 
-이 가이드는 Azure Developer CLI (AZD)를 사용하여 프로덕션 준비가 완료된 AI 워크로드를 배포하기 위한 포괄적인 모범 사례를 제공합니다. Azure AI Foundry Discord 커뮤니티와 실제 고객 배포에서 얻은 피드백을 바탕으로, 프로덕션 AI 시스템에서 가장 일반적인 문제를 해결하는 방법을 다룹니다.
+이 가이드는 Azure Developer CLI (AZD)를 사용하여 프로덕션 준비가 완료된 AI 워크로드를 배포하기 위한 종합적인 모범 사례를 제공합니다. Microsoft Foundry Discord 커뮤니티와 실제 고객 배포 사례에서 얻은 피드백을 바탕으로, 프로덕션 AI 시스템에서 가장 흔히 발생하는 문제를 해결하는 데 초점을 맞추고 있습니다.
 
 ## 주요 해결 과제
 
-커뮤니티 설문조사 결과를 바탕으로, 개발자가 직면하는 주요 과제는 다음과 같습니다:
+커뮤니티 설문조사 결과에 따르면, 개발자들이 직면하는 주요 과제는 다음과 같습니다:
 
 - **45%**가 다중 서비스 AI 배포에 어려움을 겪음
-- **38%**가 자격 증명 및 비밀 관리에 문제를 겪음  
-- **35%**가 프로덕션 준비 및 확장성을 어렵게 느낌
+- **38%**가 자격 증명 및 비밀 관리 문제를 경험함  
+- **35%**가 프로덕션 준비 및 확장성 문제를 겪음
 - **32%**가 비용 최적화 전략이 필요함
 - **29%**가 모니터링 및 문제 해결 개선이 필요함
 
@@ -299,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. 캐싱 전략
 
-**AI 응답을 위한 Redis 캐시**:
+**AI 응답을 위한 Redis Cache**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -367,12 +367,12 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 비용 최적화
 
-### 1. 리소스 적정 크기 조정
+### 1. 리소스 적정화
 
 **환경별 구성**:
 
 ```bash
-# Development environment
+# 개발 환경
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# 운영 환경
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI 비용 관리**:
 
 ```typescript
-// Application-level token optimization
+// 애플리케이션 수준의 토큰 최적화
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // 사용자 입력이 아닌 컨텍스트를 잘라내기
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,15 +453,15 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // 대략적인 추정: 1 토큰 ≈ 4 문자
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## 모니터링 및 관찰 가능성
+## 모니터링 및 가시성
 
-### 1. 포괄적인 애플리케이션 인사이트
+### 1. 종합적인 애플리케이션 인사이트
 
 ```bicep
 // Application Insights with advanced features
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# 모든 필수 서비스가 실행 중인지 확인
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# OpenAI 모델 배포를 검증
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# AI 서비스 연결 테스트
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -844,14 +844,14 @@ echo "Infrastructure validation completed successfully!"
 - [ ] 비밀이 Key Vault에 저장됨
 - [ ] 프라이빗 엔드포인트 구성 완료
 - [ ] 네트워크 보안 그룹 구현
-- [ ] 최소 권한 RBAC 설정
+- [ ] 최소 권한 기반 RBAC
 - [ ] 공용 엔드포인트에 WAF 활성화
 
 ### 성능 ✅
 - [ ] 자동 확장 구성 완료
 - [ ] 캐싱 구현 완료
 - [ ] 로드 밸런싱 설정 완료
-- [ ] 정적 콘텐츠를 위한 CDN 사용
+- [ ] 정적 콘텐츠를 위한 CDN
 - [ ] 데이터베이스 연결 풀링
 - [ ] 토큰 사용 최적화
 
@@ -861,31 +861,31 @@ echo "Infrastructure validation completed successfully!"
 - [ ] 알림 규칙 설정
 - [ ] 대시보드 생성
 - [ ] 상태 점검 구현
-- [ ] 로그 보존 정책 설정
+- [ ] 로그 보존 정책
 
 ### 신뢰성 ✅
-- [ ] 다중 지역 배포 완료
-- [ ] 백업 및 복구 계획 수립
-- [ ] 서킷 브레이커 구현
+- [ ] 다중 지역 배포
+- [ ] 백업 및 복구 계획
+- [ ] 회로 차단기 구현
 - [ ] 재시도 정책 구성
 - [ ] 점진적 성능 저하 처리
-- [ ] 상태 점검 엔드포인트 구현
+- [ ] 상태 점검 엔드포인트
 
 ### 비용 관리 ✅
 - [ ] 예산 알림 설정
-- [ ] 리소스 적정 크기 조정
+- [ ] 리소스 적정화
 - [ ] 개발/테스트 할인 적용
 - [ ] 예약 인스턴스 구매
-- [ ] 비용 모니터링 대시보드 생성
+- [ ] 비용 모니터링 대시보드
 - [ ] 정기적인 비용 검토
 
-### 컴플라이언스 ✅
+### 규정 준수 ✅
 - [ ] 데이터 거주 요구사항 충족
-- [ ] 감사 로그 활성화
-- [ ] 컴플라이언스 정책 적용
+- [ ] 감사 로깅 활성화
+- [ ] 규정 준수 정책 적용
 - [ ] 보안 기준 구현
 - [ ] 정기적인 보안 평가
-- [ ] 사고 대응 계획 수립
+- [ ] 사고 대응 계획
 
 ## 성능 벤치마크
 
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### 부하 테스트
 
 ```bash
-# Load testing script for AI applications
+# AI 애플리케이션을 위한 부하 테스트 스크립트
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,43 +913,45 @@ python scripts/load_test.py \
 
 ## 🤝 커뮤니티 모범 사례
 
-Azure AI Foundry Discord 커뮤니티의 피드백을 기반으로:
+Microsoft Foundry Discord 커뮤니티 피드백 기반:
 
 ### 커뮤니티의 주요 추천 사항:
 
 1. **작게 시작하고 점진적으로 확장**: 기본 SKU로 시작하고 실제 사용량에 따라 확장
-2. **모든 것을 모니터링**: 초기부터 포괄적인 모니터링 설정
-3. **보안을 자동화**: 인프라 코드를 사용하여 일관된 보안 유지
+2. **모든 것을 모니터링**: 첫날부터 종합적인 모니터링 설정
+3. **보안을 자동화**: 일관된 보안을 위해 코드로 인프라 관리
 4. **철저히 테스트**: 파이프라인에 AI 전용 테스트 포함
 5. **비용 계획**: 토큰 사용량을 모니터링하고 초기부터 예산 알림 설정
 
 ### 피해야 할 일반적인 실수:
 
-- ❌ 코드에 API 키를 하드코딩
-- ❌ 적절한 모니터링 설정 생략
+- ❌ 코드에 API 키 하드코딩
+- ❌ 적절한 모니터링 미설정
 - ❌ 비용 최적화를 무시
-- ❌ 실패 시나리오 테스트 생략
+- ❌ 실패 시나리오 테스트 미실시
 - ❌ 상태 점검 없이 배포
 
 ## 추가 자료
 
 - **Azure Well-Architected Framework**: [AI 워크로드 가이드](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry 문서**: [공식 문서](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Foundry 문서**: [공식 문서](https://learn.microsoft.com/azure/ai-studio/)
 - **커뮤니티 템플릿**: [Azure 샘플](https://github.com/Azure-Samples)
 - **Discord 커뮤니티**: [#Azure 채널](https://discord.gg/microsoft-azure)
 
 ---
 
-**챕터 탐색:**
-- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+**챕터 네비게이션:**
+- **📚 코스 홈**: [AZD 초보자 가이드](../../README.md)
 - **📖 현재 챕터**: 챕터 8 - 프로덕션 및 엔터프라이즈 패턴
 - **⬅️ 이전 챕터**: [챕터 7: 문제 해결](../troubleshooting/debugging.md)
 - **⬅️ 관련 항목**: [AI 워크숍 실습](ai-workshop-lab.md)
-- **🎆 코스 완료**: [AZD 초보자용](../../README.md)
+- **🎆 코스 완료**: [AZD 초보자 가이드](../../README.md)
 
 **기억하세요**: 프로덕션 AI 워크로드는 신중한 계획, 모니터링, 지속적인 최적화가 필요합니다. 이 패턴을 시작점으로 삼아 특정 요구사항에 맞게 조정하세요.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확한 내용이 포함될 수 있습니다. 원본 문서의 원어 버전을 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서를 해당 언어로 작성된 상태에서 권위 있는 자료로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

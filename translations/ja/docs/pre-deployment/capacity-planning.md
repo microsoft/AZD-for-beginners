@@ -1,71 +1,78 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:26:41+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-19T18:17:19+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "ja"
 }
 -->
-# 容量計画: Azureのクォータと制限を理解する - Azureリソースの利用可能性と制限
+# キャパシティプランニング - Azureリソースの利用可能性と制限
+
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD初心者向け](../../README.md)
+- **📖 現在の章**: 第6章 - デプロイ前の検証と計画
+- **⬅️ 前の章**: [第5章: マルチエージェントAIソリューション](../../examples/retail-scenario.md)
+- **➡️ 次へ**: [SKU選択](sku-selection.md)
+- **🚀 次の章**: [第7章: トラブルシューティング](../troubleshooting/common-issues.md)
 
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLIを使用して展開する前にAzureリソースの容量を計画・検証する方法を学びます。クォータ、利用可能性、地域の制限を評価し、コストとパフォーマンスを最適化しながら成功する展開を確保する方法を解説します。さまざまなアプリケーションアーキテクチャやスケーリングシナリオに対応する容量計画の技術を習得しましょう。
+この包括的なガイドでは、Azure Developer CLIを使用してデプロイする前にAzureリソースのキャパシティを計画・検証する方法を学びます。クォータ、利用可能性、地域の制限を評価し、コストとパフォーマンスを最適化しながら成功するデプロイを実現する方法を習得します。さまざまなアプリケーションアーキテクチャやスケーリングシナリオに対応するキャパシティプランニング技術をマスターしましょう。
 
 ## 学習目標
 
-このガイドを完了することで以下を学べます:
+このガイドを完了することで、以下を学べます:
 - Azureのクォータ、制限、地域の利用可能性の制約を理解する
-- 展開前にリソースの利用可能性と容量を確認する技術を習得する
-- 自動化された容量検証と監視戦略を実装する
-- 適切なリソースサイズとスケーリングを考慮したアプリケーション設計を行う
-- 賢明な容量計画を通じてコスト最適化戦略を適用する
-- クォータ使用量とリソース利用可能性に関するアラートと監視を設定する
+- デプロイ前にリソースの利用可能性とキャパシティを確認する技術を習得する
+- 自動化されたキャパシティ検証と監視戦略を実装する
+- 適切なリソースサイズとスケーリングを考慮したアプリケーションを設計する
+- インテリジェントなキャパシティプランニングによるコスト最適化戦略を適用する
+- クォータ使用量とリソースの利用可能性に関するアラートと監視を設定する
 
 ## 学習成果
 
 完了後、以下ができるようになります:
-- 展開前にAzureリソースの容量要件を評価・検証する
-- 容量確認とクォータ監視のための自動スクリプトを作成する
+- デプロイ前にAzureリソースのキャパシティ要件を評価・検証する
+- キャパシティチェックとクォータ監視のための自動スクリプトを作成する
 - 地域およびサブスクリプションの制限を考慮したスケーラブルなアーキテクチャを設計する
-- ワークロードタイプに応じたコスト効率の良いリソースサイズ戦略を実装する
-- 容量関連の問題に対するプロアクティブな監視とアラートを設定する
-- 適切な容量分配を考慮したマルチ地域展開を計画する
+- 異なるワークロードタイプに対するコスト効率の良いリソースサイズ戦略を実装する
+- キャパシティ関連の問題に対するプロアクティブな監視とアラートを設定する
+- 適切なキャパシティ分配を考慮したマルチ地域デプロイを計画する
 
-## 容量計画が重要な理由
+## キャパシティプランニングが重要な理由
 
-アプリケーションを展開する前に以下を確認する必要があります:
-- **必要なリソースの十分なクォータ**
-- **ターゲット地域でのリソースの利用可能性**
-- **サブスクリプションタイプに応じたサービス階層の利用可能性**
-- **予想されるトラフィックに対応するネットワーク容量**
-- **適切なサイズ設定によるコスト最適化**
+アプリケーションをデプロイする前に以下を確認する必要があります:
+- 必要なリソースに対する**十分なクォータ**
+- ターゲット地域での**リソースの利用可能性**
+- サブスクリプションタイプに応じた**サービス階層の利用可能性**
+- 予想されるトラフィックに対する**ネットワークキャパシティ**
+- 適切なサイズ設定による**コスト最適化**
 
 ## 📊 Azureのクォータと制限を理解する
 
 ### 制限の種類
-1. **サブスクリプションレベルのクォータ** - サブスクリプションごとの最大リソース数
-2. **地域クォータ** - 地域ごとの最大リソース数
+1. **サブスクリプションレベルのクォータ** - サブスクリプションごとの最大リソース
+2. **地域クォータ** - 地域ごとの最大リソース
 3. **リソース固有の制限** - 個々のリソースタイプに対する制限
 4. **サービス階層の制限** - サービスプランに基づく制限
 
 ### 一般的なリソースクォータ
 ```bash
-# Check current quota usage
+# 現在のクォータ使用量を確認する
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# 特定のリソースクォータを確認する
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## 展開前の容量チェック
+## デプロイ前のキャパシティチェック
 
-### 自動化された容量検証スクリプト
+### 自動キャパシティ検証スクリプト
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - デプロイ前にAzureの容量を検証
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# クォータ使用量を確認する関数
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,27 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# さまざまなリソースクォータを確認
+check_quota "compute" 4      # 4つのvCPUが必要
+check_quota "storage" 2      # 2つのストレージアカウントが必要
+check_quota "network" 1      # 1つの仮想ネットワークが必要
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### サービス固有の容量チェック
+### サービス固有のキャパシティチェック
 
-#### App Serviceの容量
+#### App Serviceのキャパシティ
 ```bash
-# Check App Service Plan availability
+# App Service Planの利用可能性を確認する
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # リージョン内の利用可能なSKUを確認する
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # 代替リージョンを提案する
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # 現在の使用状況を確認する
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# 使用状況
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### データベースの容量
+#### データベースのキャパシティ
 ```bash
-# Check PostgreSQL capacity
+# PostgreSQLの容量を確認する
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # SKUが利用可能か確認する
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # 利用可能なSKUを表示する
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Cosmos DBの容量を確認する
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # リージョンの利用可能性を確認する
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # サーバーレスがサポートされているか確認する（必要に応じて）
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -211,15 +218,15 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Appsの容量
+#### コンテナアプリのキャパシティ
 ```bash
-# Check Container Apps capacity
+# コンテナアプリの容量を確認する
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # コンテナアプリが地域で利用可能か確認する
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # 現在の環境数を確認する
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # コンテナアプリは地域ごとに15の環境の制限がある
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # 利用可能な地域を表示する
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,7 +263,7 @@ check_container_apps_capacity() {
 
 ### 地域ごとのサービス利用可能性
 ```bash
-# Check service availability across regions
+# 地域全体でのサービスの利用可能性を確認する
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# すべてのサービスを確認する
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### 地域選択の推奨事項
 ```bash
-# Recommend optimal regions based on requirements
+# 要件に基づいて最適なリージョンを推奨する
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "低コスト" | "パフォーマンス" | "コンプライアンス"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### リソースコストの見積もり
 ```bash
-# Estimate deployment costs
+# 展開コストを見積もる
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # 見積もり用の一時的なリソースグループを作成する
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # 検証モードでインフラを展開する
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # 一時的なリソースグループをクリーンアップする
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,7 +363,7 @@ estimate_costs() {
 
 ### SKU最適化の推奨事項
 ```bash
-# Recommend optimal SKUs based on requirements
+# 要件に基づいて最適なSKUを推奨する
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -424,27 +431,27 @@ recommend_sku() {
 ### 包括的な事前チェックスクリプト
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - デプロイ前の完全な検証
 
 set -e
 
-# Configuration
+# 設定
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# 出力用の色
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # 色なし
 
-# Logging functions
+# ログ記録関数
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# 設定を読み込む
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# チェック1: 認証
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# チェック2: リージョンの利用可能性
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# チェック3: クォータの検証
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPUクォータ
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# ストレージアカウントクォータ
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# チェック4: サービスの利用可能性
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# チェック5: ネットワーク容量
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# チェック6: リソース命名の検証
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# チェック7: コスト見積もり
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# チェック8: テンプレートの検証
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# 最終サマリー
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -654,18 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 展開中の容量監視
+## 📈 デプロイ中のキャパシティ監視
 
-### リアルタイム容量監視
+### リアルタイムキャパシティ監視
 ```bash
-# Monitor capacity during deployment
+# 展開中の容量を監視する
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # 展開状況を確認する
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # 現在のリソース使用状況を確認する
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -711,18 +718,18 @@ hooks:
 
 ## ベストプラクティス
 
-1. **新しい地域に展開する前に必ず容量チェックを実施する**
+1. **新しい地域にデプロイする前に必ずキャパシティチェックを実行する**
 2. **クォータ使用量を定期的に監視して予期せぬ問題を防ぐ**
-3. **将来の容量ニーズを考慮して成長を計画する**
-4. **コスト見積もりツールを使用して請求のショックを回避する**
-5. **チームのために容量要件を文書化する**
-6. **CI/CDパイプラインで容量検証を自動化する**
-7. **地域フェイルオーバーの容量要件を考慮する**
+3. **将来のキャパシティニーズを考慮して計画する**
+4. **コスト見積もりツールを使用して請求ショックを回避する**
+5. **チームのためにキャパシティ要件を文書化する**
+6. **CI/CDパイプラインでキャパシティ検証を自動化する**
+7. **地域フェイルオーバーのキャパシティ要件を考慮する**
 
 ## 次のステップ
 
 - [SKU選択ガイド](sku-selection.md) - 最適なサービス階層を選択する
-- [事前チェック](preflight-checks.md) - 自動化された検証スクリプト
+- [事前チェック](preflight-checks.md) - 自動検証スクリプト
 - [チートシート](../../resources/cheat-sheet.md) - クイックリファレンスコマンド
 - [用語集](../../resources/glossary.md) - 用語と定義
 
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:  
-この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。元の言語で記載された文書を正式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いません。
+この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の利用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

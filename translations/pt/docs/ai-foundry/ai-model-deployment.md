@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T14:48:01+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-19T20:01:00+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "pt"
 }
@@ -12,16 +12,16 @@ CO_OP_TRANSLATOR_METADATA:
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
 - **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento com Foco em IA
-- **⬅️ Anterior**: [Integração com Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Anterior**: [Integração com Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Próximo**: [Laboratório de IA](ai-workshop-lab.md)
 - **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../getting-started/configuration.md)
 
-Este guia fornece instruções detalhadas para implementar modelos de IA utilizando templates do AZD, abordando desde a seleção de modelos até padrões de implementação em produção.
+Este guia fornece instruções detalhadas para implementar modelos de IA utilizando templates AZD, abordando desde a seleção de modelos até padrões de implementação em produção.
 
 ## Índice
 
 - [Estratégia de Seleção de Modelos](../../../../docs/ai-foundry)
-- [Configuração do AZD para Modelos de IA](../../../../docs/ai-foundry)
+- [Configuração AZD para Modelos de IA](../../../../docs/ai-foundry)
 - [Padrões de Implementação](../../../../docs/ai-foundry)
 - [Gestão de Modelos](../../../../docs/ai-foundry)
 - [Considerações para Produção](../../../../docs/ai-foundry)
@@ -59,16 +59,16 @@ services:
         ]
 ```
 
-### Planeamento de Capacidade dos Modelos
+### Planeamento de Capacidade de Modelos
 
 | Tipo de Modelo | Caso de Uso | Capacidade Recomendada | Considerações de Custo |
-|----------------|------------|------------------------|------------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Custo acessível para a maioria das cargas de trabalho |
+|----------------|-------------|------------------------|------------------------|
+| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Rentável para a maioria das cargas de trabalho |
 | GPT-4 | Raciocínio complexo | 20-100 TPM | Custo mais elevado, ideal para funcionalidades premium |
 | Text-embedding-ada-002 | Pesquisa, RAG | 30-120 TPM | Essencial para pesquisa semântica |
 | Whisper | Texto a partir de áudio | 10-50 TPM | Cargas de trabalho de processamento de áudio |
 
-## Configuração do AZD para Modelos de IA
+## Configuração AZD para Modelos de IA
 
 ### Configuração de Templates Bicep
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Configure o ambiente da sua aplicação:
 
 ```bash
-# .env configuration
+# Configuração do .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -236,7 +236,7 @@ Acompanhe as versões dos modelos na sua configuração AZD:
 
 ### Atualizações de Modelos
 
-Utilize hooks do AZD para atualizações de modelos:
+Utilize hooks AZD para atualizações de modelos:
 
 ```bash
 #!/bin/bash
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Calcule a capacidade necessária com base nos padrões de uso:
 
 ```python
-# Capacity calculation example
+# Exemplo de cálculo de capacidade
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Exemplo de utilização
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -304,7 +304,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Configuração de Autoescalonamento
 
-Configure autoescalonamento para Container Apps:
+Configure o autoescalonamento para Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -342,7 +342,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Otimização de Custos
 
-Implemente controlos de custo:
+Implemente controlos de custos:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -376,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integração com Application Insights
 
-Configure monitorização para cargas de trabalho de IA:
+Configure a monitorização para cargas de trabalho de IA:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Acompanhe métricas específicas de IA:
 
 ```python
-# Custom telemetry for AI models
+# Telemetria personalizada para modelos de IA
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implemente monitorização de saúde para serviços de IA:
 
 ```python
-# Health check endpoints
+# Endpoints de verificação de saúde
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Testar a conexão com a OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,7 +482,7 @@ async def check_ai_models():
 
 ## Próximos Passos
 
-1. **Revise o [Guia de Integração com Azure AI Foundry](azure-ai-foundry-integration.md)** para padrões de integração de serviços
+1. **Revise o [Guia de Integração com Microsoft Foundry](microsoft-foundry-integration.md)** para padrões de integração de serviços
 2. **Complete o [Laboratório de IA](ai-workshop-lab.md)** para experiência prática
 3. **Implemente [Práticas de IA em Produção](production-ai-practices.md)** para implementações empresariais
 4. **Explore o [Guia de Resolução de Problemas de IA](../troubleshooting/ai-troubleshooting.md)** para questões comuns
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
 - **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento com Foco em IA
-- **⬅️ Anterior**: [Integração com Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Anterior**: [Integração com Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Próximo**: [Laboratório de IA](ai-workshop-lab.md)
 - **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original no seu idioma nativo deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes do uso desta tradução.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
