@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T13:26:01+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-19T11:08:20+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "fr"
 }
@@ -14,16 +14,16 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Chapitre Actuel** : Chapitre 7 - Résolution de Problèmes & Débogage
 - **⬅️ Précédent** : [Problèmes Courants](common-issues.md)
 - **➡️ Suivant** : [Résolution de Problèmes Spécifiques à l'IA](ai-troubleshooting.md)
-- **🚀 Chapitre Suivant** : [Chapitre 8 : Modèles de Production & Entreprise](../ai-foundry/production-ai-practices.md)
+- **🚀 Chapitre Suivant** : [Chapitre 8 : Modèles de Production & Entreprise](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduction
 
-Ce guide complet propose des stratégies avancées de débogage, des outils et des techniques pour diagnostiquer et résoudre des problèmes complexes liés aux déploiements avec Azure Developer CLI. Apprenez des méthodologies de résolution de problèmes systématiques, des techniques d'analyse des journaux, des profils de performance et des outils de diagnostic avancés pour résoudre efficacement les problèmes de déploiement et d'exécution.
+Ce guide complet propose des stratégies avancées de débogage, des outils et des techniques pour diagnostiquer et résoudre des problèmes complexes liés aux déploiements avec Azure Developer CLI. Apprenez des méthodologies de résolution de problèmes systématiques, des techniques d'analyse des journaux, du profilage de performance et des outils de diagnostic avancés pour résoudre efficacement les problèmes de déploiement et d'exécution.
 
 ## Objectifs d'Apprentissage
 
 En suivant ce guide, vous allez :
-- Maîtriser des méthodologies de débogage systématique pour les problèmes liés à Azure Developer CLI
+- Maîtriser les méthodologies de débogage systématique pour les problèmes liés à Azure Developer CLI
 - Comprendre la configuration avancée des journaux et les techniques d'analyse des journaux
 - Mettre en œuvre des stratégies de profilage et de surveillance des performances
 - Utiliser les outils et services de diagnostic Azure pour résoudre des problèmes complexes
@@ -35,7 +35,7 @@ En suivant ce guide, vous allez :
 À la fin, vous serez capable de :
 - Appliquer la méthodologie TRIAGE pour déboguer systématiquement des problèmes complexes de déploiement
 - Configurer et analyser des informations complètes de journalisation et de traçage
-- Utiliser Azure Monitor, Application Insights et des outils de diagnostic efficacement
+- Utiliser efficacement Azure Monitor, Application Insights et les outils de diagnostic
 - Déboguer de manière autonome les problèmes de connectivité réseau, d'authentification et de permissions
 - Mettre en œuvre des stratégies de surveillance et d'optimisation des performances
 - Créer des scripts de débogage personnalisés et des automatisations pour les problèmes récurrents
@@ -204,7 +204,7 @@ debug_database() {
 
 ## 🔬 Débogage des Performances
 
-### Surveillance des Performances Applicatives
+### Surveillance des Performances des Applications
 ```bash
 # Enable Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
@@ -519,7 +519,7 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Procédures de Débogage en Urgence
+## 🚨 Procédures de Débogage en Cas d'Urgence
 
 ### Réponse aux Problèmes en Production
 ```bash
@@ -696,7 +696,7 @@ hooks:
 - [Planification de la Capacité](../pre-deployment/capacity-planning.md) - Planifiez les besoins en ressources
 - [Sélection des SKU](../pre-deployment/sku-selection.md) - Choisissez les niveaux de service appropriés
 - [Vérifications Préliminaires](../pre-deployment/preflight-checks.md) - Validation avant déploiement
-- [Aide-Mémoire](../../resources/cheat-sheet.md) - Commandes de référence rapide
+- [Fiche Mémo](../../resources/cheat-sheet.md) - Commandes de référence rapide
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, une traduction humaine professionnelle est recommandée. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

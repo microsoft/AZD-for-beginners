@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T12:35:56+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-19T09:47:16+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "zh"
 }
@@ -11,24 +11,24 @@ CO_OP_TRANSLATOR_METADATA:
 
 **章节导航：**
 - **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第八章 - 生产与企业模式
-- **⬅️ 上一章节**: [第七章：故障排除](../troubleshooting/debugging.md)
+- **📖 当前章节**: 第8章 - 生产与企业模式
+- **⬅️ 上一章节**: [第7章：故障排查](../troubleshooting/debugging.md)
 - **⬅️ 相关内容**: [AI 工作坊实验](ai-workshop-lab.md)
 - **🎯 课程完成**: [AZD 初学者指南](../../README.md)
 
 ## 概述
 
-本指南提供了使用 Azure Developer CLI (AZD) 部署生产级 AI 工作负载的全面最佳实践。这些实践基于 Azure AI Foundry Discord 社区的反馈以及实际客户部署经验，旨在解决生产 AI 系统中最常见的挑战。
+本指南提供了使用 Azure Developer CLI (AZD) 部署生产级 AI 工作负载的全面最佳实践。这些实践基于 Microsoft Foundry Discord 社区的反馈和真实客户部署经验，旨在解决生产 AI 系统中最常见的挑战。
 
 ## 主要挑战
 
-根据社区调查结果，以下是开发者面临的主要挑战：
+根据社区投票结果，以下是开发者面临的主要挑战：
 
 - **45%** 在多服务 AI 部署中遇到困难
 - **38%** 在凭据和密钥管理方面存在问题  
-- **35%** 认为生产准备和扩展具有挑战性
+- **35%** 认为生产就绪和扩展具有挑战性
 - **32%** 需要更好的成本优化策略
-- **29%** 需要改进监控和故障排除
+- **29%** 需要改进监控和故障排查
 
 ## 生产级 AI 的架构模式
 
@@ -125,14 +125,14 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## 安全最佳实践
+## 安全性最佳实践
 
 ### 1. 零信任安全模型
 
-**实施策略**：
-- 服务之间的通信必须经过身份验证
+**实施策略**:
+- 无认证的服务间通信禁止
 - 所有 API 调用使用托管身份
-- 使用私有端点进行网络隔离
+- 使用私有终端进行网络隔离
 - 最小权限访问控制
 
 ```bicep
@@ -156,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. 安全的密钥管理
 
-**Key Vault 集成模式**：
+**Key Vault 集成模式**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -191,7 +191,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. 网络安全
 
-**私有端点配置**：
+**私有终端配置**:
 
 ```bicep
 // Virtual Network for AI services
@@ -253,7 +253,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. 自动扩展策略
 
-**容器应用自动扩展**：
+**容器应用自动扩展**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -299,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. 缓存策略
 
-**Redis 缓存用于 AI 响应**：
+**Redis 缓存 AI 响应**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -329,7 +329,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. 负载均衡与流量管理
 
-**带 WAF 的应用网关**：
+**带 WAF 的应用网关**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -367,9 +367,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 成本优化
 
-### 1. 资源合理配置
+### 1. 资源适配
 
-**针对环境的特定配置**：
+**基于环境的配置**:
 
 ```bash
 # Development environment
@@ -432,7 +432,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Token 使用优化
 
-**OpenAI 成本管理**：
+**OpenAI 成本管理**:
 
 ```typescript
 // Application-level token optimization
@@ -506,9 +506,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI 特定监控
+### 2. AI 专属监控
 
-**针对 AI 指标的自定义仪表盘**：
+**AI 指标的自定义仪表盘**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -837,15 +837,15 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## 生产准备检查清单
+## 生产就绪检查清单
 
-### 安全 ✅
+### 安全性 ✅
 - [ ] 所有服务使用托管身份
 - [ ] 密钥存储在 Key Vault 中
-- [ ] 配置私有端点
+- [ ] 配置私有终端
 - [ ] 实施网络安全组
-- [ ] 使用最小权限的 RBAC
-- [ ] 在公共端点启用 WAF
+- [ ] 最小权限的 RBAC
+- [ ] 公共终端启用 WAF
 
 ### 性能 ✅
 - [ ] 配置自动扩展
@@ -865,15 +865,15 @@ echo "Infrastructure validation completed successfully!"
 
 ### 可靠性 ✅
 - [ ] 多区域部署
-- [ ] 数据备份与恢复计划
+- [ ] 备份与恢复计划
 - [ ] 实施断路器
 - [ ] 配置重试策略
 - [ ] 优雅降级
-- [ ] 健康检查端点
+- [ ] 健康检查终端
 
 ### 成本管理 ✅
 - [ ] 配置预算警报
-- [ ] 资源合理配置
+- [ ] 资源适配
 - [ ] 应用开发/测试折扣
 - [ ] 购买预留实例
 - [ ] 成本监控仪表盘
@@ -882,7 +882,7 @@ echo "Infrastructure validation completed successfully!"
 ### 合规性 ✅
 - [ ] 满足数据驻留要求
 - [ ] 启用审计日志
-- [ ] 应用合规性策略
+- [ ] 应用合规策略
 - [ ] 实施安全基线
 - [ ] 定期安全评估
 - [ ] 事件响应计划
@@ -913,28 +913,28 @@ python scripts/load_test.py \
 
 ## 🤝 社区最佳实践
 
-基于 Azure AI Foundry Discord 社区反馈：
+基于 Microsoft Foundry Discord 社区反馈：
 
 ### 社区的主要建议：
 
-1. **从小开始，逐步扩展**：从基础配置开始，根据实际使用情况逐步扩展
-2. **全面监控**：从第一天起设置全面的监控
-3. **自动化安全**：使用基础设施即代码确保安全一致性
-4. **彻底测试**：在管道中加入 AI 特定测试
-5. **规划成本**：尽早监控 Token 使用并设置预算警报
+1. **从小开始，逐步扩展**: 从基础 SKU 开始，根据实际使用情况扩展
+2. **监控一切**: 从第一天起设置全面的监控
+3. **自动化安全**: 使用基础设施即代码确保安全一致性
+4. **彻底测试**: 在管道中包含 AI 专属测试
+5. **规划成本**: 早期监控 Token 使用并设置预算警报
 
-### 常见的错误避免：
+### 常见的陷阱：
 
 - ❌ 在代码中硬编码 API 密钥
 - ❌ 未设置适当的监控
 - ❌ 忽视成本优化
 - ❌ 未测试故障场景
-- ❌ 部署时未设置健康检查
+- ❌ 部署时未进行健康检查
 
 ## 其他资源
 
 - **Azure 良好架构框架**: [AI 工作负载指南](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry 文档**: [官方文档](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Foundry 文档**: [官方文档](https://learn.microsoft.com/azure/ai-studio/)
 - **社区模板**: [Azure 示例](https://github.com/Azure-Samples)
 - **Discord 社区**: [#Azure 频道](https://discord.gg/microsoft-azure)
 
@@ -942,14 +942,16 @@ python scripts/load_test.py \
 
 **章节导航：**
 - **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第八章 - 生产与企业模式
-- **⬅️ 上一章节**: [第七章：故障排除](../troubleshooting/debugging.md)
+- **📖 当前章节**: 第8章 - 生产与企业模式
+- **⬅️ 上一章节**: [第7章：故障排查](../troubleshooting/debugging.md)
 - **⬅️ 相关内容**: [AI 工作坊实验](ai-workshop-lab.md)
 - **🎆 课程完成**: [AZD 初学者指南](../../README.md)
 
-**请记住**: 生产级 AI 工作负载需要仔细规划、监控和持续优化。以这些模式为起点，并根据您的具体需求进行调整。
+**请记住**: 生产级 AI 工作负载需要仔细规划、监控和持续优化。从这些模式开始，并根据您的具体需求进行调整。
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

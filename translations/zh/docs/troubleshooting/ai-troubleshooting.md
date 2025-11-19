@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-17T12:39:13+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-19T09:46:19+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "zh"
 }
 -->
-# AI 专用故障排查指南
+# AI 专用故障排除指南
 
 **章节导航：**
-- **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第7章 - 故障排查与调试
-- **⬅️ 上一章**: [调试指南](debugging.md)
-- **➡️ 下一章**: [第8章：生产与企业模式](../ai-foundry/production-ai-practices.md)
-- **🤖 相关内容**: [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md)
+- **📚 课程主页**：[AZD 初学者指南](../../README.md)
+- **📖 当前章节**：第 7 章 - 故障排除与调试
+- **⬅️ 上一章**：[调试指南](debugging.md)
+- **➡️ 下一章**：[第 8 章：生产与企业模式](../microsoft-foundry/production-ai-practices.md)
+- **🤖 相关内容**：[第 2 章：AI 优先开发](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**上一章**: [生产AI实践](../ai-foundry/production-ai-practices.md) | **下一章**: [AZD 入门](../getting-started/README.md)
+**上一章：**[生产 AI 实践](../microsoft-foundry/production-ai-practices.md) | **下一章：**[AZD 入门](../getting-started/README.md)
 
-本全面故障排查指南针对使用 AZD 部署 AI 解决方案时的常见问题，提供了与 Azure AI 服务相关的解决方案和调试技术。
+本全面的故障排除指南解决了使用 AZD 部署 AI 解决方案时的常见问题，并提供了针对 Azure AI 服务的解决方案和调试技术。
 
 ## 目录
 
@@ -27,13 +27,13 @@ CO_OP_TRANSLATOR_METADATA:
 - [容器应用部署问题](../../../../docs/troubleshooting)
 - [身份验证和权限错误](../../../../docs/troubleshooting)
 - [模型部署失败](../../../../docs/troubleshooting)
-- [性能与扩展问题](../../../../docs/troubleshooting)
-- [成本与配额管理](../../../../docs/troubleshooting)
-- [调试工具与技术](../../../../docs/troubleshooting)
+- [性能和扩展问题](../../../../docs/troubleshooting)
+- [成本和配额管理](../../../../docs/troubleshooting)
+- [调试工具和技术](../../../../docs/troubleshooting)
 
 ## Azure OpenAI 服务问题
 
-### 问题：OpenAI 服务在区域内不可用
+### 问题：OpenAI 服务在区域不可用
 
 **症状：**
 ```
@@ -96,7 +96,7 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **申请配额增加：**
+2. **请求增加配额：**
 ```bash
 # Submit quota increase request
 az support tickets create \
@@ -530,14 +530,14 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## 性能与扩展问题
+## 性能和扩展问题
 
-### 问题：响应延迟过高
+### 问题：高延迟响应
 
 **症状：**
 - 响应时间 > 30 秒
 - 超时错误
-- 用户体验不佳
+- 用户体验差
 
 **解决方案：**
 
@@ -662,7 +662,7 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## 成本与配额管理
+## 成本和配额管理
 
 ### 问题：意外的高成本
 
@@ -736,7 +736,7 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## 调试工具与技术
+## 调试工具和技术
 
 ### AZD 调试命令
 
@@ -846,34 +846,36 @@ def monitor_performance(func):
 |----------|------|----------|
 | 401 | 未授权 | 检查 API 密钥和托管身份配置 |
 | 403 | 禁止访问 | 验证 RBAC 角色分配 |
-| 429 | 速率限制 | 实现带指数回退的重试逻辑 |
+| 429 | 速率限制 | 实现带指数退避的重试逻辑 |
 | 500 | 内部服务器错误 | 检查模型部署状态和日志 |
 | 503 | 服务不可用 | 验证服务健康状况和区域可用性 |
 
 ## 后续步骤
 
 1. **查看 [AI 模型部署指南](ai-model-deployment.md)**，了解部署最佳实践
-2. **完成 [生产 AI 实践](production-ai-practices.md)**，获取企业级解决方案
-3. **加入 [Azure AI Foundry Discord](https://aka.ms/foundry/discord)**，获取社区支持
+2. **完成 [生产 AI 实践](production-ai-practices.md)**，实现企业级解决方案
+3. **加入 [Microsoft Foundry Discord](https://aka.ms/foundry/discord)**，获取社区支持
 4. **提交问题**至 [AZD GitHub 仓库](https://github.com/Azure/azure-dev)，解决 AZD 相关问题
 
 ## 资源
 
-- [Azure OpenAI 服务故障排查](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [容器应用故障排查](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI 搜索故障排查](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure OpenAI 服务故障排除](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [容器应用故障排除](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI 搜索故障排除](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
 **章节导航：**
-- **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第7章 - 故障排查与调试
-- **⬅️ 上一章**: [调试指南](debugging.md)
-- **➡️ 下一章**: [第8章：生产与企业模式](../ai-foundry/production-ai-practices.md)
-- **🤖 相关内容**: [第2章：AI优先开发](../ai-foundry/azure-ai-foundry-integration.md)
-- [Azure Developer CLI 故障排查](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📚 课程主页**：[AZD 初学者指南](../../README.md)
+- **📖 当前章节**：第 7 章 - 故障排除与调试
+- **⬅️ 上一章**：[调试指南](debugging.md)
+- **➡️ 下一章**：[第 8 章：生产与企业模式](../microsoft-foundry/production-ai-practices.md)
+- **🤖 相关内容**：[第 2 章：AI 优先开发](../microsoft-foundry/microsoft-foundry-integration.md)
+- [Azure Developer CLI 故障排除](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

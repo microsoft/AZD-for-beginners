@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-17T12:38:33+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-19T09:43:28+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "zh"
 }
@@ -10,24 +10,24 @@ CO_OP_TRANSLATOR_METADATA:
 # 常见问题及解决方案
 
 **章节导航：**
-- **📚 课程主页**: [AZD 初学者指南](../../README.md)
-- **📖 当前章节**: 第7章 - 故障排查与调试
-- **⬅️ 上一章节**: [第6章: 部署前检查](../pre-deployment/preflight-checks.md)
-- **➡️ 下一步**: [调试指南](debugging.md)
-- **🚀 下一章节**: [第8章: 生产与企业模式](../ai-foundry/production-ai-practices.md)
+- **📚 课程主页**：[AZD 初学者指南](../../README.md)
+- **📖 当前章节**：第7章 - 故障排除与调试
+- **⬅️ 上一章节**：[第6章：部署前检查](../pre-deployment/preflight-checks.md)
+- **➡️ 下一步**：[调试指南](debugging.md)
+- **🚀 下一章节**：[第8章：生产与企业模式](../microsoft-foundry/production-ai-practices.md)
 
 ## 简介
 
-本故障排查指南全面覆盖了使用 Azure Developer CLI 时最常见的问题。学习如何诊断、排查和解决身份验证、部署、基础设施配置以及应用程序设置中的常见问题。每个问题都包含详细的症状、根本原因以及逐步解决方案。
+本全面故障排除指南涵盖使用 Azure Developer CLI 时最常遇到的问题。学习如何诊断、排查和解决身份验证、部署、基础设施配置以及应用程序配置中的常见问题。每个问题都包括详细的症状、根本原因以及逐步解决方案。
 
 ## 学习目标
 
 完成本指南后，您将能够：
 - 掌握 Azure Developer CLI 问题的诊断技巧
-- 理解常见的身份验证和权限问题及其解决方法
-- 解决部署失败、基础设施配置错误以及设置问题
+- 了解常见的身份验证和权限问题及其解决方法
+- 解决部署失败、基础设施配置错误和配置问题
 - 实施主动监控和调试策略
-- 应用系统化的故障排查方法解决复杂问题
+- 应用系统化的故障排除方法解决复杂问题
 - 配置正确的日志记录和监控以防止未来问题
 
 ## 学习成果
@@ -36,7 +36,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 使用内置诊断工具诊断 Azure Developer CLI 问题
 - 独立解决身份验证、订阅和权限相关问题
 - 有效排查部署失败和基础设施配置错误
-- 调试应用程序设置问题及环境特定问题
+- 调试应用程序配置问题及环境特定问题
 - 实施监控和警报以主动识别潜在问题
 - 应用日志记录、调试和问题解决工作流的最佳实践
 
@@ -64,7 +64,7 @@ azd <command> --debug
 
 ## 身份验证问题
 
-### 问题: "无法获取访问令牌"
+### 问题："无法获取访问令牌"
 **症状：**
 - `azd up` 因身份验证错误失败
 - 命令返回“未授权”或“访问被拒绝”
@@ -87,7 +87,7 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### 问题: 部署时“权限不足”
+### 问题：部署时“权限不足”
 **症状：**
 - 部署因权限错误失败
 - 无法创建某些 Azure 资源
@@ -104,7 +104,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 3. Contact your Azure administrator for proper permissions
 ```
 
-### 问题: 多租户身份验证问题
+### 问题：多租户身份验证问题
 **解决方案：**
 ```bash
 # 1. Login with specific tenant
@@ -119,7 +119,7 @@ az account clear
 
 ## 🏗️ 基础设施配置错误
 
-### 问题: 资源名称冲突
+### 问题：资源名称冲突
 **症状：**
 - 出现“资源名称已存在”错误
 - 部署在创建资源时失败
@@ -138,7 +138,7 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### 问题: 位置/区域不可用
+### 问题：位置/区域不可用
 **症状：**
 - 出现“位置‘xyz’不可用于资源类型”错误
 - 选定区域内某些 SKU 不可用
@@ -157,7 +157,7 @@ azd env set AZURE_LOCATION eastus2
 # Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### 问题: 配额超限错误
+### 问题：配额超限错误
 **症状：**
 - 出现“资源类型配额超限”错误
 - 达到资源最大数量限制
@@ -182,7 +182,7 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### 问题: Bicep 模板错误
+### 问题：Bicep 模板错误
 **症状：**
 - 模板验证失败
 - Bicep 文件中存在语法错误
@@ -204,9 +204,9 @@ azd provision --preview
 
 ## 🚀 部署失败
 
-### 问题: 构建失败
+### 问题：构建失败
 **症状：**
-- 应用程序在部署期间构建失败
+- 应用程序在部署期间无法构建
 - 包安装错误
 
 **解决方案：**
@@ -233,7 +233,7 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### 问题: 容器部署失败
+### 问题：容器部署失败
 **症状：**
 - 容器应用无法启动
 - 镜像拉取错误
@@ -254,7 +254,7 @@ az acr login --name myregistry
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### 问题: 数据库连接失败
+### 问题：数据库连接失败
 **症状：**
 - 应用程序无法连接到数据库
 - 连接超时错误
@@ -277,7 +277,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 配置问题
 
-### 问题: 环境变量不起作用
+### 问题：环境变量不起作用
 **症状：**
 - 应用无法读取配置值
 - 环境变量显示为空
@@ -298,7 +298,7 @@ azd deploy --service web
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### 问题: SSL/TLS 证书问题
+### 问题：SSL/TLS 证书问题
 **症状：**
 - HTTPS 无法正常工作
 - 证书验证错误
@@ -315,7 +315,7 @@ az webapp update --name myapp --resource-group myrg --https-only true
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### 问题: CORS 配置问题
+### 问题：CORS 配置问题
 **症状：**
 - 前端无法调用 API
 - 跨域请求被阻止
@@ -338,7 +338,7 @@ azd show
 
 ## 🌍 环境管理问题
 
-### 问题: 环境切换问题
+### 问题：环境切换问题
 **症状：**
 - 使用了错误的环境
 - 配置未正确切换
@@ -359,7 +359,7 @@ azd env new production-new
 azd env select production-new
 ```
 
-### 问题: 环境损坏
+### 问题：环境损坏
 **症状：**
 - 环境显示无效状态
 - 资源与配置不匹配
@@ -380,7 +380,7 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 性能问题
 
-### 问题: 部署时间过长
+### 问题：部署时间过长
 **症状：**
 - 部署耗时过长
 - 部署期间出现超时
@@ -403,7 +403,7 @@ azd deploy --incremental
 azd config set defaults.location eastus2
 ```
 
-### 问题: 应用性能问题
+### 问题：应用程序性能问题
 **症状：**
 - 响应时间过慢
 - 资源使用率高
@@ -426,7 +426,7 @@ azd logs --service api --follow
 # Add Redis cache to your infrastructure
 ```
 
-## 🛠️ 故障排查工具和命令
+## 🛠️ 故障排除工具和命令
 
 ### 调试命令
 ```bash
@@ -491,13 +491,13 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### 收集信息
+### 收集的信息
 在联系支持之前，请收集以下信息：
 - `azd version` 输出
 - `azd info` 输出
 - 错误消息（完整文本）
 - 重现问题的步骤
-- 环境详情 (`azd env show`)
+- 环境详情（`azd env show`）
 - 问题开始的时间线
 
 ### 日志收集脚本
@@ -575,22 +575,24 @@ az security assessment list --resource-group myrg
 
 ## 相关资源
 
-- [调试指南](debugging.md) - 高级调试技巧
-- [资源配置](../deployment/provisioning.md) - 基础设施故障排查
+- [调试指南](debugging.md) - 高级调试技术
+- [资源配置](../deployment/provisioning.md) - 基础设施故障排除
 - [容量规划](../pre-deployment/capacity-planning.md) - 资源规划指导
 - [SKU 选择](../pre-deployment/sku-selection.md) - 服务层推荐
 
 ---
 
-**提示**: 将本指南加入书签，遇到问题时随时参考。大多数问题都有已知解决方案！
+**提示**：将本指南收藏，遇到问题时随时参考。大多数问题都曾出现过，并有现成的解决方案！
 
 ---
 
 **导航**
-- **上一课**: [资源配置](../deployment/provisioning.md)
-- **下一课**: [调试指南](debugging.md)
+- **上一课**：[资源配置](../deployment/provisioning.md)
+- **下一课**：[调试指南](debugging.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

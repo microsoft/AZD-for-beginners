@@ -1,40 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T12:49:02+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-19T10:19:54+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "tw"
 }
 -->
-# 使用 AZD 部署生產級 AI 工作負載的最佳實踐
+# 使用 AZD 部署生產環境 AI 工作負載的最佳實踐
 
 **章節導航：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章內容**: 第八章 - 生產與企業模式
-- **⬅️ 上一章**: [第七章：故障排除](../troubleshooting/debugging.md)
-- **⬅️ 相關內容**: [AI 工作坊實驗室](ai-workshop-lab.md)
-- **🎯 課程完成**: [AZD 初學者指南](../../README.md)
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 當前章節**：第 8 章 - 生產與企業模式
+- **⬅️ 前一章節**：[第 7 章：故障排除](../troubleshooting/debugging.md)
+- **⬅️ 相關內容**：[AI 工作坊實驗室](ai-workshop-lab.md)
+- **🎯 完成課程**：[AZD 初學者指南](../../README.md)
 
 ## 概述
 
-本指南提供了使用 Azure Developer CLI (AZD) 部署生產級 AI 工作負載的全面最佳實踐。這些實踐基於 Azure AI Foundry Discord 社群的反饋以及真實客戶部署的經驗，旨在解決生產 AI 系統中最常見的挑戰。
+本指南提供了使用 Azure Developer CLI (AZD) 部署生產環境 AI 工作負載的全面最佳實踐。這些實踐基於 Microsoft Foundry Discord 社群的反饋以及真實客戶部署經驗，旨在解決生產 AI 系統中最常見的挑戰。
 
-## 主要挑戰
+## 解決的主要挑戰
 
-根據社群投票結果，以下是開發者面臨的主要挑戰：
+根據我們的社群投票結果，以下是開發者面臨的主要挑戰：
 
 - **45%** 在多服務 AI 部署上遇到困難
-- **38%** 在憑證和秘密管理方面存在問題  
-- **35%** 在生產準備和擴展方面感到困難
+- **38%** 在憑證和機密管理方面有問題  
+- **35%** 覺得生產準備和擴展困難
 - **32%** 需要更好的成本優化策略
 - **29%** 需要改進監控和故障排除
 
-## 生產級 AI 的架構模式
+## 生產環境 AI 的架構模式
 
 ### 模式 1：微服務 AI 架構
 
-**適用情境**: 具有多種功能的複雜 AI 應用
+**適用情境**：具有多種功能的複雜 AI 應用程式
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -53,7 +53,7 @@ CO_OP_TRANSLATOR_METADATA:
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZD 實現方式**:
+**AZD 實現方式**：
 
 ```yaml
 # azure.yaml
@@ -78,7 +78,7 @@ services:
 
 ### 模式 2：事件驅動的 AI 處理
 
-**適用情境**: 批量處理、文件分析、非同步工作流
+**適用情境**：批次處理、文件分析、非同步工作流程
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -129,11 +129,11 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### 1. 零信任安全模型
 
-**實現策略**:
-- 所有服務間的通信均需身份驗證
-- 所有 API 調用使用受管理的身份
-- 使用私有端點進行網路隔離
-- 最小權限訪問控制
+**實施策略**：
+- 無服務間通信時不進行身份驗證
+- 所有 API 呼叫使用受管理的身份
+- 使用私人端點進行網路隔離
+- 最小權限存取控制
 
 ```bicep
 // Managed Identity for each service
@@ -154,9 +154,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. 安全的秘密管理
+### 2. 安全的機密管理
 
-**Key Vault 整合模式**:
+**Key Vault 整合模式**：
 
 ```bicep
 // Key Vault with proper access policies
@@ -191,7 +191,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. 網路安全
 
-**私有端點配置**:
+**私人端點配置**：
 
 ```bicep
 // Virtual Network for AI services
@@ -253,7 +253,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. 自動擴展策略
 
-**容器應用自動擴展**:
+**容器應用自動擴展**：
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -299,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. 快取策略
 
-**Redis 快取用於 AI 回應**:
+**Redis 快取用於 AI 回應**：
 
 ```bicep
 // Redis Premium for production workloads
@@ -327,9 +327,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. 負載均衡與流量管理
+### 3. 負載平衡與流量管理
 
-**應用程式閘道與 WAF**:
+**應用程式閘道與 WAF**：
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -369,7 +369,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. 資源適配
 
-**基於環境的配置**:
+**針對環境的特定配置**：
 
 ```bash
 # Development environment
@@ -432,7 +432,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Token 使用優化
 
-**OpenAI 成本管理**:
+**OpenAI 成本管理**：
 
 ```typescript
 // Application-level token optimization
@@ -508,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI 特定監控
 
-**AI 指標的自訂儀表板**:
+**AI 指標的自訂儀表板**：
 
 ```json
 // Dashboard configuration for AI workloads
@@ -606,7 +606,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## 災難恢復與高可用性
+## 災難復原與高可用性
 
 ### 1. 多區域部署
 
@@ -670,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. 數據備份與恢復
+### 2. 資料備份與復原
 
 ```bicep
 // Backup configuration for critical data
@@ -841,8 +841,8 @@ echo "Infrastructure validation completed successfully!"
 
 ### 安全性 ✅
 - [ ] 所有服務使用受管理的身份
-- [ ] 秘密存儲於 Key Vault
-- [ ] 配置私有端點
+- [ ] 機密存儲於 Key Vault
+- [ ] 配置私人端點
 - [ ] 實施網路安全群組
 - [ ] 使用最小權限的 RBAC
 - [ ] 公共端點啟用 WAF
@@ -850,22 +850,22 @@ echo "Infrastructure validation completed successfully!"
 ### 性能 ✅
 - [ ] 配置自動擴展
 - [ ] 實施快取
-- [ ] 設置負載均衡
+- [ ] 設置負載平衡
 - [ ] 靜態內容使用 CDN
-- [ ] 數據庫連接池
+- [ ] 資料庫連接池
 - [ ] Token 使用優化
 
 ### 監控 ✅
 - [ ] 配置應用程式洞察
 - [ ] 定義自訂指標
 - [ ] 設置警報規則
-- [ ] 創建儀表板
+- [ ] 建立儀表板
 - [ ] 實施健康檢查
 - [ ] 日誌保留政策
 
 ### 可靠性 ✅
 - [ ] 多區域部署
-- [ ] 備份與恢復計劃
+- [ ] 備份與復原計劃
 - [ ] 實施斷路器
 - [ ] 配置重試策略
 - [ ] 優雅降級
@@ -880,7 +880,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] 定期成本審查
 
 ### 合規性 ✅
-- [ ] 符合數據駐留要求
+- [ ] 符合資料駐留要求
 - [ ] 啟用審計日誌
 - [ ] 應用合規政策
 - [ ] 實施安全基線
@@ -897,8 +897,8 @@ echo "Infrastructure validation completed successfully!"
 | **可用性** | 99.9% | 正常運行時間監控 |
 | **錯誤率** | < 0.1% | 應用程式日誌 |
 | **Token 使用** | < $500/月 | 成本管理 |
-| **並發用戶** | 1000+ | 負載測試 |
-| **恢復時間** | < 1 小時 | 災難恢復測試 |
+| **同時用戶** | 1000+ | 負載測試 |
+| **復原時間** | < 1 小時 | 災難復原測試 |
 
 ### 負載測試
 
@@ -913,19 +913,19 @@ python scripts/load_test.py \
 
 ## 🤝 社群最佳實踐
 
-根據 Azure AI Foundry Discord 社群的反饋：
+根據 Microsoft Foundry Discord 社群的反饋：
 
-### 社群的主要建議：
+### 社群的頂級建議：
 
-1. **從小開始，逐步擴展**: 從基本的 SKU 開始，根據實際使用情況擴展
-2. **全面監控**: 從第一天起設置全面的監控
-3. **自動化安全性**: 使用基礎架構即代碼來確保一致的安全性
-4. **徹底測試**: 在管道中包含 AI 特定的測試
-5. **提前規劃成本**: 監控 Token 使用並早期設置預算警報
+1. **從小開始，逐步擴展**：從基本的 SKU 開始，根據實際使用情況擴展
+2. **監控一切**：從第一天起就設置全面的監控
+3. **自動化安全性**：使用基礎架構即代碼來確保一致的安全性
+4. **徹底測試**：在管道中包含 AI 特定測試
+5. **規劃成本**：早期監控 Token 使用並設置預算警報
 
 ### 常見的陷阱需避免：
 
-- ❌ 在代碼中硬編碼 API 密鑰
+- ❌ 在代碼中硬編碼 API 金鑰
 - ❌ 未設置適當的監控
 - ❌ 忽略成本優化
 - ❌ 未測試故障場景
@@ -933,23 +933,25 @@ python scripts/load_test.py \
 
 ## 其他資源
 
-- **Azure 良好架構框架**: [AI 工作負載指南](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry 文件**: [官方文件](https://learn.microsoft.com/azure/ai-studio/)
-- **社群範本**: [Azure 範例](https://github.com/Azure-Samples)
-- **Discord 社群**: [#Azure 頻道](https://discord.gg/microsoft-azure)
+- **Azure 良好架構框架**：[AI 工作負載指導](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry 文件**：[官方文件](https://learn.microsoft.com/azure/ai-studio/)
+- **社群範本**：[Azure 範例](https://github.com/Azure-Samples)
+- **Discord 社群**：[#Azure 頻道](https://discord.gg/microsoft-azure)
 
 ---
 
 **章節導航：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章內容**: 第八章 - 生產與企業模式
-- **⬅️ 上一章**: [第七章：故障排除](../troubleshooting/debugging.md)
-- **⬅️ 相關內容**: [AI 工作坊實驗室](ai-workshop-lab.md)
-- **🎆 課程完成**: [AZD 初學者指南](../../README.md)
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 當前章節**：第 8 章 - 生產與企業模式
+- **⬅️ 前一章節**：[第 7 章：故障排除](../troubleshooting/debugging.md)
+- **⬅️ 相關內容**：[AI 工作坊實驗室](ai-workshop-lab.md)
+- **🎆 完成課程**：[AZD 初學者指南](../../README.md)
 
-**請記住**: 生產級 AI 工作負載需要仔細的規劃、監控和持續優化。從這些模式開始，並根據您的具體需求進行調整。
+**記住**：生產環境的 AI 工作負載需要仔細的規劃、監控和持續優化。從這些模式開始，並根據您的具體需求進行調整。
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

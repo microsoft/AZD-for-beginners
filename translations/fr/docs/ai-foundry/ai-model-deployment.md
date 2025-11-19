@@ -1,27 +1,27 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T13:22:47+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-19T11:11:40+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "fr"
 }
 -->
-# Déploiement de modèles IA avec Azure Developer CLI
+# Déploiement de modèles d'IA avec Azure Developer CLI
 
 **Navigation du chapitre :**
 - **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
 - **📖 Chapitre actuel** : Chapitre 2 - Développement axé sur l'IA
-- **⬅️ Précédent** : [Intégration Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Précédent** : [Intégration Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Suivant** : [Atelier IA](ai-workshop-lab.md)
 - **🚀 Chapitre suivant** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
 
-Ce guide fournit des instructions détaillées pour déployer des modèles IA en utilisant les modèles AZD, couvrant tout, de la sélection des modèles aux schémas de déploiement en production.
+Ce guide fournit des instructions complètes pour déployer des modèles d'IA à l'aide des modèles AZD, couvrant tout, de la sélection des modèles aux schémas de déploiement en production.
 
 ## Table des matières
 
 - [Stratégie de sélection des modèles](../../../../docs/ai-foundry)
-- [Configuration AZD pour les modèles IA](../../../../docs/ai-foundry)
+- [Configuration AZD pour les modèles d'IA](../../../../docs/ai-foundry)
 - [Schémas de déploiement](../../../../docs/ai-foundry)
 - [Gestion des modèles](../../../../docs/ai-foundry)
 - [Considérations pour la production](../../../../docs/ai-foundry)
@@ -63,16 +63,16 @@ services:
 
 | Type de modèle | Cas d'utilisation | Capacité recommandée | Considérations de coût |
 |----------------|-------------------|-----------------------|-------------------------|
-| GPT-4o-mini | Chat, Q&R | 10-50 TPM | Rentable pour la plupart des charges |
-| GPT-4 | Raisonnement complexe | 20-100 TPM | Coût élevé, à utiliser pour des fonctionnalités premium |
+| GPT-4o-mini | Chat, Q&R | 10-50 TPM | Rentable pour la plupart des charges de travail |
+| GPT-4 | Raisonnement complexe | 20-100 TPM | Coût plus élevé, à utiliser pour des fonctionnalités premium |
 | Text-embedding-ada-002 | Recherche, RAG | 30-120 TPM | Essentiel pour la recherche sémantique |
-| Whisper | Transcription audio | 10-50 TPM | Charges de traitement audio |
+| Whisper | Transcription audio | 10-50 TPM | Charges de travail de traitement audio |
 
-## Configuration AZD pour les modèles IA
+## Configuration AZD pour les modèles d'IA
 
-### Configuration des modèles avec les templates Bicep
+### Configuration des modèles Bicep
 
-Créez des déploiements de modèles via des templates Bicep :
+Créez des déploiements de modèles via des modèles Bicep :
 
 ```bicep
 // infra/main.bicep
@@ -160,7 +160,7 @@ services:
 
 Idéal pour :
 - Développement et tests
-- Applications ciblant un seul marché
+- Applications pour un seul marché
 - Optimisation des coûts
 
 ### Schéma 2 : Déploiement multi-régions
@@ -183,7 +183,7 @@ Idéal pour :
 
 ### Schéma 3 : Déploiement hybride
 
-Combinez Azure OpenAI avec d'autres services IA :
+Combinez Azure OpenAI avec d'autres services d'IA :
 
 ```bicep
 // Hybrid AI services
@@ -376,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Intégration avec Application Insights
 
-Configurez la surveillance pour les charges IA :
+Configurez la surveillance pour les charges de travail IA :
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -414,7 +414,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Métriques personnalisées
 
-Suivez les métriques spécifiques à l'IA :
+Suivez des métriques spécifiques à l'IA :
 
 ```python
 # Custom telemetry for AI models
@@ -451,7 +451,7 @@ class AITelemetry:
 
 ### Vérifications de santé
 
-Implémentez la surveillance de la santé des services IA :
+Mettez en place une surveillance de la santé des services IA :
 
 ```python
 # Health check endpoints
@@ -482,16 +482,16 @@ async def check_ai_models():
 
 ## Prochaines étapes
 
-1. **Consultez le [Guide d'intégration Azure AI Foundry](azure-ai-foundry-integration.md)** pour les schémas d'intégration des services
+1. **Consultez le [Guide d'intégration Microsoft Foundry](microsoft-foundry-integration.md)** pour les schémas d'intégration des services
 2. **Complétez l'[Atelier IA](ai-workshop-lab.md)** pour une expérience pratique
-3. **Mettez en œuvre les [Pratiques IA en production](production-ai-practices.md)** pour les déploiements en entreprise
+3. **Implémentez les [Pratiques IA en production](production-ai-practices.md)** pour les déploiements en entreprise
 4. **Explorez le [Guide de dépannage IA](../troubleshooting/ai-troubleshooting.md)** pour les problèmes courants
 
 ## Ressources
 
 - [Disponibilité des modèles Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentation Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Scaling des applications conteneurisées](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Mise à l'échelle des applications conteneurisées](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optimisation des coûts des modèles IA](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Navigation du chapitre :**
 - **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
 - **📖 Chapitre actuel** : Chapitre 2 - Développement axé sur l'IA
-- **⬅️ Précédent** : [Intégration Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Précédent** : [Intégration Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Suivant** : [Atelier IA](ai-workshop-lab.md)
 - **🚀 Chapitre suivant** : [Chapitre 3 : Configuration](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T13:09:18+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-19T10:42:53+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "hk"
 }
@@ -10,45 +10,45 @@ CO_OP_TRANSLATOR_METADATA:
 # AZD 部署的除錯指南
 
 **章節導航：**
-- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
-- **📖 本章內容**：第七章 - 疑難排解與除錯
-- **⬅️ 上一章**：[常見問題](common-issues.md)
-- **➡️ 下一章**：[AI 特定疑難排解](ai-troubleshooting.md)
-- **🚀 下一章節**：[第八章：生產與企業模式](../ai-foundry/production-ai-practices.md)
+- **📚 課程主頁**: [AZD 初學者指南](../../README.md)
+- **📖 當前章節**: 第七章 - 故障排除與除錯
+- **⬅️ 上一章**: [常見問題](common-issues.md)
+- **➡️ 下一章**: [AI 特定故障排除](ai-troubleshooting.md)
+- **🚀 下一章節**: [第八章：生產與企業模式](../microsoft-foundry/production-ai-practices.md)
 
 ## 簡介
 
-這份全面的指南提供進階的除錯策略、工具和技術，用於診斷和解決 Azure Developer CLI 部署中的複雜問題。學習系統化的疑難排解方法、日誌分析技術、性能剖析以及高級診斷工具，以高效解決部署和運行時的問題。
+這份全面的指南提供高級除錯策略、工具及技術，用於診斷和解決 Azure Developer CLI 部署中的複雜問題。學習系統化的故障排除方法、日誌分析技術、性能分析及高級診斷工具，以高效解決部署及運行時的問題。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
 - 掌握 Azure Developer CLI 問題的系統化除錯方法
-- 理解高級日誌配置和日誌分析技術
-- 實施性能剖析和監控策略
-- 使用 Azure 診斷工具和服務解決複雜問題
-- 應用網絡除錯和安全疑難排解技術
-- 配置全面的監控和警報以主動檢測問題
+- 理解高級日誌配置及日誌分析技術
+- 實施性能分析及監控策略
+- 使用 Azure 診斷工具及服務解決複雜問題
+- 應用網絡除錯及安全故障排除技術
+- 配置全面的監控及警報以主動檢測問題
 
 ## 學習成果
 
 完成後，您將能夠：
 - 使用 TRIAGE 方法系統化地除錯複雜的部署問題
-- 配置並分析全面的日誌和追蹤信息
-- 有效使用 Azure Monitor、Application Insights 和診斷工具
-- 獨立除錯網絡連接、身份驗證和權限問題
-- 實施性能監控和優化策略
-- 創建自定義除錯腳本和自動化以解決重複性問題
+- 配置及分析全面的日誌及追蹤信息
+- 有效使用 Azure Monitor、Application Insights 及診斷工具
+- 獨立除錯網絡連接、身份驗證及權限問題
+- 實施性能監控及優化策略
+- 創建自定義除錯腳本及自動化解決重複性問題
 
 ## 除錯方法
 
 ### TRIAGE 方法
-- **T**ime：問題何時開始？
-- **R**eproduce：是否能穩定重現問題？
-- **I**solate：哪個組件出現故障？
-- **A**nalyze：日誌中提供了什麼信息？
-- **G**ather：收集所有相關信息
-- **E**scalate：何時需要尋求額外幫助
+- **T**ime: 問題何時開始？
+- **R**eproduce: 是否能穩定重現問題？
+- **I**solate: 哪個組件出現故障？
+- **A**nalyze: 日誌提供了什麼信息？
+- **G**ather: 收集所有相關信息
+- **E**scalate: 何時需要尋求額外幫助
 
 ## 啟用除錯模式
 
@@ -105,7 +105,7 @@ azd logs --output json > deployment-logs.json
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### 日誌關聯
+### 日誌關聯分析
 ```bash
 #!/bin/bash
 # correlate-logs.sh - Correlate logs across services
@@ -660,9 +660,9 @@ aggregate_logs() {
 
 ### 自定義除錯腳本
 創建一個 `scripts/debug/` 目錄，包含：
-- `health-check.sh` - 全面的健康檢查
-- `performance-test.sh` - 自動化性能測試
-- `log-analyzer.py` - 高級日誌解析與分析
+- `health-check.sh` - 全面健康檢查
+- `performance-test.sh` - 自動性能測試
+- `log-analyzer.py` - 高級日誌解析及分析
 - `resource-validator.sh` - 基礎設施驗證
 
 ### 監控集成
@@ -684,32 +684,34 @@ hooks:
 
 ## 最佳實踐
 
-1. **始終啟用除錯日誌** 在非生產環境中
-2. **創建可重現的測試案例** 以定位問題
-3. **記錄除錯程序** 供團隊使用
-4. **自動化健康檢查** 和監控
-5. **保持除錯工具更新** 與應用程序變更同步
+1. **在非生產環境中啟用除錯日誌**
+2. **為問題創建可重現的測試案例**
+3. **為您的團隊記錄除錯程序**
+4. **自動化健康檢查及監控**
+5. **隨應用變更更新除錯工具**
 6. **在非事故時間練習除錯程序**
 
 ## 下一步
 
 - [容量規劃](../pre-deployment/capacity-planning.md) - 規劃資源需求
 - [SKU 選擇](../pre-deployment/sku-selection.md) - 選擇合適的服務層級
-- [預檢驗檢查](../pre-deployment/preflight-checks.md) - 部署前驗證
+- [預檢查](../pre-deployment/preflight-checks.md) - 部署前驗證
 - [速查表](../../resources/cheat-sheet.md) - 快速參考命令
 
 ---
 
-**記住**：良好的除錯是系統化、徹底且耐心的。這些工具和技術將幫助您更快、更有效地診斷問題。
+**記住**: 良好的除錯是系統化、徹底及耐心的。這些工具及技術將幫助您更快、更有效地診斷問題。
 
 ---
 
 **導航**
-- **上一課**：[常見問題](common-issues.md)
+- **上一課**: [常見問題](common-issues.md)
 
-- **下一課**：[容量規劃](../pre-deployment/capacity-planning.md)
+- **下一課**: [容量規劃](../pre-deployment/capacity-planning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為具權威性的來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為具權威性的來源。對於重要資訊，建議使用專業的人手翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋概不負責。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T12:36:18+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-19T09:49:23+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "zh"
 }
@@ -12,7 +12,7 @@ CO_OP_TRANSLATOR_METADATA:
 **章节导航：**
 - **📚 课程主页**: [AZD 初学者指南](../../README.md)
 - **📖 当前章节**: 第2章 - AI优先开发
-- **⬅️ 上一章**: [Azure AI Foundry 集成](azure-ai-foundry-integration.md)
+- **⬅️ 上一章**: [Microsoft Foundry 集成](microsoft-foundry-integration.md)
 - **➡️ 下一章**: [AI 工作坊实验](ai-workshop-lab.md)
 - **🚀 下一章节**: [第3章: 配置](../getting-started/configuration.md)
 
@@ -482,7 +482,7 @@ async def check_ai_models():
 
 ## 下一步
 
-1. **查看 [Azure AI Foundry 集成指南](azure-ai-foundry-integration.md)**，了解服务集成模式
+1. **查看 [Microsoft Foundry 集成指南](microsoft-foundry-integration.md)**，了解服务集成模式
 2. **完成 [AI 工作坊实验](ai-workshop-lab.md)**，获得实践经验
 3. **实施 [生产 AI 实践](production-ai-practices.md)**，用于企业部署
 4. **探索 [AI 故障排除指南](../troubleshooting/ai-troubleshooting.md)**，解决常见问题
@@ -499,11 +499,13 @@ async def check_ai_models():
 **章节导航：**
 - **📚 课程主页**: [AZD 初学者指南](../../README.md)
 - **📖 当前章节**: 第2章 - AI优先开发
-- **⬅️ 上一章**: [Azure AI Foundry 集成](azure-ai-foundry-integration.md)
+- **⬅️ 上一章**: [Microsoft Foundry 集成](microsoft-foundry-integration.md)
 - **➡️ 下一章**: [AI 工作坊实验](ai-workshop-lab.md)
 - **🚀 下一章节**: [第3章: 配置](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

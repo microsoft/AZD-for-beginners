@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:22:20+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-19T11:06:14+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "fr"
 }
 -->
-# Planification de la capacité : Comprendre les quotas et limites d'Azure
+# Planification de la capacité - Disponibilité et limites des ressources Azure
+
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 6 - Validation et planification avant le déploiement
+- **⬅️ Chapitre précédent** : [Chapitre 5 : Solutions IA multi-agents](../../examples/retail-scenario.md)
+- **➡️ Suivant** : [Sélection de SKU](sku-selection.md)
+- **🚀 Chapitre suivant** : [Chapitre 7 : Résolution des problèmes](../troubleshooting/common-issues.md)
 
 ## Introduction
 
@@ -15,17 +22,17 @@ Ce guide complet vous aide à planifier et valider la capacité des ressources A
 
 ## Objectifs d'apprentissage
 
-En suivant ce guide, vous serez capable de :
+En suivant ce guide, vous allez :
 - Comprendre les quotas, limites et contraintes de disponibilité régionale d'Azure
 - Maîtriser les techniques pour vérifier la disponibilité et la capacité des ressources avant le déploiement
 - Mettre en œuvre des stratégies automatisées de validation et de surveillance de la capacité
-- Concevoir des applications avec une taille et une mise à l'échelle des ressources appropriées
+- Concevoir des applications avec des considérations appropriées de dimensionnement et de mise à l'échelle des ressources
 - Appliquer des stratégies d'optimisation des coûts grâce à une planification intelligente de la capacité
 - Configurer des alertes et une surveillance pour l'utilisation des quotas et la disponibilité des ressources
 
 ## Résultats d'apprentissage
 
-À la fin de ce guide, vous serez capable de :
+À la fin, vous serez capable de :
 - Évaluer et valider les besoins en capacité des ressources Azure avant le déploiement
 - Créer des scripts automatisés pour vérifier la capacité et surveiller les quotas
 - Concevoir des architectures évolutives en tenant compte des limites régionales et d'abonnement
@@ -59,7 +66,6 @@ az vm list-usage --location eastus2 --output table
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
-
 
 ## Vérifications de capacité avant le déploiement
 
@@ -121,7 +127,6 @@ echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-
 ### Vérifications spécifiques aux services
 
 #### Capacité des services d'application
@@ -155,7 +160,6 @@ check_app_service_capacity() {
 # Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
-
 
 #### Capacité des bases de données
 ```bash
@@ -214,7 +218,6 @@ check_cosmos_capacity() {
 }
 ```
 
-
 #### Capacité des applications conteneurisées
 ```bash
 # Check Container Apps capacity
@@ -256,7 +259,6 @@ check_container_apps_capacity() {
 }
 ```
 
-
 ## 📍 Validation de la disponibilité régionale
 
 ### Disponibilité des services par région
@@ -293,7 +295,6 @@ for service in appservice containerapp postgres cosmosdb; do
 done
 ```
 
-
 ### Recommandations pour la sélection des régions
 ```bash
 # Recommend optimal regions based on requirements
@@ -324,7 +325,6 @@ recommend_region() {
     esac
 }
 ```
-
 
 ## 💰 Planification et estimation des coûts
 
@@ -360,7 +360,6 @@ estimate_costs() {
     echo "   https://portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview"
 }
 ```
-
 
 ### Recommandations pour l'optimisation des SKU
 ```bash
@@ -427,10 +426,9 @@ recommend_sku() {
 }
 ```
 
+## 🚀 Vérifications automatisées avant le déploiement
 
-## 🚀 Vérifications automatisées avant déploiement
-
-### Script complet de pré-vérification
+### Script complet de pré-déploiement
 ```bash
 #!/bin/bash
 # preflight-check.sh - Complete pre-deployment validation
@@ -629,7 +627,6 @@ echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-
 ### Modèle de fichier de configuration
 ```json
 {
@@ -663,7 +660,6 @@ echo "  3. Verify application health post-deployment"
   }
 }
 ```
-
 
 ## 📈 Surveillance de la capacité pendant le déploiement
 
@@ -700,10 +696,9 @@ monitor_deployment_capacity() {
 }
 ```
 
-
 ## 🔗 Intégration avec AZD
 
-### Ajouter des hooks de pré-vérification à azure.yaml
+### Ajouter des hooks de pré-déploiement à azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -721,7 +716,6 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-
 ## Bonnes pratiques
 
 1. **Effectuez toujours des vérifications de capacité** avant de déployer dans de nouvelles régions
@@ -734,9 +728,9 @@ hooks:
 
 ## Prochaines étapes
 
-- [Guide de sélection des SKU](sku-selection.md) - Choisissez les niveaux de service optimaux
-- [Vérifications avant déploiement](preflight-checks.md) - Scripts de validation automatisés
-- [Fiche de référence](../../resources/cheat-sheet.md) - Commandes de référence rapide
+- [Guide de sélection des SKU](sku-selection.md) - Choisir les niveaux de service optimaux
+- [Vérifications avant le déploiement](preflight-checks.md) - Scripts de validation automatisés
+- [Fiche de référence](../../resources/cheat-sheet.md) - Commandes rapides
 - [Glossaire](../../resources/glossary.md) - Termes et définitions
 
 ## Ressources supplémentaires
@@ -744,16 +738,18 @@ hooks:
 - [Limites des abonnements Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Calculateur de prix Azure](https://azure.microsoft.com/pricing/calculator/)
 - [Gestion des coûts Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Disponibilité régionale d'Azure](https://azure.microsoft.com/global-infrastructure/services/)
+- [Disponibilité régionale Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigation**
 - **Leçon précédente** : [Guide de débogage](../troubleshooting/debugging.md)
 
-- **Leçon suivante** : [Sélection des SKU](sku-selection.md)
+- **Leçon suivante** : [Sélection de SKU](sku-selection.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

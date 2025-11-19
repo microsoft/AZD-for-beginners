@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-17T13:23:07+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-19T11:14:56+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "fr"
 }
@@ -14,11 +14,11 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Chapitre Actuel** : Chapitre 1 - Fondations & Démarrage Rapide
 - **⬅️ Précédent** : [Installation & Configuration](installation.md)
 - **➡️ Suivant** : [Configuration](configuration.md)
-- **🚀 Chapitre Suivant** : [Chapitre 2 : Développement AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Chapitre Suivant** : [Chapitre 2 : Développement AI-First](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduction
 
-Bienvenue dans votre premier projet avec Azure Developer CLI ! Ce tutoriel pratique complet vous guide pas à pas pour créer, déployer et gérer une application full-stack sur Azure en utilisant azd. Vous travaillerez sur une véritable application de gestion de tâches comprenant un frontend React, un backend API Node.js et une base de données MongoDB.
+Bienvenue dans votre premier projet avec Azure Developer CLI ! Ce tutoriel pratique complet vous guide pas à pas pour créer, déployer et gérer une application full-stack sur Azure en utilisant azd. Vous travaillerez sur une application de gestion de tâches réelle comprenant un frontend React, un backend API Node.js et une base de données MongoDB.
 
 ## Objectifs d'Apprentissage
 
@@ -67,7 +67,7 @@ node --version
 
 ## Étape 1 : Choisir et Initialiser un Modèle
 
-Commençons par un modèle populaire d'application de gestion de tâches comprenant un frontend React et un backend API Node.js.
+Commençons avec un modèle populaire d'application de gestion de tâches comprenant un frontend React et un backend API Node.js.
 
 ```bash
 # Browse available templates
@@ -86,7 +86,7 @@ azd init --template todo-nodejs-mongo
 
 ### Ce Qui Vient de Se Passer ?
 - Le code du modèle a été téléchargé dans votre répertoire local
-- Un fichier `azure.yaml` a été créé avec des définitions de service
+- Un fichier `azure.yaml` avec des définitions de service a été créé
 - Le code d'infrastructure a été configuré dans le répertoire `infra/`
 - Une configuration d'environnement a été créée
 
@@ -152,7 +152,7 @@ Avant de déployer, vous pouvez personnaliser l'application :
 code src/web/src/App.tsx
 ```
 
-Faites un simple changement :
+Faites une modification simple :
 ```typescript
 // Find the title and change it
 <h1>My Awesome Todo App</h1>
@@ -215,7 +215,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Tester l'Application de Gestion de Tâches
-1. **Ajouter une tâche** - Cliquez sur "Ajouter une tâche" et entrez une activité
+1. **Ajouter une tâche** - Cliquez sur "Ajouter une tâche" et entrez une tâche
 2. **Marquer comme terminée** - Cochez les tâches terminées
 3. **Supprimer des tâches** - Retirez les tâches dont vous n'avez plus besoin
 
@@ -230,7 +230,7 @@ azd logs
 
 ## Étape 6 : Apporter des Modifications et Redéployer
 
-Faisons une modification et voyons à quel point il est facile de mettre à jour :
+Apportons une modification et voyons à quel point il est facile de mettre à jour :
 
 ### Modifier l'API
 ```bash
@@ -300,12 +300,120 @@ azd down --force --purge
 ## Ce Que Vous Avez Appris
 
 Félicitations ! Vous avez réussi à :
-- Initialiser un projet azd à partir d'un modèle
-- Explorer la structure du projet et les fichiers clés
-- Déployer une application full-stack sur Azure
-- Apporter des modifications au code et redéployer
-- Gérer plusieurs environnements
-- Nettoyer les ressources
+- ✅ Initialiser un projet azd à partir d'un modèle
+- ✅ Explorer la structure du projet et les fichiers clés
+- ✅ Déployer une application full-stack sur Azure
+- ✅ Apporter des modifications au code et redéployer
+- ✅ Gérer plusieurs environnements
+- ✅ Nettoyer les ressources
+
+## 🎯 Exercices de Validation des Compétences
+
+### Exercice 1 : Déployer un Modèle Différent (15 minutes)
+**Objectif** : Démontrer la maîtrise du workflow d'initialisation et de déploiement azd
+
+```bash
+# Try Python + MongoDB stack
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Verify deployment
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Clean up
+azd down --force --purge
+```
+
+**Critères de Réussite :**
+- [ ] L'application se déploie sans erreurs
+- [ ] L'URL de l'application est accessible dans le navigateur
+- [ ] L'application fonctionne correctement (ajout/suppression de tâches)
+- [ ] Toutes les ressources ont été nettoyées avec succès
+
+### Exercice 2 : Personnaliser la Configuration (20 minutes)
+**Objectif** : Pratiquer la configuration des variables d'environnement
+
+```bash
+cd my-first-azd-app
+
+# Create custom environment
+azd env new custom-config
+
+# Set custom variables
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Verify variables
+azd env get-values | grep APP_TITLE
+
+# Deploy with custom config
+azd up
+```
+
+**Critères de Réussite :**
+- [ ] Un environnement personnalisé a été créé avec succès
+- [ ] Les variables d'environnement sont définies et récupérables
+- [ ] L'application se déploie avec une configuration personnalisée
+- [ ] Les paramètres personnalisés sont vérifiables dans l'application déployée
+
+### Exercice 3 : Workflow Multi-Environnement (25 minutes)
+**Objectif** : Maîtriser la gestion des environnements et les stratégies de déploiement
+
+```bash
+# Create dev environment
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Create staging environment
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# Compare environments
+azd env list
+
+# Test both environments
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Clean up both
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**Critères de Réussite :**
+- [ ] Deux environnements créés avec des configurations différentes
+- [ ] Les deux environnements se déploient avec succès
+- [ ] Capacité à basculer entre les environnements avec `azd env select`
+- [ ] Les variables d'environnement diffèrent entre les environnements
+- [ ] Les deux environnements ont été nettoyés avec succès
+
+## 📊 Votre Progression
+
+**Temps Investi** : ~60-90 minutes  
+**Compétences Acquises** :
+- ✅ Initialisation de projet basée sur des modèles
+- ✅ Provisionnement de ressources Azure
+- ✅ Workflows de déploiement d'application
+- ✅ Gestion des environnements
+- ✅ Gestion de la configuration
+- ✅ Nettoyage des ressources et gestion des coûts
+
+**Niveau Suivant** : Vous êtes prêt pour [Guide de Configuration](configuration.md) pour apprendre des modèles de configuration avancés !
 
 ## Résolution des Problèmes Courants
 
@@ -400,10 +508,12 @@ azd init --template todo-java-mongo
 - **📖 Chapitre Actuel** : Chapitre 1 - Fondations & Démarrage Rapide
 - **⬅️ Précédent** : [Installation & Configuration](installation.md)
 - **➡️ Suivant** : [Configuration](configuration.md)
-- **🚀 Chapitre Suivant** : [Chapitre 2 : Développement AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Chapitre Suivant** : [Chapitre 2 : Développement AI-First](../microsoft-foundry/microsoft-foundry-integration.md)
 - **Leçon Suivante** : [Guide de Déploiement](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

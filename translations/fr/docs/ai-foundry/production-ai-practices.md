@@ -1,26 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T13:22:18+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-19T11:09:58+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "fr"
 }
 -->
-# Meilleures pratiques pour les charges de travail IA en production avec AZD
+# Bonnes Pratiques pour les Charges de Travail IA en Production avec AZD
 
-**Navigation du chapitre :**
-- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
-- **📖 Chapitre actuel** : Chapitre 8 - Modèles de production et d'entreprise
-- **⬅️ Chapitre précédent** : [Chapitre 7 : Dépannage](../troubleshooting/debugging.md)
-- **⬅️ Également lié** : [Atelier IA](ai-workshop-lab.md)
-- **🎯 Cours terminé** : [AZD pour les débutants](../../README.md)
+**Navigation du Chapitre :**
+- **📚 Accueil du Cours** : [AZD pour Débutants](../../README.md)
+- **📖 Chapitre Actuel** : Chapitre 8 - Modèles pour la Production et l'Entreprise
+- **⬅️ Chapitre Précédent** : [Chapitre 7 : Dépannage](../troubleshooting/debugging.md)
+- **⬅️ Également Lié** : [Atelier IA](ai-workshop-lab.md)
+- **🎯 Fin du Cours** : [AZD pour Débutants](../../README.md)
 
-## Aperçu
+## Vue d’Ensemble
 
-Ce guide propose des meilleures pratiques complètes pour déployer des charges de travail IA prêtes pour la production en utilisant Azure Developer CLI (AZD). Basé sur les retours de la communauté Discord Azure AI Foundry et des déploiements clients réels, ces pratiques répondent aux défis les plus courants des systèmes IA en production.
+Ce guide propose des pratiques exemplaires pour déployer des charges de travail IA prêtes pour la production en utilisant Azure Developer CLI (AZD). Basées sur les retours de la communauté Discord Microsoft Foundry et des déploiements clients réels, ces pratiques répondent aux défis les plus courants des systèmes IA en production.
 
-## Principaux défis abordés
+## Principaux Défis Abordés
 
 D'après les résultats de notre sondage communautaire, voici les principaux défis rencontrés par les développeurs :
 
@@ -30,11 +30,11 @@ D'après les résultats de notre sondage communautaire, voici les principaux dé
 - **32 %** ont besoin de meilleures stratégies d'optimisation des coûts
 - **29 %** nécessitent une surveillance et un dépannage améliorés
 
-## Modèles d'architecture pour l'IA en production
+## Modèles d’Architecture pour l’IA en Production
 
-### Modèle 1 : Architecture IA basée sur des microservices
+### Modèle 1 : Architecture IA Basée sur les Microservices
 
-**Quand l'utiliser** : Applications IA complexes avec plusieurs fonctionnalités
+**Quand l’utiliser** : Applications IA complexes avec plusieurs fonctionnalités
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -53,7 +53,7 @@ D'après les résultats de notre sondage communautaire, voici les principaux dé
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**Implémentation avec AZD** :
+**Mise en œuvre avec AZD** :
 
 ```yaml
 # azure.yaml
@@ -76,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Modèle 2 : Traitement IA basé sur des événements
+### Modèle 2 : Traitement IA Événementiel
 
-**Quand l'utiliser** : Traitement par lots, analyse de documents, workflows asynchrones
+**Quand l’utiliser** : Traitement par lots, analyse de documents, flux de travail asynchrones
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -125,15 +125,15 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Meilleures pratiques en matière de sécurité
+## Meilleures Pratiques en Matière de Sécurité
 
-### 1. Modèle de sécurité Zero-Trust
+### 1. Modèle de Sécurité Zero-Trust
 
-**Stratégie d'implémentation** :
-- Pas de communication entre services sans authentification
-- Toutes les appels API utilisent des identités gérées
+**Stratégie de Mise en Œuvre** :
+- Aucune communication entre services sans authentification
+- Toutes les API utilisent des identités managées
 - Isolation réseau avec des points de terminaison privés
-- Contrôles d'accès avec privilèges minimaux
+- Contrôles d'accès au privilège minimum
 
 ```bicep
 // Managed Identity for each service
@@ -154,9 +154,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Gestion sécurisée des secrets
+### 2. Gestion Sécurisée des Secrets
 
-**Modèle d'intégration avec Key Vault** :
+**Modèle d’Intégration avec Key Vault** :
 
 ```bicep
 // Key Vault with proper access policies
@@ -189,9 +189,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. Sécurité réseau
+### 3. Sécurité Réseau
 
-**Configuration des points de terminaison privés** :
+**Configuration des Points de Terminaison Privés** :
 
 ```bicep
 // Virtual Network for AI services
@@ -249,11 +249,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Performance et mise à l'échelle
+## Performance et Mise à l’Échelle
 
-### 1. Stratégies d'auto-mise à l'échelle
+### 1. Stratégies d’Auto-Mise à l’Échelle
 
-**Auto-mise à l'échelle des applications conteneurisées** :
+**Auto-mise à l’échelle des Applications Conteneurisées** :
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -297,9 +297,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Stratégies de mise en cache
+### 2. Stratégies de Mise en Cache
 
-**Redis Cache pour les réponses IA** :
+**Redis Cache pour les Réponses IA** :
 
 ```bicep
 // Redis Premium for production workloads
@@ -327,9 +327,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Répartition de charge et gestion du trafic
+### 3. Répartition de Charge et Gestion du Trafic
 
-**Passerelle d'application avec WAF** :
+**Passerelle d’Application avec WAF** :
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -365,11 +365,11 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Optimisation des coûts
+## 💰 Optimisation des Coûts
 
-### 1. Dimensionnement des ressources
+### 1. Dimensionnement Approprié des Ressources
 
-**Configurations spécifiques à l'environnement** :
+**Configurations Spécifiques à l’Environnement** :
 
 ```bash
 # Development environment
@@ -389,7 +389,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Surveillance des coûts et budgets
+### 2. Suivi des Coûts et Budgets
 
 ```bicep
 // Cost management and budgets
@@ -430,9 +430,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Optimisation de l'utilisation des tokens
+### 3. Optimisation de l’Utilisation des Jetons
 
-**Gestion des coûts OpenAI** :
+**Gestion des Coûts OpenAI** :
 
 ```typescript
 // Application-level token optimization
@@ -459,9 +459,9 @@ class TokenOptimizer {
 }
 ```
 
-## Surveillance et observabilité
+## Surveillance et Observabilité
 
-### 1. Insights complets sur les applications
+### 1. Insights Applicatifs Complets
 
 ```bicep
 // Application Insights with advanced features
@@ -506,9 +506,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Surveillance spécifique à l'IA
+### 2. Surveillance Spécifique à l’IA
 
-**Tableaux de bord personnalisés pour les métriques IA** :
+**Tableaux de Bord Personnalisés pour les Métriques IA** :
 
 ```json
 // Dashboard configuration for AI workloads
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Vérifications de santé et surveillance de disponibilité
+### 3. Vérifications de Santé et Surveillance de la Disponibilité
 
 ```bicep
 // Application Insights availability tests
@@ -606,9 +606,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Récupération après sinistre et haute disponibilité
+## Reprise Après Sinistre et Haute Disponibilité
 
-### 1. Déploiement multi-régions
+### 1. Déploiement Multi-Régions
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -670,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Sauvegarde et récupération des données
+### 2. Sauvegarde et Récupération des Données
 
 ```bicep
 // Backup configuration for critical data
@@ -804,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Validation de l'infrastructure
+### 2. Validation de l’Infrastructure
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -837,30 +837,30 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Liste de vérification pour la préparation à la production
+## Liste de Contrôle pour la Préparation à la Production
 
 ### Sécurité ✅
-- [ ] Tous les services utilisent des identités gérées
+- [ ] Tous les services utilisent des identités managées
 - [ ] Secrets stockés dans Key Vault
 - [ ] Points de terminaison privés configurés
 - [ ] Groupes de sécurité réseau mis en œuvre
-- [ ] RBAC avec privilèges minimaux
+- [ ] RBAC avec privilège minimum
 - [ ] WAF activé sur les points de terminaison publics
 
 ### Performance ✅
-- [ ] Auto-mise à l'échelle configurée
-- [ ] Mise en cache implémentée
+- [ ] Auto-mise à l’échelle configurée
+- [ ] Mise en cache mise en œuvre
 - [ ] Répartition de charge configurée
 - [ ] CDN pour le contenu statique
-- [ ] Pooling de connexions à la base de données
-- [ ] Optimisation de l'utilisation des tokens
+- [ ] Pooling des connexions à la base de données
+- [ ] Optimisation de l’utilisation des jetons
 
 ### Surveillance ✅
-- [ ] Insights sur les applications configurés
+- [ ] Insights applicatifs configurés
 - [ ] Métriques personnalisées définies
-- [ ] Règles d'alerte configurées
+- [ ] Règles d’alerte configurées
 - [ ] Tableau de bord créé
-- [ ] Vérifications de santé implémentées
+- [ ] Vérifications de santé mises en œuvre
 - [ ] Politiques de rétention des journaux
 
 ### Fiabilité ✅
@@ -871,36 +871,36 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Dégradation progressive
 - [ ] Points de terminaison de vérification de santé
 
-### Gestion des coûts ✅
+### Gestion des Coûts ✅
 - [ ] Alertes budgétaires configurées
-- [ ] Dimensionnement des ressources
+- [ ] Dimensionnement approprié des ressources
 - [ ] Réductions dev/test appliquées
 - [ ] Instances réservées achetées
-- [ ] Tableau de bord de surveillance des coûts
-- [ ] Revues régulières des coûts
+- [ ] Tableau de bord de suivi des coûts
+- [ ] Révisions régulières des coûts
 
 ### Conformité ✅
 - [ ] Exigences de résidence des données respectées
-- [ ] Journaux d'audit activés
+- [ ] Journalisation des audits activée
 - [ ] Politiques de conformité appliquées
 - [ ] Bases de sécurité mises en œuvre
 - [ ] Évaluations de sécurité régulières
 - [ ] Plan de réponse aux incidents
 
-## Benchmarks de performance
+## Indicateurs de Performance
 
-### Métriques typiques en production
+### Métriques Typiques en Production
 
 | Métrique | Objectif | Surveillance |
 |----------|----------|--------------|
-| **Temps de réponse** | < 2 secondes | Insights sur les applications |
-| **Disponibilité** | 99,9 % | Surveillance de disponibilité |
-| **Taux d'erreur** | < 0,1 % | Journaux d'application |
-| **Utilisation des tokens** | < 500 $/mois | Gestion des coûts |
-| **Utilisateurs simultanés** | 1000+ | Tests de charge |
-| **Temps de récupération** | < 1 heure | Tests de récupération après sinistre |
+| **Temps de Réponse** | < 2 secondes | Insights Applicatifs |
+| **Disponibilité** | 99,9 % | Surveillance de la Disponibilité |
+| **Taux d’Erreur** | < 0,1 % | Journaux Applicatifs |
+| **Utilisation des Jetons** | < 500 $/mois | Gestion des Coûts |
+| **Utilisateurs Simultanés** | 1000+ | Tests de Charge |
+| **Temps de Récupération** | < 1 heure | Tests de Reprise Après Sinistre |
 
-### Tests de charge
+### Tests de Charge
 
 ```bash
 # Load testing script for AI applications
@@ -911,45 +911,47 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Meilleures pratiques communautaires
+## 🤝 Meilleures Pratiques Communautaires
 
-Basé sur les retours de la communauté Discord Azure AI Foundry :
+Basé sur les retours de la communauté Discord Microsoft Foundry :
 
-### Principales recommandations de la communauté :
+### Principales Recommandations de la Communauté :
 
-1. **Commencez petit, évoluez progressivement** : Débutez avec des SKUs basiques et évoluez selon l'utilisation réelle
-2. **Surveillez tout** : Configurez une surveillance complète dès le premier jour
-3. **Automatisez la sécurité** : Utilisez l'infrastructure comme code pour une sécurité cohérente
-4. **Testez minutieusement** : Incluez des tests spécifiques à l'IA dans votre pipeline
-5. **Planifiez les coûts** : Surveillez l'utilisation des tokens et configurez des alertes budgétaires tôt
+1. **Commencez Petit, Évoluez Graduellement** : Débutez avec des SKUs de base et évoluez selon l’utilisation réelle
+2. **Surveillez Tout** : Configurez une surveillance complète dès le premier jour
+3. **Automatisez la Sécurité** : Utilisez l’infrastructure comme code pour une sécurité cohérente
+4. **Testez Rigoureusement** : Intégrez des tests spécifiques à l’IA dans votre pipeline
+5. **Planifiez les Coûts** : Surveillez l’utilisation des jetons et configurez des alertes budgétaires tôt
 
-### Erreurs courantes à éviter :
+### Erreurs Courantes à Éviter :
 
 - ❌ Codage en dur des clés API dans le code
-- ❌ Ne pas configurer une surveillance adéquate
-- ❌ Ignorer l'optimisation des coûts
-- ❌ Ne pas tester les scénarios de panne
+- ❌ Absence de surveillance adéquate
+- ❌ Négliger l’optimisation des coûts
+- ❌ Ne pas tester les scénarios d’échec
 - ❌ Déployer sans vérifications de santé
 
-## Ressources supplémentaires
+## Ressources Supplémentaires
 
-- **Cadre Azure bien architecturé** : [Guide des charges de travail IA](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Documentation Azure AI Foundry** : [Docs officiels](https://learn.microsoft.com/azure/ai-studio/)
-- **Templates communautaires** : [Exemples Azure](https://github.com/Azure-Samples)
-- **Communauté Discord** : [#Azure channel](https://discord.gg/microsoft-azure)
+- **Cadre Azure Bien Conçu** : [Conseils pour les charges de travail IA](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Documentation Microsoft Foundry** : [Docs Officielles](https://learn.microsoft.com/azure/ai-studio/)
+- **Modèles Communautaires** : [Exemples Azure](https://github.com/Azure-Samples)
+- **Communauté Discord** : [Canal #Azure](https://discord.gg/microsoft-azure)
 
 ---
 
-**Navigation du chapitre :**
-- **📚 Accueil du cours** : [AZD pour les débutants](../../README.md)
-- **📖 Chapitre actuel** : Chapitre 8 - Modèles de production et d'entreprise
-- **⬅️ Chapitre précédent** : [Chapitre 7 : Dépannage](../troubleshooting/debugging.md)
-- **⬅️ Également lié** : [Atelier IA](ai-workshop-lab.md)
-- **🎆 Cours terminé** : [AZD pour les débutants](../../README.md)
+**Navigation du Chapitre :**
+- **📚 Accueil du Cours** : [AZD pour Débutants](../../README.md)
+- **📖 Chapitre Actuel** : Chapitre 8 - Modèles pour la Production et l'Entreprise
+- **⬅️ Chapitre Précédent** : [Chapitre 7 : Dépannage](../troubleshooting/debugging.md)
+- **⬅️ Également Lié** : [Atelier IA](ai-workshop-lab.md)
+- **🎆 Fin du Cours** : [AZD pour Débutants](../../README.md)
 
 **Rappel** : Les charges de travail IA en production nécessitent une planification minutieuse, une surveillance et une optimisation continue. Commencez avec ces modèles et adaptez-les à vos besoins spécifiques.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de faire appel à une traduction professionnelle humaine. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
