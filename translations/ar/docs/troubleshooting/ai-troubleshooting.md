@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-17T18:24:22+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-20T07:10:09+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "ar"
 }
@@ -13,10 +13,10 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
 - **📖 الفصل الحالي**: الفصل 7 - استكشاف الأخطاء وإصلاحها وتصحيحها
 - **⬅️ السابق**: [دليل التصحيح](debugging.md)
-- **➡️ الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../ai-foundry/production-ai-practices.md)
-- **🤖 ذو صلة**: [الفصل 2: تطوير يعتمد على الذكاء الاصطناعي](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../microsoft-foundry/production-ai-practices.md)
+- **🤖 ذو صلة**: [الفصل 2: تطوير الذكاء الاصطناعي أولاً](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**السابق:** [ممارسات الذكاء الاصطناعي في الإنتاج](../ai-foundry/production-ai-practices.md) | **التالي:** [البدء مع AZD](../getting-started/README.md)
+**السابق:** [ممارسات الذكاء الاصطناعي الإنتاجية](../microsoft-foundry/production-ai-practices.md) | **التالي:** [البدء مع AZD](../getting-started/README.md)
 
 هذا الدليل الشامل لاستكشاف الأخطاء وإصلاحها يعالج المشكلات الشائعة عند نشر حلول الذكاء الاصطناعي باستخدام AZD، ويوفر حلولًا وتقنيات تصحيح خاصة بخدمات Azure AI.
 
@@ -49,7 +49,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 1. **التحقق من توفر المنطقة:**
 ```bash
-# List available regions for OpenAI
+# قائمة المناطق المتاحة لـ OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -90,7 +90,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **التحقق من الحصة الحالية:**
 ```bash
-# Check quota usage
+# تحقق من استخدام الحصة
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -98,7 +98,7 @@ az cognitiveservices usage list \
 
 2. **طلب زيادة الحصة:**
 ```bash
-# Submit quota increase request
+# إرسال طلب زيادة الحصة
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -135,13 +135,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **استخدام إصدار API مدعوم:**
 ```python
-# Use latest supported version
+# استخدم أحدث إصدار مدعوم
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **التحقق من توافق إصدار API:**
 ```bash
-# List supported API versions
+# قائمة إصدارات API المدعومة
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -201,7 +201,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **التحقق من مفاتيح خدمة البحث:**
 ```bash
-# Get search service admin key
+# احصل على مفتاح مسؤول خدمة البحث
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -209,7 +209,7 @@ az search admin-key show \
 
 2. **التحقق من مخطط الفهرس:**
 ```python
-# Validate index schema
+# التحقق من صحة مخطط الفهرس
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -284,7 +284,7 @@ azure-cosmos==4.5.1
 
 3. **إضافة فحص الصحة:**
 ```python
-# main.py - Add health check endpoint
+# main.py - إضافة نقطة نهاية لفحص الصحة
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **تحسين تحميل النموذج:**
 ```python
-# Lazy load models to reduce startup time
+# تحميل النماذج بشكل كسول لتقليل وقت بدء التشغيل
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,15 +352,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # قم بتهيئة عميل الذكاء الاصطناعي هنا
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # بدء التشغيل
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # إيقاف التشغيل
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -379,7 +379,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 1. **التحقق من تعيينات الأدوار:**
 ```bash
-# Check current role assignments
+# تحقق من تعيينات الأدوار الحالية
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -404,7 +404,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **اختبار المصادقة:**
 ```python
-# Test managed identity authentication
+# اختبار مصادقة الهوية المُدارة
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -471,7 +471,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **التحقق من النماذج المتوفرة:**
 ```bash
-# List available models
+# قائمة النماذج المتاحة
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -510,7 +510,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **التحقق من النموذج قبل النشر:**
 ```python
-# Pre-deployment model validation
+# التحقق من صحة النموذج قبل النشر
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -543,7 +543,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 1. **تنفيذ مهلات الطلبات:**
 ```python
-# Configure proper timeouts
+# قم بتكوين مهلات مناسبة
 import httpx
 
 client = httpx.AsyncClient(
@@ -558,7 +558,7 @@ client = httpx.AsyncClient(
 
 2. **إضافة تخزين مؤقت للاستجابات:**
 ```python
-# Redis cache for responses
+# ذاكرة التخزين المؤقت لـ Redis للاستجابات
 import redis.asyncio as redis
 import json
 
@@ -640,7 +640,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **تحسين استخدام الذاكرة:**
 ```python
-# Memory-efficient model handling
+# التعامل مع النموذج بكفاءة في استخدام الذاكرة
 import gc
 import psutil
 
@@ -650,14 +650,14 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # تحقق من استخدام الذاكرة قبل المعالجة
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # فرض جمع القمامة
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # تنظيف بعد المعالجة
         gc.collect()
         return result
 ```
@@ -669,13 +669,13 @@ class MemoryOptimizedAI:
 **الأعراض:**
 - فاتورة Azure أعلى من المتوقع
 - استخدام الرموز يتجاوز التقديرات
-- تنبيهات الميزانية مفعّلة
+- تنبيهات الميزانية مفعلة
 
 **الحلول:**
 
 1. **تنفيذ ضوابط التكلفة:**
 ```python
-# Token usage tracking
+# تتبع استخدام الرموز
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -719,11 +719,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **تحسين اختيار النموذج:**
 ```python
-# Cost-aware model selection
+# اختيار النموذج مع مراعاة التكلفة
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # لكل 1K رمز
+    'gpt-4': 0.03,          # لكل 1K رمز
+    'gpt-35-turbo': 0.0015  # لكل 1K رمز
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -741,16 +741,16 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 ### أوامر تصحيح AZD
 
 ```bash
-# Enable verbose logging
+# تمكين تسجيل الدخول التفصيلي
 azd up --debug
 
-# Check deployment status
+# تحقق من حالة النشر
 azd show
 
-# View deployment logs
+# عرض سجلات النشر
 azd logs --follow
 
-# Check environment variables
+# تحقق من متغيرات البيئة
 azd env get-values
 ```
 
@@ -761,7 +761,7 @@ azd env get-values
 import logging
 import json
 
-# Configure structured logging for AI applications
+# تكوين تسجيل منظم لتطبيقات الذكاء الاصطناعي
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -787,7 +787,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # تحقق من اتصال OpenAI
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -795,7 +795,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Check Search service
+    # تحقق من خدمة البحث
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -843,18 +843,18 @@ def monitor_performance(func):
 ## رموز الأخطاء الشائعة وحلولها
 
 | رمز الخطأ | الوصف | الحل |
-|-----------|-------|------|
+|------------|-------------|----------|
 | 401 | غير مصرح | تحقق من مفاتيح API وتكوين الهوية المُدارة |
 | 403 | ممنوع | تحقق من تعيينات أدوار RBAC |
 | 429 | تم تحديد المعدل | تنفيذ منطق إعادة المحاولة مع التراجع الأسي |
 | 500 | خطأ داخلي في الخادم | تحقق من حالة نشر النموذج والسجلات |
-| 503 | الخدمة غير متوفرة | تحقق من صحة الخدمة وتوفر المنطقة |
+| 503 | الخدمة غير متوفرة | تحقق من صحة الخدمة وتوفرها الإقليمي |
 
 ## الخطوات التالية
 
 1. **راجع [دليل نشر نماذج الذكاء الاصطناعي](ai-model-deployment.md)** للحصول على أفضل ممارسات النشر
-2. **أكمل [ممارسات الذكاء الاصطناعي في الإنتاج](production-ai-practices.md)** للحصول على حلول جاهزة للمؤسسات
-3. **انضم إلى [مجتمع Azure AI Foundry على Discord](https://aka.ms/foundry/discord)** للحصول على دعم المجتمع
+2. **أكمل [ممارسات الذكاء الاصطناعي الإنتاجية](production-ai-practices.md)** للحصول على حلول جاهزة للمؤسسات
+3. **انضم إلى [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** للحصول على دعم المجتمع
 4. **قدم المشكلات** إلى [مستودع GitHub الخاص بـ AZD](https://github.com/Azure/azure-dev) للمشكلات الخاصة بـ AZD
 
 ## الموارد
@@ -869,11 +869,13 @@ def monitor_performance(func):
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
 - **📖 الفصل الحالي**: الفصل 7 - استكشاف الأخطاء وإصلاحها وتصحيحها
 - **⬅️ السابق**: [دليل التصحيح](debugging.md)
-- **➡️ الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../ai-foundry/production-ai-practices.md)
-- **🤖 ذو صلة**: [الفصل 2: تطوير يعتمد على الذكاء الاصطناعي](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../microsoft-foundry/production-ai-practices.md)
+- **🤖 ذو صلة**: [الفصل 2: تطوير الذكاء الاصطناعي أولاً](../microsoft-foundry/microsoft-foundry-integration.md)
 - [استكشاف أخطاء Azure Developer CLI وإصلاحها](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

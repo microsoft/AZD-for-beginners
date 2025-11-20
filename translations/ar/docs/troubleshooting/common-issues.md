@@ -1,33 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-17T18:23:42+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-20T07:05:44+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "ar"
 }
 -->
-# المشكلات الشائعة وحلولها
+# المشكلات الشائعة والحلول
 
-**التنقل بين الفصول:**
+**تنقل الفصول:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
 - **📖 الفصل الحالي**: الفصل 7 - استكشاف الأخطاء وإصلاحها
 - **⬅️ الفصل السابق**: [الفصل 6: الفحوصات الأولية](../pre-deployment/preflight-checks.md)
-- **➡️ التالي**: [دليل التصحيح](debugging.md)
-- **🚀 الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../ai-foundry/production-ai-practices.md)
+- **➡️ التالي**: [دليل استكشاف الأخطاء](debugging.md)
+- **🚀 الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../microsoft-foundry/production-ai-practices.md)
 
 ## المقدمة
 
-يغطي هذا الدليل الشامل لاستكشاف الأخطاء وإصلاحها المشكلات الأكثر شيوعًا التي تواجهك عند استخدام Azure Developer CLI. تعلم كيفية تشخيص المشكلات وحلها المتعلقة بالمصادقة، والنشر، وتوفير البنية التحتية، وتكوين التطبيقات. يتضمن كل مشكلة أعراضًا مفصلة، وأسبابًا جذرية، وإجراءات حل خطوة بخطوة.
+يغطي هذا الدليل الشامل لاستكشاف الأخطاء وإصلاحها المشكلات الأكثر شيوعًا عند استخدام Azure Developer CLI. تعلم كيفية تشخيص المشكلات واستكشافها وحلها المتعلقة بالمصادقة، والنشر، وتوفير البنية التحتية، وتكوين التطبيقات. يتضمن كل مشكلة أعراضًا مفصلة، وأسبابًا جذرية، وإجراءات حل خطوة بخطوة.
 
 ## أهداف التعلم
 
 عند إكمال هذا الدليل، ستتمكن من:
 - إتقان تقنيات التشخيص لمشكلات Azure Developer CLI
 - فهم المشكلات الشائعة المتعلقة بالمصادقة والأذونات وحلولها
-- حل أخطاء النشر، ومشكلات توفير البنية التحتية، ومشكلات التكوين
-- تنفيذ استراتيجيات مراقبة وتصحيح استباقية
-- تطبيق منهجيات منهجية لاستكشاف المشكلات المعقدة وإصلاحها
+- حل فشل النشر، وأخطاء توفير البنية التحتية، ومشكلات التكوين
+- تنفيذ استراتيجيات مراقبة واستكشاف الأخطاء بشكل استباقي
+- تطبيق منهجيات استكشاف الأخطاء المنهجية للمشكلات المعقدة
 - إعداد تسجيل ومراقبة مناسبين لمنع المشكلات المستقبلية
 
 ## نتائج التعلم
@@ -35,29 +35,29 @@ CO_OP_TRANSLATOR_METADATA:
 عند الانتهاء، ستكون قادرًا على:
 - تشخيص مشكلات Azure Developer CLI باستخدام أدوات التشخيص المدمجة
 - حل المشكلات المتعلقة بالمصادقة والاشتراك والأذونات بشكل مستقل
-- استكشاف أخطاء النشر ومشكلات توفير البنية التحتية وإصلاحها بفعالية
+- استكشاف أخطاء فشل النشر وأخطاء توفير البنية التحتية بفعالية
 - تصحيح مشكلات تكوين التطبيقات والمشكلات الخاصة بالبيئة
 - تنفيذ المراقبة والتنبيه لتحديد المشكلات المحتملة بشكل استباقي
-- تطبيق أفضل الممارسات لتسجيل الأخطاء وتصحيحها وإجراءات حل المشكلات
+- تطبيق أفضل الممارسات لتسجيل الأخطاء واستكشافها وحلها
 
 ## التشخيص السريع
 
-قبل الغوص في المشكلات المحددة، قم بتشغيل هذه الأوامر لجمع معلومات التشخيص:
+قبل التعمق في المشكلات المحددة، قم بتشغيل هذه الأوامر لجمع معلومات التشخيص:
 
 ```bash
-# Check azd version and health
+# تحقق من إصدار azd والصحة
 azd version
 azd config list
 
-# Verify Azure authentication
+# تحقق من مصادقة Azure
 az account show
 az account list
 
-# Check current environment
+# تحقق من البيئة الحالية
 azd env show
 azd env get-values
 
-# Enable debug logging
+# تمكين تسجيل التصحيح
 export AZD_DEBUG=true
 azd <command> --debug
 ```
@@ -71,18 +71,18 @@ azd <command> --debug
 
 **الحلول:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. إعادة المصادقة باستخدام Azure CLI
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. مسح بيانات الاعتماد المخزنة مؤقتًا
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. استخدام تدفق رمز الجهاز (لأنظمة بدون واجهة)
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. تعيين الاشتراك بشكل صريح
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
@@ -94,26 +94,26 @@ azd config set defaults.subscription "your-subscription-id"
 
 **الحلول:**
 ```bash
-# 1. Check your Azure role assignments
+# 1. تحقق من تعيينات الأدوار في Azure
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. تأكد من أن لديك الأدوار المطلوبة
+# - المساهم (لإنشاء الموارد)
+# - مسؤول وصول المستخدم (لتعيينات الأدوار)
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. اتصل بمسؤول Azure الخاص بك للحصول على الأذونات المناسبة
 ```
 
 ### المشكلة: مشكلات المصادقة متعددة المستأجرين
 **الحلول:**
 ```bash
-# 1. Login with specific tenant
+# ١. تسجيل الدخول باستخدام مستأجر محدد
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# ٢. تعيين المستأجر في التكوين
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# ٣. مسح ذاكرة التخزين المؤقت للمستأجر إذا تم تبديل المستأجرين
 az account clear
 ```
 
@@ -126,15 +126,15 @@ az account clear
 
 **الحلول:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# ١. استخدم أسماء موارد فريدة مع الرموز
+# في قالب Bicep الخاص بك:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# ٢. قم بتغيير اسم البيئة
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# ٣. قم بتنظيف الموارد الموجودة
 azd down --force --purge
 ```
 
@@ -145,16 +145,16 @@ azd down --force --purge
 
 **الحلول:**
 ```bash
-# 1. Check available locations for resource types
+# 1. تحقق من المواقع المتاحة لأنواع الموارد
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. استخدم المناطق المتوفرة بشكل شائع
 azd config set defaults.location eastus2
-# or
+# أو
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. تحقق من توفر الخدمة حسب المنطقة
+# قم بزيارة: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
 ### المشكلة: تجاوز الحصة
@@ -164,21 +164,21 @@ azd env set AZURE_LOCATION eastus2
 
 **الحلول:**
 ```bash
-# 1. Check current quota usage
+# 1. تحقق من استخدام الحصة الحالية
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. طلب زيادة الحصة عبر بوابة Azure
+# انتقل إلى: الاشتراكات > الاستخدام + الحصص
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. استخدم وحدات SKU أصغر للتطوير
+# في main.parameters.json:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. تنظيف الموارد غير المستخدمة
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
@@ -189,16 +189,16 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 **الحلول:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. تحقق من صحة بناء جملة Bicep
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. استخدم مدقق Bicep
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. تحقق من صحة بناء جملة ملف المعلمات
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. معاينة تغييرات النشر
 azd provision --preview
 ```
 
@@ -211,46 +211,46 @@ azd provision --preview
 
 **الحلول:**
 ```bash
-# 1. Check build logs
+# 1. تحقق من سجلات البناء
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. اختبار البناء محليًا
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# 3. تحقق من توافق إصدار Node.js/Python
+node --version  # يجب أن تتطابق مع إعدادات azure.yaml
 python --version
 
-# 4. Clear build cache
+# 4. مسح ذاكرة التخزين المؤقت للبناء
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# 5. تحقق من ملف Dockerfile إذا كنت تستخدم الحاويات
 docker build -t test-image .
 docker run --rm test-image
 ```
 
 ### المشكلة: فشل نشر الحاويات
 **الأعراض:**
-- فشل تطبيقات الحاويات في البدء
+- فشل بدء تشغيل تطبيقات الحاويات
 - أخطاء سحب الصور
 
 **الحلول:**
 ```bash
-# 1. Test Docker build locally
+# 1. اختبار بناء Docker محليًا
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. تحقق من سجلات الحاوية
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. التحقق من الوصول إلى سجل الحاوية
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. تحقق من تكوين تطبيق الحاوية
 az containerapp show --name my-app --resource-group my-rg
 ```
 
@@ -261,17 +261,17 @@ az containerapp show --name my-app --resource-group my-rg
 
 **الحلول:**
 ```bash
-# 1. Check database firewall rules
+# ١. تحقق من قواعد جدار الحماية لقاعدة البيانات
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# ٢. اختبار الاتصال من التطبيق
+# أضف إلى تطبيقك مؤقتًا:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# ٣. تحقق من تنسيق سلسلة الاتصال
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# ٤. تحقق من حالة خادم قاعدة البيانات
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -284,17 +284,17 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 **الحلول:**
 ```bash
-# 1. Verify environment variables are set
+# 1. تحقق من تعيين متغيرات البيئة
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. تحقق من أسماء المتغيرات في azure.yaml
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. أعد تشغيل التطبيق
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. تحقق من تكوين خدمة التطبيق
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -305,13 +305,13 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 **الحلول:**
 ```bash
-# 1. Check SSL certificate status
+# 1. تحقق من حالة شهادة SSL
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. تمكين HTTPS فقط
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. إضافة نطاق مخصص (إذا لزم الأمر)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
@@ -322,17 +322,17 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 **الحلول:**
 ```bash
-# 1. Configure CORS for App Service
+# 1. تكوين CORS لخدمة التطبيق
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. تحديث API للتعامل مع CORS
+# في Express.js:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. تحقق من التشغيل على عناوين URL الصحيحة
 azd show
 ```
 
@@ -345,16 +345,16 @@ azd show
 
 **الحلول:**
 ```bash
-# 1. List all environments
+# ١. قم بسرد جميع البيئات
 azd env list
 
-# 2. Explicitly select environment
+# ٢. اختر البيئة بشكل صريح
 azd env select production
 
-# 3. Verify current environment
+# ٣. تحقق من البيئة الحالية
 azd env show
 
-# 4. Create new environment if corrupted
+# ٤. قم بإنشاء بيئة جديدة إذا كانت تالفة
 azd env new production-new
 azd env select production-new
 ```
@@ -366,16 +366,16 @@ azd env select production-new
 
 **الحلول:**
 ```bash
-# 1. Refresh environment state
+# ١. تحديث حالة البيئة
 azd env refresh
 
-# 2. Reset environment configuration
+# ٢. إعادة تعيين تكوين البيئة
 azd env new production-reset
-# Copy over required environment variables
+# نسخ المتغيرات البيئية المطلوبة
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# ٣. استيراد الموارد الموجودة (إذا كان ذلك ممكنًا)
+# تحديث يدوي لملف .azure/production/config.json باستخدام معرفات الموارد
 ```
 
 ## 🔍 مشكلات الأداء
@@ -383,23 +383,23 @@ azd env set DATABASE_URL "your-value"
 ### المشكلة: أوقات نشر بطيئة
 **الأعراض:**
 - النشر يستغرق وقتًا طويلًا
-- انتهاء مهلة أثناء النشر
+- انتهاء المهلة أثناء النشر
 
 **الحلول:**
 ```bash
-# 1. Enable parallel deployment
+# ١. تمكين النشر المتوازي
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# ٢. استخدام النشر التدريجي
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# ٣. تحسين عملية البناء
+# في package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# ٤. تحقق من مواقع الموارد (استخدام نفس المنطقة)
 azd config set defaults.location eastus2
 ```
 
@@ -410,62 +410,62 @@ azd config set defaults.location eastus2
 
 **الحلول:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# ١. زيادة الموارد
+# تحديث SKU في main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# ٢. تمكين مراقبة Application Insights
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# ٣. تحقق من سجلات التطبيق للعثور على الاختناقات
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# ٤. تنفيذ التخزين المؤقت
+# إضافة Redis cache إلى البنية التحتية الخاصة بك
 ```
 
-## 🛠️ أدوات وأوامر استكشاف الأخطاء وإصلاحها
+## 🛠️ أدوات وأوامر استكشاف الأخطاء
 
 ### أوامر التصحيح
 ```bash
-# Comprehensive debugging
+# تصحيح شامل
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# تحقق من معلومات النظام
 azd info
 
-# Validate configuration
+# تحقق من صحة التكوين
 azd config validate
 
-# Test connectivity
+# اختبار الاتصال
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### تحليل السجلات
 ```bash
-# Application logs
+# سجلات التطبيق
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# سجلات موارد Azure
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# سجلات الحاوية (لتطبيقات الحاويات)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### التحقيق في الموارد
 ```bash
-# List all resources
+# سرد جميع الموارد
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# التحقق من حالة المورد
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# تشخيص الشبكة
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
@@ -479,15 +479,15 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ### قنوات الدعم
 ```bash
-# 1. Check Azure Service Health
+# ١. تحقق من صحة خدمة Azure
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# ٢. قم بإنشاء تذكرة دعم Azure
+# انتقل إلى: https://portal.azure.com -> المساعدة + الدعم
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
-# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# ٣. موارد المجتمع
+# - Stack Overflow: علامة azure-developer-cli
+# - مشكلات GitHub: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
@@ -503,7 +503,7 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ### سكربت جمع السجلات
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# جمع-معلومات-التصحيح.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -526,34 +526,34 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 منع المشكلات
 
-### قائمة الفحص قبل النشر
+### قائمة التحقق قبل النشر
 ```bash
-# 1. Validate authentication
+# 1. التحقق من المصادقة
 az account show
 
-# 2. Check quotas and limits
+# 2. التحقق من الحصص والحدود
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# 3. التحقق من القوالب
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# 4. اختبار محلي أولاً
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# 5. استخدام عمليات النشر التجريبية
 azd provision --preview
 ```
 
 ### إعداد المراقبة
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# تمكين رؤى التطبيق
+# أضف إلى main.bicep:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# إعداد التنبيهات
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -563,20 +563,20 @@ az monitor metrics alert create \
 
 ### الصيانة الدورية
 ```bash
-# Weekly health checks
+# الفحوصات الصحية الأسبوعية
 ./scripts/health-check.sh
 
-# Monthly cost review
+# مراجعة التكلفة الشهرية
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# مراجعة الأمان الفصلية
 az security assessment list --resource-group myrg
 ```
 
 ## الموارد ذات الصلة
 
-- [دليل التصحيح](debugging.md) - تقنيات التصحيح المتقدمة
-- [توفير الموارد](../deployment/provisioning.md) - استكشاف أخطاء البنية التحتية وإصلاحها
+- [دليل استكشاف الأخطاء](debugging.md) - تقنيات استكشاف الأخطاء المتقدمة
+- [توفير الموارد](../deployment/provisioning.md) - استكشاف أخطاء البنية التحتية
 - [تخطيط السعة](../pre-deployment/capacity-planning.md) - إرشادات تخطيط الموارد
 - [اختيار SKU](../pre-deployment/sku-selection.md) - توصيات مستويات الخدمة
 
@@ -588,9 +588,11 @@ az security assessment list --resource-group myrg
 
 **التنقل**
 - **الدرس السابق**: [توفير الموارد](../deployment/provisioning.md)
-- **الدرس التالي**: [دليل التصحيح](debugging.md)
+- **الدرس التالي**: [دليل استكشاف الأخطاء](debugging.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

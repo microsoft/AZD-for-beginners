@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T18:55:53+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-20T09:04:34+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "mo"
 }
@@ -10,31 +10,31 @@ CO_OP_TRANSLATOR_METADATA:
 # 使用 AZD 部署生產級 AI 工作負載的最佳實踐
 
 **章節導航：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章內容**: 第八章 - 生產與企業模式
-- **⬅️ 上一章**: [第七章：故障排除](../troubleshooting/debugging.md)
-- **⬅️ 相關內容**: [AI 工作坊實驗室](ai-workshop-lab.md)
-- **🎯 課程完成**: [AZD 初學者指南](../../README.md)
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章內容**：第 8 章 - 生產及企業模式
+- **⬅️ 上一章**：[第 7 章：故障排除](../troubleshooting/debugging.md)
+- **⬅️ 相關內容**：[AI 工作坊實驗室](ai-workshop-lab.md)
+- **🎯 完成課程**：[AZD 初學者指南](../../README.md)
 
 ## 概述
 
-本指南提供使用 Azure Developer CLI (AZD) 部署生產級 AI 工作負載的全面最佳實踐。這些實踐基於 Azure AI Foundry Discord 社群的反饋以及真實客戶部署經驗，旨在解決生產 AI 系統中最常見的挑戰。
+本指南提供使用 Azure Developer CLI (AZD) 部署生產級 AI 工作負載的全面最佳實踐。根據 Microsoft Foundry Discord 社群的反饋以及真實客戶部署經驗，這些實踐解決了生產 AI 系統中最常見的挑戰。
 
 ## 主要挑戰
 
 根據社群投票結果，以下是開發者面臨的主要挑戰：
 
 - **45%** 在多服務 AI 部署上遇到困難
-- **38%** 在憑證和秘密管理方面存在問題  
-- **35%** 在生產準備和擴展性上感到困難
+- **38%** 在憑證和秘密管理方面有問題  
+- **35%** 在生產準備和擴展方面感到困難
 - **32%** 需要更好的成本優化策略
 - **29%** 需要改進監控和故障排除
 
-## 生產級 AI 的架構模式
+## 生產 AI 的架構模式
 
 ### 模式 1：微服務 AI 架構
 
-**適用情境**: 具有多種功能的複雜 AI 應用
+**使用時機**：適用於具有多種功能的複雜 AI 應用
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -53,7 +53,7 @@ CO_OP_TRANSLATOR_METADATA:
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZD 實現方式**:
+**AZD 實現方式**：
 
 ```yaml
 # azure.yaml
@@ -78,7 +78,7 @@ services:
 
 ### 模式 2：事件驅動的 AI 處理
 
-**適用情境**: 批量處理、文件分析、非同步工作流程
+**使用時機**：批量處理、文件分析、非同步工作流程
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -129,11 +129,11 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### 1. 零信任安全模型
 
-**實現策略**:
+**實施策略**：
 - 所有服務間的通信均需身份驗證
-- 所有 API 呼叫使用受管理的身份
-- 使用私有端點進行網路隔離
-- 最小權限訪問控制
+- 所有 API 調用使用受管理的身份
+- 使用私有端點進行網絡隔離
+- 最低權限訪問控制
 
 ```bicep
 // Managed Identity for each service
@@ -156,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. 安全的秘密管理
 
-**Key Vault 整合模式**:
+**Key Vault 整合模式**：
 
 ```bicep
 // Key Vault with proper access policies
@@ -189,9 +189,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. 網路安全
+### 3. 網絡安全
 
-**私有端點配置**:
+**私有端點配置**：
 
 ```bicep
 // Virtual Network for AI services
@@ -253,7 +253,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. 自動擴展策略
 
-**容器應用自動擴展**:
+**容器應用自動擴展**：
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -299,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. 快取策略
 
-**Redis 快取用於 AI 回應**:
+**Redis 快取用於 AI 回應**：
 
 ```bicep
 // Redis Premium for production workloads
@@ -329,7 +329,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. 負載均衡與流量管理
 
-**應用程式閘道與 WAF**:
+**應用程式閘道與 WAF**：
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -369,10 +369,10 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. 資源適配
 
-**基於環境的配置**:
+**基於環境的配置**：
 
 ```bash
-# Development environment
+# 開發環境
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# 生產環境
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -432,10 +432,10 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Token 使用優化
 
-**OpenAI 成本管理**:
+**OpenAI 成本管理**：
 
 ```typescript
-// Application-level token optimization
+// 應用層級的令牌優化
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // 截短上下文，而非用戶輸入
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // 粗略估算：1 個令牌 ≈ 4 個字符
     return Math.ceil(text.length / 4);
   }
 }
@@ -506,9 +506,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI 專屬監控
+### 2. AI 特定監控
 
-**AI 指標的自訂儀表板**:
+**AI 指標的自訂儀表板**：
 
 ```json
 // Dashboard configuration for AI workloads
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# 檢查所有所需服務是否正在運行
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# 驗證 OpenAI 模型部署
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# 測試 AI 服務連接性
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -843,8 +843,8 @@ echo "Infrastructure validation completed successfully!"
 - [ ] 所有服務使用受管理的身份
 - [ ] 秘密存儲於 Key Vault
 - [ ] 配置私有端點
-- [ ] 實施網路安全群組
-- [ ] 使用最小權限的 RBAC
+- [ ] 實施網絡安全組
+- [ ] RBAC 最低權限
 - [ ] 公共端點啟用 WAF
 
 ### 性能 ✅
@@ -852,7 +852,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] 實施快取
 - [ ] 設置負載均衡
 - [ ] 靜態內容使用 CDN
-- [ ] 數據庫連接池化
+- [ ] 數據庫連接池
 - [ ] Token 使用優化
 
 ### 監控 ✅
@@ -861,7 +861,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] 設置警報規則
 - [ ] 創建儀表板
 - [ ] 實施健康檢查
-- [ ] 日誌保留策略
+- [ ] 日誌保留政策
 
 ### 可靠性 ✅
 - [ ] 多區域部署
@@ -882,7 +882,7 @@ echo "Infrastructure validation completed successfully!"
 ### 合規性 ✅
 - [ ] 符合數據駐留要求
 - [ ] 啟用審計日誌
-- [ ] 應用合規性政策
+- [ ] 應用合規政策
 - [ ] 實施安全基線
 - [ ] 定期安全評估
 - [ ] 事件響應計劃
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### 負載測試
 
 ```bash
-# Load testing script for AI applications
+# 為人工智能應用程式的負載測試腳本
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,17 +913,17 @@ python scripts/load_test.py \
 
 ## 🤝 社群最佳實踐
 
-基於 Azure AI Foundry Discord 社群的反饋：
+根據 Microsoft Foundry Discord 社群的反饋：
 
 ### 社群的主要建議：
 
-1. **從小開始，逐步擴展**: 從基本的 SKU 開始，根據實際使用情況擴展
-2. **全面監控**: 從第一天起設置全面的監控
-3. **自動化安全性**: 使用基礎設施即代碼來確保一致的安全性
-4. **徹底測試**: 在管道中包含 AI 專屬測試
-5. **提前規劃成本**: 監控 Token 使用並早期設置預算警報
+1. **從小開始，逐步擴展**：從基本的 SKU 開始，根據實際使用情況擴展
+2. **全面監控**：從第一天起設置全面的監控
+3. **自動化安全性**：使用基礎設施即代碼來保持一致的安全性
+4. **徹底測試**：在管道中包含 AI 特定的測試
+5. **提前規劃成本**：監控 Token 使用並早期設置預算警報
 
-### 常見的錯誤避免：
+### 常見的陷阱需避免：
 
 - ❌ 在代碼中硬編碼 API 密鑰
 - ❌ 未設置適當的監控
@@ -933,23 +933,25 @@ python scripts/load_test.py \
 
 ## 其他資源
 
-- **Azure 良好架構框架**: [AI 工作負載指南](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry 文件**: [官方文件](https://learn.microsoft.com/azure/ai-studio/)
-- **社群範本**: [Azure 範例](https://github.com/Azure-Samples)
-- **Discord 社群**: [#Azure 頻道](https://discord.gg/microsoft-azure)
+- **Azure 良好架構框架**：[AI 工作負載指導](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry 文件**：[官方文件](https://learn.microsoft.com/azure/ai-studio/)
+- **社群範本**：[Azure 範例](https://github.com/Azure-Samples)
+- **Discord 社群**：[#Azure 頻道](https://discord.gg/microsoft-azure)
 
 ---
 
 **章節導航：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章內容**: 第八章 - 生產與企業模式
-- **⬅️ 上一章**: [第七章：故障排除](../troubleshooting/debugging.md)
-- **⬅️ 相關內容**: [AI 工作坊實驗室](ai-workshop-lab.md)
-- **🎆 課程完成**: [AZD 初學者指南](../../README.md)
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 本章內容**：第 8 章 - 生產及企業模式
+- **⬅️ 上一章**：[第 7 章：故障排除](../troubleshooting/debugging.md)
+- **⬅️ 相關內容**：[AI 工作坊實驗室](ai-workshop-lab.md)
+- **🎆 完成課程**：[AZD 初學者指南](../../README.md)
 
-**請記住**: 生產級 AI 工作負載需要仔細的規劃、監控和持續優化。從這些模式開始，並根據您的具體需求進行調整。
+**請記住**：生產級 AI 工作負載需要仔細規劃、監控和持續優化。從這些模式開始，並根據您的具體需求進行調整。
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議尋求專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或錯誤解釋不承擔責任。
+此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
