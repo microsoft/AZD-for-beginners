@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T16:23:47+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-19T23:56:42+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "fa"
 }
@@ -11,78 +11,78 @@ CO_OP_TRANSLATOR_METADATA:
 
 **فهرست فصل‌ها:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل ۳ - پیکربندی و احراز هویت
+- **📖 فصل جاری**: فصل ۳ - پیکربندی و احراز هویت
 - **⬅️ قبلی**: [اولین پروژه شما](first-project.md)
 - **➡️ بعدی**: [راهنمای استقرار](../deployment/deployment-guide.md)
 - **🚀 فصل بعدی**: [فصل ۴: زیرساخت به عنوان کد](../deployment/deployment-guide.md)
 
 ## مقدمه
 
-این راهنمای جامع تمام جنبه‌های پیکربندی Azure Developer CLI را برای جریان‌های کاری توسعه و استقرار بهینه پوشش می‌دهد. شما درباره سلسله‌مراتب پیکربندی، مدیریت محیط‌ها، روش‌های احراز هویت و الگوهای پیشرفته پیکربندی که استقرارهای امن و کارآمد Azure را ممکن می‌سازند، یاد خواهید گرفت.
+این راهنمای جامع تمام جنبه‌های پیکربندی Azure Developer CLI را برای بهینه‌سازی فرآیندهای توسعه و استقرار پوشش می‌دهد. شما با سلسله‌مراتب پیکربندی، مدیریت محیط‌ها، روش‌های احراز هویت و الگوهای پیشرفته پیکربندی آشنا خواهید شد که استقرارهای امن و کارآمد در Azure را ممکن می‌سازند.
 
 ## اهداف یادگیری
 
 در پایان این درس، شما:
 - به سلسله‌مراتب پیکربندی azd مسلط خواهید شد و نحوه اولویت‌بندی تنظیمات را درک خواهید کرد
-- تنظیمات جهانی و پروژه‌محور را به طور مؤثر پیکربندی خواهید کرد
-- محیط‌های متعدد با پیکربندی‌های مختلف را مدیریت خواهید کرد
+- تنظیمات جهانی و مخصوص پروژه را به طور مؤثر پیکربندی خواهید کرد
+- محیط‌های مختلف با تنظیمات متفاوت را مدیریت خواهید کرد
 - الگوهای امن احراز هویت و مجوزدهی را پیاده‌سازی خواهید کرد
 - الگوهای پیشرفته پیکربندی برای سناریوهای پیچیده را درک خواهید کرد
 
 ## نتایج یادگیری
 
-پس از تکمیل این درس، شما قادر خواهید بود:
-- azd را برای جریان‌های کاری توسعه بهینه پیکربندی کنید
-- محیط‌های استقرار متعدد را تنظیم و مدیریت کنید
+پس از اتمام این درس، شما قادر خواهید بود:
+- azd را برای فرآیندهای توسعه بهینه پیکربندی کنید
+- محیط‌های استقرار چندگانه را تنظیم و مدیریت کنید
 - شیوه‌های مدیریت پیکربندی امن را پیاده‌سازی کنید
-- مشکلات مرتبط با پیکربندی را رفع کنید
+- مشکلات مربوط به پیکربندی را عیب‌یابی کنید
 - رفتار azd را برای نیازهای خاص سازمانی سفارشی کنید
 
-این راهنمای جامع تمام جنبه‌های پیکربندی Azure Developer CLI را برای جریان‌های کاری توسعه و استقرار بهینه پوشش می‌دهد.
+این راهنمای جامع تمام جنبه‌های پیکربندی Azure Developer CLI را برای بهینه‌سازی فرآیندهای توسعه و استقرار پوشش می‌دهد.
 
 ## سلسله‌مراتب پیکربندی
 
 azd از یک سیستم پیکربندی سلسله‌مراتبی استفاده می‌کند:
-1. **فلگ‌های خط فرمان** (بالاترین اولویت)
+1. **پرچم‌های خط فرمان** (بالاترین اولویت)
 2. **متغیرهای محیطی**
-3. **پیکربندی پروژه محلی** (`.azd/config.json`)
-4. **پیکربندی کاربر جهانی** (`~/.azd/config.json`)
+3. **پیکربندی محلی پروژه** (`.azd/config.json`)
+4. **پیکربندی جهانی کاربر** (`~/.azd/config.json`)
 5. **مقادیر پیش‌فرض** (کمترین اولویت)
 
 ## پیکربندی جهانی
 
 ### تنظیم مقادیر پیش‌فرض جهانی
 ```bash
-# Set default subscription
+# تنظیم اشتراک پیش‌فرض
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# تنظیم مکان پیش‌فرض
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# تنظیم نام‌گذاری پیش‌فرض گروه منابع
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# مشاهده تمام تنظیمات جهانی
 azd config list
 
-# Remove a configuration
+# حذف یک تنظیم
 azd config unset defaults.location
 ```
 
 ### تنظیمات عمومی جهانی
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# ترجیحات توسعه
+azd config set alpha.enable true                    # فعال کردن ویژگی‌های آلفا
+azd config set telemetry.enabled false             # غیرفعال کردن تله‌متری
+azd config set output.format json                  # تنظیم قالب خروجی
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# تنظیمات امنیتی
+azd config set auth.useAzureCliCredential true     # استفاده از CLI آژور برای احراز هویت
+azd config set tls.insecure false                  # اعمال تأیید TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# تنظیم عملکرد
+azd config set provision.parallelism 5             # ایجاد منابع به صورت موازی
+azd config set deploy.timeout 30m                  # زمان‌بندی پایان استقرار
 ```
 
 ## 🏗️ پیکربندی پروژه
@@ -185,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### تنظیمات زبان‌محور
+#### تنظیمات مخصوص زبان
 ```yaml
 services:
   node-app:
@@ -213,18 +213,18 @@ services:
 
 ### ایجاد محیط‌ها
 ```bash
-# Create a new environment
+# ایجاد یک محیط جدید
 azd env new development
 
-# Create with specific location
+# ایجاد با مکان خاص
 azd env new staging --location "westus2"
 
-# Create from template
+# ایجاد از الگو
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### پیکربندی محیط
-هر محیط دارای پیکربندی خاص خود در `.azure/<env-name>/config.json` است:
+هر محیط پیکربندی خاص خود را در `.azure/<env-name>/config.json` دارد:
 
 ```json
 {
@@ -248,66 +248,75 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 
 ### متغیرهای محیطی
 ```bash
-# Set environment-specific variables
+# تنظیم متغیرهای خاص محیط
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# مشاهده متغیرهای محیط
 azd env get-values
 
-# Remove environment variable
+# خروجی مورد انتظار:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# حذف متغیر محیط
 azd env unset DEBUG
+
+# تأیید حذف
+azd env get-values | grep DEBUG
+# (نباید چیزی برگرداند)
 ```
 
 ### قالب‌های محیط
-فایل `.azure/env.template` را برای تنظیم محیط‌های یکسان ایجاد کنید:
+برای تنظیم محیط‌های یکسان، فایل `.azure/env.template` ایجاد کنید:
 ```bash
-# Required variables
+# متغیرهای مورد نیاز
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# تنظیمات برنامه
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# تنظیمات اختیاری توسعه
 DEBUG=false
 LOG_LEVEL=info
 ```
 
 ## 🔐 پیکربندی احراز هویت
 
-### یکپارچه‌سازی Azure CLI
+### یکپارچه‌سازی با Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# استفاده از اعتبارنامه‌های Azure CLI (پیش‌فرض)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# ورود با مستاجر خاص
 az login --tenant <tenant-id>
 
-# Set default subscription
+# تنظیم اشتراک پیش‌فرض
 az account set --subscription <subscription-id>
 ```
 
 ### احراز هویت با Service Principal
 برای خطوط لوله CI/CD:
 ```bash
-# Set environment variables
+# تنظیم متغیرهای محیطی
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# یا مستقیماً پیکربندی کنید
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### هویت مدیریت‌شده
-برای محیط‌های میزبانی‌شده در Azure:
+برای محیط‌های میزبانی شده در Azure:
 ```bash
-# Enable managed identity authentication
+# احراز هویت هویت مدیریت‌شده را فعال کنید
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -385,13 +394,14 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
+
 مثال `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 پیکربندی پیشرفته
 
 ### نام‌گذاری منابع سفارشی
 ```bash
-# Set naming conventions
+# تنظیم قراردادهای نام‌گذاری
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -420,7 +430,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 پیکربندی‌های محیط‌محور
+## 🎯 پیکربندی‌های مخصوص محیط
 
 ### محیط توسعه
 ```bash
@@ -453,13 +463,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### اعتبارسنجی پیکربندی
 ```bash
-# Check configuration syntax
+# بررسی نحو پیکربندی
 azd config validate
 
-# Test environment variables
+# آزمایش متغیرهای محیطی
 azd env get-values
 
-# Validate infrastructure
+# اعتبارسنجی زیرساخت
 azd provision --dry-run
 ```
 
@@ -472,13 +482,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# بررسی متغیرهای محیطی مورد نیاز
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# اعتبارسنجی نحو azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,9 +529,9 @@ database:
 ### 3. ملاحظات کنترل نسخه
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # پیکربندی‌های محیط (شامل شناسه‌های منابع)
+.azure/*/.env               # متغیرهای محیطی (ممکن است شامل اطلاعات محرمانه باشد)
+.env                        # فایل محیط محلی
 ```
 
 ### 4. مستندسازی پیکربندی
@@ -540,7 +550,69 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## مراحل بعدی
+## 🎯 تمرین‌های عملی
+
+### تمرین ۱: پیکربندی چند محیطی (۱۵ دقیقه)
+
+**هدف**: ایجاد و پیکربندی سه محیط با تنظیمات مختلف
+
+```bash
+# ایجاد محیط توسعه
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# ایجاد محیط مرحله‌بندی
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# ایجاد محیط تولید
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# تأیید هر محیط
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**معیارهای موفقیت:**
+- [ ] سه محیط با موفقیت ایجاد شده‌اند
+- [ ] هر محیط دارای پیکربندی منحصربه‌فرد است
+- [ ] امکان جابجایی بین محیط‌ها بدون خطا وجود دارد
+- [ ] `azd env list` تمام سه محیط را نشان می‌دهد
+
+### تمرین ۲: مدیریت اسرار (۱۰ دقیقه)
+
+**هدف**: تمرین پیکربندی امن با داده‌های حساس
+
+```bash
+# تنظیم اسرار (در خروجی نمایش داده نمی‌شود)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# تنظیم پیکربندی غیر محرمانه
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# مشاهده محیط (اسرار باید مخفی شوند)
+azd env get-values
+
+# تأیید کنید که اسرار ذخیره شده‌اند
+azd env get DB_PASSWORD  # باید مقدار واقعی را نشان دهد
+```
+
+**معیارهای موفقیت:**
+- [ ] اسرار بدون نمایش در ترمینال ذخیره شده‌اند
+- [ ] `azd env get-values` اسرار را به صورت مخفی نشان می‌دهد
+- [ ] `azd env get <SECRET_NAME>` مقدار واقعی را بازیابی می‌کند
+
+## گام‌های بعدی
 
 - [اولین پروژه شما](first-project.md) - اعمال پیکربندی در عمل
 - [راهنمای استقرار](../deployment/deployment-guide.md) - استفاده از پیکربندی برای استقرار
@@ -556,12 +628,14 @@ database:
 
 **فهرست فصل‌ها:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل ۳ - پیکربندی و احراز هویت
+- **📖 فصل جاری**: فصل ۳ - پیکربندی و احراز هویت
 - **⬅️ قبلی**: [اولین پروژه شما](first-project.md)
 - **➡️ فصل بعدی**: [فصل ۴: زیرساخت به عنوان کد](../deployment/deployment-guide.md)
 - **درس بعدی**: [اولین پروژه شما](first-project.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **سلب مسئولیت**:  
-این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما تلاش می‌کنیم دقت را حفظ کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌ها باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، توصیه می‌شود از ترجمه حرفه‌ای انسانی استفاده کنید. ما مسئولیتی در قبال سوءتفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما مسئولیتی در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

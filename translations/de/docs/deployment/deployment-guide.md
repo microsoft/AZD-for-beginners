@@ -1,30 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-17T16:09:38+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-19T22:52:01+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "de"
 }
 -->
-# Bereitstellungsanleitung - AZD-Bereitstellungen meistern
+# Bereitstellungsleitfaden - AZD-Bereitstellungen meistern
 
 **Kapitelübersicht:**
 - **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 4 - Infrastruktur als Code & Bereitstellung
 - **⬅️ Vorheriges Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 - **➡️ Weiter**: [Ressourcen bereitstellen](provisioning.md)
-- **🚀 Nächstes Kapitel**: [Kapitel 5: Multi-Agent KI-Lösungen](../../examples/retail-scenario.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 5: Multi-Agent-AI-Lösungen](../../examples/retail-scenario.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden behandelt alles, was Sie über die Bereitstellung von Anwendungen mit Azure Developer CLI wissen müssen – von einfachen Bereitstellungen mit einem einzigen Befehl bis hin zu fortgeschrittenen Produktionsszenarien mit benutzerdefinierten Hooks, mehreren Umgebungen und CI/CD-Integration. Meistern Sie den gesamten Bereitstellungslebenszyklus mit praktischen Beispielen und bewährten Verfahren.
+Dieser umfassende Leitfaden behandelt alles, was Sie über die Bereitstellung von Anwendungen mit Azure Developer CLI wissen müssen – von einfachen Ein-Kommando-Bereitstellungen bis hin zu fortgeschrittenen Produktionsszenarien mit benutzerdefinierten Hooks, mehreren Umgebungen und CI/CD-Integration. Meistern Sie den gesamten Bereitstellungszyklus mit praktischen Beispielen und bewährten Verfahren.
 
 ## Lernziele
 
 Nach Abschluss dieses Leitfadens werden Sie:
 - Alle Azure Developer CLI-Befehle und Workflows für die Bereitstellung beherrschen
-- Den vollständigen Bereitstellungslebenszyklus von der Bereitstellung bis zur Überwachung verstehen
+- Den vollständigen Bereitstellungszyklus von der Bereitstellung bis zur Überwachung verstehen
 - Benutzerdefinierte Bereitstellungshooks für Automatisierung vor und nach der Bereitstellung implementieren
 - Mehrere Umgebungen mit umgebungsspezifischen Parametern konfigurieren
 - Fortgeschrittene Bereitstellungsstrategien wie Blue-Green- und Canary-Bereitstellungen einrichten
@@ -53,42 +53,76 @@ Azure Developer CLI bietet mehrere Bereitstellungsbefehle:
 ### Vollständige Bereitstellung (azd up)
 Der häufigste Workflow für neue Projekte:
 ```bash
-# Deploy everything from scratch
+# Alles von Grund auf neu bereitstellen
 azd up
 
-# Deploy with specific environment
+# Mit spezifischer Umgebung bereitstellen
 azd up --environment production
 
-# Deploy with custom parameters
+# Mit benutzerdefinierten Parametern bereitstellen
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Nur Infrastruktur-Bereitstellung
 Wenn Sie nur Azure-Ressourcen aktualisieren müssen:
 ```bash
-# Provision/update infrastructure
+# Bereitstellen/aktualisieren der Infrastruktur
 azd provision
 
-# Provision with dry-run to preview changes
+# Bereitstellung mit Dry-Run, um Änderungen vorzuschauen
 azd provision --preview
 
-# Provision specific services
+# Bestimmte Dienste bereitstellen
 azd provision --service database
 ```
 
 ### Nur Code-Bereitstellung
-Für schnelle Anwendungsaktualisierungen:
+Für schnelle Anwendungsupdates:
 ```bash
-# Deploy all services
+# Alle Dienste bereitstellen
 azd deploy
 
-# Deploy specific service
+# Erwartete Ausgabe:
+# Dienste werden bereitgestellt (azd deploy)
+# - web: Bereitstellung... Fertig
+# - api: Bereitstellung... Fertig
+# ERFOLG: Ihre Bereitstellung wurde in 2 Minuten und 15 Sekunden abgeschlossen
+
+# Spezifischen Dienst bereitstellen
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# Mit benutzerdefinierten Build-Argumenten bereitstellen
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Bereitstellung überprüfen
+azd show --output json | jq '.services'
 ```
+
+### ✅ Bereitstellungsüberprüfung
+
+Nach jeder Bereitstellung den Erfolg überprüfen:
+
+```bash
+# Überprüfen Sie, ob alle Dienste laufen
+azd show
+
+# Testen Sie die Health-Endpunkte
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Überprüfen Sie die Protokolle auf Fehler
+azd logs --service api --since 5m | grep -i error
+```
+
+**Erfolgskriterien:**
+- ✅ Alle Dienste zeigen den Status "Running"
+- ✅ Health-Endpunkte geben HTTP 200 zurück
+- ✅ Keine Fehlerprotokolle in den letzten 5 Minuten
+- ✅ Anwendung reagiert auf Testanfragen
 
 ## 🏗️ Verständnis des Bereitstellungsprozesses
 
@@ -195,18 +229,18 @@ services:
 
 ### Umgebungsspezifische Konfigurationen
 ```bash
-# Development environment
+# Entwicklungsumgebung
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# Staging-Umgebung
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# Produktionsumgebung
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -253,17 +287,17 @@ services:
 
 ### Blue-Green-Bereitstellungen
 ```bash
-# Create blue environment
+# Erstelle blaue Umgebung
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blue environment
+# Teste blaue Umgebung
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# Leite den Traffic auf Blau um (manuelles DNS/Load-Balancer-Update)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# Bereinige grüne Umgebung
 azd env select production-green
 azd down --force
 ```
@@ -339,7 +373,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimierung von Multi-Stage-Dockerfiles
+### Multi-Stage-Dockerfile-Optimierung
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -369,10 +403,10 @@ CMD ["npm", "start"]
 
 ### Parallele Bereitstellungen
 ```bash
-# Configure parallel deployment
+# Konfigurieren Sie die parallele Bereitstellung
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# Dienste parallel bereitstellen
 azd deploy --parallel
 ```
 
@@ -392,28 +426,28 @@ services:
 
 ### Inkrementelle Bereitstellungen
 ```bash
-# Deploy only changed services
+# Nur geänderte Dienste bereitstellen
 azd deploy --incremental
 
-# Deploy with change detection
+# Mit Änderungsdetektion bereitstellen
 azd deploy --detect-changes
 ```
 
 ## 🔍 Überwachung der Bereitstellung
 
-### Echtzeitüberwachung der Bereitstellung
+### Echtzeit-Bereitstellungsüberwachung
 ```bash
-# Monitor deployment progress
+# Überwachen Sie den Bereitstellungsfortschritt
 azd deploy --follow
 
-# View deployment logs
+# Bereitstellungsprotokolle anzeigen
 azd logs --follow --service api
 
-# Check deployment status
+# Bereitstellungsstatus überprüfen
 azd show --service api
 ```
 
-### Gesundheitschecks
+### Health-Checks
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -434,7 +468,7 @@ services:
 
 echo "Validating deployment..."
 
-# Check application health
+# Überprüfen Sie die Anwendungsintegrität
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -464,12 +498,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### Geheimnisverwaltung
 ```bash
-# Store secrets securely
+# Geheimnisse sicher speichern
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# Geheimnisse in azure.yaml referenzieren
 ```
 
 ```yaml
@@ -512,29 +546,29 @@ services:
 
 ### Schnelles Rollback
 ```bash
-# Rollback to previous deployment
+# Zurücksetzen auf vorherige Bereitstellung
 azd deploy --rollback
 
-# Rollback specific service
+# Spezifischen Dienst zurücksetzen
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# Auf spezifische Version zurücksetzen
 azd deploy --service api --version v1.2.3
 ```
 
 ### Infrastruktur-Rollback
 ```bash
-# Rollback infrastructure changes
+# Infrastrukturänderungen zurücksetzen
 azd provision --rollback
 
-# Preview rollback changes
+# Änderungen des Rollbacks anzeigen
 azd provision --rollback --preview
 ```
 
-### Rollback von Datenbankmigrationen
+### Datenbank-Migrations-Rollback
 ```bash
 #!/bin/bash
-# scripts/rollback-database.sh
+# skripte/rollback-datenbank.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -549,13 +583,13 @@ echo "Database rollback completed"
 
 ### Bereitstellungsleistung verfolgen
 ```bash
-# Enable deployment metrics
+# Bereitstellungsmetriken aktivieren
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# Bereitstellungshistorie anzeigen
 azd history
 
-# Get deployment statistics
+# Bereitstellungsstatistiken abrufen
 azd metrics --type deployment
 ```
 
@@ -580,26 +614,26 @@ hooks:
 
 ### 1. Konsistenz der Umgebung
 ```bash
-# Use consistent naming
+# Verwenden Sie konsistente Benennungen
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# Erhalten Sie die Übereinstimmung der Umgebungen
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Validierung der Infrastruktur
 ```bash
-# Validate before deployment
+# Vor der Bereitstellung validieren
 azd provision --preview
 azd provision --what-if
 
-# Use ARM/Bicep linting
+# ARM/Bicep-Linting verwenden
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. Integrationstests
+### 3. Integration von Tests
 ```yaml
 hooks:
   predeploy:
@@ -630,7 +664,7 @@ hooks:
 
 ### 4. Dokumentation und Protokollierung
 ```bash
-# Document deployment procedures
+# Dokumentieren Sie die Bereitstellungsverfahren
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -638,10 +672,263 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Nächste Schritte
 
-- [Ressourcen bereitstellen](provisioning.md) - Tiefgehende Analyse des Infrastrukturmanagements
+- [Ressourcen bereitstellen](provisioning.md) - Tiefgehende Infrastrukturverwaltung
 - [Planung vor der Bereitstellung](../pre-deployment/capacity-planning.md) - Ihre Bereitstellungsstrategie planen
 - [Häufige Probleme](../troubleshooting/common-issues.md) - Bereitstellungsprobleme lösen
 - [Best Practices](../troubleshooting/debugging.md) - Produktionsreife Bereitstellungsstrategien
+
+## 🎯 Praktische Übungen zur Bereitstellung
+
+### Übung 1: Inkrementeller Bereitstellungsworkflow (20 Minuten)
+**Ziel**: Unterschied zwischen vollständigen und inkrementellen Bereitstellungen meistern
+
+```bash
+# Erste Bereitstellung
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Zeit der ersten Bereitstellung aufzeichnen
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Eine Codeänderung vornehmen
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Nur Code bereitstellen (schnell)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Zeiten vergleichen
+cat deployment-log.txt
+
+# Aufräumen
+azd down --force --purge
+```
+
+**Erfolgskriterien:**
+- [ ] Vollständige Bereitstellung dauert 5-15 Minuten
+- [ ] Nur Code-Bereitstellung dauert 2-5 Minuten
+- [ ] Codeänderungen werden in der bereitgestellten App reflektiert
+- [ ] Infrastruktur bleibt nach `azd deploy` unverändert
+
+**Lernergebnis**: `azd deploy` ist 50-70% schneller als `azd up` bei Codeänderungen
+
+### Übung 2: Benutzerdefinierte Bereitstellungshooks (30 Minuten)
+**Ziel**: Automatisierung vor und nach der Bereitstellung implementieren
+
+```bash
+# Erstelle ein Validierungsskript vor der Bereitstellung
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Überprüfen, ob Tests bestanden werden
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Überprüfen auf nicht übermittelte Änderungen
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Erstelle einen Smoke-Test nach der Bereitstellung
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Haken zu azure.yaml hinzufügen
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Bereitstellung mit Haken testen
+azd deploy
+```
+
+**Erfolgskriterien:**
+- [ ] Pre-Deploy-Skript wird vor der Bereitstellung ausgeführt
+- [ ] Bereitstellung wird abgebrochen, wenn Tests fehlschlagen
+- [ ] Post-Deploy-Smoke-Test validiert die Gesundheit
+- [ ] Hooks werden in der richtigen Reihenfolge ausgeführt
+
+### Übung 3: Multi-Umgebungs-Bereitstellungsstrategie (45 Minuten)
+**Ziel**: Stufenweise Bereitstellungsworkflow implementieren (Dev → Staging → Produktion)
+
+```bash
+# Erstelle Bereitstellungsskript
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Schritt 1: Bereitstellung in Entwicklung
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Schritt 2: Bereitstellung in Staging
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Schritt 3: Manuelle Genehmigung für Produktion
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Erstelle Umgebungen
+azd env new dev
+azd env new staging
+azd env new production
+
+# Führe gestufte Bereitstellung aus
+./deploy-staged.sh
+```
+
+**Erfolgskriterien:**
+- [ ] Dev-Umgebung wird erfolgreich bereitgestellt
+- [ ] Staging-Umgebung wird erfolgreich bereitgestellt
+- [ ] Manuelle Genehmigung für Produktion erforderlich
+- [ ] Alle Umgebungen haben funktionierende Health-Checks
+- [ ] Rollback ist bei Bedarf möglich
+
+### Übung 4: Rollback-Strategie (25 Minuten)
+**Ziel**: Bereitstellungs-Rollback implementieren und testen
+
+```bash
+# Bereitstellen v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Speichere v1-Konfiguration
+cp -r .azure/production .azure/production-v1-backup
+
+# Bereitstellen v2 mit inkompatibler Änderung
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Fehler erkennen
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Code zurücksetzen
+    git checkout src/api/src/server.js
+    
+    # Umgebung zurücksetzen
+    azd env set APP_VERSION "1.0.0"
+    
+    # Erneut bereitstellen v1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Erfolgskriterien:**
+- [ ] Bereitstellungsfehler können erkannt werden
+- [ ] Rollback-Skript wird automatisch ausgeführt
+- [ ] Anwendung kehrt in funktionierenden Zustand zurück
+- [ ] Health-Checks bestehen nach Rollback
+
+## 📊 Verfolgung von Bereitstellungsmetriken
+
+### Verfolgen Sie Ihre Bereitstellungsleistung
+
+```bash
+# Erstelle ein Bereitstellungsmetriken-Skript
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# In Datei protokollieren
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Verwende es
+./track-deployment.sh
+```
+
+**Analysieren Sie Ihre Metriken:**
+```bash
+# Bereitstellungshistorie anzeigen
+cat deployment-metrics.csv
+
+# Durchschnittliche Bereitstellungszeit berechnen
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
 
 ## Zusätzliche Ressourcen
 
@@ -658,5 +945,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

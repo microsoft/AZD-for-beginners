@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T16:07:26+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-19T23:01:02+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "de"
 }
@@ -10,21 +10,21 @@ CO_OP_TRANSLATOR_METADATA:
 # Best Practices für produktive KI-Workloads mit AZD
 
 **Kapitelübersicht:**
-- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📚 Kursübersicht**: [AZD für Einsteiger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 8 - Produktions- & Unternehmensmuster
 - **⬅️ Vorheriges Kapitel**: [Kapitel 7: Fehlerbehebung](../troubleshooting/debugging.md)
 - **⬅️ Ebenfalls relevant**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Kursabschluss**: [AZD für Anfänger](../../README.md)
+- **🎯 Kursabschluss**: [AZD für Einsteiger](../../README.md)
 
 ## Überblick
 
-Dieser Leitfaden bietet umfassende Best Practices für die Bereitstellung produktionsreifer KI-Workloads mit Azure Developer CLI (AZD). Basierend auf Feedback der Azure AI Foundry Discord-Community und realen Kundenbereitstellungen werden hier die häufigsten Herausforderungen in produktiven KI-Systemen adressiert.
+Dieser Leitfaden bietet umfassende Best Practices für die Bereitstellung produktionsreifer KI-Workloads mit dem Azure Developer CLI (AZD). Basierend auf Feedback der Microsoft Foundry Discord-Community und realen Kundenbereitstellungen werden hier die häufigsten Herausforderungen in produktiven KI-Systemen adressiert.
 
 ## Wichtige Herausforderungen
 
 Basierend auf den Ergebnissen unserer Community-Umfrage sind dies die größten Herausforderungen für Entwickler:
 
-- **45 %** haben Schwierigkeiten mit der Bereitstellung von KI-Workloads mit mehreren Diensten
+- **45 %** haben Schwierigkeiten mit Multi-Service-KI-Bereitstellungen
 - **38 %** kämpfen mit der Verwaltung von Anmeldedaten und Geheimnissen  
 - **35 %** finden Produktionsreife und Skalierung schwierig
 - **32 %** benötigen bessere Strategien zur Kostenoptimierung
@@ -251,9 +251,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Leistung und Skalierung
 
-### 1. Auto-Skalierungsstrategien
+### 1. Auto-Scaling-Strategien
 
-**Auto-Skalierung für Container-Apps**:
+**Auto-Scaling für Container-Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Umgebungsspezifische Konfigurationen**:
 
 ```bash
-# Development environment
+# Entwicklungsumgebung
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Produktionsumgebung
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI-Kostenmanagement**:
 
 ```typescript
-// Application-level token optimization
+// Token-Optimierung auf Anwendungsebene
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Kontext kürzen, nicht Benutzereingabe
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Grobe Schätzung: 1 Token ≈ 4 Zeichen
     return Math.ceil(text.length / 4);
   }
 }
@@ -461,7 +461,7 @@ class TokenOptimizer {
 
 ## Überwachung und Beobachtbarkeit
 
-### 1. Umfassende Anwendungsüberwachung
+### 1. Umfassende Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -508,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. KI-spezifische Überwachung
 
-**Individuelle Dashboards für KI-Metriken**:
+**Benutzerdefinierte Dashboards für KI-Metriken**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -608,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Notfallwiederherstellung und hohe Verfügbarkeit
 
-### 1. Bereitstellung in mehreren Regionen
+### 1. Multi-Region-Bereitstellung
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -670,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Daten-Backup und Wiederherstellung
+### 2. Datensicherung und Wiederherstellung
 
 ```bicep
 // Backup configuration for critical data
@@ -721,7 +721,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps und CI/CD-Integration
+## DevOps- und CI/CD-Integration
 
 ### 1. GitHub Actions Workflow
 
@@ -807,12 +807,12 @@ jobs:
 ### 2. Infrastrukturvalidierung
 
 ```bash
-# scripts/validate_infrastructure.sh
+# skripte/validate_infrastructure.sh
 #!/bin/bash
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Überprüfen, ob alle erforderlichen Dienste laufen
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# OpenAI-Modellbereitstellungen validieren
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# KI-Dienstkonnektivität testen
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -848,7 +848,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] WAF auf öffentlichen Endpunkten aktiviert
 
 ### Leistung ✅
-- [ ] Auto-Skalierung konfiguriert
+- [ ] Auto-Scaling konfiguriert
 - [ ] Caching implementiert
 - [ ] Lastverteilung eingerichtet
 - [ ] CDN für statische Inhalte
@@ -857,24 +857,24 @@ echo "Infrastructure validation completed successfully!"
 
 ### Überwachung ✅
 - [ ] Application Insights konfiguriert
-- [ ] Individuelle Metriken definiert
+- [ ] Benutzerdefinierte Metriken definiert
 - [ ] Alarmregeln eingerichtet
 - [ ] Dashboard erstellt
 - [ ] Gesundheitsprüfungen implementiert
 - [ ] Protokollaufbewahrungsrichtlinien
 
 ### Zuverlässigkeit ✅
-- [ ] Bereitstellung in mehreren Regionen
+- [ ] Multi-Region-Bereitstellung
 - [ ] Backup- und Wiederherstellungsplan
 - [ ] Circuit Breaker implementiert
 - [ ] Wiederholungsrichtlinien konfiguriert
-- [ ] Graceful Degradation
+- [ ] Sanfte Degradierung
 - [ ] Endpunkte für Gesundheitsprüfungen
 
 ### Kostenmanagement ✅
 - [ ] Budgetwarnungen konfiguriert
 - [ ] Ressourcenanpassung
-- [ ] Rabatte für Entwicklung/Test angewendet
+- [ ] Dev/Test-Rabatte angewendet
 - [ ] Reservierte Instanzen gekauft
 - [ ] Kostenüberwachungs-Dashboard
 - [ ] Regelmäßige Kostenüberprüfungen
@@ -885,7 +885,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Compliance-Richtlinien angewendet
 - [ ] Sicherheitsgrundlagen implementiert
 - [ ] Regelmäßige Sicherheitsbewertungen
-- [ ] Plan für Vorfallreaktionen
+- [ ] Notfallreaktionsplan
 
 ## Leistungsbenchmarks
 
@@ -898,12 +898,12 @@ echo "Infrastructure validation completed successfully!"
 | **Fehlerrate** | < 0,1 % | Anwendungsprotokolle |
 | **Token-Nutzung** | < $500/Monat | Kostenmanagement |
 | **Gleichzeitige Benutzer** | 1000+ | Lasttests |
-| **Wiederherstellungszeit** | < 1 Stunde | Tests zur Notfallwiederherstellung |
+| **Wiederherstellungszeit** | < 1 Stunde | Notfallwiederherstellungstests |
 
 ### Lasttests
 
 ```bash
-# Load testing script for AI applications
+# Lasttestskript für KI-Anwendungen
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,19 +913,19 @@ python scripts/load_test.py \
 
 ## 🤝 Community-Best Practices
 
-Basierend auf Feedback der Azure AI Foundry Discord-Community:
+Basierend auf dem Feedback der Microsoft Foundry Discord-Community:
 
 ### Top-Empfehlungen der Community:
 
-1. **Klein anfangen, schrittweise skalieren**: Beginnen Sie mit grundlegenden SKUs und skalieren Sie basierend auf tatsächlicher Nutzung
-2. **Alles überwachen**: Richten Sie von Anfang an umfassende Überwachung ein
+1. **Klein anfangen, schrittweise skalieren**: Beginnen Sie mit grundlegenden SKUs und skalieren Sie basierend auf der tatsächlichen Nutzung
+2. **Alles überwachen**: Richten Sie von Anfang an eine umfassende Überwachung ein
 3. **Sicherheit automatisieren**: Verwenden Sie Infrastructure as Code für konsistente Sicherheit
 4. **Gründlich testen**: Integrieren Sie KI-spezifische Tests in Ihre Pipeline
 5. **Kosten planen**: Überwachen Sie die Token-Nutzung und richten Sie frühzeitig Budgetwarnungen ein
 
 ### Häufige Fehler, die vermieden werden sollten:
 
-- ❌ API-Schlüssel im Code hartcodieren
+- ❌ API-Schlüssel im Code hartkodieren
 - ❌ Keine ordnungsgemäße Überwachung einrichten
 - ❌ Kostenoptimierung ignorieren
 - ❌ Fehler-Szenarien nicht testen
@@ -934,22 +934,24 @@ Basierend auf Feedback der Azure AI Foundry Discord-Community:
 ## Zusätzliche Ressourcen
 
 - **Azure Well-Architected Framework**: [Leitfaden für KI-Workloads](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry-Dokumentation**: [Offizielle Dokumentation](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Foundry Dokumentation**: [Offizielle Dokumentation](https://learn.microsoft.com/azure/ai-studio/)
 - **Community-Vorlagen**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord-Community**: [#Azure-Kanal](https://discord.gg/microsoft-azure)
 
 ---
 
 **Kapitelübersicht:**
-- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📚 Kursübersicht**: [AZD für Einsteiger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 8 - Produktions- & Unternehmensmuster
 - **⬅️ Vorheriges Kapitel**: [Kapitel 7: Fehlerbehebung](../troubleshooting/debugging.md)
 - **⬅️ Ebenfalls relevant**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Kursabschluss**: [AZD für Anfänger](../../README.md)
+- **🎆 Kursabschluss**: [AZD für Einsteiger](../../README.md)
 
 **Denken Sie daran**: Produktive KI-Workloads erfordern sorgfältige Planung, Überwachung und kontinuierliche Optimierung. Beginnen Sie mit diesen Mustern und passen Sie sie an Ihre spezifischen Anforderungen an.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Haftungsausschluss**:  
 Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

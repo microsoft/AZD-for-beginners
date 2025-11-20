@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T16:39:33+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-20T00:31:36+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "pl"
 }
@@ -13,28 +13,28 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
 - **📖 Obecny rozdział**: Rozdział 8 - Wzorce produkcyjne i korporacyjne
 - **⬅️ Poprzedni rozdział**: [Rozdział 7: Rozwiązywanie problemów](../troubleshooting/debugging.md)
-- **⬅️ Powiązane**: [Laboratorium warsztatowe AI](ai-workshop-lab.md)
+- **⬅️ Powiązane**: [Warsztat AI](ai-workshop-lab.md)
 - **🎯 Zakończenie kursu**: [AZD dla początkujących](../../README.md)
 
 ## Przegląd
 
-Ten przewodnik zawiera kompleksowe najlepsze praktyki dotyczące wdrażania produkcyjnych obciążeń AI za pomocą Azure Developer CLI (AZD). Na podstawie opinii społeczności Azure AI Foundry na Discordzie oraz wdrożeń u rzeczywistych klientów, te praktyki rozwiązują najczęstsze wyzwania w systemach AI na poziomie produkcyjnym.
+Ten przewodnik przedstawia kompleksowe najlepsze praktyki dotyczące wdrażania produkcyjnych obciążeń AI za pomocą Azure Developer CLI (AZD). Na podstawie opinii społeczności Microsoft Foundry Discord oraz rzeczywistych wdrożeń u klientów, te praktyki rozwiązują najczęstsze wyzwania w systemach AI na poziomie produkcyjnym.
 
 ## Kluczowe wyzwania
 
-Na podstawie wyników ankiety w naszej społeczności, oto najważniejsze wyzwania, z którymi mierzą się deweloperzy:
+Na podstawie wyników ankiety w naszej społeczności, oto najczęstsze problemy, z którymi mierzą się deweloperzy:
 
 - **45%** ma trudności z wdrożeniami AI obejmującymi wiele usług
-- **38%** napotyka problemy z zarządzaniem poświadczeniami i sekretami  
+- **38%** napotyka problemy z zarządzaniem poświadczeniami i tajemnicami  
 - **35%** uważa, że gotowość produkcyjna i skalowanie są trudne
 - **32%** potrzebuje lepszych strategii optymalizacji kosztów
 - **29%** wymaga ulepszonego monitorowania i rozwiązywania problemów
 
-## Wzorce architektury dla produkcyjnych systemów AI
+## Wzorce architektoniczne dla produkcyjnych systemów AI
 
 ### Wzorzec 1: Architektura mikroserwisów AI
 
-**Kiedy używać**: Złożone aplikacje AI z wieloma funkcjonalnościami
+**Kiedy stosować**: Złożone aplikacje AI z wieloma funkcjonalnościami
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -78,7 +78,7 @@ services:
 
 ### Wzorzec 2: Przetwarzanie AI oparte na zdarzeniach
 
-**Kiedy używać**: Przetwarzanie wsadowe, analiza dokumentów, asynchroniczne przepływy pracy
+**Kiedy stosować**: Przetwarzanie wsadowe, analiza dokumentów, asynchroniczne przepływy pracy
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -154,7 +154,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Bezpieczne zarządzanie sekretami
+### 2. Bezpieczne zarządzanie tajemnicami
 
 **Wzorzec integracji z Key Vault**:
 
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Konfiguracje specyficzne dla środowiska**:
 
 ```bash
-# Development environment
+# Środowisko deweloperskie
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Środowisko produkcyjne
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Zarządzanie kosztami OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Optymalizacja tokenów na poziomie aplikacji
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Skracaj kontekst, a nie dane wejściowe użytkownika
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Przybliżone oszacowanie: 1 token ≈ 4 znaki
     return Math.ceil(text.length / 4);
   }
 }
@@ -807,12 +807,12 @@ jobs:
 ### 2. Walidacja infrastruktury
 
 ```bash
-# scripts/validate_infrastructure.sh
+# skrypty/validate_infrastructure.sh
 #!/bin/bash
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Sprawdź, czy wszystkie wymagane usługi działają
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Zweryfikuj wdrożenia modeli OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Przetestuj łączność usługi AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -841,49 +841,49 @@ echo "Infrastructure validation completed successfully!"
 
 ### Bezpieczeństwo ✅
 - [ ] Wszystkie usługi korzystają z zarządzanych tożsamości
-- [ ] Sekrety przechowywane w Key Vault
+- [ ] Tajemnice przechowywane w Key Vault
 - [ ] Prywatne punkty końcowe skonfigurowane
-- [ ] Grupy zabezpieczeń sieciowych wdrożone
+- [ ] Zaimplementowane grupy zabezpieczeń sieciowych
 - [ ] RBAC z zasadą najmniejszych uprawnień
 - [ ] WAF włączony na publicznych punktach końcowych
 
 ### Wydajność ✅
-- [ ] Automatyczne skalowanie skonfigurowane
-- [ ] Buforowanie wdrożone
-- [ ] Równoważenie obciążenia skonfigurowane
+- [ ] Skonfigurowane automatyczne skalowanie
+- [ ] Zaimplementowane buforowanie
+- [ ] Ustawione równoważenie obciążenia
 - [ ] CDN dla treści statycznych
 - [ ] Grupowanie połączeń z bazą danych
 - [ ] Optymalizacja użycia tokenów
 
 ### Monitorowanie ✅
-- [ ] Application Insights skonfigurowane
+- [ ] Skonfigurowane Application Insights
 - [ ] Zdefiniowane niestandardowe metryki
-- [ ] Zasady alertów skonfigurowane
-- [ ] Pulpit nawigacyjny utworzony
-- [ ] Kontrole stanu wdrożone
+- [ ] Ustawione reguły alertów
+- [ ] Utworzony pulpit nawigacyjny
+- [ ] Zaimplementowane kontrole stanu
 - [ ] Polityki przechowywania logów
 
 ### Niezawodność ✅
 - [ ] Wdrożenie w wielu regionach
 - [ ] Plan kopii zapasowych i odzyskiwania
-- [ ] Wyłączniki obwodów wdrożone
-- [ ] Zasady ponawiania skonfigurowane
+- [ ] Zaimplementowane wyłączniki obwodów
+- [ ] Skonfigurowane polityki ponawiania
 - [ ] Łagodne degradacje
 - [ ] Punkty końcowe kontroli stanu
 
 ### Zarządzanie kosztami ✅
-- [ ] Alerty budżetowe skonfigurowane
+- [ ] Skonfigurowane alerty budżetowe
 - [ ] Dopasowanie zasobów
-- [ ] Zniżki dla środowisk deweloperskich/testowych zastosowane
-- [ ] Zakupione instancje zarezerwowane
+- [ ] Zastosowane zniżki dla środowisk dev/test
+- [ ] Zakupione zarezerwowane instancje
 - [ ] Pulpit monitorowania kosztów
 - [ ] Regularne przeglądy kosztów
 
 ### Zgodność ✅
 - [ ] Spełnione wymagania dotyczące lokalizacji danych
 - [ ] Włączone logowanie audytowe
-- [ ] Zastosowane zasady zgodności
-- [ ] Wdrożone podstawy bezpieczeństwa
+- [ ] Zastosowane polityki zgodności
+- [ ] Zaimplementowane podstawy bezpieczeństwa
 - [ ] Regularne oceny bezpieczeństwa
 - [ ] Plan reagowania na incydenty
 
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Testy obciążeniowe
 
 ```bash
-# Load testing script for AI applications
+# Skrypt testowania obciążenia dla aplikacji AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,7 +913,7 @@ python scripts/load_test.py \
 
 ## 🤝 Najlepsze praktyki społeczności
 
-Na podstawie opinii społeczności Azure AI Foundry na Discordzie:
+Na podstawie opinii społeczności Microsoft Foundry Discord:
 
 ### Najważniejsze rekomendacje społeczności:
 
@@ -934,7 +934,7 @@ Na podstawie opinii społeczności Azure AI Foundry na Discordzie:
 ## Dodatkowe zasoby
 
 - **Azure Well-Architected Framework**: [Wskazówki dotyczące obciążeń AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Dokumentacja Azure AI Foundry**: [Oficjalne dokumenty](https://learn.microsoft.com/azure/ai-studio/)
+- **Dokumentacja Microsoft Foundry**: [Oficjalne dokumenty](https://learn.microsoft.com/azure/ai-studio/)
 - **Szablony społeczności**: [Przykłady Azure](https://github.com/Azure-Samples)
 - **Społeczność Discord**: [Kanał #Azure](https://discord.gg/microsoft-azure)
 
@@ -944,12 +944,14 @@ Na podstawie opinii społeczności Azure AI Foundry na Discordzie:
 - **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
 - **📖 Obecny rozdział**: Rozdział 8 - Wzorce produkcyjne i korporacyjne
 - **⬅️ Poprzedni rozdział**: [Rozdział 7: Rozwiązywanie problemów](../troubleshooting/debugging.md)
-- **⬅️ Powiązane**: [Laboratorium warsztatowe AI](ai-workshop-lab.md)
+- **⬅️ Powiązane**: [Warsztat AI](ai-workshop-lab.md)
 - **🎆 Zakończenie kursu**: [AZD dla początkujących](../../README.md)
 
 **Pamiętaj**: Produkcyjne obciążenia AI wymagają starannego planowania, monitorowania i ciągłej optymalizacji. Zacznij od tych wzorców i dostosuj je do swoich specyficznych wymagań.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

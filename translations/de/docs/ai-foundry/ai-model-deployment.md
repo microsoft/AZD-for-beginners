@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T16:07:52+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-19T23:03:23+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "de"
 }
@@ -12,26 +12,26 @@ CO_OP_TRANSLATOR_METADATA:
 **Kapitelübersicht:**
 - **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 2 - KI-First-Entwicklung
-- **⬅️ Vorheriges**: [Integration der Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Vorheriges**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Nächstes**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
-Diese Anleitung bietet umfassende Anweisungen zur Bereitstellung von KI-Modellen mithilfe von AZD-Vorlagen und behandelt alles von der Modellauswahl bis hin zu Produktionsbereitstellungsmustern.
+Diese Anleitung bietet umfassende Anweisungen zur Bereitstellung von KI-Modellen mit AZD-Vorlagen, von der Modellauswahl bis hin zu Produktionsbereitstellungsmustern.
 
 ## Inhaltsverzeichnis
 
 - [Strategie zur Modellauswahl](../../../../docs/ai-foundry)
 - [AZD-Konfiguration für KI-Modelle](../../../../docs/ai-foundry)
 - [Bereitstellungsmuster](../../../../docs/ai-foundry)
-- [Modellmanagement](../../../../docs/ai-foundry)
-- [Überlegungen zur Produktion](../../../../docs/ai-foundry)
+- [Modellverwaltung](../../../../docs/ai-foundry)
+- [Produktionsüberlegungen](../../../../docs/ai-foundry)
 - [Überwachung und Beobachtbarkeit](../../../../docs/ai-foundry)
 
 ## Strategie zur Modellauswahl
 
-### Azure OpenAI-Modelle
+### Azure OpenAI Modelle
 
-Wählen Sie das passende Modell für Ihren Anwendungsfall:
+Wählen Sie das richtige Modell für Ihren Anwendungsfall:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -65,14 +65,14 @@ services:
 |-----------|----------------|----------------------|--------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kosteneffizient für die meisten Workloads |
 | GPT-4 | Komplexes Denken | 20-100 TPM | Höhere Kosten, für Premium-Funktionen verwenden |
-| Text-embedding-ada-002 | Suche, RAG | 30-120 TPM | Essenziell für semantische Suche |
+| Text-embedding-ada-002 | Suche, RAG | 30-120 TPM | Essentiell für semantische Suche |
 | Whisper | Sprache-zu-Text | 10-50 TPM | Workloads zur Audiobearbeitung |
 
 ## AZD-Konfiguration für KI-Modelle
 
-### Bicep-Template-Konfiguration
+### Bicep-Vorlagenkonfiguration
 
-Erstellen Sie Modellbereitstellungen mithilfe von Bicep-Templates:
+Erstellen Sie Modellbereitstellungen mit Bicep-Vorlagen:
 
 ```bicep
 // infra/main.bicep
@@ -133,10 +133,10 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Umgebungsvariablen
 
-Konfigurieren Sie die Umgebung Ihrer Anwendung:
+Konfigurieren Sie Ihre Anwendungsumgebung:
 
 ```bash
-# .env configuration
+# .env-Konfiguration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -145,7 +145,7 @@ AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 
 ## Bereitstellungsmuster
 
-### Muster 1: Bereitstellung in einer Region
+### Muster 1: Einzelregion-Bereitstellung
 
 ```yaml
 # azure.yaml - Single region
@@ -158,12 +158,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Geeignet für:
+Am besten geeignet für:
 - Entwicklung und Tests
 - Anwendungen für einen einzelnen Markt
 - Kostenoptimierung
 
-### Muster 2: Bereitstellung in mehreren Regionen
+### Muster 2: Multi-Region-Bereitstellung
 
 ```bicep
 // Multi-region deployment
@@ -176,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Geeignet für:
+Am besten geeignet für:
 - Globale Anwendungen
 - Anforderungen an hohe Verfügbarkeit
 - Lastverteilung
@@ -212,7 +212,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Modellmanagement
+## Modellverwaltung
 
 ### Versionskontrolle
 
@@ -240,7 +240,7 @@ Verwenden Sie AZD-Hooks für Modellaktualisierungen:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# hooks/vorbereitungsbereitstellung.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
@@ -273,14 +273,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Überlegungen zur Produktion
+## Produktionsüberlegungen
 
 ### Kapazitätsplanung
 
 Berechnen Sie die benötigte Kapazität basierend auf Nutzungsmustern:
 
 ```python
-# Capacity calculation example
+# Kapazitätsberechnungsbeispiel
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Beispielverwendung
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Verfolgen Sie KI-spezifische Metriken:
 
 ```python
-# Custom telemetry for AI models
+# Benutzerdefinierte Telemetrie für KI-Modelle
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implementieren Sie die Überwachung des Gesundheitszustands von KI-Diensten:
 
 ```python
-# Health check endpoints
+# Gesundheitsprüfungsendpunkte
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # OpenAI-Verbindung testen
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,15 +482,15 @@ async def check_ai_models():
 
 ## Nächste Schritte
 
-1. **Überprüfen Sie den [Leitfaden zur Integration der Azure AI Foundry](azure-ai-foundry-integration.md)** für Integrationsmuster
+1. **Überprüfen Sie den [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** für Integrationsmuster von Diensten
 2. **Absolvieren Sie das [AI Workshop Lab](ai-workshop-lab.md)** für praktische Erfahrungen
-3. **Implementieren Sie [Produktions-KI-Praktiken](production-ai-practices.md)** für Unternehmenseinsätze
-4. **Erkunden Sie den [Leitfaden zur Fehlerbehebung bei KI](../troubleshooting/ai-troubleshooting.md)** für häufige Probleme
+3. **Implementieren Sie [Produktions-KI-Praktiken](production-ai-practices.md)** für Unternehmensbereitstellungen
+4. **Erkunden Sie den [KI-Fehlerbehebungsleitfaden](../troubleshooting/ai-troubleshooting.md)** für häufige Probleme
 
 ## Ressourcen
 
-- [Verfügbarkeit von Azure OpenAI-Modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Dokumentation zur Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Verfügbarkeit von Azure OpenAI Modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Skalierung von Container-Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Kostenoptimierung für KI-Modelle](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Kapitelübersicht:**
 - **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 2 - KI-First-Entwicklung
-- **⬅️ Vorheriges**: [Integration der Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Vorheriges**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Nächstes**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
