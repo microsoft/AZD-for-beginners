@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-17T18:41:02+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-20T08:05:27+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "ur"
 }
@@ -10,79 +10,79 @@ CO_OP_TRANSLATOR_METADATA:
 # عام مسائل اور ان کے حل
 
 **باب کی نیویگیشن:**
-- **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
+- **📚 کورس ہوم**: [AZD ابتدائیوں کے لیے](../../README.md)
 - **📖 موجودہ باب**: باب 7 - خرابیوں کا پتہ لگانا اور ڈیبگنگ
 - **⬅️ پچھلا باب**: [باب 6: پری فلائٹ چیکس](../pre-deployment/preflight-checks.md)
 - **➡️ اگلا**: [ڈیبگنگ گائیڈ](debugging.md)
-- **🚀 اگلا باب**: [باب 8: پروڈکشن اور انٹرپرائز پیٹرنز](../ai-foundry/production-ai-practices.md)
+- **🚀 اگلا باب**: [باب 8: پروڈکشن اور انٹرپرائز پیٹرنز](../microsoft-foundry/production-ai-practices.md)
 
 ## تعارف
 
-یہ جامع گائیڈ Azure Developer CLI استعمال کرتے وقت پیش آنے والے عام مسائل کا احاطہ کرتی ہے۔ اس میں آپ کو مسائل کی تشخیص، خرابیوں کا پتہ لگانے، اور ان کے حل کے طریقے سکھائے جائیں گے، جن میں توثیق، ڈپلائمنٹ، انفراسٹرکچر کی تیاری، اور ایپلیکیشن کنفیگریشن شامل ہیں۔ ہر مسئلے کے لیے تفصیلی علامات، بنیادی وجوہات، اور مرحلہ وار حل فراہم کیے گئے ہیں۔
+یہ جامع گائیڈ Azure Developer CLI استعمال کرتے وقت پیش آنے والے عام مسائل کا احاطہ کرتی ہے۔ اس میں آپ کو مسائل کی تشخیص، خرابیوں کا پتہ لگانے، اور تصدیق، ڈپلائمنٹ، انفراسٹرکچر پروویژننگ، اور ایپلیکیشن کنفیگریشن کے مسائل کو حل کرنے کے طریقے سکھائے جائیں گے۔ ہر مسئلے کے لیے تفصیلی علامات، بنیادی وجوہات، اور مرحلہ وار حل شامل ہیں۔
 
 ## سیکھنے کے مقاصد
 
-اس گائیڈ کو مکمل کرنے کے بعد آپ:
-- Azure Developer CLI کے مسائل کی تشخیص کے ماہر بن جائیں گے
-- عام توثیق اور اجازت کے مسائل اور ان کے حل کو سمجھ سکیں گے
-- ڈپلائمنٹ کی ناکامیوں، انفراسٹرکچر کی تیاری کی غلطیوں، اور کنفیگریشن کے مسائل کو حل کر سکیں گے
-- فعال مانیٹرنگ اور ڈیبگنگ کی حکمت عملیوں کو نافذ کر سکیں گے
-- پیچیدہ مسائل کے لیے منظم خرابیوں کا پتہ لگانے کے طریقے اپنانا سیکھیں گے
-- مستقبل کے مسائل سے بچنے کے لیے مناسب لاگنگ اور مانیٹرنگ کو ترتیب دے سکیں گے
+اس گائیڈ کو مکمل کرنے کے بعد، آپ:
+- Azure Developer CLI کے مسائل کے لیے تشخیصی تکنیکوں میں مہارت حاصل کریں گے
+- عام تصدیق اور اجازت کے مسائل اور ان کے حل کو سمجھیں گے
+- ڈپلائمنٹ کی ناکامیوں، انفراسٹرکچر پروویژننگ کی غلطیوں، اور کنفیگریشن کے مسائل کو حل کریں گے
+- فعال مانیٹرنگ اور ڈیبگنگ کی حکمت عملیوں کو نافذ کریں گے
+- پیچیدہ مسائل کے لیے منظم خرابیوں کا پتہ لگانے کے طریقے اپنائیں گے
+- مستقبل کے مسائل کو روکنے کے لیے مناسب لاگنگ اور مانیٹرنگ کو ترتیب دیں گے
 
 ## سیکھنے کے نتائج
 
-گائیڈ مکمل کرنے کے بعد آپ:
-- Azure Developer CLI کے مسائل کو بلٹ ان ڈائیگنوسٹک ٹولز کے ذریعے تشخیص کر سکیں گے
-- توثیق، سبسکرپشن، اور اجازت سے متعلق مسائل کو خود حل کر سکیں گے
-- ڈپلائمنٹ کی ناکامیوں اور انفراسٹرکچر کی تیاری کی غلطیوں کو مؤثر طریقے سے حل کر سکیں گے
-- ایپلیکیشن کنفیگریشن کے مسائل اور ماحول سے متعلق مسائل کو ڈیبگ کر سکیں گے
-- ممکنہ مسائل کی شناخت کے لیے مانیٹرنگ اور الرٹنگ کو فعال طور پر نافذ کر سکیں گے
-- لاگنگ، ڈیبگنگ، اور مسئلے کے حل کے بہترین طریقوں کو اپنانا سیکھیں گے
+گائیڈ مکمل کرنے کے بعد، آپ قابل ہوں گے:
+- Azure Developer CLI کے مسائل کو بلٹ ان تشخیصی ٹولز کے ذریعے تشخیص کریں
+- تصدیق، سبسکرپشن، اور اجازت سے متعلق مسائل کو خود سے حل کریں
+- ڈپلائمنٹ کی ناکامیوں اور انفراسٹرکچر پروویژننگ کی غلطیوں کو مؤثر طریقے سے حل کریں
+- ایپلیکیشن کنفیگریشن کے مسائل اور ماحول سے متعلق مسائل کو ڈیبگ کریں
+- ممکنہ مسائل کی فعال شناخت کے لیے مانیٹرنگ اور الرٹنگ کو نافذ کریں
+- لاگنگ، ڈیبگنگ، اور مسئلہ حل کرنے کے بہترین طریقوں کو اپنائیں
 
 ## فوری تشخیص
 
-کسی خاص مسئلے میں جانے سے پہلے، یہ کمانڈز چلائیں تاکہ تشخیصی معلومات حاصل کی جا سکیں:
+مخصوص مسائل میں جانے سے پہلے، یہ کمانڈز چلائیں تاکہ تشخیصی معلومات حاصل کی جا سکیں:
 
 ```bash
-# Check azd version and health
+# azd ورژن اور صحت کی جانچ کریں
 azd version
 azd config list
 
-# Verify Azure authentication
+# Azure کی تصدیق کریں
 az account show
 az account list
 
-# Check current environment
+# موجودہ ماحول کی جانچ کریں
 azd env show
 azd env get-values
 
-# Enable debug logging
+# ڈیبگ لاگنگ کو فعال کریں
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
-## توثیق کے مسائل
+## تصدیق کے مسائل
 
 ### مسئلہ: "ایکسس ٹوکن حاصل کرنے میں ناکامی"
 **علامات:**
-- `azd up` توثیق کی غلطیوں کے ساتھ ناکام ہو جاتا ہے
-- کمانڈز "غیر مجاز" یا "رسائی مسترد" کے پیغامات دیتی ہیں
+- `azd up` تصدیق کی غلطیوں کے ساتھ ناکام ہو جاتا ہے
+- کمانڈز "غیر مجاز" یا "رسائی مسترد" واپس کرتی ہیں
 
 **حل:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. Azure CLI کے ساتھ دوبارہ تصدیق کریں
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. کیش شدہ اسناد کو صاف کریں
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. ڈیوائس کوڈ فلو استعمال کریں (ہیڈ لیس سسٹمز کے لیے)
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. واضح سبسکرپشن سیٹ کریں
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
@@ -90,34 +90,34 @@ azd config set defaults.subscription "your-subscription-id"
 ### مسئلہ: ڈپلائمنٹ کے دوران "ناکافی مراعات"
 **علامات:**
 - ڈپلائمنٹ اجازت کی غلطیوں کے ساتھ ناکام ہو جاتا ہے
-- کچھ Azure وسائل تخلیق نہیں ہو پا رہے
+- کچھ Azure وسائل تخلیق نہیں کر سکتے
 
 **حل:**
 ```bash
-# 1. Check your Azure role assignments
+# 1. اپنے Azure کردار کی تفویضات چیک کریں
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. یقینی بنائیں کہ آپ کے پاس مطلوبہ کردار ہیں
+# - معاون (وسائل کی تخلیق کے لیے)
+# - صارف رسائی منتظم (کردار کی تفویضات کے لیے)
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. مناسب اجازتوں کے لیے اپنے Azure منتظم سے رابطہ کریں
 ```
 
-### مسئلہ: ملٹی ٹیننٹ توثیق کے مسائل
+### مسئلہ: ملٹی ٹیننٹ تصدیق کے مسائل
 **حل:**
 ```bash
-# 1. Login with specific tenant
+# 1. مخصوص کرایہ دار کے ساتھ لاگ ان کریں
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. ترتیب میں کرایہ دار سیٹ کریں
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. کرایہ دار تبدیل کرنے پر کرایہ دار کی کیش صاف کریں
 az account clear
 ```
 
-## 🏗️ انفراسٹرکچر کی تیاری کی غلطیاں
+## 🏗️ انفراسٹرکچر پروویژننگ کی غلطیاں
 
 ### مسئلہ: وسائل کے نام کے تنازعات
 **علامات:**
@@ -126,79 +126,79 @@ az account clear
 
 **حل:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# 1. منفرد وسائل کے ناموں کو ٹوکنز کے ساتھ استعمال کریں
+# اپنے Bicep ٹیمپلیٹ میں:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# 2. ماحول کا نام تبدیل کریں
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# 3. موجودہ وسائل کو صاف کریں
 azd down --force --purge
 ```
 
 ### مسئلہ: مقام/علاقہ دستیاب نہیں
 **علامات:**
-- "مقام 'xyz' وسائل کی قسم کے لیے دستیاب نہیں" کی غلطی
+- "مقام 'xyz' وسائل کی قسم کے لیے دستیاب نہیں ہے"
 - منتخب کردہ علاقے میں کچھ SKUs دستیاب نہیں
 
 **حل:**
 ```bash
-# 1. Check available locations for resource types
+# 1. وسائل کی اقسام کے لیے دستیاب مقامات چیک کریں
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. عام دستیاب علاقوں کا استعمال کریں
 azd config set defaults.location eastus2
-# or
+# یا
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. علاقے کے لحاظ سے سروس کی دستیابی چیک کریں
+# ملاحظہ کریں: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
 ### مسئلہ: کوٹہ سے تجاوز کی غلطیاں
 **علامات:**
-- "وسائل کی قسم کے لیے کوٹہ سے تجاوز" کی غلطی
-- "وسائل کی زیادہ سے زیادہ تعداد تک پہنچ چکے ہیں"
+- "وسائل کی قسم کے لیے کوٹہ سے تجاوز"
+- "وسائل کی زیادہ سے زیادہ تعداد تک پہنچ گئی"
 
 **حل:**
 ```bash
-# 1. Check current quota usage
+# 1. موجودہ کوٹہ استعمال کی جانچ کریں
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. Azure پورٹل کے ذریعے کوٹہ میں اضافہ کی درخواست کریں
+# جائیں: سبسکرپشنز > استعمال + کوٹہ
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. ترقی کے لیے چھوٹے SKUs استعمال کریں
+# main.parameters.json میں:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. غیر استعمال شدہ وسائل کو صاف کریں
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### مسئلہ: Bicep ٹیمپلیٹ کی غلطیاں
 **علامات:**
-- ٹیمپلیٹ کی توثیق میں ناکامی
-- Bicep فائلز میں نحو کی غلطیاں
+- ٹیمپلیٹ کی توثیق کی ناکامیاں
+- Bicep فائلوں میں نحو کی غلطیاں
 
 **حل:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. بائیسپ نحو کی توثیق کریں
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. بائیسپ لنٹر استعمال کریں
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. پیرامیٹر فائل نحو چیک کریں
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. تعیناتی تبدیلیوں کا پیش نظارہ کریں
 azd provision --preview
 ```
 
@@ -206,72 +206,72 @@ azd provision --preview
 
 ### مسئلہ: بلڈ کی ناکامیاں
 **علامات:**
-- ڈپلائمنٹ کے دوران ایپلیکیشن بلڈ ہونے میں ناکام
+- ڈپلائمنٹ کے دوران ایپلیکیشن بلڈ ہونے میں ناکام ہو جاتی ہے
 - پیکج انسٹالیشن کی غلطیاں
 
 **حل:**
 ```bash
-# 1. Check build logs
+# 1. تعمیر کے لاگز چیک کریں
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. تعمیر کو مقامی طور پر آزمائیں
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# 3. Node.js/Python ورژن مطابقت چیک کریں
+node --version  # azure.yaml ترتیبات سے مطابقت رکھنی چاہیے
 python --version
 
-# 4. Clear build cache
+# 4. تعمیر کی کیش صاف کریں
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# 5. اگر کنٹینرز استعمال کر رہے ہیں تو Dockerfile چیک کریں
 docker build -t test-image .
 docker run --rm test-image
 ```
 
 ### مسئلہ: کنٹینر ڈپلائمنٹ کی ناکامیاں
 **علامات:**
-- کنٹینر ایپس شروع ہونے میں ناکام
+- کنٹینر ایپس شروع ہونے میں ناکام ہو جاتی ہیں
 - امیج پل کی غلطیاں
 
 **حل:**
 ```bash
-# 1. Test Docker build locally
+# 1. مقامی طور پر ڈاکر بلڈ کی جانچ کریں
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. کنٹینر لاگز چیک کریں
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. کنٹینر رجسٹری تک رسائی کی تصدیق کریں
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. کنٹینر ایپ کی تشکیل چیک کریں
 az containerapp show --name my-app --resource-group my-rg
 ```
 
 ### مسئلہ: ڈیٹا بیس کنکشن کی ناکامیاں
 **علامات:**
-- ایپلیکیشن ڈیٹا بیس سے کنیکٹ نہیں کر پا رہی
+- ایپلیکیشن ڈیٹا بیس سے کنیکٹ نہیں کر سکتی
 - کنکشن ٹائم آؤٹ کی غلطیاں
 
 **حل:**
 ```bash
-# 1. Check database firewall rules
+# 1. ڈیٹا بیس فائر وال قواعد چیک کریں
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# 2. ایپلیکیشن سے کنیکٹیویٹی ٹیسٹ کریں
+# اپنی ایپ میں عارضی طور پر شامل کریں:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# 3. کنکشن سٹرنگ فارمیٹ کی تصدیق کریں
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# 4. ڈیٹا بیس سرور کی حالت چیک کریں
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -279,22 +279,22 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ### مسئلہ: ماحول کے متغیرات کام نہیں کر رہے
 **علامات:**
-- ایپ کنفیگریشن ویلیوز نہیں پڑھ پا رہی
-- ماحول کے متغیرات خالی نظر آ رہے ہیں
+- ایپ کنفیگریشن کی قدریں نہیں پڑھ سکتی
+- ماحول کے متغیرات خالی نظر آتے ہیں
 
 **حل:**
 ```bash
-# 1. Verify environment variables are set
+# 1. تصدیق کریں کہ ماحول کے متغیرات سیٹ ہیں
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. azure.yaml میں متغیر نام چیک کریں
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. ایپلیکیشن کو دوبارہ شروع کریں
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. ایپ سروس کی تشکیل چیک کریں
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -305,34 +305,34 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 **حل:**
 ```bash
-# 1. Check SSL certificate status
+# 1. SSL سرٹیفکیٹ کی حالت چیک کریں
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. صرف HTTPS کو فعال کریں
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. حسب ضرورت ڈومین شامل کریں (اگر ضرورت ہو)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### مسئلہ: CORS کنفیگریشن کے مسائل
 **علامات:**
-- فرنٹ اینڈ API کو کال نہیں کر پا رہا
-- کراس اوریجن درخواست بلاک ہو رہی ہے
+- فرنٹ اینڈ API کو کال نہیں کر سکتا
+- کراس اوریجن درخواست بلاک ہو گئی
 
 **حل:**
 ```bash
-# 1. Configure CORS for App Service
+# 1. ایپ سروس کے لیے CORS کو ترتیب دیں
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. API کو CORS کو سنبھالنے کے لیے اپ ڈیٹ کریں
+# ایکسپریس.js میں:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. چیک کریں کہ آیا درست URLs پر چل رہا ہے
 azd show
 ```
 
@@ -345,61 +345,61 @@ azd show
 
 **حل:**
 ```bash
-# 1. List all environments
+# 1. تمام ماحول کی فہرست بنائیں
 azd env list
 
-# 2. Explicitly select environment
+# 2. ماحول کو واضح طور پر منتخب کریں
 azd env select production
 
-# 3. Verify current environment
+# 3. موجودہ ماحول کی تصدیق کریں
 azd env show
 
-# 4. Create new environment if corrupted
+# 4. اگر خراب ہو تو نیا ماحول بنائیں
 azd env new production-new
 azd env select production-new
 ```
 
 ### مسئلہ: ماحول کی خرابی
 **علامات:**
-- ماحول غیر درست حالت میں دکھائی دے رہا ہے
-- وسائل کنفیگریشن سے میل نہیں کھا رہے
+- ماحول غیر درست حالت دکھاتا ہے
+- وسائل کنفیگریشن سے میل نہیں کھاتے
 
 **حل:**
 ```bash
-# 1. Refresh environment state
+# 1. ماحول کی حالت کو تازہ کریں
 azd env refresh
 
-# 2. Reset environment configuration
+# 2. ماحول کی تشکیل کو دوبارہ ترتیب دیں
 azd env new production-reset
-# Copy over required environment variables
+# مطلوبہ ماحول کے متغیرات کو کاپی کریں
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. موجودہ وسائل کو درآمد کریں (اگر ممکن ہو)
+# .azure/production/config.json کو وسائل کے IDs کے ساتھ دستی طور پر اپ ڈیٹ کریں
 ```
 
 ## 🔍 کارکردگی کے مسائل
 
-### مسئلہ: ڈپلائمنٹ کا وقت زیادہ لگنا
+### مسئلہ: ڈپلائمنٹ کے وقت میں سستی
 **علامات:**
-- ڈپلائمنٹس میں بہت زیادہ وقت لگ رہا ہے
-- ڈپلائمنٹ کے دوران ٹائم آؤٹ ہو رہا ہے
+- ڈپلائمنٹس بہت زیادہ وقت لے رہے ہیں
+- ڈپلائمنٹ کے دوران ٹائم آؤٹ
 
 **حل:**
 ```bash
-# 1. Enable parallel deployment
+# 1. متوازی تعیناتی کو فعال کریں
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# 2. اضافی تعیناتیوں کا استعمال کریں
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# 3. تعمیر کے عمل کو بہتر بنائیں
+# پیکیج.json میں:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# 4. وسائل کے مقامات کو چیک کریں (ایک ہی علاقے کا استعمال کریں)
 azd config set defaults.location eastus2
 ```
 
@@ -410,89 +410,89 @@ azd config set defaults.location eastus2
 
 **حل:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# وسائل کو بڑھائیں
+# main.parameters.json میں SKU کو اپ ڈیٹ کریں:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# ایپلیکیشن انسائٹس مانیٹرنگ کو فعال کریں
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# رکاوٹوں کے لیے ایپلیکیشن لاگز چیک کریں
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# کیشنگ نافذ کریں
+# اپنی انفراسٹرکچر میں Redis کیش شامل کریں
 ```
 
-## 🛠️ خرابیوں کا پتہ لگانے کے ٹولز اور کمانڈز
+## 🛠️ خرابیوں کا پتہ لگانے کے اوزار اور کمانڈز
 
 ### ڈیبگ کمانڈز
 ```bash
-# Comprehensive debugging
+# جامع ڈیبگنگ
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# نظام کی معلومات چیک کریں
 azd info
 
-# Validate configuration
+# ترتیب کی تصدیق کریں
 azd config validate
 
-# Test connectivity
+# کنیکٹیویٹی کی جانچ کریں
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### لاگ تجزیہ
 ```bash
-# Application logs
+# ایپلیکیشن لاگز
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# ایزور ریسورس لاگز
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# کنٹینر لاگز (کنٹینر ایپس کے لئے)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### وسائل کی تحقیقات
 ```bash
-# List all resources
+# تمام وسائل کی فہرست بنائیں
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# وسائل کی حالت چیک کریں
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# نیٹ ورک کی تشخیص
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 اضافی مدد حاصل کرنا
 
-### کب مسئلہ بڑھانا چاہیے
-- تمام حل آزمانے کے بعد بھی توثیق کے مسائل برقرار رہیں
-- Azure سروسز کے ساتھ انفراسٹرکچر کے مسائل
+### کب مسئلہ بڑھایا جائے
+- تمام حل آزمانے کے بعد بھی تصدیق کے مسائل برقرار رہیں
+- Azure خدمات کے ساتھ انفراسٹرکچر کے مسائل
 - بلنگ یا سبسکرپشن سے متعلق مسائل
 - سیکیورٹی کے خدشات یا واقعات
 
 ### سپورٹ چینلز
 ```bash
-# 1. Check Azure Service Health
+# 1. Azure سروس ہیلتھ چیک کریں
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# 2. Azure سپورٹ ٹکٹ بنائیں
+# جائیں: https://portal.azure.com -> مدد + سپورٹ
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
+# 3. کمیونٹی وسائل
+# - Stack Overflow: azure-developer-cli ٹیگ
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### معلومات جمع کرنا
-سپورٹ سے رابطہ کرنے سے پہلے یہ معلومات جمع کریں:
+سپورٹ سے رابطہ کرنے سے پہلے، یہ معلومات جمع کریں:
 - `azd version` کا آؤٹ پٹ
 - `azd info` کا آؤٹ پٹ
 - غلطی کے پیغامات (مکمل متن)
@@ -503,7 +503,7 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ### لاگ کلیکشن اسکرپٹ
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# ڈیبگ معلومات جمع کریں۔
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -528,32 +528,32 @@ echo "Debug information collected in debug-logs/"
 
 ### پری ڈپلائمنٹ چیک لسٹ
 ```bash
-# 1. Validate authentication
+# 1. توثیق کی تصدیق کریں
 az account show
 
-# 2. Check quotas and limits
+# 2. کوٹہ اور حدود چیک کریں
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# 3. سانچوں کی تصدیق کریں
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# 4. پہلے مقامی طور پر جانچ کریں
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# 5. خشک رن تعیناتیوں کا استعمال کریں
 azd provision --preview
 ```
 
 ### مانیٹرنگ سیٹ اپ
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# ایپلیکیشن انسائٹس کو فعال کریں
+# main.bicep میں شامل کریں:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# الرٹس ترتیب دیں
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -563,34 +563,36 @@ az monitor metrics alert create \
 
 ### باقاعدہ دیکھ بھال
 ```bash
-# Weekly health checks
+# ہفتہ وار صحت کی جانچ
 ./scripts/health-check.sh
 
-# Monthly cost review
+# ماہانہ لاگت کا جائزہ
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# سہ ماہی سیکیورٹی کا جائزہ
 az security assessment list --resource-group myrg
 ```
 
 ## متعلقہ وسائل
 
-- [ڈیبگنگ گائیڈ](debugging.md) - ایڈوانسڈ ڈیبگنگ تکنیک
-- [وسائل کی تیاری](../deployment/provisioning.md) - انفراسٹرکچر کی خرابیوں کا پتہ لگانا
+- [ڈیبگنگ گائیڈ](debugging.md) - جدید ڈیبگنگ تکنیکیں
+- [وسائل کی پروویژننگ](../deployment/provisioning.md) - انفراسٹرکچر کی خرابیوں کا پتہ لگانا
 - [صلاحیت کی منصوبہ بندی](../pre-deployment/capacity-planning.md) - وسائل کی منصوبہ بندی کی رہنمائی
 - [SKU کا انتخاب](../pre-deployment/sku-selection.md) - سروس ٹائر کی سفارشات
 
 ---
 
-**ٹپ**: اس گائیڈ کو بک مارک کر لیں اور جب بھی مسائل کا سامنا ہو تو اس کا حوالہ دیں۔ زیادہ تر مسائل پہلے دیکھے جا چکے ہیں اور ان کے حل موجود ہیں!
+**ٹپ**: اس گائیڈ کو بک مارک کر لیں اور جب بھی آپ کو مسائل کا سامنا ہو، اس کا حوالہ دیں۔ زیادہ تر مسائل پہلے دیکھے جا چکے ہیں اور ان کے حل موجود ہیں!
 
 ---
 
 **نیویگیشن**
-- **پچھلا سبق**: [وسائل کی تیاری](../deployment/provisioning.md)
+- **پچھلا سبق**: [وسائل کی پروویژننگ](../deployment/provisioning.md)
 - **اگلا سبق**: [ڈیبگنگ گائیڈ](debugging.md)
 
 ---
 
-**ڈسکلیمر**:  
-یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ ہم درستگی کے لیے کوشش کرتے ہیں، لیکن براہ کرم آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا غیر درستیاں ہو سکتی ہیں۔ اصل دستاویز کو اس کی اصل زبان میں مستند ذریعہ سمجھا جانا چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ ہم اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے ذمہ دار نہیں ہیں۔
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**اعلانِ لاتعلقی**:  
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ ہم درستگی کی بھرپور کوشش کرتے ہیں، لیکن براہ کرم آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا غیر درستیاں ہو سکتی ہیں۔ اصل دستاویز کو اس کی اصل زبان میں مستند ذریعہ سمجھا جانا چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے لیے ہم ذمہ دار نہیں ہیں۔
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,17 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:24:33+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-20T07:59:10+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "ur"
 }
 -->
-# صلاحیت کی منصوبہ بندی: Azure کوٹاز اور حدود کو سمجھنا - Azure وسائل کی دستیابی اور حدود
+# صلاحیت کی منصوبہ بندی - Azure وسائل کی دستیابی اور حدود
+
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم**: [AZD ابتدائیوں کے لیے](../../README.md)
+- **📖 موجودہ باب**: باب 6 - تعیناتی سے پہلے کی توثیق اور منصوبہ بندی
+- **⬅️ پچھلا باب**: [باب 5: ملٹی ایجنٹ AI حل](../../examples/retail-scenario.md)
+- **➡️ اگلا**: [SKU کا انتخاب](sku-selection.md)
+- **🚀 اگلا باب**: [باب 7: خرابیوں کا پتہ لگانا](../troubleshooting/common-issues.md)
 
 ## تعارف
 
-یہ جامع گائیڈ آپ کو Azure Developer CLI کے ساتھ تعیناتی سے پہلے Azure وسائل کی صلاحیت کی منصوبہ بندی اور توثیق کرنے میں مدد فراہم کرتا ہے۔ کوٹاز، دستیابی، اور علاقائی حدود کا جائزہ لینا سیکھیں تاکہ کامیاب تعیناتی کو یقینی بنایا جا سکے اور اخراجات اور کارکردگی کو بہتر بنایا جا سکے۔ مختلف ایپلیکیشن آرکیٹیکچرز اور اسکیلنگ منظرناموں کے لیے صلاحیت کی منصوبہ بندی کی تکنیکوں میں مہارت حاصل کریں۔
+یہ جامع گائیڈ Azure Developer CLI کے ساتھ تعیناتی سے پہلے Azure وسائل کی صلاحیت کی منصوبہ بندی اور توثیق کرنے میں آپ کی مدد کرتا ہے۔ کوٹاز، دستیابی، اور علاقائی حدود کا جائزہ لینا سیکھیں تاکہ کامیاب تعیناتی کو یقینی بنایا جا سکے اور اخراجات اور کارکردگی کو بہتر بنایا جا سکے۔ مختلف ایپلیکیشن آرکیٹیکچرز اور اسکیلنگ منظرناموں کے لیے صلاحیت کی منصوبہ بندی کی تکنیکوں میں مہارت حاصل کریں۔
 
 ## سیکھنے کے اہداف
 
@@ -19,7 +26,7 @@ CO_OP_TRANSLATOR_METADATA:
 - Azure کوٹاز، حدود، اور علاقائی دستیابی کی رکاوٹوں کو سمجھ سکیں گے
 - تعیناتی سے پہلے وسائل کی دستیابی اور صلاحیت کو چیک کرنے کی تکنیکوں میں مہارت حاصل کریں گے
 - خودکار صلاحیت کی توثیق اور نگرانی کی حکمت عملیوں کو نافذ کریں گے
-- وسائل کے صحیح سائز اور اسکیلنگ کے خیالات کے ساتھ ایپلیکیشنز ڈیزائن کریں گے
+- وسائل کے سائز اور اسکیلنگ کے مناسب خیالات کے ساتھ ایپلیکیشنز ڈیزائن کریں گے
 - ذہین صلاحیت کی منصوبہ بندی کے ذریعے اخراجات کو بہتر بنانے کی حکمت عملیوں کو اپنائیں گے
 - کوٹاز کے استعمال اور وسائل کی دستیابی کے لیے الرٹس اور نگرانی کو ترتیب دیں گے
 
@@ -30,42 +37,42 @@ CO_OP_TRANSLATOR_METADATA:
 - صلاحیت کی جانچ اور کوٹاز کی نگرانی کے لیے خودکار اسکرپٹس بنائیں
 - علاقائی اور سبسکرپشن حدود کو مدنظر رکھتے ہوئے اسکیل ایبل آرکیٹیکچرز ڈیزائن کریں
 - مختلف ورک لوڈ اقسام کے لیے لاگت مؤثر وسائل کے سائز کی حکمت عملیوں کو نافذ کریں
-- صلاحیت سے متعلق مسائل کے لیے فعال نگرانی اور الرٹ ترتیب دیں
-- مناسب صلاحیت کی تقسیم کے ساتھ کثیر علاقائی تعیناتی کی منصوبہ بندی کریں
+- صلاحیت سے متعلق مسائل کے لیے فعال نگرانی اور الرٹس ترتیب دیں
+- مناسب صلاحیت کی تقسیم کے ساتھ ملٹی ریجن تعیناتی کی منصوبہ بندی کریں
 
 ## صلاحیت کی منصوبہ بندی کیوں اہم ہے
 
 ایپلیکیشنز کو تعینات کرنے سے پہلے، آپ کو یقینی بنانا ہوگا:
-- **کافی کوٹاز** مطلوبہ وسائل کے لیے
-- **وسائل کی دستیابی** آپ کے ہدف والے علاقے میں
-- **سروس ٹائر دستیابی** آپ کے سبسکرپشن قسم کے لیے
-- **نیٹ ورک کی صلاحیت** متوقع ٹریفک کے لیے
-- **اخراجات کی اصلاح** صحیح سائزنگ کے ذریعے
+- مطلوبہ وسائل کے لیے **کافی کوٹاز**
+- آپ کے ہدف والے علاقے میں **وسائل کی دستیابی**
+- آپ کے سبسکرپشن قسم کے لیے **سروس ٹائر دستیابی**
+- متوقع ٹریفک کے لیے **نیٹ ورک کی صلاحیت**
+- **مناسب سائزنگ** کے ذریعے **اخراجات کی اصلاح**
 
 ## 📊 Azure کوٹاز اور حدود کو سمجھنا
 
 ### حدود کی اقسام
-1. **سبسکرپشن سطح کے کوٹاز** - ہر سبسکرپشن کے لیے زیادہ سے زیادہ وسائل
+1. **سبسکرپشن لیول کوٹاز** - ہر سبسکرپشن کے لیے زیادہ سے زیادہ وسائل
 2. **علاقائی کوٹاز** - ہر علاقے کے لیے زیادہ سے زیادہ وسائل
 3. **وسائل کی مخصوص حدود** - انفرادی وسائل کی اقسام کے لیے حدود
-4. **سروس ٹائر کی حدود** - آپ کے سروس پلان کی بنیاد پر حدود
+4. **سروس ٹائر حدود** - آپ کے سروس پلان کی بنیاد پر حدود
 
-### عام وسائل کے کوٹاز
+### عام وسائل کوٹاز
 ```bash
-# Check current quota usage
+# موجودہ کوٹہ استعمال چیک کریں
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# مخصوص وسائل کے کوٹے چیک کریں
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## تعیناتی سے پہلے صلاحیت کی جانچ
+## تعیناتی سے پہلے کی صلاحیت کی جانچ
 
 ### خودکار صلاحیت کی توثیق کا اسکرپٹ
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Azure کی گنجائش کو تعیناتی سے پہلے تصدیق کریں
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# کوٹہ استعمال کی جانچ کرنے کا فنکشن
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,27 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# مختلف وسائل کے کوٹہ کی جانچ کریں
+check_quota "compute" 4      # 4 vCPUs کی ضرورت ہے
+check_quota "storage" 2      # 2 اسٹوریج اکاؤنٹس کی ضرورت ہے
+check_quota "network" 1      # 1 ورچوئل نیٹ ورک کی ضرورت ہے
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### سروس کی مخصوص صلاحیت کی جانچ
+### سروس مخصوص صلاحیت کی جانچ
 
 #### ایپ سروس کی صلاحیت
 ```bash
-# Check App Service Plan availability
+# ایپ سروس پلان کی دستیابی چیک کریں
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # علاقے میں دستیاب SKUs چیک کریں
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # متبادل علاقوں کی تجویز دیں
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # موجودہ استعمال چیک کریں
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# استعمال
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### ڈیٹا بیس کی صلاحیت
 ```bash
-# Check PostgreSQL capacity
+# پوسٹگری ایس کیو ایل کی صلاحیت چیک کریں
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # چیک کریں کہ ایس کے یو دستیاب ہے
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # دستیاب ایس کے یوز دکھائیں
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# کاسموس ڈی بی کی صلاحیت چیک کریں
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # علاقے کی دستیابی چیک کریں
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # چیک کریں کہ سرور لیس کی حمایت ہے (اگر ضرورت ہو)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### کنٹینر ایپس کی صلاحیت
 ```bash
-# Check Container Apps capacity
+# کنٹینر ایپس کی صلاحیت چیک کریں
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # چیک کریں کہ کنٹینر ایپس علاقے میں دستیاب ہے
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # موجودہ ماحول کی تعداد چیک کریں
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # کنٹینر ایپس کے پاس ہر علاقے میں 15 ماحول کی حد ہے
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # دستیاب علاقوں کو دکھائیں
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -254,9 +261,9 @@ check_container_apps_capacity() {
 
 ## 📍 علاقائی دستیابی کی توثیق
 
-### علاقے کے لحاظ سے سروس کی دستیابی
+### علاقے کے لحاظ سے سروس دستیابی
 ```bash
-# Check service availability across regions
+# خطوں میں سروس کی دستیابی چیک کریں
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# تمام خدمات چیک کریں
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### علاقے کے انتخاب کی سفارشات
 ```bash
-# Recommend optimal regions based on requirements
+# ضروریات کی بنیاد پر بہترین علاقوں کی سفارش کریں
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "کم قیمت" | "کارکردگی" | "مطابقت"
     
     echo "Region recommendations for: $requirements"
     
@@ -319,22 +326,22 @@ recommend_region() {
 }
 ```
 
-## 💰 اخراجات کی منصوبہ بندی اور تخمینہ
+## 💰 لاگت کی منصوبہ بندی اور تخمینہ
 
-### وسائل کے اخراجات کا تخمینہ
+### وسائل کی لاگت کا تخمینہ
 ```bash
-# Estimate deployment costs
+# تعیناتی کے اخراجات کا اندازہ لگائیں
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # تخمینہ کے لیے ایک عارضی وسائل گروپ بنائیں
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # توثیق کے موڈ میں بنیادی ڈھانچے کو تعینات کریں
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # عارضی وسائل گروپ کو صاف کریں
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,10 +363,10 @@ estimate_costs() {
 
 ### SKU کی اصلاح کی سفارشات
 ```bash
-# Recommend optimal SKUs based on requirements
+# ضروریات کی بنیاد پر بہترین SKUs کی سفارش کریں
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "dev" | "staging" | "production"
+    local workload_type=$2  # "ڈویلپمنٹ" | "اسٹیجنگ" | "پروڈکشن"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -424,27 +431,27 @@ recommend_sku() {
 ### جامع پری فلائٹ اسکرپٹ
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - مکمل تعیناتی سے پہلے کی توثیق
 
 set -e
 
-# Configuration
+# ترتیب
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# آؤٹ پٹ کے لیے رنگ
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # کوئی رنگ نہیں
 
-# Logging functions
+# لاگنگ کے افعال
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# ترتیب لوڈ کریں
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# چیک 1: تصدیق
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# چیک 2: علاقائی دستیابی
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# چیک 3: کوٹہ کی توثیق
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPU کوٹہ
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# اسٹوریج اکاؤنٹ کوٹہ
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# چیک 4: سروس دستیابی
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# چیک 5: نیٹ ورک کی صلاحیت
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# چیک 6: وسائل کے نام کی توثیق
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# چیک 7: لاگت کا تخمینہ
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# چیک 8: ٹیمپلیٹ کی توثیق
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# حتمی خلاصہ
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -658,14 +665,14 @@ echo "  3. Verify application health post-deployment"
 
 ### حقیقی وقت کی صلاحیت کی نگرانی
 ```bash
-# Monitor capacity during deployment
+# تعیناتی کے دوران صلاحیت کی نگرانی کریں
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # تعیناتی کی حالت چیک کریں
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # موجودہ وسائل کے استعمال کو چیک کریں
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -713,8 +720,8 @@ hooks:
 
 1. **ہمیشہ صلاحیت کی جانچ کریں** نئے علاقوں میں تعیناتی سے پہلے
 2. **کوٹاز کے استعمال کی باقاعدگی سے نگرانی کریں** تاکہ حیرت سے بچا جا سکے
-3. **ترقی کی منصوبہ بندی کریں** مستقبل کی صلاحیت کی ضروریات کو چیک کرکے
-4. **اخراجات کے تخمینے کے ٹولز استعمال کریں** بل کے جھٹکے سے بچنے کے لیے
+3. **مستقبل کی صلاحیت کی ضروریات کو چیک کرکے ترقی کی منصوبہ بندی کریں**
+4. **لاگت کے تخمینے کے ٹولز استعمال کریں** تاکہ بل کے جھٹکے سے بچا جا سکے
 5. **اپنی ٹیم کے لیے صلاحیت کی ضروریات کو دستاویز کریں**
 6. **CI/CD پائپ لائنز میں صلاحیت کی توثیق کو خودکار بنائیں**
 7. **علاقائی فیل اوور** صلاحیت کی ضروریات پر غور کریں
@@ -730,7 +737,7 @@ hooks:
 
 - [Azure سبسکرپشن حدود](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure قیمت کا کیلکولیٹر](https://azure.microsoft.com/pricing/calculator/)
-- [Azure اخراجات کا انتظام](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure لاگت کا انتظام](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
 - [Azure علاقائی دستیابی](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **اعلانِ لاتعلقی**:  
-یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ ہم درستگی کی بھرپور کوشش کرتے ہیں، لیکن براہ کرم آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا غیر درستیاں ہو سکتی ہیں۔ اصل دستاویز کو اس کی اصل زبان میں مستند ذریعہ سمجھا جانا چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے لیے ہم ذمہ دار نہیں ہیں۔
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ ہم درستگی کی بھرپور کوشش کرتے ہیں، لیکن براہ کرم آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا خامیاں ہو سکتی ہیں۔ اصل دستاویز کو اس کی اصل زبان میں مستند ذریعہ سمجھا جانا چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے لیے ہم ذمہ دار نہیں ہیں۔
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

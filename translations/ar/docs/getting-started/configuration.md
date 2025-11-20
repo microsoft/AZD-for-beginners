@@ -1,91 +1,91 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T18:22:21+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-20T07:17:50+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ar"
 }
 -->
-# دليل التكوين
+# دليل الإعداد
 
 **تنقل الفصول:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 3 - التكوين والمصادقة
+- **📖 الفصل الحالي**: الفصل الثالث - الإعداد والمصادقة
 - **⬅️ السابق**: [مشروعك الأول](first-project.md)
 - **➡️ التالي**: [دليل النشر](../deployment/deployment-guide.md)
-- **🚀 الفصل التالي**: [الفصل 4: البنية التحتية ككود](../deployment/deployment-guide.md)
+- **🚀 الفصل التالي**: [الفصل الرابع: البنية التحتية ككود](../deployment/deployment-guide.md)
 
 ## المقدمة
 
-يغطي هذا الدليل الشامل جميع جوانب تكوين Azure Developer CLI لتحقيق أفضل تدفقات العمل للتطوير والنشر. ستتعلم عن التسلسل الهرمي للتكوين، إدارة البيئات، طرق المصادقة، وأنماط التكوين المتقدمة التي تمكن من عمليات نشر آمنة وفعالة على Azure.
+يغطي هذا الدليل الشامل جميع جوانب إعداد Azure Developer CLI لتحقيق أفضل تدفقات العمل للتطوير والنشر. ستتعلم عن التسلسل الهرمي للإعداد، إدارة البيئات، طرق المصادقة، وأنماط الإعداد المتقدمة التي تمكنك من نشر آمن وفعال على Azure.
 
 ## أهداف التعلم
 
 بنهاية هذا الدرس، ستتمكن من:
-- إتقان التسلسل الهرمي لتكوين azd وفهم كيفية تحديد الأولويات للإعدادات
-- تكوين الإعدادات العامة والخاصة بالمشروع بشكل فعال
+- إتقان التسلسل الهرمي لإعداد azd وفهم كيفية تحديد الأولويات للإعدادات
+- إعداد الإعدادات العامة والخاصة بالمشروع بشكل فعال
 - إدارة بيئات متعددة بإعدادات مختلفة
 - تنفيذ أنماط المصادقة والتفويض الآمنة
-- فهم أنماط التكوين المتقدمة للسيناريوهات المعقدة
+- فهم أنماط الإعداد المتقدمة للسيناريوهات المعقدة
 
 ## نتائج التعلم
 
 بعد إكمال هذا الدرس، ستكون قادرًا على:
-- تكوين azd لتحقيق أفضل تدفقات العمل للتطوير
-- إعداد وإدارة بيئات نشر متعددة
-- تنفيذ ممارسات إدارة التكوين الآمنة
-- حل المشكلات المتعلقة بالتكوين
+- إعداد azd لتحقيق أفضل تدفقات العمل للتطوير
+- إنشاء وإدارة بيئات نشر متعددة
+- تنفيذ ممارسات إدارة إعدادات آمنة
+- حل المشكلات المتعلقة بالإعداد
 - تخصيص سلوك azd لتلبية متطلبات تنظيمية محددة
 
-يغطي هذا الدليل الشامل جميع جوانب تكوين Azure Developer CLI لتحقيق أفضل تدفقات العمل للتطوير والنشر.
+يغطي هذا الدليل الشامل جميع جوانب إعداد Azure Developer CLI لتحقيق أفضل تدفقات العمل للتطوير والنشر.
 
-## التسلسل الهرمي للتكوين
+## التسلسل الهرمي للإعداد
 
-يستخدم azd نظام تكوين هرمي:
+يستخدم azd نظام إعداد هرمي:
 1. **علامات سطر الأوامر** (أعلى أولوية)
 2. **متغيرات البيئة**
-3. **تكوين المشروع المحلي** (`.azd/config.json`)
-4. **تكوين المستخدم العام** (`~/.azd/config.json`)
+3. **إعداد المشروع المحلي** (`.azd/config.json`)
+4. **إعداد المستخدم العام** (`~/.azd/config.json`)
 5. **القيم الافتراضية** (أقل أولوية)
 
-## التكوين العام
+## الإعداد العام
 
 ### إعداد القيم الافتراضية العامة
 ```bash
-# Set default subscription
+# تعيين الاشتراك الافتراضي
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# تعيين الموقع الافتراضي
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# تعيين اتفاقية تسمية مجموعة الموارد الافتراضية
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# عرض جميع التكوينات العالمية
 azd config list
 
-# Remove a configuration
+# إزالة التكوين
 azd config unset defaults.location
 ```
 
-### الإعدادات العامة الشائعة
+### إعدادات عامة شائعة
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# تفضيلات التطوير
+azd config set alpha.enable true                    # تمكين الميزات التجريبية
+azd config set telemetry.enabled false             # تعطيل القياس عن بعد
+azd config set output.format json                  # تعيين تنسيق الإخراج
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# إعدادات الأمان
+azd config set auth.useAzureCliCredential true     # استخدام Azure CLI للمصادقة
+azd config set tls.insecure false                  # فرض التحقق من TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# تحسين الأداء
+azd config set provision.parallelism 5             # إنشاء الموارد بشكل متوازي
+azd config set deploy.timeout 30m                  # مهلة النشر
 ```
 
-## 🏗️ تكوين المشروع
+## 🏗️ إعداد المشروع
 
 ### هيكل azure.yaml
 ملف `azure.yaml` هو قلب مشروع azd الخاص بك:
@@ -164,9 +164,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### خيارات تكوين الخدمة
+### خيارات إعداد الخدمة
 
-#### أنواع الاستضافة
+#### أنواع المضيف
 ```yaml
 services:
   web-static:
@@ -209,22 +209,22 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 إدارة البيئات
+## 🌟 إدارة البيئة
 
-### إنشاء البيئات
+### إنشاء بيئات
 ```bash
-# Create a new environment
+# إنشاء بيئة جديدة
 azd env new development
 
-# Create with specific location
+# إنشاء بموقع محدد
 azd env new staging --location "westus2"
 
-# Create from template
+# إنشاء من قالب
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### تكوين البيئة
-لكل بيئة تكوين خاص بها في `.azure/<env-name>/config.json`:
+### إعداد البيئة
+لكل بيئة إعداد خاص بها في `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -248,58 +248,67 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 
 ### متغيرات البيئة
 ```bash
-# Set environment-specific variables
+# تعيين متغيرات خاصة بالبيئة
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# عرض متغيرات البيئة
 azd env get-values
 
-# Remove environment variable
+# المخرجات المتوقعة:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# إزالة متغير البيئة
 azd env unset DEBUG
+
+# التحقق من الإزالة
+azd env get-values | grep DEBUG
+# (يجب أن لا يُرجع شيئًا)
 ```
 
 ### قوالب البيئة
 قم بإنشاء `.azure/env.template` لإعداد بيئة متسق:
 ```bash
-# Required variables
+# المتغيرات المطلوبة
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# إعدادات التطبيق
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# إعدادات التطوير الاختيارية
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 تكوين المصادقة
+## 🔐 إعداد المصادقة
 
 ### تكامل Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# استخدم بيانات اعتماد Azure CLI (الافتراضية)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# تسجيل الدخول باستخدام مستأجر محدد
 az login --tenant <tenant-id>
 
-# Set default subscription
+# تعيين الاشتراك الافتراضي
 az account set --subscription <subscription-id>
 ```
 
 ### مصادقة المسؤول عن الخدمة
 لأنظمة CI/CD:
 ```bash
-# Set environment variables
+# تعيين متغيرات البيئة
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# أو التكوين مباشرة
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,15 +316,15 @@ azd config set auth.tenantId "your-tenant-id"
 ### الهوية المُدارة
 للبيئات المستضافة على Azure:
 ```bash
-# Enable managed identity authentication
+# تمكين مصادقة الهوية المُدارة
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ تكوين البنية التحتية
+## 🏗️ إعداد البنية التحتية
 
 ### معلمات Bicep
-قم بتكوين معلمات البنية التحتية في `infra/main.parameters.json`:
+قم بإعداد معلمات البنية التحتية في `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -337,8 +346,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### تكوين Terraform
-لمشاريع Terraform، قم بالتكوين في `infra/terraform.tfvars`:
+### إعداد Terraform
+لمشاريع Terraform، قم بالإعداد في `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -346,9 +355,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 تكوين النشر
+## 🚀 إعداد النشر
 
-### تكوين البناء
+### إعداد البناء
 ```yaml
 # In azure.yaml
 services:
@@ -371,7 +380,7 @@ services:
       PYTHONPATH: src
 ```
 
-### تكوين Docker
+### إعداد Docker
 ```yaml
 services:
   api:
@@ -387,17 +396,17 @@ services:
 ```
 مثال `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 التكوين المتقدم
+## 🔧 إعدادات متقدمة
 
 ### تسمية الموارد المخصصة
 ```bash
-# Set naming conventions
+# تعيين قواعد التسمية
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### تكوين الشبكة
+### إعداد الشبكة
 ```yaml
 # In azure.yaml
 infra:
@@ -408,7 +417,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### تكوين المراقبة
+### إعداد المراقبة
 ```yaml
 # In azure.yaml
 monitoring:
@@ -420,20 +429,20 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 تكوينات خاصة بالبيئة
+## 🎯 إعدادات خاصة بالبيئة
 
 ### بيئة التطوير
 ```bash
-# .azure/development/.env
+# .azure/التطوير/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### بيئة التدريج
+### بيئة الاختبار
 ```bash
-# .azure/staging/.env
+# .azure/التخزين المؤقت/.env
 DEBUG=false
 LOG_LEVEL=info
 ENABLE_MONITORING=true
@@ -442,28 +451,28 @@ USE_PRODUCTION_APIS=true
 
 ### بيئة الإنتاج
 ```bash
-# .azure/production/.env
+# .azure/الإنتاج/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 التحقق من التكوين
+## 🔍 التحقق من الإعداد
 
-### التحقق من التكوين
+### التحقق من الإعداد
 ```bash
-# Check configuration syntax
+# تحقق من بناء الجملة للتكوين
 azd config validate
 
-# Test environment variables
+# اختبار متغيرات البيئة
 azd env get-values
 
-# Validate infrastructure
+# التحقق من البنية التحتية
 azd provision --dry-run
 ```
 
-### نصوص التكوين
+### نصوص الإعداد
 قم بإنشاء نصوص التحقق في `scripts/`:
 
 ```bash
@@ -472,13 +481,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# التحقق من متغيرات البيئة المطلوبة
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# التحقق من صحة صيغة azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -500,7 +509,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. تنظيم ملفات التكوين
+### 2. تنظيم ملفات الإعداد
 ```
 .azure/
 ├── config.json              # Global project config
@@ -519,13 +528,13 @@ database:
 ### 3. اعتبارات التحكم في الإصدارات
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # تكوينات البيئة (تحتوي على معرفات الموارد)
+.azure/*/.env               # متغيرات البيئة (قد تحتوي على أسرار)
+.env                        # ملف البيئة المحلية
 ```
 
-### 4. توثيق التكوين
-وثق تكوينك في `CONFIG.md`:
+### 4. توثيق الإعداد
+وثق إعدادك في `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -540,15 +549,77 @@ database:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 تمارين عملية
+
+### التمرين 1: إعداد بيئات متعددة (15 دقيقة)
+
+**الهدف**: إنشاء وإعداد ثلاث بيئات بإعدادات مختلفة
+
+```bash
+# إنشاء بيئة التطوير
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# إنشاء بيئة التدريج
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# إنشاء بيئة الإنتاج
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# التحقق من كل بيئة
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**معايير النجاح:**
+- [ ] تم إنشاء ثلاث بيئات بنجاح
+- [ ] لكل بيئة إعداد فريد
+- [ ] يمكن التبديل بين البيئات دون أخطاء
+- [ ] `azd env list` يعرض جميع البيئات الثلاث
+
+### التمرين 2: إدارة الأسرار (10 دقائق)
+
+**الهدف**: ممارسة الإعداد الآمن للبيانات الحساسة
+
+```bash
+# تعيين الأسرار (لا يتم عرضها في الإخراج)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# تعيين إعدادات غير سرية
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# عرض البيئة (يجب إخفاء الأسرار)
+azd env get-values
+
+# التحقق من تخزين الأسرار
+azd env get DB_PASSWORD  # يجب أن يظهر القيمة الفعلية
+```
+
+**معايير النجاح:**
+- [ ] تم تخزين الأسرار دون عرضها في الطرفية
+- [ ] `azd env get-values` يعرض الأسرار المحجوبة
+- [ ] استرجاع القيمة الفعلية باستخدام `azd env get <SECRET_NAME>` لكل سر
+
 ## الخطوات التالية
 
-- [مشروعك الأول](first-project.md) - تطبيق التكوين عمليًا
-- [دليل النشر](../deployment/deployment-guide.md) - استخدام التكوين للنشر
-- [توفير الموارد](../deployment/provisioning.md) - تكوينات جاهزة للإنتاج
+- [مشروعك الأول](first-project.md) - تطبيق الإعداد عمليًا
+- [دليل النشر](../deployment/deployment-guide.md) - استخدام الإعداد للنشر
+- [توفير الموارد](../deployment/provisioning.md) - إعدادات جاهزة للإنتاج
 
 ## المراجع
 
-- [مرجع تكوين azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [مرجع إعداد azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [مخطط azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [متغيرات البيئة](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
@@ -556,12 +627,14 @@ database:
 
 **تنقل الفصول:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 3 - التكوين والمصادقة
+- **📖 الفصل الحالي**: الفصل الثالث - الإعداد والمصادقة
 - **⬅️ السابق**: [مشروعك الأول](first-project.md)
-- **➡️ الفصل التالي**: [الفصل 4: البنية التحتية ككود](../deployment/deployment-guide.md)
+- **➡️ الفصل التالي**: [الفصل الرابع: البنية التحتية ككود](../deployment/deployment-guide.md)
 - **الدرس التالي**: [مشروعك الأول](first-project.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

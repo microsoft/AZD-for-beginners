@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T18:24:04+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-20T07:08:04+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ar"
 }
@@ -14,18 +14,18 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 الفصل الحالي**: الفصل السابع - استكشاف الأخطاء وإصلاحها
 - **⬅️ السابق**: [المشاكل الشائعة](common-issues.md)
 - **➡️ التالي**: [استكشاف الأخطاء المتعلقة بالذكاء الاصطناعي](ai-troubleshooting.md)
-- **🚀 الفصل التالي**: [الفصل الثامن: أنماط الإنتاج والمؤسسات](../ai-foundry/production-ai-practices.md)
+- **🚀 الفصل التالي**: [الفصل الثامن: أنماط الإنتاج والمؤسسات](../microsoft-foundry/production-ai-practices.md)
 
 ## المقدمة
 
-يوفر هذا الدليل الشامل استراتيجيات وأدوات وتقنيات متقدمة لتشخيص وحل المشكلات المعقدة المتعلقة بتوزيعات Azure Developer CLI. تعلم منهجيات استكشاف الأخطاء بشكل منهجي، تقنيات تحليل السجلات، تحديد الأداء، وأدوات التشخيص المتقدمة لحل مشكلات التوزيع والتشغيل بكفاءة.
+يوفر هذا الدليل الشامل استراتيجيات تصحيح الأخطاء المتقدمة، الأدوات، والتقنيات لتشخيص وحل المشكلات المعقدة المتعلقة بتوزيعات Azure Developer CLI. تعلم منهجيات استكشاف الأخطاء بشكل منهجي، تقنيات تحليل السجلات، تحليل الأداء، وأدوات التشخيص المتقدمة لحل مشكلات التوزيع والتشغيل بكفاءة.
 
 ## أهداف التعلم
 
 عند إكمال هذا الدليل، ستتمكن من:
-- إتقان منهجيات تصحيح الأخطاء المنهجية لمشكلات Azure Developer CLI
+- إتقان منهجيات تصحيح الأخطاء المنهجية لمشاكل Azure Developer CLI
 - فهم تكوين السجلات المتقدمة وتقنيات تحليل السجلات
-- تنفيذ استراتيجيات تحديد الأداء والمراقبة
+- تنفيذ استراتيجيات تحليل الأداء والمراقبة
 - استخدام أدوات وخدمات التشخيص في Azure لحل المشكلات المعقدة
 - تطبيق تقنيات استكشاف الأخطاء المتعلقة بالشبكات والأمان
 - تكوين مراقبة شاملة وتنبيهات للكشف المبكر عن المشكلات
@@ -34,9 +34,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 عند الانتهاء، ستكون قادرًا على:
 - تطبيق منهجية TRIAGE لاستكشاف الأخطاء المعقدة في التوزيعات بشكل منهجي
-- تكوين وتحليل معلومات السجلات والتتبع بشكل شامل
-- استخدام Azure Monitor وApplication Insights وأدوات التشخيص بفعالية
-- استكشاف مشكلات الاتصال بالشبكة والمصادقة والأذونات بشكل مستقل
+- تكوين وتحليل معلومات السجلات والتتبع الشاملة
+- استخدام Azure Monitor، Application Insights، وأدوات التشخيص بفعالية
+- استكشاف مشكلات الاتصال بالشبكة، المصادقة، والأذونات بشكل مستقل
 - تنفيذ استراتيجيات مراقبة الأداء وتحسينه
 - إنشاء نصوص تصحيح الأخطاء المخصصة وأتمتة لحل المشكلات المتكررة
 
@@ -44,36 +44,36 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### نهج TRIAGE
 - **T**ime: متى بدأت المشكلة؟
-- **R**eproduce: هل يمكن إعادة إنتاجها بشكل متكرر؟
+- **R**eproduce: هل يمكنك إعادة إنتاجها بشكل مستمر؟
 - **I**solate: ما هو المكون الذي يفشل؟
 - **A**nalyze: ماذا تخبرنا السجلات؟
-- **G**ather: جمع جميع المعلومات ذات الصلة
+- **G**ather: جمع كل المعلومات ذات الصلة
 - **E**scalate: متى يجب طلب المساعدة الإضافية؟
 
 ## تمكين وضع التصحيح
 
 ### متغيرات البيئة
 ```bash
-# Enable comprehensive debugging
+# تمكين التصحيح الشامل
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# تصحيح واجهة سطر أوامر Azure
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# تعطيل القياس عن بعد للحصول على إخراج أنظف
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### تكوين التصحيح
 ```bash
-# Set debug configuration globally
+# ضبط تكوين التصحيح عالميًا
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# تمكين تسجيل التتبع
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### تحليل السجلات المهيكلة
 ```bash
-# Filter logs by level
+# تصفية السجلات حسب المستوى
 azd logs --level error --since 1h
 
-# Filter by service
+# تصفية حسب الخدمة
 azd logs --service api --level debug
 
-# Export logs for analysis
+# تصدير السجلات للتحليل
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# تحليل سجلات JSON باستخدام jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### ارتباط السجلات
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - ربط السجلات عبر الخدمات
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,33 +118,33 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# البحث عبر جميع الخدمات
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# البحث في سجلات Azure
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ أدوات التصحيح المتقدمة
+## 🛠️ أدوات تصحيح الأخطاء المتقدمة
 
 ### استعلامات Azure Resource Graph
 ```bash
-# Query resources by tags
+# استعلام عن الموارد حسب العلامات
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# العثور على عمليات النشر الفاشلة
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# التحقق من صحة الموارد
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### تصحيح أخطاء الشبكة
+### استكشاف أخطاء الشبكة
 ```bash
-# Test connectivity between services
+# اختبار الاتصال بين الخدمات
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# الاستخدام
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### تصحيح أخطاء الحاويات
 ```bash
-# Debug container app issues
+# تصحيح مشاكل تطبيق الحاوية
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### تصحيح أخطاء اتصال قواعد البيانات
 ```bash
-# Debug database connectivity
+# تصحيح اتصال قاعدة البيانات
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -202,11 +202,11 @@ debug_database() {
 }
 ```
 
-## 🔬 تصحيح الأداء
+## 🔬 تصحيح أخطاء الأداء
 
 ### مراقبة أداء التطبيقات
 ```bash
-# Enable Application Insights debugging
+# تمكين تصحيح أخطاء تطبيق Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# مراقبة الأداء المخصصة
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### تحليل استخدام الموارد
 ```bash
-# Monitor resource usage
+# مراقبة استخدام الموارد
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# إعداد بيئة التصحيح
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# الحصول على نقاط نهاية الخدمة
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# اختبار نقاط نهاية الصحة
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# تشغيل الاختبارات
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# تشغيل اختبارات التكامل المخصصة
 npm run test:integration
 ```
 
 ### اختبار التحميل لتصحيح الأخطاء
 ```bash
-# Simple load test to identify performance bottlenecks
+# اختبار تحميل بسيط لتحديد نقاط ضعف الأداء
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,42 +323,42 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # استخدام Apache Bench (التثبيت: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # استخراج المقاييس الرئيسية
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # التحقق من حالات الفشل
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 تصحيح البنية التحتية
+## 🔧 تصحيح أخطاء البنية التحتية
 
 ### تصحيح أخطاء قوالب Bicep
 ```bash
-# Validate Bicep templates with detailed output
+# تحقق من قوالب Bicep مع إخراج مفصل
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # التحقق من صحة بناء الجملة
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # التحقق من صحة التنسيق
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # ماذا لو تم النشر
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# تصحيح نشر القالب
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### تحليل حالة الموارد
 ```bash
-# Analyze resource states for inconsistencies
+# تحليل حالات الموارد للبحث عن التناقضات
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # سرد جميع الموارد مع حالاتها
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # التحقق من الموارد الفاشلة
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -404,11 +404,11 @@ analyze_resources() {
 }
 ```
 
-## 🔒 تصحيح الأمان
+## 🔒 تصحيح أخطاء الأمان
 
-### تصحيح تدفق المصادقة
+### تصحيح أخطاء تدفق المصادقة
 ```bash
-# Debug Azure authentication
+# تصحيح مصادقة Azure
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # فك تشفير رمز JWT (يتطلب jq و base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# تصحيح الوصول إلى Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,16 +440,16 @@ debug_keyvault() {
 }
 ```
 
-### تصحيح أمان الشبكة
+### تصحيح أخطاء أمان الشبكة
 ```bash
-# Debug network security groups
+# تصحيح مجموعات أمان الشبكة
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # تحقق من قواعد الأمان
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,17 +458,17 @@ debug_network_security() {
 }
 ```
 
-## 📱 تصحيح الأخطاء الخاصة بالتطبيقات
+## 📱 تصحيح أخطاء التطبيقات المحددة
 
 ### تصحيح أخطاء تطبيقات Node.js
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// ملف debug-middleware.js - وسيط تصحيح Express
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // تسجيل تفاصيل الطلب
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // تجاوز res.json لتسجيل الردود
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -489,9 +489,9 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### تصحيح استعلامات قواعد البيانات
+### تصحيح أخطاء استعلامات قواعد البيانات
 ```javascript
-// database-debug.js - Database debugging utilities
+// أدوات تصحيح أخطاء قاعدة البيانات - database-debug.js
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -524,7 +524,7 @@ module.exports = DebuggingPool;
 ### الاستجابة لمشكلات الإنتاج
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - تصحيح طوارئ الإنتاج
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# التبديل إلى البيئة الصحيحة
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# جمع المعلومات الهامة
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### إجراءات التراجع
 ```bash
-# Quick rollback script
+# برنامج نصي سريع للتراجع
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # تبديل البيئة
     azd env select "$environment"
     
-    # Rollback application
+    # تراجع عن التطبيق
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # التحقق من التراجع
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # اختبار النقاط النهائية الحرجة
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### لوحة مراقبة مخصصة
 ```bash
-# Create Application Insights queries for debugging
+# إنشاء استعلامات Application Insights للتصحيح
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # استعلام عن الأخطاء
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # استعلام عن مشاكل الأداء
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # استعلام عن فشل التبعيات
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### تجميع السجلات
 ```bash
-# Aggregate logs from multiple sources
+# تجميع السجلات من مصادر متعددة
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -658,11 +658,11 @@ aggregate_logs() {
 
 ## 🔗 موارد متقدمة
 
-### نصوص التصحيح المخصصة
+### نصوص تصحيح الأخطاء المخصصة
 قم بإنشاء دليل `scripts/debug/` يحتوي على:
 - `health-check.sh` - فحص شامل للصحة
-- `performance-test.sh` - اختبار الأداء الآلي
-- `log-analyzer.py` - تحليل متقدم للسجلات
+- `performance-test.sh` - اختبار الأداء التلقائي
+- `log-analyzer.py` - تحليل السجلات المتقدم
 - `resource-validator.sh` - التحقق من البنية التحتية
 
 ### تكامل المراقبة
@@ -685,17 +685,17 @@ hooks:
 ## أفضل الممارسات
 
 1. **قم دائمًا بتمكين تسجيل التصحيح** في البيئات غير الإنتاجية
-2. **أنشئ حالات اختبار قابلة للتكرار** للمشكلات
-3. **وثق إجراءات التصحيح** لفريقك
+2. **قم بإنشاء حالات اختبار قابلة للتكرار** للمشكلات
+3. **وثق إجراءات تصحيح الأخطاء** لفريقك
 4. **أتمتة فحوصات الصحة** والمراقبة
 5. **حافظ على تحديث أدوات التصحيح** مع تغييرات التطبيق
-6. **مارس إجراءات التصحيح** خلال الأوقات غير الحرجة
+6. **مارس إجراءات تصحيح الأخطاء** خلال الأوقات غير الحرجة
 
 ## الخطوات التالية
 
 - [تخطيط السعة](../pre-deployment/capacity-planning.md) - تخطيط متطلبات الموارد
 - [اختيار SKU](../pre-deployment/sku-selection.md) - اختيار مستويات الخدمة المناسبة
-- [فحوصات ما قبل التوزيع](../pre-deployment/preflight-checks.md) - التحقق قبل التوزيع
+- [فحوصات ما قبل النشر](../pre-deployment/preflight-checks.md) - التحقق قبل النشر
 - [ورقة الغش](../../resources/cheat-sheet.md) - أوامر مرجعية سريعة
 
 ---
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

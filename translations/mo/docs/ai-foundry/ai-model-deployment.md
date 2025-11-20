@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T18:56:22+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-20T09:06:54+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "mo"
 }
@@ -12,9 +12,9 @@ CO_OP_TRANSLATOR_METADATA:
 **章節導航：**
 - **📚 課程首頁**: [AZD 初學者指南](../../README.md)
 - **📖 本章內容**: 第 2 章 - AI 優先開發
-- **⬅️ 上一章**: [Azure AI Foundry 整合](azure-ai-foundry-integration.md)
-- **➡️ 下一章**: [AI 工作坊實驗](ai-workshop-lab.md)
-- **🚀 下一章節**: [第 3 章：配置](../getting-started/configuration.md)
+- **⬅️ 上一章**: [Microsoft Foundry 整合](microsoft-foundry-integration.md)
+- **➡️ 下一章**: [AI 工作坊實驗室](ai-workshop-lab.md)
+- **🚀 下一章節**: [第 3 章: 配置](../getting-started/configuration.md)
 
 本指南提供使用 AZD 模板部署 AI 模型的詳細說明，涵蓋從模型選擇到生產部署模式的所有內容。
 
@@ -24,7 +24,7 @@ CO_OP_TRANSLATOR_METADATA:
 - [AI 模型的 AZD 配置](../../../../docs/ai-foundry)
 - [部署模式](../../../../docs/ai-foundry)
 - [模型管理](../../../../docs/ai-foundry)
-- [生產環境考量](../../../../docs/ai-foundry)
+- [生產考量](../../../../docs/ai-foundry)
 - [監控與可觀察性](../../../../docs/ai-foundry)
 
 ## 模型選擇策略
@@ -63,9 +63,9 @@ services:
 
 | 模型類型 | 使用案例 | 建議容量 | 成本考量 |
 |----------|----------|----------|----------|
-| GPT-4o-mini | 聊天、問答 | 10-50 TPM | 大多數工作負載的成本效益選擇 |
-| GPT-4 | 複雜推理 | 20-100 TPM | 成本較高，適用於高級功能 |
-| Text-embedding-ada-002 | 搜索、RAG | 30-120 TPM | 對語義搜索至關重要 |
+| GPT-4o-mini | 聊天、問答 | 10-50 TPM | 大多數工作負載的成本效益 |
+| GPT-4 | 複雜推理 | 20-100 TPM | 成本較高，用於高端功能 |
+| Text-embedding-ada-002 | 搜索、RAG | 30-120 TPM | 語義搜索的必要選擇 |
 | Whisper | 語音轉文字 | 10-50 TPM | 音頻處理工作負載 |
 
 ## AI 模型的 AZD 配置
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 配置您的應用程式環境：
 
 ```bash
-# .env configuration
+# .env 配置
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -158,7 +158,7 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-適用於：
+適合：
 - 開發和測試
 - 單一市場應用程式
 - 成本優化
@@ -176,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-適用於：
+適合：
 - 全球應用程式
 - 高可用性需求
 - 負載分配
@@ -216,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### 版本控制
 
-在 AZD 配置中追蹤模型版本：
+在您的 AZD 配置中追蹤模型版本：
 
 ```json
 {
@@ -273,14 +273,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## 生產環境考量
+## 生產考量
 
 ### 容量規劃
 
 根據使用模式計算所需容量：
 
 ```python
-# Capacity calculation example
+# 容量計算範例
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# 使用範例
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 追蹤 AI 特定指標：
 
 ```python
-# Custom telemetry for AI models
+# 為人工智能模型定制的遙測
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 實施 AI 服務健康監控：
 
 ```python
-# Health check endpoints
+# 健康檢查端點
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # 測試 OpenAI 連接
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,8 +482,8 @@ async def check_ai_models():
 
 ## 下一步
 
-1. **查看 [Azure AI Foundry 整合指南](azure-ai-foundry-integration.md)**，了解服務整合模式
-2. **完成 [AI 工作坊實驗](ai-workshop-lab.md)**，獲得實際操作經驗
+1. **查看 [Microsoft Foundry 整合指南](microsoft-foundry-integration.md)**，了解服務整合模式
+2. **完成 [AI 工作坊實驗室](ai-workshop-lab.md)**，獲得實踐經驗
 3. **實施 [生產 AI 實踐](production-ai-practices.md)**，用於企業部署
 4. **探索 [AI 疑難排解指南](../troubleshooting/ai-troubleshooting.md)**，解決常見問題
 
@@ -499,11 +499,13 @@ async def check_ai_models():
 **章節導航：**
 - **📚 課程首頁**: [AZD 初學者指南](../../README.md)
 - **📖 本章內容**: 第 2 章 - AI 優先開發
-- **⬅️ 上一章**: [Azure AI Foundry 整合](azure-ai-foundry-integration.md)
-- **➡️ 下一章**: [AI 工作坊實驗](ai-workshop-lab.md)
-- **🚀 下一章節**: [第 3 章：配置](../getting-started/configuration.md)
+- **⬅️ 上一章**: [Microsoft Foundry 整合](microsoft-foundry-integration.md)
+- **➡️ 下一章**: [AI 工作坊實驗室](ai-workshop-lab.md)
+- **🚀 下一章節**: [第 3 章: 配置](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

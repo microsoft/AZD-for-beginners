@@ -1,34 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-17T18:58:54+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-20T08:58:34+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "mo"
 }
 -->
-# 常見問題與解決方案
+# 常見問題及解決方案
 
 **章節導航：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 當前章節**: 第七章 - 疑難排解與除錯
-- **⬅️ 上一章**: [第六章：部署前檢查](../pre-deployment/preflight-checks.md)
-- **➡️ 下一步**: [除錯指南](debugging.md)
-- **🚀 下一章**: [第八章：生產與企業模式](../ai-foundry/production-ai-practices.md)
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 當前章節**：第七章 - 疑難排解與除錯
+- **⬅️ 上一章**：[第六章：部署前檢查](../pre-deployment/preflight-checks.md)
+- **➡️ 下一步**：[除錯指南](debugging.md)
+- **🚀 下一章**：[第八章：生產及企業模式](../microsoft-foundry/production-ai-practices.md)
 
-## 介紹
+## 簡介
 
-這份全面的疑難排解指南涵蓋了使用 Azure Developer CLI 時最常遇到的問題。學習如何診斷、排除故障並解決與身份驗證、部署、基礎設施配置及應用程式設定相關的常見問題。每個問題都包含詳細的症狀、根本原因以及逐步解決步驟。
+這份全面的疑難排解指南涵蓋使用 Azure Developer CLI 時最常遇到的問題。學習如何診斷、排除及解決身份驗證、部署、基礎設施配置及應用程式設定的常見問題。每個問題都包含詳細的症狀、根本原因及逐步解決程序。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
 - 掌握 Azure Developer CLI 問題的診斷技巧
-- 理解常見的身份驗證與權限問題及其解決方法
+- 理解常見身份驗證及權限問題及其解決方法
 - 解決部署失敗、基礎設施配置錯誤及設定問題
-- 實施主動監控與除錯策略
-- 對複雜問題應用系統化的疑難排解方法
-- 配置適當的日誌記錄與監控以防止未來問題
+- 實施主動監控及除錯策略
+- 應用系統化的疑難排解方法來處理複雜問題
+- 配置正確的日誌記錄及監控以防止未來問題
 
 ## 學習成果
 
@@ -37,7 +37,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 獨立解決身份驗證、訂閱及權限相關問題
 - 有效排除部署失敗及基礎設施配置錯誤
 - 除錯應用程式設定問題及環境特定問題
-- 實施監控與警報以主動識別潛在問題
+- 實施監控及警報以主動識別潛在問題
 - 應用最佳實踐於日誌記錄、除錯及問題解決工作流程
 
 ## 快速診斷
@@ -45,75 +45,75 @@ CO_OP_TRANSLATOR_METADATA:
 在深入探討具體問題之前，執行以下命令以收集診斷資訊：
 
 ```bash
-# Check azd version and health
+# 檢查 azd 版本和健康狀況
 azd version
 azd config list
 
-# Verify Azure authentication
+# 驗證 Azure 身份驗證
 az account show
 az account list
 
-# Check current environment
+# 檢查當前環境
 azd env show
 azd env get-values
 
-# Enable debug logging
+# 啟用調試日誌記錄
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
 ## 身份驗證問題
 
-### 問題："無法獲取存取權杖"
+### 問題："無法獲取訪問令牌"
 **症狀：**
 - `azd up` 因身份驗證錯誤失敗
-- 命令返回 "未授權" 或 "存取被拒"
+- 命令返回 "未授權" 或 "訪問被拒"
 
 **解決方法：**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. 使用 Azure CLI 重新驗證
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. 清除緩存的憑證
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. 使用設備代碼流程（適用於無頭系統）
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. 設定明確的訂閱
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### 問題：部署期間 "權限不足"
+### 問題：部署時 "權限不足"
 **症狀：**
 - 部署因權限錯誤失敗
-- 無法建立某些 Azure 資源
+- 無法創建某些 Azure 資源
 
 **解決方法：**
 ```bash
-# 1. Check your Azure role assignments
+# 1. 檢查您的 Azure 角色分配
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. 確保您擁有所需的角色
+# - 貢獻者（用於資源創建）
+# - 使用者訪問管理員（用於角色分配）
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. 聯絡您的 Azure 管理員以獲取適當的權限
 ```
 
 ### 問題：多租戶身份驗證問題
 **解決方法：**
 ```bash
-# 1. Login with specific tenant
+# 1. 使用特定租戶登入
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. 在配置中設置租戶
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. 如果切換租戶則清除租戶緩存
 az account clear
 ```
 
@@ -122,63 +122,63 @@ az account clear
 ### 問題：資源名稱衝突
 **症狀：**
 - "資源名稱已存在" 錯誤
-- 部署在資源建立期間失敗
+- 部署在創建資源時失敗
 
 **解決方法：**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# 1. 使用帶有標記的唯一資源名稱
+# 在您的 Bicep 模板中：
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# 2. 更改環境名稱
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# 3. 清理現有資源
 azd down --force --purge
 ```
 
-### 問題：位置/區域不可用
+### 問題：位置/地區不可用
 **症狀：**
-- "位置 'xyz' 不適用於資源類型"
-- 選定區域內某些 SKU 不可用
+- "位置 'xyz' 不可用於資源類型"
+- 選定地區的某些 SKU 不可用
 
 **解決方法：**
 ```bash
-# 1. Check available locations for resource types
+# 1. 檢查資源類型的可用位置
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. 使用常見的可用區域
 azd config set defaults.location eastus2
-# or
+# 或
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. 按區域檢查服務的可用性
+# 訪問：https://azure.microsoft.com/global-infrastructure/services/
 ```
 
 ### 問題：配額超出錯誤
 **症狀：**
 - "資源類型配額超出"
-- "已達到資源最大數量"
+- "達到資源最大數量"
 
 **解決方法：**
 ```bash
-# 1. Check current quota usage
+# 1. 檢查目前配額使用情況
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. 通過 Azure 入口請求增加配額
+# 前往：訂閱 > 使用量 + 配額
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. 在開發中使用較小的 SKU
+# 在 main.parameters.json 中：
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. 清理未使用的資源
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
@@ -189,46 +189,46 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 **解決方法：**
 ```bash
-# 1. Validate Bicep syntax
+# 1. 驗證 Bicep 語法
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. 使用 Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. 檢查參數文件語法
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. 預覽部署更改
 azd provision --preview
 ```
 
 ## 🚀 部署失敗
 
-### 問題：建置失敗
+### 問題：構建失敗
 **症狀：**
-- 應用程式在部署期間無法建置
+- 應用程式在部署期間無法構建
 - 套件安裝錯誤
 
 **解決方法：**
 ```bash
-# 1. Check build logs
+# 1. 檢查建置日誌
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. 本地測試建置
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# 3. 檢查 Node.js/Python 版本相容性
+node --version  # 應符合 azure.yaml 設定
 python --version
 
-# 4. Clear build cache
+# 4. 清除建置快取
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# 5. 如果使用容器，檢查 Dockerfile
 docker build -t test-image .
 docker run --rm test-image
 ```
@@ -240,99 +240,99 @@ docker run --rm test-image
 
 **解決方法：**
 ```bash
-# 1. Test Docker build locally
+# 1. 在本地測試 Docker 構建
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. 檢查容器日誌
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. 驗證容器註冊表訪問
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. 檢查容器應用程式配置
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### 問題：資料庫連線失敗
+### 問題：資料庫連接失敗
 **症狀：**
 - 應用程式無法連接到資料庫
-- 連線逾時錯誤
+- 連接超時錯誤
 
 **解決方法：**
 ```bash
-# 1. Check database firewall rules
+# 1. 檢查資料庫防火牆規則
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# 2. 測試應用程式的連接性
+# 暫時添加到您的應用程式：
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# 3. 驗證連接字串格式
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# 4. 檢查資料庫伺服器狀態
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
 ## 🔧 設定問題
 
-### 問題：環境變數無法運作
+### 問題：環境變數無法正常運作
 **症狀：**
 - 應用程式無法讀取設定值
 - 環境變數顯示為空
 
 **解決方法：**
 ```bash
-# 1. Verify environment variables are set
+# 1. 驗證環境變數是否已設置
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. 檢查 azure.yaml 中的變數名稱
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. 重新啟動應用程式
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. 檢查應用程式服務配置
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### 問題：SSL/TLS 憑證問題
+### 問題：SSL/TLS 證書問題
 **症狀：**
-- HTTPS 無法運作
-- 憑證驗證錯誤
+- HTTPS 無法正常運作
+- 證書驗證錯誤
 
 **解決方法：**
 ```bash
-# 1. Check SSL certificate status
+# 1. 檢查 SSL 證書狀態
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. 僅啟用 HTTPS
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. 添加自定義域名（如有需要）
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### 問題：CORS 設定問題
 **症狀：**
-- 前端無法呼叫 API
+- 前端無法調用 API
 - 跨來源請求被阻止
 
 **解決方法：**
 ```bash
-# 1. Configure CORS for App Service
+# 1. 為應用服務配置CORS
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. 更新API以處理CORS
+# 在Express.js中：
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. 檢查是否在正確的URL上運行
 azd show
 ```
 
@@ -345,16 +345,16 @@ azd show
 
 **解決方法：**
 ```bash
-# 1. List all environments
+# 1. 列出所有環境
 azd env list
 
-# 2. Explicitly select environment
+# 2. 明確選擇環境
 azd env select production
 
-# 3. Verify current environment
+# 3. 驗證當前環境
 azd env show
 
-# 4. Create new environment if corrupted
+# 4. 如果損壞則創建新環境
 azd env new production-new
 azd env select production-new
 ```
@@ -366,16 +366,16 @@ azd env select production-new
 
 **解決方法：**
 ```bash
-# 1. Refresh environment state
+# 1. 刷新環境狀態
 azd env refresh
 
-# 2. Reset environment configuration
+# 2. 重置環境配置
 azd env new production-reset
-# Copy over required environment variables
+# 複製所需的環境變數
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. 導入現有資源（如果可能）
+# 手動更新 .azure/production/config.json，加入資源 ID
 ```
 
 ## 🔍 性能問題
@@ -383,89 +383,89 @@ azd env set DATABASE_URL "your-value"
 ### 問題：部署時間過長
 **症狀：**
 - 部署耗時過久
-- 部署期間逾時
+- 部署期間超時
 
 **解決方法：**
 ```bash
-# 1. Enable parallel deployment
+# 1. 啟用平行部署
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# 2. 使用增量部署
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# 3. 優化構建過程
+# 在 package.json 中：
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# 4. 檢查資源位置（使用相同地區）
 azd config set defaults.location eastus2
 ```
 
 ### 問題：應用程式性能問題
 **症狀：**
-- 回應時間過慢
+- 響應時間過慢
 - 資源使用率高
 
 **解決方法：**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# 1. 擴展資源
+# 更新 SKU 在 main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# 2. 啟用應用程式洞察監控
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# 3. 檢查應用程式日誌以找出瓶頸
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# 4. 實施快取
+# 添加 Redis 快取到您的基礎設施
 ```
 
-## 🛠️ 疑難排解工具與命令
+## 🛠️ 疑難排解工具及命令
 
 ### 除錯命令
 ```bash
-# Comprehensive debugging
+# 全面調試
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# 檢查系統資訊
 azd info
 
-# Validate configuration
+# 驗證配置
 azd config validate
 
-# Test connectivity
+# 測試連接
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### 日誌分析
 ```bash
-# Application logs
+# 應用程式日誌
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# Azure 資源日誌
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# 容器日誌（適用於容器應用程式）
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### 資源調查
 ```bash
-# List all resources
+# 列出所有資源
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# 檢查資源狀態
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# 網絡診斷
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
@@ -475,35 +475,35 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 - 嘗試所有解決方法後身份驗證問題仍然存在
 - 與 Azure 服務相關的基礎設施問題
 - 與計費或訂閱相關的問題
-- 安全性問題或事件
+- 安全問題或事件
 
-### 支援管道
+### 支援渠道
 ```bash
-# 1. Check Azure Service Health
+# 1. 檢查 Azure 服務健康狀況
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# 2. 建立 Azure 支援票
+# 前往: https://portal.azure.com -> 幫助 + 支援
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
-# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# 3. 社群資源
+# - Stack Overflow: azure-developer-cli 標籤
+# - GitHub 問題: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### 收集資訊
-在聯繫支援之前，請收集以下資訊：
+在聯絡支援之前，請收集以下資訊：
 - `azd version` 輸出
 - `azd info` 輸出
-- 錯誤訊息（完整文字）
-- 重現問題的步驟
-- 環境詳細資訊（`azd env show`）
+- 錯誤訊息（完整文本）
+- 問題重現的步驟
+- 環境詳情（`azd env show`）
 - 問題開始的時間線
 
 ### 日誌收集腳本
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# 收集調試信息.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -528,32 +528,32 @@ echo "Debug information collected in debug-logs/"
 
 ### 部署前檢查清單
 ```bash
-# 1. Validate authentication
+# 1. 驗證身份驗證
 az account show
 
-# 2. Check quotas and limits
+# 2. 檢查配額和限制
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# 3. 驗證模板
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# 4. 先在本地測試
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# 5. 使用試運行部署
 azd provision --preview
 ```
 
 ### 監控設置
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# 啟用應用程式洞察
+# 添加到 main.bicep：
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# 設置警報
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -563,13 +563,13 @@ az monitor metrics alert create \
 
 ### 定期維護
 ```bash
-# Weekly health checks
+# 每週健康檢查
 ./scripts/health-check.sh
 
-# Monthly cost review
+# 每月成本審查
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# 每季度安全審查
 az security assessment list --resource-group myrg
 ```
 
@@ -578,19 +578,21 @@ az security assessment list --resource-group myrg
 - [除錯指南](debugging.md) - 高級除錯技術
 - [資源配置](../deployment/provisioning.md) - 基礎設施疑難排解
 - [容量規劃](../pre-deployment/capacity-planning.md) - 資源規劃指導
-- [SKU 選擇](../pre-deployment/sku-selection.md) - 服務層級建議
+- [SKU 選擇](../pre-deployment/sku-selection.md) - 服務層建議
 
 ---
 
-**提示**: 將本指南加入書籤，並在遇到問題時參考。大多數問題都曾被遇到過，並有既定的解決方案！
+**提示**：將本指南加入書籤，遇到問題時隨時參考。大多數問題都曾被遇到過並有既定解決方案！
 
 ---
 
 **導航**
-- **上一課**: [資源配置](../deployment/provisioning.md)
-- **下一課**: [除錯指南](debugging.md)
+- **上一課**：[資源配置](../deployment/provisioning.md)
+- **下一課**：[除錯指南](debugging.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

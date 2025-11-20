@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-17T18:23:05+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-20T07:03:11+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "ar"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## المقدمة
 
-هذا الدليل الشامل يغطي كل ما تحتاج إلى معرفته حول نشر التطبيقات باستخدام Azure Developer CLI، بدءًا من عمليات النشر البسيطة بأمر واحد وصولاً إلى سيناريوهات الإنتاج المتقدمة مع الخطافات المخصصة، البيئات المتعددة، وتكامل CI/CD. أتقن دورة حياة النشر بالكامل من خلال أمثلة عملية وأفضل الممارسات.
+يغطي هذا الدليل الشامل كل ما تحتاج إلى معرفته حول نشر التطبيقات باستخدام Azure Developer CLI، بدءًا من عمليات النشر الأساسية بأمر واحد إلى سيناريوهات الإنتاج المتقدمة مع الخطافات المخصصة، والبيئات المتعددة، وتكامل CI/CD. أتقن دورة حياة النشر بالكامل مع أمثلة عملية وأفضل الممارسات.
 
 ## أهداف التعلم
 
@@ -27,8 +27,8 @@ CO_OP_TRANSLATOR_METADATA:
 - فهم دورة حياة النشر بالكامل من التوفير إلى المراقبة
 - تنفيذ خطافات نشر مخصصة لأتمتة ما قبل وما بعد النشر
 - تكوين بيئات متعددة بمعلمات خاصة بكل بيئة
-- إعداد استراتيجيات نشر متقدمة مثل النشر الأزرق-الأخضر ونشر الكناري
-- دمج عمليات نشر azd مع خطوط CI/CD وسير عمل DevOps
+- إعداد استراتيجيات نشر متقدمة بما في ذلك النشر الأزرق-الأخضر ونشر الكناري
+- دمج عمليات نشر azd مع خطوط أنابيب CI/CD وسير عمل DevOps
 
 ## نتائج التعلم
 
@@ -38,7 +38,7 @@ CO_OP_TRANSLATOR_METADATA:
 - تكوين عمليات نشر جاهزة للإنتاج مع أمان ومراقبة مناسبين
 - إدارة سيناريوهات نشر متعددة البيئات المعقدة
 - تحسين أداء النشر وتنفيذ استراتيجيات التراجع
-- دمج عمليات نشر azd في ممارسات DevOps المؤسسية
+- دمج عمليات نشر azd في ممارسات DevOps للمؤسسات
 
 ## نظرة عامة على النشر
 
@@ -53,42 +53,76 @@ CO_OP_TRANSLATOR_METADATA:
 ### النشر الكامل (azd up)
 أكثر سير العمل شيوعًا للمشاريع الجديدة:
 ```bash
-# Deploy everything from scratch
+# نشر كل شيء من البداية
 azd up
 
-# Deploy with specific environment
+# نشر مع بيئة محددة
 azd up --environment production
 
-# Deploy with custom parameters
+# نشر مع معلمات مخصصة
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### نشر البنية التحتية فقط
 عندما تحتاج فقط إلى تحديث موارد Azure:
 ```bash
-# Provision/update infrastructure
+# توفير/تحديث البنية التحتية
 azd provision
 
-# Provision with dry-run to preview changes
+# توفير باستخدام التشغيل الجاف لمعاينة التغييرات
 azd provision --preview
 
-# Provision specific services
+# توفير خدمات محددة
 azd provision --service database
 ```
 
 ### نشر الكود فقط
-للتحديثات السريعة للتطبيق:
+لتحديثات التطبيق السريعة:
 ```bash
-# Deploy all services
+# نشر جميع الخدمات
 azd deploy
 
-# Deploy specific service
+# المخرجات المتوقعة:
+# نشر الخدمات (azd deploy)
+# - الويب: جاري النشر... تم
+# - واجهة برمجية: جاري النشر... تم
+# النجاح: اكتمل النشر الخاص بك في دقيقتين و15 ثانية
+
+# نشر خدمة محددة
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# النشر مع وسائط بناء مخصصة
 azd deploy --service api --build-arg NODE_ENV=production
+
+# التحقق من النشر
+azd show --output json | jq '.services'
 ```
+
+### ✅ التحقق من النشر
+
+بعد أي عملية نشر، تحقق من النجاح:
+
+```bash
+# تحقق من تشغيل جميع الخدمات
+azd show
+
+# اختبار نقاط نهاية الصحة
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# تحقق من السجلات بحثًا عن الأخطاء
+azd logs --service api --since 5m | grep -i error
+```
+
+**معايير النجاح:**
+- ✅ جميع الخدمات تظهر حالة "تشغيل"
+- ✅ نقاط النهاية الصحية تعيد HTTP 200
+- ✅ لا توجد سجلات أخطاء في آخر 5 دقائق
+- ✅ التطبيق يستجيب لطلبات الاختبار
 
 ## 🏗️ فهم عملية النشر
 
@@ -110,7 +144,7 @@ hooks:
 - قراءة قوالب البنية التحتية (Bicep/Terraform)
 - إنشاء أو تحديث موارد Azure
 - تكوين الشبكات والأمان
-- إعداد المراقبة وتسجيل الأحداث
+- إعداد المراقبة والتسجيل
 
 ### المرحلة الثالثة: خطافات ما بعد التوفير
 ```yaml
@@ -127,7 +161,7 @@ hooks:
 
 ### المرحلة الرابعة: تعبئة التطبيق
 - بناء كود التطبيق
-- إنشاء ملفات النشر
+- إنشاء القطع الأثرية للنشر
 - التعبئة للمنصة المستهدفة (الحاويات، ملفات ZIP، إلخ)
 
 ### المرحلة الخامسة: خطافات ما قبل النشر
@@ -193,20 +227,20 @@ services:
     buildCommand: npm install --production
 ```
 
-### التكوينات الخاصة بالبيئة
+### تكوينات خاصة بالبيئة
 ```bash
-# Development environment
+# بيئة التطوير
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# بيئة التدريج
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# بيئة الإنتاج
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -253,17 +287,17 @@ services:
 
 ### النشر الأزرق-الأخضر
 ```bash
-# Create blue environment
+# إنشاء بيئة زرقاء
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blue environment
+# اختبار البيئة الزرقاء
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# تحويل حركة المرور إلى الزرقاء (تحديث DNS/موازن التحميل يدويًا)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# تنظيف البيئة الخضراء
 azd env select production-green
 azd down --force
 ```
@@ -285,7 +319,7 @@ services:
 ### النشر المرحلي
 ```bash
 #!/bin/bash
-# deploy-staged.sh
+# نشر-مرحلي.sh
 
 echo "Deploying to development..."
 azd env select dev
@@ -367,12 +401,12 @@ CMD ["npm", "start"]
 
 ## ⚡ تحسين الأداء
 
-### النشر المتوازي
+### عمليات النشر المتوازية
 ```bash
-# Configure parallel deployment
+# تكوين النشر المتوازي
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# نشر الخدمات بشكل متوازي
 azd deploy --parallel
 ```
 
@@ -390,12 +424,12 @@ services:
         - .next/cache
 ```
 
-### النشر التدريجي
+### عمليات النشر التزايدية
 ```bash
-# Deploy only changed services
+# نشر الخدمات التي تم تغييرها فقط
 azd deploy --incremental
 
-# Deploy with change detection
+# النشر مع اكتشاف التغييرات
 azd deploy --detect-changes
 ```
 
@@ -403,17 +437,17 @@ azd deploy --detect-changes
 
 ### مراقبة النشر في الوقت الحقيقي
 ```bash
-# Monitor deployment progress
+# مراقبة تقدم النشر
 azd deploy --follow
 
-# View deployment logs
+# عرض سجلات النشر
 azd logs --follow --service api
 
-# Check deployment status
+# التحقق من حالة النشر
 azd show --service api
 ```
 
-### فحوصات الصحة
+### الفحوصات الصحية
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -434,7 +468,7 @@ services:
 
 echo "Validating deployment..."
 
-# Check application health
+# تحقق من صحة التطبيق
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -464,12 +498,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### إدارة الأسرار
 ```bash
-# Store secrets securely
+# تخزين الأسرار بشكل آمن
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# الإشارة إلى الأسرار في azure.yaml
 ```
 
 ```yaml
@@ -512,22 +546,22 @@ services:
 
 ### التراجع السريع
 ```bash
-# Rollback to previous deployment
+# التراجع إلى النشر السابق
 azd deploy --rollback
 
-# Rollback specific service
+# التراجع عن خدمة محددة
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# التراجع إلى إصدار محدد
 azd deploy --service api --version v1.2.3
 ```
 
 ### تراجع البنية التحتية
 ```bash
-# Rollback infrastructure changes
+# التراجع عن تغييرات البنية التحتية
 azd provision --rollback
 
-# Preview rollback changes
+# معاينة تغييرات التراجع
 azd provision --rollback --preview
 ```
 
@@ -549,13 +583,13 @@ echo "Database rollback completed"
 
 ### تتبع أداء النشر
 ```bash
-# Enable deployment metrics
+# تمكين مقاييس النشر
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# عرض سجل النشر
 azd history
 
-# Get deployment statistics
+# الحصول على إحصائيات النشر
 azd metrics --type deployment
 ```
 
@@ -580,26 +614,26 @@ hooks:
 
 ### 1. اتساق البيئة
 ```bash
-# Use consistent naming
+# استخدم تسمية متسقة
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# حافظ على التوافق البيئي
 ./scripts/sync-environments.sh
 ```
 
 ### 2. التحقق من البنية التحتية
 ```bash
-# Validate before deployment
+# التحقق قبل النشر
 azd provision --preview
 azd provision --what-if
 
-# Use ARM/Bicep linting
+# استخدام التحقق من ARM/Bicep
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. اختبار التكامل
+### 3. تكامل الاختبار
 ```yaml
 hooks:
   predeploy:
@@ -628,9 +662,9 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. التوثيق وتسجيل الأحداث
+### 4. التوثيق والتسجيل
 ```bash
-# Document deployment procedures
+# توثيق إجراءات النشر
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -643,12 +677,265 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 - [المشاكل الشائعة](../troubleshooting/common-issues.md) - حل مشاكل النشر
 - [أفضل الممارسات](../troubleshooting/debugging.md) - استراتيجيات نشر جاهزة للإنتاج
 
+## 🎯 تمارين النشر العملية
+
+### التمرين 1: سير عمل النشر التزايدي (20 دقيقة)
+**الهدف**: إتقان الفرق بين النشر الكامل والتزايدي
+
+```bash
+# النشر الأولي
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# تسجيل وقت النشر الأولي
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# إجراء تغيير في الكود
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# نشر الكود فقط (سريع)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# مقارنة الأوقات
+cat deployment-log.txt
+
+# تنظيف
+azd down --force --purge
+```
+
+**معايير النجاح:**
+- [ ] يستغرق النشر الكامل 5-15 دقيقة
+- [ ] يستغرق نشر الكود فقط 2-5 دقائق
+- [ ] تظهر تغييرات الكود في التطبيق المنشور
+- [ ] تبقى البنية التحتية دون تغيير بعد `azd deploy`
+
+**نتيجة التعلم**: `azd deploy` أسرع بنسبة 50-70% من `azd up` لتغييرات الكود
+
+### التمرين 2: خطافات النشر المخصصة (30 دقيقة)
+**الهدف**: تنفيذ أتمتة ما قبل وما بعد النشر
+
+```bash
+# إنشاء نص تحقق قبل النشر
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# التحقق من نجاح الاختبارات
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# التحقق من وجود تغييرات غير ملتزمة
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# إنشاء اختبار دخان بعد النشر
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# إضافة روابط إلى azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# اختبار النشر باستخدام الروابط
+azd deploy
+```
+
+**معايير النجاح:**
+- [ ] يتم تشغيل نص ما قبل النشر قبل النشر
+- [ ] يتم إيقاف النشر إذا فشلت الاختبارات
+- [ ] يتحقق اختبار الدخان بعد النشر من الصحة
+- [ ] يتم تنفيذ الخطافات بالترتيب الصحيح
+
+### التمرين 3: استراتيجية نشر متعددة البيئات (45 دقيقة)
+**الهدف**: تنفيذ سير عمل نشر مرحلي (التطوير → التدريج → الإنتاج)
+
+```bash
+# إنشاء نص نشر
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# الخطوة 1: النشر إلى التطوير
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# الخطوة 2: النشر إلى المرحلة التجريبية
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# الخطوة 3: الموافقة اليدوية للإنتاج
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# إنشاء البيئات
+azd env new dev
+azd env new staging
+azd env new production
+
+# تشغيل النشر المرحلي
+./deploy-staged.sh
+```
+
+**معايير النجاح:**
+- [ ] يتم نشر بيئة التطوير بنجاح
+- [ ] يتم نشر بيئة التدريج بنجاح
+- [ ] يتطلب الموافقة اليدوية للإنتاج
+- [ ] جميع البيئات لديها فحوصات صحية تعمل
+- [ ] يمكن التراجع إذا لزم الأمر
+
+### التمرين 4: استراتيجية التراجع (25 دقيقة)
+**الهدف**: تنفيذ واختبار التراجع عن النشر
+
+```bash
+# نشر الإصدار 1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# حفظ إعدادات الإصدار 1
+cp -r .azure/production .azure/production-v1-backup
+
+# نشر الإصدار 2 مع تغيير جذري
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# اكتشاف الفشل
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # التراجع عن الكود
+    git checkout src/api/src/server.js
+    
+    # التراجع عن البيئة
+    azd env set APP_VERSION "1.0.0"
+    
+    # إعادة نشر الإصدار 1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**معايير النجاح:**
+- [ ] يمكن اكتشاف فشل النشر
+- [ ] يتم تنفيذ نص التراجع تلقائيًا
+- [ ] يعود التطبيق إلى حالة العمل
+- [ ] تمر الفحوصات الصحية بعد التراجع
+
+## 📊 تتبع مقاييس النشر
+
+### تتبع أداء النشر الخاص بك
+
+```bash
+# إنشاء نص برمجي لقياسات النشر
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# تسجيل في ملف
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# استخدمه
+./track-deployment.sh
+```
+
+**حلل مقاييسك:**
+```bash
+# عرض سجل النشر
+cat deployment-metrics.csv
+
+# حساب متوسط وقت النشر
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
+
 ## موارد إضافية
 
 - [مرجع نشر Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [نشر Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [نشر Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [نشر Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [نشر خدمة تطبيق Azure](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [نشر تطبيقات الحاويات Azure](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [نشر وظائف Azure](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
@@ -658,5 +945,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T18:38:22+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-20T08:16:03+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "ur"
 }
@@ -10,13 +10,13 @@ CO_OP_TRANSLATOR_METADATA:
 # ای آئی ماڈل کی تعیناتی Azure Developer CLI کے ساتھ
 
 **باب کی نیویگیشن:**
-- **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
+- **📚 کورس ہوم**: [AZD ابتدائیوں کے لیے](../../README.md)
 - **📖 موجودہ باب**: باب 2 - ای آئی-فرسٹ ڈیولپمنٹ
-- **⬅️ پچھلا**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
-- **➡️ اگلا**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ پچھلا**: [Microsoft Foundry انٹیگریشن](microsoft-foundry-integration.md)
+- **➡️ اگلا**: [AI ورکشاپ لیب](ai-workshop-lab.md)
 - **🚀 اگلا باب**: [باب 3: کنفیگریشن](../getting-started/configuration.md)
 
-یہ گائیڈ AZD ٹیمپلیٹس کے ذریعے ای آئی ماڈلز کی تعیناتی کے لیے مکمل ہدایات فراہم کرتا ہے، جس میں ماڈل کے انتخاب سے لے کر پروڈکشن تعیناتی کے پیٹرنز تک سب کچھ شامل ہے۔
+یہ گائیڈ AZD ٹیمپلیٹس کے ذریعے ای آئی ماڈلز کی تعیناتی کے لیے جامع ہدایات فراہم کرتا ہے، جس میں ماڈل کے انتخاب سے لے کر پروڈکشن تعیناتی کے پیٹرنز تک سب کچھ شامل ہے۔
 
 ## مواد کی فہرست
 
@@ -31,7 +31,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### Azure OpenAI ماڈلز
 
-اپنے استعمال کے لیے صحیح ماڈل منتخب کریں:
+اپنے استعمال کے کیس کے لیے صحیح ماڈل منتخب کریں:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 اپنے ایپلیکیشن کے ماحول کو کنفیگر کریں:
 
 ```bash
-# .env configuration
+# .env ترتیب
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -240,7 +240,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# ہکس/پری ڈپلائے.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 استعمال کے پیٹرنز کی بنیاد پر مطلوبہ صلاحیت کا حساب لگائیں:
 
 ```python
-# Capacity calculation example
+# صلاحیت کا حساب کتاب کی مثال
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# استعمال کی مثال
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 ای آئی مخصوص میٹرکس کو ٹریک کریں:
 
 ```python
-# Custom telemetry for AI models
+# AI ماڈلز کے لیے حسب ضرورت ٹیلیمیٹری
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 ای آئی سروس کی صحت کی مانیٹرنگ نافذ کریں:
 
 ```python
-# Health check endpoints
+# صحت کی جانچ کے اختتامی نکات
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # اوپن اے آئی کنکشن کی جانچ کریں
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -480,30 +480,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## اگلے مراحل
+## اگلے اقدامات
 
-1. **[Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** کا جائزہ لیں تاکہ سروس انٹیگریشن پیٹرنز کو سمجھ سکیں
-2. **[AI Workshop Lab](ai-workshop-lab.md)** مکمل کریں تاکہ عملی تجربہ حاصل ہو
-3. **[Production AI Practices](production-ai-practices.md)** نافذ کریں تاکہ انٹرپرائز تعیناتیوں کے لیے تیاری ہو
-4. **[AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** کو دریافت کریں تاکہ عام مسائل کو حل کیا جا سکے
+1. **[Microsoft Foundry انٹیگریشن گائیڈ](microsoft-foundry-integration.md)** کا جائزہ لیں تاکہ سروس انٹیگریشن پیٹرنز کو سمجھ سکیں
+2. **[AI ورکشاپ لیب](ai-workshop-lab.md)** مکمل کریں تاکہ عملی تجربہ حاصل ہو
+3. **[پروڈکشن ای آئی پریکٹسز](production-ai-practices.md)** نافذ کریں تاکہ انٹرپرائز تعیناتیوں کے لیے تیار ہوں
+4. **[AI ٹربل شوٹنگ گائیڈ](../troubleshooting/ai-troubleshooting.md)** کو دریافت کریں تاکہ عام مسائل کو حل کیا جا سکے
 
 ## وسائل
 
-- [Azure OpenAI Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Azure OpenAI ماڈل کی دستیابی](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI دستاویزات](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [کنٹینر ایپس اسکیلنگ](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [ای آئی ماڈل لاگت کی اصلاح](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **باب کی نیویگیشن:**
-- **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
+- **📚 کورس ہوم**: [AZD ابتدائیوں کے لیے](../../README.md)
 - **📖 موجودہ باب**: باب 2 - ای آئی-فرسٹ ڈیولپمنٹ
-- **⬅️ پچھلا**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
-- **➡️ اگلا**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ پچھلا**: [Microsoft Foundry انٹیگریشن](microsoft-foundry-integration.md)
+- **➡️ اگلا**: [AI ورکشاپ لیب](ai-workshop-lab.md)
 - **🚀 اگلا باب**: [باب 3: کنفیگریشن](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **ڈسکلیمر**:  
 یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ ہم درستگی کے لیے کوشش کرتے ہیں، لیکن براہ کرم آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا غیر درستیاں ہو سکتی ہیں۔ اصل دستاویز کو اس کی اصل زبان میں مستند ذریعہ سمجھا جانا چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ ہم اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے ذمہ دار نہیں ہیں۔
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

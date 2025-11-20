@@ -1,13 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:23:47+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-20T07:01:04+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "ar"
 }
 -->
-# تخطيط السعة: فهم حصص Azure والحدود
+# تخطيط السعة - توفر موارد Azure والحدود
+
+**تنقل الفصول:**
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
+- **📖 الفصل الحالي**: الفصل السادس - التحقق والتخطيط قبل النشر
+- **⬅️ الفصل السابق**: [الفصل الخامس: حلول الذكاء الاصطناعي متعددة الوكلاء](../../examples/retail-scenario.md)
+- **➡️ التالي**: [اختيار SKU](sku-selection.md)
+- **🚀 الفصل التالي**: [الفصل السابع: استكشاف الأخطاء وإصلاحها](../troubleshooting/common-issues.md)
 
 ## المقدمة
 
@@ -21,17 +28,17 @@ CO_OP_TRANSLATOR_METADATA:
 - تنفيذ استراتيجيات التحقق الآلي ومراقبة السعة
 - تصميم تطبيقات مع مراعاة الحجم المناسب للموارد واعتبارات التوسع
 - تطبيق استراتيجيات تحسين التكاليف من خلال تخطيط السعة الذكي
-- إعداد تنبيهات ومراقبة لاستخدام الحصص وتوفر الموارد
+- إعداد التنبيهات والمراقبة لاستخدام الحصص وتوفر الموارد
 
 ## نتائج التعلم
 
-عند الانتهاء، ستكون قادرًا على:
+عند الانتهاء، ستتمكن من:
 - تقييم والتحقق من متطلبات سعة موارد Azure قبل النشر
 - إنشاء نصوص آلية للتحقق من السعة ومراقبة الحصص
-- تصميم هياكل قابلة للتوسع تأخذ في الاعتبار الحدود الإقليمية وحدود الاشتراك
+- تصميم هياكل قابلة للتوسع تأخذ في الاعتبار الحدود الإقليمية والاشتراك
 - تنفيذ استراتيجيات حجم الموارد الفعالة من حيث التكلفة لأنواع الأحمال المختلفة
-- إعداد مراقبة وتنبيهات استباقية للمشكلات المتعلقة بالسعة
-- تخطيط عمليات نشر متعددة المناطق مع توزيع السعة بشكل صحيح
+- إعداد مراقبة استباقية وتنبيهات للمشكلات المتعلقة بالسعة
+- تخطيط عمليات النشر متعددة المناطق مع توزيع السعة بشكل صحيح
 
 ## لماذا تخطيط السعة مهم
 
@@ -42,7 +49,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **سعة الشبكة** لحركة المرور المتوقعة
 - **تحسين التكاليف** من خلال الحجم المناسب
 
-## 📊 فهم حصص Azure والحدود
+## 📊 فهم حصص وحدود Azure
 
 ### أنواع الحدود
 1. **حصص على مستوى الاشتراك** - الحد الأقصى للموارد لكل اشتراك
@@ -52,21 +59,20 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### حصص الموارد الشائعة
 ```bash
-# Check current quota usage
+# تحقق من استخدام الحصة الحالية
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# تحقق من حصص الموارد المحددة
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-
-## فحوصات السعة قبل النشر
+## التحقق من السعة قبل النشر
 
 ### نص التحقق الآلي من السعة
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - التحقق من سعة Azure قبل النشر
 
 set -e
 
@@ -77,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# وظيفة للتحقق من استخدام الحصة
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -112,28 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# تحقق من حصص الموارد المختلفة
+check_quota "compute" 4      # تحتاج إلى 4 وحدات معالجة مركزية افتراضية
+check_quota "storage" 2      # تحتاج إلى حسابي تخزين
+check_quota "network" 1      # تحتاج إلى شبكة افتراضية واحدة
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-
-### فحوصات السعة الخاصة بالخدمة
+### التحقق من السعة الخاصة بالخدمة
 
 #### سعة خدمة التطبيقات
 ```bash
-# Check App Service Plan availability
+# تحقق من توفر خطة خدمة التطبيق
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # تحقق من SKUs المتاحة في المنطقة
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -141,32 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # اقترح مناطق بديلة
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # تحقق من الاستخدام الحالي
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# الاستخدام
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-
 #### سعة قواعد البيانات
 ```bash
-# Check PostgreSQL capacity
+# تحقق من سعة PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # تحقق مما إذا كان SKU متاحًا
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -175,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # عرض SKUs المتاحة
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -183,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# تحقق من سعة Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # تحقق من توفر المنطقة
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # تحقق مما إذا كان يتم دعم الخادم بدون خادم (إذا لزم الأمر)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -214,16 +218,15 @@ check_cosmos_capacity() {
 }
 ```
 
-
 #### سعة تطبيقات الحاويات
 ```bash
-# Check Container Apps capacity
+# تحقق من سعة تطبيقات الحاويات
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # تحقق مما إذا كانت تطبيقات الحاويات متوفرة في المنطقة
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -231,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # تحقق من عدد البيئات الحالية
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # تطبيقات الحاويات لديها حد أقصى 15 بيئة لكل منطقة
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -246,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # عرض المناطق المتاحة
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,12 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-
 ## 📍 التحقق من توفر المناطق
 
 ### توفر الخدمة حسب المنطقة
 ```bash
-# Check service availability across regions
+# تحقق من توفر الخدمة عبر المناطق
 check_service_availability() {
     local service=$1
     
@@ -286,19 +288,18 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# تحقق من جميع الخدمات
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-
 ### توصيات اختيار المنطقة
 ```bash
-# Recommend optimal regions based on requirements
+# اقتراح المناطق المثلى بناءً على المتطلبات
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "منخفض التكلفة" | "الأداء" | "الامتثال"
     
     echo "Region recommendations for: $requirements"
     
@@ -325,23 +326,22 @@ recommend_region() {
 }
 ```
 
-
 ## 💰 تخطيط التكاليف والتقدير
 
 ### تقدير تكلفة الموارد
 ```bash
-# Estimate deployment costs
+# تقدير تكاليف النشر
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # إنشاء مجموعة موارد مؤقتة للتقدير
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # نشر البنية التحتية في وضع التحقق
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -349,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # تنظيف مجموعة الموارد المؤقتة
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -361,13 +361,12 @@ estimate_costs() {
 }
 ```
 
-
 ### توصيات تحسين SKU
 ```bash
-# Recommend optimal SKUs based on requirements
+# اقتراح أفضل رموز SKU بناءً على المتطلبات
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "dev" | "staging" | "production"
+    local workload_type=$2  # "تطوير" | "مرحلة الاختبار" | "الإنتاج"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -427,33 +426,32 @@ recommend_sku() {
 }
 ```
 
+## 🚀 التحقق الآلي قبل النشر
 
-## 🚀 الفحوصات الآلية قبل النشر
-
-### نص شامل للفحص قبل النشر
+### نص شامل للتحقق قبل النشر
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - التحقق الكامل قبل النشر
 
 set -e
 
-# Configuration
+# التكوين
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# الألوان للإخراج
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # بدون لون
 
-# Logging functions
+# وظائف التسجيل
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# تحميل التكوين
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -473,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# التحقق 1: المصادقة
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -483,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# التحقق 2: توفر المنطقة
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -492,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# التحقق 3: التحقق من الحصة
 log_info "Checking quota availability..."
 
-# vCPU quota
+# حصة vCPU
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -509,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# حصة حساب التخزين
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -522,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# التحقق 4: توفر الخدمة
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -564,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# التحقق 5: سعة الشبكة
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -578,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# التحقق 6: التحقق من تسمية الموارد
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -590,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# التحقق 7: تقدير التكلفة
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -605,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# التحقق 8: التحقق من القالب
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -619,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# الملخص النهائي
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -628,7 +626,6 @@ echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
-
 
 ### قالب ملف التكوين
 ```json
@@ -664,19 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-
 ## 📈 مراقبة السعة أثناء النشر
 
 ### مراقبة السعة في الوقت الفعلي
 ```bash
-# Monitor capacity during deployment
+# مراقبة السعة أثناء النشر
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # التحقق من حالة النشر
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -689,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # التحقق من استخدام الموارد الحالي
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -700,10 +696,9 @@ monitor_deployment_capacity() {
 }
 ```
 
-
 ## 🔗 التكامل مع AZD
 
-### إضافة فحوصات قبل النشر إلى azure.yaml
+### إضافة خطوات التحقق إلى azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -721,7 +716,6 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-
 ## أفضل الممارسات
 
 1. **قم دائمًا بإجراء فحوصات السعة** قبل النشر في مناطق جديدة
@@ -735,7 +729,7 @@ hooks:
 ## الخطوات التالية
 
 - [دليل اختيار SKU](sku-selection.md) - اختر مستويات الخدمة المثلى
-- [فحوصات قبل النشر](preflight-checks.md) - نصوص التحقق الآلية
+- [التحقق قبل النشر](preflight-checks.md) - نصوص التحقق الآلية
 - [ورقة الغش](../../resources/cheat-sheet.md) - أوامر مرجعية سريعة
 - [المصطلحات](../../resources/glossary.md) - المصطلحات والتعريفات
 
@@ -749,11 +743,13 @@ hooks:
 ---
 
 **التنقل**
-- **الدرس السابق**: [دليل التصحيح](../troubleshooting/debugging.md)
+- **الدرس السابق**: [دليل تصحيح الأخطاء](../troubleshooting/debugging.md)
 
 - **الدرس التالي**: [اختيار SKU](sku-selection.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,33 +1,145 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "616504abc1770bcde7a50c7f4ba008ac",
-  "translation_date": "2025-09-17T19:07:18+00:00",
+  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
+  "translation_date": "2025-11-20T06:51:23+00:00",
   "source_file": "examples/retail-scenario.md",
   "language_code": "ar"
 }
 -->
 # حل دعم العملاء متعدد الوكلاء - سيناريو بائع التجزئة
 
-**الفصل الخامس: حلول الذكاء الاصطناعي متعدد الوكلاء**
-- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../README.md)
-- **📖 الفصل الحالي**: [الفصل الخامس: حلول الذكاء الاصطناعي متعدد الوكلاء](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ المتطلبات الأساسية**: [الفصل الثاني: تطوير الذكاء الاصطناعي أولاً](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **➡️ الفصل التالي**: [الفصل السادس: التحقق قبل النشر](../docs/pre-deployment/capacity-planning.md)
-- **🚀 قوالب ARM**: [حزمة النشر](retail-multiagent-arm-template/README.md)
+**الفصل الخامس: حلول الذكاء الاصطناعي متعددة الوكلاء**  
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../README.md)  
+- **📖 الفصل الحالي**: [الفصل الخامس: حلول الذكاء الاصطناعي متعددة الوكلاء](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
+- **⬅️ المتطلبات المسبقة**: [الفصل الثاني: تطوير الذكاء الاصطناعي أولاً](../docs/ai-foundry/azure-ai-foundry-integration.md)  
+- **➡️ الفصل التالي**: [الفصل السادس: التحقق قبل النشر](../docs/pre-deployment/capacity-planning.md)  
+- **🚀 قوالب ARM**: [حزمة النشر](retail-multiagent-arm-template/README.md)  
+
+> **⚠️ دليل الهندسة المعمارية - ليس تطبيقًا جاهزًا للعمل**  
+> يقدم هذا المستند **مخططًا معماريًا شاملاً** لبناء نظام متعدد الوكلاء.  
+> **ما هو موجود:** قالب ARM لنشر البنية التحتية (Azure OpenAI، AI Search، تطبيقات الحاويات، إلخ)  
+> **ما يجب عليك بناؤه:** كود الوكلاء، منطق التوجيه، واجهة المستخدم الأمامية، خطوط البيانات (تقدير 80-120 ساعة)  
+>  
+> **استخدم هذا كـ:**
+> - ✅ مرجع معماري لمشروعك الخاص بنظام متعدد الوكلاء
+> - ✅ دليل تعليمي لأنماط تصميم الأنظمة متعددة الوكلاء
+> - ✅ قالب بنية تحتية لنشر موارد Azure
+> - ❌ ليس تطبيقًا جاهزًا للتشغيل (يتطلب جهد تطوير كبير)
 
 ## نظرة عامة
 
-يستعرض هذا السيناريو كيفية بناء روبوت دعم العملاء متعدد الوكلاء الجاهز للإنتاج لبائع تجزئة يحتاج إلى قدرات ذكاء اصطناعي متقدمة تشمل إدارة المخزون، معالجة المستندات، وتفاعلات العملاء الذكية.
+**الهدف التعليمي:** فهم الهندسة المعمارية، قرارات التصميم، ونهج التنفيذ لبناء روبوت دردشة لدعم العملاء متعدد الوكلاء جاهز للإنتاج لبائع تجزئة بقدرات ذكاء اصطناعي متقدمة تشمل إدارة المخزون، معالجة المستندات، والتفاعل الذكي مع العملاء.
+
+**الوقت المطلوب لإكماله:** القراءة + الفهم (2-3 ساعات) | بناء التنفيذ الكامل (80-120 ساعة)
+
+**ما ستتعلمه:**
+- أنماط الهندسة المعمارية متعددة الوكلاء ومبادئ التصميم
+- استراتيجيات نشر Azure OpenAI متعددة المناطق
+- تكامل AI Search مع RAG (توليد معزز بالاسترجاع)
+- أطر تقييم الوكلاء واختبار الأمان
+- اعتبارات النشر في الإنتاج وتحسين التكلفة
 
 ## أهداف الهندسة المعمارية
 
-يتطلب حل دعم العملاء:
-- **وكلاء متخصصين متعددين** لتلبية احتياجات العملاء المختلفة
-- **نشر متعدد النماذج** مع تخطيط السعة المناسب
-- **تكامل بيانات ديناميكي** مع البحث الذكي وتحميل الملفات
-- **قدرات مراقبة وتقييم شاملة**
-- **أمان على مستوى الإنتاج** مع التحقق من خلال فرق الأمان
+**التركيز التعليمي:** توضح هذه الهندسة أنماط المؤسسات للأنظمة متعددة الوكلاء.
+
+### متطلبات النظام (لتنفيذك)
+
+يتطلب حل دعم العملاء في الإنتاج:
+- **وكلاء متخصصون متعددون** لتلبية احتياجات العملاء المختلفة (خدمة العملاء + إدارة المخزون)
+- **نشر متعدد النماذج** مع تخطيط السعة المناسب (GPT-4o، GPT-4o-mini، التضمينات عبر المناطق)
+- **تكامل بيانات ديناميكي** مع AI Search وتحميل الملفات (بحث متجه + معالجة المستندات)
+- **مراقبة شاملة** وقدرات تقييم (Application Insights + مقاييس مخصصة)
+- **أمان بدرجة الإنتاج** مع التحقق من الفريق الأحمر (فحص الثغرات + تقييم الوكلاء)
+
+### ما يوفره هذا الدليل
+
+✅ **أنماط الهندسة المعمارية** - تصميم مثبت لأنظمة متعددة الوكلاء قابلة للتوسع  
+✅ **قوالب البنية التحتية** - قوالب ARM لنشر جميع خدمات Azure  
+✅ **أمثلة على الكود** - تنفيذات مرجعية للمكونات الرئيسية  
+✅ **إرشادات التكوين** - تعليمات إعداد خطوة بخطوة  
+✅ **أفضل الممارسات** - استراتيجيات الأمان، المراقبة، تحسين التكلفة  
+
+❌ **غير متضمن** - تطبيق كامل جاهز للعمل (يتطلب جهد تطوير)
+
+## 🗺️ خارطة طريق التنفيذ
+
+### المرحلة الأولى: دراسة الهندسة المعمارية (2-3 ساعات) - ابدأ هنا
+
+**الهدف:** فهم تصميم النظام وتفاعلات المكونات
+
+- [ ] اقرأ هذا المستند بالكامل
+- [ ] راجع مخطط الهندسة المعمارية وعلاقات المكونات
+- [ ] افهم أنماط الوكلاء المتعددين وقرارات التصميم
+- [ ] ادرس أمثلة الكود لأدوات الوكلاء والتوجيه
+- [ ] راجع تقديرات التكلفة وإرشادات تخطيط السعة
+
+**النتيجة:** فهم واضح لما تحتاج إلى بنائه
+
+### المرحلة الثانية: نشر البنية التحتية (30-45 دقيقة)
+
+**الهدف:** توفير موارد Azure باستخدام قالب ARM
+
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup -m standard
+```
+  
+**ما يتم نشره:**
+- ✅ Azure OpenAI (3 مناطق: GPT-4o، GPT-4o-mini، التضمينات)
+- ✅ خدمة AI Search (فارغة، تحتاج إلى تكوين الفهرس)
+- ✅ بيئة تطبيقات الحاويات (صور نائبة)
+- ✅ حسابات التخزين، Cosmos DB، Key Vault
+- ✅ مراقبة Application Insights
+
+**ما هو مفقود:**
+- ❌ كود تنفيذ الوكلاء
+- ❌ منطق التوجيه
+- ❌ واجهة المستخدم الأمامية
+- ❌ مخطط فهرس البحث
+- ❌ خطوط البيانات
+
+### المرحلة الثالثة: بناء التطبيق (80-120 ساعة)
+
+**الهدف:** تنفيذ النظام متعدد الوكلاء بناءً على هذه الهندسة
+
+1. **تنفيذ الوكلاء** (30-40 ساعة)
+   - فئة الوكيل الأساسية والواجهات
+   - وكيل خدمة العملاء باستخدام GPT-4o
+   - وكيل المخزون باستخدام GPT-4o-mini
+   - تكامل الأدوات (AI Search، Bing، معالجة الملفات)
+
+2. **خدمة التوجيه** (12-16 ساعة)
+   - منطق تصنيف الطلبات
+   - اختيار الوكلاء والتنسيق
+   - FastAPI/Express للواجهة الخلفية
+
+3. **تطوير الواجهة الأمامية** (20-30 ساعة)
+   - واجهة دردشة المستخدم
+   - وظيفة تحميل الملفات
+   - عرض الردود
+
+4. **خط البيانات** (8-12 ساعة)
+   - إنشاء فهرس AI Search
+   - معالجة المستندات باستخدام Document Intelligence
+   - إنشاء التضمينات والفهرسة
+
+5. **المراقبة والتقييم** (10-15 ساعة)
+   - تنفيذ التتبع المخصص
+   - إطار تقييم الوكلاء
+   - ماسح أمان الفريق الأحمر
+
+### المرحلة الرابعة: النشر والاختبار (8-12 ساعة)
+
+- بناء صور Docker لجميع الخدمات
+- دفعها إلى Azure Container Registry
+- تحديث تطبيقات الحاويات بالصور الحقيقية
+- تكوين المتغيرات البيئية والأسرار
+- تشغيل مجموعة اختبارات التقييم
+- إجراء فحص الأمان
+
+**إجمالي الجهد المقدر:** 80-120 ساعة للمطورين ذوي الخبرة
 
 ## هندسة الحل
 
@@ -35,40 +147,40 @@ CO_OP_TRANSLATOR_METADATA:
 
 ```mermaid
 graph TB
-    User[👤 Customer] --> LB[Azure Front Door]
-    LB --> WebApp[Web Frontend<br/>Container App]
+    User[👤 العميل] --> LB[Azure Front Door]
+    LB --> WebApp[واجهة الويب الأمامية<br/>تطبيق الحاوية]
     
-    WebApp --> Router[Agent Router<br/>Container App]
-    Router --> CustomerAgent[Customer Agent<br/>Customer Service]
-    Router --> InvAgent[Inventory Agent<br/>Stock Management]
+    WebApp --> Router[موجه الوكيل<br/>تطبيق الحاوية]
+    Router --> CustomerAgent[وكيل العميل<br/>خدمة العملاء]
+    Router --> InvAgent[وكيل المخزون<br/>إدارة المخزون]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>شرق الولايات المتحدة 2]
+    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>غرب الولايات المتحدة 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>Product Catalog]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Real-time Info]
+    CustomerAgent --> AISearch[Azure AI Search<br/>كتالوج المنتجات]
+    CustomerAgent --> BingSearch[واجهة برمجة تطبيقات بحث Bing<br/>معلومات في الوقت الحقيقي]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>Documents & Files]
-    Storage --> DocIntel[Document Intelligence<br/>Content Processing]
+    AISearch --> Storage[Azure Storage<br/>المستندات والملفات]
+    Storage --> DocIntel[ذكاء المستندات<br/>معالجة المحتوى]
     
-    OpenAI1 --> Embeddings[Text Embeddings<br/>ada-002<br/>France Central]
+    OpenAI1 --> Embeddings[تضمينات النصوص<br/>ada-002<br/>فرنسا الوسطى]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>Monitoring]
+    Router --> AppInsights[رؤى التطبيقات<br/>المراقبة]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Grader<br/>Switzerland North] --> Evaluation[Evaluation Framework]
-    RedTeam[Red Team Scanner] --> SecurityReports[Security Reports]
+    GraderModel[GPT-4o Grader<br/>شمال سويسرا] --> Evaluation[إطار التقييم]
+    RedTeam[ماسح الفريق الأحمر] --> SecurityReports[تقارير الأمان]
     
-    subgraph "Data Layer"
+    subgraph "طبقة البيانات"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Chat History]
+        CosmosDB[Cosmos DB<br/>سجل المحادثات]
     end
     
-    subgraph "AI Services"
+    subgraph "خدمات الذكاء الاصطناعي"
         OpenAI1
         OpenAI2
         Embeddings
@@ -77,10 +189,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Monitoring & Security"
+    subgraph "المراقبة والأمان"
         AppInsights
-        LogAnalytics[Log Analytics Workspace]
-        KeyVault[Azure Key Vault<br/>Secrets & Config]
+        LogAnalytics[مساحة عمل تحليلات السجلات]
+        KeyVault[Azure Key Vault<br/>الأسرار والتكوين]
         RedTeam
         Evaluation
     end
@@ -93,114 +205,118 @@ graph TB
     style OpenAI2 fill:#e3f2fd
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
-```
-
+```  
 ### نظرة عامة على المكونات
 
 | المكون | الغرض | التقنية | المنطقة |
 |--------|-------|---------|----------|
-| **واجهة ويب الأمامية** | واجهة المستخدم لتفاعلات العملاء | تطبيقات الحاويات | المنطقة الأساسية |
+| **الواجهة الأمامية** | واجهة المستخدم لتفاعلات العملاء | تطبيقات الحاويات | المنطقة الأساسية |
 | **موجه الوكلاء** | يوجه الطلبات إلى الوكيل المناسب | تطبيقات الحاويات | المنطقة الأساسية |
 | **وكيل العملاء** | يتعامل مع استفسارات خدمة العملاء | تطبيقات الحاويات + GPT-4o | المنطقة الأساسية |
 | **وكيل المخزون** | يدير المخزون والتنفيذ | تطبيقات الحاويات + GPT-4o-mini | المنطقة الأساسية |
-| **Azure OpenAI** | استنتاج النماذج اللغوية للوكلاء | خدمات الإدراك | متعدد المناطق |
-| **البحث الذكي** | البحث المتجه وRAG | خدمة البحث الذكي | المنطقة الأساسية |
+| **Azure OpenAI** | استدلال LLM للوكلاء | خدمات الإدراك | متعدد المناطق |
+| **AI Search** | البحث المتجه وRAG | خدمة AI Search | المنطقة الأساسية |
 | **حساب التخزين** | تحميل الملفات والمستندات | تخزين Blob | المنطقة الأساسية |
-| **رؤى التطبيقات** | المراقبة والقياس عن بعد | المراقبة | المنطقة الأساسية |
+| **Application Insights** | المراقبة والتتبع | المراقبة | المنطقة الأساسية |
 | **نموذج التقييم** | نظام تقييم الوكلاء | Azure OpenAI | المنطقة الثانوية |
 
 ## 📁 هيكل المشروع
 
+> **📍 حالة المكونات:**  
+> ✅ = موجود في المستودع  
+> 📝 = تنفيذ مرجعي (مثال كود في هذا المستند)  
+> 🔨 = تحتاج إلى إنشائه  
+
 ```
-retail-multiagent-solution/
-├── .azure/                              # Azure environment configs
-│   ├── config.json                      # Global config
+retail-multiagent-solution/              🔨 Your project directory
+├── .azure/                              🔨 Azure environment configs
+│   ├── config.json                      🔨 Global config
 │   └── env/
-│       ├── .env.development             # Dev environment
-│       ├── .env.staging                 # Staging environment
-│       └── .env.production              # Production environment
+│       ├── .env.development             🔨 Dev environment
+│       ├── .env.staging                 🔨 Staging environment
+│       └── .env.production              🔨 Production environment
 │
-├── azure.yaml                          # AZD main configuration
-├── azure.parameters.json               # Deployment parameters
-├── README.md                           # Solution documentation
+├── azure.yaml                          🔨 AZD main configuration
+├── azure.parameters.json               🔨 Deployment parameters
+├── README.md                           🔨 Solution documentation
 │
-├── infra/                              # Infrastructure as Code
-│   ├── main.bicep                      # Main Bicep template
-│   ├── main.parameters.json            # Parameters file
-│   ├── modules/                        # Bicep modules
-│   │   ├── ai-services.bicep           # Azure OpenAI deployments
-│   │   ├── search.bicep                # AI Search configuration
-│   │   ├── storage.bicep               # Storage accounts
-│   │   ├── container-apps.bicep        # Container Apps environment
-│   │   ├── monitoring.bicep            # Application Insights
-│   │   ├── security.bicep              # Key Vault and RBAC
-│   │   └── networking.bicep            # Virtual networks and DNS
-│   ├── arm-template/                   # ARM template version
-│   │   ├── azuredeploy.json            # ARM main template
-│   │   └── azuredeploy.parameters.json # ARM parameters
-│   └── scripts/                        # Deployment scripts
-│       ├── deploy.sh                   # Main deployment script
-│       ├── setup-data.sh               # Data setup script
-│       └── configure-rbac.sh           # RBAC configuration
+├── infra/                              🔨 Infrastructure as Code (you create)
+│   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
+│   ├── main.parameters.json            🔨 Parameters file
+│   ├── modules/                        📝 Bicep modules (reference examples below)
+│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── search.bicep                📝 AI Search configuration
+│   │   ├── storage.bicep               📝 Storage accounts
+│   │   ├── container-apps.bicep        📝 Container Apps environment
+│   │   ├── monitoring.bicep            📝 Application Insights
+│   │   ├── security.bicep              📝 Key Vault and RBAC
+│   │   └── networking.bicep            📝 Virtual networks and DNS
+│   ├── arm-template/                   ✅ ARM template version (EXISTS)
+│   │   ├── azuredeploy.json            ✅ ARM main template (retail-multiagent-arm-template/)
+│   │   └── azuredeploy.parameters.json ✅ ARM parameters
+│   └── scripts/                        ✅/🔨 Deployment scripts
+│       ├── deploy.sh                   ✅ Main deployment script (EXISTS)
+│       ├── setup-data.sh               🔨 Data setup script (you create)
+│       └── configure-rbac.sh           🔨 RBAC configuration (you create)
 │
-├── src/                                # Application source code
-│   ├── agents/                         # Agent implementations
-│   │   ├── base/                       # Base agent classes
-│   │   │   ├── agent.py                # Abstract agent class
-│   │   │   └── tools.py                # Tool interfaces
-│   │   ├── customer/                   # Customer service agent
-│   │   │   ├── agent.py                # Customer agent implementation
-│   │   │   ├── prompts.py              # System prompts
-│   │   │   └── tools/                  # Agent-specific tools
-│   │   │       ├── search_tool.py      # AI Search integration
-│   │   │       ├── bing_tool.py        # Bing Search integration
-│   │   │       └── file_tool.py        # File processing tool
-│   │   └── inventory/                  # Inventory management agent
-│   │       ├── agent.py                # Inventory agent implementation
-│   │       ├── prompts.py              # System prompts
-│   │       └── tools/                  # Agent-specific tools
-│   │           ├── inventory_search.py # Inventory search tool
-│   │           └── database_tool.py    # Database query tool
+├── src/                                🔨 Application source code (YOU BUILD THIS)
+│   ├── agents/                         📝 Agent implementations (examples below)
+│   │   ├── base/                       🔨 Base agent classes
+│   │   │   ├── agent.py                🔨 Abstract agent class
+│   │   │   └── tools.py                🔨 Tool interfaces
+│   │   ├── customer/                   🔨 Customer service agent
+│   │   │   ├── agent.py                📝 Customer agent implementation (see below)
+│   │   │   ├── prompts.py              🔨 System prompts
+│   │   │   └── tools/                  🔨 Agent-specific tools
+│   │   │       ├── search_tool.py      📝 AI Search integration (example below)
+│   │   │       ├── bing_tool.py        📝 Bing Search integration (example below)
+│   │   │       └── file_tool.py        🔨 File processing tool
+│   │   └── inventory/                  🔨 Inventory management agent
+│   │       ├── agent.py                🔨 Inventory agent implementation
+│   │       ├── prompts.py              🔨 System prompts
+│   │       └── tools/                  🔨 Agent-specific tools
+│   │           ├── inventory_search.py 🔨 Inventory search tool
+│   │           └── database_tool.py    🔨 Database query tool
 │   │
-│   ├── router/                         # Agent routing service
-│   │   ├── main.py                     # FastAPI router application
-│   │   ├── routing_logic.py            # Request routing logic
-│   │   └── middleware.py               # Authentication & logging
+│   ├── router/                         🔨 Agent routing service (you build)
+│   │   ├── main.py                     🔨 FastAPI router application
+│   │   ├── routing_logic.py            🔨 Request routing logic
+│   │   └── middleware.py               🔨 Authentication & logging
 │   │
-│   ├── frontend/                       # Web user interface
-│   │   ├── Dockerfile                  # Container configuration
-│   │   ├── package.json                # Node.js dependencies
-│   │   ├── src/                        # React/Vue source code
-│   │   │   ├── components/             # UI components
-│   │   │   ├── pages/                  # Application pages
-│   │   │   ├── services/               # API services
-│   │   │   └── styles/                 # CSS and themes
-│   │   └── public/                     # Static assets
+│   ├── frontend/                       🔨 Web user interface (you build)
+│   │   ├── Dockerfile                  🔨 Container configuration
+│   │   ├── package.json                🔨 Node.js dependencies
+│   │   ├── src/                        🔨 React/Vue source code
+│   │   │   ├── components/             🔨 UI components
+│   │   │   ├── pages/                  🔨 Application pages
+│   │   │   ├── services/               🔨 API services
+│   │   │   └── styles/                 🔨 CSS and themes
+│   │   └── public/                     🔨 Static assets
 │   │
-│   ├── shared/                         # Shared utilities
-│   │   ├── config.py                   # Configuration management
-│   │   ├── telemetry.py                # Telemetry utilities
-│   │   ├── security.py                 # Security utilities
-│   │   └── models.py                   # Data models
+│   ├── shared/                         🔨 Shared utilities (you build)
+│   │   ├── config.py                   🔨 Configuration management
+│   │   ├── telemetry.py                📝 Telemetry utilities (example below)
+│   │   ├── security.py                 🔨 Security utilities
+│   │   └── models.py                   🔨 Data models
 │   │
-│   └── evaluation/                     # Evaluation and testing
-│       ├── evaluator.py                # Agent evaluator
-│       ├── red_team_scanner.py         # Security scanner
-│       ├── test_cases.json             # Evaluation test cases
-│       └── reports/                    # Generated reports
+│   └── evaluation/                     🔨 Evaluation and testing (you build)
+│       ├── evaluator.py                📝 Agent evaluator (example below)
+│       ├── red_team_scanner.py         📝 Security scanner (example below)
+│       ├── test_cases.json             📝 Evaluation test cases (example below)
+│       └── reports/                    🔨 Generated reports
 │
-├── data/                               # Data and configuration
-│   ├── search-schema.json              # AI Search index schema
-│   ├── initial-docs/                   # Initial document corpus
-│   │   ├── product-manuals/            # Product documentation
-│   │   ├── policies/                   # Company policies
-│   │   └── faqs/                       # Frequently asked questions
-│   ├── fine-tuning/                    # Fine-tuning datasets
-│   │   ├── training.jsonl              # Training data
-│   │   └── validation.jsonl            # Validation data
-│   └── evaluation/                     # Evaluation datasets
-│       ├── test-conversations.json     # Test conversation data
-│       └── ground-truth.json           # Expected responses
+├── data/                               🔨 Data and configuration (you create)
+│   ├── search-schema.json              📝 AI Search index schema (example below)
+│   ├── initial-docs/                   🔨 Initial document corpus
+│   │   ├── product-manuals/            🔨 Product documentation (your data)
+│   │   ├── policies/                   🔨 Company policies (your data)
+│   │   └── faqs/                       🔨 Frequently asked questions (your data)
+│   ├── fine-tuning/                    🔨 Fine-tuning datasets (optional)
+│   │   ├── training.jsonl              🔨 Training data
+│   │   └── validation.jsonl            🔨 Validation data
+│   └── evaluation/                     🔨 Evaluation datasets
+│       ├── test-conversations.json     📝 Test conversation data (example below)
+│       └── ground-truth.json           🔨 Expected responses
 │
 ├── scripts/                            # Utility scripts
 │   ├── setup/                          # Setup scripts
@@ -253,14 +369,80 @@ retail-multiagent-solution/
         ├── security-scan.yml           # Security scanning
         └── performance-test.yml        # Performance testing
 ```
+  
+---
+
+## 🚀 البداية السريعة: ما يمكنك فعله الآن
+
+### الخيار 1: نشر البنية التحتية فقط (30 دقيقة)
+
+**ما تحصل عليه:** جميع خدمات Azure مهيأة وجاهزة للتطوير
+
+```bash
+# نسخ المستودع
+git clone https://github.com/microsoft/AZD-for-beginners.git
+cd AZD-for-beginners/examples/retail-multiagent-arm-template
+
+# نشر البنية التحتية
+./deploy.sh -g myResourceGroup -m standard
+
+# التحقق من النشر
+az resource list --resource-group myResourceGroup --output table
+```
+  
+**النتيجة المتوقعة:**
+- ✅ خدمات Azure OpenAI منشورة (3 مناطق)
+- ✅ خدمة AI Search تم إنشاؤها (فارغة)
+- ✅ بيئة تطبيقات الحاويات جاهزة
+- ✅ التخزين، Cosmos DB، Key Vault مهيأة
+- ❌ لا يوجد وكلاء يعملون بعد (البنية التحتية فقط)
+
+### الخيار 2: دراسة الهندسة المعمارية (2-3 ساعات)
+
+**ما تحصل عليه:** فهم عميق لأنماط الوكلاء المتعددين
+
+1. اقرأ هذا المستند بالكامل
+2. راجع أمثلة الكود لكل مكون
+3. افهم قرارات التصميم والمقايضات
+4. ادرس استراتيجيات تحسين التكلفة
+5. خطط لنهج التنفيذ الخاص بك
+
+**النتيجة المتوقعة:**
+- ✅ نموذج ذهني واضح لهندسة النظام
+- ✅ فهم المكونات المطلوبة
+- ✅ تقديرات جهد واقعية
+- ✅ خطة تنفيذ
+
+### الخيار 3: بناء النظام الكامل (80-120 ساعة)
+
+**ما تحصل عليه:** حل متعدد الوكلاء جاهز للإنتاج
+
+1. **المرحلة 1:** نشر البنية التحتية (تم أعلاه)
+2. **المرحلة 2:** تنفيذ الوكلاء باستخدام أمثلة الكود أدناه (30-40 ساعة)
+3. **المرحلة 3:** بناء خدمة التوجيه (12-16 ساعة)
+4. **المرحلة 4:** إنشاء واجهة المستخدم الأمامية (20-30 ساعة)
+5. **المرحلة 5:** تكوين خطوط البيانات (8-12 ساعة)
+6. **المرحلة 6:** إضافة المراقبة والتقييم (10-15 ساعة)
+
+**النتيجة المتوقعة:**
+- ✅ نظام متعدد الوكلاء يعمل بشكل كامل
+- ✅ مراقبة بدرجة الإنتاج
+- ✅ التحقق من الأمان
+- ✅ نشر محسن التكلفة
 
 ---
 
-## متطلبات التهيئة الأولية
+## 📚 مرجع الهندسة المعمارية ودليل التنفيذ
+
+تقدم الأقسام التالية أنماط هندسة معمارية مفصلة، أمثلة تكوين، وكود مرجعي لإرشادك في التنفيذ.
+
+## متطلبات التكوين الأولي
 
 ### 1. وكلاء متعددون وتكوين
 
 **الهدف**: نشر وكيلين متخصصين - "وكيل العملاء" (خدمة العملاء) و"وكيل المخزون" (إدارة المخزون)
+
+> **📝 ملاحظة:** ملفات azure.yaml وBicep التالية هي **أمثلة مرجعية** توضح كيفية هيكلة نشر الوكلاء المتعددين. ستحتاج إلى إنشاء هذه الملفات وتنفيذ الوكلاء المقابلين.
 
 #### خطوات التكوين:
 
@@ -293,7 +475,7 @@ services:
           }
         }
 ```
-
+  
 #### تحديثات قالب Bicep:
 
 ```bicep
@@ -333,12 +515,12 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
   }
 }]
 ```
-
+  
 ### 2. نماذج متعددة مع تخطيط السعة
 
-**الهدف**: نشر نموذج الدردشة (العملاء)، نموذج التضمين (البحث)، ونموذج التفكير (التقييم) مع إدارة الحصص بشكل مناسب
+**الهدف**: نشر نموذج الدردشة (العملاء)، نموذج التضمينات (البحث)، ونموذج التفكير (التقييم) مع إدارة الحصص بشكل مناسب
 
-#### استراتيجية متعدد المناطق:
+#### استراتيجية متعددة المناطق:
 
 ```bicep
 // infra/models.bicep
@@ -381,7 +563,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   }
 }
 ```
-
+  
 #### تكوين التراجع الإقليمي:
 
 ```yaml
@@ -390,12 +572,12 @@ AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 ```
+  
+### 3. AI Search مع تكوين فهرس البيانات
 
-### 3. البحث الذكي مع تكوين فهرس البيانات
+**الهدف**: تكوين AI Search لتحديث البيانات والفهرسة التلقائية
 
-**الهدف**: تكوين البحث الذكي لتحديث البيانات والفهرسة التلقائية
-
-#### الخطوة قبل التهيئة:
+#### الخطاف قبل التهيئة:
 
 ```bash
 #!/bin/bash
@@ -403,7 +585,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Create search service with specific SKU
+# إنشاء خدمة البحث باستخدام SKU محدد
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -411,7 +593,7 @@ az search service create \
   --partition-count 1 \
   --replica-count 1
 ```
-
+  
 #### إعداد البيانات بعد التهيئة:
 
 ```bash
@@ -420,22 +602,22 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Get search service key
+# الحصول على مفتاح خدمة البحث
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Create index schema
+# إنشاء مخطط الفهرس
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Upload initial documents
+# تحميل المستندات الأولية
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
-
+  
 #### مخطط فهرس البحث:
 
 ```json
@@ -460,15 +642,15 @@ python ./scripts/upload_search_data.py \
   }
 }
 ```
+  
+### 4. تكوين أدوات الوكلاء لـ AI Search
 
-### 4. تكوين أدوات الوكلاء للبحث الذكي
-
-**الهدف**: تكوين الوكلاء لاستخدام البحث الذكي كأداة تأسيسية
+**الهدف**: تكوين الوكلاء لاستخدام AI Search كأداة أساسية
 
 #### تنفيذ أداة البحث للوكيل:
 
 ```python
-# src/agents/tools/search_tool.py
+# src/agents/tools/أداة_البحث.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -508,8 +690,8 @@ class SearchTool:
         )
         return [doc async for doc in results]
 ```
-
-#### تكامل الوكيل:
+  
+#### تكامل الوكلاء:
 
 ```python
 # src/agents/customer_agent.py
@@ -522,13 +704,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # First, search for relevant context
+        # أولاً، ابحث عن السياق المناسب
         search_results = await self.search_tool.search_products(user_query)
         
-        # Prepare context for the LLM
+        # قم بإعداد السياق لنموذج اللغة
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Generate response with grounding
+        # قم بتوليد الرد مع الاستناد
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -539,7 +721,7 @@ class CustomerAgent:
         
         return response.choices[0].message.content
 ```
-
+  
 ### 5. تكامل تخزين تحميل الملفات
 
 **الهدف**: تمكين الوكلاء من معالجة الملفات المحملة (الكتيبات، المستندات) لسياق RAG
@@ -582,8 +764,8 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
   }
 }
 ```
-
-#### خط أنابيب معالجة المستندات:
+  
+#### خط معالجة المستندات:
 
 ```python
 # src/document_processor.py
@@ -603,13 +785,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Download file from blob storage
+        # تنزيل الملف من تخزين الكتل
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Extract text using Document Intelligence
+        # استخراج النص باستخدام الذكاء الوثائقي
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -617,19 +799,19 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # Extract text content
+        # استخراج محتوى النص
         text_content = ""
         for page in result.pages:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Generate embeddings
+        # إنشاء التضمينات
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Index in AI Search
+        # الفهرسة في البحث الذكي
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -640,12 +822,12 @@ class DocumentProcessor:
         
         await self.search_client.upload_documents([document])
 ```
+  
+### 6. تكامل بحث Bing
 
-### 6. تكامل البحث Bing
+**الهدف**: إضافة قدرات بحث Bing للحصول على معلومات في الوقت الفعلي
 
-**الهدف**: إضافة قدرات البحث Bing للحصول على معلومات في الوقت الفعلي
-
-#### إضافة مورد Bicep:
+#### إضافة موارد Bicep:
 
 ```bicep
 // infra/bing-search.bicep
@@ -662,8 +844,8 @@ resource bingSearchService 'Microsoft.Bing/accounts@2020-06-10' = {
 output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
-
-#### أداة البحث Bing:
+  
+#### أداة بحث Bing:
 
 ```python
 # src/agents/tools/bing_search_tool.py
@@ -704,16 +886,16 @@ class BingSearchTool:
                 
                 return results
 ```
-
+  
 ---
 
-## المراقبة وقابلية الملاحظة
+## المراقبة والرصد
 
-### 7. التتبع ورؤى التطبيقات
+### 7. التتبع وApplication Insights
 
-**الهدف**: مراقبة شاملة مع سجلات التتبع ورؤى التطبيقات
+**الهدف**: مراقبة شاملة مع سجلات التتبع وApplication Insights
 
-#### تكوين رؤى التطبيقات:
+#### تكوين Application Insights:
 
 ```bicep
 // infra/monitoring.bicep
@@ -765,8 +947,8 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 ```
-
-#### تنفيذ القياس عن بعد المخصص:
+  
+#### تنفيذ التتبع المخصص:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -780,7 +962,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Configure logging
+        # تكوين التسجيل
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -811,7 +993,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Truncate for privacy
+            'query': query[:100],  # تقصير للخصوصية
             'results_found': str(results_count > 0)
         }
         
@@ -871,12 +1053,12 @@ class AgentTelemetry:
         """Rough token estimation (4 characters per token)"""
         return len(text) // 4
 ```
+  
+### 8. التحقق الأمني من الفريق الأحمر
 
-### 8. التحقق الأمني بواسطة فرق الأمان
+**الهدف**: اختبار أمان تلقائي للوكلاء والنماذج
 
-**الهدف**: اختبار أمني تلقائي للوكلاء والنماذج
-
-#### تكوين فرق الأمان:
+#### تكوين الفريق الأحمر:
 
 ```python
 # src/security/red_team_scanner.py
@@ -924,7 +1106,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Calculate overall security score
+        # حساب الدرجة الإجمالية للأمان
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -992,8 +1174,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Implementation would send HTTP request to agent endpoint
-        # For demo purposes, returning placeholder
+        # التنفيذ سيرسل طلب HTTP إلى نقطة نهاية الوكيل
+        # لأغراض العرض التوضيحي، يتم إرجاع عنصر نائب
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1015,7 +1197,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Simplified vulnerability detection
+        # كشف الثغرات المبسط
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1050,14 +1232,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Basic scoring: 100 - (vulnerabilities / total * 100)
+        # التقييم الأساسي: 100 - (الثغرات / الإجمالي * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Reduce score based on severity
+        # تقليل الدرجة بناءً على الخطورة
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1066,8 +1248,8 @@ class RedTeamScanner:
         final_score = max(0, base_score - severity_penalty)
         return round(final_score, 2)
 ```
-
-#### خط أنابيب الأمان التلقائي:
+  
+#### خط أمان تلقائي:
 
 ```bash
 #!/bin/bash
@@ -1075,13 +1257,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Get agent endpoint from deployment
+# الحصول على نقطة نهاية الوكيل من النشر
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Run security scan
+# تشغيل فحص الأمان
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1090,7 +1272,7 @@ python -m src.security.red_team_scanner \
 
 echo "Security scan completed. Check security_reports/ for results."
 ```
-
+  
 ### 9. تقييم الوكلاء باستخدام نموذج التقييم
 
 **الهدف**: نشر نظام تقييم مع نموذج تقييم مخصص
@@ -1137,7 +1319,7 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
   }
 }
 ```
-
+  
 #### إطار التقييم:
 
 ```python
@@ -1168,7 +1350,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Calculate summary metrics
+        # حساب مقاييس الملخص
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1178,10 +1360,10 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # Get agent response
+        # الحصول على استجابة الوكيل
         agent_response = await self._get_agent_response(user_query)
         
-        # Grade the response
+        # تقييم الاستجابة
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1252,7 +1434,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Parse JSON response
+            # تحليل استجابة JSON
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1298,7 +1480,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Performance rating
+        # تقييم الأداء
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1313,7 +1495,7 @@ class AgentEvaluator:
         
         return summary
 ```
-
+  
 #### تكوين حالات الاختبار:
 
 ```json
@@ -1350,14 +1532,14 @@ class AgentEvaluator:
   ]
 }
 ```
-
+  
 ---
 
 ## التخصيص والتحديثات
 
-### 10. تخصيص تطبيقات الحاويات
+### 10. تخصيص تطبيق الحاوية
 
-**الهدف**: تحديث تكوين تطبيقات الحاويات واستبدالها بواجهة مستخدم مخصصة
+**الهدف**: تحديث تكوين تطبيق الحاوية واستبداله بواجهة مستخدم مخصصة
 
 #### التكوين الديناميكي:
 
@@ -1374,7 +1556,7 @@ services:
       BRAND_COLOR: "#2E86AB"
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
-
+  
 #### بناء الواجهة الأمامية المخصصة:
 
 ```dockerfile
@@ -1401,8 +1583,8 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
-
-#### نص البناء والنشر:
+  
+#### نص بناء ونشر:
 
 ```bash
 #!/bin/bash
@@ -1410,7 +1592,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Build custom image with environment variables
+# بناء صورة مخصصة مع متغيرات البيئة
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1418,13 +1600,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Push to Azure Container Registry
+# دفع إلى سجل حاويات Azure
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Update container app
+# تحديث تطبيق الحاوية
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1432,26 +1614,26 @@ az containerapp update \
 
 echo "Frontend deployed successfully!"
 ```
-
+  
 ---
 
 ## 🔧 دليل استكشاف الأخطاء وإصلاحها
 
 ### المشكلات الشائعة والحلول
 
-#### 1. حدود حصص تطبيقات الحاويات
+#### 1. حدود حصة تطبيقات الحاويات
 
-**المشكلة**: فشل النشر بسبب حدود الحصص الإقليمية
+**المشكلة**: فشل النشر بسبب حدود الحصة الإقليمية
 
 **الحل**:
 ```bash
-# Check current quota usage
+# تحقق من استخدام الحصة الحالية
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Request quota increase
+# طلب زيادة الحصة
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1461,7 +1643,7 @@ az support tickets create \
   --contact-phone-number "+1234567890" \
   --description "Request quota increase for Container Apps in region X"
 ```
-
+  
 #### 2. انتهاء صلاحية نشر النموذج
 
 **المشكلة**: فشل نشر النموذج بسبب انتهاء صلاحية إصدار API
@@ -1474,7 +1656,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # This would call Azure OpenAI API to get current versions
+    # هذا سيستدعي واجهة برمجة تطبيقات Azure OpenAI للحصول على الإصدارات الحالية
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1491,12 +1673,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Read and update template
+    # قراءة وتحديث القالب
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Update version in template
+        # تحديث الإصدار في القالب
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1510,14 +1692,14 @@ if __name__ == "__main__":
     versions = check_model_versions()
     update_bicep_templates(versions)
 ```
-
+  
 #### 3. تكامل التخصيص
 
 **المشكلة**: كيفية دمج النماذج المخصصة في نشر AZD
 
 **الحل**:
 ```python
-# scripts/fine_tuning_pipeline.py
+# البرامج النصية/خط أنابيب الضبط الدقيق.py
 import asyncio
 from openai import AsyncOpenAI
 
@@ -1553,14 +1735,14 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Update deployment to use fine-tuned model
-            # This would call Azure CLI to update the deployment
+            # تحديث النشر لاستخدام النموذج المضبوط
+            # سيقوم هذا باستدعاء Azure CLI لتحديث النشر
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
             return None
 ```
-
+  
 ---
 
 ## الأسئلة الشائعة والاستكشاف المفتوح
@@ -1585,13 +1767,13 @@ services:
           "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
         }
 ```
-
+  
 #### س: هل يمكنني نشر "موجه النموذج" كنموذج (تأثيرات التكلفة)؟
 
 **ج: نعم، مع مراعاة دقيقة:**
 
 ```python
-# Model Router Implementation
+# تنفيذ جهاز توجيه النموذج
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
@@ -1611,10 +1793,10 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Implementation would calculate potential savings
+        # التنفيذ سيحسب المدخرات المحتملة
         pass
 ```
-
+  
 **تأثيرات التكلفة:**
 - **التوفير**: تقليل التكلفة بنسبة 60-80% للاستفسارات البسيطة
 - **المقايضات**: زيادة طفيفة في زمن الاستجابة لمنطق التوجيه
@@ -1622,34 +1804,34 @@ class ModelRouter:
 
 #### س: هل يمكنني بدء وظيفة تخصيص من قالب azd؟
 
-**ج: نعم، باستخدام الخطوات بعد التهيئة:**
+**ج: نعم، باستخدام الخطافات بعد التهيئة:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Fine-tuning Integration
+# hooks/postprovision.sh - ضبط التكامل
 
 echo "Starting fine-tuning pipeline..."
 
-# Upload training data
+# تحميل بيانات التدريب
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Start fine-tuning job
+# بدء مهمة الضبط
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4o-mini")
 
-# Store job ID for monitoring
+# تخزين معرف المهمة للمراقبة
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
+  
+### السيناريوهات المتقدمة
 
-### سيناريوهات متقدمة
-
-#### استراتيجية نشر متعدد المناطق
+#### استراتيجية النشر متعدد المناطق
 
 ```bicep
 // infra/multi-region.bicep
@@ -1684,7 +1866,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
   }
 }
 ```
-
+  
 #### إطار تحسين التكلفة
 
 ```python
@@ -1697,7 +1879,7 @@ class CostOptimizer:
         """Analyze usage to recommend optimizations"""
         recommendations = []
         
-        # Model usage analysis
+        # تحليل استخدام النموذج
         model_usage = self.analytics.get_model_usage()
         for model, usage in model_usage.items():
             if usage['utilization'] < 0.3:
@@ -1709,7 +1891,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Peak time analysis
+        # تحليل وقت الذروة
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1728,69 +1910,73 @@ class CostOptimizer:
             elif rec['type'] == 'auto_scaling':
                 self._enable_auto_scaling(rec)
 ```
+  
+---  
+## ✅ قالب ARM جاهز للنشر
 
----
+> **✨ هذا موجود ويعمل بالفعل!**  
+> على عكس أمثلة الكود المفاهيمي أعلاه، فإن قالب ARM هو **بنية تحتية حقيقية وجاهزة للنشر** مضمّنة في هذا المستودع.
 
-## قالب ARM الجاهز للنشر
+### ما الذي يفعله هذا القالب فعليًا
 
-للنشر الفوري للحل الكامل متعدد الوكلاء لبائع التجزئة، قمنا بتوفير قالب ARM شامل يقوم بتوفير جميع موارد Azure المطلوبة بأمر واحد.
+يقوم قالب ARM الموجود في [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) بتوفير **جميع البنية التحتية لـ Azure** اللازمة لنظام الوكلاء المتعددين. هذا هو **المكون الجاهز للتشغيل الوحيد** - كل شيء آخر يتطلب تطويرًا.
 
 ### ما يتضمنه قالب ARM
 
-القالب الموجود في [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) يشمل:
+يتضمن قالب ARM الموجود في [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template):
 
-#### **البنية التحتية الكاملة**
-- ✅ **نشر Azure OpenAI متعدد المناطق** (GPT-4o، GPT-4o-mini، التضمين، التقييم)
-- ✅ **البحث الذكي** مع قدرات البحث المتجه
-- ✅ **تخزين Azure** مع حاويات المستندات والتحميل
+#### **بنية تحتية كاملة**
+- ✅ نشرات **Azure OpenAI متعددة المناطق** (GPT-4o، GPT-4o-mini، embeddings، grader)
+- ✅ **Azure AI Search** مع إمكانيات البحث المتجهي
+- ✅ **Azure Storage** مع حاويات للوثائق والتحميل
 - ✅ **بيئة تطبيقات الحاويات** مع التوسع التلقائي
-- ✅ **تطبيقات موجه الوكلاء والواجهة الأمامية**
-- ✅ **Cosmos DB** لحفظ تاريخ الدردشة
-- ✅ **رؤى التطبيقات** للمراقبة الشاملة
+- ✅ تطبيقات الحاويات **Agent Router & Frontend**
+- ✅ **Cosmos DB** لحفظ تاريخ المحادثات
+- ✅ **Application Insights** للمراقبة الشاملة
 - ✅ **Key Vault** لإدارة الأسرار بأمان
-- ✅ **ذكاء المستندات** لمعالجة الملفات
-- ✅ **واجهة بحث Bing** للحصول على معلومات في الوقت الفعلي
+- ✅ **Document Intelligence** لمعالجة الملفات
+- ✅ **Bing Search API** للحصول على معلومات في الوقت الفعلي
 
 #### **أنماط النشر**
-| النمط | حالة الاستخدام | الموارد | التكلفة الشهرية المقدرة |
-|-------|----------------|---------|-------------------------|
-| **الحد الأدنى** | التطوير، الاختبار | SKUs الأساسية، منطقة واحدة | $100-370 |
-| **القياسي** | الإنتاج، النطاق المعتدل | SKUs القياسية، متعدد المناطق | $420-1,450 |
-| **المميز** | المؤسسات، النطاق العالي | SKUs المميزة، إعداد HA | $1,150-3,500 |
+| النمط | حالة الاستخدام | الموارد | التكلفة المقدرة/الشهر |
+|-------|----------------|---------|-----------------------|
+| **Minimal** | التطوير، الاختبار | SKUs أساسية، منطقة واحدة | $100-370 |
+| **Standard** | الإنتاج، النطاق المعتدل | SKUs قياسية، متعددة المناطق | $420-1,450 |
+| **Premium** | المؤسسات، النطاق العالي | SKUs متميزة، إعداد عالي التوافر | $1,150-3,500 |
 
 ### 🎯 خيارات النشر السريع
 
 #### الخيار 1: نشر Azure بنقرة واحدة
 
-[![نشر إلى Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### الخيار 2: نشر Azure CLI
+#### الخيار 2: نشر باستخدام Azure CLI
 
 ```bash
-# Clone the repository
+# نسخ المستودع
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Make deployment script executable
+# جعل نص النشر قابلاً للتنفيذ
 chmod +x deploy.sh
 
-# Deploy with default settings (Standard mode)
+# النشر بالإعدادات الافتراضية (الوضع القياسي)
 ./deploy.sh -g myResourceGroup
 
-# Deploy for production with premium features
+# النشر للإنتاج مع الميزات المميزة
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Deploy minimal version for development
+# نشر النسخة الأدنى للتطوير
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### الخيار 3: نشر قالب ARM مباشرة
+#### الخيار 3: نشر مباشر لقالب ARM
 
 ```bash
-# Create resource group
+# إنشاء مجموعة موارد
 az group create --name myResourceGroup --location eastus2
 
-# Deploy template directly
+# نشر القالب مباشرة
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1800,7 +1986,7 @@ az deployment group create \
 
 ### مخرجات القالب
 
-بعد النشر الناجح، ستتلقى:
+بعد النشر الناجح، ستحصل على:
 
 ```json
 {
@@ -1814,31 +2000,31 @@ az deployment group create \
 }
 ```
 
-### 🔧 التكوين بعد النشر
+### 🔧 إعدادات ما بعد النشر
 
-يتعامل قالب ARM مع توفير البنية التحتية. بعد النشر:
+يتولى قالب ARM توفير البنية التحتية. بعد النشر:
 
-1. **تكوين فهرس البحث**:
+1. **إعداد فهرس البحث**:
    ```bash
-   # Use the provided search schema
+   # استخدم مخطط البحث المقدم
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **تحميل المستندات الأولية**:
+2. **تحميل الوثائق الأولية**:
    ```bash
-   # Upload product manuals and knowledge base
+   # تحميل أدلة المنتجات وقاعدة المعرفة
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **نشر كود الوكيل**:
+3. **نشر كود الوكلاء**:
    ```bash
-   # Build and deploy actual agent applications
+   # بناء ونشر تطبيقات الوكيل الفعلية
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -1865,10 +2051,10 @@ az deployment group create \
 ### 📊 ميزات النشر
 
 - ✅ **التحقق من المتطلبات الأساسية** (Azure CLI، الحصص، الأذونات)
-- ✅ **توافر عالي متعدد المناطق** مع التراجع التلقائي
-- ✅ **مراقبة شاملة** مع رؤى التطبيقات وتحليلات السجلات
-- ✅ **أفضل ممارسات الأمان** مع Key Vault وRBAC
-- ✅ **تحسين التكلفة** مع أنماط النشر القابلة للتكوين
+- ✅ **التوافر العالي متعدد المناطق** مع التبديل التلقائي
+- ✅ **مراقبة شاملة** باستخدام Application Insights وLog Analytics
+- ✅ **أفضل ممارسات الأمان** باستخدام Key Vault وRBAC
+- ✅ **تحسين التكلفة** مع أنماط نشر قابلة للتكوين
 - ✅ **التوسع التلقائي** بناءً على أنماط الطلب
 - ✅ **تحديثات بدون توقف** مع مراجعات تطبيقات الحاويات
 
@@ -1876,10 +2062,10 @@ az deployment group create \
 
 بمجرد النشر، قم بمراقبة الحل الخاص بك من خلال:
 
-- **رؤى التطبيقات**: مقاييس الأداء، تتبع التبعيات، والقياس عن بعد المخصص
-- **تحليلات السجلات**: تسجيل مركزي من جميع المكونات
-- **مراقبة Azure**: مراقبة صحة الموارد وتوافرها
-- **إدارة التكلفة**: تتبع التكلفة في الوقت الفعلي وتنبيهات الميزانية
+- **Application Insights**: مقاييس الأداء، تتبع التبعيات، والقياسات المخصصة
+- **Log Analytics**: تسجيل مركزي لجميع المكونات
+- **Azure Monitor**: مراقبة صحة الموارد وتوافرها
+- **إدارة التكاليف**: تتبع التكاليف في الوقت الفعلي وتنبيهات الميزانية
 
 ---
 
@@ -1887,20 +2073,122 @@ az deployment group create \
 
 يوفر هذا المستند السيناريو مع قالب ARM كل ما تحتاجه لنشر حل دعم العملاء متعدد الوكلاء الجاهز للإنتاج. يغطي التنفيذ:
 
-✅ **تصميم الهندسة المعمارية** - تصميم نظام شامل مع علاقات المكونات  
+✅ **تصميم البنية** - تصميم نظام شامل مع علاقات المكونات  
 ✅ **توفير البنية التحتية** - قالب ARM كامل للنشر بنقرة واحدة  
-✅ **تكوين الوكلاء** - إعداد مفصل لوكلاء العملاء والمخزون  
-✅ **نشر النماذج المتعددة** - وضع استراتيجي للنماذج عبر المناطق  
-✅ **تكامل البحث** - البحث الذكي مع قدرات البحث المتجه وفهرسة البيانات  
-✅ **تنفيذ الأمان** - فرق الأمان، فحص الثغرات، والممارسات الآمنة  
-✅ **المراقبة والتقييم** - قياس عن بعد شامل وإطار تقييم الوكلاء  
-✅ **جاهزية الإنتاج** - نشر على مستوى المؤسسات مع HA واستعادة الكوارث  
+✅ **إعداد الوكلاء** - إعداد مفصل لوكلاء العملاء والمخزون  
+✅ **نشر متعدد النماذج** - وضع استراتيجي للنماذج عبر المناطق  
+✅ **تكامل البحث** - بحث AI مع إمكانيات المتجهات وفهرسة البيانات  
+✅ **تنفيذ الأمان** - اختبارات الأمان، فحص الثغرات، والممارسات الآمنة  
+✅ **المراقبة والتقييم** - قياسات شاملة وإطار تقييم للوكلاء  
+✅ **جاهزية الإنتاج** - نشر على مستوى المؤسسات مع التوافر العالي واستعادة الكوارث  
 ✅ **تحسين التكلفة** - التوجيه الذكي والتوسع بناءً على الاستخدام  
-✅ **دليل استكشاف الأخطاء وإصلاحها** - المشكلات الشائعة واستراتيجيات الحل
-
-يغطي هذا السيناريو الشامل جميع المتطلبات لحل بائع التجزئة متعدد الوكلاء، ويوفر إرشادات عملية للتنفيذ، دعم استكشاف الأخطاء وإصلاحها، ومواضيع استكشاف متقدمة لبناء تطبيقات ذكاء اصطناعي جاهزة للإنتاج باستخدام AZD.
+✅ **دليل استكشاف الأخطاء** - المشكلات الشائعة واستراتيجيات الحل
 
 ---
 
+## 📊 ملخص: ما تعلمته
+
+### أنماط البنية المغطاة
+
+✅ **تصميم نظام متعدد الوكلاء** - وكلاء متخصصون (العملاء + المخزون) مع نماذج مخصصة  
+✅ **نشر متعدد المناطق** - وضع استراتيجي للنماذج لتقليل التكاليف وتحسين الموثوقية  
+✅ **بنية RAG** - تكامل البحث AI مع المتجهات للحصول على استجابات مستندة  
+✅ **تقييم الوكلاء** - نموذج مخصص للتقييم لضمان الجودة  
+✅ **إطار الأمان** - اختبارات الأمان وأنماط فحص الثغرات  
+✅ **تحسين التكلفة** - استراتيجيات توجيه النماذج وتخطيط السعة  
+✅ **مراقبة الإنتاج** - Application Insights مع قياسات مخصصة  
+
+### ما يوفره هذا المستند
+
+| المكون | الحالة | مكان العثور عليه |
+|--------|--------|------------------|
+| **قالب البنية التحتية** | ✅ جاهز للنشر | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **مخططات البنية** | ✅ مكتملة | مخطط Mermaid أعلاه |
+| **أمثلة الكود** | ✅ تطبيقات مرجعية | في جميع أنحاء هذا المستند |
+| **أنماط التكوين** | ✅ إرشادات مفصلة | الأقسام 1-10 أعلاه |
+| **تنفيذات الوكلاء** | 🔨 تحتاج إلى بنائها | ~40 ساعة تطوير |
+| **واجهة المستخدم الأمامية** | 🔨 تحتاج إلى بنائها | ~25 ساعة تطوير |
+| **خطوط البيانات** | 🔨 تحتاج إلى بنائها | ~10 ساعات تطوير |
+
+### الواقع: ما هو موجود فعليًا
+
+**في المستودع (جاهز الآن):**
+- ✅ قالب ARM ينشر أكثر من 15 خدمة Azure (azuredeploy.json)
+- ✅ سكربت النشر مع التحقق (deploy.sh)
+- ✅ تكوين المعلمات (azuredeploy.parameters.json)
+
+**مذكور في المستند (تحتاج إلى إنشائه):**
+- 🔨 كود تنفيذ الوكلاء (~30-40 ساعة)
+- 🔨 خدمة التوجيه (~12-16 ساعة)
+- 🔨 تطبيق الواجهة الأمامية (~20-30 ساعة)
+- 🔨 سكربتات إعداد البيانات (~8-12 ساعة)
+- 🔨 إطار المراقبة (~10-15 ساعة)
+
+### الخطوات التالية
+
+#### إذا كنت تريد نشر البنية التحتية (30 دقيقة)
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup
+```
+
+#### إذا كنت تريد بناء النظام الكامل (80-120 ساعة)
+1. ✅ اقرأ وافهم هذا المستند المعماري (2-3 ساعات)
+2. ✅ انشر البنية التحتية باستخدام قالب ARM (30 دقيقة)
+3. 🔨 نفذ الوكلاء باستخدام أنماط الكود المرجعية (~40 ساعة)
+4. 🔨 قم ببناء خدمة التوجيه باستخدام FastAPI/Express (~15 ساعة)
+5. 🔨 أنشئ واجهة المستخدم الأمامية باستخدام React/Vue (~25 ساعة)
+6. 🔨 قم بتكوين خط البيانات وفهرس البحث (~10 ساعات)
+7. 🔨 أضف المراقبة والتقييم (~15 ساعة)
+8. ✅ اختبر، قم بتأمين، وحسن الأداء (~10 ساعات)
+
+#### إذا كنت تريد تعلم أنماط الوكلاء المتعددين (دراسة)
+- 📖 راجع مخطط البنية وعلاقات المكونات
+- 📖 ادرس أمثلة الكود لـ SearchTool، BingTool، AgentEvaluator
+- 📖 افهم استراتيجية النشر متعدد المناطق
+- 📖 تعلم أطر التقييم والأمان
+- 📖 طبق الأنماط على مشاريعك الخاصة
+
+### النقاط الرئيسية
+
+1. **البنية التحتية مقابل التطبيق** - يوفر قالب ARM البنية التحتية؛ الوكلاء يتطلبون تطويرًا
+2. **استراتيجية متعددة المناطق** - وضع النماذج الاستراتيجي يقلل التكاليف ويحسن الموثوقية
+3. **إطار التقييم** - نموذج مخصص للتقييم يتيح التقييم المستمر للجودة
+4. **الأمان أولاً** - اختبارات الأمان وفحص الثغرات ضرورية للإنتاج
+5. **تحسين التكلفة** - التوجيه الذكي بين GPT-4o وGPT-4o-mini يوفر 60-80%
+
+### التكاليف المقدرة
+
+| نمط النشر | البنية التحتية/الشهر | التطوير (مرة واحدة) | إجمالي الشهر الأول |
+|-----------|---------------------|---------------------|--------------------|
+| **Minimal** | $100-370 | $15K-25K (80-120 ساعة) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (نفس الجهد) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (نفس الجهد) | $16.2K-28.5K |
+
+**ملاحظة:** البنية التحتية تمثل <5% من التكلفة الإجمالية للتطبيقات الجديدة. الجهد التطويري هو الاستثمار الرئيسي.
+
+### الموارد ذات الصلة
+
+- 📚 [دليل نشر قالب ARM](retail-multiagent-arm-template/README.md) - إعداد البنية التحتية
+- 📚 [أفضل ممارسات Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - نشر النماذج
+- 📚 [وثائق AI Search](https://learn.microsoft.com/azure/search/) - تكوين البحث المتجهي
+- 📚 [أنماط تطبيقات الحاويات](https://learn.microsoft.com/azure/container-apps/) - نشر الخدمات المصغرة
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - إعداد المراقبة
+
+### أسئلة أو مشكلات؟
+
+- 🐛 [الإبلاغ عن المشكلات](https://github.com/microsoft/AZD-for-beginners/issues) - أخطاء القالب أو الوثائق
+- 💬 [مناقشات GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - أسئلة حول البنية
+- 📖 [الأسئلة الشائعة](../../resources/faq.md) - إجابات للأسئلة الشائعة
+- 🔧 [دليل استكشاف الأخطاء](../../docs/troubleshooting/common-issues.md) - مشكلات النشر
+
+---
+
+**يوفر هذا السيناريو الشامل مخططًا معماريًا على مستوى المؤسسات لأنظمة الذكاء الاصطناعي متعددة الوكلاء، مع قوالب بنية تحتية، إرشادات التنفيذ، وأفضل الممارسات للإنتاج لبناء حلول دعم العملاء المتقدمة باستخدام Azure Developer CLI.**
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T18:39:33+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-20T08:20:53+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ur"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## تعارف
 
-یہ جامع گائیڈ Azure Developer CLI کو بہترین ترقی اور تعیناتی ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔ آپ ترتیب کی درجہ بندی، ماحول کے انتظام، تصدیق کے طریقے، اور جدید ترتیب کے نمونوں کے بارے میں سیکھیں گے جو موثر اور محفوظ Azure تعیناتیوں کو ممکن بناتے ہیں۔
+یہ جامع گائیڈ Azure Developer CLI کو بہترین ترقی اور تعیناتی ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔ آپ ترتیب کی درجہ بندی، ماحول کے انتظام، تصدیق کے طریقے، اور پیچیدہ ترتیب کے نمونوں کے بارے میں سیکھیں گے جو موثر اور محفوظ Azure تعیناتیوں کو ممکن بناتے ہیں۔
 
 ## سیکھنے کے اہداف
 
@@ -27,13 +27,13 @@ CO_OP_TRANSLATOR_METADATA:
 - عالمی اور پروجیکٹ مخصوص ترتیبات کو مؤثر طریقے سے ترتیب دیں گے
 - مختلف ترتیبات کے ساتھ متعدد ماحول کا انتظام کریں گے
 - محفوظ تصدیق اور اجازت کے نمونوں کو نافذ کریں گے
-- پیچیدہ منظرناموں کے لیے جدید ترتیب کے نمونوں کو سمجھیں گے
+- پیچیدہ منظرناموں کے لیے اعلی درجے کی ترتیب کے نمونوں کو سمجھیں گے
 
 ## سیکھنے کے نتائج
 
 اس سبق کو مکمل کرنے کے بعد، آپ قابل ہوں گے:
 - ترقی کے بہترین ورک فلو کے لیے azd ترتیب دیں
-- متعدد تعیناتی ماحول قائم کریں اور ان کا انتظام کریں
+- متعدد تعیناتی ماحول ترتیب دیں اور ان کا انتظام کریں
 - محفوظ ترتیب کے انتظام کے طریقے نافذ کریں
 - ترتیب سے متعلق مسائل کو حل کریں
 - مخصوص تنظیمی ضروریات کے لیے azd کے رویے کو حسب ضرورت بنائیں
@@ -47,42 +47,42 @@ azd ایک درجہ بندی ترتیب کا نظام استعمال کرتا ہ
 2. **ماحول کے متغیرات**
 3. **مقامی پروجیکٹ ترتیب** (`.azd/config.json`)
 4. **عالمی صارف ترتیب** (`~/.azd/config.json`)
-5. **ڈیفالٹ اقدار** (سب سے کم ترجیح)
+5. **پہلے سے طے شدہ اقدار** (سب سے کم ترجیح)
 
 ## عالمی ترتیب
 
 ### عالمی ڈیفالٹس ترتیب دینا
 ```bash
-# Set default subscription
+# ڈیفالٹ سبسکرپشن سیٹ کریں
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# ڈیفالٹ مقام سیٹ کریں
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# ڈیفالٹ وسائل گروپ نام دینے کا طریقہ کار سیٹ کریں
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# تمام عالمی ترتیب دیکھیں
 azd config list
 
-# Remove a configuration
+# ایک ترتیب کو ہٹائیں
 azd config unset defaults.location
 ```
 
 ### عام عالمی ترتیبات
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# ترقی کی ترجیحات
+azd config set alpha.enable true                    # الفا خصوصیات کو فعال کریں
+azd config set telemetry.enabled false             # ٹیلیمیٹری کو غیر فعال کریں
+azd config set output.format json                  # آؤٹ پٹ فارمیٹ سیٹ کریں
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# سیکیورٹی کی ترتیبات
+azd config set auth.useAzureCliCredential true     # تصدیق کے لیے Azure CLI استعمال کریں
+azd config set tls.insecure false                  # TLS تصدیق کو نافذ کریں
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# کارکردگی کی ترتیب
+azd config set provision.parallelism 5             # وسائل کی متوازی تخلیق
+azd config set deploy.timeout 30m                  # تعیناتی کا وقت ختم
 ```
 
 ## 🏗️ پروجیکٹ ترتیب
@@ -213,13 +213,13 @@ services:
 
 ### ماحول بنانا
 ```bash
-# Create a new environment
+# ایک نیا ماحول بنائیں
 azd env new development
 
-# Create with specific location
+# مخصوص مقام کے ساتھ بنائیں
 azd env new staging --location "westus2"
 
-# Create from template
+# سانچے سے بنائیں
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 
 ### ماحول کے متغیرات
 ```bash
-# Set environment-specific variables
+# ماحول کے مخصوص متغیرات سیٹ کریں
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# ماحول کے متغیرات دیکھیں
 azd env get-values
 
-# Remove environment variable
+# متوقع نتیجہ:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=خفیہ-اے پی آئی-کلید
+# DEBUG=true
+
+# ماحول کے متغیر کو ہٹائیں
 azd env unset DEBUG
+
+# ہٹانے کی تصدیق کریں
+azd env get-values | grep DEBUG
+# (کچھ بھی واپس نہیں آنا چاہیے)
 ```
 
 ### ماحول کے سانچے
 مسلسل ماحول کی ترتیب کے لیے `.azure/env.template` بنائیں:
 ```bash
-# Required variables
+# مطلوبہ متغیرات
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# ایپلیکیشن کی ترتیبات
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# اختیاری ترقیاتی ترتیبات
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,33 +290,33 @@ LOG_LEVEL=info
 
 ### Azure CLI انضمام
 ```bash
-# Use Azure CLI credentials (default)
+# Azure CLI اسناد استعمال کریں (پہلے سے طے شدہ)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# مخصوص کرایہ دار کے ساتھ لاگ ان کریں
 az login --tenant <tenant-id>
 
-# Set default subscription
+# ڈیفالٹ سبسکرپشن سیٹ کریں
 az account set --subscription <subscription-id>
 ```
 
 ### سروس پرنسپل تصدیق
 CI/CD پائپ لائنز کے لیے:
 ```bash
-# Set environment variables
+# ماحول کے متغیرات سیٹ کریں
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# یا براہ راست ترتیب دیں
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### منظم شناخت
-Azure پر میزبانی شدہ ماحول کے لیے:
+Azure میزبان ماحول کے لیے:
 ```bash
-# Enable managed identity authentication
+# منظم شناخت کی تصدیق کو فعال کریں
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -385,13 +394,13 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-مثال `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+ مثال `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 جدید ترتیب
+## 🔧 اعلی درجے کی ترتیب
 
 ### حسب ضرورت وسائل کے نام
 ```bash
-# Set naming conventions
+# نام رکھنے کے اصول مقرر کریں
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### ترقیاتی ماحول
 ```bash
-# .azure/development/.env
+# .azure/ترقی/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### ترتیب کی توثیق کریں
 ```bash
-# Check configuration syntax
+# ترتیب کی نحو چیک کریں
 azd config validate
 
-# Test environment variables
+# ماحول کے متغیرات کی جانچ کریں
 azd env get-values
 
-# Validate infrastructure
+# بنیادی ڈھانچے کی تصدیق کریں
 azd provision --dry-run
 ```
 
@@ -468,17 +477,17 @@ azd provision --dry-run
 
 ```bash
 #!/bin/bash
-# scripts/validate-config.sh
+# اسکرپٹس/validate-config.sh
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# مطلوبہ ماحول متغیرات چیک کریں
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# azure.yaml نحو کی تصدیق کریں
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -516,12 +525,12 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. ورژن کنٹرول کے خیالات
+### 3. ورژن کنٹرول کے تحفظات
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # ماحول کی ترتیبیں (وسائل کے IDs پر مشتمل ہیں)
+.azure/*/.env               # ماحول کے متغیرات (رازوں پر مشتمل ہو سکتے ہیں)
+.env                        # مقامی ماحول کی فائل
 ```
 
 ### 4. ترتیب کی دستاویزات
@@ -540,11 +549,73 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## اگلے اقدامات
+## 🎯 عملی مشقیں
 
-- [آپ کا پہلا پروجیکٹ](first-project.md) - ترتیب کو عملی طور پر نافذ کریں
+### مشق 1: کثیر ماحول ترتیب (15 منٹ)
+
+**مقصد**: مختلف ترتیبات کے ساتھ تین ماحول بنائیں اور ترتیب دیں
+
+```bash
+# ترقیاتی ماحول بنائیں
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# اسٹیجنگ ماحول بنائیں
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# پیداواری ماحول بنائیں
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# ہر ماحول کی تصدیق کریں
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**کامیابی کے معیار:**
+- [ ] تین ماحول کامیابی سے بنائے گئے
+- [ ] ہر ماحول کی منفرد ترتیب ہے
+- [ ] ماحول کے درمیان بغیر کسی غلطی کے سوئچ کر سکتے ہیں
+- [ ] `azd env list` تمام تین ماحول دکھاتا ہے
+
+### مشق 2: راز کا انتظام (10 منٹ)
+
+**مقصد**: حساس ڈیٹا کے ساتھ محفوظ ترتیب کی مشق کریں
+
+```bash
+# خفیہ معلومات سیٹ کریں (آؤٹ پٹ میں ظاہر نہیں ہوں گی)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# غیر خفیہ ترتیب سیٹ کریں
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# ماحول دیکھیں (خفیہ معلومات کو چھپایا جانا چاہیے)
+azd env get-values
+
+# تصدیق کریں کہ خفیہ معلومات محفوظ ہیں
+azd env get DB_PASSWORD  # اصل قدر دکھانی چاہیے
+```
+
+**کامیابی کے معیار:**
+- [ ] راز بغیر ٹرمینل میں دکھائے محفوظ کیے گئے
+- [ ] `azd env get-values` راز کو چھپائے ہوئے دکھاتا ہے
+- [ ] انفرادی `azd env get <SECRET_NAME>` اصل قدر حاصل کرتا ہے
+
+## اگلے مراحل
+
+- [آپ کا پہلا پروجیکٹ](first-project.md) - ترتیب کو عملی طور پر لاگو کریں
 - [تعیناتی گائیڈ](../deployment/deployment-guide.md) - تعیناتی کے لیے ترتیب استعمال کریں
-- [وسائل کی فراہمی](../deployment/provisioning.md) - پیداواری ترتیب کے لیے تیار کریں
+- [وسائل کی فراہمی](../deployment/provisioning.md) - پیداواری ترتیب کے لیے تیار
 
 ## حوالہ جات
 
@@ -563,5 +634,7 @@ database:
 
 ---
 
-**ڈسکلیمر**:  
-یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ ہم درستگی کے لیے کوشش کرتے ہیں، لیکن براہ کرم آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا غیر درستیاں ہو سکتی ہیں۔ اصل دستاویز کو اس کی اصل زبان میں مستند ذریعہ سمجھا جانا چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ ہم اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے ذمہ دار نہیں ہیں۔
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**اعلانِ لاتعلقی**:  
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ ہم درستگی کے لیے کوشش کرتے ہیں، لیکن براہ کرم آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا غیر درستیاں ہو سکتی ہیں۔ اصل دستاویز کو اس کی اصل زبان میں مستند ذریعہ سمجھا جانا چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے لیے ہم ذمہ دار نہیں ہیں۔
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
