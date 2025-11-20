@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T16:22:45+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-19T23:53:07+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "fa"
 }
@@ -11,8 +11,8 @@ CO_OP_TRANSLATOR_METADATA:
 
 **فهرست فصل‌ها:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل ۲ - توسعه مبتنی بر هوش مصنوعی
-- **⬅️ قبلی**: [ادغام Azure AI Foundry](azure-ai-foundry-integration.md)
+- **📖 فصل جاری**: فصل ۲ - توسعه مبتنی بر هوش مصنوعی
+- **⬅️ قبلی**: [ادغام Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ بعدی**: [آزمایشگاه کارگاه هوش مصنوعی](ai-workshop-lab.md)
 - **🚀 فصل بعدی**: [فصل ۳: پیکربندی](../getting-started/configuration.md)
 
@@ -31,7 +31,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### مدل‌های Azure OpenAI
 
-مدل مناسب برای کاربرد خود را انتخاب کنید:
+مدل مناسب برای مورد استفاده خود را انتخاب کنید:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -61,12 +61,12 @@ services:
 
 ### برنامه‌ریزی ظرفیت مدل
 
-| نوع مدل | کاربرد | ظرفیت پیشنهادی | ملاحظات هزینه |
-|---------|--------|----------------|----------------|
+| نوع مدل | مورد استفاده | ظرفیت پیشنهادی | ملاحظات هزینه |
+|---------|-------------|----------------|----------------|
 | GPT-4o-mini | چت، پرسش و پاسخ | ۱۰-۵۰ TPM | مقرون‌به‌صرفه برای اکثر بارهای کاری |
 | GPT-4 | استدلال پیچیده | ۲۰-۱۰۰ TPM | هزینه بالاتر، مناسب برای ویژگی‌های پیشرفته |
 | Text-embedding-ada-002 | جستجو، RAG | ۳۰-۱۲۰ TPM | ضروری برای جستجوی معنایی |
-| Whisper | تبدیل گفتار به متن | ۱۰-۵۰ TPM | بارهای کاری پردازش صوتی |
+| Whisper | گفتار به متن | ۱۰-۵۰ TPM | بارهای کاری پردازش صوتی |
 
 ## پیکربندی AZD برای مدل‌های هوش مصنوعی
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 محیط برنامه خود را پیکربندی کنید:
 
 ```bash
-# .env configuration
+# پیکربندی .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -216,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### کنترل نسخه
 
-نسخه‌های مدل را در پیکربندی AZD خود دنبال کنید:
+نسخه‌های مدل را در پیکربندی AZD خود پیگیری کنید:
 
 ```json
 {
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 ظرفیت مورد نیاز را بر اساس الگوهای استفاده محاسبه کنید:
 
 ```python
-# Capacity calculation example
+# مثال محاسبه ظرفیت
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# مثال استفاده
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -342,7 +342,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### بهینه‌سازی هزینه
 
-کنترل‌های هزینه را اجرا کنید:
+کنترل‌های هزینه را پیاده‌سازی کنید:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -374,7 +374,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## نظارت و مشاهده‌پذیری
 
-### ادغام Application Insights
+### یکپارچه‌سازی Application Insights
 
 نظارت بر بارهای کاری هوش مصنوعی را پیکربندی کنید:
 
@@ -414,10 +414,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### معیارهای سفارشی
 
-معیارهای خاص هوش مصنوعی را دنبال کنید:
+معیارهای خاص هوش مصنوعی را پیگیری کنید:
 
 ```python
-# Custom telemetry for AI models
+# تله‌متری سفارشی برای مدل‌های هوش مصنوعی
 import logging
 from applicationinsights import TelemetryClient
 
@@ -451,10 +451,10 @@ class AITelemetry:
 
 ### بررسی سلامت
 
-نظارت بر سلامت خدمات هوش مصنوعی را اجرا کنید:
+نظارت بر سلامت خدمات هوش مصنوعی را پیاده‌سازی کنید:
 
 ```python
-# Health check endpoints
+# نقاط پایش سلامت
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # آزمایش اتصال OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,14 +482,14 @@ async def check_ai_models():
 
 ## مراحل بعدی
 
-1. **راهنمای [ادغام Azure AI Foundry](azure-ai-foundry-integration.md)** را برای الگوهای ادغام خدمات مرور کنید
-2. **آزمایشگاه [کارگاه هوش مصنوعی](ai-workshop-lab.md)** را برای تجربه عملی کامل کنید
-3. **[روش‌های تولید هوش مصنوعی](production-ai-practices.md)** را برای استقرارهای سازمانی اجرا کنید
-4. **راهنمای [رفع اشکال هوش مصنوعی](../troubleshooting/ai-troubleshooting.md)** را برای مشکلات رایج بررسی کنید
+1. **راهنمای [ادغام Microsoft Foundry](microsoft-foundry-integration.md)** را برای الگوهای ادغام خدمات مرور کنید.
+2. **[آزمایشگاه کارگاه هوش مصنوعی](ai-workshop-lab.md)** را برای تجربه عملی کامل کنید.
+3. **[روش‌های تولید هوش مصنوعی](production-ai-practices.md)** را برای استقرارهای سازمانی پیاده‌سازی کنید.
+4. **[راهنمای عیب‌یابی هوش مصنوعی](../troubleshooting/ai-troubleshooting.md)** را برای مشکلات رایج بررسی کنید.
 
 ## منابع
 
-- [دسترسی مدل‌های Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [دسترسی به مدل‌های Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [مستندات Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [مقیاس‌گذاری برنامه‌های کانتینری](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [بهینه‌سازی هزینه مدل‌های هوش مصنوعی](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
@@ -498,12 +498,14 @@ async def check_ai_models():
 
 **فهرست فصل‌ها:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل ۲ - توسعه مبتنی بر هوش مصنوعی
-- **⬅️ قبلی**: [ادغام Azure AI Foundry](azure-ai-foundry-integration.md)
+- **📖 فصل جاری**: فصل ۲ - توسعه مبتنی بر هوش مصنوعی
+- **⬅️ قبلی**: [ادغام Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ بعدی**: [آزمایشگاه کارگاه هوش مصنوعی](ai-workshop-lab.md)
 - **🚀 فصل بعدی**: [فصل ۳: پیکربندی](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **سلب مسئولیت**:  
-این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما تلاش می‌کنیم دقت را حفظ کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌ها باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، توصیه می‌شود از ترجمه انسانی حرفه‌ای استفاده کنید. ما مسئولیتی در قبال سوء تفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما هیچ مسئولیتی در قبال سوءتفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

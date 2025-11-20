@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "22e9deee2d82e70fc841c60f97627916",
-  "translation_date": "2025-09-23T14:22:35+00:00",
+  "original_hash": "8b26783231714a00efafee3aca8b233c",
+  "translation_date": "2025-11-20T00:32:04+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "pl"
 }
 -->
-# Warsztat AI: Tworzenie Rozwiązań AI Gotowych do Wdrożenia z AZD
+# Warsztaty AI: Tworzenie rozwiązań AI gotowych do wdrożenia z AZD
 
 **Nawigacja po rozdziałach:**
 - **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
 - **📖 Obecny rozdział**: Rozdział 2 - Rozwój z AI na pierwszym miejscu
 - **⬅️ Poprzedni**: [Wdrożenie modelu AI](ai-model-deployment.md)
-- **➡️ Następny**: [Najlepsze praktyki AI w produkcji](production-ai-practices.md)
+- **➡️ Następny**: [Najlepsze praktyki produkcyjne AI](production-ai-practices.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
 
-## Przegląd warsztatu
+## Przegląd warsztatów
 
-Ten praktyczny warsztat prowadzi programistów przez proces wykorzystania istniejącego szablonu AI i wdrożenia go za pomocą Azure Developer CLI (AZD). Nauczysz się kluczowych wzorców wdrożeń AI w środowisku produkcyjnym, korzystając z usług Azure AI Foundry.
+Te praktyczne warsztaty prowadzą programistów przez proces wykorzystania istniejącego szablonu AI i wdrożenia go za pomocą Azure Developer CLI (AZD). Nauczysz się kluczowych wzorców wdrożeń AI w środowisku produkcyjnym, korzystając z usług Microsoft Foundry.
 
 **Czas trwania:** 2-3 godziny  
 **Poziom:** Średniozaawansowany  
@@ -26,9 +26,9 @@ Ten praktyczny warsztat prowadzi programistów przez proces wykorzystania istnie
 
 ## 🎓 Cele nauki
 
-Po ukończeniu tego warsztatu będziesz w stanie:
+Po ukończeniu warsztatów będziesz w stanie:
 - ✅ Przekształcić istniejącą aplikację AI w szablon AZD
-- ✅ Skonfigurować usługi Azure AI Foundry za pomocą AZD
+- ✅ Skonfigurować usługi Microsoft Foundry za pomocą AZD
 - ✅ Wdrożyć bezpieczne zarządzanie poświadczeniami dla usług AI
 - ✅ Wdrożyć aplikacje AI gotowe do produkcji z monitoringiem
 - ✅ Rozwiązywać typowe problemy związane z wdrożeniem AI
@@ -42,7 +42,7 @@ Po ukończeniu tego warsztatu będziesz w stanie:
 - Edytor kodu (zalecany VS Code)
 
 ### Zasoby Azure
-- Subskrypcja Azure z dostępem na poziomie współtwórcy
+- Subskrypcja Azure z dostępem typu contributor
 - Dostęp do usług Azure OpenAI (lub możliwość uzyskania dostępu)
 - Uprawnienia do tworzenia grup zasobów
 
@@ -51,35 +51,34 @@ Po ukończeniu tego warsztatu będziesz w stanie:
 - Znajomość interfejsów wiersza poleceń
 - Podstawowe koncepcje AI/ML (API, modele, podpowiedzi)
 
-## Konfiguracja warsztatu
+## Przygotowanie laboratorium
 
 ### Krok 1: Przygotowanie środowiska
 
 1. **Zweryfikuj instalację narzędzi:**
 ```bash
-# Check AZD installation
+# Sprawdź instalację AZD
 azd version
 
-# Check Azure CLI
+# Sprawdź Azure CLI
 az --version
 
-# Login to Azure
+# Zaloguj się do Azure
 az login
 azd auth login
 ```
 
-2. **Sklonuj repozytorium warsztatu:**
+2. **Sklonuj repozytorium warsztatowe:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-
 ## Moduł 1: Zrozumienie struktury AZD dla aplikacji AI
 
-### Anatomia szablonu AZD gotowego na AI
+### Anatomia szablonu AZD dla AI
 
-Poznaj kluczowe pliki w szablonie AZD przygotowanym dla AI:
+Poznaj kluczowe pliki w szablonie AZD gotowym do AI:
 
 ```
 azure-search-openai-demo/
@@ -96,10 +95,9 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
+### **Ćwiczenie laboratoryjne 1.1: Eksploracja konfiguracji**
 
-### **Ćwiczenie 1.1: Eksploracja konfiguracji**
-
-1. **Przeanalizuj plik azure.yaml:**
+1. **Przejrzyj plik azure.yaml:**
 ```bash
 cat azure.yaml
 ```
@@ -116,13 +114,13 @@ cat infra/main.bicep
 
 **Kluczowe wzorce AI do zidentyfikowania:**
 - Udostępnianie usługi Azure OpenAI
-- Integracja z Cognitive Search
+- Integracja Cognitive Search
 - Bezpieczne zarządzanie kluczami
 - Konfiguracje bezpieczeństwa sieci
 
 ### **Punkt dyskusji:** Dlaczego te wzorce są ważne dla AI
 
-- **Zależności usług**: Aplikacje AI często wymagają współpracy wielu usług
+- **Zależności usług**: Aplikacje AI często wymagają wielu skoordynowanych usług
 - **Bezpieczeństwo**: Klucze API i punkty końcowe muszą być bezpiecznie zarządzane
 - **Skalowalność**: Obciążenia AI mają unikalne wymagania dotyczące skalowania
 - **Zarządzanie kosztami**: Usługi AI mogą być kosztowne, jeśli nie są odpowiednio skonfigurowane
@@ -138,13 +136,12 @@ azd env new myai-workshop
 
 2. **Ustaw wymagane parametry:**
 ```bash
-# Set your preferred Azure region
+# Ustaw preferowany region Azure
 azd env set AZURE_LOCATION eastus
 
-# Optional: Set specific OpenAI model
+# Opcjonalnie: Ustaw konkretny model OpenAI
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
-
 
 ### Krok 2.2: Wdrożenie infrastruktury i aplikacji
 
@@ -180,7 +177,7 @@ azd show --output json | grep "webAppUrl"
    - Wypróbuj przykładowe zapytania
    - Zweryfikuj, czy odpowiedzi AI działają poprawnie
 
-### **Ćwiczenie 2.1: Praktyka rozwiązywania problemów**
+### **Ćwiczenie laboratoryjne 2.1: Praktyka rozwiązywania problemów**
 
 **Scenariusz**: Wdrożenie zakończyło się sukcesem, ale AI nie odpowiada.
 
@@ -192,16 +189,15 @@ azd show --output json | grep "webAppUrl"
 
 **Polecenia debugowania:**
 ```bash
-# Check environment variables
+# Sprawdź zmienne środowiskowe
 azd env get-values
 
-# View deployment logs
+# Wyświetl dzienniki wdrożenia
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Check OpenAI deployment status
+# Sprawdź status wdrożenia OpenAI
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
-
 
 ## Moduł 3: Dostosowanie aplikacji AI do własnych potrzeb
 
@@ -209,10 +205,10 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 
 1. **Zaktualizuj model OpenAI:**
 ```bash
-# Change to a different model (if available in your region)
+# Zmień na inny model (jeśli dostępny w Twoim regionie)
 azd env set AZURE_OPENAI_MODEL gpt-4
 
-# Redeploy with the new configuration
+# Wdróż ponownie z nową konfiguracją
 azd deploy
 ```
 
@@ -235,7 +231,6 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-
 ### Krok 3.2: Konfiguracje specyficzne dla środowiska
 
 **Najlepsza praktyka**: Różne konfiguracje dla rozwoju i produkcji.
@@ -247,18 +242,17 @@ azd env new myai-production
 
 2. **Ustaw parametry specyficzne dla produkcji:**
 ```bash
-# Production typically uses higher SKUs
+# Produkcja zazwyczaj używa wyższych SKU
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# Enable additional security features
+# Włącz dodatkowe funkcje bezpieczeństwa
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
+### **Ćwiczenie laboratoryjne 3.1: Optymalizacja kosztów**
 
-### **Ćwiczenie 3.1: Optymalizacja kosztów**
-
-**Wyzwanie**: Skonfiguruj szablon dla oszczędnego rozwoju.
+**Wyzwanie**: Skonfiguruj szablon dla ekonomicznego rozwoju.
 
 **Zadania:**
 1. Zidentyfikuj, które SKU można ustawić na darmowe/podstawowe poziomy
@@ -280,20 +274,19 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 1. **Przejrzyj konfigurację bezpieczeństwa w swoim szablonie:**
 ```bash
-# Look for Key Vault and Managed Identity configuration
+# Szukaj konfiguracji Key Vault i Managed Identity
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
 2. **Zweryfikuj działanie Managed Identity:**
 ```bash
-# Check if the web app has the correct identity configuration
+# Sprawdź, czy aplikacja internetowa ma poprawną konfigurację tożsamości
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-
 ### Krok 4.2: Bezpieczeństwo sieci
 
-1. **Włącz prywatne punkty końcowe** (jeśli nie są jeszcze skonfigurowane):
+1. **Włącz prywatne punkty końcowe** (jeśli nie są już skonfigurowane):
 
 Dodaj do swojego szablonu bicep:
 ```bicep
@@ -318,13 +311,12 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-
 ### Krok 4.3: Monitoring i obserwowalność
 
 1. **Skonfiguruj Application Insights:**
 ```bash
-# Application Insights should be automatically configured
-# Check the configuration:
+# Usługa Application Insights powinna być automatycznie skonfigurowana
+# Sprawdź konfigurację:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
@@ -351,8 +343,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-
-### **Ćwiczenie 4.1: Audyt bezpieczeństwa**
+### **Ćwiczenie laboratoryjne 4.1: Audyt bezpieczeństwa**
 
 **Zadanie**: Przejrzyj swoje wdrożenie pod kątem najlepszych praktyk bezpieczeństwa.
 
@@ -375,9 +366,9 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Czy wymaga bazy danych?
    - Jakie są zależności między usługami?
 
-2. **Wymagania bezpieczeństwa:**
+2. **Wymagania dotyczące bezpieczeństwa:**
    - Jakie dane wrażliwe obsługuje Twoja aplikacja?
-   - Jakie wymagania dotyczące zgodności musisz spełnić?
+   - Jakie wymagania dotyczące zgodności posiadasz?
    - Czy potrzebujesz prywatnej sieci?
 
 3. **Wymagania dotyczące skalowania:**
@@ -394,7 +385,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Initialize AZD template
+# Zainicjuj szablon AZD
 azd init --template minimal
 ```
 
@@ -465,8 +456,7 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-
-### **Ćwiczenie 5.1: Wyzwanie tworzenia szablonu**
+### **Ćwiczenie laboratoryjne 5.1: Wyzwanie tworzenia szablonu**
 
 **Wyzwanie**: Utwórz szablon AZD dla aplikacji AI do przetwarzania dokumentów.
 
@@ -479,7 +469,7 @@ output name string = openAIAccount.name
 
 **Dodatkowe punkty:**
 - Dodaj odpowiednie obsługi błędów
-- Uwzględnij szacowanie kosztów
+- Uwzględnij oszacowanie kosztów
 - Skonfiguruj pulpity monitorowania
 
 ## Moduł 6: Rozwiązywanie typowych problemów
@@ -487,45 +477,42 @@ output name string = openAIAccount.name
 ### Typowe problemy z wdrożeniem
 
 #### Problem 1: Przekroczony limit usługi OpenAI
-**Objawy:** Wdrożenie kończy się błędem limitu
+**Objawy:** Wdrożenie nie powiodło się z błędem limitu
 **Rozwiązania:**
 ```bash
-# Check current quotas
+# Sprawdź obecne limity
 az cognitiveservices usage list --location eastus
 
-# Request quota increase or try different region
+# Poproś o zwiększenie limitu lub spróbuj inny region
 azd env set AZURE_LOCATION westus2
 azd up
 ```
-
 
 #### Problem 2: Model niedostępny w regionie
 **Objawy:** Odpowiedzi AI zawodzą lub błędy wdrożenia modelu
 **Rozwiązania:**
 ```bash
-# Check model availability by region
+# Sprawdź dostępność modelu według regionu
 az cognitiveservices model list --location eastus
 
-# Update to available model
+# Zaktualizuj do dostępnego modelu
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
-
 
 #### Problem 3: Problemy z uprawnieniami
 **Objawy:** Błędy 403 Forbidden podczas wywoływania usług AI
 **Rozwiązania:**
 ```bash
-# Check role assignments
+# Sprawdź przypisania ról
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Add missing roles
+# Dodaj brakujące role
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
-
 
 ### Problemy z wydajnością
 
@@ -540,7 +527,7 @@ az role assignment create \
 - Użyj odpowiedniego modelu OpenAI dla swojego przypadku użycia
 - Rozważ repliki odczytu dla scenariuszy dużego obciążenia
 
-### **Ćwiczenie 6.1: Wyzwanie debugowania**
+### **Ćwiczenie laboratoryjne 6.1: Wyzwanie debugowania**
 
 **Scenariusz**: Wdrożenie zakończyło się sukcesem, ale aplikacja zwraca błędy 500.
 
@@ -569,7 +556,7 @@ Przejdź do portalu Azure i utwórz pulpit z:
 
 2. **Skonfiguruj alerty:**
 ```bash
-# Alert for high error rate
+# Alarm dla wysokiego wskaźnika błędów
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -578,35 +565,34 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
-
 ### Krok 7.2: Optymalizacja kosztów
 
 1. **Analizuj obecne koszty:**
 ```bash
-# Use Azure CLI to get cost data
+# Użyj Azure CLI, aby uzyskać dane o kosztach
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
 2. **Wprowadź kontrolę kosztów:**
 - Skonfiguruj alerty budżetowe
-- Użyj polityk autoskalowania
+- Użyj zasad automatycznego skalowania
 - Wprowadź buforowanie żądań
 - Monitoruj użycie tokenów dla OpenAI
 
-### **Ćwiczenie 7.1: Optymalizacja wydajności**
+### **Ćwiczenie laboratoryjne 7.1: Optymalizacja wydajności**
 
 **Zadanie**: Optymalizuj swoją aplikację AI pod kątem wydajności i kosztów.
 
 **Metryki do poprawy:**
 - Zmniejsz średni czas odpowiedzi o 20%
-- Zredukuj miesięczne koszty o 15%
+- Zmniejsz miesięczne koszty o 15%
 - Utrzymaj dostępność na poziomie 99,9%
 
 **Strategie do wypróbowania:**
 - Wprowadź buforowanie odpowiedzi
 - Optymalizuj podpowiedzi dla efektywności tokenów
 - Użyj odpowiednich SKU obliczeniowych
-- Skonfiguruj odpowiednie autoskalowanie
+- Skonfiguruj odpowiednie automatyczne skalowanie
 
 ## Ostateczne wyzwanie: Implementacja od początku do końca
 
@@ -626,7 +612,7 @@ Twoim zadaniem jest stworzenie gotowego do produkcji chatbota obsługującego kl
 - SLA dostępności na poziomie 99,9%
 - Zgodność z SOC 2
 - Koszt poniżej 500 USD miesięcznie
-- Wdrożenie do wielu środowisk (dev, staging, prod)
+- Wdrożenie w wielu środowiskach (dev, staging, prod)
 
 ### Kroki implementacji
 
@@ -650,39 +636,43 @@ Twoim zadaniem jest stworzenie gotowego do produkcji chatbota obsługującego kl
 ### Dokumentacja Microsoft
 - [Dokumentacja Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Dokumentacja Azure OpenAI Service](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Dokumentacja Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/)
+- [Dokumentacja Microsoft Foundry](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Przykładowe szablony
 - [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat
+- [OpenAI Chat App Quickstart
 Gratulacje! Ukończyłeś warsztat AI. Teraz powinieneś być w stanie:
 
 - ✅ Przekształcać istniejące aplikacje AI w szablony AZD
 - ✅ Wdrażać aplikacje AI gotowe do produkcji
 - ✅ Wdrażać najlepsze praktyki bezpieczeństwa dla obciążeń AI
 - ✅ Monitorować i optymalizować wydajność aplikacji AI
-- ✅ Rozwiązywać typowe problemy związane z wdrażaniem
+- ✅ Rozwiązywać typowe problemy związane z wdrożeniem
 
 ### Kolejne kroki
 1. Zastosuj te wzorce w swoich własnych projektach AI
-2. Wnieś swój wkład, udostępniając szablony społeczności
-3. Dołącz do Discorda Azure AI Foundry, aby uzyskać wsparcie na bieżąco
+2. Wnieś szablony z powrotem do społeczności
+3. Dołącz do Discorda Microsoft Foundry, aby uzyskać wsparcie na bieżąco
 4. Zgłębiaj zaawansowane tematy, takie jak wdrożenia w wielu regionach
 
 ---
 
-**Opinie o warsztacie**: Pomóż nam ulepszyć ten warsztat, dzieląc się swoimi doświadczeniami na [kanale #Azure Discorda Azure AI Foundry](https://discord.gg/microsoft-azure).
+**Opinie o warsztacie**: Pomóż nam ulepszyć ten warsztat, dzieląc się swoimi doświadczeniami na [kanale #Azure Discord Microsoft Foundry](https://discord.gg/microsoft-azure).
 
 ---
 
 **Nawigacja po rozdziałach:**
 - **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
-- **📖 Obecny rozdział**: Rozdział 2 - Rozwój zorientowany na AI
-- **⬅️ Poprzedni**: [Wdrażanie modelu AI](ai-model-deployment.md)
-- **➡️ Następny**: [Najlepsze praktyki dla produkcyjnych aplikacji AI](production-ai-practices.md)
+- **📖 Obecny rozdział**: Rozdział 2 - Rozwój z AI na pierwszym miejscu
+- **⬅️ Poprzedni**: [Wdrożenie modelu AI](ai-model-deployment.md)
+- **➡️ Następny**: [Najlepsze praktyki dla produkcyjnego AI](production-ai-practices.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
 
-**Potrzebujesz pomocy?** Dołącz do naszej społeczności, aby uzyskać wsparcie i uczestniczyć w dyskusjach na temat AZD i wdrożeń AI.
+**Potrzebujesz pomocy?** Dołącz do naszej społeczności, aby uzyskać wsparcie i prowadzić dyskusje na temat AZD i wdrożeń AI.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zastrzeżenie**:  
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

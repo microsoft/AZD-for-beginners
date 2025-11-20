@@ -1,28 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T16:40:04+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-20T00:33:36+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "pl"
 }
 -->
-# Wdrażanie modeli AI za pomocą Azure Developer CLI
+# Wdrażanie modeli AI z Azure Developer CLI
 
-**Nawigacja po rozdziałach:**
+**Nawigacja po rozdziale:**
 - **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
 - **📖 Obecny rozdział**: Rozdział 2 - Rozwój zorientowany na AI
-- **⬅️ Poprzedni**: [Integracja z Azure AI Foundry](azure-ai-foundry-integration.md)
-- **➡️ Następny**: [Laboratorium warsztatowe AI](ai-workshop-lab.md)
+- **⬅️ Poprzedni**: [Integracja z Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Następny**: [Warsztaty AI](ai-workshop-lab.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
 
-Ten przewodnik zawiera szczegółowe instrukcje dotyczące wdrażania modeli AI za pomocą szablonów AZD, obejmujące wszystko od wyboru modelu po wzorce wdrożenia produkcyjnego.
+Ten przewodnik zawiera szczegółowe instrukcje dotyczące wdrażania modeli AI za pomocą szablonów AZD, obejmując wszystko od wyboru modelu po wzorce wdrażania w środowisku produkcyjnym.
 
 ## Spis treści
 
 - [Strategia wyboru modelu](../../../../docs/ai-foundry)
 - [Konfiguracja AZD dla modeli AI](../../../../docs/ai-foundry)
-- [Wzorce wdrożenia](../../../../docs/ai-foundry)
+- [Wzorce wdrażania](../../../../docs/ai-foundry)
 - [Zarządzanie modelami](../../../../docs/ai-foundry)
 - [Rozważania produkcyjne](../../../../docs/ai-foundry)
 - [Monitorowanie i obserwowalność](../../../../docs/ai-foundry)
@@ -31,7 +31,7 @@ Ten przewodnik zawiera szczegółowe instrukcje dotyczące wdrażania modeli AI 
 
 ### Modele Azure OpenAI
 
-Wybierz odpowiedni model dla swojego przypadku użycia:
+Wybierz odpowiedni model do swojego przypadku użycia:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -65,8 +65,8 @@ services:
 |------------|------------------|--------------------|--------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kosztowo efektywny dla większości obciążeń |
 | GPT-4 | Złożone rozumowanie | 20-100 TPM | Wyższe koszty, używany do funkcji premium |
-| Text-embedding-ada-002 | Wyszukiwanie, RAG | 30-120 TPM | Niezbędny dla wyszukiwania semantycznego |
-| Whisper | Przetwarzanie mowy na tekst | 10-50 TPM | Obciążenia związane z przetwarzaniem audio |
+| Text-embedding-ada-002 | Wyszukiwanie, RAG | 30-120 TPM | Kluczowy dla wyszukiwania semantycznego |
+| Whisper | Mowa na tekst | 10-50 TPM | Obciążenia związane z przetwarzaniem audio |
 
 ## Konfiguracja AZD dla modeli AI
 
@@ -136,14 +136,14 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Skonfiguruj środowisko swojej aplikacji:
 
 ```bash
-# .env configuration
+# Konfiguracja .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Wzorce wdrożenia
+## Wzorce wdrażania
 
 ### Wzorzec 1: Wdrożenie w jednym regionie
 
@@ -179,7 +179,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 Najlepsze dla:
 - Aplikacji globalnych
 - Wymagań wysokiej dostępności
-- Dystrybucji obciążenia
+- Rozkładu obciążenia
 
 ### Wzorzec 3: Wdrożenie hybrydowe
 
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Oblicz wymaganą pojemność na podstawie wzorców użycia:
 
 ```python
-# Capacity calculation example
+# Przykład obliczania pojemności
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Przykład użycia
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -342,7 +342,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optymalizacja kosztów
 
-Wprowadź kontrolę kosztów:
+Wprowadź mechanizmy kontroli kosztów:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -376,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integracja z Application Insights
 
-Skonfiguruj monitorowanie dla obciążeń AI:
+Skonfiguruj monitorowanie obciążeń AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Śledź metryki specyficzne dla AI:
 
 ```python
-# Custom telemetry for AI models
+# Niestandardowa telemetria dla modeli AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -451,10 +451,10 @@ class AITelemetry:
 
 ### Kontrole zdrowia
 
-Wprowadź monitorowanie zdrowia usług AI:
+Wprowadź monitorowanie kondycji usług AI:
 
 ```python
-# Health check endpoints
+# Punkty końcowe sprawdzania stanu zdrowia
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Przetestuj połączenie z OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,10 +482,10 @@ async def check_ai_models():
 
 ## Kolejne kroki
 
-1. **Przejrzyj [Przewodnik integracji z Azure AI Foundry](azure-ai-foundry-integration.md)**, aby poznać wzorce integracji usług
-2. **Ukończ [Laboratorium warsztatowe AI](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie
-3. **Wprowadź [Praktyki AI w produkcji](production-ai-practices.md)** dla wdrożeń korporacyjnych
-4. **Zapoznaj się z [Przewodnikiem rozwiązywania problemów AI](../troubleshooting/ai-troubleshooting.md)**, aby poznać typowe problemy
+1. **Przejrzyj [Przewodnik integracji z Microsoft Foundry](microsoft-foundry-integration.md)**, aby poznać wzorce integracji usług
+2. **Ukończ [Warsztaty AI](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie
+3. **Wdroż [Praktyki AI w środowisku produkcyjnym](production-ai-practices.md)** dla wdrożeń korporacyjnych
+4. **Zapoznaj się z [Przewodnikiem rozwiązywania problemów z AI](../troubleshooting/ai-troubleshooting.md)**, aby poznać typowe problemy
 
 ## Zasoby
 
@@ -496,14 +496,16 @@ async def check_ai_models():
 
 ---
 
-**Nawigacja po rozdziałach:**
+**Nawigacja po rozdziale:**
 - **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
 - **📖 Obecny rozdział**: Rozdział 2 - Rozwój zorientowany na AI
-- **⬅️ Poprzedni**: [Integracja z Azure AI Foundry](azure-ai-foundry-integration.md)
-- **➡️ Następny**: [Laboratorium warsztatowe AI](ai-workshop-lab.md)
+- **⬅️ Poprzedni**: [Integracja z Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Następny**: [Warsztaty AI](ai-workshop-lab.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za źródło autorytatywne. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

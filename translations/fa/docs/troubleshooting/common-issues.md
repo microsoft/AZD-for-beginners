@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-17T16:25:14+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-19T23:44:22+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "fa"
 }
@@ -11,53 +11,53 @@ CO_OP_TRANSLATOR_METADATA:
 
 **ناوبری فصل:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل ۷ - عیب‌یابی و دیباگ
+- **📖 فصل فعلی**: فصل ۷ - عیب‌یابی و اشکال‌زدایی
 - **⬅️ فصل قبلی**: [فصل ۶: بررسی‌های پیش از اجرا](../pre-deployment/preflight-checks.md)
-- **➡️ بعدی**: [راهنمای دیباگ](debugging.md)
-- **🚀 فصل بعدی**: [فصل ۸: الگوهای تولید و سازمانی](../ai-foundry/production-ai-practices.md)
+- **➡️ بعدی**: [راهنمای اشکال‌زدایی](debugging.md)
+- **🚀 فصل بعدی**: [فصل ۸: الگوهای تولید و سازمانی](../microsoft-foundry/production-ai-practices.md)
 
 ## مقدمه
 
-این راهنمای جامع عیب‌یابی، مشکلات متداولی که هنگام استفاده از Azure Developer CLI با آن‌ها مواجه می‌شوید را پوشش می‌دهد. یاد بگیرید که چگونه مشکلات مربوط به احراز هویت، استقرار، تأمین زیرساخت و پیکربندی برنامه را تشخیص داده، عیب‌یابی و حل کنید. هر مشکل شامل علائم، دلایل اصلی و مراحل گام‌به‌گام برای حل آن است.
+این راهنمای جامع عیب‌یابی، مشکلاتی که اغلب هنگام استفاده از Azure Developer CLI با آن‌ها مواجه می‌شوید را پوشش می‌دهد. یاد بگیرید چگونه مشکلات مربوط به احراز هویت، استقرار، تأمین زیرساخت و پیکربندی برنامه را تشخیص داده، عیب‌یابی و حل کنید. هر مشکل شامل علائم، دلایل اصلی و مراحل گام‌به‌گام برای حل آن است.
 
 ## اهداف یادگیری
 
 با تکمیل این راهنما، شما:
-- تکنیک‌های تشخیصی برای مشکلات Azure Developer CLI را یاد می‌گیرید
-- مشکلات رایج احراز هویت و مجوزها و راه‌حل‌های آن‌ها را درک می‌کنید
-- شکست‌های استقرار، خطاهای تأمین زیرساخت و مشکلات پیکربندی را حل می‌کنید
-- استراتژی‌های نظارت و دیباگ پیشگیرانه را پیاده‌سازی می‌کنید
-- روش‌های عیب‌یابی سیستماتیک برای مشکلات پیچیده را اعمال می‌کنید
-- ثبت و نظارت مناسب را برای جلوگیری از مشکلات آینده پیکربندی می‌کنید
+- تکنیک‌های تشخیصی برای مشکلات Azure Developer CLI را یاد خواهید گرفت
+- مشکلات رایج احراز هویت و مجوزها و راه‌حل‌های آن‌ها را درک خواهید کرد
+- شکست‌های استقرار، خطاهای تأمین زیرساخت و مشکلات پیکربندی را حل خواهید کرد
+- استراتژی‌های نظارت و اشکال‌زدایی پیشگیرانه را پیاده‌سازی خواهید کرد
+- روش‌های عیب‌یابی سیستماتیک برای مشکلات پیچیده را اعمال خواهید کرد
+- ثبت و نظارت مناسب را برای جلوگیری از مشکلات آینده پیکربندی خواهید کرد
 
 ## نتایج یادگیری
 
-پس از اتمام این راهنما، شما قادر خواهید بود:
-- مشکلات Azure Developer CLI را با استفاده از ابزارهای تشخیصی داخلی شناسایی کنید
+پس از اتمام، شما قادر خواهید بود:
+- مشکلات Azure Developer CLI را با استفاده از ابزارهای تشخیصی داخلی تشخیص دهید
 - مشکلات مربوط به احراز هویت، اشتراک و مجوزها را به‌طور مستقل حل کنید
 - شکست‌های استقرار و خطاهای تأمین زیرساخت را به‌طور مؤثر عیب‌یابی کنید
-- مشکلات پیکربندی برنامه و مشکلات خاص محیط را دیباگ کنید
+- مشکلات پیکربندی برنامه و مشکلات خاص محیط را اشکال‌زدایی کنید
 - نظارت و هشداردهی را برای شناسایی پیشگیرانه مشکلات احتمالی پیاده‌سازی کنید
-- بهترین شیوه‌ها برای ثبت، دیباگ و جریان‌های کاری حل مشکلات را اعمال کنید
+- بهترین شیوه‌ها برای ثبت، اشکال‌زدایی و جریان‌های کاری حل مشکلات را اعمال کنید
 
 ## تشخیص سریع
 
-قبل از پرداختن به مشکلات خاص، این دستورات را برای جمع‌آوری اطلاعات تشخیصی اجرا کنید:
+قبل از ورود به مشکلات خاص، این دستورات را برای جمع‌آوری اطلاعات تشخیصی اجرا کنید:
 
 ```bash
-# Check azd version and health
+# بررسی نسخه و سلامت azd
 azd version
 azd config list
 
-# Verify Azure authentication
+# تأیید احراز هویت Azure
 az account show
 az account list
 
-# Check current environment
+# بررسی محیط فعلی
 azd env show
 azd env get-values
 
-# Enable debug logging
+# فعال کردن ثبت اشکال‌زدایی
 export AZD_DEBUG=true
 azd <command> --debug
 ```
@@ -66,23 +66,23 @@ azd <command> --debug
 
 ### مشکل: "دریافت توکن دسترسی ناموفق بود"
 **علائم:**
-- اجرای `azd up` با خطاهای احراز هویت شکست می‌خورد
-- دستورات پیام "غیرمجاز" یا "دسترسی رد شد" را بازمی‌گردانند
+- `azd up` با خطاهای احراز هویت شکست می‌خورد
+- دستورات پیام "غیرمجاز" یا "دسترسی رد شد" را برمی‌گردانند
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# ۱. دوباره با Azure CLI احراز هویت کنید
 az login
 az account show
 
-# 2. Clear cached credentials
+# ۲. اعتبارنامه‌های ذخیره‌شده را پاک کنید
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# ۳. از جریان کد دستگاه استفاده کنید (برای سیستم‌های بدون رابط کاربری)
 az login --use-device-code
 
-# 4. Set explicit subscription
+# ۴. اشتراک مشخصی را تنظیم کنید
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
@@ -94,111 +94,111 @@ azd config set defaults.subscription "your-subscription-id"
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Check your Azure role assignments
+# ۱. نقش‌های اختصاص داده شده در Azure خود را بررسی کنید
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# ۲. اطمینان حاصل کنید که نقش‌های مورد نیاز را دارید
+# - مشارکت‌کننده (برای ایجاد منابع)
+# - مدیر دسترسی کاربر (برای اختصاص نقش‌ها)
 
-# 3. Contact your Azure administrator for proper permissions
+# ۳. با مدیر Azure خود برای دریافت مجوزهای مناسب تماس بگیرید
 ```
 
 ### مشکل: مشکلات احراز هویت چند مستاجری
 **راه‌حل‌ها:**
 ```bash
-# 1. Login with specific tenant
+# ۱. ورود با مستاجر خاص
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# ۲. تنظیم مستاجر در پیکربندی
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# ۳. پاک کردن حافظه پنهان مستاجر در صورت تغییر مستاجرها
 az account clear
 ```
 
 ## 🏗️ خطاهای تأمین زیرساخت
 
-### مشکل: تضاد در نام منابع
+### مشکل: تضاد نام منابع
 **علائم:**
 - خطاهای "نام منبع از قبل وجود دارد"
 - استقرار در طول ایجاد منابع شکست می‌خورد
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# ۱. از نام‌های منحصربه‌فرد منابع با توکن‌ها استفاده کنید
+# در قالب Bicep خود:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# ۲. نام محیط را تغییر دهید
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# ۳. منابع موجود را پاک کنید
 azd down --force --purge
 ```
 
 ### مشکل: مکان/منطقه در دسترس نیست
 **علائم:**
-- خطای "مکان 'xyz' برای نوع منبع در دسترس نیست"
-- برخی از SKUs در منطقه انتخاب‌شده موجود نیستند
+- "مکان 'xyz' برای نوع منبع در دسترس نیست"
+- برخی از SKUs در منطقه انتخابی موجود نیستند
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Check available locations for resource types
+# ۱. مکان‌های موجود برای انواع منابع را بررسی کنید
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# ۲. از مناطق معمولاً موجود استفاده کنید
 azd config set defaults.location eastus2
-# or
+# یا
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# ۳. دسترسی به خدمات را بر اساس منطقه بررسی کنید
+# بازدید کنید: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
 ### مشکل: خطاهای تجاوز از سهمیه
 **علائم:**
-- "تجاوز از سهمیه برای نوع منبع"
+- "سهمیه برای نوع منبع تجاوز کرده است"
 - "حداکثر تعداد منابع رسیده است"
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Check current quota usage
+# ۱. بررسی استفاده فعلی از سهمیه
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# ۲. درخواست افزایش سهمیه از طریق پورتال Azure
+# برو به: Subscriptions > Usage + quotas
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# ۳. استفاده از SKUs کوچکتر برای توسعه
+# در main.parameters.json:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# ۴. پاکسازی منابع استفاده نشده
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### مشکل: خطاهای قالب Bicep
 **علائم:**
-- شکست در اعتبارسنجی قالب
+- شکست‌های اعتبارسنجی قالب
 - خطاهای نحوی در فایل‌های Bicep
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. اعتبارسنجی نحو Bicep
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. استفاده از Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. بررسی نحو فایل پارامتر
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. پیش‌نمایش تغییرات استقرار
 azd provision --preview
 ```
 
@@ -211,24 +211,24 @@ azd provision --preview
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Check build logs
+# ۱. بررسی گزارش‌های ساخت
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# ۲. آزمایش ساخت به صورت محلی
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# ۳. بررسی سازگاری نسخه Node.js/Python
+node --version  # باید با تنظیمات azure.yaml مطابقت داشته باشد
 python --version
 
-# 4. Clear build cache
+# ۴. پاک کردن حافظه پنهان ساخت
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# ۵. بررسی Dockerfile در صورت استفاده از کانتینرها
 docker build -t test-image .
 docker run --rm test-image
 ```
@@ -240,38 +240,38 @@ docker run --rm test-image
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Test Docker build locally
+# ۱. ساخت داکر را به صورت محلی آزمایش کنید
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# ۲. لاگ‌های کانتینر را بررسی کنید
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# ۳. دسترسی به رجیستری کانتینر را تأیید کنید
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# ۴. پیکربندی برنامه کانتینر را بررسی کنید
 az containerapp show --name my-app --resource-group my-rg
 ```
 
 ### مشکل: شکست‌های اتصال به پایگاه داده
 **علائم:**
 - برنامه نمی‌تواند به پایگاه داده متصل شود
-- خطاهای زمان انتظار اتصال
+- خطاهای زمان‌بندی اتصال
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Check database firewall rules
+# ۱. قوانین فایروال پایگاه داده را بررسی کنید
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# ۲. اتصال از برنامه را آزمایش کنید
+# به طور موقت به برنامه خود اضافه کنید:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# ۳. فرمت رشته اتصال را تأیید کنید
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# ۴. وضعیت سرور پایگاه داده را بررسی کنید
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -284,17 +284,17 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Verify environment variables are set
+# ۱. بررسی کنید که متغیرهای محیطی تنظیم شده‌اند
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# ۲. نام متغیرها را در azure.yaml بررسی کنید
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# ۳. برنامه را مجدداً راه‌اندازی کنید
 azd deploy --service web
 
-# 4. Check app service configuration
+# ۴. پیکربندی سرویس برنامه را بررسی کنید
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -305,13 +305,13 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Check SSL certificate status
+# ۱. وضعیت گواهی SSL را بررسی کنید
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# ۲. فقط HTTPS را فعال کنید
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# ۳. دامنه سفارشی اضافه کنید (در صورت نیاز)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
@@ -322,17 +322,17 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Configure CORS for App Service
+# ۱. تنظیم CORS برای App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# ۲. به‌روزرسانی API برای مدیریت CORS
+# در Express.js:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# ۳. بررسی اینکه آیا روی URLهای صحیح اجرا می‌شود
 azd show
 ```
 
@@ -340,21 +340,21 @@ azd show
 
 ### مشکل: مشکلات تغییر محیط
 **علائم:**
-- محیط اشتباهی استفاده می‌شود
-- پیکربندی به‌درستی تغییر نمی‌کند
+- محیط اشتباه استفاده می‌شود
+- پیکربندی به درستی تغییر نمی‌کند
 
 **راه‌حل‌ها:**
 ```bash
-# 1. List all environments
+# ۱. فهرست کردن تمام محیط‌ها
 azd env list
 
-# 2. Explicitly select environment
+# ۲. به‌طور صریح محیط را انتخاب کنید
 azd env select production
 
-# 3. Verify current environment
+# ۳. تأیید محیط فعلی
 azd env show
 
-# 4. Create new environment if corrupted
+# ۴. ایجاد محیط جدید در صورت خراب شدن
 azd env new production-new
 azd env select production-new
 ```
@@ -366,128 +366,128 @@ azd env select production-new
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Refresh environment state
+# ۱. تازه‌سازی وضعیت محیط
 azd env refresh
 
-# 2. Reset environment configuration
+# ۲. بازنشانی پیکربندی محیط
 azd env new production-reset
-# Copy over required environment variables
+# کپی کردن متغیرهای محیطی مورد نیاز
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# ۳. وارد کردن منابع موجود (در صورت امکان)
+# به‌صورت دستی فایل .azure/production/config.json را با شناسه‌های منابع به‌روزرسانی کنید
 ```
 
 ## 🔍 مشکلات عملکرد
 
 ### مشکل: زمان‌های طولانی استقرار
 **علائم:**
-- استقرارها زمان زیادی می‌برند
-- زمان‌های انتظار در طول استقرار
+- استقرارها بیش از حد طول می‌کشند
+- زمان‌بندی‌ها در طول استقرار
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Enable parallel deployment
+# ۱. فعال کردن استقرار موازی
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# ۲. استفاده از استقرارهای تدریجی
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# ۳. بهینه‌سازی فرآیند ساخت
+# در package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# ۴. بررسی مکان‌های منابع (استفاده از همان منطقه)
 azd config set defaults.location eastus2
 ```
 
 ### مشکل: مشکلات عملکرد برنامه
 **علائم:**
-- زمان پاسخ‌دهی کند
+- زمان‌های پاسخ‌دهی کند
 - استفاده زیاد از منابع
 
 **راه‌حل‌ها:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# ۱. منابع را افزایش دهید
+# SKU را در main.parameters.json به‌روزرسانی کنید:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# ۲. نظارت Application Insights را فعال کنید
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# ۳. لاگ‌های برنامه را برای گلوگاه‌ها بررسی کنید
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# ۴. کش را پیاده‌سازی کنید
+# کش Redis را به زیرساخت خود اضافه کنید
 ```
 
 ## 🛠️ ابزارها و دستورات عیب‌یابی
 
-### دستورات دیباگ
+### دستورات اشکال‌زدایی
 ```bash
-# Comprehensive debugging
+# اشکال‌زدایی جامع
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# بررسی اطلاعات سیستم
 azd info
 
-# Validate configuration
+# اعتبارسنجی پیکربندی
 azd config validate
 
-# Test connectivity
+# آزمایش اتصال
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### تحلیل لاگ‌ها
+### تحلیل لاگ
 ```bash
-# Application logs
+# گزارش‌های برنامه
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# گزارش‌های منابع Azure
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# گزارش‌های کانتینر (برای برنامه‌های کانتینری)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### بررسی منابع
 ```bash
-# List all resources
+# لیست کردن تمام منابع
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# بررسی وضعیت منابع
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# عیب‌یابی شبکه
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 دریافت کمک بیشتر
+## 🆘 دریافت کمک اضافی
 
-### زمان مناسب برای ارجاع به پشتیبانی
+### زمان مناسب برای ارجاع
 - مشکلات احراز هویت پس از امتحان همه راه‌حل‌ها ادامه دارند
 - مشکلات زیرساختی با خدمات Azure
-- مسائل مربوط به صورتحساب یا اشتراک
-- نگرانی‌ها یا حوادث امنیتی
+- مشکلات مربوط به صورتحساب یا اشتراک
+- نگرانی‌های امنیتی یا حوادث
 
 ### کانال‌های پشتیبانی
 ```bash
-# 1. Check Azure Service Health
+# ۱. بررسی سلامت سرویس Azure
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# ۲. ایجاد تیکت پشتیبانی Azure
+# به اینجا بروید: https://portal.azure.com -> کمک + پشتیبانی
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
-# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# ۳. منابع جامعه
+# - Stack Overflow: برچسب azure-developer-cli
+# - مشکلات GitHub: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
@@ -503,7 +503,7 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ### اسکریپت جمع‌آوری لاگ
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# جمع‌آوری-اطلاعات-اشکال‌زدایی.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -528,32 +528,32 @@ echo "Debug information collected in debug-logs/"
 
 ### چک‌لیست پیش از استقرار
 ```bash
-# 1. Validate authentication
+# ۱. اعتبارسنجی احراز هویت
 az account show
 
-# 2. Check quotas and limits
+# ۲. بررسی سهمیه‌ها و محدودیت‌ها
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# ۳. اعتبارسنجی قالب‌ها
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# ۴. ابتدا به صورت محلی آزمایش کنید
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# ۵. از استقرارهای آزمایشی استفاده کنید
 azd provision --preview
 ```
 
-### تنظیمات نظارت
+### تنظیم نظارت
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# فعال کردن Application Insights
+# به main.bicep اضافه کنید:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# تنظیم هشدارها
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -563,34 +563,36 @@ az monitor metrics alert create \
 
 ### نگهداری منظم
 ```bash
-# Weekly health checks
+# بررسی‌های هفتگی سلامت
 ./scripts/health-check.sh
 
-# Monthly cost review
+# بررسی هزینه‌های ماهانه
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# بررسی امنیتی فصلی
 az security assessment list --resource-group myrg
 ```
 
 ## منابع مرتبط
 
-- [راهنمای دیباگ](debugging.md) - تکنیک‌های پیشرفته دیباگ
+- [راهنمای اشکال‌زدایی](debugging.md) - تکنیک‌های پیشرفته اشکال‌زدایی
 - [تأمین منابع](../deployment/provisioning.md) - عیب‌یابی زیرساخت
 - [برنامه‌ریزی ظرفیت](../pre-deployment/capacity-planning.md) - راهنمای برنامه‌ریزی منابع
 - [انتخاب SKU](../pre-deployment/sku-selection.md) - توصیه‌های سطح خدمات
 
 ---
 
-**نکته**: این راهنما را نشانک‌گذاری کنید و هر زمان که با مشکلی مواجه شدید به آن مراجعه کنید. اکثر مشکلات قبلاً مشاهده شده‌اند و راه‌حل‌های مشخصی دارند!
+**نکته**: این راهنما را نشانه‌گذاری کنید و هر زمان که با مشکلی مواجه شدید به آن مراجعه کنید. اکثر مشکلات قبلاً دیده شده‌اند و راه‌حل‌های مشخصی دارند!
 
 ---
 
 **ناوبری**
 - **درس قبلی**: [تأمین منابع](../deployment/provisioning.md)
-- **درس بعدی**: [راهنمای دیباگ](debugging.md)
+- **درس بعدی**: [راهنمای اشکال‌زدایی](debugging.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **سلب مسئولیت**:  
-این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما تلاش می‌کنیم دقت را حفظ کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌ها باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، توصیه می‌شود از ترجمه حرفه‌ای انسانی استفاده کنید. ما مسئولیتی در قبال سوء تفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشد. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما هیچ مسئولیتی در قبال سوءتفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

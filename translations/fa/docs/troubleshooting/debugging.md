@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T16:25:36+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-19T23:46:48+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "fa"
 }
@@ -11,39 +11,39 @@ CO_OP_TRANSLATOR_METADATA:
 
 **فهرست فصل‌ها:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل ۷ - رفع اشکال و اشکال‌زدایی
+- **📖 فصل جاری**: فصل ۷ - رفع اشکال و اشکال‌زدایی
 - **⬅️ قبلی**: [مشکلات رایج](common-issues.md)
 - **➡️ بعدی**: [رفع اشکال مخصوص هوش مصنوعی](ai-troubleshooting.md)
-- **🚀 فصل بعدی**: [فصل ۸: الگوهای تولید و سازمانی](../ai-foundry/production-ai-practices.md)
+- **🚀 فصل بعدی**: [فصل ۸: الگوهای تولید و سازمانی](../microsoft-foundry/production-ai-practices.md)
 
 ## مقدمه
 
-این راهنمای جامع، استراتژی‌ها، ابزارها و تکنیک‌های پیشرفته‌ای را برای تشخیص و رفع مشکلات پیچیده در استقرارهای Azure Developer CLI ارائه می‌دهد. با یادگیری روش‌های سیستماتیک رفع اشکال، تکنیک‌های تحلیل لاگ، پروفایل‌سازی عملکرد و ابزارهای تشخیصی پیشرفته، می‌توانید مشکلات استقرار و اجرا را به‌طور مؤثر حل کنید.
+این راهنمای جامع، استراتژی‌ها، ابزارها و تکنیک‌های پیشرفته‌ای را برای تشخیص و رفع مشکلات پیچیده در استقرارهای Azure Developer CLI ارائه می‌دهد. با یادگیری روش‌های سیستماتیک رفع اشکال، تحلیل لاگ‌ها، پروفایل‌سازی عملکرد و ابزارهای تشخیصی پیشرفته، می‌توانید مشکلات استقرار و زمان اجرا را به‌طور مؤثر حل کنید.
 
 ## اهداف یادگیری
 
 با تکمیل این راهنما، شما:
-- روش‌های سیستماتیک رفع اشکال برای مشکلات Azure Developer CLI را فرا خواهید گرفت
-- پیکربندی پیشرفته لاگ و تکنیک‌های تحلیل لاگ را درک خواهید کرد
-- استراتژی‌های پروفایل‌سازی و نظارت بر عملکرد را اجرا خواهید کرد
+- روش‌های سیستماتیک رفع اشکال برای مشکلات Azure Developer CLI را یاد خواهید گرفت
+- پیکربندی پیشرفته لاگ‌ها و تکنیک‌های تحلیل لاگ را درک خواهید کرد
+- استراتژی‌های پروفایل‌سازی و نظارت بر عملکرد را پیاده‌سازی خواهید کرد
 - از ابزارها و خدمات تشخیصی Azure برای حل مشکلات پیچیده استفاده خواهید کرد
-- تکنیک‌های رفع اشکال شبکه و امنیت را به کار خواهید گرفت
-- نظارت جامع و هشداردهی را برای شناسایی پیشگیرانه مشکلات پیکربندی خواهید کرد
+- تکنیک‌های رفع اشکال شبکه و امنیت را اعمال خواهید کرد
+- نظارت و هشدارهای جامع را برای شناسایی پیشگیرانه مشکلات پیکربندی خواهید کرد
 
 ## نتایج یادگیری
 
-پس از تکمیل این راهنما، شما قادر خواهید بود:
-- روش TRIAGE را برای رفع اشکال سیستماتیک مشکلات پیچیده استقرار به کار ببرید
-- اطلاعات جامع لاگ و ردیابی را پیکربندی و تحلیل کنید
+پس از اتمام، شما قادر خواهید بود:
+- روش TRIAGE را برای رفع سیستماتیک مشکلات پیچیده استقرار اعمال کنید
+- اطلاعات جامع لاگ‌ها و ردیابی‌ها را پیکربندی و تحلیل کنید
 - از Azure Monitor، Application Insights و ابزارهای تشخیصی به‌طور مؤثر استفاده کنید
 - مشکلات اتصال شبکه، احراز هویت و مجوزها را به‌طور مستقل رفع کنید
-- استراتژی‌های نظارت بر عملکرد و بهینه‌سازی را اجرا کنید
+- استراتژی‌های نظارت و بهینه‌سازی عملکرد را پیاده‌سازی کنید
 - اسکریپت‌های سفارشی رفع اشکال و اتوماسیون برای مشکلات تکراری ایجاد کنید
 
-## روش رفع اشکال
+## روش‌شناسی اشکال‌زدایی
 
 ### رویکرد TRIAGE
-- **T**ime: چه زمانی مشکل شروع شد؟
+- **T**ime: مشکل از چه زمانی شروع شد؟
 - **R**eproduce: آیا می‌توانید مشکل را به‌طور مداوم بازتولید کنید؟
 - **I**solate: کدام مؤلفه دچار مشکل شده است؟
 - **A**nalyze: لاگ‌ها چه اطلاعاتی به ما می‌دهند؟
@@ -54,26 +54,26 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### متغیرهای محیطی
 ```bash
-# Enable comprehensive debugging
+# فعال کردن اشکال‌زدایی جامع
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# اشکال‌زدایی CLI آزور
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# غیرفعال کردن تله‌متری برای خروجی تمیزتر
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### پیکربندی اشکال‌زدایی
 ```bash
-# Set debug configuration globally
+# تنظیم پیکربندی اشکال‌زدایی به صورت جهانی
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# فعال کردن ثبت گزارش ردیابی
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### تحلیل ساختاری لاگ
 ```bash
-# Filter logs by level
+# فیلتر کردن لاگ‌ها بر اساس سطح
 azd logs --level error --since 1h
 
-# Filter by service
+# فیلتر کردن بر اساس سرویس
 azd logs --service api --level debug
 
-# Export logs for analysis
+# صادر کردن لاگ‌ها برای تحلیل
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# تجزیه لاگ‌های JSON با jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### همبستگی لاگ‌ها
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - همبستگی لاگ‌ها در میان سرویس‌ها
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,33 +118,33 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# جستجو در میان تمام سرویس‌ها
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# جستجوی لاگ‌های Azure
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ ابزارهای پیشرفته رفع اشکال
+## 🛠️ ابزارهای پیشرفته اشکال‌زدایی
 
-### پرس‌وجوهای Azure Resource Graph
+### کوئری‌های Azure Resource Graph
 ```bash
-# Query resources by tags
+# جستجوی منابع بر اساس برچسب‌ها
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# یافتن استقرارهای ناموفق
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# بررسی سلامت منابع
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### رفع اشکال شبکه
+### اشکال‌زدایی شبکه
 ```bash
-# Test connectivity between services
+# تست اتصال بین سرویس‌ها
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# استفاده
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### رفع اشکال کانتینر
+### اشکال‌زدایی کانتینر
 ```bash
-# Debug container app issues
+# اشکال‌زدایی مشکلات برنامه کانتینر
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -183,9 +183,9 @@ debug_container() {
 }
 ```
 
-### رفع اشکال اتصال پایگاه داده
+### اشکال‌زدایی اتصال به پایگاه داده
 ```bash
-# Debug database connectivity
+# اشکال‌زدایی اتصال به پایگاه داده
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -202,11 +202,11 @@ debug_database() {
 }
 ```
 
-## 🔬 رفع اشکال عملکرد
+## 🔬 اشکال‌زدایی عملکرد
 
 ### نظارت بر عملکرد برنامه
 ```bash
-# Enable Application Insights debugging
+# فعال کردن اشکال‌زدایی Application Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# نظارت سفارشی بر عملکرد
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### تحلیل استفاده از منابع
 ```bash
-# Monitor resource usage
+# نظارت بر استفاده از منابع
 monitor_resources() {
     local resource_group=$1
     
@@ -264,7 +264,7 @@ monitor_resources() {
 
 ## 🧪 آزمایش و اعتبارسنجی
 
-### رفع اشکال تست‌های یکپارچه‌سازی
+### اشکال‌زدایی تست‌های یکپارچه‌سازی
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# تنظیم محیط اشکال‌زدایی
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# دریافت نقاط پایانی سرویس
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# آزمایش نقاط پایانی سلامت
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# اجرای آزمایش‌ها
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# اجرای آزمایش‌های یکپارچه‌سازی سفارشی
 npm run test:integration
 ```
 
-### تست بار برای رفع اشکال
+### تست بار برای اشکال‌زدایی
 ```bash
-# Simple load test to identify performance bottlenecks
+# تست بار ساده برای شناسایی گلوگاه‌های عملکرد
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,42 +323,42 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # استفاده از Apache Bench (نصب: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # استخراج معیارهای کلیدی
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # بررسی خطاها
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 رفع اشکال زیرساخت
+## 🔧 اشکال‌زدایی زیرساخت
 
-### رفع اشکال قالب‌های Bicep
+### اشکال‌زدایی قالب‌های Bicep
 ```bash
-# Validate Bicep templates with detailed output
+# اعتبارسنجی قالب‌های Bicep با خروجی دقیق
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # اعتبارسنجی نحو
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # اعتبارسنجی Lint
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # استقرار چه-اگر
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# اشکال‌زدایی استقرار قالب
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### تحلیل وضعیت منابع
 ```bash
-# Analyze resource states for inconsistencies
+# تحلیل وضعیت منابع برای ناسازگاری‌ها
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # فهرست کردن تمام منابع با وضعیت‌هایشان
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # بررسی منابعی که شکست خورده‌اند
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -404,11 +404,11 @@ analyze_resources() {
 }
 ```
 
-## 🔒 رفع اشکال امنیتی
+## 🔒 اشکال‌زدایی امنیت
 
-### رفع اشکال جریان احراز هویت
+### اشکال‌زدایی جریان احراز هویت
 ```bash
-# Debug Azure authentication
+# اشکال‌زدایی احراز هویت Azure
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # رمزگشایی توکن JWT (نیاز به jq و base64 دارد)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# اشکال‌زدایی دسترسی به Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,16 +440,16 @@ debug_keyvault() {
 }
 ```
 
-### رفع اشکال امنیت شبکه
+### اشکال‌زدایی امنیت شبکه
 ```bash
-# Debug network security groups
+# اشکال‌زدایی گروه‌های امنیتی شبکه
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # بررسی قوانین امنیتی
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,17 +458,17 @@ debug_network_security() {
 }
 ```
 
-## 📱 رفع اشکال مخصوص برنامه‌ها
+## 📱 اشکال‌زدایی مخصوص برنامه‌ها
 
-### رفع اشکال برنامه‌های Node.js
+### اشکال‌زدایی برنامه‌های Node.js
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// دیباگ-میان‌افزار.js - میان‌افزار دیباگ اکسپرس
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // جزئیات درخواست را ثبت کن
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // res.json را بازنویسی کن تا پاسخ‌ها را ثبت کند
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -489,9 +489,9 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### رفع اشکال پرس‌وجوهای پایگاه داده
+### اشکال‌زدایی کوئری‌های پایگاه داده
 ```javascript
-// database-debug.js - Database debugging utilities
+// پایگاه‌داده-debug.js - ابزارهای اشکال‌زدایی پایگاه‌داده
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -519,12 +519,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 روش‌های رفع اشکال اضطراری
+## 🚨 رویه‌های اضطراری اشکال‌زدایی
 
 ### پاسخ به مشکلات تولید
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - اشکال‌زدایی اضطراری تولید
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# به محیط صحیح تغییر دهید
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# جمع‌آوری اطلاعات حیاتی
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -582,26 +582,26 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### روش‌های بازگشت به حالت قبل
+### رویه‌های بازگشت به حالت قبل
 ```bash
-# Quick rollback script
+# اسکریپت بازگشت سریع
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # تغییر محیط
     azd env select "$environment"
     
-    # Rollback application
+    # بازگشت برنامه
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # تأیید بازگشت
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # تست نقاط پایانی حیاتی
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -609,25 +609,25 @@ quick_rollback() {
 }
 ```
 
-## 📊 داشبوردهای رفع اشکال
+## 📊 داشبوردهای اشکال‌زدایی
 
 ### داشبورد نظارت سفارشی
 ```bash
-# Create Application Insights queries for debugging
+# ایجاد پرس‌وجوهای Application Insights برای اشکال‌زدایی
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # پرس‌وجو برای خطاها
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # پرس‌وجو برای مشکلات عملکرد
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # پرس‌وجو برای شکست‌های وابستگی
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### تجمیع لاگ‌ها
 ```bash
-# Aggregate logs from multiple sources
+# جمع‌آوری لاگ‌ها از منابع متعدد
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -658,10 +658,10 @@ aggregate_logs() {
 
 ## 🔗 منابع پیشرفته
 
-### اسکریپت‌های سفارشی رفع اشکال
-یک دایرکتوری `scripts/debug/` ایجاد کنید با:
+### اسکریپت‌های سفارشی اشکال‌زدایی
+یک دایرکتوری `scripts/debug/` با موارد زیر ایجاد کنید:
 - `health-check.sh` - بررسی جامع سلامت
-- `performance-test.sh` - تست عملکرد خودکار
+- `performance-test.sh` - تست خودکار عملکرد
 - `log-analyzer.py` - تجزیه و تحلیل پیشرفته لاگ‌ها
 - `resource-validator.sh` - اعتبارسنجی زیرساخت
 
@@ -682,16 +682,16 @@ hooks:
       fi
 ```
 
-## بهترین روش‌ها
+## بهترین شیوه‌ها
 
 1. **همیشه لاگ‌های اشکال‌زدایی را فعال کنید** در محیط‌های غیرتولیدی
 2. **موارد تست قابل بازتولید ایجاد کنید** برای مشکلات
-3. **روش‌های رفع اشکال را مستند کنید** برای تیم خود
+3. **رویه‌های اشکال‌زدایی را مستند کنید** برای تیم خود
 4. **بررسی‌های سلامت و نظارت را خودکار کنید**
-5. **ابزارهای رفع اشکال را به‌روز نگه دارید** با تغییرات برنامه خود
-6. **روش‌های رفع اشکال را تمرین کنید** در زمان‌های غیرحادثه
+5. **ابزارهای اشکال‌زدایی را به‌روز نگه دارید** با تغییرات برنامه
+6. **رویه‌های اشکال‌زدایی را تمرین کنید** در زمان‌های غیرحادثه
 
-## مراحل بعدی
+## گام‌های بعدی
 
 - [برنامه‌ریزی ظرفیت](../pre-deployment/capacity-planning.md) - برنامه‌ریزی نیازهای منابع
 - [انتخاب SKU](../pre-deployment/sku-selection.md) - انتخاب سطوح خدمات مناسب
@@ -700,7 +700,7 @@ hooks:
 
 ---
 
-**به یاد داشته باشید**: رفع اشکال خوب به معنای سیستماتیک بودن، دقیق بودن و صبور بودن است. این ابزارها و تکنیک‌ها به شما کمک می‌کنند مشکلات را سریع‌تر و مؤثرتر تشخیص دهید.
+**به یاد داشته باشید**: اشکال‌زدایی خوب به معنای سیستماتیک، دقیق و صبور بودن است. این ابزارها و تکنیک‌ها به شما کمک می‌کنند تا مشکلات را سریع‌تر و مؤثرتر تشخیص دهید.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **سلب مسئولیت**:  
-این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما تلاش می‌کنیم دقت را حفظ کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌ها باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، توصیه می‌شود از ترجمه حرفه‌ای انسانی استفاده کنید. ما مسئولیتی در قبال سوءتفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما مسئولیتی در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
