@@ -59,8 +59,8 @@ jobs:
           # translate -l "zh tw hk fr" -y
           # translate -l "ja ko pt es" -y 
           # translate -l "de fa pl hi" -y
-          translate -l "ru ar ur mo" -y 
-          # translate -l "ja bn mr ne" -y 
+          # translate -l "ru ar ur mo" -y 
+          translate -l "ja bn mr ne" -y 
           # translate -l "pa br it tr" -y
           # translate -l "el th sv da" -y 
           # translate -l "no fi nl he" -y
@@ -100,6 +100,7 @@ jobs:
           add-paths: |
             translations/
             translated_images/
+
 
 
 
