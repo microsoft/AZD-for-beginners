@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T21:22:52+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-20T21:41:00+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "br"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 8 - Padrões de Produção e Corporativos
+- **📖 Capítulo Atual**: Capítulo 8 - Padrões de Produção e Empresariais
 - **⬅️ Capítulo Anterior**: [Capítulo 7: Solução de Problemas](../troubleshooting/debugging.md)
 - **⬅️ Também Relacionado**: [Laboratório de IA](ai-workshop-lab.md)
 - **🎯 Curso Concluído**: [AZD Para Iniciantes](../../README.md)
 
 ## Visão Geral
 
-Este guia fornece práticas recomendadas abrangentes para implantar workloads de IA prontos para produção usando o Azure Developer CLI (AZD). Baseado no feedback da comunidade do Discord Azure AI Foundry e em implantações reais de clientes, essas práticas abordam os desafios mais comuns em sistemas de IA em produção.
+Este guia fornece as melhores práticas abrangentes para implantar workloads de IA prontos para produção usando o Azure Developer CLI (AZD). Baseado no feedback da comunidade Microsoft Foundry no Discord e em implantações reais de clientes, essas práticas abordam os desafios mais comuns em sistemas de IA em produção.
 
 ## Principais Desafios Abordados
 
@@ -133,7 +133,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 - Nenhuma comunicação entre serviços sem autenticação
 - Todas as chamadas de API usam identidades gerenciadas
 - Isolamento de rede com endpoints privados
-- Controle de acesso com privilégios mínimos
+- Controles de acesso com privilégios mínimos
 
 ```bicep
 // Managed Identity for each service
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Configurações Específicas para o Ambiente**:
 
 ```bash
-# Development environment
+# Ambiente de desenvolvimento
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Ambiente de produção
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Gerenciamento de Custos do OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Otimização de token no nível da aplicação
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Truncar o contexto, não a entrada do usuário
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Estimativa aproximada: 1 token ≈ 4 caracteres
     return Math.ceil(text.length / 4);
   }
 }
@@ -506,7 +506,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitoramento Específico de IA
+### 2. Monitoramento Específico para IA
 
 **Dashboards Personalizados para Métricas de IA**:
 
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Verifique se todos os serviços necessários estão em execução
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Validar implantações de modelos OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Testar conectividade do serviço de IA
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -897,13 +897,13 @@ echo "Infrastructure validation completed successfully!"
 | **Disponibilidade** | 99.9% | Monitoramento de uptime |
 | **Taxa de Erro** | < 0.1% | Logs de aplicação |
 | **Uso de Tokens** | < $500/mês | Gerenciamento de custos |
-| **Usuários Concomitantes** | 1000+ | Testes de carga |
+| **Usuários Simultâneos** | 1000+ | Testes de carga |
 | **Tempo de Recuperação** | < 1 hora | Testes de recuperação de desastres |
 
 ### Testes de Carga
 
 ```bash
-# Load testing script for AI applications
+# Script de teste de carga para aplicações de IA
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,14 +913,14 @@ python scripts/load_test.py \
 
 ## 🤝 Melhores Práticas da Comunidade
 
-Com base no feedback da comunidade do Discord Azure AI Foundry:
+Com base no feedback da comunidade Microsoft Foundry no Discord:
 
 ### Principais Recomendações da Comunidade:
 
 1. **Comece Pequeno, Escale Gradualmente**: Inicie com SKUs básicos e escale com base no uso real
 2. **Monitore Tudo**: Configure monitoramento abrangente desde o primeiro dia
 3. **Automatize a Segurança**: Use infraestrutura como código para segurança consistente
-4. **Teste Minuciosamente**: Inclua testes específicos de IA no seu pipeline
+4. **Teste Minuciosamente**: Inclua testes específicos para IA no seu pipeline
 5. **Planeje os Custos**: Monitore o uso de tokens e configure alertas de orçamento cedo
 
 ### Erros Comuns a Evitar:
@@ -933,8 +933,8 @@ Com base no feedback da comunidade do Discord Azure AI Foundry:
 
 ## Recursos Adicionais
 
-- **Framework Bem-Arquitetado do Azure**: [Orientação para workloads de IA](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Documentação do Azure AI Foundry**: [Documentação oficial](https://learn.microsoft.com/azure/ai-studio/)
+- **Framework Azure Well-Architected**: [Orientação para workloads de IA](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Documentação Microsoft Foundry**: [Documentação oficial](https://learn.microsoft.com/azure/ai-studio/)
 - **Templates da Comunidade**: [Exemplos do Azure](https://github.com/Azure-Samples)
 - **Comunidade no Discord**: [Canal #Azure](https://discord.gg/microsoft-azure)
 
@@ -942,7 +942,7 @@ Com base no feedback da comunidade do Discord Azure AI Foundry:
 
 **Navegação do Capítulo:**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 8 - Padrões de Produção e Corporativos
+- **📖 Capítulo Atual**: Capítulo 8 - Padrões de Produção e Empresariais
 - **⬅️ Capítulo Anterior**: [Capítulo 7: Solução de Problemas](../troubleshooting/debugging.md)
 - **⬅️ Também Relacionado**: [Laboratório de IA](ai-workshop-lab.md)
 - **🎆 Curso Concluído**: [AZD Para Iniciantes](../../README.md)
@@ -951,5 +951,7 @@ Com base no feedback da comunidade do Discord Azure AI Foundry:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional feita por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

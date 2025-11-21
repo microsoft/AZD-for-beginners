@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-17T21:58:08+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-20T22:56:31+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "tr"
 }
 -->
-# AI'ye Özel Sorun Giderme Kılavuzu
+# AI'ye Özel Sorun Giderme Rehberi
 
-**Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+**Bölüm Gezinme:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme ve Hata Ayıklama
-- **⬅️ Önceki**: [Hata Ayıklama Kılavuzu](debugging.md)
-- **➡️ Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Kalıplar](../ai-foundry/production-ai-practices.md)
-- **🤖 İlgili**: [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
+- **⬅️ Önceki**: [Hata Ayıklama Rehberi](debugging.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Modeller](../microsoft-foundry/production-ai-practices.md)
+- **🤖 İlgili**: [Bölüm 2: AI-Öncelikli Geliştirme](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**Önceki:** [Üretim AI Uygulamaları](../ai-foundry/production-ai-practices.md) | **Sonraki:** [AZD ile Başlangıç](../getting-started/README.md)
+**Önceki:** [Üretim AI Uygulamaları](../microsoft-foundry/production-ai-practices.md) | **Sonraki:** [AZD ile Başlarken](../getting-started/README.md)
 
-Bu kapsamlı sorun giderme kılavuzu, AZD ile AI çözümleri dağıtılırken karşılaşılan yaygın sorunları ele alır ve Azure AI hizmetlerine özel çözümler ve hata ayıklama teknikleri sunar.
+Bu kapsamlı sorun giderme rehberi, AZD ile AI çözümleri dağıtırken karşılaşılan yaygın sorunları ele alır ve Azure AI hizmetlerine özel çözümler ve hata ayıklama teknikleri sunar.
 
 ## İçindekiler
 
@@ -33,7 +33,7 @@ Bu kapsamlı sorun giderme kılavuzu, AZD ile AI çözümleri dağıtılırken k
 
 ## Azure OpenAI Hizmeti Sorunları
 
-### Sorun: OpenAI Hizmeti Bölge İçinde Kullanılamıyor
+### Sorun: OpenAI Hizmeti Bölgenizde Kullanılamıyor
 
 **Belirtiler:**
 ```
@@ -49,7 +49,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 1. **Bölge Uygunluğunu Kontrol Edin:**
 ```bash
-# List available regions for OpenAI
+# OpenAI için mevcut bölgeleri listele
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -67,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **Alternatif Bölgeler Kullanın:**
+3. **Alternatif Bölgeleri Kullanın:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -90,7 +90,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **Mevcut Kotayı Kontrol Edin:**
 ```bash
-# Check quota usage
+# Kota kullanımını kontrol et
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -98,7 +98,7 @@ az cognitiveservices usage list \
 
 2. **Kota Artışı Talep Edin:**
 ```bash
-# Submit quota increase request
+# Kota artırma talebi gönder
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -135,13 +135,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Desteklenen API Sürümünü Kullanın:**
 ```python
-# Use latest supported version
+# En son desteklenen sürümü kullanın
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **API Sürüm Uyumluluğunu Kontrol Edin:**
 ```bash
-# List supported API versions
+# Desteklenen API sürümlerini listele
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -201,7 +201,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **Arama Hizmeti Anahtarlarını Doğrulayın:**
 ```bash
-# Get search service admin key
+# Arama hizmeti yönetici anahtarını al
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -209,7 +209,7 @@ az search admin-key show \
 
 2. **Dizin Şemasını Kontrol Edin:**
 ```python
-# Validate index schema
+# Dizin şemasını doğrula
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -239,7 +239,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Container Apps Dağıtım Sorunları
 
-### Sorun: Container Yapı Hataları
+### Sorun: Container Build Hataları
 
 **Belirtiler:**
 ```
@@ -284,7 +284,7 @@ azure-cosmos==4.5.1
 
 3. **Sağlık Kontrolü Ekleyin:**
 ```python
-# main.py - Add health check endpoint
+# main.py - Sağlık kontrolü uç noktası ekle
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -294,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Sorun: Container Uygulama Başlangıç Hataları
+### Sorun: Container Uygulaması Başlatma Hataları
 
 **Belirtiler:**
 ```
@@ -303,7 +303,7 @@ Error: Container failed to start within timeout period
 
 **Çözümler:**
 
-1. **Başlangıç Zaman Aşımını Artırın:**
+1. **Başlatma Zaman Aşımını Artırın:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Model Yüklemeyi Optimize Edin:**
 ```python
-# Lazy load models to reduce startup time
+# Modelleri tembel yükleyerek başlangıç süresini azaltın
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,15 +352,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # Burada AI istemcisini başlatın
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # Başlangıç
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # Kapatma
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -368,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Kimlik Doğrulama ve İzin Hataları
 
-### Sorun: Yönetilen Kimlik İzin Reddedildi
+### Sorun: Yönetilen Kimlik İzni Reddedildi
 
 **Belirtiler:**
 ```
@@ -379,7 +379,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 1. **Rol Atamalarını Doğrulayın:**
 ```bash
-# Check current role assignments
+# Mevcut rol atamalarını kontrol et
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -404,7 +404,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **Kimlik Doğrulamayı Test Edin:**
 ```python
-# Test managed identity authentication
+# Yönetilen kimlik doğrulamasını test et
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -417,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Sorun: Key Vault Erişim Reddedildi
+### Sorun: Key Vault Erişimi Reddedildi
 
 **Belirtiler:**
 ```
@@ -471,7 +471,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Mevcut Modelleri Kontrol Edin:**
 ```bash
-# List available models
+# Mevcut modelleri listele
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -479,7 +479,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Model Alternatiflerini Kullanın:**
+2. **Model Yedeklerini Kullanın:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -508,9 +508,9 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Modeli Dağıtmadan Önce Doğrulayın:**
+3. **Dağıtımdan Önce Modeli Doğrulayın:**
 ```python
-# Pre-deployment model validation
+# Dağıtım öncesi model doğrulama
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -537,13 +537,13 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 **Belirtiler:**
 - Yanıt süreleri > 30 saniye
 - Zaman aşımı hataları
-- Zayıf kullanıcı deneyimi
+- Kötü kullanıcı deneyimi
 
 **Çözümler:**
 
 1. **İstek Zaman Aşımı Uygulayın:**
 ```python
-# Configure proper timeouts
+# Uygun zaman aşımı sürelerini yapılandırın
 import httpx
 
 client = httpx.AsyncClient(
@@ -558,7 +558,7 @@ client = httpx.AsyncClient(
 
 2. **Yanıt Önbellekleme Ekleyin:**
 ```python
-# Redis cache for responses
+# Yanıtlar için Redis önbelleği
 import redis.asyncio as redis
 import json
 
@@ -610,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Sorun: Bellek Tükenme Hataları
+### Sorun: Bellek Yetersiz Hataları
 
 **Belirtiler:**
 ```
@@ -640,7 +640,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Bellek Kullanımını Optimize Edin:**
 ```python
-# Memory-efficient model handling
+# Bellek verimli model işleme
 import gc
 import psutil
 
@@ -650,14 +650,14 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # İşlemden önce bellek kullanımını kontrol et
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # Zorunlu çöp toplama
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # İşlemden sonra temizleme
         gc.collect()
         return result
 ```
@@ -675,7 +675,7 @@ class MemoryOptimizedAI:
 
 1. **Maliyet Kontrolleri Uygulayın:**
 ```python
-# Token usage tracking
+# Jeton kullanım takibi
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -719,11 +719,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **Model Seçimini Optimize Edin:**
 ```python
-# Cost-aware model selection
+# Maliyet odaklı model seçimi
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # 1K jeton başına
+    'gpt-4': 0.03,          # 1K jeton başına
+    'gpt-35-turbo': 0.0015  # 1K jeton başına
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -741,16 +741,16 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 ### AZD Hata Ayıklama Komutları
 
 ```bash
-# Enable verbose logging
+# Ayrıntılı günlük kaydını etkinleştir
 azd up --debug
 
-# Check deployment status
+# Dağıtım durumunu kontrol et
 azd show
 
-# View deployment logs
+# Dağıtım günlüklerini görüntüle
 azd logs --follow
 
-# Check environment variables
+# Ortam değişkenlerini kontrol et
 azd env get-values
 ```
 
@@ -761,7 +761,7 @@ azd env get-values
 import logging
 import json
 
-# Configure structured logging for AI applications
+# AI uygulamaları için yapılandırılmış günlük kaydını yapılandırın
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -780,14 +780,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Sağlık Kontrolü Uç Noktaları:**
+2. **Sağlık Kontrol Uç Noktaları:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # OpenAI bağlantısını kontrol et
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -795,7 +795,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Check Search service
+    # Arama hizmetini kontrol et
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -846,16 +846,16 @@ def monitor_performance(func):
 |-----------|----------|-------|
 | 401 | Yetkisiz | API anahtarlarını ve yönetilen kimlik yapılandırmasını kontrol edin |
 | 403 | Yasaklandı | RBAC rol atamalarını doğrulayın |
-| 429 | Hız Sınırı | Üstel geri alma ile yeniden deneme mantığı uygulayın |
-| 500 | Dahili Sunucu Hatası | Model dağıtım durumu ve günlükleri kontrol edin |
+| 429 | Oran Sınırı Aşıldı | Üstel geri çekilme ile yeniden deneme mantığı uygulayın |
+| 500 | Dahili Sunucu Hatası | Model dağıtım durumunu ve günlükleri kontrol edin |
 | 503 | Hizmet Kullanılamıyor | Hizmet sağlığını ve bölgesel uygunluğu doğrulayın |
 
 ## Sonraki Adımlar
 
-1. **[AI Model Dağıtım Kılavuzu](ai-model-deployment.md)**'nu inceleyin ve dağıtım en iyi uygulamalarını öğrenin
+1. **[AI Model Dağıtım Rehberi](ai-model-deployment.md)**'ni inceleyin ve dağıtım için en iyi uygulamaları öğrenin
 2. **[Üretim AI Uygulamaları](production-ai-practices.md)**'nı tamamlayarak kurumsal çözümler geliştirin
-3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)**'a katılarak topluluk desteği alın
-4. **Sorunları bildirin**: AZD'ye özel problemler için [AZD GitHub deposuna](https://github.com/Azure/azure-dev) gönderin
+3. **[Microsoft Foundry Discord](https://aka.ms/foundry/discord)**'a katılarak topluluk desteği alın
+4. **Sorunları bildirin**: [AZD GitHub deposu](https://github.com/Azure/azure-dev) üzerinden AZD'ye özel sorunlarınızı paylaşın
 
 ## Kaynaklar
 
@@ -865,15 +865,17 @@ def monitor_performance(func):
 
 ---
 
-**Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+**Bölüm Gezinme:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme ve Hata Ayıklama
-- **⬅️ Önceki**: [Hata Ayıklama Kılavuzu](debugging.md)
-- **➡️ Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Kalıplar](../ai-foundry/production-ai-practices.md)
-- **🤖 İlgili**: [Bölüm 2: AI-Öncelikli Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
+- **⬅️ Önceki**: [Hata Ayıklama Rehberi](debugging.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Modeller](../microsoft-foundry/production-ai-practices.md)
+- **🤖 İlgili**: [Bölüm 2: AI-Öncelikli Geliştirme](../microsoft-foundry/microsoft-foundry-integration.md)
 - [Azure Developer CLI Sorun Giderme](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

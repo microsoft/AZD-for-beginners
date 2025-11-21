@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T21:54:23+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-20T22:58:02+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "tr"
 }
@@ -10,15 +10,15 @@ CO_OP_TRANSLATOR_METADATA:
 # AZD ile Üretim AI İş Yükü En İyi Uygulamaları
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 8 - Üretim ve Kurumsal Kalıplar
+- **📚 Kurs Ana Sayfası**: [AZD Başlangıç Rehberi](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 8 - Üretim ve Kurumsal Modeller
 - **⬅️ Önceki Bölüm**: [Bölüm 7: Sorun Giderme](../troubleshooting/debugging.md)
-- **⬅️ Ayrıca İlgili**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Kurs Tamamlandı**: [AZD For Beginners](../../README.md)
+- **⬅️ Ayrıca İlgili**: [AI Atölye Laboratuvarı](ai-workshop-lab.md)
+- **🎯 Kurs Tamamlandı**: [AZD Başlangıç Rehberi](../../README.md)
 
 ## Genel Bakış
 
-Bu rehber, Azure Developer CLI (AZD) kullanarak üretime hazır AI iş yüklerini dağıtmak için kapsamlı en iyi uygulamaları sunar. Azure AI Foundry Discord topluluğundan gelen geri bildirimler ve gerçek müşteri dağıtımları temel alınarak, bu uygulamalar üretim AI sistemlerindeki en yaygın zorlukları ele alır.
+Bu rehber, Azure Developer CLI (AZD) kullanarak üretime hazır AI iş yüklerini dağıtmak için kapsamlı en iyi uygulamaları sunar. Microsoft Foundry Discord topluluğundan alınan geri bildirimler ve gerçek müşteri dağıtımları temel alınarak, bu uygulamalar üretim AI sistemlerindeki en yaygın zorlukları ele alır.
 
 ## Ele Alınan Temel Zorluklar
 
@@ -30,9 +30,9 @@ Topluluk anket sonuçlarına göre, geliştiricilerin karşılaştığı en büy
 - **%32** daha iyi maliyet optimizasyon stratejilerine ihtiyaç duyuyor
 - **%29** izleme ve sorun giderme konusunda iyileştirme talep ediyor
 
-## Üretim AI için Mimari Kalıplar
+## Üretim AI için Mimari Modeller
 
-### Kalıp 1: Mikro Hizmetler AI Mimarisi
+### Model 1: Mikro Hizmetler AI Mimarisi
 
 **Ne zaman kullanılır**: Birden fazla yeteneğe sahip karmaşık AI uygulamaları
 
@@ -76,7 +76,7 @@ services:
     host: containerapp
 ```
 
-### Kalıp 2: Olay Tabanlı AI İşleme
+### Model 2: Olay Tabanlı AI İşleme
 
 **Ne zaman kullanılır**: Toplu işleme, belge analizi, asenkron iş akışları
 
@@ -133,7 +133,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 - Kimlik doğrulama olmadan hizmetler arası iletişim yok
 - Tüm API çağrıları yönetilen kimlikler kullanır
 - Özel uç noktalarla ağ izolasyonu
-- En az ayrıcalıklı erişim kontrolleri
+- En az ayrıcalık erişim kontrolleri
 
 ```bicep
 // Managed Identity for each service
@@ -156,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Güvenli Gizli Yönetimi
 
-**Key Vault Entegrasyon Kalıbı**:
+**Key Vault Entegrasyon Modeli**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Ortam-Specifik Yapılandırmalar**:
 
 ```bash
-# Development environment
+# Geliştirme ortamı
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Üretim ortamı
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI Maliyet Yönetimi**:
 
 ```typescript
-// Application-level token optimization
+// Uygulama düzeyinde jeton optimizasyonu
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Bağlamı kısalt, kullanıcı girdisini değil
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Kabaca tahmin: 1 jeton ≈ 4 karakter
     return Math.ceil(text.length / 4);
   }
 }
@@ -608,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Felaket Kurtarma ve Yüksek Erişilebilirlik
 
-### 1. Çok Bölgeye Dağıtım
+### 1. Çok Bölge Dağıtımı
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Tüm gerekli hizmetlerin çalışıp çalışmadığını kontrol et
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# OpenAI model dağıtımlarını doğrula
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# AI hizmeti bağlantısını test et
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -841,11 +841,11 @@ echo "Infrastructure validation completed successfully!"
 
 ### Güvenlik ✅
 - [ ] Tüm hizmetler yönetilen kimlikler kullanıyor
-- [ ] Gizliler Key Vault'ta saklanıyor
+- [ ] Gizli bilgiler Key Vault'ta saklanıyor
 - [ ] Özel uç noktalar yapılandırıldı
 - [ ] Ağ güvenlik grupları uygulandı
-- [ ] En az ayrıcalıklı RBAC
-- [ ] Genel uç noktalarda WAF etkin
+- [ ] En az ayrıcalık ile RBAC
+- [ ] Genel uç noktalarda WAF etkinleştirildi
 
 ### Performans ✅
 - [ ] Otomatik ölçeklendirme yapılandırıldı
@@ -864,7 +864,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Günlük saklama politikaları
 
 ### Güvenilirlik ✅
-- [ ] Çok bölgeye dağıtım
+- [ ] Çok bölge dağıtımı
 - [ ] Yedekleme ve kurtarma planı
 - [ ] Devre kesiciler uygulandı
 - [ ] Yeniden deneme politikaları yapılandırıldı
@@ -887,7 +887,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Düzenli güvenlik değerlendirmeleri
 - [ ] Olay müdahale planı
 
-## Performans Kıyaslamaları
+## Performans Kriterleri
 
 ### Tipik Üretim Metrikleri
 
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Yük Testi
 
 ```bash
-# Load testing script for AI applications
+# AI uygulamaları için yük testi betiği
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,14 +913,14 @@ python scripts/load_test.py \
 
 ## 🤝 Topluluk En İyi Uygulamaları
 
-Azure AI Foundry Discord topluluğundan gelen geri bildirimlere dayanarak:
+Microsoft Foundry Discord topluluğundan alınan geri bildirimlere dayanarak:
 
 ### Topluluk Tavsiyeleri:
 
 1. **Küçük Başlayın, Kademeli Ölçeklendirin**: Temel SKU'larla başlayın ve gerçek kullanım temelinde ölçeklendirin
 2. **Her Şeyi İzleyin**: İlk günden itibaren kapsamlı izleme kurun
 3. **Güvenliği Otomatikleştirin**: Tutarlı güvenlik için altyapıyı kod olarak kullanın
-4. **İyi Test Edin**: Pipeline'ınıza AI-specifik testleri dahil edin
+4. **İyi Test Edin**: AI'ya özel testleri pipeline'ınıza dahil edin
 5. **Maliyetleri Planlayın**: Token kullanımını izleyin ve erken bütçe uyarıları ayarlayın
 
 ### Kaçınılması Gereken Yaygın Hatalar:
@@ -934,22 +934,24 @@ Azure AI Foundry Discord topluluğundan gelen geri bildirimlere dayanarak:
 ## Ek Kaynaklar
 
 - **Azure İyi Tasarlanmış Çerçeve**: [AI iş yükü rehberi](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Belgeleri**: [Resmi belgeler](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Foundry Belgeleri**: [Resmi belgeler](https://learn.microsoft.com/azure/ai-studio/)
 - **Topluluk Şablonları**: [Azure Örnekleri](https://github.com/Azure-Samples)
 - **Discord Topluluğu**: [#Azure kanalı](https://discord.gg/microsoft-azure)
 
 ---
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 8 - Üretim ve Kurumsal Kalıplar
+- **📚 Kurs Ana Sayfası**: [AZD Başlangıç Rehberi](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 8 - Üretim ve Kurumsal Modeller
 - **⬅️ Önceki Bölüm**: [Bölüm 7: Sorun Giderme](../troubleshooting/debugging.md)
-- **⬅️ Ayrıca İlgili**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Kurs Tamamlandı**: [AZD For Beginners](../../README.md)
+- **⬅️ Ayrıca İlgili**: [AI Atölye Laboratuvarı](ai-workshop-lab.md)
+- **🎆 Kurs Tamamlandı**: [AZD Başlangıç Rehberi](../../README.md)
 
-**Unutmayın**: Üretim AI iş yükleri dikkatli planlama, izleme ve sürekli optimizasyon gerektirir. Bu kalıplarla başlayın ve bunları özel gereksinimlerinize göre uyarlayın.
+**Unutmayın**: Üretim AI iş yükleri dikkatli planlama, izleme ve sürekli optimizasyon gerektirir. Bu modellerle başlayın ve özel gereksinimlerinize göre uyarlayın.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlama durumunda sorumluluk kabul edilmez.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

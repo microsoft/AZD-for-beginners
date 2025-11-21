@@ -1,16 +1,16 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T21:55:59+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-20T23:03:20+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tr"
 }
 -->
 # Yapılandırma Kılavuzu
 
-**Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+**Bölüm Gezinimi:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 3 - Yapılandırma ve Kimlik Doğrulama
 - **⬅️ Önceki**: [İlk Projeniz](first-project.md)
 - **➡️ Sonraki**: [Dağıtım Kılavuzu](../deployment/deployment-guide.md)
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasını kapsar. Yapılandırma hiyerarşisi, ortam yönetimi, kimlik doğrulama yöntemleri ve verimli ve güvenli Azure dağıtımları sağlayan gelişmiş yapılandırma modelleri hakkında bilgi edineceksiniz.
+Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasını kapsar. Yapılandırma hiyerarşisini, ortam yönetimini, kimlik doğrulama yöntemlerini ve verimli ve güvenli Azure dağıtımları sağlayan gelişmiş yapılandırma modellerini öğreneceksiniz.
 
 ## Öğrenme Hedefleri
 
@@ -26,7 +26,7 @@ Bu dersin sonunda:
 - azd yapılandırma hiyerarşisini öğrenecek ve ayarların nasıl önceliklendirildiğini anlayacaksınız
 - Küresel ve proje bazlı ayarları etkili bir şekilde yapılandırabileceksiniz
 - Farklı yapılandırmalara sahip birden fazla ortamı yönetebileceksiniz
-- Güvenli kimlik doğrulama ve yetkilendirme modelleri uygulayabileceksiniz
+- Güvenli kimlik doğrulama ve yetkilendirme modellerini uygulayabileceksiniz
 - Karmaşık senaryolar için gelişmiş yapılandırma modellerini anlayacaksınız
 
 ## Öğrenme Çıktıları
@@ -34,9 +34,9 @@ Bu dersin sonunda:
 Bu dersi tamamladıktan sonra:
 - azd'yi en iyi geliştirme iş akışları için yapılandırabileceksiniz
 - Birden fazla dağıtım ortamını kurup yönetebileceksiniz
-- Güvenli yapılandırma yönetimi uygulamalarını hayata geçirebileceksiniz
-- Yapılandırma ile ilgili sorunları giderebileceksiniz
-- azd davranışını belirli kurumsal gereksinimlere göre özelleştirebileceksiniz
+- Güvenli yapılandırma yönetimi uygulamalarını gerçekleştirebileceksiniz
+- Yapılandırma ile ilgili sorunları çözebileceksiniz
+- azd davranışını belirli organizasyonel gereksinimlere göre özelleştirebileceksiniz
 
 Bu kapsamlı kılavuz, Azure Developer CLI'nin geliştirme ve dağıtım iş akışları için en iyi şekilde yapılandırılmasını kapsar.
 
@@ -53,36 +53,36 @@ azd, hiyerarşik bir yapılandırma sistemi kullanır:
 
 ### Küresel Varsayılanları Ayarlama
 ```bash
-# Set default subscription
+# Varsayılan aboneliği ayarla
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Varsayılan konumu ayarla
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Varsayılan kaynak grubu adlandırma kuralını ayarla
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Tüm global yapılandırmayı görüntüle
 azd config list
 
-# Remove a configuration
+# Bir yapılandırmayı kaldır
 azd config unset defaults.location
 ```
 
 ### Yaygın Küresel Ayarlar
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Geliştirme tercihleri
+azd config set alpha.enable true                    # Alfa özelliklerini etkinleştir
+azd config set telemetry.enabled false             # Telemetriyi devre dışı bırak
+azd config set output.format json                  # Çıktı formatını ayarla
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Güvenlik ayarları
+azd config set auth.useAzureCliCredential true     # Kimlik doğrulama için Azure CLI kullan
+azd config set tls.insecure false                  # TLS doğrulamasını zorunlu kıl
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Performans ayarları
+azd config set provision.parallelism 5             # Paralel kaynak oluşturma
+azd config set deploy.timeout 30m                  # Dağıtım zaman aşımı
 ```
 
 ## 🏗️ Proje Yapılandırması
@@ -213,13 +213,13 @@ services:
 
 ### Ortam Oluşturma
 ```bash
-# Create a new environment
+# Yeni bir ortam oluştur
 azd env new development
 
-# Create with specific location
+# Belirli bir konumla oluştur
 azd env new staging --location "westus2"
 
-# Create from template
+# Şablondan oluştur
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Her ortamın kendi yapılandırması `.azure/<env-name>/config.json` içinde bul
 
 ### Ortam Değişkenleri
 ```bash
-# Set environment-specific variables
+# Ortama özgü değişkenleri ayarla
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Ortam değişkenlerini görüntüle
 azd env get-values
 
-# Remove environment variable
+# Beklenen çıktı:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# Ortam değişkenini kaldır
 azd env unset DEBUG
+
+# Kaldırmayı doğrula
+azd env get-values | grep DEBUG
+# (hiçbir şey döndürmemeli)
 ```
 
 ### Ortam Şablonları
 Tutarlı ortam kurulumları için `.azure/env.template` oluşturun:
 ```bash
-# Required variables
+# Gerekli değişkenler
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Uygulama ayarları
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# İsteğe bağlı geliştirme ayarları
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Azure CLI Entegrasyonu
 ```bash
-# Use Azure CLI credentials (default)
+# Azure CLI kimlik bilgilerini kullan (varsayılan)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Belirli bir kiracı ile giriş yap
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Varsayılan aboneliği ayarla
 az account set --subscription <subscription-id>
 ```
 
 ### Hizmet Prensibi Kimlik Doğrulaması
-CI/CD iş akışları için:
+CI/CD boru hatları için:
 ```bash
-# Set environment variables
+# Ortam değişkenlerini ayarla
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Veya doğrudan yapılandır
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Yönetilen Kimlik
 Azure barındırılan ortamlar için:
 ```bash
-# Enable managed identity authentication
+# Yönetilen kimlik doğrulamayı etkinleştir
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -338,7 +347,7 @@ Altyapı parametrelerini `infra/main.parameters.json` içinde yapılandırın:
 ```
 
 ### Terraform Yapılandırması
-Terraform projeleri için, `infra/terraform.tfvars` içinde yapılandırın:
+Terraform projeleri için `infra/terraform.tfvars` içinde yapılandırın:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -389,9 +398,9 @@ services:
 
 ## 🔧 Gelişmiş Yapılandırma
 
-### Özel Kaynak İsimlendirme
+### Özel Kaynak Adlandırma
 ```bash
-# Set naming conventions
+# Adlandırma kurallarını belirle
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### Geliştirme Ortamı
 ```bash
-# .azure/development/.env
+# .azure/geliştirme/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -453,18 +462,18 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Yapılandırmayı Doğrula
 ```bash
-# Check configuration syntax
+# Yapılandırma sözdizimini kontrol et
 azd config validate
 
-# Test environment variables
+# Ortam değişkenlerini test et
 azd env get-values
 
-# Validate infrastructure
+# Altyapıyı doğrula
 azd provision --dry-run
 ```
 
-### Yapılandırma Scriptleri
-`scripts/` içinde doğrulama scriptleri oluşturun:
+### Yapılandırma Komut Dosyaları
+`scripts/` içinde doğrulama komut dosyaları oluşturun:
 
 ```bash
 #!/bin/bash
@@ -472,13 +481,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Gerekli ortam değişkenlerini kontrol et
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# azure.yaml söz dizimini doğrula
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -516,12 +525,12 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Sürüm Kontrolü Dikkatleri
+### 3. Sürüm Kontrolü Düşünceleri
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Çevre yapılandırmaları (kaynak kimliklerini içerir)
+.azure/*/.env               # Çevre değişkenleri (gizli bilgiler içerebilir)
+.env                        # Yerel çevre dosyası
 ```
 
 ### 4. Yapılandırma Belgeleri
@@ -540,6 +549,68 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Uygulamalı Alıştırmalar
+
+### Alıştırma 1: Çoklu Ortam Yapılandırması (15 dakika)
+
+**Amaç**: Farklı ayarlara sahip üç ortam oluşturun ve yapılandırın
+
+```bash
+# Geliştirme ortamı oluştur
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Test ortamı oluştur
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Üretim ortamı oluştur
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Her ortamı doğrula
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Başarı Kriterleri:**
+- [ ] Üç ortam başarıyla oluşturuldu
+- [ ] Her ortamın benzersiz yapılandırması var
+- [ ] Ortamlar arasında hatasız geçiş yapılabiliyor
+- [ ] `azd env list` tüm üç ortamı gösteriyor
+
+### Alıştırma 2: Gizli Yönetimi (10 dakika)
+
+**Amaç**: Hassas verilerle güvenli yapılandırma pratiği yapın
+
+```bash
+# Sırları ayarla (çıktıda görüntülenmez)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Gizli olmayan yapılandırmayı ayarla
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Ortamı görüntüle (sırlar gizlenmelidir)
+azd env get-values
+
+# Sırların saklandığını doğrula
+azd env get DB_PASSWORD  # Gerçek değeri göstermelidir
+```
+
+**Başarı Kriterleri:**
+- [ ] Gizli bilgiler terminalde görüntülenmeden saklandı
+- [ ] `azd env get-values` gizli bilgileri gizlenmiş şekilde gösteriyor
+- [ ] Bireysel `azd env get <SECRET_NAME>` gerçek değeri alıyor
+
 ## Sonraki Adımlar
 
 - [İlk Projeniz](first-project.md) - Yapılandırmayı uygulamada kullanın
@@ -554,8 +625,8 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 
 ---
 
-**Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+**Bölüm Gezinimi:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 3 - Yapılandırma ve Kimlik Doğrulama
 - **⬅️ Önceki**: [İlk Projeniz](first-project.md)
 - **➡️ Sonraki Bölüm**: [Bölüm 4: Kod Olarak Altyapı](../deployment/deployment-guide.md)
@@ -563,5 +634,7 @@ Yapılandırmanızı `CONFIG.md` içinde belgeleyin:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
