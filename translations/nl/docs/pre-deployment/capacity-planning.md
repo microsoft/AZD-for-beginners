@@ -1,23 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:33:19+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-21T16:31:13+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "nl"
 }
 -->
-# Capaciteitsplanning: Begrijpen van Azure Quota's en Limieten - Beschikbaarheid en Limieten van Azure Resources
+# Capaciteitsplanning - Azure Resource Beschikbaarheid en Limieten
+
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 6 - Validatie & Planning vóór Implementatie
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 5: Multi-Agent AI Oplossingen](../../examples/retail-scenario.md)
+- **➡️ Volgende**: [SKU Selectie](sku-selection.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../troubleshooting/common-issues.md)
 
 ## Introductie
 
-Deze uitgebreide gids helpt je bij het plannen en valideren van Azure resourcecapaciteit voordat je gaat implementeren met Azure Developer CLI. Leer hoe je quota's, beschikbaarheid en regionale beperkingen kunt beoordelen om succesvolle implementaties te garanderen, terwijl je kosten en prestaties optimaliseert. Beheers capaciteitsplanningstechnieken voor verschillende applicatiearchitecturen en schaalscenario's.
+Deze uitgebreide gids helpt je bij het plannen en valideren van Azure resourcecapaciteit voordat je implementeert met Azure Developer CLI. Leer hoe je quota's, beschikbaarheid en regionale beperkingen kunt beoordelen om succesvolle implementaties te garanderen, terwijl je kosten en prestaties optimaliseert. Beheers capaciteitsplanningstechnieken voor verschillende applicatiearchitecturen en schaalscenario's.
 
 ## Leerdoelen
 
 Na het voltooien van deze gids kun je:
-- Begrijpen wat Azure quota's, limieten en regionale beschikbaarheidsbeperkingen zijn
-- Technieken beheersen om resourcebeschikbaarheid en capaciteit te controleren vóór implementatie
+- Azure quota's, limieten en regionale beschikbaarheidsbeperkingen begrijpen
+- Technieken beheersen om resourcebeschikbaarheid en capaciteit vóór implementatie te controleren
 - Geautomatiseerde capaciteitsvalidatie- en monitoringsstrategieën implementeren
 - Applicaties ontwerpen met de juiste resourcegrootte en schaaloverwegingen
 - Kostenoptimalisatiestrategieën toepassen door intelligente capaciteitsplanning
@@ -29,7 +36,7 @@ Na voltooiing ben je in staat om:
 - Azure resourcecapaciteitsvereisten te beoordelen en te valideren vóór implementatie
 - Geautomatiseerde scripts te maken voor capaciteitscontrole en quotamonitoring
 - Schaalbare architecturen te ontwerpen die rekening houden met regionale en abonnementslimieten
-- Kosteneffectieve strategieën voor resourcegrootte te implementeren voor verschillende werkbelastingtypes
+- Kosteneffectieve resourcegrootte-strategieën te implementeren voor verschillende werkbelastingtypes
 - Proactieve monitoring en waarschuwingen te configureren voor capaciteitsgerelateerde problemen
 - Multi-region implementaties te plannen met een juiste capaciteitsverdeling
 
@@ -42,30 +49,30 @@ Voordat je applicaties implementeert, moet je ervoor zorgen:
 - **Netwerkcapaciteit** voor verwacht verkeer
 - **Kostenoptimalisatie** door juiste sizing
 
-## 📊 Begrijpen van Azure Quota's en Limieten
+## 📊 Begrip van Azure Quota's en Limieten
 
 ### Soorten Limieten
 1. **Abonnementsniveau quota's** - Maximale resources per abonnement
 2. **Regionale quota's** - Maximale resources per regio
-3. **Resource-specifieke limieten** - Limieten voor individuele resourcetypen
-4. **Servicetier limieten** - Limieten gebaseerd op je serviceplan
+3. **Resource-specifieke limieten** - Limieten voor individuele resourcetypes
+4. **Servicetier limieten** - Limieten gebaseerd op jouw serviceplan
 
 ### Veelvoorkomende Resource Quota's
 ```bash
-# Check current quota usage
+# Controleer het huidige quotagebruik
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Controleer specifieke resourcequota
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
 ## Capaciteitscontroles vóór Implementatie
 
-### Geautomatiseerd Capaciteitsvalidatiescript
+### Geautomatiseerd Capaciteitsvalidatie Script
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Valideer Azure-capaciteit vóór implementatie
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Functie om quotagebruik te controleren
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,27 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Controleer verschillende resourcequota
+check_quota "compute" 4      # Nodig 4 vCPU's
+check_quota "storage" 2      # Nodig 2 opslagaccounts
+check_quota "network" 1      # Nodig 1 virtueel netwerk
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Capaciteitscontroles per Service
+### Service-specifieke Capaciteitscontroles
 
 #### App Service Capaciteit
 ```bash
-# Check App Service Plan availability
+# Controleer beschikbaarheid van App Service Plan
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Controleer beschikbare SKUs in regio
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Stel alternatieve regio's voor
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Controleer huidig gebruik
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Gebruik
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Database Capaciteit
 ```bash
-# Check PostgreSQL capacity
+# Controleer PostgreSQL-capaciteit
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Controleer of SKU beschikbaar is
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Toon beschikbare SKU's
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Controleer Cosmos DB-capaciteit
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Controleer regio beschikbaarheid
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Controleer of serverless wordt ondersteund (indien nodig)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### Container Apps Capaciteit
 ```bash
-# Check Container Apps capacity
+# Controleer de capaciteit van Container Apps
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Controleer of Container Apps beschikbaar is in de regio
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Controleer het huidige aantal omgevingen
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Container Apps heeft een limiet van 15 omgevingen per regio
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Toon beschikbare regio's
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,7 +263,7 @@ check_container_apps_capacity() {
 
 ### Servicebeschikbaarheid per Regio
 ```bash
-# Check service availability across regions
+# Controleer de beschikbaarheid van diensten in verschillende regio's
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Controleer alle diensten
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Aanbevelingen voor Regioselectie
 ```bash
-# Recommend optimal regions based on requirements
+# Aanbevolen optimale regio's op basis van vereisten
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "laagkosten" | "prestatie" | "naleving"
     
     echo "Region recommendations for: $requirements"
     
@@ -321,20 +328,20 @@ recommend_region() {
 
 ## 💰 Kostenplanning en Schatting
 
-### Schatting van Resourcekosten
+### Resourcekosten Schatting
 ```bash
-# Estimate deployment costs
+# Schat de implementatiekosten
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Maak een tijdelijke resourcegroep voor schatting
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Implementeer infrastructuur in validatiemodus
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Ruim tijdelijke resourcegroep op
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -354,12 +361,12 @@ estimate_costs() {
 }
 ```
 
-### Aanbevelingen voor SKU-optimalisatie
+### Aanbevelingen voor SKU Optimalisatie
 ```bash
-# Recommend optimal SKUs based on requirements
+# Aanbevolen optimale SKU's op basis van vereisten
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "dev" | "staging" | "production"
+    local workload_type=$2  # "dev" | "staging" | "productie"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -424,27 +431,27 @@ recommend_sku() {
 ### Uitgebreid Pre-Flight Script
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Volledige validatie vóór implementatie
 
 set -e
 
-# Configuration
+# Configuratie
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Kleuren voor output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Geen kleur
 
-# Logging functions
+# Logfuncties
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Configuratie laden
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Controle 1: Authenticatie
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Controle 2: Regionale beschikbaarheid
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Controle 3: Quotumvalidatie
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPU-quotum
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Opslagaccountquotum
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Controle 4: Servicebeschikbaarheid
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Controle 5: Netwerkcapaciteit
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,19 +576,19 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Controle 6: Validatie van resourcebenamingen
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
 
-if [ ${#STORAGE_NAME} -le 24 ] && [[ "$STORAGE_NAME" =~ ^[a-z0-9]+$ ]]; then
+if [ ${#STORAGE_NAME} -le 24 ] && [[ "$STORAGE_NAME" =~ ^[a-z0-9]+$ ]]; dan
     log_info "Storage account naming is valid: $STORAGE_NAME"
 else
     log_error "Storage account naming is invalid: $STORAGE_NAME"
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Controle 7: Kostenraming
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Controle 8: Sjabloonvalidatie
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Eindoverzicht
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -654,18 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Monitoring van Capaciteit tijdens Implementatie
+## 📈 Monitoring van Capaciteit Tijdens Implementatie
 
 ### Real-time Capaciteitsmonitoring
 ```bash
-# Monitor capacity during deployment
+# Controleer capaciteit tijdens implementatie
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Controleer implementatiestatus
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Controleer huidig resourcegebruik
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -712,19 +719,19 @@ hooks:
 ## Best Practices
 
 1. **Voer altijd capaciteitscontroles uit** voordat je naar nieuwe regio's implementeert
-2. **Monitor regelmatig quotagebruik** om verrassingen te voorkomen
+2. **Monitor quotagebruik regelmatig** om verrassingen te voorkomen
 3. **Plan voor groei** door toekomstige capaciteitsbehoeften te controleren
-4. **Gebruik kostenramingtools** om onverwachte kosten te vermijden
-5. **Documenteer capaciteitsvereisten** voor je team
+4. **Gebruik kostenramingtools** om onverwachte rekeningen te vermijden
+5. **Documenteer capaciteitsvereisten** voor jouw team
 6. **Automatiseer capaciteitsvalidatie** in CI/CD-pijplijnen
 7. **Houd rekening met regionale failover** capaciteitsvereisten
 
 ## Volgende Stappen
 
-- [SKU Selectiegids](sku-selection.md) - Kies optimale servicetiers
+- [SKU Selectie Gids](sku-selection.md) - Kies optimale servicetiers
 - [Pre-flight Controles](preflight-checks.md) - Geautomatiseerde validatiescripts
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Snelle referentiecommando's
-- [Glossary](../../resources/glossary.md) - Termen en definities
+- [Glossarium](../../resources/glossary.md) - Termen en definities
 
 ## Aanvullende Bronnen
 
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

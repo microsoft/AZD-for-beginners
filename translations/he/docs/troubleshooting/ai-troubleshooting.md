@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-18T07:12:32+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-21T17:31:42+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "he"
 }
 -->
-# מדריך פתרון בעיות ספציפי ל-AI
+# מדריך פתרון תקלות ייעודי ל-AI
 
-**ניווט בין פרקים:**
+**ניווט פרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 7 - פתרון בעיות וניפוי שגיאות
-- **⬅️ קודם**: [מדריך ניפוי שגיאות](debugging.md)
-- **➡️ פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../ai-foundry/production-ai-practices.md)
-- **🤖 קשור**: [פרק 2: פיתוח מבוסס AI](../ai-foundry/azure-ai-foundry-integration.md)
+- **📖 פרק נוכחי**: פרק 7 - פתרון תקלות וניפוי באגים
+- **⬅️ קודם**: [מדריך ניפוי באגים](debugging.md)
+- **➡️ פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../microsoft-foundry/production-ai-practices.md)
+- **🤖 קשור**: [פרק 2: פיתוח מונחה AI](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**קודם:** [דפוסי AI בייצור](../ai-foundry/production-ai-practices.md) | **הבא:** [התחלת עבודה עם AZD](../getting-started/README.md)
+**קודם:** [דפוסי AI בייצור](../microsoft-foundry/production-ai-practices.md) | **הבא:** [התחלה עם AZD](../getting-started/README.md)
 
-מדריך פתרון בעיות מקיף זה מתמקד בבעיות נפוצות בעת פריסת פתרונות AI עם AZD, ומספק פתרונות וטכניקות ניפוי שגיאות ספציפיות לשירותי Azure AI.
+מדריך פתרון תקלות מקיף זה מתמקד בבעיות נפוצות בעת פריסת פתרונות AI עם AZD, ומספק פתרונות וטכניקות ניפוי באגים ייחודיות לשירותי Azure AI.
 
 ## תוכן עניינים
 
@@ -27,9 +27,9 @@ CO_OP_TRANSLATOR_METADATA:
 - [בעיות בפריסת אפליקציות קונטיינר](../../../../docs/troubleshooting)
 - [שגיאות אימות והרשאות](../../../../docs/troubleshooting)
 - [כשלי פריסת מודלים](../../../../docs/troubleshooting)
-- [בעיות ביצועים וסקיילינג](../../../../docs/troubleshooting)
+- [בעיות ביצועים וסקלביליות](../../../../docs/troubleshooting)
 - [ניהול עלויות ומכסה](../../../../docs/troubleshooting)
-- [כלי וטכניקות ניפוי שגיאות](../../../../docs/troubleshooting)
+- [כלי וטכניקות ניפוי באגים](../../../../docs/troubleshooting)
 
 ## בעיות בשירות Azure OpenAI
 
@@ -42,21 +42,21 @@ Error: The requested resource type is not available in the location 'westus'
 
 **גורמים:**
 - שירות Azure OpenAI אינו זמין באזור שנבחר
-- מכסה אזורית מוצתה
+- מכסה אזלה באזורים מועדפים
 - מגבלות קיבולת אזורית
 
 **פתרונות:**
 
 1. **בדיקת זמינות אזורית:**
 ```bash
-# List available regions for OpenAI
+# רשימת אזורים זמינים עבור OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
   --output table
 ```
 
-2. **עדכון הגדרות AZD:**
+2. **עדכון תצורת AZD:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -79,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### בעיה: מכסת פריסת מודלים מוצתה
+### בעיה: מכסת פריסת מודלים חרגה
 
 **תסמינים:**
 ```
@@ -90,7 +90,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **בדיקת מכסה נוכחית:**
 ```bash
-# Check quota usage
+# בדוק את השימוש במכסה
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -98,7 +98,7 @@ az cognitiveservices usage list \
 
 2. **בקשת הגדלת מכסה:**
 ```bash
-# Submit quota increase request
+# שלח בקשה להגדלת מכסה
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -106,7 +106,7 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **אופטימיזציה של קיבולת מודלים:**
+3. **אופטימיזציה של קיבולת המודל:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -135,13 +135,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **שימוש בגרסת API נתמכת:**
 ```python
-# Use latest supported version
+# השתמש בגרסה הנתמכת האחרונה
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **בדיקת תאימות גרסת API:**
 ```bash
-# List supported API versions
+# רשימת גרסאות API נתמכות
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -149,7 +149,7 @@ az rest --method get \
 
 ## בעיות בחיפוש Azure AI
 
-### בעיה: רמת תמחור שירות החיפוש אינה מספקת
+### בעיה: רמת תמחור של שירות החיפוש אינה מספקת
 
 **תסמינים:**
 ```
@@ -158,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **פתרונות:**
 
-1. **שדרוג רמת תמחור:**
+1. **שדרוג רמת התמחור:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -201,15 +201,15 @@ Error: Cannot create index, insufficient permissions
 
 1. **אימות מפתחות שירות החיפוש:**
 ```bash
-# Get search service admin key
+# קבל מפתח מנהל שירות חיפוש
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
 ```
 
-2. **בדיקת סכמת אינדקס:**
+2. **בדיקת סכמת האינדקס:**
 ```python
-# Validate index schema
+# אימות סכמת אינדקס
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -284,7 +284,7 @@ azure-cosmos==4.5.1
 
 3. **הוספת בדיקת בריאות:**
 ```python
-# main.py - Add health check endpoint
+# main.py - הוסף נקודת קצה לבדיקת בריאות
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -303,7 +303,7 @@ Error: Container failed to start within timeout period
 
 **פתרונות:**
 
-1. **הגדלת זמן אתחול:**
+1. **הגדלת זמן האתחול:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **אופטימיזציה של טעינת מודלים:**
 ```python
-# Lazy load models to reduce startup time
+# טען מודלים באופן עצל כדי להפחית את זמן ההפעלה
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,15 +352,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # אתחל את לקוח הבינה המלאכותית כאן
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # הפעלה
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # כיבוי
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -379,7 +379,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 1. **אימות הקצאות תפקידים:**
 ```bash
-# Check current role assignments
+# בדוק את הקצאות התפקיד הנוכחיות
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -404,7 +404,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **בדיקת אימות:**
 ```python
-# Test managed identity authentication
+# בדוק אימות זהות מנוהלת
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -426,7 +426,7 @@ Error: The user, group or application does not have secrets get permission
 
 **פתרונות:**
 
-1. **מתן הרשאות ל-Key Vault:**
+1. **הענקת הרשאות ל-Key Vault:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -471,7 +471,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **בדיקת מודלים זמינים:**
 ```bash
-# List available models
+# רשימת מודלים זמינים
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -510,7 +510,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **אימות מודל לפני פריסה:**
 ```python
-# Pre-deployment model validation
+# אימות מודל לפני פריסה
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -530,20 +530,20 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## בעיות ביצועים וסקיילינג
+## בעיות ביצועים וסקלביליות
 
-### בעיה: תגובות עם זמן אחזור גבוה
+### בעיה: זמני תגובה גבוהים
 
 **תסמינים:**
 - זמני תגובה > 30 שניות
-- שגיאות זמן קצוב
+- שגיאות Timeout
 - חוויית משתמש ירודה
 
 **פתרונות:**
 
 1. **יישום מגבלות זמן לבקשות:**
 ```python
-# Configure proper timeouts
+# הגדר פסקי זמן מתאימים
 import httpx
 
 client = httpx.AsyncClient(
@@ -556,9 +556,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **הוספת מטמון תגובות:**
+2. **הוספת שמירת תגובות במטמון:**
 ```python
-# Redis cache for responses
+# מטמון Redis לתגובות
 import redis.asyncio as redis
 import json
 
@@ -576,7 +576,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **הגדרת סקיילינג אוטומטי:**
+3. **הגדרת סקלביליות אוטומטית:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -610,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### בעיה: שגיאות זיכרון
+### בעיה: שגיאות זיכרון אזל
 
 **תסמינים:**
 ```
@@ -640,7 +640,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **אופטימיזציה של שימוש בזיכרון:**
 ```python
-# Memory-efficient model handling
+# טיפול יעיל בזיכרון במודל
 import gc
 import psutil
 
@@ -650,14 +650,14 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # בדוק שימוש בזיכרון לפני עיבוד
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # הכרח איסוף זבל
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # נקה לאחר עיבוד
         gc.collect()
         return result
 ```
@@ -668,14 +668,14 @@ class MemoryOptimizedAI:
 
 **תסמינים:**
 - חשבון Azure גבוה מהצפוי
-- שימוש בטוקנים עולה על הערכות
+- שימוש בטוקנים חורג מהערכות
 - התראות תקציב מופעלות
 
 **פתרונות:**
 
-1. **יישום בקרות עלויות:**
+1. **יישום בקרות עלות:**
 ```python
-# Token usage tracking
+# מעקב אחר שימוש באסימונים
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -692,7 +692,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **הגדרת התראות עלויות:**
+2. **הגדרת התראות עלות:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -719,11 +719,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **אופטימיזציה של בחירת מודלים:**
 ```python
-# Cost-aware model selection
+# בחירת מודל מודעת לעלות
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # לכל 1K טוקנים
+    'gpt-4': 0.03,          # לכל 1K טוקנים
+    'gpt-35-turbo': 0.0015  # לכל 1K טוקנים
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -736,32 +736,32 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4'
 ```
 
-## כלי וטכניקות ניפוי שגיאות
+## כלי וטכניקות ניפוי באגים
 
-### פקודות ניפוי שגיאות של AZD
+### פקודות ניפוי באגים של AZD
 
 ```bash
-# Enable verbose logging
+# הפעל רישום מפורט
 azd up --debug
 
-# Check deployment status
+# בדוק את מצב הפריסה
 azd show
 
-# View deployment logs
+# הצג יומני פריסה
 azd logs --follow
 
-# Check environment variables
+# בדוק משתני סביבה
 azd env get-values
 ```
 
-### ניפוי שגיאות באפליקציות
+### ניפוי באגים באפליקציות
 
-1. **לוגים מובנים:**
+1. **רישום מובנה:**
 ```python
 import logging
 import json
 
-# Configure structured logging for AI applications
+# הגדר יומן מובנה עבור יישומי AI
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -780,14 +780,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **נקודות בדיקת בריאות:**
+2. **נקודות קצה לבדיקת בריאות:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # בדוק את חיבור OpenAI
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -795,7 +795,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Check Search service
+    # בדוק את שירות החיפוש
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -843,37 +843,39 @@ def monitor_performance(func):
 ## קודי שגיאה נפוצים ופתרונות
 
 | קוד שגיאה | תיאור | פתרון |
-|-----------|--------|-------|
-| 401 | לא מורשה | בדיקת מפתחות API והגדרות זהות מנוהלת |
+|------------|-------------|----------|
+| 401 | לא מורשה | בדיקת מפתחות API ותצורת זהות מנוהלת |
 | 403 | אסור | אימות הקצאות תפקידים ב-RBAC |
 | 429 | מגבלת קצב | יישום לוגיקת ניסיונות חוזרים עם backoff אקספוננציאלי |
-| 500 | שגיאת שרת פנימית | בדיקת סטטוס פריסת מודל ולוגים |
-| 503 | שירות לא זמין | אימות בריאות השירות וזמינות אזורית |
+| 500 | שגיאת שרת פנימית | בדיקת סטטוס פריסת מודל ורישומים |
+| 503 | שירות אינו זמין | אימות בריאות השירות וזמינות אזורית |
 
-## צעדים הבאים
+## שלבים הבאים
 
-1. **סקירת [מדריך פריסת מודלים AI](ai-model-deployment.md)** עבור שיטות עבודה מומלצות לפריסה
-2. **השלמת [דפוסי AI בייצור](production-ai-practices.md)** עבור פתרונות מוכנים לארגונים
-3. **הצטרפות ל-[Discord של Azure AI Foundry](https://aka.ms/foundry/discord)** לקבלת תמיכה קהילתית
-4. **הגשת בעיות** ל-[מאגר GitHub של AZD](https://github.com/Azure/azure-dev) עבור בעיות ספציפיות ל-AZD
+1. **עיון ב-[מדריך פריסת מודלים של AI](ai-model-deployment.md)** להנחיות פריסה מיטביות
+2. **השלמת [דפוסי AI בייצור](production-ai-practices.md)** לפתרונות מוכנים לארגונים
+3. **הצטרפות ל-[Discord של Microsoft Foundry](https://aka.ms/foundry/discord)** לתמיכה קהילתית
+4. **הגשת בעיות** ל-[מאגר GitHub של AZD](https://github.com/Azure/azure-dev) לבעיות ייחודיות ל-AZD
 
 ## משאבים
 
-- [פתרון בעיות בשירות Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [פתרון בעיות באפליקציות קונטיינר](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [פתרון בעיות בחיפוש Azure AI](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [פתרון תקלות בשירות Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [פתרון תקלות באפליקציות קונטיינר](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [פתרון תקלות בחיפוש Azure AI](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
-**ניווט בין פרקים:**
+**ניווט פרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 7 - פתרון בעיות וניפוי שגיאות
-- **⬅️ קודם**: [מדריך ניפוי שגיאות](debugging.md)
-- **➡️ פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../ai-foundry/production-ai-practices.md)
-- **🤖 קשור**: [פרק 2: פיתוח מבוסס AI](../ai-foundry/azure-ai-foundry-integration.md)
-- [פתרון בעיות CLI של Azure Developer](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📖 פרק נוכחי**: פרק 7 - פתרון תקלות וניפוי באגים
+- **⬅️ קודם**: [מדריך ניפוי באגים](debugging.md)
+- **➡️ פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../microsoft-foundry/production-ai-practices.md)
+- **🤖 קשור**: [פרק 2: פיתוח מונחה AI](../microsoft-foundry/microsoft-foundry-integration.md)
+- [פתרון תקלות ב-Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**הצהרת אחריות**:  
+מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. אנו לא נושאים באחריות לכל אי הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

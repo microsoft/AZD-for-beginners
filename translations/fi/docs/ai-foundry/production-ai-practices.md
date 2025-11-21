@@ -1,40 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T06:32:44+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-21T15:57:14+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "fi"
 }
 -->
-# Tuotantovalmiiden AI-työkuormien parhaat käytännöt AZD:n kanssa
+# Tuotantotason tekoälytyökuormien parhaat käytännöt AZD:llä
 
 **Luvun navigointi:**
-- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 8 - Tuotanto- ja yrityskäytännöt
+- **📚 Kurssin aloitus**: [AZD aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 8 - Tuotanto- ja yritysmallit
 - **⬅️ Edellinen luku**: [Luku 7: Vianetsintä](../troubleshooting/debugging.md)
-- **⬅️ Myös liittyvä**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Kurssi valmis**: [AZD Aloittelijoille](../../README.md)
+- **⬅️ Myös aiheeseen liittyvä**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurssi valmis**: [AZD aloittelijoille](../../README.md)
 
 ## Yleiskatsaus
 
-Tämä opas tarjoaa kattavat parhaat käytännöt tuotantovalmiiden AI-työkuormien käyttöönottoon Azure Developer CLI:n (AZD) avulla. Käytännöt perustuvat Azure AI Foundry Discord -yhteisön palautteeseen ja todellisiin asiakasprojekteihin, ja ne käsittelevät yleisimpiä haasteita tuotannon AI-järjestelmissä.
+Tämä opas tarjoaa kattavat parhaat käytännöt tuotantovalmiiden tekoälytyökuormien käyttöönottoon Azure Developer CLI:n (AZD) avulla. Microsoft Foundry Discord -yhteisön palautteen ja todellisten asiakasprojektien perusteella nämä käytännöt käsittelevät yleisimpiä haasteita tuotantotason tekoälyjärjestelmissä.
 
 ## Keskeiset haasteet
 
 Yhteisökyselyn tulosten perusteella nämä ovat kehittäjien suurimmat haasteet:
 
-- **45 %** kamppailee monipalveluisten AI-järjestelmien käyttöönotossa
+- **45 %** kamppailee monipalveluisten tekoälyratkaisujen käyttöönotossa
 - **38 %** kohtaa ongelmia tunnusten ja salaisuuksien hallinnassa  
 - **35 %** pitää tuotantovalmiuden ja skaalautuvuuden saavuttamista vaikeana
 - **32 %** tarvitsee parempia kustannusten optimointistrategioita
-- **29 %** kaipaa parempaa seurantaa ja vianetsintää
+- **29 %** kaipaa parempaa valvontaa ja vianetsintää
 
-## Arkkitehtuurimallit tuotannon AI:lle
+## Arkkitehtuurimallit tuotantotason tekoälylle
 
-### Malli 1: Mikroservices AI-arkkitehtuuri
+### Malli 1: Mikroservice-pohjainen tekoälyarkkitehtuuri
 
-**Milloin käyttää**: Monimutkaiset AI-sovellukset, joissa on useita ominaisuuksia
+**Milloin käyttää**: Monimutkaiset tekoälysovellukset, joissa on useita toiminnallisuuksia
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -76,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Malli 2: Tapahtumapohjainen AI-prosessointi
+### Malli 2: Tapahtumapohjainen tekoälyn käsittely
 
-**Milloin käyttää**: Eräajot, asiakirjojen analyysi, asynkroniset työnkulut
+**Milloin käyttää**: Eräkäsittely, asiakirja-analyysi, asynkroniset työnkulut
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -130,7 +130,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 ### 1. Zero-Trust-tietoturvamalli
 
 **Toteutusstrategia**:
-- Ei palveluiden välistä viestintää ilman autentikointia
+- Ei palveluiden välistä viestintää ilman todennusta
 - Kaikki API-kutsut käyttävät hallittuja identiteettejä
 - Verkon eristäminen yksityisillä päätepisteillä
 - Vähimmäisoikeuksien käyttöoikeudet
@@ -253,7 +253,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. Automaattisen skaalauksen strategiat
 
-**Container Apps -automaattinen skaalaus**:
+**Container Apps -automaattiskaalaus**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -299,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. Välimuististrategiat
 
-**Redis-välimuisti AI-vastauksille**:
+**Redis Cache tekoälyvastauksille**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -327,7 +327,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Kuormituksen tasapainotus ja liikenteen hallinta
+### 3. Kuormantasapainotus ja liikenteen hallinta
 
 **Application Gateway ja WAF**:
 
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Ympäristökohtaiset konfiguraatiot**:
 
 ```bash
-# Development environment
+# Kehitysympäristö
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Tuotantoympäristö
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI-kustannusten hallinta**:
 
 ```typescript
-// Application-level token optimization
+// Sovellustason token-optimointi
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Katkaise konteksti, ei käyttäjän syötettä
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,15 +453,15 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Karkea arvio: 1 token ≈ 4 merkkiä
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Seuranta ja havainnointi
+## Valvonta ja havainnointi
 
-### 1. Kattavat Application Insights -näkymät
+### 1. Kattavat Application Insights -toiminnot
 
 ```bicep
 // Application Insights with advanced features
@@ -506,9 +506,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-spesifinen seuranta
+### 2. Tekoälykohtainen valvonta
 
-**Mukautetut AI-metriikkapaneelit**:
+**Mukautetut kojelaudat tekoälymetriikoille**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Terveystarkastukset ja käyttöaikaseuranta
+### 3. Terveystarkastukset ja käytettävyysvalvonta
 
 ```bicep
 // Application Insights availability tests
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Tarkista, että kaikki vaaditut palvelut ovat käynnissä
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Vahvista OpenAI-mallien käyttöönotot
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Testaa AI-palvelun yhteys
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -845,45 +845,45 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Yksityiset päätepisteet konfiguroitu
 - [ ] Verkkoturvallisuusryhmät toteutettu
 - [ ] RBAC vähimmäisoikeuksilla
-- [ ] WAF aktivoitu julkisilla päätepisteillä
+- [ ] WAF käytössä julkisilla päätepisteillä
 
 ### Suorituskyky ✅
-- [ ] Automaattinen skaalaus konfiguroitu
+- [ ] Automaattiskaalaus konfiguroitu
 - [ ] Välimuisti toteutettu
-- [ ] Kuormituksen tasapainotus asetettu
+- [ ] Kuormantasapainotus asetettu
 - [ ] CDN staattiselle sisällölle
 - [ ] Tietokantayhteyksien poolaus
 - [ ] Tokenien käytön optimointi
 
-### Seuranta ✅
+### Valvonta ✅
 - [ ] Application Insights konfiguroitu
 - [ ] Mukautetut metriikat määritelty
 - [ ] Hälytyssäännöt asetettu
-- [ ] Paneeli luotu
+- [ ] Kojelauta luotu
 - [ ] Terveystarkastukset toteutettu
-- [ ] Lokien säilytyspolitiikat
+- [ ] Lokien säilytyskäytännöt
 
 ### Luotettavuus ✅
 - [ ] Monialueinen käyttöönotto
 - [ ] Varmuuskopiointi- ja palautussuunnitelma
-- [ ] Piirikatkaisijat toteutettu
-- [ ] Uudelleenkokeilupolitiikat konfiguroitu
-- [ ] Arvokas heikentyminen
+- [ ] Piirikytkimet toteutettu
+- [ ] Uudelleenkäynnistyskäytännöt konfiguroitu
+- [ ] Hallittu heikennys
 - [ ] Terveystarkastuspäätepisteet
 
 ### Kustannusten hallinta ✅
 - [ ] Budjettihälytykset konfiguroitu
 - [ ] Resurssien oikea mitoitus
-- [ ] Kehitys/testialennukset käytössä
+- [ ] Kehitys-/testialennukset käytössä
 - [ ] Varatut instanssit ostettu
-- [ ] Kustannusten seuranta-paneeli
+- [ ] Kustannusten seurantakojelauta
 - [ ] Säännölliset kustannuskatsaukset
 
-### Vaatimustenmukaisuus ✅
+### Säädöstenmukaisuus ✅
 - [ ] Tietojen sijaintivaatimukset täytetty
-- [ ] Auditointilokit aktivoitu
-- [ ] Vaatimustenmukaisuuskäytännöt sovellettu
-- [ ] Tietoturvan peruslinjat toteutettu
+- [ ] Auditointilokit käytössä
+- [ ] Säädöstenmukaisuuskäytännöt sovellettu
+- [ ] Tietoturvaperusteet toteutettu
 - [ ] Säännölliset tietoturva-arvioinnit
 - [ ] Tapahtumien hallintasuunnitelma
 
@@ -891,10 +891,10 @@ echo "Infrastructure validation completed successfully!"
 
 ### Tyypilliset tuotantomittarit
 
-| Mittari | Tavoite | Seuranta |
-|--------|--------|------------|
+| Mittari | Tavoite | Valvonta |
+|---------|---------|----------|
 | **Vasteaika** | < 2 sekuntia | Application Insights |
-| **Käytettävyys** | 99,9 % | Käyttöaikaseuranta |
+| **Käytettävyys** | 99,9 % | Käytettävyysvalvonta |
 | **Virheprosentti** | < 0,1 % | Sovelluslokit |
 | **Tokenien käyttö** | < $500/kuukausi | Kustannusten hallinta |
 | **Samanaikaiset käyttäjät** | 1000+ | Kuormitustestaus |
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Kuormitustestaus
 
 ```bash
-# Load testing script for AI applications
+# Kuormitustestausskripti tekoälysovelluksille
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,43 +913,45 @@ python scripts/load_test.py \
 
 ## 🤝 Yhteisön parhaat käytännöt
 
-Azure AI Foundry Discord -yhteisön palautteen perusteella:
+Microsoft Foundry Discord -yhteisön palautteen perusteella:
 
 ### Yhteisön tärkeimmät suositukset:
 
-1. **Aloita pienestä, skaalaa vähitellen**: Käytä aluksi perus-SKU:ita ja skaalaa käyttöön perustuen
-2. **Seuraa kaikkea**: Ota kattava seuranta käyttöön alusta alkaen
+1. **Aloita pienestä, skaalaa vähitellen**: Käytä aluksi perus-SKU:ita ja skaalaa todellisen käytön perusteella
+2. **Valvo kaikkea**: Ota kattava valvonta käyttöön alusta alkaen
 3. **Automatisoi tietoturva**: Käytä infrastruktuuria koodina tietoturvan johdonmukaisuuden varmistamiseksi
-4. **Testaa perusteellisesti**: Sisällytä AI-spesifinen testaus putkistoon
+4. **Testaa huolellisesti**: Sisällytä tekoälykohtainen testaus putkistoon
 5. **Suunnittele kustannukset**: Seuraa tokenien käyttöä ja aseta budjettihälytykset ajoissa
 
 ### Yleiset sudenkuopat, joita kannattaa välttää:
 
 - ❌ API-avainten kovakoodaus koodiin
-- ❌ Seurannan laiminlyönti
-- ❌ Kustannusten optimoinnin sivuuttaminen
+- ❌ Valvonnan laiminlyönti
+- ❌ Kustannusten optimoinnin huomiotta jättäminen
 - ❌ Vikatilanteiden testaamatta jättäminen
 - ❌ Käyttöönotto ilman terveystarkastuksia
 
 ## Lisäresurssit
 
-- **Azure Well-Architected Framework**: [AI-työkuormien ohjeet](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry -dokumentaatio**: [Viralliset dokumentit](https://learn.microsoft.com/azure/ai-studio/)
-- **Yhteisön mallipohjat**: [Azure Samples](https://github.com/Azure-Samples)
+- **Azure Well-Architected Framework**: [Tekoälytyökuormien ohjeet](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry -dokumentaatio**: [Viralliset dokumentit](https://learn.microsoft.com/azure/ai-studio/)
+- **Yhteisön mallit**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord-yhteisö**: [#Azure-kanava](https://discord.gg/microsoft-azure)
 
 ---
 
 **Luvun navigointi:**
-- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 8 - Tuotanto- ja yrityskäytännöt
+- **📚 Kurssin aloitus**: [AZD aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 8 - Tuotanto- ja yritysmallit
 - **⬅️ Edellinen luku**: [Luku 7: Vianetsintä](../troubleshooting/debugging.md)
-- **⬅️ Myös liittyvä**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Kurssi valmis**: [AZD Aloittelijoille](../../README.md)
+- **⬅️ Myös aiheeseen liittyvä**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kurssi valmis**: [AZD aloittelijoille](../../README.md)
 
-**Muista**: Tuotannon AI-työkuormat vaativat huolellista suunnittelua, seurantaa ja jatkuvaa optimointia. Aloita näillä malleilla ja mukauta ne omiin tarpeisiisi.
+**Muista**: Tuotantotason tekoälytyökuormat vaativat huolellista suunnittelua, valvontaa ja jatkuvaa optimointia. Aloita näillä malleilla ja mukauta niitä omiin tarpeisiisi.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty AI-käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

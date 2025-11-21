@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T07:08:29+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-21T17:33:18+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "he"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 **ניווט פרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 8 - דפוסי ייצור וארגונים
+- **📖 פרק נוכחי**: פרק 8 - תבניות לייצור ולארגונים
 - **⬅️ פרק קודם**: [פרק 7: פתרון בעיות](../troubleshooting/debugging.md)
-- **⬅️ גם קשור**: [מעבדת סדנת AI](ai-workshop-lab.md)
+- **⬅️ קשור גם**: [מעבדת סדנת AI](ai-workshop-lab.md)
 - **🎯 סיום הקורס**: [AZD למתחילים](../../README.md)
 
 ## סקירה כללית
 
-מדריך זה מספק שיטות עבודה מומלצות מקיפות לפריסת עומסי עבודה של AI מוכנים לייצור באמצעות Azure Developer CLI (AZD). בהתבסס על משוב מקהילת Discord של Azure AI Foundry ועל פריסות לקוחות בעולם האמיתי, שיטות אלו מתמודדות עם האתגרים הנפוצים ביותר במערכות AI בייצור.
+מדריך זה מספק שיטות עבודה מומלצות לפריסת עומסי עבודה של AI מוכנים לייצור באמצעות Azure Developer CLI (AZD). בהתבסס על משוב מקהילת Microsoft Foundry ב-Discord ועל פריסות לקוחות בעולם האמיתי, שיטות אלו מתמודדות עם האתגרים הנפוצים ביותר במערכות AI בייצור.
 
 ## אתגרים מרכזיים שנדונו
 
@@ -27,12 +27,12 @@ CO_OP_TRANSLATOR_METADATA:
 - **45%** מתקשים בפריסות AI מרובות שירותים
 - **38%** נתקלים בבעיות בניהול אישורים וסודות  
 - **35%** מתקשים בהכנה לייצור ובסקיילינג
-- **32%** זקוקים לאסטרטגיות אופטימיזציה עלויות טובות יותר
+- **32%** זקוקים לאסטרטגיות טובות יותר לאופטימיזציית עלויות
 - **29%** דורשים שיפור במעקב ופתרון בעיות
 
-## דפוסי ארכיטקטורה ל-AI בייצור
+## תבניות ארכיטקטורה ל-AI בייצור
 
-### דפוס 1: ארכיטקטורת AI מבוססת מיקרו-שירותים
+### תבנית 1: ארכיטקטורת AI מבוססת מיקרו-שירותים
 
 **מתי להשתמש**: יישומי AI מורכבים עם יכולות מרובות
 
@@ -76,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### דפוס 2: עיבוד AI מבוסס אירועים
+### תבנית 2: עיבוד AI מונחה אירועים
 
-**מתי להשתמש**: עיבוד אצווה, ניתוח מסמכים, זרימות עבודה אסינכרוניות
+**מתי להשתמש**: עיבוד באצווה, ניתוח מסמכים, זרימות עבודה אסינכרוניות
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -156,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. ניהול סודות מאובטח
 
-**דפוס אינטגרציה עם Key Vault**:
+**תבנית אינטגרציה עם Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -365,14 +365,14 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 אופטימיזציה עלויות
+## 💰 אופטימיזציית עלויות
 
 ### 1. התאמת משאבים
 
-**תצורות ספציפיות לסביבה**:
+**תצורות מותאמות לסביבות שונות**:
 
 ```bash
-# Development environment
+# סביבת פיתוח
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# סביבת ייצור
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -430,12 +430,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. אופטימיזציה לשימוש בטוקנים
+### 3. אופטימיזציית שימוש בטוקנים
 
 **ניהול עלויות OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// אופטימיזציה של אסימונים ברמת היישום
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // לקצר את ההקשר, לא את קלט המשתמש
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // הערכה גסה: אסימון אחד ≈ 4 תווים
     return Math.ceil(text.length / 4);
   }
 }
@@ -461,7 +461,7 @@ class TokenOptimizer {
 
 ## מעקב וניטור
 
-### 1. תובנות אפליקציה מקיפות
+### 1. Application Insights מקיף
 
 ```bicep
 // Application Insights with advanced features
@@ -506,7 +506,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. מעקב ספציפי ל-AI
+### 2. ניטור ייעודי ל-AI
 
 **לוחות מחוונים מותאמים למטריקות AI**:
 
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. בדיקות בריאות ומעקב אחר זמן פעילות
+### 3. בדיקות בריאות ומעקב אחר זמן פעולה
 
 ```bicep
 // Application Insights availability tests
@@ -608,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## התאוששות מאסון וזמינות גבוהה
 
-### 1. פריסה רב-אזורית
+### 1. פריסה מרובת אזורים
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -723,7 +723,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 
 ## אינטגרציה עם DevOps ו-CI/CD
 
-### 1. זרימת עבודה עם GitHub Actions
+### 1. תהליך עבודה עם GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# בדוק אם כל השירותים הנדרשים פועלים
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# אמת פריסות מודלים של OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,14 +830,14 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# בדוק את קישוריות שירות ה-AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## רשימת בדיקות מוכנות לייצור
+## רשימת בדיקות למוכנות לייצור
 
 ### אבטחה ✅
 - [ ] כל השירותים משתמשים בזהויות מנוהלות
@@ -852,11 +852,11 @@ echo "Infrastructure validation completed successfully!"
 - [ ] קאשינג מיושם
 - [ ] איזון עומסים מוגדר
 - [ ] CDN לתוכן סטטי
-- [ ] איגוד חיבורים למסד נתונים
-- [ ] אופטימיזציה לשימוש בטוקנים
+- [ ] pooling לחיבורי מסד נתונים
+- [ ] אופטימיזציית שימוש בטוקנים
 
-### מעקב ✅
-- [ ] תובנות אפליקציה מוגדרות
+### ניטור ✅
+- [ ] Application Insights מוגדר
 - [ ] מטריקות מותאמות מוגדרות
 - [ ] כללי התראה מוגדרים
 - [ ] לוח מחוונים נוצר
@@ -864,11 +864,11 @@ echo "Infrastructure validation completed successfully!"
 - [ ] מדיניות שמירת לוגים
 
 ### אמינות ✅
-- [ ] פריסה רב-אזורית
+- [ ] פריסה מרובת אזורים
 - [ ] תוכנית גיבוי ושחזור
-- [ ] מעגלי הגנה מיושמים
+- [ ] Circuit breakers מיושמים
 - [ ] מדיניות ניסיונות חוזרים מוגדרת
-- [ ] התדרדרות הדרגתית
+- [ ] התדרדרות חיננית
 - [ ] נקודות קצה לבדיקות בריאות
 
 ### ניהול עלויות ✅
@@ -891,10 +891,10 @@ echo "Infrastructure validation completed successfully!"
 
 ### מדדים טיפוסיים לייצור
 
-| מדד | יעד | מעקב |
+| מדד | יעד | ניטור |
 |--------|--------|------------|
-| **זמן תגובה** | < 2 שניות | תובנות אפליקציה |
-| **זמינות** | 99.9% | מעקב אחר זמן פעילות |
+| **זמן תגובה** | < 2 שניות | Application Insights |
+| **זמינות** | 99.9% | ניטור זמן פעולה |
 | **שיעור שגיאות** | < 0.1% | לוגים של אפליקציה |
 | **שימוש בטוקנים** | < $500 לחודש | ניהול עלויות |
 | **משתמשים בו-זמנית** | 1000+ | בדיקות עומס |
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### בדיקות עומס
 
 ```bash
-# Load testing script for AI applications
+# סקריפט בדיקות עומס ליישומי AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,43 +913,45 @@ python scripts/load_test.py \
 
 ## 🤝 שיטות עבודה מומלצות מהקהילה
 
-בהתבסס על משוב מקהילת Discord של Azure AI Foundry:
+בהתבסס על משוב מקהילת Microsoft Foundry ב-Discord:
 
 ### המלצות מובילות מהקהילה:
 
 1. **להתחיל בקטן, להתרחב בהדרגה**: להתחיל עם SKUs בסיסיים ולהתרחב בהתאם לשימוש בפועל
-2. **לעקוב אחרי הכל**: להגדיר מעקב מקיף מהיום הראשון
+2. **לנטר הכל**: להגדיר ניטור מקיף מהיום הראשון
 3. **לאבטח באופן אוטומטי**: להשתמש בתשתית כקוד לאבטחה עקבית
-4. **לבדוק ביסודיות**: לכלול בדיקות ספציפיות ל-AI בצינור העבודה
-5. **לתכנן עלויות מראש**: לעקוב אחרי שימוש בטוקנים ולהגדיר התראות תקציב מוקדם
+4. **לבדוק ביסודיות**: לכלול בדיקות ייעודיות ל-AI בצנרת
+5. **לתכנן עלויות**: לנטר שימוש בטוקנים ולהגדיר התראות תקציב מוקדם
 
 ### טעויות נפוצות שיש להימנע מהן:
 
 - ❌ קידוד קשיח של מפתחות API בקוד
-- ❌ אי הגדרת מעקב מתאים
-- ❌ התעלמות מאופטימיזציה עלויות
+- ❌ אי הגדרת ניטור מתאים
+- ❌ התעלמות מאופטימיזציית עלויות
 - ❌ אי בדיקת תרחישי כשל
 - ❌ פריסה ללא בדיקות בריאות
 
 ## משאבים נוספים
 
-- **מסגרת ארכיטקטורה טובה של Azure**: [הנחיות לעומסי עבודה של AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **תיעוד Azure AI Foundry**: [תיעוד רשמי](https://learn.microsoft.com/azure/ai-studio/)
-- **תבניות קהילתיות**: [דוגמאות Azure](https://github.com/Azure-Samples)
-- **קהילת Discord**: [#ערוץ Azure](https://discord.gg/microsoft-azure)
+- **מסגרת Azure Well-Architected**: [הנחיות לעומסי עבודה של AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **תיעוד Microsoft Foundry**: [תיעוד רשמי](https://learn.microsoft.com/azure/ai-studio/)
+- **תבניות קהילה**: [דוגמאות Azure](https://github.com/Azure-Samples)
+- **קהילת Discord**: [ערוץ #Azure](https://discord.gg/microsoft-azure)
 
 ---
 
 **ניווט פרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 8 - דפוסי ייצור וארגונים
+- **📖 פרק נוכחי**: פרק 8 - תבניות לייצור ולארגונים
 - **⬅️ פרק קודם**: [פרק 7: פתרון בעיות](../troubleshooting/debugging.md)
-- **⬅️ גם קשור**: [מעבדת סדנת AI](ai-workshop-lab.md)
+- **⬅️ קשור גם**: [מעבדת סדנת AI](ai-workshop-lab.md)
 - **🎆 סיום הקורס**: [AZD למתחילים](../../README.md)
 
-**זכרו**: עומסי עבודה של AI בייצור דורשים תכנון קפדני, מעקב ואופטימיזציה מתמשכת. התחילו עם דפוסים אלו והתאימו אותם לדרישות הספציפיות שלכם.
+**זכרו**: עומסי עבודה של AI בייצור דורשים תכנון קפדני, ניטור ואופטימיזציה מתמשכת. התחילו עם התבניות הללו והתאימו אותן לדרישות הספציפיות שלכם.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

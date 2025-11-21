@@ -1,72 +1,78 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:33:54+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-21T17:22:15+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "he"
 }
 -->
-# תכנון קיבולת: הבנת מכסות ומגבלות ב-Azure
+# תכנון קיבולת - זמינות ומשאבים ב-Azure
 
-## הקדמה
+**ניווט פרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 6 - אימות ותכנון לפני פריסה
+- **⬅️ פרק קודם**: [פרק 5: פתרונות AI מרובי סוכנים](../../examples/retail-scenario.md)
+- **➡️ הבא**: [בחירת SKU](sku-selection.md)
+- **🚀 פרק הבא**: [פרק 7: פתרון בעיות](../troubleshooting/common-issues.md)
 
-מדריך מקיף זה יעזור לכם לתכנן ולבדוק את קיבולת המשאבים ב-Azure לפני פריסה באמצעות Azure Developer CLI. למדו להעריך מכסות, זמינות ומגבלות אזוריות כדי להבטיח פריסות מוצלחות תוך אופטימיזציה של עלויות וביצועים. שלטו בטכניקות תכנון קיבולת עבור ארכיטקטורות יישומים שונות ותסריטי סקיילינג.
+## מבוא
+
+מדריך מקיף זה יעזור לכם לתכנן ולאמת את קיבולת המשאבים ב-Azure לפני הפריסה באמצעות Azure Developer CLI. תלמדו להעריך מכסות, זמינות ומגבלות אזוריות כדי להבטיח פריסות מוצלחות תוך אופטימיזציה של עלויות וביצועים. שלטו בטכניקות תכנון קיבולת עבור ארכיטקטורות יישומים שונות ותסריטי סקיילינג.
 
 ## מטרות למידה
 
-לאחר השלמת המדריך, תוכלו:
-- להבין את מכסות Azure, מגבלות ומגבלות זמינות אזוריות
-- לשלוט בטכניקות לבדיקה זמינות וקיבולת משאבים לפני פריסה
-- ליישם אסטרטגיות אוטומטיות לבדיקת קיבולת ומעקב
-- לעצב יישומים עם גודל משאבים נכון ושיקולי סקיילינג
-- ליישם אסטרטגיות אופטימיזציה עלויות באמצעות תכנון קיבולת חכם
+בסיום מדריך זה, תוכלו:
+- להבין את המכסות, המגבלות והמגבלות האזוריות של Azure
+- לשלוט בטכניקות לבדיקה של זמינות וקיבולת משאבים לפני פריסה
+- ליישם אסטרטגיות אוטומטיות לאימות ומעקב אחר קיבולת
+- לעצב יישומים עם התחשבות בגודל משאבים ובסקיילינג
+- ליישם אסטרטגיות אופטימיזציה של עלויות באמצעות תכנון קיבולת חכם
 - להגדיר התראות ומעקב לשימוש במכסות וזמינות משאבים
 
 ## תוצאות למידה
 
 בסיום, תוכלו:
-- להעריך ולבדוק דרישות קיבולת משאבים ב-Azure לפני פריסה
-- ליצור סקריפטים אוטומטיים לבדיקת קיבולת ומעקב אחר מכסות
-- לעצב ארכיטקטורות סקיילביליות תוך התחשבות במגבלות אזוריות ומנויים
+- להעריך ולאמת דרישות קיבולת משאבים ב-Azure לפני פריסה
+- ליצור סקריפטים אוטומטיים לבדיקה ומעקב אחר מכסות
+- לעצב ארכיטקטורות סקיילביליות המתחשבות במגבלות אזוריות ומנויים
 - ליישם אסטרטגיות גודל משאבים חסכוניות עבור סוגי עומסים שונים
-- להגדיר מעקב והתראות פרואקטיביות לבעיות הקשורות לקיבולת
-- לתכנן פריסות רב-אזוריות עם חלוקת קיבולת נכונה
+- להגדיר מעקב והתראות פרואקטיביות לבעיות קיבולת
+- לתכנן פריסות מרובות אזורים עם חלוקת קיבולת נכונה
 
 ## למה תכנון קיבולת חשוב
 
 לפני פריסת יישומים, עליכם לוודא:
 - **מכסות מספקות** למשאבים הנדרשים
 - **זמינות משאבים** באזור היעד שלכם
-- **זמינות רמות שירות** עבור סוג המנוי שלכם
-- **קיבולת רשת** לתנועה הצפויה
-- **אופטימיזציה עלויות** באמצעות גודל נכון
+- **זמינות שכבת שירות** עבור סוג המנוי שלכם
+- **קיבולת רשת** לתעבורה הצפויה
+- **אופטימיזציה של עלויות** באמצעות גודל נכון
 
 ## 📊 הבנת מכסות ומגבלות ב-Azure
 
 ### סוגי מגבלות
 1. **מכסות ברמת המנוי** - כמות משאבים מקסימלית לכל מנוי
 2. **מכסות אזוריות** - כמות משאבים מקסימלית לכל אזור
-3. **מגבלות ספציפיות למשאב** - מגבלות עבור סוגי משאבים ספציפיים
-4. **מגבלות רמות שירות** - מגבלות בהתאם לתוכנית השירות שלכם
+3. **מגבלות משאב ספציפיות** - מגבלות עבור סוגי משאבים בודדים
+4. **מגבלות שכבת שירות** - מגבלות בהתאם לתוכנית השירות שלכם
 
 ### מכסות משאבים נפוצות
 ```bash
-# Check current quota usage
+# בדוק את השימוש הנוכחי במכסה
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# בדוק מכסות משאבים ספציפיות
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-
 ## בדיקות קיבולת לפני פריסה
 
-### סקריפט בדיקת קיבולת אוטומטי
+### סקריפט אוטומטי לאימות קיבולת
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - אימות קיבולת Azure לפני פריסה
 
 set -e
 
@@ -77,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# פונקציה לבדוק שימוש במכסה
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -112,28 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# בדיקת מכסות משאבים שונות
+check_quota "compute" 4      # נדרשים 4 vCPUs
+check_quota "storage" 2      # נדרשים 2 חשבונות אחסון
+check_quota "network" 1      # נדרשת רשת וירטואלית אחת
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-
 ### בדיקות קיבולת ספציפיות לשירות
 
-#### קיבולת שירות אפליקציות
+#### קיבולת שירותי אפליקציות
 ```bash
-# Check App Service Plan availability
+# בדוק זמינות של תוכנית שירות אפליקציה
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # בדוק זמינות של SKUs באזור
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -141,32 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # הצע אזורים חלופיים
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # בדוק שימוש נוכחי
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# שימוש
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-
 #### קיבולת בסיסי נתונים
 ```bash
-# Check PostgreSQL capacity
+# בדוק את קיבולת PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # בדוק אם SKU זמין
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -175,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # הצג את ה-SKUs הזמינים
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -183,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# בדוק את קיבולת Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # בדוק את זמינות האזור
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # בדוק אם תמיכה בשרתים ללא שרת זמינה (אם נדרש)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -214,16 +218,15 @@ check_cosmos_capacity() {
 }
 ```
 
-
 #### קיבולת אפליקציות קונטיינר
 ```bash
-# Check Container Apps capacity
+# בדוק את קיבולת אפליקציות הקונטיינר
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # בדוק אם אפליקציות הקונטיינר זמינות באזור
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -231,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # בדוק את מספר הסביבות הנוכחי
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # לאפליקציות הקונטיינר יש מגבלה של 15 סביבות לכל אזור
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -246,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # הצג את האזורים הזמינים
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,12 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-
-## 📍 בדיקת זמינות אזורית
+## 📍 אימות זמינות אזורית
 
 ### זמינות שירות לפי אזור
 ```bash
-# Check service availability across regions
+# בדוק זמינות שירותים בכל האזורים
 check_service_availability() {
     local service=$1
     
@@ -286,19 +288,18 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# בדוק את כל השירותים
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-
 ### המלצות לבחירת אזור
 ```bash
-# Recommend optimal regions based on requirements
+# המלץ על אזורים אופטימליים בהתבסס על דרישות
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "עלות נמוכה" | "ביצועים" | "ציות"
     
     echo "Region recommendations for: $requirements"
     
@@ -325,23 +326,22 @@ recommend_region() {
 }
 ```
 
-
-## 💰 תכנון עלויות והערכה
+## 💰 תכנון והערכת עלויות
 
 ### הערכת עלויות משאבים
 ```bash
-# Estimate deployment costs
+# הערכת עלויות פריסה
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # יצירת קבוצת משאבים זמנית לצורך הערכה
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # פריסת תשתית במצב אימות
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -349,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # ניקוי קבוצת המשאבים הזמנית
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -361,10 +361,9 @@ estimate_costs() {
 }
 ```
 
-
-### המלצות לאופטימיזציה של SKU
+### המלצות לאופטימיזציית SKU
 ```bash
-# Recommend optimal SKUs based on requirements
+# המלץ על SKUs אופטימליים בהתבסס על דרישות
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -427,33 +426,32 @@ recommend_sku() {
 }
 ```
 
-
 ## 🚀 בדיקות אוטומטיות לפני פריסה
 
 ### סקריפט מקיף לפני פריסה
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - אימות מלא לפני פריסה
 
 set -e
 
-# Configuration
+# תצורה
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# צבעים לפלט
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # ללא צבע
 
-# Logging functions
+# פונקציות רישום
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# טען תצורה
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -473,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# בדיקה 1: אימות
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -483,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# בדיקה 2: זמינות אזורית
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -492,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# בדיקה 3: אימות מכסה
 log_info "Checking quota availability..."
 
-# vCPU quota
+# מכסת vCPU
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -509,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# מכסת חשבון אחסון
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -522,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# בדיקה 4: זמינות שירות
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -564,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# בדיקה 5: קיבולת רשת
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -578,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# בדיקה 6: אימות שמות משאבים
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -590,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# בדיקה 7: הערכת עלות
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -605,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# בדיקה 8: אימות תבנית
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -619,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# סיכום סופי
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -628,7 +626,6 @@ echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
-
 
 ### תבנית קובץ קונפיגורציה
 ```json
@@ -664,19 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-
 ## 📈 מעקב קיבולת במהלך פריסה
 
 ### מעקב קיבולת בזמן אמת
 ```bash
-# Monitor capacity during deployment
+# עקוב אחר הקיבולת במהלך הפריסה
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # בדוק את מצב הפריסה
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -689,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # בדוק את השימוש הנוכחי במשאבים
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -699,7 +695,6 @@ monitor_deployment_capacity() {
     done
 }
 ```
-
 
 ## 🔗 אינטגרציה עם AZD
 
@@ -721,27 +716,26 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-
 ## שיטות עבודה מומלצות
 
-1. **תמיד בצעו בדיקות קיבולת** לפני פריסה לאזורים חדשים
+1. **תמיד הריצו בדיקות קיבולת** לפני פריסה לאזורים חדשים
 2. **עקבו אחר שימוש במכסות באופן קבוע** כדי להימנע מהפתעות
 3. **תכננו לצמיחה** על ידי בדיקת צרכי קיבולת עתידיים
-4. **השתמשו בכלי הערכת עלויות** כדי להימנע מחשבונות גבוהים
+4. **השתמשו בכלי הערכת עלויות** כדי להימנע מהפתעות בחשבון
 5. **תעדו דרישות קיבולת** עבור הצוות שלכם
-6. **אוטומטו בדיקות קיבולת** בצינורות CI/CD
-7. **שקלו דרישות קיבולת למעבר אזורי** במקרה של כשל
+6. **אוטומטו את אימות הקיבולת** בצינורות CI/CD
+7. **שקלו דרישות קיבולת לגיבוי אזורי**
 
-## צעדים הבאים
+## שלבים הבאים
 
-- [מדריך בחירת SKU](sku-selection.md) - בחירת רמות שירות אופטימליות
-- [בדיקות לפני פריסה](preflight-checks.md) - סקריפטים אוטומטיים לבדיקה
+- [מדריך בחירת SKU](sku-selection.md) - בחירת שכבות שירות אופטימליות
+- [בדיקות לפני פריסה](preflight-checks.md) - סקריפטים לאימות אוטומטי
 - [דף עזר](../../resources/cheat-sheet.md) - פקודות עזר מהירות
 - [מילון מונחים](../../resources/glossary.md) - מונחים והגדרות
 
 ## משאבים נוספים
 
-- [מגבלות מנוי ב-Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [מגבלות מנוי Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [מחשבון תמחור Azure](https://azure.microsoft.com/pricing/calculator/)
 - [ניהול עלויות Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
 - [זמינות אזורית ב-Azure](https://azure.microsoft.com/global-infrastructure/services/)
@@ -755,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. למידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

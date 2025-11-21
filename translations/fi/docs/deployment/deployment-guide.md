@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-18T06:35:27+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-21T15:46:54+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "fi"
 }
@@ -10,7 +10,7 @@ CO_OP_TRANSLATOR_METADATA:
 # Käyttöönotto-opas - AZD-käyttöönottojen hallinta
 
 **Luvun navigointi:**
-- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📚 Kurssin etusivu**: [AZD aloittelijoille](../../README.md)
 - **📖 Nykyinen luku**: Luku 4 - Infrastruktuuri koodina & käyttöönotto
 - **⬅️ Edellinen luku**: [Luku 3: Konfigurointi](../getting-started/configuration.md)
 - **➡️ Seuraava**: [Resurssien provisiointi](provisioning.md)
@@ -18,77 +18,111 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Johdanto
 
-Tämä kattava opas käsittelee kaiken, mitä sinun tarvitsee tietää sovellusten käyttöönotosta Azure Developer CLI:n avulla, yksinkertaisista yhden komennon käyttöönotosta edistyneisiin tuotantotilanteisiin, joissa on mukautettuja koukkuja, useita ympäristöjä ja CI/CD-integraatio. Hallitse koko käyttöönoton elinkaari käytännön esimerkkien ja parhaiden käytäntöjen avulla.
+Tämä kattava opas kattaa kaiken, mitä sinun tarvitsee tietää sovellusten käyttöönotosta Azure Developer CLI:n avulla, yksinkertaisista yhden komennon käyttöönotosta edistyneisiin tuotantotilanteisiin, joissa on mukautettuja koukkuja, useita ympäristöjä ja CI/CD-integraatio. Hallitse koko käyttöönoton elinkaari käytännön esimerkkien ja parhaiden käytäntöjen avulla.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
-- Hallitsemaan kaikki Azure Developer CLI:n käyttöönotto-komennot ja työnkulut
+- Hallitsemaan kaikki Azure Developer CLI:n käyttöönoton komennot ja työnkulut
 - Ymmärtämään käyttöönoton koko elinkaaren provisioinnista seurantaan
-- Toteuttamaan mukautettuja käyttöönotto-koukkuja automaatiota varten ennen ja jälkeen käyttöönoton
+- Toteuttamaan mukautettuja käyttöönoton koukkuja automaatiota varten ennen ja jälkeen käyttöönoton
 - Konfiguroimaan useita ympäristöjä ympäristökohtaisilla parametreilla
-- Ottamaan käyttöön edistyneitä käyttöönotto-strategioita, kuten blue-green- ja canary-käyttöönotot
+- Ottamaan käyttöön edistyneitä käyttöönoton strategioita, kuten blue-green- ja canary-käyttöönotot
 - Integroimaan azd-käyttöönotot CI/CD-putkistoihin ja DevOps-työnkulkuihin
 
 ## Oppimistulokset
 
-Oppaan suorittamisen jälkeen pystyt:
-- Suorittamaan ja vianetsimään itsenäisesti kaikki azd-käyttöönotto-työnkulut
-- Suunnittelemaan ja toteuttamaan mukautettua käyttöönotto-automaatioita koukkujen avulla
-- Konfiguroimaan tuotantovalmiit käyttöönotot asianmukaisella turvallisuudella ja seurannalla
-- Hallitsemaan monimutkaisia monen ympäristön käyttöönotto-skenaarioita
-- Optimoimaan käyttöönoton suorituskykyä ja toteuttamaan palautusstrategioita
+Oppaan suorittamisen jälkeen osaat:
+- Suorittaa ja ratkaista itsenäisesti kaikki azd-käyttöönoton työnkulut
+- Suunnitella ja toteuttaa mukautettua käyttöönoton automaatiota koukkujen avulla
+- Konfiguroida tuotantovalmiit käyttöönotot asianmukaisella tietoturvalla ja seurannalla
+- Hallita monimutkaisia monen ympäristön käyttöönoton skenaarioita
+- Optimoida käyttöönoton suorituskykyä ja toteuttaa palautusstrategioita
 - Integroimaan azd-käyttöönotot yrityksen DevOps-käytäntöihin
 
 ## Käyttöönoton yleiskatsaus
 
-Azure Developer CLI tarjoaa useita käyttöönotto-komentoja:
+Azure Developer CLI tarjoaa useita käyttöönoton komentoja:
 - `azd up` - Koko työnkulku (provisiointi + käyttöönotto)
-- `azd provision` - Luo/päivittää vain Azure-resurssit
+- `azd provision` - Luo/päivittää vain Azure-resursseja
 - `azd deploy` - Ottaa käyttöön vain sovelluskoodin
 - `azd package` - Rakentaa ja pakkaa sovellukset
 
-## Peruskäyttöönotto-työnkulut
+## Peruskäyttöönoton työnkulut
 
 ### Täydellinen käyttöönotto (azd up)
 Yleisin työnkulku uusille projekteille:
 ```bash
-# Deploy everything from scratch
+# Ota kaikki käyttöön alusta alkaen
 azd up
 
-# Deploy with specific environment
+# Ota käyttöön tietyssä ympäristössä
 azd up --environment production
 
-# Deploy with custom parameters
+# Ota käyttöön mukautetuilla parametreilla
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Vain infrastruktuurin provisiointi
-Kun tarvitset vain Azure-resurssien päivitystä:
+Kun tarvitset vain Azure-resurssien päivityksen:
 ```bash
-# Provision/update infrastructure
+# Tarjoa/päivitä infrastruktuuri
 azd provision
 
-# Provision with dry-run to preview changes
+# Tarjoa kuivakäynnillä esikatsellaksesi muutokset
 azd provision --preview
 
-# Provision specific services
+# Tarjoa tietyt palvelut
 azd provision --service database
 ```
 
 ### Vain koodin käyttöönotto
 Nopeita sovelluspäivityksiä varten:
 ```bash
-# Deploy all services
+# Ota kaikki palvelut käyttöön
 azd deploy
 
-# Deploy specific service
+# Odotettu tulos:
+# Palveluiden käyttöönotto (azd deploy)
+# - web: Käyttöönotto... Valmis
+# - api: Käyttöönotto... Valmis
+# ONNISTUI: Käyttöönotto valmistui 2 minuutissa 15 sekunnissa
+
+# Ota tietty palvelu käyttöön
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# Ota käyttöön mukautetuilla rakennusparametreilla
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Vahvista käyttöönotto
+azd show --output json | jq '.services'
 ```
+
+### ✅ Käyttöönoton tarkistus
+
+Tarkista onnistuminen jokaisen käyttöönoton jälkeen:
+
+```bash
+# Tarkista, että kaikki palvelut ovat käynnissä
+azd show
+
+# Testaa terveyspäätepisteet
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Tarkista lokit virheiden varalta
+azd logs --service api --since 5m | grep -i error
+```
+
+**Onnistumiskriteerit:**
+- ✅ Kaikki palvelut näyttävät tilan "Running"
+- ✅ Terveysrajapinnat palauttavat HTTP 200
+- ✅ Ei virhelokeja viimeisen 5 minuutin aikana
+- ✅ Sovellus vastaa testipyyntöihin
 
 ## 🏗️ Käyttöönoton prosessin ymmärtäminen
 
@@ -108,8 +142,8 @@ hooks:
 
 ### Vaihe 2: Infrastruktuurin provisiointi
 - Lukee infrastruktuurimallit (Bicep/Terraform)
-- Luo tai päivittää Azure-resurssit
-- Konfiguroi verkot ja turvallisuuden
+- Luo tai päivittää Azure-resursseja
+- Konfiguroi verkot ja tietoturvan
 - Asettaa seurannan ja lokituksen
 
 ### Vaihe 3: Provisioinnin jälkeiset koukut
@@ -127,7 +161,7 @@ hooks:
 
 ### Vaihe 4: Sovelluksen pakkaaminen
 - Rakentaa sovelluskoodin
-- Luo käyttöönotto-artifaktit
+- Luo käyttöönottoartefaktit
 - Pakkaa kohdealustalle (kontit, ZIP-tiedostot jne.)
 
 ### Vaihe 5: Ennen käyttöönottoa -koukut
@@ -163,7 +197,7 @@ hooks:
 
 ## 🎛️ Käyttöönoton konfigurointi
 
-### Palvelukohtaiset käyttöönotto-asetukset
+### Palvelukohtaiset käyttöönottoasetukset
 ```yaml
 # azure.yaml
 services:
@@ -195,25 +229,25 @@ services:
 
 ### Ympäristökohtaiset konfiguraatiot
 ```bash
-# Development environment
+# Kehitysympäristö
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# Välivaiheen ympäristö
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# Tuotantoympäristö
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Edistyneet käyttöönotto-skenaariot
+## 🔧 Edistyneet käyttöönoton skenaariot
 
 ### Monipalvelusovellukset
 ```yaml
@@ -253,17 +287,17 @@ services:
 
 ### Blue-Green-käyttöönotot
 ```bash
-# Create blue environment
+# Luo sininen ympäristö
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blue environment
+# Testaa sininen ympäristö
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# Vaihda liikenne siniseen (manuaalinen DNS/kuormantasaimen päivitys)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# Siivoa vihreä ympäristö
 azd env select production-green
 azd down --force
 ```
@@ -313,9 +347,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Konttikäyttöönotot
+## 🐳 Konttien käyttöönotot
 
-### Konttisovellusten käyttöönotto
+### Konttisovellusten käyttöönotot
 ```yaml
 services:
   api:
@@ -369,10 +403,10 @@ CMD ["npm", "start"]
 
 ### Rinnakkaiset käyttöönotot
 ```bash
-# Configure parallel deployment
+# Määritä rinnakkaisjakelu
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# Ota palvelut käyttöön rinnakkain
 azd deploy --parallel
 ```
 
@@ -392,10 +426,10 @@ services:
 
 ### Inkrementaaliset käyttöönotot
 ```bash
-# Deploy only changed services
+# Ota käyttöön vain muuttuneet palvelut
 azd deploy --incremental
 
-# Deploy with change detection
+# Ota käyttöön muutoshavaintojen avulla
 azd deploy --detect-changes
 ```
 
@@ -403,13 +437,13 @@ azd deploy --detect-changes
 
 ### Reaaliaikainen käyttöönoton seuranta
 ```bash
-# Monitor deployment progress
+# Seuraa käyttöönoton etenemistä
 azd deploy --follow
 
-# View deployment logs
+# Näytä käyttöönoton lokit
 azd logs --follow --service api
 
-# Check deployment status
+# Tarkista käyttöönoton tila
 azd show --service api
 ```
 
@@ -434,7 +468,7 @@ services:
 
 echo "Validating deployment..."
 
-# Check application health
+# Tarkista sovelluksen tila
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -460,16 +494,16 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Turvallisuushuomiot
+## 🔐 Tietoturvanäkökohdat
 
 ### Salaisuuksien hallinta
 ```bash
-# Store secrets securely
+# Tallenna salaisuudet turvallisesti
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# Viittaa salaisuuksiin azure.yaml-tiedostossa
 ```
 
 ```yaml
@@ -493,7 +527,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identiteetti ja käyttöoikeuksien hallinta
+### Identiteetti- ja käyttöoikeuksien hallinta
 ```yaml
 services:
   api:
@@ -512,29 +546,29 @@ services:
 
 ### Nopea palautus
 ```bash
-# Rollback to previous deployment
+# Palauta edelliseen käyttöönottoon
 azd deploy --rollback
 
-# Rollback specific service
+# Palauta tietty palvelu
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# Palauta tiettyyn versioon
 azd deploy --service api --version v1.2.3
 ```
 
 ### Infrastruktuurin palautus
 ```bash
-# Rollback infrastructure changes
+# Palauta infrastruktuurimuutokset
 azd provision --rollback
 
-# Preview rollback changes
+# Esikatsele palautusmuutokset
 azd provision --rollback --preview
 ```
 
-### Tietokantamigraation palautus
+### Tietokannan migraation palautus
 ```bash
 #!/bin/bash
-# scripts/rollback-database.sh
+# skriptit/palauta-tietokanta.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -547,15 +581,15 @@ echo "Database rollback completed"
 
 ## 📊 Käyttöönoton mittarit
 
-### Käyttöönoton suorituskyvyn seuranta
+### Seuraa käyttöönoton suorituskykyä
 ```bash
-# Enable deployment metrics
+# Ota käyttöön käyttöönoton mittarit
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# Näytä käyttöönoton historia
 azd history
 
-# Get deployment statistics
+# Hanki käyttöönoton tilastot
 azd metrics --type deployment
 ```
 
@@ -580,22 +614,22 @@ hooks:
 
 ### 1. Ympäristön johdonmukaisuus
 ```bash
-# Use consistent naming
+# Käytä johdonmukaista nimeämistä
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# Säilytä ympäristön yhtenäisyys
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Infrastruktuurin validointi
 ```bash
-# Validate before deployment
+# Vahvista ennen käyttöönottoa
 azd provision --preview
 azd provision --what-if
 
-# Use ARM/Bicep linting
+# Käytä ARM/Bicep-linttausta
 az bicep lint --file infra/main.bicep
 ```
 
@@ -630,22 +664,275 @@ hooks:
 
 ### 4. Dokumentointi ja lokitus
 ```bash
-# Document deployment procedures
+# Dokumentoi käyttöönoton menettelytavat
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## Seuraavat askeleet
+## Seuraavat vaiheet
 
 - [Resurssien provisiointi](provisioning.md) - Syväsukellus infrastruktuurin hallintaan
-- [Ennen käyttöönottoa -suunnittelu](../pre-deployment/capacity-planning.md) - Suunnittele käyttöönotto-strategiasi
-- [Yleiset ongelmat](../troubleshooting/common-issues.md) - Ratkaise käyttöönotto-ongelmat
-- [Parhaat käytännöt](../troubleshooting/debugging.md) - Tuotantovalmiit käyttöönotto-strategiat
+- [Ennakkosuunnittelu](../pre-deployment/capacity-planning.md) - Suunnittele käyttöönoton strategia
+- [Yleiset ongelmat](../troubleshooting/common-issues.md) - Ratkaise käyttöönoton ongelmat
+- [Parhaat käytännöt](../troubleshooting/debugging.md) - Tuotantovalmiit käyttöönoton strategiat
+
+## 🎯 Käytännön käyttöönottoharjoitukset
+
+### Harjoitus 1: Inkrementaalinen käyttöönoton työnkulku (20 minuuttia)
+**Tavoite**: Hallitse täyden ja inkrementaalisen käyttöönoton erot
+
+```bash
+# Alkuperäinen käyttöönotto
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Tallenna alkuperäisen käyttöönoton aika
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Tee koodimuutos
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Ota käyttöön vain koodi (nopea)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Vertaa aikoja
+cat deployment-log.txt
+
+# Siivoa
+azd down --force --purge
+```
+
+**Onnistumiskriteerit:**
+- [ ] Täysi käyttöönotto kestää 5-15 minuuttia
+- [ ] Vain koodin käyttöönotto kestää 2-5 minuuttia
+- [ ] Koodimuutokset näkyvät käyttöönotetussa sovelluksessa
+- [ ] Infrastruktuuri ei muutu `azd deploy` -komennon jälkeen
+
+**Oppimistulos**: `azd deploy` on 50-70 % nopeampi kuin `azd up` koodimuutoksille
+
+### Harjoitus 2: Mukautetut käyttöönoton koukut (30 minuuttia)
+**Tavoite**: Toteuta automaatio ennen ja jälkeen käyttöönoton
+
+```bash
+# Luo ennakkotarkistusskripti
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Tarkista, että testit läpäisevät
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Tarkista sitomattomat muutokset
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Luo jälkiasennuksen savutesti
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Lisää koukut azure.yaml-tiedostoon
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Testaa käyttöönotto koukkujen kanssa
+azd deploy
+```
+
+**Onnistumiskriteerit:**
+- [ ] Ennen käyttöönottoa -skripti suoritetaan ennen käyttöönottoa
+- [ ] Käyttöönotto keskeytyy, jos testit epäonnistuvat
+- [ ] Käyttöönoton jälkeinen savutesti varmistaa terveyden
+- [ ] Koukut suoritetaan oikeassa järjestyksessä
+
+### Harjoitus 3: Moniympäristön käyttöönoton strategia (45 minuuttia)
+**Tavoite**: Toteuta vaiheittainen käyttöönoton työnkulku (dev → staging → production)
+
+```bash
+# Luo käyttöönotto skripti
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Vaihe 1: Käyttöönotto kehitysympäristöön
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Vaihe 2: Käyttöönotto testausympäristöön
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Vaihe 3: Manuaalinen hyväksyntä tuotantoon
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Luo ympäristöt
+azd env new dev
+azd env new staging
+azd env new production
+
+# Suorita vaiheittainen käyttöönotto
+./deploy-staged.sh
+```
+
+**Onnistumiskriteerit:**
+- [ ] Kehitysympäristö otetaan onnistuneesti käyttöön
+- [ ] Testausympäristö otetaan onnistuneesti käyttöön
+- [ ] Manuaalinen hyväksyntä vaaditaan tuotantoon
+- [ ] Kaikilla ympäristöillä on toimivat terveystarkastukset
+- [ ] Palautus on mahdollista tarvittaessa
+
+### Harjoitus 4: Palautusstrategia (25 minuuttia)
+**Tavoite**: Toteuta ja testaa käyttöönoton palautus
+
+```bash
+# Ota v1 käyttöön
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Tallenna v1-konfiguraatio
+cp -r .azure/production .azure/production-v1-backup
+
+# Ota v2 käyttöön, jossa on yhteensopimaton muutos
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Havaitse virhe
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Palauta koodi
+    git checkout src/api/src/server.js
+    
+    # Palauta ympäristö
+    azd env set APP_VERSION "1.0.0"
+    
+    # Ota v1 uudelleen käyttöön
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Onnistumiskriteerit:**
+- [ ] Käyttöönoton virheet havaitaan
+- [ ] Palautusskripti suoritetaan automaattisesti
+- [ ] Sovellus palautuu toimivaan tilaan
+- [ ] Terveystarkastukset onnistuvat palautuksen jälkeen
+
+## 📊 Käyttöönoton mittareiden seuranta
+
+### Seuraa käyttöönoton suorituskykyä
+
+```bash
+# Luo käyttöönoton metristen skripti
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Kirjaa tiedostoon
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Käytä sitä
+./track-deployment.sh
+```
+
+**Analysoi mittarisi:**
+```bash
+# Näytä käyttöönoton historia
+cat deployment-metrics.csv
+
+# Laske keskimääräinen käyttöönottoaika
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
 
 ## Lisäresurssit
 
-- [Azure Developer CLI -käyttöönotto-viite](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure Developer CLI -käyttöönoton viite](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Azure App Service -käyttöönotto](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [Azure Container Apps -käyttöönotto](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Azure Functions -käyttöönotto](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
@@ -658,5 +945,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Tärkeissä tiedoissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

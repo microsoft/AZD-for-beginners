@@ -1,28 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
-  "translation_date": "2025-09-18T06:14:25+00:00",
-  "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
+  "original_hash": "2e61bc7db9c28647211ab64e03045882",
+  "translation_date": "2025-11-21T19:18:44+00:00",
+  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
   "language_code": "no"
 }
 -->
-# Azure AI Foundry-integrasjon med AZD
+# Microsoft Foundry-integrasjon med AZD
 
 **Kapittelnavigasjon:**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
 - **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
 - **⬅️ Forrige Kapittel**: [Kapittel 1: Ditt Første Prosjekt](../getting-started/first-project.md)
-- **➡️ Neste**: [AI Modellutplassering](ai-model-deployment.md)
+- **➡️ Neste**: [AI-modellutplassering](ai-model-deployment.md)
 - **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
 ## Oversikt
 
-Denne guiden viser hvordan du kan integrere Azure AI Foundry-tjenester med Azure Developer CLI (AZD) for effektiv utplassering av AI-applikasjoner. Azure AI Foundry tilbyr en omfattende plattform for å bygge, utplassere og administrere AI-applikasjoner, mens AZD forenkler infrastrukturen og utplasseringsprosessen.
+Denne veiledningen viser hvordan du kan integrere Microsoft Foundry-tjenester med Azure Developer CLI (AZD) for en mer effektiv utplassering av AI-applikasjoner. Microsoft Foundry tilbyr en omfattende plattform for å bygge, utplassere og administrere AI-applikasjoner, mens AZD forenkler infrastrukturen og utplasseringsprosessen.
 
-## Hva er Azure AI Foundry?
+## Hva er Microsoft Foundry?
 
-Azure AI Foundry er Microsofts enhetlige plattform for AI-utvikling som inkluderer:
+Microsoft Foundry er Microsofts enhetlige plattform for AI-utvikling som inkluderer:
 
 - **Modellkatalog**: Tilgang til avanserte AI-modeller
 - **Prompt Flow**: Visuell designer for AI-arbeidsflyter
@@ -30,10 +30,10 @@ Azure AI Foundry er Microsofts enhetlige plattform for AI-utvikling som inkluder
 - **Utplasseringsalternativer**: Flere hosting- og skaleringsalternativer
 - **Sikkerhet og Ansvarlighet**: Innebygde funksjoner for ansvarlig AI
 
-## AZD + Azure AI Foundry: Bedre Sammen
+## AZD + Microsoft Foundry: Bedre Sammen
 
-| Funksjon | Azure AI Foundry | Fordel med AZD-integrasjon |
-|----------|------------------|---------------------------|
+| Funksjon | Microsoft Foundry | Fordel med AZD-integrasjon |
+|----------|-------------------|---------------------------|
 | **Modellutplassering** | Manuell utplassering via portal | Automatiserte, repeterbare utplasseringer |
 | **Infrastruktur** | Klikkbasert klargjøring | Infrastruktur som kode (Bicep) |
 | **Miljøadministrasjon** | Fokus på ett miljø | Multi-miljø (dev/staging/prod) |
@@ -45,13 +45,13 @@ Azure AI Foundry er Microsofts enhetlige plattform for AI-utvikling som inkluder
 - Azure-abonnement med riktige tillatelser
 - Azure Developer CLI installert
 - Tilgang til Azure OpenAI-tjenester
-- Grunnleggende kjennskap til Azure AI Foundry
+- Grunnleggende kjennskap til Microsoft Foundry
 
 ## Kjerneintegrasjonsmønstre
 
 ### Mønster 1: Azure OpenAI-integrasjon
 
-**Brukstilfelle**: Utplassering av chatteapplikasjoner med Azure OpenAI-modeller
+**Brukstilfelle**: Utplassere chat-applikasjoner med Azure OpenAI-modeller
 
 ```yaml
 # azure.yaml
@@ -101,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Mønster 2: AI-søk + RAG-integrasjon
 
-**Brukstilfelle**: Utplassering av applikasjoner med retrieval-augmented generation (RAG)
+**Brukstilfelle**: Utplassere applikasjoner med retrieval-augmented generation (RAG)
 
 ```bicep
 // Azure AI Search
@@ -168,26 +168,26 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **Produksjonskonfigurasjon:**
 ```bash
-# Core AI services
+# Kjerne AI-tjenester
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Model configurations
+# Modellkonfigurasjoner
 azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
 
-# Performance settings
+# Ytelsesinnstillinger
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Utviklingskonfigurasjon:**
 ```bash
-# Cost-optimized settings for development
+# Kostnadsoptimaliserte innstillinger for utvikling
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Gratisnivå
 ```
 
 ### Sikker Konfigurasjon med Key Vault
@@ -230,24 +230,24 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 ### Utplassering med Én Kommando
 
 ```bash
-# Deploy everything with one command
+# Distribuer alt med én kommando
 azd up
 
-# Or deploy incrementally
-azd provision  # Infrastructure only
-azd deploy     # Application only
+# Eller distribuer gradvis
+azd provision  # Kun infrastruktur
+azd deploy     # Kun applikasjon
 ```
 
 ### Miljøspesifikke Utplasseringer
 
 ```bash
-# Development environment
+# Utviklingsmiljø
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Production environment
+# Produksjonsmiljø
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -367,7 +367,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Ytelsesoptimalisering
 
-### Hurtigbufferstrategier
+### Cache-strategier
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -433,7 +433,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## Feilsøking av Vanlige Problemer
 
-### Problem 1: OpenAI-kvote Overskredet
+### Problem 1: OpenAI-kvote overskredet
 
 **Symptomer:**
 - Utplassering mislykkes med kvotefeil
@@ -441,14 +441,14 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 **Løsninger:**
 ```bash
-# Check current quota usage
+# Sjekk nåværende kvotebruk
 az cognitiveservices usage list --location eastus
 
-# Try different region
+# Prøv en annen region
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduce capacity temporarily
+# Reduser kapasiteten midlertidig
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -461,29 +461,29 @@ azd deploy
 
 **Løsninger:**
 ```bash
-# Verify role assignments
+# Verifiser rolleoppgaver
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Check managed identity configuration
+# Sjekk administrert identitetskonfigurasjon
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Validate Key Vault access
+# Valider tilgang til Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Problem 3: Modellutplasseringsproblemer
+### Problem 3: Problemer med Modellutplassering
 
 **Symptomer:**
 - Modeller ikke tilgjengelige i utplasseringen
-- Spesifikke modellversjoner feiler
+- Spesifikke modellversjoner mislykkes
 
 **Løsninger:**
 ```bash
-# List available models by region
+# Liste tilgjengelige modeller etter region
 az cognitiveservices model list --location eastus
 
-# Update model version in bicep template
-# Check model capacity requirements
+# Oppdater modellversjon i bicep-mal
+# Sjekk krav til modellkapasitet
 ```
 
 ## Eksempelmaler
@@ -526,16 +526,264 @@ azd up
 
 ## Neste Steg
 
-1. **Prøv Eksemplene**: Start med en ferdiglaget mal som passer ditt brukstilfelle
+1. **Prøv Eksemplene**: Start med en ferdigmal som passer ditt brukstilfelle
 2. **Tilpass til Dine Behov**: Endre infrastrukturen og applikasjonskoden
 3. **Legg til Overvåking**: Implementer omfattende observabilitet
 4. **Optimaliser Kostnader**: Finjuster konfigurasjoner for ditt budsjett
 5. **Sikre Utplasseringen**: Implementer sikkerhetsmønstre for bedrifter
 6. **Skaler til Produksjon**: Legg til multi-region og høy tilgjengelighet
 
+## 🎯 Praktiske Øvelser
+
+### Øvelse 1: Utplassere Azure OpenAI Chat-applikasjon (30 minutter)
+**Mål**: Utplassere og teste en produksjonsklar AI-chat-applikasjon
+
+```bash
+# Initialiser mal
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Sett miljøvariabler
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Distribuer
+azd up
+
+# Test applikasjonen
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# Overvåk AI-operasjoner
+azd monitor
+
+# Rydd opp
+azd down --force --purge
+```
+
+**Suksesskriterier:**
+- [ ] Utplassering fullføres uten kvotefeil
+- [ ] Kan få tilgang til chat-grensesnittet i nettleseren
+- [ ] Kan stille spørsmål og få AI-drevne svar
+- [ ] Application Insights viser telemetridata
+- [ ] Ressurser ryddet opp etter testing
+
+**Estimert Kostnad**: $5-10 for 30 minutters testing
+
+### Øvelse 2: Konfigurere Multi-Modell Utplassering (45 minutter)
+**Mål**: Utplassere flere AI-modeller med ulike konfigurasjoner
+
+```bash
+# Opprett tilpasset Bicep-konfigurasjon
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Distribuer og verifiser
+azd provision
+azd show
+```
+
+**Suksesskriterier:**
+- [ ] Flere modeller utplassert vellykket
+- [ ] Ulike kapasitetsinnstillinger brukt
+- [ ] Modeller tilgjengelige via API
+- [ ] Kan kalle begge modellene fra applikasjonen
+
+### Øvelse 3: Implementere Kostnadsovervåking (20 minutter)
+**Mål**: Sette opp budsjettvarsler og kostnadssporing
+
+```bash
+# Legg til budsjettvarsel i Bicep
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Distribuer budsjettvarsel
+azd provision
+
+# Sjekk nåværende kostnader
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**Suksesskriterier:**
+- [ ] Budsjettvarsel opprettet i Azure
+- [ ] E-postvarsler konfigurert
+- [ ] Kan se kostnadsdata i Azure Portal
+- [ ] Budsjettgrenser satt riktig
+
+## 💡 Ofte Stilte Spørsmål
+
+<details>
+<summary><strong>Hvordan kan jeg redusere Azure OpenAI-kostnader under utvikling?</strong></summary>
+
+1. **Bruk Gratisnivå**: Azure OpenAI tilbyr 50,000 tokens/måned gratis
+2. **Reduser Kapasitet**: Sett kapasitet til 10 TPM i stedet for 30+ for utvikling
+3. **Bruk azd down**: Dealloker ressurser når du ikke aktivt utvikler
+4. **Cache Svar**: Implementer Redis-cache for gjentatte forespørsler
+5. **Bruk Prompt Engineering**: Reduser tokenbruk med effektive prompts
+
+```bash
+# Utviklingskonfigurasjon
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>Hva er forskjellen mellom Azure OpenAI og OpenAI API?</strong></summary>
+
+**Azure OpenAI**:
+- Sikkerhet og samsvar for bedrifter
+- Privat nettverksintegrasjon
+- SLA-garantier
+- Autentisering med administrert identitet
+- Høyere kvoter tilgjengelig
+
+**OpenAI API**:
+- Raskere tilgang til nye modeller
+- Enklere oppsett
+- Lavere terskel for oppstart
+- Kun offentlig internett
+
+For produksjonsapplikasjoner anbefales **Azure OpenAI**.
+</details>
+
+<details>
+<summary><strong>Hvordan håndterer jeg Azure OpenAI-kvote overskredet-feil?</strong></summary>
+
+```bash
+# Sjekk nåværende kvote
+az cognitiveservices usage list --location eastus2
+
+# Prøv en annen region
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Reduser kapasiteten midlertidig
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Be om kvoteøkning
+# Gå til Azure Portal > Kvoter > Be om økning
+```
+</details>
+
+<details>
+<summary><strong>Kan jeg bruke mine egne data med Azure OpenAI?</strong></summary>
+
+Ja! Bruk **Azure AI Search** for RAG (Retrieval Augmented Generation):
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+Se malen [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo).
+</details>
+
+<details>
+<summary><strong>Hvordan sikrer jeg AI-modellendepunkter?</strong></summary>
+
+**Beste Praksis**:
+1. Bruk Administrert Identitet (ingen API-nøkler)
+2. Aktiver Private Endepunkter
+3. Konfigurer nettverkssikkerhetsgrupper
+4. Implementer hastighetsbegrensning
+5. Bruk Azure Key Vault for hemmeligheter
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
+
 ## Fellesskap og Støtte
 
-- **Azure AI Foundry Discord**: [#Azure kanal](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry Discord**: [#Azure-kanal](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Problemer og diskusjoner](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Offisiell dokumentasjon](https://learn.microsoft.com/azure/ai-studio/)
 
@@ -545,12 +793,14 @@ azd up
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
 - **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
 - **⬅️ Forrige Kapittel**: [Kapittel 1: Ditt Første Prosjekt](../getting-started/first-project.md)
-- **➡️ Neste**: [AI Modellutplassering](ai-model-deployment.md)
+- **➡️ Neste**: [AI-modellutplassering](ai-model-deployment.md)
 - **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
-**Trenger Hjelp?** Bli med i våre fellesskapsdiskusjoner eller åpne en sak i repository. Azure AI + AZD-fellesskapet er her for å hjelpe deg med å lykkes!
+**Trenger Hjelp?** Bli med i fellesskapsdiskusjoner eller åpne en sak i repository. Azure AI + AZD-fellesskapet er her for å hjelpe deg med å lykkes!
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

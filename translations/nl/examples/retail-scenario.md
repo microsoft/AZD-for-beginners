@@ -1,74 +1,186 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "616504abc1770bcde7a50c7f4ba008ac",
-  "translation_date": "2025-09-18T07:23:44+00:00",
+  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
+  "translation_date": "2025-11-21T16:21:55+00:00",
   "source_file": "examples/retail-scenario.md",
   "language_code": "nl"
 }
 -->
-# Multi-Agent Klantenondersteuningsoplossing - Winkelier Scenario
+# Multi-Agent Klantenondersteuningsoplossing - Scenario voor Retailers
 
 **Hoofdstuk 5: Multi-Agent AI Oplossingen**
 - **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
 - **📖 Huidig Hoofdstuk**: [Hoofdstuk 5: Multi-Agent AI Oplossingen](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **⬅️ Vereisten**: [Hoofdstuk 2: AI-First Ontwikkeling](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **➡️ Volgend Hoofdstuk**: [Hoofdstuk 6: Validatie Voor Implementatie](../docs/pre-deployment/capacity-planning.md)
+- **➡️ Volgend Hoofdstuk**: [Hoofdstuk 6: Validatie vóór Implementatie](../docs/pre-deployment/capacity-planning.md)
 - **🚀 ARM Templates**: [Implementatiepakket](retail-multiagent-arm-template/README.md)
+
+> **⚠️ ARCHITECTUURGIDS - GEEN WERKENDE IMPLEMENTATIE**  
+> Dit document biedt een **uitgebreid architectuurplan** voor het bouwen van een multi-agent systeem.  
+> **Wat aanwezig is:** ARM-template voor infrastructuurimplementatie (Azure OpenAI, AI Search, Container Apps, enz.)  
+> **Wat je moet bouwen:** Agentcode, routeringslogica, frontend-UI, datapijplijnen (geschatte tijd: 80-120 uur)  
+>  
+> **Gebruik dit als:**
+> - ✅ Architectuurreferentie voor je eigen multi-agent project
+> - ✅ Leergids voor multi-agent ontwerpprincipes
+> - ✅ Infrastructuursjabloon om Azure-resources te implementeren
+> - ❌ GEEN kant-en-klare applicatie (vereist aanzienlijke ontwikkeling)
 
 ## Overzicht
 
-Dit scenario beschrijft het bouwen van een productieklare multi-agent klantenondersteuningschatbot voor een winkelier die geavanceerde AI-functionaliteiten nodig heeft, waaronder voorraadbeheer, documentverwerking en intelligente klantinteracties.
+**Leerdoel:** Begrijp de architectuur, ontwerpbeslissingen en implementatieaanpak voor het bouwen van een productieklare multi-agent chatbot voor klantenondersteuning voor een retailer, met geavanceerde AI-mogelijkheden zoals voorraadbeheer, documentverwerking en intelligente klantinteracties.
+
+**Tijd om te voltooien:** Lezen + Begrijpen (2-3 uur) | Volledige implementatie bouwen (80-120 uur)
+
+**Wat je leert:**
+- Multi-agent architectuurpatronen en ontwerpprincipes
+- Multi-regio Azure OpenAI implementatiestrategieën
+- AI Search integratie met RAG (Retrieval-Augmented Generation)
+- Frameworks voor agentevaluatie en beveiligingstests
+- Overwegingen voor productie-implementatie en kostenoptimalisatie
 
 ## Architectuurdoelen
 
-De klantenondersteuningsoplossing vereist:
-- **Meerdere gespecialiseerde agents** voor verschillende klantbehoeften
-- **Multi-model implementatie** met juiste capaciteitsplanning
-- **Dynamische gegevensintegratie** met AI Search en bestanduploads
-- **Uitgebreide monitoring** en evaluatiemogelijkheden
-- **Productiekwaliteit beveiliging** met validatie door red teaming
+**Educatieve Focus:** Deze architectuur demonstreert bedrijfsmodellen voor multi-agent systemen.
+
+### Systeemeisen (voor jouw implementatie)
+
+Een productieklantenondersteuningsoplossing vereist:
+- **Meerdere gespecialiseerde agents** voor verschillende klantbehoeften (Klantenservice + Voorraadbeheer)
+- **Multi-model implementatie** met juiste capaciteitsplanning (GPT-4o, GPT-4o-mini, embeddings in meerdere regio's)
+- **Dynamische dataintegratie** met AI Search en bestanduploads (vectorzoekopdrachten + documentverwerking)
+- **Uitgebreide monitoring** en evaluatiemogelijkheden (Application Insights + aangepaste statistieken)
+- **Productieklare beveiliging** met red teaming validatie (kwetsbaarheidsscans + agentevaluatie)
+
+### Wat deze gids biedt
+
+✅ **Architectuurpatronen** - Bewezen ontwerp voor schaalbare multi-agent systemen  
+✅ **Infrastructuursjablonen** - ARM-templates voor het implementeren van alle Azure-services  
+✅ **Codevoorbeelden** - Referentie-implementaties voor belangrijke componenten  
+✅ **Configuratierichtlijnen** - Stapsgewijze installatie-instructies  
+✅ **Best Practices** - Beveiliging, monitoring, kostenoptimalisatiestrategieën  
+
+❌ **Niet inbegrepen** - Volledig werkende applicatie (vereist ontwikkelinspanning)
+
+## 🗺️ Implementatieroadmap
+
+### Fase 1: Bestudeer de architectuur (2-3 uur) - BEGIN HIER
+
+**Doel:** Begrijp het systeemontwerp en de interacties tussen componenten
+
+- [ ] Lees dit volledige document
+- [ ] Bekijk het architectuurschema en de relaties tussen componenten
+- [ ] Begrijp multi-agent patronen en ontwerpbeslissingen
+- [ ] Bestudeer codevoorbeelden voor agenttools en routering
+- [ ] Bekijk kostenramingen en richtlijnen voor capaciteitsplanning
+
+**Resultaat:** Duidelijk begrip van wat je moet bouwen
+
+### Fase 2: Implementeer infrastructuur (30-45 minuten)
+
+**Doel:** Voorzie Azure-resources met behulp van ARM-template
+
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup -m standard
+```
+
+**Wat wordt geïmplementeerd:**
+- ✅ Azure OpenAI (3 regio's: GPT-4o, GPT-4o-mini, embeddings)
+- ✅ AI Search-service (leeg, moet worden geconfigureerd)
+- ✅ Container Apps-omgeving (placeholder-afbeeldingen)
+- ✅ Opslagaccounts, Cosmos DB, Key Vault
+- ✅ Application Insights monitoring
+
+**Wat ontbreekt:**
+- ❌ Agentimplementatiecode
+- ❌ Routeringslogica
+- ❌ Frontend-UI
+- ❌ Zoekindexschema
+- ❌ Datapijplijnen
+
+### Fase 3: Bouw de applicatie (80-120 uur)
+
+**Doel:** Implementeer het multi-agent systeem op basis van deze architectuur
+
+1. **Agentimplementatie** (30-40 uur)
+   - Basisagentklasse en interfaces
+   - Klantenservice-agent met GPT-4o
+   - Voorraadagent met GPT-4o-mini
+   - Toolintegraties (AI Search, Bing, bestandsverwerking)
+
+2. **Routeringsservice** (12-16 uur)
+   - Logica voor verzoekclassificatie
+   - Agentselectie en orkestratie
+   - FastAPI/Express backend
+
+3. **Frontend-ontwikkeling** (20-30 uur)
+   - Chatinterface-UI
+   - Functionaliteit voor bestanduploads
+   - Weergave van antwoorden
+
+4. **Datapijplijn** (8-12 uur)
+   - AI Search-indexcreatie
+   - Documentverwerking met Document Intelligence
+   - Generatie en indexering van embeddings
+
+5. **Monitoring & Evaluatie** (10-15 uur)
+   - Implementatie van aangepaste telemetrie
+   - Framework voor agentevaluatie
+   - Red team beveiligingsscanner
+
+### Fase 4: Implementeer & Test (8-12 uur)
+
+- Bouw Docker-afbeeldingen voor alle services
+- Push naar Azure Container Registry
+- Update Container Apps met echte afbeeldingen
+- Configureer omgevingsvariabelen en geheimen
+- Voer evaluatietestsuite uit
+- Voer beveiligingsscans uit
+
+**Totale geschatte inspanning:** 80-120 uur voor ervaren ontwikkelaars
 
 ## Oplossingsarchitectuur
 
-### Architectuurdiagram
+### Architectuurschema
 
 ```mermaid
 graph TB
-    User[👤 Customer] --> LB[Azure Front Door]
-    LB --> WebApp[Web Frontend<br/>Container App]
+    User[👤 Klant] --> LB[Azure Front Door]
+    LB --> WebApp[Web Voorkant<br/>Container App]
     
     WebApp --> Router[Agent Router<br/>Container App]
-    Router --> CustomerAgent[Customer Agent<br/>Customer Service]
-    Router --> InvAgent[Inventory Agent<br/>Stock Management]
+    Router --> CustomerAgent[Klant Agent<br/>Klantenservice]
+    Router --> InvAgent[Voorraad Agent<br/>Voorraadbeheer]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Oost VS 2]
+    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West VS 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>Product Catalog]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Real-time Info]
+    CustomerAgent --> AISearch[Azure AI Zoeken<br/>Productcatalogus]
+    CustomerAgent --> BingSearch[Bing Zoek-API<br/>Realtime Info]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>Documents & Files]
-    Storage --> DocIntel[Document Intelligence<br/>Content Processing]
+    AISearch --> Storage[Azure Opslag<br/>Documenten & Bestanden]
+    Storage --> DocIntel[Documentintelligentie<br/>Inhoudsverwerking]
     
-    OpenAI1 --> Embeddings[Text Embeddings<br/>ada-002<br/>France Central]
+    OpenAI1 --> Embeddings[Tekst Embeddings<br/>ada-002<br/>Frankrijk Centraal]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>Monitoring]
+    Router --> AppInsights[Applicatie-inzichten<br/>Monitoring]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Grader<br/>Switzerland North] --> Evaluation[Evaluation Framework]
-    RedTeam[Red Team Scanner] --> SecurityReports[Security Reports]
+    GraderModel[GPT-4o Beoordelaar<br/>Zwitserland Noord] --> Evaluation[Evaluatiekader]
+    RedTeam[Rood Team Scanner] --> SecurityReports[Beveiligingsrapporten]
     
-    subgraph "Data Layer"
+    subgraph "Gegevenslaag"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Chat History]
+        CosmosDB[Cosmos DB<br/>Chatgeschiedenis]
     end
     
-    subgraph "AI Services"
+    subgraph "AI-diensten"
         OpenAI1
         OpenAI2
         Embeddings
@@ -77,10 +189,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Monitoring & Security"
+    subgraph "Monitoring & Beveiliging"
         AppInsights
-        LogAnalytics[Log Analytics Workspace]
-        KeyVault[Azure Key Vault<br/>Secrets & Config]
+        LogAnalytics[Log Analytics Werkruimte]
+        KeyVault[Azure Sleutelkluis<br/>Geheimen & Configuratie]
         RedTeam
         Evaluation
     end
@@ -94,113 +206,117 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-
 ### Componentoverzicht
 
 | Component | Doel | Technologie | Regio |
-|-----------|------|-------------|-------|
-| **Web Frontend** | Gebruikersinterface voor klantinteracties | Container Apps | Primaire Regio |
-| **Agent Router** | Verwijst verzoeken naar de juiste agent | Container Apps | Primaire Regio |
-| **Customer Agent** | Behandelt klantenservicevragen | Container Apps + GPT-4o | Primaire Regio |
-| **Inventory Agent** | Beheert voorraad en orderverwerking | Container Apps + GPT-4o-mini | Primaire Regio |
+|-----------|---------|------------|---------|
+| **Webfrontend** | Gebruikersinterface voor klantinteracties | Container Apps | Primaire Regio |
+| **Agentrouter** | Routeert verzoeken naar de juiste agent | Container Apps | Primaire Regio |
+| **Klantenservice-agent** | Behandelt vragen van klantenservice | Container Apps + GPT-4o | Primaire Regio |
+| **Voorraadagent** | Beheert voorraad en orderafhandeling | Container Apps + GPT-4o-mini | Primaire Regio |
 | **Azure OpenAI** | LLM-inferentie voor agents | Cognitive Services | Multi-regio |
 | **AI Search** | Vectorzoekopdrachten en RAG | AI Search Service | Primaire Regio |
-| **Storage Account** | Bestanduploads en documenten | Blob Storage | Primaire Regio |
+| **Opslagaccount** | Bestanduploads en documenten | Blob Storage | Primaire Regio |
 | **Application Insights** | Monitoring en telemetrie | Monitor | Primaire Regio |
-| **Grader Model** | Evaluatiesysteem voor agents | Azure OpenAI | Secundaire Regio |
+| **Grader Model** | Systeem voor agentevaluatie | Azure OpenAI | Secundaire Regio |
 
 ## 📁 Projectstructuur
 
+> **📍 Statuslegenda:**  
+> ✅ = Aanwezig in repository  
+> 📝 = Referentie-implementatie (codevoorbeeld in dit document)  
+> 🔨 = Moet je zelf maken
+
 ```
-retail-multiagent-solution/
-├── .azure/                              # Azure environment configs
-│   ├── config.json                      # Global config
+retail-multiagent-solution/              🔨 Your project directory
+├── .azure/                              🔨 Azure environment configs
+│   ├── config.json                      🔨 Global config
 │   └── env/
-│       ├── .env.development             # Dev environment
-│       ├── .env.staging                 # Staging environment
-│       └── .env.production              # Production environment
+│       ├── .env.development             🔨 Dev environment
+│       ├── .env.staging                 🔨 Staging environment
+│       └── .env.production              🔨 Production environment
 │
-├── azure.yaml                          # AZD main configuration
-├── azure.parameters.json               # Deployment parameters
-├── README.md                           # Solution documentation
+├── azure.yaml                          🔨 AZD main configuration
+├── azure.parameters.json               🔨 Deployment parameters
+├── README.md                           🔨 Solution documentation
 │
-├── infra/                              # Infrastructure as Code
-│   ├── main.bicep                      # Main Bicep template
-│   ├── main.parameters.json            # Parameters file
-│   ├── modules/                        # Bicep modules
-│   │   ├── ai-services.bicep           # Azure OpenAI deployments
-│   │   ├── search.bicep                # AI Search configuration
-│   │   ├── storage.bicep               # Storage accounts
-│   │   ├── container-apps.bicep        # Container Apps environment
-│   │   ├── monitoring.bicep            # Application Insights
-│   │   ├── security.bicep              # Key Vault and RBAC
-│   │   └── networking.bicep            # Virtual networks and DNS
-│   ├── arm-template/                   # ARM template version
-│   │   ├── azuredeploy.json            # ARM main template
-│   │   └── azuredeploy.parameters.json # ARM parameters
-│   └── scripts/                        # Deployment scripts
-│       ├── deploy.sh                   # Main deployment script
-│       ├── setup-data.sh               # Data setup script
-│       └── configure-rbac.sh           # RBAC configuration
+├── infra/                              🔨 Infrastructure as Code (you create)
+│   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
+│   ├── main.parameters.json            🔨 Parameters file
+│   ├── modules/                        📝 Bicep modules (reference examples below)
+│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── search.bicep                📝 AI Search configuration
+│   │   ├── storage.bicep               📝 Storage accounts
+│   │   ├── container-apps.bicep        📝 Container Apps environment
+│   │   ├── monitoring.bicep            📝 Application Insights
+│   │   ├── security.bicep              📝 Key Vault and RBAC
+│   │   └── networking.bicep            📝 Virtual networks and DNS
+│   ├── arm-template/                   ✅ ARM template version (EXISTS)
+│   │   ├── azuredeploy.json            ✅ ARM main template (retail-multiagent-arm-template/)
+│   │   └── azuredeploy.parameters.json ✅ ARM parameters
+│   └── scripts/                        ✅/🔨 Deployment scripts
+│       ├── deploy.sh                   ✅ Main deployment script (EXISTS)
+│       ├── setup-data.sh               🔨 Data setup script (you create)
+│       └── configure-rbac.sh           🔨 RBAC configuration (you create)
 │
-├── src/                                # Application source code
-│   ├── agents/                         # Agent implementations
-│   │   ├── base/                       # Base agent classes
-│   │   │   ├── agent.py                # Abstract agent class
-│   │   │   └── tools.py                # Tool interfaces
-│   │   ├── customer/                   # Customer service agent
-│   │   │   ├── agent.py                # Customer agent implementation
-│   │   │   ├── prompts.py              # System prompts
-│   │   │   └── tools/                  # Agent-specific tools
-│   │   │       ├── search_tool.py      # AI Search integration
-│   │   │       ├── bing_tool.py        # Bing Search integration
-│   │   │       └── file_tool.py        # File processing tool
-│   │   └── inventory/                  # Inventory management agent
-│   │       ├── agent.py                # Inventory agent implementation
-│   │       ├── prompts.py              # System prompts
-│   │       └── tools/                  # Agent-specific tools
-│   │           ├── inventory_search.py # Inventory search tool
-│   │           └── database_tool.py    # Database query tool
+├── src/                                🔨 Application source code (YOU BUILD THIS)
+│   ├── agents/                         📝 Agent implementations (examples below)
+│   │   ├── base/                       🔨 Base agent classes
+│   │   │   ├── agent.py                🔨 Abstract agent class
+│   │   │   └── tools.py                🔨 Tool interfaces
+│   │   ├── customer/                   🔨 Customer service agent
+│   │   │   ├── agent.py                📝 Customer agent implementation (see below)
+│   │   │   ├── prompts.py              🔨 System prompts
+│   │   │   └── tools/                  🔨 Agent-specific tools
+│   │   │       ├── search_tool.py      📝 AI Search integration (example below)
+│   │   │       ├── bing_tool.py        📝 Bing Search integration (example below)
+│   │   │       └── file_tool.py        🔨 File processing tool
+│   │   └── inventory/                  🔨 Inventory management agent
+│   │       ├── agent.py                🔨 Inventory agent implementation
+│   │       ├── prompts.py              🔨 System prompts
+│   │       └── tools/                  🔨 Agent-specific tools
+│   │           ├── inventory_search.py 🔨 Inventory search tool
+│   │           └── database_tool.py    🔨 Database query tool
 │   │
-│   ├── router/                         # Agent routing service
-│   │   ├── main.py                     # FastAPI router application
-│   │   ├── routing_logic.py            # Request routing logic
-│   │   └── middleware.py               # Authentication & logging
+│   ├── router/                         🔨 Agent routing service (you build)
+│   │   ├── main.py                     🔨 FastAPI router application
+│   │   ├── routing_logic.py            🔨 Request routing logic
+│   │   └── middleware.py               🔨 Authentication & logging
 │   │
-│   ├── frontend/                       # Web user interface
-│   │   ├── Dockerfile                  # Container configuration
-│   │   ├── package.json                # Node.js dependencies
-│   │   ├── src/                        # React/Vue source code
-│   │   │   ├── components/             # UI components
-│   │   │   ├── pages/                  # Application pages
-│   │   │   ├── services/               # API services
-│   │   │   └── styles/                 # CSS and themes
-│   │   └── public/                     # Static assets
+│   ├── frontend/                       🔨 Web user interface (you build)
+│   │   ├── Dockerfile                  🔨 Container configuration
+│   │   ├── package.json                🔨 Node.js dependencies
+│   │   ├── src/                        🔨 React/Vue source code
+│   │   │   ├── components/             🔨 UI components
+│   │   │   ├── pages/                  🔨 Application pages
+│   │   │   ├── services/               🔨 API services
+│   │   │   └── styles/                 🔨 CSS and themes
+│   │   └── public/                     🔨 Static assets
 │   │
-│   ├── shared/                         # Shared utilities
-│   │   ├── config.py                   # Configuration management
-│   │   ├── telemetry.py                # Telemetry utilities
-│   │   ├── security.py                 # Security utilities
-│   │   └── models.py                   # Data models
+│   ├── shared/                         🔨 Shared utilities (you build)
+│   │   ├── config.py                   🔨 Configuration management
+│   │   ├── telemetry.py                📝 Telemetry utilities (example below)
+│   │   ├── security.py                 🔨 Security utilities
+│   │   └── models.py                   🔨 Data models
 │   │
-│   └── evaluation/                     # Evaluation and testing
-│       ├── evaluator.py                # Agent evaluator
-│       ├── red_team_scanner.py         # Security scanner
-│       ├── test_cases.json             # Evaluation test cases
-│       └── reports/                    # Generated reports
+│   └── evaluation/                     🔨 Evaluation and testing (you build)
+│       ├── evaluator.py                📝 Agent evaluator (example below)
+│       ├── red_team_scanner.py         📝 Security scanner (example below)
+│       ├── test_cases.json             📝 Evaluation test cases (example below)
+│       └── reports/                    🔨 Generated reports
 │
-├── data/                               # Data and configuration
-│   ├── search-schema.json              # AI Search index schema
-│   ├── initial-docs/                   # Initial document corpus
-│   │   ├── product-manuals/            # Product documentation
-│   │   ├── policies/                   # Company policies
-│   │   └── faqs/                       # Frequently asked questions
-│   ├── fine-tuning/                    # Fine-tuning datasets
-│   │   ├── training.jsonl              # Training data
-│   │   └── validation.jsonl            # Validation data
-│   └── evaluation/                     # Evaluation datasets
-│       ├── test-conversations.json     # Test conversation data
-│       └── ground-truth.json           # Expected responses
+├── data/                               🔨 Data and configuration (you create)
+│   ├── search-schema.json              📝 AI Search index schema (example below)
+│   ├── initial-docs/                   🔨 Initial document corpus
+│   │   ├── product-manuals/            🔨 Product documentation (your data)
+│   │   ├── policies/                   🔨 Company policies (your data)
+│   │   └── faqs/                       🔨 Frequently asked questions (your data)
+│   ├── fine-tuning/                    🔨 Fine-tuning datasets (optional)
+│   │   ├── training.jsonl              🔨 Training data
+│   │   └── validation.jsonl            🔨 Validation data
+│   └── evaluation/                     🔨 Evaluation datasets
+│       ├── test-conversations.json     📝 Test conversation data (example below)
+│       └── ground-truth.json           🔨 Expected responses
 │
 ├── scripts/                            # Utility scripts
 │   ├── setup/                          # Setup scripts
@@ -256,11 +372,77 @@ retail-multiagent-solution/
 
 ---
 
+## 🚀 Snelstart: Wat je nu kunt doen
+
+### Optie 1: Alleen infrastructuur implementeren (30 minuten)
+
+**Wat je krijgt:** Alle Azure-services geïmplementeerd en klaar voor ontwikkeling
+
+```bash
+# Repository klonen
+git clone https://github.com/microsoft/AZD-for-beginners.git
+cd AZD-for-beginners/examples/retail-multiagent-arm-template
+
+# Infrastructuur implementeren
+./deploy.sh -g myResourceGroup -m standard
+
+# Implementatie verifiëren
+az resource list --resource-group myResourceGroup --output table
+```
+
+**Verwacht resultaat:**
+- ✅ Azure OpenAI-services geïmplementeerd (3 regio's)
+- ✅ AI Search-service aangemaakt (leeg)
+- ✅ Container Apps-omgeving klaar
+- ✅ Opslag, Cosmos DB, Key Vault geconfigureerd
+- ❌ Nog geen werkende agents (alleen infrastructuur)
+
+### Optie 2: Bestudeer de architectuur (2-3 uur)
+
+**Wat je krijgt:** Diepgaand begrip van multi-agent patronen
+
+1. Lees dit volledige document
+2. Bekijk codevoorbeelden voor elke component
+3. Begrijp ontwerpbeslissingen en afwegingen
+4. Bestudeer kostenoptimalisatiestrategieën
+5. Plan je implementatieaanpak
+
+**Verwacht resultaat:**
+- ✅ Duidelijk mentaal model van systeemarchitectuur
+- ✅ Begrip van vereiste componenten
+- ✅ Realistische inspanningsschattingen
+- ✅ Implementatieplan
+
+### Optie 3: Volledig systeem bouwen (80-120 uur)
+
+**Wat je krijgt:** Productieklaar multi-agent systeem
+
+1. **Fase 1:** Implementeer infrastructuur (reeds gedaan)
+2. **Fase 2:** Implementeer agents met behulp van onderstaande codevoorbeelden (30-40 uur)
+3. **Fase 3:** Bouw routeringsservice (12-16 uur)
+4. **Fase 4:** Maak frontend-UI (20-30 uur)
+5. **Fase 5:** Configureer datapijplijnen (8-12 uur)
+6. **Fase 6:** Voeg monitoring & evaluatie toe (10-15 uur)
+
+**Verwacht resultaat:**
+- ✅ Volledig functioneel multi-agent systeem
+- ✅ Monitoring van productiekwaliteit
+- ✅ Beveiligingsvalidatie
+- ✅ Kosten-geoptimaliseerde implementatie
+
+---
+
+## 📚 Architectuurreferentie & Implementatiegids
+
+De volgende secties bieden gedetailleerde architectuurpatronen, configuratievoorbeelden en referentiecode om je implementatie te begeleiden.
+
 ## Initiële Configuratievereisten
 
 ### 1. Meerdere Agents & Configuratie
 
-**Doel**: Implementeer 2 gespecialiseerde agents - "Customer Agent" (klantenservice) en "Inventory" (voorraadbeheer)
+**Doel**: Implementeer 2 gespecialiseerde agents - "Klantenservice-agent" (klantenservice) en "Voorraad" (voorraadbeheer)
+
+> **📝 Opmerking:** De volgende azure.yaml en Bicep-configuraties zijn **referentievoorbeelden** die laten zien hoe je multi-agent implementaties structureert. Je moet deze bestanden en de bijbehorende agentimplementaties zelf maken.
 
 #### Configuratiestappen:
 
@@ -336,7 +518,7 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 
 ### 2. Meerdere Modellen met Capaciteitsplanning
 
-**Doel**: Implementeer chatmodel (Customer), embeddingsmodel (zoekopdrachten) en redeneermodel (grader) met juiste quotabeheer
+**Doel**: Implementeer chatmodel (Klantenservice), embeddingsmodel (zoekopdrachten) en redeneermodel (grader) met juiste quotabeheer
 
 #### Multi-regio Strategie:
 
@@ -391,9 +573,9 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search met Gegevensindexconfiguratie
+### 3. AI Search met Data Index Configuratie
 
-**Doel**: Configureer AI Search voor gegevensupdates en geautomatiseerde indexering
+**Doel**: Configureer AI Search voor data-updates en geautomatiseerde indexering
 
 #### Pre-Provisioning Hook:
 
@@ -403,7 +585,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Create search service with specific SKU
+# Maak zoekservice met specifieke SKU
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -412,7 +594,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Post-Provisioning Gegevensinstelling:
+#### Post-Provisioning Data Setup:
 
 ```bash
 #!/bin/bash
@@ -420,16 +602,16 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Get search service key
+# Haal zoekdienstsleutel op
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Create index schema
+# Maak indexschema aan
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Upload initial documents
+# Upload initiële documenten
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
@@ -463,7 +645,7 @@ python ./scripts/upload_search_data.py \
 
 ### 4. Agent Tool Configuratie voor AI Search
 
-**Doel**: Configureer agents om AI Search te gebruiken als een onderliggende tool
+**Doel**: Configureer agents om AI Search als hulpmiddel te gebruiken
 
 #### Implementatie van Agent Search Tool:
 
@@ -522,13 +704,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # First, search for relevant context
+        # Zoek eerst naar relevante context
         search_results = await self.search_tool.search_products(user_query)
         
-        # Prepare context for the LLM
+        # Bereid context voor de LLM voor
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Generate response with grounding
+        # Genereer antwoord met onderbouwing
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -540,11 +722,11 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Bestandupload Storage Integratie
+### 5. Integratie van Bestanduploads
 
 **Doel**: Agents in staat stellen geüploade bestanden (handleidingen, documenten) te verwerken voor RAG-context
 
-#### Storage Configuratie:
+#### Opslagconfiguratie:
 
 ```bicep
 // infra/storage.bicep
@@ -583,7 +765,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Documentverwerkingspipeline:
+#### Documentverwerkingspijplijn:
 
 ```python
 # src/document_processor.py
@@ -603,13 +785,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Download file from blob storage
+        # Bestand downloaden van blobopslag
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Extract text using Document Intelligence
+        # Tekst extraheren met Document Intelligence
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -617,19 +799,19 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # Extract text content
+        # Tekstinhoud extraheren
         text_content = ""
         for page in result.pages:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Generate embeddings
+        # Embeddings genereren
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Index in AI Search
+        # Indexeren in AI Search
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -643,7 +825,7 @@ class DocumentProcessor:
 
 ### 6. Bing Search Integratie
 
-**Doel**: Voeg Bing Search-functionaliteiten toe voor realtime informatie
+**Doel**: Voeg Bing Search-mogelijkheden toe voor realtime informatie
 
 #### Bicep Resource Toevoeging:
 
@@ -709,9 +891,9 @@ class BingSearchTool:
 
 ## Monitoring & Observatie
 
-### 7. Tracing en Application Insights
+### 7. Tracering en Application Insights
 
-**Doel**: Uitgebreide monitoring met trace logs en application insights
+**Doel**: Uitgebreide monitoring met traceerlogs en application insights
 
 #### Application Insights Configuratie:
 
@@ -780,7 +962,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Configure logging
+        # Logboekregistratie configureren
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -811,7 +993,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Truncate for privacy
+            'query': query[:100],  # Inkorten voor privacy
             'results_found': str(results_count > 0)
         }
         
@@ -879,7 +1061,7 @@ class AgentTelemetry:
 #### Red Teaming Configuratie:
 
 ```python
-# src/security/red_team_scanner.py
+# src/beveiliging/red_team_scanner.py
 import asyncio
 from typing import List, Dict
 import json
@@ -924,7 +1106,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Calculate overall security score
+        # Bereken totale beveiligingsscore
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -992,8 +1174,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Implementation would send HTTP request to agent endpoint
-        # For demo purposes, returning placeholder
+        # Implementatie zou HTTP-verzoek naar agent-endpoint sturen
+        # Voor demonstratiedoeleinden, placeholder retourneren
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1015,7 +1197,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Simplified vulnerability detection
+        # Vereenvoudigde kwetsbaarheidsdetectie
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1050,14 +1232,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Basic scoring: 100 - (vulnerabilities / total * 100)
+        # Basis scoring: 100 - (kwetsbaarheden / totaal * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Reduce score based on severity
+        # Score verlagen op basis van ernst
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1067,7 +1249,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Geautomatiseerde Beveiligingspipeline:
+#### Geautomatiseerde Beveiligingspijplijn:
 
 ```bash
 #!/bin/bash
@@ -1075,13 +1257,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Get agent endpoint from deployment
+# Haal agent endpoint op van deployment
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Run security scan
+# Voer beveiligingsscan uit
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1093,7 +1275,7 @@ echo "Security scan completed. Check security_reports/ for results."
 
 ### 9. Agent Evaluatie met Grader Model
 
-**Doel**: Implementeer evaluatiesysteem met een toegewijd grader model
+**Doel**: Implementeer evaluatiesysteem met toegewijd grader model
 
 #### Grader Model Configuratie:
 
@@ -1138,7 +1320,7 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
 }
 ```
 
-#### Evaluatiekader:
+#### Evaluatie Framework:
 
 ```python
 # src/evaluation/agent_evaluator.py
@@ -1168,7 +1350,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Calculate summary metrics
+        # Bereken samenvattingsstatistieken
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1178,10 +1360,10 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # Get agent response
+        # Verkrijg agentantwoord
         agent_response = await self._get_agent_response(user_query)
         
-        # Grade the response
+        # Beoordeel het antwoord
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1252,7 +1434,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Parse JSON response
+            # Parseer JSON-antwoord
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1298,7 +1480,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Performance rating
+        # Prestatiebeoordeling
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1353,9 +1535,9 @@ class AgentEvaluator:
 
 ---
 
-## Aanpassing & Updates
+## Aanpassingen & Updates
 
-### 10. Container App Aanpassing
+### 10. Aanpassing van Container Apps
 
 **Doel**: Update container app configuratie en vervang door aangepaste UI
 
@@ -1402,7 +1584,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Build en Implementatiescript:
+#### Build- en Implementatiescript:
 
 ```bash
 #!/bin/bash
@@ -1410,7 +1592,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Build custom image with environment variables
+# Bouw aangepaste afbeelding met omgevingsvariabelen
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1418,13 +1600,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Push to Azure Container Registry
+# Push naar Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Update container app
+# Update container-app
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1445,13 +1627,13 @@ echo "Frontend deployed successfully!"
 
 **Oplossing**:
 ```bash
-# Check current quota usage
+# Controleer het huidige quotagebruik
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Request quota increase
+# Vraag om een quotaverhoging
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1462,7 +1644,7 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Model Implementatie Verloop
+#### 2. Model Implementatie Verlooptijd
 
 **Probleem**: Modelimplementatie mislukt vanwege verlopen API-versie
 
@@ -1474,7 +1656,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # This would call Azure OpenAI API to get current versions
+    # Dit zou Azure OpenAI API aanroepen om huidige versies te verkrijgen
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1491,12 +1673,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Read and update template
+    # Lees en werk sjabloon bij
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Update version in template
+        # Werk versie bij in sjabloon
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1513,7 +1695,7 @@ if __name__ == "__main__":
 
 #### 3. Fine-tuning Integratie
 
-**Probleem**: Hoe fine-tuned modellen te integreren in AZD-implementatie
+**Probleem**: Hoe fine-tuned modellen integreren in AZD-implementatie
 
 **Oplossing**:
 ```python
@@ -1553,8 +1735,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Update deployment to use fine-tuned model
-            # This would call Azure CLI to update the deployment
+            # Update de implementatie om het fijn-afgestelde model te gebruiken
+            # Dit zou Azure CLI aanroepen om de implementatie bij te werken
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1563,7 +1745,7 @@ class FineTuningPipeline:
 
 ---
 
-## FAQ & Open Eindverkenning
+## FAQ & Open Verkenning
 
 ### Veelgestelde Vragen
 
@@ -1586,12 +1768,12 @@ services:
         }
 ```
 
-#### V: Kan ik "model router" implementeren als een model (kostenimplicaties)?
+#### V: Kan ik een "modelrouter" implementeren als een model (kostenimplicaties)?
 
 **A: Ja, met zorgvuldige overweging:**
 
 ```python
-# Model Router Implementation
+# Modelrouterimplementatie
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
@@ -1611,7 +1793,7 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Implementation would calculate potential savings
+        # Implementatie zou potentiële besparingen berekenen
         pass
 ```
 
@@ -1622,25 +1804,25 @@ class ModelRouter:
 
 #### V: Kan ik een fine-tuning job starten vanuit een azd-template?
 
-**A: Ja, met post-provisioning hooks:**
+**A: Ja, met behulp van post-provisioning hooks:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Fine-tuning Integration
+# hooks/postprovision.sh - Fijn-afstemming Integratie
 
 echo "Starting fine-tuning pipeline..."
 
-# Upload training data
+# Upload trainingsgegevens
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Start fine-tuning job
+# Start fijn-afstemmingsjob
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4o-mini")
 
-# Store job ID for monitoring
+# Sla job-ID op voor monitoring
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
@@ -1649,7 +1831,7 @@ echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 
 ### Geavanceerde Scenario's
 
-#### Multi-regio Implementatiestrategie
+#### Multi-Regio Implementatiestrategie
 
 ```bicep
 // infra/multi-region.bicep
@@ -1688,7 +1870,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 #### Kostenoptimalisatie Framework
 
 ```python
-# src/optimization/cost_optimizer.py
+# src/optimalisatie/kosten_optimizer.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1697,7 +1879,7 @@ class CostOptimizer:
         """Analyze usage to recommend optimizations"""
         recommendations = []
         
-        # Model usage analysis
+        # Analyse van modelgebruik
         model_usage = self.analytics.get_model_usage()
         for model, usage in model_usage.items():
             if usage['utilization'] < 0.3:
@@ -1709,7 +1891,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Peak time analysis
+        # Analyse van piektijden
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1730,67 +1912,71 @@ class CostOptimizer:
 ```
 
 ---
+## ✅ Klaar-voor-Gebruik ARM-sjabloon
 
-## Klaar-voor-Implementatie ARM Template
+> **✨ DIT BESTAAT ECHT EN WERKT!**  
+> In tegenstelling tot de conceptuele codevoorbeelden hierboven, is het ARM-sjabloon een **echt, werkend infrastructuurimplementatie** die in deze repository is opgenomen.
 
-Voor directe implementatie van de complete retail multi-agent oplossing hebben we een uitgebreide ARM-template geleverd die alle benodigde Azure-resources met één opdracht implementeert.
+### Wat Dit Sjabloon Eigenlijk Doet
 
-### Wat is inbegrepen in de ARM Template
+Het ARM-sjabloon in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) voorziet in **alle Azure-infrastructuur** die nodig is voor het multi-agent systeem. Dit is het **enige kant-en-klare onderdeel** - alles anders vereist ontwikkeling.
 
-De ARM-template in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) bevat:
+### Wat Er in het ARM-sjabloon Zit
 
-#### **Complete Infrastructuur**
+Het ARM-sjabloon in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) bevat:
+
+#### **Volledige Infrastructuur**
 - ✅ **Multi-regio Azure OpenAI** implementaties (GPT-4o, GPT-4o-mini, embeddings, grader)
 - ✅ **Azure AI Search** met vectorzoekmogelijkheden
 - ✅ **Azure Storage** met document- en uploadcontainers
-- ✅ **Container Apps Omgeving** met automatische schaalvergroting
-- ✅ **Agent Router & Frontend** container apps
-- ✅ **Cosmos DB** voor chatgeschiedenis persistentie
+- ✅ **Container Apps Environment** met automatische schaalvergroting
+- ✅ **Agent Router & Frontend** container-apps
+- ✅ **Cosmos DB** voor het opslaan van chatgeschiedenis
 - ✅ **Application Insights** voor uitgebreide monitoring
 - ✅ **Key Vault** voor veilige geheimbeheer
-- ✅ **Document Intelligence** voor bestandverwerking
+- ✅ **Document Intelligence** voor bestandsverwerking
 - ✅ **Bing Search API** voor realtime informatie
 
 #### **Implementatiemodi**
-| Modus | Gebruiksscenario | Resources | Geschatte Kosten/maand |
-|-------|------------------|-----------|------------------------|
-| **Minimal** | Ontwikkeling, Testen | Basis SKUs, Single regio | $100-370 |
-| **Standard** | Productie, Gemiddelde schaal | Standaard SKUs, Multi-regio | $420-1,450 |
-| **Premium** | Enterprise, Hoge schaal | Premium SKUs, HA setup | $1,150-3,500 |
+| Modus | Gebruiksscenario | Middelen | Geschatte Kosten/maand |
+|-------|------------------|----------|-------------------------|
+| **Minimal** | Ontwikkeling, Testen | Basis-SKUs, Eén regio | $100-370 |
+| **Standaard** | Productie, Gemiddelde schaal | Standaard-SKUs, Multi-regio | $420-1,450 |
+| **Premium** | Enterprise, Hoge schaal | Premium-SKUs, HA-opstelling | $1,150-3,500 |
 
 ### 🎯 Snelle Implementatieopties
 
-#### Optie 1: One-Click Azure Implementatie
+#### Optie 1: Eén-Klik Azure Implementatie
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
 #### Optie 2: Azure CLI Implementatie
 
 ```bash
-# Clone the repository
+# Clone de repository
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Make deployment script executable
+# Maak het implementatiescript uitvoerbaar
 chmod +x deploy.sh
 
-# Deploy with default settings (Standard mode)
+# Implementeer met standaardinstellingen (Standaardmodus)
 ./deploy.sh -g myResourceGroup
 
-# Deploy for production with premium features
+# Implementeer voor productie met premiumfuncties
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Deploy minimal version for development
+# Implementeer minimale versie voor ontwikkeling
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Optie 3: Directe ARM Template Implementatie
+#### Optie 3: Directe ARM-sjabloon Implementatie
 
 ```bash
-# Create resource group
+# Maak resourcegroep
 az group create --name myResourceGroup --location eastus2
 
-# Deploy template directly
+# Implementeer sjabloon direct
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1798,7 +1984,7 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### Template Outputs
+### Sjabloonuitvoer
 
 Na succesvolle implementatie ontvang je:
 
@@ -1814,13 +2000,13 @@ Na succesvolle implementatie ontvang je:
 }
 ```
 
-### 🔧 Post-Implementatie Configuratie
+### 🔧 Configuratie na Implementatie
 
-De ARM-template verzorgt infrastructuurprovisioning. Na implementatie:
+Het ARM-sjabloon verzorgt de infrastructuur. Na implementatie:
 
 1. **Configureer Zoekindex**:
    ```bash
-   # Use the provided search schema
+   # Gebruik het meegeleverde zoekschema
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
@@ -1829,16 +2015,16 @@ De ARM-template verzorgt infrastructuurprovisioning. Na implementatie:
 
 2. **Upload Initiële Documenten**:
    ```bash
-   # Upload product manuals and knowledge base
+   # Upload producthandleidingen en kennisbank
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Implementeer Agent Code**:
+3. **Implementeer Agentcode**:
    ```bash
-   # Build and deploy actual agent applications
+   # Bouw en implementeer daadwerkelijke agenttoepassingen
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -1864,43 +2050,145 @@ Bewerk `azuredeploy.parameters.json` om je implementatie aan te passen:
 
 ### 📊 Implementatiefuncties
 
-- ✅ **Vereistenvalidatie** (Azure CLI, quota's, permissies)
+- ✅ **Validatie van vereisten** (Azure CLI, quota's, machtigingen)
 - ✅ **Multi-regio hoge beschikbaarheid** met automatische failover
 - ✅ **Uitgebreide monitoring** met Application Insights en Log Analytics
 - ✅ **Beveiligingsbest practices** met Key Vault en RBAC
 - ✅ **Kostenoptimalisatie** met configureerbare implementatiemodi
-- ✅ **Automatische schaalvergroting** gebaseerd op vraagpatronen
-- ✅ **Zero-downtime updates** met Container Apps revisies
+- ✅ **Automatische schaalvergroting** op basis van vraagpatronen
+- ✅ **Zero-downtime updates** met Container Apps-revisies
 
 ### 🔍 Monitoring en Beheer
 
 Na implementatie kun je je oplossing monitoren via:
 
-- **Application Insights**: Prestatiestatistieken, afhankelijkheidstracking en aangepaste telemetrie
+- **Application Insights**: Prestatiestatistieken, afhankelijkheidstracering en aangepaste telemetrie
 - **Log Analytics**: Gecentraliseerde logging van alle componenten
 - **Azure Monitor**: Monitoring van resourcegezondheid en beschikbaarheid
 - **Kostenbeheer**: Realtime kostenbewaking en budgetwaarschuwingen
 
 ---
 
-## 📚 Complete Implementatiegids
+## 📚 Complete Implementatiehandleiding
 
-Dit scenariodocument, gecombineerd met de ARM-template, biedt alles wat nodig is om een productieklare multi-agent klantenondersteuningsoplossing te implementeren. De implementatie omvat:
+Dit scenariodocument, samen met het ARM-sjabloon, biedt alles wat nodig is om een productieklare multi-agent klantenondersteuningsoplossing te implementeren. De implementatie omvat:
 
 ✅ **Architectuurontwerp** - Uitgebreid systeemontwerp met componentrelaties  
-✅ **Infrastructuurprovisioning** - Complete ARM-template voor één-klik implementatie  
-✅ **Agentconfiguratie** - Gedetailleerde setup voor Customer en Inventory agents  
-✅ **Multi-model implementatie** - Strategische modelplaatsing over regio's  
-✅ **Zoekintegratie** - AI Search met vectorfunctionaliteiten en gegevensindexering  
-✅ **Beveiligingsimplementatie** - Red teaming, kwetsbaarheidsscanning en veilige praktijken  
+✅ **Infrastructuurvoorziening** - Compleet ARM-sjabloon voor één-klik implementatie  
+✅ **Agentconfiguratie** - Gedetailleerde setup voor Klant- en Inventarisagents  
+✅ **Multi-Model Implementatie** - Strategische modelplaatsing over regio's  
+✅ **Zoekintegratie** - AI Search met vectorcapaciteiten en data-indexering  
+✅ **Beveiligingsimplementatie** - Red teaming, kwetsbaarheidsscans en veilige praktijken  
 ✅ **Monitoring & Evaluatie** - Uitgebreide telemetrie en evaluatiekader voor agents  
-✅ **Productiegereedheid** - Enterprise-grade implementatie met HA en disaster recovery  
+✅ **Productieklaarheid** - Enterprise-grade implementatie met HA en disaster recovery  
 ✅ **Kostenoptimalisatie** - Intelligente routering en gebruiksgebaseerde schaalvergroting  
 ✅ **Probleemoplossingsgids** - Veelvoorkomende problemen en oplossingsstrategieën
 
-Dit uitgebreide scenario dekt alle vereisten voor de multi-agent oplossing voor winkeliers en biedt praktische implementatierichtlijnen, probleemoplossingsondersteuning en geavanceerde verkenningsthema's voor het bouwen van productieklare AI-toepassingen met AZD.
+---
+
+## 📊 Samenvatting: Wat Je Hebt Geleerd
+
+### Behandelde Architectuurpatronen
+
+✅ **Multi-Agent Systeemontwerp** - Gespecialiseerde agents (Klant + Inventaris) met toegewijde modellen  
+✅ **Multi-Regio Implementatie** - Strategische modelplaatsing voor kostenoptimalisatie en redundantie  
+✅ **RAG Architectuur** - AI Search integratie met vector embeddings voor onderbouwde antwoorden  
+✅ **Agent Evaluatie** - Toegewijd grader-model voor kwaliteitsbeoordeling  
+✅ **Beveiligingskader** - Red teaming en kwetsbaarheidsscanpatronen  
+✅ **Kostenoptimalisatie** - Modelroutering en capaciteitsplanningsstrategieën  
+✅ **Productiemonitoring** - Application Insights met aangepaste telemetrie  
+
+### Wat Dit Document Biedt
+
+| Component | Status | Waar Te Vinden |
+|-----------|--------|----------------|
+| **Infrastructuursjabloon** | ✅ Klaar voor Implementatie | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architectuurdiagrammen** | ✅ Compleet | Mermaid diagram hierboven |
+| **Codevoorbeelden** | ✅ Referentie-Implementaties | Door dit document heen |
+| **Configuratiepatronen** | ✅ Gedetailleerde Richtlijnen | Secties 1-10 hierboven |
+| **Agentimplementaties** | 🔨 Jij Bouwt Dit | ~40 uur ontwikkeling |
+| **Frontend UI** | 🔨 Jij Bouwt Dit | ~25 uur ontwikkeling |
+| **Datapijplijnen** | 🔨 Jij Bouwt Dit | ~10 uur ontwikkeling |
+
+### Realiteitscheck: Wat Bestaat Eigenlijk
+
+**In Repository (Klaar Nu):**
+- ✅ ARM-sjabloon dat 15+ Azure-services implementeert (azuredeploy.json)
+- ✅ Implementatiescript met validatie (deploy.sh)
+- ✅ Parametersconfiguratie (azuredeploy.parameters.json)
+
+**Genoemd in Document (Jij Creëert):**
+- 🔨 Agentimplementatiecode (~30-40 uur)
+- 🔨 Routeringsservice (~12-16 uur)
+- 🔨 Frontendapplicatie (~20-30 uur)
+- 🔨 Datascripts (~8-12 uur)
+- 🔨 Monitoringkader (~10-15 uur)
+
+### Jouw Volgende Stappen
+
+#### Als Je Infrastructuur Wilt Implementeren (30 minuten)
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup
+```
+
+#### Als Je Het Complete Systeem Wilt Bouwen (80-120 uur)
+1. ✅ Lees en begrijp dit architectuurdokument (2-3 uur)
+2. ✅ Implementeer infrastructuur met ARM-sjabloon (30 minuten)
+3. 🔨 Implementeer agents met referentiecodepatronen (~40 uur)
+4. 🔨 Bouw routeringsservice met FastAPI/Express (~15 uur)
+5. 🔨 Maak frontend UI met React/Vue (~25 uur)
+6. 🔨 Configureer datapijplijn en zoekindex (~10 uur)
+7. 🔨 Voeg monitoring en evaluatie toe (~15 uur)
+8. ✅ Test, beveilig en optimaliseer (~10 uur)
+
+#### Als Je Multi-Agent Patronen Wilt Leren (Studie)
+- 📖 Bekijk het architectuurdiagram en de componentrelaties
+- 📖 Bestudeer codevoorbeelden voor SearchTool, BingTool, AgentEvaluator
+- 📖 Begrijp de multi-regio implementatiestrategie
+- 📖 Leer evaluatie- en beveiligingskaders
+- 📖 Pas patronen toe op je eigen projecten
+
+### Belangrijkste Inzichten
+
+1. **Infrastructuur vs. Applicatie** - ARM-sjabloon biedt infrastructuur; agents vereisen ontwikkeling
+2. **Multi-Regio Strategie** - Strategische modelplaatsing verlaagt kosten en verbetert betrouwbaarheid
+3. **Evaluatiekader** - Toegewijd grader-model maakt continue kwaliteitsbeoordeling mogelijk
+4. **Beveiliging Eerst** - Red teaming en kwetsbaarheidsscans zijn essentieel voor productie
+5. **Kostenoptimalisatie** - Intelligente routering tussen GPT-4o en GPT-4o-mini bespaart 60-80%
+
+### Geschatte Kosten
+
+| Implementatiemodus | Infrastructuur/maand | Ontwikkeling (Eenmalig) | Totale Eerste Maand |
+|--------------------|-----------------------|--------------------------|---------------------|
+| **Minimal** | $100-370 | $15K-25K (80-120 uur) | $15.1K-25.4K |
+| **Standaard** | $420-1,450 | $15K-25K (zelfde inspanning) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (zelfde inspanning) | $16.2K-28.5K |
+
+**Opmerking:** Infrastructuur is <5% van de totale kosten voor nieuwe implementaties. Ontwikkelingsinspanning is de grootste investering.
+
+### Gerelateerde Bronnen
+
+- 📚 [ARM-sjabloon Implementatiehandleiding](retail-multiagent-arm-template/README.md) - Infrastructuurinstelling
+- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Modelimplementatie
+- 📚 [AI Search Documentatie](https://learn.microsoft.com/azure/search/) - Vectorzoekconfiguratie
+- 📚 [Container Apps Patronen](https://learn.microsoft.com/azure/container-apps/) - Microservices implementatie
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Monitoringinstelling
+
+### Vragen of Problemen?
+
+- 🐛 [Meld Problemen](https://github.com/microsoft/AZD-for-beginners/issues) - Sjabloonfouten of documentatiefouten
+- 💬 [GitHub Discussies](https://github.com/microsoft/AZD-for-beginners/discussions) - Architectuurvragen
+- 📖 [FAQ](../../resources/faq.md) - Veelgestelde vragen beantwoord
+- 🔧 [Probleemoplossingsgids](../../docs/troubleshooting/common-issues.md) - Implementatieproblemen
 
 ---
 
+**Dit uitgebreide scenario biedt een enterprise-grade architectuurblauwdruk voor multi-agent AI-systemen, compleet met infrastructuursjablonen, implementatierichtlijnen en productie-best practices voor het bouwen van geavanceerde klantenondersteuningsoplossingen met Azure Developer CLI.**
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

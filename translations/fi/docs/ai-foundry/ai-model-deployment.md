@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T06:33:20+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-21T15:59:57+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "fi"
 }
@@ -12,11 +12,11 @@ CO_OP_TRANSLATOR_METADATA:
 **Luvun navigointi:**
 - **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
 - **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
-- **⬅️ Edellinen**: [Azure AI Foundry -integraatio](azure-ai-foundry-integration.md)
+- **⬅️ Edellinen**: [Microsoft Foundry -integraatio](microsoft-foundry-integration.md)
 - **➡️ Seuraava**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../getting-started/configuration.md)
 
-Tämä opas tarjoaa kattavat ohjeet AI-mallien käyttöönottoon AZD-mallipohjien avulla, sisältäen kaiken mallin valinnasta tuotantokäyttöön liittyviin käyttöönoton malleihin.
+Tämä opas tarjoaa kattavat ohjeet AI-mallien käyttöönottoon AZD-mallipohjien avulla, kattaen kaiken mallin valinnasta tuotantokäyttöön liittyviin malleihin.
 
 ## Sisällysluettelo
 
@@ -24,7 +24,7 @@ Tämä opas tarjoaa kattavat ohjeet AI-mallien käyttöönottoon AZD-mallipohjie
 - [AZD-konfigurointi AI-malleille](../../../../docs/ai-foundry)
 - [Käyttöönoton mallit](../../../../docs/ai-foundry)
 - [Mallien hallinta](../../../../docs/ai-foundry)
-- [Tuotantokäytön huomioita](../../../../docs/ai-foundry)
+- [Tuotantoon liittyvät näkökohdat](../../../../docs/ai-foundry)
 - [Seuranta ja näkyvyys](../../../../docs/ai-foundry)
 
 ## Mallin valintastrategia
@@ -61,12 +61,12 @@ services:
 
 ### Mallin kapasiteettisuunnittelu
 
-| Mallityyppi | Käyttötarkoitus | Suositeltu kapasiteetti | Kustannushuomiot |
-|-------------|-----------------|-------------------------|------------------|
+| Mallityyppi | Käyttötarkoitus | Suositeltu kapasiteetti | Kustannusnäkökohdat |
+|-------------|----------------|-------------------------|---------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kustannustehokas useimmille työkuormille |
 | GPT-4 | Monimutkainen päättely | 20-100 TPM | Korkeammat kustannukset, käytä premium-ominaisuuksiin |
 | Text-embedding-ada-002 | Haku, RAG | 30-120 TPM | Välttämätön semanttiseen hakuun |
-| Whisper | Puhe tekstiksi | 10-50 TPM | Äänidatan käsittelytyökuormat |
+| Whisper | Puhe tekstiksi | 10-50 TPM | Äänidatan käsittelyyn |
 
 ## AZD-konfigurointi AI-malleille
 
@@ -133,10 +133,10 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Ympäristömuuttujat
 
-Konfiguroi sovelluksesi ympäristö:
+Määritä sovelluksesi ympäristö:
 
 ```bash
-# .env configuration
+# .env-konfiguraatio
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -158,12 +158,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Paras seuraaviin:
-- Kehitys ja testaus
-- Yhden markkina-alueen sovellukset
-- Kustannusten optimointi
+Sopii parhaiten:
+- Kehitykseen ja testaukseen
+- Yhden markkina-alueen sovelluksiin
+- Kustannusten optimointiin
 
-### Malli 2: Monialueen käyttöönotto
+### Malli 2: Monialueinen käyttöönotto
 
 ```bicep
 // Multi-region deployment
@@ -176,10 +176,10 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Paras seuraaviin:
-- Globaalit sovellukset
-- Korkean saatavuuden vaatimukset
-- Kuormituksen jakaminen
+Sopii parhaiten:
+- Globaaleihin sovelluksiin
+- Korkean käytettävyyden vaatimuksiin
+- Kuormituksen jakamiseen
 
 ### Malli 3: Hybridikäyttöönotto
 
@@ -236,7 +236,7 @@ Seuraa malliversioita AZD-konfiguraatiossasi:
 
 ### Mallipäivitykset
 
-Käytä AZD-hookeja mallipäivityksiin:
+Käytä AZD-koukkuja mallipäivityksiin:
 
 ```bash
 #!/bin/bash
@@ -273,14 +273,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Tuotantokäytön huomioita
+## Tuotantoon liittyvät näkökohdat
 
 ### Kapasiteettisuunnittelu
 
 Laske tarvittava kapasiteetti käyttötapojen perusteella:
 
 ```python
-# Capacity calculation example
+# Kapasiteettilaskennan esimerkki
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Käyttöesimerkki
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -302,9 +302,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Automaattisen skaalaamisen konfigurointi
+### Automaattinen skaalaus
 
-Konfiguroi automaattinen skaalaus Container Appsille:
+Määritä automaattinen skaalaus Container Apps -sovelluksille:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -376,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights -integraatio
 
-Konfiguroi seuranta AI-työkuormille:
+Määritä AI-työkuormien seuranta:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Seuraa AI-spesifisiä mittareita:
 
 ```python
-# Custom telemetry for AI models
+# Mukautettu telemetria AI-malleille
 import logging
 from applicationinsights import TelemetryClient
 
@@ -449,12 +449,12 @@ class AITelemetry:
         )
 ```
 
-### Terveystarkistukset
+### Terveystarkastukset
 
-Ota käyttöön AI-palveluiden terveydenseuranta:
+Ota käyttöön AI-palveluiden terveydentilan seuranta:
 
 ```python
-# Health check endpoints
+# Terveystarkistuspisteet
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Testaa OpenAI-yhteyttä
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,10 +482,10 @@ async def check_ai_models():
 
 ## Seuraavat askeleet
 
-1. **Tutustu [Azure AI Foundry -integraatio-oppaaseen](azure-ai-foundry-integration.md)** palveluiden integrointimalleista
+1. **Tutustu [Microsoft Foundry -integraatio-oppaaseen](microsoft-foundry-integration.md)** palveluiden integrointimalleihin
 2. **Suorita [AI Workshop Lab](ai-workshop-lab.md)** saadaksesi käytännön kokemusta
-3. **Ota käyttöön [Tuotannon AI-käytännöt](production-ai-practices.md)** yrityskäyttöönottoja varten
-4. **Tutustu [AI-vianmääritysoppaaseen](../troubleshooting/ai-troubleshooting.md)** yleisten ongelmien ratkaisemiseksi
+3. **Ota käyttöön [Tuotannon AI-käytännöt](production-ai-practices.md)** yrityskäyttöön
+4. **Tutki [AI-vianmääritysopasta](../troubleshooting/ai-troubleshooting.md)** yleisten ongelmien ratkaisemiseksi
 
 ## Resurssit
 
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Luvun navigointi:**
 - **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
 - **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
-- **⬅️ Edellinen**: [Azure AI Foundry -integraatio](azure-ai-foundry-integration.md)
+- **⬅️ Edellinen**: [Microsoft Foundry -integraatio](microsoft-foundry-integration.md)
 - **➡️ Seuraava**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
 Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
