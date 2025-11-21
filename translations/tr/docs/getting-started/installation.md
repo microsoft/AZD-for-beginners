@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
-  "translation_date": "2025-09-17T21:55:38+00:00",
+  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
+  "translation_date": "2025-11-20T23:04:55+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "tr"
 }
@@ -10,11 +10,11 @@ CO_OP_TRANSLATOR_METADATA:
 # Kurulum ve Ayar Kılavuzu
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç
 - **⬅️ Önceki**: [AZD Temelleri](azd-basics.md)
 - **➡️ Sonraki**: [İlk Projeniz](first-project.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-First Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-Öncelikli Geliştirme](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Giriş
 
@@ -24,25 +24,25 @@ Bu kapsamlı kılavuz, Azure Developer CLI (azd) aracını sisteminize nasıl ku
 
 Bu dersin sonunda:
 - Azure Developer CLI'yi işletim sisteminize başarıyla kurmuş olacaksınız
-- Azure ile çeşitli yöntemler kullanarak kimlik doğrulama yapılandırması yapabileceksiniz
-- Geliştirme ortamınızı gerekli ön koşullarla hazırlayabileceksiniz
-- Farklı kurulum seçeneklerini ve her birinin ne zaman kullanılacağını anlayabileceksiniz
-- Yaygın kurulum ve yapılandırma sorunlarını çözebileceksiniz
+- Azure ile çeşitli yöntemlerle kimlik doğrulama yapmayı öğreneceksiniz
+- Geliştirme ortamınızı gerekli ön koşullarla kurmuş olacaksınız
+- Farklı kurulum seçeneklerini ve her birinin ne zaman kullanılacağını anlayacaksınız
+- Yaygın kurulum ve ayar sorunlarını çözebileceksiniz
 
 ## Öğrenme Çıktıları
 
 Bu dersi tamamladıktan sonra:
 - Platformunuz için uygun yöntemi kullanarak azd'yi kurabileceksiniz
-- azd auth login komutunu kullanarak Azure ile kimlik doğrulama yapabileceksiniz
+- azd auth login ile Azure'da kimlik doğrulama yapabileceksiniz
 - Kurulumunuzu doğrulayıp temel azd komutlarını test edebileceksiniz
-- Geliştirme ortamınızı azd'nin en iyi şekilde kullanımı için yapılandırabileceksiniz
+- Geliştirme ortamınızı azd'yi en iyi şekilde kullanmak için yapılandırabileceksiniz
 - Yaygın kurulum sorunlarını bağımsız olarak çözebileceksiniz
 
 Bu kılavuz, işletim sisteminiz veya geliştirme ortamınız ne olursa olsun Azure Developer CLI'yi sisteminize kurmanıza ve yapılandırmanıza yardımcı olacaktır.
 
 ## Ön Koşullar
 
-azd'yi kurmadan önce aşağıdakilere sahip olduğunuzdan emin olun:
+azd'yi kurmadan önce şunlara sahip olduğunuzdan emin olun:
 - **Azure aboneliği** - [Ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/)
 - **Azure CLI** - Kimlik doğrulama ve kaynak yönetimi için
 - **Git** - Şablonları klonlamak ve sürüm kontrolü için
@@ -54,7 +54,7 @@ azd'yi kurmadan önce aşağıdakilere sahip olduğunuzdan emin olun:
 
 #### Seçenek 1: PowerShell (Önerilen)
 ```powershell
-# Run as Administrator or with elevated privileges
+# Yönetici olarak veya yükseltilmiş ayrıcalıklarla çalıştırın
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
@@ -88,7 +88,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 #### Seçenek 3: Manuel Kurulum
 ```bash
-# Download and install
+# İndir ve yükle
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
 ```
 
@@ -103,17 +103,17 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 **Ubuntu/Debian:**
 ```bash
-# Add Microsoft package repository
+# Microsoft paket deposunu ekle
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Install azd
+# azd'yi yükle
 sudo apt-get update
 sudo apt-get install azd
 ```
 
 **RHEL/CentOS/Fedora:**
 ```bash
-# Add Microsoft package repository
+# Microsoft paket deposunu ekle
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
 sudo dnf install azd
@@ -121,15 +121,15 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd, GitHub Codespaces içinde önceden kurulu olarak gelir. Bir codespace oluşturun ve azd'yi hemen kullanmaya başlayın.
+azd, GitHub Codespaces içinde önceden kurulu olarak gelir. Sadece bir codespace oluşturun ve azd'yi hemen kullanmaya başlayın.
 
 ### Docker
 
 ```bash
-# Run azd in a container
+# Bir konteynerde azd çalıştır
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Create an alias for easier use
+# Daha kolay kullanım için bir takma ad oluştur
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
@@ -138,13 +138,13 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 Kurulumdan sonra azd'nin doğru çalıştığını doğrulayın:
 
 ```bash
-# Check version
+# Sürümü kontrol et
 azd version
 
-# View help
+# Yardımı görüntüle
 azd --help
 
-# List available templates
+# Mevcut şablonları listele
 azd template list
 ```
 
@@ -153,19 +153,28 @@ Beklenen çıktı:
 azd version 1.5.0 (commit abc123)
 ```
 
+**✅ Kurulum Başarı Kontrol Listesi:**
+- [ ] `azd version` hata olmadan sürüm numarasını gösteriyor
+- [ ] `azd --help` komut belgelerini gösteriyor
+- [ ] `azd template list` mevcut şablonları gösteriyor
+- [ ] `az account show` Azure aboneliğinizi gösteriyor
+- [ ] Test dizini oluşturup `azd init` komutunu başarıyla çalıştırabiliyorsunuz
+
+**Tüm kontroller geçerse, [İlk Projeniz](first-project.md) bölümüne geçmeye hazırsınız!**
+
 ## Kimlik Doğrulama Ayarları
 
 ### Azure CLI Kimlik Doğrulama (Önerilen)
 ```bash
-# Install Azure CLI if not already installed
+# Azure CLI'yi henüz yüklü değilse yükleyin
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
 # Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Login to Azure
+# Azure'a giriş yapın
 az login
 
-# Verify authentication
+# Kimlik doğrulamayı doğrulayın
 az account show
 ```
 
@@ -186,34 +195,34 @@ az login --service-principal \
 
 ## Yapılandırma
 
-### Genel Yapılandırma
+### Global Yapılandırma
 ```bash
-# Set default subscription
+# Varsayılan aboneliği ayarla
 azd config set defaults.subscription <subscription-id>
 
-# Set default location
+# Varsayılan konumu ayarla
 azd config set defaults.location eastus2
 
-# View all configuration
+# Tüm yapılandırmayı görüntüle
 azd config list
 ```
 
 ### Ortam Değişkenleri
 Kabuk profilinize ekleyin (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Azure configuration
+# Azure yapılandırması
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd configuration
+# azd yapılandırması
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Enable debug logging
+export AZD_DEBUG=true  # Hata ayıklama günlüğünü etkinleştir
 ```
 
 ## IDE Entegrasyonu
 
 ### Visual Studio Code
-Azure Developer CLI uzantısını kurun:
+Azure Developer CLI uzantısını yükleyin:
 1. VS Code'u açın
 2. Uzantılar bölümüne gidin (Ctrl+Shift+X)
 3. "Azure Developer CLI" arayın
@@ -249,7 +258,7 @@ Bir `.devcontainer/devcontainer.json` oluşturun:
 
 #### İzin Reddedildi (Windows)
 ```powershell
-# Run PowerShell as Administrator
+# PowerShell'i Yönetici olarak çalıştırın
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -269,35 +278,35 @@ source ~/.bashrc
 
 #### Ağ/Proxy Sorunları
 ```bash
-# Configure proxy
+# Proxy yapılandır
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# Skip SSL verification (not recommended for production)
+# SSL doğrulamasını atla (üretim için önerilmez)
 azd config set http.insecure true
 ```
 
 #### Sürüm Çakışmaları
 ```bash
-# Remove old installations
+# Eski kurulumları kaldır
 # Windows: winget uninstall Microsoft.Azd
 # macOS: brew uninstall azd
 # Linux: sudo apt remove azd
 
-# Clean configuration
+# Yapılandırmayı temizle
 rm -rf ~/.azd
 ```
 
 ### Daha Fazla Yardım Alma
 ```bash
-# Enable debug logging
+# Hata ayıklama kaydını etkinleştir
 export AZD_DEBUG=true
 azd <command> --debug
 
-# View detailed logs
+# Ayrıntılı günlükleri görüntüle
 azd logs
 
-# Check system info
+# Sistem bilgilerini kontrol et
 azd info
 ```
 
@@ -326,17 +335,83 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
+## 💡 Sıkça Sorulan Sorular
+
+<details>
+<summary><strong>azd ile az CLI arasındaki fark nedir?</strong></summary>
+
+**Azure CLI (az)**: Bireysel Azure kaynaklarını yönetmek için düşük seviyeli bir araç
+- `az webapp create`, `az storage account create`
+- Bir seferde bir kaynak
+- Altyapı yönetimi odaklı
+
+**Azure Developer CLI (azd)**: Tam uygulama dağıtımları için yüksek seviyeli bir araç
+- `azd up` tüm uygulamayı tüm kaynaklarla birlikte dağıtır
+- Şablon tabanlı iş akışları
+- Geliştirici verimliliği odaklı
+
+**Her ikisine de ihtiyacınız var**: azd, kimlik doğrulama için az CLI kullanır
+</details>
+
+<details>
+<summary><strong>azd'yi mevcut Azure kaynaklarıyla kullanabilir miyim?</strong></summary>
+
+Evet! Şunları yapabilirsiniz:
+1. Mevcut kaynakları azd ortamlarına aktarabilirsiniz
+2. Bicep şablonlarınızda mevcut kaynaklara referans verebilirsiniz
+3. Mevcut altyapının yanında yeni dağıtımlar için azd'yi kullanabilirsiniz
+
+Detaylar için [Yapılandırma Kılavuzu](configuration.md) bölümüne bakın.
+</details>
+
+<details>
+<summary><strong>azd, Azure Government veya Azure China ile çalışır mı?</strong></summary>
+
+Evet, bulutu yapılandırın:
+```bash
+# Azure Hükümeti
+az cloud set --name AzureUSGovernment
+az login
+
+# Azure Çin
+az cloud set --name AzureChinaCloud
+az login
+```
+</details>
+
+<details>
+<summary><strong>azd'yi CI/CD boru hatlarında kullanabilir miyim?</strong></summary>
+
+Kesinlikle! azd otomasyon için tasarlanmıştır:
+- GitHub Actions entegrasyonu
+- Azure DevOps desteği
+- Hizmet prensibi kimlik doğrulama
+- Etkileşimsiz mod
+
+CI/CD desenleri için [Dağıtım Kılavuzu](../deployment/deployment-guide.md) bölümüne bakın.
+</details>
+
+<details>
+<summary><strong>azd kullanmanın maliyeti nedir?</strong></summary>
+
+azd'nin kendisi **tamamen ücretsiz** ve açık kaynaklıdır. Sadece şunlar için ödeme yaparsınız:
+- Dağıttığınız Azure kaynakları
+- Azure tüketim maliyetleri (hesaplama, depolama vb.)
+
+Dağıtımdan önce maliyetleri tahmin etmek için `azd provision --preview` komutunu kullanın.
+</details>
+
 ## Sonraki Adımlar
 
 1. **Kimlik doğrulamayı tamamlayın**: Azure aboneliğinize erişebildiğinizden emin olun
-2. **İlk dağıtımınızı deneyin**: [İlk Proje Kılavuzu](first-project.md) adımlarını takip edin
-3. **Şablonları keşfedin**: `azd template list` komutuyla mevcut şablonlara göz atın
+2. **İlk dağıtımınızı deneyin**: [İlk Proje Kılavuzu](first-project.md) bölümünü takip edin
+3. **Şablonları keşfedin**: `azd template list` ile mevcut şablonlara göz atın
 4. **IDE'nizi yapılandırın**: Geliştirme ortamınızı ayarlayın
 
 ## Destek
 
 Sorunlarla karşılaşırsanız:
-- [Resmi Dokümantasyon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Resmi Belgeler](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Sorun Bildirin](https://github.com/Azure/azure-dev/issues)
 - [Topluluk Tartışmaları](https://github.com/Azure/azure-dev/discussions)
 - [Azure Destek](https://azure.microsoft.com/support/)
@@ -344,15 +419,17 @@ Sorunlarla karşılaşırsanız:
 ---
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 1 - Temel Bilgiler ve Hızlı Başlangıç
 - **⬅️ Önceki**: [AZD Temelleri](azd-basics.md) 
 - **➡️ Sonraki**: [İlk Projeniz](first-project.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-First Geliştirme](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-Öncelikli Geliştirme](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**✅ Kurulum Tamamlandı!** azd ile proje oluşturmaya başlamak için [İlk Projeniz](first-project.md) bölümüne devam edin.
+**✅ Kurulum Tamamlandı!** azd ile çalışmaya başlamak için [İlk Projeniz](first-project.md) bölümüne devam edin.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:  
 Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

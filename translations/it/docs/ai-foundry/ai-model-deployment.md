@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T21:38:42+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-20T22:21:29+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "it"
 }
@@ -12,17 +12,17 @@ CO_OP_TRANSLATOR_METADATA:
 **Navigazione Capitolo:**
 - **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
 - **📖 Capitolo Attuale**: Capitolo 2 - Sviluppo AI-First
-- **⬅️ Precedente**: [Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md)
-- **➡️ Successivo**: [Laboratorio AI Workshop](ai-workshop-lab.md)
-- **🚀 Prossimo Capitolo**: [Capitolo 3: Configurazione](../getting-started/configuration.md)
+- **⬅️ Precedente**: [Integrazione Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Successivo**: [Laboratorio Workshop AI](ai-workshop-lab.md)
+- **🚀 Capitolo Successivo**: [Capitolo 3: Configurazione](../getting-started/configuration.md)
 
-Questa guida fornisce istruzioni complete per distribuire modelli AI utilizzando i template AZD, coprendo tutto, dalla selezione del modello ai pattern di distribuzione in produzione.
+Questa guida fornisce istruzioni complete per distribuire modelli AI utilizzando i template AZD, coprendo tutto, dalla selezione del modello ai modelli di distribuzione in produzione.
 
 ## Indice
 
 - [Strategia di Selezione del Modello](../../../../docs/ai-foundry)
 - [Configurazione AZD per Modelli AI](../../../../docs/ai-foundry)
-- [Pattern di Distribuzione](../../../../docs/ai-foundry)
+- [Modelli di Distribuzione](../../../../docs/ai-foundry)
 - [Gestione dei Modelli](../../../../docs/ai-foundry)
 - [Considerazioni per la Produzione](../../../../docs/ai-foundry)
 - [Monitoraggio e Osservabilità](../../../../docs/ai-foundry)
@@ -63,10 +63,10 @@ services:
 
 | Tipo di Modello | Caso d'Uso | Capacità Raccomandata | Considerazioni sui Costi |
 |------------------|------------|-----------------------|--------------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Conveniente per la maggior parte dei carichi |
-| GPT-4 | Ragionamento complesso | 20-100 TPM | Costo più elevato, ideale per funzionalità premium |
+| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Conveniente per la maggior parte dei carichi di lavoro |
+| GPT-4 | Ragionamento complesso | 20-100 TPM | Costi più alti, da utilizzare per funzionalità premium |
 | Text-embedding-ada-002 | Ricerca, RAG | 30-120 TPM | Essenziale per la ricerca semantica |
-| Whisper | Da voce a testo | 10-50 TPM | Per carichi di lavoro audio |
+| Whisper | Da voce a testo | 10-50 TPM | Carichi di lavoro per l'elaborazione audio |
 
 ## Configurazione AZD per Modelli AI
 
@@ -136,16 +136,16 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Configura l'ambiente della tua applicazione:
 
 ```bash
-# .env configuration
+# Configurazione .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Pattern di Distribuzione
+## Modelli di Distribuzione
 
-### Pattern 1: Distribuzione in Singola Regione
+### Modello 1: Distribuzione in Singola Regione
 
 ```yaml
 # azure.yaml - Single region
@@ -163,7 +163,7 @@ Ideale per:
 - Applicazioni per un singolo mercato
 - Ottimizzazione dei costi
 
-### Pattern 2: Distribuzione Multi-Regione
+### Modello 2: Distribuzione Multi-Regione
 
 ```bicep
 // Multi-region deployment
@@ -181,7 +181,7 @@ Ideale per:
 - Requisiti di alta disponibilità
 - Distribuzione del carico
 
-### Pattern 3: Distribuzione Ibrida
+### Modello 3: Distribuzione Ibrida
 
 Combina Azure OpenAI con altri servizi AI:
 
@@ -216,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Controllo delle Versioni
 
-Tieni traccia delle versioni dei modelli nella configurazione AZD:
+Traccia le versioni dei modelli nella configurazione AZD:
 
 ```json
 {
@@ -234,9 +234,9 @@ Tieni traccia delle versioni dei modelli nella configurazione AZD:
 }
 ```
 
-### Aggiornamenti dei Modelli
+### Aggiornamenti del Modello
 
-Utilizza gli hook AZD per aggiornare i modelli:
+Utilizza i hook AZD per gli aggiornamenti dei modelli:
 
 ```bash
 #!/bin/bash
@@ -251,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### Test A/B
 
-Distribuisci più versioni di modelli:
+Distribuisci più versioni del modello:
 
 ```bicep
 param enableABTesting bool = false
@@ -277,10 +277,10 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Pianificazione della Capacità
 
-Calcola la capacità necessaria in base ai pattern di utilizzo:
+Calcola la capacità necessaria in base ai modelli di utilizzo:
 
 ```python
-# Capacity calculation example
+# Esempio di calcolo della capacità
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Esempio di utilizzo
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -302,7 +302,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Configurazione dell'Auto-Scaling
+### Configurazione Auto-scaling
 
 Configura l'auto-scaling per le Container Apps:
 
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Traccia metriche specifiche per l'AI:
 
 ```python
-# Custom telemetry for AI models
+# Telemetria personalizzata per modelli di intelligenza artificiale
 import logging
 from applicationinsights import TelemetryClient
 
@@ -449,12 +449,12 @@ class AITelemetry:
         )
 ```
 
-### Controlli di Integrità
+### Controlli di Salute
 
 Implementa il monitoraggio dello stato dei servizi AI:
 
 ```python
-# Health check endpoints
+# Endpoint di controllo della salute
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Test connessione OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,10 +482,10 @@ async def check_ai_models():
 
 ## Prossimi Passi
 
-1. **Consulta la [Guida all'Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md)** per i pattern di integrazione dei servizi
-2. **Completa il [Laboratorio AI Workshop](ai-workshop-lab.md)** per un'esperienza pratica
-3. **Applica le [Pratiche AI per la Produzione](production-ai-practices.md)** per distribuzioni aziendali
-4. **Esplora la [Guida alla Risoluzione dei Problemi AI](../troubleshooting/ai-troubleshooting.md)** per le problematiche comuni
+1. **Consulta la [Guida all'Integrazione Microsoft Foundry](microsoft-foundry-integration.md)** per i modelli di integrazione dei servizi
+2. **Completa il [Laboratorio Workshop AI](ai-workshop-lab.md)** per un'esperienza pratica
+3. **Implementa le [Pratiche AI per la Produzione](production-ai-practices.md)** per distribuzioni aziendali
+4. **Esplora la [Guida alla Risoluzione dei Problemi AI](../troubleshooting/ai-troubleshooting.md)** per problemi comuni
 
 ## Risorse
 
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Navigazione Capitolo:**
 - **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
 - **📖 Capitolo Attuale**: Capitolo 2 - Sviluppo AI-First
-- **⬅️ Precedente**: [Integrazione con Azure AI Foundry](azure-ai-foundry-integration.md)
-- **➡️ Successivo**: [Laboratorio AI Workshop](ai-workshop-lab.md)
-- **🚀 Prossimo Capitolo**: [Capitolo 3: Configurazione](../getting-started/configuration.md)
+- **⬅️ Precedente**: [Integrazione Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Successivo**: [Laboratorio Workshop AI](ai-workshop-lab.md)
+- **🚀 Capitolo Successivo**: [Capitolo 3: Configurazione](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale umana. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

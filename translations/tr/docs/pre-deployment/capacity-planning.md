@@ -1,27 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:30:56+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-20T22:48:17+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "tr"
 }
 -->
-# Kapasite Planlama: Azure Kotaları ve Limitlerini Anlama - Azure Kaynak Erişilebilirliği ve Limitler
+# Kapasite Planlama - Azure Kaynak Kullanılabilirliği ve Limitler
+
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 6 - Dağıtım Öncesi Doğrulama ve Planlama
+- **⬅️ Önceki Bölüm**: [Bölüm 5: Çoklu Ajanlı Yapay Zeka Çözümleri](../../examples/retail-scenario.md)
+- **➡️ Sonraki**: [SKU Seçimi](sku-selection.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 7: Sorun Giderme](../troubleshooting/common-issues.md)
 
 ## Giriş
 
-Bu kapsamlı rehber, Azure Developer CLI ile dağıtımdan önce Azure kaynak kapasitesini planlamanıza ve doğrulamanıza yardımcı olur. Başarılı dağıtımlar için kotaları, erişilebilirliği ve bölgesel sınırlamaları değerlendirmeyi öğrenirken maliyetleri ve performansı optimize edin. Farklı uygulama mimarileri ve ölçeklendirme senaryoları için kapasite planlama tekniklerinde ustalaşın.
+Bu kapsamlı rehber, Azure Developer CLI ile dağıtımdan önce Azure kaynak kapasitesini planlamanıza ve doğrulamanıza yardımcı olur. Kotaları, kullanılabilirliği ve bölgesel sınırlamaları değerlendirerek başarılı dağıtımlar yapmayı, maliyetleri optimize etmeyi ve performansı artırmayı öğrenin. Farklı uygulama mimarileri ve ölçeklendirme senaryoları için kapasite planlama tekniklerini ustalıkla kullanın.
 
 ## Öğrenme Hedefleri
 
 Bu rehberi tamamladığınızda:
-- Azure kotalarını, limitlerini ve bölgesel erişim kısıtlamalarını anlayacaksınız
-- Dağıtımdan önce kaynak erişilebilirliği ve kapasitesini kontrol etme tekniklerinde ustalaşacaksınız
+- Azure kotalarını, limitlerini ve bölgesel kullanılabilirlik kısıtlamalarını anlayacaksınız
+- Dağıtımdan önce kaynak kullanılabilirliği ve kapasitesini kontrol etme tekniklerini öğreneceksiniz
 - Otomatik kapasite doğrulama ve izleme stratejilerini uygulayacaksınız
-- Uygun kaynak boyutlandırma ve ölçeklendirme dikkate alınarak uygulamalar tasarlayacaksınız
+- Uygulamaları doğru kaynak boyutlandırma ve ölçeklendirme ile tasarlayacaksınız
 - Akıllı kapasite planlama ile maliyet optimizasyon stratejilerini uygulayacaksınız
-- Kota kullanımı ve kaynak erişilebilirliği için uyarılar ve izleme yapılandıracaksınız
+- Kota kullanımı ve kaynak kullanılabilirliği için uyarılar ve izleme yapılandıracaksınız
 
 ## Öğrenme Çıktıları
 
@@ -31,16 +38,16 @@ Tamamlandığında, şunları yapabileceksiniz:
 - Bölgesel ve abonelik limitlerini dikkate alan ölçeklenebilir mimariler tasarlayın
 - Farklı iş yükü türleri için maliyet etkin kaynak boyutlandırma stratejileri uygulayın
 - Kapasiteyle ilgili sorunlar için proaktif izleme ve uyarı yapılandırın
-- Doğru kapasite dağıtımı ile çok bölgeli dağıtımlar planlayın
+- Doğru kapasite dağılımıyla çok bölgeli dağıtımlar planlayın
 
-## Kapasite Planlamasının Önemi
+## Kapasite Planlaması Neden Önemlidir?
 
 Uygulamaları dağıtmadan önce şunları sağlamanız gerekir:
 - Gerekli kaynaklar için **yeterli kotalar**
-- Hedef bölgenizde **kaynak erişilebilirliği**
-- Abonelik türünüz için **hizmet katmanı erişilebilirliği**
+- Hedef bölgenizde **kaynak kullanılabilirliği**
+- Abonelik türünüz için **hizmet katmanı kullanılabilirliği**
 - Beklenen trafik için **ağ kapasitesi**
-- **Doğru boyutlandırma** ile maliyet optimizasyonu
+- Doğru boyutlandırma ile **maliyet optimizasyonu**
 
 ## 📊 Azure Kotaları ve Limitlerini Anlama
 
@@ -52,20 +59,20 @@ Uygulamaları dağıtmadan önce şunları sağlamanız gerekir:
 
 ### Yaygın Kaynak Kotaları
 ```bash
-# Check current quota usage
+# Mevcut kota kullanımını kontrol et
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Belirli kaynak kotalarını kontrol et
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Dağıtımdan Önce Kapasite Kontrolleri
+## Dağıtım Öncesi Kapasite Kontrolleri
 
 ### Otomatik Kapasite Doğrulama Scripti
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Azure kapasitesini dağıtımdan önce doğrula
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Kota kullanımını kontrol etme fonksiyonu
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,27 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Çeşitli kaynak kotalarını kontrol et
+check_quota "compute" 4      # 4 vCPU gerekiyor
+check_quota "storage" 2      # 2 depolama hesabı gerekiyor
+check_quota "network" 1      # 1 sanal ağ gerekiyor
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Hizmet Özel Kapasite Kontrolleri
+### Hizmet Özelinde Kapasite Kontrolleri
 
 #### Uygulama Hizmeti Kapasitesi
 ```bash
-# Check App Service Plan availability
+# Uygulama Hizmet Planı kullanılabilirliğini kontrol et
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Bölgedeki mevcut SKU'ları kontrol et
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Alternatif bölgeler öner
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Mevcut kullanımı kontrol et
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Kullanım
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Veritabanı Kapasitesi
 ```bash
-# Check PostgreSQL capacity
+# PostgreSQL kapasitesini kontrol et
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # SKU'nun mevcut olup olmadığını kontrol et
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Mevcut SKU'ları göster
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Cosmos DB kapasitesini kontrol et
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Bölge uygunluğunu kontrol et
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Sunucusuz desteğinin olup olmadığını kontrol et (gerekirse)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -211,15 +218,15 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Apps Kapasitesi
+#### Container Uygulamaları Kapasitesi
 ```bash
-# Check Container Apps capacity
+# Container Uygulamaları kapasitesini kontrol et
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Container Uygulamaları'nın bölgede mevcut olup olmadığını kontrol et
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Mevcut ortam sayısını kontrol et
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Container Uygulamaları'nın her bölge için 15 ortam sınırı vardır
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Mevcut bölgeleri göster
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -252,11 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Bölgesel Erişilebilirlik Doğrulama
+## 📍 Bölgesel Kullanılabilirlik Doğrulaması
 
-### Bölgeye Göre Hizmet Erişilebilirliği
+### Bölgeye Göre Hizmet Kullanılabilirliği
 ```bash
-# Check service availability across regions
+# Bölgeler arasında hizmet kullanılabilirliğini kontrol et
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Tüm hizmetleri kontrol et
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Bölge Seçimi Önerileri
 ```bash
-# Recommend optimal regions based on requirements
+# Gereksinimlere göre en uygun bölgeleri öner
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "düşük maliyet" | "performans" | "uyumluluk"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### Kaynak Maliyet Tahmini
 ```bash
-# Estimate deployment costs
+# Dağıtım maliyetlerini tahmin et
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Tahmin için geçici bir kaynak grubu oluştur
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Altyapıyı doğrulama modunda dağıt
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Geçici kaynak grubunu temizle
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,10 +363,10 @@ estimate_costs() {
 
 ### SKU Optimizasyon Önerileri
 ```bash
-# Recommend optimal SKUs based on requirements
+# Gereksinimlere göre en uygun SKU'ları öner
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "dev" | "staging" | "production"
+    local workload_type=$2  # "geliştirme" | "test" | "üretim"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -419,32 +426,32 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Otomatik Ön Kontroller
+## 🚀 Otomatik Dağıtım Öncesi Kontroller
 
-### Kapsamlı Ön Kontrol Scripti
+### Kapsamlı Dağıtım Öncesi Script
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Dağıtım öncesi doğrulama tamamlandı
 
 set -e
 
-# Configuration
+# Yapılandırma
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Çıktı için renkler
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Renk Yok
 
-# Logging functions
+# Günlükleme işlevleri
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Yapılandırmayı yükle
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Kontrol 1: Kimlik doğrulama
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Kontrol 2: Bölgesel kullanılabilirlik
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Kontrol 3: Kota doğrulama
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPU kotası
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Depolama hesabı kotası
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Kontrol 4: Hizmet kullanılabilirliği
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Kontrol 5: Ağ kapasitesi
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Kontrol 6: Kaynak adlandırma doğrulaması
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Kontrol 7: Maliyet tahmini
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Kontrol 8: Şablon doğrulama
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Son özet
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -658,14 +665,14 @@ echo "  3. Verify application health post-deployment"
 
 ### Gerçek Zamanlı Kapasite İzleme
 ```bash
-# Monitor capacity during deployment
+# Dağıtım sırasında kapasiteyi izleyin
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Dağıtım durumunu kontrol edin
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Mevcut kaynak kullanımını kontrol edin
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -691,7 +698,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 AZD ile Entegrasyon
 
-### azure.yaml Dosyasına Ön Kontrol Hook'ları Ekleme
+### azure.yaml Dosyasına Dağıtım Öncesi Hooklar Ekleyin
 ```yaml
 # azure.yaml
 hooks:
@@ -716,14 +723,14 @@ hooks:
 3. **Büyümeyi planlayın** gelecekteki kapasite ihtiyaçlarını kontrol ederek
 4. **Maliyet tahmin araçlarını kullanın** fatura şokunu önlemek için
 5. **Kapasite gereksinimlerini belgeleyin** ekibiniz için
-6. **CI/CD süreçlerinde kapasite doğrulamasını otomatikleştirin**
-7. **Bölgesel yedekleme** kapasite gereksinimlerini dikkate alın
+6. **Kapasite doğrulamasını otomatikleştirin** CI/CD süreçlerinde
+7. **Bölgesel yedekleme** kapasite gereksinimlerini göz önünde bulundurun
 
 ## Sonraki Adımlar
 
-- [SKU Seçim Rehberi](sku-selection.md) - En uygun hizmet katmanlarını seçin
-- [Ön Kontroller](preflight-checks.md) - Otomatik doğrulama scriptleri
-- [Hızlı Başvuru](../../resources/cheat-sheet.md) - Hızlı komut referansı
+- [SKU Seçimi Rehberi](sku-selection.md) - En uygun hizmet katmanlarını seçin
+- [Dağıtım Öncesi Kontroller](preflight-checks.md) - Otomatik doğrulama scriptleri
+- [Hızlı Referans](../../resources/cheat-sheet.md) - Hızlı komutlar
 - [Terimler Sözlüğü](../../resources/glossary.md) - Terimler ve tanımlar
 
 ## Ek Kaynaklar
@@ -731,7 +738,7 @@ hooks:
 - [Azure Abonelik Limitleri](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure Fiyatlandırma Hesaplayıcı](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Maliyet Yönetimi](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Bölgesel Erişilebilirlik](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure Bölgesel Kullanılabilirlik](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

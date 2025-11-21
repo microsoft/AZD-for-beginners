@@ -1,40 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-17T21:38:16+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-20T22:19:33+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "it"
 }
 -->
-# Migliori Pratiche per Carichi di Lavoro AI in Produzione con AZD
+# Best Practices per Carichi di Lavoro AI in Produzione con AZD
 
 **Navigazione Capitolo:**
 - **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
-- **📖 Capitolo Attuale**: Capitolo 8 - Modelli per la Produzione e l'Impresa
+- **📖 Capitolo Attuale**: Capitolo 8 - Modelli per Produzione e Imprese
 - **⬅️ Capitolo Precedente**: [Capitolo 7: Risoluzione dei Problemi](../troubleshooting/debugging.md)
-- **⬅️ Anche Correlato**: [Laboratorio AI Workshop](ai-workshop-lab.md)
+- **⬅️ Anche Correlato**: [Laboratorio Workshop AI](ai-workshop-lab.md)
 - **🎯 Corso Completato**: [AZD Per Principianti](../../README.md)
 
 ## Panoramica
 
-Questa guida fornisce le migliori pratiche per distribuire carichi di lavoro AI pronti per la produzione utilizzando Azure Developer CLI (AZD). Basata sui feedback della community di Azure AI Foundry su Discord e su implementazioni reali con i clienti, affronta le sfide più comuni nei sistemi AI in produzione.
+Questa guida offre le migliori pratiche per distribuire carichi di lavoro AI pronti per la produzione utilizzando Azure Developer CLI (AZD). Basata sui feedback della community Discord di Microsoft Foundry e su implementazioni reali con clienti, queste pratiche affrontano le sfide più comuni nei sistemi AI in produzione.
 
 ## Principali Sfide Affrontate
 
-Sulla base dei risultati del nostro sondaggio nella community, queste sono le principali difficoltà riscontrate dagli sviluppatori:
+Basandoci sui risultati del sondaggio della community, queste sono le principali difficoltà che gli sviluppatori incontrano:
 
-- **45%** ha difficoltà con distribuzioni AI multi-servizio
-- **38%** incontra problemi nella gestione di credenziali e segreti  
-- **35%** trova complesso preparare e scalare per la produzione
-- **32%** necessita di migliori strategie di ottimizzazione dei costi
-- **29%** richiede un monitoraggio e una risoluzione dei problemi più efficaci
+- **45%** hanno difficoltà con distribuzioni AI multi-servizio
+- **38%** riscontrano problemi nella gestione di credenziali e segreti  
+- **35%** trovano difficile la preparazione per la produzione e la scalabilità
+- **32%** necessitano di strategie migliori per l'ottimizzazione dei costi
+- **29%** richiedono un miglior monitoraggio e risoluzione dei problemi
 
-## Modelli Architetturali per l'AI in Produzione
+## Modelli Architetturali per AI in Produzione
 
 ### Modello 1: Architettura AI a Microservizi
 
-**Quando usarlo**: Applicazioni AI complesse con più funzionalità
+**Quando usarlo**: Applicazioni AI complesse con molteplici funzionalità
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -76,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Modello 2: Elaborazione AI Basata su Eventi
+### Modello 2: Elaborazione AI Event-Driven
 
-**Quando usarlo**: Elaborazione batch, analisi di documenti, flussi di lavoro asincroni
+**Quando usarlo**: Elaborazione batch, analisi documenti, flussi di lavoro asincroni
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -132,7 +132,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 **Strategia di Implementazione**:
 - Nessuna comunicazione tra servizi senza autenticazione
 - Tutte le chiamate API utilizzano identità gestite
-- Isolamento della rete con endpoint privati
+- Isolamento di rete con endpoint privati
 - Controlli di accesso con privilegi minimi
 
 ```bicep
@@ -189,9 +189,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. Sicurezza della Rete
+### 3. Sicurezza di Rete
 
-**Configurazione degli Endpoint Privati**:
+**Configurazione Endpoint Privati**:
 
 ```bicep
 // Virtual Network for AI services
@@ -369,10 +369,10 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Dimensionamento Corretto delle Risorse
 
-**Configurazioni Specifiche per l'Ambiente**:
+**Configurazioni Specifiche per Ambiente**:
 
 ```bash
-# Development environment
+# Ambiente di sviluppo
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Ambiente di produzione
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Gestione dei Costi OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Ottimizzazione dei token a livello di applicazione
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Truncare il contesto, non l'input dell'utente
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Stima approssimativa: 1 token ≈ 4 caratteri
     return Math.ceil(text.length / 4);
   }
 }
@@ -506,7 +506,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitoraggio Specifico per l'AI
+### 2. Monitoraggio Specifico per AI
 
 **Dashboard Personalizzati per Metriche AI**:
 
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Controlli di Integrità e Monitoraggio della Disponibilità
+### 3. Controlli di Salute e Monitoraggio Uptime
 
 ```bicep
 // Application Insights availability tests
@@ -670,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Backup e Ripristino dei Dati
+### 2. Backup e Recupero dei Dati
 
 ```bicep
 // Backup configuration for critical data
@@ -721,7 +721,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## Integrazione DevOps e CI/CD
+## DevOps e Integrazione CI/CD
 
 ### 1. Workflow con GitHub Actions
 
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Verifica se tutti i servizi richiesti sono in esecuzione
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Convalida le distribuzioni dei modelli OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,14 +830,14 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Testa la connettività del servizio AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Checklist per la Prontezza alla Produzione
+## Checklist per Prontezza alla Produzione
 
 ### Sicurezza ✅
 - [ ] Tutti i servizi utilizzano identità gestite
@@ -858,30 +858,30 @@ echo "Infrastructure validation completed successfully!"
 ### Monitoraggio ✅
 - [ ] Application Insights configurato
 - [ ] Metriche personalizzate definite
-- [ ] Regole di avviso configurate
+- [ ] Regole di allerta configurate
 - [ ] Dashboard creato
-- [ ] Controlli di integrità implementati
+- [ ] Controlli di salute implementati
 - [ ] Politiche di conservazione dei log
 
 ### Affidabilità ✅
 - [ ] Distribuzione multi-regione
-- [ ] Piano di backup e ripristino
-- [ ] Circuit breaker implementati
+- [ ] Piano di backup e recupero
+- [ ] Circuit breakers implementati
 - [ ] Politiche di retry configurate
 - [ ] Degradazione graduale
-- [ ] Endpoint per controlli di integrità
+- [ ] Endpoint per controlli di salute
 
 ### Gestione dei Costi ✅
 - [ ] Avvisi di budget configurati
 - [ ] Dimensionamento corretto delle risorse
-- [ ] Sconti per dev/test applicati
-- [ ] Acquisto di istanze riservate
+- [ ] Sconti dev/test applicati
+- [ ] Istanze riservate acquistate
 - [ ] Dashboard di monitoraggio dei costi
 - [ ] Revisioni regolari dei costi
 
 ### Conformità ✅
 - [ ] Requisiti di residenza dei dati soddisfatti
-- [ ] Log di audit abilitati
+- [ ] Logging di audit abilitato
 - [ ] Politiche di conformità applicate
 - [ ] Baseline di sicurezza implementati
 - [ ] Valutazioni di sicurezza regolari
@@ -894,16 +894,16 @@ echo "Infrastructure validation completed successfully!"
 | Metrica | Obiettivo | Monitoraggio |
 |--------|-----------|--------------|
 | **Tempo di Risposta** | < 2 secondi | Application Insights |
-| **Disponibilità** | 99.9% | Monitoraggio della disponibilità |
-| **Tasso di Errore** | < 0.1% | Log delle applicazioni |
-| **Uso dei Token** | < $500/mese | Gestione dei costi |
-| **Utenti Concomitanti** | 1000+ | Test di carico |
-| **Tempo di Ripristino** | < 1 ora | Test di recupero da disastri |
+| **Disponibilità** | 99.9% | Monitoraggio Uptime |
+| **Tasso di Errore** | < 0.1% | Log Applicativi |
+| **Uso dei Token** | < $500/mese | Gestione dei Costi |
+| **Utenti Concomitanti** | 1000+ | Test di Carico |
+| **Tempo di Recupero** | < 1 ora | Test di Recupero da Disastri |
 
 ### Test di Carico
 
 ```bash
-# Load testing script for AI applications
+# Script di test di carico per applicazioni AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,43 +913,45 @@ python scripts/load_test.py \
 
 ## 🤝 Migliori Pratiche della Community
 
-Basate sui feedback della community di Azure AI Foundry su Discord:
+Basato sui feedback della community Discord di Microsoft Foundry:
 
 ### Principali Raccomandazioni dalla Community:
 
-1. **Inizia in Piccolo, Scala Gradualmente**: Parti con SKUs di base e scala in base all'uso reale
+1. **Inizia in Piccolo, Scala Gradualmente**: Parti con SKU di base e scala in base all'uso effettivo
 2. **Monitora Tutto**: Configura un monitoraggio completo fin dal primo giorno
 3. **Automatizza la Sicurezza**: Usa infrastruttura come codice per una sicurezza coerente
-4. **Testa a Fondo**: Includi test specifici per l'AI nella tua pipeline
+4. **Testa a Fondo**: Includi test specifici per AI nella tua pipeline
 5. **Pianifica i Costi**: Monitora l'uso dei token e configura avvisi di budget presto
 
 ### Errori Comuni da Evitare:
 
 - ❌ Hardcoding delle chiavi API nel codice
-- ❌ Mancata configurazione di un monitoraggio adeguato
+- ❌ Mancanza di un monitoraggio adeguato
 - ❌ Ignorare l'ottimizzazione dei costi
-- ❌ Non testare scenari di errore
-- ❌ Distribuire senza controlli di integrità
+- ❌ Non testare scenari di fallimento
+- ❌ Distribuire senza controlli di salute
 
 ## Risorse Aggiuntive
 
-- **Azure Well-Architected Framework**: [Guida ai carichi di lavoro AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Documentazione Azure AI Foundry**: [Documentazione ufficiale](https://learn.microsoft.com/azure/ai-studio/)
+- **Framework Azure Well-Architected**: [Guida ai carichi di lavoro AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Documentazione Microsoft Foundry**: [Documentazione ufficiale](https://learn.microsoft.com/azure/ai-studio/)
 - **Template della Community**: [Esempi Azure](https://github.com/Azure-Samples)
-- **Community su Discord**: [Canale #Azure](https://discord.gg/microsoft-azure)
+- **Community Discord**: [Canale #Azure](https://discord.gg/microsoft-azure)
 
 ---
 
 **Navigazione Capitolo:**
 - **📚 Home del Corso**: [AZD Per Principianti](../../README.md)
-- **📖 Capitolo Attuale**: Capitolo 8 - Modelli per la Produzione e l'Impresa
+- **📖 Capitolo Attuale**: Capitolo 8 - Modelli per Produzione e Imprese
 - **⬅️ Capitolo Precedente**: [Capitolo 7: Risoluzione dei Problemi](../troubleshooting/debugging.md)
-- **⬅️ Anche Correlato**: [Laboratorio AI Workshop](ai-workshop-lab.md)
+- **⬅️ Anche Correlato**: [Laboratorio Workshop AI](ai-workshop-lab.md)
 - **🎆 Corso Completato**: [AZD Per Principianti](../../README.md)
 
-**Ricorda**: I carichi di lavoro AI in produzione richiedono pianificazione, monitoraggio e ottimizzazione continui. Parti da questi modelli e adattali alle tue esigenze specifiche.
+**Ricorda**: I carichi di lavoro AI in produzione richiedono una pianificazione attenta, monitoraggio e ottimizzazione continua. Inizia con questi modelli e adattali alle tue esigenze specifiche.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di tenere presente che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche potrebbero contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale umana. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

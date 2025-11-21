@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T21:54:48+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-20T22:59:55+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "tr"
 }
@@ -12,26 +12,26 @@ CO_OP_TRANSLATOR_METADATA:
 **Bölüm Navigasyonu:**
 - **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 2 - AI-Öncelikli Geliştirme
-- **⬅️ Önceki**: [Azure AI Foundry Entegrasyonu](azure-ai-foundry-integration.md)
+- **⬅️ Önceki**: [Microsoft Foundry Entegrasyonu](microsoft-foundry-integration.md)
 - **➡️ Sonraki**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 3: Yapılandırma](../getting-started/configuration.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Konfigürasyon](../getting-started/configuration.md)
 
-Bu rehber, model seçiminden üretim dağıtım desenlerine kadar AZD şablonlarını kullanarak AI modellerinin dağıtımı için kapsamlı talimatlar sunar.
+Bu rehber, model seçiminden üretim dağıtım desenlerine kadar AZD şablonlarını kullanarak AI modellerini dağıtmak için kapsamlı talimatlar sunar.
 
 ## İçindekiler
 
 - [Model Seçim Stratejisi](../../../../docs/ai-foundry)
-- [AI Modelleri için AZD Yapılandırması](../../../../docs/ai-foundry)
+- [AI Modelleri için AZD Konfigürasyonu](../../../../docs/ai-foundry)
 - [Dağıtım Desenleri](../../../../docs/ai-foundry)
 - [Model Yönetimi](../../../../docs/ai-foundry)
-- [Üretim Dikkat Noktaları](../../../../docs/ai-foundry)
-- [İzleme ve Görünürlük](../../../../docs/ai-foundry)
+- [Üretim Dikkat Edilecekler](../../../../docs/ai-foundry)
+- [İzleme ve Gözlemlenebilirlik](../../../../docs/ai-foundry)
 
 ## Model Seçim Stratejisi
 
 ### Azure OpenAI Modelleri
 
-Kullanım senaryonuza uygun modeli seçin:
+Kullanım durumunuza uygun modeli seçin:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -61,16 +61,16 @@ services:
 
 ### Model Kapasite Planlaması
 
-| Model Türü | Kullanım Senaryosu | Önerilen Kapasite | Maliyet Dikkat Noktaları |
-|------------|--------------------|-------------------|--------------------------|
-| GPT-4o-mini | Sohbet, Soru-Cevap | 10-50 TPM | Çoğu iş yükü için maliyet açısından uygun |
+| Model Türü | Kullanım Durumu | Önerilen Kapasite | Maliyet Dikkat Edilecekler |
+|------------|----------------|-------------------|--------------------------|
+| GPT-4o-mini | Sohbet, Soru-Cevap | 10-50 TPM | Çoğu iş yükü için maliyet etkin |
 | GPT-4 | Karmaşık akıl yürütme | 20-100 TPM | Daha yüksek maliyet, premium özellikler için kullanın |
 | Text-embedding-ada-002 | Arama, RAG | 30-120 TPM | Anlamsal arama için gerekli |
 | Whisper | Konuşmadan metne | 10-50 TPM | Ses işleme iş yükleri |
 
-## AI Modelleri için AZD Yapılandırması
+## AI Modelleri için AZD Konfigürasyonu
 
-### Bicep Şablon Yapılandırması
+### Bicep Şablon Konfigürasyonu
 
 Bicep şablonları aracılığıyla model dağıtımları oluşturun:
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Uygulama ortamınızı yapılandırın:
 
 ```bash
-# .env configuration
+# .env yapılandırması
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -158,12 +158,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Uygun olduğu durumlar:
+En uygun kullanım:
 - Geliştirme ve test
 - Tek pazar uygulamaları
 - Maliyet optimizasyonu
 
-### Desen 2: Çoklu Bölge Dağıtımı
+### Desen 2: Çok Bölgeli Dağıtım
 
 ```bicep
 // Multi-region deployment
@@ -176,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Uygun olduğu durumlar:
+En uygun kullanım:
 - Küresel uygulamalar
 - Yüksek erişilebilirlik gereksinimleri
 - Yük dağıtımı
@@ -216,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Sürüm Kontrolü
 
-AZD yapılandırmanızda model sürümlerini takip edin:
+AZD konfigürasyonunuzda model sürümlerini takip edin:
 
 ```json
 {
@@ -240,7 +240,7 @@ Model güncellemeleri için AZD kancalarını kullanın:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# kancalar/önceden dağıtım.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
@@ -273,14 +273,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Üretim Dikkat Noktaları
+## Üretim Dikkat Edilecekler
 
 ### Kapasite Planlaması
 
 Kullanım desenlerine göre gerekli kapasiteyi hesaplayın:
 
 ```python
-# Capacity calculation example
+# Kapasite hesaplama örneği
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Örnek kullanım
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -302,7 +302,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Otomatik Ölçeklendirme Yapılandırması
+### Otomatik Ölçeklendirme Konfigürasyonu
 
 Container Apps için otomatik ölçeklendirmeyi yapılandırın:
 
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## İzleme ve Görünürlük
+## İzleme ve Gözlemlenebilirlik
 
 ### Application Insights Entegrasyonu
 
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 AI'ye özgü metrikleri takip edin:
 
 ```python
-# Custom telemetry for AI models
+# AI modelleri için özel telemetri
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 AI hizmeti sağlık izlemeyi uygulayın:
 
 ```python
-# Health check endpoints
+# Sağlık kontrol uç noktaları
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # OpenAI bağlantısını test et
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,7 +482,7 @@ async def check_ai_models():
 
 ## Sonraki Adımlar
 
-1. **[Azure AI Foundry Entegrasyon Rehberi](azure-ai-foundry-integration.md)**'ni inceleyerek hizmet entegrasyon desenlerini öğrenin
+1. **[Microsoft Foundry Entegrasyon Rehberi](microsoft-foundry-integration.md)**'ni inceleyerek hizmet entegrasyon desenlerini öğrenin
 2. **[AI Workshop Lab](ai-workshop-lab.md)**'i tamamlayarak pratik deneyim kazanın
 3. **[Üretim AI Uygulamaları](production-ai-practices.md)**'nı uygulayarak kurumsal dağıtımları gerçekleştirin
 4. **[AI Sorun Giderme Rehberi](../troubleshooting/ai-troubleshooting.md)**'ni keşfederek yaygın sorunları çözün
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Bölüm Navigasyonu:**
 - **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 2 - AI-Öncelikli Geliştirme
-- **⬅️ Önceki**: [Azure AI Foundry Entegrasyonu](azure-ai-foundry-integration.md)
+- **⬅️ Önceki**: [Microsoft Foundry Entegrasyonu](microsoft-foundry-integration.md)
 - **➡️ Sonraki**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 3: Yapılandırma](../getting-started/configuration.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Konfigürasyon](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul edilmez.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
