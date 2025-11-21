@@ -1,30 +1,30 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-17T23:29:48+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-21T09:13:43+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "da"
 }
 -->
-# Implementeringsguide - Mestre AZD-implementeringer
+# Implementeringsguide - Mestring af AZD-implementeringer
 
-**Kapitelnavigation:**
+**Kapiteloversigt:**
 - **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
 - **📖 Nuværende Kapitel**: Kapitel 4 - Infrastruktur som kode & implementering
 - **⬅️ Forrige Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
-- **➡️ Næste**: [Ressourceklargøring](provisioning.md)
+- **➡️ Næste**: [Provisionering af ressourcer](provisioning.md)
 - **🚀 Næste Kapitel**: [Kapitel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
 
 ## Introduktion
 
-Denne omfattende guide dækker alt, hvad du behøver at vide om implementering af applikationer ved hjælp af Azure Developer CLI, fra grundlæggende implementeringer med én kommando til avancerede produktionsscenarier med brugerdefinerede hooks, flere miljøer og CI/CD-integration. Bliv ekspert i hele implementeringslivscyklussen med praktiske eksempler og bedste praksis.
+Denne omfattende guide dækker alt, hvad du behøver at vide om at implementere applikationer ved hjælp af Azure Developer CLI, fra grundlæggende implementeringer med én kommando til avancerede produktionsscenarier med brugerdefinerede hooks, flere miljøer og CI/CD-integration. Mestring af hele implementeringslivscyklussen med praktiske eksempler og bedste praksis.
 
 ## Læringsmål
 
 Ved at gennemføre denne guide vil du:
 - Mestre alle Azure Developer CLI-implementeringskommandoer og arbejdsgange
-- Forstå den komplette implementeringslivscyklus fra klargøring til overvågning
+- Forstå hele implementeringslivscyklussen fra provisionering til overvågning
 - Implementere brugerdefinerede implementeringshooks til automatisering før og efter implementering
 - Konfigurere flere miljøer med miljøspecifikke parametre
 - Opsætte avancerede implementeringsstrategier, herunder blue-green og canary-implementeringer
@@ -33,7 +33,7 @@ Ved at gennemføre denne guide vil du:
 ## Læringsresultater
 
 Efter afslutning vil du være i stand til at:
-- Udføre og fejlfinde alle azd-implementeringsarbejdsgange uafhængigt
+- Udføre og fejlfinde alle azd-implementeringsarbejdsgange selvstændigt
 - Designe og implementere brugerdefineret implementeringsautomatisering ved hjælp af hooks
 - Konfigurere produktionsklare implementeringer med korrekt sikkerhed og overvågning
 - Administrere komplekse implementeringsscenarier med flere miljøer
@@ -43,56 +43,90 @@ Efter afslutning vil du være i stand til at:
 ## Implementeringsoversigt
 
 Azure Developer CLI tilbyder flere implementeringskommandoer:
-- `azd up` - Komplet arbejdsgang (klargøring + implementering)
+- `azd up` - Komplet arbejdsgang (provision + implementering)
 - `azd provision` - Opret/opdater kun Azure-ressourcer
 - `azd deploy` - Implementer kun applikationskode
 - `azd package` - Byg og pak applikationer
 
-## Grundlæggende implementeringsarbejdsgange
+## Grundlæggende Implementeringsarbejdsgange
 
-### Komplet implementering (azd up)
+### Komplet Implementering (azd up)
 Den mest almindelige arbejdsgang for nye projekter:
 ```bash
-# Deploy everything from scratch
+# Udrul alt fra bunden
 azd up
 
-# Deploy with specific environment
+# Udrul med specifikt miljø
 azd up --environment production
 
-# Deploy with custom parameters
+# Udrul med brugerdefinerede parametre
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Kun infrastrukturimplementering
-Når du kun behøver at opdatere Azure-ressourcer:
+### Kun Infrastruktur-Implementering
+Når du kun har brug for at opdatere Azure-ressourcer:
 ```bash
-# Provision/update infrastructure
+# Klargør/opdater infrastruktur
 azd provision
 
-# Provision with dry-run to preview changes
+# Klargør med tørkørsel for at forhåndsvise ændringer
 azd provision --preview
 
-# Provision specific services
+# Klargør specifikke tjenester
 azd provision --service database
 ```
 
-### Kun kodeimplementering
+### Kun Kode-Implementering
 Til hurtige applikationsopdateringer:
 ```bash
-# Deploy all services
+# Udrul alle tjenester
 azd deploy
 
-# Deploy specific service
+# Forventet output:
+# Udruller tjenester (azd deploy)
+# - web: Udruller... Færdig
+# - api: Udruller... Færdig
+# SUCCES: Din udrulning blev færdig på 2 minutter og 15 sekunder
+
+# Udrul specifik tjeneste
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# Udrul med brugerdefinerede byggeargumenter
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Bekræft udrulning
+azd show --output json | jq '.services'
 ```
 
-## 🏗️ Forstå implementeringsprocessen
+### ✅ Verifikation af Implementering
 
-### Fase 1: Hooks før klargøring
+Efter enhver implementering, verificer succes:
+
+```bash
+# Kontroller, at alle tjenester kører
+azd show
+
+# Test sundhedsendepunkter
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Kontroller logfiler for fejl
+azd logs --service api --since 5m | grep -i error
+```
+
+**Succeskriterier:**
+- ✅ Alle tjenester viser status "Kører"
+- ✅ Sundhedsendepunkter returnerer HTTP 200
+- ✅ Ingen fejl i logfilerne de sidste 5 minutter
+- ✅ Applikationen reagerer på testforespørgsler
+
+## 🏗️ Forståelse af Implementeringsprocessen
+
+### Fase 1: Hooks før Provisionering
 ```yaml
 # azure.yaml
 hooks:
@@ -106,13 +140,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Fase 2: Infrastrukturklargøring
+### Fase 2: Infrastrukturprovisionering
 - Læser infrastrukturtemplates (Bicep/Terraform)
 - Opretter eller opdaterer Azure-ressourcer
 - Konfigurerer netværk og sikkerhed
 - Opsætter overvågning og logning
 
-### Fase 3: Hooks efter klargøring
+### Fase 3: Hooks efter Provisionering
 ```yaml
 hooks:
   postprovision:
@@ -127,10 +161,10 @@ hooks:
 
 ### Fase 4: Applikationspakning
 - Bygger applikationskode
-- Opretter implementeringsartefakter
+- Skaber implementeringsartefakter
 - Pakker til målplatform (containere, ZIP-filer osv.)
 
-### Fase 5: Hooks før implementering
+### Fase 5: Hooks før Implementering
 ```yaml
 hooks:
   predeploy:
@@ -148,7 +182,7 @@ hooks:
 - Opdaterer konfigurationsindstillinger
 - Starter/genstarter tjenester
 
-### Fase 7: Hooks efter implementering
+### Fase 7: Hooks efter Implementering
 ```yaml
 hooks:
   postdeploy:
@@ -163,7 +197,7 @@ hooks:
 
 ## 🎛️ Implementeringskonfiguration
 
-### Tjenestespecifikke implementeringsindstillinger
+### Tjenestespecifikke Implementeringsindstillinger
 ```yaml
 # azure.yaml
 services:
@@ -193,29 +227,29 @@ services:
     buildCommand: npm install --production
 ```
 
-### Miljøspecifikke konfigurationer
+### Miljøspecifikke Konfigurationer
 ```bash
-# Development environment
+# Udviklingsmiljø
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# Testmiljø
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# Produktionsmiljø
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Avancerede implementeringsscenarier
+## 🔧 Avancerede Implementeringsscenarier
 
-### Applikationer med flere tjenester
+### Applikationer med Flere Tjenester
 ```yaml
 # Complex application with multiple services
 services:
@@ -251,24 +285,24 @@ services:
     host: function
 ```
 
-### Blue-Green implementeringer
+### Blue-Green Implementeringer
 ```bash
-# Create blue environment
+# Opret blå miljø
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blue environment
+# Test blå miljø
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# Skift trafik til blå (manuel DNS/load balancer opdatering)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# Ryd op i grønt miljø
 azd env select production-green
 azd down --force
 ```
 
-### Canary implementeringer
+### Canary Implementeringer
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -282,7 +316,7 @@ services:
         percentage: 10
 ```
 
-### Fasede implementeringer
+### Fasede Implementeringer
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -315,7 +349,7 @@ fi
 
 ## 🐳 Containerimplementeringer
 
-### Containerapplikationsimplementeringer
+### Implementeringer af Containerapps
 ```yaml
 services:
   api:
@@ -339,7 +373,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimering af multi-stage Dockerfile
+### Optimering af Multi-Stage Dockerfile
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -367,16 +401,16 @@ CMD ["npm", "start"]
 
 ## ⚡ Ydelsesoptimering
 
-### Parallelle implementeringer
+### Parallelle Implementeringer
 ```bash
-# Configure parallel deployment
+# Konfigurer parallel deployment
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# Udrul tjenester parallelt
 azd deploy --parallel
 ```
 
-### Bygge-cache
+### Byggecache
 ```yaml
 # azure.yaml - Enable build caching
 services:
@@ -390,26 +424,26 @@ services:
         - .next/cache
 ```
 
-### Inkrementelle implementeringer
+### Inkrementelle Implementeringer
 ```bash
-# Deploy only changed services
+# Udrul kun ændrede tjenester
 azd deploy --incremental
 
-# Deploy with change detection
+# Udrul med ændringsdetektion
 azd deploy --detect-changes
 ```
 
-## 🔍 Implementeringsovervågning
+## 🔍 Overvågning af Implementering
 
-### Overvågning af implementering i realtid
+### Overvågning i Real-Time
 ```bash
-# Monitor deployment progress
+# Overvåg implementeringsfremskridt
 azd deploy --follow
 
-# View deployment logs
+# Se implementeringslogfiler
 azd logs --follow --service api
 
-# Check deployment status
+# Kontroller implementeringsstatus
 azd show --service api
 ```
 
@@ -427,14 +461,14 @@ services:
       retries: 3
 ```
 
-### Validering efter implementering
+### Validering efter Implementering
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# Check application health
+# Kontroller applikationens tilstand
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -462,14 +496,14 @@ echo "✅ Deployment validation completed successfully"
 
 ## 🔐 Sikkerhedsovervejelser
 
-### Håndtering af hemmeligheder
+### Håndtering af Hemmeligheder
 ```bash
-# Store secrets securely
+# Opbevar hemmeligheder sikkert
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# Referer til hemmeligheder i azure.yaml
 ```
 
 ```yaml
@@ -493,7 +527,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identitets- og adgangsstyring
+### Identitets- og Adgangsstyring
 ```yaml
 services:
   api:
@@ -508,30 +542,30 @@ services:
           - external-api-key
 ```
 
-## 🚨 Rollback-strategier
+## 🚨 Rollback-Strategier
 
-### Hurtig rollback
+### Hurtig Rollback
 ```bash
-# Rollback to previous deployment
+# Rul tilbage til tidligere deployment
 azd deploy --rollback
 
-# Rollback specific service
+# Rul tilbage specifik tjeneste
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# Rul tilbage til specifik version
 azd deploy --service api --version v1.2.3
 ```
 
-### Infrastrukturrollback
+### Infrastruktur Rollback
 ```bash
-# Rollback infrastructure changes
+# Tilbagefør infrastrukturændringer
 azd provision --rollback
 
-# Preview rollback changes
+# Forhåndsvisning af tilbageføringsændringer
 azd provision --rollback --preview
 ```
 
-### Rollback af database-migration
+### Rollback af Databasemigration
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -545,21 +579,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Implementeringsmetrikker
+## 📊 Implementeringsmålinger
 
-### Spor implementeringsydelse
+### Spor Implementeringsydelse
 ```bash
-# Enable deployment metrics
+# Aktiver implementeringsmetrikker
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# Vis implementeringshistorik
 azd history
 
-# Get deployment statistics
+# Få implementeringsstatistikker
 azd metrics --type deployment
 ```
 
-### Indsamling af brugerdefinerede metrikker
+### Indsamling af Brugerdefinerede Målinger
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -576,26 +610,26 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Bedste praksis
+## 🎯 Bedste Praksis
 
-### 1. Konsistens i miljøer
+### 1. Konsistens i Miljøer
 ```bash
-# Use consistent naming
+# Brug konsekvente navngivning
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# Oprethold miljøparitet
 ./scripts/sync-environments.sh
 ```
 
-### 2. Validering af infrastruktur
+### 2. Validering af Infrastruktur
 ```bash
-# Validate before deployment
+# Valider før implementering
 azd provision --preview
 azd provision --what-if
 
-# Use ARM/Bicep linting
+# Brug ARM/Bicep lintning
 az bicep lint --file infra/main.bicep
 ```
 
@@ -628,22 +662,275 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Dokumentation og logning
+### 4. Dokumentation og Logning
 ```bash
-# Document deployment procedures
+# Dokumenter implementeringsprocedurer
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## Næste trin
+## Næste Skridt
 
-- [Ressourceklargøring](provisioning.md) - Dybdegående om infrastrukturstyring
-- [Planlægning før implementering](../pre-deployment/capacity-planning.md) - Planlæg din implementeringsstrategi
-- [Almindelige problemer](../troubleshooting/common-issues.md) - Løs implementeringsproblemer
-- [Bedste praksis](../troubleshooting/debugging.md) - Produktionsklare implementeringsstrategier
+- [Provisionering af Ressourcer](provisioning.md) - Dybdegående om infrastrukturstyring
+- [Planlægning før Implementering](../pre-deployment/capacity-planning.md) - Planlæg din implementeringsstrategi
+- [Almindelige Problemer](../troubleshooting/common-issues.md) - Løs implementeringsproblemer
+- [Bedste Praksis](../troubleshooting/debugging.md) - Produktionsklare implementeringsstrategier
 
-## Yderligere ressourcer
+## 🎯 Praktiske Implementeringsøvelser
+
+### Øvelse 1: Inkrementel Implementeringsarbejdsgang (20 minutter)
+**Mål**: Mestre forskellen mellem fuld og inkrementel implementering
+
+```bash
+# Indledende implementering
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Registrer indledende implementeringstid
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Foretag en kodeændring
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Implementer kun kode (hurtigt)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Sammenlign tider
+cat deployment-log.txt
+
+# Ryd op
+azd down --force --purge
+```
+
+**Succeskriterier:**
+- [ ] Fuld implementering tager 5-15 minutter
+- [ ] Kun kode-implementering tager 2-5 minutter
+- [ ] Kodeændringer afspejles i implementeret app
+- [ ] Infrastruktur forbliver uændret efter `azd deploy`
+
+**Læringsresultat**: `azd deploy` er 50-70% hurtigere end `azd up` for kodeændringer
+
+### Øvelse 2: Brugerdefinerede Implementeringshooks (30 minutter)
+**Mål**: Implementere automatisering før og efter implementering
+
+```bash
+# Opret valideringsscript før implementering
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Kontroller om tests består
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Kontroller for ikke-committede ændringer
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Opret røgtest efter implementering
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Tilføj hooks til azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Test implementering med hooks
+azd deploy
+```
+
+**Succeskriterier:**
+- [ ] Script før implementering kører før implementering
+- [ ] Implementering afbrydes, hvis tests fejler
+- [ ] Post-implementerings smoke test validerer sundhed
+- [ ] Hooks udføres i korrekt rækkefølge
+
+### Øvelse 3: Implementeringsstrategi for Flere Miljøer (45 minutter)
+**Mål**: Implementere fasede implementeringsarbejdsgange (dev → staging → produktion)
+
+```bash
+# Opret implementeringsscript
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Trin 1: Implementer til udvikling
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Trin 2: Implementer til staging
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Trin 3: Manuel godkendelse til produktion
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Opret miljøer
+azd env new dev
+azd env new staging
+azd env new production
+
+# Kør trinvis implementering
+./deploy-staged.sh
+```
+
+**Succeskriterier:**
+- [ ] Dev-miljø implementeres succesfuldt
+- [ ] Staging-miljø implementeres succesfuldt
+- [ ] Manuel godkendelse kræves for produktion
+- [ ] Alle miljøer har fungerende sundhedstjek
+- [ ] Kan rulles tilbage, hvis nødvendigt
+
+### Øvelse 4: Rollback-Strategi (25 minutter)
+**Mål**: Implementere og teste rollback af implementering
+
+```bash
+# Udrul v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Gem v1-konfiguration
+cp -r .azure/production .azure/production-v1-backup
+
+# Udrul v2 med brydende ændring
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Registrer fejl
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Tilbagefør kode
+    git checkout src/api/src/server.js
+    
+    # Tilbagefør miljø
+    azd env set APP_VERSION "1.0.0"
+    
+    # Udrul v1 igen
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Succeskriterier:**
+- [ ] Kan opdage implementeringsfejl
+- [ ] Rollback-script udføres automatisk
+- [ ] Applikationen vender tilbage til fungerende tilstand
+- [ ] Sundhedstjek består efter rollback
+
+## 📊 Spor Implementeringsmålinger
+
+### Spor Din Implementeringsydelse
+
+```bash
+# Opret script til implementeringsmetrikker
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Log til fil
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Brug det
+./track-deployment.sh
+```
+
+**Analyser dine målinger:**
+```bash
+# Vis implementeringshistorik
+cat deployment-metrics.csv
+
+# Beregn gennemsnitlig implementeringstid
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
+
+## Yderligere Ressourcer
 
 - [Azure Developer CLI Implementeringsreference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Azure App Service Implementering](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
@@ -654,9 +941,11 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 **Navigation**
 - **Forrige Lektion**: [Dit Første Projekt](../getting-started/first-project.md)
-- **Næste Lektion**: [Ressourceklargøring](provisioning.md)
+- **Næste Lektion**: [Provisionering af Ressourcer](provisioning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

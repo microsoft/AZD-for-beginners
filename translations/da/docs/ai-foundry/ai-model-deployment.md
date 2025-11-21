@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T23:28:08+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-21T09:25:46+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "da"
 }
@@ -12,11 +12,11 @@ CO_OP_TRANSLATOR_METADATA:
 **Kapiteloversigt:**
 - **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
 - **📖 Nuværende Kapitel**: Kapitel 2 - AI-First Udvikling
-- **⬅️ Forrige**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Næste**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Næste Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
-Denne vejledning giver omfattende instruktioner til udrulning af AI-modeller ved hjælp af AZD-skabeloner og dækker alt fra modelvalg til produktionsudrulningsmønstre.
+Denne vejledning giver omfattende instruktioner til udrulning af AI-modeller ved hjælp af AZD-skabeloner, og dækker alt fra modelvalg til produktionsudrulningsmønstre.
 
 ## Indholdsfortegnelse
 
@@ -29,7 +29,7 @@ Denne vejledning giver omfattende instruktioner til udrulning af AI-modeller ved
 
 ## Strategi for Modelvalg
 
-### Azure OpenAI-modeller
+### Azure OpenAI Modeller
 
 Vælg den rette model til din brugssituation:
 
@@ -59,13 +59,13 @@ services:
         ]
 ```
 
-### Kapacitetsplanlægning for modeller
+### Kapacitetsplanlægning for Modeller
 
-| Modeltype | Brugssituation | Anbefalet kapacitet | Omkostningsovervejelser |
+| Modeltype | Brugssituation | Anbefalet Kapacitet | Omkostningsovervejelser |
 |-----------|----------------|---------------------|--------------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Omkostningseffektiv for de fleste arbejdsbelastninger |
 | GPT-4 | Kompleks ræsonnement | 20-100 TPM | Højere omkostninger, brug til premiumfunktioner |
-| Text-embedding-ada-002 | Søgning, RAG | 30-120 TPM | Nødvendig for semantisk søgning |
+| Text-embedding-ada-002 | Søgning, RAG | 30-120 TPM | Essentiel for semantisk søgning |
 | Whisper | Tale-til-tekst | 10-50 TPM | Arbejdsbelastninger med lydbehandling |
 
 ## AZD-konfiguration for AI-modeller
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Konfigurer din applikationsmiljø:
 
 ```bash
-# .env configuration
+# .env konfiguration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Beregn nødvendig kapacitet baseret på brugsmønstre:
 
 ```python
-# Capacity calculation example
+# Kapacitetsberegningseksempel
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Eksempel på anvendelse
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -412,12 +412,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Brugerdefinerede metrikker
+### Brugerdefinerede Metrikker
 
 Spor AI-specifikke metrikker:
 
 ```python
-# Custom telemetry for AI models
+# Brugerdefineret telemetri for AI-modeller
 import logging
 from applicationinsights import TelemetryClient
 
@@ -451,10 +451,10 @@ class AITelemetry:
 
 ### Sundhedstjek
 
-Implementer overvågning af AI-tjenestens sundhed:
+Implementer sundhedsovervågning for AI-tjenester:
 
 ```python
-# Health check endpoints
+# Sundhedstjek-endepunkter
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Test OpenAI-forbindelse
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,7 +482,7 @@ async def check_ai_models():
 
 ## Næste Skridt
 
-1. **Gennemgå [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** for mønstre til tjenesteintegration
+1. **Gennemgå [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for mønstre til serviceintegration
 2. **Fuldfør [AI Workshop Lab](ai-workshop-lab.md)** for praktisk erfaring
 3. **Implementer [Produktions-AI-praksis](production-ai-practices.md)** for virksomhedsudrulninger
 4. **Udforsk [AI Fejlfindingsguide](../troubleshooting/ai-troubleshooting.md)** for almindelige problemer
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Kapiteloversigt:**
 - **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
 - **📖 Nuværende Kapitel**: Kapitel 2 - AI-First Udvikling
-- **⬅️ Forrige**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Næste**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Næste Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at sikre nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os ikke ansvar for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,33 +1,33 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "fb0687bd0b166ecb0430dfeeed83487e",
-  "translation_date": "2025-10-24T17:23:03+00:00",
+  "original_hash": "e855e899d2705754fe85b04190edd0f0",
+  "translation_date": "2025-11-21T06:56:37+00:00",
   "source_file": "docs/getting-started/azd-basics.md",
   "language_code": "el"
 }
 -->
 # AZD Βασικά - Κατανόηση του Azure Developer CLI
 
-# AZD Βασικά - Κύριες Έννοιες και Θεμελιώδη Στοιχεία
+# AZD Βασικά - Κύριες Έννοιες και Θεμελιώδη
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Βάσεις & Γρήγορη Εκκίνηση
 - **⬅️ Προηγούμενο**: [Επισκόπηση Μαθήματος](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Επόμενο**: [Εγκατάσταση & Ρύθμιση](installation.md)
-- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 2: Ανάπτυξη με AI](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην Τεχνητή Νοημοσύνη](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Εισαγωγή
 
-Αυτό το μάθημα σας εισάγει στο Azure Developer CLI (azd), ένα ισχυρό εργαλείο γραμμής εντολών που επιταχύνει τη μετάβαση από την τοπική ανάπτυξη στην ανάπτυξη στο Azure. Θα μάθετε τις βασικές έννοιες, τα κύρια χαρακτηριστικά και πώς το azd απλοποιεί την ανάπτυξη εφαρμογών που βασίζονται στο cloud.
+Αυτό το μάθημα σας εισάγει στο Azure Developer CLI (azd), ένα ισχυρό εργαλείο γραμμής εντολών που επιταχύνει τη μετάβασή σας από την τοπική ανάπτυξη στην ανάπτυξη στο Azure. Θα μάθετε τις βασικές έννοιες, τα κύρια χαρακτηριστικά και πώς το azd απλοποιεί την ανάπτυξη εφαρμογών cloud-native.
 
 ## Στόχοι Μάθησης
 
 Μέχρι το τέλος αυτού του μαθήματος, θα:
 - Κατανοήσετε τι είναι το Azure Developer CLI και τον κύριο σκοπό του
 - Μάθετε τις βασικές έννοιες των προτύπων, περιβαλλόντων και υπηρεσιών
-- Εξερευνήσετε βασικά χαρακτηριστικά όπως η ανάπτυξη με πρότυπα και το Infrastructure as Code
+- Εξερευνήσετε βασικά χαρακτηριστικά όπως η ανάπτυξη με βάση πρότυπα και το Infrastructure as Code
 - Κατανοήσετε τη δομή και τη ροή εργασίας ενός έργου azd
 - Είστε έτοιμοι να εγκαταστήσετε και να ρυθμίσετε το azd για το περιβάλλον ανάπτυξής σας
 
@@ -38,19 +38,163 @@ CO_OP_TRANSLATOR_METADATA:
 - Αναγνωρίσετε τα στοιχεία της δομής ενός έργου azd
 - Περιγράψετε πώς τα πρότυπα, τα περιβάλλοντα και οι υπηρεσίες συνεργάζονται
 - Κατανοήσετε τα οφέλη του Infrastructure as Code με το azd
-- Αναγνωρίσετε διαφορετικές εντολές του azd και τους σκοπούς τους
+- Αναγνωρίσετε διαφορετικές εντολές azd και τους σκοπούς τους
 
 ## Τι είναι το Azure Developer CLI (azd);
 
-Το Azure Developer CLI (azd) είναι ένα εργαλείο γραμμής εντολών σχεδιασμένο να επιταχύνει τη μετάβαση από την τοπική ανάπτυξη στην ανάπτυξη στο Azure. Απλοποιεί τη διαδικασία δημιουργίας, ανάπτυξης και διαχείρισης εφαρμογών που βασίζονται στο cloud στο Azure.
+Το Azure Developer CLI (azd) είναι ένα εργαλείο γραμμής εντολών σχεδιασμένο να επιταχύνει τη μετάβασή σας από την τοπική ανάπτυξη στην ανάπτυξη στο Azure. Απλοποιεί τη διαδικασία δημιουργίας, ανάπτυξης και διαχείρισης εφαρμογών cloud-native στο Azure.
+
+### 🎯 Γιατί να Χρησιμοποιήσετε το AZD; Μια Σύγκριση από τον Πραγματικό Κόσμο
+
+Ας συγκρίνουμε την ανάπτυξη μιας απλής web εφαρμογής με βάση δεδομένων:
+
+#### ❌ ΧΩΡΙΣ AZD: Χειροκίνητη Ανάπτυξη στο Azure (30+ λεπτά)
+
+```bash
+# Βήμα 1: Δημιουργία ομάδας πόρων
+az group create --name myapp-rg --location eastus
+
+# Βήμα 2: Δημιουργία Σχεδίου Υπηρεσίας Εφαρμογών
+az appservice plan create --name myapp-plan \
+  --resource-group myapp-rg \
+  --sku B1 --is-linux
+
+# Βήμα 3: Δημιουργία Εφαρμογής Ιστού
+az webapp create --name myapp-web-unique123 \
+  --resource-group myapp-rg \
+  --plan myapp-plan \
+  --runtime "NODE:18-lts"
+
+# Βήμα 4: Δημιουργία λογαριασμού Cosmos DB (10-15 λεπτά)
+az cosmosdb create --name myapp-cosmos-unique123 \
+  --resource-group myapp-rg \
+  --kind MongoDB
+
+# Βήμα 5: Δημιουργία βάσης δεδομένων
+az cosmosdb mongodb database create \
+  --account-name myapp-cosmos-unique123 \
+  --resource-group myapp-rg \
+  --name tododb
+
+# Βήμα 6: Δημιουργία συλλογής
+az cosmosdb mongodb collection create \
+  --account-name myapp-cosmos-unique123 \
+  --resource-group myapp-rg \
+  --database-name tododb \
+  --name todos
+
+# Βήμα 7: Λήψη συμβολοσειράς σύνδεσης
+CONN_STR=$(az cosmosdb keys list \
+  --name myapp-cosmos-unique123 \
+  --resource-group myapp-rg \
+  --type connection-strings \
+  --query "connectionStrings[0].connectionString" -o tsv)
+
+# Βήμα 8: Ρύθμιση παραμέτρων εφαρμογής
+az webapp config appsettings set \
+  --name myapp-web-unique123 \
+  --resource-group myapp-rg \
+  --settings MONGODB_URI="$CONN_STR"
+
+# Βήμα 9: Ενεργοποίηση καταγραφής
+az webapp log config --name myapp-web-unique123 \
+  --resource-group myapp-rg \
+  --application-logging filesystem \
+  --detailed-error-messages true
+
+# Βήμα 10: Ρύθμιση Application Insights
+az monitor app-insights component create \
+  --app myapp-insights \
+  --location eastus \
+  --resource-group myapp-rg
+
+# Βήμα 11: Σύνδεση App Insights με την Εφαρμογή Ιστού
+INSTRUMENTATION_KEY=$(az monitor app-insights component show \
+  --app myapp-insights \
+  --resource-group myapp-rg \
+  --query "instrumentationKey" -o tsv)
+
+az webapp config appsettings set \
+  --name myapp-web-unique123 \
+  --resource-group myapp-rg \
+  --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
+
+# Βήμα 12: Δημιουργία εφαρμογής τοπικά
+npm install
+npm run build
+
+# Βήμα 13: Δημιουργία πακέτου ανάπτυξης
+zip -r app.zip . -x "*.git*" "node_modules/*"
+
+# Βήμα 14: Ανάπτυξη εφαρμογής
+az webapp deployment source config-zip \
+  --resource-group myapp-rg \
+  --name myapp-web-unique123 \
+  --src app.zip
+
+# Βήμα 15: Περιμένετε και προσευχηθείτε να λειτουργήσει 🙏
+# (Δεν υπάρχει αυτοματοποιημένη επαλήθευση, απαιτείται χειροκίνητη δοκιμή)
+```
+
+**Προβλήματα:**
+- ❌ 15+ εντολές που πρέπει να θυμάστε και να εκτελέσετε με τη σωστή σειρά
+- ❌ 30-45 λεπτά χειροκίνητης εργασίας
+- ❌ Εύκολα λάθη (τυπογραφικά, λάθος παράμετροι)
+- ❌ Οι συμβολοσειρές σύνδεσης εμφανίζονται στο ιστορικό του τερματικού
+- ❌ Καμία αυτόματη επαναφορά αν κάτι αποτύχει
+- ❌ Δύσκολο να αναπαραχθεί από τα μέλη της ομάδας
+- ❌ Διαφορετικό κάθε φορά (μη αναπαραγώγιμο)
+
+#### ✅ ΜΕ AZD: Αυτοματοποιημένη Ανάπτυξη (5 εντολές, 10-15 λεπτά)
+
+```bash
+# Βήμα 1: Αρχικοποίηση από πρότυπο
+azd init --template todo-nodejs-mongo
+
+# Βήμα 2: Επαλήθευση ταυτότητας
+azd auth login
+
+# Βήμα 3: Δημιουργία περιβάλλοντος
+azd env new dev
+
+# Βήμα 4: Προεπισκόπηση αλλαγών (προαιρετικό αλλά συνιστάται)
+azd provision --preview
+
+# Βήμα 5: Ανάπτυξη όλων
+azd up
+
+# ✨ Έγινε! Όλα έχουν αναπτυχθεί, ρυθμιστεί και παρακολουθούνται
+```
+
+**Οφέλη:**
+- ✅ **5 εντολές** έναντι 15+ χειροκίνητων βημάτων
+- ✅ **10-15 λεπτά** συνολικός χρόνος (κυρίως αναμονή για το Azure)
+- ✅ **Μηδενικά λάθη** - αυτοματοποιημένο και δοκιμασμένο
+- ✅ **Διαχείριση μυστικών με ασφάλεια** μέσω Key Vault
+- ✅ **Αυτόματη επαναφορά** σε περίπτωση αποτυχίας
+- ✅ **Πλήρως αναπαραγώγιμο** - ίδιο αποτέλεσμα κάθε φορά
+- ✅ **Έτοιμο για την ομάδα** - οποιοσδήποτε μπορεί να αναπτύξει με τις ίδιες εντολές
+- ✅ **Infrastructure as Code** - πρότυπα Bicep υπό έλεγχο έκδοσης
+- ✅ **Ενσωματωμένη παρακολούθηση** - Application Insights ρυθμισμένο αυτόματα
+
+### 📊 Μείωση Χρόνου & Λαθών
+
+| Μετρική | Χειροκίνητη Ανάπτυξη | Ανάπτυξη με AZD | Βελτίωση |
+|:-------|:---------------------|:----------------|:---------|
+| **Εντολές** | 15+ | 5 | 67% λιγότερες |
+| **Χρόνος** | 30-45 λεπτά | 10-15 λεπτά | 60% ταχύτερα |
+| **Ποσοστό Λαθών** | ~40% | <5% | 88% μείωση |
+| **Συνέπεια** | Χαμηλή (χειροκίνητη) | 100% (αυτοματοποιημένη) | Τέλεια |
+| **Εκπαίδευση Ομάδας** | 2-4 ώρες | 30 λεπτά | 75% ταχύτερα |
+| **Χρόνος Επαναφοράς** | 30+ λεπτά (χειροκίνητη) | 2 λεπτά (αυτοματοποιημένη) | 93% ταχύτερα |
 
 ## Βασικές Έννοιες
 
 ### Πρότυπα
-Τα πρότυπα αποτελούν τη βάση του azd. Περιλαμβάνουν:
-- **Κώδικα εφαρμογής** - Τον πηγαίο κώδικα και τις εξαρτήσεις σας
-- **Ορισμούς υποδομής** - Πόρους του Azure που ορίζονται σε Bicep ή Terraform
-- **Αρχεία ρυθμίσεων** - Ρυθμίσεις και μεταβλητές περιβάλλοντος
+Τα πρότυπα είναι το θεμέλιο του azd. Περιλαμβάνουν:
+- **Κώδικα εφαρμογής** - Ο πηγαίος κώδικας και οι εξαρτήσεις σας
+- **Ορισμούς υποδομής** - Πόροι Azure ορισμένοι σε Bicep ή Terraform
+- **Αρχεία ρύθμισης** - Ρυθμίσεις και μεταβλητές περιβάλλοντος
 - **Σενάρια ανάπτυξης** - Αυτοματοποιημένες ροές εργασίας ανάπτυξης
 
 ### Περιβάλλοντα
@@ -61,62 +205,96 @@ CO_OP_TRANSLATOR_METADATA:
 
 Κάθε περιβάλλον διατηρεί το δικό του:
 - Ομάδα πόρων Azure
-- Ρυθμίσεις παραμέτρων
+- Ρυθμίσεις διαμόρφωσης
 - Κατάσταση ανάπτυξης
 
 ### Υπηρεσίες
 Οι υπηρεσίες είναι τα δομικά στοιχεία της εφαρμογής σας:
-- **Frontend** - Εφαρμογές ιστού, SPAs
+- **Frontend** - Web εφαρμογές, SPAs
 - **Backend** - APIs, μικροϋπηρεσίες
 - **Βάση δεδομένων** - Λύσεις αποθήκευσης δεδομένων
 - **Αποθήκευση** - Αποθήκευση αρχείων και blob
 
 ## Κύρια Χαρακτηριστικά
 
-### 1. Ανάπτυξη με Πρότυπα
+### 1. Ανάπτυξη με Βάση Πρότυπα
 ```bash
-# Browse available templates
+# Περιήγηση διαθέσιμων προτύπων
 azd template list
 
-# Initialize from a template
+# Αρχικοποίηση από ένα πρότυπο
 azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Ειδική γλώσσα του Azure
+- **Bicep** - Ειδική γλώσσα για το Azure
 - **Terraform** - Εργαλείο υποδομής πολλαπλών cloud
 - **ARM Templates** - Πρότυπα Azure Resource Manager
 
 ### 3. Ενσωματωμένες Ροές Εργασίας
 ```bash
-# Complete deployment workflow
-azd up            # Provision + Deploy this is hands off for first time setup
+# Ολοκληρώστε τη ροή εργασίας ανάπτυξης
+azd up            # Παροχή + Ανάπτυξη, αυτό είναι χωρίς παρέμβαση για την πρώτη ρύθμιση
 
-# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
-azd provision --preview    # Simulate infrastructure deployment without making changes
+# 🧪 ΝΕΟ: Προεπισκόπηση αλλαγών υποδομής πριν από την ανάπτυξη (ΑΣΦΑΛΕΣ)
+azd provision --preview    # Προσομοίωση ανάπτυξης υποδομής χωρίς να γίνουν αλλαγές
 
-azd provision     # Create Azure resources if you update the infrastructure use this
-azd deploy        # Deploy application code or redeploy application code once update
-azd down          # Clean up resources
+azd provision     # Δημιουργήστε πόρους Azure αν ενημερώσετε την υποδομή χρησιμοποιήστε αυτό
+azd deploy        # Αναπτύξτε κώδικα εφαρμογής ή επαναπροσδιορίστε τον κώδικα εφαρμογής μετά την ενημέρωση
+azd down          # Καθαρίστε τους πόρους
 ```
 
 #### 🛡️ Ασφαλής Σχεδιασμός Υποδομής με Προεπισκόπηση
 Η εντολή `azd provision --preview` είναι επαναστατική για ασφαλείς αναπτύξεις:
-- **Ανάλυση dry-run** - Δείχνει τι θα δημιουργηθεί, τροποποιηθεί ή διαγραφεί
+- **Ανάλυση δοκιμαστικής εκτέλεσης** - Δείχνει τι θα δημιουργηθεί, τροποποιηθεί ή διαγραφεί
 - **Μηδενικός κίνδυνος** - Δεν γίνονται πραγματικές αλλαγές στο περιβάλλον Azure
 - **Συνεργασία ομάδας** - Μοιραστείτε τα αποτελέσματα της προεπισκόπησης πριν την ανάπτυξη
 - **Εκτίμηση κόστους** - Κατανοήστε το κόστος των πόρων πριν τη δέσμευση
 
 ```bash
-# Example preview workflow
-azd provision --preview           # See what will change
-# Review the output, discuss with team
-azd provision                     # Apply changes with confidence
+# Παράδειγμα ροής εργασίας προεπισκόπησης
+azd provision --preview           # Δείτε τι θα αλλάξει
+# Εξετάστε την έξοδο, συζητήστε με την ομάδα
+azd provision                     # Εφαρμόστε αλλαγές με αυτοπεποίθηση
 ```
 
-### 4. Διαχείριση Περιβάλλοντος
+### 📊 Οπτική Αναπαράσταση: Ροή Εργασίας Ανάπτυξης AZD
+
+```mermaid
+graph LR
+    A[azd init] -->|Αρχικοποίηση έργου| B[azd auth login]
+    B -->|Πιστοποίηση| C[azd env new]
+    C -->|Δημιουργία περιβάλλοντος| D{Πρώτη ανάπτυξη?}
+    D -->|Ναι| E[azd up]
+    D -->|Όχι| F[azd provision --preview]
+    F -->|Ανασκόπηση αλλαγών| G[azd provision]
+    E -->|Προετοιμάζει & αναπτύσσει| H[Πόροι σε λειτουργία]
+    G -->|Ενημερώνει υποδομή| H
+    H -->|Παρακολούθηση| I[azd monitor]
+    I -->|Κάντε αλλαγές στον κώδικα| J[azd deploy]
+    J -->|Επανα-ανάπτυξη μόνο κώδικα| H
+    H -->|Καθαρισμός| K[azd down]
+    
+    style A fill:#e1f5fe
+    style E fill:#c8e6c9
+    style F fill:#fff9c4
+    style H fill:#c5e1a5
+    style K fill:#ffcdd2
+```
+**Επεξήγηση Ροής Εργασίας:**
+1. **Init** - Ξεκινήστε με πρότυπο ή νέο έργο
+2. **Auth** - Εξουσιοδότηση με το Azure
+3. **Environment** - Δημιουργία απομονωμένου περιβάλλοντος ανάπτυξης
+4. **Preview** - 🆕 Πάντα προεπισκόπηση αλλαγών υποδομής πρώτα (ασφαλής πρακτική)
+5. **Provision** - Δημιουργία/ενημέρωση πόρων Azure
+6. **Deploy** - Ανάπτυξη του κώδικα της εφαρμογής σας
+7. **Monitor** - Παρακολούθηση απόδοσης εφαρμογής
+8. **Iterate** - Κάντε αλλαγές και αναπτύξτε ξανά τον κώδικα
+9. **Cleanup** - Αφαίρεση πόρων όταν τελειώσετε
+
+### 4. Διαχείριση Περιβαλλόντων
 ```bash
-# Create and manage environments
+# Δημιουργία και διαχείριση περιβαλλόντων
 azd env new <environment-name>
 azd env select <environment-name>
 azd env list
@@ -147,7 +325,7 @@ my-app/
 ## 🔧 Αρχεία Ρύθμισης
 
 ### azure.yaml
-Το κύριο αρχείο ρύθμισης του έργου:
+Το κύριο αρχείο ρύθμισης έργου:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -184,371 +362,142 @@ hooks:
 }
 ```
 
-## 🎪 Συνήθεις Ροές Εργασίας
+## 🎪 Συνήθεις Ροές Εργασίας με Πρακτικές Ασκήσεις
 
-### Ξεκινώντας ένα Νέο Έργο
+> **💡 Συμβουλή Μάθησης:** Ακολουθήστε αυτές τις ασκήσεις με τη σειρά για να αναπτύξετε σταδιακά τις δεξιότητές σας στο AZD.
+
+### 🎯 Άσκηση 1: Αρχικοποίηση του Πρώτου σας Έργου
+
+**Στόχος:** Δημιουργήστε ένα έργο AZD και εξερευνήστε τη δομή του
+
+**Βήματα:**
 ```bash
-# Method 1: Use existing template
+# Χρησιμοποιήστε ένα αποδεδειγμένο πρότυπο
 azd init --template todo-nodejs-mongo
 
-# Method 2: Start from scratch
+# Εξερευνήστε τα παραγόμενα αρχεία
+ls -la  # Δείτε όλα τα αρχεία, συμπεριλαμβανομένων των κρυφών
+
+# Δημιουργήθηκαν βασικά αρχεία:
+# - azure.yaml (κύρια ρύθμιση)
+# - infra/ (κώδικας υποδομής)
+# - src/ (κώδικας εφαρμογής)
+```
+
+**✅ Επιτυχία:** Έχετε τους φακέλους azure.yaml, infra/ και src/
+
+---
+
+### 🎯 Άσκηση 2: Ανάπτυξη στο Azure
+
+**Στόχος:** Ολοκληρώστε την ανάπτυξη από άκρη σε άκρη
+
+**Βήματα:**
+```bash
+# 1. Επαλήθευση ταυτότητας
+az login && azd auth login
+
+# 2. Δημιουργία περιβάλλοντος
+azd env new dev
+azd env set AZURE_LOCATION eastus
+
+# 3. Προεπισκόπηση αλλαγών (ΣΥΝΙΣΤΑΤΑΙ)
+azd provision --preview
+
+# 4. Ανάπτυξη όλων
+azd up
+
+# 5. Επαλήθευση ανάπτυξης
+azd show    # Προβολή του URL της εφαρμογής σας
+```
+
+**Αναμενόμενος Χρόνος:** 10-15 λεπτά  
+**✅ Επιτυχία:** Το URL της εφαρμογής ανοίγει στον περιηγητή
+
+---
+
+### 🎯 Άσκηση 3: Πολλαπλά Περιβάλλοντα
+
+**Στόχος:** Ανάπτυξη σε dev και staging
+
+**Βήματα:**
+```bash
+# Ήδη υπάρχει dev, δημιουργήστε staging
+azd env new staging
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Εναλλαγή μεταξύ τους
+azd env list
+azd env select dev
+```
+
+**✅ Επιτυχία:** Δύο ξεχωριστές ομάδες πόρων στο Azure Portal
+
+---
+
+### 🛡️ Καθαρή Αρχή: `azd down --force --purge`
+
+Όταν χρειάζεστε πλήρη επαναφορά:
+
+```bash
+azd down --force --purge
+```
+
+**Τι κάνει:**
+- `--force`: Χωρίς επιβεβαιωτικά μηνύματα
+- `--purge`: Διαγράφει όλη την τοπική κατάσταση και τους πόρους Azure
+
+**Χρήση όταν:**
+- Η ανάπτυξη απέτυχε στη μέση
+- Αλλαγή έργων
+- Χρειάζεστε νέα αρχή
+
+---
+
+## 🎪 Αναφορά Αρχικής Ροής Εργασίας
+
+### Ξεκινώντας Ένα Νέο Έργο
+```bash
+# Μέθοδος 1: Χρησιμοποιήστε υπάρχον πρότυπο
+azd init --template todo-nodejs-mongo
+
+# Μέθοδος 2: Ξεκινήστε από την αρχή
 azd init
 
-# Method 3: Use current directory
+# Μέθοδος 3: Χρησιμοποιήστε τον τρέχοντα κατάλογο
 azd init .
 ```
 
 ### Κύκλος Ανάπτυξης
 ```bash
-# Set up development environment
+# Ρυθμίστε το περιβάλλον ανάπτυξης
 azd auth login
 azd env new dev
 azd env select dev
 
-# Deploy everything
+# Αναπτύξτε τα πάντα
 azd up
 
-# Make changes and redeploy
+# Κάντε αλλαγές και επανααναπτύξτε
 azd deploy
 
-# Clean up when done
-azd down --force --purge # command in the Azure Developer CLI is a **hard reset** for your environment—especially useful when you're troubleshooting failed deployments, cleaning up orphaned resources, or prepping for a fresh redeploy.
+# Καθαρίστε όταν τελειώσετε
+azd down --force --purge # η εντολή στο Azure Developer CLI είναι μια **σκληρή επαναφορά** για το περιβάλλον σας—ιδιαίτερα χρήσιμη όταν αντιμετωπίζετε προβλήματα με αποτυχημένες αναπτύξεις, καθαρίζετε ορφανές πόρους ή προετοιμάζεστε για μια νέα επανααναπτύξη.
 ```
 
-## Κατανόηση της εντολής `azd down --force --purge`
-Η εντολή `azd down --force --purge` είναι ένας ισχυρός τρόπος για να καταργήσετε πλήρως το περιβάλλον azd και όλους τους σχετικούς πόρους. Ακολουθεί μια ανάλυση του τι κάνει κάθε σημαία:
+## Κατανόηση του `azd down --force --purge`
+Η εντολή `azd down --force --purge` είναι ένας ισχυρός τρόπος για πλήρη κατάργηση του περιβάλλοντος azd και όλων των σχετικών πόρων. Εδώ είναι μια ανάλυση του τι κάνει κάθε σημαία:
 ```
 --force
 ```
-- Παρακάμπτει τις επιβεβαιώσεις.
-- Χρήσιμο για αυτοματοποίηση ή σενάρια όπου η χειροκίνητη εισαγωγή δεν είναι εφικτή.
-- Εξασφαλίζει ότι η κατάργηση προχωρά χωρίς διακοπή, ακόμα και αν η CLI εντοπίσει ασυνέπειες.
 
-```
---purge
-```
-Διαγράφει **όλα τα σχετικά μεταδεδομένα**, συμπεριλαμβανομένων:
-Κατάσταση περιβάλλοντος
-Τοπικός φάκελος `.azure`
-Πληροφορίες προσωρινής αποθήκευσης ανάπτυξης
-Αποτρέπει το azd από το να "θυμάται" προηγούμενες αναπτύξεις, που μπορεί να προκαλέσουν προβλήματα όπως ασυμφωνίες ομάδων πόρων ή παλιές αναφορές μητρώου.
-
-### Γιατί να χρησιμοποιήσετε και τα δύο;
-Όταν αντιμετωπίζετε προβλήματα με το `azd up` λόγω υπολειμμάτων κατάστασης ή μερικών αναπτύξεων, αυτός ο συνδυασμός εξασφαλίζει ένα **καθαρό ξεκίνημα**.
-
-Είναι ιδιαίτερα χρήσιμο μετά από χειροκίνητες διαγραφές πόρων στο Azure portal ή όταν αλλάζετε πρότυπα, περιβάλλοντα ή συμβάσεις ονοματοδοσίας ομάδων πόρων.
-
-### Διαχείριση Πολλαπλών Περιβαλλόντων
-```bash
-# Create staging environment
-azd env new staging
-azd env select staging
-azd up
-
-# Switch back to dev
-azd env select dev
-
-# Compare environments
-azd env list
-```
-
-## 🔐 Αυθεντικοποίηση και Διαπιστευτήρια
-
-Η κατανόηση της αυθεντικοποίησης είναι κρίσιμη για επιτυχημένες αναπτύξεις azd. Το Azure χρησιμοποιεί πολλαπλές μεθόδους αυθεντικοποίησης, και το azd αξιοποιεί την ίδια αλυσίδα διαπιστευτηρίων που χρησιμοποιούν και άλλα εργαλεία του Azure.
-
-### Αυθεντικοποίηση Azure CLI (`az login`)
-
-Πριν χρησιμοποιήσετε το azd, πρέπει να αυθεντικοποιηθείτε με το Azure. Η πιο κοινή μέθοδος είναι μέσω του Azure CLI:
-
-```bash
-# Interactive login (opens browser)
-az login
-
-# Login with specific tenant
-az login --tenant <tenant-id>
-
-# Login with service principal
-az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
-
-# Check current login status
-az account show
-
-# List available subscriptions
-az account list --output table
-
-# Set default subscription
-az account set --subscription <subscription-id>
-```
-
-### Ροή Αυθεντικοποίησης
-1. **Διαδραστική Είσοδος**: Ανοίγει τον προεπιλεγμένο περιηγητή σας για αυθεντικοποίηση
-2. **Ροή Κωδικού Συσκευής**: Για περιβάλλοντα χωρίς πρόσβαση σε περιηγητή
-3. **Service Principal**: Για αυτοματοποίηση και σενάρια CI/CD
-4. **Managed Identity**: Για εφαρμογές που φιλοξενούνται στο Azure
-
-### DefaultAzureCredential Chain
-
-Το `DefaultAzureCredential` είναι ένας τύπος διαπιστευτηρίου που παρέχει μια απλοποιημένη εμπειρία αυθεντικοποίησης δοκιμάζοντας αυτόματα πολλαπλές πηγές διαπιστευτηρίων με συγκεκριμένη σειρά:
-
-#### Σειρά Αλυσίδας Διαπιστευτηρίων
-```mermaid
-graph TD
-    A[DefaultAzureCredential] --> B[Environment Variables]
-    B --> C[Workload Identity]
-    C --> D[Managed Identity]
-    D --> E[Visual Studio]
-    E --> F[Visual Studio Code]
-    F --> G[Azure CLI]
-    G --> H[Azure PowerShell]
-    H --> I[Interactive Browser]
-```
-
-#### 1. Μεταβλητές Περιβάλλοντος
-```bash
-# Set environment variables for service principal
-export AZURE_CLIENT_ID="<app-id>"
-export AZURE_CLIENT_SECRET="<password>"
-export AZURE_TENANT_ID="<tenant-id>"
-```
-
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
-Χρησιμοποιείται αυτόματα σε:
-- Azure Kubernetes Service (AKS) με Workload Identity
-- GitHub Actions με OIDC federation
-- Άλλα σενάρια ταυτότητας με ομοσπονδία
-
-#### 3. Managed Identity
-Για πόρους Azure όπως:
-- Εικονικές Μηχανές
-- App Service
-- Azure Functions
-- Container Instances
-
-```bash
-# Check if running on Azure resource with managed identity
-az account show --query "user.type" --output tsv
-# Returns: "servicePrincipal" if using managed identity
-```
-
-#### 4. Ενσωμάτωση Εργαλείων Ανάπτυξης
-- **Visual Studio**: Χρησιμοποιεί αυτόματα τον λογαριασμό που έχει συνδεθεί
-- **VS Code**: Χρησιμοποιεί τα διαπιστευτήρια του Azure Account extension
-- **Azure CLI**: Χρησιμοποιεί τα διαπιστευτήρια του `az login` (πιο κοινό για τοπική ανάπτυξη)
-
-### Ρύθμιση Αυθεντικοποίησης AZD
-
-```bash
-# Method 1: Use Azure CLI (Recommended for development)
-az login
-azd auth login  # Uses existing Azure CLI credentials
-
-# Method 2: Direct azd authentication
-azd auth login --use-device-code  # For headless environments
-
-# Method 3: Check authentication status
-azd auth login --check-status
-
-# Method 4: Logout and re-authenticate
-azd auth logout
-azd auth login
-```
-
-### Βέλτιστες Πρακτικές Αυθεντικοποίησης
-
-#### Για Τοπική Ανάπτυξη
-```bash
-# 1. Login with Azure CLI
-az login
-
-# 2. Verify correct subscription
-az account show
-az account set --subscription "Your Subscription Name"
-
-# 3. Use azd with existing credentials
-azd auth login
-```
-
-#### Για Σενάρια CI/CD
-```yaml
-# GitHub Actions example
-- name: Azure Login
-  uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-- name: Deploy with azd
-  run: |
-    azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
-                    --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
-                    --tenant-id ${{ secrets.AZURE_TENANT_ID }}
-    azd up --no-prompt
-```
-
-#### Για Περιβάλλοντα Παραγωγής
-- Χρησιμοποιήστε **Managed Identity** όταν εκτελείτε σε πόρους Azure
-- Χρησιμοποιήστε **Service Principal** για σενάρια αυτοματοποίησης
-- Αποφύγετε την αποθήκευση διαπιστευτηρίων σε κώδικα ή αρχεία ρυθμίσεων
-- Χρησιμοποιήστε **Azure Key Vault** για ευαίσθητες ρυθμίσεις
-
-### Συνήθη Προβλήματα Αυθεντικοποίησης και Λύσεις
-
-#### Πρόβλημα: "Δεν βρέθηκε συνδρομή"
-```bash
-# Solution: Set default subscription
-az account list --output table
-az account set --subscription "<subscription-id>"
-azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
-```
-
-#### Πρόβλημα: "Ανεπαρκή δικαιώματα"
-```bash
-# Solution: Check and assign required roles
-az role assignment list --assignee $(az account show --query user.name --output tsv)
-
-# Common required roles:
-# - Contributor (for resource management)
-# - User Access Administrator (for role assignments)
-```
-
-#### Πρόβλημα: "Έληξε το διακριτικό"
-```bash
-# Solution: Re-authenticate
-az logout
-az login
-azd auth logout
-azd auth login
-```
-
-### Αυθεντικοποίηση σε Διάφορα Σενάρια
-
-#### Τοπική Ανάπτυξη
-```bash
-# Personal development account
-az login
-azd auth login
-```
-
-#### Ομαδική Ανάπτυξη
-```bash
-# Use specific tenant for organization
-az login --tenant contoso.onmicrosoft.com
-azd auth login
-```
-
-#### Σενάρια Πολλαπλών Ενοικιαστών
-```bash
-# Switch between tenants
-az login --tenant tenant1.onmicrosoft.com
-# Deploy to tenant 1
-azd up
-
-az login --tenant tenant2.onmicrosoft.com  
-# Deploy to tenant 2
-azd up
-```
-
-### Σκέψεις Ασφαλείας
-
-1. **Αποθήκευση Διαπιστευτηρίων**: Μην αποθηκεύετε ποτέ διαπιστευτήρια στον πηγαίο κώδικα
-2. **Περιορισμός Εμβέλειας**: Χρησιμοποιήστε την αρχή των ελάχιστων δικαιωμάτων για service principals
-3. **Περιστροφή Διακριτικών**: Περιστρέψτε τα μυστικά των service principals τακτικά
-4. **Ίχνος Ελέγχου**: Παρακολουθήστε δραστηριότητες αυθεντικοποίησης και ανάπτυξης
-5. **Ασφάλεια Δικτύου**: Χρησιμοποιήστε ιδιωτικά endpoints όπου είναι δυνατόν
-
-### Αντιμετώπιση Προβλημάτων Αυθεντικοποίησης
-
-```bash
-# Debug authentication issues
-azd auth login --check-status
-az account show
-az account get-access-token
-
-# Common diagnostic commands
-whoami                          # Current user context
-az ad signed-in-user show      # Azure AD user details
-az group list                  # Test resource access
-```
-
-## Κατανόηση της εντολής `azd down --force --purge`
-
-### Ανακάλυψη
-```bash
-azd template list              # Browse templates
-azd template show <template>   # Template details
-azd init --help               # Initialization options
-```
-
-### Διαχείριση Έργου
-```bash
-azd show                     # Project overview
-azd env show                 # Current environment
-azd config list             # Configuration settings
-```
-
-### Παρακολούθηση
-```bash
-azd monitor                  # Open Azure portal
-azd pipeline config          # Set up CI/CD
-azd logs                     # View application logs
-```
-
-## Βέλτιστες Πρακτικές
-
-### 1. Χρησιμοποιήστε Σημαντικά Ονόματα
-```bash
-# Good
-azd env new production-east
-azd init --template web-app-secure
-
-# Avoid
-azd env new env1
-azd init --template template1
-```
-
-### 2. Αξιοποιήστε τα Πρότυπα
-- Ξεκινήστε με υπάρχοντα πρότυπα
-- Προσαρμόστε τα στις ανάγκες σας
-- Δημιουργήστε επαναχρησιμοποιήσιμα πρότυπα για τον οργανισμό σας
-
-### 3. Απομόνωση Περιβάλλοντος
-- Χρησιμοποιήστε ξεχωριστά περιβάλλοντα για ανάπτυξη/δοκιμαστικό/παραγωγή
-- Μην αναπτύσσετε απευθείας στην παραγωγή από τοπικό μηχάνημα
-- Χρησιμοποιήστε CI/CD pipelines για αναπτύξεις παραγωγής
-
-### 4. Διαχείριση Ρυθμίσεων
-- Χρησιμοποιήστε μεταβλητές περιβάλλοντος για ευαίσθητα δεδομένα
-- Διατηρήστε τις ρυθμίσεις υπό έλεγχο έκδοσης
-- Τεκμηριώστε τις ρυθμίσεις που είναι συγκεκριμένες για κάθε περιβάλλον
-
-## Πρόοδος Μάθησης
-
-### Αρχάριος (Εβδομάδα 1-2)
-1. Εγκαταστήστε το azd και αυθεντικοποιηθείτε
-2. Αναπτύξτε ένα απλό πρότυπο
-3. Κατανοήστε τη δομή του έργου
-4. Μάθετε βασικές εντολές (up, down, deploy)
-
-### Ενδιάμεσος (Εβδομάδα 3-4)
-1. Προσαρμόστε πρότυπα
-2. Διαχειριστείτε πολλαπλά περιβάλλοντα
-3. Κατανοήστε τον κώδικα υποδομής
-4. Ρυθμίστε CI/CD pipelines
-
-### Προχωρημένος (Εβδομάδα 5+)
-1. Δημιουργήστε προσαρμοσμένα πρότυπα
-2. Προηγμένα μοτίβα υποδομής
-3. Αναπτύξεις πολλαπλών περιοχών
-4. Ρυθμίσεις επιπέδου επιχείρησης
-
-## Επόμενα Βήματα
-
-**📖 Συνεχίστε τη Μάθηση στο Κεφάλαιο 1:**
 - [Εγκατάσταση & Ρύθμιση](installation.md) - Εγκαταστήστε και ρυθμίστε το azd
-- [Το Πρώτο σας Έργο](first-project.md) - Ολοκληρώστε το πρακτικό σεμινάριο
-- [Οδηγός Ρυθμίσεων](configuration.md) - Προχωρημένες επιλογές ρύθμισης
+- [Το Πρώτο σας Έργο](first-project.md) - Ολοκληρωμένο πρακτικό σεμινάριο
+- [Οδηγός Ρύθμισης](configuration.md) - Προχωρημένες επιλογές ρύθμισης
 
 **🎯 Έτοιμοι για το Επόμενο Κεφάλαιο;**
-- [Κεφάλαιο 2: Ανάπτυξη με AI](../ai-foundry/azure-ai-foundry-integration.md) - Ξεκινήστε να δημιουργείτε εφαρμογές AI
+- [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην Τεχνητή Νοημοσύνη](../microsoft-foundry/microsoft-foundry-integration.md) - Ξεκινήστε να δημιουργείτε εφαρμογές AI
 
 ## Πρόσθετοι Πόροι
 
@@ -558,14 +507,344 @@ azd init --template template1
 
 ---
 
-**Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Βάσεις & Γρήγορη Εκκίνηση  
-- **⬅️ Προηγούμενο**: [Επισκόπηση Μαθήματος](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Επόμενο**: [Εγκατάσταση & Ρύθμιση](installation.md)
-- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 2: Ανάπτυξη με AI](../ai-foundry/azure-ai-foundry-integration.md)
+## 🙋 Συχνές Ερωτήσεις
+
+### Γενικές Ερωτήσεις
+
+**Ε: Ποια είναι η διαφορά μεταξύ AZD και Azure CLI;**
+
+Α: Το Azure CLI (`az`) χρησιμοποιείται για τη διαχείριση μεμονωμένων πόρων Azure. Το AZD (`azd`) χρησιμοποιείται για τη διαχείριση ολόκληρων εφαρμογών:
+
+```bash
+# Azure CLI - Διαχείριση πόρων χαμηλού επιπέδου
+az webapp create --name myapp --resource-group rg
+az sql server create --name myserver --resource-group rg
+# ...απαιτούνται πολλές περισσότερες εντολές
+
+# AZD - Διαχείριση σε επίπεδο εφαρμογής
+azd up  # Αναπτύσσει ολόκληρη την εφαρμογή με όλους τους πόρους
+```
+
+**Σκεφτείτε το έτσι:**
+- `az` = Εργασία με μεμονωμένα κομμάτια Lego
+- `azd` = Εργασία με ολοκληρωμένα σετ Lego
 
 ---
 
+**Ε: Χρειάζεται να γνωρίζω Bicep ή Terraform για να χρησιμοποιήσω το AZD;**
+
+Α: Όχι! Ξεκινήστε με πρότυπα:
+```bash
+# Χρησιμοποιήστε υπάρχον πρότυπο - δεν απαιτείται γνώση IaC
+azd init --template todo-nodejs-mongo
+azd up
+```
+
+Μπορείτε να μάθετε Bicep αργότερα για να προσαρμόσετε την υποδομή. Τα πρότυπα παρέχουν λειτουργικά παραδείγματα για να μάθετε.
+
+---
+
+**Ε: Πόσο κοστίζει η εκτέλεση προτύπων AZD;**
+
+Α: Το κόστος ποικίλλει ανά πρότυπο. Τα περισσότερα πρότυπα ανάπτυξης κοστίζουν $50-150/μήνα:
+
+```bash
+# Προεπισκόπηση κόστους πριν την ανάπτυξη
+azd provision --preview
+
+# Πάντα καθαρισμός όταν δεν χρησιμοποιείται
+azd down --force --purge  # Αφαιρεί όλους τους πόρους
+```
+
+**Συμβουλή:** Χρησιμοποιήστε δωρεάν επίπεδα όπου είναι διαθέσιμα:
+- App Service: Επίπεδο F1 (Δωρεάν)
+- Azure OpenAI: 50,000 tokens/μήνα δωρεάν
+- Cosmos DB: 1000 RU/s δωρεάν επίπεδο
+
+---
+
+**Ε: Μπορώ να χρησιμοποιήσω το AZD με υπάρχοντες πόρους Azure;**
+
+Α: Ναι, αλλά είναι πιο εύκολο να ξεκινήσετε από την αρχή. Το AZD λειτουργεί καλύτερα όταν διαχειρίζεται ολόκληρο τον κύκλο ζωής. Για υπάρχοντες πόρους:
+
+```bash
+# Επιλογή 1: Εισαγωγή υπαρχόντων πόρων (προχωρημένο)
+azd init
+# Στη συνέχεια τροποποιήστε το infra/ για να αναφέρεται σε υπάρχοντες πόρους
+
+# Επιλογή 2: Ξεκινήστε από την αρχή (συνιστάται)
+azd init --template matching-your-stack
+azd up  # Δημιουργεί νέο περιβάλλον
+```
+
+---
+
+**Ε: Πώς μπορώ να μοιραστώ το έργο μου με την ομάδα μου;**
+
+Α: Κάντε commit το έργο AZD στο Git (αλλά ΟΧΙ τον φάκελο .azure):
+
+```bash
+# Ήδη στο .gitignore από προεπιλογή
+.azure/        # Περιέχει μυστικά και δεδομένα περιβάλλοντος
+*.env          # Μεταβλητές περιβάλλοντος
+
+# Τα μέλη της ομάδας τότε:
+git clone <your-repo>
+azd auth login
+azd env new <their-name>-dev
+azd up
+```
+
+Όλοι αποκτούν ίδια υποδομή από τα ίδια πρότυπα.
+
+---
+
+### Ερωτήσεις Αντιμετώπισης Προβλημάτων
+
+**Ε: Το "azd up" απέτυχε στη μέση. Τι να κάνω;**
+
+Α: Ελέγξτε το σφάλμα, διορθώστε το και δοκιμάστε ξανά:
+
+```bash
+# Προβολή λεπτομερών καταγραφών
+azd show
+
+# Κοινές διορθώσεις:
+
+# 1. Εάν ξεπεράστηκε το όριο:
+azd env set AZURE_LOCATION "westus2"  # Δοκιμάστε διαφορετική περιοχή
+
+# 2. Εάν υπάρχει σύγκρουση ονόματος πόρου:
+azd down --force --purge  # Καθαρίστε τα πάντα
+azd up  # Δοκιμάστε ξανά
+
+# 3. Εάν η εξουσιοδότηση έχει λήξει:
+az login
+azd auth login
+azd up
+```
+
+**Το πιο συνηθισμένο πρόβλημα:** Επιλέχθηκε λάθος συνδρομή Azure
+```bash
+az account list --output table
+az account set --subscription "<correct-subscription>"
+```
+
+---
+
+**Ε: Πώς μπορώ να αναπτύξω μόνο αλλαγές στον κώδικα χωρίς να επαναπροβλέψω;**
+
+Α: Χρησιμοποιήστε το `azd deploy` αντί για `azd up`:
+
+```bash
+azd up          # Πρώτη φορά: προμήθεια + ανάπτυξη (αργό)
+
+# Κάντε αλλαγές στον κώδικα...
+
+azd deploy      # Επόμενες φορές: μόνο ανάπτυξη (γρήγορο)
+```
+
+Σύγκριση ταχύτητας:
+- `azd up`: 10-15 λεπτά (προβλέπει υποδομή)
+- `azd deploy`: 2-5 λεπτά (μόνο κώδικας)
+
+---
+
+**Ε: Μπορώ να προσαρμόσω τα πρότυπα υποδομής;**
+
+Α: Ναι! Επεξεργαστείτε τα αρχεία Bicep στον φάκελο `infra/`:
+
+```bash
+# Μετά το azd init
+cd infra/
+code main.bicep  # Επεξεργασία στο VS Code
+
+# Προεπισκόπηση αλλαγών
+azd provision --preview
+
+# Εφαρμογή αλλαγών
+azd provision
+```
+
+**Συμβουλή:** Ξεκινήστε μικρά - αλλάξτε πρώτα τα SKUs:
+```bicep
+// infra/main.bicep
+sku: {
+  name: 'B1'  // Change to 'P1V2' for production
+}
+```
+
+---
+
+**Ε: Πώς μπορώ να διαγράψω όλα όσα δημιούργησε το AZD;**
+
+Α: Μια εντολή αφαιρεί όλους τους πόρους:
+
+```bash
+azd down --force --purge
+
+# Αυτό διαγράφει:
+# - Όλους τους πόρους Azure
+# - Ομάδα πόρων
+# - Κατάσταση τοπικού περιβάλλοντος
+# - Αποθηκευμένα δεδομένα ανάπτυξης
+```
+
+**Πάντα να το εκτελείτε όταν:**
+- Ολοκληρώσετε τη δοκιμή ενός προτύπου
+- Μεταβαίνετε σε διαφορετικό έργο
+- Θέλετε να ξεκινήσετε από την αρχή
+
+**Εξοικονόμηση κόστους:** Διαγραφή αχρησιμοποίητων πόρων = $0 χρεώσεις
+
+---
+
+**Ε: Τι γίνεται αν διαγράψω κατά λάθος πόρους στο Azure Portal;**
+
+Α: Η κατάσταση του AZD μπορεί να μην συγχρονίζεται. Προσέγγιση καθαρού πίνακα:
+
+```bash
+# 1. Αφαιρέστε την τοπική κατάσταση
+azd down --force --purge
+
+# 2. Ξεκινήστε από την αρχή
+azd up
+
+# Εναλλακτική: Αφήστε το AZD να ανιχνεύσει και να διορθώσει
+azd provision  # Θα δημιουργήσει ελλείποντες πόρους
+```
+
+---
+
+### Προχωρημένες Ερωτήσεις
+
+**Ε: Μπορώ να χρησιμοποιήσω το AZD σε pipelines CI/CD;**
+
+Α: Ναι! Παράδειγμα GitHub Actions:
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy with AZD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install azd
+        run: curl -fsSL https://aka.ms/install-azd.sh | bash
+      
+      - name: Azure Login
+        run: |
+          azd auth login \
+            --client-id ${{ secrets.AZURE_CLIENT_ID }} \
+            --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
+            --tenant-id ${{ secrets.AZURE_TENANT_ID }}
+      
+      - name: Deploy
+        run: azd up --no-prompt
+```
+
+---
+
+**Ε: Πώς μπορώ να χειριστώ μυστικά και ευαίσθητα δεδομένα;**
+
+Α: Το AZD ενσωματώνεται αυτόματα με το Azure Key Vault:
+
+```bash
+# Τα μυστικά αποθηκεύονται στο Key Vault, όχι στον κώδικα
+azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
+
+# Το AZD αυτόματα:
+# 1. Δημιουργεί Key Vault
+# 2. Αποθηκεύει το μυστικό
+# 3. Παρέχει πρόσβαση στην εφαρμογή μέσω Managed Identity
+# 4. Εισάγει κατά την εκτέλεση
+```
+
+**Ποτέ μην κάνετε commit:**
+- Φάκελο `.azure/` (περιέχει δεδομένα περιβάλλοντος)
+- Αρχεία `.env` (τοπικά μυστικά)
+- Σειρές σύνδεσης
+
+---
+
+**Ε: Μπορώ να αναπτύξω σε πολλαπλές περιοχές;**
+
+Α: Ναι, δημιουργήστε περιβάλλον ανά περιοχή:
+
+```bash
+# Περιβάλλον Ανατολικών ΗΠΑ
+azd env new prod-eastus
+azd env set AZURE_LOCATION eastus
+azd up
+
+# Περιβάλλον Δυτικής Ευρώπης
+azd env new prod-westeurope
+azd env set AZURE_LOCATION westeurope
+azd up
+
+# Κάθε περιβάλλον είναι ανεξάρτητο
+azd env list
+```
+
+Για πραγματικές εφαρμογές πολλαπλών περιοχών, προσαρμόστε τα πρότυπα Bicep για ανάπτυξη σε πολλαπλές περιοχές ταυτόχρονα.
+
+---
+
+**Ε: Πού μπορώ να βρω βοήθεια αν κολλήσω;**
+
+1. **Τεκμηρίωση AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
+2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - κανάλι #azure-developer-cli
+4. **Stack Overflow:** Ετικέτα `azure-developer-cli`
+5. **Αυτό το Μάθημα:** [Οδηγός Αντιμετώπισης Προβλημάτων](../troubleshooting/common-issues.md)
+
+**Συμβουλή:** Πριν ρωτήσετε, εκτελέστε:
+```bash
+azd show       # Εμφανίζει την τρέχουσα κατάσταση
+azd version    # Εμφανίζει την έκδοσή σας
+```
+Συμπεριλάβετε αυτές τις πληροφορίες στην ερώτησή σας για γρηγορότερη βοήθεια.
+
+---
+
+## 🎓 Τι Ακολουθεί;
+
+Τώρα κατανοείτε τα βασικά του AZD. Επιλέξτε την πορεία σας:
+
+### 🎯 Για Αρχάριους:
+1. **Επόμενο:** [Εγκατάσταση & Ρύθμιση](installation.md) - Εγκαταστήστε το AZD στον υπολογιστή σας
+2. **Μετά:** [Το Πρώτο σας Έργο](first-project.md) - Αναπτύξτε την πρώτη σας εφαρμογή
+3. **Πρακτική:** Ολοκληρώστε και τις 3 ασκήσεις αυτού του μαθήματος
+
+### 🚀 Για Προγραμματιστές AI:
+1. **Μεταβείτε στο:** [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην Τεχνητή Νοημοσύνη](../microsoft-foundry/microsoft-foundry-integration.md)
+2. **Αναπτύξτε:** Ξεκινήστε με `azd init --template get-started-with-ai-chat`
+3. **Μάθετε:** Δημιουργήστε ενώ αναπτύσσετε
+
+### 🏗️ Για Έμπειρους Προγραμματιστές:
+1. **Ανασκόπηση:** [Οδηγός Ρύθμισης](configuration.md) - Προχωρημένες ρυθμίσεις
+2. **Εξερεύνηση:** [Υποδομή ως Κώδικας](../deployment/provisioning.md) - Εμβάθυνση στο Bicep
+3. **Δημιουργία:** Δημιουργήστε προσαρμοσμένα πρότυπα για το stack σας
+
+---
+
+**Πλοήγηση Κεφαλαίων:**
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Βάση & Γρήγορη Εκκίνηση  
+- **⬅️ Προηγούμενο**: [Επισκόπηση Μαθήματος](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Επόμενο**: [Εγκατάσταση & Ρύθμιση](installation.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην Τεχνητή Νοημοσύνη](../microsoft-foundry/microsoft-foundry-integration.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Αποποίηση ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτόματες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης AI [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,24 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:31:14+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-21T06:37:33+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "el"
 }
 -->
-# Σχεδιασμός Χωρητικότητας: Κατανόηση Ποσοστώσεων και Ορίων του Azure
+# Σχεδιασμός Χωρητικότητας - Διαθεσιμότητα και Όρια Πόρων Azure
+
+**Πλοήγηση Κεφαλαίου:**
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 6 - Επικύρωση & Σχεδιασμός Πριν την Ανάπτυξη
+- **⬅️ Προηγούμενο Κεφάλαιο**: [Κεφάλαιο 5: Λύσεις AI με Πολλαπλούς Πράκτορες](../../examples/retail-scenario.md)
+- **➡️ Επόμενο**: [Επιλογή SKU](sku-selection.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 7: Αντιμετώπιση Προβλημάτων](../troubleshooting/common-issues.md)
 
 ## Εισαγωγή
 
-Αυτός ο ολοκληρωμένος οδηγός σας βοηθά να σχεδιάσετε και να επαληθεύσετε τη χωρητικότητα πόρων του Azure πριν από την ανάπτυξη με το Azure Developer CLI. Μάθετε πώς να αξιολογείτε ποσοστώσεις, διαθεσιμότητα και περιφερειακούς περιορισμούς για να εξασφαλίσετε επιτυχημένες αναπτύξεις, ενώ βελτιστοποιείτε το κόστος και την απόδοση. Αποκτήστε δεξιότητες στον σχεδιασμό χωρητικότητας για διαφορετικές αρχιτεκτονικές εφαρμογών και σενάρια κλιμάκωσης.
+Αυτός ο αναλυτικός οδηγός σας βοηθά να σχεδιάσετε και να επικυρώσετε τη χωρητικότητα πόρων Azure πριν την ανάπτυξη με το Azure Developer CLI. Μάθετε να αξιολογείτε ποσοστώσεις, διαθεσιμότητα και περιφερειακούς περιορισμούς για να εξασφαλίσετε επιτυχημένες αναπτύξεις ενώ βελτιστοποιείτε το κόστος και την απόδοση. Κατακτήστε τεχνικές σχεδιασμού χωρητικότητας για διαφορετικές αρχιτεκτονικές εφαρμογών και σενάρια κλιμάκωσης.
 
 ## Στόχοι Μάθησης
 
 Με την ολοκλήρωση αυτού του οδηγού, θα:
 - Κατανοήσετε τις ποσοστώσεις, τα όρια και τους περιφερειακούς περιορισμούς του Azure
-- Μάθετε τεχνικές για τον έλεγχο της διαθεσιμότητας και της χωρητικότητας πόρων πριν από την ανάπτυξη
-- Εφαρμόσετε αυτοματοποιημένες στρατηγικές επαλήθευσης και παρακολούθησης χωρητικότητας
+- Κατακτήσετε τεχνικές για τον έλεγχο της διαθεσιμότητας και της χωρητικότητας πόρων πριν την ανάπτυξη
+- Εφαρμόσετε αυτοματοποιημένες στρατηγικές επικύρωσης και παρακολούθησης χωρητικότητας
 - Σχεδιάσετε εφαρμογές με σωστή διάσταση πόρων και κλιμάκωση
 - Εφαρμόσετε στρατηγικές βελτιστοποίησης κόστους μέσω έξυπνου σχεδιασμού χωρητικότητας
 - Ρυθμίσετε ειδοποιήσεις και παρακολούθηση για χρήση ποσοστώσεων και διαθεσιμότητα πόρων
@@ -26,23 +33,23 @@ CO_OP_TRANSLATOR_METADATA:
 ## Αποτελέσματα Μάθησης
 
 Με την ολοκλήρωση, θα μπορείτε να:
-- Αξιολογείτε και να επαληθεύετε τις απαιτήσεις χωρητικότητας πόρων του Azure πριν από την ανάπτυξη
+- Αξιολογείτε και να επικυρώνετε τις απαιτήσεις χωρητικότητας πόρων Azure πριν την ανάπτυξη
 - Δημιουργείτε αυτοματοποιημένα scripts για έλεγχο χωρητικότητας και παρακολούθηση ποσοστώσεων
 - Σχεδιάζετε αρχιτεκτονικές που κλιμακώνονται λαμβάνοντας υπόψη περιφερειακά και συνδρομητικά όρια
 - Εφαρμόζετε στρατηγικές διάστασης πόρων που είναι οικονομικά αποδοτικές για διαφορετικούς τύπους φορτίων εργασίας
-- Ρυθμίζετε προληπτική παρακολούθηση και ειδοποιήσεις για ζητήματα χωρητικότητας
+- Ρυθμίζετε προληπτική παρακολούθηση και ειδοποιήσεις για θέματα χωρητικότητας
 - Σχεδιάζετε αναπτύξεις σε πολλές περιοχές με σωστή κατανομή χωρητικότητας
 
 ## Γιατί Είναι Σημαντικός ο Σχεδιασμός Χωρητικότητας
 
-Πριν από την ανάπτυξη εφαρμογών, πρέπει να εξασφαλίσετε:
+Πριν την ανάπτυξη εφαρμογών, πρέπει να εξασφαλίσετε:
 - **Επαρκείς ποσοστώσεις** για τους απαιτούμενους πόρους
 - **Διαθεσιμότητα πόρων** στην επιλεγμένη περιοχή
 - **Διαθεσιμότητα επιπέδου υπηρεσίας** για τον τύπο συνδρομής σας
 - **Χωρητικότητα δικτύου** για την αναμενόμενη κίνηση
 - **Βελτιστοποίηση κόστους** μέσω σωστής διάστασης
 
-## 📊 Κατανόηση Ποσοστώσεων και Ορίων του Azure
+## 📊 Κατανόηση Ποσοστώσεων και Ορίων Azure
 
 ### Τύποι Ορίων
 1. **Ποσοστώσεις σε επίπεδο συνδρομής** - Μέγιστοι πόροι ανά συνδρομή
@@ -52,20 +59,20 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### Συνηθισμένες Ποσοστώσεις Πόρων
 ```bash
-# Check current quota usage
+# Ελέγξτε την τρέχουσα χρήση ποσοστώσεων
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Ελέγξτε συγκεκριμένες ποσοστώσεις πόρων
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Έλεγχοι Χωρητικότητας Πριν από την Ανάπτυξη
+## Έλεγχοι Χωρητικότητας Πριν την Ανάπτυξη
 
-### Αυτοματοποιημένο Script Επαλήθευσης Χωρητικότητας
+### Αυτοματοποιημένο Script Επικύρωσης Χωρητικότητας
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Επικύρωση χωρητικότητας Azure πριν από την ανάπτυξη
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Λειτουργία για έλεγχο χρήσης ποσοστώσεων
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,27 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Έλεγχος διαφόρων ποσοστώσεων πόρων
+check_quota "compute" 4      # Απαιτούνται 4 vCPUs
+check_quota "storage" 2      # Απαιτούνται 2 λογαριασμοί αποθήκευσης
+check_quota "network" 1      # Απαιτείται 1 εικονικό δίκτυο
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Έλεγχοι Χωρητικότητας για Συγκεκριμένες Υπηρεσίες
+### Έλεγχοι Χωρητικότητας Ανά Υπηρεσία
 
 #### Χωρητικότητα App Service
 ```bash
-# Check App Service Plan availability
+# Ελέγξτε τη διαθεσιμότητα του Σχεδίου Υπηρεσιών Εφαρμογής
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Ελέγξτε τις διαθέσιμες SKU στην περιοχή
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Προτείνετε εναλλακτικές περιοχές
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Ελέγξτε την τρέχουσα χρήση
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Χρήση
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Χωρητικότητα Βάσεων Δεδομένων
+#### Χωρητικότητα Βάσης Δεδομένων
 ```bash
-# Check PostgreSQL capacity
+# Ελέγξτε τη χωρητικότητα του PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Ελέγξτε αν το SKU είναι διαθέσιμο
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Εμφάνιση διαθέσιμων SKUs
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Ελέγξτε τη χωρητικότητα του Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Ελέγξτε τη διαθεσιμότητα της περιοχής
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Ελέγξτε αν υποστηρίζεται το serverless (αν χρειάζεται)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### Χωρητικότητα Container Apps
 ```bash
-# Check Container Apps capacity
+# Ελέγξτε τη χωρητικότητα των Container Apps
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Ελέγξτε αν τα Container Apps είναι διαθέσιμα στην περιοχή
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Ελέγξτε τον τρέχοντα αριθμό περιβαλλόντων
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Τα Container Apps έχουν όριο 15 περιβάλλοντα ανά περιοχή
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Εμφάνιση διαθέσιμων περιοχών
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -252,11 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Επαλήθευση Περιφερειακής Διαθεσιμότητας
+## 📍 Επικύρωση Περιφερειακής Διαθεσιμότητας
 
-### Διαθεσιμότητα Υπηρεσιών ανά Περιοχή
+### Διαθεσιμότητα Υπηρεσιών Ανά Περιοχή
 ```bash
-# Check service availability across regions
+# Ελέγξτε τη διαθεσιμότητα υπηρεσιών σε όλες τις περιοχές
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Ελέγξτε όλες τις υπηρεσίες
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Συστάσεις Επιλογής Περιοχής
 ```bash
-# Recommend optimal regions based on requirements
+# Προτείνετε βέλτιστες περιοχές βάσει απαιτήσεων
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "χαμηλό κόστος" | "απόδοση" | "συμμόρφωση"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### Εκτίμηση Κόστους Πόρων
 ```bash
-# Estimate deployment costs
+# Εκτίμηση κόστους ανάπτυξης
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Δημιουργία προσωρινής ομάδας πόρων για εκτίμηση
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Ανάπτυξη υποδομής σε λειτουργία επικύρωσης
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Καθαρισμός προσωρινής ομάδας πόρων
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,7 +363,7 @@ estimate_costs() {
 
 ### Συστάσεις Βελτιστοποίησης SKU
 ```bash
-# Recommend optimal SKUs based on requirements
+# Προτείνετε βέλτιστα SKUs βάσει απαιτήσεων
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -419,32 +426,32 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Αυτοματοποιημένοι Έλεγχοι Πριν από την Ανάπτυξη
+## 🚀 Αυτοματοποιημένοι Έλεγχοι Πριν την Ανάπτυξη
 
-### Ολοκληρωμένο Script Ελέγχου Πριν από την Ανάπτυξη
+### Αναλυτικό Script Πριν την Ανάπτυξη
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Ολοκληρωμένη επικύρωση πριν την ανάπτυξη
 
 set -e
 
-# Configuration
+# Διαμόρφωση
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Χρώματα για την έξοδο
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Χωρίς χρώμα
 
-# Logging functions
+# Λειτουργίες καταγραφής
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Φόρτωση διαμόρφωσης
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Έλεγχος 1: Πιστοποίηση
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Έλεγχος 2: Περιφερειακή διαθεσιμότητα
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Έλεγχος 3: Επικύρωση ποσοστώσεων
 log_info "Checking quota availability..."
 
-# vCPU quota
+# Ποσόστωση vCPU
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Ποσόστωση λογαριασμού αποθήκευσης
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Έλεγχος 4: Διαθεσιμότητα υπηρεσιών
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Έλεγχος 5: Χωρητικότητα δικτύου
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Έλεγχος 6: Επικύρωση ονομάτων πόρων
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Έλεγχος 7: Εκτίμηση κόστους
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Έλεγχος 8: Επικύρωση προτύπου
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Τελική σύνοψη
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -658,14 +665,14 @@ echo "  3. Verify application health post-deployment"
 
 ### Παρακολούθηση Χωρητικότητας σε Πραγματικό Χρόνο
 ```bash
-# Monitor capacity during deployment
+# Παρακολουθήστε τη χωρητικότητα κατά την ανάπτυξη
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Ελέγξτε την κατάσταση της ανάπτυξης
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Ελέγξτε την τρέχουσα χρήση πόρων
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -691,7 +698,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Ενσωμάτωση με AZD
 
-### Προσθήκη Hooks Ελέγχου Πριν από την Ανάπτυξη στο azure.yaml
+### Προσθήκη Hooks Πριν την Ανάπτυξη στο azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -711,18 +718,18 @@ hooks:
 
 ## Βέλτιστες Πρακτικές
 
-1. **Πάντα να εκτελείτε ελέγχους χωρητικότητας** πριν από την ανάπτυξη σε νέες περιοχές
+1. **Πάντα να εκτελείτε ελέγχους χωρητικότητας** πριν την ανάπτυξη σε νέες περιοχές
 2. **Παρακολουθείτε τη χρήση ποσοστώσεων τακτικά** για να αποφύγετε εκπλήξεις
 3. **Σχεδιάστε για ανάπτυξη** ελέγχοντας τις μελλοντικές ανάγκες χωρητικότητας
-4. **Χρησιμοποιήστε εργαλεία εκτίμησης κόστους** για να αποφύγετε απρόσμενες χρεώσεις
+4. **Χρησιμοποιήστε εργαλεία εκτίμησης κόστους** για να αποφύγετε απρόσμενα έξοδα
 5. **Τεκμηριώστε τις απαιτήσεις χωρητικότητας** για την ομάδα σας
-6. **Αυτοματοποιήστε την επαλήθευση χωρητικότητας** στις διαδικασίες CI/CD
+6. **Αυτοματοποιήστε την επικύρωση χωρητικότητας** στις διαδικασίες CI/CD
 7. **Λάβετε υπόψη τις απαιτήσεις χωρητικότητας για εναλλακτικές περιοχές**
 
 ## Επόμενα Βήματα
 
-- [Οδηγός Επιλογής SKU](sku-selection.md) - Επιλέξτε τα βέλτιστα επίπεδα υπηρεσιών
-- [Έλεγχοι Πριν από την Ανάπτυξη](preflight-checks.md) - Αυτοματοποιημένα scripts επαλήθευσης
+- [Οδηγός Επιλογής SKU](sku-selection.md) - Επιλέξτε βέλτιστα επίπεδα υπηρεσιών
+- [Έλεγχοι Πριν την Ανάπτυξη](preflight-checks.md) - Αυτοματοποιημένα scripts επικύρωσης
 - [Σύντομος Οδηγός](../../resources/cheat-sheet.md) - Γρήγορες εντολές αναφοράς
 - [Γλωσσάρι](../../resources/glossary.md) - Όροι και ορισμοί
 
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Αποποίηση ευθύνης**:  
 Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτόματες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

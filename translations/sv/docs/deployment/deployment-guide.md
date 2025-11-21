@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-17T23:15:17+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-21T08:29:31+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "sv"
 }
@@ -24,10 +24,10 @@ Denna omfattande guide täcker allt du behöver veta om att implementera applika
 
 Genom att slutföra denna guide kommer du att:
 - Bemästra alla implementeringskommandon och arbetsflöden i Azure Developer CLI
-- Förstå hela implementeringslivscykeln från resursförsörjning till övervakning
-- Implementera anpassade hooks för automatisering före och efter implementering
+- Förstå hela implementeringslivscykeln från försörjning till övervakning
+- Implementera anpassade implementeringshooks för automatisering före och efter implementering
 - Konfigurera flera miljöer med miljöspecifika parametrar
-- Ställa in avancerade implementeringsstrategier, inklusive blå-gröna och kanarieimplementeringar
+- Ställa in avancerade implementeringsstrategier inklusive blå-gröna och kanarieimplementeringar
 - Integrera azd-implementeringar med CI/CD-pipelines och DevOps-arbetsflöden
 
 ## Läranderesultat
@@ -40,7 +40,7 @@ Efter att ha slutfört guiden kommer du att kunna:
 - Optimera implementeringsprestanda och implementera återställningsstrategier
 - Integrera azd-implementeringar i företags DevOps-praktiker
 
-## Implementeringsöversikt
+## Översikt över implementering
 
 Azure Developer CLI erbjuder flera implementeringskommandon:
 - `azd up` - Komplett arbetsflöde (försörjning + implementering)
@@ -53,42 +53,76 @@ Azure Developer CLI erbjuder flera implementeringskommandon:
 ### Komplett implementering (azd up)
 Det vanligaste arbetsflödet för nya projekt:
 ```bash
-# Deploy everything from scratch
+# Distribuera allt från grunden
 azd up
 
-# Deploy with specific environment
+# Distribuera med specifik miljö
 azd up --environment production
 
-# Deploy with custom parameters
+# Distribuera med anpassade parametrar
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Endast infrastrukturimplementering
 När du bara behöver uppdatera Azure-resurser:
 ```bash
-# Provision/update infrastructure
+# Tillhandahåll/uppdatera infrastruktur
 azd provision
 
-# Provision with dry-run to preview changes
+# Tillhandahåll med torrkörning för att förhandsgranska ändringar
 azd provision --preview
 
-# Provision specific services
+# Tillhandahåll specifika tjänster
 azd provision --service database
 ```
 
 ### Endast kodimplementering
 För snabba applikationsuppdateringar:
 ```bash
-# Deploy all services
+# Distribuera alla tjänster
 azd deploy
 
-# Deploy specific service
+# Förväntat resultat:
+# Distribuerar tjänster (azd deploy)
+# - web: Distribuerar... Klar
+# - api: Distribuerar... Klar
+# FRAMGÅNG: Din distribution slutfördes på 2 minuter och 15 sekunder
+
+# Distribuera specifik tjänst
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# Distribuera med anpassade byggargument
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Verifiera distribution
+azd show --output json | jq '.services'
 ```
+
+### ✅ Verifiering av implementering
+
+Efter varje implementering, verifiera framgång:
+
+```bash
+# Kontrollera att alla tjänster körs
+azd show
+
+# Testa hälsoslutpunkter
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Kontrollera loggar för fel
+azd logs --service api --since 5m | grep -i error
+```
+
+**Kriterier för framgång:**
+- ✅ Alla tjänster visar statusen "Running"
+- ✅ Hälsoslutpunkter returnerar HTTP 200
+- ✅ Inga felmeddelanden de senaste 5 minuterna
+- ✅ Applikationen svarar på testförfrågningar
 
 ## 🏗️ Förstå implementeringsprocessen
 
@@ -195,18 +229,18 @@ services:
 
 ### Miljöspecifika konfigurationer
 ```bash
-# Development environment
+# Utvecklingsmiljö
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# Stagingmiljö
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# Produktionsmiljö
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -253,17 +287,17 @@ services:
 
 ### Blå-gröna implementeringar
 ```bash
-# Create blue environment
+# Skapa blå miljö
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blue environment
+# Testa blå miljö
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# Växla trafik till blå (manuell DNS/load balancer-uppdatering)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# Rensa grön miljö
 azd env select production-green
 azd down --force
 ```
@@ -369,10 +403,10 @@ CMD ["npm", "start"]
 
 ### Parallella implementeringar
 ```bash
-# Configure parallel deployment
+# Konfigurera parallell distribution
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# Distribuera tjänster parallellt
 azd deploy --parallel
 ```
 
@@ -392,10 +426,10 @@ services:
 
 ### Inkrementella implementeringar
 ```bash
-# Deploy only changed services
+# Distribuera endast ändrade tjänster
 azd deploy --incremental
 
-# Deploy with change detection
+# Distribuera med ändringsdetektering
 azd deploy --detect-changes
 ```
 
@@ -403,13 +437,13 @@ azd deploy --detect-changes
 
 ### Övervakning i realtid
 ```bash
-# Monitor deployment progress
+# Övervaka distributionsframsteg
 azd deploy --follow
 
-# View deployment logs
+# Visa distributionsloggar
 azd logs --follow --service api
 
-# Check deployment status
+# Kontrollera distributionsstatus
 azd show --service api
 ```
 
@@ -434,7 +468,7 @@ services:
 
 echo "Validating deployment..."
 
-# Check application health
+# Kontrollera applikationens hälsa
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -464,12 +498,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### Hantering av hemligheter
 ```bash
-# Store secrets securely
+# Lagra hemligheter säkert
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# Referera till hemligheter i azure.yaml
 ```
 
 ```yaml
@@ -512,29 +546,29 @@ services:
 
 ### Snabb återställning
 ```bash
-# Rollback to previous deployment
+# Återgå till tidigare distribution
 azd deploy --rollback
 
-# Rollback specific service
+# Återgå specifik tjänst
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# Återgå till specifik version
 azd deploy --service api --version v1.2.3
 ```
 
-### Infrastrukturåterställning
+### Återställning av infrastruktur
 ```bash
-# Rollback infrastructure changes
+# Återställ infrastrukturförändringar
 azd provision --rollback
 
-# Preview rollback changes
+# Förhandsgranska återställningsändringar
 azd provision --rollback --preview
 ```
 
 ### Återställning av databasmigration
 ```bash
 #!/bin/bash
-# scripts/rollback-database.sh
+# skript/återställ-databas.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -549,13 +583,13 @@ echo "Database rollback completed"
 
 ### Spåra implementeringsprestanda
 ```bash
-# Enable deployment metrics
+# Aktivera distributionsmetrik
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# Visa distributionshistorik
 azd history
 
-# Get deployment statistics
+# Hämta distributionsstatistik
 azd metrics --type deployment
 ```
 
@@ -578,24 +612,24 @@ hooks:
 
 ## 🎯 Bästa praxis
 
-### 1. Miljökonsistens
+### 1. Konsistens mellan miljöer
 ```bash
-# Use consistent naming
+# Använd konsekvent namngivning
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# Upprätthåll miljöparitet
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Validering av infrastruktur
 ```bash
-# Validate before deployment
+# Validera innan distribution
 azd provision --preview
 azd provision --what-if
 
-# Use ARM/Bicep linting
+# Använd ARM/Bicep lintning
 az bicep lint --file infra/main.bicep
 ```
 
@@ -630,7 +664,7 @@ hooks:
 
 ### 4. Dokumentation och loggning
 ```bash
-# Document deployment procedures
+# Dokumentera distributionsprocedurer
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -642,6 +676,259 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 - [Planering före implementering](../pre-deployment/capacity-planning.md) - Planera din implementeringsstrategi
 - [Vanliga problem](../troubleshooting/common-issues.md) - Lös implementeringsproblem
 - [Bästa praxis](../troubleshooting/debugging.md) - Produktionsklara implementeringsstrategier
+
+## 🎯 Praktiska implementeringsövningar
+
+### Övning 1: Arbetsflöde för inkrementell implementering (20 minuter)
+**Mål**: Bemästra skillnaden mellan fullständig och inkrementell implementering
+
+```bash
+# Initialt införande
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Registrera initialt införandetid
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Gör en kodändring
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Distribuera endast kod (snabbt)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Jämför tider
+cat deployment-log.txt
+
+# Rensa upp
+azd down --force --purge
+```
+
+**Kriterier för framgång:**
+- [ ] Fullständig implementering tar 5-15 minuter
+- [ ] Endast kodimplementering tar 2-5 minuter
+- [ ] Kodändringar reflekteras i implementerad applikation
+- [ ] Infrastruktur förblir oförändrad efter `azd deploy`
+
+**Läranderesultat**: `azd deploy` är 50-70% snabbare än `azd up` för kodändringar
+
+### Övning 2: Anpassade implementeringshooks (30 minuter)
+**Mål**: Implementera automatisering före och efter implementering
+
+```bash
+# Skapa valideringsskript för fördistribution
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Kontrollera om testerna klarar sig
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Kontrollera för ocommitterade ändringar
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Skapa röktest efter distribution
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Lägg till hooks i azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Testa distribution med hooks
+azd deploy
+```
+
+**Kriterier för framgång:**
+- [ ] Script före implementering körs innan implementering
+- [ ] Implementering avbryts om tester misslyckas
+- [ ] Hälsotest efter implementering validerar status
+- [ ] Hooks körs i rätt ordning
+
+### Övning 3: Implementeringsstrategi för flera miljöer (45 minuter)
+**Mål**: Implementera stegvis arbetsflöde (dev → staging → production)
+
+```bash
+# Skapa distributionsskript
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Steg 1: Distribuera till utveckling
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Steg 2: Distribuera till staging
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Steg 3: Manuell godkännande för produktion
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Skapa miljöer
+azd env new dev
+azd env new staging
+azd env new production
+
+# Kör stegvis distribution
+./deploy-staged.sh
+```
+
+**Kriterier för framgång:**
+- [ ] Dev-miljön implementeras framgångsrikt
+- [ ] Staging-miljön implementeras framgångsrikt
+- [ ] Manuell godkännande krävs för produktion
+- [ ] Alla miljöer har fungerande hälsokontroller
+- [ ] Kan återställas vid behov
+
+### Övning 4: Återställningsstrategi (25 minuter)
+**Mål**: Implementera och testa implementeringsåterställning
+
+```bash
+# Distribuera v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Spara v1-konfiguration
+cp -r .azure/production .azure/production-v1-backup
+
+# Distribuera v2 med brytande ändring
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Upptäck fel
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Återställ kod
+    git checkout src/api/src/server.js
+    
+    # Återställ miljö
+    azd env set APP_VERSION "1.0.0"
+    
+    # Återdistribuera v1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Kriterier för framgång:**
+- [ ] Kan upptäcka implementeringsfel
+- [ ] Återställningsscript körs automatiskt
+- [ ] Applikationen återgår till fungerande tillstånd
+- [ ] Hälsokontroller godkänns efter återställning
+
+## 📊 Spåra implementeringsmetrik
+
+### Spåra din implementeringsprestanda
+
+```bash
+# Skapa skript för distributionsmetrik
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Logga till fil
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Använd det
+./track-deployment.sh
+```
+
+**Analysera dina metrik:**
+```bash
+# Visa distributionshistorik
+cat deployment-metrics.csv
+
+# Beräkna genomsnittlig distributionstid
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
 
 ## Ytterligare resurser
 
@@ -658,5 +945,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som kan uppstå vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
