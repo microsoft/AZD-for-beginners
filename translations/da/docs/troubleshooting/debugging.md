@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T23:30:43+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-21T09:19:15+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "da"
 }
@@ -11,10 +11,10 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Kapitelnavigation:**
 - **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
-- **📖 Nuværende Kapitel**: Kapitel 7 - Fejlfindingsstrategier
+- **📖 Nuværende Kapitel**: Kapitel 7 - Fejlfindings- og Debugging
 - **⬅️ Forrige**: [Almindelige Problemer](common-issues.md)
-- **➡️ Næste**: [AI-Specifik Fejlfindning](ai-troubleshooting.md)
-- **🚀 Næste Kapitel**: [Kapitel 8: Produktions- og Enterprise-mønstre](../ai-foundry/production-ai-practices.md)
+- **➡️ Næste**: [AI-Specifik Fejlfindingsguide](ai-troubleshooting.md)
+- **🚀 Næste Kapitel**: [Kapitel 8: Produktions- og Enterprise-mønstre](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduktion
 
@@ -36,7 +36,7 @@ Efter afslutning vil du kunne:
 - Anvende TRIAGE-metoden til systematisk at fejlfinde komplekse implementeringsproblemer
 - Konfigurere og analysere omfattende log- og sporingsinformation
 - Effektivt bruge Azure Monitor, Application Insights og diagnostiske værktøjer
-- Fejlfinde netværksforbindelse, autentificering og tilladelsesproblemer uafhængigt
+- Fejlfinde netværksforbindelse, autentificering og tilladelsesproblemer selvstændigt
 - Implementere performanceovervågning og optimeringsstrategier
 - Oprette brugerdefinerede fejlfindingsscripts og automatisering til tilbagevendende problemer
 
@@ -46,34 +46,34 @@ Efter afslutning vil du kunne:
 - **T**id: Hvornår startede problemet?
 - **R**eproducer: Kan du konsekvent genskabe det?
 - **I**soler: Hvilken komponent fejler?
-- **A**nalyser: Hvad fortæller loggene os?
+- **A**nalyser: Hvad fortæller logfilerne os?
 - **S**aml: Indsaml alle relevante oplysninger
-- **E**skalér: Hvornår skal der søges yderligere hjælp?
+- **E**skaler: Hvornår skal du søge yderligere hjælp?
 
-## Aktivering af fejlfindingstilstand
+## Aktivering af Debug-tilstand
 
 ### Miljøvariabler
 ```bash
-# Enable comprehensive debugging
+# Aktiver omfattende fejlfinding
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Azure CLI fejlfinding
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Deaktiver telemetri for renere output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Fejlfindingskonfiguration
+### Debug-konfiguration
 ```bash
-# Set debug configuration globally
+# Indstil fejlsøgningskonfiguration globalt
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Aktiver sporingslogføring
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Struktureret loganalyse
 ```bash
-# Filter logs by level
+# Filtrer logfiler efter niveau
 azd logs --level error --since 1h
 
-# Filter by service
+# Filtrer efter tjeneste
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Eksporter logfiler til analyse
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Parse JSON-logfiler med jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Logkorrelation
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Korrelér logs på tværs af tjenester
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Søg på tværs af alle tjenester
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Søg Azure-logs
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graph-forespørgsler
 ```bash
-# Query resources by tags
+# Forespørg ressourcer efter tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Find mislykkede udrulninger
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Kontroller ressource sundhed
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Netværksfejlfindning
+### Netværksfejlfindingsmetoder
 ```bash
-# Test connectivity between services
+# Test forbindelsen mellem tjenester
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Brug
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Container-fejlfindning
+### Container-fejlfindingsmetoder
 ```bash
-# Debug container app issues
+# Fejlfind container app problemer
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -183,9 +183,9 @@ debug_container() {
 }
 ```
 
-### Fejlfindning af databaseforbindelser
+### Fejlfindingsmetoder for databaseforbindelser
 ```bash
-# Debug database connectivity
+# Fejlret databaseforbindelse
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -202,11 +202,11 @@ debug_database() {
 }
 ```
 
-## 🔬 Performance-fejlfindning
+## 🔬 Performance-fejlfindingsmetoder
 
 ### Overvågning af applikationsperformance
 ```bash
-# Enable Application Insights debugging
+# Aktiver Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Tilpasset ydelsesovervågning
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Analyse af ressourceudnyttelse
 ```bash
-# Monitor resource usage
+# Overvåg ressourceforbrug
 monitor_resources() {
     local resource_group=$1
     
@@ -264,7 +264,7 @@ monitor_resources() {
 
 ## 🧪 Test og validering
 
-### Fejlfindning af integrationstest
+### Fejlfindingsmetoder for integrationstest
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Indstil debug-miljø
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Hent serviceendepunkter
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Test sundheds-endepunkter
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Kør tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Kør brugerdefinerede integrationstests
 npm run test:integration
 ```
 
-### Belastningstest til fejlfinding
+### Belastningstest til fejlfindingsformål
 ```bash
-# Simple load test to identify performance bottlenecks
+# Enkel belastningstest for at identificere ydelsesflaskehalse
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,42 +323,42 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Brug af Apache Bench (installation: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Uddrag nøglemetrikker
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Kontroller for fejl
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Infrastruktur-fejlfindning
+## 🔧 Infrastruktur-fejlfindingsmetoder
 
-### Fejlfindning af Bicep-skabeloner
+### Fejlfindingsmetoder for Bicep-skabeloner
 ```bash
-# Validate Bicep templates with detailed output
+# Valider Bicep-skabeloner med detaljeret output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Syntaksvalidering
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Lintvalidering
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Hvad-hvis-udrulning
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Fejlret skabelonudrulning
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Analyse af ressource-tilstand
 ```bash
-# Analyze resource states for inconsistencies
+# Analyser ressource-tilstande for uoverensstemmelser
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # List alle ressourcer med deres tilstande
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Kontroller for fejlede ressourcer
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -404,11 +404,11 @@ analyze_resources() {
 }
 ```
 
-## 🔒 Sikkerhedsfejlfindning
+## 🔒 Sikkerhedsfejlfindingsmetoder
 
-### Fejlfindning af autentificeringsflow
+### Fejlfindingsmetoder for autentificeringsflow
 ```bash
-# Debug Azure authentication
+# Fejlfind Azure-autentifikation
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Dekodér JWT-token (kræver jq og base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Fejlfind adgang til Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,16 +440,16 @@ debug_keyvault() {
 }
 ```
 
-### Fejlfindning af netværkssikkerhed
+### Fejlfindingsmetoder for netværkssikkerhed
 ```bash
-# Debug network security groups
+# Fejlfind netværkssikkerhedsgrupper
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Kontroller sikkerhedsregler
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,17 +458,17 @@ debug_network_security() {
 }
 ```
 
-## 📱 Applikationsspecifik fejlfinding
+## 📱 Applikationsspecifik fejlfindingsmetoder
 
-### Fejlfindning af Node.js-applikationer
+### Fejlfindingsmetoder for Node.js-applikationer
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Express fejlsøgningsmiddleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Log anmodningsdetaljer
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Overskriv res.json for at logge svar
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -489,9 +489,9 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Fejlfindning af databaseforespørgsler
+### Fejlfindingsmetoder for databaseforespørgsler
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Database fejlfinding værktøjer
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -519,12 +519,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Nødprocedurer for fejlfinding
+## 🚨 Nødprocedurer for fejlfindingsmetoder
 
 ### Respons på produktionsproblemer
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Nødproduktion fejlfinding
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Skift til korrekt miljø
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Indsaml kritisk information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -582,26 +582,26 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Tilbagerulningsprocedurer
+### Tilbageføringsprocedurer
 ```bash
-# Quick rollback script
+# Hurtig rollback-script
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Skift miljø
     azd env select "$environment"
     
-    # Rollback application
+    # Rul applikationen tilbage
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Bekræft rollback
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Test kritiske endpoints
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### Brugerdefineret overvågningsdashboard
 ```bash
-# Create Application Insights queries for debugging
+# Opret Application Insights-forespørgsler til fejlfinding
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Forespørgsel efter fejl
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Forespørgsel efter ydeevneproblemer
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Forespørgsel efter afhængighedsfejl
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Logaggregering
 ```bash
-# Aggregate logs from multiple sources
+# Saml logfiler fra flere kilder
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -661,7 +661,7 @@ aggregate_logs() {
 ### Brugerdefinerede fejlfindingsscripts
 Opret en `scripts/debug/`-mappe med:
 - `health-check.sh` - Omfattende sundhedstjek
-- `performance-test.sh` - Automatiseret performance-test
+- `performance-test.sh` - Automatiseret performancetest
 - `log-analyzer.py` - Avanceret logparsing og analyse
 - `resource-validator.sh` - Infrastrukturvalidering
 
@@ -684,23 +684,23 @@ hooks:
 
 ## Bedste praksis
 
-1. **Aktivér altid fejllogning** i ikke-produktionsmiljøer
+1. **Aktiver altid debug-logning** i ikke-produktionsmiljøer
 2. **Opret reproducerbare testcases** for problemer
-3. **Dokumentér fejlfindingsprocedurer** for dit team
-4. **Automatisér sundhedstjek** og overvågning
+3. **Dokumenter fejlfindingsprocedurer** for dit team
+4. **Automatiser sundhedstjek** og overvågning
 5. **Hold fejlfindingsværktøjer opdateret** med dine applikationsændringer
-6. **Øv fejlfindingsprocedurer** i ikke-incidentperioder
+6. **Øv fejlfindingsprocedurer** i ikke-incidenttider
 
-## Næste skridt
+## Næste trin
 
-- [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md) - Planlæg ressourcekrav
+- [Kapacitetsplanlægning](../pre-deployment/capacity-planning.md) - Planlæg ressourcebehov
 - [SKU-valg](../pre-deployment/sku-selection.md) - Vælg passende serviceniveauer
 - [Preflight-tjek](../pre-deployment/preflight-checks.md) - Validering før implementering
-- [Snydeark](../../resources/cheat-sheet.md) - Hurtig reference til kommandoer
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Hurtig reference til kommandoer
 
 ---
 
-**Husk**: God fejlfindning handler om at være systematisk, grundig og tålmodig. Disse værktøjer og teknikker vil hjælpe dig med at diagnosticere problemer hurtigere og mere effektivt.
+**Husk**: God fejlfindingspraksis handler om at være systematisk, grundig og tålmodig. Disse værktøjer og teknikker vil hjælpe dig med at diagnosticere problemer hurtigere og mere effektivt.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på at opnå nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

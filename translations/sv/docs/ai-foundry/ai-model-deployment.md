@@ -1,28 +1,28 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T23:13:35+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-21T08:39:56+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "sv"
 }
 -->
-# AI-modellimplementering med Azure Developer CLI
+# AI-modellutveckling med Azure Developer CLI
 
-**Kapitelnavigation:**
+**Kapitelöversikt:**
 - **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
 - **📖 Nuvarande Kapitel**: Kapitel 2 - AI-Driven Utveckling
-- **⬅️ Föregående**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **⬅️ Föregående**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Nästa**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Nästa Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
-Den här guiden ger omfattande instruktioner för att implementera AI-modeller med AZD-mallar, och täcker allt från modellval till produktionsimplementeringsmönster.
+Denna guide ger omfattande instruktioner för att distribuera AI-modeller med hjälp av AZD-mallar, från modellval till produktionsdistributionsmönster.
 
 ## Innehållsförteckning
 
 - [Strategi för Modellval](../../../../docs/ai-foundry)
 - [AZD-konfiguration för AI-modeller](../../../../docs/ai-foundry)
-- [Implementeringsmönster](../../../../docs/ai-foundry)
+- [Distributionsmönster](../../../../docs/ai-foundry)
 - [Modellhantering](../../../../docs/ai-foundry)
 - [Produktionsöverväganden](../../../../docs/ai-foundry)
 - [Övervakning och Observabilitet](../../../../docs/ai-foundry)
@@ -72,7 +72,7 @@ services:
 
 ### Bicep-mallkonfiguration
 
-Skapa modellimplementeringar med Bicep-mallar:
+Skapa modellutplaceringar med hjälp av Bicep-mallar:
 
 ```bicep
 // infra/main.bicep
@@ -136,16 +136,16 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Konfigurera din applikationsmiljö:
 
 ```bash
-# .env configuration
+# .env-konfiguration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Implementeringsmönster
+## Distributionsmönster
 
-### Mönster 1: Implementering i en region
+### Mönster 1: Enregionsdistribution
 
 ```yaml
 # azure.yaml - Single region
@@ -158,12 +158,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Passar bäst för:
+Bäst för:
 - Utveckling och testning
 - Applikationer för enskilda marknader
 - Kostnadsoptimering
 
-### Mönster 2: Implementering i flera regioner
+### Mönster 2: Flerregionsdistribution
 
 ```bicep
 // Multi-region deployment
@@ -176,12 +176,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Passar bäst för:
+Bäst för:
 - Globala applikationer
-- Höga krav på tillgänglighet
-- Belastningsfördelning
+- Höga tillgänglighetskrav
+- Lastfördelning
 
-### Mönster 3: Hybridimplementering
+### Mönster 3: Hybriddistribution
 
 Kombinera Azure OpenAI med andra AI-tjänster:
 
@@ -240,7 +240,7 @@ Använd AZD-hooks för modelluppdateringar:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# krokar/predeploy.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
@@ -251,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### A/B-testning
 
-Implementera flera modellversioner:
+Distribuera flera modellversioner:
 
 ```bicep
 param enableABTesting bool = false
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Beräkna nödvändig kapacitet baserat på användningsmönster:
 
 ```python
-# Capacity calculation example
+# Exempel på kapacitetsberäkning
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Exempel på användning
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Spåra AI-specifika mätvärden:
 
 ```python
-# Custom telemetry for AI models
+# Anpassad telemetri för AI-modeller
 import logging
 from applicationinsights import TelemetryClient
 
@@ -451,10 +451,10 @@ class AITelemetry:
 
 ### Hälsokontroller
 
-Implementera övervakning av AI-tjänstens hälsa:
+Implementera hälsokontroller för AI-tjänster:
 
 ```python
-# Health check endpoints
+# Hälsokontrolländpunkter
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Testa OpenAI-anslutning
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,10 +482,10 @@ async def check_ai_models():
 
 ## Nästa Steg
 
-1. **Granska [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** för mönster för tjänsteintegration
+1. **Granska [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** för tjänsteintegrationsmönster
 2. **Slutför [AI Workshop Lab](ai-workshop-lab.md)** för praktisk erfarenhet
-3. **Implementera [Produktions-AI-praktiker](production-ai-practices.md)** för företagsimplementeringar
-4. **Utforska [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** för vanliga problem
+3. **Implementera [Produktions-AI-praktiker](production-ai-practices.md)** för företagsdistributioner
+4. **Utforska [AI Felsökningsguide](../troubleshooting/ai-troubleshooting.md)** för vanliga problem
 
 ## Resurser
 
@@ -496,14 +496,16 @@ async def check_ai_models():
 
 ---
 
-**Kapitelnavigation:**
+**Kapitelöversikt:**
 - **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
 - **📖 Nuvarande Kapitel**: Kapitel 2 - AI-Driven Utveckling
-- **⬅️ Föregående**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **⬅️ Föregående**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Nästa**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Nästa Kapitel**: [Kapitel 3: Konfiguration](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

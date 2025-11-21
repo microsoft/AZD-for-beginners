@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-17T22:38:15+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-21T06:53:19+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "el"
 }
@@ -12,8 +12,8 @@ CO_OP_TRANSLATOR_METADATA:
 **Πλοήγηση Κεφαλαίου:**
 - **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με Προτεραιότητα AI
-- **⬅️ Προηγούμενο**: [Ενσωμάτωση Azure AI Foundry](azure-ai-foundry-integration.md)
-- **➡️ Επόμενο**: [Εργαστήριο AI Workshop](ai-workshop-lab.md)
+- **⬅️ Προηγούμενο**: [Ενσωμάτωση Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Επόμενο**: [Εργαστήριο AI](ai-workshop-lab.md)
 - **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 3: Ρύθμιση](../getting-started/configuration.md)
 
 Αυτός ο οδηγός παρέχει λεπτομερείς οδηγίες για την ανάπτυξη μοντέλων AI χρησιμοποιώντας πρότυπα AZD, καλύπτοντας τα πάντα από την επιλογή μοντέλου έως τα πρότυπα ανάπτυξης σε παραγωγή.
@@ -64,7 +64,7 @@ services:
 | Τύπος Μοντέλου | Περίπτωση Χρήσης | Συνιστώμενη Χωρητικότητα | Σκέψεις Κόστους |
 |----------------|------------------|--------------------------|-----------------|
 | GPT-4o-mini | Συνομιλία, Ερωτήσεις & Απαντήσεις | 10-50 TPM | Οικονομικό για τις περισσότερες εργασίες |
-| GPT-4 | Σύνθετη Λογική | 20-100 TPM | Υψηλότερο κόστος, χρήση για premium δυνατότητες |
+| GPT-4 | Σύνθετη Λογική | 20-100 TPM | Υψηλότερο κόστος, χρήση για premium λειτουργίες |
 | Text-embedding-ada-002 | Αναζήτηση, RAG | 30-120 TPM | Απαραίτητο για σημασιολογική αναζήτηση |
 | Whisper | Μετατροπή Ομιλίας σε Κείμενο | 10-50 TPM | Εργασίες επεξεργασίας ήχου |
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Ρυθμίστε το περιβάλλον της εφαρμογής σας:
 
 ```bash
-# .env configuration
+# Ρύθμιση .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -159,7 +159,7 @@ services:
 ```
 
 Κατάλληλο για:
-- Ανάπτυξη και δοκιμές
+- Ανάπτυξη και δοκιμή
 - Εφαρμογές για μία αγορά
 - Βελτιστοποίηση κόστους
 
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Υπολογίστε την απαιτούμενη χωρητικότητα βάσει μοτίβων χρήσης:
 
 ```python
-# Capacity calculation example
+# Παράδειγμα υπολογισμού χωρητικότητας
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Παράδειγμα χρήσης
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Παρακολουθήστε μετρήσεις ειδικές για AI:
 
 ```python
-# Custom telemetry for AI models
+# Προσαρμοσμένη τηλεμετρία για μοντέλα AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Εφαρμόστε παρακολούθηση υγείας υπηρεσιών AI:
 
 ```python
-# Health check endpoints
+# Σημεία ελέγχου υγείας
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Δοκιμή σύνδεσης OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,8 +482,8 @@ async def check_ai_models():
 
 ## Επόμενα Βήματα
 
-1. **Ανασκόπηση του [Οδηγού Ενσωμάτωσης Azure AI Foundry](azure-ai-foundry-integration.md)** για μοτίβα ενσωμάτωσης υπηρεσιών
-2. **Ολοκλήρωση του [Εργαστηρίου AI Workshop](ai-workshop-lab.md)** για πρακτική εμπειρία
+1. **Ανασκόπηση του [Οδηγού Ενσωμάτωσης Microsoft Foundry](microsoft-foundry-integration.md)** για πρότυπα ενσωμάτωσης υπηρεσιών
+2. **Ολοκλήρωση του [Εργαστηρίου AI](ai-workshop-lab.md)** για πρακτική εμπειρία
 3. **Εφαρμογή [Παραγωγικών Πρακτικών AI](production-ai-practices.md)** για εταιρικές αναπτύξεις
 4. **Εξερεύνηση του [Οδηγού Αντιμετώπισης Προβλημάτων AI](../troubleshooting/ai-troubleshooting.md)** για κοινά ζητήματα
 
@@ -491,7 +491,7 @@ async def check_ai_models():
 
 - [Διαθεσιμότητα Μοντέλων Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Τεκμηρίωση Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Κλιμάκωση Εφαρμογών Container](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Κλιμάκωση Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Βελτιστοποίηση Κόστους Μοντέλων AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Πλοήγηση Κεφαλαίου:**
 - **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με Προτεραιότητα AI
-- **⬅️ Προηγούμενο**: [Ενσωμάτωση Azure AI Foundry](azure-ai-foundry-integration.md)
-- **➡️ Επόμενο**: [Εργαστήριο AI Workshop](ai-workshop-lab.md)
+- **⬅️ Προηγούμενο**: [Ενσωμάτωση Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Επόμενο**: [Εργαστήριο AI](ai-workshop-lab.md)
 - **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 3: Ρύθμιση](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Αποποίηση ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης AI [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

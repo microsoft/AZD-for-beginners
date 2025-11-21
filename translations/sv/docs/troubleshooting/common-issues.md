@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-17T23:15:52+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-21T08:32:03+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "sv"
 }
@@ -10,22 +10,22 @@ CO_OP_TRANSLATOR_METADATA:
 # Vanliga problem och lösningar
 
 **Kapitelnavigation:**
-- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
 - **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning & Debugging
 - **⬅️ Föregående kapitel**: [Kapitel 6: Förberedande kontroller](../pre-deployment/preflight-checks.md)
 - **➡️ Nästa**: [Debugging Guide](debugging.md)
-- **🚀 Nästa kapitel**: [Kapitel 8: Produktions- & Företagsmönster](../ai-foundry/production-ai-practices.md)
+- **🚀 Nästa kapitel**: [Kapitel 8: Produktions- & Företagsmönster](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduktion
 
-Denna omfattande felsökningsguide täcker de vanligaste problemen som uppstår vid användning av Azure Developer CLI. Lär dig att diagnostisera, felsöka och lösa vanliga problem med autentisering, distribution, infrastrukturprovisionering och applikationskonfiguration. Varje problem inkluderar detaljerade symtom, rotorsaker och steg-för-steg-lösningar.
+Denna omfattande felsökningsguide täcker de vanligaste problemen som uppstår vid användning av Azure Developer CLI. Lär dig att diagnostisera, felsöka och lösa vanliga problem med autentisering, distribution, infrastrukturprovisionering och applikationskonfiguration. Varje problem inkluderar detaljerade symtom, grundorsaker och steg-för-steg-lösningar.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Behärska diagnostiska tekniker för problem med Azure Developer CLI
+- Bemästra diagnostiska tekniker för problem med Azure Developer CLI
 - Förstå vanliga autentiserings- och behörighetsproblem samt deras lösningar
-- Lösa distributionsfel, infrastrukturprovisioneringsproblem och konfigurationsproblem
+- Lösa distributionsfel, infrastrukturprovisioneringsfel och konfigurationsproblem
 - Implementera proaktiv övervakning och debuggingstrategier
 - Tillämpa systematiska felsökningsmetoder för komplexa problem
 - Konfigurera korrekt loggning och övervakning för att förhindra framtida problem
@@ -34,30 +34,30 @@ Genom att slutföra denna guide kommer du att:
 
 Efter att ha slutfört guiden kommer du att kunna:
 - Diagnostisera problem med Azure Developer CLI med hjälp av inbyggda diagnostikverktyg
-- Självständigt lösa autentiserings-, abonnemangs- och behörighetsrelaterade problem
-- Effektivt felsöka distributionsfel och infrastrukturprovisioneringsproblem
+- Självständigt lösa autentiserings-, prenumerations- och behörighetsrelaterade problem
+- Felsöka distributionsfel och infrastrukturprovisioneringsproblem effektivt
 - Debugga applikationskonfigurationsproblem och miljöspecifika problem
 - Implementera övervakning och varningar för att proaktivt identifiera potentiella problem
-- Tillämpa bästa praxis för loggning, debugging och arbetsflöden för problemlösning
+- Tillämpa bästa praxis för loggning, debugging och problemlösningsarbetsflöden
 
 ## Snabbdiagnostik
 
-Innan du går in på specifika problem, kör dessa kommandon för att samla diagnostisk information:
+Innan du dyker in i specifika problem, kör dessa kommandon för att samla in diagnostisk information:
 
 ```bash
-# Check azd version and health
+# Kontrollera azd-version och hälsa
 azd version
 azd config list
 
-# Verify Azure authentication
+# Verifiera Azure-autentisering
 az account show
 az account list
 
-# Check current environment
+# Kontrollera aktuell miljö
 azd env show
 azd env get-values
 
-# Enable debug logging
+# Aktivera felsökningsloggning
 export AZD_DEBUG=true
 azd <command> --debug
 ```
@@ -67,22 +67,22 @@ azd <command> --debug
 ### Problem: "Misslyckades med att hämta åtkomsttoken"
 **Symtom:**
 - `azd up` misslyckas med autentiseringsfel
-- Kommandon returnerar "unauthorized" eller "access denied"
+- Kommandon returnerar "obehörig" eller "åtkomst nekad"
 
 **Lösningar:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. Autentisera om med Azure CLI
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. Rensa cachelagrade autentiseringsuppgifter
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. Använd enhetskodflöde (för system utan huvud)
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. Ställ in explicit prenumeration
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
@@ -94,111 +94,111 @@ azd config set defaults.subscription "your-subscription-id"
 
 **Lösningar:**
 ```bash
-# 1. Check your Azure role assignments
+# 1. Kontrollera dina Azure-rolltilldelningar
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. Säkerställ att du har nödvändiga roller
+# - Medverkande (för resurskapande)
+# - Användaråtkomstadministratör (för rolltilldelningar)
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. Kontakta din Azure-administratör för korrekta behörigheter
 ```
 
-### Problem: Problem med multi-tenant autentisering
+### Problem: Problem med multi-tenant-autentisering
 **Lösningar:**
 ```bash
-# 1. Login with specific tenant
+# 1. Logga in med specifik hyresgäst
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. Ställ in hyresgäst i konfiguration
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. Rensa hyresgästcache om du byter hyresgäster
 az account clear
 ```
 
-## 🏗️ Fel vid infrastrukturprovisionering
+## 🏗️ Infrastrukturprovisioneringsfel
 
-### Problem: Konflikter med resursnamn
+### Problem: Resursnamnskonflikter
 **Symtom:**
 - Felmeddelanden om att "Resursnamnet finns redan"
 - Distribution misslyckas under resurskapande
 
 **Lösningar:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# 1. Använd unika resursnamn med tokens
+# I din Bicep-mall:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# 2. Ändra miljönamn
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# 3. Rensa upp befintliga resurser
 azd down --force --purge
 ```
 
-### Problem: Plats/region ej tillgänglig
+### Problem: Plats/region inte tillgänglig
 **Symtom:**
 - "Platsen 'xyz' är inte tillgänglig för resurstypen"
 - Vissa SKUs är inte tillgängliga i vald region
 
 **Lösningar:**
 ```bash
-# 1. Check available locations for resource types
+# 1. Kontrollera tillgängliga platser för resurstyper
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. Använd vanligt tillgängliga regioner
 azd config set defaults.location eastus2
-# or
+# eller
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Kontrollera tjänstetillgänglighet per region
+# Besök: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
 ### Problem: Kvotöverskridande fel
 **Symtom:**
-- "Kvoten överskriden för resurstypen"
+- "Kvot överskriden för resurstyp"
 - "Maximalt antal resurser uppnått"
 
 **Lösningar:**
 ```bash
-# 1. Check current quota usage
+# 1. Kontrollera aktuell kvotanvändning
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. Begär kvotökning via Azure-portalen
+# Gå till: Prenumerationer > Användning + kvoter
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. Använd mindre SKU:er för utveckling
+# I main.parameters.json:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. Rensa upp oanvända resurser
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problem: Fel i Bicep-mallar
+### Problem: Bicep-mallfel
 **Symtom:**
 - Valideringsfel i mallar
 - Syntaxfel i Bicep-filer
 
 **Lösningar:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. Validera Bicep-syntax
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. Använd Bicep-linter
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. Kontrollera syntaxen för parameterfilen
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. Förhandsgranska distributionsändringar
 azd provision --preview
 ```
 
@@ -211,67 +211,67 @@ azd provision --preview
 
 **Lösningar:**
 ```bash
-# 1. Check build logs
+# 1. Kontrollera byggloggar
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. Testa bygget lokalt
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# 3. Kontrollera Node.js/Python versionskompatibilitet
+node --version  # Bör matcha azure.yaml-inställningar
 python --version
 
-# 4. Clear build cache
+# 4. Rensa byggcache
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# 5. Kontrollera Dockerfile om containrar används
 docker build -t test-image .
 docker run --rm test-image
 ```
 
 ### Problem: Fel vid containerdistribution
 **Symtom:**
-- Container-appar misslyckas med att starta
-- Fel vid hämtning av bilder
+- Container-appar startar inte
+- Fel vid hämtning av bild
 
 **Lösningar:**
 ```bash
-# 1. Test Docker build locally
+# 1. Testa Docker-build lokalt
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. Kontrollera containerloggar
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. Verifiera åtkomst till containerregister
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. Kontrollera containerappens konfiguration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problem: Fel vid databasanslutning
+### Problem: Databasanslutningsfel
 **Symtom:**
 - Applikationen kan inte ansluta till databasen
 - Timeout-fel vid anslutning
 
 **Lösningar:**
 ```bash
-# 1. Check database firewall rules
+# 1. Kontrollera databasens brandväggsregler
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# 2. Testa anslutning från applikationen
+# Lägg till i din app tillfälligt:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# 3. Verifiera anslutningssträngens format
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# 4. Kontrollera databasserverns status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -284,34 +284,34 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 **Lösningar:**
 ```bash
-# 1. Verify environment variables are set
+# 1. Verifiera att miljövariabler är inställda
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. Kontrollera variabelnamn i azure.yaml
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. Starta om applikationen
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. Kontrollera appens tjänstekonfiguration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Problem: Problem med SSL/TLS-certifikat
+### Problem: SSL/TLS-certifikatproblem
 **Symtom:**
 - HTTPS fungerar inte
 - Fel vid certifikatvalidering
 
 **Lösningar:**
 ```bash
-# 1. Check SSL certificate status
+# 1. Kontrollera SSL-certifikatstatus
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. Aktivera endast HTTPS
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. Lägg till anpassad domän (om det behövs)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
@@ -322,21 +322,21 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 **Lösningar:**
 ```bash
-# 1. Configure CORS for App Service
+# 1. Konfigurera CORS för App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. Uppdatera API för att hantera CORS
+# I Express.js:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. Kontrollera om det körs på rätt URL:er
 azd show
 ```
 
-## 🌍 Problem med miljöhantering
+## 🌍 Miljöhanteringsproblem
 
 ### Problem: Problem med miljöväxling
 **Symtom:**
@@ -345,37 +345,37 @@ azd show
 
 **Lösningar:**
 ```bash
-# 1. List all environments
+# 1. Lista alla miljöer
 azd env list
 
-# 2. Explicitly select environment
+# 2. Välj miljö explicit
 azd env select production
 
-# 3. Verify current environment
+# 3. Verifiera aktuell miljö
 azd env show
 
-# 4. Create new environment if corrupted
+# 4. Skapa ny miljö om den är korrupt
 azd env new production-new
 azd env select production-new
 ```
 
-### Problem: Korruption i miljön
+### Problem: Miljökorruption
 **Symtom:**
 - Miljön visar ogiltigt tillstånd
 - Resurser matchar inte konfigurationen
 
 **Lösningar:**
 ```bash
-# 1. Refresh environment state
+# 1. Uppdatera miljötillståndet
 azd env refresh
 
-# 2. Reset environment configuration
+# 2. Återställ miljökonfigurationen
 azd env new production-reset
-# Copy over required environment variables
+# Kopiera över nödvändiga miljövariabler
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. Importera befintliga resurser (om möjligt)
+# Uppdatera manuellt .azure/production/config.json med resurs-ID
 ```
 
 ## 🔍 Prestandaproblem
@@ -383,23 +383,23 @@ azd env set DATABASE_URL "your-value"
 ### Problem: Långsamma distributionstider
 **Symtom:**
 - Distributioner tar för lång tid
-- Timeout-fel under distribution
+- Timeout under distribution
 
 **Lösningar:**
 ```bash
-# 1. Enable parallel deployment
+# 1. Aktivera parallell distribution
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# 2. Använd inkrementella distributioner
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# 3. Optimera byggprocessen
+# I package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# 4. Kontrollera resursplatser (använd samma region)
 azd config set defaults.location eastus2
 ```
 
@@ -410,100 +410,100 @@ azd config set defaults.location eastus2
 
 **Lösningar:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# 1. Skala upp resurser
+# Uppdatera SKU i main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# 2. Aktivera Application Insights-övervakning
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# 3. Kontrollera applikationsloggar för flaskhalsar
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# 4. Implementera caching
+# Lägg till Redis-cache till din infrastruktur
 ```
 
 ## 🛠️ Felsökningsverktyg och kommandon
 
 ### Debug-kommandon
 ```bash
-# Comprehensive debugging
+# Omfattande felsökning
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# Kontrollera systeminformation
 azd info
 
-# Validate configuration
+# Validera konfiguration
 azd config validate
 
-# Test connectivity
+# Testa anslutning
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Logganalys
 ```bash
-# Application logs
+# Applikationsloggar
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# Azure-resursloggar
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# Containerloggar (för Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### Resursundersökning
 ```bash
-# List all resources
+# Lista alla resurser
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# Kontrollera resursstatus
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# Nätverksdiagnostik
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Få ytterligare hjälp
 
 ### När ska man eskalera
-- Autentiseringsproblem kvarstår efter att ha testat alla lösningar
+- Autentiseringsproblem kvarstår efter att ha provat alla lösningar
 - Infrastrukturproblem med Azure-tjänster
-- Problem relaterade till fakturering eller abonnemang
+- Fakturerings- eller prenumerationsrelaterade problem
 - Säkerhetsproblem eller incidenter
 
 ### Supportkanaler
 ```bash
-# 1. Check Azure Service Health
+# 1. Kontrollera Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# 2. Skapa Azure-supportärende
+# Gå till: https://portal.azure.com -> Hjälp + support
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
+# 3. Communityresurser
+# - Stack Overflow: azure-developer-cli tagg
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### Information att samla in
 Innan du kontaktar support, samla in:
-- `azd version`-utdata
-- `azd info`-utdata
+- Utdata från `azd version`
+- Utdata från `azd info`
 - Felmeddelanden (fullständig text)
-- Steg för att reproducera problemet
+- Steg för att återskapa problemet
 - Miljödetaljer (`azd env show`)
 - Tidslinje för när problemet började
 
-### Logginsamlingsskript
+### Loggningsskript
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# samla-debug-info.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -528,32 +528,32 @@ echo "Debug information collected in debug-logs/"
 
 ### Checklista före distribution
 ```bash
-# 1. Validate authentication
+# 1. Validera autentisering
 az account show
 
-# 2. Check quotas and limits
+# 2. Kontrollera kvoter och gränser
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# 3. Validera mallar
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# 4. Testa lokalt först
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# 5. Använd testkörningsdistributioner
 azd provision --preview
 ```
 
 ### Övervakningsinställning
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# Aktivera Application Insights
+# Lägg till i main.bicep:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# Ställ in varningar
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -563,13 +563,13 @@ az monitor metrics alert create \
 
 ### Regelbundet underhåll
 ```bash
-# Weekly health checks
+# Veckovisa hälsokontroller
 ./scripts/health-check.sh
 
-# Monthly cost review
+# Månatlig kostnadsöversyn
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# Kvartalsvis säkerhetsgranskning
 az security assessment list --resource-group myrg
 ```
 
@@ -582,7 +582,7 @@ az security assessment list --resource-group myrg
 
 ---
 
-**Tips**: Bokmärk denna guide och hänvisa till den när du stöter på problem. De flesta problem har redan identifierats och har etablerade lösningar!
+**Tips**: Bokmärk denna guide och hänvisa till den när du stöter på problem. De flesta problem har setts tidigare och har etablerade lösningar!
 
 ---
 
@@ -592,5 +592,7 @@ az security assessment list --resource-group myrg
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

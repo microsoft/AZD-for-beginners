@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T22:41:37+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-21T06:45:18+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "el"
 }
 -->
 # Οδηγός Εντοπισμού Σφαλμάτων για Αναπτύξεις AZD
 
-**Πλοήγηση Κεφαλαίων:**
+**Πλοήγηση Κεφαλαίου:**
 - **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 7 - Εντοπισμός Σφαλμάτων & Διάγνωση
 - **⬅️ Προηγούμενο**: [Συνηθισμένα Προβλήματα](common-issues.md)
 - **➡️ Επόμενο**: [Εντοπισμός Σφαλμάτων για AI](ai-troubleshooting.md)
-- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 8: Παραγωγή & Εταιρικά Μοτίβα](../ai-foundry/production-ai-practices.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 8: Πρότυπα Παραγωγής & Επιχειρηματικής Κλίμακας](../microsoft-foundry/production-ai-practices.md)
 
 ## Εισαγωγή
 
-Αυτός ο ολοκληρωμένος οδηγός παρέχει προηγμένες στρατηγικές εντοπισμού σφαλμάτων, εργαλεία και τεχνικές για τη διάγνωση και την επίλυση σύνθετων προβλημάτων με τις αναπτύξεις του Azure Developer CLI. Μάθετε συστηματικές μεθοδολογίες εντοπισμού σφαλμάτων, τεχνικές ανάλυσης καταγραφών, προφίλ απόδοσης και προηγμένα εργαλεία διάγνωσης για την αποτελεσματική επίλυση προβλημάτων ανάπτυξης και εκτέλεσης.
+Αυτός ο ολοκληρωμένος οδηγός παρέχει προηγμένες στρατηγικές εντοπισμού σφαλμάτων, εργαλεία και τεχνικές για τη διάγνωση και την επίλυση σύνθετων προβλημάτων με τις αναπτύξεις του Azure Developer CLI. Μάθετε συστηματικές μεθοδολογίες εντοπισμού σφαλμάτων, τεχνικές ανάλυσης καταγραφών, προφίλ απόδοσης και προηγμένα διαγνωστικά εργαλεία για την αποτελεσματική επίλυση προβλημάτων ανάπτυξης και εκτέλεσης.
 
 ## Στόχοι Μάθησης
 
@@ -26,16 +26,16 @@ CO_OP_TRANSLATOR_METADATA:
 - Κατακτήσετε συστηματικές μεθοδολογίες εντοπισμού σφαλμάτων για προβλήματα του Azure Developer CLI
 - Κατανοήσετε προηγμένες ρυθμίσεις καταγραφής και τεχνικές ανάλυσης καταγραφών
 - Εφαρμόσετε στρατηγικές προφίλ απόδοσης και παρακολούθησης
-- Χρησιμοποιήσετε εργαλεία και υπηρεσίες διάγνωσης του Azure για την επίλυση σύνθετων προβλημάτων
+- Χρησιμοποιήσετε διαγνωστικά εργαλεία και υπηρεσίες του Azure για την επίλυση σύνθετων προβλημάτων
 - Εφαρμόσετε τεχνικές εντοπισμού σφαλμάτων δικτύου και ασφάλειας
 - Ρυθμίσετε ολοκληρωμένη παρακολούθηση και ειδοποιήσεις για προληπτική ανίχνευση προβλημάτων
 
 ## Αποτελέσματα Μάθησης
 
 Με την ολοκλήρωση, θα μπορείτε να:
-- Εφαρμόσετε τη μεθοδολογία TRIAGE για τη συστηματική διάγνωση σύνθετων προβλημάτων ανάπτυξης
+- Εφαρμόσετε τη μεθοδολογία TRIAGE για συστηματικό εντοπισμό σύνθετων προβλημάτων ανάπτυξης
 - Ρυθμίσετε και αναλύσετε ολοκληρωμένες πληροφορίες καταγραφής και ιχνηλάτησης
-- Χρησιμοποιήσετε αποτελεσματικά το Azure Monitor, το Application Insights και εργαλεία διάγνωσης
+- Χρησιμοποιήσετε αποτελεσματικά το Azure Monitor, το Application Insights και διαγνωστικά εργαλεία
 - Εντοπίσετε προβλήματα συνδεσιμότητας δικτύου, αυθεντικοποίησης και δικαιωμάτων ανεξάρτητα
 - Εφαρμόσετε στρατηγικές παρακολούθησης και βελτιστοποίησης απόδοσης
 - Δημιουργήσετε προσαρμοσμένα σενάρια εντοπισμού σφαλμάτων και αυτοματισμούς για επαναλαμβανόμενα προβλήματα
@@ -44,7 +44,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### Η Προσέγγιση TRIAGE
 - **T**ime: Πότε ξεκίνησε το πρόβλημα;
-- **R**eproduce: Μπορείτε να το αναπαράγετε με συνέπεια;
+- **R**eproduce: Μπορείτε να το αναπαράγετε σταθερά;
 - **I**solate: Ποιο στοιχείο αποτυγχάνει;
 - **A**nalyze: Τι μας λένε οι καταγραφές;
 - **G**ather: Συλλέξτε όλες τις σχετικές πληροφορίες
@@ -54,26 +54,26 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### Μεταβλητές Περιβάλλοντος
 ```bash
-# Enable comprehensive debugging
+# Ενεργοποίηση εκτεταμένης αποσφαλμάτωσης
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Αποσφαλμάτωση Azure CLI
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Απενεργοποίηση τηλεμετρίας για καθαρότερη έξοδο
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Ρύθμιση Εντοπισμού Σφαλμάτων
 ```bash
-# Set debug configuration globally
+# Ορίστε τη διαμόρφωση αποσφαλμάτωσης παγκοσμίως
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Ενεργοποιήστε την καταγραφή ιχνών
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Δομημένη Ανάλυση Καταγραφών
 ```bash
-# Filter logs by level
+# Φιλτράρισμα καταγραφών κατά επίπεδο
 azd logs --level error --since 1h
 
-# Filter by service
+# Φιλτράρισμα κατά υπηρεσία
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Εξαγωγή καταγραφών για ανάλυση
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Ανάλυση καταγραφών JSON με jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Συσχέτιση Καταγραφών
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Συσχέτιση αρχείων καταγραφής μεταξύ υπηρεσιών
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Αναζήτηση σε όλες τις υπηρεσίες
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Αναζήτηση αρχείων καταγραφής Azure
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Ερωτήματα Azure Resource Graph
 ```bash
-# Query resources by tags
+# Ερώτημα πόρων ανά ετικέτες
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Εύρεση αποτυχημένων αναπτύξεων
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Έλεγχος υγείας πόρων
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Εντοπισμός Σφαλμάτων Δικτύου
 ```bash
-# Test connectivity between services
+# Δοκιμή συνδεσιμότητας μεταξύ υπηρεσιών
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Χρήση
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Εντοπισμός Σφαλμάτων Containers
+### Εντοπισμός Σφαλμάτων Κοντέινερ
 ```bash
-# Debug container app issues
+# Εντοπισμός σφαλμάτων σε θέματα εφαρμογής κοντέινερ
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Εντοπισμός Σφαλμάτων Σύνδεσης Βάσης Δεδομένων
 ```bash
-# Debug database connectivity
+# Εντοπισμός σφαλμάτων στη συνδεσιμότητα της βάσης δεδομένων
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -204,9 +204,9 @@ debug_database() {
 
 ## 🔬 Εντοπισμός Σφαλμάτων Απόδοσης
 
-### Παρακολούθηση Απόδοσης Εφαρμογών
+### Παρακολούθηση Απόδοσης Εφαρμογής
 ```bash
-# Enable Application Insights debugging
+# Ενεργοποίηση αποσφαλμάτωσης Application Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Προσαρμοσμένη παρακολούθηση απόδοσης
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Ανάλυση Χρήσης Πόρων
 ```bash
-# Monitor resource usage
+# Παρακολούθηση της χρήσης πόρων
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Ορισμός περιβάλλοντος αποσφαλμάτωσης
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Λήψη τελικών σημείων υπηρεσίας
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Δοκιμή τελικών σημείων υγείας
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Εκτέλεση δοκιμών
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Εκτέλεση προσαρμοσμένων δοκιμών ολοκλήρωσης
 npm run test:integration
 ```
 
 ### Δοκιμές Φόρτωσης για Εντοπισμό Σφαλμάτων
 ```bash
-# Simple load test to identify performance bottlenecks
+# Απλή δοκιμή φόρτωσης για τον εντοπισμό σημείων συμφόρησης απόδοσης
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Χρήση του Apache Bench (εγκατάσταση: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Εξαγωγή βασικών μετρήσεων
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Έλεγχος για αποτυχίες
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Εντοπισμός Σφαλμάτων Προτύπων Bicep
 ```bash
-# Validate Bicep templates with detailed output
+# Επικύρωση προτύπων Bicep με λεπτομερή έξοδο
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Επικύρωση σύνταξης
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Επικύρωση lint
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Τι-αν ανάπτυξη
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Εντοπισμός σφαλμάτων ανάπτυξης προτύπου
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Ανάλυση Κατάστασης Πόρων
 ```bash
-# Analyze resource states for inconsistencies
+# Αναλύστε τις καταστάσεις των πόρων για ασυνέπειες
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Καταγράψτε όλους τους πόρους με τις καταστάσεις τους
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Ελέγξτε για αποτυχημένους πόρους
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### Εντοπισμός Σφαλμάτων Ροής Αυθεντικοποίησης
 ```bash
-# Debug Azure authentication
+# Εντοπισμός σφαλμάτων στην αυθεντικοποίηση Azure
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Αποκωδικοποίηση του JWT token (απαιτεί jq και base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Εντοπισμός σφαλμάτων στην πρόσβαση στο Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Εντοπισμός Σφαλμάτων Ασφάλειας Δικτύου
 ```bash
-# Debug network security groups
+# Εντοπισμός σφαλμάτων στις ομάδες ασφαλείας δικτύου
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Έλεγχος κανόνων ασφαλείας
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Εντοπισμός Σφαλμάτων Εφαρμογών Node.js
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Express ενδιάμεσο λογισμικό αποσφαλμάτωσης
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Καταγραφή λεπτομερειών αιτήματος
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Παράκαμψη res.json για καταγραφή απαντήσεων
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Εντοπισμός Σφαλμάτων Ερωτημάτων Βάσης Δεδομένων
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Εργαλεία αποσφαλμάτωσης βάσης δεδομένων
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -524,7 +524,7 @@ module.exports = DebuggingPool;
 ### Αντιμετώπιση Προβλημάτων Παραγωγής
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Επείγουσα αποσφαλμάτωση παραγωγής
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Μετάβαση στο σωστό περιβάλλον
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Συλλογή κρίσιμων πληροφοριών
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Διαδικασίες Επαναφοράς
 ```bash
-# Quick rollback script
+# Γρήγορο σενάριο επαναφοράς
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Αλλαγή περιβάλλοντος
     azd env select "$environment"
     
-    # Rollback application
+    # Επαναφορά εφαρμογής
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Επαλήθευση επαναφοράς
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Δοκιμή κρίσιμων σημείων πρόσβασης
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### Προσαρμοσμένος Πίνακας Παρακολούθησης
 ```bash
-# Create Application Insights queries for debugging
+# Δημιουργήστε ερωτήματα Application Insights για αποσφαλμάτωση
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Ερώτημα για σφάλματα
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Ερώτημα για ζητήματα απόδοσης
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Ερώτημα για αποτυχίες εξαρτήσεων
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Συγκέντρωση Καταγραφών
 ```bash
-# Aggregate logs from multiple sources
+# Συγκεντρώστε αρχεία καταγραφής από πολλαπλές πηγές
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -684,11 +684,11 @@ hooks:
 
 ## Βέλτιστες Πρακτικές
 
-1. **Ενεργοποιήστε πάντα την καταγραφή εντοπισμού σφαλμάτων** σε μη παραγωγικά περιβάλλοντα
+1. **Ενεργοποιείτε πάντα την καταγραφή εντοπισμού σφαλμάτων** σε περιβάλλοντα εκτός παραγωγής
 2. **Δημιουργήστε αναπαραγόμενες περιπτώσεις δοκιμών** για προβλήματα
 3. **Τεκμηριώστε τις διαδικασίες εντοπισμού σφαλμάτων** για την ομάδα σας
 4. **Αυτοματοποιήστε τους ελέγχους υγείας** και την παρακολούθηση
-5. **Διατηρήστε τα εργαλεία εντοπισμού σφαλμάτων ενημερωμένα** με τις αλλαγές της εφαρμογής σας
+5. **Διατηρείτε τα εργαλεία εντοπισμού σφαλμάτων ενημερωμένα** με τις αλλαγές της εφαρμογής σας
 6. **Εξασκηθείτε στις διαδικασίες εντοπισμού σφαλμάτων** κατά τη διάρκεια μη κρίσιμων περιόδων
 
 ## Επόμενα Βήματα
@@ -696,11 +696,11 @@ hooks:
 - [Σχεδιασμός Χωρητικότητας](../pre-deployment/capacity-planning.md) - Σχεδιάστε τις απαιτήσεις πόρων
 - [Επιλογή SKU](../pre-deployment/sku-selection.md) - Επιλέξτε κατάλληλα επίπεδα υπηρεσιών
 - [Έλεγχοι Προετοιμασίας](../pre-deployment/preflight-checks.md) - Επικύρωση πριν την ανάπτυξη
-- [Σύντομος Οδηγός](../../resources/cheat-sheet.md) - Γρήγορες εντολές αναφοράς
+- [Φυλλάδιο Αναφοράς](../../resources/cheat-sheet.md) - Γρήγορες εντολές αναφοράς
 
 ---
 
-**Θυμηθείτε**: Ο καλός εντοπισμός σφαλμάτων απαιτεί συστηματικότητα, ακρίβεια και υπομονή. Αυτά τα εργαλεία και οι τεχνικές θα σας βοηθήσουν να διαγνώσετε προβλήματα πιο γρήγορα και αποτελεσματικά.
+**Θυμηθείτε**: Ο καλός εντοπισμός σφαλμάτων απαιτεί συστηματικότητα, λεπτομέρεια και υπομονή. Αυτά τα εργαλεία και οι τεχνικές θα σας βοηθήσουν να διαγνώσετε προβλήματα πιο γρήγορα και αποτελεσματικά.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
-**Αποποίηση ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Αποποίηση ευθυνών**:  
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτόματες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

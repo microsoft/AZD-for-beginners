@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-17T22:39:30+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-21T07:00:08+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "el"
 }
@@ -10,7 +10,7 @@ CO_OP_TRANSLATOR_METADATA:
 # Οδηγός Ρύθμισης
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 3 - Ρύθμιση & Αυθεντικοποίηση
 - **⬅️ Προηγούμενο**: [Το Πρώτο Σας Έργο](first-project.md)
 - **➡️ Επόμενο**: [Οδηγός Ανάπτυξης](../deployment/deployment-guide.md)
@@ -24,7 +24,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Μέχρι το τέλος αυτού του μαθήματος, θα:
 - Κατανοήσετε την ιεραρχία ρυθμίσεων του azd και πώς προτεραιοποιούνται οι ρυθμίσεις
-- Ρυθμίσετε αποτελεσματικά γενικές και ειδικές για το έργο παραμέτρους
+- Ρυθμίσετε αποτελεσματικά παγκόσμιες και ειδικές για έργα ρυθμίσεις
 - Διαχειριστείτε πολλαπλά περιβάλλοντα με διαφορετικές ρυθμίσεις
 - Εφαρμόσετε ασφαλή μοτίβα αυθεντικοποίησης και εξουσιοδότησης
 - Κατανοήσετε προηγμένα μοτίβα ρύθμισης για σύνθετα σενάρια
@@ -46,43 +46,43 @@ CO_OP_TRANSLATOR_METADATA:
 1. **Επιλογές γραμμής εντολών** (υψηλότερη προτεραιότητα)
 2. **Μεταβλητές περιβάλλοντος**
 3. **Τοπική ρύθμιση έργου** (`.azd/config.json`)
-4. **Γενική ρύθμιση χρήστη** (`~/.azd/config.json`)
+4. **Παγκόσμια ρύθμιση χρήστη** (`~/.azd/config.json`)
 5. **Προεπιλεγμένες τιμές** (χαμηλότερη προτεραιότητα)
 
-## Γενική Ρύθμιση
+## Παγκόσμια Ρύθμιση
 
-### Ορισμός Γενικών Προεπιλογών
+### Ορισμός Παγκόσμιων Προεπιλογών
 ```bash
-# Set default subscription
+# Ορίστε την προεπιλεγμένη συνδρομή
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Ορίστε την προεπιλεγμένη τοποθεσία
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Ορίστε την προεπιλεγμένη σύμβαση ονομασίας ομάδας πόρων
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Προβολή όλων των παγκόσμιων ρυθμίσεων
 azd config list
 
-# Remove a configuration
+# Κατάργηση μιας ρύθμισης
 azd config unset defaults.location
 ```
 
-### Συνηθισμένες Γενικές Ρυθμίσεις
+### Κοινές Παγκόσμιες Ρυθμίσεις
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Προτιμήσεις ανάπτυξης
+azd config set alpha.enable true                    # Ενεργοποίηση χαρακτηριστικών alpha
+azd config set telemetry.enabled false             # Απενεργοποίηση τηλεμετρίας
+azd config set output.format json                  # Ορισμός μορφής εξόδου
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Ρυθμίσεις ασφαλείας
+azd config set auth.useAzureCliCredential true     # Χρήση Azure CLI για έλεγχο ταυτότητας
+azd config set tls.insecure false                  # Εφαρμογή επαλήθευσης TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Βελτιστοποίηση απόδοσης
+azd config set provision.parallelism 5             # Παράλληλη δημιουργία πόρων
+azd config set deploy.timeout 30m                  # Χρονικό όριο ανάπτυξης
 ```
 
 ## 🏗️ Ρύθμιση Έργου
@@ -213,13 +213,13 @@ services:
 
 ### Δημιουργία Περιβαλλόντων
 ```bash
-# Create a new environment
+# Δημιουργήστε ένα νέο περιβάλλον
 azd env new development
 
-# Create with specific location
+# Δημιουργήστε με συγκεκριμένη τοποθεσία
 azd env new staging --location "westus2"
 
-# Create from template
+# Δημιουργήστε από πρότυπο
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 
 ### Μεταβλητές Περιβάλλοντος
 ```bash
-# Set environment-specific variables
+# Ορίστε μεταβλητές συγκεκριμένες για το περιβάλλον
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Προβολή μεταβλητών περιβάλλοντος
 azd env get-values
 
-# Remove environment variable
+# Αναμενόμενο αποτέλεσμα:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# Αφαιρέστε τη μεταβλητή περιβάλλοντος
 azd env unset DEBUG
+
+# Επαληθεύστε την αφαίρεση
+azd env get-values | grep DEBUG
+# (θα πρέπει να μην επιστρέφει τίποτα)
 ```
 
 ### Πρότυπα Περιβάλλοντος
 Δημιουργήστε `.azure/env.template` για συνεπή ρύθμιση περιβάλλοντος:
 ```bash
-# Required variables
+# Απαιτούμενες μεταβλητές
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Ρυθμίσεις εφαρμογής
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Προαιρετικές ρυθμίσεις ανάπτυξης
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Ενσωμάτωση Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# Χρησιμοποιήστε διαπιστευτήρια Azure CLI (προεπιλογή)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Συνδεθείτε με συγκεκριμένο μισθωτή
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Ορίστε προεπιλεγμένη συνδρομή
 az account set --subscription <subscription-id>
 ```
 
 ### Αυθεντικοποίηση με Service Principal
-Για pipelines CI/CD:
+Για CI/CD pipelines:
 ```bash
-# Set environment variables
+# Ορίστε μεταβλητές περιβάλλοντος
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Ή διαμορφώστε απευθείας
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Διαχειριζόμενη Ταυτότητα
 Για περιβάλλοντα φιλοξενούμενα στο Azure:
 ```bash
-# Enable managed identity authentication
+# Ενεργοποίηση ελέγχου ταυτότητας με διαχειριζόμενη ταυτότητα
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -391,7 +400,7 @@ services:
 
 ### Προσαρμοσμένη Ονομασία Πόρων
 ```bash
-# Set naming conventions
+# Ορίστε συμβάσεις ονοματοδοσίας
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### Περιβάλλον Ανάπτυξης
 ```bash
-# .azure/development/.env
+# .azure/ανάπτυξη/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -442,7 +451,7 @@ USE_PRODUCTION_APIS=true
 
 ### Περιβάλλον Παραγωγής
 ```bash
-# .azure/production/.env
+# .azure/παραγωγή/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Επικύρωση Ρύθμισης
 ```bash
-# Check configuration syntax
+# Ελέγξτε τη σύνταξη της διαμόρφωσης
 azd config validate
 
-# Test environment variables
+# Δοκιμάστε τις μεταβλητές περιβάλλοντος
 azd env get-values
 
-# Validate infrastructure
+# Επικυρώστε την υποδομή
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Ελέγξτε τις απαιτούμενες μεταβλητές περιβάλλοντος
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Επικυρώστε τη σύνταξη του azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,9 +528,9 @@ database:
 ### 3. Σκέψεις για Έλεγχο Έκδοσης
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Ρυθμίσεις περιβάλλοντος (περιέχουν αναγνωριστικά πόρων)
+.azure/*/.env               # Μεταβλητές περιβάλλοντος (ενδέχεται να περιέχουν μυστικά)
+.env                        # Τοπικό αρχείο περιβάλλοντος
 ```
 
 ### 4. Τεκμηρίωση Ρύθμισης
@@ -540,6 +549,68 @@ database:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Ασκήσεις Πρακτικής
+
+### Άσκηση 1: Ρύθμιση Πολλαπλών Περιβαλλόντων (15 λεπτά)
+
+**Στόχος**: Δημιουργήστε και ρυθμίστε τρία περιβάλλοντα με διαφορετικές ρυθμίσεις
+
+```bash
+# Δημιουργία περιβάλλοντος ανάπτυξης
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Δημιουργία περιβάλλοντος δοκιμών
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Δημιουργία περιβάλλοντος παραγωγής
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Επαλήθευση κάθε περιβάλλοντος
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Κριτήρια Επιτυχίας:**
+- [ ] Δημιουργήθηκαν επιτυχώς τρία περιβάλλοντα
+- [ ] Κάθε περιβάλλον έχει μοναδική ρύθμιση
+- [ ] Μπορείτε να εναλλάσσετε περιβάλλοντα χωρίς σφάλματα
+- [ ] Το `azd env list` εμφανίζει και τα τρία περιβάλλοντα
+
+### Άσκηση 2: Διαχείριση Μυστικών (10 λεπτά)
+
+**Στόχος**: Εξασκηθείτε σε ασφαλή ρύθμιση με ευαίσθητα δεδομένα
+
+```bash
+# Ορίστε μυστικά (δεν εμφανίζονται στην έξοδο)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Ορίστε μη-μυστική διαμόρφωση
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Προβολή περιβάλλοντος (τα μυστικά πρέπει να είναι κρυμμένα)
+azd env get-values
+
+# Επαληθεύστε ότι τα μυστικά αποθηκεύονται
+azd env get DB_PASSWORD  # Πρέπει να δείχνει την πραγματική τιμή
+```
+
+**Κριτήρια Επιτυχίας:**
+- [ ] Τα μυστικά αποθηκεύονται χωρίς να εμφανίζονται στο τερματικό
+- [ ] Το `azd env get-values` εμφανίζει τα μυστικά ως κρυμμένα
+- [ ] Το `azd env get <SECRET_NAME>` ανακτά την πραγματική τιμή
+
 ## Επόμενα Βήματα
 
 - [Το Πρώτο Σας Έργο](first-project.md) - Εφαρμόστε τη ρύθμιση στην πράξη
@@ -555,7 +626,7 @@ database:
 ---
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Σελίδα Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 3 - Ρύθμιση & Αυθεντικοποίηση
 - **⬅️ Προηγούμενο**: [Το Πρώτο Σας Έργο](first-project.md)
 - **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 4: Υποδομή ως Κώδικας](../deployment/deployment-guide.md)
@@ -563,5 +634,7 @@ database:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Αποποίηση ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτόματες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

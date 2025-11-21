@@ -1,42 +1,42 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-17T23:16:17+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-21T08:34:22+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "sv"
 }
 -->
-# Felsökningsguide för AZD-implementeringar
+# Felsökningsguide för AZD-distributioner
 
-**Kapitelnavigation:**
-- **📚 Kursens startsida**: [AZD För Nybörjare](../../README.md)
-- **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning & Debugging
-- **⬅️ Föregående**: [Vanliga Problem](common-issues.md)
-- **➡️ Nästa**: [AI-specifik Felsökning](ai-troubleshooting.md)
-- **🚀 Nästa kapitel**: [Kapitel 8: Produktions- & Företagsmönster](../ai-foundry/production-ai-practices.md)
+**Kapitelöversikt:**
+- **📚 Kursens startsida**: [AZD för nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning och debugging
+- **⬅️ Föregående**: [Vanliga problem](common-issues.md)
+- **➡️ Nästa**: [AI-specifik felsökning](ai-troubleshooting.md)
+- **🚀 Nästa kapitel**: [Kapitel 8: Produktions- och företagsmönster](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduktion
 
-Denna omfattande guide ger avancerade strategier, verktyg och tekniker för felsökning och diagnos av komplexa problem med Azure Developer CLI-implementeringar. Lär dig systematiska felsökningsmetoder, logganalystekniker, prestandaprofilering och avancerade diagnostikverktyg för att effektivt lösa implementerings- och körningsproblem.
+Den här omfattande guiden ger avancerade strategier, verktyg och tekniker för att diagnostisera och lösa komplexa problem med Azure Developer CLI-distributioner. Lär dig systematiska felsökningsmetoder, logganalystekniker, prestandaprofilering och avancerade diagnostikverktyg för att effektivt lösa problem vid distribution och körning.
 
 ## Lärandemål
 
-Genom att slutföra denna guide kommer du att:
-- Bemästra systematiska felsökningsmetoder för Azure Developer CLI-problem
+Efter att ha genomfört denna guide kommer du att:
+- Behärska systematiska felsökningsmetoder för Azure Developer CLI-problem
 - Förstå avancerad loggkonfiguration och logganalystekniker
 - Implementera strategier för prestandaprofilering och övervakning
-- Använda Azure diagnostikverktyg och tjänster för att lösa komplexa problem
+- Använda Azure-diagnostikverktyg och tjänster för att lösa komplexa problem
 - Tillämpa nätverksfelsökning och säkerhetsfelsökningstekniker
 - Konfigurera omfattande övervakning och varningar för proaktiv problemidentifiering
 
 ## Läranderesultat
 
-Efter att ha slutfört guiden kommer du att kunna:
-- Tillämpa TRIAGE-metoden för att systematiskt felsöka komplexa implementeringsproblem
-- Konfigurera och analysera omfattande loggning och spårningsinformation
-- Använda Azure Monitor, Application Insights och diagnostikverktyg effektivt
-- Felsöka nätverksanslutning, autentisering och behörighetsproblem självständigt
+Efter genomförandet kommer du att kunna:
+- Använda TRIAGE-metodiken för att systematiskt felsöka komplexa distributionsproblem
+- Konfigurera och analysera omfattande logg- och spårningsinformation
+- Effektivt använda Azure Monitor, Application Insights och diagnostikverktyg
+- Självständigt felsöka nätverksanslutning, autentisering och behörighetsproblem
 - Implementera strategier för prestandaövervakning och optimering
 - Skapa anpassade felsökningsskript och automatisering för återkommande problem
 
@@ -50,30 +50,30 @@ Efter att ha slutfört guiden kommer du att kunna:
 - **S**amla: Samla in all relevant information
 - **E**skalera: När ska du söka ytterligare hjälp?
 
-## Aktivera debug-läge
+## Aktivera felsökningsläge
 
 ### Miljövariabler
 ```bash
-# Enable comprehensive debugging
+# Aktivera omfattande felsökning
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Azure CLI felsökning
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Inaktivera telemetri för renare output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Debug-konfiguration
+### Felsökningskonfiguration
 ```bash
-# Set debug configuration globally
+# Ställ in felsökningskonfiguration globalt
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Aktivera spårningsloggning
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Strukturerad logganalys
 ```bash
-# Filter logs by level
+# Filtrera loggar efter nivå
 azd logs --level error --since 1h
 
-# Filter by service
+# Filtrera efter tjänst
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Exportera loggar för analys
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Tolka JSON-loggar med jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Loggkorrelation
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Korrelera loggar mellan tjänster
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Sök över alla tjänster
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Sök Azure-loggar
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graph-frågor
 ```bash
-# Query resources by tags
+# Fråga resurser efter taggar
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Hitta misslyckade distributioner
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Kontrollera resursens hälsa
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Nätverksfelsökning
 ```bash
-# Test connectivity between services
+# Testa anslutning mellan tjänster
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Användning
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Containerfelsökning
 ```bash
-# Debug container app issues
+# Felsök containerapp-problem
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -183,9 +183,9 @@ debug_container() {
 }
 ```
 
-### Felsökning av databasanslutningar
+### Databasanslutningsfelsökning
 ```bash
-# Debug database connectivity
+# Felsök databasanslutning
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -204,9 +204,9 @@ debug_database() {
 
 ## 🔬 Prestandafelsökning
 
-### Applikationsprestandaövervakning
+### Applikationsövervakning av prestanda
 ```bash
-# Enable Application Insights debugging
+# Aktivera Application Insights-felsökning
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Anpassad prestandaövervakning
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Analys av resursanvändning
 ```bash
-# Monitor resource usage
+# Övervaka resursanvändning
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Ställ in felsökningsmiljö
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Hämta tjänstendpunkter
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Testa hälsokontrollendpunkter
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Kör tester
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Kör anpassade integrationstester
 npm run test:integration
 ```
 
 ### Belastningstestning för felsökning
 ```bash
-# Simple load test to identify performance bottlenecks
+# Enkel belastningstest för att identifiera prestandaflaskhalsar
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Använder Apache Bench (installera: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Extrahera nyckelmetrik
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Kontrollera efter fel
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Felsökning av Bicep-mallar
 ```bash
-# Validate Bicep templates with detailed output
+# Validera Bicep-mallar med detaljerad output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Syntaxvalidering
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Lintvalidering
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Vad-händer-om distribution
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Felsök malldistribution
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Analys av resursstatus
 ```bash
-# Analyze resource states for inconsistencies
+# Analysera resursers tillstånd för inkonsekvenser
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Lista alla resurser med deras tillstånd
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Kontrollera misslyckade resurser
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### Felsökning av autentiseringsflöden
 ```bash
-# Debug Azure authentication
+# Felsök Azure-autentisering
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Avkoda JWT-token (kräver jq och base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Felsök åtkomst till Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Felsökning av nätverkssäkerhet
 ```bash
-# Debug network security groups
+# Felsök nätverkssäkerhetsgrupper
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Kontrollera säkerhetsregler
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Felsökning av Node.js-applikationer
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Express felsökningsmiddleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Logga begärans detaljer
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Åsidosätt res.json för att logga svar
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Felsökning av databasfrågor
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Databasfelsökningsverktyg
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -521,10 +521,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 Nödfelsökningsprocedurer
 
-### Respons på produktionsproblem
+### Respons vid produktionsproblem
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Nödfelsökning i produktion
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Växla till rätt miljö
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Samla in kritisk information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Återställningsprocedurer
 ```bash
-# Quick rollback script
+# Snabb återställningsskript
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Byt miljö
     azd env select "$environment"
     
-    # Rollback application
+    # Återställ applikation
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Verifiera återställning
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Testa kritiska slutpunkter
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,30 +613,30 @@ quick_rollback() {
 
 ### Anpassad övervakningsinstrumentpanel
 ```bash
-# Create Application Insights queries for debugging
+# Skapa Application Insights-frågor för felsökning
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Fråga efter fel
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Fråga efter prestandaproblem
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Fråga efter beroendefel
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Loggaggregat
+### Loggaggregering
 ```bash
-# Aggregate logs from multiple sources
+# Samla loggar från flera källor
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -684,7 +684,7 @@ hooks:
 
 ## Bästa praxis
 
-1. **Aktivera alltid debug-loggning** i icke-produktionsmiljöer
+1. **Aktivera alltid felsökningsloggning** i icke-produktionsmiljöer
 2. **Skapa reproducerbara testfall** för problem
 3. **Dokumentera felsökningsprocedurer** för ditt team
 4. **Automatisera hälsokontroller** och övervakning
@@ -693,10 +693,10 @@ hooks:
 
 ## Nästa steg
 
-- [Kapacitetsplanering](../pre-deployment/capacity-planning.md) - Planera resursbehov
-- [SKU-val](../pre-deployment/sku-selection.md) - Välj lämpliga tjänstenivåer
-- [Preflight-kontroller](../pre-deployment/preflight-checks.md) - Validering före implementering
-- [Fuskblad](../../resources/cheat-sheet.md) - Snabbreferenskommandon
+- [Kapacitetsplanering](../pre-deployment/capacity-planning.md) - Planera resurskrav
+- [Val av SKU](../pre-deployment/sku-selection.md) - Välj lämpliga tjänstenivåer
+- [Förkontroller](../pre-deployment/preflight-checks.md) - Validering före distribution
+- [Fusklapp](../../resources/cheat-sheet.md) - Snabbreferenskommandon
 
 ---
 
@@ -704,12 +704,14 @@ hooks:
 
 ---
 
-**Navigation**
-- **Föregående lektion**: [Vanliga Problem](common-issues.md)
+**Navigering**
+- **Föregående lektion**: [Vanliga problem](common-issues.md)
 
 - **Nästa lektion**: [Kapacitetsplanering](../pre-deployment/capacity-planning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
