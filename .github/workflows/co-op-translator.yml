@@ -63,8 +63,8 @@ jobs:
           # translate -l "ja bn mr ne" -y 
           # translate -l "pa br it tr" -y
           # translate -l "el th sv da" -y 
-          translate -l "no fi nl he" -y
-          # translate -l "vi id ms tl" -y
+          # translate -l "no fi nl he" -y
+          translate -l "vi id ms tl" -y
           # translate -l "sw hu cs sk" -y
           # translate -l "ro bg sr hr" -y 
           # translate -l "sl uk my" -y
@@ -100,6 +100,7 @@ jobs:
           add-paths: |
             translations/
             translated_images/
+
 
 
 
