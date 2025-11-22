@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T06:52:08+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-21T16:50:40+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "nl"
 }
 -->
 # Configuratiegids
 
-**Hoofdstuknavigatie:**
+**Hoofdstuk Navigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 3 - Configuratie & Authenticatie
 - **⬅️ Vorige**: [Je Eerste Project](first-project.md)
@@ -53,42 +53,42 @@ azd gebruikt een hiërarchisch configuratiesysteem:
 
 ### Globale Standaarden Instellen
 ```bash
-# Set default subscription
+# Stel standaardabonnement in
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Stel standaardlocatie in
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Stel standaardnaamgevingsconventie voor resourcegroep in
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Bekijk alle globale configuratie
 azd config list
 
-# Remove a configuration
+# Verwijder een configuratie
 azd config unset defaults.location
 ```
 
 ### Veelvoorkomende Globale Instellingen
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Voorkeuren voor ontwikkeling
+azd config set alpha.enable true                    # Alpha-functies inschakelen
+azd config set telemetry.enabled false             # Telemetrie uitschakelen
+azd config set output.format json                  # Uitvoerformaat instellen
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Beveiligingsinstellingen
+azd config set auth.useAzureCliCredential true     # Gebruik Azure CLI voor authenticatie
+azd config set tls.insecure false                  # TLS-verificatie afdwingen
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Prestatieoptimalisatie
+azd config set provision.parallelism 5             # Parallelle resourcecreatie
+azd config set deploy.timeout 30m                  # Implementatietime-out
 ```
 
 ## 🏗️ Projectconfiguratie
 
 ### azure.yaml Structuur
-Het bestand `azure.yaml` is het hart van je azd-project:
+Het `azure.yaml` bestand is het hart van je azd-project:
 
 ```yaml
 # Minimum configuration
@@ -164,7 +164,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Serviceconfiguratie-opties
+### Serviceconfiguratieopties
 
 #### Hosttypes
 ```yaml
@@ -213,13 +213,13 @@ services:
 
 ### Omgevingen Aanmaken
 ```bash
-# Create a new environment
+# Maak een nieuwe omgeving
 azd env new development
 
-# Create with specific location
+# Maak met specifieke locatie
 azd env new staging --location "westus2"
 
-# Create from template
+# Maak vanuit sjabloon
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Elke omgeving heeft zijn eigen configuratie in `.azure/<env-name>/config.json`:
 
 ### Omgevingsvariabelen
 ```bash
-# Set environment-specific variables
+# Stel omgevingsspecifieke variabelen in
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Bekijk omgevingsvariabelen
 azd env get-values
 
-# Remove environment variable
+# Verwachte output:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=geheime-api-sleutel
+# DEBUG=true
+
+# Verwijder omgevingsvariabele
 azd env unset DEBUG
+
+# Verifieer verwijdering
+azd env get-values | grep DEBUG
+# (zou niets moeten retourneren)
 ```
 
-### Omgevingstemplates
-Maak `.azure/env.template` voor consistente omgevinginstellingen:
+### Omgeving Templates
+Maak `.azure/env.template` voor consistente omgeving setup:
 ```bash
-# Required variables
+# Vereiste variabelen
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Applicatie-instellingen
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Optionele ontwikkelingsinstellingen
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Azure CLI Integratie
 ```bash
-# Use Azure CLI credentials (default)
+# Gebruik Azure CLI-referenties (standaard)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Inloggen met specifieke tenant
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Standaardabonnement instellen
 az account set --subscription <subscription-id>
 ```
 
 ### Service Principal Authenticatie
 Voor CI/CD-pijplijnen:
 ```bash
-# Set environment variables
+# Stel omgevingsvariabelen in
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Of configureer direct
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Managed Identity
 Voor Azure-gehoste omgevingen:
 ```bash
-# Enable managed identity authentication
+# Inschakelen van beheerde identiteit authenticatie
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -348,7 +357,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Implementatieconfiguratie
 
-### Buildconfiguratie
+### Build Configuratie
 ```yaml
 # In azure.yaml
 services:
@@ -371,7 +380,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Dockerconfiguratie
+### Docker Configuratie
 ```yaml
 services:
   api:
@@ -389,9 +398,9 @@ Voorbeeld `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/a
 
 ## 🔧 Geavanceerde Configuratie
 
-### Aangepaste Resourcenaamgeving
+### Aangepaste Resourcebenamingen
 ```bash
-# Set naming conventions
+# Stel naamgevingsconventies in
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -408,7 +417,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoringconfiguratie
+### Monitoring Configuratie
 ```yaml
 # In azure.yaml
 monitoring:
@@ -424,7 +433,7 @@ monitoring:
 
 ### Ontwikkelomgeving
 ```bash
-# .azure/development/.env
+# .azure/ontwikkeling/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -442,7 +451,7 @@ USE_PRODUCTION_APIS=true
 
 ### Productieomgeving
 ```bash
-# .azure/production/.env
+# .azure/productie/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Configuratie Valideren
 ```bash
-# Check configuration syntax
+# Controleer configuratiesyntaxis
 azd config validate
 
-# Test environment variables
+# Test omgevingsvariabelen
 azd env get-values
 
-# Validate infrastructure
+# Valideer infrastructuur
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ Maak validatiescripts in `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Controleer vereiste omgevingsvariabelen
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Valideer azure.yaml-syntaxis
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,9 +528,9 @@ database:
 ### 3. Versiebeheer Overwegingen
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Omgevingsconfiguraties (bevatten resource-ID's)
+.azure/*/.env               # Omgevingsvariabelen (kunnen geheimen bevatten)
+.env                        # Lokaal omgevingsbestand
 ```
 
 ### 4. Configuratiedocumentatie
@@ -540,6 +549,68 @@ Documenteer je configuratie in `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Praktijkoefeningen
+
+### Oefening 1: Multi-Omgevingsconfiguratie (15 minuten)
+
+**Doel**: Maak en configureer drie omgevingen met verschillende instellingen
+
+```bash
+# Maak ontwikkelomgeving
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Maak stagingomgeving
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Maak productieomgeving
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Verifieer elke omgeving
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Succescriteria:**
+- [ ] Drie omgevingen succesvol aangemaakt
+- [ ] Elke omgeving heeft unieke configuratie
+- [ ] Kan zonder fouten tussen omgevingen schakelen
+- [ ] `azd env list` toont alle drie omgevingen
+
+### Oefening 2: Geheimenbeheer (10 minuten)
+
+**Doel**: Oefen veilige configuratie met gevoelige gegevens
+
+```bash
+# Geheimen instellen (niet weergegeven in output)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Niet-geheime configuratie instellen
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Omgeving bekijken (geheimen moeten worden verborgen)
+azd env get-values
+
+# Verifiëren dat geheimen zijn opgeslagen
+azd env get DB_PASSWORD  # Moet de werkelijke waarde tonen
+```
+
+**Succescriteria:**
+- [ ] Geheimen opgeslagen zonder weergave in terminal
+- [ ] `azd env get-values` toont afgeschermde geheimen
+- [ ] Individuele `azd env get <SECRET_NAME>` haalt de werkelijke waarde op
+
 ## Volgende Stappen
 
 - [Je Eerste Project](first-project.md) - Pas configuratie in de praktijk toe
@@ -554,7 +625,7 @@ Documenteer je configuratie in `CONFIG.md`:
 
 ---
 
-**Hoofdstuknavigatie:**
+**Hoofdstuk Navigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 3 - Configuratie & Authenticatie
 - **⬅️ Vorige**: [Je Eerste Project](first-project.md)
@@ -563,5 +634,7 @@ Documenteer je configuratie in `CONFIG.md`:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

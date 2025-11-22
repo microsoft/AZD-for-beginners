@@ -1,33 +1,145 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "616504abc1770bcde7a50c7f4ba008ac",
-  "translation_date": "2025-09-18T07:22:18+00:00",
+  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
+  "translation_date": "2025-11-21T14:36:40+00:00",
   "source_file": "examples/retail-scenario.md",
   "language_code": "no"
 }
 -->
-# Multi-Agent Kundestøtteløsning - Forhandler Scenario
+# Multi-Agent Kundestøtteløsning - Forhandler-scenario
 
 **Kapittel 5: Multi-Agent AI-løsninger**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../README.md)
 - **📖 Nåværende Kapittel**: [Kapittel 5: Multi-Agent AI-løsninger](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **⬅️ Forutsetninger**: [Kapittel 2: AI-First Utvikling](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **➡️ Neste Kapittel**: [Kapittel 6: Validering før utrulling](../docs/pre-deployment/capacity-planning.md)
+- **➡️ Neste Kapittel**: [Kapittel 6: Validering før Utrulling](../docs/pre-deployment/capacity-planning.md)
 - **🚀 ARM-maler**: [Utrullingspakke](retail-multiagent-arm-template/README.md)
+
+> **⚠️ ARKITEKTURVEILEDNING - IKKE EN FERDIG IMPLEMENTERING**  
+> Dette dokumentet gir en **omfattende arkitekturplan** for å bygge et multi-agent system.  
+> **Hva som finnes:** ARM-mal for infrastrukturutrulling (Azure OpenAI, AI Search, Container Apps, osv.)  
+> **Hva du må bygge:** Agentkode, rutelogikk, frontend UI, datapipelines (estimert 80-120 timer)  
+>  
+> **Bruk dette som:**
+> - ✅ Arkitekturreferanse for ditt eget multi-agent prosjekt
+> - ✅ Læringsveiledning for designmønstre i multi-agent systemer
+> - ✅ Infrastrukturmal for å utrulle Azure-ressurser
+> - ❌ IKKE en ferdig applikasjon (krever betydelig utvikling)
 
 ## Oversikt
 
-Dette scenarioet viser hvordan man bygger en produksjonsklar multi-agent kundestøtte-chatbot for en forhandler som trenger avanserte AI-funksjoner, inkludert lagerstyring, dokumentbehandling og intelligente kundesamtaler.
+**Læringsmål:** Forstå arkitekturen, designvalgene og implementeringsmetoden for å bygge en produksjonsklar multi-agent kundestøtte-chatbot for en forhandler med avanserte AI-funksjoner, inkludert lagerstyring, dokumentbehandling og intelligente kundeinteraksjoner.
+
+**Tid å Fullføre:** Lesing + Forståelse (2-3 timer) | Fullstendig Implementering (80-120 timer)
+
+**Hva Du Vil Lære:**
+- Arkitekturmønstre og designprinsipper for multi-agent systemer
+- Multi-region Azure OpenAI utrullingsstrategier
+- AI Search-integrasjon med RAG (Retrieval-Augmented Generation)
+- Rammeverk for evaluering og sikkerhetstesting av agenter
+- Betraktninger for produksjonsutrulling og kostnadsoptimalisering
 
 ## Arkitekturmål
 
-Kundestøtteløsningen krever:
-- **Flere spesialiserte agenter** for ulike kundebehov
-- **Multi-modell utrulling** med riktig kapasitetsplanlegging
-- **Dynamisk dataintegrasjon** med AI-søk og filopplastinger
-- **Omfattende overvåking** og evalueringsmuligheter
-- **Produksjonsklar sikkerhet** med red team-validering
+**Utdanningsfokus:** Denne arkitekturen demonstrerer bedriftsmønstre for multi-agent systemer.
+
+### Systemkrav (For Din Implementering)
+
+En produksjonsklar kundestøtteløsning krever:
+- **Flere spesialiserte agenter** for ulike kundebehov (Kundeservice + Lagerstyring)
+- **Multi-modell utrulling** med riktig kapasitetsplanlegging (GPT-4o, GPT-4o-mini, embeddings på tvers av regioner)
+- **Dynamisk dataintegrasjon** med AI Search og filopplastinger (vektorsøk + dokumentbehandling)
+- **Omfattende overvåking** og evalueringsmuligheter (Application Insights + egendefinerte metrikker)
+- **Produksjonsklar sikkerhet** med red teaming-validering (sårbarhetsskanning + agentvurdering)
+
+### Hva Denne Veiledningen Gir
+
+✅ **Arkitekturmønstre** - Dokumenterte design for skalerbare multi-agent systemer  
+✅ **Infrastrukturmaler** - ARM-maler som utruller alle Azure-tjenester  
+✅ **Kodeeksempler** - Referanseimplementeringer for nøkkelkomponenter  
+✅ **Konfigurasjonsveiledning** - Trinnvise oppsettsinstruksjoner  
+✅ **Beste Praksis** - Sikkerhet, overvåking, kostnadsoptimaliseringsstrategier  
+
+❌ **Ikke Inkludert** - Fullstendig fungerende applikasjon (krever utviklingsarbeid)
+
+## 🗺️ Implementeringsplan
+
+### Fase 1: Studer Arkitekturen (2-3 timer) - START HER
+
+**Mål:** Forstå systemdesignet og komponentinteraksjonene
+
+- [ ] Les dette dokumentet i sin helhet
+- [ ] Gå gjennom arkitekturdiagrammet og komponentrelasjonene
+- [ ] Forstå multi-agent mønstre og designvalg
+- [ ] Studer kodeeksempler for agentverktøy og ruting
+- [ ] Gå gjennom kostnadsestimater og kapasitetsplanlegging
+
+**Resultat:** Klar forståelse av hva du må bygge
+
+### Fase 2: Utrull Infrastruktur (30-45 minutter)
+
+**Mål:** Klargjør Azure-ressurser ved hjelp av ARM-mal
+
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup -m standard
+```
+
+**Hva Som Blir Utrullet:**
+- ✅ Azure OpenAI (3 regioner: GPT-4o, GPT-4o-mini, embeddings)
+- ✅ AI Search-tjeneste (tom, trenger indekskonfigurasjon)
+- ✅ Container Apps-miljø (plassholderbilder)
+- ✅ Lagringskontoer, Cosmos DB, Key Vault
+- ✅ Application Insights-overvåking
+
+**Hva Som Mangler:**
+- ❌ Agentimplementeringskode
+- ❌ Rutingslogikk
+- ❌ Frontend UI
+- ❌ Søkeindeksskjema
+- ❌ Datapipelines
+
+### Fase 3: Bygg Applikasjon (80-120 timer)
+
+**Mål:** Implementer multi-agent systemet basert på denne arkitekturen
+
+1. **Agentimplementering** (30-40 timer)
+   - Grunnleggende agentklasse og grensesnitt
+   - Kundeserviceagent med GPT-4o
+   - Lageragent med GPT-4o-mini
+   - Verktøyintegrasjoner (AI Search, Bing, filbehandling)
+
+2. **Rutingsservice** (12-16 timer)
+   - Logikk for forespørselklassifisering
+   - Agentvalg og orkestrering
+   - FastAPI/Express backend
+
+3. **Frontendutvikling** (20-30 timer)
+   - Chatgrensesnitt UI
+   - Filopplastingsfunksjonalitet
+   - Responsvisning
+
+4. **Datapipeline** (8-12 timer)
+   - Opprettelse av AI Search-indeks
+   - Dokumentbehandling med Document Intelligence
+   - Generering og indeksering av embeddings
+
+5. **Overvåking og Evaluering** (10-15 timer)
+   - Implementering av egendefinert telemetri
+   - Rammeverk for agentvurdering
+   - Red team sikkerhetsskanner
+
+### Fase 4: Utrull og Test (8-12 timer)
+
+- Bygg Docker-bilder for alle tjenester
+- Push til Azure Container Registry
+- Oppdater Container Apps med ekte bilder
+- Konfigurer miljøvariabler og hemmeligheter
+- Kjør evalueringstestsett
+- Utfør sikkerhetsskanning
+
+**Total Estimert Innsats:** 80-120 timer for erfarne utviklere
 
 ## Løsningsarkitektur
 
@@ -35,40 +147,40 @@ Kundestøtteløsningen krever:
 
 ```mermaid
 graph TB
-    User[👤 Customer] --> LB[Azure Front Door]
+    User[👤 Kunde] --> LB[Azure Front Door]
     LB --> WebApp[Web Frontend<br/>Container App]
     
     WebApp --> Router[Agent Router<br/>Container App]
-    Router --> CustomerAgent[Customer Agent<br/>Customer Service]
-    Router --> InvAgent[Inventory Agent<br/>Stock Management]
+    Router --> CustomerAgent[Kundeagent<br/>Kundeservice]
+    Router --> InvAgent[Lageragent<br/>Lagerstyring]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Øst USA 2]
+    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Vest USA 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>Product Catalog]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Real-time Info]
+    CustomerAgent --> AISearch[Azure AI Search<br/>Produktkatalog]
+    CustomerAgent --> BingSearch[Bing Search API<br/>Sanntidsinformasjon]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>Documents & Files]
-    Storage --> DocIntel[Document Intelligence<br/>Content Processing]
+    AISearch --> Storage[Azure Storage<br/>Dokumenter & Filer]
+    Storage --> DocIntel[Dokumentintelligens<br/>Innholdsbehandling]
     
-    OpenAI1 --> Embeddings[Text Embeddings<br/>ada-002<br/>France Central]
+    OpenAI1 --> Embeddings[Tekstinnbeddinger<br/>ada-002<br/>Frankrike Sentral]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>Monitoring]
+    Router --> AppInsights[Application Insights<br/>Overvåking]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Grader<br/>Switzerland North] --> Evaluation[Evaluation Framework]
-    RedTeam[Red Team Scanner] --> SecurityReports[Security Reports]
+    GraderModel[GPT-4o Grader<br/>Sveits Nord] --> Evaluation[Vurderingsrammeverk]
+    RedTeam[Red Team Scanner] --> SecurityReports[Sikkerhetsrapporter]
     
-    subgraph "Data Layer"
+    subgraph "Databaselag"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Chat History]
+        CosmosDB[Cosmos DB<br/>Chatthistorikk]
     end
     
-    subgraph "AI Services"
+    subgraph "AI-tjenester"
         OpenAI1
         OpenAI2
         Embeddings
@@ -77,10 +189,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Monitoring & Security"
+    subgraph "Overvåking & Sikkerhet"
         AppInsights
         LogAnalytics[Log Analytics Workspace]
-        KeyVault[Azure Key Vault<br/>Secrets & Config]
+        KeyVault[Azure Key Vault<br/>Hemmeligheter & Konfigurasjon]
         RedTeam
         Evaluation
     end
@@ -94,113 +206,117 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-
 ### Komponentoversikt
 
 | Komponent | Formål | Teknologi | Region |
-|-----------|--------|-----------|--------|
-| **Web Frontend** | Brukergrensesnitt for kundesamtaler | Container Apps | Primærregion |
-| **Agent Router** | Ruter forespørsler til riktig agent | Container Apps | Primærregion |
-| **Kundeagent** | Håndterer kundeserviceforespørsler | Container Apps + GPT-4o | Primærregion |
-| **Lageragent** | Administrerer lager og oppfyllelse | Container Apps + GPT-4o-mini | Primærregion |
+|-----------|---------|------------|---------|
+| **Web Frontend** | Brukergrensesnitt for kundeinteraksjoner | Container Apps | Primær Region |
+| **Agent Router** | Ruter forespørsler til riktig agent | Container Apps | Primær Region |
+| **Kundeagent** | Håndterer kundeserviceforespørsler | Container Apps + GPT-4o | Primær Region |
+| **Lageragent** | Håndterer lager og oppfyllelse | Container Apps + GPT-4o-mini | Primær Region |
 | **Azure OpenAI** | LLM-inferens for agenter | Cognitive Services | Multi-region |
-| **AI-søk** | Vektorsøk og RAG | AI Search Service | Primærregion |
-| **Lagringskonto** | Filopplastinger og dokumenter | Blob Storage | Primærregion |
-| **Application Insights** | Overvåking og telemetri | Monitor | Primærregion |
-| **Grader Model** | Agent evalueringssystem | Azure OpenAI | Sekundærregion |
+| **AI Search** | Vektorsøk og RAG | AI Search Service | Primær Region |
+| **Lagringskonto** | Filopplastinger og dokumenter | Blob Storage | Primær Region |
+| **Application Insights** | Overvåking og telemetri | Monitor | Primær Region |
+| **Grader Model** | System for agentvurdering | Azure OpenAI | Sekundær Region |
 
 ## 📁 Prosjektstruktur
 
+> **📍 Statusoversikt:**  
+> ✅ = Finnes i repository  
+> 📝 = Referanseimplementering (kodeeksempel i dette dokumentet)  
+> 🔨 = Du må opprette dette
+
 ```
-retail-multiagent-solution/
-├── .azure/                              # Azure environment configs
-│   ├── config.json                      # Global config
+retail-multiagent-solution/              🔨 Your project directory
+├── .azure/                              🔨 Azure environment configs
+│   ├── config.json                      🔨 Global config
 │   └── env/
-│       ├── .env.development             # Dev environment
-│       ├── .env.staging                 # Staging environment
-│       └── .env.production              # Production environment
+│       ├── .env.development             🔨 Dev environment
+│       ├── .env.staging                 🔨 Staging environment
+│       └── .env.production              🔨 Production environment
 │
-├── azure.yaml                          # AZD main configuration
-├── azure.parameters.json               # Deployment parameters
-├── README.md                           # Solution documentation
+├── azure.yaml                          🔨 AZD main configuration
+├── azure.parameters.json               🔨 Deployment parameters
+├── README.md                           🔨 Solution documentation
 │
-├── infra/                              # Infrastructure as Code
-│   ├── main.bicep                      # Main Bicep template
-│   ├── main.parameters.json            # Parameters file
-│   ├── modules/                        # Bicep modules
-│   │   ├── ai-services.bicep           # Azure OpenAI deployments
-│   │   ├── search.bicep                # AI Search configuration
-│   │   ├── storage.bicep               # Storage accounts
-│   │   ├── container-apps.bicep        # Container Apps environment
-│   │   ├── monitoring.bicep            # Application Insights
-│   │   ├── security.bicep              # Key Vault and RBAC
-│   │   └── networking.bicep            # Virtual networks and DNS
-│   ├── arm-template/                   # ARM template version
-│   │   ├── azuredeploy.json            # ARM main template
-│   │   └── azuredeploy.parameters.json # ARM parameters
-│   └── scripts/                        # Deployment scripts
-│       ├── deploy.sh                   # Main deployment script
-│       ├── setup-data.sh               # Data setup script
-│       └── configure-rbac.sh           # RBAC configuration
+├── infra/                              🔨 Infrastructure as Code (you create)
+│   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
+│   ├── main.parameters.json            🔨 Parameters file
+│   ├── modules/                        📝 Bicep modules (reference examples below)
+│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── search.bicep                📝 AI Search configuration
+│   │   ├── storage.bicep               📝 Storage accounts
+│   │   ├── container-apps.bicep        📝 Container Apps environment
+│   │   ├── monitoring.bicep            📝 Application Insights
+│   │   ├── security.bicep              📝 Key Vault and RBAC
+│   │   └── networking.bicep            📝 Virtual networks and DNS
+│   ├── arm-template/                   ✅ ARM template version (EXISTS)
+│   │   ├── azuredeploy.json            ✅ ARM main template (retail-multiagent-arm-template/)
+│   │   └── azuredeploy.parameters.json ✅ ARM parameters
+│   └── scripts/                        ✅/🔨 Deployment scripts
+│       ├── deploy.sh                   ✅ Main deployment script (EXISTS)
+│       ├── setup-data.sh               🔨 Data setup script (you create)
+│       └── configure-rbac.sh           🔨 RBAC configuration (you create)
 │
-├── src/                                # Application source code
-│   ├── agents/                         # Agent implementations
-│   │   ├── base/                       # Base agent classes
-│   │   │   ├── agent.py                # Abstract agent class
-│   │   │   └── tools.py                # Tool interfaces
-│   │   ├── customer/                   # Customer service agent
-│   │   │   ├── agent.py                # Customer agent implementation
-│   │   │   ├── prompts.py              # System prompts
-│   │   │   └── tools/                  # Agent-specific tools
-│   │   │       ├── search_tool.py      # AI Search integration
-│   │   │       ├── bing_tool.py        # Bing Search integration
-│   │   │       └── file_tool.py        # File processing tool
-│   │   └── inventory/                  # Inventory management agent
-│   │       ├── agent.py                # Inventory agent implementation
-│   │       ├── prompts.py              # System prompts
-│   │       └── tools/                  # Agent-specific tools
-│   │           ├── inventory_search.py # Inventory search tool
-│   │           └── database_tool.py    # Database query tool
+├── src/                                🔨 Application source code (YOU BUILD THIS)
+│   ├── agents/                         📝 Agent implementations (examples below)
+│   │   ├── base/                       🔨 Base agent classes
+│   │   │   ├── agent.py                🔨 Abstract agent class
+│   │   │   └── tools.py                🔨 Tool interfaces
+│   │   ├── customer/                   🔨 Customer service agent
+│   │   │   ├── agent.py                📝 Customer agent implementation (see below)
+│   │   │   ├── prompts.py              🔨 System prompts
+│   │   │   └── tools/                  🔨 Agent-specific tools
+│   │   │       ├── search_tool.py      📝 AI Search integration (example below)
+│   │   │       ├── bing_tool.py        📝 Bing Search integration (example below)
+│   │   │       └── file_tool.py        🔨 File processing tool
+│   │   └── inventory/                  🔨 Inventory management agent
+│   │       ├── agent.py                🔨 Inventory agent implementation
+│   │       ├── prompts.py              🔨 System prompts
+│   │       └── tools/                  🔨 Agent-specific tools
+│   │           ├── inventory_search.py 🔨 Inventory search tool
+│   │           └── database_tool.py    🔨 Database query tool
 │   │
-│   ├── router/                         # Agent routing service
-│   │   ├── main.py                     # FastAPI router application
-│   │   ├── routing_logic.py            # Request routing logic
-│   │   └── middleware.py               # Authentication & logging
+│   ├── router/                         🔨 Agent routing service (you build)
+│   │   ├── main.py                     🔨 FastAPI router application
+│   │   ├── routing_logic.py            🔨 Request routing logic
+│   │   └── middleware.py               🔨 Authentication & logging
 │   │
-│   ├── frontend/                       # Web user interface
-│   │   ├── Dockerfile                  # Container configuration
-│   │   ├── package.json                # Node.js dependencies
-│   │   ├── src/                        # React/Vue source code
-│   │   │   ├── components/             # UI components
-│   │   │   ├── pages/                  # Application pages
-│   │   │   ├── services/               # API services
-│   │   │   └── styles/                 # CSS and themes
-│   │   └── public/                     # Static assets
+│   ├── frontend/                       🔨 Web user interface (you build)
+│   │   ├── Dockerfile                  🔨 Container configuration
+│   │   ├── package.json                🔨 Node.js dependencies
+│   │   ├── src/                        🔨 React/Vue source code
+│   │   │   ├── components/             🔨 UI components
+│   │   │   ├── pages/                  🔨 Application pages
+│   │   │   ├── services/               🔨 API services
+│   │   │   └── styles/                 🔨 CSS and themes
+│   │   └── public/                     🔨 Static assets
 │   │
-│   ├── shared/                         # Shared utilities
-│   │   ├── config.py                   # Configuration management
-│   │   ├── telemetry.py                # Telemetry utilities
-│   │   ├── security.py                 # Security utilities
-│   │   └── models.py                   # Data models
+│   ├── shared/                         🔨 Shared utilities (you build)
+│   │   ├── config.py                   🔨 Configuration management
+│   │   ├── telemetry.py                📝 Telemetry utilities (example below)
+│   │   ├── security.py                 🔨 Security utilities
+│   │   └── models.py                   🔨 Data models
 │   │
-│   └── evaluation/                     # Evaluation and testing
-│       ├── evaluator.py                # Agent evaluator
-│       ├── red_team_scanner.py         # Security scanner
-│       ├── test_cases.json             # Evaluation test cases
-│       └── reports/                    # Generated reports
+│   └── evaluation/                     🔨 Evaluation and testing (you build)
+│       ├── evaluator.py                📝 Agent evaluator (example below)
+│       ├── red_team_scanner.py         📝 Security scanner (example below)
+│       ├── test_cases.json             📝 Evaluation test cases (example below)
+│       └── reports/                    🔨 Generated reports
 │
-├── data/                               # Data and configuration
-│   ├── search-schema.json              # AI Search index schema
-│   ├── initial-docs/                   # Initial document corpus
-│   │   ├── product-manuals/            # Product documentation
-│   │   ├── policies/                   # Company policies
-│   │   └── faqs/                       # Frequently asked questions
-│   ├── fine-tuning/                    # Fine-tuning datasets
-│   │   ├── training.jsonl              # Training data
-│   │   └── validation.jsonl            # Validation data
-│   └── evaluation/                     # Evaluation datasets
-│       ├── test-conversations.json     # Test conversation data
-│       └── ground-truth.json           # Expected responses
+├── data/                               🔨 Data and configuration (you create)
+│   ├── search-schema.json              📝 AI Search index schema (example below)
+│   ├── initial-docs/                   🔨 Initial document corpus
+│   │   ├── product-manuals/            🔨 Product documentation (your data)
+│   │   ├── policies/                   🔨 Company policies (your data)
+│   │   └── faqs/                       🔨 Frequently asked questions (your data)
+│   ├── fine-tuning/                    🔨 Fine-tuning datasets (optional)
+│   │   ├── training.jsonl              🔨 Training data
+│   │   └── validation.jsonl            🔨 Validation data
+│   └── evaluation/                     🔨 Evaluation datasets
+│       ├── test-conversations.json     📝 Test conversation data (example below)
+│       └── ground-truth.json           🔨 Expected responses
 │
 ├── scripts/                            # Utility scripts
 │   ├── setup/                          # Setup scripts
@@ -256,11 +372,77 @@ retail-multiagent-solution/
 
 ---
 
-## Krav til innledende konfigurasjon
+## 🚀 Hurtigstart: Hva Du Kan Gjøre Akkurat Nå
 
-### 1. Flere agenter og konfigurasjon
+### Alternativ 1: Utrull Kun Infrastruktur (30 minutter)
 
-**Mål**: Utrull 2 spesialiserte agenter - "Kundeagent" (kundeservice) og "Lageragent" (lagerstyring)
+**Hva du får:** Alle Azure-tjenester klargjort og klare for utvikling
+
+```bash
+# Klon repository
+git clone https://github.com/microsoft/AZD-for-beginners.git
+cd AZD-for-beginners/examples/retail-multiagent-arm-template
+
+# Distribuer infrastruktur
+./deploy.sh -g myResourceGroup -m standard
+
+# Verifiser distribusjon
+az resource list --resource-group myResourceGroup --output table
+```
+
+**Forventet resultat:**
+- ✅ Azure OpenAI-tjenester utrullet (3 regioner)
+- ✅ AI Search-tjeneste opprettet (tom)
+- ✅ Container Apps-miljø klart
+- ✅ Lagring, Cosmos DB, Key Vault konfigurert
+- ❌ Ingen fungerende agenter ennå (kun infrastruktur)
+
+### Alternativ 2: Studer Arkitekturen (2-3 timer)
+
+**Hva du får:** Dyp forståelse av multi-agent mønstre
+
+1. Les dette dokumentet i sin helhet
+2. Gå gjennom kodeeksempler for hver komponent
+3. Forstå designvalg og avveininger
+4. Studer kostnadsoptimaliseringsstrategier
+5. Planlegg din implementeringsmetode
+
+**Forventet resultat:**
+- ✅ Klart mentalt bilde av systemarkitekturen
+- ✅ Forståelse av nødvendige komponenter
+- ✅ Realistiske innsatsestimater
+- ✅ Implementeringsplan
+
+### Alternativ 3: Bygg Fullstendig System (80-120 timer)
+
+**Hva du får:** Produksjonsklar multi-agent løsning
+
+1. **Fase 1:** Utrull infrastruktur (ferdig ovenfor)
+2. **Fase 2:** Implementer agenter ved hjelp av kodeeksempler nedenfor (30-40 timer)
+3. **Fase 3:** Bygg rutingsservice (12-16 timer)
+4. **Fase 4:** Lag frontend UI (20-30 timer)
+5. **Fase 5:** Konfigurer datapipelines (8-12 timer)
+6. **Fase 6:** Legg til overvåking og evaluering (10-15 timer)
+
+**Forventet resultat:**
+- ✅ Fullt funksjonelt multi-agent system
+- ✅ Produksjonsklar overvåking
+- ✅ Sikkerhetsvalidering
+- ✅ Kostnadsoptimalisert utrulling
+
+---
+
+## 📚 Arkitekturreferanse og Implementeringsveiledning
+
+De følgende seksjonene gir detaljerte arkitekturmønstre, konfigurasjonseksempler og referansekode for å veilede din implementering.
+
+## Innledende Konfigurasjonskrav
+
+### 1. Flere Agenter & Konfigurasjon
+
+**Mål**: Utrull 2 spesialiserte agenter - "Kundeagent" (kundeservice) og "Lager" (lagerstyring)
+
+> **📝 Merk:** Følgende azure.yaml og Bicep-konfigurasjoner er **referanseeksempler** som viser hvordan man strukturerer multi-agent utrullinger. Du må opprette disse filene og de tilsvarende agentimplementeringene.
 
 #### Konfigurasjonstrinn:
 
@@ -334,11 +516,11 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Flere modeller med kapasitetsplanlegging
+### 2. Flere Modeller med Kapasitetsplanlegging
 
-**Mål**: Utrull chatmodell (kunde), embeddingsmodell (søk) og resonneringsmodell (grader) med riktig kvotestyring
+**Mål**: Utrull chatmodell (Kunde), embeddingsmodell (søk) og resonneringsmodell (grader) med riktig kvotestyring
 
-#### Multi-region strategi:
+#### Multi-Region Strategi:
 
 ```bicep
 // infra/models.bicep
@@ -382,7 +564,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Region fallback-konfigurasjon:
+#### Region Fallback Konfigurasjon:
 
 ```yaml
 # .azure/env/.env.production
@@ -391,11 +573,11 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI-søk med dataindekskonfigurasjon
+### 3. AI Search med Datakonfigurasjon
 
-**Mål**: Konfigurer AI-søk for dataoppdateringer og automatisert indeksering
+**Mål**: Konfigurer AI Search for dataoppdateringer og automatisert indeksering
 
-#### Pre-provisioning hook:
+#### Pre-Provisioning Hook:
 
 ```bash
 #!/bin/bash
@@ -403,7 +585,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Create search service with specific SKU
+# Opprett søketjeneste med spesifikk SKU
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -412,7 +594,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Post-provisioning datasett:
+#### Post-Provisioning Datasett:
 
 ```bash
 #!/bin/bash
@@ -420,16 +602,16 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Get search service key
+# Hent søketjenestenøkkel
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Create index schema
+# Opprett indeksskjema
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Upload initial documents
+# Last opp innledende dokumenter
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
@@ -461,14 +643,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. Agentverktøykonfigurasjon for AI-søk
+### 4. Agentverktøykonfigurasjon for AI Search
 
-**Mål**: Konfigurer agenter til å bruke AI-søk som et grunnlag
+**Mål**: Konfigurer agenter til å bruke AI Search som et grunnlagsverktøy
 
-#### Implementering av agent søkeverktøy:
+#### Implementering av Agent Search Tool:
 
 ```python
-# src/agents/tools/search_tool.py
+# src/agents/verktøy/søk_verktøy.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -522,13 +704,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # First, search for relevant context
+        # Først, søk etter relevant kontekst
         search_results = await self.search_tool.search_products(user_query)
         
-        # Prepare context for the LLM
+        # Forbered kontekst for LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Generate response with grounding
+        # Generer svar med grunnlag
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -540,7 +722,7 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Filopplastingslagringsintegrasjon
+### 5. Filopplastingsintegrasjon
 
 **Mål**: Aktiver agenter til å behandle opplastede filer (manualer, dokumenter) for RAG-kontekst
 
@@ -603,13 +785,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Download file from blob storage
+        # Last ned fil fra blob-lagring
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Extract text using Document Intelligence
+        # Ekstraher tekst ved hjelp av Document Intelligence
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -617,19 +799,19 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # Extract text content
+        # Ekstraher tekstinnhold
         text_content = ""
         for page in result.pages:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Generate embeddings
+        # Generer innebygginger
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Index in AI Search
+        # Indekser i AI-søk
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -641,11 +823,11 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing-søkeintegrasjon
+### 6. Bing Search Integrasjon
 
-**Mål**: Legg til Bing-søkefunksjoner for sanntidsinformasjon
+**Mål**: Legg til Bing Search-funksjonalitet for sanntidsinformasjon
 
-#### Bicep ressurs tillegg:
+#### Bicep Ressurstillegg:
 
 ```bicep
 // infra/bing-search.bicep
@@ -663,10 +845,10 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Bing søkeverktøy:
+#### Bing Search Tool:
 
 ```python
-# src/agents/tools/bing_search_tool.py
+# src/agents/verktøy/bing_søk_verktøy.py
 import aiohttp
 import asyncio
 
@@ -707,13 +889,13 @@ class BingSearchTool:
 
 ---
 
-## Overvåking og observasjon
+## Overvåking og Observasjon
 
 ### 7. Sporing og Application Insights
 
 **Mål**: Omfattende overvåking med sporingslogger og Application Insights
 
-#### Konfigurasjon av Application Insights:
+#### Application Insights Konfigurasjon:
 
 ```bicep
 // infra/monitoring.bicep
@@ -766,7 +948,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Implementering av tilpasset telemetri:
+#### Implementering av Egendefinert Telemetri:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -780,7 +962,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Configure logging
+        # Konfigurer logging
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -811,7 +993,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Truncate for privacy
+            'query': query[:100],  # Avkort for personvern
             'results_found': str(results_count > 0)
         }
         
@@ -872,14 +1054,14 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Red Teaming sikkerhetsvalidering
+### 8. Red Teaming Sikkerhetsvalidering
 
 **Mål**: Automatisert sikkerhetstesting for agenter og modeller
 
-#### Red Teaming-konfigurasjon:
+#### Red Teaming Konfigurasjon:
 
 ```python
-# src/security/red_team_scanner.py
+# src/sikkerhet/red_team_scanner.py
 import asyncio
 from typing import List, Dict
 import json
@@ -924,7 +1106,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Calculate overall security score
+        # Beregn total sikkerhetsscore
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -992,8 +1174,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Implementation would send HTTP request to agent endpoint
-        # For demo purposes, returning placeholder
+        # Implementasjon vil sende HTTP-forespørsel til agentens endepunkt
+        # For demonstrasjonsformål, returnerer plassholder
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1015,7 +1197,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Simplified vulnerability detection
+        # Forenklet sårbarhetsdeteksjon
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1050,14 +1232,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Basic scoring: 100 - (vulnerabilities / total * 100)
+        # Grunnleggende poengberegning: 100 - (sårbarheter / total * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Reduce score based on severity
+        # Reduser poengsum basert på alvorlighetsgrad
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1067,7 +1249,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Automatisert sikkerhetspipeline:
+#### Automatisert Sikkerhetspipeline:
 
 ```bash
 #!/bin/bash
@@ -1075,13 +1257,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Get agent endpoint from deployment
+# Hent agent-endepunkt fra distribusjon
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Run security scan
+# Kjør sikkerhetsskanning
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1091,11 +1273,11 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. Agentevaluering med Grader Model
+### 9. Agentvurdering med Grader Model
 
-**Mål**: Utrull evalueringssystem med dedikert gradermodell
+**Mål**: Utrull evalueringssystem med dedikert grader-modell
 
-#### Konfigurasjon av Grader Model:
+#### Grader Model Konfigurasjon:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1168,7 +1350,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Calculate summary metrics
+        # Beregn sammendragsmetrikker
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1178,10 +1360,10 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # Get agent response
+        # Få agentrespons
         agent_response = await self._get_agent_response(user_query)
         
-        # Grade the response
+        # Vurder responsen
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1252,7 +1434,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Parse JSON response
+            # Analyser JSON-respons
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1298,7 +1480,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Performance rating
+        # Ytelsesvurdering
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1314,7 +1496,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Testcase-konfigurasjon:
+#### Testcases Konfigurasjon:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1353,13 +1535,13 @@ class AgentEvaluator:
 
 ---
 
-## Tilpasning og oppdateringer
+## Tilpasning og Oppdateringer
 
 ### 10. Tilpasning av Container App
 
 **Mål**: Oppdater container app-konfigurasjon og erstatt med tilpasset UI
 
-#### Dynamisk konfigurasjon:
+#### Dynamisk Konfigurasjon:
 
 ```yaml
 # azure.yaml - Container App Configuration
@@ -1375,7 +1557,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Tilpasset frontendbygging:
+#### Tilpasset Frontend Bygg:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1402,7 +1584,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Bygg og utrullingsskript:
+#### Bygg og Utrullingsskript:
 
 ```bash
 #!/bin/bash
@@ -1410,7 +1592,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Build custom image with environment variables
+# Bygg tilpasset bilde med miljøvariabler
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1418,13 +1600,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Push to Azure Container Registry
+# Push til Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Update container app
+# Oppdater container-app
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1437,21 +1619,21 @@ echo "Frontend deployed successfully!"
 
 ## 🔧 Feilsøkingsveiledning
 
-### Vanlige problemer og løsninger
+### Vanlige Problemer og Løsninger
 
-#### 1. Container Apps kvotegrenser
+#### 1. Container Apps Kvotebegrensninger
 
-**Problem**: Utrulling mislykkes på grunn av regionale kvotegrenser
+**Problem**: Utrulling mislykkes på grunn av regionale kvotebegrensninger
 
 **Løsning**:
 ```bash
-# Check current quota usage
+# Sjekk nåværende kvotebruk
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Request quota increase
+# Be om kvoteøkning
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1462,19 +1644,19 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Modellutrulling utløpt
+#### 2. Modellutrulling Utløpt
 
 **Problem**: Modellutrulling mislykkes på grunn av utløpt API-versjon
 
 **Løsning**:
 ```python
-# scripts/update_model_versions.py
+# skript/oppdater_modell_versjoner.py
 import requests
 import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # This would call Azure OpenAI API to get current versions
+    # Dette vil kalle Azure OpenAI API for å hente gjeldende versjoner
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1491,12 +1673,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Read and update template
+    # Les og oppdater mal
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Update version in template
+        # Oppdater versjon i mal
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1517,7 +1699,7 @@ if __name__ == "__main__":
 
 **Løsning**:
 ```python
-# scripts/fine_tuning_pipeline.py
+# skript/fine_tuning_pipeline.py
 import asyncio
 from openai import AsyncOpenAI
 
@@ -1553,8 +1735,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Update deployment to use fine-tuned model
-            # This would call Azure CLI to update the deployment
+            # Oppdater distribusjon for å bruke finjustert modell
+            # Dette vil kalle Azure CLI for å oppdatere distribusjonen
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1563,13 +1745,13 @@ class FineTuningPipeline:
 
 ---
 
-## FAQ og åpen utforskning
+## FAQ og Utforskning
 
-### Ofte stilte spørsmål
+### Ofte Stilte Spørsmål
 
-#### Spørsmål: Finnes det en enkel måte å utrulle flere agenter (designmønster)?
+#### Spm: Finnes det en enkel måte å utrulle flere agenter (designmønster)?
 
-**Svar: Ja! Bruk Multi-Agent-mønsteret:**
+**Svar: Ja! Bruk Multi-Agent Mønsteret:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1586,12 +1768,12 @@ services:
         }
 ```
 
-#### Spørsmål: Kan jeg utrulle "modellrouter" som en modell (kostnadsimplikasjoner)?
+#### Spm: Kan jeg utrulle "modellrouter" som en modell (kostnadsimplikasjoner)?
 
 **Svar: Ja, med nøye vurdering:**
 
 ```python
-# Model Router Implementation
+# Modellruterimplementasjon
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
@@ -1611,45 +1793,45 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Implementation would calculate potential savings
+        # Implementasjonen vil beregne potensielle besparelser
         pass
 ```
 
 **Kostnadsimplikasjoner:**
 - **Besparelser**: 60-80% kostnadsreduksjon for enkle forespørsler
-- **Avveininger**: Litt økt ventetid for rutelogikk
+- **Avveininger**: Litt økt latens for rutingslogikk
 - **Overvåking**: Spor nøyaktighet vs. kostnadsmålinger
 
-#### Spørsmål: Kan jeg starte en finjusteringsjobb fra en azd-mal?
+#### Spm: Kan jeg starte en finjusteringsjobb fra en azd-mal?
 
 **Svar: Ja, ved bruk av post-provisioning hooks:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Fine-tuning Integration
+# hooks/postprovision.sh - Finjustering Integrasjon
 
 echo "Starting fine-tuning pipeline..."
 
-# Upload training data
+# Last opp treningsdata
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Start fine-tuning job
+# Start finjusteringsjobb
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4o-mini")
 
-# Store job ID for monitoring
+# Lagre jobb-ID for overvåking
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
 
-### Avanserte scenarioer
+### Avanserte Scenarier
 
-#### Multi-region utrullingsstrategi
+#### Multi-Region Utrullingsstrategi
 
 ```bicep
 // infra/multi-region.bicep
@@ -1688,7 +1870,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 #### Kostnadsoptimaliseringsrammeverk
 
 ```python
-# src/optimization/cost_optimizer.py
+# src/optimalisering/kostnadsoptimalisator.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1697,7 +1879,7 @@ class CostOptimizer:
         """Analyze usage to recommend optimizations"""
         recommendations = []
         
-        # Model usage analysis
+        # Modellbrukanalyse
         model_usage = self.analytics.get_model_usage()
         for model, usage in model_usage.items():
             if usage['utilization'] < 0.3:
@@ -1709,7 +1891,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Peak time analysis
+        # Toppunktanalyse
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1730,67 +1912,71 @@ class CostOptimizer:
 ```
 
 ---
+## ✅ Klar-til-Deploy ARM-mal
 
-## Klar-til-utrulling ARM-mal
+> **✨ DETTE EKSISTERER OG FUNGERER!**  
+> I motsetning til de konseptuelle kodeeksemplene ovenfor, er ARM-malen en **ekte, fungerende infrastrukturdistribusjon** inkludert i dette repositoriet.
 
-For umiddelbar utrulling av den komplette multi-agent løsningen for forhandlere, har vi levert en omfattende ARM-mal som klargjør alle nødvendige Azure-ressurser med én kommando.
+### Hva denne malen faktisk gjør
 
-### Hva er inkludert i ARM-malen
+ARM-malen i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) oppretter **all Azure-infrastruktur** som trengs for multi-agent-systemet. Dette er den **eneste klare komponenten** - alt annet krever utvikling.
 
-ARM-malen som ligger i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) inkluderer:
+### Hva som er inkludert i ARM-malen
+
+ARM-malen som finnes i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) inkluderer:
 
 #### **Komplett infrastruktur**
-- ✅ **Multi-region Azure OpenAI** utrullinger (GPT-4o, GPT-4o-mini, embeddings, grader)
-- ✅ **Azure AI-søk** med vektorsøkfunksjoner
+- ✅ **Multi-region Azure OpenAI** distribusjoner (GPT-4o, GPT-4o-mini, embeddings, grader)
+- ✅ **Azure AI Search** med vektorsøk-funksjonalitet
 - ✅ **Azure Storage** med dokument- og opplastingscontainere
-- ✅ **Container Apps-miljø** med auto-skalering
-- ✅ **Agent Router & Frontend** container apps
-- ✅ **Cosmos DB** for lagring av samtalehistorikk
+- ✅ **Container Apps Environment** med automatisk skalering
+- ✅ **Agent Router & Frontend** container-apper
+- ✅ **Cosmos DB** for lagring av chat-historikk
 - ✅ **Application Insights** for omfattende overvåking
-- ✅ **Key Vault** for sikker hemmelighetsstyring
-- ✅ **Dokumentintelligens** for filbehandling
+- ✅ **Key Vault** for sikker hemmelighetsadministrasjon
+- ✅ **Document Intelligence** for filbehandling
 - ✅ **Bing Search API** for sanntidsinformasjon
 
-#### **Utrullingsmoduser**
+#### **Distribusjonsmoduser**
 | Modus | Brukstilfelle | Ressurser | Estimert kostnad/måned |
 |-------|---------------|-----------|------------------------|
 | **Minimal** | Utvikling, Testing | Grunnleggende SKUs, Enkelt region | $100-370 |
 | **Standard** | Produksjon, Moderat skala | Standard SKUs, Multi-region | $420-1,450 |
 | **Premium** | Enterprise, Høy skala | Premium SKUs, HA-oppsett | $1,150-3,500 |
 
-### 🎯 Raske utrullingsalternativer
+### 🎯 Raske distribusjonsalternativer
 
-#### Alternativ 1: Én-klikk Azure utrulling
+#### Alternativ 1: Ett-klikk Azure-distribusjon
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Alternativ 2: Azure CLI utrulling
+#### Alternativ 2: Azure CLI-distribusjon
 
 ```bash
-# Clone the repository
+# Klon depotet
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Make deployment script executable
+# Gjør distribusjonsskriptet kjørbart
 chmod +x deploy.sh
 
-# Deploy with default settings (Standard mode)
+# Distribuer med standardinnstillinger (Standardmodus)
 ./deploy.sh -g myResourceGroup
 
-# Deploy for production with premium features
+# Distribuer for produksjon med premiumfunksjoner
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Deploy minimal version for development
+# Distribuer minimal versjon for utvikling
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Alternativ 3: Direkte ARM-mal utrulling
+#### Alternativ 3: Direkte ARM-mal-distribusjon
 
 ```bash
-# Create resource group
+# Opprett ressursgruppe
 az group create --name myResourceGroup --location eastus2
 
-# Deploy template directly
+# Distribuer mal direkte
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1800,7 +1986,7 @@ az deployment group create \
 
 ### Malutganger
 
-Etter vellykket utrulling, vil du motta:
+Etter vellykket distribusjon vil du motta:
 
 ```json
 {
@@ -1814,13 +2000,13 @@ Etter vellykket utrulling, vil du motta:
 }
 ```
 
-### 🔧 Konfigurasjon etter utrulling
+### 🔧 Konfigurasjon etter distribusjon
 
-ARM-malen håndterer infrastrukturklargjøring. Etter utrulling:
+ARM-malen håndterer infrastrukturprovisjonering. Etter distribusjon:
 
 1. **Konfigurer søkeindeks**:
    ```bash
-   # Use the provided search schema
+   # Bruk det oppgitte søkeskjemaet
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
@@ -1829,16 +2015,16 @@ ARM-malen håndterer infrastrukturklargjøring. Etter utrulling:
 
 2. **Last opp innledende dokumenter**:
    ```bash
-   # Upload product manuals and knowledge base
+   # Last opp produktmanualer og kunnskapsbase
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Utrull agentkode**:
+3. **Distribuer agentkode**:
    ```bash
-   # Build and deploy actual agent applications
+   # Bygg og distribuer faktiske agentapplikasjoner
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -1848,7 +2034,7 @@ ARM-malen håndterer infrastrukturklargjøring. Etter utrulling:
 
 ### 🎛️ Tilpasningsalternativer
 
-Rediger `azuredeploy.parameters.json` for å tilpasse din utrulling:
+Rediger `azuredeploy.parameters.json` for å tilpasse distribusjonen din:
 
 ```json
 {
@@ -1862,45 +2048,147 @@ Rediger `azuredeploy.parameters.json` for å tilpasse din utrulling:
 }
 ```
 
-### 📊 Utrullingsfunksjoner
+### 📊 Distribusjonsfunksjoner
 
 - ✅ **Forutsetningsvalidering** (Azure CLI, kvoter, tillatelser)
 - ✅ **Multi-region høy tilgjengelighet** med automatisk failover
 - ✅ **Omfattende overvåking** med Application Insights og Log Analytics
-- ✅ **Sikkerhetspraksis** med Key Vault og RBAC
-- ✅ **Kostnadsoptimalisering** med konfigurerbare utrullingsmoduser
+- ✅ **Sikkerhetsbeste praksis** med Key Vault og RBAC
+- ✅ **Kostnadsoptimalisering** med konfigurerbare distribusjonsmoduser
 - ✅ **Automatisk skalering** basert på etterspørsel
-- ✅ **Null-downtime oppdateringer** med Container Apps-revisjoner
+- ✅ **Oppdateringer uten nedetid** med Container Apps-revisjoner
 
 ### 🔍 Overvåking og administrasjon
 
-Når utrullet, overvåk løsningen din gjennom:
+Når distribusjonen er fullført, kan du overvåke løsningen din gjennom:
 
 - **Application Insights**: Ytelsesmålinger, avhengighetssporing og tilpasset telemetri
 - **Log Analytics**: Sentralisert logging fra alle komponenter
 - **Azure Monitor**: Ressurshelse og tilgjengelighetsovervåking
-- **Kostnadsstyring**: Sanntids kostnadssporing og budsjettvarsler
+- **Kostnadsadministrasjon**: Sanntids kostnadssporing og budsjettvarsler
 
 ---
 
 ## 📚 Komplett implementeringsveiledning
 
-Dette scenario-dokumentet kombinert med ARM-malen gir alt du trenger for å utrulle en produksjonsklar multi-agent kundestøtteløsning. Implementeringen dekker:
+Dette scenariedokumentet kombinert med ARM-malen gir alt som trengs for å distribuere en produksjonsklar multi-agent kundestøtteløsning. Implementeringen dekker:
 
-✅ **Arkitekturdesign** - Omfattende systemdesign med komponentrelasjoner  
-✅ **Infrastrukturklargjøring** - Komplett ARM-mal for én-klikk utrulling  
-✅ **Agentkonfigurasjon** - Detaljert oppsett for Kunde- og Lageragenter  
-✅ **Multi-modell utrulling** - Strategisk modellplassering på tvers av regioner  
-✅ **Søkeintegrasjon** - AI-søk med vektorfunksjoner og dataindeksering  
+✅ **Arkitekturdesign** - Omfattende systemdesign med komponentforhold  
+✅ **Infrastrukturprovisjonering** - Komplett ARM-mal for ett-klikk distribusjon  
+✅ **Agentkonfigurasjon** - Detaljert oppsett for kunde- og lageragenter  
+✅ **Multi-modell distribusjon** - Strategisk modellplassering på tvers av regioner  
+✅ **Søkeintegrasjon** - AI-søk med vektorfunksjonalitet og dataindeksering  
 ✅ **Sikkerhetsimplementering** - Red teaming, sårbarhetsskanning og sikre praksiser  
-✅ **Overvåking og evaluering** - Omfattende telemetri og agentevalueringsrammeverk  
-✅ **Produksjonsklarhet** - Enterprise-grade utrulling med HA og katastrofegjenoppretting  
-✅ **Kostnadsoptimalisering** - Intelligent ruting og bruksbasert skalering  
+✅ **Overvåking og evaluering** - Omfattende telemetri og agent evalueringsrammeverk  
+✅ **Produksjonsklarhet** - Enterprise-grade distribusjon med HA og katastrofegjenoppretting  
+✅ **Kostnadsoptimalisering** - Intelligent ruting og bruksmønsterbasert skalering  
 ✅ **Feilsøkingsveiledning** - Vanlige problemer og løsningsstrategier
-
-Dette omfattende scenarioet dekker alle kravene for forhandlerens multi-agent løsning, og gir praktisk implementeringsveiledning, feilsøkingsstøtte og avanserte utforskningsmuligheter for å bygge produksjonsklare AI-applikasjoner med AZD.
 
 ---
 
+## 📊 Sammendrag: Hva du har lært
+
+### Arkitekturmønstre dekket
+
+✅ **Multi-agent systemdesign** - Spesialiserte agenter (Kunde + Lager) med dedikerte modeller  
+✅ **Multi-region distribusjon** - Strategisk modellplassering for kostnadsoptimalisering og redundans  
+✅ **RAG-arkitektur** - AI-søkeintegrasjon med vektor-embeddings for forankrede svar  
+✅ **Agent evaluering** - Dedikert grader-modell for kvalitetsvurdering  
+✅ **Sikkerhetsrammeverk** - Red teaming og sårbarhetsskanning mønstre  
+✅ **Kostnadsoptimalisering** - Modellruting og kapasitetsplanleggingsstrategier  
+✅ **Produksjonsovervåking** - Application Insights med tilpasset telemetri  
+
+### Hva dette dokumentet gir
+
+| Komponent | Status | Hvor du finner det |
+|-----------|--------|--------------------|
+| **Infrastrukturmal** | ✅ Klar til distribusjon | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Arkitekturdiagrammer** | ✅ Fullført | Mermaid-diagram ovenfor |
+| **Kodeeksempler** | ✅ Referanseimplementeringer | Gjennom hele dokumentet |
+| **Konfigurasjonsmønstre** | ✅ Detaljert veiledning | Seksjoner 1-10 ovenfor |
+| **Agentimplementeringer** | 🔨 Du bygger dette | ~40 timer utvikling |
+| **Frontend UI** | 🔨 Du bygger dette | ~25 timer utvikling |
+| **Datapipelines** | 🔨 Du bygger dette | ~10 timer utvikling |
+
+### Realitetsjekk: Hva som faktisk eksisterer
+
+**I repositoriet (klar nå):**
+- ✅ ARM-mal som distribuerer 15+ Azure-tjenester (azuredeploy.json)
+- ✅ Distribusjonsskript med validering (deploy.sh)
+- ✅ Parameterkonfigurasjon (azuredeploy.parameters.json)
+
+**Referert i dokumentet (du lager):**
+- 🔨 Agentimplementeringskode (~30-40 timer)
+- 🔨 Rutetjeneste (~12-16 timer)
+- 🔨 Frontend-applikasjon (~20-30 timer)
+- 🔨 Datasett-skript (~8-12 timer)
+- 🔨 Overvåkingsrammeverk (~10-15 timer)
+
+### Dine neste steg
+
+#### Hvis du vil distribuere infrastruktur (30 minutter)
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup
+```
+
+#### Hvis du vil bygge hele systemet (80-120 timer)
+1. ✅ Les og forstå dette arkitekturdokumentet (2-3 timer)
+2. ✅ Distribuer infrastruktur ved hjelp av ARM-malen (30 minutter)
+3. 🔨 Implementer agenter ved hjelp av referansekodemønstre (~40 timer)
+4. 🔨 Bygg rutetjeneste med FastAPI/Express (~15 timer)
+5. 🔨 Lag frontend UI med React/Vue (~25 timer)
+6. 🔨 Konfigurer datapipeline og søkeindeks (~10 timer)
+7. 🔨 Legg til overvåking og evaluering (~15 timer)
+8. ✅ Test, sikre og optimaliser (~10 timer)
+
+#### Hvis du vil lære multi-agent mønstre (studere)
+- 📖 Gå gjennom arkitekturdiagram og komponentforhold
+- 📖 Studer kodeeksempler for SearchTool, BingTool, AgentEvaluator
+- 📖 Forstå multi-region distribusjonsstrategi
+- 📖 Lær evaluerings- og sikkerhetsrammeverk
+- 📖 Bruk mønstre på dine egne prosjekter
+
+### Viktige punkter
+
+1. **Infrastruktur vs. applikasjon** - ARM-malen gir infrastruktur; agenter krever utvikling
+2. **Multi-region strategi** - Strategisk modellplassering reduserer kostnader og forbedrer pålitelighet
+3. **Evalueringsrammeverk** - Dedikert grader-modell muliggjør kontinuerlig kvalitetsvurdering
+4. **Sikkerhet først** - Red teaming og sårbarhetsskanning er essensielt for produksjon
+5. **Kostnadsoptimalisering** - Intelligent ruting mellom GPT-4o og GPT-4o-mini sparer 60-80%
+
+### Estimerte kostnader
+
+| Distribusjonsmodus | Infrastruktur/måned | Utvikling (engangskostnad) | Total første måned |
+|--------------------|---------------------|---------------------------|--------------------|
+| **Minimal** | $100-370 | $15K-25K (80-120 timer) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (samme innsats) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (samme innsats) | $16.2K-28.5K |
+
+**Merk:** Infrastruktur er <5% av total kostnad for nye implementeringer. Utviklingsinnsats er den største investeringen.
+
+### Relaterte ressurser
+
+- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - Infrastruktur oppsett
+- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Modell distribusjon
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Vektorsøk konfigurasjon
+- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Mikrotjenester distribusjon
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Overvåkingsoppsett
+
+### Spørsmål eller problemer?
+
+- 🐛 [Rapporter problemer](https://github.com/microsoft/AZD-for-beginners/issues) - Malfeil eller dokumentasjonsfeil
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Arkitekturspørsmål
+- 📖 [FAQ](../../resources/faq.md) - Vanlige spørsmål besvart
+- 🔧 [Feilsøkingsveiledning](../../docs/troubleshooting/common-issues.md) - Distribusjonsproblemer
+
+---
+
+**Dette omfattende scenariet gir en enterprise-grade arkitekturplan for multi-agent AI-systemer, komplett med infrastrukturmaler, implementeringsveiledning og produksjonsbeste praksis for å bygge sofistikerte kundestøtteløsninger med Azure Developer CLI.**
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

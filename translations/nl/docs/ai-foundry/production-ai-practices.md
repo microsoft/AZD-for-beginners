@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T06:50:19+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-21T16:44:06+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "nl"
 }
@@ -18,17 +18,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Overzicht
 
-Deze gids biedt uitgebreide best practices voor het implementeren van productieklare AI workloads met behulp van Azure Developer CLI (AZD). Gebaseerd op feedback van de Azure AI Foundry Discord-community en echte klantimplementaties, behandelen deze praktijken de meest voorkomende uitdagingen in productie AI-systemen.
+Deze gids biedt uitgebreide best practices voor het implementeren van productieklare AI workloads met behulp van Azure Developer CLI (AZD). Gebaseerd op feedback van de Microsoft Foundry Discord-community en echte klantimplementaties, behandelen deze praktijken de meest voorkomende uitdagingen in productie AI-systemen.
 
 ## Belangrijkste Uitdagingen
 
-Op basis van de resultaten van onze community-enquête zijn dit de grootste uitdagingen voor ontwikkelaars:
+Op basis van onze community-enquête zijn dit de grootste uitdagingen waar ontwikkelaars mee te maken hebben:
 
 - **45%** worstelt met multi-service AI-implementaties
 - **38%** heeft problemen met het beheer van referenties en geheimen  
 - **35%** vindt productievoorbereiding en schaalbaarheid moeilijk
-- **32%** heeft betere strategieën voor kostenoptimalisatie nodig
-- **29%** vereist verbeterde monitoring en probleemoplossing
+- **32%** heeft behoefte aan betere strategieën voor kostenoptimalisatie
+- **29%** vraagt om verbeterde monitoring en probleemoplossing
 
 ## Architectuurpatronen voor Productie AI
 
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Omgevingsspecifieke Configuraties**:
 
 ```bash
-# Development environment
+# Ontwikkelomgeving
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Productieomgeving
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI Kostenbeheer**:
 
 ```typescript
-// Application-level token optimization
+// Tokenoptimalisatie op applicatieniveau
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Context inkorten, niet gebruikersinvoer
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Ruwe schatting: 1 token ≈ 4 tekens
     return Math.ceil(text.length / 4);
   }
 }
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Controleer of alle vereiste services actief zijn
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Valideer OpenAI-modelimplementaties
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,14 +830,14 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Test AI-serviceconnectiviteit
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Productieklaar Checklist
+## Productievoorbereidingschecklist
 
 ### Beveiliging ✅
 - [ ] Alle services gebruiken beheerde identiteiten
@@ -868,14 +868,14 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Backup- en herstelplan
 - [ ] Circuit breakers geïmplementeerd
 - [ ] Retry policies geconfigureerd
-- [ ] Graceful degradation
+- [ ] Gracieuze degradatie
 - [ ] Gezondheidscontrole endpoints
 
 ### Kostenbeheer ✅
 - [ ] Budgetwaarschuwingen geconfigureerd
 - [ ] Juiste grootte van resources
-- [ ] Dev/test kortingen toegepast
-- [ ] Gereserveerde instanties gekocht
+- [ ] Kortingen voor dev/test toegepast
+- [ ] Gereserveerde instanties aangeschaft
 - [ ] Kostenmonitoring dashboard
 - [ ] Regelmatige kostenreviews
 
@@ -892,7 +892,7 @@ echo "Infrastructure validation completed successfully!"
 ### Typische Productiemetrics
 
 | Metric | Doel | Monitoring |
-|--------|--------|------------|
+|--------|------|------------|
 | **Reactietijd** | < 2 seconden | Application Insights |
 | **Beschikbaarheid** | 99.9% | Uptime monitoring |
 | **Foutpercentage** | < 0.1% | Applicatielogs |
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Load Testing
 
 ```bash
-# Load testing script for AI applications
+# Laadtestscript voor AI-toepassingen
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,15 +913,15 @@ python scripts/load_test.py \
 
 ## 🤝 Community Best Practices
 
-Gebaseerd op feedback van de Azure AI Foundry Discord-community:
+Gebaseerd op feedback van de Microsoft Foundry Discord-community:
 
-### Top Aanbevelingen van de Community:
+### Topaanbevelingen van de Community:
 
-1. **Begin Klein, Schaal Geleidelijk**: Start met basis-SKUs en schaal op basis van daadwerkelijk gebruik
-2. **Monitor Alles**: Stel uitgebreide monitoring in vanaf dag één
+1. **Begin Klein, Schaal Geleidelijk**: Start met basis-SKU's en schaal op basis van daadwerkelijk gebruik
+2. **Monitor Alles**: Stel uitgebreide monitoring vanaf dag één in
 3. **Automatiseer Beveiliging**: Gebruik infrastructuur als code voor consistente beveiliging
 4. **Test Grondig**: Neem AI-specifieke tests op in je pipeline
-5. **Plan voor Kosten**: Monitor tokengebruik en stel vroegtijdig budgetwaarschuwingen in
+5. **Plan voor Kosten**: Monitor tokengebruik en stel vroeg budgetwaarschuwingen in
 
 ### Veelvoorkomende Valkuilen om te Vermijden:
 
@@ -934,7 +934,7 @@ Gebaseerd op feedback van de Azure AI Foundry Discord-community:
 ## Aanvullende Bronnen
 
 - **Azure Well-Architected Framework**: [AI workload richtlijnen](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Documentatie**: [Officiële documentatie](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Foundry Documentatie**: [Officiële documentatie](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure kanaal](https://discord.gg/microsoft-azure)
 
@@ -951,5 +951,7 @@ Gebaseerd op feedback van de Azure AI Foundry Discord-community:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

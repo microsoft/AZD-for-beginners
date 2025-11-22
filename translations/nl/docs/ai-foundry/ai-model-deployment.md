@@ -1,37 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T06:50:59+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-21T16:46:12+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "nl"
 }
 -->
-# AI Model Deployment met Azure Developer CLI
+# AI Model Implementatie met Azure Developer CLI
 
 **Hoofdstuk Navigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
-- **⬅️ Vorige**: [Azure AI Foundry Integratie](azure-ai-foundry-integration.md)
+- **⬅️ Vorige**: [Microsoft Foundry Integratie](microsoft-foundry-integration.md)
 - **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../getting-started/configuration.md)
 
-Deze handleiding biedt uitgebreide instructies voor het implementeren van AI-modellen met behulp van AZD-sjablonen, van modelselectie tot productie-implementatiepatronen.
+Deze handleiding biedt uitgebreide instructies voor het implementeren van AI-modellen met AZD-sjablonen, van modelselectie tot productie-implementatiepatronen.
 
 ## Inhoudsopgave
 
-- [Strategie voor Modelselectie](../../../../docs/ai-foundry)
-- [AZD Configuratie voor AI-Modellen](../../../../docs/ai-foundry)
+- [Modelselectiestrategie](../../../../docs/ai-foundry)
+- [AZD Configuratie voor AI-modellen](../../../../docs/ai-foundry)
 - [Implementatiepatronen](../../../../docs/ai-foundry)
 - [Modelbeheer](../../../../docs/ai-foundry)
-- [Overwegingen voor Productie](../../../../docs/ai-foundry)
+- [Overwegingen voor productie](../../../../docs/ai-foundry)
 - [Monitoring en Observatie](../../../../docs/ai-foundry)
 
-## Strategie voor Modelselectie
+## Modelselectiestrategie
 
 ### Azure OpenAI Modellen
 
-Kies het juiste model voor jouw gebruiksscenario:
+Kies het juiste model voor jouw toepassing:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -59,18 +59,18 @@ services:
         ]
 ```
 
-### Capaciteitsplanning voor Modellen
+### Capaciteitsplanning voor modellen
 
-| Modeltype | Gebruiksscenario | Aanbevolen Capaciteit | Kostenoverwegingen |
-|-----------|------------------|-----------------------|--------------------|
+| Modeltype | Toepassing | Aanbevolen capaciteit | Kostenoverwegingen |
+|-----------|------------|-----------------------|--------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kosteneffectief voor de meeste workloads |
 | GPT-4 | Complexe redenering | 20-100 TPM | Hogere kosten, gebruik voor premium functies |
 | Text-embedding-ada-002 | Zoeken, RAG | 30-120 TPM | Essentieel voor semantisch zoeken |
 | Whisper | Spraak-naar-tekst | 10-50 TPM | Workloads voor audioprocessing |
 
-## AZD Configuratie voor AI-Modellen
+## AZD Configuratie voor AI-modellen
 
-### Bicep Template Configuratie
+### Bicep Sjabloon Configuratie
 
 Creëer modelimplementaties via Bicep-sjablonen:
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Configureer de omgeving van je applicatie:
 
 ```bash
-# .env configuration
+# .env configuratie
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -160,7 +160,7 @@ services:
 
 Geschikt voor:
 - Ontwikkeling en testen
-- Applicaties voor één markt
+- Toepassingen voor één markt
 - Kostenoptimalisatie
 
 ### Patroon 2: Implementatie in meerdere regio's
@@ -177,7 +177,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 Geschikt voor:
-- Wereldwijde applicaties
+- Wereldwijde toepassingen
 - Hoge beschikbaarheidseisen
 - Loadverdeling
 
@@ -273,14 +273,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Overwegingen voor Productie
+## Overwegingen voor productie
 
 ### Capaciteitsplanning
 
 Bereken de benodigde capaciteit op basis van gebruikspatronen:
 
 ```python
-# Capacity calculation example
+# Capaciteitsberekening voorbeeld
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Voorbeeldgebruik
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -412,12 +412,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Aangepaste Metrics
+### Aangepaste Statistieken
 
-Volg AI-specifieke metrics:
+Volg AI-specifieke statistieken:
 
 ```python
-# Custom telemetry for AI models
+# Aangepaste telemetrie voor AI-modellen
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implementeer monitoring van de gezondheid van AI-diensten:
 
 ```python
-# Health check endpoints
+# Gezondheidscontrole eindpunten
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Test OpenAI verbinding
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -480,9 +480,9 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Volgende Stappen
+## Volgende stappen
 
-1. **Bekijk de [Azure AI Foundry Integratie Handleiding](azure-ai-foundry-integration.md)** voor integratiepatronen van diensten
+1. **Bekijk de [Microsoft Foundry Integratie Handleiding](microsoft-foundry-integration.md)** voor integratiepatronen van diensten
 2. **Voltooi de [AI Workshop Lab](ai-workshop-lab.md)** voor praktische ervaring
 3. **Implementeer [Productie AI Praktijken](production-ai-practices.md)** voor bedrijfsimplementaties
 4. **Verken de [AI Probleemoplossingshandleiding](../troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Hoofdstuk Navigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
-- **⬅️ Vorige**: [Azure AI Foundry Integratie](azure-ai-foundry-integration.md)
+- **⬅️ Vorige**: [Microsoft Foundry Integratie](microsoft-foundry-integration.md)
 - **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,31 +1,31 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-18T06:37:13+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-21T15:55:14+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "fi"
 }
 -->
-# AI-Spesifinen Vianmääritysopas
+# AI-spesifinen vianmääritysopas
 
 **Luvun navigointi:**
 - **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
 - **📖 Nykyinen luku**: Luku 7 - Vianmääritys ja virheenkorjaus
 - **⬅️ Edellinen**: [Virheenkorjausopas](debugging.md)
-- **➡️ Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../ai-foundry/production-ai-practices.md)
-- **🤖 Liittyvä**: [Luku 2: AI-Ensimmäinen kehitys](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Liittyvä**: [Luku 2: AI-ensimmäinen kehitys](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**Edellinen:** [Tuotannon AI-käytännöt](../ai-foundry/production-ai-practices.md) | **Seuraava:** [AZD:n aloitus](../getting-started/README.md)
+**Edellinen:** [Tuotannon AI-käytännöt](../microsoft-foundry/production-ai-practices.md) | **Seuraava:** [AZD:n aloitus](../getting-started/README.md)
 
 Tämä kattava vianmääritysopas käsittelee yleisiä ongelmia AI-ratkaisujen käyttöönotossa AZD:n avulla ja tarjoaa ratkaisuja sekä virheenkorjaustekniikoita, jotka ovat erityisesti suunniteltu Azure AI -palveluille.
 
 ## Sisällysluettelo
 
 - [Azure OpenAI -palvelun ongelmat](../../../../docs/troubleshooting)
-- [Azure AI -haun ongelmat](../../../../docs/troubleshooting)
-- [Container Apps -sovellusten käyttöönotto-ongelmat](../../../../docs/troubleshooting)
-- [Autentikointi- ja käyttöoikeusvirheet](../../../../docs/troubleshooting)
+- [Azure AI Search -ongelmat](../../../../docs/troubleshooting)
+- [Container Apps -käyttöönotto-ongelmat](../../../../docs/troubleshooting)
+- [Todennus- ja käyttöoikeusvirheet](../../../../docs/troubleshooting)
 - [Mallin käyttöönoton epäonnistumiset](../../../../docs/troubleshooting)
 - [Suorituskyky- ja skaalausongelmat](../../../../docs/troubleshooting)
 - [Kustannusten ja kiintiöiden hallinta](../../../../docs/troubleshooting)
@@ -33,7 +33,7 @@ Tämä kattava vianmääritysopas käsittelee yleisiä ongelmia AI-ratkaisujen k
 
 ## Azure OpenAI -palvelun ongelmat
 
-### Ongelma: OpenAI-palvelu ei ole käytettävissä alueella
+### Ongelma: OpenAI-palvelu ei ole saatavilla alueella
 
 **Oireet:**
 ```
@@ -42,14 +42,14 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Syyt:**
 - Azure OpenAI ei ole saatavilla valitulla alueella
-- Kiintiö täynnä halutuilla alueilla
+- Kiintiö täynnä suosituilla alueilla
 - Alueelliset kapasiteettirajoitukset
 
 **Ratkaisut:**
 
 1. **Tarkista alueen saatavuus:**
 ```bash
-# List available regions for OpenAI
+# Luettele saatavilla olevat alueet OpenAI:lle
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -90,7 +90,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **Tarkista nykyinen kiintiö:**
 ```bash
-# Check quota usage
+# Tarkista kiintiön käyttö
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -98,7 +98,7 @@ az cognitiveservices usage list \
 
 2. **Pyydä kiintiön korotusta:**
 ```bash
-# Submit quota increase request
+# Lähetä kiintiön korotuspyyntö
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -135,21 +135,21 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Käytä tuettua API-versiota:**
 ```python
-# Use latest supported version
+# Käytä uusinta tuettua versiota
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **Tarkista API-version yhteensopivuus:**
 ```bash
-# List supported API versions
+# Luettele tuetut API-versiot
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI -haun ongelmat
+## Azure AI Search -ongelmat
 
-### Ongelma: Haun palvelutason hinnoittelu ei riitä
+### Ongelma: Hakupalvelun hinnoittelutaso ei riitä
 
 **Oireet:**
 ```
@@ -158,7 +158,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Ratkaisut:**
 
-1. **Päivitä palvelutaso:**
+1. **Päivitä hinnoittelutaso:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -190,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Ongelma: Indeksin luomisen epäonnistumiset
+### Ongelma: Indeksin luominen epäonnistuu
 
 **Oireet:**
 ```
@@ -199,9 +199,9 @@ Error: Cannot create index, insufficient permissions
 
 **Ratkaisut:**
 
-1. **Varmista haun palveluavaimet:**
+1. **Varmista hakupalvelun avaimet:**
 ```bash
-# Get search service admin key
+# Hanki hakupalvelun hallintanäppäin
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -209,7 +209,7 @@ az search admin-key show \
 
 2. **Tarkista indeksin skeema:**
 ```python
-# Validate index schema
+# Vahvista indeksin skeema
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -237,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps -sovellusten käyttöönotto-ongelmat
+## Container Apps -käyttöönotto-ongelmat
 
-### Ongelma: Container-sovelluksen rakennusvirheet
+### Ongelma: Container-rakennus epäonnistuu
 
 **Oireet:**
 ```
@@ -284,7 +284,7 @@ azure-cosmos==4.5.1
 
 3. **Lisää terveystarkistus:**
 ```python
-# main.py - Add health check endpoint
+# main.py - Lisää terveystarkistuspäätepiste
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -294,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Ongelma: Container-sovelluksen käynnistysvirheet
+### Ongelma: Container-sovelluksen käynnistys epäonnistuu
 
 **Oireet:**
 ```
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimoi mallin lataus:**
 ```python
-# Lazy load models to reduce startup time
+# Lataa mallit laiskasti käynnistysajan vähentämiseksi
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,21 +352,21 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # Alusta AI-asiakas täällä
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # Käynnistys
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # Sammutus
     pass
 
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Autentikointi- ja käyttöoikeusvirheet
+## Todennus- ja käyttöoikeusvirheet
 
 ### Ongelma: Hallitun identiteetin käyttöoikeus evätty
 
@@ -377,9 +377,9 @@ Error: Authentication failed for Azure OpenAI Service
 
 **Ratkaisut:**
 
-1. **Tarkista roolien määritykset:**
+1. **Tarkista roolimäärittelyt:**
 ```bash
-# Check current role assignments
+# Tarkista nykyiset roolimääritykset
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -402,9 +402,9 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Testaa autentikointi:**
+3. **Testaa todennus:**
 ```python
-# Test managed identity authentication
+# Testaa hallinnoitua identiteettitodennusta
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -417,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Ongelma: Key Vault -pääsy evätty
+### Ongelma: Key Vault -käyttö estetty
 
 **Oireet:**
 ```
@@ -445,7 +445,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Käytä RBAC:ia Access Policies -käytäntöjen sijaan:**
+2. **Käytä RBAC:ia Access Policies -asetusten sijaan:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -471,7 +471,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Tarkista saatavilla olevat mallit:**
 ```bash
-# List available models
+# Luettele saatavilla olevat mallit
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -510,7 +510,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **Vahvista malli ennen käyttöönottoa:**
 ```python
-# Pre-deployment model validation
+# Mallin validointi ennen käyttöönottoa
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -543,7 +543,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 1. **Ota käyttöön pyyntöjen aikakatkaisut:**
 ```python
-# Configure proper timeouts
+# Määritä oikeat aikakatkaisut
 import httpx
 
 client = httpx.AsyncClient(
@@ -556,9 +556,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Lisää välimuistitus vasteille:**
+2. **Lisää vasteiden välimuisti:**
 ```python
-# Redis cache for responses
+# Redis-välimuisti vastauksille
 import redis.asyncio as redis
 import json
 
@@ -610,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Ongelma: Muistin loppumisvirheet
+### Ongelma: Muistin loppuminen
 
 **Oireet:**
 ```
@@ -640,7 +640,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimoi muistin käyttö:**
 ```python
-# Memory-efficient model handling
+# Muistitehokas mallin käsittely
 import gc
 import psutil
 
@@ -650,14 +650,14 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # Tarkista muistin käyttö ennen käsittelyä
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # Pakota roskien keräys
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # Siivoa käsittelyn jälkeen
         gc.collect()
         return result
 ```
@@ -673,9 +673,9 @@ class MemoryOptimizedAI:
 
 **Ratkaisut:**
 
-1. **Ota käyttöön kustannusten hallintatyökalut:**
+1. **Ota käyttöön kustannusten hallinta:**
 ```python
-# Token usage tracking
+# Tokenien käytön seuranta
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -719,11 +719,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **Optimoi mallin valinta:**
 ```python
-# Cost-aware model selection
+# Kustannustietoinen mallin valinta
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # per 1K tokenia
+    'gpt-4': 0.03,          # per 1K tokenia
+    'gpt-35-turbo': 0.0015  # per 1K tokenia
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -738,19 +738,19 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 
 ## Virheenkorjaustyökalut ja -tekniikat
 
-### AZD:n virheenkorjauskomennot
+### AZD-virheenkorjauskomennot
 
 ```bash
-# Enable verbose logging
+# Ota käyttöön yksityiskohtainen lokitus
 azd up --debug
 
-# Check deployment status
+# Tarkista käyttöönoton tila
 azd show
 
-# View deployment logs
+# Näytä käyttöönoton lokit
 azd logs --follow
 
-# Check environment variables
+# Tarkista ympäristömuuttujat
 azd env get-values
 ```
 
@@ -761,7 +761,7 @@ azd env get-values
 import logging
 import json
 
-# Configure structured logging for AI applications
+# Määritä rakenteellinen lokitus tekoälysovelluksille
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -787,7 +787,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # Tarkista OpenAI-yhteys
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -795,7 +795,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Check Search service
+    # Tarkista hakupalvelu
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -845,23 +845,23 @@ def monitor_performance(func):
 | Virhekoodi | Kuvaus | Ratkaisu |
 |------------|-------------|----------|
 | 401 | Ei oikeuksia | Tarkista API-avaimet ja hallitun identiteetin konfiguraatio |
-| 403 | Pääsy estetty | Varmista RBAC-roolien määritykset |
+| 403 | Pääsy estetty | Vahvista RBAC-roolimäärittelyt |
 | 429 | Rajoitettu | Ota käyttöön uudelleenyritto logiikka eksponentiaalisella viiveellä |
 | 500 | Sisäinen palvelinvirhe | Tarkista mallin käyttöönoton tila ja lokit |
-| 503 | Palvelu ei ole käytettävissä | Varmista palvelun tila ja alueellinen saatavuus |
+| 503 | Palvelu ei ole käytettävissä | Vahvista palvelun tila ja alueellinen saatavuus |
 
 ## Seuraavat askeleet
 
 1. **Tutustu [AI-mallin käyttöönotto-oppaaseen](ai-model-deployment.md)** parhaiden käytäntöjen osalta
 2. **Suorita [Tuotannon AI-käytännöt](production-ai-practices.md)** yritysvalmiiden ratkaisujen osalta
-3. **Liity [Azure AI Foundry Discordiin](https://aka.ms/foundry/discord)** saadaksesi yhteisön tukea
-4. **Lähetä ongelmat** [AZD GitHub-repositorioon](https://github.com/Azure/azure-dev) AZD-spesifisiä ongelmia varten
+3. **Liity [Microsoft Foundry Discordiin](https://aka.ms/foundry/discord)** saadaksesi yhteisön tukea
+4. **Lähetä ongelmia** [AZD GitHub-repositorioon](https://github.com/Azure/azure-dev) AZD-spesifisiä ongelmia varten
 
 ## Resurssit
 
 - [Azure OpenAI -palvelun vianmääritys](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [Container Apps -vianmääritys](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI -haun vianmääritys](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Azure AI Search -vianmääritys](https://learn.microsoft.com/azure/search/search-monitor-logs)
 
 ---
 
@@ -869,11 +869,13 @@ def monitor_performance(func):
 - **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
 - **📖 Nykyinen luku**: Luku 7 - Vianmääritys ja virheenkorjaus
 - **⬅️ Edellinen**: [Virheenkorjausopas](debugging.md)
-- **➡️ Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../ai-foundry/production-ai-practices.md)
-- **🤖 Liittyvä**: [Luku 2: AI-Ensimmäinen kehitys](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Liittyvä**: [Luku 2: AI-ensimmäinen kehitys](../microsoft-foundry/microsoft-foundry-integration.md)
 - [Azure Developer CLI -vianmääritys](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T07:12:11+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-21T17:29:19+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "he"
 }
@@ -14,31 +14,31 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 פרק נוכחי**: פרק 7 - פתרון בעיות וניפוי שגיאות
 - **⬅️ קודם**: [בעיות נפוצות](common-issues.md)
 - **➡️ הבא**: [פתרון בעיות ספציפיות ל-AI](ai-troubleshooting.md)
-- **🚀 פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../ai-foundry/production-ai-practices.md)
+- **🚀 פרק הבא**: [פרק 8: דפוסי ייצור וארגונים](../microsoft-foundry/production-ai-practices.md)
 
 ## מבוא
 
-מדריך מקיף זה מספק אסטרטגיות מתקדמות לניפוי שגיאות, כלים וטכניקות לאבחון ופתרון בעיות מורכבות בפריסות Azure Developer CLI. תלמדו שיטות פתרון בעיות שיטתיות, טכניקות לניתוח לוגים, פרופיל ביצועים וכלים אבחוניים מתקדמים כדי לפתור בעיות בפריסה ובזמן ריצה בצורה יעילה.
+מדריך מקיף זה מספק אסטרטגיות מתקדמות לניפוי שגיאות, כלים וטכניקות לאבחון ופתרון בעיות מורכבות בפריסות Azure Developer CLI. תלמדו שיטות ניפוי שגיאות שיטתיות, טכניקות לניתוח לוגים, פרופיל ביצועים וכלים אבחוניים מתקדמים כדי לפתור בעיות בפריסה ובזמן ריצה בצורה יעילה.
 
 ## מטרות למידה
 
 עם סיום המדריך, תוכלו:
-- לשלוט בשיטות ניפוי שגיאות שיטתיות עבור בעיות Azure Developer CLI
+- לשלוט בשיטות ניפוי שגיאות שיטתיות לבעיות Azure Developer CLI
 - להבין תצורת לוגים מתקדמת וטכניקות לניתוח לוגים
 - ליישם אסטרטגיות פרופיל ביצועים וניטור
 - להשתמש בכלי אבחון ושירותי Azure לפתרון בעיות מורכבות
-- ליישם טכניקות ניפוי שגיאות רשת ואבטחה
+- ליישם ניפוי שגיאות רשת וטכניקות פתרון בעיות אבטחה
 - להגדיר ניטור והתראות מקיפות לזיהוי בעיות באופן יזום
 
 ## תוצאות למידה
 
 עם סיום המדריך, תוכלו:
-- ליישם את מתודולוגיית TRIAGE לניפוי שגיאות מורכבות בפריסות
+- ליישם את מתודולוגיית TRIAGE לניפוי שגיאות שיטתי של בעיות פריסה מורכבות
 - להגדיר ולנתח מידע לוגים ומעקב מקיף
-- להשתמש ב-Azure Monitor, Application Insights וכלים אבחוניים בצורה יעילה
+- להשתמש ב-Azure Monitor, Application Insights וכלי אבחון בצורה יעילה
 - לנפות בעיות חיבור רשת, אימות והרשאות באופן עצמאי
-- ליישם אסטרטגיות לניטור ואופטימיזציה של ביצועים
-- ליצור סקריפטים מותאמים אישית לניפוי שגיאות ואוטומציה עבור בעיות חוזרות
+- ליישם אסטרטגיות לניטור ביצועים ואופטימיזציה
+- ליצור סקריפטים מותאמים אישית לניפוי שגיאות ואוטומציה לבעיות חוזרות
 
 ## מתודולוגיית ניפוי שגיאות
 
@@ -48,32 +48,32 @@ CO_OP_TRANSLATOR_METADATA:
 - **I**solate: איזה רכיב נכשל?
 - **A**nalyze: מה הלוגים מספרים לנו?
 - **G**ather: אספו את כל המידע הרלוונטי
-- **E**scalate: מתי כדאי לפנות לעזרה נוספת
+- **E**scalate: מתי לפנות לעזרה נוספת
 
 ## הפעלת מצב ניפוי שגיאות
 
 ### משתני סביבה
 ```bash
-# Enable comprehensive debugging
+# הפעלת ניפוי שגיאות מקיף
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# ניפוי שגיאות של Azure CLI
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# השבתת טלמטריה לתוצאה נקייה יותר
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### תצורת ניפוי שגיאות
 ```bash
-# Set debug configuration globally
+# הגדר תצורת ניפוי שגיאות באופן גלובלי
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# הפעל רישום מעקב
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### ניתוח לוגים מובנה
 ```bash
-# Filter logs by level
+# סנן יומנים לפי רמה
 azd logs --level error --since 1h
 
-# Filter by service
+# סנן לפי שירות
 azd logs --service api --level debug
 
-# Export logs for analysis
+# ייצא יומנים לניתוח
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# נתח יומני JSON עם jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### התאמת לוגים
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - קישור יומנים בין שירותים
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# חיפוש בכל השירותים
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# חיפוש יומנים של Azure
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### שאילתות Azure Resource Graph
 ```bash
-# Query resources by tags
+# שאילתא משאבים לפי תגיות
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# מצא פריסות שנכשלו
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# בדוק את בריאות המשאב
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### ניפוי שגיאות רשת
 ```bash
-# Test connectivity between services
+# בדוק את הקישוריות בין השירותים
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# שימוש
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### ניפוי שגיאות בקונטיינרים
+### ניפוי שגיאות מכולות
 ```bash
-# Debug container app issues
+# ניפוי בעיות באפליקציית מכולה
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### ניפוי שגיאות חיבור למסד נתונים
 ```bash
-# Debug database connectivity
+# ניפוי שגיאות בחיבור למסד הנתונים
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -204,9 +204,9 @@ debug_database() {
 
 ## 🔬 ניפוי שגיאות ביצועים
 
-### ניטור ביצועי אפליקציות
+### ניטור ביצועי אפליקציה
 ```bash
-# Enable Application Insights debugging
+# הפעלת ניפוי שגיאות של Application Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# ניטור ביצועים מותאם אישית
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### ניתוח ניצול משאבים
 ```bash
-# Monitor resource usage
+# לנטר את השימוש במשאבים
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# הגדר סביבה לניפוי שגיאות
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# קבל נקודות קצה של שירות
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# בדוק נקודות קצה של בריאות
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# הפעל בדיקות
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# הפעל בדיקות אינטגרציה מותאמות אישית
 npm run test:integration
 ```
 
 ### בדיקות עומס לניפוי שגיאות
 ```bash
-# Simple load test to identify performance bottlenecks
+# בדיקת עומס פשוטה לזיהוי צווארי בקבוק בביצועים
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # שימוש ב-Apache Bench (התקנה: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # חילוץ מדדים מרכזיים
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # בדיקת כשלים
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### ניפוי שגיאות בתבניות Bicep
 ```bash
-# Validate Bicep templates with detailed output
+# אמת תבניות Bicep עם פלט מפורט
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # אימות תחביר
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # אימות Lint
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # מה-אם פריסה
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# ניפוי שגיאות פריסת תבנית
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### ניתוח מצב משאבים
 ```bash
-# Analyze resource states for inconsistencies
+# נתח מצבי משאבים לחוסר עקביות
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # רשום את כל המשאבים עם מצביהם
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # בדוק משאבים שנכשלו
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### ניפוי שגיאות בזרימת אימות
 ```bash
-# Debug Azure authentication
+# ניפוי שגיאות באימות Azure
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # פענוח אסימון JWT (דורש jq ו-base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# ניפוי שגיאות בגישה ל-Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### ניפוי שגיאות אבטחת רשת
 ```bash
-# Debug network security groups
+# ניפוי באגים בקבוצות אבטחת רשת
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # בדיקת חוקי אבטחה
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,17 +458,17 @@ debug_network_security() {
 }
 ```
 
-## 📱 ניפוי שגיאות ספציפיות לאפליקציות
+## 📱 ניפוי שגיאות ספציפיות לאפליקציה
 
 ### ניפוי שגיאות באפליקציות Node.js
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - אמצעי ביניים לדיבוג ב-Express
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // רישום פרטי הבקשה
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // החלפת res.json כדי לרשום תגובות
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### ניפוי שגיאות בשאילתות מסד נתונים
 ```javascript
-// database-debug.js - Database debugging utilities
+// כלי ניפוי שגיאות למסד נתונים
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -524,7 +524,7 @@ module.exports = DebuggingPool;
 ### תגובה לבעיות בייצור
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - דיבוג חירום בסביבת ייצור
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# מעבר לסביבה הנכונה
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# איסוף מידע קריטי
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### נהלי החזרה לאחור
 ```bash
-# Quick rollback script
+# סקריפט החזרה מהירה
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # החלף סביבה
     azd env select "$environment"
     
-    # Rollback application
+    # החזר את היישום
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # אמת את ההחזרה
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # בדוק נקודות קצה קריטיות
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -611,23 +611,23 @@ quick_rollback() {
 
 ## 📊 לוחות מחוונים לניפוי שגיאות
 
-### לוח מחוונים מותאם לניטור
+### לוח ניטור מותאם אישית
 ```bash
-# Create Application Insights queries for debugging
+# צור שאילתות Application Insights לצורך ניפוי שגיאות
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # שאילתה לשגיאות
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # שאילתה לבעיות ביצועים
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # שאילתה לכשלי תלות
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### איגוד לוגים
 ```bash
-# Aggregate logs from multiple sources
+# לאסוף יומנים ממקורות מרובים
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -665,7 +665,7 @@ aggregate_logs() {
 - `log-analyzer.py` - ניתוח לוגים מתקדם
 - `resource-validator.sh` - אימות תשתית
 
-### אינטגרציה לניטור
+### אינטגרציית ניטור
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
@@ -685,11 +685,11 @@ hooks:
 ## שיטות עבודה מומלצות
 
 1. **תמיד הפעילו לוגים לניפוי שגיאות** בסביבות שאינן ייצור
-2. **צרו מקרי בדיקה שניתנים לשחזור** עבור בעיות
+2. **צרו מקרי בדיקה שניתן לשחזר** לבעיות
 3. **תעדו נהלי ניפוי שגיאות** עבור הצוות שלכם
 4. **אוטומטו בדיקות בריאות** וניטור
 5. **שמרו על כלים לניפוי שגיאות מעודכנים** עם שינויים באפליקציה שלכם
-6. **תרגלו נהלי ניפוי שגיאות** בזמני שגרה
+6. **תרגלו נהלי ניפוי שגיאות** בזמנים שאינם אירועי חירום
 
 ## צעדים הבאים
 
@@ -700,7 +700,7 @@ hooks:
 
 ---
 
-**זכרו**: ניפוי שגיאות טוב הוא עניין של שיטתיות, יסודיות וסבלנות. הכלים והטכניקות הללו יעזרו לכם לאבחן בעיות בצורה מהירה ויעילה יותר.
+**זכרו**: ניפוי שגיאות טוב הוא להיות שיטתי, יסודי וסבלני. הכלים והטכניקות הללו יעזרו לכם לאבחן בעיות מהר וביעילות רבה יותר.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו נושאים באחריות לאי הבנות או פירושים שגויים הנובעים משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

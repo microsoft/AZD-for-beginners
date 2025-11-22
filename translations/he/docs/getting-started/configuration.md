@@ -1,91 +1,91 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T07:10:12+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-21T17:39:24+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "he"
 }
 -->
-# מדריך תצורה
+# מדריך הגדרות
 
-**ניווט בין פרקים:**
+**ניווט פרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 3 - תצורה ואימות
+- **📖 פרק נוכחי**: פרק 3 - הגדרות ואימות
 - **⬅️ קודם**: [הפרויקט הראשון שלך](first-project.md)
 - **➡️ הבא**: [מדריך פריסה](../deployment/deployment-guide.md)
 - **🚀 פרק הבא**: [פרק 4: תשתית כקוד](../deployment/deployment-guide.md)
 
 ## מבוא
 
-מדריך מקיף זה מכסה את כל ההיבטים של הגדרת Azure Developer CLI לעבודה מיטבית עם תהליכי פיתוח ופריסה. תלמדו על היררכיית התצורה, ניהול סביבות, שיטות אימות, ודפוסי תצורה מתקדמים המאפשרים פריסות יעילות ובטוחות ב-Azure.
+מדריך מקיף זה מכסה את כל ההיבטים של הגדרת Azure Developer CLI לעבודה מיטבית עם תהליכי פיתוח ופריסה. תלמדו על היררכיית ההגדרות, ניהול סביבות, שיטות אימות, ודפוסי הגדרה מתקדמים המאפשרים פריסות יעילות ובטוחות ב-Azure.
 
 ## מטרות למידה
 
 בסיום השיעור הזה, תוכלו:
-- לשלוט בהיררכיית התצורה של azd ולהבין כיצד ההגדרות מקבלות עדיפות
+- לשלוט בהיררכיית ההגדרות של azd ולהבין כיצד ההגדרות מקבלות עדיפות
 - להגדיר הגדרות גלובליות והגדרות ספציפיות לפרויקט בצורה יעילה
-- לנהל סביבות מרובות עם תצורות שונות
+- לנהל סביבות מרובות עם הגדרות שונות
 - ליישם דפוסי אימות והרשאה מאובטחים
-- להבין דפוסי תצורה מתקדמים עבור תרחישים מורכבים
+- להבין דפוסי הגדרה מתקדמים לתרחישים מורכבים
 
 ## תוצאות למידה
 
-לאחר השלמת השיעור, תוכלו:
+לאחר השלמת השיעור הזה, תוכלו:
 - להגדיר את azd לעבודה מיטבית עם תהליכי פיתוח
 - להקים ולנהל סביבות פריסה מרובות
-- ליישם שיטות ניהול תצורה מאובטחות
-- לפתור בעיות הקשורות לתצורה
+- ליישם שיטות ניהול הגדרות מאובטחות
+- לפתור בעיות הקשורות להגדרות
 - להתאים את התנהגות azd לדרישות ארגוניות ספציפיות
 
 מדריך מקיף זה מכסה את כל ההיבטים של הגדרת Azure Developer CLI לעבודה מיטבית עם תהליכי פיתוח ופריסה.
 
-## היררכיית תצורה
+## היררכיית הגדרות
 
-azd משתמש במערכת תצורה היררכית:
+azd משתמש במערכת הגדרות היררכית:
 1. **דגלי שורת פקודה** (עדיפות גבוהה ביותר)
 2. **משתני סביבה**
-3. **תצורת פרויקט מקומית** (`.azd/config.json`)
-4. **תצורה גלובלית של משתמש** (`~/.azd/config.json`)
+3. **הגדרות פרויקט מקומיות** (`.azd/config.json`)
+4. **הגדרות משתמש גלובליות** (`~/.azd/config.json`)
 5. **ערכי ברירת מחדל** (עדיפות נמוכה ביותר)
 
-## תצורה גלובלית
+## הגדרות גלובליות
 
-### הגדרת ערכי ברירת מחדל גלובליים
+### הגדרת ברירות מחדל גלובליות
 ```bash
-# Set default subscription
+# הגדר מנוי ברירת מחדל
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# הגדר מיקום ברירת מחדל
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# הגדר מוסכמת שמות קבוצת משאבים ברירת מחדל
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# הצג את כל ההגדרות הגלובליות
 azd config list
 
-# Remove a configuration
+# הסר הגדרה
 azd config unset defaults.location
 ```
 
 ### הגדרות גלובליות נפוצות
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# העדפות פיתוח
+azd config set alpha.enable true                    # הפעלת תכונות אלפא
+azd config set telemetry.enabled false             # השבתת טלמטריה
+azd config set output.format json                  # הגדרת פורמט פלט
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# הגדרות אבטחה
+azd config set auth.useAzureCliCredential true     # שימוש ב-Azure CLI לאימות
+azd config set tls.insecure false                  # אכיפת אימות TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# כוונון ביצועים
+azd config set provision.parallelism 5             # יצירת משאבים במקביל
+azd config set deploy.timeout 30m                  # זמן קצוב לפריסה
 ```
 
-## 🏗️ תצורת פרויקט
+## 🏗️ הגדרות פרויקט
 
 ### מבנה azure.yaml
 קובץ `azure.yaml` הוא הלב של פרויקט azd שלכם:
@@ -164,7 +164,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### אפשרויות תצורת שירות
+### אפשרויות הגדרת שירות
 
 #### סוגי מארחים
 ```yaml
@@ -213,18 +213,18 @@ services:
 
 ### יצירת סביבות
 ```bash
-# Create a new environment
+# צור סביבה חדשה
 azd env new development
 
-# Create with specific location
+# צור עם מיקום ספציפי
 azd env new staging --location "westus2"
 
-# Create from template
+# צור מתבנית
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### תצורת סביבה
-לכל סביבה יש תצורה משלה ב-`.azure/<env-name>/config.json`:
+### הגדרות סביבה
+לכל סביבה יש הגדרות משלה ב-`.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -248,74 +248,83 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 
 ### משתני סביבה
 ```bash
-# Set environment-specific variables
+# הגדר משתנים ספציפיים לסביבה
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# הצג משתני סביבה
 azd env get-values
 
-# Remove environment variable
+# פלט צפוי:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# הסר משתנה סביבה
 azd env unset DEBUG
+
+# אמת הסרה
+azd env get-values | grep DEBUG
+# (אמור להחזיר כלום)
 ```
 
 ### תבניות סביבה
 צרו `.azure/env.template` להגדרת סביבה עקבית:
 ```bash
-# Required variables
+# משתנים נדרשים
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# הגדרות יישום
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# הגדרות פיתוח אופציונליות
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 תצורת אימות
+## 🔐 הגדרות אימות
 
 ### אינטגרציה עם Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# השתמש באישורי Azure CLI (ברירת מחדל)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# התחבר עם דייר ספציפי
 az login --tenant <tenant-id>
 
-# Set default subscription
+# הגדר מנוי ברירת מחדל
 az account set --subscription <subscription-id>
 ```
 
-### אימות באמצעות Service Principal
-עבור תהליכי CI/CD:
+### אימות עם Service Principal
+לשימוש בצינורות CI/CD:
 ```bash
-# Set environment variables
+# הגדר משתני סביבה
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# או הגדר ישירות
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### זהות מנוהלת
-עבור סביבות המתארחות ב-Azure:
+לסביבות המתארחות ב-Azure:
 ```bash
-# Enable managed identity authentication
+# אפשר אימות זהות מנוהלת
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ תצורת תשתית
+## 🏗️ הגדרות תשתית
 
 ### פרמטרים של Bicep
-הגדירו פרמטרים של תשתית ב-`infra/main.parameters.json`:
+הגדירו פרמטרי תשתית ב-`infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -337,8 +346,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### תצורת Terraform
-עבור פרויקטים של Terraform, הגדירו ב-`infra/terraform.tfvars`:
+### הגדרות Terraform
+לפרויקטים של Terraform, הגדירו ב-`infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -346,9 +355,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 תצורת פריסה
+## 🚀 הגדרות פריסה
 
-### תצורת Build
+### הגדרות בנייה
 ```yaml
 # In azure.yaml
 services:
@@ -371,7 +380,7 @@ services:
       PYTHONPATH: src
 ```
 
-### תצורת Docker
+### הגדרות Docker
 ```yaml
 services:
   api:
@@ -387,17 +396,17 @@ services:
 ```
 דוגמה ל-`Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 תצורה מתקדמת
+## 🔧 הגדרות מתקדמות
 
-### התאמה אישית של שמות משאבים
+### מתן שמות מותאמים אישית למשאבים
 ```bash
-# Set naming conventions
+# הגדר מוסכמות שמות
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### תצורת רשת
+### הגדרות רשת
 ```yaml
 # In azure.yaml
 infra:
@@ -408,7 +417,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### תצורת ניטור
+### הגדרות ניטור
 ```yaml
 # In azure.yaml
 monitoring:
@@ -420,7 +429,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 תצורות ספציפיות לסביבה
+## 🎯 הגדרות ספציפיות לסביבה
 
 ### סביבה לפיתוח
 ```bash
@@ -449,21 +458,21 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 אימות תצורה
+## 🔍 אימות הגדרות
 
-### אימות תצורה
+### אימות הגדרות
 ```bash
-# Check configuration syntax
+# בדוק את תחביר התצורה
 azd config validate
 
-# Test environment variables
+# בדוק משתני סביבה
 azd env get-values
 
-# Validate infrastructure
+# אמת את התשתית
 azd provision --dry-run
 ```
 
-### סקריפטים לתצורה
+### סקריפטים להגדרות
 צרו סקריפטים לאימות ב-`scripts/`:
 
 ```bash
@@ -472,13 +481,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# בדוק משתני סביבה נדרשים
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# אמת את תחביר azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -500,7 +509,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. ארגנו קבצי תצורה
+### 2. ארגנו קבצי הגדרות
 ```
 .azure/
 ├── config.json              # Global project config
@@ -519,13 +528,13 @@ database:
 ### 3. שיקולים לניהול גרסאות
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # תצורות סביבה (מכילות מזהי משאבים)
+.azure/*/.env               # משתני סביבה (עשויים להכיל סודות)
+.env                        # קובץ סביבה מקומי
 ```
 
-### 4. תיעוד תצורה
-תעדו את התצורה שלכם ב-`CONFIG.md`:
+### 4. תיעוד הגדרות
+תעדו את ההגדרות שלכם ב-`CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -540,28 +549,92 @@ database:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 תרגול מעשי
+
+### תרגיל 1: הגדרת סביבות מרובות (15 דקות)
+
+**מטרה**: יצירת והגדרת שלוש סביבות עם הגדרות שונות
+
+```bash
+# צור סביבת פיתוח
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# צור סביבת בדיקות
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# צור סביבת ייצור
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# אמת כל סביבה
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**קריטריונים להצלחה:**
+- [ ] שלוש סביבות נוצרו בהצלחה
+- [ ] לכל סביבה יש הגדרות ייחודיות
+- [ ] ניתן לעבור בין סביבות ללא שגיאות
+- [ ] `azd env list` מציג את כל שלוש הסביבות
+
+### תרגיל 2: ניהול סודות (10 דקות)
+
+**מטרה**: תרגול הגדרה מאובטחת עם נתונים רגישים
+
+```bash
+# הגדר סודות (לא מוצגים בפלט)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# הגדר תצורה שאינה סודית
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# הצג סביבה (סודות צריכים להיות מוסתרים)
+azd env get-values
+
+# אמת שסודות נשמרים
+azd env get DB_PASSWORD  # צריך להציג ערך אמיתי
+```
+
+**קריטריונים להצלחה:**
+- [ ] סודות נשמרו מבלי להציגם במסוף
+- [ ] `azd env get-values` מציג סודות מוסתרים
+- [ ] הפקודה `azd env get <SECRET_NAME>` מחזירה את הערך האמיתי
+
 ## צעדים הבאים
 
-- [הפרויקט הראשון שלך](first-project.md) - יישום תצורה בפועל
-- [מדריך פריסה](../deployment/deployment-guide.md) - שימוש בתצורה לפריסה
-- [הקצאת משאבים](../deployment/provisioning.md) - תצורות מוכנות לייצור
+- [הפרויקט הראשון שלך](first-project.md) - יישום הגדרות בפועל
+- [מדריך פריסה](../deployment/deployment-guide.md) - שימוש בהגדרות לפריסה
+- [הקצאת משאבים](../deployment/provisioning.md) - הגדרות מוכנות לייצור
 
 ## מקורות
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [מדריך הגדרות azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [סכמת azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [משתני סביבה](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**ניווט בין פרקים:**
+**ניווט פרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 3 - תצורה ואימות
+- **📖 פרק נוכחי**: פרק 3 - הגדרות ואימות
 - **⬅️ קודם**: [הפרויקט הראשון שלך](first-project.md)
 - **➡️ פרק הבא**: [פרק 4: תשתית כקוד](../deployment/deployment-guide.md)
 - **שיעור הבא**: [הפרויקט הראשון שלך](first-project.md)
 
 ---
 
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור הסמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**הצהרת אחריות**:  
+מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. אנו לא נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

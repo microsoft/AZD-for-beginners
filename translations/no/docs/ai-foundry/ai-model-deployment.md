@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T06:15:10+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-21T15:04:33+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "no"
 }
@@ -10,24 +10,24 @@ CO_OP_TRANSLATOR_METADATA:
 # Distribusjon av AI-modeller med Azure Developer CLI
 
 **Kapittelnavigasjon:**
-- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
-- **⬅️ Forrige**: [Integrasjon med Azure AI Foundry](azure-ai-foundry-integration.md)
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 2 - AI-First Development
+- **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Neste**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
+- **🚀 Neste kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
 Denne veiledningen gir omfattende instruksjoner for distribusjon av AI-modeller ved bruk av AZD-maler, og dekker alt fra modellvalg til produksjonsmønstre.
 
 ## Innholdsfortegnelse
 
-- [Strategi for Modellvalg](../../../../docs/ai-foundry)
+- [Strategi for modellvalg](../../../../docs/ai-foundry)
 - [AZD-konfigurasjon for AI-modeller](../../../../docs/ai-foundry)
 - [Distribusjonsmønstre](../../../../docs/ai-foundry)
 - [Modellhåndtering](../../../../docs/ai-foundry)
 - [Produksjonsbetraktninger](../../../../docs/ai-foundry)
-- [Overvåking og Observasjon](../../../../docs/ai-foundry)
+- [Overvåking og observabilitet](../../../../docs/ai-foundry)
 
-## Strategi for Modellvalg
+## Strategi for modellvalg
 
 ### Azure OpenAI-modeller
 
@@ -61,8 +61,8 @@ services:
 
 ### Kapasitetsplanlegging for modeller
 
-| Modelltype | Bruksområde | Anbefalt kapasitet | Kostnadsbetraktninger |
-|------------|-------------|---------------------|-----------------------|
+| Modelltype | Bruksområde | Anbefalt kapasitet | Kostnadshensyn |
+|------------|-------------|--------------------|----------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kostnadseffektiv for de fleste arbeidsmengder |
 | GPT-4 | Kompleks resonnering | 20-100 TPM | Høyere kostnad, bruk for premiumfunksjoner |
 | Text-embedding-ada-002 | Søk, RAG | 30-120 TPM | Essensiell for semantisk søk |
@@ -70,9 +70,9 @@ services:
 
 ## AZD-konfigurasjon for AI-modeller
 
-### Konfigurasjon av Bicep-maler
+### Bicep-mal-konfigurasjon
 
-Opprett modelldistribusjoner gjennom Bicep-maler:
+Opprett modellutplasseringer gjennom Bicep-maler:
 
 ```bicep
 // infra/main.bicep
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Konfigurer applikasjonsmiljøet ditt:
 
 ```bash
-# .env configuration
+# .env-konfigurasjon
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -178,7 +178,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Best egnet for:
 - Globale applikasjoner
-- Krav til høy tilgjengelighet
+- Høye tilgjengelighetskrav
 - Lastfordeling
 
 ### Mønster 3: Hybrid distribusjon
@@ -240,7 +240,7 @@ Bruk AZD-hooks for modelloppdateringer:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# kroker/predeploy.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Beregn nødvendig kapasitet basert på bruksmønstre:
 
 ```python
-# Capacity calculation example
+# Kapasitetsberegningseksempel
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Eksempel på bruk
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -302,9 +302,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Konfigurasjon for automatisk skalering
+### Konfigurasjon for autoskalering
 
-Konfigurer automatisk skalering for Container Apps:
+Konfigurer autoskalering for Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Overvåking og Observasjon
+## Overvåking og observabilitet
 
 ### Integrasjon med Application Insights
 
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Spor AI-spesifikke metrikker:
 
 ```python
-# Custom telemetry for AI models
+# Tilpasset telemetri for AI-modeller
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implementer helsesjekk for AI-tjenester:
 
 ```python
-# Health check endpoints
+# Helsekontrollendepunkter
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Test OpenAI-tilkobling
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -480,12 +480,12 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Neste Steg
+## Neste steg
 
-1. **Gå gjennom [Veiledningen for Integrasjon med Azure AI Foundry](azure-ai-foundry-integration.md)** for mønstre for tjenesteintegrasjon
+1. **Gå gjennom [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for mønstre for tjenesteintegrasjon
 2. **Fullfør [AI Workshop Lab](ai-workshop-lab.md)** for praktisk erfaring
 3. **Implementer [Produksjonspraksis for AI](production-ai-practices.md)** for bedriftsdistribusjoner
-4. **Utforsk [Feilsøkingsveiledningen for AI](../troubleshooting/ai-troubleshooting.md)** for vanlige problemer
+4. **Utforsk [AI Feilsøkingsveiledning](../troubleshooting/ai-troubleshooting.md)** for vanlige problemer
 
 ## Ressurser
 
@@ -497,13 +497,15 @@ async def check_ai_models():
 ---
 
 **Kapittelnavigasjon:**
-- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 2 - AI-First Utvikling
-- **⬅️ Forrige**: [Integrasjon med Azure AI Foundry](azure-ai-foundry-integration.md)
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 2 - AI-First Development
+- **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Neste**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
+- **🚀 Neste kapittel**: [Kapittel 3: Konfigurasjon](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

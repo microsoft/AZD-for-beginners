@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T06:14:45+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-21T15:01:25+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "no"
 }
@@ -11,30 +11,30 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Kapittelnavigasjon:**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 8 - Produksjon & Bedriftsmønstre
-- **⬅️ Forrige Kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/debugging.md)
-- **⬅️ Også Relevant**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Kurs Fullført**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 8 - Produksjon & Bedriftsmønstre
+- **⬅️ Forrige kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/debugging.md)
+- **⬅️ Også relatert**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurs fullført**: [AZD For Nybegynnere](../../README.md)
 
 ## Oversikt
 
-Denne veiledningen gir omfattende beste praksis for å distribuere produksjonsklare AI-arbeidsbelastninger ved bruk av Azure Developer CLI (AZD). Basert på tilbakemeldinger fra Azure AI Foundry Discord-fellesskapet og reelle kundedistribusjoner, adresserer disse praksisene de vanligste utfordringene i produksjonssystemer for AI.
+Denne veiledningen gir omfattende beste praksis for å distribuere produksjonsklare AI-arbeidsbelastninger ved bruk av Azure Developer CLI (AZD). Basert på tilbakemeldinger fra Microsoft Foundry Discord-fellesskapet og reelle kundeimplementeringer, adresserer disse praksisene de vanligste utfordringene i produksjonssystemer for AI.
 
-## Nøkkelutfordringer som adresseres
+## Viktige utfordringer som adresseres
 
 Basert på resultatene fra vår fellesskapsundersøkelse, er dette de største utfordringene utviklere står overfor:
 
-- **45%** sliter med AI-distribusjoner som involverer flere tjenester
-- **38%** har problemer med håndtering av legitimasjon og hemmeligheter  
-- **35%** synes produksjonsklarhet og skalering er vanskelig
-- **32%** trenger bedre strategier for kostnadsoptimalisering
-- **29%** krever forbedret overvåking og feilsøking
+- **45 %** sliter med AI-distribusjoner som involverer flere tjenester
+- **38 %** har problemer med håndtering av legitimasjon og hemmeligheter  
+- **35 %** synes produksjonsklarhet og skalering er vanskelig
+- **32 %** trenger bedre strategier for kostnadsoptimalisering
+- **29 %** krever forbedret overvåking og feilsøking
 
-## Arkitekturmønstre for produksjonsklare AI-systemer
+## Arkitekturmønstre for produksjons-AI
 
 ### Mønster 1: Mikrotjenestearkitektur for AI
 
-**Når skal det brukes**: Komplekse AI-applikasjoner med flere funksjoner
+**Når brukes**: Komplekse AI-applikasjoner med flere funksjoner
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -53,7 +53,7 @@ Basert på resultatene fra vår fellesskapsundersøkelse, er dette de største u
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZD Implementering**:
+**AZD-implementering**:
 
 ```yaml
 # azure.yaml
@@ -76,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Mønster 2: Hendelsesdrevet AI-prosessering
+### Mønster 2: Hendelsesdrevet AI-behandling
 
-**Når skal det brukes**: Batchprosessering, dokumentanalyse, asynkrone arbeidsflyter
+**Når brukes**: Batchbehandling, dokumentanalyse, asynkrone arbeidsflyter
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -125,12 +125,12 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Sikkerhetsbeste praksis
+## Sikkerhetspraksis
 
 ### 1. Nulltillit-sikkerhetsmodell
 
 **Implementeringsstrategi**:
-- Ingen tjeneste-til-tjeneste-kommunikasjon uten autentisering
+- Ingen kommunikasjon mellom tjenester uten autentisering
 - Alle API-kall bruker administrerte identiteter
 - Nettverksisolasjon med private endepunkter
 - Tilgangskontroller med minst privilegium
@@ -156,7 +156,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Sikker håndtering av hemmeligheter
 
-**Mønster for Key Vault-integrasjon**:
+**Key Vault-integrasjonsmønster**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -251,9 +251,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Ytelse og skalering
 
-### 1. Strategier for automatisk skalering
+### 1. Strategier for autoskalering
 
-**Automatisk skalering for Container Apps**:
+**Autoskalering for Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -297,7 +297,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Hurtigbufferstrategier
+### 2. Hurtigbufringsstrategier
 
 **Redis Cache for AI-responser**:
 
@@ -369,10 +369,10 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Riktig dimensjonering av ressurser
 
-**Konfigurasjoner for spesifikke miljøer**:
+**Miljøspesifikke konfigurasjoner**:
 
 ```bash
-# Development environment
+# Utviklingsmiljø
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Produksjonsmiljø
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI kostnadsstyring**:
 
 ```typescript
-// Application-level token optimization
+// Tokenoptimalisering på applikasjonsnivå
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Avkort kontekst, ikke brukerinput
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Grov estimasjon: 1 token ≈ 4 tegn
     return Math.ceil(text.length / 4);
   }
 }
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Helsetester og oppetidsovervåking
+### 3. Helsesjekker og oppetidsovervåking
 
 ```bicep
 // Application Insights availability tests
@@ -670,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Databackup og gjenoppretting
+### 2. Sikkerhetskopiering og gjenoppretting av data
 
 ```bicep
 // Backup configuration for critical data
@@ -723,7 +723,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 
 ## DevOps og CI/CD-integrasjon
 
-### 1. GitHub Actions arbeidsflyt
+### 1. GitHub Actions-arbeidsflyt
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Sjekk om alle nødvendige tjenester kjører
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Valider OpenAI-modellutplasseringer
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Test AI-tjenestetilkobling
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -848,11 +848,11 @@ echo "Infrastructure validation completed successfully!"
 - [ ] WAF aktivert på offentlige endepunkter
 
 ### Ytelse ✅
-- [ ] Automatisk skalering konfigurert
-- [ ] Hurtigbuffer implementert
+- [ ] Autoskalering konfigurert
+- [ ] Hurtigbufring implementert
 - [ ] Lastbalansering satt opp
 - [ ] CDN for statisk innhold
-- [ ] Databaseforbindelsespooling
+- [ ] Tilkoblingspooling for databaser
 - [ ] Optimalisering av tokenbruk
 
 ### Overvåking ✅
@@ -860,50 +860,50 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Egendefinerte metrikker definert
 - [ ] Varslingsregler satt opp
 - [ ] Dashbord opprettet
-- [ ] Helsetester implementert
-- [ ] Retningslinjer for loggoppbevaring
+- [ ] Helsesjekker implementert
+- [ ] Loggoppbevaringspolicyer
 
 ### Pålitelighet ✅
 - [ ] Distribusjon på tvers av regioner
-- [ ] Backup- og gjenopprettingsplan
+- [ ] Sikkerhetskopierings- og gjenopprettingsplan
 - [ ] Kretsbrytere implementert
-- [ ] Retningslinjer for gjentatte forsøk konfigurert
+- [ ] Retningslinjer for gjentakelse konfigurert
 - [ ] Grasiøs degradering
-- [ ] Endepunkter for helsetester
+- [ ] Helsesjekkendepunkter
 
 ### Kostnadsstyring ✅
 - [ ] Budsjettvarsler konfigurert
 - [ ] Riktig dimensjonering av ressurser
-- [ ] Rabatter for utvikling/test brukt
-- [ ] Reservasjonsinstanser kjøpt
+- [ ] Rabatter for utvikling/test anvendt
+- [ ] Reserverte instanser kjøpt
 - [ ] Kostnadsovervåkingsdashbord
-- [ ] Regelmessige kostnadsanmeldelser
+- [ ] Regelmessige kostnadsgjennomganger
 
 ### Samsvar ✅
 - [ ] Krav til dataopphold oppfylt
-- [ ] Revisjonslogging aktivert
-- [ ] Samsvarspolicyer brukt
+- [ ] Revisorlogging aktivert
+- [ ] Samsvarspolicyer anvendt
 - [ ] Sikkerhetsgrunnlinjer implementert
 - [ ] Regelmessige sikkerhetsvurderinger
-- [ ] Plan for hendelsesrespons
+- [ ] Beredskapsplan for hendelser
 
-## Ytelsesbenchmarking
+## Ytelsesbenchmarker
 
 ### Typiske produksjonsmetrikker
 
 | Metrikk | Mål | Overvåking |
 |--------|--------|------------|
 | **Responstid** | < 2 sekunder | Application Insights |
-| **Tilgjengelighet** | 99.9% | Oppetidsovervåking |
-| **Feilrate** | < 0.1% | Applikasjonslogger |
+| **Tilgjengelighet** | 99,9 % | Oppetidsovervåking |
+| **Feilrate** | < 0,1 % | Applikasjonslogger |
 | **Tokenbruk** | < $500/måned | Kostnadsstyring |
-| **Samtidige brukere** | 1000+ | Lasttesting |
+| **Samtidige brukere** | 1000+ | Belastningstesting |
 | **Gjenopprettingstid** | < 1 time | Katastrofegjenopprettingstester |
 
-### Lasttesting
+### Belastningstesting
 
 ```bash
-# Load testing script for AI applications
+# Lasttesting skript for AI-applikasjoner
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,14 +913,14 @@ python scripts/load_test.py \
 
 ## 🤝 Fellesskapets beste praksis
 
-Basert på tilbakemeldinger fra Azure AI Foundry Discord-fellesskapet:
+Basert på tilbakemeldinger fra Microsoft Foundry Discord-fellesskapet:
 
 ### Topp anbefalinger fra fellesskapet:
 
-1. **Start smått, skaler gradvis**: Begynn med grunnleggende SKUs og skaler opp basert på faktisk bruk
+1. **Start smått, skaler gradvis**: Begynn med grunnleggende SKU-er og skaler opp basert på faktisk bruk
 2. **Overvåk alt**: Sett opp omfattende overvåking fra dag én
 3. **Automatiser sikkerhet**: Bruk infrastruktur som kode for konsistent sikkerhet
-4. **Test grundig**: Inkluder AI-spesifikk testing i din pipeline
+4. **Test grundig**: Inkluder AI-spesifikk testing i arbeidsflyten din
 5. **Planlegg for kostnader**: Overvåk tokenbruk og sett opp budsjettvarsler tidlig
 
 ### Vanlige fallgruver å unngå:
@@ -929,27 +929,29 @@ Basert på tilbakemeldinger fra Azure AI Foundry Discord-fellesskapet:
 - ❌ Ikke sette opp riktig overvåking
 - ❌ Ignorere kostnadsoptimalisering
 - ❌ Ikke teste feilsituasjoner
-- ❌ Distribuere uten helsetester
+- ❌ Distribuere uten helsesjekker
 
 ## Tilleggsressurser
 
 - **Azure Well-Architected Framework**: [Veiledning for AI-arbeidsbelastninger](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Dokumentasjon**: [Offisielle dokumenter](https://learn.microsoft.com/azure/ai-studio/)
-- **Fellesskapsmaler**: [Azure Eksempler](https://github.com/Azure-Samples)
-- **Discord-fellesskap**: [#Azure kanal](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry-dokumentasjon**: [Offisielle dokumenter](https://learn.microsoft.com/azure/ai-studio/)
+- **Fellesskapsmaler**: [Azure-eksempler](https://github.com/Azure-Samples)
+- **Discord-fellesskap**: [#Azure-kanal](https://discord.gg/microsoft-azure)
 
 ---
 
 **Kapittelnavigasjon:**
 - **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 8 - Produksjon & Bedriftsmønstre
-- **⬅️ Forrige Kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/debugging.md)
-- **⬅️ Også Relevant**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Kurs Fullført**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 8 - Produksjon & Bedriftsmønstre
+- **⬅️ Forrige kapittel**: [Kapittel 7: Feilsøking](../troubleshooting/debugging.md)
+- **⬅️ Også relatert**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎆 Kurs fullført**: [AZD For Nybegynnere](../../README.md)
 
 **Husk**: Produksjonsklare AI-arbeidsbelastninger krever nøye planlegging, overvåking og kontinuerlig optimalisering. Start med disse mønstrene og tilpass dem til dine spesifikke behov.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

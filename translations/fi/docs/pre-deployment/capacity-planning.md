@@ -1,36 +1,43 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:33:00+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-21T15:44:20+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "fi"
 }
 -->
-# Kapasiteettisuunnittelu: Azure-kvottien ja -rajoitusten ymmärtäminen - Azure-resurssien saatavuus ja rajoitukset
+# Kapasiteettisuunnittelu - Azure-resurssien saatavuus ja rajat
+
+**Luvun navigointi:**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 6 - Ennen käyttöönottoa tehtävä validointi ja suunnittelu
+- **⬅️ Edellinen luku**: [Luku 5: Moniagenttiset tekoälyratkaisut](../../examples/retail-scenario.md)
+- **➡️ Seuraava**: [SKU-valinta](sku-selection.md)
+- **🚀 Seuraava luku**: [Luku 7: Vianetsintä](../troubleshooting/common-issues.md)
 
 ## Johdanto
 
-Tämä kattava opas auttaa sinua suunnittelemaan ja varmistamaan Azure-resurssien kapasiteetin ennen käyttöönottoa Azure Developer CLI:n avulla. Opit arvioimaan kiintiöitä, saatavuutta ja alueellisia rajoituksia varmistaaksesi onnistuneet käyttöönotot samalla kun optimoit kustannuksia ja suorituskykyä. Hallitse kapasiteettisuunnittelutekniikoita eri sovellusarkkitehtuureille ja skaalaustilanteille.
+Tämä kattava opas auttaa sinua suunnittelemaan ja validoimaan Azure-resurssien kapasiteettia ennen käyttöönottoa Azure Developer CLI:n avulla. Opit arvioimaan kiintiöitä, saatavuutta ja alueellisia rajoituksia varmistaaksesi onnistuneet käyttöönotot samalla kun optimoit kustannuksia ja suorituskykyä. Hallitse kapasiteettisuunnittelun tekniikat eri sovellusarkkitehtuureille ja skaalaustilanteille.
 
 ## Oppimistavoitteet
 
 Tämän oppaan suorittamalla opit:
-- Ymmärtämään Azure-kvotat, rajoitukset ja alueelliset saatavuusrajoitukset
+- Ymmärtämään Azuren kiintiöt, rajat ja alueelliset saatavuusrajoitukset
 - Hallitsemaan tekniikoita resurssien saatavuuden ja kapasiteetin tarkistamiseksi ennen käyttöönottoa
 - Toteuttamaan automatisoituja kapasiteetin validointi- ja seurantastrategioita
-- Suunnittelemaan sovelluksia oikealla resurssikoolla ja skaalausnäkökohdilla
+- Suunnittelemaan sovelluksia oikeilla resurssikoko- ja skaalausnäkökohdilla
 - Soveltamaan kustannusoptimointistrategioita älykkään kapasiteettisuunnittelun avulla
-- Konfiguroimaan hälytyksiä ja seurantaa kiintiön käytölle ja resurssien saatavuudelle
+- Konfiguroimaan hälytyksiä ja seurantaa kiintiöiden käytölle ja resurssien saatavuudelle
 
 ## Oppimistulokset
 
 Oppaan suorittamisen jälkeen pystyt:
-- Arvioimaan ja validoimaan Azure-resurssien kapasiteettivaatimukset ennen käyttöönottoa
-- Luomaan automatisoituja skriptejä kapasiteetin tarkistamiseen ja kiintiön seurantaan
-- Suunnittelemaan skaalautuvia arkkitehtuureja, jotka huomioivat alueelliset ja tilauskohtaiset rajoitukset
-- Toteuttamaan kustannustehokkaita resurssikokostrategioita eri työkuormatyypeille
-- Konfiguroimaan ennakoivaa seurantaa ja hälytyksiä kapasiteettiin liittyvien ongelmien varalta
+- Arvioimaan ja validoimaan Azuren resurssikapasiteettivaatimukset ennen käyttöönottoa
+- Luomaan automatisoituja skriptejä kapasiteetin tarkistamiseen ja kiintiöiden seurantaan
+- Suunnittelemaan skaalautuvia arkkitehtuureja, jotka huomioivat alueelliset ja tilauskohtaiset rajat
+- Toteuttamaan kustannustehokkaita resurssikoko-strategioita eri työkuormatyypeille
+- Konfiguroimaan ennakoivaa seurantaa ja hälytyksiä kapasiteettiin liittyville ongelmille
 - Suunnittelemaan monialueellisia käyttöönottoja oikealla kapasiteetin jakautumisella
 
 ## Miksi kapasiteettisuunnittelu on tärkeää
@@ -38,34 +45,34 @@ Oppaan suorittamisen jälkeen pystyt:
 Ennen sovellusten käyttöönottoa sinun tulee varmistaa:
 - **Riittävät kiintiöt** tarvittaville resursseille
 - **Resurssien saatavuus** kohdealueellasi
-- **Palvelutason saatavuus** tilausmallillesi
+- **Palvelutason saatavuus** tilausmallisi mukaan
 - **Verkkokapasiteetti** odotetulle liikenteelle
-- **Kustannusoptimointi** oikean koon avulla
+- **Kustannusoptimointi** oikean kokoisten resurssien avulla
 
-## 📊 Azure-kvottien ja -rajoitusten ymmärtäminen
+## 📊 Azuren kiintiöiden ja rajojen ymmärtäminen
 
-### Rajoitusten tyypit
-1. **Tilaustason kiintiöt** - Maksimiresurssit per tilaus
-2. **Alueelliset kiintiöt** - Maksimiresurssit per alue
-3. **Resurssikohtaiset rajoitukset** - Rajoitukset yksittäisille resurssityypeille
-4. **Palvelutason rajoitukset** - Rajoitukset palvelusuunnitelmasi perusteella
+### Rajojen tyypit
+1. **Tilauskohtaiset kiintiöt** - Maksimiresurssit per tilaus
+2. **Aluekohtaiset kiintiöt** - Maksimiresurssit per alue
+3. **Resurssikohtaiset rajat** - Rajat yksittäisille resurssityypeille
+4. **Palvelutason rajat** - Rajat palvelusuunnitelmasi mukaan
 
 ### Yleiset resurssikiintiöt
 ```bash
-# Check current quota usage
+# Tarkista nykyinen kiintiön käyttö
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Tarkista tiettyjen resurssien kiintiöt
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Kapasiteettitarkistukset ennen käyttöönottoa
+## Ennen käyttöönottoa tehtävät kapasiteettitarkistukset
 
 ### Automatisoitu kapasiteetin validointiskripti
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Vahvista Azuren kapasiteetti ennen käyttöönottoa
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Funktio tarkistaa kiintiön käyttö
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,10 +118,10 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Tarkista eri resurssikiintiöt
+check_quota "compute" 4      # Tarvitaan 4 vCPU:ta
+check_quota "storage" 2      # Tarvitaan 2 tallennustiliä
+check_quota "network" 1      # Tarvitaan 1 virtuaalinen verkko
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
@@ -122,16 +129,16 @@ echo "✅ Capacity check completed successfully!"
 
 ### Palvelukohtaiset kapasiteettitarkistukset
 
-#### App Service -kapasiteetti
+#### Sovelluspalvelun kapasiteetti
 ```bash
-# Check App Service Plan availability
+# Tarkista App Service Planin saatavuus
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Tarkista saatavilla olevat SKU:t alueella
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Ehdota vaihtoehtoisia alueita
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Tarkista nykyinen käyttö
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Käyttö
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Tietokantakapasiteetti
 ```bash
-# Check PostgreSQL capacity
+# Tarkista PostgreSQL-kapasiteetti
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Tarkista, onko SKU saatavilla
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Näytä saatavilla olevat SKU:t
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Tarkista Cosmos DB -kapasiteetti
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Tarkista alueen saatavuus
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Tarkista, tukeeko palvelimetonta (tarvittaessa)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -211,15 +218,15 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Apps -kapasiteetti
+#### Konttisovellusten kapasiteetti
 ```bash
-# Check Container Apps capacity
+# Tarkista Container Apps -kapasiteetti
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Tarkista, onko Container Apps saatavilla alueella
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Tarkista nykyinen ympäristöjen määrä
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Container Apps -palvelulla on rajoitus, 15 ympäristöä per alue
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Näytä saatavilla olevat alueet
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,7 +263,7 @@ check_container_apps_capacity() {
 
 ### Palvelun saatavuus alueittain
 ```bash
-# Check service availability across regions
+# Tarkista palvelun saatavuus eri alueilla
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Tarkista kaikki palvelut
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Aluevalintasuositukset
 ```bash
-# Recommend optimal regions based on requirements
+# Suosittele parhaita alueita vaatimusten perusteella
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "edullinen" | "suorituskyky" | "vaatimustenmukaisuus"
     
     echo "Region recommendations for: $requirements"
     
@@ -321,20 +328,20 @@ recommend_region() {
 
 ## 💰 Kustannussuunnittelu ja arviointi
 
-### Resurssikustannusten arviointi
+### Resurssien kustannusarviointi
 ```bash
-# Estimate deployment costs
+# Arvioi käyttöönoton kustannukset
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Luo väliaikainen resurssiryhmä arviointia varten
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Ota infrastruktuuri käyttöön validointitilassa
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Poista väliaikainen resurssiryhmä
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,10 +363,10 @@ estimate_costs() {
 
 ### SKU-optimointisuositukset
 ```bash
-# Recommend optimal SKUs based on requirements
+# Suosittele optimaalisia SKU:ita vaatimusten perusteella
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "dev" | "staging" | "production"
+    local workload_type=$2  # "kehitys" | "testaus" | "tuotanto"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -424,27 +431,27 @@ recommend_sku() {
 ### Kattava ennakkotarkistusskripti
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Täydellinen käyttöönoton esivarmistus
 
 set -e
 
-# Configuration
+# Määritykset
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Värit tulosteelle
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Ei väriä
 
-# Logging functions
+# Lokitoiminnot
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Lataa määritykset
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Tarkistus 1: Todennus
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Tarkistus 2: Alueellinen saatavuus
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Tarkistus 3: Kiintiön tarkistus
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPU-kiintiö
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Tallennustilin kiintiö
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Tarkistus 4: Palvelun saatavuus
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Tarkistus 5: Verkon kapasiteetti
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Tarkistus 6: Resurssien nimeämisen tarkistus
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Tarkistus 7: Kustannusarvio
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Tarkistus 8: Mallin tarkistus
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Lopullinen yhteenveto
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -658,14 +665,14 @@ echo "  3. Verify application health post-deployment"
 
 ### Reaaliaikainen kapasiteetin seuranta
 ```bash
-# Monitor capacity during deployment
+# Seuraa kapasiteettia käyttöönoton aikana
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Tarkista käyttöönoton tila
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Tarkista nykyinen resurssien käyttö
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -712,11 +719,11 @@ hooks:
 ## Parhaat käytännöt
 
 1. **Suorita aina kapasiteettitarkistukset** ennen käyttöönottoa uusille alueille
-2. **Seuraa kiintiön käyttöä säännöllisesti** välttääksesi yllätykset
+2. **Seuraa kiintiöiden käyttöä säännöllisesti** välttääksesi yllätykset
 3. **Suunnittele kasvua varten** tarkistamalla tulevat kapasiteettitarpeet
 4. **Käytä kustannusarviotyökaluja** välttääksesi yllättävät laskut
 5. **Dokumentoi kapasiteettivaatimukset** tiimillesi
-6. **Automatisoi kapasiteetin validointi** CI/CD-putkissa
+6. **Automatisoi kapasiteetin validointi** CI/CD-putkistoissa
 7. **Huomioi alueellinen varakapasiteetti** tarpeet
 
 ## Seuraavat askeleet
@@ -728,10 +735,10 @@ hooks:
 
 ## Lisäresurssit
 
-- [Azure-tilausrajoitukset](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure-hinnoittelulaskuri](https://azure.microsoft.com/pricing/calculator/)
-- [Azure-kustannusten hallinta](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure-alueellinen saatavuus](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azuren tilausrajat](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azuren hinnoittelulaskuri](https://azure.microsoft.com/pricing/calculator/)
+- [Azuren kustannusten hallinta](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azuren alueellinen saatavuus](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Tärkeissä tiedoissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

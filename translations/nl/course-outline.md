@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "aace36eff845763a5b041a4ed9a33e02",
-  "translation_date": "2025-09-24T22:36:41+00:00",
+  "original_hash": "2a0861541126250c3558d667e9b13c50",
+  "translation_date": "2025-11-21T16:20:15+00:00",
   "source_file": "course-outline.md",
   "language_code": "nl"
 }
@@ -11,12 +11,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Cursusoverzicht
 
-Beheers Azure Developer CLI (azd) via gestructureerde hoofdstukken die zijn ontworpen voor stapsgewijze leerervaring. **Speciale focus op het implementeren van AI-toepassingen met integratie van Azure AI Foundry.**
+Beheers Azure Developer CLI (azd) via gestructureerde hoofdstukken die zijn ontworpen voor stapsgewijze leerervaring. **Speciale focus op AI-applicatie-implementatie met integratie van Microsoft Foundry.**
 
 ### Waarom deze cursus essentieel is voor moderne ontwikkelaars
 
-Gebaseerd op inzichten uit de Azure AI Foundry Discord-community, **wil 45% van de ontwikkelaars AZD gebruiken voor AI-werkbelastingen**, maar zij ondervinden uitdagingen met:
-- Complexe AI-architecturen met meerdere services
+Gebaseerd op inzichten uit de Microsoft Foundry Discord-community, **wil 45% van de ontwikkelaars AZD gebruiken voor AI-werkbelastingen**, maar zij ondervinden uitdagingen met:
+- Complexe multi-service AI-architecturen
 - Best practices voor productie-implementatie van AI
 - Integratie en configuratie van Azure AI-services
 - Kostenoptimalisatie voor AI-werkbelastingen
@@ -24,161 +24,161 @@ Gebaseerd op inzichten uit de Azure AI Foundry Discord-community, **wil 45% van 
 
 ### Kernleerdoelen
 
-Na het voltooien van deze gestructureerde cursus kun je:
-- **AZD Basisprincipes Beheersen**: Kernconcepten, installatie en configuratie
-- **AI-toepassingen Implementeren**: Gebruik AZD met Azure AI Foundry-services
-- **Infrastructure as Code Implementeren**: Beheer Azure-resources met Bicep-sjablonen
-- **Implementaties Troubleshooten**: Los veelvoorkomende problemen op en debug fouten
-- **Optimaliseren voor Productie**: Beveiliging, schaalbaarheid, monitoring en kostenbeheer
-- **Multi-Agent Oplossingen Bouwen**: Complexe AI-architecturen implementeren
+Door deze gestructureerde cursus te voltooien, leer je:
+- **Beheers AZD Fundamentals**: Kernconcepten, installatie en configuratie
+- **Implementeer AI-applicaties**: Gebruik AZD met Microsoft Foundry-services
+- **Voer Infrastructure as Code uit**: Beheer Azure-resources met Bicep-sjablonen
+- **Los implementatieproblemen op**: Los veelvoorkomende problemen op en debug
+- **Optimaliseer voor productie**: Beveiliging, schaalbaarheid, monitoring en kostenbeheer
+- **Bouw Multi-Agent Oplossingen**: Implementeer complexe AI-architecturen
 
 ## 🎓 Workshop Leerervaring
 
-### Flexibele Leeropties
-Deze cursus ondersteunt zowel **zelfstandig leren op eigen tempo** als **begeleide workshops**, zodat deelnemers praktische vaardigheden kunnen ontwikkelen door interactieve oefeningen.
+### Flexibele leermogelijkheden
+Deze cursus is ontworpen om zowel **zelfstandig leren op eigen tempo** als **gefaciliteerde workshopsessies** te ondersteunen, zodat deelnemers praktische vaardigheden kunnen ontwikkelen door interactieve oefeningen.
 
-#### 🚀 Zelfstandig Leren
+#### 🚀 Zelfstandig leren
 **Perfect voor individuele ontwikkelaars en doorlopend leren**
 
 **Kenmerken:**
-- **Browser-gebaseerde Interface**: Volledig MkDocs-aangedreven workshop toegankelijk via elke webbrowser
-- **GitHub Codespaces Integratie**: Eén klik voor een ontwikkelomgeving met vooraf geconfigureerde tools
-- **Interactieve DevContainer Omgeving**: Geen lokale installatie nodig - direct beginnen met coderen
-- **Voortgangscontrole**: Ingebouwde checkpoints en validatieoefeningen
-- **Community Ondersteuning**: Toegang tot Azure Discord-kanalen voor vragen en samenwerking
+- **Browser-gebaseerde interface**: Voltooi MkDocs-aangedreven workshop toegankelijk via elke webbrowser
+- **GitHub Codespaces-integratie**: Eén klik voor een ontwikkelomgeving met vooraf geconfigureerde tools
+- **Interactieve DevContainer-omgeving**: Geen lokale installatie nodig - begin direct met coderen
+- **Voortgang bijhouden**: Ingebouwde checkpoints en validatieoefeningen
+- **Communityondersteuning**: Toegang tot Azure Discord-kanalen voor vragen en samenwerking
 
 **Leerstructuur:**
-- **Flexibele Timing**: Voltooi hoofdstukken in je eigen tempo over dagen of weken
-- **Checkpoint Systeem**: Valideer je kennis voordat je doorgaat naar complexere onderwerpen
-- **Bibliotheek met Bronnen**: Uitgebreide documentatie, voorbeelden en probleemoplossingsgidsen
-- **Portfolio Ontwikkeling**: Bouw implementeerbare projecten voor professionele portfolio's
+- **Flexibele timing**: Voltooi hoofdstukken in je eigen tempo over dagen of weken
+- **Checkpoint-systeem**: Valideer je kennis voordat je doorgaat naar complexere onderwerpen
+- **Bronbibliotheek**: Uitgebreide documentatie, voorbeelden en probleemoplossingsgidsen
+- **Portfolio-ontwikkeling**: Bouw implementeerbare projecten voor professionele portfolio's
 
-**Aan de slag (Zelfstandig):**
+**Aan de slag (zelfstandig leren):**
 ```bash
-# Option 1: GitHub Codespaces (Recommended)
-# Navigate to the repository and click "Code" → "Create codespace on main"
+# Optie 1: GitHub Codespaces (Aanbevolen)
+# Navigeer naar de repository en klik op "Code" → "Create codespace on main"
 
-# Option 2: Local Development
+# Optie 2: Lokale Ontwikkeling
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Follow setup instructions in workshop/README.md
+# Volg de installatie-instructies in workshop/README.md
 ```
 
-#### 🏛️ Begeleide Workshops
-**Ideaal voor bedrijfsopleidingen, bootcamps en onderwijsinstellingen**
+#### 🏛️ Gefaciliteerde workshopsessies
+**Ideaal voor bedrijfstrainingen, bootcamps en onderwijsinstellingen**
 
-**Workshop Formaat Opties:**
+**Workshopformaatopties:**
 
-**📚 Academische Cursusintegratie (8-12 weken)**
-- **Universitaire Programma's**: Semesterlange cursus met wekelijkse sessies van 2 uur
-- **Bootcamp Formaat**: Intensieve 3-5 daagse programma's met dagelijkse sessies van 6-8 uur
+**📚 Academische cursusintegratie (8-12 weken)**
+- **Universitaire programma's**: Semesterlange cursus met wekelijkse sessies van 2 uur
+- **Bootcamp-formaat**: Intensief programma van 3-5 dagen met dagelijkse sessies van 6-8 uur
 - **Bedrijfstraining**: Maandelijkse teamsessies met praktische projectimplementatie
-- **Beoordelingskader**: Gegradeerde opdrachten, peer reviews en eindprojecten
+- **Beoordelingskader**: Beoordeelde opdrachten, peer reviews en eindprojecten
 
-**🚀 Intensieve Workshop (1-3 dagen)**
+**🚀 Intensieve workshop (1-3 dagen)**
 - **Dag 1**: Basis + AI-ontwikkeling (Hoofdstukken 1-2) - 6 uur
-- **Dag 2**: Configuratie + Infrastructuur (Hoofdstukken 3-4) - 6 uur  
-- **Dag 3**: Geavanceerde Patronen + Productie (Hoofdstukken 5-8) - 8 uur
+- **Dag 2**: Configuratie + infrastructuur (Hoofdstukken 3-4) - 6 uur  
+- **Dag 3**: Geavanceerde patronen + productie (Hoofdstukken 5-8) - 8 uur
 - **Follow-up**: Optionele 2 weken mentorschap voor projectafronding
 
 **⚡ Executive Briefing (4-6 uur)**
-- **Strategisch Overzicht**: AZD waardepropositie en zakelijke impact (1 uur)
-- **Praktische Demo**: AI-toepassing van begin tot eind implementeren (2 uur)
-- **Architectuur Review**: Enterprise patronen en governance (1 uur)
+- **Strategisch overzicht**: AZD waardepropositie en zakelijke impact (1 uur)
+- **Praktische demo**: AI-applicatie van begin tot eind implementeren (2 uur)
+- **Architectuurreview**: Enterprise-patronen en governance (1 uur)
 - **Implementatieplanning**: Strategie voor organisatorische adoptie (1-2 uur)
 
-#### 🛠️ Workshop Leer Methodologie
+#### 🛠️ Workshop leermethodologie
 **Ontdekken → Implementeren → Aanpassen aanpak voor praktische vaardigheidsontwikkeling**
 
 **Fase 1: Ontdekken (45 minuten)**
-- **Sjabloon Verkenning**: Evalueren van Azure AI Foundry-sjablonen en services
-- **Architectuur Analyse**: Begrijp multi-agent patronen en implementatiestrategieën
+- **Sjabloonverkenning**: Evalueer Azure AI Foundry-sjablonen en services
+- **Architectuuranalyse**: Begrijp multi-agent patronen en implementatiestrategieën
 - **Behoefteanalyse**: Identificeer organisatorische behoeften en beperkingen
 - **Omgevingsinstelling**: Configureer ontwikkelomgeving en Azure-resources
 
 **Fase 2: Implementeren (2 uur)**
-- **Geleide Implementatie**: Stapsgewijze implementatie van AI-toepassingen met AZD
-- **Service Configuratie**: Configureer Azure AI-services, eindpunten en authenticatie
-- **Beveiliging Implementeren**: Pas enterprise beveiligingspatronen en toegangscontroles toe
+- **Geleide implementatie**: Stapsgewijze implementatie van AI-applicaties met AZD
+- **Serviceconfiguratie**: Configureer Azure AI-services, eindpunten en authenticatie
+- **Beveiligingsimplementatie**: Pas beveiligingspatronen en toegangscontroles toe
 - **Validatietesten**: Verifieer implementaties en los veelvoorkomende problemen op
 
 **Fase 3: Aanpassen (45 minuten)**
-- **Toepassing Wijzigen**: Pas sjablonen aan voor specifieke use cases en vereisten
-- **Productie Optimaliseren**: Implementeer monitoring, kostenbeheer en schaalstrategieën
-- **Geavanceerde Patronen**: Verken multi-agent coördinatie en complexe architecturen
-- **Volgende Stappen Plannen**: Definieer leerpad voor verdere vaardigheidsontwikkeling
+- **Applicatiemodificatie**: Pas sjablonen aan voor specifieke use cases en vereisten
+- **Productieoptimalisatie**: Implementeer monitoring, kostenbeheer en schaalstrategieën
+- **Geavanceerde patronen**: Verken multi-agent coördinatie en complexe architecturen
+- **Plannen voor volgende stappen**: Definieer leerpad voor verdere vaardigheidsontwikkeling
 
-#### 🎯 Workshop Leerresultaten
-**Meetbare vaardigheden ontwikkeld door praktische oefeningen**
+#### 🎯 Workshop leerresultaten
+**Meetbare vaardigheden ontwikkeld door praktische oefening**
 
-**Technische Competenties:**
-- **Productie AI-toepassingen Implementeren**: Succesvol AI-oplossingen implementeren en configureren
-- **Infrastructure as Code Beheersen**: Aangepaste Bicep-sjablonen maken en beheren
-- **Multi-Agent Architectuur**: Gecoördineerde AI-agent oplossingen implementeren
-- **Productiegereedheid**: Beveiligings-, monitoring- en governancepatronen toepassen
-- **Probleemoplossing Expertise**: Zelfstandig implementatie- en configuratieproblemen oplossen
+**Technische competenties:**
+- **Implementeer productie-AI-applicaties**: Implementeer en configureer AI-oplossingen succesvol
+- **Beheers Infrastructure as Code**: Maak en beheer aangepaste Bicep-sjablonen
+- **Multi-agent architectuur**: Implementeer gecoördineerde AI-agentoplossingen
+- **Productiegereedheid**: Pas beveiligings-, monitoring- en governancepatronen toe
+- **Probleemoplossingsexpertise**: Los zelfstandig implementatie- en configuratieproblemen op
 
-**Professionele Vaardigheden:**
-- **Projectleiderschap**: Technische teams leiden bij cloud-implementatie-initiatieven
-- **Architectuur Ontwerp**: Schaalbare, kosteneffectieve Azure-oplossingen ontwerpen
-- **Kennisoverdracht**: Collega's trainen en begeleiden in AZD best practices
-- **Strategische Planning**: Organisatorische cloud-adoptiestrategieën beïnvloeden
+**Professionele vaardigheden:**
+- **Projectleiderschap**: Leid technische teams in cloud-implementatie-initiatieven
+- **Architectuurontwerp**: Ontwerp schaalbare, kosteneffectieve Azure-oplossingen
+- **Kennisoverdracht**: Train en begeleid collega's in AZD best practices
+- **Strategische planning**: Beïnvloed organisatorische cloud-adoptiestrategieën
 
-#### 📋 Workshop Bronnen en Materialen
-**Uitgebreide toolkit voor begeleiders en deelnemers**
+#### 📋 Workshop bronnen en materialen
+**Uitgebreide toolkit voor facilitators en deelnemers**
 
-**Voor Begeleiders:**
+**Voor facilitators:**
 - **Instructeursgids**: [Workshop Facilitation Guide](workshop/docs/instructor-guide.md) - Tips voor sessieplanning en uitvoering
-- **Presentatiematerialen**: Slide decks, architectuurdiagrammen en demo scripts
+- **Presentatiematerialen**: Presentaties, architectuurschema's en demo-scripts
 - **Beoordelingshulpmiddelen**: Praktische oefeningen, kennischecks en evaluatierubrieken
-- **Technische Setup**: Omgevingsconfiguratie, probleemoplossingsgidsen en back-upplannen
+- **Technische setup**: Omgevingsconfiguratie, probleemoplossingsgidsen en back-upplannen
 
-**Voor Deelnemers:**
-- **Interactieve Workshopomgeving**: [Workshop Materials](workshop/README.md) - Browser-gebaseerd leerplatform
-- **Stapsgewijze Instructies**: [Guided Exercises](../../workshop/docs/instructions) - Gedetailleerde implementatiewalkthroughs  
-- **Referentiedocumentatie**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-gerichte diepgaande informatie
-- **Community Bronnen**: Azure Discord-kanalen, GitHub-discussies en expertondersteuning
+**Voor deelnemers:**
+- **Interactieve workshopomgeving**: [Workshop Materials](workshop/README.md) - Browser-gebaseerd leerplatform
+- **Stapsgewijze instructies**: [Guided Exercises](../../workshop/docs/instructions) - Gedetailleerde implementatiehandleidingen  
+- **Referentiedocumentatie**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-gerichte verdiepingen
+- **Communitybronnen**: Azure Discord-kanalen, GitHub-discussies en expertondersteuning
 
-#### 🏢 Implementatie van Enterprise Workshops
+#### 🏢 Implementatie van workshops voor bedrijven
 **Strategieën voor organisatorische implementatie en training**
 
-**Bedrijfstraining Programma's:**
-- **Ontwikkelaar Onboarding**: Oriëntatie voor nieuwe medewerkers met AZD basisprincipes (2-4 weken)
-- **Teamvaardigheden Verbeteren**: Kwartaalworkshops voor bestaande ontwikkelteams (1-2 dagen)
-- **Architectuur Review**: Maandelijkse sessies voor senior engineers en architecten (4 uur)
-- **Leiderschap Briefings**: Executive workshops voor technische besluitvormers (halve dag)
+**Bedrijfstrainingprogramma's:**
+- **Ontwikkelaar onboarding**: Oriëntatie voor nieuwe medewerkers met AZD fundamentals (2-4 weken)
+- **Teamvaardigheden verbeteren**: Kwartaalworkshops voor bestaande ontwikkelteams (1-2 dagen)
+- **Architectuurreview**: Maandelijkse sessies voor senior engineers en architecten (4 uur)
+- **Leiderschapsbriefings**: Workshops voor technische besluitvormers (halve dag)
 
-**Implementatie Ondersteuning:**
-- **Aangepaste Workshop Ontwerp**: Op maat gemaakte inhoud voor specifieke organisatorische behoeften
-- **Pilot Programma Beheer**: Gestructureerde uitrol met succesmetingen en feedbackloops  
-- **Doorlopende Mentorschap**: Ondersteuning na de workshop voor projectimplementatie
-- **Community Opbouw**: Interne Azure AI ontwikkelaarsgemeenschappen en kennisdeling
+**Implementatieondersteuning:**
+- **Aangepast workshopontwerp**: Op maat gemaakte inhoud voor specifieke organisatorische behoeften
+- **Pilotprogramma beheer**: Gestructureerde uitrol met succesmetingen en feedbackloops  
+- **Doorlopende begeleiding**: Ondersteuning na de workshop voor projectimplementatie
+- **Communityopbouw**: Interne Azure AI-ontwikkelaarsgemeenschappen en kennisdeling
 
 **Succesmetingen:**
 - **Vaardigheidsverwerving**: Pre/post assessments die technische competentiegroei meten
-- **Implementatiesucces**: Percentage deelnemers dat succesvol productie-applicaties implementeert
-- **Tijd tot Productiviteit**: Verminderde onboardingtijd voor nieuwe Azure AI-projecten
+- **Implementatiesucces**: Percentage deelnemers dat succesvol productieapplicaties implementeert
+- **Tijd tot productiviteit**: Verminderde onboardingtijd voor nieuwe Azure AI-projecten
 - **Kennisbehoud**: Follow-up assessments 3-6 maanden na de workshop
 
 ## 8-Hoofdstukken Leerstructuur
 
-### Hoofdstuk 1: Basis & Snelle Start (30-45 minuten) 🌱
+### Hoofdstuk 1: Basis & Snelstart (30-45 minuten) 🌱
 **Vereisten**: Azure-abonnement, basiskennis van de command line  
 **Complexiteit**: ⭐
 
-#### Wat Je Leert
-- Begrip van Azure Developer CLI basisprincipes
+#### Wat je leert
+- Begrip van Azure Developer CLI fundamentals
 - AZD installeren op jouw platform  
 - Je eerste succesvolle implementatie
 - Kernconcepten en terminologie
 
 #### Leerbronnen
-- [AZD Basisprincipes](docs/getting-started/azd-basics.md) - Kernconcepten
-- [Installatie & Setup](docs/getting-started/installation.md) - Platform-specifieke gidsen
-- [Je Eerste Project](docs/getting-started/first-project.md) - Praktische tutorial
+- [AZD Basics](docs/getting-started/azd-basics.md) - Kernconcepten
+- [Installatie & Setup](docs/getting-started/installation.md) - Platformspecifieke gidsen
+- [Je eerste project](docs/getting-started/first-project.md) - Praktische tutorial
 - [Command Cheat Sheet](resources/cheat-sheet.md) - Snelle referentie
 
-#### Praktisch Resultaat
+#### Praktisch resultaat
 Succesvol een eenvoudige webapplicatie implementeren naar Azure met AZD
 
 ---
@@ -187,31 +187,31 @@ Succesvol een eenvoudige webapplicatie implementeren naar Azure met AZD
 **Vereisten**: Hoofdstuk 1 voltooid  
 **Complexiteit**: ⭐⭐
 
-#### Wat Je Leert
-- Integratie van Azure AI Foundry met AZD
+#### Wat je leert
+- Microsoft Foundry-integratie met AZD
 - AI-aangedreven applicaties implementeren
 - Begrip van AI-serviceconfiguraties
 - RAG (Retrieval-Augmented Generation) patronen
 
 #### Leerbronnen
-- [Azure AI Foundry Integratie](docs/ai-foundry/azure-ai-foundry-integration.md)
-- [AI Model Implementatie](docs/ai-foundry/ai-model-deployment.md)
-- [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - **NIEUW**: Uitgebreide hands-on lab van 2-3 uur
+- [Microsoft Foundry Integratie](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- [AI Model Implementatie](docs/microsoft-foundry/ai-model-deployment.md)
+- [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **NIEUW**: Uitgebreide hands-on lab van 2-3 uur
 - [Interactieve Workshop Gids](workshop/README.md) - **NIEUW**: Browser-gebaseerde workshop met MkDocs preview
-- [Azure AI Foundry Sjablonen](README.md#featured-azure-ai-foundry-templates)
+- [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
 - [Workshop Instructies](../../workshop/docs/instructions) - **NIEUW**: Stapsgewijze begeleide oefeningen
 
-#### Praktisch Resultaat
+#### Praktisch resultaat
 Een AI-aangedreven chatapplicatie implementeren en configureren met RAG-functionaliteiten
 
-#### Workshop Leerpad (Optionele Uitbreiding)
+#### Workshop leerpad (optionele uitbreiding)
 **NIEUW Interactieve Ervaring**: [Complete Workshop Gids](workshop/README.md)
 1. **Ontdekken** (30 min): Sjabloonselectie en evaluatie
-2. **Implementeren** (45 min): AI-sjabloonfunctionaliteit implementeren en valideren  
+2. **Implementeren** (45 min): Implementeer en valideer AI-sjabloonfunctionaliteit  
 3. **Deconstructie** (30 min): Begrijp sjabloonarchitectuur en componenten
-4. **Configuratie** (30 min): Instellingen en parameters aanpassen
+4. **Configuratie** (30 min): Pas instellingen en parameters aan
 5. **Aanpassing** (45 min): Wijzig en itereren om het eigen te maken
-6. **Afbraak** (15 min): Resources opruimen en levenscyclus begrijpen
+6. **Afbraak** (15 min): Ruim resources op en begrijp de levenscyclus
 7. **Afsluiting** (15 min): Volgende stappen en geavanceerde leerpaden
 
 ---
@@ -220,18 +220,18 @@ Een AI-aangedreven chatapplicatie implementeren en configureren met RAG-function
 **Vereisten**: Hoofdstuk 1 voltooid  
 **Complexiteit**: ⭐⭐
 
-#### Wat Je Leert
-- Omgevingsconfiguratie en beheer
+#### Wat je leert
+- Omgevingsconfiguratie en -beheer
 - Authenticatie en beveiligingsbest practices
 - Resourcebenaming en organisatie
-- Implementaties in meerdere omgevingen
+- Multi-omgeving implementaties
 
 #### Leerbronnen
-- [Configuratie Gids](docs/getting-started/configuration.md) - Omgevingsinstelling
-- Beveiligingspatronen en managed identity
-- Voorbeelden van meerdere omgevingen
+- [Configuratiegids](docs/getting-started/configuration.md) - Omgevingsinstelling
+- [Authenticatie & Beveiligingspatronen](docs/getting-started/authsecurity.md) - Managed identity en Key Vault-integratie
+- Multi-omgeving voorbeelden
 
-#### Praktisch Resultaat
+#### Praktisch resultaat
 Meerdere omgevingen beheren met juiste authenticatie en beveiliging
 
 ---
@@ -240,19 +240,22 @@ Meerdere omgevingen beheren met juiste authenticatie en beveiliging
 **Vereisten**: Hoofdstukken 1-3 voltooid  
 **Complexiteit**: ⭐⭐⭐
 
-#### Wat Je Leert
+#### Wat je leert
 - Geavanceerde implementatiepatronen
 - Infrastructure as Code met Bicep
 - Resource provisioning strategieën
-- Aangepaste sjablonen maken
+- Aangepaste sjablooncreatie
+
+- Containerized applicatie-implementatie met Azure Container Apps en AZD
 
 #### Leerbronnen
-- [Implementatie Gids](docs/deployment/deployment-guide.md) - Complete workflows
-- [Resource Provisioning](docs/deployment/provisioning.md) - Resourcebeheer
-- Voorbeelden van containers en microservices
+- [Implementatiegids](docs/deployment/deployment-guide.md) - Complete workflows
+- [Resource provisioning](docs/deployment/provisioning.md) - Resourcebeheer
+- Container en microservices voorbeelden
+- [Container App Voorbeelden](examples/container-app/README.md) - Snelle start, productie en geavanceerde implementatiepatronen
 
-#### Praktisch Resultaat
-Complexe applicaties met meerdere services implementeren met aangepaste infrastructuursjablonen
+#### Praktisch resultaat
+Complexe multi-service applicaties implementeren met aangepaste infrastructuursjablonen
 
 ---
 
@@ -260,18 +263,21 @@ Complexe applicaties met meerdere services implementeren met aangepaste infrastr
 **Vereisten**: Hoofdstukken 1-2 voltooid  
 **Complexiteit**: ⭐⭐⭐⭐
 
-#### Wat Je Leert
+#### Wat je leert
 - Multi-agent architectuurpatronen
 - Agent orkestratie en coördinatie
 - Productiegereed AI-implementaties
-- Klant- en voorraadagent implementaties
+- Klant- en voorraadagentimplementaties
+
+- Integratie van containerized microservices als onderdeel van agent-gebaseerde oplossingen
 
 #### Leerbronnen
 - [Retail Multi-Agent Oplossing](examples/retail-scenario.md) - Complete implementatie
 - [ARM Template Package](../../examples/retail-multiagent-arm-template) - Eén klik implementatie
 - Multi-agent coördinatiepatronen
+- [Microservices Architectuur Voorbeeld](../../examples/container-app/microservices) - Service-to-service communicatie, asynchrone berichten en productie-implementatie
 
-#### Praktisch Resultaat
+#### Praktisch resultaat
 Een productiegereed multi-agent AI-oplossing implementeren en beheren
 
 ---
@@ -280,7 +286,7 @@ Een productiegereed multi-agent AI-oplossing implementeren en beheren
 **Vereisten**: Hoofdstuk 4 voltooid  
 **Complexiteit**: ⭐⭐
 
-#### Wat Je Leert
+#### Wat je leert
 - Capaciteitsplanning en resourcevalidatie
 - SKU-selectiestrategieën
 - Pre-flight checks en automatisering
@@ -290,60 +296,67 @@ Een productiegereed multi-agent AI-oplossing implementeren en beheren
 - [Capaciteitsplanning](docs/pre-deployment/capacity-planning.md) - Resourcevalidatie
 - [SKU Selectie](docs/pre-deployment/sku-selection.md) - Kosteneffectieve keuzes
 - [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Geautomatiseerde scripts
+- [Application Insights Integratie](docs/pre-deployment/application-insights.md) - Monitoring en observatie
+- [Multi-Agent Coördinatiepatronen](docs/pre-deployment/coordination-patterns.md) - Agent orkestratiestrategieën
 
-#### Praktisch Resultaat
-Implementaties valideren en optimaliseren vóór uitvoering
+#### Praktisch resultaat
+Valideer en optimaliseer implementaties vóór uitvoering
 
 ---
 
-### Hoofdstuk 7: Probleemoplossing & Debugging (1-1,5 uur) 🔧
+### Hoofdstuk 7: Problemen oplossen & Debuggen (1-1,5 uur) 🔧
 **Vereisten**: Elk implementatiehoofdstuk voltooid  
 **Complexiteit**: ⭐⭐
 
-#### Wat Je Leert
-- Systematische debugging aanpakken
+#### Wat je leert
+- Systematische benaderingen voor debuggen
 - Veelvoorkomende problemen en oplossingen
 - AI-specifieke probleemoplossing
 - Prestatieoptimalisatie
 
 #### Leerbronnen
-- [Veelvoorkomende Problemen](docs/troubleshooting/common-issues.md) - FAQ en oplossingen
+- [Veelvoorkomende problemen](docs/troubleshooting/common-issues.md) - FAQ en oplossingen
 - [Debugging Gids](docs/troubleshooting/debugging.md) - Stapsgewijze strategieën
-- [AI-Specifieke Probleemoplossing](docs/troubleshooting/ai-troubleshooting.md) - Problemen met AI-diensten
+- [AI-specifieke probleemoplossing](docs/troubleshooting/ai-troubleshooting.md) - Problemen met AI-services
 
-#### Praktisch Resultaat
+#### Praktisch resultaat
 Zelfstandig veelvoorkomende implementatieproblemen diagnosticeren en oplossen
 
 ---
 
 ### Hoofdstuk 8: Productie & Enterprise Patronen (2-3 uur) 🏢
-**Vereisten**: Hoofdstukken 1-4 afgerond  
+**Vereisten**: Hoofdstukken 1-4 voltooid  
 **Complexiteit**: ⭐⭐⭐⭐
 
-#### Wat Je Leert
+#### Wat je leert
 - Strategieën voor productie-implementatie
 - Enterprise beveiligingspatronen
 - Monitoring en kostenoptimalisatie
 - Schaalbaarheid en governance
 
-#### Leerbronnen
-- [Productie AI Best Practices](docs/ai-foundry/production-ai-practices.md) - Enterprise patronen
-- Microservices en enterprise voorbeelden
-- Monitoring- en governance-frameworks
+- Best practices voor productiecontainer-app implementaties (beveiliging, monitoring, kosten, CI/CD)
 
-#### Praktisch Resultaat
+#### Leerbronnen
+- [Productie AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patronen
+- Microservices en enterprise voorbeelden
+- Monitoring- en governanceframeworks
+- [Microservices Architectuur Voorbeeld](../../examples/container-app/microservices) - Blue-green/canary implementatie, gedistribueerde tracing en kostenoptimalisatie
+
+#### Praktisch resultaat
 Enterprise-ready applicaties implementeren met volledige productiecapaciteiten
 
 ---
 
-## Leerprogressie en Complexiteit
+## Leerprogressie en complexiteit
 
-### Progressieve Vaardigheidsopbouw
+### Progressieve vaardigheidsopbouw
 
-- **🌱 Beginners**: Begin met Hoofdstuk 1 (Basis) → Hoofdstuk 2 (AI Ontwikkeling)
+- **🌱 Beginners**: Begin met Hoofdstuk 1 (Basis) → Hoofdstuk 2 (AI-ontwikkeling)
 - **🔧 Intermediate**: Hoofdstukken 3-4 (Configuratie & Infrastructuur) → Hoofdstuk 6 (Validatie)
-- **🚀 Gevorderd**: Hoofdstuk 5 (Multi-Agent Oplossingen) → Hoofdstuk 7 (Probleemoplossing)
-- **🏢 Enterprise**: Voltooi alle hoofdstukken, focus op Hoofdstuk 8 (Productie Patronen)
+- **🚀 Gevorderd**: Hoofdstuk 5 (Multi-Agent Oplossingen) → Hoofdstuk 7 (Problemen oplossen)
+- **🏢 Enterprise**: Voltooi alle hoofdstukken, focus op Hoofdstuk 8 (Productiepatronen)
+
+- **Container App Pad**: Hoofdstukken 4 (Containerized implementatie), 5 (Microservices integratie), 8 (Productie best practices)
 
 ### Complexiteitsindicatoren
 
@@ -352,39 +365,39 @@ Enterprise-ready applicaties implementeren met volledige productiecapaciteiten
 - **⭐⭐⭐ Gevorderd**: Complexe architecturen, aangepaste oplossingen, 1-3 uur
 - **⭐⭐⭐⭐ Expert**: Productiesystemen, enterprise patronen, 2-4 uur
 
-### Flexibele Leertrajecten
+### Flexibele leerpaden
 
-#### 🎯 AI Developer Snelle Route (4-6 uur)
+#### 🎯 AI Developer Fast Track (4-6 uur)
 1. **Hoofdstuk 1**: Basis & Snelle Start (45 min)
 2. **Hoofdstuk 2**: AI-First Ontwikkeling (2 uur)  
 3. **Hoofdstuk 5**: Multi-Agent AI Oplossingen (3 uur)
 4. **Hoofdstuk 8**: Productie AI Best Practices (1 uur)
 
-#### 🛠️ Infrastructuur Specialist Traject (5-7 uur)
+#### 🛠️ Infrastructure Specialist Pad (5-7 uur)
 1. **Hoofdstuk 1**: Basis & Snelle Start (45 min)
 2. **Hoofdstuk 3**: Configuratie & Authenticatie (1 uur)
 3. **Hoofdstuk 4**: Infrastructure as Code & Implementatie (1,5 uur)
-4. **Hoofdstuk 6**: Pre-Implementatie Validatie & Planning (1 uur)
-5. **Hoofdstuk 7**: Probleemoplossing & Debugging (1,5 uur)
+4. **Hoofdstuk 6**: Pre-implementatie Validatie & Planning (1 uur)
+5. **Hoofdstuk 7**: Problemen oplossen & Debuggen (1,5 uur)
 6. **Hoofdstuk 8**: Productie & Enterprise Patronen (2 uur)
 
 #### 🎓 Volledige Leerreis (8-12 uur)
-Volg alle 8 hoofdstukken op volgorde met praktische oefeningen en validatie
+Volg alle 8 hoofdstukken sequentieel met praktische oefeningen en validatie
 
-## Framework voor Cursusafronding
+## Framework voor cursusvoltooiing
 
 ### Kennisvalidatie
 - **Hoofdstuk Checkpoints**: Praktische oefeningen met meetbare resultaten
 - **Hands-On Verificatie**: Werkende oplossingen implementeren voor elk hoofdstuk
 - **Voortgangscontrole**: Visuele indicatoren en voltooiingsbadges
-- **Community Validatie**: Ervaringen delen in Azure Discord-kanalen
+- **Community Validatie**: Deel ervaringen in Azure Discord-kanalen
 
-### Leerresultaten Beoordeling
+### Beoordeling van leerresultaten
 
 #### Hoofdstuk 1-2 Voltooiing (Basis + AI)
 - ✅ Basis webapplicatie implementeren met AZD
 - ✅ AI-aangedreven chatapplicatie implementeren met RAG
-- ✅ AZD kernconcepten en AI-integratie begrijpen
+- ✅ Begrijp AZD kernconcepten en AI-integratie
 
 #### Hoofdstuk 3-4 Voltooiing (Configuratie + Infrastructuur)  
 - ✅ Multi-omgeving implementaties beheren
@@ -392,38 +405,38 @@ Volg alle 8 hoofdstukken op volgorde met praktische oefeningen en validatie
 - ✅ Veilige authenticatiepatronen implementeren
 
 #### Hoofdstuk 5-6 Voltooiing (Multi-Agent + Validatie)
-- ✅ Complexe multi-agent AI oplossing implementeren
+- ✅ Complexe multi-agent AI-oplossing implementeren
 - ✅ Capaciteitsplanning en kostenoptimalisatie uitvoeren
 - ✅ Geautomatiseerde pre-implementatie validatie implementeren
 
-#### Hoofdstuk 7-8 Voltooiing (Probleemoplossing + Productie)
-- ✅ Implementatieproblemen zelfstandig debuggen en oplossen  
+#### Hoofdstuk 7-8 Voltooiing (Problemen oplossen + Productie)
+- ✅ Problemen met implementatie zelfstandig debuggen en oplossen  
 - ✅ Enterprise-grade monitoring en beveiliging implementeren
 - ✅ Productieklare applicaties implementeren met governance
 
-### Certificering en Erkenning
-- **Cursus Voltooiingsbadge**: Voltooi alle 8 hoofdstukken met praktische validatie
-- **Community Erkenning**: Actieve deelname aan Azure AI Foundry Discord
+### Certificering en erkenning
+- **Cursusvoltooiingsbadge**: Voltooi alle 8 hoofdstukken met praktische validatie
+- **Community Erkenning**: Actieve deelname in Microsoft Foundry Discord
 - **Professionele Ontwikkeling**: Industrie-relevante AZD en AI implementatievaardigheden
 - **Carrièreontwikkeling**: Enterprise-ready cloud implementatiecapaciteiten
 
 ## 🎓 Uitgebreide Leerresultaten
 
 ### Basisniveau (Hoofdstukken 1-2)
-Na voltooiing van de basishoofdstukken tonen deelnemers:
+Na voltooiing van de basishoofdstukken tonen deelnemers aan:
 
 **Technische Vaardigheden:**
 - Eenvoudige webapplicaties implementeren naar Azure met AZD-commando's
 - AI-aangedreven chatapplicaties configureren en implementeren met RAG-functionaliteiten
-- Kernconcepten van AZD begrijpen: sjablonen, omgevingen, provisioning workflows
-- Azure AI Foundry-diensten integreren met AZD-implementaties
-- Navigeren door Azure AI-dienstconfiguraties en API-eindpunten
+- Begrijp kernconcepten van AZD: sjablonen, omgevingen, provisioning workflows
+- Microsoft Foundry-services integreren met AZD-implementaties
+- Navigeren door Azure AI-serviceconfiguraties en API-eindpunten
 
 **Professionele Vaardigheden:**
 - Gestructureerde implementatieworkflows volgen voor consistente resultaten
 - Basisimplementatieproblemen oplossen met behulp van logs en documentatie
-- Effectief communiceren over cloud implementatieprocessen
-- Best practices toepassen voor veilige AI-dienstintegratie
+- Effectief communiceren over cloudimplementatieprocessen
+- Best practices toepassen voor veilige AI-service-integratie
 
 **Leervalidatie:**
 - ✅ Succesvol `todo-nodejs-mongo` sjabloon implementeren
@@ -432,7 +445,7 @@ Na voltooiing van de basishoofdstukken tonen deelnemers:
 - ✅ Deelnemen aan Azure Discord community discussies
 
 ### Intermediate Niveau (Hoofdstukken 3-4)
-Na voltooiing van de intermediate hoofdstukken tonen deelnemers:
+Na voltooiing van de intermediate hoofdstukken tonen deelnemers aan:
 
 **Technische Vaardigheden:**
 - Multi-omgeving implementaties beheren (dev, staging, productie)
@@ -443,9 +456,9 @@ Na voltooiing van de intermediate hoofdstukken tonen deelnemers:
 
 **Professionele Vaardigheden:**
 - Schaalbare infrastructuurarchitecturen ontwerpen
-- Beveiligingsbest practices implementeren voor cloud implementaties
+- Beveiligingsbest practices implementeren voor cloudimplementaties
 - Infrastructuurpatronen documenteren voor team samenwerking
-- Geschikte Azure-diensten evalueren en selecteren voor vereisten
+- Geschikte Azure-services evalueren en selecteren voor vereisten
 
 **Leervalidatie:**
 - ✅ Gescheiden omgevingen configureren met omgeving-specifieke instellingen
@@ -454,12 +467,12 @@ Na voltooiing van de intermediate hoofdstukken tonen deelnemers:
 - ✅ Configuratiemanagement oefeningen voltooien met echte scenario's
 
 ### Gevorderd Niveau (Hoofdstukken 5-6)
-Na voltooiing van de gevorderde hoofdstukken tonen deelnemers:
+Na voltooiing van de gevorderde hoofdstukken tonen deelnemers aan:
 
 **Technische Vaardigheden:**
-- Multi-agent AI oplossingen implementeren en orkestreren met gecoördineerde workflows
+- Multi-agent AI-oplossingen implementeren en orkestreren met gecoördineerde workflows
 - Klant- en Inventarisagent architecturen implementeren voor retailscenario's
-- Uitgebreide capaciteitsplanning en resource validatie uitvoeren
+- Uitgebreide capaciteitsplanning en resourcevalidatie uitvoeren
 - Geautomatiseerde pre-implementatie validatie en optimalisatie uitvoeren
 - Kostenbesparende SKU-selecties ontwerpen op basis van workloadvereisten
 
@@ -471,16 +484,16 @@ Na voltooiing van de gevorderde hoofdstukken tonen deelnemers:
 
 **Leervalidatie:**
 - ✅ Volledige retail multi-agent oplossing implementeren met ARM-sjablonen
-- ✅ Agentcoördinatie en workflow orkestratie demonstreren
+- ✅ Agentcoördinatie en workfloworkestratie demonstreren
 - ✅ Capaciteitsplanning oefeningen voltooien met echte resourcebeperkingen
 - ✅ Implementatiegereedheid valideren via geautomatiseerde pre-flight checks
 
 ### Expert Niveau (Hoofdstukken 7-8)
-Na voltooiing van de expert hoofdstukken tonen deelnemers:
+Na voltooiing van de expert hoofdstukken tonen deelnemers aan:
 
 **Technische Vaardigheden:**
 - Complexe implementatieproblemen zelfstandig diagnosticeren en oplossen
-- Enterprise-grade beveiligingspatronen en governance-frameworks implementeren
+- Enterprise-grade beveiligingspatronen en governanceframeworks implementeren
 - Uitgebreide monitoring- en waarschuwingsstrategieën ontwerpen
 - Productie-implementaties optimaliseren voor schaal, kosten en prestaties
 - CI/CD-pijplijnen opzetten met juiste testen en validatie
@@ -495,11 +508,11 @@ Na voltooiing van de expert hoofdstukken tonen deelnemers:
 - ✅ Complexe multi-service implementatiefouten oplossen
 - ✅ Enterprise beveiligingspatronen implementeren met nalevingsvereisten
 - ✅ Productiemonitoring ontwerpen en implementeren met Application Insights
-- ✅ Enterprise governance framework implementeren
+- ✅ Enterprise governance framework implementatie voltooien
 
-## 🎯 Certificering voor Cursusafronding
+## 🎯 Certificering voor cursusvoltooiing
 
-### Framework voor Voortgangscontrole
+### Framework voor voortgangscontrole
 Volg je leerprogressie via gestructureerde checkpoints:
 
 - [ ] **Hoofdstuk 1**: Basis & Snelle Start ✅
@@ -507,12 +520,12 @@ Volg je leerprogressie via gestructureerde checkpoints:
 - [ ] **Hoofdstuk 3**: Configuratie & Authenticatie ✅
 - [ ] **Hoofdstuk 4**: Infrastructure as Code & Implementatie ✅
 - [ ] **Hoofdstuk 5**: Multi-Agent AI Oplossingen ✅
-- [ ] **Hoofdstuk 6**: Pre-Implementatie Validatie & Planning ✅
-- [ ] **Hoofdstuk 7**: Probleemoplossing & Debugging ✅
+- [ ] **Hoofdstuk 6**: Pre-implementatie Validatie & Planning ✅
+- [ ] **Hoofdstuk 7**: Problemen oplossen & Debuggen ✅
 - [ ] **Hoofdstuk 8**: Productie & Enterprise Patronen ✅
 
 ### Verificatieproces
-Na voltooiing van elk hoofdstuk, verifieer je kennis via:
+Na voltooiing van elk hoofdstuk, valideer je kennis via:
 
 1. **Praktische Oefening Voltooiing**: Werkende oplossingen implementeren voor elk hoofdstuk
 2. **Kennisbeoordeling**: FAQ-secties bekijken en zelfbeoordelingen voltooien
@@ -520,33 +533,37 @@ Na voltooiing van elk hoofdstuk, verifieer je kennis via:
 4. **Portfolio Ontwikkeling**: Je implementaties en geleerde lessen documenteren
 5. **Peer Review**: Samenwerken met andere deelnemers aan complexe scenario's
 
-### Voordelen van Cursusafronding
+### Voordelen van cursusvoltooiing
 Na voltooiing van alle hoofdstukken met verificatie hebben afgestudeerden:
 
 **Technische Expertise:**
 - **Productie-ervaring**: Echte AI-applicaties geïmplementeerd naar Azure-omgevingen
-- **Professionele Vaardigheden**: Enterprise-ready implementatie- en probleemoplossingsvaardigheden  
+- **Professionele Vaardigheden**: Enterprise-ready implementatie- en probleemoplossingscapaciteiten  
 - **Architectuurkennis**: Multi-agent AI-oplossingen en complexe infrastructuurpatronen
-- **Probleemoplossingsmeesterschap**: Zelfstandig implementatie- en configuratieproblemen oplossen
+- **Probleemoplossingsmeesterschap**: Onafhankelijke oplossing van implementatie- en configuratieproblemen
 
 **Professionele Ontwikkeling:**
 - **Industrie Erkenning**: Verifieerbare vaardigheden in AZD en AI implementatiegebieden met hoge vraag
-- **Carrièreontwikkeling**: Kwalificaties voor cloud architect en AI implementatie specialist rollen
-- **Community Leiderschap**: Actief lidmaatschap in Azure ontwikkelaars- en AI-gemeenschappen
-- **Voortdurend Leren**: Basis voor geavanceerde Azure AI Foundry specialisatie
+- **Carrièreontwikkeling**: Kwalificaties voor cloudarchitect en AI implementatiespecialist rollen
+- **Community Leiderschap**: Actief lidmaatschap in Azure ontwikkelaar- en AI-gemeenschappen
+- **Voortdurend Leren**: Basis voor geavanceerde Microsoft Foundry specialisatie
 
 **Portfolio Assets:**
 - **Geïmplementeerde Oplossingen**: Werkende voorbeelden van AI-applicaties en infrastructuurpatronen
 - **Documentatie**: Uitgebreide implementatiegidsen en probleemoplossingsprocedures  
 - **Community Bijdragen**: Discussies, voorbeelden en verbeteringen gedeeld met Azure community
-- **Professioneel Netwerk**: Connecties met Azure-experts en AI-implementatiepraktijkers
+- **Professioneel Netwerk**: Connecties met Azure-experts en AI implementatiepraktijkers
 
-### Post-Cursus Leertraject
+### Post-Cursus Leerpad
 Afgestudeerden zijn voorbereid op geavanceerde specialisatie in:
-- **Azure AI Foundry Expert**: Diepe specialisatie in AI-model implementatie en orkestratie
-- **Cloud Architectuur Leiderschap**: Enterprise-schaal implementatieontwerp en governance
-- **Ontwikkelaars Community Leiderschap**: Bijdragen aan Azure voorbeelden en community resources
+- **Microsoft Foundry Expert**: Diepe specialisatie in AI-model implementatie en orkestratie
+- **Cloud Architectuur Leiderschap**: Ontwerp en governance van implementaties op enterprise-schaal
+- **Ontwikkelaarscommunity Leiderschap**: Bijdragen aan Azure voorbeelden en community resources
 - **Bedrijfstraining**: AZD en AI implementatievaardigheden onderwijzen binnen organisaties
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:  
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

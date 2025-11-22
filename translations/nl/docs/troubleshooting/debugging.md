@@ -1,60 +1,60 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T06:53:59+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-21T16:39:44+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "nl"
 }
 -->
-# Debugging Gids voor AZD Implementaties
+# Debuggengids voor AZD-Deployments
 
-**Hoofdstuk Navigatie:**
+**Hoofdstuknavigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 7 - Problemen oplossen & Debuggen
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 7 - Problemen Oplossen & Debuggen
 - **⬅️ Vorige**: [Veelvoorkomende Problemen](common-issues.md)
 - **➡️ Volgende**: [AI-Specifieke Probleemoplossing](ai-troubleshooting.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 8: Productie & Enterprise Patronen](../ai-foundry/production-ai-practices.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 8: Productie & Enterprise Patronen](../microsoft-foundry/production-ai-practices.md)
 
 ## Introductie
 
-Deze uitgebreide gids biedt geavanceerde strategieën, tools en technieken voor het debuggen van complexe problemen met Azure Developer CLI-implementaties. Leer systematische probleemoplossingsmethodologieën, loganalyse technieken, prestatieprofilering en geavanceerde diagnostische tools om implementatie- en runtimeproblemen efficiënt op te lossen.
+Deze uitgebreide gids biedt geavanceerde debugstrategieën, tools en technieken voor het diagnosticeren en oplossen van complexe problemen met Azure Developer CLI-deployments. Leer systematische probleemoplossingsmethodologieën, loganalyse-technieken, prestatieprofilering en geavanceerde diagnostische tools om deployment- en runtimeproblemen efficiënt op te lossen.
 
 ## Leerdoelen
 
-Door deze gids te voltooien, leer je:
-- Systematische debugmethodologieën beheersen voor Azure Developer CLI-problemen
-- Geavanceerde logconfiguratie en loganalyse technieken begrijpen
+Na het doorlopen van deze gids kun je:
+- Systematische debugmethodologieën voor Azure Developer CLI-problemen beheersen
+- Geavanceerde logconfiguratie en loganalyse-technieken begrijpen
 - Prestatieprofilering en monitoringstrategieën implementeren
-- Azure diagnostische tools en services gebruiken voor complexe probleemoplossing
-- Netwerkdebugging en beveiligingsprobleemoplossing toepassen
+- Azure-diagnosetools en -services gebruiken voor complexe probleemoplossing
+- Netwerkdebugging en beveiligingsproblemen oplossen
 - Uitgebreide monitoring en waarschuwingen configureren voor proactieve probleemdetectie
 
 ## Leerresultaten
 
 Na voltooiing ben je in staat om:
-- De TRIAGE-methodologie toe te passen om complexe implementatieproblemen systematisch te debuggen
+- De TRIAGE-methodologie toe te passen om complexe deploymentproblemen systematisch op te lossen
 - Uitgebreide log- en traceerinformatie te configureren en analyseren
 - Azure Monitor, Application Insights en diagnostische tools effectief te gebruiken
-- Netwerkconnectiviteit, authenticatie en machtigingsproblemen zelfstandig te debuggen
+- Netwerkconnectiviteit, authenticatie- en machtigingsproblemen zelfstandig te debuggen
 - Prestatiemonitoring en optimalisatiestrategieën te implementeren
 - Aangepaste debugscripts en automatisering te maken voor terugkerende problemen
 
-## Debugging Methodologie
+## Debugmethodologie
 
-### De TRIAGE Aanpak
+### De TRIAGE-aanpak
 - **T**ijd: Wanneer begon het probleem?
-- **R**eproduceren: Kun je het consistent reproduceren?
+- **R**eproduceren: Kun je het probleem consistent reproduceren?
 - **I**soleren: Welk onderdeel faalt?
 - **A**nalyseren: Wat vertellen de logs ons?
 - **V**erzamelen: Verzamel alle relevante informatie
 - **E**scaleren: Wanneer moet je extra hulp inschakelen?
 
-## Debugmodus Inschakelen
+## Debugmodus inschakelen
 
 ### Omgevingsvariabelen
 ```bash
-# Enable comprehensive debugging
+# Schakel uitgebreide debugging in
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
@@ -62,25 +62,25 @@ export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 # Azure CLI debugging
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Schakel telemetrie uit voor schonere output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Debug Configuratie
+### Debugconfiguratie
 ```bash
-# Set debug configuration globally
+# Stel debugconfiguratie wereldwijd in
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Schakel trace logging in
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Loganalyse Technieken
+## 📊 Loganalyse-technieken
 
-### Begrijpen van Logniveaus
+### Begrijpen van logniveaus
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -90,25 +90,25 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Gestructureerde Loganalyse
+### Gestructureerde loganalyse
 ```bash
-# Filter logs by level
+# Filter logs op niveau
 azd logs --level error --since 1h
 
-# Filter by service
+# Filter op service
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Exporteer logs voor analyse
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Parseer JSON-logs met jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Logcorrelatie
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Correleren van logs tussen services
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Zoeken in alle services
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Zoeken in Azure-logs
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graph Queries
 ```bash
-# Query resources by tags
+# Query bronnen op tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Zoek mislukte implementaties
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Controleer de gezondheid van bronnen
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Netwerkdebugging
 ```bash
-# Test connectivity between services
+# Test connectiviteit tussen services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Gebruik
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Containerdebugging
 ```bash
-# Debug container app issues
+# Problemen met container-app debuggen
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -183,9 +183,9 @@ debug_container() {
 }
 ```
 
-### Databaseverbinding Debugging
+### Databaseverbinding debuggen
 ```bash
-# Debug database connectivity
+# Foutopsporing databaseconnectiviteit
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -202,11 +202,11 @@ debug_database() {
 }
 ```
 
-## 🔬 Prestatie Debugging
+## 🔬 Prestatie-debugging
 
-### Applicatie Prestatiemonitoring
+### Applicatieprestatiemonitoring
 ```bash
-# Enable Application Insights debugging
+# Inschakelen van Application Insights debugging
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Aangepaste prestatiemonitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -238,9 +238,9 @@ monitor_performance() {
 }
 ```
 
-### Analyse van Resourcegebruik
+### Analyse van resourcegebruik
 ```bash
-# Monitor resource usage
+# Bewaak het gebruik van middelen
 monitor_resources() {
     local resource_group=$1
     
@@ -264,21 +264,21 @@ monitor_resources() {
 
 ## 🧪 Testen en Validatie
 
-### Debugging van Integratietests
+### Debuggen van integratietests
 ```bash
 #!/bin/bash
-# debug-integration-tests.sh
+# debug-integratietests.sh
 
 set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Stel debugomgeving in
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Verkrijg service-eindpunten
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Test gezondheids-eindpunten
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Voer tests uit
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Voer aangepaste integratietests uit
 npm run test:integration
 ```
 
-### Load Testing voor Debugging
+### Loadtesten voor debugging
 ```bash
-# Simple load test to identify performance bottlenecks
+# Eenvoudige belastingtest om prestatieknelpunten te identificeren
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,42 +323,42 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Gebruik Apache Bench (installeren: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Haal belangrijke statistieken op
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Controleer op fouten
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Infrastructuur Debugging
+## 🔧 Infrastructuurdebugging
 
-### Bicep Template Debugging
+### Debuggen van Bicep-sjablonen
 ```bash
-# Validate Bicep templates with detailed output
+# Valideer Bicep-sjablonen met gedetailleerde output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Syntaxisvalidatie
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Lintvalidatie
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Wat-als implementatie
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Debug sjabloonimplementatie
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,20 +377,20 @@ debug_deployment() {
 }
 ```
 
-### Analyse van Resource Status
+### Analyse van resourcestatus
 ```bash
-# Analyze resource states for inconsistencies
+# Analyseer de toestanden van bronnen op inconsistenties
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Lijst alle bronnen met hun toestanden
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Controleer op mislukte bronnen
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -406,9 +406,9 @@ analyze_resources() {
 
 ## 🔒 Beveiligingsdebugging
 
-### Debugging van Authenticatiestromen
+### Debuggen van authenticatiestromen
 ```bash
-# Debug Azure authentication
+# Debug Azure-authenticatie
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Decode JWT-token (vereist jq en base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Debug toegang tot Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,16 +440,16 @@ debug_keyvault() {
 }
 ```
 
-### Debugging van Netwerkbeveiliging
+### Debuggen van netwerkbeveiliging
 ```bash
-# Debug network security groups
+# Debug netwerkbeveiligingsgroepen
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Controleer beveiligingsregels
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,9 +458,9 @@ debug_network_security() {
 }
 ```
 
-## 📱 Applicatie-Specifieke Debugging
+## 📱 Applicatiespecifieke Debugging
 
-### Debugging van Node.js Applicaties
+### Debuggen van Node.js-applicaties
 ```javascript
 // debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
@@ -468,7 +468,7 @@ const debug = require('debug')('app:debug');
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Log verzoekdetails
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Overschrijf res.json om reacties te loggen
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -489,9 +489,9 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Debugging van Database Queries
+### Debuggen van databasequery's
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Hulpprogramma's voor database-debugging
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -521,10 +521,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 Noodprocedures voor Debugging
 
-### Reactie op Productieproblemen
+### Reactie op productieproblemen
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Noodproductiedebugging
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Schakel over naar de juiste omgeving
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Verzamel kritieke informatie
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -582,26 +582,26 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Rollback Procedures
+### Terugrolprocedures
 ```bash
-# Quick rollback script
+# Snelle rollback-script
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Wissel omgeving
     azd env select "$environment"
     
-    # Rollback application
+    # Rollback applicatie
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Verifieer rollback
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Test kritieke eindpunten
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -611,32 +611,32 @@ quick_rollback() {
 
 ## 📊 Debugging Dashboards
 
-### Aangepast Monitoring Dashboard
+### Aangepast monitoringdashboard
 ```bash
-# Create Application Insights queries for debugging
+# Maak Application Insights-query's voor debugging
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Query voor fouten
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Query voor prestatieproblemen
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Query voor afhankelijkheidsfouten
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Log Aggregatie
+### Logaggregatie
 ```bash
-# Aggregate logs from multiple sources
+# Verzamel logboeken van meerdere bronnen
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -658,14 +658,14 @@ aggregate_logs() {
 
 ## 🔗 Geavanceerde Bronnen
 
-### Aangepaste Debug Scripts
-Maak een `scripts/debug/` directory met:
+### Aangepaste Debugscripts
+Maak een `scripts/debug/`-map met:
 - `health-check.sh` - Uitgebreide gezondheidscontrole
 - `performance-test.sh` - Geautomatiseerde prestatietests
-- `log-analyzer.py` - Geavanceerde log parsing en analyse
-- `resource-validator.sh` - Validatie van infrastructuur
+- `log-analyzer.py` - Geavanceerde logparsing en analyse
+- `resource-validator.sh` - Infrastructuurvalidatie
 
-### Monitoring Integratie
+### Monitoringintegratie
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
@@ -684,23 +684,23 @@ hooks:
 
 ## Best Practices
 
-1. **Schakel altijd debug logging in** in niet-productieomgevingen
+1. **Schakel altijd debuglogging in** in niet-productieomgevingen
 2. **Maak reproduceerbare testcases** voor problemen
 3. **Documenteer debugprocedures** voor je team
 4. **Automatiseer gezondheidscontroles** en monitoring
 5. **Houd debugtools up-to-date** met je applicatiewijzigingen
-6. **Oefen debugprocedures** tijdens niet-incident tijden
+6. **Oefen debugprocedures** tijdens niet-incidenttijden
 
 ## Volgende Stappen
 
 - [Capaciteitsplanning](../pre-deployment/capacity-planning.md) - Plan resourcevereisten
-- [SKU Selectie](../pre-deployment/sku-selection.md) - Kies geschikte servicetiers
-- [Preflight Checks](../pre-deployment/preflight-checks.md) - Validatie vóór implementatie
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Snelle referentiecommando's
+- [SKU-selectie](../pre-deployment/sku-selection.md) - Kies geschikte servicetiers
+- [Preflight-controles](../pre-deployment/preflight-checks.md) - Validatie vóór deployment
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Snelreferentiecommando's
 
 ---
 
-**Onthoud**: Goed debuggen draait om systematisch, grondig en geduldig zijn. Deze tools en technieken helpen je om problemen sneller en effectiever te diagnosticeren.
+**Onthoud**: Goed debuggen draait om systematisch, grondig en geduldig werken. Deze tools en technieken helpen je om problemen sneller en effectiever te diagnosticeren.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

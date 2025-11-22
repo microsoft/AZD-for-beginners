@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-18T06:15:27+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-21T15:15:50+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "no"
 }
@@ -14,33 +14,33 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Hurtigstart
 - **⬅️ Forrige**: [Installasjon & Oppsett](installation.md)
 - **➡️ Neste**: [Konfigurasjon](configuration.md)
-- **🚀 Neste Kapittel**: [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Neste Kapittel**: [Kapittel 2: AI-First Utvikling](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduksjon
 
-Velkommen til ditt første Azure Developer CLI-prosjekt! Denne omfattende praktiske veiledningen gir deg en komplett gjennomgang av hvordan du oppretter, distribuerer og administrerer en fullstack-applikasjon på Azure ved hjelp av azd. Du vil jobbe med en ekte todo-applikasjon som inkluderer en React frontend, Node.js API backend og MongoDB-database.
+Velkommen til ditt første Azure Developer CLI-prosjekt! Denne omfattende praktiske veiledningen gir deg en komplett gjennomgang av hvordan du oppretter, distribuerer og administrerer en full-stack-applikasjon på Azure ved hjelp av azd. Du vil jobbe med en ekte todo-applikasjon som inkluderer en React frontend, Node.js API backend og MongoDB-database.
 
 ## Læringsmål
 
 Ved å fullføre denne veiledningen vil du:
-- Mestre arbeidsflyten for azd-prosjektinitiering ved hjelp av maler
+- Mestre arbeidsflyten for azd-prosjektinitialisering ved bruk av maler
 - Forstå strukturen og konfigurasjonsfilene i Azure Developer CLI-prosjekter
 - Utføre fullstendig applikasjonsdistribusjon til Azure med infrastrukturprovisjonering
-- Implementere strategier for applikasjonsoppdateringer og ny distribusjon
+- Implementere applikasjonsoppdateringer og strategier for ny distribusjon
 - Administrere flere miljøer for utvikling og staging
-- Anvende praksiser for ressursopprydding og kostnadsstyring
+- Anvende ressursopprydding og kostnadsstyringspraksis
 
 ## Læringsutbytte
 
 Etter fullføring vil du kunne:
-- Uavhengig initiere og konfigurere azd-prosjekter fra maler
+- Initialisere og konfigurere azd-prosjekter fra maler uavhengig
 - Navigere og endre azd-prosjektstrukturer effektivt
-- Distribuere fullstack-applikasjoner til Azure med enkle kommandoer
-- Feilsøke vanlige distribusjonsproblemer og autentiseringsfeil
+- Distribuere full-stack-applikasjoner til Azure med enkle kommandoer
+- Feilsøke vanlige distribusjonsproblemer og autentiseringsutfordringer
 - Administrere flere Azure-miljøer for ulike distribusjonsstadier
 - Implementere kontinuerlige distribusjonsarbeidsflyter for applikasjonsoppdateringer
 
-## Komme i Gang
+## Kom i Gang
 
 ### Sjekkliste for Forutsetninger
 - ✅ Azure Developer CLI installert ([Installasjonsveiledning](installation.md))
@@ -51,7 +51,7 @@ Etter fullføring vil du kunne:
 
 ### Verifiser Oppsettet
 ```bash
-# Check azd installation
+# Sjekk azd installasjon
 azd version
 ```
 ### Verifiser Azure-autentisering
@@ -70,18 +70,18 @@ node --version
 La oss starte med en populær todo-applikasjonsmal som inkluderer en React frontend og Node.js API backend.
 
 ```bash
-# Browse available templates
+# Bla gjennom tilgjengelige maler
 azd template list
 
-# Initialize the todo app template
+# Initialiser todo-app-malen
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Follow the prompts:
-# - Enter an environment name: "dev"
-# - Choose a subscription (if you have multiple)
-# - Choose a region: "East US 2" (or your preferred region)
+# Følg instruksjonene:
+# - Skriv inn et miljønavn: "dev"
+# - Velg et abonnement (hvis du har flere)
+# - Velg en region: "East US 2" (eller din foretrukne region)
 ```
 
 ### Hva Skjedde Akkurat?
@@ -95,9 +95,9 @@ azd init --template todo-nodejs-mongo
 La oss undersøke hva azd har opprettet for oss:
 
 ```bash
-# View the project structure
+# Vis prosjektstrukturen
 tree /f   # Windows
-# or
+# eller
 find . -type f | head -20   # macOS/Linux
 ```
 
@@ -132,13 +132,13 @@ my-first-azd-app/
 
 **azure.yaml** - Kjernen i ditt azd-prosjekt:
 ```bash
-# View the project configuration
+# Vis prosjektkonfigurasjonen
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Infrastrukturdefinisjon:
 ```bash
-# View the infrastructure code
+# Se infrastrukturen kode
 head -30 infra/main.bicep
 ```
 
@@ -148,22 +148,22 @@ Før distribusjon kan du tilpasse applikasjonen:
 
 ### Endre Frontend
 ```bash
-# Open the React app component
+# Åpne React-appkomponenten
 code src/web/src/App.tsx
 ```
 
 Gjør en enkel endring:
 ```typescript
-// Find the title and change it
+// Finn tittelen og endre den
 <h1>My Awesome Todo App</h1>
 ```
 
 ### Konfigurer Miljøvariabler
 ```bash
-# Set custom environment variables
+# Sett egendefinerte miljøvariabler
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# View all environment variables
+# Vis alle miljøvariabler
 azd env get-values
 ```
 
@@ -172,19 +172,19 @@ azd env get-values
 Nå til den spennende delen - distribuer alt til Azure!
 
 ```bash
-# Deploy infrastructure and application
+# Distribuer infrastruktur og applikasjon
 azd up
 
-# This command will:
-# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
-# 2. Build your application
-# 3. Deploy to the provisioned resources
-# 4. Display the application URL
+# Denne kommandoen vil:
+# 1. Klargjøre Azure-ressurser (App Service, Cosmos DB, etc.)
+# 2. Bygge applikasjonen din
+# 3. Distribuere til de klargjorte ressursene
+# 4. Vise applikasjons-URL-en
 ```
 
 ### Hva Skjer Under Distribusjonen?
 
-Kommandoen `azd up` utfører følgende steg:
+Kommandoen `azd up` utfører disse stegene:
 1. **Provisjon** (`azd provision`) - Oppretter Azure-ressurser
 2. **Pakke** - Bygger applikasjonskoden din
 3. **Distribuer** (`azd deploy`) - Distribuerer kode til Azure-ressurser
@@ -207,10 +207,10 @@ https://app-web-abc123def.azurewebsites.net
 ### Få Tilgang til Applikasjonen
 Klikk på URL-en som er oppgitt i distribusjonsutdataene, eller hent den når som helst:
 ```bash
-# Get application endpoints
+# Hent applikasjonsendepunkter
 azd show
 
-# Open the application in your browser
+# Åpne applikasjonen i nettleseren din
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
@@ -221,35 +221,35 @@ azd show --output json | jq -r '.services.web.endpoint'
 
 ### Overvåk Applikasjonen Din
 ```bash
-# Open Azure portal for your resources
+# Åpne Azure-portalen for ressursene dine
 azd monitor
 
-# View application logs
+# Vis applikasjonslogger
 azd logs
 ```
 
-## Steg 6: Gjør Endringer og Distribuer På Nytt
+## Steg 6: Gjør Endringer og Distribuer på Nytt
 
 La oss gjøre en endring og se hvor enkelt det er å oppdatere:
 
 ### Endre API-en
 ```bash
-# Edit the API code
+# Rediger API-koden
 code src/api/src/routes/lists.js
 ```
 
 Legg til en tilpasset responsheader:
 ```javascript
-// Find a route handler and add:
+// Finn en rutehåndterer og legg til:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### Distribuer Kun Kodeendringene
 ```bash
-# Deploy only the application code (skip infrastructure)
+# Distribuer kun applikasjonskoden (hopp over infrastruktur)
 azd deploy
 
-# This is much faster than 'azd up' since infrastructure already exists
+# Dette er mye raskere enn 'azd up' siden infrastrukturen allerede eksisterer
 ```
 
 ## Steg 7: Administrer Flere Miljøer
@@ -257,26 +257,26 @@ azd deploy
 Opprett et staging-miljø for å teste endringer før produksjon:
 
 ```bash
-# Create a new staging environment
+# Opprett et nytt staging-miljø
 azd env new staging
 
-# Deploy to staging
+# Distribuer til staging
 azd up
 
-# Switch back to dev environment
+# Bytt tilbake til utviklingsmiljø
 azd env select dev
 
-# List all environments
+# List opp alle miljøer
 azd env list
 ```
 
 ### Miljøsammenligning
 ```bash
-# View dev environment
+# Vis utviklingsmiljø
 azd env select dev
 azd show
 
-# View staging environment  
+# Vis staging-miljø
 azd env select staging
 azd show
 ```
@@ -286,13 +286,13 @@ azd show
 Når du er ferdig med å eksperimentere, rydd opp for å unngå løpende kostnader:
 
 ```bash
-# Delete all Azure resources for current environment
+# Slett alle Azure-ressurser for nåværende miljø
 azd down
 
-# Force delete without confirmation and purge soft-deleted resources
+# Tving sletting uten bekreftelse og fjern mykt slettede ressurser
 azd down --force --purge
 
-# Delete specific environment
+# Slett spesifikt miljø
 azd env select staging
 azd down --force --purge
 ```
@@ -300,44 +300,152 @@ azd down --force --purge
 ## Hva Du Har Lært
 
 Gratulerer! Du har med suksess:
-- Initialisert et azd-prosjekt fra en mal
-- Utforsket prosjektstrukturen og viktige filer
-- Distribuert en fullstack-applikasjon til Azure
-- Gjort kodeendringer og distribuert på nytt
-- Administrert flere miljøer
-- Ryddet opp ressurser
+- ✅ Initialisert et azd-prosjekt fra en mal
+- ✅ Utforsket prosjektstrukturen og viktige filer
+- ✅ Distribuert en full-stack-applikasjon til Azure
+- ✅ Gjort kodeendringer og distribuert på nytt
+- ✅ Administrert flere miljøer
+- ✅ Ryddet opp ressurser
+
+## 🎯 Ferdighetsvalideringsøvelser
+
+### Øvelse 1: Distribuer en Annen Mal (15 minutter)
+**Mål**: Demonstrere mestring av azd init og distribusjonsarbeidsflyt
+
+```bash
+# Prøv Python + MongoDB-stakken
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Verifiser distribusjonen
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Rydd opp
+azd down --force --purge
+```
+
+**Suksesskriterier:**
+- [ ] Applikasjonen distribueres uten feil
+- [ ] Kan få tilgang til applikasjons-URL i nettleseren
+- [ ] Applikasjonen fungerer korrekt (legg til/fjern todos)
+- [ ] Ryddet opp alle ressurser med suksess
+
+### Øvelse 2: Tilpass Konfigurasjon (20 minutter)
+**Mål**: Øv på konfigurasjon av miljøvariabler
+
+```bash
+cd my-first-azd-app
+
+# Opprett tilpasset miljø
+azd env new custom-config
+
+# Sett tilpassede variabler
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Verifiser variabler
+azd env get-values | grep APP_TITLE
+
+# Distribuer med tilpasset konfigurasjon
+azd up
+```
+
+**Suksesskriterier:**
+- [ ] Tilpasset miljø opprettet med suksess
+- [ ] Miljøvariabler satt og tilgjengelige
+- [ ] Applikasjonen distribueres med tilpasset konfigurasjon
+- [ ] Kan verifisere tilpassede innstillinger i distribuert app
+
+### Øvelse 3: Arbeidsflyt for Flere Miljøer (25 minutter)
+**Mål**: Mestre miljøadministrasjon og distribusjonsstrategier
+
+```bash
+# Opprett utviklingsmiljø
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Noter utviklings-URL
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Opprett staging-miljø
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Noter staging-URL
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# Sammenlign miljøer
+azd env list
+
+# Test begge miljøene
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Rydd opp i begge
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**Suksesskriterier:**
+- [ ] To miljøer opprettet med forskjellige konfigurasjoner
+- [ ] Begge miljøer distribuert med suksess
+- [ ] Kan bytte mellom miljøer ved bruk av `azd env select`
+- [ ] Miljøvariabler varierer mellom miljøene
+- [ ] Ryddet opp begge miljøer med suksess
+
+## 📊 Din Fremgang
+
+**Tidsbruk**: ~60-90 minutter  
+**Ferdigheter Tilegnet**:
+- ✅ Malbasert prosjektinitialisering
+- ✅ Provisjonering av Azure-ressurser
+- ✅ Applikasjonsdistribusjonsarbeidsflyter
+- ✅ Miljøadministrasjon
+- ✅ Konfigurasjonsadministrasjon
+- ✅ Ressursopprydding og kostnadsstyring
+
+**Neste Nivå**: Du er klar for [Konfigurasjonsveiledning](configuration.md) for å lære avanserte konfigurasjonsmønstre!
 
 ## Feilsøking av Vanlige Problemer
 
 ### Autentiseringsfeil
 ```bash
-# Re-authenticate with Azure
+# Re-autentiser med Azure
 az login
 
-# Verify subscription access
+# Verifiser abonnementstilgang
 az account show
 ```
 
 ### Distribusjonsfeil
 ```bash
-# Enable debug logging
+# Aktiver feillogging
 export AZD_DEBUG=true
 azd up --debug
 
-# View detailed logs
+# Vis detaljerte logger
 azd logs --service api
 azd logs --service web
 ```
 
-### Ressursnavnkonflikter
+### Konflikter med Ressursnavn
 ```bash
-# Use a unique environment name
+# Bruk et unikt miljønavn
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Port-/Nettverksproblemer
 ```bash
-# Check if ports are available
+# Sjekk om porter er tilgjengelige
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
@@ -351,7 +459,7 @@ Nå som du har fullført ditt første prosjekt, utforsk disse avanserte temaene:
 - [Legg til databaser, lagring og andre tjenester](../deployment/provisioning.md#adding-services)
 
 ### 2. Sett Opp CI/CD
-- [GitHub Actions-integrasjon](../deployment/cicd-integration.md)
+- [GitHub Actions Integrasjon](../deployment/cicd-integration.md)
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
 ### 3. Beste Praksis for Produksjon
@@ -361,12 +469,12 @@ Nå som du har fullført ditt første prosjekt, utforsk disse avanserte temaene:
 
 ### 4. Utforsk Flere Maler
 ```bash
-# Browse templates by category
+# Bla gjennom maler etter kategori
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Try different technology stacks
+# Prøv forskjellige teknologistakker
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
@@ -391,7 +499,7 @@ azd init --template todo-java-mongo
 
 ---
 
-**Gratulerer med å ha fullført ditt første azd-prosjekt!** Du er nå klar til å bygge og distribuere fantastiske applikasjoner på Azure med selvtillit.
+**Gratulerer med å fullføre ditt første azd-prosjekt!** Du er nå klar til å bygge og distribuere fantastiske applikasjoner på Azure med selvtillit.
 
 ---
 
@@ -400,10 +508,12 @@ azd init --template todo-java-mongo
 - **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Hurtigstart
 - **⬅️ Forrige**: [Installasjon & Oppsett](installation.md)
 - **➡️ Neste**: [Konfigurasjon](configuration.md)
-- **🚀 Neste Kapittel**: [Kapittel 2: AI-First Utvikling](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Neste Kapittel**: [Kapittel 2: AI-First Utvikling](../microsoft-foundry/microsoft-foundry-integration.md)
 - **Neste Leksjon**: [Distribusjonsveiledning](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

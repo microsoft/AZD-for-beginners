@@ -1,111 +1,367 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eb84941706983946ae03bfa0433c0bb6",
-  "translation_date": "2025-09-18T07:25:34+00:00",
+  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
+  "translation_date": "2025-11-21T15:36:31+00:00",
   "source_file": "examples/retail-multiagent-arm-template/README.md",
   "language_code": "fi"
 }
 -->
-# Retail Multi-Agent Solution - ARM-mallin käyttöönotto
+# Retail Multi-Agent Solution - Infrastruktuurimalli
 
-**Luku 5: Tuotantokäyttöönottopaketti**
+**Luku 5: Tuotantokäyttöön tarkoitettu paketti**
 - **📚 Kurssin kotisivu**: [AZD For Beginners](../../README.md)
-- **📖 Liittyvä luku**: [Luku 5: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Skenaariokäsikirja**: [Täydellinen toteutus](../retail-scenario.md)
-- **🎯 Nopea käyttöönotto**: [Yhden klikkauksen käyttöönotto](../../../../examples/retail-multiagent-arm-template)
+- **📖 Aiheeseen liittyvä luku**: [Luku 5: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Skenaariokäsikirja**: [Täydellinen arkkitehtuuri](../retail-scenario.md)
+- **🎯 Nopea käyttöönotto**: [Yhden napsautuksen käyttöönotto](../../../../examples/retail-multiagent-arm-template)
 
-Tämä hakemisto sisältää täydellisen Azure Resource Manager (ARM) -mallin vähittäiskaupan Multi-Agent Customer Support Solutionin käyttöönottoon, tarjoten infrastruktuurin koodina koko arkkitehtuurille.
+> **⚠️ VAIN INFRASTRUKTUURIMALLI**  
+> Tämä ARM-malli ottaa käyttöön **Azure-resursseja** monen agentin järjestelmälle.  
+>  
+> **Mitä otetaan käyttöön (15-25 minuuttia):**
+> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, upotukset kolmessa alueessa)
+> - ✅ AI-hakupalvelu (tyhjä, valmis indeksin luomiseen)
+> - ✅ Container Apps (paikkamerkkikuvat, valmiina koodillesi)
+> - ✅ Tallennus, Cosmos DB, Key Vault, Application Insights
+>  
+> **Mitä EI sisälly (vaatii kehitystyötä):**
+> - ❌ Agenttien toteutuskoodi (asiakasagentti, varastoagentti)
+> - ❌ Reitityksen logiikka ja API-päätepisteet
+> - ❌ Käyttöliittymän chat-näkymä
+> - ❌ Hakemiston skeemat ja dataputket
+> - ❌ **Arvioitu kehitystyön kesto: 80-120 tuntia**
+>  
+> **Käytä tätä mallia, jos:**
+> - ✅ Haluat ottaa käyttöön Azure-infrastruktuurin monen agentin projektille
+> - ✅ Suunnittelet agenttien toteutuksen kehittämistä erikseen
+> - ✅ Tarvitset tuotantovalmiin infrastruktuurin perustan
+>  
+> **Älä käytä, jos:**
+> - ❌ Odotat toimivaa monen agentin demoa heti
+> - ❌ Etsit täydellisiä sovelluskoodiesimerkkejä
+
+## Yleiskatsaus
+
+Tämä hakemisto sisältää kattavan Azure Resource Manager (ARM) -mallin, jolla otetaan käyttöön **monen agentin asiakastukijärjestelmän infrastruktuurin perusta**. Malli ottaa käyttöön kaikki tarvittavat Azure-palvelut, jotka on asianmukaisesti konfiguroitu ja yhdistetty, valmiina sovelluskehitystä varten.
+
+**Käyttöönoton jälkeen sinulla on:** Tuotantovalmiit Azure-infrastruktuurit  
+**Järjestelmän täydentämiseksi tarvitset:** Agenttikoodin, käyttöliittymän ja datakonfiguraation (katso [Arkkitehtuuriohje](../retail-scenario.md))
 
 ## 🎯 Mitä otetaan käyttöön
 
-### Keskeinen infrastruktuuri
-- **Azure OpenAI Services** (Monialueinen korkean saatavuuden takaamiseksi)
-  - Ensisijainen alue: GPT-4o asiakasagentille
-  - Toissijainen alue: GPT-4o-mini varastoagentille  
-  - Kolmas alue: Tekstien upotusmalli
-  - Arviointialue: GPT-4o arviointimalli
-- **Azure AI Search** vektorihaun ominaisuuksilla
-- **Azure Storage Account** blob-säiliöillä dokumentteja ja latauksia varten
-- **Azure Container Apps Environment** automaattisella skaalaamisella
-- **Container Apps** agenttireitittimelle ja käyttöliittymälle
-- **Azure Cosmos DB** keskusteluhistorian tallennukseen
-- **Azure Key Vault** salaisuuksien hallintaan (valinnainen)
-- **Application Insights** ja Log Analytics seurantaan (valinnainen)
-- **Document Intelligence** dokumenttien käsittelyyn
-- **Bing Search API** reaaliaikaiseen tiedonhakuun
+### Ydininfra (tilanne käyttöönoton jälkeen)
 
-### Käyttöönoton tilat
+✅ **Azure OpenAI -palvelut** (valmiina API-kutsuille)
+  - Ensisijainen alue: GPT-4o-käyttöönotto (20K TPM kapasiteetti)
+  - Toissijainen alue: GPT-4o-mini-käyttöönotto (10K TPM kapasiteetti)
+  - Kolmas alue: Tekstiupotusmalli (30K TPM kapasiteetti)
+  - Arviointialue: GPT-4o-arviointimalli (15K TPM kapasiteetti)
+  - **Tila:** Täysin toimiva - voi tehdä API-kutsuja heti
 
-| Tila | Kuvaus | Käyttötapaus | Resurssit |
-|------|-------------|----------|-----------|
-| **Minimal** | Kustannusoptimoitu peruskäyttöönotto | Kehitys, testaus | Perus-SKU:t, yksi alue, vähennetty kapasiteetti |
-| **Standard** | Tasapainoinen käyttöönotto tuotantokuormille | Tuotanto, kohtalainen skaalaus | Standard-SKU:t, monialueinen, normaali kapasiteetti |
-| **Premium** | Suorituskykyinen, yritystason käyttöönotto | Yritys, suuri skaalaus | Premium-SKU:t, monialueinen, suuri kapasiteetti |
+✅ **Azure AI Search** (tyhjä - valmis konfiguroitavaksi)
+  - Vektorihakukyvyt käytössä
+  - Standard-taso, 1 osio, 1 replika
+  - **Tila:** Palvelu käynnissä, mutta vaatii indeksin luomisen
+  - **Toimenpiteet:** Luo hakemisto omalla skeemallasi
+
+✅ **Azure Storage Account** (tyhjä - valmis latauksille)
+  - Blob-kontit: `documents`, `uploads`
+  - Suojattu konfiguraatio (vain HTTPS, ei julkista pääsyä)
+  - **Tila:** Valmis vastaanottamaan tiedostoja
+  - **Toimenpiteet:** Lataa tuotedatasi ja dokumenttisi
+
+⚠️ **Container Apps -ympäristö** (paikkamerkkikuvat otettu käyttöön)
+  - Agenttireititin (nginx-oletuskuva)
+  - Käyttöliittymäsovellus (nginx-oletuskuva)
+  - Automaattinen skaalaus konfiguroitu (0-10 instanssia)
+  - **Tila:** Paikkamerkkikontit käynnissä
+  - **Toimenpiteet:** Rakenna ja ota käyttöön agenttisovelluksesi
+
+✅ **Azure Cosmos DB** (tyhjä - valmis datalle)
+  - Tietokanta ja kontti esikonfiguroitu
+  - Optimoitu matalan viiveen operaatioille
+  - TTL käytössä automaattista siivousta varten
+  - **Tila:** Valmis tallentamaan keskusteluhistoriaa
+
+✅ **Azure Key Vault** (valinnainen - valmis salaisuuksille)
+  - Pehmeä poisto käytössä
+  - RBAC konfiguroitu hallinnoiduille identiteeteille
+  - **Tila:** Valmis tallentamaan API-avaimia ja yhteysmerkkijonoja
+
+✅ **Application Insights** (valinnainen - valvonta aktiivinen)
+  - Yhdistetty Log Analytics -työtilaan
+  - Mukautetut mittarit ja hälytykset konfiguroitu
+  - **Tila:** Valmis vastaanottamaan telemetriatietoja sovelluksistasi
+
+✅ **Document Intelligence** (valmiina API-kutsuille)
+  - S0-taso tuotantokuormille
+  - **Tila:** Valmis käsittelemään ladattuja dokumentteja
+
+✅ **Bing Search API** (valmiina API-kutsuille)
+  - S1-taso reaaliaikaisille hauille
+  - **Tila:** Valmis verkkohakukyselyille
+
+### Käyttöönottomoodit
+
+| Moodi | OpenAI-kapasiteetti | Kontti-instanssit | Hakutaso | Tallennuksen redundanssi | Paras käyttöön |
+|-------|---------------------|-------------------|----------|--------------------------|----------------|
+| **Minimal** | 10K-20K TPM | 0-2 replikaa | Basic | LRS (paikallinen) | Kehitys/testaus, oppiminen, konseptin todistus |
+| **Standard** | 30K-60K TPM | 2-5 replikaa | Standard | ZRS (alueellinen) | Tuotanto, kohtalainen liikenne (<10K käyttäjää) |
+| **Premium** | 80K-150K TPM | 5-10 replikaa, alueellinen redundanssi | Premium | GRS (maantieteellinen) | Yrityskäyttö, korkea liikenne (>10K käyttäjää), 99,99 % SLA |
+
+**Kustannusvaikutus:**
+- **Minimal → Standard:** ~4x kustannusten kasvu ($100-370/kk → $420-1,450/kk)
+- **Standard → Premium:** ~3x kustannusten kasvu ($420-1,450/kk → $1,150-3,500/kk)
+- **Valitse perustuen:** Odotettuun kuormitukseen, SLA-vaatimuksiin, budjettirajoituksiin
+
+**Kapasiteettisuunnittelu:**
+- **TPM (Tokens Per Minute):** Yhteensä kaikille mallikäyttöönottoille
+- **Kontti-instanssit:** Automaattisen skaalauksen alue (min-max replikaa)
+- **Hakutaso:** Vaikuttaa kyselyjen suorituskykyyn ja indeksikokorajoihin
 
 ## 📋 Esivaatimukset
 
-1. **Azure CLI** asennettuna ja konfiguroituna
-2. **Aktiivinen Azure-tilaus** riittävillä kiintiöillä
-3. **Asianmukaiset käyttöoikeudet** resurssien luomiseen kohdetilauksessa
-4. **Resurssikiintiöt**:
-   - Azure OpenAI (tarkista alueellinen saatavuus)
-   - Container Apps (vaihtelee alueittain)
-   - AI Search (suositellaan standard-tasoa tai korkeampaa)
+### Tarvittavat työkalut
+1. **Azure CLI** (versio 2.50.0 tai uudempi)
+   ```bash
+   az --version  # Tarkista versio
+   az login      # Todennus
+   ```
+
+2. **Aktiivinen Azure-tilaus** omistajan tai avustajan oikeuksilla
+   ```bash
+   az account show  # Vahvista tilaus
+   ```
+
+### Tarvittavat Azure-kvotat
+
+Varmista ennen käyttöönottoa, että kohdealueillasi on riittävät kvotat:
+
+```bash
+# Tarkista Azure OpenAI:n saatavuus alueellasi
+az cognitiveservices account list-skus \
+  --kind OpenAI \
+  --location eastus2
+
+# Varmista OpenAI:n kiintiö (esimerkki gpt-4o:lle)
+az cognitiveservices usage list \
+  --location eastus2 \
+  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+
+# Tarkista Container Apps -kiintiö
+az provider show \
+  --namespace Microsoft.App \
+  --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+```
+
+**Vähimmäisvaaditut kvotat:**
+- **Azure OpenAI:** 3-4 mallikäyttöönottoa alueilla
+  - GPT-4o: 20K TPM (Tokens Per Minute)
+  - GPT-4o-mini: 10K TPM
+  - text-embedding-ada-002: 30K TPM
+  - **Huom:** GPT-4o saattaa olla jonotuslistalla joillakin alueilla - tarkista [mallien saatavuus](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- **Container Apps:** Hallinnoitu ympäristö + 2-10 kontti-instanssia
+- **AI Search:** Standard-taso (Basic ei riitä vektorihakuun)
+- **Cosmos DB:** Standard provisioned throughput
+
+**Jos kvotat eivät riitä:**
+1. Siirry Azure-portaaliin → Kvotat → Pyydä lisäystä
+2. Tai käytä Azure CLI:tä:
+   ```bash
+   az support tickets create \
+     --ticket-name "OpenAI-Quota-Increase" \
+     --severity "minimal" \
+     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+   ```
+3. Harkitse vaihtoehtoisia alueita, joilla on saatavuutta
 
 ## 🚀 Nopea käyttöönotto
 
 ### Vaihtoehto 1: Azure CLI:n käyttö
 
 ```bash
-# Clone or download the template files
+# Kloonaa tai lataa mallitiedostot
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# Make the deployment script executable
+# Tee käyttöönotto-skripti suoritettavaksi
 chmod +x deploy.sh
 
-# Deploy with default settings
+# Ota käyttöön oletusasetuksilla
 ./deploy.sh -g myResourceGroup
 
-# Deploy for production with premium features
+# Ota käyttöön tuotantoon premium-ominaisuuksilla
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### Vaihtoehto 2: Azure Portalin käyttö
+### Vaihtoehto 2: Azure-portaalin käyttö
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
 ### Vaihtoehto 3: Suora Azure CLI:n käyttö
 
 ```bash
-# Create resource group
+# Luo resurssiryhmä
 az group create --name myResourceGroup --location eastus2
 
-# Deploy template
+# Ota käyttöön mallipohja
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json
 ```
 
+## ⏱️ Käyttöönoton aikajana
+
+### Mitä odottaa
+
+| Vaihe | Kesto | Mitä tapahtuu |
+|-------|-------|---------------||
+| **Mallin validointi** | 30-60 sekuntia | Azure validoi ARM-mallin syntaksin ja parametrit |
+| **Resurssiryhmän luonti** | 10-20 sekuntia | Luo resurssiryhmän (jos tarpeen) |
+| **OpenAI:n käyttöönotto** | 5-8 minuuttia | Luo 3-4 OpenAI-tiliä ja ottaa käyttöön malleja |
+| **Container Apps** | 3-5 minuuttia | Luo ympäristön ja ottaa käyttöön paikkamerkkikontteja |
+| **Haku ja tallennus** | 2-4 minuuttia | Ottaa käyttöön AI-hakupalvelun ja tallennustilit |
+| **Cosmos DB** | 2-3 minuuttia | Luo tietokannan ja konfiguroi kontit |
+| **Valvonnan asennus** | 2-3 minuuttia | Ottaa käyttöön Application Insightsin ja Log Analyticsin |
+| **RBAC-konfiguraatio** | 1-2 minuuttia | Konfiguroi hallinnoidut identiteetit ja käyttöoikeudet |
+| **Kokonaiskäyttöönotto** | **15-25 minuuttia** | Täydellinen infrastruktuuri valmiina |
+
+**Käyttöönoton jälkeen:**
+- ✅ **Infrastruktuuri valmis:** Kaikki Azure-palvelut otettu käyttöön ja käynnissä
+- ⏱️ **Sovelluskehitys:** 80-120 tuntia (sinun vastuullasi)
+- ⏱️ **Indeksin konfigurointi:** 15-30 minuuttia (vaatii skeemasi)
+- ⏱️ **Datan lataus:** Riippuu datasetin koosta
+- ⏱️ **Testaus ja validointi:** 2-4 tuntia
+
+---
+
+## ✅ Varmista käyttöönoton onnistuminen
+
+### Vaihe 1: Tarkista resurssien käyttöönotto (2 minuuttia)
+
+```bash
+# Varmista, että kaikki resurssit on otettu käyttöön onnistuneesti
+az resource list \
+  --resource-group myResourceGroup \
+  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
+  --output table
+```
+
+**Odotettu tulos:** Tyhjä taulukko (kaikki resurssit näyttävät tilan "Onnistunut")
+
+### Vaihe 2: Varmista Azure OpenAI -käyttöönotot (3 minuuttia)
+
+```bash
+# Luettele kaikki OpenAI-tilit
+az cognitiveservices account list \
+  --resource-group myResourceGroup \
+  --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
+  --output table
+
+# Tarkista mallien käyttöönotot ensisijaiselle alueelle
+OPENAI_NAME=$(az cognitiveservices account list \
+  --resource-group myResourceGroup \
+  --query "[?kind=='OpenAI'] | [0].name" -o tsv)
+
+az cognitiveservices account deployment list \
+  --name $OPENAI_NAME \
+  --resource-group myResourceGroup \
+  --output table
+```
+
+**Odotettu tulos:** 
+- 3-4 OpenAI-tiliä (ensisijainen, toissijainen, kolmas, arviointialueet)
+- 1-2 mallikäyttöönottoa per tili (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+
+### Vaihe 3: Testaa infrastruktuurin päätepisteet (5 minuuttia)
+
+```bash
+# Hae Container App -URL-osoitteet
+az containerapp list \
+  --resource-group myResourceGroup \
+  --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
+  --output table
+
+# Testaa reitittimen päätepistettä (paikkamerkkikuva vastaa)
+ROUTER_URL=$(az containerapp show \
+  --name retail-router \
+  --resource-group myResourceGroup \
+  --query "properties.configuration.ingress.fqdn" -o tsv)
+
+echo "Testing: https://$ROUTER_URL"
+curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
+```
+
+**Odotettu tulos:** 
+- Container Apps näyttää tilan "Running"
+- Paikkamerkki nginx vastaa HTTP 200 tai 404 (ei sovelluskoodia vielä)
+
+### Vaihe 4: Varmista Azure OpenAI API -pääsy (3 minuuttia)
+
+```bash
+# Hanki OpenAI-päätepiste ja avain
+OPENAI_ENDPOINT=$(az cognitiveservices account show \
+  --name $OPENAI_NAME \
+  --resource-group myResourceGroup \
+  --query "properties.endpoint" -o tsv)
+
+OPENAI_KEY=$(az cognitiveservices account keys list \
+  --name $OPENAI_NAME \
+  --resource-group myResourceGroup \
+  --query "key1" -o tsv)
+
+# Testaa GPT-4o käyttöönottoa
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+  -H "Content-Type: application/json" \
+  -H "api-key: $OPENAI_KEY" \
+  -d '{
+    "messages": [{"role": "user", "content": "Say hello"}],
+    "max_tokens": 10
+  }'
+```
+
+**Odotettu tulos:** JSON-vastaus keskustelun täydentämisestä (vahvistaa, että OpenAI toimii)
+
+### Mikä toimii ja mikä ei
+
+**✅ Toimii käyttöönoton jälkeen:**
+- Azure OpenAI -mallit otettu käyttöön ja hyväksyvät API-kutsuja
+- AI-hakupalvelu käynnissä (tyhjä, ei indeksejä vielä)
+- Container Apps käynnissä (paikkamerkki nginx-kuvat)
+- Tallennustilit käytettävissä ja valmiina latauksille
+- Cosmos DB valmis dataoperaatioihin
+- Application Insights kerää infrastruktuuritelemetriaa
+- Key Vault valmis salaisuuksien tallennukseen
+
+**❌ Ei vielä toiminnassa (vaatii kehitystyötä):**
+- Agenttien päätepisteet (ei sovelluskoodia otettu käyttöön)
+- Keskustelutoiminnallisuus (vaatii käyttöliittymän + taustajärjestelmän toteutuksen)
+- Hakukyselyt (ei hakemistoa luotu vielä)
+- Dokumenttien käsittelyputki (ei dataa ladattu)
+- Mukautettu telemetria (vaatii sovelluksen instrumentoinnin)
+
+**Seuraavat vaiheet:** Katso [Käyttöönoton jälkeinen konfigurointi](../../../../examples/retail-multiagent-arm-template) kehittääksesi ja ottaaksesi käyttöön sovelluksesi
+
+---
+
 ## ⚙️ Konfigurointivaihtoehdot
 
 ### Mallin parametrit
 
 | Parametri | Tyyppi | Oletus | Kuvaus |
-|-----------|------|---------|-------------|
-| `projectName` | string | "retail" | Kaikkien resurssien nimien etuliite |
-| `location` | string | Resurssiryhmän sijainti | Ensisijainen käyttöönottoalue |
-| `secondaryLocation` | string | "westus2" | Toissijainen alue monialuekäyttöönotolle |
-| `tertiaryLocation` | string | "francecentral" | Alue upotusmallille |
-| `environmentName` | string | "dev" | Ympäristön määrittely (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | Käyttöönoton konfiguraatio (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | Monialuekäyttöönoton aktivointi |
-| `enableMonitoring` | bool | true | Application Insightsin ja lokituksen aktivointi |
-| `enableSecurity` | bool | true | Key Vaultin ja parannetun turvallisuuden aktivointi |
+|-----------|--------|--------|--------|
+| `projectName` | merkkijono | "retail" | Kaikkien resurssien nimen etuliite |
+| `location` | merkkijono | Resurssiryhmän sijainti | Ensisijainen käyttöönottoalue |
+| `secondaryLocation` | merkkijono | "westus2" | Toissijainen alue monialuekäyttöönotolle |
+| `tertiaryLocation` | merkkijono | "francecentral" | Alue upotusmallille |
+| `environmentName` | merkkijono | "dev" | Ympäristön määrittely (kehitys/testaus/tuotanto) |
+| `deploymentMode` | merkkijono | "standard" | Käyttöönottokonfiguraatio (minimal/standard/premium) |
+| `enableMultiRegion` | bool | true | Ota käyttöön monialuekäyttöönotto |
+| `enableMonitoring` | bool | true | Ota käyttöön Application Insights ja lokitus |
+| `enableSecurity` | bool | true | Ota käyttöön Key Vault ja parannettu tietoturva |
 
-### Parametrien muokkaaminen
+### Parametrien mukauttaminen
 
 Muokkaa `azuredeploy.parameters.json`:
 
@@ -151,18 +407,18 @@ Muokkaa `azuredeploy.parameters.json`:
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 📖 Käyttöönoton skriptin käyttö
+## 📖 Käyttöönottoskriptin käyttö
 
-`deploy.sh`-skripti tarjoaa interaktiivisen käyttöönoton:
+`deploy.sh`-skripti tarjoaa interaktiivisen käyttöönoton kokemuksen:
 
 ```bash
-# Show help
+# Näytä ohje
 ./deploy.sh --help
 
-# Basic deployment
+# Perustason käyttöönotto
 ./deploy.sh -g myResourceGroup
 
-# Advanced deployment with custom settings
+# Edistynyt käyttöönotto mukautetuilla asetuksilla
 ./deploy.sh \
   -g myProductionRG \
   -p companyname \
@@ -170,7 +426,7 @@ Muokkaa `azuredeploy.parameters.json`:
   -m premium \
   -l eastus2
 
-# Development deployment without multi-region
+# Kehityskäyttöönotto ilman monialueellisuutta
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -181,27 +437,27 @@ Muokkaa `azuredeploy.parameters.json`:
 
 ### Skriptin ominaisuudet
 
-- ✅ **Esivaatimusten tarkistus** (Azure CLI, kirjautumistila, mallin tiedostot)
+- ✅ **Esivaatimusten validointi** (Azure CLI, kirjautumistila, mallin tiedostot)
 - ✅ **Resurssiryhmän hallinta** (luo, jos ei ole olemassa)
 - ✅ **Mallin validointi** ennen käyttöönottoa
 - ✅ **Edistymisen seuranta** värikoodatulla ulostulolla
 - ✅ **Käyttöönoton tulosten** näyttö
-- ✅ **Ohjeet käyttöönoton jälkeen**
+- ✅ **Käyttöönoton jälkeinen opastus**
 
 ## 📊 Käyttöönoton seuranta
 
-### Käyttöönoton tilan tarkistus
+### Tarkista käyttöönoton tila
 
 ```bash
-# List deployments
+# Listaa käyttöönotot
 az deployment group list --resource-group myResourceGroup --output table
 
-# Get deployment details
+# Hae käyttöönoton tiedot
 az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# Watch deployment progress
+# Seuraa käyttöönoton etenemistä
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -213,79 +469,201 @@ az deployment group create \
 
 Onnistuneen käyttöönoton jälkeen seuraavat tulokset ovat saatavilla:
 
-- **Frontend URL**: Julkinen päätepiste verkkokäyttöliittymälle
-- **Router URL**: API-päätepiste agenttireitittimelle
-- **OpenAI-päätepisteet**: Ensisijainen ja toissijainen OpenAI-palvelun päätepiste
+- **Käyttöliittymän URL**: Julkinen päätepiste verkkokäyttöliittymälle
+- **Reitittimen URL**: API-päätepiste agenttireitittimelle
+- **OpenAI-päätepisteet**: Ensisijaiset ja toissijaiset OpenAI-palvelun päätepisteet
 - **Hakupalvelu**: Azure AI Search -palvelun päätepiste
-- **Storage Account**: Dokumenttien tallennustilin nimi
-- **Key Vault**: Key Vaultin nimi (jos aktivoitu)
-- **Application Insights**: Seurantapalvelun nimi (jos aktivoitu)
+- **Tallennustili**: Dokumenttien tallennustilin nimi
+- **Key Vault**: Key Vaultin nimi (jos käyt
+> **📝 Tärkeää:** Infrastruktuuri on otettu käyttöön, mutta sinun täytyy kehittää ja ottaa käyttöön sovelluskoodi.
 
-## 🔧 Käyttöönoton jälkeinen konfigurointi
+### Vaihe 1: Kehitä agenttisovellukset (Sinun vastuullasi)
 
-### 1. Hakemiston konfigurointi
+ARM-malli luo **tyhjiä Container Appseja** paikkamerkki-nginx-kuvilla. Sinun täytyy:
+
+**Vaadittava kehitys:**
+1. **Agenttien toteutus** (30-40 tuntia)
+   - Asiakaspalveluagentti GPT-4o-integraatiolla
+   - Varastoagentti GPT-4o-mini-integraatiolla
+   - Agenttien reitityksen logiikka
+
+2. **Frontend-kehitys** (20-30 tuntia)
+   - Keskustelukäyttöliittymä (React/Vue/Angular)
+   - Tiedoston lataustoiminnallisuus
+   - Vastausten esittäminen ja muotoilu
+
+3. **Backend-palvelut** (12-16 tuntia)
+   - FastAPI- tai Express-reititin
+   - Autentikointivälimuisti
+   - Telemetriaintegrointi
+
+**Katso:** [Arkkitehtuuriohje](../retail-scenario.md) yksityiskohtaisiin toteutusmalleihin ja koodiesimerkkeihin
+
+### Vaihe 2: Määritä AI-hakemisto (15-30 minuuttia)
+
+Luo hakemisto, joka vastaa tietomalliasi:
 
 ```bash
-# Set environment variables from deployment outputs
-export SEARCH_SERVICE_NAME="<search-service-name>"
-export SEARCH_ADMIN_KEY="<search-admin-key>"
+# Hae hakupalvelun tiedot
+SEARCH_NAME=$(az search service list \
+  --resource-group myResourceGroup \
+  --query "[0].name" -o tsv)
 
-# Create search index (customize schema as needed)
-curl -X POST "https://${SEARCH_SERVICE_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
+SEARCH_KEY=$(az search admin-key show \
+  --service-name $SEARCH_NAME \
+  --resource-group myResourceGroup \
+  --query "primaryKey" -o tsv)
+
+# Luo indeksi skeemallasi (esimerkki)
+curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
-  -H "api-key: ${SEARCH_ADMIN_KEY}" \
-  -d @../data/search-schema.json
+  -H "api-key: ${SEARCH_KEY}" \
+  -d '{
+    "name": "products",
+    "fields": [
+      {"name": "id", "type": "Edm.String", "key": true},
+      {"name": "title", "type": "Edm.String", "searchable": true},
+      {"name": "content", "type": "Edm.String", "searchable": true},
+      {"name": "category", "type": "Edm.String", "filterable": true},
+      {"name": "content_vector", "type": "Collection(Edm.Single)", 
+       "searchable": true, "dimensions": 1536, "vectorSearchProfile": "default"}
+    ],
+    "vectorSearch": {
+      "algorithms": [{"name": "default", "kind": "hnsw"}],
+      "profiles": [{"name": "default", "algorithm": "default"}]
+    }
+  }'
 ```
 
-### 2. Alustavien tietojen lataus
+**Resurssit:**
+- [AI-hakemiston skeeman suunnittelu](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [Vektorihakemiston konfigurointi](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+
+### Vaihe 3: Lataa tietosi (Aika vaihtelee)
+
+Kun sinulla on tuotedata ja asiakirjat:
 
 ```bash
-# Upload documents to storage
+# Hanki tallennustilin tiedot
+STORAGE_NAME=$(az storage account list \
+  --resource-group myResourceGroup \
+  --query "[0].name" -o tsv)
+
+STORAGE_KEY=$(az storage account keys list \
+  --account-name $STORAGE_NAME \
+  --resource-group myResourceGroup \
+  --query "[0].value" -o tsv)
+
+# Lataa asiakirjasi
 az storage blob upload-batch \
   --destination documents \
-  --source ../data/initial-docs \
-  --account-name <storage-account-name>
+  --source /path/to/your/product/docs \
+  --account-name $STORAGE_NAME \
+  --account-key $STORAGE_KEY
+
+# Esimerkki: Lataa yksittäinen tiedosto
+az storage blob upload \
+  --container-name documents \
+  --name "product-manual.pdf" \
+  --file /path/to/product-manual.pdf \
+  --account-name $STORAGE_NAME \
+  --account-key $STORAGE_KEY
 ```
 
-### 3. Agenttien päätepisteiden testaus
+### Vaihe 4: Rakenna ja ota sovelluksesi käyttöön (8-12 tuntia)
+
+Kun olet kehittänyt agenttikoodisi:
 
 ```bash
-# Test router endpoint
-curl -X POST "<router-url>/chat" \
+# 1. Luo Azure Container Registry (tarvittaessa)
+az acr create \
+  --name myregistry \
+  --resource-group myResourceGroup \
+  --sku Basic
+
+# 2. Rakenna ja työnnä agent router -kuva
+docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
+az acr login --name myregistry
+docker push myregistry.azurecr.io/agent-router:v1
+
+# 3. Rakenna ja työnnä frontend-kuva
+docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
+docker push myregistry.azurecr.io/frontend:v1
+
+# 4. Päivitä Container Apps kuvillasi
+az containerapp update \
+  --name retail-router \
+  --resource-group myResourceGroup \
+  --image myregistry.azurecr.io/agent-router:v1
+
+az containerapp update \
+  --name retail-frontend \
+  --resource-group myResourceGroup \
+  --image myregistry.azurecr.io/frontend:v1
+
+# 5. Määritä ympäristömuuttujat
+az containerapp update \
+  --name retail-router \
+  --resource-group myResourceGroup \
+  --set-env-vars \
+    OPENAI_ENDPOINT=secretref:openai-endpoint \
+    OPENAI_KEY=secretref:openai-key \
+    SEARCH_ENDPOINT=secretref:search-endpoint \
+    SEARCH_KEY=secretref:search-key
+```
+
+### Vaihe 5: Testaa sovelluksesi (2-4 tuntia)
+
+```bash
+# Hanki sovelluksesi URL-osoite
+ROUTER_URL=$(az containerapp show \
+  --name retail-router \
+  --resource-group myResourceGroup \
+  --query "properties.configuration.ingress.fqdn" -o tsv)
+
+# Testaa agentin päätepiste (kun koodisi on otettu käyttöön)
+curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
     "message": "Hello, I need help with my order",
     "agent": "customer"
   }'
-```
 
-### 4. Container Apps -konfigurointi
-
-ARM-malli ottaa käyttöön paikkamerkkikonttikuvat. Todellisen agenttikoodin käyttöönotto:
-
-```bash
-# Build and push agent images
-docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
-docker build -t myregistry.azurecr.io/frontend:latest ./src/frontend
-
-# Update container apps
-az containerapp update \
+# Tarkista sovelluksen lokit
+az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/agent-router:latest
+  --follow
 ```
+
+### Toteutusresurssit
+
+**Arkkitehtuuri ja suunnittelu:**
+- 📖 [Täydellinen arkkitehtuuriohje](../retail-scenario.md) - Yksityiskohtaiset toteutusmallit
+- 📖 [Moniagenttisuunnittelumallit](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+
+**Koodiesimerkit:**
+- 🔗 [Azure OpenAI Chat -esimerkki](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG-malli
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agenttikehys (C#)
+- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Agenttien orkestrointi (Python)
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Moniagenttikeskustelut
+
+**Arvioitu kokonaisaika:**
+- Infrastruktuurin käyttöönotto: 15-25 minuuttia (✅ Valmis)
+- Sovelluskehitys: 80-120 tuntia (🔨 Sinun työsi)
+- Testaus ja optimointi: 15-25 tuntia (🔨 Sinun työsi)
 
 ## 🛠️ Vianmääritys
 
 ### Yleiset ongelmat
 
-#### 1. Azure OpenAI -kiintiö ylitetty
+#### 1. Azure OpenAI -kiintiö ylittynyt
 
 ```bash
-# Check current quota usage
+# Tarkista nykyinen kiintiön käyttö
 az cognitiveservices usage list --location eastus2
 
-# Request quota increase
+# Pyydä kiintiön korotusta
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
@@ -295,13 +673,13 @@ az support tickets create \
 #### 2. Container Apps -käyttöönotto epäonnistui
 
 ```bash
-# Check container app logs
+# Tarkista säilösovelluksen lokit
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# Restart container app
+# Käynnistä säilösovellus uudelleen
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
@@ -310,12 +688,12 @@ az containerapp revision restart \
 #### 3. Hakupalvelun alustaminen
 
 ```bash
-# Verify search service status
+# Vahvista hakupalvelun tila
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# Test search service connectivity
+# Testaa hakupalvelun yhteys
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
@@ -323,33 +701,33 @@ curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-versio
 ### Käyttöönoton validointi
 
 ```bash
-# Validate all resources are created
+# Varmista, että kaikki resurssit on luotu
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Check resource health
+# Tarkista resurssien tila
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-## 🔐 Turvallisuushuomiot
+## 🔐 Tietoturva
 
-### Salaisuuksien hallinta
-- Kaikki salaisuudet tallennetaan Azure Key Vaultiin (jos aktivoitu)
+### Avainten hallinta
+- Kaikki salaisuudet tallennetaan Azure Key Vaultiin (jos käytössä)
 - Container Apps käyttää hallittua identiteettiä autentikointiin
-- Tallennustilit on konfiguroitu turvallisilla oletuksilla (vain HTTPS, ei julkista blob-pääsyä)
+- Tallennustileillä on turvalliset oletusasetukset (vain HTTPS, ei julkista blob-pääsyä)
 
 ### Verkkoturvallisuus
-- Container Apps käyttää sisäistä verkkoa mahdollisuuksien mukaan
-- Hakupalvelu konfiguroitu yksityisten päätepisteiden vaihtoehdolla
-- Cosmos DB konfiguroitu minimivaatimusten mukaisilla käyttöoikeuksilla
+- Container Apps käyttää sisäistä verkkoa aina kun mahdollista
+- Hakupalvelu on konfiguroitu yksityisillä päätepisteillä
+- Cosmos DB on konfiguroitu vähimmäisoikeuksilla
 
 ### RBAC-konfiguraatio
 ```bash
-# Assign necessary roles for managed identity
+# Määritä tarvittavat roolit hallitulle identiteetille
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
@@ -360,16 +738,16 @@ az role assignment create \
 
 ### Kustannusarviot (kuukausittain, USD)
 
-| Tila | OpenAI | Container Apps | Search | Storage | Kokonaisarvio |
-|------|--------|----------------|--------|---------|------------|
-| Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| Standard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
+| Tila | OpenAI | Container Apps | Hakupalvelu | Tallennus | Kokonaisarvio |
+|------|--------|----------------|-------------|-----------|---------------|
+| Minimi | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
+| Standardi | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
-### Kustannusten seuranta
+### Kustannusseuranta
 
 ```bash
-# Set up budget alerts
+# Aseta budjettihälytykset
 az consumption budget create \
   --account-name <subscription-id> \
   --budget-name "retail-budget" \
@@ -381,14 +759,14 @@ az consumption budget create \
 
 ## 🔄 Päivitykset ja ylläpito
 
-### Mallin päivitykset
+### Mallipäivitykset
 - Versioi ARM-mallitiedostot
-- Testaa muutokset kehitysympäristössä ensin
-- Käytä inkrementaalista käyttöönottoa päivityksille
+- Testaa muutokset ensin kehitysympäristössä
+- Käytä inkrementaalista käyttöönottoa päivityksissä
 
-### Resurssien päivitykset
+### Resurssipäivitykset
 ```bash
-# Update with new parameters
+# Päivitä uusilla parametreilla
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -397,23 +775,25 @@ az deployment group create \
 ```
 
 ### Varmuuskopiointi ja palautus
-- Cosmos DB:n automaattinen varmuuskopiointi aktivoitu
-- Key Vaultin pehmeä poisto aktivoitu
-- Container Apps -versiot säilytetään palautusta varten
+- Cosmos DB:n automaattinen varmuuskopiointi käytössä
+- Key Vaultin pehmeä poisto käytössä
+- Container App -versiot säilytetään palautusta varten
 
 ## 📞 Tuki
 
-- **Malliongelmat**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Azure-tuki**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **Yhteisö**: [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **Malliongelmat:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **Azure-tuki:** [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Yhteisö:** [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ Valmis ottamaan käyttöön multi-agent-ratkaisusi?**
+**⚡ Valmis ottamaan moniagenttiratkaisusi käyttöön?**
 
 Aloita komennolla: `./deploy.sh -g myResourceGroup`
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi katsoa ensisijaiseksi lähteeksi. Tärkeissä tiedoissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
