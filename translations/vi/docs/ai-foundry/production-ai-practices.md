@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T07:36:36+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-22T08:36:00+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "vi"
 }
@@ -11,24 +11,24 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Điều hướng chương:**
 - **📚 Trang chủ khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
-- **📖 Chương hiện tại**: Chương 8 - Mô hình sản xuất & doanh nghiệp
-- **⬅️ Chương trước**: [Chương 7: Xử lý sự cố](../troubleshooting/debugging.md)
+- **📖 Chương hiện tại**: Chương 8 - Mô hình Sản xuất & Doanh nghiệp
+- **⬅️ Chương trước**: [Chương 7: Khắc phục sự cố](../troubleshooting/debugging.md)
 - **⬅️ Cũng liên quan**: [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
 - **🎯 Hoàn thành khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
 
 ## Tổng quan
 
-Hướng dẫn này cung cấp các thực hành tốt nhất toàn diện để triển khai khối lượng công việc AI sẵn sàng sản xuất bằng Azure Developer CLI (AZD). Dựa trên phản hồi từ cộng đồng Discord Azure AI Foundry và các triển khai thực tế của khách hàng, các thực hành này giải quyết những thách thức phổ biến nhất trong hệ thống AI sản xuất.
+Hướng dẫn này cung cấp các thực hành tốt nhất toàn diện để triển khai khối lượng công việc AI sẵn sàng sản xuất bằng Azure Developer CLI (AZD). Dựa trên phản hồi từ cộng đồng Microsoft Foundry Discord và các triển khai thực tế của khách hàng, các thực hành này giải quyết những thách thức phổ biến nhất trong hệ thống AI sản xuất.
 
 ## Những thách thức chính được giải quyết
 
-Dựa trên kết quả khảo sát cộng đồng, đây là những thách thức hàng đầu mà các nhà phát triển gặp phải:
+Dựa trên kết quả khảo sát cộng đồng của chúng tôi, đây là những thách thức hàng đầu mà các nhà phát triển gặp phải:
 
 - **45%** gặp khó khăn với triển khai AI đa dịch vụ
 - **38%** gặp vấn đề với quản lý thông tin xác thực và bí mật  
 - **35%** thấy khó khăn trong việc chuẩn bị sản xuất và mở rộng quy mô
 - **32%** cần chiến lược tối ưu hóa chi phí tốt hơn
-- **29%** yêu cầu cải thiện giám sát và xử lý sự cố
+- **29%** yêu cầu cải thiện giám sát và khắc phục sự cố
 
 ## Mô hình kiến trúc cho AI sản xuất
 
@@ -76,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Mô hình 2: Xử lý AI theo sự kiện
+### Mô hình 2: Xử lý AI dựa trên sự kiện
 
-**Khi nào sử dụng**: Xử lý theo lô, phân tích tài liệu, quy trình không đồng bộ
+**Khi nào sử dụng**: Xử lý hàng loạt, phân tích tài liệu, quy trình làm việc không đồng bộ
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -130,7 +130,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 ### 1. Mô hình bảo mật Zero-Trust
 
 **Chiến lược triển khai**:
-- Không có giao tiếp giữa các dịch vụ mà không có xác thực
+- Không có giao tiếp dịch vụ với dịch vụ mà không có xác thực
 - Tất cả các cuộc gọi API sử dụng danh tính được quản lý
 - Cô lập mạng với các điểm cuối riêng tư
 - Kiểm soát truy cập với quyền tối thiểu
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Cấu hình cụ thể cho môi trường**:
 
 ```bash
-# Development environment
+# Môi trường phát triển
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Môi trường sản xuất
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Quản lý chi phí OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Tối ưu hóa token ở cấp độ ứng dụng
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Cắt ngắn ngữ cảnh, không phải đầu vào của người dùng
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,13 +453,13 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Ước tính sơ bộ: 1 token ≈ 4 ký tự
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Giám sát và khả năng quan sát
+## Giám sát và quan sát
 
 ### 1. Thông tin ứng dụng toàn diện
 
@@ -723,7 +723,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 
 ## Tích hợp DevOps và CI/CD
 
-### 1. Quy trình GitHub Actions
+### 1. Quy trình làm việc GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -804,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Xác thực cơ sở hạ tầng
+### 2. Xác thực hạ tầng
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Kiểm tra xem tất cả các dịch vụ cần thiết có đang chạy không
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Xác minh triển khai mô hình OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Kiểm tra kết nối dịch vụ AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -868,16 +868,16 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Kế hoạch sao lưu và khôi phục
 - [ ] Bộ ngắt mạch được triển khai
 - [ ] Chính sách thử lại được cấu hình
-- [ ] Giảm thiểu rủi ro một cách hợp lý
+- [ ] Giảm thiểu lỗi một cách nhẹ nhàng
 - [ ] Điểm cuối kiểm tra sức khỏe
 
 ### Quản lý chi phí ✅
 - [ ] Cảnh báo ngân sách được cấu hình
 - [ ] Điều chỉnh kích thước tài nguyên
-- [ ] Giảm giá cho môi trường dev/test được áp dụng
+- [ ] Áp dụng giảm giá cho môi trường phát triển/thử nghiệm
 - [ ] Mua các phiên bản dự trữ
 - [ ] Bảng điều khiển giám sát chi phí
-- [ ] Đánh giá chi phí thường xuyên
+- [ ] Xem xét chi phí thường xuyên
 
 ### Tuân thủ ✅
 - [ ] Yêu cầu về nơi lưu trữ dữ liệu được đáp ứng
@@ -894,7 +894,7 @@ echo "Infrastructure validation completed successfully!"
 | Chỉ số | Mục tiêu | Giám sát |
 |--------|----------|----------|
 | **Thời gian phản hồi** | < 2 giây | Thông tin ứng dụng |
-| **Khả dụng** | 99.9% | Giám sát thời gian hoạt động |
+| **Tính khả dụng** | 99.9% | Giám sát thời gian hoạt động |
 | **Tỷ lệ lỗi** | < 0.1% | Nhật ký ứng dụng |
 | **Sử dụng token** | < $500/tháng | Quản lý chi phí |
 | **Người dùng đồng thời** | 1000+ | Kiểm tra tải |
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Kiểm tra tải
 
 ```bash
-# Load testing script for AI applications
+# Tập lệnh kiểm tra tải cho các ứng dụng AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,13 +913,13 @@ python scripts/load_test.py \
 
 ## 🤝 Thực hành tốt nhất từ cộng đồng
 
-Dựa trên phản hồi từ cộng đồng Discord Azure AI Foundry:
+Dựa trên phản hồi từ cộng đồng Microsoft Foundry Discord:
 
 ### Các khuyến nghị hàng đầu từ cộng đồng:
 
 1. **Bắt đầu nhỏ, mở rộng dần**: Bắt đầu với các SKU cơ bản và mở rộng dựa trên sử dụng thực tế
 2. **Giám sát mọi thứ**: Thiết lập giám sát toàn diện ngay từ đầu
-3. **Tự động hóa bảo mật**: Sử dụng cơ sở hạ tầng dưới dạng mã để đảm bảo bảo mật nhất quán
+3. **Tự động hóa bảo mật**: Sử dụng hạ tầng dưới dạng mã để đảm bảo bảo mật nhất quán
 4. **Kiểm tra kỹ lưỡng**: Bao gồm kiểm tra cụ thể cho AI trong quy trình của bạn
 5. **Lập kế hoạch chi phí**: Giám sát sử dụng token và thiết lập cảnh báo ngân sách sớm
 
@@ -934,7 +934,7 @@ Dựa trên phản hồi từ cộng đồng Discord Azure AI Foundry:
 ## Tài nguyên bổ sung
 
 - **Khung Kiến trúc Tốt của Azure**: [Hướng dẫn khối lượng công việc AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Tài liệu Azure AI Foundry**: [Tài liệu chính thức](https://learn.microsoft.com/azure/ai-studio/)
+- **Tài liệu Microsoft Foundry**: [Tài liệu chính thức](https://learn.microsoft.com/azure/ai-studio/)
 - **Mẫu cộng đồng**: [Mẫu Azure](https://github.com/Azure-Samples)
 - **Cộng đồng Discord**: [Kênh #Azure](https://discord.gg/microsoft-azure)
 
@@ -942,8 +942,8 @@ Dựa trên phản hồi từ cộng đồng Discord Azure AI Foundry:
 
 **Điều hướng chương:**
 - **📚 Trang chủ khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
-- **📖 Chương hiện tại**: Chương 8 - Mô hình sản xuất & doanh nghiệp
-- **⬅️ Chương trước**: [Chương 7: Xử lý sự cố](../troubleshooting/debugging.md)
+- **📖 Chương hiện tại**: Chương 8 - Mô hình Sản xuất & Doanh nghiệp
+- **⬅️ Chương trước**: [Chương 7: Khắc phục sự cố](../troubleshooting/debugging.md)
 - **⬅️ Cũng liên quan**: [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
 - **🎆 Hoàn thành khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md)
 
@@ -951,5 +951,7 @@ Dựa trên phản hồi từ cộng đồng Discord Azure AI Foundry:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

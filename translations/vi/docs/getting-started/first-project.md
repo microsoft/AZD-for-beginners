@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-18T07:37:31+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-22T08:44:35+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "vi"
 }
@@ -14,11 +14,11 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Chương Hiện Tại**: Chương 1 - Nền Tảng & Bắt Đầu Nhanh
 - **⬅️ Trước**: [Cài Đặt & Thiết Lập](installation.md)
 - **➡️ Tiếp Theo**: [Cấu Hình](configuration.md)
-- **🚀 Chương Tiếp Theo**: [Chương 2: Phát Triển Ưu Tiên AI](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Chương Tiếp Theo**: [Chương 2: Phát Triển Ưu Tiên AI](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Giới Thiệu
 
-Chào mừng bạn đến với dự án đầu tiên sử dụng Azure Developer CLI! Hướng dẫn thực hành toàn diện này sẽ cung cấp cho bạn một quy trình chi tiết để tạo, triển khai và quản lý một ứng dụng full-stack trên Azure bằng azd. Bạn sẽ làm việc với một ứng dụng todo thực tế bao gồm giao diện React, API backend Node.js, và cơ sở dữ liệu MongoDB.
+Chào mừng bạn đến với dự án đầu tiên sử dụng Azure Developer CLI! Hướng dẫn thực hành toàn diện này sẽ cung cấp cho bạn một quy trình chi tiết để tạo, triển khai và quản lý một ứng dụng full-stack trên Azure bằng azd. Bạn sẽ làm việc với một ứng dụng todo thực tế bao gồm giao diện React, API backend Node.js và cơ sở dữ liệu MongoDB.
 
 ## Mục Tiêu Học Tập
 
@@ -28,17 +28,17 @@ Khi hoàn thành hướng dẫn này, bạn sẽ:
 - Thực hiện triển khai ứng dụng hoàn chỉnh lên Azure với việc cung cấp hạ tầng
 - Áp dụng các chiến lược cập nhật và triển khai lại ứng dụng
 - Quản lý nhiều môi trường cho phát triển và thử nghiệm
-- Thực hiện các biện pháp dọn dẹp tài nguyên và quản lý chi phí
+- Thực hiện dọn dẹp tài nguyên và quản lý chi phí
 
 ## Kết Quả Học Tập
 
-Sau khi hoàn thành, bạn sẽ có khả năng:
+Sau khi hoàn thành, bạn sẽ có thể:
 - Tự khởi tạo và cấu hình dự án azd từ các mẫu
 - Điều hướng và chỉnh sửa cấu trúc dự án azd một cách hiệu quả
 - Triển khai ứng dụng full-stack lên Azure chỉ với một lệnh
 - Khắc phục các vấn đề triển khai phổ biến và lỗi xác thực
 - Quản lý nhiều môi trường Azure cho các giai đoạn triển khai khác nhau
-- Thực hiện quy trình triển khai liên tục cho các bản cập nhật ứng dụng
+- Áp dụng quy trình triển khai liên tục cho các bản cập nhật ứng dụng
 
 ## Bắt Đầu
 
@@ -51,7 +51,7 @@ Sau khi hoàn thành, bạn sẽ có khả năng:
 
 ### Xác Minh Thiết Lập
 ```bash
-# Check azd installation
+# Kiểm tra cài đặt azd
 azd version
 ```
 ### Xác Minh Xác Thực Azure
@@ -67,21 +67,21 @@ node --version
 
 ## Bước 1: Chọn và Khởi Tạo Một Mẫu
 
-Hãy bắt đầu với mẫu ứng dụng todo phổ biến bao gồm giao diện React và API backend Node.js.
+Hãy bắt đầu với một mẫu ứng dụng todo phổ biến bao gồm giao diện React và API backend Node.js.
 
 ```bash
-# Browse available templates
+# Duyệt các mẫu có sẵn
 azd template list
 
-# Initialize the todo app template
+# Khởi tạo mẫu ứng dụng todo
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Follow the prompts:
-# - Enter an environment name: "dev"
-# - Choose a subscription (if you have multiple)
-# - Choose a region: "East US 2" (or your preferred region)
+# Làm theo các hướng dẫn:
+# - Nhập tên môi trường: "dev"
+# - Chọn một đăng ký (nếu bạn có nhiều đăng ký)
+# - Chọn một khu vực: "East US 2" (hoặc khu vực bạn ưa thích)
 ```
 
 ### Điều Gì Vừa Xảy Ra?
@@ -92,12 +92,12 @@ azd init --template todo-nodejs-mongo
 
 ## Bước 2: Khám Phá Cấu Trúc Dự Án
 
-Hãy kiểm tra những gì azd đã tạo cho chúng ta:
+Hãy xem xét những gì azd đã tạo cho chúng ta:
 
 ```bash
-# View the project structure
+# Xem cấu trúc dự án
 tree /f   # Windows
-# or
+# hoặc
 find . -type f | head -20   # macOS/Linux
 ```
 
@@ -128,17 +128,17 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Các Tệp Quan Trọng Cần Hiểu
+### Các Tệp Chính Cần Hiểu
 
 **azure.yaml** - Trái tim của dự án azd của bạn:
 ```bash
-# View the project configuration
+# Xem cấu hình dự án
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Định nghĩa hạ tầng:
 ```bash
-# View the infrastructure code
+# Xem mã cơ sở hạ tầng
 head -30 infra/main.bicep
 ```
 
@@ -148,22 +148,22 @@ Trước khi triển khai, bạn có thể tùy chỉnh ứng dụng:
 
 ### Chỉnh Sửa Giao Diện
 ```bash
-# Open the React app component
+# Mở thành phần ứng dụng React
 code src/web/src/App.tsx
 ```
 
 Thực hiện một thay đổi đơn giản:
 ```typescript
-// Find the title and change it
+// Tìm tiêu đề và thay đổi nó
 <h1>My Awesome Todo App</h1>
 ```
 
 ### Cấu Hình Biến Môi Trường
 ```bash
-# Set custom environment variables
+# Đặt các biến môi trường tùy chỉnh
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# View all environment variables
+# Xem tất cả các biến môi trường
 azd env get-values
 ```
 
@@ -172,17 +172,17 @@ azd env get-values
 Bây giờ là phần thú vị - triển khai mọi thứ lên Azure!
 
 ```bash
-# Deploy infrastructure and application
+# Triển khai cơ sở hạ tầng và ứng dụng
 azd up
 
-# This command will:
-# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
-# 2. Build your application
-# 3. Deploy to the provisioned resources
-# 4. Display the application URL
+# Lệnh này sẽ:
+# 1. Cung cấp tài nguyên Azure (App Service, Cosmos DB, v.v.)
+# 2. Xây dựng ứng dụng của bạn
+# 3. Triển khai đến các tài nguyên đã được cung cấp
+# 4. Hiển thị URL của ứng dụng
 ```
 
-### Điều Gì Xảy Ra Trong Quá Trình Triển Khai?
+### Điều Gì Đang Xảy Ra Trong Quá Trình Triển Khai?
 
 Lệnh `azd up` thực hiện các bước sau:
 1. **Cung Cấp** (`azd provision`) - Tạo tài nguyên Azure
@@ -207,24 +207,24 @@ https://app-web-abc123def.azurewebsites.net
 ### Truy Cập Ứng Dụng Của Bạn
 Nhấp vào URL được cung cấp trong kết quả triển khai, hoặc lấy nó bất cứ lúc nào:
 ```bash
-# Get application endpoints
+# Lấy các điểm cuối của ứng dụng
 azd show
 
-# Open the application in your browser
+# Mở ứng dụng trong trình duyệt của bạn
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Kiểm Tra Ứng Dụng Todo
 1. **Thêm một mục todo** - Nhấp vào "Add Todo" và nhập một nhiệm vụ
-2. **Đánh dấu hoàn thành** - Tích vào các mục đã hoàn thành
-3. **Xóa mục** - Loại bỏ các mục không cần thiết
+2. **Đánh dấu hoàn thành** - Đánh dấu các mục đã hoàn thành
+3. **Xóa mục** - Xóa các mục bạn không cần nữa
 
 ### Giám Sát Ứng Dụng Của Bạn
 ```bash
-# Open Azure portal for your resources
+# Mở cổng thông tin Azure cho tài nguyên của bạn
 azd monitor
 
-# View application logs
+# Xem nhật ký ứng dụng
 azd logs
 ```
 
@@ -234,49 +234,49 @@ Hãy thực hiện một thay đổi và xem việc cập nhật dễ dàng như
 
 ### Chỉnh Sửa API
 ```bash
-# Edit the API code
+# Chỉnh sửa mã API
 code src/api/src/routes/lists.js
 ```
 
-Thêm một header phản hồi tùy chỉnh:
+Thêm một tiêu đề phản hồi tùy chỉnh:
 ```javascript
-// Find a route handler and add:
+// Tìm một trình xử lý tuyến và thêm:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Chỉ Triển Khai Thay Đổi Mã
+### Chỉ Triển Khai Các Thay Đổi Mã
 ```bash
-# Deploy only the application code (skip infrastructure)
+# Triển khai chỉ mã ứng dụng (bỏ qua cơ sở hạ tầng)
 azd deploy
 
-# This is much faster than 'azd up' since infrastructure already exists
+# Điều này nhanh hơn nhiều so với 'azd up' vì cơ sở hạ tầng đã tồn tại
 ```
 
 ## Bước 7: Quản Lý Nhiều Môi Trường
 
-Tạo một môi trường thử nghiệm để kiểm tra thay đổi trước khi đưa vào sản xuất:
+Tạo một môi trường thử nghiệm để kiểm tra các thay đổi trước khi đưa vào sản xuất:
 
 ```bash
-# Create a new staging environment
+# Tạo một môi trường staging mới
 azd env new staging
 
-# Deploy to staging
+# Triển khai lên staging
 azd up
 
-# Switch back to dev environment
+# Chuyển lại sang môi trường dev
 azd env select dev
 
-# List all environments
+# Liệt kê tất cả các môi trường
 azd env list
 ```
 
 ### So Sánh Môi Trường
 ```bash
-# View dev environment
+# Xem môi trường phát triển
 azd env select dev
 azd show
 
-# View staging environment  
+# Xem môi trường dàn dựng
 azd env select staging
 azd show
 ```
@@ -286,13 +286,13 @@ azd show
 Khi bạn đã hoàn tất thử nghiệm, hãy dọn dẹp để tránh các chi phí phát sinh:
 
 ```bash
-# Delete all Azure resources for current environment
+# Xóa tất cả tài nguyên Azure cho môi trường hiện tại
 azd down
 
-# Force delete without confirmation and purge soft-deleted resources
+# Buộc xóa mà không cần xác nhận và xóa sạch các tài nguyên đã bị xóa mềm
 azd down --force --purge
 
-# Delete specific environment
+# Xóa môi trường cụ thể
 azd env select staging
 azd down --force --purge
 ```
@@ -300,44 +300,152 @@ azd down --force --purge
 ## Những Gì Bạn Đã Học Được
 
 Chúc mừng! Bạn đã thành công:
-- Khởi tạo một dự án azd từ mẫu
-- Khám phá cấu trúc dự án và các tệp quan trọng
-- Triển khai một ứng dụng full-stack lên Azure
-- Thực hiện thay đổi mã và triển khai lại
-- Quản lý nhiều môi trường
-- Dọn dẹp tài nguyên
+- ✅ Khởi tạo một dự án azd từ mẫu
+- ✅ Khám phá cấu trúc dự án và các tệp chính
+- ✅ Triển khai một ứng dụng full-stack lên Azure
+- ✅ Thực hiện thay đổi mã và triển khai lại
+- ✅ Quản lý nhiều môi trường
+- ✅ Dọn dẹp tài nguyên
+
+## 🎯 Bài Tập Xác Thực Kỹ Năng
+
+### Bài Tập 1: Triển Khai Một Mẫu Khác (15 phút)
+**Mục Tiêu**: Chứng minh sự thành thạo quy trình khởi tạo và triển khai azd
+
+```bash
+# Thử ngăn xếp Python + MongoDB
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Xác minh triển khai
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Dọn dẹp
+azd down --force --purge
+```
+
+**Tiêu Chí Thành Công:**
+- [ ] Ứng dụng triển khai không có lỗi
+- [ ] Có thể truy cập URL ứng dụng trong trình duyệt
+- [ ] Ứng dụng hoạt động chính xác (thêm/xóa todos)
+- [ ] Đã dọn dẹp thành công tất cả tài nguyên
+
+### Bài Tập 2: Tùy Chỉnh Cấu Hình (20 phút)
+**Mục Tiêu**: Thực hành cấu hình biến môi trường
+
+```bash
+cd my-first-azd-app
+
+# Tạo môi trường tùy chỉnh
+azd env new custom-config
+
+# Đặt các biến tùy chỉnh
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Xác minh các biến
+azd env get-values | grep APP_TITLE
+
+# Triển khai với cấu hình tùy chỉnh
+azd up
+```
+
+**Tiêu Chí Thành Công:**
+- [ ] Đã tạo môi trường tùy chỉnh thành công
+- [ ] Biến môi trường được thiết lập và truy xuất
+- [ ] Ứng dụng triển khai với cấu hình tùy chỉnh
+- [ ] Có thể xác minh các thiết lập tùy chỉnh trong ứng dụng đã triển khai
+
+### Bài Tập 3: Quy Trình Nhiều Môi Trường (25 phút)
+**Mục Tiêu**: Thành thạo quản lý môi trường và chiến lược triển khai
+
+```bash
+# Tạo môi trường phát triển
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Ghi chú URL phát triển
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Tạo môi trường dàn dựng
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Ghi chú URL dàn dựng
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# So sánh các môi trường
+azd env list
+
+# Kiểm tra cả hai môi trường
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Dọn dẹp cả hai
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**Tiêu Chí Thành Công:**
+- [ ] Hai môi trường được tạo với các cấu hình khác nhau
+- [ ] Cả hai môi trường triển khai thành công
+- [ ] Có thể chuyển đổi giữa các môi trường bằng `azd env select`
+- [ ] Biến môi trường khác nhau giữa các môi trường
+- [ ] Đã dọn dẹp thành công cả hai môi trường
+
+## 📊 Tiến Độ Của Bạn
+
+**Thời Gian Đầu Tư**: ~60-90 phút  
+**Kỹ Năng Đạt Được**:
+- ✅ Khởi tạo dự án dựa trên mẫu
+- ✅ Cung cấp tài nguyên Azure
+- ✅ Quy trình triển khai ứng dụng
+- ✅ Quản lý môi trường
+- ✅ Quản lý cấu hình
+- ✅ Dọn dẹp tài nguyên và quản lý chi phí
+
+**Cấp Độ Tiếp Theo**: Bạn đã sẵn sàng cho [Hướng Dẫn Cấu Hình](configuration.md) để học các mẫu cấu hình nâng cao!
 
 ## Khắc Phục Các Vấn Đề Phổ Biến
 
 ### Lỗi Xác Thực
 ```bash
-# Re-authenticate with Azure
+# Xác thực lại với Azure
 az login
 
-# Verify subscription access
+# Xác minh quyền truy cập đăng ký
 az account show
 ```
 
 ### Lỗi Triển Khai
 ```bash
-# Enable debug logging
+# Bật ghi nhật ký gỡ lỗi
 export AZD_DEBUG=true
 azd up --debug
 
-# View detailed logs
+# Xem nhật ký chi tiết
 azd logs --service api
 azd logs --service web
 ```
 
 ### Xung Đột Tên Tài Nguyên
 ```bash
-# Use a unique environment name
+# Sử dụng một tên môi trường duy nhất
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Vấn Đề Cổng/Mạng
 ```bash
-# Check if ports are available
+# Kiểm tra xem các cổng có sẵn không
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
@@ -348,7 +456,7 @@ Bây giờ bạn đã hoàn thành dự án đầu tiên, hãy khám phá các c
 
 ### 1. Tùy Chỉnh Hạ Tầng
 - [Hạ Tầng dưới dạng Mã](../deployment/provisioning.md)
-- [Thêm cơ sở dữ liệu, lưu trữ, và các dịch vụ khác](../deployment/provisioning.md#adding-services)
+- [Thêm cơ sở dữ liệu, lưu trữ và các dịch vụ khác](../deployment/provisioning.md#adding-services)
 
 ### 2. Thiết Lập CI/CD
 - [Tích Hợp GitHub Actions](../deployment/cicd-integration.md)
@@ -361,12 +469,12 @@ Bây giờ bạn đã hoàn thành dự án đầu tiên, hãy khám phá các c
 
 ### 4. Khám Phá Thêm Các Mẫu
 ```bash
-# Browse templates by category
+# Duyệt các mẫu theo danh mục
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Try different technology stacks
+# Thử các ngăn xếp công nghệ khác nhau
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
@@ -391,7 +499,7 @@ azd init --template todo-java-mongo
 
 ---
 
-**Chúc mừng bạn đã hoàn thành dự án azd đầu tiên của mình!** Bây giờ bạn đã sẵn sàng xây dựng và triển khai các ứng dụng tuyệt vời trên Azure với sự tự tin.
+**Chúc mừng bạn đã hoàn thành dự án azd đầu tiên của mình!** Bạn đã sẵn sàng để xây dựng và triển khai các ứng dụng tuyệt vời trên Azure với sự tự tin.
 
 ---
 
@@ -400,10 +508,12 @@ azd init --template todo-java-mongo
 - **📖 Chương Hiện Tại**: Chương 1 - Nền Tảng & Bắt Đầu Nhanh
 - **⬅️ Trước**: [Cài Đặt & Thiết Lập](installation.md)
 - **➡️ Tiếp Theo**: [Cấu Hình](configuration.md)
-- **🚀 Chương Tiếp Theo**: [Chương 2: Phát Triển Ưu Tiên AI](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Chương Tiếp Theo**: [Chương 2: Phát Triển Ưu Tiên AI](../microsoft-foundry/microsoft-foundry-integration.md)
 - **Bài Học Tiếp Theo**: [Hướng Dẫn Triển Khai](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

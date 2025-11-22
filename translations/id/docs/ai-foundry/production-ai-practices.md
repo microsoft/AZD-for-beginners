@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T07:55:57+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-22T09:09:42+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "id"
 }
@@ -13,19 +13,19 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 8 - Pola Produksi & Perusahaan
 - **⬅️ Bab Sebelumnya**: [Bab 7: Pemecahan Masalah](../troubleshooting/debugging.md)
-- **⬅️ Juga Terkait**: [Lab Lokakarya AI](ai-workshop-lab.md)
+- **⬅️ Juga Terkait**: [Lab Workshop AI](ai-workshop-lab.md)
 - **🎯 Kursus Selesai**: [AZD Untuk Pemula](../../README.md)
 
 ## Ikhtisar
 
-Panduan ini memberikan praktik terbaik yang komprehensif untuk menerapkan beban kerja AI yang siap produksi menggunakan Azure Developer CLI (AZD). Berdasarkan umpan balik dari komunitas Discord Azure AI Foundry dan penerapan pelanggan di dunia nyata, praktik ini mengatasi tantangan paling umum dalam sistem AI produksi.
+Panduan ini memberikan praktik terbaik yang komprehensif untuk menerapkan beban kerja AI yang siap produksi menggunakan Azure Developer CLI (AZD). Berdasarkan umpan balik dari komunitas Microsoft Foundry Discord dan implementasi pelanggan di dunia nyata, praktik ini mengatasi tantangan paling umum dalam sistem AI produksi.
 
-## Tantangan Utama yang Diatasi
+## Tantangan Utama yang Ditangani
 
 Berdasarkan hasil jajak pendapat komunitas kami, berikut adalah tantangan utama yang dihadapi pengembang:
 
 - **45%** kesulitan dengan penerapan AI multi-layanan
-- **38%** memiliki masalah dengan pengelolaan kredensial dan rahasia  
+- **38%** mengalami masalah dengan pengelolaan kredensial dan rahasia  
 - **35%** merasa kesulitan dengan kesiapan produksi dan penskalaan
 - **32%** membutuhkan strategi optimasi biaya yang lebih baik
 - **29%** memerlukan peningkatan pemantauan dan pemecahan masalah
@@ -249,7 +249,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Performa dan Penskalakan
+## Performa dan Penskalaan
 
 ### 1. Strategi Auto-Scaling
 
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Konfigurasi Spesifik Lingkungan**:
 
 ```bash
-# Development environment
+# Lingkungan pengembangan
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Lingkungan produksi
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Manajemen Biaya OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Optimisasi token tingkat aplikasi
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Potong konteks, bukan input pengguna
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Perkiraan kasar: 1 token ≈ 4 karakter
     return Math.ceil(text.length / 4);
   }
 }
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Pemeriksaan Kesehatan dan Pemantauan Uptime
+### 3. Pemeriksaan Kesehatan dan Pemantauan Waktu Aktif
 
 ```bicep
 // Application Insights availability tests
@@ -807,12 +807,12 @@ jobs:
 ### 2. Validasi Infrastruktur
 
 ```bash
-# scripts/validate_infrastructure.sh
+# skrip/validate_infrastructure.sh
 #!/bin/bash
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Periksa apakah semua layanan yang diperlukan berjalan
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Validasi penyebaran model OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Uji konektivitas layanan AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -850,7 +850,7 @@ echo "Infrastructure validation completed successfully!"
 ### Performa ✅
 - [ ] Auto-scaling dikonfigurasi
 - [ ] Caching diterapkan
-- [ ] Load balancing diatur
+- [ ] Load balancing disiapkan
 - [ ] CDN untuk konten statis
 - [ ] Pooling koneksi database
 - [ ] Optimasi penggunaan token
@@ -858,7 +858,7 @@ echo "Infrastructure validation completed successfully!"
 ### Pemantauan ✅
 - [ ] Application Insights dikonfigurasi
 - [ ] Metrik kustom didefinisikan
-- [ ] Aturan peringatan diatur
+- [ ] Aturan peringatan disiapkan
 - [ ] Dasbor dibuat
 - [ ] Pemeriksaan kesehatan diterapkan
 - [ ] Kebijakan retensi log
@@ -866,21 +866,21 @@ echo "Infrastructure validation completed successfully!"
 ### Keandalan ✅
 - [ ] Penerapan multi-region
 - [ ] Rencana cadangan dan pemulihan
-- [ ] Circuit breaker diterapkan
+- [ ] Circuit breakers diterapkan
 - [ ] Kebijakan retry dikonfigurasi
-- [ ] Degradasi yang terkontrol
+- [ ] Degradasi yang terkelola
 - [ ] Endpoint pemeriksaan kesehatan
 
 ### Manajemen Biaya ✅
 - [ ] Peringatan anggaran dikonfigurasi
 - [ ] Penyesuaian sumber daya
 - [ ] Diskon dev/test diterapkan
-- [ ] Reserved instances dibeli
+- [ ] Instansi yang dipesan dibeli
 - [ ] Dasbor pemantauan biaya
 - [ ] Tinjauan biaya rutin
 
 ### Kepatuhan ✅
-- [ ] Persyaratan residensi data dipenuhi
+- [ ] Persyaratan residensi data terpenuhi
 - [ ] Logging audit diaktifkan
 - [ ] Kebijakan kepatuhan diterapkan
 - [ ] Standar keamanan diterapkan
@@ -894,7 +894,7 @@ echo "Infrastructure validation completed successfully!"
 | Metrik | Target | Pemantauan |
 |--------|--------|------------|
 | **Waktu Respons** | < 2 detik | Application Insights |
-| **Ketersediaan** | 99.9% | Pemantauan uptime |
+| **Ketersediaan** | 99.9% | Pemantauan waktu aktif |
 | **Tingkat Kesalahan** | < 0.1% | Log aplikasi |
 | **Penggunaan Token** | < $500/bulan | Manajemen biaya |
 | **Pengguna Bersamaan** | 1000+ | Pengujian beban |
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Pengujian Beban
 
 ```bash
-# Load testing script for AI applications
+# Skrip pengujian beban untuk aplikasi AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,7 +913,7 @@ python scripts/load_test.py \
 
 ## 🤝 Praktik Terbaik Komunitas
 
-Berdasarkan umpan balik komunitas Discord Azure AI Foundry:
+Berdasarkan umpan balik komunitas Microsoft Foundry Discord:
 
 ### Rekomendasi Teratas dari Komunitas:
 
@@ -921,12 +921,12 @@ Berdasarkan umpan balik komunitas Discord Azure AI Foundry:
 2. **Pantau Segalanya**: Siapkan pemantauan yang komprehensif sejak hari pertama
 3. **Otomatiskan Keamanan**: Gunakan infrastruktur sebagai kode untuk keamanan yang konsisten
 4. **Uji Secara Menyeluruh**: Sertakan pengujian khusus AI dalam pipeline Anda
-5. **Rencanakan Biaya**: Pantau penggunaan token dan atur peringatan anggaran sejak awal
+5. **Rencanakan Biaya**: Pantau penggunaan token dan siapkan peringatan anggaran lebih awal
 
 ### Kesalahan Umum yang Harus Dihindari:
 
-- ❌ Hardcoding API key dalam kode
-- ❌ Tidak menyiapkan pemantauan yang memadai
+- ❌ Hardcoding kunci API dalam kode
+- ❌ Tidak menyiapkan pemantauan yang tepat
 - ❌ Mengabaikan optimasi biaya
 - ❌ Tidak menguji skenario kegagalan
 - ❌ Menerapkan tanpa pemeriksaan kesehatan
@@ -934,7 +934,7 @@ Berdasarkan umpan balik komunitas Discord Azure AI Foundry:
 ## Sumber Daya Tambahan
 
 - **Kerangka Kerja Azure Well-Architected**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Dokumentasi Azure AI Foundry**: [Dokumen resmi](https://learn.microsoft.com/azure/ai-studio/)
+- **Dokumentasi Microsoft Foundry**: [Dokumen resmi](https://learn.microsoft.com/azure/ai-studio/)
 - **Template Komunitas**: [Contoh Azure](https://github.com/Azure-Samples)
 - **Komunitas Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 
@@ -944,12 +944,14 @@ Berdasarkan umpan balik komunitas Discord Azure AI Foundry:
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 8 - Pola Produksi & Perusahaan
 - **⬅️ Bab Sebelumnya**: [Bab 7: Pemecahan Masalah](../troubleshooting/debugging.md)
-- **⬅️ Juga Terkait**: [Lab Lokakarya AI](ai-workshop-lab.md)
+- **⬅️ Juga Terkait**: [Lab Workshop AI](ai-workshop-lab.md)
 - **🎆 Kursus Selesai**: [AZD Untuk Pemula](../../README.md)
 
-**Ingat**: Beban kerja AI produksi memerlukan perencanaan yang matang, pemantauan, dan optimasi berkelanjutan. Mulailah dengan pola ini dan sesuaikan dengan kebutuhan spesifik Anda.
+**Ingat**: Beban kerja AI produksi memerlukan perencanaan yang cermat, pemantauan, dan optimasi berkelanjutan. Mulailah dengan pola ini dan sesuaikan dengan kebutuhan spesifik Anda.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan terjemahan yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemah manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang salah yang timbul dari penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

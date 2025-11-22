@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T07:56:23+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-22T09:11:21+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "id"
 }
@@ -12,7 +12,7 @@ CO_OP_TRANSLATOR_METADATA:
 **Navigasi Bab:**
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berbasis AI
-- **⬅️ Sebelumnya**: [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Selanjutnya**: [Lab Workshop AI](ai-workshop-lab.md)
 - **🚀 Bab Selanjutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Konfigurasikan lingkungan aplikasi Anda:
 
 ```bash
-# .env configuration
+# Konfigurasi .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -158,7 +158,7 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Cocok untuk:
+Terbaik untuk:
 - Pengembangan dan pengujian
 - Aplikasi pasar tunggal
 - Optimasi biaya
@@ -176,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Cocok untuk:
+Terbaik untuk:
 - Aplikasi global
 - Persyaratan ketersediaan tinggi
 - Distribusi beban
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Hitung kapasitas yang diperlukan berdasarkan pola penggunaan:
 
 ```python
-# Capacity calculation example
+# Contoh perhitungan kapasitas
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Contoh penggunaan
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Lacak metrik khusus AI:
 
 ```python
-# Custom telemetry for AI models
+# Telemetri khusus untuk model AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implementasikan pemantauan kesehatan layanan AI:
 
 ```python
-# Health check endpoints
+# Endpoint pemeriksaan kesehatan
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Uji koneksi OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,9 +482,9 @@ async def check_ai_models():
 
 ## Langkah Selanjutnya
 
-1. **Tinjau [Panduan Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)** untuk pola integrasi layanan
+1. **Tinjau [Panduan Integrasi Microsoft Foundry](microsoft-foundry-integration.md)** untuk pola integrasi layanan
 2. **Selesaikan [Lab Workshop AI](ai-workshop-lab.md)** untuk pengalaman langsung
-3. **Implementasikan [Praktik AI Produksi](production-ai-practices.md)** untuk penyebaran tingkat perusahaan
+3. **Implementasikan [Praktik AI Produksi](production-ai-practices.md)** untuk penyebaran perusahaan
 4. **Jelajahi [Panduan Pemecahan Masalah AI](../troubleshooting/ai-troubleshooting.md)** untuk masalah umum
 
 ## Sumber Daya
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Navigasi Bab:**
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berbasis AI
-- **⬅️ Sebelumnya**: [Integrasi Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Selanjutnya**: [Lab Workshop AI](ai-workshop-lab.md)
 - **🚀 Bab Selanjutnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa terjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang salah yang timbul dari penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

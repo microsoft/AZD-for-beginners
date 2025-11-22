@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-18T07:42:03+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-22T08:34:37+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "vi"
 }
@@ -10,15 +10,15 @@ CO_OP_TRANSLATOR_METADATA:
 # Hướng Dẫn Khắc Phục Sự Cố Dành Riêng Cho AI
 
 **Điều Hướng Chương:**
-- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
+- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
 - **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
 - **⬅️ Trước**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
-- **➡️ Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../ai-foundry/production-ai-practices.md)
-- **🤖 Liên Quan**: [Chương 2: Phát Triển AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Liên Quan**: [Chương 2: Phát Triển AI-First](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**Trước:** [Mô Hình AI Sản Xuất](../ai-foundry/production-ai-practices.md) | **Tiếp Theo:** [Bắt Đầu Với AZD](../getting-started/README.md)
+**Trước:** [Thực Hành AI Sản Xuất](../microsoft-foundry/production-ai-practices.md) | **Tiếp Theo:** [Bắt Đầu Với AZD](../getting-started/README.md)
 
-Hướng dẫn khắc phục sự cố toàn diện này giải quyết các vấn đề phổ biến khi triển khai giải pháp AI với AZD, cung cấp các giải pháp và kỹ thuật gỡ lỗi dành riêng cho dịch vụ Azure AI.
+Hướng dẫn khắc phục sự cố toàn diện này giải quyết các vấn đề thường gặp khi triển khai giải pháp AI với AZD, cung cấp các giải pháp và kỹ thuật gỡ lỗi dành riêng cho dịch vụ Azure AI.
 
 ## Mục Lục
 
@@ -49,7 +49,7 @@ Error: The requested resource type is not available in the location 'westus'
 
 1. **Kiểm Tra Khả Dụng Khu Vực:**
 ```bash
-# List available regions for OpenAI
+# Liệt kê các khu vực có sẵn cho OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -67,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **Sử Dụng Khu Vực Thay Thế:**
+3. **Sử Dụng Các Khu Vực Thay Thế:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -79,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Vấn Đề: Vượt Quá Hạn Ngạch Triển Khai Mô Hình
+### Vấn Đề: Hạn Ngạch Triển Khai Mô Hình Bị Vượt Quá
 
 **Triệu Chứng:**
 ```
@@ -90,7 +90,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **Kiểm Tra Hạn Ngạch Hiện Tại:**
 ```bash
-# Check quota usage
+# Kiểm tra việc sử dụng hạn ngạch
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -98,7 +98,7 @@ az cognitiveservices usage list \
 
 2. **Yêu Cầu Tăng Hạn Ngạch:**
 ```bash
-# Submit quota increase request
+# Gửi yêu cầu tăng hạn ngạch
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -135,13 +135,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Sử Dụng Phiên Bản API Được Hỗ Trợ:**
 ```python
-# Use latest supported version
+# Sử dụng phiên bản được hỗ trợ mới nhất
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **Kiểm Tra Tương Thích Phiên Bản API:**
 ```bash
-# List supported API versions
+# Liệt kê các phiên bản API được hỗ trợ
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -201,7 +201,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **Xác Minh Khóa Dịch Vụ Tìm Kiếm:**
 ```bash
-# Get search service admin key
+# Lấy khóa quản trị dịch vụ tìm kiếm
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -209,7 +209,7 @@ az search admin-key show \
 
 2. **Kiểm Tra Lược Đồ Chỉ Mục:**
 ```python
-# Validate index schema
+# Xác minh lược đồ chỉ mục
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -223,7 +223,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Sử Dụng Danh Tính Quản Lý:**
+3. **Sử Dụng Danh Tính Được Quản Lý:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -270,7 +270,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Xác Minh Phụ Thuộc:**
+2. **Xác Minh Các Phụ Thuộc:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -284,7 +284,7 @@ azure-cosmos==4.5.1
 
 3. **Thêm Kiểm Tra Sức Khỏe:**
 ```python
-# main.py - Add health check endpoint
+# main.py - Thêm điểm cuối kiểm tra sức khỏe
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Tối Ưu Hóa Tải Mô Hình:**
 ```python
-# Lazy load models to reduce startup time
+# Tải mô hình lười biếng để giảm thời gian khởi động
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,15 +352,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # Khởi tạo khách hàng AI tại đây
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # Khởi động
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # Tắt
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -368,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Lỗi Xác Thực và Quyền
 
-### Vấn Đề: Quyền Danh Tính Quản Lý Bị Từ Chối
+### Vấn Đề: Quyền Danh Tính Được Quản Lý Bị Từ Chối
 
 **Triệu Chứng:**
 ```
@@ -377,15 +377,15 @@ Error: Authentication failed for Azure OpenAI Service
 
 **Giải Pháp:**
 
-1. **Xác Minh Phân Quyền Vai Trò:**
+1. **Xác Minh Phân Công Vai Trò:**
 ```bash
-# Check current role assignments
+# Kiểm tra các phân công vai trò hiện tại
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Gán Vai Trò Cần Thiết:**
+2. **Phân Công Vai Trò Cần Thiết:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -404,7 +404,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **Kiểm Tra Xác Thực:**
 ```python
-# Test managed identity authentication
+# Kiểm tra xác thực danh tính được quản lý
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -471,7 +471,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Kiểm Tra Các Mô Hình Có Sẵn:**
 ```bash
-# List available models
+# Liệt kê các mô hình có sẵn
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -510,7 +510,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **Xác Minh Mô Hình Trước Khi Triển Khai:**
 ```python
-# Pre-deployment model validation
+# Xác thực mô hình trước khi triển khai
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -536,14 +536,14 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **Triệu Chứng:**
 - Thời gian phản hồi > 30 giây
-- Lỗi hết thời gian chờ
+- Lỗi thời gian chờ
 - Trải nghiệm người dùng kém
 
 **Giải Pháp:**
 
 1. **Thực Hiện Thời Gian Chờ Yêu Cầu:**
 ```python
-# Configure proper timeouts
+# Cấu hình thời gian chờ phù hợp
 import httpx
 
 client = httpx.AsyncClient(
@@ -558,7 +558,7 @@ client = httpx.AsyncClient(
 
 2. **Thêm Bộ Nhớ Đệm Phản Hồi:**
 ```python
-# Redis cache for responses
+# Bộ nhớ đệm Redis cho các phản hồi
 import redis.asyncio as redis
 import json
 
@@ -640,7 +640,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Tối Ưu Hóa Sử Dụng Bộ Nhớ:**
 ```python
-# Memory-efficient model handling
+# Xử lý mô hình tiết kiệm bộ nhớ
 import gc
 import psutil
 
@@ -650,21 +650,21 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # Kiểm tra sử dụng bộ nhớ trước khi xử lý
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # Buộc thu gom rác
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # Dọn dẹp sau khi xử lý
         gc.collect()
         return result
 ```
 
 ## Quản Lý Chi Phí và Hạn Ngạch
 
-### Vấn Đề: Chi Phí Cao Không Mong Đợi
+### Vấn Đề: Chi Phí Cao Bất Ngờ
 
 **Triệu Chứng:**
 - Hóa đơn Azure cao hơn dự kiến
@@ -675,7 +675,7 @@ class MemoryOptimizedAI:
 
 1. **Thực Hiện Kiểm Soát Chi Phí:**
 ```python
-# Token usage tracking
+# Theo dõi việc sử dụng token
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -719,11 +719,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **Tối Ưu Hóa Lựa Chọn Mô Hình:**
 ```python
-# Cost-aware model selection
+# Lựa chọn mô hình dựa trên chi phí
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # mỗi 1K token
+    'gpt-4': 0.03,          # mỗi 1K token
+    'gpt-35-turbo': 0.0015  # mỗi 1K token
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -741,16 +741,16 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 ### Lệnh Gỡ Lỗi AZD
 
 ```bash
-# Enable verbose logging
+# Bật ghi nhật ký chi tiết
 azd up --debug
 
-# Check deployment status
+# Kiểm tra trạng thái triển khai
 azd show
 
-# View deployment logs
+# Xem nhật ký triển khai
 azd logs --follow
 
-# Check environment variables
+# Kiểm tra các biến môi trường
 azd env get-values
 ```
 
@@ -761,7 +761,7 @@ azd env get-values
 import logging
 import json
 
-# Configure structured logging for AI applications
+# Cấu hình ghi nhật ký có cấu trúc cho các ứng dụng AI
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -787,7 +787,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # Kiểm tra kết nối OpenAI
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -795,7 +795,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Check Search service
+    # Kiểm tra dịch vụ Tìm kiếm
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -840,21 +840,21 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Mã Lỗi Phổ Biến và Giải Pháp
+## Mã Lỗi Thường Gặp và Giải Pháp
 
 | Mã Lỗi | Mô Tả | Giải Pháp |
 |--------|-------|-----------|
-| 401 | Không Được Phép | Kiểm tra khóa API và cấu hình danh tính quản lý |
-| 403 | Bị Cấm | Xác minh phân quyền vai trò RBAC |
+| 401 | Không Được Ủy Quyền | Kiểm tra khóa API và cấu hình danh tính được quản lý |
+| 403 | Bị Cấm | Xác minh phân công vai trò RBAC |
 | 429 | Bị Giới Hạn Tốc Độ | Thực hiện logic thử lại với backoff lũy thừa |
 | 500 | Lỗi Máy Chủ Nội Bộ | Kiểm tra trạng thái triển khai mô hình và nhật ký |
 | 503 | Dịch Vụ Không Có Sẵn | Xác minh sức khỏe dịch vụ và khả dụng khu vực |
 
-## Bước Tiếp Theo
+## Các Bước Tiếp Theo
 
 1. **Xem lại [Hướng Dẫn Triển Khai Mô Hình AI](ai-model-deployment.md)** để biết các thực hành triển khai tốt nhất
-2. **Hoàn Thành [Mô Hình AI Sản Xuất](production-ai-practices.md)** để có giải pháp sẵn sàng cho doanh nghiệp
-3. **Tham Gia [Discord Azure AI Foundry](https://aka.ms/foundry/discord)** để nhận hỗ trợ từ cộng đồng
+2. **Hoàn thành [Thực Hành AI Sản Xuất](production-ai-practices.md)** để có giải pháp sẵn sàng cho doanh nghiệp
+3. **Tham gia [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** để được hỗ trợ từ cộng đồng
 4. **Gửi vấn đề** đến [Kho GitHub AZD](https://github.com/Azure/azure-dev) cho các vấn đề cụ thể về AZD
 
 ## Tài Nguyên
@@ -866,14 +866,16 @@ def monitor_performance(func):
 ---
 
 **Điều Hướng Chương:**
-- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
+- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
 - **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
 - **⬅️ Trước**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
-- **➡️ Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../ai-foundry/production-ai-practices.md)
-- **🤖 Liên Quan**: [Chương 2: Phát Triển AI-First](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Liên Quan**: [Chương 2: Phát Triển AI-First](../microsoft-foundry/microsoft-foundry-integration.md)
 - [Khắc Phục Sự Cố Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

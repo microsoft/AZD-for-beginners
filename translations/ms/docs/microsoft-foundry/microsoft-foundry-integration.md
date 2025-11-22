@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
-  "translation_date": "2025-09-18T08:11:22+00:00",
-  "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
+  "original_hash": "2e61bc7db9c28647211ab64e03045882",
+  "translation_date": "2025-11-22T11:40:04+00:00",
+  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
   "language_code": "ms"
 }
 -->
-# Integrasi Azure AI Foundry dengan AZD
+# Integrasi Microsoft Foundry dengan AZD
 
 **Navigasi Bab:**
 - **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
@@ -18,40 +18,40 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Gambaran Keseluruhan
 
-Panduan ini menunjukkan cara mengintegrasikan perkhidmatan Azure AI Foundry dengan Azure Developer CLI (AZD) untuk mempermudah penggunaan aplikasi AI. Azure AI Foundry menyediakan platform komprehensif untuk membina, menggunakan, dan mengurus aplikasi AI, manakala AZD mempermudah proses infrastruktur dan penggunaan.
+Panduan ini menunjukkan cara untuk mengintegrasikan perkhidmatan Microsoft Foundry dengan Azure Developer CLI (AZD) bagi memudahkan penggunaan aplikasi AI. Microsoft Foundry menyediakan platform menyeluruh untuk membina, menggunakan, dan mengurus aplikasi AI, manakala AZD mempermudahkan proses infrastruktur dan penggunaan.
 
-## Apa itu Azure AI Foundry?
+## Apa itu Microsoft Foundry?
 
-Azure AI Foundry ialah platform bersatu Microsoft untuk pembangunan AI yang merangkumi:
+Microsoft Foundry adalah platform bersatu Microsoft untuk pembangunan AI yang merangkumi:
 
-- **Model Catalog**: Akses kepada model AI terkini
+- **Katalog Model**: Akses kepada model AI terkini
 - **Prompt Flow**: Pereka visual untuk aliran kerja AI
-- **AI Foundry Portal**: Persekitaran pembangunan bersepadu untuk aplikasi AI
+- **Portal AI Foundry**: Persekitaran pembangunan bersepadu untuk aplikasi AI
 - **Pilihan Penggunaan**: Pelbagai pilihan hosting dan penskalaan
-- **Keselamatan dan Perlindungan**: Ciri AI bertanggungjawab terbina dalam
+- **Keselamatan dan Sekuriti**: Ciri AI bertanggungjawab yang terbina dalam
 
-## AZD + Azure AI Foundry: Lebih Baik Bersama
+## AZD + Microsoft Foundry: Lebih Baik Bersama
 
-| Ciri | Azure AI Foundry | Manfaat Integrasi AZD |
-|------|------------------|-----------------------|
-| **Penggunaan Model** | Penggunaan manual melalui portal | Penggunaan automatik dan berulang |
-| **Infrastruktur** | Penyediaan klik melalui portal | Infrastruktur sebagai Kod (Bicep) |
+| Ciri | Microsoft Foundry | Manfaat Integrasi AZD |
+|------|--------------------|-----------------------|
+| **Penggunaan Model** | Penggunaan portal manual | Penggunaan automatik dan berulang |
+| **Infrastruktur** | Penyediaan melalui klik | Infrastruktur sebagai Kod (Bicep) |
 | **Pengurusan Persekitaran** | Fokus pada satu persekitaran | Pelbagai persekitaran (dev/staging/prod) |
 | **Integrasi CI/CD** | Terhad | Sokongan GitHub Actions asli |
-| **Pengurusan Kos** | Pemantauan asas | Pengoptimuman kos khusus persekitaran |
+| **Pengurusan Kos** | Pemantauan asas | Pengoptimuman kos berdasarkan persekitaran |
 
 ## Prasyarat
 
 - Langganan Azure dengan kebenaran yang sesuai
 - Azure Developer CLI dipasang
 - Akses kepada perkhidmatan Azure OpenAI
-- Pemahaman asas tentang Azure AI Foundry
+- Pengetahuan asas tentang Microsoft Foundry
 
 ## Corak Integrasi Teras
 
 ### Corak 1: Integrasi Azure OpenAI
 
-**Kes Penggunaan**: Menggunakan aplikasi sembang dengan model Azure OpenAI
+**Kegunaan**: Menggunakan aplikasi sembang dengan model Azure OpenAI
 
 ```yaml
 # azure.yaml
@@ -101,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Corak 2: Integrasi AI Search + RAG
 
-**Kes Penggunaan**: Menggunakan aplikasi retrieval-augmented generation (RAG)
+**Kegunaan**: Menggunakan aplikasi retrieval-augmented generation (RAG)
 
 ```bicep
 // Azure AI Search
@@ -131,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### Corak 3: Integrasi Document Intelligence
 
-**Kes Penggunaan**: Aliran kerja pemprosesan dan analisis dokumen
+**Kegunaan**: Aliran kerja pemprosesan dan analisis dokumen
 
 ```bicep
 // Document Intelligence service
@@ -164,30 +164,30 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 Corak Konfigurasi
 
-### Persediaan Pembolehubah Persekitaran
+### Tetapan Pembolehubah Persekitaran
 
 **Konfigurasi Pengeluaran:**
 ```bash
-# Core AI services
+# Perkhidmatan AI teras
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Model configurations
+# Konfigurasi model
 azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
 
-# Performance settings
+# Tetapan prestasi
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Konfigurasi Pembangunan:**
 ```bash
-# Cost-optimized settings for development
+# Tetapan kos-optimum untuk pembangunan
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Tahap percuma
 ```
 
 ### Konfigurasi Selamat dengan Key Vault
@@ -230,24 +230,24 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 ### Penggunaan dengan Satu Perintah
 
 ```bash
-# Deploy everything with one command
+# Sebarkan semuanya dengan satu arahan
 azd up
 
-# Or deploy incrementally
-azd provision  # Infrastructure only
-azd deploy     # Application only
+# Atau sebarkan secara berperingkat
+azd provision  # Infrastruktur sahaja
+azd deploy     # Aplikasi sahaja
 ```
 
-### Penggunaan Khusus Persekitaran
+### Penggunaan Berdasarkan Persekitaran
 
 ```bash
-# Development environment
+# Persekitaran pembangunan
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Production environment
+# Persekitaran pengeluaran
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -431,7 +431,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Penyelesaian Masalah Umum
+## Penyelesaian Masalah Biasa
 
 ### Isu 1: Kuota OpenAI Melebihi Had
 
@@ -441,14 +441,14 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 **Penyelesaian:**
 ```bash
-# Check current quota usage
+# Semak penggunaan kuota semasa
 az cognitiveservices usage list --location eastus
 
-# Try different region
+# Cuba kawasan yang berbeza
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduce capacity temporarily
+# Kurangkan kapasiti buat sementara waktu
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -461,13 +461,13 @@ azd deploy
 
 **Penyelesaian:**
 ```bash
-# Verify role assignments
+# Sahkan tugasan peranan
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Check managed identity configuration
+# Periksa konfigurasi identiti terurus
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Validate Key Vault access
+# Sahkan akses Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
@@ -479,14 +479,14 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Penyelesaian:**
 ```bash
-# List available models by region
+# Senaraikan model yang tersedia mengikut wilayah
 az cognitiveservices model list --location eastus
 
-# Update model version in bicep template
-# Check model capacity requirements
+# Kemas kini versi model dalam templat bicep
+# Semak keperluan kapasiti model
 ```
 
-## Templat Contoh
+## Contoh Templat
 
 ### Aplikasi Sembang Asas
 
@@ -526,17 +526,265 @@ azd up
 
 ## Langkah Seterusnya
 
-1. **Cuba Contoh**: Mulakan dengan templat pra-bina yang sesuai dengan kes penggunaan anda
+1. **Cuba Contoh**: Mulakan dengan templat sedia ada yang sesuai dengan kes penggunaan anda
 2. **Sesuaikan untuk Keperluan Anda**: Ubah suai infrastruktur dan kod aplikasi
-3. **Tambah Pemantauan**: Laksanakan pemerhatian yang komprehensif
+3. **Tambah Pemantauan**: Laksanakan pemerhatian yang menyeluruh
 4. **Optimumkan Kos**: Laraskan konfigurasi mengikut bajet anda
 5. **Amankan Penggunaan Anda**: Laksanakan corak keselamatan perusahaan
-6. **Skala ke Pengeluaran**: Tambahkan ciri multi-region dan ketersediaan tinggi
+6. **Skala ke Pengeluaran**: Tambah ciri multi-region dan ketersediaan tinggi
+
+## 🎯 Latihan Praktikal
+
+### Latihan 1: Gunakan Aplikasi Sembang Azure OpenAI (30 minit)
+**Matlamat**: Gunakan dan uji aplikasi sembang AI sedia pengeluaran
+
+```bash
+# Inisialisasi templat
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Tetapkan pembolehubah persekitaran
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Laksanakan
+azd up
+
+# Uji aplikasi
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# Pantau operasi AI
+azd monitor
+
+# Bersihkan
+azd down --force --purge
+```
+
+**Kriteria Kejayaan:**
+- [ ] Penggunaan selesai tanpa ralat kuota
+- [ ] Boleh mengakses antara muka sembang dalam pelayar
+- [ ] Boleh bertanya soalan dan mendapat jawapan berasaskan AI
+- [ ] Application Insights menunjukkan data telemetri
+- [ ] Berjaya membersihkan sumber
+
+**Anggaran Kos**: $5-10 untuk 30 minit ujian
+
+### Latihan 2: Konfigurasi Penggunaan Multi-Model (45 minit)
+**Matlamat**: Gunakan pelbagai model AI dengan konfigurasi berbeza
+
+```bash
+# Buat konfigurasi Bicep tersuai
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Laksanakan dan sahkan
+azd provision
+azd show
+```
+
+**Kriteria Kejayaan:**
+- [ ] Pelbagai model berjaya digunakan
+- [ ] Tetapan kapasiti berbeza diterapkan
+- [ ] Model boleh diakses melalui API
+- [ ] Boleh memanggil kedua-dua model dari aplikasi
+
+### Latihan 3: Laksanakan Pemantauan Kos (20 minit)
+**Matlamat**: Tetapkan amaran bajet dan penjejakan kos
+
+```bash
+# Tambah amaran bajet ke Bicep
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Sebarkan amaran bajet
+azd provision
+
+# Semak kos semasa
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**Kriteria Kejayaan:**
+- [ ] Amaran bajet dicipta dalam Azure
+- [ ] Pemberitahuan e-mel dikonfigurasi
+- [ ] Boleh melihat data kos dalam Portal Azure
+- [ ] Ambang bajet ditetapkan dengan sesuai
+
+## 💡 Soalan Lazim
+
+<details>
+<summary><strong>Bagaimana saya mengurangkan kos Azure OpenAI semasa pembangunan?</strong></summary>
+
+1. **Gunakan Tier Percuma**: Azure OpenAI menawarkan 50,000 token/bulan percuma
+2. **Kurangkan Kapasiti**: Tetapkan kapasiti kepada 10 TPM berbanding 30+ untuk pembangunan
+3. **Gunakan azd down**: Nyahaktifkan sumber apabila tidak aktif membangun
+4. **Cache Respons**: Laksanakan cache Redis untuk pertanyaan berulang
+5. **Gunakan Prompt Engineering**: Kurangkan penggunaan token dengan prompt yang efisien
+
+```bash
+# Konfigurasi pembangunan
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>Apakah perbezaan antara Azure OpenAI dan OpenAI API?</strong></summary>
+
+**Azure OpenAI**:
+- Keselamatan dan pematuhan perusahaan
+- Integrasi rangkaian peribadi
+- Jaminan SLA
+- Pengesahan identiti terurus
+- Kuota lebih tinggi tersedia
+
+**OpenAI API**:
+- Akses lebih pantas kepada model baharu
+- Persediaan lebih mudah
+- Halangan kemasukan lebih rendah
+- Hanya internet awam
+
+Untuk aplikasi pengeluaran, **Azure OpenAI adalah disyorkan**.
+</details>
+
+<details>
+<summary><strong>Bagaimana saya menangani ralat kuota melebihi Azure OpenAI?</strong></summary>
+
+```bash
+# Semak kuota semasa
+az cognitiveservices usage list --location eastus2
+
+# Cuba kawasan lain
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Kurangkan kapasiti buat sementara waktu
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Mohon peningkatan kuota
+# Pergi ke Portal Azure > Kuota > Mohon peningkatan
+```
+</details>
+
+<details>
+<summary><strong>Bolehkah saya menggunakan data saya sendiri dengan Azure OpenAI?</strong></summary>
+
+Ya! Gunakan **Azure AI Search** untuk RAG (Retrieval Augmented Generation):
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+Lihat templat [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo).
+</details>
+
+<details>
+<summary><strong>Bagaimana saya mengamankan endpoint model AI?</strong></summary>
+
+**Amalan Terbaik**:
+1. Gunakan Identiti Terurus (tanpa kunci API)
+2. Aktifkan Private Endpoints
+3. Konfigurasi kumpulan keselamatan rangkaian
+4. Laksanakan had kadar
+5. Gunakan Azure Key Vault untuk rahsia
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
 
 ## Komuniti dan Sokongan
 
-- **Discord Azure AI Foundry**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **GitHub AZD**: [Isu dan perbincangan](https://github.com/Azure/azure-dev)
+- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [Isu dan perbincangan](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Dokumentasi rasmi](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
@@ -548,9 +796,11 @@ azd up
 - **➡️ Seterusnya**: [Penggunaan Model AI](ai-model-deployment.md)
 - **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../getting-started/configuration.md)
 
-**Perlu Bantuan?** Sertai perbincangan komuniti kami atau buka isu dalam repositori. Komuniti Azure AI + AZD sedia membantu anda berjaya!
+**Perlukan Bantuan?** Sertai perbincangan komuniti kami atau buka isu dalam repositori. Komuniti Azure AI + AZD sedia membantu anda berjaya!
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

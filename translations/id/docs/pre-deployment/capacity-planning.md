@@ -1,42 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:34:25+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-22T09:00:42+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "id"
 }
 -->
-# Perencanaan Kapasitas: Memahami Kuota dan Batasan Azure - Ketersediaan dan Batasan Sumber Daya Azure
+# Perencanaan Kapasitas - Ketersediaan dan Batasan Sumber Daya Azure
+
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 6 - Validasi & Perencanaan Pra-Penerapan
+- **⬅️ Bab Sebelumnya**: [Bab 5: Solusi AI Multi-Agent](../../examples/retail-scenario.md)
+- **➡️ Selanjutnya**: [Pemilihan SKU](sku-selection.md)
+- **🚀 Bab Berikutnya**: [Bab 7: Pemecahan Masalah](../troubleshooting/common-issues.md)
 
 ## Pendahuluan
 
-Panduan lengkap ini membantu Anda merencanakan dan memvalidasi kapasitas sumber daya Azure sebelum melakukan deployment dengan Azure Developer CLI. Pelajari cara menilai kuota, ketersediaan, dan batasan regional untuk memastikan keberhasilan deployment sambil mengoptimalkan biaya dan kinerja. Kuasai teknik perencanaan kapasitas untuk berbagai arsitektur aplikasi dan skenario penskalaan.
+Panduan lengkap ini membantu Anda merencanakan dan memvalidasi kapasitas sumber daya Azure sebelum menerapkan dengan Azure Developer CLI. Pelajari cara menilai kuota, ketersediaan, dan batasan regional untuk memastikan penerapan yang sukses sambil mengoptimalkan biaya dan kinerja. Kuasai teknik perencanaan kapasitas untuk berbagai arsitektur aplikasi dan skenario penskalaan.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
 - Memahami kuota Azure, batasan, dan kendala ketersediaan regional
-- Menguasai teknik untuk memeriksa ketersediaan dan kapasitas sumber daya sebelum deployment
-- Menerapkan strategi validasi kapasitas dan pemantauan otomatis
-- Merancang aplikasi dengan pertimbangan ukuran dan penskalaan sumber daya yang tepat
+- Menguasai teknik untuk memeriksa ketersediaan dan kapasitas sumber daya sebelum penerapan
+- Menerapkan strategi validasi dan pemantauan kapasitas otomatis
+- Merancang aplikasi dengan ukuran sumber daya dan pertimbangan penskalaan yang tepat
 - Menerapkan strategi optimasi biaya melalui perencanaan kapasitas yang cerdas
 - Mengonfigurasi peringatan dan pemantauan untuk penggunaan kuota dan ketersediaan sumber daya
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan panduan ini, Anda akan dapat:
-- Menilai dan memvalidasi kebutuhan kapasitas sumber daya Azure sebelum deployment
-- Membuat skrip otomatis untuk memeriksa kapasitas dan memantau kuota
+Setelah selesai, Anda akan dapat:
+- Menilai dan memvalidasi persyaratan kapasitas sumber daya Azure sebelum penerapan
+- Membuat skrip otomatis untuk pemeriksaan kapasitas dan pemantauan kuota
 - Merancang arsitektur yang dapat diskalakan dengan mempertimbangkan batasan regional dan langganan
 - Menerapkan strategi ukuran sumber daya yang hemat biaya untuk berbagai jenis beban kerja
 - Mengonfigurasi pemantauan dan peringatan proaktif untuk masalah terkait kapasitas
-- Merencanakan deployment multi-region dengan distribusi kapasitas yang tepat
+- Merencanakan penerapan multi-region dengan distribusi kapasitas yang tepat
 
 ## Mengapa Perencanaan Kapasitas Penting
 
-Sebelum melakukan deployment aplikasi, Anda perlu memastikan:
-- **Kuota yang cukup** untuk sumber daya yang dibutuhkan
+Sebelum menerapkan aplikasi, Anda perlu memastikan:
+- **Kuota yang cukup** untuk sumber daya yang diperlukan
 - **Ketersediaan sumber daya** di wilayah target Anda
 - **Ketersediaan tingkat layanan** untuk jenis langganan Anda
 - **Kapasitas jaringan** untuk lalu lintas yang diharapkan
@@ -47,25 +54,25 @@ Sebelum melakukan deployment aplikasi, Anda perlu memastikan:
 ### Jenis Batasan
 1. **Kuota tingkat langganan** - Maksimum sumber daya per langganan
 2. **Kuota regional** - Maksimum sumber daya per wilayah
-3. **Batasan spesifik sumber daya** - Batasan untuk setiap jenis sumber daya
+3. **Batasan spesifik sumber daya** - Batasan untuk jenis sumber daya individu
 4. **Batasan tingkat layanan** - Batasan berdasarkan rencana layanan Anda
 
 ### Kuota Sumber Daya Umum
 ```bash
-# Check current quota usage
+# Periksa penggunaan kuota saat ini
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Periksa kuota sumber daya tertentu
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Pemeriksaan Kapasitas Sebelum Deployment
+## Pemeriksaan Kapasitas Pra-Penerapan
 
 ### Skrip Validasi Kapasitas Otomatis
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Validasi kapasitas Azure sebelum penerapan
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Fungsi untuk memeriksa penggunaan kuota
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,10 +118,10 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Periksa berbagai kuota sumber daya
+check_quota "compute" 4      # Membutuhkan 4 vCPU
+check_quota "storage" 2      # Membutuhkan 2 akun penyimpanan
+check_quota "network" 1      # Membutuhkan 1 jaringan virtual
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
@@ -124,14 +131,14 @@ echo "✅ Capacity check completed successfully!"
 
 #### Kapasitas App Service
 ```bash
-# Check App Service Plan availability
+# Periksa ketersediaan App Service Plan
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Periksa SKU yang tersedia di wilayah
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Sarankan wilayah alternatif
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Periksa penggunaan saat ini
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Penggunaan
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Kapasitas Database
 ```bash
-# Check PostgreSQL capacity
+# Periksa kapasitas PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Periksa apakah SKU tersedia
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Tampilkan SKU yang tersedia
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Periksa kapasitas Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Periksa ketersediaan wilayah
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Periksa apakah serverless didukung (jika diperlukan)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### Kapasitas Container Apps
 ```bash
-# Check Container Apps capacity
+# Periksa kapasitas Container Apps
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Periksa apakah Container Apps tersedia di wilayah
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Periksa jumlah lingkungan saat ini
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Container Apps memiliki batas 15 lingkungan per wilayah
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Tampilkan wilayah yang tersedia
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,7 +263,7 @@ check_container_apps_capacity() {
 
 ### Ketersediaan Layanan Berdasarkan Wilayah
 ```bash
-# Check service availability across regions
+# Periksa ketersediaan layanan di seluruh wilayah
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Periksa semua layanan
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Rekomendasi Pemilihan Wilayah
 ```bash
-# Recommend optimal regions based on requirements
+# Rekomendasikan wilayah optimal berdasarkan persyaratan
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "biayalow" | "kinerja" | "kepatuhan"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### Estimasi Biaya Sumber Daya
 ```bash
-# Estimate deployment costs
+# Perkirakan biaya penerapan
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Buat grup sumber daya sementara untuk estimasi
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Terapkan infrastruktur dalam mode validasi
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Bersihkan grup sumber daya sementara
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,7 +363,7 @@ estimate_costs() {
 
 ### Rekomendasi Optimasi SKU
 ```bash
-# Recommend optimal SKUs based on requirements
+# Rekomendasikan SKU optimal berdasarkan persyaratan
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -419,32 +426,32 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Pemeriksaan Pra-Deployment Otomatis
+## 🚀 Pemeriksaan Pra-Penerapan Otomatis
 
-### Skrip Pra-Deployment Komprehensif
+### Skrip Pra-Penerapan Komprehensif
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Validasi lengkap sebelum penerapan
 
 set -e
 
-# Configuration
+# Konfigurasi
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Warna untuk output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Tanpa Warna
 
-# Logging functions
+# Fungsi pencatatan
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Muat konfigurasi
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Periksa 1: Autentikasi
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Periksa 2: Ketersediaan regional
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Periksa 3: Validasi kuota
 log_info "Checking quota availability..."
 
-# vCPU quota
+# Kuota vCPU
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Kuota akun penyimpanan
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Periksa 4: Ketersediaan layanan
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Periksa 5: Kapasitas jaringan
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Periksa 6: Validasi penamaan sumber daya
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Periksa 7: Estimasi biaya
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Periksa 8: Validasi template
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Ringkasan akhir
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -654,18 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Pemantauan Kapasitas Selama Deployment
+## 📈 Pemantauan Kapasitas Selama Penerapan
 
 ### Pemantauan Kapasitas Real-Time
 ```bash
-# Monitor capacity during deployment
+# Pantau kapasitas selama penerapan
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Periksa status penerapan
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Periksa penggunaan sumber daya saat ini
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -691,7 +698,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integrasi dengan AZD
 
-### Menambahkan Pre-Flight Hooks ke azure.yaml
+### Tambahkan Hooks Pra-Penerapan ke azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -711,19 +718,19 @@ hooks:
 
 ## Praktik Terbaik
 
-1. **Selalu lakukan pemeriksaan kapasitas** sebelum melakukan deployment ke wilayah baru
+1. **Selalu jalankan pemeriksaan kapasitas** sebelum menerapkan ke wilayah baru
 2. **Pantau penggunaan kuota secara teratur** untuk menghindari kejutan
 3. **Rencanakan pertumbuhan** dengan memeriksa kebutuhan kapasitas di masa depan
 4. **Gunakan alat estimasi biaya** untuk menghindari tagihan yang tidak terduga
-5. **Dokumentasikan kebutuhan kapasitas** untuk tim Anda
+5. **Dokumentasikan persyaratan kapasitas** untuk tim Anda
 6. **Otomatiskan validasi kapasitas** dalam pipeline CI/CD
 7. **Pertimbangkan kebutuhan kapasitas failover regional**
 
 ## Langkah Selanjutnya
 
 - [Panduan Pemilihan SKU](sku-selection.md) - Pilih tingkat layanan yang optimal
-- [Pemeriksaan Pra-Deployment](preflight-checks.md) - Skrip validasi otomatis
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Referensi cepat perintah
+- [Pemeriksaan Pra-Penerapan](preflight-checks.md) - Skrip validasi otomatis
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Perintah referensi cepat
 - [Glosarium](../../resources/glossary.md) - Istilah dan definisi
 
 ## Sumber Daya Tambahan
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan terjemahan yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemah manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang salah yang timbul dari penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

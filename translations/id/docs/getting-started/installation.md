@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
-  "translation_date": "2025-09-18T07:57:06+00:00",
+  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
+  "translation_date": "2025-11-22T09:16:00+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "id"
 }
@@ -10,15 +10,15 @@ CO_OP_TRANSLATOR_METADATA:
 # Panduan Instalasi & Pengaturan
 
 **Navigasi Bab:**
-- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Saat Ini**: Bab 1 - Dasar & Memulai Cepat
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
 - **⬅️ Sebelumnya**: [Dasar-Dasar AZD](azd-basics.md)
 - **➡️ Selanjutnya**: [Proyek Pertama Anda](first-project.md)
-- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Pendahuluan
 
-Panduan lengkap ini akan membantu Anda menginstal dan mengonfigurasi Azure Developer CLI (azd) di sistem Anda. Anda akan mempelajari berbagai metode instalasi untuk sistem operasi yang berbeda, pengaturan autentikasi, dan konfigurasi awal untuk mempersiapkan lingkungan pengembangan Anda untuk penerapan di Azure.
+Panduan lengkap ini akan memandu Anda melalui proses instalasi dan konfigurasi Azure Developer CLI (azd) di sistem Anda. Anda akan mempelajari berbagai metode instalasi untuk sistem operasi yang berbeda, pengaturan autentikasi, dan konfigurasi awal untuk mempersiapkan lingkungan pengembangan Anda untuk penerapan di Azure.
 
 ## Tujuan Pembelajaran
 
@@ -54,7 +54,7 @@ Sebelum menginstal azd, pastikan Anda memiliki:
 
 #### Opsi 1: PowerShell (Direkomendasikan)
 ```powershell
-# Run as Administrator or with elevated privileges
+# Jalankan sebagai Administrator atau dengan hak istimewa yang ditingkatkan
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
@@ -88,7 +88,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 #### Opsi 3: Instalasi Manual
 ```bash
-# Download and install
+# Unduh dan instal
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
 ```
 
@@ -103,17 +103,17 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 **Ubuntu/Debian:**
 ```bash
-# Add Microsoft package repository
+# Tambahkan repositori paket Microsoft
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Install azd
+# Instal azd
 sudo apt-get update
 sudo apt-get install azd
 ```
 
 **RHEL/CentOS/Fedora:**
 ```bash
-# Add Microsoft package repository
+# Tambahkan repositori paket Microsoft
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
 sudo dnf install azd
@@ -121,15 +121,15 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd sudah terinstal di GitHub Codespaces. Cukup buat codespace dan mulai gunakan azd secara langsung.
+azd sudah terinstal di GitHub Codespaces. Cukup buat codespace dan mulai gunakan azd segera.
 
 ### Docker
 
 ```bash
-# Run azd in a container
+# Jalankan azd dalam sebuah kontainer
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Create an alias for easier use
+# Buat alias untuk penggunaan yang lebih mudah
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
@@ -138,13 +138,13 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 Setelah instalasi, verifikasi bahwa azd berfungsi dengan benar:
 
 ```bash
-# Check version
+# Periksa versi
 azd version
 
-# View help
+# Lihat bantuan
 azd --help
 
-# List available templates
+# Daftar template yang tersedia
 azd template list
 ```
 
@@ -153,24 +153,33 @@ Output yang diharapkan:
 azd version 1.5.0 (commit abc123)
 ```
 
+**✅ Daftar Periksa Keberhasilan Instalasi:**
+- [ ] `azd version` menampilkan nomor versi tanpa error
+- [ ] `azd --help` menampilkan dokumentasi perintah
+- [ ] `azd template list` menampilkan template yang tersedia
+- [ ] `az account show` menampilkan langganan Azure Anda
+- [ ] Anda dapat membuat direktori uji dan menjalankan `azd init` dengan sukses
+
+**Jika semua pemeriksaan berhasil, Anda siap melanjutkan ke [Proyek Pertama Anda](first-project.md)!**
+
 ## Pengaturan Autentikasi
 
 ### Autentikasi Azure CLI (Direkomendasikan)
 ```bash
-# Install Azure CLI if not already installed
+# Instal Azure CLI jika belum terinstal
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
 # Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Login to Azure
+# Masuk ke Azure
 az login
 
-# Verify authentication
+# Verifikasi autentikasi
 az account show
 ```
 
 ### Autentikasi Kode Perangkat
-Jika Anda menggunakan sistem tanpa kepala atau mengalami masalah dengan browser:
+Jika Anda menggunakan sistem tanpa antarmuka atau mengalami masalah dengan browser:
 ```bash
 az login --use-device-code
 ```
@@ -188,36 +197,36 @@ az login --service-principal \
 
 ### Konfigurasi Global
 ```bash
-# Set default subscription
+# Atur langganan default
 azd config set defaults.subscription <subscription-id>
 
-# Set default location
+# Atur lokasi default
 azd config set defaults.location eastus2
 
-# View all configuration
+# Lihat semua konfigurasi
 azd config list
 ```
 
 ### Variabel Lingkungan
 Tambahkan ke profil shell Anda (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Azure configuration
+# Konfigurasi Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd configuration
+# Konfigurasi azd
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Enable debug logging
+export AZD_DEBUG=true  # Aktifkan pencatatan debug
 ```
 
 ## Integrasi IDE
 
 ### Visual Studio Code
-Pasang ekstensi Azure Developer CLI:
+Instal ekstensi Azure Developer CLI:
 1. Buka VS Code
 2. Pergi ke Extensions (Ctrl+Shift+X)
 3. Cari "Azure Developer CLI"
-4. Pasang ekstensi tersebut
+4. Instal ekstensi
 
 Fitur:
 - IntelliSense untuk azure.yaml
@@ -239,7 +248,7 @@ Buat file `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Pasang plugin Azure
+1. Instal plugin Azure
 2. Konfigurasikan kredensial Azure
 3. Gunakan terminal terintegrasi untuk perintah azd
 
@@ -249,7 +258,7 @@ Buat file `.devcontainer/devcontainer.json`:
 
 #### Izin Ditolak (Windows)
 ```powershell
-# Run PowerShell as Administrator
+# Jalankan PowerShell sebagai Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -269,35 +278,35 @@ source ~/.bashrc
 
 #### Masalah Jaringan/Proxy
 ```bash
-# Configure proxy
+# Konfigurasi proxy
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# Skip SSL verification (not recommended for production)
+# Lewati verifikasi SSL (tidak disarankan untuk produksi)
 azd config set http.insecure true
 ```
 
 #### Konflik Versi
 ```bash
-# Remove old installations
+# Hapus instalasi lama
 # Windows: winget uninstall Microsoft.Azd
 # macOS: brew uninstall azd
 # Linux: sudo apt remove azd
 
-# Clean configuration
+# Bersihkan konfigurasi
 rm -rf ~/.azd
 ```
 
 ### Mendapatkan Bantuan Lebih Lanjut
 ```bash
-# Enable debug logging
+# Aktifkan pencatatan debug
 export AZD_DEBUG=true
 azd <command> --debug
 
-# View detailed logs
+# Lihat log terperinci
 azd logs
 
-# Check system info
+# Periksa info sistem
 azd info
 ```
 
@@ -326,6 +335,72 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
+## 💡 Pertanyaan yang Sering Diajukan
+
+<details>
+<summary><strong>Apa perbedaan antara azd dan az CLI?</strong></summary>
+
+**Azure CLI (az)**: Alat tingkat rendah untuk mengelola sumber daya Azure individu
+- `az webapp create`, `az storage account create`
+- Satu sumber daya dalam satu waktu
+- Fokus pada pengelolaan infrastruktur
+
+**Azure Developer CLI (azd)**: Alat tingkat tinggi untuk penerapan aplikasi lengkap
+- `azd up` menerapkan seluruh aplikasi dengan semua sumber daya
+- Alur kerja berbasis template
+- Fokus pada produktivitas pengembang
+
+**Anda membutuhkan keduanya**: azd menggunakan az CLI untuk autentikasi
+</details>
+
+<details>
+<summary><strong>Bisakah saya menggunakan azd dengan sumber daya Azure yang sudah ada?</strong></summary>
+
+Tentu! Anda dapat:
+1. Mengimpor sumber daya yang ada ke dalam lingkungan azd
+2. Merujuk sumber daya yang ada dalam template Bicep Anda
+3. Menggunakan azd untuk penerapan baru bersama infrastruktur yang sudah ada
+
+Lihat [Panduan Konfigurasi](configuration.md) untuk detailnya.
+</details>
+
+<details>
+<summary><strong>Apakah azd bekerja dengan Azure Government atau Azure China?</strong></summary>
+
+Ya, konfigurasikan cloud:
+```bash
+# Azure Pemerintah
+az cloud set --name AzureUSGovernment
+az login
+
+# Azure Cina
+az cloud set --name AzureChinaCloud
+az login
+```
+</details>
+
+<details>
+<summary><strong>Bisakah saya menggunakan azd dalam pipeline CI/CD?</strong></summary>
+
+Tentu saja! azd dirancang untuk otomatisasi:
+- Integrasi GitHub Actions
+- Dukungan Azure DevOps
+- Autentikasi service principal
+- Mode non-interaktif
+
+Lihat [Panduan Penerapan](../deployment/deployment-guide.md) untuk pola CI/CD.
+</details>
+
+<details>
+<summary><strong>Berapa biaya menggunakan azd?</strong></summary>
+
+azd sendiri **sepenuhnya gratis** dan open-source. Anda hanya membayar untuk:
+- Sumber daya Azure yang Anda terapkan
+- Biaya konsumsi Azure (komputasi, penyimpanan, dll.)
+
+Gunakan `azd provision --preview` untuk memperkirakan biaya sebelum penerapan.
+</details>
+
 ## Langkah Selanjutnya
 
 1. **Selesaikan autentikasi**: Pastikan Anda dapat mengakses langganan Azure Anda
@@ -344,15 +419,17 @@ Jika Anda mengalami masalah:
 ---
 
 **Navigasi Bab:**
-- **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Saat Ini**: Bab 1 - Dasar & Memulai Cepat
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
 - **⬅️ Sebelumnya**: [Dasar-Dasar AZD](azd-basics.md) 
 - **➡️ Selanjutnya**: [Proyek Pertama Anda](first-project.md)
-- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../microsoft-foundry/microsoft-foundry-integration.md)
 
 **✅ Instalasi Selesai!** Lanjutkan ke [Proyek Pertama Anda](first-project.md) untuk mulai membangun dengan azd.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa terjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang salah yang timbul dari penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
