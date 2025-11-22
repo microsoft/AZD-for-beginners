@@ -1,18 +1,18 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T08:29:02+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-22T10:20:45+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "tl"
 }
 -->
-# AI Model Deployment gamit ang Azure Developer CLI
+# Pag-deploy ng AI Model gamit ang Azure Developer CLI
 
 **Pag-navigate sa Kabanata:**
-- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📚 Bahay ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
-- **⬅️ Nakaraan**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **⬅️ Nakaraan**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Susunod**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
 
@@ -20,14 +20,14 @@ Ang gabay na ito ay nagbibigay ng detalyadong mga tagubilin para sa pag-deploy n
 
 ## Talaan ng Nilalaman
 
-- [Estratehiya sa Pagpili ng Modelo](../../../../docs/ai-foundry)
+- [Istratehiya sa Pagpili ng Modelo](../../../../docs/ai-foundry)
 - [AZD Configuration para sa AI Models](../../../../docs/ai-foundry)
 - [Mga Pattern ng Deployment](../../../../docs/ai-foundry)
 - [Pamamahala ng Modelo](../../../../docs/ai-foundry)
 - [Mga Pagsasaalang-alang sa Produksyon](../../../../docs/ai-foundry)
-- [Pag-monitor at Observability](../../../../docs/ai-foundry)
+- [Pagsubaybay at Obserbasyon](../../../../docs/ai-foundry)
 
-## Estratehiya sa Pagpili ng Modelo
+## Istratehiya sa Pagpili ng Modelo
 
 ### Azure OpenAI Models
 
@@ -63,14 +63,14 @@ services:
 
 | Uri ng Modelo | Use Case | Inirerekomendang Kapasidad | Mga Pagsasaalang-alang sa Gastos |
 |---------------|----------|---------------------------|----------------------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Sulit para sa karamihan ng workload |
-| GPT-4 | Masalimuot na pag-iisip | 20-100 TPM | Mas mataas ang gastos, gamitin para sa premium na features |
-| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Mahalagang gamitin para sa semantic search |
-| Whisper | Speech-to-text | 10-50 TPM | Para sa mga audio processing workload |
+| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Cost-effective para sa karamihan ng workloads |
+| GPT-4 | Masalimuot na pangangatwiran | 20-100 TPM | Mas mataas ang gastos, gamitin para sa premium na features |
+| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Mahalaga para sa semantic search |
+| Whisper | Speech-to-text | 10-50 TPM | Para sa audio processing workloads |
 
 ## AZD Configuration para sa AI Models
 
-### Configuration ng Bicep Template
+### Bicep Template Configuration
 
 Gumawa ng mga deployment ng modelo gamit ang Bicep templates:
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 I-configure ang environment ng iyong application:
 
 ```bash
-# .env configuration
+# .env na konfigurasyon
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -178,7 +178,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Pinakamainam para sa:
 - Mga global na application
-- Mga pangangailangan sa mataas na availability
+- Mga kinakailangan sa mataas na availability
 - Pamamahagi ng load
 
 ### Pattern 3: Hybrid Deployment
@@ -234,9 +234,9 @@ Subaybayan ang mga bersyon ng modelo sa iyong AZD configuration:
 }
 ```
 
-### Mga Update ng Modelo
+### Mga Update sa Modelo
 
-Gamitin ang AZD hooks para sa mga update ng modelo:
+Gamitin ang AZD hooks para sa mga update sa modelo:
 
 ```bash
 #!/bin/bash
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Kalkulahin ang kinakailangang kapasidad batay sa mga pattern ng paggamit:
 
 ```python
-# Capacity calculation example
+# Halimbawa ng pagkalkula ng kapasidad
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Halimbawa ng paggamit
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -302,7 +302,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Configuration ng Auto-scaling
+### Auto-scaling Configuration
 
 I-configure ang auto-scaling para sa Container Apps:
 
@@ -372,11 +372,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Pag-monitor at Observability
+## Pagsubaybay at Obserbasyon
 
 ### Application Insights Integration
 
-I-configure ang monitoring para sa mga AI workload:
+I-configure ang pagsubaybay para sa mga AI workload:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -414,10 +414,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Custom Metrics
 
-Subaybayan ang mga AI-specific metrics:
+Subaybayan ang mga AI-specific na metrics:
 
 ```python
-# Custom telemetry for AI models
+# Pasadyang telemetry para sa mga modelo ng AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -451,10 +451,10 @@ class AITelemetry:
 
 ### Health Checks
 
-Magpatupad ng monitoring sa kalusugan ng AI service:
+Ipatupad ang health monitoring para sa AI services:
 
 ```python
-# Health check endpoints
+# Mga endpoint para sa pagsusuri ng kalusugan
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Subukan ang koneksyon sa OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,12 +482,12 @@ async def check_ai_models():
 
 ## Mga Susunod na Hakbang
 
-1. **Suriin ang [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** para sa mga pattern ng integration ng serbisyo
+1. **Suriin ang [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** para sa mga pattern ng integration ng serbisyo
 2. **Kumpletuhin ang [AI Workshop Lab](ai-workshop-lab.md)** para sa hands-on na karanasan
 3. **Ipatupad ang [Production AI Practices](production-ai-practices.md)** para sa mga enterprise deployment
-4. **Galugarin ang [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** para sa mga karaniwang isyu
+4. **Suriin ang [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** para sa mga karaniwang isyu
 
-## Mga Resources
+## Mga Mapagkukunan
 
 - [Azure OpenAI Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
@@ -497,13 +497,15 @@ async def check_ai_models():
 ---
 
 **Pag-navigate sa Kabanata:**
-- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📚 Bahay ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
-- **⬅️ Nakaraan**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **⬅️ Nakaraan**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Susunod**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

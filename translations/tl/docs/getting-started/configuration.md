@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T08:30:19+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-22T10:24:36+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "tl"
 }
@@ -10,15 +10,15 @@ CO_OP_TRANSLATOR_METADATA:
 # Gabay sa Konfigurasyon
 
 **Pag-navigate sa Kabanata:**
-- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 3 - Konfigurasyon at Pagpapatunay
 - **⬅️ Nakaraan**: [Ang Iyong Unang Proyekto](first-project.md)
-- **➡️ Susunod**: [Gabay sa Pag-deploy](../deployment/deployment-guide.md)
+- **➡️ Susunod**: [Gabay sa Deployment](../deployment/deployment-guide.md)
 - **🚀 Susunod na Kabanata**: [Kabanata 4: Infrastructure as Code](../deployment/deployment-guide.md)
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na mga workflow ng pag-develop at pag-deploy. Matutunan mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng environment, mga pamamaraan ng pagpapatunay, at mga advanced na pattern ng konfigurasyon na nagbibigay-daan sa mas epektibo at ligtas na Azure deployments.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na workflows sa pag-develop at pag-deploy. Matutunan mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng environment, mga pamamaraan ng pagpapatunay, at mga advanced na pattern ng konfigurasyon na nagbibigay-daan sa mas epektibo at ligtas na Azure deployments.
 
 ## Mga Layunin sa Pag-aaral
 
@@ -31,14 +31,14 @@ Sa pagtatapos ng araling ito, ikaw ay:
 
 ## Mga Resulta ng Pag-aaral
 
-Pagkatapos makumpleto ang araling ito, magagawa mo:
-- I-configure ang azd para sa optimal na mga workflow ng pag-develop
-- Mag-set up at mag-manage ng maraming deployment environment
-- Magpatupad ng ligtas na mga kasanayan sa pamamahala ng konfigurasyon
-- Mag-troubleshoot ng mga isyu na may kaugnayan sa konfigurasyon
-- I-customize ang behavior ng azd para sa mga partikular na pangangailangan ng organisasyon
+Pagkatapos makumpleto ang araling ito, ikaw ay:
+- Makakapag-configure ng azd para sa optimal na workflows sa pag-develop
+- Makakapag-set up at makakapamahala ng maraming deployment environment
+- Makakapagpatupad ng ligtas na mga kasanayan sa pamamahala ng konfigurasyon
+- Makakapag-troubleshoot ng mga isyu na may kaugnayan sa konfigurasyon
+- Makakapag-customize ng behavior ng azd para sa partikular na mga pangangailangan ng organisasyon
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na mga workflow ng pag-develop at pag-deploy.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pag-configure ng Azure Developer CLI para sa optimal na workflows sa pag-develop at pag-deploy.
 
 ## Hierarchy ng Konfigurasyon
 
@@ -53,36 +53,36 @@ Ang azd ay gumagamit ng hierarchical na sistema ng konfigurasyon:
 
 ### Pag-set ng Global Defaults
 ```bash
-# Set default subscription
+# Itakda ang default na subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Itakda ang default na lokasyon
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Itakda ang default na naming convention para sa resource group
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Tingnan ang lahat ng global na configuration
 azd config list
 
-# Remove a configuration
+# Alisin ang isang configuration
 azd config unset defaults.location
 ```
 
 ### Karaniwang Global Settings
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Mga kagustuhan sa pag-unlad
+azd config set alpha.enable true                    # Paganahin ang mga alpha na tampok
+azd config set telemetry.enabled false             # I-disable ang telemetry
+azd config set output.format json                  # Itakda ang format ng output
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Mga setting ng seguridad
+azd config set auth.useAzureCliCredential true     # Gamitin ang Azure CLI para sa awtentikasyon
+azd config set tls.insecure false                  # Ipatupad ang beripikasyon ng TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Pag-tune ng pagganap
+azd config set provision.parallelism 5             # Parallel na paglikha ng mapagkukunan
+azd config set deploy.timeout 30m                  # Timeout ng deployment
 ```
 
 ## 🏗️ Konfigurasyon ng Proyekto
@@ -185,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Mga Setting na Pangwika
+#### Mga Setting na Batay sa Wika
 ```yaml
 services:
   node-app:
@@ -211,15 +211,15 @@ services:
 
 ## 🌟 Pamamahala ng Environment
 
-### Paglikha ng Environment
+### Paglikha ng Mga Environment
 ```bash
-# Create a new environment
+# Gumawa ng bagong kapaligiran
 azd env new development
 
-# Create with specific location
+# Gumawa gamit ang tiyak na lokasyon
 azd env new staging --location "westus2"
 
-# Create from template
+# Gumawa mula sa template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Ang bawat environment ay may sariling konfigurasyon sa `.azure/<env-name>/config
 
 ### Mga Environment Variable
 ```bash
-# Set environment-specific variables
+# Itakda ang mga variable na partikular sa kapaligiran
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Tingnan ang mga variable ng kapaligiran
 azd env get-values
 
-# Remove environment variable
+# Inaasahang output:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# Alisin ang variable ng kapaligiran
 azd env unset DEBUG
+
+# Tiyakin ang pagtanggal
+azd env get-values | grep DEBUG
+# (dapat walang ibalik)
 ```
 
 ### Mga Template ng Environment
 Gumawa ng `.azure/env.template` para sa pare-parehong setup ng environment:
 ```bash
-# Required variables
+# Kinakailangang mga variable
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Mga setting ng aplikasyon
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Opsyonal na mga setting para sa pag-develop
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Integrasyon ng Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# Gamitin ang mga kredensyal ng Azure CLI (default)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Mag-login gamit ang partikular na tenant
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Itakda ang default na subscription
 az account set --subscription <subscription-id>
 ```
 
 ### Pagpapatunay gamit ang Service Principal
 Para sa CI/CD pipelines:
 ```bash
-# Set environment variables
+# Itakda ang mga variable ng kapaligiran
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# O i-configure nang direkta
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Managed Identity
 Para sa mga environment na naka-host sa Azure:
 ```bash
-# Enable managed identity authentication
+# Paganahin ang authentication ng pinamamahalaang pagkakakilanlan
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -391,7 +400,7 @@ Halimbawa ng `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/mai
 
 ### Custom na Pagpapangalan ng Resource
 ```bash
-# Set naming conventions
+# Itakda ang mga kombensyon sa pagbibigay ng pangalan
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -420,18 +429,18 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Mga Konfigurasyon na Specific sa Environment
+## 🎯 Mga Konfigurasyon na Batay sa Environment
 
-### Development Environment
+### Environment ng Development
 ```bash
-# .azure/development/.env
+# .azure/pagpapaunlad/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### Environment ng Staging
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -440,7 +449,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### Environment ng Production
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -453,18 +462,18 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Pag-validate ng Konfigurasyon
 ```bash
-# Check configuration syntax
+# Suriin ang syntax ng configuration
 azd config validate
 
-# Test environment variables
+# Subukan ang mga environment variable
 azd env get-values
 
-# Validate infrastructure
+# I-validate ang imprastraktura
 azd provision --dry-run
 ```
 
 ### Mga Script ng Konfigurasyon
-Gumawa ng validation scripts sa `scripts/`:
+Gumawa ng mga validation script sa `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -472,13 +481,13 @@ Gumawa ng validation scripts sa `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Suriin ang kinakailangang mga variable ng kapaligiran
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# I-validate ang syntax ng azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,13 +528,13 @@ database:
 ### 3. Mga Pagsasaalang-alang sa Version Control
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Mga configuration ng kapaligiran (naglalaman ng mga resource ID)
+.azure/*/.env               # Mga variable ng kapaligiran (maaaring naglalaman ng mga lihim)
+.env                        # Lokal na file ng kapaligiran
 ```
 
 ### 4. Dokumentasyon ng Konfigurasyon
-I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
+Idokumento ang iyong konfigurasyon sa `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -540,10 +549,72 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Mga Praktikal na Ehersisyo
+
+### Ehersisyo 1: Multi-Environment Configuration (15 minuto)
+
+**Layunin**: Gumawa at mag-configure ng tatlong environment na may iba't ibang setting
+
+```bash
+# Lumikha ng kapaligiran ng pag-unlad
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Lumikha ng kapaligiran ng pagsubok
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Lumikha ng kapaligiran ng produksyon
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# I-verify ang bawat kapaligiran
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Pamantayan ng Tagumpay:**
+- [ ] Tatlong environment ang matagumpay na nagawa
+- [ ] Ang bawat environment ay may natatanging konfigurasyon
+- [ ] Maaaring magpalit sa pagitan ng mga environment nang walang error
+- [ ] `azd env list` ay nagpapakita ng lahat ng tatlong environment
+
+### Ehersisyo 2: Pamamahala ng Sekreto (10 minuto)
+
+**Layunin**: Magpraktis ng ligtas na konfigurasyon gamit ang sensitibong data
+
+```bash
+# Itakda ang mga lihim (hindi ipinapakita sa output)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Itakda ang hindi lihim na config
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Tingnan ang kapaligiran (dapat maitago ang mga lihim)
+azd env get-values
+
+# Tiyakin na ang mga lihim ay nakaimbak
+azd env get DB_PASSWORD  # Dapat ipakita ang aktwal na halaga
+```
+
+**Pamantayan ng Tagumpay:**
+- [ ] Ang mga sekreto ay na-store nang hindi ipinapakita sa terminal
+- [ ] `azd env get-values` ay nagpapakita ng redacted na mga sekreto
+- [ ] Ang indibidwal na `azd env get <SECRET_NAME>` ay nakakakuha ng aktwal na halaga
+
 ## Mga Susunod na Hakbang
 
 - [Ang Iyong Unang Proyekto](first-project.md) - I-apply ang konfigurasyon sa praktika
-- [Gabay sa Pag-deploy](../deployment/deployment-guide.md) - Gamitin ang konfigurasyon para sa pag-deploy
+- [Gabay sa Deployment](../deployment/deployment-guide.md) - Gamitin ang konfigurasyon para sa deployment
 - [Pag-provision ng Mga Resource](../deployment/provisioning.md) - Mga konfigurasyon na handa para sa produksyon
 
 ## Mga Sanggunian
@@ -555,7 +626,7 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 ---
 
 **Pag-navigate sa Kabanata:**
-- **📚 Course Home**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 3 - Konfigurasyon at Pagpapatunay
 - **⬅️ Nakaraan**: [Ang Iyong Unang Proyekto](first-project.md)
 - **➡️ Susunod na Kabanata**: [Kabanata 4: Infrastructure as Code](../deployment/deployment-guide.md)
@@ -563,5 +634,7 @@ I-dokumento ang iyong konfigurasyon sa `CONFIG.md`:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Paunawa**:  
 Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

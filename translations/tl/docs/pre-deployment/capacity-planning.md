@@ -1,71 +1,78 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:35:11+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-22T10:09:03+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "tl"
 }
 -->
-# Pagpaplano ng Kapasidad: Pag-unawa sa mga Quota at Limitasyon ng Azure
+# Capacity Planning - Azure Resource Availability and Limits
+
+**Pag-navigate sa Kabanata:**
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 6 - Pre-Deployment Validation & Planning
+- **⬅️ Nakaraang Kabanata**: [Kabanata 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **➡️ Susunod**: [Pagpili ng SKU](sku-selection.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 7: Troubleshooting](../troubleshooting/common-issues.md)
 
 ## Panimula
 
-Ang gabay na ito ay tumutulong sa iyo na magplano at mag-validate ng kapasidad ng mga resource ng Azure bago mag-deploy gamit ang Azure Developer CLI. Matutunan kung paano suriin ang mga quota, availability, at limitasyon sa rehiyon upang matiyak ang matagumpay na deployment habang pinapahusay ang gastos at performance. Maging bihasa sa mga teknik ng pagpaplano ng kapasidad para sa iba't ibang arkitektura ng aplikasyon at mga senaryo ng pag-scale.
+Ang gabay na ito ay tumutulong sa iyo na magplano at mag-validate ng kapasidad ng Azure resources bago mag-deploy gamit ang Azure Developer CLI. Matutunan kung paano suriin ang mga quota, availability, at mga limitasyon sa rehiyon upang masiguro ang matagumpay na deployment habang pinapabuti ang gastos at performance. Masterin ang mga teknik sa capacity planning para sa iba't ibang application architectures at scaling scenarios.
 
 ## Mga Layunin sa Pag-aaral
 
 Sa pagtatapos ng gabay na ito, ikaw ay:
-- Maiintindihan ang mga quota, limitasyon, at mga limitasyon sa availability ng rehiyon ng Azure
-- Magiging bihasa sa mga teknik para sa pagsusuri ng availability at kapasidad ng resource bago mag-deploy
-- Makakapagpatupad ng mga automated na estratehiya para sa pag-validate ng kapasidad at monitoring
-- Makakapagdisenyo ng mga aplikasyon na may tamang sizing at scaling ng resource
-- Makakapag-apply ng mga estratehiya sa pag-optimize ng gastos sa pamamagitan ng matalinong pagpaplano ng kapasidad
-- Makakapag-configure ng mga alerto at monitoring para sa paggamit ng quota at availability ng resource
+- Maiintindihan ang mga quota, limitasyon, at mga constraint sa regional availability ng Azure
+- Magiging bihasa sa mga teknik para sa pagsusuri ng resource availability at kapasidad bago mag-deploy
+- Makakapagpatupad ng automated na capacity validation at monitoring strategies
+- Makakapagdisenyo ng mga application na may tamang resource sizing at scaling considerations
+- Makakapag-apply ng cost optimization strategies sa pamamagitan ng intelligent capacity planning
+- Makakapag-configure ng alerts at monitoring para sa quota usage at resource availability
 
 ## Mga Resulta ng Pag-aaral
 
 Sa pagtatapos, magagawa mo:
-- Suriin at i-validate ang mga kinakailangan sa kapasidad ng resource ng Azure bago mag-deploy
-- Gumawa ng mga automated na script para sa pagsusuri ng kapasidad at monitoring ng quota
-- Magdisenyo ng mga scalable na arkitektura na isinasaalang-alang ang mga limitasyon sa rehiyon at subscription
-- Magpatupad ng mga estratehiya sa tamang sizing ng resource para sa iba't ibang uri ng workload
-- Mag-configure ng proactive na monitoring at alerting para sa mga isyu sa kapasidad
-- Magplano ng mga deployment sa maraming rehiyon na may tamang distribusyon ng kapasidad
+- Suriin at i-validate ang mga kinakailangan sa kapasidad ng Azure resources bago mag-deploy
+- Gumawa ng automated scripts para sa capacity checking at quota monitoring
+- Magdisenyo ng scalable architectures na isinasaalang-alang ang mga limitasyon sa rehiyon at subscription
+- Magpatupad ng cost-effective na resource sizing strategies para sa iba't ibang uri ng workload
+- Mag-configure ng proactive monitoring at alerting para sa mga isyu sa kapasidad
+- Magplano ng multi-region deployments na may tamang kapasidad na distribusyon
 
-## Bakit Mahalaga ang Pagpaplano ng Kapasidad
+## Bakit Mahalaga ang Capacity Planning
 
-Bago mag-deploy ng mga aplikasyon, kailangan mong tiyakin:
-- **Sapat na quota** para sa mga kinakailangang resource
-- **Availability ng resource** sa target na rehiyon
+Bago mag-deploy ng mga application, kailangan mong tiyakin:
+- **Sapat na quota** para sa mga kinakailangang resources
+- **Availability ng resources** sa target na rehiyon
 - **Availability ng service tier** para sa uri ng subscription mo
-- **Kapasidad ng network** para sa inaasahang traffic
-- **Pag-optimize ng gastos** sa pamamagitan ng tamang sizing
+- **Network capacity** para sa inaasahang traffic
+- **Cost optimization** sa pamamagitan ng tamang sizing
 
-## 📊 Pag-unawa sa mga Quota at Limitasyon ng Azure
+## 📊 Pag-unawa sa Azure Quotas at Limits
 
 ### Mga Uri ng Limitasyon
-1. **Quota sa antas ng subscription** - Maximum na resource kada subscription
-2. **Quota sa rehiyon** - Maximum na resource kada rehiyon
-3. **Limitasyon sa partikular na resource** - Limitasyon para sa bawat uri ng resource
-4. **Limitasyon sa service tier** - Limitasyon batay sa iyong service plan
+1. **Subscription-level quotas** - Maximum na resources kada subscription
+2. **Regional quotas** - Maximum na resources kada rehiyon
+3. **Resource-specific limits** - Mga limitasyon para sa bawat uri ng resource
+4. **Service tier limits** - Mga limitasyon batay sa iyong service plan
 
-### Karaniwang Quota ng Resource
+### Karaniwang Resource Quotas
 ```bash
-# Check current quota usage
+# Suriin ang kasalukuyang paggamit ng quota
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Suriin ang mga partikular na quota ng mapagkukunan
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Mga Pagsusuri sa Kapasidad Bago Mag-Deploy
+## Mga Pagsusuri sa Kapasidad Bago Mag-deploy
 
-### Automated na Script para sa Pag-validate ng Kapasidad
+### Automated Capacity Validation Script
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Suriin ang kapasidad ng Azure bago ang deployment
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Function para suriin ang paggamit ng quota
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,27 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Suriin ang iba't ibang resource quotas
+check_quota "compute" 4      # Kailangan ng 4 na vCPUs
+check_quota "storage" 2      # Kailangan ng 2 storage accounts
+check_quota "network" 1      # Kailangan ng 1 virtual network
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Mga Pagsusuri sa Kapasidad ng Partikular na Serbisyo
+### Mga Pagsusuri sa Kapasidad ng Serbisyo
 
 #### Kapasidad ng App Service
 ```bash
-# Check App Service Plan availability
+# Suriin ang availability ng App Service Plan
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Suriin ang mga available na SKU sa rehiyon
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Magmungkahi ng alternatibong mga rehiyon
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Suriin ang kasalukuyang paggamit
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Paggamit
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Kapasidad ng Database
 ```bash
-# Check PostgreSQL capacity
+# Suriin ang kapasidad ng PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Suriin kung magagamit ang SKU
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Ipakita ang mga magagamit na SKU
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Suriin ang kapasidad ng Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Suriin ang pagkakaroon ng rehiyon
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Suriin kung sinusuportahan ang serverless (kung kinakailangan)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### Kapasidad ng Container Apps
 ```bash
-# Check Container Apps capacity
+# Suriin ang kapasidad ng Container Apps
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Suriin kung ang Container Apps ay magagamit sa rehiyon
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Suriin ang kasalukuyang bilang ng kapaligiran
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Ang Container Apps ay may limitasyon na 15 kapaligiran bawat rehiyon
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Ipakita ang mga magagamit na rehiyon
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -252,11 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Pag-validate ng Availability sa Rehiyon
+## 📍 Validation ng Regional Availability
 
 ### Availability ng Serbisyo Bawat Rehiyon
 ```bash
-# Check service availability across regions
+# Suriin ang pagkakaroon ng serbisyo sa iba't ibang rehiyon
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Suriin ang lahat ng serbisyo
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Mga Rekomendasyon sa Pagpili ng Rehiyon
 ```bash
-# Recommend optimal regions based on requirements
+# Magrekomenda ng pinakamainam na rehiyon batay sa mga kinakailangan
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "mababang gastos" | "pagganap" | "pagsunod"
     
     echo "Region recommendations for: $requirements"
     
@@ -319,22 +326,22 @@ recommend_region() {
 }
 ```
 
-## 💰 Pagpaplano ng Gastos at Pagtatantya
+## 💰 Pagpaplano at Pagtatantiya ng Gastos
 
-### Pagtatantya ng Gastos ng Resource
+### Pagtatantiya ng Gastos ng Resource
 ```bash
-# Estimate deployment costs
+# Tantiya ng gastos sa pag-deploy
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Gumawa ng pansamantalang resource group para sa pagtatantiya
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # I-deploy ang imprastraktura sa validation mode
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Linisin ang pansamantalang resource group
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -354,9 +361,9 @@ estimate_costs() {
 }
 ```
 
-### Mga Rekomendasyon sa Pag-optimize ng SKU
+### Mga Rekomendasyon sa SKU Optimization
 ```bash
-# Recommend optimal SKUs based on requirements
+# Magrekomenda ng pinakamainam na SKUs batay sa mga kinakailangan
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -419,32 +426,32 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Automated na Pre-Flight Checks
+## 🚀 Automated Pre-Flight Checks
 
-### Komprehensibong Pre-Flight Script
+### Comprehensive Pre-Flight Script
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Kumpletong pag-validate bago ang pag-deploy
 
 set -e
 
-# Configuration
+# Konpigurasyon
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Mga kulay para sa output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Walang Kulay
 
-# Logging functions
+# Mga function sa pag-log
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# I-load ang konpigurasyon
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Suriin 1: Pagpapatunay
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Suriin 2: Regional availability
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,7 +490,7 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Suriin 3: Pag-validate ng quota
 log_info "Checking quota availability..."
 
 # vCPU quota
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Quota ng storage account
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Suriin 4: Availability ng serbisyo
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Suriin 5: Kapasidad ng network
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Suriin 6: Pag-validate ng pangalan ng resource
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Suriin 7: Pagtatantya ng gastos
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Suriin 8: Pag-validate ng template
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Panghuling buod
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -654,18 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Monitoring ng Kapasidad Habang Nagde-deploy
+## 📈 Pag-monitor ng Kapasidad Habang Nagde-deploy
 
-### Real-Time na Monitoring ng Kapasidad
+### Real-Time Capacity Monitoring
 ```bash
-# Monitor capacity during deployment
+# Subaybayan ang kapasidad habang nagde-deploy
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Suriin ang status ng deployment
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Suriin ang kasalukuyang paggamit ng mga mapagkukunan
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -711,36 +718,38 @@ hooks:
 
 ## Mga Best Practices
 
-1. **Laging magsagawa ng pagsusuri sa kapasidad** bago mag-deploy sa mga bagong rehiyon
-2. **Regular na i-monitor ang paggamit ng quota** upang maiwasan ang mga sorpresa
+1. **Laging magsagawa ng capacity checks** bago mag-deploy sa mga bagong rehiyon
+2. **Regular na i-monitor ang quota usage** upang maiwasan ang mga sorpresa
 3. **Magplano para sa paglago** sa pamamagitan ng pagsusuri ng mga pangangailangan sa kapasidad sa hinaharap
-4. **Gumamit ng mga tool sa pagtatantya ng gastos** upang maiwasan ang biglaang mataas na bayarin
-5. **Idokumento ang mga kinakailangan sa kapasidad** para sa iyong team
-6. **I-automate ang pag-validate ng kapasidad** sa mga CI/CD pipeline
+4. **Gumamit ng mga tool sa pagtatantiya ng gastos** upang maiwasan ang biglaang mataas na bayarin
+5. **I-dokumenta ang mga kinakailangan sa kapasidad** para sa iyong team
+6. **I-automate ang capacity validation** sa CI/CD pipelines
 7. **Isaalang-alang ang mga pangangailangan sa kapasidad para sa regional failover**
 
 ## Mga Susunod na Hakbang
 
 - [Gabay sa Pagpili ng SKU](sku-selection.md) - Pumili ng optimal na service tiers
-- [Pre-flight Checks](preflight-checks.md) - Mga automated na validation script
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Mga mabilisang reference na command
+- [Pre-flight Checks](preflight-checks.md) - Mga automated validation scripts
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Mga quick reference commands
 - [Glossary](../../resources/glossary.md) - Mga termino at kahulugan
 
-## Karagdagang Mga Resource
+## Karagdagang Resources
 
-- [Mga Limitasyon ng Subscription ng Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure Subscription Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Availability ng Azure sa Rehiyon](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure Regional Availability](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
-**Navigation**
-- **Nakaraang Aralin**: [Gabay sa Pag-debug](../troubleshooting/debugging.md)
+**Pag-navigate**
+- **Nakaraang Aralin**: [Debugging Guide](../troubleshooting/debugging.md)
 
 - **Susunod na Aralin**: [Pagpili ng SKU](sku-selection.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Bagamat sinisikap naming maging tumpak, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

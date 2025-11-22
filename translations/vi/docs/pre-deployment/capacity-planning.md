@@ -1,71 +1,78 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:34:12+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-22T08:26:02+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "vi"
 }
 -->
-# Lập Kế Hoạch Năng Lực: Hiểu Về Hạn Mức và Giới Hạn của Azure
+# Lập Kế Hoạch Năng Lực - Khả Dụng và Giới Hạn Tài Nguyên Azure
+
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 6 - Xác Thực & Lập Kế Hoạch Trước Triển Khai
+- **⬅️ Chương Trước**: [Chương 5: Giải Pháp AI Đa Tác Nhân](../../examples/retail-scenario.md)
+- **➡️ Tiếp Theo**: [Lựa Chọn SKU](sku-selection.md)
+- **🚀 Chương Tiếp Theo**: [Chương 7: Xử Lý Sự Cố](../troubleshooting/common-issues.md)
 
 ## Giới Thiệu
 
-Hướng dẫn toàn diện này giúp bạn lập kế hoạch và kiểm tra năng lực tài nguyên Azure trước khi triển khai với Azure Developer CLI. Tìm hiểu cách đánh giá hạn mức, tính khả dụng và các giới hạn theo khu vực để đảm bảo triển khai thành công đồng thời tối ưu hóa chi phí và hiệu suất. Làm chủ các kỹ thuật lập kế hoạch năng lực cho các kiến trúc ứng dụng khác nhau và các kịch bản mở rộng.
+Hướng dẫn toàn diện này giúp bạn lập kế hoạch và xác thực năng lực tài nguyên Azure trước khi triển khai với Azure Developer CLI. Tìm hiểu cách đánh giá hạn mức, khả dụng và giới hạn khu vực để đảm bảo triển khai thành công đồng thời tối ưu hóa chi phí và hiệu suất. Làm chủ các kỹ thuật lập kế hoạch năng lực cho các kiến trúc ứng dụng khác nhau và các kịch bản mở rộng.
 
 ## Mục Tiêu Học Tập
 
-Sau khi hoàn thành hướng dẫn này, bạn sẽ:
-- Hiểu về hạn mức, giới hạn và các ràng buộc khả dụng theo khu vực của Azure
-- Thành thạo các kỹ thuật kiểm tra tính khả dụng và năng lực tài nguyên trước khi triển khai
-- Triển khai các chiến lược tự động kiểm tra và giám sát năng lực
+Khi hoàn thành hướng dẫn này, bạn sẽ:
+- Hiểu các hạn mức, giới hạn và giới hạn khả dụng khu vực của Azure
+- Làm chủ các kỹ thuật kiểm tra khả dụng và năng lực tài nguyên trước khi triển khai
+- Triển khai các chiến lược xác thực và giám sát năng lực tự động
 - Thiết kế ứng dụng với kích thước tài nguyên và cân nhắc mở rộng phù hợp
 - Áp dụng các chiến lược tối ưu hóa chi phí thông qua lập kế hoạch năng lực thông minh
-- Cấu hình cảnh báo và giám sát việc sử dụng hạn mức và tính khả dụng tài nguyên
+- Cấu hình cảnh báo và giám sát việc sử dụng hạn mức và khả dụng tài nguyên
 
 ## Kết Quả Học Tập
 
 Sau khi hoàn thành, bạn sẽ có thể:
-- Đánh giá và kiểm tra yêu cầu năng lực tài nguyên Azure trước khi triển khai
+- Đánh giá và xác thực yêu cầu năng lực tài nguyên Azure trước khi triển khai
 - Tạo các script tự động để kiểm tra năng lực và giám sát hạn mức
-- Thiết kế các kiến trúc có khả năng mở rộng, tính đến giới hạn khu vực và đăng ký
+- Thiết kế kiến trúc mở rộng có tính đến giới hạn khu vực và đăng ký
 - Triển khai các chiến lược kích thước tài nguyên hiệu quả về chi phí cho các loại khối lượng công việc khác nhau
-- Cấu hình giám sát và cảnh báo chủ động cho các vấn đề liên quan đến năng lực
+- Cấu hình giám sát chủ động và cảnh báo cho các vấn đề liên quan đến năng lực
 - Lập kế hoạch triển khai đa khu vực với phân phối năng lực phù hợp
 
 ## Tại Sao Lập Kế Hoạch Năng Lực Quan Trọng
 
 Trước khi triển khai ứng dụng, bạn cần đảm bảo:
 - **Hạn mức đủ** cho các tài nguyên cần thiết
-- **Tính khả dụng tài nguyên** trong khu vực mục tiêu của bạn
-- **Tính khả dụng của cấp dịch vụ** cho loại đăng ký của bạn
+- **Khả dụng tài nguyên** trong khu vực mục tiêu của bạn
+- **Khả dụng cấp dịch vụ** cho loại đăng ký của bạn
 - **Năng lực mạng** cho lưu lượng dự kiến
 - **Tối ưu hóa chi phí** thông qua kích thước phù hợp
 
-## 📊 Hiểu Về Hạn Mức và Giới Hạn của Azure
+## 📊 Hiểu Các Hạn Mức và Giới Hạn Azure
 
 ### Các Loại Giới Hạn
-1. **Hạn mức cấp đăng ký** - Số lượng tài nguyên tối đa cho mỗi đăng ký
-2. **Hạn mức khu vực** - Số lượng tài nguyên tối đa cho mỗi khu vực
-3. **Giới hạn cụ thể cho từng tài nguyên** - Giới hạn cho từng loại tài nguyên cụ thể
+1. **Hạn mức cấp đăng ký** - Tài nguyên tối đa mỗi đăng ký
+2. **Hạn mức khu vực** - Tài nguyên tối đa mỗi khu vực
+3. **Giới hạn cụ thể tài nguyên** - Giới hạn cho từng loại tài nguyên
 4. **Giới hạn cấp dịch vụ** - Giới hạn dựa trên gói dịch vụ của bạn
 
-### Các Hạn Mức Tài Nguyên Thông Thường
+### Hạn Mức Tài Nguyên Thường Gặp
 ```bash
-# Check current quota usage
+# Kiểm tra mức sử dụng hạn ngạch hiện tại
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Kiểm tra hạn ngạch tài nguyên cụ thể
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Kiểm Tra Năng Lực Trước Khi Triển Khai
+## Kiểm Tra Năng Lực Trước Triển Khai
 
-### Script Tự Động Kiểm Tra Năng Lực
+### Script Xác Thực Năng Lực Tự Động
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Xác thực dung lượng Azure trước khi triển khai
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Hàm để kiểm tra sử dụng hạn ngạch
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,27 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Kiểm tra các hạn ngạch tài nguyên khác nhau
+check_quota "compute" 4      # Cần 4 vCPUs
+check_quota "storage" 2      # Cần 2 tài khoản lưu trữ
+check_quota "network" 1      # Cần 1 mạng ảo
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Kiểm Tra Năng Lực Cụ Thể Theo Dịch Vụ
+### Kiểm Tra Năng Lực Cụ Thể Dịch Vụ
 
 #### Năng Lực Dịch Vụ Ứng Dụng
 ```bash
-# Check App Service Plan availability
+# Kiểm tra tính khả dụng của Kế hoạch Dịch vụ Ứng dụng
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Kiểm tra các SKU có sẵn trong khu vực
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Đề xuất các khu vực thay thế
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Kiểm tra mức sử dụng hiện tại
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Mức sử dụng
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Năng Lực Cơ Sở Dữ Liệu
 ```bash
-# Check PostgreSQL capacity
+# Kiểm tra dung lượng PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Kiểm tra xem SKU có sẵn không
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Hiển thị các SKU có sẵn
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Kiểm tra dung lượng Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Kiểm tra tính khả dụng của khu vực
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Kiểm tra xem serverless có được hỗ trợ không (nếu cần)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### Năng Lực Ứng Dụng Container
 ```bash
-# Check Container Apps capacity
+# Kiểm tra dung lượng Ứng dụng Container
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Kiểm tra xem Ứng dụng Container có sẵn trong khu vực không
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Kiểm tra số lượng môi trường hiện tại
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Ứng dụng Container có giới hạn 15 môi trường mỗi khu vực
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Hiển thị các khu vực có sẵn
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -252,11 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Kiểm Tra Tính Khả Dụng Theo Khu Vực
+## 📍 Xác Thực Khả Dụng Khu Vực
 
-### Tính Khả Dụng Dịch Vụ Theo Khu Vực
+### Khả Dụng Dịch Vụ Theo Khu Vực
 ```bash
-# Check service availability across regions
+# Kiểm tra tính khả dụng của dịch vụ trên các khu vực
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Kiểm tra tất cả các dịch vụ
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Khuyến Nghị Lựa Chọn Khu Vực
 ```bash
-# Recommend optimal regions based on requirements
+# Đề xuất các khu vực tối ưu dựa trên yêu cầu
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "giáthấp" | "hiệu suất" | "tuân thủ"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### Ước Tính Chi Phí Tài Nguyên
 ```bash
-# Estimate deployment costs
+# Ước tính chi phí triển khai
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Tạo một nhóm tài nguyên tạm thời để ước tính
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Triển khai cơ sở hạ tầng ở chế độ xác thực
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Dọn dẹp nhóm tài nguyên tạm thời
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,7 +363,7 @@ estimate_costs() {
 
 ### Khuyến Nghị Tối Ưu Hóa SKU
 ```bash
-# Recommend optimal SKUs based on requirements
+# Đề xuất các SKU tối ưu dựa trên yêu cầu
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -419,32 +426,32 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Kiểm Tra Tự Động Trước Khi Triển Khai
+## 🚀 Kiểm Tra Tự Động Trước Triển Khai
 
-### Script Kiểm Tra Toàn Diện Trước Khi Triển Khai
+### Script Kiểm Tra Toàn Diện Trước Triển Khai
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Xác thực hoàn chỉnh trước khi triển khai
 
 set -e
 
-# Configuration
+# Cấu hình
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Màu sắc cho đầu ra
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Không màu
 
-# Logging functions
+# Chức năng ghi nhật ký
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Tải cấu hình
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Kiểm tra 1: Xác thực
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Kiểm tra 2: Khả dụng theo khu vực
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Kiểm tra 3: Xác thực hạn mức
 log_info "Checking quota availability..."
 
-# vCPU quota
+# Hạn mức vCPU
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Hạn mức tài khoản lưu trữ
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Kiểm tra 4: Khả dụng dịch vụ
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Kiểm tra 5: Khả năng mạng
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Kiểm tra 6: Xác thực đặt tên tài nguyên
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Kiểm tra 7: Ước tính chi phí
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Kiểm tra 8: Xác thực mẫu
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Tóm tắt cuối cùng
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -656,16 +663,16 @@ echo "  3. Verify application health post-deployment"
 
 ## 📈 Giám Sát Năng Lực Trong Quá Trình Triển Khai
 
-### Giám Sát Năng Lực Theo Thời Gian Thực
+### Giám Sát Năng Lực Thời Gian Thực
 ```bash
-# Monitor capacity during deployment
+# Giám sát dung lượng trong quá trình triển khai
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Kiểm tra trạng thái triển khai
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Kiểm tra mức sử dụng tài nguyên hiện tại
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -691,7 +698,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Tích Hợp Với AZD
 
-### Thêm Hooks Trước Khi Triển Khai Vào azure.yaml
+### Thêm Hooks Kiểm Tra Trước Vào azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -711,36 +718,38 @@ hooks:
 
 ## Các Thực Hành Tốt Nhất
 
-1. **Luôn kiểm tra năng lực** trước khi triển khai đến các khu vực mới
+1. **Luôn chạy kiểm tra năng lực** trước khi triển khai đến các khu vực mới
 2. **Giám sát việc sử dụng hạn mức thường xuyên** để tránh bất ngờ
-3. **Lập kế hoạch cho sự phát triển** bằng cách kiểm tra nhu cầu năng lực trong tương lai
-4. **Sử dụng công cụ ước tính chi phí** để tránh chi phí bất ngờ
-5. **Ghi chép yêu cầu năng lực** cho nhóm của bạn
-6. **Tự động hóa kiểm tra năng lực** trong các pipeline CI/CD
-7. **Xem xét yêu cầu năng lực dự phòng khu vực**
+3. **Lập kế hoạch cho sự tăng trưởng** bằng cách kiểm tra nhu cầu năng lực trong tương lai
+4. **Sử dụng công cụ ước tính chi phí** để tránh sốc hóa đơn
+5. **Tài liệu hóa yêu cầu năng lực** cho nhóm của bạn
+6. **Tự động hóa xác thực năng lực** trong các pipeline CI/CD
+7. **Cân nhắc yêu cầu năng lực dự phòng khu vực**
 
-## Bước Tiếp Theo
+## Các Bước Tiếp Theo
 
-- [Hướng Dẫn Chọn SKU](sku-selection.md) - Chọn các cấp dịch vụ tối ưu
-- [Kiểm Tra Trước Khi Triển Khai](preflight-checks.md) - Script kiểm tra tự động
-- [Bảng Ghi Chú](../../resources/cheat-sheet.md) - Các lệnh tham khảo nhanh
+- [Hướng Dẫn Lựa Chọn SKU](sku-selection.md) - Chọn các cấp dịch vụ tối ưu
+- [Kiểm Tra Trước Triển Khai](preflight-checks.md) - Script xác thực tự động
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Lệnh tham khảo nhanh
 - [Thuật Ngữ](../../resources/glossary.md) - Các thuật ngữ và định nghĩa
 
 ## Tài Nguyên Bổ Sung
 
 - [Giới Hạn Đăng Ký Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Công Cụ Tính Toán Chi Phí Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Máy Tính Giá Azure](https://azure.microsoft.com/pricing/calculator/)
 - [Quản Lý Chi Phí Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Tính Khả Dụng Khu Vực Azure](https://azure.microsoft.com/global-infrastructure/services/)
+- [Khả Dụng Khu Vực Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Điều Hướng**
 - **Bài Học Trước**: [Hướng Dẫn Gỡ Lỗi](../troubleshooting/debugging.md)
 
-- **Bài Học Tiếp Theo**: [Chọn SKU](sku-selection.md)
+- **Bài Học Tiếp Theo**: [Lựa Chọn SKU](sku-selection.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

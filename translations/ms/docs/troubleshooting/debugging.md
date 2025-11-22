@@ -1,49 +1,49 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T08:15:25+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-22T09:41:58+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ms"
 }
 -->
-# Panduan Debugging untuk Pemasangan AZD
+# Panduan Debugging untuk Penerapan AZD
 
 **Navigasi Bab:**
 - **📚 Kursus Utama**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Semasa**: Bab 7 - Penyelesaian Masalah & Debugging
-- **⬅️ Sebelumnya**: [Isu Umum](common-issues.md)
+- **⬅️ Sebelumnya**: [Isu Biasa](common-issues.md)
 - **➡️ Seterusnya**: [Penyelesaian Masalah Khusus AI](ai-troubleshooting.md)
-- **🚀 Bab Seterusnya**: [Bab 8: Corak Pengeluaran & Perusahaan](../ai-foundry/production-ai-practices.md)
+- **🚀 Bab Seterusnya**: [Bab 8: Corak Pengeluaran & Enterprise](../microsoft-foundry/production-ai-practices.md)
 
 ## Pengenalan
 
-Panduan komprehensif ini menyediakan strategi debugging lanjutan, alat, dan teknik untuk mendiagnosis dan menyelesaikan isu kompleks dengan pemasangan Azure Developer CLI. Pelajari metodologi penyelesaian masalah secara sistematik, teknik analisis log, profil prestasi, dan alat diagnostik lanjutan untuk menyelesaikan isu pemasangan dan runtime dengan cekap.
+Panduan lengkap ini menyediakan strategi debugging lanjutan, alat, dan teknik untuk mendiagnosis dan menyelesaikan isu-isu kompleks dengan penerapan Azure Developer CLI. Pelajari metodologi penyelesaian masalah secara sistematik, teknik analisis log, profil prestasi, dan alat diagnostik lanjutan untuk menyelesaikan isu penerapan dan runtime dengan cekap.
 
 ## Matlamat Pembelajaran
 
 Dengan melengkapkan panduan ini, anda akan:
 - Menguasai metodologi debugging sistematik untuk isu Azure Developer CLI
 - Memahami konfigurasi log lanjutan dan teknik analisis log
-- Melaksanakan strategi profil prestasi dan pemantauan
-- Menggunakan alat dan perkhidmatan diagnostik Azure untuk penyelesaian masalah kompleks
-- Mengaplikasikan teknik debugging rangkaian dan keselamatan
+- Melaksanakan strategi pemprofilan prestasi dan pemantauan
+- Menggunakan alat dan perkhidmatan diagnostik Azure untuk menyelesaikan masalah kompleks
+- Menerapkan teknik debugging rangkaian dan penyelesaian masalah keselamatan
 - Mengkonfigurasi pemantauan dan amaran yang komprehensif untuk pengesanan isu secara proaktif
 
 ## Hasil Pembelajaran
 
-Selepas melengkapkan panduan ini, anda akan dapat:
-- Mengaplikasikan metodologi TRIAGE untuk debugging isu pemasangan kompleks secara sistematik
+Setelah selesai, anda akan dapat:
+- Menggunakan metodologi TRIAGE untuk debugging isu penerapan yang kompleks secara sistematik
 - Mengkonfigurasi dan menganalisis maklumat log dan penjejakan yang komprehensif
 - Menggunakan Azure Monitor, Application Insights, dan alat diagnostik dengan berkesan
-- Debug isu sambungan rangkaian, pengesahan, dan kebenaran secara bebas
+- Debug isu sambungan rangkaian, pengesahan, dan kebenaran secara berdikari
 - Melaksanakan strategi pemantauan dan pengoptimuman prestasi
 - Mencipta skrip debugging tersuai dan automasi untuk isu berulang
 
 ## Metodologi Debugging
 
 ### Pendekatan TRIAGE
-- **T**ime: Bila isu mula berlaku?
+- **T**ime: Bila isu bermula?
 - **R**eproduce: Bolehkah anda sentiasa menghasilkan semula isu tersebut?
 - **I**solate: Komponen mana yang gagal?
 - **A**nalyze: Apa yang log beritahu kita?
@@ -54,26 +54,26 @@ Selepas melengkapkan panduan ini, anda akan dapat:
 
 ### Pembolehubah Persekitaran
 ```bash
-# Enable comprehensive debugging
+# Aktifkan penyahpepijatan menyeluruh
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Penyahpepijatan Azure CLI
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Lumpuhkan telemetri untuk output yang lebih bersih
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Konfigurasi Debug
 ```bash
-# Set debug configuration globally
+# Tetapkan konfigurasi debug secara global
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Aktifkan log penjejakan
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Analisis Log Berstruktur
 ```bash
-# Filter logs by level
+# Tapis log mengikut tahap
 azd logs --level error --since 1h
 
-# Filter by service
+# Tapis mengikut perkhidmatan
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Eksport log untuk analisis
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Huraikan log JSON dengan jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Korelasi Log
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Menghubungkan log merentasi perkhidmatan
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Cari merentasi semua perkhidmatan
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Cari log Azure
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Pertanyaan Azure Resource Graph
 ```bash
-# Query resources by tags
+# Tanyakan sumber berdasarkan tag
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Cari penyebaran yang gagal
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Periksa kesihatan sumber
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Debugging Rangkaian
 ```bash
-# Test connectivity between services
+# Uji kesambungan antara perkhidmatan
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Penggunaan
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Debugging Kontena
 ```bash
-# Debug container app issues
+# Nyahpepijat isu aplikasi kontena
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Debugging Sambungan Pangkalan Data
 ```bash
-# Debug database connectivity
+# Nyahpepijat sambungan pangkalan data
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### Pemantauan Prestasi Aplikasi
 ```bash
-# Enable Application Insights debugging
+# Aktifkan penyahpepijatan Application Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Pemantauan prestasi tersuai
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Analisis Penggunaan Sumber
 ```bash
-# Monitor resource usage
+# Pantau penggunaan sumber
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Tetapkan persekitaran debug
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Dapatkan titik akhir perkhidmatan
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Uji titik akhir kesihatan
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Jalankan ujian
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Jalankan ujian integrasi tersuai
 npm run test:integration
 ```
 
 ### Ujian Beban untuk Debugging
 ```bash
-# Simple load test to identify performance bottlenecks
+# Ujian beban mudah untuk mengenal pasti halangan prestasi
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Menggunakan Apache Bench (pasang: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Ekstrak metrik utama
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Periksa kegagalan
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Debugging Templat Bicep
 ```bash
-# Validate Bicep templates with detailed output
+# Sahkan templat Bicep dengan output terperinci
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Pengesahan sintaks
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Pengesahan lint
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Apa-jika penyebaran
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Nyahpepijat penyebaran templat
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Analisis Keadaan Sumber
 ```bash
-# Analyze resource states for inconsistencies
+# Analisis keadaan sumber untuk ketidakkonsistenan
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Senaraikan semua sumber dengan keadaan mereka
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Periksa sumber yang gagal
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### Debugging Aliran Pengesahan
 ```bash
-# Debug Azure authentication
+# Nyahpepijat pengesahan Azure
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Nyahkod token JWT (memerlukan jq dan base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Nyahpepijat akses Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Debugging Keselamatan Rangkaian
 ```bash
-# Debug network security groups
+# Nyahpepijat kumpulan keselamatan rangkaian
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Periksa peraturan keselamatan
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Debugging Aplikasi Node.js
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Middleware debugging Express
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Log butiran permintaan
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Gantikan res.json untuk log respons
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Debugging Pertanyaan Pangkalan Data
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Utiliti penyahpepijatan pangkalan data
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -521,10 +521,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 Prosedur Debugging Kecemasan
 
-### Respons Isu Pengeluaran
+### Tindak Balas Isu Pengeluaran
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Debugging kecemasan pengeluaran
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Tukar ke persekitaran yang betul
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Kumpulkan maklumat kritikal
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Prosedur Rollback
 ```bash
-# Quick rollback script
+# Skrip pengunduran cepat
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Tukar persekitaran
     azd env select "$environment"
     
-    # Rollback application
+    # Undurkan aplikasi
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Sahkan pengunduran
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Uji titik akhir kritikal
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### Papan Pemantauan Tersuai
 ```bash
-# Create Application Insights queries for debugging
+# Cipta pertanyaan Application Insights untuk penyahpepijatan
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Pertanyaan untuk ralat
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Pertanyaan untuk isu prestasi
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Pertanyaan untuk kegagalan kebergantungan
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Pengagregatan Log
 ```bash
-# Aggregate logs from multiple sources
+# Gabungkan log dari pelbagai sumber
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -689,14 +689,14 @@ hooks:
 3. **Dokumentasikan prosedur debugging** untuk pasukan anda
 4. **Automasi pemeriksaan kesihatan** dan pemantauan
 5. **Pastikan alat debug sentiasa dikemas kini** dengan perubahan aplikasi anda
-6. **Latih prosedur debugging** semasa waktu bukan insiden
+6. **Amalkan prosedur debugging** semasa waktu bukan insiden
 
 ## Langkah Seterusnya
 
 - [Perancangan Kapasiti](../pre-deployment/capacity-planning.md) - Rancang keperluan sumber
-- [Pemilihan SKU](../pre-deployment/sku-selection.md) - Pilih tingkat perkhidmatan yang sesuai
-- [Pemeriksaan Awal](../pre-deployment/preflight-checks.md) - Pengesahan sebelum pemasangan
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Rujukan pantas untuk arahan
+- [Pemilihan SKU](../pre-deployment/sku-selection.md) - Pilih tahap perkhidmatan yang sesuai
+- [Pemeriksaan Awal](../pre-deployment/preflight-checks.md) - Pengesahan sebelum penerapan
+- [Lembaran Ringkasan](../../resources/cheat-sheet.md) - Rujukan pantas untuk arahan
 
 ---
 
@@ -705,11 +705,13 @@ hooks:
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Isu Umum](common-issues.md)
+- **Pelajaran Sebelumnya**: [Isu Biasa](common-issues.md)
 
 - **Pelajaran Seterusnya**: [Perancangan Kapasiti](../pre-deployment/capacity-planning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

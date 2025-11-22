@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T07:38:39+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-22T08:41:07+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "vi"
 }
@@ -22,11 +22,11 @@ Hướng dẫn toàn diện này bao gồm tất cả các khía cạnh của vi
 
 ## Mục Tiêu Học Tập
 
-Sau khi hoàn thành bài học này, bạn sẽ:
+Kết thúc bài học này, bạn sẽ:
 - Nắm vững hệ thống cấu hình azd và hiểu cách ưu tiên các thiết lập
-- Cấu hình hiệu quả các thiết lập toàn cục và cụ thể cho dự án
+- Cấu hình hiệu quả các thiết lập toàn cầu và cụ thể cho dự án
 - Quản lý nhiều môi trường với các cấu hình khác nhau
-- Thực hiện các mẫu xác thực và ủy quyền an toàn
+- Áp dụng các mẫu xác thực và ủy quyền an toàn
 - Hiểu các mẫu cấu hình nâng cao cho các tình huống phức tạp
 
 ## Kết Quả Học Tập
@@ -34,7 +34,7 @@ Sau khi hoàn thành bài học này, bạn sẽ:
 Sau khi hoàn thành bài học này, bạn sẽ có thể:
 - Cấu hình azd để tối ưu hóa quy trình phát triển
 - Thiết lập và quản lý nhiều môi trường triển khai
-- Thực hiện các thực hành quản lý cấu hình an toàn
+- Áp dụng các thực hành quản lý cấu hình an toàn
 - Khắc phục sự cố liên quan đến cấu hình
 - Tùy chỉnh hành vi của azd theo yêu cầu của tổ chức
 
@@ -42,47 +42,47 @@ Hướng dẫn toàn diện này bao gồm tất cả các khía cạnh của vi
 
 ## Hệ Thống Cấu Hình
 
-azd sử dụng hệ thống cấu hình theo thứ tự ưu tiên:
+azd sử dụng một hệ thống cấu hình theo thứ tự ưu tiên:
 1. **Cờ dòng lệnh** (ưu tiên cao nhất)
 2. **Biến môi trường**
 3. **Cấu hình dự án cục bộ** (`.azd/config.json`)
-4. **Cấu hình người dùng toàn cục** (`~/.azd/config.json`)
+4. **Cấu hình người dùng toàn cầu** (`~/.azd/config.json`)
 5. **Giá trị mặc định** (ưu tiên thấp nhất)
 
-## Cấu Hình Toàn Cục
+## Cấu Hình Toàn Cầu
 
-### Thiết Lập Giá Trị Mặc Định Toàn Cục
+### Thiết Lập Giá Trị Mặc Định Toàn Cầu
 ```bash
-# Set default subscription
+# Đặt đăng ký mặc định
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Đặt vị trí mặc định
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Đặt quy ước đặt tên nhóm tài nguyên mặc định
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Xem tất cả cấu hình toàn cầu
 azd config list
 
-# Remove a configuration
+# Xóa một cấu hình
 azd config unset defaults.location
 ```
 
-### Các Thiết Lập Toàn Cục Thường Dùng
+### Các Thiết Lập Toàn Cầu Thông Dụng
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Tùy chọn phát triển
+azd config set alpha.enable true                    # Bật các tính năng alpha
+azd config set telemetry.enabled false             # Tắt thu thập dữ liệu
+azd config set output.format json                  # Đặt định dạng đầu ra
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Cài đặt bảo mật
+azd config set auth.useAzureCliCredential true     # Sử dụng Azure CLI để xác thực
+azd config set tls.insecure false                  # Bắt buộc xác minh TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Tinh chỉnh hiệu suất
+azd config set provision.parallelism 5             # Tạo tài nguyên song song
+azd config set deploy.timeout 30m                  # Thời gian chờ triển khai
 ```
 
 ## 🏗️ Cấu Hình Dự Án
@@ -185,7 +185,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Thiết Lập Theo Ngôn Ngữ
+#### Cài Đặt Theo Ngôn Ngữ
 ```yaml
 services:
   node-app:
@@ -213,13 +213,13 @@ services:
 
 ### Tạo Môi Trường
 ```bash
-# Create a new environment
+# Tạo một môi trường mới
 azd env new development
 
-# Create with specific location
+# Tạo với vị trí cụ thể
 azd env new staging --location "westus2"
 
-# Create from template
+# Tạo từ mẫu
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Mỗi môi trường có cấu hình riêng trong `.azure/<env-name>/config.json
 
 ### Biến Môi Trường
 ```bash
-# Set environment-specific variables
+# Đặt các biến môi trường cụ thể
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Xem các biến môi trường
 azd env get-values
 
-# Remove environment variable
+# Kết quả mong đợi:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# Xóa biến môi trường
 azd env unset DEBUG
+
+# Xác minh việc xóa
+azd env get-values | grep DEBUG
+# (nên không trả về gì)
 ```
 
 ### Mẫu Môi Trường
 Tạo `.azure/env.template` để thiết lập môi trường nhất quán:
 ```bash
-# Required variables
+# Các biến bắt buộc
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Cài đặt ứng dụng
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Cài đặt phát triển tùy chọn
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Tích Hợp Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# Sử dụng thông tin xác thực Azure CLI (mặc định)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Đăng nhập với tenant cụ thể
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Đặt đăng ký mặc định
 az account set --subscription <subscription-id>
 ```
 
 ### Xác Thực Service Principal
 Dành cho các pipeline CI/CD:
 ```bash
-# Set environment variables
+# Đặt các biến môi trường
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Hoặc cấu hình trực tiếp
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Managed Identity
 Dành cho các môi trường được lưu trữ trên Azure:
 ```bash
-# Enable managed identity authentication
+# Bật xác thực danh tính được quản lý
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -391,7 +400,7 @@ Ví dụ `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/az
 
 ### Tùy Chỉnh Tên Tài Nguyên
 ```bash
-# Set naming conventions
+# Đặt quy ước đặt tên
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### Môi Trường Phát Triển
 ```bash
-# .azure/development/.env
+# .azure/phát_triển/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Xác Thực Cấu Hình
 ```bash
-# Check configuration syntax
+# Kiểm tra cú pháp cấu hình
 azd config validate
 
-# Test environment variables
+# Kiểm tra các biến môi trường
 azd env get-values
 
-# Validate infrastructure
+# Xác minh cơ sở hạ tầng
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ Tạo script xác thực trong `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Kiểm tra các biến môi trường cần thiết
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Xác thực cú pháp azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -516,12 +525,12 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Cân Nhắc Khi Sử Dụng Kiểm Soát Phiên Bản
+### 3. Cân Nhắc Khi Sử Dụng Quản Lý Phiên Bản
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Cấu hình môi trường (chứa ID tài nguyên)
+.azure/*/.env               # Biến môi trường (có thể chứa thông tin bí mật)
+.env                        # Tệp môi trường cục bộ
 ```
 
 ### 4. Tài Liệu Cấu Hình
@@ -540,6 +549,68 @@ Ghi lại cấu hình của bạn trong `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Bài Tập Thực Hành
+
+### Bài Tập 1: Cấu Hình Đa Môi Trường (15 phút)
+
+**Mục Tiêu**: Tạo và cấu hình ba môi trường với các thiết lập khác nhau
+
+```bash
+# Tạo môi trường phát triển
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Tạo môi trường dàn dựng
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Tạo môi trường sản xuất
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Xác minh từng môi trường
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Tiêu Chí Thành Công:**
+- [ ] Ba môi trường được tạo thành công
+- [ ] Mỗi môi trường có cấu hình riêng biệt
+- [ ] Có thể chuyển đổi giữa các môi trường mà không gặp lỗi
+- [ ] `azd env list` hiển thị cả ba môi trường
+
+### Bài Tập 2: Quản Lý Bí Mật (10 phút)
+
+**Mục Tiêu**: Thực hành cấu hình an toàn với dữ liệu nhạy cảm
+
+```bash
+# Đặt bí mật (không hiển thị trong đầu ra)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Đặt cấu hình không bí mật
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Xem môi trường (các bí mật nên được che giấu)
+azd env get-values
+
+# Xác minh các bí mật được lưu trữ
+azd env get DB_PASSWORD  # Nên hiển thị giá trị thực tế
+```
+
+**Tiêu Chí Thành Công:**
+- [ ] Bí mật được lưu trữ mà không hiển thị trên terminal
+- [ ] `azd env get-values` hiển thị bí mật đã được che giấu
+- [ ] Lệnh riêng lẻ `azd env get <SECRET_NAME>` lấy giá trị thực tế
+
 ## Bước Tiếp Theo
 
 - [Dự Án Đầu Tiên Của Bạn](first-project.md) - Áp dụng cấu hình vào thực tế
@@ -548,7 +619,7 @@ Ghi lại cấu hình của bạn trong `CONFIG.md`:
 
 ## Tài Liệu Tham Khảo
 
-- [Tham Khảo Cấu Hình azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Tài Liệu Tham Khảo Cấu Hình azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schema azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Biến Môi Trường](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
@@ -563,5 +634,7 @@ Ghi lại cấu hình của bạn trong `CONFIG.md`:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

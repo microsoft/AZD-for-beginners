@@ -1,26 +1,26 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
-  "translation_date": "2025-09-18T07:38:09+00:00",
+  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
+  "translation_date": "2025-11-22T08:42:38+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "vi"
 }
 -->
-# Hướng Dẫn Cài Đặt & Thiết Lập
+# Hướng dẫn cài đặt & thiết lập
 
-**Điều Hướng Chương:**
-- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
-- **📖 Chương Hiện Tại**: Chương 1 - Nền Tảng & Bắt Đầu Nhanh
-- **⬅️ Trước**: [AZD Basics](azd-basics.md)
-- **➡️ Tiếp Theo**: [Dự Án Đầu Tiên Của Bạn](first-project.md)
-- **🚀 Chương Tiếp Theo**: [Chương 2: Phát Triển Ưu Tiên AI](../ai-foundry/azure-ai-foundry-integration.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD For Beginners](../../README.md)
+- **📖 Chương hiện tại**: Chương 1 - Nền tảng & Bắt đầu nhanh
+- **⬅️ Trước đó**: [AZD Basics](azd-basics.md)
+- **➡️ Tiếp theo**: [Dự án đầu tiên của bạn](first-project.md)
+- **🚀 Chương tiếp theo**: [Chương 2: Phát triển ưu tiên AI](../microsoft-foundry/microsoft-foundry-integration.md)
 
-## Giới Thiệu
+## Giới thiệu
 
-Hướng dẫn toàn diện này sẽ giúp bạn cài đặt và cấu hình Azure Developer CLI (azd) trên hệ thống của mình. Bạn sẽ học các phương pháp cài đặt khác nhau cho từng hệ điều hành, thiết lập xác thực và cấu hình ban đầu để chuẩn bị môi trường phát triển cho việc triển khai Azure.
+Hướng dẫn toàn diện này sẽ giúp bạn cài đặt và cấu hình Azure Developer CLI (azd) trên hệ thống của mình. Bạn sẽ học các phương pháp cài đặt khác nhau cho các hệ điều hành, thiết lập xác thực và cấu hình ban đầu để chuẩn bị môi trường phát triển cho việc triển khai Azure.
 
-## Mục Tiêu Học Tập
+## Mục tiêu học tập
 
 Sau khi hoàn thành bài học này, bạn sẽ:
 - Cài đặt thành công Azure Developer CLI trên hệ điều hành của mình
@@ -29,7 +29,7 @@ Sau khi hoàn thành bài học này, bạn sẽ:
 - Hiểu các tùy chọn cài đặt khác nhau và khi nào nên sử dụng từng tùy chọn
 - Khắc phục các vấn đề thường gặp trong quá trình cài đặt và thiết lập
 
-## Kết Quả Học Tập
+## Kết quả học tập
 
 Sau khi hoàn thành bài học này, bạn sẽ có thể:
 - Cài đặt azd bằng phương pháp phù hợp với nền tảng của bạn
@@ -40,80 +40,80 @@ Sau khi hoàn thành bài học này, bạn sẽ có thể:
 
 Hướng dẫn này sẽ giúp bạn cài đặt và cấu hình Azure Developer CLI trên hệ thống của mình, bất kể hệ điều hành hay môi trường phát triển của bạn.
 
-## Yêu Cầu Trước
+## Yêu cầu trước
 
 Trước khi cài đặt azd, hãy đảm bảo bạn có:
 - **Đăng ký Azure** - [Tạo tài khoản miễn phí](https://azure.microsoft.com/free/)
 - **Azure CLI** - Dùng để xác thực và quản lý tài nguyên
 - **Git** - Dùng để sao chép mẫu và kiểm soát phiên bản
-- **Docker** (tùy chọn) - Dành cho các ứng dụng container hóa
+- **Docker** (tùy chọn) - Dùng cho các ứng dụng container hóa
 
-## Phương Pháp Cài Đặt
+## Phương pháp cài đặt
 
 ### Windows
 
-#### Tùy Chọn 1: PowerShell (Khuyến Nghị)
+#### Tùy chọn 1: PowerShell (Khuyến nghị)
 ```powershell
-# Run as Administrator or with elevated privileges
+# Chạy với quyền Quản trị viên hoặc quyền nâng cao
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### Tùy Chọn 2: Trình Quản Lý Gói Windows (winget)
+#### Tùy chọn 2: Trình quản lý gói Windows (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
 
-#### Tùy Chọn 3: Chocolatey
+#### Tùy chọn 3: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### Tùy Chọn 4: Cài Đặt Thủ Công
+#### Tùy chọn 4: Cài đặt thủ công
 1. Tải xuống phiên bản mới nhất từ [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Giải nén vào `C:\Program Files\azd\`
 3. Thêm vào biến môi trường PATH
 
 ### macOS
 
-#### Tùy Chọn 1: Homebrew (Khuyến Nghị)
+#### Tùy chọn 1: Homebrew (Khuyến nghị)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### Tùy Chọn 2: Script Cài Đặt
+#### Tùy chọn 2: Script cài đặt
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Tùy Chọn 3: Cài Đặt Thủ Công
+#### Tùy chọn 3: Cài đặt thủ công
 ```bash
-# Download and install
+# Tải xuống và cài đặt
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
 ```
 
 ### Linux
 
-#### Tùy Chọn 1: Script Cài Đặt (Khuyến Nghị)
+#### Tùy chọn 1: Script cài đặt (Khuyến nghị)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Tùy Chọn 2: Trình Quản Lý Gói
+#### Tùy chọn 2: Trình quản lý gói
 
 **Ubuntu/Debian:**
 ```bash
-# Add Microsoft package repository
+# Thêm kho lưu trữ gói Microsoft
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Install azd
+# Cài đặt azd
 sudo apt-get update
 sudo apt-get install azd
 ```
 
 **RHEL/CentOS/Fedora:**
 ```bash
-# Add Microsoft package repository
+# Thêm kho lưu trữ gói Microsoft
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
 sudo dnf install azd
@@ -126,25 +126,25 @@ azd được cài đặt sẵn trong GitHub Codespaces. Chỉ cần tạo một 
 ### Docker
 
 ```bash
-# Run azd in a container
+# Chạy azd trong một container
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Create an alias for easier use
+# Tạo một bí danh để sử dụng dễ dàng hơn
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Kiểm Tra Cài Đặt
+## ✅ Xác minh cài đặt
 
-Sau khi cài đặt, kiểm tra azd hoạt động đúng cách:
+Sau khi cài đặt, hãy kiểm tra azd hoạt động đúng:
 
 ```bash
-# Check version
+# Kiểm tra phiên bản
 azd version
 
-# View help
+# Xem trợ giúp
 azd --help
 
-# List available templates
+# Liệt kê các mẫu có sẵn
 azd template list
 ```
 
@@ -153,30 +153,39 @@ Kết quả mong đợi:
 azd version 1.5.0 (commit abc123)
 ```
 
-## Thiết Lập Xác Thực
+**✅ Danh sách kiểm tra thành công cài đặt:**
+- [ ] `azd version` hiển thị số phiên bản mà không có lỗi
+- [ ] `azd --help` hiển thị tài liệu lệnh
+- [ ] `azd template list` hiển thị các mẫu có sẵn
+- [ ] `az account show` hiển thị đăng ký Azure của bạn
+- [ ] Bạn có thể tạo một thư mục thử nghiệm và chạy `azd init` thành công
 
-### Xác Thực Azure CLI (Khuyến Nghị)
+**Nếu tất cả các kiểm tra đều đạt, bạn đã sẵn sàng tiếp tục đến [Dự án đầu tiên của bạn](first-project.md)!**
+
+## Thiết lập xác thực
+
+### Xác thực Azure CLI (Khuyến nghị)
 ```bash
-# Install Azure CLI if not already installed
+# Cài đặt Azure CLI nếu chưa được cài đặt
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
 # Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Login to Azure
+# Đăng nhập vào Azure
 az login
 
-# Verify authentication
+# Xác minh xác thực
 az account show
 ```
 
-### Xác Thực Bằng Mã Thiết Bị
+### Xác thực bằng mã thiết bị
 Nếu bạn đang sử dụng hệ thống không có giao diện hoặc gặp vấn đề với trình duyệt:
 ```bash
 az login --use-device-code
 ```
 
 ### Service Principal (CI/CD)
-Dành cho môi trường tự động hóa:
+Dành cho môi trường tự động:
 ```bash
 az login --service-principal \
   --username <client-id> \
@@ -184,33 +193,33 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## Cấu Hình
+## Cấu hình
 
-### Cấu Hình Toàn Cục
+### Cấu hình toàn cầu
 ```bash
-# Set default subscription
+# Đặt đăng ký mặc định
 azd config set defaults.subscription <subscription-id>
 
-# Set default location
+# Đặt vị trí mặc định
 azd config set defaults.location eastus2
 
-# View all configuration
+# Xem tất cả cấu hình
 azd config list
 ```
 
-### Biến Môi Trường
+### Biến môi trường
 Thêm vào profile shell của bạn (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Azure configuration
+# Cấu hình Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd configuration
+# Cấu hình azd
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Enable debug logging
+export AZD_DEBUG=true  # Bật ghi nhật ký gỡ lỗi
 ```
 
-## Tích Hợp IDE
+## Tích hợp IDE
 
 ### Visual Studio Code
 Cài đặt tiện ích mở rộng Azure Developer CLI:
@@ -226,7 +235,7 @@ Tính năng:
 - Theo dõi triển khai
 
 ### GitHub Codespaces
-Tạo file `.devcontainer/devcontainer.json`:
+Tạo một `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -241,20 +250,20 @@ Tạo file `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Cài đặt plugin Azure
 2. Cấu hình thông tin xác thực Azure
-3. Sử dụng terminal tích hợp để chạy lệnh azd
+3. Sử dụng terminal tích hợp để chạy các lệnh azd
 
-## 🐛 Khắc Phục Sự Cố Cài Đặt
+## 🐛 Khắc phục sự cố cài đặt
 
-### Các Vấn Đề Thường Gặp
+### Các vấn đề thường gặp
 
-#### Quyền Bị Từ Chối (Windows)
+#### Quyền bị từ chối (Windows)
 ```powershell
-# Run PowerShell as Administrator
+# Chạy PowerShell với quyền Quản trị viên
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-#### Vấn Đề PATH
-Thêm azd vào PATH thủ công:
+#### Vấn đề PATH
+Thêm azd vào PATH một cách thủ công:
 
 **Windows:**
 ```cmd
@@ -267,49 +276,49 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Vấn Đề Mạng/Proxy
+#### Vấn đề mạng/Proxy
 ```bash
-# Configure proxy
+# Cấu hình proxy
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# Skip SSL verification (not recommended for production)
+# Bỏ qua xác minh SSL (không khuyến nghị cho môi trường sản xuất)
 azd config set http.insecure true
 ```
 
-#### Xung Đột Phiên Bản
+#### Xung đột phiên bản
 ```bash
-# Remove old installations
+# Gỡ cài đặt cũ
 # Windows: winget uninstall Microsoft.Azd
 # macOS: brew uninstall azd
 # Linux: sudo apt remove azd
 
-# Clean configuration
+# Dọn dẹp cấu hình
 rm -rf ~/.azd
 ```
 
-### Nhận Thêm Hỗ Trợ
+### Nhận thêm trợ giúp
 ```bash
-# Enable debug logging
+# Bật ghi nhật ký gỡ lỗi
 export AZD_DEBUG=true
 azd <command> --debug
 
-# View detailed logs
+# Xem nhật ký chi tiết
 azd logs
 
-# Check system info
+# Kiểm tra thông tin hệ thống
 azd info
 ```
 
-## Cập Nhật azd
+## Cập nhật azd
 
-### Cập Nhật Tự Động
-azd sẽ thông báo khi có bản cập nhật:
+### Cập nhật tự động
+azd sẽ thông báo cho bạn khi có bản cập nhật:
 ```bash
 azd version --check-for-updates
 ```
 
-### Cập Nhật Thủ Công
+### Cập nhật thủ công
 
 **Windows (winget):**
 ```cmd
@@ -326,33 +335,101 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## Bước Tiếp Theo
+## 💡 Câu hỏi thường gặp
+
+<details>
+<summary><strong>Sự khác biệt giữa azd và az CLI là gì?</strong></summary>
+
+**Azure CLI (az)**: Công cụ cấp thấp để quản lý từng tài nguyên Azure
+- `az webapp create`, `az storage account create`
+- Một tài nguyên tại một thời điểm
+- Tập trung vào quản lý hạ tầng
+
+**Azure Developer CLI (azd)**: Công cụ cấp cao để triển khai toàn bộ ứng dụng
+- `azd up` triển khai toàn bộ ứng dụng với tất cả tài nguyên
+- Quy trình dựa trên mẫu
+- Tập trung vào năng suất của nhà phát triển
+
+**Bạn cần cả hai**: azd sử dụng az CLI để xác thực
+</details>
+
+<details>
+<summary><strong>Tôi có thể sử dụng azd với các tài nguyên Azure hiện có không?</strong></summary>
+
+Có! Bạn có thể:
+1. Nhập các tài nguyên hiện có vào môi trường azd
+2. Tham chiếu các tài nguyên hiện có trong mẫu Bicep của bạn
+3. Sử dụng azd cho các triển khai mới cùng với hạ tầng hiện có
+
+Xem [Hướng dẫn cấu hình](configuration.md) để biết chi tiết.
+</details>
+
+<details>
+<summary><strong>azd có hoạt động với Azure Government hoặc Azure China không?</strong></summary>
+
+Có, cấu hình đám mây:
+```bash
+# Azure Chính phủ
+az cloud set --name AzureUSGovernment
+az login
+
+# Azure Trung Quốc
+az cloud set --name AzureChinaCloud
+az login
+```
+</details>
+
+<details>
+<summary><strong>Tôi có thể sử dụng azd trong các pipeline CI/CD không?</strong></summary>
+
+Chắc chắn! azd được thiết kế cho tự động hóa:
+- Tích hợp GitHub Actions
+- Hỗ trợ Azure DevOps
+- Xác thực bằng service principal
+- Chế độ không tương tác
+
+Xem [Hướng dẫn triển khai](../deployment/deployment-guide.md) để biết các mẫu CI/CD.
+</details>
+
+<details>
+<summary><strong>Chi phí sử dụng azd là bao nhiêu?</strong></summary>
+
+azd bản thân nó **hoàn toàn miễn phí** và mã nguồn mở. Bạn chỉ phải trả cho:
+- Tài nguyên Azure bạn triển khai
+- Chi phí tiêu thụ Azure (tính toán, lưu trữ, v.v.)
+
+Sử dụng `azd provision --preview` để ước tính chi phí trước khi triển khai.
+</details>
+
+## Bước tiếp theo
 
 1. **Hoàn thành xác thực**: Đảm bảo bạn có thể truy cập đăng ký Azure của mình
-2. **Thử triển khai đầu tiên**: Làm theo [Hướng Dẫn Dự Án Đầu Tiên](first-project.md)
+2. **Thử triển khai đầu tiên**: Làm theo [Hướng dẫn dự án đầu tiên](first-project.md)
 3. **Khám phá mẫu**: Duyệt các mẫu có sẵn với `azd template list`
 4. **Cấu hình IDE của bạn**: Thiết lập môi trường phát triển
 
-## Hỗ Trợ
+## Hỗ trợ
 
 Nếu bạn gặp vấn đề:
-- [Tài Liệu Chính Thức](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Báo Cáo Vấn Đề](https://github.com/Azure/azure-dev/issues)
-- [Thảo Luận Cộng Đồng](https://github.com/Azure/azure-dev/discussions)
-- [Hỗ Trợ Azure](https://azure.microsoft.com/support/)
+- [Tài liệu chính thức](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Báo cáo vấn đề](https://github.com/Azure/azure-dev/issues)
+- [Thảo luận cộng đồng](https://github.com/Azure/azure-dev/discussions)
+- [Hỗ trợ Azure](https://azure.microsoft.com/support/)
 
 ---
 
-**Điều Hướng Chương:**
-- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
-- **📖 Chương Hiện Tại**: Chương 1 - Nền Tảng & Bắt Đầu Nhanh
-- **⬅️ Trước**: [AZD Basics](azd-basics.md) 
-- **➡️ Tiếp Theo**: [Dự Án Đầu Tiên Của Bạn](first-project.md)
-- **🚀 Chương Tiếp Theo**: [Chương 2: Phát Triển Ưu Tiên AI](../ai-foundry/azure-ai-foundry-integration.md)
+**Điều hướng chương:**
+- **📚 Trang chủ khóa học**: [AZD For Beginners](../../README.md)
+- **📖 Chương hiện tại**: Chương 1 - Nền tảng & Bắt đầu nhanh
+- **⬅️ Trước đó**: [AZD Basics](azd-basics.md) 
+- **➡️ Tiếp theo**: [Dự án đầu tiên của bạn](first-project.md)
+- **🚀 Chương tiếp theo**: [Chương 2: Phát triển ưu tiên AI](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**✅ Cài Đặt Hoàn Tất!** Tiếp tục đến [Dự Án Đầu Tiên Của Bạn](first-project.md) để bắt đầu xây dựng với azd.
+**✅ Cài đặt hoàn tất!** Tiếp tục đến [Dự án đầu tiên của bạn](first-project.md) để bắt đầu xây dựng với azd.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
